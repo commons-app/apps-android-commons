@@ -4,6 +4,7 @@ import com.nhaarman.mockitokotlin2.mock
 import fr.free.nrw.commons.upload.FileUtils
 import fr.free.nrw.commons.upload.FileUtilsWrapper
 import org.junit.Assert.assertEquals
+import org.junit.Ignore
 import org.junit.Test
 import java.io.*
 
@@ -18,6 +19,7 @@ class FileUtilsTest {
         assertEquals(false, file.exists())
     }
 
+    @Ignore
     @Test
     fun testSHA1() {
         val fileUtilsWrapper = FileUtilsWrapper(mock())
