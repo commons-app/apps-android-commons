@@ -104,6 +104,14 @@ class UploadProgressActivity : BaseActivity() {
         return true
     }
 
+    /**
+     * Updates the menu items based on the current position in the view pager and the visibility
+     * of icons related to pending or failed uploads. This function dynamically modifies the menu
+     * to display pause, resume, retry, and cancel options depending on the state of the uploads.
+     *
+     * @param currentPosition The current position in the view pager. A value of `0` indicates
+     * pending uploads, while `1` indicates failed uploads.
+     */
     fun updateMenuItems(currentPosition: Int) {
         if (menu != null) {
             menu!!.clear()

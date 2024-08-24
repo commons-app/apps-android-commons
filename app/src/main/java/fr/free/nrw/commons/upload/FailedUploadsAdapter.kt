@@ -17,7 +17,14 @@ import fr.free.nrw.commons.R
 import fr.free.nrw.commons.contributions.Contribution
 import java.io.File
 
-
+/**
+ * Adapter for displaying failed uploads in a paginated list in FailedUploadsFragment. This adapter
+ * binds the data from [Contribution] objects to the item views in the RecyclerView, allowing users to view
+ * details of failed uploads, retry them, or delete them.
+ *
+ * @param callback The callback to handle user actions such as Delete Uploads and Restart Uploads
+ * on failed uploads.
+ */
 class FailedUploadsAdapter(callback: Callback) :
     PagedListAdapter<Contribution, FailedUploadsAdapter.ViewHolder>(ContributionDiffCallback()) {
     private var callback: Callback = callback

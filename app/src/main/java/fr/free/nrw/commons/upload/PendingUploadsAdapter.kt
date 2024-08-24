@@ -18,7 +18,13 @@ import fr.free.nrw.commons.contributions.Contribution
 import timber.log.Timber
 import java.io.File
 
-
+/**
+ * Adapter for displaying pending uploads in a paginated list in PendingUploadsFragment. This adapter
+ * binds data from [Contribution] objects to the item views in the RecyclerView, allowing users to
+ * view details of pending uploads and perform actions such as deleting them.
+ *
+ * @param callback The callback to handle user actions such as Delete Uploads on pending uploads.
+ */
 class PendingUploadsAdapter(private val callback: Callback) :
     PagedListAdapter<Contribution, PendingUploadsAdapter.ViewHolder>(ContributionDiffCallback()) {
 
