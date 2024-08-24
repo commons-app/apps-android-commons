@@ -162,14 +162,17 @@ public class MainActivity  extends BaseActivity
              * so that location in the EXIF metadata of the images shared by the user
              * is retained on devices running Android 10 or above
              */
-            if (VERSION.SDK_INT >= VERSION_CODES.Q) {
-                PermissionUtils.checkPermissionsAndPerformAction(
-                    this,
-                    () -> {},
-                    R.string.media_location_permission_denied,
-                    R.string.add_location_manually,
-                    permission.ACCESS_MEDIA_LOCATION);
-            }
+//            if (VERSION.SDK_INT >= VERSION_CODES.Q) {
+//                ActivityCompat.requestPermissions(this,
+//                    new String[]{Manifest.permission.ACCESS_MEDIA_LOCATION}, 0);
+//                PermissionUtils.checkPermissionsAndPerformAction(
+//                    this,
+//                    () -> {},
+//                    R.string.media_location_permission_denied,
+//                    R.string.add_location_manually,
+//                    permission.ACCESS_MEDIA_LOCATION);
+//            }
+
             checkAndResumeStuckUploads();
         }
     }
