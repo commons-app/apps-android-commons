@@ -1,24 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:tools="http://schemas.android.com/tools">
+
   <uses-permission android:name="android.permission.INTERNET" />
-  <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+  <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"
+    android:maxSdkVersion="32" />
   <uses-permission android:name="android.permission.READ_SYNC_SETTINGS" />
   <uses-permission android:name="android.permission.READ_SYNC_STATS" />
   <uses-permission android:name="android.permission.REORDER_TASKS" />
   <uses-permission android:name="android.permission.WRITE_SYNC_SETTINGS" />
-  <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+  <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+    android:maxSdkVersion="29"/>
   <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
   <uses-permission android:name="android.permission.AUTHENTICATE_ACCOUNTS" />
   <uses-permission android:name="android.permission.GET_ACCOUNTS" />
   <uses-permission android:name="android.permission.USE_CREDENTIALS" />
   <uses-permission android:name="android.permission.MANAGE_ACCOUNTS" />
   <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
-  <uses-permission android:name="android.permission.READ_MEDIA_IMAGES"/>
+  <uses-permission android:name="android.permission.READ_MEDIA_IMAGES"
+    android:minSdkVersion="33"/>
   <uses-permission android:name="com.google.android.apps.photos.permission.GOOGLE_PHOTOS" />
   <uses-permission android:name="android.permission.SET_WALLPAPER"/>
   <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
   <uses-permission android:name="android.permission.ACCESS_MEDIA_LOCATION"/>
+  <uses-permission android:name="android.permission.READ_MEDIA_VISUAL_USER_SELECTED"
+    android:minSdkVersion="34"/>
 
   <queries>
     <!-- Browser -->
@@ -54,7 +60,7 @@
     <activity
       android:theme="@style/EditActivityTheme"
       android:name=".description.DescriptionEditActivity"
-      android:exported="true" />
+      android:exported="false" />
 
     <activity
       android:name=".edit.EditActivity"
