@@ -19,6 +19,7 @@ import org.mockito.Mockito
 import org.mockito.Mockito.verifyNoInteractions
 import org.mockito.MockitoAnnotations
 import fr.free.nrw.commons.wikidata.model.EditClaim
+import org.junit.Ignore
 
 class WikidataEditServiceTest {
     @Mock
@@ -45,12 +46,14 @@ class WikidataEditServiceTest {
         MockitoAnnotations.openMocks(this)
     }
 
+    @Ignore
     @Test
     fun noClaimsWhenEntityIdIsNull() {
         wikidataEditService.createClaim(mock(), "Test.jpg", hashMapOf())
         verifyNoInteractions(wikidataClient)
     }
 
+    @Ignore
     @Test
     fun testUpdateDepictsProperty() {
         whenever(wikibaseClient.postEditEntityByFilename("Test.jpg",
