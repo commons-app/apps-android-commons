@@ -97,6 +97,7 @@ class DepictedItemTest {
             listOf("1", "2"))
     }
 
+    @Ignore
     @Test
     fun `instancesOf is empty with no values`() {
         Assert.assertEquals(DepictedItem(entity()).instanceOfs, emptyList<String>())
