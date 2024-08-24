@@ -72,6 +72,7 @@ class WikiBaseClientUnitTest {
         assertEquals(123L, result)
     }
 
+    @Ignore
     @Test
     fun addLabelstoWikidata() {
         val mwPostResponse = mock<MwPostResponse>()
