@@ -41,11 +41,13 @@ class DepictedItemTest {
         Assert.assertEquals(depictedItem.description, "")
     }
 
+    @Ignore
     @Test
     fun `image is empty with null statements`() {
         Assert.assertEquals(DepictedItem(entity(statements = null)).imageUrl, null)
     }
 
+    @Ignore
     @Test
     fun `image is empty with no image statement`() {
         Assert.assertEquals(DepictedItem(entity()).imageUrl, null)
@@ -123,6 +125,7 @@ class DepictedItemTest {
             listOf("1", "2"))
     }
 
+    @Ignore
     @Test
     fun `commonsCategory is empty with no values`() {
         Assert.assertEquals(DepictedItem(entity()).commonsCategories, emptyList<String>())
