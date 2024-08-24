@@ -62,13 +62,15 @@ class FolderAdapter(
         folder.images.removeAll(toBeRemoved)
         val count = folder.images.size
 
-        if(count == 0) {
+        if(count == 0 && folders.size > 0) {
             // Folder is empty, remove folder from the adapter.
             holder.itemView.post{
                 val updatePosition = folders.indexOf(folder)
-                folders.removeAt(updatePosition)
-                notifyItemRemoved(updatePosition)
-                notifyItemRangeChanged(updatePosition, folders.size)
+                if(updatePosition != -1) {
+                    folders.removeAt(updatePosition)
+                    notifyItemRemoved(updatePosition)
+                    notifyItemRangeChanged(updatePosition, folders.size)
+                }
             }
         } else {
             val previewImage = folder.images[0]
