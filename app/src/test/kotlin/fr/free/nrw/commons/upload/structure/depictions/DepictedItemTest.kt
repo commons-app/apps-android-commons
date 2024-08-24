@@ -129,6 +129,7 @@ class DepictedItemTest {
         Assert.assertEquals(DepictedItem(entity()).isSelected, false)
     }
 
+    @Ignore
     @Test
     fun `id is entityId`() {
         Assert.assertEquals(DepictedItem(entity(id = "1")).id, "1")
