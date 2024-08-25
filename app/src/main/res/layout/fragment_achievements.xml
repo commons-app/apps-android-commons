@@ -133,27 +133,20 @@
               android:layout_width="@dimen/dimen_40"
               android:layout_height="@dimen/dimen_40"
               android:layout_alignParentEnd="true"
-              android:layout_alignParentRight="true"
-              android:layout_marginEnd="32dp"
-              android:layout_marginRight="32dp">
+              android:layout_marginEnd="32dp">
 
-              <com.dinuscxj.progressbar.CircleProgressBar
+              <com.google.android.material.progressindicator.CircularProgressIndicator
+                android:id="@+id/images_uploaded_progressbar"
                 android:layout_width="@dimen/dimen_40"
                 android:layout_height="@dimen/dimen_40"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"
+                android:indeterminate="false"
                 android:layout_marginEnd="@dimen/large_gap"
-                android:layout_marginRight="@dimen/large_gap"
-                android:id="@+id/images_uploaded_progressbar"
-                android:progress="50"
-                app:progress_text_size="@dimen/progressbar_text"
-                app:progress_end_color="#8C8B98"
-                app:progress_start_color="#3A3381"
-                app:progress_stroke_width="@dimen/progressbar_stroke"
-                app:progress_text_format_pattern=""
-                android:visibility="gone"
-                app:progress_text_color="@color/secondaryColor"
-                app:style="solid_line" />
+                app:showAnimationBehavior="outward"
+                app:indicatorColor="@color/primaryColor"
+                app:indicatorSize="32dp"
+                app:trackThickness="@dimen/progressbar_stroke"
+                app:trackColor="#B7B6B6"
+                android:visibility="gone"/>
 
               <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_uploaded_images"
@@ -228,24 +221,38 @@
               android:layout_marginStart="@dimen/activity_margin_horizontal"
               android:layout_below="@id/images_reverted_info"/>
 
-            <com.dinuscxj.progressbar.CircleProgressBar
+            <FrameLayout
               android:layout_width="@dimen/dimen_40"
               android:layout_height="@dimen/dimen_40"
-              android:layout_alignParentRight="true"
               android:layout_alignParentEnd="true"
-              android:layout_marginRight="@dimen/large_gap"
-              android:layout_marginEnd="@dimen/large_gap"
-              android:progress="50"
-              android:visibility="gone"
-              android:id="@+id/image_reverts_progressbar"
-              app:progress_end_color="#8C8B98"
-              app:progress_start_color="#3A3381"
-              app:progress_text_size="@dimen/progressbar_text"
-              app:progress_stroke_width="@dimen/progressbar_stroke"
-              app:progress_text_format_pattern="92%%"
-              app:progress_text_color="@color/secondaryColor"
-              app:style="solid_line" />
+              android:layout_marginEnd="32dp">
 
+              <com.google.android.material.progressindicator.CircularProgressIndicator
+                android:id="@+id/image_reverts_progressbar"
+                android:layout_width="@dimen/dimen_40"
+                android:layout_height="@dimen/dimen_40"
+                android:indeterminate="false"
+                android:layout_marginEnd="@dimen/large_gap"
+                app:showAnimationBehavior="outward"
+                app:indicatorColor="@color/primaryColor"
+                app:indicatorSize="32dp"
+                app:trackThickness="@dimen/progressbar_stroke"
+                app:trackColor="#B7B6B6"
+                android:visibility="gone"/>
+
+              <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_reverted_images"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="@dimen/progressbar_padding"
+                android:gravity="center"
+                android:maxLines="1"
+                android:textColor="@color/secondaryColor"
+                app:autoSizeMaxTextSize="@dimen/progressbar_text"
+                app:autoSizeMinTextSize="2sp"
+                app:autoSizeStepGranularity="1sp"
+                app:autoSizeTextType="uniform" />
+            </FrameLayout>
           </RelativeLayout>
 
           <RelativeLayout
@@ -295,27 +302,20 @@
               android:layout_width="@dimen/dimen_40"
               android:layout_height="@dimen/dimen_40"
               android:layout_alignParentEnd="true"
-              android:layout_alignParentRight="true"
-              android:layout_marginEnd="32dp"
-              android:layout_marginRight="32dp">
+              android:layout_marginEnd="32dp">
 
-              <com.dinuscxj.progressbar.CircleProgressBar
+              <com.google.android.material.progressindicator.CircularProgressIndicator
+                android:id="@+id/images_used_by_wiki_progress_bar"
                 android:layout_width="@dimen/dimen_40"
                 android:layout_height="@dimen/dimen_40"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginRight="@dimen/large_gap"
+                android:indeterminate="false"
                 android:layout_marginEnd="@dimen/large_gap"
-                android:progress="50"
-                app:progress_text_size="@dimen/progressbar_text"
-                android:id="@+id/images_used_by_wiki_progress_bar"
-                app:progress_end_color="#8C8B98"
-                app:progress_start_color="#3A3381"
-                app:progress_stroke_width="2.5dp"
-                android:visibility="gone"
-                app:progress_text_color="@color/secondaryColor"
-                app:progress_text_format_pattern=""
-                app:style="solid_line" />
+                app:showAnimationBehavior="outward"
+                app:indicatorColor="@color/primaryColor"
+                app:indicatorSize="32dp"
+                app:trackThickness="@dimen/progressbar_stroke"
+                app:trackColor="#B7B6B6"
+                android:visibility="gone"/>
 
               <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_wiki_pb"

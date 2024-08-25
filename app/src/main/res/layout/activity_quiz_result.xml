@@ -41,20 +41,37 @@
                         android:textSize="32sp"
                         android:layout_marginTop="@dimen/activity_margin_vertical" />
 
-                    <com.dinuscxj.progressbar.CircleProgressBar
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/dimen_250"
-                        android:layout_marginRight="@dimen/activity_margin_horizontal"
-                        android:layout_marginLeft="@dimen/activity_margin_horizontal"
-                        android:layout_marginTop="@dimen/activity_margin_vertical"
-                        android:progress="50"
-                        app:progress_end_color="#8C8B98"
-                        app:progress_start_color="#3A3381"
-                        app:progress_stroke_width="@dimen/first_fab"
-                        app:progress_text_size="@dimen/large_gap"
-                        app:progress_text_format_pattern="4/5"
-                        app:style="solid_line"
-                        android:id="@+id/result_progress_bar"/>
+                    <FrameLayout
+                      android:layout_width="match_parent"
+                      android:layout_height="@dimen/dimen_250"
+                      android:layout_marginRight="@dimen/activity_margin_horizontal"
+                      android:layout_marginLeft="@dimen/activity_margin_horizontal"
+                      android:layout_marginTop="@dimen/activity_margin_vertical">
+
+                        <com.google.android.material.progressindicator.CircularProgressIndicator
+                          android:id="@+id/result_progress_bar"
+                          android:layout_width="match_parent"
+                          android:layout_height="@dimen/dimen_250"
+                          android:layout_gravity="center"
+                          android:indeterminate="false"
+                          app:showAnimationBehavior="outward"
+                          app:indicatorColor="#3A3381"
+                          app:indicatorSize="128dp"
+                          app:trackThickness="@dimen/first_fab"
+                          app:trackColor="#B7B6B6" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                          android:id="@+id/tv_result_progress"
+                          android:layout_width="match_parent"
+                          android:layout_height="match_parent"
+                          android:padding="@dimen/progressbar_padding"
+                          android:gravity="center"
+                          android:maxLines="1"
+                          android:textColor="@color/secondaryColor"
+                          app:autoSizeMaxTextSize="@dimen/large_gap"
+                          app:autoSizeStepGranularity="1sp"
+                          app:autoSizeTextType="uniform" />
+                    </FrameLayout>
 
                     <TextView
                         android:layout_width="match_parent"
