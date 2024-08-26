@@ -1992,51 +1992,9 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
      *                          locations.
      */
     private void addMarkersToMap(List<BaseMarker> nearbyBaseMarkers) {
-        for (int i = 0; i < nearbyBaseMarkers.size(); i++) {
-            Drawable icon = ContextCompat.getDrawable(getContext(),
-                getIconFor(nearbyBaseMarkers.get(i).getPlace(), false));
-            GeoPoint point = new GeoPoint(
-                nearbyBaseMarkers.get(i).getPlace().location.getLatitude(),
-                nearbyBaseMarkers.get(i).getPlace().location.getLongitude());
-            Marker marker = new Marker(binding.map);
-            marker.setPosition(point);
-            marker.setIcon(icon);
-            Place place = nearbyBaseMarkers.get(i).getPlace();
-            if (!Objects.equals(place.name, "")) {
-                marker.setTitle(place.name);
-                marker.setSnippet(
-                    containsParentheses(place.getLongDescription())
-                        ? getTextBetweenParentheses(
-                        place.getLongDescription()) : place.getLongDescription());
-            }
-            marker.setTextLabelFontSize(40);
-            marker.setId(String.valueOf(i));
-            marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_TOP);
-            marker.setOnMarkerClickListener((marker1, mapView) -> {
-                marker1.showInfoWindow();
-                if (clickedMarker != null) {
-                    clickedMarker.closeInfoWindow();
-                }
-                clickedMarker = marker1;
-                int index = Integer.parseInt(marker1.getId());
-                Place updatedPlace = nearbyBaseMarkers.get(index).getPlace();
-                binding.bottomSheetDetails.dataCircularProgress.setVisibility(View.VISIBLE);
-                binding.bottomSheetDetails.icon.setVisibility(View.GONE);
-                binding.bottomSheetDetails.wikiDataLl.setVisibility(View.GONE);
-                if (Objects.equals(updatedPlace.name, "")) {
-                    getPlaceData(updatedPlace.getWikiDataEntityId(), updatedPlace, marker1, false);
-                } else {
-                    marker.showInfoWindow();
-                    binding.bottomSheetDetails.dataCircularProgress.setVisibility(View.GONE);
-                    binding.bottomSheetDetails.icon.setVisibility(View.VISIBLE);
-                    binding.bottomSheetDetails.wikiDataLl.setVisibility(View.VISIBLE);
-                    passInfoToSheet(place);
-                    hideBottomSheet();
-                }
-                bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
-                return true;
-            });
-            binding.map.getOverlays().add(marker);
+
+        for(int i = 0; i< nearbyBaseMarkers.size(); i++){
+            addMarkerToMap(nearbyBaseMarkers.get(i).getPlace(), false);
         }
     }
 
