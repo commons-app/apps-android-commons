@@ -116,6 +116,7 @@
   <string name="upload_failed">Nie znaleziono pliku. Spróbuj znaleźć inny.</string>
   <string name="retry_limit_reached">Osiągnięto maksymalny limit ponownych prób! Anuluj przesyłanie i spróbuj ponownie</string>
   <string name="unrestricted_battery_mode">Wyłączyć optymalizację baterii?</string>
+  <string name="suggest_unrestricted_mode">Przesyłanie więcej niż 3 obrazów działa bardziej niezawodnie, gdy optymalizacja baterii jest wyłączona. Wyłącz optymalizację baterii dla aplikacji Commons w ustawieniach, aby zapewnić płynne przesyłanie. \n\nMożliwe kroki, aby wyłączyć optymalizację baterii:\n\nKrok 1: Stuknij przycisk „Ustawienia” poniżej.\n\nKrok 2: Przełącz z „Niezoptymalizowane” na „Wszystkie aplikacje”.\n\nKrok 3: Wyszukaj „Commons” lub „fr.free.nrw.commons”.\n\nKrok 4: Stuknij i wybierz „Nie optymalizuj”.\n\nKrok 5: Naciśnij „Gotowe”.</string>
   <string name="authentication_failed">Uwierzytelnianie nie powiodło się, zaloguj się ponownie, proszę.</string>
   <string name="uploading_started">Wysyłanie rozpoczęte!</string>
   <string name="uploading_queued">Prześlij w kolejce (włączony tryb ograniczonego połączenia)</string>
@@ -306,7 +307,7 @@
   <string name="skip_login">Pomiń</string>
   <string name="navigation_item_login">Zaloguj się</string>
   <string name="skip_login_title">Czy na pewno chcesz pominąć logowanie?</string>
-  <string name="skip_login_message" fuzzy="true">Musisz się zalogować, aby przesłać zdjęcia w przyszłości</string>
+  <string name="skip_login_message">Aby w przyszłości przesyłać zdjęcia, będziesz musiał się zalogować.</string>
   <string name="login_alert_message">Zaloguj się, aby skorzystać z tej funkcji</string>
   <string name="copy_wikicode">Skopiuj wikitext do schowka</string>
   <string name="wikicode_copied">Wikitext został skopiowany do schowka</string>
@@ -462,6 +463,7 @@
   <string name="ends_on">Kończy się na:</string>
   <string name="display_campaigns">Wyświetl kampanie</string>
   <string name="display_campaigns_explanation">Zobacz trwające kampanie</string>
+  <string name="in_app_camera_location_access_explanation">Zezwól aplikacji na pobieranie lokalizacji, jeśli kamera jej nie rejestruje. Niektóre kamery urządzeń nie rejestrują lokalizacji. W takich przypadkach pozwolenie aplikacji na pobieranie i dołączanie do niej lokalizacji sprawia, że Twój wkład jest bardziej użyteczny. Możesz to zmienić w dowolnym momencie w Ustawieniach</string>
   <string name="option_allow">Zezwól</string>
   <string name="option_dismiss">Odrzuć</string>
   <string name="location_loss_warning" fuzzy="true">Upewnij się, że ten nowy selektor Androida nie usuwa lokalizacji ze zdjęć.</string>
@@ -770,6 +772,7 @@
   <string name="unable_to_share_upload_item">Nie można udostępnić tego elementu</string>
   <string name="edit_image">Edytuj obraz</string>
   <string name="edit_location">Edytuj lokalizację</string>
+  <string name="location_updated">Lokalizacja zaktualizowana!</string>
   <string name="send_thanks_to_author">Dziękuję autorowi</string>
   <string name="error_sending_thanks">Błąd wysyłania podziękowań do autora.</string>
   <string name="file_saved_successfully">Pomyślnie zapisano</string>
