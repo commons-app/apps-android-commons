@@ -8,7 +8,6 @@ import android.content.Context;
 import androidx.annotation.Nullable;
 import com.google.gson.Gson;
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.auth.csrf.InvalidLoginTokenException;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.upload.UploadResult;
@@ -19,9 +18,11 @@ import fr.free.nrw.commons.utils.ViewUtil;
 import fr.free.nrw.commons.wikidata.model.DataValue;
 import fr.free.nrw.commons.wikidata.model.DataValue.ValueString;
 import fr.free.nrw.commons.wikidata.model.EditClaim;
+import fr.free.nrw.commons.wikidata.model.RemoveClaim;
 import fr.free.nrw.commons.wikidata.model.Snak_partial;
 import fr.free.nrw.commons.wikidata.model.Statement_partial;
 import fr.free.nrw.commons.wikidata.model.WikiBaseMonolingualTextValue;
+import fr.free.nrw.commons.wikidata.mwapi.MwPostResponse;
 import io.reactivex.Observable;
 import io.reactivex.schedulers.Schedulers;
 import java.util.ArrayList;
@@ -34,7 +35,6 @@ import java.util.UUID;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;
-import fr.free.nrw.commons.wikidata.mwapi.MwPostResponse;
 import timber.log.Timber;
 
 /**
@@ -72,9 +72,10 @@ public class WikidataEditService {
      * to the wikibase API to set tag against the entity.
      */
     @SuppressLint("CheckResult")
-    private Observable<Boolean> addDepictsProperty(final String fileEntityId,
-        final List<String> depictedItems) {
-
+    private Observable<Boolean> addDepictsProperty(
+        final String fileEntityId,
+        final List<String> depictedItems
+    ) {
         final EditClaim data = editClaim(
             ConfigUtils.isBetaFlavour() ? Collections.singletonList("Q10")
                 // Wikipedia:Sandbox (Q10)
@@ -100,43 +101,52 @@ public class WikidataEditService {
      * Takes depicts ID as a parameter and create a uploadable data with the Id
      * and send the data for POST operation
      *
-     * @param filename name of the file
-     * @param depictedItems ID of the selected depict item
+     * @param fileEntityId ID of the file
+     * @param depictedItems IDs of the selected depict item
      * @return Observable<Boolean>
      */
     @SuppressLint("CheckResult")
-    public Observable<Boolean> updateDepictsProperty(final String filename,
-        final List<String> depictedItems) {
+    public Observable<Boolean> updateDepictsProperty(
+        final String fileEntityId,
+        final List<String> depictedItems
+    ) {
+        final String entityId = PAGE_ID_PREFIX + fileEntityId;
+        final List<String> claimIds = getDepictionsClaimIds(entityId);
 
-        final EditClaim data = editClaim(
+        final RemoveClaim data = removeClaim( /* Please consider removeClaim scenario for BetaDebug */
             ConfigUtils.isBetaFlavour() ? Collections.singletonList("Q10")
                 // Wikipedia:Sandbox (Q10)
-                : depictedItems
+                : claimIds
         );
 
-        return wikiBaseClient.postEditEntityByFilename(filename,
-            gson.toJson(data))
-            .doOnNext(success -> {
-                if (success) {
-                    Timber.d("DEPICTS property was set successfully for %s", filename);
-                } else {
-                    Timber.d("Unable to set DEPICTS property for %s", filename);
-                }
-            })
+        return wikiBaseClient.postDeleteClaims(entityId, gson.toJson(data))
             .doOnError(throwable -> {
-                if (throwable instanceof InvalidLoginTokenException) {
-                     Observable.error(throwable);
+                Timber.e(throwable, "Error occurred while removing existing claims for DEPICTS property");
+                ViewUtil.showLongToast(context, context.getString(R.string.wikidata_edit_failure));
+            }).switchMap(success-> {
+                if(success) {
+                    Timber.d("DEPICTS property was deleted successfully");
+                    return addDepictsProperty(fileEntityId, depictedItems);
                 } else {
-                    Timber.e(throwable, "Error occurred while setting DEPICTS property");
-                    ViewUtil.showLongToast(context, throwable.toString());
+                    Timber.d("Unable to delete DEPICTS property");
+                    return Observable.empty();
                 }
+            });
+    }
 
-            })
-            .subscribeOn(Schedulers.io());
+    @SuppressLint("CheckResult")
+    private List<String> getDepictionsClaimIds(final String entityId) {
+        return wikiBaseClient.getClaimIdsByProperty(entityId, WikidataProperties.DEPICTS.getPropertyName())
+            .subscribeOn(Schedulers.io())
+            .blockingFirst();
     }
 
     private EditClaim editClaim(final List<String> entityIds) {
         return EditClaim.from(entityIds, WikidataProperties.DEPICTS.getPropertyName());
+    }
+
+    private RemoveClaim removeClaim(final List<String> claimIds) {
+        return RemoveClaim.from(claimIds);
     }
 
     /**
@@ -156,11 +166,10 @@ public class WikidataEditService {
      * @param fileEntityId
      * @return
      */
-
     @SuppressLint("CheckResult")
     private Observable<Boolean> addCaption(final long fileEntityId, final String languageCode,
         final String captionValue) {
-        return wikiBaseClient.addLabelstoWikidata(fileEntityId, languageCode, captionValue)
+        return wikiBaseClient.addLabelsToWikidata(fileEntityId, languageCode, captionValue)
             .doOnNext(mwPostResponse -> onAddCaptionResponse(fileEntityId, mwPostResponse))
             .doOnError(throwable -> {
                 Timber.e(throwable, "Error occurred while setting Captions");
@@ -220,8 +229,10 @@ public class WikidataEditService {
         }
     }
 
-    public Observable addDepictionsAndCaptions(final UploadResult uploadResult,
-        final Contribution contribution) {
+    public Observable<Boolean> addDepictionsAndCaptions(
+        final UploadResult uploadResult,
+        final Contribution contribution
+    ) {
         return wikiBaseClient.getFileEntityId(uploadResult)
             .doOnError(throwable -> {
                 Timber

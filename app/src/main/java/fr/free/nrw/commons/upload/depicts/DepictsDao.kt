@@ -1,112 +1,99 @@
 package fr.free.nrw.commons.upload.depicts
 
-import androidx.room.*
+import androidx.room.Dao
+import androidx.room.Delete
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
-import java.util.*
+import java.util.Date
 
 /**
  *  Dao class for DepictsRoomDataBase
  */
 @Dao
 abstract class DepictsDao {
-
-    /**
-     *  insert Depicts in DepictsRoomDataBase
-     */
+    /** The maximum number of depicts allowed in the database. */
+    private val maxItemsAllowed = 10
+    
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     abstract suspend fun insert(depictedItem: Depicts)
-
-    /**
-     * get all Depicts from roomdatabase
-     */
+    
     @Query("Select * From depicts_table order by lastUsed DESC")
-    abstract suspend fun getAllDepict(): List<Depicts>
+    abstract suspend fun getAllDepicts(): List<Depicts>
 
-    /**
-     *  get all Depicts which need to delete  from roomdatabase
-     */
     @Query("Select * From depicts_table order by lastUsed DESC LIMIT :n OFFSET 10")
-    abstract suspend fun getItemToDelete(n: Int): List<Depicts>
+    abstract suspend fun getDepictsForDeletion(n: Int): List<Depicts>
 
-    /**
-     *  Delete Depicts from roomdatabase
-     */
     @Delete
     abstract suspend fun delete(depicts: Depicts)
 
-    lateinit var allDepict: List<Depicts>
-    lateinit var listOfDelete: List<Depicts>
-
     /**
-     * get all depicts from DepictsRoomDatabase
+     * Gets all Depicts objects from the database, ordered by lastUsed in descending order.
+     *
+     * @return A list of Depicts objects.
      */
-    fun depictsList(): List<Depicts> {
-        runBlocking {
-            launch(Dispatchers.IO) {
-                allDepict = getAllDepict()
-            }
-        }
-        return allDepict
+    fun depictsList(): Deferred<List<Depicts>> = CoroutineScope(Dispatchers.IO).async {
+        getAllDepicts()
     }
 
     /**
-     *  insert Depicts  in DepictsRoomDataBase
+     * Inserts a Depicts object into the database.
+     *
+     * @param depictedItem The Depicts object to insert.
      */
-    fun insertDepict(depictes: Depicts) {
-        runBlocking {
-            launch(Dispatchers.IO) {
-                insert(depictes)
-            }
-        }
+    private fun insertDepict(depictedItem: Depicts) = CoroutineScope(Dispatchers.IO).launch { 
+        insert(depictedItem)
     }
 
     /**
-     *  get all Depicts item which need to delete
+     * Gets a list of Depicts objects that need to be deleted from the database.
+     *
+     * @param n The number of depicts to delete.
+     * @return A list of Depicts objects to delete.
      */
-    fun getItemTodelete(number: Int): List<Depicts> {
-        runBlocking {
-            launch(Dispatchers.IO) {
-                listOfDelete = getItemToDelete(number)
-            }
-        }
-        return listOfDelete
+    private suspend fun depictsForDeletion(n: Int): Deferred<List<Depicts>> = CoroutineScope(Dispatchers.IO).async {
+        getDepictsForDeletion(n)
     }
 
     /**
-     *  delete Depicts  in DepictsRoomDataBase
+     * Deletes a Depicts object from the database.
+     *
+     * @param depicts The Depicts object to delete.
      */
-    fun deleteDepicts(depictes: Depicts) {
-        runBlocking {
-            launch(Dispatchers.IO) {
-                delete(depictes)
-            }
-        }
+    private suspend fun deleteDepicts(depicts: Depicts) = CoroutineScope(Dispatchers.IO).launch {
+        delete(depicts)
     }
 
     /**
-     *  save Depicts in DepictsRoomDataBase
+     * Saves a list of DepictedItems in the DepictsRoomDataBase.
      */
     fun savingDepictsInRoomDataBase(listDepictedItem: List<DepictedItem>) {
-        var numberofItemInRoomDataBase: Int
-        val maxNumberOfItemSaveInRoom = 10
+        CoroutineScope(Dispatchers.IO).launch {
+            for (depictsItem in listDepictedItem) {
+                depictsItem.isSelected = false
+                insertDepict(Depicts(depictsItem, Date()))
+            }
 
-        for (depictsItem in listDepictedItem) {
-            depictsItem.isSelected = false
-            insertDepict(Depicts(depictsItem, Date()))
+            // Deletes old Depicts objects from the database if
+            // the number of depicts exceeds the maximum allowed.
+            deleteOldDepictions(depictsList().await().size)
         }
+    }
 
-        numberofItemInRoomDataBase = depictsList().size
-        // delete the depictItem from depictsroomdataBase when number of element in depictsroomdataBase is greater than 10
-        if (numberofItemInRoomDataBase > maxNumberOfItemSaveInRoom) {
+    private suspend fun deleteOldDepictions(depictsListSize: Int) {
+        if(depictsListSize > maxItemsAllowed) {
+            val depictsForDeletion = depictsForDeletion(depictsListSize).await()
 
-            val listOfDepictsToDelete: List<Depicts> =
-                getItemTodelete(numberofItemInRoomDataBase)
-            for (i in listOfDepictsToDelete) {
-                deleteDepicts(i)
+            for(depicts in depictsForDeletion) {
+                deleteDepicts(depicts)
             }
         }
     }
 }
+
