@@ -47,9 +47,9 @@ class WikiBaseClient @Inject constructor(
         }
     }
 
-    fun postDeleteClaims(entityId: String, data: String): Observable<Boolean> {
+    fun postDeleteClaims(entityId: String, data: String?): Observable<Boolean> {
         return csrfToken().switchMap { editToken ->
-            wikiBaseInterface.postDeleteClaims(editToken, entityId, data)
+            wikiBaseInterface.postDeleteClaims(editToken, entityId, data!!)
                 .map { response: MwPostResponse -> response.successVal == 1 }
         }
     }
