@@ -76,7 +76,9 @@ public class PermissionUtils {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
             return ContextCompat.checkSelfPermission(activity,
                 permission.READ_MEDIA_VISUAL_USER_SELECTED
-            ) == PackageManager.PERMISSION_GRANTED;
+            ) == PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(
+                activity, permission.READ_MEDIA_IMAGES
+            ) == PackageManager.PERMISSION_DENIED;
         }
         return false;
     }
