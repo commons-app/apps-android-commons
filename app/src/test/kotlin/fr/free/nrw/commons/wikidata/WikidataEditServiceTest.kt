@@ -8,6 +8,7 @@ import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.upload.UploadResult
 import fr.free.nrw.commons.upload.WikidataPlace
+import fr.free.nrw.commons.wikidata.model.RemoveClaim
 import io.reactivex.Observable
 import org.junit.Before
 import org.junit.Test
@@ -18,8 +19,6 @@ import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.Mockito.verifyNoInteractions
 import org.mockito.MockitoAnnotations
-import fr.free.nrw.commons.wikidata.model.EditClaim
-import fr.free.nrw.commons.wikidata.model.RemoveClaim
 
 class WikidataEditServiceTest {
     @Mock
@@ -56,7 +55,8 @@ class WikidataEditServiceTest {
     fun testUpdateDepictsProperty() {
         val fileEntityId = "12345"
 
-        whenever(wikibaseClient.getClaimIdsByProperty("M" + fileEntityId, "P180"))
+        whenever(wikibaseClient.getClaimIdsByProperty("M" + fileEntityId,
+            WikidataProperties.DEPICTS.propertyName))
             .thenReturn(Observable.just(emptyList()))
         whenever(wikibaseClient.postDeleteClaims("M" + fileEntityId,
             gson.toJson(Mockito.mock(RemoveClaim::class.java)))
