@@ -306,6 +306,7 @@ public class AchievementsFragment extends CommonsDaggerSupportFragment {
         if (uploadCount==0){
             setZeroAchievements();
         }else {
+
             binding.imagesUploadedProgressbar.setVisibility(View.VISIBLE);
             binding.imagesUploadedProgressbar.setProgress
                     (100*uploadCount/levelInfo.getMaxUploadCount());
@@ -342,8 +343,8 @@ public class AchievementsFragment extends CommonsDaggerSupportFragment {
     private void setImageRevertPercentage(int notRevertPercentage){
         binding.imageRevertsProgressbar.setVisibility(View.VISIBLE);
         binding.imageRevertsProgressbar.setProgress(notRevertPercentage);
-        String revertPercentage = Integer.toString(notRevertPercentage);
-        binding.imageRevertsProgressbar.setProgressTextFormatPattern(revertPercentage + "%%");
+        final String revertPercentage = Integer.toString(notRevertPercentage);
+        binding.tvRevertedImages.setText(revertPercentage + "%");
         binding.imagesRevertLimitText.setText(getResources().getString(R.string.achievements_revert_limit_message)+ levelInfo.getMinNonRevertPercentage() + "%");
     }
 
@@ -357,10 +358,8 @@ public class AchievementsFragment extends CommonsDaggerSupportFragment {
         binding.thanksReceived.setText(String.valueOf(achievements.getThanksReceived()));
         binding.imagesUsedByWikiProgressBar.setProgress
                 (100 * achievements.getUniqueUsedImages() / levelInfo.getMaxUniqueImages());
-        if(binding.tvWikiPb != null) {
-            binding.tvWikiPb.setText
-                (achievements.getUniqueUsedImages() + "/" + levelInfo.getMaxUniqueImages());
-        }
+        binding.tvWikiPb.setText(achievements.getUniqueUsedImages() + "/"
+            + levelInfo.getMaxUniqueImages());
         binding.imageFeatured.setText(String.valueOf(achievements.getFeaturedImages()));
         binding.qualityImages.setText(String.valueOf(achievements.getQualityImages()));
         String levelUpInfoString = getString(R.string.level).toUpperCase();

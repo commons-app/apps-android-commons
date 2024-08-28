@@ -65,10 +65,10 @@ public class QuizResultActivity extends AppCompatActivity {
      * @param score
      */
     public void setScore(int score) {
-        int per = score * MULTIPLIER_TO_GET_PERCENTAGE;
-        binding.resultProgressBar.setProgress(per);
-        binding.resultProgressBar.setProgressTextFormatPattern(score +" / " + NUMBER_OF_QUESTIONS);
-        String message = getResources().getString(R.string.congratulatory_message_quiz,per + "%");
+        final int scorePercent = score * MULTIPLIER_TO_GET_PERCENTAGE;
+        binding.resultProgressBar.setProgress(scorePercent);
+        binding.tvResultProgress.setText(score +" / " + NUMBER_OF_QUESTIONS);
+        final String message = getResources().getString(R.string.congratulatory_message_quiz,scorePercent + "%");
         binding.congratulatoryMessage.setText(message);
     }
 
