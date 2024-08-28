@@ -16,9 +16,9 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.processors.PublishProcessor
 import io.reactivex.schedulers.Schedulers
+import kotlinx.coroutines.runBlocking
 import timber.log.Timber
 import java.lang.reflect.Proxy
-import java.util.*
 import javax.inject.Inject
 import javax.inject.Named
 import javax.inject.Singleton
@@ -85,7 +85,7 @@ class DepictsPresenter @Inject constructor(
         var recentDepictedItemList: MutableList<DepictedItem> = ArrayList();
         //show recentDepictedItemList when queryString is empty
         if (querystring.isEmpty()) {
-            recentDepictedItemList = getRecentDepictedItems();
+            recentDepictedItemList = getRecentDepictedItems().toMutableList()
         }
 
         if (media == null) {
@@ -223,9 +223,8 @@ class DepictsPresenter @Inject constructor(
                             if (error is InvalidLoginTokenException) {
                                 view.navigateToLoginScreen();
                             } else {
-                                Timber.e(
-                                    "Failed to update depictions"
-                                )
+                                view.dismissProgressDialog()
+                                Timber.e("Failed to update depictions")
                             }
                         })
                 )
@@ -266,14 +265,9 @@ class DepictsPresenter @Inject constructor(
     /**
      * Get the depicts from DepictsRoomdataBase
      */
-    fun getRecentDepictedItems(): MutableList<DepictedItem> {
-        val depictedItemList: MutableList<DepictedItem> = ArrayList()
-        val depictsList = depictsDao.depictsList()
-        for (i in depictsList.indices) {
-            val depictedItem = depictsList[i].item
-            depictedItemList.add(depictedItem)
-        }
-        return depictedItemList
+    private fun getRecentDepictedItems(): List<DepictedItem> = runBlocking {
+        val depictsList = depictsDao.depictsList().await()
+        return@runBlocking depictsList.map { it.item }
     }
 }
 

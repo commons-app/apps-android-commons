@@ -15,7 +15,7 @@ import fr.free.nrw.commons.theme.BaseActivity;
 public class SettingsActivity extends BaseActivity {
 
     private ActivitySettingsBinding binding;
-    private AppCompatDelegate settingsDelegate;
+//    private AppCompatDelegate settingsDelegate;
     /**
      * to be called when the activity starts
      * @param savedInstanceState the previously saved state
@@ -39,10 +39,10 @@ public class SettingsActivity extends BaseActivity {
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
-        if (settingsDelegate == null) {
-            settingsDelegate = AppCompatDelegate.create(this, null);
-        }
-        settingsDelegate.onPostCreate(savedInstanceState);
+//        if (settingsDelegate == null) {
+//            settingsDelegate = AppCompatDelegate.create(this, null);
+//        }
+//        settingsDelegate.onPostCreate(savedInstanceState);
     }
 
     @Override
