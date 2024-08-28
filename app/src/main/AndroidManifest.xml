@@ -25,6 +25,7 @@
   <uses-permission android:name="android.permission.ACCESS_MEDIA_LOCATION"/>
   <uses-permission android:name="android.permission.READ_MEDIA_VISUAL_USER_SELECTED"
     android:minSdkVersion="34"/>
+  <uses-permission android:name="android.permission.FOREGROUND_SERVICE_DATA_SYNC" />
 
   <queries>
     <!-- Browser -->
@@ -201,6 +202,10 @@
       android:name="org.acra.sender.SenderService"
       android:exported="false"
       android:process=":acra" />
+    
+    <service
+      android:name="androidx.work.impl.foreground.SystemForegroundService"
+      android:foregroundServiceType="dataSync" />
 
     <provider
       android:name=".filepicker.ExtendedFileProvider"

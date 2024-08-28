@@ -6,6 +6,7 @@ import android.app.PendingIntent
 import android.app.TaskStackBuilder
 import android.content.Context
 import android.content.Intent
+import android.content.pm.ServiceInfo
 import android.graphics.BitmapFactory
 import android.os.Build
 import androidx.core.app.NotificationCompat
@@ -271,10 +272,18 @@ class UploadWorker(
      * Create new notification for foreground service
      */
     private fun createForegroundInfo(): ForegroundInfo {
-        return ForegroundInfo(
-            1,
-            createNotificationForForegroundService()
-        )
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            ForegroundInfo(
+                1,
+                createNotificationForForegroundService(),
+                ServiceInfo.FOREGROUND_SERVICE_TYPE_DATA_SYNC
+            )
+        } else {
+            ForegroundInfo(
+                1,
+                createNotificationForForegroundService()
+            )
+        }
     }
 
     override suspend fun getForegroundInfo(): ForegroundInfo {
