@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="wrap_content"
+    android:background="@android:color/transparent"
+    android:clickable="true"
+    android:focusable="true"
+    android:gravity="center"
+    tools:background="@color/black">
+
+    <ImageView
+      android:id="@+id/pending_uploads_image_view"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:visibility="gone"
+      android:layout_marginEnd="@dimen/activity_margin_horizontal"
+      android:layout_marginRight="@dimen/activity_margin_horizontal"
+      android:gravity="center"
+      app:srcCompat="?attr/upload_icon_drawable" />
+
+    <TextView
+      android:id="@+id/pending_uploads_count_badge"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignTop="@id/pending_uploads_image_view"
+      android:layout_alignEnd="@id/pending_uploads_image_view"
+      android:layout_alignRight="@id/pending_uploads_image_view"
+      android:background="@drawable/notification_badge"
+      android:backgroundTint="@color/button_blue"
+      android:gravity="center"
+      android:padding="@dimen/miniscule_margin"
+      android:textColor="@color/white"
+      android:textSize="7sp"
+      android:textStyle="bold"
+      android:visibility="gone"
+      tools:text="9+"
+      tools:visibility="visible" />
+
+    <TextView
+      android:id="@+id/uploads_error_count_badge"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_below="@+id/pending_uploads_count_badge"
+      android:layout_alignEnd="@id/pending_uploads_image_view"
+      android:layout_alignRight="@id/pending_uploads_image_view"
+      android:layout_marginTop="1dp"
+      android:layout_marginEnd="0dp"
+      android:layout_marginRight="0dp"
+      android:background="@drawable/notification_badge"
+      android:gravity="center"
+      android:padding="@dimen/miniscule_margin"
+      android:textColor="?attr/notification_icon_text_color"
+      android:textSize="7sp"
+      android:textStyle="bold"
+      android:visibility="gone"
+      tools:text="9+"
+      tools:visibility="visible" />
+</RelativeLayout>

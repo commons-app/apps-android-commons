@@ -20,7 +20,6 @@ allprojects {
         gradlePluginPortal() // potential jcenter() replacement
         maven { url "https://jitpack.io" }
         maven { url "https://maven.google.com" }
-        jcenter()
     }
 }
 subprojects{

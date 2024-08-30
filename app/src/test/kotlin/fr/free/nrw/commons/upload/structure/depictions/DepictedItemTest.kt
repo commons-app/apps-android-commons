@@ -6,6 +6,7 @@ import entity
 import entityId
 import fr.free.nrw.commons.wikidata.WikidataProperties
 import org.junit.Assert
+import org.junit.Ignore
 import org.junit.Test
 import place
 import snak
