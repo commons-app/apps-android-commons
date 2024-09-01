@@ -533,8 +533,8 @@ class UploadWorker(
     private fun showSuccessNotification(contribution: Contribution) {
         val displayTitle = contribution.media.displayTitle
         contribution.state=Contribution.STATE_COMPLETED
-        curentNotification.setContentIntent(getPendingIntent(MainActivity::class.java))
-        curentNotification.setContentTitle(
+        currentNotification.setContentIntent(getPendingIntent(MainActivity::class.java))
+        currentNotification.setContentTitle(
             appContext.getString(
                 R.string.upload_completed_notification_title,
                 displayTitle
@@ -556,8 +556,8 @@ class UploadWorker(
     @SuppressLint("StringFormatInvalid")
     private fun showFailedNotification(contribution: Contribution) {
         val displayTitle = contribution.media.displayTitle
-        curentNotification.setContentIntent(getPendingIntent(UploadProgressActivity::class.java))
-        curentNotification.setContentTitle(
+        currentNotification.setContentIntent(getPendingIntent(UploadProgressActivity::class.java))
+        currentNotification.setContentTitle(
             appContext.getString(
                 R.string.upload_failed_notification_title,
                 displayTitle
@@ -595,7 +595,7 @@ class UploadWorker(
     @SuppressLint("StringFormatInvalid")
     private fun showErrorNotification(contribution: Contribution) {
         val displayTitle = contribution.media.displayTitle
-        curentNotification.setContentTitle(
+        currentNotification.setContentTitle(
             appContext.getString(
                 R.string.upload_failed_notification_title,
                 displayTitle
@@ -606,7 +606,7 @@ class UploadWorker(
             .setOngoing(false)
         notificationManager?.notify(
             currentNotificationTag, currentNotificationID,
-            curentNotification.build()
+            currentNotification.build()
         )
     }
 
@@ -617,8 +617,8 @@ class UploadWorker(
     private fun showPausedNotification(contribution: Contribution) {
         val displayTitle = contribution.media.displayTitle
       
-        curentNotification.setContentIntent(getPendingIntent(UploadProgressActivity::class.java))
-        curentNotification.setContentTitle(
+        currentNotification.setContentIntent(getPendingIntent(UploadProgressActivity::class.java))
+        currentNotification.setContentTitle(
             appContext.getString(
                 R.string.upload_paused_notification_title,
                 displayTitle
@@ -639,8 +639,8 @@ class UploadWorker(
      */
     private fun showCancelledNotification(contribution: Contribution) {
         val displayTitle = contribution.media.displayTitle
-        curentNotification.setContentIntent(getPendingIntent(UploadProgressActivity::class.java))
-        curentNotification.setContentTitle(
+        currentNotification.setContentIntent(getPendingIntent(UploadProgressActivity::class.java))
+        currentNotification.setContentTitle(
             displayTitle
         )
             .setContentText("Upload has been cancelled!")
@@ -648,7 +648,7 @@ class UploadWorker(
             .setOngoing(false)
         notificationManager!!.notify(
             currentNotificationTag, currentNotificationID,
-            curentNotification.build()
+            currentNotification.build()
         )
     }
 
