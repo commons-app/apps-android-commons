@@ -197,25 +197,6 @@ class MainActivityUnitTests {
 
     @Test
     @Throws(Exception::class)
-    fun testToggleLimitedConnectionModeCaseDefault() {
-        activity.toggleLimitedConnectionMode()
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun testToggleLimitedConnectionMode() {
-        Shadows.shadowOf(Looper.getMainLooper()).idle()
-        `when`(
-            defaultKvStore.getBoolean(
-                CommonsApplication.IS_LIMITED_CONNECTION_MODE_ENABLED, false
-            )
-        )
-            .thenReturn(false)
-        activity.toggleLimitedConnectionMode()
-    }
-
-    @Test
-    @Throws(Exception::class)
     fun testSetUpPager() {
         val method: Method = MainActivity::class.java.getDeclaredMethod(
             "setUpPager"

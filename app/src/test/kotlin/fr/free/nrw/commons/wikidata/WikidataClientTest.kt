@@ -17,6 +17,7 @@ import org.mockito.MockitoAnnotations
 import fr.free.nrw.commons.wikidata.mwapi.MwQueryResponse
 import fr.free.nrw.commons.wikidata.mwapi.MwQueryResult
 import fr.free.nrw.commons.wikidata.model.Statement_partial
+import org.junit.Ignore
 
 class WikidataClientTest {
 

@@ -17,6 +17,7 @@ import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
 import io.reactivex.Completable
 import io.reactivex.Single
 import org.junit.Before
+import org.junit.Ignore
 import org.junit.Test
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.mockito.Mock
@@ -198,7 +199,6 @@ class UploadRepositoryUnitTest {
             uploadModel.getCaptionQuality(uploadItem)
         )
     }
-
 
     @Test
     fun testDeletePicture() {

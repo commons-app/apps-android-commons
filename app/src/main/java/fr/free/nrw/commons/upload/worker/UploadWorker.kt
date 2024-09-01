@@ -35,13 +35,11 @@ import fr.free.nrw.commons.upload.FileUtilsWrapper
 import fr.free.nrw.commons.upload.StashUploadResult
 import fr.free.nrw.commons.upload.StashUploadState
 import fr.free.nrw.commons.upload.UploadClient
+import fr.free.nrw.commons.upload.UploadProgressActivity
 import fr.free.nrw.commons.upload.UploadResult
 import fr.free.nrw.commons.wikidata.WikidataEditService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
-import kotlinx.coroutines.flow.asFlow
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import timber.log.Timber
@@ -105,7 +103,6 @@ class UploadWorker(
             getNotificationBuilder(CommonsApplication.NOTIFICATION_CHANNEL_ID_ALL)!!
 
         statesToProcess.add(Contribution.STATE_QUEUED)
-        statesToProcess.add(Contribution.STATE_QUEUED_LIMITED_CONNECTION_MODE)
     }
 
     @dagger.Module
@@ -167,105 +164,85 @@ class UploadWorker(
     }
 
     override suspend fun doWork(): Result {
-        var countUpload = 0
-        // Start a foreground service
-        setForeground(createForegroundInfo())
-        notificationManager = NotificationManagerCompat.from(appContext)
-        val processingUploads = getNotificationBuilder(
-            CommonsApplication.NOTIFICATION_CHANNEL_ID_ALL
-        )!!
-        withContext(Dispatchers.IO) {
-            /*
-                queuedContributions receives the results from a one-shot query.
-                This means that once the list has been fetched from the database,
-                it does not get updated even if some changes (insertions, deletions, etc.)
-                are made to the contribution table afterwards.
+        try {
+            var totalUploadsStarted = 0
+            // Start a foreground service
+            setForeground(createForegroundInfo())
+            notificationManager = NotificationManagerCompat.from(appContext)
+            val processingUploads = getNotificationBuilder(
+                CommonsApplication.NOTIFICATION_CHANNEL_ID_ALL
+            )!!
+            withContext(Dispatchers.IO) {
+                while (contributionDao.getContribution(statesToProcess)
+                        .blockingGet().size > 0 && contributionDao.getContribution(
+                        arrayListOf(
+                            Contribution.STATE_IN_PROGRESS
+                        )
+                    ).blockingGet().size == 0
+                ) {
+                    /*
+                    queuedContributions receives the results from a one-shot query.
+                    This means that once the list has been fetched from the database,
+                    it does not get updated even if some changes (insertions, deletions, etc.)
+                    are made to the contribution table afterwards.
 
-                Related issues (fixed):
-                https://github.com/commons-app/apps-android-commons/issues/5136
-                https://github.com/commons-app/apps-android-commons/issues/5346
-             */
-            val queuedContributions = contributionDao.getContribution(statesToProcess)
-                .blockingGet()
-            //Showing initial notification for the number of uploads being processed
+                    Related issues (fixed):
+                    https://github.com/commons-app/apps-android-commons/issues/5136
+                    https://github.com/commons-app/apps-android-commons/issues/5346
+                 */
+                    val queuedContributions = contributionDao.getContribution(statesToProcess)
+                        .blockingGet()
+                    //Showing initial notification for the number of uploads being processed
 
-            Timber.e("Queued Contributions: %s", queuedContributions.size)
-
-            processingUploads.setContentTitle(appContext.getString(R.string.starting_uploads))
-            processingUploads.setContentText(
-                appContext.resources.getQuantityString(
-                        R.plurals.starting_multiple_uploads,
-                        queuedContributions.size,
-                        queuedContributions.size
+                    processingUploads.setContentTitle(appContext.getString(R.string.starting_uploads))
+                    processingUploads.setContentText(
+                        appContext.resources.getQuantityString(
+                            R.plurals.starting_multiple_uploads,
+                            queuedContributions.size,
+                            queuedContributions.size
+                        )
                     )
-            )
-            notificationManager?.notify(
-                PROCESSING_UPLOADS_NOTIFICATION_TAG,
-                PROCESSING_UPLOADS_NOTIFICATION_ID,
-                processingUploads.build()
-            )
+                    notificationManager?.notify(
+                        PROCESSING_UPLOADS_NOTIFICATION_TAG,
+                        PROCESSING_UPLOADS_NOTIFICATION_ID,
+                        processingUploads.build()
+                    )
 
-            /**
-             * To avoid race condition when multiple of these workers are working, assign this state
-            so that the next one does not process these contribution again
-             */
-            queuedContributions.forEach {
-                it.state = Contribution.STATE_IN_PROGRESS
-                contributionDao.saveSynchronous(it)
-            }
+                    val sortedQueuedContributionsList: List<Contribution> =
+                        queuedContributions.sortedBy { it.dateUploadStartedInMillis() }
 
-            queuedContributions.asFlow().map { contribution ->
-                // Upload the contribution if it has not been cancelled by the user
-                if (!CommonsApplication.cancelledUploads.contains(contribution.pageId)) {
-                    /**
-                     * If the limited connection mode is on, lets iterate through the queued
-                     * contributions
-                     * and set the state as STATE_QUEUED_LIMITED_CONNECTION_MODE ,
-                     * otherwise proceed with the upload
-                     */
-                    if (isLimitedConnectionModeEnabled()) {
-                        if (contribution.state == Contribution.STATE_QUEUED) {
-                            contribution.state = Contribution.STATE_QUEUED_LIMITED_CONNECTION_MODE
-                            contributionDao.saveSynchronous(contribution)
-                        }
-                    } else {
+                    var contribution = sortedQueuedContributionsList.first()
+
+                    if (contributionDao.getContribution(contribution.pageId) != null) {
                         contribution.transferred = 0
                         contribution.state = Contribution.STATE_IN_PROGRESS
                         contributionDao.saveSynchronous(contribution)
-                        setProgressAsync(Data.Builder().putInt("progress", countUpload).build())
-                        countUpload++
+                        setProgressAsync(Data.Builder().putInt("progress", totalUploadsStarted).build())
+                        totalUploadsStarted++
                         uploadContribution(contribution = contribution)
                     }
-                } else {
-                    /* We can remove the cancelled upload from the hashset
-                       as this contribution will not be processed again
-                     */
-                    removeUploadFromInMemoryHashSet(contribution)
                 }
-            }.collect()
+                //Dismiss the global notification
+                notificationManager?.cancel(
+                    PROCESSING_UPLOADS_NOTIFICATION_TAG,
+                    PROCESSING_UPLOADS_NOTIFICATION_ID
+                )
+            }
+            // Trigger WorkManager to process any new contributions that may have been added to the queue
+            val updatedContributionQueue = withContext(Dispatchers.IO) {
+                contributionDao.getContribution(statesToProcess).blockingGet()
+            }
+            if (updatedContributionQueue.isNotEmpty()) {
+                return Result.retry()
+            }
 
-            //Dismiss the global notification
-            notificationManager?.cancel(
-                PROCESSING_UPLOADS_NOTIFICATION_TAG,
-                PROCESSING_UPLOADS_NOTIFICATION_ID
-            )
+            return Result.success()
+        } catch (e: Exception) {
+            Timber.e(e, "UploadWorker encountered an error.")
+            return Result.failure()
+        } finally {
+            WorkRequestHelper.markUploadWorkerAsStopped()
         }
-        //Trigger WorkManager to process any new contributions that may have been added to the queue
-        val updatedContributionQueue = withContext(Dispatchers.IO) {
-            contributionDao.getContribution(statesToProcess).blockingGet()
-        }
-        if (updatedContributionQueue.isNotEmpty()) {
-            return Result.retry()
-        }
-
-        return Result.success()
-    }
-
-    /**
-     * Removes the processed contribution from the cancelledUploads in-memory hashset
-     */
-    private fun removeUploadFromInMemoryHashSet(contribution: Contribution) {
-        CommonsApplication.cancelledUploads.remove(contribution.pageId)
     }
 
     /**
@@ -295,12 +272,6 @@ class UploadWorker(
             CommonsApplication.NOTIFICATION_CHANNEL_ID_ALL)!!
             .setContentTitle(appContext.getString(R.string.upload_in_progress))
             .build()
-    }
-    /**
-     * Returns true is the limited connection mode is enabled
-     */
-    private fun isLimitedConnectionModeEnabled(): Boolean {
-        return sessionManager.getPreference(CommonsApplication.IS_LIMITED_CONNECTION_MODE_ENABLED)
     }
 
     /**
@@ -354,7 +325,6 @@ class UploadWorker(
                     StashUploadState.FAILED,fileKey = null,errorMessage = it.message
                 )
             }.blockingSingle()
-
             when (stashUploadResult.state) {
                 StashUploadState.SUCCESS -> {
                     //If the stash upload succeeds
@@ -414,16 +384,22 @@ class UploadWorker(
                     contribution.state = Contribution.STATE_PAUSED
                     contributionDao.saveSynchronous(contribution)
                 }
+                StashUploadState.CANCELLED -> {
+                    showCancelledNotification(contribution)
+                }
                 else -> {
-                    Timber.e("Upload file to stash failed with status: ${stashUploadResult.state}")
-                    showInvalidLoginNotification(contribution)
+                    Timber.e("""upload file to stash failed with status: ${stashUploadResult.state}""")
+
                     contribution.state = Contribution.STATE_FAILED
                     contribution.chunkInfo = null
+                    contribution.errorInfo = stashUploadResult.errorMessage
+                    showErrorNotification(contribution)
                     contributionDao.saveSynchronous(contribution)
                     if (stashUploadResult.errorMessage.equals(
                             CsrfTokenClient.INVALID_TOKEN_ERROR_MESSAGE)
                         ) {
                         Timber.e("Invalid Login, logging out")
+                        showInvalidLoginNotification(contribution)
                         val username = sessionManager.userName
                         var logoutListener = CommonsApplication.BaseLogoutListener(
                             appContext,
@@ -439,6 +415,7 @@ class UploadWorker(
             Timber.e(exception)
             Timber.e("Stash upload failed for contribution: $filename")
             showFailedNotification(contribution)
+            contribution.errorInfo=exception.message
             contribution.state=Contribution.STATE_FAILED
             clearChunks(contribution)
         }
@@ -556,7 +533,8 @@ class UploadWorker(
     private fun showSuccessNotification(contribution: Contribution) {
         val displayTitle = contribution.media.displayTitle
         contribution.state=Contribution.STATE_COMPLETED
-        currentNotification.setContentTitle(
+        curentNotification.setContentIntent(getPendingIntent(MainActivity::class.java))
+        curentNotification.setContentTitle(
             appContext.getString(
                 R.string.upload_completed_notification_title,
                 displayTitle
@@ -578,8 +556,8 @@ class UploadWorker(
     @SuppressLint("StringFormatInvalid")
     private fun showFailedNotification(contribution: Contribution) {
         val displayTitle = contribution.media.displayTitle
-        currentNotification.setContentIntent(getPendingIntent(MainActivity::class.java))
-        currentNotification.setContentTitle(
+        curentNotification.setContentIntent(getPendingIntent(UploadProgressActivity::class.java))
+        curentNotification.setContentTitle(
             appContext.getString(
                 R.string.upload_failed_notification_title,
                 displayTitle
@@ -612,12 +590,35 @@ class UploadWorker(
     }
 
     /**
+     * Shows a notification for a failed contribution upload.
+     */
+    @SuppressLint("StringFormatInvalid")
+    private fun showErrorNotification(contribution: Contribution) {
+        val displayTitle = contribution.media.displayTitle
+        curentNotification.setContentTitle(
+            appContext.getString(
+                R.string.upload_failed_notification_title,
+                displayTitle
+            )
+        )
+            .setContentText(contribution.errorInfo)
+            .setProgress(0, 0, false)
+            .setOngoing(false)
+        notificationManager?.notify(
+            currentNotificationTag, currentNotificationID,
+            curentNotification.build()
+        )
+    }
+
+    /**
      * Notify that the current upload is paused
      * @param contribution
      */
     private fun showPausedNotification(contribution: Contribution) {
         val displayTitle = contribution.media.displayTitle
-        currentNotification.setContentTitle(
+      
+        curentNotification.setContentIntent(getPendingIntent(UploadProgressActivity::class.java))
+        curentNotification.setContentTitle(
             appContext.getString(
                 R.string.upload_paused_notification_title,
                 displayTitle
@@ -629,6 +630,25 @@ class UploadWorker(
         notificationManager!!.notify(
             currentNotificationTag, currentNotificationID,
             currentNotification.build()
+        )
+    }
+
+    /**
+     * Notify that the current upload is cancelled
+     * @param contribution
+     */
+    private fun showCancelledNotification(contribution: Contribution) {
+        val displayTitle = contribution.media.displayTitle
+        curentNotification.setContentIntent(getPendingIntent(UploadProgressActivity::class.java))
+        curentNotification.setContentTitle(
+            displayTitle
+        )
+            .setContentText("Upload has been cancelled!")
+            .setProgress(0, 0, false)
+            .setOngoing(false)
+        notificationManager!!.notify(
+            currentNotificationTag, currentNotificationID,
+            curentNotification.build()
         )
     }
 

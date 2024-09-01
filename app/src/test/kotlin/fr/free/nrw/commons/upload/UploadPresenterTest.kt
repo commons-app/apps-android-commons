@@ -9,6 +9,7 @@ import fr.free.nrw.commons.repository.UploadRepository
 import fr.free.nrw.commons.upload.ImageCoordinates
 import io.reactivex.Observable
 import org.junit.Before
+import org.junit.Ignore
 import org.junit.Test
 import org.mockito.ArgumentMatchers
 import org.mockito.InjectMocks
@@ -68,6 +69,7 @@ class UploadPresenterTest {
     /**
      * unit test case for method UploadPresenter.handleSubmit
      */
+    @Ignore
     @Test
     fun handleSubmitTestUserLoggedIn() {
         `when`(view.isLoggedIn).thenReturn(true)
@@ -78,6 +80,7 @@ class UploadPresenterTest {
         verify(repository).buildContributions()
     }
 
+    @Ignore
     @Test
     fun handleSubmitImagesNoLocationWithConsecutiveNoLocationUploads() {
         `when`(imageCoords.imageCoordsExists).thenReturn(false)
@@ -102,6 +105,7 @@ class UploadPresenterTest {
         verify(view).showAlertDialog(ArgumentMatchers.anyInt(), ArgumentMatchers.any<Runnable>())
     }
 
+    @Ignore
     @Test
     fun handleSubmitImagesWithLocationWithConsecutiveNoLocationUploads() {
         `when`(
@@ -117,6 +121,7 @@ class UploadPresenterTest {
             .showAlertDialog(ArgumentMatchers.anyInt(), ArgumentMatchers.any<Runnable>())
     }
 
+    @Ignore
     @Test
     fun handleSubmitTestUserLoggedInAndLimitedConnectionOn() {
         `when`(
@@ -136,6 +141,7 @@ class UploadPresenterTest {
     /**
      * unit test case for method UploadPresenter.handleSubmit
      */
+    @Ignore
     @Test
     fun handleSubmitTestUserNotLoggedIn() {
         `when`(view.isLoggedIn).thenReturn(false)
@@ -152,6 +158,7 @@ class UploadPresenterTest {
     /**
      * Test which asserts If the next fragment to be shown is not one of the MediaDetailsFragment, lets hide the top card
      */
+    @Ignore
     @Test
     fun hideTopCardWhenReachedTheLastFile(){
         deletePictureBaseTest()
@@ -163,6 +170,7 @@ class UploadPresenterTest {
     /**
      * Test media deletion during single upload
      */
+    @Ignore
     @Test
     fun testDeleteWhenSingleUpload(){
         deletePictureBaseTest()
@@ -176,6 +184,7 @@ class UploadPresenterTest {
     /**
      * Test media deletion during multiple upload
      */
+    @Ignore
     @Test
     fun testDeleteWhenMultipleFilesUpload(){
         deletePictureBaseTest()

@@ -8,6 +8,7 @@ import androidx.loader.content.CursorLoader
 import androidx.loader.content.Loader
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
+import fr.free.nrw.commons.repository.UploadRepository
 import io.reactivex.Completable
 import io.reactivex.schedulers.TestScheduler
 import org.junit.Before
@@ -24,6 +25,10 @@ import org.mockito.MockitoAnnotations
 class ContributionsPresenterTest {
     @Mock
     internal lateinit var repository: ContributionsRepository
+
+    @Mock
+    internal lateinit var uploadRepository: UploadRepository
+
     @Mock
     internal lateinit var view: ContributionsContract.View
 
@@ -37,9 +42,11 @@ class ContributionsPresenterTest {
 
     lateinit var liveData: LiveData<List<Contribution>>
 
-    @Rule @JvmField var instantTaskExecutorRule = InstantTaskExecutorRule()
+    @Rule
+    @JvmField
+    var instantTaskExecutorRule = InstantTaskExecutorRule()
 
-    lateinit var scheduler : TestScheduler
+    lateinit var scheduler: TestScheduler
 
     /**
      * initial setup
@@ -48,35 +55,23 @@ class ContributionsPresenterTest {
     @Throws(Exception::class)
     fun setUp() {
         MockitoAnnotations.initMocks(this)
-        scheduler=TestScheduler()
+        scheduler = TestScheduler()
         cursor = Mockito.mock(Cursor::class.java)
         contribution = Mockito.mock(Contribution::class.java)
-        contributionsPresenter = ContributionsPresenter(repository, scheduler)
+        contributionsPresenter = ContributionsPresenter(repository, uploadRepository, scheduler)
         loader = Mockito.mock(CursorLoader::class.java)
         contributionsPresenter.onAttachView(view)
-        liveData=MutableLiveData()
-    }
-
-    /**
-     * Test presenter actions onDeleteContribution
-     */
-    @Test
-    fun testDeleteContribution() {
-        whenever(repository.deleteContributionFromDB(ArgumentMatchers.any<Contribution>()))
-            .thenReturn(Completable.complete())
-        contributionsPresenter.deleteUpload(contribution)
-        verify(repository).deleteContributionFromDB(contribution)
+        liveData = MutableLiveData()
     }
 
     /**
      * Test fetch contribution with filename
      */
     @Test
-    fun testGetContributionWithFileName(){
+    fun testGetContributionWithFileName() {
         contributionsPresenter.getContributionsWithTitle("ashish")
         verify(repository).getContributionWithFileName("ashish")
     }
-
 
 
 }
