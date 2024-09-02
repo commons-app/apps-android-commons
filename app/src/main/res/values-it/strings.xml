@@ -8,6 +8,7 @@
 * Black Sky83
 * Champ0999
 * Davio
+* Dream Indigo
 * Gianfranco
 * Lorelai87
 * Lorem Ipsum
@@ -127,7 +128,7 @@
   <string name="share_caption_hint">Didascalia</string>
   <string name="login_failed_network">Impossibile accedere: errore di rete</string>
   <string name="login_failed_throttled">Troppi tentativi falliti. Riprova tra alcuni minuti.</string>
-  <string name="login_failed_blocked">Spiacente, questo utente è stato bloccato su Commons</string>
+  <string name="login_failed_blocked">Spiacente, quest\'utente è stato/a bloccato/a su Commons</string>
   <string name="login_failed_2fa_needed">Devi fornire il tuo codice di autenticazione a due fattori.</string>
   <string name="login_failed_generic">Accesso non riuscito</string>
   <string name="share_upload_button">Carica</string>
@@ -737,9 +738,9 @@
   <string name="menu_view_set_white_background">Imposta lo sfondo bianco</string>
   <string name="menu_view_set_black_background">Imposta lo sfondo nero</string>
   <string name="report_violation">Segnala violazione</string>
-  <string name="report_user">Segnala questo utente</string>
+  <string name="report_user">Segnala quest\'utente</string>
   <string name="report_content">Segnala questo contenuto</string>
-  <string name="request_user_block">Richiedi di bloccare questo utente</string>
+  <string name="request_user_block">Richiedi di bloccare quest\'utente</string>
   <string name="welcome_to_full_screen_mode_text">Benvenuto nella modalità di selezione a schermo intero</string>
   <string name="full_screen_mode_zoom_info">Usa due dita per ingrandire e rimpicciolire.</string>
   <string name="full_screen_mode_features_info">Scorri velocemente e a lungo per eseguire queste azioni: \n- Sinistra/destra: vai al precedente/successivo \n- Su: seleziona\n- Giù: contrassegna come da non caricare.</string>

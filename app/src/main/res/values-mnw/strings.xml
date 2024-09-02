@@ -50,7 +50,7 @@
   <string name="login_success" fuzzy="true">လုက်အေန် အာစိုပ်ဒတုဲ!</string>
   <string name="login_failed" fuzzy="true">လံက်အေန် လီုလာ်!</string>
   <string name="upload_failed">ဝှာင် ဟွံဂွံဆဵု၊ ပဂုန်တုဲ ဂၠာဲ ဝှာင်တၞဟ်။</string>
-  <string name="authentication_failed" fuzzy="true">ပွမစၟဳစၟတ်ဂှ် ဟွံအံင်ဇၞး။ ပဂုန်တုဲ လံက်အေန် မွဲဝါပၠန်</string>
+  <string name="authentication_failed">ပွမစၟဳစၟတ်ဂှ် ဟွံအံင်ဇၞး။ ပဂုန်တုဲ လံက်အေန် မွဲဝါပၠန်</string>
   <string name="uploading_started">ပတိုန်ဝှာင် စဒၟံင်ရ!</string>
   <string name="upload_completed_notification_title">%1$s ပတိုန်ပၠုပ်တုဲ!</string>
   <string name="upload_completed_notification_text">ဒၞာဲမကလေင်ရံင် ဝှာင်ပတိုန်ပၠုပ် မၞး</string>
@@ -69,11 +69,12 @@
   <string name="menu_nearby">ဗဒဲါဒၞာဲဏအ်</string>
   <string name="provider_contributions">ပတိုန်ပၠုပ် ဇကုဂမၠိုင်</string>
   <string name="menu_share">ပါ်ပရအ်</string>
+  <string name="menu_view_file_page">ဗဵု မုက်လိက် ဝှာင်</string>
   <string name="share_title_hint">က္ဍိုပ်လိက် (အာတ်မိက်ဒၟံင်)</string>
   <string name="add_caption_toast">ပဂုန်တုဲ ကဵု က္ဍိုပ်လိက် ဝှာင်ဏအ်ညိ</string>
   <string name="share_description_hint">မဗမံက်ထ္ၜး</string>
-  <string name="share_caption_hint" fuzzy="true">က္ဍိုပ်လိက် (ပိုင်ခြာလဝ် လၟိဟ်မလိက် ၂၅၅)</string>
-  <string name="login_failed_network" fuzzy="true">လုပ်လံက်အေန် ဟွံဂွံ - ဇာဇၞိက် ဗၠေတ်</string>
+  <string name="share_caption_hint">က္ဍိုပ်လိက်</string>
+  <string name="login_failed_network">လုပ်လံက်အေန် ဟွံဂွံ - ဇာဇၞိက် ဗၠေတ်</string>
   <string name="login_failed_throttled">ပရေင်ဂိုတ်ဂစာန် ဟွံအံင်ဇၞး ဂၠိုင်လောန်အာရ။ ပဂုန်တုဲ မိနေတ်ညိညပၠန် ကလေင်စမ်ပၠန်။</string>
   <string name="login_failed_blocked">သၠးအခေါင်၊ ညးလွပ်ဏအ် ဒးဒုင်ကၟာတ်လဒဵုလဝ် ပ္ဍဲ ကောမ်မောန်</string>
   <string name="login_failed_2fa_needed">ကုစၟဳစၟတ်မၞးၜါဂှ် သ္ဒးပါ်လဝ် ဗွဲတၞဟ်ခြာရောင်။</string>
@@ -85,7 +86,7 @@
   <string name="categories_search_text_hint">ဂၠာဲ ကဏ္ဍဂမၠိုၚ်</string>
   <string name="depicts_search_text_hint">ဂၠာဲ တင်ဂၞင် မၞိဟ်မဗၟံက်ထ္ၜး (မပတံ ဒဵု၊ ဍုင်လ္ဂုင်)</string>
   <string name="menu_save_categories">ဂိုင်သိပ်</string>
-  <string name="refresh_button">ကလေင်မၚုဟ်</string>
+  <string name="refresh_button">ကလေင်မင္ၚုဟ်</string>
   <string name="display_list_button">စရၚ်</string>
   <string name="contributions_subtitle_zero" fuzzy="true">ဟွံဂွံ ပတိုန်ပၠုပ်ဏီ</string>
   <string name="categories_not_found">ကဏ္ဍ မကိတ်ညဳ ကု %1$s ဟွံဆဵု</string>
