@@ -67,6 +67,11 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     private int indexOfFragment;
 
     /**
+     * Stores the rotation angle of the image in degrees.
+     */
+    private int rotation = 0;
+
+    /**
      * A key for applicationKvStore. By this key we can retrieve the location of last UploadItem ex.
      * 12.3433,54.78897 from applicationKvStore.
      */
@@ -129,7 +134,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     private UploadItem editableUploadItem;
 
     private BasicKvStore basicKvStore;
-    
+
     private final String keyForShowingAlertDialog = "isNoNetworkAlertDialogShowing";
 
     private UploadMediaDetailFragmentCallback callback;
@@ -183,18 +188,18 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         }
 
         if(savedInstanceState!=null){
-                if(uploadMediaDetailAdapter.getItems().size()==0 && callback != null){
-                    uploadMediaDetailAdapter.setItems(savedInstanceState.getParcelableArrayList(UPLOAD_MEDIA_DETAILS));
-                    presenter.setUploadMediaDetails(uploadMediaDetailAdapter.getItems(),
-                        indexOfFragment);
-                }
+            if(uploadMediaDetailAdapter.getItems().size()==0 && callback != null){
+                uploadMediaDetailAdapter.setItems(savedInstanceState.getParcelableArrayList(UPLOAD_MEDIA_DETAILS));
+                presenter.setUploadMediaDetails(uploadMediaDetailAdapter.getItems(),
+                    indexOfFragment);
+            }
         }
 
         try {
             if(!presenter.getImageQuality(indexOfFragment, inAppPictureLocation, getActivity())) {
                 startActivityWithFlags(
-                getActivity(), MainActivity.class, Intent.FLAG_ACTIVITY_CLEAR_TOP,
-                Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                    getActivity(), MainActivity.class, Intent.FLAG_ACTIVITY_CLEAR_TOP,
+                    Intent.FLAG_ACTIVITY_SINGLE_TOP);
             }
         } catch (Exception e) {
         }
@@ -223,7 +228,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
 
         // If the image EXIF data contains the location, show the map icon with a green tick
         if (inAppPictureLocation != null ||
-                (uploadableFile != null && uploadableFile.hasLocation())) {
+            (uploadableFile != null && uploadableFile.hasLocation())) {
             Drawable mapTick = getResources().getDrawable(R.drawable.ic_map_available_20dp);
             binding.locationImageView.setImageDrawable(mapTick);
             binding.locationTextView.setText(R.string.edit_location);
@@ -600,6 +605,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         editableUploadItem = uploadItem;
         Intent intent = new Intent(getContext(), EditActivity.class);
         intent.putExtra("image", uploadableFile.getFilePath().toString());
+        intent.putExtra("rotation",rotation);
         startActivityForResult(intent, REQUEST_CODE_FOR_EDIT_ACTIVITY);
     }
 
@@ -680,6 +686,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         }
         if (requestCode == REQUEST_CODE_FOR_EDIT_ACTIVITY && resultCode == RESULT_OK) {
             String result = data.getStringExtra("editedImageFilePath");
+            rotation = data.getIntExtra("editedImageRotation",0);
 
             if (Objects.equals(result, "Error")) {
                 Timber.e("Error in rotating image");
