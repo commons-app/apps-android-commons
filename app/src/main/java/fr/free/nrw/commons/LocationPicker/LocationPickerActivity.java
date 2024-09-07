@@ -40,12 +40,10 @@ import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.auth.csrf.CsrfTokenClient;
-import fr.free.nrw.commons.auth.csrf.InvalidLoginTokenException;
 import fr.free.nrw.commons.coordinates.CoordinateEditHelper;
 import fr.free.nrw.commons.filepicker.Constants;
 import fr.free.nrw.commons.kvstore.BasicKvStore;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
-import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.location.LocationPermissionsHelper;
 import fr.free.nrw.commons.location.LocationPermissionsHelper.LocationPermissionCallback;
 import fr.free.nrw.commons.location.LocationServiceManager;
@@ -606,9 +604,9 @@ public class LocationPickerActivity extends BaseActivity implements
                 locationManager.requestLocationUpdatesFromProvider(
                     LocationManager.NETWORK_PROVIDER);
                 locationManager.requestLocationUpdatesFromProvider(LocationManager.GPS_PROVIDER);
-                getLocation();
+                addMarkerAtGPSLocation();
             } else {
-                getLocation();
+                addMarkerAtGPSLocation();
                 locationPermissionsHelper.showLocationOffDialog(this,
                     R.string.ask_to_turn_location_on_text);
             }
@@ -616,16 +614,15 @@ public class LocationPickerActivity extends BaseActivity implements
     }
 
     /**
-     * Gets new location if locations services are on, else gets last location
+     * Adds a marker to the map at the most recent GPS location
+     * (which may be the current GPS location).
      */
-    private void getLocation() {
+    private void addMarkerAtGPSLocation() {
         fr.free.nrw.commons.location.LatLng currLocation = locationManager.getLastLocation();
         if (currLocation != null) {
             GeoPoint currLocationGeopoint = new GeoPoint(currLocation.getLatitude(),
                 currLocation.getLongitude());
             addLocationMarker(currLocationGeopoint);
-            mapView.getController().setCenter(currLocationGeopoint);
-            mapView.getController().animateTo(currLocationGeopoint);
             markerImage.setTranslationY(0);
         }
     }
