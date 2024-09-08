@@ -36,16 +36,18 @@ public class FeedbackContentCreator {
          * Construct the feedback section title
          */
 
-        //Get the UTC Date and Time
-        final SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss", Locale.ENGLISH);
+        //Get the UTC Date and Time and add it to the Title
+        final SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
         dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
-        final String UTC_FormattedDateTime = dateFormat.format(new Date());
+        final String UTC_FormattedDate = dateFormat.format(new Date());
 
         sectionTitleBuilder = new StringBuilder();
         sectionTitleBuilder.append("Feedback from  ");
         sectionTitleBuilder.append(AccountUtil.getUserName(context));
         sectionTitleBuilder.append(" for version ");
         sectionTitleBuilder.append(feedback.getVersion());
+        sectionTitleBuilder.append(" on ");
+        sectionTitleBuilder.append(UTC_FormattedDate);
 
         /*
          * Construct the feedback section text
@@ -106,10 +108,6 @@ public class FeedbackContentCreator {
         sectionTextBuilder.append("~~~~");
         sectionTextBuilder.append("\n");
 
-        //Add the UTC Date and Time to Feedback
-        sectionTextBuilder.append("Generated on: ");
-        sectionTextBuilder.append(UTC_FormattedDateTime);
-        sectionTextBuilder.append("\n");
     }
 
     public String getSectionText() {
