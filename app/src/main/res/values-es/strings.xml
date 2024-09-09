@@ -32,6 +32,7 @@
 * Juanman
 * Keneth Urrutia
 * Ktranz
+* Laquin
 * Luisangelrg
 * Macofe
 * Madamebiblio
@@ -788,6 +789,9 @@
   <string name="storage_permissions_denied">Se denegaron los permisos de almacenamiento</string>
   <string name="unable_to_share_upload_item">No se puede compartir este elemento</string>
   <string name="permissions_are_required_for_functionality">Se requieren permisos para la funcionalidad</string>
+  <string name="learn_how_to_write_a_useful_description">Aprenda a escribir una descripción útil</string>
+  <string name="learn_how_to_write_a_useful_caption">Aprenda a escribir una leyenda útil</string>
+  <string name="see_your_achievements">Ver sus logros</string>
   <string name="edit_image">Editar Imagen</string>
   <string name="edit_location">Editar Ubicación</string>
   <string name="location_updated">¡Ubicación actualizada!</string>
@@ -795,6 +799,8 @@
   <string name="remove_location_warning_title">Eliminar el aviso de ubicación</string>
   <string name="remove_location_warning_desc">La ubicación hace que las imágenes sean más útiles y accesibles. ¿De verdad quieres eliminar la ubicación de esta foto?</string>
   <string name="location_removed">¡Ubicación eliminada!</string>
+  <string name="send_thanks_to_author">Agradecer al autor</string>
+  <string name="error_sending_thanks">Error al enviar gracias al autor.</string>
   <string name="invalid_login_message">Su sesión ha caducado. Inicie sesión de nuevo.</string>
   <string name="no_application_available_to_open_gpx_files">No hay ninguna aplicación disponible para abrir archivos GPX</string>
   <string name="file_saved_successfully">Guardado correctamente</string>
@@ -810,4 +816,12 @@
   </plurals>
   <string name="multiple_files_depiction">Recuerde que todas las imágenes en una carga múltiple tienen la misma categoría y representación. Si las imágenes no comparten representación y categoría, haga varias cargas por separado.</string>
   <string name="multiple_files_depiction_header">Nota sobre cargas múltiples</string>
+  <string name="nearby_wikitalk">Informar a Wikidata sobre un problema relacionado con este elemento</string>
+  <string name="please_enter_some_comments">Por favor, escriba algunos comentarios.</string>
+  <string name="talk">Discusión</string>
+  <string name="write_something_about_the_item">Escriba algo sobre el elemento \'%1$s\'. Será visible públicamente.</string>
+  <string name="cancelling_all_the_uploads">Cancelando todas las subidas...</string>
+  <string name="uploads">Subidas</string>
+  <string name="pending">Pendiente</string>
+  <string name="failed">Falló</string>
 </resources>

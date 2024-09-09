@@ -9,6 +9,10 @@ import android.content.Intent;
 import android.widget.Toast;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.annotation.NonNull;
+import androidx.lifecycle.LiveData;
+import androidx.paging.DataSource.Factory;
+import androidx.paging.LivePagedListBuilder;
+import androidx.paging.PagedList;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.filepicker.DefaultCallback;
 import fr.free.nrw.commons.filepicker.FilePicker;
@@ -25,6 +29,8 @@ import fr.free.nrw.commons.utils.DialogUtil;
 import fr.free.nrw.commons.utils.PermissionUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -39,9 +45,15 @@ public class ContributionController {
     private boolean isInAppCameraUpload;
     public LocationPermissionCallback locationPermissionCallback;
     private LocationPermissionsHelper locationPermissionsHelper;
+    LiveData<PagedList<Contribution>> failedAndPendingContributionList;
+    LiveData<PagedList<Contribution>> pendingContributionList;
+    LiveData<PagedList<Contribution>> failedContributionList;
 
     @Inject
     LocationServiceManager locationManager;
+
+    @Inject
+    ContributionsRepository repository;
 
     @Inject
     public ContributionController(@Named("default_preferences") JsonKvStore defaultKvStore) {
@@ -115,14 +127,14 @@ public class ContributionController {
     }
 
     /**
-     * Shows a dialog alerting the user about location services being off
-     * and asking them to turn it on
+     * Shows a dialog alerting the user about location services being off and asking them to turn it
+     * on
      * TODO: Add a seperate callback in LocationPermissionsHelper for this.
      *      Ref: https://github.com/commons-app/apps-android-commons/pull/5494/files#r1510553114
      *
-     * @param activity Activity reference
+     * @param activity           Activity reference
      * @param dialogTextResource Resource id of text to be shown in dialog
-     * @param toastTextResource Resource id of text to be shown in toast
+     * @param toastTextResource  Resource id of text to be shown in toast
      */
     private void showLocationOffDialog(Activity activity, int dialogTextResource,
         int toastTextResource) {
@@ -306,5 +318,61 @@ public class ContributionController {
         );
         isInAppCameraUpload = false;    // reset the flag for next use
         return shareIntent;
+    }
+
+    /**
+     * Fetches the contributions with the state "IN_PROGRESS", "QUEUED" and "PAUSED" and then it
+     * populates the `pendingContributionList`.
+     **/
+    void getPendingContributions() {
+        final PagedList.Config pagedListConfig =
+            (new PagedList.Config.Builder())
+                .setPrefetchDistance(50)
+                .setPageSize(10).build();
+        Factory<Integer, Contribution> factory;
+        factory = repository.fetchContributionsWithStates(
+            Arrays.asList(Contribution.STATE_IN_PROGRESS, Contribution.STATE_QUEUED,
+                Contribution.STATE_PAUSED));
+
+        LivePagedListBuilder livePagedListBuilder = new LivePagedListBuilder(factory,
+            pagedListConfig);
+        pendingContributionList = livePagedListBuilder.build();
+    }
+
+    /**
+     * Fetches the contributions with the state "FAILED" and populates the
+     * `failedContributionList`.
+     **/
+    void getFailedContributions() {
+        final PagedList.Config pagedListConfig =
+            (new PagedList.Config.Builder())
+                .setPrefetchDistance(50)
+                .setPageSize(10).build();
+        Factory<Integer, Contribution> factory;
+        factory = repository.fetchContributionsWithStates(
+            Collections.singletonList(Contribution.STATE_FAILED));
+
+        LivePagedListBuilder livePagedListBuilder = new LivePagedListBuilder(factory,
+            pagedListConfig);
+        failedContributionList = livePagedListBuilder.build();
+    }
+
+    /**
+     * Fetches the contributions with the state "IN_PROGRESS", "QUEUED", "PAUSED" and "FAILED" and
+     * then it populates the `failedAndPendingContributionList`.
+     **/
+    void getFailedAndPendingContributions() {
+        final PagedList.Config pagedListConfig =
+            (new PagedList.Config.Builder())
+                .setPrefetchDistance(50)
+                .setPageSize(10).build();
+        Factory<Integer, Contribution> factory;
+        factory = repository.fetchContributionsWithStates(
+            Arrays.asList(Contribution.STATE_IN_PROGRESS, Contribution.STATE_QUEUED,
+                Contribution.STATE_PAUSED, Contribution.STATE_FAILED));
+
+        LivePagedListBuilder livePagedListBuilder = new LivePagedListBuilder(factory,
+            pagedListConfig);
+        failedAndPendingContributionList = livePagedListBuilder.build();
     }
 }

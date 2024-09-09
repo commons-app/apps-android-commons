@@ -779,5 +779,10 @@
   <string name="is_at_a_different_place_please_specify_the_correct_place_below_if_possible_tell_us_the_correct_latitude_longitude">„%1$s“ се наоѓа на друго место. Подолу укажете го исправното место и, ако е можно, ставете исправна географска ширина и должина.</string>
   <string name="other_problem_or_information_please_explain_below">Друг проблем или информација (објаснете подолу).</string>
   <string name="feedback_destination_note">Вашите мислења се објавуваат на следнава викистраница:  &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Mobile_app/Feedback\"&gt;Commons:Mobile app/Feedback&lt;/a&gt;</string>
+  <string name="are_you_sure_that_you_want_cancel_all_the_uploads">Дали сигурно сакате да ги откажете сите подигања?</string>
+  <string name="cancelling_all_the_uploads">Ги откажувам сите подигања...</string>
+  <string name="uploads">Подигања</string>
+  <string name="pending">Во исчекување</string>
+  <string name="failed">Неуспешно</string>
   <string name="could_not_load_place_data">Не можев да ги вчитам податоците за место</string>
 </resources>

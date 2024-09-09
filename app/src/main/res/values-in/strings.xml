@@ -5,6 +5,7 @@
 * Arifin.wijaya
 * DARMAS BUDI SANTOSO
 * Daud I.F. Argana
+* Fafau06
 * Farras
 * Gombang
 * Hidayatsrf
@@ -240,6 +241,7 @@
   <string name="navigation_item_about">Perihal</string>
   <string name="navigation_item_settings">Pengaturan</string>
   <string name="navigation_item_feedback">Umpan balik</string>
+  <string name="navigation_item_feedback_github">Ulasan melalui GitHub</string>
   <string name="navigation_item_logout">Keluar</string>
   <string name="navigation_item_info">Tutorial</string>
   <string name="navigation_item_notification">Pemberitahuan</string>
@@ -349,6 +351,7 @@
   <string name="share_app_title">Bagikan Aplikasi</string>
   <string name="rotate">Putar</string>
   <string name="error_fetching_nearby_places" fuzzy="true">Galat saat mengambil tempat terdekat.</string>
+  <string name="no_pictures_in_this_area">Tidak ada gambar di area ini</string>
   <string name="no_nearby_places_around">Tidak ditemukan tempat yang dekat</string>
   <string name="error_fetching_nearby_monuments">Galat saat mengambil monumen terdekat.</string>
   <string name="no_recent_searches">Tidak ada pencarian terbaru</string>
@@ -729,7 +732,19 @@
   <string name="learn_how_to_write_a_useful_description">Pelajari cara menulis deskripsi yang berguna</string>
   <string name="learn_how_to_write_a_useful_caption">Pelajari cara menulis takarir yang berguna</string>
   <string name="see_your_achievements">Lihat pencapaian Anda</string>
+  <string name="edit_image">Edit Gambar</string>
+  <string name="edit_location">Edit Lokasi</string>
+  <string name="location_updated">Lokasi diperbarui!</string>
+  <string name="remove_location">Hapus Lokasi</string>
+  <string name="remove_location_warning_title">Hapus Peringatan Lokasi</string>
+  <string name="remove_location_warning_desc">Lokasi membuat gambar lebih berguna dan mudah ditemukan. Apakah Anda benar-benar ingin menghapus lokasi dari gambar ini?</string>
+  <string name="location_removed">Lokasi dihapus!</string>
   <plurals name="custom_picker_images_selected_title_appendix">
     <item quantity="other">%d gambar dipilih</item>
   </plurals>
+  <string name="talk">Bicara</string>
+  <string name="cancelling_all_the_uploads">Membatalkan semua unggahan...</string>
+  <string name="uploads">Unggah</string>
+  <string name="pending">Menunggu</string>
+  <string name="failed">Gagal</string>
 </resources>
