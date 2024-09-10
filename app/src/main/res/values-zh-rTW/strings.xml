@@ -82,7 +82,6 @@
   <string name="preference_category_feedback">意見回饋</string>
   <string name="preference_category_privacy">隱私權政策</string>
   <string name="app_name">維基共享資源</string>
-  <string name="bullet">•</string>
   <string name="menu_settings">設定</string>
   <string name="intent_share_upload_label">上傳至維基共享資源</string>
   <string name="upload_in_progress">正在上傳</string>

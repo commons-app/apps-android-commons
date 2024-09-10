@@ -67,7 +67,6 @@
   <string name="preference_category_feedback">Återkoppling</string>
   <string name="preference_category_privacy">Integritet</string>
   <string name="app_name">Commons</string>
-  <string name="bullet">•</string>
   <string name="menu_settings">Inställningar</string>
   <string name="intent_share_upload_label">Ladda upp till Commons</string>
   <string name="upload_in_progress">Uppladdning pågår</string>

@@ -59,7 +59,6 @@
   <string name="preference_category_feedback">Sugeriment</string>
   <string name="preference_category_privacy">Confidensialità</string>
   <string name="app_name">Comun</string>
-  <string name="bullet">•</string>
   <string name="menu_settings">Paràmeter</string>
   <string name="intent_share_upload_label">Carié su Commons</string>
   <string name="upload_in_progress">Cariament an cors</string>

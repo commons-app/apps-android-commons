@@ -108,7 +108,6 @@
   <string name="preference_category_feedback">Sugerencias</string>
   <string name="preference_category_privacy">Privacidad</string>
   <string name="app_name">Commons</string>
-  <string name="bullet">•</string>
   <string name="menu_settings">Configuración</string>
   <string name="intent_share_upload_label">Subir a Commons</string>
   <string name="upload_in_progress">Carga en curso</string>

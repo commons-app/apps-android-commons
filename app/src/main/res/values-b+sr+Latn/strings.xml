@@ -59,7 +59,6 @@
   <string name="preference_category_feedback">Povratne informacije</string>
   <string name="preference_category_privacy">Privatnost</string>
   <string name="app_name">Ostava</string>
-  <string name="bullet">•</string>
   <string name="menu_settings">Podešavanja</string>
   <string name="intent_share_upload_label">Otpremi na Ostavu</string>
   <string name="upload_in_progress">Otpremanje u toku</string>

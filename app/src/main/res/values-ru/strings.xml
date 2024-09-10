@@ -116,7 +116,6 @@
   <string name="preference_category_feedback">Обратная связь</string>
   <string name="preference_category_privacy">Конфиденциальность</string>
   <string name="app_name">Викисклад</string>
-  <string name="bullet">•</string>
   <string name="menu_settings">Настройки</string>
   <string name="intent_share_upload_label">Загрузить на Викисклад</string>
   <string name="upload_in_progress">Идёт загрузка…</string>

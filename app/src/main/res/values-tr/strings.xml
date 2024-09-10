@@ -88,7 +88,6 @@
   <string name="preference_category_feedback">Geri bildirim</string>
   <string name="preference_category_privacy">Gizlilik</string>
   <string name="app_name">Commons</string>
-  <string name="bullet">•</string>
   <string name="menu_settings">Ayarlar</string>
   <string name="intent_share_upload_label">Commons\'a yükle</string>
   <string name="upload_in_progress">Yükleme devam etmekte</string>

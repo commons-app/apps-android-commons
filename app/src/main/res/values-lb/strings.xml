@@ -49,7 +49,6 @@
   <string name="preference_category_feedback">Feedback</string>
   <string name="preference_category_privacy">Dateschutz</string>
   <string name="app_name">Commons</string>
-  <string name="bullet">•</string>
   <string name="menu_settings">Astellungen</string>
   <string name="intent_share_upload_label">Op Commons eroplueden</string>
   <string name="upload_in_progress">Eroplueden amgaang</string>

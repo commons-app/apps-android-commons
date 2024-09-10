@@ -37,7 +37,6 @@
   <string name="preference_category_feedback">Povratna informacija</string>
   <string name="preference_category_privacy">Privatnost</string>
   <string name="app_name">Zajednički poslužitelj</string>
-  <string name="bullet">•</string>
   <string name="menu_settings">Postavke</string>
   <string name="intent_share_upload_label">Prenesi na Zajednički poslužitelj</string>
   <string name="username">Suradničko ime</string>
