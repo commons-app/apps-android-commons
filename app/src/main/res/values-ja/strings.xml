@@ -71,7 +71,6 @@
   <string name="preference_category_feedback">フィードバック</string>
   <string name="preference_category_privacy">プライバシー</string>
   <string name="app_name">コモンズ</string>
-  <string name="bullet">•</string>
   <string name="menu_settings">設定</string>
   <string name="intent_share_upload_label">コモンズにアップロード</string>
   <string name="upload_in_progress">アップロード中</string>

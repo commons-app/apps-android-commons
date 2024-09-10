@@ -65,7 +65,6 @@
   <string name="preference_category_feedback">Zpětná vazba</string>
   <string name="preference_category_privacy">Soukromí</string>
   <string name="app_name">Commons</string>
-  <string name="bullet">•</string>
   <string name="menu_settings">Nastavení</string>
   <string name="intent_share_upload_label">Nahrát na Commons</string>
   <string name="username">Uživatelské jméno</string>

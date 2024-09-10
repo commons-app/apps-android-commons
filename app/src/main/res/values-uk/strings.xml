@@ -92,7 +92,6 @@
   <string name="preference_category_feedback">Зворотний зв\'язок</string>
   <string name="preference_category_privacy">Конфіденційність</string>
   <string name="app_name">Вікісховище</string>
-  <string name="bullet">•</string>
   <string name="menu_settings">Налаштування</string>
   <string name="intent_share_upload_label">Завантажити до Вікісховища</string>
   <string name="upload_in_progress">Триває вивантаження</string>

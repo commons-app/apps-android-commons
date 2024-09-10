@@ -67,7 +67,6 @@
   <string name="preference_category_feedback">Feedback</string>
   <string name="preference_category_privacy">Privatliv</string>
   <string name="app_name">Commons</string>
-  <string name="bullet">•</string>
   <string name="menu_settings">Indstillinger</string>
   <string name="intent_share_upload_label">Upload til Commons</string>
   <string name="upload_in_progress">Upload i gang</string>

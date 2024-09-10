@@ -61,7 +61,6 @@
   <string name="preference_category_feedback">Мислења</string>
   <string name="preference_category_privacy">Лични податоци</string>
   <string name="app_name">Ризница</string>
-  <string name="bullet">•</string>
   <string name="menu_settings">Поставки</string>
   <string name="intent_share_upload_label">Подигни на Ризницата</string>
   <string name="upload_in_progress">Подигањето е во тек</string>

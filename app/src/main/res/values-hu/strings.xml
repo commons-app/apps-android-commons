@@ -58,7 +58,6 @@
   <string name="preference_category_feedback">Visszajelzés</string>
   <string name="preference_category_privacy">Adatvédelem</string>
   <string name="app_name">Commons</string>
-  <string name="bullet">•</string>
   <string name="menu_settings">Beállítások</string>
   <string name="intent_share_upload_label">Feltöltés a Commonsra</string>
   <string name="upload_in_progress">Feltöltés folyamatban</string>

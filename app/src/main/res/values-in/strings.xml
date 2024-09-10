@@ -69,7 +69,6 @@
   <string name="preference_category_feedback">Umpan balik</string>
   <string name="preference_category_privacy">Privasi</string>
   <string name="app_name">Commons</string>
-  <string name="bullet">•</string>
   <string name="menu_settings">Pengaturan</string>
   <string name="intent_share_upload_label">Unggah ke Commons</string>
   <string name="upload_in_progress">Pengunggahan sedang berlangsung</string>
