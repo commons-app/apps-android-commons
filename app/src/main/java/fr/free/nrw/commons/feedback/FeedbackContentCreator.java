@@ -37,7 +37,7 @@ public class FeedbackContentCreator {
          */
 
         //Get the UTC Date and Time and add it to the Title
-        final SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
+        final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss", Locale.ENGLISH);
         dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
         final String UTC_FormattedDate = dateFormat.format(new Date());
 
@@ -49,7 +49,7 @@ public class FeedbackContentCreator {
         sectionTitleBuilder.append(" on ");
         sectionTitleBuilder.append(UTC_FormattedDate);
 
-        /*
+        /*of 
          * Construct the feedback section text
          */
         sectionTextBuilder = new StringBuilder();
