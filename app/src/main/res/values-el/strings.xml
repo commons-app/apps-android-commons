@@ -20,6 +20,7 @@
 * Nikosguard
 * Norhorn
 * Panos78
+* PeachyOne
 * Protnet
 * Tgkarounos
 * Vtalos
@@ -418,7 +419,7 @@
   <string name="provider_bookmarks">Σελιδοδείκτες</string>
   <string name="bookmark_empty">Δεν έχετε προσθέσει σελιδοδείκτες</string>
   <string name="provider_bookmarks_location">Σελιδοδείκτες</string>
-  <string name="log_collection_started">Η συλλογή αρχείων καταγραφής ξεκίνησε. ΕΠΑΝΕΚΚΙΝΗΣΤΕ την εφαρμογή, εκτελέστε την ενέργεια που επιθυμείτε να καταγράψετε και, στη συνέχεια, πατήστε ξανά «Αποστολή αρχείου καταγραφής»</string>
+  <string name="log_collection_started">Η συλλογή αρχείων καταγραφής ξεκίνησε. Παρακαλώ ΕΠΑΝΕΚΚΙΝΗΣΤΕ την εφαρμογή, εκτελέστε την ενέργεια που επιθυμείτε να καταγράψετε και, στη συνέχεια, πατήστε ξανά «Αποστολή αρχείου καταγραφής»</string>
   <string name="deletion_reason_uploaded_by_mistake">Το μεταφόρτωσα κατά λάθος</string>
   <string name="deletion_reason_publicly_visible">Δεν ήξερα ότι θα ήταν δημόσια ορατό</string>
   <string name="deletion_reason_bad_for_my_privacy">Συνειδητοποίησα ότι είναι κακό για την ιδιωτικότητά μου</string>

@@ -842,5 +842,7 @@
   <string name="are_you_sure_that_you_want_cancel_all_the_uploads">Вы уверены, что хотите отменить все загрузки?</string>
   <string name="cancelling_all_the_uploads">Отмена всех загрузок...</string>
   <string name="uploads">Загрузки</string>
+  <string name="pending">В ожидании</string>
+  <string name="failed">Не удалось</string>
   <string name="could_not_load_place_data">Не удалось загрузить данные о месте</string>
 </resources>

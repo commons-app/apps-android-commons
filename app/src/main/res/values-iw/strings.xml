@@ -91,7 +91,6 @@
   <string name="preference_category_feedback">משוב</string>
   <string name="preference_category_privacy">פרטיות</string>
   <string name="app_name">ויקישיתוף</string>
-
   <string name="menu_settings">הגדרות</string>
   <string name="intent_share_upload_label">להעלות לוויקישיתוף</string>
   <string name="upload_in_progress">מתבצעת העלאה</string>
