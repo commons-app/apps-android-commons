@@ -800,5 +800,10 @@
   <string name="is_at_a_different_place_please_specify_the_correct_place_below_if_possible_tell_us_the_correct_latitude_longitude">「%1$s」位於不同的位置。請在下面指定正確的位置，可以的話請填寫正確的經緯度。</string>
   <string name="other_problem_or_information_please_explain_below">其他問題或資訊（請在下方解釋）。</string>
   <string name="feedback_destination_note">您的回饋已發布到以下 wiki 頁面：&lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Mobile_app/Feedback\"&gt;Commons:Mobile app/Feedback&lt;/a&gt;</string>
+  <string name="are_you_sure_that_you_want_cancel_all_the_uploads">您確定要取消所有上傳嗎？</string>
+  <string name="cancelling_all_the_uploads">正在取消所有上傳…</string>
+  <string name="uploads">上傳</string>
+  <string name="pending">待處理</string>
+  <string name="failed">失敗</string>
   <string name="could_not_load_place_data">無法載入地點資料</string>
 </resources>

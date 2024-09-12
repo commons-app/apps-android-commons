@@ -54,12 +54,4 @@ class ContributionsListPresenterTest {
             );
     }
 
-    @Test
-    fun testDeleteUpload() {
-        whenever(repository.deleteContributionFromDB(any<Contribution>()))
-            .thenReturn(Completable.complete())
-        contributionsListPresenter.deleteUpload(mock(Contribution::class.java))
-        verify(repository, times(1))
-            .deleteContributionFromDB(ArgumentMatchers.any(Contribution::class.java));
-    }
 }

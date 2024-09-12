@@ -4,6 +4,7 @@
 * Abijeet Patro
 * Anamdas
 * Anandra
+* AnupamM
 * Bhatakati aatma
 * Gopalindians
 * Nilesh shukla
@@ -349,4 +350,9 @@
   <string name="leaderboard_column_count">गणना</string>
   <string name="custom_selector_dismiss_limit_warning_button_text">रद्द करें</string>
   <string name="talk">वार्ता</string>
+  <string name="are_you_sure_that_you_want_cancel_all_the_uploads">क्या आप वाकई सभी अपलोड रद्द करना चाहते हैं?</string>
+  <string name="cancelling_all_the_uploads">सभी अपलोड रद्द किये जा रहे हैं...</string>
+  <string name="uploads">अपलोड</string>
+  <string name="pending">लंबित</string>
+  <string name="failed">विफल हुआ</string>
 </resources>

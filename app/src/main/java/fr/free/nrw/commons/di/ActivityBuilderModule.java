@@ -20,6 +20,7 @@ import fr.free.nrw.commons.profile.ProfileActivity;
 import fr.free.nrw.commons.review.ReviewActivity;
 import fr.free.nrw.commons.settings.SettingsActivity;
 import fr.free.nrw.commons.upload.UploadActivity;
+import fr.free.nrw.commons.upload.UploadProgressActivity;
 
 /**
  * This Class handles the dependency injection (using dagger)
@@ -80,6 +81,9 @@ public abstract class ActivityBuilderModule {
 
     @ContributesAndroidInjector
     abstract ZoomableActivity bindZoomableActivity();
+
+    @ContributesAndroidInjector
+    abstract UploadProgressActivity bindUploadProgressActivity();
 
     @ContributesAndroidInjector
     abstract WikidataFeedback bindWikiFeedback();

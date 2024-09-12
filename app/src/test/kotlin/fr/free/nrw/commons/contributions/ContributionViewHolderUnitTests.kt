@@ -94,63 +94,6 @@ class ContributionViewHolderUnitTests {
 
     @Test
     @Throws(Exception::class)
-    fun testSetResume() {
-        Shadows.shadowOf(Looper.getMainLooper()).idle()
-        val method: Method = ContributionViewHolder::class.java.getDeclaredMethod(
-            "setResume"
-        )
-        method.isAccessible = true
-        method.invoke(contributionViewHolder)
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun testSetPaused() {
-        Shadows.shadowOf(Looper.getMainLooper()).idle()
-        val method: Method = ContributionViewHolder::class.java.getDeclaredMethod(
-            "setPaused"
-        )
-        method.isAccessible = true
-        method.invoke(contributionViewHolder)
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun testPause() {
-        Shadows.shadowOf(Looper.getMainLooper()).idle()
-        val method: Method = ContributionViewHolder::class.java.getDeclaredMethod(
-            "pause"
-        )
-        method.isAccessible = true
-        method.invoke(contributionViewHolder)
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun testResume() {
-        Shadows.shadowOf(Looper.getMainLooper()).idle()
-        val method: Method = ContributionViewHolder::class.java.getDeclaredMethod(
-            "resume"
-        )
-        method.isAccessible = true
-        method.invoke(contributionViewHolder)
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun testOnPauseResumeButtonClickedCaseTrue() {
-        contributionViewHolder.onPauseResumeButtonClicked()
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun testOnPauseResumeButtonClickedCaseFalse() {
-        bindind.pauseResumeButton.tag = ""
-        contributionViewHolder.onPauseResumeButtonClicked()
-    }
-
-    @Test
-    @Throws(Exception::class)
     fun testWikipediaButtonClicked() {
         contributionViewHolder.wikipediaButtonClicked()
     }
@@ -159,18 +102,6 @@ class ContributionViewHolderUnitTests {
     @Throws(Exception::class)
     fun testImageClicked() {
         contributionViewHolder.imageClicked()
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun testDeleteUpload() {
-        contributionViewHolder.deleteUpload()
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun testRetryUpload() {
-        contributionViewHolder.retryUpload()
     }
 
     @Test
@@ -234,17 +165,6 @@ class ContributionViewHolderUnitTests {
     fun testInitCaseNonNull_STATE_QUEUED() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
         `when`(contribution.state).thenReturn(Contribution.STATE_QUEUED)
-        `when`(contribution.media).thenReturn(media)
-        `when`(media.mostRelevantCaption).thenReturn("")
-        `when`(media.author).thenReturn("")
-        contributionViewHolder.init(0, contribution)
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun testInitCaseNonNull_STATE_QUEUED_LIMITED_CONNECTION_MODE() {
-        Shadows.shadowOf(Looper.getMainLooper()).idle()
-        `when`(contribution.state).thenReturn(Contribution.STATE_QUEUED_LIMITED_CONNECTION_MODE)
         `when`(contribution.media).thenReturn(media)
         `when`(media.mostRelevantCaption).thenReturn("")
         `when`(media.author).thenReturn("")

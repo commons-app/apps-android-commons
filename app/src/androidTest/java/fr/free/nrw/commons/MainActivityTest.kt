@@ -195,36 +195,4 @@ class MainActivityTest {
         Espresso.pressBack()
         UITestHelper.sleep(1000)
     }
-
-    @Test
-    fun testLimitedConnectionModeToggle() {
-        val isEnabled = defaultKvStore
-            .getBoolean(CommonsApplication.IS_LIMITED_CONNECTION_MODE_ENABLED, false)
-        Espresso.onView(
-            Matchers.allOf(
-                ViewMatchers.withId(R.id.toggle_limited_connection_mode),
-                childAtPosition(
-                    childAtPosition(
-                        ViewMatchers.withId(R.id.toolbar),
-                        1
-                    ),
-                    0
-                ),
-                ViewMatchers.isDisplayed()
-            )
-        ).perform(ViewActions.click())
-        UITestHelper.sleep(1000)
-        if (isEnabled) {
-            Assert.assertFalse(
-                defaultKvStore
-                    .getBoolean(CommonsApplication.IS_LIMITED_CONNECTION_MODE_ENABLED, false)
-            )
-        } else {
-            Assert.assertTrue(
-                defaultKvStore
-                    .getBoolean(CommonsApplication.IS_LIMITED_CONNECTION_MODE_ENABLED, false)
-            )
-        }
-    }
-
 }

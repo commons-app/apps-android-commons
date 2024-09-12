@@ -735,4 +735,7 @@
   <string name="please_enter_some_comments">Унесите коментар</string>
   <string name="talk">Разговор</string>
   <string name="does_not_exist_anymore_no_picture_can_ever_be_taken_of_it">„%1$s” не постоји више, и није га могуће више сликати.</string>
+  <string name="uploads">Отпремања</string>
+  <string name="pending">На чекању</string>
+  <string name="failed">Није успело</string>
 </resources>

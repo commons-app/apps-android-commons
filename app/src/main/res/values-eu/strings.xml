@@ -7,6 +7,7 @@
 * Fitoschido
 * Iñaki LL
 * Joseba
+* Laquin
 * Mikel Ibaiba
 * Sator
 * Subi
@@ -24,6 +25,11 @@
   <string name="add_new_contribution">Ekarpen berria gehitu</string>
   <string name="add_contribution_from_camera">Gehitu ekarpena kamaratik</string>
   <string name="add_contribution_from_photos">Gehitu ekarpena argazkietatik</string>
+  <string name="add_contribution_from_contributions_gallery">Gehitu ekarpena aurreko ekarpen-galeriatik</string>
+  <string name="show_captions">Irudi-oineko testuak</string>
+  <string name="row_item_language_description">Hizkuntzaren deskribapena</string>
+  <string name="row_item_caption">Irudi-oineko testua</string>
+  <string name="nearby_row_image">Irudia</string>
   <string name="appwidget_img">Eguneko argazkia</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">Fitxategi %1$d kargatzen</item>
@@ -67,6 +73,7 @@
   <string name="signup">Eman izena</string>
   <string name="logging_in_title">Saioa hasten</string>
   <string name="logging_in_message">Mesedez itxaron…</string>
+  <string name="updating_caption_message">Itxaron mesedez…</string>
   <string name="login_success">Sarrera arrakastatsua!</string>
   <string name="login_failed">Saio hasieran akatsa!</string>
   <string name="upload_failed">Fitxategia ez da aurkitu. Mesedez saiatu beste batekin.</string>
@@ -79,6 +86,7 @@
   <string name="upload_progress_notification_title_finishing">%1$s igotzen bukatzen</string>
   <string name="upload_failed_notification_title">%1$s igotzean akatsa</string>
   <string name="upload_failed_notification_subtitle">Ukitu ikusteko</string>
+  <string name="upload_paused_notification_subtitle">Ukitu ikusteko</string>
   <string name="title_activity_contributions">Nire azken igoerak</string>
   <string name="contribution_state_queued">Itxoite-zerrendan</string>
   <string name="contribution_state_failed">Hutseginda</string>
@@ -97,7 +105,7 @@
   <string name="login_failed_throttled">Sartzeko saiakera txar gehiegi. Mesedez saiatu zaitez minutu batzuk barru.</string>
   <string name="login_failed_blocked">Barka, baina erabiltzaile hau blokeatuta dago Commonsen</string>
   <string name="login_failed_2fa_needed">Zure bi faktoreko autentifikazio kodea eman behar duzu.</string>
-  <string name="login_failed_generic" fuzzy="true">Saio hasieran akatsa</string>
+  <string name="login_failed_generic">Saio hasieran akatsa</string>
   <string name="share_upload_button">Igo</string>
   <string name="multiple_share_base_title">Izena eman bilduma honi</string>
   <string name="provider_modifications">Aldaketak</string>
@@ -114,6 +122,7 @@
   <string name="title_activity_signup">Eman izena</string>
   <string name="title_activity_featured_images">Nabarmendutako irudiak</string>
   <string name="title_activity_category_details">Kategoria</string>
+  <string name="title_activity_review">Parekoen Ebaluazioa</string>
   <string name="menu_about">Honi buruz</string>
   <string name="about_license">Wikimedia Commons iturri-irekiko aplikazioa da Wikimedia komunitateko bolondresek sortu eta mantendutakoa. Wikimedia Fundazioa ez dago aplikazioaren sorreran, garapenean, edota mantenuan ibili.</string>
   <string name="about_improve">&lt;a href=\"%1$s\"&gt;GitHub-eko gai&lt;/a&gt; berria sortu errore eta iradokizunen berri emateko.</string>
@@ -150,6 +159,7 @@
   <string name="tutorial_3_text">Mesedez EZ igo:</string>
   <string name="tutorial_3_subtext_1">Autorretratuak edo zure lagunen argazkiak</string>
   <string name="tutorial_3_subtext_2">Internetetik jaitsitako irudiak</string>
+  <string name="tutorial_3_subtext_3">Aplikazio jabedunen pantaila-irudiak</string>
   <string name="tutorial_4_text">Igoera adibidea:</string>
   <string name="tutorial_4_subtext_1">Izenburua: Sydney Opera House</string>
   <string name="tutorial_4_subtext_2">Deskribapena: Sydney Opera House badiaren beste aldetik ikusita</string>
@@ -206,6 +216,7 @@
   <string name="navigation_item_about">Honi buruz</string>
   <string name="navigation_item_settings">Ezarpenak</string>
   <string name="navigation_item_feedback">Feedback</string>
+  <string name="navigation_item_feedback_github">Github-en bidez berrelikatu</string>
   <string name="navigation_item_logout">Saioa itxi</string>
   <string name="navigation_item_info">Tutoriala</string>
   <string name="navigation_item_notification">Jakinarazpenak</string>
@@ -215,9 +226,12 @@
   <string name="nearby_info_menu_wikidata_article">Wikidata itema</string>
   <string name="nearby_info_menu_wikipedia_article">Wikipediako artikulua</string>
   <string name="description_info">Mesedez, deskribatu multimedia elementua ahal duzun gehien: non hartu zen? zer erakusten du? zein da bere testuingurua? Mesedez, objektuak eta pertsonak deskribatu. Eman asmatzeko erraza ez den informazioa, adibidez, paisaia bat izatekotan, eguneko zein ordutan hartu den. Multimediak zerbait berezia erakusten badu, mesedez azaldu zerk egiten duen berezia.</string>
+  <string name="upload_problem_exist">Irudi honen arazo potentzialak:</string>
   <string name="upload_problem_image_dark">Irudia ilunegia da.</string>
+  <string name="upload_problem_image_blurry">Argazkia lausoa da.</string>
   <string name="upload_problem_image_duplicate">Irudia Commonsen badago.</string>
   <string name="upload_problem_different_geolocation">Irudi hau beste leku batean hartu da.</string>
+  <string name="upload_problem_do_you_continue">Oraindik igo nahi al duzu argazki hau?</string>
   <string name="upload_connection_error_alert_title">Konektatzeko Errorea</string>
   <string name="upload_problem_image">Arazoak aurkitu dira irudian</string>
   <string name="use_external_storage">Irudiak aplikazioan gorde</string>
@@ -273,6 +287,7 @@
   <string name="search_tab_title_depictions">Elementuak</string>
   <string name="explore_tab_title_featured">Nabarmendua</string>
   <string name="explore_tab_title_mobile">Mugikorretik igota</string>
+  <string name="explore_tab_title_map">Mapa</string>
   <string name="successful_wikidata_edit">Irudia gehitu da %1$s-(e)ra Wikidatan!</string>
   <string name="wikidata_edit_failure">Ezin izan da dagokion Wikidata entitatea eguneratu!</string>
   <string name="menu_set_wallpaper">Horma-paper gisa ezarri</string>
@@ -328,6 +343,7 @@
   <string name="provider_bookmarks">Lastermarkak</string>
   <string name="provider_bookmarks_location">Lastermarkak</string>
   <string name="search_this_area">Leku honetan bilatu</string>
+  <string name="achievements_fetch_failed_ultimate_achievement">Hainbeste ekarpen egin dituzu, non gure lorpenetarako kalkulu-sistema ez den iristen. Hau da lorpen handiena.</string>
   <string name="nominate_for_deletion_done">Egina</string>
   <string name="review_thanks_yes_button_text">Hurrengo orria</string>
   <string name="review_thanks_no_button_text">Bai, zergatik ez</string>
@@ -344,6 +360,8 @@
   <string name="delete_helper_ask_reason_copyright_press_photo">Prentsarako argazkia</string>
   <string name="delete_helper_ask_reason_copyright_logo">Logo</string>
   <string name="category_edit_helper_show_edit_title_success">Arrakasta</string>
+  <string name="you_have_no_achievements_yet">Oraindik ez duzu ekarpenik egin</string>
+  <string name="no_achievements_yet">%s(r)ek oraindik ez du ekarpenik egin</string>
   <string name="title_app_shortcut_setting">Hobespenak</string>
   <string name="theme_dark_name">Iluna</string>
   <string name="theme_light_name">Argia</string>
@@ -358,4 +376,5 @@
   <string name="leaderboard_column_count">Zenbaketa</string>
   <string name="leaderboard_upload">Igo</string>
   <string name="leaderboard_nearby">Hurbilekoak</string>
+  <string name="contributions_of_user">Erabiltzailearen ekarpenak: %s</string>
 </resources>

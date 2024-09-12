@@ -18,6 +18,7 @@
 * Jesusmc
 * Kaganer
 * Kareyac
+* Lutece398
 * MaxBioHazard
 * McDutchie
 * Megakott
@@ -839,5 +840,8 @@
   <string name="is_at_a_different_place_please_specify_the_correct_place_below_if_possible_tell_us_the_correct_latitude_longitude">\'%1$s\' находится в другом месте. Пожалуйста, укажите правильное место ниже и, если возможно, напишите правильную широту и долготу.</string>
   <string name="other_problem_or_information_please_explain_below">Другая проблема или информация (пожалуйста, объясните ниже).</string>
   <string name="feedback_destination_note">Ваш отзыв будет опубликован на следующей вики-странице: &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Mobile_app/Feedback\"&gt;Commons:Mobile app/Feedback&lt;/a&gt;</string>
+  <string name="are_you_sure_that_you_want_cancel_all_the_uploads">Вы уверены, что хотите отменить все загрузки?</string>
+  <string name="cancelling_all_the_uploads">Отмена всех загрузок...</string>
+  <string name="uploads">Загрузки</string>
   <string name="could_not_load_place_data">Не удалось загрузить данные о месте</string>
 </resources>

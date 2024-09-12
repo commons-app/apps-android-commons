@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:tools="http://schemas.android.com/tools">
+
   <uses-permission android:name="android.permission.INTERNET" />
   <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
   <uses-permission android:name="android.permission.READ_SYNC_SETTINGS" />
@@ -13,66 +14,65 @@
   <uses-permission android:name="android.permission.GET_ACCOUNTS" />
   <uses-permission android:name="android.permission.USE_CREDENTIALS" />
   <uses-permission android:name="android.permission.MANAGE_ACCOUNTS" />
-  <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
-  <uses-permission android:name="android.permission.READ_MEDIA_IMAGES"/>
+  <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+  <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
   <uses-permission android:name="com.google.android.apps.photos.permission.GOOGLE_PHOTOS" />
-  <uses-permission android:name="android.permission.SET_WALLPAPER"/>
+  <uses-permission android:name="android.permission.SET_WALLPAPER" />
   <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
-  <uses-permission android:name="android.permission.ACCESS_MEDIA_LOCATION"/>
+  <uses-permission android:name="android.permission.ACCESS_MEDIA_LOCATION" />
 
   <queries>
+
     <!-- Browser -->
     <intent>
       <action android:name="android.intent.action.VIEW" />
+
       <category android:name="android.intent.category.BROWSABLE" />
+
       <data android:scheme="https" />
     </intent>
     <!-- Google Maps -->
     <package android:name="com.google.android.apps.maps" />
-  </queries>
-
-
-  <!-- Needed only if your app targets Android 5.0 (API level 21) or higher. -->
+  </queries> <!-- Needed only if your app targets Android 5.0 (API level 21) or higher. -->
   <uses-feature android:name="android.hardware.location.gps" />
 
   <application
     android:name=".CommonsApplication"
+    android:appComponentFactory="commons"
     android:icon="@mipmap/ic_launcher"
     android:label="@string/app_name"
-    android:theme="@style/LightAppTheme"
     android:largeHeap="true"
+    android:requestLegacyExternalStorage="true"
     android:supportsRtl="true"
-    tools:replace="android:appComponentFactory"
-    android:appComponentFactory="commons"
-    android:requestLegacyExternalStorage = "true"
-    tools:ignore="GoogleAppIndexingWarning">
-
+    android:theme="@style/LightAppTheme"
+    tools:ignore="GoogleAppIndexingWarning"
+    tools:replace="android:appComponentFactory">
     <activity
       android:name=".nearby.WikidataFeedback"
       android:exported="false" />
-
     <activity
-      android:theme="@style/EditActivityTheme"
+      android:name=".upload.UploadProgressActivity"
+      android:exported="false" />
+    <activity
       android:name=".description.DescriptionEditActivity"
-      android:exported="true" />
-
+      android:exported="true"
+      android:theme="@style/EditActivityTheme" />
     <activity
       android:name=".edit.EditActivity"
       android:exported="false" />
-
-    <activity android:name="org.acra.dialog.CrashReportDialog"
-      android:process=":acra"
-      android:launchMode="singleInstance"
+    <activity
+      android:name="org.acra.dialog.CrashReportDialog"
       android:excludeFromRecents="true"
-      android:finishOnTaskLaunch="true" />
-
+      android:finishOnTaskLaunch="true"
+      android:launchMode="singleInstance"
+      android:process=":acra" />
     <activity
       android:name=".media.ZoomableActivity"
-      android:label="Zoomable Activity"
       android:configChanges="screenSize|keyboard|orientation"
+      android:label="Zoomable Activity"
       android:parentActivityName=".customselector.ui.selector.CustomSelectorActivity" />
-
-    <activity android:name=".auth.LoginActivity"
+    <activity
+      android:name=".auth.LoginActivity"
       android:exported="true">
       <intent-filter>
         <category android:name="android.intent.category.LAUNCHER" />
@@ -80,21 +80,19 @@
         <action android:name="android.intent.action.MAIN" />
       </intent-filter>
 
-      <meta-data android:name="android.app.shortcuts"
+      <meta-data
+        android:name="android.app.shortcuts"
         android:resource="@xml/shortcuts" />
-
     </activity>
     <activity android:name=".WelcomeActivity" />
-
     <activity
-      android:hardwareAccelerated="false"
       android:name=".upload.UploadActivity"
-      android:exported="true"
       android:configChanges="orientation|screenSize|keyboard"
+      android:exported="true"
+      android:hardwareAccelerated="false"
       android:icon="@mipmap/ic_launcher"
       android:label="@string/app_name"
-      android:windowSoftInputMode="adjustResize"
-      >
+      android:windowSoftInputMode="adjustResize">
       <intent-filter android:label="@string/intent_share_upload_label">
         <action android:name="android.intent.action.SEND" />
 
@@ -114,9 +112,9 @@
     </activity>
     <activity
       android:name=".contributions.MainActivity"
+      android:configChanges="screenSize|keyboard|orientation"
       android:icon="@mipmap/ic_launcher"
-      android:label="@string/app_name"
-      android:configChanges="screenSize|keyboard|orientation" />
+      android:label="@string/app_name" />
     <activity
       android:name=".settings.SettingsActivity"
       android:label="@string/title_activity_settings" />
@@ -124,57 +122,47 @@
       android:name=".AboutActivity"
       android:label="@string/title_activity_about"
       android:parentActivityName=".contributions.MainActivity" />
-
     <activity
       android:name=".auth.SignupActivity"
       android:configChanges="orientation|screenLayout|screenSize"
       android:label="@string/title_activity_signup" />
-
     <activity
       android:name=".notification.NotificationActivity"
       android:label="@string/navigation_item_notification" />
-
-    <activity android:name=".quiz.QuizActivity"
-      android:label="@string/quiz"/>
-
-    <activity android:name=".quiz.QuizResultActivity"
-      android:label="@string/result"/>
-
+    <activity
+      android:name=".quiz.QuizActivity"
+      android:label="@string/quiz" />
+    <activity
+      android:name=".quiz.QuizResultActivity"
+      android:label="@string/result" />
     <activity
       android:name=".customselector.ui.selector.CustomSelectorActivity"
-      android:label="@string/title_activity_custom_selector"
       android:configChanges="screenSize|keyboard|orientation"
+      android:label="@string/title_activity_custom_selector"
       android:parentActivityName=".contributions.MainActivity" />
-
     <activity
       android:name=".category.CategoryDetailsActivity"
-      android:label="@string/title_activity_featured_images"
       android:configChanges="screenSize|keyboard|orientation"
+      android:label="@string/title_activity_featured_images"
       android:parentActivityName=".contributions.MainActivity" />
-
     <activity
       android:name=".explore.depictions.WikidataItemDetailsActivity"
-      android:label="@string/title_activity_featured_images"
       android:configChanges="screenSize|keyboard|orientation"
+      android:label="@string/title_activity_featured_images"
       android:parentActivityName=".contributions.MainActivity" />
-
     <activity
       android:name=".explore.SearchActivity"
+      android:configChanges="orientation|keyboardHidden|screenSize"
       android:label="@string/title_activity_search"
       android:launchMode="singleTop"
-      android:configChanges="orientation|keyboardHidden|screenSize"
-      android:parentActivityName=".contributions.MainActivity"
-      />
-
+      android:parentActivityName=".contributions.MainActivity" />
     <activity
       android:name=".profile.ProfileActivity"
       android:configChanges="orientation|screenSize|keyboard"
       android:label="@string/Profile" />
-
     <activity
       android:name=".review.ReviewActivity"
       android:label="@string/title_activity_review" />
-
     <activity
       android:name=".LocationPicker.LocationPickerActivity"
       android:label="Location Picker" />
@@ -186,11 +174,11 @@
       <intent-filter>
         <action android:name="android.accounts.AccountAuthenticator" />
       </intent-filter>
+
       <meta-data
         android:name="android.accounts.AccountAuthenticator"
         android:resource="@xml/authenticator" />
     </service>
-
     <service
       android:name="org.acra.sender.SenderService"
       android:exported="false"
@@ -205,42 +193,36 @@
         android:name="android.support.FILE_PROVIDER_PATHS"
         android:resource="@xml/provider_paths" />
     </provider>
-
     <provider
       android:name=".category.CategoryContentProvider"
       android:authorities="${applicationId}.categories.contentprovider"
       android:exported="false"
       android:label="@string/provider_categories"
       android:syncable="false" />
-
     <provider
       android:name=".explore.recentsearches.RecentSearchesContentProvider"
       android:authorities="${applicationId}.explore.recentsearches.contentprovider"
       android:exported="false"
       android:label="@string/provider_searches"
       android:syncable="false" />
-
     <provider
       android:name=".recentlanguages.RecentLanguagesContentProvider"
       android:authorities="${applicationId}.recentlanguages.contentprovider"
       android:exported="false"
       android:label="@string/provider_recent_languages"
       android:syncable="false" />
-
     <provider
       android:name=".bookmarks.pictures.BookmarkPicturesContentProvider"
       android:authorities="${applicationId}.bookmarks.contentprovider"
       android:exported="false"
       android:label="@string/provider_bookmarks"
       android:syncable="false" />
-
     <provider
       android:name=".bookmarks.locations.BookmarkLocationsContentProvider"
       android:authorities="${applicationId}.bookmarks.locations.contentprovider"
       android:exported="false"
       android:label="@string/provider_bookmarks_location"
       android:syncable="false" />
-
     <provider
       android:name=".bookmarks.items.BookmarkItemsContentProvider"
       android:authorities="${applicationId}.bookmarks.items.contentprovider"
@@ -248,7 +230,8 @@
       android:label="@string/provider_bookmarks_location"
       android:syncable="false" />
 
-    <receiver android:name=".widget.PicOfDayAppWidget"
+    <receiver
+      android:name=".widget.PicOfDayAppWidget"
       android:exported="true">
       <intent-filter>
         <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
@@ -259,8 +242,9 @@
         android:resource="@xml/pic_of_day_app_widget_info" />
     </receiver>
 
-    <uses-library android:name="org.apache.http.legacy" android:required="false" />
-
+    <uses-library
+      android:name="org.apache.http.legacy"
+      android:required="false" />
   </application>
 
 </manifest>

@@ -10,13 +10,27 @@
 * Mguix
 * Toliño
 * Vivaelcelta
+* Xosecalvo
 -->
 <resources>
   <string name="commons_facebook">Páxina de Commons en Facebook</string>
   <string name="commons_github">Código fonte de Commons en Github</string>
   <string name="commons_logo">Logo de Commons</string>
   <string name="commons_website">Sitio web de Commons</string>
+  <string name="exit_location_picker">Saír do selector de localización</string>
   <string name="submit">Enviar</string>
+  <string name="add_another_description">Engadir outra descrición</string>
+  <string name="add_new_contribution">Engadir unha nova achega</string>
+  <string name="add_contribution_from_camera">Engadir achega desde cámara</string>
+  <string name="add_contribution_from_photos">Engadir achega desde Photos</string>
+  <string name="add_contribution_from_contributions_gallery">Engadir achega desde galería de achegas previas</string>
+  <string name="show_captions">Lendas</string>
+  <string name="row_item_language_description">Descrición da lingua</string>
+  <string name="row_item_caption">Lenda</string>
+  <string name="show_captions_description">Descrición</string>
+  <string name="nearby_row_image">Imaxe</string>
+  <string name="nearby_all">Todo</string>
+  <string name="nearby_filter_search">Vista de busca</string>
   <string name="appwidget_img">Imaxe do día</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">Cargando %1$d ficheiro</item>
@@ -55,6 +69,7 @@
   <string name="bullet">•</string>
   <string name="menu_settings">Configuracións</string>
   <string name="intent_share_upload_label">Cargar en Commons</string>
+  <string name="upload_in_progress">Envío en curso</string>
   <string name="username">Nome de usuario</string>
   <string name="password">Contrasinal</string>
   <string name="login_credential">Acceda á súa conta de Commons Beta</string>
@@ -63,18 +78,25 @@
   <string name="signup">Rexistrarse</string>
   <string name="logging_in_title">Accedendo ao sistema</string>
   <string name="logging_in_message">Por favor, agarde…</string>
-  <string name="login_success" fuzzy="true">Accedeu correctamente!</string>
-  <string name="login_failed" fuzzy="true">Erro durante o inición de sesión!</string>
+  <string name="updating_caption_title">A actualizar lendas e descricións</string>
+  <string name="updating_caption_message">Agarde un chisco…</string>
+  <string name="login_success">Accedeu correctamente!</string>
+  <string name="login_failed">Erro durante o inició de sesión!</string>
   <string name="upload_failed">Ficheiro non atopado. Por favor, probe con outro.</string>
-  <string name="authentication_failed" fuzzy="true">Erro de autenticación, por favor inicia unha nova sesión</string>
+  <string name="retry_limit_reached">Alcanzouse o límite máximo de reintentos! Cancele o envío e ténteo de novo</string>
+  <string name="unrestricted_battery_mode">Desactivar a optimización da batería?</string>
+  <string name="authentication_failed">Fallou a autenticación. Inicie sesión de novo.</string>
   <string name="uploading_started">A carga comezou!</string>
+  <string name="uploading_queued">Envío en cola (modo de conexión limitado activado)</string>
   <string name="upload_completed_notification_title">Cargouse \"%1$s\"!</string>
   <string name="upload_completed_notification_text">Prema para ollar a súa carga</string>
-  <string name="upload_progress_notification_title_start" fuzzy="true">Comezando a carga de \"%1$s\"</string>
+  <string name="upload_progress_notification_title_start">A enviar ficheiro: %s</string>
   <string name="upload_progress_notification_title_in_progress">Cargando \"%1$s\"</string>
   <string name="upload_progress_notification_title_finishing">Rematando a carga de \"%1$s\"</string>
-  <string name="upload_failed_notification_title" fuzzy="true">Erro ao cargar \"%1$s\"</string>
+  <string name="upload_failed_notification_title">Produciuse un erro ao enviar %1$s</string>
+  <string name="upload_paused_notification_title">Deteuse o envío de %1$s</string>
   <string name="upload_failed_notification_subtitle">Prema para amosalo</string>
+  <string name="upload_paused_notification_subtitle">Toque para ver</string>
   <string name="title_activity_contributions">As miñas subas recentes</string>
   <string name="contribution_state_queued">Na cola</string>
   <string name="contribution_state_failed">Erróneo</string>
@@ -85,13 +107,15 @@
   <string name="menu_nearby">Preto</string>
   <string name="provider_contributions">As miñas subidas</string>
   <string name="menu_share">Compartir</string>
+  <string name="menu_view_file_page">Ver a páxina do ficheiro</string>
   <string name="share_title_hint">Lenda (Obrigatoria)</string>
   <string name="share_description_hint">Descrición</string>
-  <string name="login_failed_network" fuzzy="true">Erro ao acceder ao sistema: Fallou a rede</string>
+  <string name="share_caption_hint">Lenda</string>
+  <string name="login_failed_network">Non foi posíbel acceder ao sistema - fallou a rede</string>
   <string name="login_failed_throttled">Demasiados intentos incorrectos. Inténteo de novo nuns minutos.</string>
   <string name="login_failed_blocked">Sentímolo, este usuario está bloqueado en Commons</string>
   <string name="login_failed_2fa_needed">Debe proporcionar o seu código de autenticación de dous factores.</string>
-  <string name="login_failed_generic" fuzzy="true">Erro durante o inición de sesión</string>
+  <string name="login_failed_generic">Fallou o inicio de sesión</string>
   <string name="share_upload_button">Subir</string>
   <string name="multiple_share_base_title">Dea un nome a este conxunto</string>
   <string name="provider_modifications">Modificacións</string>
@@ -102,11 +126,13 @@
   <string name="display_list_button">Lista</string>
   <string name="contributions_subtitle_zero">(Aínda non hai subas)</string>
   <string name="categories_not_found">Non se atopou ningunha categoría que coincidise con \"%1$s\"</string>
+  <string name="depictions_not_found">Non se atopou ningún elemento de Wikidata que coincida con %1$s</string>
   <string name="categories_skip_explanation">Engada categorías para facer máis accesibles as súas imaxes na Wikimedia Commons.\nComece a escribir para engadir categorías.</string>
   <string name="categories_activity_title">Categorías</string>
   <string name="title_activity_settings">Configuracións</string>
   <string name="title_activity_signup">Rexistrarse</string>
   <string name="title_activity_featured_images">Imaxes destacadas</string>
+  <string name="title_activity_custom_selector">Selector personalizado</string>
   <string name="title_activity_category_details">Categoría</string>
   <string name="title_activity_review">Revisión por pares</string>
   <string name="menu_about">Acerca de</string>
@@ -160,6 +186,7 @@
   <string name="detail_panel_cats_label">Categorías</string>
   <string name="detail_panel_cats_loading">Cargando…</string>
   <string name="detail_panel_cats_none">Ningunha seleccionada</string>
+  <string name="detail_caption_empty">Sen lenda</string>
   <string name="detail_description_empty">Sen descrición</string>
   <string name="detail_discussion_empty">Sen conversas</string>
   <string name="detail_license_empty">Licenza descoñecida</string>
@@ -170,8 +197,11 @@
   <string name="location_permission_title">Pedindo Permiso de Localización</string>
   <string name="ok">Aceptar</string>
   <string name="warning">Aviso</string>
+  <string name="duplicate_file_name">Atopouse un nome de ficheiro duplicado</string>
+  <string name="upload">Enviar</string>
   <string name="yes">Si</string>
   <string name="no">Non</string>
+  <string name="media_detail_caption">Lenda</string>
   <string name="media_detail_title">Título</string>
   <string name="media_detail_description">Descrición</string>
   <string name="media_detail_discussion">Conversa</string>
@@ -219,6 +249,8 @@
   <string name="upload_problem_different_geolocation">Esta imaxe foi realizada nunha localización diferente.</string>
   <string name="upload_problem_fbmd">Por favor sube so fotografías feitas por ti mesmo. Non subas imaxes ou fotografías que atopes nas contas de Facebook de outros.</string>
   <string name="upload_problem_do_you_continue">Aínda quere subir esta imaxe?</string>
+  <string name="upload_connection_error_alert_title">Erro de conexión</string>
+  <string name="upload_connection_error_alert_detail">O proceso de envío require acceso activo a Internet. Comprobe a súa conexión de rede.</string>
   <string name="internet_downloaded">Por favor suba so fotografías feitas por vostede mesmo. Non suba imaxes ou fotografías que descargara da Internet.</string>
   <string name="use_external_storage">Gardar fotos tiradas na aplicación</string>
   <string name="use_external_storage_summary">Gardar ao almacenamento interno as fotografías tiradas na aplicación</string>
@@ -232,8 +264,8 @@
   <string name="nominated_see_more">Ver páxina web para máis detalles</string>
   <string name="skip_login">Omitir</string>
   <string name="navigation_item_login">Acceder ao sistema</string>
-  <string name="skip_login_title" fuzzy="true">Realmente quere saltar o inicio de sesión?</string>
-  <string name="skip_login_message" fuzzy="true">Terá que iniciar sesión para subir imaxes no futuro.</string>
+  <string name="skip_login_title">Confirma quequere saltar o inicio de sesión?</string>
+  <string name="skip_login_message">Terá que iniciar sesión para enviar imaxes no futuro.</string>
   <string name="login_alert_message">Por favor, inicie a sesión para usar esta funcionalidade</string>
   <string name="copy_wikicode">Copiar o texto wiki ó portapapeis</string>
   <string name="wikicode_copied">Texto wiki copiado ó portapapeis</string>
@@ -245,6 +277,7 @@
   <string name="nearby_commons">COMMONS</string>
   <string name="about_rate_us">Avalíenos</string>
   <string name="about_faq">FAQ</string>
+  <string name="user_guide">Guía de uso</string>
   <string name="welcome_skip_button">Saltar titorial</string>
   <string name="no_internet">Internet non dispoñible</string>
   <string name="error_notifications">Erro ó recuperar as notificacións</string>
@@ -257,6 +290,9 @@
   <string name="about_translate_cancel">Cancelar</string>
   <string name="retry">Reintentar</string>
   <string name="showcase_view_whole_nearby_activity">Hai sitios preto de vostede que precisan fotos para ilustrar os seus artigos de Wikipedia</string>
+  <string name="showcase_view_needs_photo">Este lugar precisa dunha foto.</string>
+  <string name="showcase_view_has_photo">Este lugar xa ten unha foto.</string>
+  <string name="showcase_view_no_longer_exists">Este lugar xa non existe.</string>
   <string name="no_images_found">Non se atopou ningunha imaxeǃ</string>
   <string name="error_loading_images">Houbo un erro ó subir as imaxes.</string>
   <string name="image_uploaded_by">Subida porː %1$s</string>
@@ -271,8 +307,10 @@
   <string name="error_loading_categories">Houbo un erro ó cargar categorías.</string>
   <string name="search_tab_title_media">Multimedia</string>
   <string name="search_tab_title_categories">Categorías</string>
+  <string name="search_tab_title_depictions">Elementos</string>
   <string name="explore_tab_title_featured">Destacadas</string>
   <string name="explore_tab_title_mobile">Cargada vía móbil</string>
+  <string name="explore_tab_title_map">Mapa</string>
   <string name="successful_wikidata_edit">A imaxe engadiuse a %1$s en Wikidata!</string>
   <string name="wikidata_edit_failure">Fallou a actualización da entidade do Wikidata correspondente!</string>
   <string name="menu_set_wallpaper">Poñer como imaxe de fondo</string>
@@ -290,21 +328,27 @@
   <string name="construction_event_answer">Fotografiás que amosen tecnoloxía ou cultura son moi benvidas en Commons</string>
   <string name="congratulatory_message_quiz">Acadou un %1$s de respostas correctas. Parabéns!</string>
   <string name="warning_for_no_answer">Escolla unha das dúas opcións para contestar a pregunta</string>
-  <string name="user_not_logged_in" fuzzy="true">A sesión caducou, por favor inicia unha nova sesión.</string>
+  <string name="user_not_logged_in">O inicio de sesión caducou. Inicie sesión de novo.</string>
   <string name="quiz_result_share_message">Comparta o seu cuestionario cos seus amigos!</string>
   <string name="continue_message">Continuar</string>
   <string name="correct">Resposta correcta</string>
   <string name="wrong">Resposta incorrecta</string>
   <string name="quiz_screenshot_question">Pódese subir esta captura de pantalla?</string>
   <string name="share_app_title">Compartir a aplicación</string>
-  <string name="error_fetching_nearby_places" fuzzy="true">Erro ó procurar os lugares próximos.</string>
+  <string name="rotate">Xirar</string>
+  <string name="error_fetching_nearby_places">Non foi posíbel cargar lugares próximos</string>
+  <string name="no_pictures_in_this_area">Non hai imaxes nesta zona</string>
+  <string name="no_nearby_places_around">Non hai lugares próximos</string>
+  <string name="error_fetching_nearby_monuments">Produciuse un erro ao buscar monumentos próximos.</string>
   <string name="no_recent_searches">Non hai procuras recentes</string>
   <string name="delete_recent_searches_dialog">Está seguro de querer borrar o seu historial de procuras?</string>
+  <string name="cancel_upload_dialog">Confirma que quere cancelar este envío?</string>
   <string name="delete_search_dialog">Queres borrar esta procura?</string>
   <string name="search_history_deleted">Eliminouse o historial de procuras</string>
   <string name="nominate_delete">Nomear para borrado</string>
   <string name="delete">Borrar</string>
   <string name="Achievements">Logros</string>
+  <string name="Profile">Perfil</string>
   <string name="statistics">Estatísticas</string>
   <string name="statistics_thanks">Agradecementos recibidos</string>
   <string name="statistics_featured">Imaxes destacadas</string>
@@ -355,18 +399,22 @@
   <string name="no_uploads">Dámoslle a benvida ó Commonsǃ\n\nCargue o seu primeiro ficheiro premendo no botón Engadir.</string>
   <string name="no_categories_selected">Non hai categorías seleccionadas</string>
   <string name="no_categories_selected_warning_desc">As imaxes sen categorías só son utilizables en contadas ocasións. Está seguro de que quere continuar sen seleccionar categorías?</string>
-  <string name="upload_flow_all_images_in_set" fuzzy="true">(Para tódalas imaxes no conxunto)</string>
+  <string name="back_button_warning">Cancelar envío</string>
+  <string name="back_button_continue">Continuar co envío</string>
+  <string name="upload_flow_all_images_in_set">(Para tódalas imaxes do conxunto)</string>
   <string name="search_this_area">Procurar nesta área</string>
   <string name="nearby_card_permission_title">Solicitude de permisos</string>
   <string name="nearby_card_permission_explanation">Desexa que usemos a súa localizacións actual para amosarlle o lugar máis preto que precisa imaxes?</string>
   <string name="unable_to_display_nearest_place">Imposible amosar o sitio máis achegado que precisa fotos sen ter permisos de localización</string>
   <string name="never_ask_again">Non volver a preguntar isto nunca</string>
-  <string name="display_location_permission_title" fuzzy="true">Amosar permiso de localización</string>
+  <string name="display_location_permission_title">Solicitar permiso de localización</string>
   <string name="display_location_permission_explanation">Pedir permisos de localización cando sexa necesario para a funcionalidade de notificación de proximidade.</string>
   <string name="achievements_fetch_failed" fuzzy="true">Algo foi mal, non puidemos obter as túas achegas</string>
   <string name="ends_on">Finaliza o:</string>
   <string name="display_campaigns">Amosar campañas</string>
   <string name="display_campaigns_explanation">Ver as campañas en curso</string>
+  <string name="option_allow">Permitir</string>
+  <string name="option_dismiss">Descartar</string>
   <string name="nearby_campaign_dismiss_message">Xa non verá as campañas. Porén, pode volver habilitar esta notificación na configuración.</string>
   <string name="this_function_needs_network_connection" fuzzy="true">Esta función require conexión de rede, verifique a súa configuración de conexión.</string>
   <string name="error_processing_image">Houbo un erro ó procesar a imaxe. Por favor, ténteo de novoǃ</string>
@@ -383,8 +431,8 @@
   <string name="send_thank_success_title">Enviando agradecementos: Éxito</string>
   <string name="send_thank_success_message">Enviado correctamente o agradecemento a %1$s</string>
   <string name="send_thank_toast">Enviando agradecementos por %1$s</string>
-  <string name="review_thanks_yes_button_text" fuzzy="true">Si, por que non</string>
-  <string name="review_thanks_no_button_text" fuzzy="true">Seguinte imaxe</string>
+  <string name="review_thanks_yes_button_text">Imaxe seguinte</string>
+  <string name="review_thanks_no_button_text">Si, por que non</string>
   <string name="no_image">Ningunha imaxe usada</string>
   <string name="no_image_reverted">Ningunha imaxe revertida</string>
   <string name="no_image_uploaded">Ningunha imaxe subida</string>
@@ -396,6 +444,8 @@
   <string name="error_occurred_in_picking_images">Houbo un erro ó escoller as imaxes</string>
   <string name="please_wait">Por favor, agarde…</string>
   <string name="skip_image">Saltar esta imaxe</string>
+  <string name="manage_exif_tags">Xestionar etiquetas EXIF</string>
+  <string name="manage_exif_tags_summary">Seleccione que etiquetas EXIF manter nos envíos</string>
   <string name="exif_tag_name_author">Autor</string>
   <string name="exif_tag_name_copyright">Dereitos de autoría</string>
   <string name="exif_tag_name_location">Localización</string>
@@ -407,16 +457,43 @@
   <string name="image_info">Información da imaxe</string>
   <string name="no_categories_found">Non se atoparon categorías</string>
   <string name="upload_cancelled">Cancelouse a carga</string>
+  <string name="default_description_language">Lingua de descrición predeterminada</string>
   <string name="delete_helper_show_deletion_title">Nomeando para borrado</string>
   <string name="delete_helper_show_deletion_title_success">Todo correcto</string>
   <string name="delete_helper_show_deletion_title_failed">Fallou</string>
-  <string name="delete_helper_ask_spam_selfie" fuzzy="true">Un autorretrato</string>
+  <string name="delete_helper_show_deletion_message_else">Non foi posíbel solicitar a eliminación.</string>
+  <string name="delete_helper_ask_spam_selfie">Un autorretrato que non se emprega en ningún artigo</string>
   <string name="delete_helper_ask_spam_blurry" fuzzy="true">Borrosa</string>
   <string name="delete_helper_ask_spam_nonsense" fuzzy="true">Sen sentido</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">Foto de prensa</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">Foto aleatoria de internet</string>
   <string name="delete_helper_ask_reason_copyright_logo">Logo</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">Porque é</string>
+  <string name="category_edit_helper_show_edit_title_success">Todo correcto</string>
+  <plurals name="category_edit_helper_show_edit_message_if">
+    <item quantity="one">Engádese a categoría %1$s .</item>
+    <item quantity="other">Engádense as categorías %1$s .</item>
+  </plurals>
+  <string name="category_edit_helper_edit_message_else">Non foi posíbel engadir categorías.</string>
+  <string name="category_edit_button_text">Actualizar categorías</string>
+  <string name="depictions_edit_helper_make_edit_toast">A tentar actualizar representacións.</string>
+  <string name="depictions_edit_helper_show_edit_title">Editar representacións</string>
+  <plurals name="depictions_edit_helper_show_edit_message_if">
+    <item quantity="one">Engádese a representación %1$s .</item>
+    <item quantity="other">Engádense as representacións %1$s .</item>
+  </plurals>
+  <string name="depictions_edit_helper_edit_message_else">Non foi posíbel engadir representacións.</string>
+  <string name="coordinates_edit_helper_make_edit_toast">A tentar actualizar coordenadas.</string>
+  <string name="coordinates_edit_helper_show_edit_title">Actualización de coordenadas</string>
+  <string name="description_edit_helper_show_edit_title">Actualización da descrición</string>
+  <string name="caption_edit_helper_show_edit_title">Actualización da lenda</string>
+  <string name="coordinates_edit_helper_show_edit_title_success">Todo correcto</string>
+  <string name="coordinates_edit_helper_show_edit_message">Engádense as coordenadas %1$s .</string>
+  <string name="description_edit_helper_show_edit_message">Engádense as descricións.</string>
+  <string name="caption_edit_helper_show_edit_message">Engádese a lenda.</string>
+  <string name="coordinates_edit_helper_edit_message_else">Non foi posíbel engadir as coordenadas.</string>
+  <string name="description_edit_helper_edit_message_else">Non foi posíbel engadir descricións.</string>
+  <string name="caption_edit_helper_edit_message_else">Non foi posíbel engadir lenda.</string>
   <string name="share_image_via">Compartir imaxe vía</string>
   <string name="account_created">Conta creada!</string>
   <string name="place_state_exists">Existe</string>
@@ -429,4 +506,28 @@
   <string name="setting_wallpaper_dialog_title">Definir como fondo de pantalla</string>
   <string name="theme_dark_name">Escuro</string>
   <string name="theme_light_name">Claro</string>
+  <string name="todo_improve">Melloras suxeridas:</string>
+  <string name="missing_category">- Engadir categorías a esta imaxe para mellorar a usabilidade.</string>
+  <string name="missing_article">- Engade esta imaxe ao artigo asociado da Wikipedia que non ten imaxes.</string>
+  <string name="add_picture_to_wikipedia_article_title">Engadir imaxe á Wikipedia</string>
+  <string name="confirm">Confirmar</string>
+  <string name="instructions_title">Instrucións</string>
+  <string name="wikipedia_instructions_step_7">7. Publicar o artigo</string>
+  <string name="pause">pausar</string>
+  <string name="resume">continuar</string>
+  <string name="paused">En pausa</string>
+  <string name="more">Máis</string>
+  <string name="bookmarks">Marcadores</string>
+  <string name="achievements_tab_title">Logros</string>
+  <string name="leaderboard_tab_title">Tǃboa de maior actividade</string>
+  <string name="rank_prefix">Clasificaciónː</string>
+  <string name="count_prefix">Número:</string>
+  <string name="leaderboard_column_rank">Clasificación</string>
+  <string name="menu_set_avatar">Establecer como avatar</string>
+  <string name="leaderboard_yearly">Anualmente</string>
+  <string name="leaderboard_weekly">Semanalmente</string>
+  <string name="leaderboard_all_time">Todo o tempo</string>
+  <string name="leaderboard_upload">Enviar</string>
+  <string name="leaderboard_my_rank_button_text">A miña clasificación</string>
+  <string name="limited_connection_enabled">Activouse o modo de conexión limitadoǃ</string>
 </resources>
