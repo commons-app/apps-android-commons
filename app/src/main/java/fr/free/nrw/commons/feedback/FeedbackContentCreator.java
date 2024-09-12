@@ -49,7 +49,7 @@ public class FeedbackContentCreator {
         sectionTitleBuilder.append(" on ");
         sectionTitleBuilder.append(UTC_FormattedDate);
 
-        /*of 
+        /*
          * Construct the feedback section text
          */
         sectionTextBuilder = new StringBuilder();
