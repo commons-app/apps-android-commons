@@ -319,7 +319,7 @@ public class LocationPickerActivity extends BaseActivity implements
         requestLocationPermissions();
 
         //If EXIF data is available, move map to EXIF location.
-        if(activity.equals("UploadActivity")){
+        if(activity.equals("UploadActivity") || activity.equals("MediaActivity")){
             moveMapToMediaLocation();
         } else {
             //EXIF data is not available. Move map to device GPS location.
