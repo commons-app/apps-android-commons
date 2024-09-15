@@ -27,13 +27,16 @@ public class PermissionUtils {
     static String[] getPermissionsStorage() {
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
             return new String[]{ Manifest.permission.READ_MEDIA_VISUAL_USER_SELECTED,
-                Manifest.permission.READ_MEDIA_IMAGES };
+                Manifest.permission.READ_MEDIA_IMAGES,
+                Manifest.permission.ACCESS_MEDIA_LOCATION };
         }
         if(Build.VERSION.SDK_INT == Build.VERSION_CODES.TIRAMISU) {
-            return new String[]{ Manifest.permission.READ_MEDIA_IMAGES };
+            return new String[]{ Manifest.permission.READ_MEDIA_IMAGES,
+            Manifest. permission.ACCESS_MEDIA_LOCATION };
         }
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            return new String[]{ Manifest.permission.READ_EXTERNAL_STORAGE };
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            return new String[]{ Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.ACCESS_MEDIA_LOCATION };
         }
         return new String[]{
             Manifest.permission.READ_EXTERNAL_STORAGE,

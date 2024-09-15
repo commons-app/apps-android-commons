@@ -81,7 +81,7 @@ class UploadWorker(
 
 
     //Attributes of the current-upload notification
-    private var currentNotificationID: Int = -1// late init is not allowed with primitives
+    private var currentNotificationID: Int = -1// lateinit is not allowed with primitives
     private lateinit var currentNotificationTag: String
     private var currentNotification: NotificationCompat.Builder
 
