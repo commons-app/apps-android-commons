@@ -29,12 +29,19 @@ abstract class BasePagingFragment<T> : CommonsDaggerSupportFragment(),
     private val mergeAdapter by lazy { MergeAdapter(pagedListAdapter, loadingAdapter) }
     private var searchResults: LiveData<PagedList<T>>? = null
 
-    private var binding : FragmentSearchPaginatedBinding? = null
+    protected lateinit var binding : FragmentSearchPaginatedBinding
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        binding = FragmentSearchPaginatedBinding.inflate(inflater, container, false)
+        return binding.root
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val binding = FragmentSearchPaginatedBinding.bind(view)
-        this.binding = binding
 
         binding.paginatedSearchResultsList.apply {
             layoutManager = GridLayoutManager(context, if (isPortrait) 1 else 2)
@@ -51,7 +58,7 @@ abstract class BasePagingFragment<T> : CommonsDaggerSupportFragment(),
      */
     override fun onConfigurationChanged(newConfig: Configuration) {
         super.onConfigurationChanged(newConfig)
-        binding!!.paginatedSearchResultsList.apply {
+        binding.paginatedSearchResultsList.apply {
             layoutManager = GridLayoutManager(context, if (isPortrait) 1 else 2)
         }
     }
@@ -75,15 +82,15 @@ abstract class BasePagingFragment<T> : CommonsDaggerSupportFragment(),
     }
 
     override fun hideInitialLoadProgress() {
-        binding!!.paginatedSearchInitialLoadProgress.visibility = GONE
+        binding.paginatedSearchInitialLoadProgress.visibility = GONE
     }
 
     override fun showInitialLoadInProgress() {
-        binding!!.paginatedSearchInitialLoadProgress.visibility = VISIBLE
+        binding.paginatedSearchInitialLoadProgress.visibility = VISIBLE
     }
 
     override fun showSnackbar() {
-        ViewUtil.showShortSnackbar(binding!!.paginatedSearchResultsList, errorTextId)
+        ViewUtil.showShortSnackbar(binding.paginatedSearchResultsList, errorTextId)
     }
 
     fun onQueryUpdated(query: String) {
@@ -91,14 +98,14 @@ abstract class BasePagingFragment<T> : CommonsDaggerSupportFragment(),
     }
 
     override fun showEmptyText(query: String) {
-        binding!!.contentNotFound.text = getEmptyText(query)
-        binding!!.contentNotFound.visibility = VISIBLE
+        binding.contentNotFound.text = getEmptyText(query)
+        binding.contentNotFound.visibility = VISIBLE
     }
 
     abstract fun getEmptyText(query: String): String
 
     override fun hideEmptyText() {
-        binding!!.contentNotFound.visibility = GONE
+        binding.contentNotFound.visibility = GONE
     }
 }
 
