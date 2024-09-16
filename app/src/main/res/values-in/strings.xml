@@ -3,6 +3,7 @@
 * Agam Riyandana
 * Akmaie Ajam
 * Arifin.wijaya
+* Birusian
 * DARMAS BUDI SANTOSO
 * Daud I.F. Argana
 * Fafau06
@@ -743,7 +744,7 @@
   </plurals>
   <string name="talk">Bicara</string>
   <string name="cancelling_all_the_uploads">Membatalkan semua unggahan...</string>
-  <string name="uploads">Unggah</string>
+  <string name="uploads">Unggahan</string>
   <string name="pending">Menunggu</string>
   <string name="failed">Gagal</string>
 </resources>
