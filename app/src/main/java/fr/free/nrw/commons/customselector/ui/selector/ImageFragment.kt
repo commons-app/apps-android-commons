@@ -39,6 +39,7 @@ import fr.free.nrw.commons.upload.FileUtilsWrapper
 import io.reactivex.schedulers.Schedulers
 import java.util.*
 import javax.inject.Inject
+import kotlin.collections.ArrayList
 
 /**
  * Custom Selector Image Fragment.
@@ -279,6 +280,8 @@ class ImageFragment : CommonsDaggerSupportFragment(), RefreshUIListener, PassDat
                     }
                 }
             } else {
+                filteredImages = ArrayList()
+                allImages = filteredImages
                 binding?.emptyText?.let {
                     it.visibility = View.VISIBLE
                 }
@@ -324,7 +327,7 @@ class ImageFragment : CommonsDaggerSupportFragment(), RefreshUIListener, PassDat
             .findFirstVisibleItemPosition()
 
         // Check for empty RecyclerView.
-        if (position != -1) {
+        if (position != -1 && filteredImages.size > 0) {
             context?.let { context ->
                 context.getSharedPreferences(
                     "CustomSelector",

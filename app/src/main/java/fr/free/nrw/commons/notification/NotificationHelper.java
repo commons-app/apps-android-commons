@@ -4,16 +4,12 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-
 import android.os.Build;
 import androidx.core.app.NotificationCompat;
-
 import javax.inject.Inject;
 import javax.inject.Singleton;
-
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
-
 import static androidx.core.app.NotificationCompat.DEFAULT_ALL;
 import static androidx.core.app.NotificationCompat.PRIORITY_HIGH;
 
@@ -30,11 +26,11 @@ public class NotificationHelper {
     public static final int NOTIFICATION_EDIT_DESCRIPTION = 4;
     public static final int NOTIFICATION_EDIT_DEPICTIONS = 5;
 
-    private NotificationManager notificationManager;
-    private NotificationCompat.Builder notificationBuilder;
+    private final NotificationManager notificationManager;
+    private final NotificationCompat.Builder notificationBuilder;
 
     @Inject
-    public NotificationHelper(Context context) {
+    public NotificationHelper(final Context context) {
         notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         notificationBuilder = new NotificationCompat
                 .Builder(context, CommonsApplication.NOTIFICATION_CHANNEL_ID_ALL)
@@ -49,12 +45,13 @@ public class NotificationHelper {
      * @param notificationId the notificationID
      * @param intent the intent to be fired when the notification is clicked
      */
-    public void showNotification(Context context,
-        String notificationTitle,
-        String notificationMessage,
-        int notificationId,
-        Intent intent) {
-
+    public void showNotification(
+        final Context context,
+        final String notificationTitle,
+        final String notificationMessage,
+        final int notificationId,
+        final Intent intent
+    ) {
         notificationBuilder.setDefaults(DEFAULT_ALL)
             .setContentTitle(notificationTitle)
             .setStyle(new NotificationCompat.BigTextStyle()
@@ -65,14 +62,11 @@ public class NotificationHelper {
             .setPriority(PRIORITY_HIGH);
 
         int flags = PendingIntent.FLAG_UPDATE_CURRENT;
-
-        // Check if the API level is 31 or higher to modify the flag
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            // For API level 31 or above, PendingIntent requires either FLAG_IMMUTABLE or FLAG_MUTABLE to be set
-            flags |= PendingIntent.FLAG_IMMUTABLE;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            flags |= PendingIntent.FLAG_IMMUTABLE; // This flag was introduced in API 23
         }
 
-        PendingIntent pendingIntent = PendingIntent.getActivity(context, 1, intent, flags);
+        final PendingIntent pendingIntent = PendingIntent.getActivity(context, 1, intent, flags);
         notificationBuilder.setContentIntent(pendingIntent);
         notificationManager.notify(notificationId, notificationBuilder.build());
     }
