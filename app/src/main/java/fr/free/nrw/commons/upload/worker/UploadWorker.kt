@@ -74,9 +74,9 @@ class UploadWorker(
     @Inject
     lateinit var fileUtilsWrapper: FileUtilsWrapper
 
-    private val PROCESSING_UPLOADS_NOTIFICATION_TAG = BuildConfig.APPLICATION_ID + " : upload_tag"
+    private val processingUploadsNotificationTag = BuildConfig.APPLICATION_ID + " : upload_tag"
 
-    private val PROCESSING_UPLOADS_NOTIFICATION_ID = 101
+    private val processingUploadsNotificationId = 101
 
     // Attributes of the current-upload notification
     private var currentNotificationID: Int = -1 // lateinit is not allowed with primitives
@@ -85,7 +85,7 @@ class UploadWorker(
 
     private val statesToProcess = ArrayList<Int>()
 
-    private val STASH_ERROR_CODES =
+    private val stashErrorCodes =
         listOf(
             "uploadstash-file-not-found",
             "stashfailed",
@@ -132,8 +132,8 @@ class UploadWorker(
                     )
             }
             notificationManager?.cancel(
-                PROCESSING_UPLOADS_NOTIFICATION_TAG,
-                PROCESSING_UPLOADS_NOTIFICATION_ID,
+                processingUploadsNotificationTag,
+                processingUploadsNotificationId,
             )
             notificationManager?.notify(
                 currentNotificationTag,
@@ -216,8 +216,8 @@ class UploadWorker(
                         ),
                     )
                     notificationManager?.notify(
-                        PROCESSING_UPLOADS_NOTIFICATION_TAG,
-                        PROCESSING_UPLOADS_NOTIFICATION_ID,
+                        processingUploadsNotificationTag,
+                        processingUploadsNotificationId,
                         processingUploads.build(),
                     )
 
@@ -237,8 +237,8 @@ class UploadWorker(
                 }
                 // Dismiss the global notification
                 notificationManager?.cancel(
-                    PROCESSING_UPLOADS_NOTIFICATION_TAG,
-                    PROCESSING_UPLOADS_NOTIFICATION_ID,
+                    processingUploadsNotificationTag,
+                    processingUploadsNotificationId,
                 )
             }
             // Trigger WorkManager to process any new contributions that may have been added to the queue
@@ -397,7 +397,7 @@ class UploadWorker(
                         showFailedNotification(contribution)
                         contribution.state = Contribution.STATE_FAILED
                         contributionDao.saveSynchronous(contribution)
-                        if (STASH_ERROR_CODES.contains(exception.message)) {
+                        if (stashErrorCodes.contains(exception.message)) {
                             clearChunks(contribution)
                         }
                     }
