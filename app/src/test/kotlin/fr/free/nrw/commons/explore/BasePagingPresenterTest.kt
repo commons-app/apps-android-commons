@@ -17,7 +17,6 @@ import org.mockito.Mock
 import org.mockito.MockitoAnnotations
 
 class BasePagingPresenterTest {
-
     @Rule
     @JvmField
     var instantTaskExecutorRule = InstantTaskExecutorRule()
@@ -70,7 +69,8 @@ class BasePagingPresenterTest {
     @Test
     fun `Complete offers an empty list item and hides initial loader`() {
         onLoadingState(LoadingState.Complete)
-        basePagingPresenter.listFooterData.test()
+        basePagingPresenter.listFooterData
+            .test()
             .assertValue(emptyList())
         verify(view).hideInitialLoadProgress()
     }

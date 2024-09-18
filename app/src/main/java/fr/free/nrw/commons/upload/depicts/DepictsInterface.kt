@@ -24,9 +24,11 @@ interface DepictsInterface {
         @Query("limit") limit: String?,
         @Query("language") language: String?,
         @Query("uselang") uselang: String?,
-        @Query("continue") offset: String?
+        @Query("continue") offset: String?,
     ): Single<DepictSearchResponse>
 
     @GET("/w/api.php?format=json&action=wbgetentities")
-    fun getEntities(@Query("ids") ids: String?): Single<Entities>
+    fun getEntities(
+        @Query("ids") ids: String?,
+    ): Single<Entities>
 }

@@ -40,10 +40,9 @@ class BookmarkPicturesControllerTest {
             .thenReturn(mockBookmarkList)
         whenever(
             mediaClient!!.getMedia(
-                ArgumentMatchers.anyString()
-            )
-        )
-            .thenReturn(Single.just(mockMedia))
+                ArgumentMatchers.anyString(),
+            ),
+        ).thenReturn(Single.just(mockMedia))
     }
 
     /**
@@ -83,7 +82,7 @@ class BookmarkPicturesControllerTest {
     }
 
     private val mockMedia: Media
-        private get() = media(filename="File:Test.jpg")
+        private get() = media(filename = "File:Test.jpg")
 
     /**
      * Test case where current bookmarks don't match the bookmarks in DB

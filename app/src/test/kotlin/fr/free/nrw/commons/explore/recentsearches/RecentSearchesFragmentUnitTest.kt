@@ -3,17 +3,12 @@ package fr.free.nrw.commons.explore.recentsearches
 import android.content.Context
 import android.content.DialogInterface
 import android.view.LayoutInflater
-import android.view.View
 import android.widget.ArrayAdapter
-import android.widget.ImageView
-import android.widget.ListView
-import android.widget.TextView
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.test.core.app.ApplicationProvider
 import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.OkHttpConnectionFactory
-import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.contributions.MainActivity
 import fr.free.nrw.commons.createTestClient
@@ -34,7 +29,6 @@ import java.lang.reflect.Method
 @Config(sdk = [21], application = TestCommonsApplication::class)
 @LooperMode(LooperMode.Mode.PAUSED)
 class RecentSearchesFragmentUnitTest {
-
     private lateinit var fragment: RecentSearchesFragment
     private lateinit var fragmentManager: FragmentManager
     private lateinit var context: Context
@@ -42,7 +36,6 @@ class RecentSearchesFragmentUnitTest {
 
     @Mock
     private lateinit var recentSearchesDao: RecentSearchesDao
-
 
     @Mock
     private lateinit var adapter: ArrayAdapter<*>
@@ -96,10 +89,11 @@ class RecentSearchesFragmentUnitTest {
     @Test
     @Throws(Exception::class)
     fun testShowDeleteRecentAlertDialog() {
-        val method: Method = RecentSearchesFragment::class.java.getDeclaredMethod(
-            "showDeleteRecentAlertDialog",
-            Context::class.java
-        )
+        val method: Method =
+            RecentSearchesFragment::class.java.getDeclaredMethod(
+                "showDeleteRecentAlertDialog",
+                Context::class.java,
+            )
         method.isAccessible = true
         method.invoke(fragment, context)
     }
@@ -107,11 +101,12 @@ class RecentSearchesFragmentUnitTest {
     @Test
     @Throws(Exception::class)
     fun testSetDeleteRecentPositiveButton() {
-        val method: Method = RecentSearchesFragment::class.java.getDeclaredMethod(
-            "setDeleteRecentPositiveButton",
-            Context::class.java,
-            DialogInterface::class.java
-        )
+        val method: Method =
+            RecentSearchesFragment::class.java.getDeclaredMethod(
+                "setDeleteRecentPositiveButton",
+                Context::class.java,
+                DialogInterface::class.java,
+            )
         method.isAccessible = true
         method.invoke(fragment, context, dialog)
     }
@@ -119,11 +114,12 @@ class RecentSearchesFragmentUnitTest {
     @Test
     @Throws(Exception::class)
     fun testShowDeleteAlertDialog() {
-        val method: Method = RecentSearchesFragment::class.java.getDeclaredMethod(
-            "showDeleteAlertDialog",
-            Context::class.java,
-            Int::class.java
-        )
+        val method: Method =
+            RecentSearchesFragment::class.java.getDeclaredMethod(
+                "showDeleteAlertDialog",
+                Context::class.java,
+                Int::class.java,
+            )
         method.isAccessible = true
         method.invoke(fragment, context, 0)
     }
@@ -131,14 +127,14 @@ class RecentSearchesFragmentUnitTest {
     @Test
     @Throws(Exception::class)
     fun testSetDeletePositiveButton() {
-        val method: Method = RecentSearchesFragment::class.java.getDeclaredMethod(
-            "setDeletePositiveButton",
-            Context::class.java,
-            DialogInterface::class.java,
-            Int::class.java
-        )
+        val method: Method =
+            RecentSearchesFragment::class.java.getDeclaredMethod(
+                "setDeletePositiveButton",
+                Context::class.java,
+                DialogInterface::class.java,
+                Int::class.java,
+            )
         method.isAccessible = true
         method.invoke(fragment, context, dialog, 0)
     }
-
 }

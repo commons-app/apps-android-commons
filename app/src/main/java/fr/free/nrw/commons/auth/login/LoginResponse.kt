@@ -13,9 +13,7 @@ class LoginResponse {
     @SerializedName("clientlogin")
     private val clientLogin: ClientLogin? = null
 
-    fun toLoginResult(password: String): LoginResult? {
-        return clientLogin?.toLoginResult(password)
-    }
+    fun toLoginResult(password: String): LoginResult? = clientLogin?.toLoginResult(password)
 }
 
 internal class ClientLogin {
@@ -39,7 +37,7 @@ internal class ClientLogin {
                 }
             }
         } else if ("PASS" != status && "FAIL" != status) {
-            //TODO: String resource -- Looks like needed for others in this class too
+            // TODO: String resource -- Looks like needed for others in this class too
             userMessage = "An unknown error occurred."
         }
         return Result(status ?: "", userName, password, userMessage)

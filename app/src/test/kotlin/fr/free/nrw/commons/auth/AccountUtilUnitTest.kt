@@ -14,7 +14,6 @@ import org.robolectric.annotation.Config
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
 class AccountUtilUnitTest {
-
     private lateinit var context: FakeContextWrapper
     private lateinit var accountUtil: AccountUtil
 

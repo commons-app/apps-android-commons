@@ -27,7 +27,6 @@ import java.lang.reflect.Method
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
 class QuizCheckerUnitTest {
-
     private lateinit var quizChecker: QuizChecker
     private lateinit var activity: Activity
 
@@ -52,7 +51,8 @@ class QuizCheckerUnitTest {
         quizChecker = QuizChecker(sessionManager, okHttpJsonApiClient, jsonKvStore)
         Mockito.`when`(sessionManager.userName).thenReturn("")
         Mockito.`when`(okHttpJsonApiClient.getUploadCount(any())).thenReturn(Single.just(0))
-        Mockito.`when`(okHttpJsonApiClient.getAchievements(any()))
+        Mockito
+            .`when`(okHttpJsonApiClient.getAchievements(any()))
             .thenReturn(Single.just(feedbackResponse))
     }
 
@@ -77,10 +77,11 @@ class QuizCheckerUnitTest {
     @Test
     @Throws(Exception::class)
     fun testSetTotalUploadCount() {
-        val method: Method = QuizChecker::class.java.getDeclaredMethod(
-            "setTotalUploadCount",
-            Int::class.java
-        )
+        val method: Method =
+            QuizChecker::class.java.getDeclaredMethod(
+                "setTotalUploadCount",
+                Int::class.java,
+            )
         method.isAccessible = true
         method.invoke(quizChecker, -1)
     }
@@ -88,10 +89,11 @@ class QuizCheckerUnitTest {
     @Test
     @Throws(Exception::class)
     fun testSetRevertParameter() {
-        val method: Method = QuizChecker::class.java.getDeclaredMethod(
-            "setRevertParameter",
-            Int::class.java
-        )
+        val method: Method =
+            QuizChecker::class.java.getDeclaredMethod(
+                "setRevertParameter",
+                Int::class.java,
+            )
         method.isAccessible = true
         method.invoke(quizChecker, -1)
     }
@@ -100,10 +102,11 @@ class QuizCheckerUnitTest {
     @Throws(Exception::class)
     fun testCalculateRevertParameterAndShowQuiz() {
         Whitebox.setInternalState(quizChecker, "revertCount", -1)
-        val method: Method = QuizChecker::class.java.getDeclaredMethod(
-            "calculateRevertParameterAndShowQuiz",
-            Activity::class.java
-        )
+        val method: Method =
+            QuizChecker::class.java.getDeclaredMethod(
+                "calculateRevertParameterAndShowQuiz",
+                Activity::class.java,
+            )
         method.isAccessible = true
         method.invoke(quizChecker, activity)
     }
@@ -115,10 +118,11 @@ class QuizCheckerUnitTest {
         Whitebox.setInternalState(quizChecker, "isUploadCountFetched", true)
         Whitebox.setInternalState(quizChecker, "totalUploadCount", 5)
         Whitebox.setInternalState(quizChecker, "revertCount", 5)
-        val method: Method = QuizChecker::class.java.getDeclaredMethod(
-            "calculateRevertParameterAndShowQuiz",
-            Activity::class.java
-        )
+        val method: Method =
+            QuizChecker::class.java.getDeclaredMethod(
+                "calculateRevertParameterAndShowQuiz",
+                Activity::class.java,
+            )
         method.isAccessible = true
         method.invoke(quizChecker, activity)
     }
@@ -126,12 +130,12 @@ class QuizCheckerUnitTest {
     @Test
     @Throws(Exception::class)
     fun testStartQuizActivity() {
-        val method: Method = QuizChecker::class.java.getDeclaredMethod(
-            "startQuizActivity",
-            Activity::class.java
-        )
+        val method: Method =
+            QuizChecker::class.java.getDeclaredMethod(
+                "startQuizActivity",
+                Activity::class.java,
+            )
         method.isAccessible = true
         method.invoke(quizChecker, activity)
     }
-
 }

@@ -26,20 +26,23 @@ import org.robolectric.annotation.Config
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
 class BookMarkLocationDaoTest {
-    private val columns = arrayOf(COLUMN_NAME,
-        COLUMN_LANGUAGE,
-        COLUMN_DESCRIPTION,
-        COLUMN_CATEGORY,
-        COLUMN_LABEL_TEXT,
-        COLUMN_LABEL_ICON,
-        COLUMN_IMAGE_URL,
-        COLUMN_WIKIPEDIA_LINK,
-        COLUMN_WIKIDATA_LINK,
-        COLUMN_COMMONS_LINK,
-        COLUMN_LAT,
-        COLUMN_LONG,
-        COLUMN_PIC,
-        COLUMN_EXISTS)
+    private val columns =
+        arrayOf(
+            COLUMN_NAME,
+            COLUMN_LANGUAGE,
+            COLUMN_DESCRIPTION,
+            COLUMN_CATEGORY,
+            COLUMN_LABEL_TEXT,
+            COLUMN_LABEL_ICON,
+            COLUMN_IMAGE_URL,
+            COLUMN_WIKIPEDIA_LINK,
+            COLUMN_WIKIDATA_LINK,
+            COLUMN_COMMONS_LINK,
+            COLUMN_LAT,
+            COLUMN_LONG,
+            COLUMN_PIC,
+            COLUMN_EXISTS,
+        )
     private val client: ContentProviderClient = mock()
     private val database: SQLiteDatabase = mock()
     private val captor = argumentCaptor<ContentValues>()
@@ -55,16 +58,25 @@ class BookMarkLocationDaoTest {
     fun setUp() {
         exampleLabel = Label.FOREST
         exampleUri = Uri.parse("wikimedia/uri")
-        exampleLocation = LatLng(40.0,51.4, 1f)
+        exampleLocation = LatLng(40.0, 51.4, 1f)
 
         builder = Sitelinks.Builder()
         builder.setWikipediaLink("wikipediaLink")
         builder.setWikidataLink("wikidataLink")
         builder.setCommonsLink("commonsLink")
 
-
-        examplePlaceBookmark = Place("en", "placeName", exampleLabel, "placeDescription"
-            , exampleLocation, "placeCategory", builder.build(),"picName",false)
+        examplePlaceBookmark =
+            Place(
+                "en",
+                "placeName",
+                exampleLabel,
+                "placeDescription",
+                exampleLocation,
+                "placeCategory",
+                builder.build(),
+                "picName",
+                false,
+            )
         testObject = BookmarkLocationsDao { client }
     }
 
@@ -276,8 +288,8 @@ class BookMarkLocationDaoTest {
         verify(database).execSQL("ALTER TABLE bookmarksLocations ADD COLUMN location_exists STRING;")
     }
 
-    private fun createCursor(rows: Int): Cursor {
-        return MatrixCursor(columns, rows).apply {
+    private fun createCursor(rows: Int): Cursor =
+        MatrixCursor(columns, rows).apply {
             repeat(rows) {
                 newRow().apply {
                     add("placeName")
@@ -297,5 +309,4 @@ class BookMarkLocationDaoTest {
                 }
             }
         }
-    }
 }

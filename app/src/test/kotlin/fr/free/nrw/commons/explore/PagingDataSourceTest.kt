@@ -16,7 +16,6 @@ import org.mockito.Mockito.verifyNoInteractions
 import org.mockito.MockitoAnnotations
 
 class PagingDataSourceTest {
-
     private lateinit var loadingStates: PublishProcessor<LoadingState>
     private lateinit var searchDepictionsDataSource: TestPagingDataSource
 
@@ -31,7 +30,7 @@ class PagingDataSourceTest {
         searchDepictionsDataSource =
             TestPagingDataSource(
                 loadingStates,
-                mockGetItems
+                mockGetItems,
             )
     }
 
@@ -97,7 +96,8 @@ class PagingDataSourceTest {
         val callback: PositionalDataSource.LoadRangeCallback<String> = mock()
         val params = PositionalDataSource.LoadRangeParams(0, 1)
         whenever(mockGetItems.getItems(params.loadSize, params.startPosition))
-            .thenThrow(RuntimeException()).thenReturn(emptyList())
+            .thenThrow(RuntimeException())
+            .thenReturn(emptyList())
         val testSubscriber = loadingStates.test()
         searchDepictionsDataSource.loadRange(params, callback)
         verify(callback, never()).onResult(any())
@@ -107,17 +107,24 @@ class PagingDataSourceTest {
             LoadingState.Loading,
             LoadingState.Error,
             LoadingState.Loading,
-            LoadingState.Complete
+            LoadingState.Complete,
         )
     }
 }
 
-class TestPagingDataSource(loadingStates: LoadingStates, val mockGetItems: MockGetItems) :
-    PagingDataSource<String>(loadingStates) {
-    override fun getItems(loadSize: Int, startPosition: Int): List<String> =
-        mockGetItems.getItems(loadSize, startPosition)
+class TestPagingDataSource(
+    loadingStates: LoadingStates,
+    val mockGetItems: MockGetItems,
+) : PagingDataSource<String>(loadingStates) {
+    override fun getItems(
+        loadSize: Int,
+        startPosition: Int,
+    ): List<String> = mockGetItems.getItems(loadSize, startPosition)
 }
 
 interface MockGetItems {
-    fun getItems(loadSize: Int, startPosition: Int): List<String>
+    fun getItems(
+        loadSize: Int,
+        startPosition: Int,
+    ): List<String>
 }

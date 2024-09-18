@@ -38,7 +38,7 @@ class ContributionsRepositoryTest {
         whenever(localDataSource.getContributions())
             .thenReturn(createMockDataSourceFactory(listOf(contribution)))
         val contributionsFactory = contributionsRepository.fetchContributions()
-        verify(localDataSource, times(1)).getContributions();
+        verify(localDataSource, times(1)).getContributions()
     }
 
     @Test
@@ -46,8 +46,9 @@ class ContributionsRepositoryTest {
         val contributions = listOf(mock(Contribution::class.java))
         whenever(localDataSource.saveContributions(ArgumentMatchers.anyList()))
             .thenReturn(Single.just(listOf(1L)))
-        val save = contributionsRepository.save(contributions).test().assertValueAt(0) {
-            it.size == 1 && it.get(0) == 1L
-        }
+        val save =
+            contributionsRepository.save(contributions).test().assertValueAt(0) {
+                it.size == 1 && it.get(0) == 1L
+            }
     }
 }

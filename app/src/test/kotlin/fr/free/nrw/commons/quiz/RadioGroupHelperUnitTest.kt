@@ -8,12 +8,9 @@ import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import org.mockito.Mock
-import org.mockito.Mockito.`when`
-import org.mockito.Mockito.anyInt
 import org.mockito.MockitoAnnotations
 
 class RadioGroupHelperUnitTest {
-
     private lateinit var radioGroupHelper: RadioGroupHelper
 
     @Mock
@@ -54,5 +51,4 @@ class RadioGroupHelperUnitTest {
     fun constructor2() {
         radioGroupHelper = RadioGroupHelper(activity)
     }
-
 }

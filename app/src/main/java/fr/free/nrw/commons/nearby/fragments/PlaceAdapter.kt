@@ -11,9 +11,8 @@ class PlaceAdapter(
     onPlaceClicked: ((Place) -> Unit)? = null,
     onBookmarkClicked: (Place, Boolean) -> Unit,
     commonPlaceClickActions: CommonPlaceClickActions,
-    inAppCameraLocationPermissionLauncher: ActivityResultLauncher<Array<String>>
-) :
-    BaseDelegateAdapter<Place>(
+    inAppCameraLocationPermissionLauncher: ActivityResultLauncher<Array<String>>,
+) : BaseDelegateAdapter<Place>(
         placeAdapterDelegate(
             bookmarkLocationsDao,
             onPlaceClicked,
@@ -27,7 +26,7 @@ class PlaceAdapter(
             commonPlaceClickActions.onOverflowLongPressed(),
             commonPlaceClickActions.onDirectionsClicked(),
             commonPlaceClickActions.onDirectionsLongPressed(),
-            inAppCameraLocationPermissionLauncher
+            inAppCameraLocationPermissionLauncher,
         ),
-        areItemsTheSame = {oldItem, newItem -> oldItem.wikiDataEntityId == newItem.wikiDataEntityId }
+        areItemsTheSame = { oldItem, newItem -> oldItem.wikiDataEntityId == newItem.wikiDataEntityId },
     )

@@ -12,8 +12,10 @@ object DialogUtil {
      * @param activity the activity
      * @param dialog the dialog to be shown
      */
-    private fun showSafely(activity: Activity?, dialog: AlertDialog?):AlertDialog? {
-
+    private fun showSafely(
+        activity: Activity?,
+        dialog: AlertDialog?,
+    ): AlertDialog? {
         if (activity == null || dialog == null) {
             Timber.d("Show called with null activity / dialog. Ignoring.")
             return null
@@ -37,18 +39,17 @@ object DialogUtil {
         title: String?,
         message: String?,
         onPositiveBtnClick: Runnable?,
-        onNegativeBtnClick: Runnable?
-    ): AlertDialog? {
-        return createAndShowDialogSafely(
+        onNegativeBtnClick: Runnable?,
+    ): AlertDialog? =
+        createAndShowDialogSafely(
             activity = activity,
             title = title,
             message = message,
             positiveButtonText = activity.getString(R.string.yes),
             negativeButtonText = activity.getString(R.string.no),
             onPositiveBtnClick = onPositiveBtnClick,
-            onNegativeBtnClick = onNegativeBtnClick
+            onNegativeBtnClick = onNegativeBtnClick,
         )
-    }
 
     @JvmStatic
     fun showAlertDialog(
@@ -59,17 +60,16 @@ object DialogUtil {
         negativeButtonText: String?,
         onPositiveBtnClick: Runnable?,
         onNegativeBtnClick: Runnable?,
-    ): AlertDialog? {
-        return createAndShowDialogSafely(
+    ): AlertDialog? =
+        createAndShowDialogSafely(
             activity = activity,
             title = title,
             message = message,
             positiveButtonText = positiveButtonText,
             negativeButtonText = negativeButtonText,
             onPositiveBtnClick = onPositiveBtnClick,
-            onNegativeBtnClick = onNegativeBtnClick
+            onNegativeBtnClick = onNegativeBtnClick,
         )
-    }
 
     @JvmStatic
     fun showAlertDialog(
@@ -79,9 +79,9 @@ object DialogUtil {
         onPositiveBtnClick: Runnable?,
         onNegativeBtnClick: Runnable?,
         customView: View?,
-        cancelable: Boolean
-    ): AlertDialog? {
-        return createAndShowDialogSafely(
+        cancelable: Boolean,
+    ): AlertDialog? =
+        createAndShowDialogSafely(
             activity = activity,
             title = title,
             message = message,
@@ -90,9 +90,8 @@ object DialogUtil {
             onPositiveBtnClick = onPositiveBtnClick,
             onNegativeBtnClick = onNegativeBtnClick,
             customView = customView,
-            cancelable = cancelable
+            cancelable = cancelable,
         )
-    }
 
     @JvmStatic
     fun showAlertDialog(
@@ -104,9 +103,9 @@ object DialogUtil {
         onPositiveBtnClick: Runnable?,
         onNegativeBtnClick: Runnable?,
         customView: View?,
-        cancelable: Boolean
-    ): AlertDialog? {
-        return createAndShowDialogSafely(
+        cancelable: Boolean,
+    ): AlertDialog? =
+        createAndShowDialogSafely(
             activity = activity,
             title = title,
             message = message,
@@ -115,9 +114,8 @@ object DialogUtil {
             onPositiveBtnClick = onPositiveBtnClick,
             onNegativeBtnClick = onNegativeBtnClick,
             customView = customView,
-            cancelable = cancelable
+            cancelable = cancelable,
         )
-    }
 
     @JvmStatic
     fun showAlertDialog(
@@ -126,17 +124,16 @@ object DialogUtil {
         message: String?,
         positiveButtonText: String?,
         onPositiveBtnClick: Runnable?,
-        cancelable: Boolean
-    ): AlertDialog? {
-        return createAndShowDialogSafely(
+        cancelable: Boolean,
+    ): AlertDialog? =
+        createAndShowDialogSafely(
             activity = activity,
             title = title,
             message = message,
             positiveButtonText = positiveButtonText,
             onPositiveBtnClick = onPositiveBtnClick,
-            cancelable = cancelable
+            cancelable = cancelable,
         )
-    }
 
     /**
      * show a dialog
@@ -159,9 +156,8 @@ object DialogUtil {
         onPositiveBtnClick: Runnable? = null,
         onNegativeBtnClick: Runnable? = null,
         customView: View? = null,
-        cancelable: Boolean = true
+        cancelable: Boolean = true,
     ): AlertDialog? {
-
         /* If the custom view already has a parent, there is already a dialog showing with the view
          * This happens for on resume - return to avoid creating a second dialog - the first one
          * will still show
@@ -170,17 +166,22 @@ object DialogUtil {
             return null
         }
 
-        return showSafely(activity, AlertDialog.Builder(activity).apply {
-            title?.also{setTitle(title)}
-            message?.also{setMessage(message)}
-            setView(customView)
-            setCancelable(cancelable)
-            positiveButtonText?.let {
-                setPositiveButton(it) { _, _ -> onPositiveBtnClick?.run() }
-            }
-            negativeButtonText?.let {
-                setNegativeButton(it) { _, _ -> onNegativeBtnClick?.run() }
-            }
-        }.create())
+        return showSafely(
+            activity,
+            AlertDialog
+                .Builder(activity)
+                .apply {
+                    title?.also { setTitle(title) }
+                    message?.also { setMessage(message) }
+                    setView(customView)
+                    setCancelable(cancelable)
+                    positiveButtonText?.let {
+                        setPositiveButton(it) { _, _ -> onPositiveBtnClick?.run() }
+                    }
+                    negativeButtonText?.let {
+                        setNegativeButton(it) { _, _ -> onNegativeBtnClick?.run() }
+                    }
+                }.create(),
+        )
     }
 }

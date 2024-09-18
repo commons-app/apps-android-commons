@@ -28,7 +28,6 @@ import java.lang.reflect.Method
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
 class PicOfDayAppWidgetUnitTests {
-
     private lateinit var widget: PicOfDayAppWidget
     private lateinit var context: Context
 
@@ -83,14 +82,15 @@ class PicOfDayAppWidgetUnitTests {
     @Test
     @Throws(Exception::class)
     fun testLoadImageFromUrl() {
-        val method: Method = PicOfDayAppWidget::class.java.getDeclaredMethod(
-            "loadImageFromUrl",
-            String::class.java,
-            Context::class.java,
-            RemoteViews::class.java,
-            AppWidgetManager::class.java,
-            Int::class.java
-        )
+        val method: Method =
+            PicOfDayAppWidget::class.java.getDeclaredMethod(
+                "loadImageFromUrl",
+                String::class.java,
+                Context::class.java,
+                RemoteViews::class.java,
+                AppWidgetManager::class.java,
+                Int::class.java,
+            )
         method.isAccessible = true
         method.invoke(widget, "", context, views, appWidgetManager, 1)
     }
@@ -99,15 +99,15 @@ class PicOfDayAppWidgetUnitTests {
     @Throws(Exception::class)
     fun testLoadPictureOfTheDay() {
         `when`(mediaClient.getPictureOfTheDay()).thenReturn(Single.just(Media()))
-        val method: Method = PicOfDayAppWidget::class.java.getDeclaredMethod(
-            "loadPictureOfTheDay",
-            Context::class.java,
-            RemoteViews::class.java,
-            AppWidgetManager::class.java,
-            Int::class.java
-        )
+        val method: Method =
+            PicOfDayAppWidget::class.java.getDeclaredMethod(
+                "loadPictureOfTheDay",
+                Context::class.java,
+                RemoteViews::class.java,
+                AppWidgetManager::class.java,
+                Int::class.java,
+            )
         method.isAccessible = true
         method.invoke(widget, context, views, appWidgetManager, 1)
     }
-
 }

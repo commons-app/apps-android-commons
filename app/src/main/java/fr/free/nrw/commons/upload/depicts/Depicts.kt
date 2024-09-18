@@ -9,4 +9,7 @@ import java.util.*
  *  entity class for DepictsRoomDateBase
  */
 @Entity(tableName = "depicts_table")
-data class Depicts (@PrimaryKey val item: DepictedItem, val lastUsed:Date)
+data class Depicts(
+    @PrimaryKey val item: DepictedItem,
+    val lastUsed: Date,
+)

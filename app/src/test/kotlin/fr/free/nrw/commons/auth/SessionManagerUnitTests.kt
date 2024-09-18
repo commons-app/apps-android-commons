@@ -20,12 +20,10 @@ import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
 import java.lang.reflect.Method
 
-
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
 @LooperMode(LooperMode.Mode.PAUSED)
 class SessionManagerUnitTests {
-
     private lateinit var sessionManager: SessionManager
     private lateinit var accountManager: AccountManager
 
@@ -59,9 +57,10 @@ class SessionManagerUnitTests {
     @Test
     @Throws(Exception::class)
     fun testRemoveAccountCaseNull() {
-        val method: Method = SessionManager::class.java.getDeclaredMethod(
-            "removeAccount"
-        )
+        val method: Method =
+            SessionManager::class.java.getDeclaredMethod(
+                "removeAccount",
+            )
         method.isAccessible = true
         method.invoke(sessionManager)
     }
@@ -71,10 +70,11 @@ class SessionManagerUnitTests {
     fun testUpdateAccount() {
         `when`(loginResult.userName).thenReturn("username")
         `when`(loginResult.password).thenReturn("password")
-        val method: Method = SessionManager::class.java.getDeclaredMethod(
-            "updateAccount",
-            LoginResult::class.java
-        )
+        val method: Method =
+            SessionManager::class.java.getDeclaredMethod(
+                "updateAccount",
+                LoginResult::class.java,
+            )
         method.isAccessible = true
         method.invoke(sessionManager, loginResult)
     }
@@ -118,11 +118,12 @@ class SessionManagerUnitTests {
     @Test
     @Throws(Exception::class)
     fun testCreateAccount() {
-        val method: Method = SessionManager::class.java.getDeclaredMethod(
-            "createAccount",
-            String::class.java,
-            String::class.java
-        )
+        val method: Method =
+            SessionManager::class.java.getDeclaredMethod(
+                "createAccount",
+                String::class.java,
+                String::class.java,
+            )
         method.isAccessible = true
         Assert.assertEquals(method.invoke(sessionManager, "username", "password"), true)
     }
@@ -130,10 +131,11 @@ class SessionManagerUnitTests {
     @Test
     @Throws(Exception::class)
     fun testSetUserLoggedIn() {
-        val method: Method = SessionManager::class.java.getDeclaredMethod(
-            "setUserLoggedIn",
-            Boolean::class.java
-        )
+        val method: Method =
+            SessionManager::class.java.getDeclaredMethod(
+                "setUserLoggedIn",
+                Boolean::class.java,
+            )
         method.isAccessible = true
         method.invoke(sessionManager, true)
     }
@@ -141,9 +143,10 @@ class SessionManagerUnitTests {
     @Test
     @Throws(Exception::class)
     fun testGetUserName() {
-        val method: Method = SessionManager::class.java.getDeclaredMethod(
-            "getUserName"
-        )
+        val method: Method =
+            SessionManager::class.java.getDeclaredMethod(
+                "getUserName",
+            )
         method.isAccessible = true
         Assert.assertEquals(method.invoke(sessionManager), null)
     }
@@ -151,11 +154,11 @@ class SessionManagerUnitTests {
     @Test
     @Throws(Exception::class)
     fun testGetPassword() {
-        val method: Method = SessionManager::class.java.getDeclaredMethod(
-            "getPassword"
-        )
+        val method: Method =
+            SessionManager::class.java.getDeclaredMethod(
+                "getPassword",
+            )
         method.isAccessible = true
         Assert.assertEquals(method.invoke(sessionManager), null)
     }
-
 }

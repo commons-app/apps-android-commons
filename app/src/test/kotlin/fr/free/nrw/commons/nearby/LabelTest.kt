@@ -33,5 +33,4 @@ class LabelTest {
         var nullLabel: Label = Label.fromText("a random text not exist in label texts")
         assert(nullLabel.icon.equals(R.drawable.round_icon_unknown))
     }
-
 }

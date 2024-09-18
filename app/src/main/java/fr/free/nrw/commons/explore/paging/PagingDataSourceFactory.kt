@@ -14,13 +14,14 @@ import javax.inject.Inject
 private const val PAGE_SIZE = 50
 private const val INITIAL_LOAD_SIZE = 50
 
-abstract class PageableBaseDataSource<T>(private val liveDataConverter: LiveDataConverter) {
-
+abstract class PageableBaseDataSource<T>(
+    private val liveDataConverter: LiveDataConverter,
+) {
     lateinit var query: String
     private val dataSourceFactoryFactory: () -> PagingDataSourceFactory<T> = {
         dataSourceFactory(
             _loadingStates,
-            loadFunction
+            loadFunction,
         )
     }
     private val _loadingStates = PublishProcessor.create<LoadingState>()
@@ -38,7 +39,7 @@ abstract class PageableBaseDataSource<T>(private val liveDataConverter: LiveData
         _pagingResults.offer(
             liveDataConverter.convert(dataSourceFactoryFactory().also { currentFactory = it }) {
                 _noItemsLoadedEvent.offer(query)
-            }
+            },
         )
     }
 
@@ -47,52 +48,58 @@ abstract class PageableBaseDataSource<T>(private val liveDataConverter: LiveData
     }
 }
 
-class LiveDataConverter @Inject constructor() {
-    fun <T> convert(
-        dataSourceFactory: PagingDataSourceFactory<T>,
-        zeroItemsLoadedFunction: () -> Unit
-    ): LiveData<PagedList<T>> {
-        return dataSourceFactory.toLiveData(
-            Config(
-                pageSize = PAGE_SIZE,
-                initialLoadSizeHint = INITIAL_LOAD_SIZE,
-                enablePlaceholders = false
-            ),
-            boundaryCallback = object : PagedList.BoundaryCallback<T>() {
-                override fun onZeroItemsLoaded() {
-                    zeroItemsLoadedFunction()
-                }
-            }
-        )
+class LiveDataConverter
+    @Inject
+    constructor() {
+        fun <T> convert(
+            dataSourceFactory: PagingDataSourceFactory<T>,
+            zeroItemsLoadedFunction: () -> Unit,
+        ): LiveData<PagedList<T>> =
+            dataSourceFactory.toLiveData(
+                Config(
+                    pageSize = PAGE_SIZE,
+                    initialLoadSizeHint = INITIAL_LOAD_SIZE,
+                    enablePlaceholders = false,
+                ),
+                boundaryCallback =
+                    object : PagedList.BoundaryCallback<T>() {
+                        override fun onZeroItemsLoaded() {
+                            zeroItemsLoadedFunction()
+                        }
+                    },
+            )
     }
 
-}
-
-abstract class PagingDataSourceFactory<T>(val loadingStates: LoadingStates) :
-    DataSource.Factory<Int, T>() {
+abstract class PagingDataSourceFactory<T>(
+    val loadingStates: LoadingStates,
+) : DataSource.Factory<Int, T>() {
     private var currentDataSource: PagingDataSource<T>? = null
     abstract val loadFunction: LoadFunction<T>
 
     override fun create() =
         dataSource(
             loadingStates,
-            loadFunction
+            loadFunction,
         ).also { currentDataSource = it }
 
     fun retryFailedRequest() {
         currentDataSource?.retryFailedRequest()
     }
-
 }
 
-fun <T> dataSourceFactory(loadingStates: LoadingStates, loadFunction: LoadFunction<T>) =
-    object : PagingDataSourceFactory<T>(loadingStates) {
-        override val loadFunction: LoadFunction<T> = loadFunction
-    }
+fun <T> dataSourceFactory(
+    loadingStates: LoadingStates,
+    loadFunction: LoadFunction<T>,
+) = object : PagingDataSourceFactory<T>(loadingStates) {
+    override val loadFunction: LoadFunction<T> = loadFunction
+}
 
 sealed class LoadingState {
     object InitialLoad : LoadingState()
+
     object Loading : LoadingState()
+
     object Complete : LoadingState()
+
     object Error : LoadingState()
 }

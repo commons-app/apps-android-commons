@@ -14,7 +14,6 @@ import org.robolectric.annotation.Config
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
 class QuizQuestionTest {
-
     @Mock
     private lateinit var quizQuestion: QuizQuestion
 
@@ -28,13 +27,14 @@ class QuizQuestionTest {
     @Before
     fun setup() {
         MockitoAnnotations.openMocks(this)
-        quizQuestion = QuizQuestion(
-            QUESTION_NUM_SAMPLE_VALUE,
-            QUESTION_SAMPLE_VALUE,
-            QUESTION_URL_SAMPLE_VALUE_ONE,
-            IS_ANSWER_SAMPLE_VALUE,
-            ANSWER_MESSAGE_SAMPLE_VALUE
-        )
+        quizQuestion =
+            QuizQuestion(
+                QUESTION_NUM_SAMPLE_VALUE,
+                QUESTION_SAMPLE_VALUE,
+                QUESTION_URL_SAMPLE_VALUE_ONE,
+                IS_ANSWER_SAMPLE_VALUE,
+                ANSWER_MESSAGE_SAMPLE_VALUE,
+            )
     }
 
     @Test
@@ -47,5 +47,4 @@ class QuizQuestionTest {
         quizQuestion.setUrl(QUESTION_URL_SAMPLE_VALUE_TWO)
         assertEquals(quizQuestion.getUrl(), Uri.parse(QUESTION_URL_SAMPLE_VALUE_TWO))
     }
-
 }

@@ -21,15 +21,16 @@ import org.mockito.Mockito.*
 import org.mockito.MockitoAnnotations
 import java.util.*
 
-
 class ReasonBuilderTest {
-
     @Mock
     internal var sessionManager: SessionManager? = null
+
     @Mock
     internal var okHttpJsonApiClient: OkHttpJsonApiClient? = null
+
     @Mock
     internal var context: Context? = null
+
     @Mock
     internal var viewUtilWrapper: ViewUtilWrapper? = null
 
@@ -56,13 +57,13 @@ class ReasonBuilderTest {
         `when`(sessionManager?.userName).thenReturn("Testuser")
         `when`(sessionManager?.doesAccountExist()).thenReturn(true)
         `when`(okHttpJsonApiClient!!.getAchievements(anyString()))
-                .thenReturn(Single.just(mock(FeedbackResponse::class.java)))
+            .thenReturn(Single.just(mock(FeedbackResponse::class.java)))
         `when`(okHttpJsonApiClient!!.getLeaderboard(anyString(), anyString(), anyString(), anyString(), anyString()))
             .thenReturn(Observable.just(mock(LeaderboardResponse::class.java)))
         `when`(okHttpJsonApiClient!!.setAvatar(anyString(), anyString()))
             .thenReturn(Single.just(mock(UpdateAvatarResponse::class.java)))
 
-        val media = media(filename="test_file", dateUploaded = Date())
+        val media = media(filename = "test_file", dateUploaded = Date())
 
         reasonBuilder!!.getReason(media, "test")
         verify(sessionManager, times(0))!!.forceLogin(any(Context::class.java))

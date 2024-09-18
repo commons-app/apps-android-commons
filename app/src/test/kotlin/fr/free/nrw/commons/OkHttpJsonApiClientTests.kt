@@ -46,14 +46,15 @@ class OkHttpJsonApiClientTests {
     @Before
     fun setUp() {
         MockitoAnnotations.openMocks(this)
-        okHttpJsonApiClient = OkHttpJsonApiClient(
-            okhttpClient,
-            depictsClient,
-            wikiMediaToolforgeUrl,
-            sparqlQueryUrl,
-            campaignsUrl,
-            gson
-        )
+        okHttpJsonApiClient =
+            OkHttpJsonApiClient(
+                okhttpClient,
+                depictsClient,
+                wikiMediaToolforgeUrl,
+                sparqlQueryUrl,
+                campaignsUrl,
+                gson,
+            )
         Mockito.`when`(okhttpClient.newCall(any())).thenReturn(call)
         Mockito.`when`(call.execute()).thenReturn(response)
     }
@@ -69,7 +70,6 @@ class OkHttpJsonApiClientTests {
         }
         verify(okhttpClient).newCall(any())
         verify(call).execute()
-
     }
 
     @Test
@@ -83,6 +83,5 @@ class OkHttpJsonApiClientTests {
         }
         verify(okhttpClient).newCall(any())
         verify(call).execute()
-
     }
 }

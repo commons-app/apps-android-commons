@@ -11,19 +11,18 @@ import com.nhaarman.mockitokotlin2.*
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.bookmarks.models.Bookmark
 import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesContentProvider.BASE_URI
-import org.junit.runner.RunWith
-import org.robolectric.RobolectricTestRunner
-import org.robolectric.annotation.Config
 import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesDao.Table.*
 import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
+import org.junit.runner.RunWith
 import org.mockito.Mockito.verifyNoInteractions
+import org.robolectric.RobolectricTestRunner
+import org.robolectric.annotation.Config
 
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
 class BookmarkPictureDaoTest {
-
     private val columns = arrayOf(COLUMN_MEDIA_NAME, COLUMN_CREATOR)
     private val client: ContentProviderClient = mock()
     private val database: SQLiteDatabase = mock()
@@ -70,8 +69,7 @@ class BookmarkPictureDaoTest {
 
         var result = testObject.allBookmarks
 
-        assertEquals(14,(result.size))
-
+        assertEquals(14, (result.size))
     }
 
     @Test(expected = RuntimeException::class)
@@ -102,7 +100,6 @@ class BookmarkPictureDaoTest {
 
         verify(mockCursor).close()
     }
-
 
     @Test
     fun updateNewBookmark() {
@@ -210,9 +207,10 @@ class BookmarkPictureDaoTest {
         verify(database).execSQL(CREATE_TABLE_STATEMENT)
     }
 
-    private fun createCursor(rowCount: Int) = MatrixCursor(columns, rowCount).apply {
-        for (i in 0 until rowCount) {
-            addRow(listOf("mediaName", "creatorName"))
+    private fun createCursor(rowCount: Int) =
+        MatrixCursor(columns, rowCount).apply {
+            for (i in 0 until rowCount) {
+                addRow(listOf("mediaName", "creatorName"))
+            }
         }
-    }
 }

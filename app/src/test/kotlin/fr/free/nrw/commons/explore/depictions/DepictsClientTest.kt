@@ -9,17 +9,16 @@ import fr.free.nrw.commons.mwapi.Result
 import fr.free.nrw.commons.mwapi.SparqlResponse
 import fr.free.nrw.commons.upload.depicts.DepictsInterface
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
+import fr.free.nrw.commons.wikidata.model.*
 import fr.free.nrw.commons.wikidata.model.DepictSearchResponse
 import io.reactivex.Single
 import org.junit.Before
 import org.junit.Test
 import org.mockito.Mock
 import org.mockito.MockitoAnnotations
-import fr.free.nrw.commons.wikidata.model.*
 import java.lang.reflect.Method
 
 class DepictsClientTest {
-
     @Mock
     private lateinit var depictsInterface: DepictsInterface
     private lateinit var depictsClient: DepictsClient
@@ -35,15 +34,15 @@ class DepictsClientTest {
         val depictSearchResponse = mock<DepictSearchResponse>()
         whenever(depictsInterface.searchForDepicts("query", "1", "en", "en", "0"))
             .thenReturn(Single.just(depictSearchResponse))
-        whenever(depictSearchResponse.search).thenReturn(listOf(depictSearchItem("1"),depictSearchItem("2")))
+        whenever(depictSearchResponse.search).thenReturn(listOf(depictSearchItem("1"), depictSearchItem("2")))
         val entities = mock<Entities>()
         whenever(depictsInterface.getEntities("1|2")).thenReturn(Single.just(entities))
         whenever(entities.entities()).thenReturn(emptyMap())
-        depictsClient.searchForDepictions("query", 1, 0)
+        depictsClient
+            .searchForDepictions("query", 1, 0)
             .test()
             .assertValue(emptyList())
     }
-
 
     @Test
     fun getEntities() {
@@ -69,20 +68,32 @@ class DepictsClientTest {
         whenever(entities.entities()).thenReturn(mapOf("en" to entity))
         whenever(entity.statements).thenReturn(mapOf("P31" to listOf(statementPartial)))
         whenever(statementPartial.mainSnak).thenReturn(
-            Snak_partial("test", "P31",
+            Snak_partial(
+                "test",
+                "P31",
                 DataValue.EntityId(
-                    WikiBaseEntityValue("wikibase-entityid", "Q10", 10L)
-                )
-            )
+                    WikiBaseEntityValue("wikibase-entityid", "Q10", 10L),
+                ),
+            ),
         )
         whenever(depictsInterface.getEntities("Q10")).thenReturn(Single.just(entities))
         whenever(entity.id()).thenReturn("Q10")
-        depictsClient.toDepictions(Single.just(sparqlResponse))
+        depictsClient
+            .toDepictions(Single.just(sparqlResponse))
             .test()
-            .assertValue(listOf(
-                DepictedItem("", "", null,
-                    listOf("Q10"), emptyList(), false, "Q10")
-            ))
+            .assertValue(
+                listOf(
+                    DepictedItem(
+                        "",
+                        "",
+                        null,
+                        listOf("Q10"),
+                        emptyList(),
+                        false,
+                        "Q10",
+                    ),
+                ),
+            )
     }
 
     @Test
@@ -99,34 +110,49 @@ class DepictsClientTest {
         val entity = mock<Entities.Entity>()
         whenever(depictsInterface.getEntities("1|2")).thenReturn(Single.just(entities))
         whenever(entities.entities()).thenReturn(mapOf("en" to entity))
-        whenever(entity.descriptions()).thenReturn(mapOf("en" to
-                Entities.Label("en", "Test description")
-        ))
+        whenever(entity.descriptions()).thenReturn(
+            mapOf(
+                "en" to
+                    Entities.Label("en", "Test description"),
+            ),
+        )
         whenever(entity.id()).thenReturn("Q10")
-        depictsClient.toDepictions(Single.just(sparqlResponse))
+        depictsClient
+            .toDepictions(Single.just(sparqlResponse))
             .test()
-            .assertValue(listOf(
-                DepictedItem("", "", null, listOf("Q10"),
-                    emptyList(), false, "Q10")
-            ))
+            .assertValue(
+                listOf(
+                    DepictedItem(
+                        "",
+                        "",
+                        null,
+                        listOf("Q10"),
+                        emptyList(),
+                        false,
+                        "Q10",
+                    ),
+                ),
+            )
     }
 
     @Test
     fun `Test mapToDepictItem when description is not empty`() {
-        val method: Method = DepictsClient::class.java.getDeclaredMethod(
-            "mapToDepictItem",
-            Entities.Entity::class.java
-        )
+        val method: Method =
+            DepictsClient::class.java.getDeclaredMethod(
+                "mapToDepictItem",
+                Entities.Entity::class.java,
+            )
         method.isAccessible = true
         method.invoke(depictsClient, entity(descriptions = mapOf("en" to "Test")))
     }
 
     @Test
     fun `Test mapToDepictItem when description is empty and P31 doesn't exists`() {
-        val method: Method = DepictsClient::class.java.getDeclaredMethod(
-            "mapToDepictItem",
-            Entities.Entity::class.java
-        )
+        val method: Method =
+            DepictsClient::class.java.getDeclaredMethod(
+                "mapToDepictItem",
+                Entities.Entity::class.java,
+            )
         method.isAccessible = true
         method.invoke(depictsClient, entity())
     }
@@ -138,20 +164,23 @@ class DepictsClientTest {
         val statementPartial = mock<Statement_partial>()
         whenever(entity.statements).thenReturn(mapOf("P31" to listOf(statementPartial)))
         whenever(statementPartial.mainSnak).thenReturn(
-            Snak_partial("test", "P31",
+            Snak_partial(
+                "test",
+                "P31",
                 DataValue.EntityId(
-                    WikiBaseEntityValue("wikibase-entityid", "Q10", 10L)
-                )
-            )
+                    WikiBaseEntityValue("wikibase-entityid", "Q10", 10L),
+                ),
+            ),
         )
         whenever(depictsInterface.getEntities("Q10")).thenReturn(Single.just(entities))
         whenever(entities.entities())
             .thenReturn(mapOf("test" to entity))
         whenever(entity.id()).thenReturn("Q10")
-        val method: Method = DepictsClient::class.java.getDeclaredMethod(
-            "mapToDepictItem",
-            Entities.Entity::class.java
-        )
+        val method: Method =
+            DepictsClient::class.java.getDeclaredMethod(
+                "mapToDepictItem",
+                Entities.Entity::class.java,
+            )
         method.isAccessible = true
         method.invoke(depictsClient, entity)
     }

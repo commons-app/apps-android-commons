@@ -6,12 +6,10 @@ import io.reactivex.Scheduler
 import io.reactivex.disposables.CompositeDisposable
 import timber.log.Timber
 
-
 abstract class BasePagingPresenter<T>(
     val mainThreadScheduler: Scheduler,
-    val pageableBaseDataSource: PageableBaseDataSource<T>
+    val pageableBaseDataSource: PageableBaseDataSource<T>,
 ) : PagingContract.Presenter<T> {
-
     private val DUMMY: PagingContract.View<T> = proxy()
     private var view: PagingContract.View<T> = DUMMY
 
@@ -25,29 +23,30 @@ abstract class BasePagingPresenter<T>(
             pageableBaseDataSource.loadingStates
                 .observeOn(mainThreadScheduler)
                 .subscribe(::onLoadingState, Timber::e),
-            pageableBaseDataSource.noItemsLoadedQueries.subscribe(view::showEmptyText)
+            pageableBaseDataSource.noItemsLoadedQueries.subscribe(view::showEmptyText),
         )
     }
 
-    private fun onLoadingState(it: LoadingState) = when (it) {
-        LoadingState.Loading -> {
-            view.hideEmptyText()
-            listFooterData.postValue(listOf(FooterItem.LoadingItem))
+    private fun onLoadingState(it: LoadingState) =
+        when (it) {
+            LoadingState.Loading -> {
+                view.hideEmptyText()
+                listFooterData.postValue(listOf(FooterItem.LoadingItem))
+            }
+            LoadingState.Complete -> {
+                listFooterData.postValue(emptyList())
+                view.hideInitialLoadProgress()
+            }
+            LoadingState.InitialLoad -> {
+                view.hideEmptyText()
+                view.showInitialLoadInProgress()
+            }
+            LoadingState.Error -> {
+                view.showSnackbar()
+                view.hideInitialLoadProgress()
+                listFooterData.postValue(listOf(FooterItem.RefreshItem))
+            }
         }
-        LoadingState.Complete -> {
-            listFooterData.postValue(emptyList())
-            view.hideInitialLoadProgress()
-        }
-        LoadingState.InitialLoad -> {
-            view.hideEmptyText()
-            view.showInitialLoadInProgress()
-        }
-        LoadingState.Error -> {
-            view.showSnackbar()
-            view.hideInitialLoadProgress()
-            listFooterData.postValue(listOf(FooterItem.RefreshItem))
-        }
-    }
 
     override fun retryFailedRequest() {
         pageableBaseDataSource.retryFailedRequest()
@@ -61,5 +60,4 @@ abstract class BasePagingPresenter<T>(
     override fun onQueryUpdated(query: String) {
         pageableBaseDataSource.onQueryUpdated(query)
     }
-
 }

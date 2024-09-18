@@ -14,6 +14,7 @@ import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.createTestClient
 import fr.free.nrw.commons.delete.DeleteHelper
+import fr.free.nrw.commons.wikidata.mwapi.MwQueryPage
 import media
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
@@ -30,7 +31,6 @@ import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
 import org.robolectric.shadows.ShadowNotificationManager
 import org.robolectric.shadows.ShadowToast
-import fr.free.nrw.commons.wikidata.mwapi.MwQueryPage
 import java.lang.reflect.Method
 import java.util.*
 
@@ -38,7 +38,6 @@ import java.util.*
 @Config(sdk = [21], application = TestCommonsApplication::class)
 @LooperMode(LooperMode.Mode.PAUSED)
 class ReviewControllerTest {
-
     private lateinit var controller: ReviewController
     private lateinit var context: Context
     private lateinit var activity: Activity
@@ -82,7 +81,7 @@ class ReviewControllerTest {
             activity,
             activity.resources.getString(R.string.review_spam_report_question),
             ReviewController.DeleteReason.SPAM,
-            reviewCallback
+            reviewCallback,
         )
     }
 
@@ -95,7 +94,7 @@ class ReviewControllerTest {
             activity,
             activity.resources.getString(R.string.review_c_violation_report_question),
             ReviewController.DeleteReason.COPYRIGHT_VIOLATION,
-            reviewCallback
+            reviewCallback,
         )
     }
 
@@ -105,28 +104,33 @@ class ReviewControllerTest {
         controller.reportWrongCategory(activity, reviewCallback)
         assertEquals(
             ShadowToast.getTextOfLatestToast().toString(),
-            context.getString(R.string.check_category_toast, media.displayTitle)
+            context.getString(R.string.check_category_toast, media.displayTitle),
         )
     }
 
     @Test
     fun testPublishProgress() {
         shadowOf(Looper.getMainLooper()).idle()
-        val method: Method = ReviewController::class.java.getDeclaredMethod(
-            "publishProgress", Context::class.java, Int::class.java
-        )
+        val method: Method =
+            ReviewController::class.java.getDeclaredMethod(
+                "publishProgress",
+                Context::class.java,
+                Int::class.java,
+            )
         method.isAccessible = true
         method.invoke(controller, context, 1)
         assertNotNull(ShadowNotificationManager().allNotifications)
     }
 
-
     @Test
     fun testShowNotification() {
         shadowOf(Looper.getMainLooper()).idle()
-        val method: Method = ReviewController::class.java.getDeclaredMethod(
-            "showNotification", String::class.java, String::class.java
-        )
+        val method: Method =
+            ReviewController::class.java.getDeclaredMethod(
+                "showNotification",
+                String::class.java,
+                String::class.java,
+            )
         method.isAccessible = true
         method.invoke(controller, "", "")
         assertNotNull(ShadowNotificationManager().allNotifications)
@@ -141,25 +145,29 @@ class ReviewControllerTest {
         assertEquals(
             ShadowToast.getTextOfLatestToast().toString(),
             context.getString(
-                R.string.send_thank_toast, media.displayTitle
-            )
+                R.string.send_thank_toast,
+                media.displayTitle,
+            ),
         )
 
-        val method: Method = ReviewController::class.java.getDeclaredMethod(
-            "displayThanksToast", Context::class.java, Boolean::class.java
-        )
+        val method: Method =
+            ReviewController::class.java.getDeclaredMethod(
+                "displayThanksToast",
+                Context::class.java,
+                Boolean::class.java,
+            )
 
         method.isAccessible = true
-        method.invoke(controller,context,true)
+        method.invoke(controller, context, true)
 
         assertEquals(
             ShadowToast.getTextOfLatestToast().toString(),
             context.getString(
-                R.string.send_thank_success_message, media.displayTitle
-            )
+                R.string.send_thank_success_message,
+                media.displayTitle,
+            ),
         )
     }
-
 
     @Test
     fun testSendThanksCaseNull() {
@@ -168,8 +176,9 @@ class ReviewControllerTest {
         assertEquals(
             ShadowToast.getTextOfLatestToast().toString(),
             context.getString(
-                R.string.send_thank_toast, media.displayTitle
-            )
+                R.string.send_thank_toast,
+                media.displayTitle,
+            ),
         )
     }
 }

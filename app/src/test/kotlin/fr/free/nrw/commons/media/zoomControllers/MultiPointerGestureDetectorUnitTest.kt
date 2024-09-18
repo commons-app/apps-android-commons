@@ -14,7 +14,6 @@ import org.powermock.reflect.Whitebox
 import java.lang.reflect.Method
 
 class MultiPointerGestureDetectorUnitTest {
-
     private lateinit var detector: MultiPointerGestureDetector
 
     @Mock
@@ -42,9 +41,10 @@ class MultiPointerGestureDetectorUnitTest {
     @Test
     @Throws(Exception::class)
     fun testSetAvatarCaseNull() {
-        val method: Method = MultiPointerGestureDetector::class.java.getDeclaredMethod(
-            "shouldStartGesture"
-        )
+        val method: Method =
+            MultiPointerGestureDetector::class.java.getDeclaredMethod(
+                "shouldStartGesture",
+            )
         method.isAccessible = true
         Assert.assertEquals(method.invoke(detector), true)
     }
@@ -52,9 +52,10 @@ class MultiPointerGestureDetectorUnitTest {
     @Test
     @Throws(Exception::class)
     fun testStartGesture() {
-        val method: Method = MultiPointerGestureDetector::class.java.getDeclaredMethod(
-            "startGesture"
-        )
+        val method: Method =
+            MultiPointerGestureDetector::class.java.getDeclaredMethod(
+                "startGesture",
+            )
         method.isAccessible = true
         method.invoke(detector)
         verify(listener).onGestureBegin(detector)
@@ -64,9 +65,10 @@ class MultiPointerGestureDetectorUnitTest {
     @Throws(Exception::class)
     fun testStopGesture() {
         Whitebox.setInternalState(detector, "mGestureInProgress", true)
-        val method: Method = MultiPointerGestureDetector::class.java.getDeclaredMethod(
-            "stopGesture"
-        )
+        val method: Method =
+            MultiPointerGestureDetector::class.java.getDeclaredMethod(
+                "stopGesture",
+            )
         method.isAccessible = true
         method.invoke(detector)
         verify(listener).onGestureEnd(detector)
@@ -77,9 +79,11 @@ class MultiPointerGestureDetectorUnitTest {
     fun testUpdatePointersOnTap() {
         whenever(event.pointerCount).thenReturn(3)
         whenever(event.actionMasked).thenReturn(MotionEvent.ACTION_UP)
-        val method: Method = MultiPointerGestureDetector::class.java.getDeclaredMethod(
-            "updatePointersOnTap", MotionEvent::class.java
-        )
+        val method: Method =
+            MultiPointerGestureDetector::class.java.getDeclaredMethod(
+                "updatePointersOnTap",
+                MotionEvent::class.java,
+            )
         method.isAccessible = true
         method.invoke(detector, event)
         verify(event, times(2)).actionIndex
@@ -172,5 +176,4 @@ class MultiPointerGestureDetectorUnitTest {
         whenever(event.actionMasked).thenReturn(MotionEvent.ACTION_CANCEL)
         Assert.assertEquals(detector.onTouchEvent(event), true)
     }
-
 }

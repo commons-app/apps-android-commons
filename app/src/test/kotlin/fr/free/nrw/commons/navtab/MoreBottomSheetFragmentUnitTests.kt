@@ -16,8 +16,8 @@ import fr.free.nrw.commons.CommonsApplication
 import fr.free.nrw.commons.OkHttpConnectionFactory
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestCommonsApplication
-import fr.free.nrw.commons.createTestClient
 import fr.free.nrw.commons.actions.PageEditClient
+import fr.free.nrw.commons.createTestClient
 import fr.free.nrw.commons.feedback.model.Feedback
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.profile.ProfileActivity
@@ -40,12 +40,10 @@ import org.robolectric.shadows.ShadowAlertDialog
 import org.robolectric.shadows.ShadowDialog
 import java.lang.reflect.Method
 
-
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
 @LooperMode(LooperMode.Mode.PAUSED)
 class MoreBottomSheetFragmentUnitTests {
-
     private lateinit var fragment: MoreBottomSheetFragment
     private lateinit var view: View
     private lateinit var layoutInflater: LayoutInflater
@@ -75,7 +73,7 @@ class MoreBottomSheetFragmentUnitTests {
         Whitebox.setInternalState(fragment, "pageEditClient", pageEditClient)
 
         `when`(store.getBoolean(CommonsApplication.IS_LIMITED_CONNECTION_MODE_ENABLED)).thenReturn(
-            true
+            true,
         )
 
         layoutInflater = LayoutInflater.from(activity)
@@ -197,8 +195,7 @@ class MoreBottomSheetFragmentUnitTests {
         Assert.assertEquals(startedIntent.`data`, Uri.parse("mailto:"))
         Assert.assertEquals(
             startedIntent.extras?.get(Intent.EXTRA_SUBJECT),
-            CommonsApplication.FEEDBACK_EMAIL_SUBJECT
+            CommonsApplication.FEEDBACK_EMAIL_SUBJECT,
         )
     }
-
 }

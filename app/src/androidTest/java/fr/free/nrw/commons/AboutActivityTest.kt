@@ -25,7 +25,6 @@ import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 class AboutActivityTest {
-
     @get:Rule
     var activityRule: ActivityTestRule<*> = ActivityTestRule(AboutActivity::class.java)
 
@@ -36,7 +35,8 @@ class AboutActivityTest {
         device.setOrientationNatural()
         device.freezeRotation()
         Intents.init()
-        Intents.intending(CoreMatchers.not(IntentMatchers.isInternal()))
+        Intents
+            .intending(CoreMatchers.not(IntentMatchers.isInternal()))
             .respondWith(Instrumentation.ActivityResult(Activity.RESULT_OK, null))
     }
 
@@ -47,11 +47,12 @@ class AboutActivityTest {
 
     @Test
     fun testBuildNumber() {
-        Espresso.onView(ViewMatchers.withId(R.id.about_version))
+        Espresso
+            .onView(ViewMatchers.withId(R.id.about_version))
             .check(
                 ViewAssertions.matches(
-                    withText(getApplicationContext<CommonsApplication>().getVersionNameWithSha())
-                )
+                    withText(getApplicationContext<CommonsApplication>().getVersionNameWithSha()),
+                ),
             )
     }
 
@@ -61,8 +62,8 @@ class AboutActivityTest {
         Intents.intended(
             CoreMatchers.allOf(
                 IntentMatchers.hasAction(Intent.ACTION_VIEW),
-                IntentMatchers.hasData(Urls.WEBSITE_URL)
-            )
+                IntentMatchers.hasData(Urls.WEBSITE_URL),
+            ),
         )
     }
 
@@ -73,8 +74,8 @@ class AboutActivityTest {
             CoreMatchers.anyOf(
                 IntentMatchers.hasAction(Intent.ACTION_VIEW),
                 IntentMatchers.hasData(Urls.FACEBOOK_WEB_URL),
-                IntentMatchers.hasPackage(Urls.FACEBOOK_PACKAGE_NAME)
-            )
+                IntentMatchers.hasPackage(Urls.FACEBOOK_PACKAGE_NAME),
+            ),
         )
     }
 
@@ -84,8 +85,8 @@ class AboutActivityTest {
         Intents.intended(
             CoreMatchers.allOf(
                 IntentMatchers.hasAction(Intent.ACTION_VIEW),
-                IntentMatchers.hasData(Urls.GITHUB_REPO_URL)
-            )
+                IntentMatchers.hasData(Urls.GITHUB_REPO_URL),
+            ),
         )
     }
 
@@ -95,8 +96,8 @@ class AboutActivityTest {
         Intents.intended(
             CoreMatchers.allOf(
                 IntentMatchers.hasAction(Intent.ACTION_VIEW),
-                IntentMatchers.hasData(BuildConfig.PRIVACY_POLICY_URL)
-            )
+                IntentMatchers.hasData(BuildConfig.PRIVACY_POLICY_URL),
+            ),
         )
     }
 
@@ -108,8 +109,8 @@ class AboutActivityTest {
         Intents.intended(
             CoreMatchers.allOf(
                 IntentMatchers.hasAction(Intent.ACTION_VIEW),
-                IntentMatchers.hasData("${Urls.TRANSLATE_WIKI_URL}$langCode")
-            )
+                IntentMatchers.hasData("${Urls.TRANSLATE_WIKI_URL}$langCode"),
+            ),
         )
     }
 
@@ -119,18 +120,21 @@ class AboutActivityTest {
         Intents.intended(
             CoreMatchers.allOf(
                 IntentMatchers.hasAction(Intent.ACTION_VIEW),
-                IntentMatchers.hasData(Urls.CREDITS_URL)
-            )
+                IntentMatchers.hasData(Urls.CREDITS_URL),
+            ),
         )
     }
 
     @Test
     fun testLaunchUserGuide() {
         Espresso.onView(ViewMatchers.withId(R.id.about_user_guide)).perform(ViewActions.click())
-        Intents.intended(CoreMatchers.allOf(IntentMatchers.hasAction(Intent.ACTION_VIEW),
-            IntentMatchers.hasData(Urls.USER_GUIDE_URL)))
+        Intents.intended(
+            CoreMatchers.allOf(
+                IntentMatchers.hasAction(Intent.ACTION_VIEW),
+                IntentMatchers.hasData(Urls.USER_GUIDE_URL),
+            ),
+        )
     }
-
 
     @Test
     fun testLaunchAboutFaq() {
@@ -138,8 +142,8 @@ class AboutActivityTest {
         Intents.intended(
             CoreMatchers.allOf(
                 IntentMatchers.hasAction(Intent.ACTION_VIEW),
-                IntentMatchers.hasData(Urls.FAQ_URL)
-            )
+                IntentMatchers.hasData(Urls.FAQ_URL),
+            ),
         )
     }
 }

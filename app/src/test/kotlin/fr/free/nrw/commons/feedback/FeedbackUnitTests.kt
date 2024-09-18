@@ -61,5 +61,4 @@ class FeedbackUnitTests {
         feedback.networkType = "network"
         Assert.assertEquals(feedback.networkType, "network")
     }
-
 }

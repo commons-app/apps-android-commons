@@ -25,7 +25,6 @@ import org.robolectric.annotation.Config
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
 class QuizActivityUnitTest {
-
     private val SAMPLE_ALERT_TITLE_VALUE = "Title"
     private val SAMPLE_ALERT_MESSAGE_VALUE = "Message"
 
@@ -45,9 +44,12 @@ class QuizActivityUnitTest {
         Fresco.initialize(ApplicationProvider.getApplicationContext())
         activity = Robolectric.buildActivity(QuizActivity::class.java).create().get()
         context = mock(Context::class.java)
-        view = LayoutInflater.from(activity)
-            .inflate(R.layout.answer_layout, null) as View
-        Mockito.`when`(context.getString(Mockito.any(Int::class.java)))
+        view =
+            LayoutInflater
+                .from(activity)
+                .inflate(R.layout.answer_layout, null) as View
+        Mockito
+            .`when`(context.getString(Mockito.any(Int::class.java)))
             .thenReturn("")
         quizController = QuizController()
         quizController.initialize(context)
@@ -88,5 +90,4 @@ class QuizActivityUnitTest {
     fun testCustomAlert() {
         activity.customAlert(SAMPLE_ALERT_TITLE_VALUE, SAMPLE_ALERT_MESSAGE_VALUE)
     }
-
 }

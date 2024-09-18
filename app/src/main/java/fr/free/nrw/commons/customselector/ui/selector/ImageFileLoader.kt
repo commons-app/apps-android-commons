@@ -20,8 +20,9 @@ import kotlin.coroutines.CoroutineContext
  * Custom Selector Image File Loader.
  * Loads device images.
  */
-class ImageFileLoader(val context: Context) : CoroutineScope{
-
+class ImageFileLoader(
+    val context: Context,
+) : CoroutineScope {
     /**
      * Coroutine context for fetching images.
      */
@@ -30,14 +31,15 @@ class ImageFileLoader(val context: Context) : CoroutineScope{
     /**
      * Media paramerters required.
      */
-    private val projection = arrayOf(
-        MediaStore.Images.Media._ID,
-        MediaStore.Images.Media.DISPLAY_NAME,
-        MediaStore.Images.Media.DATA,
-        MediaStore.Images.Media.BUCKET_ID,
-        MediaStore.Images.Media.BUCKET_DISPLAY_NAME,
-        MediaStore.Images.Media.DATE_ADDED
-    )
+    private val projection =
+        arrayOf(
+            MediaStore.Images.Media._ID,
+            MediaStore.Images.Media.DISPLAY_NAME,
+            MediaStore.Images.Media.DATA,
+            MediaStore.Images.Media.BUCKET_ID,
+            MediaStore.Images.Media.BUCKET_DISPLAY_NAME,
+            MediaStore.Images.Media.DATE_ADDED,
+        )
 
     /**
      * Load Device Images under coroutine.
@@ -50,12 +52,18 @@ class ImageFileLoader(val context: Context) : CoroutineScope{
         }
     }
 
-
     /**
      * Load Device images using cursor
      */
-    private fun getImages(listener:ImageLoaderListener) {
-        val cursor = context.contentResolver.query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, projection, null, null, MediaStore.Images.Media.DATE_ADDED + " DESC")
+    private fun getImages(listener: ImageLoaderListener) {
+        val cursor =
+            context.contentResolver.query(
+                MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+                projection,
+                null,
+                null,
+                MediaStore.Images.Media.DATE_ADDED + " DESC",
+            )
         if (cursor == null) {
             listener.onFailed(NullPointerException())
             return
@@ -85,10 +93,12 @@ class ImageFileLoader(val context: Context) : CoroutineScope{
                 val file =
                     if (path == null || path.isEmpty()) {
                         null
-                    } else try {
-                        File(path)
-                    } catch (ignored: Exception) {
-                        null
+                    } else {
+                        try {
+                            File(path)
+                        } catch (ignored: Exception) {
+                            null
+                        }
                     }
 
                 if (file != null && file.exists() && name != null && path != null && bucketName != null) {
@@ -106,30 +116,29 @@ class ImageFileLoader(val context: Context) : CoroutineScope{
                     val dateFormat = DateFormat.getMediumDateFormat(context)
                     val formattedDate = dateFormat.format(date)
 
-                    val image = Image(
-                        id,
-                        name,
-                        uri,
-                        path,
-                        bucketId,
-                        bucketName,
-                        date = (formattedDate)
-                    )
+                    val image =
+                        Image(
+                            id,
+                            name,
+                            uri,
+                            path,
+                            bucketId,
+                            bucketName,
+                            date = (formattedDate),
+                        )
                     images.add(image)
                 }
-
             } while (cursor.moveToNext())
         }
         cursor.close()
         listener.onImageLoaded(images)
     }
 
-
     /**
      * Abort loading images.
      */
-    fun abortLoadImage(){
-        //todo Abort loading images.
+    fun abortLoadImage() {
+        // todo Abort loading images.
     }
 
     /*

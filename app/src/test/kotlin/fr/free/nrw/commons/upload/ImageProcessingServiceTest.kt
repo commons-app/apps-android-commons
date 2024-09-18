@@ -20,14 +20,19 @@ import java.io.FileInputStream
 class ImageProcessingServiceTest {
     @Mock
     internal var fileUtilsWrapper: FileUtilsWrapper? = null
+
     @Mock
     internal var imageUtilsWrapper: ImageUtilsWrapper? = null
+
     @Mock
-    internal var readFBMD: ReadFBMD?=null
+    internal var readFBMD: ReadFBMD? = null
+
     @Mock
-    internal var readEXIF: EXIFReader?=null
+    internal var readEXIF: EXIFReader? = null
+
     @Mock
     internal var mediaClient: MediaClient? = null
+
     @Mock
     internal var location: LatLng? = null
 
@@ -60,31 +65,31 @@ class ImageProcessingServiceTest {
         `when`(uploadItem.fileName).thenReturn("File:jpg")
 
         `when`(fileUtilsWrapper!!.getFileInputStream(ArgumentMatchers.anyString()))
-                .thenReturn(mock(FileInputStream::class.java))
+            .thenReturn(mock(FileInputStream::class.java))
         `when`(fileUtilsWrapper!!.getSHA1(any(FileInputStream::class.java)))
-                .thenReturn("fileSha")
+            .thenReturn("fileSha")
 
         `when`(fileUtilsWrapper!!.getGeolocationOfFile(ArgumentMatchers.anyString(), any(LatLng::class.java)))
-                .thenReturn("latLng")
+            .thenReturn("latLng")
 
         `when`(imageUtilsWrapper?.checkIfImageIsTooDark(ArgumentMatchers.anyString()))
-                .thenReturn(Single.just(ImageUtils.IMAGE_OK))
+            .thenReturn(Single.just(ImageUtils.IMAGE_OK))
 
         `when`(imageUtilsWrapper!!.checkImageGeolocationIsDifferent(ArgumentMatchers.anyString(), any(LatLng::class.java)))
-                .thenReturn(Single.just(ImageUtils.IMAGE_OK))
+            .thenReturn(Single.just(ImageUtils.IMAGE_OK))
 
         `when`(fileUtilsWrapper!!.getFileInputStream(ArgumentMatchers.anyString()))
-                .thenReturn(mock(FileInputStream::class.java))
+            .thenReturn(mock(FileInputStream::class.java))
         `when`(fileUtilsWrapper!!.getSHA1(any(FileInputStream::class.java)))
-                .thenReturn("fileSha")
+            .thenReturn("fileSha")
         `when`(mediaClient!!.checkFileExistsUsingSha(ArgumentMatchers.anyString()))
-                .thenReturn(Single.just(false))
+            .thenReturn(Single.just(false))
         `when`(mediaClient?.checkPageExistsUsingTitle(ArgumentMatchers.anyString()))
-                .thenReturn(Single.just(false))
+            .thenReturn(Single.just(false))
         `when`(readFBMD?.processMetadata(ArgumentMatchers.any()))
-                .thenReturn(Single.just(ImageUtils.IMAGE_OK))
+            .thenReturn(Single.just(ImageUtils.IMAGE_OK))
         `when`(readEXIF?.processMetadata(ArgumentMatchers.anyString()))
-                .thenReturn(Single.just(ImageUtils.IMAGE_OK))
+            .thenReturn(Single.just(ImageUtils.IMAGE_OK))
     }
 
     @Test
@@ -97,7 +102,7 @@ class ImageProcessingServiceTest {
     @Test
     fun validateImageForDuplicateImage() {
         `when`(mediaClient!!.checkFileExistsUsingSha(ArgumentMatchers.anyString()))
-                .thenReturn(Single.just(true))
+            .thenReturn(Single.just(true))
         val validateImage = imageProcessingService!!.validateImage(uploadItem, location)
         assertEquals(ImageUtils.IMAGE_DUPLICATE, validateImage.blockingGet())
     }
@@ -111,7 +116,7 @@ class ImageProcessingServiceTest {
     @Test
     fun validateImageForDarkImage() {
         `when`(imageUtilsWrapper?.checkIfImageIsTooDark(ArgumentMatchers.anyString()))
-                .thenReturn(Single.just(ImageUtils.IMAGE_DARK))
+            .thenReturn(Single.just(ImageUtils.IMAGE_DARK))
         val validateImage = imageProcessingService!!.validateImage(uploadItem, location)
         assertEquals(ImageUtils.IMAGE_DARK, validateImage.blockingGet())
     }
@@ -119,7 +124,7 @@ class ImageProcessingServiceTest {
     @Test
     fun validateImageForWrongGeoLocation() {
         `when`(imageUtilsWrapper!!.checkImageGeolocationIsDifferent(ArgumentMatchers.anyString(), any(LatLng::class.java)))
-                .thenReturn(Single.just(ImageUtils.IMAGE_GEOLOCATION_DIFFERENT))
+            .thenReturn(Single.just(ImageUtils.IMAGE_GEOLOCATION_DIFFERENT))
         val validateImage = imageProcessingService!!.validateImage(uploadItem, location)
         assertEquals(ImageUtils.IMAGE_GEOLOCATION_DIFFERENT, validateImage.blockingGet())
     }
@@ -127,7 +132,7 @@ class ImageProcessingServiceTest {
     @Test
     fun validateImageForFileNameExistsWithCheckTitleOn() {
         `when`(mediaClient?.checkPageExistsUsingTitle(ArgumentMatchers.anyString()))
-                .thenReturn(Single.just(true))
+            .thenReturn(Single.just(true))
         val validateImage = imageProcessingService!!.validateCaption(uploadItem)
         assertEquals(ImageUtils.FILE_NAME_EXISTS, validateImage.blockingGet())
     }

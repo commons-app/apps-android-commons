@@ -12,9 +12,10 @@ import org.junit.Test
 import org.mockito.Mock
 import org.mockito.MockitoAnnotations
 
-class PageableParentCategoriesDataSourceTest{
+class PageableParentCategoriesDataSourceTest {
     @Mock
     lateinit var categoryClient: CategoryClient
+
     @Mock
     lateinit var liveDataConverter: LiveDataConverter
 

@@ -25,7 +25,6 @@ import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.LocationPicker.LocationPickerActivity
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.OkHttpConnectionFactory
-import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.createTestClient
 import fr.free.nrw.commons.databinding.FragmentMediaDetailBinding
@@ -60,7 +59,6 @@ import java.util.*
 @Config(sdk = [21], application = TestCommonsApplication::class)
 @LooperMode(LooperMode.Mode.PAUSED)
 class MediaDetailFragmentUnitTests {
-
     private val REQUEST_CODE = 1001
     private val LAST_LOCATION = "last_location_while_uploading"
     private lateinit var fragment: MediaDetailFragment
@@ -79,7 +77,6 @@ class MediaDetailFragmentUnitTests {
 
     @Mock
     private lateinit var delete: Button
-
 
     private var isDeleted = true
 
@@ -138,21 +135,20 @@ class MediaDetailFragmentUnitTests {
     private lateinit var intent: Intent
 
     private lateinit var activity: SearchActivity
-    
+
     @Mock
     private lateinit var mockContext: Context
-    
+
     @Mock
     private lateinit var mockSharedPreferences: SharedPreferences
-    
+
     @Mock
-    private lateinit var mockSharedPreferencesEditor:  SharedPreferences.Editor
+    private lateinit var mockSharedPreferencesEditor: SharedPreferences.Editor
 
     private lateinit var binding: FragmentMediaDetailBinding
 
     @Before
     fun setUp() {
-
         MockitoAnnotations.openMocks(this)
 
         context = ApplicationProvider.getApplicationContext()
@@ -327,10 +323,11 @@ class MediaDetailFragmentUnitTests {
     @Test
     @Throws(Exception::class)
     fun testExtractDescription() {
-        val method: Method = MediaDetailFragment::class.java.getDeclaredMethod(
-            "extractDescription",
-            String::class.java
-        )
+        val method: Method =
+            MediaDetailFragment::class.java.getDeclaredMethod(
+                "extractDescription",
+                String::class.java,
+            )
         method.isAccessible = true
         method.invoke(fragment, "")
     }
@@ -339,9 +336,10 @@ class MediaDetailFragmentUnitTests {
     @Throws(Exception::class)
     fun testGetDescription() {
         `when`(media.filename).thenReturn("")
-        val method: Method = MediaDetailFragment::class.java.getDeclaredMethod(
-            "getDescription"
-        )
+        val method: Method =
+            MediaDetailFragment::class.java.getDeclaredMethod(
+                "getDescription",
+            )
         method.isAccessible = true
         method.invoke(fragment)
     }
@@ -352,7 +350,8 @@ class MediaDetailFragmentUnitTests {
         `when`(media.filename).thenReturn("")
         val method: Method = MediaDetailFragment::class.java.getDeclaredMethod("getDescriptions", String::class.java)
         method.isAccessible = true
-        val s = "=={{int:filedesc}}==\n" +
+        val s =
+            "=={{int:filedesc}}==\n" +
                 "{{Information\n" +
                 "|description={{en|1=Antique cash register in a cafe, Darjeeling}}\n" +
                 "|date=2017-05-17 17:07:26\n" +
@@ -373,7 +372,8 @@ class MediaDetailFragmentUnitTests {
         `when`(media.filename).thenReturn("")
         val method: Method = MediaDetailFragment::class.java.getDeclaredMethod("getDescriptions", String::class.java)
         method.isAccessible = true
-        val s = "=={{int:filedesc}}==\n" +
+        val s =
+            "=={{int:filedesc}}==\n" +
                 "{{Information\n" +
                 "|description={{en|1=[[:en:Fitzrovia Chapel|Fitzrovia Chapel]] ceiling<br/>\n" +
                 "{{On Wikidata|Q17549757}}}}\n" +
@@ -396,7 +396,8 @@ class MediaDetailFragmentUnitTests {
         `when`(media.filename).thenReturn("")
         val method: Method = MediaDetailFragment::class.java.getDeclaredMethod("getDescriptions", String::class.java)
         method.isAccessible = true
-        val s = "=={{int:filedesc}}==\n" +
+        val s =
+            "=={{int:filedesc}}==\n" +
                 "{{Information\n" +
                 "|description={{en|1=[[:en:Fitzrovia Chapel|Fitzrovia Chapel]] ceiling<br/>\n" +
                 "}}{{Listed building England|1223496}}\n" +
@@ -419,7 +420,8 @@ class MediaDetailFragmentUnitTests {
         `when`(media.filename).thenReturn("")
         val method: Method = MediaDetailFragment::class.java.getDeclaredMethod("getDescriptions", String::class.java)
         method.isAccessible = true
-        val s = "=={{int:filedesc}}==\n" +
+        val s =
+            "=={{int:filedesc}}==\n" +
                 "{{Artwork\n" +
                 " |artist = {{Creator:Filippo Peroni}} Restored by {{Creator:Adam Cuerden}}\n" +
                 " |author = \n" +
@@ -447,8 +449,11 @@ class MediaDetailFragmentUnitTests {
                 " |references = \n" +
                 " |wikidata = \n" +
                 "}}"
-        val map = linkedMapOf("en" to "''Ricchi giardini nel Palazzo di Monforte a Palermo'', set design for ''I Vespri siciliani'' act 5 (undated).",
-        "it" to "''Ricchi giardini nel Palazzo di Monforte a Palermo'', bozzetto per ''I Vespri siciliani'' atto 5 (s.d.).")
+        val map =
+            linkedMapOf(
+                "en" to "''Ricchi giardini nel Palazzo di Monforte a Palermo'', set design for ''I Vespri siciliani'' act 5 (undated).",
+                "it" to "''Ricchi giardini nel Palazzo di Monforte a Palermo'', bozzetto per ''I Vespri siciliani'' atto 5 (s.d.).",
+            )
         Assert.assertEquals(map, method.invoke(fragment, s))
     }
 
@@ -458,7 +463,8 @@ class MediaDetailFragmentUnitTests {
         `when`(media.filename).thenReturn("")
         val method: Method = MediaDetailFragment::class.java.getDeclaredMethod("getDescriptions", String::class.java)
         method.isAccessible = true
-        val s = "=={{int:filedesc}}==\n" +
+        val s =
+            "=={{int:filedesc}}==\n" +
                 "{{Information\n" +
                 "|Description   ={{en|1=The interior of Sacred Heart RC Church, Wimbledon, London.}}\n" +
                 "|Source        ={{own}}\n" +
@@ -475,9 +481,10 @@ class MediaDetailFragmentUnitTests {
     @Throws(Exception::class)
     fun testGetDescriptionList() {
         `when`(media.filename).thenReturn("")
-        val method: Method = MediaDetailFragment::class.java.getDeclaredMethod(
-            "getDescriptionList"
-        )
+        val method: Method =
+            MediaDetailFragment::class.java.getDeclaredMethod(
+                "getDescriptionList",
+            )
         method.isAccessible = true
         method.invoke(fragment)
     }
@@ -486,9 +493,10 @@ class MediaDetailFragmentUnitTests {
     @Throws(Exception::class)
     fun testGetCaptions() {
         `when`(media.captions).thenReturn(mapOf(Pair("a", "b")))
-        val method: Method = MediaDetailFragment::class.java.getDeclaredMethod(
-            "getCaptions"
-        )
+        val method: Method =
+            MediaDetailFragment::class.java.getDeclaredMethod(
+                "getCaptions",
+            )
         method.isAccessible = true
         method.invoke(fragment)
     }
@@ -497,9 +505,10 @@ class MediaDetailFragmentUnitTests {
     @Throws(Exception::class)
     fun testGetCaptionsCaseEmpty() {
         `when`(media.captions).thenReturn(mapOf())
-        val method: Method = MediaDetailFragment::class.java.getDeclaredMethod(
-            "getCaptions"
-        )
+        val method: Method =
+            MediaDetailFragment::class.java.getDeclaredMethod(
+                "getCaptions",
+            )
         method.isAccessible = true
         method.invoke(fragment)
     }
@@ -512,9 +521,10 @@ class MediaDetailFragmentUnitTests {
             MediaDetailFragment::class.java.getDeclaredField("descriptionHtmlCode")
         field.isAccessible = true
         field.set(fragment, null)
-        val method: Method = MediaDetailFragment::class.java.getDeclaredMethod(
-            "setUpCaptionAndDescriptionLayout"
-        )
+        val method: Method =
+            MediaDetailFragment::class.java.getDeclaredMethod(
+                "setUpCaptionAndDescriptionLayout",
+            )
         method.isAccessible = true
         method.invoke(fragment)
     }
@@ -557,10 +567,11 @@ class MediaDetailFragmentUnitTests {
     @Test
     @Throws(Exception::class)
     fun testPrettyCoordinatesCaseNull() {
-        val method: Method = MediaDetailFragment::class.java.getDeclaredMethod(
-            "prettyCoordinates",
-            Media::class.java
-        )
+        val method: Method =
+            MediaDetailFragment::class.java.getDeclaredMethod(
+                "prettyCoordinates",
+                Media::class.java,
+            )
         method.isAccessible = true
         method.invoke(fragment, media)
     }
@@ -569,10 +580,11 @@ class MediaDetailFragmentUnitTests {
     @Throws(Exception::class)
     fun testPrettyCoordinates() {
         `when`(media.coordinates).thenReturn(LatLng(-0.000001, -0.999999, 0f))
-        val method: Method = MediaDetailFragment::class.java.getDeclaredMethod(
-            "prettyCoordinates",
-            Media::class.java
-        )
+        val method: Method =
+            MediaDetailFragment::class.java.getDeclaredMethod(
+                "prettyCoordinates",
+                Media::class.java,
+            )
         method.isAccessible = true
         method.invoke(fragment, media)
     }
@@ -581,10 +593,11 @@ class MediaDetailFragmentUnitTests {
     @Throws(Exception::class)
     fun testPrettyUploadedDateCaseNull() {
         `when`(media.dateUploaded).thenReturn(null)
-        val method: Method = MediaDetailFragment::class.java.getDeclaredMethod(
-            "prettyUploadedDate",
-            Media::class.java
-        )
+        val method: Method =
+            MediaDetailFragment::class.java.getDeclaredMethod(
+                "prettyUploadedDate",
+                Media::class.java,
+            )
         method.isAccessible = true
         method.invoke(fragment, media)
     }
@@ -593,10 +606,11 @@ class MediaDetailFragmentUnitTests {
     @Throws(Exception::class)
     fun testPrettyUploadedDateCaseNonNull() {
         `when`(media.dateUploaded).thenReturn(Date(2000, 1, 1))
-        val method: Method = MediaDetailFragment::class.java.getDeclaredMethod(
-            "prettyUploadedDate",
-            Media::class.java
-        )
+        val method: Method =
+            MediaDetailFragment::class.java.getDeclaredMethod(
+                "prettyUploadedDate",
+                Media::class.java,
+            )
         method.isAccessible = true
         method.invoke(fragment, media)
     }
@@ -605,10 +619,11 @@ class MediaDetailFragmentUnitTests {
     @Throws(Exception::class)
     fun testPrettyLicenseCaseNull() {
         `when`(media.license).thenReturn(null)
-        val method: Method = MediaDetailFragment::class.java.getDeclaredMethod(
-            "prettyLicense",
-            Media::class.java
-        )
+        val method: Method =
+            MediaDetailFragment::class.java.getDeclaredMethod(
+                "prettyLicense",
+                Media::class.java,
+            )
         method.isAccessible = true
         method.invoke(fragment, media)
     }
@@ -617,10 +632,11 @@ class MediaDetailFragmentUnitTests {
     @Throws(Exception::class)
     fun testPrettyLicenseCaseNonNull() {
         `when`(media.license).thenReturn("licence")
-        val method: Method = MediaDetailFragment::class.java.getDeclaredMethod(
-            "prettyLicense",
-            Media::class.java
-        )
+        val method: Method =
+            MediaDetailFragment::class.java.getDeclaredMethod(
+                "prettyLicense",
+                Media::class.java,
+            )
         method.isAccessible = true
         method.invoke(fragment, media)
     }
@@ -628,10 +644,11 @@ class MediaDetailFragmentUnitTests {
     @Test
     @Throws(Exception::class)
     fun testPrettyDiscussion() {
-        val method: Method = MediaDetailFragment::class.java.getDeclaredMethod(
-            "prettyDiscussion",
-            String::class.java
-        )
+        val method: Method =
+            MediaDetailFragment::class.java.getDeclaredMethod(
+                "prettyDiscussion",
+                String::class.java,
+            )
         method.isAccessible = true
         method.invoke(fragment, "mock")
     }
@@ -639,10 +656,11 @@ class MediaDetailFragmentUnitTests {
     @Test
     @Throws(Exception::class)
     fun testExtractCaptionDescription() {
-        val method: Method = MediaDetailFragment::class.java.getDeclaredMethod(
-            "extractCaptionDescription",
-            String::class.java
-        )
+        val method: Method =
+            MediaDetailFragment::class.java.getDeclaredMethod(
+                "extractCaptionDescription",
+                String::class.java,
+            )
         method.isAccessible = true
         method.invoke(fragment, "mock")
     }
@@ -650,10 +668,11 @@ class MediaDetailFragmentUnitTests {
     @Test
     @Throws(Exception::class)
     fun testGetDescriptions() {
-        val method: Method = MediaDetailFragment::class.java.getDeclaredMethod(
-            "getDescriptions",
-            String::class.java
-        )
+        val method: Method =
+            MediaDetailFragment::class.java.getDeclaredMethod(
+                "getDescriptions",
+                String::class.java,
+            )
         method.isAccessible = true
         method.invoke(fragment, "mock")
     }
@@ -662,10 +681,11 @@ class MediaDetailFragmentUnitTests {
     @Throws(Exception::class)
     fun testPrettyCaptionCaseEmpty() {
         `when`(media.captions).thenReturn(mapOf(Pair("a", "")))
-        val method: Method = MediaDetailFragment::class.java.getDeclaredMethod(
-            "prettyCaption",
-            Media::class.java
-        )
+        val method: Method =
+            MediaDetailFragment::class.java.getDeclaredMethod(
+                "prettyCaption",
+                Media::class.java,
+            )
         method.isAccessible = true
         method.invoke(fragment, media)
     }
@@ -674,10 +694,11 @@ class MediaDetailFragmentUnitTests {
     @Throws(Exception::class)
     fun testPrettyCaptionCaseNonEmpty() {
         `when`(media.captions).thenReturn(mapOf(Pair("a", "b")))
-        val method: Method = MediaDetailFragment::class.java.getDeclaredMethod(
-            "prettyCaption",
-            Media::class.java
-        )
+        val method: Method =
+            MediaDetailFragment::class.java.getDeclaredMethod(
+                "prettyCaption",
+                Media::class.java,
+            )
         method.isAccessible = true
         method.invoke(fragment, media)
     }
@@ -686,10 +707,11 @@ class MediaDetailFragmentUnitTests {
     @Throws(Exception::class)
     fun testPrettyCaption() {
         `when`(media.captions).thenReturn(mapOf())
-        val method: Method = MediaDetailFragment::class.java.getDeclaredMethod(
-            "prettyCaption",
-            Media::class.java
-        )
+        val method: Method =
+            MediaDetailFragment::class.java.getDeclaredMethod(
+                "prettyCaption",
+                Media::class.java,
+            )
         method.isAccessible = true
         method.invoke(fragment, media)
     }
@@ -697,9 +719,10 @@ class MediaDetailFragmentUnitTests {
     @Test
     @Throws(Exception::class)
     fun testSetupImageView() {
-        val method: Method = MediaDetailFragment::class.java.getDeclaredMethod(
-            "setupImageView"
-        )
+        val method: Method =
+            MediaDetailFragment::class.java.getDeclaredMethod(
+                "setupImageView",
+            )
         method.isAccessible = true
         method.invoke(fragment)
     }
@@ -707,10 +730,11 @@ class MediaDetailFragmentUnitTests {
     @Test
     @Throws(Exception::class)
     fun testOnDiscussionLoaded() {
-        val method: Method = MediaDetailFragment::class.java.getDeclaredMethod(
-            "onDiscussionLoaded",
-            String::class.java
-        )
+        val method: Method =
+            MediaDetailFragment::class.java.getDeclaredMethod(
+                "onDiscussionLoaded",
+                String::class.java,
+            )
         method.isAccessible = true
         method.invoke(fragment, "")
     }
@@ -723,16 +747,25 @@ class MediaDetailFragmentUnitTests {
         `when`(media.imageUrl).thenReturn("test@example.com")
         `when`(spinner.selectedItemPosition).thenReturn(0)
         `when`(reasonListEnglishMappings?.get(spinner.selectedItemPosition)).thenReturn("TESTING")
-        `when`(applicationKvStore.getBoolean(String.format(MediaDetailFragment.NOMINATING_FOR_DELETION_MEDIA,media.imageUrl
-                ))).thenReturn(true)
-        doReturn(Single.just(true)).`when`(deleteHelper).makeDeletion(ArgumentMatchers.any(),ArgumentMatchers.any(), ArgumentMatchers.any())
+        `when`(
+            applicationKvStore.getBoolean(
+                String.format(
+                    MediaDetailFragment.NOMINATING_FOR_DELETION_MEDIA,
+                    media.imageUrl,
+                ),
+            ),
+        ).thenReturn(true)
+        doReturn(
+            Single.just(true),
+        ).`when`(deleteHelper).makeDeletion(ArgumentMatchers.any(), ArgumentMatchers.any(), ArgumentMatchers.any())
 
         doReturn(Single.just("")).`when`(reasonBuilder).getReason(ArgumentMatchers.any(), ArgumentMatchers.any())
 
-        val method: Method = MediaDetailFragment::class.java.getDeclaredMethod(
-            "onDeleteClicked",
-            Spinner::class.java
-        )
+        val method: Method =
+            MediaDetailFragment::class.java.getDeclaredMethod(
+                "onDeleteClicked",
+                Spinner::class.java,
+            )
         method.isAccessible = true
         method.invoke(fragment, spinner)
     }
@@ -769,9 +802,10 @@ class MediaDetailFragmentUnitTests {
     @Throws(Exception::class)
     fun testDisplayMediaDetails() {
         whenever(media.filename).thenReturn("File:Example.jpg")
-        val method: Method = MediaDetailFragment::class.java.getDeclaredMethod(
-            "displayMediaDetails"
-        )
+        val method: Method =
+            MediaDetailFragment::class.java.getDeclaredMethod(
+                "displayMediaDetails",
+            )
         method.isAccessible = true
         method.invoke(fragment)
         verify(media, times(4)).filename
@@ -780,10 +814,11 @@ class MediaDetailFragmentUnitTests {
     @Test
     @Throws(Exception::class)
     fun testGotoCategoryEditor() {
-        val method: Method = MediaDetailFragment::class.java.getDeclaredMethod(
-            "gotoCategoryEditor",
-            String::class.java
-        )
+        val method: Method =
+            MediaDetailFragment::class.java.getDeclaredMethod(
+                "gotoCategoryEditor",
+                String::class.java,
+            )
         method.isAccessible = true
         method.invoke(fragment, "[[Category:Test]]")
     }
@@ -791,14 +826,15 @@ class MediaDetailFragmentUnitTests {
     @Test
     @Throws(Exception::class)
     fun testOnMediaRefreshed() {
-        val method: Method = MediaDetailFragment::class.java.getDeclaredMethod(
-            "onMediaRefreshed",
-            Media::class.java
-        )
+        val method: Method =
+            MediaDetailFragment::class.java.getDeclaredMethod(
+                "onMediaRefreshed",
+                Media::class.java,
+            )
         method.isAccessible = true
         method.invoke(fragment, media)
     }
-    
+
     @Test
     fun testOnImageBackgroundChangedWithDifferentColor() {
         val spyFragment = spy(fragment)
@@ -808,10 +844,9 @@ class MediaDetailFragmentUnitTests {
 
         spyFragment.onImageBackgroundChanged(color)
 
-        verify(simpleDraweeView, times(1)).setBackgroundColor(color) 
+        verify(simpleDraweeView, times(1)).setBackgroundColor(color)
         verify(mockSharedPreferencesEditor, times(1)).putInt(anyString(), anyInt())
     }
-
 
     @Test
     fun testOnImageBackgroundChangedWithSameColor() {

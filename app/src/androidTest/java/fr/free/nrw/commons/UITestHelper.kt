@@ -13,14 +13,13 @@ import org.apache.commons.lang3.StringUtils
 import org.hamcrest.*
 import timber.log.Timber
 
-
 class UITestHelper {
     companion object {
         fun skipWelcome() {
             try {
                 onView(ViewMatchers.withId(R.id.button_ok))
                     .perform(ViewActions.click())
-                //Skip tutorial
+                // Skip tutorial
                 onView(ViewMatchers.withId(R.id.finishTutorialButton))
                     .perform(ViewActions.click())
             } catch (ignored: NoMatchingViewException) {
@@ -29,27 +28,31 @@ class UITestHelper {
 
         fun skipLogin() {
             try {
-                //Skip Login
-                val htmlTextView = onView(
-                    Matchers.allOf(
-                        ViewMatchers.withId(R.id.skip_login), ViewMatchers.withText("Skip"),
-                        ViewMatchers.isDisplayed()
+                // Skip Login
+                val htmlTextView =
+                    onView(
+                        Matchers.allOf(
+                            ViewMatchers.withId(R.id.skip_login),
+                            ViewMatchers.withText("Skip"),
+                            ViewMatchers.isDisplayed(),
+                        ),
                     )
-                )
                 htmlTextView.perform(ViewActions.click())
 
-                val appCompatButton = onView(
-                    Matchers.allOf(
-                        ViewMatchers.withId(android.R.id.button1), ViewMatchers.withText("Yes"),
-                        childAtPosition(
+                val appCompatButton =
+                    onView(
+                        Matchers.allOf(
+                            ViewMatchers.withId(android.R.id.button1),
+                            ViewMatchers.withText("Yes"),
                             childAtPosition(
-                                ViewMatchers.withId(R.id.buttonPanel),
-                                0
+                                childAtPosition(
+                                    ViewMatchers.withId(R.id.buttonPanel),
+                                    0,
+                                ),
+                                3,
                             ),
-                            3
-                        )
+                        ),
                     )
-                )
                 appCompatButton.perform(ViewActions.scrollTo(), ViewActions.click())
             } catch (ignored: NoMatchingViewException) {
             }
@@ -57,18 +60,18 @@ class UITestHelper {
 
         fun loginUser() {
             try {
-                //Perform Login
+                // Perform Login
                 sleep(3000)
                 onView(ViewMatchers.withId(R.id.login_username))
                     .perform(
                         ViewActions.replaceText(getTestUsername()),
-                        ViewActions.closeSoftKeyboard()
+                        ViewActions.closeSoftKeyboard(),
                     )
                 sleep(2000)
                 onView(ViewMatchers.withId(R.id.login_password))
                     .perform(
                         ViewActions.replaceText(getTestUserPassword()),
-                        ViewActions.closeSoftKeyboard()
+                        ViewActions.closeSoftKeyboard(),
                     )
                 sleep(2000)
                 onView(ViewMatchers.withId(R.id.login_button))
@@ -76,7 +79,6 @@ class UITestHelper {
                 sleep(10000)
             } catch (ignored: NoMatchingViewException) {
             }
-
         }
 
         fun logoutUser() {
@@ -87,36 +89,38 @@ class UITestHelper {
                         childAtPosition(
                             childAtPosition(
                                 ViewMatchers.withId(R.id.fragment_main_nav_tab_layout),
-                                0
+                                0,
                             ),
-                            4
+                            4,
                         ),
-                        ViewMatchers.isDisplayed()
-                    )
+                        ViewMatchers.isDisplayed(),
+                    ),
                 ).perform(ViewActions.click())
                 onView(
                     Matchers.allOf(
-                        ViewMatchers.withId(R.id.more_logout), ViewMatchers.withText("Logout"),
+                        ViewMatchers.withId(R.id.more_logout),
+                        ViewMatchers.withText("Logout"),
                         childAtPosition(
                             childAtPosition(
                                 ViewMatchers.withId(R.id.scroll_view_more_bottom_sheet),
-                                0
+                                0,
                             ),
-                            6
-                        )
-                    )
+                            6,
+                        ),
+                    ),
                 ).perform(ViewActions.scrollTo(), ViewActions.click())
                 onView(
                     Matchers.allOf(
-                        ViewMatchers.withId(android.R.id.button1), ViewMatchers.withText("Yes"),
+                        ViewMatchers.withId(android.R.id.button1),
+                        ViewMatchers.withText("Yes"),
                         childAtPosition(
                             childAtPosition(
                                 ViewMatchers.withId(R.id.buttonPanel),
-                                0
+                                0,
                             ),
-                            3
-                        )
-                    )
+                            3,
+                        ),
+                    ),
                 ).perform(ViewActions.scrollTo(), ViewActions.click())
                 sleep(5000)
             } catch (ignored: NoMatchingViewException) {
@@ -124,9 +128,9 @@ class UITestHelper {
         }
 
         fun childAtPosition(
-            parentMatcher: Matcher<View>, position: Int
+            parentMatcher: Matcher<View>,
+            position: Int,
         ): Matcher<View> {
-
             return object : TypeSafeMatcher<View>() {
                 override fun describeTo(description: Description) {
                     description.appendText("Child at position $position in parent ")
@@ -135,8 +139,9 @@ class UITestHelper {
 
                 public override fun matchesSafely(view: View): Boolean {
                     val parent = view.parent
-                    return parent is ViewGroup && parentMatcher.matches(parent)
-                            && view == parent.getChildAt(position)
+                    return parent is ViewGroup &&
+                        parentMatcher.matches(parent) &&
+                        view == parent.getChildAt(position)
                 }
             }
         }
@@ -154,14 +159,18 @@ class UITestHelper {
             val username = BuildConfig.TEST_USERNAME
             if (StringUtils.isEmpty(username) || username == "null") {
                 throw NotImplementedError("Configure your beta account's username")
-            } else return username
+            } else {
+                return username
+            }
         }
 
         private fun getTestUserPassword(): String {
             val password = BuildConfig.TEST_PASSWORD
             if (StringUtils.isEmpty(password) || password == "null") {
                 throw NotImplementedError("Configure your beta account's password")
-            } else return password
+            } else {
+                return password
+            }
         }
 
         fun <T : Activity> changeOrientation(activityRule: ActivityTestRule<T>) {
@@ -174,6 +183,7 @@ class UITestHelper {
         fun <T> first(matcher: Matcher<T>): Matcher<T>? {
             return object : BaseMatcher<T>() {
                 var isFirst = true
+
                 override fun matches(item: Any): Boolean {
                     if (isFirst && matcher.matches(item)) {
                         isFirst = false

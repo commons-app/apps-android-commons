@@ -17,18 +17,19 @@ data class UploadMediaDetail constructor(
      */
     var languageCode: String? = null,
     var descriptionText: String = "",
-    var captionText: String = ""
+    var captionText: String = "",
 ) : Parcelable {
     fun javaCopy() = copy()
 
     constructor(place: Place) : this(
         place.language,
         place.longDescription,
-        place.name
+        place.name,
     )
     /**
      * @return the index of the  language selected in a spinner with [SpinnerLanguagesAdapter]
      */
+
     /**
      * @param selectedLanguageIndex the index of the language selected in a spinner with [SpinnerLanguagesAdapter]
      */
@@ -42,5 +43,4 @@ data class UploadMediaDetail constructor(
      * @param manuallyAdded
      */
     var isManuallyAdded: Boolean = false
-
 }

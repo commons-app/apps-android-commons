@@ -5,10 +5,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.paging.PagedList
 import androidx.recyclerview.widget.LinearLayoutManager
-import fr.free.nrw.commons.CommonsApplication
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.contributions.Contribution
@@ -26,9 +24,10 @@ import javax.inject.Inject
  * Fragment for displaying a list of failed uploads in Upload Progress Activity. This fragment provides
  * functionality for the user to retry or cancel failed uploads.
  */
-class FailedUploadsFragment : CommonsDaggerSupportFragment(), PendingUploadsContract.View,
+class FailedUploadsFragment :
+    CommonsDaggerSupportFragment(),
+    PendingUploadsContract.View,
     FailedUploadsAdapter.Callback {
-
     @Inject
     lateinit var pendingUploadsPresenter: PendingUploadsPresenter
 
@@ -57,7 +56,7 @@ class FailedUploadsFragment : CommonsDaggerSupportFragment(), PendingUploadsCont
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //Now that we are allowing this fragment to be started for
+        // Now that we are allowing this fragment to be started for
         // any userName- we expect it to be passed as an argument
         if (arguments != null) {
             userName = requireArguments().getString(ProfileActivity.KEY_USERNAME)
@@ -69,8 +68,9 @@ class FailedUploadsFragment : CommonsDaggerSupportFragment(), PendingUploadsCont
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
     ): View? {
         binding = FragmentFailedUploadsBinding.inflate(layoutInflater)
         pendingUploadsPresenter.onAttachView(this)
@@ -82,7 +82,10 @@ class FailedUploadsFragment : CommonsDaggerSupportFragment(), PendingUploadsCont
         adapter = FailedUploadsAdapter(this)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         super.onViewCreated(view, savedInstanceState)
         initRecyclerView()
     }
@@ -95,7 +98,7 @@ class FailedUploadsFragment : CommonsDaggerSupportFragment(), PendingUploadsCont
         binding.failedUploadsRecyclerView.adapter = adapter
         pendingUploadsPresenter!!.getFailedContributions()
         pendingUploadsPresenter!!.failedContributionList.observe(
-            viewLifecycleOwner
+            viewLifecycleOwner,
         ) { list: PagedList<Contribution?> ->
             adapter.submitList(list)
             contributionsList = ArrayList()
@@ -125,7 +128,7 @@ class FailedUploadsFragment : CommonsDaggerSupportFragment(), PendingUploadsCont
             pendingUploadsPresenter.restartUploads(
                 contributionsList,
                 0,
-                this.requireContext().applicationContext
+                this.requireContext().applicationContext,
             )
         }
     }
@@ -138,7 +141,7 @@ class FailedUploadsFragment : CommonsDaggerSupportFragment(), PendingUploadsCont
             pendingUploadsPresenter.restartUpload(
                 contributionsList,
                 index,
-                this.requireContext().applicationContext
+                this.requireContext().applicationContext,
             )
         }
     }
@@ -151,11 +154,11 @@ class FailedUploadsFragment : CommonsDaggerSupportFragment(), PendingUploadsCont
             requireActivity(),
             String.format(
                 Locale.getDefault(),
-                requireActivity().getString(R.string.cancelling_upload)
+                requireActivity().getString(R.string.cancelling_upload),
             ),
             String.format(
                 Locale.getDefault(),
-                requireActivity().getString(R.string.cancel_upload_dialog)
+                requireActivity().getString(R.string.cancel_upload_dialog),
             ),
             String.format(Locale.getDefault(), requireActivity().getString(R.string.yes)),
             String.format(Locale.getDefault(), requireActivity().getString(R.string.no)),
@@ -163,10 +166,10 @@ class FailedUploadsFragment : CommonsDaggerSupportFragment(), PendingUploadsCont
                 ViewUtil.showShortToast(context, R.string.cancelling_upload)
                 pendingUploadsPresenter.deleteUpload(
                     contribution,
-                    this.requireContext().applicationContext
+                    this.requireContext().applicationContext,
                 )
             },
-            {}
+            {},
         )
     }
 
@@ -179,11 +182,11 @@ class FailedUploadsFragment : CommonsDaggerSupportFragment(), PendingUploadsCont
                 requireActivity(),
                 String.format(
                     Locale.getDefault(),
-                    requireActivity().getString(R.string.cancelling_all_the_uploads)
+                    requireActivity().getString(R.string.cancelling_all_the_uploads),
                 ),
                 String.format(
                     Locale.getDefault(),
-                    requireActivity().getString(R.string.are_you_sure_that_you_want_cancel_all_the_uploads)
+                    requireActivity().getString(R.string.are_you_sure_that_you_want_cancel_all_the_uploads),
                 ),
                 String.format(Locale.getDefault(), requireActivity().getString(R.string.yes)),
                 String.format(Locale.getDefault(), requireActivity().getString(R.string.no)),
@@ -191,10 +194,10 @@ class FailedUploadsFragment : CommonsDaggerSupportFragment(), PendingUploadsCont
                     ViewUtil.showShortToast(context, R.string.cancelling_upload)
                     uploadProgressActivity.hidePendingIcons()
                     pendingUploadsPresenter.deleteUploads(
-                        listOf(Contribution.STATE_FAILED)
+                        listOf(Contribution.STATE_FAILED),
                     )
                 },
-                {}
+                {},
             )
         }
     }

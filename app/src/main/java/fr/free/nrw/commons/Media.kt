@@ -2,8 +2,8 @@ package fr.free.nrw.commons
 
 import android.os.Parcelable
 import fr.free.nrw.commons.location.LatLng
-import kotlinx.parcelize.Parcelize
 import fr.free.nrw.commons.wikidata.model.page.PageTitle
+import kotlinx.parcelize.Parcelize
 import java.util.*
 
 @Parcelize
@@ -14,7 +14,6 @@ class Media constructor(
      */
     var pageId: String = UUID.randomUUID().toString(),
     var thumbUrl: String? = null,
-
     /**
      * Gets image URL
      * @return Image URL
@@ -35,7 +34,6 @@ class Media constructor(
      * @param fallbackDescription the new description of the file
      */
     var fallbackDescription: String? = null,
-
     /**
      * Gets the upload date of the file.
      * Can be null.
@@ -62,9 +60,7 @@ class Media constructor(
      * @param author creator name as a string
      */
     var author: String? = null,
-
-    var user:String?=null,
-
+    var user: String? = null,
     /**
      * Gets the categories the file falls under.
      * @return file categories as an ArrayList of Strings
@@ -83,23 +79,23 @@ class Media constructor(
      * Stores the mapping of category title to hidden attribute
      * Example: "Mountains" => false, "CC-BY-SA-2.0" => true
      */
-    var categoriesHiddenStatus: Map<String, Boolean> = emptyMap()
+    var categoriesHiddenStatus: Map<String, Boolean> = emptyMap(),
 ) : Parcelable {
-
     constructor(
         captions: Map<String, String>,
         categories: List<String>?,
         filename: String?,
         fallbackDescription: String?,
-        author: String?, user:String?
+        author: String?,
+        user: String?,
     ) : this(
         filename = filename,
         fallbackDescription = fallbackDescription,
         dateUploaded = Date(),
         author = author,
-        user=user,
+        user = user,
         categories = categories,
-        captions = captions
+        captions = captions,
     )
 
     /**
@@ -108,10 +104,11 @@ class Media constructor(
      */
     val displayTitle: String
         get() =
-            if (filename != null)
+            if (filename != null) {
                 pageTitle.displayTextWithoutNamespace.replaceFirst("[.][^.]+$".toRegex(), "")
-            else
+            } else {
                 ""
+            }
 
     /**
      * Gets file page title
@@ -127,9 +124,10 @@ class Media constructor(
         get() = String.format("[[%s|thumb|%s]]", filename, mostRelevantCaption)
 
     val mostRelevantCaption: String
-        get() = captions[Locale.getDefault().language]
-            ?: captions.values.firstOrNull()
-            ?: displayTitle
+        get() =
+            captions[Locale.getDefault().language]
+                ?: captions.values.firstOrNull()
+                ?: displayTitle
 
     /**
      * Gets the categories the file falls under.
@@ -138,6 +136,8 @@ class Media constructor(
     var addedCategories: List<String>? = null
         // TODO added categories should be removed. It is added for a short fix. On category update,
         //  categories should be re-fetched instead
-        get() = field                     // getter
-        set(value) { field = value }      // setter
+        get() = field // getter
+        set(value) {
+            field = value
+        } // setter
 }

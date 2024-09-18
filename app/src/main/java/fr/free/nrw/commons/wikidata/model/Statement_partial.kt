@@ -24,5 +24,5 @@ data class Statement_partial(
     val rank: String,
     val id: String? = null,
     val qualifiers: Map<String, List<Snak_partial>> = mapOf(),
-    @SerializedName("qualifiers-order") val qualifiersOrder: List<String> = listOf()
+    @SerializedName("qualifiers-order") val qualifiersOrder: List<String> = listOf(),
 )

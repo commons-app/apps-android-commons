@@ -44,31 +44,32 @@ class EditActivity : AppCompatActivity() {
         imageUri = intent.getStringExtra("image") ?: ""
         vm = ViewModelProvider(this).get(EditViewModel::class.java)
         val sourceExif = imageUri.toUri().path?.let { ExifInterface(it) }
-        val exifTags = arrayOf(
-            ExifInterface.TAG_APERTURE,
-            ExifInterface.TAG_DATETIME,
-            ExifInterface.TAG_EXPOSURE_TIME,
-            ExifInterface.TAG_FLASH,
-            ExifInterface.TAG_FOCAL_LENGTH,
-            ExifInterface.TAG_GPS_ALTITUDE,
-            ExifInterface.TAG_GPS_ALTITUDE_REF,
-            ExifInterface.TAG_GPS_DATESTAMP,
-            ExifInterface.TAG_GPS_LATITUDE,
-            ExifInterface.TAG_GPS_LATITUDE_REF,
-            ExifInterface.TAG_GPS_LONGITUDE,
-            ExifInterface.TAG_GPS_LONGITUDE_REF,
-            ExifInterface.TAG_GPS_PROCESSING_METHOD,
-            ExifInterface.TAG_GPS_TIMESTAMP,
-            ExifInterface.TAG_IMAGE_LENGTH,
-            ExifInterface.TAG_IMAGE_WIDTH,
-            ExifInterface.TAG_ISO,
-            ExifInterface.TAG_MAKE,
-            ExifInterface.TAG_MODEL,
-            ExifInterface.TAG_ORIENTATION,
-            ExifInterface.TAG_WHITE_BALANCE,
-            ExifInterface.WHITEBALANCE_AUTO,
-            ExifInterface.WHITEBALANCE_MANUAL
-        )
+        val exifTags =
+            arrayOf(
+                ExifInterface.TAG_APERTURE,
+                ExifInterface.TAG_DATETIME,
+                ExifInterface.TAG_EXPOSURE_TIME,
+                ExifInterface.TAG_FLASH,
+                ExifInterface.TAG_FOCAL_LENGTH,
+                ExifInterface.TAG_GPS_ALTITUDE,
+                ExifInterface.TAG_GPS_ALTITUDE_REF,
+                ExifInterface.TAG_GPS_DATESTAMP,
+                ExifInterface.TAG_GPS_LATITUDE,
+                ExifInterface.TAG_GPS_LATITUDE_REF,
+                ExifInterface.TAG_GPS_LONGITUDE,
+                ExifInterface.TAG_GPS_LONGITUDE_REF,
+                ExifInterface.TAG_GPS_PROCESSING_METHOD,
+                ExifInterface.TAG_GPS_TIMESTAMP,
+                ExifInterface.TAG_IMAGE_LENGTH,
+                ExifInterface.TAG_IMAGE_WIDTH,
+                ExifInterface.TAG_ISO,
+                ExifInterface.TAG_MAKE,
+                ExifInterface.TAG_MODEL,
+                ExifInterface.TAG_ORIENTATION,
+                ExifInterface.TAG_WHITE_BALANCE,
+                ExifInterface.WHITEBALANCE_AUTO,
+                ExifInterface.WHITEBALANCE_MANUAL,
+            )
         for (tag in exifTags) {
             val attribute = sourceExif?.getAttribute(tag.toString())
             sourceExifAttributeList.add(Pair(tag.toString(), attribute))
@@ -87,37 +88,38 @@ class EditActivity : AppCompatActivity() {
     private fun init() {
         binding.iv.adjustViewBounds = true
         binding.iv.scaleType = ImageView.ScaleType.MATRIX
-        binding.iv.post(Runnable {
-            val options = BitmapFactory.Options()
-            options.inJustDecodeBounds = true
-            BitmapFactory.decodeFile(imageUri, options)
+        binding.iv.post(
+            Runnable {
+                val options = BitmapFactory.Options()
+                options.inJustDecodeBounds = true
+                BitmapFactory.decodeFile(imageUri, options)
 
-            val bitmapWidth = options.outWidth
-            val bitmapHeight = options.outHeight
+                val bitmapWidth = options.outWidth
+                val bitmapHeight = options.outHeight
 
-            // Check if the bitmap dimensions exceed a certain threshold
-            val maxBitmapSize = 2000 // Set your maximum size here
-            if (bitmapWidth > maxBitmapSize || bitmapHeight > maxBitmapSize) {
-                val scaleFactor = calculateScaleFactor(bitmapWidth, bitmapHeight, maxBitmapSize)
-                options.inSampleSize = scaleFactor
-                options.inJustDecodeBounds = false
-                val scaledBitmap = BitmapFactory.decodeFile(imageUri, options)
-                binding.iv.setImageBitmap(scaledBitmap)
-                // Update the ImageView with the scaled bitmap
-                val scale = binding.iv.measuredWidth.toFloat() / scaledBitmap.width.toFloat()
-                binding.iv.layoutParams.height = (scale * scaledBitmap.height).toInt()
-                binding.iv.imageMatrix = scaleMatrix(scale, scale)
-            } else {
+                // Check if the bitmap dimensions exceed a certain threshold
+                val maxBitmapSize = 2000 // Set your maximum size here
+                if (bitmapWidth > maxBitmapSize || bitmapHeight > maxBitmapSize) {
+                    val scaleFactor = calculateScaleFactor(bitmapWidth, bitmapHeight, maxBitmapSize)
+                    options.inSampleSize = scaleFactor
+                    options.inJustDecodeBounds = false
+                    val scaledBitmap = BitmapFactory.decodeFile(imageUri, options)
+                    binding.iv.setImageBitmap(scaledBitmap)
+                    // Update the ImageView with the scaled bitmap
+                    val scale = binding.iv.measuredWidth.toFloat() / scaledBitmap.width.toFloat()
+                    binding.iv.layoutParams.height = (scale * scaledBitmap.height).toInt()
+                    binding.iv.imageMatrix = scaleMatrix(scale, scale)
+                } else {
+                    options.inJustDecodeBounds = false
+                    val bitmap = BitmapFactory.decodeFile(imageUri, options)
+                    binding.iv.setImageBitmap(bitmap)
 
-                options.inJustDecodeBounds = false
-                val bitmap = BitmapFactory.decodeFile(imageUri, options)
-                binding.iv.setImageBitmap(bitmap)
-
-                val scale = binding.iv.measuredWidth.toFloat() / bitmapWidth.toFloat()
-                binding.iv.layoutParams.height = (scale * bitmapHeight).toInt()
-                binding.iv.imageMatrix = scaleMatrix(scale, scale)
-            }
-        })
+                    val scale = binding.iv.measuredWidth.toFloat() / bitmapWidth.toFloat()
+                    binding.iv.layoutParams.height = (scale * bitmapHeight).toInt()
+                    binding.iv.imageMatrix = scaleMatrix(scale, scale)
+                }
+            },
+        )
         binding.rotateBtn.setOnClickListener {
             animateImageHeight()
         }
@@ -138,8 +140,16 @@ class EditActivity : AppCompatActivity() {
      * further rotation actions.
      */
     private fun animateImageHeight() {
-        val drawableWidth: Float = binding.iv.getDrawable().getIntrinsicWidth().toFloat()
-        val drawableHeight: Float = binding.iv.getDrawable().getIntrinsicHeight().toFloat()
+        val drawableWidth: Float =
+            binding.iv
+                .getDrawable()
+                .getIntrinsicWidth()
+                .toFloat()
+        val drawableHeight: Float =
+            binding.iv
+                .getDrawable()
+                .getIntrinsicHeight()
+                .toFloat()
         val viewWidth: Float = binding.iv.getMeasuredWidth().toFloat()
         val viewHeight: Float = binding.iv.getMeasuredHeight().toFloat()
         val rotation = imageRotation % 360
@@ -151,7 +161,6 @@ class EditActivity : AppCompatActivity() {
 
         Timber.d("Rotation $rotation")
         Timber.d("new Rotation $newRotation")
-
 
         if (rotation == 0 || rotation == 180) {
             imageScale = viewWidth / drawableWidth
@@ -169,23 +178,24 @@ class EditActivity : AppCompatActivity() {
 
         animator.interpolator = AccelerateDecelerateInterpolator()
 
-        animator.addListener(object : AnimatorListener {
-            override fun onAnimationStart(animation: Animator) {
-                binding.rotateBtn.setEnabled(false)
-            }
+        animator.addListener(
+            object : AnimatorListener {
+                override fun onAnimationStart(animation: Animator) {
+                    binding.rotateBtn.setEnabled(false)
+                }
 
-            override fun onAnimationEnd(animation: Animator) {
-                imageRotation = newRotation % 360
-                binding.rotateBtn.setEnabled(true)
-            }
+                override fun onAnimationEnd(animation: Animator) {
+                    imageRotation = newRotation % 360
+                    binding.rotateBtn.setEnabled(true)
+                }
 
-            override fun onAnimationCancel(animation: Animator) {
-            }
+                override fun onAnimationCancel(animation: Animator) {
+                }
 
-            override fun onAnimationRepeat(animation: Animator) {
-            }
-
-        })
+                override fun onAnimationRepeat(animation: Animator) {
+                }
+            },
+        )
 
         animator.addUpdateListener { animation ->
             val animVal = animation.animatedValue as Float
@@ -195,20 +205,21 @@ class EditActivity : AppCompatActivity() {
             val animatedScale = complementaryAnimVal * imageScale + animVal * newImageScale
             val animatedRotation = complementaryAnimVal * rotation + animVal * newRotation
             binding.iv.getLayoutParams().height = animatedHeight
-            val matrix: Matrix = rotationMatrix(
-                animatedRotation,
-                drawableWidth / 2,
-                drawableHeight / 2
-            )
+            val matrix: Matrix =
+                rotationMatrix(
+                    animatedRotation,
+                    drawableWidth / 2,
+                    drawableHeight / 2,
+                )
             matrix.postScale(
                 animatedScale,
                 animatedScale,
                 drawableWidth / 2,
-                drawableHeight / 2
+                drawableHeight / 2,
             )
             matrix.postTranslate(
                 -(drawableWidth - binding.iv.getMeasuredWidth()) / 2,
-                -(drawableHeight - binding.iv.getMeasuredHeight()) / 2
+                -(drawableHeight - binding.iv.getMeasuredHeight()) / 2,
             )
             binding.iv.setImageMatrix(matrix)
             binding.iv.requestLayout()
@@ -228,10 +239,8 @@ class EditActivity : AppCompatActivity() {
      * as a result, and finishes the current activity.
      */
     fun getRotatedImage() {
-
         val filePath = imageUri.toUri().path
         val file = filePath?.let { File(it) }
-
 
         val rotatedImage = file?.let { vm.rotateImage(imageRotation, it) }
         if (rotatedImage == null) {
@@ -243,9 +252,9 @@ class EditActivity : AppCompatActivity() {
             copyExifData(editedImageExif)
         }
         val resultIntent = Intent()
-        resultIntent.putExtra("editedImageFilePath", rotatedImage?.toUri()?.path ?: "Error");
-        setResult(RESULT_OK, resultIntent);
-        finish();
+        resultIntent.putExtra("editedImageFilePath", rotatedImage?.toUri()?.path ?: "Error")
+        setResult(RESULT_OK, resultIntent)
+        finish()
     }
 
     /**
@@ -257,7 +266,6 @@ class EditActivity : AppCompatActivity() {
      * @param editedImageExif The ExifInterface object for the edited image.
      */
     private fun copyExifData(editedImageExif: ExifInterface?) {
-
         for (attr in sourceExifAttributeList) {
             Log.d("Tag is  ${attr.first}", "Value is ${attr.second}")
             editedImageExif!!.setAttribute(attr.first, attr.second)
@@ -282,7 +290,11 @@ class EditActivity : AppCompatActivity() {
      *         The scale factor ensures that the scaled bitmap will fit within the maximum size
      *         while maintaining aspect ratio.
      */
-    private fun calculateScaleFactor(originalWidth: Int, originalHeight: Int, maxSize: Int): Int {
+    private fun calculateScaleFactor(
+        originalWidth: Int,
+        originalHeight: Int,
+        maxSize: Int,
+    ): Int {
         var scaleFactor = 1
 
         if (originalWidth > maxSize || originalHeight > maxSize) {
@@ -295,7 +307,4 @@ class EditActivity : AppCompatActivity() {
 
         return scaleFactor
     }
-
-
-
 }

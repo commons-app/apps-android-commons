@@ -14,7 +14,6 @@ import org.mockito.Mock
 import org.mockito.MockitoAnnotations
 
 class PageableBaseDataSourceTest {
-
     @Mock
     private lateinit var liveDataConverter: LiveDataConverter
 
@@ -23,17 +22,18 @@ class PageableBaseDataSourceTest {
     @Before
     fun setUp() {
         MockitoAnnotations.openMocks(this)
-        pageableBaseDataSource = object: PageableBaseDataSource<String>(liveDataConverter){
-            override val loadFunction: LoadFunction<String>
-                get() = mock()
-
-        }
+        pageableBaseDataSource =
+            object : PageableBaseDataSource<String>(liveDataConverter) {
+                override val loadFunction: LoadFunction<String>
+                    get() = mock()
+            }
     }
 
     @Test
     fun `onQueryUpdated emits new liveData`() {
         val (_, liveData) = expectNewLiveData()
-        pageableBaseDataSource.pagingResults.test()
+        pageableBaseDataSource.pagingResults
+            .test()
             .also { pageableBaseDataSource.onQueryUpdated("test") }
             .assertValue(liveData)
     }
@@ -42,14 +42,15 @@ class PageableBaseDataSourceTest {
     fun `onQueryUpdated invokes livedatconverter with no items emitter`() {
         val (zeroItemsFuncCaptor, _) = expectNewLiveData()
         pageableBaseDataSource.onQueryUpdated("test")
-        pageableBaseDataSource.noItemsLoadedQueries.test()
+        pageableBaseDataSource.noItemsLoadedQueries
+            .test()
             .also { zeroItemsFuncCaptor.firstValue.invoke() }
             .assertValue("test")
     }
 
     /*
-    * Just for coverage, no way to really assert this
-    * */
+     * Just for coverage, no way to really assert this
+     * */
     @Test
     fun `retryFailedRequest does nothing without a factory`() {
         pageableBaseDataSource.retryFailedRequest()

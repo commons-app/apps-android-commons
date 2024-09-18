@@ -42,8 +42,11 @@ import java.util.*
 @RunWith(AndroidJUnit4::class)
 class UploadTest {
     @get:Rule
-    var permissionRule = GrantPermissionRule.grant(Manifest.permission.WRITE_EXTERNAL_STORAGE,
-            Manifest.permission.ACCESS_FINE_LOCATION)!!
+    var permissionRule =
+        GrantPermissionRule.grant(
+            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            Manifest.permission.ACCESS_FINE_LOCATION,
+        )!!
 
     @get:Rule
     var activityRule = ActivityTestRule(LoginActivity::class.java)
@@ -61,7 +64,6 @@ class UploadTest {
         try {
             Intents.init()
         } catch (ex: IllegalStateException) {
-
         }
         UITestHelper.loginUser()
         UITestHelper.skipWelcome()
@@ -94,14 +96,13 @@ class UploadTest {
         dismissWarning("Yes")
 
         onView(allOf<View>(isDisplayed(), withId(R.id.tv_title)))
-                .perform(replaceText(commonsFileName))
+            .perform(replaceText(commonsFileName))
 
         onView(allOf<View>(isDisplayed(), withId(R.id.description_item_edit_text)))
-                .perform(replaceText(commonsFileName))
-
+            .perform(replaceText(commonsFileName))
 
         onView(allOf(isDisplayed(), withId(R.id.btn_next)))
-                .perform(click())
+            .perform(click())
 
         UITestHelper.sleep(5000)
         dismissWarning("Yes")
@@ -109,29 +110,30 @@ class UploadTest {
         UITestHelper.sleep(3000)
 
         onView(allOf(isDisplayed(), withId(R.id.et_search)))
-                .perform(replaceText("Uploaded with Mobile/Android Tests"))
+            .perform(replaceText("Uploaded with Mobile/Android Tests"))
 
         UITestHelper.sleep(3000)
 
         try {
             onView(allOf(isDisplayed(), UITestHelper.first(withParent(withId(R.id.rv_categories)))))
-                    .perform(click())
+                .perform(click())
         } catch (ignored: NoMatchingViewException) {
         }
 
         onView(allOf(isDisplayed(), withId(R.id.btn_next)))
-                .perform(click())
+            .perform(click())
 
         dismissWarning("Yes, Submit")
 
         UITestHelper.sleep(500)
 
         onView(allOf(isDisplayed(), withId(R.id.btn_submit)))
-                .perform(click())
+            .perform(click())
 
         UITestHelper.sleep(10000)
 
-        val fileUrl = "https://commons.wikimedia.beta.wmflabs.org/wiki/File:" +
+        val fileUrl =
+            "https://commons.wikimedia.beta.wmflabs.org/wiki/File:" +
                 commonsFileName.replace(' ', '_') + ".jpg"
         Timber.i("File should be uploaded to $fileUrl")
     }
@@ -139,8 +141,8 @@ class UploadTest {
     private fun dismissWarning(warningText: String) {
         try {
             onView(withText(warningText))
-                    .check(matches(isDisplayed()))
-                    .perform(click())
+                .check(matches(isDisplayed()))
+                .perform(click())
         } catch (ignored: NoMatchingViewException) {
         }
     }
@@ -167,10 +169,10 @@ class UploadTest {
         dismissWarning("Yes")
 
         onView(allOf<View>(isDisplayed(), withId(R.id.tv_title)))
-                .perform(replaceText(commonsFileName))
+            .perform(replaceText(commonsFileName))
 
         onView(allOf(isDisplayed(), withId(R.id.btn_next)))
-                .perform(click())
+            .perform(click())
 
         UITestHelper.sleep(10000)
         dismissWarning("Yes")
@@ -178,29 +180,30 @@ class UploadTest {
         UITestHelper.sleep(3000)
 
         onView(allOf(isDisplayed(), withId(R.id.et_search)))
-                .perform(replaceText("Test"))
+            .perform(replaceText("Test"))
 
         UITestHelper.sleep(3000)
 
         try {
             onView(allOf(isDisplayed(), UITestHelper.first(withParent(withId(R.id.rv_categories)))))
-                    .perform(click())
+                .perform(click())
         } catch (ignored: NoMatchingViewException) {
         }
 
         onView(allOf(isDisplayed(), withId(R.id.btn_next)))
-                .perform(click())
+            .perform(click())
 
         dismissWarning("Yes, Submit")
 
         UITestHelper.sleep(500)
 
         onView(allOf(isDisplayed(), withId(R.id.btn_submit)))
-                .perform(click())
+            .perform(click())
 
         UITestHelper.sleep(10000)
 
-        val fileUrl = "https://commons.wikimedia.beta.wmflabs.org/wiki/File:" +
+        val fileUrl =
+            "https://commons.wikimedia.beta.wmflabs.org/wiki/File:" +
                 commonsFileName.replace(' ', '_') + ".jpg"
         Timber.i("File should be uploaded to $fileUrl")
     }
@@ -227,23 +230,29 @@ class UploadTest {
         dismissWarningDialog()
 
         onView(allOf<View>(isDisplayed(), withId(R.id.tv_title)))
-                .perform(replaceText(commonsFileName))
+            .perform(replaceText(commonsFileName))
 
         onView(withId(R.id.rv_descriptions)).perform(
-                RecyclerViewActions
-                        .actionOnItemAtPosition<UploadMediaDetailAdapter.ViewHolder>(0,
-                                MyViewAction.typeTextInChildViewWithId(R.id.description_item_edit_text, "Test description")))
+            RecyclerViewActions
+                .actionOnItemAtPosition<UploadMediaDetailAdapter.ViewHolder>(
+                    0,
+                    MyViewAction.typeTextInChildViewWithId(R.id.description_item_edit_text, "Test description"),
+                ),
+        )
 
         onView(withId(R.id.btn_add))
-                .perform(click())
+            .perform(click())
 
         onView(withId(R.id.rv_descriptions)).perform(
-                RecyclerViewActions
-                        .actionOnItemAtPosition<UploadMediaDetailAdapter.ViewHolder>(1,
-                                MyViewAction.typeTextInChildViewWithId(R.id.description_item_edit_text, "Description")))
+            RecyclerViewActions
+                .actionOnItemAtPosition<UploadMediaDetailAdapter.ViewHolder>(
+                    1,
+                    MyViewAction.typeTextInChildViewWithId(R.id.description_item_edit_text, "Description"),
+                ),
+        )
 
         onView(allOf(isDisplayed(), withId(R.id.btn_next)))
-                .perform(click())
+            .perform(click())
 
         UITestHelper.sleep(5000)
         dismissWarning("Yes")
@@ -251,29 +260,30 @@ class UploadTest {
         UITestHelper.sleep(3000)
 
         onView(allOf(isDisplayed(), withId(R.id.et_search)))
-                .perform(replaceText("Test"))
+            .perform(replaceText("Test"))
 
         UITestHelper.sleep(3000)
 
         try {
             onView(allOf(isDisplayed(), UITestHelper.first(withParent(withId(R.id.rv_categories)))))
-                    .perform(click())
+                .perform(click())
         } catch (ignored: NoMatchingViewException) {
         }
 
         onView(allOf(isDisplayed(), withId(R.id.btn_next)))
-                .perform(click())
+            .perform(click())
 
         dismissWarning("Yes, Submit")
 
         UITestHelper.sleep(500)
 
         onView(allOf(isDisplayed(), withId(R.id.btn_submit)))
-                .perform(click())
+            .perform(click())
 
         UITestHelper.sleep(10000)
 
-        val fileUrl = "https://commons.wikimedia.beta.wmflabs.org/wiki/File:" +
+        val fileUrl =
+            "https://commons.wikimedia.beta.wmflabs.org/wiki/File:" +
                 commonsFileName.replace(' ', '_') + ".jpg"
         Timber.i("File should be uploaded to $fileUrl")
     }
@@ -306,7 +316,6 @@ class UploadTest {
             } catch (e: IOException) {
                 e.printStackTrace()
             }
-
         }
     }
 
@@ -328,8 +337,8 @@ class UploadTest {
     private fun dismissWarningDialog() {
         try {
             onView(withText("Yes"))
-                    .check(matches(isDisplayed()))
-                    .perform(click())
+                .check(matches(isDisplayed()))
+                .perform(click())
         } catch (ignored: NoMatchingViewException) {
         }
     }
@@ -337,10 +346,10 @@ class UploadTest {
     private fun openGallery() {
         // Open FAB
         onView(allOf<View>(withId(R.id.fab_plus), isDisplayed()))
-                .perform(click())
+            .perform(click())
 
         // Click gallery
         onView(allOf<View>(withId(R.id.fab_gallery), isDisplayed()))
-                .perform(click())
+            .perform(click())
     }
 }

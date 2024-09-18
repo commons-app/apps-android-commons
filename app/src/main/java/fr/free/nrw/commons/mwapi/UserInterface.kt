@@ -17,7 +17,7 @@ interface UserInterface {
     @GET(WikidataConstants.MW_API_PREFIX + "action=query&list=logevents&letype=upload&leprop=title|timestamp|ids&lelimit=500")
     fun getUserLogEvents(
         @Query("leuser") user: String?,
-        @QueryMap continuation: Map<String?, String?>?
+        @QueryMap continuation: Map<String?, String?>?,
     ): Observable<MwQueryResponse>
 
     /**

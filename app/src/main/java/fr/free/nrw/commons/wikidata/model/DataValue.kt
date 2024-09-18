@@ -2,11 +2,14 @@ package fr.free.nrw.commons.wikidata.model
 
 import fr.free.nrw.commons.wikidata.json.RuntimeTypeAdapterFactory
 
-sealed class DataValue(val type: String) {
+sealed class DataValue(
+    val type: String,
+) {
     companion object {
         @JvmStatic
         val polymorphicTypeAdapter =
-            RuntimeTypeAdapterFactory.of(DataValue::class.java, DataValue::type.name)
+            RuntimeTypeAdapterFactory
+                .of(DataValue::class.java, DataValue::type.name)
                 .registerSubtype(EntityId::class.java, EntityId.TYPE)
                 .registerSubtype(ValueString::class.java, ValueString.TYPE)
                 .registerSubtype(GlobeCoordinate_partial::class.java, GlobeCoordinate_partial.TYPE)
@@ -22,7 +25,9 @@ sealed class DataValue(val type: String) {
     //    },
     //    "type": "wikibase-entityid"
     //    }
-    data class EntityId(val value: WikiBaseEntityValue) : DataValue(TYPE) {
+    data class EntityId(
+        val value: WikiBaseEntityValue,
+    ) : DataValue(TYPE) {
         companion object {
             const val TYPE = "wikibase-entityid"
         }
@@ -32,7 +37,9 @@ sealed class DataValue(val type: String) {
     //        "value": "SomePicture.jpg",
     //        "type": "string"
     //    }
-    data class ValueString(val value: String) : DataValue(TYPE) {
+    data class ValueString(
+        val value: String,
+    ) : DataValue(TYPE) {
         companion object {
             const val TYPE = "string"
         }
@@ -47,7 +54,7 @@ sealed class DataValue(val type: String) {
     //    },
     //    "type": "globecoordinate"
     //    }
-    class GlobeCoordinate_partial() : DataValue(TYPE) {
+    class GlobeCoordinate_partial : DataValue(TYPE) {
         companion object {
             const val TYPE = "globecoordinate"
         }
@@ -63,7 +70,7 @@ sealed class DataValue(val type: String) {
     //    },
     //    "type": "time"
     //    }
-    class Time_partial() : DataValue(TYPE) {
+    class Time_partial : DataValue(TYPE) {
         companion object {
             const val TYPE = "time"
         }
@@ -75,7 +82,7 @@ sealed class DataValue(val type: String) {
     //        "unit": "http://www.wikidata.org/entity/Q828224"
     //    }
     //    }
-    class Quantity_partial() : DataValue(TYPE) {
+    class Quantity_partial : DataValue(TYPE) {
         companion object {
             const val TYPE = "quantity"
         }
@@ -87,7 +94,9 @@ sealed class DataValue(val type: String) {
     //        "language": "ko"
     //    }
     //    }
-    class MonoLingualText(val value: WikiBaseMonolingualTextValue) : DataValue(TYPE) {
+    class MonoLingualText(
+        val value: WikiBaseMonolingualTextValue,
+    ) : DataValue(TYPE) {
         companion object {
             const val TYPE = "monolingualtext"
         }

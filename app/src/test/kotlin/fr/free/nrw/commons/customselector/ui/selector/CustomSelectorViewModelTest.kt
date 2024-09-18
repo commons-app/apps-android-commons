@@ -10,7 +10,6 @@ import org.mockito.MockitoAnnotations
  * Custom Selector View Model test.
  */
 class CustomSelectorViewModelTest {
-
     private lateinit var viewModel: CustomSelectorViewModel
 
     @Mock
@@ -23,19 +22,18 @@ class CustomSelectorViewModelTest {
      * Set up the test.
      */
     @Before
-    fun setUp(){
+    fun setUp() {
         MockitoAnnotations.initMocks(this)
-        viewModel = CustomSelectorViewModel(context, imageFileLoader);
+        viewModel = CustomSelectorViewModel(context, imageFileLoader)
     }
 
     /**
      * Test onCleared();
      */
     @Test
-    fun testOnCleared(){
+    fun testOnCleared() {
         val func = viewModel.javaClass.getDeclaredMethod("onCleared")
         func.isAccessible = true
-        func.invoke(viewModel);
+        func.invoke(viewModel)
     }
-
 }

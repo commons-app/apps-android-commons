@@ -25,14 +25,18 @@ import java.io.File
  * @param callback The callback to handle user actions such as Delete Uploads and Restart Uploads
  * on failed uploads.
  */
-class FailedUploadsAdapter(callback: Callback) :
-    PagedListAdapter<Contribution, FailedUploadsAdapter.ViewHolder>(ContributionDiffCallback()) {
+class FailedUploadsAdapter(
+    callback: Callback,
+) : PagedListAdapter<Contribution, FailedUploadsAdapter.ViewHolder>(ContributionDiffCallback()) {
     private var callback: Callback = callback
 
     /**
      * Creates a new ViewHolder instance. Inflates the layout for each item in the list.
      */
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int,
+    ): ViewHolder {
         val view: View =
             LayoutInflater.from(parent.context).inflate(R.layout.item_failed_upload, parent, false)
         return ViewHolder(view)
@@ -42,7 +46,10 @@ class FailedUploadsAdapter(callback: Callback) :
      * Binds data to the provided ViewHolder. Sets up the item view with data from the
      * contribution at the specified position.
      */
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+    override fun onBindViewHolder(
+        holder: ViewHolder,
+        position: Int,
+    ) {
         val item: Contribution? = getItem(position)
         if (item != null) {
             holder.titleTextView.setText(item.media.displayTitle)
@@ -86,7 +93,9 @@ class FailedUploadsAdapter(callback: Callback) :
     /**
      * ViewHolder for the failed upload item. Holds references to the views for each item.
      */
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class ViewHolder(
+        itemView: View,
+    ) : RecyclerView.ViewHolder(itemView) {
         var itemImage: com.facebook.drawee.view.SimpleDraweeView =
             itemView.findViewById(R.id.itemImage)
         var titleTextView: TextView = itemView.findViewById<TextView>(R.id.titleTextView)
@@ -100,22 +109,22 @@ class FailedUploadsAdapter(callback: Callback) :
      * Returns the ID of the item at the specified position. Uses the pageId of the contribution
      * for unique identification.
      */
-    override fun getItemId(position: Int): Long {
-        return getItem(position)?.pageId?.hashCode()?.toLong() ?: position.toLong()
-    }
+    override fun getItemId(position: Int): Long = getItem(position)?.pageId?.hashCode()?.toLong() ?: position.toLong()
 
     /**
      * Uses DiffUtil to calculate the changes in the list
      * It has methods that check pageId and the content of the items to determine if its a new item
      */
     class ContributionDiffCallback : DiffUtil.ItemCallback<Contribution>() {
-        override fun areItemsTheSame(oldItem: Contribution, newItem: Contribution): Boolean {
-            return oldItem.pageId.hashCode() == newItem.pageId.hashCode()
-        }
+        override fun areItemsTheSame(
+            oldItem: Contribution,
+            newItem: Contribution,
+        ): Boolean = oldItem.pageId.hashCode() == newItem.pageId.hashCode()
 
-        override fun areContentsTheSame(oldItem: Contribution, newItem: Contribution): Boolean {
-            return oldItem.transferred == newItem.transferred
-        }
+        override fun areContentsTheSame(
+            oldItem: Contribution,
+            newItem: Contribution,
+        ): Boolean = oldItem.transferred == newItem.transferred
     }
 
     /**

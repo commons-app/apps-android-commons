@@ -13,12 +13,10 @@ import junit.framework.TestCase.assertEquals
 import junit.framework.TestCase.assertSame
 import junit.framework.TestCase.assertTrue
 import org.junit.Before
-import org.junit.Ignore
 import org.junit.Test
 import org.mockito.Mockito.mock
 
 class WikiBaseClientUnitTest {
-
     private val csrfTokenClient: CsrfTokenClient = mock()
     private val wikiBaseInterface: WikiBaseInterface = mock()
     private val wikiBaseClient = WikiBaseClient(wikiBaseInterface, csrfTokenClient)
@@ -74,9 +72,14 @@ class WikiBaseClientUnitTest {
     @Test
     fun addLabelstoWikidata() {
         val mwPostResponse = mock<MwPostResponse>()
-        whenever(wikiBaseInterface.addLabelstoWikidata(
-            "M123", "test", "en", "caption"
-        )).thenReturn(Observable.just(mwPostResponse))
+        whenever(
+            wikiBaseInterface.addLabelstoWikidata(
+                "M123",
+                "test",
+                "en",
+                "caption",
+            ),
+        ).thenReturn(Observable.just(mwPostResponse))
 
         val result = wikiBaseClient.addLabelsToWikidata(123L, "en", "caption").blockingFirst()
 

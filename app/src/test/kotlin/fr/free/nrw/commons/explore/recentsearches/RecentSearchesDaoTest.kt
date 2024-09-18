@@ -24,7 +24,6 @@ import java.util.*
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
 class RecentSearchesDaoTest {
-
     private val columns = arrayOf(COLUMN_ID, COLUMN_NAME, COLUMN_LAST_USED)
     private val client: ContentProviderClient = mock()
     private val database: SQLiteDatabase = mock()
@@ -238,11 +237,11 @@ class RecentSearchesDaoTest {
         assertEquals(123L, recentSearch?.lastSearched?.time)
 
         verify(client).query(
-                eq(BASE_URI),
-                eq(ALL_FIELDS),
-                eq("$COLUMN_NAME=?"),
-                queryCaptor.capture(),
-                isNull()
+            eq(BASE_URI),
+            eq(ALL_FIELDS),
+            eq("$COLUMN_NAME=?"),
+            queryCaptor.capture(),
+            isNull(),
         )
         assertEquals("butterfly", queryCaptor.firstValue[0])
     }
@@ -274,11 +273,11 @@ class RecentSearchesDaoTest {
         assertEquals("butterfly", result[0])
 
         verify(client).query(
-                eq(BASE_URI),
-                eq(ALL_FIELDS),
-                isNull(),
-                queryCaptor.capture(),
-                eq("$COLUMN_LAST_USED DESC")
+            eq(BASE_URI),
+            eq(ALL_FIELDS),
+            isNull(),
+            queryCaptor.capture(),
+            eq("$COLUMN_LAST_USED DESC"),
         )
         assertEquals(0, queryCaptor.firstValue.size)
     }
@@ -299,10 +298,10 @@ class RecentSearchesDaoTest {
      * Unit Test for creating entries in recent searches database.
      * @param rowCount No of rows
      */
-    private fun createCursor(rowCount: Int) = MatrixCursor(columns, rowCount).apply {
-        for (i in 0 until rowCount) {
-            addRow(listOf("1", "butterfly", "123"))
+    private fun createCursor(rowCount: Int) =
+        MatrixCursor(columns, rowCount).apply {
+            for (i in 0 until rowCount) {
+                addRow(listOf("1", "butterfly", "123"))
+            }
         }
-    }
-
 }

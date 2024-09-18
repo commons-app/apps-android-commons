@@ -2,6 +2,8 @@ package fr.free.nrw.commons.actions
 
 import com.nhaarman.mockitokotlin2.eq
 import com.nhaarman.mockitokotlin2.verify
+import fr.free.nrw.commons.auth.csrf.CsrfTokenClient
+import fr.free.nrw.commons.wikidata.model.edit.Edit
 import io.reactivex.Observable
 import org.junit.Before
 import org.junit.Test
@@ -9,12 +11,11 @@ import org.mockito.ArgumentMatchers
 import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.MockitoAnnotations
-import fr.free.nrw.commons.auth.csrf.CsrfTokenClient
-import fr.free.nrw.commons.wikidata.model.edit.Edit
 
 class PageEditClientTest {
     @Mock
     private lateinit var csrfTokenClient: CsrfTokenClient
+
     @Mock
     private lateinit var pageEditInterface: PageEditInterface
 
@@ -52,16 +53,17 @@ class PageEditClientTest {
     @Test
     fun testAppendEdit() {
         Mockito.`when`(csrfTokenClient.getTokenBlocking()).thenReturn("test")
-        Mockito.`when`(
-            pageEditInterface.postAppendEdit(
-                ArgumentMatchers.anyString(),
-                ArgumentMatchers.anyString(),
-                ArgumentMatchers.anyString(),
-                ArgumentMatchers.anyString()
+        Mockito
+            .`when`(
+                pageEditInterface.postAppendEdit(
+                    ArgumentMatchers.anyString(),
+                    ArgumentMatchers.anyString(),
+                    ArgumentMatchers.anyString(),
+                    ArgumentMatchers.anyString(),
+                ),
+            ).thenReturn(
+                Observable.just(edit),
             )
-        ).thenReturn(
-            Observable.just(edit)
-        )
         Mockito.`when`(edit.edit()).thenReturn(editResult)
         Mockito.`when`(editResult.editSucceeded()).thenReturn(true)
         pageEditClient.appendEdit("test", "test", "test").test()
@@ -88,7 +90,12 @@ class PageEditClientTest {
     fun testSetCaptions() {
         Mockito.`when`(csrfTokenClient.getTokenBlocking()).thenReturn("test")
         pageEditClient.setCaptions("test", "test", "en", "test")
-        verify(pageEditInterface).postCaptions(eq("test"), eq("test"), eq("en"),
-            eq("test"), eq("test"))
+        verify(pageEditInterface).postCaptions(
+            eq("test"),
+            eq("test"),
+            eq("en"),
+            eq("test"),
+            eq("test"),
+        )
     }
 }

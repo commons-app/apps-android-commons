@@ -22,9 +22,7 @@ import org.mockito.MockitoAnnotations
 import org.powermock.reflect.Whitebox
 import java.lang.reflect.Method
 
-
 class DepictsPresenterTest {
-
     @get:Rule
     var testRule = InstantTaskExecutorRule()
 
@@ -65,14 +63,15 @@ class DepictsPresenterTest {
 
     @Test
     fun `search results emission returns distinct results + selected items without disambiguations`() {
-        val searchResults = listOf(
-            depictedItem(id="nonUnique"),
-            depictedItem(id="nonUnique"),
-            depictedItem(
-                instanceOfs = listOf(WikidataDisambiguationItems.CATEGORY.id),
-                id = "unique"
+        val searchResults =
+            listOf(
+                depictedItem(id = "nonUnique"),
+                depictedItem(id = "nonUnique"),
+                depictedItem(
+                    instanceOfs = listOf(WikidataDisambiguationItems.CATEGORY.id),
+                    id = "unique",
+                ),
             )
-        )
         whenever(repository.searchAllEntities("")).thenReturn(Flowable.just(searchResults))
         val selectedItem = depictedItem(id = "selected")
         whenever(repository.selectedDepictions).thenReturn(listOf(selectedItem))
@@ -81,7 +80,6 @@ class DepictsPresenterTest {
         verify(view).showProgress(false)
         verify(view).showError(true)
     }
-
 
     @Test
     fun `empty search results with empty term do not show error`() {
@@ -151,10 +149,11 @@ class DepictsPresenterTest {
     fun `Test searchResults when media is null`() {
         whenever(repository.searchAllEntities("querystring"))
             .thenReturn(Flowable.just(listOf(depictedItem())))
-        val method: Method = DepictsPresenter::class.java.getDeclaredMethod(
-            "searchResults",
-            String::class.java
-        )
+        val method: Method =
+            DepictsPresenter::class.java.getDeclaredMethod(
+                "searchResults",
+                String::class.java,
+            )
         method.isAccessible = true
         method.invoke(depictsPresenter, "querystring")
         verify(repository, times(1)).searchAllEntities("querystring")
@@ -167,10 +166,11 @@ class DepictsPresenterTest {
             .thenReturn(Flowable.just(listOf(depictedItem())))
         whenever(repository.searchAllEntities("querystring"))
             .thenReturn(Flowable.just(listOf(depictedItem())))
-        val method: Method = DepictsPresenter::class.java.getDeclaredMethod(
-            "searchResults",
-            String::class.java
-        )
+        val method: Method =
+            DepictsPresenter::class.java.getDeclaredMethod(
+                "searchResults",
+                String::class.java,
+            )
         method.isAccessible = true
         method.invoke(depictsPresenter, "querystring")
         verify(repository, times(1)).searchAllEntities("querystring")
@@ -179,19 +179,21 @@ class DepictsPresenterTest {
     @Test
     fun testSelectNewDepictions() {
         Whitebox.setInternalState(depictsPresenter, "media", media)
-        val method: Method = DepictsPresenter::class.java.getDeclaredMethod(
-            "selectNewDepictions",
-            List::class.java
-        )
+        val method: Method =
+            DepictsPresenter::class.java.getDeclaredMethod(
+                "selectNewDepictions",
+                List::class.java,
+            )
         method.isAccessible = true
         method.invoke(depictsPresenter, listOf(depictedItem()))
     }
 
     @Test
     fun testClearPreviousSelection() {
-        val method: Method = DepictsPresenter::class.java.getDeclaredMethod(
-            "clearPreviousSelection"
-        )
+        val method: Method =
+            DepictsPresenter::class.java.getDeclaredMethod(
+                "clearPreviousSelection",
+            )
         method.isAccessible = true
         method.invoke(depictsPresenter)
     }

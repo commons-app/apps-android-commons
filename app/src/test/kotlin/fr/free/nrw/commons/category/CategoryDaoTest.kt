@@ -7,7 +7,6 @@ import android.database.MatrixCursor
 import android.database.sqlite.SQLiteDatabase
 import android.os.RemoteException
 import com.nhaarman.mockitokotlin2.*
-import fr.free.nrw.commons.BuildConfig
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.category.CategoryContentProvider.BASE_URI
 import fr.free.nrw.commons.category.CategoryContentProvider.uriForId
@@ -24,9 +23,15 @@ import java.util.*
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
 class CategoryDaoTest {
-
-    private val columns = arrayOf(COLUMN_ID, COLUMN_NAME, COLUMN_DESCRIPTION,
-        COLUMN_THUMBNAIL, COLUMN_LAST_USED, COLUMN_TIMES_USED)
+    private val columns =
+        arrayOf(
+            COLUMN_ID,
+            COLUMN_NAME,
+            COLUMN_DESCRIPTION,
+            COLUMN_THUMBNAIL,
+            COLUMN_LAST_USED,
+            COLUMN_TIMES_USED,
+        )
     private val client: ContentProviderClient = mock()
     private val database: SQLiteDatabase = mock()
     private val captor = argumentCaptor<ContentValues>()
@@ -138,8 +143,15 @@ class CategoryDaoTest {
     fun saveNewCategory() {
         val contentUri = CategoryContentProvider.uriForId(111)
         whenever(client.insert(isA(), isA())).thenReturn(contentUri)
-        val category = Category(null, "showImageWithItem", "description",
-            "image", Date(234L), 1)
+        val category =
+            Category(
+                null,
+                "showImageWithItem",
+                "description",
+                "image",
+                Date(234L),
+                1,
+            )
 
         testObject.save(category)
 
@@ -199,11 +211,11 @@ class CategoryDaoTest {
         assertEquals(2, category?.timesUsed)
 
         verify(client).query(
-                eq(BASE_URI),
-                eq(ALL_FIELDS),
-                eq("$COLUMN_NAME=?"),
-                queryCaptor.capture(),
-                isNull()
+            eq(BASE_URI),
+            eq(ALL_FIELDS),
+            eq("$COLUMN_NAME=?"),
+            queryCaptor.capture(),
+            isNull(),
         )
         assertEquals("showImageWithItem", queryCaptor.firstValue[0])
     }
@@ -253,11 +265,11 @@ class CategoryDaoTest {
         assertEquals("showImageWithItem", result[0].name)
 
         verify(client).query(
-                eq(BASE_URI),
-                eq(ALL_FIELDS),
-                isNull(),
-                queryCaptor.capture(),
-                eq("$COLUMN_LAST_USED DESC")
+            eq(BASE_URI),
+            eq(ALL_FIELDS),
+            isNull(),
+            queryCaptor.capture(),
+            eq("$COLUMN_LAST_USED DESC"),
         )
         assertEquals(0, queryCaptor.firstValue.size)
     }
@@ -271,10 +283,10 @@ class CategoryDaoTest {
         assertEquals(5, result.size)
     }
 
-    private fun createCursor(rowCount: Int) = MatrixCursor(columns, rowCount).apply {
-        for (i in 0 until rowCount) {
-            addRow(listOf("1", "showImageWithItem", "description", "image", "123", "2"))
+    private fun createCursor(rowCount: Int) =
+        MatrixCursor(columns, rowCount).apply {
+            for (i in 0 until rowCount) {
+                addRow(listOf("1", "showImageWithItem", "description", "image", "123", "2"))
+            }
         }
-    }
-
 }

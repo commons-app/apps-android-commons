@@ -6,6 +6,11 @@ import fr.free.nrw.commons.BuildConfig
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.explore.media.MediaConverter
 import fr.free.nrw.commons.media.model.PageMediaListResponse
+import fr.free.nrw.commons.wikidata.model.Entities
+import fr.free.nrw.commons.wikidata.model.gallery.ImageInfo
+import fr.free.nrw.commons.wikidata.mwapi.MwQueryPage
+import fr.free.nrw.commons.wikidata.mwapi.MwQueryResponse
+import fr.free.nrw.commons.wikidata.mwapi.MwQueryResult
 import io.reactivex.Single
 import media
 import org.junit.Before
@@ -13,15 +18,8 @@ import org.junit.Test
 import org.mockito.ArgumentMatchers
 import org.mockito.Mock
 import org.mockito.MockitoAnnotations
-import fr.free.nrw.commons.wikidata.mwapi.MwQueryPage
-import fr.free.nrw.commons.wikidata.mwapi.MwQueryResponse
-import fr.free.nrw.commons.wikidata.mwapi.MwQueryResult
-import fr.free.nrw.commons.wikidata.model.gallery.ImageInfo
-import fr.free.nrw.commons.wikidata.model.Entities
-
 
 class MediaClientTest {
-
     @Mock
     internal lateinit var mediaInterface: MediaInterface
 
@@ -71,9 +69,10 @@ class MediaClientTest {
 
     @Test
     fun `checkFileExistsUsingSha returns false with no Images`() {
-        val mwQueryResponse = mockQuery {
-            whenever(allImages()).thenReturn(listOf())
-        }
+        val mwQueryResponse =
+            mockQuery {
+                whenever(allImages()).thenReturn(listOf())
+            }
         whenever(mediaInterface.checkFileExistsUsingSha(""))
             .thenReturn(Single.just(mwQueryResponse))
         mediaClient.checkFileExistsUsingSha("").test().assertValue(false)
@@ -81,9 +80,10 @@ class MediaClientTest {
 
     @Test
     fun `checkFileExistsUsingSha returns true with Images`() {
-        val mwQueryResponse = mockQuery {
-            whenever(allImages()).thenReturn(listOf(mock()))
-        }
+        val mwQueryResponse =
+            mockQuery {
+                whenever(allImages()).thenReturn(listOf(mock()))
+            }
         whenever(mediaInterface.checkFileExistsUsingSha(""))
             .thenReturn(Single.just(mwQueryResponse))
         mediaClient.checkFileExistsUsingSha("").test().assertValue(true)
@@ -101,7 +101,7 @@ class MediaClientTest {
         mediaClient.getMediaListFromCategory("").test().assertError { true }
 
         mediaClient.resetCategoryContinuation("")
-        val (resetMwQueryResponse, resetMedia)=expectSuccessfulMapping()
+        val (resetMwQueryResponse, resetMedia) = expectSuccessfulMapping()
         whenever(mediaInterface.getMediaListFromCategory("", 10, emptyMap()))
             .thenReturn(Single.just(resetMwQueryResponse))
         mediaClient.getMediaListFromCategory("").test().assertValues(listOf(resetMedia))
@@ -121,7 +121,8 @@ class MediaClientTest {
         val (mwQueryResponse, media) = expectSuccessfulMapping()
         whenever(mediaInterface.getMediaListFromSearch("", 0, 1))
             .thenReturn(Single.just(mwQueryResponse))
-        mediaClient.getMediaListFromSearch("", 0, 1)
+        mediaClient
+            .getMediaListFromSearch("", 0, 1)
             .test()
             .assertValues(listOf(media))
     }
@@ -131,7 +132,8 @@ class MediaClientTest {
         val (mwQueryResponse, media) = expectSuccessfulMapping()
         whenever(mediaInterface.fetchImagesForDepictedItem("haswbstatement:${BuildConfig.DEPICTS_PROPERTY}=", "0", "1"))
             .thenReturn(Single.just(mwQueryResponse))
-        mediaClient.fetchImagesForDepictedItem("", 0, 1)
+        mediaClient
+            .fetchImagesForDepictedItem("", 0, 1)
             .test()
             .assertValues(listOf(media))
     }
@@ -178,7 +180,7 @@ class MediaClientTest {
     fun `getEntities invokes interface with non empty ids`() {
         val entities = mock<Entities>()
         whenever(mediaDetailInterface.getEntity("1|2")).thenReturn(Single.just(entities))
-        mediaClient.getEntities(listOf("1","2")).test().assertValue(entities)
+        mediaClient.getEntities(listOf("1", "2")).test().assertValue(entities)
     }
 
     @Test
@@ -213,21 +215,21 @@ class MediaClientTest {
         return mwQueryResponse
     }
 
-    private fun expectResponseWithPageId(expectedId: Int): MwQueryResponse {
-        return mockQuery {
+    private fun expectResponseWithPageId(expectedId: Int): MwQueryResponse =
+        mockQuery {
             val mwQueryPage = mock<MwQueryPage>()
             whenever(firstPage()).thenReturn(mwQueryPage)
             whenever(mwQueryPage.pageId()).thenReturn(expectedId)
         }
-    }
 
     private fun expectSuccessfulMapping(continuationMap: Map<String, String>? = emptyMap()): Pair<MwQueryResponse, Media> {
         val media = media()
         val mwQueryPage = mock<MwQueryPage>()
-        val mwQueryResponse = mockQuery {
-            whenever(pages()).thenReturn(listOf(mwQueryPage, mwQueryPage))
-            whenever(mwQueryPage.pageId()).thenReturn(1, 2)
-        }
+        val mwQueryResponse =
+            mockQuery {
+                whenever(pages()).thenReturn(listOf(mwQueryPage, mwQueryPage))
+                whenever(mwQueryPage.pageId()).thenReturn(1, 2)
+            }
         whenever(mwQueryResponse.continuation()).thenReturn(continuationMap)
         val entities = mock<Entities>()
         whenever(mediaDetailInterface.getEntity("M1|M2")).thenReturn(Single.just(entities))

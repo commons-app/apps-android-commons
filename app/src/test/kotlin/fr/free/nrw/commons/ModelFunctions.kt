@@ -7,8 +7,8 @@ import fr.free.nrw.commons.nearby.Label
 import fr.free.nrw.commons.nearby.Place
 import fr.free.nrw.commons.nearby.Sitelinks
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
-import fr.free.nrw.commons.wikidata.model.DepictSearchItem
 import fr.free.nrw.commons.wikidata.model.*
+import fr.free.nrw.commons.wikidata.model.DepictSearchItem
 import java.util.*
 
 fun depictedItem(
@@ -18,7 +18,7 @@ fun depictedItem(
     instanceOfs: List<String> = listOf(),
     commonsCategories: List<CategoryItem> = listOf(),
     isSelected: Boolean = false,
-    id: String = "entityId"
+    id: String = "entityId",
 ) = DepictedItem(
     name = name,
     description = description,
@@ -26,12 +26,15 @@ fun depictedItem(
     instanceOfs = instanceOfs,
     commonsCategories = commonsCategories,
     isSelected = isSelected,
-    id = id
+    id = id,
 )
 
-fun categoryItem(name: String = "name", description: String = "desc",
-                 thumbUrl: String = "thumbUrl", selected: Boolean = false) =
-    CategoryItem(name, description, thumbUrl, selected)
+fun categoryItem(
+    name: String = "name",
+    description: String = "desc",
+    thumbUrl: String = "thumbUrl",
+    selected: Boolean = false,
+) = CategoryItem(name, description, thumbUrl, selected)
 
 fun media(
     thumbUrl: String? = "thumbUrl",
@@ -42,13 +45,13 @@ fun media(
     license: String? = "license",
     licenseUrl: String? = "licenseUrl",
     author: String? = "creator",
-    user:String?="user",
+    user: String? = "user",
     pageId: String = "pageId",
     categories: List<String>? = listOf("categories"),
     coordinates: LatLng? = LatLng(0.0, 0.0, 0.0f),
     captions: Map<String, String> = mapOf("en" to "caption"),
     descriptions: Map<String, String> = mapOf("en" to "description"),
-    depictionIds: List<String> = listOf("depictionId")
+    depictionIds: List<String> = listOf("depictionId"),
 ) = Media(
     pageId,
     thumbUrl,
@@ -64,7 +67,7 @@ fun media(
     coordinates,
     captions,
     descriptions,
-    depictionIds
+    depictionIds,
 )
 
 fun depictSearchItem(
@@ -72,7 +75,7 @@ fun depictSearchItem(
     pageId: String = "pageid",
     url: String = "url",
     label: String = "label",
-    description: String = "description"
+    description: String = "description",
 ) = DepictSearchItem(id, pageId, url, label, description)
 
 fun place(
@@ -85,30 +88,27 @@ fun place(
     siteLinks: Sitelinks? = null,
     pic: String = "pic",
     exists: Boolean = false,
-    entityID: String = "entityID"
-): Place {
-    return Place(lang, name, label, longDescription, latLng, category, siteLinks, pic, exists, entityID)
-}
+    entityID: String = "entityID",
+): Place = Place(lang, name, label, longDescription, latLng, category, siteLinks, pic, exists, entityID)
 
-fun entityId(wikiBaseEntityValue: WikiBaseEntityValue = wikiBaseEntityValue()) =
-    DataValue.EntityId(wikiBaseEntityValue)
+fun entityId(wikiBaseEntityValue: WikiBaseEntityValue = wikiBaseEntityValue()) = DataValue.EntityId(wikiBaseEntityValue)
 
 fun wikiBaseEntityValue(
     entityType: String = "type",
     id: String = "id",
-    numericId: Long = 0
+    numericId: Long = 0,
 ) = WikiBaseEntityValue(entityType, id, numericId)
 
 fun statement(
     mainSnak: Snak_partial = snak(),
     rank: String = "rank",
-    type: String = "type"
+    type: String = "type",
 ) = Statement_partial(mainSnak, type, rank)
 
 fun snak(
     snakType: String = "type",
     property: String = "property",
-    dataValue: DataValue = valueString("")
+    dataValue: DataValue = valueString(""),
 ) = Snak_partial(snakType, property, dataValue)
 
 fun valueString(value: String) = DataValue.ValueString(value)
@@ -117,7 +117,7 @@ fun entity(
     labels: Map<String, String> = emptyMap(),
     descriptions: Map<String, String> = emptyMap(),
     statements: Map<String, List<Statement_partial>>? = emptyMap(),
-    id: String = "id"
+    id: String = "id",
 ) = mock<Entities.Entity>().apply {
     val mockedLabels = labels.mockLabels()
     whenever(labels()).thenReturn(mockedLabels)
@@ -127,8 +127,7 @@ fun entity(
     whenever(id()).thenReturn(id)
 }
 
-private fun Map<String, String>.mockLabels(): Map<String, Entities.Label> {
-    return mapValues { entry ->
+private fun Map<String, String>.mockLabels(): Map<String, Entities.Label> =
+    mapValues { entry ->
         mock<Entities.Label>().also { whenever(it.value()).thenReturn(entry.value) }
     }
-}

@@ -23,7 +23,6 @@ import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 class LoginActivityTest {
-
     @get:Rule
     var activityRule = ActivityTestRule(LoginActivity::class.java)
 
@@ -49,8 +48,8 @@ class LoginActivityTest {
         Intents.intended(
             CoreMatchers.allOf(
                 IntentMatchers.hasAction(Intent.ACTION_VIEW),
-                IntentMatchers.hasData(BuildConfig.FORGOT_PASSWORD_URL)
-            )
+                IntentMatchers.hasData(BuildConfig.FORGOT_PASSWORD_URL),
+            ),
         )
     }
 

@@ -18,12 +18,18 @@ interface ReviewInterface {
      * the limit is increased from 10 to 50 using gcmlimit
      *
      */
-    @GET("w/api.php?action=query&format=json&formatversion=2&generator=categorymembers&gcmtype=file&gcmsort=timestamp&gcmdir=desc&gcmtitle=Category:Uploaded_with_Mobile/Android&gcmlimit=50")
+    @GET(
+        "w/api.php?action=query&format=json&formatversion=2&generator=categorymembers&gcmtype=file&gcmsort=timestamp&gcmdir=desc&gcmtitle=Category:Uploaded_with_Mobile/Android&gcmlimit=50",
+    )
     fun getRecentChanges(): Observable<MwQueryResponse>
 
     @GET("w/api.php?action=query&format=json&formatversion=2&prop=revisions&rvprop=timestamp|ids|user&rvdir=newer&rvlimit=1")
-    fun getFirstRevisionOfFile(@Query("titles") titles: String?): Observable<MwQueryResponse>
+    fun getFirstRevisionOfFile(
+        @Query("titles") titles: String?,
+    ): Observable<MwQueryResponse>
 
     @GET("w/api.php?action=query&format=json&formatversion=2&prop=fileusage|globalusage")
-    fun getGlobalUsageInfo(@Query("titles") title: String?): Observable<MwQueryResponse>
+    fun getGlobalUsageInfo(
+        @Query("titles") title: String?,
+    ): Observable<MwQueryResponse>
 }

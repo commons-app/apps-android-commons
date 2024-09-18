@@ -3,16 +3,14 @@ package fr.free.nrw.commons.customselector.helper
 import android.net.Uri
 import fr.free.nrw.commons.customselector.model.Folder
 import fr.free.nrw.commons.customselector.model.Image
-import org.junit.jupiter.api.Assertions.*
-
 import org.junit.Test
+import org.junit.jupiter.api.Assertions.*
 import org.mockito.Mockito.mock
 
 /**
  * Custom Selector Image Helper Test
  */
 internal class ImageHelperTest {
-
     var uri: Uri = mock(Uri::class.java)
     private val folderImage1 = Image(1, "image1", uri, "abc/abc", 1, "bucket1")
     private val folderImage2 = Image(2, "image1", uri, "xyz/xyz", 2, "bucket2")
@@ -42,7 +40,7 @@ internal class ImageHelperTest {
      */
     @Test
     fun getIndex() {
-        assertEquals(1,ImageHelper.getIndex(mockImageList, folderImage2))
+        assertEquals(1, ImageHelper.getIndex(mockImageList, folderImage2))
     }
 
     /**

@@ -9,14 +9,13 @@ import java.util.*
  * Test cases for FileMetadataUtils
  */
 class FileMetadataUtilsTest {
-
     /**
      * Test method to verify EXIF tags for "Author"
      */
     @Test
     fun getTagsFromPrefAuthor() {
         val author = FileMetadataUtils.getTagsFromPref("Author")
-        val authorRef = arrayOf(TAG_ARTIST, TAG_CAMERA_OWNER_NAME);
+        val authorRef = arrayOf(TAG_ARTIST, TAG_CAMERA_OWNER_NAME)
 
         assertTrue(Arrays.deepEquals(author, authorRef))
     }
@@ -27,9 +26,15 @@ class FileMetadataUtilsTest {
     @Test
     fun getTagsFromPrefLocation() {
         val author = FileMetadataUtils.getTagsFromPref("Location")
-        val authorRef = arrayOf(TAG_GPS_LATITUDE, TAG_GPS_LATITUDE_REF,
-                TAG_GPS_LONGITUDE, TAG_GPS_LONGITUDE_REF,
-                TAG_GPS_ALTITUDE, TAG_GPS_ALTITUDE_REF)
+        val authorRef =
+            arrayOf(
+                TAG_GPS_LATITUDE,
+                TAG_GPS_LATITUDE_REF,
+                TAG_GPS_LONGITUDE,
+                TAG_GPS_LONGITUDE_REF,
+                TAG_GPS_ALTITUDE,
+                TAG_GPS_ALTITUDE_REF,
+            )
 
         assertTrue(Arrays.deepEquals(author, authorRef))
     }

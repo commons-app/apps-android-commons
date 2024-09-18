@@ -9,7 +9,6 @@ import java.io.File
  * implementations to provide specific functionality for tasks like rotating images.
  */
 interface TransformImage {
-
     /**
      * Rotates the specified image file by the given degree.
      *
@@ -17,5 +16,8 @@ interface TransformImage {
      * @param degree The degree by which to rotate the image.
      * @return The rotated image File, or null if the rotation operation fails.
      */
-    fun rotateImage(imageFile: File, degree : Int ):File?
+    fun rotateImage(
+        imageFile: File,
+        degree: Int,
+    ): File?
 }

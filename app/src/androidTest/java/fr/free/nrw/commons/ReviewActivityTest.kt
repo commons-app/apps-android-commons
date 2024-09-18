@@ -9,7 +9,6 @@ import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 class ReviewActivityTest {
-
     @get:Rule
     var activityRule: ActivityTestRule<*> = ActivityTestRule(ReviewActivity::class.java)
 
@@ -17,5 +16,4 @@ class ReviewActivityTest {
     fun orientationChange() {
         UITestHelper.changeOrientation(activityRule)
     }
-
 }

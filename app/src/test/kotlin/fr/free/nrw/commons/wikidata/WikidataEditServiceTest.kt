@@ -55,11 +55,17 @@ class WikidataEditServiceTest {
     fun testUpdateDepictsProperty() {
         val fileEntityId = "12345"
 
-        whenever(wikibaseClient.getClaimIdsByProperty("M" + fileEntityId,
-            WikidataProperties.DEPICTS.propertyName))
-            .thenReturn(Observable.just(emptyList()))
-        whenever(wikibaseClient.postDeleteClaims("M" + fileEntityId,
-            gson.toJson(Mockito.mock(RemoveClaim::class.java)))
+        whenever(
+            wikibaseClient.getClaimIdsByProperty(
+                "M" + fileEntityId,
+                WikidataProperties.DEPICTS.propertyName,
+            ),
+        ).thenReturn(Observable.just(emptyList()))
+        whenever(
+            wikibaseClient.postDeleteClaims(
+                "M" + fileEntityId,
+                gson.toJson(Mockito.mock(RemoveClaim::class.java)),
+            ),
         ).thenReturn(Observable.just(true))
 
         wikidataEditService.updateDepictsProperty(fileEntityId, listOf())
@@ -78,7 +84,7 @@ class WikidataEditServiceTest {
         wikidataEditService.createClaim(
             wikidataPlace,
             uploadResult.filename,
-            hashMapOf<String, String>()
+            hashMapOf<String, String>(),
         )
     }
 }

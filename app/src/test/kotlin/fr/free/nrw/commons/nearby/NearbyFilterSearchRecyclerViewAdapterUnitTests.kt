@@ -22,7 +22,6 @@ import java.util.*
 @Config(sdk = [21], application = TestCommonsApplication::class)
 @LooperMode(LooperMode.Mode.PAUSED)
 class NearbyFilterSearchRecyclerViewAdapterUnitTests {
-
     private lateinit var context: Context
     private lateinit var adapter: NearbyFilterSearchRecyclerViewAdapter
 
@@ -101,5 +100,4 @@ class NearbyFilterSearchRecyclerViewAdapterUnitTests {
     fun testSetRecyclerViewAdapterAllSelected() {
         adapter.setRecyclerViewAdapterAllSelected()
     }
-
 }

@@ -3,6 +3,7 @@ package fr.free.nrw.commons.actions
 import com.nhaarman.mockitokotlin2.eq
 import com.nhaarman.mockitokotlin2.verify
 import fr.free.nrw.commons.CommonsApplication
+import fr.free.nrw.commons.auth.csrf.CsrfTokenClient
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -14,13 +15,13 @@ import org.mockito.Mockito.`when`
 import org.mockito.MockitoAnnotations
 import org.powermock.core.classloader.annotations.PrepareForTest
 import org.robolectric.RobolectricTestRunner
-import fr.free.nrw.commons.auth.csrf.CsrfTokenClient
 
 @RunWith(RobolectricTestRunner::class)
 @PrepareForTest(CommonsApplication::class)
 class ThanksClientTest {
     @Mock
     private lateinit var csrfTokenClient: CsrfTokenClient
+
     @Mock
     private lateinit var service: ThanksInterface
 

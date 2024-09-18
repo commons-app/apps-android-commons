@@ -5,5 +5,5 @@ import fr.free.nrw.commons.wikidata.model.Statement_partial
 
 data class Claims(
     @SerializedName(value = "claims")
-    val claims: Map<String, List<Statement_partial>> = emptyMap()
+    val claims: Map<String, List<Statement_partial>> = emptyMap(),
 )

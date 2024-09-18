@@ -18,9 +18,9 @@ import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.OkHttpConnectionFactory
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestCommonsApplication
-import fr.free.nrw.commons.createTestClient
 import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesFragment
 import fr.free.nrw.commons.contributions.MainActivity
+import fr.free.nrw.commons.createTestClient
 import fr.free.nrw.commons.databinding.FragmentBookmarksBinding
 import fr.free.nrw.commons.databinding.FragmentFeaturedRootBinding
 import fr.free.nrw.commons.explore.ParentViewPager
@@ -44,7 +44,6 @@ import java.lang.reflect.Field
 @Config(sdk = [21], application = TestCommonsApplication::class)
 @LooperMode(LooperMode.Mode.PAUSED)
 class BookmarkListRootFragmentUnitTest {
-
     private lateinit var fragment: BookmarkListRootFragment
     private lateinit var fragmentManager: FragmentManager
     private lateinit var layoutInflater: LayoutInflater
@@ -328,5 +327,4 @@ class BookmarkListRootFragmentUnitTest {
         field.set(fragment, null)
         Assert.assertEquals(fragment.backPressed(), false)
     }
-
 }

@@ -10,14 +10,14 @@ import java.util.concurrent.TimeUnit
  * Helper class for all the one time work requests
  */
 class WorkRequestHelper {
-
     companion object {
-
         private var isUploadWorkerRunning = false
         private val lock = Object()
 
-        fun makeOneTimeWorkRequest(context: Context, existingWorkPolicy: ExistingWorkPolicy) {
-
+        fun makeOneTimeWorkRequest(
+            context: Context,
+            existingWorkPolicy: ExistingWorkPolicy,
+        ) {
             synchronized(lock) {
                 if (isUploadWorkerRunning) {
                     Timber.e("UploadWorker is already running. Cannot start another instance.")
@@ -35,23 +35,26 @@ class WorkRequestHelper {
 
            More details on when exactly it is retried:
            https://developer.android.com/guide/background/persistent/getting-started/define-work#retries_backoff
-         */
-            val constraints: Constraints = Constraints.Builder()
-                .setRequiredNetworkType(NetworkType.CONNECTED)
-                .build()
+             */
+            val constraints: Constraints =
+                Constraints
+                    .Builder()
+                    .setRequiredNetworkType(NetworkType.CONNECTED)
+                    .build()
             val uploadRequest: OneTimeWorkRequest =
-                OneTimeWorkRequest.Builder(UploadWorker::class.java)
+                OneTimeWorkRequest
+                    .Builder(UploadWorker::class.java)
                     .setBackoffCriteria(
                         BackoffPolicy.LINEAR,
                         MIN_BACKOFF_MILLIS,
-                        TimeUnit.MILLISECONDS
-                    )
-                    .setConstraints(constraints)
+                        TimeUnit.MILLISECONDS,
+                    ).setConstraints(constraints)
                     .build()
             WorkManager.getInstance(context).enqueueUniqueWork(
-                UploadWorker::class.java.simpleName, existingWorkPolicy, uploadRequest
+                UploadWorker::class.java.simpleName,
+                existingWorkPolicy,
+                uploadRequest,
             )
-
         }
 
         /**
@@ -64,4 +67,3 @@ class WorkRequestHelper {
         }
     }
 }
-

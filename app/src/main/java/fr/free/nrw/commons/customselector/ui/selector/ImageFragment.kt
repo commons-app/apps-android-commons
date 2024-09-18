@@ -44,8 +44,10 @@ import kotlin.collections.ArrayList
 /**
  * Custom Selector Image Fragment.
  */
-class ImageFragment : CommonsDaggerSupportFragment(), RefreshUIListener, PassDataListener {
-
+class ImageFragment :
+    CommonsDaggerSupportFragment(),
+    RefreshUIListener,
+    PassDataListener {
     private var _binding: FragmentCustomSelectorBinding? = null
     private val binding get() = _binding
 
@@ -107,7 +109,6 @@ class ImageFragment : CommonsDaggerSupportFragment(), RefreshUIListener, PassDat
     private lateinit var progressDialog: AlertDialog
     private lateinit var progressDialogLayout: ProgressDialogBinding
 
-
     /**
      * NotForUploadStatus Dao class for database operations
      */
@@ -142,7 +143,6 @@ class ImageFragment : CommonsDaggerSupportFragment(), RefreshUIListener, PassDat
     lateinit var contributionDao: ContributionDao
 
     companion object {
-
         /**
          * Switch state
          */
@@ -157,7 +157,10 @@ class ImageFragment : CommonsDaggerSupportFragment(), RefreshUIListener, PassDat
         /**
          * newInstance from bucketId.
          */
-        fun newInstance(bucketId: Long, lastItemId: Long): ImageFragment {
+        fun newInstance(
+            bucketId: Long,
+            lastItemId: Long,
+        ): ImageFragment {
             val fragment = ImageFragment()
             val args = Bundle()
             args.putLong(BUCKET_ID, bucketId)
@@ -175,9 +178,10 @@ class ImageFragment : CommonsDaggerSupportFragment(), RefreshUIListener, PassDat
         super.onCreate(savedInstanceState)
         bucketId = arguments?.getLong(BUCKET_ID)
         lastItemId = arguments?.getLong(LAST_ITEM_ID, 0)
-        viewModel = ViewModelProvider(requireActivity(), customSelectorViewModelFactory).get(
-            CustomSelectorViewModel::class.java
-        )
+        viewModel =
+            ViewModelProvider(requireActivity(), customSelectorViewModelFactory).get(
+                CustomSelectorViewModel::class.java,
+            )
     }
 
     /**
@@ -188,7 +192,7 @@ class ImageFragment : CommonsDaggerSupportFragment(), RefreshUIListener, PassDat
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
         _binding = FragmentCustomSelectorBinding.inflate(inflater, container, false)
         imageAdapter =
@@ -200,9 +204,12 @@ class ImageFragment : CommonsDaggerSupportFragment(), RefreshUIListener, PassDat
             this?.adapter = imageAdapter
         }
 
-        viewModel?.result?.observe(viewLifecycleOwner, Observer {
-            handleResult(it)
-        })
+        viewModel?.result?.observe(
+            viewLifecycleOwner,
+            Observer {
+                handleResult(it)
+            },
+        )
 
         switch = binding?.switchWidget
         switch?.visibility = View.VISIBLE
@@ -323,20 +330,22 @@ class ImageFragment : CommonsDaggerSupportFragment(), RefreshUIListener, PassDat
     override fun onDestroy() {
         imageAdapter.cleanUp()
 
-        val position = (selectorRV?.layoutManager as GridLayoutManager)
-            .findFirstVisibleItemPosition()
+        val position =
+            (selectorRV?.layoutManager as GridLayoutManager)
+                .findFirstVisibleItemPosition()
 
         // Check for empty RecyclerView.
         if (position != -1 && filteredImages.size > 0) {
             context?.let { context ->
-                context.getSharedPreferences(
-                    "CustomSelector",
-                    BaseActivity.MODE_PRIVATE
-                )?.let { prefs ->
-                    prefs.edit()?.let { editor ->
-                        editor.putLong("ItemId", imageAdapter.getImageIdAt(position))?.apply()
+                context
+                    .getSharedPreferences(
+                        "CustomSelector",
+                        BaseActivity.MODE_PRIVATE,
+                    )?.let { prefs ->
+                        prefs.edit()?.let { editor ->
+                            editor.putLong("ItemId", imageAdapter.getImageIdAt(position))?.apply()
+                        }
                     }
-                }
             }
         }
         super.onDestroy()
@@ -354,7 +363,7 @@ class ImageFragment : CommonsDaggerSupportFragment(), RefreshUIListener, PassDat
     /**
      * Removes the image from the actionable image map
      */
-    fun removeImage(image : Image){
+    fun removeImage(image: Image) {
         imageAdapter.removeImageFromActionableImageMap(image)
     }
 
@@ -364,11 +373,15 @@ class ImageFragment : CommonsDaggerSupportFragment(), RefreshUIListener, PassDat
     fun clearSelectedImages() {
         imageAdapter.clearSelectedImages()
     }
+
     /**
      * Passes selected images and other information from Activity to Fragment and connects it with
      * the adapter
      */
-    override fun passSelectedImages(selectedImages: ArrayList<Image>, shouldRefresh: Boolean) {
+    override fun passSelectedImages(
+        selectedImages: ArrayList<Image>,
+        shouldRefresh: Boolean,
+    ) {
         imageAdapter.setSelectedImages(selectedImages)
 
         val uploadingContributions = getUploadingContributions()
@@ -398,11 +411,10 @@ class ImageFragment : CommonsDaggerSupportFragment(), RefreshUIListener, PassDat
         }
     }
 
-    private fun getUploadingContributions(): List<Contribution> {
-
-        return  contributionDao.getContribution(
-            listOf(Contribution.STATE_IN_PROGRESS, Contribution.STATE_FAILED, Contribution.STATE_QUEUED, Contribution.STATE_PAUSED)
-        )?.subscribeOn(Schedulers.io())?.blockingGet() ?: emptyList()
-    }
-
+    private fun getUploadingContributions(): List<Contribution> =
+        contributionDao
+            .getContribution(
+                listOf(Contribution.STATE_IN_PROGRESS, Contribution.STATE_FAILED, Contribution.STATE_QUEUED, Contribution.STATE_PAUSED),
+            )?.subscribeOn(Schedulers.io())
+            ?.blockingGet() ?: emptyList()
 }

@@ -19,6 +19,6 @@ interface ThanksInterface {
         @Field("rev") rev: String?,
         @Field("log") log: String?,
         @Field("token") token: String,
-        @Field("source") source: String?
+        @Field("source") source: String?,
     ): Observable<MwThankPostResponse?>
 }

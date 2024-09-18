@@ -24,7 +24,6 @@ import java.lang.reflect.Field
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
 class CategoryDetailsActivityUnitTests {
-
     private lateinit var activity: CategoryDetailsActivity
 
     private lateinit var context: Context
@@ -38,7 +37,6 @@ class CategoryDetailsActivityUnitTests {
 
     @Before
     fun setUp() {
-
         MockitoAnnotations.openMocks(this)
 
         OkHttpConnectionFactory.CLIENT = createTestClient()
@@ -110,5 +108,4 @@ class CategoryDetailsActivityUnitTests {
     fun testViewPagerNotifyDataSetChanged() {
         activity.viewPagerNotifyDataSetChanged()
     }
-
 }

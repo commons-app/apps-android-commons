@@ -12,62 +12,61 @@ import javax.inject.Named
 /**
  * Data-Source which acts as mediator for contributions-data from the API
  */
-class ContributionsRemoteDataSource @Inject constructor(
-    private val mediaClient: MediaClient,
-    @param:Named(CommonsApplicationModule.IO_THREAD) private val ioThreadScheduler: Scheduler
-) : ItemKeyedDataSource<Int, Contribution>() {
-    private val compositeDisposable: CompositeDisposable = CompositeDisposable()
-    var userName: String? = null
+class ContributionsRemoteDataSource
+    @Inject
+    constructor(
+        private val mediaClient: MediaClient,
+        @param:Named(CommonsApplicationModule.IO_THREAD) private val ioThreadScheduler: Scheduler,
+    ) : ItemKeyedDataSource<Int, Contribution>() {
+        private val compositeDisposable: CompositeDisposable = CompositeDisposable()
+        var userName: String? = null
 
-    override fun loadInitial(
-        params: LoadInitialParams<Int>,
-        callback: LoadInitialCallback<Contribution>
-    ) {
-        fetchContributions(callback)
+        override fun loadInitial(
+            params: LoadInitialParams<Int>,
+            callback: LoadInitialCallback<Contribution>,
+        ) {
+            fetchContributions(callback)
+        }
+
+        override fun loadAfter(
+            params: LoadParams<Int>,
+            callback: LoadCallback<Contribution>,
+        ) {
+            fetchContributions(callback)
+        }
+
+        override fun loadBefore(
+            params: LoadParams<Int>,
+            callback: LoadCallback<Contribution>,
+        ) {
+        }
+
+        override fun getKey(item: Contribution): Int = item.pageId.hashCode()
+
+        /**
+         * Fetches contributions using the MediaWiki API
+         */
+        private fun fetchContributions(callback: LoadCallback<Contribution>) {
+            compositeDisposable.add(
+                mediaClient
+                    .getMediaListForUser(userName!!)
+                    .map { mediaList ->
+                        mediaList.map {
+                            Contribution(media = it, state = Contribution.STATE_COMPLETED)
+                        }
+                    }.subscribeOn(ioThreadScheduler)
+                    .subscribe({
+                        callback.onResult(it)
+                    }) { error: Throwable ->
+                        Timber.e(
+                            "Failed to fetch contributions: %s",
+                            error.message,
+                        )
+                    },
+            )
+        }
+
+        fun dispose() {
+            compositeDisposable.dispose()
+        }
     }
-
-    override fun loadAfter(
-        params: LoadParams<Int>,
-        callback: LoadCallback<Contribution>
-    ) {
-        fetchContributions(callback)
-    }
-
-    override fun loadBefore(
-        params: LoadParams<Int>,
-        callback: LoadCallback<Contribution>
-    ) {
-    }
-
-    override fun getKey(item: Contribution): Int {
-        return item.pageId.hashCode()
-    }
-
-
-    /**
-     * Fetches contributions using the MediaWiki API
-     */
-    private fun fetchContributions(callback: LoadCallback<Contribution>) {
-        compositeDisposable.add(
-            mediaClient.getMediaListForUser(userName!!)
-                .map { mediaList ->
-                    mediaList.map {
-                        Contribution(media = it, state = Contribution.STATE_COMPLETED)
-                    }
-                }
-                .subscribeOn(ioThreadScheduler)
-                .subscribe({
-                    callback.onResult(it)
-                }) { error: Throwable ->
-                    Timber.e(
-                        "Failed to fetch contributions: %s",
-                        error.message
-                    )
-                }
-        )
-    }
-
-    fun dispose() {
-        compositeDisposable.dispose()
-    }
-}

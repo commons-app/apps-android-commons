@@ -22,7 +22,6 @@ import fr.free.nrw.commons.recentlanguages.RecentLanguagesDao
 import fr.free.nrw.commons.settings.SettingsFragment.createLocale
 import org.junit.Assert
 import org.junit.Assert.assertEquals
-import org.junit.Assert.assertNull
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -38,12 +37,10 @@ import org.robolectric.annotation.LooperMode
 import java.lang.reflect.Method
 import java.util.Locale
 
-
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
 @LooperMode(LooperMode.Mode.PAUSED)
 class SettingsFragmentUnitTests {
-
     private lateinit var fragment: SettingsFragment
     private lateinit var fragmentManager: FragmentManager
     private lateinit var layoutInflater: LayoutInflater
@@ -79,11 +76,17 @@ class SettingsFragmentUnitTests {
         layoutInflater = LayoutInflater.from(activity)
 
         Whitebox.setInternalState(fragment, "recentLanguagesDao", recentLanguagesDao)
-        Whitebox.setInternalState(fragment, "recentLanguagesTextView",
-            recentLanguagesTextView)
+        Whitebox.setInternalState(
+            fragment,
+            "recentLanguagesTextView",
+            recentLanguagesTextView,
+        )
         Whitebox.setInternalState(fragment, "separator", separator)
-        Whitebox.setInternalState(fragment, "languageHistoryListView",
-            languageHistoryListView)
+        Whitebox.setInternalState(
+            fragment,
+            "languageHistoryListView",
+            languageHistoryListView,
+        )
     }
 
     @Test
@@ -95,9 +98,10 @@ class SettingsFragmentUnitTests {
     @Test
     @Throws(Exception::class)
     fun testRequestExternalStoragePermissions() {
-        val method: Method = SettingsFragment::class.java.getDeclaredMethod(
-            "requestExternalStoragePermissions"
-        )
+        val method: Method =
+            SettingsFragment::class.java.getDeclaredMethod(
+                "requestExternalStoragePermissions",
+            )
         method.isAccessible = true
         method.invoke(fragment)
     }
@@ -106,9 +110,10 @@ class SettingsFragmentUnitTests {
     @Throws(Exception::class)
     fun testCheckPermissionsAndSendLogs() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
-        val method: Method = SettingsFragment::class.java.getDeclaredMethod(
-            "checkPermissionsAndSendLogs"
-        )
+        val method: Method =
+            SettingsFragment::class.java.getDeclaredMethod(
+                "checkPermissionsAndSendLogs",
+            )
         method.isAccessible = true
         method.invoke(fragment)
     }
@@ -117,10 +122,11 @@ class SettingsFragmentUnitTests {
     @Throws(Exception::class)
     fun testGetCurrentLanguageCode() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
-        val method: Method = SettingsFragment::class.java.getDeclaredMethod(
-            "getCurrentLanguageCode",
-            String::class.java
-        )
+        val method: Method =
+            SettingsFragment::class.java.getDeclaredMethod(
+                "getCurrentLanguageCode",
+                String::class.java,
+            )
         method.isAccessible = true
         method.invoke(fragment, "")
     }
@@ -129,11 +135,12 @@ class SettingsFragmentUnitTests {
     @Throws(Exception::class)
     fun testSaveLanguageValueCase_appUiDefaultLanguagePref() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
-        val method: Method = SettingsFragment::class.java.getDeclaredMethod(
-            "saveLanguageValue",
-            String::class.java,
-            String::class.java
-        )
+        val method: Method =
+            SettingsFragment::class.java.getDeclaredMethod(
+                "saveLanguageValue",
+                String::class.java,
+                String::class.java,
+            )
         method.isAccessible = true
         method.invoke(fragment, "", "appUiDefaultLanguagePref")
     }
@@ -142,12 +149,13 @@ class SettingsFragmentUnitTests {
     @Throws(Exception::class)
     fun `Test prepareAppLanguages when recently used languages is empty`() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
-        val method: Method = SettingsFragment::class.java.getDeclaredMethod(
-            "prepareAppLanguages",
-            String::class.java
-        )
+        val method: Method =
+            SettingsFragment::class.java.getDeclaredMethod(
+                "prepareAppLanguages",
+                String::class.java,
+            )
         method.isAccessible = true
-        method.invoke(fragment,  "appUiDefaultLanguagePref")
+        method.invoke(fragment, "appUiDefaultLanguagePref")
         verify(recentLanguagesDao, times(1)).recentLanguages
     }
 
@@ -157,19 +165,22 @@ class SettingsFragmentUnitTests {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
         whenever(recentLanguagesDao.recentLanguages)
             .thenReturn(
-                mutableListOf(Language("English", "en"),
-                Language("English", "en"),
-                Language("English", "en"),
-                Language("English", "en"),
-                Language("English", "en"),
-                Language("English", "en"))
+                mutableListOf(
+                    Language("English", "en"),
+                    Language("English", "en"),
+                    Language("English", "en"),
+                    Language("English", "en"),
+                    Language("English", "en"),
+                    Language("English", "en"),
+                ),
             )
-        val method: Method = SettingsFragment::class.java.getDeclaredMethod(
-            "prepareAppLanguages",
-            String::class.java
-        )
+        val method: Method =
+            SettingsFragment::class.java.getDeclaredMethod(
+                "prepareAppLanguages",
+                String::class.java,
+            )
         method.isAccessible = true
-        method.invoke(fragment,  "appUiDefaultLanguagePref")
+        method.invoke(fragment, "appUiDefaultLanguagePref")
         verify(recentLanguagesDao, times(2)).recentLanguages
     }
 
@@ -177,11 +188,12 @@ class SettingsFragmentUnitTests {
     @Throws(Exception::class)
     fun testSaveLanguageValueCase_descriptionDefaultLanguagePref() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
-        val method: Method = SettingsFragment::class.java.getDeclaredMethod(
-            "saveLanguageValue",
-            String::class.java,
-            String::class.java
-        )
+        val method: Method =
+            SettingsFragment::class.java.getDeclaredMethod(
+                "saveLanguageValue",
+                String::class.java,
+                String::class.java,
+            )
         method.isAccessible = true
         method.invoke(fragment, "", "descriptionDefaultLanguagePref")
     }
@@ -190,9 +202,10 @@ class SettingsFragmentUnitTests {
     @Throws(Exception::class)
     fun testHideRecentLanguagesSection() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
-        val method: Method = SettingsFragment::class.java.getDeclaredMethod(
-            "hideRecentLanguagesSection"
-        )
+        val method: Method =
+            SettingsFragment::class.java.getDeclaredMethod(
+                "hideRecentLanguagesSection",
+            )
         method.isAccessible = true
         method.invoke(fragment)
         verify(recentLanguagesTextView, times(1)).visibility = any()
@@ -206,18 +219,21 @@ class SettingsFragmentUnitTests {
         whenever(recentLanguagesDao.findRecentLanguage(any()))
             .thenReturn(true)
         whenever(adapterView.adapter)
-            .thenReturn(RecentLanguagesAdapter(context,
-                listOf(Language("English", "en")),
-                hashMapOf<String,String>()
-                )
+            .thenReturn(
+                RecentLanguagesAdapter(
+                    context,
+                    listOf(Language("English", "en")),
+                    hashMapOf<String, String>(),
+                ),
             )
-        val method: Method = SettingsFragment::class.java.getDeclaredMethod(
-            "onRecentLanguageClicked",
-            String::class.java,
-            Dialog::class.java,
-            AdapterView::class.java,
-            Int::class.java
-        )
+        val method: Method =
+            SettingsFragment::class.java.getDeclaredMethod(
+                "onRecentLanguageClicked",
+                String::class.java,
+                Dialog::class.java,
+                AdapterView::class.java,
+                Int::class.java,
+            )
         method.isAccessible = true
         method.invoke(fragment, "test", Mockito.mock(Dialog::class.java), adapterView, 0)
         verify(recentLanguagesDao, times(1)).findRecentLanguage(any())
@@ -226,13 +242,14 @@ class SettingsFragmentUnitTests {
 
     @Test
     fun `Test setUpRecentLanguagesSection when list is empty`() {
-        val method: Method = SettingsFragment::class.java.getDeclaredMethod(
-            "setUpRecentLanguagesSection",
-            List::class.java,
-            HashMap::class.java
-        )
+        val method: Method =
+            SettingsFragment::class.java.getDeclaredMethod(
+                "setUpRecentLanguagesSection",
+                List::class.java,
+                HashMap::class.java,
+            )
         method.isAccessible = true
-        method.invoke(fragment, emptyList<Language>(), hashMapOf<Int,String>())
+        method.invoke(fragment, emptyList<Language>(), hashMapOf<Int, String>())
         verify(languageHistoryListView, times(1)).visibility = View.GONE
         verify(separator, times(1)).visibility = View.GONE
         verify(recentLanguagesTextView, times(1)).visibility = View.GONE
@@ -240,20 +257,25 @@ class SettingsFragmentUnitTests {
 
     @Test
     fun `Test setUpRecentLanguagesSection when list is not empty`() {
-        val method: Method = SettingsFragment::class.java.getDeclaredMethod(
-            "setUpRecentLanguagesSection",
-            List::class.java,
-            HashMap::class.java
-        )
+        val method: Method =
+            SettingsFragment::class.java.getDeclaredMethod(
+                "setUpRecentLanguagesSection",
+                List::class.java,
+                HashMap::class.java,
+            )
         method.isAccessible = true
-        method.invoke(fragment, listOf(
-            Language("Bengali", "bn"),
-            Language("Bengali", "bn"),
-            Language("Bengali", "bn"),
-            Language("Bengali", "bn"),
-            Language("Bengali", "bn"),
-            Language("Bengali", "bn")
-        ), hashMapOf<Int,String>())
+        method.invoke(
+            fragment,
+            listOf(
+                Language("Bengali", "bn"),
+                Language("Bengali", "bn"),
+                Language("Bengali", "bn"),
+                Language("Bengali", "bn"),
+                Language("Bengali", "bn"),
+                Language("Bengali", "bn"),
+            ),
+            hashMapOf<Int, String>(),
+        )
         verify(languageHistoryListView, times(1)).visibility = View.VISIBLE
         verify(separator, times(1)).visibility = View.VISIBLE
         verify(recentLanguagesTextView, times(1)).visibility = View.VISIBLE
@@ -264,8 +286,8 @@ class SettingsFragmentUnitTests {
         val locale: Locale = createLocale("en")
 
         assertEquals("en", locale.language)
-        assertEquals("",locale.country)
-        assertEquals("",locale.variant)
+        assertEquals("", locale.country)
+        assertEquals("", locale.variant)
     }
 
     @Test
@@ -273,8 +295,8 @@ class SettingsFragmentUnitTests {
         val locale: Locale = createLocale("zh-CN")
 
         assertEquals("zh", locale.language)
-        assertEquals("CN",locale.country)
-        assertEquals("",locale.variant)
+        assertEquals("CN", locale.country)
+        assertEquals("", locale.variant)
     }
 
     @Test
@@ -282,7 +304,7 @@ class SettingsFragmentUnitTests {
         val locale: Locale = createLocale("pt-BR-variant")
 
         assertEquals("pt", locale.language)
-        assertEquals("BR",locale.country)
-        assertEquals("variant",locale.variant)
+        assertEquals("BR", locale.country)
+        assertEquals("variant", locale.variant)
     }
 }

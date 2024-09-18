@@ -4,16 +4,16 @@ import android.net.Uri
 import com.google.gson.GsonBuilder
 import com.google.gson.stream.MalformedJsonException
 import fr.free.nrw.commons.MockWebServerTest
-import io.reactivex.observers.TestObserver
-import org.junit.Before
-import org.junit.Test
-import fr.free.nrw.commons.wikidata.model.WikiSite
-import fr.free.nrw.commons.wikidata.mwapi.MwQueryResponse
 import fr.free.nrw.commons.wikidata.json.NamespaceTypeAdapter
 import fr.free.nrw.commons.wikidata.json.PostProcessingTypeAdapter
 import fr.free.nrw.commons.wikidata.json.UriTypeAdapter
 import fr.free.nrw.commons.wikidata.json.WikiSiteTypeAdapter
+import fr.free.nrw.commons.wikidata.model.WikiSite
 import fr.free.nrw.commons.wikidata.model.page.Namespace
+import fr.free.nrw.commons.wikidata.mwapi.MwQueryResponse
+import io.reactivex.observers.TestObserver
+import org.junit.Before
+import org.junit.Test
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
@@ -21,29 +21,36 @@ import retrofit2.converter.gson.GsonConverterFactory
 class UserExtendedInfoClientTest : MockWebServerTest() {
     private var apiService: LoginInterface? = null
     private val observer = TestObserver<MwQueryResponse>()
-    private val gson = GsonBuilder()
-        .registerTypeHierarchyAdapter(Uri::class.java, UriTypeAdapter()
-            .nullSafe())
-        .registerTypeHierarchyAdapter(
-            Namespace::class.java, NamespaceTypeAdapter()
-            .nullSafe())
-        .registerTypeAdapter(
-            WikiSite::class.java, WikiSiteTypeAdapter()
-            .nullSafe())
-        .registerTypeAdapterFactory(PostProcessingTypeAdapter())
-        .create()
+    private val gson =
+        GsonBuilder()
+            .registerTypeHierarchyAdapter(
+                Uri::class.java,
+                UriTypeAdapter()
+                    .nullSafe(),
+            ).registerTypeHierarchyAdapter(
+                Namespace::class.java,
+                NamespaceTypeAdapter()
+                    .nullSafe(),
+            ).registerTypeAdapter(
+                WikiSite::class.java,
+                WikiSiteTypeAdapter()
+                    .nullSafe(),
+            ).registerTypeAdapterFactory(PostProcessingTypeAdapter())
+            .create()
 
     @Before
     @Throws(Throwable::class)
     override fun setUp() {
         super.setUp()
 
-        apiService = Retrofit.Builder()
-            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-            .addConverterFactory(GsonConverterFactory.create(gson))
-            .baseUrl(server().url)
-            .build()
-            .create(LoginInterface::class.java)
+        apiService =
+            Retrofit
+                .Builder()
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .baseUrl(server().url)
+                .build()
+                .create(LoginInterface::class.java)
     }
 
     @Test
@@ -57,9 +64,14 @@ class UserExtendedInfoClientTest : MockWebServerTest() {
             .assertComplete()
             .assertNoErrors()
             .assertValue { result: MwQueryResponse ->
-                result.query()!!
-                    .userInfo()!!.id() == 24531888 && result.query()!!.getUserResponse("USER")!!
-                    .name() == "USER"
+                result
+                    .query()!!
+                    .userInfo()!!
+                    .id() == 24531888 &&
+                    result
+                        .query()!!
+                        .getUserResponse("USER")!!
+                        .name() == "USER"
             }
     }
 

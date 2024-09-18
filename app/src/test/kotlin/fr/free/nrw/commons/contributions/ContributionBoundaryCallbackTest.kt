@@ -62,8 +62,8 @@ class ContributionBoundaryCallbackTest {
         whenever(mediaClient.getMediaListForUser(anyString()))
             .thenReturn(Single.just(listOf(media())))
         contributionBoundaryCallback.onZeroItemsLoaded()
-        verify(repository).save(anyList<Contribution>());
-        verify(mediaClient).getMediaListForUser(anyString());
+        verify(repository).save(anyList<Contribution>())
+        verify(mediaClient).getMediaListForUser(anyString())
     }
 
     @Test
@@ -74,8 +74,8 @@ class ContributionBoundaryCallbackTest {
         whenever(mediaClient.getMediaListForUser(anyString()))
             .thenReturn(Single.just(listOf(media())))
         contributionBoundaryCallback.onItemAtEndLoaded(mock(Contribution::class.java))
-        verify(repository).save(anyList());
-        verify(mediaClient).getMediaListForUser(anyString());
+        verify(repository).save(anyList())
+        verify(mediaClient).getMediaListForUser(anyString())
     }
 
     @Test
@@ -94,27 +94,29 @@ class ContributionBoundaryCallbackTest {
             .thenReturn(Single.just(listOf(1L, 2L)))
         whenever(sessionManager.userName).thenReturn("Test")
         whenever(mediaClient.getMediaListForUser(anyString())).thenReturn(
-            Single.just(listOf(media()))
+            Single.just(listOf(media())),
         )
-        val method: Method = ContributionBoundaryCallback::class.java.getDeclaredMethod(
-            "fetchContributions"
-        )
+        val method: Method =
+            ContributionBoundaryCallback::class.java.getDeclaredMethod(
+                "fetchContributions",
+            )
         method.isAccessible = true
         method.invoke(contributionBoundaryCallback)
-        verify(repository).save(anyList());
-        verify(mediaClient).getMediaListForUser(anyString());
+        verify(repository).save(anyList())
+        verify(mediaClient).getMediaListForUser(anyString())
     }
 
     @Test
     fun testFetchContributionsFailed() {
         whenever(sessionManager.userName).thenReturn("Test")
         whenever(mediaClient.getMediaListForUser(anyString())).thenReturn(Single.error(Exception("Error")))
-        val method: Method = ContributionBoundaryCallback::class.java.getDeclaredMethod(
-            "fetchContributions"
-        )
+        val method: Method =
+            ContributionBoundaryCallback::class.java.getDeclaredMethod(
+                "fetchContributions",
+            )
         method.isAccessible = true
         method.invoke(contributionBoundaryCallback)
         verifyNoInteractions(repository)
-        verify(mediaClient).getMediaListForUser(anyString());
+        verify(mediaClient).getMediaListForUser(anyString())
     }
 }

@@ -10,30 +10,25 @@ import java.util.*
  */
 @Entity(tableName = "uploaded_table", indices = [Index(value = ["modifiedImageSHA1"], unique = true)])
 data class UploadedStatus(
-
     /**
      * Original image sha1.
      */
     @PrimaryKey
-    val imageSHA1 : String,
-
+    val imageSHA1: String,
     /**
      * Modified image sha1 (after exif changes).
      */
-    val modifiedImageSHA1 : String,
-
+    val modifiedImageSHA1: String,
     /**
      * imageSHA1 query result from API.
      */
-    var imageResult : Boolean,
-
+    var imageResult: Boolean,
     /**
      * modifiedImageSHA1 query result from API.
      */
-    var modifiedImageResult : Boolean,
-
+    var modifiedImageResult: Boolean,
     /**
      * lastUpdated for data validation.
      */
-    var lastUpdated : Date? = null
+    var lastUpdated: Date? = null,
 )

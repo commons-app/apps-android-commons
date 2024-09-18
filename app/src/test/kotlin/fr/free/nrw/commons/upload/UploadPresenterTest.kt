@@ -6,7 +6,6 @@ import fr.free.nrw.commons.contributions.Contribution
 import fr.free.nrw.commons.filepicker.UploadableFile
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.repository.UploadRepository
-import fr.free.nrw.commons.upload.ImageCoordinates
 import io.reactivex.Observable
 import org.junit.Before
 import org.junit.Ignore
@@ -14,21 +13,21 @@ import org.junit.Test
 import org.mockito.ArgumentMatchers
 import org.mockito.InjectMocks
 import org.mockito.Mock
-import org.mockito.Mockito.`when`
 import org.mockito.Mockito.times
+import org.mockito.Mockito.`when`
 import org.mockito.MockitoAnnotations
 import java.util.*
-
 
 /**
  * The clas contains unit test cases for UploadPresenter
  */
 class UploadPresenterTest {
-
     @Mock
     internal lateinit var repository: UploadRepository
+
     @Mock
     internal lateinit var view: UploadContract.View
+
     @Mock
     lateinit var contribution: Contribution
 
@@ -43,6 +42,7 @@ class UploadPresenterTest {
 
     @Mock
     private lateinit var imageCoords: ImageCoordinates
+
     @Mock
     private lateinit var uploadItem: UploadItem
 
@@ -90,16 +90,16 @@ class UploadPresenterTest {
 
         // test 1 - insufficient count
         `when`(
-            defaultKvStore.getInt(UploadPresenter.COUNTER_OF_CONSECUTIVE_UPLOADS_WITHOUT_COORDINATES, 0))
-                .thenReturn(UploadPresenter.CONSECUTIVE_UPLOADS_WITHOUT_COORDINATES_REMINDER_THRESHOLD - 1)
+            defaultKvStore.getInt(UploadPresenter.COUNTER_OF_CONSECUTIVE_UPLOADS_WITHOUT_COORDINATES, 0),
+        ).thenReturn(UploadPresenter.CONSECUTIVE_UPLOADS_WITHOUT_COORDINATES_REMINDER_THRESHOLD - 1)
         uploadPresenter.handleSubmit()
         // no alert dialog expected as insufficient consecutive count
         verify(view, times(0)).showAlertDialog(ArgumentMatchers.anyInt(), ArgumentMatchers.any<Runnable>())
 
         // test 2 - sufficient count
         `when`(
-            defaultKvStore.getInt(UploadPresenter.COUNTER_OF_CONSECUTIVE_UPLOADS_WITHOUT_COORDINATES, 0))
-            .thenReturn(UploadPresenter.CONSECUTIVE_UPLOADS_WITHOUT_COORDINATES_REMINDER_THRESHOLD)
+            defaultKvStore.getInt(UploadPresenter.COUNTER_OF_CONSECUTIVE_UPLOADS_WITHOUT_COORDINATES, 0),
+        ).thenReturn(UploadPresenter.CONSECUTIVE_UPLOADS_WITHOUT_COORDINATES_REMINDER_THRESHOLD)
         uploadPresenter.handleSubmit()
         // alert dialog expected as consecutive count is at threshold
         verify(view).showAlertDialog(ArgumentMatchers.anyInt(), ArgumentMatchers.any<Runnable>())
@@ -109,8 +109,8 @@ class UploadPresenterTest {
     @Test
     fun handleSubmitImagesWithLocationWithConsecutiveNoLocationUploads() {
         `when`(
-            defaultKvStore.getInt(UploadPresenter.COUNTER_OF_CONSECUTIVE_UPLOADS_WITHOUT_COORDINATES, 0))
-            .thenReturn(UploadPresenter.CONSECUTIVE_UPLOADS_WITHOUT_COORDINATES_REMINDER_THRESHOLD)
+            defaultKvStore.getInt(UploadPresenter.COUNTER_OF_CONSECUTIVE_UPLOADS_WITHOUT_COORDINATES, 0),
+        ).thenReturn(UploadPresenter.CONSECUTIVE_UPLOADS_WITHOUT_COORDINATES_REMINDER_THRESHOLD)
         `when`(imageCoords.imageCoordsExists).thenReturn(true)
         `when`(uploadItem.getGpsCoords()).thenReturn(imageCoords)
         `when`(repository.uploads).thenReturn(uploadableItems)
@@ -128,8 +128,9 @@ class UploadPresenterTest {
             defaultKvStore
                 .getBoolean(
                     CommonsApplication.IS_LIMITED_CONNECTION_MODE_ENABLED,
-                    false
-                )).thenReturn(true)
+                    false,
+                ),
+        ).thenReturn(true)
         `when`(view.isLoggedIn).thenReturn(true)
         uploadPresenter.handleSubmit()
         verify(view).isLoggedIn
@@ -148,10 +149,9 @@ class UploadPresenterTest {
         uploadPresenter.handleSubmit()
         verify(view).isLoggedIn
         verify(view).askUserToLogIn()
-
     }
 
-    private fun deletePictureBaseTest(){
+    private fun deletePictureBaseTest() {
         uploadableFiles.clear()
     }
 
@@ -160,7 +160,7 @@ class UploadPresenterTest {
      */
     @Ignore
     @Test
-    fun hideTopCardWhenReachedTheLastFile(){
+    fun hideTopCardWhenReachedTheLastFile() {
         deletePictureBaseTest()
         uploadableFiles.add(uploadableFile)
         uploadPresenter.deletePictureAtIndex(0)
@@ -172,12 +172,12 @@ class UploadPresenterTest {
      */
     @Ignore
     @Test
-    fun testDeleteWhenSingleUpload(){
+    fun testDeleteWhenSingleUpload() {
         deletePictureBaseTest()
         uploadableFiles.add(uploadableFile)
         uploadPresenter.deletePictureAtIndex(0)
         verify(repository).deletePicture(ArgumentMatchers.anyString())
-        verify(view).showMessage(ArgumentMatchers.anyInt())//As there is only one while which we are asking for deletion, upload should be cancelled and this flow should be triggered
+        verify(view).showMessage(ArgumentMatchers.anyInt()) // As there is only one while which we are asking for deletion, upload should be cancelled and this flow should be triggered
         verify(view).finish()
     }
 
@@ -186,7 +186,7 @@ class UploadPresenterTest {
      */
     @Ignore
     @Test
-    fun testDeleteWhenMultipleFilesUpload(){
+    fun testDeleteWhenMultipleFilesUpload() {
         deletePictureBaseTest()
         uploadableFiles.add(uploadableFile)
         uploadableFiles.add(anotherUploadableFile)

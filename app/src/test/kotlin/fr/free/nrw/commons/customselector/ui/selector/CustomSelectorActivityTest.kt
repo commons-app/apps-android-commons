@@ -30,12 +30,11 @@ import java.lang.reflect.Method
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
 class CustomSelectorActivityTest {
-
     private lateinit var activity: CustomSelectorActivity
 
     private lateinit var imageFragment: ImageFragment
 
-    private lateinit var images : java.util.ArrayList<Image>
+    private lateinit var images: java.util.ArrayList<Image>
 
     private var uri: Uri = Mockito.mock(Uri::class.java)
 
@@ -52,18 +51,20 @@ class CustomSelectorActivityTest {
         MockitoAnnotations.openMocks(this)
         OkHttpConnectionFactory.CLIENT = createTestClient()
 
-        activity = Robolectric.buildActivity(CustomSelectorActivity::class.java)
-            .get()
+        activity =
+            Robolectric
+                .buildActivity(CustomSelectorActivity::class.java)
+                .get()
         val onCreate = activity.javaClass.getDeclaredMethod("onCreate", Bundle::class.java)
         onCreate.isAccessible = true
         onCreate.invoke(activity, null)
-        imageFragment = ImageFragment.newInstance(1,0)
+        imageFragment = ImageFragment.newInstance(1, 0)
         image = Image(1, "image", uri, "abc/abc", 1, "bucket1")
         images = ArrayList()
 
         Whitebox.setInternalState(activity, "imageFragment", imageFragment)
         Whitebox.setInternalState(imageFragment, "imageAdapter", Mockito.mock(ImageAdapter::class.java))
-        Whitebox.setInternalState(imageFragment,"contributionDao",contributionDao)
+        Whitebox.setInternalState(imageFragment, "contributionDao", contributionDao)
     }
 
     /**
@@ -93,7 +94,7 @@ class CustomSelectorActivityTest {
     @Test
     @Throws(Exception::class)
     fun testOnFolderClick() {
-        activity.onFolderClick(1, "test", 0);
+        activity.onFolderClick(1, "test", 0)
     }
 
     /**
@@ -102,12 +103,13 @@ class CustomSelectorActivityTest {
     @Test
     @Throws(Exception::class)
     fun testOnActivityResult() {
-        val func = activity.javaClass.getDeclaredMethod(
-            "onActivityResult",
-            Int::class.java,
-            Int::class.java,
-            Intent::class.java
-        )
+        val func =
+            activity.javaClass.getDeclaredMethod(
+                "onActivityResult",
+                Int::class.java,
+                Int::class.java,
+                Intent::class.java,
+            )
         func.isAccessible = true
         func.invoke(activity, 512, -1, Mockito.mock(Intent::class.java))
     }
@@ -118,13 +120,13 @@ class CustomSelectorActivityTest {
     @Test
     @Throws(Exception::class)
     fun testShowWelcomeDialog() {
-        val func = activity.javaClass.getDeclaredMethod(
-            "showWelcomeDialog"
-        )
+        val func =
+            activity.javaClass.getDeclaredMethod(
+                "showWelcomeDialog",
+            )
         func.isAccessible = true
         func.invoke(activity)
     }
-
 
     /**
      * Test onLongPress function.
@@ -132,12 +134,13 @@ class CustomSelectorActivityTest {
     @Test
     @Throws(Exception::class)
     fun testOnLongPress() {
-        val func = activity.javaClass.getDeclaredMethod(
-            "onLongPress",
-            Int::class.java,
-            ArrayList::class.java,
-            ArrayList::class.java
-        )
+        val func =
+            activity.javaClass.getDeclaredMethod(
+                "onLongPress",
+                Int::class.java,
+                ArrayList::class.java,
+                ArrayList::class.java,
+            )
         images.add(image)
 
         func.isAccessible = true
@@ -164,7 +167,7 @@ class CustomSelectorActivityTest {
         activity.onFolderClick(1, "test", 0)
         activity.onSelectedImagesChanged(
             ArrayList(arrayListOf(Image(1, "test", Uri.parse("test"), "test", 1))),
-            1
+            1,
         )
         activity.onDone()
     }
@@ -176,14 +179,15 @@ class CustomSelectorActivityTest {
     @Throws(Exception::class)
     fun testOnClickNotForUpload() {
         activity.onFolderClick(1, "test", 0)
-        val method: Method = CustomSelectorActivity::class.java.getDeclaredMethod(
-            "onClickNotForUpload"
-        )
+        val method: Method =
+            CustomSelectorActivity::class.java.getDeclaredMethod(
+                "onClickNotForUpload",
+            )
         method.isAccessible = true
         method.invoke(activity)
         activity.onSelectedImagesChanged(
             ArrayList(arrayListOf(Image(1, "test", Uri.parse("test"), "test", 1))),
-            0
+            0,
         )
         method.invoke(activity)
     }
@@ -212,9 +216,10 @@ class CustomSelectorActivityTest {
     @Test
     @Throws(Exception::class)
     fun testOnDestroy() {
-        val method: Method = CustomSelectorActivity::class.java.getDeclaredMethod(
-            "onDestroy"
-        )
+        val method: Method =
+            CustomSelectorActivity::class.java.getDeclaredMethod(
+                "onDestroy",
+            )
         method.isAccessible = true
         method.invoke(activity)
     }
@@ -225,9 +230,10 @@ class CustomSelectorActivityTest {
     @Test
     @Throws(Exception::class)
     fun testDisplayUploadLimitWarning() {
-        val method: Method = CustomSelectorActivity::class.java.getDeclaredMethod(
-            "displayUploadLimitWarning"
-        )
+        val method: Method =
+            CustomSelectorActivity::class.java.getDeclaredMethod(
+                "displayUploadLimitWarning",
+            )
         method.isAccessible = true
         method.invoke(activity)
     }
@@ -252,11 +258,19 @@ class CustomSelectorActivityTest {
 
         // test with list size limit
         for (i in 1..limit.getInt(activity)) {
-            images.add(Image(i.toLong(), i.toString(), uri,
-                "abc/abc", 1, "bucket1"))
+            images.add(
+                Image(
+                    i.toLong(),
+                    i.toString(),
+                    uri,
+                    "abc/abc",
+                    1,
+                    "bucket1",
+                ),
+            )
         }
         activity.onFolderClick(1, "test", 0)
-        activity.onSelectedImagesChanged(images,0)
+        activity.onSelectedImagesChanged(images, 0)
         assertEquals(false, overLimit.getBoolean(activity))
         assertEquals(0, exceededBy.getInt(activity))
         activity.onSelectedImagesChanged(images, 1)
@@ -265,20 +279,20 @@ class CustomSelectorActivityTest {
 
         // test with list size limit+1
         images.add(image)
-        activity.onSelectedImagesChanged(images,0)
+        activity.onSelectedImagesChanged(images, 0)
         assertEquals(true, overLimit.getBoolean(activity))
         assertEquals(1, exceededBy.getInt(activity))
-        activity.onSelectedImagesChanged(images,1)
+        activity.onSelectedImagesChanged(images, 1)
         assertEquals(true, overLimit.getBoolean(activity))
         assertEquals(1, exceededBy.getInt(activity))
 
-        //test with list size 1
+        // test with list size 1
         images.clear()
         images.add(image)
-        activity.onSelectedImagesChanged(images,0)
+        activity.onSelectedImagesChanged(images, 0)
         assertEquals(false, overLimit.getBoolean(activity))
         assertEquals(0, exceededBy.getInt(activity))
-        activity.onSelectedImagesChanged(images,1)
+        activity.onSelectedImagesChanged(images, 1)
         assertEquals(false, overLimit.getBoolean(activity))
         assertEquals(0, exceededBy.getInt(activity))
     }

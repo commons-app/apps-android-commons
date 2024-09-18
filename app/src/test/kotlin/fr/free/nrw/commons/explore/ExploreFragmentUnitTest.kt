@@ -10,8 +10,8 @@ import com.google.android.material.tabs.TabLayout
 import fr.free.nrw.commons.OkHttpConnectionFactory
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestCommonsApplication
-import fr.free.nrw.commons.createTestClient
 import fr.free.nrw.commons.contributions.MainActivity
+import fr.free.nrw.commons.createTestClient
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Ignore
@@ -34,7 +34,6 @@ import org.robolectric.fakes.RoboMenuItem
 @Config(sdk = [21], application = TestCommonsApplication::class)
 @LooperMode(LooperMode.Mode.PAUSED)
 class ExploreFragmentUnitTest {
-
     private lateinit var fragment: ExploreFragment
     private lateinit var fragmentManager: FragmentManager
     private lateinit var context: Context
@@ -69,7 +68,6 @@ class ExploreFragmentUnitTest {
         layoutInflater = LayoutInflater.from(activity)
         view = fragment.onCreateView(layoutInflater, null, null) as View
         viewPager = view.findViewById(R.id.viewPager)
-
     }
 
     @Test
@@ -101,7 +99,8 @@ class ExploreFragmentUnitTest {
         Assert.assertEquals(fragment.onBackPressed(), true)
     }
 
-    @Test @Ignore("TODO fix this test")
+    @Test
+    @Ignore("TODO fix this test")
     @Throws(Exception::class)
     fun testOnBackPressedCaseTrueSelectedTabNonZero() {
         Whitebox.setInternalState(fragment, "mobileRootFragment", exploreRootFragment)
@@ -150,5 +149,4 @@ class ExploreFragmentUnitTest {
         fragment.onCreateOptionsMenu(menu, inflater)
         verify(inflater).inflate(R.menu.menu_search, menu)
     }
-
 }

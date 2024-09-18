@@ -21,7 +21,6 @@ import org.robolectric.shadows.ShadowIntent
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
 class WelcomeActivityUnitTest {
-
     private lateinit var activity: WelcomeActivity
     private lateinit var finishTutorialButton: TextView
 
@@ -32,8 +31,10 @@ class WelcomeActivityUnitTest {
     @Before
     fun setUp() {
         val intent = Intent().putExtra("isQuiz", true)
-        activity = Robolectric.buildActivity(WelcomeActivity::class.java, intent)
-            .get()
+        activity =
+            Robolectric
+                .buildActivity(WelcomeActivity::class.java, intent)
+                .get()
         activity.onCreate(null)
         finishTutorialButton = activity.findViewById(R.id.finishTutorialButton)
     }
@@ -77,5 +78,4 @@ class WelcomeActivityUnitTest {
     fun testOnBackPressed() {
         activity.onBackPressed()
     }
-
 }

@@ -49,13 +49,15 @@ class WikidataFeedback : BaseActivity() {
         binding.radioButton1.setText(
             getString(
                 R.string.does_not_exist_anymore_no_picture_can_ever_be_taken_of_it,
-                place
-            ))
+                place,
+            ),
+        )
         binding.radioButton2.setText(
             getString(
                 R.string.is_at_a_different_place_please_specify_the_correct_place_below_if_possible_tell_us_the_correct_latitude_longitude,
-                place
-            ))
+                place,
+            ),
+        )
         binding.radioButton3.setText(getString(R.string.other_problem_or_information_please_explain_below))
         setSupportActionBar(binding.toolbarBinding.toolbar)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
@@ -64,21 +66,29 @@ class WikidataFeedback : BaseActivity() {
             var desc = findViewById<RadioButton>(binding.radioGroup.checkedRadioButtonId).text
             var det = binding.detailsEditText.text.toString()
             if (binding.radioGroup.checkedRadioButtonId == R.id.radioButton3 && binding.detailsEditText.text.isNullOrEmpty()) {
-                Toast.makeText(
-                    this,
-                    getString(R.string.please_enter_some_comments), Toast.LENGTH_SHORT
-                ).show()
+                Toast
+                    .makeText(
+                        this,
+                        getString(R.string.please_enter_some_comments),
+                        Toast.LENGTH_SHORT,
+                    ).show()
             } else {
                 binding.radioGroup.clearCheck()
                 binding.detailsEditText.setText("")
-                Single.defer<Boolean?>(Callable<SingleSource<Boolean?>> {
-                    pageEditHelper.makePageEdit(
-                        this, pageTitle, preText,
-                        desc.toString(),
-                        det, lat, lng
-                    )
-                } as Callable<SingleSource<Boolean?>>)
-                    .subscribeOn(Schedulers.io())
+                Single
+                    .defer<Boolean?>(
+                        Callable<SingleSource<Boolean?>> {
+                            pageEditHelper.makePageEdit(
+                                this,
+                                pageTitle,
+                                preText,
+                                desc.toString(),
+                                det,
+                                lat,
+                                lng,
+                            )
+                        } as Callable<SingleSource<Boolean?>>,
+                    ).subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe({ aBoolean: Boolean? ->
                     }, { throwable: Throwable? ->
@@ -92,5 +102,4 @@ class WikidataFeedback : BaseActivity() {
         onBackPressed()
         return true
     }
-
 }
