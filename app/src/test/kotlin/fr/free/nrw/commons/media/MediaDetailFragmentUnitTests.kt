@@ -76,8 +76,8 @@ import java.util.Locale
 @Config(sdk = [21], application = TestCommonsApplication::class)
 @LooperMode(LooperMode.Mode.PAUSED)
 class MediaDetailFragmentUnitTests {
-    private val REQUEST_CODE = 1001
-    private val LAST_LOCATION = "last_location_while_uploading"
+    private val requestCode = 1001
+    private val lastLocation = "last_location_while_uploading"
     private lateinit var fragment: MediaDetailFragment
     private lateinit var fragmentManager: FragmentManager
     private lateinit var layoutInflater: LayoutInflater
@@ -234,19 +234,19 @@ class MediaDetailFragmentUnitTests {
     @Test
     @Throws(Exception::class)
     fun testOnActivityResultLocationPickerActivity() {
-        fragment.onActivityResult(REQUEST_CODE, Activity.RESULT_CANCELED, intent)
+        fragment.onActivityResult(requestCode, Activity.RESULT_CANCELED, intent)
     }
 
     @Test
     @Throws(Exception::class)
     fun `test OnActivity Result Cancelled LocationPickerActivity`() {
-        fragment.onActivityResult(REQUEST_CODE, Activity.RESULT_CANCELED, intent)
+        fragment.onActivityResult(requestCode, Activity.RESULT_CANCELED, intent)
     }
 
     @Test
     @Throws(Exception::class)
     fun `test OnActivity Result Cancelled DescriptionEditActivity`() {
-        fragment.onActivityResult(REQUEST_CODE, Activity.RESULT_OK, intent)
+        fragment.onActivityResult(requestCode, Activity.RESULT_OK, intent)
     }
 
     @Test
@@ -267,7 +267,7 @@ class MediaDetailFragmentUnitTests {
     fun testOnUpdateCoordinatesClickedCurrentLocationNull() {
         `when`(media.coordinates).thenReturn(null)
         `when`(locationManager.lastLocation).thenReturn(null)
-        `when`(applicationKvStore.getString(LAST_LOCATION)).thenReturn("37.773972,-122.431297")
+        `when`(applicationKvStore.getString(lastLocation)).thenReturn("37.773972,-122.431297")
         fragment.onUpdateCoordinatesClicked()
         Mockito.verify(media, Mockito.times(1)).coordinates
         Mockito.verify(locationManager, Mockito.times(1)).lastLocation
@@ -281,7 +281,7 @@ class MediaDetailFragmentUnitTests {
     @Throws(Exception::class)
     fun testOnUpdateCoordinatesClickedNotNullValue() {
         `when`(media.coordinates).thenReturn(LatLng(-0.000001, -0.999999, 0f))
-        `when`(applicationKvStore.getString(LAST_LOCATION)).thenReturn("37.773972,-122.431297")
+        `when`(applicationKvStore.getString(lastLocation)).thenReturn("37.773972,-122.431297")
         fragment.onUpdateCoordinatesClicked()
         Mockito.verify(media, Mockito.times(3)).coordinates
         val shadowActivity: ShadowActivity = shadowOf(activity)
@@ -295,7 +295,7 @@ class MediaDetailFragmentUnitTests {
     fun testOnUpdateCoordinatesClickedCurrentLocationNotNull() {
         `when`(media.coordinates).thenReturn(null)
         `when`(locationManager.lastLocation).thenReturn(LatLng(-0.000001, -0.999999, 0f))
-        `when`(applicationKvStore.getString(LAST_LOCATION)).thenReturn("37.773972,-122.431297")
+        `when`(applicationKvStore.getString(lastLocation)).thenReturn("37.773972,-122.431297")
 
         fragment.onUpdateCoordinatesClicked()
         Mockito.verify(locationManager, Mockito.times(3)).lastLocation
