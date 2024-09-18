@@ -64,7 +64,7 @@
   <string name="upload_in_progress">ეთმიხარგუ...</string>
   <string name="username">მახვარებუშ ჯოხო</string>
   <string name="password">პაროლი</string>
-  <string name="login_credential">გემშართით თქვანი პროფილით Commons Beta-შა</string>
+  <string name="login_credential">გენშართით თქვანი პროფილით Commons Beta-შა</string>
   <string name="login">მიშულა</string>
   <string name="forgot_password">პაროლქ დუგოჭყორდესო?</string>
   <string name="signup">რეგისტრაცია</string>
@@ -77,6 +77,7 @@
   <string name="upload_failed">ფაილქ ვეგორუ. ქორთხინთ, ქოცადით შხვა ფაილი.</string>
   <string name="retry_limit_reached">გომაჟირაფაშ მაქსიმალურ ლიმიტი რე გიმორინაფილი! ქორთინთ, გაუქვათ ეხარგუა დო კჷნი ქოცადით.</string>
   <string name="unrestricted_battery_mode">გობთიშათო ბატარეაშ ოპტიმიზაცია?</string>
+  <string name="suggest_unrestricted_mode">3 სურათშე უმოსიშ ეხარგუაშის პროცესი უჯგუშო მუშენს, მუჟანსჷთ ბატარეაშ დჷმაზოგე გოთიშილი რენ. წორობორჯული ეხარგუაშ გაუჯგუშებელო, გეგმოთიშით ბატარეაშ დჷმაზოგე ვიკიოწკარუეშ პროგრამაშო პარამეტრეფშე.\n\nბატარეაშ ოპტიმიზაციაშ გჷმოთიშუაშ შილებუანი ბიჯგეფი:\n\nბიჯგი 1 : გიმე ქეგუწკანტეთ „პარამეტრეფიშ“ კონჭის.\n\nბიჯგი 2: გეგნიღით „ვაოპტიმიზებული“ ვარიანტიშე „არძა პროგრამაშა“.\n\nბიჯგი 3: დოგორით „Commons“ ვარ-და „fr.free.nrw.commons“.\n    \nბიჯგი 3: გექუწკანტეთ თის დო გოთიშით დაზოგებაშ რეჟიმი.\n\nბიჯგი 3: ქეგუწკანტეთ „თებას“.</string>
   <string name="authentication_failed">ავთენტიფიკაციაქ ვემიხუჯინუ, ქოთხინთ კჷნი გენშართით.</string>
   <string name="uploading_started">ეხარგუაქ ქჷდიჭყუ!</string>
   <string name="uploading_queued">ეხარგუა რანწკის გერე (გოხურგილი რსხუშ რეჟიმი ჩართული რე)</string>
@@ -191,8 +192,11 @@
   <string name="read_storage_permission_rationale">ოჸია: გალენი შვენაშ კითხირი. აპლიკაციას ვემიაჭირინე თქვან გალერეაშა თეშ უმუშო.</string>
   <string name="write_storage_permission_rationale">ოჸიას ოხვილუ: გალენი შვენაშ გიმორინაფა. აპლიკაციას ვემიახუჯინე თქვან კამერაშა/გალერეაშა თეშ უმუშო.</string>
   <string name="location_permission_title">ორენიშ გჷმორინაფაშ მოთხირი</string>
+  <string name="in_app_camera_location_permission_title">აპლიკაციას გინოღალირი მასალაშო ორენიშ ჩართება</string>
+  <string name="in_app_camera_location_switch_pref_summary">ჩართით თე ორენიშ დინაჭარალო აპის გინოღალირი კადრეფშო, მონწყილობაშ კამერაქ ვენიჭარჷ-და</string>
   <string name="ok">ჯგირი</string>
   <string name="warning">ხვილაფა</string>
+  <string name="duplicate_file_name">მეგორაფილი რე გომაჟირელი ფაილიშ ჯოხო</string>
   <string name="upload">ეხარგუა</string>
   <string name="yes">ქო</string>
   <string name="no">ვარი</string>
@@ -207,6 +211,7 @@
   <string name="media_detail_coordinates">კოორდინატეფი</string>
   <string name="media_detail_coordinates_empty">ვა რე წჷმორინაფილი</string>
   <string name="become_a_tester_title">ბეტა ტესტირებას კათაფი</string>
+  <string name="become_a_tester_description">ჩართით Beta-შა ჭირინაფა Google Play-ს დო მიღით ორდოიანი ჭირინაფა ახალ ფუნქციეფშა დო ჩილათეფიშ ეშახინტკალო</string>
   <string name="_2fa_code">2ფა კოდი</string>
   <string name="logout_verification">გოკონანო გიშულა?</string>
   <string name="mediaimage_failed">მედიაფაილიშ ჩილათა</string>
@@ -246,21 +251,25 @@
   <string name="upload_problem_fbmd">ქორთხინთ, გეხარგეთ ხვალე თქვანი გინნაღელი სურათეფი. ვეხარგათ თი სურათეფი, ნამუთ შხვა კათაშ ფეისბუქიშ ანგარიშის ძირითინ.</string>
   <string name="upload_problem_do_you_continue">იშენ გოკონანო თე სურათიშ ეხარგუა?</string>
   <string name="upload_connection_error_alert_title">მერსხუაფაშ ჩილათა</string>
+  <string name="upload_connection_error_alert_detail">ეხარგუაშ პროცესი თხულენს ინტერნეტშა ჭირინაფას. ქორთხინთ, ქოძირით თქვანი ინტერნეტ რსხუ.</string>
   <string name="upload_problem_image">სურათის პრობლემეფს ქიმუოგორეთ</string>
   <string name="internet_downloaded">ქორთხინთ, გეხარგეთ ხვალე თქვანი გინნაღელი სურათეფი. ვეხარგათ თი სურათეფი, ნამუეფჷთ ინტერნეტშე გჷმოხარგელი გაფჷნან.</string>
   <string name="use_external_storage">აპლიკაციაშ გინნაღელი სურათეფიშ ჩუალა</string>
   <string name="use_external_storage_summary">აპლიკაციაშ კამერათ გინნაღელო სურათეფიშ ჩუალა თქვან მონწყილობაშ შვენას</string>
   <string name="login_to_your_account">გემშართით თქვან პროფილშა</string>
   <string name="send_log_file">ლოგ-ფაილიშ ჯღონუა</string>
+  <string name="no_web_browser">URL-იშ განწყუმალო ვებ ბრაუზერქ ვეგორუ</string>
   <string name="null_url">ჩილათა! URL ვეგორუ</string>
   <string name="nominate_deletion">ლასუაშ ნომინანტი</string>
   <string name="nominated_for_deletion">თე სურათი ოლასარო რე წჷმორინაფილი</string>
   <string name="nominated_see_more">დეტალეფიშ გეშა ვებ-ხასჷლაშ ძირაფა</string>
   <string name="skip_login">გიშატება</string>
   <string name="navigation_item_login">მიშულა</string>
-  <string name="skip_login_title" fuzzy="true">ნანდულო გოკონანო მიშულაშ გიშატება?</string>
+  <string name="skip_login_title">ნანდულო გოკონანო მიშულაშ გიშატება?</string>
   <string name="skip_login_message" fuzzy="true">სურათეფიშ ეიოხარგალო თქვა ოხვილუთ ანგარიშიშა მიშულას.</string>
   <string name="login_alert_message">ქორთხინთ გენშართით თქვან ანგარიშიშა ათე ფუნქციაშ გჷმარინაფალო</string>
+  <string name="copy_wikicode">დაკოპირით ვიკიტექსტი</string>
+  <string name="wikicode_copied">ვიკიტექსტიქ დეკოპირუ</string>
   <string name="nearby_location_not_available">გოხოლუაშ ფუნქციაქ შილებე თინას ვემუშუასჷნ, ლოკაცია გოთიშილი რე.</string>
   <string name="location_permission_rationale_nearby">გოხოლუაშ აბანეფიშ ერკებულიშ ოძირაფალო ალობა ოხვილური რე</string>
   <string name="nearby_directions">მალობეფი</string>

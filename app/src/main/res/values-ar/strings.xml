@@ -113,7 +113,6 @@
   <string name="preference_category_feedback">التعليقات</string>
   <string name="preference_category_privacy">الخصوصية</string>
   <string name="app_name">المشاعات</string>
-  <string name="bullet">•</string>
   <string name="menu_settings">الإعدادات</string>
   <string name="intent_share_upload_label">رفع إلى المشاعات</string>
   <string name="upload_in_progress">جار الرفع</string>

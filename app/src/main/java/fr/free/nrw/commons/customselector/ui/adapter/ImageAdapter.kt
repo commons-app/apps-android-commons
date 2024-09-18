@@ -122,7 +122,7 @@ class ImageAdapter(
      * Bind View holder, load image, selected view, click listeners.
      */
     override fun onBindViewHolder(holder: ImageViewHolder, position: Int) {
-
+        if(images.size == 0) { return }
         var image=images[position]
         holder.image.setImageDrawable (null)
         if (context.contentResolver.getType(image.uri) == null) {

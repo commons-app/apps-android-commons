@@ -1,16 +1,49 @@
 package fr.free.nrw.commons.customselector.ui.selector
 
+import android.Manifest
 import android.app.Activity
 import android.app.Dialog
 import android.content.Intent
 import android.content.SharedPreferences
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.Window
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedCard
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.customselector.database.NotForUploadStatus
@@ -24,10 +57,12 @@ import fr.free.nrw.commons.databinding.ActivityCustomSelectorBinding
 import fr.free.nrw.commons.databinding.CustomSelectorBottomLayoutBinding
 import fr.free.nrw.commons.databinding.CustomSelectorToolbarBinding
 import fr.free.nrw.commons.filepicker.Constants
+import fr.free.nrw.commons.filepicker.FilePicker
 import fr.free.nrw.commons.media.ZoomableActivity
 import fr.free.nrw.commons.theme.BaseActivity
 import fr.free.nrw.commons.upload.FileUtilsWrapper
 import fr.free.nrw.commons.utils.CustomSelectorUtils
+import fr.free.nrw.commons.utils.PermissionUtils
 import kotlinx.coroutines.*
 import java.io.File
 import java.lang.Integer.max
@@ -114,14 +149,37 @@ class CustomSelectorActivity : BaseActivity(), FolderClickListener, ImageSelectL
 
     private var progressDialogText:String=""
 
+    private var showPartialAccessIndicator by mutableStateOf(false)
+
     /**
      * onCreate Activity, sets theme, initialises the view model, setup view.
      */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE &&
+            ContextCompat.checkSelfPermission(
+                this, Manifest.permission.READ_MEDIA_IMAGES
+            ) == PackageManager.PERMISSION_DENIED
+        ) {
+            showPartialAccessIndicator = true
+        }
+
         binding = ActivityCustomSelectorBinding.inflate(layoutInflater)
         toolbarBinding = CustomSelectorToolbarBinding.bind(binding.root)
         bottomSheetBinding = CustomSelectorBottomLayoutBinding.bind(binding.root)
+        binding.partialAccessIndicator.setContent {
+            PartialStorageAccessIndicator(
+                isVisible = showPartialAccessIndicator,
+                onManage = {
+                    if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+                        requestPermissions(arrayOf(Manifest.permission.READ_MEDIA_IMAGES), 1)
+                    }
+                },
+                modifier = Modifier
+                    .padding(vertical = 8.dp, horizontal = 4.dp)
+                    .fillMaxWidth()
+            )
+        }
         val view = binding.root
         setContentView(view)
 
@@ -145,6 +203,24 @@ class CustomSelectorActivity : BaseActivity(), FolderClickListener, ImageSelectL
             val lastItemId: Long = prefs.getLong(ITEM_ID, 0)
             lastOpenFolderName?.let { onFolderClick(lastOpenFolderId, it, lastItemId) }
         }
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if(requestCode == 1 && Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+            if(grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                showPartialAccessIndicator = false
+            }
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        fetchData()
     }
 
     /**
@@ -181,7 +257,6 @@ class CustomSelectorActivity : BaseActivity(), FolderClickListener, ImageSelectL
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragment_container, FolderFragment.newInstance())
             .commit()
-        fetchData()
         setUpToolbar()
         setUpBottomLayout()
     }
@@ -496,5 +571,54 @@ class CustomSelectorActivity : BaseActivity(), FolderClickListener, ImageSelectL
         const val FOLDER_ID: String = "FolderId"
         const val FOLDER_NAME: String = "FolderName"
         const val ITEM_ID: String = "ItemId"
+    }
+}
+@Composable
+fun PartialStorageAccessIndicator(
+    isVisible: Boolean,
+    onManage: ()-> Unit,
+    modifier: Modifier = Modifier
+) {
+    if(isVisible) {
+        OutlinedCard(
+            modifier = modifier,
+            colors = CardDefaults.cardColors(
+                containerColor = colorResource(R.color.primarySuperLightColor)
+            ),
+            border = BorderStroke(0.5.dp, color = colorResource(R.color.primaryColor)),
+            shape = RoundedCornerShape(8.dp)
+        ) {
+            Row(modifier = Modifier.padding(16.dp).fillMaxWidth()) {
+                Text(
+                    text = "You've given access to a select number of photos",
+                    modifier = Modifier.weight(1f)
+                )
+                TextButton(
+                    onClick = onManage,
+                    modifier = Modifier.align(Alignment.Bottom),
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = colorResource(R.color.primaryColor)
+                    ),
+                    shape = RoundedCornerShape(8.dp)
+                ) {
+                    Text(
+                        text = "Manage",
+                        style = MaterialTheme.typography.labelMedium,
+                        color = colorResource(R.color.primaryTextColor)
+                    )
+                }
+            }
+        }
+    }
+}
+
+@Preview
+@Composable
+fun PartialStorageAccessIndicatorPreview() {
+    Surface {
+        PartialStorageAccessIndicator(isVisible = true, onManage = {}, modifier = Modifier
+            .padding(vertical = 8.dp, horizontal = 4.dp)
+            .fillMaxWidth()
+        )
     }
 }

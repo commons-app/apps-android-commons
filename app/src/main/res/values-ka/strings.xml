@@ -53,7 +53,6 @@
   <string name="preference_category_feedback">უკუკავშირი</string>
   <string name="preference_category_privacy">კონფიდენციალურობა</string>
   <string name="app_name">ვიკისაწყობი</string>
-  <string name="bullet">•</string>
   <string name="menu_settings">კონფიგურაცია</string>
   <string name="intent_share_upload_label">ვიკისაწყობში ატვირთვა</string>
   <string name="upload_in_progress">მიმდინარეობს ატვირთვა</string>

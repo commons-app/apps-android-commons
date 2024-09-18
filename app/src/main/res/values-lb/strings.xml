@@ -49,7 +49,6 @@
   <string name="preference_category_feedback">Feedback</string>
   <string name="preference_category_privacy">Dateschutz</string>
   <string name="app_name">Commons</string>
-  <string name="bullet">•</string>
   <string name="menu_settings">Astellungen</string>
   <string name="intent_share_upload_label">Op Commons eroplueden</string>
   <string name="upload_in_progress">Eroplueden amgaang</string>
@@ -66,6 +65,7 @@
   <string name="login_success">Umeldung huet geklappt!</string>
   <string name="login_failed">D\'Aloggen huet net funktionéiert!</string>
   <string name="upload_failed">Fichier net fonnt. Probéiert wgl. en anere Fichier.</string>
+  <string name="unrestricted_battery_mode">Batterieoptiméierung deaktivieren?</string>
   <string name="authentication_failed">D\'Authentifizéierung huet net funktionéiert. Loggt Iech wgl. nach eng Kéier an.</string>
   <string name="uploading_started">D\'Eroplueden huet ugefaang!</string>
   <string name="upload_completed_notification_title">%1$s eropgelueden!</string>

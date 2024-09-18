@@ -51,6 +51,21 @@ dependencies {
     implementation 'com.karumi:dexter:5.0.0'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
 
+    // Jetpack Compose
+    def composeBom = platform('androidx.compose:compose-bom:2024.08.00')
+
+    implementation "androidx.activity:activity-compose:1.9.1"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.8.4"
+    implementation (composeBom)
+    implementation "androidx.compose.runtime:runtime"
+    implementation "androidx.compose.ui:ui"
+    implementation "androidx.compose.ui:ui-graphics"
+    implementation "androidx.compose.ui:ui-tooling"
+    implementation "androidx.compose.foundation:foundation"
+    implementation "androidx.compose.foundation:foundation-layout"
+    implementation "androidx.compose.material3:material3"
+    androidTestImplementation(composeBom)
+
     implementation "com.hannesdorfmann:adapterdelegates4-kotlin-dsl-viewbinding:$ADAPTER_DELEGATES_VERSION"
     implementation "com.hannesdorfmann:adapterdelegates4-pagination:$ADAPTER_DELEGATES_VERSION"
     implementation "androidx.paging:paging-runtime-ktx:$PAGING_VERSION"
@@ -186,7 +201,7 @@ project.gradle.taskGraph.whenReady {
 }
 
 android {
-    compileSdkVersion 33
+    compileSdkVersion 34
 
     defaultConfig {
         //applicationId 'fr.free.nrw.commons'
@@ -196,7 +211,7 @@ android {
         setProperty("archivesBaseName", "app-commons-v$versionName-" + getBranchName())
 
         minSdkVersion 21
-        targetSdkVersion 33
+        targetSdkVersion 34
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         testInstrumentationRunnerArguments clearPackageData: 'true'
 
@@ -253,11 +268,12 @@ android {
             }
         }
         debug {
-            testCoverageEnabled true
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
             testProguardFile 'test-proguard-rules.txt'
             versionNameSuffix "-debug-" + getBranchName()
+            enableUnitTestCoverage true
+            enableAndroidTestCoverage true
         }
     }
 
@@ -354,13 +370,17 @@ android {
         targetCompatibility JavaVersion.VERSION_11
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "11"
     }
 
     buildToolsVersion buildToolsVersion
 
     buildFeatures {
         viewBinding true
+        compose true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion '1.3.2'
     }
     namespace 'fr.free.nrw.commons'
     lint {

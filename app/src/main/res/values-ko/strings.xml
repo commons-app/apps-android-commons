@@ -73,7 +73,6 @@
   <string name="preference_category_feedback">피드백</string>
   <string name="preference_category_privacy">개인정보</string>
   <string name="app_name">공용</string>
-  <string name="bullet">•</string>
   <string name="menu_settings">설정</string>
   <string name="intent_share_upload_label">공용에 업로드</string>
   <string name="upload_in_progress">업로드 진행 중</string>

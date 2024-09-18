@@ -85,7 +85,6 @@
   <string name="preference_category_feedback">Comentário</string>
   <string name="preference_category_privacy">Privacidade</string>
   <string name="app_name">Commons</string>
-  <string name="bullet">•</string>
   <string name="menu_settings">Configurações</string>
   <string name="intent_share_upload_label">Carregar no Commons</string>
   <string name="upload_in_progress">Upload em progresso</string>

@@ -77,7 +77,6 @@
   <string name="preference_category_feedback">Povratne informacije</string>
   <string name="preference_category_privacy">Zasebnost</string>
   <string name="app_name">Zbirka</string>
-  <string name="bullet">•</string>
   <string name="menu_settings">Nastavitve</string>
   <string name="intent_share_upload_label">Naloži v Zbirko</string>
   <string name="upload_in_progress">Nalaganje poteka</string>

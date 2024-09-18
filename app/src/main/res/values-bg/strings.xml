@@ -42,7 +42,6 @@
   <string name="preference_category_feedback">Обратна връзка</string>
   <string name="preference_category_privacy">Поверителност</string>
   <string name="app_name">Общомедия</string>
-  <string name="bullet">•</string>
   <string name="menu_settings">Настройки</string>
   <string name="intent_share_upload_label">Качване в Общомедия</string>
   <string name="username">Потребителско име</string>

@@ -111,7 +111,6 @@
   <string name="preference_category_feedback">反馈</string>
   <string name="preference_category_privacy">隐私</string>
   <string name="app_name">共享资源</string>
-  <string name="bullet">•</string>
   <string name="menu_settings">设置</string>
   <string name="intent_share_upload_label">上传到共享资源</string>
   <string name="upload_in_progress">上传中</string>

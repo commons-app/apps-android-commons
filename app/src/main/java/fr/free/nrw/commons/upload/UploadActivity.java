@@ -278,7 +278,8 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
     public void checkStoragePermissions() {
         // Check if all required permissions are granted
         final boolean hasAllPermissions = PermissionUtils.hasPermission(this, PERMISSIONS_STORAGE);
-        if (hasAllPermissions) {
+        final boolean hasPartialAccess = PermissionUtils.hasPartialAccess(this);
+        if (hasAllPermissions || hasPartialAccess) {
             // All required permissions are granted, so enable UI elements and perform actions
             receiveSharedItems();
             binding.cvContainerTopCard.setVisibility(View.VISIBLE);

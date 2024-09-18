@@ -6,6 +6,9 @@ import fr.free.nrw.commons.auth.AccountUtil;
 import fr.free.nrw.commons.feedback.model.Feedback;
 import fr.free.nrw.commons.utils.LangCodeUtils;
 import java.util.Locale;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.TimeZone;
 
 /**
  * Creates a wikimedia recognizable format
@@ -32,11 +35,19 @@ public class FeedbackContentCreator {
         /*
          * Construct the feedback section title
          */
+
+        //Get the UTC Date and Time and add it to the Title
+        final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss", Locale.ENGLISH);
+        dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+        final String UTC_FormattedDate = dateFormat.format(new Date());
+
         sectionTitleBuilder = new StringBuilder();
         sectionTitleBuilder.append("Feedback from  ");
         sectionTitleBuilder.append(AccountUtil.getUserName(context));
         sectionTitleBuilder.append(" for version ");
         sectionTitleBuilder.append(feedback.getVersion());
+        sectionTitleBuilder.append(" on ");
+        sectionTitleBuilder.append(UTC_FormattedDate);
 
         /*
          * Construct the feedback section text
@@ -96,6 +107,7 @@ public class FeedbackContentCreator {
         }
         sectionTextBuilder.append("~~~~");
         sectionTextBuilder.append("\n");
+
     }
 
     public String getSectionText() {

@@ -69,7 +69,6 @@
   <string name="preference_category_feedback">Tilbakemelding</string>
   <string name="preference_category_privacy">Personvern</string>
   <string name="app_name">Commons</string>
-  <string name="bullet">•</string>
   <string name="menu_settings">Innstillinger</string>
   <string name="intent_share_upload_label">Last opp til Commons</string>
   <string name="upload_in_progress">Opplasting pågår</string>

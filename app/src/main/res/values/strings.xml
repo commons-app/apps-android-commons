@@ -59,7 +59,6 @@
   <string name="preference_category_feedback">Feedback</string>
   <string name="preference_category_privacy">Privacy</string>
   <string name="app_name">Commons</string>
-  <string name="bullet">&#8226;</string>
   <string name="menu_settings">Settings</string>
   <string name="intent_share_upload_label">Upload to Commons</string>
   <string name="upload_in_progress">Upload in progress</string>

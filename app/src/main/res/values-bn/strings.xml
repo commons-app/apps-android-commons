@@ -75,7 +75,6 @@
   <string name="preference_category_feedback">প্রতিক্রিয়া</string>
   <string name="preference_category_privacy">গোপনীয়তা</string>
   <string name="app_name">কমন্স</string>
-  <string name="bullet">•</string>
   <string name="menu_settings">সেটিং</string>
   <string name="intent_share_upload_label">কমন্সে আপলোড করুন</string>
   <string name="upload_in_progress">আপলোড করা হচ্ছে</string>
@@ -527,4 +526,7 @@
   <string name="report_content">এই বিষয়বস্তু সম্পর্কে অভিযোগ জানান</string>
   <string name="request_user_block">এই ব্যবহারকারীকে বাধাদনের অনুরোধ করুন</string>
   <string name="permissions_are_required_for_functionality">কার্যকারিতার জন্য অনুমতি প্রয়োজন</string>
+  <string name="uploads">আপলোড</string>
+  <string name="pending">অমীমাংসিত</string>
+  <string name="failed">ব্যর্থ হয়েছে</string>
 </resources>

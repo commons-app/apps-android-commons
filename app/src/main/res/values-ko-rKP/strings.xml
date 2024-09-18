@@ -32,7 +32,6 @@
   <string name="preference_category_general">일반</string>
   <string name="preference_category_feedback">반결합</string>
   <string name="app_name">공용</string>
-  <string name="bullet">•</string>
   <string name="menu_settings">설정</string>
   <string name="intent_share_upload_label">공용에 올리적재</string>
   <string name="username">사용자 이름</string>

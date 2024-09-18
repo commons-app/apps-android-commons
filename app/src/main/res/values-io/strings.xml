@@ -136,7 +136,7 @@
   <string name="menu_about">Pri</string>
   <string name="about_license">La programo \'\'app\'\' di Wikimedia Commons esas libera di autoroyuro, e kreesis e mantenesas da volontarii de la komunitato Wikimedia. La Fonduro Wikimedia ne partoprenas en lua kreo, developo o manteno.</string>
   <string name="about_improve">Krear nova &lt;a href=\"%1$s\"&gt;GitHub temo&lt;/a&gt; por raporti pri \'\'bugs\'\' e sugesti.</string>
-  <string name="about_privacy_policy">Sistemo di agado pri privateso</string>
+  <string name="about_privacy_policy">Nia politiki pri privateso</string>
   <string name="about_credits">Kreinto o kreinti</string>
   <string name="title_activity_about">Pri</string>
   <string name="menu_feedback">Sendez komenti (per e-posto)</string>

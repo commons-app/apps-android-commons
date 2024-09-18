@@ -61,7 +61,6 @@
   <string name="preference_category_feedback">คำติชม</string>
   <string name="preference_category_privacy">ความเป็นส่วนตัว</string>
   <string name="app_name">คอมมอนส์</string>
-  <string name="bullet">•</string>
   <string name="menu_settings">การตั้งค่า</string>
   <string name="intent_share_upload_label">อัปโหลดไปคอมมอนส์</string>
   <string name="username">ชื่อผู้ใช้</string>
