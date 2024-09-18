@@ -70,7 +70,7 @@ class DescriptionEditActivity :
 
     private lateinit var binding: ActivityDescriptionEditBinding
 
-    private val REQUEST_CODE_FOR_VOICE_INPUT = 1213
+    private val requestCodeForVoiceInput = 1213
 
     private var descriptionAndCaptions: ArrayList<UploadMediaDetail>? = null
 
@@ -298,7 +298,7 @@ class DescriptionEditActivity :
         data: Intent?,
     ) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == REQUEST_CODE_FOR_VOICE_INPUT) {
+        if (requestCode == requestCodeForVoiceInput) {
             if (resultCode == RESULT_OK && data != null) {
                 val result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)
                 uploadMediaDetailAdapter.handleSpeechResult(result!![0])
