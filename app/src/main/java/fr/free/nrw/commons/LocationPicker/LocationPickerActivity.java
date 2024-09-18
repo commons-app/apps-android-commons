@@ -40,7 +40,6 @@ import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.auth.csrf.CsrfTokenClient;
-import fr.free.nrw.commons.auth.csrf.InvalidLoginTokenException;
 import fr.free.nrw.commons.coordinates.CoordinateEditHelper;
 import fr.free.nrw.commons.filepicker.Constants;
 import fr.free.nrw.commons.kvstore.BasicKvStore;
@@ -237,15 +236,28 @@ public class LocationPickerActivity extends BaseActivity implements
                 cameraPosition.getLongitude()));
         }
         setupMapView();
-        
-        if("UploadActivity".equals(activity)){
-            if(mapView != null && mapView.getController() != null && cameraPosition != null){
-                GeoPoint cameraGeoPoint = new GeoPoint(cameraPosition.getLatitude(),
-                    cameraPosition.getLongitude());
+    }
 
-                mapView.getController().setCenter(cameraGeoPoint);
-                mapView.getController().animateTo(cameraGeoPoint);
-            }
+    /**
+     * Moves the center of the map to the specified coordinates
+     *
+     */
+    private void moveMapTo(double latitude, double longitude){
+        if(mapView != null && mapView.getController() != null){
+            GeoPoint point = new GeoPoint(latitude, longitude);
+
+            mapView.getController().setCenter(point);
+            mapView.getController().animateTo(point);
+        }
+    }
+
+    /**
+     * Moves the center of the map to the specified coordinates
+     * @param point The GeoPoint object which contains the coordinates to move to
+     */
+    private void moveMapTo(GeoPoint point){
+        if(point != null){
+            moveMapTo(point.getLatitude(), point.getLongitude());
         }
     }
 
@@ -304,12 +316,20 @@ public class LocationPickerActivity extends BaseActivity implements
     }
 
     private void setupMapView() {
-        adjustCameraBasedOnOptions();
+        requestLocationPermissions();
+
+        //If location metadata is available, move map to that location.
+        if(activity.equals("UploadActivity") || activity.equals("MediaActivity")){
+            moveMapToMediaLocation();
+        } else {
+            //If location metadata is not available, move map to device GPS location.
+            moveMapToGPSLocation();
+        }
+
         modifyLocationButton.setOnClickListener(v -> onClickModifyLocation());
         removeLocationButton.setOnClickListener(v -> onClickRemoveLocation());
-        showInMapButton.setOnClickListener(v -> showInMap());
+        showInMapButton.setOnClickListener(v -> showInMapApp());
         darkThemeSetup();
-        requestLocationPermissions();
     }
 
     /**
@@ -326,12 +346,7 @@ public class LocationPickerActivity extends BaseActivity implements
         smallToolbarText.setText(getResources().getString(R.string.pan_and_zoom_to_adjust));
         fabCenterOnLocation.setVisibility(View.VISIBLE);
         removeSelectedLocationMarker();
-        if (cameraPosition != null && mapView != null) {
-            if (mapView.getController() != null) {
-                mapView.getController().animateTo(new GeoPoint(cameraPosition.getLatitude(),
-                    cameraPosition.getLongitude()));
-            }
-        }
+        moveMapToMediaLocation();
     }
 
     /**
@@ -364,21 +379,53 @@ public class LocationPickerActivity extends BaseActivity implements
     }
 
     /**
-     * Show the location in map app
+     * Show the location in map app. Map will center on the location metadata, if available.
+     * If there is no location metadata, the map will center on the commons app map center.
      */
-    public void showInMap() {
-        Utils.handleGeoCoordinates(this,
-            new fr.free.nrw.commons.location.LatLng(mapView.getMapCenter().getLatitude(),
-                mapView.getMapCenter().getLongitude(), 0.0f));
+    private void showInMapApp() {
+        fr.free.nrw.commons.location.LatLng position = null;
+
+        if(activity.equals("UploadActivity") && cameraPosition != null){
+            //location metadata is available
+            position = new fr.free.nrw.commons.location.LatLng(cameraPosition.getLatitude(),
+                cameraPosition.getLongitude(), 0.0f);
+        } else if(mapView != null){
+            //location metadata is not available
+            position = new fr.free.nrw.commons.location.LatLng(mapView.getMapCenter().getLatitude(),
+                mapView.getMapCenter().getLongitude(), 0.0f);
+        }
+
+        if(position != null){
+            Utils.handleGeoCoordinates(this, position);
+        }
     }
 
     /**
-     * move the location to the current media coordinates
+     * Moves the center of the map to the media's location, if that data
+     * is available.
      */
-    private void adjustCameraBasedOnOptions() {
+    private void moveMapToMediaLocation() {
         if (cameraPosition != null) {
-            mapView.getController().setCenter(new GeoPoint(cameraPosition.getLatitude(),
-                cameraPosition.getLongitude()));
+
+            GeoPoint point = new GeoPoint(cameraPosition.getLatitude(),
+                cameraPosition.getLongitude());
+
+            moveMapTo(point);
+        }
+    }
+
+    /**
+     * Moves the center of the map to the device's GPS location, if that data is available.
+     */
+    private void moveMapToGPSLocation(){
+        if(locationManager != null){
+            fr.free.nrw.commons.location.LatLng location = locationManager.getLastLocation();
+
+            if(location != null){
+                GeoPoint point = new GeoPoint(location.getLatitude(), location.getLongitude());
+
+                moveMapTo(point);
+            }
         }
     }
 
@@ -557,9 +604,9 @@ public class LocationPickerActivity extends BaseActivity implements
                 locationManager.requestLocationUpdatesFromProvider(
                     LocationManager.NETWORK_PROVIDER);
                 locationManager.requestLocationUpdatesFromProvider(LocationManager.GPS_PROVIDER);
-                getLocation();
+                addMarkerAtGPSLocation();
             } else {
-                getLocation();
+                addMarkerAtGPSLocation();
                 locationPermissionsHelper.showLocationOffDialog(this,
                     R.string.ask_to_turn_location_on_text);
             }
@@ -567,16 +614,15 @@ public class LocationPickerActivity extends BaseActivity implements
     }
 
     /**
-     * Gets new location if locations services are on, else gets last location
+     * Adds a marker to the map at the most recent GPS location
+     * (which may be the current GPS location).
      */
-    private void getLocation() {
+    private void addMarkerAtGPSLocation() {
         fr.free.nrw.commons.location.LatLng currLocation = locationManager.getLastLocation();
         if (currLocation != null) {
             GeoPoint currLocationGeopoint = new GeoPoint(currLocation.getLatitude(),
                 currLocation.getLongitude());
             addLocationMarker(currLocationGeopoint);
-            mapView.getController().setCenter(currLocationGeopoint);
-            mapView.getController().animateTo(currLocationGeopoint);
             markerImage.setTranslationY(0);
         }
     }
