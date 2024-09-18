@@ -18,7 +18,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
@@ -166,7 +165,7 @@ class CustomSelectorActivity :
         toolbarBinding = CustomSelectorToolbarBinding.bind(binding.root)
         bottomSheetBinding = CustomSelectorBottomLayoutBinding.bind(binding.root)
         binding.partialAccessIndicator.setContent {
-            PartialStorageAccessIndicator(
+            partialStorageAccessIndicator(
                 isVisible = showPartialAccessIndicator,
                 onManage = {
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
@@ -608,7 +607,7 @@ class CustomSelectorActivity :
 }
 
 @Composable
-fun PartialStorageAccessIndicator(
+fun partialStorageAccessIndicator(
     isVisible: Boolean,
     onManage: () -> Unit,
     modifier: Modifier = Modifier,
@@ -650,9 +649,9 @@ fun PartialStorageAccessIndicator(
 
 @Preview
 @Composable
-fun PartialStorageAccessIndicatorPreview() {
+fun partialStorageAccessIndicatorPreview() {
     Surface {
-        PartialStorageAccessIndicator(
+        partialStorageAccessIndicator(
             isVisible = true,
             onManage = {},
             modifier =
