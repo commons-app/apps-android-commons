@@ -71,7 +71,11 @@ class PageableBaseDataSourceTest {
         verify(dataSourceFactory).retryFailedRequest()
     }
 
-    private fun expectNewLiveData(): Triple<KArgumentCaptor<() -> Unit>, LiveData<PagedList<String>>, KArgumentCaptor<PagingDataSourceFactory<String>>> {
+    private fun expectNewLiveData(): Triple<
+        KArgumentCaptor<() -> Unit>,
+        LiveData<PagedList<String>>,
+        KArgumentCaptor<PagingDataSourceFactory<String>>,
+    > {
         val captor = argumentCaptor<() -> Unit>()
         val dataSourceFactoryCaptor = argumentCaptor<PagingDataSourceFactory<String>>()
         val liveData: LiveData<PagedList<String>> = mock()
