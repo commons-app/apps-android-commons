@@ -12,8 +12,8 @@ import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
 import fr.free.nrw.commons.wikidata.model.DataValue
 import fr.free.nrw.commons.wikidata.model.DepictSearchResponse
 import fr.free.nrw.commons.wikidata.model.Entities
-import fr.free.nrw.commons.wikidata.model.Snak_partial
-import fr.free.nrw.commons.wikidata.model.Statement_partial
+import fr.free.nrw.commons.wikidata.model.SnakPartial
+import fr.free.nrw.commons.wikidata.model.StatementPartial
 import fr.free.nrw.commons.wikidata.model.WikiBaseEntityValue
 import io.reactivex.Single
 import org.junit.Before
@@ -67,12 +67,12 @@ class DepictsClientTest {
         whenever(binding2.id).thenReturn("2")
         val entities = mock<Entities>()
         val entity = mock<Entities.Entity>()
-        val statementPartial = mock<Statement_partial>()
+        val statementPartial = mock<StatementPartial>()
         whenever(depictsInterface.getEntities("1|2")).thenReturn(Single.just(entities))
         whenever(entities.entities()).thenReturn(mapOf("en" to entity))
         whenever(entity.statements).thenReturn(mapOf("P31" to listOf(statementPartial)))
         whenever(statementPartial.mainSnak).thenReturn(
-            Snak_partial(
+            SnakPartial(
                 "test",
                 "P31",
                 DataValue.EntityId(
@@ -165,10 +165,10 @@ class DepictsClientTest {
     fun `Test mapToDepictItem when description is empty and P31 exists`() {
         val entities = mock<Entities>()
         val entity = mock<Entities.Entity>()
-        val statementPartial = mock<Statement_partial>()
+        val statementPartial = mock<StatementPartial>()
         whenever(entity.statements).thenReturn(mapOf("P31" to listOf(statementPartial)))
         whenever(statementPartial.mainSnak).thenReturn(
-            Snak_partial(
+            SnakPartial(
                 "test",
                 "P31",
                 DataValue.EntityId(

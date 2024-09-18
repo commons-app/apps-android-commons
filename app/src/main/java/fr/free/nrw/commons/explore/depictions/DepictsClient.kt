@@ -10,7 +10,7 @@ import fr.free.nrw.commons.wikidata.WikidataProperties
 import fr.free.nrw.commons.wikidata.model.DataValue
 import fr.free.nrw.commons.wikidata.model.DepictSearchItem
 import fr.free.nrw.commons.wikidata.model.Entities
-import fr.free.nrw.commons.wikidata.model.Statement_partial
+import fr.free.nrw.commons.wikidata.model.StatementPartial
 import io.reactivex.Single
 import java.util.Locale
 import javax.inject.Inject
@@ -111,7 +111,7 @@ class DepictsClient
         /**
          * returns list of id ex. "Q2323" from Statement_partial
          */
-        private fun List<Statement_partial>?.toIds(): List<String> =
+        private fun List<StatementPartial>?.toIds(): List<String> =
             this
                 ?.map { it.mainSnak.dataValue }
                 ?.filterIsInstance<DataValue.EntityId>()

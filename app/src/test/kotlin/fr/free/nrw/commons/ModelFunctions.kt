@@ -10,8 +10,8 @@ import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
 import fr.free.nrw.commons.wikidata.model.DataValue
 import fr.free.nrw.commons.wikidata.model.DepictSearchItem
 import fr.free.nrw.commons.wikidata.model.Entities
-import fr.free.nrw.commons.wikidata.model.Snak_partial
-import fr.free.nrw.commons.wikidata.model.Statement_partial
+import fr.free.nrw.commons.wikidata.model.SnakPartial
+import fr.free.nrw.commons.wikidata.model.StatementPartial
 import fr.free.nrw.commons.wikidata.model.WikiBaseEntityValue
 import java.util.Date
 
@@ -104,23 +104,23 @@ fun wikiBaseEntityValue(
 ) = WikiBaseEntityValue(entityType, id, numericId)
 
 fun statement(
-    mainSnak: Snak_partial = snak(),
+    mainSnak: SnakPartial = snak(),
     rank: String = "rank",
     type: String = "type",
-) = Statement_partial(mainSnak, type, rank)
+) = StatementPartial(mainSnak, type, rank)
 
 fun snak(
     snakType: String = "type",
     property: String = "property",
     dataValue: DataValue = valueString(""),
-) = Snak_partial(snakType, property, dataValue)
+) = SnakPartial(snakType, property, dataValue)
 
 fun valueString(value: String) = DataValue.ValueString(value)
 
 fun entity(
     labels: Map<String, String> = emptyMap(),
     descriptions: Map<String, String> = emptyMap(),
-    statements: Map<String, List<Statement_partial>>? = emptyMap(),
+    statements: Map<String, List<StatementPartial>>? = emptyMap(),
     id: String = "id",
 ) = mock<Entities.Entity>().apply {
     val mockedLabels = labels.mockLabels()

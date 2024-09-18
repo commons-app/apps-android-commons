@@ -1,7 +1,7 @@
 package fr.free.nrw.commons.wikidata
 
 import com.google.gson.Gson
-import fr.free.nrw.commons.wikidata.model.Statement_partial
+import fr.free.nrw.commons.wikidata.model.StatementPartial
 import fr.free.nrw.commons.wikidata.model.WbCreateClaimResponse
 import io.reactivex.Observable
 import javax.inject.Inject
@@ -20,7 +20,7 @@ class WikidataClient
          * @return revisionID of the edit
          */
         fun setClaim(
-            claim: Statement_partial?,
+            claim: StatementPartial?,
             tags: String?,
         ): Observable<Long> =
             csrfToken()

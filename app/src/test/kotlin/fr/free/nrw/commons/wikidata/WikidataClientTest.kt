@@ -3,7 +3,7 @@ package fr.free.nrw.commons.wikidata
 import com.google.gson.Gson
 import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.wikidata.model.PageInfo
-import fr.free.nrw.commons.wikidata.model.Statement_partial
+import fr.free.nrw.commons.wikidata.model.StatementPartial
 import fr.free.nrw.commons.wikidata.model.WbCreateClaimResponse
 import fr.free.nrw.commons.wikidata.mwapi.MwQueryResponse
 import fr.free.nrw.commons.wikidata.mwapi.MwQueryResult
@@ -48,8 +48,8 @@ class WikidataClientTest {
         whenever(response.pageinfo).thenReturn(pageInfo)
         `when`(wikidataInterface!!.postSetClaim(anyString(), anyString(), anyString()))
             .thenReturn(Observable.just(response))
-        whenever(gson!!.toJson(any(Statement_partial::class.java))).thenReturn("claim")
-        val request = mock(Statement_partial::class.java)
+        whenever(gson!!.toJson(any(StatementPartial::class.java))).thenReturn("claim")
+        val request = mock(StatementPartial::class.java)
 
         val claim =
             wikidataClient!!

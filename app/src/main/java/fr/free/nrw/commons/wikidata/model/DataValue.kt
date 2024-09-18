@@ -12,9 +12,9 @@ sealed class DataValue(
                 .of(DataValue::class.java, DataValue::type.name)
                 .registerSubtype(EntityId::class.java, EntityId.TYPE)
                 .registerSubtype(ValueString::class.java, ValueString.TYPE)
-                .registerSubtype(GlobeCoordinate_partial::class.java, GlobeCoordinate_partial.TYPE)
-                .registerSubtype(Time_partial::class.java, Time_partial.TYPE)
-                .registerSubtype(Quantity_partial::class.java, Quantity_partial.TYPE)
+                .registerSubtype(GlobeCoordinatePartial::class.java, GlobeCoordinatePartial.TYPE)
+                .registerSubtype(TimePartial::class.java, TimePartial.TYPE)
+                .registerSubtype(QuantityPartial::class.java, QuantityPartial.TYPE)
                 .registerSubtype(MonoLingualText::class.java, MonoLingualText.TYPE)
     }
 
@@ -54,7 +54,7 @@ sealed class DataValue(
     //    },
     //    "type": "globecoordinate"
     //    }
-    class GlobeCoordinate_partial : DataValue(TYPE) {
+    class GlobeCoordinatePartial : DataValue(TYPE) {
         companion object {
             const val TYPE = "globecoordinate"
         }
@@ -70,7 +70,7 @@ sealed class DataValue(
     //    },
     //    "type": "time"
     //    }
-    class Time_partial : DataValue(TYPE) {
+    class TimePartial : DataValue(TYPE) {
         companion object {
             const val TYPE = "time"
         }
@@ -82,7 +82,7 @@ sealed class DataValue(
     //        "unit": "http://www.wikidata.org/entity/Q828224"
     //    }
     //    }
-    class Quantity_partial : DataValue(TYPE) {
+    class QuantityPartial : DataValue(TYPE) {
         companion object {
             const val TYPE = "quantity"
         }

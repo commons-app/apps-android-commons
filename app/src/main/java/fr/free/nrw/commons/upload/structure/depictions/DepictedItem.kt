@@ -12,7 +12,7 @@ import fr.free.nrw.commons.wikidata.WikidataProperties.IMAGE
 import fr.free.nrw.commons.wikidata.WikidataProperties.INSTANCE_OF
 import fr.free.nrw.commons.wikidata.model.DataValue
 import fr.free.nrw.commons.wikidata.model.Entities
-import fr.free.nrw.commons.wikidata.model.Statement_partial
+import fr.free.nrw.commons.wikidata.model.StatementPartial
 import kotlinx.parcelize.Parcelize
 import java.math.BigInteger
 import java.security.MessageDigest
@@ -78,14 +78,14 @@ data class DepictedItem constructor(
     override fun hashCode(): Int = name.hashCode()
 }
 
-private fun List<Statement_partial>?.toIds(): List<String> =
+private fun List<StatementPartial>?.toIds(): List<String> =
     this
         ?.map { it.mainSnak.dataValue }
         ?.filterIsInstance<DataValue.EntityId>()
         ?.map { it.value.id }
         ?: emptyList()
 
-private val List<Statement_partial>?.primaryImageValue: DataValue.ValueString?
+private val List<StatementPartial>?.primaryImageValue: DataValue.ValueString?
     get() = this?.firstOrNull()?.mainSnak?.dataValue as? DataValue.ValueString
 
 operator fun Entities.Entity.get(property: WikidataProperties) = statements?.get(property.propertyName)

@@ -19,8 +19,8 @@ import fr.free.nrw.commons.wikidata.model.DataValue;
 import fr.free.nrw.commons.wikidata.model.DataValue.ValueString;
 import fr.free.nrw.commons.wikidata.model.EditClaim;
 import fr.free.nrw.commons.wikidata.model.RemoveClaim;
-import fr.free.nrw.commons.wikidata.model.Snak_partial;
-import fr.free.nrw.commons.wikidata.model.Statement_partial;
+import fr.free.nrw.commons.wikidata.model.SnakPartial;
+import fr.free.nrw.commons.wikidata.model.StatementPartial;
 import fr.free.nrw.commons.wikidata.model.WikiBaseMonolingualTextValue;
 import fr.free.nrw.commons.wikidata.mwapi.MwPostResponse;
 import io.reactivex.Observable;
@@ -198,19 +198,19 @@ public class WikidataEditService {
 
     public Long addImageAndMediaLegends(final WikidataItem wikidataItem, final String fileName,
         final Map<String, String> captions) {
-        final Snak_partial p18 = new Snak_partial("value",
+        final SnakPartial p18 = new SnakPartial("value",
             WikidataProperties.IMAGE.getPropertyName(),
             new ValueString(fileName.replace("File:", "")));
 
-        final List<Snak_partial> snaks = new ArrayList<>();
+        final List<SnakPartial> snaks = new ArrayList<>();
         for (final Map.Entry<String, String> entry : captions.entrySet()) {
-            snaks.add(new Snak_partial("value",
+            snaks.add(new SnakPartial("value",
                 WikidataProperties.MEDIA_LEGENDS.getPropertyName(), new DataValue.MonoLingualText(
                 new WikiBaseMonolingualTextValue(entry.getValue(), entry.getKey()))));
         }
 
         final String id = wikidataItem.getId() + "$" + UUID.randomUUID().toString();
-        final Statement_partial claim = new Statement_partial(p18, "statement", "normal", id,
+        final StatementPartial claim = new StatementPartial(p18, "statement", "normal", id,
             Collections.singletonMap(WikidataProperties.MEDIA_LEGENDS.getPropertyName(), snaks),
             Arrays.asList(WikidataProperties.MEDIA_LEGENDS.getPropertyName()));
 

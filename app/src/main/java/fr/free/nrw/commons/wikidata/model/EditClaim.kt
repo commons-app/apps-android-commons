@@ -1,7 +1,7 @@
 package fr.free.nrw.commons.wikidata.model
 
 data class EditClaim(
-    val claims: List<Statement_partial>,
+    val claims: List<StatementPartial>,
 ) {
     companion object {
         @JvmStatic
@@ -9,12 +9,12 @@ data class EditClaim(
             entityIds: List<String>,
             propertyName: String,
         ): EditClaim {
-            val list = mutableListOf<Statement_partial>()
+            val list = mutableListOf<StatementPartial>()
             entityIds.forEach {
                 list.add(
-                    Statement_partial(
+                    StatementPartial(
                         mainSnak =
-                            Snak_partial(
+                            SnakPartial(
                                 snakType = "value",
                                 property = propertyName,
                                 dataValue =

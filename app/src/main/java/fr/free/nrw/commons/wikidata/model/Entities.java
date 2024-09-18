@@ -44,7 +44,7 @@ public class Entities extends MwResponse {
         @Nullable private Map<String, Label> labels;
         @Nullable private Map<String, Label> descriptions;
         @Nullable private Map<String, SiteLink> sitelinks;
-        @Nullable @SerializedName(value = "statements", alternate = "claims") private Map<String, List<Statement_partial>> statements;
+        @Nullable @SerializedName(value = "statements", alternate = "claims") private Map<String, List<StatementPartial>> statements;
         @Nullable private String missing;
 
         @NonNull public String id() {
@@ -64,7 +64,7 @@ public class Entities extends MwResponse {
         }
 
         @Nullable
-        public Map<String, List<Statement_partial>> getStatements() {
+        public Map<String, List<StatementPartial>> getStatements() {
             return statements;
         }
 
