@@ -21,14 +21,14 @@ private class TestStubInterceptor : Interceptor {
 
     @Throws(IOException::class)
     override fun intercept(chain: Interceptor.Chain): Response =
-        if (CALLBACK != null) {
-            CALLBACK!!.getResponse(chain)
+        if (callback != null) {
+            callback!!.getResponse(chain)
         } else {
             chain.proceed(chain.request())
         }
 
     companion object {
-        var CALLBACK: Callback? = null
+        var callback: Callback? = null
     }
 }
 
