@@ -40,11 +40,11 @@ class UploadClient
         private val timeProvider: TimeProvider,
         private val contributionDao: ContributionDao,
     ) {
-        private val CHUNK_SIZE = 512 * 1024 // 512 KB
+        private val chunkSize = 512 * 1024 // 512 KB
 
         // This is maximum duration for which a stash is persisted on MediaWiki
         // https://www.mediawiki.org/wiki/Manual:$wgUploadStashMaxAge
-        private val MAX_CHUNK_AGE = 6 * 3600 * 1000 // 6 hours
+        private val maxChunkAge = 6 * 3600 * 1000 // 6 hours
         private val compositeDisposable = CompositeDisposable()
 
         /**
@@ -65,7 +65,7 @@ class UploadClient
             }
 
             val file = contribution.localUriPath
-            val fileChunks = fileUtilsWrapper.getFileChunks(file, CHUNK_SIZE)
+            val fileChunks = fileUtilsWrapper.getFileChunks(file, chunkSize)
             val mediaType = fileUtilsWrapper.getMimeType(file).toMediaTypeOrNull()
 
             val chunkInfo = AtomicReference<ChunkInfo?>()
@@ -203,7 +203,7 @@ class UploadClient
             contribution.chunkInfo != null &&
                 contribution.dateModified!!.after(
                     Date(
-                        timeProvider.currentTimeMillis() - MAX_CHUNK_AGE,
+                        timeProvider.currentTimeMillis() - maxChunkAge,
                     ),
                 )
 
