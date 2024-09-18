@@ -47,7 +47,7 @@ class PageableBaseDataSourceTest {
     fun `onQueryUpdated invokes livedatconverter with no items emitter`() {
         val (zeroItemsFuncCaptor, _) = expectNewLiveData()
         pageableBaseDataSource.onQueryUpdated("test")
-        pageableBaseDataSource.noItemsLoadedQueries
+        pageableBaseDataSource.noItemsLoadedEvent
             .test()
             .also { zeroItemsFuncCaptor.firstValue.invoke() }
             .assertValue("test")

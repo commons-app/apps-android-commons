@@ -13,7 +13,7 @@ import fr.free.nrw.commons.databinding.FragmentAdvanceQueryBinding
 
 class AdvanceQueryFragment : Fragment() {
     private var _binding: FragmentAdvanceQueryBinding? = null
-    private val binding get() = _binding
+    val binding get() = _binding
 
     lateinit var callback: Callback
 

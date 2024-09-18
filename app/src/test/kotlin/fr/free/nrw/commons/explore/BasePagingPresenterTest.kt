@@ -48,7 +48,7 @@ class BasePagingPresenterTest {
         MockitoAnnotations.openMocks(this)
         whenever(pageableBaseDataSource.pagingResults).thenReturn(searchResults)
         whenever(pageableBaseDataSource.loadingStates).thenReturn(loadingStates)
-        whenever(pageableBaseDataSource.noItemsLoadedQueries)
+        whenever(pageableBaseDataSource.noItemsLoadedEvent)
             .thenReturn(noItemLoadedQueries)
         testScheduler = TestScheduler()
         basePagingPresenter =

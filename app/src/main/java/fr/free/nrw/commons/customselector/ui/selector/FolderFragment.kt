@@ -28,7 +28,7 @@ class FolderFragment : CommonsDaggerSupportFragment() {
      * ViewBinding
      */
     private var _binding: FragmentCustomSelectorBinding? = null
-    private val binding get() = _binding
+    val binding get() = _binding
 
     /**
      * View Model for images.

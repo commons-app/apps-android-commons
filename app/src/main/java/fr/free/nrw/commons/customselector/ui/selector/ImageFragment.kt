@@ -49,7 +49,7 @@ class ImageFragment :
     RefreshUIListener,
     PassDataListener {
     private var _binding: FragmentCustomSelectorBinding? = null
-    private val binding get() = _binding
+    val binding get() = _binding
 
     /**
      * Current bucketId.

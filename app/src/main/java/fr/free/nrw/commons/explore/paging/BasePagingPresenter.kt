@@ -23,7 +23,7 @@ abstract class BasePagingPresenter<T>(
             pageableBaseDataSource.loadingStates
                 .observeOn(mainThreadScheduler)
                 .subscribe(::onLoadingState, Timber::e),
-            pageableBaseDataSource.noItemsLoadedQueries.subscribe(view::showEmptyText),
+            pageableBaseDataSource.noItemsLoadedEvent.subscribe(view::showEmptyText),
         )
     }
 

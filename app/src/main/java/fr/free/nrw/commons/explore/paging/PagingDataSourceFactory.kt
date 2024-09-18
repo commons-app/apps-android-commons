@@ -29,7 +29,7 @@ abstract class PageableBaseDataSource<T>(
     private val _pagingResults = PublishProcessor.create<LiveData<PagedList<T>>>()
     val pagingResults: Flowable<LiveData<PagedList<T>>> = _pagingResults
     private val _noItemsLoadedEvent = PublishProcessor.create<String>()
-    val noItemsLoadedQueries: Flowable<String> = _noItemsLoadedEvent
+    val noItemsLoadedEvent: Flowable<String> = _noItemsLoadedEvent
     private var currentFactory: PagingDataSourceFactory<T>? = null
 
     abstract val loadFunction: LoadFunction<T>
