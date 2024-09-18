@@ -39,7 +39,12 @@ import fr.free.nrw.commons.theme.BaseActivity
 import fr.free.nrw.commons.upload.FileProcessor
 import fr.free.nrw.commons.upload.FileUtilsWrapper
 import fr.free.nrw.commons.utils.CustomSelectorUtils
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.cancel
+import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
 import kotlin.collections.ArrayList

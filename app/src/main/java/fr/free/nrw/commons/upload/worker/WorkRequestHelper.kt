@@ -1,7 +1,12 @@
 package fr.free.nrw.commons.upload.worker
 
 import android.content.Context
-import androidx.work.*
+import androidx.work.BackoffPolicy
+import androidx.work.Constraints
+import androidx.work.ExistingWorkPolicy
+import androidx.work.NetworkType
+import androidx.work.OneTimeWorkRequest
+import androidx.work.WorkManager
 import androidx.work.WorkRequest.Companion.MIN_BACKOFF_MILLIS
 import timber.log.Timber
 import java.util.concurrent.TimeUnit

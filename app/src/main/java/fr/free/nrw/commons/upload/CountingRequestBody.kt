@@ -2,7 +2,11 @@ package fr.free.nrw.commons.upload
 
 import okhttp3.MediaType
 import okhttp3.RequestBody
-import okio.*
+import okio.Buffer
+import okio.BufferedSink
+import okio.ForwardingSink
+import okio.Sink
+import okio.buffer
 import java.io.IOException
 
 /**

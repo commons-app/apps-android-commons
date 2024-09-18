@@ -8,7 +8,9 @@ import fr.free.nrw.commons.wikidata.mwapi.MwQueryResult
 import io.reactivex.Single
 import org.junit.Before
 import org.junit.Test
-import org.mockito.ArgumentMatchers.*
+import org.mockito.ArgumentMatchers.anyInt
+import org.mockito.ArgumentMatchers.anyMap
+import org.mockito.ArgumentMatchers.anyString
 import org.mockito.InjectMocks
 import org.mockito.Mock
 import org.mockito.Mockito.mock

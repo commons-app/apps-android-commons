@@ -8,7 +8,8 @@ import fr.free.nrw.commons.utils.StringSortingUtils
 import io.reactivex.Observable
 import io.reactivex.functions.Function4
 import timber.log.Timber
-import java.util.*
+import java.util.Calendar
+import java.util.Date
 import javax.inject.Inject
 
 /**

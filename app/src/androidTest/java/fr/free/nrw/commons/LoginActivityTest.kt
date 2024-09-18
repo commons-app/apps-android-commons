@@ -18,7 +18,10 @@ import fr.free.nrw.commons.auth.LoginActivity
 import fr.free.nrw.commons.auth.SignupActivity
 import org.hamcrest.CoreMatchers
 import org.hamcrest.CoreMatchers.not
-import org.junit.*
+import org.junit.After
+import org.junit.Before
+import org.junit.Rule
+import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)

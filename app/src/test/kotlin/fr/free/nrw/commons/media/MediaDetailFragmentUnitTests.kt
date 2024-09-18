@@ -12,7 +12,13 @@ import android.view.View
 import android.view.View.GONE
 import android.view.ViewTreeObserver
 import android.webkit.WebView
-import android.widget.*
+import android.widget.Button
+import android.widget.LinearLayout
+import android.widget.ListView
+import android.widget.ProgressBar
+import android.widget.ScrollView
+import android.widget.Spinner
+import android.widget.TextView
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.test.core.app.ApplicationProvider
@@ -40,8 +46,18 @@ import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.*
-import org.mockito.Mockito.*
+import org.mockito.ArgumentMatchers
+import org.mockito.Mock
+import org.mockito.Mockito
+import org.mockito.Mockito.anyInt
+import org.mockito.Mockito.anyString
+import org.mockito.Mockito.mock
+import org.mockito.Mockito.never
+import org.mockito.Mockito.spy
+import org.mockito.Mockito.times
+import org.mockito.Mockito.verify
+import org.mockito.Mockito.`when`
+import org.mockito.MockitoAnnotations
 import org.powermock.reflect.Whitebox
 import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
@@ -53,7 +69,8 @@ import org.robolectric.shadows.ShadowActivity
 import org.robolectric.shadows.ShadowIntent
 import java.lang.reflect.Field
 import java.lang.reflect.Method
-import java.util.*
+import java.util.Date
+import java.util.Locale
 
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)

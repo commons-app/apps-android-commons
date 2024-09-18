@@ -7,7 +7,11 @@ import com.jraska.livedata.test
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
-import fr.free.nrw.commons.explore.paging.*
+import fr.free.nrw.commons.explore.paging.BasePagingPresenter
+import fr.free.nrw.commons.explore.paging.FooterItem
+import fr.free.nrw.commons.explore.paging.LoadingState
+import fr.free.nrw.commons.explore.paging.PageableBaseDataSource
+import fr.free.nrw.commons.explore.paging.PagingContract
 import io.reactivex.processors.PublishProcessor
 import io.reactivex.schedulers.TestScheduler
 import org.junit.Before

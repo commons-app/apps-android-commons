@@ -1,7 +1,7 @@
 package fr.free.nrw.commons.explore.models
 
 import android.net.Uri
-import java.util.*
+import java.util.Date
 
 /**
  * Represents a recently searched query

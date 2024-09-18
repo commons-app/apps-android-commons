@@ -12,7 +12,13 @@ import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.CommonsApplication
 import fr.free.nrw.commons.kvstore.JsonKvStore
-import okhttp3.*
+import okhttp3.CacheControl
+import okhttp3.Call
+import okhttp3.OkHttpClient
+import okhttp3.Protocol
+import okhttp3.Request
+import okhttp3.Response
+import okhttp3.ResponseBody
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test

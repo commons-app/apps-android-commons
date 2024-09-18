@@ -5,7 +5,7 @@ import fr.free.nrw.commons.upload.FileUtils
 import fr.free.nrw.commons.upload.FileUtilsWrapper
 import org.junit.Assert.assertEquals
 import org.junit.Test
-import java.io.*
+import java.io.File
 
 class FileUtilsTest {
     @Test

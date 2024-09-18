@@ -4,7 +4,8 @@ import android.content.ContentResolver
 import android.content.Context
 import android.content.SharedPreferences
 import android.net.Uri
-import com.nhaarman.mockitokotlin2.*
+import com.nhaarman.mockitokotlin2.any
+import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.TestUtility.setFinalStatic
 import fr.free.nrw.commons.customselector.database.NotForUploadStatusDao
@@ -20,22 +21,30 @@ import fr.free.nrw.commons.upload.FileUtilsWrapper
 import io.reactivex.Single
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.test.*
+import kotlinx.coroutines.test.TestCoroutineDispatcher
+import kotlinx.coroutines.test.resetMain
+import kotlinx.coroutines.test.runBlockingTest
+import kotlinx.coroutines.test.setMain
 import org.junit.After
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import org.junit.jupiter.api.BeforeAll
 import org.junit.runner.RunWith
-import org.mockito.*
+import org.mockito.BDDMockito
+import org.mockito.Mock
+import org.mockito.MockedStatic
+import org.mockito.Mockito
 import org.mockito.Mockito.mockStatic
+import org.mockito.MockitoAnnotations
 import org.powermock.core.classloader.annotations.PrepareForTest
 import org.powermock.reflect.Whitebox
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 import java.io.File
 import java.io.FileInputStream
-import java.util.*
+import java.util.Calendar
+import java.util.Date
 import kotlin.collections.HashMap
 
 /**

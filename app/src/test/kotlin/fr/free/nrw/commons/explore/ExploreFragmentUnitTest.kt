@@ -2,7 +2,11 @@ package fr.free.nrw.commons.explore
 
 import android.content.Context
 import android.os.Looper.getMainLooper
-import android.view.*
+import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
+import android.view.View
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.test.core.app.ApplicationProvider

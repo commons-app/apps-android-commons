@@ -18,7 +18,7 @@ import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
 import java.io.File
 import java.io.IOException
-import java.util.*
+import java.util.Locale
 import javax.inject.Inject
 import javax.inject.Named
 

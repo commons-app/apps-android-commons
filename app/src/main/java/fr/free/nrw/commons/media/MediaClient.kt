@@ -9,7 +9,7 @@ import fr.free.nrw.commons.wikidata.model.Entities
 import fr.free.nrw.commons.wikidata.mwapi.MwQueryPage
 import fr.free.nrw.commons.wikidata.mwapi.MwQueryResponse
 import io.reactivex.Single
-import java.util.*
+import java.util.Date
 import javax.inject.Inject
 import javax.inject.Singleton
 

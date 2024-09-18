@@ -2,7 +2,11 @@ package fr.free.nrw.commons.customselector.helper
 
 import android.content.Context
 import android.util.DisplayMetrics
-import android.view.*
+import android.view.Display
+import android.view.GestureDetector
+import android.view.MotionEvent
+import android.view.View
+import android.view.WindowManager
 import kotlin.math.abs
 
 /**

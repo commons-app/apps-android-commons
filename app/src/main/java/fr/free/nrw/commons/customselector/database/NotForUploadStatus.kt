@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.customselector.database
 
-import androidx.room.*
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 
 /**
  * Entity class for Not For Upload status.

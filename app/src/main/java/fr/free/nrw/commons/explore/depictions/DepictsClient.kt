@@ -12,7 +12,7 @@ import fr.free.nrw.commons.wikidata.model.DepictSearchItem
 import fr.free.nrw.commons.wikidata.model.Entities
 import fr.free.nrw.commons.wikidata.model.Statement_partial
 import io.reactivex.Single
-import java.util.*
+import java.util.Locale
 import javax.inject.Inject
 import javax.inject.Singleton
 

@@ -13,7 +13,9 @@ import org.mockito.Mockito
 import org.mockito.MockitoAnnotations
 import java.lang.reflect.Field
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Calendar
+import java.util.Locale
+import java.util.TimeZone
 import kotlin.collections.ArrayList
 
 class CampaignsPresenterTest {

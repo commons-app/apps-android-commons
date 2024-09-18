@@ -9,8 +9,12 @@ import fr.free.nrw.commons.mwapi.Result
 import fr.free.nrw.commons.mwapi.SparqlResponse
 import fr.free.nrw.commons.upload.depicts.DepictsInterface
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
-import fr.free.nrw.commons.wikidata.model.*
+import fr.free.nrw.commons.wikidata.model.DataValue
 import fr.free.nrw.commons.wikidata.model.DepictSearchResponse
+import fr.free.nrw.commons.wikidata.model.Entities
+import fr.free.nrw.commons.wikidata.model.Snak_partial
+import fr.free.nrw.commons.wikidata.model.Statement_partial
+import fr.free.nrw.commons.wikidata.model.WikiBaseEntityValue
 import io.reactivex.Single
 import org.junit.Before
 import org.junit.Test

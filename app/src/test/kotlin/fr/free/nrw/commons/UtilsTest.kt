@@ -2,7 +2,7 @@ package fr.free.nrw.commons
 
 import org.junit.Test
 import org.junit.jupiter.api.Assertions
-import java.util.*
+import java.util.Calendar
 
 class UtilsTest {
     @Test

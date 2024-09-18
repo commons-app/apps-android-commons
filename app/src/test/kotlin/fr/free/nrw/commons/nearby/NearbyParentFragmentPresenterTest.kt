@@ -1,6 +1,8 @@
 package fr.free.nrw.commons.nearby
 
-import com.nhaarman.mockitokotlin2.*
+import com.nhaarman.mockitokotlin2.verify
+import com.nhaarman.mockitokotlin2.verifyNoMoreInteractions
+import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao
 import fr.free.nrw.commons.location.LatLng
 import fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType
@@ -17,7 +19,7 @@ import org.mockito.Mockito.any
 import org.mockito.Mockito.anyBoolean
 import org.mockito.Mockito.verifyNoInteractions
 import org.mockito.MockitoAnnotations
-import java.util.*
+import java.util.Collections
 
 /**
  * The unit test class for NearbyParentFragmentPresenter

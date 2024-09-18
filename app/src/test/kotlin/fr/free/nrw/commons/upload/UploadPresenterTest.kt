@@ -16,7 +16,6 @@ import org.mockito.Mock
 import org.mockito.Mockito.times
 import org.mockito.Mockito.`when`
 import org.mockito.MockitoAnnotations
-import java.util.*
 
 /**
  * The clas contains unit test cases for UploadPresenter

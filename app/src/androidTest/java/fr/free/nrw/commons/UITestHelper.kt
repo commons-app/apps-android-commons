@@ -10,7 +10,11 @@ import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.rule.ActivityTestRule
 import org.apache.commons.lang3.StringUtils
-import org.hamcrest.*
+import org.hamcrest.BaseMatcher
+import org.hamcrest.Description
+import org.hamcrest.Matcher
+import org.hamcrest.Matchers
+import org.hamcrest.TypeSafeMatcher
 import timber.log.Timber
 
 class UITestHelper {

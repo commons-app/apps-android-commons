@@ -4,7 +4,9 @@ import android.os.Parcelable
 import fr.free.nrw.commons.location.LatLng
 import fr.free.nrw.commons.wikidata.model.page.PageTitle
 import kotlinx.parcelize.Parcelize
-import java.util.*
+import java.util.Date
+import java.util.Locale
+import java.util.UUID
 
 @Parcelize
 class Media constructor(

@@ -19,12 +19,12 @@ import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment.LAST_ZO
 import io.reactivex.android.plugins.RxAndroidPlugins
 import io.reactivex.schedulers.Schedulers
 import org.junit.Assert
-import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
-import org.mockito.Mockito.*
+import org.mockito.Mockito.any
+import org.mockito.Mockito.`when`
 import org.mockito.MockitoAnnotations
 import org.osmdroid.util.GeoPoint
 import org.powermock.reflect.Whitebox

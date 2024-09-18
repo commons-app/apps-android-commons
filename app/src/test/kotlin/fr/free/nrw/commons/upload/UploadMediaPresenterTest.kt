@@ -10,7 +10,9 @@ import fr.free.nrw.commons.nearby.Place
 import fr.free.nrw.commons.repository.UploadRepository
 import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailsContract
 import fr.free.nrw.commons.upload.mediaDetails.UploadMediaPresenter
-import fr.free.nrw.commons.utils.ImageUtils.*
+import fr.free.nrw.commons.utils.ImageUtils.EMPTY_CAPTION
+import fr.free.nrw.commons.utils.ImageUtils.FILE_NAME_EXISTS
+import fr.free.nrw.commons.utils.ImageUtils.IMAGE_OK
 import io.github.coordinates2country.Coordinates2Country
 import io.reactivex.Observable
 import io.reactivex.Single
@@ -20,12 +22,17 @@ import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.*
+import org.mockito.ArgumentCaptor
+import org.mockito.ArgumentMatchers
+import org.mockito.Mock
+import org.mockito.MockedStatic
+import org.mockito.Mockito
 import org.mockito.Mockito.mockStatic
 import org.mockito.Mockito.verify
+import org.mockito.MockitoAnnotations
 import org.powermock.core.classloader.annotations.PrepareForTest
 import org.robolectric.RobolectricTestRunner
-import java.util.*
+import java.util.Collections
 
 /**
  * The class contains unit test cases for UploadMediaPresenter

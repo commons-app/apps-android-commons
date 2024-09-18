@@ -15,8 +15,11 @@ import fr.free.nrw.commons.upload.FileProcessor
 import fr.free.nrw.commons.upload.FileUtilsWrapper
 import fr.free.nrw.commons.utils.CustomSelectorUtils
 import fr.free.nrw.commons.utils.CustomSelectorUtils.Companion.checkWhetherFileExistsOnCommonsUsingSHA1
-import kotlinx.coroutines.*
-import java.util.*
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.launch
+import java.util.Calendar
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 

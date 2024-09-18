@@ -7,9 +7,13 @@ import fr.free.nrw.commons.nearby.Label
 import fr.free.nrw.commons.nearby.Place
 import fr.free.nrw.commons.nearby.Sitelinks
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
-import fr.free.nrw.commons.wikidata.model.*
+import fr.free.nrw.commons.wikidata.model.DataValue
 import fr.free.nrw.commons.wikidata.model.DepictSearchItem
-import java.util.*
+import fr.free.nrw.commons.wikidata.model.Entities
+import fr.free.nrw.commons.wikidata.model.Snak_partial
+import fr.free.nrw.commons.wikidata.model.Statement_partial
+import fr.free.nrw.commons.wikidata.model.WikiBaseEntityValue
+import java.util.Date
 
 fun depictedItem(
     name: String = "label",

@@ -21,7 +21,10 @@ import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.notification.NotificationActivity
 import org.hamcrest.CoreMatchers
 import org.hamcrest.Matchers
-import org.junit.*
+import org.junit.After
+import org.junit.Before
+import org.junit.Rule
+import org.junit.Test
 import org.junit.runner.RunWith
 
 @LargeTest

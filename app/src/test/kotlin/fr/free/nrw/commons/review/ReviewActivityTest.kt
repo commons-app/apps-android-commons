@@ -20,7 +20,9 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.ArgumentMatchers
 import org.mockito.Mock
-import org.mockito.Mockito.*
+import org.mockito.Mockito.anyInt
+import org.mockito.Mockito.doReturn
+import org.mockito.Mockito.mock
 import org.mockito.MockitoAnnotations
 import org.powermock.reflect.Whitebox
 import org.robolectric.Robolectric

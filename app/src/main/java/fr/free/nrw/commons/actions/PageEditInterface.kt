@@ -6,7 +6,12 @@ import fr.free.nrw.commons.wikidata.model.edit.Edit
 import fr.free.nrw.commons.wikidata.mwapi.MwQueryResponse
 import io.reactivex.Observable
 import io.reactivex.Single
-import retrofit2.http.*
+import retrofit2.http.Field
+import retrofit2.http.FormUrlEncoded
+import retrofit2.http.GET
+import retrofit2.http.Headers
+import retrofit2.http.POST
+import retrofit2.http.Query
 
 /**
  * This interface facilitates wiki commons page editing services to the Networking module

@@ -19,7 +19,10 @@ import androidx.test.espresso.intent.Intents.intended
 import androidx.test.espresso.intent.Intents.intending
 import androidx.test.espresso.intent.matcher.IntentMatchers.hasAction
 import androidx.test.espresso.intent.matcher.IntentMatchers.hasType
-import androidx.test.espresso.matcher.ViewMatchers.*
+import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
+import androidx.test.espresso.matcher.ViewMatchers.withId
+import androidx.test.espresso.matcher.ViewMatchers.withParent
+import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
 import androidx.test.rule.ActivityTestRule
@@ -29,14 +32,19 @@ import fr.free.nrw.commons.upload.UploadMediaDetailAdapter
 import fr.free.nrw.commons.util.MyViewAction
 import fr.free.nrw.commons.utils.ConfigUtils
 import org.hamcrest.core.AllOf.allOf
-import org.junit.*
+import org.junit.After
+import org.junit.Before
+import org.junit.Ignore
+import org.junit.Rule
+import org.junit.Test
 import org.junit.runner.RunWith
 import timber.log.Timber
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Date
+import java.util.Random
 
 @LargeTest
 @RunWith(AndroidJUnit4::class)

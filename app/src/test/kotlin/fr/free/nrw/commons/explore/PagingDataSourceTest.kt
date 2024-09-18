@@ -1,7 +1,11 @@
 package fr.free.nrw.commons.explore
 
 import androidx.paging.PositionalDataSource
-import com.nhaarman.mockitokotlin2.*
+import com.nhaarman.mockitokotlin2.any
+import com.nhaarman.mockitokotlin2.mock
+import com.nhaarman.mockitokotlin2.never
+import com.nhaarman.mockitokotlin2.verify
+import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.explore.depictions.search.LoadingStates
 import fr.free.nrw.commons.explore.paging.LoadingState
 import fr.free.nrw.commons.explore.paging.PagingDataSource

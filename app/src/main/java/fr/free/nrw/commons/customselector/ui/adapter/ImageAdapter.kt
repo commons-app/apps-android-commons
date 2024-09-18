@@ -19,8 +19,13 @@ import fr.free.nrw.commons.customselector.helper.ImageHelper.SHOW_ALREADY_ACTION
 import fr.free.nrw.commons.customselector.listeners.ImageSelectListener
 import fr.free.nrw.commons.customselector.model.Image
 import fr.free.nrw.commons.customselector.ui.selector.ImageLoader
-import kotlinx.coroutines.*
-import java.util.*
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.cancel
+import kotlinx.coroutines.launch
+import java.util.TreeMap
 import kotlin.collections.ArrayList
 
 /**

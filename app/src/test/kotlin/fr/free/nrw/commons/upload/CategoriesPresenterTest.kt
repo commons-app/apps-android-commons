@@ -2,7 +2,11 @@ package fr.free.nrw.commons.upload
 
 import androidx.lifecycle.MutableLiveData
 import categoryItem
-import com.nhaarman.mockitokotlin2.*
+import com.nhaarman.mockitokotlin2.any
+import com.nhaarman.mockitokotlin2.mock
+import com.nhaarman.mockitokotlin2.verify
+import com.nhaarman.mockitokotlin2.verifyNoMoreInteractions
+import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.category.CategoryItem
 import fr.free.nrw.commons.repository.UploadRepository

@@ -37,7 +37,7 @@ import fr.free.nrw.commons.theme.BaseActivity
 import fr.free.nrw.commons.upload.FileProcessor
 import fr.free.nrw.commons.upload.FileUtilsWrapper
 import io.reactivex.schedulers.Schedulers
-import java.util.*
+import java.util.TreeMap
 import javax.inject.Inject
 import kotlin.collections.ArrayList
 

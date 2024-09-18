@@ -13,7 +13,7 @@ import fr.free.nrw.commons.wikidata.model.gallery.ImageInfo
 import fr.free.nrw.commons.wikidata.mwapi.MwQueryPage
 import org.apache.commons.lang3.StringUtils
 import java.text.ParseException
-import java.util.*
+import java.util.Date
 import javax.inject.Inject
 
 class MediaConverter

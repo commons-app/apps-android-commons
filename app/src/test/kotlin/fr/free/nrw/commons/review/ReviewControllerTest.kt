@@ -32,7 +32,7 @@ import org.robolectric.annotation.LooperMode
 import org.robolectric.shadows.ShadowNotificationManager
 import org.robolectric.shadows.ShadowToast
 import java.lang.reflect.Method
-import java.util.*
+import java.util.Date
 
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)

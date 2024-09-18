@@ -5,7 +5,10 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import fr.free.nrw.commons.contributions.Contribution
 import fr.free.nrw.commons.contributions.ContributionDao
-import fr.free.nrw.commons.customselector.database.*
+import fr.free.nrw.commons.customselector.database.NotForUploadStatus
+import fr.free.nrw.commons.customselector.database.NotForUploadStatusDao
+import fr.free.nrw.commons.customselector.database.UploadedStatus
+import fr.free.nrw.commons.customselector.database.UploadedStatusDao
 import fr.free.nrw.commons.nearby.Place
 import fr.free.nrw.commons.nearby.PlaceDao
 import fr.free.nrw.commons.review.ReviewDao

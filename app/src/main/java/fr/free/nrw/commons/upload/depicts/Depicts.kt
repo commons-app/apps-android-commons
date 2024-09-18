@@ -3,7 +3,7 @@ package fr.free.nrw.commons.upload.depicts
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
-import java.util.*
+import java.util.Date
 
 /**
  *  entity class for DepictsRoomDateBase

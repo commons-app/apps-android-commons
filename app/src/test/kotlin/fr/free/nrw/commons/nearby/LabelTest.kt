@@ -1,7 +1,6 @@
 package fr.free.nrw.commons.nearby
 
 import fr.free.nrw.commons.R
-import fr.free.nrw.commons.R.*
 import org.junit.Before
 import org.junit.Test
 

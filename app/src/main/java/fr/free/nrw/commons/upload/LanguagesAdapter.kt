@@ -12,7 +12,7 @@ import fr.free.nrw.commons.databinding.RowItemLanguagesSpinnerBinding
 import fr.free.nrw.commons.language.AppLanguageLookUpTable
 import fr.free.nrw.commons.utils.LangCodeUtils
 import org.apache.commons.lang3.StringUtils
-import java.util.*
+import java.util.Locale
 
 /**
  * This class handles the display of language dialog and their views for UploadMediaDetailFragment
