@@ -25,8 +25,8 @@ import org.robolectric.annotation.Config
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
 class QuizActivityUnitTest {
-    private val SAMPLE_ALERT_TITLE_VALUE = "Title"
-    private val SAMPLE_ALERT_MESSAGE_VALUE = "Message"
+    private val sampleAlertTitleValue = "Title"
+    private val sampleAlertMessageValue = "Message"
 
     private lateinit var activity: QuizActivity
     private lateinit var positiveAnswer: Button
@@ -88,6 +88,6 @@ class QuizActivityUnitTest {
     @Test
     @Throws(Exception::class)
     fun testCustomAlert() {
-        activity.customAlert(SAMPLE_ALERT_TITLE_VALUE, SAMPLE_ALERT_MESSAGE_VALUE)
+        activity.customAlert(sampleAlertTitleValue, sampleAlertMessageValue)
     }
 }
