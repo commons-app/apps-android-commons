@@ -6,15 +6,12 @@ class Bookmark(
     mediaName: String?,
     mediaCreator: String?,
     /**
-     * Modifies the content URI - marking this bookmark as already saved in the database
+     * Gets or Sets the content URI - marking this bookmark as already saved in the database
+     * @return content URI
      * @param contentUri the content URI
      */
     var contentUri: Uri?,
 ) {
-    /**
-     * Gets the content URI for this bookmark
-     * @return content URI
-     */
     /**
      * Gets the media name
      * @return the media name

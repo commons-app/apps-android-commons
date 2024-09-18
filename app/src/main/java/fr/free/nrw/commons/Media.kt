@@ -27,12 +27,8 @@ class Media constructor(
      */
     var filename: String? = null,
     /**
-     * Gets the file description.
+     * Gets or sets the file description.
      * @return file description as a string
-     */
-    // monolingual description on input...
-    /**
-     * Sets the file description.
      * @param fallbackDescription the new description of the file
      */
     var fallbackDescription: String? = null,
@@ -43,22 +39,15 @@ class Media constructor(
      */
     var dateUploaded: Date? = null,
     /**
-     * Gets the license name of the file.
+     * Gets or sets the license name of the file.
      * @return license as a String
-     */
-    /**
-     * Sets the license name of the file.
-     *
      * @param license license name as a String
      */
     var license: String? = null,
     var licenseUrl: String? = null,
     /**
-     * Gets the name of the creator of the file.
+     * Gets or sets the name of the creator of the file.
      * @return author name as a String
-     */
-    /**
-     * Sets the author name of the file.
      * @param author creator name as a string
      */
     var author: String? = null,

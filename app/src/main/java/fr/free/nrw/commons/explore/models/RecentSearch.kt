@@ -7,14 +7,7 @@ import java.util.Date
  * Represents a recently searched query
  * Example - query = "butterfly"
  */
-class RecentSearch
-/**
- * Constructor
- * @param contentUri the content URI for this query
- * @param query query name
- * @param lastSearched last searched date
- */
-(
+class RecentSearch(
     /**
      * Modifies the content URI - marking this query as already saved in the database
      *

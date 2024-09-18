@@ -5,27 +5,27 @@ package fr.free.nrw.commons.upload
  */
 class Description {
     /**
-     * @return The language code ie. "en" or "fr"
-     */
-    /**
-     * @param languageCode The language code ie. "en" or "fr"
+     * The language code, e.g., "en" or "fr".
+     * @param languageCode The language code.
      */
     var languageCode: String? = null
-    var descriptionText: String? = null
+
     /**
-     * @return the index of the  language selected in a spinner with [SpinnerLanguagesAdapter]
+     * The description text for the item being uploaded.
+     * @param descriptionText The description text.
      */
+    var descriptionText: String? = null
+
     /**
-     * @param selectedLanguageIndex the index of the language selected in a spinner with [SpinnerLanguagesAdapter]
+     * The index of the language selected in a spinner with [SpinnerLanguagesAdapter].
+     * @param selectedLanguageIndex The index of the selected language.
      */
     var selectedLanguageIndex = -1
+
     /**
-     * returns if the description was added manually (by the user, or we have added it programaticallly)
-     * @return
-     */
-    /**
-     * sets to true if the description was manually added by the user
-     * @param manuallyAdded
+     * Indicates if the description was added manually (by the user or programmatically).
+     * @param manuallyAdded Sets to true if the description was manually added by the user.
+     * @return True if the description was manually added.
      */
     var isManuallyAdded = false
 

@@ -24,10 +24,11 @@ class ImageCoordinates internal constructor(
      * @return string of `"[decLatitude]|[decLongitude]"` or null if coordinates do not exist
      */
     var decimalCoords: String? = null
-    var zoomLevel: Double = 16.0
+
     /**
      *  @return double value of zoom or 16.0 by default
      */
+    var zoomLevel: Double = 16.0
 
     /**
      * Construct from a stream.

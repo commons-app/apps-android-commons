@@ -30,8 +30,7 @@ data class Contribution constructor(
     var errorInfo: String? = null,
     /**
      * @return array list of entityids for the depictions
-     */
-    /**
+     *
      * Each depiction loaded in depictions activity is associated with a wikidata entity id, this Id
      * is in turn used to upload depictions to wikibase
      */
