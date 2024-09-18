@@ -101,8 +101,8 @@ private fun getImageUrl(
         .substringAfter(":")
         .replace(" ", "_")
         .let {
-            val MD5Hash = getMd5(it)
-            "https://upload.wikimedia.org/wikipedia/commons/thumb/${MD5Hash[0]}/${MD5Hash[0]}${MD5Hash[1]}/$it/$size-$it"
+            val md5Hash = getMd5(it)
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/${md5Hash[0]}/${md5Hash[0]}${md5Hash[1]}/$it/$size-$it"
         }
 
 /**
@@ -126,7 +126,6 @@ private fun getMd5(input: String): String =
             hashtext = "0$hashtext"
         }
         hashtext
-    } // For specifying wrong message digest algorithms
-    catch (e: NoSuchAlgorithmException) {
+    } catch (e: NoSuchAlgorithmException) {
         throw RuntimeException(e)
     }
