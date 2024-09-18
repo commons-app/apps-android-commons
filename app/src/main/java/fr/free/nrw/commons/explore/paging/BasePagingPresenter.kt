@@ -10,8 +10,8 @@ abstract class BasePagingPresenter<T>(
     val mainThreadScheduler: Scheduler,
     val pageableBaseDataSource: PageableBaseDataSource<T>,
 ) : PagingContract.Presenter<T> {
-    private val DUMMY: PagingContract.View<T> = proxy()
-    private var view: PagingContract.View<T> = DUMMY
+    private val dummy: PagingContract.View<T> = proxy()
+    private var view: PagingContract.View<T> = dummy
 
     private val compositeDisposable = CompositeDisposable()
     override val listFooterData = MutableLiveData<List<FooterItem>>().apply { value = emptyList() }
@@ -53,7 +53,7 @@ abstract class BasePagingPresenter<T>(
     }
 
     override fun onDetachView() {
-        view = DUMMY
+        view = dummy
         compositeDisposable.clear()
     }
 
