@@ -443,8 +443,12 @@ class MediaDetailFragmentUnitTests {
                 " |artist = {{Creator:Filippo Peroni}} Restored by {{Creator:Adam Cuerden}}\n" +
                 " |author = \n" +
                 " |title = Ricchi giardini nel Palazzo di Monforte a Palermo\n" +
-                " |description = {{en|''Ricchi giardini nel Palazzo di Monforte a Palermo'', set design for ''I Vespri siciliani'' act 5 (undated).}} {{it|''Ricchi giardini nel Palazzo di Monforte a Palermo'', bozzetto per ''I Vespri siciliani'' atto 5 (s.d.).}}\n" +
-                " |date = {{between|1855|1878}} (Premiére of the opera and death of the artist, respectively)\n" +
+                " |description = {{en|''Ricchi giardini nel Palazzo di Monforte a Palermo''," +
+                    " set design for ''I Vespri siciliani'' act 5 (undated).}} {{it|''Ricchi" +
+                    " giardini nel Palazzo di Monforte a Palermo'', bozzetto per ''I Vespri" +
+                    " siciliani'' atto 5 (s.d.).}}\n" +
+                " |date = {{between|1855|1878}} (Premiére of the opera and death of the artist, " +
+                    "respectively)\n" +
                 " |medium = {{technique|watercolor|and=tempera|and2=|over=paper}}\n" +
                 " |dimensions = {{Size|unit=mm|height=210|width=270}}\n" +
                 " |institution = {{Institution:Archivio Storico Ricordi}}\n" +
@@ -457,12 +461,20 @@ class MediaDetailFragmentUnitTests {
                 " |notes = \n" +
                 " |accession number = ICON000132\n" +
                 " |place of creation = \n" +
-                " |source = [https://www.archivioricordi.com/chi-siamo/glam-archivio-ricordi/#/ Archivio Storico Ricordi], [https://www.digitalarchivioricordi.com/it/works/display/108/Vespri_Siciliani__I Collezione Digitale Ricordi]\n" +
+                " |source = [https://www.archivioricordi.com/chi-siamo/glam-archivio-ricordi/#/" +
+                " Archivio Storico Ricordi], [https://www.digitalarchivioricordi.com/it/" +
+                "works/display/108/Vespri_Siciliani__I Collezione Digitale Ricordi]\n" +
                 " |permission={{PermissionTicket|id=2022031410007974|user=Ruthven}} \n" +
                 " |other_versions = \n" +
-                "* [[:File:Ricchi giardini nel Palazzo di Monforte a Palermo, bozzetto di Filippo Peroni per I Vespri siciliani (s.d.) - Archivio Storico Ricordi ICON000132 - Restoration.jpg]] - Restoration (JPEG)\n" +
-                "* [[:File:Ricchi giardini nel Palazzo di Monforte a Palermo, bozzetto di Filippo Peroni per I Vespri siciliani (s.d.) - Archivio Storico Ricordi ICON000132 - Restoration.png]] - Restoration (PNG)\n" +
-                "* [[:File:Ricchi giardini nel Palazzo di Monforte a Palermo, bozzetto di Filippo Peroni per I Vespri siciliani (s.d.) - Archivio Storico Ricordi ICON000132.jpg]] - Original (JPEG)\n" +
+                "* [[:File:Ricchi giardini nel Palazzo di Monforte a Palermo, bozzetto di" +
+                " Filippo Peroni per I Vespri siciliani (s.d.) - Archivio Storico Ricordi" +
+                " ICON000132 - Restoration.jpg]] - Restoration (JPEG)\n" +
+                "* [[:File:Ricchi giardini nel Palazzo di Monforte a Palermo, bozzetto di" +
+                " Filippo Peroni per I Vespri siciliani (s.d.) - Archivio Storico Ricordi" +
+                " ICON000132 - Restoration.png]] - Restoration (PNG)\n" +
+                "* [[:File:Ricchi giardini nel Palazzo di Monforte a Palermo, bozzetto di" +
+                " Filippo Peroni per I Vespri siciliani (s.d.) - Archivio Storico Ricordi" +
+                " ICON000132.jpg]] - Original (JPEG)\n" +
                 " |references = \n" +
                 " |wikidata = \n" +
                 "}}"
