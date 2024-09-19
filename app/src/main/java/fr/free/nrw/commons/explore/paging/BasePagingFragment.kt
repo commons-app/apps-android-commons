@@ -5,7 +5,8 @@ import android.content.res.Configuration
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
-import android.view.View.*
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
@@ -18,10 +19,9 @@ import fr.free.nrw.commons.databinding.FragmentSearchPaginatedBinding
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment
 import fr.free.nrw.commons.utils.ViewUtil
 
-
-abstract class BasePagingFragment<T> : CommonsDaggerSupportFragment(),
+abstract class BasePagingFragment<T> :
+    CommonsDaggerSupportFragment(),
     PagingContract.View<T> {
-
     abstract val pagedListAdapter: PagedListAdapter<T, *>
     abstract val injectedPresenter: PagingContract.Presenter<T>
     abstract val errorTextId: Int
@@ -29,18 +29,21 @@ abstract class BasePagingFragment<T> : CommonsDaggerSupportFragment(),
     private val mergeAdapter by lazy { MergeAdapter(pagedListAdapter, loadingAdapter) }
     private var searchResults: LiveData<PagedList<T>>? = null
 
-    protected lateinit var binding : FragmentSearchPaginatedBinding
+    protected lateinit var binding: FragmentSearchPaginatedBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
         binding = FragmentSearchPaginatedBinding.inflate(inflater, container, false)
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         super.onViewCreated(view, savedInstanceState)
 
         binding.paginatedSearchResultsList.apply {
@@ -49,7 +52,7 @@ abstract class BasePagingFragment<T> : CommonsDaggerSupportFragment(),
         }
         injectedPresenter.listFooterData.observe(
             viewLifecycleOwner,
-            Observer(loadingAdapter::submitList)
+            Observer(loadingAdapter::submitList),
         )
     }
 
@@ -66,9 +69,12 @@ abstract class BasePagingFragment<T> : CommonsDaggerSupportFragment(),
     override fun observePagingResults(searchResults: LiveData<PagedList<T>>) {
         this.searchResults?.removeObservers(viewLifecycleOwner)
         this.searchResults = searchResults
-        searchResults.observe(viewLifecycleOwner, Observer {
-            pagedListAdapter.submitList(it)
-        })
+        searchResults.observe(
+            viewLifecycleOwner,
+            Observer {
+                pagedListAdapter.submitList(it)
+            },
+        )
     }
 
     override fun onAttach(context: Context) {

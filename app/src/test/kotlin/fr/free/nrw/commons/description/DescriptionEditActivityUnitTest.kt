@@ -10,7 +10,6 @@ import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
-import androidx.test.core.app.ApplicationProvider
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestCommonsApplication
@@ -26,7 +25,6 @@ import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
-import org.mockito.Mockito.verify
 import org.mockito.Mockito.`when`
 import org.mockito.MockitoAnnotations
 import org.powermock.reflect.Whitebox
@@ -39,13 +37,12 @@ import org.robolectric.annotation.LooperMode
 import org.robolectric.shadows.ShadowAlertDialog
 import org.robolectric.shadows.ShadowProgressDialog
 import java.lang.reflect.Method
-import java.util.*
+import java.util.Date
 
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
 @LooperMode(LooperMode.Mode.PAUSED)
 class DescriptionEditActivityUnitTest {
-
     private lateinit var context: Context
     private lateinit var activity: Activity
     private lateinit var uploadMediaDetails: ArrayList<UploadMediaDetail>
@@ -64,10 +61,19 @@ class DescriptionEditActivityUnitTest {
     fun setUp() {
         MockitoAnnotations.initMocks(this)
         context = RuntimeEnvironment.getApplication().applicationContext
-        uploadMediaDetails = mutableListOf(UploadMediaDetail("en", "desc"))
+        uploadMediaDetails =
+            mutableListOf(UploadMediaDetail("en", "desc"))
                 as ArrayList<UploadMediaDetail>
-        media = Media("filename", "creator", "url", "thumburl",
-            "localpath", Date(197000), "extmetadata")
+        media =
+            Media(
+                "filename",
+                "creator",
+                "url",
+                "thumburl",
+                "localpath",
+                Date(197000),
+                "extmetadata",
+            )
 
         val intent = Intent().putExtra("title", "read")
         val bundle = Bundle()
@@ -87,7 +93,7 @@ class DescriptionEditActivityUnitTest {
         Whitebox.setInternalState(activity, "binding", binding)
         Whitebox.setInternalState(activity, "savedLanguageValue", "bn")
         Whitebox.setInternalState(activity, "media", media)
-        Whitebox.setInternalState(activity,"descriptionAndCaptions",uploadMediaDetails)
+        Whitebox.setInternalState(activity, "descriptionAndCaptions", uploadMediaDetails)
         `when`(uploadMediaDetailAdapter.items).thenReturn(uploadMediaDetails)
     }
 
@@ -101,9 +107,10 @@ class DescriptionEditActivityUnitTest {
     @Throws(Exception::class)
     fun testShowLoggingProgressBar() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
-        val method: Method = DescriptionEditActivity::class.java.getDeclaredMethod(
-            "showLoggingProgressBar"
-        )
+        val method: Method =
+            DescriptionEditActivity::class.java.getDeclaredMethod(
+                "showLoggingProgressBar",
+            )
         method.isAccessible = true
         method.invoke(activity)
         val dialog: ProgressDialog = ShadowProgressDialog.getLatestDialog() as ProgressDialog
@@ -114,9 +121,11 @@ class DescriptionEditActivityUnitTest {
     @Throws(Exception::class)
     fun testUpdateDescription() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
-        val method: Method = DescriptionEditActivity::class.java.getDeclaredMethod(
-            "updateDescription", List::class.java
-        )
+        val method: Method =
+            DescriptionEditActivity::class.java.getDeclaredMethod(
+                "updateDescription",
+                List::class.java,
+            )
         method.isAccessible = true
         method.invoke(activity, mutableListOf(UploadMediaDetail("en", "desc")))
         assertEquals(activity.isFinishing, true)
@@ -126,9 +135,11 @@ class DescriptionEditActivityUnitTest {
     @Throws(Exception::class)
     fun testOnSubmitButtonClicked() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
-        val method: Method = DescriptionEditActivity::class.java.getDeclaredMethod(
-            "onSubmitButtonClicked", View::class.java
-        )
+        val method: Method =
+            DescriptionEditActivity::class.java.getDeclaredMethod(
+                "onSubmitButtonClicked",
+                View::class.java,
+            )
         method.isAccessible = true
         method.invoke(activity, null)
         assertEquals(activity.isFinishing, true)
@@ -138,9 +149,11 @@ class DescriptionEditActivityUnitTest {
     @Throws(Exception::class)
     fun testOnBackButtonClicked() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
-        val method: Method = DescriptionEditActivity::class.java.getDeclaredMethod(
-            "onBackButtonClicked", View::class.java
-        )
+        val method: Method =
+            DescriptionEditActivity::class.java.getDeclaredMethod(
+                "onBackButtonClicked",
+                View::class.java,
+            )
         method.isAccessible = true
         method.invoke(activity, null)
         assertEquals(activity.isFinishing, true)
@@ -150,9 +163,11 @@ class DescriptionEditActivityUnitTest {
     @Throws(Exception::class)
     fun testOnPrimaryCaptionTextChange() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
-        val method: Method = DescriptionEditActivity::class.java.getDeclaredMethod(
-            "onPrimaryCaptionTextChange", Boolean::class.java
-        )
+        val method: Method =
+            DescriptionEditActivity::class.java.getDeclaredMethod(
+                "onPrimaryCaptionTextChange",
+                Boolean::class.java,
+            )
         method.isAccessible = true
         method.invoke(activity, true)
     }
@@ -161,17 +176,19 @@ class DescriptionEditActivityUnitTest {
     @Throws(Exception::class)
     fun testShowInfoAlert() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
-        val method: Method = DescriptionEditActivity::class.java.getDeclaredMethod(
-            "showInfoAlert", Int::class.java, Int::class.java
-        )
+        val method: Method =
+            DescriptionEditActivity::class.java.getDeclaredMethod(
+                "showInfoAlert",
+                Int::class.java,
+                Int::class.java,
+            )
         method.isAccessible = true
         method.invoke(
             activity,
             android.R.string.ok,
-            android.R.string.ok
+            android.R.string.ok,
         )
         val dialog: AlertDialog = ShadowAlertDialog.getLatestDialog() as AlertDialog
         assertEquals(dialog.isShowing, true)
     }
-
 }

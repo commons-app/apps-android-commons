@@ -1,29 +1,19 @@
 package fr.free.nrw.commons.upload
 
 import android.content.Context
-import android.os.AsyncTask
-import android.os.Build.VERSION
-import android.os.Build.VERSION_CODES
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.paging.PagedList
-import androidx.paging.PositionalDataSource
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView.AdapterDataObserver
 import fr.free.nrw.commons.CommonsApplication
 import fr.free.nrw.commons.R
-import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.contributions.Contribution
 import fr.free.nrw.commons.databinding.FragmentPendingUploadsBinding
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment
-import fr.free.nrw.commons.media.MediaClient
-import fr.free.nrw.commons.profile.ProfileActivity
 import fr.free.nrw.commons.utils.DialogUtil.showAlertDialog
 import fr.free.nrw.commons.utils.ViewUtil
-import org.apache.commons.lang3.StringUtils
-import timber.log.Timber
 import java.util.Locale
 import javax.inject.Inject
 
@@ -31,9 +21,10 @@ import javax.inject.Inject
  * Fragment for showing pending uploads in Upload Progress Activity. This fragment provides
  * functionality for the user to pause uploads.
  */
-class PendingUploadsFragment : CommonsDaggerSupportFragment(), PendingUploadsContract.View,
+class PendingUploadsFragment :
+    CommonsDaggerSupportFragment(),
+    PendingUploadsContract.View,
     PendingUploadsAdapter.Callback {
-
     @Inject
     lateinit var pendingUploadsPresenter: PendingUploadsPresenter
 
@@ -54,8 +45,9 @@ class PendingUploadsFragment : CommonsDaggerSupportFragment(), PendingUploadsCon
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
     ): View? {
         super.onCreate(savedInstanceState)
         binding = FragmentPendingUploadsBinding.inflate(inflater, container, false)
@@ -68,7 +60,10 @@ class PendingUploadsFragment : CommonsDaggerSupportFragment(), PendingUploadsCon
         adapter = PendingUploadsAdapter(this)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         super.onViewCreated(view, savedInstanceState)
         initRecyclerView()
     }
@@ -81,21 +76,21 @@ class PendingUploadsFragment : CommonsDaggerSupportFragment(), PendingUploadsCon
         binding.pendingUploadsRecyclerView.adapter = adapter
         pendingUploadsPresenter!!.setup()
         pendingUploadsPresenter!!.totalContributionList.observe(
-            viewLifecycleOwner
+            viewLifecycleOwner,
         ) { list: PagedList<Contribution?> ->
             contributionsSize = list.size
             contributionsList = ArrayList()
             var pausedOrQueuedUploads = 0
             list.forEach {
                 if (it != null) {
-                    if (it.state == Contribution.STATE_PAUSED
-                        || it.state == Contribution.STATE_QUEUED
-                        || it.state == Contribution.STATE_IN_PROGRESS
+                    if (it.state == Contribution.STATE_PAUSED ||
+                        it.state == Contribution.STATE_QUEUED ||
+                        it.state == Contribution.STATE_IN_PROGRESS
                     ) {
                         contributionsList.add(it)
                     }
-                    if (it.state == Contribution.STATE_PAUSED
-                        || it.state == Contribution.STATE_QUEUED
+                    if (it.state == Contribution.STATE_PAUSED ||
+                        it.state == Contribution.STATE_QUEUED
                     ) {
                         pausedOrQueuedUploads++
                     }
@@ -127,11 +122,11 @@ class PendingUploadsFragment : CommonsDaggerSupportFragment(), PendingUploadsCon
             requireActivity(),
             String.format(
                 Locale.getDefault(),
-                requireActivity().getString(R.string.cancelling_upload)
+                requireActivity().getString(R.string.cancelling_upload),
             ),
             String.format(
                 Locale.getDefault(),
-                requireActivity().getString(R.string.cancel_upload_dialog)
+                requireActivity().getString(R.string.cancel_upload_dialog),
             ),
             String.format(Locale.getDefault(), requireActivity().getString(R.string.yes)),
             String.format(Locale.getDefault(), requireActivity().getString(R.string.no)),
@@ -139,10 +134,10 @@ class PendingUploadsFragment : CommonsDaggerSupportFragment(), PendingUploadsCon
                 ViewUtil.showShortToast(context, R.string.cancelling_upload)
                 pendingUploadsPresenter.deleteUpload(
                     contribution,
-                    this.requireContext().applicationContext
+                    this.requireContext().applicationContext,
                 )
             },
-            {}
+            {},
         )
     }
 
@@ -154,7 +149,7 @@ class PendingUploadsFragment : CommonsDaggerSupportFragment(), PendingUploadsCon
             pendingUploadsPresenter.restartUploads(
                 contributionsList,
                 0,
-                this.requireContext().applicationContext
+                this.requireContext().applicationContext,
             )
         }
     }
@@ -174,11 +169,11 @@ class PendingUploadsFragment : CommonsDaggerSupportFragment(), PendingUploadsCon
             requireActivity(),
             String.format(
                 Locale.getDefault(),
-                requireActivity().getString(R.string.cancelling_all_the_uploads)
+                requireActivity().getString(R.string.cancelling_all_the_uploads),
             ),
             String.format(
                 Locale.getDefault(),
-                requireActivity().getString(R.string.are_you_sure_that_you_want_cancel_all_the_uploads)
+                requireActivity().getString(R.string.are_you_sure_that_you_want_cancel_all_the_uploads),
             ),
             String.format(Locale.getDefault(), requireActivity().getString(R.string.yes)),
             String.format(Locale.getDefault(), requireActivity().getString(R.string.no)),
@@ -189,12 +184,11 @@ class PendingUploadsFragment : CommonsDaggerSupportFragment(), PendingUploadsCon
                     listOf(
                         Contribution.STATE_QUEUED,
                         Contribution.STATE_IN_PROGRESS,
-                        Contribution.STATE_PAUSED
-                    )
+                        Contribution.STATE_PAUSED,
+                    ),
                 )
             },
-            {}
+            {},
         )
-
     }
 }

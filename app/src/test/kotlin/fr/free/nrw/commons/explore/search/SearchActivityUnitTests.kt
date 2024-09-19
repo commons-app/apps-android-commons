@@ -1,16 +1,12 @@
 package fr.free.nrw.commons.explore.search
 
 import android.content.Context
-import android.widget.SearchView
-import androidx.fragment.app.FragmentController
 import androidx.fragment.app.FragmentManager
 import androidx.test.core.app.ApplicationProvider
-import androidx.viewpager.widget.ViewPager
 import com.nhaarman.mockitokotlin2.verify
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.ViewPagerAdapter
-import fr.free.nrw.commons.databinding.ActivitySearchBinding
 import fr.free.nrw.commons.explore.SearchActivity
 import fr.free.nrw.commons.explore.categories.search.SearchCategoryFragment
 import fr.free.nrw.commons.explore.depictions.search.SearchDepictionsFragment
@@ -37,12 +33,10 @@ import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
 import java.lang.reflect.Method
 
-
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
 @LooperMode(LooperMode.Mode.PAUSED)
 class SearchActivityUnitTests {
-
     @Mock
     private lateinit var activity: SearchActivity
 
@@ -175,10 +169,11 @@ class SearchActivityUnitTests {
     fun testHandleSearchCaseEmpty() {
         Whitebox.setInternalState(activity, "recentSearchesFragment", recentSearchesFragment)
         val query = ""
-        val method: Method = SearchActivity::class.java.getDeclaredMethod(
-            "handleSearch",
-            CharSequence::class.java
-        )
+        val method: Method =
+            SearchActivity::class.java.getDeclaredMethod(
+                "handleSearch",
+                CharSequence::class.java,
+            )
         method.isAccessible = true
         method.invoke(activity, query)
         verify(recentSearchesFragment).updateRecentSearches()
@@ -209,10 +204,11 @@ class SearchActivityUnitTests {
         `when`(searchMediaFragment.isRemoving).thenReturn(false)
         `when`(searchCategoryFragment.isRemoving).thenReturn(false)
 
-        val method: Method = SearchActivity::class.java.getDeclaredMethod(
-            "handleSearch",
-            CharSequence::class.java
-        )
+        val method: Method =
+            SearchActivity::class.java.getDeclaredMethod(
+                "handleSearch",
+                CharSequence::class.java,
+            )
         method.isAccessible = true
         method.invoke(activity, query)
         verify(recentSearchesDao).find(query)
@@ -220,5 +216,4 @@ class SearchActivityUnitTests {
         verify(searchMediaFragment).onQueryUpdated(query)
         verify(searchCategoryFragment).onQueryUpdated(query)
     }
-
 }

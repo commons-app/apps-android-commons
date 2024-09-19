@@ -1,18 +1,22 @@
 package fr.free.nrw.commons.customselector.database
 
-import androidx.room.*
-import java.util.*
+import androidx.room.Dao
+import androidx.room.Delete
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
+import androidx.room.Update
+import java.util.Calendar
 
 /**
  * UploadedStatusDao for Custom Selector.
  */
 @Dao
 abstract class UploadedStatusDao {
-
     /**
      * Insert into uploaded status.
      */
-    @Insert( onConflict = OnConflictStrategy.REPLACE )
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     abstract suspend fun insert(uploadedStatus: UploadedStatus)
 
     /**
@@ -31,13 +35,13 @@ abstract class UploadedStatusDao {
      * Query uploaded status with image sha1.
      */
     @Query("SELECT * FROM uploaded_table WHERE imageSHA1 = (:imageSHA1) ")
-    abstract suspend fun getFromImageSHA1(imageSHA1 : String) : UploadedStatus?
+    abstract suspend fun getFromImageSHA1(imageSHA1: String): UploadedStatus?
 
     /**
      * Query uploaded status with modified image sha1.
      */
     @Query("SELECT * FROM uploaded_table WHERE modifiedImageSHA1 = (:modifiedImageSHA1) ")
-    abstract suspend fun getFromModifiedImageSHA1(modifiedImageSHA1 : String) : UploadedStatus?
+    abstract suspend fun getFromModifiedImageSHA1(modifiedImageSHA1: String): UploadedStatus?
 
     /**
      * Asynchronous insert into uploaded status table.
@@ -51,20 +55,24 @@ abstract class UploadedStatusDao {
      * Check whether the imageSHA1 is present in database
      */
     @Query("SELECT COUNT() FROM uploaded_table WHERE imageSHA1 = (:imageSHA1) AND imageResult = (:imageResult) ")
-    abstract suspend fun findByImageSHA1(imageSHA1 : String, imageResult: Boolean): Int
+    abstract suspend fun findByImageSHA1(
+        imageSHA1: String,
+        imageResult: Boolean,
+    ): Int
 
     /**
      * Check whether the modifiedImageSHA1 is present in database
      */
-    @Query("SELECT COUNT() FROM uploaded_table WHERE modifiedImageSHA1 = (:modifiedImageSHA1) AND modifiedImageResult = (:modifiedImageResult) ")
-    abstract suspend fun findByModifiedImageSHA1(modifiedImageSHA1 : String,
-                                                 modifiedImageResult: Boolean): Int
+    @Query(
+        "SELECT COUNT() FROM uploaded_table WHERE modifiedImageSHA1 = (:modifiedImageSHA1) AND modifiedImageResult = (:modifiedImageResult) ",
+    )
+    abstract suspend fun findByModifiedImageSHA1(
+        modifiedImageSHA1: String,
+        modifiedImageResult: Boolean,
+    ): Int
 
     /**
      * Asynchronous image sha1 query.
      */
-    suspend fun getUploadedFromImageSHA1(imageSHA1: String):UploadedStatus? {
-        return getFromImageSHA1(imageSHA1)
-    }
-
+    suspend fun getUploadedFromImageSHA1(imageSHA1: String): UploadedStatus? = getFromImageSHA1(imageSHA1)
 }

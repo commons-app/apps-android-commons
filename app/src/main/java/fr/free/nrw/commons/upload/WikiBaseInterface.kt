@@ -22,7 +22,7 @@ interface WikiBaseInterface {
     fun postEditEntity(
         @Field("id") fileEntityId: String,
         @Field("token") editToken: String,
-        @Field("data") data: String
+        @Field("data") data: String,
     ): Observable<MwPostResponse>
 
     /**
@@ -32,18 +32,20 @@ interface WikiBaseInterface {
      * @param editToken editToken for the file
      * @param data data of the depicts to be uploaded
      * @return Observable<MwPostResponse>
-    </MwPostResponse> */
+     </MwPostResponse> */
     @Headers("Cache-Control: no-cache")
     @FormUrlEncoded
     @POST(WikidataConstants.MW_API_PREFIX + "action=wbeditentity&site=commonswiki")
     fun postEditEntityByFilename(
         @Field("title") filename: String,
         @Field("token") editToken: String,
-        @Field("data") data: String
+        @Field("data") data: String,
     ): Observable<MwPostResponse>
 
     @GET(WikidataConstants.MW_API_PREFIX + "action=query&prop=info")
-    fun getFileEntityId(@Query("titles") fileName: String?): Observable<MwQueryResponse>
+    fun getFileEntityId(
+        @Query("titles") fileName: String?,
+    ): Observable<MwQueryResponse>
 
     /**
      * Upload Captions for the image when upload is successful
@@ -58,14 +60,14 @@ interface WikiBaseInterface {
         @Field("id") fileEntityId: String?,
         @Field("token") editToken: String?,
         @Field("language") language: String?,
-        @Field("value") captionValue: String?
+        @Field("value") captionValue: String?,
     ): Observable<MwPostResponse>
 
     @GET(WikidataConstants.MW_API_PREFIX + "action=wbgetclaims")
     fun getClaimsByProperty(
         @Query("entity") entityId: String,
-        @Query("property") property: String
-    ) : Observable<Claims>
+        @Query("property") property: String,
+    ): Observable<Claims>
 
     @Headers("Cache-Control: no-cache")
     @FormUrlEncoded
@@ -73,6 +75,6 @@ interface WikiBaseInterface {
     fun postDeleteClaims(
         @Field("token") editToken: String,
         @Field("id") entityId: String,
-        @Field("data") data: String
+        @Field("data") data: String,
     ): Observable<MwPostResponse>
 }

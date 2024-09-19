@@ -7,9 +7,31 @@ import android.database.MatrixCursor
 import android.database.sqlite.SQLiteDatabase
 import android.net.Uri
 import android.os.RemoteException
-import com.nhaarman.mockitokotlin2.*
+import com.nhaarman.mockitokotlin2.any
+import com.nhaarman.mockitokotlin2.anyOrNull
+import com.nhaarman.mockitokotlin2.argumentCaptor
+import com.nhaarman.mockitokotlin2.eq
+import com.nhaarman.mockitokotlin2.inOrder
+import com.nhaarman.mockitokotlin2.isA
+import com.nhaarman.mockitokotlin2.isNull
+import com.nhaarman.mockitokotlin2.mock
+import com.nhaarman.mockitokotlin2.verify
+import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.TestCommonsApplication
-import fr.free.nrw.commons.bookmarks.items.BookmarkItemsDao.Table.*
+import fr.free.nrw.commons.bookmarks.items.BookmarkItemsDao.Table.COLUMN_CATEGORIES_DESCRIPTION_LIST
+import fr.free.nrw.commons.bookmarks.items.BookmarkItemsDao.Table.COLUMN_CATEGORIES_NAME_LIST
+import fr.free.nrw.commons.bookmarks.items.BookmarkItemsDao.Table.COLUMN_CATEGORIES_THUMBNAIL_LIST
+import fr.free.nrw.commons.bookmarks.items.BookmarkItemsDao.Table.COLUMN_DESCRIPTION
+import fr.free.nrw.commons.bookmarks.items.BookmarkItemsDao.Table.COLUMN_ID
+import fr.free.nrw.commons.bookmarks.items.BookmarkItemsDao.Table.COLUMN_IMAGE
+import fr.free.nrw.commons.bookmarks.items.BookmarkItemsDao.Table.COLUMN_INSTANCE_LIST
+import fr.free.nrw.commons.bookmarks.items.BookmarkItemsDao.Table.COLUMN_IS_SELECTED
+import fr.free.nrw.commons.bookmarks.items.BookmarkItemsDao.Table.COLUMN_NAME
+import fr.free.nrw.commons.bookmarks.items.BookmarkItemsDao.Table.CREATE_TABLE_STATEMENT
+import fr.free.nrw.commons.bookmarks.items.BookmarkItemsDao.Table.DROP_TABLE_STATEMENT
+import fr.free.nrw.commons.bookmarks.items.BookmarkItemsDao.Table.onCreate
+import fr.free.nrw.commons.bookmarks.items.BookmarkItemsDao.Table.onDelete
+import fr.free.nrw.commons.bookmarks.items.BookmarkItemsDao.Table.onUpdate
 import fr.free.nrw.commons.category.CategoryItem
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
 import org.junit.Assert
@@ -23,17 +45,18 @@ import org.robolectric.annotation.Config
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
 class BookmarkItemsDaoTest {
-    private val columns = arrayOf(
-        COLUMN_NAME,
-        COLUMN_DESCRIPTION,
-        COLUMN_IMAGE,
-        COLUMN_INSTANCE_LIST,
-        COLUMN_CATEGORIES_NAME_LIST,
-        COLUMN_CATEGORIES_DESCRIPTION_LIST,
-        COLUMN_CATEGORIES_THUMBNAIL_LIST,
-        COLUMN_IS_SELECTED,
-        COLUMN_ID,
-    )
+    private val columns =
+        arrayOf(
+            COLUMN_NAME,
+            COLUMN_DESCRIPTION,
+            COLUMN_IMAGE,
+            COLUMN_INSTANCE_LIST,
+            COLUMN_CATEGORIES_NAME_LIST,
+            COLUMN_CATEGORIES_DESCRIPTION_LIST,
+            COLUMN_CATEGORIES_THUMBNAIL_LIST,
+            COLUMN_IS_SELECTED,
+            COLUMN_ID,
+        )
     private val client: ContentProviderClient = mock()
     private val database: SQLiteDatabase = mock()
     private val captor = argumentCaptor<ContentValues>()
@@ -46,12 +69,23 @@ class BookmarkItemsDaoTest {
      */
     @Before
     fun setUp() {
-        exampleItemBookmark = DepictedItem("itemName", "itemDescription",
-            "itemImageUrl", listOf("instance"), listOf(
-                CategoryItem("category name", "category description",
-                "category thumbnail", false)
-            ), false,
-            "itemID")
+        exampleItemBookmark =
+            DepictedItem(
+                "itemName",
+                "itemDescription",
+                "itemImageUrl",
+                listOf("instance"),
+                listOf(
+                    CategoryItem(
+                        "category name",
+                        "category description",
+                        "category thumbnail",
+                        false,
+                    ),
+                ),
+                false,
+                "itemID",
+            )
         testObject = BookmarkItemsDao { client }
     }
 
@@ -79,9 +113,17 @@ class BookmarkItemsDaoTest {
                 Assert.assertEquals("itemDescription", it.description)
                 Assert.assertEquals("itemImageUrl", it.imageUrl)
                 Assert.assertEquals(listOf("instance"), it.instanceOfs)
-                Assert.assertEquals(listOf(CategoryItem("category name",
-                    "category description",
-                    "category thumbnail", false)), it.commonsCategories)
+                Assert.assertEquals(
+                    listOf(
+                        CategoryItem(
+                            "category name",
+                            "category description",
+                            "category thumbnail",
+                            false,
+                        ),
+                    ),
+                    it.commonsCategories,
+                )
                 Assert.assertEquals(false, it.isSelected)
                 Assert.assertEquals("itemID", it.id)
             }
@@ -96,13 +138,12 @@ class BookmarkItemsDaoTest {
         val result = testObject.allBookmarksItems
 
         Assert.assertEquals(14, (result.size))
-
     }
 
     @Test(expected = RuntimeException::class)
     fun getAllItemsBookmarksTranslatesExceptions() {
         whenever(client.query(any(), any(), anyOrNull(), any(), anyOrNull())).thenThrow(
-            RemoteException("")
+            RemoteException(""),
         )
         testObject.allBookmarksItems
     }
@@ -131,7 +172,6 @@ class BookmarkItemsDaoTest {
         verify(mockCursor).close()
     }
 
-
     @Test
     fun updateNewItemBookmark() {
         whenever(client.insert(any(), any())).thenReturn(Uri.EMPTY)
@@ -143,39 +183,39 @@ class BookmarkItemsDaoTest {
             Assert.assertEquals(9, cv.size())
             Assert.assertEquals(
                 exampleItemBookmark.name,
-                cv.getAsString(COLUMN_NAME)
+                cv.getAsString(COLUMN_NAME),
             )
             Assert.assertEquals(
                 exampleItemBookmark.description,
-                cv.getAsString(COLUMN_DESCRIPTION)
+                cv.getAsString(COLUMN_DESCRIPTION),
             )
             Assert.assertEquals(
                 exampleItemBookmark.imageUrl,
-                cv.getAsString(COLUMN_IMAGE)
+                cv.getAsString(COLUMN_IMAGE),
             )
             Assert.assertEquals(
                 exampleItemBookmark.instanceOfs[0],
-                cv.getAsString(COLUMN_INSTANCE_LIST)
+                cv.getAsString(COLUMN_INSTANCE_LIST),
             )
             Assert.assertEquals(
                 exampleItemBookmark.commonsCategories[0].name,
-                cv.getAsString(COLUMN_CATEGORIES_NAME_LIST)
+                cv.getAsString(COLUMN_CATEGORIES_NAME_LIST),
             )
             Assert.assertEquals(
                 exampleItemBookmark.commonsCategories[0].description,
-                cv.getAsString(COLUMN_CATEGORIES_DESCRIPTION_LIST)
+                cv.getAsString(COLUMN_CATEGORIES_DESCRIPTION_LIST),
             )
             Assert.assertEquals(
                 exampleItemBookmark.commonsCategories[0].thumbnail,
-                cv.getAsString(COLUMN_CATEGORIES_THUMBNAIL_LIST)
+                cv.getAsString(COLUMN_CATEGORIES_THUMBNAIL_LIST),
             )
             Assert.assertEquals(
                 exampleItemBookmark.isSelected,
-                cv.getAsBoolean(COLUMN_IS_SELECTED)
+                cv.getAsBoolean(COLUMN_IS_SELECTED),
             )
             Assert.assertEquals(
                 exampleItemBookmark.id,
-                cv.getAsString(COLUMN_ID)
+                cv.getAsString(COLUMN_ID),
             )
         }
     }
@@ -186,8 +226,11 @@ class BookmarkItemsDaoTest {
         whenever(client.query(any(), any(), any(), any(), anyOrNull())).thenReturn(createCursor(1))
 
         Assert.assertFalse(testObject.updateBookmarkItem(exampleItemBookmark))
-        verify(client).delete(eq(BookmarkItemsContentProvider.uriForName(exampleItemBookmark.id)),
-            isNull(), isNull())
+        verify(client).delete(
+            eq(BookmarkItemsContentProvider.uriForName(exampleItemBookmark.id)),
+            isNull(),
+            isNull(),
+        )
     }
 
     @Test
@@ -199,7 +242,7 @@ class BookmarkItemsDaoTest {
     @Test(expected = RuntimeException::class)
     fun findItemBookmarkTranslatesExceptions() {
         whenever(client.query(any(), any(), anyOrNull(), any(), anyOrNull())).thenThrow(
-            RemoteException("")
+            RemoteException(""),
         )
         testObject.findBookmarkItem(exampleItemBookmark.id)
     }
@@ -351,12 +394,22 @@ class BookmarkItemsDaoTest {
         verifyNoInteractions(database)
     }
 
-    private fun createCursor(rowCount: Int) = MatrixCursor(columns, rowCount).apply {
-
-        for (i in 0 until rowCount) {
-            addRow(listOf("itemName", "itemDescription",
-                "itemImageUrl", "instance", "category name", "category description",
-                "category thumbnail", false, "itemID"))
+    private fun createCursor(rowCount: Int) =
+        MatrixCursor(columns, rowCount).apply {
+            for (i in 0 until rowCount) {
+                addRow(
+                    listOf(
+                        "itemName",
+                        "itemDescription",
+                        "itemImageUrl",
+                        "instance",
+                        "category name",
+                        "category description",
+                        "category thumbnail",
+                        false,
+                        "itemID",
+                    ),
+                )
+            }
         }
-    }
 }

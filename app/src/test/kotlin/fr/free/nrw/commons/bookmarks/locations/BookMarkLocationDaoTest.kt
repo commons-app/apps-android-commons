@@ -7,15 +7,44 @@ import android.database.MatrixCursor
 import android.database.sqlite.SQLiteDatabase
 import android.net.Uri
 import android.os.RemoteException
-import com.nhaarman.mockitokotlin2.*
+import com.nhaarman.mockitokotlin2.any
+import com.nhaarman.mockitokotlin2.anyOrNull
+import com.nhaarman.mockitokotlin2.argumentCaptor
+import com.nhaarman.mockitokotlin2.eq
+import com.nhaarman.mockitokotlin2.inOrder
+import com.nhaarman.mockitokotlin2.isA
+import com.nhaarman.mockitokotlin2.isNull
+import com.nhaarman.mockitokotlin2.mock
+import com.nhaarman.mockitokotlin2.verify
+import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsContentProvider.BASE_URI
-import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao.Table.*
+import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao.Table.COLUMN_CATEGORY
+import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao.Table.COLUMN_COMMONS_LINK
+import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao.Table.COLUMN_DESCRIPTION
+import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao.Table.COLUMN_EXISTS
+import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao.Table.COLUMN_IMAGE_URL
+import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao.Table.COLUMN_LABEL_ICON
+import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao.Table.COLUMN_LABEL_TEXT
+import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao.Table.COLUMN_LANGUAGE
+import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao.Table.COLUMN_LAT
+import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao.Table.COLUMN_LONG
+import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao.Table.COLUMN_NAME
+import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao.Table.COLUMN_PIC
+import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao.Table.COLUMN_WIKIDATA_LINK
+import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao.Table.COLUMN_WIKIPEDIA_LINK
+import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao.Table.CREATE_TABLE_STATEMENT
+import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao.Table.DROP_TABLE_STATEMENT
+import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao.Table.onCreate
+import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao.Table.onDelete
+import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao.Table.onUpdate
 import fr.free.nrw.commons.location.LatLng
 import fr.free.nrw.commons.nearby.Label
 import fr.free.nrw.commons.nearby.Place
 import fr.free.nrw.commons.nearby.Sitelinks
-import org.junit.Assert.*
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertFalse
+import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -26,20 +55,23 @@ import org.robolectric.annotation.Config
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
 class BookMarkLocationDaoTest {
-    private val columns = arrayOf(COLUMN_NAME,
-        COLUMN_LANGUAGE,
-        COLUMN_DESCRIPTION,
-        COLUMN_CATEGORY,
-        COLUMN_LABEL_TEXT,
-        COLUMN_LABEL_ICON,
-        COLUMN_IMAGE_URL,
-        COLUMN_WIKIPEDIA_LINK,
-        COLUMN_WIKIDATA_LINK,
-        COLUMN_COMMONS_LINK,
-        COLUMN_LAT,
-        COLUMN_LONG,
-        COLUMN_PIC,
-        COLUMN_EXISTS)
+    private val columns =
+        arrayOf(
+            COLUMN_NAME,
+            COLUMN_LANGUAGE,
+            COLUMN_DESCRIPTION,
+            COLUMN_CATEGORY,
+            COLUMN_LABEL_TEXT,
+            COLUMN_LABEL_ICON,
+            COLUMN_IMAGE_URL,
+            COLUMN_WIKIPEDIA_LINK,
+            COLUMN_WIKIDATA_LINK,
+            COLUMN_COMMONS_LINK,
+            COLUMN_LAT,
+            COLUMN_LONG,
+            COLUMN_PIC,
+            COLUMN_EXISTS,
+        )
     private val client: ContentProviderClient = mock()
     private val database: SQLiteDatabase = mock()
     private val captor = argumentCaptor<ContentValues>()
@@ -55,16 +87,25 @@ class BookMarkLocationDaoTest {
     fun setUp() {
         exampleLabel = Label.FOREST
         exampleUri = Uri.parse("wikimedia/uri")
-        exampleLocation = LatLng(40.0,51.4, 1f)
+        exampleLocation = LatLng(40.0, 51.4, 1f)
 
         builder = Sitelinks.Builder()
         builder.setWikipediaLink("wikipediaLink")
         builder.setWikidataLink("wikidataLink")
         builder.setCommonsLink("commonsLink")
 
-
-        examplePlaceBookmark = Place("en", "placeName", exampleLabel, "placeDescription"
-            , exampleLocation, "placeCategory", builder.build(),"picName",false)
+        examplePlaceBookmark =
+            Place(
+                "en",
+                "placeName",
+                exampleLabel,
+                "placeDescription",
+                exampleLocation,
+                "placeCategory",
+                builder.build(),
+                "picName",
+                false,
+            )
         testObject = BookmarkLocationsDao { client }
     }
 
@@ -276,8 +317,8 @@ class BookMarkLocationDaoTest {
         verify(database).execSQL("ALTER TABLE bookmarksLocations ADD COLUMN location_exists STRING;")
     }
 
-    private fun createCursor(rows: Int): Cursor {
-        return MatrixCursor(columns, rows).apply {
+    private fun createCursor(rows: Int): Cursor =
+        MatrixCursor(columns, rows).apply {
             repeat(rows) {
                 newRow().apply {
                     add("placeName")
@@ -297,5 +338,4 @@ class BookMarkLocationDaoTest {
                 }
             }
         }
-    }
 }

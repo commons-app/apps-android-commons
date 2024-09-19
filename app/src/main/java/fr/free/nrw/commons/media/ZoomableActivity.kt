@@ -10,10 +10,7 @@ import android.os.Bundle
 import android.view.View
 import android.view.Window
 import android.widget.Button
-import android.widget.ProgressBar
-import android.widget.TextView
 import android.widget.Toast
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.facebook.drawee.controller.BaseControllerListener
@@ -38,12 +35,16 @@ import fr.free.nrw.commons.customselector.ui.selector.CustomSelectorViewModel
 import fr.free.nrw.commons.customselector.ui.selector.CustomSelectorViewModelFactory
 import fr.free.nrw.commons.databinding.ActivityZoomableBinding
 import fr.free.nrw.commons.media.zoomControllers.zoomable.DoubleTapGestureListener
-import fr.free.nrw.commons.media.zoomControllers.zoomable.ZoomableDraweeView
 import fr.free.nrw.commons.theme.BaseActivity
 import fr.free.nrw.commons.upload.FileProcessor
 import fr.free.nrw.commons.upload.FileUtilsWrapper
 import fr.free.nrw.commons.utils.CustomSelectorUtils
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.cancel
+import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
 import kotlin.collections.ArrayList
@@ -53,7 +54,6 @@ import kotlin.collections.ArrayList
  * like zoom, and swap gestures
  */
 class ZoomableActivity : BaseActivity() {
-
     private lateinit var imageUri: Uri
 
     /**
@@ -67,7 +67,7 @@ class ZoomableActivity : BaseActivity() {
     private lateinit var prefs: SharedPreferences
 
     private lateinit var binding: ActivityZoomableBinding
-    
+
     var photoBackgroundColor: Int? = null
 
     /**
@@ -126,36 +126,39 @@ class ZoomableActivity : BaseActivity() {
     lateinit var customSelectorViewModelFactory: CustomSelectorViewModelFactory
 
     /**
-    * Coroutine Dispatchers and Scope.
-    */
-    private var defaultDispatcher : CoroutineDispatcher = Dispatchers.Default
-    private var ioDispatcher : CoroutineDispatcher = Dispatchers.IO
-    private val scope : CoroutineScope = MainScope()
+     * Coroutine Dispatchers and Scope.
+     */
+    private var defaultDispatcher: CoroutineDispatcher = Dispatchers.Default
+    private var ioDispatcher: CoroutineDispatcher = Dispatchers.IO
+    private val scope: CoroutineScope = MainScope()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityZoomableBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        prefs =  applicationContext.getSharedPreferences(
-            ImageHelper.CUSTOM_SELECTOR_PREFERENCE_KEY,
-            MODE_PRIVATE
-        )
+        prefs =
+            applicationContext.getSharedPreferences(
+                ImageHelper.CUSTOM_SELECTOR_PREFERENCE_KEY,
+                MODE_PRIVATE,
+            )
 
-        selectedImages = intent.getParcelableArrayListExtra(
-            CustomSelectorConstants.TOTAL_SELECTED_IMAGES
-        )
+        selectedImages =
+            intent.getParcelableArrayListExtra(
+                CustomSelectorConstants.TOTAL_SELECTED_IMAGES,
+            )
         position = intent.getIntExtra(CustomSelectorConstants.PRESENT_POSITION, 0)
         bucketId = intent.getLongExtra(CustomSelectorConstants.BUCKET_ID, 0L)
-        viewModel = ViewModelProvider(this, customSelectorViewModelFactory).get(
-            CustomSelectorViewModel::class.java
-        )
+        viewModel =
+            ViewModelProvider(this, customSelectorViewModelFactory).get(
+                CustomSelectorViewModel::class.java,
+            )
         viewModel.fetchImages()
         viewModel.result.observe(this) {
             handleResult(it)
         }
 
-        val origin = intent.getStringExtra(ZoomableActivityConstants.ORIGIN);
+        val origin = intent.getStringExtra(ZoomableActivityConstants.ORIGIN)
 
         /**
          * If origin is "null" it means that ZoomableActivity was created by the custom picker
@@ -166,15 +169,20 @@ class ZoomableActivity : BaseActivity() {
             if (prefs.getBoolean(CustomSelectorConstants.FULL_SCREEN_MODE_FIRST_LUNCH, true)) {
                 // show welcome dialog on first launch
                 showWelcomeDialog()
-                prefs.edit().putBoolean(
-                    CustomSelectorConstants.FULL_SCREEN_MODE_FIRST_LUNCH,
-                    false
-                ).apply()
+                prefs
+                    .edit()
+                    .putBoolean(
+                        CustomSelectorConstants.FULL_SCREEN_MODE_FIRST_LUNCH,
+                        false,
+                    ).apply()
             }
         }
-        
-        val backgroundColor = intent.getIntExtra(ZoomableActivityConstants.PHOTO_BACKGROUND_COLOR,
-                MediaDetailFragment.DEFAULT_IMAGE_BACKGROUND_COLOR);
+
+        val backgroundColor =
+            intent.getIntExtra(
+                ZoomableActivityConstants.PHOTO_BACKGROUND_COLOR,
+                MediaDetailFragment.DEFAULT_IMAGE_BACKGROUND_COLOR,
+            )
 
         if (backgroundColor != MediaDetailFragment.DEFAULT_IMAGE_BACKGROUND_COLOR) {
             photoBackgroundColor = backgroundColor
@@ -196,15 +204,16 @@ class ZoomableActivity : BaseActivity() {
      * Handle view model result.
      */
     private fun handleResult(result: Result) {
-        if(result.status is CallbackStatus.SUCCESS){
+        if (result.status is CallbackStatus.SUCCESS) {
             val images = result.images
-            if(images.isNotEmpty()) {
+            if (images.isNotEmpty()) {
                 this@ZoomableActivity.images = ImageHelper.filterImages(images, bucketId)
-                imageUri = if (this@ZoomableActivity.images.isNullOrEmpty()) {
-                    intent.data as Uri
-                } else {
-                    this@ZoomableActivity.images!![position].uri
-                }
+                imageUri =
+                    if (this@ZoomableActivity.images.isNullOrEmpty()) {
+                        intent.data as Uri
+                    } else {
+                        this@ZoomableActivity.images!![position].uri
+                    }
                 Timber.d("URL = $imageUri")
                 init(imageUri)
                 onSwipe()
@@ -225,34 +234,36 @@ class ZoomableActivity : BaseActivity() {
             sharedPreferences.getBoolean(ImageHelper.SHOW_ALREADY_ACTIONED_IMAGES_PREFERENCE_KEY, true)
 
         if (!images.isNullOrEmpty()) {
-            binding.zoomable!!.setOnTouchListener(object : OnSwipeTouchListener(this) {
-                // Swipe left to view next image in the folder. (if available)
-                override fun onSwipeLeft() {
-                    super.onSwipeLeft()
-                    onLeftSwiped(showAlreadyActionedImages)
-                }
+            binding.zoomable!!.setOnTouchListener(
+                object : OnSwipeTouchListener(this) {
+                    // Swipe left to view next image in the folder. (if available)
+                    override fun onSwipeLeft() {
+                        super.onSwipeLeft()
+                        onLeftSwiped(showAlreadyActionedImages)
+                    }
 
-                // Swipe right to view previous image in the folder. (if available)
-                override fun onSwipeRight() {
-                    super.onSwipeRight()
-                    onRightSwiped(showAlreadyActionedImages)
-                }
+                    // Swipe right to view previous image in the folder. (if available)
+                    override fun onSwipeRight() {
+                        super.onSwipeRight()
+                        onRightSwiped(showAlreadyActionedImages)
+                    }
 
-                // Swipe up to select the picture (the equivalent of tapping it in non-fullscreen mode)
-                // and show the next picture skipping pictures that have either already been uploaded or
-                // marked as not for upload
-                override fun onSwipeUp() {
-                    super.onSwipeUp()
-                    onUpSwiped()
-                }
+                    // Swipe up to select the picture (the equivalent of tapping it in non-fullscreen mode)
+                    // and show the next picture skipping pictures that have either already been uploaded or
+                    // marked as not for upload
+                    override fun onSwipeUp() {
+                        super.onSwipeUp()
+                        onUpSwiped()
+                    }
 
-                // Swipe down to mark that picture as "Not for upload" (the equivalent of selecting it then
-                // tapping "Mark as not for upload" in non-fullscreen mode), and show the next picture.
-                override fun onSwipeDown() {
-                    super.onSwipeDown()
-                    onDownSwiped()
-                }
-            })
+                    // Swipe down to mark that picture as "Not for upload" (the equivalent of selecting it then
+                    // tapping "Mark as not for upload" in non-fullscreen mode), and show the next picture.
+                    override fun onSwipeDown() {
+                        super.onSwipeDown()
+                        onDownSwiped()
+                    }
+                },
+            )
         }
     }
 
@@ -260,58 +271,66 @@ class ZoomableActivity : BaseActivity() {
      * Handles down swipe action
      */
     private fun onDownSwiped() {
-        if (binding.zoomable?.zoomableController?.isIdentity == false)
+        if (binding.zoomable?.zoomableController?.isIdentity == false) {
             return
+        }
 
         scope.launch {
-            val imageSHA1 = CustomSelectorUtils.getImageSHA1(
-                images!![position].uri,
-                ioDispatcher,
-                fileUtilsWrapper,
-                contentResolver
-            )
+            val imageSHA1 =
+                CustomSelectorUtils.getImageSHA1(
+                    images!![position].uri,
+                    ioDispatcher,
+                    fileUtilsWrapper,
+                    contentResolver,
+                )
             var isUploaded = uploadedStatusDao.findByImageSHA1(imageSHA1, true)
             if (isUploaded > 0) {
-                Toast.makeText(
-                    this@ZoomableActivity,
-                    getString(R.string.this_image_is_already_uploaded),
-                    Toast.LENGTH_SHORT
-                ).show()
-            } else {
-                val imageModifiedSHA1 = CustomSelectorUtils.generateModifiedSHA1(
-                    images!![position],
-                    defaultDispatcher,
-                    this@ZoomableActivity,
-                    fileProcessor,
-                    fileUtilsWrapper
-                )
-                isUploaded = uploadedStatusDao.findByModifiedImageSHA1(
-                    imageModifiedSHA1,
-                    true
-                )
-                if (isUploaded > 0) {
-                    Toast.makeText(
+                Toast
+                    .makeText(
                         this@ZoomableActivity,
                         getString(R.string.this_image_is_already_uploaded),
-                        Toast.LENGTH_SHORT
+                        Toast.LENGTH_SHORT,
                     ).show()
+            } else {
+                val imageModifiedSHA1 =
+                    CustomSelectorUtils.generateModifiedSHA1(
+                        images!![position],
+                        defaultDispatcher,
+                        this@ZoomableActivity,
+                        fileProcessor,
+                        fileUtilsWrapper,
+                    )
+                isUploaded =
+                    uploadedStatusDao.findByModifiedImageSHA1(
+                        imageModifiedSHA1,
+                        true,
+                    )
+                if (isUploaded > 0) {
+                    Toast
+                        .makeText(
+                            this@ZoomableActivity,
+                            getString(R.string.this_image_is_already_uploaded),
+                            Toast.LENGTH_SHORT,
+                        ).show()
                 } else {
                     insertInNotForUpload(images!![position])
-                    Toast.makeText(
-                        this@ZoomableActivity,
-                        getString(R.string.image_marked_as_not_for_upload),
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    Toast
+                        .makeText(
+                            this@ZoomableActivity,
+                            getString(R.string.image_marked_as_not_for_upload),
+                            Toast.LENGTH_SHORT,
+                        ).show()
                     shouldRefresh = true
                     if (position < images!!.size - 1) {
                         position++
                         init(images!![position].uri)
                     } else {
-                        Toast.makeText(
-                            this@ZoomableActivity,
-                            getString(R.string.no_more_images_found),
-                            Toast.LENGTH_SHORT
-                        ).show()
+                        Toast
+                            .makeText(
+                                this@ZoomableActivity,
+                                getString(R.string.no_more_images_found),
+                                Toast.LENGTH_SHORT,
+                            ).show()
                     }
                 }
             }
@@ -322,58 +341,66 @@ class ZoomableActivity : BaseActivity() {
      * Handles up swipe action
      */
     private fun onUpSwiped() {
-        if (binding.zoomable?.zoomableController?.isIdentity == false)
+        if (binding.zoomable?.zoomableController?.isIdentity == false) {
             return
+        }
 
         scope.launch {
-            val imageSHA1 = CustomSelectorUtils.getImageSHA1(
-                images!![position].uri,
-                ioDispatcher,
-                fileUtilsWrapper,
-                contentResolver
-            )
+            val imageSHA1 =
+                CustomSelectorUtils.getImageSHA1(
+                    images!![position].uri,
+                    ioDispatcher,
+                    fileUtilsWrapper,
+                    contentResolver,
+                )
             var isNonActionable = notForUploadStatusDao.find(imageSHA1)
             if (isNonActionable > 0) {
-                Toast.makeText(
-                    this@ZoomableActivity,
-                    getString(R.string.can_not_select_this_image_for_upload),
-                    Toast.LENGTH_SHORT
-                ).show()
+                Toast
+                    .makeText(
+                        this@ZoomableActivity,
+                        getString(R.string.can_not_select_this_image_for_upload),
+                        Toast.LENGTH_SHORT,
+                    ).show()
             } else {
                 isNonActionable =
                     uploadedStatusDao.findByImageSHA1(imageSHA1, true)
                 if (isNonActionable > 0) {
-                    Toast.makeText(
-                        this@ZoomableActivity,
-                        getString(R.string.this_image_is_already_uploaded),
-                        Toast.LENGTH_SHORT
-                    ).show()
-                } else {
-                    val imageModifiedSHA1 = CustomSelectorUtils.generateModifiedSHA1(
-                        images!![position],
-                        defaultDispatcher,
-                        this@ZoomableActivity,
-                        fileProcessor,
-                        fileUtilsWrapper
-                    )
-                    isNonActionable = uploadedStatusDao.findByModifiedImageSHA1(
-                        imageModifiedSHA1,
-                        true
-                    )
-                    if (isNonActionable > 0) {
-                        Toast.makeText(
+                    Toast
+                        .makeText(
                             this@ZoomableActivity,
                             getString(R.string.this_image_is_already_uploaded),
-                            Toast.LENGTH_SHORT
+                            Toast.LENGTH_SHORT,
                         ).show()
+                } else {
+                    val imageModifiedSHA1 =
+                        CustomSelectorUtils.generateModifiedSHA1(
+                            images!![position],
+                            defaultDispatcher,
+                            this@ZoomableActivity,
+                            fileProcessor,
+                            fileUtilsWrapper,
+                        )
+                    isNonActionable =
+                        uploadedStatusDao.findByModifiedImageSHA1(
+                            imageModifiedSHA1,
+                            true,
+                        )
+                    if (isNonActionable > 0) {
+                        Toast
+                            .makeText(
+                                this@ZoomableActivity,
+                                getString(R.string.this_image_is_already_uploaded),
+                                Toast.LENGTH_SHORT,
+                            ).show()
                     } else {
                         if (!selectedImages!!.contains(images!![position])) {
                             selectedImages!!.add(images!![position])
-                            Toast.makeText(
-                                this@ZoomableActivity,
-                                getString(R.string.image_selected),
-                                Toast.LENGTH_SHORT
-                            ).show()
+                            Toast
+                                .makeText(
+                                    this@ZoomableActivity,
+                                    getString(R.string.image_selected),
+                                    Toast.LENGTH_SHORT,
+                                ).show()
                         }
                         position = getNextActionableImage(position + 1)
                         init(images!![position].uri)
@@ -387,19 +414,21 @@ class ZoomableActivity : BaseActivity() {
      * Handles right swipe action
      */
     private fun onRightSwiped(showAlreadyActionedImages: Boolean) {
-        if (binding.zoomable?.zoomableController?.isIdentity == false)
+        if (binding.zoomable?.zoomableController?.isIdentity == false) {
             return
+        }
 
         if (showAlreadyActionedImages) {
             if (position > 0) {
                 position--
                 init(images!![position].uri)
             } else {
-                Toast.makeText(
-                    this@ZoomableActivity,
-                    getString(R.string.no_more_images_found),
-                    Toast.LENGTH_SHORT
-                ).show()
+                Toast
+                    .makeText(
+                        this@ZoomableActivity,
+                        getString(R.string.no_more_images_found),
+                        Toast.LENGTH_SHORT,
+                    ).show()
             }
         } else {
             if (position > 0) {
@@ -408,11 +437,12 @@ class ZoomableActivity : BaseActivity() {
                     init(images!![position].uri)
                 }
             } else {
-                Toast.makeText(
-                    this@ZoomableActivity,
-                    getString(R.string.no_more_images_found),
-                    Toast.LENGTH_SHORT
-                ).show()
+                Toast
+                    .makeText(
+                        this@ZoomableActivity,
+                        getString(R.string.no_more_images_found),
+                        Toast.LENGTH_SHORT,
+                    ).show()
             }
         }
     }
@@ -421,19 +451,21 @@ class ZoomableActivity : BaseActivity() {
      * Handles left swipe action
      */
     private fun onLeftSwiped(showAlreadyActionedImages: Boolean) {
-        if (binding.zoomable?.zoomableController?.isIdentity == false)
+        if (binding.zoomable?.zoomableController?.isIdentity == false) {
             return
+        }
 
         if (showAlreadyActionedImages) {
             if (position < images!!.size - 1) {
                 position++
                 init(images!![position].uri)
             } else {
-                Toast.makeText(
-                    this@ZoomableActivity,
-                    getString(R.string.no_more_images_found),
-                    Toast.LENGTH_SHORT
-                ).show()
+                Toast
+                    .makeText(
+                        this@ZoomableActivity,
+                        getString(R.string.no_more_images_found),
+                        Toast.LENGTH_SHORT,
+                    ).show()
             }
         } else {
             if (position < images!!.size - 1) {
@@ -442,11 +474,12 @@ class ZoomableActivity : BaseActivity() {
                     init(images!![position].uri)
                 }
             } else {
-                Toast.makeText(
-                    this@ZoomableActivity,
-                    getString(R.string.no_more_images_found),
-                    Toast.LENGTH_SHORT
-                ).show()
+                Toast
+                    .makeText(
+                        this@ZoomableActivity,
+                        getString(R.string.no_more_images_found),
+                        Toast.LENGTH_SHORT,
+                    ).show()
             }
         }
     }
@@ -459,29 +492,32 @@ class ZoomableActivity : BaseActivity() {
      */
     private suspend fun getNextActionableImage(index: Int): Int {
         var nextPosition = position
-        for(i in index until images!!.size){
+        for (i in index until images!!.size) {
             nextPosition = i
-            val imageSHA1 = CustomSelectorUtils.getImageSHA1(
-                images!![i].uri,
-                ioDispatcher,
-                fileUtilsWrapper,
-                contentResolver
-            )
+            val imageSHA1 =
+                CustomSelectorUtils.getImageSHA1(
+                    images!![i].uri,
+                    ioDispatcher,
+                    fileUtilsWrapper,
+                    contentResolver,
+                )
             var isNonActionable = notForUploadStatusDao.find(imageSHA1)
             if (isNonActionable <= 0) {
                 isNonActionable = uploadedStatusDao.findByImageSHA1(imageSHA1, true)
                 if (isNonActionable <= 0) {
-                    val imageModifiedSHA1 = CustomSelectorUtils.generateModifiedSHA1(
-                        images!![i],
-                        defaultDispatcher,
-                        this@ZoomableActivity,
-                        fileProcessor,
-                        fileUtilsWrapper
-                    )
-                    isNonActionable = uploadedStatusDao.findByModifiedImageSHA1(
-                        imageModifiedSHA1,
-                        true
-                    )
+                    val imageModifiedSHA1 =
+                        CustomSelectorUtils.generateModifiedSHA1(
+                            images!![i],
+                            defaultDispatcher,
+                            this@ZoomableActivity,
+                            fileProcessor,
+                            fileUtilsWrapper,
+                        )
+                    isNonActionable =
+                        uploadedStatusDao.findByModifiedImageSHA1(
+                            imageModifiedSHA1,
+                            true,
+                        )
                     if (isNonActionable <= 0) {
                         return i
                     } else {
@@ -505,29 +541,32 @@ class ZoomableActivity : BaseActivity() {
      */
     private suspend fun getPreviousActionableImage(index: Int): Int {
         var previousPosition = position
-        for(i in index downTo 0){
+        for (i in index downTo 0) {
             previousPosition = i
-            val imageSHA1 = CustomSelectorUtils.getImageSHA1(
-                images!![i].uri,
-                ioDispatcher,
-                fileUtilsWrapper,
-                contentResolver
-            )
+            val imageSHA1 =
+                CustomSelectorUtils.getImageSHA1(
+                    images!![i].uri,
+                    ioDispatcher,
+                    fileUtilsWrapper,
+                    contentResolver,
+                )
             var isNonActionable = notForUploadStatusDao.find(imageSHA1)
             if (isNonActionable <= 0) {
                 isNonActionable = uploadedStatusDao.findByImageSHA1(imageSHA1, true)
                 if (isNonActionable <= 0) {
-                    val imageModifiedSHA1 = CustomSelectorUtils.generateModifiedSHA1(
-                        images!![i],
-                        defaultDispatcher,
-                        this@ZoomableActivity,
-                        fileProcessor,
-                        fileUtilsWrapper
-                    )
-                    isNonActionable = uploadedStatusDao.findByModifiedImageSHA1(
-                        imageModifiedSHA1,
-                        true
-                    )
+                    val imageModifiedSHA1 =
+                        CustomSelectorUtils.generateModifiedSHA1(
+                            images!![i],
+                            defaultDispatcher,
+                            this@ZoomableActivity,
+                            fileProcessor,
+                            fileUtilsWrapper,
+                        )
+                    isNonActionable =
+                        uploadedStatusDao.findByModifiedImageSHA1(
+                            imageModifiedSHA1,
+                            true,
+                        )
                     if (isNonActionable <= 0) {
                         return i
                     } else {
@@ -561,9 +600,10 @@ class ZoomableActivity : BaseActivity() {
     /**
      * Get position of an image from list
      */
-    private fun getImagePosition(list: ArrayList<Image>?, image: Image): Int {
-        return list!!.indexOf(image)
-    }
+    private fun getImagePosition(
+        list: ArrayList<Image>?,
+        image: Image,
+    ): Int = list!!.indexOf(image)
 
     /**
      * Two types of loading indicators have been added to the zoom activity:
@@ -573,19 +613,25 @@ class ZoomableActivity : BaseActivity() {
      */
     private val loadingListener: ControllerListener<ImageInfo?> =
         object : BaseControllerListener<ImageInfo?>() {
-            override fun onSubmit(id: String, callerContext: Any) {
+            override fun onSubmit(
+                id: String,
+                callerContext: Any,
+            ) {
                 // Sometimes the spinner doesn't appear when rapidly switching between images, this fixes that
                 binding.zoomProgressBar.visibility = View.VISIBLE
             }
 
-            override fun onIntermediateImageSet(id: String, imageInfo: ImageInfo?) {
+            override fun onIntermediateImageSet(
+                id: String,
+                imageInfo: ImageInfo?,
+            ) {
                 binding.zoomProgressBar.visibility = View.GONE
             }
 
             override fun onFinalImageSet(
                 id: String,
                 imageInfo: ImageInfo?,
-                animatable: Animatable?
+                animatable: Animatable?,
             ) {
                 binding.zoomProgressBar.visibility = View.GONE
             }
@@ -593,23 +639,27 @@ class ZoomableActivity : BaseActivity() {
 
     private fun init(imageUri: Uri?) {
         if (imageUri != null) {
-            val hierarchy = GenericDraweeHierarchyBuilder.newInstance(resources)
-                .setActualImageScaleType(ScalingUtils.ScaleType.FIT_CENTER)
-                .setProgressBarImage(ProgressBarDrawable())
-                .setProgressBarImageScaleType(ScalingUtils.ScaleType.FIT_CENTER)
-                .build()
+            val hierarchy =
+                GenericDraweeHierarchyBuilder
+                    .newInstance(resources)
+                    .setActualImageScaleType(ScalingUtils.ScaleType.FIT_CENTER)
+                    .setProgressBarImage(ProgressBarDrawable())
+                    .setProgressBarImageScaleType(ScalingUtils.ScaleType.FIT_CENTER)
+                    .build()
             with(binding.zoomable!!) {
                 setHierarchy(hierarchy)
                 setAllowTouchInterceptionWhileZoomed(true)
                 setIsLongpressEnabled(false)
                 setTapListener(DoubleTapGestureListener(this))
             }
-            val controller: DraweeController = Fresco.newDraweeControllerBuilder()
-                .setUri(imageUri)
-                .setControllerListener(loadingListener)
-                .build()
+            val controller: DraweeController =
+                Fresco
+                    .newDraweeControllerBuilder()
+                    .setUri(imageUri)
+                    .setControllerListener(loadingListener)
+                    .build()
             binding.zoomable!!.controller = controller
-            
+
             if (photoBackgroundColor != null) {
                 binding.zoomable!!.setBackgroundColor(photoBackgroundColor!!)
             }
@@ -630,16 +680,17 @@ class ZoomableActivity : BaseActivity() {
      * Inserts an image in Not For Upload table
      */
     private suspend fun insertInNotForUpload(it: Image) {
-        val imageSHA1 = CustomSelectorUtils.getImageSHA1(
-            it.uri,
-            ioDispatcher,
-            fileUtilsWrapper,
-            contentResolver
-        )
+        val imageSHA1 =
+            CustomSelectorUtils.getImageSHA1(
+                it.uri,
+                ioDispatcher,
+                fileUtilsWrapper,
+                contentResolver,
+            )
         notForUploadStatusDao.insert(
             NotForUploadStatus(
-                imageSHA1
-            )
+                imageSHA1,
+            ),
         )
     }
 
@@ -651,7 +702,7 @@ class ZoomableActivity : BaseActivity() {
             val returnIntent = Intent()
             returnIntent.putParcelableArrayListExtra(
                 CustomSelectorConstants.NEW_SELECTED_IMAGES,
-                selectedImages
+                selectedImages,
             )
             returnIntent.putExtra(SHOULD_REFRESH, shouldRefresh)
             setResult(Activity.RESULT_OK, returnIntent)
@@ -665,14 +716,14 @@ class ZoomableActivity : BaseActivity() {
         super.onDestroy()
     }
 
-    object ZoomableActivityConstants  {
+    object ZoomableActivityConstants {
         /**
          * Key for Accessing Intent Data Named "Origin", The value indicates what fragment
          * ZoomableActivity was created by. It is null if ZoomableActivity was created by
          * the custom picker.
          */
-        const val ORIGIN = "Origin";
-        
+        const val ORIGIN = "Origin"
+
         const val PHOTO_BACKGROUND_COLOR = "photo_background_color"
     }
 }

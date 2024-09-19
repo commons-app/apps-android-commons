@@ -3,10 +3,15 @@ package fr.free.nrw.commons.actions
 import fr.free.nrw.commons.wikidata.WikidataConstants.MW_API_PREFIX
 import fr.free.nrw.commons.wikidata.model.Entities
 import fr.free.nrw.commons.wikidata.model.edit.Edit
+import fr.free.nrw.commons.wikidata.mwapi.MwQueryResponse
 import io.reactivex.Observable
 import io.reactivex.Single
-import fr.free.nrw.commons.wikidata.mwapi.MwQueryResponse
-import retrofit2.http.*
+import retrofit2.http.Field
+import retrofit2.http.FormUrlEncoded
+import retrofit2.http.GET
+import retrofit2.http.Headers
+import retrofit2.http.POST
+import retrofit2.http.Query
 
 /**
  * This interface facilitates wiki commons page editing services to the Networking module
@@ -33,7 +38,7 @@ interface PageEditInterface {
         @Field("summary") summary: String,
         @Field("text") text: String,
         // NOTE: This csrf shold always be sent as the last field of form data
-        @Field("token") token: String
+        @Field("token") token: String,
     ): Observable<Edit>
 
     /**
@@ -60,7 +65,7 @@ interface PageEditInterface {
         @Field("minor") minor: Boolean,
         @Field("recreate") recreate: Boolean,
         // NOTE: This csrf shold always be sent as the last field of form data
-        @Field("token") token: String
+        @Field("token") token: String,
     ): Observable<Edit>
 
     /**
@@ -79,7 +84,7 @@ interface PageEditInterface {
         @Field("title") title: String,
         @Field("summary") summary: String,
         @Field("appendtext") appendText: String,
-        @Field("token") token: String
+        @Field("token") token: String,
     ): Observable<Edit>
 
     /**
@@ -98,7 +103,7 @@ interface PageEditInterface {
         @Field("title") title: String,
         @Field("summary") summary: String,
         @Field("prependtext") prependText: String,
-        @Field("token") token: String
+        @Field("token") token: String,
     ): Observable<Edit>
 
     @FormUrlEncoded
@@ -109,7 +114,7 @@ interface PageEditInterface {
         @Field("summary") summary: String,
         @Field("sectiontitle") sectionTitle: String,
         @Field("text") sectionText: String,
-        @Field("token") token: String
+        @Field("token") token: String,
     ): Observable<Edit>
 
     @FormUrlEncoded
@@ -120,7 +125,7 @@ interface PageEditInterface {
         @Field("title") title: String,
         @Field("language") language: String,
         @Field("value") value: String,
-        @Field("token") token: String
+        @Field("token") token: String,
     ): Observable<Entities>
 
     /**
@@ -130,6 +135,6 @@ interface PageEditInterface {
      */
     @GET(MW_API_PREFIX + "action=query&prop=revisions&rvprop=content|timestamp&rvlimit=1&converttitles=")
     fun getWikiText(
-        @Query("titles") title: String
+        @Query("titles") title: String,
     ): Single<MwQueryResponse?>
 }

@@ -9,16 +9,13 @@ object ConfigUtils {
     val isBetaFlavour: Boolean = BuildConfig.FLAVOR == "beta"
 
     @JvmStatic
-    private fun Context.getVersionName(): String {
-        return try {
+    private fun Context.getVersionName(): String =
+        try {
             packageManager.getPackageInfo(packageName, 0).versionName
         } catch (e: PackageManager.NameNotFoundException) {
             BuildConfig.VERSION_NAME
         }
-    }
 
     @JvmStatic
-    fun Context.getVersionNameWithSha(): String {
-        return "${getVersionName()}~${BuildConfig.COMMIT_SHA}"
-    }
+    fun Context.getVersionNameWithSha(): String = "${getVersionName()}~${BuildConfig.COMMIT_SHA}"
 }

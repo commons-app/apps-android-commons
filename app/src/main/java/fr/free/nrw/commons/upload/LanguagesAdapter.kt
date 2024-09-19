@@ -9,10 +9,10 @@ import android.widget.Filter
 import androidx.core.os.ConfigurationCompat
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.databinding.RowItemLanguagesSpinnerBinding
+import fr.free.nrw.commons.language.AppLanguageLookUpTable
 import fr.free.nrw.commons.utils.LangCodeUtils
 import org.apache.commons.lang3.StringUtils
-import fr.free.nrw.commons.language.AppLanguageLookUpTable
-import java.util.*
+import java.util.Locale
 
 /**
  * This class handles the display of language dialog and their views for UploadMediaDetailFragment
@@ -23,9 +23,8 @@ import java.util.*
  */
 class LanguagesAdapter constructor(
     context: Context,
-    private val selectedLanguages: HashMap<*, String>
+    private val selectedLanguages: HashMap<*, String>,
 ) : ArrayAdapter<String?>(context, R.layout.row_item_languages_spinner) {
-
     companion object {
         /**
          * Represents the default index for the language list. By default, this index corresponds to the
@@ -41,6 +40,7 @@ class LanguagesAdapter constructor(
 
     var language: AppLanguageLookUpTable =
         AppLanguageLookUpTable(context)
+
     init {
         languageNamesList = language.localizedNames
         languageCodesList = language.codes
@@ -49,14 +49,18 @@ class LanguagesAdapter constructor(
     private val filter = LanguageFilter()
     var selectedLangCode = ""
 
-    override fun isEnabled(position: Int) = languageCodesList[position].let {
-        it.isNotEmpty() && !selectedLanguages.containsValue(it) && it != selectedLangCode
-    }
+    override fun isEnabled(position: Int) =
+        languageCodesList[position].let {
+            it.isNotEmpty() && !selectedLanguages.containsValue(it) && it != selectedLangCode
+        }
 
     override fun getCount() = languageNamesList.size
 
-
-    override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
+    override fun getView(
+        position: Int,
+        convertView: View?,
+        parent: ViewGroup,
+    ): View {
         val binding: RowItemLanguagesSpinnerBinding
         var rowView = convertView
 
@@ -79,22 +83,18 @@ class LanguagesAdapter constructor(
             } else {
                 it.text =
                     "${StringUtils.capitalize(languageName)}" +
-                            " [${LangCodeUtils.fixLanguageCode(languageCode)}]"
+                    " [${LangCodeUtils.fixLanguageCode(languageCode)}]"
             }
         }
         return rowView
     }
 
-    fun getLanguageCode(position: Int): String {
-        return languageCodesList[position]
-    }
+    fun getLanguageCode(position: Int): String = languageCodesList[position]
 
     /**
      * Provides name of a language from languages for a specific position
      */
-    fun getLanguageName(position: Int): String {
-        return languageNamesList[position]
-    }
+    fun getLanguageName(position: Int): String = languageNamesList[position]
 
     /**
      * Retrieves the index of the user's default locale from the list of available languages.
@@ -116,21 +116,15 @@ class LanguagesAdapter constructor(
      * Future contributors are advised not to simplify this function without addressing this concern.
      */
     fun getIndexOfUserDefaultLocale(context: Context): Int {
-
         val userLanguageCode = context.locale?.language ?: return DEFAULT_INDEX
         return language.codes.indexOf(userLanguageCode).takeIf { it >= 0 } ?: DEFAULT_INDEX
     }
 
-    fun getIndexOfLanguageCode(languageCode: String): Int {
-
-        return languageCodesList.indexOf(languageCode)
-    }
-
+    fun getIndexOfLanguageCode(languageCode: String): Int = languageCodesList.indexOf(languageCode)
 
     override fun getFilter() = filter
 
     inner class LanguageFilter : Filter() {
-
         override fun performFiltering(constraint: CharSequence?): FilterResults {
             val filterResults = FilterResults()
             val temp: LinkedHashMap<String, String> = LinkedHashMap()
@@ -141,9 +135,14 @@ class LanguagesAdapter constructor(
                     val key: String = language.codes[i]
                     val value: String = language.localizedNames[i]
                     val defaultlanguagecode = getIndexOfUserDefaultLocale(context)
-                    if(value.contains(constraint, true) || Locale(key).getDisplayName(
-                            Locale(language.codes[defaultlanguagecode])).contains(constraint, true))
+                    if (value.contains(constraint, true) ||
+                        Locale(key)
+                            .getDisplayName(
+                                Locale(language.codes[defaultlanguagecode]),
+                            ).contains(constraint, true)
+                    ) {
                         temp[key] = value
+                    }
                     i++
                 }
                 filterResults.values = temp
@@ -152,7 +151,10 @@ class LanguagesAdapter constructor(
             return filterResults
         }
 
-        override fun publishResults(constraint: CharSequence?, results: FilterResults) {
+        override fun publishResults(
+            constraint: CharSequence?,
+            results: FilterResults,
+        ) {
             if (results.count > 0) {
                 languageCodesList =
                     ArrayList((results.values as LinkedHashMap<String, String>).keys)
@@ -164,11 +166,8 @@ class LanguagesAdapter constructor(
                 languageNamesList = ArrayList()
                 notifyDataSetChanged()
             }
-
         }
-
     }
-
 }
 
 private val Context.locale: Locale?

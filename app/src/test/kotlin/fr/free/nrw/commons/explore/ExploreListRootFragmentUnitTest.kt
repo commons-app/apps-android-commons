@@ -11,8 +11,8 @@ import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.OkHttpConnectionFactory
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestCommonsApplication
-import fr.free.nrw.commons.createTestClient
 import fr.free.nrw.commons.contributions.MainActivity
+import fr.free.nrw.commons.createTestClient
 import fr.free.nrw.commons.databinding.FragmentFeaturedRootBinding
 import fr.free.nrw.commons.explore.categories.media.CategoriesMediaFragment
 import fr.free.nrw.commons.media.MediaDetailPagerFragment
@@ -36,7 +36,6 @@ import java.lang.reflect.Field
 @Config(sdk = [21], application = TestCommonsApplication::class)
 @LooperMode(LooperMode.Mode.PAUSED)
 class ExploreListRootFragmentUnitTest {
-
     private lateinit var fragment: ExploreListRootFragment
     private lateinit var fragmentManager: FragmentManager
     private lateinit var context: Context
@@ -82,7 +81,6 @@ class ExploreListRootFragmentUnitTest {
         Whitebox.setInternalState(fragment, "mParentFragment", exploreFragment)
         Whitebox.setInternalState(fragment, "mediaDetails", mediaDetails)
         Whitebox.setInternalState(fragment, "listFragment", listFragment)
-
 
         `when`(childFragmentManager.beginTransaction()).thenReturn(childFragmentTransaction)
         `when`(childFragmentTransaction.hide(any())).thenReturn(childFragmentTransaction)
@@ -249,5 +247,4 @@ class ExploreListRootFragmentUnitTest {
     fun `testBackPressed_Case null != mediaDetails && mediaDetails_isNotVisible`() {
         Assert.assertEquals(fragment.backPressed(), false)
     }
-
 }

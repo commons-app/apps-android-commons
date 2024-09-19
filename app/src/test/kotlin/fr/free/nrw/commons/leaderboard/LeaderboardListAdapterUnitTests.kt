@@ -28,7 +28,6 @@ import java.lang.reflect.Field
 @Config(sdk = [21], application = TestCommonsApplication::class)
 @LooperMode(LooperMode.Mode.PAUSED)
 class LeaderboardListAdapterUnitTests {
-
     private lateinit var context: Context
     private lateinit var adapter: LeaderboardListAdapter
 
@@ -97,5 +96,4 @@ class LeaderboardListAdapterUnitTests {
         `when`(pagedList.size).thenReturn(list.size)
         return pagedList
     }
-
 }

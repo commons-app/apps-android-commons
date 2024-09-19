@@ -2,9 +2,11 @@ package fr.free.nrw.commons
 
 import android.os.Parcelable
 import fr.free.nrw.commons.location.LatLng
-import kotlinx.parcelize.Parcelize
 import fr.free.nrw.commons.wikidata.model.page.PageTitle
-import java.util.*
+import kotlinx.parcelize.Parcelize
+import java.util.Date
+import java.util.Locale
+import java.util.UUID
 
 @Parcelize
 class Media constructor(
@@ -14,7 +16,6 @@ class Media constructor(
      */
     var pageId: String = UUID.randomUUID().toString(),
     var thumbUrl: String? = null,
-
     /**
      * Gets image URL
      * @return Image URL
@@ -26,16 +27,11 @@ class Media constructor(
      */
     var filename: String? = null,
     /**
-     * Gets the file description.
+     * Gets or sets the file description.
      * @return file description as a string
-     */
-    // monolingual description on input...
-    /**
-     * Sets the file description.
      * @param fallbackDescription the new description of the file
      */
     var fallbackDescription: String? = null,
-
     /**
      * Gets the upload date of the file.
      * Can be null.
@@ -43,28 +39,19 @@ class Media constructor(
      */
     var dateUploaded: Date? = null,
     /**
-     * Gets the license name of the file.
+     * Gets or sets the license name of the file.
      * @return license as a String
-     */
-    /**
-     * Sets the license name of the file.
-     *
      * @param license license name as a String
      */
     var license: String? = null,
     var licenseUrl: String? = null,
     /**
-     * Gets the name of the creator of the file.
+     * Gets or sets the name of the creator of the file.
      * @return author name as a String
-     */
-    /**
-     * Sets the author name of the file.
      * @param author creator name as a string
      */
     var author: String? = null,
-
-    var user:String?=null,
-
+    var user: String? = null,
     /**
      * Gets the categories the file falls under.
      * @return file categories as an ArrayList of Strings
@@ -83,23 +70,23 @@ class Media constructor(
      * Stores the mapping of category title to hidden attribute
      * Example: "Mountains" => false, "CC-BY-SA-2.0" => true
      */
-    var categoriesHiddenStatus: Map<String, Boolean> = emptyMap()
+    var categoriesHiddenStatus: Map<String, Boolean> = emptyMap(),
 ) : Parcelable {
-
     constructor(
         captions: Map<String, String>,
         categories: List<String>?,
         filename: String?,
         fallbackDescription: String?,
-        author: String?, user:String?
+        author: String?,
+        user: String?,
     ) : this(
         filename = filename,
         fallbackDescription = fallbackDescription,
         dateUploaded = Date(),
         author = author,
-        user=user,
+        user = user,
         categories = categories,
-        captions = captions
+        captions = captions,
     )
 
     /**
@@ -108,10 +95,11 @@ class Media constructor(
      */
     val displayTitle: String
         get() =
-            if (filename != null)
+            if (filename != null) {
                 pageTitle.displayTextWithoutNamespace.replaceFirst("[.][^.]+$".toRegex(), "")
-            else
+            } else {
                 ""
+            }
 
     /**
      * Gets file page title
@@ -127,9 +115,10 @@ class Media constructor(
         get() = String.format("[[%s|thumb|%s]]", filename, mostRelevantCaption)
 
     val mostRelevantCaption: String
-        get() = captions[Locale.getDefault().language]
-            ?: captions.values.firstOrNull()
-            ?: displayTitle
+        get() =
+            captions[Locale.getDefault().language]
+                ?: captions.values.firstOrNull()
+                ?: displayTitle
 
     /**
      * Gets the categories the file falls under.
@@ -138,6 +127,8 @@ class Media constructor(
     var addedCategories: List<String>? = null
         // TODO added categories should be removed. It is added for a short fix. On category update,
         //  categories should be re-fetched instead
-        get() = field                     // getter
-        set(value) { field = value }      // setter
+        get() = field // getter
+        set(value) {
+            field = value
+        } // setter
 }

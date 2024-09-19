@@ -40,14 +40,13 @@ import java.lang.reflect.Field
 @Config(sdk = [21], application = TestCommonsApplication::class)
 @LooperMode(LooperMode.Mode.PAUSED)
 class FolderFragmentTest {
-
     private lateinit var fragment: FolderFragment
     private lateinit var view: View
-    private lateinit var selectorRV : RecyclerView
-    private lateinit var loader : ProgressBar
+    private lateinit var selectorRV: RecyclerView
+    private lateinit var loader: ProgressBar
     private lateinit var layoutInflater: LayoutInflater
     private lateinit var context: Context
-    private lateinit var viewModelField:Field
+    private lateinit var viewModelField: Field
 
     @Mock
     private lateinit var adapter: FolderAdapter
@@ -80,7 +79,7 @@ class FolderFragmentTest {
         loader = view.findViewById(R.id.loader)
 
         Whitebox.setInternalState(fragment, "folderAdapter", adapter)
-        Whitebox.setInternalState(fragment, "selectorRV", selectorRV )
+        Whitebox.setInternalState(fragment, "selectorRV", selectorRV)
         Whitebox.setInternalState(fragment, "loader", loader)
 
         viewModelField = fragment.javaClass.getDeclaredField("viewModel")
@@ -137,5 +136,4 @@ class FolderFragmentTest {
         func.isAccessible = true
         func.invoke(fragment)
     }
-
 }

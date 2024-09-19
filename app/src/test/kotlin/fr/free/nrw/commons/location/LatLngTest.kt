@@ -9,7 +9,6 @@ class LatLngTest {
 
     @Before
     fun setup() {
-
     }
 
     @Test
@@ -40,14 +39,14 @@ class LatLngTest {
     fun testHashCodeDiffersWenLngZero() {
         latLng1 = LatLng(2.0, 0.0, 0.0f)
         latLng2 = LatLng(1.0, 0.0, 0.0f)
-        assert(latLng1.hashCode()!=latLng2.hashCode())
+        assert(latLng1.hashCode() != latLng2.hashCode())
     }
 
     @Test
     fun testHashCodeDiffersWenLatZero() {
         latLng1 = LatLng(0.0, 1.0, 0.0f)
         latLng2 = LatLng(0.0, 2.0, 0.0f)
-        assert(latLng1.hashCode()!=latLng2.hashCode())
+        assert(latLng1.hashCode() != latLng2.hashCode())
     }
 
     @Test

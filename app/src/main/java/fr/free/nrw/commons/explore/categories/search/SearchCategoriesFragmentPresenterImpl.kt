@@ -9,8 +9,10 @@ import javax.inject.Named
 
 interface SearchCategoriesFragmentPresenter : PagingContract.Presenter<String>
 
-class SearchCategoriesFragmentPresenterImpl @Inject constructor(
-    @Named(CommonsApplicationModule.MAIN_THREAD) mainThreadScheduler: Scheduler,
-    dataSourceFactory: PageableSearchCategoriesDataSource
-) : BasePagingPresenter<String>(mainThreadScheduler, dataSourceFactory),
-    SearchCategoriesFragmentPresenter
+class SearchCategoriesFragmentPresenterImpl
+    @Inject
+    constructor(
+        @Named(CommonsApplicationModule.MAIN_THREAD) mainThreadScheduler: Scheduler,
+        dataSourceFactory: PageableSearchCategoriesDataSource,
+    ) : BasePagingPresenter<String>(mainThreadScheduler, dataSourceFactory),
+        SearchCategoriesFragmentPresenter

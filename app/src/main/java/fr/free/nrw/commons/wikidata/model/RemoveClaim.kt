@@ -1,6 +1,8 @@
 package fr.free.nrw.commons.wikidata.model
 
-data class RemoveClaim(val claims: List<ClaimRemoveRequest>) {
+data class RemoveClaim(
+    val claims: List<ClaimRemoveRequest>,
+) {
     companion object {
         @JvmStatic
         fun from(claimIds: List<String>): RemoveClaim {
@@ -8,7 +10,7 @@ data class RemoveClaim(val claims: List<ClaimRemoveRequest>) {
 
             claimIds.forEach {
                 claimsToRemove.add(
-                    ClaimRemoveRequest(id = it, remove = "")
+                    ClaimRemoveRequest(id = it, remove = ""),
                 )
             }
 
@@ -17,4 +19,7 @@ data class RemoveClaim(val claims: List<ClaimRemoveRequest>) {
     }
 }
 
-data class ClaimRemoveRequest(val id: String, val remove: String)
+data class ClaimRemoveRequest(
+    val id: String,
+    val remove: String,
+)

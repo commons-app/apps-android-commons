@@ -1,6 +1,5 @@
 package fr.free.nrw.commons.upload
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -8,13 +7,9 @@ import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.ViewPagerAdapter
-import fr.free.nrw.commons.contributions.Contribution
 import fr.free.nrw.commons.contributions.ContributionDao
 import fr.free.nrw.commons.databinding.ActivityUploadProgressBinding
 import fr.free.nrw.commons.theme.BaseActivity
-import io.reactivex.functions.Consumer
-import io.reactivex.schedulers.Schedulers
-import timber.log.Timber
 import javax.inject.Inject
 
 /**
@@ -24,7 +19,6 @@ import javax.inject.Inject
  * failed uploads respectively.
  */
 class UploadProgressActivity : BaseActivity() {
-
     private lateinit var binding: ActivityUploadProgressBinding
     private var pendingUploadsFragment: PendingUploadsFragment? = null
     private var failedUploadsFragment: FailedUploadsFragment? = null
@@ -52,26 +46,29 @@ class UploadProgressActivity : BaseActivity() {
         setSupportActionBar(binding.toolbarBinding.toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        binding.uploadProgressViewPager.addOnPageChangeListener(object :
-            ViewPager.OnPageChangeListener {
-            override fun onPageScrolled(
-                position: Int, positionOffset: Float,
-                positionOffsetPixels: Int
-            ) {
-            }
-
-            override fun onPageSelected(position: Int) {
-                updateMenuItems(position)
-                if (position == 2) {
-                    binding.uploadProgressViewPager.setCanScroll(false)
-                } else {
-                    binding.uploadProgressViewPager.setCanScroll(true)
+        binding.uploadProgressViewPager.addOnPageChangeListener(
+            object :
+                ViewPager.OnPageChangeListener {
+                override fun onPageScrolled(
+                    position: Int,
+                    positionOffset: Float,
+                    positionOffsetPixels: Int,
+                ) {
                 }
-            }
 
-            override fun onPageScrollStateChanged(state: Int) {
-            }
-        })
+                override fun onPageSelected(position: Int) {
+                    updateMenuItems(position)
+                    if (position == 2) {
+                        binding.uploadProgressViewPager.setCanScroll(false)
+                    } else {
+                        binding.uploadProgressViewPager.setCanScroll(true)
+                    }
+                }
+
+                override fun onPageScrollStateChanged(state: Int) {
+                }
+            },
+        )
         setTabs()
     }
 
@@ -119,75 +116,72 @@ class UploadProgressActivity : BaseActivity() {
                 if (isPendingIconsVisible) {
                     if (!isPaused) {
                         if (menu!!.findItem(R.id.pause_icon) == null) {
-                            menu!!.add(
-                                Menu.NONE,
-                                R.id.pause_icon,
-                                Menu.NONE,
-                                getString(R.string.pause)
-                            )
-                                .setIcon(R.drawable.pause_icon)
+                            menu!!
+                                .add(
+                                    Menu.NONE,
+                                    R.id.pause_icon,
+                                    Menu.NONE,
+                                    getString(R.string.pause),
+                                ).setIcon(R.drawable.pause_icon)
                                 .setOnMenuItemClickListener {
                                     pendingUploadsFragment!!.pauseUploads()
                                     setPausedIcon(true)
                                     true
-                                }
-                                .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM)
+                                }.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM)
                         }
                         if (menu!!.findItem(R.id.cancel_icon) == null) {
-                            menu!!.add(
-                                Menu.NONE,
-                                R.id.cancel_icon,
-                                Menu.NONE,
-                                getString(R.string.cancel)
-                            )
-                                .setIcon(R.drawable.ic_cancel_upload)
+                            menu!!
+                                .add(
+                                    Menu.NONE,
+                                    R.id.cancel_icon,
+                                    Menu.NONE,
+                                    getString(R.string.cancel),
+                                ).setIcon(R.drawable.ic_cancel_upload)
                                 .setOnMenuItemClickListener {
                                     pendingUploadsFragment!!.deleteUploads()
                                     true
-                                }
-                                .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM)
+                                }.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM)
                         }
                     } else {
                         if (menu!!.findItem(R.id.resume_icon) == null) {
-                            menu!!.add(
-                                Menu.NONE,
-                                R.id.resume_icon,
-                                Menu.NONE,
-                                getString(R.string.resume)
-                            )
-                                .setIcon(R.drawable.play_icon)
+                            menu!!
+                                .add(
+                                    Menu.NONE,
+                                    R.id.resume_icon,
+                                    Menu.NONE,
+                                    getString(R.string.resume),
+                                ).setIcon(R.drawable.play_icon)
                                 .setOnMenuItemClickListener {
                                     pendingUploadsFragment!!.restartUploads()
                                     setPausedIcon(false)
                                     true
-                                }
-                                .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM)
+                                }.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM)
                         }
                     }
                 }
             } else if (currentPosition == 1) {
                 if (isErrorIconsVisisble) {
                     if (menu!!.findItem(R.id.retry_icon) == null) {
-                        menu!!.add(Menu.NONE, R.id.retry_icon, Menu.NONE, getString(R.string.retry))
-                            .setIcon(R.drawable.ic_refresh_24dp).setOnMenuItemClickListener {
+                        menu!!
+                            .add(Menu.NONE, R.id.retry_icon, Menu.NONE, getString(R.string.retry))
+                            .setIcon(R.drawable.ic_refresh_24dp)
+                            .setOnMenuItemClickListener {
                                 failedUploadsFragment!!.restartUploads()
                                 true
-                            }
-                            .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM)
+                            }.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM)
                     }
                     if (menu!!.findItem(R.id.cancel_icon) == null) {
-                        menu!!.add(
-                            Menu.NONE,
-                            R.id.cancel_icon,
-                            Menu.NONE,
-                            getString(R.string.cancel)
-                        )
-                            .setIcon(R.drawable.ic_cancel_upload)
+                        menu!!
+                            .add(
+                                Menu.NONE,
+                                R.id.cancel_icon,
+                                Menu.NONE,
+                                getString(R.string.cancel),
+                            ).setIcon(R.drawable.ic_cancel_upload)
                             .setOnMenuItemClickListener {
                                 failedUploadsFragment!!.deleteUploads()
                                 true
-                            }
-                            .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM)
+                            }.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM)
                     }
                 }
             }
@@ -219,5 +213,4 @@ class UploadProgressActivity : BaseActivity() {
         isErrorIconsVisisble = visible
         updateMenuItems(binding.uploadProgressViewPager.currentItem)
     }
-
 }

@@ -10,7 +10,9 @@ import fr.free.nrw.commons.nearby.Place
 import fr.free.nrw.commons.repository.UploadRepository
 import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailsContract
 import fr.free.nrw.commons.upload.mediaDetails.UploadMediaPresenter
-import fr.free.nrw.commons.utils.ImageUtils.*
+import fr.free.nrw.commons.utils.ImageUtils.EMPTY_CAPTION
+import fr.free.nrw.commons.utils.ImageUtils.FILE_NAME_EXISTS
+import fr.free.nrw.commons.utils.ImageUtils.IMAGE_OK
 import io.github.coordinates2country.Coordinates2Country
 import io.reactivex.Observable
 import io.reactivex.Single
@@ -20,13 +22,17 @@ import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.*
+import org.mockito.ArgumentCaptor
+import org.mockito.ArgumentMatchers
+import org.mockito.Mock
+import org.mockito.MockedStatic
+import org.mockito.Mockito
 import org.mockito.Mockito.mockStatic
 import org.mockito.Mockito.verify
+import org.mockito.MockitoAnnotations
 import org.powermock.core.classloader.annotations.PrepareForTest
 import org.robolectric.RobolectricTestRunner
-import java.util.*
-
+import java.util.Collections
 
 /**
  * The class contains unit test cases for UploadMediaPresenter
@@ -82,9 +88,13 @@ class UploadMediaPresenterTest {
         testObservableUploadItem = Observable.just(uploadItem)
         testSingleImageResult = Single.just(1)
         testScheduler = TestScheduler()
-        uploadMediaPresenter = UploadMediaPresenter(
-            repository, jsonKvStore, testScheduler, testScheduler
-        )
+        uploadMediaPresenter =
+            UploadMediaPresenter(
+                repository,
+                jsonKvStore,
+                testScheduler,
+                testScheduler,
+            )
         uploadMediaPresenter.onAttachView(view)
         mockedCountry = mockStatic(Coordinates2Country::class.java)
     }
@@ -93,7 +103,6 @@ class UploadMediaPresenterTest {
     fun tearDown() {
         mockedCountry.close()
     }
-
 
     /**
      * unit test for method UploadMediaPresenter.receiveImage
@@ -105,15 +114,15 @@ class UploadMediaPresenterTest {
                 ArgumentMatchers.any(UploadableFile::class.java),
                 ArgumentMatchers.any(Place::class.java),
                 ArgumentMatchers.any(UploadMediaPresenter::class.java),
-                ArgumentMatchers.any(LatLng::class.java)
-            )
+                ArgumentMatchers.any(LatLng::class.java),
+            ),
         ).thenReturn(testObservableUploadItem)
         uploadMediaPresenter.receiveImage(uploadableFile, place, location)
         verify(view).showProgress(true)
         testScheduler.triggerActions()
         verify(view).onImageProcessed(
             ArgumentMatchers.any(UploadItem::class.java),
-            ArgumentMatchers.any(Place::class.java)
+            ArgumentMatchers.any(Place::class.java),
         )
     }
 
@@ -157,7 +166,7 @@ class UploadMediaPresenterTest {
      */
     @Test
     fun emptyFileNameTest() {
-        uploadMediaPresenter.handleCaptionResult(EMPTY_CAPTION, uploadItem);
+        uploadMediaPresenter.handleCaptionResult(EMPTY_CAPTION, uploadItem)
         verify(view).showMessage(ArgumentMatchers.anyInt(), ArgumentMatchers.anyInt())
     }
 
@@ -237,7 +246,6 @@ class UploadMediaPresenterTest {
 
     @Test
     fun setCorrectCountryCodeForReceivedImage() {
-
         val germanyAsPlace =
             Place(null, null, null, null, LatLng(50.1, 10.2, 1.0f), null, null, null, true, null)
         germanyAsPlace.isMonument = true
@@ -245,8 +253,8 @@ class UploadMediaPresenterTest {
         whenever(
             Coordinates2Country.country(
                 ArgumentMatchers.eq(germanyAsPlace.getLocation().latitude),
-                ArgumentMatchers.eq(germanyAsPlace.getLocation().longitude)
-            )
+                ArgumentMatchers.eq(germanyAsPlace.getLocation().longitude),
+            ),
         ).thenReturn("Germany")
 
         val item: Observable<UploadItem> =
@@ -257,8 +265,8 @@ class UploadMediaPresenterTest {
                 ArgumentMatchers.any(UploadableFile::class.java),
                 ArgumentMatchers.any(Place::class.java),
                 ArgumentMatchers.any(UploadMediaPresenter::class.java),
-                ArgumentMatchers.any(LatLng::class.java)
-            )
+                ArgumentMatchers.any(LatLng::class.java),
+            ),
         ).thenReturn(item)
 
         uploadMediaPresenter.receiveImage(uploadableFile, germanyAsPlace, location)
@@ -268,9 +276,9 @@ class UploadMediaPresenterTest {
         val captor: ArgumentCaptor<UploadItem> = ArgumentCaptor.forClass(UploadItem::class.java)
         verify(view).onImageProcessed(
             captor.capture(),
-            ArgumentMatchers.any(Place::class.java)
+            ArgumentMatchers.any(Place::class.java),
         )
 
-        assertEquals("Exptected contry code", "de", captor.value.countryCode);
+        assertEquals("Exptected contry code", "de", captor.value.countryCode)
     }
 }

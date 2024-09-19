@@ -1,9 +1,12 @@
 package fr.free.nrw.commons.upload
 
-import fr.free.nrw.commons.contributions.ChunkInfo
 import okhttp3.MediaType
 import okhttp3.RequestBody
-import okio.*
+import okio.Buffer
+import okio.BufferedSink
+import okio.ForwardingSink
+import okio.Sink
+import okio.buffer
 import java.io.IOException
 
 /**
@@ -17,12 +20,11 @@ class CountingRequestBody(
     protected var delegate: RequestBody,
     protected var listener: Listener,
     var offset: Long,
-    var totalContentLength: Long
+    var totalContentLength: Long,
 ) : RequestBody() {
     protected var countingSink: CountingSink? = null
-    override fun contentType(): MediaType? {
-        return delegate.contentType()
-    }
+
+    override fun contentType(): MediaType? = delegate.contentType()
 
     override fun contentLength(): Long {
         try {
@@ -41,11 +43,16 @@ class CountingRequestBody(
         bufferedSink.flush()
     }
 
-    protected inner class CountingSink(delegate: Sink?) : ForwardingSink(delegate!!) {
+    protected inner class CountingSink(
+        delegate: Sink?,
+    ) : ForwardingSink(delegate!!) {
         private var bytesWritten: Long = 0
 
         @Throws(IOException::class)
-        override fun write(source: Buffer, byteCount: Long) {
+        override fun write(
+            source: Buffer,
+            byteCount: Long,
+        ) {
             super.write(source, byteCount)
             bytesWritten += byteCount
             listener.onRequestProgress(offset + bytesWritten, totalContentLength)
@@ -58,7 +65,9 @@ class CountingRequestBody(
          * @param bytesWritten
          * @param contentLength
          */
-        fun onRequestProgress(bytesWritten: Long, contentLength: Long)
+        fun onRequestProgress(
+            bytesWritten: Long,
+            contentLength: Long,
+        )
     }
-
 }

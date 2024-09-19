@@ -39,26 +39,25 @@ class BaseMarker {
     constructor() {
     }
 
-    fun fromResource(context: Context, drawableResId: Int) {
+    fun fromResource(
+        context: Context,
+        drawableResId: Int,
+    ) {
         val drawable: Drawable = context.resources.getDrawable(drawableResId)
-        icon = if (drawable is BitmapDrawable) {
-            (drawable as BitmapDrawable).bitmap
-        } else {
-            val bitmap = Bitmap.createBitmap(
-                drawable.intrinsicWidth,
-                drawable.intrinsicHeight, Bitmap.Config.ARGB_8888
-            )
-            val canvas = Canvas(bitmap)
-            drawable.setBounds(0, 0, canvas.width, canvas.height)
-            drawable.draw(canvas)
-            bitmap
-        }
+        icon =
+            if (drawable is BitmapDrawable) {
+                (drawable as BitmapDrawable).bitmap
+            } else {
+                val bitmap =
+                    Bitmap.createBitmap(
+                        drawable.intrinsicWidth,
+                        drawable.intrinsicHeight,
+                        Bitmap.Config.ARGB_8888,
+                    )
+                val canvas = Canvas(bitmap)
+                drawable.setBounds(0, 0, canvas.width, canvas.height)
+                drawable.draw(canvas)
+                bitmap
+            }
     }
 }
-
-
-
-
-
-
-

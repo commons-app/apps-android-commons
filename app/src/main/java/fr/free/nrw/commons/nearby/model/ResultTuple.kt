@@ -19,5 +19,4 @@ class ResultTuple {
         type = ""
         value = ""
     }
-
 }

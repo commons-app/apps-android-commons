@@ -9,22 +9,31 @@ import fr.free.nrw.commons.R
 import fr.free.nrw.commons.databinding.ItemDepictionsBinding
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
 
-class DepictionAdapter(private val onDepictionClicked: (DepictedItem) -> Unit) :
-    PagedListAdapter<DepictedItem, DepictedItemViewHolder>(DepictionDiffUtilCallback) {
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = DepictedItemViewHolder(
-        ItemDepictionsBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+class DepictionAdapter(
+    private val onDepictionClicked: (DepictedItem) -> Unit,
+) : PagedListAdapter<DepictedItem, DepictedItemViewHolder>(DepictionDiffUtilCallback) {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int,
+    ) = DepictedItemViewHolder(
+        ItemDepictionsBinding.inflate(LayoutInflater.from(parent.context), parent, false),
     )
 
-    override fun onBindViewHolder(holder: DepictedItemViewHolder, position: Int) {
+    override fun onBindViewHolder(
+        holder: DepictedItemViewHolder,
+        position: Int,
+    ) {
         holder.bind(getItem(position)!!, onDepictionClicked)
     }
 }
 
 class DepictedItemViewHolder(
-    private val binding: ItemDepictionsBinding
+    private val binding: ItemDepictionsBinding,
 ) : RecyclerView.ViewHolder(binding.root) {
-    fun bind(item: DepictedItem, onDepictionClicked: (DepictedItem) -> Unit) = with(binding) {
+    fun bind(
+        item: DepictedItem,
+        onDepictionClicked: (DepictedItem) -> Unit,
+    ) = with(binding) {
         root.setOnClickListener { onDepictionClicked(item) }
         depictsLabel.text = item.name
         description.text = item.description
@@ -37,9 +46,13 @@ class DepictedItemViewHolder(
 }
 
 private object DepictionDiffUtilCallback : DiffUtil.ItemCallback<DepictedItem>() {
-    override fun areItemsTheSame(oldItem: DepictedItem, newItem: DepictedItem) =
-        oldItem.id == newItem.id
+    override fun areItemsTheSame(
+        oldItem: DepictedItem,
+        newItem: DepictedItem,
+    ) = oldItem.id == newItem.id
 
-    override fun areContentsTheSame(oldItem: DepictedItem, newItem: DepictedItem) =
-        oldItem == newItem
+    override fun areContentsTheSame(
+        oldItem: DepictedItem,
+        newItem: DepictedItem,
+    ) = oldItem == newItem
 }

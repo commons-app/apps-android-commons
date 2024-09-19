@@ -21,14 +21,11 @@ class FolderAdapter(
      * Application context.
      */
     context: Context,
-
     /**
      * Folder Click listener for click events.
      */
-    private val itemClickListener: FolderClickListener
-
+    private val itemClickListener: FolderClickListener,
 ) : RecyclerViewAdapter<FolderAdapter.FolderViewHolder?>(context) {
-
     /**
      * List of folders.
      */
@@ -37,7 +34,10 @@ class FolderAdapter(
     /**
      * Create view holder, returns View holder item.
      */
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FolderViewHolder {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int,
+    ): FolderViewHolder {
         val itemView = inflater.inflate(R.layout.item_custom_selector_folder, parent, false)
         return FolderViewHolder(itemView)
     }
@@ -45,28 +45,31 @@ class FolderAdapter(
     /**
      * Bind view holder, setup the item view, title, count and click listener
      */
-    override fun onBindViewHolder(holder: FolderViewHolder, position: Int) {
+    override fun onBindViewHolder(
+        holder: FolderViewHolder,
+        position: Int,
+    ) {
         val folder = folders[position]
         val toBeRemoved = ArrayList<Image>()
 
-        for(image in folder.images) {
+        for (image in folder.images) {
             // Remove all the top images that do not exist anymore
-            if(context.contentResolver.getType(image.uri) == null){
+            if (context.contentResolver.getType(image.uri) == null) {
                 // File not found
                 toBeRemoved.add(image)
             } else {
                 break
             }
         }
-        holder.image.setImageDrawable (null)
+        holder.image.setImageDrawable(null)
         folder.images.removeAll(toBeRemoved)
         val count = folder.images.size
 
-        if(count == 0 && folders.size > 0) {
+        if (count == 0 && folders.size > 0) {
             // Folder is empty, remove folder from the adapter.
-            holder.itemView.post{
+            holder.itemView.post {
                 val updatePosition = folders.indexOf(folder)
-                if(updatePosition != -1) {
+                if (updatePosition != -1) {
                     folders.removeAt(updatePosition)
                     notifyItemRemoved(updatePosition)
                     notifyItemRangeChanged(updatePosition, folders.size)
@@ -89,9 +92,10 @@ class FolderAdapter(
     fun init(newFolders: List<Folder>) {
         val oldFolderList: MutableList<Folder> = folders
         val newFolderList = newFolders.toMutableList()
-        val diffResult = DiffUtil.calculateDiff(
-            FoldersDiffCallback(oldFolderList, newFolderList)
-        )
+        val diffResult =
+            DiffUtil.calculateDiff(
+                FoldersDiffCallback(oldFolderList, newFolderList),
+            )
         folders = newFolderList
         diffResult.dispatchUpdatesTo(this)
     }
@@ -99,15 +103,14 @@ class FolderAdapter(
     /**
      * returns item count.
      */
-    override fun getItemCount(): Int {
-        return folders.size
-    }
+    override fun getItemCount(): Int = folders.size
 
     /**
      * Folder view holder.
      */
-    class FolderViewHolder(itemView:View) : RecyclerView.ViewHolder(itemView) {
-
+    class FolderViewHolder(
+        itemView: View,
+    ) : RecyclerView.ViewHolder(itemView) {
         /**
          * Folder thumbnail image view.
          */
@@ -129,37 +132,33 @@ class FolderAdapter(
      */
     class FoldersDiffCallback(
         var oldFolders: MutableList<Folder>,
-        var newFolders: MutableList<Folder>
+        var newFolders: MutableList<Folder>,
     ) : DiffUtil.Callback() {
         /**
          * Returns the size of the old list.
          */
-        override fun getOldListSize(): Int {
-            return oldFolders.size
-        }
+        override fun getOldListSize(): Int = oldFolders.size
 
         /**
          * Returns the size of the new list.
          */
-        override fun getNewListSize(): Int {
-            return newFolders.size
-        }
+        override fun getNewListSize(): Int = newFolders.size
 
         /**
          * Called by the DiffUtil to decide whether two object represent the same Item.
          */
-        override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-            return oldFolders.get(oldItemPosition).bucketId == newFolders.get(newItemPosition).bucketId
-        }
+        override fun areItemsTheSame(
+            oldItemPosition: Int,
+            newItemPosition: Int,
+        ): Boolean = oldFolders.get(oldItemPosition).bucketId == newFolders.get(newItemPosition).bucketId
 
         /**
          * Called by the DiffUtil when it wants to check whether two items have the same data.
          * DiffUtil uses this information to detect if the contents of an item has changed.
          */
-        override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-            return oldFolders.get(oldItemPosition).equals(newFolders.get(newItemPosition))
-        }
-
+        override fun areContentsTheSame(
+            oldItemPosition: Int,
+            newItemPosition: Int,
+        ): Boolean = oldFolders.get(oldItemPosition).equals(newFolders.get(newItemPosition))
     }
-
 }

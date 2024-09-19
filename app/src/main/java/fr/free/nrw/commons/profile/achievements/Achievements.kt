@@ -5,54 +5,44 @@ package fr.free.nrw.commons.profile.achievements
  */
 class Achievements {
     /**
-     * getter function to get count of unique images used by wiki
-     * @return
-     */
-    /**
-     * setter function to set count of uniques images used by wiki
-     * @param uniqueUsedImages
+     * The count of unique images used by the wiki.
+     * @return The count of unique images used.
+     * @param uniqueUsedImages The count to set for unique images used.
      */
     var uniqueUsedImages = 0
     private var articlesUsingImages = 0
+
     /**
-     * getter function to get count of thanks received
-     * @return
-     */
-    /**
-     * setter function to set count of thanks received
-     * @param thanksReceived
+     * The count of thanks received.
+     * @return The count of thanks received.
+     * @param thanksReceived The count to set for thanks received.
      */
     var thanksReceived = 0
+
     /**
-     * getter function to get count of featured images
-     * @return
-     */
-    /**
-     * setter function to set count of featured images
-     * @param featuredImages
+     * The count of featured images.
+     * @return The count of featured images.
+     * @param featuredImages The count to set for featured images.
      */
     var featuredImages = 0
+
     /**
-     * getter function to get count of featured images
-     * @return
-     */
-    /**
-     * setter function to set count of featured images
-     * @param featuredImages
+     * The count of quality images.
+     * @return The count of quality images.
+     * @param qualityImages The count to set for quality images.
      */
     var qualityImages = 0
+
     /**
-     * getter function to get count of images uploaded
-     * @return
-     */
-    /**
-     * setter function to count of images uploaded
-     * @param imagesUploaded
+     * The count of images uploaded.
+     * @return The count of images uploaded.
+     * @param imagesUploaded The count to set for images uploaded.
      */
     var imagesUploaded = 0
     private var revertCount = 0
 
     constructor() {}
+
     /**
      * constructor for achievements class to set its data members
      * @param uniqueUsedImages
@@ -62,13 +52,15 @@ class Achievements {
      * @param imagesUploaded
      * @param revertCount
      */
-    constructor(uniqueUsedImages: Int,
-                articlesUsingImages: Int,
-                thanksReceived: Int,
-                featuredImages: Int,
-                qualityImages: Int,
-                imagesUploaded: Int,
-                revertCount: Int) {
+    constructor(
+        uniqueUsedImages: Int,
+        articlesUsingImages: Int,
+        thanksReceived: Int,
+        featuredImages: Int,
+        qualityImages: Int,
+        imagesUploaded: Int,
+        revertCount: Int,
+    ) {
         this.uniqueUsedImages = uniqueUsedImages
         this.articlesUsingImages = articlesUsingImages
         this.thanksReceived = thanksReceived
@@ -83,11 +75,12 @@ class Achievements {
      * @return
      */
     val notRevertPercentage: Int
-        get() = try {
-            (imagesUploaded - revertCount) * 100 / imagesUploaded
-        } catch (divideByZero: ArithmeticException) {
-            100
-        }
+        get() =
+            try {
+                (imagesUploaded - revertCount) * 100 / imagesUploaded
+            } catch (divideByZero: ArithmeticException) {
+                100
+            }
 
     companion object {
         /**
@@ -97,15 +90,15 @@ class Achievements {
          * @return
          */
         @JvmStatic
-        fun from(response: FeedbackResponse): Achievements {
-            return Achievements(
+        fun from(response: FeedbackResponse): Achievements =
+            Achievements(
                 response.uniqueUsedImages,
                 response.articlesUsingImages,
                 response.thanksReceived,
                 response.featuredImages.featuredPicturesOnWikimediaCommons,
-                response.featuredImages.qualityImages, 0,
-                response.deletedUploads
+                response.featuredImages.qualityImages,
+                0,
+                response.deletedUploads,
             )
-        }
     }
 }

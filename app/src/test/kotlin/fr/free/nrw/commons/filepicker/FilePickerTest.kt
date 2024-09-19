@@ -15,9 +15,13 @@ import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.*
-import org.mockito.Mockito.`when`
+import org.mockito.ArgumentCaptor
+import org.mockito.ArgumentMatchers
+import org.mockito.Captor
+import org.mockito.Mock
 import org.mockito.Mockito.mock
+import org.mockito.Mockito.`when`
+import org.mockito.MockitoAnnotations
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
@@ -28,11 +32,10 @@ import kotlin.random.Random.Default.nextBoolean
 @Config(
     sdk = [21],
     application = TestCommonsApplication::class,
-    shadows = [ShadowFileProvider::class]
+    shadows = [ShadowFileProvider::class],
 )
 @LooperMode(LooperMode.Mode.PAUSED)
 class FilePickerTest {
-
     @Mock
     internal lateinit var activity: Activity
 
@@ -64,7 +67,7 @@ class FilePickerTest {
         FilePicker.openGallery(activity, 0, nextBoolean())
         verify(activity).startActivityForResult(
             ArgumentMatchers.any(),
-            requestCodeCaptor?.capture()?.toInt()!!
+            requestCodeCaptor?.capture()?.toInt()!!,
         )
         assertEquals(requestCodeCaptor?.value, RequestCodes.PICK_PICTURE_FROM_GALLERY)
     }
@@ -79,7 +82,7 @@ class FilePickerTest {
         FilePicker.openCameraForImage(activity, 0)
         verify(activity).startActivityForResult(
             ArgumentMatchers.any(),
-            requestCodeCaptor?.capture()?.toInt()!!
+            requestCodeCaptor?.capture()?.toInt()!!,
         )
         assertEquals(requestCodeCaptor?.value, RequestCodes.TAKE_PICTURE)
     }
@@ -87,10 +90,11 @@ class FilePickerTest {
     @Test
     fun testCreateCameraPictureFile() {
         val mockFilePicker = mock(FilePicker::class.java)
-        val method: Method = FilePicker::class.java.getDeclaredMethod(
-            "createCameraPictureFile",
-            Context::class.java
-        )
+        val method: Method =
+            FilePicker::class.java.getDeclaredMethod(
+                "createCameraPictureFile",
+                Context::class.java,
+            )
         method.isAccessible = true
         method.invoke(mockFilePicker, context)
     }
@@ -98,11 +102,12 @@ class FilePickerTest {
     @Test
     fun testCreateCameraForImageIntent() {
         val mockFilePicker = mock(FilePicker::class.java)
-        val method: Method = FilePicker::class.java.getDeclaredMethod(
-            "createCameraForImageIntent",
-            Context::class.java,
-            Int::class.java
-        )
+        val method: Method =
+            FilePicker::class.java.getDeclaredMethod(
+                "createCameraForImageIntent",
+                Context::class.java,
+                Int::class.java,
+            )
         method.isAccessible = true
         method.invoke(mockFilePicker, context, 0)
     }
@@ -112,11 +117,12 @@ class FilePickerTest {
         val mockFilePicker = mock(FilePicker::class.java)
         val mockUri = mock(Uri::class.java)
         val mockContext = mock(Context::class.java)
-        val method: Method = FilePicker::class.java.getDeclaredMethod(
-            "revokeWritePermission",
-            Context::class.java,
-            Uri::class.java
-        )
+        val method: Method =
+            FilePicker::class.java.getDeclaredMethod(
+                "revokeWritePermission",
+                Context::class.java,
+                Uri::class.java,
+            )
         method.isAccessible = true
         method.invoke(mockFilePicker, mockContext, mockUri)
     }
@@ -124,10 +130,11 @@ class FilePickerTest {
     @Test
     fun testRestoreType() {
         val mockFilePicker = mock(FilePicker::class.java)
-        val method: Method = FilePicker::class.java.getDeclaredMethod(
-            "restoreType",
-            Context::class.java
-        )
+        val method: Method =
+            FilePicker::class.java.getDeclaredMethod(
+                "restoreType",
+                Context::class.java,
+            )
         method.isAccessible = true
         method.invoke(mockFilePicker, context)
     }
@@ -135,10 +142,11 @@ class FilePickerTest {
     @Test
     fun testTakenCameraPicture() {
         val mockFilePicker = mock(FilePicker::class.java)
-        val method: Method = FilePicker::class.java.getDeclaredMethod(
-            "takenCameraPicture",
-            Context::class.java
-        )
+        val method: Method =
+            FilePicker::class.java.getDeclaredMethod(
+                "takenCameraPicture",
+                Context::class.java,
+            )
         method.isAccessible = true
         method.invoke(mockFilePicker, context)
     }
@@ -148,10 +156,11 @@ class FilePickerTest {
         val mockFilePicker = mock(FilePicker::class.java)
         `when`(PreferenceManager.getDefaultSharedPreferences(activity)).thenReturn(sharedPref)
         `when`(sharedPref.getString("last_photo", null)).thenReturn("")
-        val method: Method = FilePicker::class.java.getDeclaredMethod(
-            "takenCameraPicture",
-            Context::class.java
-        )
+        val method: Method =
+            FilePicker::class.java.getDeclaredMethod(
+                "takenCameraPicture",
+                Context::class.java,
+            )
         method.isAccessible = true
         method.invoke(mockFilePicker, activity)
     }
@@ -159,10 +168,11 @@ class FilePickerTest {
     @Test
     fun testTakenCameraVideo() {
         val mockFilePicker = mock(FilePicker::class.java)
-        val method: Method = FilePicker::class.java.getDeclaredMethod(
-            "takenCameraVideo",
-            Context::class.java
-        )
+        val method: Method =
+            FilePicker::class.java.getDeclaredMethod(
+                "takenCameraVideo",
+                Context::class.java,
+            )
         method.isAccessible = true
         method.invoke(mockFilePicker, context)
     }
@@ -172,10 +182,11 @@ class FilePickerTest {
         val mockFilePicker = mock(FilePicker::class.java)
         `when`(PreferenceManager.getDefaultSharedPreferences(activity)).thenReturn(sharedPref)
         `when`(sharedPref.getString("last_video", null)).thenReturn("")
-        val method: Method = FilePicker::class.java.getDeclaredMethod(
-            "takenCameraVideo",
-            Context::class.java
-        )
+        val method: Method =
+            FilePicker::class.java.getDeclaredMethod(
+                "takenCameraVideo",
+                Context::class.java,
+            )
         method.isAccessible = true
         method.invoke(mockFilePicker, activity)
     }
@@ -184,10 +195,11 @@ class FilePickerTest {
     fun testIsPhoto() {
         val mockFilePicker = mock(FilePicker::class.java)
         val mockIntent = mock(Intent::class.java)
-        val method: Method = FilePicker::class.java.getDeclaredMethod(
-            "isPhoto",
-            Intent::class.java
-        )
+        val method: Method =
+            FilePicker::class.java.getDeclaredMethod(
+                "isPhoto",
+                Intent::class.java,
+            )
         method.isAccessible = true
         method.invoke(mockFilePicker, mockIntent)
     }
@@ -201,24 +213,28 @@ class FilePickerTest {
             mockIntent,
             activity,
             object : DefaultCallback() {
-                override fun onCanceled(source: FilePicker.ImageSource, type: Int) {
+                override fun onCanceled(
+                    source: FilePicker.ImageSource,
+                    type: Int,
+                ) {
                     super.onCanceled(source, type)
                 }
 
                 override fun onImagePickerError(
                     e: Exception,
                     source: FilePicker.ImageSource,
-                    type: Int
+                    type: Int,
                 ) {
                 }
 
                 override fun onImagesPicked(
                     imagesFiles: List<UploadableFile>,
                     source: FilePicker.ImageSource,
-                    type: Int
+                    type: Int,
                 ) {
                 }
-            })
+            },
+        )
     }
 
     @Test

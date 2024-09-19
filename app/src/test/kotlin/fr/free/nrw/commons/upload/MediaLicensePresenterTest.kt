@@ -17,9 +17,7 @@ import org.mockito.MockedStatic
 import org.mockito.Mockito
 import org.mockito.Mockito.`when`
 import org.mockito.MockitoAnnotations
-import org.powermock.api.mockito.PowerMockito
 import org.powermock.core.classloader.annotations.PrepareForTest
-import org.powermock.modules.junit4.PowerMockRunner
 import org.robolectric.RobolectricTestRunner
 
 /**
@@ -59,7 +57,6 @@ class MediaLicensePresenterTest {
     fun tearDown() {
         mockedUtil.close()
     }
-
 
     /**
      * unit test case for method MediaLicensePresenter.getLicense

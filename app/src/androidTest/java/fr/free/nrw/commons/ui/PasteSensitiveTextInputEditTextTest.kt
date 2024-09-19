@@ -11,7 +11,6 @@ import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 class PasteSensitiveTextInputEditTextTest {
-
     private var context: Context? = null
     private var textView: PasteSensitiveTextInputEditText? = null
 
@@ -23,9 +22,13 @@ class PasteSensitiveTextInputEditTextTest {
 
     // this test has no real value, just % for test code coverage
     @Test
-    fun extractFormattingAttributeSet(){
-        val methodExtractFormattingAttribute = textView!!.javaClass.getDeclaredMethod(
-            "extractFormattingAttribute", Context::class.java, AttributeSet::class.java)
+    fun extractFormattingAttributeSet() {
+        val methodExtractFormattingAttribute =
+            textView!!.javaClass.getDeclaredMethod(
+                "extractFormattingAttribute",
+                Context::class.java,
+                AttributeSet::class.java,
+            )
         methodExtractFormattingAttribute.isAccessible = true
         methodExtractFormattingAttribute.invoke(textView, context, null)
     }

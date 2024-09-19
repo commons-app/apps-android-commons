@@ -4,7 +4,9 @@ import okhttp3.Cookie
 import okhttp3.CookieJar
 import okhttp3.HttpUrl
 
-class CommonsCookieJar(private val cookieStorage: CommonsCookieStorage) : CookieJar {
+class CommonsCookieJar(
+    private val cookieStorage: CommonsCookieStorage,
+) : CookieJar {
     override fun loadForRequest(url: HttpUrl): List<Cookie> {
         val cookieList = mutableListOf<Cookie>()
         val domain: String = url.toUri().getAuthority()
@@ -21,7 +23,10 @@ class CommonsCookieJar(private val cookieStorage: CommonsCookieStorage) : Cookie
         return cookieList
     }
 
-    override fun saveFromResponse(url: HttpUrl, cookies: List<Cookie>) {
+    override fun saveFromResponse(
+        url: HttpUrl,
+        cookies: List<Cookie>,
+    ) {
         if (cookies.isEmpty()) {
             return
         }
@@ -66,7 +71,9 @@ class CommonsCookieJar(private val cookieStorage: CommonsCookieStorage) : Cookie
     }
 
     private fun buildCookieList(
-        outList: MutableList<Cookie>, inList: MutableList<Cookie>, prefix: String?
+        outList: MutableList<Cookie>,
+        inList: MutableList<Cookie>,
+        prefix: String?,
     ) {
         var cookieJarModified = false
 
@@ -90,14 +97,11 @@ class CommonsCookieJar(private val cookieStorage: CommonsCookieStorage) : Cookie
         }
     }
 
-    private fun Cookie.expiredOrDeleted(): Boolean =
-        expiresAt < System.currentTimeMillis() || "deleted" == value
+    private fun Cookie.expiredOrDeleted(): Boolean = expiresAt < System.currentTimeMillis() || "deleted" == value
 
-    private fun Cookie.domainSpec(url: HttpUrl): String =
-        domain.ifEmpty { url.toUri().getAuthority() }
+    private fun Cookie.domainSpec(url: HttpUrl): String = domain.ifEmpty { url.toUri().getAuthority() }
 
     fun clear() {
         cookieStorage.clear()
     }
-
 }

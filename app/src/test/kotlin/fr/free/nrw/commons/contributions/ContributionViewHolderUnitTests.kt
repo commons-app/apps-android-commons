@@ -4,13 +4,8 @@ import android.net.Uri
 import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
-import android.widget.ImageButton
-import android.widget.ProgressBar
-import android.widget.RelativeLayout
-import android.widget.TextView
 import androidx.test.core.app.ApplicationProvider
 import com.facebook.drawee.backends.pipeline.Fresco
-import com.facebook.drawee.view.SimpleDraweeView
 import com.facebook.soloader.SoLoader
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.R
@@ -25,7 +20,7 @@ import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
-import org.mockito.Mockito.*
+import org.mockito.Mockito.`when`
 import org.mockito.MockitoAnnotations
 import org.powermock.core.classloader.annotations.PrepareForTest
 import org.powermock.reflect.Whitebox
@@ -34,16 +29,13 @@ import org.robolectric.RobolectricTestRunner
 import org.robolectric.Shadows
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
-import java.lang.reflect.Field
 import java.lang.reflect.Method
-import java.lang.reflect.Modifier
 
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
 @LooperMode(LooperMode.Mode.PAUSED)
 @PrepareForTest(ContributionViewHolder::class)
 class ContributionViewHolderUnitTests {
-
     private lateinit var contributionViewHolder: ContributionViewHolder
     private lateinit var activity: ProfileActivity
     private lateinit var parent: View
@@ -66,7 +58,7 @@ class ContributionViewHolderUnitTests {
     @Mock
     private lateinit var media: Media
 
-    private lateinit var bindind : LayoutContributionBinding
+    private lateinit var bindind: LayoutContributionBinding
 
     @Before
     fun setUp() {
@@ -82,8 +74,9 @@ class ContributionViewHolderUnitTests {
         Whitebox.setInternalState(contributionViewHolder, "binding", bindind)
 
         setFinalStatic(
-                ContributionViewHolder::class.java.getDeclaredField("compositeDisposable"),
-                compositeDisposable)
+            ContributionViewHolder::class.java.getDeclaredField("compositeDisposable"),
+            compositeDisposable,
+        )
     }
 
     @Test
@@ -108,11 +101,12 @@ class ContributionViewHolderUnitTests {
     @Throws(Exception::class)
     fun testChooseImageSource() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
-        val method: Method = ContributionViewHolder::class.java.getDeclaredMethod(
-            "chooseImageSource",
-            String::class.java,
-            Uri::class.java
-        )
+        val method: Method =
+            ContributionViewHolder::class.java.getDeclaredMethod(
+                "chooseImageSource",
+                String::class.java,
+                Uri::class.java,
+            )
         method.isAccessible = true
         method.invoke(contributionViewHolder, "", uri)
     }
@@ -121,10 +115,11 @@ class ContributionViewHolderUnitTests {
     @Throws(Exception::class)
     fun testDisplayWikipediaButton() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
-        val method: Method = ContributionViewHolder::class.java.getDeclaredMethod(
-            "displayWikipediaButton",
-            Boolean::class.javaObjectType
-        )
+        val method: Method =
+            ContributionViewHolder::class.java.getDeclaredMethod(
+                "displayWikipediaButton",
+                Boolean::class.javaObjectType,
+            )
         method.isAccessible = true
         method.invoke(contributionViewHolder, false)
     }
@@ -134,10 +129,11 @@ class ContributionViewHolderUnitTests {
     fun testCheckIfMediaExistsOnWikipediaPageCaseNull() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
         `when`(contribution.wikidataPlace).thenReturn(null)
-        val method: Method = ContributionViewHolder::class.java.getDeclaredMethod(
-            "checkIfMediaExistsOnWikipediaPage",
-            Contribution::class.java
-        )
+        val method: Method =
+            ContributionViewHolder::class.java.getDeclaredMethod(
+                "checkIfMediaExistsOnWikipediaPage",
+                Contribution::class.java,
+            )
         method.isAccessible = true
         method.invoke(contributionViewHolder, contribution)
     }

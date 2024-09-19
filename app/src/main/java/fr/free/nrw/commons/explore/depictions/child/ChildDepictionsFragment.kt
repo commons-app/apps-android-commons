@@ -6,18 +6,19 @@ import fr.free.nrw.commons.R
 import fr.free.nrw.commons.explore.depictions.PageableDepictionsFragment
 import javax.inject.Inject
 
-
-class ChildDepictionsFragment: PageableDepictionsFragment() {
+class ChildDepictionsFragment : PageableDepictionsFragment() {
     @Inject
     lateinit var presenter: ChildDepictionsPresenter
 
     override val injectedPresenter
-    get() = presenter
+        get() = presenter
 
-    override fun getEmptyText(query: String) =
-        getString(R.string.no_child_classes, arguments!!.getString("wikidataItemName")!!)
+    override fun getEmptyText(query: String) = getString(R.string.no_child_classes, arguments!!.getString("wikidataItemName")!!)
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         super.onViewCreated(view, savedInstanceState)
         onQueryUpdated(arguments!!.getString("entityId")!!)
     }

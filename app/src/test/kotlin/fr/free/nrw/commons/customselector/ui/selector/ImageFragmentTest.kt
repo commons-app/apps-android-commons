@@ -46,12 +46,11 @@ import java.lang.reflect.Field
 @Config(sdk = [21], application = TestCommonsApplication::class)
 @LooperMode(LooperMode.Mode.PAUSED)
 class ImageFragmentTest {
-
     private lateinit var fragment: ImageFragment
     private lateinit var activity: CustomSelectorActivity
     private lateinit var view: View
-    private lateinit var selectorRV : RecyclerView
-    private lateinit var loader : ProgressBar
+    private lateinit var selectorRV: RecyclerView
+    private lateinit var loader: ProgressBar
     private lateinit var layoutInflater: LayoutInflater
     private lateinit var context: Context
     private lateinit var viewModelField: Field
@@ -75,7 +74,7 @@ class ImageFragmentTest {
      * Setup the image fragment.
      */
     @Before
-    fun setUp(){
+    fun setUp() {
         MockitoAnnotations.initMocks(this)
         context = ApplicationProvider.getApplicationContext()
         OkHttpConnectionFactory.CLIENT = createTestClient()
@@ -83,7 +82,7 @@ class ImageFragmentTest {
         Fresco.initialize(context)
         activity = Robolectric.buildActivity(CustomSelectorActivity::class.java).create().get()
 
-        fragment = ImageFragment.newInstance(1,0)
+        fragment = ImageFragment.newInstance(1, 0)
         val fragmentManager: FragmentManager = activity.supportFragmentManager
         val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
         fragmentTransaction.add(fragment, null)
@@ -95,9 +94,9 @@ class ImageFragmentTest {
         loader = view.findViewById(R.id.loader)
 
         Whitebox.setInternalState(fragment, "imageAdapter", adapter)
-        Whitebox.setInternalState(fragment, "selectorRV", selectorRV )
+        Whitebox.setInternalState(fragment, "selectorRV", selectorRV)
         Whitebox.setInternalState(fragment, "loader", loader)
-        Whitebox.setInternalState(fragment, "filteredImages", arrayListOf(image,image))
+        Whitebox.setInternalState(fragment, "filteredImages", arrayListOf(image, image))
         Whitebox.setInternalState(fragment, "contributionDao", contributionDao)
 
         viewModelField = fragment.javaClass.getDeclaredField("viewModel")
@@ -109,9 +108,9 @@ class ImageFragmentTest {
      */
     @Test
     @Throws(Exception::class)
-    fun testOnCreate(){
+    fun testOnCreate() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
-        fragment.onCreate(savedInstanceState);
+        fragment.onCreate(savedInstanceState)
     }
 
     /**
@@ -129,11 +128,11 @@ class ImageFragmentTest {
      * Test handleResult.
      */
     @Test
-    fun testHandleResult(){
+    fun testHandleResult() {
         val func = fragment.javaClass.getDeclaredMethod("handleResult", Result::class.java)
         func.isAccessible = true
         func.invoke(fragment, Result(CallbackStatus.SUCCESS, arrayListOf()))
-        func.invoke(fragment, Result(CallbackStatus.SUCCESS, arrayListOf(image,image)))
+        func.invoke(fragment, Result(CallbackStatus.SUCCESS, arrayListOf(image, image)))
     }
 
     /**
@@ -184,5 +183,4 @@ class ImageFragmentTest {
         func.isAccessible = true
         func.invoke(fragment)
     }
-
 }

@@ -21,6 +21,7 @@ import org.robolectric.annotation.Config
 class CheckBoxTriStatesTest {
     @Mock
     internal lateinit var callback: CheckBoxTriStates.Callback
+
     @Mock
     internal lateinit var onCheckChangeListener: CompoundButton.OnCheckedChangeListener
     private lateinit var checkBoxTriStates: CheckBoxTriStates
@@ -52,7 +53,7 @@ class CheckBoxTriStatesTest {
      */
     @Test
     fun testSetStateWhenDiffState() {
-        NearbyController.currentLocation = LatLng(0.0,0.0,0.0f)
+        NearbyController.currentLocation = LatLng(0.0, 0.0, 0.0f)
         checkBoxTriStates.state = CHECKED
         checkBoxTriStates.setState(UNCHECKED)
         verify(callback).filterByMarkerType(null, UNCHECKED, false, true)

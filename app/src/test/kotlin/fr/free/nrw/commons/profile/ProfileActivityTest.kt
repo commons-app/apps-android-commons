@@ -5,7 +5,6 @@ import android.graphics.Bitmap
 import android.os.Looper
 import android.view.Menu
 import android.view.MenuItem
-import androidx.appcompat.widget.Toolbar
 import androidx.test.core.app.ApplicationProvider
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestCommonsApplication
@@ -23,11 +22,9 @@ import org.robolectric.fakes.RoboMenu
 import org.robolectric.fakes.RoboMenuItem
 import java.lang.reflect.Method
 
-
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
 class ProfileActivityTest {
-
     @Mock
     private lateinit var activity: ProfileActivity
 
@@ -95,9 +92,11 @@ class ProfileActivityTest {
     @Throws(Exception::class)
     fun testShareScreen() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
-        val method: Method = ProfileActivity::class.java.getDeclaredMethod(
-            "shareScreen", Bitmap::class.java
-        )
+        val method: Method =
+            ProfileActivity::class.java.getDeclaredMethod(
+                "shareScreen",
+                Bitmap::class.java,
+            )
         method.isAccessible = true
         method.invoke(activity, bitmap)
     }
@@ -107,6 +106,7 @@ class ProfileActivityTest {
     fun testOnSupportNavigateUp() {
         activity.onSupportNavigateUp()
     }
+
     @Test
     fun testToolbarNotNull() {
         val toolbar = activity.binding.toolbarBinding.toolbar
@@ -119,5 +119,4 @@ class ProfileActivityTest {
         activity.onCreateOptionsMenu(menu)
         Assert.assertEquals(1, menu.size())
     }
-
 }

@@ -15,11 +15,9 @@ import java.lang.reflect.Method
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
 class HeightLimitedRecyclerViewUnitTests {
-
     private lateinit var activityController: ActivityController<Activity>
     private lateinit var activity: Activity
     private lateinit var recyclerView: HeightLimitedRecyclerView
-
 
     @Before
     fun setUp() {
@@ -40,13 +38,13 @@ class HeightLimitedRecyclerViewUnitTests {
     @Test
     @Throws(Exception::class)
     fun testOnMeasure() {
-        val method: Method = HeightLimitedRecyclerView::class.java.getDeclaredMethod(
-            "onMeasure",
-            Int::class.java,
-            Int::class.java
-        )
+        val method: Method =
+            HeightLimitedRecyclerView::class.java.getDeclaredMethod(
+                "onMeasure",
+                Int::class.java,
+                Int::class.java,
+            )
         method.isAccessible = true
         method.invoke(recyclerView, 0, 0)
     }
-
 }

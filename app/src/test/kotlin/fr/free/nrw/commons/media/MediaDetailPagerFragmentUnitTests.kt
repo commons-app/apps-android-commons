@@ -20,8 +20,8 @@ import com.nhaarman.mockitokotlin2.verify
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.OkHttpConnectionFactory
 import fr.free.nrw.commons.TestCommonsApplication
-import fr.free.nrw.commons.createTestClient
 import fr.free.nrw.commons.auth.SessionManager
+import fr.free.nrw.commons.createTestClient
 import fr.free.nrw.commons.databinding.FragmentMediaDetailPagerBinding
 import fr.free.nrw.commons.explore.SearchActivity
 import io.reactivex.android.plugins.RxAndroidPlugins
@@ -77,9 +77,8 @@ class MediaDetailPagerFragmentUnitTests {
     fun setUp() {
         RxAndroidPlugins.setMainThreadSchedulerHandler { Schedulers.trampoline() }
         RxJavaPlugins.setNewThreadSchedulerHandler { Schedulers.trampoline() }
-        
-        MockitoAnnotations.openMocks(this)
 
+        MockitoAnnotations.openMocks(this)
 
         context = ApplicationProvider.getApplicationContext()
 
@@ -111,7 +110,7 @@ class MediaDetailPagerFragmentUnitTests {
         doReturn(menuItem).`when`(menuItem).isEnabled = any()
         doReturn(menuItem).`when`(menuItem).isVisible = any()
     }
-    
+
     @After
     fun tearDown() {
         RxAndroidPlugins.reset()
@@ -152,10 +151,11 @@ class MediaDetailPagerFragmentUnitTests {
     @Test
     @Throws(Exception::class)
     fun testSetWallpaperCaseNull() {
-        val method: Method = MediaDetailPagerFragment::class.java.getDeclaredMethod(
-            "setWallpaper",
-            Media::class.java
-        )
+        val method: Method =
+            MediaDetailPagerFragment::class.java.getDeclaredMethod(
+                "setWallpaper",
+                Media::class.java,
+            )
         method.isAccessible = true
         method.invoke(fragment, media)
     }
@@ -165,22 +165,23 @@ class MediaDetailPagerFragmentUnitTests {
     fun testSetWallpaperCaseNonNull() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
         `when`(media.imageUrl).thenReturn("url")
-        val method: Method = MediaDetailPagerFragment::class.java.getDeclaredMethod(
-            "setWallpaper",
-            Media::class.java
-        )
+        val method: Method =
+            MediaDetailPagerFragment::class.java.getDeclaredMethod(
+                "setWallpaper",
+                Media::class.java,
+            )
         method.isAccessible = true
         method.invoke(fragment, media)
     }
 
-
     @Test
     @Throws(Exception::class)
     fun testSetAvatarCaseNull() {
-        val method: Method = MediaDetailPagerFragment::class.java.getDeclaredMethod(
-            "setAvatar",
-            Media::class.java
-        )
+        val method: Method =
+            MediaDetailPagerFragment::class.java.getDeclaredMethod(
+                "setAvatar",
+                Media::class.java,
+            )
         method.isAccessible = true
         method.invoke(fragment, media)
     }
@@ -237,11 +238,12 @@ class MediaDetailPagerFragmentUnitTests {
     }
 
     private fun invokeHandleBackgroundColorMenuItems(getBitmap: Callable<Bitmap>) {
-        val method: Method = MediaDetailPagerFragment::class.java.getDeclaredMethod(
-            "handleBackgroundColorMenuItems",
-            Callable::class.java,
-            Menu::class.java
-        )
+        val method: Method =
+            MediaDetailPagerFragment::class.java.getDeclaredMethod(
+                "handleBackgroundColorMenuItems",
+                Callable::class.java,
+                Menu::class.java,
+            )
         method.isAccessible = true
         method.invoke(fragment, getBitmap, menu)
     }

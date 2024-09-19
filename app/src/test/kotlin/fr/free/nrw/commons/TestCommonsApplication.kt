@@ -17,28 +17,30 @@ import fr.free.nrw.commons.location.LocationServiceManager
 class TestCommonsApplication : Application() {
     private var mockApplicationComponent: CommonsApplicationComponent? = null
 
-
     override fun onCreate() {
         if (mockApplicationComponent == null) {
-            mockApplicationComponent = DaggerCommonsApplicationComponent.builder()
+            mockApplicationComponent =
+                DaggerCommonsApplicationComponent
+                    .builder()
                     .appModule(MockCommonsApplicationModule(this))
                     .build()
         }
         super.onCreate()
         setTheme(R.style.Theme_AppCompat)
-        context=applicationContext
+        context = applicationContext
     }
 
-    companion object{
-        private var context: Context?=null
-        fun getContext(): Context? {
-            return context
-        }
+    companion object {
+        private var context: Context? = null
+
+        fun getContext(): Context? = context
     }
 }
 
 @Suppress("MemberVisibilityCanBePrivate")
-class MockCommonsApplicationModule(appContext: Context) : CommonsApplicationModule(appContext) {
+class MockCommonsApplicationModule(
+    appContext: Context,
+) : CommonsApplicationModule(appContext) {
     val accountUtil: AccountUtil = mock()
     val defaultSharedPreferences: JsonKvStore = mock()
     val locationServiceManager: LocationServiceManager = mock()
@@ -58,7 +60,10 @@ class MockCommonsApplicationModule(appContext: Context) : CommonsApplicationModu
 
     override fun providesAccountUtil(context: Context): AccountUtil = accountUtil
 
-    override fun providesDefaultKvStore(context: Context, gson: Gson): JsonKvStore = defaultSharedPreferences
+    override fun providesDefaultKvStore(
+        context: Context,
+        gson: Gson,
+    ): JsonKvStore = defaultSharedPreferences
 
     override fun provideLocationServiceManager(context: Context): LocationServiceManager = locationServiceManager
 

@@ -16,7 +16,6 @@ import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.recentlanguages.Language
 import fr.free.nrw.commons.recentlanguages.RecentLanguagesAdapter
 import fr.free.nrw.commons.recentlanguages.RecentLanguagesDao
-import fr.free.nrw.commons.settings.SettingsFragment
 import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment
 import org.junit.Assert
 import org.junit.Before
@@ -38,7 +37,6 @@ import java.lang.reflect.Method
 @Config(sdk = [21], application = TestCommonsApplication::class)
 @LooperMode(LooperMode.Mode.PAUSED)
 class UploadMediaDetailAdapterUnitTest {
-
     private lateinit var adapter: UploadMediaDetailAdapter
     private lateinit var context: Context
     private lateinit var viewHolder: UploadMediaDetailAdapter.ViewHolder
@@ -58,7 +56,7 @@ class UploadMediaDetailAdapterUnitTest {
     private lateinit var textView: TextView
 
     @Mock
-    private lateinit var fragment : UploadMediaDetailFragment
+    private lateinit var fragment: UploadMediaDetailFragment
 
     @Mock
     private lateinit var view: View
@@ -75,7 +73,7 @@ class UploadMediaDetailAdapterUnitTest {
         uploadMediaDetails = mutableListOf(uploadMediaDetail, uploadMediaDetail)
         activity = Robolectric.buildActivity(UploadActivity::class.java).get()
         fragment = mock(UploadMediaDetailFragment::class.java)
-        adapter = UploadMediaDetailAdapter(fragment,"", recentLanguagesDao)
+        adapter = UploadMediaDetailAdapter(fragment, "", recentLanguagesDao)
         context = ApplicationProvider.getApplicationContext()
         Whitebox.setInternalState(adapter, "uploadMediaDetails", uploadMediaDetails)
         Whitebox.setInternalState(adapter, "eventListener", eventListener)
@@ -184,9 +182,10 @@ class UploadMediaDetailAdapterUnitTest {
 
     @Test
     fun testHideRecentLanguagesSection() {
-        val method: Method = UploadMediaDetailAdapter.ViewHolder::class.java.getDeclaredMethod(
-            "hideRecentLanguagesSection"
-        )
+        val method: Method =
+            UploadMediaDetailAdapter.ViewHolder::class.java.getDeclaredMethod(
+                "hideRecentLanguagesSection",
+            )
         method.isAccessible = true
         method.invoke(viewHolder)
         verify(listView, times(1)).visibility = View.GONE
@@ -196,10 +195,11 @@ class UploadMediaDetailAdapterUnitTest {
 
     @Test
     fun `Test setUpRecentLanguagesSection when list is empty`() {
-        val method: Method = UploadMediaDetailAdapter.ViewHolder::class.java.getDeclaredMethod(
-            "setUpRecentLanguagesSection",
-            List::class.java
-        )
+        val method: Method =
+            UploadMediaDetailAdapter.ViewHolder::class.java.getDeclaredMethod(
+                "setUpRecentLanguagesSection",
+                List::class.java,
+            )
         method.isAccessible = true
         method.invoke(viewHolder, emptyList<Language>())
         verify(listView, times(1)).visibility = View.GONE
@@ -209,19 +209,23 @@ class UploadMediaDetailAdapterUnitTest {
 
     @Test
     fun `Test setUpRecentLanguagesSection when list is not empty`() {
-        val method: Method = UploadMediaDetailAdapter.ViewHolder::class.java.getDeclaredMethod(
-            "setUpRecentLanguagesSection",
-            List::class.java
-        )
+        val method: Method =
+            UploadMediaDetailAdapter.ViewHolder::class.java.getDeclaredMethod(
+                "setUpRecentLanguagesSection",
+                List::class.java,
+            )
         method.isAccessible = true
-        method.invoke(viewHolder, listOf(
-            Language("Bengali", "bn"),
-            Language("Bengali", "bn"),
-            Language("Bengali", "bn"),
-            Language("Bengali", "bn"),
-            Language("Bengali", "bn"),
-            Language("Bengali", "bn")
-        ))
+        method.invoke(
+            viewHolder,
+            listOf(
+                Language("Bengali", "bn"),
+                Language("Bengali", "bn"),
+                Language("Bengali", "bn"),
+                Language("Bengali", "bn"),
+                Language("Bengali", "bn"),
+                Language("Bengali", "bn"),
+            ),
+        )
         verify(listView, times(1)).visibility = View.VISIBLE
         verify(view, times(1)).visibility = View.VISIBLE
         verify(textView, times(1)).visibility = View.VISIBLE
@@ -234,21 +238,28 @@ class UploadMediaDetailAdapterUnitTest {
             .thenReturn(true)
         whenever(adapterView.adapter)
             .thenReturn(
-                RecentLanguagesAdapter(context,
-                listOf(Language("English", "en")),
-                hashMapOf<String,String>()
-                )
+                RecentLanguagesAdapter(
+                    context,
+                    listOf(Language("English", "en")),
+                    hashMapOf<String, String>(),
+                ),
             )
-        val method: Method = UploadMediaDetailAdapter.ViewHolder::class.java.getDeclaredMethod(
-            "onRecentLanguageClicked",
-            Dialog::class.java,
-            AdapterView::class.java,
-            Int::class.java,
-            UploadMediaDetail::class.java
-        )
+        val method: Method =
+            UploadMediaDetailAdapter.ViewHolder::class.java.getDeclaredMethod(
+                "onRecentLanguageClicked",
+                Dialog::class.java,
+                AdapterView::class.java,
+                Int::class.java,
+                UploadMediaDetail::class.java,
+            )
         method.isAccessible = true
-        method.invoke(viewHolder, Mockito.mock(Dialog::class.java), adapterView, 0,
-            Mockito.mock(UploadMediaDetail::class.java))
+        method.invoke(
+            viewHolder,
+            Mockito.mock(Dialog::class.java),
+            adapterView,
+            0,
+            Mockito.mock(UploadMediaDetail::class.java),
+        )
         verify(recentLanguagesDao, times(1)).findRecentLanguage(any())
         verify(adapterView, times(3)).adapter
     }
@@ -265,13 +276,13 @@ class UploadMediaDetailAdapterUnitTest {
         Assert.assertEquals(expected2, viewHolder.removeLeadingAndTrailingWhitespace(test2))
 
         // No whitespace
-        val test3 = "No trailing space";
-        val expected3 = "No trailing space";
+        val test3 = "No trailing space"
+        val expected3 = "No trailing space"
         Assert.assertEquals(expected3, viewHolder.removeLeadingAndTrailingWhitespace(test3))
 
         // blank string
         val test4 = " \r \t  "
-        val expected4 = "";
+        val expected4 = ""
         Assert.assertEquals(expected4, viewHolder.removeLeadingAndTrailingWhitespace(test4))
     }
 
@@ -293,7 +304,7 @@ class UploadMediaDetailAdapterUnitTest {
     fun testCaptionJapaneseCharacters() {
         val test1 = "テスト　テスト"
         val expected1 = "テスト テスト"
-        Assert.assertEquals(expected1, viewHolder.convertIdeographicSpaceToLatinSpace(test1));
+        Assert.assertEquals(expected1, viewHolder.convertIdeographicSpaceToLatinSpace(test1))
 
         val test2 = "　\r　\t　テスト　\r　\t　"
         val expected2 = "テスト"

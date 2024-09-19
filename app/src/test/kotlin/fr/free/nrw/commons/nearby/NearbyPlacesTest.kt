@@ -33,7 +33,7 @@ class NearbyPlacesTest {
             eq(currentLatLong),
             eq("test"),
             any(),
-            eq("test")
+            eq("test"),
         )
     }
 }

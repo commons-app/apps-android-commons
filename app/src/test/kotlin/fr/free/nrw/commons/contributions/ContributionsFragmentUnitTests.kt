@@ -3,7 +3,11 @@ package fr.free.nrw.commons.contributions
 import android.content.Context
 import android.os.Bundle
 import android.os.Looper
-import android.view.*
+import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
+import android.view.View
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.fragment.app.FragmentManager
@@ -12,10 +16,9 @@ import androidx.test.core.app.ApplicationProvider
 import fr.free.nrw.commons.OkHttpConnectionFactory
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestCommonsApplication
-import fr.free.nrw.commons.createTestClient
 import fr.free.nrw.commons.campaigns.CampaignView
 import fr.free.nrw.commons.campaigns.models.Campaign
-import fr.free.nrw.commons.databinding.FragmentContributionsBinding
+import fr.free.nrw.commons.createTestClient
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.media.MediaDetailPagerFragment
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient
@@ -29,7 +32,10 @@ import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.ArgumentMatchers.*
+import org.mockito.ArgumentMatchers.any
+import org.mockito.ArgumentMatchers.anyBoolean
+import org.mockito.ArgumentMatchers.anyInt
+import org.mockito.ArgumentMatchers.anyString
 import org.mockito.Mock
 import org.mockito.Mockito.verify
 import org.mockito.Mockito.`when`
@@ -46,7 +52,6 @@ import java.lang.reflect.Method
 @Config(sdk = [21], application = TestCommonsApplication::class)
 @LooperMode(LooperMode.Mode.PAUSED)
 class ContributionsFragmentUnitTests {
-
     @Mock
     private lateinit var mediaDetailPagerFragment: MediaDetailPagerFragment
 
@@ -105,7 +110,6 @@ class ContributionsFragmentUnitTests {
         context = ApplicationProvider.getApplicationContext()
         activity = Robolectric.buildActivity(MainActivity::class.java).create().get()
 
-
         fragment = ContributionsFragment.newInstance()
         val fragmentManager: FragmentManager = activity.supportFragmentManager
         val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
@@ -113,8 +117,10 @@ class ContributionsFragmentUnitTests {
         fragmentTransaction.commit()
 
         layoutInflater = LayoutInflater.from(activity)
-        view = LayoutInflater.from(activity)
-            .inflate(R.layout.fragment_contributions, null) as View
+        view =
+            LayoutInflater
+                .from(activity)
+                .inflate(R.layout.fragment_contributions, null) as View
 
         nearbyNotificationCardView = view.findViewById(R.id.card_view_nearby)
         campaignView = view.findViewById(R.id.campaigns_view)
@@ -157,17 +163,20 @@ class ContributionsFragmentUnitTests {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
         `when`(notificationController.getNotifications(anyBoolean())).thenReturn(singleNotification)
         `when`(notificationController.getNotifications(anyBoolean()).subscribeOn(any())).thenReturn(
-            singleNotification
+            singleNotification,
         )
         `when`(
             notificationController.getNotifications(anyBoolean()).subscribeOn(any()).observeOn(
-                any()
-            )
+                any(),
+            ),
         ).thenReturn(singleNotification)
         `when`(
-            notificationController.getNotifications(anyBoolean()).subscribeOn(any()).observeOn(
-                any()
-            ).subscribe()
+            notificationController
+                .getNotifications(anyBoolean())
+                .subscribeOn(any())
+                .observeOn(
+                    any(),
+                ).subscribe(),
         ).thenReturn(compositeDisposable)
         fragment.setNotificationCount()
     }
@@ -176,10 +185,11 @@ class ContributionsFragmentUnitTests {
     @Throws(Exception::class)
     fun testInitNotificationViewsCaseEmptyList() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
-        val method: Method = ContributionsFragment::class.java.getDeclaredMethod(
-            "initNotificationViews",
-            List::class.java
-        )
+        val method: Method =
+            ContributionsFragment::class.java.getDeclaredMethod(
+                "initNotificationViews",
+                List::class.java,
+            )
         method.isAccessible = true
         method.invoke(fragment, listOf<Notification>())
     }
@@ -190,10 +200,11 @@ class ContributionsFragmentUnitTests {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
         val list: List<Notification> =
             listOf(Notification(NotificationType.UNKNOWN, "", "", "", "", ""))
-        val method: Method = ContributionsFragment::class.java.getDeclaredMethod(
-            "initNotificationViews",
-            List::class.java
-        )
+        val method: Method =
+            ContributionsFragment::class.java.getDeclaredMethod(
+                "initNotificationViews",
+                List::class.java,
+            )
         method.isAccessible = true
         method.invoke(fragment, list)
     }
@@ -209,7 +220,7 @@ class ContributionsFragmentUnitTests {
 
     @Test
     @Throws(Exception::class)
-    fun testScrollToTop(){
+    fun testScrollToTop() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
         fragment.scrollToTop()
         verify(contributionsListFragment).scrollToTop()
@@ -348,5 +359,4 @@ class ContributionsFragmentUnitTests {
         `when`(mediaDetailPagerFragment.isVisible).thenReturn(false)
         fragment.showDetail(0, false)
     }
-
 }

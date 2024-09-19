@@ -1,7 +1,6 @@
 package fr.free.nrw.commons.nearby
 
 import fr.free.nrw.commons.R
-import fr.free.nrw.commons.R.*
 import org.junit.Before
 import org.junit.Test
 
@@ -33,5 +32,4 @@ class LabelTest {
         var nullLabel: Label = Label.fromText("a random text not exist in label texts")
         assert(nullLabel.icon.equals(R.drawable.round_icon_unknown))
     }
-
 }

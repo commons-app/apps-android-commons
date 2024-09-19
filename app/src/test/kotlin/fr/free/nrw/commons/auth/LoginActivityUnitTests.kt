@@ -13,8 +13,8 @@ import androidx.test.core.app.ApplicationProvider
 import fr.free.nrw.commons.OkHttpConnectionFactory
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestCommonsApplication
-import fr.free.nrw.commons.createTestClient
 import fr.free.nrw.commons.auth.login.LoginResult
+import fr.free.nrw.commons.createTestClient
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import org.junit.Assert
 import org.junit.Before
@@ -30,11 +30,9 @@ import org.robolectric.annotation.Config
 import org.robolectric.fakes.RoboMenuItem
 import java.lang.reflect.Method
 
-
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
 class LoginActivityUnitTests {
-
     private lateinit var menuItem: MenuItem
     private lateinit var context: Context
 
@@ -92,12 +90,13 @@ class LoginActivityUnitTests {
     @Test
     @Throws(Exception::class)
     fun testOnEditorActionCaseDefault() {
-        val method: Method = LoginActivity::class.java.getDeclaredMethod(
-            "onEditorAction",
-            TextView::class.java,
-            Int::class.java,
-            KeyEvent::class.java
-        )
+        val method: Method =
+            LoginActivity::class.java.getDeclaredMethod(
+                "onEditorAction",
+                TextView::class.java,
+                Int::class.java,
+                KeyEvent::class.java,
+            )
         method.isAccessible = true
         method.invoke(activity, textView, 0, keyEvent)
     }
@@ -105,9 +104,10 @@ class LoginActivityUnitTests {
     @Test
     @Throws(Exception::class)
     fun testSkipLogin() {
-        val method: Method = LoginActivity::class.java.getDeclaredMethod(
-            "skipLogin"
-        )
+        val method: Method =
+            LoginActivity::class.java.getDeclaredMethod(
+                "skipLogin",
+            )
         method.isAccessible = true
         method.invoke(activity)
     }
@@ -115,9 +115,10 @@ class LoginActivityUnitTests {
     @Test
     @Throws(Exception::class)
     fun testForgotPassword() {
-        val method: Method = LoginActivity::class.java.getDeclaredMethod(
-            "forgotPassword"
-        )
+        val method: Method =
+            LoginActivity::class.java.getDeclaredMethod(
+                "forgotPassword",
+            )
         method.isAccessible = true
         method.invoke(activity)
     }
@@ -125,9 +126,10 @@ class LoginActivityUnitTests {
     @Test
     @Throws(Exception::class)
     fun testOnPrivacyPolicyClicked() {
-        val method: Method = LoginActivity::class.java.getDeclaredMethod(
-            "onPrivacyPolicyClicked"
-        )
+        val method: Method =
+            LoginActivity::class.java.getDeclaredMethod(
+                "onPrivacyPolicyClicked",
+            )
         method.isAccessible = true
         method.invoke(activity)
     }
@@ -135,9 +137,10 @@ class LoginActivityUnitTests {
     @Test
     @Throws(Exception::class)
     fun testSignUp() {
-        val method: Method = LoginActivity::class.java.getDeclaredMethod(
-            "signUp"
-        )
+        val method: Method =
+            LoginActivity::class.java.getDeclaredMethod(
+                "signUp",
+            )
         method.isAccessible = true
         method.invoke(activity)
     }
@@ -145,10 +148,11 @@ class LoginActivityUnitTests {
     @Test
     @Throws(Exception::class)
     fun testOnPostCreate() {
-        val method: Method = LoginActivity::class.java.getDeclaredMethod(
-            "onPostCreate",
-            Bundle::class.java
-        )
+        val method: Method =
+            LoginActivity::class.java.getDeclaredMethod(
+                "onPostCreate",
+                Bundle::class.java,
+            )
         method.isAccessible = true
         method.invoke(activity, bundle)
     }
@@ -157,9 +161,10 @@ class LoginActivityUnitTests {
     @Throws(Exception::class)
     fun testOnDestroy() {
         `when`(progressDialog.isShowing).thenReturn(true)
-        val method: Method = LoginActivity::class.java.getDeclaredMethod(
-            "onDestroy"
-        )
+        val method: Method =
+            LoginActivity::class.java.getDeclaredMethod(
+                "onDestroy",
+            )
         method.isAccessible = true
         method.invoke(activity)
     }
@@ -168,9 +173,10 @@ class LoginActivityUnitTests {
     @Throws(Exception::class)
     fun testOnDestroyWithException() {
         `when`(progressDialog.isShowing).thenThrow(NullPointerException())
-        val method: Method = LoginActivity::class.java.getDeclaredMethod(
-            "onDestroy"
-        )
+        val method: Method =
+            LoginActivity::class.java.getDeclaredMethod(
+                "onDestroy",
+            )
         method.isAccessible = true
         method.invoke(activity)
     }
@@ -178,10 +184,11 @@ class LoginActivityUnitTests {
     @Test
     @Throws(Exception::class)
     fun testOnLoginSuccessCaseDefault() {
-        val method: Method = LoginActivity::class.java.getDeclaredMethod(
-            "onLoginSuccess",
-            LoginResult::class.java
-        )
+        val method: Method =
+            LoginActivity::class.java.getDeclaredMethod(
+                "onLoginSuccess",
+                LoginResult::class.java,
+            )
         method.isAccessible = true
         method.invoke(activity, loginResult)
     }
@@ -190,10 +197,11 @@ class LoginActivityUnitTests {
     @Throws(Exception::class)
     fun testOnLoginSuccess() {
         `when`(progressDialog.isShowing).thenReturn(true)
-        val method: Method = LoginActivity::class.java.getDeclaredMethod(
-            "onLoginSuccess",
-            LoginResult::class.java
-        )
+        val method: Method =
+            LoginActivity::class.java.getDeclaredMethod(
+                "onLoginSuccess",
+                LoginResult::class.java,
+            )
         method.isAccessible = true
         method.invoke(activity, loginResult)
     }
@@ -201,9 +209,10 @@ class LoginActivityUnitTests {
     @Test
     @Throws(Exception::class)
     fun testShowPasswordResetPrompt() {
-        val method: Method = LoginActivity::class.java.getDeclaredMethod(
-            "showPasswordResetPrompt"
-        )
+        val method: Method =
+            LoginActivity::class.java.getDeclaredMethod(
+                "showPasswordResetPrompt",
+            )
         method.isAccessible = true
         method.invoke(activity)
     }
@@ -211,9 +220,10 @@ class LoginActivityUnitTests {
     @Test
     @Throws(Exception::class)
     fun testHideProgress() {
-        val method: Method = LoginActivity::class.java.getDeclaredMethod(
-            "hideProgress"
-        )
+        val method: Method =
+            LoginActivity::class.java.getDeclaredMethod(
+                "hideProgress",
+            )
         method.isAccessible = true
         method.invoke(activity)
     }
@@ -225,9 +235,10 @@ class LoginActivityUnitTests {
         `when`(applicationKvStore.getBoolean("login_skipped", false)).thenReturn(true)
         `when`(sessionManager.currentAccount).thenReturn(account)
         `when`(sessionManager.isUserLoggedIn).thenReturn(true)
-        val method: Method = LoginActivity::class.java.getDeclaredMethod(
-            "onResume"
-        )
+        val method: Method =
+            LoginActivity::class.java.getDeclaredMethod(
+                "onResume",
+            )
         method.isAccessible = true
         method.invoke(activity)
     }
@@ -235,9 +246,10 @@ class LoginActivityUnitTests {
     @Test
     @Throws(Exception::class)
     fun testOnStart() {
-        val method: Method = LoginActivity::class.java.getDeclaredMethod(
-            "onStart"
-        )
+        val method: Method =
+            LoginActivity::class.java.getDeclaredMethod(
+                "onStart",
+            )
         method.isAccessible = true
         method.invoke(activity)
     }
@@ -245,9 +257,10 @@ class LoginActivityUnitTests {
     @Test
     @Throws(Exception::class)
     fun testOnStop() {
-        val method: Method = LoginActivity::class.java.getDeclaredMethod(
-            "onStop"
-        )
+        val method: Method =
+            LoginActivity::class.java.getDeclaredMethod(
+                "onStop",
+            )
         method.isAccessible = true
         method.invoke(activity)
     }
@@ -255,9 +268,10 @@ class LoginActivityUnitTests {
     @Test
     @Throws(Exception::class)
     fun testOnPostResume() {
-        val method: Method = LoginActivity::class.java.getDeclaredMethod(
-            "onPostResume"
-        )
+        val method: Method =
+            LoginActivity::class.java.getDeclaredMethod(
+                "onPostResume",
+            )
         method.isAccessible = true
         method.invoke(activity)
     }

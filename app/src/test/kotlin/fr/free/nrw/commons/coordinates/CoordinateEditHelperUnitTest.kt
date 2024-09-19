@@ -17,7 +17,9 @@ import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.runner.RunWith
 import org.mockito.ArgumentMatchers.anyString
 import org.mockito.Mock
-import org.mockito.Mockito.*
+import org.mockito.Mockito.times
+import org.mockito.Mockito.verify
+import org.mockito.Mockito.`when`
 import org.mockito.MockitoAnnotations
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
@@ -28,7 +30,6 @@ import java.lang.reflect.Method
 @Config(sdk = [21], application = TestCommonsApplication::class)
 @LooperMode(LooperMode.Mode.PAUSED)
 class CoordinateEditHelperUnitTest {
-
     private lateinit var context: Context
     private lateinit var helper: CoordinateEditHelper
 
@@ -55,8 +56,8 @@ class CoordinateEditHelperUnitTest {
             pageEditClient.edit(
                 anyString(),
                 anyString(),
-                anyString()
-            )
+                anyString(),
+            ),
         ).thenReturn(Observable.just(true))
     }
 
@@ -72,7 +73,7 @@ class CoordinateEditHelperUnitTest {
         helper.makeCoordinatesEdit(context, media, "0.0", "0.0", "0.0F")
         verify(viewUtilWrapper, times(1)).showShortToast(
             context,
-            context.getString(R.string.coordinates_edit_helper_make_edit_toast)
+            context.getString(R.string.coordinates_edit_helper_make_edit_toast),
         )
         verify(pageEditClient, times(1)).getCurrentWikiText(anyString())
         verify(pageEditClient, times(1)).edit(anyString(), anyString(), anyString())
@@ -81,94 +82,118 @@ class CoordinateEditHelperUnitTest {
     @Test
     @Throws(Exception::class)
     fun testGetFormattedWikiTextCaseNewLineContainsLocation() {
-        val method: Method = CoordinateEditHelper::class.java.getDeclaredMethod(
-            "getFormattedWikiText", String::class.java, String::class.java
-        )
+        val method: Method =
+            CoordinateEditHelper::class.java.getDeclaredMethod(
+                "getFormattedWikiText",
+                String::class.java,
+                String::class.java,
+            )
         method.isAccessible = true
         assertEquals(
             method.invoke(
                 helper,
                 "== {{int:filedesc}} == {{user|Test}} == \n{{Location|0.0|0.0|0.0F}}",
-                "{{Location|0.1|0.1|0.1F}}"
-            ), "== {{int:filedesc}} == {{user|Test}} == \n" +
-                    "{Location|0.1|0.1|0.1F}}\n"
+                "{{Location|0.1|0.1|0.1F}}",
+            ),
+            "== {{int:filedesc}} == {{user|Test}} == \n" +
+                "{Location|0.1|0.1|0.1F}}\n",
         )
     }
 
     @Test
     @Throws(Exception::class)
     fun testGetFormattedWikiTextCaseContainsLocation() {
-        val method: Method = CoordinateEditHelper::class.java.getDeclaredMethod(
-            "getFormattedWikiText", String::class.java, String::class.java
-        )
+        val method: Method =
+            CoordinateEditHelper::class.java.getDeclaredMethod(
+                "getFormattedWikiText",
+                String::class.java,
+                String::class.java,
+            )
         method.isAccessible = true
         assertEquals(
             method.invoke(
                 helper,
                 "== {{int:filedesc}} == {{Location|0.0|0.0|0.0F}}",
-                "{{Location|0.1|0.1|0.1F}}"
-            ), "== {{int:filedesc}} == {{Location|0.1|0.1|0.1F}}"
+                "{{Location|0.1|0.1|0.1F}}",
+            ),
+            "== {{int:filedesc}} == {{Location|0.1|0.1|0.1F}}",
         )
     }
 
     @Test
     @Throws(Exception::class)
     fun testGetFormattedWikiTextCaseDoesContainsLocationHasSubString() {
-        val method: Method = CoordinateEditHelper::class.java.getDeclaredMethod(
-            "getFormattedWikiText", String::class.java, String::class.java
-        )
+        val method: Method =
+            CoordinateEditHelper::class.java.getDeclaredMethod(
+                "getFormattedWikiText",
+                String::class.java,
+                String::class.java,
+            )
         method.isAccessible = true
         assertEquals(
             method.invoke(
                 helper,
                 "== {{int:filedesc}} == {{user|Test}} == {{int:license-header}} ==",
-                "{{Location|0.1|0.1|0.1F}}"
+                "{{Location|0.1|0.1|0.1F}}",
             ),
             "== {{int:filedesc}} == {{user|Test}} {Location|0.1|0.1|0.1F}}\n" +
-                    "== {{int:license-header}} =="
+                "== {{int:license-header}} ==",
         )
     }
 
     @Test
     @Throws(Exception::class)
     fun testGetFormattedWikiTextCaseDoesContainsLocationDoesNotHaveSubString() {
-        val method: Method = CoordinateEditHelper::class.java.getDeclaredMethod(
-            "getFormattedWikiText", String::class.java, String::class.java
-        )
+        val method: Method =
+            CoordinateEditHelper::class.java.getDeclaredMethod(
+                "getFormattedWikiText",
+                String::class.java,
+                String::class.java,
+            )
         method.isAccessible = true
         assertEquals(
             method.invoke(
                 helper,
                 "== {{int:filedesc}} {{int:license-header}} ==",
-                "{{Location|0.1|0.1|0.1F}}"
+                "{{Location|0.1|0.1|0.1F}}",
             ),
-            "== {{int:filedesc}} {{int:license-header}} =={{Location|0.1|0.1|0.1F}}"
+            "== {{int:filedesc}} {{int:license-header}} =={{Location|0.1|0.1|0.1F}}",
         )
     }
 
     @Test
     @Throws(Exception::class)
     fun testGetFormattedWikiTextCaseDoesNotContainFileDesc() {
-        val method: Method = CoordinateEditHelper::class.java.getDeclaredMethod(
-            "getFormattedWikiText", String::class.java, String::class.java
-        )
+        val method: Method =
+            CoordinateEditHelper::class.java.getDeclaredMethod(
+                "getFormattedWikiText",
+                String::class.java,
+                String::class.java,
+            )
         method.isAccessible = true
         assertEquals(
             method.invoke(
                 helper,
                 "{{Location|0.0|0.0|0.0F}}",
-                "{{Location|0.1|0.1|0.1F}}"
-            ), "== {{int:filedesc}} =={{Location|0.1|0.1|0.1F}}{{Location|0.0|0.0|0.0F}}"
+                "{{Location|0.1|0.1|0.1F}}",
+            ),
+            "== {{int:filedesc}} =={{Location|0.1|0.1|0.1F}}{{Location|0.0|0.0|0.0F}}",
         )
     }
 
     @Test
     @Throws(Exception::class)
     fun testShowCoordinatesEditNotificationCaseTrue() {
-        val method: Method = CoordinateEditHelper::class.java.getDeclaredMethod(
-            "showCoordinatesEditNotification", Context::class.java, Media::class.java,
-            String::class.java, String::class.java, String::class.java, Boolean::class.java
-        )
+        val method: Method =
+            CoordinateEditHelper::class.java.getDeclaredMethod(
+                "showCoordinatesEditNotification",
+                Context::class.java,
+                Media::class.java,
+                String::class.java,
+                String::class.java,
+                String::class.java,
+                Boolean::class.java,
+            )
         method.isAccessible = true
         assertEquals(method.invoke(helper, context, media, "0.0", "0.0", "0.0F", true), true)
     }
@@ -176,12 +201,17 @@ class CoordinateEditHelperUnitTest {
     @Test
     @Throws(Exception::class)
     fun testShowCoordinatesEditNotificationCaseFalse() {
-        val method: Method = CoordinateEditHelper::class.java.getDeclaredMethod(
-            "showCoordinatesEditNotification", Context::class.java, Media::class.java,
-            String::class.java, String::class.java, String::class.java, Boolean::class.java
-        )
+        val method: Method =
+            CoordinateEditHelper::class.java.getDeclaredMethod(
+                "showCoordinatesEditNotification",
+                Context::class.java,
+                Media::class.java,
+                String::class.java,
+                String::class.java,
+                String::class.java,
+                Boolean::class.java,
+            )
         method.isAccessible = true
         assertEquals(method.invoke(helper, context, media, "0.0", "0.0", "0.0F", false), false)
     }
-
 }

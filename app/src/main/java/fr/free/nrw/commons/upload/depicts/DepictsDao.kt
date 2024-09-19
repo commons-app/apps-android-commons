@@ -20,10 +20,10 @@ import java.util.Date
 abstract class DepictsDao {
     /** The maximum number of depicts allowed in the database. */
     private val maxItemsAllowed = 10
-    
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     abstract suspend fun insert(depictedItem: Depicts)
-    
+
     @Query("Select * From depicts_table order by lastUsed DESC")
     abstract suspend fun getAllDepicts(): List<Depicts>
 
@@ -38,18 +38,20 @@ abstract class DepictsDao {
      *
      * @return A list of Depicts objects.
      */
-    fun depictsList(): Deferred<List<Depicts>> = CoroutineScope(Dispatchers.IO).async {
-        getAllDepicts()
-    }
+    fun depictsList(): Deferred<List<Depicts>> =
+        CoroutineScope(Dispatchers.IO).async {
+            getAllDepicts()
+        }
 
     /**
      * Inserts a Depicts object into the database.
      *
      * @param depictedItem The Depicts object to insert.
      */
-    private fun insertDepict(depictedItem: Depicts) = CoroutineScope(Dispatchers.IO).launch { 
-        insert(depictedItem)
-    }
+    private fun insertDepict(depictedItem: Depicts) =
+        CoroutineScope(Dispatchers.IO).launch {
+            insert(depictedItem)
+        }
 
     /**
      * Gets a list of Depicts objects that need to be deleted from the database.
@@ -57,18 +59,20 @@ abstract class DepictsDao {
      * @param n The number of depicts to delete.
      * @return A list of Depicts objects to delete.
      */
-    private suspend fun depictsForDeletion(n: Int): Deferred<List<Depicts>> = CoroutineScope(Dispatchers.IO).async {
-        getDepictsForDeletion(n)
-    }
+    private suspend fun depictsForDeletion(n: Int): Deferred<List<Depicts>> =
+        CoroutineScope(Dispatchers.IO).async {
+            getDepictsForDeletion(n)
+        }
 
     /**
      * Deletes a Depicts object from the database.
      *
      * @param depicts The Depicts object to delete.
      */
-    private suspend fun deleteDepicts(depicts: Depicts) = CoroutineScope(Dispatchers.IO).launch {
-        delete(depicts)
-    }
+    private suspend fun deleteDepicts(depicts: Depicts) =
+        CoroutineScope(Dispatchers.IO).launch {
+            delete(depicts)
+        }
 
     /**
      * Saves a list of DepictedItems in the DepictsRoomDataBase.
@@ -87,13 +91,12 @@ abstract class DepictsDao {
     }
 
     private suspend fun deleteOldDepictions(depictsListSize: Int) {
-        if(depictsListSize > maxItemsAllowed) {
+        if (depictsListSize > maxItemsAllowed) {
             val depictsForDeletion = depictsForDeletion(depictsListSize).await()
 
-            for(depicts in depictsForDeletion) {
+            for (depicts in depictsForDeletion) {
                 deleteDepicts(depicts)
             }
         }
     }
 }
-

@@ -15,14 +15,11 @@ import fr.free.nrw.commons.explore.media.SearchMediaFragmentPresenterImpl
 @Module
 abstract class SearchModule {
     @Binds
-    abstract fun SearchDepictionsFragmentPresenterImpl.bindsSearchDepictionsFragmentPresenter()
-            : SearchDepictionsFragmentPresenter
+    abstract fun SearchDepictionsFragmentPresenterImpl.bindsSearchDepictionsFragmentPresenter(): SearchDepictionsFragmentPresenter
 
     @Binds
-    abstract fun SearchCategoriesFragmentPresenterImpl.bindsSearchCategoriesFragmentPresenter()
-            : SearchCategoriesFragmentPresenter
+    abstract fun SearchCategoriesFragmentPresenterImpl.bindsSearchCategoriesFragmentPresenter(): SearchCategoriesFragmentPresenter
 
     @Binds
-    abstract fun SearchMediaFragmentPresenterImpl.bindsSearchMediaFragmentPresenter()
-            : SearchMediaFragmentPresenter
+    abstract fun SearchMediaFragmentPresenterImpl.bindsSearchMediaFragmentPresenter(): SearchMediaFragmentPresenter
 }

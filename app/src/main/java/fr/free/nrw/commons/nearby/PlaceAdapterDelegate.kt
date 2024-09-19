@@ -1,7 +1,9 @@
 package fr.free.nrw.commons.nearby
 
 import android.view.View
-import android.view.View.*
+import android.view.View.GONE
+import android.view.View.INVISIBLE
+import android.view.View.VISIBLE
 import androidx.activity.result.ActivityResultLauncher
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -11,7 +13,6 @@ import com.hannesdorfmann.adapterdelegates4.dsl.adapterDelegateViewBinding
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao
 import fr.free.nrw.commons.databinding.ItemPlaceBinding
-
 
 fun placeAdapterDelegate(
     bookmarkLocationDao: BookmarkLocationsDao,
@@ -26,7 +27,7 @@ fun placeAdapterDelegate(
     onOverFlowLongPressed: () -> Boolean,
     onDirectionsClicked: (Place) -> Unit,
     onDirectionsLongPressed: () -> Boolean,
-    inAppCameraLocationPermissionLauncher: ActivityResultLauncher<Array<String>>
+    inAppCameraLocationPermissionLauncher: ActivityResultLauncher<Array<String>>,
 ) = adapterDelegateViewBinding<Place, Place, ItemPlaceBinding>({ layoutInflater, parent ->
     ItemPlaceBinding.inflate(layoutInflater, parent, false)
 }) {
@@ -47,17 +48,17 @@ fun placeAdapterDelegate(
         nearbyButtonLayout.cameraButton.setOnLongClickListener { onCameraLongPressed() }
 
         nearbyButtonLayout.galleryButton.setOnClickListener { onGalleryClicked(item) }
-        nearbyButtonLayout.galleryButton.setOnLongClickListener{onGalleryLongPressed()}
+        nearbyButtonLayout.galleryButton.setOnLongClickListener { onGalleryLongPressed() }
         bookmarkButtonImage.setOnClickListener {
             val isBookmarked = bookmarkLocationDao.updateBookmarkLocation(item)
             bookmarkButtonImage.setImageResource(
-                if (isBookmarked) R.drawable.ic_round_star_filled_24px else R.drawable.ic_round_star_border_24px
+                if (isBookmarked) R.drawable.ic_round_star_filled_24px else R.drawable.ic_round_star_border_24px,
             )
             onBookmarkClicked(item, isBookmarked)
         }
-        bookmarkButtonImage.setOnLongClickListener{onBookmarkLongPressed()}
+        bookmarkButtonImage.setOnLongClickListener { onBookmarkLongPressed() }
         nearbyButtonLayout.iconOverflow.setOnClickListener { onOverflowIconClicked(item, it) }
-        nearbyButtonLayout.iconOverflow.setOnLongClickListener{onOverFlowLongPressed()}
+        nearbyButtonLayout.iconOverflow.setOnLongClickListener { onOverFlowLongPressed() }
         nearbyButtonLayout.directionsButton.setOnClickListener { onDirectionsClicked(item) }
         bind {
             tvName.text = item.name
@@ -68,23 +69,28 @@ fun placeAdapterDelegate(
             } else {
                 // Remove the label and display only texts inside pharentheses (description) since too long
                 tvDesc.text =
-                    descriptionText.substringAfter(tvName.text.toString() + " (")
-                        .substringBeforeLast(")");
+                    descriptionText
+                        .substringAfter(tvName.text.toString() + " (")
+                        .substringBeforeLast(")")
             }
             distance.text = item.distance
             icon.setImageResource(item.label.icon)
             nearbyButtonLayout.iconOverflow.visibility =
-                if (item.hasCommonsLink() || item.hasWikidataLink()) VISIBLE
-                else GONE
+                if (item.hasCommonsLink() || item.hasWikidataLink()) {
+                    VISIBLE
+                } else {
+                    GONE
+                }
 
             bookmarkButtonImage.setImageResource(
-                if (bookmarkLocationDao.findBookmarkLocation(item))
+                if (bookmarkLocationDao.findBookmarkLocation(item)) {
                     R.drawable.ic_round_star_filled_24px
-                else
+                } else {
                     R.drawable.ic_round_star_border_24px
+                },
             )
         }
-        nearbyButtonLayout.directionsButton.setOnLongClickListener{onDirectionsLongPressed()}
+        nearbyButtonLayout.directionsButton.setOnLongClickListener { onDirectionsLongPressed() }
     }
 }
 
@@ -101,7 +107,7 @@ private fun AdapterDelegateViewBindingViewHolder<Place, ItemPlaceBinding>.showOr
                 (recyclerView.layoutManager as LinearLayoutManager?)
                     ?.scrollToPositionWithOffset(
                         lastPosition,
-                        nearbyButtonLayout.buttonLayout.height
+                        nearbyButtonLayout.buttonLayout.height,
                     )
             }
         }

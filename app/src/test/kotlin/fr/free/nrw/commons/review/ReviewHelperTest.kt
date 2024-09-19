@@ -13,17 +13,18 @@ import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
-import org.mockito.Mockito.*
+import org.mockito.Mockito.any
+import org.mockito.Mockito.mock
+import org.mockito.Mockito.times
+import org.mockito.Mockito.verify
 
 /**
  * Test class for ReviewHelper
  */
 class ReviewHelperTest {
-
     private val reviewInterface = mock<ReviewInterface>()
     private val mediaClient = mock<MediaClient>()
     private val reviewHelper = ReviewHelper(mediaClient, reviewInterface)
-
 
     private val mwQueryResult = mock<MwQueryResult>()
     private val mockResponse = mock<MwQueryResponse>()
@@ -132,16 +133,21 @@ class ReviewHelperTest {
         assertTrue(result)
     }
 
-    private fun setupMedia(file: String, vararg revision: MwQueryPage.Revision): MwQueryPage = mock<MwQueryPage>().apply {
-        whenever(title()).thenReturn(file)
-        if (revision.isNotEmpty()) {
-            whenever(revisions()).thenReturn(*revision.toMutableList())
-        }
+    private fun setupMedia(
+        file: String,
+        vararg revision: MwQueryPage.Revision,
+    ): MwQueryPage =
+        mock<MwQueryPage>().apply {
+            whenever(title()).thenReturn(file)
+            if (revision.isNotEmpty()) {
+                whenever(revisions()).thenReturn(*revision.toMutableList())
+            }
 
-        val media = mock<Media>().apply {
-            whenever(filename).thenReturn(file)
-            whenever(pageId).thenReturn(file.split(".").first())
+            val media =
+                mock<Media>().apply {
+                    whenever(filename).thenReturn(file)
+                    whenever(pageId).thenReturn(file.split(".").first())
+                }
+            whenever(mediaClient.getMedia(file)).thenReturn(Single.just(media))
         }
-        whenever(mediaClient.getMedia(file)).thenReturn(Single.just(media))
-    }
 }

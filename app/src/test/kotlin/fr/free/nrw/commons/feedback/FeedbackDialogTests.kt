@@ -7,9 +7,9 @@ import androidx.test.core.app.ApplicationProvider
 import com.nhaarman.mockitokotlin2.doReturn
 import fr.free.nrw.commons.OkHttpConnectionFactory
 import fr.free.nrw.commons.TestCommonsApplication
-import fr.free.nrw.commons.createTestClient
 import fr.free.nrw.commons.TestUtility.setFinalStatic
 import fr.free.nrw.commons.contributions.MainActivity
+import fr.free.nrw.commons.createTestClient
 import fr.free.nrw.commons.databinding.DialogFeedbackBinding
 import fr.free.nrw.commons.ui.PasteSensitiveTextInputEditText
 import org.junit.Assert
@@ -66,8 +66,9 @@ class FeedbackDialogTests {
         val editable = mock(Editable::class.java)
         val ed = mock(PasteSensitiveTextInputEditText::class.java)
         setFinalStatic(
-                DialogFeedbackBinding::class.java.getDeclaredField("feedbackItemEditText"),
-                ed)
+            DialogFeedbackBinding::class.java.getDeclaredField("feedbackItemEditText"),
+            ed,
+        )
         `when`(ed?.text).thenReturn(editable)
         doReturn(editable).`when`(ed)?.text
         doReturn("").`when`(editable).toString()
@@ -80,13 +81,13 @@ class FeedbackDialogTests {
         val editable: Editable = mock(Editable::class.java)
         val ed = mock(PasteSensitiveTextInputEditText::class.java)
         setFinalStatic(
-                DialogFeedbackBinding::class.java.getDeclaredField("feedbackItemEditText"),
-                ed)
+            DialogFeedbackBinding::class.java.getDeclaredField("feedbackItemEditText"),
+            ed,
+        )
         `when`(ed?.text).thenReturn(editable)
         `when`(editable.toString()).thenReturn("1234")
 
         Assert.assertEquals(ed.text.toString(), "1234")
         dialog.submitFeedback()
     }
-
 }

@@ -8,6 +8,7 @@ import androidx.core.os.ConfigurationCompat
 import androidx.test.core.app.ApplicationProvider
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestCommonsApplication
+import fr.free.nrw.commons.language.AppLanguageLookUpTable
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
@@ -19,18 +20,18 @@ import org.mockito.MockitoAnnotations
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
-import fr.free.nrw.commons.language.AppLanguageLookUpTable
-import java.util.*
+import java.util.Collections
+import java.util.Locale
 
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
 @LooperMode(LooperMode.Mode.PAUSED)
 class LanguagesAdapterTest {
-
     private lateinit var context: Context
 
     @Mock
     private lateinit var selectedLanguages: HashMap<Integer, String>
+
     @Mock
     private lateinit var parent: ViewGroup
 
@@ -48,8 +49,10 @@ class LanguagesAdapterTest {
         MockitoAnnotations.openMocks(this)
         context = ApplicationProvider.getApplicationContext()
         language = AppLanguageLookUpTable(context)
-        convertView = LayoutInflater.from(context)
-            .inflate(R.layout.row_item_languages_spinner, null) as View
+        convertView =
+            LayoutInflater
+                .from(context)
+                .inflate(R.layout.row_item_languages_spinner, null) as View
 
         languageNamesList = language.localizedNames
         languageCodesList = language.codes
@@ -79,10 +82,14 @@ class LanguagesAdapterTest {
     @Test
     fun testGetIndexOfUserDefaultLocale() {
         languagesAdapter = LanguagesAdapter(context, selectedLanguages)
-        Assertions.assertEquals(ConfigurationCompat.getLocales(context.resources.configuration)[0]?.let {
-            languageCodesList.indexOf(
-                it.language)
-        }, languagesAdapter.getIndexOfUserDefaultLocale(context))
+        Assertions.assertEquals(
+            ConfigurationCompat.getLocales(context.resources.configuration)[0]?.let {
+                languageCodesList.indexOf(
+                    it.language,
+                )
+            },
+            languagesAdapter.getIndexOfUserDefaultLocale(context),
+        )
     }
 
     @Test
@@ -108,21 +115,27 @@ class LanguagesAdapterTest {
         val constraint = "spa"
         languagesAdapter.filter.filter(constraint)
         val length: Int = languageNamesList.size
-        val defaultlanguagecode = ConfigurationCompat.getLocales(context.resources.configuration)[0]?.let {
-            languageCodesList.indexOf(
-                it.language)
-        }
+        val defaultlanguagecode =
+            ConfigurationCompat.getLocales(context.resources.configuration)[0]?.let {
+                languageCodesList.indexOf(
+                    it.language,
+                )
+            }
         var i = 0
         var s = 0
         while (i < length) {
             val key: String = language.codes[i]
             val value: String = language.localizedNames[i]
-            if(value.contains(constraint, true) || Locale(key).getDisplayName(
-                    Locale(language.codes[defaultlanguagecode!!])).contains(constraint, true))
+            if (value.contains(constraint, true) ||
+                Locale(key)
+                    .getDisplayName(
+                        Locale(language.codes[defaultlanguagecode!!]),
+                    ).contains(constraint, true)
+            ) {
                 s++
+            }
             i++
         }
         Assertions.assertEquals(s, languagesAdapter.count)
     }
-
 }

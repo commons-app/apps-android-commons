@@ -9,13 +9,12 @@ import androidx.fragment.app.Fragment
 import androidx.test.core.app.ApplicationProvider
 import androidx.work.Configuration
 import androidx.work.testing.WorkManagerTestInitHelper
-import fr.free.nrw.commons.CommonsApplication
 import fr.free.nrw.commons.OkHttpConnectionFactory
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestCommonsApplication
-import fr.free.nrw.commons.createTestClient
 import fr.free.nrw.commons.bookmarks.BookmarkFragment
 import fr.free.nrw.commons.contributions.MainActivity.ActiveFragment
+import fr.free.nrw.commons.createTestClient
 import fr.free.nrw.commons.explore.ExploreFragment
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.navtab.NavTabLayout
@@ -40,12 +39,10 @@ import org.robolectric.fakes.RoboMenuItem
 import java.lang.reflect.Field
 import java.lang.reflect.Method
 
-
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
 @LooperMode(LooperMode.Mode.PAUSED)
 class MainActivityUnitTests {
-
     private lateinit var activity: MainActivity
     private lateinit var context: Context
     private lateinit var menuItem: RoboMenuItem
@@ -198,9 +195,10 @@ class MainActivityUnitTests {
     @Test
     @Throws(Exception::class)
     fun testSetUpPager() {
-        val method: Method = MainActivity::class.java.getDeclaredMethod(
-            "setUpPager"
-        )
+        val method: Method =
+            MainActivity::class.java.getDeclaredMethod(
+                "setUpPager",
+            )
         method.isAccessible = true
         method.invoke(activity)
     }
@@ -208,9 +206,10 @@ class MainActivityUnitTests {
     @Test
     @Throws(Exception::class)
     fun testSetUpLoggedOutPager() {
-        val method: Method = MainActivity::class.java.getDeclaredMethod(
-            "setUpLoggedOutPager"
-        )
+        val method: Method =
+            MainActivity::class.java.getDeclaredMethod(
+                "setUpLoggedOutPager",
+            )
         method.isAccessible = true
         method.invoke(activity)
     }
@@ -218,11 +217,12 @@ class MainActivityUnitTests {
     @Test
     @Throws(Exception::class)
     fun testLoadFragmentCaseContributionsFragment() {
-        val method: Method = MainActivity::class.java.getDeclaredMethod(
-            "loadFragment",
-            Fragment::class.java,
-            Boolean::class.java
-        )
+        val method: Method =
+            MainActivity::class.java.getDeclaredMethod(
+                "loadFragment",
+                Fragment::class.java,
+                Boolean::class.java,
+            )
         method.isAccessible = true
         method.invoke(activity, contributionsFragment, false)
     }
@@ -232,14 +232,15 @@ class MainActivityUnitTests {
     fun testLoadFragmentCaseContributionsFragmentCaseTrue() {
         activeFragment = ActiveFragment.CONTRIBUTIONS
         activity.activeFragment = activeFragment
-        val method: Method = MainActivity::class.java.getDeclaredMethod(
-            "loadFragment",
-            Fragment::class.java,
-            Boolean::class.java
-        )
+        val method: Method =
+            MainActivity::class.java.getDeclaredMethod(
+                "loadFragment",
+                Fragment::class.java,
+                Boolean::class.java,
+            )
         method.isAccessible = true
         method.invoke(activity, contributionsFragment, false)
-        verify(contributionsFragment).scrollToTop();
+        verify(contributionsFragment).scrollToTop()
     }
 
     @Test
@@ -247,11 +248,12 @@ class MainActivityUnitTests {
     fun testLoadFragmentCaseNearbyParentFragmentCaseTrue() {
         activeFragment = ActiveFragment.NEARBY
         activity.activeFragment = activeFragment
-        val method: Method = MainActivity::class.java.getDeclaredMethod(
-            "loadFragment",
-            Fragment::class.java,
-            Boolean::class.java
-        )
+        val method: Method =
+            MainActivity::class.java.getDeclaredMethod(
+                "loadFragment",
+                Fragment::class.java,
+                Boolean::class.java,
+            )
         method.isAccessible = true
         method.invoke(activity, nearbyParentFragment, false)
     }
@@ -259,11 +261,12 @@ class MainActivityUnitTests {
     @Test
     @Throws(Exception::class)
     fun testLoadFragmentCaseNearbyParentFragment() {
-        val method: Method = MainActivity::class.java.getDeclaredMethod(
-            "loadFragment",
-            Fragment::class.java,
-            Boolean::class.java
-        )
+        val method: Method =
+            MainActivity::class.java.getDeclaredMethod(
+                "loadFragment",
+                Fragment::class.java,
+                Boolean::class.java,
+            )
         method.isAccessible = true
         method.invoke(activity, nearbyParentFragment, false)
     }
@@ -273,11 +276,12 @@ class MainActivityUnitTests {
     fun testLoadFragmentCaseExploreFragmentCaseTrue() {
         activeFragment = ActiveFragment.EXPLORE
         activity.activeFragment = activeFragment
-        val method: Method = MainActivity::class.java.getDeclaredMethod(
-            "loadFragment",
-            Fragment::class.java,
-            Boolean::class.java
-        )
+        val method: Method =
+            MainActivity::class.java.getDeclaredMethod(
+                "loadFragment",
+                Fragment::class.java,
+                Boolean::class.java,
+            )
         method.isAccessible = true
         method.invoke(activity, exploreFragment, false)
     }
@@ -285,11 +289,12 @@ class MainActivityUnitTests {
     @Test
     @Throws(Exception::class)
     fun testLoadFragmentCaseExploreFragment() {
-        val method: Method = MainActivity::class.java.getDeclaredMethod(
-            "loadFragment",
-            Fragment::class.java,
-            Boolean::class.java
-        )
+        val method: Method =
+            MainActivity::class.java.getDeclaredMethod(
+                "loadFragment",
+                Fragment::class.java,
+                Boolean::class.java,
+            )
         method.isAccessible = true
         method.invoke(activity, exploreFragment, false)
     }
@@ -299,11 +304,12 @@ class MainActivityUnitTests {
     fun testLoadFragmentCaseBookmarkFragmentCaseTrue() {
         activeFragment = ActiveFragment.BOOKMARK
         activity.activeFragment = activeFragment
-        val method: Method = MainActivity::class.java.getDeclaredMethod(
-            "loadFragment",
-            Fragment::class.java,
-            Boolean::class.java
-        )
+        val method: Method =
+            MainActivity::class.java.getDeclaredMethod(
+                "loadFragment",
+                Fragment::class.java,
+                Boolean::class.java,
+            )
         method.isAccessible = true
         method.invoke(activity, bookmarkFrament, false)
     }
@@ -311,11 +317,12 @@ class MainActivityUnitTests {
     @Test
     @Throws(Exception::class)
     fun testLoadFragmentCaseBookmarkFragment() {
-        val method: Method = MainActivity::class.java.getDeclaredMethod(
-            "loadFragment",
-            Fragment::class.java,
-            Boolean::class.java
-        )
+        val method: Method =
+            MainActivity::class.java.getDeclaredMethod(
+                "loadFragment",
+                Fragment::class.java,
+                Boolean::class.java,
+            )
         method.isAccessible = true
         method.invoke(activity, bookmarkFrament, false)
     }
@@ -323,11 +330,12 @@ class MainActivityUnitTests {
     @Test
     @Throws(Exception::class)
     fun testLoadFragmentCaseNull() {
-        val method: Method = MainActivity::class.java.getDeclaredMethod(
-            "loadFragment",
-            Fragment::class.java,
-            Boolean::class.java
-        )
+        val method: Method =
+            MainActivity::class.java.getDeclaredMethod(
+                "loadFragment",
+                Fragment::class.java,
+                Boolean::class.java,
+            )
         method.isAccessible = true
         method.invoke(activity, null, true)
     }
@@ -335,12 +343,13 @@ class MainActivityUnitTests {
     @Test
     @Throws(Exception::class)
     fun testOnActivityResult() {
-        val method: Method = MainActivity::class.java.getDeclaredMethod(
-            "onActivityResult",
-            Int::class.java,
-            Int::class.java,
-            Intent::class.java
-        )
+        val method: Method =
+            MainActivity::class.java.getDeclaredMethod(
+                "onActivityResult",
+                Int::class.java,
+                Int::class.java,
+                Intent::class.java,
+            )
         method.isAccessible = true
         method.invoke(activity, 0, 0, null)
     }
@@ -348,9 +357,10 @@ class MainActivityUnitTests {
     @Test
     @Throws(Exception::class)
     fun testOnResume() {
-        val method: Method = MainActivity::class.java.getDeclaredMethod(
-            "onResume"
-        )
+        val method: Method =
+            MainActivity::class.java.getDeclaredMethod(
+                "onResume",
+            )
         method.isAccessible = true
         method.invoke(activity)
     }
@@ -358,9 +368,10 @@ class MainActivityUnitTests {
     @Test
     @Throws(Exception::class)
     fun testOnDestroy() {
-        val method: Method = MainActivity::class.java.getDeclaredMethod(
-            "onDestroy"
-        )
+        val method: Method =
+            MainActivity::class.java.getDeclaredMethod(
+                "onDestroy",
+            )
         method.isAccessible = true
         method.invoke(activity)
     }
@@ -368,10 +379,11 @@ class MainActivityUnitTests {
     @Test
     @Throws(Exception::class)
     fun testOnPostCreate() {
-        val method: Method = MainActivity::class.java.getDeclaredMethod(
-            "onPostCreate",
-            Bundle::class.java
-        )
+        val method: Method =
+            MainActivity::class.java.getDeclaredMethod(
+                "onPostCreate",
+                Bundle::class.java,
+            )
         method.isAccessible = true
         method.invoke(activity, null)
     }
@@ -380,10 +392,11 @@ class MainActivityUnitTests {
     @Throws(Exception::class)
     fun testOnSaveInstanceState() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
-        val method: Method = MainActivity::class.java.getDeclaredMethod(
-            "onSaveInstanceState",
-            Bundle::class.java
-        )
+        val method: Method =
+            MainActivity::class.java.getDeclaredMethod(
+                "onSaveInstanceState",
+                Bundle::class.java,
+            )
         method.isAccessible = true
         method.invoke(activity, bundle)
     }
@@ -393,10 +406,11 @@ class MainActivityUnitTests {
     fun testOnRestoreInstanceStateCaseContributions() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
         `when`(bundle.getString("activeFragment")).thenReturn(ActiveFragment.CONTRIBUTIONS.name)
-        val method: Method = MainActivity::class.java.getDeclaredMethod(
-            "onRestoreInstanceState",
-            Bundle::class.java
-        )
+        val method: Method =
+            MainActivity::class.java.getDeclaredMethod(
+                "onRestoreInstanceState",
+                Bundle::class.java,
+            )
         method.isAccessible = true
         method.invoke(activity, bundle)
     }
@@ -406,10 +420,11 @@ class MainActivityUnitTests {
     fun testOnRestoreInstanceStateCaseNearby() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
         `when`(bundle.getString("activeFragment")).thenReturn(ActiveFragment.NEARBY.name)
-        val method: Method = MainActivity::class.java.getDeclaredMethod(
-            "onRestoreInstanceState",
-            Bundle::class.java
-        )
+        val method: Method =
+            MainActivity::class.java.getDeclaredMethod(
+                "onRestoreInstanceState",
+                Bundle::class.java,
+            )
         method.isAccessible = true
         method.invoke(activity, bundle)
     }
@@ -419,10 +434,11 @@ class MainActivityUnitTests {
     fun testOnRestoreInstanceStateCaseExplore() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
         `when`(bundle.getString("activeFragment")).thenReturn(ActiveFragment.EXPLORE.name)
-        val method: Method = MainActivity::class.java.getDeclaredMethod(
-            "onRestoreInstanceState",
-            Bundle::class.java
-        )
+        val method: Method =
+            MainActivity::class.java.getDeclaredMethod(
+                "onRestoreInstanceState",
+                Bundle::class.java,
+            )
         method.isAccessible = true
         method.invoke(activity, bundle)
     }
@@ -432,34 +448,34 @@ class MainActivityUnitTests {
     fun testOnRestoreInstanceStateCaseBookmark() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
         `when`(bundle.getString("activeFragment")).thenReturn(ActiveFragment.BOOKMARK.name)
-        val method: Method = MainActivity::class.java.getDeclaredMethod(
-            "onRestoreInstanceState",
-            Bundle::class.java
-        )
+        val method: Method =
+            MainActivity::class.java.getDeclaredMethod(
+                "onRestoreInstanceState",
+                Bundle::class.java,
+            )
         method.isAccessible = true
         method.invoke(activity, bundle)
     }
 
     @Test
     @Throws(Exception::class)
-    fun testOnSetUpPagerNearBy(){
+    fun testOnSetUpPagerNearBy() {
         val item = Mockito.mock(MenuItem::class.java)
         `when`(item.title).thenReturn(activity.getString(R.string.nearby_fragment))
         activity.navListener.onNavigationItemSelected(item)
         verify(item, Mockito.times(3)).title
-        verify(applicationKvStore,Mockito.times(1))
-            .putBoolean("last_opened_nearby",true)
+        verify(applicationKvStore, Mockito.times(1))
+            .putBoolean("last_opened_nearby", true)
     }
 
     @Test
     @Throws(Exception::class)
-    fun testOnSetUpPagerOtherThanNearBy(){
+    fun testOnSetUpPagerOtherThanNearBy() {
         val item = Mockito.mock(MenuItem::class.java)
         `when`(item.title).thenReturn(activity.getString(R.string.bookmarks))
         activity.navListener.onNavigationItemSelected(item)
         verify(item, Mockito.times(3)).title
-        verify(applicationKvStore,Mockito.times(1))
-            .putBoolean("last_opened_nearby",false)
+        verify(applicationKvStore, Mockito.times(1))
+            .putBoolean("last_opened_nearby", false)
     }
-
 }

@@ -7,7 +7,6 @@ import org.mockito.MockitoAnnotations
 import java.lang.reflect.Field
 
 class WikiAccountAuthenticatorServiceUnitTest {
-
     private lateinit var service: WikiAccountAuthenticatorService
 
     @Before
@@ -30,5 +29,4 @@ class WikiAccountAuthenticatorServiceUnitTest {
         field.set(service, null)
         Assert.assertEquals(service.onBind(null), null)
     }
-
 }

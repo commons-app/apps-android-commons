@@ -14,6 +14,7 @@ import org.mockito.MockitoAnnotations
 class PageableChildDepictionsDataSourceTest {
     @Mock
     lateinit var okHttpJsonApiClient: OkHttpJsonApiClient
+
     @Mock
     lateinit var liveDataConverter: LiveDataConverter
 

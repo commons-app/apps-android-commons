@@ -7,14 +7,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.loader.content.CursorLoader
 import androidx.loader.content.Loader
 import com.nhaarman.mockitokotlin2.verify
-import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.repository.UploadRepository
-import io.reactivex.Completable
 import io.reactivex.schedulers.TestScheduler
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import org.mockito.ArgumentMatchers
 import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.MockitoAnnotations
@@ -72,6 +69,4 @@ class ContributionsPresenterTest {
         contributionsPresenter.getContributionsWithTitle("ashish")
         verify(repository).getContributionWithFileName("ashish")
     }
-
-
 }

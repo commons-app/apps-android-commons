@@ -18,7 +18,6 @@ import retrofit2.Call
 import retrofit2.Response
 
 class LocationPickerViewModelUnitTests {
-
     private lateinit var viewModel: LocationPickerViewModel
 
     @Mock
@@ -68,5 +67,4 @@ class LocationPickerViewModelUnitTests {
     fun testGetResult() {
         viewModel.result
     }
-
 }

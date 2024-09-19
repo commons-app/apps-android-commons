@@ -1,6 +1,5 @@
 package fr.free.nrw.commons.utils
 
-import fr.free.nrw.commons.location.LatLng
 import org.junit.Test
 import org.junit.jupiter.api.Assertions.assertEquals
 
@@ -8,7 +7,6 @@ import org.junit.jupiter.api.Assertions.assertEquals
  * Test class for location utils
  */
 class LocationUtilsTest {
-
     @Test
     fun testCalculateDistance() {
         val lat1 = 37.7749
@@ -22,5 +20,4 @@ class LocationUtilsTest {
 
         assertEquals(expectedDistance, actualDistance, 0.2) // Tolerance = 0.2 km
     }
-
 }

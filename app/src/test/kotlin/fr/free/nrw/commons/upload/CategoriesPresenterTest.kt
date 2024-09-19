@@ -2,7 +2,11 @@ package fr.free.nrw.commons.upload
 
 import androidx.lifecycle.MutableLiveData
 import categoryItem
-import com.nhaarman.mockitokotlin2.*
+import com.nhaarman.mockitokotlin2.any
+import com.nhaarman.mockitokotlin2.mock
+import com.nhaarman.mockitokotlin2.verify
+import com.nhaarman.mockitokotlin2.verifyNoMoreInteractions
+import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.category.CategoryItem
 import fr.free.nrw.commons.repository.UploadRepository
@@ -16,7 +20,6 @@ import org.junit.Test
 import org.mockito.Mock
 import org.mockito.MockitoAnnotations
 import java.lang.reflect.Method
-
 
 /**
  * The class contains unit test cases for CategoriesPresenter
@@ -41,7 +44,6 @@ class CategoriesPresenterTest {
         MockitoAnnotations.openMocks(this)
         testScheduler = TestScheduler()
         categoriesPresenter = CategoriesPresenter(repository, testScheduler, testScheduler)
-
     }
 
     @Test
@@ -58,12 +60,14 @@ class CategoriesPresenterTest {
             .thenReturn(Observable.just(mutableListOf(categoryItem())))
         whenever(repository.searchAll("mock", emptyList(), repository.selectedDepictions))
             .thenReturn(Observable.just(mutableListOf(categoryItem())))
-        val method: Method = CategoriesPresenter::class.java.getDeclaredMethod(
-            "searchResults",
-            String::class.java
-        )
+        val method: Method =
+            CategoriesPresenter::class.java.getDeclaredMethod(
+                "searchResults",
+                String::class.java,
+            )
         method.isAccessible = true
-        method.invoke(categoriesPresenter, "mock")    }
+        method.invoke(categoriesPresenter, "mock")
+    }
 
     /**
      * unit test case for method CategoriesPresenter.searchForCategories
@@ -73,8 +77,11 @@ class CategoriesPresenterTest {
         categoriesPresenter.onAttachView(view)
         val liveData = MutableLiveData<List<CategoryItem>>()
         categoriesPresenter.setCategoryList(liveData)
-        categoriesPresenter.setCategoryListValue(listOf(
-            categoryItem("selected", "", "", true)))
+        categoriesPresenter.setCategoryListValue(
+            listOf(
+                categoryItem("selected", "", "", true),
+            ),
+        )
         val nonEmptyCaptionUploadItem = mock<UploadItem>()
         whenever(nonEmptyCaptionUploadItem.uploadMediaDetails)
             .thenReturn(listOf(UploadMediaDetail(captionText = "nonEmpty")))
@@ -84,22 +91,25 @@ class CategoriesPresenterTest {
         whenever(repository.uploads).thenReturn(
             listOf(
                 nonEmptyCaptionUploadItem,
-                emptyCaptionUploadItem
-            )
+                emptyCaptionUploadItem,
+            ),
         )
         whenever(repository.searchAll(any(), any(), any()))
             .thenReturn(
                 Observable.just(
                     listOf(
                         categoryItem("selected"),
-                        categoryItem("doesContainYear")
-                    )
-                )
+                        categoryItem("doesContainYear"),
+                    ),
+                ),
             )
         whenever(repository.isSpammyCategory("selected")).thenReturn(false)
         whenever(repository.isSpammyCategory("doesContainYear")).thenReturn(true)
-        whenever(repository.selectedCategories).thenReturn(listOf(
-            categoryItem("selected", "", "",true)))
+        whenever(repository.selectedCategories).thenReturn(
+            listOf(
+                categoryItem("selected", "", "", true),
+            ),
+        )
         categoriesPresenter.searchForCategories("test")
         testScheduler.triggerActions()
         verify(view).showProgress(true)
@@ -123,10 +133,11 @@ class CategoriesPresenterTest {
         whenever(repository.selectedCategories).thenReturn(listOf())
         categoriesPresenter.searchForCategories(query)
         testScheduler.triggerActions()
-        val method: Method = CategoriesPresenter::class.java.getDeclaredMethod(
-            "searchResults",
-            String::class.java
-        )
+        val method: Method =
+            CategoriesPresenter::class.java.getDeclaredMethod(
+                "searchResults",
+                String::class.java,
+            )
         method.isAccessible = true
         method.invoke(categoriesPresenter, query)
 

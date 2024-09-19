@@ -9,19 +9,14 @@ import fr.free.nrw.commons.explore.categories.parent.ParentCategoriesPresenterIm
 import fr.free.nrw.commons.explore.categories.sub.SubCategoriesPresenter
 import fr.free.nrw.commons.explore.categories.sub.SubCategoriesPresenterImpl
 
-
 @Module
 abstract class CategoriesModule {
+    @Binds
+    abstract fun CategoryMediaPresenterImpl.bindsCategoryMediaPresenter(): CategoryMediaPresenter
 
     @Binds
-    abstract fun CategoryMediaPresenterImpl.bindsCategoryMediaPresenter()
-            : CategoryMediaPresenter
+    abstract fun SubCategoriesPresenterImpl.bindsSubCategoriesPresenter(): SubCategoriesPresenter
 
     @Binds
-    abstract fun SubCategoriesPresenterImpl.bindsSubCategoriesPresenter()
-            : SubCategoriesPresenter
-
-    @Binds
-    abstract fun ParentCategoriesPresenterImpl.bindsParentCategoriesPresenter()
-            : ParentCategoriesPresenter
+    abstract fun ParentCategoriesPresenterImpl.bindsParentCategoriesPresenter(): ParentCategoriesPresenter
 }
