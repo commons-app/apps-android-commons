@@ -2,6 +2,7 @@
 <!-- Authors:
 * Askar Nazyrov
 * Bosogo
+* Kotormochu
 * Maksat
 * NR Deblocked
 -->
@@ -9,6 +10,9 @@
   <string name="commons_facebook">Викиказынанын Facebook баракчасы</string>
   <string name="commons_logo">Викиказынанын логотиби</string>
   <string name="commons_website">Викиказынанын сайты</string>
+  <string name="add_another_description">Башка сүрөттөмө кошуу</string>
+  <string name="add_new_contribution">Жаңы салым кошуу</string>
+  <string name="row_item_language_description">Тилдин мүнөздөмөлөрү</string>
   <string name="show_captions_description">Сыпаттама</string>
   <string name="nearby_row_image">Сүрөт</string>
   <string name="nearby_all">Баары</string>
@@ -33,6 +37,7 @@
   <string name="preference_category_privacy">Купуялык</string>
   <string name="app_name">Викиказына</string>
   <string name="menu_settings">Параметрлер</string>
+  <string name="intent_share_upload_label">Викиказынага жүктөө</string>
   <string name="username">Колдонуучунун аты</string>
   <string name="password">Сырсөз</string>
   <string name="login">Кирүү</string>
@@ -58,6 +63,7 @@
   <string name="contribution_state_starting">Жүктөлүүдө</string>
   <string name="menu_from_gallery">Галереядан алынган</string>
   <string name="menu_from_camera">Сүрөткө тартуу</string>
+  <string name="menu_nearby">Жакынкы</string>
   <string name="provider_contributions">Жүктөөлөрүм</string>
   <string name="menu_share">Бөлүшүү</string>
   <string name="share_title_hint" fuzzy="true">Аталышы</string>
@@ -73,6 +79,8 @@
   <string name="categories_search_text_hint">Түрмөктөрдү издөө</string>
   <string name="menu_save_categories">Сактоо</string>
   <string name="refresh_button">Жаңылоо</string>
+  <string name="display_list_button">Тизме</string>
+  <string name="contributions_subtitle_zero">(Азырынча жүктөөлөр жок)</string>
   <string name="categories_not_found">%1$s түрмөктөрү табылган жок</string>
   <string name="categories_skip_explanation" fuzzy="true">Уикиказынада Сиздин сүрөттөрдү жеңил табуу үчүн түрмөктөрдү кошуңуз.\n\nТүрмөктөрдү жазууну баштаңыз.\nБул кадамды аттап өтүү үчүн, бул билдирүүнү (же кийинкини) басыңыз.</string>
   <string name="categories_activity_title">Категориялар</string>
