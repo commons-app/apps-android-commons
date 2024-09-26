@@ -362,15 +362,13 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
     @Override
     public void onResume() {
         super.onResume();
-        if (getParentFragment() != null && getParentFragment().getParentFragment() != null) {
-            //Added a check because, not necessarily, the parent fragment will have a parent fragment, say
-            // in the case when MediaDetailPagerFragment is directly started by the CategoryImagesActivity
-            if (getParentFragment() instanceof ContributionsFragment) {
-                ((ContributionsFragment) (getParentFragment()
-                    .getParentFragment())).binding.cardViewNearby
-                    .setVisibility(View.GONE);
-            }
+
+        //Hide the Nearby card when looking at media details
+        ContributionsFragment cf = this.getContributionsFragmentParent();
+        if(cf != null && cf.binding != null){
+            cf.binding.cardViewNearby.setVisibility(View.GONE);
         }
+
         // detail provider is null when fragment is shown in review activity
         if (detailProvider != null) {
             media = detailProvider.getMediaAtPosition(index);
@@ -448,7 +446,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
     /**
      * Retrieves the ContributionsFragment that is potentially the parent, grandparent, etc
      * fragment of this fragment.
-     * 
+     *
      * @return The ContributionsFragment instance. If the ContributionsFragment instance could not
      * be found, null is returned.
      */
