@@ -445,6 +445,27 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
         }
     }
 
+    /**
+     * Retrieves the ContributionsFragment that is potentially the parent, grandparent, etc
+     * fragment of this fragment.
+     * 
+     * @return The ContributionsFragment instance. If the ContributionsFragment instance could not
+     * be found, null is returned.
+     */
+    private ContributionsFragment getContributionsFragmentParent(){
+        Fragment f = this;
+
+        while(f != null && !(f instanceof ContributionsFragment)){
+            f = f.getParentFragment();
+        }
+
+        if(f != null){
+            return (ContributionsFragment)f;
+        } else {
+            return null;
+        }
+    }
+
     private void displayMediaDetails() {
         setTextFields(media);
         compositeDisposable.addAll(
