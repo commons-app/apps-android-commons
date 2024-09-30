@@ -83,6 +83,7 @@
   <string name="app_name">Commons</string>
   <string name="menu_settings">Nastavenia</string>
   <string name="intent_share_upload_label">Nahrať na Commons</string>
+  <string name="upload_in_progress">Nahrávanie prebieha</string>
   <string name="username">Používateľské meno</string>
   <string name="password">Heslo</string>
   <string name="login_credential">Prihláste sa do svojho účtu Commons Beta</string>
@@ -93,10 +94,12 @@
   <string name="logging_in_message">Čakajte prosím…</string>
   <string name="updating_caption_title">Aktualizovanie tituliek a popisov</string>
   <string name="updating_caption_message">Čakajte prosím…</string>
-  <string name="login_success" fuzzy="true">Prihlásenie úspešné</string>
-  <string name="login_failed" fuzzy="true">Prihlásenie zlyhalo!</string>
+  <string name="login_success">Prihlásenie úspešné!</string>
+  <string name="login_failed">Prihlásenie zlyhalo!</string>
   <string name="upload_failed">Súbor nebol nájdený. Skúste, prosím, iný súbor.</string>
-  <string name="authentication_failed" fuzzy="true">Overenie zlyhalo, prosím, prihláste sa znovu</string>
+  <string name="retry_limit_reached">Maximálny limit opätovného skúšania dosiahnutý! Prosím, zrušte nahrávanie a skúste znova</string>
+  <string name="unrestricted_battery_mode">Vypnúť optimalizáciu batérie?</string>
+  <string name="authentication_failed">Overenie zlyhalo. Prosím, prihláste sa znovu.</string>
   <string name="uploading_started">Nahrávanie začalo!</string>
   <string name="uploading_queued">Nahrávanie v poradí (je zapnuté limitované pripojenie)</string>
   <string name="upload_completed_notification_title">%1$s je nahraný!</string>
@@ -123,11 +126,11 @@
   <string name="add_caption_toast">Prosím, pridajte popisok pre tento súbor</string>
   <string name="share_description_hint">Opis</string>
   <string name="share_caption_hint">Popis</string>
-  <string name="login_failed_network" fuzzy="true">prihlásenie zlyhalo - zlyhanie siete</string>
+  <string name="login_failed_network">Prihlásenie zlyhalo – zlyhanie siete</string>
   <string name="login_failed_throttled">Príliš veľa neúspešných pokusov. Skúste to znova o niekoľko minút.</string>
   <string name="login_failed_blocked">Ospravedlňujeme sa, tento užívateľ bol na Commons zablokovaný</string>
   <string name="login_failed_2fa_needed">Musíte vložiť kód pre dvojfaktorovú autentifikáciu.</string>
-  <string name="login_failed_generic" fuzzy="true">Prihlásenie zlyhalo</string>
+  <string name="login_failed_generic">Prihlásenie zlyhalo</string>
   <string name="share_upload_button">Nahrať</string>
   <string name="multiple_share_base_title">Názov tejto sady</string>
   <string name="provider_modifications">Úpravy</string>
@@ -210,8 +213,11 @@
   <string name="read_storage_permission_rationale">Požadované oprávnenie: Čítanie externého úložiska. Bez neho nemôže aplikácia čítať vašu galériu.</string>
   <string name="write_storage_permission_rationale">Požadované oprávnenie: Zapisovanie do externého úložiska. Bez neho nemôže aplikácia používať váš fotoaparát/galériu.</string>
   <string name="location_permission_title">Požiadavka na prístup k polohe</string>
+  <string name="in_app_camera_location_permission_title">Zaznamenajte polohu pre zábery v aplikácii</string>
+  <string name="in_app_camera_location_switch_pref_summary">Povoľte túto možnosť, ak chcete zaznamenať polohu záberov v aplikácii v prípade, že ju kamera zariadenia nezaznamená.</string>
   <string name="ok">OK</string>
   <string name="warning">Upozornenie</string>
+  <string name="duplicate_file_name">Našiel sa duplicitný názov súboru</string>
   <string name="upload">Nahrať</string>
   <string name="yes">Áno</string>
   <string name="no">Nie</string>
@@ -248,6 +254,7 @@
   <string name="navigation_item_about">O aplikácii</string>
   <string name="navigation_item_settings">Nastavenia</string>
   <string name="navigation_item_feedback">Spätná väzba</string>
+  <string name="navigation_item_feedback_github">Spätná väzba cez GitHub</string>
   <string name="navigation_item_logout">Odhlásiť sa</string>
   <string name="navigation_item_info">Návod</string>
   <string name="navigation_item_notification">Upozornenia</string>
@@ -281,13 +288,15 @@
   <string name="nominated_see_more">Zobraziť webovú stránku pre viac informácií</string>
   <string name="skip_login">Preskočiť</string>
   <string name="navigation_item_login">Prihlásiť sa</string>
-  <string name="skip_login_title" fuzzy="true">Naozaj chcete preskočiť prihlásenie?</string>
-  <string name="skip_login_message" fuzzy="true">Pokiaľ chcete v budúcnosti nahrať obrázky, musíte sa prihlásiť.</string>
+  <string name="skip_login_title">Naozaj chcete preskočiť prihlásenie?</string>
+  <string name="skip_login_message">Pokiaľ chcete v budúcnosti nahrať obrázky, budete sa musieť prihlásiť.</string>
   <string name="login_alert_message">Pre použitie tejto fukncie sa, prosím, prihláste.</string>
   <string name="copy_wikicode">Skopírovať wikitext do schránky</string>
   <string name="wikicode_copied">Wikitext bol skopírovaný do schránky</string>
   <string name="nearby_location_not_available">Funkcia V okolí nemusí pracovať správne, poloha nie je dostupná.</string>
+  <string name="upload_location_access_denied">Prístup k polohe bol odmietnutý. Ak chcete použiť túto funkciu, nastavte svoju polohu manuálne.</string>
   <string name="location_permission_rationale_nearby">Zobrazenie zoznamu miest v okolí vyžaduje povolenie</string>
+  <string name="location_permission_rationale_explore">Povolenie je potrebné na zobrazenie zoznamu obrázkov v blízkosti</string>
   <string name="nearby_directions">Trasa</string>
   <string name="nearby_wikidata">Wikiúdaje</string>
   <string name="nearby_wikipedia">Wikipédia</string>
@@ -347,14 +356,16 @@
   <string name="construction_event_answer">Obrázky s technickou či kultúrnou tematikou sú na Commons vítané.</string>
   <string name="congratulatory_message_quiz">Na %1$s otázok ste odpovedali správne! Gratulujeme!</string>
   <string name="warning_for_no_answer">Vyberte správnu možnosť</string>
-  <string name="user_not_logged_in" fuzzy="true">Došlo k odhláseniu. Prihláste sa, prosím, znovu.</string>
+  <string name="user_not_logged_in">Platnosť vášho prihlásenia vypršala. Prihláste sa znovu, prosím.</string>
   <string name="quiz_result_share_message">Zdieľajte váš kvíz s priateľmi!</string>
   <string name="continue_message">Pokračovať</string>
   <string name="correct">Správna odpoveď</string>
   <string name="wrong">Nesprávna odpoveď</string>
   <string name="quiz_screenshot_question">Je v poriadku nahrať túto snímku obrazovky?</string>
   <string name="share_app_title">Zdieľať aplikáciu</string>
-  <string name="error_fetching_nearby_places" fuzzy="true">Nastala chyba pri hľadaní miest v okolí.</string>
+  <string name="rotate">Otočiť</string>
+  <string name="error_fetching_nearby_places">Nepodarilo sa načítať miesta v okolí</string>
+  <string name="no_pictures_in_this_area">V tejto oblasti nie sú žiadne obrázky</string>
   <string name="no_nearby_places_around">V okolí sa nenašli žiadne miesta</string>
   <string name="error_fetching_nearby_monuments">Nastala chyba pri načítavaní miest v okolí.</string>
   <string name="no_recent_searches">Žiadne nedávne hľadania</string>
@@ -429,13 +440,17 @@
   <string name="never_ask_again">Znovu nezobrazovať</string>
   <string name="display_location_permission_title">Žiadať povolenie prístupu k polohe</string>
   <string name="display_location_permission_explanation">Požiada o oprávnenie k prístupu k polohe, pokiaľ je to potrebné pre funkciu zobrazenia miest v okolí.</string>
-  <string name="achievements_fetch_failed" fuzzy="true">Nastala chyba, nepodarilo sa nám načítať vaše úspechy</string>
+  <string name="achievements_fetch_failed">Nastala chyba, úspechy sa nám nepodarilo načítať</string>
   <string name="achievements_fetch_failed_ultimate_achievement">Urobili ste toľko príspevkov, že to náš systém výpočtu úspechov nedokáže zvládnuť. Toto je konečný úspech.</string>
   <string name="ends_on">Končí:</string>
   <string name="display_campaigns">Zobraziť kampane</string>
   <string name="display_campaigns_explanation">Zobrazovať prebiehajúce kampane</string>
+  <string name="option_allow">Povoliť</string>
+  <string name="option_dismiss">Odmietnuť</string>
+  <string name="in_app_camera_location_permission_denied">Aplikácia nezaznamená polohu k záberom v aplikácii z dôvodu chýbajúceho prístupu k polohe</string>
+  <string name="in_app_camera_location_unavailable">Aplikácia nezaznamená polohu k záberom v aplikácii z dôvodu vypnutej GPS</string>
   <string name="nearby_campaign_dismiss_message">Kampane už neuvidíte. Znovu ich zapnúť môžete v Nastaveniach.</string>
-  <string name="this_function_needs_network_connection" fuzzy="true">Táto funkcia vyžaduje pripojenie k sieti, skontrolujte, prosím, nastavenie pripojenia.</string>
+  <string name="this_function_needs_network_connection">Táto funkcia vyžaduje pripojenie k sieti. Prosím, skontrolujte nastavenie pripojenia.</string>
   <string name="error_processing_image">Počas spracovania obrázku nastala chyba. Prosím, skúste to znovu.</string>
   <string name="getting_edit_token">Získavam token pre úpravu</string>
   <string name="check_category_adding_template">Pridávam šablónu na skontrolovanie kategórie</string>
@@ -495,6 +510,8 @@
   <string name="exif_tag_name_lensModel">Model objektívu</string>
   <string name="exif_tag_name_serialNumbers">Sériové čísla</string>
   <string name="exif_tag_name_software">Softvér</string>
+  <string name="media_location_permission_denied">Prístup k polohe médií bol odmietnutý</string>
+  <string name="add_location_manually">Možno nebudeme môcť automaticky získať údaje o polohe z obrázkov, ktoré nahráte. Pred odoslaním, prosím, pridajte ku každému obrázku údaj o polohe.</string>
   <string name="share_text">Nahrávajte fotky na Wikimedia Commons priamo z vášho mobilu. Stiahnite si aplikáciu Wikimedia Commons teraz: %1$s</string>
   <string name="share_via">Zdieľať aplikáciu cez...</string>
   <string name="image_info">Informácie o obrázku</string>
@@ -510,9 +527,9 @@
   <string name="delete_helper_show_deletion_message_if">%1$s úspešne nominované na zmazanie.</string>
   <string name="delete_helper_show_deletion_title_failed">Chyba</string>
   <string name="delete_helper_show_deletion_message_else">Nepodarilo sa požiadať o zmazanie.</string>
-  <string name="delete_helper_ask_spam_selfie" fuzzy="true">Selfie</string>
-  <string name="delete_helper_ask_spam_blurry" fuzzy="true">Rozmazané</string>
-  <string name="delete_helper_ask_spam_nonsense" fuzzy="true">Nezmysel</string>
+  <string name="delete_helper_ask_spam_selfie">selfie, ktorá nie je použitá v žiadnom článku</string>
+  <string name="delete_helper_ask_spam_blurry">úplne rozmazané</string>
+  <string name="delete_helper_ask_spam_nonsense">nezmysel, úplne nepoužiteľné v akomkoľvek článku</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">Tlačová fotka</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">Náhodná fotka z internetu</string>
   <string name="delete_helper_ask_reason_copyright_logo">Logo</string>
@@ -548,7 +565,7 @@
   <string name="coordinates_edit_helper_edit_message_else">Nepodarilo sa pridať súradnice.</string>
   <string name="description_edit_helper_edit_message_else">Nepodarilo sa pridať popisy.</string>
   <string name="caption_edit_helper_edit_message_else">Nepodarilo sa pridať titulky.</string>
-  <string name="coordinates_picking_unsuccessful" fuzzy="true">Nepodarilo sa získať súradnice.</string>
+  <string name="coordinates_picking_unsuccessful">Súradnice obrázka sa neaktualizovali.</string>
   <string name="descriptions_picking_unsuccessful">Nepodarilo sa získať popisy.</string>
   <string name="description_activity_title">Upraviť popisy a titulky</string>
   <string name="share_image_via">Zdieľať obrázok cez</string>
@@ -563,12 +580,13 @@
   <string name="place_state_needs_photo">Potrebuje fotku</string>
   <string name="place_type">Typ miesta:</string>
   <string name="nearby_search_hint">Most, múzeum, hotel atď.</string>
-  <string name="you_must_reset_your_passsword" fuzzy="true">Pri prihlásení nastala chyba, musíte si resetovať vaše heslo!</string>
+  <string name="you_must_reset_your_passsword">Pri prihlásení nastala chyba. Musíte si obnoviť vaše heslo!</string>
   <string name="title_for_media">MÉDIA</string>
   <string name="title_for_child_classes">DETSKÉ TRIEDY</string>
   <string name="title_for_parent_classes">RODIČOVSKÉ TRIEDY</string>
   <string name="upload_nearby_place_found_title">Miesto v okolí nájdené</string>
-  <string name="upload_nearby_place_found_description_singular" fuzzy="true">Je toto fotka miesta %1$s?</string>
+  <string name="upload_nearby_place_found_description_plural">Je na týchto obrázkoch %1$s?</string>
+  <string name="upload_nearby_place_found_description_singular">Je na tomto obrázku %1$s?</string>
   <string name="title_app_shortcut_bookmark">Záložky</string>
   <string name="title_app_shortcut_setting">Nastavenia</string>
   <string name="remove_bookmark">Odstránené zo záložiek</string>
@@ -582,7 +600,10 @@
   <string name="cannot_open_location_settings">Nepodarilo sa otvoriť umiestnenie nastavenia. Prosím zapnite umiestnenia manuálne.</string>
   <string name="recommend_high_accuracy_mode">Pre najpresnejšie výsledky zvoľte režim vysokej presnosti.</string>
   <string name="ask_to_turn_location_on">Zapnúť lokáciu?</string>
+  <string name="ask_to_turn_location_on_text">Prosím, zapnite funkciu polohy, aby vám mohla aplikácia zobraziť vašu aktuálnu polohu.</string>
   <string name="nearby_needs_location">Funkcia \"Nablízku\" potrebuje mať zapnutú lokalizáciu pre správne fungovanie</string>
+  <string name="explore_map_needs_location">Používanie mapy vyžaduje prístup k polohe na zobrazenie obrázkov v blízkosti</string>
+  <string name="upload_map_location_access">Ak chcete polohu nastaviť automaticky, musíte povoliť prístup k polohe.</string>
   <string name="use_location_from_similar_image">Spravili ste tieto dva obrázky na tom istom mieste? Chcete použiť zemepisnú šírku/dĺžku pre obrázok vpravo?</string>
   <string name="load_more">Načítať ďalšie</string>
   <string name="nearby_no_results">Neboli nájdené žiadne miesta, skúste zmeniť vyhľadávacie kritériá.</string>
@@ -666,11 +687,15 @@
   <string name="done">Hotovo</string>
   <string name="back">Späť</string>
   <string name="welcome_custom_picture_selector_text">Vitajte vo vlastnom výbere obrázkov</string>
-  <string name="custom_selector_info_text1" fuzzy="true">Tento výber zobrazuje iné obrázky, ktoré už sú na Commons.</string>
+  <string name="custom_selector_info_text1">Tento výberový nástroj vám ukazuje, ktoré obrázky ste už nahrali na Commons.</string>
   <string name="custom_selector_info_text2">Na rozdiel od obrázka v ľavo, obrázkov v pravo má logo Commons, ktoré indikuje, že už je nahraný. Podržte kurzor nad obrázkom pre náhľad.</string>
   <string name="welcome_custom_selector_ok">Úžasné</string>
   <string name="custom_selector_already_uploaded_image_text">Tento obrázok už bol do Commons nahraný.</string>
-  <string name="wlm_upload_info" fuzzy="true">Tento obrázok bude zaradený do súťaže Wiki miluje monumenty</string>
+  <string name="custom_selector_over_limit_warning">Z technických dôvodov aplikácia nemôže spoľahlivo nahrať viac ako %1$d obrázkov naraz. Maximálny počet %1$d bol prekročený o %2$d.</string>
+  <string name="custom_selector_dismiss_limit_warning_button_text">Zrušiť</string>
+  <string name="custom_selector_button_limit_text">Maximum: %1$d</string>
+  <string name="custom_selector_limit_error_desc">Chyba: Prekročený limit nahrávania</string>
+  <string name="wlm_upload_info">Tento obrázok bude zaradený do súťaže Wiki miluje pamiatky</string>
   <string name="display_monuments">Zobraziť monumenty</string>
   <string name="wlm_month_message">Je mesiac Wiki miluje monumenty!</string>
   <string name="learn_more">ZISTIŤ VIAC</string>
@@ -679,7 +704,7 @@
   <string name="read_phone_state_permission_message">Blízke mapy potrebujú mať prístup k polohe telefónu, aby správne fungovali</string>
   <string name="contributions_of_user">Príspevky používateľa:  %s</string>
   <string name="achievements_of_user">Úspechy používateľa: %s</string>
-  <string name="menu_view_user_page" fuzzy="true">Zobraziť stránku používateľa</string>
+  <string name="menu_view_user_page">Zobraziť profil používateľa</string>
   <string name="edit_depictions">Upraviť vyobrazenia</string>
   <string name="edit_categories">Upraviť kategórie</string>
   <string name="advanced_options">Rozšírené možnosti</string>
@@ -690,10 +715,10 @@
   <string name="no_location_found_title">Nenašli sa žiadne polohy</string>
   <string name="no_location_found_message">Čo tak pridať miesto kde bol tento obrázok urobený? Údaje o polohe pomáhajú editorom Wiki nájsť Váš obrázok a urobiť ho tak viac užitočným. Ďakujeme!</string>
   <string name="add_location">Pridať polohu</string>
-  <string name="feedback_sharing_data_alert">Prosím odstráňte z tohto emailu informácie, ktoré nechcete zverejniť. Takisto berte prosím na vedomie, že vaša emailová adresa z ktorej posielate príspevky bude zverejnená.</string>
+  <string name="feedback_sharing_data_alert">Prosím, odstráňte z tohto e-mailu informácie, ktoré nechcete zverejniť. Tiež, prosím, berte na vedomie, že vaša e-mailová adresa, z ktorej posielate príspevky, bude zverejnená.</string>
   <string name="explore_map_details">Podrobnosti</string>
-  <string name="achievements_unavailable_beta" fuzzy="true">Úspechy sú dostupné len v prod flavor. Prosím skontrolujte vývojársku dokumentáciu.</string>
-  <string name="leaderboard_unavailable_beta" fuzzy="true">Rebríček je dostupný len v prod flavor. Prosím skontrolujte vývojársku dokumentáciu.</string>
+  <string name="achievements_unavailable_beta">Úspechy sú dostupné len v prod flavor. Prosím, skontrolujte vývojársku dokumentáciu.</string>
+  <string name="leaderboard_unavailable_beta">Rebríček je dostupný len v prod flavor. Prosím, skontrolujte vývojársku dokumentáciu.</string>
   <string name="copyright_popup">Prosím nahrajte len obrázky, ktoré ste urobili Vy sami. Obrázky podliehajúce autorským právam budú zablokované.</string>
   <string name="select_feedback_data_choice">Prosím odznačte každú informáciu, ktorú nechcete verejne zdieľať.</string>
   <string name="api_level">Úroveň API</string>
@@ -706,4 +731,65 @@
   <string name="error_feedback">Pri odosielaní spätnej väzby sa vyskytla chyba</string>
   <string name="enter_description">Aká je Vaša spätná väzba?</string>
   <string name="your_feedback">Vaša spätná väzba</string>
+  <string name="mark_as_not_for_upload">Označiť obrázok ako nevhodný na nahratie</string>
+  <string name="unmark_as_not_for_upload">Zrušiť označenie, že obrázok nie je určený na nahratie</string>
+  <string name="marking_as_not_for_upload">Obrázok sa označuje ako nevhodný na nahratie</string>
+  <string name="unmarking_as_not_for_upload">Ruší sa označenie, že obrázok nie je určený na nahratie</string>
+  <string name="show_already_actioned_pictures">Zobraziť už spracované obrázky</string>
+  <string name="hiding_already_actioned_pictures">Už spracované obrázky sú skryté</string>
+  <string name="no_more_images_found">Nenašli sa žiadne ďalšie obrázky</string>
+  <string name="this_image_is_already_uploaded">Tento obrázok je už nahratý</string>
+  <string name="can_not_select_this_image_for_upload">Tento obrázok nebolo možné vybrať na nahratie</string>
+  <string name="image_selected">Obrázok zvolený</string>
+  <string name="image_marked_as_not_for_upload">Obrázok označený ako nevhodný na nahratie</string>
+  <string name="menu_view_report">Nahlásiť</string>
+  <string name="menu_view_set_white_background">Nastaviť biele pozadie</string>
+  <string name="menu_view_set_black_background">Nastavte čierne pozadie</string>
+  <string name="report_violation">Nahlásiť porušenie</string>
+  <string name="report_user">Nahlásiť tohto používateľa</string>
+  <string name="report_content">Nahlásiť tento obsah</string>
+  <string name="request_user_block">Žiadosť o zablokovanie tohto používateľa</string>
+  <string name="welcome_to_full_screen_mode_text">Vitajte v režime výberu na celú obrazovku</string>
+  <string name="full_screen_mode_zoom_info">Na priblíženie a oddialenie použite dva prsty.</string>
+  <string name="similar_coordinate_description_auto_set">Súradnice nie sú presné, ale osoba, ktorá nahrala tento obrázok, si myslí, že sú dostatočne blízko.</string>
+  <string name="storage_permissions_denied">Prístup k úložisku odmietnutý</string>
+  <string name="unable_to_share_upload_item">Nemožno zdielať túto položku</string>
+  <string name="permissions_are_required_for_functionality">Povolenia sú potrebné pre zabezpečenie funkčnosti</string>
+  <string name="learn_how_to_write_a_useful_description">Zistite, ako napísať užitočný popis</string>
+  <string name="learn_how_to_write_a_useful_caption">Zistite, ako napísať užitočný titulok</string>
+  <string name="see_your_achievements">Pozrite si svoje úspechy</string>
+  <string name="edit_image">Upraviť obrázok</string>
+  <string name="edit_location">Upraviť polohu</string>
+  <string name="location_updated">Poloha aktualizovaná!</string>
+  <string name="remove_location">Odstrániť polohu</string>
+  <string name="remove_location_warning_title">Odstrániť upozornenie o polohe</string>
+  <string name="remove_location_warning_desc">Vďaka polohe sú obrázky užitočnejšie a ľahšie sa dajú nájsť. Naozaj si prajete odstrániť informácie o polohe z tohto obrázku?</string>
+  <string name="location_removed">Poloha odstránená!</string>
+  <string name="send_thanks_to_author">Poďakovať autorovi</string>
+  <string name="error_sending_thanks">Chyba pri odosielaní poďakovania autorovi.</string>
+  <string name="invalid_login_message">Platnosť vášho prihlásenia vypršala. Prihláste sa znovu, prosím.</string>
+  <string name="no_application_available_to_open_gpx_files">Nie je k dispozícii žiadna aplikácia na otvorenie GPX súborov</string>
+  <string name="file_saved_successfully">Súbor úspešne uložený</string>
+  <string name="do_you_want_to_open_gpx_file">Chcete otvoriť GPX súbor?</string>
+  <string name="do_you_want_to_open_kml_file">Chcete otvoriť KML súbor?</string>
+  <string name="failed_to_save_kml_file">KML súbor sa nepodarilo uložiť.</string>
+  <string name="failed_to_save_gpx_file">GPX súbor sa nepodarilo uložiť.</string>
+  <string name="saving_kml_file">KML súbor sa ukladá</string>
+  <string name="saving_gpx_file">GPX súbor sa ukladá</string>
+  <string name="multiple_files_depiction">Pamätajte, že všetkým obrázkom vo viacnásobnom nahratí budú pridelené rovnaké kategórie a popisy. Ak obrázky nezdieľajú rovnaký popis a kategórie, vykonajte niekoľko samostatných nahratí, prosím.</string>
+  <string name="multiple_files_depiction_header">Poznámka k viacnásobnému nahrávaniu</string>
+  <string name="nearby_wikitalk">Oznámte problém s touto položkou na Wikiúdajoch</string>
+  <string name="please_enter_some_comments">Prosím, pridajte poznámky</string>
+  <string name="talk">Diskusia</string>
+  <string name="write_something_about_the_item">Napíšte niečo o „%1$s“. Bude to verejne viditeľné.</string>
+  <string name="does_not_exist_anymore_no_picture_can_ever_be_taken_of_it">„%1$s“ už neexistuje, nedá sa z neho urobiť žiadna fotografia.</string>
+  <string name="is_at_a_different_place_please_specify_the_correct_place_below_if_possible_tell_us_the_correct_latitude_longitude">„%1$s“ je na inom mieste. Nižšie, prosím, uveďte správne miesto a ak je to možné, napíšte správnu zemepisnú šírku a dĺžku.</string>
+  <string name="other_problem_or_information_please_explain_below">Iný problém alebo informácia (vysvetlite nižšie).</string>
+  <string name="feedback_destination_note">Vaša spätná väzba sa zverejní na nasledujúcej wiki stránke: &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Mobile_app/Feedback\"&gt;Commons:Mobile app/Feedback&lt;/a&gt;</string>
+  <string name="are_you_sure_that_you_want_cancel_all_the_uploads">Ste si istí, že chcete zrušiť všetky nahrávania?</string>
+  <string name="cancelling_all_the_uploads">Ruším všetky nahrávania...</string>
+  <string name="uploads">Nahrané súbory</string>
+  <string name="pending">Čakajúce</string>
+  <string name="failed">Zlyhané</string>
+  <string name="could_not_load_place_data">Nepodarilo sa načítať údaje o polohe</string>
 </resources>

@@ -266,4 +266,5 @@
   <string name="back">Undur</string>
   <string name="edit_categories">Sunting kategori</string>
   <string name="explore_map_details">Butiran</string>
+  <string name="failed">Gagal</string>
 </resources>
