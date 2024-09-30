@@ -1380,7 +1380,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
         // Instead of loading all pins in a single SPARQL query, we query in batches.
         // This variable controls the number of pins queried per batch.
-        int batchSize = 50;
+        int batchSize = 3;
 
         updatedLatLng = curLatLng;
         updatedPlacesList = new ArrayList<>(placeList);
