@@ -27,6 +27,7 @@ import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.provider.Settings;
 import android.text.Html;
@@ -149,7 +150,6 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     WikidataEditListener.WikidataP18EditListener, LocationUpdateListener,
     LocationPermissionCallback, BottomSheetAdapter.ItemClickListener {
 
-
     FragmentNearbyParentBinding binding;
 
     @Inject
@@ -171,6 +171,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     SystemThemeUtils systemThemeUtils;
     @Inject
     CommonPlaceClickActions commonPlaceClickActions;
+
     private LocationPermissionsHelper locationPermissionsHelper;
     private NearbyFilterSearchRecyclerViewAdapter nearbyFilterSearchRecyclerViewAdapter;
     private BottomSheetBehavior bottomSheetListBehavior;
@@ -207,6 +208,11 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     private boolean isAdvancedQueryFragmentVisible = false;
     private Place nearestPlace;
     private volatile boolean stopQuery;
+
+    private boolean isSearchInProgress = false;
+    private final Handler searchHandler = new Handler();
+    private Runnable searchRunnable;
+    private static final long SCROLL_DELAY = 800; // Delay for debounce of onscroll
 
     private List<Place> updatedPlacesList;
     private LatLng updatedLatLng;
@@ -419,28 +425,27 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         binding.map.addMapListener(new MapListener() {
             @Override
             public boolean onScroll(ScrollEvent event) {
-                if (lastMapFocus != null) {
-                    Location mylocation = new Location("");
-                    Location dest_location = new Location("");
-                    dest_location.setLatitude(binding.map.getMapCenter().getLatitude());
-                    dest_location.setLongitude(binding.map.getMapCenter().getLongitude());
-                    mylocation.setLatitude(lastMapFocus.getLatitude());
-                    mylocation.setLongitude(lastMapFocus.getLongitude());
-                    Float distance = mylocation.distanceTo(dest_location);//in meters
-                    if (lastMapFocus != null) {
-                        if (isNetworkConnectionEstablished() && (event.getX() > 0
-                            || event.getY() > 0)) {
-                            if (distance > 2000.0) {
-                                searchable = true;
+
+                // Remove any pending search runnables
+                searchHandler.removeCallbacks(searchRunnable);
+
+                // Set a runnable to call the Search after a delay
+                searchRunnable = new Runnable() {
+                    @Override
+                    public void run() {
+                        if (!isSearchInProgress) {
+                            isSearchInProgress = true; // search executing flag
+                            // Start Search
+                            try {
                                 presenter.searchInTheArea();
-                            } else {
-                                searchable = false;
+                            } finally {
+                                isSearchInProgress = false;
                             }
                         }
-                    } else {
-                        searchable = false;
                     }
-                }
+                };
+                // post runnable with configured SCROLL_DELAY
+                searchHandler.postDelayed(searchRunnable, SCROLL_DELAY);
 
                 return true;
             }
@@ -680,6 +685,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+        searchHandler.removeCallbacks(searchRunnable);
         presenter.removeNearbyPreferences(applicationKvStore);
     }
 
@@ -1027,7 +1033,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
     @Override
     public void populatePlaces(final LatLng currentLatLng) {
-        IGeoPoint screenTopRight = binding.map.getProjection()
+            IGeoPoint screenTopRight = binding.map.getProjection()
             .fromPixels(binding.map.getWidth(), 0);
         IGeoPoint screenBottomLeft = binding.map.getProjection()
             .fromPixels(0, binding.map.getHeight());
@@ -1374,7 +1380,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
         // Instead of loading all pins in a single SPARQL query, we query in batches.
         // This variable controls the number of pins queried per batch.
-        int batchSize = 3;
+        int batchSize = 50;
 
         updatedLatLng = curLatLng;
         updatedPlacesList = new ArrayList<>(placeList);
@@ -1931,8 +1937,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             return (R.drawable.ic_clear_black_24dp);
         }else if (place.name == "") {
             return (isBookmarked ?
-                    R.drawable.ic_custom_map_marker_grey_bookmarked :
-                    R.drawable.ic_custom_map_marker_grey);
+                R.drawable.ic_custom_map_marker_grey_bookmarked :
+                R.drawable.ic_custom_map_marker_grey);
         } else {
             return (isBookmarked ?
                 R.drawable.ic_custom_map_marker_red_bookmarked :
@@ -2499,5 +2505,4 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         intent.setData(Uri.parse(WLM_URL));
         startActivity(intent);
     }
-
 }
