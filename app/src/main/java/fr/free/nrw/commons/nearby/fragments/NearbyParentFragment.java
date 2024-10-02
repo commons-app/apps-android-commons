@@ -212,7 +212,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     private boolean isSearchInProgress = false;
     private final Handler searchHandler = new Handler();
     private Runnable searchRunnable;
-    private static final long SCROLL_DELAY = 800; // Delay for debounce of onscroll
+    private static final long SCROLL_DELAY = 800; // Delay for debounce of onscroll, in milliseconds.
 
     private List<Place> updatedPlacesList;
     private LatLng updatedLatLng;
