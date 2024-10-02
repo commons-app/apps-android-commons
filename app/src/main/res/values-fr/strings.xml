@@ -35,6 +35,7 @@
 * Sherbrooke
 * SleaY
 * Tektasc
+* Terio legale
 * Thibaut120094
 * Tomri5
 * Tpt
@@ -49,7 +50,7 @@
   <string name="commons_github">Code source Github de Commons</string>
   <string name="commons_logo">Logo de Commons</string>
   <string name="commons_website">Site web de Commons</string>
-  <string name="exit_location_picker">Sortir du sélecteur de lieu</string>
+  <string name="exit_location_picker">Sélecteur d\'emplacement de sortie</string>
   <string name="submit">Soumettre</string>
   <string name="add_another_description">Ajouter une autre description</string>
   <string name="add_new_contribution">Ajouter une nouvelle contribution</string>
@@ -818,5 +819,10 @@
   <string name="is_at_a_different_place_please_specify_the_correct_place_below_if_possible_tell_us_the_correct_latitude_longitude">\'%1$s\' se trouve à un endroit différent. Veuillez indiquer l\'endroit correct ci-dessous et, si possible, indiquez la latitude et la longitude correctes.</string>
   <string name="other_problem_or_information_please_explain_below">Autre problème ou information (merci d\'expliquer ci-dessous).</string>
   <string name="feedback_destination_note">Vos commentaires sont publiés sur la page wiki suivante : &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Mobile_app/Feedback\"&gt;Commons:Mobile app/Feedback&lt;/a&gt;</string>
+  <string name="are_you_sure_that_you_want_cancel_all_the_uploads">Êtes-vous sûr de vouloir annuler tous les téléchargements ?</string>
+  <string name="cancelling_all_the_uploads">Annulation de tous les téléchargements...</string>
+  <string name="uploads">Téléversements</string>
+  <string name="pending">En attente</string>
+  <string name="failed">Échec</string>
   <string name="could_not_load_place_data">Ne peut pas supporter les données</string>
 </resources>
