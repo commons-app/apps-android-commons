@@ -49,7 +49,7 @@ fun SecondaryButton(
         modifier = modifier,
         border = BorderStroke(1.dp, color = MaterialTheme.colorScheme.primary),
         shape = shape,
-        contentPadding = PaddingValues(horizontal = 24.dp, vertical = 4.dp)
+        contentPadding = PaddingValues(horizontal = 16.dp, vertical = 4.dp)
     ) {
         Text(
             text = text,

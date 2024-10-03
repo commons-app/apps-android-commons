@@ -28,6 +28,7 @@ fun CustomSelectorTopBar(
     onNavigateBack: ()-> Unit,
     modifier: Modifier = Modifier,
     secondaryText: String? = null,
+    showNavigationIcon: Boolean = true,
     showAlertIcon: Boolean = false,
     onAlertAction: ()-> Unit = { },
 ) {
@@ -36,7 +37,7 @@ fun CustomSelectorTopBar(
             Column {
                 Text(
                     text = primaryText,
-                    style = MaterialTheme.typography.titleMedium.copy(fontSize = 20.sp),
+                    style = MaterialTheme.typography.titleMedium.copy(fontSize = 18.sp),
                     color = MaterialTheme.colorScheme.primary,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis
@@ -44,7 +45,7 @@ fun CustomSelectorTopBar(
                 secondaryText?.let {
                     Text(
                         text = it,
-                        style = MaterialTheme.typography.labelLarge,
+                        style = MaterialTheme.typography.labelMedium,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
                 }
@@ -52,12 +53,14 @@ fun CustomSelectorTopBar(
         },
         modifier = modifier,
         navigationIcon = {
-            IconButton(onClick = onNavigateBack) {
-                Icon(
-                    imageVector = Icons.AutoMirrored.Rounded.KeyboardArrowLeft,
-                    contentDescription = "Navigate Back",
-                    modifier = Modifier.fillMaxSize()
-                )
+            if(showNavigationIcon) {
+                IconButton(onClick = onNavigateBack) {
+                    Icon(
+                        imageVector = Icons.AutoMirrored.Rounded.KeyboardArrowLeft,
+                        contentDescription = "Navigate Back",
+                        modifier = Modifier.fillMaxSize()
+                    )
+                }
             }
         },
         actions = {

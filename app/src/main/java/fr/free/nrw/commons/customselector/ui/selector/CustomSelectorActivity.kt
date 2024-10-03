@@ -13,53 +13,34 @@ import android.view.Window
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
-import androidx.activity.result.ActivityResult
-import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult
-import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedCard
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
-import androidx.compose.runtime.Composable
+import androidx.activity.compose.setContent
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.colorResource
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.viewmodel.compose.viewModel
 import fr.free.nrw.commons.R
+import fr.free.nrw.commons.customselector.data.MediaReader
 import fr.free.nrw.commons.customselector.database.NotForUploadStatus
 import fr.free.nrw.commons.customselector.database.NotForUploadStatusDao
 import fr.free.nrw.commons.customselector.helper.CustomSelectorConstants
 import fr.free.nrw.commons.customselector.listeners.FolderClickListener
 import fr.free.nrw.commons.customselector.listeners.ImageSelectListener
 import fr.free.nrw.commons.customselector.model.Image
+import fr.free.nrw.commons.customselector.ui.screens.CustomSelectorScreen
 import fr.free.nrw.commons.databinding.ActivityCustomSelectorBinding
 import fr.free.nrw.commons.databinding.CustomSelectorBottomLayoutBinding
 import fr.free.nrw.commons.databinding.CustomSelectorToolbarBinding
 import fr.free.nrw.commons.filepicker.Constants
 import fr.free.nrw.commons.media.ZoomableActivity
 import fr.free.nrw.commons.theme.BaseActivity
+import fr.free.nrw.commons.ui.theme.CommonsTheme
 import fr.free.nrw.commons.upload.FileUtilsWrapper
 import fr.free.nrw.commons.utils.CustomSelectorUtils
-import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.MainScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.*
 import java.io.File
 import java.lang.Integer.max
 import javax.inject.Inject
@@ -166,25 +147,24 @@ class CustomSelectorActivity :
             showPartialAccessIndicator = true
         }
 
-        binding = ActivityCustomSelectorBinding.inflate(layoutInflater)
-        toolbarBinding = CustomSelectorToolbarBinding.bind(binding.root)
-        bottomSheetBinding = CustomSelectorBottomLayoutBinding.bind(binding.root)
-        binding.partialAccessIndicator.setContent {
-            partialStorageAccessIndicator(
-                isVisible = showPartialAccessIndicator,
-                onManage = {
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
-                        requestPermissions(arrayOf(Manifest.permission.READ_MEDIA_IMAGES), 1)
-                    }
-                },
-                modifier =
-                    Modifier
-                        .padding(vertical = 8.dp, horizontal = 4.dp)
-                        .fillMaxWidth(),
-            )
-        }
-        val view = binding.root
-        setContentView(view)
+//        binding = ActivityCustomSelectorBinding.inflate(layoutInflater)
+//        toolbarBinding = CustomSelectorToolbarBinding.bind(binding.root)
+//        bottomSheetBinding = CustomSelectorBottomLayoutBinding.bind(binding.root)
+//        binding.partialAccessIndicator.setContent {
+//            PartialStorageAccessDialog(
+//                isVisible = showPartialAccessIndicator,
+//                onManage = {
+//                    if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+//                        requestPermissions(arrayOf(Manifest.permission.READ_MEDIA_IMAGES), 1)
+//                    }
+//                },
+//                modifier = Modifier
+//                    .padding(vertical = 8.dp, horizontal = 4.dp)
+//                    .fillMaxWidth()
+//            )
+//        }
+//        val view = binding.root
+//        setContentView(view)
 
         prefs = applicationContext.getSharedPreferences("CustomSelector", MODE_PRIVATE)
         viewModel =
@@ -192,7 +172,25 @@ class CustomSelectorActivity :
                 CustomSelectorViewModel::class.java,
             )
 
-        setupViews()
+        val mediaReader = MediaReader(this)
+
+        setContent {
+            val csViewModel = viewModel<fr.free.nrw.commons.customselector.ui.screens.CustomSelectorViewModel> {
+                fr.free.nrw.commons.customselector.ui.screens.CustomSelectorViewModel(mediaReader)
+            }
+
+            val uiState by csViewModel.uiState.collectAsStateWithLifecycle()
+
+            CommonsTheme {
+                CustomSelectorScreen(
+                    uiState = uiState,
+                    onEvent = csViewModel::onEvent,
+                    selectedImageIds = csViewModel.selectedImageIds
+                )
+            }
+        }
+
+//        setupViews()
 
         if (prefs.getBoolean("customSelectorFirstLaunch", true)) {
             // show welcome dialog on first launch
@@ -600,61 +598,5 @@ class CustomSelectorActivity :
         const val FOLDER_ID: String = "FolderId"
         const val FOLDER_NAME: String = "FolderName"
         const val ITEM_ID: String = "ItemId"
-    }
-}
-
-@Composable
-fun partialStorageAccessIndicator(
-    isVisible: Boolean,
-    onManage: () -> Unit,
-    modifier: Modifier = Modifier,
-) {
-    if (isVisible) {
-        OutlinedCard(
-            modifier = modifier,
-            colors =
-                CardDefaults.cardColors(
-                    containerColor = colorResource(R.color.primarySuperLightColor),
-                ),
-            border = BorderStroke(0.5.dp, color = colorResource(R.color.primaryColor)),
-            shape = RoundedCornerShape(8.dp),
-        ) {
-            Row(modifier = Modifier.padding(16.dp).fillMaxWidth()) {
-                Text(
-                    text = "You've given access to a select number of photos",
-                    modifier = Modifier.weight(1f),
-                )
-                TextButton(
-                    onClick = onManage,
-                    modifier = Modifier.align(Alignment.Bottom),
-                    colors =
-                        ButtonDefaults.buttonColors(
-                            containerColor = colorResource(R.color.primaryColor),
-                        ),
-                    shape = RoundedCornerShape(8.dp),
-                ) {
-                    Text(
-                        text = "Manage",
-                        style = MaterialTheme.typography.labelMedium,
-                        color = colorResource(R.color.primaryTextColor),
-                    )
-                }
-            }
-        }
-    }
-}
-
-@Preview
-@Composable
-fun partialStorageAccessIndicatorPreview() {
-    Surface {
-        partialStorageAccessIndicator(
-            isVisible = true,
-            onManage = {},
-            modifier =
-                Modifier
-                    .padding(vertical = 8.dp, horizontal = 4.dp)
-                    .fillMaxWidth(),
-        )
     }
 }
