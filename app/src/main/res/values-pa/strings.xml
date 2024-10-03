@@ -160,7 +160,7 @@
   <string name="navigation_item_settings">ਸੈਟਿੰਗਾਂ</string>
   <string name="navigation_item_feedback">ਸੁਝਾਅ</string>
   <string name="navigation_item_logout">ਬਾਹਰ ਆਉ</string>
-  <string name="navigation_item_info">ਟਿਊਟੋਰਿਅਲ</string>
+  <string name="navigation_item_info">ਸਿਖਲਾਈ</string>
   <string name="navigation_item_notification">ਸੂਚਨਾਵਾਂ</string>
   <string name="navigation_item_review">ਪਰਖੋ</string>
   <string name="nearby_info_menu_wikipedia_article">ਵਿਕੀਪੀਡੀਆ ਲੇਖ</string>
@@ -199,5 +199,6 @@
   <string name="copied_successfully">ਉਤਾਰਾ ਕੀਤਾ</string>
   <string name="exif_tag_name_location">ਟਿਕਾਣਾ</string>
   <string name="wikipedia_instructions_step_7">ਲਿਖਤ ਛਾਪੋ</string>
+  <string name="leaderboard_column_user">ਵਰਤੋਂਕਾਰ</string>
   <string name="invalid_login_message">ਤੁਹਾਡੇ ਦਾਖਲੇ ਦੀ ਮਿਆਦ ਪੁੱਗ ਗਈ ਹੈ। ਕਿਰਪਾ ਕਰਕੇ ਦੁਬਾਰਾ ਦਾਖਲ ਹੋਵੋ।</string>
 </resources>
