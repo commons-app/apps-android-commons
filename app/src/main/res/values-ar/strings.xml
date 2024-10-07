@@ -798,6 +798,9 @@
   <string name="storage_permissions_denied">رُفض إذن التخزين</string>
   <string name="unable_to_share_upload_item">تعذر مشاركة هذا العنصر</string>
   <string name="permissions_are_required_for_functionality">الإذن مطلوب لهذه الوظيفة</string>
+  <string name="learn_how_to_write_a_useful_description">تعلم كيفية كتابة وصف مفيد</string>
+  <string name="remove_location_warning_title">إزالة تحذير الموقع</string>
   <string name="send_thanks_to_author">اشكر المؤلف</string>
   <string name="error_sending_thanks">حدث خطأ أثناء إرسال الشكر للمؤلف.</string>
+  <string name="could_not_load_place_data">تعذر تحميل بيانات المكان</string>
 </resources>
