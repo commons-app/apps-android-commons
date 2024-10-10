@@ -126,6 +126,7 @@
   <string name="welcome_copyright_subtext">ਇੰਟਰਨੈੱਟ ਉੱਤੇ ਮਿਲੀ ਕਾਪੀਰਾਈਟ ਸਮੱਗਰੀ ਅਤੇ ਪੋਸਟਰਾਂ, ਕਿਤਾਬਾਂ ਦੀਆਂ ਜਿਲਦਾਂ ਦੀਆਂ ਤਸਵੀਆਂ ਆਦਿ ਤੋਂ ਪਰਹੇਜ਼ ਰੱਖੋ।</string>
   <string name="welcome_final_text">ਤੁਹਾਨੂੰ ਲੱਗਦਾ ਹੈ ਕਿ ਤੁਹਾਡੇ ਕੋਲ ਹੈ?</string>
   <string name="welcome_final_button_text">ਹਾਂ!</string>
+  <string name="welcome_help_button_text">ਹੋਰ ਜਾਣਕਾਰੀ</string>
   <string name="detail_panel_cats_label">ਸ਼੍ਰੇਣੀਆਂ</string>
   <string name="detail_panel_cats_loading">ਲੱਦ ਰਿਹਾ ਹੈ...</string>
   <string name="detail_panel_cats_none">ਕੋਈ ਵੀ ਨਹੀਂ ਚੁਣਿਆ</string>
@@ -199,6 +200,7 @@
   <string name="copied_successfully">ਉਤਾਰਾ ਕੀਤਾ</string>
   <string name="exif_tag_name_location">ਟਿਕਾਣਾ</string>
   <string name="wikipedia_instructions_step_7">ਲਿਖਤ ਛਾਪੋ</string>
+  <string name="leaderboard_tab_title">ਮੁਹਰੈਲ</string>
   <string name="leaderboard_column_user">ਵਰਤੋਂਕਾਰ</string>
   <string name="invalid_login_message">ਤੁਹਾਡੇ ਦਾਖਲੇ ਦੀ ਮਿਆਦ ਪੁੱਗ ਗਈ ਹੈ। ਕਿਰਪਾ ਕਰਕੇ ਦੁਬਾਰਾ ਦਾਖਲ ਹੋਵੋ।</string>
 </resources>
