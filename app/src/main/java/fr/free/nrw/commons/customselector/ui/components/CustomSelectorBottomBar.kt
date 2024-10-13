@@ -9,26 +9,33 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
+import fr.free.nrw.commons.R
 import fr.free.nrw.commons.ui.theme.CommonsTheme
 
 @Composable
-fun CustomSelectorBottomBar(modifier: Modifier = Modifier) {
+fun CustomSelectorBottomBar(
+    onPrimaryAction: ()-> Unit,
+    onSecondaryAction: ()-> Unit,
+    modifier: Modifier = Modifier
+) {
     Row(
         modifier = modifier,
         horizontalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         SecondaryButton(
-            text = "Mark as\nnot for upload".uppercase(),
-            onClick = { /*TODO*/ },
+            text = stringResource(R.string.mark_as_not_for_upload).uppercase(),
+            onClick = onSecondaryAction,
             modifier = Modifier.weight(1f)
         )
 
         PrimaryButton(
-            text = "Upload".uppercase(),
-            onClick = { /*TODO*/ },
-            modifier = Modifier.weight(1f)
+            text = stringResource(R.string.upload).uppercase(),
+            onClick = onPrimaryAction,
+            modifier = Modifier
+                .weight(1f)
                 .height(IntrinsicSize.Max)
         )
     }
@@ -40,7 +47,10 @@ private fun CustomSelectorBottomBarPreview() {
     CommonsTheme {
         Surface(tonalElevation = 3.dp) {
             CustomSelectorBottomBar(
-                modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)
+                onPrimaryAction = { },
+                onSecondaryAction = { },
+                modifier = Modifier
+                    .padding(horizontal = 16.dp, vertical = 8.dp)
                     .fillMaxWidth()
             )
         }
