@@ -21,37 +21,34 @@ import fr.free.nrw.commons.ui.theme.CommonsTheme
 
 @Composable
 fun PartialStorageAccessDialog(
-    isVisible: Boolean,
-    onManage: ()-> Unit,
+    onManageAction: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    if(isVisible) {
-        Card(
-            modifier = modifier,
-            colors = CardDefaults.cardColors(
-                containerColor = MaterialTheme.colorScheme.secondaryContainer
-            ),
-            shape = RoundedCornerShape(12.dp)
+    Card(
+        modifier = modifier,
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.secondaryContainer
+        ),
+        shape = RoundedCornerShape(12.dp)
+    ) {
+        Row(
+            modifier = Modifier
+                .padding(vertical = 8.dp, horizontal = 16.dp)
+                .fillMaxWidth(),
+            horizontalArrangement = Arrangement.spacedBy(4.dp),
+            verticalAlignment = Alignment.CenterVertically
         ) {
-            Row(
-                modifier = Modifier
-                    .padding(vertical = 8.dp, horizontal = 16.dp)
-                    .fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(4.dp),
-                verticalAlignment = Alignment.CenterVertically
+            Text(
+                text = "You've given access to a selected number of photos",
+                style = MaterialTheme.typography.bodyMedium,
+                modifier = Modifier.weight(1f)
+            )
+            Button(
+                onClick = onManageAction,
+                shape = RoundedCornerShape(8.dp),
+                contentPadding = PaddingValues(horizontal = 16.dp)
             ) {
-                Text(
-                    text = "You've given access to a selected number of photos",
-                    style = MaterialTheme.typography.bodyMedium,
-                    modifier = Modifier.weight(1f)
-                )
-                Button(
-                    onClick = onManage,
-                    shape = RoundedCornerShape(8.dp),
-                    contentPadding = PaddingValues(horizontal = 16.dp)
-                ) {
-                    Text(text = "Manage", style = MaterialTheme.typography.labelMedium)
-                }
+                Text(text = "Manage", style = MaterialTheme.typography.labelMedium)
             }
         }
     }
@@ -62,9 +59,11 @@ fun PartialStorageAccessDialog(
 fun PartialStorageAccessIndicatorPreview() {
     CommonsTheme {
         Surface {
-            PartialStorageAccessDialog(isVisible = true, onManage = {}, modifier = Modifier
-                .padding(8.dp)
-                .fillMaxWidth()
+            PartialStorageAccessDialog(
+                onManageAction = {},
+                modifier = Modifier
+                    .padding(8.dp)
+                    .fillMaxWidth()
             )
         }
     }
