@@ -174,7 +174,7 @@ dependencies {
     kaptTest "androidx.databinding:databinding-compiler:8.0.2"
     kaptAndroidTest "androidx.databinding:databinding-compiler:8.0.2"
 
-    implementation("io.github.coordinates2country:coordinates2country-android:1.3") {  exclude group: 'com.google.android', module: 'android' }
+    implementation("io.github.coordinates2country:coordinates2country-android:1.8") {  exclude group: 'com.google.android', module: 'android' }
 
     //OSMDroid
     implementation ("org.osmdroid:osmdroid-android:$OSMDROID_VERSION")
