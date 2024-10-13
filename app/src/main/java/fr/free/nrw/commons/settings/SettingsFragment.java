@@ -79,6 +79,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
 
     private ListPreference themeListPreference;
     private Preference descriptionLanguageListPreference;
+    private Preference descriptionSecondaryLanguageListPreference;
     private Preference appUiLanguageListPreference;
     private String keyLanguageListPreference;
     private TextView recentLanguagesTextView;
@@ -152,6 +153,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         appUiLanguageListPreference.setOnPreferenceClickListener(new OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(Preference preference) {
+                System.out.println("Clicked appui");
                 prepareAppLanguages(appUiLanguageListPreference.getKey());
                 return true;
             }
@@ -174,6 +176,28 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             @Override
             public boolean onPreferenceClick(Preference preference) {
                 prepareAppLanguages(descriptionLanguageListPreference.getKey());
+                return true;
+            }
+        });
+
+        descriptionSecondaryLanguageListPreference = findPreference("descriptionSecondaryLanguagePref");
+        assert descriptionSecondaryLanguageListPreference != null;
+        keyLanguageListPreference = descriptionSecondaryLanguageListPreference.getKey();
+        languageCode = getCurrentLanguageCode(keyLanguageListPreference);
+        assert languageCode != null;
+        if (languageCode.equals("")) {
+            // If current language code is empty, means none selected by user yet so use phone local
+            descriptionSecondaryLanguageListPreference.setSummary(Locale.getDefault().getDisplayLanguage());
+        } else {
+            // If any language is selected by user previously, use it
+            Locale defLocale = createLocale(languageCode);
+            descriptionSecondaryLanguageListPreference.setSummary(defLocale.getDisplayLanguage(defLocale));
+        }
+        descriptionSecondaryLanguageListPreference.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+                System.out.println("clickedseco");
+                prepareAppLanguages(descriptionSecondaryLanguageListPreference.getKey());
                 return true;
             }
         });
@@ -205,6 +229,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             findPreference("useAuthorName").setEnabled(false);
             findPreference("displayNearbyCardView").setEnabled(false);
             findPreference("descriptionDefaultLanguagePref").setEnabled(false);
+            findPreference("descriptionSecondaryLanguagePref").setEnabled(false);
             findPreference("displayLocationPermissionForCardView").setEnabled(false);
             findPreference(CampaignView.CAMPAIGNS_DEFAULT_PREFERENCE).setEnabled(false);
             findPreference("managed_exif_tags").setEnabled(false);
@@ -278,6 +303,8 @@ public class SettingsFragment extends PreferenceFragmentCompat {
      */
     private void prepareAppLanguages(final String keyListPreference) {
 
+        System.out.println("gets to prepare app languages");
+
         // Gets current language code from shared preferences
         final String languageCode = getCurrentLanguageCode(keyListPreference);
         final List<Language> recentLanguages = recentLanguagesDao.getRecentLanguages();
@@ -300,7 +327,16 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             } else {
                 selectedLanguages.put(0, languageCode);
             }
+        } else if (keyListPreference.equals("descriptionSecondaryLanguagePref")) {
+
+        assert languageCode != null;
+        if (languageCode.equals("")) {
+            selectedLanguages.put(0, Locale.getDefault().getLanguage());
+
+        } else {
+            selectedLanguages.put(0, languageCode);
         }
+    }
 
         LanguagesAdapter languagesAdapter = new LanguagesAdapter(
             getActivity(),
@@ -368,8 +404,11 @@ public class SettingsFragment extends PreferenceFragmentCompat {
                     getActivity().recreate();
                     final Intent intent = new Intent(getActivity(), MainActivity.class);
                     startActivity(intent);
-                }else {
+                }else if(keyListPreference.equals("descriptionDefaultLanguagePref")){
                     descriptionLanguageListPreference.setSummary(defLocale.getDisplayLanguage(defLocale));
+                }
+                else{
+                    descriptionSecondaryLanguageListPreference.setSummary(defLocale.getDisplayLanguage(defLocale));
                 }
                 dialog.dismiss();
             }
@@ -496,6 +535,8 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             defaultKvStore.putString(Prefs.APP_UI_LANGUAGE, userSelectedValue);
         } else if (preferenceKey.equals("descriptionDefaultLanguagePref")) {
             defaultKvStore.putString(Prefs.DESCRIPTION_LANGUAGE, userSelectedValue);
+        } else if (preferenceKey.equals("descriptionSecondaryLanguagePref")) {
+            defaultKvStore.putString(Prefs.SECONDARY_LANGUAGE, userSelectedValue);
         }
     }
 
@@ -510,6 +551,9 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         }
         if (preferenceKey.equals("descriptionDefaultLanguagePref")) {
             return defaultKvStore.getString(Prefs.DESCRIPTION_LANGUAGE, "");
+        }
+        if (preferenceKey.equals("descriptionSecondaryLanguagePref")) {
+            return defaultKvStore.getString(Prefs.SECONDARY_LANGUAGE, "");
         }
         return null;
     }
