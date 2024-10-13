@@ -1,6 +1,5 @@
 package fr.free.nrw.commons.customselector.ui.screens
 
-import androidx.compose.runtime.mutableStateListOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import fr.free.nrw.commons.customselector.data.MediaReader
@@ -16,9 +15,6 @@ class CustomSelectorViewModel(private val mediaReader: MediaReader): ViewModel()
     val uiState = _uiState.asStateFlow()
 
     private val foldersMap = mutableMapOf<Long, MutableList<Image>>()
-
-    private var _selectedImageIds = mutableStateListOf<Long>()
-    val selectedImageIds = _selectedImageIds
 
     init {
         _uiState.update { it.copy(isLoading = true) }
@@ -46,12 +42,19 @@ class CustomSelectorViewModel(private val mediaReader: MediaReader): ViewModel()
                 }
             }
 
-            is CustomSelectorEvent.OnImageSelect -> {
-                if(_selectedImageIds.contains(e.imageId)) {
-                    _selectedImageIds.remove(e.imageId)
-                } else {
-                    _selectedImageIds.add(e.imageId)
+            is CustomSelectorEvent.OnImageSelection -> {
+                _uiState.update { state ->
+                    val updatedSelectedIds = if (state.selectedImageIds.contains(e.imageId)) {
+                        state.selectedImageIds - e.imageId // Remove if already selected
+                    } else{
+                        state.selectedImageIds + e.imageId // Add if not selected
+                    }
+                    state.copy(selectedImageIds = updatedSelectedIds)
                 }
+            }
+
+            is CustomSelectorEvent.OnDragImageSelection-> {
+                _uiState.update { it.copy(selectedImageIds = e.imageIds) }
             }
 
             else -> {}
