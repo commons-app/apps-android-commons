@@ -1,6 +1,9 @@
 package fr.free.nrw.commons.customselector.ui.screens
 
 import androidx.activity.compose.BackHandler
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -31,7 +34,9 @@ import androidx.compose.material3.adaptive.layout.ListDetailPaneScaffold
 import androidx.compose.material3.adaptive.layout.ListDetailPaneScaffoldRole
 import androidx.compose.material3.adaptive.navigation.rememberListDetailPaneScaffoldNavigator
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -57,7 +62,8 @@ import fr.free.nrw.commons.ui.theme.CommonsTheme
 fun CustomSelectorScreen(
     uiState: CustomSelectorState,
     onEvent: (CustomSelectorEvent)-> Unit,
-    selectedImageIds: List<Long>
+    selectedImageIds: ()-> Set<Long>,
+    hasPartialAccess: Boolean = false
 ) {
     val adaptiveInfo = currentWindowAdaptiveInfo()
     val navigator = rememberListDetailPaneScaffoldNavigator<Folder>()
@@ -65,34 +71,34 @@ fun CustomSelectorScreen(
     BackHandler(navigator.canNavigateBack()) {
         navigator.navigateBack()
     }
-    LaunchedEffect(key1 = navigator.currentDestination, key2 = navigator.scaffoldValue) {
-        println("Current Dest:- ${navigator.currentDestination} | Scaffold Value:- ${navigator.scaffoldValue}")
-    }
 
     ListDetailPaneScaffold(
         directive = navigator.scaffoldDirective.copy(horizontalPartitionSpacerSize = 0.dp),
         value = navigator.scaffoldValue,
         listPane = {
             AnimatedPane {
-                FoldersPane(uiState = uiState,
+                FoldersPane(
+                    uiState = uiState,
                     onFolderClick = {
                         onEvent(CustomSelectorEvent.OnFolderClick(it.bucketId))
                         navigator.navigateTo(ListDetailPaneScaffoldRole.Detail, it)
                     },
+                    hasPartialAccess = hasPartialAccess,
                     adaptiveInfo = adaptiveInfo
                 )
             }
         },
         detailPane = {
-            AnimatedPane(modifier = Modifier) {
+            AnimatedPane {
                 navigator.currentDestination?.content?.let { folder->
                     ImagesPane(
+                        uiState = uiState,
                         selectedFolder = folder,
                         selectedImages = selectedImageIds,
-                        imageList = uiState.filteredImages,
                         onNavigateBack = { navigator.navigateBack() },
-                        onToggleImageSelection = { onEvent(CustomSelectorEvent.OnImageSelect(it)) },
-                        adaptiveInfo = adaptiveInfo
+                        onEvent = onEvent,
+                        adaptiveInfo = adaptiveInfo,
+                        hasPartialAccess = hasPartialAccess
                     )
                 }
             }
@@ -104,23 +110,42 @@ fun CustomSelectorScreen(
 fun FoldersPane(
     uiState: CustomSelectorState,
     onFolderClick: (Folder)-> Unit,
-    adaptiveInfo: WindowAdaptiveInfo
+    adaptiveInfo: WindowAdaptiveInfo,
+    hasPartialAccess: Boolean = false
 ) {
+    val isCompatWidth by remember(adaptiveInfo.windowSizeClass) {
+        derivedStateOf { adaptiveInfo.windowSizeClass
+            .windowWidthSizeClass == WindowWidthSizeClass.COMPACT }
+    }
+
     Scaffold(
         topBar = {
             Surface(tonalElevation = 1.dp) {
                 CustomSelectorTopBar(
                     primaryText = stringResource(R.string.custom_selector_title),
                     onNavigateBack = { /*TODO*/ },
-                    showAlertIcon = true
+                    showAlertIcon = uiState.selectedImageIds.size > 20 && isCompatWidth,
+                    selectionCount = uiState.selectedImageIds.size,
+                    onAlertAction = { },
+                    showSelectionCount = uiState.inSelectionMode && isCompatWidth
                 )
             }
         },
         bottomBar = {
-            Surface(tonalElevation = 1.dp) {
-                CustomSelectorBottomBar(
-                    modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)
-                )
+            AnimatedVisibility(
+                visible = uiState.inSelectionMode,
+                enter = slideInVertically(initialOffsetY = { it }),
+                exit = slideOutVertically(targetOffsetY = { it })
+            ) {
+                Surface(tonalElevation = 1.dp) {
+                    CustomSelectorBottomBar(
+                        onPrimaryAction = { /*TODO("Implement action to upload selected images")*/},
+                        onSecondaryAction = {
+                            /*TODO("Implement action to mark/unmark images as not for upload")*/
+                        },
+                        modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)
+                    )
+                }
             }
         }
     ) { innerPadding->
@@ -130,16 +155,20 @@ fun FoldersPane(
                     .padding(innerPadding)
                     .fillMaxSize()
             ) {
-                if(adaptiveInfo.windowSizeClass.windowWidthSizeClass == WindowWidthSizeClass.COMPACT) {
+                if(hasPartialAccess && isCompatWidth) {
                     PartialStorageAccessDialog(
-                        isVisible = true,
-                        onManage = { /*TODO*/ },
+                        onManageAction = { /*TODO("Request permission[READ_MEDIA_IMAGES]")*/ },
                         modifier = Modifier.padding(8.dp)
                     )
                 }
 
                 if(uiState.isLoading) {
-                    CircularProgressIndicator()
+                    Box(
+                        modifier = Modifier.fillMaxSize(1f),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        CircularProgressIndicator()
+                    }
                 } else {
                     LazyVerticalGrid(
                         columns = GridCells.Adaptive(164.dp),
@@ -236,7 +265,8 @@ private fun CustomSelectorScreenPreview() {
         CustomSelectorScreen(
             uiState = CustomSelectorState(),
             onEvent = { },
-            selectedImageIds = emptyList()
+            selectedImageIds = { emptySet() },
+            hasPartialAccess = true
         )
     }
 }

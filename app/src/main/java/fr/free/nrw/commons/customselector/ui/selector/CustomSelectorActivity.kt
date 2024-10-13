@@ -185,7 +185,8 @@ class CustomSelectorActivity :
                 CustomSelectorScreen(
                     uiState = uiState,
                     onEvent = csViewModel::onEvent,
-                    selectedImageIds = csViewModel.selectedImageIds
+                    selectedImageIds = { uiState.selectedImageIds },
+                    hasPartialAccess = showPartialAccessIndicator
                 )
             }
         }
