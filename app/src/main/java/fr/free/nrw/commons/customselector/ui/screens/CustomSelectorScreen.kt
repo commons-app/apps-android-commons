@@ -246,7 +246,7 @@ private fun FolderItemPreview() {
     CommonsTheme {
         Surface {
             FolderItem(
-                previewPainter = painterResource(R.drawable.placeholder_image),
+                previewPainter = painterResource(R.drawable.image_placeholder_96),
                 folderName = "Folder Name",
                 itemsCount = 12,
                 onClick = { },
