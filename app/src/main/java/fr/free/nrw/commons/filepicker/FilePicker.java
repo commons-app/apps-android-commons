@@ -109,7 +109,13 @@ public class FilePicker implements Constants {
      */
     public static void openGallery(Activity activity, int type, boolean openDocumentIntentPreferred) {
         Intent intent = createGalleryIntent(activity, type, openDocumentIntentPreferred);
-        activity.startActivityForResult(intent, RequestCodes.PICK_PICTURE_FROM_GALLERY);
+        int requestCode = RequestCodes.PICK_PICTURE_FROM_GALLERY;
+
+            if(openDocumentIntentPreferred){
+                requestCode = RequestCodes.PICK_PICTURE_FROM_DOCUMENTS;
+            }
+
+        activity.startActivityForResult(intent, requestCode);
     }
 
     /**
