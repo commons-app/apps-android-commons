@@ -28,14 +28,14 @@ class CommonPlaceClickActions
         private val activity: Activity,
         private val contributionController: ContributionController,
     ) {
-        fun onCameraClicked(): (Place, ActivityResultLauncher<Array<String>>) -> Unit =
-            { place, launcher ->
+        fun onCameraClicked(): (Place, ActivityResultLauncher<Array<String>>, ActivityResultLauncher<Intent>) -> Unit =
+            { place, launcher, resultLauncher ->
                 if (applicationKvStore.getBoolean("login_skipped", false)) {
                     showLoginDialog()
                 } else {
                     Timber.d("Camera button tapped. Image title: ${place.getName()}Image desc: ${place.longDescription}")
                     storeSharedPrefs(place)
-                    contributionController.initiateCameraPick(activity, launcher)
+                    contributionController.initiateCameraPick(activity, launcher, resultLauncher)
                 }
             }
 
@@ -72,14 +72,14 @@ class CommonPlaceClickActions
                 true
             }
 
-        fun onGalleryClicked(): (Place) -> Unit =
-            {
+        fun onGalleryClicked(): (Place, ActivityResultLauncher<Intent>) -> Unit =
+            {place, galleryPickLauncherForResult ->
                 if (applicationKvStore.getBoolean("login_skipped", false)) {
                     showLoginDialog()
                 } else {
-                    Timber.d("Gallery button tapped. Image title: ${it.getName()}Image desc: ${it.getLongDescription()}")
-                    storeSharedPrefs(it)
-                    contributionController.initiateGalleryPick(activity, false)
+                    Timber.d("Gallery button tapped. Image title: ${place.getName()}Image desc: ${place.getLongDescription()}")
+                    storeSharedPrefs(place)
+                    contributionController.initiateGalleryPick(activity, galleryPickLauncherForResult,false)
                 }
             }
 

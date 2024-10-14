@@ -1065,6 +1065,8 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
         return captionList;
     }
 
+    // TODO[Parry]: Request code is never used to start an activity, so the result will never
+    // be used, safely remove this.
     /**
      * Get the result from another activity and act accordingly.
      * @param requestCode
