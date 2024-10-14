@@ -174,10 +174,6 @@ public class FilePicker implements Constants {
                         onPictureReturnedFromCustomSelector(data, activity, callbacks);
                     } else if (requestCode == RequestCodes.TAKE_PICTURE) {
                         onPictureReturnedFromCamera(activity, callbacks);
-                    } else if (isPhoto(data)) {
-                        onPictureReturnedFromCamera(activity, callbacks);
-                    } else {
-                        onPictureReturnedFromDocuments(data, activity, callbacks);
                     }
                 } else {
                     if (requestCode == RequestCodes.PICK_PICTURE_FROM_DOCUMENTS) {
