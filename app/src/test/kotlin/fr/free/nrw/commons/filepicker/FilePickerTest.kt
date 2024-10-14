@@ -64,12 +64,17 @@ class FilePickerTest {
         `when`(PreferenceManager.getDefaultSharedPreferences(activity)).thenReturn(sharedPref)
         `when`(sharedPref.edit()).thenReturn(sharedPreferencesEditor)
         `when`(sharedPref.edit().putInt("type", 0)).thenReturn(sharedPreferencesEditor)
-        FilePicker.openGallery(activity, 0, nextBoolean())
+        val openDocumentPreferred = nextBoolean()
+        FilePicker.openGallery(activity, 0, openDocumentPreferred)
         verify(activity).startActivityForResult(
             ArgumentMatchers.any(),
             requestCodeCaptor?.capture()?.toInt()!!,
         )
-        assertEquals(requestCodeCaptor?.value, RequestCodes.PICK_PICTURE_FROM_GALLERY)
+        if(openDocumentPreferred){
+            assertEquals(requestCodeCaptor?.value, RequestCodes.PICK_PICTURE_FROM_DOCUMENTS)
+        }else{
+            assertEquals(requestCodeCaptor?.value, RequestCodes.PICK_PICTURE_FROM_GALLERY)
+        }
     }
 
     @Test
