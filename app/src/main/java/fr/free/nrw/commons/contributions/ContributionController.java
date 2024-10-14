@@ -7,6 +7,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.widget.Toast;
+import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
@@ -64,10 +65,11 @@ public class ContributionController {
      * Check for permissions and initiate camera click
      */
     public void initiateCameraPick(Activity activity,
-        ActivityResultLauncher<String[]> inAppCameraLocationPermissionLauncher) {
+        ActivityResultLauncher<String[]> inAppCameraLocationPermissionLauncher,
+        ActivityResultLauncher<Intent> resultLauncher) {
         boolean useExtStorage = defaultKvStore.getBoolean("useExternalStorage", true);
         if (!useExtStorage) {
-            initiateCameraUpload(activity);
+            initiateCameraUpload(activity, resultLauncher);
             return;
         }
 
@@ -75,12 +77,12 @@ public class ContributionController {
             () -> {
                 if (defaultKvStore.getBoolean("inAppCameraFirstRun")) {
                     defaultKvStore.putBoolean("inAppCameraFirstRun", false);
-                    askUserToAllowLocationAccess(activity, inAppCameraLocationPermissionLauncher);
+                    askUserToAllowLocationAccess(activity, inAppCameraLocationPermissionLauncher, resultLauncher);
                 } else if (defaultKvStore.getBoolean("inAppCameraLocationPref")) {
                     createDialogsAndHandleLocationPermissions(activity,
-                        inAppCameraLocationPermissionLauncher);
+                        inAppCameraLocationPermissionLauncher, resultLauncher);
                 } else {
-                    initiateCameraUpload(activity);
+                    initiateCameraUpload(activity,resultLauncher);
                 }
             },
             R.string.storage_permission_title,
@@ -94,7 +96,8 @@ public class ContributionController {
      * @param activity
      */
     private void createDialogsAndHandleLocationPermissions(Activity activity,
-        ActivityResultLauncher<String[]> inAppCameraLocationPermissionLauncher) {
+        ActivityResultLauncher<String[]> inAppCameraLocationPermissionLauncher,
+        ActivityResultLauncher<Intent> resultLauncher) {
         locationPermissionCallback = new LocationPermissionCallback() {
             @Override
             public void onLocationPermissionDenied(String toastMessage) {
@@ -103,7 +106,7 @@ public class ContributionController {
                     toastMessage,
                     Toast.LENGTH_LONG
                 ).show();
-                initiateCameraUpload(activity);
+                initiateCameraUpload(activity, resultLauncher);
             }
 
             @Override
@@ -112,7 +115,7 @@ public class ContributionController {
                     showLocationOffDialog(activity, R.string.in_app_camera_needs_location,
                         R.string.in_app_camera_location_unavailable);
                 } else {
-                    initiateCameraUpload(activity);
+                    initiateCameraUpload(activity, resultLauncher);
                 }
             }
         };
@@ -148,20 +151,22 @@ public class ContributionController {
                 () -> {
                     Toast.makeText(activity, activity.getString(toastTextResource),
                         Toast.LENGTH_LONG).show();
-                    initiateCameraUpload(activity);
+                    //TODO [Parry] why do we need this call???
+//                    initiateCameraUpload(activity);
                 }
             );
     }
 
     public void handleShowRationaleFlowCameraLocation(Activity activity,
-        ActivityResultLauncher<String[]> inAppCameraLocationPermissionLauncher) {
+        ActivityResultLauncher<String[]> inAppCameraLocationPermissionLauncher,
+        ActivityResultLauncher<Intent> resultLauncher) {
         DialogUtil.showAlertDialog(activity, activity.getString(R.string.location_permission_title),
             activity.getString(R.string.in_app_camera_location_permission_rationale),
             activity.getString(android.R.string.ok),
             activity.getString(android.R.string.cancel),
             () -> {
                 createDialogsAndHandleLocationPermissions(activity,
-                    inAppCameraLocationPermissionLauncher);
+                    inAppCameraLocationPermissionLauncher, resultLauncher);
             },
             () -> locationPermissionCallback.onLocationPermissionDenied(
                 activity.getString(R.string.in_app_camera_location_permission_denied)),
@@ -181,7 +186,8 @@ public class ContributionController {
      * @param activity
      */
     private void askUserToAllowLocationAccess(Activity activity,
-        ActivityResultLauncher<String[]> inAppCameraLocationPermissionLauncher) {
+        ActivityResultLauncher<String[]> inAppCameraLocationPermissionLauncher,
+        ActivityResultLauncher<Intent> resultLauncher) {
         DialogUtil.showAlertDialog(activity,
             activity.getString(R.string.in_app_camera_location_permission_title),
             activity.getString(R.string.in_app_camera_location_access_explanation),
@@ -190,12 +196,12 @@ public class ContributionController {
             () -> {
                 defaultKvStore.putBoolean("inAppCameraLocationPref", true);
                 createDialogsAndHandleLocationPermissions(activity,
-                    inAppCameraLocationPermissionLauncher);
+                    inAppCameraLocationPermissionLauncher, resultLauncher);
             },
             () -> {
                 ViewUtil.showLongToast(activity, R.string.in_app_camera_location_permission_denied);
                 defaultKvStore.putBoolean("inAppCameraLocationPref", false);
-                initiateCameraUpload(activity);
+                initiateCameraUpload(activity, resultLauncher);
             },
             null,
             true);
@@ -204,18 +210,18 @@ public class ContributionController {
     /**
      * Initiate gallery picker
      */
-    public void initiateGalleryPick(final Activity activity, final boolean allowMultipleUploads) {
-        initiateGalleryUpload(activity, allowMultipleUploads);
+    public void initiateGalleryPick(final Activity activity,ActivityResultLauncher<Intent> resultLauncher ,final boolean allowMultipleUploads) {
+        initiateGalleryUpload(activity,resultLauncher ,allowMultipleUploads);
     }
 
     /**
      * Initiate gallery picker with permission
      */
-    public void initiateCustomGalleryPickWithPermission(final Activity activity) {
+    public void initiateCustomGalleryPickWithPermission(final Activity activity, ActivityResultLauncher<Intent> resultLauncher) {
         setPickerConfiguration(activity, true);
 
         PermissionUtils.checkPermissionsAndPerformAction(activity,
-            () -> FilePicker.openCustomSelector(activity, 0),
+            () -> FilePicker.openCustomSelector(activity, resultLauncher,0),
             R.string.storage_permission_title,
             R.string.write_storage_permission_rationale,
             PermissionUtils.PERMISSIONS_STORAGE);
@@ -225,12 +231,12 @@ public class ContributionController {
     /**
      * Open chooser for gallery uploads
      */
-    private void initiateGalleryUpload(final Activity activity,
+    private void initiateGalleryUpload(final Activity activity, ActivityResultLauncher<Intent> resultLauncher,
         final boolean allowMultipleUploads) {
         setPickerConfiguration(activity, allowMultipleUploads);
         boolean openDocumentIntentPreferred = defaultKvStore.getBoolean(
             "openDocumentPhotoPickerPref", true);
-        FilePicker.openGallery(activity, 0, openDocumentIntentPreferred);
+        FilePicker.openGallery(activity, resultLauncher,0, openDocumentIntentPreferred);
     }
 
     /**
@@ -247,42 +253,72 @@ public class ContributionController {
     /**
      * Initiate camera upload by opening camera
      */
-    private void initiateCameraUpload(Activity activity) {
+    private void initiateCameraUpload(Activity activity, ActivityResultLauncher<Intent> resultLauncher) {
         setPickerConfiguration(activity, false);
         if (defaultKvStore.getBoolean("inAppCameraLocationPref", false)) {
             locationBeforeImageCapture = locationManager.getLastLocation();
         }
         isInAppCameraUpload = true;
-        FilePicker.openCameraForImage(activity, 0);
+        FilePicker.openCameraForImage(activity, resultLauncher,0);
+    }
+
+    public void onPictureReturnedFromGallery(ActivityResult result, Activity activity, FilePicker.Callbacks callbacks){
+        FilePicker.onPictureReturnedFromGallery(result,activity,callbacks);
+    }
+
+    public void onPictureReturnedFromCustomSelector(ActivityResult result, Activity activity, @NonNull FilePicker.Callbacks callbacks) {
+        FilePicker.onPictureReturnedFromCustomSelector(result,activity,callbacks);
     }
 
     /**
      * Attaches callback for file picker.
      */
-    public void handleActivityResult(Activity activity, int requestCode, int resultCode,
-        Intent data) {
-        FilePicker.handleActivityResult(requestCode, resultCode, data, activity,
-            new DefaultCallback() {
+    public void handleActivityResultWithCallback(Activity activity, FilePicker.HandleActivityResult handleActivityResult) {
 
-                @Override
-                public void onCanceled(final ImageSource source, final int type) {
-                    super.onCanceled(source, type);
-                    defaultKvStore.remove(PLACE_OBJECT);
-                }
+        handleActivityResult.onHandleActivityResult(new DefaultCallback() {
 
-                @Override
-                public void onImagePickerError(Exception e, FilePicker.ImageSource source,
-                    int type) {
-                    ViewUtil.showShortToast(activity, R.string.error_occurred_in_picking_images);
-                }
+            @Override
+            public void onCanceled(final ImageSource source, final int type) {
+                super.onCanceled(source, type);
+                defaultKvStore.remove(PLACE_OBJECT);
+            }
 
-                @Override
-                public void onImagesPicked(@NonNull List<UploadableFile> imagesFiles,
-                    FilePicker.ImageSource source, int type) {
-                    Intent intent = handleImagesPicked(activity, imagesFiles);
-                    activity.startActivity(intent);
-                }
-            });
+            @Override
+            public void onImagePickerError(Exception e, FilePicker.ImageSource source,
+                int type) {
+                ViewUtil.showShortToast(activity, R.string.error_occurred_in_picking_images);
+            }
+
+            @Override
+            public void onImagesPicked(@NonNull List<UploadableFile> imagesFiles,
+                FilePicker.ImageSource source, int type) {
+                Intent intent = handleImagesPicked(activity, imagesFiles);
+                activity.startActivity(intent);
+            }
+        });
+
+//        FilePicker.handleActivityResult(requestCode, resultCode, data, activity,
+//            new DefaultCallback() {
+//
+//                @Override
+//                public void onCanceled(final ImageSource source, final int type) {
+//                    super.onCanceled(source, type);
+//                    defaultKvStore.remove(PLACE_OBJECT);
+//                }
+//
+//                @Override
+//                public void onImagePickerError(Exception e, FilePicker.ImageSource source,
+//                    int type) {
+//                    ViewUtil.showShortToast(activity, R.string.error_occurred_in_picking_images);
+//                }
+//
+//                @Override
+//                public void onImagesPicked(@NonNull List<UploadableFile> imagesFiles,
+//                    FilePicker.ImageSource source, int type) {
+//                    Intent intent = handleImagesPicked(activity, imagesFiles);
+//                    activity.startActivity(intent);
+//                }
+//            });
     }
 
     public List<UploadableFile> handleExternalImagesPicked(Activity activity,

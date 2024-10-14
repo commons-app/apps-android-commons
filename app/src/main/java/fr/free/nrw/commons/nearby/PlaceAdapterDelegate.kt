@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.nearby
 
+import android.content.Intent
 import android.view.View
 import android.view.View.GONE
 import android.view.View.INVISIBLE
@@ -17,9 +18,9 @@ import fr.free.nrw.commons.databinding.ItemPlaceBinding
 fun placeAdapterDelegate(
     bookmarkLocationDao: BookmarkLocationsDao,
     onItemClick: ((Place) -> Unit)? = null,
-    onCameraClicked: (Place, ActivityResultLauncher<Array<String>>) -> Unit,
+    onCameraClicked: (Place, ActivityResultLauncher<Array<String>>, ActivityResultLauncher<Intent>) -> Unit,
     onCameraLongPressed: () -> Boolean,
-    onGalleryClicked: (Place) -> Unit,
+    onGalleryClicked: (Place, ActivityResultLauncher<Intent>) -> Unit,
     onGalleryLongPressed: () -> Boolean,
     onBookmarkClicked: (Place, Boolean) -> Unit,
     onBookmarkLongPressed: () -> Boolean,
@@ -28,6 +29,8 @@ fun placeAdapterDelegate(
     onDirectionsClicked: (Place) -> Unit,
     onDirectionsLongPressed: () -> Boolean,
     inAppCameraLocationPermissionLauncher: ActivityResultLauncher<Array<String>>,
+    resultLauncher: ActivityResultLauncher<Intent>,
+    galleryPickLauncherForResult: ActivityResultLauncher<Intent>
 ) = adapterDelegateViewBinding<Place, Place, ItemPlaceBinding>({ layoutInflater, parent ->
     ItemPlaceBinding.inflate(layoutInflater, parent, false)
 }) {
@@ -44,10 +47,10 @@ fun placeAdapterDelegate(
                 onItemClick?.invoke(item)
             }
         }
-        nearbyButtonLayout.cameraButton.setOnClickListener { onCameraClicked(item, inAppCameraLocationPermissionLauncher) }
+        nearbyButtonLayout.cameraButton.setOnClickListener { onCameraClicked(item, inAppCameraLocationPermissionLauncher, resultLauncher) }
         nearbyButtonLayout.cameraButton.setOnLongClickListener { onCameraLongPressed() }
 
-        nearbyButtonLayout.galleryButton.setOnClickListener { onGalleryClicked(item) }
+        nearbyButtonLayout.galleryButton.setOnClickListener { onGalleryClicked(item,galleryPickLauncherForResult) }
         nearbyButtonLayout.galleryButton.setOnLongClickListener { onGalleryLongPressed() }
         bookmarkButtonImage.setOnClickListener {
             val isBookmarked = bookmarkLocationDao.updateBookmarkLocation(item)

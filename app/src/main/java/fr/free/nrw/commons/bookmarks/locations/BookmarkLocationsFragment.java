@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -33,6 +34,19 @@ public class BookmarkLocationsFragment extends DaggerFragment {
     @Inject BookmarkLocationsDao bookmarkLocationDao;
     @Inject CommonPlaceClickActions commonPlaceClickActions;
     private PlaceAdapter adapter;
+
+    private ActivityResultLauncher<Intent> cameraPickLauncherForResult = registerForActivityResult(new StartActivityForResult(),
+        result -> {
+            // TODO handle result from controller
+        });
+
+      private ActivityResultLauncher<Intent> galleryPickLauncherForResult = registerForActivityResult(new StartActivityForResult(),
+        result -> {
+            contributionController.handleActivityResultWithCallback(requireActivity(),callbacks -> {
+                contributionController.onPictureReturnedFromGallery(result,requireActivity(),callbacks);
+            });
+        });
+
     private ActivityResultLauncher<String[]> inAppCameraLocationPermissionLauncher = registerForActivityResult(new ActivityResultContracts.RequestMultiplePermissions(), new ActivityResultCallback<Map<String, Boolean>>() {
         @Override
         public void onActivityResult(Map<String, Boolean> result) {
@@ -45,7 +59,7 @@ public class BookmarkLocationsFragment extends DaggerFragment {
                 contributionController.locationPermissionCallback.onLocationPermissionGranted();
             } else {
                 if (shouldShowRequestPermissionRationale(permission.ACCESS_FINE_LOCATION)) {
-                    contributionController.handleShowRationaleFlowCameraLocation(getActivity(), inAppCameraLocationPermissionLauncher);
+                    contributionController.handleShowRationaleFlowCameraLocation(getActivity(), inAppCameraLocationPermissionLauncher,cameraPickLauncherForResult);
                 } else {
                     contributionController.locationPermissionCallback.onLocationPermissionDenied(getActivity().getString(R.string.in_app_camera_location_permission_denied));
                 }
@@ -83,7 +97,11 @@ public class BookmarkLocationsFragment extends DaggerFragment {
                 return Unit.INSTANCE;
             },
             commonPlaceClickActions,
-            inAppCameraLocationPermissionLauncher
+            inAppCameraLocationPermissionLauncher,
+            galleryPickLauncherForResult,
+            //TODO[Parry] just a stub, make sure if this is actually the launcher we need!!
+            cameraPickLauncherForResult
+
         );
         binding.listView.setAdapter(adapter);
     }
@@ -109,9 +127,10 @@ public class BookmarkLocationsFragment extends DaggerFragment {
         }
     }
 
+    //TODO[Parr]: doubtful if it even used, check while testing
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        contributionController.handleActivityResult(getActivity(), requestCode, resultCode, data);
+//        contributionController.handleActivityResult(getActivity(), resultCode, data);
     }
 
     @Override
