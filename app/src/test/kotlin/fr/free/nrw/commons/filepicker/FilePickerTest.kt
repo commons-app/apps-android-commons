@@ -166,32 +166,6 @@ class FilePickerTest {
     }
 
     @Test
-    fun testTakenCameraVideo() {
-        val mockFilePicker = mock(FilePicker::class.java)
-        val method: Method =
-            FilePicker::class.java.getDeclaredMethod(
-                "takenCameraVideo",
-                Context::class.java,
-            )
-        method.isAccessible = true
-        method.invoke(mockFilePicker, context)
-    }
-
-    @Test
-    fun testTakenCameraVideoCaseTrue() {
-        val mockFilePicker = mock(FilePicker::class.java)
-        `when`(PreferenceManager.getDefaultSharedPreferences(activity)).thenReturn(sharedPref)
-        `when`(sharedPref.getString("last_video", null)).thenReturn("")
-        val method: Method =
-            FilePicker::class.java.getDeclaredMethod(
-                "takenCameraVideo",
-                Context::class.java,
-            )
-        method.isAccessible = true
-        method.invoke(mockFilePicker, activity)
-    }
-
-    @Test
     fun testIsPhoto() {
         val mockFilePicker = mock(FilePicker::class.java)
         val mockIntent = mock(Intent::class.java)

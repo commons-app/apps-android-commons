@@ -157,7 +157,6 @@ public class FilePicker implements Constants {
             requestCode &= ~RequestCodes.SOURCE_CHOOSER;
             if (requestCode == RequestCodes.PICK_PICTURE_FROM_GALLERY ||
                     requestCode == RequestCodes.TAKE_PICTURE ||
-                    requestCode == RequestCodes.CAPTURE_VIDEO ||
                     requestCode == RequestCodes.PICK_PICTURE_FROM_DOCUMENTS ||
                     requestCode == RequestCodes.PICK_PICTURE_FROM_CUSTOM_SELECTOR) {
                 if (resultCode == Activity.RESULT_OK) {
@@ -169,8 +168,6 @@ public class FilePicker implements Constants {
                         onPictureReturnedFromCustomSelector(data, activity, callbacks);
                     } else if (requestCode == RequestCodes.TAKE_PICTURE) {
                         onPictureReturnedFromCamera(activity, callbacks);
-                    } else if (requestCode == RequestCodes.CAPTURE_VIDEO) {
-                        onVideoReturnedFromCamera(activity, callbacks);
                     } else if (isPhoto(data)) {
                         onPictureReturnedFromCamera(activity, callbacks);
                     } else {
