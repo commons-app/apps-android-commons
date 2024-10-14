@@ -178,7 +178,10 @@ public class FilePicker implements Constants {
                         callbacks.onCanceled(FilePicker.ImageSource.DOCUMENTS, restoreType(activity));
                     } else if (requestCode == RequestCodes.PICK_PICTURE_FROM_GALLERY) {
                         callbacks.onCanceled(FilePicker.ImageSource.GALLERY, restoreType(activity));
-                    } else {
+                    } else if (requestCode == RequestCodes.PICK_PICTURE_FROM_CUSTOM_SELECTOR){
+                        callbacks.onCanceled(ImageSource.CUSTOM_SELECTOR, restoreType(activity));
+                    }
+                    else {
                         callbacks.onCanceled(FilePicker.ImageSource.CAMERA_IMAGE, restoreType(activity));
                     }
                 }
