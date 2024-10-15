@@ -18,6 +18,8 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
+import android.widget.ArrayAdapter;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
@@ -47,10 +49,13 @@ import fr.free.nrw.commons.logging.CommonsLogSender;
 import fr.free.nrw.commons.recentlanguages.Language;
 import fr.free.nrw.commons.recentlanguages.RecentLanguagesAdapter;
 import fr.free.nrw.commons.recentlanguages.RecentLanguagesDao;
+import fr.free.nrw.commons.recentlanguages.SavedLanguagesAdapter;
 import fr.free.nrw.commons.upload.LanguagesAdapter;
 import fr.free.nrw.commons.utils.DialogUtil;
 import fr.free.nrw.commons.utils.PermissionUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -153,7 +158,6 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         appUiLanguageListPreference.setOnPreferenceClickListener(new OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(Preference preference) {
-                System.out.println("Clicked appui");
                 prepareAppLanguages(appUiLanguageListPreference.getKey());
                 return true;
             }
@@ -180,6 +184,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             }
         });
 
+
         descriptionSecondaryLanguageListPreference = findPreference("descriptionSecondaryLanguagePref");
         assert descriptionSecondaryLanguageListPreference != null;
         keyLanguageListPreference = descriptionSecondaryLanguageListPreference.getKey();
@@ -196,8 +201,8 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         descriptionSecondaryLanguageListPreference.setOnPreferenceClickListener(new OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(Preference preference) {
-                System.out.println("clickedseco");
-                prepareAppLanguages(descriptionSecondaryLanguageListPreference.getKey());
+                System.out.println("click recieved");
+                prepareSecondaryLanguageDialog();
                 return true;
             }
         });
@@ -292,6 +297,136 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         });
     }
 
+    private void updateSavedLanguages(ListView savedLanguageListView, List<Language> savedLanguages, HashMap<Integer, String> selectedLanguages) {
+        // Use SavedLanguagesAdapter to display saved languages
+        SavedLanguagesAdapter savedLanguagesAdapter = new SavedLanguagesAdapter(
+            getActivity(),
+            savedLanguages,  // List of saved Language objects
+            selectedLanguages  // Pass the map of selected languages
+        );
+
+        // Set the adapter to the ListView to display the saved languages
+        savedLanguageListView.setAdapter(savedLanguagesAdapter);
+    }
+
+    private ArrayList<String> deSerialise(String languageCodes) {
+        // Check if the stored string is empty or null
+        if (languageCodes == null || languageCodes.isEmpty()) {
+            return new ArrayList<>();  // Return an empty list if there's no data
+        }
+
+        // Split the string by commas and store it in a list
+        String[] languageArray = languageCodes.split(",\\s*");  // Split by comma and optional space
+        return new ArrayList<>(Arrays.asList(languageArray));  // Convert array to ArrayList and return
+    }
+
+
+    private void prepareSecondaryLanguageDialog() {
+        final String languageCode = getCurrentLanguageCode("descriptionSecondaryLanguagePref");
+        System.out.println("before");
+        System.out.println(languageCode);
+        HashMap<Integer, String> selectedLanguages = new HashMap<>();
+        assert languageCode != null;
+        selectedLanguages.put(0, Locale.getDefault().getLanguage());
+
+        // Deserializing saved language codes to Language objects
+        ArrayList<Language> Saved_Languages = new ArrayList<>();
+        for (String code : deSerialise(languageCode)) {
+            Locale locale = new Locale(code);
+            Saved_Languages.add(new Language(locale.getDisplayLanguage(locale), code));
+        }
+
+        // Create the new dialog for secondary language
+        Dialog dialog = new Dialog(getActivity());
+        dialog.setContentView(R.layout.dialog_select_secondary_language);
+        dialog.setCanceledOnTouchOutside(true);
+        dialog.getWindow().setLayout(
+            (int) (getActivity().getResources().getDisplayMetrics().widthPixels * 0.90),
+            (int) (getActivity().getResources().getDisplayMetrics().heightPixels * 0.90)
+        );
+        dialog.show();
+
+        // Bind UI elements
+        EditText editText = dialog.findViewById(R.id.search_language);
+        ListView listView = dialog.findViewById(R.id.language_list);
+        ListView savedLanguageListView = dialog.findViewById(R.id.language_history_list);
+        View separator = dialog.findViewById(R.id.separator);
+
+        // Setup saved languages with the new SavedLanguagesAdapter
+        updateSavedLanguages(savedLanguageListView, Saved_Languages, selectedLanguages);
+
+        // Set an onItemClickListener to remove a language when clicked
+        savedLanguageListView.setOnItemClickListener((adapterView, view, position, id) -> {
+            // Remove the clicked language from Saved_Languages
+            Saved_Languages.remove(position);
+
+            // Update the saved language list view after removing the language
+            updateSavedLanguages(savedLanguageListView, Saved_Languages, selectedLanguages);
+
+            // Update the shared preferences to reflect the removal
+            String updatedLanguageCodes = "";
+            for (Language language : Saved_Languages) {
+                updatedLanguageCodes += language.getLanguageCode() + ", ";
+            }
+            // Remove the trailing comma and space if present
+            if (!updatedLanguageCodes.isEmpty()) {
+                updatedLanguageCodes = updatedLanguageCodes.substring(0, updatedLanguageCodes.length() - 2);
+            }
+
+            saveLanguageValue(updatedLanguageCodes, "descriptionSecondaryLanguagePref");
+            System.out.println("after removal");
+            System.out.println(getCurrentLanguageCode("descriptionSecondaryLanguagePref"));
+        });
+
+        // Set up the adapter for new languages using the selectedLanguages map
+        LanguagesAdapter languagesAdapter = new LanguagesAdapter(getActivity(), selectedLanguages);
+        listView.setAdapter(languagesAdapter);
+
+        // Add search functionality
+        editText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                hideRecentLanguagesSection();
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                languagesAdapter.getFilter().filter(charSequence);
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+            }
+        });
+
+        // Handle item click for language selection in the main list
+        listView.setOnItemClickListener((adapterView, view, i, l) -> {
+            String selectedLanguageCode = languagesAdapter.getLanguageCode(i);
+            String selectedLanguageName = languagesAdapter.getLanguageName(i);
+
+            if (deSerialise(getCurrentLanguageCode("descriptionSecondaryLanguagePref")).contains(selectedLanguageCode)) {
+                Toast.makeText(getActivity(), "Language already selected", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            Saved_Languages.add(new Language(selectedLanguageName, selectedLanguageCode));
+            updateSavedLanguages(savedLanguageListView, Saved_Languages, selectedLanguages);
+
+
+            // Save the language
+            if (getCurrentLanguageCode("descriptionSecondaryLanguagePref").isEmpty()) {
+                saveLanguageValue(selectedLanguageCode, "descriptionSecondaryLanguagePref");
+            } else {
+                saveLanguageValue(getCurrentLanguageCode("descriptionSecondaryLanguagePref") + ", "
+                    + selectedLanguageCode, "descriptionSecondaryLanguagePref");
+            }
+            descriptionSecondaryLanguageListPreference.setSummary(getCurrentLanguageCode("descriptionSecondaryLanguagePref"));
+        });
+    }
+
+
+
+
     /**
      * Prepare and Show language selection dialog box
      * Uses previously saved language if there is any, if not uses phone locale as initial language.
@@ -303,7 +438,6 @@ public class SettingsFragment extends PreferenceFragmentCompat {
      */
     private void prepareAppLanguages(final String keyListPreference) {
 
-        System.out.println("gets to prepare app languages");
 
         // Gets current language code from shared preferences
         final String languageCode = getCurrentLanguageCode(keyListPreference);
@@ -345,6 +479,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
 
         Dialog dialog = new Dialog(getActivity());
         dialog.setContentView(R.layout.dialog_select_language);
+
         dialog.setCanceledOnTouchOutside(true);
         dialog.getWindow().setLayout((int)(getActivity().getResources().getDisplayMetrics().widthPixels*0.90),
             (int)(getActivity().getResources().getDisplayMetrics().heightPixels*0.90));
