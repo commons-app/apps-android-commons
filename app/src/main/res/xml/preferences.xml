@@ -25,11 +25,19 @@
           app:singleLineTitle="false"
           android:title="@string/app_ui_language" />
 
+
         <Preference
           android:key="descriptionDefaultLanguagePref"
           app:useSimpleSummaryProvider="true"
           app:singleLineTitle="false"
           android:title="@string/default_description_language" />
+
+        <!-- New Secondary Language Picker -->
+        <Preference
+          android:key="descriptionSecondaryLanguagePref"
+          app:useSimpleSummaryProvider="true"
+          app:singleLineTitle="false"
+          android:title="@string/secondary_description_language" />
 
         <SwitchPreference
           android:defaultValue="true"
