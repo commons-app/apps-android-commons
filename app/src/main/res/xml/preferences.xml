@@ -12,7 +12,9 @@
             android:entries="@array/pref_theme_entries"
             android:entryValues="@array/pref_theme_entries_values"
             app:useSimpleSummaryProvider="true"
-            android:defaultValue="0" />
+          android:dependency="is_below_android_13"
+          android:defaultValue="0" />
+
 
     </PreferenceCategory>
 

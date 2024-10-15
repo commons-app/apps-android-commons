@@ -22,6 +22,7 @@
   <string name="nearby_filter_search">Search View</string>
   <string name="nearby_filter_state">Place State</string>
   <string name="appwidget_img">Pic of the Day</string>
+  <string name="use_system_language">Using system language</string>
 
   <!--Other strings-->
   <plurals name="uploads_pending_notification_indicator">

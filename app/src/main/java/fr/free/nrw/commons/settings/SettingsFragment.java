@@ -136,7 +136,33 @@ public class SettingsFragment extends PreferenceFragmentCompat {
 
         // Gets current language code from shared preferences
         String languageCode;
-
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU) {
+            // **Added:** Disable the app's UI language preference for Android 13 and above
+            appUiLanguageListPreference.setEnabled(false);
+            appUiLanguageListPreference.setSummary(getString(R.string.use_system_language));
+        } else {
+            // **Existing code remains for older Android versions**
+            keyLanguageListPreference = appUiLanguageListPreference.getKey();
+            languageCode = getCurrentLanguageCode(keyLanguageListPreference);
+            assert languageCode != null;
+            if (languageCode.equals("")) {
+                // If current language code is empty, means none selected by user yet so use phone local
+                appUiLanguageListPreference.setSummary(Locale.getDefault().getDisplayLanguage());
+            } else {
+                // If any language is selected by user previously, use it
+                Locale defLocale = createLocale(languageCode);
+                appUiLanguageListPreference.setSummary(defLocale.getDisplayLanguage(defLocale));
+            }
+            appUiLanguageListPreference.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+                @Override
+                public boolean onPreferenceClick(Preference preference) {
+                    // **No change:** Existing method call
+                    prepareAppLanguages(appUiLanguageListPreference.getKey());
+                    return true;
+                }
+            });
+        }
+/*
         appUiLanguageListPreference = findPreference("appUiDefaultLanguagePref");
         assert appUiLanguageListPreference != null;
         keyLanguageListPreference = appUiLanguageListPreference.getKey();
@@ -159,6 +185,9 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             }
         });
 
+ */
+
+        // Continue with other preferences
         descriptionLanguageListPreference = findPreference("descriptionDefaultLanguagePref");
         assert descriptionLanguageListPreference != null;
         keyLanguageListPreference = descriptionLanguageListPreference.getKey();
@@ -311,6 +340,10 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         HashMap<Integer, String> selectedLanguages = new HashMap<>();
 
         if (keyListPreference.equals("appUiDefaultLanguagePref")) {
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU) {
+                // For Android 13+, the system manages language, so we skip manual selection
+                return;
+            }
 
             assert languageCode != null;
             if (languageCode.equals("")) {
