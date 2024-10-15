@@ -23,7 +23,7 @@ WHERE {
   BIND(COALESCE(?itemLabelPreferredLanguage, ?itemLabelAnyLanguage, "?") as ?label)
 
   # Get the description in the preferred language of the user, or any other language if no description is available in that language.
-  OPTIONAL {?item schema:description ?itemDescriptionPreferredLanguage. FILTER (lang(?itemDescriptionPreferredLanguage) = "${LANG}")}
+  OPTIONAL {?item schema:description ?itemDescriptionPreferredLanguage. FILTER (LANG(?itemDescriptionPreferredLanguage) = "${LANG}" || LANG(?itemDescriptionPreferredLanguage) = "en")}
   OPTIONAL {?item schema:description ?itemDescriptionAnyLanguage}
   BIND(COALESCE(?itemDescriptionPreferredLanguage, ?itemDescriptionAnyLanguage, "?") as ?description)
 
