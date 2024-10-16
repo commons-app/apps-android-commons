@@ -311,9 +311,22 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     public void onCreateOptionsMenu(@NonNull final Menu menu,
         @NonNull final MenuInflater inflater) {
         inflater.inflate(R.menu.nearby_fragment_menu, menu);
+        MenuItem refreshButton = menu.findItem(R.id.item_refresh);
         MenuItem listMenu = menu.findItem(R.id.list_sheet);
         MenuItem saveAsGPXButton = menu.findItem(R.id.list_item_gpx);
         MenuItem saveAsKMLButton = menu.findItem(R.id.list_item_kml);
+        refreshButton.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                try {
+                    // REFRESH BUTTON FUNCTIONALITY HERE
+                    refresh(); // handle functionality of refreshing
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+                return false;
+            }
+        });
         listMenu.setOnMenuItemClickListener(new OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
@@ -1113,6 +1126,21 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         if (recenterToUserLocation) {
             recenterToUserLocation = false;
         }
+    }
+
+    /**
+     *  Empties the Nearby local cache and reloads the Nearby map
+     */
+    private void refresh(){
+        // can either use this sort of progressDialog to display while page is refreshing
+        // or, we can put a big fat refresh icon on the page.
+        // If we stick with the progressDialog, we should make a new one called refreshDialog,
+        // since itll interfere with the one used to save as GPX/KML
+
+        // When the map initially loads, there is already a big fat refresh circle that is displayed so maybe itll be good to use that instead of dialog
+//        progressDialog.setTitle("REFRESHING NEARBY"); // PLACEHOLDER UNTIL WE
+//        progressDialog.show();
+//        progressDialog.hide();
     }
 
     private void savePlacesAsKML() {
