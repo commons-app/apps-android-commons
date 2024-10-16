@@ -18,7 +18,7 @@ WHERE {
   }
 
   # Get the label in the preferred language of the user, or any other language if no label is available in that language.
-  OPTIONAL {?item rdfs:label ?itemLabelPreferredLanguage. FILTER (lang(?itemLabelPreferredLanguage) = "en")}
+  OPTIONAL {?item rdfs:label ?itemLabelPreferredLanguage. FILTER (lang(?itemLabelPreferredLanguage) = "${LANG}")}
   OPTIONAL {?item rdfs:label ?itemLabelAnyLanguage}
   BIND(COALESCE(?itemLabelPreferredLanguage, ?itemLabelAnyLanguage, "?") as ?label)
 
