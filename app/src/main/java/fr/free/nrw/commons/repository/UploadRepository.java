@@ -373,9 +373,11 @@ public class UploadRepository {
     @Nullable
     public Place checkNearbyPlaces(final double decLatitude, final double decLongitude) {
         try {
+            String fullCode = Locale.getDefault().getLanguage();
+            String mainCode = fullCode.contains(",") ? fullCode.substring(0, fullCode.indexOf(',')).trim() : fullCode;
             final List<Place> fromWikidataQuery = nearbyPlaces.getFromWikidataQuery(new LatLng(
                     decLatitude, decLongitude, 0.0f),
-                Locale.getDefault().getLanguage(),
+                mainCode,
                 NEARBY_RADIUS_IN_KILO_METERS, null);
             return (fromWikidataQuery != null && fromWikidataQuery.size() > 0) ? fromWikidataQuery
                 .get(0) : null;

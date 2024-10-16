@@ -56,6 +56,8 @@ public class NearbyController extends MapController {
             Timber.d("Loading attractions nearby, but currentLatLng is null");
             return null;
         }
+        String fullCode = Locale.getDefault().getLanguage();
+        String mainCode = fullCode.contains(",") ? fullCode.substring(0, fullCode.indexOf(',')).trim() : fullCode;
         List<Place> places = nearbyPlaces
             .radiusExpander(searchLatLng, Locale.getDefault().getLanguage(), returnClosestResult,
                 customQuery);
