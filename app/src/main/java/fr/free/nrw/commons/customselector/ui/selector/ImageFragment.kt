@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
 import android.widget.Switch
+import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.Observer
@@ -73,6 +74,7 @@ class ImageFragment :
     private var loader: ProgressBar? = null
     private var switch: Switch? = null
     lateinit var filteredImages: ArrayList<Image>
+    private var appreciationText : TextView? = null
 
     /**
      * Stores all images
@@ -211,6 +213,7 @@ class ImageFragment :
             },
         )
 
+        appreciationText = binding?.appreciationText
         switch = binding?.switchWidget
         switch?.visibility = View.VISIBLE
         switch?.setOnCheckedChangeListener { _, isChecked -> onChangeSwitchState(isChecked) }
@@ -236,6 +239,7 @@ class ImageFragment :
     private fun onChangeSwitchState(checked: Boolean) {
         if (checked) {
             showAlreadyActionedImages = true
+            appreciationText?.visibility = View.GONE
             val sharedPreferences: SharedPreferences =
                 requireContext().getSharedPreferences(CUSTOM_SELECTOR_PREFERENCE_KEY, MODE_PRIVATE)
             val editor = sharedPreferences.edit()
@@ -291,6 +295,10 @@ class ImageFragment :
                 allImages = filteredImages
                 binding?.emptyText?.let {
                     it.visibility = View.VISIBLE
+                    if (!showAlreadyActionedImages) {
+                        appreciationText?.visibility = View.VISIBLE
+
+                    }
                 }
                 selectorRV?.let {
                     it.visibility = View.GONE
