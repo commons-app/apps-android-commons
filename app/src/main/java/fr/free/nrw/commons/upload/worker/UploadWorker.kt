@@ -44,6 +44,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import timber.log.Timber
 import java.util.Date
+import java.util.Random
 import java.util.regex.Pattern
 import javax.inject.Inject
 
@@ -532,33 +533,33 @@ class UploadWorker(
     }
 
     private fun findUniqueFileName(fileName: String): String {
-        var sequenceFileName: String?
-        var sequenceNumber = 1
-        while (true) {
+        var sequenceFileName: String? = fileName
+        val chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+        val random = Random()
+
+        // Loops until sequenceFileName does not match any existing file names
+        while (mediaClient
+                .checkPageExistsUsingTitle(
+                    String.format(
+                        "File:%s",
+                        sequenceFileName,
+                    ),
+                ).blockingGet()) {
+
+            // Generate a random 5-character alphanumeric string
+            val randomHash = (1..3)
+                .map { chars[random.nextInt(chars.length)] }
+                .joinToString("")
+
             sequenceFileName =
-                if (sequenceNumber == 1) {
-                    fileName
+                if (fileName.indexOf('.') == -1) {
+                    "$fileName #$randomHash"
                 } else {
-                    if (fileName.indexOf('.') == -1) {
-                        "$fileName $sequenceNumber"
-                    } else {
-                        val regex =
-                            Pattern.compile("^(.*)(\\..+?)$")
-                        val regexMatcher = regex.matcher(fileName)
-                        regexMatcher.replaceAll("$1 $sequenceNumber$2")
-                    }
+                    val regex =
+                        Pattern.compile("^(.*)(\\..+?)$")
+                    val regexMatcher = regex.matcher(fileName)
+                    regexMatcher.replaceAll("$1 #$randomHash")
                 }
-            if (!mediaClient
-                    .checkPageExistsUsingTitle(
-                        String.format(
-                            "File:%s",
-                            sequenceFileName,
-                        ),
-                    ).blockingGet()
-            ) {
-                break
-            }
-            sequenceNumber++
         }
         return sequenceFileName!!
     }
