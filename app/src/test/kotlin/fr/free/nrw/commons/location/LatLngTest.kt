@@ -23,7 +23,7 @@ class LatLngTest {
     @Test
     fun testConstructorBigLongitude() {
         latLng1 = LatLng(0.0, 181.0, 0.0f)
-        assertThat(latLng1.longitude, equalTo(179.0))
+        assertThat(latLng1.longitude, equalTo(-179.0))
     }
 
     @Test
