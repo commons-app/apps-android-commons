@@ -320,7 +320,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             public boolean onMenuItemClick(MenuItem item) {
                 try {
                     // REFRESH BUTTON FUNCTIONALITY HERE
-                    refresh(); // handle functionality of refreshing
+                    emptyCache();
+                    reloadMap();
                 } catch (Exception e) {
                     throw new RuntimeException(e);
                 }
@@ -1129,18 +1130,18 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     }
 
     /**
-     *  Empties the Nearby local cache and reloads the Nearby map
+     *  Reloads the Nearby map
      */
-    private void refresh(){
-        // can either use this sort of progressDialog to display while page is refreshing
-        // or, we can put a big fat refresh icon on the page.
-        // If we stick with the progressDialog, we should make a new one called refreshDialog,
-        // since itll interfere with the one used to save as GPX/KML
+    private void reloadMap(){
 
-        // When the map initially loads, there is already a big fat refresh circle that is displayed so maybe itll be good to use that instead of dialog
-//        progressDialog.setTitle("REFRESHING NEARBY"); // PLACEHOLDER UNTIL WE
-//        progressDialog.show();
-//        progressDialog.hide();
+    }
+
+
+    /**
+     *  Empties the Nearby local cache
+     */
+    private void emptyCache(){
+
     }
 
     private void savePlacesAsKML() {
