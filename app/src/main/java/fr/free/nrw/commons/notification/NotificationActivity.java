@@ -19,6 +19,7 @@ import fr.free.nrw.commons.databinding.ActivityNotificationBinding;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.auth.csrf.InvalidLoginTokenException;
 import fr.free.nrw.commons.notification.models.Notification;
+import fr.free.nrw.commons.notification.models.NotificationType;
 import fr.free.nrw.commons.theme.BaseActivity;
 import fr.free.nrw.commons.utils.NetworkUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
@@ -147,8 +148,11 @@ public class NotificationActivity extends BaseActivity {
             refresh(false);
         }
         adapter = new NotificatinAdapter(item -> {
-            Timber.d("Notification clicked %s", item.getLink());
-            handleUrl(item.getLink());
+            if (item.getNotificationType() == NotificationType.EMAIL){
+                ViewUtil.showLongSnackbar(binding.container, "Check your mail box");
+            } else {
+                handleUrl(item.getLink());
+            }
             removeNotification(item);
             return Unit.INSTANCE;
         });
