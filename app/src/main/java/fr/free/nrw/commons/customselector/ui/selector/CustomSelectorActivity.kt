@@ -13,6 +13,11 @@ import android.view.Window
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
+import android.view.Menu
+import android.view.MenuItem
+import android.widget.PopupMenu
+import androidx.appcompat.app.AlertDialog
+
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -59,6 +64,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import timber.log.Timber
 import java.io.File
 import java.lang.Integer.max
 import javax.inject.Inject
@@ -148,6 +154,13 @@ class CustomSelectorActivity :
     private var showPartialAccessIndicator by mutableStateOf(false)
 
     /**
+     * Show delete button on folder
+     */
+    private var showOverflowMenu = false
+
+
+
+    /**
      * onCreate Activity, sets theme, initialises the view model, setup view.
      */
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -173,9 +186,9 @@ class CustomSelectorActivity :
                     }
                 },
                 modifier =
-                    Modifier
-                        .padding(vertical = 8.dp, horizontal = 4.dp)
-                        .fillMaxWidth(),
+                Modifier
+                    .padding(vertical = 8.dp, horizontal = 4.dp)
+                    .fillMaxWidth(),
             )
         }
         val view = binding.root
@@ -203,6 +216,7 @@ class CustomSelectorActivity :
             lastOpenFolderName?.let { onFolderClick(lastOpenFolderId, it, lastItemId) }
         }
     }
+
 
     override fun onRequestPermissionsResult(
         requestCode: Int,
@@ -414,7 +428,7 @@ class CustomSelectorActivity :
     }
 
     /**
-     * Set up the toolbar, back listener, done listener.
+     * Set up the toolbar, back listener, done listener, overflow menu listener.
      */
     private fun setUpToolbar() {
         val back: ImageButton = findViewById(R.id.back)
@@ -423,16 +437,72 @@ class CustomSelectorActivity :
         val limitError: ImageButton = findViewById(R.id.image_limit_error)
         limitError.visibility = View.INVISIBLE
         limitError.setOnClickListener { displayUploadLimitWarning() }
+
+        val overflowMenu: ImageButton = findViewById(R.id.menu_overflow)
+        overflowMenu.visibility = if (showOverflowMenu) View.VISIBLE else View.INVISIBLE
+
+        // Set up popup menu when overflow menu is clicked
+        overflowMenu.setOnClickListener { showPopupMenu(overflowMenu) }
+
     }
 
+    private fun showPopupMenu(anchorView: View) {
+        val popupMenu = PopupMenu(this, anchorView)
+        popupMenu.menuInflater.inflate(R.menu.menu_custom_selector, popupMenu.menu)
+
+        // Handle menu item clicks
+        popupMenu.setOnMenuItemClickListener { item ->
+            when (item.itemId) {
+                R.id.action_delete_folder -> {
+                    deleteFolder()  // Call the delete folder logic here
+                    true
+                }
+                else -> false
+            }
+        }
+        popupMenu.show()
+    }
+
+    private fun deleteFolder() {
+        Timber.tag("FolderAction").d("Delete folder action triggered")
+
+
+        // Run on UI thread to ensure dialog shows correctly
+        runOnUiThread {
+            val builder = AlertDialog.Builder(this)
+            builder.setTitle("Delete Folder")
+            builder.setMessage("Are you sure you want to delete this folder?")
+
+            // Set the positive button to confirm deletion
+            builder.setPositiveButton("Delete") { dialog, _ ->
+                // Perform folder deletion here
+                Timber.tag("FolderAction").d("Folder deleted")
+                dialog.dismiss()
+            }
+
+            // Set the negative button to cancel
+            builder.setNegativeButton("Cancel") { dialog, _ ->
+                Timber.tag("FolderAction").d("Delete action cancelled")
+                dialog.dismiss()  // Dismiss the dialog
+            }
+
+            // Show the AlertDialog
+            builder.create().show()
+        }
+    }
+
+
+
     /**
-     * override on folder click, change the toolbar title on folder click.
+     * override on folder click,
+     * change the toolbar title on folder click, make overflow menu visible
      */
     override fun onFolderClick(
         folderId: Long,
         folderName: String,
-        lastItemId: Long,
+        lastItemId: Long
     ) {
+
         supportFragmentManager
             .beginTransaction()
             .add(R.id.fragment_container, ImageFragment.newInstance(folderId, lastItemId))
@@ -444,7 +514,13 @@ class CustomSelectorActivity :
         bucketId = folderId
         bucketName = folderName
         isImageFragmentOpen = true
+
+        // Show the overflow menu only when a folder is clicked
+        showOverflowMenu = true
+        setUpToolbar()
+
     }
+
 
     /**
      * override Selected Images Change, update view model selected images and change UI.
@@ -559,6 +635,10 @@ class CustomSelectorActivity :
             isImageFragmentOpen = false
             changeTitle(getString(R.string.custom_selector_title), 0)
         }
+
+        //hide overflow menu when not in folder
+        showOverflowMenu = false
+        setUpToolbar()
     }
 
     /**
@@ -616,9 +696,9 @@ fun partialStorageAccessIndicator(
         OutlinedCard(
             modifier = modifier,
             colors =
-                CardDefaults.cardColors(
-                    containerColor = colorResource(R.color.primarySuperLightColor),
-                ),
+            CardDefaults.cardColors(
+                containerColor = colorResource(R.color.primarySuperLightColor),
+            ),
             border = BorderStroke(0.5.dp, color = colorResource(R.color.primaryColor)),
             shape = RoundedCornerShape(8.dp),
         ) {
@@ -631,9 +711,9 @@ fun partialStorageAccessIndicator(
                     onClick = onManage,
                     modifier = Modifier.align(Alignment.Bottom),
                     colors =
-                        ButtonDefaults.buttonColors(
-                            containerColor = colorResource(R.color.primaryColor),
-                        ),
+                    ButtonDefaults.buttonColors(
+                        containerColor = colorResource(R.color.primaryColor),
+                    ),
                     shape = RoundedCornerShape(8.dp),
                 ) {
                     Text(
@@ -655,9 +735,9 @@ fun partialStorageAccessIndicatorPreview() {
             isVisible = true,
             onManage = {},
             modifier =
-                Modifier
-                    .padding(vertical = 8.dp, horizontal = 4.dp)
-                    .fillMaxWidth(),
+            Modifier
+                .padding(vertical = 8.dp, horizontal = 4.dp)
+                .fillMaxWidth(),
         )
     }
 }

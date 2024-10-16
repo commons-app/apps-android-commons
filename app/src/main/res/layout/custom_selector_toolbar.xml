@@ -52,5 +52,20 @@
       app:layout_constraintVertical_bias="1.0"
       app:srcCompat="@drawable/ic_error_red_24dp" />
 
+    <ImageButton
+      android:id="@+id/menu_overflow"
+      android:layout_width="48dp"
+      android:layout_height="0dp"
+      android:background="#00FFFFFF"
+      android:contentDescription="@string/menu_overflow_desc"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.0"
+      app:layout_constraintStart_toEndOf="@id/title"
+      app:layout_constraintTop_toTopOf="parent"
+      app:layout_constraintVertical_bias="1.0"
+      app:srcCompat="@drawable/ic_overflow" />
+
+
   </androidx.constraintlayout.widget.ConstraintLayout>
 </merge>
