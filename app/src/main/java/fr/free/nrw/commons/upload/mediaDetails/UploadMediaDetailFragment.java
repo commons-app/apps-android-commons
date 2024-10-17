@@ -79,13 +79,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
 
     private final ActivityResultLauncher<Intent> voiceInputResultLauncher = registerForActivityResult(
         new StartActivityForResult(), result -> {
-            if (result.getResultCode() == RESULT_OK && result.getData() != null) {
-                ArrayList<String> resultData = result.getData().getStringArrayListExtra(
-                    RecognizerIntent.EXTRA_RESULTS);
-                uploadMediaDetailAdapter.handleSpeechResult(resultData.get(0));
-            }else {
-                Timber.e("Error %s", result.getResultCode());
-            }
+            onVoiceInput(result);
         }
     );
 
@@ -698,6 +692,16 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
                 // If camera position is null means location is removed by the user
                 removeLocation();
             }
+        }
+    }
+
+    private void onVoiceInput(ActivityResult result) {
+        if (result.getResultCode() == RESULT_OK && result.getData() != null) {
+            ArrayList<String> resultData = result.getData().getStringArrayListExtra(
+                RecognizerIntent.EXTRA_RESULTS);
+            uploadMediaDetailAdapter.handleSpeechResult(resultData.get(0));
+        }else {
+            Timber.e("Error %s", result.getResultCode());
         }
     }
 
