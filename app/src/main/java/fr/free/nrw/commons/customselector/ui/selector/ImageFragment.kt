@@ -279,6 +279,7 @@ class ImageFragment :
                 filteredImages = ImageHelper.filterImages(images, bucketId)
                 allImages = ArrayList(filteredImages)
                 imageAdapter.init(filteredImages, allImages, TreeMap(), uploadingContributions)
+                imageAdapter.notifyDataSetChanged()
                 selectorRV?.let {
                     it.visibility = View.VISIBLE
                     lastItemId?.let { pos ->
