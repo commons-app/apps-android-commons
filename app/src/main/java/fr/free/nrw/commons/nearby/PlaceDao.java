@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.nearby;
 
 import androidx.room.Dao;
+import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
@@ -24,6 +25,12 @@ public abstract class PlaceDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     public abstract void saveSynchronous(Place place);
 
+    /**
+     * Deletes a Place object from the database
+     * based on the provided entity.
+     */
+    @Delete
+    public abstract void deletePlace(Place place);
     /**
      * Retrieves a Place object from the database based on the provided entity ID.
      *
