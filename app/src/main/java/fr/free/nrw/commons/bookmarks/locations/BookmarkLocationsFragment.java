@@ -128,12 +128,6 @@ public class BookmarkLocationsFragment extends DaggerFragment {
         }
     }
 
-    //TODO[Parr]: doubtful if it even used, check while testing
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        contributionController.handleActivityResult(getActivity(), resultCode, data);
-    }
-
     @Override
     public void onDestroy() {
         super.onDestroy();
