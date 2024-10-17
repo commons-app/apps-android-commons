@@ -9,6 +9,7 @@ import fr.free.nrw.commons.utils.DateUtil
 import fr.free.nrw.commons.wikidata.mwapi.MwQueryResponse
 import io.reactivex.Observable
 import io.reactivex.Single
+import timber.log.Timber
 import javax.inject.Inject
 import javax.inject.Named
 import javax.inject.Singleton
@@ -21,43 +22,55 @@ class NotificationClient
         @param:Named(NetworkingModule.NAMED_COMMONS_CSRF) private val csrfTokenClient: CsrfTokenClient,
         private val service: NotificationInterface,
     ) {
-        fun getNotifications(archived: Boolean): Single<List<Notification>> =
+    fun getNotifications(archived: Boolean): Single<List<Notification>> =
+        service
+            .getAllNotifications(
+                wikiList = "wikidatawiki|commonswiki|enwiki",
+                filter = if (archived) "read" else "!read",
+                continueStr = null,
+            ).map {
+                it.query()?.notifications()?.list() ?: emptyList()
+            }.flatMap {
+                Observable.fromIterable(it)
+            }.map {
+                it.toCommonsNotification()
+            }.toList()
+
+    fun markNotificationAsRead(notificationId: String?): Observable<Boolean> =
+        try {
             service
-                .getAllNotifications(
-                    wikiList = "wikidatawiki|commonswiki|enwiki",
-                    filter = if (archived) "read" else "!read",
-                    continueStr = null,
-                ).map {
-                    it.query()?.notifications()?.list() ?: emptyList()
-                }.flatMap {
-                    Observable.fromIterable(it)
-                }.map {
-                    it.toCommonsNotification()
-                }.toList()
-
-        fun markNotificationAsRead(notificationId: String?): Observable<Boolean> =
-            try {
-                service
-                    .markRead(
-                        token = csrfTokenClient.getTokenBlocking(),
-                        readList = notificationId,
-                        unreadList = "",
-                    ).map(MwQueryResponse::success)
-            } catch (throwable: Throwable) {
-                if (throwable is InvalidLoginTokenException) {
-                    Observable.error(throwable)
-                } else {
-                    Observable.just(false)
-                }
+                .markRead(
+                    token = csrfTokenClient.getTokenBlocking(),
+                    readList = notificationId,
+                    unreadList = "",
+                ).map(MwQueryResponse::success)
+        } catch (throwable: Throwable) {
+            if (throwable is InvalidLoginTokenException) {
+                Observable.error(throwable)
+            } else {
+                Observable.just(false)
             }
+        }
 
-        private fun WikimediaNotification.toCommonsNotification() =
-            Notification(
-                notificationType = NotificationType.UNKNOWN,
-                notificationText = contents?.compactHeader ?: "",
-                date = DateUtil.getMonthOnlyDateString(timestamp),
-                link = contents?.links?.primary?.url ?: "",
-                iconUrl = "",
-                notificationId = id().toString(),
-            )
+    private fun WikimediaNotification.toCommonsNotification(): Notification {
+
+        val notificationText = contents?.compactHeader ?: ""
+
+        val notificationType = if (notificationText.contains("sent you an email", ignoreCase = true)){
+            NotificationType.EMAIL
+        } else {
+            NotificationType.UNKNOWN
+        }
+
+        return Notification(
+
+            notificationType = notificationType,
+            notificationText = notificationText,
+            date = DateUtil.getMonthOnlyDateString(timestamp),
+            link = contents?.links?.primary?.url ?: "",
+            iconUrl = "",
+            notificationId = id().toString(),
+        )
+
     }
+}
