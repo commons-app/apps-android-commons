@@ -74,8 +74,8 @@ class PendingUploadsFragment :
     fun initRecyclerView() {
         binding.pendingUploadsRecyclerView.setLayoutManager(LinearLayoutManager(this.context))
         binding.pendingUploadsRecyclerView.adapter = adapter
-        pendingUploadsPresenter!!.setup()
-        pendingUploadsPresenter!!.totalContributionList.observe(
+        pendingUploadsPresenter.setup()
+        pendingUploadsPresenter.totalContributionList.observe(
             viewLifecycleOwner,
         ) { list: PagedList<Contribution?> ->
             contributionsSize = list.size
