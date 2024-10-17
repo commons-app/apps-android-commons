@@ -79,12 +79,7 @@ class DescriptionEditActivity :
     private val voiceInputResultLauncher = registerForActivityResult<Intent, ActivityResult>(
         ActivityResultContracts.StartActivityForResult()
     ) { result: ActivityResult ->
-        if (result.resultCode == RESULT_OK && result.data != null) {
-            val resultData = result.data!!.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)
-            uploadMediaDetailAdapter.handleSpeechResult(resultData!![0])
-        } else {
-            Timber.e("Error %s", result.resultCode)
-        }
+        onVoiceInput(result)
     }
 
     @Inject lateinit var descriptionEditHelper: DescriptionEditHelper
@@ -162,6 +157,15 @@ class DescriptionEditActivity :
     }
 
     override fun onPrimaryCaptionTextChange(isNotEmpty: Boolean) {}
+
+    private fun onVoiceInput(result: ActivityResult) {
+        if (result.resultCode == RESULT_OK && result.data != null) {
+            val resultData = result.data!!.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)
+            uploadMediaDetailAdapter.handleSpeechResult(resultData!![0])
+        } else {
+            Timber.e("Error %s", result.resultCode)
+        }
+    }
 
     /**
      * Adds new language item to RecyclerView
