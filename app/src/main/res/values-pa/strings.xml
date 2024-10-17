@@ -149,8 +149,8 @@
   <string name="media_detail_coordinates_empty">ਕੋਈ ਉਪਲਬਧ ਨਹੀਂ</string>
   <string name="_2fa_code">2FA ਕੋਡ</string>
   <string name="logout_verification">ਕੀ ਤੁਸੀਂ ਸੱਚੀਂ ਬੰਦ ਕਰਨਾ ਚਾਹੁੰਦੇ ਹੋ?</string>
-  <string name="welcome_image_welcome_wikipedia">ਵਿਕੀਪੀਡੀਆ \'ਤੇ ਸੁਆਗਤ</string>
-  <string name="welcome_image_welcome_copyright">ਕਾਪੀਰਾਈਟ ਸੁਆਗਤ</string>
+  <string name="welcome_image_welcome_wikipedia">ਵਿਕੀਪੀਡੀਆ \'ਤੇ ਜੀ ਆਇਆਂ ਨੂੰ</string>
+  <string name="welcome_image_welcome_copyright">ਜੀ ਆਇਆਂ ਨੂੰ ਕਾਪੀਰਾਈਟ</string>
   <string name="cancel">ਰੱਦ ਕਰੋ</string>
   <string name="navigation_drawer_open">ਖੋਲ੍ਹੋ</string>
   <string name="navigation_drawer_close">ਬੰਦ ਕਰੋ</string>
@@ -179,6 +179,7 @@
   <string name="menu_search_button">ਲੱਭੋ</string>
   <string name="title_activity_search">ਲੱਭੋ</string>
   <string name="search_recent_header">ਹਾਲੀਆ ਖੋਜਾਂ:</string>
+  <string name="provider_searches">ਹਾਲ ਦੀਆਂ ਪੁੱਛਗਿੱਛ ਖੋਜਾਂ</string>
   <string name="provider_recent_languages">ਹਾਲ ਹੀ ਵਿੱਚ ਬੋਲੀਆਂ ਬਾਰੇ ਪੁੱਛਗਿੱਛ</string>
   <string name="search_tab_title_categories">ਸ਼੍ਰੇਣੀਆਂ</string>
   <string name="explore_tab_title_map">ਨਕਸ਼ਾ</string>
