@@ -111,13 +111,6 @@ public class FilePicker implements Constants {
      */
     public static void openGallery(Activity activity,ActivityResultLauncher<Intent> resultLauncher,int type, boolean openDocumentIntentPreferred) {
         Intent intent = createGalleryIntent(activity, type, openDocumentIntentPreferred);
-//        int requestCode = RequestCodes.PICK_PICTURE_FROM_GALLERY;
-//
-//            if(openDocumentIntentPreferred){
-//                requestCode = RequestCodes.PICK_PICTURE_FROM_DOCUMENTS;
-//            }
-//
-//        activity.startActivityForResult(intent, requestCode);
         resultLauncher.launch(intent);
     }
 
@@ -126,7 +119,6 @@ public class FilePicker implements Constants {
      */
     public static void openCustomSelector(Activity activity,ActivityResultLauncher<Intent> resultLauncher,int type) {
         Intent intent = createCustomSelectorIntent(activity, type);
-//        activity.startActivityForResult(intent, RequestCodes.PICK_PICTURE_FROM_CUSTOM_SELECTOR);
         resultLauncher.launch(intent);
     }
 
@@ -135,7 +127,6 @@ public class FilePicker implements Constants {
      */
     public static void openCameraForImage(Activity activity, ActivityResultLauncher<Intent> resultLauncher, int type) {
         Intent intent = createCameraForImageIntent(activity, type);
-//        activity.startActivityForResult(intent, RequestCodes.TAKE_PICTURE);
         resultLauncher.launch(intent);
     }
 
@@ -156,43 +147,6 @@ public class FilePicker implements Constants {
             return new UploadableFile(new File(lastCameraPhoto));
         } else {
             return null;
-        }
-    }
-
-    /**
-     * Any activity can use this method to attach their callback to the file picker
-     */
-    public static void handleActivityResult(int requestCode, int resultCode, Intent data, Activity activity, @NonNull FilePicker.Callbacks callbacks) {
-        boolean isHandledPickedFile = (requestCode & RequestCodes.FILE_PICKER_IMAGE_IDENTIFICATOR) > 0;
-        if (isHandledPickedFile) {
-            requestCode &= ~RequestCodes.SOURCE_CHOOSER;
-            if (requestCode == RequestCodes.PICK_PICTURE_FROM_GALLERY ||
-                    requestCode == RequestCodes.TAKE_PICTURE ||
-                    requestCode == RequestCodes.PICK_PICTURE_FROM_DOCUMENTS ||
-                    requestCode == RequestCodes.PICK_PICTURE_FROM_CUSTOM_SELECTOR) {
-                if (resultCode == Activity.RESULT_OK) {
-                    if (requestCode == RequestCodes.PICK_PICTURE_FROM_DOCUMENTS && !isPhoto(data)) {
-//                        onPictureReturnedFromDocuments(data, activity, callbacks);
-                    } else if (requestCode == RequestCodes.PICK_PICTURE_FROM_GALLERY && !isPhoto(data)) {
-//                        onPictureReturnedFromGallery(data, activity, callbacks);
-                    } else if (requestCode == RequestCodes.PICK_PICTURE_FROM_CUSTOM_SELECTOR) {
-//                        onPictureReturnedFromCustomSelector(data, activity, callbacks);
-                    } else if (requestCode == RequestCodes.TAKE_PICTURE) {
-//                        onPictureReturnedFromCamera(activity, callbacks);
-                    }
-                } else {
-                    if (requestCode == RequestCodes.PICK_PICTURE_FROM_DOCUMENTS) {
-                        callbacks.onCanceled(FilePicker.ImageSource.DOCUMENTS, restoreType(activity));
-                    } else if (requestCode == RequestCodes.PICK_PICTURE_FROM_GALLERY) {
-                        callbacks.onCanceled(FilePicker.ImageSource.GALLERY, restoreType(activity));
-                    } else if (requestCode == RequestCodes.PICK_PICTURE_FROM_CUSTOM_SELECTOR){
-                        callbacks.onCanceled(ImageSource.CUSTOM_SELECTOR, restoreType(activity));
-                    }
-                    else {
-                        callbacks.onCanceled(FilePicker.ImageSource.CAMERA_IMAGE, restoreType(activity));
-                    }
-                }
-            }
         }
     }
 
@@ -249,7 +203,7 @@ public class FilePicker implements Constants {
     }
 
     public static void onPictureReturnedFromDocuments(ActivityResult result, Activity activity, @NonNull FilePicker.Callbacks callbacks) {
-        if(result.getResultCode() == Activity.RESULT_OK){
+        if(result.getResultCode() == Activity.RESULT_OK && !isPhoto(result.getData())){
             try {
                 Uri photoPath = result.getData().getData();
                 UploadableFile photoFile = PickedFiles.pickedExistingPicture(activity, photoPath);
@@ -306,7 +260,7 @@ public class FilePicker implements Constants {
     }
 
     public static void onPictureReturnedFromGallery(ActivityResult result, Activity activity, @NonNull FilePicker.Callbacks callbacks) {
-        if(result.getResultCode() == Activity.RESULT_OK){
+        if(result.getResultCode() == Activity.RESULT_OK && !isPhoto(result.getData())){
             try {
                 List<UploadableFile> files = getFilesFromGalleryPictures(result.getData(), activity);
                 callbacks.onImagesPicked(files, FilePicker.ImageSource.GALLERY, restoreType(activity));
