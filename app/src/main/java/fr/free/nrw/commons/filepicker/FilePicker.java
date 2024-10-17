@@ -172,7 +172,7 @@ public class FilePicker implements Constants {
                     requestCode == RequestCodes.PICK_PICTURE_FROM_CUSTOM_SELECTOR) {
                 if (resultCode == Activity.RESULT_OK) {
                     if (requestCode == RequestCodes.PICK_PICTURE_FROM_DOCUMENTS && !isPhoto(data)) {
-                        onPictureReturnedFromDocuments(data, activity, callbacks);
+//                        onPictureReturnedFromDocuments(data, activity, callbacks);
                     } else if (requestCode == RequestCodes.PICK_PICTURE_FROM_GALLERY && !isPhoto(data)) {
 //                        onPictureReturnedFromGallery(data, activity, callbacks);
                     } else if (requestCode == RequestCodes.PICK_PICTURE_FROM_CUSTOM_SELECTOR) {
@@ -248,18 +248,22 @@ public class FilePicker implements Constants {
         return intent;
     }
 
-    private static void onPictureReturnedFromDocuments(Intent data, Activity activity, @NonNull FilePicker.Callbacks callbacks) {
-        try {
-            Uri photoPath = data.getData();
-            UploadableFile photoFile = PickedFiles.pickedExistingPicture(activity, photoPath);
-            callbacks.onImagesPicked(singleFileList(photoFile), FilePicker.ImageSource.DOCUMENTS, restoreType(activity));
+    public static void onPictureReturnedFromDocuments(ActivityResult result, Activity activity, @NonNull FilePicker.Callbacks callbacks) {
+        if(result.getResultCode() == Activity.RESULT_OK){
+            try {
+                Uri photoPath = result.getData().getData();
+                UploadableFile photoFile = PickedFiles.pickedExistingPicture(activity, photoPath);
+                callbacks.onImagesPicked(singleFileList(photoFile), FilePicker.ImageSource.DOCUMENTS, restoreType(activity));
 
-            if (configuration(activity).shouldCopyPickedImagesToPublicGalleryAppFolder()) {
-                PickedFiles.copyFilesInSeparateThread(activity, singleFileList(photoFile));
+                if (configuration(activity).shouldCopyPickedImagesToPublicGalleryAppFolder()) {
+                    PickedFiles.copyFilesInSeparateThread(activity, singleFileList(photoFile));
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                callbacks.onImagePickerError(e, FilePicker.ImageSource.DOCUMENTS, restoreType(activity));
             }
-        } catch (Exception e) {
-            e.printStackTrace();
-            callbacks.onImagePickerError(e, FilePicker.ImageSource.DOCUMENTS, restoreType(activity));
+        } else {
+            callbacks.onCanceled(FilePicker.ImageSource.DOCUMENTS, restoreType(activity));
         }
     }
 
@@ -310,7 +314,7 @@ public class FilePicker implements Constants {
                 e.printStackTrace();
                 callbacks.onImagePickerError(e, FilePicker.ImageSource.GALLERY, restoreType(activity));
             }
-        }else{
+        } else{
             callbacks.onCanceled(FilePicker.ImageSource.GALLERY, restoreType(activity));
         }
     }
