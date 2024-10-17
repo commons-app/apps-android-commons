@@ -276,6 +276,8 @@ public class FilePicker implements Constants {
                e.printStackTrace();
                callbacks.onImagePickerError(e, ImageSource.CUSTOM_SELECTOR, restoreType(activity));
            }
+       } else {
+           callbacks.onCanceled(ImageSource.CUSTOM_SELECTOR, restoreType(activity));
        }
     }
 
@@ -367,6 +369,8 @@ public class FilePicker implements Constants {
                 e.printStackTrace();
                 callbacks.onImagePickerError(e, FilePicker.ImageSource.CAMERA_IMAGE, restoreType(activity));
             }
+        } else {
+            callbacks.onCanceled(FilePicker.ImageSource.CAMERA_IMAGE, restoreType(activity));
         }
     }
 
