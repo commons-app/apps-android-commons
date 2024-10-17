@@ -149,7 +149,7 @@ public class NotificationActivity extends BaseActivity {
         }
         adapter = new NotificatinAdapter(item -> {
             if (item.getNotificationType() == NotificationType.EMAIL){
-                ViewUtil.showLongSnackbar(binding.container, "Check your mail box");
+                ViewUtil.showLongSnackbar(binding.container, getString(R.string.check_your_email_inbox));
             } else {
                 handleUrl(item.getLink());
             }
