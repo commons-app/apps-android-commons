@@ -27,7 +27,8 @@ class RecentLanguagesAdapter constructor(
 
     override fun isEnabled(position: Int) =
         recentLanguages[position].languageCode.let {
-            it.isNotEmpty() && !selectedLanguages.containsValue(it) && it != selectedLangCode
+//            it.isNotEmpty() && !it.contains(selectedLanguages.values.first())
+            true
         }
 
     override fun getCount() = recentLanguages.size

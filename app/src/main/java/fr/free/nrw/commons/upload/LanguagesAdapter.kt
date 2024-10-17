@@ -51,7 +51,8 @@ class LanguagesAdapter constructor(
 
     override fun isEnabled(position: Int) =
         languageCodesList[position].let {
-            it.isNotEmpty() && !selectedLanguages.containsValue(it) && it != selectedLangCode
+//            it.isNotEmpty() && !it.contains(selectedLanguages.values.first())
+            true
         }
 
     override fun getCount() = languageNamesList.size
