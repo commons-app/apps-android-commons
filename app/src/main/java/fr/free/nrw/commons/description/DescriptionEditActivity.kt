@@ -221,7 +221,7 @@ class DescriptionEditActivity :
     ) {
         try {
             descriptionEditHelper
-                ?.addDescription(
+                .addDescription(
                     applicationContext,
                     media,
                     updatedWikiText,
