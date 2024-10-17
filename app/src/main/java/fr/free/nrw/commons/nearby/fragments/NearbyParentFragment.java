@@ -243,7 +243,9 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
     private ActivityResultLauncher<Intent> cameraPickLauncherForResult = registerForActivityResult(new StartActivityForResult(),
         result -> {
-            // TODO handle result from controller
+            controller.handleActivityResultWithCallback(requireActivity(),callbacks -> {
+                controller.onPictureReturnedFromCamera(result,requireActivity(),callbacks);
+            });
         });
 
     private ActivityResultLauncher<String[]> inAppCameraLocationPermissionLauncher = registerForActivityResult(

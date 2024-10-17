@@ -135,7 +135,6 @@ public class FilePicker implements Constants {
      */
     public static void openCameraForImage(Activity activity, ActivityResultLauncher<Intent> resultLauncher, int type) {
         Intent intent = createCameraForImageIntent(activity, type);
-        //TODO[Parry] we're not using the result anyways.
 //        activity.startActivityForResult(intent, RequestCodes.TAKE_PICTURE);
         resultLauncher.launch(intent);
     }
@@ -179,8 +178,7 @@ public class FilePicker implements Constants {
                     } else if (requestCode == RequestCodes.PICK_PICTURE_FROM_CUSTOM_SELECTOR) {
 //                        onPictureReturnedFromCustomSelector(data, activity, callbacks);
                     } else if (requestCode == RequestCodes.TAKE_PICTURE) {
-                        //TODO[Parry] why handle the result , when not using it in the first place???
-                        onPictureReturnedFromCamera(activity, callbacks);
+//                        onPictureReturnedFromCamera(activity, callbacks);
                     }
                 } else {
                     if (requestCode == RequestCodes.PICK_PICTURE_FROM_DOCUMENTS) {
@@ -337,36 +335,38 @@ public class FilePicker implements Constants {
         return files;
     }
 
-    private static void onPictureReturnedFromCamera(Activity activity, @NonNull FilePicker.Callbacks callbacks) {
-        try {
-            String lastImageUri = PreferenceManager.getDefaultSharedPreferences(activity).getString(KEY_PHOTO_URI, null);
-            if (!TextUtils.isEmpty(lastImageUri)) {
-                revokeWritePermission(activity, Uri.parse(lastImageUri));
-            }
-
-            UploadableFile photoFile = FilePicker.takenCameraPicture(activity);
-            List<UploadableFile> files = new ArrayList<>();
-            files.add(photoFile);
-
-            if (photoFile == null) {
-                Exception e = new IllegalStateException("Unable to get the picture returned from camera");
-                callbacks.onImagePickerError(e, FilePicker.ImageSource.CAMERA_IMAGE, restoreType(activity));
-            } else {
-                if (configuration(activity).shouldCopyTakenPhotosToPublicGalleryAppFolder()) {
-                    PickedFiles.copyFilesInSeparateThread(activity, singleFileList(photoFile));
+    public static void onPictureReturnedFromCamera(ActivityResult activityResult, Activity activity, @NonNull FilePicker.Callbacks callbacks) {
+        if(activityResult.getResultCode() == Activity.RESULT_OK){
+            try {
+                String lastImageUri = PreferenceManager.getDefaultSharedPreferences(activity).getString(KEY_PHOTO_URI, null);
+                if (!TextUtils.isEmpty(lastImageUri)) {
+                    revokeWritePermission(activity, Uri.parse(lastImageUri));
                 }
 
-                callbacks.onImagesPicked(files, FilePicker.ImageSource.CAMERA_IMAGE, restoreType(activity));
-            }
+                UploadableFile photoFile = FilePicker.takenCameraPicture(activity);
+                List<UploadableFile> files = new ArrayList<>();
+                files.add(photoFile);
 
-            PreferenceManager.getDefaultSharedPreferences(activity)
+                if (photoFile == null) {
+                    Exception e = new IllegalStateException("Unable to get the picture returned from camera");
+                    callbacks.onImagePickerError(e, FilePicker.ImageSource.CAMERA_IMAGE, restoreType(activity));
+                } else {
+                    if (configuration(activity).shouldCopyTakenPhotosToPublicGalleryAppFolder()) {
+                        PickedFiles.copyFilesInSeparateThread(activity, singleFileList(photoFile));
+                    }
+
+                    callbacks.onImagesPicked(files, FilePicker.ImageSource.CAMERA_IMAGE, restoreType(activity));
+                }
+
+                PreferenceManager.getDefaultSharedPreferences(activity)
                     .edit()
                     .remove(KEY_LAST_CAMERA_PHOTO)
                     .remove(KEY_PHOTO_URI)
                     .apply();
-        } catch (Exception e) {
-            e.printStackTrace();
-            callbacks.onImagePickerError(e, FilePicker.ImageSource.CAMERA_IMAGE, restoreType(activity));
+            } catch (Exception e) {
+                e.printStackTrace();
+                callbacks.onImagePickerError(e, FilePicker.ImageSource.CAMERA_IMAGE, restoreType(activity));
+            }
         }
     }
 
