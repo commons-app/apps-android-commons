@@ -234,7 +234,7 @@ class ZoomableActivity : BaseActivity() {
             sharedPreferences.getBoolean(ImageHelper.SHOW_ALREADY_ACTIONED_IMAGES_PREFERENCE_KEY, true)
 
         if (!images.isNullOrEmpty()) {
-            binding.zoomable!!.setOnTouchListener(
+            binding.zoomable.setOnTouchListener(
                 object : OnSwipeTouchListener(this) {
                     // Swipe left to view next image in the folder. (if available)
                     override fun onSwipeLeft() {
