@@ -113,7 +113,6 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
     CategoryEditHelper.Callback {
 
     private static final int REQUEST_CODE = 1001;
-    private static final int REQUEST_CODE_EDIT_DESCRIPTION = 1002;
     private static final String IMAGE_BACKGROUND_COLOR = "image_background_color";
     static final int DEFAULT_IMAGE_BACKGROUND_COLOR = 0;
     
@@ -1063,83 +1062,6 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
             captionList.put(language, languageCaption);
         }
         return captionList;
-    }
-
-    // TODO[Parry]: Request code is never used to start an activity, so the result will never
-    // be used, safely remove this.
-    /**
-     * Get the result from another activity and act accordingly.
-     * @param requestCode
-     * @param resultCode
-     * @param data
-     */
-    @Override
-    public void onActivityResult(final int requestCode, final int resultCode,
-        @Nullable final Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == REQUEST_CODE_EDIT_DESCRIPTION && resultCode == RESULT_OK) {
-            final String updatedWikiText = data.getStringExtra(UPDATED_WIKITEXT);
-
-            try {
-                compositeDisposable.add(descriptionEditHelper.addDescription(getContext(), media,
-                        updatedWikiText)
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(s -> {
-                        Timber.d("Descriptions are added.");
-                    }));
-            } catch (Exception e) {
-                if (e.getLocalizedMessage().equals(CsrfTokenClient.ANONYMOUS_TOKEN_MESSAGE)) {
-                    final String username = sessionManager.getUserName();
-                    final CommonsApplication.BaseLogoutListener logoutListener = new CommonsApplication.BaseLogoutListener(
-                        getActivity(),
-                        requireActivity().getString(R.string.invalid_login_message),
-                        username
-                    );
-
-                    CommonsApplication.getInstance().clearApplicationData(
-                        requireActivity(), logoutListener);
-                }
-            }
-
-            final ArrayList<UploadMediaDetail> uploadMediaDetails
-                = data.getParcelableArrayListExtra(LIST_OF_DESCRIPTION_AND_CAPTION);
-
-            LinkedHashMap<String, String> updatedCaptions = new LinkedHashMap<>();
-            for (UploadMediaDetail mediaDetail:
-            uploadMediaDetails) {
-                try {
-                    compositeDisposable.add(descriptionEditHelper.addCaption(getContext(), media,
-                            mediaDetail.getLanguageCode(), mediaDetail.getCaptionText())
-                        .subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(s -> {
-                                updateCaptions(mediaDetail, updatedCaptions);
-                                Timber.d("Caption is added.");
-                            }));
-
-                } catch (Exception e) {
-                    if (e.getLocalizedMessage().equals(CsrfTokenClient.ANONYMOUS_TOKEN_MESSAGE)) {
-                        final String username = sessionManager.getUserName();
-                        final CommonsApplication.BaseLogoutListener logoutListener = new CommonsApplication.BaseLogoutListener(
-                            getActivity(),
-                            requireActivity().getString(R.string.invalid_login_message),
-                            username
-                        );
-
-                        CommonsApplication.getInstance().clearApplicationData(
-                            requireActivity(), logoutListener);
-                    }
-                }
-            }
-            binding.progressBarEdit.setVisibility(GONE);
-            binding.descriptionEdit.setVisibility(VISIBLE);
-
-        } else if (requestCode == REQUEST_CODE_EDIT_DESCRIPTION && resultCode == RESULT_CANCELED) {
-            binding.progressBarEdit.setVisibility(GONE);
-            binding.descriptionEdit.setVisibility(VISIBLE);
-        }
     }
 
     /**
