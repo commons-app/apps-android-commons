@@ -646,7 +646,7 @@ class ZoomableActivity : BaseActivity() {
                     .setProgressBarImage(ProgressBarDrawable())
                     .setProgressBarImageScaleType(ScalingUtils.ScaleType.FIT_CENTER)
                     .build()
-            with(binding.zoomable!!) {
+            with(binding.zoomable) {
                 setHierarchy(hierarchy)
                 setAllowTouchInterceptionWhileZoomed(true)
                 setIsLongpressEnabled(false)
@@ -658,10 +658,10 @@ class ZoomableActivity : BaseActivity() {
                     .setUri(imageUri)
                     .setControllerListener(loadingListener)
                     .build()
-            binding.zoomable!!.controller = controller
+            binding.zoomable.controller = controller
 
             if (photoBackgroundColor != null) {
-                binding.zoomable!!.setBackgroundColor(photoBackgroundColor!!)
+                binding.zoomable.setBackgroundColor(photoBackgroundColor!!)
             }
 
             if (!images.isNullOrEmpty()) {
