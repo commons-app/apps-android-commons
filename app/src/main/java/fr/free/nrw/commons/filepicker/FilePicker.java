@@ -370,39 +370,6 @@ public class FilePicker implements Constants {
         }
     }
 
-    private static void onVideoReturnedFromCamera(Activity activity, @NonNull FilePicker.Callbacks callbacks) {
-        try {
-            String lastVideoUri = PreferenceManager.getDefaultSharedPreferences(activity).getString(KEY_VIDEO_URI, null);
-            if (!TextUtils.isEmpty(lastVideoUri)) {
-                revokeWritePermission(activity, Uri.parse(lastVideoUri));
-            }
-
-            UploadableFile photoFile = FilePicker.takenCameraVideo(activity);
-            List<UploadableFile> files = new ArrayList<>();
-            files.add(photoFile);
-
-            if (photoFile == null) {
-                Exception e = new IllegalStateException("Unable to get the video returned from camera");
-                callbacks.onImagePickerError(e, FilePicker.ImageSource.CAMERA_VIDEO, restoreType(activity));
-            } else {
-                if (configuration(activity).shouldCopyTakenPhotosToPublicGalleryAppFolder()) {
-                    PickedFiles.copyFilesInSeparateThread(activity, singleFileList(photoFile));
-                }
-
-                callbacks.onImagesPicked(files, FilePicker.ImageSource.CAMERA_VIDEO, restoreType(activity));
-            }
-
-            PreferenceManager.getDefaultSharedPreferences(activity)
-                    .edit()
-                    .remove(KEY_LAST_CAMERA_VIDEO)
-                    .remove(KEY_VIDEO_URI)
-                    .apply();
-        } catch (Exception e) {
-            e.printStackTrace();
-            callbacks.onImagePickerError(e, FilePicker.ImageSource.CAMERA_VIDEO, restoreType(activity));
-        }
-    }
-
     public static FilePickerConfiguration configuration(@NonNull Context context) {
         return new FilePickerConfiguration(context);
     }
