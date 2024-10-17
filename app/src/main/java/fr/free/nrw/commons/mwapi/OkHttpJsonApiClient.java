@@ -640,13 +640,17 @@ public class OkHttpJsonApiClient {
             }
         }).doOnError(Timber::e));
     }
+    String fullCode = Locale.getDefault().getLanguage();
+    String mainCode = fullCode.contains(",") ? fullCode.substring(0, fullCode.indexOf(',')).trim() : fullCode;
 
     @NotNull
     private Request sparqlQuery(String qid, int startPosition, int limit, String fileName)
         throws IOException {
+        String fullCode = Locale.getDefault().getLanguage();
+        String mainCode = fullCode.contains(",") ? fullCode.substring(0, fullCode.indexOf(',')).trim() : fullCode;
         String query = FileUtils.readFromResource(fileName)
             .replace("${QID}", qid)
-            .replace("${LANG}", "\"" + Locale.getDefault().getLanguage() + "\"")
+            .replace("${LANG}", "\"" + mainCode + "\"")
             .replace("${LIMIT}", "" + limit)
             .replace("${OFFSET}", "" + startPosition);
         HttpUrl.Builder urlBuilder = HttpUrl

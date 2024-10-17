@@ -59,7 +59,7 @@ public class NearbyController extends MapController {
         String fullCode = Locale.getDefault().getLanguage();
         String mainCode = fullCode.contains(",") ? fullCode.substring(0, fullCode.indexOf(',')).trim() : fullCode;
         List<Place> places = nearbyPlaces
-            .radiusExpander(searchLatLng, Locale.getDefault().getLanguage(), returnClosestResult,
+            .radiusExpander(searchLatLng, mainCode, returnClosestResult,
                 customQuery);
 
         if (null != places && places.size() > 0) {
@@ -141,7 +141,9 @@ public class NearbyController extends MapController {
      * @throws Exception If an error occurs during the retrieval process.
      */
     public List<Place> getPlaces(List<Place> placeList) throws Exception {
-        return nearbyPlaces.getPlaces(placeList, Locale.getDefault().getLanguage());
+        String fullCode = Locale.getDefault().getLanguage();
+        String mainCode = fullCode.contains(",") ? fullCode.substring(0, fullCode.indexOf(',')).trim() : fullCode;
+        return nearbyPlaces.getPlaces(placeList, mainCode);
     }
 
     public static LatLng calculateNorthEast(double latitude, double longitude, double distance) {
@@ -198,8 +200,11 @@ public class NearbyController extends MapController {
             return null;
         }
 
+        String fullCode = Locale.getDefault().getLanguage();
+        String mainCode = fullCode.contains(",") ? fullCode.substring(0, fullCode.indexOf(',')).trim() : fullCode;
+
         List<Place> places = nearbyPlaces.getFromWikidataQuery(screenTopRight, screenBottomLeft,
-            Locale.getDefault().getLanguage(), shouldQueryForMonuments, customQuery);
+            mainCode, shouldQueryForMonuments, customQuery);
 
         if (null != places && places.size() > 0) {
             LatLng[] boundaryCoordinates = {

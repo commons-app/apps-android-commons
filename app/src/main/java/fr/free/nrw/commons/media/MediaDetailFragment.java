@@ -1367,8 +1367,10 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
     }
 
     private String chooseDescription(Media media) {
+        String fullCode = Locale.getDefault().getLanguage();
+        String mainCode = fullCode.contains(",") ? fullCode.substring(0, fullCode.indexOf(',')).trim() : fullCode;
         final Map<String, String> descriptions = media.getDescriptions();
-        final String multilingualDesc = descriptions.get(Locale.getDefault().getLanguage());
+        final String multilingualDesc = descriptions.get(mainCode);
         if (multilingualDesc != null) {
             return multilingualDesc;
         }
