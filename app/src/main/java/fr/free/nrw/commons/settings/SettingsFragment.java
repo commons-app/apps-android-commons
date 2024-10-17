@@ -3,6 +3,7 @@ package fr.free.nrw.commons.settings;
 import static android.content.Context.MODE_PRIVATE;
 
 import android.Manifest.permission;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
@@ -21,6 +22,8 @@ import android.widget.TextView;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.appcompat.app.AppCompatDelegate;
+import androidx.core.os.LocaleListCompat;
 import androidx.preference.ListPreference;
 import androidx.preference.MultiSelectListPreference;
 import androidx.preference.Preference;
@@ -267,6 +270,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         );
     }
 
+    @SuppressLint("RestrictedApi")
     @Override
     protected Adapter onCreateAdapter(final PreferenceScreen preferenceScreen) {
         return new PreferenceGroupAdapter(preferenceScreen) {
@@ -314,7 +318,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
 
             assert languageCode != null;
             if (languageCode.equals("")) {
-                selectedLanguages.put(0, Locale.getDefault().getLanguage());
+                selectedLanguages.put(0, AppCompatDelegate.getApplicationLocales().toLanguageTags());
             } else {
                 selectedLanguages.put(0, languageCode);
             }
@@ -396,14 +400,11 @@ public class SettingsFragment extends PreferenceFragmentCompat {
                     recentLanguagesDao.deleteRecentLanguage(languageCode);
                 }
                 recentLanguagesDao.addRecentLanguage(new Language(languageName, languageCode));
-                saveLanguageValue(languageCode, keyListPreference);
                 Locale defLocale = createLocale(languageCode);
                 if(keyListPreference.equals("appUiDefaultLanguagePref")) {
                     appUiLanguageListPreference.setSummary(defLocale.getDisplayLanguage(defLocale));
-                    setLocale(requireActivity(), languageCode);
-                    getActivity().recreate();
-                    final Intent intent = new Intent(getActivity(), MainActivity.class);
-                    startActivity(intent);
+                    LocaleListCompat appLocale = LocaleListCompat.forLanguageTags(languageCode);
+                    AppCompatDelegate.setApplicationLocales(appLocale);
                 }else if(keyListPreference.equals("descriptionDefaultLanguagePref")){
                     descriptionLanguageListPreference.setSummary(defLocale.getDisplayLanguage(defLocale));
                 }
@@ -468,10 +469,8 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         final Locale defLocale = createLocale(recentLanguageCode);
         if (keyListPreference.equals("appUiDefaultLanguagePref")) {
             appUiLanguageListPreference.setSummary(defLocale.getDisplayLanguage(defLocale));
-            setLocale(requireActivity(), recentLanguageCode);
-            getActivity().recreate();
-            final Intent intent = new Intent(getActivity(), MainActivity.class);
-            startActivity(intent);
+            LocaleListCompat appLocale = LocaleListCompat.forLanguageTags(recentLanguageCode);
+            AppCompatDelegate.setApplicationLocales(appLocale);
         } else {
             descriptionLanguageListPreference.setSummary(defLocale.getDisplayLanguage(defLocale));
         }

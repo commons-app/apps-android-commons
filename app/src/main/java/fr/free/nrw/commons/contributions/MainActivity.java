@@ -124,7 +124,7 @@ public class MainActivity extends BaseActivity
         setContentView(binding.getRoot());
         setSupportActionBar(binding.toolbarBinding.toolbar);
         tabLayout = binding.fragmentMainNavTabLayout;
-        loadLocale();
+//        loadLocale();
 
         binding.toolbarBinding.toolbar.setNavigationOnClickListener(view -> {
             onSupportNavigateUp();
@@ -485,13 +485,13 @@ public class MainActivity extends BaseActivity
     /**
      * Load default language in onCreate from SharedPreferences
      */
-    private void loadLocale() {
-        final SharedPreferences preferences = getSharedPreferences("Settings",
-            Activity.MODE_PRIVATE);
-        final String language = preferences.getString("language", "");
-        final SettingsFragment settingsFragment = new SettingsFragment();
-        settingsFragment.setLocale(this, language);
-    }
+//    private void loadLocale() {
+//        final SharedPreferences preferences = getSharedPreferences("Settings",
+//            Activity.MODE_PRIVATE);
+//        final String language = preferences.getString("language", "");
+//        final SettingsFragment settingsFragment = new SettingsFragment();
+//        settingsFragment.setLocale(this, language);
+//    }
 
     public NavTabLayout.OnNavigationItemSelectedListener getNavListener() {
         return navListener;
