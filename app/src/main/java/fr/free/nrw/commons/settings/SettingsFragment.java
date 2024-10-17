@@ -89,7 +89,9 @@ public class SettingsFragment extends PreferenceFragmentCompat {
 
     private ActivityResultLauncher<Intent> cameraPickLauncherForResult = registerForActivityResult(new StartActivityForResult(),
         result -> {
-            // TODO handle result from controller
+            contributionController.handleActivityResultWithCallback(requireActivity(),callbacks -> {
+                contributionController.onPictureReturnedFromCamera(result,requireActivity(),callbacks);
+            });
         });
 
     private ActivityResultLauncher<String[]> inAppCameraLocationPermissionLauncher = registerForActivityResult(new ActivityResultContracts.RequestMultiplePermissions(), new ActivityResultCallback<Map<String, Boolean>>() {

@@ -37,7 +37,9 @@ public class BookmarkLocationsFragment extends DaggerFragment {
 
     private ActivityResultLauncher<Intent> cameraPickLauncherForResult = registerForActivityResult(new StartActivityForResult(),
         result -> {
-            // TODO handle result from controller
+            contributionController.handleActivityResultWithCallback(requireActivity(),callbacks -> {
+                contributionController.onPictureReturnedFromCamera(result,requireActivity(),callbacks);
+            });
         });
 
       private ActivityResultLauncher<Intent> galleryPickLauncherForResult = registerForActivityResult(new StartActivityForResult(),
@@ -99,7 +101,6 @@ public class BookmarkLocationsFragment extends DaggerFragment {
             commonPlaceClickActions,
             inAppCameraLocationPermissionLauncher,
             galleryPickLauncherForResult,
-            //TODO[Parry] just a stub, make sure if this is actually the launcher we need!!
             cameraPickLauncherForResult
 
         );

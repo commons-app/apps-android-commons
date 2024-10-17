@@ -113,7 +113,7 @@ public class ContributionController {
             public void onLocationPermissionGranted() {
                 if (!locationPermissionsHelper.isLocationAccessToAppsTurnedOn()) {
                     showLocationOffDialog(activity, R.string.in_app_camera_needs_location,
-                        R.string.in_app_camera_location_unavailable);
+                        R.string.in_app_camera_location_unavailable, resultLauncher);
                 } else {
                     initiateCameraUpload(activity, resultLauncher);
                 }
@@ -138,9 +138,10 @@ public class ContributionController {
      * @param activity           Activity reference
      * @param dialogTextResource Resource id of text to be shown in dialog
      * @param toastTextResource  Resource id of text to be shown in toast
+     * @param resultLauncher
      */
     private void showLocationOffDialog(Activity activity, int dialogTextResource,
-        int toastTextResource) {
+        int toastTextResource, ActivityResultLauncher<Intent> resultLauncher) {
         DialogUtil
             .showAlertDialog(activity,
                 activity.getString(R.string.ask_to_turn_location_on),
@@ -151,8 +152,7 @@ public class ContributionController {
                 () -> {
                     Toast.makeText(activity, activity.getString(toastTextResource),
                         Toast.LENGTH_LONG).show();
-                    //TODO [Parry] why do we need this call???
-//                    initiateCameraUpload(activity);
+                    initiateCameraUpload(activity,resultLauncher);
                 }
             );
     }
@@ -268,6 +268,10 @@ public class ContributionController {
 
     public void onPictureReturnedFromCustomSelector(ActivityResult result, Activity activity, @NonNull FilePicker.Callbacks callbacks) {
         FilePicker.onPictureReturnedFromCustomSelector(result,activity,callbacks);
+    }
+
+    public void onPictureReturnedFromCamera(ActivityResult result, Activity activity, @NonNull FilePicker.Callbacks callbacks) {
+        FilePicker.onPictureReturnedFromCamera(result,activity,callbacks);
     }
 
     /**
