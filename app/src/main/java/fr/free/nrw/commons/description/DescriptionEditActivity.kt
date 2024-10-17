@@ -234,7 +234,7 @@ class DescriptionEditActivity :
                     )
                 }
         } catch (e: InvalidLoginTokenException) {
-            val username: String? = sessionManager?.userName
+            val username: String? = sessionManager.userName
             val logoutListener =
                 CommonsApplication.BaseLogoutListener(
                     this,
