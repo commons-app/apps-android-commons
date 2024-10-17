@@ -234,9 +234,7 @@ public class ContributionController {
     private void initiateGalleryUpload(final Activity activity, ActivityResultLauncher<Intent> resultLauncher,
         final boolean allowMultipleUploads) {
         setPickerConfiguration(activity, allowMultipleUploads);
-        boolean openDocumentIntentPreferred = defaultKvStore.getBoolean(
-            "openDocumentPhotoPickerPref", true);
-        FilePicker.openGallery(activity, resultLauncher,0, openDocumentIntentPreferred);
+        FilePicker.openGallery(activity, resultLauncher,0, isDocumentPhotoPickerPreferred());
     }
 
     /**
@@ -262,8 +260,17 @@ public class ContributionController {
         FilePicker.openCameraForImage(activity, resultLauncher,0);
     }
 
+    private boolean isDocumentPhotoPickerPreferred(){
+        return defaultKvStore.getBoolean(
+            "openDocumentPhotoPickerPref", true);
+    }
+
     public void onPictureReturnedFromGallery(ActivityResult result, Activity activity, FilePicker.Callbacks callbacks){
-        FilePicker.onPictureReturnedFromGallery(result,activity,callbacks);
+        if(isDocumentPhotoPickerPreferred()){
+            FilePicker.onPictureReturnedFromDocuments(result, activity, callbacks);
+        } else {
+            FilePicker.onPictureReturnedFromGallery(result,activity,callbacks);
+        }
     }
 
     public void onPictureReturnedFromCustomSelector(ActivityResult result, Activity activity, @NonNull FilePicker.Callbacks callbacks) {
