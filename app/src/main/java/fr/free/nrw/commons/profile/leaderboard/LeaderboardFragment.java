@@ -18,7 +18,11 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.MergeAdapter;
+import androidx.recyclerview.widget.MergeAdapte;     
+import androidx.recyclerview.widget.RecyclerView;
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import com.google.android.material.snackbar.Snackbar;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.databinding.FragmentLeaderboardBinding;
@@ -180,9 +184,9 @@ public class LeaderboardFragment extends CommonsDaggerSupportFragment {
                 ctx = getView().getContext();
             }
             if(ctx != null) {
-                Toast.makeText(ctx,
-                    R.string.leaderboard_unavailable_beta,
-                    Toast.LENGTH_LONG).show();
+                Snackbar snackbar = Snackbar.make(getActivity().findViewById(R.id.drawer_layout),R.string.leaderboard_unavailable_beta, Snackbar.LENGTH_LONG);
+                snackbar.setAction("OK", view -> snackbar.dismiss());
+                snackbar.show();
             }
         }
     }
@@ -206,6 +210,10 @@ public class LeaderboardFragment extends CommonsDaggerSupportFragment {
     private void scrollToUserRank() {
 
         if(userRank==0){
+            Snackbar snackbar = Snackbar.make(getActivity().findViewById(R.id.drawer_layout),R.string.no_achievements_yet, Snackbar.LENGTH_LONG);
+            snackbar.setAction("OK", view -> snackbar.dismiss());
+            snackbar.show();        }else {
+            if (Objects.requireNonNull(leaderboardListRecyclerView.getAdapter()).getItemCount()
             Toast.makeText(getContext(),R.string.no_achievements_yet,Toast.LENGTH_SHORT).show();
         }else {
             if (binding == null) {
