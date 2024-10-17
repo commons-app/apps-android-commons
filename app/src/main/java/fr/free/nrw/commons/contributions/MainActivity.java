@@ -432,15 +432,6 @@ public class MainActivity extends BaseActivity
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Timber.d(data != null ? data.toString() : "onActivityResult data is null");
-        super.onActivityResult(requestCode, resultCode, data);
-        //TODO [parr] This can be removed. since any screen that expects a result from launched activity
-        // handles that in it's own respective place.
-//        controller.handleActivityResult(this, resultCode, data);
-    }
-
-    @Override
     protected void onResume() {
         super.onResume();
 
