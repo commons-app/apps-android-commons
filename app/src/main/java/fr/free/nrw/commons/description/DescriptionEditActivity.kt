@@ -252,7 +252,7 @@ class DescriptionEditActivity :
         for (mediaDetail in uploadMediaDetails) {
             try {
                 compositeDisposable.add(
-                    descriptionEditHelper!!
+                    descriptionEditHelper
                         .addCaption(
                             applicationContext,
                             media,
