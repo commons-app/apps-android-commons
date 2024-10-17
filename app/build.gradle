@@ -16,6 +16,11 @@ if (isRunningOnTravisAndIsNotPRBuild) {
 
 dependencies {
 
+    def appcompat_version = "1.7.0"
+    implementation "androidx.appcompat:appcompat:$appcompat_version"
+    // For loading and tinting drawables on older versions of the platform
+    implementation "androidx.appcompat:appcompat-resources:$appcompat_version"
+
     // Utils
     implementation 'in.yuvi:http.fluent:1.3'
     implementation 'com.google.code.gson:gson:2.8.5'
@@ -386,6 +391,9 @@ android {
     lint {
         abortOnError false
         disable 'MissingTranslation', 'ExtraTranslation'
+    }
+    androidResources {
+        generateLocaleConfig true
     }
 }
 
