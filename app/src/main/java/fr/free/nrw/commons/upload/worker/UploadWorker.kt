@@ -17,6 +17,7 @@ import androidx.work.Data
 import androidx.work.ForegroundInfo
 import androidx.work.WorkerParameters
 import dagger.android.ContributesAndroidInjector
+import fr.free.nrw.commons.BuildConfig.HOME_URL
 import fr.free.nrw.commons.CommonsApplication
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.R
@@ -39,6 +40,7 @@ import fr.free.nrw.commons.upload.UploadClient
 import fr.free.nrw.commons.upload.UploadProgressActivity
 import fr.free.nrw.commons.upload.UploadResult
 import fr.free.nrw.commons.wikidata.WikidataEditService
+import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
@@ -476,17 +478,20 @@ class UploadWorker(
                         )
                     if (null != revisionID) {
                         showSuccessNotification(contribution)
+                        withContext(Dispatchers.IO) {
+                            val place = placesRepository.fetchPlace(wikiDataPlace.id);
+                            place.pic = HOME_URL + uploadResult.createCanonicalFileName()
+                            placesRepository
+                                .save(place)
+                                .subscribeOn(Schedulers.io())
+                                .blockingAwait()
+                            Timber.d("Updated WikiItem place ${place.name} with image ${place.pic}")
+                        }
                     }
                 } catch (exception: Exception) {
                     Timber.e(exception)
                 }
-                withContext(Dispatchers.IO) {
-                    val place = placesRepository.fetchPlace(wikiDataPlace.id);
-                    Timber.d("Clearing cache for place: $place")
-                    if (null != place) {
-                        placesRepository.deletePlace(place);
-                    }
-                }
+
                 withContext(Dispatchers.Main) {
                     wikidataEditService.handleImageClaimResult(
                         contribution.wikidataPlace,
