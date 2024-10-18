@@ -11,6 +11,7 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.activity.result.ActivityResult
 import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.AppCompatImageButton
 import androidx.fragment.app.FragmentManager
@@ -363,7 +364,12 @@ class UploadMediaDetailFragmentUnitTest {
         `when`(latLng.latitude).thenReturn(0.0)
         `when`(latLng.longitude).thenReturn(0.0)
         `when`(uploadItem.gpsCoords).thenReturn(imageCoordinates)
-        fragment.onActivityResult(1211, Activity.RESULT_OK, intent)
+        val activityResult = ActivityResult(Activity.RESULT_OK,intent)
+
+        val handleResultMethod = UploadMediaDetailFragment::class.java.getDeclaredMethod("onCameraPosition", ActivityResult::class.java)
+        handleResultMethod.isAccessible = true
+
+        handleResultMethod.invoke(fragment,activityResult)
         Mockito.verify(presenter, Mockito.times(0)).getImageQuality(0, location, activity)
     }
 
@@ -387,7 +393,13 @@ class UploadMediaDetailFragmentUnitTest {
         `when`(latLng.latitude).thenReturn(0.0)
         `when`(latLng.longitude).thenReturn(0.0)
         `when`(uploadItem.gpsCoords).thenReturn(imageCoordinates)
-        fragment.onActivityResult(1211, Activity.RESULT_OK, intent)
+
+        val activityResult = ActivityResult(Activity.RESULT_OK,intent)
+
+        val handleResultMethod = UploadMediaDetailFragment::class.java.getDeclaredMethod("onCameraPosition", ActivityResult::class.java)
+        handleResultMethod.isAccessible = true
+
+        handleResultMethod.invoke(fragment, activityResult)
         Mockito.verify(presenter, Mockito.times(1)).displayLocDialog(0, null, false)
     }
 
