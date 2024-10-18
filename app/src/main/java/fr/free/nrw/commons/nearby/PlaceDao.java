@@ -26,12 +26,6 @@ public abstract class PlaceDao {
     public abstract void saveSynchronous(Place place);
 
     /**
-     * Deletes a Place object from the database
-     * based on the provided entity.
-     */
-    @Delete
-    public abstract void deletePlace(Place place);
-    /**
      * Retrieves a Place object from the database based on the provided entity ID.
      *
      * @param entity The entity ID of the Place to be retrieved.

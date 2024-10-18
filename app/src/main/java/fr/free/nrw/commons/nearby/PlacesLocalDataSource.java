@@ -37,10 +37,4 @@ public class PlacesLocalDataSource {
         return placeDao.save(place);
     }
 
-    /**
-     * Deletes a Place object from the database
-     * based on the provided entity.
-     */
-    public void deletePlace(final Place place) {placeDao.deletePlace(place);}
-
 }
