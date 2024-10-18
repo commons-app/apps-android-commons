@@ -3,6 +3,8 @@ package fr.free.nrw.commons.nearby
 import fr.free.nrw.commons.R
 import org.junit.Before
 import org.junit.Test
+import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.CoreMatchers.equalTo
 
 class LabelTest {
     private lateinit var label: Label
@@ -21,7 +23,7 @@ class LabelTest {
      */
     @Test
     fun testLabelIcon() {
-        assert(label.icon.equals(R.drawable.round_icon_church))
+        assertThat(label.icon, equalTo(R.drawable.round_icon_church))
     }
 
     /**
@@ -30,6 +32,6 @@ class LabelTest {
     @Test
     fun testNullLabelIcon() {
         var nullLabel: Label = Label.fromText("a random text not exist in label texts")
-        assert(nullLabel.icon.equals(R.drawable.round_icon_unknown))
+        assertThat(nullLabel.icon, equalTo(R.drawable.round_icon_unknown))
     }
 }
