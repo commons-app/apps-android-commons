@@ -477,9 +477,9 @@ class UploadWorker(
                             contribution.media.captions,
                         )
                     if (null != revisionID) {
-                        showSuccessNotification(contribution)
                         withContext(Dispatchers.IO) {
                             val place = placesRepository.fetchPlace(wikiDataPlace.id);
+                            place.name = wikiDataPlace.name;
                             place.pic = HOME_URL + uploadResult.createCanonicalFileName()
                             placesRepository
                                 .save(place)
@@ -487,6 +487,7 @@ class UploadWorker(
                                 .blockingAwait()
                             Timber.d("Updated WikiItem place ${place.name} with image ${place.pic}")
                         }
+                        showSuccessNotification(contribution)
                     }
                 } catch (exception: Exception) {
                     Timber.e(exception)
