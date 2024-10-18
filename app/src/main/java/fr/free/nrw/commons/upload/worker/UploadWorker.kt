@@ -17,6 +17,7 @@ import androidx.work.Data
 import androidx.work.ForegroundInfo
 import androidx.work.WorkerParameters
 import dagger.android.ContributesAndroidInjector
+import fr.free.nrw.commons.BuildConfig.HOME_URL
 import fr.free.nrw.commons.CommonsApplication
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.R
@@ -30,6 +31,7 @@ import fr.free.nrw.commons.customselector.database.UploadedStatus
 import fr.free.nrw.commons.customselector.database.UploadedStatusDao
 import fr.free.nrw.commons.di.ApplicationlessInjection
 import fr.free.nrw.commons.media.MediaClient
+import fr.free.nrw.commons.nearby.PlacesRepository
 import fr.free.nrw.commons.theme.BaseActivity
 import fr.free.nrw.commons.upload.FileUtilsWrapper
 import fr.free.nrw.commons.upload.StashUploadResult
@@ -38,6 +40,7 @@ import fr.free.nrw.commons.upload.UploadClient
 import fr.free.nrw.commons.upload.UploadProgressActivity
 import fr.free.nrw.commons.upload.UploadResult
 import fr.free.nrw.commons.wikidata.WikidataEditService
+import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
@@ -73,6 +76,9 @@ class UploadWorker(
 
     @Inject
     lateinit var fileUtilsWrapper: FileUtilsWrapper
+
+    @Inject
+    lateinit var placesRepository: PlacesRepository
 
     private val processingUploadsNotificationTag = BuildConfig.APPLICATION_ID + " : upload_tag"
 
@@ -379,7 +385,7 @@ class UploadWorker(
                                 saveCompletedContribution(contribution, uploadResult)
                             } else {
                                 Timber.d(
-                                    "WikiDataEdit not required, making wikidata edit",
+                                    "WikiDataEdit required, making wikidata edit",
                                 )
                                 makeWikiDataEdit(uploadResult, contribution)
                             }
@@ -471,6 +477,16 @@ class UploadWorker(
                             contribution.media.captions,
                         )
                     if (null != revisionID) {
+                        withContext(Dispatchers.IO) {
+                            val place = placesRepository.fetchPlace(wikiDataPlace.id);
+                            place.name = wikiDataPlace.name;
+                            place.pic = HOME_URL + uploadResult.createCanonicalFileName()
+                            placesRepository
+                                .save(place)
+                                .subscribeOn(Schedulers.io())
+                                .blockingAwait()
+                            Timber.d("Updated WikiItem place ${place.name} with image ${place.pic}")
+                        }
                         showSuccessNotification(contribution)
                     }
                 } catch (exception: Exception) {
