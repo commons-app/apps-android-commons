@@ -63,9 +63,6 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
 
     private UploadMediaDetailAdapter uploadMediaDetailAdapter;
 
-//    private static final int REQUEST_CODE_FOR_EDIT_ACTIVITY = 1212;
-//    private static final int REQUEST_CODE_FOR_VOICE_INPUT = 1213;
-
     private final ActivityResultLauncher<Intent> startForResult = registerForActivityResult(
         new StartActivityForResult(), result -> {
                 onCameraPosition(result);
@@ -706,7 +703,6 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     }
 
     private void onEditActivityResult(ActivityResult result){
-        //TODO[Parry] Doubtful how it works, understand it....
         if (result.getResultCode() == RESULT_OK) {
             String path = result.getData().getStringExtra("editedImageFilePath");
 
@@ -726,28 +722,6 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
             }
         }
     }
-
-    /**
-     * Get the coordinates and update the existing coordinates.
-     * @param requestCode code of request
-     * @param resultCode code of result
-     * @param data intent
-     */
-//    @Override
-//    public void onActivityResult(final int requestCode, final int resultCode,
-//        @Nullable final Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//
-//         if (requestCode == REQUEST_CODE_FOR_VOICE_INPUT) {
-//            if (resultCode == RESULT_OK && data != null) {
-//                ArrayList<String> result = data.getStringArrayListExtra(
-//                    RecognizerIntent.EXTRA_RESULTS);
-//                uploadMediaDetailAdapter.handleSpeechResult(result.get(0));
-//            }else {
-//                Timber.e("Error %s", resultCode);
-//            }
-//        }
-//    }
 
     /**
      * Removes the location data from the image, by setting them to null

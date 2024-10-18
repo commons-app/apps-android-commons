@@ -9,8 +9,6 @@ public interface Constants {
     interface RequestCodes {
         int LOCATION = 1;
         int STORAGE = 2;
-
-        int RECEIVE_DATA_FROM_FULL_SCREEN_MODE = 1 << 9;
     }
 
     /**

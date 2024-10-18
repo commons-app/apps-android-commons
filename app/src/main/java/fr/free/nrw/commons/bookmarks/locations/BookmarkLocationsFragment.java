@@ -35,14 +35,16 @@ public class BookmarkLocationsFragment extends DaggerFragment {
     @Inject CommonPlaceClickActions commonPlaceClickActions;
     private PlaceAdapter adapter;
 
-    private ActivityResultLauncher<Intent> cameraPickLauncherForResult = registerForActivityResult(new StartActivityForResult(),
+    private final ActivityResultLauncher<Intent> cameraPickLauncherForResult =
+        registerForActivityResult(new StartActivityForResult(),
         result -> {
             contributionController.handleActivityResultWithCallback(requireActivity(),callbacks -> {
                 contributionController.onPictureReturnedFromCamera(result,requireActivity(),callbacks);
             });
         });
 
-      private ActivityResultLauncher<Intent> galleryPickLauncherForResult = registerForActivityResult(new StartActivityForResult(),
+      private final ActivityResultLauncher<Intent> galleryPickLauncherForResult =
+          registerForActivityResult(new StartActivityForResult(),
         result -> {
             contributionController.handleActivityResultWithCallback(requireActivity(),callbacks -> {
                 contributionController.onPictureReturnedFromGallery(result,requireActivity(),callbacks);

@@ -58,9 +58,8 @@ public class UploadMediaDetailAdapter extends
     private int currentPosition;
     private Fragment fragment;
     private Activity activity;
-    private ActivityResultLauncher<Intent> voiceInputResultLauncher;
+    private final ActivityResultLauncher<Intent> voiceInputResultLauncher;
     private SelectedVoiceIcon selectedVoiceIcon;
-    private static final int REQUEST_CODE_FOR_VOICE_INPUT = 1213;
 
     private RowItemDescriptionBinding binding;
 

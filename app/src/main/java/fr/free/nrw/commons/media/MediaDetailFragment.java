@@ -1,13 +1,10 @@
 package fr.free.nrw.commons.media;
 
-import static android.app.Activity.RESULT_CANCELED;
-import static android.app.Activity.RESULT_OK;
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 import static fr.free.nrw.commons.category.CategoryClientKt.CATEGORY_NEEDING_CATEGORIES;
 import static fr.free.nrw.commons.category.CategoryClientKt.CATEGORY_UNCATEGORISED;
 import static fr.free.nrw.commons.description.EditDescriptionConstants.LIST_OF_DESCRIPTION_AND_CAPTION;
-import static fr.free.nrw.commons.description.EditDescriptionConstants.UPDATED_WIKITEXT;
 import static fr.free.nrw.commons.description.EditDescriptionConstants.WIKITEXT;
 import static fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment.LAST_LOCATION;
 import static fr.free.nrw.commons.utils.LangCodeUtils.getLocalizedResources;
@@ -112,7 +109,6 @@ import timber.log.Timber;
 public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
     CategoryEditHelper.Callback {
 
-    private static final int REQUEST_CODE = 1001;
     private static final String IMAGE_BACKGROUND_COLOR = "image_background_color";
     static final int DEFAULT_IMAGE_BACKGROUND_COLOR = 0;
     

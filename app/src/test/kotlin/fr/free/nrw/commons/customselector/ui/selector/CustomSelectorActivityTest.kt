@@ -100,7 +100,7 @@ class CustomSelectorActivityTest {
     }
 
     /**
-     * Test onActivityResult function.
+     * Test callback when result received.
      */
     @Test
     @Throws(Exception::class)

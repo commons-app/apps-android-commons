@@ -349,7 +349,7 @@ class UploadMediaDetailFragmentUnitTest {
 
     @Test
     @Throws(Exception::class)
-    fun testOnActivityResultOnMapIconClicked() {
+    fun testOnCameraPositionCallbackOnMapIconClicked() {
         shadowOf(Looper.getMainLooper()).idle()
         Mockito.mock(LocationPicker::class.java)
         val intent = Mockito.mock(Intent::class.java)
@@ -375,7 +375,7 @@ class UploadMediaDetailFragmentUnitTest {
 
     @Test
     @Throws(Exception::class)
-    fun testOnActivityResultAddLocationDialog() {
+    fun testOnCameraPositionCallbackAddLocationDialog() {
         shadowOf(Looper.getMainLooper()).idle()
         Mockito.mock(LocationPicker::class.java)
         val intent = Mockito.mock(Intent::class.java)
