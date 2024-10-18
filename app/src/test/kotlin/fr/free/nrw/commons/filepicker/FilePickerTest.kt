@@ -6,18 +6,19 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.net.Uri
+import android.provider.MediaStore
+import androidx.activity.result.ActivityResultLauncher
 import androidx.preference.PreferenceManager
 import androidx.test.core.app.ApplicationProvider
+import com.nhaarman.mockitokotlin2.KArgumentCaptor
+import com.nhaarman.mockitokotlin2.argumentCaptor
 import com.nhaarman.mockitokotlin2.verify
 import fr.free.nrw.commons.TestCommonsApplication
-import fr.free.nrw.commons.filepicker.Constants.RequestCodes
+import fr.free.nrw.commons.customselector.ui.selector.CustomSelectorActivity
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.ArgumentCaptor
-import org.mockito.ArgumentMatchers
-import org.mockito.Captor
 import org.mockito.Mock
 import org.mockito.Mockito.mock
 import org.mockito.Mockito.`when`
@@ -48,8 +49,10 @@ class FilePickerTest {
     @Mock
     var unit: Unit? = null
 
-    @Captor
-    var requestCodeCaptor: ArgumentCaptor<Integer>? = null
+    @Mock
+    private lateinit var mockResultLauncher: ActivityResultLauncher<Intent>
+
+    private val intentCaptor: KArgumentCaptor<Intent> = argumentCaptor()
 
     private lateinit var context: Context
 
@@ -65,15 +68,17 @@ class FilePickerTest {
         `when`(sharedPref.edit()).thenReturn(sharedPreferencesEditor)
         `when`(sharedPref.edit().putInt("type", 0)).thenReturn(sharedPreferencesEditor)
         val openDocumentPreferred = nextBoolean()
-        FilePicker.openGallery(activity, 0, openDocumentPreferred)
-        verify(activity).startActivityForResult(
-            ArgumentMatchers.any(),
-            requestCodeCaptor?.capture()?.toInt()!!,
-        )
-        if(openDocumentPreferred){
-            assertEquals(requestCodeCaptor?.value, RequestCodes.PICK_PICTURE_FROM_DOCUMENTS)
-        }else{
-            assertEquals(requestCodeCaptor?.value, RequestCodes.PICK_PICTURE_FROM_GALLERY)
+
+        FilePicker.openGallery(activity, mockResultLauncher, 0, openDocumentPreferred)
+
+        verify(mockResultLauncher).launch(intentCaptor.capture())
+
+        val capturedIntent = intentCaptor.firstValue
+
+        if (openDocumentPreferred) {
+            assertEquals(Intent.ACTION_OPEN_DOCUMENT, capturedIntent.action)
+        } else {
+            assertEquals(Intent.ACTION_GET_CONTENT, capturedIntent.action)
         }
     }
 
@@ -84,12 +89,13 @@ class FilePickerTest {
         `when`(sharedPref.edit().putInt("type", 0)).thenReturn(sharedPreferencesEditor)
         val mockApplication = mock(Application::class.java)
         `when`(activity.applicationContext).thenReturn(mockApplication)
-        FilePicker.openCameraForImage(activity, 0)
-        verify(activity).startActivityForResult(
-            ArgumentMatchers.any(),
-            requestCodeCaptor?.capture()?.toInt()!!,
-        )
-        assertEquals(requestCodeCaptor?.value, RequestCodes.TAKE_PICTURE)
+        FilePicker.openCameraForImage(activity, mockResultLauncher, 0)
+
+        verify(mockResultLauncher).launch(intentCaptor.capture())
+
+        val capturedIntent = intentCaptor.firstValue
+        
+        assertEquals(MediaStore.ACTION_IMAGE_CAPTURE, capturedIntent.action)
     }
 
     @Test
@@ -183,47 +189,20 @@ class FilePickerTest {
         method.invoke(mockFilePicker, mockIntent)
     }
 
-    //TODO [Parry] adapt tests
-//    @Test
-//    fun testHandleActivityResultCaseOne() {
-//        val mockIntent = mock(Intent::class.java)
-//        FilePicker.handleActivityResult(
-//            RequestCodes.FILE_PICKER_IMAGE_IDENTIFICATOR,
-//            Activity.RESULT_OK,
-//            mockIntent,
-//            activity,
-//            object : DefaultCallback() {
-//                override fun onCanceled(
-//                    source: FilePicker.ImageSource,
-//                    type: Int,
-//                ) {
-//                    super.onCanceled(source, type)
-//                }
-//
-//                override fun onImagePickerError(
-//                    e: Exception,
-//                    source: FilePicker.ImageSource,
-//                    type: Int,
-//                ) {
-//                }
-//
-//                override fun onImagesPicked(
-//                    imagesFiles: List<UploadableFile>,
-//                    source: FilePicker.ImageSource,
-//                    type: Int,
-//                ) {
-//                }
-//            },
-//        )
-//    }
-
     @Test
     fun testOpenCustomSelectorRequestCode() {
         `when`(PreferenceManager.getDefaultSharedPreferences(activity)).thenReturn(sharedPref)
         `when`(sharedPref.edit()).thenReturn(sharedPreferencesEditor)
         `when`(sharedPref.edit().putInt("type", 0)).thenReturn(sharedPreferencesEditor)
-        FilePicker.openCustomSelector(activity, 0)
-        verify(activity).startActivityForResult(ArgumentMatchers.any(), requestCodeCaptor?.capture()?.toInt()!!)
-        assertEquals(requestCodeCaptor?.value, RequestCodes.PICK_PICTURE_FROM_CUSTOM_SELECTOR)
+        FilePicker.openCustomSelector(activity, mockResultLauncher, 0)
+
+        verify(mockResultLauncher).launch(intentCaptor.capture())
+
+        val capturedIntent = intentCaptor.firstValue
+
+        assertEquals(
+            CustomSelectorActivity.Companion::class.java.declaringClass.name,
+            capturedIntent.component?.className
+        )
     }
 }
