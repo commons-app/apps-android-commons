@@ -38,4 +38,10 @@ public class PlacesRepository {
         return localDataSource.fetchPlace(entityID);
     }
 
+    /**
+     * Deletes a Place object from the database
+     * based on the provided entity.
+     */
+    public void deletePlace(final Place place){ localDataSource.deletePlace(place);}
+
 }

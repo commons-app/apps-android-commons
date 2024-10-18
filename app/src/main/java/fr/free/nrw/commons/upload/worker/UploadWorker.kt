@@ -30,6 +30,7 @@ import fr.free.nrw.commons.customselector.database.UploadedStatus
 import fr.free.nrw.commons.customselector.database.UploadedStatusDao
 import fr.free.nrw.commons.di.ApplicationlessInjection
 import fr.free.nrw.commons.media.MediaClient
+import fr.free.nrw.commons.nearby.PlacesRepository
 import fr.free.nrw.commons.theme.BaseActivity
 import fr.free.nrw.commons.upload.FileUtilsWrapper
 import fr.free.nrw.commons.upload.StashUploadResult
@@ -73,6 +74,9 @@ class UploadWorker(
 
     @Inject
     lateinit var fileUtilsWrapper: FileUtilsWrapper
+
+    @Inject
+    lateinit var placesRepository: PlacesRepository
 
     private val processingUploadsNotificationTag = BuildConfig.APPLICATION_ID + " : upload_tag"
 
@@ -379,7 +383,7 @@ class UploadWorker(
                                 saveCompletedContribution(contribution, uploadResult)
                             } else {
                                 Timber.d(
-                                    "WikiDataEdit not required, making wikidata edit",
+                                    "WikiDataEdit required, making wikidata edit",
                                 )
                                 makeWikiDataEdit(uploadResult, contribution)
                             }
@@ -476,7 +480,13 @@ class UploadWorker(
                 } catch (exception: Exception) {
                     Timber.e(exception)
                 }
-
+                withContext(Dispatchers.IO) {
+                    val place = placesRepository.fetchPlace(wikiDataPlace.id);
+                    Timber.d("Clearing cache for place: $place")
+                    if (null != place) {
+                        placesRepository.deletePlace(place);
+                    }
+                }
                 withContext(Dispatchers.Main) {
                     wikidataEditService.handleImageClaimResult(
                         contribution.wikidataPlace,
