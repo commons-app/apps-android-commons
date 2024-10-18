@@ -72,11 +72,9 @@ class DescriptionEditActivity :
 
     private lateinit var binding: ActivityDescriptionEditBinding
 
-    private val requestCodeForVoiceInput = 1213
-
     private var descriptionAndCaptions: ArrayList<UploadMediaDetail>? = null
 
-    private val voiceInputResultLauncher = registerForActivityResult<Intent, ActivityResult>(
+    private val voiceInputResultLauncher = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
     ) { result: ActivityResult ->
         onVoiceInput(result)
@@ -309,22 +307,6 @@ class DescriptionEditActivity :
         progressDialog!!.setCanceledOnTouchOutside(false)
         progressDialog!!.show()
     }
-
-//    override fun onActivityResult(
-//        requestCode: Int,
-//        resultCode: Int,
-//        data: Intent?,
-//    ) {
-//        super.onActivityResult(requestCode, resultCode, data)
-//        if (requestCode == requestCodeForVoiceInput) {
-//            if (resultCode == RESULT_OK && data != null) {
-//                val result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)
-//                uploadMediaDetailAdapter.handleSpeechResult(result!![0])
-//            } else {
-//                Timber.e("Error %s", resultCode)
-//            }
-//        }
-//    }
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)

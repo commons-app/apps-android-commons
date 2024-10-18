@@ -266,6 +266,7 @@ public class ContributionController {
     }
 
     public void onPictureReturnedFromGallery(ActivityResult result, Activity activity, FilePicker.Callbacks callbacks){
+
         if(isDocumentPhotoPickerPreferred()){
             FilePicker.onPictureReturnedFromDocuments(result, activity, callbacks);
         } else {
@@ -288,25 +289,25 @@ public class ContributionController {
 
         handleActivityResult.onHandleActivityResult(new DefaultCallback() {
 
-            @Override
-            public void onCanceled(final ImageSource source, final int type) {
-                super.onCanceled(source, type);
-                defaultKvStore.remove(PLACE_OBJECT);
-            }
+                @Override
+                public void onCanceled(final ImageSource source, final int type) {
+                    super.onCanceled(source, type);
+                    defaultKvStore.remove(PLACE_OBJECT);
+                }
 
-            @Override
-            public void onImagePickerError(Exception e, FilePicker.ImageSource source,
-                int type) {
-                ViewUtil.showShortToast(activity, R.string.error_occurred_in_picking_images);
-            }
+                @Override
+                public void onImagePickerError(Exception e, FilePicker.ImageSource source,
+                    int type) {
+                    ViewUtil.showShortToast(activity, R.string.error_occurred_in_picking_images);
+                }
 
-            @Override
-            public void onImagesPicked(@NonNull List<UploadableFile> imagesFiles,
-                FilePicker.ImageSource source, int type) {
-                Intent intent = handleImagesPicked(activity, imagesFiles);
-                activity.startActivity(intent);
-            }
-        });
+                @Override
+                public void onImagesPicked(@NonNull List<UploadableFile> imagesFiles,
+                    FilePicker.ImageSource source, int type) {
+                    Intent intent = handleImagesPicked(activity, imagesFiles);
+                    activity.startActivity(intent);
+                }
+            });
     }
 
     public List<UploadableFile> handleExternalImagesPicked(Activity activity,

@@ -227,21 +227,24 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     private List<BottomSheetItem> dataList;
     private BottomSheetAdapter bottomSheetAdapter;
 
-    private ActivityResultLauncher<Intent> galleryPickLauncherForResult = registerForActivityResult(new StartActivityForResult(),
+    private final ActivityResultLauncher<Intent> galleryPickLauncherForResult =
+        registerForActivityResult(new StartActivityForResult(),
         result -> {
             controller.handleActivityResultWithCallback(requireActivity(),callbacks -> {
                 controller.onPictureReturnedFromGallery(result,requireActivity(),callbacks);
             });
         });
 
-    private ActivityResultLauncher<Intent> customSelectorLauncherForResult = registerForActivityResult(new StartActivityForResult(),
+    private final ActivityResultLauncher<Intent> customSelectorLauncherForResult =
+        registerForActivityResult(new StartActivityForResult(),
         result -> {
             controller.handleActivityResultWithCallback(requireActivity(),callbacks -> {
                 controller.onPictureReturnedFromCustomSelector(result,requireActivity(),callbacks);
             });
         });
 
-    private ActivityResultLauncher<Intent> cameraPickLauncherForResult = registerForActivityResult(new StartActivityForResult(),
+    private final ActivityResultLauncher<Intent> cameraPickLauncherForResult =
+        registerForActivityResult(new StartActivityForResult(),
         result -> {
             controller.handleActivityResultWithCallback(requireActivity(),callbacks -> {
                 controller.onPictureReturnedFromCamera(result,requireActivity(),callbacks);

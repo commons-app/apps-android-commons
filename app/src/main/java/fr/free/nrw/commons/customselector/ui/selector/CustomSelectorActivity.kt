@@ -230,7 +230,7 @@ class CustomSelectorActivity :
     /**
      * When data will be send from full screen mode, it will be passed to fragment
      */
-    fun onFullScreenDataReceived(result: ActivityResult){
+    private fun onFullScreenDataReceived(result: ActivityResult){
         if (result.resultCode ==  Activity.RESULT_OK) {
             val selectedImages: ArrayList<Image> =
                 result.data!!

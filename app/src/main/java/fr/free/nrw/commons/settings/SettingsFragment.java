@@ -87,7 +87,8 @@ public class SettingsFragment extends PreferenceFragmentCompat {
     private ListView languageHistoryListView;
     private static final String GET_CONTENT_PICKER_HELP_URL = "https://commons-app.github.io/docs.html#get-content";
 
-    private ActivityResultLauncher<Intent> cameraPickLauncherForResult = registerForActivityResult(new StartActivityForResult(),
+    private final ActivityResultLauncher<Intent> cameraPickLauncherForResult =
+        registerForActivityResult(new StartActivityForResult(),
         result -> {
             contributionController.handleActivityResultWithCallback(requireActivity(),callbacks -> {
                 contributionController.onPictureReturnedFromCamera(result,requireActivity(),callbacks);
