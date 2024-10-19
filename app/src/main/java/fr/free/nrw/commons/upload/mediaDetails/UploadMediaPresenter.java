@@ -129,9 +129,9 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
                         if (place.location != null) {
                             final String countryCode = reverseGeoCode(place.location);
                             if (countryCode != null && WLM_SUPPORTED_COUNTRIES
-                                .contains(countryCode.toLowerCase())) {
+                                .contains(countryCode.toLowerCase(Locale.ROOT))) {
                                 uploadItem.setWLMUpload(true);
-                                uploadItem.setCountryCode(countryCode.toLowerCase());
+                                uploadItem.setCountryCode(countryCode.toLowerCase(Locale.ROOT));
                             }
                         }
                     }
