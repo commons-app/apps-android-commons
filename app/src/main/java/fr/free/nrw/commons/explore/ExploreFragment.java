@@ -22,6 +22,7 @@ import fr.free.nrw.commons.theme.BaseActivity;
 import fr.free.nrw.commons.utils.ActivityUtils;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -112,13 +113,13 @@ public class ExploreFragment extends CommonsDaggerSupportFragment {
         mobileRootFragment = new ExploreListRootFragment(mobileArguments);
         mapRootFragment = new ExploreMapRootFragment(mapArguments);
         fragmentList.add(featuredRootFragment);
-        titleList.add(getString(R.string.explore_tab_title_featured).toUpperCase());
+        titleList.add(getString(R.string.explore_tab_title_featured).toUpperCase(Locale.getDefault()));
 
         fragmentList.add(mobileRootFragment);
-        titleList.add(getString(R.string.explore_tab_title_mobile).toUpperCase());
+        titleList.add(getString(R.string.explore_tab_title_mobile).toUpperCase(Locale.getDefault()));
 
         fragmentList.add(mapRootFragment);
-        titleList.add(getString(R.string.explore_tab_title_map).toUpperCase());
+        titleList.add(getString(R.string.explore_tab_title_map).toUpperCase(Locale.getDefault()));
 
         ((MainActivity)getActivity()).showTabs();
         ((BaseActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
