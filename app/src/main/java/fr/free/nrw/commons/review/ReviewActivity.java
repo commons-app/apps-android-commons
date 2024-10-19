@@ -3,6 +3,7 @@ package fr.free.nrw.commons.review;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -22,9 +23,12 @@ import fr.free.nrw.commons.media.MediaDetailFragment;
 import fr.free.nrw.commons.theme.BaseActivity;
 import fr.free.nrw.commons.utils.DialogUtil;
 import fr.free.nrw.commons.utils.ViewUtil;
+import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
+import java.util.ArrayList;
+import java.util.List;
 import javax.inject.Inject;
 
 public class ReviewActivity extends BaseActivity {
@@ -34,6 +38,10 @@ public class ReviewActivity extends BaseActivity {
     MediaDetailFragment mediaDetailFragment;
     public ReviewPagerAdapter reviewPagerAdapter;
     public ReviewController reviewController;
+
+
+
+
     @Inject
     ReviewHelper reviewHelper;
     @Inject
@@ -51,6 +59,13 @@ public class ReviewActivity extends BaseActivity {
 
     final String SAVED_MEDIA = "saved_media";
     private Media media;
+
+    private List<Media> cachedMedia = new ArrayList<>();
+
+    private static final String PREF_NAME = "ReviewActivityPrefs";
+    private static final String LAST_CACHE_TIME_KEY = "lastCacheTime";
+    private static final int CACHE_SIZE = 50;
+    private static final long CACHE_EXPIRY_TIME = 24 * 60 * 60 * 1000;
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
@@ -99,10 +114,10 @@ public class ReviewActivity extends BaseActivity {
         d[2].setColorFilter(getApplicationContext().getResources().getColor(R.color.button_blue), PorterDuff.Mode.SRC_IN);
 
         if (savedInstanceState != null && savedInstanceState.getParcelable(SAVED_MEDIA) != null) {
-            updateImage(savedInstanceState.getParcelable(SAVED_MEDIA)); // Use existing media if we have one
+            updateImage(savedInstanceState.getParcelable(SAVED_MEDIA));
             setUpMediaDetailOnOrientation();
         } else {
-            runRandomizer(); //Run randomizer whenever everything is ready so that a first random image will be added
+            runRandomizer();
         }
 
         binding.skipImage.setOnClickListener(view -> {
@@ -132,35 +147,69 @@ public class ReviewActivity extends BaseActivity {
 
     @SuppressLint("CheckResult")
     public boolean runRandomizer() {
-
         hasNonHiddenCategories = false;
         binding.pbReviewImage.setVisibility(View.VISIBLE);
         binding.viewPagerReview.setCurrentItem(0);
-        // Finds non-hidden categories from Media instance
-        compositeDisposable.add(reviewHelper.getRandomMedia()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(this::checkWhetherFileIsUsedInWikis));
+
+        if (cachedMedia.isEmpty() || isCacheExpired()) {
+            fetchAndCacheMedia();
+        } else {
+            processNextCachedMedia();
+        }
         return true;
+    }
+
+    private void fetchAndCacheMedia() {
+        compositeDisposable.add(Observable.range(0, CACHE_SIZE)
+            .flatMap(i -> reviewHelper.getRandomMedia().toObservable())
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .toList()
+            .subscribe(mediaList -> {
+                cachedMedia.clear();
+                cachedMedia.addAll(mediaList);
+                updateLastCacheTime();
+                processNextCachedMedia();
+            }, this::handleError));
+    }
+
+    private void processNextCachedMedia() {
+        if (!cachedMedia.isEmpty()) {
+            Media media = cachedMedia.remove(0);
+            checkWhetherFileIsUsedInWikis(media);
+        } else {
+            fetchAndCacheMedia();
+        }
+    }
+
+    private boolean isCacheExpired() {
+        SharedPreferences prefs = getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
+        long lastCacheTime = prefs.getLong(LAST_CACHE_TIME_KEY, 0);
+        long currentTime = System.currentTimeMillis();
+        return (currentTime - lastCacheTime) > CACHE_EXPIRY_TIME;
+    }
+
+    private void updateLastCacheTime() {
+        SharedPreferences prefs = getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putLong(LAST_CACHE_TIME_KEY, System.currentTimeMillis());
+        editor.apply();
     }
 
     /**
      * Check whether media is used or not in any Wiki Page
      */
-    @SuppressLint("CheckResult")
     private void checkWhetherFileIsUsedInWikis(final Media media) {
         compositeDisposable.add(reviewHelper.checkFileUsage(media.getFilename())
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(result -> {
-                // result false indicates media is not used in any wiki
                 if (!result) {
-                    // Finds non-hidden categories from Media instance
                     findNonHiddenCategories(media);
                 } else {
-                    runRandomizer();
+                    processNextCachedMedia();
                 }
-            }));
+            }, this::handleError));
     }
 
     /**
@@ -181,7 +230,6 @@ public class ReviewActivity extends BaseActivity {
         updateImage(media);
     }
 
-    @SuppressLint("CheckResult")
     private void updateImage(Media media) {
         reviewHelper.addViewedImagesToDB(media.getPageId());
         this.media = media;
@@ -191,27 +239,26 @@ public class ReviewActivity extends BaseActivity {
             return;
         }
 
-        //If The Media User and Current Session Username is same then Skip the Image
         if (media.getUser() != null && media.getUser().equals(AccountUtil.getUserName(getApplicationContext()))) {
-            runRandomizer();
+            processNextCachedMedia();
             return;
         }
 
         binding.reviewImageView.setImageURI(media.getImageUrl());
 
-        reviewController.onImageRefreshed(media); //file name is updated
+        reviewController.onImageRefreshed(media);
         compositeDisposable.add(reviewHelper.getFirstRevisionOfFile(fileName)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(revision -> {
-                    reviewController.firstRevision = revision;
-                    reviewPagerAdapter.updateFileInformation();
-                    @SuppressLint({"StringFormatInvalid", "LocalSuppress"}) String caption = String.format(getString(R.string.review_is_uploaded_by), fileName, revision.getUser());
-                    binding.tvImageCaption.setText(caption);
-                    binding.pbReviewImage.setVisibility(View.GONE);
-                    reviewImageFragment = getInstanceOfReviewImageFragment();
-                    reviewImageFragment.enableButtons();
-                }));
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(revision -> {
+                reviewController.firstRevision = revision;
+                reviewPagerAdapter.updateFileInformation();
+                String caption = String.format(getString(R.string.review_is_uploaded_by), fileName, revision.getUser());
+                binding.tvImageCaption.setText(caption);
+                binding.pbReviewImage.setVisibility(View.GONE);
+                reviewImageFragment = getInstanceOfReviewImageFragment();
+                reviewImageFragment.enableButtons();
+            }, this::handleError));
         binding.viewPagerReview.setCurrentItem(0);
     }
 
@@ -257,6 +304,11 @@ public class ReviewActivity extends BaseActivity {
                 "",
                 null,
                 null);
+    }
+    private void handleError(Throwable error) {
+        binding.pbReviewImage.setVisibility(View.GONE);
+        ViewUtil.showShortSnackbar(binding.drawerLayout, R.string.error_review);
+        // 可以添加更详细的错误处理逻辑
     }
 
 
