@@ -64,12 +64,17 @@ class FilePickerTest {
         `when`(PreferenceManager.getDefaultSharedPreferences(activity)).thenReturn(sharedPref)
         `when`(sharedPref.edit()).thenReturn(sharedPreferencesEditor)
         `when`(sharedPref.edit().putInt("type", 0)).thenReturn(sharedPreferencesEditor)
-        FilePicker.openGallery(activity, 0, nextBoolean())
+        val openDocumentPreferred = nextBoolean()
+        FilePicker.openGallery(activity, 0, openDocumentPreferred)
         verify(activity).startActivityForResult(
             ArgumentMatchers.any(),
             requestCodeCaptor?.capture()?.toInt()!!,
         )
-        assertEquals(requestCodeCaptor?.value, RequestCodes.PICK_PICTURE_FROM_GALLERY)
+        if(openDocumentPreferred){
+            assertEquals(requestCodeCaptor?.value, RequestCodes.PICK_PICTURE_FROM_DOCUMENTS)
+        }else{
+            assertEquals(requestCodeCaptor?.value, RequestCodes.PICK_PICTURE_FROM_GALLERY)
+        }
     }
 
     @Test
@@ -159,32 +164,6 @@ class FilePickerTest {
         val method: Method =
             FilePicker::class.java.getDeclaredMethod(
                 "takenCameraPicture",
-                Context::class.java,
-            )
-        method.isAccessible = true
-        method.invoke(mockFilePicker, activity)
-    }
-
-    @Test
-    fun testTakenCameraVideo() {
-        val mockFilePicker = mock(FilePicker::class.java)
-        val method: Method =
-            FilePicker::class.java.getDeclaredMethod(
-                "takenCameraVideo",
-                Context::class.java,
-            )
-        method.isAccessible = true
-        method.invoke(mockFilePicker, context)
-    }
-
-    @Test
-    fun testTakenCameraVideoCaseTrue() {
-        val mockFilePicker = mock(FilePicker::class.java)
-        `when`(PreferenceManager.getDefaultSharedPreferences(activity)).thenReturn(sharedPref)
-        `when`(sharedPref.getString("last_video", null)).thenReturn("")
-        val method: Method =
-            FilePicker::class.java.getDeclaredMethod(
-                "takenCameraVideo",
                 Context::class.java,
             )
         method.isAccessible = true
