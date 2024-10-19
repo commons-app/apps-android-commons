@@ -29,6 +29,8 @@ import javax.inject.Inject;
 
 public class ReviewActivity extends BaseActivity {
 
+    public static int runRandomizerCallCount = 0;
+
 
     private ActivityReviewBinding binding;
 
@@ -133,6 +135,7 @@ public class ReviewActivity extends BaseActivity {
 
     @SuppressLint("CheckResult")
     public boolean runRandomizer() {
+        runRandomizerCallCount++;
         hasNonHiddenCategories = false;
         binding.pbReviewImage.setVisibility(View.VISIBLE);
         binding.viewPagerReview.setCurrentItem(0);
