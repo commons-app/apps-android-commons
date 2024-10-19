@@ -362,7 +362,7 @@ public class AchievementsFragment extends CommonsDaggerSupportFragment {
             + levelInfo.getMaxUniqueImages());
         binding.imageFeatured.setText(String.valueOf(achievements.getFeaturedImages()));
         binding.qualityImages.setText(String.valueOf(achievements.getQualityImages()));
-        String levelUpInfoString = getString(R.string.level).toUpperCase(Locale.getDefault());
+        String levelUpInfoString = getString(R.string.level).toUpperCase(Locale.ROOT);
         levelUpInfoString += " " + levelInfo.getLevelNumber();
         binding.achievementLevel.setText(levelUpInfoString);
         binding.achievementBadgeImage.setImageDrawable(VectorDrawableCompat.create(getResources(), R.drawable.badge,
