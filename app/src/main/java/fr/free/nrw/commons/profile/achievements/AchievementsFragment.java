@@ -27,6 +27,7 @@ import fr.free.nrw.commons.profile.ProfileActivity;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
+import java.util.Locale;
 import java.util.Objects;
 import javax.inject.Inject;
 import org.apache.commons.lang3.StringUtils;
@@ -361,7 +362,7 @@ public class AchievementsFragment extends CommonsDaggerSupportFragment {
             + levelInfo.getMaxUniqueImages());
         binding.imageFeatured.setText(String.valueOf(achievements.getFeaturedImages()));
         binding.qualityImages.setText(String.valueOf(achievements.getQualityImages()));
-        String levelUpInfoString = getString(R.string.level).toUpperCase();
+        String levelUpInfoString = getString(R.string.level).toUpperCase(Locale.getDefault());
         levelUpInfoString += " " + levelInfo.getLevelNumber();
         binding.achievementLevel.setText(levelUpInfoString);
         binding.achievementBadgeImage.setImageDrawable(VectorDrawableCompat.create(getResources(), R.drawable.badge,
