@@ -113,13 +113,13 @@ public class ExploreFragment extends CommonsDaggerSupportFragment {
         mobileRootFragment = new ExploreListRootFragment(mobileArguments);
         mapRootFragment = new ExploreMapRootFragment(mapArguments);
         fragmentList.add(featuredRootFragment);
-        titleList.add(getString(R.string.explore_tab_title_featured).toUpperCase(Locale.getDefault()));
+        titleList.add(getString(R.string.explore_tab_title_featured).toUpperCase(Locale.ROOT));
 
         fragmentList.add(mobileRootFragment);
-        titleList.add(getString(R.string.explore_tab_title_mobile).toUpperCase(Locale.getDefault()));
+        titleList.add(getString(R.string.explore_tab_title_mobile).toUpperCase(Locale.ROOT));
 
         fragmentList.add(mapRootFragment);
-        titleList.add(getString(R.string.explore_tab_title_map).toUpperCase(Locale.getDefault()));
+        titleList.add(getString(R.string.explore_tab_title_map).toUpperCase(Locale.ROOT));
 
         ((MainActivity)getActivity()).showTabs();
         ((BaseActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
