@@ -109,7 +109,13 @@ public class FilePicker implements Constants {
      */
     public static void openGallery(Activity activity, int type, boolean openDocumentIntentPreferred) {
         Intent intent = createGalleryIntent(activity, type, openDocumentIntentPreferred);
-        activity.startActivityForResult(intent, RequestCodes.PICK_PICTURE_FROM_GALLERY);
+        int requestCode = RequestCodes.PICK_PICTURE_FROM_GALLERY;
+
+            if(openDocumentIntentPreferred){
+                requestCode = RequestCodes.PICK_PICTURE_FROM_DOCUMENTS;
+            }
+
+        activity.startActivityForResult(intent, requestCode);
     }
 
     /**
@@ -157,7 +163,6 @@ public class FilePicker implements Constants {
             requestCode &= ~RequestCodes.SOURCE_CHOOSER;
             if (requestCode == RequestCodes.PICK_PICTURE_FROM_GALLERY ||
                     requestCode == RequestCodes.TAKE_PICTURE ||
-                    requestCode == RequestCodes.CAPTURE_VIDEO ||
                     requestCode == RequestCodes.PICK_PICTURE_FROM_DOCUMENTS ||
                     requestCode == RequestCodes.PICK_PICTURE_FROM_CUSTOM_SELECTOR) {
                 if (resultCode == Activity.RESULT_OK) {
@@ -169,19 +174,16 @@ public class FilePicker implements Constants {
                         onPictureReturnedFromCustomSelector(data, activity, callbacks);
                     } else if (requestCode == RequestCodes.TAKE_PICTURE) {
                         onPictureReturnedFromCamera(activity, callbacks);
-                    } else if (requestCode == RequestCodes.CAPTURE_VIDEO) {
-                        onVideoReturnedFromCamera(activity, callbacks);
-                    } else if (isPhoto(data)) {
-                        onPictureReturnedFromCamera(activity, callbacks);
-                    } else {
-                        onPictureReturnedFromDocuments(data, activity, callbacks);
                     }
                 } else {
                     if (requestCode == RequestCodes.PICK_PICTURE_FROM_DOCUMENTS) {
                         callbacks.onCanceled(FilePicker.ImageSource.DOCUMENTS, restoreType(activity));
                     } else if (requestCode == RequestCodes.PICK_PICTURE_FROM_GALLERY) {
                         callbacks.onCanceled(FilePicker.ImageSource.GALLERY, restoreType(activity));
-                    } else {
+                    } else if (requestCode == RequestCodes.PICK_PICTURE_FROM_CUSTOM_SELECTOR){
+                        callbacks.onCanceled(ImageSource.CUSTOM_SELECTOR, restoreType(activity));
+                    }
+                    else {
                         callbacks.onCanceled(FilePicker.ImageSource.CAMERA_IMAGE, restoreType(activity));
                     }
                 }

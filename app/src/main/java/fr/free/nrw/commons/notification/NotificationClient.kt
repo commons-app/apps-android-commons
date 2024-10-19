@@ -51,13 +51,23 @@ class NotificationClient
                 }
             }
 
-        private fun WikimediaNotification.toCommonsNotification() =
-            Notification(
-                notificationType = NotificationType.UNKNOWN,
-                notificationText = contents?.compactHeader ?: "",
-                date = DateUtil.getMonthOnlyDateString(timestamp),
-                link = contents?.links?.primary?.url ?: "",
-                iconUrl = "",
-                notificationId = id().toString(),
-            )
+        private fun WikimediaNotification.toCommonsNotification() :
+            Notification {
+            val notificationText = contents?.compactHeader ?: ""
+            val notificationType =
+                if (notificationText.contains("Sent you an email", ignoreCase = true)) {
+                    NotificationType.EMAIL
+                } else {
+                    NotificationType.UNKNOWN
+                }
+
+                return Notification(
+                    notificationType = notificationType,
+                    notificationText = notificationText,
+                    date = DateUtil.getMonthOnlyDateString(timestamp),
+                    link = contents?.links?.primary?.url ?: "",
+                    iconUrl = "",
+                    notificationId = id().toString(),
+                )
+        }
     }

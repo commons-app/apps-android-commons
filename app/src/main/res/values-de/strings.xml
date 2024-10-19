@@ -29,6 +29,7 @@
 * Sujan
 * Sushi
 * Tacsipacsi
+* TheRabbit22
 * ThisCarthing
 * Tobi 406
 * TomatoCake
@@ -802,4 +803,17 @@
   <string name="multiple_files_depiction">Bitte beachte, dass bei einem Multiupload alle Bilder die gleichen Kategorien und Bezeichnungen erhalten. Sollten die Bilder keine gemeinsamen Bezeichnungen und Kategorien haben, führe bitte mehrere separate Uploads durch.</string>
   <string name="multiple_files_depiction_header">Hinweis zu Mehrfach-Uploads</string>
   <string name="nearby_wikitalk">Melde ein Problem mit diesem Datenobjekt an Wikidata</string>
+  <string name="please_enter_some_comments">Bitte gib einige Kommentare ein</string>
+  <string name="talk">Diskussion</string>
+  <string name="write_something_about_the_item">Schreibe etwas über das Objekt ‚%1$s‘. Deine Beschreibung wird öffentlich sichtbar sein.</string>
+  <string name="does_not_exist_anymore_no_picture_can_ever_be_taken_of_it">‚%1$s‘ existiert nicht mehr, es kann kein Foto mehr davon gemacht werden.</string>
+  <string name="is_at_a_different_place_please_specify_the_correct_place_below_if_possible_tell_us_the_correct_latitude_longitude">‚%1$s‘ ist jetzt an einem anderen Ort. Bitte gib den richtigen Ort und, wenn möglich, den Breiten- und Längengrad an.</string>
+  <string name="other_problem_or_information_please_explain_below">Sonstiges Problem oder Information (bitte unten erläutern).</string>
+  <string name="feedback_destination_note">Dein Feedback wird auf der folgenden Wiki-Seite veröffentlicht werden: &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Mobile_app/Feedback\"&gt;Commons:Mobile app/Feedback&lt;/a&gt;</string>
+  <string name="are_you_sure_that_you_want_cancel_all_the_uploads">Möchtest du wirklich alle Uploads abbrechen?</string>
+  <string name="cancelling_all_the_uploads">Alle Uploads werden abgebrochen…</string>
+  <string name="uploads">Hochgeladene Dateien</string>
+  <string name="pending">Ausstehend</string>
+  <string name="failed">Fehlgeschlagen</string>
+  <string name="could_not_load_place_data">Ortsdaten konnten nicht geladen werden</string>
 </resources>
