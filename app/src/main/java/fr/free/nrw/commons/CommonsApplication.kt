@@ -392,9 +392,6 @@ class CommonsApplication : MultiDexApplication() {
         @JvmField
         var isPaused: Boolean = false
 
-        val isRoboUnitTest: Boolean
-            get() = "robolectric" == Build.FINGERPRINT
-
         @JvmStatic
         fun createNotificationChannel(context: Context) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
