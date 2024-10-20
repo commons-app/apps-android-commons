@@ -85,7 +85,6 @@ class CommonsApplication : MultiDexApplication() {
     @Inject
     lateinit var customOkHttpNetworkFetcher: CustomOkHttpNetworkFetcher
 
-    //TODO [parry] not being used anywhere, remove after checking
     var languageLookUpTable: AppLanguageLookUpTable? = null
         private set
 
@@ -385,7 +384,9 @@ class CommonsApplication : MultiDexApplication() {
         /**
          * Constants End
          */
-        var instance: CommonsApplication? = null
+
+        @JvmStatic
+        lateinit var instance: CommonsApplication
             private set
 
         @JvmField
