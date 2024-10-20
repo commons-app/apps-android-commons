@@ -609,7 +609,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
      * This method is called to start the image editing activity for a specific UploadItem.
      * It sets the UploadItem as the currently editable item, creates an intent to launch the
      * EditActivity, and passes the image file path as an extra in the intent. The activity
-     * is started with a request code, allowing the result to be handled in onActivityResult.
+     * is started using resultLauncher that handles the result in respective callback.
      */
     @Override
     public void showEditActivity(UploadItem uploadItem) {

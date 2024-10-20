@@ -4,7 +4,7 @@ public interface Constants {
     String DEFAULT_FOLDER_NAME = "CommonsContributions";
 
     /**
-     * Provides the request codes utilised by the FilePicker
+     * Provides the request codes for permission handling
      */
     interface RequestCodes {
         int LOCATION = 1;
