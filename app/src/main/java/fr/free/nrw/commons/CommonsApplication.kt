@@ -68,33 +68,29 @@ import javax.inject.Named
 )
 
 class CommonsApplication : MultiDexApplication() {
-    @JvmField
-    @Inject
-    var sessionManager: SessionManager? = null
 
-    @JvmField
     @Inject
-    var dbOpenHelper: DBOpenHelper? = null
+    lateinit var sessionManager: SessionManager
 
-    @JvmField
     @Inject
-    @Named("default_preferences")
-    var defaultPrefs: JsonKvStore? = null
+    lateinit var dbOpenHelper: DBOpenHelper
 
-    @JvmField
     @Inject
-    var cookieJar: CommonsCookieJar? = null
+    @field:Named("default_preferences")
+    lateinit var defaultPrefs: JsonKvStore
 
-    @JvmField
     @Inject
-    var customOkHttpNetworkFetcher: CustomOkHttpNetworkFetcher? = null
+    lateinit var cookieJar: CommonsCookieJar
 
+    @Inject
+    lateinit var customOkHttpNetworkFetcher: CustomOkHttpNetworkFetcher
+
+    //TODO [parry] not being used anywhere, remove after checking
     var languageLookUpTable: AppLanguageLookUpTable? = null
         private set
 
-    @JvmField
     @Inject
-    var contributionDao: ContributionDao? = null
+    lateinit var contributionDao: ContributionDao
 
     /**
      * Used to declare and initialize various components and dependencies
@@ -112,13 +108,13 @@ class CommonsApplication : MultiDexApplication() {
 
         initTimber()
 
-        if (!defaultPrefs!!.getBoolean("has_user_manually_removed_location")) {
-            var defaultExifTagsSet = defaultPrefs!!.getStringSet(Prefs.MANAGED_EXIF_TAGS)
+        if (!defaultPrefs.getBoolean("has_user_manually_removed_location")) {
+            var defaultExifTagsSet = defaultPrefs.getStringSet(Prefs.MANAGED_EXIF_TAGS)
             if (null == defaultExifTagsSet) {
                 defaultExifTagsSet = HashSet()
             }
             defaultExifTagsSet.add(getString(R.string.exif_tag_location))
-            defaultPrefs!!.putStringSet(Prefs.MANAGED_EXIF_TAGS, defaultExifTagsSet)
+            defaultPrefs.putStringSet(Prefs.MANAGED_EXIF_TAGS, defaultExifTagsSet)
         }
 
         //        Set DownsampleEnabled to True to downsample the image in case it's heavy
@@ -216,14 +212,14 @@ class CommonsApplication : MultiDexApplication() {
             }
         }
 
-        sessionManager!!.logout()
-            .andThen(Completable.fromAction { cookieJar!!.clear() })
+        sessionManager.logout()
+            .andThen(Completable.fromAction { cookieJar.clear() })
             .andThen(Completable.fromAction {
                 Timber.d("All accounts have been removed")
                 clearImageCache()
                 //TODO: fix preference manager
-                defaultPrefs!!.clearAll()
-                defaultPrefs!!.putBoolean("firstrun", false)
+                defaultPrefs.clearAll()
+                defaultPrefs.putBoolean("firstrun", false)
                 updateAllDatabases()
             })
             .subscribeOn(Schedulers.io())
@@ -243,17 +239,17 @@ class CommonsApplication : MultiDexApplication() {
      * Deletes all tables and re-creates them.
      */
     private fun updateAllDatabases() {
-        dbOpenHelper!!.readableDatabase.close()
-        val db = dbOpenHelper!!.writableDatabase
+        dbOpenHelper.readableDatabase.close()
+        val db = dbOpenHelper.writableDatabase
 
         CategoryDao.Table.onDelete(db)
-        dbOpenHelper!!.deleteTable(
+        dbOpenHelper.deleteTable(
             db,
             DBOpenHelper.CONTRIBUTIONS_TABLE
         ) //Delete the contributions table in the existing db on older versions
 
         try {
-            contributionDao!!.deleteAll()
+            contributionDao.deleteAll()
         } catch (e: SQLiteException) {
             Timber.e(e)
         }
@@ -361,6 +357,7 @@ class CommonsApplication : MultiDexApplication() {
     }
 
     companion object {
+        //TODO should be uppercase
         const val loginMessageIntentKey: String = "loginMessage"
         const val loginUsernameIntentKey: String = "loginUsername"
 
