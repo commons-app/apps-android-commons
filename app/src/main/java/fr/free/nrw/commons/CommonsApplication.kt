@@ -306,10 +306,10 @@ class CommonsApplication : MultiDexApplication() {
                 .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
 
             if (loginMessage != null) {
-                loginIntent.putExtra(loginMessageIntentKey, loginMessage)
+                loginIntent.putExtra(LOGIN_MESSAGE_INTENT_KEY, loginMessage)
             }
             if (userName != null) {
-                loginIntent.putExtra(loginUsernameIntentKey, userName)
+                loginIntent.putExtra(LOGIN_USERNAME_INTENT_KEY, userName)
             }
 
             ctx.startActivity(loginIntent)
@@ -356,9 +356,9 @@ class CommonsApplication : MultiDexApplication() {
     }
 
     companion object {
-        //TODO should be uppercase
-        const val loginMessageIntentKey: String = "loginMessage"
-        const val loginUsernameIntentKey: String = "loginUsername"
+
+        const val LOGIN_MESSAGE_INTENT_KEY: String = "loginMessage"
+        const val LOGIN_USERNAME_INTENT_KEY: String = "loginUsername"
 
         const val IS_LIMITED_CONNECTION_MODE_ENABLED: String = "is_limited_connection_mode_enabled"
 
