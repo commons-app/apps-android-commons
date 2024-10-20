@@ -258,7 +258,7 @@ class DescriptionEditActivity :
                     username,
                 )
 
-            val commonsApplication = CommonsApplication.getInstance()
+            val commonsApplication = CommonsApplication.instance
             if (commonsApplication != null) {
                 commonsApplication.clearApplicationData(this, logoutListener)
             }
@@ -291,7 +291,7 @@ class DescriptionEditActivity :
                         username,
                     )
 
-                val commonsApplication = CommonsApplication.getInstance()
+                val commonsApplication = CommonsApplication.instance
                 if (commonsApplication != null) {
                     commonsApplication.clearApplicationData(this, logoutListener)
                 }
