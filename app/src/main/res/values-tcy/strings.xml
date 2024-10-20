@@ -242,7 +242,6 @@
   <string name="about_translate_proceed">ಮುಂದುವರಿಪುಲೆ.</string>
   <string name="about_translate_cancel">ವಜಾ ಮಲ್ಪುಲೆ</string>
   <string name="retry">ನನೊರ ಪ್ರಯತ್ನ ಮಾನ್ಪುಲೇ</string>
-  <string name="showcase_view_whole_nearby_activity" fuzzy="true">ವಿಕಿಪೀಡಿಯ ಲೇಕನೊಲೆನ್ ಸಚಿತ್ರ ಮಲ್ಪರೆ  ಚಿತ್ರೊಲು ಬೋಡಾಯಿನ,  ಇರೆನ ಕೈತಲ್ದ ಜಾಗೊಲು ಮೂಲುಂಡು.</string>
   <string name="no_images_found">ಒವ್ವೆ ಆಕೃತಿಲು ತಿಕ್ಕುಜಾ!</string>
   <string name="error_loading_images">ಆಕೃತಿಲೆನ್ ಏರಾನಗ ದೋಷ ಆಂಡ್.</string>
   <string name="image_uploaded_by">ಮಿತೇರಾಯಿನಾರ್: %1$s</string>

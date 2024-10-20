@@ -323,7 +323,6 @@
   <string name="about_translate_proceed">İlerle</string>
   <string name="about_translate_cancel">İptal</string>
   <string name="retry">Tekrar dene</string>
-  <string name="showcase_view_whole_nearby_activity">Bunlar, Vikipedi maddeleri görselleştirmek için resimlere ihtiyaç duyan size yakın yerler.\n\n\'BU ALANI ARA\'yı tıklamak haritayı açar ve o konumun yakınında bir arama başlatır.</string>
   <string name="showcase_view_needs_photo">Burada bir fotoğrafa ihtiyacı var.</string>
   <string name="showcase_view_has_photo">Burada zaten bir fotoğrafı var.</string>
   <string name="showcase_view_no_longer_exists">Burası artık mevcut değil.</string>

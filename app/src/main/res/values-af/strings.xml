@@ -246,7 +246,6 @@
   <string name="about_translate_proceed">Voortgaan</string>
   <string name="about_translate_cancel">Kanselleer</string>
   <string name="retry">Probeer weer</string>
-  <string name="showcase_view_whole_nearby_activity">Dit is die plekke in jou omgewing wat foto\'s benodig om hul Wikipedia-artikels te illustreer.\n\nAs u op \'SOEK HIERDIE GEBIED\' klik, word die kaart gesluit en \'n nabygeleë soektog na daardie plek begin.</string>
   <string name="no_images_found">Geen afbeeldings gevind!</string>
   <string name="error_loading_images">Daar is \'n fout opgetree tydens se die laden van die afbeeldings.</string>
   <string name="image_uploaded_by">Opgelaai deur:%$1s</string>

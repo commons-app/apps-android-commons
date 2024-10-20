@@ -348,7 +348,6 @@
   <string name="about_translate_proceed">تقدم</string>
   <string name="about_translate_cancel">إلغاء</string>
   <string name="retry">إعادة المحاولة</string>
-  <string name="showcase_view_whole_nearby_activity">هذه هي الأماكن القريبة منك التي تحتاج إلى صور لتوضيح مقالات ويكيبيديا الخاصة بها. \n\nيؤدي النقر فوق \"البحث في هذه المنطقة\" إلى إغلاق الخريطة وإطلاق بحث قريب حول هذا الموقع.</string>
   <string name="showcase_view_needs_photo">هذا المكان يحتاج إلى صورة.</string>
   <string name="showcase_view_has_photo">هذا المكان به صورة بالفعل.</string>
   <string name="showcase_view_no_longer_exists">هذه الصفحة لم تعد موجودة.</string>

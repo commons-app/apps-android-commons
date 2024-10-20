@@ -337,7 +337,6 @@
   <string name="about_translate_proceed">Continuer</string>
   <string name="about_translate_cancel">Annuler</string>
   <string name="retry">Réessayer</string>
-  <string name="showcase_view_whole_nearby_activity">Ce sont les lieux autour de vous qui ont besoin d’images pour illustrer leurs articles sur Wikipédia.\n\nEn cliquant sur « CHERCHER DANS CETTE ZONE » vous verrouillez la carte et lancez une recherche à proximité de ce lieu.</string>
   <string name="showcase_view_needs_photo">Ce lieu a besoin d’une photo.</string>
   <string name="showcase_view_has_photo">Ce lieu a déjà une photo.</string>
   <string name="showcase_view_no_longer_exists">Ce lieu n’existe plus.</string>

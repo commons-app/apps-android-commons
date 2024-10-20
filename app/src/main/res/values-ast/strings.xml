@@ -289,7 +289,6 @@
   <string name="about_translate_proceed">Siguir</string>
   <string name="about_translate_cancel">Zarrar</string>
   <string name="retry">Retentar</string>
-  <string name="showcase_view_whole_nearby_activity">Estos son sitios cercanos que precisen imaxes para ilustrar los sos artículos de Wikipedia.\n\nAl pulsiar en \'BUSCAR NESTA ÁREA\' bloquiase\'l mapa y llánzase una busca cercana alredor d\'esi llugar.</string>
   <string name="showcase_view_needs_photo">Esti llugar precisa una semeya.</string>
   <string name="showcase_view_has_photo">Esti llugar yá tien una semeya.</string>
   <string name="showcase_view_no_longer_exists">Esti llugar yá nun esiste.</string>
