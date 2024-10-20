@@ -85,7 +85,7 @@ class CommonsApplication : MultiDexApplication() {
     @Inject
     lateinit var customOkHttpNetworkFetcher: CustomOkHttpNetworkFetcher
 
-    var languageLookUpTable: AppLanguageLookUpTable? = null
+    lateinit var languageLookUpTable: AppLanguageLookUpTable
         private set
 
     @Inject
@@ -386,7 +386,7 @@ class CommonsApplication : MultiDexApplication() {
          */
 
         @JvmStatic
-        var instance: CommonsApplication? = null
+        lateinit var instance: CommonsApplication
             private set
 
         @JvmField

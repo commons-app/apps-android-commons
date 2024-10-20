@@ -438,7 +438,7 @@ class UploadWorker(
                                 username,
                             )
                         CommonsApplication
-                            .instance!!
+                            .instance
                             .clearApplicationData(appContext, logoutListener)
                     }
                 }
