@@ -50,8 +50,8 @@ import timber.log.Timber;
 import static android.view.KeyEvent.KEYCODE_ENTER;
 import static android.view.View.VISIBLE;
 import static android.view.inputmethod.EditorInfo.IME_ACTION_DONE;
-import static fr.free.nrw.commons.CommonsApplication.loginMessageIntentKey;
-import static fr.free.nrw.commons.CommonsApplication.loginUsernameIntentKey;
+import static fr.free.nrw.commons.CommonsApplication.LOGIN_MESSAGE_INTENT_KEY;
+import static fr.free.nrw.commons.CommonsApplication.LOGIN_USERNAME_INTENT_KEY;
 
 public class LoginActivity extends AccountAuthenticatorActivity {
 
@@ -94,8 +94,8 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        String message = getIntent().getStringExtra(loginMessageIntentKey);
-        String username = getIntent().getStringExtra(loginUsernameIntentKey);
+        String message = getIntent().getStringExtra(LOGIN_MESSAGE_INTENT_KEY);
+        String username = getIntent().getStringExtra(LOGIN_USERNAME_INTENT_KEY);
 
         binding.loginUsername.addTextChangedListener(textWatcher);
         binding.loginPassword.addTextChangedListener(textWatcher);
