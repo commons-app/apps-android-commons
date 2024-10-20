@@ -18,12 +18,14 @@ WHERE {
   }
 
   # Get the label in the preferred language of the user, or any other language if no label is available in that language.
-  OPTIONAL {?item rdfs:label ?itemLabelPreferredLanguage. FILTER (lang(?itemLabelPreferredLanguage) = "en")}
+  OPTIONAL {?item rdfs:label ?itemLabelPreferredLanguage. FILTER (lang(?itemLabelPreferredLanguage) = "${LANG}")}
+  ${SECONDARYLABEL}
   OPTIONAL {?item rdfs:label ?itemLabelAnyLanguage}
   BIND(COALESCE(?itemLabelPreferredLanguage, ?itemLabelAnyLanguage, "?") as ?label)
 
   # Get the description in the preferred language of the user, or any other language if no description is available in that language.
   OPTIONAL {?item schema:description ?itemDescriptionPreferredLanguage. FILTER (lang(?itemDescriptionPreferredLanguage) = "${LANG}")}
+  ${SECONDARYDESCRIPTION}
   OPTIONAL {?item schema:description ?itemDescriptionAnyLanguage}
   BIND(COALESCE(?itemDescriptionPreferredLanguage, ?itemDescriptionAnyLanguage, "?") as ?description)
 
@@ -31,6 +33,7 @@ WHERE {
   OPTIONAL {
   ?item p:P31/ps:P31 ?class.
     OPTIONAL {?class rdfs:label ?classLabelPreferredLanguage. FILTER (lang(?classLabelPreferredLanguage) = "${LANG}")}
+    ${SECONDARYCLASSLABEL}
     OPTIONAL {?class rdfs:label ?classLabelAnyLanguage}
     BIND(COALESCE(?classLabelPreferredLanguage, ?classLabelAnyLanguage, "?") as ?classLabel)
   }

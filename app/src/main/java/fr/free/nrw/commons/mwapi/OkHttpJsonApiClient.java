@@ -409,15 +409,55 @@ public class OkHttpJsonApiClient {
      */
     @Nullable
     public List<Place> getPlaces(
-        final List<Place> placeList, final String language) throws IOException {
+        final List<Place> placeList, final String language, final String secondaryLanguages) throws IOException {
         final String wikidataQuery = FileUtils.readFromResource("/queries/query_for_item.rq");
+        final String[] secondaryLanguageArray = secondaryLanguages.split(",\\s*"); // could be used to generate backup SparQL Queries
+
         String qids = "";
         for (final Place place : placeList) {
             qids += "\n" + ("wd:" + place.getWikiDataEntityId());
         }
+
+        StringBuilder fallBackDescription = new StringBuilder();
+        for (int i = 0; i < secondaryLanguageArray.length; i++) {
+            fallBackDescription.append("OPTIONAL {?item schema:description ?itemDescriptionPreferredLanguage_")
+                .append(i + 1)
+                .append(". FILTER (lang(?itemDescriptionPreferredLanguage_")
+                .append(i + 1)
+                .append(") = \"")
+                .append(secondaryLanguageArray[i])
+                .append("\")}\n");
+        }
+
+        StringBuilder fallbackLabel = new StringBuilder();
+        for (int i = 0; i < secondaryLanguageArray.length; i++) {
+            fallbackLabel.append("OPTIONAL {?item rdfs:label ?itemLabelPreferredLanguage_")
+                .append(i + 1)
+                .append(". FILTER (lang(?itemLabelPreferredLanguage_")
+                .append(i + 1)
+                .append(") = \"")
+                .append(secondaryLanguageArray[i])
+                .append("\")}\n");
+        }
+
+        StringBuilder fallbackClassLabel = new StringBuilder();
+        for (int i = 0; i < secondaryLanguageArray.length; i++) {
+            fallbackClassLabel.append("OPTIONAL {?class rdfs:label ?classLabelPreferredLanguage_")
+                .append(i + 1)
+                .append(". FILTER (lang(?classLabelPreferredLanguage_")
+                .append(i + 1)
+                .append(") = \"")
+                .append(secondaryLanguageArray[i])
+                .append("\")}\n");
+        }
+
         final String query = wikidataQuery
             .replace("${ENTITY}", qids)
-            .replace("${LANG}", language);
+            .replace("${LANG}", language)
+            .replace("${SECONDARYDESCRIPTION}", fallBackDescription.toString())
+            .replace("${SECONDARYLABEL}", fallbackLabel.toString())
+            .replace("${SECONDARYCLASSLABEL}", fallbackClassLabel.toString());
+
         final HttpUrl.Builder urlBuilder = HttpUrl
             .parse(sparqlQueryUrl)
             .newBuilder()
@@ -640,17 +680,13 @@ public class OkHttpJsonApiClient {
             }
         }).doOnError(Timber::e));
     }
-    String fullCode = Locale.getDefault().getLanguage();
-    String mainCode = fullCode.contains(",") ? fullCode.substring(0, fullCode.indexOf(',')).trim() : fullCode;
 
     @NotNull
     private Request sparqlQuery(String qid, int startPosition, int limit, String fileName)
         throws IOException {
-        String fullCode = Locale.getDefault().getLanguage();
-        String mainCode = fullCode.contains(",") ? fullCode.substring(0, fullCode.indexOf(',')).trim() : fullCode;
         String query = FileUtils.readFromResource(fileName)
             .replace("${QID}", qid)
-            .replace("${LANG}", "\"" + mainCode + "\"")
+            .replace("${LANG}", "\"" + Locale.getDefault().getLanguage() + "\"")
             .replace("${LIMIT}", "" + limit)
             .replace("${OFFSET}", "" + startPosition);
         HttpUrl.Builder urlBuilder = HttpUrl

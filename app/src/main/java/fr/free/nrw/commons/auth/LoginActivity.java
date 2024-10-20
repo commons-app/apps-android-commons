@@ -223,9 +223,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         final String twoFactorCode = Objects.requireNonNull(binding.loginTwoFactor.getText()).toString();
 
         showLoggingProgressBar();
-        String fullCode = Locale.getDefault().getLanguage();
-        String mainCode = fullCode.contains(",") ? fullCode.substring(0, fullCode.indexOf(',')).trim() : fullCode;
-        loginClient.doLogin(username, password, twoFactorCode, mainCode,
+        loginClient.doLogin(username, password, twoFactorCode, Locale.getDefault().getLanguage(),
             new LoginCallback() {
                 @Override
                 public void success(@NonNull LoginResult loginResult) {

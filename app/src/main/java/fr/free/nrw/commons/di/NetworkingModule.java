@@ -345,8 +345,6 @@ public class NetworkingModule {
     @Singleton
     @Named(NAMED_LANGUAGE_WIKI_PEDIA_WIKI_SITE)
     public WikiSite provideLanguageWikipediaSite() {
-        String fullCode = Locale.getDefault().getLanguage();
-        String mainCode = fullCode.contains(",") ? fullCode.substring(0, fullCode.indexOf(',')).trim() : fullCode;
-        return WikiSite.forLanguageCode(mainCode);
+        return WikiSite.forLanguageCode(Locale.getDefault().getLanguage());
     }
 }

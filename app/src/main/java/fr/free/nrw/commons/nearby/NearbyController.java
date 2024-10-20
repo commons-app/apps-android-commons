@@ -8,6 +8,8 @@ import androidx.annotation.Nullable;
 import fr.free.nrw.commons.BaseMarker;
 import fr.free.nrw.commons.MapController;
 import fr.free.nrw.commons.location.LatLng;
+import fr.free.nrw.commons.kvstore.JsonKvStore;
+import fr.free.nrw.commons.settings.Prefs;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -16,6 +18,7 @@ import java.util.ListIterator;
 import java.util.Locale;
 import java.util.Map;
 import javax.inject.Inject;
+import javax.inject.Named;
 import timber.log.Timber;
 
 public class NearbyController extends MapController {
@@ -34,6 +37,9 @@ public class NearbyController extends MapController {
         this.nearbyPlaces = nearbyPlaces;
     }
 
+    @Inject
+    @Named("default_preferences")
+    JsonKvStore defaultKvStore;
 
     /**
      * Prepares Place list to make their distance information update later.
@@ -56,10 +62,9 @@ public class NearbyController extends MapController {
             Timber.d("Loading attractions nearby, but currentLatLng is null");
             return null;
         }
-        String fullCode = Locale.getDefault().getLanguage();
-        String mainCode = fullCode.contains(",") ? fullCode.substring(0, fullCode.indexOf(',')).trim() : fullCode;
+
         List<Place> places = nearbyPlaces
-            .radiusExpander(searchLatLng, mainCode, returnClosestResult,
+            .radiusExpander(searchLatLng, Locale.getDefault().getLanguage(), returnClosestResult,
                 customQuery);
 
         if (null != places && places.size() > 0) {
@@ -141,9 +146,10 @@ public class NearbyController extends MapController {
      * @throws Exception If an error occurs during the retrieval process.
      */
     public List<Place> getPlaces(List<Place> placeList) throws Exception {
-        String fullCode = Locale.getDefault().getLanguage();
-        String mainCode = fullCode.contains(",") ? fullCode.substring(0, fullCode.indexOf(',')).trim() : fullCode;
-        return nearbyPlaces.getPlaces(placeList, mainCode);
+
+        String secondaryLanguages = defaultKvStore.getString(Prefs.SECONDARY_LANGUAGE, "");
+
+        return nearbyPlaces.getPlaces(placeList, Locale.getDefault().getLanguage(), secondaryLanguages);
     }
 
     public static LatLng calculateNorthEast(double latitude, double longitude, double distance) {
@@ -200,11 +206,8 @@ public class NearbyController extends MapController {
             return null;
         }
 
-        String fullCode = Locale.getDefault().getLanguage();
-        String mainCode = fullCode.contains(",") ? fullCode.substring(0, fullCode.indexOf(',')).trim() : fullCode;
-
         List<Place> places = nearbyPlaces.getFromWikidataQuery(screenTopRight, screenBottomLeft,
-            mainCode, shouldQueryForMonuments, customQuery);
+            Locale.getDefault().getLanguage(), shouldQueryForMonuments, customQuery);
 
         if (null != places && places.size() > 0) {
             LatLng[] boundaryCoordinates = {

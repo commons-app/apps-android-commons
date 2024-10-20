@@ -490,7 +490,7 @@ public class MainActivity extends BaseActivity
             Activity.MODE_PRIVATE);
         final String language = preferences.getString("language", "");
         final SettingsFragment settingsFragment = new SettingsFragment();
-        settingsFragment.setLocale(this, language, true);
+        settingsFragment.setLocale(this, language);
     }
 
     public NavTabLayout.OnNavigationItemSelectedListener getNavListener() {

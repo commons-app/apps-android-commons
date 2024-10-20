@@ -190,18 +190,11 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         keyLanguageListPreference = descriptionSecondaryLanguageListPreference.getKey();
         languageCode = getCurrentLanguageCode(keyLanguageListPreference);
         assert languageCode != null;
-        if (languageCode.equals("")) {
-            // If current language code is empty, means none selected by user yet so use phone local
-            descriptionSecondaryLanguageListPreference.setSummary(Locale.getDefault().getDisplayLanguage());
-        } else {
-            // If any language is selected by user previously, use it
-            Locale defLocale = createLocale(languageCode);
-            descriptionSecondaryLanguageListPreference.setSummary(defLocale.getDisplayLanguage(defLocale));
-        }
+        descriptionSecondaryLanguageListPreference.setSummary("List additional languages.");
+
         descriptionSecondaryLanguageListPreference.setOnPreferenceClickListener(new OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(Preference preference) {
-                System.out.println("click recieved");
                 prepareSecondaryLanguageDialog();
                 return true;
             }
@@ -323,19 +316,22 @@ public class SettingsFragment extends PreferenceFragmentCompat {
 
     private void prepareSecondaryLanguageDialog() {
         final String languageCode = getCurrentLanguageCode("descriptionSecondaryLanguagePref");
-        System.out.println("before");
-        System.out.println(languageCode);
         HashMap<Integer, String> selectedLanguages = new HashMap<>();
         assert languageCode != null;
-        String fullCode = Locale.getDefault().getLanguage();
-        String mainCode = fullCode.contains(",") ? fullCode.substring(0, fullCode.indexOf(',')).trim() : fullCode;
-        selectedLanguages.put(0, mainCode);
+        selectedLanguages.put(0, Locale.getDefault().getLanguage());
+        System.out.println(Locale.getDefault().getLanguage());
+        System.out.println(languageCode);
 
         // Deserializing saved language codes to Language objects
-        ArrayList<Language> Saved_Languages = new ArrayList<>();
+        ArrayList<Language> savedLanguages = new ArrayList<>();
         for (String code : deSerialise(languageCode)) {
+            System.out.println(code);
+            if(code.equals(Locale.getDefault().getLanguage())){
+                System.out.println("match");
+                continue;
+            }
             Locale locale = new Locale(code);
-            Saved_Languages.add(new Language(locale.getDisplayLanguage(locale), code));
+            savedLanguages.add(new Language(locale.getDisplayLanguage(locale), code));
         }
 
         // Create the new dialog for secondary language
@@ -355,29 +351,27 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         View separator = dialog.findViewById(R.id.separator);
 
         // Setup saved languages with the new SavedLanguagesAdapter
-        updateSavedLanguages(savedLanguageListView, Saved_Languages, selectedLanguages);
+        updateSavedLanguages(savedLanguageListView, savedLanguages, selectedLanguages);
 
         // Set an onItemClickListener to remove a language when clicked
         savedLanguageListView.setOnItemClickListener((adapterView, view, position, id) -> {
             // Remove the clicked language from Saved_Languages
-            Saved_Languages.remove(position);
+            savedLanguages.remove(position);
 
             // Update the saved language list view after removing the language
-            updateSavedLanguages(savedLanguageListView, Saved_Languages, selectedLanguages);
+            updateSavedLanguages(savedLanguageListView, savedLanguages, selectedLanguages);
 
             // Update the shared preferences to reflect the removal
             String updatedLanguageCodes = "";
-            for (Language language : Saved_Languages) {
+            for (Language language : savedLanguages) {
                 updatedLanguageCodes += language.getLanguageCode() + ", ";
             }
             // Remove the trailing comma and space if present
             if (!updatedLanguageCodes.isEmpty()) {
                 updatedLanguageCodes = updatedLanguageCodes.substring(0, updatedLanguageCodes.length() - 2);
             }
-
             saveLanguageValue(updatedLanguageCodes, "descriptionSecondaryLanguagePref");
-            System.out.println("after removal");
-            System.out.println(getCurrentLanguageCode("descriptionSecondaryLanguagePref"));
+//            descriptionSecondaryLanguageListPreference.setSummary(getCurrentLanguageCode("descriptionSecondaryLanguagePref"));
         });
 
         // Set up the adapter for new languages using the selectedLanguages map
@@ -411,22 +405,36 @@ public class SettingsFragment extends PreferenceFragmentCompat {
                 return;
             }
 
-            Saved_Languages.add(new Language(selectedLanguageName, selectedLanguageCode));
-            updateSavedLanguages(savedLanguageListView, Saved_Languages, selectedLanguages);
+            savedLanguages.add(new Language(selectedLanguageName, selectedLanguageCode));
+            updateSavedLanguages(savedLanguageListView, savedLanguages, selectedLanguages);
 
-
-            // Save the language
-            if (getCurrentLanguageCode("descriptionSecondaryLanguagePref").isEmpty()) {
-                saveLanguageValue(selectedLanguageCode, "descriptionSecondaryLanguagePref");
-            } else {
-                saveLanguageValue(getCurrentLanguageCode("descriptionSecondaryLanguagePref") + ", "
-                    + selectedLanguageCode, "descriptionSecondaryLanguagePref");
+            // Update the shared preferences to reflect the addition
+            String updatedLanguageCodes = "";
+            for (Language language : savedLanguages) {
+                updatedLanguageCodes += language.getLanguageCode() + ", ";
             }
-            descriptionSecondaryLanguageListPreference.setSummary(getCurrentLanguageCode("descriptionSecondaryLanguagePref"));
+            // Remove the trailing comma and space if present
+            if (!updatedLanguageCodes.isEmpty()) {
+                updatedLanguageCodes = updatedLanguageCodes.substring(0, updatedLanguageCodes.length() - 2);
+            }
+
+            saveLanguageValue(updatedLanguageCodes, "descriptionSecondaryLanguagePref");
+
+//            descriptionSecondaryLanguageListPreference.setSummary(getCurrentLanguageCode("descriptionSecondaryLanguagePref"));
         });
 
         dialog.setOnDismissListener(dialogInterface -> {
-            setLocale(requireActivity(), languageCode, false);
+            // Update the shared preferences to reflect changes
+            String updatedLanguageCodes = "";
+            for (Language language : savedLanguages) {
+                updatedLanguageCodes += language.getLanguageCode() + ", ";
+            }
+            // Remove the trailing comma and space if present
+            if (!updatedLanguageCodes.isEmpty()) {
+                updatedLanguageCodes = updatedLanguageCodes.substring(0, updatedLanguageCodes.length() - 2);
+            }
+            saveLanguageValue(updatedLanguageCodes, "descriptionSecondaryLanguagePref");
+
         });
     }
 
@@ -454,9 +462,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
 
             assert languageCode != null;
             if (languageCode.equals("")) {
-                String fullCode = Locale.getDefault().getLanguage();
-                String mainCode = fullCode.contains(",") ? fullCode.substring(0, fullCode.indexOf(',')).trim() : fullCode;
-                selectedLanguages.put(0, mainCode);
+                selectedLanguages.put(0, Locale.getDefault().getLanguage());
             } else {
                 selectedLanguages.put(0, languageCode);
             }
@@ -464,9 +470,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
 
             assert languageCode != null;
             if (languageCode.equals("")) {
-                String fullCode = Locale.getDefault().getLanguage();
-                String mainCode = fullCode.contains(",") ? fullCode.substring(0, fullCode.indexOf(',')).trim() : fullCode;
-                selectedLanguages.put(0, mainCode);
+                selectedLanguages.put(0, Locale.getDefault().getLanguage());
 
             } else {
                 selectedLanguages.put(0, languageCode);
@@ -475,9 +479,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
 
         assert languageCode != null;
         if (languageCode.equals("")) {
-            String fullCode = Locale.getDefault().getLanguage();
-            String mainCode = fullCode.contains(",") ? fullCode.substring(0, fullCode.indexOf(',')).trim() : fullCode;
-            selectedLanguages.put(0, mainCode);
+            selectedLanguages.put(0, Locale.getDefault().getLanguage());
 
         } else {
             selectedLanguages.put(0, languageCode);
@@ -547,15 +549,12 @@ public class SettingsFragment extends PreferenceFragmentCompat {
                 Locale defLocale = createLocale(languageCode);
                 if(keyListPreference.equals("appUiDefaultLanguagePref")) {
                     appUiLanguageListPreference.setSummary(defLocale.getDisplayLanguage(defLocale));
-                    setLocale(requireActivity(), languageCode, true);
+                    setLocale(requireActivity(), languageCode);
                     getActivity().recreate();
                     final Intent intent = new Intent(getActivity(), MainActivity.class);
                     startActivity(intent);
                 }else if(keyListPreference.equals("descriptionDefaultLanguagePref")){
                     descriptionLanguageListPreference.setSummary(defLocale.getDisplayLanguage(defLocale));
-                }
-                else{
-                    descriptionSecondaryLanguageListPreference.setSummary(defLocale.getDisplayLanguage(defLocale));
                 }
                 dialog.dismiss();
             }
@@ -615,7 +614,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         final Locale defLocale = createLocale(recentLanguageCode);
         if (keyListPreference.equals("appUiDefaultLanguagePref")) {
             appUiLanguageListPreference.setSummary(defLocale.getDisplayLanguage(defLocale));
-            setLocale(requireActivity(), recentLanguageCode, true);
+            setLocale(requireActivity(), recentLanguageCode);
             getActivity().recreate();
             final Intent intent = new Intent(getActivity(), MainActivity.class);
             startActivity(intent);
@@ -642,28 +641,34 @@ public class SettingsFragment extends PreferenceFragmentCompat {
     /**
      * Changing the default app language with selected one and save it to SharedPreferences
      */
-    public void setLocale(final Activity activity, String userSelectedValue, boolean appUI) {
-
-        if (userSelectedValue.equals("")) {
-            userSelectedValue = Locale.getDefault().getLanguage();
-        }
-
-        String current = Locale.getDefault().getLanguage();
-        ArrayList<String> languageCodes = deSerialise(current);
-        if(appUI) {
-            languageCodes.set(0, userSelectedValue);
-            userSelectedValue = reSerialise(languageCodes);
-            }
-        else{
-            ArrayList<String> newLanguageCodes = new ArrayList<>();
-            ArrayList<String> userSelctedCode = deSerialise(userSelectedValue);
-
-            newLanguageCodes.add(languageCodes.get(0));
-            for(String code : userSelctedCode){
-                newLanguageCodes.add(code);
-            }
-            userSelectedValue = reSerialise(newLanguageCodes);
-        }
+    public void setLocale(final Activity activity, String userSelectedValue) {
+//        if (userSelectedValue.equals("")) {
+//            userSelectedValue = Locale.getDefault().getLanguage();
+//        }
+//
+//        String current = Locale.getDefault().getLanguage();
+//        ArrayList<String> languageCodes = deSerialise(current);
+//        if(appUI) {
+//            languageCodes.set(0, userSelectedValue);
+//            userSelectedValue = reSerialise(languageCodes);
+//            }
+//        else{
+//            ArrayList<String> newLanguageCodes = new ArrayList<>();
+//            ArrayList<String> userSelctedCode = deSerialise(userSelectedValue);
+//
+//            newLanguageCodes.add(languageCodes.get(0));
+//            for(String code : userSelctedCode){
+//                newLanguageCodes.add(code);
+//            }
+//            userSelectedValue = reSerialise(newLanguageCodes);
+//        }
+//
+//        System.out.println("Final locale");
+//        System.out.println(userSelectedValue);
+//
+//        System.out.println("vs");
+//        System.out.println(getCurrentLanguageCode("appUiDefaultLanguagePref"));
+//        System.out.println(getCurrentLanguageCode("descriptionSecondaryLanguagePref"));
 
         final Locale locale = createLocale(userSelectedValue);
         Locale.setDefault(locale);
