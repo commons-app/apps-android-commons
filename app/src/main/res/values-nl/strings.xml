@@ -496,6 +496,7 @@
   <string name="no_notification">U heeft geen ongelezen meldingen</string>
   <string name="no_read_notification">U heeft geen gelezen meldingen</string>
   <string name="share_logs_using">Logboeken delen via</string>
+  <string name="check_your_email_inbox">Bekijk uw e-mailinbox</string>
   <string name="menu_option_read">Bekijk gelezen</string>
   <string name="menu_option_unread">Ongelezen bekijken</string>
   <string name="error_occurred_in_picking_images">Er is een fout opgetreden bij het kiezen van afbeeldingen</string>
