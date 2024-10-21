@@ -1131,16 +1131,28 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
     /**
      *  Reloads the Nearby map
+     *  Clears all location markers, refreshes them, reinserts them into the map.
+     * @author Marcus Barta - marcusbarta@icloud.com
      */
-    private void reloadMap(){
-
+    private void reloadMap() {
+        // TODO: Marcus's section
+        clearAllMarkers(); // clear the list of markers
+        binding.map.getController().setZoom(ZOOM_LEVEL); // reset the zoom level
+        binding.map.getController().setCenter(lastMapFocus); // recentre the focus
+        if (locationPermissionsHelper.checkLocationPermission(getActivity())) {
+            locationPermissionGranted(); // reload map with user's location
+        } else {
+            startMapWithoutPermission(); // reload map without user's location
+        }
+        binding.map.invalidate(); // invalidate the map
+        presenter.updateMapAndList(LOCATION_SIGNIFICANTLY_CHANGED); // restart the map
     }
 
 
     /**
      *  Empties the Nearby local cache
      */
-    private void emptyCache(){
+    private void emptyCache() {
 
     }
 
