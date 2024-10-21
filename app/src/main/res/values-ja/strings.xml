@@ -462,6 +462,7 @@
   <string name="no_notification">未読の通知はありません</string>
   <string name="no_read_notification">既読のお知らせはありません</string>
   <string name="share_logs_using">ログの共有に使うアプリ</string>
+  <string name="check_your_email_inbox">メールをご確認ください</string>
   <string name="menu_option_read">既読を表示</string>
   <string name="menu_option_unread">未読を見る</string>
   <string name="error_occurred_in_picking_images">画像の選択中にエラーが発生しました</string>
@@ -679,7 +680,6 @@
   <string name="error_sending_thanks">作者への感謝の送信エラー。</string>
   <string name="invalid_login_message">ログインが期限切れになりました。もう一度ログインしてください。</string>
   <string name="no_application_available_to_open_gpx_files">GPXファイルを開くことができるアプリケーションがありません</string>
-  <string name="check_your_email_inbox">メールをご確認ください</string>
   <plurals name="custom_picker_images_selected_title_appendix">
     <item quantity="other">%d件の画像が選択されました</item>
   </plurals>

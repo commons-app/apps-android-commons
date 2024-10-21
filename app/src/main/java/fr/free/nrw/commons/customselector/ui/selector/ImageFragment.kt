@@ -285,9 +285,11 @@ class ImageFragment :
                 imageAdapter.notifyDataSetChanged()
                 selectorRV?.let {
                     it.visibility = View.VISIBLE
-                    lastItemId?.let { pos ->
-                        (it.layoutManager as GridLayoutManager)
-                            .scrollToPosition(ImageHelper.getIndexFromId(filteredImages, pos))
+                    if (switch?.isChecked == false) {
+                        lastItemId?.let { pos ->
+                            (it.layoutManager as GridLayoutManager)
+                                .scrollToPosition(ImageHelper.getIndexFromId(filteredImages, pos))
+                        }
                     }
                 }
             } else {

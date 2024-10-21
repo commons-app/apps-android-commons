@@ -12,34 +12,60 @@
 * Şeyx Şamil
 -->
 <resources>
+  <string name="commons_facebook">Commons Facebook səhifəsi</string>
+  <string name="commons_github">Commons Github Mənbə Kodu</string>
+  <string name="commons_logo">Commons Loqotipi</string>
+  <string name="commons_website">Commons Veb-saytı</string>
+  <string name="exit_location_picker">Məkan seçicidən çıxın</string>
+  <string name="submit">Göndər</string>
+  <string name="add_another_description">Başqa təsvir əlavə et</string>
+  <string name="add_new_contribution">Yeni töhfə</string>
+  <string name="add_contribution_from_camera">Kamera ilə töhfə ver</string>
+  <string name="add_contribution_from_photos">Fotolar ilə töhfə ver</string>
+  <string name="add_contribution_from_contributions_gallery">Əvvəlki töhfələr qalereyasından töhfə əlavə et</string>
+  <string name="show_captions">Başlıqlar</string>
+  <string name="row_item_language_description">Dil təsviri</string>
+  <string name="row_item_caption">Başlıq</string>
+  <string name="show_captions_description">Təsvir</string>
+  <string name="nearby_row_image">Şəkil</string>
+  <string name="nearby_all">Hamısı</string>
+  <string name="nearby_filter_toggle">Aç/Bağla</string>
+  <string name="nearby_filter_search">Axtarış Görünüşü</string>
+  <string name="nearby_filter_state">Məkanın Vəziyyəti</string>
+  <string name="appwidget_img">Günün Şəkli</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">%1$d fayl yüklənir</item>
     <item quantity="other">%1$d fayllar yüklənir</item>
   </plurals>
+  <plurals name="contributions_subtitle">
+    <item quantity="one">(%1$d)</item>
+    <item quantity="other">(%1$d)</item>
+  </plurals>
+  <string name="starting_uploads">Yükləmələrə Başlanılır</string>
   <string name="preference_category_general">Ümumi</string>
   <string name="preference_category_privacy">Məxfilik</string>
-  <string name="app_name">Vikimedia Commons</string>
+  <string name="app_name">Vikianbar</string>
   <string name="menu_settings">Tənzimləmələr</string>
-  <string name="username">Ləqəb</string>
+  <string name="username">İstifadəçi adı</string>
   <string name="password">Parol</string>
   <string name="login">Daxil ol</string>
   <string name="signup">Qeydiyyatdan keç</string>
   <string name="logging_in_title">Giriş edilir</string>
-  <string name="logging_in_message">Lütfən gözləyin…</string>
+  <string name="logging_in_message">Zəhmət olmasa, gözləyin…</string>
   <string name="login_success" fuzzy="true">Daxil oldunuz!</string>
   <string name="login_failed">Giriş baş tutmadı!</string>
   <string name="upload_failed">Fayl tapılmadı. Xahiş edirik başqa bir fayl üzərində cəhd edin.</string>
   <string name="authentication_failed" fuzzy="true">Doğrulama alınmadı, xahiş edirəm yenidən daxil olun</string>
   <string name="uploading_started">Yükləmə başladı!</string>
   <string name="upload_completed_notification_title">%1$s yükləndi!</string>
-  <string name="upload_completed_notification_text">Yüklədiyini izlə</string>
+  <string name="upload_completed_notification_text">Yükləmənizə baxmaq üçün toxunun</string>
   <string name="upload_progress_notification_title_start" fuzzy="true">%1$s yüklənməsi başlanır</string>
   <string name="upload_progress_notification_title_in_progress">%1$s yüklənir</string>
   <string name="upload_progress_notification_title_finishing">%1$s yüklənməsi başa çatdı</string>
   <string name="upload_failed_notification_title" fuzzy="true">%1$s faylının yüklənməsi alınmadı</string>
-  <string name="upload_failed_notification_subtitle">Baxmaq üçün toxunun</string>
-  <string name="title_activity_contributions">Yükləmələrim</string>
-  <string name="contribution_state_queued">Sırada</string>
+  <string name="upload_failed_notification_subtitle">Baxmaq üçün toxun</string>
+  <string name="title_activity_contributions">Son Yükləmələrim</string>
+  <string name="contribution_state_queued">Növbəyə alındı</string>
   <string name="contribution_state_failed">Uğursuz</string>
   <string name="contribution_state_in_progress">%1$d%% tamamlandı</string>
   <string name="contribution_state_starting">Yüklənir</string>
@@ -52,15 +78,15 @@
   <string name="share_description_hint">Açıqlama</string>
   <string name="login_failed_network" fuzzy="true">Daxil olmaq olmur — şəbəkə xətası</string>
   <string name="login_failed_throttled">Çox sayda uğursuz daxil olma. Xahiş edirik bir neçə dəqiqə sonra yenidən cəhd edin.</string>
-  <string name="login_failed_blocked">Bağışlayın, bu istifadəçi Commons-da bloklanmışdır.</string>
-  <string name="login_failed_2fa_needed">İki faktorlu giriş doğrulama kodunu verməlisiniz.</string>
+  <string name="login_failed_blocked">Bağışlayın, bu istifadəçi Vikianbardan bloklanıb</string>
+  <string name="login_failed_2fa_needed">Siz iki faktorlu autentifikasiya kodunuzu təqdim etməlisiniz.</string>
   <string name="login_failed_generic" fuzzy="true">Daxil olma uğursuz oldu</string>
   <string name="share_upload_button">Yüklə</string>
   <string name="multiple_share_base_title">Bu dəsti adlandırın</string>
-  <string name="provider_modifications">Bildirişlər</string>
+  <string name="provider_modifications">Dəyişikliklər</string>
   <string name="menu_upload_single">Yüklə</string>
-  <string name="categories_search_text_hint">Kateqoriyaları axtar</string>
-  <string name="menu_save_categories">Qeyd et</string>
+  <string name="categories_search_text_hint">Kateqoriyalarda axtar</string>
+  <string name="menu_save_categories">Yadda saxla</string>
   <string name="refresh_button">Yenilə</string>
   <string name="display_list_button">Siyahı</string>
   <string name="contributions_subtitle_zero">(Hələ yükləmə yoxdur)</string>

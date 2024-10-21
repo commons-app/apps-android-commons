@@ -28,6 +28,7 @@
   <string name="show_captions_description">Aprašymas</string>
   <string name="nearby_row_image">Paveikslėlis</string>
   <string name="nearby_all">Visi</string>
+  <string name="nearby_filter_toggle">Perjungti aukštyn</string>
   <string name="nearby_filter_search">Paieškos rodinys</string>
   <string name="appwidget_img">Dienos nuotrauka</string>
   <plurals name="uploads_pending_notification_indicator" fuzzy="true">
@@ -57,6 +58,7 @@
   <string name="app_name">Vikiteka</string>
   <string name="menu_settings">Nustatymai</string>
   <string name="intent_share_upload_label">Įkelti į Vikiteką</string>
+  <string name="upload_in_progress">Vyksta įkėlimas</string>
   <string name="username">Naudotojo vardas</string>
   <string name="password">Slaptažodis</string>
   <string name="login_credential">Prisijunkite prie savo Commons Beta paskyros</string>
@@ -67,10 +69,13 @@
   <string name="logging_in_message">Prašome palaukti…</string>
   <string name="updating_caption_title">Antraštės ir aprašymai atnaujinami</string>
   <string name="updating_caption_message">Prašome palaukti...</string>
-  <string name="login_success" fuzzy="true">Sėkmingai prisijungėte!</string>
-  <string name="login_failed" fuzzy="true">Prisijungti nepavyko!</string>
+  <string name="login_success">Sėkmingai prisijungėte!</string>
+  <string name="login_failed">Prisijungti nepavyko!</string>
   <string name="upload_failed">Failas nerastas. Prašome pabandyti kitą failą.</string>
-  <string name="authentication_failed" fuzzy="true">Autentifikavimas nepavyko, prašome prisijungti dar kartą</string>
+  <string name="retry_limit_reached">Pasiektas maksimalus pakartotinių bandymų limitas! Atšaukite įkėlimą ir bandykite dar kartą</string>
+  <string name="unrestricted_battery_mode">Išjungti akumuliatoriaus optimizavimą?</string>
+  <string name="suggest_unrestricted_mode">Daugiau nei 3 paveikslėlių įkėlimas veikia patikimiau, kai akumuliatoriaus optimizavimas išjungtas. Išjunkite Vikitekos programėlės akumuliatoriaus optimizavimą nustatymuose, kad įkėlimas būtų sklandus. \n\nGalimi akumuliatoriaus optimizavimo išjungimo veiksmai:\n\n1 veiksmas: bakstelėkite toliau esantį mygtuką „Nustatymai“.\n\n2 veiksmas: perjunkite iš „Neoptimizuota“ į „Visos programėlės“.\n\n3 veiksmas: ieškokite „Vikiteka“ arba „fr.free.nrw.commons“.\n\n4 veiksmas: spustelėkite jį ir pasirinkite „Neoptimizuoti“.\n\n5 veiksmas: paspauskite „Atlikta“.</string>
+  <string name="authentication_failed">Autentifikavimas nepavyko. Prašome prisijungti dar kartą.</string>
   <string name="uploading_started">Įkėlimas prasidėjo!</string>
   <string name="uploading_queued">Įkėlimas eilėje (įgalintas riboto ryšio režimas)</string>
   <string name="upload_completed_notification_title">%1$s įkelta!</string>
@@ -97,11 +102,11 @@
   <string name="add_caption_toast">Pateikite šio failo antraštę</string>
   <string name="share_description_hint">Aprašymas</string>
   <string name="share_caption_hint">Antraštė</string>
-  <string name="login_failed_network" fuzzy="true">Negalima prisijungti - tinklo klaida</string>
+  <string name="login_failed_network">Negalima prisijungti - tinklo klaida</string>
   <string name="login_failed_throttled">Per daug nesėkmingų bandymų. Pabandykite dar kartą po keleto minučių.</string>
   <string name="login_failed_blocked">Atsiprašome, šis vartotojas buvo užblokuotas Commons</string>
   <string name="login_failed_2fa_needed">Turite pateikti savo dviejų žingsnių patvirtinimo kodą.</string>
-  <string name="login_failed_generic" fuzzy="true">Prisijungti nepavyko</string>
+  <string name="login_failed_generic">Prisijungti nepavyko</string>
   <string name="share_upload_button">Įkelti</string>
   <string name="multiple_share_base_title">Pavadinkite šį rinkinį</string>
   <string name="provider_modifications">Pakeitimai</string>
@@ -123,7 +128,7 @@
   <string name="title_activity_category_details">Kategorija</string>
   <string name="menu_about">Apie</string>
   <string name="about_license">Vikitekos programėlė yra atviro kodo programėlė, kurią sukūrė ir prižiūri Vikitekos bendruomenės dotacijų gavėjai ir savanoriai. „Wikimedia Foundation“ nedalyvauja kuriant, plėtojant ar prižiūrint programėlę.</string>
-  <string name="about_improve" fuzzy="true">Sukurkite naują &lt;a href=\"%1$s\"&gt;GitHub pranešimą&lt;/a&gt;, siekiant pranešti apie klaidas ir pateikti siūlymus.</string>
+  <string name="about_improve">Sukurkite naują &lt;a href=\"%1$s\"&gt;GitHub pranešimą&lt;/a&gt;, siekiant pranešti apie klaidas ir pateikti siūlymus.</string>
   <string name="about_privacy_policy">Privatumo politika</string>
   <string name="about_credits">Kūrėjai</string>
   <string name="title_activity_about">Apie</string>
@@ -178,6 +183,8 @@
   <string name="read_storage_permission_rationale">Reikalinga teisė: Skaityti išorinę talpyklą. Programėle be to negali prieiti prie jūsų galerijos.</string>
   <string name="write_storage_permission_rationale">Reikalingas leidimas: rašyti į išorinę saugyklą. Programėlė be to negali pasiekti jūsų fotoaparato/galerijos.</string>
   <string name="location_permission_title">Prašoma vietovės leidimo</string>
+  <string name="in_app_camera_location_permission_title">Įrašyti vietovę nuotraukoms, kurios fotografuotos programėlėje</string>
+  <string name="in_app_camera_location_switch_pref_summary">Įjunkite šią funkciją, kad įrašytumėte vietovę nuotraukoms, jei jūsų įrenginio kamera to nepadaro</string>
   <string name="ok">Gerai</string>
   <string name="warning">Įspėjimas</string>
   <string name="duplicate_file_name">Rastas pasikartojantis failo pavadinimas</string>
@@ -198,6 +205,7 @@
   <string name="become_a_tester_description">Prisijunkite prie beta kanalo Google Play ir gaukite išankstinę prieigą prie naujų funkcijų bei klaidų pataisymų</string>
   <string name="_2fa_code">2FA kodas</string>
   <string name="logout_verification">Ar tikrai norite atsijungti?</string>
+  <string name="mediaimage_failed">Medijos paveikslėlis nepavyko</string>
   <string name="no_subcategory_found">Subkategorijų nerasta</string>
   <string name="welcome_image_mount_zao">Zao kalnas</string>
   <string name="welcome_image_llamas">Lamos</string>
@@ -214,6 +222,7 @@
   <string name="navigation_item_about">Apie</string>
   <string name="navigation_item_settings">Nustatymai</string>
   <string name="navigation_item_feedback">Atsiliepimai</string>
+  <string name="navigation_item_feedback_github">Atsiliepimai per GitHub</string>
   <string name="navigation_item_logout">Atsijungti</string>
   <string name="navigation_item_info">Pamoka</string>
   <string name="navigation_item_notification">Pranešimai</string>
@@ -247,13 +256,15 @@
   <string name="nominated_see_more">Žiūrėkite tinklapį dėl daugiau informacijos</string>
   <string name="skip_login">Praleisti</string>
   <string name="navigation_item_login">Prisijungti</string>
-  <string name="skip_login_title" fuzzy="true">Ar tikrai norite praleisti prisijungimą?</string>
-  <string name="skip_login_message" fuzzy="true">Norėdami ateityje įkelti nuotraukas, turėsite prisijungti.</string>
+  <string name="skip_login_title">Ar tikrai norite praleisti prisijungimą?</string>
+  <string name="skip_login_message">Norėdami ateityje įkelti nuotraukas, turėsite prisijungti.</string>
   <string name="login_alert_message">Jei norite naudotis šia funkcija, prisijunkite</string>
   <string name="copy_wikicode">Nukopijuokite vikitekstą į mainų sritį</string>
   <string name="wikicode_copied">Vikitekstas buvo nukopijuotas į mainų sritį</string>
   <string name="nearby_location_not_available">Netoliese gali tinkamai neveikti, vieta nepasiekiama.</string>
+  <string name="upload_location_access_denied">Prieiga prie vietos uždrausta. Norėdami naudotis šia funkcija, nustatykite savo vietą rankiniu būdu.</string>
   <string name="location_permission_rationale_nearby">Norint rodyti netoliese esančių vietų sąrašą, reikalingas leidimas</string>
+  <string name="location_permission_rationale_explore">Norint rodyti netoliese esančių paveikslėlių sąrašą, reikalingas leidimas</string>
   <string name="nearby_directions">Nurodymai</string>
   <string name="nearby_wikidata">Vikiduomenys</string>
   <string name="nearby_wikipedia">Vikipedija</string>
@@ -313,14 +324,16 @@
   <string name="construction_event_answer">Nuotraukos, kuriose pavaizduotos technologijos ar kultūra, yra labai laukiamos Vikitekoje.</string>
   <string name="congratulatory_message_quiz">Surinkote %1$s teisingų atsakymų. Sveikiname!</string>
   <string name="warning_for_no_answer">Norėdami atsakyti į klausimą, pasirinkite vieną iš dviejų variantų</string>
-  <string name="user_not_logged_in" fuzzy="true">Prisijungimo sesija baigėsi, prisijunkite dar kartą.</string>
+  <string name="user_not_logged_in">Prisijungimo sesija baigėsi, prašome prisijungti dar kartą.</string>
   <string name="quiz_result_share_message">Pasidalinkite savo apkalusa su draugais!</string>
   <string name="continue_message">Tęsti</string>
   <string name="correct">Teisingas atsakymas</string>
   <string name="wrong">Atsakymas neteisingas</string>
   <string name="quiz_screenshot_question">Ar šią ekrano kopiją galima įkelti?</string>
   <string name="share_app_title">Dalintis programėle</string>
-  <string name="error_fetching_nearby_places" fuzzy="true">Klaida gaunant netoliese esančias vietas.</string>
+  <string name="rotate">Pasukti</string>
+  <string name="error_fetching_nearby_places">Nepavyko įkelti netoliese esančių vietų</string>
+  <string name="no_pictures_in_this_area">Šioje vietovėje nuotraukų nėra</string>
   <string name="no_nearby_places_around">Nėra šalia esančių vietų</string>
   <string name="error_fetching_nearby_monuments">Gaunant netoliese esančius paminklus įvyko klaida.</string>
   <string name="no_recent_searches">Nėra naujausių paieškų</string>
@@ -338,6 +351,7 @@
   <string name="statistics_wikidata_edits">Vaizdai per „Netoliese esančios vietos“</string>
   <string name="level">Lygis</string>
   <string name="images_uploaded">Vaizdai įkelti</string>
+  <string name="image_reverts">Paveikslėliai negrąžinti</string>
   <string name="images_used_by_wiki">Naudoti vaizdai</string>
   <string name="achievements_share_message">Pasidalinkite savo pasiekimais su draugais!</string>
   <string name="achievements_info_message">Jūsų lygis kyla, kai atitinkate šiuos reikalavimus. Skiltyje „statistika“ esantys elementai neįskaičiuojami į jūsų lygį.</string>
@@ -394,12 +408,22 @@
   <string name="never_ask_again">Niekada daugiau to neklausti</string>
   <string name="display_location_permission_title">Paprašyti vietos leidimo</string>
   <string name="display_location_permission_explanation">Jei reikia, kad būtų galima naudoti netoliese esančio pranešimų kortelės peržiūros funkciją, paprašykite leidimo nustatyti vietą.</string>
-  <string name="achievements_fetch_failed" fuzzy="true">Kažkas ne taip. Nepavyko gauti jūsų pasiekimų</string>
+  <string name="achievements_fetch_failed">Kažkas ne taip, mums nepavyko gauti pasiekimų</string>
   <string name="achievements_fetch_failed_ultimate_achievement">Prisidėjote tiek daug, kad mūsų pasiekimų skaičiavimo sistema negali susidoroti. Tai yra didžiausias pasiekimas.</string>
   <string name="ends_on">Baigiasi:</string>
   <string name="display_campaigns_explanation">Peržiūrėkite vykstančias kampanijas</string>
+  <string name="in_app_camera_location_access_explanation">Leiskite programėlei nuskaityti vietą, jei fotoaparatas jos neįrašo. Kai kurių įrenginių kameros neįrašo vietos. Tokiais atvejais leidus programai gauti ir pridėti vietą, jūsų indėlis bus naudingesnis. Tai galite bet kada pakeisti nustatymuose</string>
+  <string name="option_allow">Leisti</string>
+  <string name="option_dismiss">Paslėpti</string>
+  <string name="in_app_camera_needs_location">Nustatymuose įjunkite prieigą prie vietos ir bandykite dar kartą. \n\nPastaba: įkėlimas gali neturėti vietos, jei programėlė negali per trumpą laiką nuskaityti vietos iš įrenginio.</string>
+  <string name="in_app_camera_location_permission_rationale">Programėlėje esančiam fotoaparatui reikalingas vietos leidimas, kad jis būtų pridėtas prie vaizdų, jei EXIF nėra vietos. Leiskite programėlei pasiekti jūsų buvimo vietą ir bandykite dar kartą.\n\nPastaba: įkėlimas gali neturėti vietos, jei programėlė negali per trumpą laiką nuskaityti vietos iš įrenginio.</string>
+  <string name="in_app_camera_location_permission_denied">Programėlė neįrašys vietos kartu su kadrais, nes neturi vietos leidimo</string>
+  <string name="in_app_camera_location_unavailable">Programa neįrašys vietos kartu su kadrais, nes GPS išjungtas</string>
+  <string name="open_document_photo_picker_title">Naudokite dokumentais pagrįstą nuotraukų rinkiklį</string>
+  <string name="open_document_photo_picker_explanation">Naujasis „Android“ nuotraukų rinkiklis gali prarasti vietos informaciją. Įjunkite, jei atrodo, kad jį naudojate.</string>
+  <string name="location_loss_warning">Išjungus tai gali suaktyvinti naująjį „Android“ nuotraukų rinkiklį. Dėl to kyla pavojus prarasti vietos informaciją.\n\nNorėdami gauti daugiau informacijos, bakstelėkite „Skaityti daugiau“.</string>
   <string name="nearby_campaign_dismiss_message">Kampanijų nebematysite. Tačiau, jei norite, galite iš naujo įjungti šį pranešimą nustatymuose.</string>
-  <string name="this_function_needs_network_connection" fuzzy="true">Šiai funkcijai reikalingas tinklo ryšys, patikrinkite ryšio nustatymus.</string>
+  <string name="this_function_needs_network_connection">Šiai funkcijai reikalingas tinklo ryšys. Prašome patikrinti savo ryšio nustatymus.</string>
   <string name="error_processing_image">Apdorojant vaizdą įvyko klaida. Pabandykite dar kartą!</string>
   <string name="getting_edit_token">Gaunamas redagavimo prieigos raktas</string>
   <string name="check_category_adding_template">Kategorijos tikrinimo šablonas pridedamas</string>
@@ -418,22 +442,26 @@
   <string name="send_thank_toast">Siunčiama padėka už %1$s</string>
   <string name="review_copyright">Ar tai atitinka autorines teises?</string>
   <string name="review_category">Ar tai teisingai priskirta kategorijoms?</string>
+  <string name="review_spam">Ar tai taikytina?</string>
   <string name="review_thanks">Ar norėtumėte padėkoti prisidėjusiam?</string>
   <string name="review_spam_explanation">Spustelėkite NE, kad pasiūlytumėte šį vaizdą ištrinti, jei jis visai nenaudingas.</string>
   <string name="review_copyright_explanation">Logotipai, ekrano kopijos, filmų plakatai dažnai pažeidžia autorines teises. Spustelėkite NE, jei norite pasiūlyti šį vaizdą ištrinti</string>
   <string name="review_thanks_explanation">%1$s bus padrąsintas jūsų dėkingumu</string>
   <string name="review_no_category">Oi, tai net nėra priskirta kategorijai!</string>
   <string name="review_category_explanation">Šis vaizdas priklauso %1$s kategorijoms.</string>
+  <string name="review_spam_report_question">Tai nėra taikytina, nes</string>
   <string name="review_c_violation_report_question">Tai yra autorių teisių pažeidimas, nes</string>
   <string name="review_thanks_yes_button_text">Kitas vaizdas</string>
   <string name="review_thanks_no_button_text">Taip, kodėl gi ne</string>
   <string name="skip_image_explanation">Spustelėję šį mygtuką pamatysite kitą neseniai įkeltą vaizdą iš Vikitekos</string>
+  <string name="review_image_explanation">Galite peržiūrėti vaizdus, kad pagerintumėte Vikitekos kokybę.\nTrys peržiūros parametrai yra:\n\n- Ar šis vaizdas tinkamas?\nKai paliesite Ne (nepatenka į sritį), jūs prie šio paveikslėlio pridedate ištrynimo nominacijos šabloną.\n\n- Ar šis vaizdas atitinka autorių teisių taisykles?\nKai paliesite Ne (neatitinka autorių teisių taisyklių), pridedate ištrynimo nominacijos šabloną prie šio paveikslėlio.\n\n- Ar šis vaizdas teisingai suskirstytas į kategorijas?\nKai paliesite Ne (neteisingai suskirstytas į kategorijas), prie šio paveikslėlio pridedate kategorizavimo užklausos šabloną.\n\nJei viskas yra gerai, prie paveikslėlio nepridedamas joks šablonas, ir jūs turite galimybę padėkoti bendraautoriui.</string>
   <string name="no_image">Nenaudojami jokie vaizdai</string>
   <string name="no_image_reverted">Jokie vaizdai negrąžinti</string>
   <string name="no_image_uploaded">Neįkelta jokių vaizdų</string>
   <string name="no_notification">Neturite neskaitytų pranešimų</string>
   <string name="no_read_notification">Neturite perskaitytų pranešimų</string>
   <string name="share_logs_using">Dalinkitės žurnalus naudodami</string>
+  <string name="check_your_email_inbox">Patikrinkite savo el. pašto dėžutę</string>
   <string name="menu_option_read">Žiūrėti perskaitytus</string>
   <string name="menu_option_unread">Žiūrėti neperskaitytus</string>
   <string name="error_occurred_in_picking_images">Renkant vaizdus įvyko klaida</string>
@@ -478,6 +506,7 @@
   <string name="delete_helper_ask_reason_copyright_press_photo">Žiniasklaidos nuotrauka</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">Atsitiktinė nuotrauka iš interneto</string>
   <string name="delete_helper_ask_reason_copyright_logo">Logotipas</string>
+  <string name="delete_helper_ask_reason_copyright_no_freedom_of_panorama">Panoramos laisvės pažeidimas</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">Nes</string>
   <string name="category_edit_helper_make_edit_toast">Bandoma atnaujinti kategorijas.</string>
   <string name="category_edit_helper_show_edit_title">Kategorijos atnaujinimas</string>
@@ -498,7 +527,7 @@
   <string name="coordinates_edit_helper_edit_message_else">Nepavyko pridėti koordinačių.</string>
   <string name="description_edit_helper_edit_message_else">Nepavyko pridėti aprašymų.</string>
   <string name="caption_edit_helper_edit_message_else">Nepavyko pridėti antraštę.</string>
-  <string name="coordinates_picking_unsuccessful" fuzzy="true">Nepavyko gauti koordinačių.</string>
+  <string name="coordinates_picking_unsuccessful">Paveikslėlio koordinatės neatnaujintos</string>
   <string name="descriptions_picking_unsuccessful">Nepavyko gauti aprašymų.</string>
   <string name="description_activity_title">Redaguokite aprašymus ir antraštes</string>
   <string name="share_image_via">Dalintis vaizdu per</string>
@@ -513,10 +542,11 @@
   <string name="place_state_needs_photo">Reikia Nuotraukos</string>
   <string name="place_type">Vietos tipas:</string>
   <string name="nearby_search_hint">Tiltas, muziejus, viešbutis ir t.t.</string>
-  <string name="you_must_reset_your_passsword" fuzzy="true">Kažkas nepavyko prisijungiant, turite iš naujo nustatyti slaptažodį !!</string>
+  <string name="you_must_reset_your_passsword">Kažkas nepavyko prisijungiant. Turite iš naujo nustatyti slaptažodį!</string>
   <string name="title_for_media">MEDIJA</string>
   <string name="upload_nearby_place_found_title">Netoliese rasta vieta</string>
-  <string name="upload_nearby_place_found_description_singular" fuzzy="true">Ar tai vietos %1$s nuotrauka?</string>
+  <string name="upload_nearby_place_found_description_plural">Ar tai %1$s nuotraukos?</string>
+  <string name="upload_nearby_place_found_description_singular">Ar tai %1$s nuotrauka?</string>
   <string name="title_app_shortcut_bookmark">Žymės</string>
   <string name="title_app_shortcut_setting">Nustatymai</string>
   <string name="remove_bookmark">Pašalinta iš žymių</string>
@@ -524,12 +554,16 @@
   <string name="wallpaper_set_unsuccessfully">Kažkas nepavyko. Nepavyko nustatyti fono paveikslėlio</string>
   <string name="setting_wallpaper_dialog_title">Nustatyti kaip fono paveikslėlį</string>
   <string name="setting_wallpaper_dialog_message">Fono paveikslėlis nustatomas. Prašome palaukti…</string>
+  <string name="theme_default_name">Sekti sistemos</string>
   <string name="theme_dark_name">Tamsus</string>
   <string name="theme_light_name">Šviesus</string>
   <string name="cannot_open_location_settings">Nepavyko atidaryti vietos nustatymų. Įjunkite vietą rankiniu būdu</string>
   <string name="recommend_high_accuracy_mode">Norėdami gauti geriausius rezultatus, pasirinkite didelio tikslumo režimą.</string>
   <string name="ask_to_turn_location_on">Įjungti vietą?</string>
+  <string name="ask_to_turn_location_on_text">Įjunkite vietos nustatymo paslaugas, kad programa parodytų jūsų dabartinę vietą</string>
   <string name="nearby_needs_location">Kad tinkamai veiktų, Netoliese turi būti įjungta vieta</string>
+  <string name="explore_map_needs_location">Žemėlapio naršymui reikia vietos leidimo, kad būtų rodomi netoliese esantys paveikslėliai</string>
+  <string name="upload_map_location_access">Norėdami automatiškai nustatyti vietą, turite suteikti vietos leidimą.</string>
   <string name="use_location_from_similar_image">Ar nufotografavote šias dvi nuotraukas toje pačioje vietoje? Ar norite naudoti dešinėje esančio paveikslėlio platumą/ilgumą?</string>
   <string name="load_more">Įkelti daugiau</string>
   <string name="nearby_no_results">Vietų nerasta, pabandykite pakeisti paieškos kriterijus.</string>
@@ -617,6 +651,10 @@
   <string name="custom_selector_info_text2">Skirtingai nuo paveikslėlio kairėje, paveikslėlyje dešinėje yra Vikitekos logotipas, nurodantis, kad jis jau įkeltas. \n Palieskite ir palaikykite, kad peržiūrėtumėte vaizdą.</string>
   <string name="welcome_custom_selector_ok">Puiku</string>
   <string name="custom_selector_already_uploaded_image_text">Šis vaizdas jau buvo įkeltas į Vikiteką.</string>
+  <string name="custom_selector_over_limit_warning">Dėl techninių priežasčių programėlė negali patikimai įkelti daugiau nei %1$d nuotraukos vienu metu. %1$d įkėlimo limitas buvo viršytas %2$d.</string>
+  <string name="custom_selector_dismiss_limit_warning_button_text">Paslėpti</string>
+  <string name="custom_selector_button_limit_text">Maksimalus: %1$d</string>
+  <string name="custom_selector_limit_error_desc">Klaida: viršytas įkėlimo limitas</string>
   <string name="wlm_upload_info">Šis vaizdas bus įtrauktas į konkursą \"Wiki Loves Monuments\" (\"Wiki\" mėgsta paminklus)</string>
   <string name="display_monuments">Rodyti paminklus</string>
   <string name="wlm_month_message">Vyksta Viki myli paminklus mėnuo!</string>
@@ -626,7 +664,7 @@
   <string name="read_phone_state_permission_message">Netoliese žemėlapiai turi perskaityti TELENFONO BŪSENĄ, kad tinkamai funkcionuotų</string>
   <string name="contributions_of_user">Naudotojo indėlis: %s</string>
   <string name="achievements_of_user">Naudotojo pasiekimai: %s</string>
-  <string name="menu_view_user_page" fuzzy="true">Žiūrėti naudotojo puslapį</string>
+  <string name="menu_view_user_page">Žiūrėti naudotojo puslapį</string>
   <string name="edit_depictions">Redaguoti vaizdus</string>
   <string name="edit_categories">Redaguoti kategorijas</string>
   <string name="advanced_options">Išplėstiniai nustatymai</string>
@@ -652,6 +690,8 @@
   <string name="your_feedback">Jūsų atsiliepimas</string>
   <string name="mark_as_not_for_upload">Pažymėti kaip neskirtą įkėlimui</string>
   <string name="unmark_as_not_for_upload">Panaikinkite žymėjimą kaip neskirto įkėlimui</string>
+  <string name="marking_as_not_for_upload">Žymima kaip neįkėlimui</string>
+  <string name="unmarking_as_not_for_upload">Naikinamas žymėjimas kaip neįkėlimui</string>
   <string name="show_already_actioned_pictures">Rodyti jau padarytas nuotraukas</string>
   <string name="hiding_already_actioned_pictures">Slepiamos jau padarytos nuotraukos</string>
   <string name="no_more_images_found">Daugiau paveikslėlių nerasta</string>
@@ -660,6 +700,8 @@
   <string name="image_selected">Paveiklėlis pasirinktas</string>
   <string name="image_marked_as_not_for_upload">Paveikslėlis pažymėtas kaip neskirtas įkėlimui</string>
   <string name="menu_view_report">Pranešti</string>
+  <string name="menu_view_set_white_background">Nustatyti baltą foną</string>
+  <string name="menu_view_set_black_background">Nustatyti juodą foną</string>
   <string name="report_violation">Pranešti apie pažeidimą</string>
   <string name="report_user">Pranešti apie šį nauodotoją</string>
   <string name="report_content">Pranešti apie šį turinį</string>
@@ -669,4 +711,44 @@
   <string name="full_screen_mode_features_info">Norėdami atlikti šiuos veiksmus, braukite greitai ir ilgai: \n- Kairėn/dešinėn: Pereikite prie ankstesnio/kito\n- Į viršų: Pasirinkite\n- Žemyn: Pažymėti kaip neskirtą įkėlimui.</string>
   <string name="set_up_avatar_toast_string">Norėdami nustatyti pirmaujančiųjų sąrašo avatarą, bet kurio vaizdo trijų taškų meniu palieskite „Nustatyti kaip avatarą“.</string>
   <string name="similar_coordinate_description_auto_set">Koordinatės nėra tikslios koordinatės, bet asmuo, kuris įkėlė šią nuotrauką, mano, kad jos yra pakankamai arti.</string>
+  <string name="storage_permissions_denied">Saugyklos leidimai atmesti</string>
+  <string name="unable_to_share_upload_item">Nepavyko bendrinti šio elemento</string>
+  <string name="permissions_are_required_for_functionality">Funkcionalumui reikalingi leidimai</string>
+  <string name="learn_how_to_write_a_useful_description">Sužinokite, kaip parašyti naudingą aprašymą</string>
+  <string name="learn_how_to_write_a_useful_caption">Sužinokite, kaip parašyti naudingą antraštę</string>
+  <string name="see_your_achievements">Pamatykite savo pasiekimus</string>
+  <string name="edit_image">Redaguoti paveikslėlį</string>
+  <string name="edit_location">Redaguoti vietą</string>
+  <string name="location_updated">Vieta atnaujinta!</string>
+  <string name="remove_location">Pašalinti vietą</string>
+  <string name="remove_location_warning_title">Pašalinti vietos įspėjimą</string>
+  <string name="remove_location_warning_desc">Vieta daro nuotraukas naudingesnes ir lengviau randamas. Ar tikrai norite pašalinti vietą iš šios nuotraukos?</string>
+  <string name="location_removed">Vieta pašalinta!</string>
+  <string name="send_thanks_to_author">Padėkoti autoriui</string>
+  <string name="error_sending_thanks">Klaida siunčiant padėką autoriui.</string>
+  <string name="invalid_login_message">Jūsų prisijungimo sesija baigėsi. Prašome prisijungti dar kartą.</string>
+  <string name="no_application_available_to_open_gpx_files">Nėra jokios programos GPX failams atidaryti</string>
+  <string name="file_saved_successfully">Failas sėkmingai išsaugotas</string>
+  <string name="do_you_want_to_open_gpx_file">Ar norite atidaryti GPX failą?</string>
+  <string name="do_you_want_to_open_kml_file">Ar norite atidaryti KML failą?</string>
+  <string name="failed_to_save_kml_file">Nepavyko išsaugoti KML failo.</string>
+  <string name="failed_to_save_gpx_file">Nepavyko išsaugoti GPX failo.</string>
+  <string name="saving_kml_file">Išsaugomas KML failas</string>
+  <string name="saving_gpx_file">Išsaugomas GPX failas</string>
+  <string name="multiple_files_depiction">Atminkite, kad visi paveikslėliai, įkeliant kelis, turi tas pačias kategorijas ir vaizdus. Jei paveikslėliuose vaizdai ir kategorijos skiriasi, prašome atlikti kelis atskirus įkėlimus.</string>
+  <string name="multiple_files_depiction_header">Pastaba apie kelis įkėlimus</string>
+  <string name="nearby_wikitalk">Praneškite apie problemą dėl šio elemento Vikiduomenims.</string>
+  <string name="please_enter_some_comments">Įveskite keletą komentarų</string>
+  <string name="talk">Aptarimas</string>
+  <string name="write_something_about_the_item">Parašykite ką nors apie \'%1$s\' elementą. Tai bus matoma viešai.</string>
+  <string name="does_not_exist_anymore_no_picture_can_ever_be_taken_of_it">\'%1$s\' nebeegzistuoja, niekada nebegalima jo nufotografuoti.</string>
+  <string name="is_at_a_different_place_please_specify_the_correct_place_below_if_possible_tell_us_the_correct_latitude_longitude">\'%1$s\' yra kitoje vietoje. Toliau nurodykite teisingą vietą ir, jei įmanoma, parašykite teisingą platumą ir ilgumą.</string>
+  <string name="other_problem_or_information_please_explain_below">Kita problema arba informacija (paaiškinkite toliau).</string>
+  <string name="feedback_destination_note">Jūsų atsiliepimai bus paskelbti šiame viki puslapyje: &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Mobile_app/Feedback\"&gt;Commons:Mobile App/Feedback&lt;/a&gt;</string>
+  <string name="are_you_sure_that_you_want_cancel_all_the_uploads">Ar tikrai norite atšaukti visus įkėlimus?</string>
+  <string name="cancelling_all_the_uploads">Atšaukiami visi įkėlimai...</string>
+  <string name="uploads">Įkėlimai</string>
+  <string name="pending">Laukiama</string>
+  <string name="failed">Nepavyko</string>
+  <string name="could_not_load_place_data">Nepavyko įkelti vietos duomenų</string>
 </resources>

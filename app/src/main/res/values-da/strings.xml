@@ -481,6 +481,7 @@
   <string name="no_notification">Du har ingen ulæste notifikationer</string>
   <string name="no_read_notification">Du har ingen læste notifikationer</string>
   <string name="share_logs_using">Del logs ved hjælp af</string>
+  <string name="check_your_email_inbox">Tjek din e-mail-indbakke</string>
   <string name="menu_option_read">Vis læste</string>
   <string name="menu_option_unread">Vis ulæste</string>
   <string name="error_occurred_in_picking_images">Der opstod en fejl under udvælgelse af billeder</string>
