@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="wrap_content"
+  android:layout_height="wrap_content"
+  android:background="#BFFFFFFF"
+  android:orientation="vertical">
+
+  <ImageView
+    android:id="@+id/imageRed"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="0dp"
+    app:layout_constraintBottom_toTopOf="@+id/imageGreen"
+    app:layout_constraintEnd_toEndOf="@+id/imageGreen"
+    app:layout_constraintStart_toStartOf="@+id/imageGreen"
+    app:srcCompat="@drawable/ic_custom_map_marker_red" />
+
+  <TextView
+    android:id="@+id/textRed"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="0dp"
+    android:text="There is a Wikidata item here with no picture yet."
+    android:textColor="#F74D4D"
+    android:textSize="12sp"
+    app:layout_constraintBottom_toBottomOf="@+id/imageRed"
+    app:layout_constraintStart_toEndOf="@+id/imageRed"
+    app:layout_constraintTop_toTopOf="@+id/imageRed" />
+
+  <ImageView
+    android:id="@+id/imageGreen"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="0dp"
+    app:layout_constraintBottom_toTopOf="@+id/imageGrey"
+    app:layout_constraintEnd_toEndOf="@+id/imageGrey"
+    app:layout_constraintStart_toStartOf="@+id/imageGrey"
+    app:srcCompat="@drawable/ic_custom_map_marker_green" />
+
+  <TextView
+    android:id="@+id/textGreen"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="0dp"
+    android:text="There is a Wikidata item with a picture here."
+    android:textColor="#1F7123"
+    android:textSize="12sp"
+    app:layout_constraintBottom_toBottomOf="@+id/imageGreen"
+    app:layout_constraintStart_toEndOf="@+id/imageGreen"
+    app:layout_constraintTop_toTopOf="@+id/imageGreen" />
+
+  <ImageView
+    android:id="@+id/imageGrey"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="0dp"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:srcCompat="@drawable/ic_custom_map_marker_grey" />
+
+  <TextView
+    android:id="@+id/textGrey"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="The app is checking if the Wikidata item here has a picture."
+    android:textColor="#454547"
+    android:textSize="12sp"
+    app:layout_constraintBottom_toBottomOf="@+id/imageGrey"
+    app:layout_constraintStart_toEndOf="@+id/imageGrey"
+    app:layout_constraintTop_toTopOf="@+id/imageGrey" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

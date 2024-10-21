@@ -43,6 +43,7 @@ import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.Toast;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
@@ -52,6 +53,7 @@ import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog.Builder;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -218,6 +220,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     private LatLng updatedLatLng;
     private boolean searchable;
 
+    private ConstraintLayout nearbyLegend;
+
     private GridLayoutManager gridLayoutManager;
     private List<BottomSheetItem> dataList;
     private BottomSheetAdapter bottomSheetAdapter;
@@ -302,6 +306,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         progressDialog.setCancelable(false);
         progressDialog.setMessage("Saving in progress...");
         setHasOptionsMenu(true);
+
         // Inflate the layout for this fragment
         return view;
 
@@ -362,6 +367,16 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         }
         locationPermissionsHelper = new LocationPermissionsHelper(getActivity(), locationManager,
             this);
+
+        // Set up the floating activity button to toggle the visibility of the legend
+        binding.fabLegend.setOnClickListener(v -> {
+            if (binding.nearbyLegendLayout.getRoot().getVisibility() == View.VISIBLE) {
+                binding.nearbyLegendLayout.getRoot().setVisibility(View.GONE);
+            } else {
+                binding.nearbyLegendLayout.getRoot().setVisibility(View.VISIBLE);
+            }
+        });
+
         presenter.attachView(this);
         isPermissionDenied = false;
         recenterToUserLocation = false;
