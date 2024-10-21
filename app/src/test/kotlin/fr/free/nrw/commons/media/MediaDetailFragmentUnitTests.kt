@@ -19,6 +19,7 @@ import android.widget.ProgressBar
 import android.widget.ScrollView
 import android.widget.Spinner
 import android.widget.TextView
+import androidx.activity.result.ActivityResult
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.test.core.app.ApplicationProvider
@@ -76,7 +77,6 @@ import java.util.Locale
 @Config(sdk = [21], application = TestCommonsApplication::class)
 @LooperMode(LooperMode.Mode.PAUSED)
 class MediaDetailFragmentUnitTests {
-    private val requestCode = 1001
     private val lastLocation = "last_location_while_uploading"
     private lateinit var fragment: MediaDetailFragment
     private lateinit var fragmentManager: FragmentManager
@@ -229,24 +229,6 @@ class MediaDetailFragmentUnitTests {
         Whitebox.setInternalState(fragment, "applicationKvStore", applicationKvStore)
         `when`(applicationKvStore.getBoolean("login_skipped")).thenReturn(true)
         fragment.onCreateView(layoutInflater, null, savedInstanceState)
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun testOnActivityResultLocationPickerActivity() {
-        fragment.onActivityResult(requestCode, Activity.RESULT_CANCELED, intent)
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun `test OnActivity Result Cancelled LocationPickerActivity`() {
-        fragment.onActivityResult(requestCode, Activity.RESULT_CANCELED, intent)
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun `test OnActivity Result Cancelled DescriptionEditActivity`() {
-        fragment.onActivityResult(requestCode, Activity.RESULT_OK, intent)
     }
 
     @Test

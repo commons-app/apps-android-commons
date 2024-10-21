@@ -6,6 +6,8 @@ import android.os.Bundle
 import android.os.Parcelable
 import android.speech.RecognizerIntent
 import android.view.View
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import fr.free.nrw.commons.CommonsApplication
@@ -70,9 +72,13 @@ class DescriptionEditActivity :
 
     private lateinit var binding: ActivityDescriptionEditBinding
 
-    private val requestCodeForVoiceInput = 1213
-
     private var descriptionAndCaptions: ArrayList<UploadMediaDetail>? = null
+
+    private val voiceInputResultLauncher = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result: ActivityResult ->
+        onVoiceInput(result)
+    }
 
     @Inject lateinit var descriptionEditHelper: DescriptionEditHelper
 
@@ -115,6 +121,7 @@ class DescriptionEditActivity :
                 savedLanguageValue,
                 descriptionAndCaptions,
                 recentLanguagesDao,
+                voiceInputResultLauncher
             )
         uploadMediaDetailAdapter.setCallback { titleStringID: Int, messageStringId: Int ->
             showInfoAlert(
@@ -148,6 +155,15 @@ class DescriptionEditActivity :
     }
 
     override fun onPrimaryCaptionTextChange(isNotEmpty: Boolean) {}
+
+    private fun onVoiceInput(result: ActivityResult) {
+        if (result.resultCode == RESULT_OK && result.data != null) {
+            val resultData = result.data!!.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)
+            uploadMediaDetailAdapter.handleSpeechResult(resultData!![0])
+        } else {
+            Timber.e("Error %s", result.resultCode)
+        }
+    }
 
     /**
      * Adds new language item to RecyclerView
@@ -290,22 +306,6 @@ class DescriptionEditActivity :
         progressDialog!!.setMessage(getString(R.string.updating_caption_message))
         progressDialog!!.setCanceledOnTouchOutside(false)
         progressDialog!!.show()
-    }
-
-    override fun onActivityResult(
-        requestCode: Int,
-        resultCode: Int,
-        data: Intent?,
-    ) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == requestCodeForVoiceInput) {
-            if (resultCode == RESULT_OK && data != null) {
-                val result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)
-                uploadMediaDetailAdapter.handleSpeechResult(result!![0])
-            } else {
-                Timber.e("Error %s", resultCode)
-            }
-        }
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
