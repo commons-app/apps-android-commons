@@ -298,7 +298,6 @@
   <string name="about_translate_proceed">次へ</string>
   <string name="about_translate_cancel">キャンセル</string>
   <string name="retry">やり直す</string>
-  <string name="showcase_view_whole_nearby_activity">以下のとおり、近くにウィキペディアの記事に使う写真が足りない場所があります。\n\n\'この近くを検索\' ボタンを押すと、地図をロックしてその地点周辺の検索結果を表示します。</string>
   <string name="showcase_view_needs_photo">この場所の写真を募集中です。</string>
   <string name="showcase_view_has_photo">この場所の写真はすでにあります。</string>
   <string name="showcase_view_no_longer_exists">この場所はもうありません</string>

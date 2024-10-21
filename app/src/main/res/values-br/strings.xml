@@ -263,7 +263,6 @@
   <string name="about_translate_proceed">Kenderc\'hel</string>
   <string name="about_translate_cancel">Nullañ</string>
   <string name="retry">Klask en-dro</string>
-  <string name="showcase_view_whole_nearby_activity" fuzzy="true">Lec\'hioù zo en-dro deoc\'h zo ezhomm skeudennoù anezho evit skeudennaouiñ pennadoù Wikipedia</string>
   <string name="no_images_found">N\'eus bet kavet skeudenn ebet !</string>
   <string name="error_loading_images">Ur fazi zo c\'hoarvezet p\'eo bet karget ar skeudennoù.</string>
   <string name="image_uploaded_by">Pellgaset gant:%1$s</string>

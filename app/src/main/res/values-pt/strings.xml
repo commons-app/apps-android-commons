@@ -310,7 +310,6 @@
   <string name="about_translate_proceed">Avançar</string>
   <string name="about_translate_cancel">Cancelar</string>
   <string name="retry">Tentar novamente</string>
-  <string name="showcase_view_whole_nearby_activity">Estes são os locais próximos de si que precisam de fotografias para ilustrar os respetivos artigos na Wikipédia.\n\nClicar em \'Pesquisar nesta área\' bloqueia a localização do mapa e inicia uma pesquisa de locais na área circundante.</string>
   <string name="showcase_view_needs_photo">Este local precisa de uma foto.</string>
   <string name="showcase_view_has_photo">Este local já tem uma foto.</string>
   <string name="showcase_view_no_longer_exists">Este local já não existe.</string>

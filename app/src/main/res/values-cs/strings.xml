@@ -275,7 +275,6 @@
   <string name="about_translate_proceed">Pokračovat</string>
   <string name="about_translate_cancel">Zrušit</string>
   <string name="retry">Zkusit znovu</string>
-  <string name="showcase_view_whole_nearby_activity">Toto jsou místa poblíž vaší současné polohy, které potřebují fotografie k ilustraci příslušných článků na Wikipedii.\n\nKlepnutím na „PROHLEDAT TUTO OBLAST“ se zamkne mapa a spustí se prohledávání okolí daného místa.</string>
   <string name="showcase_view_needs_photo">Toto místo potřebuje obrázek.</string>
   <string name="showcase_view_has_photo">Toto místo už má obrázek.</string>
   <string name="showcase_view_no_longer_exists">Toto místo už neexistuje.</string>

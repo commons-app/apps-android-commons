@@ -271,7 +271,6 @@
   <string name="about_translate_proceed">Folytatás</string>
   <string name="about_translate_cancel">Mégse</string>
   <string name="retry">Újra</string>
-  <string name="showcase_view_whole_nearby_activity">Vannak olyan helyek a közeledben, amikről van Wikipédia szócikk és nincs bennük kép.\n\nA \"Keresés ezen a helyen\"-re kattintva közeli helyekre vonatkozó keresést indíthatsz el.</string>
   <string name="showcase_view_no_longer_exists">A hely nem létezik.</string>
   <string name="no_images_found">Nem található kép!</string>
   <string name="error_loading_images">Képbetöltés közben hiba történt</string>

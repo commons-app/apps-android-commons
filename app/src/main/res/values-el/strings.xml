@@ -317,7 +317,6 @@
   <string name="about_translate_proceed">Συνέχεια</string>
   <string name="about_translate_cancel">Ακύρωση</string>
   <string name="retry">Επανάληψη</string>
-  <string name="showcase_view_whole_nearby_activity">Αυτά είναι τα μέρη κοντά σας που χρειάζονται φωτογραφίες για να εικονογραφηθούν τα λήμματά τους στη Βικιπαίδεια.\n\nΚάνοντας κλικ στην «ΑΝΑΖΗΤΗΣΗ ΣΕ ΑΥΤΗ ΤΗΝ ΠΕΡΙΟΧΗ» κλειδώνει ο χάρτης και ξεκινά μια κοντινή αναζήτηση γύρω από αυτή την τοποθεσία.</string>
   <string name="showcase_view_needs_photo">Αυτό το μέρος χρειάζεται μια φωτογραφία.</string>
   <string name="showcase_view_has_photo">Αυτό το μέρος έχει ήδη μια φωτογραφία.</string>
   <string name="showcase_view_no_longer_exists">Αυτό το μέρος δεν υπάρχει πλέον.</string>

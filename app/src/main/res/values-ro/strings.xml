@@ -291,7 +291,6 @@
   <string name="about_translate_proceed">Continuă</string>
   <string name="about_translate_cancel">Anulare</string>
   <string name="retry">Reîncercare</string>
-  <string name="showcase_view_whole_nearby_activity">Acestea sunt locurile din apropierea dvs. care au nevoie de imagini pentru a ilustra articolele lor Wikipedia.\n\nFăcând click pe „CAUTĂ ACEASTĂ ZONĂ”, se blochează harta și se lansează o căutare în apropiere în jurul locației respective.</string>
   <string name="showcase_view_needs_photo">Acest loc are nevoie de o fotografie.</string>
   <string name="showcase_view_has_photo">Acest loc are deja o fotografie.</string>
   <string name="showcase_view_no_longer_exists">Acest loc nu mai există.</string>

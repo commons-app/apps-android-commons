@@ -265,7 +265,6 @@
   <string name="about_translate_proceed">Jarraitu</string>
   <string name="about_translate_cancel">Utzi</string>
   <string name="retry">Saiatu berriro</string>
-  <string name="showcase_view_whole_nearby_activity">Zugandik hurbil dauden leku hauek irudiak behar dituzte beren Wikipedia artikuluak hornitzeko.\n\nSakatu \'EREMU HONETAN BILATU\' mapa zentratzeko eta kokapen horren inguruan bilaketa hasteko.</string>
   <string name="showcase_view_needs_photo">Leku honek argazkia behar du.</string>
   <string name="showcase_view_has_photo">Leku honek badu argazkia.</string>
   <string name="showcase_view_no_longer_exists">Lekua hau ez da existitzen.</string>

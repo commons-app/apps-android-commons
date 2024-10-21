@@ -317,7 +317,6 @@
   <string name="about_translate_proceed">繼續</string>
   <string name="about_translate_cancel">取消</string>
   <string name="retry">重試</string>
-  <string name="showcase_view_whole_nearby_activity">這些是您附近的地方，需要圖片來說明其維基百科條目。\n\n點擊「搜尋此區域」會鎖定地圖，並啟動對該位置周圍附近的搜尋。</string>
   <string name="showcase_view_needs_photo">此地點需要照片。</string>
   <string name="showcase_view_has_photo">此地點已有照片。</string>
   <string name="showcase_view_no_longer_exists">此地點已不存在。</string>
