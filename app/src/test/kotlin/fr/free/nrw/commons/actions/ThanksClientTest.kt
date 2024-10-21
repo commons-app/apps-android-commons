@@ -39,7 +39,7 @@ class ThanksClientTest {
     fun setUp() {
         MockitoAnnotations.openMocks(this)
         mockedApplication = Mockito.mockStatic(CommonsApplication::class.java)
-        `when`(CommonsApplication.getInstance()).thenReturn(commonsApplication)
+        `when`(CommonsApplication.instance).thenReturn(commonsApplication)
         thanksClient = ThanksClient(csrfTokenClient, service)
     }
 

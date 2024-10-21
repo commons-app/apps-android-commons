@@ -10,7 +10,7 @@ import com.nhaarman.mockitokotlin2.eq
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.times
 import com.nhaarman.mockitokotlin2.whenever
-import fr.free.nrw.commons.CommonsApplication.DEFAULT_EDIT_SUMMARY
+import fr.free.nrw.commons.CommonsApplication.Companion.DEFAULT_EDIT_SUMMARY
 import fr.free.nrw.commons.auth.csrf.CsrfTokenClient
 import fr.free.nrw.commons.contributions.ChunkInfo
 import fr.free.nrw.commons.contributions.Contribution
