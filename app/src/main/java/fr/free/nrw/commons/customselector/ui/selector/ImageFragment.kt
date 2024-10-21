@@ -279,6 +279,10 @@ class ImageFragment :
                 filteredImages = ImageHelper.filterImages(images, bucketId)
                 allImages = ArrayList(filteredImages)
                 imageAdapter.init(filteredImages, allImages, TreeMap(), uploadingContributions)
+                viewModel?.selectedImages?.value?.let { selectedImages ->
+                    imageAdapter.setSelectedImages(selectedImages)
+                }
+                imageAdapter.notifyDataSetChanged()
                 selectorRV?.let {
                     it.visibility = View.VISIBLE
                     lastItemId?.let { pos ->
@@ -382,14 +386,6 @@ class ImageFragment :
         selectedImages: ArrayList<Image>,
         shouldRefresh: Boolean,
     ) {
-        imageAdapter.setSelectedImages(selectedImages)
-
-        val uploadingContributions = getUploadingContributions()
-
-        if (!showAlreadyActionedImages && shouldRefresh) {
-            imageAdapter.init(filteredImages, allImages, TreeMap(), uploadingContributions)
-            imageAdapter.setSelectedImages(selectedImages)
-        }
     }
 
     /**
