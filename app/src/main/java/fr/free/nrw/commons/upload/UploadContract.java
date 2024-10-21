@@ -18,6 +18,13 @@ public interface UploadContract {
 
         void returnToMainActivity();
 
+        /**
+         * When submission successful, go to the loadProgressActivity to hint the user this
+         * submission is valid. And the user will see the upload progress in this activity;
+         * Fixes: <a href="https://github.com/commons-app/apps-android-commons/issues/5846">Issue</a>
+         */
+        void goToUploadProgressActivity();
+
         void askUserToLogIn();
 
         /**
