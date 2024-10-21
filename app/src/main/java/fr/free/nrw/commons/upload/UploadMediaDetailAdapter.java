@@ -407,7 +407,7 @@ public class UploadMediaDetailAdapter extends
                             recentLanguagesDao
                                 .addRecentLanguage(new Language(languageName, languageCode));
 
-                            selectedLanguages.remove(position);
+                            selectedLanguages.clear();
                             selectedLanguages.put(position, languageCode);
                             ((LanguagesAdapter) adapterView
                                 .getAdapter()).setSelectedLangCode(languageCode);
@@ -497,7 +497,7 @@ public class UploadMediaDetailAdapter extends
             }
             recentLanguagesDao.addRecentLanguage(new Language(languageName, languageCode));
 
-            selectedLanguages.remove(position);
+            selectedLanguages.clear();
             selectedLanguages.put(position, languageCode);
             ((RecentLanguagesAdapter) adapterView
                 .getAdapter()).setSelectedLangCode(languageCode);
