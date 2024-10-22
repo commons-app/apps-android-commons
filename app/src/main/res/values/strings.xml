@@ -833,6 +833,6 @@ Upload your first media by tapping on the add button.</string>
   <string name="failed">Failed</string>
   <string name="could_not_load_place_data">Could not load place data</string>
   <string name="red_pin">This place has no picture yet, go take one!</string>
-  <string name="green_prin">This place has a picture already.</string>
+  <string name="green_pin">This place has a picture already.</string>
   <string name="grey_pin">Now checking whether this place has a picture.</string>
 </resources>
