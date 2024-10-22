@@ -547,9 +547,7 @@ class UploadWorker(
                 ).blockingGet()) {
 
             // Generate a random 5-character alphanumeric string
-            val randomHash = (1..3)
-                .map { chars[random.nextInt(chars.length)] }
-                .joinToString("")
+            val randomHash = (random.nextInt(90000) + 10000).toString()
 
             sequenceFileName =
                 if (fileName.indexOf('.') == -1) {
