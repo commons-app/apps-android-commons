@@ -4,6 +4,7 @@ public enum NotificationType {
     THANK_YOU_EDIT("thank-you-edit"),
     EDIT_USER_TALK("edit-user-talk"),
     MENTION("mention"),
+    EMAIL("email"),
     WELCOME("welcome"),
     UNKNOWN("unknown");
     private String type;

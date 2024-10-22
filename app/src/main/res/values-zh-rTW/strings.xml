@@ -496,6 +496,7 @@
   <string name="no_notification">您有尚未讀取的通知</string>
   <string name="no_read_notification">您沒有已讀的通知</string>
   <string name="share_logs_using">分享日誌使用</string>
+  <string name="check_your_email_inbox">請查看你的電子郵件信箱</string>
   <string name="menu_option_read">檢視已讀</string>
   <string name="menu_option_unread">檢視未讀</string>
   <string name="error_occurred_in_picking_images">選擇圖片時發生錯誤</string>
