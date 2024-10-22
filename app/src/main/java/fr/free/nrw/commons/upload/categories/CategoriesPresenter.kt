@@ -81,8 +81,6 @@ class CategoriesPresenter
                         },
                     ),
             )
-
-            //isInitialLoad = false
         }
 
         private var isInitialLoad = true //avoid initial empty content of edittext lead to showError
