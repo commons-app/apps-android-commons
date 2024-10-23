@@ -93,7 +93,7 @@
   <string name="share_description_hint">Şınasnayış</string>
   <string name="share_caption_hint">Bınnuşte</string>
   <string name="login_failed_network" fuzzy="true">Xırabiya kewten-network xeta</string>
-  <string name="login_failed_throttled">Şıma xeylê rayi kerd ke cı kewê, a ser nêvıst. Şıma rê zehmet 2-3 deqey ra tepeya reyna bıcerrebnên.</string>
+  <string name="login_failed_throttled">Şıma xeylê rayi kerd ke cı kewê, a ser nêvıst. Şıma rê zehmet 2–3 deqey ra tepeya reyna bıcerrebnên.</string>
   <string name="login_failed_blocked">Qısur mewni rê, Karber commons dı bloqe biyo.</string>
   <string name="login_failed_2fa_needed">Kodê kamiya raştkerdışi dıfaktorın gani cı kewê.</string>
   <string name="login_failed_generic" fuzzy="true">Nidekeweya de</string>
