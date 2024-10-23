@@ -32,7 +32,6 @@ import android.preference.PreferenceManager;
 import android.provider.Settings;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -320,7 +319,6 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 try {
-                    Timber.d("Reload: menuItem");
                     // REFRESH BUTTON FUNCTIONALITY HERE
                     emptyCache();
                     reloadMap();
@@ -1132,11 +1130,22 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     }
 
     /**
-     * Reloads the Nearby map.
-     * This method clears the existing markers, resets the map state, and repopulates the map with the latest data.
+     *  Reloads the Nearby map
+     *  Clears all location markers, refreshes them, reinserts them into the map.
+     * @author Marcus Barta - marcusbarta@icloud.com
      */
-    private void reloadMap(){
-
+    private void reloadMap() {
+        // TODO: Marcus's section
+        clearAllMarkers(); // clear the list of markers
+        binding.map.getController().setZoom(ZOOM_LEVEL); // reset the zoom level
+        binding.map.getController().setCenter(lastMapFocus); // recentre the focus
+        if (locationPermissionsHelper.checkLocationPermission(getActivity())) {
+            locationPermissionGranted(); // reload map with user's location
+        } else {
+            startMapWithoutPermission(); // reload map without user's location
+        }
+        binding.map.invalidate(); // invalidate the map
+        presenter.updateMapAndList(LOCATION_SIGNIFICANTLY_CHANGED); // restart the map
     }
 
 
