@@ -40,8 +40,8 @@
   <string name="login">Tràse</string>
   <string name="forgot_password">Passuord scurdate?</string>
   <string name="signup">Reggistrate</string>
-  <string name="logging_in_title">Stoche a tràse…</string>
-  <string name="logging_in_message">Aspitte…</string>
+  <string name="logging_in_title">Stoche a tràse...</string>
+  <string name="logging_in_message">Aspitte...</string>
   <string name="login_success" fuzzy="true">E\' trasute!</string>
   <string name="login_failed" fuzzy="true">Non g\'è trasute!</string>
   <string name="upload_failed">File non acchiate. Pruève \'n\'otre file.</string>
@@ -121,7 +121,7 @@
   <string name="nearby_card_permission_title">Permesse richieste</string>
   <string name="no_notification">Non ge tìne notifeche non lette</string>
   <string name="error_occurred_in_picking_images">Errore assute mendre ca ste pigghiave le immaggine</string>
-  <string name="please_wait">Aspitte…</string>
+  <string name="please_wait">Aspitte...</string>
   <string name="skip_image">Zumbe ste immaggine</string>
   <string name="exif_tag_name_author">Autore</string>
   <string name="default_description_language">Lènghe d\'a descrizione predefinite</string>
