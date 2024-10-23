@@ -503,7 +503,7 @@
   <string name="media_location_permission_denied">Приступ локацији медија је одбијен</string>
   <string name="add_location_manually">Можда нећемо моћи да аутоматски прибавимо податке о локацији из слика које отпремите. Додајте одговарајућу локацију за сваку слику пре објављивања</string>
   <string name="share_text">Отпреми фотографије на Викимедијину Оставу директно са свог телефона. Преузми апликацију Оставе сада: %1$s</string>
-  <string name="share_via">Подели апликацију преко...</string>
+  <string name="share_via">Подели апликацију преко…</string>
   <string name="image_info">Информације о слици</string>
   <string name="no_categories_found">Нису пронађене категорије</string>
   <string name="upload_cancelled">Отказано отпремање</string>
@@ -528,12 +528,13 @@
   <string name="category_edit_helper_show_edit_title_success">Успешно</string>
   <plurals name="category_edit_helper_show_edit_message_if">
     <item quantity="one">Категорија %1$s је додата.</item>
+    <item quantity="few">Категорије %1$s су додате.</item>
     <item quantity="other">Категорије %1$s су додате.</item>
   </plurals>
   <string name="category_edit_helper_edit_message_else">Није могуће додати категорије.</string>
   <string name="category_edit_button_text">Ажурирај категорију</string>
   <string name="depictions_edit_helper_show_edit_title">Уреди приказе</string>
-  <string name="coordinates_edit_helper_make_edit_toast">Ажурирање координата...</string>
+  <string name="coordinates_edit_helper_make_edit_toast">Ажурирање координата…</string>
   <string name="coordinates_edit_helper_show_edit_title">Ажурирање координата</string>
   <string name="description_edit_helper_show_edit_title">Ажурирање описа</string>
   <string name="caption_edit_helper_show_edit_title">Ажурирање натписа</string>
@@ -736,6 +737,7 @@
   <string name="saving_gpx_file">Чување GPX датотеке</string>
   <plurals name="custom_picker_images_selected_title_appendix">
     <item quantity="one">%d слика је одабрана</item>
+    <item quantity="few">%d слике су одабране</item>
     <item quantity="other">%d слика је одабрано</item>
   </plurals>
   <string name="please_enter_some_comments">Унесите коментар</string>
