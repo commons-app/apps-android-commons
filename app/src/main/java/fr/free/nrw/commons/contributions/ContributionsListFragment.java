@@ -101,24 +101,24 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
     private final ActivityResultLauncher<Intent> galleryPickLauncherForResult =
         registerForActivityResult(new StartActivityForResult(),
         result -> {
-            controller.handleActivityResultWithCallback(requireActivity(),callbacks -> {
-                controller.onPictureReturnedFromGallery(result,requireActivity(),callbacks);
+            controller.handleActivityResultWithCallback(requireActivity(), callbacks -> {
+                controller.onPictureReturnedFromGallery(result, requireActivity(), callbacks);
             });
         });
 
     private final ActivityResultLauncher<Intent> customSelectorLauncherForResult =
         registerForActivityResult(new StartActivityForResult(),
         result -> {
-            controller.handleActivityResultWithCallback(requireActivity(),callbacks -> {
-                controller.onPictureReturnedFromCustomSelector(result,requireActivity(),callbacks);
+            controller.handleActivityResultWithCallback(requireActivity(), callbacks -> {
+                controller.onPictureReturnedFromCustomSelector(result, requireActivity(), callbacks);
             });
         });
 
     private final ActivityResultLauncher<Intent> cameraPickLauncherForResult =
         registerForActivityResult(new StartActivityForResult(),
         result -> {
-            controller.handleActivityResultWithCallback(requireActivity(),callbacks -> {
-                controller.onPictureReturnedFromCamera(result,requireActivity(),callbacks);
+            controller.handleActivityResultWithCallback(requireActivity(), callbacks -> {
+                controller.onPictureReturnedFromCamera(result, requireActivity(), callbacks);
             });
         });
 
@@ -356,7 +356,7 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
             return true;
         });
         binding.fabGallery.setOnClickListener(view -> {
-            controller.initiateGalleryPick(getActivity(), galleryPickLauncherForResult,true);
+            controller.initiateGalleryPick(getActivity(), galleryPickLauncherForResult, true);
             animateFAB(isFabOpen);
         });
         binding.fabGallery.setOnLongClickListener(view -> {
@@ -369,7 +369,7 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
      * Launch Custom Selector.
      */
     protected void launchCustomSelector() {
-        controller.initiateCustomGalleryPickWithPermission(getActivity(),customSelectorLauncherForResult);
+        controller.initiateCustomGalleryPickWithPermission(getActivity(), customSelectorLauncherForResult);
         animateFAB(isFabOpen);
     }
 

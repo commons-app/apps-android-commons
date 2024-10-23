@@ -109,7 +109,7 @@ public class FilePicker implements Constants {
      *
      * @param type Custom type of your choice, which will be returned with the images
      */
-    public static void openGallery(Activity activity,ActivityResultLauncher<Intent> resultLauncher,int type, boolean openDocumentIntentPreferred) {
+    public static void openGallery(Activity activity, ActivityResultLauncher<Intent> resultLauncher, int type, boolean openDocumentIntentPreferred) {
         Intent intent = createGalleryIntent(activity, type, openDocumentIntentPreferred);
         resultLauncher.launch(intent);
     }
@@ -117,7 +117,7 @@ public class FilePicker implements Constants {
     /**
      * Opens Custom Selector
      */
-    public static void openCustomSelector(Activity activity,ActivityResultLauncher<Intent> resultLauncher,int type) {
+    public static void openCustomSelector(Activity activity, ActivityResultLauncher<Intent> resultLauncher, int type) {
         Intent intent = createCustomSelectorIntent(activity, type);
         resultLauncher.launch(intent);
     }

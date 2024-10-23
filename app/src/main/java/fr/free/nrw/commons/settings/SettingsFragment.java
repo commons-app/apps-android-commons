@@ -90,8 +90,8 @@ public class SettingsFragment extends PreferenceFragmentCompat {
     private final ActivityResultLauncher<Intent> cameraPickLauncherForResult =
         registerForActivityResult(new StartActivityForResult(),
         result -> {
-            contributionController.handleActivityResultWithCallback(requireActivity(),callbacks -> {
-                contributionController.onPictureReturnedFromCamera(result,requireActivity(),callbacks);
+            contributionController.handleActivityResultWithCallback(requireActivity(), callbacks -> {
+                contributionController.onPictureReturnedFromCamera(result, requireActivity(), callbacks);
             });
         });
 

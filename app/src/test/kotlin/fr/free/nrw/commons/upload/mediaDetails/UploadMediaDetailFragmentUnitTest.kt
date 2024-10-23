@@ -364,12 +364,12 @@ class UploadMediaDetailFragmentUnitTest {
         `when`(latLng.latitude).thenReturn(0.0)
         `when`(latLng.longitude).thenReturn(0.0)
         `when`(uploadItem.gpsCoords).thenReturn(imageCoordinates)
-        val activityResult = ActivityResult(Activity.RESULT_OK,intent)
+        val activityResult = ActivityResult(Activity.RESULT_OK, intent)
 
         val handleResultMethod = UploadMediaDetailFragment::class.java.getDeclaredMethod("onCameraPosition", ActivityResult::class.java)
         handleResultMethod.isAccessible = true
 
-        handleResultMethod.invoke(fragment,activityResult)
+        handleResultMethod.invoke(fragment, activityResult)
         Mockito.verify(presenter, Mockito.times(0)).getImageQuality(0, location, activity)
     }
 

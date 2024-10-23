@@ -50,7 +50,7 @@ fun placeAdapterDelegate(
         nearbyButtonLayout.cameraButton.setOnClickListener { onCameraClicked(item, inAppCameraLocationPermissionLauncher, cameraPickLauncherForResult) }
         nearbyButtonLayout.cameraButton.setOnLongClickListener { onCameraLongPressed() }
 
-        nearbyButtonLayout.galleryButton.setOnClickListener { onGalleryClicked(item,galleryPickLauncherForResult) }
+        nearbyButtonLayout.galleryButton.setOnClickListener { onGalleryClicked(item, galleryPickLauncherForResult) }
         nearbyButtonLayout.galleryButton.setOnLongClickListener { onGalleryLongPressed() }
         bookmarkButtonImage.setOnClickListener {
             val isBookmarked = bookmarkLocationDao.updateBookmarkLocation(item)

@@ -79,7 +79,7 @@ class CommonPlaceClickActions
                 } else {
                     Timber.d("Gallery button tapped. Image title: ${place.getName()}Image desc: ${place.getLongDescription()}")
                     storeSharedPrefs(place)
-                    contributionController.initiateGalleryPick(activity, galleryPickLauncherForResult,false)
+                    contributionController.initiateGalleryPick(activity, galleryPickLauncherForResult, false)
                 }
             }
 

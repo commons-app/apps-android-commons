@@ -82,7 +82,7 @@ public class ContributionController {
                     createDialogsAndHandleLocationPermissions(activity,
                         inAppCameraLocationPermissionLauncher, resultLauncher);
                 } else {
-                    initiateCameraUpload(activity,resultLauncher);
+                    initiateCameraUpload(activity, resultLauncher);
                 }
             },
             R.string.storage_permission_title,
@@ -152,7 +152,7 @@ public class ContributionController {
                 () -> {
                     Toast.makeText(activity, activity.getString(toastTextResource),
                         Toast.LENGTH_LONG).show();
-                    initiateCameraUpload(activity,resultLauncher);
+                    initiateCameraUpload(activity, resultLauncher);
                 }
             );
     }
@@ -210,8 +210,8 @@ public class ContributionController {
     /**
      * Initiate gallery picker
      */
-    public void initiateGalleryPick(final Activity activity,ActivityResultLauncher<Intent> resultLauncher ,final boolean allowMultipleUploads) {
-        initiateGalleryUpload(activity,resultLauncher ,allowMultipleUploads);
+    public void initiateGalleryPick(final Activity activity, ActivityResultLauncher<Intent> resultLauncher, final boolean allowMultipleUploads) {
+        initiateGalleryUpload(activity, resultLauncher, allowMultipleUploads);
     }
 
     /**
@@ -221,7 +221,7 @@ public class ContributionController {
         setPickerConfiguration(activity, true);
 
         PermissionUtils.checkPermissionsAndPerformAction(activity,
-            () -> FilePicker.openCustomSelector(activity, resultLauncher,0),
+            () -> FilePicker.openCustomSelector(activity, resultLauncher, 0),
             R.string.storage_permission_title,
             R.string.write_storage_permission_rationale,
             PermissionUtils.PERMISSIONS_STORAGE);
@@ -234,7 +234,7 @@ public class ContributionController {
     private void initiateGalleryUpload(final Activity activity, ActivityResultLauncher<Intent> resultLauncher,
         final boolean allowMultipleUploads) {
         setPickerConfiguration(activity, allowMultipleUploads);
-        FilePicker.openGallery(activity, resultLauncher,0, isDocumentPhotoPickerPreferred());
+        FilePicker.openGallery(activity, resultLauncher, 0, isDocumentPhotoPickerPreferred());
     }
 
     /**
@@ -257,7 +257,7 @@ public class ContributionController {
             locationBeforeImageCapture = locationManager.getLastLocation();
         }
         isInAppCameraUpload = true;
-        FilePicker.openCameraForImage(activity, resultLauncher,0);
+        FilePicker.openCameraForImage(activity, resultLauncher, 0);
     }
 
     private boolean isDocumentPhotoPickerPreferred(){
@@ -270,16 +270,16 @@ public class ContributionController {
         if(isDocumentPhotoPickerPreferred()){
             FilePicker.onPictureReturnedFromDocuments(result, activity, callbacks);
         } else {
-            FilePicker.onPictureReturnedFromGallery(result,activity,callbacks);
+            FilePicker.onPictureReturnedFromGallery(result, activity, callbacks);
         }
     }
 
     public void onPictureReturnedFromCustomSelector(ActivityResult result, Activity activity, @NonNull FilePicker.Callbacks callbacks) {
-        FilePicker.onPictureReturnedFromCustomSelector(result,activity,callbacks);
+        FilePicker.onPictureReturnedFromCustomSelector(result, activity, callbacks);
     }
 
     public void onPictureReturnedFromCamera(ActivityResult result, Activity activity, @NonNull FilePicker.Callbacks callbacks) {
-        FilePicker.onPictureReturnedFromCamera(result,activity,callbacks);
+        FilePicker.onPictureReturnedFromCamera(result, activity, callbacks);
     }
 
     /**

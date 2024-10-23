@@ -38,16 +38,16 @@ public class BookmarkLocationsFragment extends DaggerFragment {
     private final ActivityResultLauncher<Intent> cameraPickLauncherForResult =
         registerForActivityResult(new StartActivityForResult(),
         result -> {
-            contributionController.handleActivityResultWithCallback(requireActivity(),callbacks -> {
-                contributionController.onPictureReturnedFromCamera(result,requireActivity(),callbacks);
+            contributionController.handleActivityResultWithCallback(requireActivity(), callbacks -> {
+                contributionController.onPictureReturnedFromCamera(result, requireActivity(), callbacks);
             });
         });
 
       private final ActivityResultLauncher<Intent> galleryPickLauncherForResult =
           registerForActivityResult(new StartActivityForResult(),
         result -> {
-            contributionController.handleActivityResultWithCallback(requireActivity(),callbacks -> {
-                contributionController.onPictureReturnedFromGallery(result,requireActivity(),callbacks);
+              contributionController.handleActivityResultWithCallback(requireActivity(), callbacks -> {
+                contributionController.onPictureReturnedFromGallery(result, requireActivity(), callbacks);
             });
         });
 
@@ -63,7 +63,7 @@ public class BookmarkLocationsFragment extends DaggerFragment {
                 contributionController.locationPermissionCallback.onLocationPermissionGranted();
             } else {
                 if (shouldShowRequestPermissionRationale(permission.ACCESS_FINE_LOCATION)) {
-                    contributionController.handleShowRationaleFlowCameraLocation(getActivity(), inAppCameraLocationPermissionLauncher,cameraPickLauncherForResult);
+                    contributionController.handleShowRationaleFlowCameraLocation(getActivity(), inAppCameraLocationPermissionLauncher, cameraPickLauncherForResult);
                 } else {
                     contributionController.locationPermissionCallback.onLocationPermissionDenied(getActivity().getString(R.string.in_app_camera_location_permission_denied));
                 }
@@ -104,7 +104,6 @@ public class BookmarkLocationsFragment extends DaggerFragment {
             inAppCameraLocationPermissionLauncher,
             galleryPickLauncherForResult,
             cameraPickLauncherForResult
-
         );
         binding.listView.setAdapter(adapter);
     }

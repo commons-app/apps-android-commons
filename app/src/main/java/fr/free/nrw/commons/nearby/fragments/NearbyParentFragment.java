@@ -230,24 +230,24 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     private final ActivityResultLauncher<Intent> galleryPickLauncherForResult =
         registerForActivityResult(new StartActivityForResult(),
         result -> {
-            controller.handleActivityResultWithCallback(requireActivity(),callbacks -> {
-                controller.onPictureReturnedFromGallery(result,requireActivity(),callbacks);
+            controller.handleActivityResultWithCallback(requireActivity(), callbacks -> {
+                controller.onPictureReturnedFromGallery(result, requireActivity(), callbacks);
             });
         });
 
     private final ActivityResultLauncher<Intent> customSelectorLauncherForResult =
         registerForActivityResult(new StartActivityForResult(),
         result -> {
-            controller.handleActivityResultWithCallback(requireActivity(),callbacks -> {
-                controller.onPictureReturnedFromCustomSelector(result,requireActivity(),callbacks);
+            controller.handleActivityResultWithCallback(requireActivity(), callbacks -> {
+                controller.onPictureReturnedFromCustomSelector(result, requireActivity(), callbacks);
             });
         });
 
     private final ActivityResultLauncher<Intent> cameraPickLauncherForResult =
         registerForActivityResult(new StartActivityForResult(),
         result -> {
-            controller.handleActivityResultWithCallback(requireActivity(),callbacks -> {
-                controller.onPictureReturnedFromCamera(result,requireActivity(),callbacks);
+            controller.handleActivityResultWithCallback(requireActivity(), callbacks -> {
+                controller.onPictureReturnedFromCamera(result, requireActivity(), callbacks);
             });
         });
 
@@ -2247,7 +2247,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             if (binding.fabCustomGallery.isShown()) {
                 Timber.d("Gallery button tapped. Place: %s", selectedPlace.toString());
                 storeSharedPrefs(selectedPlace);
-                controller.initiateCustomGalleryPickWithPermission(getActivity(),customSelectorLauncherForResult);
+                controller.initiateCustomGalleryPickWithPermission(getActivity(), customSelectorLauncherForResult);
             }
         });
     }

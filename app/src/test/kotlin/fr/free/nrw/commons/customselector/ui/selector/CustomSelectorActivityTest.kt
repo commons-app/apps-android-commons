@@ -106,7 +106,7 @@ class CustomSelectorActivityTest {
     @Throws(Exception::class)
     fun testResultLauncher() {
         val intent = Mockito.mock(Intent::class.java)
-        val activityResult = ActivityResult(Activity.RESULT_OK,intent)
+        val activityResult = ActivityResult(Activity.RESULT_OK, intent)
         val func =
             activity.javaClass.getDeclaredMethod(
                 "onFullScreenDataReceived",
