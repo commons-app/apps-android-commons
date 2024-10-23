@@ -49,28 +49,28 @@
   </plurals>
   <plurals name="contributions_subtitle">
     <item quantity="one">(%1$d)</item>
-    <item quantity="many">(muitos %1$d)</item>
+    <item quantity="many">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
   <string name="starting_uploads">A iniciar carregamentos</string>
   <plurals name="starting_multiple_uploads">
     <item quantity="one">A processar %d carregamento</item>
-    <item quantity="many">A processar muitos %d carregamentos</item>
+    <item quantity="many">A processar %d carregamentos</item>
     <item quantity="other">A processar %d carregamentos</item>
   </plurals>
   <plurals name="multiple_uploads_title">
     <item quantity="one">%d carregamento</item>
-    <item quantity="many">muitos %d carregamentos</item>
+    <item quantity="many">%d carregamentos</item>
     <item quantity="other">%d carregamentos</item>
   </plurals>
   <plurals name="share_license_summary">
     <item quantity="one">Esta imagem será licenciada com a %1$s</item>
-    <item quantity="many">Estas muitas imagens serão licenciadas com a %1$s</item>
+    <item quantity="many">Estas imagens serão licenciadas com a %1$s</item>
     <item quantity="other">Estas imagens serão licenciadas com a %1$s</item>
   </plurals>
   <plurals name="upload_count_title">
     <item quantity="one">%1$d carregamento</item>
-    <item quantity="many">muitos %1$d carregamentos</item>
+    <item quantity="many">%1$d carregamentos</item>
     <item quantity="other">%1$d carregamentos</item>
   </plurals>
   <plurals name="receiving_shared_content">
@@ -547,7 +547,7 @@
   <string name="category_edit_helper_show_edit_title_success">Êxito</string>
   <plurals name="category_edit_helper_show_edit_message_if">
     <item quantity="one">A categoria %1$s foi adicionada.</item>
-    <item quantity="many">Muitas categorias %1$s foram adicionadas.</item>
+    <item quantity="many">As categorias %1$s foram adicionadas.</item>
     <item quantity="other">As categorias %1$s foram adicionadas.</item>
   </plurals>
   <string name="category_edit_helper_edit_message_else">Não foi possível adicionar categorias.</string>
@@ -556,7 +556,7 @@
   <string name="depictions_edit_helper_show_edit_title">Editar elementos retratados</string>
   <plurals name="depictions_edit_helper_show_edit_message_if">
     <item quantity="one">O elemento retratado %1$s está adicionado.</item>
-    <item quantity="many">Muitos elementos retratados %1$s estão adicionados.</item>
+    <item quantity="many">Os elementos retratados %1$s estão adicionados.</item>
     <item quantity="other">Os elementos retratados %1$s estão adicionados.</item>
   </plurals>
   <string name="depictions_edit_helper_edit_message_else">Não foi possível adicionar os elementos retratados.</string>
@@ -769,7 +769,7 @@
   <string name="error_sending_thanks">Erro no envio de agradecimento ao autor.</string>
   <plurals name="custom_picker_images_selected_title_appendix">
     <item quantity="one">%d imagem selecionada</item>
-    <item quantity="many">Muitas %d imagens selecionadas</item>
+    <item quantity="many">%d imagens selecionadas</item>
     <item quantity="other">%d imagens selecionadas</item>
   </plurals>
 </resources>
