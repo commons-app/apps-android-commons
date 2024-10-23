@@ -56,9 +56,9 @@
   <plurals name="share_license_summary" fuzzy="true">
     <item quantity="zero">Ni chaiff unrhyw ddelweddau eu trwyddedu dan %1$s</item>
     <item quantity="one">Caiff y ddelwedd hon ei thrwyddedu yn ôl termau\'r drwydded %1$s</item>
-    <item quantity="two">Caiff y ddwy ddelwedd eu trwyddedu dan %1$s</item>
-    <item quantity="few">Caiff ychydig o ddelweddau eu trwyddedu dan %1$s</item>
-    <item quantity="many">Caiff llawer o ddelweddau eu trwyddedu dan %1$s</item>
+    <item quantity="two">Caiff y delweddau hyn eu trwyddedu dan %1$s</item>
+    <item quantity="few">Caiff y delweddau hyn eu trwyddedu dan %1$s</item>
+    <item quantity="many">Caiff y delweddau hyn eu trwyddedu dan %1$s</item>
     <item quantity="other">Caiff y delweddau hyn eu trwyddedu dan %1$s</item>
   </plurals>
   <string name="navigation_item_explore">Archwilio</string>
