@@ -33,20 +33,27 @@
   <string name="appwidget_img">Dienos nuotrauka</string>
   <plurals name="uploads_pending_notification_indicator" fuzzy="true">
     <item quantity="one">%1$d keliamas failas</item>
+    <item quantity="few">%1$d keliami failai</item>
+    <item quantity="many">%1$d failų keliamas</item>
     <item quantity="other">%1$d keliami failai</item>
   </plurals>
   <plurals name="contributions_subtitle" fuzzy="true">
+    <item quantity="one">%1$d įkėlimas</item>
+    <item quantity="few">%1$d įkėlimai</item>
+    <item quantity="many">%1$d įkėlimų</item>
     <item quantity="other"/>
-    <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">1 įkėlimas</item>
   </plurals>
   <string name="starting_uploads"> Įkėlimai pradedami</string>
   <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">Pradedamas %1$d įkėlimas</item>
+    <item quantity="few">Pradedami %1$d įkėlimai</item>
+    <item quantity="many">Pradedami %1$d įkėlimų</item>
     <item quantity="other">Pradedami %1$d įkėlimai</item>
   </plurals>
   <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">%1$d įkėlimas</item>
+    <item quantity="few">%1$d įkėlimai</item>
+    <item quantity="many">%1$d įkėlimų</item>
     <item quantity="other">%1$d įkėlimai</item>
   </plurals>
   <string name="share_license_summary" fuzzy="true">Šio paveikslėlio licencija bus %1$s</string>
