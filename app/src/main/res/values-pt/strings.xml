@@ -20,7 +20,7 @@
 * Unamane
 * Vitorvicentevalente
 -->
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
   <string name="commons_facebook">Página da wiki Commons no Facebook</string>
   <string name="commons_github">Código-fonte da wiki Commons no Github</string>
   <string name="commons_logo">Logótipo da wiki Commons</string>
@@ -44,31 +44,38 @@
   <string name="appwidget_img">Imagem do Dia</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">a carregar %1$d ficheiro</item>
+    <item quantity="many">a carregar muitos %1$d ficheiros</item>
     <item quantity="other">a carregar %1$d ficheiros</item>
   </plurals>
   <plurals name="contributions_subtitle">
     <item quantity="one">(%1$d)</item>
+    <item quantity="many">(muitos %1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
   <string name="starting_uploads">A iniciar carregamentos</string>
   <plurals name="starting_multiple_uploads">
     <item quantity="one">A processar %d carregamento</item>
+    <item quantity="many">A processar muitos %d carregamentos</item>
     <item quantity="other">A processar %d carregamentos</item>
   </plurals>
   <plurals name="multiple_uploads_title">
     <item quantity="one">%d carregamento</item>
+    <item quantity="many">muitos %d carregamentos</item>
     <item quantity="other">%d carregamentos</item>
   </plurals>
   <plurals name="share_license_summary">
     <item quantity="one">Esta imagem será licenciada com a %1$s</item>
+    <item quantity="many">Estas muitas imagens serão licenciadas com a %1$s</item>
     <item quantity="other">Estas imagens serão licenciadas com a %1$s</item>
   </plurals>
   <plurals name="upload_count_title">
     <item quantity="one">%1$d carregamento</item>
+    <item quantity="many">muitos %1$d carregamentos</item>
     <item quantity="other">%1$d carregamentos</item>
   </plurals>
   <plurals name="receiving_shared_content">
-    <item quantity="one">A receber conteúdo partilhado. O processamento da imagem pode demorar algum tempo, dependendo do tamanho da mesma e do seu dispositivo</item>
+    <item quantity="one" tools:ignore="ImpliedQuantity">A receber conteúdo partilhado. O processamento da imagem pode demorar algum tempo, dependendo do tamanho da mesma e do seu dispositivo</item>
+    <item quantity="many">A receber conteúdo partilhado. O processamento da imagem pode demorar algum tempo, dependendo do tamanho da mesma e do seu dispositivo</item>
     <item quantity="other">A receber conteúdo partilhado. O processamento das imagens pode demorar algum tempo, dependendo do tamanho das mesmas e do seu dispositivo</item>
   </plurals>
   <string name="navigation_item_explore">Explorar</string>
@@ -156,8 +163,8 @@
   <string name="about_privacy_policy">Política de privacidade</string>
   <string name="about_credits">Créditos</string>
   <string name="title_activity_about">Sobre</string>
-  <string name="menu_feedback">Enviar comentários (por correio eletrónico)</string>
-  <string name="no_email_client">Não foi instalado nenhum cliente de correio eletrónico</string>
+  <string name="menu_feedback" tools:ignore="Typos">Enviar comentários (por correio eletrónico)</string>
+  <string name="no_email_client" tools:ignore="Typos">Não foi instalado nenhum cliente de correio eletrónico</string>
   <string name="provider_categories">Categorias usadas recentemente</string>
   <string name="waiting_first_sync">A aguardar pela primeira sincronização…</string>
   <string name="no_uploads_yet">Não carregou ainda nenhuma foto.</string>
@@ -276,7 +283,7 @@
   <string name="use_external_storage_summary">Gravar as fotografias tiradas com a câmara da aplicação no armazenamento do seu dispositivo</string>
   <string name="login_to_your_account">Inicie sessão na sua conta</string>
   <string name="send_log_file">Enviar ficheiro de registos</string>
-  <string name="send_log_file_description">Enviar o ficheiro de registos aos programadores por correio eletrónico para ajudar a corrigir problemas da aplicação. Nota: os registos podem conter informações identificativas</string>
+  <string name="send_log_file_description" tools:ignore="Typos">Enviar o ficheiro de registos aos programadores por correio eletrónico para ajudar a corrigir problemas da aplicação. Nota: os registos podem conter informações identificativas</string>
   <string name="no_web_browser">Não foi encontrado nenhum navegador da Internet para abrir o URL</string>
   <string name="null_url">Erro! Não foi possível encontrar o URL</string>
   <string name="nominate_deletion">Nomear para eliminação</string>
@@ -491,7 +498,7 @@
   <string name="menu_option_read">Ver lidas</string>
   <string name="menu_option_unread">Ver não lidas</string>
   <string name="error_occurred_in_picking_images">Ocorreu um erro ao escolher imagens</string>
-  <string name="please_wait">Aguarde, por favor...</string>
+  <string name="please_wait">Aguarde, por favor…</string>
   <string name="images_featured_explanation">As fotografias destacadas são imagens de fotógrafos e ilustradores altamente qualificados, que a comunidade da wiki Wikimedia Commons escolheu como as de melhor qualidade do \'\'site\'\'.</string>
   <string name="images_via_nearby_explanation">As imagens carregadas via \"Locais próximos\" são as imagens que são carregadas descobrindo locais do mapa.</string>
   <string name="thanks_received_explanation">Esta funcionalidade permite que os editores enviem uma notificação de agradecimento aos utilizadores que fizerem edições úteis - usando uma pequena hiperligação de agradecimento na página do historial ou na de diferenças.</string>
@@ -513,7 +520,7 @@
   <string name="media_location_permission_denied">Acesso à localização de multimédia negado</string>
   <string name="add_location_manually">Podemos não conseguir obter automaticamente os dados de localização das fotografias que carregar. Adicione a localização apropriada de cada fotografia antes de a enviar, por favor</string>
   <string name="share_text">Carregue fotografias na wiki Wikimedia Commons, diretamente do seu telemóvel. Descarregue a aplicação Commons agora: %1$s</string>
-  <string name="share_via">Partilhar aplicação por...</string>
+  <string name="share_via">Partilhar aplicação por…</string>
   <string name="image_info">Informação da imagem</string>
   <string name="no_categories_found">Não foi encontrada nenhuma categoria</string>
   <string name="no_depiction_found">Não foi encontrada nenhuma representação</string>
@@ -540,6 +547,7 @@
   <string name="category_edit_helper_show_edit_title_success">Êxito</string>
   <plurals name="category_edit_helper_show_edit_message_if">
     <item quantity="one">A categoria %1$s foi adicionada.</item>
+    <item quantity="many">Muitas categorias %1$s foram adicionadas.</item>
     <item quantity="other">As categorias %1$s foram adicionadas.</item>
   </plurals>
   <string name="category_edit_helper_edit_message_else">Não foi possível adicionar categorias.</string>
@@ -548,6 +556,7 @@
   <string name="depictions_edit_helper_show_edit_title">Editar elementos retratados</string>
   <plurals name="depictions_edit_helper_show_edit_message_if">
     <item quantity="one">O elemento retratado %1$s está adicionado.</item>
+    <item quantity="many">Muitos elementos retratados %1$s estão adicionados.</item>
     <item quantity="other">Os elementos retratados %1$s estão adicionados.</item>
   </plurals>
   <string name="depictions_edit_helper_edit_message_else">Não foi possível adicionar os elementos retratados.</string>
@@ -589,7 +598,7 @@
   <string name="add_bookmark">Adicionado aos marcadores</string>
   <string name="wallpaper_set_unsuccessfully">Ocorreu um problema. Não foi possível definir a imagem de fundo</string>
   <string name="setting_wallpaper_dialog_title">Definir como imagem de fundo</string>
-  <string name="setting_wallpaper_dialog_message">A definir a imagem de fundo. Aguarde, por favor...</string>
+  <string name="setting_wallpaper_dialog_message">A definir a imagem de fundo. Aguarde, por favor…</string>
   <string name="theme_default_name">Seguir sistema</string>
   <string name="theme_dark_name">Escuro</string>
   <string name="theme_light_name">Claro</string>
@@ -645,8 +654,8 @@
   <string name="limited_connection_mode">Modo de ligação limitada</string>
   <string name="statistics_quality">Imagens de qualidade</string>
   <string name="quality_images_info">As imagens de qualidade são diagramas ou fotografias que satisfazem certos padrões de qualidade (principalmente de natureza técnica) e são valiosos para projetos da Wikimedia</string>
-  <string name="resuming_upload">A retomar carregamento...</string>
-  <string name="pausing_upload">A pausar carregamento...</string>
+  <string name="resuming_upload">A retomar carregamento…</string>
+  <string name="pausing_upload">A pausar carregamento…</string>
   <string name="cancelling_upload">A cancelar o carregamento…</string>
   <string name="cancel_upload">Cancelar carregamento</string>
   <string name="limited_connection_explanation">Ativou o modo de ligação limitada. Todos os carregamentos foram colocados em pausa e serão retomados quando desativar este modo.</string>
@@ -709,7 +718,7 @@
   <string name="no_location_found_title">Não foi encontrada nenhuma localização</string>
   <string name="no_location_found_message">Que tal adicionar o local onde a imagem foi tirada?\nOs dados de localização ajudam os editores da wiki a encontrarem a sua fotografia, tornando-a muito mais útil.\nObrigado!</string>
   <string name="add_location">Adicionar localização</string>
-  <string name="feedback_sharing_data_alert">Remova desta mensagem de correio todas as informações que não se sinta à vontade em partilhar publicamente, por favor. Adicionalmente, esteja consciente de que o seu endereço de correio eletrónico, com o qual está a fazer esta publicação, e o nome e imagem de perfil a ele associados, serão visíveis pelo público geral.</string>
+  <string name="feedback_sharing_data_alert" tools:ignore="Typos">Remova desta mensagem de correio todas as informações que não se sinta à vontade em partilhar publicamente, por favor. Adicionalmente, esteja consciente de que o seu endereço de correio eletrónico, com o qual está a fazer esta publicação, e o nome e imagem de perfil a ele associados, serão visíveis pelo público geral.</string>
   <string name="explore_map_details">Detalhes</string>
   <string name="achievements_unavailable_beta" fuzzy="true">As realizações só estão disponíveis na versão de produção; consulte a documentação para programadores, por favor.</string>
   <string name="leaderboard_unavailable_beta">A tabela de classificação só está disponível na versão prod. Consulte a documentação do desenvolvedor.</string>
@@ -760,6 +769,7 @@
   <string name="error_sending_thanks">Erro no envio de agradecimento ao autor.</string>
   <plurals name="custom_picker_images_selected_title_appendix">
     <item quantity="one">%d imagem selecionada</item>
+    <item quantity="many">Muitas %d imagens selecionadas</item>
     <item quantity="other">%d imagens selecionadas</item>
   </plurals>
 </resources>
