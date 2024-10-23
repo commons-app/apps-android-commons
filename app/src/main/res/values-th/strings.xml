@@ -38,21 +38,16 @@
   <string name="appwidget_img">รูปภาพประจำวัน</string>
   <string name="uploads_pending_notification_indicator">กำลังอัปโหลดไฟล์ %1$d ไฟล์</string>
   <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
   <string name="starting_uploads">กำลังเริ่มอัปโหลด</string>
   <plurals name="starting_multiple_uploads" fuzzy="true">
-    <item quantity="one">กำลังเริ่มอัปโหลด %1$d รายการ</item>
     <item quantity="other">กำลังเริ่มอัปโหลด %1$d รายการ</item>
   </plurals>
   <plurals name="multiple_uploads_title" fuzzy="true">
-    <item quantity="one">การอัปโหลด %1$d รายการ</item>
     <item quantity="other">การอัปโหลด %1$d รายการ</item>
   </plurals>
   <plurals name="share_license_summary">
-    <item quantity="one">ภาพนี้จะอยู่ในสัญญาอนุญาต %1$s</item>
     <item quantity="other">ภาะเหล่านี้จะอยู่อยู่ในสัญญาอนุญาติ %1$s</item>
   </plurals>
   <string name="navigation_item_explore">สำรวจ</string>
