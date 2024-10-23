@@ -52,9 +52,8 @@ public abstract class PlaceDao {
     public abstract void deleteAllSynchronous();
 
     /**
-     * Deletes all Place objects asynchronously from the database.
+     * Deletes all Place objects from the database.
      *
-     * @return A Completable that completes once the deletion operation is done.
      */
     public Completable deleteAll() {
         return Completable

@@ -3,6 +3,7 @@ package fr.free.nrw.commons.nearby;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.location.LatLng;
 import io.reactivex.Completable;
+import io.reactivex.schedulers.Schedulers;
 import javax.inject.Inject;
 
 /**
@@ -38,7 +39,13 @@ public class PlacesRepository {
         return localDataSource.fetchPlace(entityID);
     }
 
+    /**
+     * Clears the Nearby cache on an IO thread.
+     *
+     * @return A Completable that completes once the cache has been successfully cleared.
+     */
     public Completable clearCache() {
-        return localDataSource.clearCache();
+        return localDataSource.clearCache()
+            .subscribeOn(Schedulers.io()); // Ensure it runs on IO thread
     }
 }
