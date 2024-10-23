@@ -75,7 +75,7 @@
   <string name="logging_in_title">Jungiamasi</string>
   <string name="logging_in_message">Prašome palaukti…</string>
   <string name="updating_caption_title">Antraštės ir aprašymai atnaujinami</string>
-  <string name="updating_caption_message">Prašome palaukti...</string>
+  <string name="updating_caption_message">Prašome palaukti…</string>
   <string name="login_success">Sėkmingai prisijungėte!</string>
   <string name="login_failed">Prisijungti nepavyko!</string>
   <string name="upload_failed">Failas nerastas. Prašome pabandyti kitą failą.</string>
@@ -753,7 +753,7 @@
   <string name="other_problem_or_information_please_explain_below">Kita problema arba informacija (paaiškinkite toliau).</string>
   <string name="feedback_destination_note">Jūsų atsiliepimai bus paskelbti šiame viki puslapyje: &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Mobile_app/Feedback\"&gt;Commons:Mobile App/Feedback&lt;/a&gt;</string>
   <string name="are_you_sure_that_you_want_cancel_all_the_uploads">Ar tikrai norite atšaukti visus įkėlimus?</string>
-  <string name="cancelling_all_the_uploads">Atšaukiami visi įkėlimai...</string>
+  <string name="cancelling_all_the_uploads">Atšaukiami visi įkėlimai…</string>
   <string name="uploads">Įkėlimai</string>
   <string name="pending">Laukiama</string>
   <string name="failed">Nepavyko</string>
