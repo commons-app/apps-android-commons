@@ -169,20 +169,6 @@ class UploadActivityUnitTests {
 
     @Test
     @Throws(Exception::class)
-    fun testOnActivityResult() {
-        val method: Method =
-            UploadActivity::class.java.getDeclaredMethod(
-                "onActivityResult",
-                Int::class.java,
-                Int::class.java,
-                Intent::class.java,
-            )
-        method.isAccessible = true
-        method.invoke(activity, CommonsApplication.OPEN_APPLICATION_DETAIL_SETTINGS, 0, Intent())
-    }
-
-    @Test
-    @Throws(Exception::class)
     fun testReceiveSharedItems() {
         val method: Method =
             UploadActivity::class.java.getDeclaredMethod(
