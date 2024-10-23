@@ -809,7 +809,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     @Override
     public void displayAddLocationDialog(final Runnable onSkipClicked) {
         isMissingLocationDialog = true;
-        DialogUtil.showAlertDialog(Objects.requireNonNull(getActivity()),
+        DialogUtil.showAlertDialog(requireActivity(),
             getString(R.string.no_location_found_title),
             getString(R.string.no_location_found_message),
             getString(R.string.add_location),
