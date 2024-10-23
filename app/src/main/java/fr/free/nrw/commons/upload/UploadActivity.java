@@ -321,6 +321,14 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
     }
 
     /**
+     * go to the uploadProgress activity to check the status of uploading
+     */
+    @Override
+    public void goToUploadProgressActivity() {
+        startActivity(new Intent(this, UploadProgressActivity.class));
+    }
+
+    /**
      * Show/Hide the progress dialog
      */
     @Override
