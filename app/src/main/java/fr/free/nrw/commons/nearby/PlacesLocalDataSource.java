@@ -36,4 +36,8 @@ public class PlacesLocalDataSource {
     public Completable savePlace(Place place) {
         return placeDao.save(place);
     }
+
+    public Completable clearCache() {
+        return placeDao.deleteAll();
+    }
 }

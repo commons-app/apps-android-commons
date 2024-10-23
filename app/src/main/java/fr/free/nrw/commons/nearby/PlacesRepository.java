@@ -38,4 +38,7 @@ public class PlacesRepository {
         return localDataSource.fetchPlace(entityID);
     }
 
+    public Completable clearCache() {
+        return localDataSource.clearCache();
+    }
 }

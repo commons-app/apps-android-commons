@@ -32,6 +32,7 @@ import android.preference.PreferenceManager;
 import android.provider.Settings;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -319,6 +320,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 try {
+                    Timber.d("Reload: menuItem");
                     // REFRESH BUTTON FUNCTIONALITY HERE
                     emptyCache();
                     reloadMap();
@@ -1130,7 +1132,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     }
 
     /**
-     *  Reloads the Nearby map
+     * Reloads the Nearby map.
+     * This method clears the existing markers, resets the map state, and repopulates the map with the latest data.
      */
     private void reloadMap(){
 
@@ -1141,7 +1144,13 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
      *  Empties the Nearby local cache
      */
     private void emptyCache(){
+        Timber.d("Reload: emptyCache");
 
+        placesRepository.clearCache();
+
+        // Optionally, clear any in-memory cache or state
+        updatedPlacesList.clear();
+        updatedLatLng = null;
     }
 
     private void savePlacesAsKML() {
