@@ -40,6 +40,9 @@
   </plurals>
   <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">%1$d bellgargadenn loc\'het</item>
+    <item quantity="two">%1$d bellgargadenn loc\'het</item>
+    <item quantity="few">%1$d bellgargadennoù loc\'het</item>
+    <item quantity="many">%1$d bellgargadennoù loc\'het</item>
     <item quantity="other">%1$d pellgargadennoù loc\'het</item>
   </plurals>
   <plurals name="multiple_uploads_title">
@@ -51,6 +54,9 @@
   </plurals>
   <plurals name="share_license_summary" fuzzy="true">
     <item quantity="one">gant an aotre-implijout %1$s e vo ar skeudenn-mañ</item>
+    <item quantity="two">gant an aotre-implijout %1$s e vo an div skeudenn-mañ</item>
+    <item quantity="few">gant an aotre-implijout %1$s e vo meur a skeudenn-mañ</item>
+    <item quantity="many">gant an aotre-implijout %1$s e vo kalz a skeudenn-mañ</item>
     <item quantity="other">gant an aotreoù-implijout %1$s e vo ar skeudenn-mañ</item>
   </plurals>
   <string name="navigation_item_explore">Ergerzhout</string>
