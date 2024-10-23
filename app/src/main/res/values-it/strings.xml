@@ -46,31 +46,38 @@
   <string name="appwidget_img">Foto del giorno</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">%1$d file in caricamento</item>
+    <item quantity="many">%1$d file in caricamento</item>
     <item quantity="other">%1$d file in caricamento</item>
   </plurals>
   <plurals name="contributions_subtitle">
     <item quantity="one">(%1$d)</item>
+    <item quantity="many">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
   <string name="starting_uploads">Avvio del caricamento</string>
   <plurals name="starting_multiple_uploads">
     <item quantity="one">Elaborando %d caricamento</item>
+    <item quantity="many">Elaborando %d caricamenti</item>
     <item quantity="other">Elaborando %d caricamenti</item>
   </plurals>
   <plurals name="multiple_uploads_title">
     <item quantity="one">%d caricamento</item>
+    <item quantity="many">%d caricamenti</item>
     <item quantity="other">%d caricamenti</item>
   </plurals>
   <plurals name="share_license_summary">
     <item quantity="one">Questa immagine sarà rilasciata in base alla licenza %1$s</item>
+    <item quantity="many">Queste immagini saranno rilasciate in base alla licenza %1$s</item>
     <item quantity="other">Queste immagini saranno rilasciate in base alla licenza %1$s</item>
   </plurals>
   <plurals name="upload_count_title">
     <item quantity="one">%1$d caricamento</item>
+    <item quantity="many">%1$d caricamenti</item>
     <item quantity="other">%1$d caricamenti</item>
   </plurals>
   <plurals name="receiving_shared_content">
     <item quantity="one">Ricezione di contenuti condivisi. L\'elaborazione dell\'immagine potrebbe richiedere del tempo a seconda delle dimensioni dell\'immagine e del dispositivo</item>
+    <item quantity="many">Ricezione di contenuti condivisi. L\'elaborazione delle immagini potrebbe richiedere del tempo a seconda delle dimensioni delle immagini e del dispositivo</item>
     <item quantity="other">Ricezione di contenuti condivisi. L\'elaborazione delle immagini potrebbe richiedere del tempo a seconda delle dimensioni delle immagini e del dispositivo</item>
   </plurals>
   <string name="navigation_item_explore">Esplora</string>
@@ -516,7 +523,7 @@
   <string name="media_location_permission_denied">Accesso alla posizione multimediale negato</string>
   <string name="add_location_manually">Potremmo non essere in grado di ottenere automaticamente i dati sulla posizione dalle immagini caricate. Si prega di aggiungere la posizione appropriata per ciascuna immagine prima di inviarla</string>
   <string name="share_text">Carica foto su Wikimedia Commons direttamente dal tuo telefono. Scarica subito l\'app Commons: %1$s</string>
-  <string name="share_via">Condividi applicazione tramite...</string>
+  <string name="share_via">Condividi applicazione tramite…</string>
   <string name="image_info">Informazioni sull\'immagine</string>
   <string name="no_categories_found">Nessuna categoria trovata</string>
   <string name="no_depiction_found">Nessuna definizione trovata</string>
@@ -543,6 +550,7 @@
   <string name="category_edit_helper_show_edit_title_success">Successo</string>
   <plurals name="category_edit_helper_show_edit_message_if">
     <item quantity="one">Categoria %1$s aggiunta.</item>
+    <item quantity="many">Categorie %1$s aggiunte.</item>
     <item quantity="other">Categorie %1$s aggiunte.</item>
   </plurals>
   <string name="category_edit_helper_edit_message_else">Non è stato possibile aggiungere le categorie.</string>
@@ -575,7 +583,7 @@
   <string name="place_state_exists">Esiste</string>
   <string name="place_state_needs_photo">Necessita della fotografia</string>
   <string name="place_type">Tipo di luogo:</string>
-  <string name="nearby_search_hint">Ponte, museo, albergo, ecc...</string>
+  <string name="nearby_search_hint">Ponte, museo, albergo, ecc…</string>
   <string name="you_must_reset_your_passsword">Si è verificato un errore durante l\'accesso. Devi reimpostare la password!</string>
   <string name="title_for_media">MEDIA</string>
   <string name="title_for_child_classes">CLASSI FIGLIE</string>
@@ -588,7 +596,7 @@
   <string name="add_bookmark">Aggiungi ai preferiti</string>
   <string name="wallpaper_set_unsuccessfully">Qualcosa è andato storto. Non è stato possibile impostare lo sfondo schermo</string>
   <string name="setting_wallpaper_dialog_title">Imposta come sfondo</string>
-  <string name="setting_wallpaper_dialog_message">Impostazione di sfondo in corso...</string>
+  <string name="setting_wallpaper_dialog_message">Impostazione di sfondo in corso…</string>
   <string name="theme_default_name">Segui sistema</string>
   <string name="theme_dark_name">Scuro</string>
   <string name="theme_light_name">Chiaro</string>
@@ -758,6 +766,7 @@
   <string name="invalid_login_message">Sessione scaduta. Accedi nuovamente.</string>
   <plurals name="custom_picker_images_selected_title_appendix">
     <item quantity="one">%d immagine selezionata</item>
+    <item quantity="many">%d immagini selezionate</item>
     <item quantity="other">%d immagini selezionate</item>
   </plurals>
 </resources>
