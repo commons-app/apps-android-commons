@@ -43,28 +43,22 @@
   <string name="nearby_filter_search">검색 뷰</string>
   <string name="appwidget_img">오늘의 이미지</string>
   <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">%1$d개의 파일을 올리는 중</item>
     <item quantity="other">%1$d개의 파일을 올리는 중</item>
   </plurals>
   <plurals name="contributions_subtitle">
-    <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
   <string name="starting_uploads">파일 올리기</string>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">%1$d장의 업로드를 처리하는 중입니다</item>
     <item quantity="other">%1$d장의 업로드를 처리하는 중입니다</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">%d개 업로드</item>
     <item quantity="other">%d개 업로드</item>
   </plurals>
   <plurals name="share_license_summary">
-    <item quantity="one">이 그림은 %1$s에 따라 사용이 허가됩니다</item>
     <item quantity="other">이 그림은 %1$s에 따라 사용이 허가됩니다</item>
   </plurals>
   <plurals name="upload_count_title">
-    <item quantity="one">%1$d개 업로드</item>
     <item quantity="other">%1$d개 업로드</item>
   </plurals>
   <string name="navigation_item_explore">찾아보기</string>
