@@ -19,20 +19,16 @@
   <string name="nearby_all">အားလုံး</string>
   <string name="appwidget_img">ယနေ့အတွက် အထူးဓာတ်ပုံ</string>
   <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">ဖိုင် %1$d ခု တင်နေသည်</item>
     <item quantity="other">ဖိုင် %1$d ခု တင်နေသည်</item>
   </plurals>
   <string name="starting_uploads">အပ်ပလုဒ်များ စတင်ခြင်း</string>
   <plurals name="multiple_uploads_title" fuzzy="true">
-    <item quantity="one">%1$d ခု တင်ထားသည်</item>
     <item quantity="other">%1$d ခု တင်ထားသည်</item>
   </plurals>
   <plurals name="share_license_summary">
-    <item quantity="one">ဤရုပ်ပုံသည် %1$ အောက်တွင် လိုင်စင်သတ်မှတ်ထးပါမည်</item>
     <item quantity="other">ဤရုပ်ပုံများသည် %1$ အောက်တွင် လိုင်စင်သတ်မှတ်ထးပါမည်</item>
   </plurals>
   <plurals name="upload_count_title">
-    <item quantity="one">%1$d အက်ပလုပ်</item>
     <item quantity="other">%1$d အက်ပလုပ်များ</item>
   </plurals>
   <string name="navigation_item_explore">ရှာဖွေစူးစမ်းပါ</string>
