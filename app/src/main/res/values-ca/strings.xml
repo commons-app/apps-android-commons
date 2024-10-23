@@ -20,7 +20,7 @@
   <string name="appwidget_img">Imatge del dia</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">s\'està carregant %1$d fitxer</item>
-    <item quantity="many">S\'estan carregant molts de %1$d fitxers</item>
+    <item quantity="many">S\'estan carregant de %1$d fitxers</item>
     <item quantity="other">s\'estan carregant %1$d fitxers</item>
   </plurals>
   <plurals name="contributions_subtitle">
@@ -36,7 +36,7 @@
   </plurals>
   <plurals name="multiple_uploads_title">
     <item quantity="one">%d càrrega</item>
-    <item quantity="many">%1$d càrregues</item>
+    <item quantity="many">$d càrregues</item>
     <item quantity="other">%d càrregues</item>
   </plurals>
   <plurals name="share_license_summary">
