@@ -26,32 +26,25 @@
   <string name="nearby_filter_toggle">Togel ka Luhur</string>
   <string name="appwidget_img">Gambar poé ieu</string>
   <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">ngunjal %1$d berkas</item>
     <item quantity="other">ngunjal %1$d berkas</item>
   </plurals>
   <plurals name="contributions_subtitle">
-    <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
   <string name="starting_uploads">Mitembeyan Ngamuat</string>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">Ngolah %d muatan</item>
     <item quantity="other">Ngolah %d muatan</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">%1$d muatan</item>
     <item quantity="other">%1$d muatan</item>
   </plurals>
   <plurals name="share_license_summary">
-    <item quantity="one">Ieu gambar bakal dilisénsi %1$s</item>
     <item quantity="other">Ieu gambar bakal dilisénsi %1$s</item>
   </plurals>
   <plurals name="upload_count_title">
-    <item quantity="one">%1$d Dimuat</item>
     <item quantity="other">%1$d Dimuat</item>
   </plurals>
   <plurals name="receiving_shared_content">
-    <item quantity="one">Nampa kontén anu dibagikeun. Ngolah gambarna bisa jadi rada lila gumantung kana ukuran gambar jeung gaway anjeun</item>
     <item quantity="other">Nampa kontén anu dibagikeun</item>
   </plurals>
   <string name="navigation_item_explore">Langlang</string>
