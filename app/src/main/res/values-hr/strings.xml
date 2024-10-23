@@ -15,19 +15,22 @@
   <string name="appwidget_img">Slika dana</string>
   <plurals name="uploads_pending_notification_indicator" fuzzy="true">
     <item quantity="one">Postavlja se %1$d datoteka</item>
+    <item quantity="few">Postavlja se %1$d datoteke</item>
     <item quantity="other">Postavljaju se %1$d datoteke</item>
   </plurals>
   <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">%1$d postavljena datoteka</item>
+    <item quantity="few">%1$d postavljena datoteke</item>
     <item quantity="other">%1$d postavljene datoteke</item>
   </plurals>
   <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">Započeto %1$d postavljanje</item>
+    <item quantity="few">Započinjem %1$d postavljanja</item>
     <item quantity="other">Započeta %1$d postavljanja</item>
   </plurals>
   <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">%1$d postavljanje</item>
+    <item quantity="few">%1$d postavljanja</item>
     <item quantity="other">%1$d postavljanja</item>
   </plurals>
   <string name="share_license_summary" fuzzy="true">Ova će slika biti licencirana pod %1$s</string>
