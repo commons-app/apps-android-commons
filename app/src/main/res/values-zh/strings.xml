@@ -552,7 +552,7 @@
   <string name="media_location_permission_denied">已拒绝访问媒体位置</string>
   <string name="add_location_manually">我们可能无法自动从你上传的图片中获取位置数据。提交前请为每张图片添加适当的位置</string>
   <string name="share_text">直接在您手机上的维基共享资源应用中上传照片。立即下载共享资源应用：%1$s</string>
-  <string name="share_via">分享到...</string>
+  <string name="share_via">分享到…</string>
   <string name="image_info">图像信息</string>
   <string name="no_categories_found">找不到分类</string>
   <string name="no_depiction_found">找不到描写。</string>
@@ -687,8 +687,8 @@
   <string name="limited_connection_mode">限制连接模式</string>
   <string name="statistics_quality">优良图片</string>
   <string name="quality_images_info">品质图像是符合一定质量标准（本质上大多是技术性的）的图表或照片，它们对维基媒体计划很有价值</string>
-  <string name="resuming_upload">正在恢复上传...</string>
-  <string name="pausing_upload">暂停上传...</string>
+  <string name="resuming_upload">正在恢复上传…</string>
+  <string name="pausing_upload">暂停上传…</string>
   <string name="cancelling_upload">正在取消上传…</string>
   <string name="cancel_upload">取消上传</string>
   <string name="limited_connection_explanation">您已启用限制连接模式。所有的上传已暂停并将在您禁用此模式后立刻恢复。</string>
@@ -830,7 +830,7 @@
   <string name="other_problem_or_information_please_explain_below">其他问题或信息（请在下方解释）。</string>
   <string name="feedback_destination_note">您的反馈已经发布在以下wiki页面：&lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Mobile_app/Feedback\"&gt;Commons:Mobile app/Feedback&lt;/a&gt;</string>
   <string name="are_you_sure_that_you_want_cancel_all_the_uploads">您确定要取消所有上传吗？</string>
-  <string name="cancelling_all_the_uploads">取消所有的上传...</string>
+  <string name="cancelling_all_the_uploads">取消所有的上传…</string>
   <string name="uploads">上传</string>
   <string name="pending">待处理</string>
   <string name="failed">失败</string>

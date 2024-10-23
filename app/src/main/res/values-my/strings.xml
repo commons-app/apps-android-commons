@@ -49,9 +49,9 @@
   <string name="login">အကောင့်ဝင်ရန်</string>
   <string name="forgot_password">စကားဝှက် မေ့နေပါသလား</string>
   <string name="signup">မှတ်ပုံတင်ရန်</string>
-  <string name="logging_in_title">လော့ဂ်အင် ဝင်ရောက်နေသည်...</string>
-  <string name="logging_in_message">ခေတ္တစောင့်ပါ...</string>
-  <string name="updating_caption_message">ကျေးဇူးပြု၍ ခဏစောင့်ပါ...</string>
+  <string name="logging_in_title">လော့ဂ်အင် ဝင်ရောက်နေသည်…</string>
+  <string name="logging_in_message">ခေတ္တစောင့်ပါ…</string>
+  <string name="updating_caption_message">ကျေးဇူးပြု၍ ခဏစောင့်ပါ…</string>
   <string name="login_success" fuzzy="true">လော့အင် အောင်မြင်သည်</string>
   <string name="login_failed" fuzzy="true">လော့အင် မအောင်မြင်ပါ</string>
   <string name="upload_failed">ဖိုင်မတွေ့ပါ၊ အခြးဖိုင်တစ်ခု စမ်းကြည့်ပါ။</string>
@@ -133,7 +133,7 @@
   <string name="welcome_final_button_text">ဟုတ်ကဲ့</string>
   <string name="welcome_help_button_text">သတင်းအချက်အလက် ပို၍</string>
   <string name="detail_panel_cats_label">ကဏ္ဍများ</string>
-  <string name="detail_panel_cats_loading">ဝန်ဆွဲတင်နေသည်...</string>
+  <string name="detail_panel_cats_loading">ဝန်ဆွဲတင်နေသည်…</string>
   <string name="detail_panel_cats_none">ဘာမှရွေးချယ်မထားပါ</string>
   <string name="detail_caption_empty">ပုံစာ မရှိ</string>
   <string name="detail_description_empty">ဖော်ပြချက် မရှိ</string>
@@ -315,7 +315,7 @@
   <string name="no_notification">မဖတ်ရသေးသော အသိပေးချက်များ မရှိပါ</string>
   <string name="no_read_notification">မဖတ်ရသေးသော အသိပေးချက်များ မရှိပါ</string>
   <string name="error_occurred_in_picking_images">ရုပ်ပုံများကိုရွေးနေစဉ် အမှားဖြစ်ပွားခဲ့ပါသည်</string>
-  <string name="please_wait">ကျေးဇူးပြု၍ ခဏစောင့်ပါ...</string>
+  <string name="please_wait">ကျေးဇူးပြု၍ ခဏစောင့်ပါ…</string>
   <string name="welcome_dont_upload_content_description">နမူနာရုပ်ပုံများ အက်ပလုပ်တင်ရန် မဟုတ်ပါ</string>
   <string name="skip_image">ဤရုပ်ပုံအား ကျော်သွားမည်</string>
   <string name="download_failed_we_cannot_download_the_file_without_storage_permission">ဒေါင်းလုဒ် မအောင်မြင်ပါ။ ပြင်ပသိုလှောင်မှုခွင့်ပြုချက်မရှိဘဲ ဖိုင်ဒေါင်းလုဒ်မဆွဲနိုင်ပါ။</string>

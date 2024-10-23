@@ -560,7 +560,7 @@
   <string name="add_bookmark">ブックマークに追加</string>
   <string name="wallpaper_set_unsuccessfully">問題が発生しました。壁紙を設定できませんでした。</string>
   <string name="setting_wallpaper_dialog_title">壁紙として設定</string>
-  <string name="setting_wallpaper_dialog_message">壁紙を設定中。お待ちください...</string>
+  <string name="setting_wallpaper_dialog_message">壁紙を設定中。お待ちください…</string>
   <string name="theme_default_name">システムのまま</string>
   <string name="theme_dark_name">ダーク</string>
   <string name="theme_light_name">ライト</string>

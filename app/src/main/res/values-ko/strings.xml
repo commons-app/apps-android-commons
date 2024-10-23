@@ -85,7 +85,7 @@
   <string name="logging_in_title">로그인 중</string>
   <string name="logging_in_message">기다려 주세요…</string>
   <string name="updating_caption_title">캡션 및 설명를 업데이트하는 중</string>
-  <string name="updating_caption_message">기다려 주십시오...</string>
+  <string name="updating_caption_message">기다려 주십시오…</string>
   <string name="login_success">로그인 성공!</string>
   <string name="login_failed">로그인 실패!</string>
   <string name="upload_failed">파일을 찾을 수 없습니다. 다른 파일을 사용해 주십시오.</string>
@@ -456,7 +456,7 @@
   <string name="menu_option_read">읽은 항목 보기</string>
   <string name="menu_option_unread">읽지 않은 항목 보기</string>
   <string name="error_occurred_in_picking_images">이미지 선택 도중 오류가 발생했습니다</string>
-  <string name="please_wait">기다려 주십시오...</string>
+  <string name="please_wait">기다려 주십시오…</string>
   <string name="copy_image_caption_description">다음 미디어로 복사</string>
   <string name="copied_successfully">복사했습니다</string>
   <string name="welcome_do_upload_content_description">공용에 업로드할 좋은 이미지의 예</string>
@@ -471,7 +471,7 @@
   <string name="exif_tag_name_lensModel">렌즈 모델</string>
   <string name="exif_tag_name_serialNumbers">일련 번호</string>
   <string name="exif_tag_name_software">소프트웨어</string>
-  <string name="share_via">앱 공유...</string>
+  <string name="share_via">앱 공유…</string>
   <string name="image_info">이미지 정보</string>
   <string name="no_categories_found">분류가 없습니다</string>
   <string name="no_depiction_found">서술이 발견되지 않았습니다</string>
@@ -529,7 +529,7 @@
   <string name="add_bookmark">북마크에 추가됨</string>
   <string name="wallpaper_set_unsuccessfully">무언가 잘못되었습니다. 배경화면을 설정하지 못했습니다</string>
   <string name="setting_wallpaper_dialog_title">배경화면으로 설정</string>
-  <string name="setting_wallpaper_dialog_message">배경화면을 설정 중입니다. 기다려 주십시오...</string>
+  <string name="setting_wallpaper_dialog_message">배경화면을 설정 중입니다. 기다려 주십시오…</string>
   <string name="theme_dark_name">어두운</string>
   <string name="theme_light_name">밝은</string>
   <string name="cannot_open_location_settings">위치 설정을 열지 못했습니다. 위치를 수동으로 켜주세요</string>

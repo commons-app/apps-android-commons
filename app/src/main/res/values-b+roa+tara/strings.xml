@@ -41,7 +41,7 @@
   <string name="forgot_password">Passuord scurdate?</string>
   <string name="signup">Reggistrate</string>
   <string name="logging_in_title">Stoche a tràse…</string>
-  <string name="logging_in_message">Aspitte...</string>
+  <string name="logging_in_message">Aspitte…</string>
   <string name="login_success" fuzzy="true">E\' trasute!</string>
   <string name="login_failed" fuzzy="true">Non g\'è trasute!</string>
   <string name="upload_failed">File non acchiate. Pruève \'n\'otre file.</string>

@@ -71,7 +71,7 @@
   <string name="logging_in_title">Asup log</string>
   <string name="logging_in_message">Tungguan…</string>
   <string name="updating_caption_title">Nganyarkeun pertélaan jeung pedaran</string>
-  <string name="updating_caption_message">Mangga tungguan...</string>
+  <string name="updating_caption_message">Mangga tungguan…</string>
   <string name="login_success" fuzzy="true">Laksana login!</string>
   <string name="login_failed" fuzzy="true">Gagal login!</string>
   <string name="upload_failed">Berkas teu kapanggih. Coba berkas séjén.</string>
@@ -399,7 +399,7 @@
   <string name="menu_option_read" fuzzy="true">Tempo arsip</string>
   <string name="menu_option_unread">Tempo nu can dibaca</string>
   <string name="error_occurred_in_picking_images">Éror pas keur nyomot gambar</string>
-  <string name="please_wait">Mangga tungguan...</string>
+  <string name="please_wait">Mangga tungguan…</string>
   <string name="skip_image">Iwalkeun ieu gambar</string>
   <string name="exif_tag_name_author">Karya</string>
   <string name="exif_tag_name_copyright">Hak cipta</string>
@@ -409,7 +409,7 @@
   <string name="exif_tag_name_serialNumbers">Nomer Seri</string>
   <string name="exif_tag_name_software">Sopwér</string>
   <string name="share_text">Muat poto ka Wikimedia Commons langsung tina ponsél. Unduh Commons App ayeuna: %1$s</string>
-  <string name="share_via">Bagikeun app liwat...</string>
+  <string name="share_via">Bagikeun app liwat…</string>
   <string name="image_info">Info Gambar</string>
   <string name="no_categories_found">Euweuh Kategori kapanggih</string>
   <string name="upload_cancelled">Muatan bedo</string>

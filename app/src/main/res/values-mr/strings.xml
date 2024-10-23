@@ -94,7 +94,7 @@
   <string name="menu_feedback">प्रतिसाद पाठवा (विपत्राद्वारे)</string>
   <string name="no_email_client">कोणतेही ईमेल क्लायंट स्थापित नाहीत</string>
   <string name="provider_categories">अलीकडे वापरलेले वर्ग</string>
-  <string name="waiting_first_sync">प्रथम संकालनाची प्रतीक्षा करीत आहे ...</string>
+  <string name="waiting_first_sync">प्रथम संकालनाची प्रतीक्षा करीत आहे …</string>
   <string name="no_uploads_yet">आपण अद्याप काहीच चित्रे अपभारीत केली नाहीत.</string>
   <string name="menu_retry_upload">पुन्हा प्रयत्न करा</string>
   <string name="menu_cancel_upload">रद्द करा</string>

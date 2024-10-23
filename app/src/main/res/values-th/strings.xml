@@ -398,7 +398,7 @@
   <string name="exif_tag_name_lensModel">รุ่นเลนส์</string>
   <string name="exif_tag_name_serialNumbers">หมายเลขซีเรียล</string>
   <string name="exif_tag_name_software">ซอฟต์แวร์</string>
-  <string name="share_via">แบ่งปันแอปผ่าน...</string>
+  <string name="share_via">แบ่งปันแอปผ่าน…</string>
   <string name="no_categories_found">ไม่พบหมวดหมู่</string>
   <string name="delete_helper_ask_spam_selfie" fuzzy="true">ภาพเซลฟี</string>
   <string name="delete_helper_ask_spam_blurry" fuzzy="true">ภาพเบลอ</string>

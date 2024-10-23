@@ -611,7 +611,7 @@
   <string name="add_bookmark">zu den Lesezeichen hinzugefügt</string>
   <string name="wallpaper_set_unsuccessfully">Etwas ist schiefgelaufen. Das Hintergrundbild konnte nicht eingestellt werden</string>
   <string name="setting_wallpaper_dialog_title">Als Hintergrundbild festlegen</string>
-  <string name="setting_wallpaper_dialog_message">Hintergrundbild wird festgelegt. Bitte warten...</string>
+  <string name="setting_wallpaper_dialog_message">Hintergrundbild wird festgelegt. Bitte warten…</string>
   <string name="theme_default_name">Systemeinstellung</string>
   <string name="theme_dark_name">Dunkel</string>
   <string name="theme_light_name">Hell</string>
