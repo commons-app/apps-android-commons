@@ -49,6 +49,7 @@ import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts.RequestMultiplePermissions;
 import androidx.activity.result.contract.ActivityResultContracts.RequestPermission;
+import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -225,6 +226,31 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     private GridLayoutManager gridLayoutManager;
     private List<BottomSheetItem> dataList;
     private BottomSheetAdapter bottomSheetAdapter;
+
+    private final ActivityResultLauncher<Intent> galleryPickLauncherForResult =
+        registerForActivityResult(new StartActivityForResult(),
+        result -> {
+            controller.handleActivityResultWithCallback(requireActivity(), callbacks -> {
+                controller.onPictureReturnedFromGallery(result, requireActivity(), callbacks);
+            });
+        });
+
+    private final ActivityResultLauncher<Intent> customSelectorLauncherForResult =
+        registerForActivityResult(new StartActivityForResult(),
+        result -> {
+            controller.handleActivityResultWithCallback(requireActivity(), callbacks -> {
+                controller.onPictureReturnedFromCustomSelector(result, requireActivity(), callbacks);
+            });
+        });
+
+    private final ActivityResultLauncher<Intent> cameraPickLauncherForResult =
+        registerForActivityResult(new StartActivityForResult(),
+        result -> {
+            controller.handleActivityResultWithCallback(requireActivity(), callbacks -> {
+                controller.onPictureReturnedFromCamera(result, requireActivity(), callbacks);
+            });
+        });
+
     private ActivityResultLauncher<String[]> inAppCameraLocationPermissionLauncher = registerForActivityResult(
         new RequestMultiplePermissions(),
         new ActivityResultCallback<Map<String, Boolean>>() {
@@ -240,7 +266,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                 } else {
                     if (shouldShowRequestPermissionRationale(permission.ACCESS_FINE_LOCATION)) {
                         controller.handleShowRationaleFlowCameraLocation(getActivity(),
-                            inAppCameraLocationPermissionLauncher);
+                            inAppCameraLocationPermissionLauncher, cameraPickLauncherForResult);
                     } else {
                         controller.locationPermissionCallback.onLocationPermissionDenied(
                             getActivity().getString(
@@ -570,7 +596,9 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                 return Unit.INSTANCE;
             },
             commonPlaceClickActions,
-            inAppCameraLocationPermissionLauncher
+            inAppCameraLocationPermissionLauncher,
+            galleryPickLauncherForResult,
+            cameraPickLauncherForResult
         );
         binding.bottomSheetNearby.rvNearbyList.setAdapter(adapter);
     }
@@ -2201,7 +2229,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             if (binding.fabCamera.isShown()) {
                 Timber.d("Camera button tapped. Place: %s", selectedPlace.toString());
                 storeSharedPrefs(selectedPlace);
-                controller.initiateCameraPick(getActivity(), inAppCameraLocationPermissionLauncher);
+                controller.initiateCameraPick(getActivity(), inAppCameraLocationPermissionLauncher, cameraPickLauncherForResult);
             }
         });
 
@@ -2210,6 +2238,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                 Timber.d("Gallery button tapped. Place: %s", selectedPlace.toString());
                 storeSharedPrefs(selectedPlace);
                 controller.initiateGalleryPick(getActivity(),
+                    galleryPickLauncherForResult,
                     false);
             }
         });
@@ -2218,7 +2247,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             if (binding.fabCustomGallery.isShown()) {
                 Timber.d("Gallery button tapped. Place: %s", selectedPlace.toString());
                 storeSharedPrefs(selectedPlace);
-                controller.initiateCustomGalleryPickWithPermission(getActivity());
+                controller.initiateCustomGalleryPickWithPermission(getActivity(), customSelectorLauncherForResult);
             }
         });
     }

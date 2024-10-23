@@ -1,8 +1,10 @@
 package fr.free.nrw.commons.customselector.ui.selector
 
+import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import androidx.activity.result.ActivityResult
 import fr.free.nrw.commons.OkHttpConnectionFactory
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.contributions.ContributionDao
@@ -98,20 +100,20 @@ class CustomSelectorActivityTest {
     }
 
     /**
-     * Test onActivityResult function.
+     * Test callback when result received.
      */
     @Test
     @Throws(Exception::class)
-    fun testOnActivityResult() {
+    fun testResultLauncher() {
+        val intent = Mockito.mock(Intent::class.java)
+        val activityResult = ActivityResult(Activity.RESULT_OK, intent)
         val func =
             activity.javaClass.getDeclaredMethod(
-                "onActivityResult",
-                Int::class.java,
-                Int::class.java,
-                Intent::class.java,
+                "onFullScreenDataReceived",
+                ActivityResult::class.java,
             )
         func.isAccessible = true
-        func.invoke(activity, 512, -1, Mockito.mock(Intent::class.java))
+        func.invoke(activity, activityResult)
     }
 
     /**
