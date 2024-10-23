@@ -45,44 +45,37 @@
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">מועלה קובץ אחד</item>
     <item quantity="two">מועלים %1$d קבצים</item>
-    <item quantity="many">מועלים %1$d קבצים</item>
     <item quantity="other">מועלים %1$d קבצים</item>
   </plurals>
   <plurals name="contributions_subtitle">
     <item quantity="one">(%1$d)</item>
     <item quantity="two">(%1$d)</item>
-    <item quantity="many">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
   <string name="starting_uploads">ההעלאות מתחילות</string>
   <plurals name="starting_multiple_uploads">
     <item quantity="one">עיבוד העלאה</item>
     <item quantity="two">עיבוד d% העלאות</item>
-    <item quantity="many">עיבוד d% העלאות</item>
     <item quantity="other">עיבוד d% העלאות</item>
   </plurals>
   <plurals name="multiple_uploads_title">
     <item quantity="one">העלאה אחת</item>
     <item quantity="two">%d העלאות</item>
-    <item quantity="many">%d העלאות</item>
     <item quantity="other">%d העלאות</item>
   </plurals>
   <plurals name="share_license_summary">
     <item quantity="one">התמונה הזאת תפורסם ברישיון %1$s</item>
     <item quantity="two">התמונות האלה תפורסמנה ברישיון %1$s</item>
-    <item quantity="many">התמונות האלה תפורסמנה ברישיון %1$s</item>
     <item quantity="other">התמונות האלה תפורסמנה ברישיון %1$s</item>
   </plurals>
   <plurals name="upload_count_title">
     <item quantity="one">העלאה אחת</item>
     <item quantity="two">%1$d העלאות</item>
-    <item quantity="many">%1$d העלאות</item>
     <item quantity="other">%1$d העלאות</item>
   </plurals>
   <plurals name="receiving_shared_content">
     <item quantity="one">מתקבל תוכן שיתופי. עיבוד התמונה עשוי לארוך זמן מה כתלות בגודל התמונה והמכשיר שלך</item>
     <item quantity="two">מתקבל תוכן שיתופי. עיבוד התמונות עשוי לארוך זמן מה כתלות בגודל התמונות והמכשיר שלך</item>
-    <item quantity="many">מתקבל תוכן שיתופי. עיבוד התמונות עשוי לארוך זמן מה כתלות בגודל התמונות והמכשיר שלך</item>
     <item quantity="other">מתקבל תוכן שיתופי. עיבוד התמונות עשוי לארוך זמן מה כתלות בגודל התמונות והמכשיר שלך</item>
   </plurals>
   <string name="navigation_item_explore">לחקור</string>
@@ -558,7 +551,6 @@
   <plurals name="category_edit_helper_show_edit_message_if">
     <item quantity="one">נוספה קטגוריה.</item>
     <item quantity="two">נוספו %1$s קטגוריות.</item>
-    <item quantity="many">נוספו %1$s קטגוריות.</item>
     <item quantity="other">נוספו %1$s קטגוריות.</item>
   </plurals>
   <string name="category_edit_helper_edit_message_else">לא ניתן להוסיף קטגוריות.</string>
@@ -568,7 +560,6 @@
   <plurals name="depictions_edit_helper_show_edit_message_if">
     <item quantity="one">נוסף מוצג %1$s</item>
     <item quantity="two">נוספו המוצגים %1$s</item>
-    <item quantity="many">נוספו המוצגים %1$s</item>
     <item quantity="other">נוספו המוצגים %1$s</item>
   </plurals>
   <string name="depictions_edit_helper_edit_message_else">לא היה אפשר להוסיף מוצגים.</string>
@@ -801,7 +792,6 @@
   <plurals name="custom_picker_images_selected_title_appendix">
     <item quantity="one">נבחרה תמונה אחת</item>
     <item quantity="two">נבחרו שתי תמונות</item>
-    <item quantity="many">נבחרו %d תמונות</item>
     <item quantity="other">נבחרו %d תמונות</item>
   </plurals>
   <string name="multiple_files_depiction">נא לזכור שכשמועלות כמה תמונות, כולן מקבלות את אותן הקטגוריות והמוצגים. אם התמונות אינן חולקות מוצגים וקטגוריות, נא לעשות כמה העלאות נפרדות.</string>
