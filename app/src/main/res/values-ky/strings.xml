@@ -21,7 +21,6 @@
     <item quantity="other">%1$d файл жүктөлүүдө</item>
   </plurals>
   <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">Азырынча жүктөөлөр жок</item>
     <item quantity="one">1 жүктөө</item>
     <item quantity="other">%1$d жүктөө</item>
   </plurals>
