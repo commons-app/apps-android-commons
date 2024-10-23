@@ -12,6 +12,8 @@ import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.text.TextUtils;
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultLauncher;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.preference.PreferenceManager;
@@ -107,31 +109,25 @@ public class FilePicker implements Constants {
      *
      * @param type Custom type of your choice, which will be returned with the images
      */
-    public static void openGallery(Activity activity, int type, boolean openDocumentIntentPreferred) {
+    public static void openGallery(Activity activity, ActivityResultLauncher<Intent> resultLauncher, int type, boolean openDocumentIntentPreferred) {
         Intent intent = createGalleryIntent(activity, type, openDocumentIntentPreferred);
-        int requestCode = RequestCodes.PICK_PICTURE_FROM_GALLERY;
-
-            if(openDocumentIntentPreferred){
-                requestCode = RequestCodes.PICK_PICTURE_FROM_DOCUMENTS;
-            }
-
-        activity.startActivityForResult(intent, requestCode);
+        resultLauncher.launch(intent);
     }
 
     /**
      * Opens Custom Selector
      */
-    public static void openCustomSelector(Activity activity, int type) {
+    public static void openCustomSelector(Activity activity, ActivityResultLauncher<Intent> resultLauncher, int type) {
         Intent intent = createCustomSelectorIntent(activity, type);
-        activity.startActivityForResult(intent, RequestCodes.PICK_PICTURE_FROM_CUSTOM_SELECTOR);
+        resultLauncher.launch(intent);
     }
 
     /**
      * Opens the camera app to pick image clicked by user 
      */
-    public static void openCameraForImage(Activity activity, int type) {
+    public static void openCameraForImage(Activity activity, ActivityResultLauncher<Intent> resultLauncher, int type) {
         Intent intent = createCameraForImageIntent(activity, type);
-        activity.startActivityForResult(intent, RequestCodes.TAKE_PICTURE);
+        resultLauncher.launch(intent);
     }
 
     @Nullable
@@ -151,43 +147,6 @@ public class FilePicker implements Constants {
             return new UploadableFile(new File(lastCameraPhoto));
         } else {
             return null;
-        }
-    }
-
-    /**
-     * Any activity can use this method to attach their callback to the file picker
-     */
-    public static void handleActivityResult(int requestCode, int resultCode, Intent data, Activity activity, @NonNull FilePicker.Callbacks callbacks) {
-        boolean isHandledPickedFile = (requestCode & RequestCodes.FILE_PICKER_IMAGE_IDENTIFICATOR) > 0;
-        if (isHandledPickedFile) {
-            requestCode &= ~RequestCodes.SOURCE_CHOOSER;
-            if (requestCode == RequestCodes.PICK_PICTURE_FROM_GALLERY ||
-                    requestCode == RequestCodes.TAKE_PICTURE ||
-                    requestCode == RequestCodes.PICK_PICTURE_FROM_DOCUMENTS ||
-                    requestCode == RequestCodes.PICK_PICTURE_FROM_CUSTOM_SELECTOR) {
-                if (resultCode == Activity.RESULT_OK) {
-                    if (requestCode == RequestCodes.PICK_PICTURE_FROM_DOCUMENTS && !isPhoto(data)) {
-                        onPictureReturnedFromDocuments(data, activity, callbacks);
-                    } else if (requestCode == RequestCodes.PICK_PICTURE_FROM_GALLERY && !isPhoto(data)) {
-                        onPictureReturnedFromGallery(data, activity, callbacks);
-                    } else if (requestCode == RequestCodes.PICK_PICTURE_FROM_CUSTOM_SELECTOR) {
-                        onPictureReturnedFromCustomSelector(data, activity, callbacks);
-                    } else if (requestCode == RequestCodes.TAKE_PICTURE) {
-                        onPictureReturnedFromCamera(activity, callbacks);
-                    }
-                } else {
-                    if (requestCode == RequestCodes.PICK_PICTURE_FROM_DOCUMENTS) {
-                        callbacks.onCanceled(FilePicker.ImageSource.DOCUMENTS, restoreType(activity));
-                    } else if (requestCode == RequestCodes.PICK_PICTURE_FROM_GALLERY) {
-                        callbacks.onCanceled(FilePicker.ImageSource.GALLERY, restoreType(activity));
-                    } else if (requestCode == RequestCodes.PICK_PICTURE_FROM_CUSTOM_SELECTOR){
-                        callbacks.onCanceled(ImageSource.CUSTOM_SELECTOR, restoreType(activity));
-                    }
-                    else {
-                        callbacks.onCanceled(FilePicker.ImageSource.CAMERA_IMAGE, restoreType(activity));
-                    }
-                }
-            }
         }
     }
 
@@ -243,18 +202,22 @@ public class FilePicker implements Constants {
         return intent;
     }
 
-    private static void onPictureReturnedFromDocuments(Intent data, Activity activity, @NonNull FilePicker.Callbacks callbacks) {
-        try {
-            Uri photoPath = data.getData();
-            UploadableFile photoFile = PickedFiles.pickedExistingPicture(activity, photoPath);
-            callbacks.onImagesPicked(singleFileList(photoFile), FilePicker.ImageSource.DOCUMENTS, restoreType(activity));
+    public static void onPictureReturnedFromDocuments(ActivityResult result, Activity activity, @NonNull FilePicker.Callbacks callbacks) {
+        if(result.getResultCode() == Activity.RESULT_OK && !isPhoto(result.getData())){
+            try {
+                Uri photoPath = result.getData().getData();
+                UploadableFile photoFile = PickedFiles.pickedExistingPicture(activity, photoPath);
+                callbacks.onImagesPicked(singleFileList(photoFile), FilePicker.ImageSource.DOCUMENTS, restoreType(activity));
 
-            if (configuration(activity).shouldCopyPickedImagesToPublicGalleryAppFolder()) {
-                PickedFiles.copyFilesInSeparateThread(activity, singleFileList(photoFile));
+                if (configuration(activity).shouldCopyPickedImagesToPublicGalleryAppFolder()) {
+                    PickedFiles.copyFilesInSeparateThread(activity, singleFileList(photoFile));
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                callbacks.onImagePickerError(e, FilePicker.ImageSource.DOCUMENTS, restoreType(activity));
             }
-        } catch (Exception e) {
-            e.printStackTrace();
-            callbacks.onImagePickerError(e, FilePicker.ImageSource.DOCUMENTS, restoreType(activity));
+        } else {
+            callbacks.onCanceled(FilePicker.ImageSource.DOCUMENTS, restoreType(activity));
         }
     }
 
@@ -262,14 +225,18 @@ public class FilePicker implements Constants {
      * onPictureReturnedFromCustomSelector.
      * Retrieve and forward the images to upload wizard through callback.
      */
-    private static void onPictureReturnedFromCustomSelector(Intent data, Activity activity, @NonNull FilePicker.Callbacks callbacks) {
-        try {
-            List<UploadableFile> files = getFilesFromCustomSelector(data, activity);
-            callbacks.onImagesPicked(files, ImageSource.CUSTOM_SELECTOR, restoreType(activity));
-        } catch (Exception e) {
-            e.printStackTrace();
-            callbacks.onImagePickerError(e, ImageSource.CUSTOM_SELECTOR, restoreType(activity));
-        }
+    public static void onPictureReturnedFromCustomSelector(ActivityResult result, Activity activity, @NonNull FilePicker.Callbacks callbacks) {
+       if(result.getResultCode() == Activity.RESULT_OK){
+           try {
+               List<UploadableFile> files = getFilesFromCustomSelector(result.getData(), activity);
+               callbacks.onImagesPicked(files, ImageSource.CUSTOM_SELECTOR, restoreType(activity));
+           } catch (Exception e) {
+               e.printStackTrace();
+               callbacks.onImagePickerError(e, ImageSource.CUSTOM_SELECTOR, restoreType(activity));
+           }
+       } else {
+           callbacks.onCanceled(ImageSource.CUSTOM_SELECTOR, restoreType(activity));
+       }
     }
 
     /**
@@ -292,13 +259,17 @@ public class FilePicker implements Constants {
         return files;
     }
 
-    private static void onPictureReturnedFromGallery(Intent data, Activity activity, @NonNull FilePicker.Callbacks callbacks) {
-        try {
-            List<UploadableFile> files = getFilesFromGalleryPictures(data, activity);
-            callbacks.onImagesPicked(files, FilePicker.ImageSource.GALLERY, restoreType(activity));
-        } catch (Exception e) {
-            e.printStackTrace();
-            callbacks.onImagePickerError(e, FilePicker.ImageSource.GALLERY, restoreType(activity));
+    public static void onPictureReturnedFromGallery(ActivityResult result, Activity activity, @NonNull FilePicker.Callbacks callbacks) {
+        if(result.getResultCode() == Activity.RESULT_OK && !isPhoto(result.getData())){
+            try {
+                List<UploadableFile> files = getFilesFromGalleryPictures(result.getData(), activity);
+                callbacks.onImagesPicked(files, FilePicker.ImageSource.GALLERY, restoreType(activity));
+            } catch (Exception e) {
+                e.printStackTrace();
+                callbacks.onImagePickerError(e, FilePicker.ImageSource.GALLERY, restoreType(activity));
+            }
+        } else{
+            callbacks.onCanceled(FilePicker.ImageSource.GALLERY, restoreType(activity));
         }
     }
 
@@ -324,69 +295,40 @@ public class FilePicker implements Constants {
         return files;
     }
 
-    private static void onPictureReturnedFromCamera(Activity activity, @NonNull FilePicker.Callbacks callbacks) {
-        try {
-            String lastImageUri = PreferenceManager.getDefaultSharedPreferences(activity).getString(KEY_PHOTO_URI, null);
-            if (!TextUtils.isEmpty(lastImageUri)) {
-                revokeWritePermission(activity, Uri.parse(lastImageUri));
-            }
-
-            UploadableFile photoFile = FilePicker.takenCameraPicture(activity);
-            List<UploadableFile> files = new ArrayList<>();
-            files.add(photoFile);
-
-            if (photoFile == null) {
-                Exception e = new IllegalStateException("Unable to get the picture returned from camera");
-                callbacks.onImagePickerError(e, FilePicker.ImageSource.CAMERA_IMAGE, restoreType(activity));
-            } else {
-                if (configuration(activity).shouldCopyTakenPhotosToPublicGalleryAppFolder()) {
-                    PickedFiles.copyFilesInSeparateThread(activity, singleFileList(photoFile));
+    public static void onPictureReturnedFromCamera(ActivityResult activityResult, Activity activity, @NonNull FilePicker.Callbacks callbacks) {
+        if(activityResult.getResultCode() == Activity.RESULT_OK){
+            try {
+                String lastImageUri = PreferenceManager.getDefaultSharedPreferences(activity).getString(KEY_PHOTO_URI, null);
+                if (!TextUtils.isEmpty(lastImageUri)) {
+                    revokeWritePermission(activity, Uri.parse(lastImageUri));
                 }
 
-                callbacks.onImagesPicked(files, FilePicker.ImageSource.CAMERA_IMAGE, restoreType(activity));
-            }
+                UploadableFile photoFile = FilePicker.takenCameraPicture(activity);
+                List<UploadableFile> files = new ArrayList<>();
+                files.add(photoFile);
 
-            PreferenceManager.getDefaultSharedPreferences(activity)
+                if (photoFile == null) {
+                    Exception e = new IllegalStateException("Unable to get the picture returned from camera");
+                    callbacks.onImagePickerError(e, FilePicker.ImageSource.CAMERA_IMAGE, restoreType(activity));
+                } else {
+                    if (configuration(activity).shouldCopyTakenPhotosToPublicGalleryAppFolder()) {
+                        PickedFiles.copyFilesInSeparateThread(activity, singleFileList(photoFile));
+                    }
+
+                    callbacks.onImagesPicked(files, FilePicker.ImageSource.CAMERA_IMAGE, restoreType(activity));
+                }
+
+                PreferenceManager.getDefaultSharedPreferences(activity)
                     .edit()
                     .remove(KEY_LAST_CAMERA_PHOTO)
                     .remove(KEY_PHOTO_URI)
                     .apply();
-        } catch (Exception e) {
-            e.printStackTrace();
-            callbacks.onImagePickerError(e, FilePicker.ImageSource.CAMERA_IMAGE, restoreType(activity));
-        }
-    }
-
-    private static void onVideoReturnedFromCamera(Activity activity, @NonNull FilePicker.Callbacks callbacks) {
-        try {
-            String lastVideoUri = PreferenceManager.getDefaultSharedPreferences(activity).getString(KEY_VIDEO_URI, null);
-            if (!TextUtils.isEmpty(lastVideoUri)) {
-                revokeWritePermission(activity, Uri.parse(lastVideoUri));
+            } catch (Exception e) {
+                e.printStackTrace();
+                callbacks.onImagePickerError(e, FilePicker.ImageSource.CAMERA_IMAGE, restoreType(activity));
             }
-
-            UploadableFile photoFile = FilePicker.takenCameraVideo(activity);
-            List<UploadableFile> files = new ArrayList<>();
-            files.add(photoFile);
-
-            if (photoFile == null) {
-                Exception e = new IllegalStateException("Unable to get the video returned from camera");
-                callbacks.onImagePickerError(e, FilePicker.ImageSource.CAMERA_VIDEO, restoreType(activity));
-            } else {
-                if (configuration(activity).shouldCopyTakenPhotosToPublicGalleryAppFolder()) {
-                    PickedFiles.copyFilesInSeparateThread(activity, singleFileList(photoFile));
-                }
-
-                callbacks.onImagesPicked(files, FilePicker.ImageSource.CAMERA_VIDEO, restoreType(activity));
-            }
-
-            PreferenceManager.getDefaultSharedPreferences(activity)
-                    .edit()
-                    .remove(KEY_LAST_CAMERA_VIDEO)
-                    .remove(KEY_VIDEO_URI)
-                    .apply();
-        } catch (Exception e) {
-            e.printStackTrace();
-            callbacks.onImagePickerError(e, FilePicker.ImageSource.CAMERA_VIDEO, restoreType(activity));
+        } else {
+            callbacks.onCanceled(FilePicker.ImageSource.CAMERA_IMAGE, restoreType(activity));
         }
     }
 
@@ -405,5 +347,9 @@ public class FilePicker implements Constants {
         void onImagesPicked(@NonNull List<UploadableFile> imageFiles, FilePicker.ImageSource source, int type);
 
         void onCanceled(FilePicker.ImageSource source, int type);
+    }
+
+    public interface HandleActivityResult{
+        void onHandleActivityResult(FilePicker.Callbacks callbacks);
     }
 }
