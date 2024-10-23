@@ -61,7 +61,6 @@
     <item quantity="other">%1$d Unggahan</item>
   </plurals>
   <plurals name="receiving_shared_content">
-    <item quantity="one">Sedang menerima konten yang dibagikan. Memproses gambar mungkin memerlukan waktu lebih lama tergantung pada ukuran gambar dan perangkat Anda</item>
     <item quantity="other">Sedang menerima konten yang dibagikan. Memproses gambar mungkin memerlukan waktu lebih lama tergantung pada ukuran gambar dan perangkat Anda</item>
   </plurals>
   <string name="navigation_item_explore">Jelajahi</string>
@@ -523,7 +522,6 @@
   <string name="category_edit_helper_show_edit_title">Pembaruan kategori</string>
   <string name="category_edit_helper_show_edit_title_success">Berhasil</string>
   <plurals name="category_edit_helper_show_edit_message_if">
-    <item quantity="one">Kategori %1$s ditambahkan.</item>
     <item quantity="other">Kategori %1$s ditambahkan.</item>
   </plurals>
   <string name="category_edit_helper_edit_message_else">Tidak bisa menambahkan kategori.</string>
