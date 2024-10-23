@@ -34,32 +34,39 @@
   <string name="appwidget_img">Слика дана</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">%1$d датотека се отпрема</item>
+    <item quantity="few">%1$d датотеке се отпремају</item>
     <item quantity="other">%1$d датотеке се отпремају</item>
   </plurals>
   <plurals name="contributions_subtitle">
     <item quantity="one">%1$d отпремање</item>
+    <item quantity="few">%1$d отпремања</item>
     <item quantity="other">%1$d отпремања</item>
   </plurals>
   <string name="starting_uploads">Покретање отпремања</string>
   <plurals name="starting_multiple_uploads">
     <item quantity="one">Процесуирање %d отпремање</item>
+    <item quantity="few">Процесуирање %d отпремања</item>
     <item quantity="other">Процесуирање %d отпремања</item>
   </plurals>
   <plurals name="multiple_uploads_title">
     <item quantity="one">%d отпремање</item>
+    <item quantity="few">%1$d отпремања</item>
     <item quantity="other">%d отпремања</item>
   </plurals>
   <plurals name="share_license_summary">
     <item quantity="one">Слика ће се водити под лиценцом %1$s</item>
+    <item quantity="few">Слике неће бити под лиценцом %1$s</item>
     <item quantity="other">Слике ће се водити под лиценцом %1$s</item>
   </plurals>
   <plurals name="upload_count_title">
     <item quantity="one">%1$d отпремање</item>
+    <item quantity="few">%1$d отпремања</item>
     <item quantity="other">%1$d отпремања</item>
   </plurals>
   <plurals name="receiving_shared_content">
-    <item quantity="one">Примање дељеног садржаја... Процесуирање слике може потрајати неко време, у зависности од величине слике и вашег уређаја</item>
-    <item quantity="other">Примање дељеног садржаја... Процесуирање слика може потрајати неко време, у зависности од величине слика и вашег уређаја</item>
+    <item quantity="one">Пријем %d дељеног садржаја… Процесуирање слике може потрајати неко време, у зависности од величине слике и вашег уређаја</item>
+    <item quantity="few">Пријем %d дељеног садржаја… Процесуирање слика може потрајати неко време, у зависности од величине слика и вашег уређаја</item>
+    <item quantity="other">Пријем %d дељеног садржаја… Процесуирање слика може потрајати неко време, у зависности од величине слика и вашег уређаја</item>
   </plurals>
   <string name="navigation_item_explore">Истрага</string>
   <string name="preference_category_appearance">Изглед</string>
