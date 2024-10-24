@@ -10,6 +10,7 @@ import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
+import fr.free.nrw.commons.CommonsApplication
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestCommonsApplication
@@ -19,6 +20,8 @@ import fr.free.nrw.commons.description.EditDescriptionConstants.WIKITEXT
 import fr.free.nrw.commons.settings.Prefs
 import fr.free.nrw.commons.upload.UploadMediaDetail
 import fr.free.nrw.commons.upload.UploadMediaDetailAdapter
+import io.mockk.every
+import io.mockk.mockkObject
 import org.junit.Assert
 import org.junit.Assert.assertEquals
 import org.junit.Before
@@ -54,6 +57,9 @@ class DescriptionEditActivityUnitTest {
     @Mock
     private lateinit var rvDescriptions: RecyclerView
 
+    @Mock
+    private lateinit var commonsApplication: CommonsApplication
+
     private lateinit var media: Media
 
     @Before
@@ -82,6 +88,8 @@ class DescriptionEditActivityUnitTest {
         bundle.putString(Prefs.DESCRIPTION_LANGUAGE, "bn")
         bundle.putParcelable("media", media)
         intent.putExtras(bundle)
+        mockkObject(CommonsApplication)
+        every { CommonsApplication.instance }.returns(commonsApplication)
         activity =
             Robolectric.buildActivity(DescriptionEditActivity::class.java, intent).create().get()
         binding = ActivityDescriptionEditBinding.inflate(LayoutInflater.from(activity))
