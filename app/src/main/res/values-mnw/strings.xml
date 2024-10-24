@@ -240,10 +240,6 @@
   <string name="about_translate_title">အရေဝ်ဘာသာဂမၠိုင်</string>
   <string name="about_translate_cancel">တးပဲါ</string>
   <string name="retry">ကလေင်ကၠောန်</string>
-  <string name="showcase_view_whole_nearby_activity">သွက်ဂွံစုတ် ဗီုပ္ဍဲကဵု လိက်ပရေင်ဝဳကဳပဳဒဳယာညးတအ်ဂှ် ဗီုရုပ်ဂမၠိုင် ပ္ဍဲဒေသဂှ် နွံဒၟံင်။\n\nဍဵု ပ္ဍဲ \'SEARCH THIS AREA\' ပ္ဍဲကဵု ဗီုတိ တုဲပၠန် ဂၠာဲဗဒင်ဗဒင် ပ္ဍဲကဵုဒေသဂှ်။</string>
-  <string name="showcase_view_needs_photo">ဒၞာဲဏအ် နွံပၟိက်ဒၟံင် ဗီုရုပ်မွဲ။</string>
-  <string name="showcase_view_has_photo">ဒၞာဲဏအ် ကလိဂွံလဝ် ဗီုရုပ်မွဲ တုဲရ။</string>
-  <string name="showcase_view_no_longer_exists">ဒၞာဲဏအ်ဂှ် ဟွံမဲရ။</string>
   <string name="no_images_found">ဟွံဂွံဆဵု ဗီုရုပ်!</string>
   <string name="error_loading_images">ဗၠေတ် ကတဵုဒှ်ကၠုင် အဃောမပၠုပ်ဒၟံင် ဗီုရုပ်ဂမၠိုင်။</string>
   <string name="image_uploaded_by">ပတိုန်လဝ် နကဵု: %1$s</string>

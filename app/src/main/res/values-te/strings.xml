@@ -271,10 +271,6 @@
   <string name="about_translate_proceed">పద</string>
   <string name="about_translate_cancel">రద్దుచేయి</string>
   <string name="retry">మళ్ళీ ప్రయత్నించు</string>
-  <string name="showcase_view_whole_nearby_activity">మీ చుట్టుపక్కల ఈ స్థలాల గురించిన వికీపీడియా వ్యాసాల్లో బొమ్మలు అవసరం.\n\n\'ఈ ప్రాంతంలో వెతుకు\' నొక్కితే, మ్యాపును లాక్ చేసి, ఈ స్థలం చుట్టుపట్ల వెతకడం మొదలు పెడుతుంది.</string>
-  <string name="showcase_view_needs_photo">ఈ స్థలానికి ఒక ఫొటో కావాలి.</string>
-  <string name="showcase_view_has_photo">ఈ స్థలానికి ఈసరికే ఒక ఫొటో ఉంది.</string>
-  <string name="showcase_view_no_longer_exists">ఈ స్థలం ఇప్పుడు ఉనికిలో లేదు.</string>
   <string name="no_images_found">బొమ్మలేమీ కనబడలేదు!</string>
   <string name="error_loading_images">బొమ్మలను లోడు చేసేటపుడు లోపం దొర్లింది.</string>
   <string name="image_uploaded_by">ఎక్కించినవారు: %1$s</string>
