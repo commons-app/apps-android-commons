@@ -127,6 +127,7 @@ public class NearbyPlaces {
      *
      * @param placeList A list of Place objects for which to fetch information.
      * @param lang      The language code to use for the query.
+     * @param lang2      The serialised secondary language code to use for the query.
      * @return A list of Place objects obtained from the Wikidata query.
      * @throws Exception If an error occurs during the retrieval process.
      */

@@ -290,6 +290,13 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         });
     }
 
+    /**
+     * Updates the ListView to display saved languages using the SavedLanguagesAdapter.
+     *
+     * @param savedLanguageListView  The ListView that will display the saved languages.
+     * @param savedLanguages         A list of saved Language objects to be displayed.
+     * @param selectedLanguages      A HashMap containing the selected language IDs and their corresponding names.
+     */
     private void updateSavedLanguages(ListView savedLanguageListView, List<Language> savedLanguages, HashMap<Integer, String> selectedLanguages) {
         // Use SavedLanguagesAdapter to display saved languages
         SavedLanguagesAdapter savedLanguagesAdapter = new SavedLanguagesAdapter(
@@ -302,6 +309,12 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         savedLanguageListView.setAdapter(savedLanguagesAdapter);
     }
 
+    /**
+     * Deserializes a comma-separated string of language codes into an ArrayList of strings.
+     *
+     * @param languageCodes  A string containing language codes separated by commas.
+     * @return               An ArrayList of language codes, or an empty ArrayList if the input is null or empty.
+     */
     private ArrayList<String> deSerialise(String languageCodes) {
         // Check if the stored string is empty or null
         if (languageCodes == null || languageCodes.isEmpty()) {
@@ -313,21 +326,21 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         return new ArrayList<>(Arrays.asList(languageArray));  // Convert array to ArrayList and return
     }
 
-
+    /**
+     * Prepare and Show language selection dialog box
+     * Disable default/already selected language from dialog box
+     * Saves values chosen by user to shared preferences as a serialised string.
+     */
     private void prepareSecondaryLanguageDialog() {
         final String languageCode = getCurrentLanguageCode("descriptionSecondaryLanguagePref");
         HashMap<Integer, String> selectedLanguages = new HashMap<>();
         assert languageCode != null;
         selectedLanguages.put(0, Locale.getDefault().getLanguage());
-        System.out.println(Locale.getDefault().getLanguage());
-        System.out.println(languageCode);
 
         // Deserializing saved language codes to Language objects
         ArrayList<Language> savedLanguages = new ArrayList<>();
         for (String code : deSerialise(languageCode)) {
-            System.out.println(code);
             if(code.equals(Locale.getDefault().getLanguage())){
-                System.out.println("match");
                 continue;
             }
             Locale locale = new Locale(code);
@@ -633,42 +646,10 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         separator.setVisibility(View.GONE);
     }
 
-    private String reSerialise(ArrayList<String> languageCodes) {
-        // Join the elements of the list into a single string, separated by a comma and a space
-        return String.join(", ", languageCodes);
-    }
-
     /**
      * Changing the default app language with selected one and save it to SharedPreferences
      */
     public void setLocale(final Activity activity, String userSelectedValue) {
-//        if (userSelectedValue.equals("")) {
-//            userSelectedValue = Locale.getDefault().getLanguage();
-//        }
-//
-//        String current = Locale.getDefault().getLanguage();
-//        ArrayList<String> languageCodes = deSerialise(current);
-//        if(appUI) {
-//            languageCodes.set(0, userSelectedValue);
-//            userSelectedValue = reSerialise(languageCodes);
-//            }
-//        else{
-//            ArrayList<String> newLanguageCodes = new ArrayList<>();
-//            ArrayList<String> userSelctedCode = deSerialise(userSelectedValue);
-//
-//            newLanguageCodes.add(languageCodes.get(0));
-//            for(String code : userSelctedCode){
-//                newLanguageCodes.add(code);
-//            }
-//            userSelectedValue = reSerialise(newLanguageCodes);
-//        }
-//
-//        System.out.println("Final locale");
-//        System.out.println(userSelectedValue);
-//
-//        System.out.println("vs");
-//        System.out.println(getCurrentLanguageCode("appUiDefaultLanguagePref"));
-//        System.out.println(getCurrentLanguageCode("descriptionSecondaryLanguagePref"));
 
         final Locale locale = createLocale(userSelectedValue);
         Locale.setDefault(locale);

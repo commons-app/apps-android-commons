@@ -400,35 +400,43 @@ public class OkHttpJsonApiClient {
     /**
      * Retrieves a list of places based on the provided list of places and language.
      *
-     * @param placeList A list of Place objects for which to fetch information.
-     * @param language  The language code to use for the query.
+     * @param placeList           A list of Place objects for which to fetch information.
+     * @param language            The language code to use for the query.
+     * @param secondaryLanguages  The serialized secondary language code(s) to use for fallback queries.
      * @return A list of Place objects with additional information retrieved from Wikidata, or null
-     * if an error occurs.
+     *         if an error occurs.
      * @throws IOException If there is an issue with reading the resource file or executing the HTTP
      *                     request.
      */
     @Nullable
     public List<Place> getPlaces(
         final List<Place> placeList, final String language, final String secondaryLanguages) throws IOException {
-        final String wikidataQuery = FileUtils.readFromResource("/queries/query_for_item.rq");
-        final String[] secondaryLanguageArray = secondaryLanguages.split(",\\s*"); // could be used to generate backup SparQL Queries
 
+        // Read the SparQL query template from the resource file
+        final String wikidataQuery = FileUtils.readFromResource("/queries/query_for_item.rq");
+
+        // Split the secondary languages string into an array to use in fallback queries
+        final String[] secondaryLanguageArray = secondaryLanguages.split(",\\s*");
+
+        // Prepare the Wikidata entity IDs (QIDs) for each place in the list
         String qids = "";
         for (final Place place : placeList) {
             qids += "\n" + ("wd:" + place.getWikiDataEntityId());
         }
 
+        // Build fallback descriptions for secondary languages in case the primary language is unavailable
         StringBuilder fallBackDescription = new StringBuilder();
         for (int i = 0; i < secondaryLanguageArray.length; i++) {
             fallBackDescription.append("OPTIONAL {?item schema:description ?itemDescriptionPreferredLanguage_")
-                .append(i + 1)
+                .append(i + 1)  // Unique identifier for each fallback
                 .append(". FILTER (lang(?itemDescriptionPreferredLanguage_")
                 .append(i + 1)
                 .append(") = \"")
-                .append(secondaryLanguageArray[i])
+                .append(secondaryLanguageArray[i])  // Use the secondary language code
                 .append("\")}\n");
         }
 
+        // Build fallback labels for secondary languages
         StringBuilder fallbackLabel = new StringBuilder();
         for (int i = 0; i < secondaryLanguageArray.length; i++) {
             fallbackLabel.append("OPTIONAL {?item rdfs:label ?itemLabelPreferredLanguage_")
@@ -440,6 +448,7 @@ public class OkHttpJsonApiClient {
                 .append("\")}\n");
         }
 
+        // Build fallback class labels for secondary languages
         StringBuilder fallbackClassLabel = new StringBuilder();
         for (int i = 0; i < secondaryLanguageArray.length; i++) {
             fallbackClassLabel.append("OPTIONAL {?class rdfs:label ?classLabelPreferredLanguage_")
@@ -451,6 +460,7 @@ public class OkHttpJsonApiClient {
                 .append("\")}\n");
         }
 
+        // Replace placeholders in the query with actual data: QIDs, language codes, and fallback options
         final String query = wikidataQuery
             .replace("${ENTITY}", qids)
             .replace("${LANG}", language)
@@ -458,32 +468,40 @@ public class OkHttpJsonApiClient {
             .replace("${SECONDARYLABEL}", fallbackLabel.toString())
             .replace("${SECONDARYCLASSLABEL}", fallbackClassLabel.toString());
 
+        // Build the URL for the SparQL query with the formatted query string
         final HttpUrl.Builder urlBuilder = HttpUrl
             .parse(sparqlQueryUrl)
             .newBuilder()
             .addQueryParameter("query", query)
-            .addQueryParameter("format", "json");
+            .addQueryParameter("format", "json");  // Ensure JSON response
 
+        // Create and send the HTTP request
         final Request request = new Request.Builder()
             .url(urlBuilder.build())
             .build();
 
+        // Execute the request and handle the response
         try (Response response = okHttpClient.newCall(request).execute()) {
             if (response.isSuccessful()) {
+                // Parse the JSON response and convert it to a list of NearbyResultItems
                 final String json = response.body().string();
                 final NearbyResponse nearbyResponse = gson.fromJson(json, NearbyResponse.class);
                 final List<NearbyResultItem> bindings = nearbyResponse.getResults().getBindings();
+
+                // Convert each NearbyResultItem into a Place object and return the list of places
                 final List<Place> places = new ArrayList<>();
                 for (final NearbyResultItem item : bindings) {
                     final Place placeFromNearbyItem = Place.from(item);
                     places.add(placeFromNearbyItem);
                 }
-                return places;
+                return places;  // Return the list of places with additional information
             } else {
+                // Handle unsuccessful HTTP response codes
                 throw new IOException("Unexpected response code: " + response.code());
             }
         }
     }
+
 
     /**
      * Make API Call to get Places
