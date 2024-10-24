@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.upload.categories
 
+import android.annotation.SuppressLint
 import android.text.TextUtils
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -53,6 +54,7 @@ class CategoriesPresenter
         @Inject
         lateinit var categoryEditHelper: CategoryEditHelper
 
+        @SuppressLint("TimberArgCount")
         override fun onAttachView(view: CategoriesContract.View) {
             this.view = view
             compositeDisposable.add(
@@ -68,7 +70,7 @@ class CategoriesPresenter
                         {
                             setCategoryListValue(it)
                             view.showProgress(false)
-                            if (it.isEmpty()) {
+                            if (it.isEmpty() && !isInitialLoad) {
                                 view.showError(R.string.no_categories_found)
                             }
                         },
@@ -80,6 +82,9 @@ class CategoriesPresenter
                     ),
             )
         }
+
+        private var isInitialLoad = true //avoid initial empty content of edittext lead to showError
+
 
         /**
          * If media is null : Fetches categories from server according to the term
@@ -94,7 +99,7 @@ class CategoriesPresenter
                     .map {
                         it.filter { categoryItem ->
                             !repository.isSpammyCategory(categoryItem.name) ||
-                                categoryItem.name == term
+                                    categoryItem.name == term
                         }
                     }
             } else {
@@ -114,7 +119,7 @@ class CategoriesPresenter
                     .map {
                         it.filter { categoryItem ->
                             !repository.isSpammyCategory(categoryItem.name) ||
-                                categoryItem.name == term
+                                    categoryItem.name == term
                         }
                     }.map { it.filterNot { categoryItem -> categoryItem.thumbnail == "hidden" } }
             }
@@ -123,6 +128,7 @@ class CategoriesPresenter
         override fun onDetachView() {
             view = DUMMY
             compositeDisposable.clear()
+            isInitialLoad = true
         }
 
         /**
@@ -130,6 +136,13 @@ class CategoriesPresenter
          * @param query
          */
         override fun searchForCategories(query: String) {
+            if (query.isBlank()) {
+                if (!isInitialLoad) {
+                    view.showError(R.string.no_categories_found)
+                }
+                return
+            }
+            isInitialLoad = false
             searchTerms.onNext(query)
         }
 
@@ -187,7 +200,7 @@ class CategoriesPresenter
                         {
                             setCategoryListValue(it)
                             view.showProgress(false)
-                            if (it.isEmpty()) {
+                            if (it.isEmpty() && !isInitialLoad) {
                                 view.showError(R.string.no_categories_found)
                             }
                         },
@@ -223,9 +236,9 @@ class CategoriesPresenter
             ) {
                 val selectedCategories: MutableList<String> =
                     (
-                        repository.selectedCategories.map { it.name }.toMutableList() +
-                            repository.selectedExistingCategories
-                    ).toMutableList()
+                            repository.selectedCategories.map { it.name }.toMutableList() +
+                                    repository.selectedExistingCategories
+                            ).toMutableList()
 
                 if (selectedCategories.isNotEmpty()) {
                     view.showProgressDialog()
