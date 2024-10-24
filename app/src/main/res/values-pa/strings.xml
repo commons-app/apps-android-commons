@@ -42,6 +42,7 @@
   <string name="username">ਵਰਤੋਂਕਾਰ ਨਾਂ</string>
   <string name="password">ਲੰਘ-ਸ਼ਬਦ</string>
   <string name="login">ਦਾਖ਼ਲ ਹੋਵੋ</string>
+  <string name="forgot_password">ਪਾਰਸ਼ਬਦ ਭੁੱਲ ਗਏ?</string>
   <string name="logging_in_title">ਦਾਖ਼ਲਾ ਹੋ ਰਿਹਾ ਹੈ</string>
   <string name="logging_in_message">ਉਡੀਕੋ ਜੀ…</string>
   <string name="updating_caption_message">ਕਿਰਪਾ ਕਰਕੇ ਉਡੀਕੋ...</string>
@@ -67,7 +68,7 @@
   <string name="menu_nearby">ਨੇੜੇ-ਤੇੜੇ</string>
   <string name="provider_contributions">ਮੇਰੇ ਅੱਪਲੋਡ</string>
   <string name="menu_share">ਸਾਂਝਾ ਕਰੋ</string>
-  <string name="share_title_hint" fuzzy="true">ਸਿਰਲੇਖ</string>
+  <string name="share_title_hint">ਸੁਰਖੀ (ਲੋੜੀਂਦੀ)</string>
   <string name="share_description_hint">ਵੇਰਵਾ</string>
   <string name="login_failed_network">ਦਾਖ਼ਲ ਹੋਣ ਵਿੱਚ ਅਸਮਰੱਥ - ਨੈੱਟਵਰਕ ਫੇਲ੍ਹ ਹੋਇਆ ਹੈ</string>
   <string name="login_failed_throttled">ਬਹੁਤ ਸਾਰੀਆਂ ਅਸਫ਼ਲ ਕੋਸ਼ਿਸ਼ਾਂ। ਥੋੜ੍ਹੀ ਦੇਰ ਬਾਅਦ ਕੋਸ਼ਿਸ਼ ਕਰੋ ਜੀ।</string>
