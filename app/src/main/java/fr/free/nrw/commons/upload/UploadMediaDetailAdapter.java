@@ -60,27 +60,35 @@ public class UploadMediaDetailAdapter extends
     private Activity activity;
     private final ActivityResultLauncher<Intent> voiceInputResultLauncher;
     private SelectedVoiceIcon selectedVoiceIcon;
+    boolean isVoiceRecognitionAvailable;
 
     private RowItemDescriptionBinding binding;
 
     public UploadMediaDetailAdapter(Fragment fragment, String savedLanguageValue,
-        RecentLanguagesDao recentLanguagesDao, ActivityResultLauncher<Intent> voiceInputResultLauncher) {
+        RecentLanguagesDao recentLanguagesDao,
+        ActivityResultLauncher<Intent> voiceInputResultLauncher,
+        boolean isVoiceRecognitionAvailable) {
         uploadMediaDetails = new ArrayList<>();
         selectedLanguages = new HashMap<>();
         this.savedLanguageValue = savedLanguageValue;
         this.recentLanguagesDao = recentLanguagesDao;
         this.fragment = fragment;
         this.voiceInputResultLauncher = voiceInputResultLauncher;
+        this.isVoiceRecognitionAvailable = isVoiceRecognitionAvailable;
     }
 
     public UploadMediaDetailAdapter(Activity activity, final String savedLanguageValue,
-        List<UploadMediaDetail> uploadMediaDetails, RecentLanguagesDao recentLanguagesDao, ActivityResultLauncher<Intent> voiceInputResultLauncher) {
+        List<UploadMediaDetail> uploadMediaDetails,
+        RecentLanguagesDao recentLanguagesDao,
+        ActivityResultLauncher<Intent> voiceInputResultLauncher,
+        boolean isVoiceRecognitionAvailable) {
         this.uploadMediaDetails = uploadMediaDetails;
         selectedLanguages = new HashMap<>();
         this.savedLanguageValue = savedLanguageValue;
         this.recentLanguagesDao = recentLanguagesDao;
         this.activity = activity;
         this.voiceInputResultLauncher = voiceInputResultLauncher;
+        this.isVoiceRecognitionAvailable = isVoiceRecognitionAvailable;
     }
 
     public void setCallback(Callback callback) {
@@ -274,6 +282,7 @@ public class UploadMediaDetailAdapter extends
                 selectedVoiceIcon = SelectedVoiceIcon.CAPTION;
                 startSpeechInput(descriptionLanguages.getText().toString());
             });
+            captionInputLayout.setEndIconVisible(isVoiceRecognitionAvailable);
             descInputLayout.setEndIconMode(TextInputLayout.END_ICON_CUSTOM);
             descInputLayout.setEndIconDrawable(R.drawable.baseline_keyboard_voice);
             descInputLayout.setEndIconOnClickListener(v -> {
@@ -281,6 +290,7 @@ public class UploadMediaDetailAdapter extends
                 selectedVoiceIcon = SelectedVoiceIcon.DESCRIPTION;
                 startSpeechInput(descriptionLanguages.getText().toString());
             });
+            descInputLayout.setEndIconVisible(isVoiceRecognitionAvailable);
 
             if (position == 0) {
                 removeButton.setVisibility(View.GONE);
