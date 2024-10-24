@@ -707,11 +707,9 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
      */
     private void buildDepictionList(List<IdAndCaptions> idAndCaptions) {
         binding.mediaDetailDepictionContainer.removeAllViews();
-        String fullCode = Locale.getDefault().getLanguage();
-        String locale = fullCode.contains(",") ? fullCode.substring(0, fullCode.indexOf(',')).trim() : fullCode;
         for (IdAndCaptions idAndCaption : idAndCaptions) {
             binding.mediaDetailDepictionContainer.addView(buildDepictLabel(
-                    getDepictionCaption(idAndCaption, locale),
+                    getDepictionCaption(idAndCaption, Locale.getDefault().getLanguage()),
                     idAndCaption.getId(),
                 binding.mediaDetailDepictionContainer
                 ));
