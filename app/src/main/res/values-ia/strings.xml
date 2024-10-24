@@ -290,9 +290,6 @@
   <string name="about_translate_proceed">Proceder</string>
   <string name="about_translate_cancel">Cancellar</string>
   <string name="retry">Reprobar</string>
-  <string name="showcase_view_needs_photo">Iste loco require un photo.</string>
-  <string name="showcase_view_has_photo">Iste loco ha ja un photo.</string>
-  <string name="showcase_view_no_longer_exists">Iste loco non existe plus.</string>
   <string name="no_images_found">Necun imagine trovate!</string>
   <string name="error_loading_images">Un error ha occurrite durante le cargamento de imagines.</string>
   <string name="image_uploaded_by">Incargate per: %1$s</string>

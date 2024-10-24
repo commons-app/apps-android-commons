@@ -326,9 +326,6 @@
   <string name="about_translate_proceed">המשך</string>
   <string name="about_translate_cancel">ביטול</string>
   <string name="retry">לנסות שוב</string>
-  <string name="showcase_view_needs_photo">המקום הזה צריך תמונה.</string>
-  <string name="showcase_view_has_photo">למקום הזה יש כבר תמונה.</string>
-  <string name="showcase_view_no_longer_exists">המקום הזה כבר לא קיים.</string>
   <string name="no_images_found">לא נמצאו תמונות!</string>
   <string name="error_loading_images">אירעה שגיאה בטעינת התמונות.</string>
   <string name="image_uploaded_by">הועלה על־ידי: %1$s</string>

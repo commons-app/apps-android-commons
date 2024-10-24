@@ -301,9 +301,6 @@
   <string name="about_translate_proceed">Daŭrigi</string>
   <string name="about_translate_cancel">Nuligi</string>
   <string name="retry">Reprovi</string>
-  <string name="showcase_view_needs_photo">Ĉi tiu loko bezonas foton.</string>
-  <string name="showcase_view_has_photo">Ĉi tiu loko jam havas foton.</string>
-  <string name="showcase_view_no_longer_exists">Ĉi tiu loko ne plu ekzistas.</string>
   <string name="no_images_found">Neniuj bildoj trovitaj!</string>
   <string name="error_loading_images">Okazis eraro ŝargante la bildojn.</string>
   <string name="image_uploaded_by">Alŝutita de: %1$s</string>

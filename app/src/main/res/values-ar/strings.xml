@@ -348,9 +348,6 @@
   <string name="about_translate_proceed">تقدم</string>
   <string name="about_translate_cancel">إلغاء</string>
   <string name="retry">إعادة المحاولة</string>
-  <string name="showcase_view_needs_photo">هذا المكان يحتاج إلى صورة.</string>
-  <string name="showcase_view_has_photo">هذا المكان به صورة بالفعل.</string>
-  <string name="showcase_view_no_longer_exists">هذه الصفحة لم تعد موجودة.</string>
   <string name="no_images_found">لم يتم العثور على صور!</string>
   <string name="error_loading_images">حدث خطأ أثناء تحميل الصور.</string>
   <string name="image_uploaded_by">%1$s :تم الرفع بواسطة</string>

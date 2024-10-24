@@ -323,9 +323,6 @@
   <string name="about_translate_proceed">İlerle</string>
   <string name="about_translate_cancel">İptal</string>
   <string name="retry">Tekrar dene</string>
-  <string name="showcase_view_needs_photo">Burada bir fotoğrafa ihtiyacı var.</string>
-  <string name="showcase_view_has_photo">Burada zaten bir fotoğrafı var.</string>
-  <string name="showcase_view_no_longer_exists">Burası artık mevcut değil.</string>
   <string name="no_images_found">Resim bulunamadı!</string>
   <string name="error_loading_images">Resimler yüklenirken hata oluştu.</string>
   <string name="image_uploaded_by">Yükleyen: %1$s</string>

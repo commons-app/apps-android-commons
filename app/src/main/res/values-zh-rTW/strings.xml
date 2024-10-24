@@ -317,9 +317,6 @@
   <string name="about_translate_proceed">繼續</string>
   <string name="about_translate_cancel">取消</string>
   <string name="retry">重試</string>
-  <string name="showcase_view_needs_photo">此地點需要照片。</string>
-  <string name="showcase_view_has_photo">此地點已有照片。</string>
-  <string name="showcase_view_no_longer_exists">此地點已不存在。</string>
   <string name="no_images_found">找不到圖片！</string>
   <string name="error_loading_images">載入圖片時發生錯誤。</string>
   <string name="image_uploaded_by">由%1$s上傳</string>

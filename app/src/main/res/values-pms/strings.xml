@@ -294,9 +294,6 @@
   <string name="about_translate_proceed">Andé anans</string>
   <string name="about_translate_cancel">Anulé</string>
   <string name="retry">Prové torna</string>
-  <string name="showcase_view_needs_photo">Ës pòst-sì a l\'ha damanca ëd na fòto.</string>
-  <string name="showcase_view_has_photo">Ës pòst-sì a l\'ha già na fòto.</string>
-  <string name="showcase_view_no_longer_exists">Ës pòst a esist pi.</string>
   <string name="no_images_found">Gnun-e plance trovà!</string>
   <string name="error_loading_images">A-i é staje n\'eror durant ël cariament ëd le plance.</string>
   <string name="image_uploaded_by">Carià da: %1$s</string>

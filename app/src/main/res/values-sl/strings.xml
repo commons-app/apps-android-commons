@@ -310,9 +310,6 @@
   <string name="about_translate_proceed">Nadaljuj</string>
   <string name="about_translate_cancel">Prekliči</string>
   <string name="retry">Poskusi znova</string>
-  <string name="showcase_view_needs_photo">Ta kraj potrebuje fotografijo</string>
-  <string name="showcase_view_has_photo">Ta kraj že ima fotografijo.</string>
-  <string name="showcase_view_no_longer_exists">Ta kraj ne obstaja več.</string>
   <string name="no_images_found">Ni najdenih slik!</string>
   <string name="error_loading_images">Pri nalaganju slik je prišlo do napake.</string>
   <string name="image_uploaded_by">Naložil_a: %1$s</string>

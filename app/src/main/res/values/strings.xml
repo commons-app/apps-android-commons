@@ -303,9 +303,6 @@
 
   <string name="about_translate_cancel">Cancel</string>
   <string name="retry">Retry</string>
-  <string name="showcase_view_needs_photo">This place needs a photo.</string>
-  <string name="showcase_view_has_photo">This place already has a photo.</string>
-  <string name="showcase_view_no_longer_exists">This place no longer exists.</string>
 
   <string name="no_images_found">No images found!</string>
 

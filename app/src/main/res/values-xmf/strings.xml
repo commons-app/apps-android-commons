@@ -288,9 +288,6 @@
   <string name="about_translate_proceed">გაგჷნძორება</string>
   <string name="about_translate_cancel">გოუქვაფა</string>
   <string name="retry">გომაჟირაფა</string>
-  <string name="showcase_view_needs_photo">ათე აბანი ოხვილჷ სურათის.</string>
-  <string name="showcase_view_has_photo">ათრ აბანს უკვე უღჷ სურათი.</string>
-  <string name="showcase_view_no_longer_exists">ათე აბანი ვა რე.</string>
   <string name="no_images_found">სურათეფქ ვეგორინუ!</string>
   <string name="error_loading_images">სურათიშ ეხარგუაშ ბორჯის ჩილათაქ მოხვადჷ.</string>
   <string name="image_uploaded_by">ეხარგილი რე $1-იშით</string>

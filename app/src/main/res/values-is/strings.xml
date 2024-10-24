@@ -286,9 +286,6 @@
   <string name="about_translate_proceed">Halda áfram</string>
   <string name="about_translate_cancel">Hætta við</string>
   <string name="retry">Reyna aftur</string>
-  <string name="showcase_view_needs_photo">Þennan stað vantar ljósmynd.</string>
-  <string name="showcase_view_has_photo">Þessi staður er þegar með ljósmynd.</string>
-  <string name="showcase_view_no_longer_exists">Þessi staður er ekki lengur til.</string>
   <string name="no_images_found">Engir myndir fundust!</string>
   <string name="error_loading_images">Villa kom upp við að hlaða inn myndum.</string>
   <string name="image_uploaded_by">Sent inn af: %1$s</string>

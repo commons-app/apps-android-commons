@@ -288,9 +288,6 @@
   <string name="about_translate_proceed">Nastavi</string>
   <string name="about_translate_cancel">Otkaži</string>
   <string name="retry">Pokušaj ponovo</string>
-  <string name="showcase_view_needs_photo">Ovom mestu je potrebna fotografija.</string>
-  <string name="showcase_view_has_photo">Ovo mesto već ima fotografiju.</string>
-  <string name="showcase_view_no_longer_exists">Ovo mesto više ne postoji.</string>
   <string name="no_images_found">Slike nisu pronađene.</string>
   <string name="error_loading_images">Došlo je do greške pri učitavanju slika.</string>
   <string name="image_uploaded_by">Otpremio/la: %1$s</string>

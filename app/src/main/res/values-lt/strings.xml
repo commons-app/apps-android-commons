@@ -272,9 +272,6 @@
   <string name="about_translate_proceed">Tęsti</string>
   <string name="about_translate_cancel">Atšaukti</string>
   <string name="retry">Bandyti dar kartą</string>
-  <string name="showcase_view_needs_photo">Šiai vietai reikia nuotraukos.</string>
-  <string name="showcase_view_has_photo">Ši vieta jau turi nuotrauką.</string>
-  <string name="showcase_view_no_longer_exists">Šios vietos nebėra.</string>
   <string name="no_images_found">Vaizdų nerasta!</string>
   <string name="error_loading_images">Įkeliant vaizdus įvyko klaida.</string>
   <string name="image_uploaded_by">Įkėlė: %1$s</string>

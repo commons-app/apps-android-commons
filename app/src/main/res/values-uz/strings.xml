@@ -293,9 +293,6 @@
   <string name="about_translate_proceed">Himoyalash</string>
   <string name="about_translate_cancel">Bekor qilish</string>
   <string name="retry">Qayta urinish</string>
-  <string name="showcase_view_needs_photo">Bu joyga rasm kerak.</string>
-  <string name="showcase_view_has_photo">Bu joyning rasmi bor.</string>
-  <string name="showcase_view_no_longer_exists">Bu endi mavjud emas.</string>
   <string name="no_images_found">Rasm topilmadi!</string>
   <string name="error_loading_images">Rasmlarni joylashda xatolik yuz berdi.</string>
   <string name="image_uploaded_by">%1$s tomonidan joylangan</string>

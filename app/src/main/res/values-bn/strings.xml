@@ -297,9 +297,6 @@
   <string name="about_translate_proceed">অগ্রসর</string>
   <string name="about_translate_cancel">বাতিল</string>
   <string name="retry">পুনঃচেষ্টা করুন</string>
-  <string name="showcase_view_needs_photo">এই স্থানটির একটি চিত্র দরকার।</string>
-  <string name="showcase_view_has_photo">এই স্থানের ছবি ইতিমধ্যে বিদ্যমান।</string>
-  <string name="showcase_view_no_longer_exists">এই জায়গাটি আর নেই।</string>
   <string name="no_images_found">কোন চিত্র পাওয়া যায়নি!</string>
   <string name="error_loading_images">ছবি লোড করার সময় ত্রুটি ঘটেছে৷</string>
   <string name="image_uploaded_by">আপলোড করেছেন: %1$s</string>

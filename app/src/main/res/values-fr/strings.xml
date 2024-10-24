@@ -337,9 +337,6 @@
   <string name="about_translate_proceed">Continuer</string>
   <string name="about_translate_cancel">Annuler</string>
   <string name="retry">Réessayer</string>
-  <string name="showcase_view_needs_photo">Ce lieu a besoin d’une photo.</string>
-  <string name="showcase_view_has_photo">Ce lieu a déjà une photo.</string>
-  <string name="showcase_view_no_longer_exists">Ce lieu n’existe plus.</string>
   <string name="no_images_found">Aucune image trouvée !</string>
   <string name="error_loading_images">Une erreur s’est produite durant le chargement des images.</string>
   <string name="image_uploaded_by">Téléversé par : %1$s</string>

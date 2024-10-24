@@ -315,9 +315,6 @@
   <string name="about_translate_proceed">Pokračovať</string>
   <string name="about_translate_cancel">Zrušiť</string>
   <string name="retry">Obnoviť</string>
-  <string name="showcase_view_needs_photo">Toto miesto potrebuje obrázok.</string>
-  <string name="showcase_view_has_photo">Toto miesto už má obrázok.</string>
-  <string name="showcase_view_no_longer_exists">Toto miesto už nejestvuje.</string>
   <string name="no_images_found">Neboli nájdené žiadne obrázky!</string>
   <string name="error_loading_images">Pri načítaní obrázkov došlo k chybe.</string>
   <string name="image_uploaded_by">Nahral/a: %1$s</string>

@@ -296,9 +296,6 @@
   <string name="about_translate_proceed">Продолжи</string>
   <string name="about_translate_cancel">Откажи</string>
   <string name="retry">Пробај пак</string>
-  <string name="showcase_view_needs_photo">На местово му треба слика.</string>
-  <string name="showcase_view_has_photo">Местово веќе има слика.</string>
-  <string name="showcase_view_no_longer_exists">Местово повеќе не постои.</string>
   <string name="no_images_found">Не пронајдов ниедна слика!</string>
   <string name="error_loading_images">Се појави грешка при вчитувањето на сликите.</string>
   <string name="image_uploaded_by">Подигач: %1$s</string>
