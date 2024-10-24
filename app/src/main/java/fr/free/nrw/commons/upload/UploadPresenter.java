@@ -123,6 +123,9 @@ public class UploadPresenter implements UploadContract.UserActionListener {
                             view.returnToMainActivity();
                             compositeDisposable.clear();
                             Timber.e("failed to upload: " + e.getMessage());
+
+                            //is submission error, not need to go to the uploadActivity
+                            //not start the uploading progress
                         }
 
                         @Override
@@ -131,6 +134,10 @@ public class UploadPresenter implements UploadContract.UserActionListener {
                             repository.cleanup();
                             view.returnToMainActivity();
                             compositeDisposable.clear();
+
+                            //after finish the uploadActivity, if successful,
+                            //directly go to the upload progress activity
+                            view.goToUploadProgressActivity();
                         }
                     });
         } else {

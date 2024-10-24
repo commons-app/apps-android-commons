@@ -1,6 +1,5 @@
 package fr.free.nrw.commons.nearby;
 
-import fr.free.nrw.commons.location.LatLng;
 import io.reactivex.Completable;
 import javax.inject.Inject;
 

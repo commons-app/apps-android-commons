@@ -22,6 +22,7 @@
 * JenyxGym
 * KATRINE1992
 * Koreller
+* Mahabarata
 * McDutchie
 * Melissadeba95
 * Metroitendo
@@ -516,6 +517,7 @@
   <string name="no_notification">Vous n’avez aucune notification non lue</string>
   <string name="no_read_notification">Vous n’avez aucune notification lue</string>
   <string name="share_logs_using">Partager les journaux en utilisant</string>
+  <string name="check_your_email_inbox">Vérifiez votre boîte de réception</string>
   <string name="menu_option_read">Afficher les lus</string>
   <string name="menu_option_unread">Afficher les non lus</string>
   <string name="error_occurred_in_picking_images">Une erreur est survenue lors de la sélection des images</string>

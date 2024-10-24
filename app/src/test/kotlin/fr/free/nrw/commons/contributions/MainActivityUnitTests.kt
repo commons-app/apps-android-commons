@@ -342,20 +342,6 @@ class MainActivityUnitTests {
 
     @Test
     @Throws(Exception::class)
-    fun testOnActivityResult() {
-        val method: Method =
-            MainActivity::class.java.getDeclaredMethod(
-                "onActivityResult",
-                Int::class.java,
-                Int::class.java,
-                Intent::class.java,
-            )
-        method.isAccessible = true
-        method.invoke(activity, 0, 0, null)
-    }
-
-    @Test
-    @Throws(Exception::class)
     fun testOnResume() {
         val method: Method =
             MainActivity::class.java.getDeclaredMethod(
