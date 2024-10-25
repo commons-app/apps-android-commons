@@ -25,6 +25,7 @@ import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
+import java.util.Locale;
 import javax.inject.Inject;
 
 public class ReviewActivity extends BaseActivity {
@@ -241,7 +242,7 @@ public class ReviewActivity extends BaseActivity {
 
     public void showSkipImageInfo(){
         DialogUtil.showAlertDialog(ReviewActivity.this,
-                getString(R.string.skip_image).toUpperCase(),
+                getString(R.string.skip_image).toUpperCase(Locale.ROOT),
                 getString(R.string.skip_image_explanation),
                 getString(android.R.string.ok),
                 "",

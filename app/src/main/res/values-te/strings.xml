@@ -127,7 +127,7 @@
   <string name="menu_feedback">ఫీడుబ్యాకును పంపండి (ఈమెయిలు ద్వారా)</string>
   <string name="no_email_client">ఈమెయిలు క్లయంటేదీ లేదు</string>
   <string name="provider_categories">ఇటీవల వాడిన వర్గాలు</string>
-  <string name="waiting_first_sync">మొట్టమొదటి సింక్ కోసం చూస్తున్నాం...</string>
+  <string name="waiting_first_sync">మొట్టమొదటి సింక్ కోసం చూస్తున్నాం…</string>
   <string name="no_uploads_yet">ఇంకా మీరు ఫోటోలేమీ ఎక్కించలేదు.</string>
   <string name="menu_retry_upload">మళ్ళీ ప్రయత్నించు</string>
   <string name="menu_cancel_upload">రద్దుచేయి</string>
@@ -457,7 +457,7 @@
   <string name="exif_tag_name_serialNumbers">క్రమ సంఖ్యలు</string>
   <string name="exif_tag_name_software">సాఫ్టువేరు</string>
   <string name="share_text">నేరుగా మీ ఫోను నుంచే వికీమీడియా కామన్స్‌కు ఫోటోలను ఎక్కించండి. కామన్స్ యాప్‌ను ఇప్పుడే దించుకోండి: %1$s</string>
-  <string name="share_via">యాప్‌ను దీని ద్వారా పంచుకోండి...</string>
+  <string name="share_via">యాప్‌ను దీని ద్వారా పంచుకోండి…</string>
   <string name="image_info">బొమ్మ సమాచారం</string>
   <string name="no_categories_found">వర్గాలేమీ కనబడలేదు</string>
   <string name="upload_cancelled">ఎక్కింపును రద్దు చేసాం</string>
@@ -523,7 +523,7 @@
   <string name="add_bookmark">బుక్‌మార్కులకు చేర్చాం</string>
   <string name="wallpaper_set_unsuccessfully">ఏదో లోపం జరిగింది. వాల్‌పేపరును సెట్ చెయ్యలేకపోయాం</string>
   <string name="setting_wallpaper_dialog_title">వాల్‌పేపరుగా అమర్చు</string>
-  <string name="setting_wallpaper_dialog_message">వాల్‌పేపరుగా సెట్ చేస్తున్నాం. కాస్త ఆగండి...</string>
+  <string name="setting_wallpaper_dialog_message">వాల్‌పేపరుగా సెట్ చేస్తున్నాం. కాస్త ఆగండి…</string>
   <string name="theme_dark_name">నల్లటి</string>
   <string name="theme_light_name">వెలుగుతో</string>
   <string name="cannot_open_location_settings">స్థానపు సెట్టింగులను తెరవడం విఫలమైంది. స్థానాన్ని మానవికంగా ఆన్ చెయ్యండి</string>
@@ -576,9 +576,9 @@
   <string name="limited_connection_disabled">పరిమిత కనెక్షను మోడ్‌ను అచేతనం చేసాం. పెండింగులో ఉన్న ఎక్కింపులు తిరిగి మొదలౌతాయి.</string>
   <string name="limited_connection_mode">పరిమిత కనెక్షను మోడ్</string>
   <string name="statistics_quality">నాణ్యమైన బొమ్మలు</string>
-  <string name="resuming_upload">ఎక్కింపును తిరిగి మొదలెడుతున్నాం...</string>
-  <string name="pausing_upload">ఎక్కింపును నిలుపుతున్నాం...</string>
-  <string name="cancelling_upload">ఎక్కింపును రద్దు చేస్తున్నాం...</string>
+  <string name="resuming_upload">ఎక్కింపును తిరిగి మొదలెడుతున్నాం…</string>
+  <string name="pausing_upload">ఎక్కింపును నిలుపుతున్నాం…</string>
+  <string name="cancelling_upload">ఎక్కింపును రద్దు చేస్తున్నాం…</string>
   <string name="cancel_upload">ఎక్కింపును రద్దుచెయ్యి</string>
   <string name="limited_connection_explanation">మీరు పరిమిత కనెక్షను మోడ్‌ను చేతనం చేసారు. ఎక్కింపులన్నీ నిలిచిపోయాయి. మీరు ఈ మోడ్‌ను అచేతనం చెయ్యగానే అవి తిరిగి మొదలౌతాయి.</string>
   <string name="limited_connection_is_on">పరిమిత కనెక్షను మోడ్ ఆన్ అయింది.</string>

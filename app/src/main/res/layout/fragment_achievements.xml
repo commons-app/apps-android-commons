@@ -28,7 +28,6 @@
         <RelativeLayout
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:layout_below="@+id/toolbar"
           android:background="?attr/achievementBackground"
           android:orientation="vertical">
 
@@ -36,7 +35,6 @@
             style="?android:textAppearanceLarge"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/activity_margin_horizontal"
             android:layout_marginStart="@dimen/activity_margin_horizontal"
             android:layout_marginTop="@dimen/activity_margin_horizontal"
             android:text="@string/level"
@@ -48,13 +46,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/activity_margin_vertical"
-            android:layout_marginRight="@dimen/activity_margin_horizontal"
             android:layout_marginEnd="@dimen/activity_margin_horizontal"
-            android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
             app:srcCompat="@drawable/ic_info_outline_24dp"
-            android:tint="@color/black"
-            android:layout_marginVertical="@dimen/activity_margin_vertical" />
+            android:layout_marginVertical="@dimen/activity_margin_vertical"
+            app:tint="@color/black" />
 
           <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/badge_layout"
@@ -108,7 +104,6 @@
                 style="?android:textAppearanceMedium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/activity_margin_horizontal"
                 android:layout_marginStart="@dimen/activity_margin_horizontal"
                 android:id="@+id/images_upload_text_param"
                 android:layout_marginTop="@dimen/achievements_activity_margin_vertical"
@@ -120,12 +115,10 @@
                 android:layout_marginTop="@dimen/activity_margin_horizontal"
                 android:layout_marginRight="@dimen/activity_margin_horizontal"
                 android:layout_marginEnd="@dimen/activity_margin_horizontal"
-                android:layout_toRightOf="@+id/images_upload_text_param"
-                android:layout_toEndOf="@+id/images_upload_text_param"
                 app:srcCompat="@drawable/ic_info_outline_24dp"
-                android:tint="@color/primaryLightColor"
                 android:layout_marginLeft="@dimen/activity_margin_horizontal"
-                android:layout_marginStart="@dimen/activity_margin_horizontal"/>
+                android:layout_marginStart="@dimen/activity_margin_horizontal"
+                app:tint="@color/primaryLightColor" />
 
             </LinearLayout>
 
@@ -189,7 +182,6 @@
                 style="?android:textAppearanceMedium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/activity_margin_horizontal"
                 android:id="@+id/images_reverted_text"
                 android:layout_marginStart="@dimen/activity_margin_horizontal"
                 android:text="@string/image_reverts" />
@@ -200,15 +192,11 @@
                 android:layout_marginTop="@dimen/activity_margin_horizontal"
                 android:layout_marginRight="@dimen/activity_margin_horizontal"
                 android:layout_marginEnd="@dimen/activity_margin_horizontal"
-                android:layout_toRightOf="@+id/images_reverted_text"
-                android:layout_toEndOf="@+id/images_reverted_text"
                 app:srcCompat="@drawable/ic_info_outline_24dp"
-                android:tint="@color/primaryLightColor"
                 android:layout_marginLeft="@dimen/activity_margin_horizontal"
-                android:layout_marginStart="@dimen/activity_margin_horizontal"/>
+                android:layout_marginStart="@dimen/activity_margin_horizontal" app:tint="@color/primaryLightColor" />
 
             </LinearLayout>
-
 
 
             <TextView
@@ -217,7 +205,6 @@
               android:text="@string/achievements_revert_limit_message"
               android:textSize="@dimen/small_text"
               android:id="@+id/images_revert_limit_text"
-              android:layout_marginLeft="@dimen/activity_margin_horizontal"
               android:layout_marginStart="@dimen/activity_margin_horizontal"
               android:layout_below="@id/images_reverted_info"/>
 
@@ -278,7 +265,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/images_used_by_wiki_text"
-                android:layout_marginLeft="@dimen/activity_margin_horizontal"
                 android:layout_marginStart="@dimen/activity_margin_horizontal"
                 android:layout_marginTop="@dimen/achievements_activity_margin_vertical"
                 android:text="@string/images_used_by_wiki" />
@@ -289,12 +275,10 @@
                 android:layout_marginTop="@dimen/activity_margin_horizontal"
                 android:layout_marginRight="@dimen/activity_margin_horizontal"
                 android:layout_marginEnd="@dimen/activity_margin_horizontal"
-                android:layout_toRightOf="@+id/images_used_by_wiki_text"
-                android:layout_toEndOf="@+id/images_used_by_wiki_text"
                 app:srcCompat="@drawable/ic_info_outline_24dp"
-                android:tint="@color/primaryLightColor"
                 android:layout_marginLeft="@dimen/activity_margin_horizontal"
-                android:layout_marginStart="@dimen/activity_margin_horizontal"/>
+                android:layout_marginStart="@dimen/activity_margin_horizontal"
+                app:tint="@color/primaryLightColor" />
 
             </LinearLayout>
 
@@ -353,7 +337,6 @@
             android:layout_height="wrap_content"
             android:text="@string/statistics"
             style="?android:textAppearanceLarge"
-            android:layout_marginLeft="@dimen/activity_margin_horizontal"
             android:layout_marginStart="@dimen/activity_margin_horizontal"
             android:layout_marginTop="@dimen/activity_margin_vertical"
             android:textAllCaps="true"/>
@@ -373,9 +356,7 @@
               android:id="@+id/images_nearby_info"
               android:layout_centerVertical="true"
               android:layout_alignParentStart="true"
-              android:layout_alignParentLeft="true"
               android:layout_toStartOf="@+id/wikidata_edits"
-              android:layout_toLeftOf="@+id/wikidata_edits"
               android:orientation="horizontal"
               android:gravity="center_vertical">
 
@@ -407,14 +388,13 @@
                 android:layout_height="@dimen/medium_height"
                 android:id="@+id/images_nearby_info_icon"
                 android:layout_marginTop="@dimen/activity_margin_horizontal"
-                android:layout_marginRight="@dimen/activity_margin_horizontal"
                 android:layout_marginEnd="@dimen/activity_margin_horizontal"
                 android:layout_gravity="top"
                 app:layout_constraintLeft_toRightOf="@id/images_nearby_data"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:srcCompat="@drawable/ic_info_outline_24dp"
-                android:tint="@color/primaryLightColor" />
+                app:tint="@color/primaryLightColor" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -423,16 +403,14 @@
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
               style="?android:textAppearanceMedium"
-              android:layout_alignParentRight="true"
               android:layout_alignParentEnd="true"
-              android:layout_marginLeft="@dimen/activity_margin_horizontal"
               android:layout_marginEnd="@dimen/half_standard_height"
               android:layout_marginTop="@dimen/activity_margin_horizontal"
               android:layout_marginStart="@dimen/activity_margin_horizontal"
               android:layout_centerVertical="true"
               tools:text="2"
               android:id="@+id/wikidata_edits"
-              android:layout_marginRight="@dimen/half_standard_height" />
+              />
 
           </RelativeLayout>
 
@@ -451,9 +429,7 @@
               android:id="@+id/images_featured_info"
               android:layout_centerVertical="true"
               android:layout_alignParentStart="true"
-              android:layout_alignParentLeft="true"
               android:layout_toStartOf="@+id/image_featured"
-              android:layout_toLeftOf="@+id/image_featured"
               android:orientation="horizontal"
               android:gravity="center_vertical">
 
@@ -486,14 +462,13 @@
                 android:layout_height="@dimen/medium_height"
                 android:id="@+id/images_featured_info_icon"
                 android:layout_marginTop="@dimen/activity_margin_horizontal"
-                android:layout_marginRight="@dimen/activity_margin_horizontal"
                 android:layout_marginEnd="@dimen/activity_margin_horizontal"
                 app:layout_constraintLeft_toRightOf="@id/images_featured_data"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 android:layout_gravity="top"
                 app:srcCompat="@drawable/ic_info_outline_24dp"
-                android:tint="@color/primaryLightColor" />
+                app:tint="@color/primaryLightColor" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -501,16 +476,14 @@
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
               style="?android:textAppearanceMedium"
-              android:layout_alignParentRight="true"
               android:layout_alignParentEnd="true"
               android:layout_marginTop="@dimen/activity_margin_horizontal"
               android:layout_marginStart="@dimen/activity_margin_horizontal"
               android:layout_centerVertical="true"
               tools:text="2"
               android:id="@+id/image_featured"
-              android:layout_marginLeft="@dimen/activity_margin_horizontal"
               android:layout_marginEnd="@dimen/half_standard_height"
-              android:layout_marginRight="@dimen/half_standard_height" />
+              />
 
           </RelativeLayout>
 
@@ -529,9 +502,7 @@
               android:id="@+id/quality_images_info"
               android:layout_centerVertical="true"
               android:layout_alignParentStart="true"
-              android:layout_alignParentLeft="true"
               android:layout_toStartOf="@+id/quality_images"
-              android:layout_toLeftOf="@+id/quality_images"
               android:orientation="horizontal"
               android:gravity="center_vertical">
 
@@ -564,14 +535,13 @@
                 android:layout_height="@dimen/medium_height"
                 android:id="@+id/quality_images_info_icon"
                 android:layout_marginTop="@dimen/activity_margin_horizontal"
-                android:layout_marginRight="@dimen/activity_margin_horizontal"
                 android:layout_marginEnd="@dimen/activity_margin_horizontal"
                 app:layout_constraintLeft_toRightOf="@id/quality_images_data"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 android:layout_gravity="top"
                 app:srcCompat="@drawable/ic_info_outline_24dp"
-                android:tint="@color/primaryLightColor" />
+                app:tint="@color/primaryLightColor" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -579,7 +549,6 @@
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
               style="?android:textAppearanceMedium"
-              android:layout_alignParentRight="true"
               android:layout_alignParentEnd="true"
               android:layout_marginTop="@dimen/activity_margin_horizontal"
               android:layout_marginStart="@dimen/activity_margin_horizontal"
@@ -587,9 +556,8 @@
               tools:text="2"
               android:text="0"
               android:id="@+id/quality_images"
-              android:layout_marginLeft="@dimen/activity_margin_horizontal"
               android:layout_marginEnd="@dimen/half_standard_height"
-              android:layout_marginRight="@dimen/half_standard_height" />
+              />
 
           </RelativeLayout>
 
@@ -608,9 +576,7 @@
               android:id="@+id/thanks_received_info"
               android:layout_centerVertical="true"
               android:layout_alignParentStart="true"
-              android:layout_alignParentLeft="true"
               android:layout_toStartOf="@+id/thanks_received"
-              android:layout_toLeftOf="@+id/thanks_received"
               android:orientation="horizontal"
               android:gravity="center_vertical">
 
@@ -643,14 +609,13 @@
                 android:layout_height="@dimen/medium_height"
                 android:id="@+id/thanks_received_info_icon"
                 android:layout_marginTop="@dimen/activity_margin_horizontal"
-                android:layout_marginRight="@dimen/activity_margin_horizontal"
                 android:layout_marginEnd="@dimen/activity_margin_horizontal"
                 app:layout_constraintLeft_toRightOf="@id/thanks_received_data"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 android:layout_gravity="top"
                 app:srcCompat="@drawable/ic_info_outline_24dp"
-                android:tint="@color/primaryLightColor" />
+                app:tint="@color/primaryLightColor" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -658,16 +623,14 @@
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
               style="?android:textAppearanceMedium"
-              android:layout_alignParentRight="true"
               android:layout_alignParentEnd="true"
               android:layout_marginTop="@dimen/activity_margin_horizontal"
               android:layout_marginStart="@dimen/activity_margin_horizontal"
-              android:layout_marginLeft="@dimen/activity_margin_horizontal"
               android:layout_centerVertical="true"
               tools:text="2"
               android:id="@+id/thanks_received"
               android:layout_marginEnd="@dimen/half_standard_height"
-              android:layout_marginRight="@dimen/half_standard_height" />
+              />
 
           </RelativeLayout>
 

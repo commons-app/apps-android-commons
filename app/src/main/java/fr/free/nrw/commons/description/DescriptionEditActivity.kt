@@ -237,7 +237,7 @@ class DescriptionEditActivity :
     ) {
         try {
             descriptionEditHelper
-                ?.addDescription(
+                .addDescription(
                     applicationContext,
                     media,
                     updatedWikiText,
@@ -250,7 +250,7 @@ class DescriptionEditActivity :
                     )
                 }
         } catch (e: InvalidLoginTokenException) {
-            val username: String? = sessionManager?.userName
+            val username: String? = sessionManager.userName
             val logoutListener =
                 CommonsApplication.BaseLogoutListener(
                     this,
@@ -268,7 +268,7 @@ class DescriptionEditActivity :
         for (mediaDetail in uploadMediaDetails) {
             try {
                 compositeDisposable.add(
-                    descriptionEditHelper!!
+                    descriptionEditHelper
                         .addCaption(
                             applicationContext,
                             media,

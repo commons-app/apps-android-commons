@@ -61,7 +61,7 @@
   <string name="logging_in_title">Aloggen</string>
   <string name="logging_in_message">Waart wgl. …</string>
   <string name="updating_caption_title">Beschrëftungen a Beschreiwungen aktualiséieren</string>
-  <string name="updating_caption_message">Waart wgl. ...</string>
+  <string name="updating_caption_message">Waart wgl. …</string>
   <string name="login_success">Umeldung huet geklappt!</string>
   <string name="login_failed">D\'Aloggen huet net funktionéiert!</string>
   <string name="upload_failed">Fichier net fonnt. Probéiert wgl. en anere Fichier.</string>
@@ -349,7 +349,7 @@
   <string name="menu_option_read">Déi geliese weisen</string>
   <string name="menu_option_unread">Déi net geliese weisen</string>
   <string name="error_occurred_in_picking_images">Feeler beim Eraussiche vun de Biller</string>
-  <string name="please_wait">Waart wgl. ...</string>
+  <string name="please_wait">Waart wgl. …</string>
   <string name="copied_successfully">Kopéiert</string>
   <string name="welcome_do_upload_content_description">Beispiller vu gudde Biller fir op Commons eropzelueden</string>
   <string name="welcome_dont_upload_content_description">Beispiller fir Biller, déi een net eropluede sollt</string>
@@ -361,7 +361,7 @@
   <string name="exif_tag_name_serialNumbers">Seriennummeren</string>
   <string name="exif_tag_name_software">Software</string>
   <string name="share_text">Luet Fotoen direkt vun Ärem Handy op Wikimedia Commons erop. Luet d\'Commons-App elo erof: %1$s</string>
-  <string name="share_via">App deelen iwwer...</string>
+  <string name="share_via">App deelen iwwer…</string>
   <string name="image_info">Bildinformatiounen</string>
   <string name="no_categories_found">Keng Kategorie fonnt.</string>
   <string name="upload_cancelled">Eroplueden ofgebrach</string>
@@ -411,7 +411,7 @@
   <string name="add_bookmark">Bei d\'Lieszeechen derbäigesat</string>
   <string name="wallpaper_set_unsuccessfully">Et ass Eppes schif gaangen. D\'Hannergrondbild konnt net agestallt ginn</string>
   <string name="setting_wallpaper_dialog_title">Als Hannergrondbild festleeën</string>
-  <string name="setting_wallpaper_dialog_message">Hannergrondbild gëtt agestallt. Waart wgl...</string>
+  <string name="setting_wallpaper_dialog_message">Hannergrondbild gëtt agestallt. Waart wgl…</string>
   <string name="theme_default_name">System suivéieren</string>
   <string name="theme_dark_name">Däischter</string>
   <string name="theme_light_name">Hell</string>
@@ -454,7 +454,7 @@
   <string name="limited_connection_mode">Limitéierte Verbindungsmodus</string>
   <string name="statistics_quality">Qualitéitsbiller</string>
   <string name="quality_images_info">Qualitéitsbiller sinn Diagrammen oder Fotoen, déi gewësse Qualitéitscritèren erfëllen (déi haaptsächlech vun technescher Natur sinn) a wäertvoll fir Wikimedia-Projete sinn.</string>
-  <string name="cancelling_upload">Eropluede gëtt ofgebrach....</string>
+  <string name="cancelling_upload">Eropluede gëtt ofgebrach….</string>
   <string name="cancel_upload">Eroplueden ofbriechen</string>
   <string name="menu_view_category_page">Kategoriesäit weisen</string>
   <string name="app_ui_language">Sprooch vum Interface vum Benotzer vun der App</string>

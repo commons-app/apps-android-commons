@@ -372,7 +372,7 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
                 return false;
             });
 
-            Objects.requireNonNull(getView()).setFocusableInTouchMode(true);
+            requireView().setFocusableInTouchMode(true);
             getView().requestFocus();
             getView().setOnKeyListener((v, keyCode, event) -> {
                 if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK) {
@@ -387,7 +387,7 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
             });
 
             Objects.requireNonNull(
-                ((AppCompatActivity) Objects.requireNonNull(getActivity())).getSupportActionBar())
+                ((AppCompatActivity) requireActivity()).getSupportActionBar())
                 .hide();
 
             if (getParentFragment().getParentFragment().getParentFragment()
@@ -407,7 +407,7 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
         super.onStop();
         if (media != null) {
             Objects.requireNonNull(
-                ((AppCompatActivity) Objects.requireNonNull(getActivity())).getSupportActionBar())
+                ((AppCompatActivity) requireActivity()).getSupportActionBar())
                 .show();
         }
     }

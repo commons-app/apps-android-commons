@@ -31,7 +31,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
-                android:layout_marginRight="50dp"
+                android:layout_marginEnd="50dp"
                 android:maxLines="2"
                 android:ellipsize="end"
                 />
@@ -58,6 +58,7 @@
         android:layout_width="@dimen/dimen_0"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:focusable="true"
         android:padding="@dimen/standard_gap"
         android:clickable="true"
         android:background="@drawable/button_background_selector"
@@ -69,8 +70,7 @@
             android:layout_gravity="center_horizontal"
             android:duplicateParentState="true"
             app:srcCompat="@drawable/ic_directions_black_24dp"
-            android:tint="?attr/rowButtonColor"
-            />
+            app:tint="?attr/rowButtonColor" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -89,6 +89,7 @@
         android:layout_width="@dimen/dimen_0"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:focusable="true"
         android:padding="@dimen/standard_gap"
         android:clickable="true"
         android:background="@drawable/button_background_selector"
@@ -118,6 +119,7 @@
       android:layout_width="@dimen/dimen_0"
       android:layout_height="wrap_content"
       android:layout_weight="1"
+      android:focusable="true"
       android:padding="@dimen/standard_gap"
       android:clickable="true"
       android:background="@drawable/button_background_selector"
@@ -153,8 +155,8 @@
     android:id="@+id/description"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginLeft="@dimen/large_height"
-    android:layout_marginRight="@dimen/standard_gap"
+    android:layout_marginStart="@dimen/large_height"
+    android:layout_marginEnd="@dimen/standard_gap"
     android:layout_marginBottom="@dimen/standard_gap"
     android:textSize="16sp" />
 

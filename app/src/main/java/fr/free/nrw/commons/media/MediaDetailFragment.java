@@ -600,8 +600,8 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
         // Check if the presented category is about need of category
         if (categoriesPresent) {
             for (String category : media.getCategories()) {
-                if (category.toLowerCase().contains(CATEGORY_NEEDING_CATEGORIES) ||
-                    category.toLowerCase().contains(CATEGORY_UNCATEGORISED)) {
+                if (category.toLowerCase(Locale.ROOT).contains(CATEGORY_NEEDING_CATEGORIES) ||
+                    category.toLowerCase(Locale.ROOT).contains(CATEGORY_UNCATEGORISED)) {
                     categoriesPresent = false;
                 }
                 break;

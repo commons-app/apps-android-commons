@@ -45,7 +45,7 @@
   <string name="forgot_password">ဝိုတ်စ မအက္ခရ်ပၞုက်</string>
   <string name="signup">ပတိုန် စၟတ်သမ္တီ</string>
   <string name="logging_in_title">လုပ်လံက်အေန် ဒၟံင်</string>
-  <string name="logging_in_message">ပဂုန်တုဲ မင်မွဲလစုတ်...</string>
+  <string name="logging_in_message">ပဂုန်တုဲ မင်မွဲလစုတ်…</string>
   <string name="login_success" fuzzy="true">လုက်အေန် အာစိုပ်ဒတုဲ!</string>
   <string name="login_failed" fuzzy="true">လံက်အေန် လီုလာ်!</string>
   <string name="upload_failed">ဝှာင် ဟွံဂွံဆဵု၊ ပဂုန်တုဲ ဂၠာဲ ဝှာင်တၞဟ်။</string>
@@ -148,7 +148,7 @@
   <string name="welcome_final_button_text">ယွံ!</string>
   <string name="welcome_help_button_text">ဆက်လဴ ပရူတင်ဂၞင်</string>
   <string name="detail_panel_cats_label">ကဏ္ဍဂမၠိုင်</string>
-  <string name="detail_panel_cats_loading">ပတိုန်ဒၟံင်...</string>
+  <string name="detail_panel_cats_loading">ပတိုန်ဒၟံင်…</string>
   <string name="detail_panel_cats_none">ဟွံမဲကဵု ပရေၚ်ရုဲစှ်</string>
   <string name="detail_caption_empty">ဟွံမဲကဵု က္ဍိုပ်လိက်</string>
   <string name="detail_description_empty">ဟွံမဲကဵု ဗမံက်ထ္ၜး</string>

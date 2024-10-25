@@ -73,9 +73,9 @@
   <string name="forgot_password">Parolni unutdingizmi?</string>
   <string name="signup">Roʻyxatdan oʻtish</string>
   <string name="logging_in_title">Kirish</string>
-  <string name="logging_in_message">Iltimos kuting...</string>
+  <string name="logging_in_message">Iltimos kuting…</string>
   <string name="updating_caption_title">Sarlavhalar va tavsiflarni yangilash</string>
-  <string name="updating_caption_message">Iltimos, kutib turing...</string>
+  <string name="updating_caption_message">Iltimos, kutib turing…</string>
   <string name="login_success" fuzzy="true">Kirish muvaffaqiyatli bajarildi!</string>
   <string name="login_failed" fuzzy="true">Kirish muvaffaqiyatsiz yakunlandi!</string>
   <string name="upload_failed">Fayl topilmadi. Iltimos, boshqa faylni izlab koʻring.</string>
@@ -180,7 +180,7 @@
   <string name="welcome_final_button_text">Ha!</string>
   <string name="welcome_help_button_text">Batafsil maʼlumot</string>
   <string name="detail_panel_cats_label">Turkumlar</string>
-  <string name="detail_panel_cats_loading">Yuklanmoqda...</string>
+  <string name="detail_panel_cats_loading">Yuklanmoqda…</string>
   <string name="detail_panel_cats_none">Tanlanmagan</string>
   <string name="detail_caption_empty">Izoh yoʻq</string>
   <string name="detail_description_empty">Tavsif yoʻq</string>
@@ -390,7 +390,7 @@
   <string name="provider_bookmarks">Xatchoʻplar</string>
   <string name="provider_bookmarks_location">Xatchoʻplar</string>
   <string name="nominate_for_deletion_done">Bajarildi</string>
-  <string name="please_wait">Iltimos, kuting...</string>
+  <string name="please_wait">Iltimos, kuting…</string>
   <string name="manage_exif_tags">EXIF teglarni boshqarish</string>
   <string name="exif_tag_name_author">Muallif</string>
   <string name="exif_tag_name_copyright">Mualliflik huquqlari</string>

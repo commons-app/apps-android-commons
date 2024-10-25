@@ -62,9 +62,9 @@
   <string name="forgot_password">Fʋ tami fʋ paaswɛɛtɛ?</string>
   <string name="signup">Yɔ\'ɔgin kpɛn\'</string>
   <string name="logging_in_title">Kpɛn\'ɛdnɛ</string>
-  <string name="logging_in_message">M bɛlimnɛ gu\'usim...</string>
+  <string name="logging_in_message">M bɛlimnɛ gu\'usim…</string>
   <string name="updating_caption_title">Maligim maal pian\'azut nɛ pa\'alʋg nam</string>
-  <string name="updating_caption_message">M bɛlimnɛ gu\'usim...</string>
+  <string name="updating_caption_message">M bɛlimnɛ gu\'usim…</string>
   <string name="login_success" fuzzy="true">Kpɛn\'ɛb nyaŋya</string>
   <string name="login_failed" fuzzy="true">Kpɛn\'ɛb gʋ\'ʋŋya</string>
   <string name="upload_failed">M Pʋ nyɛ faal la. M bɛlimnɛ tiakim faal si\'a.</string>
@@ -169,7 +169,7 @@
   <string name="welcome_final_button_text">Ɛɛn!</string>
   <string name="welcome_help_button_text">Labaya bɛdigʋ</string>
   <string name="detail_panel_cats_label">Buudi kɔn\'ɔb-kɔn\'ɔb</string>
-  <string name="detail_panel_cats_loading">Bɛ tʋʋma ni...</string>
+  <string name="detail_panel_cats_loading">Bɛ tʋʋma ni…</string>
   <string name="detail_panel_cats_none">Pʋ gaŋ si\'ela</string>
   <string name="detail_caption_empty">Pian\'azug kae</string>
   <string name="detail_description_empty">Pa\'alʋg kae</string>
@@ -400,7 +400,7 @@
   <string name="menu_option_read">Gɔsim dinɛ ka fʋ karim sa</string>
   <string name="menu_option_unread">Gɔsim dinɛ ka fʋ nam pʋ karim</string>
   <string name="error_occurred_in_picking_images">Daʋŋʋ kidig footonam la nɔkirin</string>
-  <string name="please_wait">M bɛlimnɛ gu\'usim...</string>
+  <string name="please_wait">M bɛlimnɛ gu\'usim…</string>
   <string name="images_via_nearby_explanation">Footo banɛ ka fʋ kpɛn\'ɛsi dɔlis zin\'ibanɛ be yamma anɛ footo banɛ ka fʋ kpɛn\'ɛs ka di yinɛ fʋn nyɛ di map ni la.</string>
   <string name="copy_image_caption_description">Yaam paas media banɛ bɛ tuon</string>
   <string name="copied_successfully">Yaaiya</string>
@@ -418,7 +418,7 @@
   <string name="exif_tag_name_serialNumbers">Serial Numbers</string>
   <string name="exif_tag_name_software">Software</string>
   <string name="media_location_permission_denied">Pʋ bas suor ye fʋ kpɛn\' midia zin\'iginɛ</string>
-  <string name="share_via">Pʋdigim app la dɔlis...</string>
+  <string name="share_via">Pʋdigim app la dɔlis…</string>
   <string name="image_info">Footo labaar</string>
   <string name="no_categories_found">Pʋ paam buudinama</string>
   <string name="no_depiction_found">Pʋ nyɛ nwɛnnɛm si\'aa.</string>
@@ -492,7 +492,7 @@
   <string name="add_bookmark">Ba zaŋi paas bookmarknamin</string>
   <string name="wallpaper_set_unsuccessfully">Daʋŋsi\'a naam. Pʋ nyaŋi maal nibdaa footo la</string>
   <string name="setting_wallpaper_dialog_title">Maalimi fʋ nindaa footo la</string>
-  <string name="setting_wallpaper_dialog_message">Maanɛ nindaa footo. M bɛlimnɛ gu\'usim...</string>
+  <string name="setting_wallpaper_dialog_message">Maanɛ nindaa footo. M bɛlimnɛ gu\'usim…</string>
   <string name="theme_default_name">Dɔl sistɛm la</string>
   <string name="theme_dark_name">Lik</string>
   <string name="theme_light_name">Nɛɛsim</string>
@@ -538,9 +538,9 @@
   <string name="limited_connection_enabled">Bas suor ye di tʋm saŋa bi\'ela!</string>
   <string name="limited_connection_mode">Atʋm bi\'ela zi\'esim</string>
   <string name="statistics_quality">Footo sʋma</string>
-  <string name="resuming_upload">Lɛm pin\'in kpɛn\'ɛsʋg...</string>
-  <string name="pausing_upload">Gu\'om kpɛn\'ɛsʋg...</string>
-  <string name="cancelling_upload">Basid kpɛn\'ɛsʋg...</string>
+  <string name="resuming_upload">Lɛm pin\'in kpɛn\'ɛsʋg…</string>
+  <string name="pausing_upload">Gu\'om kpɛn\'ɛsʋg…</string>
+  <string name="cancelling_upload">Basid kpɛn\'ɛsʋg…</string>
   <string name="cancel_upload">Basim kpɛn\'ɛsʋg</string>
   <string name="limited_connection_is_on">Bas suor ye di tʋm saŋa bi\'ela.</string>
   <string name="depicts_step_title">Nwɛnnɛm nam</string>

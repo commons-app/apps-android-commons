@@ -33,20 +33,27 @@
   <string name="appwidget_img">Dienos nuotrauka</string>
   <plurals name="uploads_pending_notification_indicator" fuzzy="true">
     <item quantity="one">%1$d keliamas failas</item>
+    <item quantity="few">%1$d keliami failai</item>
+    <item quantity="many">%1$d failų keliamas</item>
     <item quantity="other">%1$d keliami failai</item>
   </plurals>
   <plurals name="contributions_subtitle" fuzzy="true">
+    <item quantity="one">%1$d įkėlimas</item>
+    <item quantity="few">%1$d įkėlimai</item>
+    <item quantity="many">%1$d įkėlimų</item>
     <item quantity="other"/>
-    <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">1 įkėlimas</item>
   </plurals>
   <string name="starting_uploads"> Įkėlimai pradedami</string>
   <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">Pradedamas %1$d įkėlimas</item>
+    <item quantity="few">Pradedami %1$d įkėlimai</item>
+    <item quantity="many">Pradedami %1$d įkėlimų</item>
     <item quantity="other">Pradedami %1$d įkėlimai</item>
   </plurals>
   <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">%1$d įkėlimas</item>
+    <item quantity="few">%1$d įkėlimai</item>
+    <item quantity="many">%1$d įkėlimų</item>
     <item quantity="other">%1$d įkėlimai</item>
   </plurals>
   <string name="share_license_summary" fuzzy="true">Šio paveikslėlio licencija bus %1$s</string>
@@ -68,7 +75,7 @@
   <string name="logging_in_title">Jungiamasi</string>
   <string name="logging_in_message">Prašome palaukti…</string>
   <string name="updating_caption_title">Antraštės ir aprašymai atnaujinami</string>
-  <string name="updating_caption_message">Prašome palaukti...</string>
+  <string name="updating_caption_message">Prašome palaukti…</string>
   <string name="login_success">Sėkmingai prisijungėte!</string>
   <string name="login_failed">Prisijungti nepavyko!</string>
   <string name="upload_failed">Failas nerastas. Prašome pabandyti kitą failą.</string>
@@ -172,7 +179,7 @@
   <string name="welcome_final_button_text">Taip!</string>
   <string name="welcome_help_button_text">Daugiau informacijos</string>
   <string name="detail_panel_cats_label">Kategorijos</string>
-  <string name="detail_panel_cats_loading">Kraunasi...</string>
+  <string name="detail_panel_cats_loading">Kraunasi…</string>
   <string name="detail_panel_cats_none">Niekas nepasirinkta</string>
   <string name="detail_caption_empty">Nėra antraštės</string>
   <string name="detail_description_empty">Nėra aprašymo</string>
@@ -465,7 +472,7 @@
   <string name="menu_option_read">Žiūrėti perskaitytus</string>
   <string name="menu_option_unread">Žiūrėti neperskaitytus</string>
   <string name="error_occurred_in_picking_images">Renkant vaizdus įvyko klaida</string>
-  <string name="please_wait">Prašome palaukti...</string>
+  <string name="please_wait">Prašome palaukti…</string>
   <string name="images_featured_explanation">Rinktinės nuotraukos yra aukštos kvalifikacijos fotografų ir iliustratorių vaizdai, kuriuos Vikiteka bendruomenė pasirinko kaip svetainėje aukščiausios kokybės.</string>
   <string name="images_via_nearby_explanation">Vaizdai, įkelti per Netoliese esančias vietas, yra vaizdai, kurie įkeliami atrandant vietas žemėlapyje.</string>
   <string name="thanks_received_explanation">Ši funkcija leidžia redaktoriams siųsti padėkos pranešimą naudotojams, kurie atlieka naudingus pakeitimus, naudojant nedidelę padėkos nuorodą istorijos puslapyje arba skirtumų puslapyje.</string>
@@ -486,7 +493,7 @@
   <string name="media_location_permission_denied">Prieiga prie medijos vietos uždrausta</string>
   <string name="add_location_manually">Gali būti, kad negalėsime automatiškai gauti vietos duomenų iš jūsų įkeltų nuotraukų. Prieš pateikdami kiekvienai nuotraukai pridėkite tinkamą vietą</string>
   <string name="share_text">Įkelkite nuotraukas į Vikiteką tiesiai iš savo telefono. Atsisiųskite Vikitekos programėlę dabar: %1$s</string>
-  <string name="share_via">Dalintis programą per ...</string>
+  <string name="share_via">Dalintis programą per …</string>
   <string name="image_info">Vaizdo informacija</string>
   <string name="no_categories_found">Kategorijų nerasta</string>
   <string name="no_depiction_found">Vaizdų nerasta</string>
@@ -746,7 +753,7 @@
   <string name="other_problem_or_information_please_explain_below">Kita problema arba informacija (paaiškinkite toliau).</string>
   <string name="feedback_destination_note">Jūsų atsiliepimai bus paskelbti šiame viki puslapyje: &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Mobile_app/Feedback\"&gt;Commons:Mobile App/Feedback&lt;/a&gt;</string>
   <string name="are_you_sure_that_you_want_cancel_all_the_uploads">Ar tikrai norite atšaukti visus įkėlimus?</string>
-  <string name="cancelling_all_the_uploads">Atšaukiami visi įkėlimai...</string>
+  <string name="cancelling_all_the_uploads">Atšaukiami visi įkėlimai…</string>
   <string name="uploads">Įkėlimai</string>
   <string name="pending">Laukiama</string>
   <string name="failed">Nepavyko</string>

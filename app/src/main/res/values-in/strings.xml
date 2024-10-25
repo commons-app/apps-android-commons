@@ -61,7 +61,6 @@
     <item quantity="other">%1$d Unggahan</item>
   </plurals>
   <plurals name="receiving_shared_content">
-    <item quantity="one">Sedang menerima konten yang dibagikan. Memproses gambar mungkin memerlukan waktu lebih lama tergantung pada ukuran gambar dan perangkat Anda</item>
     <item quantity="other">Sedang menerima konten yang dibagikan. Memproses gambar mungkin memerlukan waktu lebih lama tergantung pada ukuran gambar dan perangkat Anda</item>
   </plurals>
   <string name="navigation_item_explore">Jelajahi</string>
@@ -82,7 +81,7 @@
   <string name="logging_in_title">Memasuki log</string>
   <string name="logging_in_message">Silakan tunggu…</string>
   <string name="updating_caption_title">Memperbarui takarir dan deskripsi</string>
-  <string name="updating_caption_message">Mohon tunggu...</string>
+  <string name="updating_caption_message">Mohon tunggu…</string>
   <string name="login_success" fuzzy="true">Berhasil masuk log!</string>
   <string name="login_failed" fuzzy="true">Gagal masuk log!</string>
   <string name="upload_failed">Berkas tidak ditemukan. Silakan coba berkas lain.</string>
@@ -191,7 +190,7 @@
   <string name="welcome_final_button_text">Ya!</string>
   <string name="welcome_help_button_text">Informasi selengkapnya</string>
   <string name="detail_panel_cats_label">Kategori</string>
-  <string name="detail_panel_cats_loading">Memuat...</string>
+  <string name="detail_panel_cats_loading">Memuat…</string>
   <string name="detail_panel_cats_none">Tidak ada yang dipilih</string>
   <string name="detail_caption_empty">Tanpa takarir</string>
   <string name="detail_description_empty">Tidak ada keterangan</string>
@@ -497,7 +496,7 @@
   <string name="media_location_permission_denied">Akses lokasi media ditolak</string>
   <string name="add_location_manually">Kami mungkin tidak dapat memperoleh data lokasi secara otomatis dari gambar yang Anda unggah. Harap tambahkan lokasi yang sesuai untuk setiap gambar sebelum mengirimkannya</string>
   <string name="share_text">Mengunggah foto ke Wikimedia Commons secara langsung dari telepon Anda. Unduh aplikasi Commons sekarang: %1$s</string>
-  <string name="share_via">Bagikan aplikasi lewat...</string>
+  <string name="share_via">Bagikan aplikasi lewat…</string>
   <string name="image_info">Info Gambar</string>
   <string name="no_categories_found">Kategori tidak ditemukan</string>
   <string name="no_depiction_found">Penggambaran tidak ditemukan</string>
@@ -523,7 +522,6 @@
   <string name="category_edit_helper_show_edit_title">Pembaruan kategori</string>
   <string name="category_edit_helper_show_edit_title_success">Berhasil</string>
   <plurals name="category_edit_helper_show_edit_message_if">
-    <item quantity="one">Kategori %1$s ditambahkan.</item>
     <item quantity="other">Kategori %1$s ditambahkan.</item>
   </plurals>
   <string name="category_edit_helper_edit_message_else">Tidak bisa menambahkan kategori.</string>
@@ -569,7 +567,7 @@
   <string name="add_bookmark">Ditambahkan ke pembatas</string>
   <string name="wallpaper_set_unsuccessfully">Terjadi kesalahan. Tidak bisa menetapkan wallpaper</string>
   <string name="setting_wallpaper_dialog_title">Jadikan Wallpaper</string>
-  <string name="setting_wallpaper_dialog_message">Sedang menetapkan Wallpaper. Tolong tunggu...</string>
+  <string name="setting_wallpaper_dialog_message">Sedang menetapkan Wallpaper. Tolong tunggu…</string>
   <string name="theme_default_name">Ikuti sistem</string>
   <string name="theme_dark_name">Gelap</string>
   <string name="theme_light_name">Terang</string>
@@ -625,9 +623,9 @@
   <string name="limited_connection_mode">Mode Koneksi Terbatas</string>
   <string name="statistics_quality">Gambar Berkualitas</string>
   <string name="quality_images_info">Gambar berkualitas adalah diagram atau foto yang memenuhi standar kualitas tertentu (yang sifatnya teknis) dan berharga bagi proyek Wikimedia</string>
-  <string name="resuming_upload">Melanjutkan unggahan...</string>
-  <string name="pausing_upload">Menunda unggahan...</string>
-  <string name="cancelling_upload">Membatalkan pengunggahan...</string>
+  <string name="resuming_upload">Melanjutkan unggahan…</string>
+  <string name="pausing_upload">Menunda unggahan…</string>
+  <string name="cancelling_upload">Membatalkan pengunggahan…</string>
   <string name="cancel_upload">Batalkan pengunggahan</string>
   <string name="limited_connection_explanation">Anda menyalakan mode koneksi terbatas. Semua pengunggahan ditunda dan akan dilanjutkan begitu Anda mematikan mode ini.</string>
   <string name="limited_connection_is_on">Mode sambungan terbatas sedang menyala.</string>
@@ -743,7 +741,7 @@
     <item quantity="other">%d gambar dipilih</item>
   </plurals>
   <string name="talk">Bicara</string>
-  <string name="cancelling_all_the_uploads">Membatalkan semua unggahan...</string>
+  <string name="cancelling_all_the_uploads">Membatalkan semua unggahan…</string>
   <string name="uploads">Unggahan</string>
   <string name="pending">Menunggu</string>
   <string name="failed">Gagal</string>

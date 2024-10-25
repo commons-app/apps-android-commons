@@ -23,15 +23,15 @@
   <string name="app_name">Вики-аһулх һазр</string>
   <string name="menu_settings">Тохрллһ</string>
   <string name="intent_share_upload_label">Вики-аһулх һазрур ацалх</string>
-  <string name="upload_in_progress">Ацалгдҗана...</string>
+  <string name="upload_in_progress">Ацалгдҗана…</string>
   <string name="username">Кергләчин нерн</string>
   <string name="password">Нууц үг</string>
   <string name="login">Невтрх</string>
   <string name="forgot_password">Нууц үгән мартвт?</string>
   <string name="signup">Бүрткүлх</string>
   <string name="logging_in_title">Невтрҗәнә</string>
-  <string name="logging_in_message">Күләхнтн...</string>
-  <string name="updating_caption_message">Күләхнтн...</string>
+  <string name="logging_in_message">Күләхнтн…</string>
+  <string name="updating_caption_message">Күләхнтн…</string>
   <string name="login_success" fuzzy="true">Невтрлт амҗлтта болла!</string>
   <string name="login_failed" fuzzy="true">Невтрҗ чадсн уга!</string>
   <string name="uploading_started">Ацаллт кеҗ экллә!</string>
@@ -83,7 +83,7 @@
   <string name="welcome_final_button_text">Тиим</string>
   <string name="welcome_help_button_text">Делгрңгү</string>
   <string name="detail_panel_cats_label">Нерн, төрл</string>
-  <string name="detail_panel_cats_loading">Умшҗана...</string>
+  <string name="detail_panel_cats_loading">Умшҗана…</string>
   <string name="detail_panel_cats_none">Алькинь чигн суңһад уга</string>
   <string name="detail_description_empty">Тодрхаллт уга</string>
   <string name="detail_discussion_empty">Күүндән уга</string>

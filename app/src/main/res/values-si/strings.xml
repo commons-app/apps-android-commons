@@ -5,25 +5,24 @@
 * Sandaru
 * හරිත
 -->
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
   <string name="commons_facebook">කොමන්ස් ෆේස්බුක් පිටුව</string>
   <string name="commons_logo">කොමන්ස් ලාන්චනය</string>
   <string name="commons_website">කොමන්ස් වෙබ් අඩවිය</string>
   <plurals name="uploads_pending_notification_indicator" fuzzy="true">
-    <item quantity="one">1 ගොනුවක් උඩුගත කෙරේ</item>
+    <item quantity="one" tools:ignore="ImpliedQuantity">1 ගොනුවක් උඩුගත කෙරේ</item>
     <item quantity="other">ගොනු %d ක් උඩුගත කෙරේ</item>
   </plurals>
   <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">තවමත් කිසිදු උඩුගත කිරීමක් නැත</item>
-    <item quantity="one">එක් උඩුගත කිරීමක් ඇත</item>
+    <item quantity="one" tools:ignore="ImpliedQuantity">එක් උඩුගත කිරීමක් ඇත</item>
     <item quantity="other">උඩුගත කිරීම් %1$d ක් ඇත</item>
   </plurals>
   <plurals name="starting_multiple_uploads" fuzzy="true">
-    <item quantity="one">1 උඩුගත කිරීමක් ආරම්භ කරමින්</item>
+    <item quantity="one" tools:ignore="ImpliedQuantity">1 උඩුගත කිරීමක් ආරම්භ කරමින්</item>
     <item quantity="other">උඩුගත කිරීම් %1$d ක් ආරම්භ කරමින්</item>
   </plurals>
   <plurals name="multiple_uploads_title" fuzzy="true">
-    <item quantity="one">1 උඩුගත කිරීමක්</item>
+    <item quantity="one" tools:ignore="ImpliedQuantity">1 උඩුගත කිරීමක්</item>
     <item quantity="other">උඩුගත කිරීම් %1$d ක්</item>
   </plurals>
   <string name="share_license_summary" fuzzy="true">මෙම පින්තූරය %1$s යටතේ වලංගු වනු ඇත</string>

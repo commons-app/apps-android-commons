@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.bookmarks.locations;
 
+import android.annotation.SuppressLint;
 import android.content.ContentProviderClient;
 import android.content.ContentValues;
 import android.database.Cursor;
@@ -146,6 +147,7 @@ public class BookmarkLocationsDao {
         return false;
     }
 
+    @SuppressLint("Range")
     @NonNull
     Place fromCursor(final Cursor cursor) {
         final LatLng location = new LatLng(cursor.getDouble(cursor.getColumnIndex(Table.COLUMN_LAT)),

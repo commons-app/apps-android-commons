@@ -87,7 +87,7 @@ class WikidataFeedback : BaseActivity() {
                                 lat,
                                 lng,
                             )
-                        } as Callable<SingleSource<Boolean?>>,
+                        },
                     ).subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe({ aBoolean: Boolean? ->

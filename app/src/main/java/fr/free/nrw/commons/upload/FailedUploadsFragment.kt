@@ -63,7 +63,7 @@ class FailedUploadsFragment :
         }
 
         if (StringUtils.isEmpty(userName)) {
-            userName = sessionManager!!.getUserName()
+            userName = sessionManager.getUserName()
         }
     }
 
@@ -96,8 +96,8 @@ class FailedUploadsFragment :
     fun initRecyclerView() {
         binding.failedUploadsRecyclerView.setLayoutManager(LinearLayoutManager(this.context))
         binding.failedUploadsRecyclerView.adapter = adapter
-        pendingUploadsPresenter!!.getFailedContributions()
-        pendingUploadsPresenter!!.failedContributionList.observe(
+        pendingUploadsPresenter.getFailedContributions()
+        pendingUploadsPresenter.failedContributionList.observe(
             viewLifecycleOwner,
         ) { list: PagedList<Contribution?> ->
             adapter.submitList(list)

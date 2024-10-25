@@ -10,19 +10,22 @@
   <string name="commons_logo">Logo Commonsa</string>
   <plurals name="uploads_pending_notification_indicator" fuzzy="true">
     <item quantity="one">postavlja se %1$d datoteka</item>
+    <item quantity="few">postavlja se %1$d datoteke</item>
     <item quantity="other">postavlja se %1$d datoteka</item>
   </plurals>
   <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">postavljena %1$d datoteka</item>
+    <item quantity="few">postavljena %1$d datoteke</item>
     <item quantity="other">postavljenih datoteka: %1$d</item>
   </plurals>
   <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">Započinjem postavljanje %1$d datoteke</item>
+    <item quantity="few">Započinjem postavljanje %1$d datoteke</item>
     <item quantity="other">Započinjem postavljanje %1$d datoteka/-e</item>
   </plurals>
   <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">%1$d postavljanje</item>
+    <item quantity="few">%1$d postavljanja</item>
     <item quantity="other">%1$d postavljanja</item>
   </plurals>
   <string name="share_license_summary" fuzzy="true">Slika će se voditi pod licencom %1$s</string>

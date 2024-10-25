@@ -19,6 +19,7 @@ import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+import java.util.Locale;
 import timber.log.Timber;
 
 public class FileUtils {
@@ -139,7 +140,7 @@ public class FileUtils {
             String fileExtension = MimeTypeMap.getFileExtensionFromUrl(uri
                     .toString());
             mimeType = MimeTypeMap.getSingleton().getMimeTypeFromExtension(
-                    fileExtension.toLowerCase());
+                    fileExtension.toLowerCase(Locale.getDefault()));
         }
         return mimeType;
     }

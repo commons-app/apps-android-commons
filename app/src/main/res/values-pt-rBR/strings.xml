@@ -28,7 +28,7 @@
 * Tuliouel
 * YuriNikolai
 -->
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
   <string name="commons_facebook">Página do Commons no Facebook</string>
   <string name="commons_github">Código fonte do Commons no Github</string>
   <string name="commons_logo">Logotipo do Commons</string>
@@ -51,32 +51,39 @@
   <string name="nearby_filter_state">Estado do local</string>
   <string name="appwidget_img">Imagem do Dia</string>
   <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">carregando arquivo</item>
+    <item quantity="one" tools:ignore="ImpliedQuantity">carregando arquivo</item>
+    <item quantity="many">carregando %1$d arquivos</item>
     <item quantity="other">carregando %1$d arquivos</item>
   </plurals>
   <plurals name="contributions_subtitle">
     <item quantity="one">(%1$d)</item>
+    <item quantity="many">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
   <string name="starting_uploads">Iniciando carregamentos</string>
   <plurals name="starting_multiple_uploads">
     <item quantity="one">Processando %d carregamento</item>
+    <item quantity="many">Processando %d carregamentos</item>
     <item quantity="other">Processando %d carregamentos</item>
   </plurals>
   <plurals name="multiple_uploads_title">
     <item quantity="one">%d carregamento</item>
+    <item quantity="many">%d carregamentos</item>
     <item quantity="other">%d carregamentos</item>
   </plurals>
   <plurals name="share_license_summary">
     <item quantity="one">Esta imagem será licenciada sob %1$s</item>
+    <item quantity="many">Estas imagens serão licenciadas sob %1$s</item>
     <item quantity="other">Estas imagens serão licenciadas sob %1$s</item>
   </plurals>
   <plurals name="upload_count_title">
     <item quantity="one">%1$d carregamento</item>
+    <item quantity="many">%1$d carregamentos</item>
     <item quantity="other">%1$d carregamentos</item>
   </plurals>
   <plurals name="receiving_shared_content">
-    <item quantity="one">Recebendo conteúdo compartilhado. O processamento da imagem pode demorar algum tempo, dependendo do tamanho da imagem e do seu dispositivo</item>
+    <item quantity="one" tools:ignore="ImpliedQuantity">Recebendo conteúdo compartilhado. O processamento da imagem pode demorar algum tempo, dependendo do tamanho da imagem e do seu dispositivo</item>
+    <item quantity="many">Recebendo conteúdo compartilhado. O processamento das imagens pode levar algum tempo, dependendo do tamanho das imagens e do dispositivo</item>
     <item quantity="other">Recebendo conteúdo compartilhado. O processamento das imagens pode levar algum tempo, dependendo do tamanho das imagens e do dispositivo</item>
   </plurals>
   <string name="navigation_item_explore">Explorar</string>
@@ -95,9 +102,9 @@
   <string name="forgot_password">Esqueceu a senha?</string>
   <string name="signup">Cadastre-se</string>
   <string name="logging_in_title">Efetuar login</string>
-  <string name="logging_in_message">Por favor, aguarde...</string>
+  <string name="logging_in_message">Por favor, aguarde…</string>
   <string name="updating_caption_title">Atualizando legendas e descrições</string>
-  <string name="updating_caption_message">Por favor, aguarde...</string>
+  <string name="updating_caption_message">Por favor, aguarde…</string>
   <string name="login_success" fuzzy="true">Login bem sucedido</string>
   <string name="login_failed" fuzzy="true">Falha na identificação</string>
   <string name="upload_failed">Arquivo não encontrado. Tente outro arquivo.</string>
@@ -161,7 +168,7 @@
   <string name="menu_about">Sobre</string>
   <string name="about_license">O Wikimedia Commons é um aplicativo de código aberto criado e mantido por beneficiários e voluntários da comunidade Wikimedia. A Wikimedia Foundation não está envolvida na criação, desenvolvimento ou manutenção do aplicativo.</string>
   <string name="about_improve">Criar uma nova &lt;a href=\"%1$s\"&gt;publicação no GitHub&lt;/a&gt; para informar erros e sugestões.</string>
-  <string name="about_privacy_policy">Politica de privacidade</string>
+  <string name="about_privacy_policy">Política de privacidade</string>
   <string name="about_credits">Créditos</string>
   <string name="title_activity_about">Sobre</string>
   <string name="menu_feedback">Enviar comentários (por e-mail)</string>
@@ -248,7 +255,7 @@
   <string name="welcome_image_rainbow_bridge">Ponte de Arco-Íris</string>
   <string name="welcome_image_tulip">Tulipa</string>
   <string name="welcome_image_welcome_wikipedia">Bem-vindo à Wikipédia</string>
-  <string name="welcome_image_welcome_copyright">Direitos de autor são bem vindo</string>
+  <string name="welcome_image_welcome_copyright">Direitos de autor são bem-vindo</string>
   <string name="welcome_image_sydney_opera_house">Ópera de Sydney</string>
   <string name="cancel">Cancelar</string>
   <string name="navigation_drawer_open">Abrir</string>
@@ -306,7 +313,7 @@
   <string name="nearby_commons">Commons</string>
   <string name="about_rate_us">Avalie-nos</string>
   <string name="about_faq">Perguntas frequentes</string>
-  <string name="user_guide">Guia de usuario</string>
+  <string name="user_guide">Guia de usuário</string>
   <string name="welcome_skip_button">Pular Tutorial</string>
   <string name="no_internet">A Internet não está disponível</string>
   <string name="error_notifications">Erro ao tentar obter as notificações</string>
@@ -521,7 +528,7 @@
   <string name="media_location_permission_denied">Acesso à localização da mídia negado</string>
   <string name="add_location_manually">É possível que não possamos obter automaticamente os dados de localização das imagens que você carregar. Por favor adicione a localização adequada para cada imagem antes de envia-las</string>
   <string name="share_text">Carregue fotos na wiki Wikimedia Commons, diretamente do seu celular. Baixe o aolicativo Commons agora: %1$s</string>
-  <string name="share_via">Compartilhar aplicativo via...</string>
+  <string name="share_via">Compartilhar aplicativo via…</string>
   <string name="image_info">Informação da imagem</string>
   <string name="no_categories_found">Nenhuma categoria encontrada</string>
   <string name="no_depiction_found">Nenhuma representação encontrada</string>
@@ -548,6 +555,7 @@
   <string name="category_edit_helper_show_edit_title_success">Sucesso</string>
   <plurals name="category_edit_helper_show_edit_message_if">
     <item quantity="one">A categoria %1$s foi adicionada.</item>
+    <item quantity="many">As categorias %1$s foram adicionadas.</item>
     <item quantity="other">As categorias %1$s foram adicionadas.</item>
   </plurals>
   <string name="category_edit_helper_edit_message_else">Não foi possível adicionar categorias.</string>
@@ -556,6 +564,7 @@
   <string name="depictions_edit_helper_show_edit_title">Editar representações</string>
   <plurals name="depictions_edit_helper_show_edit_message_if">
     <item quantity="one">O elemento retratado %1$s está adicionado.</item>
+    <item quantity="many">Os elementos retratados %1$s estão adicionados.</item>
     <item quantity="other">Os elementos retratados %1$s estão adicionados.</item>
   </plurals>
   <string name="depictions_edit_helper_edit_message_else">Não foi possível adicionar os elementos retratados.</string>
@@ -767,6 +776,7 @@
   <string name="saving_gpx_file">Salvar arquivo GPX</string>
   <plurals name="custom_picker_images_selected_title_appendix">
     <item quantity="one">%d imagem selecinada</item>
+    <item quantity="many">%d imagens selecionadas</item>
     <item quantity="other">%d imagens selecionadas</item>
   </plurals>
   <string name="write_something_about_the_item">Escreva algo sobre o item %1$s. Isso será visivel publicamente.</string>

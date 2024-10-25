@@ -46,7 +46,7 @@ class BaseMarker {
         val drawable: Drawable = context.resources.getDrawable(drawableResId)
         icon =
             if (drawable is BitmapDrawable) {
-                (drawable as BitmapDrawable).bitmap
+                drawable.bitmap
             } else {
                 val bitmap =
                     Bitmap.createBitmap(

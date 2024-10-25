@@ -70,9 +70,9 @@
   <string name="forgot_password">Ka tu obliviis tua pasovorto?</string>
   <string name="signup">Enirar</string>
   <string name="logging_in_title">Eniranta</string>
-  <string name="logging_in_message">Voluntez vartar...</string>
+  <string name="logging_in_message">Voluntez vartar…</string>
   <string name="updating_caption_title">Aktualiganta etiketi e deskripturi</string>
-  <string name="updating_caption_message">Voluntez vartar...</string>
+  <string name="updating_caption_message">Voluntez vartar…</string>
   <string name="login_success">Eniro sucesoza!</string>
   <string name="login_failed">Eniro faliis!</string>
   <string name="upload_failed">Arkivo ne trovita. Voluntez probar altr arkivo.</string>
@@ -142,7 +142,7 @@
   <string name="menu_feedback">Sendez komenti (per e-posto)</string>
   <string name="no_email_client">Nula kliento di e-posto instalesis</string>
   <string name="provider_categories">Kategorii recente uzita</string>
-  <string name="waiting_first_sync">Vartanta unesma sinkronigo...</string>
+  <string name="waiting_first_sync">Vartanta unesma sinkronigo…</string>
   <string name="no_uploads_yet">Vu ankore ne sendis fotografuri.</string>
   <string name="menu_retry_upload">Riprobar</string>
   <string name="menu_cancel_upload">Nuligar</string>
@@ -180,7 +180,7 @@
   <string name="welcome_final_button_text">Yes!</string>
   <string name="welcome_help_button_text">Plusa informo</string>
   <string name="detail_panel_cats_label">Kategorii</string>
-  <string name="detail_panel_cats_loading">Karganta...</string>
+  <string name="detail_panel_cats_loading">Karganta…</string>
   <string name="detail_panel_cats_none">Nulo selektesis</string>
   <string name="detail_caption_empty">Nula deskripto-texto</string>
   <string name="detail_description_empty">Nula deskripto</string>
@@ -410,7 +410,7 @@
   <string name="no_read_notification">Vu ne lektis irga avizo</string>
   <string name="menu_option_read">Vidar lektita</string>
   <string name="menu_option_unread">Vidar ne-lektata</string>
-  <string name="please_wait">Vartez...</string>
+  <string name="please_wait">Vartez…</string>
   <string name="copied_successfully">Kopiita</string>
   <string name="welcome_do_upload_content_description">Exempli pri bona imaji por sendar a Commons</string>
   <string name="skip_image">Saltez ca imajo</string>
@@ -472,7 +472,7 @@
   <string name="title_app_shortcut_setting">Ajusti</string>
   <string name="add_bookmark">Adjuntita marko-rubandi</string>
   <string name="setting_wallpaper_dialog_title">Uzar kom skreno-kovrilo</string>
-  <string name="setting_wallpaper_dialog_message">Kreanta skreno-kovrilo. Voluntez vartar...</string>
+  <string name="setting_wallpaper_dialog_message">Kreanta skreno-kovrilo. Voluntez vartar…</string>
   <string name="theme_dark_name">Koloro obskura</string>
   <string name="theme_light_name">Koloro klara</string>
   <string name="load_more">Charjez pluse</string>
@@ -500,7 +500,7 @@
   <string name="leaderboard_used">Uzita</string>
   <string name="leaderboard_my_rank_button_text">Mea rango</string>
   <string name="statistics_quality">Imaji di qualeso</string>
-  <string name="cancelling_upload">Nuliganta sendajo...</string>
+  <string name="cancelling_upload">Nuliganta sendajo…</string>
   <string name="cancel_upload">Cesar kargajo</string>
   <string name="read_help_link">Lektez pluse</string>
   <string name="media_detail_in_all_languages">En omna idiomi</string>

@@ -22,7 +22,7 @@ class WikipediaInstructionsDialogFragment : DialogFragment() {
     ) = DialogAddToWikipediaInstructionsBinding
         .inflate(inflater, container, false)
         .apply {
-            val contribution: Contribution? = arguments!!.getParcelable(ARG_CONTRIBUTION)
+            val contribution: Contribution? = requireArguments().getParcelable(ARG_CONTRIBUTION)
             tvWikicode.setText(contribution?.media?.wikiCode)
             instructionsCancel.setOnClickListener { dismiss() }
             instructionsConfirm.setOnClickListener {

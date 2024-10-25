@@ -20,27 +20,33 @@
   <string name="appwidget_img">Imatge del dia</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">s\'està carregant %1$d fitxer</item>
+    <item quantity="many">S\'estan carregant de %1$d fitxers</item>
     <item quantity="other">s\'estan carregant %1$d fitxers</item>
   </plurals>
   <plurals name="contributions_subtitle">
     <item quantity="one">(%1$d)</item>
+    <item quantity="many">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
   <string name="starting_uploads">S\'inicien les càrregues</string>
   <plurals name="starting_multiple_uploads">
     <item quantity="one">S\'està processant %1$d càrrega</item>
+    <item quantity="many">S\'estan processant %1$d càrregues</item>
     <item quantity="other">S\'estan processant %1$d càrregues</item>
   </plurals>
   <plurals name="multiple_uploads_title">
     <item quantity="one">%d càrrega</item>
+    <item quantity="many">$d càrregues</item>
     <item quantity="other">%d càrregues</item>
   </plurals>
   <plurals name="share_license_summary">
     <item quantity="one">Aquesta imatge quedarà sota llicència %1$s</item>
+    <item quantity="many">Aquestes imatges quedaran sota llicència %1$s</item>
     <item quantity="other">Aquestes imatges quedaran sota llicència %1$s</item>
   </plurals>
   <plurals name="upload_count_title">
     <item quantity="one">%1$d pujada</item>
+    <item quantity="many">%1$d pujades</item>
     <item quantity="other">%1$d pujades</item>
   </plurals>
   <string name="navigation_item_explore">Explora</string>
@@ -392,7 +398,7 @@
   <string name="exif_tag_name_lensModel">Model de lent</string>
   <string name="exif_tag_name_serialNumbers">Números de sèrie</string>
   <string name="exif_tag_name_software">Programari</string>
-  <string name="share_via">Comparteix l\'aplicació a través de...</string>
+  <string name="share_via">Comparteix l\'aplicació a través de…</string>
   <string name="image_info">Informació de la imatge</string>
   <string name="no_categories_found">No s’ha trobat cap categoria</string>
   <string name="no_depiction_found">No s\'han trobat representacions</string>

@@ -393,7 +393,7 @@
   <string name="no_image">কোনও চিত্র ব্যবহৃত হয়নি</string>
   <string name="menu_option_read">পঠিতগুলি দেখান</string>
   <string name="menu_option_unread">অপঠিতগুলি দেখান</string>
-  <string name="please_wait">অনুগ্রহ করে অপেক্ষা করুন...</string>
+  <string name="please_wait">অনুগ্রহ করে অপেক্ষা করুন…</string>
   <string name="copied_successfully">অনুলিপি করা হয়েছে</string>
   <string name="skip_image">এই চিত্র এড়িয়ে যান</string>
   <string name="exif_tag_name_author">প্রণেতা</string>

@@ -4,7 +4,7 @@
 * Violetova
 * Vlad5250
 -->
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
   <string name="commons_facebook">Ризницата на Фејсбук</string>
   <string name="commons_github">Изворен код на Ризницата на Github</string>
   <string name="commons_logo">Лого на Ризницата</string>
@@ -52,7 +52,7 @@
     <item quantity="other">%1$d подигања</item>
   </plurals>
   <plurals name="receiving_shared_content">
-    <item quantity="one">Добивам споделена содржина. Обработката може да потрае, зависно од големината на сликата и вашиот уред</item>
+    <item quantity="one" tools:ignore="ImpliedQuantity">Добивам споделена содржина. Обработката може да потрае, зависно од големината на сликата и вашиот уред</item>
     <item quantity="other">Добивам споделена содржина. Обработката може да потрае, зависно од големината на сликите и вашиот уред</item>
   </plurals>
   <string name="navigation_item_explore">Истражи</string>
@@ -73,7 +73,7 @@
   <string name="logging_in_title">Најава</string>
   <string name="logging_in_message">Почекајте…</string>
   <string name="updating_caption_title">Поднова на толкувања и описи</string>
-  <string name="updating_caption_message">Почекајте...</string>
+  <string name="updating_caption_message">Почекајте…</string>
   <string name="login_success">Најавата е успешна!</string>
   <string name="login_failed">Најавата не успеа!</string>
   <string name="upload_failed">Не ја пронајдов податотеката. Пробајте со друга.</string>
@@ -479,7 +479,7 @@
   <string name="menu_option_read">Погл. прочитани</string>
   <string name="menu_option_unread">Погл. непрочитани</string>
   <string name="error_occurred_in_picking_images">Се јави грешка при избирањето на сликите</string>
-  <string name="please_wait">Почекајте...</string>
+  <string name="please_wait">Почекајте…</string>
   <string name="images_featured_explanation">Избраните слики се дела на високообучени фотографи и илустратори кои заедницата ги избрала за да бидат истакнати како едни од најдобрите слики на Ризницата.</string>
   <string name="images_via_nearby_explanation">Сликите подигнати преку „Околни места“ се оние подигнати при откривање на места на картата.</string>
   <string name="thanks_received_explanation">Ова им дава можност на уредниците да им испраќаат благодарници на корисниците што вршат полезни уредувања. Ова се прави стискајќи на малата врска за заблагодарување во страницата за историја или разлики.</string>
@@ -501,7 +501,7 @@
   <string name="media_location_permission_denied">Одибиен пристапот до местоположбата на сликата</string>
   <string name="add_location_manually">Можеби нема да можеме автоматски да ги добиеме податоците за местоположба од сликите што ги подигате. Ставете ја соодветната местоположба за секоја слика пред да подигате</string>
   <string name="share_text">Подигајте слики непосредно на Ризницата од телефон. Преземете го прилогот на Ризницата сега: %1$s</string>
-  <string name="share_via">Сподели преку...</string>
+  <string name="share_via">Сподели преку…</string>
   <string name="image_info">Инфо за сликата</string>
   <string name="no_categories_found">Не пронајдов ниедна категорија</string>
   <string name="no_depiction_found">Не пронајдов ниедно прикажување</string>
@@ -780,7 +780,7 @@
   <string name="other_problem_or_information_please_explain_below">Друг проблем или информација (објаснете подолу).</string>
   <string name="feedback_destination_note">Вашите мислења се објавуваат на следнава викистраница:  &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Mobile_app/Feedback\"&gt;Commons:Mobile app/Feedback&lt;/a&gt;</string>
   <string name="are_you_sure_that_you_want_cancel_all_the_uploads">Дали сигурно сакате да ги откажете сите подигања?</string>
-  <string name="cancelling_all_the_uploads">Ги откажувам сите подигања...</string>
+  <string name="cancelling_all_the_uploads">Ги откажувам сите подигања…</string>
   <string name="uploads">Подигања</string>
   <string name="pending">Во исчекување</string>
   <string name="failed">Неуспешно</string>

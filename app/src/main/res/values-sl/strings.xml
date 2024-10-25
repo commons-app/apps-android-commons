@@ -6,7 +6,7 @@
 * McDutchie
 * Upwinxp
 -->
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
   <string name="commons_facebook">Facebook stran Zbirke</string>
   <string name="commons_github">Izvorna koda Zbirke v shrambi Github</string>
   <string name="commons_logo">Logotip Zbirke</string>
@@ -66,8 +66,8 @@
     <item quantity="other">%1$d nalaganj</item>
   </plurals>
   <plurals name="receiving_shared_content">
-    <item quantity="one">Prejemam deljeno vsebino. Obdelava slike lahko traja nekaj časa, odvisno od velikosti slike in vaše naprave.</item>
-    <item quantity="two">Prejemam deljeno vsebino. Obdelava slik lahko traja nekaj časa, odvisno od velikosti slike in vaše naprave.</item>
+    <item quantity="one" tools:ignore="ImpliedQuantity">Prejemam deljeno vsebino. Obdelava slike lahko traja nekaj časa, odvisno od velikosti slike in vaše naprave.</item>
+    <item quantity="two" tools:ignore="ImpliedQuantity">Prejemam deljeno vsebino. Obdelava slik lahko traja nekaj časa, odvisno od velikosti slike in vaše naprave.</item>
     <item quantity="few">Prejemam deljeno vsebino. Obdelava slik lahko traja nekaj časa, odvisno od velikosti slike in vaše naprave.</item>
     <item quantity="other">Prejemam deljeno vsebino. Obdelava slik lahko traja nekaj časa, odvisno od velikosti slike in vaše naprave.</item>
   </plurals>
@@ -87,9 +87,9 @@
   <string name="forgot_password">Ste pozabili geslo?</string>
   <string name="signup">Ustvari račun</string>
   <string name="logging_in_title">Prijavljanje</string>
-  <string name="logging_in_message">Prosimo, počakajte ...</string>
+  <string name="logging_in_message">Prosimo, počakajte …</string>
   <string name="updating_caption_title">Posodabljam napise in opise</string>
-  <string name="updating_caption_message">Prosimo, počakajte ...</string>
+  <string name="updating_caption_message">Prosimo, počakajte …</string>
   <string name="login_success" fuzzy="true">Uspešno ste se prijavili!</string>
   <string name="login_failed" fuzzy="true">Prijava ni uspela!</string>
   <string name="upload_failed">Datoteka ni bila najdena. Prosimo, poskusite z drugo datoteko.</string>
@@ -133,7 +133,7 @@
   <string name="provider_modifications">Spremembe</string>
   <string name="menu_upload_single">Naloži</string>
   <string name="categories_search_text_hint">Poišči kategorije</string>
-  <string name="depicts_search_text_hint">Poiščite predmete, ki jih vaša predstavnostna datoteka prikazuje (gora, Tadž Mahal, ...)</string>
+  <string name="depicts_search_text_hint">Poiščite predmete, ki jih vaša predstavnostna datoteka prikazuje (gora, Tadž Mahal, …)</string>
   <string name="menu_save_categories">Shrani</string>
   <string name="refresh_button">Osveži</string>
   <string name="display_list_button">Seznam</string>
@@ -159,7 +159,7 @@
   <string name="menu_feedback">Pošljite povratno informacijo (prek e-pošte)</string>
   <string name="no_email_client">Nameščen ni noben e-poštni odjemalec</string>
   <string name="provider_categories">Pred kratkim uporabljene kategorije</string>
-  <string name="waiting_first_sync">Čakam na prvo sinhronizacijo ...</string>
+  <string name="waiting_first_sync">Čakam na prvo sinhronizacijo …</string>
   <string name="no_uploads_yet">Naložili niste še nobene fotografije.</string>
   <string name="menu_retry_upload">Poskusi znova</string>
   <string name="menu_cancel_upload">Prekliči</string>
@@ -199,7 +199,7 @@
   <string name="welcome_final_button_text">Da!</string>
   <string name="welcome_help_button_text">Več informacij</string>
   <string name="detail_panel_cats_label">Kategorije</string>
-  <string name="detail_panel_cats_loading">Nalaganje ...</string>
+  <string name="detail_panel_cats_loading">Nalaganje …</string>
   <string name="detail_panel_cats_none">Nič ni izbrano</string>
   <string name="detail_caption_empty">Ni napisa</string>
   <string name="detail_description_empty">Ni opisa</string>
@@ -491,7 +491,7 @@
   <string name="menu_option_read">Ogled prebranih</string>
   <string name="menu_option_unread">Ogled neprebranih</string>
   <string name="error_occurred_in_picking_images">Pri izbiri slik je prišlo do napake</string>
-  <string name="please_wait">Prosimo, počakajte ...</string>
+  <string name="please_wait">Prosimo, počakajte …</string>
   <string name="images_featured_explanation">Izbrane slike so slike izvrstnih fotografov in ilustratorjev, ki jih je skupnost Wikimedijine zbirke prepoznala kot najbolj kakovostne v tem projektu.</string>
   <string name="images_via_nearby_explanation">Slike, naložene z Bližnjimi kraji, so slike, ki so naložene z odkrivanjem krajev na zemljevidu.</string>
   <string name="thanks_received_explanation">Ta možnost vam omogoča, da urejevalcem, ki so opravili koristno urejanje, pošljete zahvalo – z uporabo kratke povezave na strani zgodovine ali strani primerjave.</string>
@@ -513,7 +513,7 @@
   <string name="media_location_permission_denied">Dostop do lokacije predstavnosti zavrnjen</string>
   <string name="add_location_manually">Za slike, ki jih nalagate, ne moremo samodejno pridobiti lokacije. Pred pošiljanjem dodajte za vsako sliko ustrezno lokacijo.</string>
   <string name="share_text">Nalagajte slike v Wikimedijino zbirko neposredno iz telefona. Prenesite aplikacijo Commons zdaj: %1$s</string>
-  <string name="share_via">Deli aplikacijo prek ...</string>
+  <string name="share_via">Deli aplikacijo prek …</string>
   <string name="image_info">Informacije o sliki</string>
   <string name="no_categories_found">Ni najdenih kategorij</string>
   <string name="no_depiction_found">Ni najdenih upodobitev</string>
@@ -569,7 +569,7 @@
   <string name="coordinates_picking_unsuccessful" fuzzy="true">Koordinat ni bilo mogoče pridobiti.</string>
   <string name="descriptions_picking_unsuccessful">Ni bilo mogoče pridobiti opisov.</string>
   <string name="description_activity_title">Uredi opise in napise</string>
-  <string name="share_image_via">Deli slike prek ...</string>
+  <string name="share_image_via">Deli slike prek …</string>
   <string name="you_have_no_achievements_yet">Ničesar še niste prispevali</string>
   <string name="no_achievements_yet">%s ni opravil_a še nobenega prispevka</string>
   <string name="account_created">Račun ustvarjen!</string>
@@ -593,7 +593,7 @@
   <string name="add_bookmark">Dodano med zaznamke</string>
   <string name="wallpaper_set_unsuccessfully">Nekaj je šlo narobe. Ozadja ni bilo mogoče nastaviti.</string>
   <string name="setting_wallpaper_dialog_title">Nastavi kot ozadje</string>
-  <string name="setting_wallpaper_dialog_message">Nastavljam ozadje. Prosimo, počakajte ...</string>
+  <string name="setting_wallpaper_dialog_message">Nastavljam ozadje. Prosimo, počakajte …</string>
   <string name="theme_default_name">Sledi sistemu</string>
   <string name="theme_dark_name">Temna</string>
   <string name="theme_light_name">Svetla</string>
@@ -649,9 +649,9 @@
   <string name="limited_connection_mode">Način omejene povezanosti</string>
   <string name="statistics_quality">Kakovostne slike</string>
   <string name="quality_images_info">Kakovostne slike so ponazoritve ali fotografije, ki ustrezajo nekaterim merilom kakovosti (ta so predvsem tehnična) in so dragocene za projekte Wikimedie</string>
-  <string name="resuming_upload">Nalaganje se nadaljuje ...</string>
-  <string name="pausing_upload">Zaustavljam nalaganje ...</string>
-  <string name="cancelling_upload">Preklicujem nalaganje ...</string>
+  <string name="resuming_upload">Nalaganje se nadaljuje…</string>
+  <string name="pausing_upload">Zaustavljam nalaganje…</string>
+  <string name="cancelling_upload">Preklicujem nalaganje…</string>
   <string name="cancel_upload">Preklic nalaganja</string>
   <string name="limited_connection_explanation">Vklopili ste način omejene povezanosti. Vsa nalaganja so začasno ustavljena in se bodo nadaljevala, ko boste ta način izklopili.</string>
   <string name="limited_connection_is_on">Način omejene povezanosti je vklopljen.</string>

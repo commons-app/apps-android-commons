@@ -21,25 +21,44 @@
   <string name="nearby_all">Popeth</string>
   <string name="appwidget_img">Llun y Dydd</string>
   <plurals name="uploads_pending_notification_indicator" fuzzy="true">
+    <item quantity="zero">%1$d ffeil yn uwchlwytho</item>
     <item quantity="one">%1$d ffeil yn uwchlwytho</item>
+    <item quantity="two">%1$d ffeil yn uwchlwytho</item>
+    <item quantity="few">%1$d ffeil yn uwchlwytho</item>
+    <item quantity="many">%1$d ffeil yn uwchlwytho</item>
     <item quantity="other">%1$d ffeil yn uwchlwytho</item>
   </plurals>
   <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">(%1$d)</item>
+    <item quantity="two">(%1$d)</item>
+    <item quantity="few">(%1$d)</item>
+    <item quantity="many">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
   <string name="starting_uploads">Cychwyn Uwchlwytho</string>
   <plurals name="starting_multiple_uploads" fuzzy="true">
+    <item quantity="zero">Dechrau %1$d uwchlwythiad</item>
     <item quantity="one">Cychwyn %1$d uwchlwythiad</item>
+    <item quantity="two">Dechrau %1$d uwchlwythiad</item>
+    <item quantity="few">Dechrau %1$d uwchlwythiad</item>
+    <item quantity="many">Dechrau %1$d uwchlwythiad</item>
     <item quantity="other">Cychwyn uwchlwytho %1$d ffeil</item>
   </plurals>
   <plurals name="multiple_uploads_title" fuzzy="true">
+    <item quantity="zero">%1$d uwchlwythiad</item>
     <item quantity="one">%1$d uwchlwythiad</item>
+    <item quantity="two">%1$d uwchlwythiad</item>
+    <item quantity="few">%1$d uwchlwythiad</item>
+    <item quantity="many">%1$d uwchlwythiad</item>
     <item quantity="other">%1$d uwchlwythiad</item>
   </plurals>
   <plurals name="share_license_summary" fuzzy="true">
+    <item quantity="zero">Ni chaiff unrhyw ddelweddau eu trwyddedu dan %1$s</item>
     <item quantity="one">Caiff y ddelwedd hon ei thrwyddedu yn ôl termau\'r drwydded %1$s</item>
+    <item quantity="two">Caiff y delweddau hyn eu trwyddedu dan %1$s</item>
+    <item quantity="few">Caiff y delweddau hyn eu trwyddedu dan %1$s</item>
+    <item quantity="many">Caiff y delweddau hyn eu trwyddedu dan %1$s</item>
     <item quantity="other">Caiff y delweddau hyn eu trwyddedu dan %1$s</item>
   </plurals>
   <string name="navigation_item_explore">Archwilio</string>
