@@ -789,4 +789,7 @@
   <string name="pending">Afventer</string>
   <string name="failed">Mislykkedes</string>
   <string name="could_not_load_place_data">Kunne ikke indlæse steddata</string>
+  <string name="red_pin">Dette sted har endnu ikke noget billede, så gå hen og tag et!</string>
+  <string name="green_pin">Dette sted har allerede et billede.</string>
+  <string name="grey_pin">Tjekker nu, om dette sted har et billede.</string>
 </resources>

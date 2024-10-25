@@ -41,4 +41,23 @@ public abstract class PlaceDao {
                 saveSynchronous(place);
             });
     }
+
+    /**
+     * Deletes all Place objects from the database.
+     *
+     * @return A Completable that completes once the deletion operation is done.
+     */
+    @Query("DELETE FROM place")
+    public abstract void deleteAllSynchronous();
+
+    /**
+     * Deletes all Place objects from the database.
+     *
+     */
+    public Completable deleteAll() {
+        return Completable
+            .fromAction(() -> {
+                deleteAllSynchronous();
+            });
+    }
 }
