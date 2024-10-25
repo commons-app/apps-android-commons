@@ -4,9 +4,11 @@ import static fr.free.nrw.commons.profile.leaderboard.LeaderboardConstants.LEADE
 import static fr.free.nrw.commons.profile.leaderboard.LeaderboardConstants.UPDATE_AVATAR_END_POINT;
 
 import android.text.TextUtils;
+import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import com.google.gson.Gson;
+import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.campaigns.CampaignResponseDTO;
 import fr.free.nrw.commons.explore.depictions.DepictsClient;
 import fr.free.nrw.commons.location.LatLng;
@@ -33,6 +35,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.inject.Inject;
 import javax.inject.Singleton;
+import okhttp3.Call;
+import okhttp3.Callback;
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -119,6 +123,90 @@ public class OkHttpJsonApiClient {
             return new LeaderboardResponse();
         });
     }
+
+
+    public void getFileUsagesOnCommons(String fileName){
+
+        HttpUrl.Builder urlBuilder = HttpUrl.parse(BuildConfig.FILE_USAGES_BASE_URL).newBuilder();
+        urlBuilder.addQueryParameter("prop", "fileusage");
+        urlBuilder.addQueryParameter("titles", fileName);
+        //TODO[Parry] might need pagination
+        urlBuilder.addQueryParameter("fulimit", "max");
+
+        Timber.i("Url %s", urlBuilder.toString());
+        System.out.println(urlBuilder.build());
+        Request request = new Request.Builder()
+            .url(urlBuilder.toString())
+            .build();
+
+        okHttpClient.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                System.out.println("failed");
+                System.out.println("exception "+ e.getMessage());
+            }
+
+            @Override
+            public void onResponse(@NonNull Call call, @NonNull Response response)
+                throws IOException {
+                System.out.println("onResponse");
+                String result = response.body().string();
+                logJson("ParneetLog",result);
+                System.out.println(result);
+            }
+        });
+    }
+
+    public void getFileUsagesOnOtherWikis(String fileName){
+
+        HttpUrl.Builder urlBuilder = HttpUrl.parse(BuildConfig.FILE_USAGES_BASE_URL).newBuilder();
+        urlBuilder.addQueryParameter("prop", "globalusage");
+        urlBuilder.addQueryParameter("titles", fileName);
+        //TODO[Parry] might need pagination
+        urlBuilder.addQueryParameter("gulimit", "max");
+
+        Timber.i("Url %s", urlBuilder.toString());
+        System.out.println(urlBuilder.build());
+        Request request = new Request.Builder()
+            .url(urlBuilder.toString())
+            .build();
+
+        okHttpClient.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                System.out.println("failed");
+                System.out.println("exception "+ e.getMessage());
+            }
+
+            @Override
+            public void onResponse(@NonNull Call call, @NonNull Response response)
+                throws IOException {
+                System.out.println("onResponse");
+                logJson("ParneetLog",response.body().string());
+            }
+        });
+    }
+
+    //TODO:[Parry] remove, only to bypass the logcat character limit
+    // when loggin api responses
+    public static int logJson(String tag, String message) {
+        final int _charLimit = 2000;
+        // If the message is less than the limit just show
+        if (message.length() < _charLimit) {
+            return Log.v(tag, message);
+        }
+        int sections = message.length() / _charLimit;
+        for (int i = 0; i <= sections; i++) {
+            int max = _charLimit * (i + 1);
+            if (max >= message.length()) {
+                Log.v(tag, message.substring(_charLimit * i));
+            } else {
+                Log.v(tag, message.substring(_charLimit * i, max));
+            }
+        }
+        return 1;
+    }
+
 
     /**
      * This method will update the leaderboard user avatar
