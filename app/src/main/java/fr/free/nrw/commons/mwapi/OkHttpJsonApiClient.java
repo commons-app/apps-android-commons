@@ -8,9 +8,12 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import com.google.gson.Gson;
+import com.google.gson.JsonParser;
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.campaigns.CampaignResponseDTO;
 import fr.free.nrw.commons.explore.depictions.DepictsClient;
+import fr.free.nrw.commons.fileusages.CommonsFileUsagesResponse;
+import fr.free.nrw.commons.fileusages.GlobalFileUsagesResponse;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.nearby.model.ItemsClass;
@@ -125,7 +128,7 @@ public class OkHttpJsonApiClient {
     }
 
 
-    public void getFileUsagesOnCommons(String fileName){
+    public Observable<CommonsFileUsagesResponse> getFileUsagesOnCommons(String fileName){
 
         HttpUrl.Builder urlBuilder = HttpUrl.parse(BuildConfig.FILE_USAGES_BASE_URL).newBuilder();
         urlBuilder.addQueryParameter("prop", "fileusage");
@@ -139,25 +142,27 @@ public class OkHttpJsonApiClient {
             .url(urlBuilder.toString())
             .build();
 
-        okHttpClient.newCall(request).enqueue(new Callback() {
-            @Override
-            public void onFailure(@NonNull Call call, @NonNull IOException e) {
-                System.out.println("failed");
-                System.out.println("exception "+ e.getMessage());
+        return Observable.fromCallable(() -> {
+            Response response = okHttpClient.newCall(request).execute();
+            if (response != null && response.body() != null && response.isSuccessful()) {
+                String json = response.body().string();
+                if (json == null) {
+                    System.out.println("json null");
+                    return null;
+                }
+                try {
+                    return gson.fromJson(json, CommonsFileUsagesResponse.class);
+                } catch (Exception e) {
+                    System.out.println("exception raised "+e.getMessage());
+                    return null;
+                }
             }
-
-            @Override
-            public void onResponse(@NonNull Call call, @NonNull Response response)
-                throws IOException {
-                System.out.println("onResponse");
-                String result = response.body().string();
-                logJson("ParneetLog",result);
-                System.out.println(result);
-            }
+            System.out.println("something else happend error");
+            return null;
         });
     }
 
-    public void getFileUsagesOnOtherWikis(String fileName){
+    public Observable<GlobalFileUsagesResponse> getGlobalFileUsages(String fileName){
 
         HttpUrl.Builder urlBuilder = HttpUrl.parse(BuildConfig.FILE_USAGES_BASE_URL).newBuilder();
         urlBuilder.addQueryParameter("prop", "globalusage");
@@ -171,19 +176,20 @@ public class OkHttpJsonApiClient {
             .url(urlBuilder.toString())
             .build();
 
-        okHttpClient.newCall(request).enqueue(new Callback() {
-            @Override
-            public void onFailure(@NonNull Call call, @NonNull IOException e) {
-                System.out.println("failed");
-                System.out.println("exception "+ e.getMessage());
+        return Observable.fromCallable(() -> {
+            Response response = okHttpClient.newCall(request).execute();
+            if (response != null && response.body() != null && response.isSuccessful()) {
+                String json = response.body().string();
+                if (json == null) {
+                    return null;
+                }
+                try {
+                    return gson.fromJson(json, GlobalFileUsagesResponse.class);
+                } catch (Exception e) {
+                    return null;
+                }
             }
-
-            @Override
-            public void onResponse(@NonNull Call call, @NonNull Response response)
-                throws IOException {
-                System.out.println("onResponse");
-                logJson("ParneetLog",response.body().string());
-            }
+            return null;
         });
     }
 
