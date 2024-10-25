@@ -308,7 +308,7 @@ public class ReviewActivity extends BaseActivity {
     private void handleError(Throwable error) {
         binding.pbReviewImage.setVisibility(View.GONE);
         ViewUtil.showShortSnackbar(binding.drawerLayout, R.string.error_review);
-        // 可以添加更详细的错误处理逻辑
+
     }
 
 
