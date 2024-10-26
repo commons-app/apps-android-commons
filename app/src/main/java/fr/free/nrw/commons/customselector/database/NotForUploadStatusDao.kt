@@ -15,19 +15,19 @@ abstract class NotForUploadStatusDao {
      * Insert into Not For Upload status.
      */
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    abstract fun insert(notForUploadStatus: NotForUploadStatus)
+    abstract suspend fun insert(notForUploadStatus: NotForUploadStatus)
 
     /**
      * Delete Not For Upload status entry.
      */
     @Delete
-    abstract fun delete(notForUploadStatus: NotForUploadStatus)
+    abstract suspend fun delete(notForUploadStatus: NotForUploadStatus)
 
     /**
      * Query Not For Upload status with image sha1.
      */
     @Query("SELECT * FROM images_not_for_upload_table WHERE imageSHA1 = (:imageSHA1) ")
-    abstract fun getFromImageSHA1(imageSHA1: String): NotForUploadStatus?
+    abstract suspend fun getFromImageSHA1(imageSHA1: String): NotForUploadStatus?
 
     /**
      * Asynchronous image sha1 query.
@@ -38,7 +38,7 @@ abstract class NotForUploadStatusDao {
      * Deletion Not For Upload status with image sha1.
      */
     @Query("DELETE FROM images_not_for_upload_table WHERE imageSHA1 = (:imageSHA1) ")
-    abstract fun deleteWithImageSHA1(imageSHA1: String)
+    abstract suspend fun deleteWithImageSHA1(imageSHA1: String)
 
     /**
      * Asynchronous image sha1 deletion.
@@ -49,5 +49,5 @@ abstract class NotForUploadStatusDao {
      * Check whether the imageSHA1 is present in database
      */
     @Query("SELECT COUNT() FROM images_not_for_upload_table WHERE imageSHA1 = (:imageSHA1) ")
-    abstract fun find(imageSHA1: String): Int
+    abstract suspend fun find(imageSHA1: String): Int
 }
