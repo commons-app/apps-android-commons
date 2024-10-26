@@ -242,8 +242,8 @@
   <string name="nominated_for_deletion">Meneget eo bet ar skeudenn evit lemel.</string>
   <string name="skip_login">Lezel a-gostez</string>
   <string name="navigation_item_login">Kevreañ</string>
-  <string name="skip_login_title" fuzzy="true">Ha c\'hoant ho peus, evit gwir, da gevreañ ?</string>
-  <string name="skip_login_message" fuzzy="true">Da gevreañ ho po en amzer-da-zont evit pellgargañ skeudennoù.</string>
+  <string name="skip_login_title">Ha n\'ho peus ket c\'hoant, evit gwir, da gevreañ ?</string>
+  <string name="skip_login_message">Ret e vo deoc\'h kevreañ en amzer-da-zont evit pellgargañ skeudennoù.</string>
   <string name="login_alert_message">Kevreit, mar plij, evit implijout an arc\'hwel-mañ</string>
   <string name="copy_wikicode">Eilañ an destenn wiki er golver</string>
   <string name="wikicode_copied">Testenn wiki eilet er golver</string>

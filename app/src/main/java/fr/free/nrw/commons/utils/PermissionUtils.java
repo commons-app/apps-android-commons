@@ -54,8 +54,7 @@ public class PermissionUtils {
         final Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
         final Uri uri = Uri.fromParts("package", activity.getPackageName(), null);
         intent.setData(uri);
-        activity.startActivityForResult(intent,
-            CommonsApplication.OPEN_APPLICATION_DETAIL_SETTINGS);
+        activity.startActivity(intent);
     }
 
     /**

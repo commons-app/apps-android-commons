@@ -760,4 +760,7 @@
     <item quantity="one">%d immagine selezionata</item>
     <item quantity="other">%d immagini selezionate</item>
   </plurals>
+  <string name="red_pin">Questo posto non ha ancora una foto, scattane una!</string>
+  <string name="green_pin">Questo posto ha già una foto.</string>
+  <string name="grey_pin">Ora controlliamo se questo posto ha una foto.</string>
 </resources>

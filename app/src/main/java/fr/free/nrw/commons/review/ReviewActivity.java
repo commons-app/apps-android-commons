@@ -64,7 +64,7 @@ public class ReviewActivity extends BaseActivity {
 
     private static final String PREF_NAME = "ReviewActivityPrefs";
     private static final String LAST_CACHE_TIME_KEY = "lastCacheTime";
-    private static final int CACHE_SIZE = 50;
+    private static final int CACHE_SIZE = 5;
     private static final long CACHE_EXPIRY_TIME = 24 * 60 * 60 * 1000;
 
     @Override
