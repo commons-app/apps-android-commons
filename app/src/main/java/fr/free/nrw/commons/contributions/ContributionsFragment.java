@@ -18,6 +18,8 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -306,32 +308,83 @@ public class ContributionsFragment
                 throwable -> Timber.e(throwable, "Error occurred while loading notifications")));
     }
 
+    public boolean checkNetworkConnectivity() {
+        ConnectivityManager cm = (ConnectivityManager) getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (cm == null) {
+            Timber.e("Cannot get Connectivity Manager");
+            return false;  // Indicating that connectivity check could not be performed
+        }
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        boolean isConnected = activeNetwork != null && activeNetwork.isConnectedOrConnecting();
+        Timber.d("Network connectivity status: " + isConnected);
+        return isConnected;  // Returning the status of the network connection
+    }
+
+
+    private void handleNoNetworkConnection() {
+        Toast.makeText(getContext(), "Check your network connection", Toast.LENGTH_LONG).show();
+    }
+
+
+
     /**
      * Sets the visibility of the upload icon based on the number of failed and pending
      * contributions.
      */
     public void setUploadIconVisibility() {
+        if (!checkNetworkConnectivity()) {
+            Timber.e("setUploadIconVisibility: No network connection available.");
+            handleNoNetworkConnection();
+            return;
+        }
+
+        Timber.d("setUploadIconVisibility: Starting to get failed and pending contributions");
         contributionController.getFailedAndPendingContributions();
-        contributionController.failedAndPendingContributionList.observe(getViewLifecycleOwner(),
-            list -> {
+        contributionController.failedAndPendingContributionList.observe(getViewLifecycleOwner(), list -> {
+            if (list != null) {
+                Timber.d("setUploadIconVisibility: Received contribution list update with size " + list.size());
                 updateUploadIcon(list.size());
-            });
+            } else {
+                Timber.e("setUploadIconVisibility: Failed to retrieve contributions");
+            }
+        });
     }
+
+
 
     /**
      * Sets the count for the upload icon based on the number of pending and failed contributions.
      */
     public void setUploadIconCount() {
+        if (!checkNetworkConnectivity()) {
+            Timber.e("setUploadIconCount: No network connection available.");
+            return;
+        }
+
+        Timber.d("setUploadIconCount: Getting pending contributions");
         contributionController.getPendingContributions();
-        contributionController.pendingContributionList.observe(getViewLifecycleOwner(),
-            list -> {
+        contributionController.pendingContributionList.observe(getViewLifecycleOwner(), list -> {
+            if (list != null) {
+                Timber.d("setUploadIconCount: Updated pending icon count to " + list.size());
                 updatePendingIcon(list.size());
-            });
+            } else {
+                Timber.e("setUploadIconCount: Failed to retrieve pending contributions");
+            }
+        });
+
+        Timber.d("setUploadIconCount: Getting failed contributions");
         contributionController.getFailedContributions();
         contributionController.failedContributionList.observe(getViewLifecycleOwner(), list -> {
-            updateErrorIcon(list.size());
+            if (list != null) {
+                Timber.d("setUploadIconCount: Updated error icon count to " + list.size());
+                updateErrorIcon(list.size());
+            } else {
+                Timber.e("setUploadIconCount: Failed to retrieve failed contributions");
+            }
         });
     }
+
+
 
     public void scrollToTop() {
         if (contributionsListFragment != null) {
@@ -750,15 +803,29 @@ public class ContributionsFragment
      * @param errorCount The number of error uploads.
      */
     public void updateErrorIcon(int errorCount) {
+        Timber.d("updateErrorIcon: Method Start");
+        long startTime = System.currentTimeMillis();
+
         if (uploadsErrorTextView != null) {
+            Timber.d("Current error count: " + errorCount);
+
             if (errorCount != 0) {
                 uploadsErrorTextView.setVisibility(View.VISIBLE);
                 uploadsErrorTextView.setText(String.valueOf(errorCount));
+                Timber.d("Error visibility changed to: VISIBLE with count: " + errorCount);
             } else {
                 uploadsErrorTextView.setVisibility(View.GONE);
+                Timber.d("Error visibility changed to: GONE");
             }
+        } else {
+            Timber.e("updateErrorIcon: uploadsErrorTextView is null");
         }
+
+        long endTime = System.currentTimeMillis();
+        Timber.d("updateErrorIcon took " + (endTime - startTime) + " ms.");
+        Timber.d("updateErrorIcon: Method End");
     }
+
 
     /**
      * Updates the visibility of the pending uploads ImageView based on the given count.
@@ -766,14 +833,27 @@ public class ContributionsFragment
      * @param count The number of pending uploads.
      */
     public void updateUploadIcon(int count) {
+        Timber.d("updateUploadIcon: Method Start");
+        long startTime = System.currentTimeMillis();
+
         if (pendingUploadsImageView != null) {
+            Timber.d("Current upload count: " + count);
+
             if (count != 0) {
                 pendingUploadsImageView.setVisibility(View.VISIBLE);
             } else {
-                pendingUploadsImageView.setVisibility(View.GONE);
+                pendingUploadsImageView.setVisibility(View.VISIBLE);
             }
+        } else {
+            Timber.e("updateUploadIcon: pendingUploadsImageView is null");
         }
+
+        long endTime = System.currentTimeMillis();
+        Timber.d("updateUploadIcon took " + (endTime - startTime) + " ms.");
+        Timber.d("updateUploadIcon: Method End");
     }
+
+
 
     /**
      * Replace whatever is in the current contributionsFragmentContainer view with
