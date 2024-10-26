@@ -535,14 +535,16 @@ class UploadWorker(
             val imageSha1 = contribution.imageSHA1.toString()
             val modifiedSha1 = fileUtilsWrapper.getSHA1(fileUtilsWrapper.getFileInputStream(contribution.localUri?.path))
             MainScope().launch {
-                uploadedStatusDao.insertUploaded(
-                    UploadedStatus(
-                        imageSha1,
-                        modifiedSha1,
-                        imageSha1 == modifiedSha1,
-                        true,
-                    ),
-                )
+                withContext(Dispatchers.IO){
+                    uploadedStatusDao.insertUploaded(
+                        UploadedStatus(
+                            imageSha1,
+                            modifiedSha1,
+                            imageSha1 == modifiedSha1,
+                            true,
+                        ),
+                    )
+                }
             }
         }
     }
