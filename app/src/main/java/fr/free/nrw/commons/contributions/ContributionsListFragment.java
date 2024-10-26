@@ -465,6 +465,13 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
             });
     }
 
+    @Override
+    public void onFileUsageClicked(Media media) {
+        if (callback != null) {
+            callback.showFileUsagesFragment(media);
+        }
+    }
+
     /**
      * Display confirmation dialog with instructions when the user tries to add image to wikipedia
      *
@@ -520,6 +527,8 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
 
         // Notify the viewpager that number of items have changed.
         void viewPagerNotifyDataSetChanged();
+
+        void showFileUsagesFragment(Media media);
 
     }
 }

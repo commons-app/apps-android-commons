@@ -5,6 +5,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.paging.PagedListAdapter;
 import androidx.recyclerview.widget.DiffUtil;
+import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.media.MediaClient;
 
@@ -73,5 +74,7 @@ public class ContributionsListAdapter extends
         void openMediaDetail(int contribution, boolean isWikipediaPageExists);
 
         void addImageToWikipedia(Contribution contribution);
+
+        void onFileUsageClicked(Media media);
     }
 }

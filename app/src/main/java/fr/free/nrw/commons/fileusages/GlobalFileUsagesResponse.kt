@@ -21,7 +21,7 @@ data class GlobalPage(
     @SerializedName("pageid") val pageId: Int,
     @SerializedName("ns") val nameSpace: Int,
     @SerializedName("title") val title: String,
-    @SerializedName("globalusage") val fileUsage: List<GlobalFileUsage>
+    @SerializedName("globalusage") val globalUsage: List<GlobalFileUsage>
 )
 
 data class GlobalFileUsage(

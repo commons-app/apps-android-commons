@@ -25,6 +25,7 @@ import fr.free.nrw.commons.explore.depictions.parent.ParentDepictionsFragment;
 import fr.free.nrw.commons.explore.depictions.search.SearchDepictionsFragment;
 import fr.free.nrw.commons.explore.media.SearchMediaFragment;
 import fr.free.nrw.commons.explore.recentsearches.RecentSearchesFragment;
+import fr.free.nrw.commons.fileusages.FileUsagesFragment;
 import fr.free.nrw.commons.media.MediaDetailFragment;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
 import fr.free.nrw.commons.navtab.MoreBottomSheetFragment;
@@ -64,6 +65,9 @@ public abstract class FragmentBuilderModule {
 
     @ContributesAndroidInjector
     abstract MediaDetailPagerFragment bindMediaDetailPagerFragment();
+
+    @ContributesAndroidInjector
+    abstract FileUsagesFragment bindFileUsagesFragment();
 
     @ContributesAndroidInjector
     abstract SettingsFragment bindSettingsFragment();

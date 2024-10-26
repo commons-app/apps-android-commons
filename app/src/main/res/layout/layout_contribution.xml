@@ -105,6 +105,14 @@
       android:visibility="visible">
 
       <ImageButton
+        android:id="@+id/file_usages_button"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_action_github"
+        android:background="@android:color/transparent"
+        android:layout_width="48dp"
+        android:layout_height="48dp" />
+
+      <ImageButton
         android:id="@+id/wikipediaButton"
         android:layout_width="48dp"
         android:layout_height="48dp"

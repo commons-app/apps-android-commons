@@ -39,6 +39,7 @@ import androidx.fragment.app.FragmentTransaction;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.databinding.FragmentContributionsBinding;
+import fr.free.nrw.commons.fileusages.FileUsagesActivity;
 import fr.free.nrw.commons.notification.models.Notification;
 import fr.free.nrw.commons.notification.NotificationController;
 import fr.free.nrw.commons.profile.ProfileActivity;
@@ -786,6 +787,24 @@ public class ContributionsFragment
             showMediaDetailPagerFragment();
         }
         mediaDetailPagerFragment.showImage(position, isWikipediaButtonDisplayed);
+    }
+
+    @Override
+    public void showFileUsagesFragment(Media media) {
+
+        Intent intent = new Intent(requireActivity(), FileUsagesActivity.class);
+
+        intent.putExtra("media",media);
+
+        startActivity(intent);
+
+//        FileUsagesFragment fileUsagesFragment = new FileUsagesFragment();
+//
+//        Bundle args = new Bundle();
+//        args.putParcelable("media", media);
+//        fileUsagesFragment.setArguments(args);
+//
+//        showFragment(fileUsagesFragment, "FileUsagesFragmentTag", contributionsListFragment);
     }
 
     @Override

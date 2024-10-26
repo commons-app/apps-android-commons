@@ -50,6 +50,7 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder {
 
         binding.contributionImage.setOnClickListener(v -> imageClicked());
         binding.wikipediaButton.setOnClickListener(v -> wikipediaButtonClicked());
+        binding.fileUsagesButton.setOnClickListener(v -> onFileUsageClicked());
 
         /* Set a dialog indicating that the upload is being paused. This is needed because pausing
         an upload might take a dozen seconds. */
@@ -101,7 +102,8 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder {
         binding.wikipediaButton.setVisibility(View.GONE);
         binding.contributionState.setVisibility(View.GONE);
         binding.contributionProgress.setVisibility(View.GONE);
-        binding.imageOptions.setVisibility(View.GONE);
+        //TODO[Parry] temp
+//        binding.imageOptions.setVisibility(View.GONE);
         binding.contributionState.setText("");
         checkIfMediaExistsOnWikipediaPage(contribution);
 
@@ -163,6 +165,10 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder {
 
     public void wikipediaButtonClicked() {
         callback.addImageToWikipedia(contribution);
+    }
+
+    public void onFileUsageClicked(){
+        callback.onFileUsageClicked(contribution.getMedia());
     }
 
     public ImageRequest getImageRequest() {
