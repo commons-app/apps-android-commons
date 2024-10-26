@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.edit
 
+import android.Manifest
 import android.animation.Animator
 import android.animation.Animator.AnimatorListener
 import android.animation.ValueAnimator
@@ -20,6 +21,11 @@ import androidx.lifecycle.ViewModelProvider
 import fr.free.nrw.commons.databinding.ActivityEditBinding
 import timber.log.Timber
 import java.io.File
+import androidx.core.content.ContextCompat
+import android.content.pm.PackageManager
+import androidx.core.app.ActivityCompat
+
+
 
 /**
  * An activity class for editing and rotating images using LLJTran with EXIF attribute preservation.
@@ -239,6 +245,12 @@ class EditActivity : AppCompatActivity() {
      * as a result, and finishes the current activity.
      */
     fun getRotatedImage() {
+        //Get Permission to saccess
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+            != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), 7747)
+        }
+
         val filePath = imageUri.toUri().path
         val file = filePath?.let { File(it) }
 
