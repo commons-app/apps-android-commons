@@ -40,7 +40,7 @@ class MediaConverter
                 metadata.licenseShortName(),
                 metadata.prefixedLicenseUrl,
                 getAuthor(metadata),
-                imageInfo.user,
+                getAuthor(metadata),
                 MediaDataExtractorUtil.extractCategoriesFromList(metadata.categories),
                 metadata.latLng,
                 entity.labels().mapValues { it.value.value() },
