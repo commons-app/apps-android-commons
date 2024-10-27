@@ -34,10 +34,10 @@
 
         <!-- New Secondary Language Picker -->
         <Preference
-          android:key="descriptionSecondaryLanguagePref"
+          android:key="descriptionSecondaryLanguagesPref"
           app:useSimpleSummaryProvider="true"
           app:singleLineTitle="false"
-          android:title="@string/secondary_description_language" />
+          android:title="@string/secondary_description_languages" />
 
         <SwitchPreference
           android:defaultValue="true"

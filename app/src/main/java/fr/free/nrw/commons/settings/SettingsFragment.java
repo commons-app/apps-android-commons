@@ -19,7 +19,6 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.ArrayAdapter;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
@@ -84,7 +83,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
 
     private ListPreference themeListPreference;
     private Preference descriptionLanguageListPreference;
-    private Preference descriptionSecondaryLanguageListPreference;
+    private Preference descriptionSecondaryLanguagesListPreference;
     private Preference appUiLanguageListPreference;
     private String keyLanguageListPreference;
     private TextView recentLanguagesTextView;
@@ -185,17 +184,17 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         });
 
 
-        descriptionSecondaryLanguageListPreference = findPreference("descriptionSecondaryLanguagePref");
-        assert descriptionSecondaryLanguageListPreference != null;
-        keyLanguageListPreference = descriptionSecondaryLanguageListPreference.getKey();
+        descriptionSecondaryLanguagesListPreference = findPreference("descriptionSecondaryLanguagesPref");
+        assert descriptionSecondaryLanguagesListPreference != null;
+        keyLanguageListPreference = descriptionSecondaryLanguagesListPreference.getKey();
         languageCode = getCurrentLanguageCode(keyLanguageListPreference);
         assert languageCode != null;
-        descriptionSecondaryLanguageListPreference.setSummary("List additional languages.");
+        descriptionSecondaryLanguagesListPreference.setSummary("List additional languages.");
 
-        descriptionSecondaryLanguageListPreference.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+        descriptionSecondaryLanguagesListPreference.setOnPreferenceClickListener(new OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(Preference preference) {
-                prepareSecondaryLanguageDialog();
+                prepareSecondaryLanguagesDialog();
                 return true;
             }
         });
@@ -227,7 +226,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             findPreference("useAuthorName").setEnabled(false);
             findPreference("displayNearbyCardView").setEnabled(false);
             findPreference("descriptionDefaultLanguagePref").setEnabled(false);
-            findPreference("descriptionSecondaryLanguagePref").setEnabled(false);
+            findPreference("descriptionSecondaryLanguagesPref").setEnabled(false);
             findPreference("displayLocationPermissionForCardView").setEnabled(false);
             findPreference(CampaignView.CAMPAIGNS_DEFAULT_PREFERENCE).setEnabled(false);
             findPreference("managed_exif_tags").setEnabled(false);
@@ -331,8 +330,8 @@ public class SettingsFragment extends PreferenceFragmentCompat {
      * Disable default/already selected language from dialog box
      * Saves values chosen by user to shared preferences as a serialised string.
      */
-    private void prepareSecondaryLanguageDialog() {
-        final String languageCode = getCurrentLanguageCode("descriptionSecondaryLanguagePref");
+    private void prepareSecondaryLanguagesDialog() {
+        final String languageCode = getCurrentLanguageCode("descriptionSecondaryLanguagesPref");
         HashMap<Integer, String> selectedLanguages = new HashMap<>();
         assert languageCode != null;
         selectedLanguages.put(0, Locale.getDefault().getLanguage());
@@ -383,8 +382,8 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             if (!updatedLanguageCodes.isEmpty()) {
                 updatedLanguageCodes = updatedLanguageCodes.substring(0, updatedLanguageCodes.length() - 2);
             }
-            saveLanguageValue(updatedLanguageCodes, "descriptionSecondaryLanguagePref");
-//            descriptionSecondaryLanguageListPreference.setSummary(getCurrentLanguageCode("descriptionSecondaryLanguagePref"));
+            saveLanguageValue(updatedLanguageCodes, "descriptionSecondaryLanguagesPref");
+//            descriptionSecondaryLanguagesListPreference.setSummary(getCurrentLanguageCode("descriptionSecondaryLanguagesPref"));
         });
 
         // Set up the adapter for new languages using the selectedLanguages map
@@ -413,7 +412,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             String selectedLanguageCode = languagesAdapter.getLanguageCode(i);
             String selectedLanguageName = languagesAdapter.getLanguageName(i);
 
-            if (deSerialise(getCurrentLanguageCode("descriptionSecondaryLanguagePref")).contains(selectedLanguageCode)) {
+            if (deSerialise(getCurrentLanguageCode("descriptionSecondaryLanguagesPref")).contains(selectedLanguageCode)) {
                 Toast.makeText(getActivity(), "Language already selected", Toast.LENGTH_SHORT).show();
                 return;
             }
@@ -431,9 +430,9 @@ public class SettingsFragment extends PreferenceFragmentCompat {
                 updatedLanguageCodes = updatedLanguageCodes.substring(0, updatedLanguageCodes.length() - 2);
             }
 
-            saveLanguageValue(updatedLanguageCodes, "descriptionSecondaryLanguagePref");
+            saveLanguageValue(updatedLanguageCodes, "descriptionSecondaryLanguagesPref");
 
-//            descriptionSecondaryLanguageListPreference.setSummary(getCurrentLanguageCode("descriptionSecondaryLanguagePref"));
+//            descriptionSecondaryLanguagesListPreference.setSummary(getCurrentLanguageCode("descriptionSecondaryLanguagesPref"));
         });
 
         dialog.setOnDismissListener(dialogInterface -> {
@@ -446,7 +445,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             if (!updatedLanguageCodes.isEmpty()) {
                 updatedLanguageCodes = updatedLanguageCodes.substring(0, updatedLanguageCodes.length() - 2);
             }
-            saveLanguageValue(updatedLanguageCodes, "descriptionSecondaryLanguagePref");
+            saveLanguageValue(updatedLanguageCodes, "descriptionSecondaryLanguagesPref");
 
         });
     }
@@ -488,7 +487,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             } else {
                 selectedLanguages.put(0, languageCode);
             }
-        } else if (keyListPreference.equals("descriptionSecondaryLanguagePref")) {
+        } else if (keyListPreference.equals("descriptionSecondaryLanguagesPref")) {
 
         assert languageCode != null;
         if (languageCode.equals("")) {
@@ -692,8 +691,8 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             defaultKvStore.putString(Prefs.APP_UI_LANGUAGE, userSelectedValue);
         } else if (preferenceKey.equals("descriptionDefaultLanguagePref")) {
             defaultKvStore.putString(Prefs.DESCRIPTION_LANGUAGE, userSelectedValue);
-        } else if (preferenceKey.equals("descriptionSecondaryLanguagePref")) {
-            defaultKvStore.putString(Prefs.SECONDARY_LANGUAGE, userSelectedValue);
+        } else if (preferenceKey.equals("descriptionSecondaryLanguagesPref")) {
+            defaultKvStore.putString(Prefs.SECONDARY_LANGUAGES, userSelectedValue);
         }
     }
 
@@ -709,8 +708,8 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         if (preferenceKey.equals("descriptionDefaultLanguagePref")) {
             return defaultKvStore.getString(Prefs.DESCRIPTION_LANGUAGE, "");
         }
-        if (preferenceKey.equals("descriptionSecondaryLanguagePref")) {
-            return defaultKvStore.getString(Prefs.SECONDARY_LANGUAGE, "");
+        if (preferenceKey.equals("descriptionSecondaryLanguagesPref")) {
+            return defaultKvStore.getString(Prefs.SECONDARY_LANGUAGES, "");
         }
         return null;
     }

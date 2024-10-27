@@ -416,7 +416,7 @@ public class OkHttpJsonApiClient {
         final String wikidataQuery = FileUtils.readFromResource("/queries/query_for_item.rq");
 
         // Split the secondary languages string into an array to use in fallback queries
-        final String[] secondaryLanguageArray = secondaryLanguages.split(",\\s*");
+        final String[] secondaryLanguagesArray = secondaryLanguages.split(",\\s*");
 
         // Prepare the Wikidata entity IDs (QIDs) for each place in the list
         String qids = "";
@@ -426,37 +426,37 @@ public class OkHttpJsonApiClient {
 
         // Build fallback descriptions for secondary languages in case the primary language is unavailable
         StringBuilder fallBackDescription = new StringBuilder();
-        for (int i = 0; i < secondaryLanguageArray.length; i++) {
+        for (int i = 0; i < secondaryLanguagesArray.length; i++) {
             fallBackDescription.append("OPTIONAL {?item schema:description ?itemDescriptionPreferredLanguage_")
                 .append(i + 1)  // Unique identifier for each fallback
                 .append(". FILTER (lang(?itemDescriptionPreferredLanguage_")
                 .append(i + 1)
                 .append(") = \"")
-                .append(secondaryLanguageArray[i])  // Use the secondary language code
+                .append(secondaryLanguagesArray[i])  // Use the secondary language code
                 .append("\")}\n");
         }
 
         // Build fallback labels for secondary languages
         StringBuilder fallbackLabel = new StringBuilder();
-        for (int i = 0; i < secondaryLanguageArray.length; i++) {
+        for (int i = 0; i < secondaryLanguagesArray.length; i++) {
             fallbackLabel.append("OPTIONAL {?item rdfs:label ?itemLabelPreferredLanguage_")
                 .append(i + 1)
                 .append(". FILTER (lang(?itemLabelPreferredLanguage_")
                 .append(i + 1)
                 .append(") = \"")
-                .append(secondaryLanguageArray[i])
+                .append(secondaryLanguagesArray[i])
                 .append("\")}\n");
         }
 
         // Build fallback class labels for secondary languages
         StringBuilder fallbackClassLabel = new StringBuilder();
-        for (int i = 0; i < secondaryLanguageArray.length; i++) {
+        for (int i = 0; i < secondaryLanguagesArray.length; i++) {
             fallbackClassLabel.append("OPTIONAL {?class rdfs:label ?classLabelPreferredLanguage_")
                 .append(i + 1)
                 .append(". FILTER (lang(?classLabelPreferredLanguage_")
                 .append(i + 1)
                 .append(") = \"")
-                .append(secondaryLanguageArray[i])
+                .append(secondaryLanguagesArray[i])
                 .append("\")}\n");
         }
 
