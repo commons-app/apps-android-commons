@@ -37,15 +37,11 @@ public abstract class PlaceDao {
      */
     public Completable save(final Place place) {
         return Completable
-            .fromAction(() -> {
-                saveSynchronous(place);
-            });
+            .fromAction(() -> saveSynchronous(place));
     }
 
     /**
      * Deletes all Place objects from the database.
-     *
-     * @return A Completable that completes once the deletion operation is done.
      */
     @Query("DELETE FROM place")
     public abstract void deleteAllSynchronous();
@@ -53,11 +49,9 @@ public abstract class PlaceDao {
     /**
      * Deletes all Place objects from the database.
      *
+     * @return A Completable that completes once the deletion operation is done.
      */
     public Completable deleteAll() {
-        return Completable
-            .fromAction(() -> {
-                deleteAllSynchronous();
-            });
+        return Completable.fromAction(this::deleteAllSynchronous);
     }
 }

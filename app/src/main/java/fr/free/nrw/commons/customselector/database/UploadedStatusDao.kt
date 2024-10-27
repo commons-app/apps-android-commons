@@ -17,31 +17,31 @@ abstract class UploadedStatusDao {
      * Insert into uploaded status.
      */
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    abstract fun insert(uploadedStatus: UploadedStatus)
+    abstract suspend fun insert(uploadedStatus: UploadedStatus)
 
     /**
      * Update uploaded status entry.
      */
     @Update
-    abstract fun update(uploadedStatus: UploadedStatus)
+    abstract suspend fun update(uploadedStatus: UploadedStatus)
 
     /**
      * Delete uploaded status entry.
      */
     @Delete
-    abstract fun delete(uploadedStatus: UploadedStatus)
+    abstract suspend fun delete(uploadedStatus: UploadedStatus)
 
     /**
      * Query uploaded status with image sha1.
      */
     @Query("SELECT * FROM uploaded_table WHERE imageSHA1 = (:imageSHA1) ")
-    abstract fun getFromImageSHA1(imageSHA1: String): UploadedStatus?
+    abstract suspend fun getFromImageSHA1(imageSHA1: String): UploadedStatus?
 
     /**
      * Query uploaded status with modified image sha1.
      */
     @Query("SELECT * FROM uploaded_table WHERE modifiedImageSHA1 = (:modifiedImageSHA1) ")
-    abstract fun getFromModifiedImageSHA1(modifiedImageSHA1: String): UploadedStatus?
+    abstract suspend fun getFromModifiedImageSHA1(modifiedImageSHA1: String): UploadedStatus?
 
     /**
      * Asynchronous insert into uploaded status table.
@@ -55,7 +55,7 @@ abstract class UploadedStatusDao {
      * Check whether the imageSHA1 is present in database
      */
     @Query("SELECT COUNT() FROM uploaded_table WHERE imageSHA1 = (:imageSHA1) AND imageResult = (:imageResult) ")
-    abstract fun findByImageSHA1(
+    abstract suspend fun findByImageSHA1(
         imageSHA1: String,
         imageResult: Boolean,
     ): Int
@@ -66,7 +66,7 @@ abstract class UploadedStatusDao {
     @Query(
         "SELECT COUNT() FROM uploaded_table WHERE modifiedImageSHA1 = (:modifiedImageSHA1) AND modifiedImageResult = (:modifiedImageResult) ",
     )
-    abstract fun findByModifiedImageSHA1(
+    abstract suspend fun findByModifiedImageSHA1(
         modifiedImageSHA1: String,
         modifiedImageResult: Boolean,
     ): Int
