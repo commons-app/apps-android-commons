@@ -2,9 +2,6 @@
 *.iml
 *.ipr
 *.iws
-app/.idea/gradle.xml
-app/.idea/vcs.xml
-app/.idea/workspace.xml
 /.idea/*
 app/src/main/gen/*
 
