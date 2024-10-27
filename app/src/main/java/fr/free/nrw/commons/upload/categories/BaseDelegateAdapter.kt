@@ -17,7 +17,8 @@ abstract class BaseDelegateAdapter<T>(
             override fun areContentsTheSame(oldItem: T & Any, newItem: T & Any): Boolean {
                 return areContentsTheSame(oldItem, newItem)
             }
-            },
+        },
+
         *delegates,
     ) {
     fun addAll(newResults: List<T>) {

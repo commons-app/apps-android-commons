@@ -504,6 +504,7 @@ Upload your first media by tapping on the add button.</string>
   <string name="no_notification">You have no unread notifications</string>
   <string name="no_read_notification">You have no read notifications</string>
   <string name="share_logs_using">Share logs using</string>
+  <string name="check_your_email_inbox">Check your email inbox</string>
   <string name="menu_option_read">View read</string>
   <string name="menu_option_unread">View unread</string>
 
@@ -832,4 +833,7 @@ Upload your first media by tapping on the add button.</string>
   <string name="pending">Pending</string>
   <string name="failed">Failed</string>
   <string name="could_not_load_place_data">Could not load place data</string>
+  <string name="red_pin">This place has no picture yet, go take one!</string>
+  <string name="green_pin">This place has a picture already.</string>
+  <string name="grey_pin">Now checking whether this place has a picture.</string>
 </resources>

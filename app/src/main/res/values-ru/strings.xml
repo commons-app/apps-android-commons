@@ -530,6 +530,7 @@
   <string name="no_notification">У вас нет непрочитанных уведомлений</string>
   <string name="no_read_notification">Нет прочитанных уведомлений</string>
   <string name="share_logs_using">Поделиться лог-файлами</string>
+  <string name="check_your_email_inbox">Проверьте свой почтовый ящик</string>
   <string name="menu_option_read">Просмотр прочитанного</string>
   <string name="menu_option_unread">См. непрочитанные</string>
   <string name="error_occurred_in_picking_images">Произошла ошибка при загрузке изображений</string>
