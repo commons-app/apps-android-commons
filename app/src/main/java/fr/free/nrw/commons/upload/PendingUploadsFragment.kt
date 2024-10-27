@@ -12,6 +12,7 @@ import fr.free.nrw.commons.R
 import fr.free.nrw.commons.contributions.Contribution
 import fr.free.nrw.commons.databinding.FragmentPendingUploadsBinding
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment
+import fr.free.nrw.commons.upload.worker.WorkRequestHelper
 import fr.free.nrw.commons.utils.DialogUtil.showAlertDialog
 import fr.free.nrw.commons.utils.ViewUtil
 import java.util.Locale
@@ -105,10 +106,18 @@ class PendingUploadsFragment :
                 binding.pendingUplaodsLl.visibility = View.VISIBLE
                 adapter.submitList(list)
                 binding.progressTextView.setText(contributionsSize.toString() + " uploads left")
+
                 if ((pausedOrQueuedUploads == contributionsSize) || CommonsApplication.isPaused) {
-                    uploadProgressActivity.setPausedIcon(true)
+                    //As this function would be triggered multiple times by one tap
+                    //Add new checking to enable/ disable the pause button for better UI
+                    if (!WorkRequestHelper.Companion.getisUploadWorkerRunning()) {
+                        uploadProgressActivity.setPausedIcon(true)
+                    }
+
                 } else {
-                    uploadProgressActivity.setPausedIcon(false)
+                    if (WorkRequestHelper.Companion.getisUploadWorkerRunning()) {
+                        uploadProgressActivity.setPausedIcon(false)
+                    }
                 }
             }
         }

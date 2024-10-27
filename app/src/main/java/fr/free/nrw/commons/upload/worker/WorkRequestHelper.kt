@@ -70,5 +70,12 @@ class WorkRequestHelper {
                 isUploadWorkerRunning = false
             }
         }
+
+        /**
+         * Provide a function for other class to get the flag isUploadWorkerRunning
+         */
+        fun getisUploadWorkerRunning(): Boolean {
+            return isUploadWorkerRunning;
+        }
     }
 }
