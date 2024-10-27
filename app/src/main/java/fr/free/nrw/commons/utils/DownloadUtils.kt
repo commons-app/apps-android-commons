@@ -53,7 +53,7 @@ object DownloadUtils {
             }
         } catch (e: SecurityException) {
             // Catch SecurityException if storage permission is missing, show a message, and exit
-            Toast.makeText(activity, "存储权限被拒绝，无法下载文件", Toast.LENGTH_SHORT).show()
+            Toast.makeText(activity, "no permission", Toast.LENGTH_SHORT).show()
             return
         }
 
