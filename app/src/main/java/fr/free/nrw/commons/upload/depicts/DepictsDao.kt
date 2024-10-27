@@ -22,16 +22,16 @@ abstract class DepictsDao {
     private val maxItemsAllowed = 10
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    abstract suspend fun insert(depictedItem: Depicts)
+    abstract fun insert(depictedItem: Depicts)
 
     @Query("Select * From depicts_table order by lastUsed DESC")
-    abstract suspend fun getAllDepicts(): List<Depicts>
+    abstract fun getAllDepicts(): List<Depicts>
 
     @Query("Select * From depicts_table order by lastUsed DESC LIMIT :n OFFSET 10")
-    abstract suspend fun getDepictsForDeletion(n: Int): List<Depicts>
+    abstract fun getDepictsForDeletion(n: Int): List<Depicts>
 
     @Delete
-    abstract suspend fun delete(depicts: Depicts)
+    abstract fun delete(depicts: Depicts)
 
     /**
      * Gets all Depicts objects from the database, ordered by lastUsed in descending order.
