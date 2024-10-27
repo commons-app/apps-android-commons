@@ -20,6 +20,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import androidx.activity.result.ActivityResultLauncher;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -57,27 +58,29 @@ public class UploadMediaDetailAdapter extends
     private int currentPosition;
     private Fragment fragment;
     private Activity activity;
+    private final ActivityResultLauncher<Intent> voiceInputResultLauncher;
     private SelectedVoiceIcon selectedVoiceIcon;
-    private static final int REQUEST_CODE_FOR_VOICE_INPUT = 1213;
 
     private RowItemDescriptionBinding binding;
 
     public UploadMediaDetailAdapter(Fragment fragment, String savedLanguageValue,
-        RecentLanguagesDao recentLanguagesDao) {
+        RecentLanguagesDao recentLanguagesDao, ActivityResultLauncher<Intent> voiceInputResultLauncher) {
         uploadMediaDetails = new ArrayList<>();
         selectedLanguages = new HashMap<>();
         this.savedLanguageValue = savedLanguageValue;
         this.recentLanguagesDao = recentLanguagesDao;
         this.fragment = fragment;
+        this.voiceInputResultLauncher = voiceInputResultLauncher;
     }
 
     public UploadMediaDetailAdapter(Activity activity, final String savedLanguageValue,
-        List<UploadMediaDetail> uploadMediaDetails, RecentLanguagesDao recentLanguagesDao) {
+        List<UploadMediaDetail> uploadMediaDetails, RecentLanguagesDao recentLanguagesDao, ActivityResultLauncher<Intent> voiceInputResultLauncher) {
         this.uploadMediaDetails = uploadMediaDetails;
         selectedLanguages = new HashMap<>();
         this.savedLanguageValue = savedLanguageValue;
         this.recentLanguagesDao = recentLanguagesDao;
         this.activity = activity;
+        this.voiceInputResultLauncher = voiceInputResultLauncher;
     }
 
     public void setCallback(Callback callback) {
@@ -150,11 +153,7 @@ public class UploadMediaDetailAdapter extends
         );
 
         try {
-            if (activity == null) {
-                fragment.startActivityForResult(intent, REQUEST_CODE_FOR_VOICE_INPUT);
-            } else {
-                activity.startActivityForResult(intent, REQUEST_CODE_FOR_VOICE_INPUT);
-            }
+            voiceInputResultLauncher.launch(intent);
         } catch (Exception e) {
             Timber.e(e.getMessage());
         }
@@ -407,7 +406,7 @@ public class UploadMediaDetailAdapter extends
                             recentLanguagesDao
                                 .addRecentLanguage(new Language(languageName, languageCode));
 
-                            selectedLanguages.remove(position);
+                            selectedLanguages.clear();
                             selectedLanguages.put(position, languageCode);
                             ((LanguagesAdapter) adapterView
                                 .getAdapter()).setSelectedLangCode(languageCode);
@@ -497,7 +496,7 @@ public class UploadMediaDetailAdapter extends
             }
             recentLanguagesDao.addRecentLanguage(new Language(languageName, languageCode));
 
-            selectedLanguages.remove(position);
+            selectedLanguages.clear();
             selectedLanguages.put(position, languageCode);
             ((RecentLanguagesAdapter) adapterView
                 .getAdapter()).setSelectedLangCode(languageCode);

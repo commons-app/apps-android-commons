@@ -6,6 +6,7 @@ import static fr.free.nrw.commons.di.NetworkingModule.NAMED_LANGUAGE_WIKI_PEDIA_
 
 import android.Manifest.permission;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
@@ -20,6 +21,7 @@ import android.widget.LinearLayout;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts.RequestMultiplePermissions;
+import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
@@ -96,6 +98,30 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
     private int contributionsSize;
     private String userName;
 
+    private final ActivityResultLauncher<Intent> galleryPickLauncherForResult =
+        registerForActivityResult(new StartActivityForResult(),
+        result -> {
+            controller.handleActivityResultWithCallback(requireActivity(), callbacks -> {
+                controller.onPictureReturnedFromGallery(result, requireActivity(), callbacks);
+            });
+        });
+
+    private final ActivityResultLauncher<Intent> customSelectorLauncherForResult =
+        registerForActivityResult(new StartActivityForResult(),
+        result -> {
+            controller.handleActivityResultWithCallback(requireActivity(), callbacks -> {
+                controller.onPictureReturnedFromCustomSelector(result, requireActivity(), callbacks);
+            });
+        });
+
+    private final ActivityResultLauncher<Intent> cameraPickLauncherForResult =
+        registerForActivityResult(new StartActivityForResult(),
+        result -> {
+            controller.handleActivityResultWithCallback(requireActivity(), callbacks -> {
+                controller.onPictureReturnedFromCamera(result, requireActivity(), callbacks);
+            });
+        });
+
     private ActivityResultLauncher<String[]> inAppCameraLocationPermissionLauncher = registerForActivityResult(
         new RequestMultiplePermissions(),
         new ActivityResultCallback<Map<String, Boolean>>() {
@@ -111,7 +137,7 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
                 } else {
                     if (shouldShowRequestPermissionRationale(permission.ACCESS_FINE_LOCATION)) {
                         controller.handleShowRationaleFlowCameraLocation(getActivity(),
-                            inAppCameraLocationPermissionLauncher);
+                            inAppCameraLocationPermissionLauncher, cameraPickLauncherForResult);
                     } else {
                         controller.locationPermissionCallback.onLocationPermissionDenied(
                             getActivity().getString(
@@ -322,7 +348,7 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
     private void setListeners() {
         binding.fabPlus.setOnClickListener(view -> animateFAB(isFabOpen));
         binding.fabCamera.setOnClickListener(view -> {
-            controller.initiateCameraPick(getActivity(), inAppCameraLocationPermissionLauncher);
+            controller.initiateCameraPick(getActivity(), inAppCameraLocationPermissionLauncher, cameraPickLauncherForResult);
             animateFAB(isFabOpen);
         });
         binding.fabCamera.setOnLongClickListener(view -> {
@@ -330,7 +356,7 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
             return true;
         });
         binding.fabGallery.setOnClickListener(view -> {
-            controller.initiateGalleryPick(getActivity(), true);
+            controller.initiateGalleryPick(getActivity(), galleryPickLauncherForResult, true);
             animateFAB(isFabOpen);
         });
         binding.fabGallery.setOnLongClickListener(view -> {
@@ -343,7 +369,7 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
      * Launch Custom Selector.
      */
     protected void launchCustomSelector() {
-        controller.initiateCustomGalleryPickWithPermission(getActivity());
+        controller.initiateCustomGalleryPickWithPermission(getActivity(), customSelectorLauncherForResult);
         animateFAB(isFabOpen);
     }
 

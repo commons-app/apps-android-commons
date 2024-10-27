@@ -13,6 +13,8 @@ import android.view.Window
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -41,7 +43,6 @@ import fr.free.nrw.commons.R
 import fr.free.nrw.commons.customselector.database.NotForUploadStatus
 import fr.free.nrw.commons.customselector.database.NotForUploadStatusDao
 import fr.free.nrw.commons.customselector.helper.CustomSelectorConstants
-import fr.free.nrw.commons.customselector.helper.CustomSelectorConstants.SHOULD_REFRESH
 import fr.free.nrw.commons.customselector.listeners.FolderClickListener
 import fr.free.nrw.commons.customselector.listeners.ImageSelectListener
 import fr.free.nrw.commons.customselector.model.Image
@@ -147,6 +148,10 @@ class CustomSelectorActivity :
 
     private var showPartialAccessIndicator by mutableStateOf(false)
 
+    private val startForResult = registerForActivityResult(StartActivityForResult()){ result ->
+        onFullScreenDataReceived(result)
+    }
+
     /**
      * onCreate Activity, sets theme, initialises the view model, setup view.
      */
@@ -225,20 +230,12 @@ class CustomSelectorActivity :
     /**
      * When data will be send from full screen mode, it will be passed to fragment
      */
-    override fun onActivityResult(
-        requestCode: Int,
-        resultCode: Int,
-        data: Intent?,
-    ) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == Constants.RequestCodes.RECEIVE_DATA_FROM_FULL_SCREEN_MODE &&
-            resultCode == Activity.RESULT_OK
-        ) {
+    private fun onFullScreenDataReceived(result: ActivityResult){
+        if (result.resultCode == Activity.RESULT_OK) {
             val selectedImages: ArrayList<Image> =
-                data!!
+                result.data!!
                     .getParcelableArrayListExtra(CustomSelectorConstants.NEW_SELECTED_IMAGES)!!
-            val shouldRefresh = data.getBooleanExtra(SHOULD_REFRESH, false)
-            imageFragment?.passSelectedImages(selectedImages, shouldRefresh)
+            viewModel?.selectedImages?.value = selectedImages
         }
     }
 
@@ -511,7 +508,7 @@ class CustomSelectorActivity :
             selectedImages,
         )
         intent.putExtra(CustomSelectorConstants.BUCKET_ID, bucketId)
-        startActivityForResult(intent, Constants.RequestCodes.RECEIVE_DATA_FROM_FULL_SCREEN_MODE)
+        startForResult.launch(intent)
     }
 
     /**

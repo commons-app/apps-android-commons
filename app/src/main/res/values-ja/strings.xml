@@ -462,6 +462,7 @@
   <string name="no_notification">未読の通知はありません</string>
   <string name="no_read_notification">既読のお知らせはありません</string>
   <string name="share_logs_using">ログの共有に使うアプリ</string>
+  <string name="check_your_email_inbox">メールをご確認ください</string>
   <string name="menu_option_read">既読を表示</string>
   <string name="menu_option_unread">未読を見る</string>
   <string name="error_occurred_in_picking_images">画像の選択中にエラーが発生しました</string>

@@ -473,6 +473,7 @@
   <string name="no_notification">A l\'ha gnun-e notìfiche nen lesùe</string>
   <string name="no_read_notification">A l\'ha gnun-e notìfiche lesùe</string>
   <string name="share_logs_using">Partagé j\'argistr dovrand</string>
+  <string name="check_your_email_inbox">Ch\'a contròla soa casela ëd pòsta eletrònica</string>
   <string name="menu_option_read">Vëdde lòn ch\'a l\'é stàit lesù</string>
   <string name="menu_option_unread">Vëdde lòn ch\'a l\'é ancor nen ëstàit lesù</string>
   <string name="error_occurred_in_picking_images">A-i é staje n\'eror an selessionand le plance</string>
