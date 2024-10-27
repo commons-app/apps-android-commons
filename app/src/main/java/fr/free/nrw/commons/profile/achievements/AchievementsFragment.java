@@ -104,7 +104,7 @@ public class AchievementsFragment extends CommonsDaggerSupportFragment {
 
         // Used for the setting the size of imageView at runtime
         ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams)
-                binding.achievementBadgeImage.getLayoutParams();
+            binding.achievementBadgeImage.getLayoutParams();
         params.height = (int) (height * BADGE_IMAGE_HEIGHT_RATIO);
         params.width = (int) (width * BADGE_IMAGE_WIDTH_RATIO);
         binding.achievementBadgeImage.requestLayout();
@@ -185,37 +185,37 @@ public class AchievementsFragment extends CommonsDaggerSupportFragment {
             try{
 
                 compositeDisposable.add(okHttpJsonApiClient
-                        .getAchievements(Objects.requireNonNull(userName))
-                        .subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(
-                                response -> {
-                                    if (response != null) {
-                                        setUploadCount(Achievements.from(response));
-                                    } else {
-                                        Timber.d("success");
-                                        binding.layoutImageReverts.setVisibility(View.INVISIBLE);
-                                        binding.achievementBadgeImage.setVisibility(View.INVISIBLE);
-                                        // If the number of edits made by the user are more than 150,000
-                                        // in some cases such high number of wiki edit counts cause the
-                                        // achievements calculator to fail in some cases, for more details
-                                        // refer Issue: #3295
-                                        if (numberOfEdits <= 150000) {
-                                            showSnackBarWithRetry(false);
-                                        } else {
-                                            showSnackBarWithRetry(true);
-                                        }
-                                    }
-                                },
-                                t -> {
-                                    Timber.e(t, "Fetching achievements statistics failed");
-                                    if (numberOfEdits <= 150000) {
-                                        showSnackBarWithRetry(false);
-                                    } else {
-                                        showSnackBarWithRetry(true);
-                                    }
+                    .getAchievements(Objects.requireNonNull(userName))
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(
+                        response -> {
+                            if (response != null) {
+                                setUploadCount(Achievements.from(response));
+                            } else {
+                                Timber.d("success");
+                                binding.layoutImageReverts.setVisibility(View.INVISIBLE);
+                                binding.achievementBadgeImage.setVisibility(View.INVISIBLE);
+                                // If the number of edits made by the user are more than 150,000
+                                // in some cases such high number of wiki edit counts cause the
+                                // achievements calculator to fail in some cases, for more details
+                                // refer Issue: #3295
+                                if (numberOfEdits <= 150000) {
+                                    showSnackBarWithRetry(false);
+                                } else {
+                                    showSnackBarWithRetry(true);
                                 }
-                        ));
+                            }
+                        },
+                        t -> {
+                            Timber.e(t, "Fetching achievements statistics failed");
+                            if (numberOfEdits <= 150000) {
+                                showSnackBarWithRetry(false);
+                            } else {
+                                showSnackBarWithRetry(true);
+                            }
+                        }
+                    ));
             }
             catch (Exception e){
                 Timber.d(e+"success");
@@ -232,15 +232,15 @@ public class AchievementsFragment extends CommonsDaggerSupportFragment {
             return;
         }
         compositeDisposable.add(okHttpJsonApiClient
-                .getWikidataEdits(userName)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(edits -> {
-                    numberOfEdits = edits;
-                    binding.wikidataEdits.setText(String.valueOf(edits));
-                }, e -> {
-                    Timber.e("Error:" + e);
-                }));
+            .getWikidataEdits(userName)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(edits -> {
+                numberOfEdits = edits;
+                binding.wikidataEdits.setText(String.valueOf(edits));
+            }, e -> {
+                Timber.e("Error:" + e);
+            }));
     }
 
     /**
@@ -254,11 +254,11 @@ public class AchievementsFragment extends CommonsDaggerSupportFragment {
         if (tooManyAchievements) {
             binding.progressBar.setVisibility(View.GONE);
             ViewUtil.showDismissibleSnackBar(getActivity().findViewById(android.R.id.content),
-                    R.string.achievements_fetch_failed_ultimate_achievement, R.string.retry, view -> setAchievements());
+                R.string.achievements_fetch_failed_ultimate_achievement, R.string.retry, view -> setAchievements());
         } else {
             binding.progressBar.setVisibility(View.GONE);
             ViewUtil.showDismissibleSnackBar(getActivity().findViewById(android.R.id.content),
-                    R.string.achievements_fetch_failed, R.string.retry, view -> setAchievements());
+                R.string.achievements_fetch_failed, R.string.retry, view -> setAchievements());
         }
     }
 
@@ -276,16 +276,16 @@ public class AchievementsFragment extends CommonsDaggerSupportFragment {
     private void setUploadCount(Achievements achievements) {
         if (checkAccount()) {
             compositeDisposable.add(okHttpJsonApiClient
-                    .getUploadCount(Objects.requireNonNull(userName))
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(
-                            uploadCount -> setAchievementsUploadCount(achievements, uploadCount),
-                            t -> {
-                                Timber.e(t, "Fetching upload count failed");
-                                onError();
-                            }
-                    ));
+                .getUploadCount(Objects.requireNonNull(userName))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                    uploadCount -> setAchievementsUploadCount(achievements, uploadCount),
+                    t -> {
+                        Timber.e(t, "Fetching upload count failed");
+                        onError();
+                    }
+                ));
         }
     }
 
@@ -294,8 +294,18 @@ public class AchievementsFragment extends CommonsDaggerSupportFragment {
      * @param uploadCount
      */
     private void setAchievementsUploadCount(Achievements achievements, int uploadCount) {
-        achievements.setImagesUploaded(uploadCount);
-        hideProgressBar(achievements);
+        // Create a new instance of Achievements with updated imagesUploaded
+        Achievements updatedAchievements = new Achievements(
+            achievements.getUniqueUsedImages(),
+            achievements.getArticlesUsingImages(),
+            achievements.getThanksReceived(),
+            achievements.getFeaturedImages(),
+            achievements.getQualityImages(),
+            uploadCount,  // Update imagesUploaded with new value
+            achievements.getRevertCount()
+        );
+
+        hideProgressBar(updatedAchievements);
     }
 
     /**
@@ -308,7 +318,7 @@ public class AchievementsFragment extends CommonsDaggerSupportFragment {
         }else {
             binding.imagesUploadedProgressbar.setVisibility(View.VISIBLE);
             binding.imagesUploadedProgressbar.setProgress
-                    (100*uploadCount/levelInfo.getMaxUploadCount());
+                (100*uploadCount/levelInfo.getMaxUploadCount());
             binding.tvUploadedImages.setText
                 (uploadCount + "/" + levelInfo.getMaxUploadCount());
         }
@@ -317,8 +327,8 @@ public class AchievementsFragment extends CommonsDaggerSupportFragment {
 
     private void setZeroAchievements() {
         String message = !Objects.equals(sessionManager.getUserName(), userName) ?
-                getString(R.string.no_achievements_yet, userName) :
-                getString(R.string.you_have_no_achievements_yet);
+            getString(R.string.no_achievements_yet, userName) :
+            getString(R.string.you_have_no_achievements_yet);
         DialogUtil.showAlertDialog(getActivity(),
             null,
             message,
@@ -356,7 +366,7 @@ public class AchievementsFragment extends CommonsDaggerSupportFragment {
 //        binding.imagesUsedByWikiProgressBar.setVisibility(View.VISIBLE);
         binding.thanksReceived.setText(String.valueOf(achievements.getThanksReceived()));
         binding.imagesUsedByWikiProgressBar.setProgress
-                (100 * achievements.getUniqueUsedImages() / levelInfo.getMaxUniqueImages());
+            (100 * achievements.getUniqueUsedImages() / levelInfo.getMaxUniqueImages());
         binding.tvWikiPb.setText(achievements.getUniqueUsedImages() + "/"
             + levelInfo.getMaxUniqueImages());
         binding.imageFeatured.setText(String.valueOf(achievements.getFeaturedImages()));
@@ -365,7 +375,7 @@ public class AchievementsFragment extends CommonsDaggerSupportFragment {
         levelUpInfoString += " " + levelInfo.getLevelNumber();
         binding.achievementLevel.setText(levelUpInfoString);
         binding.achievementBadgeImage.setImageDrawable(VectorDrawableCompat.create(getResources(), R.drawable.badge,
-                new ContextThemeWrapper(getActivity(), levelInfo.getLevelStyle()).getTheme()));
+            new ContextThemeWrapper(getActivity(), levelInfo.getLevelStyle()).getTheme()));
         binding.achievementBadgeText.setText(Integer.toString(levelInfo.getLevelNumber()));
         BasicKvStore store = new BasicKvStore(this.getContext(), userName);
         store.putString("userAchievementsLevel", Integer.toString(levelInfo.getLevelNumber()));
@@ -377,8 +387,8 @@ public class AchievementsFragment extends CommonsDaggerSupportFragment {
     private void hideProgressBar(Achievements achievements) {
         if (binding.progressBar != null) {
             levelInfo = LevelController.LevelInfo.from(achievements.getImagesUploaded(),
-                    achievements.getUniqueUsedImages(),
-                    achievements.getNotRevertPercentage());
+                achievements.getUniqueUsedImages(),
+                achievements.getNotRevertPercentage());
             inflateAchievements(achievements);
             setUploadProgress(achievements.getImagesUploaded());
             setImageRevertPercentage(achievements.getNotRevertPercentage());
