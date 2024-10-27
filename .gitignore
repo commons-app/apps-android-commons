@@ -2,6 +2,7 @@
 *.iml
 *.ipr
 *.iws
+.idea/
 /.idea/*
 app/src/main/gen/*
 
