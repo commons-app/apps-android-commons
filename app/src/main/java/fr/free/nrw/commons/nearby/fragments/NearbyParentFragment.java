@@ -108,6 +108,7 @@ import fr.free.nrw.commons.utils.NetworkUtils;
 import fr.free.nrw.commons.utils.SystemThemeUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import fr.free.nrw.commons.wikidata.WikidataEditListener;
+import io.reactivex.Completable;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
@@ -342,9 +343,21 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     public void onCreateOptionsMenu(@NonNull final Menu menu,
         @NonNull final MenuInflater inflater) {
         inflater.inflate(R.menu.nearby_fragment_menu, menu);
+        MenuItem refreshButton = menu.findItem(R.id.item_refresh);
         MenuItem listMenu = menu.findItem(R.id.list_sheet);
         MenuItem saveAsGPXButton = menu.findItem(R.id.list_item_gpx);
         MenuItem saveAsKMLButton = menu.findItem(R.id.list_item_kml);
+        refreshButton.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                try {
+                    emptyCache();
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+                return false;
+            }
+        });
         listMenu.setOnMenuItemClickListener(new OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
@@ -1156,6 +1169,48 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         if (recenterToUserLocation) {
             recenterToUserLocation = false;
         }
+    }
+
+    /**
+     *  Reloads the Nearby map
+     *  Clears all location markers, refreshes them, reinserts them into the map.
+     *
+     */
+    private void reloadMap() {
+        clearAllMarkers(); // Clear the list of markers
+        binding.map.getController().setZoom(ZOOM_LEVEL); // Reset the zoom level
+        binding.map.getController().setCenter(lastMapFocus); // Recenter the focus
+        if (locationPermissionsHelper.checkLocationPermission(getActivity())) {
+            locationPermissionGranted(); // Reload map with user's location
+        } else {
+            startMapWithoutPermission(); // Reload map without user's location
+        }
+        binding.map.invalidate(); // Invalidate the map
+        presenter.updateMapAndList(LOCATION_SIGNIFICANTLY_CHANGED); // Restart the map
+        Timber.d("Reloaded Map Successfully");
+    }
+
+
+    /**
+     * Clears the Nearby local cache and then calls for the map to be reloaded
+     *
+     */
+    private void emptyCache() {
+        // reload the map once the cache is cleared
+        compositeDisposable.add(
+            placesRepository.clearCache()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .andThen(Completable.fromAction(this::reloadMap))
+                .subscribe(
+                    () -> {
+                        Timber.d("Nearby Cache cleared successfully.");
+                    },
+                    throwable -> {
+                        Timber.e(throwable, "Failed to clear the Nearby Cache");
+                    }
+                )
+        );
     }
 
     private void savePlacesAsKML() {

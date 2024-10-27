@@ -806,4 +806,7 @@
   <string name="pending">待處理</string>
   <string name="failed">失敗</string>
   <string name="could_not_load_place_data">無法載入地點資料</string>
+  <string name="red_pin">這個地點還沒有照片，來拍一張吧！</string>
+  <string name="green_pin">這個地點已有照片。</string>
+  <string name="grey_pin">現在檢查這個地點是否有照片。</string>
 </resources>
