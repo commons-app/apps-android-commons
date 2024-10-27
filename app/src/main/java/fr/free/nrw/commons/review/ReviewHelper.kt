@@ -133,8 +133,6 @@ class ReviewHelper
 
 
 
-
-
     /**
      * Batch checks whether multiple files are being used in any wiki pages.
      * This method processes a list of filenames in parallel using RxJava Observables.
