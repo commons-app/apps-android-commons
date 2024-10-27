@@ -80,7 +80,7 @@
   <string name="logging_in_title">Kirjaudutaan</string>
   <string name="logging_in_message">Odota…</string>
   <string name="updating_caption_title">Päivitetään kuvatekstejä ja kuvauksia</string>
-  <string name="updating_caption_message">Odota...</string>
+  <string name="updating_caption_message">Odota…</string>
   <string name="login_success">Kirjautuminen onnistui!</string>
   <string name="login_failed">Kirjautuminen epäonnistui!</string>
   <string name="upload_failed">Tiedostoa ei löytynyt. Yritä toista tiedostoa.</string>
@@ -481,7 +481,7 @@
   <string name="exif_tag_name_serialNumbers">Sarjanumerot</string>
   <string name="exif_tag_name_software">Ohjelmisto</string>
   <string name="share_text">Lähetä valokuvia suoraan Wikimedia Commonsiin puhelimestasi. Lataa Commons-appi nyt: %1$s</string>
-  <string name="share_via">Jaa sovellus...</string>
+  <string name="share_via">Jaa sovellus…</string>
   <string name="image_info">Kuvan tiedot</string>
   <string name="no_categories_found">Luokkia ei löytynyt</string>
   <string name="no_depiction_found">Kuvauksia ei löytynyt</string>
@@ -546,7 +546,7 @@
   <string name="add_bookmark">Lisätty kirjanmerkkeihin</string>
   <string name="wallpaper_set_unsuccessfully">Jotain meni väärin. Ei voitu asettaa taustakuvaksi.</string>
   <string name="setting_wallpaper_dialog_title">Aseta taustakuvaksi</string>
-  <string name="setting_wallpaper_dialog_message">Asetetaan taustakuvaksi. Odota...</string>
+  <string name="setting_wallpaper_dialog_message">Asetetaan taustakuvaksi. Odota…</string>
   <string name="theme_default_name">Käytä järjestelmän</string>
   <string name="theme_dark_name">Tumma</string>
   <string name="theme_light_name">Vaalea</string>
@@ -594,8 +594,8 @@
   <string name="limited_connection_disabled">Rajoitettu yhteistila pois päältä. Jonossa olevat lähetykset kopioidaan nyt.</string>
   <string name="limited_connection_mode">Rajoitettu yhteystila</string>
   <string name="statistics_quality">Laatukuvat</string>
-  <string name="resuming_upload">Jatketaan lähettämistä...</string>
-  <string name="pausing_upload">Keskeytetään lähetys...</string>
+  <string name="resuming_upload">Jatketaan lähettämistä…</string>
+  <string name="pausing_upload">Keskeytetään lähetys…</string>
   <string name="cancelling_upload">Peruutetaan tallennusta…</string>
   <string name="cancel_upload">Peruuta tallennus</string>
   <string name="limited_connection_is_on">Rajoitettu yhteystila on päällä.</string>

@@ -169,7 +169,7 @@
   <string name="welcome_final_button_text">ھا!</string>
   <string name="welcome_help_button_text">وڌيڪ معلومات</string>
   <string name="detail_panel_cats_label">زمرا</string>
-  <string name="detail_panel_cats_loading">لاهيندي...</string>
+  <string name="detail_panel_cats_loading">لاهيندي…</string>
   <string name="detail_panel_cats_none">ڪوبہ چونڊيل ناھي</string>
   <string name="detail_caption_empty">عنوان ناهي</string>
   <string name="detail_description_empty">ڪا تشريح ناھي</string>
@@ -315,7 +315,7 @@
   <string name="exif_tag_name_lensModel">لينس ماڊل</string>
   <string name="exif_tag_name_serialNumbers">سيريل انگ</string>
   <string name="exif_tag_name_software">سافٽويئر</string>
-  <string name="share_via">ايپ ذريعي ونڊيو...</string>
+  <string name="share_via">ايپ ذريعي ونڊيو…</string>
   <string name="image_info">عڪس معلومات</string>
   <string name="no_categories_found">زمرا نہ لڌا</string>
   <string name="upload_cancelled">رد-ڪيل چاڙھ</string>

@@ -17,6 +17,6 @@ class DepictedImagesFragment : PageableMediaFragment() {
         savedInstanceState: Bundle?,
     ) {
         super.onViewCreated(view, savedInstanceState)
-        onQueryUpdated(arguments!!.getString("entityId")!!)
+        onQueryUpdated(requireArguments().getString("entityId")!!)
     }
 }

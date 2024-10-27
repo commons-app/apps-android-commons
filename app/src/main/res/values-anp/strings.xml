@@ -27,14 +27,14 @@
   <string name="forgot_password">पासवर्ड भूलाय गेलौ की?</string>
   <string name="signup">साइन अप करौ</string>
   <string name="logging_in_title">प्रवेश होय रहलौ छौं</string>
-  <string name="logging_in_message">कृपया प्रतीक्षा करौ...</string>
-  <string name="updating_caption_message">कृपया प्रतीक्षा करौ...</string>
+  <string name="logging_in_message">कृपया प्रतीक्षा करौ…</string>
+  <string name="updating_caption_message">कृपया प्रतीक्षा करौ…</string>
   <string name="login_failed" fuzzy="true">प्रवेश विफल</string>
   <string name="uploading_started">अपलोड आरंभ!</string>
   <string name="title_activity_contributions">हाल केरौ अपलोड</string>
   <string name="contribution_state_queued">कतारबद्ध</string>
   <string name="contribution_state_failed">विफल</string>
-  <string name="contribution_state_starting">अपलोड होय रहलौ छौं...</string>
+  <string name="contribution_state_starting">अपलोड होय रहलौ छौं…</string>
   <string name="menu_nearby">ठामे मँ</string>
   <string name="provider_contributions">हमरौ अपलोड</string>
   <string name="menu_share">साझा करौ</string>
@@ -68,7 +68,7 @@
   <string name="welcome_final_button_text">हाँव!</string>
   <string name="welcome_help_button_text">बेसी जानकारी</string>
   <string name="detail_panel_cats_label">श्रेणी सिनी</string>
-  <string name="detail_panel_cats_loading">लोड होय रहलौ छौं...</string>
+  <string name="detail_panel_cats_loading">लोड होय रहलौ छौं…</string>
   <string name="detail_panel_cats_none">कुछु चयनित नाय</string>
   <string name="detail_caption_empty">कोय शीर्षक नाय</string>
   <string name="detail_description_empty">कोय विवरण नाय</string>
@@ -173,7 +173,7 @@
   <string name="nominate_for_deletion_done">पूर्ण होलौं</string>
   <string name="review_thanks_yes_button_text">अगलका छवि</string>
   <string name="review_thanks_no_button_text">हाँव, केन्हअ नाय</string>
-  <string name="please_wait">कृपया प्रतीक्षा करौ...</string>
+  <string name="please_wait">कृपया प्रतीक्षा करौ…</string>
   <string name="copied_successfully">प्रतिलिपि बनैलौ गेलै!</string>
   <string name="exif_tag_name_author">लेखक</string>
   <string name="exif_tag_name_location">स्थान</string>
