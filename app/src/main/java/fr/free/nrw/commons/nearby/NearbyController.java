@@ -147,7 +147,7 @@ public class NearbyController extends MapController {
      */
     public List<Place> getPlaces(List<Place> placeList) throws Exception {
 
-        String secondaryLanguages = defaultKvStore.getString(Prefs.SECONDARY_LANGUAGE, "");
+        String secondaryLanguages = defaultKvStore.getString(Prefs.SECONDARY_LANGUAGES, "");
 
         return nearbyPlaces.getPlaces(placeList, Locale.getDefault().getLanguage(), secondaryLanguages);
     }
