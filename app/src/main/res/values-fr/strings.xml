@@ -46,7 +46,7 @@
 * Wladek92
 * Y-M D
 -->
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
   <string name="commons_facebook">Page Facebook de Commons</string>
   <string name="commons_github">Code source Github de Commons</string>
   <string name="commons_logo">Logo de Commons</string>
@@ -70,31 +70,38 @@
   <string name="appwidget_img">Image du jour</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">%1$d fichier en cours de téléversement</item>
+    <item quantity="many">%1$d fichiers en cours de téléversement</item>
     <item quantity="other">%1$d fichiers en cours de téléversement</item>
   </plurals>
   <plurals name="contributions_subtitle">
     <item quantity="one">(%1$d)</item>
+    <item quantity="many">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
   <string name="starting_uploads">Démarrage des téléversements</string>
   <plurals name="starting_multiple_uploads">
     <item quantity="one">%d téléversement en cours</item>
+    <item quantity="many">%d téléversements en cours</item>
     <item quantity="other">%d téléversements en cours</item>
   </plurals>
   <plurals name="multiple_uploads_title">
     <item quantity="one">%d téléversement</item>
+    <item quantity="many">%d téléversements</item>
     <item quantity="other">%d téléversements</item>
   </plurals>
   <plurals name="share_license_summary">
     <item quantity="one">Cette image sera sous licence %1$s.</item>
+    <item quantity="many">Ces images seront sous licence %1$s.</item>
     <item quantity="other">Ces images seront sous licence %1$s.</item>
   </plurals>
   <plurals name="upload_count_title">
     <item quantity="one">%1$d téléversement</item>
+    <item quantity="many">%1$d téléversements</item>
     <item quantity="other">%1$d téléversements</item>
   </plurals>
   <plurals name="receiving_shared_content">
-    <item quantity="one">Réception de contenu partagé. Le traitement de l’image peut prendre un certain temps en fonction de la taille de l’image et de votre matériel.</item>
+    <item quantity="one" tools:ignore="ImpliedQuantity">Réception de contenu partagé. Le traitement de l’image peut prendre un certain temps en fonction de la taille de l’image et de votre matériel.</item>
+    <item quantity="many">Réception de contenu partagé. Le traitement des images peut prendre un certain temps en fonction de la taille des images et de votre matériel.</item>
     <item quantity="other">Réception de contenu partagé. Le traitement des images peut prendre un certain temps en fonction de la taille des images et de votre matériel.</item>
   </plurals>
   <string name="navigation_item_explore">Explorer</string>
@@ -113,9 +120,9 @@
   <string name="forgot_password">Mot de passe oublié ?</string>
   <string name="signup">S’inscrire</string>
   <string name="logging_in_title">Connexion</string>
-  <string name="logging_in_message">Veuillez patienter...</string>
+  <string name="logging_in_message">Veuillez patienter…</string>
   <string name="updating_caption_title">Mise à jour des légendes et des descriptions</string>
-  <string name="updating_caption_message">Veuillez patienter...</string>
+  <string name="updating_caption_message">Veuillez patienter…</string>
   <string name="login_success">Connexion réussie !</string>
   <string name="login_failed">Échec de la connexion !</string>
   <string name="upload_failed">Fichier non trouvé. Veuillez en essayer un autre.</string>
@@ -185,7 +192,7 @@
   <string name="menu_feedback">Envoyer vos commentaires (par courriel)</string>
   <string name="no_email_client">Aucun client de courriel installé</string>
   <string name="provider_categories">Catégories récemment utilisées</string>
-  <string name="waiting_first_sync">En attente de première synchronisation...</string>
+  <string name="waiting_first_sync">En attente de première synchronisation…</string>
   <string name="no_uploads_yet">Vous n’avez encore téléchargé aucune photo.</string>
   <string name="menu_retry_upload">Réessayer</string>
   <string name="menu_cancel_upload">Annuler</string>
@@ -225,7 +232,7 @@
   <string name="welcome_final_button_text">Oui !</string>
   <string name="welcome_help_button_text">Davantage d’informations</string>
   <string name="detail_panel_cats_label">Catégories</string>
-  <string name="detail_panel_cats_loading">Chargement en cours...</string>
+  <string name="detail_panel_cats_loading">Chargement en cours…</string>
   <string name="detail_panel_cats_none">Aucune catégorie sélectionnée</string>
   <string name="detail_caption_empty">Aucune légende</string>
   <string name="detail_description_empty">Aucune description</string>
@@ -521,7 +528,7 @@
   <string name="menu_option_read">Afficher les lus</string>
   <string name="menu_option_unread">Afficher les non lus</string>
   <string name="error_occurred_in_picking_images">Une erreur est survenue lors de la sélection des images</string>
-  <string name="please_wait">Veuillez patienter...</string>
+  <string name="please_wait">Veuillez patienter…</string>
   <string name="images_featured_explanation">Les images en vedette sont des images de photographes et d’illustrateurs très doués que la communauté de Wikimédia Commons a choisies comme étant de la meilleure qualité pour le site.</string>
   <string name="images_via_nearby_explanation">Les images téléversées par « Lieux à proximité » sont les images téléversées lors de la découverte de lieux sur la carte.</string>
   <string name="thanks_received_explanation">Cette fonctionnalité permet aux contributeurs d’envoyer une notification de remerciement aux utilisateurs qui font des modifications utiles ― en utilisant un petit lien de remerciement sur la page historique ou sur celle du diff.</string>
@@ -543,7 +550,7 @@
   <string name="media_location_permission_denied">Accès à l’emplacement du média refusé</string>
   <string name="add_location_manually">Nous ne pourrons pas obtenir automatiquement les données de localisation des images que vous téléchargez. Veuillez ajouter l’emplacement approprié pour chaque image avant de la soumettre.</string>
   <string name="share_text">Téléversez des photos sur Wikimedia Commons directement depuis votre téléphone. Téléchargez l’application Commons maintenant : %1$s</string>
-  <string name="share_via">Partager l’application via...</string>
+  <string name="share_via">Partager l’application via…</string>
   <string name="image_info">Informations sur l’image</string>
   <string name="no_categories_found">Aucune catégorie trouvée</string>
   <string name="no_depiction_found">Aucun élément représenté trouvé</string>
@@ -570,6 +577,7 @@
   <string name="category_edit_helper_show_edit_title_success">Succès</string>
   <plurals name="category_edit_helper_show_edit_message_if">
     <item quantity="one">La catégorie %1$s est ajoutée.</item>
+    <item quantity="many">Les catégories %1$s sont ajoutées.</item>
     <item quantity="other">Les catégories %1$s sont ajoutées.</item>
   </plurals>
   <string name="category_edit_helper_edit_message_else">Impossible d’ajouter des catégories.</string>
@@ -578,6 +586,7 @@
   <string name="depictions_edit_helper_show_edit_title">Modifier les éléments représentés</string>
   <plurals name="depictions_edit_helper_show_edit_message_if">
     <item quantity="one">L’élément représenté %1$s est ajouté.</item>
+    <item quantity="many">Les éléments représentés %1$s sont ajoutés.</item>
     <item quantity="other">Les éléments représentés %1$s sont ajoutés.</item>
   </plurals>
   <string name="depictions_edit_helper_edit_message_else">Impossible d’ajouter des éléments représentés.</string>
@@ -620,7 +629,7 @@
   <string name="add_bookmark">Ajouté aux favoris</string>
   <string name="wallpaper_set_unsuccessfully">Un problème est survenu. Impossible d’installer le fond d’écran.</string>
   <string name="setting_wallpaper_dialog_title">Définir comme fond d’écran</string>
-  <string name="setting_wallpaper_dialog_message">Installation du fond d’écran. Veuillez patienter...</string>
+  <string name="setting_wallpaper_dialog_message">Installation du fond d’écran. Veuillez patienter…</string>
   <string name="theme_default_name">Suivre le système</string>
   <string name="theme_dark_name">Sombre</string>
   <string name="theme_light_name">Clair</string>
@@ -678,9 +687,9 @@
   <string name="limited_connection_mode">Mode de connexion limitée</string>
   <string name="statistics_quality">Images de qualité</string>
   <string name="quality_images_info">Les images de qualité sont des diagrammes ou des photographies qui respectent certains standards de qualité (qui sont, par nature, essentiellement techniques) et sont précieuses pour les projets Wikimedia.</string>
-  <string name="resuming_upload">Reprise du téléversement...</string>
-  <string name="pausing_upload">Mise en pause du téléversement...</string>
-  <string name="cancelling_upload">Annulation du téléversement...</string>
+  <string name="resuming_upload">Reprise du téléversement…</string>
+  <string name="pausing_upload">Mise en pause du téléversement…</string>
+  <string name="cancelling_upload">Annulation du téléversement…</string>
   <string name="cancel_upload">Annuler le téléversement</string>
   <string name="limited_connection_explanation">Vous avez activé le mode de connexion limitée. Tous les téléversements sont suspendus et reprendront une fois ce mode désactivé.</string>
   <string name="limited_connection_is_on">Le mode de connexion limitée est actif.</string>
@@ -809,6 +818,7 @@
   <string name="saving_gpx_file">Fichier GPX enregistré</string>
   <plurals name="custom_picker_images_selected_title_appendix">
     <item quantity="one">%d image sélectionnée</item>
+    <item quantity="many">%d images sélectionnées</item>
     <item quantity="other">%d images sélectionnées</item>
   </plurals>
   <string name="multiple_files_depiction">Souvenez-vous que toutes les images dans une importation multiple prennent les mêmes catégories et descriptions. Si les images de partagent pas les descriptions et catégories, veuillez effectuer plusieurs importations séparées.</string>
@@ -822,7 +832,7 @@
   <string name="other_problem_or_information_please_explain_below">Autre problème ou information (merci d\'expliquer ci-dessous).</string>
   <string name="feedback_destination_note">Vos commentaires sont publiés sur la page wiki suivante : &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Mobile_app/Feedback\"&gt;Commons:Mobile app/Feedback&lt;/a&gt;</string>
   <string name="are_you_sure_that_you_want_cancel_all_the_uploads">Êtes-vous sûr de vouloir annuler tous les téléchargements ?</string>
-  <string name="cancelling_all_the_uploads">Annulation de tous les téléchargements...</string>
+  <string name="cancelling_all_the_uploads">Annulation de tous les téléchargements…</string>
   <string name="uploads">Téléversements</string>
   <string name="pending">En attente</string>
   <string name="failed">Échec</string>

@@ -21,6 +21,6 @@ class ParentCategoriesFragment : PageableCategoryFragment() {
         savedInstanceState: Bundle?,
     ) {
         super.onViewCreated(view, savedInstanceState)
-        onQueryUpdated("$CATEGORY_PREFIX${arguments!!.getString("categoryName")!!}")
+        onQueryUpdated("$CATEGORY_PREFIX${requireArguments().getString("categoryName")!!}")
     }
 }

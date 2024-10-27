@@ -15,19 +15,22 @@
   <string name="appwidget_img">Slika dana</string>
   <plurals name="uploads_pending_notification_indicator" fuzzy="true">
     <item quantity="one">Postavlja se %1$d datoteka</item>
+    <item quantity="few">Postavlja se %1$d datoteke</item>
     <item quantity="other">Postavljaju se %1$d datoteke</item>
   </plurals>
   <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">%1$d postavljena datoteka</item>
+    <item quantity="few">%1$d postavljena datoteke</item>
     <item quantity="other">%1$d postavljene datoteke</item>
   </plurals>
   <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">Započeto %1$d postavljanje</item>
+    <item quantity="few">Započinjem %1$d postavljanja</item>
     <item quantity="other">Započeta %1$d postavljanja</item>
   </plurals>
   <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">%1$d postavljanje</item>
+    <item quantity="few">%1$d postavljanja</item>
     <item quantity="other">%1$d postavljanja</item>
   </plurals>
   <string name="share_license_summary" fuzzy="true">Ova će slika biti licencirana pod %1$s</string>
@@ -46,7 +49,7 @@
   <string name="forgot_password">Zaboravljena zaporka?</string>
   <string name="signup">Otvori račun</string>
   <string name="logging_in_title">Prijava</string>
-  <string name="logging_in_message">Molimo pričekajte ...</string>
+  <string name="logging_in_message">Molimo pričekajte …</string>
   <string name="login_success" fuzzy="true">Prijava uspješna!</string>
   <string name="login_failed" fuzzy="true">Prijava neuspješna!</string>
   <string name="upload_failed">Datoteka nije pronađena. Molimo probajte drugu.</string>
@@ -104,7 +107,7 @@
   <string name="menu_feedback">Pošaljite povratnu informaciju (putem elektroničke pošte)</string>
   <string name="no_email_client">Klijent za elektroničku poštu nije instaliran</string>
   <string name="provider_categories">Nedavno rabljene kategorije</string>
-  <string name="waiting_first_sync">Pričekajte za prvu sinkronizaciju...</string>
+  <string name="waiting_first_sync">Pričekajte za prvu sinkronizaciju…</string>
   <string name="no_uploads_yet">Nemate još postavljenih slika.</string>
   <string name="menu_retry_upload">Pokušaj ponovo</string>
   <string name="menu_cancel_upload">Odustani</string>
@@ -144,7 +147,7 @@
   <string name="welcome_final_button_text">Da!</string>
   <string name="welcome_help_button_text">Više informacija</string>
   <string name="detail_panel_cats_label">Kategorije</string>
-  <string name="detail_panel_cats_loading">Učitavanje...</string>
+  <string name="detail_panel_cats_loading">Učitavanje…</string>
   <string name="detail_panel_cats_none">Ništa nije odabrano</string>
   <string name="detail_description_empty">Nema opisa</string>
   <string name="detail_license_empty">Nepoznata licencija</string>
@@ -193,7 +196,7 @@
   <string name="nearby_info_menu_commons_article">Stranica datoteke na Zajedničkom poslužitelju</string>
   <string name="nearby_info_menu_wikidata_article">Stavka na Wikidati</string>
   <string name="nearby_info_menu_wikipedia_article">Članak na Wikipediji</string>
-  <string name="description_info">Opišite medij što je više moguće: gdje je napravljen, što prikazuje,... Opišite objekte ili osobe. Napišite informacije koje ne mogu biti lako okrivene, npr. doba dana ako je u pitanju pejzaž. Ako medij prikazuje nešto neobično, molimo objasnite što je neobično.</string>
+  <string name="description_info">Opišite medij što je više moguće: gdje je napravljen, što prikazuje,… Opišite objekte ili osobe. Napišite informacije koje ne mogu biti lako okrivene, npr. doba dana ako je u pitanju pejzaž. Ako medij prikazuje nešto neobično, molimo objasnite što je neobično.</string>
   <string name="upload_problem_exist">Mogući problemi s ovom slikom:</string>
   <string name="upload_problem_image_dark">Slika je pretamna.</string>
   <string name="upload_problem_image_blurry">Slika je mutna.</string>
@@ -281,7 +284,7 @@
   <string name="deletion_reason_no_longer_want_public">Promijenio/la sam mišljenje, ne želim da više bude javno vidljivo</string>
   <string name="achievements_fetch_failed_ultimate_achievement">Toliko ste pridonijeli projektu da se naš sustav za računanje postignuća ne može nositi s time. To je vrhunsko postignuće.</string>
   <string name="error_processing_image">Došlo je do pogrješke tijekom obradbe slike. Molimo Vas, pokušajte ponovo!</string>
-  <string name="please_wait">Molimo Vas, pričekajte ...</string>
+  <string name="please_wait">Molimo Vas, pričekajte …</string>
   <string name="skip_image">Preskoči ovu sliku</string>
   <string name="default_description_language">Zadani jezik za opis</string>
   <string name="category_edit_helper_make_edit_toast">Pokušavanje ažuriranja kategorija.</string>
@@ -293,7 +296,7 @@
   <string name="add_bookmark">Dodano u oznake</string>
   <string name="wallpaper_set_unsuccessfully">Nešto je pošlo po zlu. Ne možemo postaviti pozadinu</string>
   <string name="setting_wallpaper_dialog_title">Postavi kao pozadinu</string>
-  <string name="setting_wallpaper_dialog_message">Postavljanje pozadine. Molimo, pričekajte...</string>
+  <string name="setting_wallpaper_dialog_message">Postavljanje pozadine. Molimo, pričekajte…</string>
   <string name="theme_default_name" fuzzy="true">Zadano</string>
   <string name="theme_dark_name">Tamno</string>
   <string name="theme_light_name">Svijetlo</string>

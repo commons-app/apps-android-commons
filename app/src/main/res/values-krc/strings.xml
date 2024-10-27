@@ -143,7 +143,7 @@
   <string name="menu_feedback">Оюмунгу билдир (эл. почта бла)</string>
   <string name="no_email_client">Почта клиент къурулмагъанды</string>
   <string name="provider_categories">Кёб болмай хайырланнган категорияла</string>
-  <string name="waiting_first_sync">Биринчи синхронизацияны сакълаб турады...</string>
+  <string name="waiting_first_sync">Биринчи синхронизацияны сакълаб турады…</string>
   <string name="no_uploads_yet">Алкъын джюкленнген фотосуратыгъыз джокъду.</string>
   <string name="menu_retry_upload">Джангыдан сына</string>
   <string name="menu_cancel_upload">Ызына ал</string>
@@ -498,7 +498,7 @@
   <string name="media_location_permission_denied">Медиа локациягъа джетишиу уналмады</string>
   <string name="add_location_manually">Джюклеген суратладан локация билгилени автомат халда алмазгъа боллукъбуз. Тилейбиз, джибериуден алгъа хар сурат ючюн келишген локацияны къошугъуз</string>
   <string name="share_text">Фотосуратланы телефонугъуздан туура Викигёзеннге джюклегиз. Гёзен Къошакъны энди эндиригиз: %1$s</string>
-  <string name="share_via">Къошакъны буну бла юлюшле...</string>
+  <string name="share_via">Къошакъны буну бла юлюшле…</string>
   <string name="image_info">Сурат Информация</string>
   <string name="no_categories_found">Категорияла табылмадыла</string>
   <string name="no_depiction_found">Танытыула табылмадыла</string>
@@ -575,7 +575,7 @@
   <string name="add_bookmark">Китаб белгилеге къошулду</string>
   <string name="wallpaper_set_unsuccessfully">Не эсе да терс кетди. Къабыргъа къагъыт къурулалмады</string>
   <string name="setting_wallpaper_dialog_title">Къабыргъа къагъыт эт</string>
-  <string name="setting_wallpaper_dialog_message">Къабыргъа Къагъыт къурула турады. Тилейбиз сакълагъыз...</string>
+  <string name="setting_wallpaper_dialog_message">Къабыргъа Къагъыт къурула турады. Тилейбиз сакълагъыз…</string>
   <string name="theme_default_name">Системаны джарашдыр</string>
   <string name="theme_dark_name">Къарангы</string>
   <string name="theme_light_name">Джарыкъ</string>
@@ -633,9 +633,9 @@
   <string name="limited_connection_mode">Чекленнген Байланыу Режим</string>
   <string name="statistics_quality">Агъачлары Мийик Суратла</string>
   <string name="quality_images_info">Агъачлы суратла, белгили агъач стандартларына (асламысыны техника халы болады) келишген эмда Викимедиа проектле ючюн багъалы болгъан диаграммала неда фотосуратладыла</string>
-  <string name="resuming_upload">Джюклениу андан ары бардырылады...</string>
-  <string name="pausing_upload">Джюклениу туракъланады...</string>
-  <string name="cancelling_upload">Джюклениу ызына алынады...</string>
+  <string name="resuming_upload">Джюклениу андан ары бардырылады…</string>
+  <string name="pausing_upload">Джюклениу туракъланады…</string>
+  <string name="cancelling_upload">Джюклениу ызына алынады…</string>
   <string name="cancel_upload">Джюклеуню Ызына Ал</string>
   <string name="limited_connection_explanation">Чекли байланыу режимни джандырдыгъыз. Бютеу джюклениуле туракълатыллыкъдыла эмда бу режимни джукълатсагъыз, тохтагъан джерден башларыкъдыла.</string>
   <string name="limited_connection_is_on">Чекленнген байланыу режим джандырылгъанды.</string>

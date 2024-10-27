@@ -65,7 +65,6 @@ class TransformImageImpl : TransformImage {
             } catch (e: LLJTranException) {
                 Timber.tag("Error").d(e)
                 return null
-                false
             }
 
         if (rotated) {

@@ -452,7 +452,7 @@
   <string name="exif_tag_name_lensModel">Modelo de lente</string>
   <string name="exif_tag_name_serialNumbers">Números de serie</string>
   <string name="exif_tag_name_software">Software</string>
-  <string name="share_via">Compartir a aplicación vía...</string>
+  <string name="share_via">Compartir a aplicación vía…</string>
   <string name="image_info">Información da imaxe</string>
   <string name="no_categories_found">Non se atoparon categorías</string>
   <string name="upload_cancelled">Cancelouse a carga</string>

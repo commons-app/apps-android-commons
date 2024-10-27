@@ -62,8 +62,8 @@
   <string name="forgot_password">Parola, xo vira kerde?</string>
   <string name="signup">Qeyd be</string>
   <string name="logging_in_title">Kewno cı</string>
-  <string name="logging_in_message">Kerem kerên, bıpawên...</string>
-  <string name="updating_caption_message">Kerem ke, bıpawe...</string>
+  <string name="logging_in_message">Kerem kerên, bıpawên…</string>
+  <string name="updating_caption_message">Kerem ke, bıpawe…</string>
   <string name="login_success" fuzzy="true">Cıkewtış hewl bi.</string>
   <string name="login_failed" fuzzy="true">Nidekeweya de</string>
   <string name="upload_failed">Dosya nêvineya. Dosyê da bine bıcerebnê.</string>
@@ -93,7 +93,7 @@
   <string name="share_description_hint">Şınasnayış</string>
   <string name="share_caption_hint">Bınnuşte</string>
   <string name="login_failed_network" fuzzy="true">Xırabiya kewten-network xeta</string>
-  <string name="login_failed_throttled">Şıma xeylê rayi kerd ke cı kewê, a ser nêvıst. Şıma rê zehmet 2-3 deqey ra tepeya reyna bıcerrebnên.</string>
+  <string name="login_failed_throttled">Şıma xeylê rayi kerd ke cı kewê, a ser nêvıst. Şıma rê zehmet 2–3 deqey ra tepeya reyna bıcerrebnên.</string>
   <string name="login_failed_blocked">Qısur mewni rê, Karber commons dı bloqe biyo.</string>
   <string name="login_failed_2fa_needed">Kodê kamiya raştkerdışi dıfaktorın gani cı kewê.</string>
   <string name="login_failed_generic" fuzzy="true">Nidekeweya de</string>
@@ -298,7 +298,7 @@
   <string name="no_read_notification">Pêhesnayışê toyê wendışi çıniyê</string>
   <string name="menu_option_read">Wendışi bıvêne</string>
   <string name="menu_option_unread">Nêwendeyan bıvêne</string>
-  <string name="please_wait">Kerem kerên, bıpawên...</string>
+  <string name="please_wait">Kerem kerên, bıpawên…</string>
   <string name="skip_image">Nê resımi raviyarnê</string>
   <string name="exif_tag_name_author">Nuştekar</string>
   <string name="exif_tag_name_copyright">Heqa telifi</string>

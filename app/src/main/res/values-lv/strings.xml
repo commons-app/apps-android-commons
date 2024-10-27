@@ -21,7 +21,7 @@
   <string name="signup">Reģistrēties</string>
   <string name="logging_in_title">Pieslēdzas</string>
   <string name="logging_in_message">Lūdzu, uzgaidiet…</string>
-  <string name="updating_caption_message">Lūdzu, uzgaidi...</string>
+  <string name="updating_caption_message">Lūdzu, uzgaidi…</string>
   <string name="login_success" fuzzy="true">Ieiešana veiksmīga</string>
   <string name="login_failed" fuzzy="true">Pieteikšanās neizdevās.</string>
   <string name="authentication_failed" fuzzy="true">Autentifikācija neizdevās!</string>
@@ -163,7 +163,7 @@
   <string name="review_thanks_no_button_text" fuzzy="true">Nākamais attēls</string>
   <string name="menu_option_read" fuzzy="true">Skatīt arhivētos</string>
   <string name="menu_option_unread">Skatīt nelasītos</string>
-  <string name="please_wait">Lūdzu, uzgaidiet...</string>
+  <string name="please_wait">Lūdzu, uzgaidiet…</string>
   <string name="skip_image">Izlaist šo attēlu</string>
   <string name="exif_tag_name_author">Autors</string>
   <string name="exif_tag_name_copyright">Autortiesības</string>

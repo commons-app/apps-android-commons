@@ -38,9 +38,9 @@
   <string name="forgot_password">Ou bliyé ou Kodsigré ?</string>
   <string name="signup">Enskri oukò</string>
   <string name="logging_in_title">Konnègsyon</string>
-  <string name="logging_in_message">Souplé antann...</string>
+  <string name="logging_in_message">Souplé antann…</string>
   <string name="updating_caption_title">Mizajou di léjann-yan ké dèskripsyon-yan</string>
-  <string name="updating_caption_message">Souplé antann...</string>
+  <string name="updating_caption_message">Souplé antann…</string>
   <string name="login_success" fuzzy="true">Konnègsyon bon !</string>
   <string name="login_failed" fuzzy="true">Konnègsyon pabon !</string>
   <string name="upload_failed">Fiché pa trouvé. Souplé éséyé ké rounòt.</string>
@@ -96,7 +96,7 @@
   <string name="welcome_final_button_text">Enren !</string>
   <string name="welcome_help_button_text">Plis lenfòrmasyon</string>
   <string name="detail_panel_cats_label">Katégori-ya</string>
-  <string name="detail_panel_cats_loading">Chajman ka fèt...</string>
+  <string name="detail_panel_cats_loading">Chajman ka fèt…</string>
   <string name="detail_panel_cats_none">Pyès katégori sélègsyonnen</string>
   <string name="detail_caption_empty">Pyès léjann</string>
   <string name="detail_description_empty">Pyès dèskripsyon</string>

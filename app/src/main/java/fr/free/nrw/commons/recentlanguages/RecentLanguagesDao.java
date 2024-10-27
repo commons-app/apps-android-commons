@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.recentlanguages;
 
+import android.annotation.SuppressLint;
 import android.content.ContentProviderClient;
 import android.content.ContentValues;
 import android.database.Cursor;
@@ -117,6 +118,7 @@ public class RecentLanguagesDao {
      * @return Language object
      */
     @NonNull
+    @SuppressLint("Range")
     Language fromCursor(final Cursor cursor) {
         // Hardcoding column positions!
         final String languageName = cursor.getString(cursor.getColumnIndex(Table.COLUMN_NAME));
