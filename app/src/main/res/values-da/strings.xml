@@ -507,7 +507,7 @@
   <string name="media_location_permission_denied">Adgang til medieplacering nægtet</string>
   <string name="add_location_manually">Vi kan muligvis ikke automatisk indhente placeringsdata fra billeder, du uploader. Tilføj den passende placering for hvert billede, før du indsender</string>
   <string name="share_text">Upload billeder til Wikimedia Commons direkte fra din telefon. Download Commons-appen nu: %1$s</string>
-  <string name="share_via">Del app via…</string>
+  <string name="share_via">Del app via...</string>
   <string name="image_info">Billedoplysninger</string>
   <string name="no_categories_found">Ingen kategorier blev fundet</string>
   <string name="no_depiction_found">Ingen afbildninger fundet</string>
@@ -642,9 +642,9 @@
   <string name="limited_connection_mode">Begrænset forbindelsestilstand</string>
   <string name="statistics_quality">Kvalitetsbilleder</string>
   <string name="quality_images_info">Kvalitetsbilleder er tegninger eller fotografier, der opfylder visse kvalitetsstandarder (som for det meste er af teknisk karakter) og er værdifulde for Wikimedia-projekter</string>
-  <string name="resuming_upload">Genoptager upload…</string>
-  <string name="pausing_upload">Sætter upload på pause…</string>
-  <string name="cancelling_upload">Annullerer upload…</string>
+  <string name="resuming_upload">Genoptager upload...</string>
+  <string name="pausing_upload">Sætter upload på pause...</string>
+  <string name="cancelling_upload">Annullerer upload...</string>
   <string name="cancel_upload">Annuller upload</string>
   <string name="limited_connection_explanation">Du har aktiveret begrænset forbindelsestilstand. Alle uploads er sat på pause og genoptages, når du deaktiverer denne tilstand.</string>
   <string name="limited_connection_is_on">Begrænset forbindelsestilstand aktiveret!</string>
@@ -784,7 +784,7 @@
   <string name="other_problem_or_information_please_explain_below">Andet problem eller anden information (forklar venligst nedenfor).</string>
   <string name="feedback_destination_note">Din feedback bliver slået op på følgende wiki-side:  &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Mobile_app/Feedback\"&gt;Commons:Mobile app/Feedback&lt;/a&gt;</string>
   <string name="are_you_sure_that_you_want_cancel_all_the_uploads">Er du sikker på, at du vil annullere alle uploads?</string>
-  <string name="cancelling_all_the_uploads">Annullerer alle uploads…</string>
+  <string name="cancelling_all_the_uploads">Annullerer alle uploads...</string>
   <string name="uploads">Uploads</string>
   <string name="pending">Afventer</string>
   <string name="failed">Mislykkedes</string>

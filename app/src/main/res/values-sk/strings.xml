@@ -491,7 +491,7 @@
   <string name="menu_option_read">Zobraziť prečítané</string>
   <string name="menu_option_unread">Zobraziť neprečítané</string>
   <string name="error_occurred_in_picking_images">Nastala chyba pri vyberaní obrázkov</string>
-  <string name="please_wait">Čakajte, prosím…</string>
+  <string name="please_wait">Čakajte, prosím...</string>
   <string name="images_featured_explanation">Najlepšie obrázky sú fotografie od vysoko skúsených fotografov a ilustrátorov, ktoré vybrala komunita Wikimedie Commons ako jedny z najkvalitnejších na stránke.</string>
   <string name="images_via_nearby_explanation">Obrázky nahrané cez Miesta v okolí sú obrázky, ktoré sú nahrané vďaka objavovaniu miest na mape.</string>
   <string name="thanks_received_explanation">Táto funkcia umožňuje poslať poďakovanie za užitočné úpravy používateľom – použitím malého odkazu poďakovať v histórií stránky alebo na stránke rozdielu medzi revíziami.</string>
@@ -513,7 +513,7 @@
   <string name="media_location_permission_denied">Prístup k polohe médií bol odmietnutý</string>
   <string name="add_location_manually">Možno nebudeme môcť automaticky získať údaje o polohe z obrázkov, ktoré nahráte. Pred odoslaním, prosím, pridajte ku každému obrázku údaj o polohe.</string>
   <string name="share_text">Nahrávajte fotky na Wikimedia Commons priamo z vášho mobilu. Stiahnite si aplikáciu Wikimedia Commons teraz: %1$s</string>
-  <string name="share_via">Zdieľať aplikáciu cez…</string>
+  <string name="share_via">Zdieľať aplikáciu cez...</string>
   <string name="image_info">Informácie o obrázku</string>
   <string name="no_categories_found">Nenájdené žiadne kategórie</string>
   <string name="no_depiction_found">Neboli nájdené spôsoby vykreslovania</string>
@@ -593,7 +593,7 @@
   <string name="add_bookmark">Pridané do záložiek</string>
   <string name="wallpaper_set_unsuccessfully">Niečo sa pokazilo. Tapetu sa nepodarilo nastaviť</string>
   <string name="setting_wallpaper_dialog_title">Nastaviť ako tapetu</string>
-  <string name="setting_wallpaper_dialog_message">Nastavujem tapetu. Prosím, čakajte…</string>
+  <string name="setting_wallpaper_dialog_message">Nastavujem tapetu. Prosím, čakajte...</string>
   <string name="theme_default_name">Predvolený systém</string>
   <string name="theme_dark_name">Tmavý</string>
   <string name="theme_light_name">Svetlý</string>
@@ -651,9 +651,9 @@
   <string name="limited_connection_mode">Mód limitovaného pripojenia</string>
   <string name="statistics_quality">Kvalitné obrázky</string>
   <string name="quality_images_info">Kvalitné obrázky sú diagramy a fotografie, ktoré spĺňajú určité štandardy (ktoré sú väčšinou technického charakteru) a sú cenné pre projekty Wikimédie</string>
-  <string name="resuming_upload">Pokračovanie nahrávania…</string>
-  <string name="pausing_upload">Pozastavovanie nahrávania…</string>
-  <string name="cancelling_upload">Prerušovanie nahrávania…</string>
+  <string name="resuming_upload">Pokračovanie nahrávania...</string>
+  <string name="pausing_upload">Pozastavovanie nahrávania...</string>
+  <string name="cancelling_upload">Prerušovanie nahrávania...</string>
   <string name="cancel_upload">Zrušiť nahrávanie</string>
   <string name="limited_connection_explanation">Zapli ste mód limitovaného pripojenia. Všetky nahrávania budú teraz pozastavené a budú pokračovať až po vypnutí tohto módu.</string>
   <string name="limited_connection_is_on">Mód limitovaného pripojenia je zapnutý.</string>
@@ -787,7 +787,7 @@
   <string name="other_problem_or_information_please_explain_below">Iný problém alebo informácia (vysvetlite nižšie).</string>
   <string name="feedback_destination_note">Vaša spätná väzba sa zverejní na nasledujúcej wiki stránke: &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Mobile_app/Feedback\"&gt;Commons:Mobile app/Feedback&lt;/a&gt;</string>
   <string name="are_you_sure_that_you_want_cancel_all_the_uploads">Ste si istí, že chcete zrušiť všetky nahrávania?</string>
-  <string name="cancelling_all_the_uploads">Ruším všetky nahrávania…</string>
+  <string name="cancelling_all_the_uploads">Ruším všetky nahrávania...</string>
   <string name="uploads">Nahrané súbory</string>
   <string name="pending">Čakajúce</string>
   <string name="failed">Zlyhané</string>

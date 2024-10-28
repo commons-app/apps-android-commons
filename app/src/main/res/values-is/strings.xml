@@ -3,7 +3,7 @@
 * Sveinki
 * Sveinn í Felli
 -->
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
   <string name="commons_facebook">Commons Facebook-síðan</string>
   <string name="commons_github">Grunnkóði Commons á Github</string>
   <string name="commons_logo">Táknmerki Commons</string>
@@ -51,7 +51,7 @@
     <item quantity="other">%1$d innsendingar</item>
   </plurals>
   <plurals name="receiving_shared_content">
-    <item quantity="one" tools:ignore="ImpliedQuantity">Tek við deildu efni. Meðhöndlun myndarinnar gæti tekið einhvern tíma, sem fer eftir stærð myndarinnar og gerð tækisins þíns</item>
+    <item quantity="one">Tek við deildu efni. Meðhöndlun myndarinnar gæti tekið einhvern tíma, sem fer eftir stærð myndarinnar og gerð tækisins þíns</item>
     <item quantity="other">Tek við deildu efni. Meðhöndlun myndarinnar gæti tekið einhvern tíma, sem fer eftir stærð myndaanna og gerð tækisins þíns</item>
   </plurals>
   <string name="navigation_item_explore">Uppgötva</string>
@@ -138,7 +138,7 @@
   <string name="menu_feedback">Senda umsögn (með tölvupósti)</string>
   <string name="no_email_client">Ekkert tölvupóstforrit er uppsett</string>
   <string name="provider_categories">Nýlega notaðir flokkar</string>
-  <string name="waiting_first_sync">Bíð eftir fyrstu samstillingu…</string>
+  <string name="waiting_first_sync">Bíð eftir fyrstu samstillingu...</string>
   <string name="no_uploads_yet">Þú ert ekki ennþá búin(n) að senda inn neinar myndir.</string>
   <string name="menu_retry_upload">Reyna aftur</string>
   <string name="menu_cancel_upload">Hætta við</string>
@@ -477,7 +477,7 @@
   <string name="exif_tag_name_software">Hugbúnaður</string>
   <string name="media_location_permission_denied">Aðgangi að staðsetningu gagnamiðla hafnað</string>
   <string name="share_text">Sendu myndir inn á Wikimedia Commons beint úr símanum þínum. Sæktu Commons-appið núna: %1$s</string>
-  <string name="share_via">Deila forriti með…</string>
+  <string name="share_via">Deila forriti með...</string>
   <string name="image_info">Upplýsingar í mynd</string>
   <string name="no_categories_found">Engir flokkar fundust</string>
   <string name="no_depiction_found">Engar myndlýsingar fundust</string>

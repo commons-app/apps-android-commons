@@ -83,7 +83,7 @@
   <string name="forgot_password">رمز عبور خودتان را فراموش کرده‌اید؟</string>
   <string name="signup">ثبت نام</string>
   <string name="logging_in_title">واردشدن</string>
-  <string name="logging_in_message">شکیبا باشید…</string>
+  <string name="logging_in_message">شکیبا باشید...</string>
   <string name="login_success" fuzzy="true">ورود موفق!</string>
   <string name="login_failed" fuzzy="true">ورود ناموفق!</string>
   <string name="upload_failed">پرونده یافت نشد لطفاً پرونده دیگری را امتحان کنید.</string>
@@ -122,7 +122,7 @@
   <string name="provider_modifications">تغییرها</string>
   <string name="menu_upload_single">بارگذاری</string>
   <string name="categories_search_text_hint">جستجوی رده‌ها</string>
-  <string name="depicts_search_text_hint">جستجو برای موضوعی که در پروندهٔ شما به‌نمایش کشیده‌شده است (مثلا کوه، تاج محل، …)</string>
+  <string name="depicts_search_text_hint">جستجو برای موضوعی که در پروندهٔ شما به‌نمایش کشیده‌شده است (مثلا کوه، تاج محل، ...)</string>
   <string name="menu_save_categories">ذخیره</string>
   <string name="refresh_button">تازه کردن</string>
   <string name="display_list_button">فهرست</string>
@@ -411,7 +411,7 @@
   <string name="no_read_notification">شما هیچ اعلان خوانده‌شده‌ای ندارید</string>
   <string name="menu_option_read">نمایش دیده‌شده</string>
   <string name="menu_option_unread">مشاهده خوانده نشده ها</string>
-  <string name="please_wait">لطفاً صبر کنید…</string>
+  <string name="please_wait">لطفاً صبر کنید...</string>
   <string name="welcome_dont_upload_content_description">نمونه تصاویری که برای بازگذاری مناسب نیستند</string>
   <string name="skip_image">از این تصویر صرف نظر کن</string>
   <string name="manage_exif_tags">مدیریت تگ‌های EXIF</string>
@@ -423,7 +423,7 @@
   <string name="exif_tag_name_lensModel">مدل لنز</string>
   <string name="exif_tag_name_serialNumbers">شماره سریال</string>
   <string name="exif_tag_name_software">نرم‌افزار</string>
-  <string name="share_via">اشتراک از طریق…</string>
+  <string name="share_via">اشتراک از طریق...</string>
   <string name="image_info">اطلاعات عکس</string>
   <string name="no_categories_found">هیچ رده‌ای یافت نشد</string>
   <string name="upload_cancelled">بارگذاری لغو شد</string>
@@ -455,7 +455,7 @@
   <string name="add_bookmark">به بوکمارک‌ها افزوده شد</string>
   <string name="wallpaper_set_unsuccessfully">مشکل به وجود آمد. به عنوان پس‌زمینه انتخاب نشد.</string>
   <string name="setting_wallpaper_dialog_title">انتخاب به عنوان پس‌زمینه</string>
-  <string name="setting_wallpaper_dialog_message">قرار دادن پس‌زمینه. لطفاً صبر کنید…</string>
+  <string name="setting_wallpaper_dialog_message">قرار دادن پس‌زمینه. لطفاً صبر کنید...</string>
   <string name="theme_default_name">سامانه را دنبال کنید</string>
   <string name="theme_dark_name">تیره</string>
   <string name="theme_light_name">روشن</string>

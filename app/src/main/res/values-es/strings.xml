@@ -51,7 +51,7 @@
 * Vivaelcelta
 * Wizardeck
 -->
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
   <string name="commons_facebook">Página de Facebook de Commons</string>
   <string name="commons_github">Código fuente de Commons en GitHub</string>
   <string name="commons_logo">Logo de Commons</string>
@@ -75,38 +75,31 @@
   <string name="appwidget_img">Foto del día</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">Cargando %1$d archivo</item>
-    <item quantity="many">Cargando %1$d archivos</item>
     <item quantity="other">Cargando %1$d archivos</item>
   </plurals>
   <plurals name="contributions_subtitle">
     <item quantity="one">(%1$d)</item>
-    <item quantity="many">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
   <string name="starting_uploads">Comenzando las subidas</string>
   <plurals name="starting_multiple_uploads">
     <item quantity="one">Procesando %d carga</item>
-    <item quantity="many">Procesando %d cargas</item>
     <item quantity="other">Procesando %d cargas</item>
   </plurals>
   <plurals name="multiple_uploads_title">
     <item quantity="one">%d carga</item>
-    <item quantity="many">%1 cargas</item>
     <item quantity="other">%1 cargas</item>
   </plurals>
   <plurals name="share_license_summary">
     <item quantity="one">Esta imagen se publicará bajo la licencia %1$s</item>
-    <item quantity="many">Estas imágenes se publicarán bajo la licencia %1$s</item>
     <item quantity="other">Estas imágenes se publicarán bajo la licencia %1$s</item>
   </plurals>
   <plurals name="upload_count_title">
     <item quantity="one">%1$d Subida</item>
-    <item quantity="many">%1$d Subidas</item>
     <item quantity="other">%1$d Subidas</item>
   </plurals>
   <plurals name="receiving_shared_content">
     <item quantity="one">Recepción de contenido compartido. El procesamiento de la imagen puede tardar cierto tiempo, dependiendo del tamaño de la imagen y de tu dispositivo</item>
-    <item quantity="many">Recepción de contenido compartido. El procesamiento de las imágenes puede tardar cierto tiempo, dependiendo del tamaño de las imágenes y de tu dispositivo</item>
     <item quantity="other">Recepción de contenido compartido. El procesamiento de las imágenes puede tardar cierto tiempo, dependiendo del tamaño de las imágenes y de tu dispositivo</item>
   </plurals>
   <string name="navigation_item_explore">Explorar</string>
@@ -342,7 +335,7 @@
   <string name="welcome_skip_button">Omitir tutorial</string>
   <string name="no_internet">Internet no disponible</string>
   <string name="error_notifications">Error al recuperar las notificaciones</string>
-  <string name="error_review" tools:ignore="Typos">Hubo un error al recuperar la imágen a revisar. Toca refrescar para intentarlo de nuevo.</string>
+  <string name="error_review">Hubo un error al recuperar la imágen a revisar. Toca refrescar para intentarlo de nuevo.</string>
   <string name="no_notifications">No se encontró ninguna notificación</string>
   <string name="about_translate">Traducir</string>
   <string name="about_translate_title">Idiomas</string>
@@ -484,7 +477,7 @@
   <string name="option_allow">Permitir</string>
   <string name="option_dismiss">Descartar</string>
   <string name="in_app_camera_needs_location">Por favor, activa el acceso a la ubicación desde Configuración y vuelva a intentarlo. \n\nNota: Es posible que la subida no tenga datos de la ubicación si la aplicación no puede recuperar la ubicación del dispositivo en un intervalo corto.</string>
-  <string name="in_app_camera_location_permission_rationale">La cámara dentro de la aplicación necesita el permiso a la ubicación para adjuntarla a sus imágenes en caso de que la ubicación no esté disponible en EXIF. Por favor, permita que la aplicación acceda a su ubicación e inténtelo de nuevo.\n\nNota: Es posible que la subida no tenga los datos de la ubicación si la aplicación no puede recuperar la ubicación del dispositivo en un intervalo corto.</string>
+  <string name="in_app_camera_location_permission_rationale">La cámara dentro de la aplicación necesita el permiso a la ubicación para adjuntarla a sus imágenes en caso de que la ubicación no esté disponible en EXIF. Por favor, permita que la aplicación acceda a su ubicación e inténtelo de nuevo.\n\nNota: Es posible que la subida no tenga los datos de la la ubicación si la aplicación no puede recuperar la ubicación del dispositivo en un intervalo corto.</string>
   <string name="in_app_camera_location_permission_denied">La aplicación no registrará la ubicación junto con las tomas debido a la falta del permiso de la ubicación.</string>
   <string name="in_app_camera_location_unavailable">La aplicación no registrará la ubicación junto con las tomas porque el GPS está apagado</string>
   <string name="open_document_photo_picker_title">Utilizar el selector de fotografías basado en documentos</string>
@@ -512,8 +505,8 @@
   <string name="review_category">¿Está correctamente categorizado?</string>
   <string name="review_spam">¿Está dentro de los objetivos del proyecto?</string>
   <string name="review_thanks">¿Quieres agradecer al colaborador?</string>
-  <string name="review_spam_explanation" tools:ignore="Typos">Toca en NO para nominar esta imágen para ser borrada si no es para nada útil.</string>
-  <string name="review_copyright_explanation" tools:ignore="Typos">Los logotipos, las capturas de pantalla y los pósteres de películas son habitualmente infracciones a los derechos de autor.\n Toca NO para nominar esta imágen para borrado</string>
+  <string name="review_spam_explanation">Toca en NO para nominar esta imágen para ser borrada si no es para nada útil.</string>
+  <string name="review_copyright_explanation">Los logotipos, las capturas de pantalla y los pósteres de películas son habitualmente infracciones a los derechos de autor.\n Toca NO para nominar esta imágen para borrado</string>
   <string name="review_thanks_explanation">Tu apreciación animara a %1$s</string>
   <string name="review_no_category">¡Oh, esto ni siquiera esta categorizado!</string>
   <string name="review_category_explanation">Esta imagen esta dentro de %1$s categorías.</string>
@@ -531,7 +524,7 @@
   <string name="share_logs_using">Compartir registros usando</string>
   <string name="menu_option_read">Ver leídas</string>
   <string name="menu_option_unread">Ver no leidas</string>
-  <string name="error_occurred_in_picking_images">Ocurrió un error mientras se elegían imágenes</string>
+  <string name="error_occurred_in_picking_images">Ocurrió un error mientras se elegían imagenes</string>
   <string name="please_wait">Un momento…</string>
   <string name="images_featured_explanation">Las imágenes destacadas son creaciones de talentosos fotógrafos e ilustradores que la comunidad de Wikimedia Commons ha reconocido como las de mayor calidad del sitio.</string>
   <string name="images_via_nearby_explanation">Las imágenes subidas vía Lugares Cercanos son las imágenes que han sido subidas al descubrir lugares en el mapa.</string>
@@ -554,7 +547,7 @@
   <string name="media_location_permission_denied">Acceso a la ubicación del archivo multimedia denegado</string>
   <string name="add_location_manually">Es posible que no podamos obtener automáticamente los datos de ubicación de las imágenes que suba. Añada la ubicación adecuada a cada imagen antes de enviarla</string>
   <string name="share_text">Sube fotos a Wikimedia Commons directamente desde tu celular. Descarga la aplicación de Commons ahora: %1$s</string>
-  <string name="share_via">Compartir la aplicación vía…</string>
+  <string name="share_via">Compartir la aplicación vía...</string>
   <string name="image_info">Información de la imagen</string>
   <string name="no_categories_found">No se encontró ninguna categoría</string>
   <string name="no_depiction_found">No se encontraron representaciones</string>
@@ -581,7 +574,6 @@
   <string name="category_edit_helper_show_edit_title_success">Éxito</string>
   <plurals name="category_edit_helper_show_edit_message_if">
     <item quantity="one">Se añade %1$s categoría.</item>
-    <item quantity="many">Se añaden %1$s categorías.</item>
     <item quantity="other">Se añaden %1$s categorías.</item>
   </plurals>
   <string name="category_edit_helper_edit_message_else">No se pudieron añadir las categorías.</string>
@@ -590,7 +582,6 @@
   <string name="depictions_edit_helper_show_edit_title">Editar las descripciones</string>
   <plurals name="depictions_edit_helper_show_edit_message_if">
     <item quantity="one">%1$s Se añade la descripción.</item>
-    <item quantity="many">Descripción %1$s se añadieron.</item>
     <item quantity="other">Descripción %1$s se añadieron.</item>
   </plurals>
   <string name="depictions_edit_helper_edit_message_else">No se pueden añadir descripciones.</string>
@@ -608,7 +599,7 @@
   <string name="coordinates_picking_unsuccessful">Las coordenadas de la imagen no están actualizadas.</string>
   <string name="descriptions_picking_unsuccessful">No se puede obtener descripciones.</string>
   <string name="description_activity_title">Editar descripciones y leyendas</string>
-  <string name="share_image_via" tools:ignore="Typos">Compartir imagen via</string>
+  <string name="share_image_via">Compartir imagen via</string>
   <string name="you_have_no_achievements_yet">Todavía no has hecho ninguna contribución.</string>
   <string name="no_achievements_yet">%s Aún no ha realizado ninguna contribución</string>
   <string name="account_created">Cuenta creada</string>
@@ -633,7 +624,7 @@
   <string name="add_bookmark">añadido a marcadores</string>
   <string name="wallpaper_set_unsuccessfully">Algo salió mal. No se pudo establecer el fondo de pantalla</string>
   <string name="setting_wallpaper_dialog_title">Colocar como fondo de pantalla</string>
-  <string name="setting_wallpaper_dialog_message">Estableciendo el fondo de pantalla. Por favor espere…</string>
+  <string name="setting_wallpaper_dialog_message">Estableciendo el fondo de pantalla. Por favor espere...</string>
   <string name="theme_default_name">Seguir sistema</string>
   <string name="theme_dark_name">Oscuro</string>
   <string name="theme_light_name">Claro</string>
@@ -691,9 +682,9 @@
   <string name="limited_connection_mode">Modo de conexión limitada</string>
   <string name="statistics_quality">Imágenes de calidad</string>
   <string name="quality_images_info">Las imágenes de calidad son diagramas o fotografías que cumplen determinados estándares de calidad (mayormente de carácter técnico) y que son valiosas para proyectos de Wikimedia</string>
-  <string name="resuming_upload">Reanudando carga…</string>
-  <string name="pausing_upload">Pausando carga…</string>
-  <string name="cancelling_upload">Cancelando carga…</string>
+  <string name="resuming_upload">Reanudando carga...</string>
+  <string name="pausing_upload">Pausando carga...</string>
+  <string name="cancelling_upload">Cancelando carga...</string>
   <string name="cancel_upload">Cancelar carga</string>
   <string name="limited_connection_explanation">Has habilitado el modo de conexión limitada. Todas las cargas están pausadas y se reanudarán cuando deshabilites este modo.</string>
   <string name="limited_connection_is_on">El modo de conexión limitada está encendido.</string>
@@ -820,8 +811,7 @@
   <string name="saving_gpx_file">Guardar archivo GPX</string>
   <plurals name="custom_picker_images_selected_title_appendix">
     <item quantity="one">%d imagen seleccionada</item>
-    <item quantity="many">%d imágenes seleccionadas</item>
-    <item quantity="other">%d imágenes seleccionadas</item>
+    <item quantity="other">%d imagenes seleccionadas</item>
   </plurals>
   <string name="multiple_files_depiction">Recuerde que todas las imágenes en una carga múltiple tienen la misma categoría y representación. Si las imágenes no comparten representación y categoría, haga varias cargas por separado.</string>
   <string name="multiple_files_depiction_header">Nota sobre cargas múltiples</string>
@@ -829,7 +819,7 @@
   <string name="please_enter_some_comments">Por favor, escriba algunos comentarios.</string>
   <string name="talk">Discusión</string>
   <string name="write_something_about_the_item">Escriba algo sobre el elemento \'%1$s\'. Será visible públicamente.</string>
-  <string name="cancelling_all_the_uploads">Cancelando todas las subidas…</string>
+  <string name="cancelling_all_the_uploads">Cancelando todas las subidas...</string>
   <string name="uploads">Subidas</string>
   <string name="pending">Pendiente</string>
   <string name="failed">Falló</string>

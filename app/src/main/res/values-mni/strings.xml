@@ -18,7 +18,7 @@
   <string name="signup">ꯈꯨꯠꯌꯦꯛ ꯄꯤꯈꯠꯂꯨ</string>
   <string name="logging_in_title">ꯃꯅꯨꯡ ꯆꯪꯁꯤꯟꯂꯤ</string>
   <string name="logging_in_message">ꯉꯥꯏꯍꯥꯛ ꯉꯥꯏꯕꯤꯌꯨ</string>
-  <string name="updating_caption_message">ꯉꯥꯏꯍꯥꯛꯇꯪ ꯉꯥꯏꯕꯤꯈꯣ…</string>
+  <string name="updating_caption_message">ꯉꯥꯏꯍꯥꯛꯇꯪ ꯉꯥꯏꯕꯤꯈꯣ...</string>
   <string name="login_success" fuzzy="true">ꯃꯥꯏꯄꯥꯛꯅꯥ ꯆꯪꯁꯤꯜꯂꯦ ꯫</string>
   <string name="login_failed" fuzzy="true">ꯆꯪꯁꯤꯟꯕ ꯃꯥꯏꯄꯥꯛꯇꯔꯦ!</string>
   <string name="upload_failed">ꯐꯥꯏꯜ ꯊꯤꯕꯥ ꯐꯪꯗꯔꯦ ꯫ ꯆꯥꯟꯕꯤꯗꯨꯅꯥ ꯑꯇꯣꯞꯄ ꯑꯃꯥ ꯇꯧꯕꯤꯔꯣ ꯫</string>
@@ -59,7 +59,7 @@
   <string name="welcome_final_button_text">ꯍꯣꯏ!</string>
   <string name="welcome_help_button_text">ꯑꯍꯦꯟꯕ ꯋꯥꯔꯣꯜ</string>
   <string name="detail_panel_cats_label">ꯃꯆꯥꯈꯥꯏꯕꯁꯤꯡ</string>
-  <string name="detail_panel_cats_loading">ꯆꯤꯡꯂꯤ/ꯎꯪꯂꯤ…..</string>
+  <string name="detail_panel_cats_loading">ꯆꯤꯡꯂꯤ/ꯎꯪꯂꯤ.....</string>
   <string name="detail_panel_cats_none">ꯑꯃꯠꯇ ꯈꯟꯗꯦ</string>
   <string name="detail_description_empty">ꯑꯀꯨꯞꯄ ꯃꯔꯣꯜ ꯌꯥꯎꯗꯦ</string>
   <string name="detail_discussion_empty">ꯈꯟꯅ-ꯅꯩꯅꯕ ꯂꯩꯇꯦ</string>

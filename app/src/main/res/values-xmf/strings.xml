@@ -61,7 +61,7 @@
   <string name="app_name">ვიკიოწკარუე</string>
   <string name="menu_settings">პარამეტრეფი</string>
   <string name="intent_share_upload_label">ვიკიოწკარუეშა ეხარგუა</string>
-  <string name="upload_in_progress">ეთმიხარგუ…</string>
+  <string name="upload_in_progress">ეთმიხარგუ...</string>
   <string name="username">მახვარებუშ ჯოხო</string>
   <string name="password">პაროლი</string>
   <string name="login_credential">გენშართით თქვანი პროფილით Commons Beta-შა</string>
@@ -71,7 +71,7 @@
   <string name="logging_in_title">სისტემაშა მიშულა</string>
   <string name="logging_in_message">ქორთხინთ ქჷმიცადით …</string>
   <string name="updating_caption_title">მუკნაჭარეფი დო ეჭარუეფი მითმიახალებუ</string>
-  <string name="updating_caption_message">ქორთხინთ ქჷმიცადით…</string>
+  <string name="updating_caption_message">ქორთხინთ ქჷმიცადით...</string>
   <string name="login_success">სისტემაშა მიშულაქ წჷმოძინელო გეთუ!</string>
   <string name="login_failed">სისტემაშა მიშულაქ ვემიხუჯინუ!</string>
   <string name="upload_failed">ფაილქ ვეგორუ. ქორთხინთ, ქოცადით შხვა ფაილი.</string>
@@ -181,7 +181,7 @@
   <string name="welcome_final_button_text">ქოǃ</string>
   <string name="welcome_help_button_text">უმოსი ინფორმაცია</string>
   <string name="detail_panel_cats_label">კატეგორიეფი</string>
-  <string name="detail_panel_cats_loading">იხარგუ…</string>
+  <string name="detail_panel_cats_loading">იხარგუ...</string>
   <string name="detail_panel_cats_none">მუთუნ ვა რე გიშაგორილი</string>
   <string name="detail_caption_empty">მუკნაჭარა ვა რე</string>
   <string name="detail_description_empty">ვა რე ეჭარუა</string>

@@ -38,7 +38,7 @@
   <string name="forgot_password">အွောန်ႏဖေင်ꩻထိုꩻ ငဝ်းဗိဉ်ႏပလို့ꩻနဲ့?</string>
   <string name="signup">ဒင်ႏမတ်ပိုင်တိဉ်</string>
   <string name="logging_in_title">အဝ်ႏနွို့အကောက်ကျာꩻ</string>
-  <string name="logging_in_message">အိုင်ပွေားဆောင်းတဆင်ႏသြ…</string>
+  <string name="logging_in_message">အိုင်ပွေားဆောင်းတဆင်ႏသြ...</string>
   <string name="login_success" fuzzy="true">နွို့အကောက်အောင်ႏလဲဉ်း!</string>
   <string name="login_failed" fuzzy="true">နွို့အကောက်အောင်ႏတဝ်း!</string>
   <string name="upload_failed">မော့ꩻတဝ်းဖုဲင်၊ စံꩻထွားစံꩻသွော့ ဖုဲင်အလင်တဗာႏသြ။</string>
@@ -97,7 +97,7 @@
   <string name="welcome_final_button_text">မွေး!</string>
   <string name="welcome_help_button_text">ထဲင်းယင်း သꩻတင်ꩻအချက်လက်</string>
   <string name="detail_panel_cats_label">ကဏ္ဍဖုံႏ</string>
-  <string name="detail_panel_cats_loading">အဝ်ႏဒင်ႏဝွန်ႏကျာꩻ…</string>
+  <string name="detail_panel_cats_loading">အဝ်ႏဒင်ႏဝွန်ႏကျာꩻ...</string>
   <string name="detail_panel_cats_none">လွိုက်ခါꩻတဝ်းမုဲင်ꩻမုဲင်ꩻ</string>
   <string name="detail_caption_empty">ပုင်ႏလိတ်အဝ်ႏတဝ်း</string>
   <string name="detail_description_empty">အွောန်ႏနယ်ချက်အဝ်ႏတဝ်း</string>

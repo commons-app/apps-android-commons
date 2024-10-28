@@ -26,25 +26,32 @@
   <string name="nearby_filter_toggle">Togel ka Luhur</string>
   <string name="appwidget_img">Gambar poé ieu</string>
   <plurals name="uploads_pending_notification_indicator">
+    <item quantity="one">ngunjal %1$d berkas</item>
     <item quantity="other">ngunjal %1$d berkas</item>
   </plurals>
   <plurals name="contributions_subtitle">
+    <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
   <string name="starting_uploads">Mitembeyan Ngamuat</string>
   <plurals name="starting_multiple_uploads">
+    <item quantity="one">Ngolah %d muatan</item>
     <item quantity="other">Ngolah %d muatan</item>
   </plurals>
   <plurals name="multiple_uploads_title">
+    <item quantity="one">%1$d muatan</item>
     <item quantity="other">%1$d muatan</item>
   </plurals>
   <plurals name="share_license_summary">
+    <item quantity="one">Ieu gambar bakal dilisénsi %1$s</item>
     <item quantity="other">Ieu gambar bakal dilisénsi %1$s</item>
   </plurals>
   <plurals name="upload_count_title">
+    <item quantity="one">%1$d Dimuat</item>
     <item quantity="other">%1$d Dimuat</item>
   </plurals>
   <plurals name="receiving_shared_content">
+    <item quantity="one">Nampa kontén anu dibagikeun. Ngolah gambarna bisa jadi rada lila gumantung kana ukuran gambar jeung gaway anjeun</item>
     <item quantity="other">Nampa kontén anu dibagikeun</item>
   </plurals>
   <string name="navigation_item_explore">Langlang</string>
@@ -64,7 +71,7 @@
   <string name="logging_in_title">Asup log</string>
   <string name="logging_in_message">Tungguan…</string>
   <string name="updating_caption_title">Nganyarkeun pertélaan jeung pedaran</string>
-  <string name="updating_caption_message">Mangga tungguan…</string>
+  <string name="updating_caption_message">Mangga tungguan...</string>
   <string name="login_success" fuzzy="true">Laksana login!</string>
   <string name="login_failed" fuzzy="true">Gagal login!</string>
   <string name="upload_failed">Berkas teu kapanggih. Coba berkas séjén.</string>
@@ -392,7 +399,7 @@
   <string name="menu_option_read" fuzzy="true">Tempo arsip</string>
   <string name="menu_option_unread">Tempo nu can dibaca</string>
   <string name="error_occurred_in_picking_images">Éror pas keur nyomot gambar</string>
-  <string name="please_wait">Mangga tungguan…</string>
+  <string name="please_wait">Mangga tungguan...</string>
   <string name="skip_image">Iwalkeun ieu gambar</string>
   <string name="exif_tag_name_author">Karya</string>
   <string name="exif_tag_name_copyright">Hak cipta</string>
@@ -402,7 +409,7 @@
   <string name="exif_tag_name_serialNumbers">Nomer Seri</string>
   <string name="exif_tag_name_software">Sopwér</string>
   <string name="share_text">Muat poto ka Wikimedia Commons langsung tina ponsél. Unduh Commons App ayeuna: %1$s</string>
-  <string name="share_via">Bagikeun app liwat…</string>
+  <string name="share_via">Bagikeun app liwat...</string>
   <string name="image_info">Info Gambar</string>
   <string name="no_categories_found">Euweuh Kategori kapanggih</string>
   <string name="upload_cancelled">Muatan bedo</string>

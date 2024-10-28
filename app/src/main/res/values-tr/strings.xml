@@ -210,7 +210,7 @@
   <string name="welcome_final_button_text">Evet!</string>
   <string name="welcome_help_button_text">Daha Fazla Bilgi</string>
   <string name="detail_panel_cats_label">Kategoriler</string>
-  <string name="detail_panel_cats_loading">Yükleniyor…</string>
+  <string name="detail_panel_cats_loading">Yükleniyor...</string>
   <string name="detail_panel_cats_none">Hiçbir şey seçilmedi</string>
   <string name="detail_caption_empty">Altyazı yok</string>
   <string name="detail_description_empty">Açıklama yok</string>
@@ -505,7 +505,7 @@
   <string name="menu_option_read">Okunanları görüntüle</string>
   <string name="menu_option_unread">Okunmayanları görüntüle</string>
   <string name="error_occurred_in_picking_images">Resimler seçilirken hata oluştu</string>
-  <string name="please_wait">Lütfen bekleyin…</string>
+  <string name="please_wait">Lütfen bekleyin...</string>
   <string name="images_featured_explanation">Seçkin resimler, Wikimedia Commons topluluğunun sitedeki en yüksek kaliteden bazıları olarak seçtiği son derece yetenekli fotoğrafçıların ve illüstratörlerin görüntüleridir.</string>
   <string name="images_via_nearby_explanation">Yakındaki yerler üzerinden yüklenen resimler, haritadaki yerleri keşfederek yüklenen resimlerdir.</string>
   <string name="thanks_received_explanation">Bu özellik, editörlerin, geçmiş sayfasında veya fark sayfasında küçük bir teşekkür bağlantısı kullanarak faydalı düzenlemeler yapan kullanıcılara bir Teşekkür bildirimi göndermesine olanak tanır.</string>
@@ -604,7 +604,7 @@
   <string name="add_bookmark">Yer işaretlerine eklendi</string>
   <string name="wallpaper_set_unsuccessfully">Bir şeyler yanlış gitti. Duvar kağıdı ayarlanamadı</string>
   <string name="setting_wallpaper_dialog_title">Duvar kağıdı olarak ayarla</string>
-  <string name="setting_wallpaper_dialog_message">Duvar Kağıdı ayarlanıyor. Lütfen bekleyin…</string>
+  <string name="setting_wallpaper_dialog_message">Duvar Kağıdı ayarlanıyor. Lütfen bekleyin...</string>
   <string name="theme_default_name">Sistemi izle</string>
   <string name="theme_dark_name">Koyu</string>
   <string name="theme_light_name">Açık</string>

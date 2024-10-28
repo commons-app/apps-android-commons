@@ -125,7 +125,7 @@
   <string name="logging_in_title">يجري الدخول</string>
   <string name="logging_in_message">الرجاء الانتظار…</string>
   <string name="updating_caption_title">تحديث التسميات التوضيحية والأوصاف</string>
-  <string name="updating_caption_message">يرجى الانتظار…</string>
+  <string name="updating_caption_message">يرجى الانتظار...</string>
   <string name="login_success">نجاح تسجيل الدخول!</string>
   <string name="login_failed">فشل تسجيل الدخول</string>
   <string name="upload_failed">الملف غير موجود. فضلا اختر ملفا آخر.</string>
@@ -530,7 +530,7 @@
   <string name="menu_option_read">عرض المقروءة</string>
   <string name="menu_option_unread">عرض غير المقروءة</string>
   <string name="error_occurred_in_picking_images">حدث خطأ أثناء التقاط الصور</string>
-  <string name="please_wait">الرجاء الانتظار…</string>
+  <string name="please_wait">الرجاء الانتظار...</string>
   <string name="images_featured_explanation">الصور المختارة هي صور من مصورين ورسامين ذوي مهارات عالية اختارها مجتمع ويكيميديا ​​كومنز كبعض الأفضل جودة على الموقع.</string>
   <string name="images_via_nearby_explanation">الصور المرفوعة عبر الأماكن القريبة هي الصور المرفوعة عن طريق اكتشاف الأماكن على الخريطة.</string>
   <string name="thanks_received_explanation">تتيح هذه الميزة للمحررين إرسال إشعار شكر للمستخدمين الذين يقومون بتعديلات مفيدة - باستخدام رابط شكر صغير في صفحة التاريخ أو صفحة الفرق.</string>
@@ -552,7 +552,7 @@
   <string name="media_location_permission_denied">رفض الوصول إلى موقع الوسائط</string>
   <string name="add_location_manually">قد لا نتمكن من الحصول تلقائيًا على بيانات الموقع من الصور التي تقوم برفعها. يرجى إضافة الموقع المناسب لكل صورة قبل الإرسال</string>
   <string name="share_text">ارفع الصور لويكيميديا ​​كومنز مباشرة من هاتفك. قم بتنزيل تطبيق كومنز الآن: %1$s</string>
-  <string name="share_via">مشاركة التطبيق عبر…</string>
+  <string name="share_via">مشاركة التطبيق عبر...</string>
   <string name="image_info">معلومات الصورة</string>
   <string name="no_categories_found">لم يتم العثور على تصنيفات</string>
   <string name="no_depiction_found">لم يتم العثور على الصور</string>
@@ -695,7 +695,7 @@
   <string name="limited_connection_mode">وضع الاتصال المحدود</string>
   <string name="statistics_quality">صور عالية الجودة</string>
   <string name="quality_images_info">الصور عالية الجودة هي رسوم بيانية أو صور فوتوغرافية تفي بمعايير جودة معينة (والتي تكون في الغالب ذات طبيعة فنية) وذات قيمة لمشروعات ويكيميديا</string>
-  <string name="resuming_upload">جاري استئناف التحميل …</string>
+  <string name="resuming_upload">جاري استئناف التحميل ...</string>
   <string name="pausing_upload">جاري إيقاف التحميل مؤقتًا ..</string>
   <string name="cancelling_upload">الغاء التحميل</string>
   <string name="cancel_upload">إلغاء الرفع</string>

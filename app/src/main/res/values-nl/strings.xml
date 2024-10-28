@@ -522,7 +522,7 @@
   <string name="media_location_permission_denied">Toegang tot medialocatie geweigerd</string>
   <string name="add_location_manually">Het is mogelijk dat we niet automatisch locatiegegevens kunnen verkrijgen van foto\'s die u uploadt. Voeg de locatie bij elke foto toe voordat u die upload</string>
   <string name="share_text">Upload foto\'s rechtstreeks vanaf uw telefoon naar Wikimedia Commons. Download de Commons-app nu: %1$s</string>
-  <string name="share_via">App delen via…</string>
+  <string name="share_via">App delen via...</string>
   <string name="image_info">Afbeeldingsinfo</string>
   <string name="no_categories_found">Geen categorieën gevonden</string>
   <string name="no_depiction_found">Geen beschrijvingen gevonden</string>
@@ -599,7 +599,7 @@
   <string name="add_bookmark">Als bladwijzer toegevoegd</string>
   <string name="wallpaper_set_unsuccessfully">Er is iets fout gegaan. Kan de achtergrond niet instellen</string>
   <string name="setting_wallpaper_dialog_title">Instellen als achtergrond</string>
-  <string name="setting_wallpaper_dialog_message">Wordt ingesteld als achtergrond. Een ogenblik geduld…</string>
+  <string name="setting_wallpaper_dialog_message">Wordt ingesteld als achtergrond. Een ogenblik geduld...</string>
   <string name="theme_default_name">Systeem volgen</string>
   <string name="theme_dark_name">Donker</string>
   <string name="theme_light_name">Licht</string>
@@ -659,7 +659,7 @@
   <string name="quality_images_info">Kwaliteitsafbeeldingen zijn diagrammen of foto\'s die voldoen aan bepaalde kwaliteitsnormen (die meestal technisch van aard zijn) en waardevol zijn voor Wikimedia-projecten</string>
   <string name="resuming_upload">Uploaden hervatten…</string>
   <string name="pausing_upload">Uploaden onderbreken…</string>
-  <string name="cancelling_upload">Uploaden wordt geannuleerd…</string>
+  <string name="cancelling_upload">Uploaden wordt geannuleerd...</string>
   <string name="cancel_upload">Uploaden Annuleren</string>
   <string name="limited_connection_explanation">U hebt de beperkte verbindingsmodus ingeschakeld. Alle uploads worden gepauzeerd en worden hervat zodra u deze modus uitschakelt.</string>
   <string name="limited_connection_is_on">Beperkte verbindingsmodus is ingeschakeld.</string>
@@ -806,4 +806,7 @@
   <string name="pending">In behandeling</string>
   <string name="failed">Mislukt</string>
   <string name="could_not_load_place_data">Plaatsgegevens konden niet geladen worden</string>
+  <string name="red_pin">Er is nog geen foto van deze plek, maak er eentje!</string>
+  <string name="green_pin">Er is al een foto van deze plek.</string>
+  <string name="grey_pin">We controleren nu of er een foto van deze plek is.</string>
 </resources>
