@@ -245,9 +245,11 @@ class EditActivity : AppCompatActivity() {
      * as a result, and finishes the current activity.
      */
     fun getRotatedImage() {
-        //Get Permission to saccess
+        //Get Permission to access
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
             != PackageManager.PERMISSION_GRANTED) {
+            //The request code 7747 can be change to any other constant, because it was choose randomly.
+            //The random selection is to avoid future duplication of the same code, preventing confusion during debugging.
             ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), 7747)
         }
 
