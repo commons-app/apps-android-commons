@@ -17,7 +17,7 @@ import fr.free.nrw.commons.utils.CustomSelectorUtils
 import fr.free.nrw.commons.utils.CustomSelectorUtils.Companion.checkWhetherFileExistsOnCommonsUsingSHA1
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.util.Calendar
 import java.util.concurrent.TimeUnit
@@ -65,7 +65,7 @@ class ImageLoader
         /**
          * Coroutine Scope.
          */
-        private val scope: CoroutineScope = MainScope()
+        private val scope: CoroutineScope = CoroutineScope(Dispatchers.IO)
 
         /**
          * Query image and setUp the view.

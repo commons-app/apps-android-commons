@@ -15,6 +15,7 @@ import fr.free.nrw.commons.databinding.FragmentSearchHistoryBinding;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.explore.SearchActivity;
 import java.util.List;
+import java.util.Locale;
 import javax.inject.Inject;
 
 
@@ -90,7 +91,7 @@ public class RecentSearchesFragment extends CommonsDaggerSupportFragment {
     private void showDeleteAlertDialog(@NonNull final Context context, final int position) {
         new AlertDialog.Builder(context)
             .setMessage(R.string.delete_search_dialog)
-            .setPositiveButton(getString(R.string.delete).toUpperCase(),
+            .setPositiveButton(getString(R.string.delete).toUpperCase(Locale.ROOT),
                 ((dialog, which) -> setDeletePositiveButton(context, dialog, position)))
             .setNegativeButton(android.R.string.cancel, null)
             .create()

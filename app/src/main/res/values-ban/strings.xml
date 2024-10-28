@@ -61,7 +61,7 @@
   <string name="forgot_password">Lali kruna Sandi?</string>
   <string name="signup">Daftar</string>
   <string name="logging_in_title">Ngeranjingin log</string>
-  <string name="logging_in_message">Jantos dumun...</string>
+  <string name="logging_in_message">Jantos dumun…</string>
   <string name="updating_caption_title">Nganyarin sesirah miwah pidarta</string>
   <string name="updating_caption_message">Jantos dumun…</string>
   <string name="login_success">Mahasil manjing log!</string>
@@ -303,7 +303,7 @@
   <string name="exif_tag_name_serialNumbers">Nomor seri</string>
   <string name="exif_tag_name_software">Piranti lunak</string>
   <string name="share_text">Unggah foto nuju Wikimédia Commons langsung saking télépon ragané. Unduh aplikasi Commons mangkin: %1$s</string>
-  <string name="share_via">Wedar aplikasi saking...</string>
+  <string name="share_via">Wedar aplikasi saking…</string>
   <string name="image_info">Pidarta Gambar</string>
   <string name="upload_cancelled">Pangunggahan Kawangdé</string>
   <string name="review_is_uploaded_by">%1$s kaunggah olih: %2$s</string>
@@ -340,7 +340,7 @@
   <string name="leaderboard_used">Kaanggén</string>
   <string name="leaderboard_my_rank_button_text">Paringkat Titiang</string>
   <string name="statistics_quality">Kualitas Gambar</string>
-  <string name="resuming_upload">Ngalanturang unggahan...</string>
+  <string name="resuming_upload">Ngalanturang unggahan…</string>
   <string name="pausing_upload">Ngarérénang unggahan…</string>
   <string name="cancel_upload">Wangdé Unggah</string>
   <string name="license_step_title">Lisénsi Média</string>

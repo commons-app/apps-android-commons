@@ -70,8 +70,8 @@
   <string name="forgot_password">Te şîfreya xwe ji bîr kir?</string>
   <string name="signup">Xwe tomar bike</string>
   <string name="logging_in_title">Têdikeve</string>
-  <string name="logging_in_message">Ji kerema xwe piçek bisekine ...</string>
-  <string name="updating_caption_message">Xêra xwe hinek bisekine...</string>
+  <string name="logging_in_message">Ji kerema xwe piçek bisekine …</string>
+  <string name="updating_caption_message">Xêra xwe hinek bisekine…</string>
   <string name="login_success">Têketin bi ser ket!</string>
   <string name="login_failed">Têketin bi ser neket!</string>
   <string name="upload_failed">Dosye nehat dîtin. Ji kerema xwe re dosyeyek din biceribîne.</string>
@@ -183,7 +183,7 @@
   <string name="images_uploaded">Wêneyên Barkirî</string>
   <string name="review_thanks_yes_button_text">Wêneyê din</string>
   <string name="review_thanks_no_button_text">Belê, çima na</string>
-  <string name="please_wait">Ji kerema xwe piçek bisekine ...</string>
+  <string name="please_wait">Ji kerema xwe piçek bisekine …</string>
   <string name="add_picture_to_wikipedia_article_title">Wêne tevlî Wîkîpediyayê bike</string>
   <string name="add_picture_to_wikipedia_article_desc">Tu dixwazî vê wêneyê tevlî gotara Wîkîpediyayê ya bi zimanê %1$s bikî?</string>
   <string name="confirm">Pişrast bike</string>

@@ -61,9 +61,9 @@
   <string name="forgot_password">Серһүҙҙе оноттоғоҙмо?</string>
   <string name="signup">Теркәлеү</string>
   <string name="logging_in_title">Системаға инеү</string>
-  <string name="logging_in_message">Зинһар, көтөгөҙ...</string>
+  <string name="logging_in_message">Зинһар, көтөгөҙ…</string>
   <string name="updating_caption_title">Аңлатмалар һәм тасуирламалар яңыртыла</string>
-  <string name="updating_caption_message">Зинһар, көтөгөҙ...</string>
+  <string name="updating_caption_message">Зинһар, көтөгөҙ…</string>
   <string name="login_success">Системаға инеү уңышлы!</string>
   <string name="login_failed">Системаға инеү уңышһыҙ!</string>
   <string name="upload_failed">Файл табылманы. Башҡа файлды эҙләп ҡарағыҙ.</string>
@@ -131,7 +131,7 @@
   <string name="menu_feedback">Фекереңде ебәр (эл.почта аша)</string>
   <string name="no_email_client">Почта клиенты асыҡланмаған</string>
   <string name="provider_categories">Яңыраҡ ҡулланылған категориялар</string>
-  <string name="waiting_first_sync">Тәүге синхронлаштырыуҙы көтөү...</string>
+  <string name="waiting_first_sync">Тәүге синхронлаштырыуҙы көтөү…</string>
   <string name="no_uploads_yet">Әлегә бер фото ла йөкләмәгәнһегеҙ</string>
   <string name="menu_retry_upload">Ҡабатларға</string>
   <string name="menu_cancel_upload">Кире алыу</string>
@@ -171,7 +171,7 @@
   <string name="welcome_final_button_text">Эйе!</string>
   <string name="welcome_help_button_text">Ентеклерәк</string>
   <string name="detail_panel_cats_label">Категориялар</string>
-  <string name="detail_panel_cats_loading">Йөкләнә башланы...</string>
+  <string name="detail_panel_cats_loading">Йөкләнә башланы…</string>
   <string name="detail_panel_cats_none">Бер ни ҙә һайланмаған</string>
   <string name="detail_description_empty">Тасуирламаһы юҡ</string>
   <string name="detail_discussion_empty">Фекер алышыу юҡ</string>
