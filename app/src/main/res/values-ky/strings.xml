@@ -21,6 +21,7 @@
     <item quantity="other">%1$d файл жүктөлүүдө</item>
   </plurals>
   <plurals name="contributions_subtitle" fuzzy="true">
+    <item quantity="zero">Азырынча жүктөөлөр жок</item>
     <item quantity="one">1 жүктөө</item>
     <item quantity="other">%1$d жүктөө</item>
   </plurals>
@@ -136,7 +137,7 @@
   <string name="back_button_warning">Жүктөөнү жокко чыгаруу</string>
   <string name="back_button_warning_desc">Артка баскычын колдонуу менен бул жүктөө жокко чыгарылат жана сиз ийгиликти жоготосуз</string>
   <string name="back_button_continue">Жүктөөнү улантуу</string>
-  <string name="please_wait">Күтө туруңуз…</string>
+  <string name="please_wait">Күтө туруңуз...</string>
   <string name="label">Аталыш</string>
   <string name="description">Сыпаттама</string>
   <string name="title_page_bookmarks_items">Элементтер</string>

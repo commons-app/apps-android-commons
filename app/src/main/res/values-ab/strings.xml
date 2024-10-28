@@ -14,7 +14,7 @@
   <string name="login">Аҭаларҭа</string>
   <string name="signup">Иҟаҵатәуп арегистрациа</string>
   <string name="logging_in_title">Асистемахь аҭаларҭа</string>
-  <string name="logging_in_message">Шәааԥшы ԥыҭрак…</string>
+  <string name="logging_in_message">Шәааԥшы ԥыҭрак...</string>
   <string name="login_success" fuzzy="true">Аҭалара қәҿиарала имҩаԥысит!</string>
   <string name="login_failed" fuzzy="true">Асистемахь аҭалараан агха!</string>
   <string name="upload_failed">Афаил ԥшаам. Даҽа фаилк шәахәаԥш.</string>
@@ -64,7 +64,7 @@
   <string name="welcome_final_text">Ари шәара еилышәкаама?</string>
   <string name="welcome_final_button_text">Ааи!</string>
   <string name="detail_panel_cats_label">Акатегориақәа</string>
-  <string name="detail_panel_cats_loading">Аҭагалара…</string>
+  <string name="detail_panel_cats_loading">Аҭагалара...</string>
   <string name="detail_panel_cats_none">Акагь алхӡам</string>
   <string name="detail_description_empty">Иҟам ахҳәаа</string>
   <string name="detail_license_empty">Идырым алицензиа</string>

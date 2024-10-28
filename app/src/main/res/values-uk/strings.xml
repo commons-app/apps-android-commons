@@ -21,7 +21,7 @@
 * Ата
 * Пан Хаунд
 -->
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
   <string name="commons_facebook">Facebook-сторінка Вікісховища</string>
   <string name="commons_github">Програмний код Вікісховища на GitHub</string>
   <string name="commons_logo">Логотип Вікісховища</string>
@@ -81,7 +81,7 @@
     <item quantity="other">%1$d завантажень</item>
   </plurals>
   <plurals name="receiving_shared_content">
-    <item quantity="one" tools:ignore="ImpliedQuantity">Отримання спільного контенту. Обробка зображення може зайняти трохи часу, залежно від розміру зображення і від Вашого пристрою</item>
+    <item quantity="one">Отримання спільного контенту. Обробка зображення може зайняти трохи часу, залежно від розміру зображення і від Вашого пристрою</item>
     <item quantity="few">Отримання спільного контенту. Обробка зображень може зайняти трохи часу, залежно від розміру зображень і від Вашого пристрою</item>
     <item quantity="many">Отримання спільного контенту. Обробка зображень може зайняти трохи часу, залежно від розміру зображень і від Вашого пристрою</item>
     <item quantity="other">Отримання спільного контенту. Обробка зображень може зайняти трохи часу, залежно від розміру зображень і від Вашого пристрою</item>
@@ -612,7 +612,7 @@
   <string name="add_bookmark">Додано у закладки</string>
   <string name="wallpaper_set_unsuccessfully">Щось трапилось. Не вдалося встановити шпалери робочого столу</string>
   <string name="setting_wallpaper_dialog_title">Встановити в якості шпалер робочого столу</string>
-  <string name="setting_wallpaper_dialog_message">Встановлення робочого столу. Будь ласка зачекайте…</string>
+  <string name="setting_wallpaper_dialog_message">Встановлення робочого столу. Будь ласка зачекайте...</string>
   <string name="theme_default_name">На взірець системи</string>
   <string name="theme_dark_name">Темна</string>
   <string name="theme_light_name">Світла</string>

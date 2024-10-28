@@ -13,7 +13,7 @@
   <string name="forgot_password">ⵜⴻⵜⵜⵓⴷ ⵜⴰⴳⵓⵔⵉ ⵏ ⵓⵣⵣⵔⴰⵢ?</string>
   <string name="signup">ⵣⵎⵎⴻⵎ</string>
   <string name="logging_in_title">ⴷⴰ ⵜⴽⵛⵛⵎⴷ</string>
-  <string name="logging_in_message">ⴰⵎⵓⵔ ⵏⵏⴽ ⵇⵇⵍ…</string>
+  <string name="logging_in_message">ⴰⵎⵓⵔ ⵏⵏⴽ ⵇⵇⵍ...</string>
   <string name="login_success" fuzzy="true">ⴰⴽⵛⴰⵎ !ⵉⵎⵓⵔⵙ</string>
   <string name="login_failed" fuzzy="true">ⴰⴽⵛⴰⵎ ⵉⵣⴳⵍ!</string>
   <string name="upload_failed">ⴰⴼⴰⵢⵍⵓ ⵓⵔ ⵉⵜⵜⵢⵓⴼⴰ. ⴰⵎⵓⵔ ⵏⵏⴽ ⴰⵔⵎ ⴰⴼⴰⵢⵍⵓ ⵢⴰⴹⵏ.</string>

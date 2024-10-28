@@ -51,9 +51,9 @@
   <string name="forgot_password">ߌ ߓߘߊ߫ ߢߌ߬ߣߊ߬ ߌ ߟߊ߫ ߕߊ߬ߡߌ߲߬ߞߊ߲ ߠߊ߫؟</string>
   <string name="signup">ߖߊ߬ߕߋ߬ߘߊ ߟߊߞߊ߬</string>
   <string name="logging_in_title">ߜߊ߲߬ߞߎ߲߬ߠߌ߲ ߦߋ߫ ߛߋ߲߬ߠߊ߫</string>
-  <string name="logging_in_message">ߡߊ߬ߞߐ߬ߣߐ߲߬ߠߌ߲ ߞߍ߫ ߖߊ߰ߣߌ߲߬…</string>
+  <string name="logging_in_message">ߡߊ߬ߞߐ߬ߣߐ߲߬ߠߌ߲ ߞߍ߫ ߖߊ߰ߣߌ߲߬...</string>
   <string name="updating_caption_title">ߝߍ߬ߛߓߍߟߌ ߣߌ߫ ߞߊ߲߬ߛߓߍߟߌ ߟߊߞߎߘߦߊ ߦߴߌ ߘߐ߫</string>
-  <string name="updating_caption_message">ߡߊ߬ߞߐ߬ߣߐ߲߬ߠߌ߲ ߞߍ߫ ߖߊ߰ߣߌ߲߬…</string>
+  <string name="updating_caption_message">ߡߊ߬ߞߐ߬ߣߐ߲߬ߠߌ߲ ߞߍ߫ ߖߊ߰ߣߌ߲߬...</string>
   <string name="login_success" fuzzy="true">ߜߊ߲߬ߞߎ߲߬ߠߌ߲ ߓߘߊ߫ ߛߎߘߊ߲߫߹</string>
   <string name="login_failed" fuzzy="true">ߜߊ߲߬ߞߎ߲߬ߠߌ߲ ߓߘߊ߫ ߗߌߙߏ߲߫߹</string>
   <string name="upload_failed">ߞߐߕߐ߮ ߡߊ߫ ߛߐ߬ߘߐ߲߬. ߘߏ߫ ߜߘߍ߫ ߡߊߝߍߣߍ߲߫ ߖߊ߰ߣߌ߲߫.</string>
@@ -69,7 +69,7 @@
   <string name="upload_failed_notification_subtitle">ߊ߬ ߛߐ߲߬ߞߌ߲߫ ߞߵߊ߬ ߦߋ߫</string>
   <string name="upload_paused_notification_subtitle">ߊ߬ ߛߐ߲߬ߞߌ߲߫ ߞߵߊ߬ ߦߋ߫</string>
   <string name="title_activity_contributions">ߒ ߠߊ߫ ߟߊ߬ߦߟߍ߬ߣߍ߲߬ ߞߐ߯ߟߕߊ ߟߎ߬</string>
-  <string name="contribution_state_queued">ߘߞߐ߬ߣߐ߲߬ߠߌ߲ ߘߐ߫…</string>
+  <string name="contribution_state_queued">ߘߞߐ߬ߣߐ߲߬ߠߌ߲ ߘߐ߫...</string>
   <string name="contribution_state_failed">ߊ߬ ߓߘߊ߫ ߗߌߙߏ߲߫</string>
   <string name="contribution_state_in_progress">%1$d%% ߓߘߊ߫ ߘߝߊ߫</string>
   <string name="contribution_state_starting">ߟߊ߬ߦߟߍ߬ߟߌ ߦߋ߫ ߛߋ߲߬ߠߊ߫</string>
@@ -148,7 +148,7 @@
   <string name="welcome_final_button_text">ߐ߲߬ߐ߲߬ߐ߲߫߹</string>
   <string name="welcome_help_button_text">ߞߎ߲߬ߠߊ߬ߝߎ߬ߟߋ߲߬ ߜߘߍ ߟߎ߬</string>
   <string name="detail_panel_cats_label">ߦߌߟߡߊ ߟߎ߬</string>
-  <string name="detail_panel_cats_loading">ߟߊ߬ߢߎ߲߬ߠߌ߲ ߦߵߌ ߘߐ߫…</string>
+  <string name="detail_panel_cats_loading">ߟߊ߬ߢߎ߲߬ߠߌ߲ ߦߵߌ ߘߐ߫...</string>
   <string name="detail_panel_cats_none">ߊ߬ ߡߊ߫ ߓߊߕߐ߬ߡߐ߲߬</string>
   <string name="detail_caption_empty">ߝߍ߬ߛߓߍߟߌ߫ ߕߍ߫ ߦߋ߲߬</string>
   <string name="detail_description_empty">ߞߊ߲߬ߛߓߍߟߌ߫ ߕߴߦߋ߲߬</string>
@@ -408,7 +408,7 @@
   <string name="menu_option_read">ߘߐ߬ߞߊ߬ߙߊ߲߬ߣߍ߲ ߠߎ߬ ߦߋ߫</string>
   <string name="menu_option_unread">ߘߐ߬ߞߊ߬ߙߊ߲߬ߓߊߟߌ ߟߎ߬ ߦߋ߫</string>
   <string name="error_occurred_in_picking_images">ߝߎ߬ߕߎ߲߬ߕߌ ߓߌ߬ߟߊ߬ߣߍ߲߫ ߊ߬ ߘߐ߫ ߞߵߌ ߕߏ߫ ߖߌ߬ߦߊ߬ߓߍ ߓߊߕߐ߬ߡߐ߲ ߞߊ߲߬.</string>
-  <string name="please_wait">ߡߊ߬ߞߐ߬ߣߐ߲߬ߠߌ߲ ߞߍ߫ ߖߊ߰ߣߌ߲߬…</string>
+  <string name="please_wait">ߡߊ߬ߞߐ߬ߣߐ߲߬ߠߌ߲ ߞߍ߫ ߖߊ߰ߣߌ߲߬...</string>
   <string name="copied_successfully">ߓߘߊ߫ ߓߊߓߌ߬ߟߊ߬</string>
   <string name="welcome_do_upload_content_description">ߖߌ߬ߦߊ߬ߓߍ߬ ߢߌ߬ߡߊ߬ ߟߊߦߟߍ߬ߕߊ ߟߎ߬ ߞߏߟߊ߲ߞߏߡߊ</string>
   <string name="welcome_dont_upload_content_description">ߖߌ߬ߦߊ߬ߓߍ߬ ߖߎ߰ ߟߊߦߟߍ߬ߓߊߟߌ ߟߎ߬ ߞߏߟߊ߲ߞߏߡߊ</string>
@@ -418,7 +418,7 @@
   <string name="exif_tag_name_location">ߘߌ߲߬ߞߌߙߊ</string>
   <string name="exif_tag_name_cameraModel">ߖߌ߬ߦߊ߬ߕߊ߬ߟߊ߲ ߛߎ߮ߦߊ</string>
   <string name="exif_tag_name_software">ߛߎ߲ߝߘߍ</string>
-  <string name="share_via">ߟߥߊ߬ߟߌ߬ߟߊ߲ ߠߊߖߍ߲ߛߍ߲ ߢߌ߲߬ ߠߎ߫ ߞߊ߲߬…</string>
+  <string name="share_via">ߟߥߊ߬ߟߌ߬ߟߊ߲ ߠߊߖߍ߲ߛߍ߲ ߢߌ߲߬ ߠߎ߫ ߞߊ߲߬...</string>
   <string name="image_info">ߖߌ߬ߦߊ߬ߓߍ ߞߌ߬ߓߊ߬ߙߏ߬ߦߊ</string>
   <string name="no_categories_found">ߦߌߟߡߊߙߋ߲߫ ߕߴߦߋ߲߬</string>
   <string name="no_depiction_found">ߘߊ߲߬ߠߊ߬ߕߍ߰ߟߌ ߡߊ߫ ߛߐ߬ߘߐ߲߬</string>
@@ -486,7 +486,7 @@
   <string name="add_bookmark">ߊ߬ ߓߌ߬ߟߊ߬ ߟߊ߬ߡߊ ߘߐ߫</string>
   <string name="wallpaper_set_unsuccessfully">ߞߏ ߘߏ߫ ߓߍ߲߬ߣߍ߫ ߕߎ߲߬ ߕߍ߫. ߘߊ߲߬ߘߊ߲߬ߥߟߊ ߕߍ߫ ߛߐ߲߬ ߘߐߓߍ߲߬ ߠߊ߫.</string>
   <string name="setting_wallpaper_dialog_title">ߊ߬ ߓߌ߬ߟߊ߬ ߘߊ߬ߣߊ߲߬ߥߟߊ ߟߊ߫.</string>
-  <string name="setting_wallpaper_dialog_message">ߘߊ߬ߣߊ߲߬ߥߟߊ ߘߊߘߐߓߍ߲߭ ߦߴߌ ߘߐ߫. ߌ ߟߐ߬ ߖߊ߰ߣߌ߲߫…</string>
+  <string name="setting_wallpaper_dialog_message">ߘߊ߬ߣߊ߲߬ߥߟߊ ߘߊߘߐߓߍ߲߭ ߦߴߌ ߘߐ߫. ߌ ߟߐ߬ ߖߊ߰ߣߌ߲߫...</string>
   <string name="theme_default_name">ߞߊ߲ߞߋ ߟߊߓߊ߬ߕߏ߬</string>
   <string name="theme_dark_name">ߘߌ߬ߓߌ</string>
   <string name="theme_light_name">ߦߋߟߋ߲</string>
@@ -533,9 +533,9 @@
   <string name="leaderboard_used">ߟߊߓߊ߯ߙߊߣߍ߲</string>
   <string name="leaderboard_my_rank_button_text">ߒ ߠߊ߫ ߛߝߊ</string>
   <string name="statistics_quality">ߖߌ߬ߦߊ߬ߓߍ ߛߎ߯ߦߊ</string>
-  <string name="resuming_upload">ߟߊ߬ߦߟߍ߬ߟߌ ߘߊߡߌ߬ߣߊ߭ ߦߴߌ ߘߐ߫…</string>
-  <string name="pausing_upload">ߟߊ߬ߦߟߍ߬ߟߌ ߟߊߟߐ߭ ߦߴߌ ߘߐ߫…</string>
-  <string name="cancelling_upload">ߟߊ߬ߦߟߍ߬ߟߌ ߘߐߛߊ߭ ߦߴߌ ߘߐ߫…</string>
+  <string name="resuming_upload">ߟߊ߬ߦߟߍ߬ߟߌ ߘߊߡߌ߬ߣߊ߭ ߦߴߌ ߘߐ߫...</string>
+  <string name="pausing_upload">ߟߊ߬ߦߟߍ߬ߟߌ ߟߊߟߐ߭ ߦߴߌ ߘߐ߫...</string>
+  <string name="cancelling_upload">ߟߊ߬ߦߟߍ߬ߟߌ ߘߐߛߊ߭ ߦߴߌ ߘߐ߫...</string>
   <string name="cancel_upload">ߟߊ߬ߦߟߍ߬ߟߌ ߘߊߓߌ߬ߟߊ߬</string>
   <string name="media_detail_step_title">ߡߋߘߌߦߊ ߝߊߙߊ߲ߝߊ߯ߛߌ</string>
   <string name="menu_view_category_page">ߦߌߟߡߊ߫ ߞߐߜߍ ߘߐߜߍ߫</string>

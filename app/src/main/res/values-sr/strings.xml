@@ -34,39 +34,32 @@
   <string name="appwidget_img">Слика дана</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">%1$d датотека се отпрема</item>
-    <item quantity="few">%1$d датотеке се отпремају</item>
     <item quantity="other">%1$d датотеке се отпремају</item>
   </plurals>
   <plurals name="contributions_subtitle">
     <item quantity="one">%1$d отпремање</item>
-    <item quantity="few">%1$d отпремања</item>
     <item quantity="other">%1$d отпремања</item>
   </plurals>
   <string name="starting_uploads">Покретање отпремања</string>
   <plurals name="starting_multiple_uploads">
     <item quantity="one">Процесуирање %d отпремање</item>
-    <item quantity="few">Процесуирање %d отпремања</item>
     <item quantity="other">Процесуирање %d отпремања</item>
   </plurals>
   <plurals name="multiple_uploads_title">
     <item quantity="one">%d отпремање</item>
-    <item quantity="few">%1$d отпремања</item>
     <item quantity="other">%d отпремања</item>
   </plurals>
   <plurals name="share_license_summary">
     <item quantity="one">Слика ће се водити под лиценцом %1$s</item>
-    <item quantity="few">Слике ће се водити под лиценцом %1$s</item>
     <item quantity="other">Слике ће се водити под лиценцом %1$s</item>
   </plurals>
   <plurals name="upload_count_title">
     <item quantity="one">%1$d отпремање</item>
-    <item quantity="few">%1$d отпремања</item>
     <item quantity="other">%1$d отпремања</item>
   </plurals>
   <plurals name="receiving_shared_content">
-    <item quantity="one">Пријем %d дељеног садржаја… Процесуирање слике може потрајати неко време, у зависности од величине слике и вашег уређаја</item>
-    <item quantity="few">Пријем %d дељеног садржаја… Процесуирање слика може потрајати неко време, у зависности од величине слика и вашег уређаја</item>
-    <item quantity="other">Пријем %d дељеног садржаја… Процесуирање слика може потрајати неко време, у зависности од величине слика и вашег уређаја</item>
+    <item quantity="one">Примање дељеног садржаја... Процесуирање слике може потрајати неко време, у зависности од величине слике и вашег уређаја</item>
+    <item quantity="other">Примање дељеног садржаја... Процесуирање слика може потрајати неко време, у зависности од величине слика и вашег уређаја</item>
   </plurals>
   <string name="navigation_item_explore">Истрага</string>
   <string name="preference_category_appearance">Изглед</string>
@@ -503,7 +496,7 @@
   <string name="media_location_permission_denied">Приступ локацији медија је одбијен</string>
   <string name="add_location_manually">Можда нећемо моћи да аутоматски прибавимо податке о локацији из слика које отпремите. Додајте одговарајућу локацију за сваку слику пре објављивања</string>
   <string name="share_text">Отпреми фотографије на Викимедијину Оставу директно са свог телефона. Преузми апликацију Оставе сада: %1$s</string>
-  <string name="share_via">Подели апликацију преко…</string>
+  <string name="share_via">Подели апликацију преко...</string>
   <string name="image_info">Информације о слици</string>
   <string name="no_categories_found">Нису пронађене категорије</string>
   <string name="upload_cancelled">Отказано отпремање</string>
@@ -528,13 +521,12 @@
   <string name="category_edit_helper_show_edit_title_success">Успешно</string>
   <plurals name="category_edit_helper_show_edit_message_if">
     <item quantity="one">Категорија %1$s је додата.</item>
-    <item quantity="few">Категорије %1$s су додате.</item>
     <item quantity="other">Категорије %1$s су додате.</item>
   </plurals>
   <string name="category_edit_helper_edit_message_else">Није могуће додати категорије.</string>
   <string name="category_edit_button_text">Ажурирај категорију</string>
   <string name="depictions_edit_helper_show_edit_title">Уреди приказе</string>
-  <string name="coordinates_edit_helper_make_edit_toast">Ажурирање координата…</string>
+  <string name="coordinates_edit_helper_make_edit_toast">Ажурирање координата...</string>
   <string name="coordinates_edit_helper_show_edit_title">Ажурирање координата</string>
   <string name="description_edit_helper_show_edit_title">Ажурирање описа</string>
   <string name="caption_edit_helper_show_edit_title">Ажурирање натписа</string>
@@ -737,7 +729,6 @@
   <string name="saving_gpx_file">Чување GPX датотеке</string>
   <plurals name="custom_picker_images_selected_title_appendix">
     <item quantity="one">%d слика је одабрана</item>
-    <item quantity="few">%d слике су одабране</item>
     <item quantity="other">%d слика је одабрано</item>
   </plurals>
   <string name="please_enter_some_comments">Унесите коментар</string>
@@ -746,4 +737,6 @@
   <string name="uploads">Отпремања</string>
   <string name="pending">На чекању</string>
   <string name="failed">Није успело</string>
+  <string name="green_pin">Ово место већ има слику</string>
+  <string name="grey_pin">Проверавање да ли ово место има слику.</string>
 </resources>

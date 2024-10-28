@@ -112,7 +112,7 @@
   <string name="menu_feedback">Pošaljite Vašu povratnu informaciju (putem e-pošte)</string>
   <string name="no_email_client">Nemate uspostavljen klijent za e-poštu</string>
   <string name="provider_categories">Nedavno korištene kategorije</string>
-  <string name="waiting_first_sync">Čekam prvo usklađivanje…</string>
+  <string name="waiting_first_sync">Čekam prvo usklađivanje...</string>
   <string name="no_uploads_yet">Još uvijek niste otpremili nijednu sliku.</string>
   <string name="menu_retry_upload">Pokušaj ponovo</string>
   <string name="menu_cancel_upload">Otkaži</string>
@@ -147,7 +147,7 @@
   <string name="welcome_final_button_text">Da!</string>
   <string name="welcome_help_button_text">Više informacija</string>
   <string name="detail_panel_cats_label">Kategorije</string>
-  <string name="detail_panel_cats_loading">Učitavanje…</string>
+  <string name="detail_panel_cats_loading">Učitavanje...</string>
   <string name="detail_panel_cats_none">Ništa nije odabrano</string>
   <string name="detail_description_empty">Nema opisa</string>
   <string name="detail_discussion_empty">Nema razgovora</string>
