@@ -18,6 +18,7 @@ import fr.free.nrw.commons.utils.CustomSelectorUtils.Companion.checkWhetherFileE
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 import java.util.Calendar
 import java.util.concurrent.TimeUnit
@@ -65,7 +66,7 @@ class ImageLoader
         /**
          * Coroutine Scope.
          */
-        private val scope: CoroutineScope = CoroutineScope(Dispatchers.IO)
+        private val scope: CoroutineScope = MainScope()
 
         /**
          * Query image and setUp the view.
