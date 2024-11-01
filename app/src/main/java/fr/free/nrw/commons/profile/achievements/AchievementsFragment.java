@@ -2,12 +2,16 @@ package fr.free.nrw.commons.profile.achievements;
 
 import android.accounts.Account;
 import android.content.Context;
+import android.graphics.ColorMatrix;
+import android.graphics.ColorMatrixColorFilter;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.view.ContextThemeWrapper;
@@ -28,6 +32,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Objects;
 import javax.inject.Inject;
 import org.apache.commons.lang3.StringUtils;
@@ -92,10 +97,10 @@ public class AchievementsFragment extends CommonsDaggerSupportFragment {
         binding.imagesUploadInfo.setOnClickListener(view -> showUploadInfo());
         binding.imagesRevertedInfo.setOnClickListener(view -> showRevertedInfo());
         binding.imagesUsedByWikiInfo.setOnClickListener(view -> showUsedByWikiInfo());
-        binding.imagesNearbyInfo.setOnClickListener(view -> showImagesViaNearbyInfo());
-        binding.imagesFeaturedInfo.setOnClickListener(view -> showFeaturedImagesInfo());
-        binding.thanksReceivedInfo.setOnClickListener(view -> showThanksReceivedInfo());
-        binding.qualityImagesInfo.setOnClickListener(view -> showQualityImagesInfo());
+        binding.wikidataEditsIcon.setOnClickListener(view -> showImagesViaNearbyInfo());
+        binding.qualityImageIcon.setOnClickListener(view -> showFeaturedImagesInfo());
+        binding.featuredImageIcon.setOnClickListener(view -> showThanksReceivedInfo());
+        binding.thanksImageIcon.setOnClickListener(view -> showThanksReceivedInfo());
 
         // DisplayMetrics used to fetch the size of the screen
         DisplayMetrics displayMetrics = new DisplayMetrics();
@@ -132,11 +137,26 @@ public class AchievementsFragment extends CommonsDaggerSupportFragment {
             binding.imageFeatured.setText("0");
             binding.qualityImages.setText("0");
             binding.achievementLevel.setText("0");
+            binding.thanksReceived.setText("0");
+            Map<ImageView,TextView> badgeMap = Map.of(
+                binding.wikidataEditsIcon,binding.wikidataEdits,
+                binding.featuredImageIcon,binding.imageFeatured,
+                binding.qualityImageIcon, binding.qualityImages,
+                binding.thanksImageIcon, binding.thanksReceived
+            );
+            badgeRender(badgeMap);
             setMenuVisibility(true);
             return rootView;
         }
         setWikidataEditCount();
         setAchievements();
+        Map<ImageView,TextView> badgeMap = Map.of(
+            binding.wikidataEditsIcon,binding.wikidataEdits,
+            binding.featuredImageIcon,binding.imageFeatured,
+            binding.qualityImageIcon, binding.qualityImages,
+            binding.thanksImageIcon, binding.thanksReceived
+        );
+        badgeRender(badgeMap);
         return rootView;
     }
 
@@ -478,5 +498,29 @@ public class AchievementsFragment extends CommonsDaggerSupportFragment {
             return false;
         }
         return true;
+    }
+    /**
+     * list the badgeset and set the 0 one to gray
+     * @param badgeMap
+     */
+    public void badgeRender(Map<ImageView, TextView> badgeMap){
+        for(Map.Entry<ImageView,TextView> badge:badgeMap.entrySet()){
+            TextView textView= badge.getValue();
+            ImageView imageView=badge.getKey();
+            if(textView.getText().equals("0")){
+                Grayfilter(imageView);
+                textView.setVisibility(View.GONE);
+            }
+        }
+    }
+    /**
+     * Set imageView element to Gray
+     * @param imageView
+     */
+    public void Grayfilter(ImageView imageView){
+        ColorMatrix matrix = new ColorMatrix();
+        matrix.setSaturation(0);
+        ColorMatrixColorFilter filter = new ColorMatrixColorFilter(matrix);
+        imageView.setColorFilter(filter);
     }
 }
