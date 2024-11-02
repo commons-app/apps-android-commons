@@ -7,15 +7,10 @@ import android.content.ContentUris
 import android.content.Context
 import android.content.IntentSender
 import android.content.pm.PackageManager
-import android.net.Uri
 import android.os.Build
 import android.provider.MediaStore
-import android.widget.Toast
-import androidx.annotation.StringRes
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
-import fr.free.nrw.commons.R
-import fr.free.nrw.commons.utils.PermissionUtils
 import timber.log.Timber
 import java.io.File
 
