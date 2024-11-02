@@ -3,11 +3,14 @@ package fr.free.nrw.commons.customselector.ui.selector
 import android.Manifest
 import android.app.Activity
 import android.app.Dialog
+import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.provider.Settings
 import android.view.View
 import android.view.Window
 import android.widget.Button
@@ -16,6 +19,7 @@ import android.widget.TextView
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.PopupMenu
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 
 import androidx.compose.foundation.BorderStroke
@@ -42,11 +46,17 @@ import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
+import com.karumi.dexter.Dexter
+import com.karumi.dexter.MultiplePermissionsReport
+import com.karumi.dexter.PermissionToken
+import com.karumi.dexter.listener.PermissionRequest
+import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.customselector.database.NotForUploadStatus
 import fr.free.nrw.commons.customselector.database.NotForUploadStatusDao
 import fr.free.nrw.commons.customselector.helper.CustomSelectorConstants
 import fr.free.nrw.commons.customselector.helper.CustomSelectorConstants.SHOULD_REFRESH
+import fr.free.nrw.commons.customselector.helper.FolderDeletionHelper
 import fr.free.nrw.commons.customselector.listeners.FolderClickListener
 import fr.free.nrw.commons.customselector.listeners.ImageSelectListener
 import fr.free.nrw.commons.customselector.model.Image
@@ -58,6 +68,7 @@ import fr.free.nrw.commons.media.ZoomableActivity
 import fr.free.nrw.commons.theme.BaseActivity
 import fr.free.nrw.commons.upload.FileUtilsWrapper
 import fr.free.nrw.commons.utils.CustomSelectorUtils
+import fr.free.nrw.commons.utils.PermissionUtils
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -254,6 +265,16 @@ class CustomSelectorActivity :
             val shouldRefresh = data.getBooleanExtra(SHOULD_REFRESH, false)
             imageFragment?.passSelectedImages(selectedImages, shouldRefresh)
         }
+
+        if (requestCode == 2) {
+            if (resultCode == Activity.RESULT_OK) {
+                Timber.tag("FolderAction").d("User confirmed deletion")
+                // Retry deletion or refresh UI if needed
+            } else {
+                Timber.tag("FolderAction").e("User denied deletion request")
+            }
+        }
+
     }
 
     /**
@@ -439,10 +460,12 @@ class CustomSelectorActivity :
         limitError.setOnClickListener { displayUploadLimitWarning() }
 
         val overflowMenu: ImageButton = findViewById(R.id.menu_overflow)
-        overflowMenu.visibility = if (showOverflowMenu) View.VISIBLE else View.INVISIBLE
-
-        // Set up popup menu when overflow menu is clicked
-        overflowMenu.setOnClickListener { showPopupMenu(overflowMenu) }
+        if(defaultKvStore.getBoolean("displayDeletionButton")) {
+            overflowMenu.visibility = if (showOverflowMenu) View.VISIBLE else View.INVISIBLE
+            overflowMenu.setOnClickListener { showPopupMenu(overflowMenu) }
+        }else{
+            overflowMenu.visibility = View.GONE
+        }
 
     }
 
@@ -454,7 +477,7 @@ class CustomSelectorActivity :
         popupMenu.setOnMenuItemClickListener { item ->
             when (item.itemId) {
                 R.id.action_delete_folder -> {
-                    deleteFolder()  // Call the delete folder logic here
+                    deleteFolderWithPermissions()
                     true
                 }
                 else -> false
@@ -463,37 +486,121 @@ class CustomSelectorActivity :
         popupMenu.show()
     }
 
-    private fun deleteFolder() {
-        Timber.tag("FolderAction").d("Delete folder action triggered")
-
-
-        // Run on UI thread to ensure dialog shows correctly
-        runOnUiThread {
-            val builder = AlertDialog.Builder(this)
-            builder.setTitle("Delete Folder")
-            builder.setMessage("Are you sure you want to delete this folder?")
-
-            // Set the positive button to confirm deletion
-            builder.setPositiveButton("Delete") { dialog, _ ->
-                // Perform folder deletion here
-                Timber.tag("FolderAction").d("Folder deleted")
-                dialog.dismiss()
-            }
-
-            // Set the negative button to cancel
-            builder.setNegativeButton("Cancel") { dialog, _ ->
-                Timber.tag("FolderAction").d("Delete action cancelled")
-                dialog.dismiss()  // Dismiss the dialog
-            }
-
-            // Show the AlertDialog
-            builder.create().show()
+    /**
+     * Triggers folder deletion after permission checks.
+     */
+    private fun deleteFolderWithPermissions() {
+        val permissions = PermissionUtils.PERMISSIONS_STORAGE
+        if (PermissionUtils.hasPermission(this, permissions)) {
+            deleteFolderByApiVersion()
+        } else {
+            requestPermissionsIfNeeded()
         }
     }
 
 
+    /**
+     * Checks and requests necessary permissions using Dexter library.
+     */
+    private fun requestPermissionsIfNeeded() {
+        val permissions = PermissionUtils.PERMISSIONS_STORAGE
+
+        Dexter.withActivity(this)
+            .withPermissions(*permissions)
+            .withListener(object : MultiplePermissionsListener {
+                override fun onPermissionsChecked(report: MultiplePermissionsReport) {
+                    if (report.areAllPermissionsGranted()) {
+                        deleteFolderByApiVersion()
+                    } else if (report.isAnyPermissionPermanentlyDenied) {
+                        showSettingsDialog()
+                    } else {
+                        Toast.makeText(
+                            this@CustomSelectorActivity,
+                            "Permissions required to delete folder.",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                }
+
+                override fun onPermissionRationaleShouldBeShown(
+                    permissions: List<PermissionRequest>,
+                    token: PermissionToken
+                ) {
+                    token.continuePermissionRequest()
+                }
+            }).check()
+    }
 
     /**
+     * Show a dialog directing the user to settings if permissions are permanently denied.
+     */
+    private fun showSettingsDialog() {
+        AlertDialog.Builder(this)
+            .setTitle("Need Permissions")
+            .setMessage("This app needs storage permissions to delete folders. You can grant them in app settings.")
+            .setPositiveButton("Go to Settings") { _, _ ->
+                val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+                intent.data = Uri.fromParts("package", packageName, null)
+                startActivity(intent)
+            }
+            .setNegativeButton("Cancel") { dialog, _ -> dialog.dismiss() }
+            .show()
+    }
+
+    /**
+     * Deletes folder based on Android API version.
+     */
+    private fun deleteFolderByApiVersion() {
+        val folderPath = FolderDeletionHelper.getFolderPath(this, bucketId)
+        if (folderPath != null) {
+            val folder = File(folderPath)
+
+            if (folder.exists() && folder.isDirectory) {
+                FolderDeletionHelper.confirmAndDeleteFolder(this, folder) { success ->
+                    if (success) {
+                        Toast.makeText(this, "Folder deleted", Toast.LENGTH_SHORT).show()
+                        Timber.tag("FolderAction").d("Folder deleted successfully")
+
+                        reloadFolderList()
+                    } else {
+                        Toast.makeText(this, "Failed to delete folder", Toast.LENGTH_SHORT).show()
+                        Timber.tag("FolderAction").e("Failed to delete folder")
+                    }
+                }
+            } else {
+                Toast.makeText(this, "Folder not found", Toast.LENGTH_SHORT).show()
+                Timber.tag("FolderAction").e("Folder not found")
+            }
+        } else {
+            Toast.makeText(this, "Folder path not found", Toast.LENGTH_SHORT).show()
+            Timber.tag("FolderDeletion").e("Failed to retrieve folder path for bucket ID: $bucketId")
+        }
+    }
+
+    private fun reloadFolderList() {
+        // Clear any saved state for the last open folder
+        prefs.edit()
+            .remove(FOLDER_ID)
+            .remove(FOLDER_NAME)
+            .apply()
+
+        supportFragmentManager.popBackStack(null, androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE)
+        supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.fragment_container, FolderFragment.newInstance())
+            .commit()
+
+        // Reset the toolbar and other flags
+
+        isImageFragmentOpen = false
+        showOverflowMenu = false
+        fetchData()
+        setUpToolbar()
+        changeTitle(getString(R.string.custom_selector_title), 0)
+    }
+
+
+        /**
      * override on folder click,
      * change the toolbar title on folder click, make overflow menu visible
      */
