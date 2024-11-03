@@ -7,6 +7,8 @@ import android.content.ContentUris
 import android.content.Context
 import android.content.IntentSender
 import android.content.pm.PackageManager
+import android.media.MediaScannerConnection
+import android.net.Uri
 import android.os.Build
 import android.provider.MediaStore
 import androidx.appcompat.app.AlertDialog
@@ -20,7 +22,7 @@ object FolderDeletionHelper {
      * Main function to confirm and delete a folder.
      */
     fun confirmAndDeleteFolder(context: Context, folder: File, onDeletionComplete: (Boolean) -> Unit) {
-        val itemCount = countItemsInFolder(folder)
+        val itemCount = countItemsInFolder(context, folder)
         val folderPath = folder.absolutePath
 
         // Show confirmation dialog
@@ -42,7 +44,7 @@ object FolderDeletionHelper {
     /**
      * Delete the folder based on the Android version.
      */
-    private fun deleteFolder(context: Context, folder: File): Boolean {
+   fun deleteFolder(context: Context, folder: File): Boolean {
         return when {
             Build.VERSION.SDK_INT >= Build.VERSION_CODES.R -> deleteFolderScopedStorage(context, folder)
             Build.VERSION.SDK_INT == Build.VERSION_CODES.Q -> deleteFolderMediaStore(context, folder)
@@ -53,8 +55,16 @@ object FolderDeletionHelper {
     /**
      * Count the number of items in the folder, including subfolders.
      */
-    private fun countItemsInFolder(folder: File): Int {
-        return folder.listFiles()?.size ?: 0
+    private fun countItemsInFolder(context: Context, folder: File): Int {
+        val contentResolver = context.contentResolver
+        val folderPath = folder.absolutePath
+        val uri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI
+        val selection = "${MediaStore.Images.Media.DATA} LIKE ?"
+        val selectionArgs = arrayOf("$folderPath/%")
+
+        return contentResolver.query(uri, arrayOf(MediaStore.Images.Media._ID), selection, selectionArgs, null)?.use { cursor ->
+            cursor.count
+        } ?: 0
     }
     /**
      * Deletes a folder using the Scoped Storage API for Android 11 (API level 30) and above.
@@ -70,9 +80,7 @@ object FolderDeletionHelper {
         }
     }
 
-    /**
-     * Deletes a folder using the MediaStore API for Android 10 (API level 29).
-     */
+
     /**
      * Deletes a folder using the MediaStore API for Android 10 (API level 29).
      */
@@ -135,6 +143,18 @@ object FolderDeletionHelper {
             Timber.tag("FolderAction").e("RecoverableSecurityException requires API 29 or higher")
         }
     }
+    fun refreshMediaStore(context: Context, folder: File) {
+        MediaScannerConnection.scanFile(
+            context,
+            arrayOf(folder.absolutePath),
+            null
+        ) { path, uri ->
+            Timber.tag("FolderAction").d("MediaStore updated for path: $path, URI: $uri")
+        }
+    }
+
+
+
 
     /**
      * Handles deletion for devices running Android 9 (API level 28) and below.
@@ -203,5 +223,3 @@ object FolderDeletionHelper {
         }
     }
 }
-
-

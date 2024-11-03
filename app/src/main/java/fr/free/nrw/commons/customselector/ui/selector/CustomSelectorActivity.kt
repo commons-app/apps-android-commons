@@ -54,6 +54,8 @@ import fr.free.nrw.commons.customselector.database.NotForUploadStatusDao
 import fr.free.nrw.commons.customselector.helper.CustomSelectorConstants
 import fr.free.nrw.commons.customselector.helper.CustomSelectorConstants.SHOULD_REFRESH
 import fr.free.nrw.commons.customselector.helper.FolderDeletionHelper
+import fr.free.nrw.commons.customselector.helper.FolderDeletionHelper.getFolderPath
+import fr.free.nrw.commons.customselector.helper.FolderDeletionHelper.refreshMediaStore
 import fr.free.nrw.commons.customselector.listeners.FolderClickListener
 import fr.free.nrw.commons.customselector.listeners.ImageSelectListener
 import fr.free.nrw.commons.customselector.model.Image
@@ -168,6 +170,7 @@ class CustomSelectorActivity :
 
 
 
+
     /**
      * onCreate Activity, sets theme, initialises the view model, setup view.
      */
@@ -263,16 +266,23 @@ class CustomSelectorActivity :
             imageFragment?.passSelectedImages(selectedImages, shouldRefresh)
         }
 
-        if (requestCode == 2) {
+        if (requestCode == 2) { // Consistent with handleRecoverableSecurityException
             if (resultCode == Activity.RESULT_OK) {
                 Timber.tag("FolderAction").d("User confirmed deletion")
-                // Retry deletion or refresh UI if needed
-            } else {
-                Timber.tag("FolderAction").e("User denied deletion request")
+                // Retry deletion for the pending files
+                val folderPath = FolderDeletionHelper.getFolderPath(this, bucketId)
+                if (folderPath != null) {
+                    val folder = File(folderPath)
+                    FolderDeletionHelper.deleteFolder(this, folder)
+                    navigateToMainScreen()
+                } else {
+                    Timber.tag("FolderAction").e("User denied deletion request")
+                }
             }
         }
 
     }
+
 
     /**
      * Show Custom Selector Welcome Dialog.
@@ -495,7 +505,6 @@ class CustomSelectorActivity :
         }
     }
 
-
     /**
      * Checks and requests necessary permissions using Dexter library.
      */
@@ -558,7 +567,8 @@ class CustomSelectorActivity :
                         Toast.makeText(this, "Folder deleted", Toast.LENGTH_SHORT).show()
                         Timber.tag("FolderAction").d("Folder deleted successfully")
 
-                        reloadFolderList()
+                        // Navigate back to main FolderFragment after deletion
+                        navigateToMainScreen()
                     } else {
                         Toast.makeText(this, "Failed to delete folder", Toast.LENGTH_SHORT).show()
                         Timber.tag("FolderAction").e("Failed to delete folder")
@@ -574,30 +584,35 @@ class CustomSelectorActivity :
         }
     }
 
-    private fun reloadFolderList() {
-        // Clear any saved state for the last open folder
-        prefs.edit()
-            .remove(FOLDER_ID)
-            .remove(FOLDER_NAME)
-            .apply()
+    /**
+     * Navigate back to the main FolderFragment.
+     */
+    private fun navigateToMainScreen() {
+
+        val folderPath = getFolderPath(this, bucketId) ?: ""
+        val folder = File(folderPath)
 
         supportFragmentManager.popBackStack(null, androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE)
-        supportFragmentManager
-            .beginTransaction()
+
+        // Refresh MediaStore for the deleted folder path to ensure metadata updates
+        refreshMediaStore(this, folder)
+        // Replace the current fragment with FolderFragment to go back to the main screen
+        supportFragmentManager.beginTransaction()
             .replace(R.id.fragment_container, FolderFragment.newInstance())
-            .commit()
+            .commitAllowingStateLoss() // Ensure this transaction executes, even if the activity state is not fully stable
 
-        // Reset the toolbar and other flags
-
+        // Reset toolbar and flags
         isImageFragmentOpen = false
         showOverflowMenu = false
-        fetchData()
         setUpToolbar()
         changeTitle(getString(R.string.custom_selector_title), 0)
+
+        // Fetch updated folder data
+        fetchData()
     }
 
 
-        /**
+    /**
      * override on folder click,
      * change the toolbar title on folder click, make overflow menu visible
      */
