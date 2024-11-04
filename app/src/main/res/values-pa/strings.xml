@@ -207,5 +207,6 @@
   <string name="wikipedia_instructions_step_7">ਲਿਖਤ ਛਾਪੋ</string>
   <string name="leaderboard_tab_title">ਮੁਹਰੈਲ</string>
   <string name="leaderboard_column_user">ਵਰਤੋਂਕਾਰ</string>
+  <string name="location_updated">ਟਿਕਾਣਾ ਨਵਿਆਈਆ ਗਿਆ</string>
   <string name="invalid_login_message">ਤੁਹਾਡੇ ਦਾਖਲੇ ਦੀ ਮਿਆਦ ਪੁੱਗ ਗਈ ਹੈ। ਕਿਰਪਾ ਕਰਕੇ ਦੁਬਾਰਾ ਦਾਖਲ ਹੋਵੋ।</string>
 </resources>
