@@ -98,7 +98,7 @@
   <string name="menu_feedback">ਵਿਚਾਰ ਭੇਜੋ (ਈਮੇਲ ਰਾਹੀਂ)</string>
   <string name="no_email_client">ਕੋਈ ਈਮੇਲ ਸਾਧਨ ਇੰਸਟਾਲ ਨਹੀਂ ਕੀਤਾ ਗਿਆ</string>
   <string name="provider_categories">ਹਾਲ \'ਚ ਵਰਤੀਆਂ ਗਈਆਂ ਸ਼੍ਰੇਣੀਆਂ</string>
-  <string name="waiting_first_sync">ਪਹਿਲੀ ਸਿੰਕ ਲਈ ਉਡੀਕ…</string>
+  <string name="waiting_first_sync">ਪਹਿਲੇ ਸਮਕਾਲੀਕਰਨ ਦੀ ਉਡੀਕ ਕੀਤੀ ਜਾ ਰਹੀ ਹੈ...</string>
   <string name="no_uploads_yet">ਤੁਸੀਂ ਹਾਲੇ ਤੱਕ ਕੋਈ ਤਸਵੀਰਾਂ ਅੱਪਲੋਡ ਨਹੀਂ ਕੀਤੀਆਂ</string>
   <string name="menu_retry_upload">ਮੁੜ-ਕੋਸ਼ਿਸ਼ ਕਰੋ</string>
   <string name="menu_cancel_upload">ਰੱਦ ਕਰੋ</string>

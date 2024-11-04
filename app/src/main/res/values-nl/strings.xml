@@ -131,7 +131,7 @@
   <string name="login_failed_network">Aanmelden niet mogelijk. Er is een probleem met het netwerk</string>
   <string name="login_failed_throttled">Te veel mislukte pogingen. Probeer het over een paar minuten opnieuw.</string>
   <string name="login_failed_blocked">Deze gebruiker is helaas geblokkeerd op Wikimedia Commons</string>
-  <string name="login_failed_2fa_needed">U moet uw code voor tweefactor-authenticatie opgeven.</string>
+  <string name="login_failed_2fa_needed">U moet uw code voor tweetrapsauthenticatie opgeven.</string>
   <string name="login_failed_generic">Aanmelden mislukt</string>
   <string name="share_upload_button">Uploaden</string>
   <string name="multiple_share_base_title">Geef deze verzameling een naam</string>
