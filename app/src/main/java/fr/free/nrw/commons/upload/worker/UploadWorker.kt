@@ -534,7 +534,6 @@ class UploadWorker(
 
     private fun findUniqueFileName(fileName: String): String {
         var sequenceFileName: String? = fileName
-        val chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
         val random = Random()
 
         // Loops until sequenceFileName does not match any existing file names
