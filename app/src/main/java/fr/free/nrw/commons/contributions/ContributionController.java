@@ -45,7 +45,8 @@ public class ContributionController {
     private boolean isInAppCameraUpload;
     public LocationPermissionCallback locationPermissionCallback;
     private LocationPermissionsHelper locationPermissionsHelper;
-    LiveData<PagedList<Contribution>> failedAndPendingContributionList;
+      // originally called by function getFailedAndPendingContributions,comment out to make the Upload Icon always visible(Issue 5847),
+    // LiveData<PagedList<Contribution>> failedAndPendingContributionList;
     LiveData<PagedList<Contribution>> pendingContributionList;
     LiveData<PagedList<Contribution>> failedContributionList;
 
@@ -358,21 +359,23 @@ public class ContributionController {
     }
 
     /**
-     * Fetches the contributions with the state "IN_PROGRESS", "QUEUED", "PAUSED" and "FAILED" and
+     * This section of code was originally used to fetch the contributions with the state "IN_PROGRESS", "QUEUED", "PAUSED" and "FAILED" and
      * then it populates the `failedAndPendingContributionList`.
+     * According to Issue5847 and the owner's request: "make the upload icon always visible and adjust the count accordingly,"
+     * This section of code has been temporarily commented out
      **/
-    void getFailedAndPendingContributions() {
-        final PagedList.Config pagedListConfig =
-            (new PagedList.Config.Builder())
-                .setPrefetchDistance(50)
-                .setPageSize(10).build();
-        Factory<Integer, Contribution> factory;
-        factory = repository.fetchContributionsWithStates(
-            Arrays.asList(Contribution.STATE_IN_PROGRESS, Contribution.STATE_QUEUED,
-                Contribution.STATE_PAUSED, Contribution.STATE_FAILED));
-
-        LivePagedListBuilder livePagedListBuilder = new LivePagedListBuilder(factory,
-            pagedListConfig);
-        failedAndPendingContributionList = livePagedListBuilder.build();
-    }
+//    void getFailedAndPendingContributions() {
+//        final PagedList.Config pagedListConfig =
+//            (new PagedList.Config.Builder())
+//                .setPrefetchDistance(50)
+//                .setPageSize(10).build();
+//        Factory<Integer, Contribution> factory;
+//        factory = repository.fetchContributionsWithStates(
+//            Arrays.asList(Contribution.STATE_IN_PROGRESS, Contribution.STATE_QUEUED,
+//                Contribution.STATE_PAUSED, Contribution.STATE_FAILED));
+//
+//        LivePagedListBuilder livePagedListBuilder = new LivePagedListBuilder(factory,
+//            pagedListConfig);
+//        failedAndPendingContributionList = livePagedListBuilder.build();
+//    }
 }
