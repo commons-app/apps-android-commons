@@ -41,6 +41,8 @@ class EditActivity : AppCompatActivity() {
     private val sourceExifAttributeList = mutableListOf<Pair<String, String?>>()
     private lateinit var binding: ActivityEditBinding
 
+    private final var WRITE_EXTERNAL_STORAGE_PERMISSION_REQUEST_CODE = 7747;
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityEditBinding.inflate(layoutInflater)
@@ -248,9 +250,7 @@ class EditActivity : AppCompatActivity() {
         //Get Permission to access
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
             != PackageManager.PERMISSION_GRANTED) {
-            //The request code 7747 can be change to any other constant, because it was choose randomly.
-            //The random selection is to avoid future duplication of the same code, preventing confusion during debugging.
-            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), 7747)
+            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), WRITE_EXTERNAL_STORAGE_PERMISSION_REQUEST_CODE)
         }
 
         val filePath = imageUri.toUri().path
