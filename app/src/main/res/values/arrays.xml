@@ -25,6 +25,7 @@
         <item>@string/exif_tag_name_serialNumbers</item>
         <item>@string/exif_tag_name_software</item>
     </array>
+
     <array name="pref_exifTag_values">
         <item>@string/exif_tag_author</item>
         <item>@string/exif_tag_copyright</item>

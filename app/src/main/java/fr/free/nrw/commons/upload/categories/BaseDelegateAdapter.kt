@@ -18,6 +18,7 @@ abstract class BaseDelegateAdapter<T>(
                 return areContentsTheSame(oldItem, newItem)
             }
         },
+
         *delegates,
     ) {
     fun addAll(newResults: List<T>) {

@@ -127,13 +127,14 @@ public class NearbyPlaces {
      *
      * @param placeList A list of Place objects for which to fetch information.
      * @param lang      The language code to use for the query.
+     * @param lang2      The serialised secondary language code to use for the query.
      * @return A list of Place objects obtained from the Wikidata query.
      * @throws Exception If an error occurs during the retrieval process.
      */
     public List<Place> getPlaces(final List<Place> placeList,
-        final String lang) throws Exception {
+        final String lang, final String lang2) throws Exception {
         return okHttpJsonApiClient
-            .getPlaces(placeList, lang);
+            .getPlaces(placeList, lang, lang2);
     }
 
     /**
