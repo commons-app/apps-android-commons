@@ -19,6 +19,8 @@ public interface Constants {
         int CAPTURE_VIDEO = FILE_PICKER_IMAGE_IDENTIFICATOR + (1 << 14);
 
         int RECEIVE_DATA_FROM_FULL_SCREEN_MODE = 1 << 9;
+
+        int DELETE_FOLDER_REQUEST_CODE = 1 << 16;
     }
 
     /**

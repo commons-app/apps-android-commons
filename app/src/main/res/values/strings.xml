@@ -832,5 +832,15 @@ Upload your first media by tapping on the add button.</string>
   <string name="pending">Pending</string>
   <string name="failed">Failed</string>
   <string name="could_not_load_place_data">Could not load place data</string>
-  <string name="delete_folder">Delete Folder</string>
+
+  <string name="custom_selector_delete_folder">Delete Folder</string>
+  <string name="custom_selector_confirm_deletion_title">Confirm Deletion</string>
+  <string name="custom_selector_confirm_deletion_message">Are you sure you want to delete folder %1$s containing %2$d items?</string>
+  <string name="custom_selector_delete">Delete</string>
+  <string name="custom_selector_cancel">Cancel</string>
+  <string name="custom_selector_folder_deleted_success">Folder %1$s deleted successfully</string>
+  <string name="custom_selector_folder_deleted_failure">Failed to delete folder %1$s</string>
+  <string name="custom_selector_error_trashing_folder_contents">Error in trashing folder contents: %1$s</string>
+  <string name="custom_selector_folder_not_found_error">Failed to retrieve folder path for bucket ID: %1$d</string>
+
 </resources>

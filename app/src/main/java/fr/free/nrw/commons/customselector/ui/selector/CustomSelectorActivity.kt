@@ -6,19 +6,14 @@ import android.app.Dialog
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
-import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.provider.Settings
 import android.view.View
 import android.view.Window
 import android.widget.Button
 import android.widget.ImageButton
-import android.widget.TextView
 import android.widget.PopupMenu
-import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
-
+import android.widget.TextView
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -43,19 +38,12 @@ import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
-import com.karumi.dexter.Dexter
-import com.karumi.dexter.MultiplePermissionsReport
-import com.karumi.dexter.PermissionToken
-import com.karumi.dexter.listener.PermissionRequest
-import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.customselector.database.NotForUploadStatus
 import fr.free.nrw.commons.customselector.database.NotForUploadStatusDao
 import fr.free.nrw.commons.customselector.helper.CustomSelectorConstants
 import fr.free.nrw.commons.customselector.helper.CustomSelectorConstants.SHOULD_REFRESH
 import fr.free.nrw.commons.customselector.helper.FolderDeletionHelper
-import fr.free.nrw.commons.customselector.helper.FolderDeletionHelper.getFolderPath
-import fr.free.nrw.commons.customselector.helper.FolderDeletionHelper.refreshMediaStore
 import fr.free.nrw.commons.customselector.listeners.FolderClickListener
 import fr.free.nrw.commons.customselector.listeners.ImageSelectListener
 import fr.free.nrw.commons.customselector.model.Image
@@ -67,17 +55,16 @@ import fr.free.nrw.commons.media.ZoomableActivity
 import fr.free.nrw.commons.theme.BaseActivity
 import fr.free.nrw.commons.upload.FileUtilsWrapper
 import fr.free.nrw.commons.utils.CustomSelectorUtils
-import fr.free.nrw.commons.utils.PermissionUtils
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import timber.log.Timber
 import java.io.File
 import java.lang.Integer.max
 import javax.inject.Inject
+
 
 /**
  * Custom Selector Activity.
@@ -164,7 +151,7 @@ class CustomSelectorActivity :
     private var showPartialAccessIndicator by mutableStateOf(false)
 
     /**
-     * Show delete button on folder
+     * Show delete button in folder
      */
     private var showOverflowMenu = false
 
@@ -266,22 +253,17 @@ class CustomSelectorActivity :
             imageFragment?.passSelectedImages(selectedImages, shouldRefresh)
         }
 
-        if (requestCode == 2) { // Consistent with handleRecoverableSecurityException
-            if (resultCode == Activity.RESULT_OK) {
-                Timber.tag("FolderAction").d("User confirmed deletion")
-                // Retry deletion for the pending files
-                val folderPath = FolderDeletionHelper.getFolderPath(this, bucketId)
-                if (folderPath != null) {
-                    val folder = File(folderPath)
-                    FolderDeletionHelper.deleteFolder(this, folder)
-                    navigateToMainScreen()
-                } else {
-                    Timber.tag("FolderAction").e("User denied deletion request")
-                }
-            }
+        if (requestCode == Constants.RequestCodes.DELETE_FOLDER_REQUEST_CODE &&
+            resultCode == Activity.RESULT_OK) {
+
+            FolderDeletionHelper.showSuccess(this, "Folder deleted successfully", bucketName)
+            navigateToCustomSelector()
         }
 
     }
+
+
+
 
 
     /**
@@ -480,11 +462,10 @@ class CustomSelectorActivity :
         val popupMenu = PopupMenu(this, anchorView)
         popupMenu.menuInflater.inflate(R.menu.menu_custom_selector, popupMenu.menu)
 
-        // Handle menu item clicks
         popupMenu.setOnMenuItemClickListener { item ->
             when (item.itemId) {
                 R.id.action_delete_folder -> {
-                    deleteFolderWithPermissions()
+                    deleteFolder()
                     true
                 }
                 else -> false
@@ -494,120 +475,62 @@ class CustomSelectorActivity :
     }
 
     /**
-     * Triggers folder deletion after permission checks.
-     */
-    private fun deleteFolderWithPermissions() {
-        val permissions = PermissionUtils.PERMISSIONS_STORAGE
-        if (PermissionUtils.hasPermission(this, permissions)) {
-            deleteFolderByApiVersion()
-        } else {
-            requestPermissionsIfNeeded()
-        }
-    }
-
-    /**
-     * Checks and requests necessary permissions using Dexter library.
-     */
-    private fun requestPermissionsIfNeeded() {
-        val permissions = PermissionUtils.PERMISSIONS_STORAGE
-
-        Dexter.withActivity(this)
-            .withPermissions(*permissions)
-            .withListener(object : MultiplePermissionsListener {
-                override fun onPermissionsChecked(report: MultiplePermissionsReport) {
-                    if (report.areAllPermissionsGranted()) {
-                        deleteFolderByApiVersion()
-                    } else if (report.isAnyPermissionPermanentlyDenied) {
-                        showSettingsDialog()
-                    } else {
-                        Toast.makeText(
-                            this@CustomSelectorActivity,
-                            "Permissions required to delete folder.",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    }
-                }
-
-                override fun onPermissionRationaleShouldBeShown(
-                    permissions: List<PermissionRequest>,
-                    token: PermissionToken
-                ) {
-                    token.continuePermissionRequest()
-                }
-            }).check()
-    }
-
-    /**
-     * Show a dialog directing the user to settings if permissions are permanently denied.
-     */
-    private fun showSettingsDialog() {
-        AlertDialog.Builder(this)
-            .setTitle("Need Permissions")
-            .setMessage("This app needs storage permissions to delete folders. You can grant them in app settings.")
-            .setPositiveButton("Go to Settings") { _, _ ->
-                val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
-                intent.data = Uri.fromParts("package", packageName, null)
-                startActivity(intent)
-            }
-            .setNegativeButton("Cancel") { dialog, _ -> dialog.dismiss() }
-            .show()
-    }
-
-    /**
      * Deletes folder based on Android API version.
      */
-    private fun deleteFolderByApiVersion() {
-        val folderPath = FolderDeletionHelper.getFolderPath(this, bucketId)
-        if (folderPath != null) {
-            val folder = File(folderPath)
+    private fun deleteFolder() {
+        val folderPath = FolderDeletionHelper.getFolderPath(this, bucketId) ?: run {
+            FolderDeletionHelper.showError(this, "Failed to retrieve folder path", bucketName)
+            return
+        }
 
-            if (folder.exists() && folder.isDirectory) {
-                FolderDeletionHelper.confirmAndDeleteFolder(this, folder) { success ->
-                    if (success) {
-                        Toast.makeText(this, "Folder deleted", Toast.LENGTH_SHORT).show()
-                        Timber.tag("FolderAction").d("Folder deleted successfully")
+        val folder = File(folderPath)
+        if (!folder.exists() || !folder.isDirectory) {
+            FolderDeletionHelper.showError(this,"Folder not found or is not a directory", bucketName)
+            return
+        }
 
-                        // Navigate back to main FolderFragment after deletion
-                        navigateToMainScreen()
-                    } else {
-                        Toast.makeText(this, "Failed to delete folder", Toast.LENGTH_SHORT).show()
-                        Timber.tag("FolderAction").e("Failed to delete folder")
-                    }
+        FolderDeletionHelper.confirmAndDeleteFolder(this, folder) { success ->
+            if (success) {
+                // For API 30+, navigation is handled in 'onActivityResult'
+                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.R) {
+                    FolderDeletionHelper.showSuccess(this, "Folder deleted successfully", bucketName)
+                    navigateToCustomSelector()
                 }
             } else {
-                Toast.makeText(this, "Folder not found", Toast.LENGTH_SHORT).show()
-                Timber.tag("FolderAction").e("Folder not found")
+                FolderDeletionHelper.showError(this, "Failed to delete folder", bucketName)
             }
-        } else {
-            Toast.makeText(this, "Folder path not found", Toast.LENGTH_SHORT).show()
-            Timber.tag("FolderDeletion").e("Failed to retrieve folder path for bucket ID: $bucketId")
         }
     }
 
-    /**
-     * Navigate back to the main FolderFragment.
-     */
-    private fun navigateToMainScreen() {
 
-        val folderPath = getFolderPath(this, bucketId) ?: ""
+
+    /**
+     * Navigates back to the main `FolderFragment`, refreshes the MediaStore, resets UI states,
+     * and reloads folder data.
+     */
+    private fun navigateToCustomSelector() {
+
+        val folderPath = FolderDeletionHelper.getFolderPath(this, bucketId) ?: ""
         val folder = File(folderPath)
 
-        supportFragmentManager.popBackStack(null, androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE)
+        supportFragmentManager.popBackStack(null,
+                                androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE)
 
-        // Refresh MediaStore for the deleted folder path to ensure metadata updates
-        refreshMediaStore(this, folder)
-        // Replace the current fragment with FolderFragment to go back to the main screen
+        //refresh MediaStore for the deleted folder path to ensure metadata updates
+        FolderDeletionHelper.refreshMediaStore(this, folder)
+
+        //replace the current fragment with FolderFragment to go back to the main screen
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragment_container, FolderFragment.newInstance())
-            .commitAllowingStateLoss() // Ensure this transaction executes, even if the activity state is not fully stable
+            .commitAllowingStateLoss()
 
-        // Reset toolbar and flags
+        //reset toolbar and flags
         isImageFragmentOpen = false
         showOverflowMenu = false
         setUpToolbar()
         changeTitle(getString(R.string.custom_selector_title), 0)
 
-        // Fetch updated folder data
+        //fetch updated folder data
         fetchData()
     }
 
@@ -634,7 +557,7 @@ class CustomSelectorActivity :
         bucketName = folderName
         isImageFragmentOpen = true
 
-        // Show the overflow menu only when a folder is clicked
+        //show the overflow menu only when a folder is clicked
         showOverflowMenu = true
         setUpToolbar()
 
@@ -821,7 +744,9 @@ fun partialStorageAccessIndicator(
             border = BorderStroke(0.5.dp, color = colorResource(R.color.primaryColor)),
             shape = RoundedCornerShape(8.dp),
         ) {
-            Row(modifier = Modifier.padding(16.dp).fillMaxWidth()) {
+            Row(modifier = Modifier
+                .padding(16.dp)
+                .fillMaxWidth()) {
                 Text(
                     text = "You've given access to a select number of photos",
                     modifier = Modifier.weight(1f),

@@ -1,59 +1,136 @@
 package fr.free.nrw.commons.customselector.helper
 
-import android.Manifest
 import android.app.Activity
-import android.app.RecoverableSecurityException
 import android.content.ContentUris
 import android.content.Context
-import android.content.IntentSender
-import android.content.pm.PackageManager
 import android.media.MediaScannerConnection
 import android.net.Uri
 import android.os.Build
 import android.provider.MediaStore
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import androidx.core.content.ContextCompat
+import fr.free.nrw.commons.R
+import fr.free.nrw.commons.filepicker.Constants
 import timber.log.Timber
 import java.io.File
 
 object FolderDeletionHelper {
 
     /**
-     * Main function to confirm and delete a folder.
+     * Prompts the user to confirm deletion of a specified folder and, if confirmed, deletes it.
+     *
+     * @param context The context used to show the confirmation dialog and manage deletion.
+     * @param folder The folder to be deleted.
+     * @param onDeletionComplete Callback invoked with `true` if the folder was
+     * successfully deleted, `false` otherwise.
      */
     fun confirmAndDeleteFolder(context: Context, folder: File, onDeletionComplete: (Boolean) -> Unit) {
         val itemCount = countItemsInFolder(context, folder)
         val folderPath = folder.absolutePath
 
-        // Show confirmation dialog
-        AlertDialog.Builder(context)
-            .setTitle("Confirm Deletion")
-            .setMessage("Are you sure you want to delete the folder?\n\nPath: $folderPath\nItems: $itemCount")
-            .setPositiveButton("Delete") { _, _ ->
-                // Proceed with deletion if user confirms
-                val success = deleteFolder(context, folder)
-                onDeletionComplete(success)
-            }
-            .setNegativeButton("Cancel") { dialog, _ ->
-                dialog.dismiss()
-                onDeletionComplete(false) // Return false if the user cancels
-            }
-            .show()
+        //don't show this dialog on API 30+, it's handled automatically using MediaStore
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            val success = deleteFolderMain(context, folder)
+            onDeletionComplete(success)
+
+        } else {
+            AlertDialog.Builder(context)
+                .setTitle(context.getString(R.string.custom_selector_confirm_deletion_title))
+                .setMessage(context.getString(R.string.custom_selector_confirm_deletion_message, folderPath, itemCount))
+                .setPositiveButton(context.getString(R.string.custom_selector_delete)) { _, _ ->
+
+                    //proceed with deletion if user confirms
+                    val success = deleteFolderMain(context, folder)
+                    onDeletionComplete(success)
+                }
+                .setNegativeButton(context.getString(R.string.custom_selector_cancel)) { dialog, _ ->
+                    dialog.dismiss()
+                    onDeletionComplete(false)
+                }
+                .show()
+        }
     }
 
     /**
-     * Delete the folder based on the Android version.
+     * Deletes the specified folder, handling different Android storage models based on the API
+     *
+     * @param context The context used to manage storage operations.
+     * @param folder The folder to delete.
+     * @return `true` if the folder deletion was successful, `false` otherwise.
      */
-   fun deleteFolder(context: Context, folder: File): Boolean {
+    private fun deleteFolderMain(context: Context, folder: File): Boolean {
         return when {
-            Build.VERSION.SDK_INT >= Build.VERSION_CODES.R -> deleteFolderScopedStorage(context, folder)
-            Build.VERSION.SDK_INT == Build.VERSION_CODES.Q -> deleteFolderMediaStore(context, folder)
+            //for API 30 and above, use MediaStore
+            Build.VERSION.SDK_INT >= Build.VERSION_CODES.R -> trashFolderContents(context, folder)
+
+            //for API 29 ('requestLegacyExternalStorage' is set to true in Manifest)
+            // and below use file system
             else -> deleteFolderLegacy(folder)
         }
     }
 
     /**
-     * Count the number of items in the folder, including subfolders.
+     * Moves all contents of a specified folder to the trash on devices running
+     * Android 11 (API level 30) and above.
+     *
+     * @param context The context used to access the content resolver.
+     * @param folder The folder whose contents are to be moved to the trash.
+     * @return `true` if the trash request was initiated successfully, `false` otherwise.
+     */
+    private fun trashFolderContents(context: Context, folder: File): Boolean {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.R) return false
+
+        val contentResolver = context.contentResolver
+        val folderPath = folder.absolutePath
+        val urisToTrash = mutableListOf<Uri>()
+
+        // Use URIs specific to media items
+        val mediaUris = listOf(
+            MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+            MediaStore.Video.Media.EXTERNAL_CONTENT_URI,
+            MediaStore.Audio.Media.EXTERNAL_CONTENT_URI
+        )
+
+        for (mediaUri in mediaUris) {
+            val selection = "${MediaStore.MediaColumns.DATA} LIKE ?"
+            val selectionArgs = arrayOf("$folderPath/%")
+
+            contentResolver.query(mediaUri, arrayOf(MediaStore.MediaColumns._ID), selection,
+                selectionArgs, null)
+                ?.use{ cursor ->
+                val idColumn = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns._ID)
+                while (cursor.moveToNext()) {
+                    val id = cursor.getLong(idColumn)
+                    val fileUri = ContentUris.withAppendedId(mediaUri, id)
+                    urisToTrash.add(fileUri)
+                }
+            }
+        }
+
+        //proceed with trashing if we have valid URIs
+        if (urisToTrash.isNotEmpty()) {
+            try {
+                val trashRequest = MediaStore.createTrashRequest(contentResolver, urisToTrash, true)
+                (context as? Activity)?.startIntentSenderForResult(
+                    trashRequest.intentSender,
+                    Constants.RequestCodes.DELETE_FOLDER_REQUEST_CODE,
+                    null, 0, 0, 0
+                )
+                return true
+            } catch (e: SecurityException) {
+                Timber.tag("DeleteFolder").e(context.getString(R.string.custom_selector_error_trashing_folder_contents, e.message))
+            }
+        }
+        return false
+    }
+
+
+    /**
+     * Counts the number of items in a specified folder, including items in subfolders.
+     *
+     * @param context The context used to access the content resolver.
+     * @param folder The folder in which to count items.
+     * @return The total number of items in the folder.
      */
     private fun countItemsInFolder(context: Context, folder: File): Int {
         val contentResolver = context.contentResolver
@@ -62,116 +139,52 @@ object FolderDeletionHelper {
         val selection = "${MediaStore.Images.Media.DATA} LIKE ?"
         val selectionArgs = arrayOf("$folderPath/%")
 
-        return contentResolver.query(uri, arrayOf(MediaStore.Images.Media._ID), selection, selectionArgs, null)?.use { cursor ->
+        return contentResolver.query(
+            uri,
+            arrayOf(MediaStore.Images.Media._ID),
+            selection,
+            selectionArgs,
+            null)?.use { cursor ->
             cursor.count
         } ?: 0
     }
-    /**
-     * Deletes a folder using the Scoped Storage API for Android 11 (API level 30) and above.
-     */
-    private fun deleteFolderScopedStorage(context: Context, folder: File): Boolean {
-        Timber.tag("FolderAction").d("Deleting folder using Scoped Storage API")
 
-        // Implement deletion with Scoped Storage; fallback to recursive delete
-        return folder.deleteRecursively().also {
-            if (!it) {
-                Timber.tag("FolderAction").e("Failed to delete folder with Scoped Storage API")
-            }
-        }
-    }
 
 
     /**
-     * Deletes a folder using the MediaStore API for Android 10 (API level 29).
+     * Refreshes the MediaStore for a specified folder, updating the system to recognize any changes
+     *
+     * @param context The context used to access the MediaScannerConnection.
+     * @param folder The folder to refresh in the MediaStore.
      */
-    fun deleteFolderMediaStore(context: Context, folder: File): Boolean {
-        Timber.tag("FolderAction").d("Deleting folder using MediaStore API on Android 10")
-
-        val contentResolver = context.contentResolver
-        val folderPath = folder.absolutePath
-        var deletionSuccessful = true
-
-        val uri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI
-        val selection = "${MediaStore.Images.Media.DATA} LIKE ?"
-        val selectionArgs = arrayOf("$folderPath/%")
-
-        contentResolver.query(uri, arrayOf(MediaStore.Images.Media._ID), selection, selectionArgs, null)?.use { cursor ->
-            val idColumn = cursor.getColumnIndexOrThrow(MediaStore.Images.Media._ID)
-
-            while (cursor.moveToNext()) {
-                val id = cursor.getLong(idColumn)
-                val imageUri = ContentUris.withAppendedId(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, id)
-
-                try {
-                    val rowsDeleted = contentResolver.delete(imageUri, null, null)
-                    if (rowsDeleted <= 0) {
-                        Timber.tag("FolderAction").e("Failed to delete image with URI: $imageUri")
-                        deletionSuccessful = false
-                    }
-                } catch (e: Exception) {
-                    // Handle RecoverableSecurityException only for API 29 and above
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q && e is RecoverableSecurityException) {
-                        handleRecoverableSecurityException(context, e)
-                        deletionSuccessful = false
-                    } else {
-                        Timber.tag("FolderAction").e("Error deleting file: ${e.message}")
-                        deletionSuccessful = false
-                    }
-                }
-            }
-        }
-
-        return deletionSuccessful
-    }
-
-    /**
-     * Handles the RecoverableSecurityException for deletion requests requiring user confirmation.
-     */
-    private fun handleRecoverableSecurityException(context: Context, e: RecoverableSecurityException) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-            try {
-                val intentSender = e.userAction.actionIntent.intentSender
-                (context as? Activity)?.startIntentSenderForResult(
-                    intentSender,
-                    2,
-                    null, 0, 0, 0
-                )
-            } catch (ex: IntentSender.SendIntentException) {
-                Timber.tag("FolderAction").e("Error sending intent for deletion: ${ex.message}")
-            }
-        } else {
-            Timber.tag("FolderAction").e("RecoverableSecurityException requires API 29 or higher")
-        }
-    }
     fun refreshMediaStore(context: Context, folder: File) {
         MediaScannerConnection.scanFile(
             context,
             arrayOf(folder.absolutePath),
             null
-        ) { path, uri ->
-            Timber.tag("FolderAction").d("MediaStore updated for path: $path, URI: $uri")
-        }
+        ) { _, _ -> }
     }
 
 
 
-
     /**
-     * Handles deletion for devices running Android 9 (API level 28) and below.
+     * Deletes a specified folder and all of its contents on devices running
+     * Android 10 (API level 29) and below.
+     *
+     * @param folder The `File` object representing the folder to be deleted.
+     * @return `true` if the folder and all contents were deleted successfully; `false` otherwise.
      */
     private fun deleteFolderLegacy(folder: File): Boolean {
-        return folder.deleteRecursively().also {
-            if (it) {
-                Timber.tag("FolderAction").d("Folder deleted successfully")
-            } else {
-                Timber.tag("FolderAction").e("Failed to delete folder")
-            }
-        }
+        return folder.deleteRecursively()
     }
 
 
     /**
-     * Retrieves the path of the folder with the specified ID from the MediaStore.
+     * Retrieves the absolute path of a folder given its unique identifier (bucket ID).
+     *
+     * @param context The context used to access the content resolver.
+     * @param folderId The unique identifier (bucket ID) of the folder.
+     * @return The absolute path of the folder as a `String`, or `null` if the folder is not found.
      */
     fun getFolderPath(context: Context, folderId: Long): String? {
         val projection = arrayOf(MediaStore.Images.Media.DATA)
@@ -190,36 +203,35 @@ object FolderDeletionHelper {
                 return File(fullPath).parent
             }
         }
-        Timber.tag("FolderDeletion").d("Path is null for folder ID: $folderId")
         return null
     }
 
-
-    fun printCurrentPermissions(context: Context) {
-        val permissions = mutableListOf(
-            Manifest.permission.READ_EXTERNAL_STORAGE,
-            Manifest.permission.WRITE_EXTERNAL_STORAGE,
-            Manifest.permission.ACCESS_FINE_LOCATION,
-            Manifest.permission.ACCESS_COARSE_LOCATION
-        )
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            permissions.add(Manifest.permission.READ_MEDIA_IMAGES)
-            permissions.add(Manifest.permission.ACCESS_MEDIA_LOCATION)
-        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-            permissions.add(Manifest.permission.READ_EXTERNAL_STORAGE)
-            permissions.add(Manifest.permission.ACCESS_MEDIA_LOCATION)
-        } else {
-            permissions.add(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-        }
-
-        for (permission in permissions) {
-            val status = if (ContextCompat.checkSelfPermission(context, permission) == PackageManager.PERMISSION_GRANTED) {
-                "GRANTED"
-            } else {
-                "DENIED"
-            }
-            Timber.tag("PermissionsStatus").d("$permission: $status")
-        }
+    /**
+     * Displays an error message to the user and logs it for debugging purposes.
+     *
+     * @param context The context used to display the Toast.
+     * @param message The error message to display and log.
+     * @param folderName The name of the folder to delete.
+     */
+    fun showError(context: Context, message: String, folderName: String) {
+        Toast.makeText(context,
+            context.getString(R.string.custom_selector_folder_deleted_failure, folderName),
+            Toast.LENGTH_SHORT).show()
+        Timber.tag("DeleteFolder").e(message)
     }
+
+    /**
+     * Displays a success message to the user.
+     *
+     * @param context The context used to display the Toast.
+     * @param message The success message to display.
+     * @param folderName The name of the folder to delete.
+     */
+    fun showSuccess(context: Context, message: String, folderName: String) {
+        Toast.makeText(context,
+            context.getString(R.string.custom_selector_folder_deleted_success, folderName),
+            Toast.LENGTH_SHORT).show()
+        Timber.tag("DeleteFolder").d(message)
+    }
+
 }
