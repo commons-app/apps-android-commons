@@ -44,9 +44,9 @@
   <string name="forgot_password">Vajáldahttetgo beassansáni?</string>
   <string name="signup">Searvva</string>
   <string name="logging_in_title">Čáliha sisa</string>
-  <string name="logging_in_message">Vuordil…</string>
+  <string name="logging_in_message">Vuordil...</string>
   <string name="updating_caption_title">Ođasmáhttá govvateavsttaid ja govvádusaid</string>
-  <string name="updating_caption_message">Vuordil…</string>
+  <string name="updating_caption_message">Vuordil...</string>
   <string name="login_success">Sisačáliheapmi lihkostuvai!</string>
   <string name="login_failed">Sisačáliheapmi ii lihkostuvvan!</string>
   <string name="upload_failed">Fiila ii gávdnon. Geahččal áinnas eará fiilla.</string>
@@ -112,7 +112,7 @@
   <string name="menu_feedback">Atte máhcahaga (e-poasttain)</string>
   <string name="no_email_client">Ii leat ásahuvvon epoastadoaimmaheaddji</string>
   <string name="provider_categories">Áitto geavahuvvon kategoriijat</string>
-  <string name="waiting_first_sync">Vuordime vuosttaš synkroniserema…</string>
+  <string name="waiting_first_sync">Vuordime vuosttaš synkroniserema...</string>
   <string name="no_uploads_yet">It leat vel bajásluđen ovttage gova.</string>
   <string name="menu_retry_upload">Geahččal ođđasit</string>
   <string name="menu_cancel_upload">Gaskkalduhte</string>
@@ -143,7 +143,7 @@
   <string name="welcome_final_button_text">Jua!</string>
   <string name="welcome_help_button_text">Lassedieđut</string>
   <string name="detail_panel_cats_label">Kategoriijat</string>
-  <string name="detail_panel_cats_loading">Luđeme…</string>
+  <string name="detail_panel_cats_loading">Luđeme...</string>
   <string name="detail_panel_cats_none">Ii guhtege válljejuvvon</string>
   <string name="detail_caption_empty">Ii leat govvateaksta</string>
   <string name="detail_description_empty">Ii gávdno govvádus</string>

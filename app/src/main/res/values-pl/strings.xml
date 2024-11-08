@@ -508,7 +508,7 @@
   <string name="menu_option_read">Zobacz przeczytane</string>
   <string name="menu_option_unread">Wyświetl nieprzeczytane</string>
   <string name="error_occurred_in_picking_images">Wystąpił błąd podczas pobierania zdjęć</string>
-  <string name="please_wait">Proszę czekać…</string>
+  <string name="please_wait">Proszę czekać...</string>
   <string name="images_featured_explanation">Polecane zdjęcia to zdjęcia wysoko wykwalifikowanych fotografów i ilustratorów, które społeczność Wikimedia Commons wybrała jako jedne z najwyższych jakości na stronie.</string>
   <string name="images_via_nearby_explanation">Obrazy przesłane przez Pobliskie miejsca to obrazy, które są przesyłane przez odkrywanie miejsc na mapie.</string>
   <string name="thanks_received_explanation">Ta funkcja umożliwia redaktorom wysyłanie powiadomień z podziękowaniem do użytkowników, którzy dokonują przydatnych zmian - za pomocą małego linku z podziękowaniem na stronie historii lub na stronie diff.</string>
@@ -769,6 +769,8 @@
   <string name="set_up_avatar_toast_string">Aby skonfigurować swojego awatara rankingu, dotknij \'Ustaw jako awatar\' w menu z trzema kropkami dowolnego obrazu.</string>
   <string name="similar_coordinate_description_auto_set">Współrzędne nie są dokładnymi współrzędnymi, ale osoba, która przesłała to zdjęcie, uważa, że są wystarczająco blisko.</string>
   <string name="unable_to_share_upload_item">Nie można udostępnić tego elementu</string>
+  <string name="learn_how_to_write_a_useful_description">Przeczytaj jak napisać użyteczny opis</string>
+  <string name="learn_how_to_write_a_useful_caption">Przeczytaj jak napisać użyteczny podpis</string>
   <string name="edit_image">Edytuj obraz</string>
   <string name="edit_location">Edytuj lokalizację</string>
   <string name="location_updated">Lokalizacja zaktualizowana!</string>

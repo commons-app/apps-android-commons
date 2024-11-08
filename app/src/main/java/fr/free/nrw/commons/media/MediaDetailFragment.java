@@ -272,6 +272,12 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
 
         if (!sessionManager.isUserLoggedIn()) {
             binding.categoryEditButton.setVisibility(GONE);
+            binding.descriptionEdit.setVisibility(GONE);
+            binding.depictionsEditButton.setVisibility(GONE);
+        } else {
+            binding.categoryEditButton.setVisibility(VISIBLE);
+            binding.descriptionEdit.setVisibility(VISIBLE);
+            binding.depictionsEditButton.setVisibility(VISIBLE);
         }
 
         if(applicationKvStore.getBoolean("login_skipped")){
@@ -400,7 +406,6 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
             }
         );
         binding.progressBarEdit.setVisibility(GONE);
-        binding.descriptionEdit.setVisibility(VISIBLE);
     }
 
     @Override
@@ -678,7 +683,9 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
             // Stick in a filler element.
             allCategories.add(getString(R.string.detail_panel_cats_none));
         }
-        binding.categoryEditButton.setVisibility(VISIBLE);
+        if(sessionManager.isUserLoggedIn()) {
+            binding.categoryEditButton.setVisibility(VISIBLE);
+        }
         rebuildCatList(allCategories);
     }
 

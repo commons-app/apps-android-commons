@@ -22,6 +22,7 @@
     <item quantity="other">%1$d lêers aan die uploaden</item>
   </plurals>
   <plurals name="contributions_subtitle" fuzzy="true">
+    <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
@@ -147,7 +148,7 @@
   <string name="welcome_final_button_text">Ja!</string>
   <string name="welcome_help_button_text" fuzzy="true">&lt;u&gt;Meer inligting&lt;/u&gt;</string>
   <string name="detail_panel_cats_label">Kategorieë</string>
-  <string name="detail_panel_cats_loading">Laai …</string>
+  <string name="detail_panel_cats_loading">Laai ...</string>
   <string name="detail_panel_cats_none">Niks gekies nie</string>
   <string name="detail_description_empty">Geen beskrywing</string>
   <string name="detail_discussion_empty">Geen bespreking nie</string>

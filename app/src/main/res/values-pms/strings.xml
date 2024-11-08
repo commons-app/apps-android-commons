@@ -477,7 +477,7 @@
   <string name="menu_option_read">Vëdde lòn ch\'a l\'é stàit lesù</string>
   <string name="menu_option_unread">Vëdde lòn ch\'a l\'é ancor nen ëstàit lesù</string>
   <string name="error_occurred_in_picking_images">A-i é staje n\'eror an selessionand le plance</string>
-  <string name="please_wait">Ch\'a l\'abia passiensa…</string>
+  <string name="please_wait">Ch\'a l\'abia passiensa...</string>
   <string name="images_featured_explanation">Le fòto an evidensa a son ëd plance fàite da dij fotògraf e ilustrator motobin àbij che la comunità ëd Wikipedia Commons a l\'ha sernù tra cole ëd qualità pi àuta an sël sit.</string>
   <string name="images_via_nearby_explanation">Le plance carià dai pòst ëd prossimità a son le plance carià con la dëscuverta dij pòst an sla carta.</string>
   <string name="thanks_received_explanation">Costa fonsionalità a përmet ai contributor ëd mandé na notìfica d\'aringrassiament a j\'utent ch\'a fan dle modìfiche ùtij -  an dovrand na cita liura d\'aringrassiament an sla pàgina dla stòria o cola dle diferense.</string>
@@ -499,7 +499,7 @@
   <string name="media_location_permission_denied">Acess a la locassion dël mojen arfudà</string>
   <string name="add_location_manually">I podoma pa oten-e an automàtich ij dàit ëd localisassion dle plance che chiel a caria. Për piasì, ch\'a giontà la posission apropià për tute le plance prima ëd mandeje</string>
   <string name="share_text">Ch\'a caria dle fòto su Wikimedia Commons diretaman da sò teléfon. Ch\'a dëscaria l\'aplicassion Commons adess: %1$s</string>
-  <string name="share_via">Partagé l\'aplicassion via…</string>
+  <string name="share_via">Partagé l\'aplicassion via...</string>
   <string name="image_info">Anformassion an sla plancia</string>
   <string name="no_categories_found">Gnun-e categorìe trovà</string>
   <string name="no_depiction_found">Gnun-e descrission trovà</string>
@@ -776,9 +776,12 @@
   <string name="other_problem_or_information_please_explain_below">Àutr problema o anformassion (për piasì, ch\'a spiega sì-sota).</string>
   <string name="feedback_destination_note">Ij sò sugeriment a saran giontà a coste pàgine wiki:  &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Mobile_app/Feedback\"&gt;Commons:Mobile app/Feedback&lt;/a&gt;</string>
   <string name="are_you_sure_that_you_want_cancel_all_the_uploads">É-lo sigur ëd vorèj anulé tuti ij cariament?</string>
-  <string name="cancelling_all_the_uploads">Anulament ëd tuti ij cariament…</string>
+  <string name="cancelling_all_the_uploads">Anulament ëd tuti ij cariament...</string>
   <string name="uploads">Cariament</string>
   <string name="pending">An atèisa</string>
   <string name="failed">Falì</string>
   <string name="could_not_load_place_data">Impossìbil carié ij dàit dël pòst</string>
+  <string name="red_pin">Ës pòst a l\'ha ancor gnun-e fòto, ch\'a na pija un-a!</string>
+  <string name="green_pin">Ës pòst a l\'ha già dle fòto.</string>
+  <string name="grey_pin">An camin ch\'as verìfica si cost pòst -sì a l\'ha dle fòto.</string>
 </resources>

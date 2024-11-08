@@ -29,7 +29,7 @@
   <string name="login">Wlogùjë mie</string>
   <string name="signup">Wregistrëjë sã</string>
   <string name="logging_in_title">Logòwanié</string>
-  <string name="logging_in_message">Proszã żdac…</string>
+  <string name="logging_in_message">Proszã żdac...</string>
   <string name="login_success" fuzzy="true">Ùdałi logòwanié!</string>
   <string name="login_failed" fuzzy="true">Logòwanié nie darzëło sã!</string>
   <string name="upload_failed">Felënk lopka. Proszã spróbòwac znowa.</string>
@@ -78,7 +78,7 @@
   <string name="menu_feedback">Sélôj òpinijã (przez e-mail)</string>
   <string name="no_email_client">Felënk wjinstalowónegò e-mailowégò klienta</string>
   <string name="provider_categories">Slédno ùżëwóne kategòrëje</string>
-  <string name="waiting_first_sync">Żdanié na pierszą synchronizacëjã…</string>
+  <string name="waiting_first_sync">Żdanié na pierszą synchronizacëjã...</string>
   <string name="no_uploads_yet">Nie môsz jesz wladowónych òdjimków</string>
   <string name="menu_retry_upload">Próbùjë znowa</string>
   <string name="menu_cancel_upload">Òprzestóń</string>
@@ -99,7 +99,7 @@
   <string name="tutorial_4_text">Przëmiôr wladënka:</string>
   <string name="welcome_final_button_text">Jo!</string>
   <string name="detail_panel_cats_label">Kategòrëje</string>
-  <string name="detail_panel_cats_loading">Wladënk…</string>
+  <string name="detail_panel_cats_loading">Wladënk...</string>
   <string name="detail_panel_cats_none">Felënk nacéchòwaniô</string>
   <string name="detail_description_empty">Felënk òpisënka</string>
   <string name="detail_license_empty">Nieznónô licencëja</string>

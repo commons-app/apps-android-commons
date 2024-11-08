@@ -64,7 +64,7 @@
   <string name="app_name">Викиларма</string>
   <string name="menu_settings">Параметраш</string>
   <string name="intent_share_upload_label">Викиларма чуйаккха</string>
-  <string name="upload_in_progress">ДӀадоьдуш ду чуйаккхар…</string>
+  <string name="upload_in_progress">ДӀадоьдуш ду чуйаккхар...</string>
   <string name="username">Декъашхочун цӀе</string>
   <string name="password">Пароль</string>
   <string name="login_credential">Commons Beta тӀехь хьай цӀарца чугӀо</string>
@@ -146,7 +146,7 @@
   <string name="tutorial_4_subtext_1">ЦӀе: Сиднейн операн театр</string>
   <string name="welcome_final_button_text">ХӀаъ!</string>
   <string name="detail_panel_cats_label">Категореш</string>
-  <string name="detail_panel_cats_loading">Чуйолуш…</string>
+  <string name="detail_panel_cats_loading">Чуйолуш...</string>
   <string name="detail_panel_cats_none">ХӀума хаьржина йац</string>
   <string name="detail_caption_empty">Куьг доцуш</string>
   <string name="detail_description_empty">Хаамаш бац</string>
@@ -297,7 +297,7 @@
   <string name="exif_tag_name_serialNumbers">Серийн лоьмар</string>
   <string name="exif_tag_name_software">Программан кхачам</string>
   <string name="media_location_permission_denied">Файл йолу меттиган тӀекхача бакъо ца ло</string>
-  <string name="share_via">Йекъа программа, гӀоьнца…</string>
+  <string name="share_via">Йекъа программа, гӀоьнца...</string>
   <string name="image_info">Суьртан информаци</string>
   <string name="no_categories_found">Цхьа а категори ца карийна.</string>
   <string name="no_depiction_found">Цхьа а хаам ца карийна.</string>
@@ -362,7 +362,7 @@
   <string name="remove_bookmark">ДӀайаьккхина закладки йукъара</string>
   <string name="wallpaper_set_unsuccessfully">Цхьа хӀума галдаьлла. Фонан сурт хӀотто аьтто ца баьлла</string>
   <string name="setting_wallpaper_dialog_title">Фонан сурт санна хӀоттайе</string>
-  <string name="setting_wallpaper_dialog_message">Фонан сурт дӀахӀоттош ду…</string>
+  <string name="setting_wallpaper_dialog_message">Фонан сурт дӀахӀоттош ду...</string>
   <string name="theme_default_name">Системин нисдаран гӀирс</string>
   <string name="theme_dark_name">Бодане</string>
   <string name="theme_light_name">Сирла</string>

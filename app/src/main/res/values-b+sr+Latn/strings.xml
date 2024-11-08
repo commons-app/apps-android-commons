@@ -5,7 +5,7 @@
 * Milicevic01
 * Zoranzoki21
 -->
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
   <string name="commons_facebook">Fejsbuk stranica Ostave</string>
   <string name="commons_github">Izvorni kod na Github-u</string>
   <string name="commons_logo">Logo Ostave</string>
@@ -26,39 +26,32 @@
   <string name="appwidget_img">Slika dana</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">%1$d datoteka se otprema</item>
-    <item quantity="few">%1$d datoteke se otpremaju</item>
     <item quantity="other">%1$d datoteke se otpremaju</item>
   </plurals>
   <plurals name="contributions_subtitle">
     <item quantity="one">%1$d otpremanje</item>
-    <item quantity="few">%1$d otpremanja</item>
     <item quantity="other">%1$d otpremanja</item>
   </plurals>
   <string name="starting_uploads">Pokretanje otpremanja</string>
   <plurals name="starting_multiple_uploads">
     <item quantity="one">Procesuiranje %d otpremanje</item>
-    <item quantity="few">Procesuiranje %d otpremanja</item>
     <item quantity="other">Procesuiranje %d otpremanja</item>
   </plurals>
   <plurals name="multiple_uploads_title">
     <item quantity="one">%d otpremanje</item>
-    <item quantity="few">%d otpremanja</item>
     <item quantity="other">%d otpremanja</item>
   </plurals>
   <plurals name="share_license_summary">
     <item quantity="one">Slika će se voditi pod licencom %1$s</item>
-    <item quantity="few">Slike će se voditi pod licencom %1$s</item>
     <item quantity="other">Slike će se voditi pod licencom %1$s</item>
   </plurals>
   <plurals name="upload_count_title">
     <item quantity="one">%1$d otpremanje</item>
-    <item quantity="few">%1$d otpremanja</item>
     <item quantity="other">%1$d otpremanja</item>
   </plurals>
   <plurals name="receiving_shared_content">
-    <item quantity="one" tools:ignore="ImpliedQuantity">Primanje deljenog sadržaja… Procesuiranje slike može potrajati neko vreme, u zavisnosti od veličine slike i vašeg uređaja</item>
-    <item quantity="few">Primanje deljenog sadržaja… Procesuiranje slika može potrajati neko vreme, u zavisnosti od veličine slika i vašeg uređaja</item>
-    <item quantity="other">Primanje deljenog sadržaja… Procesuiranje slika može potrajati neko vreme, u zavisnosti od veličine slika i vašeg uređaja</item>
+    <item quantity="one">Primanje deljenog sadržaja... Procesuiranje slike može potrajati neko vreme, u zavisnosti od veličine slike i vašeg uređaja</item>
+    <item quantity="other">Primanje deljenog sadržaja... Procesuiranje slika može potrajati neko vreme, u zavisnosti od veličine slika i vašeg uređaja</item>
   </plurals>
   <string name="navigation_item_explore">Istraga</string>
   <string name="preference_category_appearance">Izgled</string>
@@ -493,7 +486,7 @@
   <string name="media_location_permission_denied">Pristup lokaciji medija je odbijen</string>
   <string name="add_location_manually">Možda nećemo moći da automatski pribavimo podatke o lokaciji iz slika koje otpremite. Dodajte odgovarajuću lokaciju za svaku sliku pre objavljivanja</string>
   <string name="share_text">Otpremi fotografije na Vikimedijinu Ostavu direktno sa svog telefona. Preuzmi aplikaciju Ostave sada: %1$s</string>
-  <string name="share_via">Podeli aplikaciju preko…</string>
+  <string name="share_via">Podeli aplikaciju preko...</string>
   <string name="image_info">Informacije o slici</string>
   <string name="no_categories_found">Nisu pronađene kategorije</string>
   <string name="upload_cancelled">Otkazano otpremanje</string>
@@ -518,13 +511,12 @@
   <string name="category_edit_helper_show_edit_title_success">Uspešno</string>
   <plurals name="category_edit_helper_show_edit_message_if">
     <item quantity="one">Kategorija %1$s je dodata.</item>
-    <item quantity="few">Kategorije %1$s su dodate.</item>
     <item quantity="other">Kategorije %1$s su dodate.</item>
   </plurals>
   <string name="category_edit_helper_edit_message_else">Nije moguće dodati kategorije.</string>
   <string name="category_edit_button_text">Ažuriraj kategoriju</string>
   <string name="depictions_edit_helper_show_edit_title">Uredi prikaze</string>
-  <string name="coordinates_edit_helper_make_edit_toast">Pokušavanje promena koordinata…</string>
+  <string name="coordinates_edit_helper_make_edit_toast">Pokušavanje promena koordinata...</string>
   <string name="coordinates_edit_helper_show_edit_title">Ažuriranje koordinata</string>
   <string name="description_edit_helper_show_edit_title">Ažuriranje opisa</string>
   <string name="caption_edit_helper_show_edit_title">Ažuriranje natpisa</string>
@@ -706,7 +698,6 @@
   <string name="unable_to_share_upload_item">Nije moguće podeliti ovu stavku</string>
   <plurals name="custom_picker_images_selected_title_appendix">
     <item quantity="one">%d slika je odabrana</item>
-    <item quantity="few">%d slika je odabrano</item>
     <item quantity="other">%d slika je odabrano</item>
   </plurals>
 </resources>

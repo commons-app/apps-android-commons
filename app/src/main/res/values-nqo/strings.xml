@@ -51,9 +51,9 @@
   <string name="forgot_password">ߌ ߓߘߊ߫ ߢߌ߬ߣߊ߬ ߌ ߟߊ߫ ߕߊ߬ߡߌ߲߬ߞߊ߲ ߠߊ߫؟</string>
   <string name="signup">ߖߊ߬ߕߋ߬ߘߊ ߟߊߞߊ߬</string>
   <string name="logging_in_title">ߜߊ߲߬ߞߎ߲߬ߠߌ߲ ߦߋ߫ ߛߋ߲߬ߠߊ߫</string>
-  <string name="logging_in_message">ߡߊ߬ߞߐ߬ߣߐ߲߬ߠߌ߲ ߞߍ߫ ߖߊ߰ߣߌ߲߬…</string>
+  <string name="logging_in_message">ߡߊ߬ߞߐ߬ߣߐ߲߬ߠߌ߲ ߞߍ߫ ߖߊ߰ߣߌ߲߬...</string>
   <string name="updating_caption_title">ߝߍ߬ߛߓߍߟߌ ߣߌ߫ ߞߊ߲߬ߛߓߍߟߌ ߟߊߞߎߘߦߊ ߦߴߌ ߘߐ߫</string>
-  <string name="updating_caption_message">ߡߊ߬ߞߐ߬ߣߐ߲߬ߠߌ߲ ߞߍ߫ ߖߊ߰ߣߌ߲߬…</string>
+  <string name="updating_caption_message">ߡߊ߬ߞߐ߬ߣߐ߲߬ߠߌ߲ ߞߍ߫ ߖߊ߰ߣߌ߲߬...</string>
   <string name="login_success" fuzzy="true">ߜߊ߲߬ߞߎ߲߬ߠߌ߲ ߓߘߊ߫ ߛߎߘߊ߲߫߹</string>
   <string name="login_failed" fuzzy="true">ߜߊ߲߬ߞߎ߲߬ߠߌ߲ ߓߘߊ߫ ߗߌߙߏ߲߫߹</string>
   <string name="upload_failed">ߞߐߕߐ߮ ߡߊ߫ ߛߐ߬ߘߐ߲߬. ߘߏ߫ ߜߘߍ߫ ߡߊߝߍߣߍ߲߫ ߖߊ߰ߣߌ߲߫.</string>
@@ -69,7 +69,7 @@
   <string name="upload_failed_notification_subtitle">ߊ߬ ߛߐ߲߬ߞߌ߲߫ ߞߵߊ߬ ߦߋ߫</string>
   <string name="upload_paused_notification_subtitle">ߊ߬ ߛߐ߲߬ߞߌ߲߫ ߞߵߊ߬ ߦߋ߫</string>
   <string name="title_activity_contributions">ߒ ߠߊ߫ ߟߊ߬ߦߟߍ߬ߣߍ߲߬ ߞߐ߯ߟߕߊ ߟߎ߬</string>
-  <string name="contribution_state_queued">ߘߞߐ߬ߣߐ߲߬ߠߌ߲ ߘߐ߫…</string>
+  <string name="contribution_state_queued">ߘߞߐ߬ߣߐ߲߬ߠߌ߲ ߘߐ߫...</string>
   <string name="contribution_state_failed">ߊ߬ ߓߘߊ߫ ߗߌߙߏ߲߫</string>
   <string name="contribution_state_in_progress">%1$d%% ߓߘߊ߫ ߘߝߊ߫</string>
   <string name="contribution_state_starting">ߟߊ߬ߦߟߍ߬ߟߌ ߦߋ߫ ߛߋ߲߬ߠߊ߫</string>
@@ -148,7 +148,7 @@
   <string name="welcome_final_button_text">ߐ߲߬ߐ߲߬ߐ߲߫߹</string>
   <string name="welcome_help_button_text">ߞߎ߲߬ߠߊ߬ߝߎ߬ߟߋ߲߬ ߜߘߍ ߟߎ߬</string>
   <string name="detail_panel_cats_label">ߦߌߟߡߊ ߟߎ߬</string>
-  <string name="detail_panel_cats_loading">ߟߊ߬ߢߎ߲߬ߠߌ߲ ߦߵߌ ߘߐ߫…</string>
+  <string name="detail_panel_cats_loading">ߟߊ߬ߢߎ߲߬ߠߌ߲ ߦߵߌ ߘߐ߫...</string>
   <string name="detail_panel_cats_none">ߊ߬ ߡߊ߫ ߓߊߕߐ߬ߡߐ߲߬</string>
   <string name="detail_caption_empty">ߝߍ߬ߛߓߍߟߌ߫ ߕߍ߫ ߦߋ߲߬</string>
   <string name="detail_description_empty">ߞߊ߲߬ߛߓߍߟߌ߫ ߕߴߦߋ߲߬</string>
@@ -161,6 +161,7 @@
   <string name="location_permission_title">ߘߌ߲߬ߞߌߙߊ ߟߊ߬ߘߌ߬ߢߍ߬ߟߌ ߡߊߢߌߣߌ߲ߠߌ߲</string>
   <string name="ok">ߏ߬ߞߍ߫</string>
   <string name="warning">ߖߊ߲߬ߓߌ߬ߟߊ߬ߟߌ</string>
+  <string name="duplicate_file_name">ߞߐߕߐ߯ ߕߐ߯ ߓߊߟߌߣߍ߲ ߓߘߊ߫ ߦߋ߫</string>
   <string name="upload">ߊ߬ ߟߊߦߟߍ߬</string>
   <string name="yes">ߐ߲߬ߐ߲߬ߐ߲߫</string>
   <string name="no">ߍ߲߬ߍ߲߫</string>
@@ -175,6 +176,7 @@
   <string name="media_detail_coordinates">ߘߏ߲߬ߖߟߎ߬ߡߊ߬ߟߌ</string>
   <string name="media_detail_coordinates_empty">ߡߊ߫ ߡߊߛߐ߫</string>
   <string name="become_a_tester_title">ߌ ߞߊߘߊ߲߫ ߞߊ߬ ߞߍ߫ ߓߋߕߊ ߣߍߣߍߓߊ߮ ߘߏ߫ ߘߌ߫</string>
+  <string name="become_a_tester_description">ߌ ߕߐ߮ ߛߓߍ߫ ߊ߲ ߠߊ߫ ߓߋߕߊ ߥߏ߬ߦߏ ߟߊ߫ ߜ߭ߎߜ߭ߏߟ ߔߑߟߋߦ ߞߊ߲߬ ߞߊ߬ ߗߋߘߊ߫ ߞߎߘߊ ߟߎ߬ ߟߊߛߐ߬ߘߐ߲߫ ߊ߬ ߣߌ߫ ߞߐߕߐ߯ ߕߌߢߍߣߍ߲ ߠߎ߬</string>
   <string name="_2fa_code">2FA Code</string>
   <string name="logout_verification">ߌ ߦߴߊ߬ ߝߍ߬ ߞߵߌ ߜߊ߲߬ߞߎ߲߬ߣߍ߲ ߓߐ߫ ߝߛߊߦߌ߫؟</string>
   <string name="mediaimage_failed">ߡߋߘߌߦߊ ߖߌ߬ߦߊ߬ߓߍ ߓߘߊ߫ ߗߌߙߏ߲߫</string>
@@ -196,6 +198,7 @@
   <string name="navigation_item_about">ߞߊ߬ ߓߍ߲߬</string>
   <string name="navigation_item_settings">ߟߊ߬ߓߍ߲߬ߢߐ߲߰ߡߦߊ߬ߘߊ</string>
   <string name="navigation_item_feedback">ߞߙߐ߬ߛߌ߬ߕߊ</string>
+  <string name="navigation_item_feedback_github">ߌ ߕߊ߫ ߦߋߕߊ ߗߋ߫ ߜ߭ߌߕߑߤߐߕ ߛߌߟߊ ߝߍ߬</string>
   <string name="navigation_item_logout">ߌ ߜߊ߲߬ߞߎ߲߬ߣߍ߲ ߓߐ߫</string>
   <string name="navigation_item_info">ߟߞߊ߬ߙߊ߲߬ߠߌ߲</string>
   <string name="navigation_item_notification">ߖߊ߲߬ߓߌ߬ߟߊ߬ߟߌ ߟߎ߬</string>
@@ -227,13 +230,15 @@
   <string name="nominated_see_more">ߞߍߦߙߐ߫ ߞߐߜߍ ߘߐߜߍ߫ ߝߊߙߊ߲ߝߊ߯ߛߌ߫ ߞߏ ߘߐ߫</string>
   <string name="skip_login">ߊ߬ ߟߊߜߊ߲߫</string>
   <string name="navigation_item_login">ߌ ߜߊ߲߬ߞߎ߲߬</string>
-  <string name="skip_login_title" fuzzy="true">ߌ ߦߴߊ߬ ߝߍ߬ ߓߊ߬ ߞߵߌ ߜߊ߲߫ ߜߊ߲߬ߞߎ߲߬ߠߌ߲ ߞߎ߲߬ߠߊ߫؟</string>
-  <string name="skip_login_message" fuzzy="true">ߌ ߞߊߞߊ߲߫ ߞߵߌ ߜߊ߲߬ߞߎ߲߫ ߞߊ߬ ߖߌ߬ߦߊ߬ߓߍ ߟߊߦߍ߬ߟߍ߫ ߛߐ߲߬.</string>
+  <string name="skip_login_title">ߌ ߦߴߊ߬ ߝߍ߬ ߞߊ߬ ߜߊ߲߬ߞߎ߲߬ߠߌ߲ ߓߴߦߋ߲߬ ߝߛߊߦߌ߫؟</string>
+  <string name="skip_login_message">ߌ ߞߊ߫ ߞߊ߲߫ ߞߵߌ ߜߊ߲߬ߞߎ߲߫ ߡߎߣߎ߲߬ ߛߴߌ ߘߴߛߋ߫ ߖߌ߬ߦߊ߬ߓߍ ߟߊߦߍ߬ߟߍ߫ ߢߍߝߍ߬.</string>
   <string name="login_alert_message">ߌ ߜߊ߲߬ߞߎ߲߫ ߖߊ߰ߣߌ߲߫ ߞߊ߬ ߟߊ߬ߓߊ߰ߙߊ߬ߟߌ ߣߌ߲߬ ߠߊߓߊ߯ߙߊ߫</string>
   <string name="copy_wikicode">ߥߞߌߛߓߍߟߌ ߓߊߓߌ߬ߟߊ߬ ߛߓߍߝߌߘߊ-ߜߍ߬ߙߍ߲߬ߘߍ߬ߣߍ߲ ߘߐ߫</string>
   <string name="wikicode_copied">ߥߞߌߛߓߍߟߌ ߓߘߊ߫ ߓߊ߲߫ ߓߊߓߌ߬ߟߊ߬ ߟߊ߫ ߛߓߍߝߌߘߊ-ߜߍ߬ߙߍ߲߬ߘߍ߬ߣߍ߲ ߘߐ߫</string>
   <string name="nearby_location_not_available">ߕߙߐ߬ߝߍ߬ߟߊ ߓߊ߯ߙߊߣߍ߲߫ ߕߍ߫ ߞߍ߫ ߟߴߊ߬ ߢߊߓߘߍ ߡߊ߬߸ ߘߌ߲߬ߞߌߙߊ ߕߴߦߋ߲߬.</string>
+  <string name="upload_location_access_denied">ߓߊ߲߬ ߓߘߊ߫ ߞߍ߫ ߘߌ߲߬ߞߌߙߊ ߡߊߛߐ߬ߘߐ߲ ߡߊ߬. ߌ ߘߌ߲߬ߞߌߙߊ ߘߊ߲߬ߠߊߕߍ߰ ߖߊ߰ߣߌ߲߫ ߛߴߌ ߘߌ߫ ߗߋߘߊ ߣߌ߲߬ ߠߊߛߐ߬ߘߐ߲߫.</string>
   <string name="location_permission_rationale_nearby">ߟߊ߬ߘߌ߬ߢߍ߬ߟߌ ߢߌ߬ߣߌ߲߬ߞߊ߬ߣߍ߲߫ ߦߋ߫ ߞߊ߬ ߛߌ߬ߢߐ߲߰ߦߊ߫ ߛߙߍߘߍ ߟߎ߬ ߟߊߓߊ߯ߙߊ߫</string>
+  <string name="location_permission_rationale_explore">ߟߊ߬ߘߌ߬ߢߍ߬ߟߌ ߢߌ߬ߣߌ߲߬ߞߊ߬ߣߍ߲߫ ߦߋ߫ ߞߊ߬ ߛߌ߬ߢߐ߲߰ ߖߌߦߊߓߍ ߟߎ߬ ߛߙߍߘߍ ߟߊߓߊ߯ߙߊ߫</string>
   <string name="nearby_directions">ߞߎ߲߬ߕߋߟߋ߲</string>
   <string name="nearby_wikidata">ߥߞߌߘߕߊ</string>
   <string name="nearby_wikipedia">ߥߞߌߔߋߘߌߦߊ߫</string>
@@ -277,6 +282,7 @@
   <string name="explore_tab_title_mobile">ߟߊ߬ߦߟߍ߬ߣߍ߲ ߠߎ߬ ߜߋߟߋ߲ߜߋߟߋ߲ ߠߊ߫</string>
   <string name="explore_tab_title_map">ߔߊ߬ߔߘߊ</string>
   <string name="successful_wikidata_edit">ߖߌ߬ߦߊ߬ߓߍ ߓߌ߬ߟߊ߬ߣߍ߲߬ ߦߋ߫ %1$s ߟߊ߫ ߥߞߌߘߕߊ ߛߌߟߊ ߟߋ߬ ߝߍ߬߹</string>
+  <string name="wikidata_edit_failure">ߥߞߌߘߕߊ ߞߣߐߘߐ ߟߎ߬ ߓߘߊ߫ ߞߢߊ߬  ߟߊߞߎߘߦߊ߫ ߟߊ߫߹</string>
   <string name="menu_set_wallpaper">ߊ߬ ߓߌ߬ߟߊ߬ ߘߊ߬ߣߊ߲߬ߥߟߊ ߟߊ߫.</string>
   <string name="wallpaper_set_successfully">ߘߊ߬ߣߊ߲߬ߥߟߊ ߓߌ߬ߟߊ ߓߘߊ߫ ߛߎߘߊ߲߫߹</string>
   <string name="quiz">ߡߊ߬ߝߍ߬ߣߍ߲߬ߠߌ߲</string>
@@ -290,14 +296,16 @@
   <string name="construction_event_answer">ߖߌ߬ߦߊ߬ߓߍ ߡߍ߲ ߠߎ߬ ߦߋ߫ ߛߋߒߞߏߟߦߊ ߦߌ߬ߘߊ߬ ߟߊ߫ ߥߟߊ߫ ߟߐ߲ߠߌ߲ߦߊ߸ ߏ߬ ߟߎ߬ ߟߊߛߣߍߣߍ߲ߓߊ ߟߋ߬ ߦߋ߫ ߞߐߡߐ߲ߛ ߞߊ߲߬.</string>
   <string name="congratulatory_message_quiz">ߌ ߓߘߊ߫  %1$s ߖߋ߬ߓߟߌ߬ ߓߘߍ ߛߐ߬ߘߐ߲߬. ߌ ߞߎߟߎ߲ߖߋ߫߹</string>
   <string name="warning_for_no_answer">ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ ߝߌ߬ߟߊ ߘߏ߫ ߘߐ߫ ߞߋߟߋ߲߫ ߢߣߊߕߊߟߌ ߓߊߕߐ߬ߡߐ߲߫ ߞߊ߬ ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ ߖߋ߬ߓߌ߫</string>
-  <string name="user_not_logged_in" fuzzy="true">ߜߊ߲߬ߞߎ߲߬ߠߌ߲ ߥߎ߬ߛߎ ߓߘߊ߫ ߕߊ߬ߡߌ߲߬߸ ߌ ߜߊ߲߬ߞߎ߲߬ ߕߎ߲߯ߣߌ߲߫ ߖߊ߰ߣߌ߲߫.</string>
+  <string name="user_not_logged_in">ߜߊ߲߬ߞߎ߲߬ߠߌ߲ ߥߎ߬ߛߎ ߓߘߊ߫ ߕߊ߬ߡߌ߲߬߸ ߌ ߜߊ߲߬ߞߎ߲߬ ߌߞߐ߫ ߖߊ߰ߣߌ߲߫.</string>
   <string name="quiz_result_share_message">ߌ ߟߊ߫ ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ ߟߊߖߍ߲ߛߍ߲߫ ߌ ߕߋߙߌ ߟߎ߬ ߡߊ߬߹</string>
   <string name="continue_message">ߘߊߓߊ߲ߠߌ߲</string>
   <string name="correct">ߖߋ߬ߓߟߌ߬ ߢߌߡߊ</string>
   <string name="wrong">ߖߋ߬ߓߌ߬ߟߌ ߝߘߏ߬ߣߍ߲</string>
   <string name="quiz_screenshot_question">ߊ߬ ߝߐ߫ ߘߊ߬ߣߊ߲߬ߥߟߊ߬ߖߌߦߊ ߣߌ߲߬ ߓߍ߲߬ߣߍ߲߫ ߦߋ߫ ߟߊ߬ߦߟߍ߬ߟߌ ߘߐ߫ ߝߋߎ߫؟</string>
   <string name="share_app_title">ߟߥߊ߬ߟߌ߬ߟߊ߲ ߟߊ߬ߖߍ߲߬ߛߍ߲߬ߠߌ߲</string>
-  <string name="error_fetching_nearby_places" fuzzy="true">ߝߌ߬ߟߌ ߦߋ߫ ߛߌ߰ߢߐ߲߰ ߘߌ߲ߞߌߙߊ ߟߊߘߏ߲߬ߕߐ ߘߐ߫.</string>
+  <string name="rotate">ߡߊߖߍ߲߬ߞߍ߫</string>
+  <string name="error_fetching_nearby_places">ߛߌ߰ߢߐ߲߰ ߘߌ߲ߞߌߙߊ ߕߴߛߋ߫ ߟߊߢߎ߲߫ ߠߊ߫.</string>
+  <string name="no_pictures_in_this_area">ߖߌ߬ߦߊ߬ߓߍ߫ ߕߍ߫ ߘߌ߲߬ߞߌߙߊ ߣߌ߲߬ ߞߊ߲߬</string>
   <string name="no_nearby_places_around">ߛߌ߰ߢߐ߲߰ ߦߙߐ߫ ߡߊ߫ ߛߐ߬ߘߐ߲߫ ߟߊ߬ߡߌߣߌ߲ ߘߐ߫</string>
   <string name="error_fetching_nearby_monuments">ߝߟߌ߬ ߓߘߊ߫ ߞߍ߫ ߛߌ߰ߢߐ߲߰ ߝߙߎߕߎ ߟߊߛߐ߬ߘߐ߲ ߘߐ߫.</string>
   <string name="no_recent_searches">ߢߌߣߌ߲ߠߌ߲߫ ߠߊߓߊ߲ ߕߴߦߋ߲߬</string>
@@ -408,7 +416,7 @@
   <string name="menu_option_read">ߘߐ߬ߞߊ߬ߙߊ߲߬ߣߍ߲ ߠߎ߬ ߦߋ߫</string>
   <string name="menu_option_unread">ߘߐ߬ߞߊ߬ߙߊ߲߬ߓߊߟߌ ߟߎ߬ ߦߋ߫</string>
   <string name="error_occurred_in_picking_images">ߝߎ߬ߕߎ߲߬ߕߌ ߓߌ߬ߟߊ߬ߣߍ߲߫ ߊ߬ ߘߐ߫ ߞߵߌ ߕߏ߫ ߖߌ߬ߦߊ߬ߓߍ ߓߊߕߐ߬ߡߐ߲ ߞߊ߲߬.</string>
-  <string name="please_wait">ߡߊ߬ߞߐ߬ߣߐ߲߬ߠߌ߲ ߞߍ߫ ߖߊ߰ߣߌ߲߬…</string>
+  <string name="please_wait">ߡߊ߬ߞߐ߬ߣߐ߲߬ߠߌ߲ ߞߍ߫ ߖߊ߰ߣߌ߲߬...</string>
   <string name="copied_successfully">ߓߘߊ߫ ߓߊߓߌ߬ߟߊ߬</string>
   <string name="welcome_do_upload_content_description">ߖߌ߬ߦߊ߬ߓߍ߬ ߢߌ߬ߡߊ߬ ߟߊߦߟߍ߬ߕߊ ߟߎ߬ ߞߏߟߊ߲ߞߏߡߊ</string>
   <string name="welcome_dont_upload_content_description">ߖߌ߬ߦߊ߬ߓߍ߬ ߖߎ߰ ߟߊߦߟߍ߬ߓߊߟߌ ߟߎ߬ ߞߏߟߊ߲ߞߏߡߊ</string>
@@ -418,7 +426,7 @@
   <string name="exif_tag_name_location">ߘߌ߲߬ߞߌߙߊ</string>
   <string name="exif_tag_name_cameraModel">ߖߌ߬ߦߊ߬ߕߊ߬ߟߊ߲ ߛߎ߮ߦߊ</string>
   <string name="exif_tag_name_software">ߛߎ߲ߝߘߍ</string>
-  <string name="share_via">ߟߥߊ߬ߟߌ߬ߟߊ߲ ߠߊߖߍ߲ߛߍ߲ ߢߌ߲߬ ߠߎ߫ ߞߊ߲߬…</string>
+  <string name="share_via">ߟߥߊ߬ߟߌ߬ߟߊ߲ ߠߊߖߍ߲ߛߍ߲ ߢߌ߲߬ ߠߎ߫ ߞߊ߲߬...</string>
   <string name="image_info">ߖߌ߬ߦߊ߬ߓߍ ߞߌ߬ߓߊ߬ߙߏ߬ߦߊ</string>
   <string name="no_categories_found">ߦߌߟߡߊߙߋ߲߫ ߕߴߦߋ߲߬</string>
   <string name="no_depiction_found">ߘߊ߲߬ߠߊ߬ߕߍ߰ߟߌ ߡߊ߫ ߛߐ߬ߘߐ߲߬</string>
@@ -486,7 +494,7 @@
   <string name="add_bookmark">ߊ߬ ߓߌ߬ߟߊ߬ ߟߊ߬ߡߊ ߘߐ߫</string>
   <string name="wallpaper_set_unsuccessfully">ߞߏ ߘߏ߫ ߓߍ߲߬ߣߍ߫ ߕߎ߲߬ ߕߍ߫. ߘߊ߲߬ߘߊ߲߬ߥߟߊ ߕߍ߫ ߛߐ߲߬ ߘߐߓߍ߲߬ ߠߊ߫.</string>
   <string name="setting_wallpaper_dialog_title">ߊ߬ ߓߌ߬ߟߊ߬ ߘߊ߬ߣߊ߲߬ߥߟߊ ߟߊ߫.</string>
-  <string name="setting_wallpaper_dialog_message">ߘߊ߬ߣߊ߲߬ߥߟߊ ߘߊߘߐߓߍ߲߭ ߦߴߌ ߘߐ߫. ߌ ߟߐ߬ ߖߊ߰ߣߌ߲߫…</string>
+  <string name="setting_wallpaper_dialog_message">ߘߊ߬ߣߊ߲߬ߥߟߊ ߘߊߘߐߓߍ߲߭ ߦߴߌ ߘߐ߫. ߌ ߟߐ߬ ߖߊ߰ߣߌ߲߫...</string>
   <string name="theme_default_name">ߞߊ߲ߞߋ ߟߊߓߊ߬ߕߏ߬</string>
   <string name="theme_dark_name">ߘߌ߬ߓߌ</string>
   <string name="theme_light_name">ߦߋߟߋ߲</string>
@@ -533,9 +541,9 @@
   <string name="leaderboard_used">ߟߊߓߊ߯ߙߊߣߍ߲</string>
   <string name="leaderboard_my_rank_button_text">ߒ ߠߊ߫ ߛߝߊ</string>
   <string name="statistics_quality">ߖߌ߬ߦߊ߬ߓߍ ߛߎ߯ߦߊ</string>
-  <string name="resuming_upload">ߟߊ߬ߦߟߍ߬ߟߌ ߘߊߡߌ߬ߣߊ߭ ߦߴߌ ߘߐ߫…</string>
-  <string name="pausing_upload">ߟߊ߬ߦߟߍ߬ߟߌ ߟߊߟߐ߭ ߦߴߌ ߘߐ߫…</string>
-  <string name="cancelling_upload">ߟߊ߬ߦߟߍ߬ߟߌ ߘߐߛߊ߭ ߦߴߌ ߘߐ߫…</string>
+  <string name="resuming_upload">ߟߊ߬ߦߟߍ߬ߟߌ ߘߊߡߌ߬ߣߊ߭ ߦߴߌ ߘߐ߫...</string>
+  <string name="pausing_upload">ߟߊ߬ߦߟߍ߬ߟߌ ߟߊߟߐ߭ ߦߴߌ ߘߐ߫...</string>
+  <string name="cancelling_upload">ߟߊ߬ߦߟߍ߬ߟߌ ߘߐߛߊ߭ ߦߴߌ ߘߐ߫...</string>
   <string name="cancel_upload">ߟߊ߬ߦߟߍ߬ߟߌ ߘߊߓߌ߬ߟߊ߬</string>
   <string name="media_detail_step_title">ߡߋߘߌߦߊ ߝߊߙߊ߲ߝߊ߯ߛߌ</string>
   <string name="menu_view_category_page">ߦߌߟߡߊ߫ ߞߐߜߍ ߘߐߜߍ߫</string>

@@ -45,37 +45,44 @@
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">מועלה קובץ אחד</item>
     <item quantity="two">מועלים %1$d קבצים</item>
+    <item quantity="many">מועלים %1$d קבצים</item>
     <item quantity="other">מועלים %1$d קבצים</item>
   </plurals>
   <plurals name="contributions_subtitle">
     <item quantity="one">(%1$d)</item>
     <item quantity="two">(%1$d)</item>
+    <item quantity="many">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
   <string name="starting_uploads">ההעלאות מתחילות</string>
   <plurals name="starting_multiple_uploads">
     <item quantity="one">עיבוד העלאה</item>
     <item quantity="two">עיבוד d% העלאות</item>
+    <item quantity="many">עיבוד d% העלאות</item>
     <item quantity="other">עיבוד d% העלאות</item>
   </plurals>
   <plurals name="multiple_uploads_title">
     <item quantity="one">העלאה אחת</item>
     <item quantity="two">%d העלאות</item>
+    <item quantity="many">%d העלאות</item>
     <item quantity="other">%d העלאות</item>
   </plurals>
   <plurals name="share_license_summary">
     <item quantity="one">התמונה הזאת תפורסם ברישיון %1$s</item>
     <item quantity="two">התמונות האלה תפורסמנה ברישיון %1$s</item>
+    <item quantity="many">התמונות האלה תפורסמנה ברישיון %1$s</item>
     <item quantity="other">התמונות האלה תפורסמנה ברישיון %1$s</item>
   </plurals>
   <plurals name="upload_count_title">
     <item quantity="one">העלאה אחת</item>
     <item quantity="two">%1$d העלאות</item>
+    <item quantity="many">%1$d העלאות</item>
     <item quantity="other">%1$d העלאות</item>
   </plurals>
   <plurals name="receiving_shared_content">
     <item quantity="one">מתקבל תוכן שיתופי. עיבוד התמונה עשוי לארוך זמן מה כתלות בגודל התמונה והמכשיר שלך</item>
     <item quantity="two">מתקבל תוכן שיתופי. עיבוד התמונות עשוי לארוך זמן מה כתלות בגודל התמונות והמכשיר שלך</item>
+    <item quantity="many">מתקבל תוכן שיתופי. עיבוד התמונות עשוי לארוך זמן מה כתלות בגודל התמונות והמכשיר שלך</item>
     <item quantity="other">מתקבל תוכן שיתופי. עיבוד התמונות עשוי לארוך זמן מה כתלות בגודל התמונות והמכשיר שלך</item>
   </plurals>
   <string name="navigation_item_explore">לחקור</string>
@@ -94,9 +101,9 @@
   <string name="forgot_password">שכחת את הסיסמה?</string>
   <string name="signup">רישום</string>
   <string name="logging_in_title">כניסה לחשבון</string>
-  <string name="logging_in_message">נא להמתין…</string>
+  <string name="logging_in_message">נא להמתין...</string>
   <string name="updating_caption_title">עדכון כיתובים ותיאורים</string>
-  <string name="updating_caption_message">נא להמתין…</string>
+  <string name="updating_caption_message">נא להמתין...</string>
   <string name="login_success">הכניסה הצליחה!</string>
   <string name="login_failed">הכניסה נכשלה!</string>
   <string name="upload_failed">הקובץ לא נמצא. נא לנסות קובץ אחר.</string>
@@ -206,7 +213,7 @@
   <string name="welcome_final_button_text">כן!</string>
   <string name="welcome_help_button_text">מידע נוסף</string>
   <string name="detail_panel_cats_label">קטגוריות</string>
-  <string name="detail_panel_cats_loading">בטעינה…</string>
+  <string name="detail_panel_cats_loading">בטעינה...</string>
   <string name="detail_panel_cats_none">לא נבחר דבר</string>
   <string name="detail_caption_empty">אין כיתוב</string>
   <string name="detail_description_empty">אין תיאור</string>
@@ -498,10 +505,11 @@
   <string name="no_notification">אין לך התראות שלא נקראו</string>
   <string name="no_read_notification">אין לך התראות שנקראו</string>
   <string name="share_logs_using">שיתוף יומנים בעזרת</string>
+  <string name="check_your_email_inbox">לבדוק את תיבת הדוא״ל הנכנס שלך</string>
   <string name="menu_option_read">הצגת התראות שנקראו</string>
   <string name="menu_option_unread">הצגת התראות שלא נקראו</string>
   <string name="error_occurred_in_picking_images">אירעה שגיאה בעת בחירת תמונות</string>
-  <string name="please_wait">נא להמתין…</string>
+  <string name="please_wait">נא להמתין...</string>
   <string name="images_featured_explanation">תמונות מובילות הן תמונות של צלמים ומאיירים מיומנים אותם בחרה קהילת ויקישיתוף בזכות איכות התוצר שהם תורמים לאתר.</string>
   <string name="images_via_nearby_explanation">תמונות שהועלו דרך מקומות בסביבה הן התמונות שנשלחות על ידי גילוי מקומות במפה.</string>
   <string name="thanks_received_explanation">תכונה זו מאפשרת לעורכים לשלוח מסרי תודה למשתמשים שביצעו עריכות מועילות - על ידי שימוש בקישור תודה בדף ההיסטוריה או בדף ההבדלים.</string>
@@ -523,7 +531,7 @@
   <string name="media_location_permission_denied">הגישה למקום המדיה נדחתה</string>
   <string name="add_location_manually">ייתכן שלא נוכל לאתר את נתוני המקום מתמונות שהעלית. נא להוסיף את המקום המתאים לכל תמונה בטרם הגשתה</string>
   <string name="share_text">כדי להעלות תמונות לוויקינתונים של ויקימדיה ישר מהטלפון שלך. אתם מוזמנים להוריד את היישום של ויקינתונים עכשיו: %1$s</string>
-  <string name="share_via">שיתוף היישום דרך…</string>
+  <string name="share_via">שיתוף היישום דרך...</string>
   <string name="image_info">פרטי תמונה</string>
   <string name="no_categories_found">לא נמצאו קטגוריות</string>
   <string name="no_depiction_found">לא נמצאו מוצגים</string>
@@ -551,6 +559,7 @@
   <plurals name="category_edit_helper_show_edit_message_if">
     <item quantity="one">נוספה קטגוריה.</item>
     <item quantity="two">נוספו %1$s קטגוריות.</item>
+    <item quantity="many">נוספו %1$s קטגוריות.</item>
     <item quantity="other">נוספו %1$s קטגוריות.</item>
   </plurals>
   <string name="category_edit_helper_edit_message_else">לא ניתן להוסיף קטגוריות.</string>
@@ -560,6 +569,7 @@
   <plurals name="depictions_edit_helper_show_edit_message_if">
     <item quantity="one">נוסף מוצג %1$s</item>
     <item quantity="two">נוספו המוצגים %1$s</item>
+    <item quantity="many">נוספו המוצגים %1$s</item>
     <item quantity="other">נוספו המוצגים %1$s</item>
   </plurals>
   <string name="depictions_edit_helper_edit_message_else">לא היה אפשר להוסיף מוצגים.</string>
@@ -602,7 +612,7 @@
   <string name="add_bookmark">נוסף לסימניות</string>
   <string name="wallpaper_set_unsuccessfully">משהו השתבש. לא היה אפשר להגדיר את הטפט</string>
   <string name="setting_wallpaper_dialog_title">להגדיר בתור טפט</string>
-  <string name="setting_wallpaper_dialog_message">הגדרת טפט. נא להמתין…</string>
+  <string name="setting_wallpaper_dialog_message">הגדרת טפט. נא להמתין...</string>
   <string name="theme_default_name">מערכת מעקב</string>
   <string name="theme_dark_name">כהה</string>
   <string name="theme_light_name">בהירה</string>
@@ -662,7 +672,7 @@
   <string name="quality_images_info">תמונות איכות הן תרשימים או תמונות שעומדות בתקני איכות מסוימים (שמטבעם בעיקר טכניים) והן בעלות ערך למיזמי ויקימדיה</string>
   <string name="resuming_upload">ההעלאה ממשיכה…</string>
   <string name="pausing_upload">ההעלאה מושהית…</string>
-  <string name="cancelling_upload">ביטול ההעלאה…</string>
+  <string name="cancelling_upload">ביטול ההעלאה...</string>
   <string name="cancel_upload">ביטול ההעלאה</string>
   <string name="limited_connection_explanation">הפעלת מצב חיבור מוגבל. כל ההעלאות מושהות ותמשכנה לאחר השבתת המצב הזה.</string>
   <string name="limited_connection_is_on">מצב חיבור מוגבל פעיל.</string>
@@ -792,6 +802,7 @@
   <plurals name="custom_picker_images_selected_title_appendix">
     <item quantity="one">נבחרה תמונה אחת</item>
     <item quantity="two">נבחרו שתי תמונות</item>
+    <item quantity="many">נבחרו %d תמונות</item>
     <item quantity="other">נבחרו %d תמונות</item>
   </plurals>
   <string name="multiple_files_depiction">נא לזכור שכשמועלות כמה תמונות, כולן מקבלות את אותן הקטגוריות והמוצגים. אם התמונות אינן חולקות מוצגים וקטגוריות, נא לעשות כמה העלאות נפרדות.</string>
@@ -805,9 +816,12 @@
   <string name="other_problem_or_information_please_explain_below">בעיה אחרת או מידע אחר (נא להסביר הלאה).</string>
   <string name="feedback_destination_note">המשוב שלך מתפרסם בדף הוויקי הבא: &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Mobile_app/Feedback\"&gt;Commons:Mobile app/Feedback&lt;/a&gt;</string>
   <string name="are_you_sure_that_you_want_cancel_all_the_uploads">האם ברצונך באמת לבטל את כל ההעלאות?</string>
-  <string name="cancelling_all_the_uploads">ביטול כל ההעלאות…</string>
+  <string name="cancelling_all_the_uploads">ביטול כל ההעלאות...</string>
   <string name="uploads">העלאות</string>
   <string name="pending">ממתינות</string>
   <string name="failed">נכשלו</string>
   <string name="could_not_load_place_data">לא היה אפשר לטעון את נתוני המקום</string>
+  <string name="red_pin">אין עדיין תמונה למקום הזה, אפשר פשוט לצלם אחת!</string>
+  <string name="green_pin">למקום הזה כבר יש תמונה.</string>
+  <string name="grey_pin">עכשיו מתבצעת בדיקה האם למקום הזה יש תמונה.</string>
 </resources>
