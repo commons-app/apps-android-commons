@@ -846,4 +846,7 @@
   <string name="pending">В ожидании</string>
   <string name="failed">Не удалось</string>
   <string name="could_not_load_place_data">Не удалось загрузить данные о месте</string>
+  <string name="red_pin">У этого места пока нет фотографий, так что сделайте несколько!</string>
+  <string name="green_pin">У этого места уже есть фотография.</string>
+  <string name="grey_pin">Сейчас проверим, есть ли у этого места фотография.</string>
 </resources>
