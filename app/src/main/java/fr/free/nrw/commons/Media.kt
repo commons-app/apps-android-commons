@@ -3,6 +3,7 @@ package fr.free.nrw.commons
 import android.os.Parcelable
 import fr.free.nrw.commons.location.LatLng
 import fr.free.nrw.commons.wikidata.model.page.PageTitle
+import kotlinx.parcelize.IgnoredOnParcel
 import kotlinx.parcelize.Parcelize
 import java.util.Date
 import java.util.Locale
@@ -124,6 +125,7 @@ class Media constructor(
      * Gets the categories the file falls under.
      * @return file categories as an ArrayList of Strings
      */
+    @IgnoredOnParcel
     var addedCategories: List<String>? = null
         // TODO added categories should be removed. It is added for a short fix. On category update,
         //  categories should be re-fetched instead

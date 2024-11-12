@@ -1,6 +1,5 @@
 package fr.free.nrw.commons.customselector.helper
 
-import android.app.Activity
 import android.content.ContentUris
 import android.content.Context
 import android.media.MediaScannerConnection
@@ -8,9 +7,10 @@ import android.net.Uri
 import android.os.Build
 import android.provider.MediaStore
 import android.widget.Toast
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.IntentSenderRequest
 import androidx.appcompat.app.AlertDialog
 import fr.free.nrw.commons.R
-import fr.free.nrw.commons.filepicker.Constants
 import timber.log.Timber
 import java.io.File
 
@@ -22,15 +22,20 @@ object FolderDeletionHelper {
      * @param context The context used to show the confirmation dialog and manage deletion.
      * @param folder The folder to be deleted.
      * @param onDeletionComplete Callback invoked with `true` if the folder was
+     * @param trashFolderLauncher An ActivityResultLauncher for handling the result of the trash request.
      * successfully deleted, `false` otherwise.
      */
-    fun confirmAndDeleteFolder(context: Context, folder: File, onDeletionComplete: (Boolean) -> Unit) {
+    fun confirmAndDeleteFolder(
+        context: Context,
+        folder: File,
+        trashFolderLauncher: ActivityResultLauncher<IntentSenderRequest>,
+        onDeletionComplete: (Boolean) -> Unit) {
         val itemCount = countItemsInFolder(context, folder)
         val folderPath = folder.absolutePath
 
         //don't show this dialog on API 30+, it's handled automatically using MediaStore
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            val success = deleteFolderMain(context, folder)
+            val success = deleteFolderMain(context, folder, trashFolderLauncher)
             onDeletionComplete(success)
 
         } else {
@@ -40,7 +45,7 @@ object FolderDeletionHelper {
                 .setPositiveButton(context.getString(R.string.custom_selector_delete)) { _, _ ->
 
                     //proceed with deletion if user confirms
-                    val success = deleteFolderMain(context, folder)
+                    val success = deleteFolderMain(context, folder, trashFolderLauncher)
                     onDeletionComplete(success)
                 }
                 .setNegativeButton(context.getString(R.string.custom_selector_cancel)) { dialog, _ ->
@@ -56,12 +61,17 @@ object FolderDeletionHelper {
      *
      * @param context The context used to manage storage operations.
      * @param folder The folder to delete.
+     * @param trashFolderLauncher An ActivityResultLauncher for handling the result of the trash request.
      * @return `true` if the folder deletion was successful, `false` otherwise.
      */
-    private fun deleteFolderMain(context: Context, folder: File): Boolean {
+    private fun deleteFolderMain(
+        context: Context,
+        folder: File,
+        trashFolderLauncher: ActivityResultLauncher<IntentSenderRequest>): Boolean
+    {
         return when {
             //for API 30 and above, use MediaStore
-            Build.VERSION.SDK_INT >= Build.VERSION_CODES.R -> trashFolderContents(context, folder)
+            Build.VERSION.SDK_INT >= Build.VERSION_CODES.R -> trashFolderContents(context, folder, trashFolderLauncher)
 
             //for API 29 ('requestLegacyExternalStorage' is set to true in Manifest)
             // and below use file system
@@ -75,9 +85,14 @@ object FolderDeletionHelper {
      *
      * @param context The context used to access the content resolver.
      * @param folder The folder whose contents are to be moved to the trash.
+     * @param trashFolderLauncher An ActivityResultLauncher for handling the result of the trash request.
      * @return `true` if the trash request was initiated successfully, `false` otherwise.
      */
-    private fun trashFolderContents(context: Context, folder: File): Boolean {
+    private fun trashFolderContents(
+        context: Context,
+        folder: File,
+        trashFolderLauncher: ActivityResultLauncher<IntentSenderRequest>): Boolean
+    {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.R) return false
 
         val contentResolver = context.contentResolver
@@ -111,11 +126,8 @@ object FolderDeletionHelper {
         if (urisToTrash.isNotEmpty()) {
             try {
                 val trashRequest = MediaStore.createTrashRequest(contentResolver, urisToTrash, true)
-                (context as? Activity)?.startIntentSenderForResult(
-                    trashRequest.intentSender,
-                    Constants.RequestCodes.DELETE_FOLDER_REQUEST_CODE,
-                    null, 0, 0, 0
-                )
+                val intentSenderRequest = IntentSenderRequest.Builder(trashRequest.intentSender).build()
+                trashFolderLauncher.launch(intentSenderRequest)
                 return true
             } catch (e: SecurityException) {
                 Timber.tag("DeleteFolder").e(context.getString(R.string.custom_selector_error_trashing_folder_contents, e.message))

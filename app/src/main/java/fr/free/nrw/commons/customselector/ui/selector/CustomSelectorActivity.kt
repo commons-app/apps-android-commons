@@ -14,6 +14,9 @@ import android.widget.Button
 import android.widget.ImageButton
 import android.widget.PopupMenu
 import android.widget.TextView
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -42,7 +45,6 @@ import fr.free.nrw.commons.R
 import fr.free.nrw.commons.customselector.database.NotForUploadStatus
 import fr.free.nrw.commons.customselector.database.NotForUploadStatusDao
 import fr.free.nrw.commons.customselector.helper.CustomSelectorConstants
-import fr.free.nrw.commons.customselector.helper.CustomSelectorConstants.SHOULD_REFRESH
 import fr.free.nrw.commons.customselector.helper.FolderDeletionHelper
 import fr.free.nrw.commons.customselector.listeners.FolderClickListener
 import fr.free.nrw.commons.customselector.listeners.ImageSelectListener
@@ -50,7 +52,6 @@ import fr.free.nrw.commons.customselector.model.Image
 import fr.free.nrw.commons.databinding.ActivityCustomSelectorBinding
 import fr.free.nrw.commons.databinding.CustomSelectorBottomLayoutBinding
 import fr.free.nrw.commons.databinding.CustomSelectorToolbarBinding
-import fr.free.nrw.commons.filepicker.Constants
 import fr.free.nrw.commons.media.ZoomableActivity
 import fr.free.nrw.commons.theme.BaseActivity
 import fr.free.nrw.commons.upload.FileUtilsWrapper
@@ -64,7 +65,6 @@ import kotlinx.coroutines.withContext
 import java.io.File
 import java.lang.Integer.max
 import javax.inject.Inject
-
 
 /**
  * Custom Selector Activity.
@@ -155,7 +155,16 @@ class CustomSelectorActivity :
      */
     private var showOverflowMenu = false
 
+    /**
+     * Waits for confirmation of delete folder
+     */
+    private val startForFolderDeletionResult = registerForActivityResult(ActivityResultContracts.StartIntentSenderForResult()){
+        result -> onDeleteFolderResultReceived(result)
+    }
 
+    private val startForResult = registerForActivityResult(StartActivityForResult()){ result ->
+        onFullScreenDataReceived(result)
+    }
 
 
     /**
@@ -184,9 +193,9 @@ class CustomSelectorActivity :
                     }
                 },
                 modifier =
-                Modifier
-                    .padding(vertical = 8.dp, horizontal = 4.dp)
-                    .fillMaxWidth(),
+                    Modifier
+                        .padding(vertical = 8.dp, horizontal = 4.dp)
+                        .fillMaxWidth(),
             )
         }
         val view = binding.root
@@ -215,7 +224,6 @@ class CustomSelectorActivity :
         }
     }
 
-
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
@@ -237,32 +245,21 @@ class CustomSelectorActivity :
     /**
      * When data will be send from full screen mode, it will be passed to fragment
      */
-    override fun onActivityResult(
-        requestCode: Int,
-        resultCode: Int,
-        data: Intent?,
-    ) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == Constants.RequestCodes.RECEIVE_DATA_FROM_FULL_SCREEN_MODE &&
-            resultCode == Activity.RESULT_OK
-        ) {
+    private fun onFullScreenDataReceived(result: ActivityResult){
+        if (result.resultCode == Activity.RESULT_OK) {
             val selectedImages: ArrayList<Image> =
-                data!!
+                result.data!!
                     .getParcelableArrayListExtra(CustomSelectorConstants.NEW_SELECTED_IMAGES)!!
-            val shouldRefresh = data.getBooleanExtra(SHOULD_REFRESH, false)
-            imageFragment?.passSelectedImages(selectedImages, shouldRefresh)
+            viewModel?.selectedImages?.value = selectedImages
         }
+    }
 
-        if (requestCode == Constants.RequestCodes.DELETE_FOLDER_REQUEST_CODE &&
-            resultCode == Activity.RESULT_OK) {
-
+    private fun onDeleteFolderResultReceived(result: ActivityResult){
+        if (result.resultCode == Activity.RESULT_OK){
             FolderDeletionHelper.showSuccess(this, "Folder deleted successfully", bucketName)
             navigateToCustomSelector()
         }
-
     }
-
-
 
 
 
@@ -438,7 +435,7 @@ class CustomSelectorActivity :
     }
 
     /**
-     * Set up the toolbar, back listener, done listener, overflow menu listener.
+     * Set up the toolbar, back listener, done listener.
      */
     private fun setUpToolbar() {
         val back: ImageButton = findViewById(R.id.back)
@@ -489,9 +486,9 @@ class CustomSelectorActivity :
             return
         }
 
-        FolderDeletionHelper.confirmAndDeleteFolder(this, folder) { success ->
+        FolderDeletionHelper.confirmAndDeleteFolder(this, folder, startForFolderDeletionResult) { success ->
             if (success) {
-                // For API 30+, navigation is handled in 'onActivityResult'
+                //for API 30+, navigation is handled in 'onDeleteFolderResultReceived'
                 if (Build.VERSION.SDK_INT < Build.VERSION_CODES.R) {
                     FolderDeletionHelper.showSuccess(this, "Folder deleted successfully", bucketName)
                     navigateToCustomSelector()
@@ -542,9 +539,8 @@ class CustomSelectorActivity :
     override fun onFolderClick(
         folderId: Long,
         folderName: String,
-        lastItemId: Long
+        lastItemId: Long,
     ) {
-
         supportFragmentManager
             .beginTransaction()
             .add(R.id.fragment_container, ImageFragment.newInstance(folderId, lastItemId))
@@ -562,7 +558,6 @@ class CustomSelectorActivity :
         setUpToolbar()
 
     }
-
 
     /**
      * override Selected Images Change, update view model selected images and change UI.
@@ -629,7 +624,7 @@ class CustomSelectorActivity :
             selectedImages,
         )
         intent.putExtra(CustomSelectorConstants.BUCKET_ID, bucketId)
-        startActivityForResult(intent, Constants.RequestCodes.RECEIVE_DATA_FROM_FULL_SCREEN_MODE)
+        startForResult.launch(intent)
     }
 
     /**
@@ -738,15 +733,13 @@ fun partialStorageAccessIndicator(
         OutlinedCard(
             modifier = modifier,
             colors =
-            CardDefaults.cardColors(
-                containerColor = colorResource(R.color.primarySuperLightColor),
-            ),
+                CardDefaults.cardColors(
+                    containerColor = colorResource(R.color.primarySuperLightColor),
+                ),
             border = BorderStroke(0.5.dp, color = colorResource(R.color.primaryColor)),
             shape = RoundedCornerShape(8.dp),
         ) {
-            Row(modifier = Modifier
-                .padding(16.dp)
-                .fillMaxWidth()) {
+            Row(modifier = Modifier.padding(16.dp).fillMaxWidth()) {
                 Text(
                     text = "You've given access to a select number of photos",
                     modifier = Modifier.weight(1f),
@@ -755,9 +748,9 @@ fun partialStorageAccessIndicator(
                     onClick = onManage,
                     modifier = Modifier.align(Alignment.Bottom),
                     colors =
-                    ButtonDefaults.buttonColors(
-                        containerColor = colorResource(R.color.primaryColor),
-                    ),
+                        ButtonDefaults.buttonColors(
+                            containerColor = colorResource(R.color.primaryColor),
+                        ),
                     shape = RoundedCornerShape(8.dp),
                 ) {
                     Text(
@@ -779,9 +772,9 @@ fun partialStorageAccessIndicatorPreview() {
             isVisible = true,
             onManage = {},
             modifier =
-            Modifier
-                .padding(vertical = 8.dp, horizontal = 4.dp)
-                .fillMaxWidth(),
+                Modifier
+                    .padding(vertical = 8.dp, horizontal = 4.dp)
+                    .fillMaxWidth(),
         )
     }
 }

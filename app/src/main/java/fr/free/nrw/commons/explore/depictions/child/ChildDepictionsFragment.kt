@@ -13,13 +13,13 @@ class ChildDepictionsFragment : PageableDepictionsFragment() {
     override val injectedPresenter
         get() = presenter
 
-    override fun getEmptyText(query: String) = getString(R.string.no_child_classes, arguments!!.getString("wikidataItemName")!!)
+    override fun getEmptyText(query: String) = getString(R.string.no_child_classes, requireArguments().getString("wikidataItemName")!!)
 
     override fun onViewCreated(
         view: View,
         savedInstanceState: Bundle?,
     ) {
         super.onViewCreated(view, savedInstanceState)
-        onQueryUpdated(arguments!!.getString("entityId")!!)
+        onQueryUpdated(requireArguments().getString("entityId")!!)
     }
 }

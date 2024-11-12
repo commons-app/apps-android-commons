@@ -53,6 +53,7 @@ import fr.free.nrw.commons.utils.SystemThemeUtils;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import java.util.List;
+import java.util.Locale;
 import javax.inject.Inject;
 import javax.inject.Named;
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
@@ -301,7 +302,8 @@ public class LocationPickerActivity extends BaseActivity implements
         modifyLocationButton = findViewById(R.id.modify_location);
         removeLocationButton = findViewById(R.id.remove_location);
         showInMapButton = findViewById(R.id.show_in_map);
-        showInMapButton.setText(getResources().getString(R.string.show_in_map_app).toUpperCase());
+        showInMapButton.setText(getResources().getString(R.string.show_in_map_app).toUpperCase(
+            Locale.ROOT));
         shadow = findViewById(R.id.location_picker_image_view_shadow);
     }
 

@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.category;
 
+import android.annotation.SuppressLint;
 import android.content.ContentProviderClient;
 import android.content.ContentValues;
 import android.database.Cursor;
@@ -111,6 +112,7 @@ public class CategoryDao {
     }
 
     @NonNull
+    @SuppressLint("Range")
     Category fromCursor(Cursor cursor) {
         // Hardcoding column positions!
         return new Category(

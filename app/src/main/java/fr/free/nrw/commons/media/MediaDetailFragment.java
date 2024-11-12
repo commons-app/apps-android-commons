@@ -1,13 +1,10 @@
 package fr.free.nrw.commons.media;
 
-import static android.app.Activity.RESULT_CANCELED;
-import static android.app.Activity.RESULT_OK;
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 import static fr.free.nrw.commons.category.CategoryClientKt.CATEGORY_NEEDING_CATEGORIES;
 import static fr.free.nrw.commons.category.CategoryClientKt.CATEGORY_UNCATEGORISED;
 import static fr.free.nrw.commons.description.EditDescriptionConstants.LIST_OF_DESCRIPTION_AND_CAPTION;
-import static fr.free.nrw.commons.description.EditDescriptionConstants.UPDATED_WIKITEXT;
 import static fr.free.nrw.commons.description.EditDescriptionConstants.WIKITEXT;
 import static fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment.LAST_LOCATION;
 import static fr.free.nrw.commons.utils.LangCodeUtils.getLocalizedResources;
@@ -112,8 +109,6 @@ import timber.log.Timber;
 public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
     CategoryEditHelper.Callback {
 
-    private static final int REQUEST_CODE = 1001;
-    private static final int REQUEST_CODE_EDIT_DESCRIPTION = 1002;
     private static final String IMAGE_BACKGROUND_COLOR = "image_background_color";
     static final int DEFAULT_IMAGE_BACKGROUND_COLOR = 0;
     
@@ -277,6 +272,12 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
 
         if (!sessionManager.isUserLoggedIn()) {
             binding.categoryEditButton.setVisibility(GONE);
+            binding.descriptionEdit.setVisibility(GONE);
+            binding.depictionsEditButton.setVisibility(GONE);
+        } else {
+            binding.categoryEditButton.setVisibility(VISIBLE);
+            binding.descriptionEdit.setVisibility(VISIBLE);
+            binding.depictionsEditButton.setVisibility(VISIBLE);
         }
 
         if(applicationKvStore.getBoolean("login_skipped")){
@@ -405,7 +406,6 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
             }
         );
         binding.progressBarEdit.setVisibility(GONE);
-        binding.descriptionEdit.setVisibility(VISIBLE);
     }
 
     @Override
@@ -605,8 +605,8 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
         // Check if the presented category is about need of category
         if (categoriesPresent) {
             for (String category : media.getCategories()) {
-                if (category.toLowerCase().contains(CATEGORY_NEEDING_CATEGORIES) ||
-                    category.toLowerCase().contains(CATEGORY_UNCATEGORISED)) {
+                if (category.toLowerCase(Locale.ROOT).contains(CATEGORY_NEEDING_CATEGORIES) ||
+                    category.toLowerCase(Locale.ROOT).contains(CATEGORY_UNCATEGORISED)) {
                     categoriesPresent = false;
                 }
                 break;
@@ -683,7 +683,9 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
             // Stick in a filler element.
             allCategories.add(getString(R.string.detail_panel_cats_none));
         }
-        binding.categoryEditButton.setVisibility(VISIBLE);
+        if(sessionManager.isUserLoggedIn()) {
+            binding.categoryEditButton.setVisibility(VISIBLE);
+        }
         rebuildCatList(allCategories);
     }
 
@@ -1063,81 +1065,6 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
             captionList.put(language, languageCaption);
         }
         return captionList;
-    }
-
-    /**
-     * Get the result from another activity and act accordingly.
-     * @param requestCode
-     * @param resultCode
-     * @param data
-     */
-    @Override
-    public void onActivityResult(final int requestCode, final int resultCode,
-        @Nullable final Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == REQUEST_CODE_EDIT_DESCRIPTION && resultCode == RESULT_OK) {
-            final String updatedWikiText = data.getStringExtra(UPDATED_WIKITEXT);
-
-            try {
-                compositeDisposable.add(descriptionEditHelper.addDescription(getContext(), media,
-                        updatedWikiText)
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(s -> {
-                        Timber.d("Descriptions are added.");
-                    }));
-            } catch (Exception e) {
-                if (e.getLocalizedMessage().equals(CsrfTokenClient.ANONYMOUS_TOKEN_MESSAGE)) {
-                    final String username = sessionManager.getUserName();
-                    final CommonsApplication.BaseLogoutListener logoutListener = new CommonsApplication.BaseLogoutListener(
-                        getActivity(),
-                        requireActivity().getString(R.string.invalid_login_message),
-                        username
-                    );
-
-                    CommonsApplication.getInstance().clearApplicationData(
-                        requireActivity(), logoutListener);
-                }
-            }
-
-            final ArrayList<UploadMediaDetail> uploadMediaDetails
-                = data.getParcelableArrayListExtra(LIST_OF_DESCRIPTION_AND_CAPTION);
-
-            LinkedHashMap<String, String> updatedCaptions = new LinkedHashMap<>();
-            for (UploadMediaDetail mediaDetail:
-            uploadMediaDetails) {
-                try {
-                    compositeDisposable.add(descriptionEditHelper.addCaption(getContext(), media,
-                            mediaDetail.getLanguageCode(), mediaDetail.getCaptionText())
-                        .subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(s -> {
-                                updateCaptions(mediaDetail, updatedCaptions);
-                                Timber.d("Caption is added.");
-                            }));
-
-                } catch (Exception e) {
-                    if (e.getLocalizedMessage().equals(CsrfTokenClient.ANONYMOUS_TOKEN_MESSAGE)) {
-                        final String username = sessionManager.getUserName();
-                        final CommonsApplication.BaseLogoutListener logoutListener = new CommonsApplication.BaseLogoutListener(
-                            getActivity(),
-                            requireActivity().getString(R.string.invalid_login_message),
-                            username
-                        );
-
-                        CommonsApplication.getInstance().clearApplicationData(
-                            requireActivity(), logoutListener);
-                    }
-                }
-            }
-            binding.progressBarEdit.setVisibility(GONE);
-            binding.descriptionEdit.setVisibility(VISIBLE);
-
-        } else if (requestCode == REQUEST_CODE_EDIT_DESCRIPTION && resultCode == RESULT_CANCELED) {
-            binding.progressBarEdit.setVisibility(GONE);
-            binding.descriptionEdit.setVisibility(VISIBLE);
-        }
     }
 
     /**

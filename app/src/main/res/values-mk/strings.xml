@@ -475,6 +475,7 @@
   <string name="no_notification">Немате непрочитани известувања</string>
   <string name="no_read_notification">Немате прочитани известувања</string>
   <string name="share_logs_using">Споделувај дневници користејќи</string>
+  <string name="check_your_email_inbox">Проверете си ја дојдовната е-пошта</string>
   <string name="menu_option_read">Погл. прочитани</string>
   <string name="menu_option_unread">Погл. непрочитани</string>
   <string name="error_occurred_in_picking_images">Се јави грешка при избирањето на сликите</string>
@@ -784,4 +785,7 @@
   <string name="pending">Во исчекување</string>
   <string name="failed">Неуспешно</string>
   <string name="could_not_load_place_data">Не можев да ги вчитам податоците за место</string>
+  <string name="red_pin">Местово сè уште нема слика. Направете ја!</string>
+  <string name="green_pin">Местово веќе има слика.</string>
+  <string name="grey_pin">Проверувам дали местово има слика.</string>
 </resources>

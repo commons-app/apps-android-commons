@@ -18,6 +18,9 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.Toast;
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.exifinterface.media.ExifInterface;
@@ -58,9 +61,24 @@ import timber.log.Timber;
 public class UploadMediaDetailFragment extends UploadBaseFragment implements
     UploadMediaDetailsContract.View, UploadMediaDetailAdapter.EventListener {
 
-    private static final int REQUEST_CODE = 1211;
-    private static final int REQUEST_CODE_FOR_EDIT_ACTIVITY = 1212;
-    private static final int REQUEST_CODE_FOR_VOICE_INPUT = 1213;
+    private UploadMediaDetailAdapter uploadMediaDetailAdapter;
+
+    private final ActivityResultLauncher<Intent> startForResult = registerForActivityResult(
+        new StartActivityForResult(), result -> {
+                onCameraPosition(result);
+        });
+
+    private final ActivityResultLauncher<Intent> startForEditActivityResult = registerForActivityResult(
+        new StartActivityForResult(), result -> {
+            onEditActivityResult(result);
+        }
+    );
+
+    private final ActivityResultLauncher<Intent> voiceInputResultLauncher = registerForActivityResult(
+        new StartActivityForResult(), result -> {
+            onVoiceInput(result);
+        }
+    );
 
     public static Activity activity ;
 
@@ -83,8 +101,6 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
      */
     private boolean hasUserRemovedLocation;
 
-
-    private UploadMediaDetailAdapter uploadMediaDetailAdapter;
 
     @Inject
     UploadMediaDetailsContract.UserActionListener presenter;
@@ -279,7 +295,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
      */
     private void initRecyclerView() {
         uploadMediaDetailAdapter = new UploadMediaDetailAdapter(this,
-            defaultKvStore.getString(Prefs.DESCRIPTION_LANGUAGE, ""), recentLanguagesDao);
+            defaultKvStore.getString(Prefs.DESCRIPTION_LANGUAGE, ""), recentLanguagesDao, voiceInputResultLauncher);
         uploadMediaDetailAdapter.setCallback(this::showInfoAlert);
         uploadMediaDetailAdapter.setEventListener(this);
         binding.rvDescriptions.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -593,14 +609,14 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
      * This method is called to start the image editing activity for a specific UploadItem.
      * It sets the UploadItem as the currently editable item, creates an intent to launch the
      * EditActivity, and passes the image file path as an extra in the intent. The activity
-     * is started with a request code, allowing the result to be handled in onActivityResult.
+     * is started using resultLauncher that handles the result in respective callback.
      */
     @Override
     public void showEditActivity(UploadItem uploadItem) {
         editableUploadItem = uploadItem;
         Intent intent = new Intent(getContext(), EditActivity.class);
         intent.putExtra("image", uploadableFile.getFilePath().toString());
-        startActivityForResult(intent, REQUEST_CODE_FOR_EDIT_ACTIVITY);
+        startForEditActivityResult.launch(intent);
     }
 
     /**
@@ -615,6 +631,8 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         double defaultLongitude = -122.431297;
         double defaultZoom = 16.0;
 
+        final Intent locationPickerIntent;
+
         /* Retrieve image location from EXIF if present or
            check if user has provided location while using the in-app camera.
            Use location of last UploadItem if none of them is available */
@@ -624,10 +642,11 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
                 .getDecLatitude();
             defaultLongitude = uploadItem.getGpsCoords().getDecLongitude();
             defaultZoom = uploadItem.getGpsCoords().getZoomLevel();
-            startActivityForResult(new LocationPicker.IntentBuilder()
+
+            locationPickerIntent = new LocationPicker.IntentBuilder()
                 .defaultLocation(new CameraPosition(defaultLatitude,defaultLongitude,defaultZoom))
                 .activityKey("UploadActivity")
-                .build(getActivity()), REQUEST_CODE);
+                .build(getActivity());
         } else {
             if (defaultKvStore.getString(LAST_LOCATION) != null) {
                 final String[] locationLatLng
@@ -638,27 +657,20 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
             if (defaultKvStore.getString(LAST_ZOOM) != null) {
                 defaultZoom = Double.parseDouble(defaultKvStore.getString(LAST_ZOOM));
             }
-            startActivityForResult(new LocationPicker.IntentBuilder()
+
+            locationPickerIntent = new LocationPicker.IntentBuilder()
                 .defaultLocation(new CameraPosition(defaultLatitude,defaultLongitude,defaultZoom))
                 .activityKey("NoLocationUploadActivity")
-                .build(getActivity()), REQUEST_CODE);
+                .build(getActivity());
         }
+        startForResult.launch(locationPickerIntent);
     }
 
-    /**
-     * Get the coordinates and update the existing coordinates.
-     * @param requestCode code of request
-     * @param resultCode code of result
-     * @param data intent
-     */
-    @Override
-    public void onActivityResult(final int requestCode, final int resultCode,
-        @Nullable final Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == REQUEST_CODE && resultCode == RESULT_OK) {
+    private void onCameraPosition(ActivityResult result){
+        if (result.getResultCode() == RESULT_OK) {
 
-            assert data != null;
-            final CameraPosition cameraPosition = LocationPicker.getCameraPosition(data);
+            assert result.getData() != null;
+            final CameraPosition cameraPosition = LocationPicker.getCameraPosition(result.getData());
 
             if (cameraPosition != null) {
 
@@ -678,8 +690,21 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
                 removeLocation();
             }
         }
-        if (requestCode == REQUEST_CODE_FOR_EDIT_ACTIVITY && resultCode == RESULT_OK) {
-            String result = data.getStringExtra("editedImageFilePath");
+    }
+
+    private void onVoiceInput(ActivityResult result) {
+        if (result.getResultCode() == RESULT_OK && result.getData() != null) {
+            ArrayList<String> resultData = result.getData().getStringArrayListExtra(
+                RecognizerIntent.EXTRA_RESULTS);
+            uploadMediaDetailAdapter.handleSpeechResult(resultData.get(0));
+        }else {
+            Timber.e("Error %s", result.getResultCode());
+        }
+    }
+
+    private void onEditActivityResult(ActivityResult result){
+        if (result.getResultCode() == RESULT_OK) {
+            String path = result.getData().getStringExtra("editedImageFilePath");
 
             if (Objects.equals(result, "Error")) {
                 Timber.e("Error in rotating image");
@@ -687,22 +712,13 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
             }
             try {
                 if (binding != null){
-                    binding.backgroundImage.setImageURI(Uri.fromFile(new File(result)));
+                    binding.backgroundImage.setImageURI(Uri.fromFile(new File(path)));
                 }
-                editableUploadItem.setContentUri(Uri.fromFile(new File(result)));
+                editableUploadItem.setContentUri(Uri.fromFile(new File(path)));
                 callback.changeThumbnail(indexOfFragment,
-                    result);
+                    path);
             } catch (Exception e) {
                 Timber.e(e);
-            }
-        }
-        else if (requestCode == REQUEST_CODE_FOR_VOICE_INPUT) {
-            if (resultCode == RESULT_OK && data != null) {
-                ArrayList<String> result = data.getStringArrayListExtra(
-                    RecognizerIntent.EXTRA_RESULTS);
-                uploadMediaDetailAdapter.handleSpeechResult(result.get(0));
-            }else {
-                Timber.e("Error %s", resultCode);
             }
         }
     }
@@ -809,7 +825,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     @Override
     public void displayAddLocationDialog(final Runnable onSkipClicked) {
         isMissingLocationDialog = true;
-        DialogUtil.showAlertDialog(Objects.requireNonNull(getActivity()),
+        DialogUtil.showAlertDialog(requireActivity(),
             getString(R.string.no_location_found_title),
             getString(R.string.no_location_found_message),
             getString(R.string.add_location),

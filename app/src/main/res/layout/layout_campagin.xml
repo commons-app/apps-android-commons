@@ -19,17 +19,14 @@
       android:id="@+id/iv_campaign"
       android:layout_width="@dimen/dimen_40"
       android:layout_height="@dimen/dimen_40"
-      android:layout_marginLeft="@dimen/standard_gap"
       android:layout_marginStart="@dimen/standard_gap"
       android:scaleType="centerCrop"
       app:srcCompat="@drawable/ic_campaign"
-      android:tint="?attr/card_item_color"
-      />
+    app:tint="?attr/card_item_color" />
   <LinearLayout
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:layout_centerInParent="true"
-      android:orientation="horizontal"
+    android:orientation="horizontal"
       android:layout_gravity="center_vertical"
       android:gravity="center_vertical"
       android:weightSum="4">
@@ -37,15 +34,13 @@
   <androidx.constraintlayout.widget.ConstraintLayout
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:layout_marginLeft="@dimen/standard_gap"
-      android:layout_marginRight="@dimen/tiny_margin"
-      android:layout_centerInParent="true"
-      >
+      android:layout_marginStart="@dimen/standard_gap"
+      android:layout_marginEnd="@dimen/tiny_margin">
     <TextView
         android:id="@+id/tv_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/standard_gap"
+        android:layout_marginStart="@dimen/standard_gap"
         android:textColor="?attr/card_item_color"
         android:textStyle="bold"
         tools:text="Campaign Title"
@@ -55,7 +50,7 @@
         android:id="@+id/tv_description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/standard_gap"
+        android:layout_marginStart="@dimen/standard_gap"
         android:gravity="start"
         android:paddingTop="@dimen/miniscule_margin"
         android:textAlignment="textStart"
@@ -69,7 +64,7 @@
         android:id="@+id/tv_dates"
         android:layout_width="@dimen/dimen_0"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/standard_gap"
+        android:layout_marginStart="@dimen/standard_gap"
         android:layout_weight="1"
         android:paddingTop="@dimen/miniscule_margin"
         android:text="@string/ends_on"
