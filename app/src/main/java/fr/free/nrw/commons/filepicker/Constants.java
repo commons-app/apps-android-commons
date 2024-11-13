@@ -9,7 +9,6 @@ public interface Constants {
     interface RequestCodes {
         int LOCATION = 1;
         int STORAGE = 2;
-
     }
 
     /**
