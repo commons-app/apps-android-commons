@@ -527,6 +527,7 @@
   <string name="no_notification">ليس لديك أي إشعارات غير مقروءة</string>
   <string name="no_read_notification">ليس لديك أي إشعاراتٍ غير مقروءة</string>
   <string name="share_logs_using">مشاركة السجلات باستخدام</string>
+  <string name="check_your_email_inbox">تحقق من صندوق بريدك الإلكتروني</string>
   <string name="menu_option_read">عرض المقروءة</string>
   <string name="menu_option_unread">عرض غير المقروءة</string>
   <string name="error_occurred_in_picking_images">حدث خطأ أثناء التقاط الصور</string>
@@ -690,6 +691,7 @@
   <string name="leaderboard_nearby">مجاور</string>
   <string name="leaderboard_used">مستخدَم</string>
   <string name="leaderboard_my_rank_button_text">ترتيبي</string>
+  <string name="map_attribution">&amp;#169; &lt;a href=\"https://www.openstreetmap.org/copyright\"&gt;خريطة الشارع المفتوحة&lt;/a&gt;</string>
   <string name="limited_connection_enabled">وضع الاتصال المحدود مُمَكَّن!</string>
   <string name="limited_connection_disabled">وضع الاتصال المحدود مُعطل. سيجري استئناف التحميلات المعلقة الآن.</string>
   <string name="limited_connection_mode">وضع الاتصال المحدود</string>
@@ -739,6 +741,7 @@
   <string name="custom_selector_dismiss_limit_warning_button_text">رفض</string>
   <string name="custom_selector_button_limit_text">الحد الأقصى: %1$d</string>
   <string name="custom_selector_limit_error_desc">خطأ: تجاوز حد التحميل</string>
+  <string name="place_state_wlm">دبليو إل إم</string>
   <string name="wlm_upload_info">سيتم إدخال هذه الصورة في مسابقة Wiki Loves Monuments</string>
   <string name="display_monuments">عرض الآثار</string>
   <string name="wlm_month_message">إنه شهر Wiki Loves Monuments!</string>
@@ -788,19 +791,66 @@
   <string name="image_selected">تم تحديد الصورة</string>
   <string name="image_marked_as_not_for_upload">تم وضع علامة على الصورة على أنها ليست للتحميل</string>
   <string name="menu_view_report">تقرير</string>
+  <string name="menu_view_set_white_background">تعيين الخلفية البيضاء</string>
+  <string name="menu_view_set_black_background">تعيين خلفية سوداء</string>
   <string name="report_violation">تبليغ عن عنف</string>
   <string name="report_user">أخطر عن هذا المستخدم</string>
   <string name="report_content">الإبلاغ عن هذا المحتوى</string>
   <string name="request_user_block">طلب منع هذا المستخدم</string>
   <string name="welcome_to_full_screen_mode_text">مرحبًا بك في وضع التحديد بملء الشاشة</string>
   <string name="full_screen_mode_zoom_info">استخدم إصبعين للتكبير والتصغير.</string>
-  <string name="full_screen_mode_features_info" fuzzy="true">مرر سريعًا وطويلًا لتنفيذ هذه الإجراءات:! N! - يسار / يمين: انتقل إلى السابق / التالي! N! - لأعلى: حدد! N! - أسفل: وضع علامة على أنه ليس للتحميل.</string>
+  <string name="full_screen_mode_features_info">مرر سريعًا وطويلًا لأداء هذه الإجراءات: \n- يسار/يمين: الانتقال إلى السابق/التالي \n- أعلى: تحديد\n- أسفل: وضع علامة على عدم التحميل.</string>
+  <string name="set_up_avatar_toast_string">لإعداد صورتك الرمزية في قائمة المتصدرين، اضغط على \"تعيين كصورة رمزية\" في قائمة النقاط الثلاث لأي صورة.</string>
+  <string name="similar_coordinate_description_auto_set">الإحداثيات ليست إحداثيات دقيقة، لكن الشخص الذي قام بتحميل هذه الصورة يعتقد أنها قريبة بما فيه الكفاية.</string>
   <string name="storage_permissions_denied">رُفض إذن التخزين</string>
   <string name="unable_to_share_upload_item">تعذر مشاركة هذا العنصر</string>
   <string name="permissions_are_required_for_functionality">الإذن مطلوب لهذه الوظيفة</string>
   <string name="learn_how_to_write_a_useful_description">تعلم كيفية كتابة وصف مفيد</string>
+  <string name="learn_how_to_write_a_useful_caption">تعلم كيفية كتابة تعليق مفيد</string>
+  <string name="see_your_achievements">شاهد إنجازاتك</string>
+  <string name="edit_image">تعديل الصورة</string>
+  <string name="edit_location">تعديل الموقع</string>
+  <string name="location_updated">تم تحديث الموقع!</string>
+  <string name="remove_location">إزالة الموقع</string>
   <string name="remove_location_warning_title">إزالة تحذير الموقع</string>
+  <string name="remove_location_warning_desc">يجعل تحديد الموقع الصور أكثر فائدة وسهولة في العثور عليها. هل ترغب حقًا في إزالة تحديد الموقع من هذه الصورة؟</string>
+  <string name="location_removed">تمت إزالة الموقع!</string>
   <string name="send_thanks_to_author">اشكر المؤلف</string>
   <string name="error_sending_thanks">حدث خطأ أثناء إرسال الشكر للمؤلف.</string>
+  <string name="invalid_login_message">لقد انتهت صلاحية تسجيل الدخول الخاص بك. يرجى تسجيل الدخول مرة أخرى.</string>
+  <string name="no_application_available_to_open_gpx_files">لا يوجد تطبيق متاح لفتح ملفات GPX</string>
+  <string name="file_saved_successfully">تم حفظ الملف بنجاح</string>
+  <string name="do_you_want_to_open_gpx_file">هل تريد فتح ملف GPX؟</string>
+  <string name="do_you_want_to_open_kml_file">هل تريد فتح ملف KML؟</string>
+  <string name="failed_to_save_kml_file">فشل في حفظ ملف KML.</string>
+  <string name="failed_to_save_gpx_file">فشل في حفظ ملف GPX.</string>
+  <string name="saving_kml_file">حفظ ملف KML</string>
+  <string name="saving_gpx_file">حفظ ملف GPX</string>
+  <plurals name="custom_picker_images_selected_title_appendix">
+    <item quantity="zero">لا صور تم اختيارها</item>
+    <item quantity="one">%d صورة تم اختيارها</item>
+    <item quantity="two">صورتان تم اختيارهما</item>
+    <item quantity="few">صور قليلة تم اختيارها</item>
+    <item quantity="many">صور كثيرة تم اختيارها</item>
+    <item quantity="other">%d صور تم اختيارها</item>
+  </plurals>
+  <string name="multiple_files_depiction">يرجى تذكر أن جميع الصور في التحميل المتعدد تحصل على نفس الفئات والأوصاف. إذا لم تتشارك الصور في الأوصاف والفئات، فيرجى إجراء عدة عمليات تحميل منفصلة.</string>
+  <string name="multiple_files_depiction_header">ملاحظة حول التحميلات المتعددة</string>
+  <string name="nearby_wikitalk">الإبلاغ عن مشكلة حول هذا العنصر إلى Wikidata</string>
+  <string name="please_enter_some_comments">الرجاء إدخال بعض التعليقات</string>
+  <string name="talk">نقاش</string>
+  <string name="write_something_about_the_item">اكتب شيئًا عن العنصر \'%1$s\'. سيكون مرئيًا للعامة.</string>
+  <string name="does_not_exist_anymore_no_picture_can_ever_be_taken_of_it">\'%1$s\' لم يعد موجودًا، ولا يمكن التقاط صورة له أبدًا.</string>
+  <string name="is_at_a_different_place_please_specify_the_correct_place_below_if_possible_tell_us_the_correct_latitude_longitude">\'%1$s\' موجود في مكان مختلف. يرجى تحديد المكان الصحيح أدناه، وإذا أمكن، اكتب خط العرض وخط الطول الصحيحين.</string>
+  <string name="other_problem_or_information_please_explain_below">مشكلة أو معلومات أخرى (يرجى التوضيح أدناه).</string>
+  <string name="feedback_destination_note">سيتم نشر تعليقاتك على صفحة الويكي التالية:  &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Mobile_app/Feedback\"&gt;Commons:Mobile app/Feedback&lt;/a&gt;</string>
+  <string name="are_you_sure_that_you_want_cancel_all_the_uploads">هل أنت متأكد أنك تريد إلغاء كافة التحميلات؟</string>
+  <string name="cancelling_all_the_uploads">إلغاء كافة التحميلات...</string>
+  <string name="uploads">المرفوعات</string>
+  <string name="pending">قيد الانتظار</string>
+  <string name="failed">فشل</string>
   <string name="could_not_load_place_data">تعذر تحميل بيانات المكان</string>
+  <string name="red_pin">هذا المكان ليس له صورة بعد، اذهب والتقط واحدة!</string>
+  <string name="green_pin">هذا المكان لديه صورة بالفعل.</string>
+  <string name="grey_pin">الآن التحقق ما إذا كان هذا المكان لديه صورة.</string>
 </resources>

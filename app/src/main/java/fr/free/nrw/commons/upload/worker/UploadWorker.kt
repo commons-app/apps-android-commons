@@ -41,8 +41,8 @@ import fr.free.nrw.commons.upload.UploadProgressActivity
 import fr.free.nrw.commons.upload.UploadResult
 import fr.free.nrw.commons.wikidata.WikidataEditService
 import io.reactivex.schedulers.Schedulers
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import timber.log.Timber
@@ -438,7 +438,7 @@ class UploadWorker(
                                 username,
                             )
                         CommonsApplication
-                            .getInstance()
+                            .instance!!
                             .clearApplicationData(appContext, logoutListener)
                     }
                 }
@@ -534,7 +534,7 @@ class UploadWorker(
         contribution.contentUri?.let {
             val imageSha1 = contribution.imageSHA1.toString()
             val modifiedSha1 = fileUtilsWrapper.getSHA1(fileUtilsWrapper.getFileInputStream(contribution.localUri?.path))
-            MainScope().launch {
+            CoroutineScope(Dispatchers.IO).launch {
                 uploadedStatusDao.insertUploaded(
                     UploadedStatus(
                         imageSha1,

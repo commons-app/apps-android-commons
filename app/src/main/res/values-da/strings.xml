@@ -481,6 +481,7 @@
   <string name="no_notification">Du har ingen ulæste notifikationer</string>
   <string name="no_read_notification">Du har ingen læste notifikationer</string>
   <string name="share_logs_using">Del logs ved hjælp af</string>
+  <string name="check_your_email_inbox">Tjek din e-mail-indbakke</string>
   <string name="menu_option_read">Vis læste</string>
   <string name="menu_option_unread">Vis ulæste</string>
   <string name="error_occurred_in_picking_images">Der opstod en fejl under udvælgelse af billeder</string>
@@ -788,4 +789,7 @@
   <string name="pending">Afventer</string>
   <string name="failed">Mislykkedes</string>
   <string name="could_not_load_place_data">Kunne ikke indlæse steddata</string>
+  <string name="red_pin">Dette sted har endnu ikke noget billede, så gå hen og tag et!</string>
+  <string name="green_pin">Dette sted har allerede et billede.</string>
+  <string name="grey_pin">Tjekker nu, om dette sted har et billede.</string>
 </resources>

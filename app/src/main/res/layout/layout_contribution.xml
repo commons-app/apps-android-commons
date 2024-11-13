@@ -113,9 +113,9 @@
         android:background="@android:color/transparent"
         android:padding="@dimen/activity_margin_horizontal"
         android:src="@drawable/ic_wikipedia"
-        android:tint="?attr/contributionsListTextSecondary"
         android:text="@string/menu_cancel_upload"
-        android:visibility="visible" />
+        android:visibility="visible"
+        app:tint="?attr/contributionsListTextSecondary" />
 
     </RelativeLayout>
 

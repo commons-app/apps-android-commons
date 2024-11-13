@@ -505,6 +505,7 @@
   <string name="no_notification">אין לך התראות שלא נקראו</string>
   <string name="no_read_notification">אין לך התראות שנקראו</string>
   <string name="share_logs_using">שיתוף יומנים בעזרת</string>
+  <string name="check_your_email_inbox">לבדוק את תיבת הדוא״ל הנכנס שלך</string>
   <string name="menu_option_read">הצגת התראות שנקראו</string>
   <string name="menu_option_unread">הצגת התראות שלא נקראו</string>
   <string name="error_occurred_in_picking_images">אירעה שגיאה בעת בחירת תמונות</string>
@@ -820,4 +821,7 @@
   <string name="pending">ממתינות</string>
   <string name="failed">נכשלו</string>
   <string name="could_not_load_place_data">לא היה אפשר לטעון את נתוני המקום</string>
+  <string name="red_pin">אין עדיין תמונה למקום הזה, אפשר פשוט לצלם אחת!</string>
+  <string name="green_pin">למקום הזה כבר יש תמונה.</string>
+  <string name="grey_pin">עכשיו מתבצעת בדיקה האם למקום הזה יש תמונה.</string>
 </resources>

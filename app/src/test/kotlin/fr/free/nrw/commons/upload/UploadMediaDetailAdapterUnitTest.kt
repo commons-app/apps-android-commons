@@ -2,11 +2,13 @@ package fr.free.nrw.commons.upload
 
 import android.app.Dialog
 import android.content.Context
+import android.content.Intent
 import android.view.View
 import android.widget.AdapterView
 import android.widget.GridLayout
 import android.widget.ListView
 import android.widget.TextView
+import androidx.activity.result.ActivityResultLauncher
 import androidx.test.core.app.ApplicationProvider
 import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.times
@@ -67,13 +69,16 @@ class UploadMediaDetailAdapterUnitTest {
     @Mock
     private lateinit var adapterView: AdapterView<RecentLanguagesAdapter>
 
+    @Mock
+    private lateinit var mockResultLauncher: ActivityResultLauncher<Intent>
+
     @Before
     fun setUp() {
         MockitoAnnotations.openMocks(this)
         uploadMediaDetails = mutableListOf(uploadMediaDetail, uploadMediaDetail)
         activity = Robolectric.buildActivity(UploadActivity::class.java).get()
         fragment = mock(UploadMediaDetailFragment::class.java)
-        adapter = UploadMediaDetailAdapter(fragment, "", recentLanguagesDao)
+        adapter = UploadMediaDetailAdapter(fragment, "", recentLanguagesDao, mockResultLauncher)
         context = ApplicationProvider.getApplicationContext()
         Whitebox.setInternalState(adapter, "uploadMediaDetails", uploadMediaDetails)
         Whitebox.setInternalState(adapter, "eventListener", eventListener)
