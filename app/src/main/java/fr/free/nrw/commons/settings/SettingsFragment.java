@@ -12,6 +12,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -59,6 +60,7 @@ import java.util.Locale;
 import java.util.Map;
 import javax.inject.Inject;
 import javax.inject.Named;
+import timber.log.Timber;
 
 public class SettingsFragment extends PreferenceFragmentCompat {
 
@@ -81,6 +83,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
     private ListPreference themeListPreference;
     private Preference descriptionLanguageListPreference;
     private Preference appUiLanguageListPreference;
+    private Preference showDeletionButtonPreference;
     private String keyLanguageListPreference;
     private TextView recentLanguagesTextView;
     private View separator;
@@ -187,6 +190,18 @@ public class SettingsFragment extends PreferenceFragmentCompat {
                 return true;
             }
         });
+
+        //
+        showDeletionButtonPreference = findPreference("displayDeletionButton");
+        if (showDeletionButtonPreference != null) {
+            showDeletionButtonPreference.setOnPreferenceChangeListener((preference, newValue) -> {
+                boolean isEnabled = (boolean) newValue;
+                // Save preference when user toggles the button
+                defaultKvStore.putBoolean("displayDeletionButton", isEnabled);
+                return true;
+            });
+        }
+
 
         Preference betaTesterPreference = findPreference("becomeBetaTester");
         betaTesterPreference.setOnPreferenceClickListener(preference -> {
