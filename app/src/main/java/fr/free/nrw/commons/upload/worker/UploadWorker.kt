@@ -556,20 +556,16 @@ class UploadWorker(
                     fileName
                 } else {
                     if (fileName.indexOf('.') == -1) {
-                        "$fileName $sequenceNumber"
+                        "$fileName ($sequenceNumber)"
                     } else {
-                        val regex =
-                            Pattern.compile("^(.*)(\\..+?)$")
+                        val regex = Pattern.compile("^(.*)(\\..+?)$")
                         val regexMatcher = regex.matcher(fileName)
-                        regexMatcher.replaceAll("$1 $sequenceNumber$2")
+                        regexMatcher.replaceAll("$1 ($sequenceNumber)$2")
                     }
                 }
             if (!mediaClient
                     .checkPageExistsUsingTitle(
-                        String.format(
-                            "File:%s",
-                            sequenceFileName,
-                        ),
+                        String.format("File:%s", sequenceFileName)
                     ).blockingGet()
             ) {
                 break
