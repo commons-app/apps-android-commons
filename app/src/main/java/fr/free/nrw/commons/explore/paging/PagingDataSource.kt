@@ -7,7 +7,7 @@ import io.reactivex.processors.PublishProcessor
 import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
 
-abstract class PagingDataSource<T>(
+abstract class PagingDataSource<T: Any>(
     private val loadingStates: PublishProcessor<LoadingState>,
 ) : PositionalDataSource<T>() {
     private var lastExecutedRequest: (() -> Boolean)? = null
@@ -65,7 +65,7 @@ abstract class PagingDataSource<T>(
     }
 }
 
-fun <T> dataSource(
+fun <T: Any> dataSource(
     loadingStates: PublishProcessor<LoadingState>,
     loadFunction: LoadFunction<T>,
 ) = object : PagingDataSource<T>(loadingStates) {

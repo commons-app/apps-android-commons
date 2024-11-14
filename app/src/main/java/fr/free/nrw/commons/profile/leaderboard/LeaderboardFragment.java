@@ -17,8 +17,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.ConcatAdapter;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.MergeAdapter;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.databinding.FragmentLeaderboardBinding;
@@ -280,7 +280,7 @@ public class LeaderboardFragment extends CommonsDaggerSupportFragment {
         viewModel.setParams(duration, category, limit, offset);
         LeaderboardListAdapter leaderboardListAdapter = new LeaderboardListAdapter();
         UserDetailAdapter userDetailAdapter= new UserDetailAdapter(response);
-        MergeAdapter mergeAdapter = new MergeAdapter(userDetailAdapter, leaderboardListAdapter);
+        ConcatAdapter mergeAdapter = new ConcatAdapter(userDetailAdapter, leaderboardListAdapter);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         binding.leaderboardList.setLayoutManager(linearLayoutManager);
         binding.leaderboardList.setAdapter(mergeAdapter);

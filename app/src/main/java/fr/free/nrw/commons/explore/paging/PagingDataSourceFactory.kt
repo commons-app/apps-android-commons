@@ -14,7 +14,7 @@ import javax.inject.Inject
 private const val PAGE_SIZE = 50
 private const val INITIAL_LOAD_SIZE = 50
 
-abstract class PageableBaseDataSource<T>(
+abstract class PageableBaseDataSource<T: Any>(
     private val liveDataConverter: LiveDataConverter,
 ) {
     lateinit var query: String
@@ -51,7 +51,7 @@ abstract class PageableBaseDataSource<T>(
 class LiveDataConverter
     @Inject
     constructor() {
-        fun <T> convert(
+        fun <T: Any> convert(
             dataSourceFactory: PagingDataSourceFactory<T>,
             zeroItemsLoadedFunction: () -> Unit,
         ): LiveData<PagedList<T>> =
@@ -70,7 +70,7 @@ class LiveDataConverter
             )
     }
 
-abstract class PagingDataSourceFactory<T>(
+abstract class PagingDataSourceFactory<T: Any>(
     val loadingStates: LoadingStates,
 ) : DataSource.Factory<Int, T>() {
     private var currentDataSource: PagingDataSource<T>? = null
@@ -87,7 +87,7 @@ abstract class PagingDataSourceFactory<T>(
     }
 }
 
-fun <T> dataSourceFactory(
+fun <T: Any> dataSourceFactory(
     loadingStates: LoadingStates,
     loadFunction: LoadFunction<T>,
 ) = object : PagingDataSourceFactory<T>(loadingStates) {

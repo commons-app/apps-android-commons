@@ -77,7 +77,8 @@ class PendingUploadsFragment :
         pendingUploadsPresenter.setup()
         pendingUploadsPresenter.totalContributionList.observe(
             viewLifecycleOwner,
-        ) { list: PagedList<Contribution?> ->
+            //TODO [Parry] making it non-null fixes it, but not sure if the right way?
+        ) { list ->
             contributionsSize = list.size
             contributionsList = ArrayList()
             var pausedOrQueuedUploads = 0

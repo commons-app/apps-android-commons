@@ -99,7 +99,8 @@ class FailedUploadsFragment :
         pendingUploadsPresenter.getFailedContributions()
         pendingUploadsPresenter.failedContributionList.observe(
             viewLifecycleOwner,
-        ) { list: PagedList<Contribution?> ->
+            //TODO [Parry] making it non-null fixes it, but not sure if the right way?
+        ) { list ->
             adapter.submitList(list)
             contributionsList = ArrayList()
             list.forEach {

@@ -6,7 +6,7 @@ import io.reactivex.Scheduler
 import io.reactivex.disposables.CompositeDisposable
 import timber.log.Timber
 
-abstract class BasePagingPresenter<T>(
+abstract class BasePagingPresenter<T: Any>(
     val mainThreadScheduler: Scheduler,
     val pageableBaseDataSource: PageableBaseDataSource<T>,
 ) : PagingContract.Presenter<T> {

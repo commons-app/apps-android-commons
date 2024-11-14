@@ -5,7 +5,7 @@ import androidx.paging.PagedList
 import fr.free.nrw.commons.BasePresenter
 
 interface PagingContract {
-    interface View<T> {
+    interface View<T: Any> {
         fun showSnackbar()
 
         fun observePagingResults(searchResults: LiveData<PagedList<T>>)
@@ -19,7 +19,7 @@ interface PagingContract {
         fun hideEmptyText()
     }
 
-    interface Presenter<T> : BasePresenter<View<T>> {
+    interface Presenter<T: Any> : BasePresenter<View<T>> {
         val listFooterData: LiveData<List<FooterItem>>
 
         fun onQueryUpdated(query: String)

@@ -13,20 +13,20 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.paging.PagedList
 import androidx.paging.PagedListAdapter
+import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.MergeAdapter
 import fr.free.nrw.commons.databinding.FragmentSearchPaginatedBinding
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment
 import fr.free.nrw.commons.utils.ViewUtil
 
-abstract class BasePagingFragment<T> :
+abstract class BasePagingFragment<T: Any> :
     CommonsDaggerSupportFragment(),
     PagingContract.View<T> {
     abstract val pagedListAdapter: PagedListAdapter<T, *>
     abstract val injectedPresenter: PagingContract.Presenter<T>
     abstract val errorTextId: Int
     private val loadingAdapter by lazy { FooterAdapter { injectedPresenter.retryFailedRequest() } }
-    private val mergeAdapter by lazy { MergeAdapter(pagedListAdapter, loadingAdapter) }
+    private val mergeAdapter by lazy { ConcatAdapter(pagedListAdapter, loadingAdapter) }
     private var searchResults: LiveData<PagedList<T>>? = null
 
     protected lateinit var binding: FragmentSearchPaginatedBinding
