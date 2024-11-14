@@ -17,6 +17,7 @@ import androidx.work.Data
 import androidx.work.ForegroundInfo
 import androidx.work.WorkerParameters
 import dagger.android.ContributesAndroidInjector
+import fr.free.nrw.commons.BuildConfig.HOME_URL
 import fr.free.nrw.commons.CommonsApplication
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.R
@@ -30,6 +31,7 @@ import fr.free.nrw.commons.customselector.database.UploadedStatus
 import fr.free.nrw.commons.customselector.database.UploadedStatusDao
 import fr.free.nrw.commons.di.ApplicationlessInjection
 import fr.free.nrw.commons.media.MediaClient
+import fr.free.nrw.commons.nearby.PlacesRepository
 import fr.free.nrw.commons.theme.BaseActivity
 import fr.free.nrw.commons.upload.FileUtilsWrapper
 import fr.free.nrw.commons.upload.StashUploadResult
@@ -38,12 +40,14 @@ import fr.free.nrw.commons.upload.UploadClient
 import fr.free.nrw.commons.upload.UploadProgressActivity
 import fr.free.nrw.commons.upload.UploadResult
 import fr.free.nrw.commons.wikidata.WikidataEditService
+import io.reactivex.schedulers.Schedulers
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import timber.log.Timber
 import java.util.Date
+import java.util.Random
 import java.util.regex.Pattern
 import javax.inject.Inject
 
@@ -73,6 +77,9 @@ class UploadWorker(
 
     @Inject
     lateinit var fileUtilsWrapper: FileUtilsWrapper
+
+    @Inject
+    lateinit var placesRepository: PlacesRepository
 
     private val processingUploadsNotificationTag = BuildConfig.APPLICATION_ID + " : upload_tag"
 
@@ -379,7 +386,7 @@ class UploadWorker(
                                 saveCompletedContribution(contribution, uploadResult)
                             } else {
                                 Timber.d(
-                                    "WikiDataEdit not required, making wikidata edit",
+                                    "WikiDataEdit required, making wikidata edit",
                                 )
                                 makeWikiDataEdit(uploadResult, contribution)
                             }
@@ -432,7 +439,7 @@ class UploadWorker(
                                 username,
                             )
                         CommonsApplication
-                            .getInstance()
+                            .instance!!
                             .clearApplicationData(appContext, logoutListener)
                     }
                 }
@@ -471,6 +478,16 @@ class UploadWorker(
                             contribution.media.captions,
                         )
                     if (null != revisionID) {
+                        withContext(Dispatchers.IO) {
+                            val place = placesRepository.fetchPlace(wikiDataPlace.id);
+                            place.name = wikiDataPlace.name;
+                            place.pic = HOME_URL + uploadResult.createCanonicalFileName()
+                            placesRepository
+                                .save(place)
+                                .subscribeOn(Schedulers.io())
+                                .blockingAwait()
+                            Timber.d("Updated WikiItem place ${place.name} with image ${place.pic}")
+                        }
                         showSuccessNotification(contribution)
                     }
                 } catch (exception: Exception) {
@@ -518,7 +535,7 @@ class UploadWorker(
         contribution.contentUri?.let {
             val imageSha1 = contribution.imageSHA1.toString()
             val modifiedSha1 = fileUtilsWrapper.getSHA1(fileUtilsWrapper.getFileInputStream(contribution.localUri?.path))
-            MainScope().launch {
+            CoroutineScope(Dispatchers.IO).launch {
                 uploadedStatusDao.insertUploaded(
                     UploadedStatus(
                         imageSha1,
@@ -532,33 +549,30 @@ class UploadWorker(
     }
 
     private fun findUniqueFileName(fileName: String): String {
-        var sequenceFileName: String?
-        var sequenceNumber = 1
-        while (true) {
+        var sequenceFileName: String? = fileName
+        val random = Random()
+
+        // Loops until sequenceFileName does not match any existing file names
+        while (mediaClient
+                .checkPageExistsUsingTitle(
+                    String.format(
+                        "File:%s",
+                        sequenceFileName,
+                    ),
+                ).blockingGet()) {
+
+            // Generate a random 5-character alphanumeric string
+            val randomHash = (random.nextInt(90000) + 10000).toString()
+
             sequenceFileName =
-                if (sequenceNumber == 1) {
-                    fileName
+                if (fileName.indexOf('.') == -1) {
+                    "$fileName #$randomHash"
                 } else {
-                    if (fileName.indexOf('.') == -1) {
-                        "$fileName $sequenceNumber"
-                    } else {
-                        val regex =
-                            Pattern.compile("^(.*)(\\..+?)$")
-                        val regexMatcher = regex.matcher(fileName)
-                        regexMatcher.replaceAll("$1 $sequenceNumber$2")
-                    }
+                    val regex =
+                        Pattern.compile("^(.*)(\\..+?)$")
+                    val regexMatcher = regex.matcher(fileName)
+                    regexMatcher.replaceAll("$1 #$randomHash")
                 }
-            if (!mediaClient
-                    .checkPageExistsUsingTitle(
-                        String.format(
-                            "File:%s",
-                            sequenceFileName,
-                        ),
-                    ).blockingGet()
-            ) {
-                break
-            }
-            sequenceNumber++
         }
         return sequenceFileName!!
     }

@@ -10,15 +10,13 @@ abstract class BaseDelegateAdapter<T>(
     areContentsTheSame: (T, T) -> Boolean = { old, new -> old == new },
 ) : AsyncListDifferDelegationAdapter<T>(
         object : DiffUtil.ItemCallback<T>() {
-            override fun areItemsTheSame(
-                oldItem: T,
-                newItem: T,
-            ) = areItemsTheSame(oldItem, newItem)
+            override fun areItemsTheSame(oldItem: T & Any, newItem: T & Any): Boolean {
+                return areItemsTheSame(oldItem, newItem)
+            }
 
-            override fun areContentsTheSame(
-                oldItem: T,
-                newItem: T,
-            ) = areContentsTheSame(oldItem, newItem)
+            override fun areContentsTheSame(oldItem: T & Any, newItem: T & Any): Boolean {
+                return areContentsTheSame(oldItem, newItem)
+            }
         },
         *delegates,
     ) {

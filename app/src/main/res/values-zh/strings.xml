@@ -526,6 +526,7 @@
   <string name="no_notification">您没有任何未读通知</string>
   <string name="no_read_notification">您没有已读通知</string>
   <string name="share_logs_using">分享日志于</string>
+  <string name="check_your_email_inbox">请查看你的电子邮箱</string>
   <string name="menu_option_read">查看已读</string>
   <string name="menu_option_unread">查看未读</string>
   <string name="error_occurred_in_picking_images">选择图片时出错</string>
@@ -834,4 +835,7 @@
   <string name="pending">待处理</string>
   <string name="failed">失败</string>
   <string name="could_not_load_place_data">无法加载地点数据</string>
+  <string name="red_pin">这个地点还没有照片，快去拍一张吧！</string>
+  <string name="green_pin">这个地点已经有照片了。</string>
+  <string name="grey_pin">现在检查这个地点是否有照片。</string>
 </resources>

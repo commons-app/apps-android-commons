@@ -36,7 +36,7 @@ abstract class DepictsDao {
     /**
      * Gets all Depicts objects from the database, ordered by lastUsed in descending order.
      *
-     * @return A list of Depicts objects.
+     * @return Deferred list of Depicts objects.
      */
     fun depictsList(): Deferred<List<Depicts>> =
         CoroutineScope(Dispatchers.IO).async {
@@ -48,7 +48,7 @@ abstract class DepictsDao {
      *
      * @param depictedItem The Depicts object to insert.
      */
-    private fun insertDepict(depictedItem: Depicts) =
+    fun insertDepict(depictedItem: Depicts) =
         CoroutineScope(Dispatchers.IO).launch {
             insert(depictedItem)
         }
@@ -59,7 +59,7 @@ abstract class DepictsDao {
      * @param n The number of depicts to delete.
      * @return A list of Depicts objects to delete.
      */
-    private suspend fun depictsForDeletion(n: Int): Deferred<List<Depicts>> =
+    fun depictsForDeletion(n: Int): Deferred<List<Depicts>> =
         CoroutineScope(Dispatchers.IO).async {
             getDepictsForDeletion(n)
         }
@@ -69,7 +69,7 @@ abstract class DepictsDao {
      *
      * @param depicts The Depicts object to delete.
      */
-    private suspend fun deleteDepicts(depicts: Depicts) =
+    fun deleteDepicts(depicts: Depicts) =
         CoroutineScope(Dispatchers.IO).launch {
             delete(depicts)
         }

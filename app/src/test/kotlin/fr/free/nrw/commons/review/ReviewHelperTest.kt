@@ -140,7 +140,7 @@ class ReviewHelperTest {
         mock<MwQueryPage>().apply {
             whenever(title()).thenReturn(file)
             if (revision.isNotEmpty()) {
-                whenever(revisions()).thenReturn(*revision.toMutableList())
+                whenever(revisions()).thenReturn(revision.toMutableList())
             }
 
             val media =

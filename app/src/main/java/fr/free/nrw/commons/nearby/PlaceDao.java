@@ -4,7 +4,6 @@ import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
-import fr.free.nrw.commons.location.LatLng;
 import io.reactivex.Completable;
 
 /**
@@ -38,8 +37,21 @@ public abstract class PlaceDao {
      */
     public Completable save(final Place place) {
         return Completable
-            .fromAction(() -> {
-                saveSynchronous(place);
-            });
+            .fromAction(() -> saveSynchronous(place));
+    }
+
+    /**
+     * Deletes all Place objects from the database.
+     */
+    @Query("DELETE FROM place")
+    public abstract void deleteAllSynchronous();
+
+    /**
+     * Deletes all Place objects from the database.
+     *
+     * @return A Completable that completes once the deletion operation is done.
+     */
+    public Completable deleteAll() {
+        return Completable.fromAction(this::deleteAllSynchronous);
     }
 }

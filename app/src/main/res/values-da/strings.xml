@@ -125,6 +125,7 @@
   <string name="categories_search_text_hint">Søg kategorier</string>
   <string name="depicts_search_text_hint">Søg efter genstande, som dine medier afbilder (bjerg, Taj Mahal osv.)</string>
   <string name="menu_save_categories">Gem</string>
+  <string name="menu_overflow_desc">Overløbsmenu</string>
   <string name="refresh_button">Opdater</string>
   <string name="display_list_button">Liste</string>
   <string name="contributions_subtitle_zero">(Ingen uploads endnu)</string>
@@ -481,6 +482,7 @@
   <string name="no_notification">Du har ingen ulæste notifikationer</string>
   <string name="no_read_notification">Du har ingen læste notifikationer</string>
   <string name="share_logs_using">Del logs ved hjælp af</string>
+  <string name="check_your_email_inbox">Tjek din e-mail-indbakke</string>
   <string name="menu_option_read">Vis læste</string>
   <string name="menu_option_unread">Vis ulæste</string>
   <string name="error_occurred_in_picking_images">Der opstod en fejl under udvælgelse af billeder</string>
@@ -788,4 +790,16 @@
   <string name="pending">Afventer</string>
   <string name="failed">Mislykkedes</string>
   <string name="could_not_load_place_data">Kunne ikke indlæse steddata</string>
+  <string name="custom_selector_delete_folder">Slet mappe</string>
+  <string name="custom_selector_confirm_deletion_title">Bekræft sletning</string>
+  <string name="custom_selector_confirm_deletion_message">Er du sikker på, at du vil slette mappen %1$s, der indeholder %2$d elementer?</string>
+  <string name="custom_selector_delete">Slet</string>
+  <string name="custom_selector_cancel">Annuller</string>
+  <string name="custom_selector_folder_deleted_success">Mappen %1$s blev slettet</string>
+  <string name="custom_selector_folder_deleted_failure">Kunne ikke slette mappen %1$s</string>
+  <string name="custom_selector_error_trashing_folder_contents">Fejl ved sletning af mappeindhold: %1$s</string>
+  <string name="custom_selector_folder_not_found_error">Kunne ikke hente mappestien til bucket-id: %1$d</string>
+  <string name="red_pin">Dette sted har endnu ikke noget billede, så gå hen og tag et!</string>
+  <string name="green_pin">Dette sted har allerede et billede.</string>
+  <string name="grey_pin">Tjekker nu, om dette sted har et billede.</string>
 </resources>
