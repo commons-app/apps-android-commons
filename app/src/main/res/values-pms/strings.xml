@@ -117,6 +117,7 @@
   <string name="categories_search_text_hint">Sërché dle categorìe</string>
   <string name="depicts_search_text_hint">Arserché j\'element che sò mojen a arpresenta (montagna, Taj Mahal, e via fòrt)</string>
   <string name="menu_save_categories">Argistré</string>
+  <string name="menu_overflow_desc">Mnu dë strabordament</string>
   <string name="refresh_button">Agiorné</string>
   <string name="display_list_button">Lista</string>
   <string name="contributions_subtitle_zero">(Ancor gnun cariament)</string>
@@ -781,6 +782,14 @@
   <string name="pending">An atèisa</string>
   <string name="failed">Falì</string>
   <string name="could_not_load_place_data">Impossìbil carié ij dàit dël pòst</string>
+  <string name="custom_selector_delete_folder">Eliminé ëd dossié</string>
+  <string name="custom_selector_confirm_deletion_title">Confirmé l\'eliminassion</string>
+  <string name="custom_selector_confirm_deletion_message">É-lo sigur ëd vorèj eliminé ël dossié %1$s ch\'a content %2$d element?</string>
+  <string name="custom_selector_delete">Eliminé</string>
+  <string name="custom_selector_cancel">Anulé</string>
+  <string name="custom_selector_folder_deleted_success">Ël dossié %1$s a l\'é stàit eliminà për da bin</string>
+  <string name="custom_selector_folder_deleted_failure">Impossìbil eliminé ël dossié %1$s</string>
+  <string name="custom_selector_error_trashing_folder_contents">Eror durant l\'eliminassion dël contnù dël dossié: %1$s</string>
   <string name="red_pin">Ës pòst a l\'ha ancor gnun-e fòto, ch\'a na pija un-a!</string>
   <string name="green_pin">Ës pòst a l\'ha già dle fòto.</string>
   <string name="grey_pin">An camin ch\'as verìfica si cost pòst -sì a l\'ha dle fòto.</string>

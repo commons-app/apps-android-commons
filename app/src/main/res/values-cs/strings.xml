@@ -5,6 +5,7 @@
 * Chmee2
 * Clon
 * Dvorapa
+* Fjuro
 * Frettie
 * Georg101
 * Ilimanaq29
@@ -28,31 +29,58 @@
   <string name="commons_github">Zdrojový kód Commons na GitHubu</string>
   <string name="commons_logo">Logo Wikimedia Commons</string>
   <string name="commons_website">Stránka Commons</string>
+  <string name="exit_location_picker">Ukončit výběr polohy</string>
   <string name="submit">Odeslat</string>
+  <string name="add_another_description">Přidat další popis</string>
+  <string name="add_new_contribution">Přidat nový příspěvek</string>
+  <string name="add_contribution_from_camera">Přidat příspěvek z fotoaparátu</string>
+  <string name="add_contribution_from_photos">Přidat příspěvek z fotek</string>
+  <string name="add_contribution_from_contributions_gallery">Přidat příspěvek z galerie předchozích příspěvků</string>
+  <string name="show_captions">Titulky</string>
+  <string name="row_item_language_description">Popis jazyka</string>
+  <string name="row_item_caption">Titulek</string>
+  <string name="show_captions_description">Popis</string>
+  <string name="nearby_row_image">Obrázek</string>
+  <string name="nearby_all">Vše</string>
+  <string name="nearby_filter_toggle">Přepnout nahoru</string>
+  <string name="nearby_filter_search">Zobrazení vyhledávání</string>
+  <string name="nearby_filter_state">Stát místa</string>
   <string name="appwidget_img">Obrázek dne</string>
-  <plurals name="uploads_pending_notification_indicator" fuzzy="true">
-    <item quantity="one">%1$d soubor se nahrává</item>
-    <item quantity="other">%1$d souborů se nahrává</item>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="one">Nahrávání %1$d souboru</item>
+    <item quantity="few">Nahrávání %1$d souborů</item>
+    <item quantity="many">Nahrávání %1$d souborů</item>
+    <item quantity="other">Nahrávání %1$d souborů</item>
   </plurals>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">\@string/contributions_subtitle_zero</item>
+  <plurals name="contributions_subtitle">
     <item quantity="one">(%1$d)</item>
+    <item quantity="few">(%1$d)</item>
+    <item quantity="many">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
-  <plurals name="starting_multiple_uploads" fuzzy="true">
-    <item quantity="one">Spouští se nahrávání %1$d souboru</item>
-    <item quantity="other">Spouští se nahrávání %1$d souborů</item>
+  <string name="starting_uploads">Spouštění nahrávání</string>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">Zpracovávání %d nahrání</item>
+    <item quantity="few">Zpracovávání %d nahrání</item>
+    <item quantity="many">Zpracovávání %d nahrání</item>
+    <item quantity="other">Zpracovávání %d nahrání</item>
   </plurals>
-  <plurals name="multiple_uploads_title" fuzzy="true">
-    <item quantity="one">%1$d nahrávání</item>
-    <item quantity="other">%1$d nahrávání</item>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">%d nahrávání</item>
+    <item quantity="few">%d nahrávání</item>
+    <item quantity="many">%d nahrávání</item>
+    <item quantity="other">%d nahrávání</item>
   </plurals>
-  <plurals name="share_license_summary" fuzzy="true">
+  <plurals name="share_license_summary">
     <item quantity="one">Tento obrázek bude zveřejněn pod licencí %1$s</item>
+    <item quantity="few">Tyto obrázky budou zveřejněny pod licencí %1$s</item>
+    <item quantity="many">Tyto obrázky budou zveřejněny pod licencí %1$s</item>
     <item quantity="other">Tyto obrázky budou zveřejněny pod licencí %1$s</item>
   </plurals>
-  <plurals name="upload_count_title" fuzzy="true">
+  <plurals name="upload_count_title">
     <item quantity="one">%1$d nahrání</item>
+    <item quantity="few">%1$d nahrání</item>
+    <item quantity="many">%1$d nahrání</item>
     <item quantity="other">%1$d nahrání</item>
   </plurals>
   <plurals name="receiving_shared_content" fuzzy="true">
@@ -67,6 +95,7 @@
   <string name="app_name">Commons</string>
   <string name="menu_settings">Nastavení</string>
   <string name="intent_share_upload_label">Nahrát na Commons</string>
+  <string name="upload_in_progress">Probíhá nahrávání</string>
   <string name="username">Uživatelské jméno</string>
   <string name="password">Heslo</string>
   <string name="login_credential">Přihlásit se do svého Commons beta účtu</string>
@@ -75,7 +104,9 @@
   <string name="signup">Zaregistrovat se</string>
   <string name="logging_in_title">Přihlášení</string>
   <string name="logging_in_message">Čekejte prosím…</string>
-  <string name="login_success" fuzzy="true">Přihlášení uspělo!</string>
+  <string name="updating_caption_title">Nahrávání titulků a popisů</string>
+  <string name="updating_caption_message">Čekejte prosím…</string>
+  <string name="login_success">Úspěšně přihlášeni!</string>
   <string name="login_failed" fuzzy="true">Přihlášení se nezdařilo!</string>
   <string name="upload_failed">Soubor nebyl nalezen. Prosím, zkuste jiný soubor.</string>
   <string name="authentication_failed" fuzzy="true">Ověření se nezdařilo, prosím přihlaste se znovu</string>
@@ -488,7 +519,10 @@
   <string name="you_must_reset_your_passsword" fuzzy="true">Při přihlášení nastala chyba, musíte si resetovat vaše heslo!</string>
   <string name="upload_nearby_place_found_title">Místo v okolí nalezeno</string>
   <string name="upload_nearby_place_found_description_singular" fuzzy="true">Je toto fotka místa %1$s?</string>
+  <string name="title_app_shortcut_bookmark">Záložky</string>
   <string name="title_app_shortcut_setting">Nastavení</string>
+  <string name="remove_bookmark">Odebráno ze záložek</string>
+  <string name="add_bookmark">Přidáno do záložek</string>
   <string name="wallpaper_set_unsuccessfully">Něco se pokazilo. Tapetu se nepodařilo nastavit</string>
   <string name="setting_wallpaper_dialog_title">Nastavit jako tapetu</string>
   <string name="setting_wallpaper_dialog_message">Nastavování tapety. Prosím, čekejte…</string>

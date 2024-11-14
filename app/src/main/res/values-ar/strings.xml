@@ -171,6 +171,7 @@
   <string name="categories_search_text_hint">تصنيفات البحث</string>
   <string name="depicts_search_text_hint">(.البحث عن العناصر التي تصورها وسائطك (جبل ،تاج محل، إلخ</string>
   <string name="menu_save_categories">حفظ</string>
+  <string name="menu_overflow_desc">القائمة الزائدة</string>
   <string name="refresh_button">أنعش</string>
   <string name="display_list_button">القائمة</string>
   <string name="contributions_subtitle_zero">(لا يوجد تحميلات حتى الآن)</string>
@@ -850,6 +851,15 @@
   <string name="pending">قيد الانتظار</string>
   <string name="failed">فشل</string>
   <string name="could_not_load_place_data">تعذر تحميل بيانات المكان</string>
+  <string name="custom_selector_delete_folder">حذف المجلد</string>
+  <string name="custom_selector_confirm_deletion_title">تأكيد الحذف</string>
+  <string name="custom_selector_confirm_deletion_message">هل أنت متأكد أنك تريد حذف المجلد %1$s الذي يحتوي على %2$d عنصرا؟</string>
+  <string name="custom_selector_delete">حذف</string>
+  <string name="custom_selector_cancel">إلغاء</string>
+  <string name="custom_selector_folder_deleted_success">تم حذف المجلد %1$s بنجاح</string>
+  <string name="custom_selector_folder_deleted_failure">فشل حذف المجلد %1$s</string>
+  <string name="custom_selector_error_trashing_folder_contents">خطأ في نقل محتويات المجلد إلى سلة المهملات: %1$s</string>
+  <string name="custom_selector_folder_not_found_error">فشل استرداد مسار المجلد لمعرف الدلو: %1$d</string>
   <string name="red_pin">هذا المكان ليس له صورة بعد، اذهب والتقط واحدة!</string>
   <string name="green_pin">هذا المكان لديه صورة بالفعل.</string>
   <string name="grey_pin">الآن التحقق ما إذا كان هذا المكان لديه صورة.</string>

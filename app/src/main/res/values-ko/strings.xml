@@ -129,6 +129,7 @@
   <string name="categories_search_text_hint">분류 검색</string>
   <string name="depicts_search_text_hint">미디어가 서술한 항목을 검색하세요. (산, 타지마할 등)</string>
   <string name="menu_save_categories">저장</string>
+  <string name="menu_overflow_desc">오버플로 메뉴</string>
   <string name="refresh_button">새로 고침</string>
   <string name="display_list_button">목록</string>
   <string name="contributions_subtitle_zero">(아직 올린 항목이 없음)</string>
@@ -686,6 +687,14 @@
   <string name="pending">보류 중</string>
   <string name="failed">실패</string>
   <string name="could_not_load_place_data">장소 데이터를 불러오지 못했습니다</string>
+  <string name="custom_selector_delete_folder">폴더 삭제</string>
+  <string name="custom_selector_confirm_deletion_title">삭제 확인</string>
+  <string name="custom_selector_confirm_deletion_message">항목 %2$d개를 포함하는 %1$s 폴더를 삭제하시겠습니까?</string>
+  <string name="custom_selector_delete">삭제</string>
+  <string name="custom_selector_cancel">취소</string>
+  <string name="custom_selector_folder_deleted_success">%1$s 폴더를 성공적으로 삭제했습니다</string>
+  <string name="custom_selector_folder_deleted_failure">%1$s 폴더를 삭제하지 못했습니다</string>
+  <string name="custom_selector_folder_not_found_error">버킷 ID의 폴더 경로를 검색하지 못했습니다: %1$d</string>
   <string name="red_pin">이 장소에 아직 사진이 없습니다. 사진을 찍어보세요!</string>
   <string name="green_pin">이 장소에 이미 사진이 있습니다.</string>
   <string name="grey_pin">지금 이 장소에 사진이 있는지 확인 중입니다.</string>

@@ -481,6 +481,7 @@
   <string name="no_notification">Du har inga olästa aviseringar</string>
   <string name="no_read_notification">Du har inga lästa aviseringar</string>
   <string name="share_logs_using">Dela loggar med hjälp av</string>
+  <string name="check_your_email_inbox">Kontrollera inkorgen för din e-post</string>
   <string name="menu_option_read">Visa lästa</string>
   <string name="menu_option_unread">Visa olästa</string>
   <string name="error_occurred_in_picking_images">Fel uppstod när bilder valdes ut</string>
@@ -788,4 +789,7 @@
   <string name="pending">Pågår</string>
   <string name="failed">Misslyckades</string>
   <string name="could_not_load_place_data">Kunde inte läsa in platsdata</string>
+  <string name="red_pin">Det här platsen har ännu ingen bild. Gå och ta en!</string>
+  <string name="green_pin">Det här platsen har redan en bild.</string>
+  <string name="grey_pin">Kollar nu om den här platsen har en bild.</string>
 </resources>

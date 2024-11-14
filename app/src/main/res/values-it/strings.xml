@@ -760,6 +760,11 @@
     <item quantity="one">%d immagine selezionata</item>
     <item quantity="other">%d immagini selezionate</item>
   </plurals>
+  <string name="custom_selector_delete_folder">Cancella cartella</string>
+  <string name="custom_selector_confirm_deletion_title">Conferma cancellazione</string>
+  <string name="custom_selector_delete">Cancella</string>
+  <string name="custom_selector_cancel">Annulla</string>
+  <string name="custom_selector_folder_deleted_success">Cartella %1$s cancellata correttamente</string>
   <string name="red_pin">Questo posto non ha ancora una foto, scattane una!</string>
   <string name="green_pin">Questo posto ha già una foto.</string>
   <string name="grey_pin">Ora controlliamo se questo posto ha una foto.</string>
