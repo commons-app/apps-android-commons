@@ -117,6 +117,7 @@
   <string name="categories_search_text_hint">Search categories</string>
   <string name="depicts_search_text_hint">Search for items that your media depicts (mountain, Taj Mahal, etc.)</string>
   <string name="menu_save_categories">Save</string>
+  <string name="menu_overflow_desc">Overflow menu</string>
   <string name="refresh_button">Refresh</string>
   <string name="display_list_button">List</string>
   <string name="contributions_subtitle_zero">(No uploads yet)</string>
@@ -504,6 +505,7 @@ Upload your first media by tapping on the add button.</string>
   <string name="no_notification">You have no unread notifications</string>
   <string name="no_read_notification">You have no read notifications</string>
   <string name="share_logs_using">Share logs using</string>
+  <string name="check_your_email_inbox">Check your email inbox</string>
   <string name="menu_option_read">View read</string>
   <string name="menu_option_unread">View unread</string>
 
@@ -831,4 +833,18 @@ Upload your first media by tapping on the add button.</string>
   <string name="pending">Pending</string>
   <string name="failed">Failed</string>
   <string name="could_not_load_place_data">Could not load place data</string>
+
+  <string name="custom_selector_delete_folder">Delete Folder</string>
+  <string name="custom_selector_confirm_deletion_title">Confirm Deletion</string>
+  <string name="custom_selector_confirm_deletion_message">Are you sure you want to delete folder %1$s containing %2$d items?</string>
+  <string name="custom_selector_delete">Delete</string>
+  <string name="custom_selector_cancel">Cancel</string>
+  <string name="custom_selector_folder_deleted_success">Folder %1$s deleted successfully</string>
+  <string name="custom_selector_folder_deleted_failure">Failed to delete folder %1$s</string>
+  <string name="custom_selector_error_trashing_folder_contents">Error in trashing folder contents: %1$s</string>
+  <string name="custom_selector_folder_not_found_error">Failed to retrieve folder path for bucket ID: %1$d</string>
+
+  <string name="red_pin">This place has no picture yet, go take one!</string>
+  <string name="green_pin">This place has a picture already.</string>
+  <string name="grey_pin">Now checking whether this place has a picture.</string>
 </resources>

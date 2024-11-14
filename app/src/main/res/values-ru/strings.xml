@@ -530,6 +530,7 @@
   <string name="no_notification">У вас нет непрочитанных уведомлений</string>
   <string name="no_read_notification">Нет прочитанных уведомлений</string>
   <string name="share_logs_using">Поделиться лог-файлами</string>
+  <string name="check_your_email_inbox">Проверьте свой почтовый ящик</string>
   <string name="menu_option_read">Просмотр прочитанного</string>
   <string name="menu_option_unread">См. непрочитанные</string>
   <string name="error_occurred_in_picking_images">Произошла ошибка при загрузке изображений</string>
@@ -845,4 +846,7 @@
   <string name="pending">В ожидании</string>
   <string name="failed">Не удалось</string>
   <string name="could_not_load_place_data">Не удалось загрузить данные о месте</string>
+  <string name="red_pin">У этого места пока нет фотографий, так что сделайте несколько!</string>
+  <string name="green_pin">У этого места уже есть фотография.</string>
+  <string name="grey_pin">Сейчас проверим, есть ли у этого места фотография.</string>
 </resources>

@@ -34,9 +34,14 @@ public class PermissionUtils {
             return new String[]{ Manifest.permission.READ_MEDIA_IMAGES,
             Manifest. permission.ACCESS_MEDIA_LOCATION };
         }
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+        if(Build.VERSION.SDK_INT > Build.VERSION_CODES.Q) {
             return new String[]{ Manifest.permission.READ_EXTERNAL_STORAGE,
             Manifest.permission.ACCESS_MEDIA_LOCATION };
+        }
+        if(Build.VERSION.SDK_INT == Build.VERSION_CODES.Q) {
+            return new String[]{ Manifest.permission.READ_EXTERNAL_STORAGE,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.ACCESS_MEDIA_LOCATION };
         }
         return new String[]{
             Manifest.permission.READ_EXTERNAL_STORAGE,
@@ -54,8 +59,7 @@ public class PermissionUtils {
         final Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
         final Uri uri = Uri.fromParts("package", activity.getPackageName(), null);
         intent.setData(uri);
-        activity.startActivityForResult(intent,
-            CommonsApplication.OPEN_APPLICATION_DETAIL_SETTINGS);
+        activity.startActivity(intent);
     }
 
     /**

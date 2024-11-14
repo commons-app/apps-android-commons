@@ -12,6 +12,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -21,6 +22,7 @@ import android.widget.TextView;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult;
 import androidx.preference.ListPreference;
 import androidx.preference.MultiSelectListPreference;
 import androidx.preference.Preference;
@@ -58,6 +60,7 @@ import java.util.Locale;
 import java.util.Map;
 import javax.inject.Inject;
 import javax.inject.Named;
+import timber.log.Timber;
 
 public class SettingsFragment extends PreferenceFragmentCompat {
 
@@ -80,11 +83,21 @@ public class SettingsFragment extends PreferenceFragmentCompat {
     private ListPreference themeListPreference;
     private Preference descriptionLanguageListPreference;
     private Preference appUiLanguageListPreference;
+    private Preference showDeletionButtonPreference;
     private String keyLanguageListPreference;
     private TextView recentLanguagesTextView;
     private View separator;
     private ListView languageHistoryListView;
     private static final String GET_CONTENT_PICKER_HELP_URL = "https://commons-app.github.io/docs.html#get-content";
+
+    private final ActivityResultLauncher<Intent> cameraPickLauncherForResult =
+        registerForActivityResult(new StartActivityForResult(),
+        result -> {
+            contributionController.handleActivityResultWithCallback(requireActivity(), callbacks -> {
+                contributionController.onPictureReturnedFromCamera(result, requireActivity(), callbacks);
+            });
+        });
+
     private ActivityResultLauncher<String[]> inAppCameraLocationPermissionLauncher = registerForActivityResult(new ActivityResultContracts.RequestMultiplePermissions(), new ActivityResultCallback<Map<String, Boolean>>() {
         @Override
         public void onActivityResult(Map<String, Boolean> result) {
@@ -93,7 +106,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
                 areAllGranted = areAllGranted && b;
             }
             if (!areAllGranted && shouldShowRequestPermissionRationale(permission.ACCESS_FINE_LOCATION)) {
-                contributionController.handleShowRationaleFlowCameraLocation(getActivity(), inAppCameraLocationPermissionLauncher);
+                contributionController.handleShowRationaleFlowCameraLocation(getActivity(), inAppCameraLocationPermissionLauncher, cameraPickLauncherForResult);
             }
         }
     });
@@ -177,6 +190,18 @@ public class SettingsFragment extends PreferenceFragmentCompat {
                 return true;
             }
         });
+
+        //
+        showDeletionButtonPreference = findPreference("displayDeletionButton");
+        if (showDeletionButtonPreference != null) {
+            showDeletionButtonPreference.setOnPreferenceChangeListener((preference, newValue) -> {
+                boolean isEnabled = (boolean) newValue;
+                // Save preference when user toggles the button
+                defaultKvStore.putBoolean("displayDeletionButton", isEnabled);
+                return true;
+            });
+        }
+
 
         Preference betaTesterPreference = findPreference("becomeBetaTester");
         betaTesterPreference.setOnPreferenceClickListener(preference -> {

@@ -439,13 +439,6 @@ public class MainActivity extends BaseActivity
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Timber.d(data != null ? data.toString() : "onActivityResult data is null");
-        super.onActivityResult(requestCode, resultCode, data);
-        controller.handleActivityResult(this, requestCode, resultCode, data);
-    }
-
-    @Override
     protected void onResume() {
         super.onResume();
 

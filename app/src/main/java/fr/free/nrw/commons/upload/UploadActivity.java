@@ -321,6 +321,14 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
     }
 
     /**
+     * go to the uploadProgress activity to check the status of uploading
+     */
+    @Override
+    public void goToUploadProgressActivity() {
+        startActivity(new Intent(this, UploadProgressActivity.class));
+    }
+
+    /**
      * Show/Hide the progress dialog
      */
     @Override
@@ -431,14 +439,6 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
             }
         }
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == CommonsApplication.OPEN_APPLICATION_DETAIL_SETTINGS) {
-            //TODO: Confirm if handling manual permission enabled is required
-        }
     }
 
     /**

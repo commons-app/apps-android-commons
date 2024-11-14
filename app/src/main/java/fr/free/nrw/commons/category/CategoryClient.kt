@@ -124,7 +124,7 @@ class CategoryClient
                 }.map {
                     it
                         .filter { page ->
-                            page.categoryInfo() == null || !page.categoryInfo().isHidden
+                            !page.categoryInfo().isHidden
                         }.map {
                             CategoryItem(
                                 it.title().replace(CATEGORY_PREFIX, ""),

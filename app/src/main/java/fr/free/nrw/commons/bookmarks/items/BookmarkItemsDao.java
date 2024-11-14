@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.bookmarks.items;
 
+import android.annotation.SuppressLint;
 import android.content.ContentProviderClient;
 import android.content.ContentValues;
 import android.database.Cursor;
@@ -134,6 +135,7 @@ public class BookmarkItemsDao {
      * @param cursor : Object for storing database data
      * @return DepictedItem
      */
+    @SuppressLint("Range")
     DepictedItem fromCursor(final Cursor cursor) {
         final String fileName = cursor.getString(cursor.getColumnIndex(Table.COLUMN_NAME));
         final String description

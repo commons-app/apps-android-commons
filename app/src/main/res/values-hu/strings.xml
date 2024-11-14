@@ -374,7 +374,7 @@
   <string name="unable_to_display_nearest_place">A helymeghatározás nélkül nem használható ez a funkció.</string>
   <string name="never_ask_again">Ne kérdezd meg többször</string>
   <string name="display_location_permission_title">Helymeghatározási engedély</string>
-  <string name="achievements_fetch_failed" fuzzy="true">Valami hiba történt, nem sikerült az eredményeid betöltése</string>
+  <string name="achievements_fetch_failed">Valami hiba történt, nem sikerült az eredményeid betöltése</string>
   <string name="display_campaigns">Kampányok megjelenítése</string>
   <string name="display_campaigns_explanation">Folyamatban lévő kampányok megjelenítése</string>
   <string name="in_app_camera_location_access_explanation">Engedélyezd az alkalmazás számára a helyszín lekérését, ha a kamera nem rögzíti azt! Egyes eszközök kamerái nem rögzítik a helyszínt. Közreműködésed hasznosabb, ha ilyen esetekben hagyod, hogy az alkalmazás lekérje és hozzárendelje a helyszínt. Ezt bármikor módosíthatod a Beállításokban</string>
@@ -385,7 +385,7 @@
   <string name="in_app_camera_location_permission_denied">Az alkalmazás helymeghatározási engedély hiányában nem rögzíti a helyszínt a felvételekkel együtt</string>
   <string name="in_app_camera_location_unavailable">Az alkalmazás nem rögzít helyszínt a felvételekkel együtt, mivel a GPS ki van kapcsolva</string>
   <string name="nearby_campaign_dismiss_message">Többé nem lesznek láthatók a kampányok. Ha akarod, visszakapcsolható a Beállításoknál.</string>
-  <string name="this_function_needs_network_connection" fuzzy="true">Ehhez a funkcióhoz hálózati kapcsolat szükséges, kérlek ellenőrizd az internetbeállításaidat.</string>
+  <string name="this_function_needs_network_connection">Ehhez a funkcióhoz hálózati kapcsolat szükséges. Kérlek ellenőrizd az internetbeállításaidat!</string>
   <string name="error_processing_image">Hiba történt a kép feltöltése során. Próbáld meg újra!</string>
   <string name="getting_edit_token">Szerkesztő token beszerzése</string>
   <string name="check_category_adding_template">Kategóriaellenőrző sablon felhelyezése</string>
@@ -454,9 +454,9 @@
   <string name="delete_helper_show_deletion_message_if">Törlésre jelölve: %1$s.</string>
   <string name="delete_helper_show_deletion_title_failed">Sikertelen</string>
   <string name="delete_helper_show_deletion_message_else">Nem sikerült a törlés kérése.</string>
-  <string name="delete_helper_ask_spam_selfie" fuzzy="true">Egy szelfi</string>
-  <string name="delete_helper_ask_spam_blurry" fuzzy="true">Homályos</string>
-  <string name="delete_helper_ask_spam_nonsense" fuzzy="true">Nonszensz</string>
+  <string name="delete_helper_ask_spam_selfie">egy szelfi, amely egyetlen cikkben sem szerepel</string>
+  <string name="delete_helper_ask_spam_blurry">teljesen homályos</string>
+  <string name="delete_helper_ask_spam_nonsense">nonszensz, abszolút használhatatlan bármely cikkben is</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">Sajtófotó</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">Random fénykép az Internetről</string>
   <string name="delete_helper_ask_reason_copyright_logo">Logó</string>
@@ -472,7 +472,7 @@
   <string name="place_state_needs_photo">Fénykép szükséges</string>
   <string name="place_type">Hely típusa:</string>
   <string name="nearby_search_hint">Híd, múzeum, szálloda, stb.</string>
-  <string name="you_must_reset_your_passsword" fuzzy="true">A belépés nem sikerült, kérj új jelszót.</string>
+  <string name="you_must_reset_your_passsword">A belépés nem sikerült. Kérj új jelszót!</string>
   <string name="setting_wallpaper_dialog_title">Beállítás háttérképnek</string>
   <string name="setting_wallpaper_dialog_message">Beállítás háttérképnek. Kérem várjon...</string>
   <string name="theme_default_name">Rendszerbeállítás követése</string>

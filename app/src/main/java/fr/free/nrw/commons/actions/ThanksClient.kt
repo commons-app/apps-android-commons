@@ -32,7 +32,7 @@ class ThanksClient
                         revisionId.toString(), // Rev
                         null, // Log
                         csrfTokenClient.getTokenBlocking(), // Token
-                        CommonsApplication.getInstance().userAgent, // Source
+                        CommonsApplication.instance.userAgent, // Source
                     ).map { mwThankPostResponse ->
                         mwThankPostResponse.result?.success == 1
                     }
