@@ -12,15 +12,15 @@ import androidx.annotation.Nullable;
 import fr.free.nrw.commons.campaigns.models.Campaign;
 import fr.free.nrw.commons.databinding.LayoutCampaginBinding;
 import fr.free.nrw.commons.theme.BaseActivity;
-import fr.free.nrw.commons.utils.DateUtil;
+import fr.free.nrw.commons.utils.CommonsDateUtil;
 
+import fr.free.nrw.commons.utils.DateUtil;
 import java.text.ParseException;
 import java.util.Date;
 
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.contributions.MainActivity;
-import fr.free.nrw.commons.utils.CommonsDateUtil;
 import fr.free.nrw.commons.utils.SwipableCardView;
 import fr.free.nrw.commons.utils.ViewUtil;
 

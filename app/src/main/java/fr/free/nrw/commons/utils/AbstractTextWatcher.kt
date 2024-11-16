@@ -1,31 +1,25 @@
-package fr.free.nrw.commons.utils;
+package fr.free.nrw.commons.utils
 
-import android.text.Editable;
-import android.text.TextWatcher;
+import android.text.Editable
+import android.text.TextWatcher
 
-import androidx.annotation.NonNull;
+class AbstractTextWatcher(
+    private val textChange: TextChange
+) : TextWatcher {
 
-public class AbstractTextWatcher implements TextWatcher {
-    private final TextChange textChange;
-
-    public AbstractTextWatcher(@NonNull TextChange textChange) {
-        this.textChange = textChange;
+    override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+        // No-op
     }
 
-    @Override
-    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+    override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+        textChange.onTextChanged(s.toString())
     }
 
-    @Override
-    public void onTextChanged(CharSequence s, int start, int before, int count) {
-        textChange.onTextChanged(s.toString());
+    override fun afterTextChanged(s: Editable?) {
+        // No-op
     }
 
-    @Override
-    public void afterTextChanged(Editable s) {
-    }
-
-    public interface TextChange {
-        void onTextChanged(String value);
+    interface TextChange {
+        fun onTextChanged(value: String)
     }
 }

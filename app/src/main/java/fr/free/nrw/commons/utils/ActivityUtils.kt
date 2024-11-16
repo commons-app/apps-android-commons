@@ -1,15 +1,16 @@
-package fr.free.nrw.commons.utils;
+package fr.free.nrw.commons.utils
 
-import android.content.Context;
-import android.content.Intent;
+import android.content.Context
+import android.content.Intent
 
-public class ActivityUtils {
+object ActivityUtils {
 
-    public static <T> void startActivityWithFlags(Context context, Class<T> cls, int... flags) {
-        Intent intent = new Intent(context, cls);
-        for (int flag : flags) {
-            intent.addFlags(flag);
+    @JvmStatic
+    fun <T> startActivityWithFlags(context: Context, cls: Class<T>, vararg flags: Int) {
+        val intent = Intent(context, cls)
+        for (flag in flags) {
+            intent.addFlags(flag)
         }
-        context.startActivity(intent);
+        context.startActivity(intent)
     }
 }

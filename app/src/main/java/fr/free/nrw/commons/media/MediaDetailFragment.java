@@ -55,7 +55,6 @@ import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.actions.ThanksClient;
 import fr.free.nrw.commons.auth.AccountUtil;
 import fr.free.nrw.commons.auth.SessionManager;
-import fr.free.nrw.commons.auth.csrf.CsrfTokenClient;
 import fr.free.nrw.commons.auth.csrf.InvalidLoginTokenException;
 import fr.free.nrw.commons.category.CategoryClient;
 import fr.free.nrw.commons.category.CategoryDetailsActivity;
