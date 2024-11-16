@@ -13,7 +13,7 @@ object CommonsDateUtil {
 
     /**
      * Gets SimpleDateFormat for short date pattern.
-     * @return simpledateformat
+     * @return simpleDateFormat
      */
     @JvmStatic
     fun getIso8601DateFormatShort(): SimpleDateFormat {
@@ -24,7 +24,7 @@ object CommonsDateUtil {
 
     /**
      * Gets SimpleDateFormat for date pattern returned by Media object.
-     * @return simpledateformat
+     * @return simpleDateFormat
      */
     @JvmStatic
     fun getMediaSimpleDateFormat(): SimpleDateFormat {

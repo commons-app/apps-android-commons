@@ -42,7 +42,10 @@ object DateUtil {
     @JvmStatic
     @Synchronized
     fun getDateStringWithSkeletonPattern(date: Date, pattern: String): String {
-        return getCachedDateFormat(getBestDateTimePattern(Locale.getDefault(), pattern), Locale.getDefault(), false).format(date)
+        return getCachedDateFormat(
+            getBestDateTimePattern(Locale.getDefault(), pattern),
+            Locale.getDefault(), false
+        ).format(date)
     }
 
     @JvmStatic

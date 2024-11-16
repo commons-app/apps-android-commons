@@ -1,31 +1,33 @@
-package fr.free.nrw.commons.utils;
+package fr.free.nrw.commons.utils
 
-import android.os.Handler;
-import android.os.Looper;
+import android.os.Handler
+import android.os.Looper
 
-import java.util.concurrent.Executor;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.concurrent.Executor
+import java.util.concurrent.ExecutorService
+import java.util.concurrent.Executors
 
-public class ExecutorUtils {
+object ExecutorUtils {
 
-    private static final Executor uiExecutor = command -> {
+    @JvmStatic
+    private val uiExecutor: Executor = Executor { command ->
         if (Looper.myLooper() == Looper.getMainLooper()) {
-            command.run();
+            command.run()
         } else {
-            new Handler(Looper.getMainLooper()).post(command);
+            Handler(Looper.getMainLooper()).post(command)
         }
-    };
-
-    public static Executor uiExecutor() {
-        return uiExecutor;
     }
 
-
-    private static final ExecutorService executor = Executors.newFixedThreadPool(3);
-
-    public static ExecutorService get() {
-        return executor;
+    @JvmStatic
+    fun uiExecutor(): Executor {
+        return uiExecutor
     }
 
+    @JvmStatic
+    private val executor: ExecutorService = Executors.newFixedThreadPool(3)
+
+    @JvmStatic
+    fun get(): ExecutorService {
+        return executor
+    }
 }
