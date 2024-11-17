@@ -966,6 +966,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                 lastPlaceToCenter.location.getLatitude() - cameraShift,
                 lastPlaceToCenter.getLocation().getLongitude(), 0));
         }
+        highlightNearestPlace(place);
     }
 
 
@@ -2002,7 +2003,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
      *
      * @param nearestPlace nearest place, which has to be highlighted
      */
-    private void highlightNearestPlace(Place nearestPlace) {
+    private void highlightNearestPlace(final Place nearestPlace) {
         passInfoToSheet(nearestPlace);
         hideBottomSheet();
         bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
@@ -2016,32 +2017,37 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
      * @return returns the drawable of marker according to the place information
      */
     private @DrawableRes int getIconFor(Place place, Boolean isBookmarked) {
-        if (nearestPlace != null) {
-            if (place.name.equals(nearestPlace.name)) {
-                // Highlight nearest place only when user clicks on the home nearby banner
-                highlightNearestPlace(place);
-                return (isBookmarked ?
-                    R.drawable.ic_custom_map_marker_purple_bookmarked :
-                    R.drawable.ic_custom_map_marker_purple);
-            }
+        if (nearestPlace != null && place.name.equals(nearestPlace.name)) {
+            // Highlight nearest place only when user clicks on the home nearby banner
+//            highlightNearestPlace(place);
+            return (isBookmarked ?
+                R.drawable.ic_custom_map_marker_purple_bookmarked :
+                R.drawable.ic_custom_map_marker_purple
+            );
         }
+
         if (place.isMonument()) {
             return R.drawable.ic_custom_map_marker_monuments;
-        } else if (!place.pic.trim().isEmpty()) {
+        }
+        if (!place.pic.trim().isEmpty()) {
             return (isBookmarked ?
                 R.drawable.ic_custom_map_marker_green_bookmarked :
-                R.drawable.ic_custom_map_marker_green);
-        } else if (!place.exists) { // Means that the topic of the Wikidata item does not exist in the real world anymore, for instance it is a past event, or a place that was destroyed
+                R.drawable.ic_custom_map_marker_green
+            );
+        }
+        if (!place.exists) { // Means that the topic of the Wikidata item does not exist in the real world anymore, for instance it is a past event, or a place that was destroyed
             return (R.drawable.ic_clear_black_24dp);
-        }else if (place.name == "") {
+        }
+        if (place.name.isEmpty()) {
             return (isBookmarked ?
                 R.drawable.ic_custom_map_marker_grey_bookmarked :
-                R.drawable.ic_custom_map_marker_grey);
-        } else {
-            return (isBookmarked ?
-                R.drawable.ic_custom_map_marker_red_bookmarked :
-                R.drawable.ic_custom_map_marker_red);
+                R.drawable.ic_custom_map_marker_grey
+            );
         }
+        return (isBookmarked ?
+            R.drawable.ic_custom_map_marker_red_bookmarked :
+            R.drawable.ic_custom_map_marker_red
+        );
     }
 
     /**
