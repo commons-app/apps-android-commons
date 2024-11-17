@@ -1,12 +1,15 @@
-package fr.free.nrw.commons.utils;
+package fr.free.nrw.commons.utils
 
-import androidx.annotation.NonNull;
+import java.text.NumberFormat
+import fr.free.nrw.commons.location.LatLng
+import kotlin.math.asin
+import kotlin.math.atan2
+import kotlin.math.cos
+import kotlin.math.roundToInt
+import kotlin.math.sin
+import kotlin.math.sqrt
 
-import java.text.NumberFormat;
-
-import fr.free.nrw.commons.location.LatLng;
-
-public class LengthUtils {
+object LengthUtils {
     /**
      * Returns a formatted distance string between two points.
      *
@@ -14,13 +17,14 @@ public class LengthUtils {
      * @param point2 LatLng type point2
      * @return string distance
      */
-    public static String formatDistanceBetween(LatLng point1, LatLng point2) {
+    @JvmStatic
+    fun formatDistanceBetween(point1: LatLng?, point2: LatLng?): String? {
         if (point1 == null || point2 == null) {
-            return null;
+            return null
         }
 
-        int distance = (int) Math.round(computeDistanceBetween(point1, point2));
-        return formatDistance(distance);
+        val distance = computeDistanceBetween(point1, point2).roundToInt()
+        return formatDistance(distance)
     }
 
     /**
@@ -32,21 +36,21 @@ public class LengthUtils {
      * @return A string representing the distance
      * @throws IllegalArgumentException If distance is negative
      */
-    public static String formatDistance(int distance) {
+    @JvmStatic
+    fun formatDistance(distance: Int): String {
         if (distance < 0) {
-            throw new IllegalArgumentException("Distance must be non-negative");
+            throw IllegalArgumentException("Distance must be non-negative")
         }
 
-        NumberFormat numberFormat = NumberFormat.getNumberInstance();
+        val numberFormat = NumberFormat.getNumberInstance()
 
         // Adjust to km if distance is over 1000m (1km)
-        if (distance >= 1000) {
-            numberFormat.setMaximumFractionDigits(1);
-            return numberFormat.format(distance / 1000.0) + "km";
+        return if (distance >= 1000) {
+            numberFormat.maximumFractionDigits = 1
+            "${numberFormat.format(distance / 1000.0)}km"
+        } else {
+            "${numberFormat.format(distance)}m"
         }
-
-        // Otherwise just return in meters
-        return numberFormat.format(distance) + "m";
     }
 
     /**
@@ -57,8 +61,9 @@ public class LengthUtils {
      * @return distance between the points in meters
      * @throws NullPointerException if one or both the points are null
      */
-    public static double computeDistanceBetween(@NonNull LatLng point1, @NonNull LatLng point2) {
-        return computeAngleBetween(point1, point2) * 6371009.0D; // Earth's radius in meter
+    @JvmStatic
+    fun computeDistanceBetween(point1: LatLng, point2: LatLng): Double {
+        return computeAngleBetween(point1, point2) * 6371009.0 // Earth's radius in meters
     }
 
     /**
@@ -66,16 +71,17 @@ public class LengthUtils {
      *
      * @param point1 one of the two end points
      * @param point2 one of the two end points
-     * @return Angle in radius
+     * @return Angle in radians
      * @throws NullPointerException if one or both the points are null
      */
-    private static double computeAngleBetween(@NonNull LatLng point1, @NonNull LatLng point2) {
+    @JvmStatic
+    private fun computeAngleBetween(point1: LatLng, point2: LatLng): Double {
         return distanceRadians(
-                Math.toRadians(point1.getLatitude()),
-                Math.toRadians(point1.getLongitude()),
-                Math.toRadians(point2.getLatitude()),
-                Math.toRadians(point2.getLongitude())
-        );
+            Math.toRadians(point1.latitude),
+            Math.toRadians(point1.longitude),
+            Math.toRadians(point2.latitude),
+            Math.toRadians(point2.longitude)
+        )
     }
 
     /**
@@ -87,8 +93,9 @@ public class LengthUtils {
      * @param lng2 Longitude of point B
      * @return Arc length between the points
      */
-    private static double distanceRadians(double lat1, double lng1, double lat2, double lng2) {
-        return arcHav(havDistance(lat1, lat2, lng1 - lng2));
+    @JvmStatic
+    private fun distanceRadians(lat1: Double, lng1: Double, lat2: Double, lng2: Double): Double {
+        return arcHav(havDistance(lat1, lat2, lng1 - lng2))
     }
 
     /**
@@ -97,8 +104,9 @@ public class LengthUtils {
      * @param x Angle in radian
      * @return Inverse of haversine
      */
-    private static double arcHav(double x) {
-        return 2.0D * Math.asin(Math.sqrt(x));
+    @JvmStatic
+    private fun arcHav(x: Double): Double {
+        return 2.0 * asin(sqrt(x))
     }
 
     /**
@@ -109,8 +117,9 @@ public class LengthUtils {
      * @param longitude Longitude on which they lie
      * @return Arc length between points
      */
-    private static double havDistance(double lat1, double lat2, double longitude) {
-        return hav(lat1 - lat2) + hav(longitude) * Math.cos(lat1) * Math.cos(lat2);
+    @JvmStatic
+    private fun havDistance(lat1: Double, lat2: Double, longitude: Double): Double {
+        return hav(lat1 - lat2) + hav(longitude) * cos(lat1) * cos(lat2)
     }
 
     /**
@@ -119,9 +128,10 @@ public class LengthUtils {
      * @param x Angle in radians
      * @return Haversine of x
      */
-    private static double hav(double x) {
-        double sinHalf = Math.sin(x * 0.5D);
-        return sinHalf * sinHalf;
+    @JvmStatic
+    private fun hav(x: Double): Double {
+        val sinHalf = sin(x * 0.5)
+        return sinHalf * sinHalf
     }
 
     /**
@@ -133,13 +143,14 @@ public class LengthUtils {
      * @return Bearing between the two end points in degrees
      * @throws NullPointerException if one or both the points are null
      */
-    public static double computeBearing(@NonNull LatLng point1, @NonNull LatLng point2) {
-        double diffLongitute = Math.toRadians(point2.getLongitude() - point1.getLongitude());
-        double lat1 = Math.toRadians(point1.getLatitude());
-        double lat2 = Math.toRadians(point2.getLatitude());
-        double y = Math.sin(diffLongitute) * Math.cos(lat2);
-        double x = Math.cos(lat1) * Math.sin(lat2) - Math.sin(lat1) * Math.cos(lat2) * Math.cos(diffLongitute);
-        double bearing = Math.atan2(y, x);
-        return (Math.toDegrees(bearing) + 360) % 360;
+    @JvmStatic
+    fun computeBearing(point1: LatLng, point2: LatLng): Double {
+        val diffLongitude = Math.toRadians(point2.longitude - point1.longitude)
+        val lat1 = Math.toRadians(point1.latitude)
+        val lat2 = Math.toRadians(point2.latitude)
+        val y = sin(diffLongitude) * cos(lat2)
+        val x = cos(lat1) * sin(lat2) - sin(lat1) * cos(lat2) * cos(diffLongitude)
+        val bearing = atan2(y, x)
+        return (Math.toDegrees(bearing) + 360) % 360
     }
 }

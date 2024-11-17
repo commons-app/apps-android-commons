@@ -1,58 +1,63 @@
-package fr.free.nrw.commons.utils;
+package fr.free.nrw.commons.utils
 
-import fr.free.nrw.commons.location.LatLng;
-import timber.log.Timber;
+import fr.free.nrw.commons.location.LatLng
+import timber.log.Timber
+import kotlin.math.atan2
+import kotlin.math.cos
+import kotlin.math.sin
+import kotlin.math.sqrt
 
-public class LocationUtils {
-    public static final double RADIUS_OF_EARTH_KM = 6371.0; // Earth's radius in kilometers
+object LocationUtils {
+    const val RADIUS_OF_EARTH_KM = 6371.0 // Earth's radius in kilometers
 
-    public static LatLng deriveUpdatedLocationFromSearchQuery(String customQuery) {
-        LatLng latLng = null;
-        final int indexOfPrefix = customQuery.indexOf("Point(");
+    @JvmStatic
+    fun deriveUpdatedLocationFromSearchQuery(customQuery: String): LatLng? {
+        var latLng: LatLng? = null
+        val indexOfPrefix = customQuery.indexOf("Point(")
         if (indexOfPrefix == -1) {
-            Timber.e("Invalid prefix index - Seems like user has entered an invalid query");
-            return latLng;
+            Timber.e("Invalid prefix index - Seems like user has entered an invalid query")
+            return latLng
         }
-        final int indexOfSuffix = customQuery.indexOf(")\"", indexOfPrefix);
+        val indexOfSuffix = customQuery.indexOf(")\"", indexOfPrefix)
         if (indexOfSuffix == -1) {
-            Timber.e("Invalid suffix index - Seems like user has entered an invalid query");
-            return latLng;
+            Timber.e("Invalid suffix index - Seems like user has entered an invalid query")
+            return latLng
         }
-        String latLngString = customQuery.substring(indexOfPrefix+"Point(".length(), indexOfSuffix);
+        val latLngString = customQuery.substring(indexOfPrefix + "Point(".length, indexOfSuffix)
         if (latLngString.isEmpty()) {
-            return null;
+            return null
         }
 
-        String latLngArray[] = latLngString.split(" ");
-        if (latLngArray.length != 2) {
-            return null;
+        val latLngArray = latLngString.split(" ")
+        if (latLngArray.size != 2) {
+            return null
         }
 
         try {
-            latLng = new LatLng(Double.parseDouble(latLngArray[1].trim()),
-                Double.parseDouble(latLngArray[0].trim()), 1f);
-        }catch (Exception e){
-            Timber.e("Error while parsing user entered lat long: %s", e);
+            latLng = LatLng(latLngArray[1].trim().toDouble(),
+                latLngArray[0].trim().toDouble(), 1f)
+        } catch (e: Exception) {
+            Timber.e("Error while parsing user entered lat long: %s", e)
         }
 
-        return latLng;
+        return latLng
     }
 
-
-    public static double calculateDistance(double lat1, double lon1, double lat2, double lon2) {
-        double lat1Rad = Math.toRadians(lat1);
-        double lon1Rad = Math.toRadians(lon1);
-        double lat2Rad = Math.toRadians(lat2);
-        double lon2Rad = Math.toRadians(lon2);
+    @JvmStatic
+    fun calculateDistance(lat1: Double, lon1: Double, lat2: Double, lon2: Double): Double {
+        val lat1Rad = Math.toRadians(lat1)
+        val lon1Rad = Math.toRadians(lon1)
+        val lat2Rad = Math.toRadians(lat2)
+        val lon2Rad = Math.toRadians(lon2)
 
         // Haversine formula
-        double dlon = lon2Rad - lon1Rad;
-        double dlat = lat2Rad - lat1Rad;
-        double a = Math.pow(Math.sin(dlat / 2), 2) + Math.cos(lat1Rad) * Math.cos(lat2Rad) * Math.pow(Math.sin(dlon / 2), 2);
-        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        val dlon = lon2Rad - lon1Rad
+        val dlat = lat2Rad - lat1Rad
+        val a = Math.pow(
+                sin(dlat / 2), 2.0) + cos(lat1Rad) * cos(lat2Rad) * Math.pow(sin(dlon / 2), 2.0
+            )
+        val c = 2 * atan2(sqrt(a), sqrt(1 - a))
 
-        double distance = RADIUS_OF_EARTH_KM * c;
-
-        return distance;
+        return RADIUS_OF_EARTH_KM * c
     }
 }

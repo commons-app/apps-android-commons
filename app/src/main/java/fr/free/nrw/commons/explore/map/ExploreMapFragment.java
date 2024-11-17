@@ -310,7 +310,7 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
     }
 
     private void startMapWithoutPermission() {
-        lastKnownLocation = MapUtils.defaultLatLng;
+        lastKnownLocation = MapUtils.getDefaultLatLng();
         moveCameraToPosition(
             new GeoPoint(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude()));
         presenter.onMapReady(exploreMapController);
@@ -331,7 +331,7 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
             !locationPermissionsHelper.checkLocationPermission(getActivity())) {
             isPermissionDenied = true;
         }
-        lastKnownLocation = MapUtils.defaultLatLng;
+        lastKnownLocation = MapUtils.getDefaultLatLng();
         moveCameraToPosition(
             new GeoPoint(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude()));
         presenter.onMapReady(exploreMapController);
