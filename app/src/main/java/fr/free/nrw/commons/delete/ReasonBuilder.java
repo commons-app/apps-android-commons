@@ -3,7 +3,6 @@ package fr.free.nrw.commons.delete;
 import android.content.Context;
 
 import fr.free.nrw.commons.utils.DateUtil;
-
 import java.util.Date;
 import java.util.Locale;
 
