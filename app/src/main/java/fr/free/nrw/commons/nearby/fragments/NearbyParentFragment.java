@@ -2004,6 +2004,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
      * @param nearestPlace nearest place, which has to be highlighted
      */
     private void highlightNearestPlace(final Place nearestPlace) {
+        binding.bottomSheetDetails.icon.setVisibility(View.VISIBLE);
         passInfoToSheet(nearestPlace);
         hideBottomSheet();
         bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
