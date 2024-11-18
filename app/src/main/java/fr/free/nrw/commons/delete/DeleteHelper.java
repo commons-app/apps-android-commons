@@ -1,10 +1,10 @@
 package fr.free.nrw.commons.delete;
 
 import static fr.free.nrw.commons.notification.NotificationHelper.NOTIFICATION_DELETE;
+import static fr.free.nrw.commons.utils.LangCodeUtils.getLocalizedResources;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import static fr.free.nrw.commons.utils.LangCodeUtils.getLocalizedResources;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
@@ -16,6 +16,7 @@ import fr.free.nrw.commons.actions.PageEditClient;
 import fr.free.nrw.commons.auth.csrf.InvalidLoginTokenException;
 import fr.free.nrw.commons.notification.NotificationHelper;
 import fr.free.nrw.commons.review.ReviewController;
+import fr.free.nrw.commons.utils.LangCodeUtils;
 import fr.free.nrw.commons.utils.ViewUtilWrapper;
 import io.reactivex.Observable;
 import io.reactivex.Single;

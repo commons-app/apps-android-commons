@@ -318,7 +318,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
     }
 
     public void launchZoomActivity(final View view) {
-        final boolean hasPermission = PermissionUtils.hasPermission(getActivity(), PermissionUtils.PERMISSIONS_STORAGE);
+        final boolean hasPermission = PermissionUtils.hasPermission(getActivity(), PermissionUtils.getPERMISSIONS_STORAGE());
         if (hasPermission) {
             launchZoomActivityAfterPermissionCheck(view);
         } else {
@@ -328,7 +328,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
                 },
                 R.string.storage_permission_title,
                 R.string.read_storage_permission_rationale,
-                PermissionUtils.PERMISSIONS_STORAGE
+                PermissionUtils.getPERMISSIONS_STORAGE()
                 );
         }
     }

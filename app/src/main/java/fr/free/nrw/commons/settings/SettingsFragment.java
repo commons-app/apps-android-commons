@@ -12,7 +12,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -543,7 +542,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
      * First checks for external storage permissions and then sends logs via email
      */
     private void checkPermissionsAndSendLogs() {
-        if (PermissionUtils.hasPermission(getActivity(), PermissionUtils.PERMISSIONS_STORAGE)) {
+        if (PermissionUtils.hasPermission(getActivity(), PermissionUtils.getPERMISSIONS_STORAGE())) {
             commonsLogSender.send(getActivity(), null);
         } else {
             requestExternalStoragePermissions();
@@ -556,7 +555,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
      */
     private void requestExternalStoragePermissions() {
         Dexter.withActivity(getActivity())
-            .withPermissions(PermissionUtils.PERMISSIONS_STORAGE)
+            .withPermissions(PermissionUtils.getPERMISSIONS_STORAGE())
             .withListener(new MultiplePermissionsListener() {
                 @Override
                 public void onPermissionsChecked(MultiplePermissionsReport report) {
