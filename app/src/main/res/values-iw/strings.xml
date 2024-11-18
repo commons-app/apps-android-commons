@@ -114,7 +114,7 @@
   <string name="uploading_started">ההעלאה התחילה!</string>
   <string name="uploading_queued">ההעלאות בתור (מופעל מצב חיבור מוגבל)</string>
   <string name="upload_completed_notification_title">הקובץ %1$s הועלה!</string>
-  <string name="upload_completed_notification_text">ללחוץ כאן כדי לצפות בהעלאה שלך</string>
+  <string name="upload_completed_notification_text">נא ללחוץ כאן כדי לצפות בהעלאה שלך</string>
   <string name="upload_progress_notification_title_start">העלאת קובץ: %s</string>
   <string name="upload_progress_notification_title_in_progress">מתבצעת העלאת %1$s</string>
   <string name="upload_progress_notification_title_finishing">העלאת %1$s מסתיימת</string>
@@ -123,7 +123,7 @@
   <string name="upload_failed_notification_subtitle">לחץ כדי להציג</string>
   <string name="upload_paused_notification_subtitle">יש לגעת כדי לראות</string>
   <string name="title_activity_contributions">ההעלאות האחרונות שלי</string>
-  <string name="contribution_state_queued">בתור</string>
+  <string name="contribution_state_queued">הוכנסה בתור</string>
   <string name="contribution_state_failed">נכשלה</string>
   <string name="contribution_state_in_progress">%1$d%% הושלמו</string>
   <string name="contribution_state_starting">העלאה</string>
@@ -674,7 +674,7 @@
   <string name="pausing_upload">ההעלאה מושהית…</string>
   <string name="cancelling_upload">ביטול ההעלאה...</string>
   <string name="cancel_upload">ביטול ההעלאה</string>
-  <string name="limited_connection_explanation">הפעלת מצב חיבור מוגבל. כל ההעלאות מושהות ותמשכנה לאחר השבתת המצב הזה.</string>
+  <string name="limited_connection_explanation">הפעלת מצב חיבור מוגבל. כל ההעלאות מושהות והן תימשכנה לאחר השבתת המצב הזה.</string>
   <string name="limited_connection_is_on">מצב חיבור מוגבל פעיל.</string>
   <string name="media_details_tooltip">נא לכתוב תיאור קצר שמסביר מה מופיע בתמונה. בתיאור, כדאי לכתוב מה הופך את התמונה הזאת למעניינת, טיפוסית או נדירה ולהסביר את ההקשר, בין אם גלוי או סמוי. יש להשתמש במינוח מדויק ככל הניתן.</string>
   <string name="depicts_tooltip">נא למצוא ולבחור את כל העקרונות שהתמונה הזאת מתארת. נא לשמור על דיוק מרבי. אם התמונה מתארת מגוון פריטים, נא לבחור אותם בגבולות הסביר. לא לבחור תגיות גנריות אם יש תגיות יותר נקודתית זמינות.</string>

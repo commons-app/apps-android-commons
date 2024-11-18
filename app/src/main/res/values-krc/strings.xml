@@ -119,6 +119,7 @@
   <string name="categories_search_text_hint">Категорияланы изле</string>
   <string name="depicts_search_text_hint">Медиагъызда суратланнган элементлени излегиз (тау, Тадж Махал э. а. к.)</string>
   <string name="menu_save_categories">Сакъландыр</string>
+  <string name="menu_overflow_desc">Къошакъ меню</string>
   <string name="refresh_button">Джангырт</string>
   <string name="display_list_button">Тизме</string>
   <string name="contributions_subtitle_zero">(Алкъын джюклеуле джокъдула)</string>
@@ -781,6 +782,15 @@
   <string name="pending">Сакълауда</string>
   <string name="failed">Джетишимсиз</string>
   <string name="could_not_load_place_data">Джерни юсюнден билгилени джюклеялмады</string>
+  <string name="custom_selector_delete_folder">Папканы кетер</string>
+  <string name="custom_selector_confirm_deletion_title">Кетериуню мюкюл эт</string>
+  <string name="custom_selector_confirm_deletion_message">%2$d элементи болгъан %1$s папканы кетерирге излегенинге ишексизмисе?</string>
+  <string name="custom_selector_delete">Кетер</string>
+  <string name="custom_selector_cancel">Ызына ал</string>
+  <string name="custom_selector_folder_deleted_success">%1$s папка  джетишимли кетерилгенди</string>
+  <string name="custom_selector_folder_deleted_failure">%1$s папканы кетериу джетишимисизди</string>
+  <string name="custom_selector_error_trashing_folder_contents">Папканы ичиндегисини кетериуде халат: %1$s</string>
+  <string name="custom_selector_folder_not_found_error">Контейнерни идентификатору папкагъа джол табалмады: %1$d</string>
   <string name="red_pin">Бу джерни сураты джокъду, хайда бирин эт!</string>
   <string name="green_pin">Бу джерни алайсыз да сураты барды.</string>
   <string name="grey_pin">Бу джерни сураты болуб-болмагъанын тинте турама.</string>

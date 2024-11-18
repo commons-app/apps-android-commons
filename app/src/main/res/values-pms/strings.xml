@@ -790,6 +790,7 @@
   <string name="custom_selector_folder_deleted_success">Ël dossié %1$s a l\'é stàit eliminà për da bin</string>
   <string name="custom_selector_folder_deleted_failure">Impossìbil eliminé ël dossié %1$s</string>
   <string name="custom_selector_error_trashing_folder_contents">Eror durant l\'eliminassion dël contnù dël dossié: %1$s</string>
+  <string name="custom_selector_folder_not_found_error">Falì a arcuperé ël sënté d\'acess al dossié për ël sigilin d\'ID: %1$d</string>
   <string name="red_pin">Ës pòst a l\'ha ancor gnun-e fòto, ch\'a na pija un-a!</string>
   <string name="green_pin">Ës pòst a l\'ha già dle fòto.</string>
   <string name="grey_pin">An camin ch\'as verìfica si cost pòst -sì a l\'ha dle fòto.</string>
