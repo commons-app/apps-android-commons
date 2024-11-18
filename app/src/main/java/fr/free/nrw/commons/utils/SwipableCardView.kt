@@ -1,74 +1,64 @@
-package fr.free.nrw.commons.utils;
+package fr.free.nrw.commons.utils
 
-import android.content.Context;
-import android.content.res.Resources;
-import android.util.AttributeSet;
-import android.view.MotionEvent;
-import android.view.View;
+import android.annotation.SuppressLint
+import android.content.Context
+import android.content.res.Resources
+import android.util.AttributeSet
+import android.view.MotionEvent
+import android.view.View
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.cardview.widget.CardView;
+import androidx.cardview.widget.CardView
 
-import timber.log.Timber;
+import timber.log.Timber
+import kotlin.math.abs
 
 /**
  * A card view which informs onSwipe events to its child
  */
-public abstract class SwipableCardView extends CardView {
-    float x1, x2;
-    private static final float MINIMUM_THRESHOLD_FOR_SWIPE = 100;
+abstract class SwipableCardView @JvmOverloads constructor(
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0
+) : CardView(context, attrs, defStyleAttr) {
 
-    public SwipableCardView(@NonNull Context context) {
-        super(context);
-        interceptOnTouchListener();
+    private var x1 = 0f
+    private var x2 = 0f
+    private val MINIMUM_THRESHOLD_FOR_SWIPE = 100f
+
+    init {
+        interceptOnTouchListener()
     }
 
-    public SwipableCardView(@NonNull Context context, @Nullable AttributeSet attrs) {
-        super(context, attrs);
-        interceptOnTouchListener();
-    }
-
-    public SwipableCardView(@NonNull Context context, @Nullable AttributeSet attrs,
-        int defStyleAttr) {
-        super(context, attrs, defStyleAttr);
-        interceptOnTouchListener();
-    }
-
-    private void interceptOnTouchListener() {
-        this.setOnTouchListener((v, event) -> {
-            boolean isSwipe = false;
-            float deltaX = 0.0f;
-            Timber.e(event.getAction() + "");
-            switch (event.getAction()) {
-                case MotionEvent.ACTION_DOWN:
-                    x1 = event.getX();
-                    break;
-                case MotionEvent.ACTION_UP:
-                    x2 = event.getX();
-                    deltaX = x2 - x1;
-                    if (deltaX < 0) {
-                        //Right to left swipe
-                        isSwipe = true;
-                    } else if (deltaX > 0) {
-                        //Left to right swipe
-                        isSwipe = true;
-                    }
-                    break;
+    @SuppressLint("ClickableViewAccessibility")
+    private fun interceptOnTouchListener() {
+        this.setOnTouchListener { v, event ->
+            var isSwipe = false
+            var deltaX = 0f
+            Timber.e(event.action.toString())
+            when (event.action) {
+                MotionEvent.ACTION_DOWN -> {
+                    x1 = event.x
+                }
+                MotionEvent.ACTION_UP -> {
+                    x2 = event.x
+                    deltaX = x2 - x1
+                    isSwipe = deltaX != 0f
+                }
             }
-            if (isSwipe && (pixelToDp(Math.abs(deltaX)) > MINIMUM_THRESHOLD_FOR_SWIPE)) {
-                return onSwipe(v);
+            if (isSwipe && pixelToDp(abs(deltaX)) > MINIMUM_THRESHOLD_FOR_SWIPE) {
+                onSwipe(v)
+                return@setOnTouchListener true
             }
-            return false;
-        });
+            false
+        }
     }
 
     /**
      * abstract function which informs swipe events to those who have inherited from it
      */
-    public abstract boolean onSwipe(View view);
+    abstract fun onSwipe(view: View): Boolean
 
-    private float pixelToDp(float pixels) {
-        return (pixels / Resources.getSystem().getDisplayMetrics().density);
+    private fun pixelToDp(pixels: Float): Float {
+        return pixels / Resources.getSystem().displayMetrics.density
     }
 }

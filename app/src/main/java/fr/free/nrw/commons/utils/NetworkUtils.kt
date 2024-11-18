@@ -1,17 +1,14 @@
-package fr.free.nrw.commons.utils;
+package fr.free.nrw.commons.utils
 
+import android.annotation.SuppressLint
+import android.content.Context
+import android.net.ConnectivityManager
+import android.net.NetworkInfo
+import android.telephony.TelephonyManager
 
-import android.annotation.SuppressLint;
-import android.content.Context;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
-import android.telephony.TelephonyManager;
+import fr.free.nrw.commons.utils.model.NetworkConnectionType
 
-import androidx.annotation.Nullable;
-
-import fr.free.nrw.commons.utils.model.NetworkConnectionType;
-
-public class NetworkUtils {
+object NetworkUtils {
 
     /**
      * https://developer.android.com/training/monitoring-device-state/connectivity-monitoring#java
@@ -21,74 +18,68 @@ public class NetworkUtils {
      * @return Returns current internet connection status. Returns false if null context was passed.
      */
     @SuppressLint("MissingPermission")
-    public static boolean isInternetConnectionEstablished(@Nullable Context context) {
+    @JvmStatic
+    fun isInternetConnectionEstablished(context: Context?): Boolean {
         if (context == null) {
-            return false;
+            return false
         }
 
-        NetworkInfo activeNetwork = getNetworkInfo(context);
-        return activeNetwork != null && activeNetwork.isConnectedOrConnecting();
+        val activeNetwork = getNetworkInfo(context)
+        return activeNetwork != null && activeNetwork.isConnectedOrConnecting
     }
 
     /**
      * Detect network connection type
      */
-    static NetworkConnectionType getNetworkType(Context context) {
-        TelephonyManager telephonyManager = (TelephonyManager) context.getApplicationContext().getSystemService(Context.TELEPHONY_SERVICE);
-        if (telephonyManager == null) {
-            return NetworkConnectionType.UNKNOWN;
-        }
+    @JvmStatic
+    fun getNetworkType(context: Context): NetworkConnectionType {
+        val telephonyManager = context.applicationContext.getSystemService(Context.TELEPHONY_SERVICE) as? TelephonyManager
+            ?: return NetworkConnectionType.UNKNOWN
 
-        NetworkInfo networkInfo = getNetworkInfo(context);
-        if (networkInfo == null) {
-            return NetworkConnectionType.UNKNOWN;
-        }
+        val networkInfo = getNetworkInfo(context)
+            ?: return NetworkConnectionType.UNKNOWN
 
-        int network = networkInfo.getType();
+        val network = networkInfo.type
         if (network == ConnectivityManager.TYPE_WIFI) {
-            return NetworkConnectionType.WIFI;
+            return NetworkConnectionType.WIFI
         }
 
         // TODO for Android 12+ request permission from user is mandatory
         /*
-        int mobileNetwork = telephonyManager.getNetworkType();
-        switch (mobileNetwork) {
-            case TelephonyManager.NETWORK_TYPE_GPRS:
-            case TelephonyManager.NETWORK_TYPE_EDGE:
-            case TelephonyManager.NETWORK_TYPE_CDMA:
-            case TelephonyManager.NETWORK_TYPE_1xRTT:
-                return NetworkConnectionType.TWO_G;
-            case TelephonyManager.NETWORK_TYPE_HSDPA:
-            case TelephonyManager.NETWORK_TYPE_UMTS:
-            case TelephonyManager.NETWORK_TYPE_HSUPA:
-            case TelephonyManager.NETWORK_TYPE_HSPA:
-            case TelephonyManager.NETWORK_TYPE_EHRPD:
-            case TelephonyManager.NETWORK_TYPE_EVDO_0:
-            case TelephonyManager.NETWORK_TYPE_EVDO_A:
-            case TelephonyManager.NETWORK_TYPE_EVDO_B:
-                return NetworkConnectionType.THREE_G;
-            case TelephonyManager.NETWORK_TYPE_LTE:
-            case TelephonyManager.NETWORK_TYPE_HSPAP:
-                return NetworkConnectionType.FOUR_G;
-            default:
-                return NetworkConnectionType.UNKNOWN;
+        val mobileNetwork = telephonyManager.networkType
+        return when (mobileNetwork) {
+            TelephonyManager.NETWORK_TYPE_GPRS,
+            TelephonyManager.NETWORK_TYPE_EDGE,
+            TelephonyManager.NETWORK_TYPE_CDMA,
+            TelephonyManager.NETWORK_TYPE_1xRTT -> NetworkConnectionType.TWO_G
+
+            TelephonyManager.NETWORK_TYPE_HSDPA,
+            TelephonyManager.NETWORK_TYPE_UMTS,
+            TelephonyManager.NETWORK_TYPE_HSUPA,
+            TelephonyManager.NETWORK_TYPE_HSPA,
+            TelephonyManager.NETWORK_TYPE_EHRPD,
+            TelephonyManager.NETWORK_TYPE_EVDO_0,
+            TelephonyManager.NETWORK_TYPE_EVDO_A,
+            TelephonyManager.NETWORK_TYPE_EVDO_B -> NetworkConnectionType.THREE_G
+
+            TelephonyManager.NETWORK_TYPE_LTE,
+            TelephonyManager.NETWORK_TYPE_HSPAP -> NetworkConnectionType.FOUR_G
+
+            else -> NetworkConnectionType.UNKNOWN
         }
          */
-        return NetworkConnectionType.UNKNOWN;
+        return NetworkConnectionType.UNKNOWN
     }
 
     /**
      * Extracted private method to get nullable network info
      */
-    @Nullable
-    private static NetworkInfo getNetworkInfo(Context context) {
-        ConnectivityManager connectivityManager =
-                (ConnectivityManager) context.getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+    @JvmStatic
+    private fun getNetworkInfo(context: Context): NetworkInfo? {
+        val connectivityManager =
+            context.applicationContext.getSystemService(Context.CONNECTIVITY_SERVICE) as? ConnectivityManager
+                ?: return null
 
-        if (connectivityManager == null) {
-            return null;
-        }
-
-        return connectivityManager.getActiveNetworkInfo();
+        return connectivityManager.activeNetworkInfo
     }
 }

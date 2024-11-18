@@ -1,29 +1,29 @@
-package fr.free.nrw.commons.utils;
+package fr.free.nrw.commons.utils
 
-import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.StringUtils
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.ArrayList
 
-public class MediaDataExtractorUtil {
+object MediaDataExtractorUtil {
+
     /**
      * Extracts a list of categories from | separated category string
      *
      * @param source
      * @return
      */
-    public static List<String> extractCategoriesFromList(String source) {
-        if (StringUtils.isBlank(source)) {
-            return new ArrayList<>();
+    @JvmStatic
+    fun extractCategoriesFromList(source: String): List<String> {
+        if (source.isBlank()) {
+            return emptyList()
         }
-        String[] cats = source.split("\\|");
-        List<String> categories = new ArrayList<>();
-        for (String category : cats) {
-            if (!StringUtils.isBlank(category.trim())) {
-                categories.add(category);
+        val cats = source.split("|")
+        val categories = mutableListOf<String>()
+        for (category in cats) {
+            if (category.trim().isNotBlank()) {
+                categories.add(category)
             }
         }
-        return categories;
+        return categories
     }
-
 }

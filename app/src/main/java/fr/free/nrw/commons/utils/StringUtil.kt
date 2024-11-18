@@ -1,38 +1,37 @@
-package fr.free.nrw.commons.utils;
+package fr.free.nrw.commons.utils
 
-import android.os.Build;
-import android.text.Html;
-import android.text.Spanned;
-import android.text.SpannedString;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
+import android.os.Build
+import android.text.Html
+import android.text.Spanned
+import android.text.SpannedString
 
-public final class StringUtil {
+object StringUtil {
 
     /**
      * @param source String that may contain HTML tags.
      * @return returned Spanned string that may contain spans parsed from the HTML source.
      */
-    @NonNull public static Spanned fromHtml(@Nullable String source) {
+    @JvmStatic
+    fun fromHtml(source: String?): Spanned {
         if (source == null) {
-            return new SpannedString("");
+            return SpannedString("")
         }
         if (!source.contains("<") && !source.contains("&")) {
             // If the string doesn't contain any hints of HTML entities, then skip the expensive
             // processing that fromHtml() performs.
-            return new SpannedString(source);
+            return SpannedString(source)
         }
-        source = source.replaceAll("&#8206;", "\u200E")
-                .replaceAll("&#8207;", "\u200F")
-                .replaceAll("&amp;", "&");
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            return Html.fromHtml(source, Html.FROM_HTML_MODE_LEGACY);
+        val processedSource = source
+            .replace("&#8206;", "\u200E")
+            .replace("&#8207;", "\u200F")
+            .replace("&amp;", "&")
+
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            Html.fromHtml(processedSource, Html.FROM_HTML_MODE_LEGACY)
         } else {
             //noinspection deprecation
-            return Html.fromHtml(source);
+            @Suppress("DEPRECATION")
+            Html.fromHtml(processedSource)
         }
-    }
-
-    private StringUtil() {
     }
 }

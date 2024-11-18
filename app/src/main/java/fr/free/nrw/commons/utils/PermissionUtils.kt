@@ -1,51 +1,54 @@
-package fr.free.nrw.commons.utils;
+package fr.free.nrw.commons.utils
 
-import android.Manifest;
-import android.Manifest.permission;
-import android.app.Activity;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.net.Uri;
-import android.os.Build;
-import android.provider.Settings;
-import android.widget.Toast;
-import androidx.annotation.StringRes;
-import androidx.core.content.ContextCompat;
-import com.karumi.dexter.Dexter;
-import com.karumi.dexter.MultiplePermissionsReport;
-import com.karumi.dexter.PermissionToken;
-import com.karumi.dexter.listener.PermissionRequest;
-import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
-import fr.free.nrw.commons.CommonsApplication;
-import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.upload.UploadActivity;
-import java.util.List;
+import android.Manifest
+import android.app.Activity
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.net.Uri
+import android.os.Build
+import android.provider.Settings
+import android.widget.Toast
+import androidx.core.content.ContextCompat
+import com.karumi.dexter.Dexter
+import com.karumi.dexter.MultiplePermissionsReport
+import com.karumi.dexter.PermissionToken
+import com.karumi.dexter.listener.PermissionRequest
+import com.karumi.dexter.listener.multi.MultiplePermissionsListener
+import fr.free.nrw.commons.R
+import fr.free.nrw.commons.upload.UploadActivity
 
-public class PermissionUtils {
-    public static String[] PERMISSIONS_STORAGE = getPermissionsStorage();
 
-    static String[] getPermissionsStorage() {
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
-            return new String[]{ Manifest.permission.READ_MEDIA_VISUAL_USER_SELECTED,
+object PermissionUtils {
+
+    @JvmStatic
+    val PERMISSIONS_STORAGE: Array<String> = getPermissionsStorage()
+
+    @JvmStatic
+    private fun getPermissionsStorage(): Array<String> {
+        return when {
+            Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE -> arrayOf(
+                Manifest.permission.READ_MEDIA_VISUAL_USER_SELECTED,
                 Manifest.permission.READ_MEDIA_IMAGES,
-                Manifest.permission.ACCESS_MEDIA_LOCATION };
-        }
-        if(Build.VERSION.SDK_INT == Build.VERSION_CODES.TIRAMISU) {
-            return new String[]{ Manifest.permission.READ_MEDIA_IMAGES,
-            Manifest. permission.ACCESS_MEDIA_LOCATION };
-        }
-        if(Build.VERSION.SDK_INT > Build.VERSION_CODES.Q) {
-            return new String[]{ Manifest.permission.READ_EXTERNAL_STORAGE,
-            Manifest.permission.ACCESS_MEDIA_LOCATION };
-        }
-        if(Build.VERSION.SDK_INT == Build.VERSION_CODES.Q) {
-            return new String[]{ Manifest.permission.READ_EXTERNAL_STORAGE,
+                Manifest.permission.ACCESS_MEDIA_LOCATION
+            )
+            Build.VERSION.SDK_INT == Build.VERSION_CODES.TIRAMISU -> arrayOf(
+                Manifest.permission.READ_MEDIA_IMAGES,
+                Manifest.permission.ACCESS_MEDIA_LOCATION
+            )
+            Build.VERSION.SDK_INT > Build.VERSION_CODES.Q -> arrayOf(
+                Manifest.permission.READ_EXTERNAL_STORAGE,
+                Manifest.permission.ACCESS_MEDIA_LOCATION
+            )
+            Build.VERSION.SDK_INT == Build.VERSION_CODES.Q -> arrayOf(
+                Manifest.permission.READ_EXTERNAL_STORAGE,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                Manifest.permission.ACCESS_MEDIA_LOCATION };
+                Manifest.permission.ACCESS_MEDIA_LOCATION
+            )
+            else -> arrayOf(
+                Manifest.permission.READ_EXTERNAL_STORAGE,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE
+            )
         }
-        return new String[]{
-            Manifest.permission.READ_EXTERNAL_STORAGE,
-            Manifest.permission.WRITE_EXTERNAL_STORAGE };
     }
 
     /**
@@ -55,11 +58,12 @@ public class PermissionUtils {
      *
      * @param activity The Activity which requires a permission which has been blocked
      */
-    private static void askUserToManuallyEnablePermissionFromSettings(final Activity activity) {
-        final Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-        final Uri uri = Uri.fromParts("package", activity.getPackageName(), null);
-        intent.setData(uri);
-        activity.startActivity(intent);
+    @JvmStatic
+    private fun askUserToManuallyEnablePermissionFromSettings(activity: Activity) {
+        val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
+            data = Uri.fromParts("package", activity.packageName, null)
+        }
+        activity.startActivity(intent)
     }
 
     /**
@@ -69,25 +73,26 @@ public class PermissionUtils {
      * @param permissions An array of permission strings to check
      * @return `true if the app has all the specified permissions, `false` otherwise
      */
-    public static boolean hasPermission(final Activity activity, final String[] permissions) {
-        boolean hasPermission = true;
-        for(final String permission : permissions) {
-            hasPermission = hasPermission &&
-                ContextCompat.checkSelfPermission(activity, permission)
-                    == PackageManager.PERMISSION_GRANTED;
+    @JvmStatic
+    fun hasPermission(activity: Activity, permissions: Array<String>): Boolean {
+        return permissions.all { permission ->
+            ContextCompat.checkSelfPermission(activity, permission) == PackageManager.PERMISSION_GRANTED
         }
-        return hasPermission;
     }
 
-    public static boolean hasPartialAccess(final Activity activity) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
-            return ContextCompat.checkSelfPermission(activity,
-                permission.READ_MEDIA_VISUAL_USER_SELECTED
-            ) == PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(
-                activity, permission.READ_MEDIA_IMAGES
-            ) == PackageManager.PERMISSION_DENIED;
-        }
-        return false;
+    /**
+     * Check if the app has partial access permissions.
+     */
+    @JvmStatic
+    fun hasPartialAccess(activity: Activity): Boolean {
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+            ContextCompat.checkSelfPermission(
+                activity, Manifest.permission.READ_MEDIA_VISUAL_USER_SELECTED
+            ) == PackageManager.PERMISSION_GRANTED &&
+                    ContextCompat.checkSelfPermission(
+                        activity, Manifest.permission.READ_MEDIA_IMAGES
+                    ) == PackageManager.PERMISSION_DENIED
+        } else false
     }
 
     /**
@@ -116,19 +121,21 @@ public class PermissionUtils {
      * @param rationaleMessage    rationale message to be displayed when permission was denied. It
      *                            can be an invalid @StringRes
      */
-    public static void checkPermissionsAndPerformAction(
-        final Activity activity,
-        final Runnable onPermissionGranted,
-        final @StringRes int rationaleTitle,
-        final @StringRes int rationaleMessage,
-        final String... permissions
+    @JvmStatic
+    fun checkPermissionsAndPerformAction(
+        activity: Activity,
+        onPermissionGranted: Runnable,
+        rationaleTitle: Int,
+        rationaleMessage: Int,
+        vararg permissions: String
     ) {
         if (hasPartialAccess(activity)) {
-            onPermissionGranted.run();
-            return;
+            Thread(onPermissionGranted).start()
+            return
         }
-        checkPermissionsAndPerformAction(activity, onPermissionGranted, null,
-            rationaleTitle, rationaleMessage, permissions);
+        checkPermissionsAndPerformAction(
+            activity, onPermissionGranted, null, rationaleTitle, rationaleMessage, *permissions
+        )
     }
 
     /**
@@ -150,75 +157,75 @@ public class PermissionUtils {
      * @param rationaleTitle      rationale title to be displayed when permission was denied
      * @param rationaleMessage    rationale message to be displayed when permission was denied
      */
-    public static void checkPermissionsAndPerformAction(
-        final Activity activity,
-        final Runnable onPermissionGranted,
-        final Runnable onPermissionDenied,
-        final @StringRes int rationaleTitle,
-        final @StringRes int rationaleMessage,
-        final String... permissions
+    @JvmStatic
+    fun checkPermissionsAndPerformAction(
+        activity: Activity,
+        onPermissionGranted: Runnable,
+        onPermissionDenied: Runnable? = null,
+        rationaleTitle: Int,
+        rationaleMessage: Int,
+        vararg permissions: String
     ) {
         Dexter.withActivity(activity)
-            .withPermissions(permissions)
-            .withListener(new MultiplePermissionsListener() {
-                @Override
-                public void onPermissionsChecked(final MultiplePermissionsReport report) {
-                    if (report.areAllPermissionsGranted() || hasPartialAccess(activity)) {
-                        onPermissionGranted.run();
-                        return;
-                    }
-                    if (report.isAnyPermissionPermanentlyDenied()) {
-                        // permission is denied permanently, we will show user a dialog message.
-                        DialogUtil.showAlertDialog(
-                            activity, activity.getString(rationaleTitle),
-                            activity.getString(rationaleMessage),
-                            activity.getString(R.string.navigation_item_settings),
-                            null, () -> {
-                                askUserToManuallyEnablePermissionFromSettings(activity);
-                                if (activity instanceof UploadActivity) {
-                                    ((UploadActivity) activity).setShowPermissionsDialog(true);
-                                }
-                            }, null, null,
-                            !(activity instanceof UploadActivity));
-                    } else {
-                        if (null != onPermissionDenied) {
-                            onPermissionDenied.run();
+            .withPermissions(*permissions)
+            .withListener(object : MultiplePermissionsListener {
+                override fun onPermissionsChecked(report: MultiplePermissionsReport) {
+                    when {
+                        report.areAllPermissionsGranted() || hasPartialAccess(activity) ->
+                            Thread(onPermissionGranted).start()
+                        report.isAnyPermissionPermanentlyDenied -> {
+                            DialogUtil.showAlertDialog(
+                                activity,
+                                activity.getString(rationaleTitle),
+                                activity.getString(rationaleMessage),
+                                activity.getString(R.string.navigation_item_settings),
+                                null,
+                                {
+                                    askUserToManuallyEnablePermissionFromSettings(activity)
+                                    if (activity is UploadActivity) {
+                                        activity.isShowPermissionsDialog = true
+                                    }
+                                },
+                                null, null, activity !is UploadActivity
+                            )
                         }
+                        else -> Thread(onPermissionDenied).start()
                     }
                 }
 
-                @Override
-                public void onPermissionRationaleShouldBeShown(
-                    final List<PermissionRequest> permissions,
-                    final PermissionToken token
+                override fun onPermissionRationaleShouldBeShown(
+                    permissions: List<PermissionRequest>, token: PermissionToken
                 ) {
                     if (rationaleTitle == -1 && rationaleMessage == -1) {
-                        token.continuePermissionRequest();
-                        return;
+                        token.continuePermissionRequest()
+                        return
                     }
                     DialogUtil.showAlertDialog(
-                        activity, activity.getString(rationaleTitle),
+                        activity,
+                        activity.getString(rationaleTitle),
                         activity.getString(rationaleMessage),
                         activity.getString(android.R.string.ok),
                         activity.getString(android.R.string.cancel),
-                        () -> {
-                            if (activity instanceof UploadActivity) {
-                                ((UploadActivity) activity).setShowPermissionsDialog(true);
+                        {
+                            if (activity is UploadActivity) {
+                                activity.setShowPermissionsDialog(true)
                             }
-                            token.continuePermissionRequest();
+                            token.continuePermissionRequest()
                         },
-                        () -> {
-                            Toast.makeText(activity.getApplicationContext(),
+                        {
+                            Toast.makeText(
+                                activity.applicationContext,
                                 R.string.permissions_are_required_for_functionality,
                                 Toast.LENGTH_LONG
-                            ).show();
-                            token.cancelPermissionRequest();
-                            if (activity instanceof UploadActivity) {
-                                activity.finish();
+                            ).show()
+                            token.cancelPermissionRequest()
+                            if (activity is UploadActivity) {
+                                activity.finish()
                             }
-                        }, null, false
-                    );
+                        },
+                        null, false
+                    )
                 }
-            }).onSameThread().check();
+            }).onSameThread().check()
     }
 }
