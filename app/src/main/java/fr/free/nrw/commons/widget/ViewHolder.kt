@@ -1,7 +1,7 @@
-package fr.free.nrw.commons.widget;
+package fr.free.nrw.commons.widget
 
-import android.content.Context;
+import android.content.Context
 
-public interface ViewHolder<T> {
-    void bindModel(Context context, T model);
+interface ViewHolder<T> {
+    fun bindModel(context: Context, model: T)
 }
