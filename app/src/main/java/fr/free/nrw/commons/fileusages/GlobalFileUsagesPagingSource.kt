@@ -36,9 +36,7 @@ class GlobalFileUsagesPagingSource @Inject constructor(
                 //TODO: handle this scenario
                 val data = response.query.pages.first().globalUsage
                 println(data)
-                println("Test Loaded for current key $continueKey")
-                println("Test Returned result ${response.continueResponse?.guContinue ?: "no key in the response"}")
-                println("Test Next key $nextKey")
+
 
                 if (data == null) {
                     throw IllegalStateException("No contributions for this file")

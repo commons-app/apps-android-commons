@@ -8,11 +8,10 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import com.google.gson.Gson;
-import com.google.gson.JsonParser;
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.campaigns.CampaignResponseDTO;
 import fr.free.nrw.commons.explore.depictions.DepictsClient;
-import fr.free.nrw.commons.fileusages.CommonsFileUsagesResponse;
+import fr.free.nrw.commons.fileusages.FileUsagesResponse;
 import fr.free.nrw.commons.fileusages.GlobalFileUsagesResponse;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.nearby.Place;
@@ -38,8 +37,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.inject.Inject;
 import javax.inject.Singleton;
-import okhttp3.Call;
-import okhttp3.Callback;
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -128,18 +125,21 @@ public class OkHttpJsonApiClient {
     }
 
 
-    public Observable<CommonsFileUsagesResponse> getFileUsagesOnCommons(String fileName,
-        String continueKey){
+    public Observable<FileUsagesResponse> getFileUsagesOnCommons
+        (String fileName,
+        int loadSize,
+        FileUsagesResponse.FileUsagesContinue continueElement){
 
         HttpUrl.Builder urlBuilder = HttpUrl.parse(BuildConfig.FILE_USAGES_BASE_URL).newBuilder();
         urlBuilder.addQueryParameter("prop", "fileusage");
         urlBuilder.addQueryParameter("titles", fileName);
 
-        if(continueKey != null){
-            urlBuilder.addQueryParameter("fucontinue", continueKey);
+        if(continueElement != null){
+            urlBuilder.addQueryParameter("fucontinue", continueElement.getFuContinue());
+            urlBuilder.addQueryParameter("continue", continueElement.getContinueKey());
         }
 
-        urlBuilder.addQueryParameter("fulimit", "max");
+        urlBuilder.addQueryParameter("fulimit", String.valueOf(loadSize));
 
         Timber.i("Url %s", urlBuilder.toString());
         System.out.println(urlBuilder.build());
@@ -156,8 +156,8 @@ public class OkHttpJsonApiClient {
                     return null;
                 }
                 try {
-                    System.out.println(json);
-                    return gson.fromJson(json, CommonsFileUsagesResponse.class);
+                    System.out.println("Test" + json);
+                    return gson.fromJson(json, FileUsagesResponse.class);
                 } catch (Exception e) {
                     System.out.println("exception raised "+e.getMessage());
                     return null;
@@ -174,7 +174,6 @@ public class OkHttpJsonApiClient {
         HttpUrl.Builder urlBuilder = HttpUrl.parse(BuildConfig.FILE_USAGES_BASE_URL).newBuilder();
         urlBuilder.addQueryParameter("prop", "globalusage");
         urlBuilder.addQueryParameter("titles", fileName);
-        //TODO[Parry] might need pagination
 
         if(continueKey != null){
             //TODO; test sandbox adds the other param too, adding the whole continue make sense

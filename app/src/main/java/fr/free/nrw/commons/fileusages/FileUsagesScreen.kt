@@ -20,6 +20,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextAlign
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
@@ -57,6 +58,7 @@ fun FileUsagesScreen(modifier: Modifier = Modifier, viewModel: FileUsagesViewMod
                 0 -> {
                     when (fileUsagesLazyPagingItems.loadState.refresh) {
                         is LoadState.Error -> {
+                            println("test error when refresh")
                             Text("Error while loading... ${(fileUsagesLazyPagingItems.loadState.refresh as LoadState.Error).error.message}")
                         }
 
@@ -103,11 +105,12 @@ fun GlobalUsagesListContent(data: LazyPagingItems<UiModel>) {
     LazyColumn {
         items(data) {
             it?.let { item ->
-                when(item){
+                when (item) {
                     is UiModel.HeaderModel -> Text(
                         text = item.group,
                         style = MaterialTheme.typography.headlineMedium
                     )
+
                     is UiModel.ItemModel -> Text(
                         text = item.item.title,
                         style = MaterialTheme.typography.bodyMedium
@@ -125,13 +128,17 @@ fun GlobalUsagesListContent(data: LazyPagingItems<UiModel>) {
             if (data.loadState.append is LoadState.Loading) {
                 LinearProgressIndicator(modifier = Modifier.fillMaxWidth())
             }
+
+            if (data.loadState.append is LoadState.Error) {
+                Text(modifier = Modifier.fillMaxWidth(), text = "End reached")
+            }
         }
     }
 }
 
 //TODO [Parry] global usages are shown differently
 @Composable
-fun FileUsagesListContent(data: LazyPagingItems<FileUsage>) {
+fun FileUsagesListContent(data: LazyPagingItems<FileUsagesResponse.FileUsage>) {
     LazyColumn {
         items(data) {
             it?.let { item ->
@@ -143,8 +150,24 @@ fun FileUsagesListContent(data: LazyPagingItems<FileUsage>) {
             }
         }
         item {
-            if (data.loadState.append is LoadState.Loading) {
-                LinearProgressIndicator(modifier = Modifier.fillMaxWidth())
+            when (data.loadState.append) {
+                is LoadState.Error -> Text(
+                    modifier = Modifier.fillMaxWidth(),
+                    text = "Error occurred while loading"
+                )
+
+                LoadState.Loading -> LinearProgressIndicator(modifier = Modifier.fillMaxWidth())
+
+                is LoadState.NotLoading -> {
+                    val ifLastPage = data.loadState.append.endOfPaginationReached
+                    if (ifLastPage) {
+                        Text(
+                            "End Reached",
+                            modifier = Modifier.fillMaxWidth(),
+                            textAlign = TextAlign.Center
+                        )
+                    }
+                }
             }
         }
     }

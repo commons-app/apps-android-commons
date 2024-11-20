@@ -22,7 +22,7 @@ import javax.inject.Inject
 private const val ITEMS_PER_PAGE = 30
 
 class FileUsagesViewModel(
-    private val commonsFileUsagesPagingSource: CommonsFileUsagesPagingSource,
+    private val fileUsagesPagingSource: FileUsagesPagingSource,
     private val globalFileUsagesPagingSource: GlobalFileUsagesPagingSource,
     private val okHttpJsonApiClient: OkHttpJsonApiClient
 ) : ViewModel() {
@@ -30,20 +30,20 @@ class FileUsagesViewModel(
         MutableStateFlow(FileUsagesScreenState())
     val screenState = _screenState.asStateFlow()
 
-    lateinit var fileUsagesPagingData: Flow<PagingData<FileUsage>>
+    lateinit var fileUsagesPagingData: Flow<PagingData<FileUsagesResponse.FileUsage>>
 
     lateinit var globalFileUsagesPagingData: Flow<PagingData<UiModel>>
 
     fun setFileName(fileName: String?) {
         // for testing
-        val testingFileName = "File:Commons-logo.svg"
+        val testingFileName = "File:Ratargul 785 retouched.jpg"
         // get the file name and use it to create paging source
         //TODO: [Parry} handle if null
         if (fileName != null) {
             if (!::fileUsagesPagingData.isInitialized) {
                 initFileUsagesPagingData()
                 initGlobalFileUsagesPagingData()
-                commonsFileUsagesPagingSource.fileName = testingFileName
+                fileUsagesPagingSource.fileName = testingFileName
                 globalFileUsagesPagingSource.fileName = testingFileName
             }
 
@@ -53,7 +53,7 @@ class FileUsagesViewModel(
     private fun initFileUsagesPagingData() {
         fileUsagesPagingData =
             Pager(config = PagingConfig(pageSize = ITEMS_PER_PAGE),
-                pagingSourceFactory = { commonsFileUsagesPagingSource })
+                pagingSourceFactory = { fileUsagesPagingSource })
                 .flow.cachedIn(viewModelScope)
     }
 
@@ -73,7 +73,9 @@ class FileUsagesViewModel(
                         // what about when after item is null (i.e when last item)
                         // also does direction would affect this logic???
                         if (before == null || before.item.group != after?.item?.group) {
-                            UiModel.HeaderModel(group = after!!.item.group)
+                            if(after != null){
+                                UiModel.HeaderModel(group = after.item.group)
+                            } else null
                         } else null
                     }
                 }
@@ -103,13 +105,13 @@ data class FileUsagesScreenState(
     //TODO: should we have separate loading indicators?
     val isCommonsScreenLoading: Boolean = false,
     val isOtherWikisScreenLoading: Boolean = false,
-    val commonsFileUsagesList: List<FileUsage>? = null,
+    val commonsFileUsagesList: List<FileUsagesResponse.FileUsage>? = null,
     val otherWikisUsagesList: List<GlobalFileUsage>? = null
 )
 
 class FileUsagesViewModelProviderFactory
 @Inject constructor(
-    private val commonsFileUsagesPagingSource: CommonsFileUsagesPagingSource,
+    private val fileUsagesPagingSource: FileUsagesPagingSource,
     private val globalFileUsagesPagingSource: GlobalFileUsagesPagingSource,
     private val okHttpJsonApiClient: OkHttpJsonApiClient
 ) :
@@ -118,7 +120,7 @@ class FileUsagesViewModelProviderFactory
         if (modelClass.isAssignableFrom(FileUsagesViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")
             return FileUsagesViewModel(
-                commonsFileUsagesPagingSource,
+                fileUsagesPagingSource,
                 globalFileUsagesPagingSource,
                 okHttpJsonApiClient
             ) as T
