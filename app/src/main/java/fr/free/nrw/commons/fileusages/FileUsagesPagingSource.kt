@@ -47,8 +47,8 @@ class FileUsagesPagingSource @Inject constructor(
                 //TODO: handle this scenario
                 val data = response.query.pages.first().fileUsage
 
-                if (data == null) {
-                    throw IllegalStateException("No contributions for this file")
+                if (data.isNullOrEmpty()) {
+                    throw NoContributionsError()
                 } else {
                     LoadResult.Page(
                         data = data,

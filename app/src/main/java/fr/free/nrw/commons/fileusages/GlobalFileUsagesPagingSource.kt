@@ -41,7 +41,7 @@ class GlobalFileUsagesPagingSource @Inject constructor(
                     null
                 }
 
-                println("Test response for curernt page is nulL?  ${response == null}")
+                println("Test response for curernt page is nulL?  ${response}")
                 println("Test continue response for curernt page ${response.continueResponse}")
                 println("Test Loaded for current key $continueElement")
                 println("Test Returned result ${response.continueResponse ?: "no key in the response"}")
@@ -53,8 +53,8 @@ class GlobalFileUsagesPagingSource @Inject constructor(
                 println(data)
 
 
-                if (data == null) {
-                    throw IllegalStateException("No contributions for this file")
+                if (data.isNullOrEmpty()) {
+                    throw NoContributionsError()
                 } else {
                     LoadResult.Page(
                         data = data,

@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.ListItem
@@ -53,13 +54,33 @@ fun FileUsagesScreen(modifier: Modifier = Modifier, viewModel: FileUsagesViewMod
         }
 
 
-        Box(modifier = Modifier.fillMaxSize()) {
+        Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
             when (currentScreenIndex) {
                 0 -> {
                     when (fileUsagesLazyPagingItems.loadState.refresh) {
                         is LoadState.Error -> {
-                            println("test error when refresh")
-                            Text("Error while loading... ${(fileUsagesLazyPagingItems.loadState.refresh as LoadState.Error).error.message}")
+                            val error =
+                                (fileUsagesLazyPagingItems.loadState.refresh as LoadState.Error).error
+
+                            if (error is NoContributionsError) {
+                                Text(
+                                    text = error.message!!,
+                                    style = MaterialTheme.typography.headlineSmall
+                                )
+                            } else {
+                                Column(
+                                    horizontalAlignment = Alignment.CenterHorizontally
+                                ) {
+                                    Text(
+                                        text = "Something went wrong",
+                                        style = MaterialTheme.typography.headlineSmall
+                                    )
+                                    Button(onClick = { fileUsagesLazyPagingItems.retry() }) {
+                                        Text("Try again")
+                                    }
+                                }
+                            }
+
                         }
 
                         LoadState.Loading -> {
@@ -83,7 +104,27 @@ fun FileUsagesScreen(modifier: Modifier = Modifier, viewModel: FileUsagesViewMod
 
                     when (globalFileUsagesLazyPagingItems.loadState.refresh) {
                         is LoadState.Error -> {
-                            Text("Error while loading... ${(globalFileUsagesLazyPagingItems.loadState.refresh as LoadState.Error).error.message}")
+                            val error =
+                                (globalFileUsagesLazyPagingItems.loadState.refresh as LoadState.Error).error
+
+                            if (error is NoContributionsError) {
+                                Text(
+                                    text = error.message!!,
+                                    style = MaterialTheme.typography.headlineSmall
+                                )
+                            } else {
+                                Column(
+                                    horizontalAlignment = Alignment.CenterHorizontally
+                                ) {
+                                    Text(
+                                        text = "Something went wrong",
+                                        style = MaterialTheme.typography.headlineSmall
+                                    )
+                                    Button(onClick = { globalFileUsagesLazyPagingItems.retry() }) {
+                                        Text("Try again")
+                                    }
+                                }
+                            }
                         }
 
                         LoadState.Loading -> {
