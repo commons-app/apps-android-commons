@@ -57,84 +57,19 @@ fun FileUsagesScreen(modifier: Modifier = Modifier, viewModel: FileUsagesViewMod
         Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
             when (currentScreenIndex) {
                 0 -> {
-                    when (fileUsagesLazyPagingItems.loadState.refresh) {
-                        is LoadState.Error -> {
-                            val error =
-                                (fileUsagesLazyPagingItems.loadState.refresh as LoadState.Error).error
-
-                            if (error is NoContributionsError) {
-                                Text(
-                                    text = error.message!!,
-                                    style = MaterialTheme.typography.headlineSmall
-                                )
-                            } else {
-                                Column(
-                                    horizontalAlignment = Alignment.CenterHorizontally
-                                ) {
-                                    Text(
-                                        text = "Something went wrong",
-                                        style = MaterialTheme.typography.headlineSmall
-                                    )
-                                    Button(onClick = { fileUsagesLazyPagingItems.retry() }) {
-                                        Text("Try again")
-                                    }
-                                }
-                            }
-
-                        }
-
-                        LoadState.Loading -> {
-                            CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
-                        }
-
-                        is LoadState.NotLoading -> {
-                            FileUsagesListContent(fileUsagesLazyPagingItems)
-                        }
-                    }
+                    FileUsages(
+                        refreshLoadState = fileUsagesLazyPagingItems.loadState.refresh,
+                        pagingItems = fileUsagesLazyPagingItems,
+                        usagesType = 0
+                    )
                 }
 
                 1 -> {
-//                    if (screenState.isOtherWikisScreenLoading) {
-//                        CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
-//                    } else {
-//                        OtherWikisListContent(
-//                            screenState.otherWikisUsagesList
-//                        )
-//                    }
-
-                    when (globalFileUsagesLazyPagingItems.loadState.refresh) {
-                        is LoadState.Error -> {
-                            val error =
-                                (globalFileUsagesLazyPagingItems.loadState.refresh as LoadState.Error).error
-
-                            if (error is NoContributionsError) {
-                                Text(
-                                    text = error.message!!,
-                                    style = MaterialTheme.typography.headlineSmall
-                                )
-                            } else {
-                                Column(
-                                    horizontalAlignment = Alignment.CenterHorizontally
-                                ) {
-                                    Text(
-                                        text = "Something went wrong",
-                                        style = MaterialTheme.typography.headlineSmall
-                                    )
-                                    Button(onClick = { globalFileUsagesLazyPagingItems.retry() }) {
-                                        Text("Try again")
-                                    }
-                                }
-                            }
-                        }
-
-                        LoadState.Loading -> {
-                            CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
-                        }
-
-                        is LoadState.NotLoading -> {
-                            GlobalUsagesListContent(globalFileUsagesLazyPagingItems)
-                        }
-                    }
+                    FileUsages(
+                        refreshLoadState = globalFileUsagesLazyPagingItems.loadState.refresh,
+                        pagingItems = globalFileUsagesLazyPagingItems,
+                        usagesType = 1
+                    )
                 }
             }
         }
@@ -160,25 +95,7 @@ fun GlobalUsagesListContent(data: LazyPagingItems<UiModel>) {
             }
         }
         item {
-            when (data.loadState.append) {
-                is LoadState.Error -> Text(
-                    modifier = Modifier.fillMaxWidth(),
-                    text = "Error occurred while loading"
-                )
-
-                LoadState.Loading -> LinearProgressIndicator(modifier = Modifier.fillMaxWidth())
-
-                is LoadState.NotLoading -> {
-                    val ifLastPage = data.loadState.append.endOfPaginationReached
-                    if (ifLastPage) {
-                        Text(
-                            "End Reached",
-                            modifier = Modifier.fillMaxWidth(),
-                            textAlign = TextAlign.Center
-                        )
-                    }
-                }
-            }
+            FileUsagesItemAppend(appendState = data.loadState.append)
         }
     }
 }
@@ -197,45 +114,88 @@ fun FileUsagesListContent(data: LazyPagingItems<FileUsagesResponse.FileUsage>) {
             }
         }
         item {
-            when (data.loadState.append) {
-                is LoadState.Error -> Text(
-                    modifier = Modifier.fillMaxWidth(),
-                    text = "Error occurred while loading"
-                )
-
-                LoadState.Loading -> LinearProgressIndicator(modifier = Modifier.fillMaxWidth())
-
-                is LoadState.NotLoading -> {
-                    val ifLastPage = data.loadState.append.endOfPaginationReached
-                    if (ifLastPage) {
-                        Text(
-                            "End Reached",
-                            modifier = Modifier.fillMaxWidth(),
-                            textAlign = TextAlign.Center
-                        )
-                    }
-                }
-            }
+            FileUsagesItemAppend(appendState = data.loadState.append)
         }
     }
 }
 
-//@Composable
-//fun OtherWikisListContent(data: List<GlobalFileUsage>?) {
-//    data?.let {
-//        LazyColumn {
-//            items(data.size) { index ->
-//                val globalFileUsageItem = data[index]
-//                ListItem(leadingContent = {
-//                    Text(text = "*")
-//                }, headlineContent = {
-//                    Text(text = globalFileUsageItem.wiki)
-//                })
-//            }
-//        }
-//    }
-//}
+@Composable
+fun <T : Any> FileUsages(
+    refreshLoadState: LoadState,
+    pagingItems: LazyPagingItems<T>,
+    usagesType: Int
+) {
+    when (refreshLoadState) {
+        LoadState.Loading -> CircularProgressIndicator()
 
+        is LoadState.NotLoading -> {
+            when (usagesType) {
+                0 -> FileUsagesListContent(pagingItems as LazyPagingItems<FileUsagesResponse.FileUsage>)
+                1 -> GlobalUsagesListContent(pagingItems as LazyPagingItems<UiModel>)
+            }
+        }
+
+        is LoadState.Error -> {
+            RefreshErrorItem(
+                errorState = refreshLoadState,
+                onRetry = { pagingItems.retry() }
+            )
+        }
+    }
+}
+
+@Composable
+fun FileUsagesItemAppend(
+    appendState: LoadState
+) {
+    when (appendState) {
+
+        LoadState.Loading -> LinearProgressIndicator(modifier = Modifier.fillMaxWidth())
+
+        is LoadState.NotLoading -> {
+            val ifLastPage = appendState.endOfPaginationReached
+            if (ifLastPage) {
+                Text(
+                    "End Reached",
+                    modifier = Modifier.fillMaxWidth(),
+                    textAlign = TextAlign.Center
+                )
+            }
+        }
+
+        is LoadState.Error -> Text(
+            modifier = Modifier.fillMaxWidth(),
+            text = "Error occurred while loading"
+        )
+    }
+}
+
+@Composable
+fun RefreshErrorItem(
+    errorState: LoadState.Error,
+    onRetry: () -> Unit
+) {
+
+    if (errorState.error is NoContributionsError) {
+        Text(
+            text = errorState.error.message!!,
+            style = MaterialTheme.typography.headlineSmall
+        )
+    } else {
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Text(
+                text = "Something went wrong",
+                style = MaterialTheme.typography.headlineSmall
+            )
+            Button(onClick = onRetry) {
+                Text("Try again")
+            }
+        }
+    }
+
+}
 
 sealed class UiModel {
     data class HeaderModel(val group: String) : UiModel()
