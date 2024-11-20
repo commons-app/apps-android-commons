@@ -43,11 +43,6 @@ class FileUsagesPagingSource @Inject constructor(
                     null
                 }
 
-                println("Test response for curernt page is nulL?  ${response == null}")
-                println("Test continue response for curernt page ${response.continueResponse}")
-                println("Test Loaded for current key $continueElement")
-                println("Test Returned result ${response.continueResponse ?: "no key in the response"}")
-                println("Test Next key $nextKey")
                 // this comes null if there are no contributions to show for a file
                 //TODO: handle this scenario
                 val data = response.query.pages.first().fileUsage

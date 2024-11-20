@@ -10,13 +10,10 @@ import androidx.paging.cachedIn
 import androidx.paging.insertSeparators
 import androidx.paging.map
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.update
 import javax.inject.Inject
 
 private const val ITEMS_PER_PAGE = 30
@@ -73,7 +70,7 @@ class FileUsagesViewModel(
                         // what about when after item is null (i.e when last item)
                         // also does direction would affect this logic???
                         if (before == null || before.item.group != after?.item?.group) {
-                            if(after != null){
+                            if (after != null) {
                                 UiModel.HeaderModel(group = after.item.group)
                             } else null
                         } else null
@@ -81,23 +78,23 @@ class FileUsagesViewModel(
                 }
     }
 
-    fun getOtherWikisUsage() {
-//            val fileName = media!!.filename
-        // for testing
-        val fileName = "File:Commons-logo.svg"
-        _screenState.update { it.copy(isCommonsScreenLoading = true) }
-        okHttpJsonApiClient.getGlobalFileUsages(fileName, null)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe { globalResponse ->
-                _screenState.update {
-                    it.copy(
-                        isCommonsScreenLoading = false,
-                        otherWikisUsagesList = globalResponse.query.pages.first().globalUsage
-                    )
-                }
-            }
-    }
+//    fun getOtherWikisUsage() {
+////            val fileName = media!!.filename
+//        // for testing
+//        val fileName = "File:Commons-logo.svg"
+//        _screenState.update { it.copy(isCommonsScreenLoading = true) }
+//        okHttpJsonApiClient.getGlobalFileUsages(fileName, null)
+//            .subscribeOn(Schedulers.io())
+//            .observeOn(AndroidSchedulers.mainThread())
+//            .subscribe { globalResponse ->
+//                _screenState.update {
+//                    it.copy(
+//                        isCommonsScreenLoading = false,
+//                        otherWikisUsagesList = globalResponse.query.pages.first().globalUsage
+//                    )
+//                }
+//            }
+//    }
 
 }
 
@@ -106,7 +103,7 @@ data class FileUsagesScreenState(
     val isCommonsScreenLoading: Boolean = false,
     val isOtherWikisScreenLoading: Boolean = false,
     val commonsFileUsagesList: List<FileUsagesResponse.FileUsage>? = null,
-    val otherWikisUsagesList: List<GlobalFileUsage>? = null
+    val otherWikisUsagesList: List<GlobalFileUsagesResponse.GlobalFileUsage>? = null
 )
 
 class FileUsagesViewModelProviderFactory

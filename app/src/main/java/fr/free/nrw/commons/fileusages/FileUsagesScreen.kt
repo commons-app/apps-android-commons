@@ -116,21 +116,27 @@ fun GlobalUsagesListContent(data: LazyPagingItems<UiModel>) {
                         style = MaterialTheme.typography.bodyMedium
                     )
                 }
-
-//                ListItem(leadingContent = {
-//                    Text(text = "*")
-//                }, headlineContent = {
-//                    Text(text = item.title)
-//                })
             }
         }
         item {
-            if (data.loadState.append is LoadState.Loading) {
-                LinearProgressIndicator(modifier = Modifier.fillMaxWidth())
-            }
+            when (data.loadState.append) {
+                is LoadState.Error -> Text(
+                    modifier = Modifier.fillMaxWidth(),
+                    text = "Error occurred while loading"
+                )
 
-            if (data.loadState.append is LoadState.Error) {
-                Text(modifier = Modifier.fillMaxWidth(), text = "End reached")
+                LoadState.Loading -> LinearProgressIndicator(modifier = Modifier.fillMaxWidth())
+
+                is LoadState.NotLoading -> {
+                    val ifLastPage = data.loadState.append.endOfPaginationReached
+                    if (ifLastPage) {
+                        Text(
+                            "End Reached",
+                            modifier = Modifier.fillMaxWidth(),
+                            textAlign = TextAlign.Center
+                        )
+                    }
+                }
             }
         }
     }
@@ -173,21 +179,21 @@ fun FileUsagesListContent(data: LazyPagingItems<FileUsagesResponse.FileUsage>) {
     }
 }
 
-@Composable
-fun OtherWikisListContent(data: List<GlobalFileUsage>?) {
-    data?.let {
-        LazyColumn {
-            items(data.size) { index ->
-                val globalFileUsageItem = data[index]
-                ListItem(leadingContent = {
-                    Text(text = "*")
-                }, headlineContent = {
-                    Text(text = globalFileUsageItem.wiki)
-                })
-            }
-        }
-    }
-}
+//@Composable
+//fun OtherWikisListContent(data: List<GlobalFileUsage>?) {
+//    data?.let {
+//        LazyColumn {
+//            items(data.size) { index ->
+//                val globalFileUsageItem = data[index]
+//                ListItem(leadingContent = {
+//                    Text(text = "*")
+//                }, headlineContent = {
+//                    Text(text = globalFileUsageItem.wiki)
+//                })
+//            }
+//        }
+//    }
+//}
 
 
 sealed class UiModel {

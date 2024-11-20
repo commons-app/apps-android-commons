@@ -125,16 +125,17 @@ public class OkHttpJsonApiClient {
     }
 
 
-    public Observable<FileUsagesResponse> getFileUsagesOnCommons
-        (String fileName,
+    public Observable<FileUsagesResponse> getFileUsagesOnCommons(
+        String fileName,
         int loadSize,
-        FileUsagesResponse.FileUsagesContinue continueElement){
+        FileUsagesResponse.FileUsagesContinue continueElement
+    ) {
 
         HttpUrl.Builder urlBuilder = HttpUrl.parse(BuildConfig.FILE_USAGES_BASE_URL).newBuilder();
         urlBuilder.addQueryParameter("prop", "fileusage");
         urlBuilder.addQueryParameter("titles", fileName);
 
-        if(continueElement != null){
+        if (continueElement != null) {
             urlBuilder.addQueryParameter("fucontinue", continueElement.getFuContinue());
             urlBuilder.addQueryParameter("continue", continueElement.getContinueKey());
         }
@@ -159,7 +160,7 @@ public class OkHttpJsonApiClient {
                     System.out.println("Test" + json);
                     return gson.fromJson(json, FileUsagesResponse.class);
                 } catch (Exception e) {
-                    System.out.println("exception raised "+e.getMessage());
+                    System.out.println("exception raised " + e.getMessage());
                     return null;
                 }
             }
@@ -168,18 +169,21 @@ public class OkHttpJsonApiClient {
         });
     }
 
-    public Observable<GlobalFileUsagesResponse> getGlobalFileUsages(String fileName,
-        String continueKey){
+    public Observable<GlobalFileUsagesResponse> getGlobalFileUsages(
+        String fileName,
+        int loadSize,
+        GlobalFileUsagesResponse.GlobalContinue continueElement
+    ) {
 
         HttpUrl.Builder urlBuilder = HttpUrl.parse(BuildConfig.FILE_USAGES_BASE_URL).newBuilder();
         urlBuilder.addQueryParameter("prop", "globalusage");
         urlBuilder.addQueryParameter("titles", fileName);
 
-        if(continueKey != null){
-            //TODO; test sandbox adds the other param too, adding the whole continue make sense
-            urlBuilder.addQueryParameter("gucontinue", continueKey);
+        if (continueElement != null) {
+            urlBuilder.addQueryParameter("gucontinue", continueElement.getGuContinue());
+            urlBuilder.addQueryParameter("continue", continueElement.getContinueKey());
         }
-        urlBuilder.addQueryParameter("gulimit", "max");
+        urlBuilder.addQueryParameter("gulimit", String.valueOf(loadSize));
 
         Timber.i("Url %s", urlBuilder.toString());
         System.out.println(urlBuilder.build());
