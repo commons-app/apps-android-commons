@@ -133,7 +133,7 @@ public class NotificationActivity extends BaseActivity {
                     }
                     binding.progressBar.setVisibility(View.GONE);
                 });
-        compositeDisposable.add(disposable);
+        getCompositeDisposable().add(disposable);
     }
 
 
@@ -178,7 +178,7 @@ public class NotificationActivity extends BaseActivity {
         Timber.d("Add notifications");
         if (mNotificationWorkerFragment == null) {
             binding.progressBar.setVisibility(View.VISIBLE);
-            compositeDisposable.add(controller.getNotifications(archived)
+            getCompositeDisposable().add(controller.getNotifications(archived)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(notificationList -> {

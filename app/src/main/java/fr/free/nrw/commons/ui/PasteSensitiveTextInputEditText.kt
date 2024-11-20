@@ -1,65 +1,60 @@
-package fr.free.nrw.commons.ui;
+package fr.free.nrw.commons.ui
 
-import android.content.Context;
-import android.content.res.TypedArray;
-import android.os.Build.VERSION;
-import android.util.AttributeSet;
-import com.google.android.material.textfield.TextInputEditText;
-import fr.free.nrw.commons.R;
+import android.content.Context
+import android.content.res.TypedArray
+import android.os.Build
+import android.os.Build.VERSION
+import android.util.AttributeSet
+import com.google.android.material.textfield.TextInputEditText
+import fr.free.nrw.commons.R
 
-public class PasteSensitiveTextInputEditText extends TextInputEditText {
 
-    private boolean formattingAllowed = true;
+class PasteSensitiveTextInputEditText @JvmOverloads constructor(
+    context: Context,
+    attrs: AttributeSet? = null
+) : TextInputEditText(context, attrs) {
 
-    public PasteSensitiveTextInputEditText(final Context context) {
-        super(context);
+    private var formattingAllowed: Boolean = true
+
+    init {
+        if (attrs != null) {
+            formattingAllowed = extractFormattingAttribute(context, attrs)
+        }
     }
 
-    public PasteSensitiveTextInputEditText(final Context context, final AttributeSet attrs) {
-        super(context, attrs);
-        formattingAllowed = extractFormattingAttribute(context, attrs);
-    }
-
-    @Override
-    public boolean onTextContextMenuItem(int id) {
-
+    override fun onTextContextMenuItem(id: Int): Boolean {
         // if not paste command, or formatting is allowed, return default
-        if(id != android.R.id.paste || formattingAllowed){
-            return super.onTextContextMenuItem(id);
+        if (id != android.R.id.paste || formattingAllowed) {
+            return super.onTextContextMenuItem(id)
         }
 
-        // if its paste and formatting not allowed
-        boolean proceeded;
-        if(VERSION.SDK_INT >= 23) {
-            proceeded = super.onTextContextMenuItem(android.R.id.pasteAsPlainText);
-        }else {
-            proceeded = super.onTextContextMenuItem(id);
-            if (proceeded && getText() != null) {
+        // if it's paste and formatting not allowed
+        val proceeded: Boolean = if (VERSION.SDK_INT >= 23) {
+            super.onTextContextMenuItem(android.R.id.pasteAsPlainText)
+        } else {
+            val success = super.onTextContextMenuItem(id)
+            if (success && text != null) {
                 // rewrite with plain text so formatting is lost
-                setText(getText().toString());
-                setSelection(getText().length());
+                setText(text.toString())
+                setSelection(text?.length ?: 0)
             }
+            success
         }
-        return proceeded;
+        return proceeded
     }
 
-    private boolean extractFormattingAttribute(Context context, AttributeSet attrs){
-
-        boolean formatAllowed = true;
-
-        TypedArray a = context.getTheme().obtainStyledAttributes(
-            attrs, R.styleable.PasteSensitiveTextInputEditText, 0, 0);
-
-        try {
-            formatAllowed = a.getBoolean(
-                R.styleable.PasteSensitiveTextInputEditText_allowFormatting, true);
+    private fun extractFormattingAttribute(context: Context, attrs: AttributeSet): Boolean {
+        val a = context.theme.obtainStyledAttributes(
+            attrs, R.styleable.PasteSensitiveTextInputEditText, 0, 0
+        )
+        return try {
+            a.getBoolean(R.styleable.PasteSensitiveTextInputEditText_allowFormatting, true)
         } finally {
-            a.recycle();
+            a.recycle()
         }
-        return formatAllowed;
     }
 
-    public void setFormattingAllowed(boolean formattingAllowed){
-        this.formattingAllowed = formattingAllowed;
+    fun setFormattingAllowed(formattingAllowed: Boolean) {
+        this.formattingAllowed = formattingAllowed
     }
 }

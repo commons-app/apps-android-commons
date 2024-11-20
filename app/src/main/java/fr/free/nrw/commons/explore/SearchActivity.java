@@ -104,7 +104,7 @@ public class SearchActivity extends BaseActivity
 
         viewPagerAdapter.setTabData(fragmentList, titleList);
         viewPagerAdapter.notifyDataSetChanged();
-        compositeDisposable.add(RxSearchView.queryTextChanges(binding.searchBox)
+        getCompositeDisposable().add(RxSearchView.queryTextChanges(binding.searchBox)
                 .takeUntil(RxView.detaches(binding.searchBox))
                 .debounce(500, TimeUnit.MILLISECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
@@ -284,7 +284,7 @@ public class SearchActivity extends BaseActivity
     @Override protected void onDestroy() {
         super.onDestroy();
         //Dispose the disposables when the activity is destroyed
-        compositeDisposable.dispose();
+        getCompositeDisposable().dispose();
         binding = null;
     }
 }

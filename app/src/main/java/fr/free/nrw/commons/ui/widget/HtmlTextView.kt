@@ -1,36 +1,32 @@
-package fr.free.nrw.commons.ui.widget;
+package fr.free.nrw.commons.ui.widget
 
-import android.content.Context;
-import android.text.method.LinkMovementMethod;
-import android.util.AttributeSet;
+import android.content.Context
+import android.text.method.LinkMovementMethod
+import android.util.AttributeSet
 
-import androidx.appcompat.widget.AppCompatTextView;
+import androidx.appcompat.widget.AppCompatTextView
 
-import fr.free.nrw.commons.utils.StringUtil;
+import fr.free.nrw.commons.utils.StringUtil
 
 /**
- * An {@link AppCompatTextView} which formats the text to HTML displayable text and makes any
+ * An [AppCompatTextView] which formats the text to HTML displayable text and makes any
  * links clickable.
  */
-public class HtmlTextView extends AppCompatTextView {
+class HtmlTextView @JvmOverloads constructor(
+    context: Context,
+    attrs: AttributeSet? = null
+) : AppCompatTextView(context, attrs) {
 
-    /**
-     * Constructs a new instance of HtmlTextView
-     * @param context the context of the view
-     * @param attrs the set of attributes for the view
-     */
-    public HtmlTextView(Context context, AttributeSet attrs) {
-        super(context, attrs);
-
-        setMovementMethod(LinkMovementMethod.getInstance());
-        setText(StringUtil.fromHtml(getText().toString()));
+    init {
+        movementMethod = LinkMovementMethod.getInstance()
+        text = StringUtil.fromHtml(text.toString())
     }
 
     /**
      * Sets the text to be displayed
      * @param newText the text to be displayed
      */
-    public void setHtmlText(String newText) {
-        setText(StringUtil.fromHtml(newText));
+    fun setHtmlText(newText: String) {
+        text = StringUtil.fromHtml(newText)
     }
 }
