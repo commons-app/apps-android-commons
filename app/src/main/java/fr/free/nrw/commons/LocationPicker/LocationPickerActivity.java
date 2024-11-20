@@ -367,7 +367,7 @@ public class LocationPickerActivity extends BaseActivity implements
      */
     private void removeLocationFromImage() {
         if (media != null) {
-            compositeDisposable.add(coordinateEditHelper.makeCoordinatesEdit(getApplicationContext()
+            getCompositeDisposable().add(coordinateEditHelper.makeCoordinatesEdit(getApplicationContext()
                     , media, "0.0", "0.0", "0.0f")
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -479,7 +479,7 @@ public class LocationPickerActivity extends BaseActivity implements
         }
 
         try {
-            compositeDisposable.add(
+            getCompositeDisposable().add(
                 coordinateEditHelper.makeCoordinatesEdit(getApplicationContext(), media,
                         Latitude, Longitude, Accuracy)
                     .subscribeOn(Schedulers.io())

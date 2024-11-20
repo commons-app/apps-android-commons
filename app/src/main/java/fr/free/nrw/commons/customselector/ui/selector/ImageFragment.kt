@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.customselector.ui.selector
 
 import android.app.Activity
+import android.content.Context
 import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences
 import android.os.Bundle
@@ -346,7 +347,7 @@ class ImageFragment :
                 context
                     .getSharedPreferences(
                         "CustomSelector",
-                        BaseActivity.MODE_PRIVATE,
+                        MODE_PRIVATE,
                     )?.let { prefs ->
                         prefs.edit()?.let { editor ->
                             editor.putLong("ItemId", imageAdapter.getImageIdAt(position))?.apply()
