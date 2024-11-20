@@ -128,12 +128,17 @@ public class OkHttpJsonApiClient {
     }
 
 
-    public Observable<CommonsFileUsagesResponse> getFileUsagesOnCommons(String fileName){
+    public Observable<CommonsFileUsagesResponse> getFileUsagesOnCommons(String fileName,
+        String continueKey){
 
         HttpUrl.Builder urlBuilder = HttpUrl.parse(BuildConfig.FILE_USAGES_BASE_URL).newBuilder();
         urlBuilder.addQueryParameter("prop", "fileusage");
         urlBuilder.addQueryParameter("titles", fileName);
-        //TODO[Parry] might need pagination
+
+        if(continueKey != null){
+            urlBuilder.addQueryParameter("fucontinue", continueKey);
+        }
+
         urlBuilder.addQueryParameter("fulimit", "max");
 
         Timber.i("Url %s", urlBuilder.toString());
@@ -151,6 +156,7 @@ public class OkHttpJsonApiClient {
                     return null;
                 }
                 try {
+                    System.out.println(json);
                     return gson.fromJson(json, CommonsFileUsagesResponse.class);
                 } catch (Exception e) {
                     System.out.println("exception raised "+e.getMessage());
@@ -162,12 +168,18 @@ public class OkHttpJsonApiClient {
         });
     }
 
-    public Observable<GlobalFileUsagesResponse> getGlobalFileUsages(String fileName){
+    public Observable<GlobalFileUsagesResponse> getGlobalFileUsages(String fileName,
+        String continueKey){
 
         HttpUrl.Builder urlBuilder = HttpUrl.parse(BuildConfig.FILE_USAGES_BASE_URL).newBuilder();
         urlBuilder.addQueryParameter("prop", "globalusage");
         urlBuilder.addQueryParameter("titles", fileName);
         //TODO[Parry] might need pagination
+
+        if(continueKey != null){
+            //TODO; test sandbox adds the other param too, adding the whole continue make sense
+            urlBuilder.addQueryParameter("gucontinue", continueKey);
+        }
         urlBuilder.addQueryParameter("gulimit", "max");
 
         Timber.i("Url %s", urlBuilder.toString());

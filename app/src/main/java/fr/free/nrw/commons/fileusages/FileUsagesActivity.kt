@@ -16,15 +16,12 @@ import javax.inject.Inject
 
 class FileUsagesActivity : BaseActivity() {
 
-
     @Inject
-    lateinit var okHttpJsonApiClient: OkHttpJsonApiClient
+    lateinit var viewModelFactory: FileUsagesViewModelProviderFactory
 
-    private val viewModel: FileUsagesViewModel by viewModels(factoryProducer = {
-        FileUsagesViewModelProviderFactory(
-            okHttpJsonApiClient
-        )
-    })
+    private val viewModel: FileUsagesViewModel by viewModels<FileUsagesViewModel> {
+        viewModelFactory
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,9 +30,9 @@ class FileUsagesActivity : BaseActivity() {
         } else {
             intent.getParcelableExtra("media")
         }
-        viewModel.setMedia(media)
-        viewModel.getCommonsFileUsages()
-        viewModel.getOtherWikisUsages()
+        viewModel.setFileName(media?.filename)
+//        viewModel.getOtherWikisUsage()
+        println(media?.filename)
         setContent {
 //TODO also need theming
             MaterialTheme {
@@ -44,12 +41,6 @@ class FileUsagesActivity : BaseActivity() {
                 }
             }
         }
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        //TODO[Parry] see if we should keep it in composable screen
-        viewModel.disposeNetworkOperations()
     }
 }
 

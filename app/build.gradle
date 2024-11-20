@@ -71,6 +71,8 @@ dependencies {
     implementation "androidx.paging:paging-runtime-ktx:$PAGING_VERSION"
     testImplementation "androidx.paging:paging-common-ktx:$PAGING_VERSION"
     implementation "androidx.paging:paging-rxjava2-ktx:$PAGING_VERSION"
+    implementation "androidx.paging:paging-compose:1.0.0-alpha18"
+
     implementation "androidx.recyclerview:recyclerview:1.2.0-alpha02"
     implementation "com.squareup.okhttp3:okhttp-ws:$OKHTTP_VERSION"
 

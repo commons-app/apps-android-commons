@@ -2,86 +2,99 @@ package fr.free.nrw.commons.fileusages
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import fr.free.nrw.commons.Media
+import androidx.lifecycle.viewModelScope
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
+import androidx.paging.cachedIn
+import androidx.paging.insertSeparators
+import androidx.paging.map
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.update
+import javax.inject.Inject
 
-class FileUsagesViewModel(private val okHttpJsonApiClient: OkHttpJsonApiClient) : ViewModel() {
+private const val ITEMS_PER_PAGE = 30
 
-    private val compositeDisposable = CompositeDisposable()
-
-    private var media: Media? = null
-
+class FileUsagesViewModel(
+    private val commonsFileUsagesPagingSource: CommonsFileUsagesPagingSource,
+    private val globalFileUsagesPagingSource: GlobalFileUsagesPagingSource,
+    private val okHttpJsonApiClient: OkHttpJsonApiClient
+) : ViewModel() {
     private val _screenState: MutableStateFlow<FileUsagesScreenState> =
         MutableStateFlow(FileUsagesScreenState())
     val screenState = _screenState.asStateFlow()
 
-    init {
-//        getCommonsFileUsages()
+    lateinit var fileUsagesPagingData: Flow<PagingData<FileUsage>>
+
+    lateinit var globalFileUsagesPagingData: Flow<PagingData<UiModel>>
+
+    fun setFileName(fileName: String?) {
+        // for testing
+        val testingFileName = "File:Commons-logo.svg"
+        // get the file name and use it to create paging source
+        //TODO: [Parry} handle if null
+        if (fileName != null) {
+            if (!::fileUsagesPagingData.isInitialized) {
+                initFileUsagesPagingData()
+                initGlobalFileUsagesPagingData()
+                commonsFileUsagesPagingSource.fileName = testingFileName
+                globalFileUsagesPagingSource.fileName = testingFileName
+            }
+
+        }
     }
 
-    fun setMedia(media: Media?) {
-        this.media = media
+    private fun initFileUsagesPagingData() {
+        fileUsagesPagingData =
+            Pager(config = PagingConfig(pageSize = ITEMS_PER_PAGE),
+                pagingSourceFactory = { commonsFileUsagesPagingSource })
+                .flow.cachedIn(viewModelScope)
     }
 
-    fun getCommonsFileUsages() {
-        if (media != null) {
-            println("file name is ${media!!.filename}")
+    private fun initGlobalFileUsagesPagingData() {
+        globalFileUsagesPagingData =
+            Pager(config = PagingConfig(pageSize = ITEMS_PER_PAGE),
+                pagingSourceFactory = { globalFileUsagesPagingSource })
+                .flow.cachedIn(viewModelScope).map {
+                    it.map {
+                        UiModel.ItemModel(
+                            item = GlobalUsageItem(
+                                group = it.wiki,
+                                title = it.title
+                            )
+                        )
+                    }.insertSeparators { before, after ->
+                        // what about when after item is null (i.e when last item)
+                        // also does direction would affect this logic???
+                        if (before == null || before.item.group != after?.item?.group) {
+                            UiModel.HeaderModel(group = after!!.item.group)
+                        } else null
+                    }
+                }
+    }
+
+    fun getOtherWikisUsage() {
 //            val fileName = media!!.filename
-            // for testing
-            val fileName = "File:Commons-logo.svg"
-            _screenState.update { it.copy(isCommonsScreenLoading = true) }
-            compositeDisposable.add(
-                okHttpJsonApiClient.getFileUsagesOnCommons(fileName)
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe { fileUsageResponse ->
-                        //TODO assuming page is always going to be just one.
-                        _screenState.update {
-                            it.copy(
-                                isCommonsScreenLoading = false,
-                                commonsFileUsagesList = fileUsageResponse.query.pages.first().fileUsage
-                            )
-                        }
-                    }
-            )
-        } else {
-            println("media object is null")
-        }
-    }
-
-    fun getOtherWikisUsages() {
-        if (media != null) {
-            //            val fileName = media!!.filename
-            // for testing
-            val fileName = "File:Commons-logo.svg"
-            _screenState.update { it.copy(isOtherWikisScreenLoading = true) }
-            compositeDisposable.add(
-                okHttpJsonApiClient.getGlobalFileUsages(fileName)
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe { fileUsageResponse ->
-                        //TODO assuming page is always going to be just one.
-                        _screenState.update {
-                            it.copy(
-                                isOtherWikisScreenLoading = false,
-                                otherWikisUsagesList = fileUsageResponse.query.pages.first().globalUsage
-                            )
-                        }
-                    }
-            )
-        }else{
-            println("media object is null")
-        }
-    }
-
-    fun disposeNetworkOperations() {
-        compositeDisposable.clear()
+        // for testing
+        val fileName = "File:Commons-logo.svg"
+        _screenState.update { it.copy(isCommonsScreenLoading = true) }
+        okHttpJsonApiClient.getGlobalFileUsages(fileName, null)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe { globalResponse ->
+                _screenState.update {
+                    it.copy(
+                        isCommonsScreenLoading = false,
+                        otherWikisUsagesList = globalResponse.query.pages.first().globalUsage
+                    )
+                }
+            }
     }
 
 }
@@ -94,12 +107,21 @@ data class FileUsagesScreenState(
     val otherWikisUsagesList: List<GlobalFileUsage>? = null
 )
 
-class FileUsagesViewModelProviderFactory(private val okHttpJsonApiClient: OkHttpJsonApiClient) :
+class FileUsagesViewModelProviderFactory
+@Inject constructor(
+    private val commonsFileUsagesPagingSource: CommonsFileUsagesPagingSource,
+    private val globalFileUsagesPagingSource: GlobalFileUsagesPagingSource,
+    private val okHttpJsonApiClient: OkHttpJsonApiClient
+) :
     ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(FileUsagesViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")
-            return FileUsagesViewModel(okHttpJsonApiClient) as T
+            return FileUsagesViewModel(
+                commonsFileUsagesPagingSource,
+                globalFileUsagesPagingSource,
+                okHttpJsonApiClient
+            ) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }

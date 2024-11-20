@@ -22,7 +22,7 @@ data class Page(
     @SerializedName("pageid") val pageId: Int,
     @SerializedName("ns") val nameSpace: Int,
     @SerializedName("title") val title: String,
-    @SerializedName("fileusage") val fileUsage: List<FileUsage>
+    @SerializedName("fileusage") val fileUsage: List<FileUsage>?
 )
 
 data class FileUsage(

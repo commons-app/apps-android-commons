@@ -1,15 +1,14 @@
 package fr.free.nrw.commons.fileusages
 
-import android.graphics.Paint.Align
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.ListItem
-import androidx.compose.material3.Surface
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Tab
 import androidx.compose.material3.TabRow
 import androidx.compose.material3.Text
@@ -21,14 +20,21 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.paging.LoadState
+import androidx.paging.compose.LazyPagingItems
+import androidx.paging.compose.collectAsLazyPagingItems
+import androidx.paging.compose.items
 
 @Composable
 fun FileUsagesScreen(modifier: Modifier = Modifier, viewModel: FileUsagesViewModel) {
-    // temp screen state
-    // 0 -> Commons File usages
-    // 1 -> Other wikis usages
+    val fileUsagesLazyPagingItems =
+        viewModel.fileUsagesPagingData.collectAsLazyPagingItems()
+
+    val globalFileUsagesLazyPagingItems =
+        viewModel.globalFileUsagesPagingData.collectAsLazyPagingItems()
+
     val screenState by viewModel.screenState.collectAsState()
+
     var currentScreenIndex by rememberSaveable { mutableStateOf(0) }
 
     Column(
@@ -49,22 +55,42 @@ fun FileUsagesScreen(modifier: Modifier = Modifier, viewModel: FileUsagesViewMod
         Box(modifier = Modifier.fillMaxSize()) {
             when (currentScreenIndex) {
                 0 -> {
-                    if (screenState.isCommonsScreenLoading) {
-                        CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
-                    } else {
-                        CommonsListContent(
-                            screenState.commonsFileUsagesList
-                        )
+                    when (fileUsagesLazyPagingItems.loadState.refresh) {
+                        is LoadState.Error -> {
+                            Text("Error while loading... ${(fileUsagesLazyPagingItems.loadState.refresh as LoadState.Error).error.message}")
+                        }
+
+                        LoadState.Loading -> {
+                            CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
+                        }
+
+                        is LoadState.NotLoading -> {
+                            FileUsagesListContent(fileUsagesLazyPagingItems)
+                        }
                     }
                 }
 
                 1 -> {
-                    if (screenState.isOtherWikisScreenLoading) {
-                        CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
-                    } else {
-                        OtherWikisListContent(
-                            screenState.otherWikisUsagesList
-                        )
+//                    if (screenState.isOtherWikisScreenLoading) {
+//                        CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
+//                    } else {
+//                        OtherWikisListContent(
+//                            screenState.otherWikisUsagesList
+//                        )
+//                    }
+
+                    when (globalFileUsagesLazyPagingItems.loadState.refresh) {
+                        is LoadState.Error -> {
+                            Text("Error while loading... ${(globalFileUsagesLazyPagingItems.loadState.refresh as LoadState.Error).error.message}")
+                        }
+
+                        LoadState.Loading -> {
+                            CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
+                        }
+
+                        is LoadState.NotLoading -> {
+                            GlobalUsagesListContent(globalFileUsagesLazyPagingItems)
+                        }
                     }
                 }
             }
@@ -73,17 +99,52 @@ fun FileUsagesScreen(modifier: Modifier = Modifier, viewModel: FileUsagesViewMod
 }
 
 @Composable
-fun CommonsListContent(data: List<FileUsage>?) {
-    println("list received $data")
-    data?.let {
-        println(it.size)
-        LazyColumn {
-            items(it) { fileUsageItem ->
+fun GlobalUsagesListContent(data: LazyPagingItems<UiModel>) {
+    LazyColumn {
+        items(data) {
+            it?.let { item ->
+                when(item){
+                    is UiModel.HeaderModel -> Text(
+                        text = item.group,
+                        style = MaterialTheme.typography.headlineMedium
+                    )
+                    is UiModel.ItemModel -> Text(
+                        text = item.item.title,
+                        style = MaterialTheme.typography.bodyMedium
+                    )
+                }
+
+//                ListItem(leadingContent = {
+//                    Text(text = "*")
+//                }, headlineContent = {
+//                    Text(text = item.title)
+//                })
+            }
+        }
+        item {
+            if (data.loadState.append is LoadState.Loading) {
+                LinearProgressIndicator(modifier = Modifier.fillMaxWidth())
+            }
+        }
+    }
+}
+
+//TODO [Parry] global usages are shown differently
+@Composable
+fun FileUsagesListContent(data: LazyPagingItems<FileUsage>) {
+    LazyColumn {
+        items(data) {
+            it?.let { item ->
                 ListItem(leadingContent = {
                     Text(text = "*")
                 }, headlineContent = {
-                    Text(text = fileUsageItem.title)
+                    Text(text = item.title)
                 })
+            }
+        }
+        item {
+            if (data.loadState.append is LoadState.Loading) {
+                LinearProgressIndicator(modifier = Modifier.fillMaxWidth())
             }
         }
     }
@@ -93,7 +154,8 @@ fun CommonsListContent(data: List<FileUsage>?) {
 fun OtherWikisListContent(data: List<GlobalFileUsage>?) {
     data?.let {
         LazyColumn {
-            items(it) { globalFileUsageItem ->
+            items(data.size) { index ->
+                val globalFileUsageItem = data[index]
                 ListItem(leadingContent = {
                     Text(text = "*")
                 }, headlineContent = {
@@ -103,3 +165,11 @@ fun OtherWikisListContent(data: List<GlobalFileUsage>?) {
         }
     }
 }
+
+
+sealed class UiModel {
+    data class HeaderModel(val group: String) : UiModel()
+    data class ItemModel(val item: GlobalUsageItem) : UiModel()
+}
+
+data class GlobalUsageItem(val group: String, val title: String)
