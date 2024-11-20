@@ -1,7 +1,9 @@
-package fr.free.nrw.commons.fileusages
+package fr.free.nrw.commons.fileusages.paging
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
+import fr.free.nrw.commons.fileusages.model.GlobalFileUsagesResponse
+import fr.free.nrw.commons.fileusages.model.NoContributionsError
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext

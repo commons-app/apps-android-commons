@@ -1,4 +1,4 @@
-package fr.free.nrw.commons.fileusages
+package fr.free.nrw.commons.fileusages.model
 
 import com.google.gson.annotations.SerializedName
 

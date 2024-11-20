@@ -9,12 +9,15 @@ import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import androidx.paging.insertSeparators
 import androidx.paging.map
+import fr.free.nrw.commons.fileusages.model.FileUsagesResponse
+import fr.free.nrw.commons.fileusages.paging.FileUsagesPagingSource
+import fr.free.nrw.commons.fileusages.paging.GlobalFileUsagesPagingSource
+import fr.free.nrw.commons.fileusages.model.GlobalFileUsagesResponse
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.retry
 import javax.inject.Inject
 
 private const val ITEMS_PER_PAGE = 30

@@ -26,6 +26,8 @@ import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.items
+import fr.free.nrw.commons.fileusages.model.FileUsagesResponse
+import fr.free.nrw.commons.fileusages.model.NoContributionsError
 
 @Composable
 fun FileUsagesScreen(modifier: Modifier = Modifier, viewModel: FileUsagesViewModel) {
