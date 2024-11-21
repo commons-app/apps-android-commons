@@ -1,9 +1,5 @@
 package fr.free.nrw.commons.utils
 
-import org.apache.commons.lang3.StringUtils
-
-import java.util.ArrayList
-
 object MediaDataExtractorUtil {
 
     /**
@@ -13,8 +9,8 @@ object MediaDataExtractorUtil {
      * @return
      */
     @JvmStatic
-    fun extractCategoriesFromList(source: String): List<String> {
-        if (source.isBlank()) {
+    fun extractCategoriesFromList(source: String?): List<String> {
+        if (source.isNullOrBlank()) {
             return emptyList()
         }
         val cats = source.split("|")
