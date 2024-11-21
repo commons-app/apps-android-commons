@@ -471,18 +471,20 @@ class SettingsFragment : PreferenceFragmentCompat() {
         editor.apply()
     }
 
-    /**
-     * Create Locale based on different types of language codes
-     * @param languageCode
-     * @return Locale and throws error for invalid language codes
-     */
-    fun createLocale(languageCode: String): Locale {
-        val parts = languageCode.split("-")
-        return when (parts.size) {
-            1 -> Locale(parts[0])
-            2 -> Locale(parts[0], parts[1])
-            3 -> Locale(parts[0], parts[1], parts[2])
-            else -> throw IllegalArgumentException("Invalid language code: $languageCode")
+    companion object {
+        /**
+         * Create Locale based on different types of language codes
+         * @param languageCode
+         * @return Locale and throws error for invalid language codes
+         */
+        fun createLocale(languageCode: String): Locale {
+            val parts = languageCode.split("-")
+            return when (parts.size) {
+                1 -> Locale(parts[0])
+                2 -> Locale(parts[0], parts[1])
+                3 -> Locale(parts[0], parts[1], parts[2])
+                else -> throw IllegalArgumentException("Invalid language code: $languageCode")
+            }
         }
     }
 

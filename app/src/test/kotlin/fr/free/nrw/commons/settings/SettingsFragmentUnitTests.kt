@@ -19,7 +19,7 @@ import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.recentlanguages.Language
 import fr.free.nrw.commons.recentlanguages.RecentLanguagesAdapter
 import fr.free.nrw.commons.recentlanguages.RecentLanguagesDao
-import fr.free.nrw.commons.settings.SettingsFragment.createLocale
+import fr.free.nrw.commons.settings.SettingsFragment.Companion.createLocale
 import org.junit.Assert
 import org.junit.Assert.assertEquals
 import org.junit.Before
