@@ -820,7 +820,7 @@
   <string name="could_not_load_place_data">Ortsdaten konnten nicht geladen werden</string>
   <string name="custom_selector_delete_folder">Ordner löschen</string>
   <string name="custom_selector_confirm_deletion_title">Löschung bestätigen</string>
-  <string name="custom_selector_confirm_deletion_message">Bist du sicher, dass du den Ordner %1$s löschen möchten, die %2$d Datenobjekte enthalten?</string>
+  <string name="custom_selector_confirm_deletion_message">Bist du sicher, dass du den Ordner %1$s löschen möchten, der %2$d Datenobjekte enthält?</string>
   <string name="custom_selector_delete">Löschen</string>
   <string name="custom_selector_cancel">Abbrechen</string>
   <string name="custom_selector_folder_deleted_success">Ordner %1$s erfolgreich gelöscht</string>
