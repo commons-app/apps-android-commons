@@ -1,34 +1,31 @@
-package fr.free.nrw.commons.settings;
+package fr.free.nrw.commons.settings
 
-import android.os.Bundle;
-import android.view.MenuItem;
+import android.os.Bundle
+import android.view.MenuItem
+import fr.free.nrw.commons.databinding.ActivitySettingsBinding
+import fr.free.nrw.commons.theme.BaseActivity
 
-import android.view.View;
-import androidx.appcompat.app.AppCompatDelegate;
-
-import fr.free.nrw.commons.databinding.ActivitySettingsBinding;
-import fr.free.nrw.commons.theme.BaseActivity;
 
 /**
  * allows the user to change the settings
  */
-public class SettingsActivity extends BaseActivity {
+class SettingsActivity : BaseActivity() {
 
-    private ActivitySettingsBinding binding;
-//    private AppCompatDelegate settingsDelegate;
+    private lateinit var binding: ActivitySettingsBinding
+//    private var settingsDelegate: AppCompatDelegate? = null
+
     /**
      * to be called when the activity starts
      * @param savedInstanceState the previously saved state
      */
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        binding = ActivitySettingsBinding.inflate(getLayoutInflater());
-        final View view = binding.getRoot();
-        setContentView(view);
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        binding = ActivitySettingsBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
 
-        setSupportActionBar(binding.toolbarBinding.toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        setSupportActionBar(binding.toolbarBinding.toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
     // Get an action bar
@@ -36,19 +33,17 @@ public class SettingsActivity extends BaseActivity {
      * takes care of actions taken after the creation has happened
      * @param savedInstanceState the saved state
      */
-    @Override
-    protected void onPostCreate(Bundle savedInstanceState) {
-        super.onPostCreate(savedInstanceState);
+    override fun onPostCreate(savedInstanceState: Bundle?) {
+        super.onPostCreate(savedInstanceState)
 //        if (settingsDelegate == null) {
-//            settingsDelegate = AppCompatDelegate.create(this, null);
+//            settingsDelegate = AppCompatDelegate.create(this, null)
 //        }
-//        settingsDelegate.onPostCreate(savedInstanceState);
+//        settingsDelegate?.onPostCreate(savedInstanceState)
     }
 
-    @Override
-    public boolean onSupportNavigateUp() {
-        onBackPressed();
-        return true;
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
     }
 
     /**
@@ -56,14 +51,13 @@ public class SettingsActivity extends BaseActivity {
      * @param item the selected item
      * @return true on success, false on failure
      */
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                finish();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            android.R.id.home -> {
+                finish()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
         }
     }
 }

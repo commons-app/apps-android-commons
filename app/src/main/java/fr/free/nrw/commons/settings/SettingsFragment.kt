@@ -1,239 +1,241 @@
-package fr.free.nrw.commons.settings;
+package fr.free.nrw.commons.settings
 
-import static android.content.Context.MODE_PRIVATE;
+import android.Manifest.permission
+import android.app.Activity
+import android.app.Dialog
+import android.content.Context.MODE_PRIVATE
+import android.content.Intent
+import android.content.res.Configuration
+import android.net.Uri
+import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
+import android.view.View
+import android.widget.AdapterView
+import android.widget.EditText
+import android.widget.ListView
+import android.widget.TextView
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts.RequestMultiplePermissions
+import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult
+import androidx.preference.ListPreference
+import androidx.preference.MultiSelectListPreference
+import androidx.preference.Preference
+import androidx.preference.PreferenceFragmentCompat
+import androidx.preference.PreferenceGroupAdapter
+import androidx.preference.PreferenceScreen
+import androidx.preference.PreferenceViewHolder
+import androidx.recyclerview.widget.RecyclerView.Adapter
+import com.karumi.dexter.Dexter
+import com.karumi.dexter.MultiplePermissionsReport
+import com.karumi.dexter.PermissionToken
+import com.karumi.dexter.listener.PermissionRequest
+import com.karumi.dexter.listener.multi.MultiplePermissionsListener
+import fr.free.nrw.commons.R
+import fr.free.nrw.commons.Utils
+import fr.free.nrw.commons.campaigns.CampaignView
+import fr.free.nrw.commons.contributions.ContributionController
+import fr.free.nrw.commons.contributions.MainActivity
+import fr.free.nrw.commons.di.ApplicationlessInjection
+import fr.free.nrw.commons.kvstore.JsonKvStore
+import fr.free.nrw.commons.location.LocationServiceManager
+import fr.free.nrw.commons.logging.CommonsLogSender
+import fr.free.nrw.commons.recentlanguages.Language
+import fr.free.nrw.commons.recentlanguages.RecentLanguagesAdapter
+import fr.free.nrw.commons.recentlanguages.RecentLanguagesDao
+import fr.free.nrw.commons.upload.LanguagesAdapter
+import fr.free.nrw.commons.utils.DialogUtil
+import fr.free.nrw.commons.utils.PermissionUtils
+import fr.free.nrw.commons.utils.ViewUtil
+import java.util.Locale
+import javax.inject.Inject
+import javax.inject.Named
 
-import android.Manifest.permission;
-import android.app.Activity;
-import android.app.Dialog;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.res.Configuration;
-import android.net.Uri;
-import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.EditText;
-import android.widget.ListView;
-import android.widget.TextView;
-import androidx.activity.result.ActivityResultCallback;
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult;
-import androidx.preference.ListPreference;
-import androidx.preference.MultiSelectListPreference;
-import androidx.preference.Preference;
-import androidx.preference.Preference.OnPreferenceClickListener;
-import androidx.preference.PreferenceFragmentCompat;
-import androidx.preference.PreferenceGroupAdapter;
-import androidx.preference.PreferenceScreen;
-import androidx.preference.PreferenceViewHolder;
-import androidx.recyclerview.widget.RecyclerView.Adapter;
-import com.karumi.dexter.Dexter;
-import com.karumi.dexter.MultiplePermissionsReport;
-import com.karumi.dexter.PermissionToken;
-import com.karumi.dexter.listener.PermissionRequest;
-import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
-import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.Utils;
-import fr.free.nrw.commons.campaigns.CampaignView;
-import fr.free.nrw.commons.contributions.ContributionController;
-import fr.free.nrw.commons.contributions.MainActivity;
-import fr.free.nrw.commons.di.ApplicationlessInjection;
-import fr.free.nrw.commons.kvstore.JsonKvStore;
-import fr.free.nrw.commons.location.LocationServiceManager;
-import fr.free.nrw.commons.logging.CommonsLogSender;
-import fr.free.nrw.commons.recentlanguages.Language;
-import fr.free.nrw.commons.recentlanguages.RecentLanguagesAdapter;
-import fr.free.nrw.commons.recentlanguages.RecentLanguagesDao;
-import fr.free.nrw.commons.upload.LanguagesAdapter;
-import fr.free.nrw.commons.utils.DialogUtil;
-import fr.free.nrw.commons.utils.PermissionUtils;
-import fr.free.nrw.commons.utils.ViewUtil;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import javax.inject.Inject;
-import javax.inject.Named;
-import timber.log.Timber;
-
-public class SettingsFragment extends PreferenceFragmentCompat {
+class SettingsFragment : PreferenceFragmentCompat() {
 
     @Inject
-    @Named("default_preferences")
-    JsonKvStore defaultKvStore;
+    @field: Named("default_preferences")
+    lateinit var defaultKvStore: JsonKvStore
 
     @Inject
-    CommonsLogSender commonsLogSender;
+    lateinit var commonsLogSender: CommonsLogSender
 
     @Inject
-    RecentLanguagesDao recentLanguagesDao;
+    lateinit var recentLanguagesDao: RecentLanguagesDao
 
     @Inject
-    ContributionController contributionController;
+    lateinit var contributionController: ContributionController
 
     @Inject
-    LocationServiceManager locationManager;
+    lateinit var locationManager: LocationServiceManager
 
-    private ListPreference themeListPreference;
-    private Preference descriptionLanguageListPreference;
-    private Preference appUiLanguageListPreference;
-    private Preference showDeletionButtonPreference;
-    private String keyLanguageListPreference;
-    private TextView recentLanguagesTextView;
-    private View separator;
-    private ListView languageHistoryListView;
-    private static final String GET_CONTENT_PICKER_HELP_URL = "https://commons-app.github.io/docs.html#get-content";
+    private var themeListPreference: ListPreference? = null
+    private var descriptionLanguageListPreference: Preference? = null
+    private var appUiLanguageListPreference: Preference? = null
+    private var showDeletionButtonPreference: Preference? = null
+    private var keyLanguageListPreference: String? = null
+    private var recentLanguagesTextView: TextView? = null
+    private var separator: View? = null
+    private var languageHistoryListView: ListView? = null
+    private lateinit var inAppCameraLocationPermissionLauncher: ActivityResultLauncher<Array<String>>
+    private val GET_CONTENT_PICKER_HELP_URL = "https://commons-app.github.io/docs.html#get-content"
 
-    private final ActivityResultLauncher<Intent> cameraPickLauncherForResult =
-        registerForActivityResult(new StartActivityForResult(),
-        result -> {
-            contributionController.handleActivityResultWithCallback(requireActivity(), callbacks -> {
-                contributionController.onPictureReturnedFromCamera(result, requireActivity(), callbacks);
-            });
-        });
-
-    private ActivityResultLauncher<String[]> inAppCameraLocationPermissionLauncher = registerForActivityResult(new ActivityResultContracts.RequestMultiplePermissions(), new ActivityResultCallback<Map<String, Boolean>>() {
-        @Override
-        public void onActivityResult(Map<String, Boolean> result) {
-            boolean areAllGranted = true;
-            for (final boolean b : result.values()) {
-                areAllGranted = areAllGranted && b;
-            }
-            if (!areAllGranted && shouldShowRequestPermissionRationale(permission.ACCESS_FINE_LOCATION)) {
-                contributionController.handleShowRationaleFlowCameraLocation(getActivity(), inAppCameraLocationPermissionLauncher, cameraPickLauncherForResult);
-            }
+    private val cameraPickLauncherForResult: ActivityResultLauncher<Intent> =
+        registerForActivityResult(StartActivityForResult()) { result ->
+        contributionController.handleActivityResultWithCallback(requireActivity()) { callbacks ->
+            contributionController.onPictureReturnedFromCamera(result, requireActivity(), callbacks)
         }
-    });
+    }
 
-    @Override
-    public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+    /**
+     * to be called when the fragment creates preferences
+     * @param savedInstanceState the previously saved state
+     * @param rootKey the root key for preferences
+     */
+    override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         ApplicationlessInjection
-            .getInstance(getActivity().getApplicationContext())
-            .getCommonsApplicationComponent()
-            .inject(this);
+            .getInstance(requireActivity().applicationContext)
+            .commonsApplicationComponent
+            .inject(this)
 
         // Set the preferences from an XML resource
-        setPreferencesFromResource(R.xml.preferences, rootKey);
+        setPreferencesFromResource(R.xml.preferences, rootKey)
 
-        themeListPreference = findPreference(Prefs.KEY_THEME_VALUE);
-        prepareTheme();
+        themeListPreference = findPreference(Prefs.KEY_THEME_VALUE)
+        prepareTheme()
 
-        MultiSelectListPreference multiSelectListPref = findPreference(Prefs.MANAGED_EXIF_TAGS);
-        if (multiSelectListPref != null) {
-            multiSelectListPref.setOnPreferenceChangeListener((preference, newValue) -> {
-                if (newValue instanceof HashSet && !((HashSet) newValue).contains(getString(R.string.exif_tag_location))) {
-                    defaultKvStore.putBoolean("has_user_manually_removed_location", true);
-                }
-                return true;
-            });
+        val multiSelectListPref: MultiSelectListPreference? = findPreference(
+            Prefs.MANAGED_EXIF_TAGS
+        )
+        multiSelectListPref?.setOnPreferenceChangeListener { _, newValue ->
+            if (newValue is HashSet<*> && !newValue.contains(getString(R.string.exif_tag_location)))
+            {
+                defaultKvStore.putBoolean("has_user_manually_removed_location", true)
+            }
+            true
         }
 
-        Preference inAppCameraLocationPref = findPreference("inAppCameraLocationPref");
-
-        inAppCameraLocationPref.setOnPreferenceChangeListener(
-            (preference, newValue) -> {
-                boolean isInAppCameraLocationTurnedOn = (boolean) newValue;
-                if (isInAppCameraLocationTurnedOn) {
-                    createDialogsAndHandleLocationPermissions(getActivity());
-                }
-                return true;
+        val inAppCameraLocationPref: Preference? = findPreference("inAppCameraLocationPref")
+        inAppCameraLocationPref?.setOnPreferenceChangeListener { _, newValue ->
+            val isInAppCameraLocationTurnedOn = newValue as Boolean
+            if (isInAppCameraLocationTurnedOn) {
+                createDialogsAndHandleLocationPermissions(requireActivity())
             }
-        );
+            true
+        }
+
+        inAppCameraLocationPermissionLauncher = registerForActivityResult(
+            RequestMultiplePermissions()
+        ) { result ->
+            var areAllGranted = true
+            for (b in result.values) {
+                areAllGranted = areAllGranted && b
+            }
+            if (
+                !areAllGranted
+                    &&
+                shouldShowRequestPermissionRationale(permission.ACCESS_FINE_LOCATION)
+            ) {
+                contributionController.handleShowRationaleFlowCameraLocation(
+                    requireActivity(),
+                    inAppCameraLocationPermissionLauncher,
+                    cameraPickLauncherForResult
+                )
+            }
+        }
 
         // Gets current language code from shared preferences
-        String languageCode;
+        var languageCode: String?
 
-        appUiLanguageListPreference = findPreference("appUiDefaultLanguagePref");
-        assert appUiLanguageListPreference != null;
-        keyLanguageListPreference = appUiLanguageListPreference.getKey();
-        languageCode = getCurrentLanguageCode(keyLanguageListPreference);
-        assert languageCode != null;
-        if (languageCode.equals("")) {
-            // If current language code is empty, means none selected by user yet so use phone local
-            appUiLanguageListPreference.setSummary(Locale.getDefault().getDisplayLanguage());
-        } else {
-            // If any language is selected by user previously, use it
-            Locale defLocale = createLocale(languageCode);
-            appUiLanguageListPreference.setSummary((defLocale).getDisplayLanguage(defLocale));
-        }
-        appUiLanguageListPreference.setOnPreferenceClickListener(new OnPreferenceClickListener() {
-            @Override
-            public boolean onPreferenceClick(Preference preference) {
-                prepareAppLanguages(appUiLanguageListPreference.getKey());
-                return true;
-            }
-        });
+        appUiLanguageListPreference = findPreference("appUiDefaultLanguagePref")
+        appUiLanguageListPreference?.let { appUiLanguageListPreference ->
+            keyLanguageListPreference = appUiLanguageListPreference.key
+            languageCode = getCurrentLanguageCode(keyLanguageListPreference!!)
 
-        descriptionLanguageListPreference = findPreference("descriptionDefaultLanguagePref");
-        assert descriptionLanguageListPreference != null;
-        keyLanguageListPreference = descriptionLanguageListPreference.getKey();
-        languageCode = getCurrentLanguageCode(keyLanguageListPreference);
-        assert languageCode != null;
-        if (languageCode.equals("")) {
-            // If current language code is empty, means none selected by user yet so use phone local
-            descriptionLanguageListPreference.setSummary(Locale.getDefault().getDisplayLanguage());
-        } else {
-            // If any language is selected by user previously, use it
-            Locale defLocale = createLocale(languageCode);
-            descriptionLanguageListPreference.setSummary(defLocale.getDisplayLanguage(defLocale));
-        }
-        descriptionLanguageListPreference.setOnPreferenceClickListener(new OnPreferenceClickListener() {
-            @Override
-            public boolean onPreferenceClick(Preference preference) {
-                prepareAppLanguages(descriptionLanguageListPreference.getKey());
-                return true;
-            }
-        });
-
-        //
-        showDeletionButtonPreference = findPreference("displayDeletionButton");
-        if (showDeletionButtonPreference != null) {
-            showDeletionButtonPreference.setOnPreferenceChangeListener((preference, newValue) -> {
-                boolean isEnabled = (boolean) newValue;
-                // Save preference when user toggles the button
-                defaultKvStore.putBoolean("displayDeletionButton", isEnabled);
-                return true;
-            });
-        }
-
-
-        Preference betaTesterPreference = findPreference("becomeBetaTester");
-        betaTesterPreference.setOnPreferenceClickListener(preference -> {
-            Utils.handleWebUrl(getActivity(), Uri.parse(getResources().getString(R.string.beta_opt_in_link)));
-            return true;
-        });
-        Preference sendLogsPreference = findPreference("sendLogFile");
-        sendLogsPreference.setOnPreferenceClickListener(preference -> {
-            checkPermissionsAndSendLogs();
-            return true;
-        });
-
-        Preference documentBasedPickerPreference = findPreference("openDocumentPhotoPickerPref");
-        documentBasedPickerPreference.setOnPreferenceChangeListener(
-            (preference, newValue) -> {
-                boolean isGetContentPickerTurnedOn = !(boolean) newValue;
-                if (isGetContentPickerTurnedOn) {
-                    showLocationLossWarning();
+            languageCode?.let { code ->
+                if (code.isEmpty()) {
+                    // If current language code is empty, means none selected by user yet so use
+                    // phone locale
+                    appUiLanguageListPreference.summary = Locale.getDefault().displayLanguage
+                } else {
+                    // If any language is selected by user previously, use it
+                    val defLocale = createLocale(code)
+                    appUiLanguageListPreference.summary = defLocale.getDisplayLanguage(defLocale)
                 }
-                return true;
             }
-        );
+
+            appUiLanguageListPreference.setOnPreferenceClickListener {
+                prepareAppLanguages(keyLanguageListPreference!!)
+                true
+            }
+        }
+
+        descriptionLanguageListPreference = findPreference("descriptionDefaultLanguagePref")
+        descriptionLanguageListPreference?.let { descriptionLanguageListPreference ->
+            languageCode = getCurrentLanguageCode(descriptionLanguageListPreference.key)
+
+            languageCode?.let { code ->
+                if (code.isEmpty()) {
+                    // If current language code is empty, means none selected by user yet so use
+                    // phone locale
+                    descriptionLanguageListPreference.summary = Locale.getDefault().displayLanguage
+                } else {
+                    // If any language is selected by user previously, use it
+                    val defLocale = createLocale(code)
+                    descriptionLanguageListPreference.summary = defLocale.getDisplayLanguage(
+                        defLocale
+                    )
+                }
+            }
+
+            descriptionLanguageListPreference.setOnPreferenceClickListener {
+                prepareAppLanguages(it.key)
+                true
+            }
+        }
+
+        showDeletionButtonPreference = findPreference("displayDeletionButton")
+        showDeletionButtonPreference?.setOnPreferenceChangeListener { _, newValue ->
+            val isEnabled = newValue as Boolean
+            // Save preference when user toggles the button
+            defaultKvStore.putBoolean("displayDeletionButton", isEnabled)
+            true
+        }
+
+        val betaTesterPreference: Preference? = findPreference("becomeBetaTester")
+        betaTesterPreference?.setOnPreferenceClickListener {
+            Utils.handleWebUrl(requireActivity(), Uri.parse(getString(R.string.beta_opt_in_link)))
+            true
+        }
+
+        val sendLogsPreference: Preference? = findPreference("sendLogFile")
+        sendLogsPreference?.setOnPreferenceClickListener {
+            checkPermissionsAndSendLogs()
+            true
+        }
+
+        val documentBasedPickerPreference: Preference? = findPreference(
+            "openDocumentPhotoPickerPref"
+        )
+        documentBasedPickerPreference?.setOnPreferenceChangeListener { _, newValue ->
+            val isGetContentPickerTurnedOn = newValue as Boolean
+            if (!isGetContentPickerTurnedOn) {
+                showLocationLossWarning()
+            }
+            true
+        }
+
         // Disable some settings when not logged in.
         if (defaultKvStore.getBoolean("login_skipped", false)) {
-            findPreference("useExternalStorage").setEnabled(false);
-            findPreference("useAuthorName").setEnabled(false);
-            findPreference("displayNearbyCardView").setEnabled(false);
-            findPreference("descriptionDefaultLanguagePref").setEnabled(false);
-            findPreference("displayLocationPermissionForCardView").setEnabled(false);
-            findPreference(CampaignView.CAMPAIGNS_DEFAULT_PREFERENCE).setEnabled(false);
-            findPreference("managed_exif_tags").setEnabled(false);
-            findPreference("openDocumentPhotoPickerPref").setEnabled(false);
-            findPreference("inAppCameraLocationPref").setEnabled(false);
+            findPreference<Preference>("useExternalStorage")?.isEnabled = false
+            findPreference<Preference>("useAuthorName")?.isEnabled = false
+            findPreference<Preference>("displayNearbyCardView")?.isEnabled = false
+            findPreference<Preference>("descriptionDefaultLanguagePref")?.isEnabled = false
+            findPreference<Preference>("displayLocationPermissionForCardView")?.isEnabled = false
+            findPreference<Preference>(CampaignView.CAMPAIGNS_DEFAULT_PREFERENCE)?.isEnabled = false
+            findPreference<Preference>("managed_exif_tags")?.isEnabled = false
+            findPreference<Preference>("openDocumentPhotoPickerPref")?.isEnabled = false
+            findPreference<Preference>("inAppCameraLocationPref")?.isEnabled = false
         }
     }
 
@@ -242,8 +244,8 @@ public class SettingsFragment extends PreferenceFragmentCompat {
      *
      * @param activity
      */
-    private void createDialogsAndHandleLocationPermissions(Activity activity) {
-        inAppCameraLocationPermissionLauncher.launch(new String[]{permission.ACCESS_FINE_LOCATION});
+    private fun createDialogsAndHandleLocationPermissions(activity: Activity) {
+        inAppCameraLocationPermissionLauncher.launch(arrayOf(permission.ACCESS_FINE_LOCATION))
     }
 
     /**
@@ -252,43 +254,40 @@ public class SettingsFragment extends PreferenceFragmentCompat {
      *
      * Show warning to the user when ACTION_GET_CONTENT intent is enabled
      */
-    private void showLocationLossWarning() {
+    private fun showLocationLossWarning() {
         DialogUtil.showAlertDialog(
-            getActivity(),
+            requireActivity(),
             null,
             getString(R.string.location_loss_warning),
             getString(R.string.ok),
             getString(R.string.read_help_link),
-            () -> {},
-            () -> Utils.handleWebUrl(requireContext(), Uri.parse(GET_CONTENT_PICKER_HELP_URL)),
+            { },
+            { Utils.handleWebUrl(requireContext(), Uri.parse(GET_CONTENT_PICKER_HELP_URL)) },
             null,
             true
-        );
+        )
     }
 
-    @Override
-    protected Adapter onCreateAdapter(final PreferenceScreen preferenceScreen) {
-        return new PreferenceGroupAdapter(preferenceScreen) {
-            @Override
-            public void onBindViewHolder(PreferenceViewHolder holder, int position) {
-                super.onBindViewHolder(holder, position);
-                Preference preference = getItem(position);
-                View iconFrame = holder.itemView.findViewById(R.id.icon_frame);
-                if (iconFrame != null) {
-                    iconFrame.setVisibility(View.GONE);
-                }
+    override fun onCreateAdapter(preferenceScreen: PreferenceScreen): Adapter<PreferenceViewHolder>
+    {
+        return object : PreferenceGroupAdapter(preferenceScreen) {
+            override fun onBindViewHolder(holder: PreferenceViewHolder, position: Int) {
+                super.onBindViewHolder(holder, position)
+                val preference = getItem(position)
+                val iconFrame: View? = holder.itemView.findViewById(R.id.icon_frame)
+                iconFrame?.visibility = View.GONE
             }
-        };
+        }
     }
 
     /**
      * Sets the theme pref
      */
-    private void prepareTheme() {
-        themeListPreference.setOnPreferenceChangeListener((preference, newValue) -> {
-            getActivity().recreate();
-            return true;
-        });
+    private fun prepareTheme() {
+        themeListPreference?.setOnPreferenceChangeListener { _, _ ->
+            requireActivity().recreate()
+            true
+        }
     }
 
     /**
@@ -300,107 +299,86 @@ public class SettingsFragment extends PreferenceFragmentCompat {
      * to remember later and recall MainActivity to reflect language changes
      * @param keyListPreference
      */
-    private void prepareAppLanguages(final String keyListPreference) {
-
+    private fun prepareAppLanguages(keyListPreference: String) {
         // Gets current language code from shared preferences
-        final String languageCode = getCurrentLanguageCode(keyListPreference);
-        final List<Language> recentLanguages = recentLanguagesDao.getRecentLanguages();
-        HashMap<Integer, String> selectedLanguages = new HashMap<>();
+        val languageCode = getCurrentLanguageCode(keyListPreference)
+        val recentLanguages = recentLanguagesDao.getRecentLanguages()
+        val selectedLanguages = hashMapOf<Int, String>()
 
-        if (keyListPreference.equals("appUiDefaultLanguagePref")) {
-
-            assert languageCode != null;
-            if (languageCode.equals("")) {
-                selectedLanguages.put(0, Locale.getDefault().getLanguage());
+        if (keyListPreference == "appUiDefaultLanguagePref") {
+            if (languageCode.isNullOrEmpty()) {
+                selectedLanguages[0] = Locale.getDefault().language
             } else {
-                selectedLanguages.put(0, languageCode);
+                selectedLanguages[0] = languageCode
             }
-        } else if (keyListPreference.equals("descriptionDefaultLanguagePref")) {
-
-            assert languageCode != null;
-            if (languageCode.equals("")) {
-                selectedLanguages.put(0, Locale.getDefault().getLanguage());
-
+        } else if (keyListPreference == "descriptionDefaultLanguagePref") {
+            if (languageCode.isNullOrEmpty()) {
+                selectedLanguages[0] = Locale.getDefault().language
             } else {
-                selectedLanguages.put(0, languageCode);
+                selectedLanguages[0] = languageCode
             }
         }
 
-        LanguagesAdapter languagesAdapter = new LanguagesAdapter(
-            getActivity(),
-            selectedLanguages
-        );
+        val languagesAdapter = LanguagesAdapter(requireActivity(), selectedLanguages)
 
-        Dialog dialog = new Dialog(getActivity());
-        dialog.setContentView(R.layout.dialog_select_language);
-        dialog.setCanceledOnTouchOutside(true);
-        dialog.getWindow().setLayout((int)(getActivity().getResources().getDisplayMetrics().widthPixels*0.90),
-            (int)(getActivity().getResources().getDisplayMetrics().heightPixels*0.90));
-        dialog.show();
+        val dialog = Dialog(requireActivity())
+        dialog.setContentView(R.layout.dialog_select_language)
+        dialog.setCanceledOnTouchOutside(true)
+        dialog.window?.setLayout(
+            (resources.displayMetrics.widthPixels * 0.90).toInt(),
+            (resources.displayMetrics.heightPixels * 0.90).toInt()
+        )
+        dialog.show()
 
-        EditText editText = dialog.findViewById(R.id.search_language);
-        ListView listView = dialog.findViewById(R.id.language_list);
-        languageHistoryListView = dialog.findViewById(R.id.language_history_list);
-        recentLanguagesTextView = dialog.findViewById(R.id.recent_searches);
-        separator = dialog.findViewById(R.id.separator);
+        val editText: EditText = dialog.findViewById(R.id.search_language)
+        val listView: ListView = dialog.findViewById(R.id.language_list)
+        languageHistoryListView = dialog.findViewById(R.id.language_history_list)
+        recentLanguagesTextView = dialog.findViewById(R.id.recent_searches)
+        separator = dialog.findViewById(R.id.separator)
 
-        setUpRecentLanguagesSection(recentLanguages, selectedLanguages);
+        setUpRecentLanguagesSection(recentLanguages, selectedLanguages)
 
-        listView.setAdapter(languagesAdapter);
+        listView.adapter = languagesAdapter
 
-        editText.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1,
-                int i2) {
-                hideRecentLanguagesSection();
+        editText.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(charSequence: CharSequence, start: Int, count: Int, after: Int) {
+                hideRecentLanguagesSection()
             }
 
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1,
-                int i2) {
-                languagesAdapter.getFilter().filter(charSequence);
+            override fun onTextChanged(charSequence: CharSequence, start: Int, before: Int, count: Int) {
+                languagesAdapter.filter.filter(charSequence)
             }
 
-            @Override
-            public void afterTextChanged(Editable editable) {
+            override fun afterTextChanged(editable: Editable?) {}
+        })
 
+        languageHistoryListView?.setOnItemClickListener { adapterView, _, position, _ ->
+            onRecentLanguageClicked(keyListPreference, dialog, adapterView, position)
+        }
+
+        listView.setOnItemClickListener { adapterView, _, position, _ ->
+            val lCode = (adapterView.adapter as LanguagesAdapter).getLanguageCode(position)
+            val languageName = (adapterView.adapter as LanguagesAdapter).getLanguageName(position)
+            val isExists = recentLanguagesDao.findRecentLanguage(lCode)
+            if (isExists) {
+                recentLanguagesDao.deleteRecentLanguage(lCode)
             }
-        });
-
-        languageHistoryListView.setOnItemClickListener((adapterView, view, position, id) -> {
-            onRecentLanguageClicked(keyListPreference, dialog, adapterView, position);
-        });
-
-        listView.setOnItemClickListener(new OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i,
-                long l) {
-                String languageCode = ((LanguagesAdapter) adapterView.getAdapter())
-                    .getLanguageCode(i);
-                final String languageName = ((LanguagesAdapter) adapterView.getAdapter())
-                    .getLanguageName(i);
-                final boolean isExists = recentLanguagesDao.findRecentLanguage(languageCode);
-                if (isExists) {
-                    recentLanguagesDao.deleteRecentLanguage(languageCode);
-                }
-                recentLanguagesDao.addRecentLanguage(new Language(languageName, languageCode));
-                saveLanguageValue(languageCode, keyListPreference);
-                Locale defLocale = createLocale(languageCode);
-                if(keyListPreference.equals("appUiDefaultLanguagePref")) {
-                    appUiLanguageListPreference.setSummary(defLocale.getDisplayLanguage(defLocale));
-                    setLocale(requireActivity(), languageCode);
-                    getActivity().recreate();
-                    final Intent intent = new Intent(getActivity(), MainActivity.class);
-                    startActivity(intent);
-                }else {
-                    descriptionLanguageListPreference.setSummary(defLocale.getDisplayLanguage(defLocale));
-                }
-                dialog.dismiss();
+            recentLanguagesDao.addRecentLanguage(Language(languageName, lCode))
+            saveLanguageValue(lCode, keyListPreference)
+            val defLocale = createLocale(lCode)
+            if (keyListPreference == "appUiDefaultLanguagePref") {
+                appUiLanguageListPreference?.summary = defLocale.getDisplayLanguage(defLocale)
+                setLocale(requireActivity(), lCode)
+                requireActivity().recreate()
+                val intent = Intent(requireActivity(), MainActivity::class.java)
+                startActivity(intent)
+            } else {
+                descriptionLanguageListPreference?.summary = defLocale.getDisplayLanguage(defLocale)
             }
-        });
+            dialog.dismiss()
+        }
 
-        dialog.setOnDismissListener(
-            dialogInterface -> languagesAdapter.getFilter().filter(""));
+        dialog.setOnDismissListener { languagesAdapter.filter.filter("") }
     }
 
     /**
@@ -409,86 +387,88 @@ public class SettingsFragment extends PreferenceFragmentCompat {
      * @param recentLanguages recently used languages
      * @param selectedLanguages selected languages
      */
-    private void setUpRecentLanguagesSection(List<Language> recentLanguages,
-        HashMap<Integer, String> selectedLanguages) {
+    private fun setUpRecentLanguagesSection(
+        recentLanguages: List<Language>,
+        selectedLanguages: HashMap<Int, String>
+    ) {
         if (recentLanguages.isEmpty()) {
-            languageHistoryListView.setVisibility(View.GONE);
-            recentLanguagesTextView.setVisibility(View.GONE);
-            separator.setVisibility(View.GONE);
+            languageHistoryListView?.visibility = View.GONE
+            recentLanguagesTextView?.visibility = View.GONE
+            separator?.visibility = View.GONE
         } else {
-            if (recentLanguages.size() > 5) {
-                for (int i = recentLanguages.size()-1; i >=5; i--) {
-                    recentLanguagesDao
-                        .deleteRecentLanguage(recentLanguages.get(i).getLanguageCode());
+            if (recentLanguages.size > 5) {
+                for (i in recentLanguages.size - 1 downTo 5) {
+                    recentLanguagesDao.deleteRecentLanguage(recentLanguages[i].languageCode)
                 }
             }
-            languageHistoryListView.setVisibility(View.VISIBLE);
-            recentLanguagesTextView.setVisibility(View.VISIBLE);
-            separator.setVisibility(View.VISIBLE);
-            final RecentLanguagesAdapter recentLanguagesAdapter
-                = new RecentLanguagesAdapter(
-                getActivity(),
+            languageHistoryListView?.visibility = View.VISIBLE
+            recentLanguagesTextView?.visibility = View.VISIBLE
+            separator?.visibility = View.VISIBLE
+            val recentLanguagesAdapter = RecentLanguagesAdapter(
+                requireActivity(),
                 recentLanguagesDao.getRecentLanguages(),
-                selectedLanguages);
-            languageHistoryListView.setAdapter(recentLanguagesAdapter);
+                selectedLanguages
+            )
+            languageHistoryListView?.adapter = recentLanguagesAdapter
         }
     }
 
     /**
      * Handles click event for recent language section
      */
-    private void onRecentLanguageClicked(String keyListPreference, Dialog dialog, AdapterView<?> adapterView,
-        int position) {
-        final String recentLanguageCode = ((RecentLanguagesAdapter) adapterView.getAdapter())
-            .getLanguageCode(position);
-        final String recentLanguageName = ((RecentLanguagesAdapter) adapterView.getAdapter())
-            .getLanguageName(position);
-        final boolean isExists = recentLanguagesDao.findRecentLanguage(recentLanguageCode);
+    private fun onRecentLanguageClicked(
+        keyListPreference: String,
+        dialog: Dialog,
+        adapterView: AdapterView<*>,
+        position: Int
+    ) {
+        val recentLanguageCode = (adapterView.adapter as RecentLanguagesAdapter).getLanguageCode(position)
+        val recentLanguageName = (adapterView.adapter as RecentLanguagesAdapter).getLanguageName(position)
+        val isExists = recentLanguagesDao.findRecentLanguage(recentLanguageCode)
         if (isExists) {
-            recentLanguagesDao.deleteRecentLanguage(recentLanguageCode);
+            recentLanguagesDao.deleteRecentLanguage(recentLanguageCode)
         }
-        recentLanguagesDao.addRecentLanguage(
-            new Language(recentLanguageName, recentLanguageCode));
-        saveLanguageValue(recentLanguageCode, keyListPreference);
-        final Locale defLocale = createLocale(recentLanguageCode);
-        if (keyListPreference.equals("appUiDefaultLanguagePref")) {
-            appUiLanguageListPreference.setSummary(defLocale.getDisplayLanguage(defLocale));
-            setLocale(requireActivity(), recentLanguageCode);
-            getActivity().recreate();
-            final Intent intent = new Intent(getActivity(), MainActivity.class);
-            startActivity(intent);
+        recentLanguagesDao.addRecentLanguage(Language(recentLanguageName, recentLanguageCode))
+        saveLanguageValue(recentLanguageCode, keyListPreference)
+        val defLocale = createLocale(recentLanguageCode)
+        if (keyListPreference == "appUiDefaultLanguagePref") {
+            appUiLanguageListPreference?.summary = defLocale.getDisplayLanguage(defLocale)
+            setLocale(requireActivity(), recentLanguageCode)
+            requireActivity().recreate()
+            val intent = Intent(requireActivity(), MainActivity::class.java)
+            startActivity(intent)
         } else {
-            descriptionLanguageListPreference.setSummary(defLocale.getDisplayLanguage(defLocale));
+            descriptionLanguageListPreference?.summary = defLocale.getDisplayLanguage(defLocale)
         }
-        dialog.dismiss();
+        dialog.dismiss()
     }
 
     /**
      * Remove the section of recent languages
      */
-    private void hideRecentLanguagesSection() {
-        languageHistoryListView.setVisibility(View.GONE);
-        recentLanguagesTextView.setVisibility(View.GONE);
-        separator.setVisibility(View.GONE);
+    private fun hideRecentLanguagesSection() {
+        languageHistoryListView?.visibility = View.GONE
+        recentLanguagesTextView?.visibility = View.GONE
+        separator?.visibility = View.GONE
     }
 
     /**
      * Changing the default app language with selected one and save it to SharedPreferences
      */
-    public void setLocale(final Activity activity, String userSelectedValue) {
-        if (userSelectedValue.equals("")) {
-            userSelectedValue = Locale.getDefault().getLanguage();
+    fun setLocale(activity: Activity, userSelectedValue: String) {
+        var selectedLanguage = userSelectedValue
+        if (selectedLanguage == "") {
+            selectedLanguage = Locale.getDefault().language
         }
-        final Locale locale = createLocale(userSelectedValue);
-        Locale.setDefault(locale);
-        final Configuration configuration = new Configuration();
-        configuration.locale = locale;
-        activity.getBaseContext().getResources().updateConfiguration(configuration,
-            activity.getBaseContext().getResources().getDisplayMetrics());
+        val locale = createLocale(selectedLanguage)
+        Locale.setDefault(locale)
+        val configuration = Configuration()
+        configuration.locale = locale
+        activity.baseContext.resources.updateConfiguration(configuration, activity.baseContext.resources.displayMetrics)
 
-        final SharedPreferences.Editor editor = activity.getSharedPreferences("Settings", MODE_PRIVATE).edit();
-        editor.putString("language", userSelectedValue);
-        editor.apply();
+        val editor = activity.getSharedPreferences("Settings", MODE_PRIVATE).edit()
+        editor.putString("language", selectedLanguage)
+        editor.apply()
     }
 
     /**
@@ -496,30 +476,25 @@ public class SettingsFragment extends PreferenceFragmentCompat {
      * @param languageCode
      * @return Locale and throws error for invalid language codes
      */
-    public static Locale createLocale(String languageCode) {
-        String[] parts = languageCode.split("-");
-        switch (parts.length) {
-            case 1:
-                return new Locale(parts[0]);
-            case 2:
-                return new Locale(parts[0], parts[1]);
-            case 3:
-                return new Locale(parts[0], parts[1], parts[2]);
-            default:
-                throw new IllegalArgumentException("Invalid language code: " + languageCode);
+    fun createLocale(languageCode: String): Locale {
+        val parts = languageCode.split("-")
+        return when (parts.size) {
+            1 -> Locale(parts[0])
+            2 -> Locale(parts[0], parts[1])
+            3 -> Locale(parts[0], parts[1], parts[2])
+            else -> throw IllegalArgumentException("Invalid language code: $languageCode")
         }
     }
 
     /**
-     * Save userselected language in List Preference
+     * Save userSelected language in List Preference
      * @param userSelectedValue
      * @param preferenceKey
      */
-    private void saveLanguageValue(final String userSelectedValue, final String preferenceKey) {
-        if (preferenceKey.equals("appUiDefaultLanguagePref")) {
-            defaultKvStore.putString(Prefs.APP_UI_LANGUAGE, userSelectedValue);
-        } else if (preferenceKey.equals("descriptionDefaultLanguagePref")) {
-            defaultKvStore.putString(Prefs.DESCRIPTION_LANGUAGE, userSelectedValue);
+    private fun saveLanguageValue(userSelectedValue: String, preferenceKey: String) {
+        when (preferenceKey) {
+            "appUiDefaultLanguagePref" -> defaultKvStore.putString(Prefs.APP_UI_LANGUAGE, userSelectedValue)
+            "descriptionDefaultLanguagePref" -> defaultKvStore.putString(Prefs.DESCRIPTION_LANGUAGE, userSelectedValue)
         }
     }
 
@@ -528,24 +503,31 @@ public class SettingsFragment extends PreferenceFragmentCompat {
      * @param preferenceKey
      * @return
      */
-    private String getCurrentLanguageCode(final String preferenceKey) {
-        if (preferenceKey.equals("appUiDefaultLanguagePref")) {
-            return defaultKvStore.getString(Prefs.APP_UI_LANGUAGE, "");
+    private fun getCurrentLanguageCode(preferenceKey: String): String? {
+        return when (preferenceKey) {
+            "appUiDefaultLanguagePref" -> defaultKvStore.getString(
+                Prefs.APP_UI_LANGUAGE, ""
+            )
+            "descriptionDefaultLanguagePref" -> defaultKvStore.getString(
+                Prefs.DESCRIPTION_LANGUAGE, ""
+            )
+            else -> null
         }
-        if (preferenceKey.equals("descriptionDefaultLanguagePref")) {
-            return defaultKvStore.getString(Prefs.DESCRIPTION_LANGUAGE, "");
-        }
-        return null;
     }
 
     /**
      * First checks for external storage permissions and then sends logs via email
      */
-    private void checkPermissionsAndSendLogs() {
-        if (PermissionUtils.hasPermission(getActivity(), PermissionUtils.getPERMISSIONS_STORAGE())) {
-            commonsLogSender.send(getActivity(), null);
+    private fun checkPermissionsAndSendLogs() {
+        if (
+            PermissionUtils.hasPermission(
+                requireActivity(),
+                PermissionUtils.PERMISSIONS_STORAGE
+            )
+        ) {
+            commonsLogSender.send(requireActivity(), null)
         } else {
-            requestExternalStoragePermissions();
+            requestExternalStoragePermissions()
         }
     }
 
@@ -553,23 +535,22 @@ public class SettingsFragment extends PreferenceFragmentCompat {
      * Requests external storage permissions and shows a toast stating that log collection has
      * started
      */
-    private void requestExternalStoragePermissions() {
-        Dexter.withActivity(getActivity())
-            .withPermissions(PermissionUtils.getPERMISSIONS_STORAGE())
-            .withListener(new MultiplePermissionsListener() {
-                @Override
-                public void onPermissionsChecked(MultiplePermissionsReport report) {
-                    ViewUtil.showLongToast(getActivity(),
-                        getResources().getString(R.string.log_collection_started));
+    private fun requestExternalStoragePermissions() {
+        Dexter.withActivity(requireActivity())
+            .withPermissions(*PermissionUtils.PERMISSIONS_STORAGE)
+            .withListener(object : MultiplePermissionsListener {
+                override fun onPermissionsChecked(report: MultiplePermissionsReport) {
+                    ViewUtil.showLongToast(requireActivity(), getString(R.string.log_collection_started))
                 }
 
-                @Override
-                public void onPermissionRationaleShouldBeShown(
-                    List<PermissionRequest> permissions, PermissionToken token) {
-
+                override fun onPermissionRationaleShouldBeShown(
+                    permissions: List<PermissionRequest>, token: PermissionToken
+                ) {
+                    // No action needed
                 }
             })
             .onSameThread()
-            .check();
+            .check()
     }
+
 }
