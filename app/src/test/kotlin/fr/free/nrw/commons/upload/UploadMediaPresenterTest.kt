@@ -131,7 +131,7 @@ class UploadMediaPresenterTest {
      */
     @Test
     fun getImageQualityTest() {
-        whenever(repository.uploads).thenReturn(listOf(uploadItem))
+        whenever(repository.getUploads()).thenReturn(listOf(uploadItem))
         whenever(repository.getImageQuality(uploadItem, location))
             .thenReturn(testSingleImageResult)
         whenever(uploadItem.imageQuality).thenReturn(0)
@@ -149,7 +149,7 @@ class UploadMediaPresenterTest {
      */
     @Test
     fun `get ImageQuality Test while coordinates equals to null`() {
-        whenever(repository.uploads).thenReturn(listOf(uploadItem))
+        whenever(repository.getUploads()).thenReturn(listOf(uploadItem))
         whenever(repository.getImageQuality(uploadItem, location))
             .thenReturn(testSingleImageResult)
         whenever(uploadItem.imageQuality).thenReturn(0)
@@ -225,7 +225,7 @@ class UploadMediaPresenterTest {
      */
     @Test
     fun fetchImageAndTitleTest() {
-        whenever(repository.uploads).thenReturn(listOf(uploadItem))
+        whenever(repository.getUploads()).thenReturn(listOf(uploadItem))
         whenever(repository.getUploadItem(ArgumentMatchers.anyInt()))
             .thenReturn(uploadItem)
         whenever(uploadItem.uploadMediaDetails).thenReturn(listOf())

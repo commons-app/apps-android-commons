@@ -6,7 +6,6 @@ import android.content.ContentValues
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.os.RemoteException
-import java.util.ArrayList
 import javax.inject.Inject
 import javax.inject.Named
 import javax.inject.Provider
@@ -163,9 +162,9 @@ class RecentLanguagesDao @Inject constructor(
             COLUMN_CODE
         )
 
-        private const val DROP_TABLE_STATEMENT = "DROP TABLE IF EXISTS $TABLE_NAME"
+        const val DROP_TABLE_STATEMENT = "DROP TABLE IF EXISTS $TABLE_NAME"
 
-        private const val CREATE_TABLE_STATEMENT = "CREATE TABLE $TABLE_NAME (" +
+        const val CREATE_TABLE_STATEMENT = "CREATE TABLE $TABLE_NAME (" +
                 "$COLUMN_NAME STRING," +
                 "$COLUMN_CODE STRING PRIMARY KEY" +
                 ");"

@@ -19,10 +19,10 @@ import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
 import io.reactivex.Flowable
 import io.reactivex.Observable
 import io.reactivex.Single
+import timber.log.Timber
 import java.util.Locale
 import javax.inject.Inject
 import javax.inject.Singleton
-import timber.log.Timber
 
 /**
  * The repository class for UploadActivity
