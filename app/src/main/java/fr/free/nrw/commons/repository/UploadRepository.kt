@@ -1,86 +1,66 @@
-package fr.free.nrw.commons.repository;
+package fr.free.nrw.commons.repository
 
-import androidx.annotation.Nullable;
-import fr.free.nrw.commons.Media;
-import fr.free.nrw.commons.category.CategoriesModel;
-import fr.free.nrw.commons.category.CategoryItem;
-import fr.free.nrw.commons.contributions.Contribution;
-import fr.free.nrw.commons.contributions.ContributionDao;
-import fr.free.nrw.commons.filepicker.UploadableFile;
-import fr.free.nrw.commons.location.LatLng;
-import fr.free.nrw.commons.nearby.NearbyPlaces;
-import fr.free.nrw.commons.nearby.Place;
-import fr.free.nrw.commons.upload.ImageCoordinates;
-import fr.free.nrw.commons.upload.SimilarImageInterface;
-import fr.free.nrw.commons.upload.UploadController;
-import fr.free.nrw.commons.upload.UploadItem;
-import fr.free.nrw.commons.upload.UploadModel;
-import fr.free.nrw.commons.upload.structure.depictions.DepictModel;
-import fr.free.nrw.commons.upload.structure.depictions.DepictedItem;
-import io.reactivex.Flowable;
-import io.reactivex.Observable;
-import io.reactivex.Single;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Locale;
-import java.util.Set;
-import javax.inject.Inject;
-import javax.inject.Singleton;
-import timber.log.Timber;
+import fr.free.nrw.commons.Media
+import fr.free.nrw.commons.category.CategoriesModel
+import fr.free.nrw.commons.category.CategoryItem
+import fr.free.nrw.commons.contributions.Contribution
+import fr.free.nrw.commons.contributions.ContributionDao
+import fr.free.nrw.commons.filepicker.UploadableFile
+import fr.free.nrw.commons.location.LatLng
+import fr.free.nrw.commons.nearby.NearbyPlaces
+import fr.free.nrw.commons.nearby.Place
+import fr.free.nrw.commons.upload.ImageCoordinates
+import fr.free.nrw.commons.upload.SimilarImageInterface
+import fr.free.nrw.commons.upload.UploadController
+import fr.free.nrw.commons.upload.UploadItem
+import fr.free.nrw.commons.upload.UploadModel
+import fr.free.nrw.commons.upload.structure.depictions.DepictModel
+import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
+import io.reactivex.Flowable
+import io.reactivex.Observable
+import io.reactivex.Single
+import java.util.Locale
+import javax.inject.Inject
+import javax.inject.Singleton
+import timber.log.Timber
 
 /**
  * The repository class for UploadActivity
  */
 @Singleton
-public class UploadRepository {
+class UploadRepository @Inject constructor(
+    private val uploadModel: UploadModel,
+    private val uploadController: UploadController,
+    private val categoriesModel: CategoriesModel,
+    private val nearbyPlaces: NearbyPlaces,
+    private val depictModel: DepictModel,
+    private val contributionDao: ContributionDao
+) {
 
-    private final UploadModel uploadModel;
-    private final UploadController uploadController;
-    private final CategoriesModel categoriesModel;
-    private final NearbyPlaces nearbyPlaces;
-    private final DepictModel depictModel;
-
-    private static final double NEARBY_RADIUS_IN_KILO_METERS = 0.1; //100 meters
-    private final ContributionDao contributionDao;
-
-    @Inject
-    public UploadRepository(UploadModel uploadModel,
-        UploadController uploadController,
-        CategoriesModel categoriesModel,
-        NearbyPlaces nearbyPlaces,
-        DepictModel depictModel,
-        ContributionDao contributionDao) {
-        this.uploadModel = uploadModel;
-        this.uploadController = uploadController;
-        this.categoriesModel = categoriesModel;
-        this.nearbyPlaces = nearbyPlaces;
-        this.depictModel = depictModel;
-        this.contributionDao=contributionDao;
+    companion object {
+        private const val NEARBY_RADIUS_IN_KILO_METERS = 0.1 // 100 meters
     }
 
     /**
-     * asks the RemoteDataSource to build contributions
+     * Asks the RemoteDataSource to build contributions
      *
      * @return
      */
-    public Observable<Contribution> buildContributions() {
-        return uploadModel.buildContributions();
+    fun buildContributions(): Observable<Contribution> {
+        return uploadModel.buildContributions()
     }
 
     /**
-     * asks the RemoteDataSource to start upload for the contribution
+     * Asks the RemoteDataSource to start upload for the contribution
      *
      * @param contribution
      */
-
-    public void prepareMedia(Contribution contribution) {
-        uploadController.prepareMedia(contribution);
+    fun prepareMedia(contribution: Contribution) {
+        uploadController.prepareMedia(contribution)
     }
 
-
-    public void saveContribution(Contribution contribution) {
-        contributionDao.save(contribution).blockingAwait();
+    fun saveContribution(contribution: Contribution) {
+        contributionDao.save(contribution).blockingAwait()
     }
 
     /**
@@ -88,18 +68,19 @@ public class UploadRepository {
      *
      * @return
      */
-    public List<UploadItem> getUploads() {
-        return uploadModel.getUploads();
+    fun getUploads(): List<UploadItem> {
+        return uploadModel.getUploads()
     }
 
     /**
-     *Prepare for a fresh upload
+     * Prepare for a fresh upload
      */
-    public void cleanup() {
-        uploadModel.cleanUp();
-        //This needs further refactoring, this should not be here, right now the structure wont suppoort rhis
-        categoriesModel.cleanUp();
-        depictModel.cleanUp();
+    fun cleanup() {
+        uploadModel.cleanUp()
+        // This needs further refactoring, this should not be here, right now the structure
+        // won't support this
+        categoriesModel.cleanUp()
+        depictModel.cleanUp()
     }
 
     /**
@@ -107,110 +88,123 @@ public class UploadRepository {
      *
      * @return
      */
-    public List<CategoryItem> getSelectedCategories() {
-        return categoriesModel.getSelectedCategories();
+    fun getSelectedCategories(): List<CategoryItem> {
+        return categoriesModel.getSelectedCategories()
     }
 
     /**
-     * all categories from MWApi
+     * All categories from MWApi
      *
      * @param query
      * @param imageTitleList
      * @param selectedDepictions
      * @return
      */
-    public Observable<List<CategoryItem>> searchAll(String query, List<String> imageTitleList,
-        List<DepictedItem> selectedDepictions) {
-        return categoriesModel.searchAll(query, imageTitleList, selectedDepictions);
+    fun searchAll(
+        query: String,
+        imageTitleList: List<String>,
+        selectedDepictions: List<DepictedItem>
+    ): Observable<List<CategoryItem>> {
+        return categoriesModel.searchAll(query, imageTitleList, selectedDepictions)
     }
 
     /**
-     * sets the list of selected categories for the current upload
+     * Sets the list of selected categories for the current upload
      *
      * @param categoryStringList
      */
-    public void setSelectedCategories(List<String> categoryStringList) {
-        uploadModel.setSelectedCategories(categoryStringList);
+    fun setSelectedCategories(categoryStringList: List<String>) {
+        uploadModel.setSelectedCategories(categoryStringList)
     }
 
     /**
-     * handles the category selection/deselection
+     * Handles the category selection/deselection
      *
      * @param categoryItem
      */
-    public void onCategoryClicked(CategoryItem categoryItem, final Media media) {
-        categoriesModel.onCategoryItemClicked(categoryItem, media);
+    fun onCategoryClicked(categoryItem: CategoryItem, media: Media?) {
+        categoriesModel.onCategoryItemClicked(categoryItem, media)
     }
 
     /**
-     * prunes the category list for irrelevant categories see #750
+     * Prunes the category list for irrelevant categories see #750
      *
      * @param name
      * @return
      */
-    public boolean isSpammyCategory(String name) {
-        return categoriesModel.isSpammyCategory(name);
+    fun isSpammyCategory(name: String): Boolean {
+        return categoriesModel.isSpammyCategory(name)
     }
 
     /**
-     * retursn the string list of available license from the LocalDataSource
+     * Returns the string list of available licenses from the LocalDataSource
      *
      * @return
      */
-    public List<String> getLicenses() {
-        return uploadModel.getLicenses();
+    fun getLicenses(): List<String> {
+        return uploadModel.licenses
     }
 
     /**
-     * returns the selected license for the current upload
+     * Returns the selected license for the current upload
      *
      * @return
      */
-    public String getSelectedLicense() {
-        return uploadModel.getSelectedLicense();
+    fun getSelectedLicense(): String {
+        return uploadModel.selectedLicense
     }
 
     /**
-     * returns the number of Upload Items
+     * Returns the number of Upload Items
      *
      * @return
      */
-    public int getCount() {
-        return uploadModel.getCount();
+    fun getCount(): Int {
+        return uploadModel.count
     }
 
     /**
-     * ask the RemoteDataSource to pre process the image
+     * Ask the RemoteDataSource to preprocess the image
      *
      * @param uploadableFile
      * @param place
      * @param similarImageInterface
+     * @param inAppPictureLocation
      * @return
      */
-    public Observable<UploadItem> preProcessImage(UploadableFile uploadableFile, Place place,
-        SimilarImageInterface similarImageInterface, LatLng inAppPictureLocation) {
-        return uploadModel.preProcessImage(uploadableFile, place,
-            similarImageInterface, inAppPictureLocation);
+    fun preProcessImage(
+        uploadableFile: UploadableFile,
+        place: Place?,
+        similarImageInterface: SimilarImageInterface,
+        inAppPictureLocation: LatLng?
+    ): Observable<UploadItem> {
+        return uploadModel.preProcessImage(
+            uploadableFile,
+            place,
+            similarImageInterface,
+            inAppPictureLocation
+        )
     }
 
     /**
-     * query the RemoteDataSource for image quality
+     * Query the RemoteDataSource for image quality
      *
      * @param uploadItem UploadItem whose caption is to be checked
+     * @param location Location of the image
      * @return Quality of UploadItem
      */
-    public Single<Integer> getImageQuality(UploadItem uploadItem, LatLng location) {
-        return uploadModel.getImageQuality(uploadItem, location);
+    fun getImageQuality(uploadItem: UploadItem, location: LatLng?): Single<Int> {
+        return uploadModel.getImageQuality(uploadItem, location)
     }
 
     /**
-     * query the RemoteDataSource for image duplicity check
+     * Query the RemoteDataSource for image duplicity check
      *
      * @param filePath file to be checked
      * @return IMAGE_DUPLICATE or IMAGE_OK
      */
-    public Single<Integer> checkDuplicateImage(String filePath) {
-        return uploadModel.checkDuplicateImage(filePath);
+    fun checkDuplicateImage(filePath: String): Single<Int> {
+        return uploadModel.checkDuplicateImage(filePath)
     }
 
     /**
@@ -219,8 +213,8 @@ public class UploadRepository {
      * @param uploadItem UploadItem whose caption is to be checked
      * @return Quality of caption of the UploadItem
      */
-    public Single<Integer> getCaptionQuality(UploadItem uploadItem) {
-        return uploadModel.getCaptionQuality(uploadItem);
+    fun getCaptionQuality(uploadItem: UploadItem): Single<Int> {
+        return uploadModel.getCaptionQuality(uploadItem)
     }
 
     /**
@@ -228,8 +222,8 @@ public class UploadRepository {
      *
      * @param filePath
      */
-    public void deletePicture(String filePath) {
-        uploadModel.deletePicture(filePath);
+    fun deletePicture(filePath: String) {
+        uploadModel.deletePicture(filePath)
     }
 
     /**
@@ -238,11 +232,10 @@ public class UploadRepository {
      * @param index
      * @return
      */
-    public UploadItem getUploadItem(int index) {
-        if (index >= 0) {
-            return uploadModel.getItems().get(index);
-        }
-        return null; //There is no item to copy details
+    fun getUploadItem(index: Int): UploadItem? {
+        return if (index >= 0) {
+            uploadModel.items.getOrNull(index)
+        } else null //There is no item to copy details
     }
 
     /**
@@ -250,12 +243,12 @@ public class UploadRepository {
      *
      * @param licenseName
      */
-    public void setSelectedLicense(String licenseName) {
-        uploadModel.setSelectedLicense(licenseName);
+    fun setSelectedLicense(licenseName: String) {
+        uploadModel.selectedLicense = licenseName
     }
 
-    public void onDepictItemClicked(DepictedItem depictedItem, final Media media) {
-        uploadModel.onDepictItemClicked(depictedItem, media);
+    fun onDepictItemClicked(depictedItem: DepictedItem, media: Media?) {
+        uploadModel.onDepictItemClicked(depictedItem, media)
     }
 
     /**
@@ -263,9 +256,8 @@ public class UploadRepository {
      *
      * @return
      */
-
-    public List<DepictedItem> getSelectedDepictions() {
-        return uploadModel.getSelectedDepictions();
+    fun getSelectedDepictions(): List<DepictedItem> {
+        return uploadModel.selectedDepictions
     }
 
     /**
@@ -273,8 +265,8 @@ public class UploadRepository {
      *
      * @return selected existing depicts
      */
-    public List<String> getSelectedExistingDepictions() {
-        return uploadModel.getSelectedExistingDepictions();
+    fun getSelectedExistingDepictions(): List<String> {
+        return uploadModel.selectedExistingDepictions
     }
 
     /**
@@ -282,18 +274,18 @@ public class UploadRepository {
      *
      * @param selectedExistingDepictions existing depicts
      */
-    public void setSelectedExistingDepictions(final List<String> selectedExistingDepictions) {
-        uploadModel.setSelectedExistingDepictions(selectedExistingDepictions);
+    fun setSelectedExistingDepictions(selectedExistingDepictions: List<String>) {
+        uploadModel.selectedExistingDepictions = selectedExistingDepictions
     }
+
     /**
      * Search all depictions from
      *
      * @param query
      * @return
      */
-
-    public Flowable<List<DepictedItem>> searchAllEntities(String query) {
-        return depictModel.searchAllEntities(query, this);
+    fun searchAllEntities(query: String): Flowable<List<DepictedItem>> {
+        return depictModel.searchAllEntities(query, this)
     }
 
     /**
@@ -302,15 +294,16 @@ public class UploadRepository {
      *
      * @return a single that provides the depictions
      */
-    public Single<List<DepictedItem>> getPlaceDepictions() {
-        final Set<String> qids = new HashSet<>();
-        for (final UploadItem item : getUploads()) {
-            final Place place = item.getPlace();
-            if (place != null) {
-                qids.add(place.getWikiDataEntityId());
+    fun getPlaceDepictions(): Single<List<DepictedItem>> {
+        val qids = mutableSetOf<String>()
+        getUploads().forEach { item ->
+            item.place?.let {
+                it.wikiDataEntityId?.let { it1 ->
+                    qids.add(it1)
+                }
             }
         }
-        return depictModel.getPlaceDepictions(new ArrayList<>(qids));
+        return depictModel.getPlaceDepictions(qids.toList())
     }
 
     /**
@@ -319,15 +312,12 @@ public class UploadRepository {
      *
      * @return a single that provides the categories
      */
-    public Single<List<CategoryItem>> getPlaceCategories() {
-        final Set<String> qids = new HashSet<>();
-        for (final UploadItem item : getUploads()) {
-            final Place place = item.getPlace();
-            if (place != null) {
-                qids.add(place.getCategory());
-            }
+    fun getPlaceCategories(): Single<List<CategoryItem>> {
+        val qids = mutableSetOf<String>()
+        getUploads().forEach { item ->
+            item.place?.category?.let { qids.add(it) }
         }
-        return Single.fromObservable(categoriesModel.getCategoriesByName(new ArrayList<>(qids)));
+        return Single.fromObservable(categoriesModel.getCategoriesByName(qids.toList()))
     }
 
     /**
@@ -337,9 +327,9 @@ public class UploadRepository {
      * @param depictionsQIDs IDs of Depiction
      * @return Flowable<List<DepictedItem>>
      */
-    public Flowable<List<DepictedItem>> getDepictions(final List<String> depictionsQIDs){
-        final String ids = joinQIDs(depictionsQIDs);
-        return depictModel.getDepictions(ids).toFlowable();
+    fun getDepictions(depictionsQIDs: List<String>): Flowable<List<DepictedItem>> {
+        val ids = joinQIDs(depictionsQIDs) ?: ""
+        return depictModel.getDepictions(ids).toFlowable()
     }
 
     /**
@@ -348,19 +338,10 @@ public class UploadRepository {
      * @param depictionsQIDs IDs of depiction ex. ["Q11023","Q1356"]
      * @return string ex. "Q11023|Q1356"
      */
-    private String joinQIDs(final List<String> depictionsQIDs) {
-        if (depictionsQIDs != null && !depictionsQIDs.isEmpty()) {
-            final StringBuilder buffer = new StringBuilder(depictionsQIDs.get(0));
-
-            if (depictionsQIDs.size() > 1) {
-                for (int i = 1; i < depictionsQIDs.size(); i++) {
-                    buffer.append("|");
-                    buffer.append(depictionsQIDs.get(i));
-                }
-            }
-            return buffer.toString();
-        }
-        return null;
+    private fun joinQIDs(depictionsQIDs: List<String>?): String? {
+        return depictionsQIDs?.takeIf {
+            it.isNotEmpty()
+        }?.joinToString("|")
     }
 
     /**
@@ -370,27 +351,30 @@ public class UploadRepository {
      * @param decLongitude
      * @return
      */
-    @Nullable
-    public Place checkNearbyPlaces(final double decLatitude, final double decLongitude) {
-        try {
-            final List<Place> fromWikidataQuery = nearbyPlaces.getFromWikidataQuery(new LatLng(
-                    decLatitude, decLongitude, 0.0f),
-                Locale.getDefault().getLanguage(),
-                NEARBY_RADIUS_IN_KILO_METERS, null);
-            return (fromWikidataQuery != null && fromWikidataQuery.size() > 0) ? fromWikidataQuery
-                .get(0) : null;
-        } catch (final Exception e) {
-            Timber.e("Error fetching nearby places: %s", e.getMessage());
-            return null;
+    fun checkNearbyPlaces(decLatitude: Double, decLongitude: Double): Place? {
+        return try {
+            val fromWikidataQuery = nearbyPlaces.getFromWikidataQuery(
+                LatLng(decLatitude, decLongitude, 0.0f),
+                Locale.getDefault().language,
+                NEARBY_RADIUS_IN_KILO_METERS,
+                null
+            )
+            fromWikidataQuery?.firstOrNull()
+        } catch (e: Exception) {
+            Timber.e("Error fetching nearby places: %s", e.message)
+            null
         }
     }
 
-    public void useSimilarPictureCoordinates(ImageCoordinates imageCoordinates, int uploadItemIndex) {
-        uploadModel.useSimilarPictureCoordinates(imageCoordinates, uploadItemIndex);
+    fun useSimilarPictureCoordinates(imageCoordinates: ImageCoordinates, uploadItemIndex: Int) {
+        uploadModel.useSimilarPictureCoordinates(
+            imageCoordinates,
+            uploadItemIndex
+        )
     }
 
-    public boolean isWMLSupportedForThisPlace() {
-        return uploadModel.getItems().get(0).isWLMUpload();
+    fun isWMLSupportedForThisPlace(): Boolean {
+        return uploadModel.items.firstOrNull()?.isWLMUpload == true
     }
 
     /**
@@ -398,8 +382,8 @@ public class UploadRepository {
      *
      * @return selected existing categories
      */
-    public List<String> getSelectedExistingCategories() {
-        return categoriesModel.getSelectedExistingCategories();
+    fun getSelectedExistingCategories(): List<String> {
+        return categoriesModel.getSelectedExistingCategories()
     }
 
     /**
@@ -407,8 +391,10 @@ public class UploadRepository {
      *
      * @param selectedExistingCategories existing categories
      */
-    public void setSelectedExistingCategories(final List<String> selectedExistingCategories) {
-        categoriesModel.setSelectedExistingCategories(selectedExistingCategories);
+    fun setSelectedExistingCategories(selectedExistingCategories: List<String>) {
+        categoriesModel.setSelectedExistingCategories(
+            selectedExistingCategories.toMutableList()
+        )
     }
 
     /**
@@ -417,7 +403,8 @@ public class UploadRepository {
      * @param categories names of Category
      * @return Observable<List<CategoryItem>>
      */
-    public Observable<List<CategoryItem>> getCategories(final List<String> categories){
-        return categoriesModel.getCategoriesByName(categories);
+    fun getCategories(categories: List<String>): Observable<List<CategoryItem>> {
+        return categoriesModel.getCategoriesByName(categories)
+            ?.map { it.toList() } ?: Observable.empty()
     }
 }
