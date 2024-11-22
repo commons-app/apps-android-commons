@@ -15,6 +15,7 @@ import fr.free.nrw.commons.repository.UploadRepository
 import fr.free.nrw.commons.upload.structure.depictions.DepictModel
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
 import io.reactivex.Completable
+import io.reactivex.Observable
 import io.reactivex.Single
 import org.junit.Before
 import org.junit.Test
@@ -196,7 +197,7 @@ class UploadRepositoryUnitTest {
     fun testGetCaptionQuality() {
         assertEquals(
             repository.getCaptionQuality(uploadItem),
-            uploadModel.getCaptionQuality(uploadItem),
+            uploadModel.getCaptionQuality(uploadItem)
         )
     }
 
@@ -386,7 +387,8 @@ class UploadRepositoryUnitTest {
     fun testGetCategories() {
         assertEquals(
             repository.getCategories(listOf("Test")),
-            categoriesModel.getCategoriesByName(mutableListOf("Test")),
+            categoriesModel.getCategoriesByName(mutableListOf("Test"))
+                ?: Observable.empty<List<CategoryItem>>()
         )
     }
 }
