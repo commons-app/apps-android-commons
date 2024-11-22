@@ -61,7 +61,7 @@ class CategoriesPresenter
                     .doOnNext {
                         view.showProgress(true)
                     }.switchMap(::searchResults)
-                    .map { repository.selectedCategories + it }
+                    .map { repository.getSelectedCategories() + it }
                     .map { it.distinctBy { categoryItem -> categoryItem.name } }
                     .observeOn(mainThreadScheduler)
                     .subscribe(
@@ -89,7 +89,7 @@ class CategoriesPresenter
         private fun searchResults(term: String): Observable<List<CategoryItem>>? {
             if (media == null) {
                 return repository
-                    .searchAll(term, getImageTitleList(), repository.selectedDepictions)
+                    .searchAll(term, getImageTitleList(), repository.getSelectedDepictions())
                     .subscribeOn(ioScheduler)
                     .map {
                         it.filter { categoryItem ->
@@ -101,13 +101,13 @@ class CategoriesPresenter
                 return Observable
                     .zip(
                         repository
-                            .getCategories(repository.selectedExistingCategories)
+                            .getCategories(repository.getSelectedExistingCategories())
                             .map { list ->
                                 list.map {
                                     CategoryItem(it.name, it.description, it.thumbnail, true)
                                 }
                             },
-                        repository.searchAll(term, getImageTitleList(), repository.selectedDepictions),
+                        repository.searchAll(term, getImageTitleList(), repository.getSelectedDepictions()),
                     ) { it1, it2 ->
                         it1 + it2
                     }.subscribeOn(ioScheduler)
@@ -138,7 +138,7 @@ class CategoriesPresenter
          * @return
          */
         private fun getImageTitleList(): List<String> =
-            repository.uploads
+            repository.getUploads()
                 .map { it.uploadMediaDetails[0].captionText }
                 .filterNot { TextUtils.isEmpty(it) }
 
@@ -146,7 +146,7 @@ class CategoriesPresenter
          * Verifies the number of categories selected, prompts the user if none selected
          */
         override fun verifyCategories() {
-            val selectedCategories = repository.selectedCategories
+            val selectedCategories = repository.getSelectedCategories()
             if (selectedCategories.isNotEmpty()) {
                 repository.setSelectedCategories(selectedCategories.map { it.name })
                 view.goToNextScreen()
@@ -173,14 +173,14 @@ class CategoriesPresenter
         ) {
             this.view = view
             this.media = media
-            repository.selectedExistingCategories = view.existingCategories
+            repository.setSelectedExistingCategories(view.existingCategories)
             compositeDisposable.add(
                 searchTerms
                     .observeOn(mainThreadScheduler)
                     .doOnNext {
                         view.showProgress(true)
                     }.switchMap(::searchResults)
-                    .map { repository.selectedCategories + it }
+                    .map { repository.getSelectedCategories() + it }
                     .map { it.distinctBy { categoryItem -> categoryItem.name } }
                     .observeOn(mainThreadScheduler)
                     .subscribe(
@@ -218,13 +218,21 @@ class CategoriesPresenter
             wikiText: String,
         ) {
             // check if view.existingCategories is null
-            if (repository.selectedCategories.isNotEmpty() ||
-                (view.existingCategories != null && repository.selectedExistingCategories.size != view.existingCategories.size)
+            if (
+                repository.getSelectedCategories().isNotEmpty()
+                        ||
+                (
+                view.existingCategories != null
+                        &&
+                repository.getSelectedExistingCategories().size
+                        !=
+                view.existingCategories.size
+                )
             ) {
                 val selectedCategories: MutableList<String> =
                     (
-                        repository.selectedCategories.map { it.name }.toMutableList() +
-                            repository.selectedExistingCategories
+                        repository.getSelectedCategories().map { it.name }.toMutableList() +
+                            repository.getSelectedExistingCategories()
                     ).toMutableList()
 
                 if (selectedCategories.isNotEmpty()) {
@@ -305,7 +313,7 @@ class CategoriesPresenter
 
         override fun selectCategories() {
             compositeDisposable.add(
-                repository.placeCategories
+                repository.getPlaceCategories()
                     .subscribeOn(ioScheduler)
                     .observeOn(mainThreadScheduler)
                     .subscribe(::selectNewCategories),

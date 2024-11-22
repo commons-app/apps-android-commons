@@ -93,14 +93,14 @@ class DepictsPresenter
                 return repository
                     .searchAllEntities(querystring)
                     .subscribeOn(ioScheduler)
-                    .map { repository.selectedDepictions + it + recentDepictedItemList + controller.loadFavoritesItems() }
+                    .map { repository.getSelectedDepictions() + it + recentDepictedItemList + controller.loadFavoritesItems() }
                     .map { it.filterNot { item -> WikidataDisambiguationItems.isDisambiguationItem(item.instanceOfs) } }
                     .map { it.distinctBy(DepictedItem::id) }
             } else {
                 return Flowable
                     .zip(
                         repository
-                            .getDepictions(repository.selectedExistingDepictions)
+                            .getDepictions(repository.getSelectedExistingDepictions())
                             .map { list ->
                                 list.map {
                                     DepictedItem(
@@ -118,7 +118,7 @@ class DepictsPresenter
                     ) { it1, it2 ->
                         it1 + it2
                     }.subscribeOn(ioScheduler)
-                    .map { repository.selectedDepictions + it + recentDepictedItemList + controller.loadFavoritesItems() }
+                    .map { repository.getSelectedDepictions() + it + recentDepictedItemList + controller.loadFavoritesItems() }
                     .map { it.filterNot { item -> WikidataDisambiguationItems.isDisambiguationItem(item.instanceOfs) } }
                     .map { it.distinctBy(DepictedItem::id) }
             }
@@ -135,7 +135,7 @@ class DepictsPresenter
          */
         override fun selectPlaceDepictions() {
             compositeDisposable.add(
-                repository.placeDepictions
+                repository.getPlaceDepictions()
                     .subscribeOn(ioScheduler)
                     .observeOn(mainThreadScheduler)
                     .subscribe(::selectNewDepictions),
@@ -188,10 +188,10 @@ class DepictsPresenter
          * from the depiction list
          */
         override fun verifyDepictions() {
-            if (repository.selectedDepictions.isNotEmpty()) {
+            if (repository.getSelectedDepictions().isNotEmpty()) {
                 if (::depictsDao.isInitialized) {
                     // save all the selected Depicted item in room Database
-                    depictsDao.savingDepictsInRoomDataBase(repository.selectedDepictions)
+                    depictsDao.savingDepictsInRoomDataBase(repository.getSelectedDepictions())
                 }
                 view.goToNextScreen()
             } else {
@@ -205,20 +205,20 @@ class DepictsPresenter
          */
         @SuppressLint("CheckResult")
         override fun updateDepictions(media: Media) {
-            if (repository.selectedDepictions.isNotEmpty() ||
-                repository.selectedExistingDepictions.size != view.existingDepictions.size
+            if (repository.getSelectedDepictions().isNotEmpty() ||
+                repository.getSelectedExistingDepictions().size != view.existingDepictions.size
             ) {
                 view.showProgressDialog()
                 val selectedDepictions: MutableList<String> =
                     (
-                        repository.selectedDepictions.map { it.id }.toMutableList() +
-                            repository.selectedExistingDepictions
+                        repository.getSelectedDepictions().map { it.id }.toMutableList() +
+                            repository.getSelectedExistingDepictions()
                     ).toMutableList()
 
                 if (selectedDepictions.isNotEmpty()) {
                     if (::depictsDao.isInitialized) {
                         // save all the selected Depicted item in room Database
-                        depictsDao.savingDepictsInRoomDataBase(repository.selectedDepictions)
+                        depictsDao.savingDepictsInRoomDataBase(repository.getSelectedDepictions())
                     }
 
                     compositeDisposable.add(
@@ -254,7 +254,7 @@ class DepictsPresenter
         ) {
             this.view = view
             this.media = media
-            repository.selectedExistingDepictions = view.existingDepictions
+            repository.setSelectedExistingDepictions(view.existingDepictions)
             compositeDisposable.add(
                 searchTerm
                     .observeOn(mainThreadScheduler)

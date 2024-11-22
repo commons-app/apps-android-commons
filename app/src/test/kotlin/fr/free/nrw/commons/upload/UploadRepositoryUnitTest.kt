@@ -117,7 +117,7 @@ class UploadRepositoryUnitTest {
 
     @Test
     fun testGetUploads() {
-        assertEquals(repository.uploads, uploadModel.uploads)
+        assertEquals(repository.getUploads(), uploadModel.uploads)
     }
 
     @Test
@@ -130,7 +130,7 @@ class UploadRepositoryUnitTest {
 
     @Test
     fun testGetSelectedCategories() {
-        assertEquals(repository.selectedCategories, categoriesModel.getSelectedCategories())
+        assertEquals(repository.getSelectedCategories(), categoriesModel.getSelectedCategories())
     }
 
     @Test
@@ -163,17 +163,17 @@ class UploadRepositoryUnitTest {
 
     @Test
     fun testGetLicenses() {
-        assertEquals(repository.licenses, uploadModel.licenses)
+        assertEquals(repository.getLicenses(), uploadModel.licenses)
     }
 
     @Test
     fun testGetSelectedLicense() {
-        assertEquals(repository.selectedLicense, uploadModel.selectedLicense)
+        assertEquals(repository.getSelectedLicense(), uploadModel.selectedLicense)
     }
 
     @Test
     fun testGetCount() {
-        assertEquals(repository.count, uploadModel.count)
+        assertEquals(repository.getCount(), uploadModel.count)
     }
 
     @Test
@@ -242,12 +242,12 @@ class UploadRepositoryUnitTest {
 
     @Test
     fun testGetSelectedDepictions() {
-        assertEquals(repository.selectedDepictions, uploadModel.selectedDepictions)
+        assertEquals(repository.getSelectedDepictions(), uploadModel.selectedDepictions)
     }
 
     @Test
     fun testGetSelectedExistingDepictions() {
-        assertEquals(repository.selectedExistingDepictions, uploadModel.selectedExistingDepictions)
+        assertEquals(repository.getSelectedExistingDepictions(), uploadModel.selectedExistingDepictions)
     }
 
     @Test
@@ -264,7 +264,7 @@ class UploadRepositoryUnitTest {
         `when`(uploadItem.place).thenReturn(place)
         `when`(place.wikiDataEntityId).thenReturn("1")
         assertEquals(
-            repository.placeDepictions,
+            repository.getPlaceDepictions(),
             depictModel.getPlaceDepictions(listOf("1")),
         )
     }
@@ -326,7 +326,7 @@ class UploadRepositoryUnitTest {
         `when`(uploadModel.items).thenReturn(listOf(uploadItem))
         `when`(uploadItem.isWLMUpload).thenReturn(true)
         assertEquals(
-            repository.isWMLSupportedForThisPlace,
+            repository.isWMLSupportedForThisPlace(),
             true,
         )
     }
@@ -369,7 +369,7 @@ class UploadRepositoryUnitTest {
     @Test
     fun testGetSelectedExistingCategories() {
         assertEquals(
-            repository.selectedExistingCategories,
+            repository.getSelectedExistingCategories(),
             categoriesModel.getSelectedExistingCategories(),
         )
     }
