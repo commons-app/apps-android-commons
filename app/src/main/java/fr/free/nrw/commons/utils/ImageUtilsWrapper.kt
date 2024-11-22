@@ -16,7 +16,7 @@ class ImageUtilsWrapper @Inject constructor() {
 
     fun checkImageGeolocationIsDifferent(
         geolocationOfFileString: String,
-        latLng: LatLng
+        latLng: LatLng?
     ): Single<Int> {
         return Single.fromCallable {
             ImageUtils.checkImageGeolocationIsDifferent(geolocationOfFileString, latLng)
