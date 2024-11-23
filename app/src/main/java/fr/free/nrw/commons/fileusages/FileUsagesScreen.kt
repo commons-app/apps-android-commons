@@ -1,5 +1,7 @@
 package fr.free.nrw.commons.fileusages
 
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -12,6 +14,8 @@ import androidx.compose.material3.ListItem
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Tab
 import androidx.compose.material3.TabRow
+import androidx.compose.material3.TabRowDefaults
+import androidx.compose.material3.TabRowDefaults.tabIndicatorOffset
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -21,11 +25,14 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.items
+import fr.free.nrw.commons.R
 import fr.free.nrw.commons.fileusages.model.FileUsagesResponse
 import fr.free.nrw.commons.fileusages.model.NoContributionsError
 
@@ -45,14 +52,42 @@ fun FileUsagesScreen(modifier: Modifier = Modifier, viewModel: FileUsagesViewMod
         modifier = modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        TabRow(selectedTabIndex = currentScreenIndex) {
-            Tab(selected = currentScreenIndex == 0, onClick = {
-                currentScreenIndex = 0
-            }, text = { Text("Commons") })
+        TabRow(
+            selectedTabIndex = currentScreenIndex,
+            contentColor = Color.Transparent,
+            containerColor = if (isSystemInDarkTheme())
+                colorResource(R.color.contributionListDarkBackground)
+            else colorResource(R.color.card_light_grey),
+            indicator = { tabPositions ->
+                if (currentScreenIndex < tabPositions.size) {
+                    TabRowDefaults.SecondaryIndicator(
+                        Modifier.tabIndicatorOffset(tabPositions[currentScreenIndex]),
+                        color = if (isSystemInDarkTheme()) colorResource(R.color.white)
+                        else colorResource(R.color.primaryDarkColor)
+                    )
+                }
+            }
+        ) {
+            Tab(
+                selected = currentScreenIndex == 0,
+                onClick = {
+                    currentScreenIndex = 0
+                },
+                text = { Text("Commons") },
+                selectedContentColor = if (isSystemInDarkTheme()) colorResource(R.color.white)
+                else colorResource(R.color.primaryDarkColor),
+                unselectedContentColor = if (isSystemInDarkTheme()) colorResource(R.color.white)
+                else colorResource(R.color.primaryDarkColor)
+            )
 
             Tab(selected = currentScreenIndex == 1, onClick = {
                 currentScreenIndex = 1
-            }, text = { Text("Other Wikis") })
+            }, text = { Text("Other Wikis") },
+                selectedContentColor = if (isSystemInDarkTheme()) colorResource(R.color.white)
+                else colorResource(R.color.primaryDarkColor),
+                unselectedContentColor = if (isSystemInDarkTheme()) colorResource(R.color.white)
+                else colorResource(R.color.primaryDarkColor)
+            )
         }
 
 
@@ -92,12 +127,13 @@ fun GlobalUsagesListContent(data: LazyPagingItems<UiModel>) {
                             )
                         }
                     )
+
                     is UiModel.ItemModel -> ListItem(headlineContent = {
-                            Text(
-                                text = item.item.title,
-                                style = MaterialTheme.typography.bodyMedium
-                            )
-                        })
+                        Text(
+                            text = item.item.title,
+                            style = MaterialTheme.typography.bodyMedium
+                        )
+                    })
                 }
             }
         }
