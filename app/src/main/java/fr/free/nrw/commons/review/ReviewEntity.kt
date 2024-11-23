@@ -1,19 +1,13 @@
-package fr.free.nrw.commons.review;
+package fr.free.nrw.commons.review
 
-import androidx.annotation.NonNull;
-import androidx.room.Entity;
-import androidx.room.PrimaryKey;
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 
 /**
  * Entity to store reviewed/skipped images identifier
  */
 @Entity(tableName = "reviewed-images")
-public class ReviewEntity {
+data class ReviewEntity(
     @PrimaryKey
-    @NonNull
-    String imageId;
-
-    public ReviewEntity(String imageId) {
-        this.imageId = imageId;
-    }
-}
+    val imageId: String
+)

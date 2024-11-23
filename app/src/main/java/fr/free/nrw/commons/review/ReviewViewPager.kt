@@ -1,30 +1,25 @@
-package fr.free.nrw.commons.review;
+package fr.free.nrw.commons.review
 
-import android.content.Context;
-import android.util.AttributeSet;
-import android.view.MotionEvent;
+import android.annotation.SuppressLint
+import android.content.Context
+import android.util.AttributeSet
+import android.view.MotionEvent
 
-import androidx.viewpager.widget.ViewPager;
+import androidx.viewpager.widget.ViewPager
 
-public class ReviewViewPager extends ViewPager {
+class ReviewViewPager @JvmOverloads constructor(
+    context: Context,
+    attrs: AttributeSet? = null
+) : ViewPager(context, attrs) {
 
-    public ReviewViewPager(Context context) {
-        super(context);
-    }
-
-    public ReviewViewPager(Context context, AttributeSet attrs) {
-        super(context, attrs);
-    }
-
-    @Override
-    public boolean onInterceptTouchEvent(MotionEvent event) {
+    override fun onInterceptTouchEvent(event: MotionEvent): Boolean {
         // Never allow swiping to switch between pages
-        return false;
+        return false
     }
 
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
+    @SuppressLint("ClickableViewAccessibility")
+    override fun onTouchEvent(event: MotionEvent): Boolean {
         // Never allow swiping to switch between pages
-        return false;
+        return false
     }
 }
