@@ -77,7 +77,7 @@ class ReviewHelper
          * @param image
          * @return
          */
-        fun getReviewStatus(image: String?): Boolean = dao?.isReviewedAlready(image) ?: false
+        fun getReviewStatus(image: String?): Boolean = image?.let { dao?.isReviewedAlready(it) } ?: false
 
         /**
          * Gets the first revision of the file from filename
@@ -132,7 +132,7 @@ class ReviewHelper
          */
         fun addViewedImagesToDB(imageId: String?) {
             Completable
-                .fromAction { dao!!.insert(ReviewEntity(imageId)) }
+                .fromAction { imageId?.let { ReviewEntity(it) }?.let { dao!!.insert(it) } }
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
