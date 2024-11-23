@@ -49,7 +49,7 @@ class QuizActivity : AppCompatActivity() {
     /**
      * To move to next question and check whether answer is selected or not
      */
-    private fun setNextQuestion() {
+    fun setNextQuestion() {
         if (questionIndex <= quiz.size && (isPositiveAnswerChecked || isNegativeAnswerChecked)) {
             evaluateScore()
         }
@@ -109,7 +109,7 @@ class QuizActivity : AppCompatActivity() {
     /**
      * To evaluate score and check whether answer is correct or wrong
      */
-    private fun evaluateScore() {
+    fun evaluateScore() {
         if (
             (quiz[questionIndex].isAnswer && isPositiveAnswerChecked)
                 ||
@@ -133,7 +133,7 @@ class QuizActivity : AppCompatActivity() {
      * @param title The alert title
      * @param message The alert message
      */
-    private fun customAlert(title: String, message: String) {
+    fun customAlert(title: String, message: String) {
         AlertDialog.Builder(this)
             .setTitle(title)
             .setMessage(message)

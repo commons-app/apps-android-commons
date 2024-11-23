@@ -33,7 +33,7 @@ class QuizResultActivity : AppCompatActivity() {
     private val NUMBER_OF_QUESTIONS = 5
     private val MULTIPLIER_TO_GET_PERCENTAGE = 20
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+    public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityQuizResultBinding.inflate(layoutInflater)
         setContentView(binding?.root)
@@ -149,7 +149,7 @@ class QuizResultActivity : AppCompatActivity() {
      * @param bitmap
      */
     @SuppressLint("SetWorldReadable")
-    private fun shareScreen(bitmap: Bitmap) {
+    fun shareScreen(bitmap: Bitmap) {
         try {
             val file = File(this.externalCacheDir, "screen.png")
             FileOutputStream(file).use { fOut ->
