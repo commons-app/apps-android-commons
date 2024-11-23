@@ -1,64 +1,56 @@
-package fr.free.nrw.commons.review;
+package fr.free.nrw.commons.review
 
-import android.annotation.SuppressLint;
-import android.content.Context;
-import android.content.Intent;
-import android.graphics.PorterDuff;
-import android.graphics.drawable.Drawable;
-import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.MotionEvent;
-import android.view.View;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import fr.free.nrw.commons.Media;
-import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.auth.AccountUtil;
-import fr.free.nrw.commons.databinding.ActivityReviewBinding;
-import fr.free.nrw.commons.delete.DeleteHelper;
-import fr.free.nrw.commons.media.MediaDetailFragment;
-import fr.free.nrw.commons.theme.BaseActivity;
-import fr.free.nrw.commons.utils.DialogUtil;
-import fr.free.nrw.commons.utils.ViewUtil;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.schedulers.Schedulers;
-import java.util.Locale;
-import javax.inject.Inject;
+import android.annotation.SuppressLint
+import android.content.Context
+import android.content.Intent
+import android.graphics.PorterDuff
+import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
+import android.view.MotionEvent
+import android.view.View
+import fr.free.nrw.commons.Media
+import fr.free.nrw.commons.R
+import fr.free.nrw.commons.auth.AccountUtil
+import fr.free.nrw.commons.databinding.ActivityReviewBinding
+import fr.free.nrw.commons.delete.DeleteHelper
+import fr.free.nrw.commons.media.MediaDetailFragment
+import fr.free.nrw.commons.theme.BaseActivity
+import fr.free.nrw.commons.utils.DialogUtil
+import fr.free.nrw.commons.utils.ViewUtil
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
+import java.util.Locale
+import javax.inject.Inject
 
-public class ReviewActivity extends BaseActivity {
+class ReviewActivity : BaseActivity() {
 
+    private lateinit var binding: ActivityReviewBinding
 
-    private ActivityReviewBinding binding;
+    private var mediaDetailFragment: MediaDetailFragment? = null
+    lateinit var reviewPagerAdapter: ReviewPagerAdapter
+    lateinit var reviewController: ReviewController
 
-    MediaDetailFragment mediaDetailFragment;
-    public ReviewPagerAdapter reviewPagerAdapter;
-    public ReviewController reviewController;
     @Inject
-    ReviewHelper reviewHelper;
+    lateinit var reviewHelper: ReviewHelper
+
     @Inject
-    DeleteHelper deleteHelper;
+    lateinit var deleteHelper: DeleteHelper
+
     /**
      * Represent fragment for ReviewImage
      * Use to call some methods of ReviewImage fragment
      */
-     private ReviewImageFragment reviewImageFragment;
+    private var reviewImageFragment: ReviewImageFragment? = null
+    private var hasNonHiddenCategories = false
+    var media: Media? = null
 
-    /**
-     * Flag to check whether there are any non-hidden categories in the File
-     */
-    private boolean hasNonHiddenCategories = false;
+    private val SAVED_MEDIA = "saved_media"
 
-    final String SAVED_MEDIA = "saved_media";
-    private Media media;
-
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        if (media != null) {
-            outState.putParcelable(SAVED_MEDIA, media);
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        media?.let {
+            outState.putParcelable(SAVED_MEDIA, it)
         }
     }
 
@@ -66,241 +58,248 @@ public class ReviewActivity extends BaseActivity {
      * Consumers should be simply using this method to use this activity.
      *
      * @param context
-     * @param title   Page title
+     * @param title Page title
      */
-    public static void startYourself(Context context, String title) {
-        Intent reviewActivity = new Intent(context, ReviewActivity.class);
-        reviewActivity.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-        reviewActivity.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-        context.startActivity(reviewActivity);
+    companion object {
+        fun startYourself(context: Context, title: String) {
+            val reviewActivity = Intent(context, ReviewActivity::class.java)
+            reviewActivity.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)
+            reviewActivity.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
+            context.startActivity(reviewActivity)
+        }
     }
 
-    private CompositeDisposable compositeDisposable = new CompositeDisposable();
+    @SuppressLint("ClickableViewAccessibility")
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        binding = ActivityReviewBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-    public Media getMedia() {
-        return media;
-    }
+        setSupportActionBar(binding.toolbarBinding?.toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        binding = ActivityReviewBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+        reviewController = ReviewController(deleteHelper, this)
 
-        setSupportActionBar(binding.toolbarBinding.toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        
-        reviewController = new ReviewController(deleteHelper, this);
+        reviewPagerAdapter = ReviewPagerAdapter(supportFragmentManager)
+        binding.viewPagerReview.adapter = reviewPagerAdapter
+        binding.pagerIndicatorReview.setViewPager(binding.viewPagerReview)
+        binding.pbReviewImage.visibility = View.VISIBLE
 
-        reviewPagerAdapter = new ReviewPagerAdapter(getSupportFragmentManager());
-        binding.viewPagerReview.setAdapter(reviewPagerAdapter);
-        binding.pagerIndicatorReview.setViewPager(binding.viewPagerReview);
-        binding.pbReviewImage.setVisibility(View.VISIBLE);
+        binding.skipImage.compoundDrawablesRelative[2]?.setColorFilter(
+            resources.getColor(R.color.button_blue),
+            PorterDuff.Mode.SRC_IN
+        )
 
-        Drawable d[]=binding.skipImage.getCompoundDrawablesRelative();
-        d[2].setColorFilter(getApplicationContext().getResources().getColor(R.color.button_blue), PorterDuff.Mode.SRC_IN);
-
-        if (savedInstanceState != null && savedInstanceState.getParcelable(SAVED_MEDIA) != null) {
-            updateImage(savedInstanceState.getParcelable(SAVED_MEDIA)); // Use existing media if we have one
-            setUpMediaDetailOnOrientation();
+        if (savedInstanceState?.getParcelable<Media>(SAVED_MEDIA) != null) {
+            updateImage(savedInstanceState.getParcelable(SAVED_MEDIA)!!)
+            setUpMediaDetailOnOrientation()
         } else {
-            runRandomizer(); //Run randomizer whenever everything is ready so that a first random image will be added
+            runRandomizer()
         }
 
-        binding.skipImage.setOnClickListener(view -> {
-            reviewImageFragment = getInstanceOfReviewImageFragment();
-            reviewImageFragment.disableButtons();
-            runRandomizer();
-        });
+        binding.skipImage.setOnClickListener {
+            reviewImageFragment = getInstanceOfReviewImageFragment()
+            reviewImageFragment?.disableButtons()
+            runRandomizer()
+        }
 
-        binding.reviewImageView.setOnClickListener(view ->setUpMediaDetailFragment());
+        binding.reviewImageView.setOnClickListener {
+            setUpMediaDetailFragment()
+        }
 
-        binding.skipImage.setOnTouchListener((view, event) -> {
-            if (event.getAction() == MotionEvent.ACTION_UP && event.getRawX() >= (
-                    binding.skipImage.getRight() - binding.skipImage
-                            .getCompoundDrawables()[2].getBounds().width())) {
-                showSkipImageInfo();
-                return true;
+        binding.skipImage.setOnTouchListener { _, event ->
+            if (event.action == MotionEvent.ACTION_UP &&
+                event.rawX >= (binding.skipImage.right - binding.skipImage.compoundDrawables[2].bounds.width())
+            ) {
+                showSkipImageInfo()
+                true
+            } else {
+                false
             }
-            return false;
-        });
+        }
     }
 
-    @Override
-    public boolean onSupportNavigateUp() {
-        onBackPressed();
-        return true;
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
     }
 
     @SuppressLint("CheckResult")
-    public boolean runRandomizer() {
-        hasNonHiddenCategories = false;
-        binding.pbReviewImage.setVisibility(View.VISIBLE);
-        binding.viewPagerReview.setCurrentItem(0);
-        // Finds non-hidden categories from Media instance
-        compositeDisposable.add(reviewHelper.getRandomMedia()
+    fun runRandomizer(): Boolean {
+        hasNonHiddenCategories = false
+        binding.pbReviewImage.visibility = View.VISIBLE
+        binding.viewPagerReview.currentItem = 0
+
+        compositeDisposable.add(
+            reviewHelper.getRandomMedia()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(this::checkWhetherFileIsUsedInWikis));
-        return true;
+                .subscribe(::checkWhetherFileIsUsedInWikis)
+        )
+        return true
     }
 
     /**
      * Check whether media is used or not in any Wiki Page
      */
     @SuppressLint("CheckResult")
-    private void checkWhetherFileIsUsedInWikis(final Media media) {
-        compositeDisposable.add(reviewHelper.checkFileUsage(media.getFilename())
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(result -> {
-                // result false indicates media is not used in any wiki
-                if (!result) {
-                    // Finds non-hidden categories from Media instance
-                    findNonHiddenCategories(media);
-                } else {
-                    runRandomizer();
+    private fun checkWhetherFileIsUsedInWikis(media: Media) {
+        compositeDisposable.add(
+            reviewHelper.checkFileUsage(media.filename)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe { result ->
+                    if (!result) {
+                        findNonHiddenCategories(media)
+                    } else {
+                        runRandomizer()
+                    }
                 }
-            }));
+        )
     }
 
     /**
      * Finds non-hidden categories and updates current image
      */
-    private void findNonHiddenCategories(Media media) {
-        for(String key : media.getCategoriesHiddenStatus().keySet()) {
-            Boolean value = media.getCategoriesHiddenStatus().get(key);
-            // If non-hidden category is found then set hasNonHiddenCategories to true
-            // so that category review cannot be skipped
-            if(!value) {
-                hasNonHiddenCategories = true;
-                break;
-            }
-        }
-        reviewImageFragment = getInstanceOfReviewImageFragment();
-        reviewImageFragment.disableButtons();
-        updateImage(media);
+    private fun findNonHiddenCategories(media: Media) {
+        this.media = media
+        // If non-hidden category is found then set hasNonHiddenCategories to true
+        // so that category review cannot be skipped
+        hasNonHiddenCategories = media.categoriesHiddenStatus.values.any { !it }
+        reviewImageFragment = getInstanceOfReviewImageFragment()
+        reviewImageFragment?.disableButtons()
+        updateImage(media)
     }
 
     @SuppressLint("CheckResult")
-    private void updateImage(Media media) {
-        reviewHelper.addViewedImagesToDB(media.getPageId());
-        this.media = media;
-        String fileName = media.getFilename();
-        if (fileName.length() == 0) {
-            ViewUtil.showShortSnackbar(binding.drawerLayout, R.string.error_review);
-            return;
+    private fun updateImage(media: Media) {
+        reviewHelper.addViewedImagesToDB(media.pageId)
+        this.media = media
+        val fileName = media.filename
+
+        if (fileName.isNullOrEmpty()) {
+            ViewUtil.showShortSnackbar(binding.drawerLayout, R.string.error_review)
+            return
         }
 
         //If The Media User and Current Session Username is same then Skip the Image
-        if (media.getUser() != null && media.getUser().equals(AccountUtil.getUserName(getApplicationContext()))) {
-            runRandomizer();
-            return;
+        if (media.user == AccountUtil.getUserName(applicationContext)) {
+            runRandomizer()
+            return
         }
 
-        binding.reviewImageView.setImageURI(media.getImageUrl());
+        binding.reviewImageView.setImageURI(media.imageUrl)
 
-        reviewController.onImageRefreshed(media); //file name is updated
-        compositeDisposable.add(reviewHelper.getFirstRevisionOfFile(fileName)
+        reviewController.onImageRefreshed(media)    // filename is updated
+        compositeDisposable.add(
+            reviewHelper.getFirstRevisionOfFile(fileName)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(revision -> {
-                    reviewController.firstRevision = revision;
-                    reviewPagerAdapter.updateFileInformation();
-                    @SuppressLint({"StringFormatInvalid", "LocalSuppress"}) String caption = String.format(getString(R.string.review_is_uploaded_by), fileName, revision.getUser());
-                    binding.tvImageCaption.setText(caption);
-                    binding.pbReviewImage.setVisibility(View.GONE);
-                    reviewImageFragment = getInstanceOfReviewImageFragment();
-                    reviewImageFragment.enableButtons();
-                }));
-        binding.viewPagerReview.setCurrentItem(0);
+                .subscribe { revision ->
+                    reviewController.firstRevision = revision
+                    reviewPagerAdapter.updateFileInformation()
+                    val caption = getString(
+                        R.string.review_is_uploaded_by,
+                        fileName,
+                        revision.user
+                    )
+                    binding.tvImageCaption.text = caption
+                    binding.pbReviewImage.visibility = View.GONE
+                    reviewImageFragment = getInstanceOfReviewImageFragment()
+                    reviewImageFragment?.enableButtons()
+                }
+        )
+        binding.viewPagerReview.currentItem = 0
     }
 
-    public void swipeToNext() {
-        int nextPos = binding.viewPagerReview.getCurrentItem() + 1;
+    fun swipeToNext() {
+        val nextPos = binding.viewPagerReview.currentItem + 1
+
         // If currently at category fragment, then check whether the media has any non-hidden category
         if (nextPos <= 3) {
-            binding.viewPagerReview.setCurrentItem(nextPos);
-            if (nextPos == 2) {
+            binding.viewPagerReview.currentItem = nextPos
+            if (nextPos == 2 && !hasNonHiddenCategories)
+            {
                 // The media has no non-hidden category. Such media are already flagged by server-side bots, so no need to review manually.
-                if (!hasNonHiddenCategories) {
-                    swipeToNext();
-                    return;
-                }
+                swipeToNext()
             }
         } else {
-            runRandomizer();
+            runRandomizer()
         }
     }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        compositeDisposable.clear();
-        binding = null;
+    public override fun onDestroy() {
+        super.onDestroy()
+        compositeDisposable.clear()
     }
 
-    public void showSkipImageInfo(){
-        DialogUtil.showAlertDialog(ReviewActivity.this,
-                getString(R.string.skip_image).toUpperCase(Locale.ROOT),
-                getString(R.string.skip_image_explanation),
-                getString(android.R.string.ok),
-                "",
-                null,
-                null);
+    fun showSkipImageInfo() {
+        DialogUtil.showAlertDialog(
+            this,
+            getString(R.string.skip_image).uppercase(Locale.ROOT),
+            getString(R.string.skip_image_explanation),
+            getString(android.R.string.ok),
+            null,
+            null,
+            null
+        )
     }
 
-    public void showReviewImageInfo() {
-        DialogUtil.showAlertDialog(ReviewActivity.this,
-                getString(R.string.title_activity_review),
-                getString(R.string.review_image_explanation),
-                getString(android.R.string.ok),
-                "",
-                null,
-                null);
+    fun showReviewImageInfo() {
+        DialogUtil.showAlertDialog(
+            this,
+            getString(R.string.title_activity_review),
+            getString(R.string.review_image_explanation),
+            getString(android.R.string.ok),
+            null,
+            null,
+            null
+        )
     }
 
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_review_activty, menu);
-        return super.onCreateOptionsMenu(menu);
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.menu_review_activty, menu)
+        return super.onCreateOptionsMenu(menu)
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.menu_image_info:
-                showReviewImageInfo();
-                return true;
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.menu_image_info -> {
+                showReviewImageInfo()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
         }
-        return super.onOptionsItemSelected(item);
     }
 
     /**
      * this function return the instance of  reviewImageFragment
      */
-    public ReviewImageFragment getInstanceOfReviewImageFragment(){
-        int currentItemOfReviewPager = binding.viewPagerReview.getCurrentItem();
-        reviewImageFragment = (ReviewImageFragment) reviewPagerAdapter.instantiateItem(binding.viewPagerReview, currentItemOfReviewPager);
-        return reviewImageFragment;
+    private fun getInstanceOfReviewImageFragment(): ReviewImageFragment? {
+        val currentItemOfReviewPager = binding.viewPagerReview.currentItem
+        return reviewPagerAdapter.instantiateItem(
+            binding.viewPagerReview,
+            currentItemOfReviewPager
+        ) as? ReviewImageFragment
     }
 
     /**
      * set up the media detail fragment when click on the review image
      */
-    private void setUpMediaDetailFragment() {
-        if (binding.mediaDetailContainer.getVisibility() == View.GONE && media != null) {
-            binding.mediaDetailContainer.setVisibility(View.VISIBLE);
-            binding.reviewActivityContainer.setVisibility(View.INVISIBLE);
-            FragmentManager fragmentManager = getSupportFragmentManager();
-            mediaDetailFragment = new MediaDetailFragment();
-            Bundle bundle = new Bundle();
-            bundle.putParcelable("media", media);
-            mediaDetailFragment.setArguments(bundle);
-            fragmentManager.beginTransaction().add(R.id.mediaDetailContainer, mediaDetailFragment).
-                addToBackStack("MediaDetail").commit();
+    private fun setUpMediaDetailFragment() {
+        if (binding.mediaDetailContainer.visibility == View.GONE && media != null) {
+            binding.mediaDetailContainer.visibility = View.VISIBLE
+            binding.reviewActivityContainer.visibility = View.INVISIBLE
+            val fragmentManager = supportFragmentManager
+            mediaDetailFragment = MediaDetailFragment().apply {
+                arguments = Bundle().apply {
+                    putParcelable("media", media)
+                }
+            }
+            fragmentManager.beginTransaction()
+                .add(R.id.mediaDetailContainer, mediaDetailFragment!!)
+                .addToBackStack("MediaDetail")
+                .commit()
         }
     }
 
@@ -308,27 +307,30 @@ public class ReviewActivity extends BaseActivity {
      * handle the back pressed event of this activity
      * this function call every time when back button is pressed
      */
-    @Override
-    public void onBackPressed() {
-        if (binding.mediaDetailContainer.getVisibility() == View.VISIBLE) {
-            binding.mediaDetailContainer.setVisibility(View.GONE);
-            binding.reviewActivityContainer.setVisibility(View.VISIBLE);
+    @Deprecated("This method has been deprecated in favor of using the" +
+            "{@link OnBackPressedDispatcher} via {@link #getOnBackPressedDispatcher()}." +
+            "The OnBackPressedDispatcher controls how back button events are dispatched" +
+            "to one or more {@link OnBackPressedCallback} objects.")
+    override fun onBackPressed() {
+        if (binding.mediaDetailContainer.visibility == View.VISIBLE) {
+            binding.mediaDetailContainer.visibility = View.GONE
+            binding.reviewActivityContainer.visibility = View.VISIBLE
         }
-        super.onBackPressed();
+        super.onBackPressed()
     }
 
     /**
      * set up media detail fragment after orientation change
      */
-    private void setUpMediaDetailOnOrientation() {
-        Fragment mediaDetailFragment = getSupportFragmentManager()
-            .findFragmentById(R.id.mediaDetailContainer);
-        if (mediaDetailFragment != null) {
-            binding.mediaDetailContainer.setVisibility(View.VISIBLE);
-            binding.reviewActivityContainer.setVisibility(View.INVISIBLE);
-            getSupportFragmentManager().beginTransaction()
-                .replace(R.id.mediaDetailContainer, mediaDetailFragment).commit();
+    private fun setUpMediaDetailOnOrientation() {
+        val fragment = supportFragmentManager.findFragmentById(R.id.mediaDetailContainer)
+        fragment?.let {
+            binding.mediaDetailContainer.visibility = View.VISIBLE
+            binding.reviewActivityContainer.visibility = View.INVISIBLE
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.mediaDetailContainer, it)
+                .commit()
         }
     }
-
 }
+

@@ -232,7 +232,7 @@ public class MoreBottomSheetFragment extends BottomSheetDialogFragment {
     }
 
     protected void onPeerReviewClicked() {
-        ReviewActivity.startYourself(getActivity(), getString(R.string.title_activity_review));
+        ReviewActivity.Companion.startYourself(getActivity(), getString(R.string.title_activity_review));
     }
 }
 
