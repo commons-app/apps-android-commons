@@ -3,6 +3,7 @@ package fr.free.nrw.commons.campaigns;
 import android.annotation.SuppressLint;
 
 import fr.free.nrw.commons.campaigns.models.Campaign;
+import fr.free.nrw.commons.utils.CommonsDateUtil;
 import java.text.ParseException;
 import java.util.Collections;
 import java.util.Date;
@@ -14,7 +15,6 @@ import javax.inject.Singleton;
 
 import fr.free.nrw.commons.BasePresenter;
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient;
-import fr.free.nrw.commons.utils.CommonsDateUtil;
 import io.reactivex.Scheduler;
 import io.reactivex.Single;
 import io.reactivex.SingleObserver;

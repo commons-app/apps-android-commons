@@ -168,7 +168,9 @@
   <string name="nearby_info_menu_wikipedia_article">ਵਿਕੀਪੀਡੀਆ ਲੇਖ</string>
   <string name="upload_problem_image_dark">ਤਸਵੀਰ ਬਹੁਤ ਗੂੜ੍ਹੀ ਹੈ।</string>
   <string name="upload_problem_image_blurry">ਤਸਵੀਰ ਧੁੰਦਲੀ ਹੈ।</string>
+  <string name="login_to_your_account">ਆਪਣੇ ਖਾਤੇ ਵਿੱਚ ਦਾਖ਼ਲ ਹੋਵੋ</string>
   <string name="skip_login">ਛੱਡੋ</string>
+  <string name="navigation_item_login">ਦਾਖ਼ਲ ਹੋਵੋ</string>
   <string name="nearby_wikidata">ਵਿਕੀਡੇਟਾ</string>
   <string name="nearby_wikipedia">ਵਿਕੀਪੀਡੀਆ</string>
   <string name="about_faq">ਅਕਸਰ ਪੁੱਛੇ ਜਾਂਦੇ ਸੁਆਲ</string>
@@ -185,6 +187,7 @@
   <string name="search_tab_title_categories">ਸ਼੍ਰੇਣੀਆਂ</string>
   <string name="explore_tab_title_map">ਨਕਸ਼ਾ</string>
   <string name="question">ਸਵਾਲ</string>
+  <string name="user_not_logged_in">ਤੁਹਾਡੇ ਦਾਖਲੇ ਦੀ ਮਿਆਦ ਪੁੱਗ ਗਈ ਹੈ। ਕਿਰਪਾ ਕਰਕੇ ਮੁੜ ਦਾਖਲ ਹੋਵੋ।</string>
   <string name="continue_message">ਜਾਰੀ ਰੱਖੋ</string>
   <string name="no_recent_searches">ਕੋਈ ਤਾਜ਼ਾ ਖੋਜ ਨਹੀਂ</string>
   <string name="delete">ਮਿਟਾਓ</string>

@@ -2,7 +2,6 @@ package fr.free.nrw.commons.di;
 
 import com.google.gson.Gson;
 
-import fr.free.nrw.commons.actions.PageEditClient;
 import fr.free.nrw.commons.explore.categories.CategoriesModule;
 import fr.free.nrw.commons.navtab.MoreBottomSheetFragment;
 import fr.free.nrw.commons.navtab.MoreBottomSheetLoggedOutFragment;

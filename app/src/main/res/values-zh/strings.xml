@@ -34,11 +34,13 @@
 * SomeyaMako
 * Stang
 * StarrySky
+* TFX202X
 * Tranve
 * U.T.
 * Vikarna
 * VulpesVulpes825
 * Whym
+* WiiUf
 * Willy1018
 * Wxyveronica
 * XiaoGuoQuQ233
@@ -170,6 +172,7 @@
   <string name="categories_search_text_hint">搜索分类</string>
   <string name="depicts_search_text_hint">搜索您的媒体描述的项目（如山、泰姬陵等）</string>
   <string name="menu_save_categories">保存</string>
+  <string name="menu_overflow_desc">溢出菜单</string>
   <string name="refresh_button">刷新</string>
   <string name="display_list_button">列表</string>
   <string name="contributions_subtitle_zero">（尚无上传）</string>
@@ -835,6 +838,15 @@
   <string name="pending">待处理</string>
   <string name="failed">失败</string>
   <string name="could_not_load_place_data">无法加载地点数据</string>
+  <string name="custom_selector_delete_folder">删除文件夹</string>
+  <string name="custom_selector_confirm_deletion_title">确认删除</string>
+  <string name="custom_selector_confirm_deletion_message">您确定要删除包含%2$d的文件夹%1$s吗？</string>
+  <string name="custom_selector_delete">删除</string>
+  <string name="custom_selector_cancel">撤消</string>
+  <string name="custom_selector_folder_deleted_success">文件夹%1$s已成功删除</string>
+  <string name="custom_selector_folder_deleted_failure">无法删除文件夹%1$s</string>
+  <string name="custom_selector_error_trashing_folder_contents">删除文件夹内容时出错： %1$s</string>
+  <string name="custom_selector_folder_not_found_error">无法检索存储桶ID的文件夹路径： %1$d</string>
   <string name="red_pin">这个地点还没有照片，快去拍一张吧！</string>
   <string name="green_pin">这个地点已经有照片了。</string>
   <string name="grey_pin">现在检查这个地点是否有照片。</string>

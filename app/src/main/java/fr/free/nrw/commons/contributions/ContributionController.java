@@ -87,7 +87,7 @@ public class ContributionController {
             },
             R.string.storage_permission_title,
             R.string.write_storage_permission_rationale,
-            PermissionUtils.PERMISSIONS_STORAGE);
+            PermissionUtils.getPERMISSIONS_STORAGE());
     }
 
     /**
@@ -224,7 +224,7 @@ public class ContributionController {
             () -> FilePicker.openCustomSelector(activity, resultLauncher, 0),
             R.string.storage_permission_title,
             R.string.write_storage_permission_rationale,
-            PermissionUtils.PERMISSIONS_STORAGE);
+            PermissionUtils.getPERMISSIONS_STORAGE());
     }
 
 

@@ -7,13 +7,14 @@ import androidx.test.core.app.ApplicationProvider
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.auth.login.LoginResult
 import fr.free.nrw.commons.kvstore.JsonKvStore
+import io.mockk.every
+import io.mockk.mockk
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.MockitoAnnotations
-import org.powermock.api.mockito.PowerMockito.`when`
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.Shadows.shadowOf
 import org.robolectric.annotation.Config
@@ -33,7 +34,6 @@ class SessionManagerUnitTests {
     @Mock
     private lateinit var defaultKvStore: JsonKvStore
 
-    @Mock
     private lateinit var loginResult: LoginResult
 
     @Mock
@@ -41,6 +41,7 @@ class SessionManagerUnitTests {
 
     @Before
     fun setUp() {
+        loginResult = mockk()
         MockitoAnnotations.openMocks(this)
         accountManager = AccountManager.get(ApplicationProvider.getApplicationContext())
         shadowOf(accountManager).addAccount(account)
@@ -68,8 +69,8 @@ class SessionManagerUnitTests {
     @Test
     @Throws(Exception::class)
     fun testUpdateAccount() {
-        `when`(loginResult.userName).thenReturn("username")
-        `when`(loginResult.password).thenReturn("password")
+        every { loginResult.userName } returns "username"
+        every { loginResult.password } returns "password"
         val method: Method =
             SessionManager::class.java.getDeclaredMethod(
                 "updateAccount",

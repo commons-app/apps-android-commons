@@ -43,7 +43,6 @@ import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.Button;
 import android.widget.Toast;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
@@ -701,7 +700,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                 = new LatLng(Double.parseDouble(locationLatLng[0]),
                 Double.parseDouble(locationLatLng[1]), 1f);
         } else {
-            lastKnownLocation = MapUtils.defaultLatLng;
+            lastKnownLocation = MapUtils.getDefaultLatLng();
         }
         if (binding.map != null) {
             moveCameraToPosition(
@@ -793,7 +792,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         hideBottomSheet();
         binding.nearbyFilter.searchViewLayout.searchView.setOnQueryTextFocusChangeListener(
             (v, hasFocus) -> {
-                LayoutUtils.setLayoutHeightAllignedToWidth(1.25,
+                LayoutUtils.setLayoutHeightAlignedToWidth(1.25,
                     binding.nearbyFilterList.getRoot());
                 if (hasFocus) {
                     binding.nearbyFilterList.getRoot().setVisibility(View.VISIBLE);
@@ -834,7 +833,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             .getLayoutParams().width = (int) LayoutUtils.getScreenWidth(getActivity(),
             0.75);
         binding.nearbyFilterList.searchListView.setAdapter(nearbyFilterSearchRecyclerViewAdapter);
-        LayoutUtils.setLayoutHeightAllignedToWidth(1.25, binding.nearbyFilterList.getRoot());
+        LayoutUtils.setLayoutHeightAlignedToWidth(1.25, binding.nearbyFilterList.getRoot());
         compositeDisposable.add(
             RxSearchView.queryTextChanges(binding.nearbyFilter.searchViewLayout.searchView)
                 .takeUntil(RxView.detaches(binding.nearbyFilter.searchViewLayout.searchView))

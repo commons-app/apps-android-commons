@@ -56,9 +56,9 @@ class CategoriesPresenterTest {
     @Throws(Exception::class)
     fun `Test onAttachViewWithMedia when media is not null`() {
         categoriesPresenter.onAttachViewWithMedia(view, media())
-        whenever(repository.getCategories(repository.selectedExistingCategories))
+        whenever(repository.getCategories(repository.getSelectedExistingCategories()))
             .thenReturn(Observable.just(mutableListOf(categoryItem())))
-        whenever(repository.searchAll("mock", emptyList(), repository.selectedDepictions))
+        whenever(repository.searchAll("mock", emptyList(), repository.getSelectedDepictions()))
             .thenReturn(Observable.just(mutableListOf(categoryItem())))
         val method: Method =
             CategoriesPresenter::class.java.getDeclaredMethod(
@@ -88,7 +88,7 @@ class CategoriesPresenterTest {
         val emptyCaptionUploadItem = mock<UploadItem>()
         whenever(emptyCaptionUploadItem.uploadMediaDetails)
             .thenReturn(listOf(UploadMediaDetail(captionText = "")))
-        whenever(repository.uploads).thenReturn(
+        whenever(repository.getUploads()).thenReturn(
             listOf(
                 nonEmptyCaptionUploadItem,
                 emptyCaptionUploadItem,
@@ -105,7 +105,7 @@ class CategoriesPresenterTest {
             )
         whenever(repository.isSpammyCategory("selected")).thenReturn(false)
         whenever(repository.isSpammyCategory("doesContainYear")).thenReturn(true)
-        whenever(repository.selectedCategories).thenReturn(
+        whenever(repository.getSelectedCategories()).thenReturn(
             listOf(
                 categoryItem("selected", "", "", true),
             ),
@@ -130,7 +130,7 @@ class CategoriesPresenterTest {
 
         whenever(repository.searchAll(any(), any(), any()))
             .thenReturn(Observable.just(emptyCategories))
-        whenever(repository.selectedCategories).thenReturn(listOf())
+        whenever(repository.getSelectedCategories()).thenReturn(listOf())
         categoriesPresenter.searchForCategories(query)
         testScheduler.triggerActions()
         val method: Method =
@@ -154,7 +154,7 @@ class CategoriesPresenterTest {
     fun `verifyCategories with non empty selection goes to next screen`() {
         categoriesPresenter.onAttachView(view)
         val item = categoryItem()
-        whenever(repository.selectedCategories).thenReturn(listOf(item))
+        whenever(repository.getSelectedCategories()).thenReturn(listOf(item))
         categoriesPresenter.verifyCategories()
         verify(repository).setSelectedCategories(listOf(item.name))
         verify(view).goToNextScreen()
@@ -163,7 +163,7 @@ class CategoriesPresenterTest {
     @Test
     fun `verifyCategories with empty selection show no category selected`() {
         categoriesPresenter.onAttachView(view)
-        whenever(repository.selectedCategories).thenReturn(listOf())
+        whenever(repository.getSelectedCategories()).thenReturn(listOf())
         categoriesPresenter.verifyCategories()
         verify(view).showNoCategorySelected()
     }

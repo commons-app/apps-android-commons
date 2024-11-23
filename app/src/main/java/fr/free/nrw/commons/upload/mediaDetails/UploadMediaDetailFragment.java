@@ -1,7 +1,6 @@
 package fr.free.nrw.commons.upload.mediaDetails;
 
 import static android.app.Activity.RESULT_OK;
-import static fr.free.nrw.commons.utils.ActivityUtils.startActivityWithFlags;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -45,6 +44,7 @@ import fr.free.nrw.commons.upload.UploadBaseFragment;
 import fr.free.nrw.commons.upload.UploadItem;
 import fr.free.nrw.commons.upload.UploadMediaDetail;
 import fr.free.nrw.commons.upload.UploadMediaDetailAdapter;
+import fr.free.nrw.commons.utils.ActivityUtils;
 import fr.free.nrw.commons.utils.DialogUtil;
 import fr.free.nrw.commons.utils.ImageUtils;
 import fr.free.nrw.commons.utils.NetworkUtils;
@@ -208,7 +208,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
 
         try {
             if(!presenter.getImageQuality(indexOfFragment, inAppPictureLocation, getActivity())) {
-                startActivityWithFlags(
+                ActivityUtils.startActivityWithFlags(
                 getActivity(), MainActivity.class, Intent.FLAG_ACTIVITY_CLEAR_TOP,
                 Intent.FLAG_ACTIVITY_SINGLE_TOP);
             }

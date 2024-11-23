@@ -19,7 +19,7 @@ import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.recentlanguages.Language
 import fr.free.nrw.commons.recentlanguages.RecentLanguagesAdapter
 import fr.free.nrw.commons.recentlanguages.RecentLanguagesDao
-import fr.free.nrw.commons.settings.SettingsFragment.createLocale
+import fr.free.nrw.commons.settings.SettingsFragment.Companion.createLocale
 import org.junit.Assert
 import org.junit.Assert.assertEquals
 import org.junit.Before
@@ -156,14 +156,14 @@ class SettingsFragmentUnitTests {
             )
         method.isAccessible = true
         method.invoke(fragment, "appUiDefaultLanguagePref")
-        verify(recentLanguagesDao, times(1)).recentLanguages
+        verify(recentLanguagesDao, times(1)).getRecentLanguages()
     }
 
     @Test
     @Throws(Exception::class)
     fun `Test prepareAppLanguages when recently used languages is not empty`() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
-        whenever(recentLanguagesDao.recentLanguages)
+        whenever(recentLanguagesDao.getRecentLanguages())
             .thenReturn(
                 mutableListOf(
                     Language("English", "en"),
@@ -181,7 +181,7 @@ class SettingsFragmentUnitTests {
             )
         method.isAccessible = true
         method.invoke(fragment, "appUiDefaultLanguagePref")
-        verify(recentLanguagesDao, times(2)).recentLanguages
+        verify(recentLanguagesDao, times(2)).getRecentLanguages()
     }
 
     @Test

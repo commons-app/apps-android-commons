@@ -1,10 +1,10 @@
 package fr.free.nrw.commons.upload.structure.depictions
 
-import com.nhaarman.mockitokotlin2.mock
 import depictedItem
 import entity
 import entityId
 import fr.free.nrw.commons.wikidata.WikidataProperties
+import io.mockk.mockk
 import org.junit.Assert
 import org.junit.Test
 import place
@@ -53,7 +53,7 @@ class DepictedItemTest {
                 entity(
                     statements =
                         mapOf(
-                            WikidataProperties.IMAGE.propertyName to listOf(statement(snak(dataValue = mock()))),
+                            WikidataProperties.IMAGE.propertyName to listOf(statement(snak(dataValue = mockk()))),
                         ),
                 ),
             ).imageUrl,
