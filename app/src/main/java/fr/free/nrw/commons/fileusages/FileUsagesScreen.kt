@@ -84,15 +84,20 @@ fun GlobalUsagesListContent(data: LazyPagingItems<UiModel>) {
         items(data) {
             it?.let { item ->
                 when (item) {
-                    is UiModel.HeaderModel -> Text(
-                        text = item.group,
-                        style = MaterialTheme.typography.headlineMedium
+                    is UiModel.HeaderModel -> ListItem(
+                        headlineContent = {
+                            Text(
+                                text = item.group,
+                                style = MaterialTheme.typography.titleMedium
+                            )
+                        }
                     )
-
-                    is UiModel.ItemModel -> Text(
-                        text = item.item.title,
-                        style = MaterialTheme.typography.bodyMedium
-                    )
+                    is UiModel.ItemModel -> ListItem(headlineContent = {
+                            Text(
+                                text = item.item.title,
+                                style = MaterialTheme.typography.bodyMedium
+                            )
+                        })
                 }
             }
         }
