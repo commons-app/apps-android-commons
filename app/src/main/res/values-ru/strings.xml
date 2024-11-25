@@ -846,6 +846,14 @@
   <string name="pending">В ожидании</string>
   <string name="failed">Не удалось</string>
   <string name="could_not_load_place_data">Не удалось загрузить данные о месте</string>
+  <string name="custom_selector_delete_folder">Удалить папку</string>
+  <string name="custom_selector_confirm_deletion_title">Подтвердите удаление</string>
+  <string name="custom_selector_confirm_deletion_message">Вы уверены, что хотите удалить папку %1$s содержащую %2$d шт. вложенных элементов?</string>
+  <string name="custom_selector_delete">Удалить</string>
+  <string name="custom_selector_cancel">Отмена</string>
+  <string name="custom_selector_folder_deleted_success">Папка %1$s успешно удалена</string>
+  <string name="custom_selector_folder_deleted_failure">Не получилось удалить папку %1$s</string>
+  <string name="custom_selector_error_trashing_folder_contents">Ошибка при удалении содержимого папки: %1$s</string>
   <string name="red_pin">У этого места пока нет фотографий, так что сделайте несколько!</string>
   <string name="green_pin">У этого места уже есть фотография.</string>
   <string name="grey_pin">Сейчас проверим, есть ли у этого места фотография.</string>
