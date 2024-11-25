@@ -288,8 +288,8 @@ fun RefreshErrorItem(
 }
 
 enum class ListContentType(val navTitle: String) {
-    Commons(navTitle = "Commons"),
-    OtherWikis(navTitle = "Other Wikis")
+    Commons(navTitle = "COMMONS"),
+    OtherWikis(navTitle = "OTHER WIKIS")
 }
 
 sealed class UiModel {
