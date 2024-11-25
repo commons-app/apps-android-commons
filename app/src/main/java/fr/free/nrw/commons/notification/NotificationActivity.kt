@@ -1,288 +1,247 @@
-package fr.free.nrw.commons.notification;
+package fr.free.nrw.commons.notification
 
-import android.annotation.SuppressLint;
-import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
-import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.View;
-import androidx.recyclerview.widget.DividerItemDecoration;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import com.google.android.material.snackbar.Snackbar;
-import fr.free.nrw.commons.CommonsApplication;
-import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.Utils;
-import fr.free.nrw.commons.databinding.ActivityNotificationBinding;
-import fr.free.nrw.commons.auth.SessionManager;
-import fr.free.nrw.commons.auth.csrf.InvalidLoginTokenException;
-import fr.free.nrw.commons.notification.models.Notification;
-import fr.free.nrw.commons.notification.models.NotificationType;
-import fr.free.nrw.commons.theme.BaseActivity;
-import fr.free.nrw.commons.utils.NetworkUtils;
-import fr.free.nrw.commons.utils.ViewUtil;
-import io.reactivex.Observable;
-import io.reactivex.ObservableSource;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.schedulers.Schedulers;
-import java.util.Collections;
-import java.util.List;
-import java.util.concurrent.Callable;
-import javax.inject.Inject;
-import kotlin.Unit;
-import timber.log.Timber;
+import android.annotation.SuppressLint
+import android.content.Context
+import android.content.Intent
+import android.net.Uri
+import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
+import android.view.View
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.snackbar.Snackbar
+import fr.free.nrw.commons.CommonsApplication
+import fr.free.nrw.commons.R
+import fr.free.nrw.commons.Utils
+import fr.free.nrw.commons.auth.SessionManager
+import fr.free.nrw.commons.auth.csrf.InvalidLoginTokenException
+import fr.free.nrw.commons.databinding.ActivityNotificationBinding
+import fr.free.nrw.commons.notification.models.Notification
+import fr.free.nrw.commons.notification.models.NotificationType
+import fr.free.nrw.commons.theme.BaseActivity
+import fr.free.nrw.commons.utils.NetworkUtils
+import fr.free.nrw.commons.utils.ViewUtil
+import io.reactivex.Observable
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
+import timber.log.Timber
+import javax.inject.Inject
 
 /**
  * Created by root on 18.12.2017.
  */
+class NotificationActivity : BaseActivity() {
 
-public class NotificationActivity extends BaseActivity {
-    private ActivityNotificationBinding binding;
-
-    @Inject
-    NotificationController controller;
+    private lateinit var binding: ActivityNotificationBinding
 
     @Inject
-    SessionManager sessionManager;
+    lateinit var controller: NotificationController
 
-    private static final String TAG_NOTIFICATION_WORKER_FRAGMENT = "NotificationWorkerFragment";
-    private NotificationWorkerFragment mNotificationWorkerFragment;
-    private NotificatinAdapter adapter;
-    private List<Notification> notificationList;
-    MenuItem notificationMenuItem;
+    @Inject
+    lateinit var sessionManager: SessionManager
+
+    private val tagNotificationWorkerFragment = "NotificationWorkerFragment"
+    private var mNotificationWorkerFragment: NotificationWorkerFragment? = null
+    private lateinit var adapter: NotificationAdapter
+    private var notificationList: MutableList<Notification> = mutableListOf()
+    private var notificationMenuItem: MenuItem? = null
+
     /**
      * Boolean isRead is true if this notification activity is for read section of notification.
      */
-    private boolean isRead;
+    private var isRead: Boolean = false
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        isRead = getIntent().getStringExtra("title").equals("read");
-        binding = ActivityNotificationBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
-        mNotificationWorkerFragment = (NotificationWorkerFragment) getFragmentManager()
-                .findFragmentByTag(TAG_NOTIFICATION_WORKER_FRAGMENT);
-        initListView();
-        setPageTitle();
-        setSupportActionBar(binding.toolbar.toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        isRead = intent.getStringExtra("title") == "read"
+        binding = ActivityNotificationBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        mNotificationWorkerFragment = supportFragmentManager.findFragmentByTag(
+            tagNotificationWorkerFragment
+        ) as? NotificationWorkerFragment
+        initListView()
+        setPageTitle()
+        setSupportActionBar(binding.toolbar.toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
-    @Override
-    public boolean onSupportNavigateUp() {
-        onBackPressed();
-        return true;
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
     }
 
-    /**
-     * If this is unread section of the notifications, removeNotification method
-     *  Marks the notification as read,
-     *  Removes the notification from unread,
-     *  Displays the Snackbar.
-     *
-     * Otherwise returns (read section).
-     *
-     * @param notification
-     */
-    @SuppressLint("CheckResult")
-    public void removeNotification(Notification notification) {
-        if (isRead) {
-            return;
+    @SuppressLint("CheckResult", "NotifyDataSetChanged")
+    fun removeNotification(notification: Notification) {
+        if (isRead) return
+
+        val disposable = Observable.defer { controller.markAsRead(notification) }
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({ result ->
+                if (result) {
+                    notificationList.remove(notification)
+                    setItems(notificationList)
+                    adapter.notifyDataSetChanged()
+                    ViewUtil.showLongSnackbar(binding.container, getString(R.string.notification_mark_read))
+                    if (notificationList.isEmpty()) {
+                        setEmptyView()
+                        binding.container.visibility = View.GONE
+                        binding.noNotificationBackground.visibility = View.VISIBLE
+                    }
+                } else {
+                    adapter.notifyDataSetChanged()
+                    setItems(notificationList)
+                    ViewUtil.showLongToast(this, getString(R.string.some_error))
+                }
+            }, { throwable ->
+                if (throwable is InvalidLoginTokenException) {
+                    val username = sessionManager.getUserName()
+                    val logoutListener = CommonsApplication.BaseLogoutListener(
+                        this,
+                        getString(R.string.invalid_login_message),
+                        username
+                    )
+                    CommonsApplication.instance.clearApplicationData(this, logoutListener)
+                } else {
+                    Timber.e(throwable, "Error occurred while loading notifications")
+                    ViewUtil.showShortSnackbar(binding.container, R.string.error_notifications)
+                }
+                binding.progressBar.visibility = View.GONE
+            })
+        compositeDisposable.add(disposable)
+    }
+
+    private fun initListView() {
+        binding.listView.layoutManager = LinearLayoutManager(this)
+        val itemDecor = DividerItemDecoration(binding.listView.context, DividerItemDecoration.VERTICAL)
+        binding.listView.addItemDecoration(itemDecor)
+        refresh(isRead)
+        adapter = NotificationAdapter { item ->
+            Timber.d("Notification clicked %s", item.link)
+            if (item.notificationType == NotificationType.EMAIL) {
+                ViewUtil.showLongSnackbar(binding.container, getString(R.string.check_your_email_inbox))
+            } else {
+                handleUrl(item.link)
+            }
+            removeNotification(item)
         }
-        Disposable disposable = Observable.defer((Callable<ObservableSource<Boolean>>)
-                () -> controller.markAsRead(notification))
+        binding.listView.adapter = adapter
+    }
+
+    private fun refresh(archived: Boolean) {
+        if (!NetworkUtils.isInternetConnectionEstablished(this)) {
+            binding.progressBar.visibility = View.GONE
+            Snackbar.make(binding.container, R.string.no_internet, Snackbar.LENGTH_INDEFINITE)
+                .setAction(R.string.retry) { refresh(archived) }
+                .show()
+        } else {
+            addNotifications(archived)
+        }
+        binding.progressBar.visibility = View.VISIBLE
+        binding.noNotificationBackground.visibility = View.GONE
+        binding.container.visibility = View.VISIBLE
+    }
+
+    @SuppressLint("CheckResult")
+    private fun addNotifications(archived: Boolean) {
+        Timber.d("Add notifications")
+        if (mNotificationWorkerFragment == null) {
+            binding.progressBar.visibility = View.VISIBLE
+            compositeDisposable.add(controller.getNotifications(archived)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(result -> {
-                    if (result) {
-                        notificationList.remove(notification);
-                        setItems(notificationList);
-                        adapter.notifyDataSetChanged();
-                        ViewUtil.showLongSnackbar(binding.container,getString(R.string.notification_mark_read));
-                        if (notificationList.size() == 0) {
-                            setEmptyView();
-                            binding.container.setVisibility(View.GONE);
-                            binding.noNotificationBackground.setVisibility(View.VISIBLE);
-                        }
+                .subscribe({ notificationList ->
+                    notificationList.reversed()
+                    Timber.d("Number of notifications is %d", notificationList.size)
+                    this.notificationList = notificationList.toMutableList()
+                    if (notificationList.isEmpty()) {
+                        setEmptyView()
+                        binding.container.visibility = View.GONE
+                        binding.noNotificationBackground.visibility = View.VISIBLE
                     } else {
-                        adapter.notifyDataSetChanged();
-                        setItems(notificationList);
-                        ViewUtil.showLongToast(this,getString(R.string.some_error));
+                        setItems(notificationList)
                     }
-                }, throwable -> {
-                    if (throwable instanceof InvalidLoginTokenException) {
-                        final String username = sessionManager.getUserName();
-                        final CommonsApplication.BaseLogoutListener logoutListener = new CommonsApplication.BaseLogoutListener(
-                            this,
-                            getString(R.string.invalid_login_message),
-                            username
-                        );
-
-                        CommonsApplication.getInstance().clearApplicationData(
-                            this, logoutListener);
-                    } else {
-                        Timber.e(throwable, "Error occurred while loading notifications");
-                        throwable.printStackTrace();
-                    ViewUtil.showShortSnackbar(binding.container, R.string.error_notifications);
-                    binding.progressBar.setVisibility(View.GONE);
-                        ViewUtil.showShortSnackbar(binding.container, R.string.error_notifications);
-                    }
-                    binding.progressBar.setVisibility(View.GONE);
-                });
-        getCompositeDisposable().add(disposable);
-    }
-
-
-
-    private void initListView() {
-        binding.listView.setLayoutManager(new LinearLayoutManager(this));
-        DividerItemDecoration itemDecor = new DividerItemDecoration(binding.listView.getContext(), DividerItemDecoration.VERTICAL);
-        binding.listView.addItemDecoration(itemDecor);
-        if (isRead) {
-            refresh(true);
+                    binding.progressBar.visibility = View.GONE
+                }, { throwable ->
+                    Timber.e(throwable, "Error occurred while loading notifications")
+                    ViewUtil.showShortSnackbar(binding.container, R.string.error_notifications)
+                    binding.progressBar.visibility = View.GONE
+                }))
         } else {
-            refresh(false);
-        }
-        adapter = new NotificatinAdapter(item -> {
-            Timber.d("Notification clicked %s", item.getLink());
-            if (item.getNotificationType() == NotificationType.EMAIL){
-                ViewUtil.showLongSnackbar(binding.container,getString(R.string.check_your_email_inbox));
-            } else {
-                handleUrl(item.getLink());
-            }
-            removeNotification(item);
-            return Unit.INSTANCE;
-        });
-        binding.listView.setAdapter(adapter);
-    }
-
-    private void refresh(boolean archived) {
-        if (!NetworkUtils.isInternetConnectionEstablished(this)) {
-            binding.progressBar.setVisibility(View.GONE);
-            Snackbar.make(binding.container, R.string.no_internet, Snackbar.LENGTH_INDEFINITE)
-                    .setAction(R.string.retry, view -> refresh(archived)).show();
-        } else {
-            addNotifications(archived);
-        }
-        binding.progressBar.setVisibility(View.VISIBLE);
-        binding.noNotificationBackground.setVisibility(View.GONE);
-        binding.container.setVisibility(View.VISIBLE);
-    }
-
-    @SuppressLint("CheckResult")
-    private void addNotifications(boolean archived) {
-        Timber.d("Add notifications");
-        if (mNotificationWorkerFragment == null) {
-            binding.progressBar.setVisibility(View.VISIBLE);
-            getCompositeDisposable().add(controller.getNotifications(archived)
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(notificationList -> {
-                        Collections.reverse(notificationList);
-                        Timber.d("Number of notifications is %d", notificationList.size());
-                        this.notificationList = notificationList;
-                        if (notificationList.size()==0){
-                            setEmptyView();
-                            binding.container.setVisibility(View.GONE);
-                            binding.noNotificationBackground.setVisibility(View.VISIBLE);
-                        } else {
-                            setItems(notificationList);
-                        }
-                        binding.progressBar.setVisibility(View.GONE);
-                    }, throwable -> {
-                        Timber.e(throwable, "Error occurred while loading notifications ");
-                        ViewUtil.showShortSnackbar(binding.container, R.string.error_notifications);
-                        binding.progressBar.setVisibility(View.GONE);
-                    }));
-        } else {
-            notificationList = mNotificationWorkerFragment.getNotificationList();
-            setItems(notificationList);
+            notificationList = mNotificationWorkerFragment?.notificationList?.toMutableList() ?: mutableListOf()
+            setItems(notificationList)
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_notifications, menu);
-        notificationMenuItem = menu.findItem(R.id.archived);
-        setMenuItemTitle();
-        return true;
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.menu_notifications, menu)
+        notificationMenuItem = menu.findItem(R.id.archived)
+        setMenuItemTitle()
+        return true
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle item selection
-        switch (item.getItemId()) {
-            case R.id.archived:
-                if (item.getTitle().equals(getString(R.string.menu_option_read))) {
-                    NotificationActivity.startYourself(NotificationActivity.this, "read");
-                }else if (item.getTitle().equals(getString(R.string.menu_option_unread))) {
-                    onBackPressed();
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.archived -> {
+                if (item.title == getString(R.string.menu_option_read)) {
+                    startYourself(this, "read")
+                } else if (item.title == getString(R.string.menu_option_unread)) {
+                    onBackPressed()
                 }
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-
-    private void handleUrl(String url) {
-        if (url == null || url.equals("")) {
-            return;
-        }
-        Utils.handleWebUrl(this, Uri.parse(url));
-    }
-
-    private void setItems(List<Notification> notificationList) {
-        if (notificationList == null || notificationList.isEmpty()) {
-            ViewUtil.showShortSnackbar(binding.container, R.string.no_notifications);
-            /*progressBar.setVisibility(View.GONE);
-            recyclerView.setVisibility(View.GONE);*/
-            binding.container.setVisibility(View.GONE);
-            setEmptyView();
-            binding.noNotificationBackground.setVisibility(View.VISIBLE);
-            return;
-        }
-        binding.container.setVisibility(View.VISIBLE);
-        binding.noNotificationBackground.setVisibility(View.GONE);
-        adapter.setItems(notificationList);
-    }
-
-    public static void startYourself(Context context, String title) {
-        Intent intent = new Intent(context, NotificationActivity.class);
-        intent.putExtra("title", title);
-
-        context.startActivity(intent);
-    }
-
-    private void setPageTitle() {
-        if (getSupportActionBar() != null) {
-            if (isRead) {
-                getSupportActionBar().setTitle(R.string.read_notifications);
-            } else {
-                getSupportActionBar().setTitle(R.string.notifications);
+                true
             }
+            else -> super.onOptionsItemSelected(item)
         }
     }
 
-    private void setEmptyView() {
-        if (isRead) {
-            binding.noNotificationText.setText(R.string.no_read_notification);
-        }else {
-            binding.noNotificationText.setText(R.string.no_notification);
+    private fun handleUrl(url: String?) {
+        if (url.isNullOrEmpty()) return
+        Utils.handleWebUrl(this, Uri.parse(url))
+    }
+
+    private fun setItems(notificationList: List<Notification>?) {
+        if (notificationList.isNullOrEmpty()) {
+            ViewUtil.showShortSnackbar(binding.container, R.string.no_notifications)
+            binding.container.visibility = View.GONE
+            setEmptyView()
+            binding.noNotificationBackground.visibility = View.VISIBLE
+            return
+        }
+        binding.container.visibility = View.VISIBLE
+        binding.noNotificationBackground.visibility = View.GONE
+        adapter.items = notificationList
+    }
+
+    private fun setPageTitle() {
+        supportActionBar?.title = if (isRead) {
+            getString(R.string.read_notifications)
+        } else {
+            getString(R.string.notifications)
         }
     }
 
-    private void setMenuItemTitle() {
-        if (isRead) {
-            notificationMenuItem.setTitle(R.string.menu_option_unread);
+    private fun setEmptyView() {
+        binding.noNotificationText.text = if (isRead) {
+            getString(R.string.no_read_notification)
+        } else {
+            getString(R.string.no_notification)
+        }
+    }
 
-        }else {
-            notificationMenuItem.setTitle(R.string.menu_option_read);
+    private fun setMenuItemTitle() {
+        notificationMenuItem?.title = if (isRead) {
+            getString(R.string.menu_option_unread)
+        } else {
+            getString(R.string.menu_option_read)
+        }
+    }
 
+    companion object {
+        fun startYourself(context: Context, title: String) {
+            val intent = Intent(context, NotificationActivity::class.java)
+            intent.putExtra("title", title)
+            context.startActivity(intent)
         }
     }
 }

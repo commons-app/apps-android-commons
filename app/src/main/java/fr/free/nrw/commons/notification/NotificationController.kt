@@ -1,33 +1,25 @@
-package fr.free.nrw.commons.notification;
+package fr.free.nrw.commons.notification
 
-import fr.free.nrw.commons.notification.models.Notification;
-import java.util.List;
+import fr.free.nrw.commons.notification.models.Notification
+import javax.inject.Inject
+import javax.inject.Singleton
 
-import javax.inject.Inject;
-import javax.inject.Singleton;
-
-import io.reactivex.Observable;
-import io.reactivex.Single;
+import io.reactivex.Observable
+import io.reactivex.Single
 
 /**
  * Created by root on 19.12.2017.
  */
 @Singleton
-public class NotificationController {
+class NotificationController @Inject constructor(
+    private val notificationClient: NotificationClient
+) {
 
-    private NotificationClient notificationClient;
-
-
-    @Inject
-    public NotificationController(NotificationClient notificationClient) {
-        this.notificationClient = notificationClient;
+    fun getNotifications(archived: Boolean): Single<List<Notification>> {
+        return notificationClient.getNotifications(archived)
     }
 
-    public Single<List<Notification>> getNotifications(boolean archived) {
-        return notificationClient.getNotifications(archived);
-    }
-
-    Observable<Boolean> markAsRead(Notification notification) {
-        return notificationClient.markNotificationAsRead(notification.getNotificationId());
+    fun markAsRead(notification: Notification): Observable<Boolean> {
+        return notificationClient.markNotificationAsRead(notification.notificationId)
     }
 }

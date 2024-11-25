@@ -1,28 +1,33 @@
-package fr.free.nrw.commons.notification.models;
+package fr.free.nrw.commons.notification.models
 
-public enum NotificationType {
+enum class NotificationType(private val type: String) {
     THANK_YOU_EDIT("thank-you-edit"),
+
     EDIT_USER_TALK("edit-user-talk"),
+
     MENTION("mention"),
+
     EMAIL("email"),
+
     WELCOME("welcome"),
+
     UNKNOWN("unknown");
-    private String type;
 
-    NotificationType(String type) {
-        this.type = type;
+    // Getter for the type property
+    fun getType(): String {
+        return type
     }
 
-    public String getType() {
-        return type;
-    }
-
-    public static NotificationType handledValueOf(String name) {
-        for (NotificationType e : values()) {
-            if (e.getType().equals(name)) {
-                return e;
+    companion object {
+        // Returns the corresponding NotificationType for a given name or UNKNOWN
+        // if no match is found
+        fun handledValueOf(name: String): NotificationType {
+            for (e in values()) {
+                if (e.type == name) {
+                    return e
+                }
             }
+            return UNKNOWN
         }
-        return UNKNOWN;
     }
 }
