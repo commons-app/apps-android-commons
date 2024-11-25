@@ -243,14 +243,7 @@ fun FileUsagesItemAppend(
         LoadState.Loading -> LinearProgressIndicator(modifier = Modifier.fillMaxWidth())
 
         is LoadState.NotLoading -> {
-            val ifLastPage = appendState.endOfPaginationReached
-            if (ifLastPage) {
-                Text(
-                    "End Reached",
-                    modifier = Modifier.fillMaxWidth(),
-                    textAlign = TextAlign.Center
-                )
-            }
+            // TODO: maybe need to show something when reached end
         }
 
         is LoadState.Error -> Text(
