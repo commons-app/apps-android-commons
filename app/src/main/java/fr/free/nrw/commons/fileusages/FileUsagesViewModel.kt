@@ -37,7 +37,7 @@ class FileUsagesViewModel(
 
     fun setFileName(fileName: String?) {
         // for testing
-        val testingFileName = "File:Ratargul 785 retouched.jpg"
+        val testingFileName = "File:Commons-logo.svg"
         // get the file name and use it to create paging source
         //TODO: [Parry} handle if null
         if (fileName != null) {

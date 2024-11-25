@@ -1,12 +1,16 @@
 package fr.free.nrw.commons.fileusages
 
-import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyListState
+import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.LinearProgressIndicator
@@ -20,9 +24,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -35,7 +37,9 @@ import androidx.paging.compose.items
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.fileusages.model.FileUsagesResponse
 import fr.free.nrw.commons.fileusages.model.NoContributionsError
+import kotlinx.coroutines.launch
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun FileUsagesScreen(modifier: Modifier = Modifier, viewModel: FileUsagesViewModel) {
     val fileUsagesLazyPagingItems =
@@ -46,76 +50,79 @@ fun FileUsagesScreen(modifier: Modifier = Modifier, viewModel: FileUsagesViewMod
 
     val screenState by viewModel.screenState.collectAsState()
 
-    var currentScreenIndex by rememberSaveable { mutableStateOf(0) }
+    val pagerState = rememberPagerState { ListContentType.entries.size }
+
+    val scope = rememberCoroutineScope()
+
+    val listState1 = rememberLazyListState()
+    val listState2 = rememberLazyListState()
 
     Column(
         modifier = modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         TabRow(
-            selectedTabIndex = currentScreenIndex,
+            selectedTabIndex = pagerState.currentPage,
             contentColor = Color.Transparent,
             containerColor = if (isSystemInDarkTheme())
                 colorResource(R.color.contributionListDarkBackground)
             else colorResource(R.color.card_light_grey),
             indicator = { tabPositions ->
-                if (currentScreenIndex < tabPositions.size) {
+                if (pagerState.currentPage < tabPositions.size) {
                     TabRowDefaults.SecondaryIndicator(
-                        Modifier.tabIndicatorOffset(tabPositions[currentScreenIndex]),
+                        Modifier.tabIndicatorOffset(tabPositions[pagerState.currentPage]),
                         color = if (isSystemInDarkTheme()) colorResource(R.color.white)
                         else colorResource(R.color.primaryDarkColor)
                     )
                 }
             }
-        ) {
-            Tab(
-                selected = currentScreenIndex == 0,
-                onClick = {
-                    currentScreenIndex = 0
-                },
-                text = { Text("Commons") },
-                selectedContentColor = if (isSystemInDarkTheme()) colorResource(R.color.white)
-                else colorResource(R.color.primaryDarkColor),
-                unselectedContentColor = if (isSystemInDarkTheme()) colorResource(R.color.white)
-                else colorResource(R.color.primaryDarkColor)
-            )
+        )
 
-            Tab(selected = currentScreenIndex == 1, onClick = {
-                currentScreenIndex = 1
-            }, text = { Text("Other Wikis") },
-                selectedContentColor = if (isSystemInDarkTheme()) colorResource(R.color.white)
-                else colorResource(R.color.primaryDarkColor),
-                unselectedContentColor = if (isSystemInDarkTheme()) colorResource(R.color.white)
-                else colorResource(R.color.primaryDarkColor)
-            )
+        {
+            ListContentType.entries.onEachIndexed() { tabIndex, tabEntry ->
+
+                Tab(
+                    selected = pagerState.currentPage == tabIndex,
+                    onClick = { scope.launch { pagerState.scrollToPage(tabIndex) } },
+                    text = { Text(tabEntry.navTitle) },
+                    selectedContentColor = if (isSystemInDarkTheme()) colorResource(R.color.white)
+                    else colorResource(R.color.primaryDarkColor),
+                    unselectedContentColor = if (isSystemInDarkTheme()) colorResource(R.color.white)
+                    else colorResource(R.color.primaryDarkColor)
+                )
+            }
         }
 
+        HorizontalPager(state = pagerState) { currentIndex ->
+            Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                when (currentIndex) {
+                    0 -> {
+                        FileUsages(
+                            refreshLoadState = fileUsagesLazyPagingItems.loadState.refresh,
+                            pagingItems = fileUsagesLazyPagingItems,
+                            usagesType = ListContentType.Commons,
+                            state = listState1
+                        )
+                    }
 
-        Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-            when (currentScreenIndex) {
-                0 -> {
-                    FileUsages(
-                        refreshLoadState = fileUsagesLazyPagingItems.loadState.refresh,
-                        pagingItems = fileUsagesLazyPagingItems,
-                        usagesType = 0
-                    )
-                }
-
-                1 -> {
-                    FileUsages(
-                        refreshLoadState = globalFileUsagesLazyPagingItems.loadState.refresh,
-                        pagingItems = globalFileUsagesLazyPagingItems,
-                        usagesType = 1
-                    )
+                    1 -> {
+                        FileUsages(
+                            refreshLoadState = globalFileUsagesLazyPagingItems.loadState.refresh,
+                            pagingItems = globalFileUsagesLazyPagingItems,
+                            usagesType = ListContentType.OtherWikis,
+                            state = listState2
+                        )
+                    }
                 }
             }
         }
+
     }
 }
 
 @Composable
-fun GlobalUsagesListContent(data: LazyPagingItems<UiModel>) {
-    LazyColumn {
+fun GlobalUsagesListContent(data: LazyPagingItems<UiModel>, state: LazyListState) {
+    LazyColumn(state = state) {
         items(data) {
             it?.let { item ->
                 when (item) {
@@ -145,8 +152,11 @@ fun GlobalUsagesListContent(data: LazyPagingItems<UiModel>) {
 
 //TODO [Parry] global usages are shown differently
 @Composable
-fun FileUsagesListContent(data: LazyPagingItems<FileUsagesResponse.FileUsage>) {
-    LazyColumn {
+fun FileUsagesListContent(
+    data: LazyPagingItems<FileUsagesResponse.FileUsage>,
+    state: LazyListState
+) {
+    LazyColumn(state = state) {
         items(data) {
             it?.let { item ->
                 ListItem(leadingContent = {
@@ -166,15 +176,23 @@ fun FileUsagesListContent(data: LazyPagingItems<FileUsagesResponse.FileUsage>) {
 fun <T : Any> FileUsages(
     refreshLoadState: LoadState,
     pagingItems: LazyPagingItems<T>,
-    usagesType: Int
+    usagesType: ListContentType,
+    state: LazyListState
 ) {
     when (refreshLoadState) {
         LoadState.Loading -> CircularProgressIndicator()
 
         is LoadState.NotLoading -> {
             when (usagesType) {
-                0 -> FileUsagesListContent(pagingItems as LazyPagingItems<FileUsagesResponse.FileUsage>)
-                1 -> GlobalUsagesListContent(pagingItems as LazyPagingItems<UiModel>)
+                ListContentType.Commons -> FileUsagesListContent(
+                    pagingItems as LazyPagingItems<FileUsagesResponse.FileUsage>,
+                    state
+                )
+
+                ListContentType.OtherWikis -> GlobalUsagesListContent(
+                    pagingItems as LazyPagingItems<UiModel>,
+                    state
+                )
             }
         }
 
@@ -238,6 +256,11 @@ fun RefreshErrorItem(
         }
     }
 
+}
+
+enum class ListContentType(val navTitle: String) {
+    Commons(navTitle = "Commons"),
+    OtherWikis(navTitle = "Other Wikis")
 }
 
 sealed class UiModel {
