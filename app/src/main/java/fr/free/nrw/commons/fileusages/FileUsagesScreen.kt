@@ -1,6 +1,6 @@
 package fr.free.nrw.commons.fileusages
 
-import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -13,6 +13,7 @@ import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.MaterialTheme
@@ -28,8 +29,11 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
@@ -39,7 +43,6 @@ import fr.free.nrw.commons.fileusages.model.FileUsagesResponse
 import fr.free.nrw.commons.fileusages.model.NoContributionsError
 import kotlinx.coroutines.launch
 
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun FileUsagesScreen(modifier: Modifier = Modifier, viewModel: FileUsagesViewModel) {
     val fileUsagesLazyPagingItems =
@@ -122,23 +125,37 @@ fun FileUsagesScreen(modifier: Modifier = Modifier, viewModel: FileUsagesViewMod
 
 @Composable
 fun GlobalUsagesListContent(data: LazyPagingItems<UiModel>, state: LazyListState) {
+    val uriHandler = LocalUriHandler.current
     LazyColumn(state = state) {
         items(data) {
             it?.let { item ->
                 when (item) {
-                    is UiModel.HeaderModel -> ListItem(
-                        headlineContent = {
-                            Text(
-                                text = item.group,
-                                style = MaterialTheme.typography.titleMedium
+                    is UiModel.HeaderModel -> {
+                        Column {
+                            ListItem(
+                                headlineContent = {
+                                    Text(
+                                        text = item.group,
+                                        style = MaterialTheme.typography.titleMedium
+                                    )
+                                }
                             )
+                            HorizontalDivider()
                         }
-                    )
+                    }
 
-                    is UiModel.ItemModel -> ListItem(headlineContent = {
+                    is UiModel.ItemModel -> ListItem(leadingContent = {
+                        Text(text = "•", fontWeight = FontWeight.Bold)
+                    }, headlineContent = {
                         Text(
+                            modifier = Modifier.clickable {
+                                uriHandler.openUri(item.item.linkUrl)
+                            },
                             text = item.item.title,
-                            style = MaterialTheme.typography.bodyMedium
+                            style = MaterialTheme.typography.bodyMedium.copy(
+                                color = Color(0xFF5A6AEC),
+                                textDecoration = TextDecoration.Underline
+                            )
                         )
                     })
                 }
@@ -156,13 +173,25 @@ fun FileUsagesListContent(
     data: LazyPagingItems<FileUsagesResponse.FileUsage>,
     state: LazyListState
 ) {
+    val uriHandler = LocalUriHandler.current
     LazyColumn(state = state) {
         items(data) {
             it?.let { item ->
                 ListItem(leadingContent = {
-                    Text(text = "*")
+                    Text(text = "•", fontWeight = FontWeight.Bold)
                 }, headlineContent = {
-                    Text(text = item.title)
+                    Text(
+                        modifier = Modifier.clickable {
+                            //TODO: see if API can give us the link
+                            val link = "https://commons.wikimedia.org/wiki/${item.title}"
+                            uriHandler.openUri(link)
+                        },
+                        text = item.title,
+                        style = MaterialTheme.typography.titleSmall.copy(
+                            color = Color(0xFF5A6AEC),
+                            textDecoration = TextDecoration.Underline
+                        )
+                    )
                 })
             }
         }
@@ -268,4 +297,4 @@ sealed class UiModel {
     data class ItemModel(val item: GlobalUsageItem) : UiModel()
 }
 
-data class GlobalUsageItem(val group: String, val title: String)
+data class GlobalUsageItem(val group: String, val title: String, val linkUrl: String)
