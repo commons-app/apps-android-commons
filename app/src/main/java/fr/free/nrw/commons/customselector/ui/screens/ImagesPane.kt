@@ -257,7 +257,7 @@ fun Modifier.imageGridDragHandler(
     autoScrollThreshold: Float,
     setSelectedImageIds: (Set<Long>) -> Unit,
     setAutoScrollSpeed: (Float) -> Unit,
-) = pointerInput(autoScrollThreshold, setAutoScrollSpeed, setSelectedImageIds, imageList) {
+) = pointerInput(autoScrollThreshold, setAutoScrollSpeed, imageList) {
 
     fun imageIndexAtOffset(hitPoint: Offset): Int? =
         gridState.layoutInfo.visibleItemsInfo.find { itemInfo ->
