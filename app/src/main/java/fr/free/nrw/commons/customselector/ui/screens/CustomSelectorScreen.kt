@@ -63,6 +63,7 @@ fun CustomSelectorScreen(
     uiState: CustomSelectorState,
     onEvent: (CustomSelectorEvent)-> Unit,
     selectedImageIds: ()-> Set<Long>,
+    onViewImage: (id: Long)-> Unit,
     hasPartialAccess: Boolean = false
 ) {
     val adaptiveInfo = currentWindowAdaptiveInfo()
@@ -96,6 +97,7 @@ fun CustomSelectorScreen(
                         selectedFolder = folder,
                         selectedImages = selectedImageIds,
                         onNavigateBack = { navigator.navigateBack() },
+                        onViewImage = onViewImage,
                         onEvent = onEvent,
                         adaptiveInfo = adaptiveInfo,
                         hasPartialAccess = hasPartialAccess
@@ -264,6 +266,7 @@ private fun CustomSelectorScreenPreview() {
     CommonsTheme {
         CustomSelectorScreen(
             uiState = CustomSelectorState(),
+            onViewImage = { },
             onEvent = { },
             selectedImageIds = { emptySet() },
             hasPartialAccess = true

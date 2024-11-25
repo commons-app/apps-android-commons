@@ -68,6 +68,7 @@ fun ImagesPane(
     selectedFolder: Folder,
     selectedImages: () -> Set<Long>,
     onNavigateBack: () -> Unit,
+    onViewImage: (id: Long)-> Unit,
     onEvent: (CustomSelectorEvent) -> Unit,
     adaptiveInfo: WindowAdaptiveInfo,
     hasPartialAccess: Boolean = false
@@ -128,7 +129,7 @@ fun ImagesPane(
             }
 
             LazyVerticalGrid(
-                columns = GridCells.Adaptive(116.dp),
+                columns = GridCells.Adaptive(96.dp),
                 modifier = Modifier
                     .fillMaxSize()
                     .imageGridDragHandler(
@@ -159,6 +160,8 @@ fun ImagesPane(
                             onClick = {
                                 if (uiState.inSelectionMode) {
                                     onEvent(CustomSelectorEvent.OnImageSelection(image.id))
+                                } else {
+                                    onViewImage(image.id)
                                 }
                             },
                             onLongClick = {

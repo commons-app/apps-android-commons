@@ -6,6 +6,7 @@ import android.app.Dialog
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.view.View
@@ -14,6 +15,9 @@ import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -22,6 +26,9 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.customselector.data.MediaReader
 import fr.free.nrw.commons.customselector.database.NotForUploadStatus
@@ -31,10 +38,10 @@ import fr.free.nrw.commons.customselector.listeners.FolderClickListener
 import fr.free.nrw.commons.customselector.listeners.ImageSelectListener
 import fr.free.nrw.commons.customselector.model.Image
 import fr.free.nrw.commons.customselector.ui.screens.CustomSelectorScreen
+import fr.free.nrw.commons.customselector.ui.screens.ViewImageScreen
 import fr.free.nrw.commons.databinding.ActivityCustomSelectorBinding
 import fr.free.nrw.commons.databinding.CustomSelectorBottomLayoutBinding
 import fr.free.nrw.commons.databinding.CustomSelectorToolbarBinding
-import fr.free.nrw.commons.filepicker.Constants
 import fr.free.nrw.commons.media.ZoomableActivity
 import fr.free.nrw.commons.theme.BaseActivity
 import fr.free.nrw.commons.ui.theme.CommonsTheme
@@ -129,7 +136,7 @@ class CustomSelectorActivity :
 
     private var showPartialAccessIndicator by mutableStateOf(false)
 
-    private val startForResult = registerForActivityResult(StartActivityForResult()){ result ->
+    private val startForResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){ result ->
         onFullScreenDataReceived(result)
     }
 
@@ -137,6 +144,7 @@ class CustomSelectorActivity :
      * onCreate Activity, sets theme, initialises the view model, setup view.
      */
     override fun onCreate(savedInstanceState: Bundle?) {
+        enableEdgeToEdge()
         super.onCreate(savedInstanceState)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE &&
             ContextCompat.checkSelfPermission(
@@ -182,12 +190,30 @@ class CustomSelectorActivity :
             val uiState by csViewModel.uiState.collectAsStateWithLifecycle()
 
             CommonsTheme {
-                CustomSelectorScreen(
-                    uiState = uiState,
-                    onEvent = csViewModel::onEvent,
-                    selectedImageIds = { uiState.selectedImageIds },
-                    hasPartialAccess = showPartialAccessIndicator
-                )
+                val navController = rememberNavController()
+
+                NavHost(navController = navController, startDestination = "main") {
+                    composable(route = "main") {
+                        CustomSelectorScreen(
+                            uiState = uiState,
+                            onEvent = csViewModel::onEvent,
+                            onViewImage = { navController.navigate("view_image/$it") },
+                            selectedImageIds = { uiState.selectedImageIds },
+                            hasPartialAccess = showPartialAccessIndicator
+                        )
+                    }
+
+                    composable(route = "view_image/{imageId}") { backStackEntry->
+                        val imageId = backStackEntry.arguments?.getString("imageId")?.toLongOrNull()
+                        val imageUri = uiState.filteredImages.find { it.id == imageId }?.uri ?: Uri.EMPTY
+                        val imageIndex = uiState.filteredImages.indexOfFirst { it.id == imageId }
+
+                        ViewImageScreen(
+                            currentImageIndex = imageIndex,
+                            imageList = uiState.filteredImages
+                        )
+                    }
+                }
             }
         }
 
