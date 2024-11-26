@@ -150,6 +150,7 @@ fun FoldersPane(
                             /*TODO("Implement action to mark/unmark images as not for upload")*/
                         },
                         modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)
+                            .navigationBarsPadding()
                     )
                 }
             }

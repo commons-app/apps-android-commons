@@ -117,6 +117,7 @@ fun ImagesPane(
                         onPrimaryAction = { /*TODO("Implement action to upload selected images")*/ },
                         onSecondaryAction = { /*TODO("Implement action to mark/unmark as not for upload")*/ },
                         modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)
+                            .navigationBarsPadding()
                     )
                 }
             }
