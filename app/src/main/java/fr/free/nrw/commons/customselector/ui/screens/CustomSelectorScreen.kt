@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.widthIn
@@ -85,7 +86,8 @@ fun CustomSelectorScreen(
                         navigator.navigateTo(ListDetailPaneScaffoldRole.Detail, it)
                     },
                     hasPartialAccess = hasPartialAccess,
-                    adaptiveInfo = adaptiveInfo
+                    adaptiveInfo = adaptiveInfo,
+                    onUnselectAll = { onEvent(CustomSelectorEvent.OnUnselectAll) }
                 )
             }
         },
@@ -112,6 +114,7 @@ fun CustomSelectorScreen(
 fun FoldersPane(
     uiState: CustomSelectorState,
     onFolderClick: (Folder)-> Unit,
+    onUnselectAll: ()-> Unit,
     adaptiveInfo: WindowAdaptiveInfo,
     hasPartialAccess: Boolean = false
 ) {
@@ -129,6 +132,7 @@ fun FoldersPane(
                     showAlertIcon = uiState.selectedImageIds.size > 20 && isCompatWidth,
                     selectionCount = uiState.selectedImageIds.size,
                     onAlertAction = { },
+                    onUnselectAllAction = onUnselectAll,
                     showSelectionCount = uiState.inSelectionMode && isCompatWidth
                 )
             }

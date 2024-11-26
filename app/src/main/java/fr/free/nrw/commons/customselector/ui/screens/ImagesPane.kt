@@ -16,6 +16,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.grid.GridCells
@@ -101,7 +102,8 @@ fun ImagesPane(
                 showNavigationIcon = isCompatWidth,
                 showAlertIcon = selectedImages().size > 20,
                 selectionCount = selectedImages().size,
-                showSelectionCount = uiState.inSelectionMode
+                showSelectionCount = uiState.inSelectionMode,
+                onUnselectAllAction = { onEvent(CustomSelectorEvent.OnUnselectAll) }
             )
         },
         bottomBar = {

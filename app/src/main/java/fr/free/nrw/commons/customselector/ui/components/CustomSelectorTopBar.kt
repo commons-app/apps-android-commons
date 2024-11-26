@@ -1,11 +1,15 @@
 package fr.free.nrw.commons.customselector.ui.components
 
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.KeyboardArrowLeft
+import androidx.compose.material.icons.filled.Close
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -16,6 +20,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.semantics.contentDescription
@@ -39,6 +44,7 @@ fun CustomSelectorTopBar(
     showSelectionCount: Boolean = false,
     showAlertIcon: Boolean = false,
     onAlertAction: ()-> Unit = { },
+    onUnselectAllAction: ()-> Unit = { }
 ) {
     TopAppBar(
         title = {
@@ -86,15 +92,27 @@ fun CustomSelectorTopBar(
                     colors = CardDefaults.elevatedCardColors(
                         containerColor = MaterialTheme.colorScheme.primary
                     ),
+                    elevation = CardDefaults.elevatedCardElevation(8.dp),
                     shape = CircleShape,
                     modifier = Modifier.semantics { contentDescription = "$selectionCount Selected" }
                         .padding(end = 8.dp)
                 ) {
-                    Text(
-                        text = "$selectionCount",
-                        modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
-                        style = MaterialTheme.typography.labelMedium
-                    )
+                    Row(
+                        modifier = Modifier.padding(start = 16.dp, end = 8.dp),
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.spacedBy(8.dp)
+                    ) {
+                        Text(
+                            text = "$selectionCount",
+                            modifier = Modifier.padding(vertical = 8.dp)
+                        )
+
+                        Icon(
+                            imageVector = Icons.Default.Close,
+                            contentDescription = null,
+                            modifier = Modifier.clickable { onUnselectAllAction() }
+                        )
+                    }
                 }
             }
         }
@@ -111,7 +129,8 @@ private fun CustomSelectorTopBarPreview() {
                 secondaryText = "10 images",
                 onNavigateBack = { },
                 showAlertIcon = true,
-                selectionCount = 1
+                selectionCount = 2,
+                showSelectionCount = true
             )
         }
     }

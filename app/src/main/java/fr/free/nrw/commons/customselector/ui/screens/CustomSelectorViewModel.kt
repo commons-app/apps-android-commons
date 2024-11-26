@@ -57,7 +57,9 @@ class CustomSelectorViewModel(private val mediaReader: MediaReader): ViewModel()
                 _uiState.update { it.copy(selectedImageIds = e.imageIds) }
             }
 
-            else -> {}
+            CustomSelectorEvent.OnUnselectAll-> {
+                _uiState.update { it.copy(selectedImageIds = emptySet()) }
+            }
         }
     }
 }
