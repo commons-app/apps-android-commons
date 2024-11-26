@@ -11,7 +11,7 @@ import android.view.MotionEvent
 import android.view.View
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.R
-import fr.free.nrw.commons.auth.AccountUtil
+import fr.free.nrw.commons.auth.getUserName
 import fr.free.nrw.commons.databinding.ActivityReviewBinding
 import fr.free.nrw.commons.delete.DeleteHelper
 import fr.free.nrw.commons.media.MediaDetailFragment
@@ -183,7 +183,7 @@ class ReviewActivity : BaseActivity() {
         }
 
         //If The Media User and Current Session Username is same then Skip the Image
-        if (media.user == AccountUtil.getUserName(applicationContext)) {
+        if (media.user == getUserName(applicationContext)) {
             runRandomizer()
             return
         }

@@ -58,7 +58,7 @@ class WikiAccountAuthenticator(
     ) = bundleOf("test" to "getAuthToken")
 
     override fun getAuthTokenLabel(authTokenType: String) =
-        if (BuildConfig.ACCOUNT_TYPE == authTokenType) AccountUtil.AUTH_TOKEN_TYPE else null
+        if (BuildConfig.ACCOUNT_TYPE == authTokenType) AUTH_TOKEN_TYPE else null
 
     @Throws(NetworkErrorException::class)
     override fun updateCredentials(
