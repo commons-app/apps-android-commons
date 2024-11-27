@@ -12,7 +12,7 @@ import com.google.gson.JsonParser;
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.campaigns.CampaignResponseDTO;
 import fr.free.nrw.commons.explore.depictions.DepictsClient;
-import fr.free.nrw.commons.fileusages.CommonsFileUsagesResponse;
+import fr.free.nrw.commons.fileusages.FileUsagesResponse;
 import fr.free.nrw.commons.fileusages.GlobalFileUsagesResponse;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.nearby.Place;
@@ -128,7 +128,7 @@ public class OkHttpJsonApiClient {
     }
 
 
-    public Observable<CommonsFileUsagesResponse> getFileUsagesOnCommons(
+    public Observable<FileUsagesResponse> getFileUsagesOnCommons(
         String fileName,
         int pageSize
     ){
@@ -154,7 +154,7 @@ public class OkHttpJsonApiClient {
                     return null;
                 }
                 try {
-                    return gson.fromJson(json, CommonsFileUsagesResponse.class);
+                    return gson.fromJson(json, FileUsagesResponse.class);
                 } catch (Exception e) {
                     System.out.println("exception raised "+e.getMessage());
                     return null;

@@ -3,7 +3,7 @@ package fr.free.nrw.commons.fileusages
 import com.google.gson.annotations.SerializedName
 
 
-data class CommonsFileUsagesResponse(
+data class FileUsagesResponse(
     @SerializedName("continue") val continueResponse: CommonsContinue?,
     @SerializedName("batchcomplete") val batchComplete: Boolean,
     @SerializedName("query") val query: Query,
