@@ -414,7 +414,7 @@ public class MainActivity extends BaseActivity
                 return true;
             case R.id.notifications:
                 // Starts notification activity on click to notification icon
-                NotificationActivity.startYourself(this, "unread");
+                NotificationActivity.Companion.startYourself(this, "unread");
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

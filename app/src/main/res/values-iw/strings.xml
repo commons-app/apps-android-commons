@@ -149,6 +149,7 @@
   <string name="categories_search_text_hint">חיפוש קטגוריות</string>
   <string name="depicts_search_text_hint">חפשו פריטים שהמדיה שלך מציגה (הר, טאג\' מהאל, וכו\')</string>
   <string name="menu_save_categories">שמירה</string>
+  <string name="menu_overflow_desc">תפריט גלישה</string>
   <string name="refresh_button">רענון</string>
   <string name="display_list_button">רשימה</string>
   <string name="contributions_subtitle_zero">(לא הועלה עדיין שום דבר)</string>
@@ -821,6 +822,15 @@
   <string name="pending">ממתינות</string>
   <string name="failed">נכשלו</string>
   <string name="could_not_load_place_data">לא היה אפשר לטעון את נתוני המקום</string>
+  <string name="custom_selector_delete_folder">מחיקת תיקייה</string>
+  <string name="custom_selector_confirm_deletion_title">אישור מחיקה</string>
+  <string name="custom_selector_confirm_deletion_message">למחוק את התיקייה %1$s על כל %2$d פריטיה?</string>
+  <string name="custom_selector_delete">מחיקה</string>
+  <string name="custom_selector_cancel">ביטול</string>
+  <string name="custom_selector_folder_deleted_success">התיקייה %1$s נמחקה</string>
+  <string name="custom_selector_folder_deleted_failure">מחיקת התיקייה %1$s נכשלה</string>
+  <string name="custom_selector_error_trashing_folder_contents">שגיאה בהעברת תוכן התיקייה לאשפה: %1$s</string>
+  <string name="custom_selector_folder_not_found_error">נכשל אחזור נתיב התיקייה למזהה ההקבצה: %1$d</string>
   <string name="red_pin">אין עדיין תמונה למקום הזה, אפשר פשוט לצלם אחת!</string>
   <string name="green_pin">למקום הזה כבר יש תמונה.</string>
   <string name="grey_pin">עכשיו מתבצעת בדיקה האם למקום הזה יש תמונה.</string>

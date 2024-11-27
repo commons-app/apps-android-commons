@@ -289,7 +289,7 @@ public class ContributionsFragment
             });
         }
         notification.setOnClickListener(view -> {
-            NotificationActivity.startYourself(getContext(), "unread");
+            NotificationActivity.Companion.startYourself(getContext(), "unread");
         });
     }
 
