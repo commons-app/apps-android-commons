@@ -20,19 +20,6 @@ import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult
-import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedCard
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
-import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -698,23 +685,6 @@ class CustomSelectorActivity :
         data.putParcelableArrayListExtra("Images", images)
         setResult(Activity.RESULT_OK, data)
         finish()
-    }
-
-    /**
-     * Back pressed.
-     * Change toolbar title.
-     */
-    override fun onBackPressed() {
-        super.onBackPressed()
-        val fragment = supportFragmentManager.findFragmentById(R.id.fragment_container)
-        if (fragment != null && fragment is FolderFragment) {
-            isImageFragmentOpen = false
-            changeTitle(getString(R.string.custom_selector_title), 0)
-        }
-
-        //hide overflow menu when not in folder
-        showOverflowMenu = false
-        setUpToolbar()
     }
 
     /**
