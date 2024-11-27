@@ -44,8 +44,6 @@ class MoreBottomSheetFragment : BottomSheetDialogFragment() {
     @Inject
     lateinit var commonsLogSender: CommonsLogSender
 
-    private lateinit var moreProfile: TextView
-
     @Inject
     @field: Named("default_preferences")
     lateinit var store: JsonKvStore
@@ -59,19 +57,20 @@ class MoreBottomSheetFragment : BottomSheetDialogFragment() {
             "https://github.com/commons-app/apps-android-commons/issues"
     }
 
+    private var binding: FragmentMoreBottomSheetBinding? = null
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val binding = FragmentMoreBottomSheetBinding.inflate(inflater, container, false)
-        moreProfile = binding.moreProfile
+        binding = FragmentMoreBottomSheetBinding.inflate(inflater, container, false)
 
         if (store.getBoolean(CommonsApplication.IS_LIMITED_CONNECTION_MODE_ENABLED)) {
-            binding.morePeerReview.visibility = View.GONE
+            binding?.morePeerReview?.visibility = View.GONE
         }
 
-        binding.apply {
+        binding?.apply {
             moreLogout.setOnClickListener { onLogoutClicked() }
             moreFeedback.setOnClickListener { onFeedbackClicked() }
             moreAbout.setOnClickListener { onAboutClicked() }
@@ -83,7 +82,7 @@ class MoreBottomSheetFragment : BottomSheetDialogFragment() {
         }
 
         setUserName()
-        return binding.root
+        return binding?.root
     }
 
     private fun onFeedbackGithubClicked() {
@@ -101,13 +100,18 @@ class MoreBottomSheetFragment : BottomSheetDialogFragment() {
             .inject(this)
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding = null
+    }
+
     /**
      * Set the username and user achievements level (if available) in navigationHeader.
      */
     private fun setUserName() {
         val store = BasicKvStore(requireContext(), getUserName())
         val level = store.getString("userAchievementsLevel", "0")
-        moreProfile.text = if (level == "0") {
+        binding?.moreProfile?.text = if (level == "0") {
             "${getUserName()} (${getString(R.string.see_your_achievements)})"
         } else {
             "${getUserName()} (${getString(R.string.level)} $level)"
