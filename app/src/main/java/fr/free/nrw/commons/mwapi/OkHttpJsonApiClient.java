@@ -128,13 +128,16 @@ public class OkHttpJsonApiClient {
     }
 
 
-    public Observable<CommonsFileUsagesResponse> getFileUsagesOnCommons(String fileName){
+    public Observable<CommonsFileUsagesResponse> getFileUsagesOnCommons(
+        String fileName,
+        int pageSize
+    ){
 
         HttpUrl.Builder urlBuilder = HttpUrl.parse(BuildConfig.FILE_USAGES_BASE_URL).newBuilder();
         urlBuilder.addQueryParameter("prop", "fileusage");
         urlBuilder.addQueryParameter("titles", fileName);
         //TODO[Parry] might need pagination
-        urlBuilder.addQueryParameter("fulimit", "max");
+        urlBuilder.addQueryParameter("fulimit", String.valueOf(pageSize));
 
         Timber.i("Url %s", urlBuilder.toString());
         System.out.println(urlBuilder.build());
@@ -162,13 +165,16 @@ public class OkHttpJsonApiClient {
         });
     }
 
-    public Observable<GlobalFileUsagesResponse> getGlobalFileUsages(String fileName){
+    public Observable<GlobalFileUsagesResponse> getGlobalFileUsages(
+        String fileName,
+        int pageSize
+    ){
 
         HttpUrl.Builder urlBuilder = HttpUrl.parse(BuildConfig.FILE_USAGES_BASE_URL).newBuilder();
         urlBuilder.addQueryParameter("prop", "globalusage");
         urlBuilder.addQueryParameter("titles", fileName);
         //TODO[Parry] might need pagination
-        urlBuilder.addQueryParameter("gulimit", "max");
+        urlBuilder.addQueryParameter("gulimit", String.valueOf(pageSize));
 
         Timber.i("Url %s", urlBuilder.toString());
         System.out.println(urlBuilder.build());
