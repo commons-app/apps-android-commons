@@ -1,40 +1,46 @@
-package fr.free.nrw.commons.navtab;
+package fr.free.nrw.commons.navtab
 
-import android.content.Context;
-import android.util.AttributeSet;
-import android.view.Menu;
+import android.content.Context
+import android.util.AttributeSet
+import android.view.Menu
 
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-import fr.free.nrw.commons.contributions.MainActivity;
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import fr.free.nrw.commons.contributions.MainActivity
 
 
-public class NavTabLayout extends BottomNavigationView {
+class NavTabLayout : BottomNavigationView {
 
-    public NavTabLayout(Context context) {
-        super(context);
-        setTabViews();
+    constructor(context: Context) : super(context) {
+        setTabViews()
     }
 
-    public NavTabLayout(Context context, AttributeSet attrs) {
-        super(context, attrs);
-        setTabViews();
+    constructor(
+        context: Context,
+        attrs: AttributeSet?
+    ) : super(context, attrs) {
+        setTabViews()
     }
 
-    public NavTabLayout(Context context, AttributeSet attrs, int defStyleAttr) {
-        super(context, attrs, defStyleAttr);
-        setTabViews();
+    constructor(
+        context: Context,
+        attrs: AttributeSet?,
+        defStyleAttr: Int
+    ) : super(context, attrs, defStyleAttr) {
+        setTabViews()
     }
 
-    private void setTabViews() {
-        if (((MainActivity) getContext()).applicationKvStore.getBoolean("login_skipped") == true) {
-            for (int i = 0; i < NavTabLoggedOut.size(); i++) {
-                NavTabLoggedOut navTab = NavTabLoggedOut.of(i);
-                getMenu().add(Menu.NONE, i, i, navTab.text()).setIcon(navTab.icon());
+    private fun setTabViews() {
+        val isLoginSkipped = (context as MainActivity)
+            .applicationKvStore.getBoolean("login_skipped")
+        if (isLoginSkipped) {
+            for (i in 0 until NavTabLoggedOut.size()) {
+                val navTab = NavTabLoggedOut.of(i)
+                menu.add(Menu.NONE, i, i, navTab.text()).setIcon(navTab.icon())
             }
         } else {
-            for (int i = 0; i < NavTab.size(); i++) {
-                NavTab navTab = NavTab.of(i);
-                getMenu().add(Menu.NONE, i, i, navTab.text()).setIcon(navTab.icon());
+            for (i in 0 until NavTab.size()) {
+                val navTab = NavTab.of(i)
+                menu.add(Menu.NONE, i, i, navTab.text()).setIcon(navTab.icon())
             }
         }
     }

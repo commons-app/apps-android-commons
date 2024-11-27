@@ -1,238 +1,238 @@
-package fr.free.nrw.commons.navtab;
+package fr.free.nrw.commons.navtab
 
-import android.accounts.Account;
-import android.accounts.AccountManager;
-import android.content.ActivityNotFoundException;
-import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
-import android.widget.Toast;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
-import fr.free.nrw.commons.AboutActivity;
-import fr.free.nrw.commons.BuildConfig;
-import fr.free.nrw.commons.CommonsApplication;
-import fr.free.nrw.commons.CommonsApplication.ActivityLogoutListener;
-import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.WelcomeActivity;
-import fr.free.nrw.commons.actions.PageEditClient;
-import fr.free.nrw.commons.databinding.FragmentMoreBottomSheetBinding;
-import fr.free.nrw.commons.di.ApplicationlessInjection;
-import fr.free.nrw.commons.feedback.FeedbackContentCreator;
-import fr.free.nrw.commons.feedback.model.Feedback;
-import fr.free.nrw.commons.feedback.FeedbackDialog;
-import fr.free.nrw.commons.kvstore.BasicKvStore;
-import fr.free.nrw.commons.kvstore.JsonKvStore;
-import fr.free.nrw.commons.logging.CommonsLogSender;
-import fr.free.nrw.commons.profile.ProfileActivity;
-import fr.free.nrw.commons.review.ReviewActivity;
-import fr.free.nrw.commons.settings.SettingsActivity;
-import io.reactivex.Single;
-import io.reactivex.SingleSource;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
-import java.util.concurrent.Callable;
-import javax.inject.Inject;
-import javax.inject.Named;
+import android.accounts.AccountManager
+import android.annotation.SuppressLint
+import android.content.ActivityNotFoundException
+import android.content.Context
+import android.content.Intent
+import android.net.Uri
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.TextView
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import fr.free.nrw.commons.AboutActivity
+import fr.free.nrw.commons.BuildConfig
+import fr.free.nrw.commons.CommonsApplication
+import fr.free.nrw.commons.CommonsApplication.ActivityLogoutListener
+import fr.free.nrw.commons.R
+import fr.free.nrw.commons.WelcomeActivity
+import fr.free.nrw.commons.actions.PageEditClient
+import fr.free.nrw.commons.databinding.FragmentMoreBottomSheetBinding
+import fr.free.nrw.commons.di.ApplicationlessInjection
+import fr.free.nrw.commons.feedback.FeedbackContentCreator
+import fr.free.nrw.commons.feedback.FeedbackDialog
+import fr.free.nrw.commons.feedback.model.Feedback
+import fr.free.nrw.commons.kvstore.BasicKvStore
+import fr.free.nrw.commons.kvstore.JsonKvStore
+import fr.free.nrw.commons.logging.CommonsLogSender
+import fr.free.nrw.commons.profile.ProfileActivity
+import fr.free.nrw.commons.review.ReviewActivity
+import fr.free.nrw.commons.settings.SettingsActivity
+import io.reactivex.Single
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
+import javax.inject.Inject
+import javax.inject.Named
 
-public class MoreBottomSheetFragment extends BottomSheetDialogFragment {
+
+class MoreBottomSheetFragment : BottomSheetDialogFragment() {
 
     @Inject
-    CommonsLogSender commonsLogSender;
+    lateinit var commonsLogSender: CommonsLogSender
 
-    private TextView moreProfile;
-
-    @Inject @Named("default_preferences")
-    JsonKvStore store;
+    private lateinit var moreProfile: TextView
 
     @Inject
-    @Named("commons-page-edit")
-    PageEditClient pageEditClient;
+    @field: Named("default_preferences")
+    lateinit var store: JsonKvStore
 
-    private static final String GITHUB_ISSUES_URL = "https://github.com/commons-app/apps-android-commons/issues";
-    @Nullable
-    @Override
-    public View onCreateView(@NonNull final LayoutInflater inflater,
-        @Nullable final ViewGroup container, @Nullable final Bundle savedInstanceState) {
-        super.onCreateView(inflater, container, savedInstanceState);
-        final @NonNull FragmentMoreBottomSheetBinding binding =
-            FragmentMoreBottomSheetBinding.inflate(inflater, container, false);
-        moreProfile = binding.moreProfile;
+    @Inject
+    @field: Named("commons-page-edit")
+    lateinit var pageEditClient: PageEditClient
 
-        if(store.getBoolean(CommonsApplication.IS_LIMITED_CONNECTION_MODE_ENABLED)){
-            binding.morePeerReview.setVisibility(View.GONE);
+    companion object {
+        private const val GITHUB_ISSUES_URL =
+            "https://github.com/commons-app/apps-android-commons/issues"
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        val binding = FragmentMoreBottomSheetBinding.inflate(inflater, container, false)
+        moreProfile = binding.moreProfile
+
+        if (store.getBoolean(CommonsApplication.IS_LIMITED_CONNECTION_MODE_ENABLED)) {
+            binding.morePeerReview.visibility = View.GONE
         }
 
-        binding.moreLogout.setOnClickListener(v -> onLogoutClicked());
-        binding.moreFeedback.setOnClickListener(v -> onFeedbackClicked());
-        binding.moreAbout.setOnClickListener(v -> onAboutClicked());
-        binding.moreTutorial.setOnClickListener(v -> onTutorialClicked());
-        binding.moreSettings.setOnClickListener(v -> onSettingsClicked());
-        binding.moreProfile.setOnClickListener(v -> onProfileClicked());
-        binding.morePeerReview.setOnClickListener(v -> onPeerReviewClicked());
-        binding.moreFeedbackGithub.setOnClickListener(v -> onFeedbackGithubClicked());
+        binding.apply {
+            moreLogout.setOnClickListener { onLogoutClicked() }
+            moreFeedback.setOnClickListener { onFeedbackClicked() }
+            moreAbout.setOnClickListener { onAboutClicked() }
+            moreTutorial.setOnClickListener { onTutorialClicked() }
+            moreSettings.setOnClickListener { onSettingsClicked() }
+            moreProfile.setOnClickListener { onProfileClicked() }
+            morePeerReview.setOnClickListener { onPeerReviewClicked() }
+            moreFeedbackGithub.setOnClickListener { onFeedbackGithubClicked() }
+        }
 
-        setUserName();
-        return binding.getRoot();
+        setUserName()
+        return binding.root
     }
 
-    private void onFeedbackGithubClicked() {
-        final Intent intent;
-        intent = new Intent(Intent.ACTION_VIEW);
-        intent.setData(Uri.parse(GITHUB_ISSUES_URL));
-        startActivity(intent);
+    private fun onFeedbackGithubClicked() {
+        val intent = Intent(Intent.ACTION_VIEW).apply {
+            data = Uri.parse(GITHUB_ISSUES_URL)
+        }
+        startActivity(intent)
     }
 
-    @Override
-    public void onAttach(@NonNull final Context context) {
-        super.onAttach(context);
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
         ApplicationlessInjection
-            .getInstance(requireActivity().getApplicationContext())
-            .getCommonsApplicationComponent()
-            .inject(this);
+            .getInstance(requireActivity().applicationContext)
+            .commonsApplicationComponent
+            .inject(this)
     }
 
     /**
      * Set the username and user achievements level (if available) in navigationHeader.
      */
-    private void setUserName() {
-        BasicKvStore store = new BasicKvStore(this.getContext(), getUserName());
-        String level = store.getString("userAchievementsLevel","0");
-        if (level.equals("0")) {
-            moreProfile.setText(getUserName() + " (" + getString(R.string.see_your_achievements) + ")");
-        }
-        else {
-            moreProfile.setText(getUserName() + " (" + getString(R.string.level) + " " + level + ")");
+    private fun setUserName() {
+        val store = BasicKvStore(requireContext(), getUserName())
+        val level = store.getString("userAchievementsLevel", "0")
+        moreProfile.text = if (level == "0") {
+            "${getUserName()} (${getString(R.string.see_your_achievements)})"
+        } else {
+            "${getUserName()} (${getString(R.string.level)} $level)"
         }
     }
 
-    private String getUserName(){
-        final AccountManager accountManager = AccountManager.get(getActivity());
-        final Account[] allAccounts = accountManager.getAccountsByType(BuildConfig.ACCOUNT_TYPE);
-        if (allAccounts.length != 0) {
-            return allAccounts[0].name;
+    private fun getUserName(): String {
+        val accountManager = AccountManager.get(requireActivity())
+        val allAccounts = accountManager.getAccountsByType(BuildConfig.ACCOUNT_TYPE)
+        return if (allAccounts.isNotEmpty()) {
+            allAccounts[0].name
+        } else {
+            ""
         }
-        return "";
     }
 
-
-    protected void onLogoutClicked() {
-        new AlertDialog.Builder(requireActivity())
+    fun onLogoutClicked() {
+        AlertDialog.Builder(requireActivity())
             .setMessage(R.string.logout_verification)
             .setCancelable(false)
-            .setPositiveButton(R.string.yes, (dialog, which) -> {
-                final CommonsApplication app = (CommonsApplication)
-                    requireContext().getApplicationContext();
-                app.clearApplicationData(requireContext(), new ActivityLogoutListener(requireActivity(), getContext()));
-            })
-            .setNegativeButton(R.string.no, (dialog, which) -> dialog.cancel())
-            .show();
+            .setPositiveButton(R.string.yes) { _, _ ->
+                val app = requireContext().applicationContext as CommonsApplication
+                app.clearApplicationData(requireContext(), ActivityLogoutListener(requireActivity(), requireContext()))
+            }
+            .setNegativeButton(R.string.no) { dialog, _ -> dialog.cancel() }
+            .show()
     }
 
-    protected void onFeedbackClicked() {
-        showFeedbackDialog();
+    fun onFeedbackClicked() {
+        showFeedbackDialog()
     }
 
     /**
      * Creates and shows a dialog asking feedback from users
      */
-    private void showFeedbackDialog() {
-        new FeedbackDialog(getContext(), this::uploadFeedback).show();
+    private fun showFeedbackDialog() {
+        FeedbackDialog(requireContext()) { uploadFeedback(it) }.show()
     }
 
     /**
-     * uploads feedback data on the server
+     * Uploads feedback data on the server
      */
-    void uploadFeedback(final Feedback feedback) {
-        final FeedbackContentCreator feedbackContentCreator = new FeedbackContentCreator(getContext(), feedback);
+    @SuppressLint("CheckResult")
+    fun uploadFeedback(feedback: Feedback) {
+        val feedbackContentCreator = FeedbackContentCreator(requireContext(), feedback)
 
-        final Single<Boolean> single =
-            pageEditClient.createNewSection(
-                    "Commons:Mobile_app/Feedback",
-                    feedbackContentCreator.getSectionTitle(),
-                    feedbackContentCreator.getSectionText(),
-                    "New feedback on version " + feedback.getVersion() + " of the app"
-                )
-                .flatMapSingle(Single::just)
-                .firstOrError();
+        val single = pageEditClient.createNewSection(
+            "Commons:Mobile_app/Feedback",
+            feedbackContentCreator.sectionTitle,
+            feedbackContentCreator.sectionText,
+            "New feedback on version ${feedback.version} of the app"
+        )
+            .flatMapSingle { Single.just(it) }
+            .firstOrError()
 
-        Single.defer((Callable<SingleSource<Boolean>>) () -> single)
+        Single.defer { single }
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(aBoolean -> {
-                if (aBoolean) {
-                    Toast.makeText(getContext(), getString(R.string.thanks_feedback), Toast.LENGTH_SHORT)
-                        .show();
+            .subscribe { success ->
+                val messageResId = if (success) {
+                    R.string.thanks_feedback
                 } else {
-                    Toast.makeText(getContext(), getString(R.string.error_feedback),
-                        Toast.LENGTH_SHORT).show();
+                    R.string.error_feedback
                 }
-            });
+                Toast.makeText(requireContext(), getString(messageResId), Toast.LENGTH_SHORT).show()
+            }
     }
 
     /**
      * This method shows the alert dialog when a user wants to send feedback about the app.
      */
-    private void showAlertDialog() {
-        new AlertDialog.Builder(requireActivity())
+    private fun showAlertDialog() {
+        AlertDialog.Builder(requireActivity())
             .setMessage(R.string.feedback_sharing_data_alert)
             .setCancelable(false)
-            .setPositiveButton(R.string.ok, (dialog, which) -> sendFeedback())
-            .show();
+            .setPositiveButton(R.string.ok) { _, _ -> sendFeedback() }
+            .show()
     }
 
     /**
      * This method collects the feedback message and starts the activity with implicit intent
-     * to available email client.
+     * to the available email client.
      */
-    private void sendFeedback() {
-        final String technicalInfo = commonsLogSender.getExtraInfo();
+    @SuppressLint("IntentReset")
+    private fun sendFeedback() {
+        val technicalInfo = commonsLogSender.getExtraInfo()
 
-        final Intent feedbackIntent = new Intent(Intent.ACTION_SENDTO);
-        feedbackIntent.setType("message/rfc822");
-        feedbackIntent.setData(Uri.parse("mailto:"));
-        feedbackIntent.putExtra(Intent.EXTRA_EMAIL,
-            new String[]{CommonsApplication.FEEDBACK_EMAIL});
-        feedbackIntent.putExtra(Intent.EXTRA_SUBJECT,
-            CommonsApplication.FEEDBACK_EMAIL_SUBJECT);
-        feedbackIntent.putExtra(Intent.EXTRA_TEXT, String.format(
-            "\n\n%s\n%s", CommonsApplication.FEEDBACK_EMAIL_TEMPLATE_HEADER, technicalInfo));
+        val feedbackIntent = Intent(Intent.ACTION_SENDTO).apply {
+            type = "message/rfc822"
+            data = Uri.parse("mailto:")
+            putExtra(Intent.EXTRA_EMAIL, arrayOf(CommonsApplication.FEEDBACK_EMAIL))
+            putExtra(Intent.EXTRA_SUBJECT, CommonsApplication.FEEDBACK_EMAIL_SUBJECT)
+            putExtra(Intent.EXTRA_TEXT, "\n\n${CommonsApplication.FEEDBACK_EMAIL_TEMPLATE_HEADER}\n$technicalInfo")
+        }
+
         try {
-            startActivity(feedbackIntent);
-        } catch (final ActivityNotFoundException e) {
-            Toast.makeText(getActivity(), R.string.no_email_client, Toast.LENGTH_SHORT).show();
+            startActivity(feedbackIntent)
+        } catch (e: ActivityNotFoundException) {
+            Toast.makeText(activity, R.string.no_email_client, Toast.LENGTH_SHORT).show()
         }
     }
 
-    protected void onAboutClicked() {
-        final Intent intent = new Intent(getActivity(), AboutActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-        requireActivity().startActivity(intent);
+    fun onAboutClicked() {
+        val intent = Intent(activity, AboutActivity::class.java).apply {
+            addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT or Intent.FLAG_ACTIVITY_SINGLE_TOP)
+        }
+        requireActivity().startActivity(intent)
     }
 
-    protected void onTutorialClicked() {
-        WelcomeActivity.startYourself(getActivity());
+    fun onTutorialClicked() {
+        WelcomeActivity.startYourself(requireActivity())
     }
 
-    protected void onSettingsClicked() {
-        final Intent intent = new Intent(getActivity(), SettingsActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-        requireActivity().startActivity(intent);
+    fun onSettingsClicked() {
+        val intent = Intent(activity, SettingsActivity::class.java).apply {
+            addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT or Intent.FLAG_ACTIVITY_SINGLE_TOP)
+        }
+        requireActivity().startActivity(intent)
     }
 
-    protected void onProfileClicked() {
-        ProfileActivity.startYourself(getActivity(), getUserName(), false);
+    fun onProfileClicked() {
+        ProfileActivity.startYourself(requireActivity(), getUserName(), false)
     }
 
-    protected void onPeerReviewClicked() {
-        ReviewActivity.Companion.startYourself(getActivity(), getString(R.string.title_activity_review));
+    fun onPeerReviewClicked() {
+        ReviewActivity.startYourself(requireActivity(), getString(R.string.title_activity_review))
     }
 }
-

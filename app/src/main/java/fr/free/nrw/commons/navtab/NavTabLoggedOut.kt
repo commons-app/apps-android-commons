@@ -1,79 +1,65 @@
-package fr.free.nrw.commons.navtab;
+package fr.free.nrw.commons.navtab
 
-import androidx.annotation.DrawableRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.StringRes;
-import androidx.fragment.app.Fragment;
-import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.bookmarks.BookmarkFragment;
-import fr.free.nrw.commons.explore.ExploreFragment;
-import fr.free.nrw.commons.wikidata.model.EnumCode;
-import fr.free.nrw.commons.wikidata.model.EnumCodeMap;
+import androidx.annotation.DrawableRes
+import androidx.annotation.StringRes
+import androidx.fragment.app.Fragment
+import fr.free.nrw.commons.R
+import fr.free.nrw.commons.bookmarks.BookmarkFragment
+import fr.free.nrw.commons.explore.ExploreFragment
+import fr.free.nrw.commons.wikidata.model.EnumCode
+import fr.free.nrw.commons.wikidata.model.EnumCodeMap
 
 
-public enum NavTabLoggedOut implements EnumCode {
+enum class NavTabLoggedOut(
+    @StringRes private val text: Int,
+    @DrawableRes private val icon: Int
+) : EnumCode {
 
     EXPLORE(R.string.navigation_item_explore, R.drawable.ic_globe) {
-        @NonNull
-        @Override
-        public Fragment newInstance() {
-            return ExploreFragment.newInstance();
+        override fun newInstance(): Fragment {
+            return ExploreFragment.newInstance()
         }
     },
     BOOKMARKS(R.string.bookmarks, R.drawable.ic_round_star_border_24px) {
-        @NonNull
-        @Override
-        public Fragment newInstance() {
-            return BookmarkFragment.newInstance();
+        override fun newInstance(): Fragment {
+            return BookmarkFragment.newInstance()
         }
     },
     MORE(R.string.more, R.drawable.ic_menu_black_24dp) {
-        @NonNull
-        @Override
-        public Fragment newInstance() {
-            return null;
+        override fun newInstance(): Fragment? {
+            return null
         }
     };
 
-    private static final EnumCodeMap<NavTabLoggedOut> MAP = new EnumCodeMap<>(
-        NavTabLoggedOut.class);
+    companion object {
+        private val MAP: EnumCodeMap<NavTabLoggedOut> = EnumCodeMap(NavTabLoggedOut::class.java)
 
-    @StringRes
-    private final int text;
-    @DrawableRes
-    private final int icon;
+        @JvmStatic
+        fun of(code: Int): NavTabLoggedOut {
+            return MAP[code]
+        }
 
-    @NonNull
-    public static NavTabLoggedOut of(int code) {
-        return MAP.get(code);
-    }
-
-    public static int size() {
-        return MAP.size();
+        @JvmStatic
+        fun size(): Int {
+            return MAP.size()
+        }
     }
 
     @StringRes
-    public int text() {
-        return text;
+    fun text(): Int {
+        return text
     }
 
     @DrawableRes
-    public int icon() {
-        return icon;
+    fun icon(): Int {
+        return icon
     }
 
-    @NonNull
-    public abstract Fragment newInstance();
+    abstract fun newInstance(): Fragment?
 
-    @Override
-    public int code() {
+    override fun code(): Int {
         // This enumeration is not marshalled so tying declaration order to presentation order is
         // convenient and consistent.
-        return ordinal();
-    }
-
-    NavTabLoggedOut(@StringRes int text, @DrawableRes int icon) {
-        this.text = text;
-        this.icon = icon;
+        return ordinal
     }
 }

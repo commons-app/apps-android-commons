@@ -1,38 +1,36 @@
-package fr.free.nrw.commons.navtab;
+package fr.free.nrw.commons.navtab
 
-import android.view.ViewGroup;
+import android.view.ViewGroup
 
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentPagerAdapter
 
-public class NavTabFragmentPagerAdapter extends FragmentPagerAdapter {
 
-    private Fragment currentFragment;
+class NavTabFragmentPagerAdapter(
+    mgr: FragmentManager
+) : FragmentPagerAdapter(mgr, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 
-    public NavTabFragmentPagerAdapter(FragmentManager mgr) {
-        super(mgr);
+    private var currentFragment: Fragment? = null
+
+    fun getCurrentFragment(): Fragment? {
+        return currentFragment
     }
 
-    @Nullable
-    public Fragment getCurrentFragment() {
-        return currentFragment;
+    override fun getItem(pos: Int): Fragment {
+        return NavTab.of(pos).newInstance()!!
     }
 
-    @Override
-    public Fragment getItem(int pos) {
-        return NavTab.of(pos).newInstance();
+    override fun getCount(): Int {
+        return NavTab.size()
     }
 
-    @Override
-    public int getCount() {
-        return NavTab.size();
-    }
-
-    @Override
-    public void setPrimaryItem(ViewGroup container, int position, Object object) {
-        currentFragment = ((Fragment) object);
-        super.setPrimaryItem(container, position, object);
+    override fun setPrimaryItem(
+        container: ViewGroup,
+        position: Int,
+        `object`: Any
+    ) {
+        currentFragment = `object` as Fragment
+        super.setPrimaryItem(container, position, `object`)
     }
 }
