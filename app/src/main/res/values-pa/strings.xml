@@ -8,7 +8,7 @@
 * Sony dandiwal
 * ਗੁਰਪ੍ਰੀਤ ਹੁੰਦਲ
 -->
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
   <string name="commons_logo">ਕਾਮਨਜ਼ ਮਾਰਕਾ</string>
   <string name="add_another_description">ਇੱਕ ਹੋਰ ਵੇਰਵਾ ਸ਼ਾਮਲ ਕਰੋ</string>
   <string name="add_new_contribution">ਨਵਾਂ ਯੋਗਦਾਨ ਸ਼ਾਮਲ ਕਰੋ</string>
@@ -17,10 +17,11 @@
   <string name="nearby_all">ਸਾਰੇ</string>
   <string name="appwidget_img">ਦਿਨ ਦੀ ਤਸਵੀਰ</string>
   <plurals name="uploads_pending_notification_indicator" fuzzy="true">
-    <item quantity="one" tools:ignore="ImpliedQuantity">੧ ਫ਼ਾਈਲ ਚੜ੍ਹਾਈ ਜਾ ਰਹੀ ਹੈ</item>
+    <item quantity="one">੧ ਫ਼ਾਈਲ ਚੜ੍ਹਾਈ ਜਾ ਰਹੀ ਹੈ</item>
     <item quantity="other">%1$d ਫ਼ਾਈਲਾਂ ਚੜ੍ਹਾਈਆਂ ਜਾ ਰਹੀਆਂ ਹਨ</item>
   </plurals>
   <plurals name="contributions_subtitle" fuzzy="true">
+    <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">%1$d upload</item>
     <item quantity="other">%1$d ਅੱਪਲੋਡ</item>
   </plurals>
@@ -29,7 +30,7 @@
     <item quantity="other">%1$d ਸ਼ੁਰੂ ਹੋ ਰਹੇ ਹਨ</item>
   </plurals>
   <plurals name="multiple_uploads_title" fuzzy="true">
-    <item quantity="one">%1$d ਅੱਪਲੋਡ</item>
+    <item quantity="one">&amp;d ਅੱਪਲੋਡ</item>
     <item quantity="other">%1$d ਅੱਪਲੋਡਾਂ</item>
   </plurals>
   <string name="share_license_summary" fuzzy="true">ਇਹ ਤਸਵੀਰ ਦਾ %1$s ਹੇਠ ਲਸੰਸ ਜਾਰੀ ਕੀਤੀ ਜਾਵੇਗਾ</string>
@@ -44,7 +45,7 @@
   <string name="forgot_password">ਪਾਰਸ਼ਬਦ ਭੁੱਲ ਗਏ?</string>
   <string name="logging_in_title">ਦਾਖ਼ਲਾ ਹੋ ਰਿਹਾ ਹੈ</string>
   <string name="logging_in_message">ਉਡੀਕੋ ਜੀ…</string>
-  <string name="updating_caption_message">ਕਿਰਪਾ ਕਰਕੇ ਉਡੀਕੋ…</string>
+  <string name="updating_caption_message">ਕਿਰਪਾ ਕਰਕੇ ਉਡੀਕੋ...</string>
   <string name="login_success">ਦਾਖ਼ਲ ਹੋਣਾ ਸਫ਼ਲ!</string>
   <string name="login_failed">ਦਾਖ਼ਲ ਹੋਣਾ ਅਸਫ਼ਲ!</string>
   <string name="upload_failed">ਫ਼ਾਇਲ ਦੀ ਖੋਜ ਨਹੀਂ ਹੋ ਸਕੀ। ਕਿਰਪਾ ਕਰਕੇ ਹੋਰ ਫ਼ਾਇਲ ਖੋਜੋ।</string>
@@ -97,7 +98,7 @@
   <string name="menu_feedback">ਵਿਚਾਰ ਭੇਜੋ (ਈਮੇਲ ਰਾਹੀਂ)</string>
   <string name="no_email_client">ਕੋਈ ਈਮੇਲ ਸਾਧਨ ਇੰਸਟਾਲ ਨਹੀਂ ਕੀਤਾ ਗਿਆ</string>
   <string name="provider_categories">ਹਾਲ \'ਚ ਵਰਤੀਆਂ ਗਈਆਂ ਸ਼੍ਰੇਣੀਆਂ</string>
-  <string name="waiting_first_sync">ਪਹਿਲੀ ਸਿੰਕ ਲਈ ਉਡੀਕ…</string>
+  <string name="waiting_first_sync">ਪਹਿਲੇ ਸਮਕਾਲੀਕਰਨ ਦੀ ਉਡੀਕ ਕੀਤੀ ਜਾ ਰਹੀ ਹੈ...</string>
   <string name="no_uploads_yet">ਤੁਸੀਂ ਹਾਲੇ ਤੱਕ ਕੋਈ ਤਸਵੀਰਾਂ ਅੱਪਲੋਡ ਨਹੀਂ ਕੀਤੀਆਂ</string>
   <string name="menu_retry_upload">ਮੁੜ-ਕੋਸ਼ਿਸ਼ ਕਰੋ</string>
   <string name="menu_cancel_upload">ਰੱਦ ਕਰੋ</string>
@@ -128,7 +129,7 @@
   <string name="welcome_final_button_text">ਹਾਂ!</string>
   <string name="welcome_help_button_text">ਹੋਰ ਜਾਣਕਾਰੀ</string>
   <string name="detail_panel_cats_label">ਸ਼੍ਰੇਣੀਆਂ</string>
-  <string name="detail_panel_cats_loading">ਲੱਦ ਰਿਹਾ ਹੈ…</string>
+  <string name="detail_panel_cats_loading">ਲੱਦ ਰਿਹਾ ਹੈ...</string>
   <string name="detail_panel_cats_none">ਕੋਈ ਵੀ ਨਹੀਂ ਚੁਣਿਆ</string>
   <string name="detail_description_empty">ਕੋਈ ਵੇਰਵਾ ਨਹੀਂ</string>
   <string name="detail_discussion_empty">ਕੋਈ ਗੱਲਬਾਤ ਨਹੀਂ</string>
@@ -167,7 +168,9 @@
   <string name="nearby_info_menu_wikipedia_article">ਵਿਕੀਪੀਡੀਆ ਲੇਖ</string>
   <string name="upload_problem_image_dark">ਤਸਵੀਰ ਬਹੁਤ ਗੂੜ੍ਹੀ ਹੈ।</string>
   <string name="upload_problem_image_blurry">ਤਸਵੀਰ ਧੁੰਦਲੀ ਹੈ।</string>
+  <string name="login_to_your_account">ਆਪਣੇ ਖਾਤੇ ਵਿੱਚ ਦਾਖ਼ਲ ਹੋਵੋ</string>
   <string name="skip_login">ਛੱਡੋ</string>
+  <string name="navigation_item_login">ਦਾਖ਼ਲ ਹੋਵੋ</string>
   <string name="nearby_wikidata">ਵਿਕੀਡੇਟਾ</string>
   <string name="nearby_wikipedia">ਵਿਕੀਪੀਡੀਆ</string>
   <string name="about_faq">ਅਕਸਰ ਪੁੱਛੇ ਜਾਂਦੇ ਸੁਆਲ</string>
@@ -184,12 +187,14 @@
   <string name="search_tab_title_categories">ਸ਼੍ਰੇਣੀਆਂ</string>
   <string name="explore_tab_title_map">ਨਕਸ਼ਾ</string>
   <string name="question">ਸਵਾਲ</string>
+  <string name="user_not_logged_in">ਤੁਹਾਡੇ ਦਾਖਲੇ ਦੀ ਮਿਆਦ ਪੁੱਗ ਗਈ ਹੈ। ਕਿਰਪਾ ਕਰਕੇ ਮੁੜ ਦਾਖਲ ਹੋਵੋ।</string>
   <string name="continue_message">ਜਾਰੀ ਰੱਖੋ</string>
   <string name="no_recent_searches">ਕੋਈ ਤਾਜ਼ਾ ਖੋਜ ਨਹੀਂ</string>
   <string name="delete">ਮਿਟਾਓ</string>
   <string name="Achievements">ਪ੍ਰਾਪਤੀਆਂ</string>
   <string name="statistics">ਅੰਕੜੇ</string>
   <string name="statistics_thanks">ਧੰਨਵਾਦ ਪ੍ਰਾਪਤ ਹੋਏ</string>
+  <string name="achievements_share_message">ਆਪਣੀਆਂ ਪ੍ਰਾਪਤੀਆਂ ਨੂੰ ਆਪਣੇ ਦੋਸਤਾਂ ਨਾਲ ਸਾਂਝਾ ਕਰੋ!</string>
   <string name="read_notifications">ਸੂਚਨਾਵਾਂ (ਪੜ੍ਹਿਆਂ)</string>
   <string name="list_sheet">ਸੂਚੀ</string>
   <string name="next">ਅੱਗੇ</string>
@@ -200,11 +205,14 @@
   <string name="option_allow">ਇਜਾਜ਼ਤ ਦਿਓ</string>
   <string name="option_dismiss">ਖ਼ਾਰਜ ਕਰੋ</string>
   <string name="send_thank_success_title">ਧੰਨਵਾਦ ਭੇਜਣਾ: ਸਫਲ ਹੋਇਆ</string>
-  <string name="please_wait">ਕਿਰਪਾ ਕਰਕੇ ਉਡੀਕੋ…</string>
+  <string name="please_wait">ਕਿਰਪਾ ਕਰਕੇ ਉਡੀਕੋ...</string>
   <string name="copied_successfully">ਉਤਾਰਾ ਕੀਤਾ</string>
   <string name="exif_tag_name_location">ਟਿਕਾਣਾ</string>
+  <string name="text_copy">ਲਿਖਤ ਚੂੰਢੀ-ਤਖਤੀ \'ਤੇ ਲਾਹੀ ਗਈ ਏ।</string>
   <string name="wikipedia_instructions_step_7">ਲਿਖਤ ਛਾਪੋ</string>
+  <string name="copy_wikicode_to_clipboard">ਵਿਕੀਕੋਡ ਦਾ ਉਤਾਰਾ ਚੂੰਢੀ-ਤਖਤੀ \'ਤੇ ਲਿਖੋ</string>
   <string name="leaderboard_tab_title">ਮੁਹਰੈਲ</string>
   <string name="leaderboard_column_user">ਵਰਤੋਂਕਾਰ</string>
+  <string name="location_updated">ਟਿਕਾਣਾ ਨਵਿਆਈਆ ਗਿਆ</string>
   <string name="invalid_login_message">ਤੁਹਾਡੇ ਦਾਖਲੇ ਦੀ ਮਿਆਦ ਪੁੱਗ ਗਈ ਹੈ। ਕਿਰਪਾ ਕਰਕੇ ਦੁਬਾਰਾ ਦਾਖਲ ਹੋਵੋ।</string>
 </resources>

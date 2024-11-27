@@ -40,9 +40,6 @@
   </plurals>
   <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">%1$d bellgargadenn loc\'het</item>
-    <item quantity="two">%1$d bellgargadenn loc\'het</item>
-    <item quantity="few">%1$d bellgargadennoù loc\'het</item>
-    <item quantity="many">%1$d bellgargadennoù loc\'het</item>
     <item quantity="other">%1$d pellgargadennoù loc\'het</item>
   </plurals>
   <plurals name="multiple_uploads_title">
@@ -54,10 +51,14 @@
   </plurals>
   <plurals name="share_license_summary" fuzzy="true">
     <item quantity="one">gant an aotre-implijout %1$s e vo ar skeudenn-mañ</item>
-    <item quantity="two">gant an aotre-implijout %1$s e vo an div skeudenn-mañ</item>
-    <item quantity="few">gant an aotre-implijout %1$s e vo meur a skeudenn-mañ</item>
-    <item quantity="many">gant an aotre-implijout %1$s e vo kalz a skeudenn-mañ</item>
     <item quantity="other">gant an aotreoù-implijout %1$s e vo ar skeudenn-mañ</item>
+  </plurals>
+  <plurals name="upload_count_title">
+    <item quantity="one">%1$d enporzhiadur</item>
+    <item quantity="two">%1$d enporzhiadur</item>
+    <item quantity="few">%1$d enporzhiadur</item>
+    <item quantity="many">%1$d enporzhiadur</item>
+    <item quantity="other">%1$d enporzhiadur</item>
   </plurals>
   <string name="navigation_item_explore">Ergerzhout</string>
   <string name="preference_category_appearance">Neuz</string>
@@ -79,7 +80,7 @@
   <string name="login_success">Kevreet oc\'h !</string>
   <string name="login_failed">N\'haller ket kevreañ!</string>
   <string name="upload_failed">N\'eo ket bet kavet ar restr. Klask gant unan all.</string>
-  <string name="authentication_failed" fuzzy="true">Dilesadur c\'hwitet, kevreit en-dro mar plij</string>
+  <string name="authentication_failed">Dilesadur c\'hwitet. Kevreit en-dro mar plij.</string>
   <string name="uploading_started">Kroget da enporzhiañ!</string>
   <string name="upload_completed_notification_title">%1$s bet pellgaset !</string>
   <string name="upload_completed_notification_text">Pouezit evit gwelet hoc\'h enporzhiadenn</string>
@@ -185,6 +186,7 @@
   <string name="write_storage_permission_rationale" fuzzy="true">Aotre ret ; skrivañ war al lec\'h stokañ diavaez. Ne c\'hall ket an arload tizhout ho kamera hep an dra-se.</string>
   <string name="ok">Mat eo</string>
   <string name="warning">Diwallit</string>
+  <string name="duplicate_file_name">Anv ar restr doubl kavet</string>
   <string name="upload">Enporzhiañ</string>
   <string name="yes">Ya</string>
   <string name="no">Ket</string>
@@ -259,6 +261,7 @@
   <string name="nearby_commons">Commons</string>
   <string name="about_rate_us">Ho priziadur</string>
   <string name="about_faq">FAG</string>
+  <string name="user_guide">Sturlevr an implijer</string>
   <string name="welcome_skip_button">Lezel an tutorial a-gostez</string>
   <string name="no_internet">Kenrouedad dihegerz</string>
   <string name="error_notifications">Fazi war enklask kemennoù</string>
@@ -299,6 +302,7 @@
   <string name="wrong">Respont fall</string>
   <string name="share_app_title">Rannañ an arloadoù</string>
   <string name="rotate">C\'hwelañ</string>
+  <string name="no_pictures_in_this_area">Skeudenn ebet en takad-mañ</string>
   <string name="no_recent_searches">Klask nevez ebet</string>
   <string name="search_history_deleted">Istor klask diverket</string>
   <string name="delete">Dilemel</string>
@@ -314,6 +318,7 @@
   <string name="images_used_by_wiki">Skeudennoù implijet</string>
   <string name="error_occurred">Ur fazi zo bet !</string>
   <string name="preference_author_name_toggle">Implijit un anv aozer personelaet</string>
+  <string name="preference_author_name">Anv aozer personelaet</string>
   <string name="contributions_fragment">Degasadennoù</string>
   <string name="nearby_fragment">Nepell</string>
   <string name="notifications">Kemennoù</string>
@@ -335,12 +340,14 @@
   <string name="back_button_warning">Nullañ an enporzhiadur</string>
   <string name="back_button_continue">Kenderc\'hel an enporzhiadur</string>
   <string name="upload_flow_all_images_in_set">(Evit holl skeudennoù an  hollad)</string>
+  <string name="search_this_area">Furchal en takad-mañ</string>
   <string name="nearby_card_permission_title">Goulenn aotre</string>
   <string name="never_ask_again">Arabat goulenn en-dro</string>
   <string name="option_allow">Aotren</string>
   <string name="option_dismiss">Disteurel</string>
   <string name="nominate_for_deletion_done">Graet</string>
   <string name="send_thank_success_message">Trugarekaet eo bet %1$s gant berzh</string>
+  <string name="send_thank_failure_message">Ur fazi zo bet en ur drugarekaat %1$s</string>
   <string name="send_thank_toast">Trugarekaat %1$s</string>
   <string name="review_thanks_yes_button_text">Skeudenn da-heul</string>
   <string name="review_thanks_no_button_text">Ya, perak pas</string>
@@ -358,6 +365,7 @@
   <string name="exif_tag_name_location">Lec\'hiadur</string>
   <string name="exif_tag_name_cameraModel">Doare kamera</string>
   <string name="exif_tag_name_software">Meziant</string>
+  <string name="share_via">Rannañ an arload gant...</string>
   <string name="image_info">Titouroù ar skeudenn</string>
   <string name="no_categories_found">Rummad ebet kavet</string>
   <string name="no_depiction_found">Deskrivadur ebet kavet</string>
@@ -371,13 +379,18 @@
   <string name="category_edit_helper_show_edit_title_success">Berzh</string>
   <string name="category_edit_button_text">Hizivaat ar rummadoù</string>
   <string name="coordinates_edit_helper_show_edit_title_success">Berzh</string>
+  <string name="coordinates_edit_helper_show_edit_message">Ouzhpennet eo bet an daveennoù %1$s.</string>
   <string name="account_created">Kont krouet!</string>
   <string name="text_copy">Testenn eilet er golver</string>
   <string name="some_error">Ur fazi zo bet!</string>
   <string name="place_state_exists">Bez\' ez eus anezhañ</string>
+  <string name="place_state_needs_photo">Ur skeudenn zo ezhomm</string>
+  <string name="place_type">Seurt lec\'h:</string>
+  <string name="nearby_search_hint">Pont, mirdi, leti h.a.</string>
   <string name="title_for_media">MEDIA</string>
   <string name="title_for_child_classes">KLASOÙ BUGALE</string>
   <string name="title_for_parent_classes">KLASOÙ KERENT</string>
+  <string name="upload_nearby_place_found_description_singular">Ur skeudenn eus %1$s eo?</string>
   <string name="title_app_shortcut_bookmark">Sinedoù</string>
   <string name="title_app_shortcut_setting">Arventennoù</string>
   <string name="remove_bookmark">Lamet eus ar sinedoù</string>
@@ -406,8 +419,10 @@
   <string name="leaderboard_upload">Enporzhiañ</string>
   <string name="leaderboard_nearby">Nepell</string>
   <string name="leaderboard_used">Implijet</string>
+  <string name="leaderboard_my_rank_button_text">Ma renk</string>
   <string name="statistics_quality">Skeudennoù a-zoare</string>
   <string name="cancel_upload">Nullañ an enporzhiadur</string>
+  <string name="depicts_step_title">Taolenniñ a ra</string>
   <string name="app_ui_language">Yezh etrefas an arload</string>
   <string name="read_help_link">Lenn muioc\'h</string>
   <string name="media_detail_in_all_languages">En holl yezhoù</string>
@@ -422,7 +437,7 @@
   <string name="learn_more">GOUZOUT HIROC\'H</string>
   <string name="contributions_of_user">Degasadennoù an implijer: %s</string>
   <string name="achievements_of_user">Taolioù-kaer an implijer: %s</string>
-  <string name="menu_view_user_page" fuzzy="true">Gwelet pajenn an implijer</string>
+  <string name="menu_view_user_page">Gwelet profil an implijer</string>
   <string name="edit_categories">Kemmañ ar rummadoù</string>
   <string name="advanced_options">Dibarzhioù araokaet</string>
   <string name="no_location_found_title">Lec\'hiadur ebet kavet</string>
@@ -438,4 +453,11 @@
   <string name="remove_location">Lemel al lec\'hiadur</string>
   <string name="location_removed">Lec\'hiadur lamet!</string>
   <string name="send_thanks_to_author">Trugarekaat an aozer</string>
+  <string name="talk">Kaozeadenn</string>
+  <string name="failed">C\'hwitet</string>
+  <string name="custom_selector_delete">Dilemel</string>
+  <string name="custom_selector_cancel">Nullañ</string>
+  <string name="custom_selector_folder_deleted_success">Restr %1$s dilamet gant berzh</string>
+  <string name="custom_selector_folder_deleted_failure">Ur fazi zo bet en ur zilemel ar restr %1$s</string>
+  <string name="green_pin">Al lec\'h-mañ en deus ur skeudenn dija.</string>
 </resources>

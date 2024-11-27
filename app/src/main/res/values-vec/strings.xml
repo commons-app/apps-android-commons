@@ -68,7 +68,7 @@
   <string name="upload_failed_notification_title" fuzzy="true">Cargamento de %1$s no riusio</string>
   <string name="upload_failed_notification_subtitle">Schicia par vixuałixare</string>
   <string name="title_activity_contributions">I me ultimi cargamenti</string>
-  <string name="contribution_state_queued">In coa…</string>
+  <string name="contribution_state_queued">In coa...</string>
   <string name="contribution_state_failed">Fałimento</string>
   <string name="contribution_state_in_progress">%1$d%% conpleto</string>
   <string name="contribution_state_starting">Drio cargar..</string>
@@ -114,7 +114,7 @@
   <string name="menu_feedback">Mandane on comento (co ła mail)</string>
   <string name="no_email_client">Nisun client de posta eletronega instałà</string>
   <string name="provider_categories">Categorie doparà ultimamente</string>
-  <string name="waiting_first_sync">Speta par ła prima sincronixasion…</string>
+  <string name="waiting_first_sync">Speta par ła prima sincronixasion...</string>
   <string name="no_uploads_yet">No te ghe njiancora cargà na foto</string>
   <string name="menu_retry_upload">Riproa</string>
   <string name="menu_cancel_upload">Descançełare</string>
@@ -403,7 +403,7 @@
   <string name="menu_option_read">Varda no lexeste</string>
   <string name="menu_option_unread">Varda no lexeste</string>
   <string name="error_occurred_in_picking_images">Se ga vuo on eror co se jera drio ełexare łe imajini.</string>
-  <string name="please_wait">Speta on fià…</string>
+  <string name="please_wait">Speta on fià...</string>
   <string name="images_featured_explanation">Le foto in primo pian łe xé imajini de fotografi altamente cuałifegai che ła comunità de Wikimedia Commons ła ga ełeto come fotografi de alta cuałità sol sito.</string>
   <string name="images_via_nearby_explanation">Imajini cargae via \"Posti cuà rente\", imajini che łe njien cargae scoerxendo posti n\'te ła mapa</string>
   <string name="thanks_received_explanation">Sta funsion ła consente ai editori de enviar na notifega de ringrasiamento ai uxuari che i fa modifeghe che serve, doparando on lingambo picenin de ringrasiamento n\'te ła pajina del storego o n\'te ła pajina de łe difarense.\n\nQuesta funzione consente agli editor di inviare una notifica di ringraziamento agli utenti che apportano modifiche utili, utilizzando un piccolo link di ringraziamento nella pagina della cronologia o nella pagina delle differenze.</string>
@@ -421,7 +421,7 @@
   <string name="exif_tag_name_serialNumbers">Numari seriałi</string>
   <string name="exif_tag_name_software">Software</string>
   <string name="share_text">Carga foto so Wikimedia Commons diretamente dal to tełefonin. Descarga l\'aplicasion deso: %1$s</string>
-  <string name="share_via">Spartisi aplicasion co…</string>
+  <string name="share_via">Spartisi aplicasion co...</string>
   <string name="image_info">Informasion so l\'imajine</string>
   <string name="no_categories_found">Nisuna categoria catada</string>
   <string name="upload_cancelled">Cargamento nułà</string>
@@ -461,7 +461,7 @@
   <string name="add_bookmark">Xonta ai favorii</string>
   <string name="wallpaper_set_unsuccessfully">Calcosa el xé ndà roerso. No xé sta pusibiłe canbiar el sfondo</string>
   <string name="setting_wallpaper_dialog_title">Inposta el sfondo</string>
-  <string name="setting_wallpaper_dialog_message">Drio inpostar el sfondo. Speta on fià…</string>
+  <string name="setting_wallpaper_dialog_message">Drio inpostar el sfondo. Speta on fià...</string>
   <string name="theme_default_name">Segui el sistema</string>
   <string name="theme_dark_name">Scuro</string>
   <string name="theme_light_name">Ciaro</string>

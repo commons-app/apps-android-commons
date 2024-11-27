@@ -74,7 +74,7 @@ class DepictsPresenterTest {
             )
         whenever(repository.searchAllEntities("")).thenReturn(Flowable.just(searchResults))
         val selectedItem = depictedItem(id = "selected")
-        whenever(repository.selectedDepictions).thenReturn(listOf(selectedItem))
+        whenever(repository.getSelectedDepictions()).thenReturn(listOf(selectedItem))
         depictsPresenter.searchForDepictions("")
         testScheduler.triggerActions()
         verify(view).showProgress(false)
@@ -123,14 +123,14 @@ class DepictsPresenterTest {
 
     @Test
     fun `verifyDepictions with non empty selectedDepictions goes to next screen`() {
-        whenever(repository.selectedDepictions).thenReturn(listOf(depictedItem()))
+        whenever(repository.getSelectedDepictions()).thenReturn(listOf(depictedItem()))
         depictsPresenter.verifyDepictions()
         verify(view).goToNextScreen()
     }
 
     @Test
     fun `verifyDepictions with empty selectedDepictions goes to noDepictionSelected`() {
-        whenever(repository.selectedDepictions).thenReturn(emptyList())
+        whenever(repository.getSelectedDepictions()).thenReturn(emptyList())
         depictsPresenter.verifyDepictions()
         verify(view).noDepictionSelected()
     }
@@ -162,7 +162,7 @@ class DepictsPresenterTest {
     @Test
     fun `Test searchResults when media is not null`() {
         Whitebox.setInternalState(depictsPresenter, "media", media)
-        whenever(repository.getDepictions(repository.selectedExistingDepictions))
+        whenever(repository.getDepictions(repository.getSelectedExistingDepictions()))
             .thenReturn(Flowable.just(listOf(depictedItem())))
         whenever(repository.searchAllEntities("querystring"))
             .thenReturn(Flowable.just(listOf(depictedItem())))

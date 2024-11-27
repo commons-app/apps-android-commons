@@ -19,6 +19,7 @@
 * ManuelFranz
 * Mcliquid
 * Metalhead64
+* Mukeber
 * Nekky-chan
 * Ngschaider
 * Pyscowicz
@@ -512,11 +513,12 @@
   <string name="no_notification">Du hast keine ungelesenen Benachrichtigungen</string>
   <string name="no_read_notification">Du hast keine gelesenen Benachrichtigungen</string>
   <string name="share_logs_using">Protokolle freigeben mit</string>
+  <string name="check_your_email_inbox">Überprüfe deinen E-Mail-Posteingang</string>
   <string name="menu_option_read">Gelesene ansehen</string>
   <string name="menu_option_unread">Ungelesene ansehen</string>
   <string name="error_occurred_in_picking_images">Beim Auswählen der Bilder ist ein Fehler aufgetreten</string>
   <string name="please_wait">Bitte warten …</string>
-  <string name="images_featured_explanation">Vorgestellte Bilder sind Bilder von professionellen Fotografen und Zeichnern, die Gemeinschaft von Wikimedia Commons als diejenigen mit der höchsten Qualität auf der Website ausgewählt hat.</string>
+  <string name="images_featured_explanation">Vorgestellte Bilder sind Bilder von professionellen Fotografen und Zeichnern, die die Gemeinschaft von Wikimedia Commons als diejenigen mit der höchsten Qualität auf der Website ausgewählt hat.</string>
   <string name="images_via_nearby_explanation">Über Orte in der Nähe hochgeladene Bilder sind die Bilder, die von entdeckten Orten auf der Karte hochgeladen wurden.</string>
   <string name="thanks_received_explanation">Diese Funktion erlaubt es Autoren, eine Dankeschön-Benachrichtigung an Benutzer zu senden, die nützliche Bearbeitungen durchgeführt haben – durch die Benutzung eines kleinen Dankeschön-Links in der Versionsgeschichte oder Unterschiedsseite.</string>
   <string name="copy_image_caption_description">Auf Folgemedien kopieren</string>
@@ -611,7 +613,7 @@
   <string name="add_bookmark">zu den Lesezeichen hinzugefügt</string>
   <string name="wallpaper_set_unsuccessfully">Etwas ist schiefgelaufen. Das Hintergrundbild konnte nicht eingestellt werden</string>
   <string name="setting_wallpaper_dialog_title">Als Hintergrundbild festlegen</string>
-  <string name="setting_wallpaper_dialog_message">Hintergrundbild wird festgelegt. Bitte warten…</string>
+  <string name="setting_wallpaper_dialog_message">Hintergrundbild wird festgelegt. Bitte warten...</string>
   <string name="theme_default_name">Systemeinstellung</string>
   <string name="theme_dark_name">Dunkel</string>
   <string name="theme_light_name">Hell</string>
@@ -816,4 +818,15 @@
   <string name="pending">Ausstehend</string>
   <string name="failed">Fehlgeschlagen</string>
   <string name="could_not_load_place_data">Ortsdaten konnten nicht geladen werden</string>
+  <string name="custom_selector_delete_folder">Ordner löschen</string>
+  <string name="custom_selector_confirm_deletion_title">Löschung bestätigen</string>
+  <string name="custom_selector_confirm_deletion_message">Bist du sicher, dass du den Ordner %1$s löschen möchten, der %2$d Datenobjekte enthält?</string>
+  <string name="custom_selector_delete">Löschen</string>
+  <string name="custom_selector_cancel">Abbrechen</string>
+  <string name="custom_selector_folder_deleted_success">Ordner %1$s erfolgreich gelöscht</string>
+  <string name="custom_selector_folder_deleted_failure">Ordner %1$s konnte nicht gelöscht werden</string>
+  <string name="custom_selector_error_trashing_folder_contents">Fehler beim Löschen des Ordnerinhalts: %1$s</string>
+  <string name="red_pin">Von diesem Ort gibt es noch kein Bild. Mach eins!</string>
+  <string name="green_pin">Dieser Ort hat bereits ein Bild.</string>
+  <string name="grey_pin">Jetzt wird geprüft, ob dieser Ort bereits ein Bild hat.</string>
 </resources>

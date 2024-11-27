@@ -119,6 +119,7 @@
   <string name="categories_search_text_hint">Категорияланы изле</string>
   <string name="depicts_search_text_hint">Медиагъызда суратланнган элементлени излегиз (тау, Тадж Махал э. а. к.)</string>
   <string name="menu_save_categories">Сакъландыр</string>
+  <string name="menu_overflow_desc">Къошакъ меню</string>
   <string name="refresh_button">Джангырт</string>
   <string name="display_list_button">Тизме</string>
   <string name="contributions_subtitle_zero">(Алкъын джюклеуле джокъдула)</string>
@@ -143,7 +144,7 @@
   <string name="menu_feedback">Оюмунгу билдир (эл. почта бла)</string>
   <string name="no_email_client">Почта клиент къурулмагъанды</string>
   <string name="provider_categories">Кёб болмай хайырланнган категорияла</string>
-  <string name="waiting_first_sync">Биринчи синхронизацияны сакълаб турады…</string>
+  <string name="waiting_first_sync">Биринчи синхронизацияны сакълаб турады...</string>
   <string name="no_uploads_yet">Алкъын джюкленнген фотосуратыгъыз джокъду.</string>
   <string name="menu_retry_upload">Джангыдан сына</string>
   <string name="menu_cancel_upload">Ызына ал</string>
@@ -227,7 +228,7 @@
   <string name="cancel">Ызына ал</string>
   <string name="navigation_drawer_open">Ач</string>
   <string name="navigation_drawer_close">Джаб</string>
-  <string name="navigation_item_home">Баш бет</string>
+  <string name="navigation_item_home">Тамал бет</string>
   <string name="navigation_item_upload">Джюкле</string>
   <string name="navigation_item_nearby">Джуўукъда</string>
   <string name="navigation_item_about">Юсюнден</string>
@@ -473,6 +474,7 @@
   <string name="no_notification">Окъулмагъана хапарландырыуугъуз джокъду</string>
   <string name="no_read_notification">Окъулмагъан хапарландырыуугъуз барды</string>
   <string name="share_logs_using">Логларыгъызны хайырланыб юлюшлегиз</string>
+  <string name="check_your_email_inbox">Электрон почтагъызны тинтигиз</string>
   <string name="menu_option_read">Окъулгъанны кёргюз</string>
   <string name="menu_option_unread">Окъулмагъанланы кёргюз</string>
   <string name="error_occurred_in_picking_images">Суратла сайланнган заманда халат болду.</string>
@@ -498,7 +500,7 @@
   <string name="media_location_permission_denied">Медиа локациягъа джетишиу уналмады</string>
   <string name="add_location_manually">Джюклеген суратладан локация билгилени автомат халда алмазгъа боллукъбуз. Тилейбиз, джибериуден алгъа хар сурат ючюн келишген локацияны къошугъуз</string>
   <string name="share_text">Фотосуратланы телефонугъуздан туура Викигёзеннге джюклегиз. Гёзен Къошакъны энди эндиригиз: %1$s</string>
-  <string name="share_via">Къошакъны буну бла юлюшле…</string>
+  <string name="share_via">Къошакъны буну бла юлюшле...</string>
   <string name="image_info">Сурат Информация</string>
   <string name="no_categories_found">Категорияла табылмадыла</string>
   <string name="no_depiction_found">Танытыула табылмадыла</string>
@@ -575,7 +577,7 @@
   <string name="add_bookmark">Китаб белгилеге къошулду</string>
   <string name="wallpaper_set_unsuccessfully">Не эсе да терс кетди. Къабыргъа къагъыт къурулалмады</string>
   <string name="setting_wallpaper_dialog_title">Къабыргъа къагъыт эт</string>
-  <string name="setting_wallpaper_dialog_message">Къабыргъа Къагъыт къурула турады. Тилейбиз сакълагъыз…</string>
+  <string name="setting_wallpaper_dialog_message">Къабыргъа Къагъыт къурула турады. Тилейбиз сакълагъыз...</string>
   <string name="theme_default_name">Системаны джарашдыр</string>
   <string name="theme_dark_name">Къарангы</string>
   <string name="theme_light_name">Джарыкъ</string>
@@ -633,9 +635,9 @@
   <string name="limited_connection_mode">Чекленнген Байланыу Режим</string>
   <string name="statistics_quality">Агъачлары Мийик Суратла</string>
   <string name="quality_images_info">Агъачлы суратла, белгили агъач стандартларына (асламысыны техника халы болады) келишген эмда Викимедиа проектле ючюн багъалы болгъан диаграммала неда фотосуратладыла</string>
-  <string name="resuming_upload">Джюклениу андан ары бардырылады…</string>
-  <string name="pausing_upload">Джюклениу туракъланады…</string>
-  <string name="cancelling_upload">Джюклениу ызына алынады…</string>
+  <string name="resuming_upload">Джюклениу андан ары бардырылады...</string>
+  <string name="pausing_upload">Джюклениу туракъланады...</string>
+  <string name="cancelling_upload">Джюклениу ызына алынады...</string>
   <string name="cancel_upload">Джюклеуню Ызына Ал</string>
   <string name="limited_connection_explanation">Чекли байланыу режимни джандырдыгъыз. Бютеу джюклениуле туракълатыллыкъдыла эмда бу режимни джукълатсагъыз, тохтагъан джерден башларыкъдыла.</string>
   <string name="limited_connection_is_on">Чекленнген байланыу режим джандырылгъанды.</string>
@@ -686,7 +688,7 @@
   <string name="read_phone_state_permission_message">Джууукъдагъы картала тюз ишлер ючюн ТЕЛЕФОННУ БОЛУМУн окъургъа амал болургъа кереклиди</string>
   <string name="contributions_of_user">Хайырланыучуну къошумлары: %s</string>
   <string name="achievements_of_user">Хайырланыучуну джетишимлери: %s</string>
-  <string name="menu_view_user_page" fuzzy="true">Хайырланыучу бетни кёргюз</string>
+  <string name="menu_view_user_page">Хайырланыучу профильни кёр</string>
   <string name="edit_depictions">Танытыуланы тюзет</string>
   <string name="edit_categories">Категорияланы тюзет</string>
   <string name="advanced_options">Кенгленнген Сайлаула</string>
@@ -774,4 +776,22 @@
   <string name="is_at_a_different_place_please_specify_the_correct_place_below_if_possible_tell_us_the_correct_latitude_longitude">\'%1$s\' - башха джерди. Тилейбиз, тюз джерни энишгерекде белгилегиз, эмда мадар бар эсе, тюз кенглик бла узунлукъну джазыгъыз.</string>
   <string name="other_problem_or_information_please_explain_below">Башха проблема неда информация (тилейбиз, энишгерекде ангылатыгъыз).</string>
   <string name="feedback_destination_note">Сизни кери оюмугъуз тюбюндеги вики бетге джиберилликди:  &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Mobile_app/Feedback\"&gt;Commons:Mobile app/Feedback&lt;/a&gt;</string>
+  <string name="are_you_sure_that_you_want_cancel_all_the_uploads">Бютеу джюклеулени тохтатыргъа излегенигизге ишексизмисиз?</string>
+  <string name="cancelling_all_the_uploads">Бютеу джюклеулени тохтатыу...</string>
+  <string name="uploads">Джюклеуле</string>
+  <string name="pending">Сакълауда</string>
+  <string name="failed">Джетишимсиз</string>
+  <string name="could_not_load_place_data">Джерни юсюнден билгилени джюклеялмады</string>
+  <string name="custom_selector_delete_folder">Папканы кетер</string>
+  <string name="custom_selector_confirm_deletion_title">Кетериуню мюкюл эт</string>
+  <string name="custom_selector_confirm_deletion_message">%2$d элементи болгъан %1$s папканы кетерирге излегенинге ишексизмисе?</string>
+  <string name="custom_selector_delete">Кетер</string>
+  <string name="custom_selector_cancel">Ызына ал</string>
+  <string name="custom_selector_folder_deleted_success">%1$s папка  джетишимли кетерилгенди</string>
+  <string name="custom_selector_folder_deleted_failure">%1$s папканы кетериу джетишимисизди</string>
+  <string name="custom_selector_error_trashing_folder_contents">Папканы ичиндегисини кетериуде халат: %1$s</string>
+  <string name="custom_selector_folder_not_found_error">Контейнерни идентификатору папкагъа джол табалмады: %1$d</string>
+  <string name="red_pin">Бу джерни сураты джокъду, хайда бирин эт!</string>
+  <string name="green_pin">Бу джерни алайсыз да сураты барды.</string>
+  <string name="grey_pin">Бу джерни сураты болуб-болмагъанын тинте турама.</string>
 </resources>

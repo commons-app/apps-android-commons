@@ -39,6 +39,7 @@
     <item quantity="other">%1$d फ़ाइलें अपलोड हो रहीं</item>
   </plurals>
   <plurals name="contributions_subtitle" fuzzy="true">
+    <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
@@ -69,8 +70,8 @@
   <string name="forgot_password">पासवर्ड भूल गये?</string>
   <string name="signup">खाता बनायें</string>
   <string name="logging_in_title">लॉग इन हो रहा है</string>
-  <string name="logging_in_message">कृपया प्रतीक्षा करें…</string>
-  <string name="updating_caption_message">कृपया प्रतीक्षा करें…</string>
+  <string name="logging_in_message">कृपया प्रतीक्षा करें...</string>
+  <string name="updating_caption_message">कृपया प्रतीक्षा करें...</string>
   <string name="login_success" fuzzy="true">लॉग इन सफल!</string>
   <string name="login_failed" fuzzy="true">लॉग इन विफल!</string>
   <string name="upload_failed">फ़ाइल नहीं मिली, कृपया अन्य फ़ाइल से प्रयास करें।</string>
@@ -349,8 +350,11 @@
   <string name="custom_selector_dismiss_limit_warning_button_text">रद्द करें</string>
   <string name="talk">वार्ता</string>
   <string name="are_you_sure_that_you_want_cancel_all_the_uploads">क्या आप वाकई सभी अपलोड रद्द करना चाहते हैं?</string>
-  <string name="cancelling_all_the_uploads">सभी अपलोड रद्द किये जा रहे हैं…</string>
+  <string name="cancelling_all_the_uploads">सभी अपलोड रद्द किये जा रहे हैं...</string>
   <string name="uploads">अपलोड</string>
   <string name="pending">लंबित</string>
   <string name="failed">विफल हुआ</string>
+  <string name="custom_selector_delete_folder">फ़ोल्डर हटाएँ</string>
+  <string name="custom_selector_delete">हटाएँ</string>
+  <string name="custom_selector_cancel">रद्द करें</string>
 </resources>

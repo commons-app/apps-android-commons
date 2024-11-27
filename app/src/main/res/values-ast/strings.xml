@@ -74,7 +74,7 @@
   <string name="logging_in_title">Aniciando sesión</string>
   <string name="logging_in_message">Espera…</string>
   <string name="updating_caption_title">Actualizando pies y descripciones</string>
-  <string name="updating_caption_message">Porfavor espera…</string>
+  <string name="updating_caption_message">Porfavor espera...</string>
   <string name="login_success" fuzzy="true">¡Identificación correuta!</string>
   <string name="login_failed" fuzzy="true">¡Falló l\'aniciu de sesión!</string>
   <string name="upload_failed">Nun s\'alcontró\'l ficheru. Tenta con otru.</string>
@@ -480,7 +480,7 @@
   <string name="exif_tag_name_serialNumbers">Númberos de serie</string>
   <string name="exif_tag_name_software">Software</string>
   <string name="share_text">Xubi semeyes a Wikimedia Commons direutamente dende\'l to móvil. Descarga yá la app de Commons: %1$s</string>
-  <string name="share_via">Compartir l\'aplicación per…</string>
+  <string name="share_via">Compartir l\'aplicación per...</string>
   <string name="image_info">Información de la imaxe</string>
   <string name="no_categories_found">Nun s\'alcontró nenguna categoría</string>
   <string name="no_depiction_found">Nun s\'alcontraron retratos</string>

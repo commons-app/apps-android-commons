@@ -10,6 +10,7 @@
 * Toghrul Rahimli
 * Wertuose
 * Şeyx Şamil
+* Əkrəm Cəfər
 -->
 <resources>
   <string name="commons_facebook">Commons Facebook səhifəsi</string>
@@ -104,7 +105,7 @@
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
   <string name="welcome_help_button_text">Əlavə məlumat</string>
   <string name="detail_panel_cats_label">Kateqoriyalar</string>
-  <string name="detail_panel_cats_loading">Yüklənir…</string>
+  <string name="detail_panel_cats_loading">Yüklənir...</string>
   <string name="detail_panel_cats_none">Heç biri seçilməmişdir</string>
   <string name="detail_license_empty">Naməlum lisenziya</string>
   <string name="menu_refresh">Yenilə</string>
@@ -124,4 +125,5 @@
   <string name="notification_mark_read">Bildiriş oxunmuş olaraq işarələndi</string>
   <string name="ask_to_turn_location_on_text">Zəhmət olmasa tətbiqin cari məkanınızı göstərmək üçün məkan xidmətlərini aktiv edin</string>
   <string name="explore_map_needs_location">Yaxınlıqdakı şəkilləri göstərmək üçün məkan icazəsi lazımdır</string>
+  <string name="custom_selector_delete_folder">Qovluğu Sil</string>
 </resources>

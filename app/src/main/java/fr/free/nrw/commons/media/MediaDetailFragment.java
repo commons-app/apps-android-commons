@@ -55,7 +55,6 @@ import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.actions.ThanksClient;
 import fr.free.nrw.commons.auth.AccountUtil;
 import fr.free.nrw.commons.auth.SessionManager;
-import fr.free.nrw.commons.auth.csrf.CsrfTokenClient;
 import fr.free.nrw.commons.auth.csrf.InvalidLoginTokenException;
 import fr.free.nrw.commons.category.CategoryClient;
 import fr.free.nrw.commons.category.CategoryDetailsActivity;
@@ -272,6 +271,12 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
 
         if (!sessionManager.isUserLoggedIn()) {
             binding.categoryEditButton.setVisibility(GONE);
+            binding.descriptionEdit.setVisibility(GONE);
+            binding.depictionsEditButton.setVisibility(GONE);
+        } else {
+            binding.categoryEditButton.setVisibility(VISIBLE);
+            binding.descriptionEdit.setVisibility(VISIBLE);
+            binding.depictionsEditButton.setVisibility(VISIBLE);
         }
 
         if(applicationKvStore.getBoolean("login_skipped")){
@@ -313,7 +318,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
     }
 
     public void launchZoomActivity(final View view) {
-        final boolean hasPermission = PermissionUtils.hasPermission(getActivity(), PermissionUtils.PERMISSIONS_STORAGE);
+        final boolean hasPermission = PermissionUtils.hasPermission(getActivity(), PermissionUtils.getPERMISSIONS_STORAGE());
         if (hasPermission) {
             launchZoomActivityAfterPermissionCheck(view);
         } else {
@@ -323,7 +328,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
                 },
                 R.string.storage_permission_title,
                 R.string.read_storage_permission_rationale,
-                PermissionUtils.PERMISSIONS_STORAGE
+                PermissionUtils.getPERMISSIONS_STORAGE()
                 );
         }
     }
@@ -400,7 +405,6 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
             }
         );
         binding.progressBarEdit.setVisibility(GONE);
-        binding.descriptionEdit.setVisibility(VISIBLE);
     }
 
     @Override
@@ -678,7 +682,9 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
             // Stick in a filler element.
             allCategories.add(getString(R.string.detail_panel_cats_none));
         }
-        binding.categoryEditButton.setVisibility(VISIBLE);
+        if(sessionManager.isUserLoggedIn()) {
+            binding.categoryEditButton.setVisibility(VISIBLE);
+        }
         rebuildCatList(allCategories);
     }
 

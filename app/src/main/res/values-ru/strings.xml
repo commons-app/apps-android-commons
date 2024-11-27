@@ -45,7 +45,7 @@
 * ЛингвоЧел
 * ОйЛ
 -->
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
   <string name="commons_facebook">Facebook-страница Викисклада</string>
   <string name="commons_github">Исходный код Викисклада на гитхабе</string>
   <string name="commons_logo">Логотип Викисклада</string>
@@ -105,7 +105,7 @@
     <item quantity="other">%1$d загрузок</item>
   </plurals>
   <plurals name="receiving_shared_content">
-    <item quantity="one" tools:ignore="ImpliedQuantity">Получение общего содержимого. Обработка изображения может занять некоторое время, в зависимости от размера изображения и модели вашего устройства</item>
+    <item quantity="one">Получение общего содержимого. Обработка изображения может занять некоторое время, в зависимости от размера изображения и модели вашего устройства</item>
     <item quantity="few">Получение общего содержимого. Обработка изображений может занять некоторое время, в зависимости от размера изображения и модели вашего устройства</item>
     <item quantity="many">Получение общего содержимого. Обработка изображений может занять некоторое время, в зависимости от размера изображения и модели вашего устройства</item>
     <item quantity="other">Получение общего содержимого. Обработка изображений может занять некоторое время, в зависимости от размера изображения и модели вашего устройства</item>
@@ -556,7 +556,7 @@
   <string name="media_location_permission_denied">Отказано в доступе к местоположению файла</string>
   <string name="add_location_manually">Возможно, мы не сможем автоматически получать данные о местоположении из загруженных вами изображений. Пожалуйста, добавьте подходящее место для каждого изображения перед отправкой</string>
   <string name="share_text">Загружайте фото на Викисклад прямо с телефона. Скачайте приложение Wikimedia Commons прямо сейчас: %1$s</string>
-  <string name="share_via">Поделиться приложением с помощью…</string>
+  <string name="share_via">Поделиться приложением с помощью...</string>
   <string name="image_info">Информация об изображении</string>
   <string name="no_categories_found">Категории не найдены.</string>
   <string name="no_depiction_found">Описания не найдены</string>
@@ -637,7 +637,7 @@
   <string name="add_bookmark">Добавлено в закладки</string>
   <string name="wallpaper_set_unsuccessfully">Что-то пошло не так. Не удалось установить фоновую заставку</string>
   <string name="setting_wallpaper_dialog_title">Сделать фоновой заставкой</string>
-  <string name="setting_wallpaper_dialog_message">Идёт установка фоновой заставки…</string>
+  <string name="setting_wallpaper_dialog_message">Идёт установка фоновой заставки...</string>
   <string name="theme_default_name">Настройки системы</string>
   <string name="theme_dark_name">Тёмная</string>
   <string name="theme_light_name">Светлая</string>
@@ -695,8 +695,8 @@
   <string name="limited_connection_mode">Режим ограниченного подключения</string>
   <string name="statistics_quality">Качественные изображения</string>
   <string name="quality_images_info">Качественные изображения - это диаграммы или фотографии, которые соответствуют определенным стандартам качества (которые в основном носят технический характер) и представляют ценность для проектов Викимедиа</string>
-  <string name="resuming_upload">Возобновление загрузки…</string>
-  <string name="pausing_upload">Приостановка загрузки…</string>
+  <string name="resuming_upload">Возобновление загрузки...</string>
+  <string name="pausing_upload">Приостановка загрузки...</string>
   <string name="cancelling_upload">Отмена загрузки…</string>
   <string name="cancel_upload">Отменить загрузку</string>
   <string name="limited_connection_explanation">Вы включили ограниченный режим подключения. Все загрузки приостановлены и возобновятся после отключения этого режима.</string>
@@ -841,9 +841,20 @@
   <string name="other_problem_or_information_please_explain_below">Другая проблема или информация (пожалуйста, объясните ниже).</string>
   <string name="feedback_destination_note">Ваш отзыв будет опубликован на следующей вики-странице: &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Mobile_app/Feedback\"&gt;Commons:Mobile app/Feedback&lt;/a&gt;</string>
   <string name="are_you_sure_that_you_want_cancel_all_the_uploads">Вы уверены, что хотите отменить все загрузки?</string>
-  <string name="cancelling_all_the_uploads">Отмена всех загрузок…</string>
+  <string name="cancelling_all_the_uploads">Отмена всех загрузок...</string>
   <string name="uploads">Загрузки</string>
   <string name="pending">В ожидании</string>
   <string name="failed">Не удалось</string>
   <string name="could_not_load_place_data">Не удалось загрузить данные о месте</string>
+  <string name="custom_selector_delete_folder">Удалить папку</string>
+  <string name="custom_selector_confirm_deletion_title">Подтвердите удаление</string>
+  <string name="custom_selector_confirm_deletion_message">Вы уверены, что хотите удалить папку %1$s содержащую %2$d шт. вложенных элементов?</string>
+  <string name="custom_selector_delete">Удалить</string>
+  <string name="custom_selector_cancel">Отмена</string>
+  <string name="custom_selector_folder_deleted_success">Папка %1$s успешно удалена</string>
+  <string name="custom_selector_folder_deleted_failure">Не получилось удалить папку %1$s</string>
+  <string name="custom_selector_error_trashing_folder_contents">Ошибка при удалении содержимого папки: %1$s</string>
+  <string name="red_pin">У этого места пока нет фотографий, так что сделайте несколько!</string>
+  <string name="green_pin">У этого места уже есть фотография.</string>
+  <string name="grey_pin">Сейчас проверим, есть ли у этого места фотография.</string>
 </resources>

@@ -272,4 +272,6 @@
   <string name="uploads">اپلوڈاں</string>
   <string name="pending">وچار ہیٹھ</string>
   <string name="failed">ناکام تھیا</string>
+  <string name="custom_selector_delete">مٹاؤ</string>
+  <string name="custom_selector_cancel">منسوخ</string>
 </resources>

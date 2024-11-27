@@ -157,7 +157,7 @@ public class ProfileActivity extends BaseActivity {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        compositeDisposable.clear();
+        getCompositeDisposable().clear();
     }
 
     /**

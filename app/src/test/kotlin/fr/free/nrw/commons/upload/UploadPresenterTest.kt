@@ -84,7 +84,7 @@ class UploadPresenterTest {
     fun handleSubmitImagesNoLocationWithConsecutiveNoLocationUploads() {
         `when`(imageCoords.imageCoordsExists).thenReturn(false)
         `when`(uploadItem.getGpsCoords()).thenReturn(imageCoords)
-        `when`(repository.uploads).thenReturn(uploadableItems)
+        `when`(repository.getUploads()).thenReturn(uploadableItems)
         uploadableItems.add(uploadItem)
 
         // test 1 - insufficient count
@@ -112,7 +112,7 @@ class UploadPresenterTest {
         ).thenReturn(UploadPresenter.CONSECUTIVE_UPLOADS_WITHOUT_COORDINATES_REMINDER_THRESHOLD)
         `when`(imageCoords.imageCoordsExists).thenReturn(true)
         `when`(uploadItem.getGpsCoords()).thenReturn(imageCoords)
-        `when`(repository.uploads).thenReturn(uploadableItems)
+        `when`(repository.getUploads()).thenReturn(uploadableItems)
         uploadableItems.add(uploadItem)
         uploadPresenter.handleSubmit()
         // no alert dialog expected

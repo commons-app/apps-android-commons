@@ -27,7 +27,7 @@
   <string name="forgot_password">পাছৱৰ্ড পাহৰিলে?</string>
   <string name="signup">পঞ্জীয়ন কৰক</string>
   <string name="logging_in_title">লগইন হৈ আছে</string>
-  <string name="logging_in_message">অনুগ্ৰহ কৰি অপেক্ষা কৰক…</string>
+  <string name="logging_in_message">অনুগ্ৰহ কৰি অপেক্ষা কৰক...</string>
   <string name="login_success" fuzzy="true">লগইন সফল হ\'ল!</string>
   <string name="login_failed" fuzzy="true">লগইন বিফল হৈছে!</string>
   <string name="upload_failed">ফাইল পোৱা নগ\'ল। অনুগ্ৰহ কৰি আন এটা ফাইল চেষ্টা কৰক।</string>
@@ -74,7 +74,7 @@
   <string name="about_privacy_policy" fuzzy="true">&lt;u&gt;গোপনিয়তা নীতি&lt;/u&gt;</string>
   <string name="menu_feedback">প্ৰতিক্ৰিয়া প্ৰেৰণ কৰক (ইমেইল যোগে)</string>
   <string name="no_email_client">কোনো ইমেইল ক্লায়েন্ট ইনষ্টল কৰা নাই</string>
-  <string name="waiting_first_sync">প্ৰথম চিংকৰ বাবে অপেক্ষাৰত…</string>
+  <string name="waiting_first_sync">প্ৰথম চিংকৰ বাবে অপেক্ষাৰত...</string>
   <string name="no_uploads_yet">আপুনি এতিয়ালৈকে কোনো ফটো আপল\'ড কৰা নাই।</string>
   <string name="menu_retry_upload">পুনৰ চেষ্টা কৰক</string>
   <string name="menu_cancel_upload">বাতিল কৰক</string>

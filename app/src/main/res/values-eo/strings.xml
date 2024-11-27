@@ -78,7 +78,7 @@
   <string name="forgot_password">Ĉu pasvorto forgesita?</string>
   <string name="signup">Registriĝi</string>
   <string name="logging_in_title">Ensalutado</string>
-  <string name="logging_in_message">Bonvolu atendi…</string>
+  <string name="logging_in_message">Bonvolu atendi...</string>
   <string name="updating_caption_title">Ĝisdatiganta subtekstojn kaj priskribojn</string>
   <string name="updating_caption_message">Bonvolu atendi…</string>
   <string name="login_success" fuzzy="true">Ensalutado sukcesis</string>
@@ -150,7 +150,7 @@
   <string name="menu_feedback">Sendi viajn komentojn (per retpoŝto)</string>
   <string name="no_email_client">Neniu retpoŝtilo instalita</string>
   <string name="provider_categories">Laste uzitaj kategorioj</string>
-  <string name="waiting_first_sync">Atendas la unuan Sinkronigado…</string>
+  <string name="waiting_first_sync">Atendas la unuan Sinkronigado...</string>
   <string name="no_uploads_yet">Vi ankoraŭ ne alŝutis fotojn.</string>
   <string name="menu_retry_upload">Reprovi</string>
   <string name="menu_cancel_upload">Nuligi</string>
@@ -190,7 +190,7 @@
   <string name="welcome_final_button_text">Jes!</string>
   <string name="welcome_help_button_text">&lt;u&gt;Ekscii pli&lt;/u&gt;</string>
   <string name="detail_panel_cats_label">Kategorioj</string>
-  <string name="detail_panel_cats_loading">Ŝargado…</string>
+  <string name="detail_panel_cats_loading">Ŝargado...</string>
   <string name="detail_panel_cats_none">Neniu elektita</string>
   <string name="detail_caption_empty">Neniu substeksto</string>
   <string name="detail_description_empty">Sen priskribo</string>
@@ -482,7 +482,7 @@
   <string name="menu_option_read">Vidu legitajn</string>
   <string name="menu_option_unread">Vidi nelegitojn</string>
   <string name="error_occurred_in_picking_images">Eraro okazis dum elektado de bildoj</string>
-  <string name="please_wait">Bonvolu atendi…</string>
+  <string name="please_wait">Bonvolu atendi...</string>
   <string name="images_featured_explanation">Elstaraj bildoj estas tiuj bildoj far tre spertaj fotografistoj kaj ilustristoj, kiujn la komunumo de Vikimedia Komunejo elektis kiel iujn de la plej alta kvalito en la retejo.</string>
   <string name="images_via_nearby_explanation">Bildoj Alŝutitaj per Apudaj lokoj estas bildoj alŝutitaj per trovado de lokoj sur la mapo.</string>
   <string name="thanks_received_explanation">Tiu funkcio ebligas sendi Dankantan sciigon al farinto de utila redakto – per malgranda dankiga ligilo ĉe la paĝo de historio aŭ diferenco.</string>
@@ -504,7 +504,7 @@
   <string name="media_location_permission_denied">Aliro al loko de plurmediaĵo malakceptita</string>
   <string name="add_location_manually">Ni eble ne povos aŭtomate akiri pri-lokajn datumojn de bildoj, kiujn vi alŝutas. Bonvolu aldoni la taŭgan lokon por ĉiu bildo antaŭ ol sendi</string>
   <string name="share_text">Alŝutu fotojn al Vikimedia Komunejo rekte de via telefono. Elŝutu la Komunejan aplikaĵon nun: %1$s</string>
-  <string name="share_via">Diskonigi aplikaĵon per…</string>
+  <string name="share_via">Diskonigi aplikaĵon per...</string>
   <string name="image_info">Informo pri Bildo</string>
   <string name="no_categories_found">Neniu Kategorio troviĝis</string>
   <string name="no_depiction_found">Neniu bildo-priskribo trovita</string>
@@ -636,9 +636,9 @@
   <string name="limited_connection_mode">Modo por limigita konekto</string>
   <string name="statistics_quality">Kvalitaj Bildoj</string>
   <string name="quality_images_info">Kvalitaj bildoj estas diagramoj aŭ fotoj kiuj kontentigas certajn normojn pri kvalito (kiuj estas plejparte teknikaj) kaj estas valoraj por Vikimediaj projektoj.</string>
-  <string name="resuming_upload">Rekomencante alŝuton…</string>
-  <string name="pausing_upload">Paŭzante alŝuton…</string>
-  <string name="cancelling_upload">Nuligante alŝuton…</string>
+  <string name="resuming_upload">Rekomencante alŝuton...</string>
+  <string name="pausing_upload">Paŭzante alŝuton...</string>
+  <string name="cancelling_upload">Nuligante alŝuton...</string>
   <string name="cancel_upload">Ĉesigi alŝutadon</string>
   <string name="limited_connection_explanation">Vi aktivigis Modon por limigita konekto. Ĉiuj alŝutoj estas paŭzitaj kaj rekomencos post kiam vi malŝaltos ĉi modon.</string>
   <string name="limited_connection_is_on">Modo por limigita konekto estas aktivigita.</string>

@@ -285,7 +285,7 @@ public class OkHttpJsonApiClient {
         throws Exception {
 
         Timber.d("Fetching nearby items at radius %s", radius);
-        Timber.d("CUSTOM_SPARQL%s", String.valueOf(customQuery != null));
+        Timber.d("CUSTOM_SPARQL: %s", String.valueOf(customQuery != null));
         final String wikidataQuery;
         if (customQuery != null) {
             wikidataQuery = customQuery;
@@ -344,7 +344,7 @@ public class OkHttpJsonApiClient {
         final boolean shouldQueryForMonuments, final String customQuery)
         throws Exception {
 
-        Timber.d("CUSTOM_SPARQL%s", String.valueOf(customQuery != null));
+        Timber.d("CUSTOM_SPARQL: %s", String.valueOf(customQuery != null));
 
         final String wikidataQuery;
         if (customQuery != null) {

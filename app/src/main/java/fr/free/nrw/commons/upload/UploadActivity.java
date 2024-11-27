@@ -1,8 +1,8 @@
 package fr.free.nrw.commons.upload;
 
 import static fr.free.nrw.commons.contributions.ContributionController.ACTION_INTERNAL_UPLOADS;
-import static fr.free.nrw.commons.utils.PermissionUtils.PERMISSIONS_STORAGE;
 import static fr.free.nrw.commons.utils.PermissionUtils.checkPermissionsAndPerformAction;
+import static fr.free.nrw.commons.utils.PermissionUtils.getPERMISSIONS_STORAGE;
 import static fr.free.nrw.commons.wikidata.WikidataConstants.PLACE_OBJECT;
 import static fr.free.nrw.commons.wikidata.WikidataConstants.SELECTED_NEARBY_PLACE;
 import static fr.free.nrw.commons.wikidata.WikidataConstants.SELECTED_NEARBY_PLACE_CATEGORY;
@@ -32,7 +32,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 import androidx.work.ExistingWorkPolicy;
-import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.LoginActivity;
 import fr.free.nrw.commons.auth.SessionManager;
@@ -277,7 +276,7 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
 
     public void checkStoragePermissions() {
         // Check if all required permissions are granted
-        final boolean hasAllPermissions = PermissionUtils.hasPermission(this, PERMISSIONS_STORAGE);
+        final boolean hasAllPermissions = PermissionUtils.hasPermission(this, getPERMISSIONS_STORAGE());
         final boolean hasPartialAccess = PermissionUtils.hasPartialAccess(this);
         if (hasAllPermissions || hasPartialAccess) {
             // All required permissions are granted, so enable UI elements and perform actions
@@ -297,7 +296,7 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
                         },
                     R.string.storage_permission_title,
                     R.string.write_storage_permission_rationale_for_image_share,
-                    PERMISSIONS_STORAGE);
+                    getPERMISSIONS_STORAGE());
             }
         }
         /* If all permissions are not granted and a dialog is already showing on screen

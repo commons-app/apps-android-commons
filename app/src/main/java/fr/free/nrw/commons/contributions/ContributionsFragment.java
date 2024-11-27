@@ -5,7 +5,6 @@ import static fr.free.nrw.commons.contributions.Contribution.STATE_FAILED;
 import static fr.free.nrw.commons.contributions.Contribution.STATE_PAUSED;
 import static fr.free.nrw.commons.nearby.fragments.NearbyParentFragment.WLM_URL;
 import static fr.free.nrw.commons.profile.ProfileActivity.KEY_USERNAME;
-import static fr.free.nrw.commons.utils.ImageUtils.IMAGE_OK;
 import static fr.free.nrw.commons.utils.LengthUtils.computeBearing;
 import static fr.free.nrw.commons.utils.LengthUtils.formatDistanceBetween;
 
@@ -23,12 +22,10 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.MenuItem.OnMenuItemClickListener;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.activity.result.ActivityResultCallback;
@@ -39,7 +36,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager.OnBackStackChangedListener;
 import androidx.fragment.app.FragmentTransaction;
-import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.databinding.FragmentContributionsBinding;
@@ -293,7 +289,7 @@ public class ContributionsFragment
             });
         }
         notification.setOnClickListener(view -> {
-            NotificationActivity.startYourself(getContext(), "unread");
+            NotificationActivity.Companion.startYourself(getContext(), "unread");
         });
     }
 

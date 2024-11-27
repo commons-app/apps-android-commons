@@ -85,7 +85,7 @@ class RecentLanguagesDaoUnitTest {
         whenever(client.query(any(), any(), anyOrNull(), any(), anyOrNull()))
             .thenReturn(createCursor(14))
 
-        val result = testObject.recentLanguages
+        val result = testObject.getRecentLanguages()
 
         Assert.assertEquals(14, (result.size))
     }
@@ -95,20 +95,20 @@ class RecentLanguagesDaoUnitTest {
         whenever(client.query(any(), any(), anyOrNull(), any(), anyOrNull())).thenThrow(
             RemoteException(""),
         )
-        testObject.recentLanguages
+        testObject.getRecentLanguages()
     }
 
     @Test
     fun getGetRecentLanguagesReturnsEmptyList_emptyCursor() {
         whenever(client.query(any(), any(), anyOrNull(), any(), anyOrNull()))
             .thenReturn(createCursor(0))
-        Assert.assertTrue(testObject.recentLanguages.isEmpty())
+        Assert.assertTrue(testObject.getRecentLanguages().isEmpty())
     }
 
     @Test
     fun getGetRecentLanguagesReturnsEmptyList_nullCursor() {
         whenever(client.query(any(), any(), anyOrNull(), any(), anyOrNull())).thenReturn(null)
-        Assert.assertTrue(testObject.recentLanguages.isEmpty())
+        Assert.assertTrue(testObject.getRecentLanguages().isEmpty())
     }
 
     @Test
@@ -117,7 +117,7 @@ class RecentLanguagesDaoUnitTest {
         whenever(client.query(any(), any(), anyOrNull(), any(), anyOrNull())).thenReturn(mockCursor)
         whenever(mockCursor.moveToFirst()).thenReturn(false)
 
-        testObject.recentLanguages
+        testObject.getRecentLanguages()
 
         verify(mockCursor).close()
     }

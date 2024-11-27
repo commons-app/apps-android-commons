@@ -210,7 +210,7 @@
   <string name="welcome_final_button_text">Evet!</string>
   <string name="welcome_help_button_text">Daha Fazla Bilgi</string>
   <string name="detail_panel_cats_label">Kategoriler</string>
-  <string name="detail_panel_cats_loading">Yükleniyor…</string>
+  <string name="detail_panel_cats_loading">Yükleniyor...</string>
   <string name="detail_panel_cats_none">Hiçbir şey seçilmedi</string>
   <string name="detail_caption_empty">Altyazı yok</string>
   <string name="detail_description_empty">Açıklama yok</string>
@@ -502,10 +502,11 @@
   <string name="no_notification">Okunmamış bildiriminiz yok</string>
   <string name="no_read_notification">Okundu bildiriminiz yok</string>
   <string name="share_logs_using">Günlükleri kullanarak paylaş</string>
+  <string name="check_your_email_inbox">E-posta kutunuzu denetleyin</string>
   <string name="menu_option_read">Okunanları görüntüle</string>
   <string name="menu_option_unread">Okunmayanları görüntüle</string>
   <string name="error_occurred_in_picking_images">Resimler seçilirken hata oluştu</string>
-  <string name="please_wait">Lütfen bekleyin…</string>
+  <string name="please_wait">Lütfen bekleyin...</string>
   <string name="images_featured_explanation">Seçkin resimler, Wikimedia Commons topluluğunun sitedeki en yüksek kaliteden bazıları olarak seçtiği son derece yetenekli fotoğrafçıların ve illüstratörlerin görüntüleridir.</string>
   <string name="images_via_nearby_explanation">Yakındaki yerler üzerinden yüklenen resimler, haritadaki yerleri keşfederek yüklenen resimlerdir.</string>
   <string name="thanks_received_explanation">Bu özellik, editörlerin, geçmiş sayfasında veya fark sayfasında küçük bir teşekkür bağlantısı kullanarak faydalı düzenlemeler yapan kullanıcılara bir Teşekkür bildirimi göndermesine olanak tanır.</string>
@@ -604,7 +605,7 @@
   <string name="add_bookmark">Yer işaretlerine eklendi</string>
   <string name="wallpaper_set_unsuccessfully">Bir şeyler yanlış gitti. Duvar kağıdı ayarlanamadı</string>
   <string name="setting_wallpaper_dialog_title">Duvar kağıdı olarak ayarla</string>
-  <string name="setting_wallpaper_dialog_message">Duvar Kağıdı ayarlanıyor. Lütfen bekleyin…</string>
+  <string name="setting_wallpaper_dialog_message">Duvar Kağıdı ayarlanıyor. Lütfen bekleyin...</string>
   <string name="theme_default_name">Sistemi izle</string>
   <string name="theme_dark_name">Koyu</string>
   <string name="theme_light_name">Açık</string>
@@ -715,7 +716,7 @@
   <string name="read_phone_state_permission_message">Yakındaki haritalar düzgün çalışmak için TELEFON DURUMUNU okumaya ihtiyaç duyuyor</string>
   <string name="contributions_of_user">Kullanıcının katkıları: %s</string>
   <string name="achievements_of_user">Kullanıcının başarıları: %s</string>
-  <string name="menu_view_user_page" fuzzy="true">Kullanıcı sayfasını görüntüle</string>
+  <string name="menu_view_user_page">Kullanıcı profilini görüntüle</string>
   <string name="edit_depictions">Betimlemeleri düzenle</string>
   <string name="edit_categories">Kategorileri düzenle</string>
   <string name="advanced_options">Gelişmiş Seçenekler</string>
@@ -795,5 +796,16 @@
   </plurals>
   <string name="multiple_files_depiction">Lütfen çoklu yüklemedeki tüm görsellerin aynı kategorilere ve tasvirlere sahip olduğunu unutmayın. Görseller tasvirleri ve kategorileri paylaşmıyorsa, lütfen birkaç ayrı yükleme gerçekleştirin.</string>
   <string name="multiple_files_depiction_header">Çoklu yüklemelerle ilgili not</string>
+  <string name="nearby_wikitalk">Bu öge ile ilgili bir sorunu Vikiveri\'ye bildirin</string>
+  <string name="please_enter_some_comments">Lütfen bir yorum girin</string>
+  <string name="talk">Tartışma</string>
+  <string name="write_something_about_the_item">\' %1$s \' öğesi hakkında bir şeyler yazın. Herkes tarafından görülebilir olacaktır.</string>
+  <string name="other_problem_or_information_please_explain_below">Diğer sorun veya bilgi (lütfen aşağıda açıklayınız).</string>
   <string name="feedback_destination_note">Geri bildiriminiz aşağıdaki wiki sayfasına gönderilir:  &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Mobile_app/Feedback\"&gt;Commons:Mobile app/Feedback&lt;/a&gt;</string>
+  <string name="are_you_sure_that_you_want_cancel_all_the_uploads">Tüm yüklemeleri iptal etmek istediğinizden emin misiniz?</string>
+  <string name="cancelling_all_the_uploads">Tüm yüklemeler iptal ediliyor...</string>
+  <string name="uploads">Yüklemeler</string>
+  <string name="pending">Beklemede</string>
+  <string name="failed">Başarısız</string>
+  <string name="green_pin">Bu yerin zaten bir resmi var.</string>
 </resources>

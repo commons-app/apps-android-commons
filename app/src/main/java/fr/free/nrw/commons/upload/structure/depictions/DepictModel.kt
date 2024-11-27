@@ -39,7 +39,7 @@ class DepictModel
                     for (place in places) {
                         place.wikiDataEntityId?.let { qids.add(it) }
                     }
-                    repository.uploads.forEach { item ->
+                    repository.getUploads().forEach { item ->
                         if (item.gpsCoords != null && item.gpsCoords.imageCoordsExists) {
                             Coordinates2Country
                                 .countryQID(

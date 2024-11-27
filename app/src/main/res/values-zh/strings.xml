@@ -34,11 +34,13 @@
 * SomeyaMako
 * Stang
 * StarrySky
+* TFX202X
 * Tranve
 * U.T.
 * Vikarna
 * VulpesVulpes825
 * Whym
+* WiiUf
 * Willy1018
 * Wxyveronica
 * XiaoGuoQuQ233
@@ -79,22 +81,28 @@
   <string name="nearby_filter_state">地点状态</string>
   <string name="appwidget_img">今日图片</string>
   <plurals name="uploads_pending_notification_indicator">
+    <item quantity="one">%1$d个文件正在上传</item>
     <item quantity="other">%1$d个文件正在上传</item>
   </plurals>
   <plurals name="contributions_subtitle">
+    <item quantity="one">%1$d次上传</item>
     <item quantity="other">%1$d次上传</item>
   </plurals>
   <string name="starting_uploads">开始上传</string>
   <plurals name="starting_multiple_uploads">
+    <item quantity="one">正在处理%d个上传</item>
     <item quantity="other">正在处理%d个上传</item>
   </plurals>
   <plurals name="multiple_uploads_title">
+    <item quantity="one">%d个上传</item>
     <item quantity="other">%d个上传</item>
   </plurals>
   <plurals name="share_license_summary">
+    <item quantity="one">该图像的授权协议是 %1$s</item>
     <item quantity="other">这些图像的授权协议是 %1$s</item>
   </plurals>
   <plurals name="upload_count_title">
+    <item quantity="one">%1$d次上传</item>
     <item quantity="other">%1$d次上传</item>
   </plurals>
   <plurals name="receiving_shared_content">
@@ -164,6 +172,7 @@
   <string name="categories_search_text_hint">搜索分类</string>
   <string name="depicts_search_text_hint">搜索您的媒体描述的项目（如山、泰姬陵等）</string>
   <string name="menu_save_categories">保存</string>
+  <string name="menu_overflow_desc">溢出菜单</string>
   <string name="refresh_button">刷新</string>
   <string name="display_list_button">列表</string>
   <string name="contributions_subtitle_zero">（尚无上传）</string>
@@ -546,7 +555,7 @@
   <string name="media_location_permission_denied">已拒绝访问媒体位置</string>
   <string name="add_location_manually">我们可能无法自动从你上传的图片中获取位置数据。提交前请为每张图片添加适当的位置</string>
   <string name="share_text">直接在您手机上的维基共享资源应用中上传照片。立即下载共享资源应用：%1$s</string>
-  <string name="share_via">分享到…</string>
+  <string name="share_via">分享到...</string>
   <string name="image_info">图像信息</string>
   <string name="no_categories_found">找不到分类</string>
   <string name="no_depiction_found">找不到描写。</string>
@@ -572,6 +581,7 @@
   <string name="category_edit_helper_show_edit_title">分类更新</string>
   <string name="category_edit_helper_show_edit_title_success">成功</string>
   <plurals name="category_edit_helper_show_edit_message_if">
+    <item quantity="one">分类%1$s已添加。</item>
     <item quantity="other">分类%1$s已添加。</item>
   </plurals>
   <string name="category_edit_helper_edit_message_else">无法添加分类。</string>
@@ -579,6 +589,7 @@
   <string name="depictions_edit_helper_make_edit_toast">正在尝试更新描述。</string>
   <string name="depictions_edit_helper_show_edit_title">编辑描述</string>
   <plurals name="depictions_edit_helper_show_edit_message_if">
+    <item quantity="one">已添加 %1$s 个描写。</item>
     <item quantity="other">已添加 %1$s 个描写。</item>
   </plurals>
   <string name="depictions_edit_helper_edit_message_else">无法添加描述。</string>
@@ -679,8 +690,8 @@
   <string name="limited_connection_mode">限制连接模式</string>
   <string name="statistics_quality">优良图片</string>
   <string name="quality_images_info">品质图像是符合一定质量标准（本质上大多是技术性的）的图表或照片，它们对维基媒体计划很有价值</string>
-  <string name="resuming_upload">正在恢复上传…</string>
-  <string name="pausing_upload">暂停上传…</string>
+  <string name="resuming_upload">正在恢复上传...</string>
+  <string name="pausing_upload">暂停上传...</string>
   <string name="cancelling_upload">正在取消上传…</string>
   <string name="cancel_upload">取消上传</string>
   <string name="limited_connection_explanation">您已启用限制连接模式。所有的上传已暂停并将在您禁用此模式后立刻恢复。</string>
@@ -808,6 +819,7 @@
   <string name="saving_kml_file">正在保存KML文件</string>
   <string name="saving_gpx_file">正在保存GPX文件</string>
   <plurals name="custom_picker_images_selected_title_appendix">
+    <item quantity="one">已选择%d个图像</item>
     <item quantity="other">已选择%d个图像</item>
   </plurals>
   <string name="multiple_files_depiction">请记住，每次多图片上传会为其中的所有图片标注相同的分类和描述。如果这些图片并不共享同样的描述和分类，请分别进行多次上传。</string>
@@ -821,9 +833,21 @@
   <string name="other_problem_or_information_please_explain_below">其他问题或信息（请在下方解释）。</string>
   <string name="feedback_destination_note">您的反馈已经发布在以下wiki页面：&lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Mobile_app/Feedback\"&gt;Commons:Mobile app/Feedback&lt;/a&gt;</string>
   <string name="are_you_sure_that_you_want_cancel_all_the_uploads">您确定要取消所有上传吗？</string>
-  <string name="cancelling_all_the_uploads">取消所有的上传…</string>
+  <string name="cancelling_all_the_uploads">取消所有的上传...</string>
   <string name="uploads">上传</string>
   <string name="pending">待处理</string>
   <string name="failed">失败</string>
   <string name="could_not_load_place_data">无法加载地点数据</string>
+  <string name="custom_selector_delete_folder">删除文件夹</string>
+  <string name="custom_selector_confirm_deletion_title">确认删除</string>
+  <string name="custom_selector_confirm_deletion_message">您确定要删除包含%2$d的文件夹%1$s吗？</string>
+  <string name="custom_selector_delete">删除</string>
+  <string name="custom_selector_cancel">撤消</string>
+  <string name="custom_selector_folder_deleted_success">文件夹%1$s已成功删除</string>
+  <string name="custom_selector_folder_deleted_failure">无法删除文件夹%1$s</string>
+  <string name="custom_selector_error_trashing_folder_contents">删除文件夹内容时出错： %1$s</string>
+  <string name="custom_selector_folder_not_found_error">无法检索存储桶ID的文件夹路径： %1$d</string>
+  <string name="red_pin">这个地点还没有照片，快去拍一张吧！</string>
+  <string name="green_pin">这个地点已经有照片了。</string>
+  <string name="grey_pin">现在检查这个地点是否有照片。</string>
 </resources>
