@@ -3,18 +3,15 @@ package fr.free.nrw.commons.kvstore
 import android.content.Context
 import android.content.SharedPreferences
 import com.nhaarman.mockitokotlin2.atLeast
-import com.nhaarman.mockitokotlin2.never
-import com.nhaarman.mockitokotlin2.times
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
-import fr.free.nrw.commons.kvstore.BasicKvStore.KEY_VERSION
+import fr.free.nrw.commons.kvstore.BasicKvStore.Companion.KEY_VERSION
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import org.mockito.ArgumentMatchers.anyInt
 import org.mockito.ArgumentMatchers.anyString
 import org.mockito.Mockito.mock
-import java.lang.IllegalArgumentException
 
 class BasicKvStoreTest {
     private val context = mock<Context>()
@@ -30,7 +27,7 @@ class BasicKvStoreTest {
     }
 
     @Test
-    fun testVersionUpdate() {
+    fun versionUpdate() {
         whenever(prefs.getInt(KEY_VERSION, 0)).thenReturn(99)
         BasicKvStore(context, "name", 100, true)
 
@@ -41,10 +38,10 @@ class BasicKvStoreTest {
         verify(editor, atLeast(2)).apply()
     }
 
-    @Test
-    fun testClearAllFlagIsHonored() {
-        store.onVersionUpdate(99, 100, false)
-        verify(prefs, never()).edit()
+    @Test(expected = IllegalArgumentException::class)
+    fun versionDowngradeNotAllowed() {
+        whenever(prefs.getInt(KEY_VERSION, 0)).thenReturn(100)
+        BasicKvStore(context, "name", 99, true)
     }
 
     @Test
@@ -118,11 +115,14 @@ class BasicKvStoreTest {
 
     @Test
     fun putAllStrings() {
-        store.putAllStrings(mapOf(
+        store.putAllStrings(
+            mapOf(
                 "one" to "fish",
                 "two" to "fish",
                 "red" to "fish",
-                "blue" to "fish"))
+                "blue" to "fish"
+            )
+        )
 
         verify(prefs).edit()
         verify(editor).putString("one", "fish")
@@ -130,6 +130,16 @@ class BasicKvStoreTest {
         verify(editor).putString("red", "fish")
         verify(editor).putString("blue", "fish")
         verify(editor).apply()
+    }
+
+    @Test(expected = IllegalArgumentException::class)
+    fun putAllStringsWithReservedKey() {
+        store.putAllStrings(
+            mapOf(
+                "this" to "that",
+                KEY_VERSION to "something"
+            )
+        )
     }
 
     @Test
@@ -215,37 +225,14 @@ class BasicKvStoreTest {
     }
 
     @Test
-    fun clearAllWithVersion() {
-        store.clearAllWithVersion()
-        verify(prefs).edit()
-        verify(editor).clear()
-        verify(editor).apply()
-        verify(editor, never()).putInt(anyString(), anyInt())
-    }
-
-    @Test
     fun clearAllPreservesVersion() {
         whenever(prefs.getInt(KEY_VERSION, 0)).thenReturn(99)
 
         store.clearAll()
 
-        verify(prefs, times(2)).edit()
+        verify(prefs).edit()
         verify(editor).clear()
         verify(editor).putInt(KEY_VERSION, 99)
-        verify(editor, times(2)).apply()
-    }
-
-    @Test
-    fun registerForChanges() {
-        val listener = mock<SharedPreferences.OnSharedPreferenceChangeListener>()
-        store.registerChangeListener(listener)
-        verify(prefs).registerOnSharedPreferenceChangeListener(listener)
-    }
-
-    @Test
-    fun unregisterForChanges() {
-        val listener = mock<SharedPreferences.OnSharedPreferenceChangeListener>()
-        store.unregisterChangeListener(listener)
-        verify(prefs).unregisterOnSharedPreferenceChangeListener(listener)
+        verify(editor).apply()
     }
 }
