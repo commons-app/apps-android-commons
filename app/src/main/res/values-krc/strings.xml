@@ -295,10 +295,6 @@
   <string name="about_translate_proceed">Бардыр</string>
   <string name="about_translate_cancel">Ызына ал</string>
   <string name="retry">Джангыдан сына</string>
-  <string name="showcase_view_whole_nearby_activity">Была, Википедия статьяланы суратлы этер ючюн суратлагъа керек болгъан сизге джууукъ джерле.\n\n\n\'БУ БЁЛГЕДЕ ИЗЛЕ\'ни басыб, карта ачылыр эмда ол локацияны къатында излеуню башлар.</string>
-  <string name="showcase_view_needs_photo">Былайда фотосурат керекди.</string>
-  <string name="showcase_view_has_photo">Былайда фотосурат алайсыз да барды.</string>
-  <string name="showcase_view_no_longer_exists">Былайы энди джокъду.</string>
   <string name="no_images_found">Сурат табылалмады!</string>
   <string name="error_loading_images">Суратла джюкленнген заманда халат болду.</string>
   <string name="image_uploaded_by">Джюклеген: %1$s</string>

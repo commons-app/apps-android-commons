@@ -301,10 +301,6 @@
   <string name="about_translate_proceed">Lanjutkan</string>
   <string name="about_translate_cancel">Batal</string>
   <string name="retry">Coba lagi</string>
-  <string name="showcase_view_whole_nearby_activity">Tekan pada \'CARI AREA INI\' akan mengunci peta dan meluncurkan pencarian terdekat di sekitar lokasi tersebut</string>
-  <string name="showcase_view_needs_photo">Tempat ini membutuhkan sebuah foto.</string>
-  <string name="showcase_view_has_photo">Tempat ini telah mempunyai sebuah foto.</string>
-  <string name="showcase_view_no_longer_exists">Tempat ini sudah tidak ada lagi.</string>
   <string name="no_images_found">tidak ada gambar yang ditemukan</string>
   <string name="error_loading_images">Terjadi kesalahan selama memuat gambar.</string>
   <string name="image_uploaded_by">Diunggah oleh: %1$s</string>

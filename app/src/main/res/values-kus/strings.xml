@@ -263,9 +263,6 @@
   <string name="about_translate_proceed">Kem tuon</string>
   <string name="about_translate_cancel">Basim</string>
   <string name="retry">Mɔɔm ya\'as</string>
-  <string name="showcase_view_needs_photo">Zin\'kaŋ bɔɔdi footo.</string>
-  <string name="showcase_view_has_photo">Zin\'ikaŋa pʋm mɔr footo sa.</string>
-  <string name="showcase_view_no_longer_exists">Zin\'ikaŋa pʋ lɛm bɛ ya\'asa.</string>
   <string name="no_images_found">Pʋ nyɛ footo!</string>
   <string name="error_loading_images">Daʋŋʋ kidig footonam la kpɛn\'ɛdin la.</string>
   <string name="image_uploaded_by">%1$s kpɛn\'ɛs</string>
