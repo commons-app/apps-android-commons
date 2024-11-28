@@ -1,145 +1,133 @@
-package fr.free.nrw.commons.logging;
+package fr.free.nrw.commons.logging
 
-import android.util.Log;
+import android.util.Log
 
-import androidx.annotation.NonNull;
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import java.util.Locale
+import java.util.concurrent.Executor
 
-import java.util.Locale;
-import java.util.concurrent.Executor;
+import ch.qos.logback.classic.LoggerContext
+import ch.qos.logback.classic.encoder.PatternLayoutEncoder
+import ch.qos.logback.classic.spi.ILoggingEvent
+import ch.qos.logback.core.rolling.FixedWindowRollingPolicy
+import ch.qos.logback.core.rolling.RollingFileAppender
+import ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy
+import timber.log.Timber
 
-import ch.qos.logback.classic.LoggerContext;
-import ch.qos.logback.classic.encoder.PatternLayoutEncoder;
-import ch.qos.logback.classic.spi.ILoggingEvent;
-import ch.qos.logback.core.rolling.FixedWindowRollingPolicy;
-import ch.qos.logback.core.rolling.RollingFileAppender;
-import ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy;
-import timber.log.Timber;
 
 /**
- * Extends Timber's debug tree to write logs to a file
+ * Extends Timber's debug tree to write logs to a file.
  */
-public class FileLoggingTree extends Timber.DebugTree implements LogLevelSettableTree {
-    private final Logger logger = LoggerFactory.getLogger(Logger.ROOT_LOGGER_NAME);
-    private int logLevel;
-    private final String logFileName;
-    private int fileSize;
-    private FixedWindowRollingPolicy rollingPolicy;
-    private final Executor executor;
+class FileLoggingTree(
+    private var logLevel: Int,
+    private val logFileName: String,
+    logDirectory: String,
+    private val fileSizeInKb: Int,
+    private val executor: Executor
+) : Timber.DebugTree(), LogLevelSettableTree {
 
-    public FileLoggingTree(int logLevel,
-                           String logFileName,
-                           String logDirectory,
-                           int fileSizeInKb,
-                           Executor executor) {
-        this.logLevel = logLevel;
-        this.logFileName = logFileName;
-        this.fileSize = fileSizeInKb;
-        configureLogger(logDirectory);
-        this.executor = executor;
+    private val logger: Logger = LoggerFactory.getLogger(Logger.ROOT_LOGGER_NAME)
+    private lateinit var rollingPolicy: FixedWindowRollingPolicy
+
+    init {
+        configureLogger(logDirectory)
     }
 
     /**
-     * Can be overridden to change file's log level
-     * @param logLevel
+     * Can be overridden to change the file's log level.
+     * @param logLevel The new log level.
      */
-    @Override
-    public void setLogLevel(int logLevel) {
-        this.logLevel = logLevel;
+    override fun setLogLevel(logLevel: Int) {
+        this.logLevel = logLevel
     }
 
     /**
-     * Check and log any message
-     * @param priority
-     * @param tag
-     * @param message
-     * @param t
+     * Checks and logs any message.
+     * @param priority The priority of the log message.
+     * @param tag The tag associated with the log message.
+     * @param message The log message.
+     * @param t An optional throwable.
      */
-    @Override
-    protected void log(final int priority, final String tag, @NonNull final String message, Throwable t) {
-        executor.execute(() -> logMessage(priority, tag, message));
-
-    }
-
-    /**
-     * Log any message based on the priority
-     * @param priority
-     * @param tag
-     * @param message
-     */
-    private void logMessage(int priority, String tag, String message) {
-        String messageWithTag = String.format("[%s] : %s", tag, message);
-        switch (priority) {
-            case Log.VERBOSE:
-                logger.trace(messageWithTag);
-                break;
-            case Log.DEBUG:
-                logger.debug(messageWithTag);
-                break;
-            case Log.INFO:
-                logger.info(messageWithTag);
-                break;
-            case Log.WARN:
-                logger.warn(messageWithTag);
-                break;
-            case Log.ERROR:
-                logger.error(messageWithTag);
-                break;
-            case Log.ASSERT:
-                logger.error(messageWithTag);
-                break;
+    override fun log(priority: Int, tag: String?, message: String, t: Throwable?) {
+        executor.execute {
+            logMessage(priority, tag.orEmpty(), message)
         }
     }
 
     /**
-     * Checks if a particular log line should be logged in the file or not
-     * @param priority
-     * @return
+     * Logs a message based on the priority.
+     * @param priority The priority of the log message.
+     * @param tag The tag associated with the log message.
+     * @param message The log message.
      */
-    @Override
-    protected boolean isLoggable(int priority) {
-        return priority >= logLevel;
+    private fun logMessage(priority: Int, tag: String, message: String) {
+        val messageWithTag = "[$tag] : $message"
+        when (priority) {
+            Log.VERBOSE -> logger.trace(messageWithTag)
+            Log.DEBUG -> logger.debug(messageWithTag)
+            Log.INFO -> logger.info(messageWithTag)
+            Log.WARN -> logger.warn(messageWithTag)
+            Log.ERROR, Log.ASSERT -> logger.error(messageWithTag)
+        }
     }
 
     /**
-     * Configures the logger with a file size rolling policy (SizeBasedTriggeringPolicy)
-     * https://github.com/tony19/logback-android/wiki
-     * @param logDir
+     * Checks if a particular log line should be logged in the file or not.
+     * @param priority The priority of the log message.
+     * @return True if the log message should be logged, false otherwise.
      */
-    private void configureLogger(String logDir) {
-        LoggerContext loggerContext = (LoggerContext) LoggerFactory.getILoggerFactory();
-        loggerContext.reset();
+    @Deprecated("Deprecated in Java")
+    override fun isLoggable(priority: Int): Boolean {
+        return priority >= logLevel
+    }
 
-        RollingFileAppender<ILoggingEvent> rollingFileAppender = new RollingFileAppender<>();
-        rollingFileAppender.setContext(loggerContext);
-        rollingFileAppender.setFile(logDir + "/" + logFileName + ".0.log");
+    /**
+     * Configures the logger with a file size rolling policy (SizeBasedTriggeringPolicy).
+     * https://github.com/tony19/logback-android/wiki
+     * @param logDir The directory where logs should be stored.
+     */
+    private fun configureLogger(logDir: String) {
+        val loggerContext = LoggerFactory.getILoggerFactory() as LoggerContext
+        loggerContext.reset()
 
-        rollingPolicy = new FixedWindowRollingPolicy();
-        rollingPolicy.setContext(loggerContext);
-        rollingPolicy.setMinIndex(1);
-        rollingPolicy.setMaxIndex(4);
-        rollingPolicy.setParent(rollingFileAppender);
-        rollingPolicy.setFileNamePattern(logDir + "/" + logFileName + ".%i.log");
-        rollingPolicy.start();
+        val rollingFileAppender = RollingFileAppender<ILoggingEvent>().apply {
+            context = loggerContext
+            file = "$logDir/$logFileName.0.log"
+        }
 
-        SizeBasedTriggeringPolicy<ILoggingEvent> triggeringPolicy = new SizeBasedTriggeringPolicy<>();
-        triggeringPolicy.setContext(loggerContext);
-        triggeringPolicy.setMaxFileSize(String.format(Locale.ENGLISH, "%dKB", fileSize));
-        triggeringPolicy.start();
+        rollingPolicy = FixedWindowRollingPolicy().apply {
+            context = loggerContext
+            minIndex = 1
+            maxIndex = 4
+            setParent(rollingFileAppender)
+            fileNamePattern = "$logDir/$logFileName.%i.log"
+            start()
+        }
 
-        PatternLayoutEncoder encoder = new PatternLayoutEncoder();
-        encoder.setContext(loggerContext);
-        encoder.setPattern("%-27(%date{ISO8601}) [%-5level] [%thread] %msg%n");
-        encoder.start();
+        val triggeringPolicy = SizeBasedTriggeringPolicy<ILoggingEvent>().apply {
+            context = loggerContext
+            maxFileSize = "$fileSizeInKb"
+            start()
+        }
 
-        rollingFileAppender.setEncoder(encoder);
-        rollingFileAppender.setRollingPolicy(rollingPolicy);
-        rollingFileAppender.setTriggeringPolicy(triggeringPolicy);
-        rollingFileAppender.start();
-        ch.qos.logback.classic.Logger logger = (ch.qos.logback.classic.Logger)
-                LoggerFactory.getLogger(Logger.ROOT_LOGGER_NAME);
-        logger.addAppender(rollingFileAppender);
+        val encoder = PatternLayoutEncoder().apply {
+            context = loggerContext
+            pattern = "%-27(%date{ISO8601}) [%-5level] [%thread] %msg%n"
+            start()
+        }
+
+        rollingFileAppender.apply {
+            this.encoder = encoder
+            rollingPolicy = rollingPolicy
+            this.triggeringPolicy = triggeringPolicy
+            start()
+        }
+
+        val rootLogger = LoggerFactory.getLogger(
+            Logger.ROOT_LOGGER_NAME
+        ) as ch.qos.logback.classic.Logger
+        rootLogger.addAppender(rollingFileAppender)
     }
 }

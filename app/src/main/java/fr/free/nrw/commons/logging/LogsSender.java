@@ -1,201 +1,193 @@
-package fr.free.nrw.commons.logging;
+package fr.free.nrw.commons.logging
 
-import static org.acra.ACRA.getErrorReporter;
+import android.content.Context
+import android.content.Intent
+import android.net.Uri
 
-import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
+import androidx.core.content.FileProvider
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.content.FileProvider;
+import org.acra.data.CrashReportData
+import org.acra.sender.ReportSender
 
-import org.acra.data.CrashReportData;
-import org.acra.sender.ReportSender;
+import java.io.BufferedInputStream
+import java.io.BufferedOutputStream
+import java.io.File
+import java.io.FileInputStream
+import java.io.FileOutputStream
+import java.io.IOException
+import java.util.zip.ZipEntry
+import java.util.zip.ZipOutputStream
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.nio.charset.Charset;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipOutputStream;
+import fr.free.nrw.commons.R
+import fr.free.nrw.commons.auth.SessionManager
+import org.acra.ACRA.errorReporter
+import timber.log.Timber
 
-import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.auth.SessionManager;
-import timber.log.Timber;
 
 /**
- * Abstract class that implements Acra's log sender
+ * Abstract class that implements Acra's log sender.
  */
-public abstract class LogsSender implements ReportSender {
+abstract class LogsSender(
+    private val sessionManager: SessionManager
+): ReportSender {
 
-    String mailTo;
-    String logFileName;
-    String emailSubject;
-    String emailBody;
-
-    private final SessionManager sessionManager;
-
-    LogsSender(SessionManager sessionManager) {
-        this.sessionManager = sessionManager;
-    }
+    var mailTo: String? = null
+    var logFileName: String? = null
+    var emailSubject: String? = null
+    var emailBody: String? = null
 
     /**
-     * Overrides send method of ACRA's ReportSender to send logs
+     * Overrides the send method of ACRA's ReportSender to send logs.
      *
-     * @param context
-     * @param report
+     * @param context The context in which to send the logs.
+     * @param report The crash report data, if any.
      */
-    @Override
-    public void send(@NonNull final Context context, @Nullable CrashReportData report) {
-        sendLogs(context, report);
-    }
-
-    /**
-     * Gets zipped log files and sends it via email. Can be modified to change the send log mechanism
-     *
-     * @param context
-     * @param report
-     */
-    private void sendLogs(Context context, CrashReportData report) {
-        final Uri logFileUri = getZippedLogFileUri(context, report);
-        if (logFileUri != null) {
-            sendEmail(context, logFileUri);
-        } else {
-            getErrorReporter().handleSilentException(null);
-        }
-    }
-
-    /***
-     * Provides any extra information that you want to send. The return value will be
-     * delivered inside the report verbatim
-     *
-     * @return
-     */
-    protected abstract String getExtraInfo();
-
-    /**
-     * Fires an intent to send email with logs
-     *
-     * @param context
-     * @param logFileUri
-     */
-    private void sendEmail(Context context, Uri logFileUri) {
-        String subject = emailSubject;
-        String body = emailBody;
-
-        Intent emailIntent = new Intent(Intent.ACTION_SEND);
-        emailIntent.setType("message/rfc822");
-        emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{mailTo});
-        emailIntent.putExtra(Intent.EXTRA_SUBJECT, subject);
-        emailIntent.putExtra(Intent.EXTRA_TEXT, body);
-        emailIntent.putExtra(Intent.EXTRA_STREAM, logFileUri);
-        emailIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        emailIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-        context.startActivity(Intent.createChooser(emailIntent, context.getString(R.string.share_logs_using)));
-    }
-
-    /**
-     * Returns the URI for the zipped log file
-     *
-     * @param report
-     * @return
-     */
-    private Uri getZippedLogFileUri(Context context, CrashReportData report) {
-        try {
-            StringBuilder builder = new StringBuilder();
-            if (report != null) {
-                attachCrashInfo(report, builder);
-            }
-            attachUserInfo(builder);
-            attachExtraInfo(builder);
-            byte[] metaData = builder.toString().getBytes(Charset.forName("UTF-8"));
-            File zipFile = new File(LogUtils.getLogZipDirectory(), logFileName);
-            writeLogToZipFile(metaData, zipFile);
-            return FileProvider
-                    .getUriForFile(context,
-                            context.getApplicationContext().getPackageName() + ".provider", zipFile);
-        } catch (IOException e) {
-            Timber.w(e, "Error in generating log file");
-        }
-        return null;
-    }
-
-    /**
-     * Checks if there are any pending crash reports and attaches them to the logs
-     *
-     * @param report
-     * @param builder
-     */
-    private void attachCrashInfo(CrashReportData report, StringBuilder builder) {
+    fun sendWithNullable(context: Context, report: CrashReportData?) {
         if (report == null) {
-            return;
+            errorReporter.handleSilentException(null)
+            return
         }
-        builder.append(report);
+        send(context, report)
+    }
+
+    override fun send(context: Context, report: CrashReportData) {
+        sendLogs(context, report)
     }
 
     /**
-     * Attaches username to the the meta_data file
+     * Gets zipped log files and sends them via email. Can be modified to change the send
+     * log mechanism.
      *
-     * @param builder
+     * @param context The context in which to send the logs.
+     * @param report The crash report data, if any.
      */
-    private void attachUserInfo(StringBuilder builder) {
-        builder.append("MediaWiki Username = ").append(sessionManager.getUserName()).append("\n");
-    }
+    private fun sendLogs(context: Context, report: CrashReportData?) {
+        val logFileUri = getZippedLogFileUri(context, report)
+        if (logFileUri != null) {
+            sendEmail(context, logFileUri)
+        } else {
+            errorReporter.handleSilentException(null)
 
-    /**
-     * Gets any extra meta information to be attached with the log files
-     *
-     * @param builder
-     */
-    private void attachExtraInfo(StringBuilder builder) {
-        String infoToBeAttached = getExtraInfo();
-        builder.append(infoToBeAttached);
-        builder.append("\n");
-    }
-
-    /**
-     * Zips the logs and meta information
-     *
-     * @param metaData
-     * @param zipFile
-     * @throws IOException
-     */
-    private void writeLogToZipFile(byte[] metaData, File zipFile) throws IOException {
-        FileOutputStream fos = new FileOutputStream(zipFile);
-        BufferedOutputStream bos = new BufferedOutputStream(fos);
-        ZipOutputStream zos = new ZipOutputStream(bos);
-        File logDir = new File(LogUtils.getLogDirectory());
-
-        if (!logDir.exists() || logDir.listFiles().length == 0) {
-            return;
         }
+    }
 
-        byte[] buffer = new byte[1024];
-        for (File file : logDir.listFiles()) {
-            if (file.isDirectory()) {
-                continue;
+    /**
+     * Provides any extra information that you want to send. The return value will be
+     * delivered inside the report verbatim.
+     *
+     * @return A string containing the extra information.
+     */
+    protected abstract fun getExtraInfo(): String
+
+    /**
+     * Fires an intent to send an email with logs.
+     *
+     * @param context The context in which to send the email.
+     * @param logFileUri The URI of the zipped log file.
+     */
+    private fun sendEmail(context: Context, logFileUri: Uri) {
+        val emailIntent = Intent(Intent.ACTION_SEND).apply {
+            type = "message/rfc822"
+            putExtra(Intent.EXTRA_EMAIL, arrayOf(mailTo))
+            putExtra(Intent.EXTRA_SUBJECT, emailSubject)
+            putExtra(Intent.EXTRA_TEXT, emailBody)
+            putExtra(Intent.EXTRA_STREAM, logFileUri)
+            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+        }
+        context.startActivity(Intent.createChooser(emailIntent, context.getString(R.string.share_logs_using)))
+    }
+
+    /**
+     * Returns the URI for the zipped log file.
+     *
+     * @param context The context for file URI generation.
+     * @param report The crash report data, if any.
+     * @return The URI of the zipped log file or null if an error occurs.
+     */
+    private fun getZippedLogFileUri(context: Context, report: CrashReportData?): Uri? {
+        return try {
+            val builder = StringBuilder().apply {
+                report?.let { attachCrashInfo(it, this) }
+                attachUserInfo(this)
+                attachExtraInfo(this)
             }
-            FileInputStream fis = new FileInputStream(file);
-            BufferedInputStream bis = new BufferedInputStream(fis);
-            zos.putNextEntry(new ZipEntry(file.getName()));
-            int length;
-            while ((length = bis.read(buffer)) > 0) {
-                zos.write(buffer, 0, length);
-            }
-            zos.closeEntry();
-            bis.close();
+            val metaData = builder.toString().toByteArray(Charsets.UTF_8)
+            val zipFile = File(LogUtils.getLogZipDirectory(), logFileName ?: "logs.zip")
+            writeLogToZipFile(metaData, zipFile)
+            FileProvider.getUriForFile(
+                context,
+                "${context.applicationContext.packageName}.provider",
+                zipFile
+            )
+        } catch (e: IOException) {
+            Timber.w(e, "Error in generating log file")
+            null
         }
+    }
 
-        //attach metadata as a separate file
-        zos.putNextEntry(new ZipEntry("meta_data.txt"));
-        zos.write(metaData);
-        zos.closeEntry();
+    /**
+     * Checks if there are any pending crash reports and attaches them to the logs.
+     *
+     * @param report The crash report data, if any.
+     * @param builder The string builder to append crash info.
+     */
+    private fun attachCrashInfo(report: CrashReportData?, builder: StringBuilder) {
+        if(report != null) {
+            builder.append(report)
+        }
+    }
 
-        zos.flush();
-        zos.close();
+    /**
+     * Attaches the username to the metadata file.
+     *
+     * @param builder The string builder to append user info.
+     */
+    private fun attachUserInfo(builder: StringBuilder) {
+        builder.append("MediaWiki Username = ").append(sessionManager.userName).append("\n")
+    }
+
+    /**
+     * Gets any extra metadata information to be attached with the log files.
+     *
+     * @param builder The string builder to append extra info.
+     */
+    private fun attachExtraInfo(builder: StringBuilder) {
+        builder.append(getExtraInfo()).append("\n")
+    }
+
+    /**
+     * Zips the logs and metadata information.
+     *
+     * @param metaData The metadata to be added to the zip file.
+     * @param zipFile The zip file to write to.
+     * @throws IOException If an I/O error occurs.
+     */
+    @Throws(IOException::class)
+    private fun writeLogToZipFile(metaData: ByteArray, zipFile: File) {
+        val logDir = File(LogUtils.getLogDirectory())
+        if (!logDir.exists() || logDir.listFiles().isNullOrEmpty()) return
+
+        ZipOutputStream(BufferedOutputStream(FileOutputStream(zipFile))).use { zos ->
+            val buffer = ByteArray(1024)
+            logDir.listFiles()?.forEach { file ->
+                if (file.isDirectory) return@forEach
+                FileInputStream(file).use { fis ->
+                    BufferedInputStream(fis).use { bis ->
+                        zos.putNextEntry(ZipEntry(file.name))
+                        var length: Int
+                        while (bis.read(buffer).also { length = it } > 0) {
+                            zos.write(buffer, 0, length)
+                        }
+                        zos.closeEntry()
+                    }
+                }
+            }
+
+            // Attach metadata as a separate file.
+            zos.putNextEntry(ZipEntry("meta_data.txt"))
+            zos.write(metaData)
+            zos.closeEntry()
+        }
     }
 }
