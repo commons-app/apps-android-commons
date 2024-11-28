@@ -220,17 +220,6 @@ class LoginActivityUnitTests {
 
     @Test
     @Throws(Exception::class)
-    fun testHideProgress() {
-        val method: Method =
-            LoginActivity::class.java.getDeclaredMethod(
-                "hideProgress",
-            )
-        method.isAccessible = true
-        method.invoke(activity)
-    }
-
-    @Test
-    @Throws(Exception::class)
     fun testOnResume() {
         `when`(applicationKvStore.getBoolean("firstrun", true)).thenReturn(true)
         `when`(applicationKvStore.getBoolean("login_skipped", false)).thenReturn(true)
