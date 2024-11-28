@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 
 import androidx.annotation.Nullable;
 
+import androidx.annotation.VisibleForTesting;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -13,7 +14,9 @@ import java.util.Set;
 import timber.log.Timber;
 
 public class BasicKvStore implements KeyValueStore {
-    private static final String KEY_VERSION = "__version__";
+    @VisibleForTesting
+    static final String KEY_VERSION = "__version__";
+
     /*
     This class only performs puts, sets and clears.
     A commit returns a boolean indicating whether it has succeeded, we are not throwing an exception as it will
@@ -159,11 +162,15 @@ public class BasicKvStore implements KeyValueStore {
 
     @Override
     public boolean contains(String key) {
+        if (key.equals(KEY_VERSION)) {
+            return false;
+        }
         return _store.contains(key);
     }
 
     @Override
     public void remove(String key) {
+        assertKeyNotReserved(key);
         SharedPreferences.Editor editor = _store.edit();
         editor.remove(key);
         editor.apply();
