@@ -63,7 +63,7 @@ class FailedUploadsFragment :
         }
 
         if (StringUtils.isEmpty(userName)) {
-            userName = sessionManager.getUserName()
+            userName = sessionManager.userName
         }
     }
 

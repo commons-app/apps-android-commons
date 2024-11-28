@@ -14,7 +14,6 @@ import dagger.Module;
 import dagger.Provides;
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.auth.AccountUtil;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.contributions.ContributionDao;
 import fr.free.nrw.commons.customselector.database.NotForUploadStatusDao;
@@ -112,11 +111,6 @@ public class CommonsApplicationModule {
         byName.put(context.getString(R.string.license_name_cc_by_four), Prefs.Licenses.CC_BY_4);
         byName.put(context.getString(R.string.license_name_cc_by_sa_four), Prefs.Licenses.CC_BY_SA_4);
         return byName;
-    }
-
-    @Provides
-    public AccountUtil providesAccountUtil(Context context) {
-        return new AccountUtil();
     }
 
     /**

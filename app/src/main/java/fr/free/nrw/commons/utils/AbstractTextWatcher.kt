@@ -19,7 +19,7 @@ class AbstractTextWatcher(
         // No-op
     }
 
-    interface TextChange {
+    fun interface TextChange {
         fun onTextChanged(value: String)
     }
 }

@@ -86,10 +86,7 @@ class WikiAccountAuthenticatorUnitTest {
 
     @Test
     fun testGetAuthTokenLabelCaseNonNull() {
-        Assert.assertEquals(
-            authenticator.getAuthTokenLabel(BuildConfig.ACCOUNT_TYPE),
-            AccountUtil.AUTH_TOKEN_TYPE,
-        )
+        Assert.assertEquals(authenticator.getAuthTokenLabel(BuildConfig.ACCOUNT_TYPE), AUTH_TOKEN_TYPE)
     }
 
     @Test
