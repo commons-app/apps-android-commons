@@ -29,6 +29,7 @@
 * Jduranboger
 * Jelou
 * Johnny243
+* Josuert
 * Juanman
 * Keneth Urrutia
 * Ktranz
@@ -166,6 +167,7 @@
   <string name="categories_search_text_hint">Buscar categorías</string>
   <string name="depicts_search_text_hint">Buscar elementos que tu archivo multimedia representa (montaña, Taj Mahal, etc.)</string>
   <string name="menu_save_categories">Guardar</string>
+  <string name="menu_overflow_desc">Menú de desbordamiento</string>
   <string name="refresh_button">Actualizar</string>
   <string name="display_list_button">Lista</string>
   <string name="contributions_subtitle_zero">(No hay subidas aún)</string>
@@ -522,6 +524,7 @@
   <string name="no_notification">No tienes notificaciones sin leer</string>
   <string name="no_read_notification">No tienes ninguna notificación leída</string>
   <string name="share_logs_using">Compartir registros usando</string>
+  <string name="check_your_email_inbox">Revisa tu bandeja de entrada</string>
   <string name="menu_option_read">Ver leídas</string>
   <string name="menu_option_unread">Ver no leidas</string>
   <string name="error_occurred_in_picking_images">Ocurrió un error mientras se elegían imagenes</string>
@@ -819,8 +822,26 @@
   <string name="please_enter_some_comments">Por favor, escriba algunos comentarios.</string>
   <string name="talk">Discusión</string>
   <string name="write_something_about_the_item">Escriba algo sobre el elemento \'%1$s\'. Será visible públicamente.</string>
+  <string name="does_not_exist_anymore_no_picture_can_ever_be_taken_of_it">\' %1$s \' ya no existe, nunca se podrá tomar ninguna fotografía de él.</string>
+  <string name="is_at_a_different_place_please_specify_the_correct_place_below_if_possible_tell_us_the_correct_latitude_longitude">\' %1$s \' está en un lugar diferente. Especifique el lugar correcto a continuación y, si es posible, escriba la latitud y longitud correctas.</string>
+  <string name="other_problem_or_information_please_explain_below">Otro problema o información (por favor explique a continuación).</string>
+  <string name="feedback_destination_note">Sus comentarios se publicarán en la siguiente página wiki: &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Mobile_app/Feedback\"&gt;Commons:Mobile_app/Feedback&lt;/a&gt;</string>
+  <string name="are_you_sure_that_you_want_cancel_all_the_uploads">¿Estás seguro de que deseas cancelar todas las subidas?</string>
   <string name="cancelling_all_the_uploads">Cancelando todas las subidas...</string>
   <string name="uploads">Subidas</string>
   <string name="pending">Pendiente</string>
   <string name="failed">Falló</string>
+  <string name="could_not_load_place_data">No se pudieron cargar los datos del lugar</string>
+  <string name="custom_selector_delete_folder">Eliminar carpeta</string>
+  <string name="custom_selector_confirm_deletion_title">Confirmar eliminación</string>
+  <string name="custom_selector_confirm_deletion_message">¿Está seguro de que deseas eliminar la carpeta %1$s que contiene %2$d elementos?</string>
+  <string name="custom_selector_delete">Eliminar</string>
+  <string name="custom_selector_cancel">Cancelar</string>
+  <string name="custom_selector_folder_deleted_success">La carpeta %1$s se eliminó correctamente</string>
+  <string name="custom_selector_folder_deleted_failure">No se pudo eliminar la carpeta %1$s</string>
+  <string name="custom_selector_error_trashing_folder_contents">Error al eliminar el contenido de la carpeta: %1$s</string>
+  <string name="custom_selector_folder_not_found_error">No se pudo recuperar la ruta de la carpeta para el ID del bucket: %1$d</string>
+  <string name="red_pin">Este lugar aún no tiene foto, ¡ve y toma una!</string>
+  <string name="green_pin">Este lugar ya tiene una foto.</string>
+  <string name="grey_pin">Ahora comprobando si este lugar tiene una foto.</string>
 </resources>
