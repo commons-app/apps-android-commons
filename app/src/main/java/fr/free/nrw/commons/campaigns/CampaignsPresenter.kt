@@ -4,14 +4,15 @@ import android.annotation.SuppressLint
 import fr.free.nrw.commons.BasePresenter
 import fr.free.nrw.commons.campaigns.models.Campaign
 import fr.free.nrw.commons.di.CommonsApplicationModule
+import fr.free.nrw.commons.di.CommonsApplicationModule.IO_THREAD
+import fr.free.nrw.commons.di.CommonsApplicationModule.MAIN_THREAD
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient
 import fr.free.nrw.commons.utils.CommonsDateUtil.getIso8601DateFormatShort
 import io.reactivex.Scheduler
-import io.reactivex.SingleObserver
 import io.reactivex.disposables.Disposable
 import timber.log.Timber
 import java.text.ParseException
-import java.util.Collections
+import java.text.SimpleDateFormat
 import java.util.Date
 import javax.inject.Inject
 import javax.inject.Named
@@ -24,12 +25,9 @@ import javax.inject.Singleton
 @Singleton
 class CampaignsPresenter @Inject constructor(
     private val okHttpJsonApiClient: OkHttpJsonApiClient?,
-    @param:Named(CommonsApplicationModule.IO_THREAD) private val ioScheduler: Scheduler,
-    @param:Named(
-        CommonsApplicationModule.MAIN_THREAD
-    ) private val mainThreadScheduler: Scheduler
-) :
-    BasePresenter<ICampaignsView?> {
+    @param:Named(IO_THREAD) private val ioScheduler: Scheduler,
+    @param:Named(MAIN_THREAD) private val mainThreadScheduler: Scheduler
+) : BasePresenter<ICampaignsView?> {
     private var view: ICampaignsView? = null
     private var disposable: Disposable? = null
     private var campaign: Campaign? = null
@@ -54,59 +52,56 @@ class CampaignsPresenter @Inject constructor(
                 view!!.showCampaigns(campaign)
                 return
             }
-            val campaigns = okHttpJsonApiClient.campaigns
-            campaigns.observeOn(mainThreadScheduler)
-                .subscribeOn(ioScheduler)
-                .subscribeWith(object : SingleObserver<CampaignResponseDTO> {
-                    override fun onSubscribe(d: Disposable) {
-                        disposable = d
-                    }
 
-                    override fun onSuccess(campaignResponseDTO: CampaignResponseDTO) {
-                        val campaigns = campaignResponseDTO.campaigns
-                        if (campaigns == null || campaigns.isEmpty()) {
-                            Timber.e("The campaigns list is empty")
-                            view!!.showCampaigns(null)
-                            return
-                        }
-                        val dateFormat = getIso8601DateFormatShort()
-                        Collections.sort(campaigns) { campaign: Campaign, t1: Campaign ->
-                            val date1: Date
-                            val date2: Date
-                            try {
-                                date1 = dateFormat.parse(campaign.startDate)
-                                date2 = dateFormat.parse(t1.startDate)
-                            } catch (e: ParseException) {
-                                Timber.e(e)
-                                return@sort -1
-                            }
-                            date1.compareTo(date2)
-                        }
-                        var campaignEndDate: Date
-                        var campaignStartDate: Date
-                        val currentDate = Date()
-                        try {
-                            for (aCampaign in campaigns) {
-                                campaignEndDate = dateFormat.parse(aCampaign.endDate)
-                                campaignStartDate = dateFormat.parse(aCampaign.startDate)
-                                if (
-                                    campaignEndDate.compareTo(currentDate) >= 0 &&
-                                    campaignStartDate.compareTo(currentDate) <= 0
-                                ) {
-                                    campaign = aCampaign
-                                    break
-                                }
-                            }
-                        } catch (e: ParseException) {
-                            Timber.e(e)
-                        }
+            okHttpJsonApiClient.campaigns
+                .observeOn(mainThreadScheduler)
+                .subscribeOn(ioScheduler)
+                .doOnSubscribe { disposable = it }
+                .subscribe({ campaignResponseDTO ->
+                    val campaigns = campaignResponseDTO.campaigns?.toMutableList()
+                    if (campaigns.isNullOrEmpty()) {
+                        Timber.e("The campaigns list is empty")
+                        view!!.showCampaigns(null)
+                    } else {
+                        sortCampaignsByStartDate(campaigns)
+                        campaign = findActiveCampaign(campaigns)
                         view!!.showCampaigns(campaign)
                     }
-
-                    override fun onError(e: Throwable) {
-                        Timber.e(e, "could not fetch campaigns")
-                    }
+                }, {
+                    Timber.e(it, "could not fetch campaigns")
                 })
+        }
+    }
+
+    private fun sortCampaignsByStartDate(campaigns: MutableList<Campaign>) {
+        val dateFormat: SimpleDateFormat = getIso8601DateFormatShort()
+        campaigns.sortWith(Comparator { campaign: Campaign, other: Campaign ->
+            val date1: Date?
+            val date2: Date?
+            try {
+                date1 = campaign.startDate?.let { dateFormat.parse(it) }
+                date2 = other.startDate?.let { dateFormat.parse(it) }
+            } catch (e: ParseException) {
+                Timber.e(e)
+                return@Comparator -1
+            }
+            if (date1 != null && date2 != null) date1.compareTo(date2) else -1
+        })
+    }
+
+    private fun findActiveCampaign(campaigns: List<Campaign>) : Campaign? {
+        val dateFormat: SimpleDateFormat = getIso8601DateFormatShort()
+        val currentDate = Date()
+        return try {
+            campaigns.firstOrNull {
+                val campaignStartDate = it.startDate?.let { s -> dateFormat.parse(s) }
+                val campaignEndDate = it.endDate?.let { s -> dateFormat.parse(s) }
+                campaignStartDate != null && campaignEndDate != null &&
+                        campaignEndDate >= currentDate && campaignStartDate <= currentDate
+            }
+        } catch (e: ParseException) {
+            Timber.e(e, "could not find active campaign")
+            null
         }
     }
 }
