@@ -135,12 +135,12 @@ open class BasicKvStore : KeyValueStore {
         }
     }
 
-    private fun assertKeyNotReserved(key: Set<String>, block: SharedPreferences.Editor.() -> Unit) {
+    protected fun assertKeyNotReserved(key: Set<String>, block: SharedPreferences.Editor.() -> Unit) {
         key.forEach { require(it != KEY_VERSION) { "$it is a reserved key" } }
         _store.edit { block(this) }
     }
 
-    private fun assertKeyNotReserved(key: String, block: SharedPreferences.Editor.() -> Unit) {
+    protected fun assertKeyNotReserved(key: String, block: SharedPreferences.Editor.() -> Unit) {
         require(key != KEY_VERSION) { "$key is a reserved key" }
         _store.edit { block(this) }
     }
