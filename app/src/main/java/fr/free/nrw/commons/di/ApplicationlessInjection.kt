@@ -16,6 +16,7 @@ import dagger.android.HasFragmentInjector
 import dagger.android.HasServiceInjector
 import dagger.android.support.HasSupportFragmentInjector
 import javax.inject.Inject
+import androidx.fragment.app.Fragment as AndroidXFragmen
 
 /**
  * Provides injectors for all sorts of components
@@ -24,26 +25,26 @@ import javax.inject.Inject
 class ApplicationlessInjection(applicationContext: Context) : HasAndroidInjector,
     HasActivityInjector, HasFragmentInjector, HasSupportFragmentInjector, HasServiceInjector,
     HasBroadcastReceiverInjector, HasContentProviderInjector {
-    @Inject
-    lateinit var androidInjector: DispatchingAndroidInjector<Any>
+    @Inject @JvmField
+    var androidInjector: DispatchingAndroidInjector<Any>? = null
 
-    @Inject
-    lateinit var activityInjector: DispatchingAndroidInjector<Activity>
+    @Inject @JvmField
+    var activityInjector: DispatchingAndroidInjector<Activity>? = null
 
-    @Inject
-    lateinit var broadcastReceiverInjector: DispatchingAndroidInjector<BroadcastReceiver>
+    @Inject @JvmField
+    var broadcastReceiverInjector: DispatchingAndroidInjector<BroadcastReceiver>? = null
 
-    @Inject
-    lateinit var fragmentInjector: DispatchingAndroidInjector<Fragment>
+    @Inject @JvmField
+    var fragmentInjector: DispatchingAndroidInjector<Fragment>? = null
 
-    @Inject
-    lateinit var supportFragmentInjector: DispatchingAndroidInjector<androidx.fragment.app.Fragment>
+    @Inject @JvmField
+    var supportFragmentInjector: DispatchingAndroidInjector<AndroidXFragmen>? = null
 
-    @Inject
-    lateinit var serviceInjector: DispatchingAndroidInjector<Service>
+    @Inject @JvmField
+    var serviceInjector: DispatchingAndroidInjector<Service>? = null
 
-    @Inject
-    lateinit var contentProviderInjector: DispatchingAndroidInjector<ContentProvider>
+    @Inject @JvmField
+    var contentProviderInjector: DispatchingAndroidInjector<ContentProvider>? = null
 
     val instance: ApplicationlessInjection get() = _instance!!
 
@@ -57,25 +58,25 @@ class ApplicationlessInjection(applicationContext: Context) : HasAndroidInjector
         commonsApplicationComponent.inject(this)
     }
 
-    override fun androidInjector(): AndroidInjector<Any> =
+    override fun androidInjector(): AndroidInjector<Any>? =
         androidInjector
 
-    override fun activityInjector(): DispatchingAndroidInjector<Activity> =
+    override fun activityInjector(): DispatchingAndroidInjector<Activity>? =
         activityInjector
 
-    override fun fragmentInjector(): DispatchingAndroidInjector<Fragment> =
+    override fun fragmentInjector(): DispatchingAndroidInjector<Fragment>? =
         fragmentInjector
 
-    override fun supportFragmentInjector(): DispatchingAndroidInjector<androidx.fragment.app.Fragment> =
+    override fun supportFragmentInjector(): DispatchingAndroidInjector<AndroidXFragmen>? =
         supportFragmentInjector
 
-    override fun broadcastReceiverInjector(): DispatchingAndroidInjector<BroadcastReceiver> =
+    override fun broadcastReceiverInjector(): DispatchingAndroidInjector<BroadcastReceiver>? =
         broadcastReceiverInjector
 
-    override fun serviceInjector(): DispatchingAndroidInjector<Service> =
+    override fun serviceInjector(): DispatchingAndroidInjector<Service>? =
         serviceInjector
 
-    override fun contentProviderInjector(): AndroidInjector<ContentProvider> =
+    override fun contentProviderInjector(): AndroidInjector<ContentProvider>? =
         contentProviderInjector
 
     companion object {
