@@ -37,9 +37,8 @@ class TestCommonsApplication : Application() {
 }
 
 @Suppress("MemberVisibilityCanBePrivate")
-class MockCommonsApplicationModule(
-    appContext: Context,
-) : CommonsApplicationModule(appContext) {
+class MockCommonsApplicationModule(appContext: Context) : CommonsApplicationModule(appContext) {
+
     val defaultSharedPreferences: JsonKvStore = mock()
     val locationServiceManager: LocationServiceManager = mock()
     val mockDbOpenHelper: DBOpenHelper = mock()
@@ -50,16 +49,13 @@ class MockCommonsApplicationModule(
     val modificationClient: ContentProviderClient = mock()
     val uploadPrefs: JsonKvStore = mock()
 
-    override fun provideCategoryContentProviderClient(context: Context?): ContentProviderClient = categoryClient
+    override fun provideCategoryContentProviderClient(context: Context): ContentProviderClient = categoryClient
 
-    override fun provideContributionContentProviderClient(context: Context?): ContentProviderClient = contributionClient
+    override fun provideContributionContentProviderClient(context: Context): ContentProviderClient = contributionClient
 
-    override fun provideModificationContentProviderClient(context: Context?): ContentProviderClient = modificationClient
+    override fun provideModificationContentProviderClient(context: Context): ContentProviderClient = modificationClient
 
-    override fun providesDefaultKvStore(
-        context: Context,
-        gson: Gson,
-    ): JsonKvStore = defaultSharedPreferences
+    override fun providesDefaultKvStore(context: Context, gson: Gson): JsonKvStore = defaultSharedPreferences
 
     override fun provideLocationServiceManager(context: Context): LocationServiceManager = locationServiceManager
 
