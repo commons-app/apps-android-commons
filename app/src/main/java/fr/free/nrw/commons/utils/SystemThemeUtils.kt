@@ -46,7 +46,7 @@ class SystemThemeUtils @Inject constructor(
     // Returns true if the device is in night mode or false otherwise
     fun isDeviceInNightMode(): Boolean {
         return getSystemDefaultThemeBool(
-            applicationKvStore.getString(Prefs.KEY_THEME_VALUE, getSystemDefaultTheme())
+            applicationKvStore.getString(Prefs.KEY_THEME_VALUE, getSystemDefaultTheme())!!
         )
     }
 }

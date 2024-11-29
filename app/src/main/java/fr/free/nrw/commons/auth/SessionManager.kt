@@ -62,7 +62,7 @@ class SessionManager @Inject constructor(
     fun forceLogin(context: Context?) =
         context?.let { LoginActivity.startYourself(it) }
 
-    fun getPreference(key: String?): Boolean =
+    fun getPreference(key: String): Boolean =
         defaultKvStore.getBoolean(key)
 
     fun logout(): Completable = Completable.fromObservable(
