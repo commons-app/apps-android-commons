@@ -6,7 +6,6 @@ import android.content.Context
 import androidx.collection.LruCache
 import com.google.gson.Gson
 import com.nhaarman.mockitokotlin2.mock
-import fr.free.nrw.commons.auth.AccountUtil
 import fr.free.nrw.commons.data.DBOpenHelper
 import fr.free.nrw.commons.di.CommonsApplicationComponent
 import fr.free.nrw.commons.di.CommonsApplicationModule
@@ -41,7 +40,6 @@ class TestCommonsApplication : Application() {
 class MockCommonsApplicationModule(
     appContext: Context,
 ) : CommonsApplicationModule(appContext) {
-    val accountUtil: AccountUtil = mock()
     val defaultSharedPreferences: JsonKvStore = mock()
     val locationServiceManager: LocationServiceManager = mock()
     val mockDbOpenHelper: DBOpenHelper = mock()
@@ -57,8 +55,6 @@ class MockCommonsApplicationModule(
     override fun provideContributionContentProviderClient(context: Context?): ContentProviderClient = contributionClient
 
     override fun provideModificationContentProviderClient(context: Context?): ContentProviderClient = modificationClient
-
-    override fun providesAccountUtil(context: Context): AccountUtil = accountUtil
 
     override fun providesDefaultKvStore(
         context: Context,

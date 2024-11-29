@@ -542,9 +542,9 @@
   <string name="review_is_uploaded_by">%1$s הועלה על ידי: %2$s</string>
   <string name="default_description_language">שפת התיאור כבררת מחדל</string>
   <string name="delete_helper_show_deletion_title">העמדה למחיקה</string>
-  <string name="delete_helper_show_deletion_title_success">הצלחה</string>
+  <string name="delete_helper_show_deletion_title_success">זה עבד</string>
   <string name="delete_helper_show_deletion_message_if">הקובץ %1$s הועמד למחיקה.</string>
-  <string name="delete_helper_show_deletion_title_failed">כשלון</string>
+  <string name="delete_helper_show_deletion_title_failed">זה לא עבד</string>
   <string name="delete_helper_show_deletion_message_else">לא ניתן לבקש מחיקה</string>
   <string name="delete_helper_ask_spam_selfie">תמונה עצמית (סלפי) שלא משמשת בשום ערך</string>
   <string name="delete_helper_ask_spam_blurry">תמונה מטושטשת לגמרי</string>
@@ -825,7 +825,7 @@
   <string name="custom_selector_delete_folder">מחיקת תיקייה</string>
   <string name="custom_selector_confirm_deletion_title">אישור מחיקה</string>
   <string name="custom_selector_confirm_deletion_message">למחוק את התיקייה %1$s על כל %2$d פריטיה?</string>
-  <string name="custom_selector_delete">מחיקה</string>
+  <string name="custom_selector_delete">למחוק</string>
   <string name="custom_selector_cancel">ביטול</string>
   <string name="custom_selector_folder_deleted_success">התיקייה %1$s נמחקה</string>
   <string name="custom_selector_folder_deleted_failure">מחיקת התיקייה %1$s נכשלה</string>

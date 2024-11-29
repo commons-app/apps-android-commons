@@ -96,7 +96,7 @@ class NotificationActivity : BaseActivity() {
                 }
             }, { throwable ->
                 if (throwable is InvalidLoginTokenException) {
-                    val username = sessionManager.getUserName()
+                    val username = sessionManager.userName
                     val logoutListener = CommonsApplication.BaseLogoutListener(
                         this,
                         getString(R.string.invalid_login_message),

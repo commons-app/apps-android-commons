@@ -53,7 +53,7 @@ import fr.free.nrw.commons.MediaDataExtractor;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.actions.ThanksClient;
-import fr.free.nrw.commons.auth.AccountUtil;
+import fr.free.nrw.commons.auth.AccountUtilKt;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.auth.csrf.InvalidLoginTokenException;
 import fr.free.nrw.commons.category.CategoryClient;
@@ -382,8 +382,8 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
             enableProgressBar();
         }
 
-        if (AccountUtil.getUserName(getContext()) != null && media != null
-            && AccountUtil.getUserName(getContext()).equals(media.getAuthor())) {
+        if (AccountUtilKt.getUserName(getContext()) != null && media != null
+            && AccountUtilKt.getUserName(getContext()).equals(media.getAuthor())) {
             binding.sendThanks.setVisibility(GONE);
         } else {
             binding.sendThanks.setVisibility(VISIBLE);
@@ -485,7 +485,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
     }
 
     private void onDeletionPageExists(Boolean deletionPageExists) {
-        if (AccountUtil.getUserName(getContext()) == null && !AccountUtil.getUserName(getContext()).equals(media.getAuthor())) {
+        if (AccountUtilKt.getUserName(getContext()) == null && !AccountUtilKt.getUserName(getContext()).equals(media.getAuthor())) {
             binding.nominateDeletion.setVisibility(GONE);
             binding.nominatedDeletionBanner.setVisibility(GONE);
         } else if (deletionPageExists) {
@@ -1079,7 +1079,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
 
     @SuppressLint("StringFormatInvalid")
     public void onDeleteButtonClicked(){
-            if (AccountUtil.getUserName(getContext()) != null && AccountUtil.getUserName(getContext()).equals(media.getAuthor())) {
+            if (AccountUtilKt.getUserName(getContext()) != null && AccountUtilKt.getUserName(getContext()).equals(media.getAuthor())) {
                 final ArrayAdapter<String> languageAdapter = new ArrayAdapter<>(getActivity(),
                     R.layout.simple_spinner_dropdown_list, reasonList);
                 final Spinner spinner = new Spinner(getActivity());
@@ -1105,7 +1105,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
             //Reviewer correct me if i have misunderstood something over here
             //But how does this  if (delete.getVisibility() == View.VISIBLE) {
             //            enableDeleteButton(true);   makes sense ?
-            else if (AccountUtil.getUserName(getContext()) != null) {
+            else if (AccountUtilKt.getUserName(getContext()) != null) {
                 final EditText input = new EditText(getActivity());
                 input.requestFocus();
                 AlertDialog d = DialogUtil.showAlertDialog(getActivity(),
