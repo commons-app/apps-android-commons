@@ -17,7 +17,7 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.preference.PreferenceManager;
-import fr.free.nrw.commons.customselector.model.Image;
+import fr.free.nrw.commons.customselector.domain.model.Image;
 import fr.free.nrw.commons.customselector.ui.selector.CustomSelectorActivity;
 import java.io.File;
 import java.io.IOException;

@@ -54,7 +54,7 @@ import androidx.compose.ui.unit.toIntRect
 import androidx.window.core.layout.WindowWidthSizeClass
 import coil.compose.rememberAsyncImagePainter
 import fr.free.nrw.commons.R
-import fr.free.nrw.commons.customselector.model.Image
+import fr.free.nrw.commons.customselector.domain.model.Image
 import fr.free.nrw.commons.customselector.ui.components.CustomSelectorBottomBar
 import fr.free.nrw.commons.customselector.ui.components.CustomSelectorTopBar
 import fr.free.nrw.commons.customselector.ui.components.PartialStorageAccessDialog

@@ -4,14 +4,15 @@ import android.content.ContentUris
 import android.content.Context
 import android.provider.MediaStore
 import android.text.format.DateFormat
-import fr.free.nrw.commons.customselector.model.Image
+import fr.free.nrw.commons.customselector.domain.model.Image
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import java.util.Calendar
 import java.util.Date
+import javax.inject.Inject
 
-class MediaReader(private val context: Context) {
+class MediaReader @Inject constructor(private val context: Context) {
     fun getImages() = flow {
         val projection = arrayOf(
             MediaStore.Images.Media._ID,

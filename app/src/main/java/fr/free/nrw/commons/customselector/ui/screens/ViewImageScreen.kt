@@ -27,7 +27,7 @@ import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
-import fr.free.nrw.commons.customselector.model.Image
+import fr.free.nrw.commons.customselector.domain.model.Image
 import kotlin.math.abs
 
 @Composable

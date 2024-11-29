@@ -10,8 +10,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.customselector.listeners.FolderClickListener
-import fr.free.nrw.commons.customselector.model.Folder
-import fr.free.nrw.commons.customselector.model.Image
+import fr.free.nrw.commons.customselector.domain.model.Folder
+import fr.free.nrw.commons.customselector.domain.model.Image
 
 /**
  * Custom selector FolderAdapter.

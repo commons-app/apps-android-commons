@@ -39,7 +39,7 @@ import fr.free.nrw.commons.customselector.helper.CustomSelectorConstants
 import fr.free.nrw.commons.customselector.helper.FolderDeletionHelper
 import fr.free.nrw.commons.customselector.listeners.FolderClickListener
 import fr.free.nrw.commons.customselector.listeners.ImageSelectListener
-import fr.free.nrw.commons.customselector.model.Image
+import fr.free.nrw.commons.customselector.domain.model.Image
 import fr.free.nrw.commons.customselector.ui.screens.CustomSelectorScreen
 import fr.free.nrw.commons.customselector.ui.screens.ViewImageScreen
 import fr.free.nrw.commons.databinding.ActivityCustomSelectorBinding
