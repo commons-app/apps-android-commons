@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.settings
 
 import android.Manifest.permission
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.Dialog
 import android.content.Context.MODE_PRIVATE
@@ -527,7 +528,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
                 PermissionUtils.PERMISSIONS_STORAGE
             )
         ) {
-            commonsLogSender.send(requireActivity(), null)
+            commonsLogSender.sendWithNullable(requireActivity(), null)
         } else {
             requestExternalStoragePermissions()
         }
