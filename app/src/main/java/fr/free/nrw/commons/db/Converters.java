@@ -22,7 +22,10 @@ import java.util.Map;
 public class Converters {
 
     public static Gson getGson() {
-        return ApplicationlessInjection.getInstance(CommonsApplication.getInstance()).getCommonsApplicationComponent().gson();
+        return ApplicationlessInjection
+            .getInstance(CommonsApplication.getInstance())
+            .getCommonsApplicationComponent()
+            .gson();
     }
 
     /**
