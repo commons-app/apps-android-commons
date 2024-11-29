@@ -1,45 +1,43 @@
-package fr.free.nrw.commons.profile.leaderboard;
+package fr.free.nrw.commons.profile.leaderboard
 
 /**
  * This class contains the constant variables for leaderboard
  */
-public class LeaderboardConstants {
-
+object LeaderboardConstants {
     /**
      * This is the size of the page i.e. number items to load in a batch when pagination is performed
      */
-    public static final int PAGE_SIZE = 100;
+    const val PAGE_SIZE: Int = 100
 
     /**
      * This is the starting offset, we set it to 0 to start loading from rank 1
      */
-    public static final int START_OFFSET = 0;
+    const val START_OFFSET: Int = 0
 
     /**
      * This is the prefix of the user's homepage url, appending the username will give us complete url
      */
-    public static final String USER_LINK_PREFIX = "https://commons.wikimedia.org/wiki/User:";
+    const val USER_LINK_PREFIX: String = "https://commons.wikimedia.org/wiki/User:"
 
     /**
      * This is the a constant string for the state loading, when the pages are getting loaded we can
      * use this constant to identify if we need to show the progress bar or not
      */
-    public final static String LOADING = "Loading";
+    const val LOADING: String = "Loading"
 
     /**
      * This is the a constant string for the state loaded, when the pages are loaded we can
      * use this constant to identify if we need to show the progress bar or not
      */
-    public final static String LOADED = "Loaded";
+    const val LOADED: String = "Loaded"
 
     /**
      * This API endpoint is to update the leaderboard avatar
      */
-    public final static String UPDATE_AVATAR_END_POINT = "/update_avatar.py";
+    const val UPDATE_AVATAR_END_POINT: String = "/update_avatar.py"
 
     /**
      * This API endpoint is to get leaderboard data
      */
-    public final static String LEADERBOARD_END_POINT = "/leaderboard.py";
-
+    const val LEADERBOARD_END_POINT: String = "/leaderboard.py"
 }
