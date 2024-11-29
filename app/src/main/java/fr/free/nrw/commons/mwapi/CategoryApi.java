@@ -3,7 +3,10 @@ package fr.free.nrw.commons.mwapi;
 import static fr.free.nrw.commons.category.CategoryClientKt.CATEGORY_PREFIX;
 
 import com.google.gson.Gson;
+import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.category.CategoryItem;
+import fr.free.nrw.commons.wikidata.mwapi.MwQueryPage;
+import fr.free.nrw.commons.wikidata.mwapi.MwQueryResponse;
 import io.reactivex.Single;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -11,14 +14,11 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 import javax.inject.Inject;
-import javax.inject.Named;
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
-import fr.free.nrw.commons.wikidata.mwapi.MwQueryPage;
-import fr.free.nrw.commons.wikidata.mwapi.MwQueryResponse;
 import timber.log.Timber;
 
 /**
@@ -30,14 +30,11 @@ import timber.log.Timber;
 public class CategoryApi {
 
     private final OkHttpClient okHttpClient;
-    private final String commonsBaseUrl;
     private final Gson gson;
 
     @Inject
-    public CategoryApi(OkHttpClient okHttpClient, Gson gson,
-                       @Named("wikimedia_api_host") String commonsBaseUrl) {
+    public CategoryApi(final OkHttpClient okHttpClient, final Gson gson) {
         this.okHttpClient = okHttpClient;
-        this.commonsBaseUrl = commonsBaseUrl;
         this.gson = gson;
     }
 
@@ -75,9 +72,9 @@ public class CategoryApi {
      * @param coords Coordinates to build query with
      * @return URL for API query
      */
-    private HttpUrl buildUrl(String coords) {
+    private HttpUrl buildUrl(final String coords) {
         return HttpUrl
-                .parse(commonsBaseUrl)
+                .parse(BuildConfig.WIKIMEDIA_API_HOST)
                 .newBuilder()
                 .addQueryParameter("action", "query")
                 .addQueryParameter("prop", "categories|coordinates|pageprops")
