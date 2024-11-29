@@ -20,10 +20,10 @@ import fr.free.nrw.commons.profile.leaderboard.LeaderboardListAdapter.ListViewHo
  */
 class LeaderboardListAdapter : PagedListAdapter<LeaderboardList, ListViewHolder>(DIFF_CALLBACK) {
     inner class ListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        var rank: TextView = itemView.findViewById(R.id.user_rank)
-        var avatar: SimpleDraweeView = itemView.findViewById(R.id.user_avatar)
-        var username: TextView = itemView.findViewById(R.id.user_name)
-        var count: TextView = itemView.findViewById(R.id.user_count)
+        var rank: TextView? = itemView.findViewById(R.id.user_rank)
+        var avatar: SimpleDraweeView? = itemView.findViewById(R.id.user_avatar)
+        var username: TextView? = itemView.findViewById(R.id.user_name)
+        var count: TextView? = itemView.findViewById(R.id.user_count)
     }
 
     /**
@@ -46,10 +46,10 @@ class LeaderboardListAdapter : PagedListAdapter<LeaderboardList, ListViewHolder>
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) = with (holder) {
         val item = getItem(position)!!
 
-        rank.text = item.rank.toString()
-        avatar.setImageURI(Uri.parse(item.avatar))
-        username.text = item.username
-        count.text = item.categoryCount.toString()
+        rank?.text = item.rank.toString()
+        avatar?.setImageURI(Uri.parse(item.avatar))
+        username?.text = item.username
+        count?.text = item.categoryCount.toString()
 
         /*
           Now that we have our in app profile-section, lets take the user there
