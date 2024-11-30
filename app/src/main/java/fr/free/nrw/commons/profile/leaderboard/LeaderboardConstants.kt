@@ -19,17 +19,18 @@ object LeaderboardConstants {
      */
     const val USER_LINK_PREFIX: String = "https://commons.wikimedia.org/wiki/User:"
 
-    /**
-     * This is the a constant string for the state loading, when the pages are getting loaded we can
-     * use this constant to identify if we need to show the progress bar or not
-     */
-    const val LOADING: String = "Loading"
-
-    /**
-     * This is the a constant string for the state loaded, when the pages are loaded we can
-     * use this constant to identify if we need to show the progress bar or not
-     */
-    const val LOADED: String = "Loaded"
+    sealed class LoadingStatus {
+        /**
+         * This is the state loading, when the pages are getting loaded we can
+         * use this constant to identify if we need to show the progress bar or not
+         */
+        data object LOADING: LoadingStatus()
+        /**
+         * This is the state loaded, when the pages are loaded we can
+         * use this constant to identify if we need to show the progress bar or not
+         */
+        data object LOADED: LoadingStatus()
+    }
 
     /**
      * This API endpoint is to update the leaderboard avatar

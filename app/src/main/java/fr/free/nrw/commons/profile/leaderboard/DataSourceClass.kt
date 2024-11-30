@@ -5,8 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.paging.PageKeyedDataSource
 import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient
-import fr.free.nrw.commons.profile.leaderboard.LeaderboardConstants.LOADED
-import fr.free.nrw.commons.profile.leaderboard.LeaderboardConstants.LOADING
+import fr.free.nrw.commons.profile.leaderboard.LeaderboardConstants.LoadingStatus.LOADING
+import fr.free.nrw.commons.profile.leaderboard.LeaderboardConstants.LoadingStatus.LOADED
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import timber.log.Timber
@@ -23,7 +23,7 @@ class DataSourceClass(
     private val limit: Int,
     private val offset: Int
 ) : PageKeyedDataSource<Int, LeaderboardList>() {
-    val progressLiveStatus: MutableLiveData<String> = MutableLiveData()
+    val progressLiveStatus: MutableLiveData<LeaderboardConstants.LoadingStatus> = MutableLiveData()
     private val compositeDisposable = CompositeDisposable()
 
 

@@ -2,11 +2,13 @@ package fr.free.nrw.commons.profile.leaderboard
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.map
 import androidx.lifecycle.switchMap
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
 import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient
+import fr.free.nrw.commons.profile.leaderboard.LeaderboardConstants.LoadingStatus
 import fr.free.nrw.commons.profile.leaderboard.LeaderboardConstants.PAGE_SIZE
 
 /**
@@ -26,9 +28,8 @@ class LeaderboardListViewModel(
             .setPageSize(PAGE_SIZE).build()
     ).build()
 
-    val progressLoadStatus: LiveData<String> = dataSourceFactory.mutableLiveData.switchMap {
-        it.progressLiveStatus
-    }
+    val progressLoadStatus: LiveData<LoadingStatus> =
+        dataSourceFactory.mutableLiveData.switchMap { it.progressLiveStatus }
 
     /**
      * Refreshes the paged list with the new params and starts the loading of new data
