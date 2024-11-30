@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.contributions;
 
+import static fr.free.nrw.commons.di.CommonsApplicationModule.IO_THREAD;
 import static fr.free.nrw.commons.utils.ImageUtils.IMAGE_OK;
 
 import androidx.work.ExistingWorkPolicy;
@@ -31,7 +32,7 @@ public class ContributionsPresenter implements UserActionListener {
     @Inject
     ContributionsPresenter(ContributionsRepository repository,
         UploadRepository uploadRepository,
-        @Named(CommonsApplicationModule.IO_THREAD) Scheduler ioThreadScheduler) {
+        @Named(IO_THREAD) Scheduler ioThreadScheduler) {
         this.contributionsRepository = repository;
         this.uploadRepository = uploadRepository;
         this.ioThreadScheduler = ioThreadScheduler;
