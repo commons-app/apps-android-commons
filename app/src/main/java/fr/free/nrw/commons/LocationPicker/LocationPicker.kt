@@ -1,14 +1,15 @@
-package fr.free.nrw.commons.LocationPicker;
+package fr.free.nrw.commons.LocationPicker
 
-import android.app.Activity;
-import android.content.Intent;
-import fr.free.nrw.commons.CameraPosition;
-import fr.free.nrw.commons.Media;
+import android.app.Activity
+import android.content.Intent
+import fr.free.nrw.commons.CameraPosition
+import fr.free.nrw.commons.Media
+
 
 /**
  * Helper class for starting the activity
  */
-public final class LocationPicker {
+object LocationPicker {
 
     /**
      * Getting camera position from the intent using constants
@@ -16,30 +17,26 @@ public final class LocationPicker {
      * @param data intent
      * @return CameraPosition
      */
-    public static CameraPosition getCameraPosition(final Intent data) {
-        return data.getParcelableExtra(LocationPickerConstants.MAP_CAMERA_POSITION);
+    @JvmStatic
+    fun getCameraPosition(data: Intent): CameraPosition? {
+        return data.getParcelableExtra(LocationPickerConstants.MAP_CAMERA_POSITION)
     }
 
-    public static class IntentBuilder {
+    class IntentBuilder
+    /**
+     * Creates a new builder that creates an intent to launch the place picker activity.
+     */() {
 
-        private final Intent intent;
-
-        /**
-         * Creates a new builder that creates an intent to launch the place picker activity.
-         */
-        public IntentBuilder() {
-            intent = new Intent();
-        }
+        private val intent: Intent = Intent()
 
         /**
          * Gets and puts location in intent
          * @param position CameraPosition
          * @return LocationPicker.IntentBuilder
          */
-        public LocationPicker.IntentBuilder defaultLocation(
-            final CameraPosition position) {
-          intent.putExtra(LocationPickerConstants.MAP_CAMERA_POSITION, position);
-          return this;
+        fun defaultLocation(position: CameraPosition): IntentBuilder {
+            intent.putExtra(LocationPickerConstants.MAP_CAMERA_POSITION, position)
+            return this
         }
 
         /**
@@ -47,10 +44,9 @@ public final class LocationPicker {
          * @param activity activity key
          * @return LocationPicker.IntentBuilder
          */
-        public LocationPicker.IntentBuilder activityKey(
-            final String activity) {
-          intent.putExtra(LocationPickerConstants.ACTIVITY_KEY, activity);
-          return this;
+        fun activityKey(activity: String): IntentBuilder {
+            intent.putExtra(LocationPickerConstants.ACTIVITY_KEY, activity)
+            return this
         }
 
         /**
@@ -58,20 +54,19 @@ public final class LocationPicker {
          * @param media Media
          * @return LocationPicker.IntentBuilder
          */
-        public LocationPicker.IntentBuilder media(
-                final Media media) {
-              intent.putExtra(LocationPickerConstants.MEDIA, media);
-              return this;
-            }
+        fun media(media: Media): IntentBuilder {
+            intent.putExtra(LocationPickerConstants.MEDIA, media)
+            return this
+        }
 
         /**
          * Gets and sets the activity
          * @param activity Activity
          * @return Intent
          */
-       public Intent build(final Activity activity) {
-          intent.setClass(activity, LocationPickerActivity.class);
-          return intent;
+        fun build(activity: Activity): Intent {
+            intent.setClass(activity, LocationPickerActivity::class.java)
+            return intent
         }
     }
 }

@@ -1,254 +1,258 @@
-package fr.free.nrw.commons.LocationPicker;
+package fr.free.nrw.commons.LocationPicker
 
-import static fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment.LAST_LOCATION;
-import static fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment.LAST_ZOOM;
-import static fr.free.nrw.commons.utils.MapUtils.ZOOM_LEVEL;
+import android.Manifest.permission
+import android.annotation.SuppressLint
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.graphics.Color
+import android.graphics.Paint
+import android.location.LocationManager
+import android.os.Bundle
+import android.preference.PreferenceManager
+import android.text.Html
+import android.text.method.LinkMovementMethod
+import android.view.MotionEvent
+import android.view.View
+import android.view.Window
+import android.view.animation.OvershootInterpolator
+import android.widget.Button
+import android.widget.ImageView
+import android.widget.TextView
+import android.widget.Toast
+import androidx.appcompat.widget.AppCompatTextView
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+import fr.free.nrw.commons.CameraPosition
+import fr.free.nrw.commons.CommonsApplication
+import fr.free.nrw.commons.Media
+import fr.free.nrw.commons.R
+import fr.free.nrw.commons.Utils
+import fr.free.nrw.commons.auth.SessionManager
+import fr.free.nrw.commons.auth.csrf.CsrfTokenClient
+import fr.free.nrw.commons.coordinates.CoordinateEditHelper
+import fr.free.nrw.commons.filepicker.Constants
+import fr.free.nrw.commons.kvstore.BasicKvStore
+import fr.free.nrw.commons.kvstore.JsonKvStore
+import fr.free.nrw.commons.location.LocationPermissionsHelper
+import fr.free.nrw.commons.location.LocationPermissionsHelper.LocationPermissionCallback
+import fr.free.nrw.commons.location.LocationServiceManager
+import fr.free.nrw.commons.theme.BaseActivity
+import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment.LAST_LOCATION
+import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment.LAST_ZOOM
+import fr.free.nrw.commons.utils.DialogUtil
+import fr.free.nrw.commons.utils.MapUtils.ZOOM_LEVEL
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
+import org.osmdroid.tileprovider.tilesource.TileSourceFactory
+import org.osmdroid.util.GeoPoint
+import org.osmdroid.util.constants.GeoConstants
+import org.osmdroid.views.CustomZoomButtonsController
+import org.osmdroid.views.overlay.Marker
+import org.osmdroid.views.overlay.ScaleDiskOverlay
+import org.osmdroid.views.overlay.TilesOverlay
+import timber.log.Timber
+import java.util.Locale
+import javax.inject.Inject
+import javax.inject.Named
 
-import android.Manifest.permission;
-import android.annotation.SuppressLint;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.drawable.Drawable;
-import android.location.LocationManager;
-import android.os.Bundle;
-import android.preference.PreferenceManager;
-import android.text.Html;
-import android.text.method.LinkMovementMethod;
-import android.view.MotionEvent;
-import android.view.View;
-import android.view.Window;
-import android.view.animation.OvershootInterpolator;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.AppCompatTextView;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import fr.free.nrw.commons.CameraPosition;
-import fr.free.nrw.commons.CommonsApplication;
-import fr.free.nrw.commons.Media;
-import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.Utils;
-import fr.free.nrw.commons.auth.SessionManager;
-import fr.free.nrw.commons.auth.csrf.CsrfTokenClient;
-import fr.free.nrw.commons.coordinates.CoordinateEditHelper;
-import fr.free.nrw.commons.filepicker.Constants;
-import fr.free.nrw.commons.kvstore.BasicKvStore;
-import fr.free.nrw.commons.kvstore.JsonKvStore;
-import fr.free.nrw.commons.location.LocationPermissionsHelper;
-import fr.free.nrw.commons.location.LocationPermissionsHelper.LocationPermissionCallback;
-import fr.free.nrw.commons.location.LocationServiceManager;
-import fr.free.nrw.commons.theme.BaseActivity;
-import fr.free.nrw.commons.utils.DialogUtil;
-import fr.free.nrw.commons.utils.SystemThemeUtils;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
-import java.util.List;
-import java.util.Locale;
-import javax.inject.Inject;
-import javax.inject.Named;
-import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
-import org.osmdroid.util.GeoPoint;
-import org.osmdroid.util.constants.GeoConstants;
-import org.osmdroid.views.CustomZoomButtonsController;
-import org.osmdroid.views.overlay.Marker;
-import org.osmdroid.views.overlay.Overlay;
-import org.osmdroid.views.overlay.ScaleDiskOverlay;
-import org.osmdroid.views.overlay.TilesOverlay;
-import timber.log.Timber;
 
 /**
  * Helps to pick location and return the result with an intent
  */
-public class LocationPickerActivity extends BaseActivity implements
-    LocationPermissionCallback {
+class LocationPickerActivity : BaseActivity(), LocationPermissionCallback {
     /**
      * coordinateEditHelper: helps to edit coordinates
      */
     @Inject
-    CoordinateEditHelper coordinateEditHelper;
+    lateinit var coordinateEditHelper: CoordinateEditHelper
+
     /**
      * media : Media object
      */
-    private Media media;
+    private var media: Media? = null
+
     /**
      * cameraPosition : position of picker
      */
-    private CameraPosition cameraPosition;
+    private var cameraPosition: CameraPosition? = null
+
     /**
      * markerImage : picker image
      */
-    private ImageView markerImage;
+    private lateinit var markerImage: ImageView
+
     /**
      * mapView : OSM Map
      */
-    private org.osmdroid.views.MapView mapView;
+    private var mapView: org.osmdroid.views.MapView? = null
+
     /**
      * tvAttribution : credit
      */
-    private AppCompatTextView tvAttribution;
+    private lateinit var tvAttribution: AppCompatTextView
+
     /**
      * activity : activity key
      */
-    private String activity;
+    private var activity: String? = null
+
     /**
      * modifyLocationButton : button for start editing location
      */
-    Button modifyLocationButton;
+    private lateinit var modifyLocationButton: Button
+
     /**
      * removeLocationButton : button to remove location metadata
      */
-    Button removeLocationButton;
+    private lateinit var removeLocationButton: Button
+
     /**
      * showInMapButton : button for showing in map
      */
-    TextView showInMapButton;
+    private lateinit var showInMapButton: TextView
+
     /**
      * placeSelectedButton : fab for selecting location
      */
-    FloatingActionButton placeSelectedButton;
+    private lateinit var placeSelectedButton: FloatingActionButton
+
     /**
      * fabCenterOnLocation: button for center on location;
      */
-    FloatingActionButton fabCenterOnLocation;
+    private lateinit var fabCenterOnLocation: FloatingActionButton
+
     /**
      * shadow : imageview of shadow
      */
-    private ImageView shadow;
+    private lateinit var shadow: ImageView
+
     /**
      * largeToolbarText : textView of shadow
      */
-    private TextView largeToolbarText;
+    private lateinit var largeToolbarText: TextView
+
     /**
      * smallToolbarText : textView of shadow
      */
-    private TextView smallToolbarText;
+    private lateinit var smallToolbarText: TextView
+
     /**
      * applicationKvStore : for storing values
      */
     @Inject
-    @Named("default_preferences")
-    public
-    JsonKvStore applicationKvStore;
-    BasicKvStore store;
+    @field: Named("default_preferences")
+    lateinit var applicationKvStore: JsonKvStore
+    private lateinit var store: BasicKvStore
+
     /**
      * isDarkTheme: for keeping a track of the device theme and modifying the map theme accordingly
      */
-    @Inject
-    SystemThemeUtils systemThemeUtils;
-    private boolean isDarkTheme;
-    private boolean moveToCurrentLocation;
+    private var isDarkTheme: Boolean = false
+    private var moveToCurrentLocation: Boolean = false
 
     @Inject
-    LocationServiceManager locationManager;
-    LocationPermissionsHelper locationPermissionsHelper;
+    lateinit var locationManager: LocationServiceManager
+    private lateinit var locationPermissionsHelper: LocationPermissionsHelper
 
     @Inject
-    SessionManager sessionManager;
+    lateinit var sessionManager: SessionManager
 
     /**
      * Constants
      */
-    private static final String CAMERA_POS = "cameraPosition";
-    private static final String ACTIVITY = "activity";
-
+    companion object {
+        private const val CAMERA_POS = "cameraPosition"
+        private const val ACTIVITY = "activity"
+    }
 
     @SuppressLint("ClickableViewAccessibility")
-    @Override
-    protected void onCreate(@Nullable final Bundle savedInstanceState) {
-        getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
-        super.onCreate(savedInstanceState);
+    override fun onCreate(savedInstanceState: Bundle?) {
+        requestWindowFeature(Window.FEATURE_ACTION_BAR)
+        super.onCreate(savedInstanceState)
 
-        isDarkTheme = systemThemeUtils.isDeviceInNightMode();
-        moveToCurrentLocation = false;
-        store = new BasicKvStore(this, "LocationPermissions");
+        isDarkTheme = systemThemeUtils.isDeviceInNightMode()
+        moveToCurrentLocation = false
+        store = BasicKvStore(this, "LocationPermissions")
 
-        getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
-        final ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.hide();
-        }
-        setContentView(R.layout.activity_location_picker);
+        requestWindowFeature(Window.FEATURE_ACTION_BAR)
+        supportActionBar?.hide()
+        setContentView(R.layout.activity_location_picker)
 
         if (savedInstanceState == null) {
-            cameraPosition = getIntent()
-                .getParcelableExtra(LocationPickerConstants.MAP_CAMERA_POSITION);
-            activity = getIntent().getStringExtra(LocationPickerConstants.ACTIVITY_KEY);
-            media = getIntent().getParcelableExtra(LocationPickerConstants.MEDIA);
-        }else{
-            cameraPosition = savedInstanceState.getParcelable(CAMERA_POS);
-            activity = savedInstanceState.getString(ACTIVITY);
-            media = savedInstanceState.getParcelable("sMedia");
+            cameraPosition = intent.getParcelableExtra(LocationPickerConstants.MAP_CAMERA_POSITION)
+            activity = intent.getStringExtra(LocationPickerConstants.ACTIVITY_KEY)
+            media = intent.getParcelableExtra(LocationPickerConstants.MEDIA)
+        } else {
+            cameraPosition = savedInstanceState.getParcelable(CAMERA_POS)
+            activity = savedInstanceState.getString(ACTIVITY)
+            media = savedInstanceState.getParcelable("sMedia")
         }
-        bindViews();
-        addBackButtonListener();
-        addPlaceSelectedButton();
-        addCredits();
-        getToolbarUI();
-        addCenterOnGPSButton();
 
-        org.osmdroid.config.Configuration.getInstance().load(getApplicationContext(),
-            PreferenceManager.getDefaultSharedPreferences(getApplicationContext()));
+        bindViews()
+        addBackButtonListener()
+        addPlaceSelectedButton()
+        addCredits()
+        getToolbarUI()
+        addCenterOnGPSButton()
 
-        mapView.setTileSource(TileSourceFactory.WIKIMEDIA);
-        mapView.setTilesScaledToDpi(true);
-        mapView.setMultiTouchControls(true);
+        org.osmdroid.config.Configuration.getInstance()
+            .load(
+                applicationContext, PreferenceManager.getDefaultSharedPreferences(
+                applicationContext
+                )
+            )
 
-        org.osmdroid.config.Configuration.getInstance().getAdditionalHttpRequestProperties().put(
-            "Referer", "http://maps.wikimedia.org/"
-        );
-        mapView.getZoomController().setVisibility(CustomZoomButtonsController.Visibility.NEVER);
-        mapView.getController().setZoom(ZOOM_LEVEL);
-        mapView.setOnTouchListener((v, event) -> {
-            if (event.getAction() == MotionEvent.ACTION_MOVE) {
-                if (markerImage.getTranslationY() == 0) {
-                    markerImage.animate().translationY(-75)
-                        .setInterpolator(new OvershootInterpolator()).setDuration(250).start();
+        mapView?.setTileSource(TileSourceFactory.WIKIMEDIA)
+        mapView?.setTilesScaledToDpi(true)
+        mapView?.setMultiTouchControls(true)
+
+        org.osmdroid.config.Configuration.getInstance().additionalHttpRequestProperties["Referer"] =
+            "http://maps.wikimedia.org/"
+        mapView?.zoomController?.setVisibility(CustomZoomButtonsController.Visibility.NEVER)
+        mapView?.controller?.setZoom(ZOOM_LEVEL.toDouble())
+        mapView?.setOnTouchListener { _, event ->
+            when (event.action) {
+                MotionEvent.ACTION_MOVE -> {
+                    if (markerImage.translationY == 0f) {
+                        markerImage.animate().translationY(-75f)
+                            .setInterpolator(OvershootInterpolator()).duration = 250
+                    }
                 }
-            } else if (event.getAction() == MotionEvent.ACTION_UP) {
-                markerImage.animate().translationY(0)
-                    .setInterpolator(new OvershootInterpolator()).setDuration(250).start();
+                MotionEvent.ACTION_UP -> {
+                    markerImage.animate().translationY(0f)
+                        .setInterpolator(OvershootInterpolator()).duration = 250
+                }
             }
-            return false;
-        });
-
-        if ("UploadActivity".equals(activity)) {
-            placeSelectedButton.setVisibility(View.GONE);
-            modifyLocationButton.setVisibility(View.VISIBLE);
-            removeLocationButton.setVisibility(View.VISIBLE);
-            showInMapButton.setVisibility(View.VISIBLE);
-            largeToolbarText.setText(getResources().getString(R.string.image_location));
-            smallToolbarText.setText(getResources().
-                getString(R.string.check_whether_location_is_correct));
-            fabCenterOnLocation.setVisibility(View.GONE);
-            markerImage.setVisibility(View.GONE);
-            shadow.setVisibility(View.GONE);
-            assert cameraPosition != null;
-            showSelectedLocationMarker(new GeoPoint(cameraPosition.getLatitude(),
-                cameraPosition.getLongitude()));
+            false
         }
-        setupMapView();
+
+        if (activity == "UploadActivity") {
+            placeSelectedButton.visibility = View.GONE
+            modifyLocationButton.visibility = View.VISIBLE
+            removeLocationButton.visibility = View.VISIBLE
+            showInMapButton.visibility = View.VISIBLE
+            largeToolbarText.text = getString(R.string.image_location)
+            smallToolbarText.text = getString(R.string.check_whether_location_is_correct)
+            fabCenterOnLocation.visibility = View.GONE
+            markerImage.visibility = View.GONE
+            shadow.visibility = View.GONE
+            cameraPosition?.let {
+                showSelectedLocationMarker(GeoPoint(it.latitude, it.longitude))
+            }
+        }
+        setupMapView()
     }
 
     /**
      * Moves the center of the map to the specified coordinates
-     *
      */
-    private void moveMapTo(double latitude, double longitude){
-        if(mapView != null && mapView.getController() != null){
-            GeoPoint point = new GeoPoint(latitude, longitude);
-
-            mapView.getController().setCenter(point);
-            mapView.getController().animateTo(point);
+    private fun moveMapTo(latitude: Double, longitude: Double) {
+        mapView?.controller?.let {
+            val point = GeoPoint(latitude, longitude)
+            it.setCenter(point)
+            it.animateTo(point)
         }
     }
 
@@ -256,426 +260,419 @@ public class LocationPickerActivity extends BaseActivity implements
      * Moves the center of the map to the specified coordinates
      * @param point The GeoPoint object which contains the coordinates to move to
      */
-    private void moveMapTo(GeoPoint point){
-        if(point != null){
-            moveMapTo(point.getLatitude(), point.getLongitude());
+    private fun moveMapTo(point: GeoPoint?) {
+        point?.let {
+            moveMapTo(it.latitude, it.longitude)
         }
     }
 
     /**
      * For showing credits
      */
-    private void addCredits() {
-        tvAttribution.setText(Html.fromHtml(getString(R.string.map_attribution)));
-        tvAttribution.setMovementMethod(LinkMovementMethod.getInstance());
+    private fun addCredits() {
+        tvAttribution.text = Html.fromHtml(getString(R.string.map_attribution))
+        tvAttribution.movementMethod = LinkMovementMethod.getInstance()
     }
 
     /**
      * For setting up Dark Theme
      */
-    private void darkThemeSetup() {
+    private fun darkThemeSetup() {
         if (isDarkTheme) {
-            shadow.setColorFilter(Color.argb(255, 255, 255, 255));
-            mapView.getOverlayManager().getTilesOverlay()
-                .setColorFilter(TilesOverlay.INVERT_COLORS);
+            shadow.setColorFilter(Color.argb(255, 255, 255, 255))
+            mapView?.overlayManager?.tilesOverlay?.setColorFilter(TilesOverlay.INVERT_COLORS)
         }
     }
 
     /**
      * Clicking back button destroy locationPickerActivity
      */
-    private void addBackButtonListener() {
-        final ImageView backButton = findViewById(R.id.maplibre_place_picker_toolbar_back_button);
-        backButton.setOnClickListener(v -> {
-            finish();
-        });
-
+    private fun addBackButtonListener() {
+        val backButton = findViewById<ImageView>(R.id.maplibre_place_picker_toolbar_back_button)
+        backButton.setOnClickListener {
+            finish()
+        }
     }
 
     /**
      * Binds mapView and location picker icon
      */
-    private void bindViews() {
-        mapView = findViewById(R.id.map_view);
-        markerImage = findViewById(R.id.location_picker_image_view_marker);
-        tvAttribution = findViewById(R.id.tv_attribution);
-        modifyLocationButton = findViewById(R.id.modify_location);
-        removeLocationButton = findViewById(R.id.remove_location);
-        showInMapButton = findViewById(R.id.show_in_map);
-        showInMapButton.setText(getResources().getString(R.string.show_in_map_app).toUpperCase(
-            Locale.ROOT));
-        shadow = findViewById(R.id.location_picker_image_view_shadow);
+    private fun bindViews() {
+        mapView = findViewById(R.id.map_view)
+        markerImage = findViewById(R.id.location_picker_image_view_marker)
+        tvAttribution = findViewById(R.id.tv_attribution)
+        modifyLocationButton = findViewById(R.id.modify_location)
+        removeLocationButton = findViewById(R.id.remove_location)
+        showInMapButton = findViewById(R.id.show_in_map)
+        showInMapButton.text = getString(R.string.show_in_map_app).uppercase(Locale.ROOT)
+        shadow = findViewById(R.id.location_picker_image_view_shadow)
     }
 
     /**
      * Gets toolbar color
      */
-    private void getToolbarUI() {
-        final ConstraintLayout toolbar = findViewById(R.id.location_picker_toolbar);
-        largeToolbarText = findViewById(R.id.location_picker_toolbar_primary_text_view);
-        smallToolbarText = findViewById(R.id.location_picker_toolbar_secondary_text_view);
-        toolbar.setBackgroundColor(getResources().getColor(R.color.primaryColor));
+    private fun getToolbarUI() {
+        val toolbar: ConstraintLayout = findViewById(R.id.location_picker_toolbar)
+        largeToolbarText = findViewById(R.id.location_picker_toolbar_primary_text_view)
+        smallToolbarText = findViewById(R.id.location_picker_toolbar_secondary_text_view)
+        toolbar.setBackgroundColor(ContextCompat.getColor(this, R.color.primaryColor))
     }
 
-    private void setupMapView() {
-        requestLocationPermissions();
+    private fun setupMapView() {
+        requestLocationPermissions()
 
         //If location metadata is available, move map to that location.
-        if(activity.equals("UploadActivity") || activity.equals("MediaActivity")){
-            moveMapToMediaLocation();
+        if (activity == "UploadActivity" || activity == "MediaActivity") {
+            moveMapToMediaLocation()
         } else {
             //If location metadata is not available, move map to device GPS location.
-            moveMapToGPSLocation();
+            moveMapToGPSLocation()
         }
 
-        modifyLocationButton.setOnClickListener(v -> onClickModifyLocation());
-        removeLocationButton.setOnClickListener(v -> onClickRemoveLocation());
-        showInMapButton.setOnClickListener(v -> showInMapApp());
-        darkThemeSetup();
+        modifyLocationButton.setOnClickListener { onClickModifyLocation() }
+        removeLocationButton.setOnClickListener { onClickRemoveLocation() }
+        showInMapButton.setOnClickListener { showInMapApp() }
+        darkThemeSetup()
     }
 
     /**
-     * Handles onclick event of modifyLocationButton
+     * Handles onClick event of modifyLocationButton
      */
-    private void onClickModifyLocation() {
-        placeSelectedButton.setVisibility(View.VISIBLE);
-        modifyLocationButton.setVisibility(View.GONE);
-        removeLocationButton.setVisibility(View.GONE);
-        showInMapButton.setVisibility(View.GONE);
-        markerImage.setVisibility(View.VISIBLE);
-        shadow.setVisibility(View.VISIBLE);
-        largeToolbarText.setText(getResources().getString(R.string.choose_a_location));
-        smallToolbarText.setText(getResources().getString(R.string.pan_and_zoom_to_adjust));
-        fabCenterOnLocation.setVisibility(View.VISIBLE);
-        removeSelectedLocationMarker();
-        moveMapToMediaLocation();
+    private fun onClickModifyLocation() {
+        placeSelectedButton.visibility = View.VISIBLE
+        modifyLocationButton.visibility = View.GONE
+        removeLocationButton.visibility = View.GONE
+        showInMapButton.visibility = View.GONE
+        markerImage.visibility = View.VISIBLE
+        shadow.visibility = View.VISIBLE
+        largeToolbarText.text = getString(R.string.choose_a_location)
+        smallToolbarText.text = getString(R.string.pan_and_zoom_to_adjust)
+        fabCenterOnLocation.visibility = View.VISIBLE
+        removeSelectedLocationMarker()
+        moveMapToMediaLocation()
     }
 
     /**
-     * Handles onclick event of removeLocationButton
+     * Handles onClick event of removeLocationButton
      */
-    private void onClickRemoveLocation() {
-        DialogUtil.showAlertDialog(this,
+    private fun onClickRemoveLocation() {
+        DialogUtil.showAlertDialog(
+            this,
             getString(R.string.remove_location_warning_title),
             getString(R.string.remove_location_warning_desc),
             getString(R.string.continue_message),
-            getString(R.string.cancel), () -> removeLocationFromImage(), null);
+            getString(R.string.cancel),
+            { removeLocationFromImage() },
+            null
+        )
     }
 
     /**
-     * Method to remove the location from the picture
+     * Removes location metadata from the image
      */
-    private void removeLocationFromImage() {
-        if (media != null) {
-            getCompositeDisposable().add(coordinateEditHelper.makeCoordinatesEdit(getApplicationContext()
-                    , media, "0.0", "0.0", "0.0f")
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(s -> {
-                    Timber.d("Coordinates are removed from the image");
-                }));
-        }
-        final Intent returningIntent = new Intent();
-        setResult(AppCompatActivity.RESULT_OK, returningIntent);
-        finish();
-    }
-
-    /**
-     * Show the location in map app. Map will center on the location metadata, if available.
-     * If there is no location metadata, the map will center on the commons app map center.
-     */
-    private void showInMapApp() {
-        fr.free.nrw.commons.location.LatLng position = null;
-
-        if(activity.equals("UploadActivity") && cameraPosition != null){
-            //location metadata is available
-            position = new fr.free.nrw.commons.location.LatLng(cameraPosition.getLatitude(),
-                cameraPosition.getLongitude(), 0.0f);
-        } else if(mapView != null){
-            //location metadata is not available
-            position = new fr.free.nrw.commons.location.LatLng(mapView.getMapCenter().getLatitude(),
-                mapView.getMapCenter().getLongitude(), 0.0f);
-        }
-
-        if(position != null){
-            Utils.handleGeoCoordinates(this, position);
-        }
-    }
-
-    /**
-     * Moves the center of the map to the media's location, if that data
-     * is available.
-     */
-    private void moveMapToMediaLocation() {
-        if (cameraPosition != null) {
-
-            GeoPoint point = new GeoPoint(cameraPosition.getLatitude(),
-                cameraPosition.getLongitude());
-
-            moveMapTo(point);
-        }
-    }
-
-    /**
-     * Moves the center of the map to the device's GPS location, if that data is available.
-     */
-    private void moveMapToGPSLocation(){
-        if(locationManager != null){
-            fr.free.nrw.commons.location.LatLng location = locationManager.getLastLocation();
-
-            if(location != null){
-                GeoPoint point = new GeoPoint(location.getLatitude(), location.getLongitude());
-
-                moveMapTo(point);
-            }
-        }
-    }
-
-    /**
-     * Select the preferable location
-     */
-    private void addPlaceSelectedButton() {
-        placeSelectedButton = findViewById(R.id.location_chosen_button);
-        placeSelectedButton.setOnClickListener(view -> placeSelected());
-    }
-
-    /**
-     * Return the intent with required data
-     */
-    void placeSelected() {
-        if (activity.equals("NoLocationUploadActivity")) {
-            applicationKvStore.putString(LAST_LOCATION,
-                mapView.getMapCenter().getLatitude()
-                    + ","
-                    + mapView.getMapCenter().getLongitude());
-            applicationKvStore.putString(LAST_ZOOM, mapView.getZoomLevel() + "");
-        }
-
-        if (media == null) {
-            final Intent returningIntent = new Intent();
-            returningIntent.putExtra(LocationPickerConstants.MAP_CAMERA_POSITION,
-                new CameraPosition(mapView.getMapCenter().getLatitude(),
-                    mapView.getMapCenter().getLongitude(), 14.0));
-            setResult(AppCompatActivity.RESULT_OK, returningIntent);
-        } else {
-            updateCoordinates(String.valueOf(mapView.getMapCenter().getLatitude()),
-                String.valueOf(mapView.getMapCenter().getLongitude()),
-                String.valueOf(0.0f));
-        }
-
-        finish();
-    }
-
-    /**
-     * Fetched coordinates are replaced with existing coordinates by a POST API call.
-     * @param Latitude to be added
-     * @param Longitude to be added
-     * @param Accuracy to be added
-     */
-    public void updateCoordinates(final String Latitude, final String Longitude,
-        final String Accuracy) {
-        if (media == null) {
-            return;
-        }
-
-        try {
-            getCompositeDisposable().add(
-                coordinateEditHelper.makeCoordinatesEdit(getApplicationContext(), media,
-                        Latitude, Longitude, Accuracy)
+    private fun removeLocationFromImage() {
+        media?.let {
+            compositeDisposable.add(
+                coordinateEditHelper.makeCoordinatesEdit(
+                    applicationContext, it, "0.0", "0.0", "0.0f"
+                )
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(s -> {
-                            Timber.d("Coordinates are added.");
-                        }));
-        } catch (Exception e) {
-            if (e.getLocalizedMessage().equals(CsrfTokenClient.ANONYMOUS_TOKEN_MESSAGE)) {
-                final String username = sessionManager.getUserName();
-                final CommonsApplication.BaseLogoutListener logoutListener = new CommonsApplication.BaseLogoutListener(
-                    this,
-                    getString(R.string.invalid_login_message),
-                    username
-                );
+                    .subscribe { _ ->
+                        Timber.d("Coordinates removed from the image")
+                    }
+            )
+        }
+        setResult(RESULT_OK, Intent())
+        finish()
+    }
 
-                CommonsApplication.getInstance().clearApplicationData(
-                    this, logoutListener);
+    /**
+     * Show location in map app
+     */
+    private fun showInMapApp() {
+        val position = when {
+            //location metadata is available
+            activity == "UploadActivity" && cameraPosition != null -> {
+                fr.free.nrw.commons.location.LatLng(cameraPosition!!.latitude, cameraPosition!!.longitude, 0.0f)
             }
+            //location metadata is not available
+            mapView != null -> {
+                fr.free.nrw.commons.location.LatLng(
+                    mapView?.mapCenter?.latitude!!,
+                    mapView?.mapCenter?.longitude!!,
+                    0.0f
+                )
+            }
+            else -> null
+        }
+
+        position?.let { Utils.handleGeoCoordinates(this, it) }
+    }
+
+    /**
+     * Moves map to media's location
+     */
+    private fun moveMapToMediaLocation() {
+        cameraPosition?.let {
+            moveMapTo(GeoPoint(it.latitude, it.longitude))
         }
     }
 
     /**
-     * Center the camera on the last saved location
+     * Moves map to GPS location
      */
-    private void addCenterOnGPSButton() {
-        fabCenterOnLocation = findViewById(R.id.center_on_gps);
-        fabCenterOnLocation.setOnClickListener(view -> {
-            moveToCurrentLocation = true;
-            requestLocationPermissions();
-        });
-    }
-
-    /**
-     * Adds selected location marker on the map
-     */
-    private void showSelectedLocationMarker(GeoPoint point) {
-        Drawable icon = ContextCompat.getDrawable(this, R.drawable.map_default_map_marker);
-        Marker marker = new Marker(mapView);
-        marker.setPosition(point);
-        marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
-        marker.setIcon(icon);
-        marker.setInfoWindow(null);
-        mapView.getOverlays().add(marker);
-        mapView.invalidate();
-    }
-
-    /**
-     * Removes selected location marker from the map
-     */
-    private void removeSelectedLocationMarker() {
-        List<Overlay> overlays = mapView.getOverlays();
-        for (int i = 0; i < overlays.size(); i++) {
-            if (overlays.get(i) instanceof Marker) {
-                Marker item = (Marker) overlays.get(i);
-                if (cameraPosition.getLatitude() == item.getPosition().getLatitude()
-                    && cameraPosition.getLongitude() == item.getPosition().getLongitude()) {
-                    mapView.getOverlays().remove(i);
-                    mapView.invalidate();
-                    break;
-                }
-            }
+    private fun moveMapToGPSLocation() {
+        locationManager.lastLocation?.let {
+            moveMapTo(GeoPoint(it.latitude, it.longitude))
         }
     }
 
     /**
-     * Center the map at user's current location
+     * Adds "Place Selected" button
      */
-    private void requestLocationPermissions() {
-        locationPermissionsHelper = new LocationPermissionsHelper(
-            this, locationManager, this);
-        locationPermissionsHelper.requestForLocationAccess(R.string.location_permission_title,
-            R.string.upload_map_location_access);
+    private fun addPlaceSelectedButton() {
+        placeSelectedButton = findViewById(R.id.location_chosen_button)
+        placeSelectedButton.setOnClickListener { placeSelected() }
     }
 
-    @Override
-    public void onRequestPermissionsResult(final int requestCode,
-        @NonNull final String[] permissions,
-        @NonNull final int[] grantResults) {
-        if (requestCode == Constants.RequestCodes.LOCATION
-            && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-            onLocationPermissionGranted();
+    /**
+     * Handles "Place Selected" action
+     */
+    private fun placeSelected() {
+        if (activity == "NoLocationUploadActivity") {
+            applicationKvStore.putString(
+                LAST_LOCATION,
+                "${mapView?.mapCenter?.latitude},${mapView?.mapCenter?.longitude}"
+            )
+            applicationKvStore.putString(LAST_ZOOM, mapView?.zoomLevel?.toString()!!)
+        }
+
+        if (media == null) {
+            val intent = Intent().apply {
+                putExtra(
+                    LocationPickerConstants.MAP_CAMERA_POSITION,
+                    CameraPosition(mapView?.mapCenter?.latitude!!, mapView?.mapCenter?.longitude!!, 14.0)
+                )
+            }
+            setResult(RESULT_OK, intent)
         } else {
-            onLocationPermissionDenied(getString(R.string.upload_map_location_access));
+            updateCoordinates(
+                mapView?.mapCenter?.latitude.toString(),
+                mapView?.mapCenter?.longitude.toString(),
+                "0.0f"
+            )
         }
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        finish()
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        mapView.onResume();
+    /**
+     * Updates image with new coordinates
+     */
+    fun updateCoordinates(latitude: String, longitude: String, accuracy: String) {
+        media?.let {
+            try {
+                compositeDisposable.add(
+                    coordinateEditHelper.makeCoordinatesEdit(
+                        applicationContext,
+                        it,
+                        latitude,
+                        longitude,
+                        accuracy
+                    ).subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe { _ ->
+                            Timber.d("Coordinates updated")
+                        }
+                )
+            } catch (e: Exception) {
+                if (e.localizedMessage == CsrfTokenClient.ANONYMOUS_TOKEN_MESSAGE) {
+                    val username = sessionManager.userName
+                    CommonsApplication.BaseLogoutListener(
+                        this,
+                        getString(R.string.invalid_login_message)
+                        , username
+                    ).let {
+                        CommonsApplication.instance.clearApplicationData(this, it)
+                    }
+                } else { }
+            }
+        }
     }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-        mapView.onPause();
+    /**
+     * Adds a button to center the map at user's location
+     */
+    private fun addCenterOnGPSButton() {
+        fabCenterOnLocation = findViewById(R.id.center_on_gps)
+        fabCenterOnLocation.setOnClickListener {
+            moveToCurrentLocation = true
+            requestLocationPermissions()
+        }
     }
 
-    @Override
-    public void onLocationPermissionDenied(String toastMessage) {
-        if (!ActivityCompat.shouldShowRequestPermissionRationale(this,
-            permission.ACCESS_FINE_LOCATION)) {
+    /**
+     * Shows a selected location marker
+     */
+    private fun showSelectedLocationMarker(point: GeoPoint) {
+        val icon = ContextCompat.getDrawable(this, R.drawable.map_default_map_marker)
+        Marker(mapView).apply {
+            position = point
+            setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
+            setIcon(icon)
+            infoWindow = null
+            mapView?.overlays?.add(this)
+        }
+        mapView?.invalidate()
+    }
+
+    /**
+     * Removes selected location marker
+     */
+    private fun removeSelectedLocationMarker() {
+        val overlays = mapView?.overlays
+        overlays?.filterIsInstance<Marker>()?.firstOrNull {
+            it.position.latitude ==
+                    cameraPosition?.latitude && it.position.longitude == cameraPosition?.longitude
+        }?.let {
+            overlays.remove(it)
+            mapView?.invalidate()
+        }
+    }
+
+    /**
+     * Centers map at user's location
+     */
+    private fun requestLocationPermissions() {
+        locationPermissionsHelper = LocationPermissionsHelper(this, locationManager, this)
+        locationPermissionsHelper.requestForLocationAccess(
+            R.string.location_permission_title,
+            R.string.upload_map_location_access
+        )
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        if (requestCode == Constants.RequestCodes.LOCATION && grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            onLocationPermissionGranted()
+        } else {
+            onLocationPermissionDenied(getString(R.string.upload_map_location_access))
+        }
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        mapView?.onResume()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        mapView?.onPause()
+    }
+
+    override fun onLocationPermissionDenied(toastMessage: String) {
+        val isDeniedBefore = store.getBoolean("isPermissionDenied", false)
+        val showRationale = ActivityCompat.shouldShowRequestPermissionRationale(this, permission.ACCESS_FINE_LOCATION)
+
+        if (!showRationale) {
             if (!locationPermissionsHelper.checkLocationPermission(this)) {
-                if (store.getBoolean("isPermissionDenied", false)) {
-                    // means user has denied location permission twice or checked the "Don't show again"
-                    locationPermissionsHelper.showAppSettingsDialog(this,
-                        R.string.upload_map_location_access);
+                if (isDeniedBefore) {
+                    locationPermissionsHelper.showAppSettingsDialog(this, R.string.upload_map_location_access)
                 } else {
-                    Toast.makeText(getBaseContext(), toastMessage, Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, toastMessage, Toast.LENGTH_LONG).show()
                 }
-                store.putBoolean("isPermissionDenied", true);
+                store.putBoolean("isPermissionDenied", true)
             }
         } else {
-            Toast.makeText(getBaseContext(), toastMessage, Toast.LENGTH_LONG).show();
+            Toast.makeText(this, toastMessage, Toast.LENGTH_LONG).show()
         }
     }
 
-    @Override
-    public void onLocationPermissionGranted() {
-        if (moveToCurrentLocation || !(activity.equals("MediaActivity"))) {
-            if (locationPermissionsHelper.isLocationAccessToAppsTurnedOn()) {
-                locationManager.requestLocationUpdatesFromProvider(
-                    LocationManager.NETWORK_PROVIDER);
-                locationManager.requestLocationUpdatesFromProvider(LocationManager.GPS_PROVIDER);
-                addMarkerAtGPSLocation();
+    override fun onLocationPermissionGranted() {
+        if (moveToCurrentLocation || activity != "MediaActivity") {
+            if (locationPermissionsHelper.isLocationAccessToAppsTurnedOn) {
+                locationManager.requestLocationUpdatesFromProvider(LocationManager.NETWORK_PROVIDER)
+                locationManager.requestLocationUpdatesFromProvider(LocationManager.GPS_PROVIDER)
+                addMarkerAtGPSLocation()
             } else {
-                addMarkerAtGPSLocation();
-                locationPermissionsHelper.showLocationOffDialog(this,
-                    R.string.ask_to_turn_location_on_text);
+                addMarkerAtGPSLocation()
+                locationPermissionsHelper.showLocationOffDialog(this, R.string.ask_to_turn_location_on_text)
             }
         }
     }
 
     /**
-     * Adds a marker to the map at the most recent GPS location
-     * (which may be the current GPS location).
+     * Adds a marker at the user's GPS location
      */
-    private void addMarkerAtGPSLocation() {
-        fr.free.nrw.commons.location.LatLng currLocation = locationManager.getLastLocation();
-        if (currLocation != null) {
-            GeoPoint currLocationGeopoint = new GeoPoint(currLocation.getLatitude(),
-                currLocation.getLongitude());
-            addLocationMarker(currLocationGeopoint);
-            markerImage.setTranslationY(0);
+    private fun addMarkerAtGPSLocation() {
+        locationManager.lastLocation?.let {
+            addLocationMarker(GeoPoint(it.latitude, it.longitude))
+            markerImage.translationY = 0f
         }
     }
 
-    private void addLocationMarker(GeoPoint geoPoint) {
+    private fun addLocationMarker(geoPoint: GeoPoint) {
         if (moveToCurrentLocation) {
-            mapView.getOverlays().clear();
+            mapView?.overlays?.clear()
         }
-        ScaleDiskOverlay diskOverlay =
-            new ScaleDiskOverlay(this,
-                geoPoint, 2000, GeoConstants.UnitOfMeasure.foot);
-        Paint circlePaint = new Paint();
-        circlePaint.setColor(Color.rgb(128, 128, 128));
-        circlePaint.setStyle(Paint.Style.STROKE);
-        circlePaint.setStrokeWidth(2f);
-        diskOverlay.setCirclePaint2(circlePaint);
-        Paint diskPaint = new Paint();
-        diskPaint.setColor(Color.argb(40, 128, 128, 128));
-        diskPaint.setStyle(Paint.Style.FILL_AND_STROKE);
-        diskOverlay.setCirclePaint1(diskPaint);
-        diskOverlay.setDisplaySizeMin(900);
-        diskOverlay.setDisplaySizeMax(1700);
-        mapView.getOverlays().add(diskOverlay);
-        org.osmdroid.views.overlay.Marker startMarker = new org.osmdroid.views.overlay.Marker(
-            mapView);
-        startMarker.setPosition(geoPoint);
-        startMarker.setAnchor(org.osmdroid.views.overlay.Marker.ANCHOR_CENTER,
-            org.osmdroid.views.overlay.Marker.ANCHOR_BOTTOM);
-        startMarker.setIcon(
-            ContextCompat.getDrawable(this, R.drawable.current_location_marker));
-        startMarker.setTitle("Your Location");
-        startMarker.setTextLabelFontSize(24);
-        mapView.getOverlays().add(startMarker);
+
+        val diskOverlay = ScaleDiskOverlay(
+            this,
+            geoPoint,
+            2000,
+            GeoConstants.UnitOfMeasure.foot
+        )
+
+        val circlePaint = Paint().apply {
+            color = Color.rgb(128, 128, 128)
+            style = Paint.Style.STROKE
+            strokeWidth = 2f
+        }
+        diskOverlay.setCirclePaint2(circlePaint)
+
+        val diskPaint = Paint().apply {
+            color = Color.argb(40, 128, 128, 128)
+            style = Paint.Style.FILL_AND_STROKE
+        }
+        diskOverlay.setCirclePaint1(diskPaint)
+
+        diskOverlay.setDisplaySizeMin(900)
+        diskOverlay.setDisplaySizeMax(1700)
+
+        mapView?.overlays?.add(diskOverlay)
+
+        val startMarker = Marker(mapView).apply {
+            position = geoPoint
+            setAnchor(
+                Marker.ANCHOR_CENTER,
+                Marker.ANCHOR_BOTTOM
+            )
+            icon = ContextCompat.getDrawable(this@LocationPickerActivity, R.drawable.current_location_marker)
+            title = "Your Location"
+            textLabelFontSize = 24
+        }
+
+        mapView?.overlays?.add(startMarker)
     }
 
     /**
      * Saves the state of the activity
      * @param outState Bundle
      */
-    @Override
-    public void onSaveInstanceState(@NonNull final Bundle outState) {
-        super.onSaveInstanceState(outState);
-        if(cameraPosition!=null){
-            outState.putParcelable(CAMERA_POS, cameraPosition);
-        }
-        if(activity!=null){
-            outState.putString(ACTIVITY, activity);
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+
+        cameraPosition?.let {
+            outState.putParcelable(CAMERA_POS, it)
         }
 
-        if(media!=null){
-            outState.putParcelable("sMedia", media);
+        activity?.let {
+            outState.putString(ACTIVITY, it)
+        }
+
+        media?.let {
+            outState.putParcelable("sMedia", it)
         }
     }
 }

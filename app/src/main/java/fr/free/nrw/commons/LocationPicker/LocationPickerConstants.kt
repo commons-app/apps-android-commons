@@ -1,20 +1,13 @@
-package fr.free.nrw.commons.LocationPicker;
+package fr.free.nrw.commons.LocationPicker
 
 /**
  * Constants need for location picking
  */
-public final class LocationPickerConstants {
+object LocationPickerConstants {
 
-    public static final String ACTIVITY_KEY
-        = "location.picker.activity";
+    const val ACTIVITY_KEY = "location.picker.activity"
 
-    public static final String MAP_CAMERA_POSITION
-        = "location.picker.cameraPosition";
+    const val MAP_CAMERA_POSITION = "location.picker.cameraPosition"
 
-    public static final String MEDIA
-        = "location.picker.media";
-
-
-    private LocationPickerConstants() {
-    }
+    const val MEDIA = "location.picker.media"
 }
