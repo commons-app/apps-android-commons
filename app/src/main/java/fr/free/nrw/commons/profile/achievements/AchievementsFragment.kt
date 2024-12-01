@@ -369,7 +369,7 @@ class AchievementsFragment : CommonsDaggerSupportFragment(){
             )
         )
         binding.achievementBadgeText.text = levelInfo.levelNumber.toString()
-        val store = BasicKvStore(this.context, userName)
+        val store = BasicKvStore(requireContext(), userName)
         store.putString("userAchievementsLevel", levelInfo.levelNumber.toString())
     }
 
