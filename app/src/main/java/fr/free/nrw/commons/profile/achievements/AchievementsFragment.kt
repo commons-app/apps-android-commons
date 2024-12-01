@@ -222,12 +222,21 @@ class AchievementsFragment : CommonsDaggerSupportFragment(){
      */
     private fun showSnackBarWithRetry(tooManyAchievements: Boolean) {
         if (tooManyAchievements) {
-            binding.progressBar.visibility = View.GONE
-            showDismissibleSnackBar(
-                requireView().findViewById(android.R.id.content),
-                R.string.achievements_fetch_failed_ultimate_achievement, R.string.retry
-            ) { setAchievements() }
+            if (view == null) {
+                return
+            }
+            else {
+                binding.progressBar.visibility = View.GONE
+                showDismissibleSnackBar(
+                    requireView().findViewById(android.R.id.content),
+                    R.string.achievements_fetch_failed_ultimate_achievement, R.string.retry
+                ) { setAchievements() }
+            }
+
         } else {
+            if (view == null) {
+                return
+            }
             binding.progressBar.visibility = View.GONE
             showDismissibleSnackBar(
                 requireView().findViewById(android.R.id.content),
