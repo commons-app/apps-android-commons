@@ -24,7 +24,6 @@ import fr.free.nrw.commons.utils.DialogUtil.showAlertDialog
 import fr.free.nrw.commons.utils.ViewUtil.showDismissibleSnackBar
 import fr.free.nrw.commons.utils.ViewUtil.showLongToast
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import org.apache.commons.lang3.StringUtils
 import timber.log.Timber
@@ -42,9 +41,6 @@ class AchievementsFragment : CommonsDaggerSupportFragment(){
 
     private var _binding: FragmentAchievementsBinding? = null
     private val binding get() = _binding!!
-//    private lateinit var binding: FragmentAchievementsBinding
-    private val compositeDisposable = CompositeDisposable()
-
     // To keep track of the number of wiki edits made by a user
     private var numberOfEdits: Int = 0
 
@@ -65,13 +61,13 @@ class AchievementsFragment : CommonsDaggerSupportFragment(){
         _binding = FragmentAchievementsBinding.inflate(inflater, container, false)
 
         binding.achievementInfo.setOnClickListener { showInfoDialog() }
-        binding.imagesUploadInfo.setOnClickListener { showUploadInfo() }
-        binding.imagesRevertedInfo.setOnClickListener { showRevertedInfo() }
-        binding.imagesUsedByWikiInfo.setOnClickListener { showUsedByWikiInfo() }
-        binding.imagesNearbyInfo.setOnClickListener { showImagesViaNearbyInfo() }
-        binding.imagesFeaturedInfo.setOnClickListener { showFeaturedImagesInfo() }
-        binding.thanksReceivedInfo.setOnClickListener { showThanksReceivedInfo() }
-        binding.qualityImagesInfo.setOnClickListener { showQualityImagesInfo() }
+        binding.imagesUploadInfoIcon.setOnClickListener { showUploadInfo() }
+        binding.imagesRevertedInfoIcon.setOnClickListener { showRevertedInfo() }
+        binding.imagesUsedByWikiInfoIcon.setOnClickListener { showUsedByWikiInfo() }
+        binding.imagesNearbyInfoIcon.setOnClickListener { showImagesViaNearbyInfo() }
+        binding.imagesFeaturedInfoIcon.setOnClickListener { showFeaturedImagesInfo() }
+        binding.thanksReceivedInfoIcon.setOnClickListener { showThanksReceivedInfo() }
+        binding.qualityImageIcon.setOnClickListener { showQualityImagesInfo() }
 
         // DisplayMetrics used to fetch the size of the screen
         val displayMetrics = DisplayMetrics()
@@ -80,6 +76,7 @@ class AchievementsFragment : CommonsDaggerSupportFragment(){
         val width = displayMetrics.widthPixels
 
         // Used for the setting the size of imageView at runtime
+        // TODO REMOVE
         val params = binding.achievementBadgeImage.layoutParams as ConstraintLayout.LayoutParams
         params.height = (height * BADGE_IMAGE_HEIGHT_RATIO).toInt()
         params.width = (width * BADGE_IMAGE_WIDTH_RATIO).toInt()
@@ -98,7 +95,7 @@ class AchievementsFragment : CommonsDaggerSupportFragment(){
         }
         if (isBetaFlavour) {
             binding.progressBar.visibility = View.GONE
-            binding.imagesUsedByWikiText.setText(R.string.no_image)
+            binding.imagesUsedCount.setText(R.string.no_image)
             binding.imagesRevertedText.setText(R.string.no_image_reverted)
             binding.imagesUploadTextParam.setText(R.string.no_image_uploaded)
             binding.wikidataEdits.text = "0"
@@ -169,8 +166,9 @@ class AchievementsFragment : CommonsDaggerSupportFragment(){
                                     setUploadCount(Achievements.from(response))
                                 } else {
                                     Timber.d("Success")
-                                    binding.layoutImageReverts.visibility = View.INVISIBLE
-                                    binding.achievementBadgeImage.visibility = View.INVISIBLE
+                                    // TODO Create a Method to Hide all the Statistics
+//                                    binding.layoutImageReverts.visibility = View.INVISIBLE
+//                                    binding.achievementBadgeImage.visibility = View.INVISIBLE
                                     // If the number of edits made by the user are more than 150,000
                                     // in some cases such high number of wiki edit counts cause the
                                     // achievements calculator to fail in some cases, for more details
@@ -307,7 +305,7 @@ class AchievementsFragment : CommonsDaggerSupportFragment(){
             binding.imagesUploadedProgressbar.visibility = View.VISIBLE
             binding.imagesUploadedProgressbar.progress =
                 100 * uploadCount / levelInfo.maxUploadCount
-            binding.tvUploadedImages.text = uploadCount.toString() + "/" + levelInfo.maxUploadCount
+            binding.imageUploadedTVCount.text = uploadCount.toString() + "/" + levelInfo.maxUploadCount
         }
     }
 
@@ -329,11 +327,10 @@ class AchievementsFragment : CommonsDaggerSupportFragment(){
 //        binding.imagesUploadedProgressbar.setVisibility(View.INVISIBLE);
 //        binding.imageRevertsProgressbar.setVisibility(View.INVISIBLE);
 //        binding.imagesUsedByWikiProgressBar.setVisibility(View.INVISIBLE);
-        binding.achievementBadgeImage.visibility = View.INVISIBLE
-        binding.imagesUsedByWikiText.setText(R.string.no_image)
+        //binding.achievementBadgeImage.visibility = View.INVISIBLE // TODO
+        binding.imagesUsedCount.setText(R.string.no_image)
         binding.imagesRevertedText.setText(R.string.no_image_reverted)
         binding.imagesUploadTextParam.setText(R.string.no_image_uploaded)
-        binding.achievementBadgeImage.visibility = View.INVISIBLE
     }
 
     /**
@@ -344,7 +341,7 @@ class AchievementsFragment : CommonsDaggerSupportFragment(){
         binding.imageRevertsProgressbar.visibility = View.VISIBLE
         binding.imageRevertsProgressbar.progress = notRevertPercentage
         val revertPercentage = notRevertPercentage.toString()
-        binding.tvRevertedImages.text = "$revertPercentage%"
+        binding.imageRevertTVCount.text = "$revertPercentage%"
         binding.imagesRevertLimitText.text =
             resources.getString(R.string.achievements_revert_limit_message) + levelInfo.minNonRevertPercentage + "%"
     }
@@ -359,13 +356,12 @@ class AchievementsFragment : CommonsDaggerSupportFragment(){
         binding.thanksReceived.text = achievements.thanksReceived.toString()
         binding.imagesUsedByWikiProgressBar.progress =
             100 * achievements.uniqueUsedImages / levelInfo.maxUniqueImages
-        binding.tvWikiPb.text = (achievements.uniqueUsedImages.toString() + "/"
+        binding.imagesUsedCount.text = (achievements.uniqueUsedImages.toString() + "/"
                 + levelInfo.maxUniqueImages)
         binding.imageFeatured.text = achievements.featuredImages.toString()
         binding.qualityImages.text = achievements.qualityImages.toString()
-        var levelUpInfoString = getString(R.string.level).uppercase()
-        levelUpInfoString += " " + levelInfo.levelNumber
-        binding.achievementLevel.text = levelUpInfoString
+
+        binding.achievementLevel.text = getString(R.string.level,levelInfo.levelNumber)
         binding.achievementBadgeImage.setImageDrawable(
             VectorDrawableCompat.create(
                 resources, R.drawable.badge,

@@ -1,640 +1,535 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools"
-  android:id="@+id/drawer_layout"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  android:background="?attr/achievementBackground">
+  android:background="?attr/achievementBackground"
+  android:fillViewport="true"
+  tools:ignore="ContentDescription" >
 
-    <ScrollView
+<!-- TODO Add ContentDescription For ALL Images Added ignore to suppress Lints -->
+
+  <androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+      android:id="@+id/tv_achievements_of_user"
+      style="@style/MediaDetailTextLabel"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:padding="10dp"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.0"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      tools:text="Achievements of user : Ashish" />
+
+    <ImageView
+      android:id="@+id/achievement_info"
       android:layout_width="wrap_content"
-      android:layout_height="wrap_content">
-
-      <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-      <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_achievements_of_user"
-        style="@style/MediaDetailTextLabel"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        tools:text="Achievements of user : Ashish" />
-
-
-        <RelativeLayout
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:background="?attr/achievementBackground"
-          android:orientation="vertical">
-
-          <TextView
-            style="?android:textAppearanceLarge"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/activity_margin_horizontal"
-            android:layout_marginTop="@dimen/activity_margin_horizontal"
-            android:text="@string/level"
-            android:id="@+id/achievement_level"
-            android:textAllCaps="true"/>
-
-          <ImageView
-            android:id="@+id/achievement_info"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/activity_margin_vertical"
-            android:layout_marginEnd="@dimen/activity_margin_horizontal"
-            android:layout_alignParentEnd="true"
-            app:srcCompat="@drawable/ic_info_outline_24dp"
-            android:layout_marginVertical="@dimen/activity_margin_vertical"
-            app:tint="@color/black" />
-
-          <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/badge_layout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/achievement_info"
-            android:layout_centerHorizontal="true">
-
-            <ImageView
-              android:id="@+id/achievement_badge_image"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              app:layout_constraintLeft_toLeftOf="parent"
-              app:layout_constraintRight_toRightOf="parent"
-              app:layout_constraintTop_toTopOf="parent"
-              app:srcCompat="@drawable/badge" />
-
-            <TextView
-              android:id="@+id/achievement_badge_text"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:textAlignment="center"
-              android:textColor="@color/achievement_badge_text"
-              android:textSize="75sp"
-              app:layout_constraintBottom_toBottomOf="@+id/achievement_badge_image"
-              app:layout_constraintEnd_toEndOf="@+id/achievement_badge_image"
-              app:layout_constraintStart_toStartOf="@+id/achievement_badge_image"
-              app:layout_constraintTop_toTopOf="@+id/achievement_badge_image"
-              app:layout_constraintVertical_bias="0.58" />
-          </androidx.constraintlayout.widget.ConstraintLayout>
-
-          <RelativeLayout
-            android:id="@+id/layout_image_uploaded"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/badge_layout"
-            android:layout_marginEnd="@dimen/activity_margin_horizontal"
-            android:layout_marginLeft="@dimen/activity_margin_horizontal"
-            android:layout_marginRight="@dimen/activity_margin_horizontal"
-            android:layout_marginStart="@dimen/activity_margin_horizontal">
-
-
-            <LinearLayout
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:id="@+id/images_upload_info"
-              android:orientation="horizontal"
-              >
-
-              <TextView
-                style="?android:textAppearanceMedium"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/activity_margin_horizontal"
-                android:id="@+id/images_upload_text_param"
-                android:layout_marginTop="@dimen/achievements_activity_margin_vertical"
-                android:text="@string/images_uploaded" />
-
-              <ImageView
-                android:layout_width="@dimen/quarter_standard_height"
-                android:layout_height="@dimen/quarter_standard_height"
-                android:layout_marginTop="@dimen/activity_margin_horizontal"
-                android:layout_marginRight="@dimen/activity_margin_horizontal"
-                android:layout_marginEnd="@dimen/activity_margin_horizontal"
-                app:srcCompat="@drawable/ic_info_outline_24dp"
-                android:layout_marginLeft="@dimen/activity_margin_horizontal"
-                android:layout_marginStart="@dimen/activity_margin_horizontal"
-                app:tint="@color/primaryLightColor" />
-
-            </LinearLayout>
-
-            <FrameLayout
-              android:layout_width="@dimen/dimen_40"
-              android:layout_height="@dimen/dimen_40"
-              android:layout_alignParentEnd="true"
-              android:layout_marginEnd="32dp">
-
-              <com.google.android.material.progressindicator.CircularProgressIndicator
-                android:id="@+id/images_uploaded_progressbar"
-                android:layout_width="@dimen/dimen_40"
-                android:layout_height="@dimen/dimen_40"
-                android:indeterminate="false"
-                android:layout_marginEnd="@dimen/large_gap"
-                app:showAnimationBehavior="outward"
-                app:indicatorColor="@color/primaryColor"
-                app:indicatorSize="32dp"
-                app:trackThickness="@dimen/progressbar_stroke"
-                app:trackColor="#B7B6B6"
-                android:visibility="gone"/>
-
-              <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tv_uploaded_images"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="@dimen/progressbar_padding"
-                android:gravity="center"
-                android:maxLines="1"
-                android:textColor="@color/secondaryColor"
-                app:autoSizeMaxTextSize="@dimen/progressbar_text"
-                app:autoSizeMinTextSize="2sp"
-                app:autoSizeStepGranularity="1sp"
-                app:autoSizeTextType="uniform" />
-
-            </FrameLayout>
-
-
-
-          </RelativeLayout>
-
-          <RelativeLayout
-            android:id="@+id/layout_image_reverts"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/tiny_margin"
-            android:layout_below="@+id/layout_image_uploaded"
-            android:layout_marginEnd="@dimen/activity_margin_horizontal"
-            android:layout_marginLeft="@dimen/activity_margin_horizontal"
-            android:layout_marginRight="@dimen/activity_margin_horizontal"
-            android:layout_marginStart="@dimen/activity_margin_horizontal">
-
-            <LinearLayout
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:id="@+id/images_reverted_info"
-              android:orientation="horizontal"
-              >
-
-              <TextView
-                style="?android:textAppearanceMedium"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/images_reverted_text"
-                android:layout_marginStart="@dimen/activity_margin_horizontal"
-                android:text="@string/image_reverts" />
-
-              <ImageView
-                android:layout_width="@dimen/medium_width"
-                android:layout_height="@dimen/medium_height"
-                android:layout_marginTop="@dimen/activity_margin_horizontal"
-                android:layout_marginRight="@dimen/activity_margin_horizontal"
-                android:layout_marginEnd="@dimen/activity_margin_horizontal"
-                app:srcCompat="@drawable/ic_info_outline_24dp"
-                android:layout_marginLeft="@dimen/activity_margin_horizontal"
-                android:layout_marginStart="@dimen/activity_margin_horizontal" app:tint="@color/primaryLightColor" />
-
-            </LinearLayout>
-
-
-            <TextView
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:text="@string/achievements_revert_limit_message"
-              android:textSize="@dimen/small_text"
-              android:id="@+id/images_revert_limit_text"
-              android:layout_marginStart="@dimen/activity_margin_horizontal"
-              android:layout_below="@id/images_reverted_info"/>
-
-            <FrameLayout
-              android:layout_width="@dimen/dimen_40"
-              android:layout_height="@dimen/dimen_40"
-              android:layout_alignParentEnd="true"
-              android:layout_marginEnd="32dp">
-
-              <com.google.android.material.progressindicator.CircularProgressIndicator
-                android:id="@+id/image_reverts_progressbar"
-                android:layout_width="@dimen/dimen_40"
-                android:layout_height="@dimen/dimen_40"
-                android:indeterminate="false"
-                android:layout_marginEnd="@dimen/large_gap"
-                app:showAnimationBehavior="outward"
-                app:indicatorColor="@color/primaryColor"
-                app:indicatorSize="32dp"
-                app:trackThickness="@dimen/progressbar_stroke"
-                app:trackColor="#B7B6B6"
-                android:visibility="gone"/>
-
-              <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tv_reverted_images"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="@dimen/progressbar_padding"
-                android:gravity="center"
-                android:maxLines="1"
-                android:textColor="@color/secondaryColor"
-                app:autoSizeMaxTextSize="@dimen/progressbar_text"
-                app:autoSizeMinTextSize="2sp"
-                app:autoSizeStepGranularity="1sp"
-                app:autoSizeTextType="uniform" />
-            </FrameLayout>
-          </RelativeLayout>
-
-          <RelativeLayout
-            android:id="@+id/layout_image_used_by_wiki"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/tiny_margin"
-            android:layout_below="@+id/layout_image_reverts"
-            android:layout_marginBottom="@dimen/activity_margin_vertical"
-            android:layout_marginEnd="@dimen/activity_margin_horizontal"
-            android:layout_marginLeft="@dimen/activity_margin_horizontal"
-            android:layout_marginRight="@dimen/activity_margin_horizontal"
-            android:layout_marginStart="@dimen/activity_margin_horizontal">
-
-            <LinearLayout
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:id="@+id/images_used_by_wiki_info"
-              android:orientation="horizontal">
-
-              <TextView
-                style="?android:textAppearanceMedium"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/images_used_by_wiki_text"
-                android:layout_marginStart="@dimen/activity_margin_horizontal"
-                android:layout_marginTop="@dimen/achievements_activity_margin_vertical"
-                android:text="@string/images_used_by_wiki" />
-
-              <ImageView
-                android:layout_width="@dimen/medium_width"
-                android:layout_height="@dimen/medium_height"
-                android:layout_marginTop="@dimen/activity_margin_horizontal"
-                android:layout_marginRight="@dimen/activity_margin_horizontal"
-                android:layout_marginEnd="@dimen/activity_margin_horizontal"
-                app:srcCompat="@drawable/ic_info_outline_24dp"
-                android:layout_marginLeft="@dimen/activity_margin_horizontal"
-                android:layout_marginStart="@dimen/activity_margin_horizontal"
-                app:tint="@color/primaryLightColor" />
-
-            </LinearLayout>
-
-            <FrameLayout
-              android:layout_width="@dimen/dimen_40"
-              android:layout_height="@dimen/dimen_40"
-              android:layout_alignParentEnd="true"
-              android:layout_marginEnd="32dp">
-
-              <com.google.android.material.progressindicator.CircularProgressIndicator
-                android:id="@+id/images_used_by_wiki_progress_bar"
-                android:layout_width="@dimen/dimen_40"
-                android:layout_height="@dimen/dimen_40"
-                android:indeterminate="false"
-                android:layout_marginEnd="@dimen/large_gap"
-                app:showAnimationBehavior="outward"
-                app:indicatorColor="@color/primaryColor"
-                app:indicatorSize="32dp"
-                app:trackThickness="@dimen/progressbar_stroke"
-                app:trackColor="#B7B6B6"
-                android:visibility="gone"/>
-
-              <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tv_wiki_pb"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="@dimen/progressbar_padding"
-                android:gravity="center"
-                android:maxLines="1"
-                android:textColor="@color/secondaryColor"
-                app:autoSizeMaxTextSize="@dimen/progressbar_text"
-                app:autoSizeMinTextSize="2sp"
-                app:autoSizeStepGranularity="1sp"
-                app:autoSizeTextType="uniform" />
-
-            </FrameLayout>
-
-          </RelativeLayout>
-
-          <ProgressBar
-            android:id="@+id/progressBar"
-            android:layout_centerVertical="true"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        </RelativeLayout>
-
-        <LinearLayout
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:id="@+id/layout_statistics"
-          android:orientation="vertical">
-
-          <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/statistics"
-            style="?android:textAppearanceLarge"
-            android:layout_marginStart="@dimen/activity_margin_horizontal"
-            android:layout_marginTop="@dimen/activity_margin_vertical"
-            android:textAllCaps="true"/>
-
-          <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/activity_margin_horizontal"
-            android:layout_marginRight="@dimen/activity_margin_horizontal"
-            android:layout_marginEnd="@dimen/activity_margin_horizontal"
-            android:layout_marginStart="@dimen/activity_margin_horizontal"
-            android:layout_marginTop="@dimen/activity_margin_horizontal">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:id="@+id/images_nearby_info"
-              android:layout_centerVertical="true"
-              android:layout_alignParentStart="true"
-              android:layout_toStartOf="@+id/wikidata_edits"
-              android:orientation="horizontal"
-              android:gravity="center_vertical">
-
-              <ImageView
-                android:id="@+id/wikidata_edits_icon"
-                android:layout_width="@dimen/overflow_icon_dimen"
-                android:layout_height="@dimen/overflow_icon_dimen"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_custom_map_marker_dark" />
-
-              <TextView
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:id="@+id/images_nearby_data"
-                style="?android:textAppearanceMedium"
-                android:layout_marginStart="@dimen/activity_margin_horizontal"
-                android:layout_marginLeft="@dimen/activity_margin_horizontal"
-                android:layout_marginEnd="@dimen/activity_margin_horizontal"
-                android:layout_marginRight="@dimen/activity_margin_horizontal"
-                app:layout_constraintLeft_toRightOf="@id/wikidata_edits_icon"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintRight_toLeftOf="@id/images_nearby_info_icon"
-                android:text="@string/statistics_wikidata_edits"  />
-
-              <ImageView
-                android:layout_width="@dimen/medium_width"
-                android:layout_height="@dimen/medium_height"
-                android:id="@+id/images_nearby_info_icon"
-                android:layout_marginTop="@dimen/activity_margin_horizontal"
-                android:layout_marginEnd="@dimen/activity_margin_horizontal"
-                android:layout_gravity="top"
-                app:layout_constraintLeft_toRightOf="@id/images_nearby_data"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:srcCompat="@drawable/ic_info_outline_24dp"
-                app:tint="@color/primaryLightColor" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-            <TextView
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              style="?android:textAppearanceMedium"
-              android:layout_alignParentEnd="true"
-              android:layout_marginEnd="@dimen/half_standard_height"
-              android:layout_marginTop="@dimen/activity_margin_horizontal"
-              android:layout_marginStart="@dimen/activity_margin_horizontal"
-              android:layout_centerVertical="true"
-              tools:text="2"
-              android:id="@+id/wikidata_edits"
-              />
-
-          </RelativeLayout>
-
-          <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/activity_margin_horizontal"
-            android:layout_marginRight="@dimen/activity_margin_horizontal"
-            android:layout_marginEnd="@dimen/activity_margin_horizontal"
-            android:layout_marginStart="@dimen/activity_margin_horizontal"
-            android:layout_marginTop="@dimen/activity_margin_horizontal">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:id="@+id/images_featured_info"
-              android:layout_centerVertical="true"
-              android:layout_alignParentStart="true"
-              android:layout_toStartOf="@+id/image_featured"
-              android:orientation="horizontal"
-              android:gravity="center_vertical">
-
-              <ImageView
-                android:layout_width="@dimen/overflow_icon_dimen"
-                android:layout_height="@dimen/overflow_icon_dimen"
-                android:id="@+id/featured_image_icon"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/featured"
-                android:scaleType="centerCrop" />
-
-              <TextView
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                style="?android:textAppearanceMedium"
-                android:id="@+id/images_featured_data"
-                android:layout_marginStart="@dimen/activity_margin_horizontal"
-                android:layout_marginLeft="@dimen/activity_margin_horizontal"
-                android:layout_marginEnd="@dimen/activity_margin_horizontal"
-                android:layout_marginRight="@dimen/activity_margin_horizontal"
-                app:layout_constraintLeft_toRightOf="@id/featured_image_icon"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintRight_toLeftOf="@id/images_featured_info_icon"
-                android:text="@string/statistics_featured"  />
-
-              <ImageView
-                android:layout_width="@dimen/medium_width"
-                android:layout_height="@dimen/medium_height"
-                android:id="@+id/images_featured_info_icon"
-                android:layout_marginTop="@dimen/activity_margin_horizontal"
-                android:layout_marginEnd="@dimen/activity_margin_horizontal"
-                app:layout_constraintLeft_toRightOf="@id/images_featured_data"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                android:layout_gravity="top"
-                app:srcCompat="@drawable/ic_info_outline_24dp"
-                app:tint="@color/primaryLightColor" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <TextView
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              style="?android:textAppearanceMedium"
-              android:layout_alignParentEnd="true"
-              android:layout_marginTop="@dimen/activity_margin_horizontal"
-              android:layout_marginStart="@dimen/activity_margin_horizontal"
-              android:layout_centerVertical="true"
-              tools:text="2"
-              android:id="@+id/image_featured"
-              android:layout_marginEnd="@dimen/half_standard_height"
-              />
-
-          </RelativeLayout>
-
-          <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/activity_margin_horizontal"
-            android:layout_marginRight="@dimen/activity_margin_horizontal"
-            android:layout_marginEnd="@dimen/activity_margin_horizontal"
-            android:layout_marginStart="@dimen/activity_margin_horizontal"
-            android:layout_marginTop="@dimen/activity_margin_horizontal">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:id="@+id/quality_images_info"
-              android:layout_centerVertical="true"
-              android:layout_alignParentStart="true"
-              android:layout_toStartOf="@+id/quality_images"
-              android:orientation="horizontal"
-              android:gravity="center_vertical">
-
-              <ImageView
-                android:layout_width="@dimen/overflow_icon_dimen"
-                android:layout_height="@dimen/overflow_icon_dimen"
-                android:id="@+id/quality_image_icon"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_quality_images_logo"
-                android:scaleType="centerInside" />
-
-              <TextView
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                style="?android:textAppearanceMedium"
-                android:id="@+id/quality_images_data"
-                android:layout_marginStart="@dimen/activity_margin_horizontal"
-                android:layout_marginLeft="@dimen/activity_margin_horizontal"
-                android:layout_marginEnd="@dimen/activity_margin_horizontal"
-                android:layout_marginRight="@dimen/activity_margin_horizontal"
-                app:layout_constraintLeft_toRightOf="@id/quality_image_icon"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintRight_toLeftOf="@id/quality_images_info_icon"
-                android:text="@string/statistics_quality"  />
-
-              <ImageView
-                android:layout_width="@dimen/medium_width"
-                android:layout_height="@dimen/medium_height"
-                android:id="@+id/quality_images_info_icon"
-                android:layout_marginTop="@dimen/activity_margin_horizontal"
-                android:layout_marginEnd="@dimen/activity_margin_horizontal"
-                app:layout_constraintLeft_toRightOf="@id/quality_images_data"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                android:layout_gravity="top"
-                app:srcCompat="@drawable/ic_info_outline_24dp"
-                app:tint="@color/primaryLightColor" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <TextView
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              style="?android:textAppearanceMedium"
-              android:layout_alignParentEnd="true"
-              android:layout_marginTop="@dimen/activity_margin_horizontal"
-              android:layout_marginStart="@dimen/activity_margin_horizontal"
-              android:layout_centerVertical="true"
-              tools:text="2"
-              android:text="0"
-              android:id="@+id/quality_images"
-              android:layout_marginEnd="@dimen/half_standard_height"
-              />
-
-          </RelativeLayout>
-
-          <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/activity_margin_horizontal"
-            android:layout_marginRight="@dimen/activity_margin_horizontal"
-            android:layout_marginStart="@dimen/activity_margin_horizontal"
-            android:layout_marginTop="@dimen/activity_margin_horizontal"
-            android:layout_marginEnd="@dimen/activity_margin_horizontal">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:id="@+id/thanks_received_info"
-              android:layout_centerVertical="true"
-              android:layout_alignParentStart="true"
-              android:layout_toStartOf="@+id/thanks_received"
-              android:orientation="horizontal"
-              android:gravity="center_vertical">
-
-              <ImageView
-                android:layout_width="@dimen/overflow_icon_dimen"
-                android:layout_height="@dimen/overflow_icon_dimen"
-                android:id="@+id/thanks_image_icon"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_thanks"
-                android:scaleType="centerCrop" />
-
-              <TextView
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                style="?android:textAppearanceMedium"
-                android:id="@+id/thanks_received_data"
-                android:layout_marginStart="@dimen/activity_margin_horizontal"
-                android:layout_marginLeft="@dimen/activity_margin_horizontal"
-                android:layout_marginEnd="@dimen/activity_margin_horizontal"
-                android:layout_marginRight="@dimen/activity_margin_horizontal"
-                app:layout_constraintLeft_toRightOf="@id/thanks_image_icon"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintRight_toLeftOf="@id/thanks_received_info_icon"
-                android:text="@string/statistics_thanks"  />
-
-              <ImageView
-                android:layout_width="@dimen/medium_width"
-                android:layout_height="@dimen/medium_height"
-                android:id="@+id/thanks_received_info_icon"
-                android:layout_marginTop="@dimen/activity_margin_horizontal"
-                android:layout_marginEnd="@dimen/activity_margin_horizontal"
-                app:layout_constraintLeft_toRightOf="@id/thanks_received_data"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                android:layout_gravity="top"
-                app:srcCompat="@drawable/ic_info_outline_24dp"
-                app:tint="@color/primaryLightColor" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <TextView
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              style="?android:textAppearanceMedium"
-              android:layout_alignParentEnd="true"
-              android:layout_marginTop="@dimen/activity_margin_horizontal"
-              android:layout_marginStart="@dimen/activity_margin_horizontal"
-              android:layout_centerVertical="true"
-              tools:text="2"
-              android:id="@+id/thanks_received"
-              android:layout_marginEnd="@dimen/half_standard_height"
-              />
-
-          </RelativeLayout>
-
-        </LinearLayout>
-      </LinearLayout>
-    </ScrollView>
-</androidx.drawerlayout.widget.DrawerLayout>
+      android:layout_height="wrap_content"
+      android:layout_marginEnd="@dimen/activity_margin_horizontal"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/tv_achievements_of_user"
+      app:srcCompat="@drawable/ic_info_outline_24dp"
+      app:tint="@color/black"
+      tools:ignore="ContentDescription" />
+
+    <ImageView
+      android:id="@+id/achievement_badge_image"
+      android:layout_width="150dp"
+      android:layout_height="150dp"
+      android:layout_marginTop="16dp"
+      android:background="@drawable/badge"
+      app:layout_constraintLeft_toLeftOf="parent"
+      app:layout_constraintRight_toRightOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      tools:layout_height="100dp"
+      tools:layout_width="100dp" />
+
+    <TextView
+      android:id="@+id/achievement_badge_text"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:textAlignment="center"
+      android:textColor="@color/achievement_badge_text"
+      android:textSize="75sp"
+      tools:text="1"
+      app:layout_constraintBottom_toBottomOf="@+id/achievement_badge_image"
+      app:layout_constraintEnd_toEndOf="@+id/achievement_badge_image"
+      app:layout_constraintStart_toStartOf="@+id/achievement_badge_image"
+      app:layout_constraintTop_toTopOf="@+id/achievement_badge_image"
+      app:layout_constraintVertical_bias="0.58" />
+
+
+    <TextView
+      android:id="@+id/achievement_level"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="8dp"
+      android:text="@string/level"
+      android:textAllCaps="true"
+      android:textSize="16sp"
+      android:textStyle="bold"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/achievement_badge_image" />
+
+    <!-- Images Uploaded -->
+    <TextView
+      android:id="@+id/images_upload_text_param"
+      style="?android:textAppearanceMedium"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="@dimen/activity_margin_horizontal"
+      android:layout_marginTop="@dimen/activity_margin_horizontal"
+      android:text="@string/images_uploaded"
+      android:textStyle="bold"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/achievement_level" />
+
+    <ImageView
+      android:id="@+id/images_upload_info_icon"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginEnd="@dimen/activity_margin_horizontal"
+      app:layout_constraintBottom_toBottomOf="@+id/images_upload_text_param"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintTop_toTopOf="@+id/images_upload_text_param"
+      app:srcCompat="@drawable/ic_info_outline_24dp"
+      app:tint="@color/black" />
+
+    <!--  Image's Uploaded Progress Bar  -->
+    <ProgressBar
+      android:id="@+id/images_uploaded_progressbar"
+      style="?android:attr/progressBarStyleHorizontal"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="@dimen/activity_margin_horizontal"
+      android:layout_marginTop="@dimen/activity_margin_horizontal"
+      android:layout_marginEnd="@dimen/activity_margin_horizontal"
+      android:progressDrawable="@android:drawable/progress_horizontal"
+      app:layout_constraintEnd_toStartOf="@+id/imageUploadedTVCount"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/images_upload_text_param"
+      tools:progress="50" />
+
+    <TextView
+      android:id="@+id/imageUploadedTVCount"
+      style="?android:textAppearanceMedium"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginEnd="@dimen/activity_margin_horizontal"
+      app:layout_constraintBottom_toBottomOf="@+id/images_uploaded_progressbar"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintTop_toTopOf="@+id/images_uploaded_progressbar"
+      tools:text="10/15" />
+
+    <com.google.android.material.divider.MaterialDivider
+      android:id="@+id/materialDivider"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="@dimen/activity_margin_horizontal"
+      android:layout_marginTop="@dimen/activity_margin_horizontal"
+      android:layout_marginEnd="@dimen/activity_margin_horizontal"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/images_uploaded_progressbar" />
+
+
+    <!-- Image's Not Reverted -->
+    <TextView
+      android:id="@+id/images_reverted_text"
+      style="?android:textAppearanceMedium"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="@dimen/activity_margin_horizontal"
+      android:layout_marginTop="@dimen/activity_margin_horizontal"
+      android:text="@string/image_reverts"
+      android:textStyle="bold"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/materialDivider" />
+
+    <TextView
+      android:id="@+id/images_revert_limit_text"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="4dp"
+      android:layout_marginEnd="@dimen/activity_margin_horizontal"
+      android:text="@string/achievements_revert_limit_message"
+      app:layout_constraintBottom_toBottomOf="@+id/images_reverted_text"
+      app:layout_constraintEnd_toStartOf="@+id/images_reverted_info_icon"
+      app:layout_constraintStart_toEndOf="@+id/images_reverted_text"
+      app:layout_constraintTop_toTopOf="@+id/images_reverted_text" />
+
+    <ImageView
+      android:id="@+id/images_reverted_info_icon"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginEnd="@dimen/activity_margin_horizontal"
+      app:layout_constraintBottom_toBottomOf="@+id/images_revert_limit_text"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintTop_toTopOf="@+id/images_revert_limit_text"
+      app:srcCompat="@drawable/ic_info_outline_24dp"
+      app:tint="@color/black" />
+
+    <!--  Image's Not Reverted Progress Bar  -->
+    <ProgressBar
+      android:id="@+id/image_reverts_progressbar"
+      style="?android:attr/progressBarStyleHorizontal"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="@dimen/activity_margin_horizontal"
+      android:layout_marginTop="@dimen/activity_margin_horizontal"
+      android:layout_marginEnd="@dimen/activity_margin_horizontal"
+      android:progressDrawable="@android:drawable/progress_horizontal"
+      app:layout_constraintEnd_toStartOf="@+id/imageUploadedTVCount"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/images_reverted_text"
+      tools:progress="50" />
+
+    <TextView
+      android:id="@+id/imageRevertTVCount"
+      style="?android:textAppearanceMedium"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginEnd="@dimen/activity_margin_horizontal"
+      app:layout_constraintBottom_toBottomOf="@+id/image_reverts_progressbar"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintTop_toTopOf="@+id/image_reverts_progressbar"
+      tools:text="10/15" />
+
+    <com.google.android.material.divider.MaterialDivider
+      android:id="@+id/materialDivider1"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="@dimen/activity_margin_horizontal"
+      android:layout_marginTop="@dimen/activity_margin_horizontal"
+      android:layout_marginEnd="@dimen/activity_margin_horizontal"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/image_reverts_progressbar" />
+
+    <!-- Image Used -->
+    <TextView
+      android:id="@+id/images_used_tv"
+      style="?android:textAppearanceMedium"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="@dimen/activity_margin_horizontal"
+      android:layout_marginTop="@dimen/activity_margin_horizontal"
+      android:text="@string/images_used_by_wiki"
+      android:textStyle="bold"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/materialDivider1" />
+
+    <ImageView
+      android:id="@+id/images_used_by_wiki_info_icon"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginEnd="@dimen/activity_margin_horizontal"
+      app:layout_constraintBottom_toBottomOf="@+id/images_used_tv"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintTop_toTopOf="@+id/images_used_tv"
+      app:srcCompat="@drawable/ic_info_outline_24dp"
+      app:tint="@color/black" />
+
+    <!--  Image's Used Progress Bar  -->
+
+    <ProgressBar
+      android:id="@+id/images_used_by_wiki_progress_bar"
+      style="?android:attr/progressBarStyleHorizontal"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="@dimen/activity_margin_horizontal"
+      android:layout_marginTop="@dimen/activity_margin_horizontal"
+      android:layout_marginEnd="@dimen/activity_margin_horizontal"
+      android:progressDrawable="@android:drawable/progress_horizontal"
+      app:layout_constraintEnd_toStartOf="@+id/imagesUsedCount"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/images_used_tv"
+      tools:progress="50" />
+
+    <TextView
+      android:id="@+id/imagesUsedCount"
+      style="?android:textAppearanceMedium"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginEnd="@dimen/activity_margin_horizontal"
+      app:layout_constraintBottom_toBottomOf="@+id/images_used_by_wiki_progress_bar"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintTop_toTopOf="@+id/images_used_by_wiki_progress_bar"
+      tools:text="10/15" />
+
+    <com.google.android.material.divider.MaterialDivider
+      android:id="@+id/materialDivider2"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="@dimen/activity_margin_horizontal"
+      android:layout_marginTop="@dimen/activity_margin_horizontal"
+      android:layout_marginEnd="@dimen/activity_margin_horizontal"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/images_used_by_wiki_progress_bar" />
+
+    <!-- Statistics -->
+    <TextView
+      android:id="@+id/tv_statistics"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="@dimen/activity_margin_horizontal"
+      android:layout_marginTop="@dimen/activity_margin_horizontal"
+      android:text="@string/statistics"
+      android:textAllCaps="true"
+      android:textSize="16sp"
+      android:textStyle="bold"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/materialDivider2" />
+
+    <!--Nearby Places Statistics-->
+    <ImageView
+      android:id="@+id/wikidata_edits_icon"
+      android:layout_width="@dimen/dimen_40"
+      android:layout_height="@dimen/dimen_40"
+      android:layout_marginStart="@dimen/activity_margin_horizontal"
+      android:layout_marginTop="@dimen/activity_margin_horizontal"
+      app:layout_constraintLeft_toLeftOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/tv_statistics"
+      app:srcCompat="@drawable/ic_custom_map_marker" />
+
+    <TextView
+      android:id="@+id/images_nearby_data"
+      style="?android:textAppearanceMedium"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="16dp"
+      android:layout_marginEnd="16dp"
+      android:text="@string/statistics_wikidata_edits"
+      app:layout_constraintBottom_toBottomOf="@+id/wikidata_edits_icon"
+      app:layout_constraintEnd_toStartOf="@+id/images_nearby_info_icon"
+      app:layout_constraintStart_toEndOf="@+id/wikidata_edits_icon"
+      app:layout_constraintTop_toTopOf="@+id/wikidata_edits_icon" />
+
+    <ImageView
+      android:id="@+id/images_nearby_info_icon"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginEnd="16dp"
+      app:layout_constraintBottom_toBottomOf="@+id/images_nearby_data"
+      app:layout_constraintEnd_toStartOf="@+id/wikidata_edits"
+      app:layout_constraintTop_toTopOf="@+id/images_nearby_data"
+      app:srcCompat="@drawable/ic_info_outline_24dp"
+      app:tint="@color/black" />
+
+    <TextView
+      android:id="@+id/wikidata_edits"
+      style="?android:textAppearanceMedium"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginEnd="@dimen/activity_margin_horizontal"
+      app:layout_constraintBottom_toBottomOf="@+id/images_nearby_info_icon"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintTop_toTopOf="@+id/images_nearby_info_icon"
+      tools:text="2" />
+
+    <com.google.android.material.divider.MaterialDivider
+      android:id="@+id/materialDivider3"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="@dimen/activity_margin_horizontal"
+      android:layout_marginTop="@dimen/activity_margin_horizontal"
+      android:layout_marginEnd="@dimen/activity_margin_horizontal"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/wikidata_edits_icon" />
+
+    <!--Featured Image Statistics-->
+
+    <ImageView
+      android:id="@+id/featured_image_icon"
+      android:layout_width="@dimen/dimen_40"
+      android:layout_height="@dimen/dimen_40"
+      android:layout_marginStart="@dimen/activity_margin_horizontal"
+      android:layout_marginTop="@dimen/activity_margin_horizontal"
+      app:layout_constraintLeft_toLeftOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/materialDivider3"
+      app:srcCompat="@drawable/featured" />
+
+    <TextView
+      android:id="@+id/images_featured_data"
+      style="?android:textAppearanceMedium"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="@dimen/activity_margin_horizontal"
+      android:layout_marginEnd="@dimen/activity_margin_horizontal"
+      android:text="@string/statistics_featured"
+      app:layout_constraintBottom_toBottomOf="@+id/featured_image_icon"
+      app:layout_constraintEnd_toStartOf="@+id/images_nearby_info_icon"
+      app:layout_constraintStart_toEndOf="@+id/featured_image_icon"
+      app:layout_constraintTop_toTopOf="@+id/featured_image_icon" />
+
+
+    <ImageView
+      android:id="@+id/images_featured_info_icon"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginEnd="16dp"
+      app:layout_constraintBottom_toBottomOf="@+id/images_featured_data"
+      app:layout_constraintEnd_toStartOf="@+id/wikidata_edits"
+      app:layout_constraintTop_toTopOf="@+id/images_featured_data"
+      app:srcCompat="@drawable/ic_info_outline_24dp"
+      app:tint="@color/black" />
+
+
+    <TextView
+      android:id="@+id/image_featured"
+      style="?android:textAppearanceMedium"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginEnd="@dimen/activity_margin_horizontal"
+      app:layout_constraintBottom_toBottomOf="@+id/images_featured_info_icon"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintTop_toTopOf="@+id/images_featured_info_icon"
+      tools:text="2" />
+
+    <com.google.android.material.divider.MaterialDivider
+      android:id="@+id/materialDivider4"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="@dimen/activity_margin_horizontal"
+      android:layout_marginTop="@dimen/activity_margin_horizontal"
+      android:layout_marginEnd="@dimen/activity_margin_horizontal"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/featured_image_icon" />
+
+    <!--Quality Image Statistics-->
+
+    <ImageView
+      android:id="@+id/quality_image_icon"
+      android:layout_width="@dimen/dimen_40"
+      android:layout_height="@dimen/dimen_40"
+      android:layout_marginStart="@dimen/activity_margin_horizontal"
+      android:layout_marginTop="@dimen/activity_margin_horizontal"
+      app:layout_constraintLeft_toLeftOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/materialDivider4"
+      app:srcCompat="@drawable/ic_quality_images_logo" />
+
+    <TextView
+      android:id="@+id/quality_images_data"
+      style="?android:textAppearanceMedium"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="@dimen/activity_margin_horizontal"
+      android:layout_marginEnd="@dimen/activity_margin_horizontal"
+      android:text="@string/statistics_quality"
+      app:layout_constraintBottom_toBottomOf="@+id/quality_image_icon"
+      app:layout_constraintEnd_toStartOf="@+id/images_nearby_info_icon"
+      app:layout_constraintStart_toEndOf="@+id/quality_image_icon"
+      app:layout_constraintTop_toTopOf="@+id/quality_image_icon" />
+
+    <ImageView
+      android:id="@+id/quality_images_info_icon"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginEnd="16dp"
+      app:layout_constraintBottom_toBottomOf="@+id/quality_images_data"
+      app:layout_constraintEnd_toStartOf="@+id/quality_images"
+      app:layout_constraintTop_toTopOf="@+id/quality_images_data"
+      app:srcCompat="@drawable/ic_info_outline_24dp"
+      app:tint="@color/black" />
+
+    <TextView
+      android:id="@+id/quality_images"
+      style="?android:textAppearanceMedium"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginEnd="@dimen/activity_margin_horizontal"
+      app:layout_constraintBottom_toBottomOf="@+id/quality_images_info_icon"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintTop_toTopOf="@+id/quality_images_info_icon"
+      tools:text="2" />
+
+    <com.google.android.material.divider.MaterialDivider
+      android:id="@+id/materialDivider5"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="@dimen/activity_margin_horizontal"
+      android:layout_marginTop="@dimen/activity_margin_horizontal"
+      android:layout_marginEnd="@dimen/activity_margin_horizontal"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/quality_image_icon" />
+
+    <!--Thank Image Statistics-->
+
+    <ImageView
+      android:id="@+id/thanks_image_icon"
+      android:layout_width="@dimen/dimen_40"
+      android:layout_height="@dimen/dimen_40"
+      android:layout_marginStart="@dimen/activity_margin_horizontal"
+      android:layout_marginTop="@dimen/activity_margin_horizontal"
+      app:layout_constraintLeft_toLeftOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/materialDivider5"
+      app:srcCompat="@drawable/ic_thanks" />
+
+    <TextView
+      android:id="@+id/thanks_received_data"
+      style="?android:textAppearanceMedium"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="@dimen/activity_margin_horizontal"
+      android:layout_marginEnd="@dimen/activity_margin_horizontal"
+      android:text="@string/statistics_thanks"
+      app:layout_constraintBottom_toBottomOf="@+id/thanks_image_icon"
+      app:layout_constraintEnd_toStartOf="@+id/images_nearby_info_icon"
+      app:layout_constraintStart_toEndOf="@+id/thanks_image_icon"
+      app:layout_constraintTop_toTopOf="@+id/thanks_image_icon" />
+
+    <ImageView
+      android:id="@+id/thanks_received_info_icon"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginEnd="@dimen/activity_margin_horizontal"
+      app:layout_constraintBottom_toBottomOf="@+id/thanks_received_data"
+      app:layout_constraintEnd_toStartOf="@+id/quality_images"
+      app:layout_constraintTop_toTopOf="@+id/thanks_received_data"
+      app:srcCompat="@drawable/ic_info_outline_24dp"
+      app:tint="@color/black" />
+
+    <TextView
+      android:id="@+id/thanks_received"
+      style="?android:textAppearanceMedium"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginEnd="@dimen/activity_margin_horizontal"
+      app:layout_constraintBottom_toBottomOf="@+id/thanks_received_info_icon"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintTop_toTopOf="@+id/thanks_received_info_icon"
+      tools:text="2" />
+
+
+    <ProgressBar
+      android:id="@+id/progressBar"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      app:layout_constraintVertical_bias="0.5"
+      app:layout_constraintHorizontal_bias="0.5"
+      android:visibility="gone"/>
+
+
+
+  </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+</ScrollView>
