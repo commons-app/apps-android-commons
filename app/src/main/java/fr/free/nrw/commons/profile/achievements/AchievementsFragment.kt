@@ -136,7 +136,7 @@ class AchievementsFragment : CommonsDaggerSupportFragment(){
     /**
      * To invoke the AlertDialog on clicking info button
      */
-    protected fun showInfoDialog() {
+    fun showInfoDialog() {
         launchAlert(
             resources.getString(R.string.Achievements),
             resources.getString(R.string.achievements_info_message)
@@ -391,7 +391,7 @@ class AchievementsFragment : CommonsDaggerSupportFragment(){
         }
     }
 
-    protected fun showUploadInfo() {
+    fun showUploadInfo() {
         launchAlertWithHelpLink(
             resources.getString(R.string.images_uploaded),
             resources.getString(R.string.images_uploaded_explanation),
@@ -399,7 +399,7 @@ class AchievementsFragment : CommonsDaggerSupportFragment(){
         )
     }
 
-    protected fun showRevertedInfo() {
+    fun showRevertedInfo() {
         launchAlertWithHelpLink(
             resources.getString(R.string.image_reverts),
             resources.getString(R.string.images_reverted_explanation),
@@ -407,7 +407,7 @@ class AchievementsFragment : CommonsDaggerSupportFragment(){
         )
     }
 
-    protected fun showUsedByWikiInfo() {
+    fun showUsedByWikiInfo() {
         launchAlertWithHelpLink(
             resources.getString(R.string.images_used_by_wiki),
             resources.getString(R.string.images_used_explanation),
@@ -415,7 +415,7 @@ class AchievementsFragment : CommonsDaggerSupportFragment(){
         )
     }
 
-    protected fun showImagesViaNearbyInfo() {
+    fun showImagesViaNearbyInfo() {
         launchAlertWithHelpLink(
             resources.getString(R.string.statistics_wikidata_edits),
             resources.getString(R.string.images_via_nearby_explanation),
@@ -423,7 +423,7 @@ class AchievementsFragment : CommonsDaggerSupportFragment(){
         )
     }
 
-    protected fun showFeaturedImagesInfo() {
+    fun showFeaturedImagesInfo() {
         launchAlertWithHelpLink(
             resources.getString(R.string.statistics_featured),
             resources.getString(R.string.images_featured_explanation),
@@ -431,7 +431,7 @@ class AchievementsFragment : CommonsDaggerSupportFragment(){
         )
     }
 
-    protected fun showThanksReceivedInfo() {
+    fun showThanksReceivedInfo() {
         launchAlertWithHelpLink(
             resources.getString(R.string.statistics_thanks),
             resources.getString(R.string.thanks_received_explanation),
