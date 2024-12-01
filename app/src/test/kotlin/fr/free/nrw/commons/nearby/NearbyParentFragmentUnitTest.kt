@@ -325,7 +325,7 @@ class NearbyParentFragmentUnitTest {
     @Throws(Exception::class)
     fun testOnDestroy() {
         fragment.onDestroy()
-        verify(wikidataEditListener).setAuthenticationStateListener(null)
+        verify(wikidataEditListener).authenticationStateListener = null
     }
 
     @Test @Ignore
