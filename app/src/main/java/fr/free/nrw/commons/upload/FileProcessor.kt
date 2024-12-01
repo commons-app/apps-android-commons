@@ -194,7 +194,7 @@ class FileProcessor
             requireNotNull(imageCoordinates.decimalCoords)
             compositeDisposable.add(
                 apiCall
-                    .request(imageCoordinates.decimalCoords)
+                    .request(imageCoordinates.decimalCoords!!)
                     .subscribeOn(Schedulers.io())
                     .observeOn(Schedulers.io())
                     .subscribe(
@@ -220,7 +220,7 @@ class FileProcessor
                 .concatMap {
                     Observable.fromCallable {
                         okHttpJsonApiClient.getNearbyPlaces(
-                            imageCoordinates.latLng,
+                            imageCoordinates.latLng!!,
                             Locale.getDefault().language,
                             it,
                         )

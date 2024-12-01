@@ -49,13 +49,13 @@ class CampaignsPresenterTest {
         campaignsSingle = Single.just(campaignResponseDTO)
         campaignsPresenter = CampaignsPresenter(okHttpJsonApiClient, testScheduler, testScheduler)
         campaignsPresenter.onAttachView(view)
-        Mockito.`when`(okHttpJsonApiClient.campaigns).thenReturn(campaignsSingle)
+        Mockito.`when`(okHttpJsonApiClient.getCampaigns()).thenReturn(campaignsSingle)
     }
 
     @Test
     fun getCampaignsTestNoCampaigns() {
         campaignsPresenter.getCampaigns()
-        verify(okHttpJsonApiClient).campaigns
+        verify(okHttpJsonApiClient).getCampaigns()
         testScheduler.triggerActions()
         verify(view).showCampaigns(null)
     }
@@ -77,7 +77,7 @@ class CampaignsPresenterTest {
         Mockito.`when`(campaign.endDate).thenReturn(endDateString)
         Mockito.`when`(campaign.startDate).thenReturn(startDateString)
         Mockito.`when`(campaignResponseDTO.campaigns).thenReturn(campaigns)
-        verify(okHttpJsonApiClient).campaigns
+        verify(okHttpJsonApiClient).getCampaigns()
         testScheduler.triggerActions()
         verify(view).showCampaigns(campaign)
     }
