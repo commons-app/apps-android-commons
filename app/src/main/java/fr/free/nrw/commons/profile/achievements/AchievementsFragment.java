@@ -8,11 +8,21 @@ import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toast        
 import androidx.annotation.Nullable;
 import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat;
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import com.dinuscxj.progressbar.CircleProgressBar;
+import com.google.android.material.snackbar.Snackbar;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.auth.SessionManager;
@@ -20,10 +30,10 @@ import fr.free.nrw.commons.databinding.FragmentAchievementsBinding;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.kvstore.BasicKvStore;
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient;
+import fr.free.nrw.commons.profile.ProfileActivity;
 import fr.free.nrw.commons.utils.ConfigUtils;
 import fr.free.nrw.commons.utils.DialogUtil;
 import fr.free.nrw.commons.utils.ViewUtil;
-import fr.free.nrw.commons.profile.ProfileActivity;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
@@ -160,9 +170,9 @@ public class AchievementsFragment extends CommonsDaggerSupportFragment {
                 ctx = getView().getContext();
             }
             if(ctx != null) {
-                Toast.makeText(ctx,
-                    R.string.achievements_unavailable_beta,
-                    Toast.LENGTH_LONG).show();
+                Snackbar snackbar = Snackbar.make(getActivity().findViewById(R.id.drawer_layout),R.string.achievements_unavailable_beta, Snackbar.LENGTH_LONG);
+                snackbar.setAction("OK", view -> snackbar.dismiss());
+                snackbar.show();
             }
         }
     }
