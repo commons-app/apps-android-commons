@@ -396,7 +396,7 @@
         android:id="@+id/wikidata_edits_icon"
         android:layout_width="@dimen/dimen_40"
         android:layout_height="@dimen/dimen_40"
-        android:layout_marginEnd="@dimen/medium_width"
+        android:layout_marginEnd="@dimen/large_gap"
         app:srcCompat="@drawable/ic_custom_map_marker" />
 
       <!--Featured Image Statistics-->
@@ -404,7 +404,7 @@
         android:id="@+id/featured_image_icon"
         android:layout_width="@dimen/dimen_40"
         android:layout_height="@dimen/dimen_40"
-        android:layout_marginEnd="@dimen/medium_width"
+        android:layout_marginEnd="@dimen/large_gap"
         app:srcCompat="@drawable/featured" />
 
       <!--Quality Image Statistics-->
@@ -412,7 +412,7 @@
         android:id="@+id/quality_image_icon"
         android:layout_width="@dimen/dimen_40"
         android:layout_height="@dimen/dimen_40"
-        android:layout_marginEnd="@dimen/medium_width"
+        android:layout_marginEnd="@dimen/large_gap"
         app:srcCompat="@drawable/ic_quality_images_logo" />
 
       <!--Thank Image Statistics-->
@@ -421,7 +421,7 @@
         android:layout_width="@dimen/dimen_40"
         android:layout_height="@dimen/dimen_40"
 
-        android:layout_marginEnd="@dimen/medium_width"
+        android:layout_marginEnd="@dimen/large_gap"
         app:srcCompat="@drawable/ic_thanks" />
 
 

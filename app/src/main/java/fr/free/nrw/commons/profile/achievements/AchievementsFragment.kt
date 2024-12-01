@@ -68,9 +68,9 @@ class AchievementsFragment : CommonsDaggerSupportFragment(){
         binding.imagesUploadInfoIcon.setOnClickListener { showUploadInfo() }
         binding.imagesRevertedInfoIcon.setOnClickListener { showRevertedInfo() }
         binding.imagesUsedByWikiInfoIcon.setOnClickListener { showUsedByWikiInfo() }
-        //binding.imagesNearbyInfoIcon.setOnClickListener { showImagesViaNearbyInfo() }
-        //binding.imagesFeaturedInfoIcon.setOnClickListener { showFeaturedImagesInfo() }
-        //binding.thanksReceivedInfoIcon.setOnClickListener { showThanksReceivedInfo() }
+        binding.wikidataEditsIcon.setOnClickListener { showImagesViaNearbyInfo() }
+        binding.featuredImageIcon.setOnClickListener { showFeaturedImagesInfo() }
+        binding.thanksImageIcon.setOnClickListener { showThanksReceivedInfo() }
         binding.qualityImageIcon.setOnClickListener { showQualityImagesInfo() }
 
         // DisplayMetrics used to fetch the size of the screen
@@ -345,7 +345,6 @@ class AchievementsFragment : CommonsDaggerSupportFragment(){
      * and assign badge and level. Also stores the achievements level of the user in BasicKvStore to display in menu
      * @param achievements
      */
-//    @OptIn(ExperimentalBadgeUtils::class)
     private fun inflateAchievements(achievements: Achievements) {
 
         // Thanks Received Badge
@@ -412,7 +411,7 @@ class AchievementsFragment : CommonsDaggerSupportFragment(){
                 badgeDrawable.badgeGravity = badgeGravity
                 badgeDrawable.badgeTextColor = badgeTextColor
                 badgeDrawable.backgroundColor = backgroundColor
-                BadgeUtils.attachBadgeDrawable(badgeDrawable, binding.wikidataEditsIcon)
+                BadgeUtils.attachBadgeDrawable(badgeDrawable, view)
                 view.getViewTreeObserver().removeOnGlobalLayoutListener(this)
             }
         })
