@@ -10,7 +10,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -160,8 +159,10 @@ class MoreBottomSheetFragment : BottomSheetDialogFragment() {
 
         val single = pageEditClient.createNewSection(
             "Commons:Mobile_app/Feedback",
-            feedbackContentCreator.sectionTitle,
-            feedbackContentCreator.sectionText,
+            feedbackContentCreator.getSectionTitle(),
+//            feedbackContentCreator.sectionTitle,
+            feedbackContentCreator.getSectionText(),
+//            feedbackContentCreator.sectionText,
             "New feedback on version ${feedback.version} of the app"
         )
             .flatMapSingle { Single.just(it) }

@@ -1,120 +1,123 @@
-package fr.free.nrw.commons.feedback;
+package fr.free.nrw.commons.feedback
 
-import android.content.Context;
-import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.auth.AccountUtilKt;
-import fr.free.nrw.commons.feedback.model.Feedback;
-import fr.free.nrw.commons.utils.LangCodeUtils;
-import java.util.Locale;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.TimeZone;
+import android.content.Context
+import fr.free.nrw.commons.R
+import fr.free.nrw.commons.auth.getUserName
+import fr.free.nrw.commons.feedback.model.Feedback
+import fr.free.nrw.commons.utils.LangCodeUtils.getLocalizedResources
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
+import java.util.TimeZone
 
-/**
- * Creates a wikimedia recognizable format
- * from feedback information
- */
-public class FeedbackContentCreator {
-    private StringBuilder sectionTextBuilder;
-    private StringBuilder sectionTitleBuilder;
-    private Feedback feedback;
-    private Context context;
-
-    public FeedbackContentCreator(Context context, Feedback feedback) {
-        this.feedback = feedback;
-        this.context = context;
-        init();
-    }
-
-    /**
-     * Initializes the string buffer object to append content from feedback object
-     */
-    public void init() {
-        // Localization is not needed here, because this ends up on a page where developers read the feedback, so English is the most convenient.
-
-        /*
-         * Construct the feedback section title
-         */
+class FeedbackContentCreator(context: Context, feedback: Feedback) {
+    private var sectionTitleBuilder = StringBuilder()
+    private var sectionTextBuilder = StringBuilder()
+    init {
+        // Localization is not needed here
+        // because this ends up on a page where developers read the feedback,
+        // so English is the most convenient.
 
         //Get the UTC Date and Time and add it to the Title
-        final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss", Locale.ENGLISH);
-        dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
-        final String UTC_FormattedDate = dateFormat.format(new Date());
+        val dateFormat = SimpleDateFormat("yyyy/MM/dd HH:mm:ss", Locale.ENGLISH)
+        dateFormat.timeZone = TimeZone.getTimeZone("UTC")
+        val utcFormattedDate = dateFormat.format(Date())
 
-        sectionTitleBuilder = new StringBuilder();
-        sectionTitleBuilder.append("Feedback from  ");
-        sectionTitleBuilder.append(AccountUtilKt.getUserName(context));
-        sectionTitleBuilder.append(" for version ");
-        sectionTitleBuilder.append(feedback.getVersion());
-        sectionTitleBuilder.append(" on ");
-        sectionTitleBuilder.append(UTC_FormattedDate);
-
-        /*
-         * Construct the feedback section text
-         */
-        sectionTextBuilder = new StringBuilder();
-        sectionTextBuilder.append("\n");
-        sectionTextBuilder.append(feedback.getTitle());
-        sectionTextBuilder.append("\n");
-        sectionTextBuilder.append("\n");
-        if (feedback.getApiLevel() != null) {
-            sectionTextBuilder.append("* ");
-            sectionTextBuilder.append(LangCodeUtils.getLocalizedResources(context,
-                Locale.ENGLISH).getString(R.string.api_level));
-            sectionTextBuilder.append(": ");
-            sectionTextBuilder.append(feedback.getApiLevel());
-            sectionTextBuilder.append("\n");
+        // Construct the feedback section title
+        sectionTitleBuilder.append("Feedback from  ")
+        sectionTitleBuilder.append(getUserName(context))
+        sectionTitleBuilder.append(" for version ")
+        sectionTitleBuilder.append(feedback.version)
+        sectionTitleBuilder.append(" on ")
+        sectionTitleBuilder.append(utcFormattedDate)
+        
+        // Construct the feedback section text
+        sectionTextBuilder = StringBuilder()
+        sectionTextBuilder.append("\n")
+        sectionTextBuilder.append(feedback.title)
+        sectionTextBuilder.append("\n")
+        sectionTextBuilder.append("\n")
+        if (feedback.apiLevel != null) {
+            sectionTextBuilder.append("* ")
+            sectionTextBuilder.append(
+                getLocalizedResources(
+                    context,
+                    Locale.ENGLISH
+                ).getString(R.string.api_level)
+            )
+            sectionTextBuilder.append(": ")
+            sectionTextBuilder.append(feedback.apiLevel)
+            sectionTextBuilder.append("\n")
         }
-        if (feedback.getAndroidVersion() != null) {
-            sectionTextBuilder.append("* ");
-            sectionTextBuilder.append(LangCodeUtils.getLocalizedResources(context,
-                Locale.ENGLISH).getString(R.string.android_version));
-            sectionTextBuilder.append(": ");
-            sectionTextBuilder.append(feedback.getAndroidVersion());
-            sectionTextBuilder.append("\n");
+        if (feedback.androidVersion != null) {
+            sectionTextBuilder.append("* ")
+            sectionTextBuilder.append(
+                getLocalizedResources(
+                    context,
+                    Locale.ENGLISH
+                ).getString(R.string.android_version)
+            )
+            sectionTextBuilder.append(": ")
+            sectionTextBuilder.append(feedback.androidVersion)
+            sectionTextBuilder.append("\n")
         }
-        if (feedback.getDeviceManufacturer() != null) {
-            sectionTextBuilder.append("* ");
-            sectionTextBuilder.append(LangCodeUtils.getLocalizedResources(context,
-                Locale.ENGLISH).getString(R.string.device_manufacturer));
-            sectionTextBuilder.append(": ");
-            sectionTextBuilder.append(feedback.getDeviceManufacturer());
-            sectionTextBuilder.append("\n");
+        if (feedback.deviceManufacturer != null) {
+            sectionTextBuilder.append("* ")
+            sectionTextBuilder.append(
+                getLocalizedResources(
+                    context,
+                    Locale.ENGLISH
+                ).getString(R.string.device_manufacturer)
+            )
+            sectionTextBuilder.append(": ")
+            sectionTextBuilder.append(feedback.deviceManufacturer)
+            sectionTextBuilder.append("\n")
         }
-        if (feedback.getDeviceModel() != null) {
-            sectionTextBuilder.append("* ");
-            sectionTextBuilder.append(LangCodeUtils.getLocalizedResources(context,
-                Locale.ENGLISH).getString(R.string.device_model));
-            sectionTextBuilder.append(": ");
-            sectionTextBuilder.append(feedback.getDeviceModel());
-            sectionTextBuilder.append("\n");
+        if (feedback.deviceModel != null) {
+            sectionTextBuilder.append("* ")
+            sectionTextBuilder.append(
+                getLocalizedResources(
+                    context,
+                    Locale.ENGLISH
+                ).getString(R.string.device_model)
+            )
+            sectionTextBuilder.append(": ")
+            sectionTextBuilder.append(feedback.deviceModel)
+            sectionTextBuilder.append("\n")
         }
-        if (feedback.getDevice() != null) {
-            sectionTextBuilder.append("* ");
-            sectionTextBuilder.append(LangCodeUtils.getLocalizedResources(context,
-                Locale.ENGLISH).getString(R.string.device_name));
-            sectionTextBuilder.append(": ");
-            sectionTextBuilder.append(feedback.getDevice());
-            sectionTextBuilder.append("\n");
+        if (feedback.device != null) {
+            sectionTextBuilder.append("* ")
+            sectionTextBuilder.append(
+                getLocalizedResources(
+                    context,
+                    Locale.ENGLISH
+                ).getString(R.string.device_name)
+            )
+            sectionTextBuilder.append(": ")
+            sectionTextBuilder.append(feedback.device)
+            sectionTextBuilder.append("\n")
         }
-        if (feedback.getNetworkType() != null) {
-            sectionTextBuilder.append("* ");
-            sectionTextBuilder.append(LangCodeUtils.getLocalizedResources(context,
-                Locale.ENGLISH).getString(R.string.network_type));
-            sectionTextBuilder.append(": ");
-            sectionTextBuilder.append(feedback.getNetworkType());
-            sectionTextBuilder.append("\n");
+        if (feedback.networkType != null) {
+            sectionTextBuilder.append("* ")
+            sectionTextBuilder.append(
+                getLocalizedResources(
+                    context,
+                    Locale.ENGLISH
+                ).getString(R.string.network_type)
+            )
+            sectionTextBuilder.append(": ")
+            sectionTextBuilder.append(feedback.networkType)
+            sectionTextBuilder.append("\n")
         }
-        sectionTextBuilder.append("~~~~");
-        sectionTextBuilder.append("\n");
-
+        sectionTextBuilder.append("~~~~")
+        sectionTextBuilder.append("\n")
     }
 
-    public String getSectionText() {
-        return sectionTextBuilder.toString();
+    fun getSectionText(): String {
+        return sectionTextBuilder.toString()
     }
 
-    public String getSectionTitle() {
-        return sectionTitleBuilder.toString();
+    fun getSectionTitle(): String {
+        return sectionTitleBuilder.toString()
     }
 }
