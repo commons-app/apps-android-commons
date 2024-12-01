@@ -1,75 +1,76 @@
-package fr.free.nrw.commons.feedback;
+package fr.free.nrw.commons.feedback
 
-import android.app.Dialog;
-import android.content.Context;
-import android.os.Bundle;
-import android.text.Html;
-import android.text.Spanned;
-import android.text.method.LinkMovementMethod;
-import android.view.View;
-import android.view.WindowManager.LayoutParams;
-import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.databinding.DialogFeedbackBinding;
-import fr.free.nrw.commons.feedback.model.Feedback;
-import fr.free.nrw.commons.utils.ConfigUtils;
-import fr.free.nrw.commons.utils.DeviceInfoUtil;
-import java.util.Objects;
+import android.app.Dialog
+import android.content.Context
+import android.os.Bundle
+import android.text.Html
+import android.text.Spanned
+import android.text.method.LinkMovementMethod
+import android.view.WindowManager
+import fr.free.nrw.commons.R
+import fr.free.nrw.commons.databinding.DialogFeedbackBinding
+import fr.free.nrw.commons.feedback.model.Feedback
+import fr.free.nrw.commons.utils.ConfigUtils.getVersionNameWithSha
+import fr.free.nrw.commons.utils.DeviceInfoUtil.getAPILevel
+import fr.free.nrw.commons.utils.DeviceInfoUtil.getAndroidVersion
+import fr.free.nrw.commons.utils.DeviceInfoUtil.getConnectionType
+import fr.free.nrw.commons.utils.DeviceInfoUtil.getDevice
+import fr.free.nrw.commons.utils.DeviceInfoUtil.getDeviceManufacturer
+import fr.free.nrw.commons.utils.DeviceInfoUtil.getDeviceModel
 
-/**
- * Feedback dialog that asks user for message and
- * other device specifications
- */
-public class FeedbackDialog extends Dialog {
-    DialogFeedbackBinding dialogFeedbackBinding;
+class FeedbackDialog(
+    context: Context,
+    private val onFeedbackSubmitCallback: OnFeedbackSubmitCallback) : Dialog(context) {
+    private var _binding: DialogFeedbackBinding? = null
+    private val binding get() = _binding!!
+    private var feedbackDestinationHtml: Spanned = Html.fromHtml(
+        context.getString(R.string.feedback_destination_note))
 
-    private OnFeedbackSubmitCallback onFeedbackSubmitCallback;
 
-    private Spanned feedbackDestinationHtml;
-
-    public FeedbackDialog(Context context, OnFeedbackSubmitCallback onFeedbackSubmitCallback) {
-        super(context);
-        this.onFeedbackSubmitCallback = onFeedbackSubmitCallback;
-        feedbackDestinationHtml = Html.fromHtml(context.getString(R.string.feedback_destination_note));
-    }
-
-    @Override
-    protected void onCreate(final Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        dialogFeedbackBinding = DialogFeedbackBinding.inflate(getLayoutInflater());
-        dialogFeedbackBinding.feedbackDestination.setText(feedbackDestinationHtml);
-        dialogFeedbackBinding.feedbackDestination.setMovementMethod(LinkMovementMethod.getInstance());
-        Objects.requireNonNull(getWindow()).setSoftInputMode(LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
-        final View view = dialogFeedbackBinding.getRoot();
-        setContentView(view);
-        dialogFeedbackBinding.btnSubmitFeedback.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                submitFeedback();
-            }
-        });
-    }
-
-    /**
-     * When the button is clicked, it will create a feedback object
-     * and give a callback to calling activity/fragment
-     */
-    void submitFeedback() {
-        if(dialogFeedbackBinding.feedbackItemEditText.getText().toString().equals("")) {
-            dialogFeedbackBinding.feedbackItemEditText.setError(getContext().getString(R.string.enter_description));
-            return;
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        _binding = DialogFeedbackBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        binding.feedbackDestination.text = feedbackDestinationHtml
+        binding.feedbackDestination.movementMethod = LinkMovementMethod.getInstance()
+        window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
+        binding.btnSubmitFeedback.setOnClickListener {
+            submitFeedback()
         }
-        String appVersion = ConfigUtils.getVersionNameWithSha(getContext());
-        String androidVersion = dialogFeedbackBinding.androidVersionCheckbox.isChecked() ? DeviceInfoUtil.getAndroidVersion() : null;
-        String apiLevel = dialogFeedbackBinding.apiLevelCheckbox.isChecked() ? DeviceInfoUtil.getAPILevel() : null;
-        String deviceManufacturer = dialogFeedbackBinding.deviceManufacturerCheckbox.isChecked() ? DeviceInfoUtil.getDeviceManufacturer() : null;
-        String deviceModel = dialogFeedbackBinding.deviceModelCheckbox.isChecked() ? DeviceInfoUtil.getDeviceModel() : null;
-        String deviceName = dialogFeedbackBinding.deviceNameCheckbox.isChecked() ? DeviceInfoUtil.getDevice() : null;
-        String networkType = dialogFeedbackBinding.networkTypeCheckbox.isChecked() ? DeviceInfoUtil.getConnectionType(getContext()).toString() : null;
-        Feedback feedback = new Feedback(appVersion, apiLevel
-            , dialogFeedbackBinding.feedbackItemEditText.getText().toString()
-            , androidVersion, deviceModel, deviceManufacturer, deviceName, networkType);
-        onFeedbackSubmitCallback.onFeedbackSubmit(feedback);
-        dismiss();
+
     }
 
+    private fun submitFeedback() {
+        if (binding.feedbackItemEditText.getText().toString() == "") {
+            binding.feedbackItemEditText.error = context.getString(R.string.enter_description)
+            return
+        }
+        val appVersion = context.getVersionNameWithSha()
+        val androidVersion =
+            if (binding.androidVersionCheckbox.isChecked) getAndroidVersion() else null
+        val apiLevel =
+            if (binding.apiLevelCheckbox.isChecked) getAPILevel() else null
+        val deviceManufacturer =
+            if (binding.deviceManufacturerCheckbox.isChecked) getDeviceManufacturer() else null
+        val deviceModel =
+            if (binding.deviceModelCheckbox.isChecked) getDeviceModel() else null
+        val deviceName =
+            if (binding.deviceNameCheckbox.isChecked) getDevice() else null
+        val networkType =
+            if (binding.networkTypeCheckbox.isChecked) getConnectionType(
+                context
+            ).toString() else null
+        val feedback = Feedback(
+            appVersion, apiLevel,
+            binding.feedbackItemEditText.getText().toString(),
+            androidVersion, deviceModel, deviceManufacturer, deviceName, networkType
+        )
+        onFeedbackSubmitCallback.onFeedbackSubmit(feedback)
+        dismiss()
+    }
+
+    override fun dismiss() {
+        super.dismiss()
+        _binding = null
+    }
 }
