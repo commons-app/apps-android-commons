@@ -11,7 +11,7 @@
 <!-- TODO Add ContentDescription For ALL Images Added ignore to suppress Lints -->
 
   <androidx.constraintlayout.widget.ConstraintLayout
-    android:id="@+id/drawer_layout"
+    android:id="@+id/layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -283,234 +283,233 @@
       android:layout_height="wrap_content"
       android:layout_marginStart="@dimen/activity_margin_horizontal"
       android:layout_marginTop="@dimen/activity_margin_horizontal"
-      android:text="@string/statistics"
+      android:text="@string/badges"
       android:textAllCaps="true"
       android:textSize="16sp"
       android:textStyle="bold"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@+id/materialDivider2" />
 
-    <!--Nearby Places Statistics-->
-    <ImageView
-      android:id="@+id/wikidata_edits_icon"
-      android:layout_width="@dimen/dimen_40"
-      android:layout_height="@dimen/dimen_40"
-      android:layout_marginStart="@dimen/activity_margin_horizontal"
-      android:layout_marginTop="@dimen/activity_margin_horizontal"
-      app:layout_constraintLeft_toLeftOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/tv_statistics"
-      app:srcCompat="@drawable/ic_custom_map_marker" />
 
-    <TextView
-      android:id="@+id/images_nearby_data"
-      style="?android:textAppearanceMedium"
-      android:layout_width="0dp"
-      android:layout_height="wrap_content"
-      android:layout_marginStart="16dp"
-      android:layout_marginEnd="16dp"
-      android:text="@string/statistics_wikidata_edits"
-      app:layout_constraintBottom_toBottomOf="@+id/wikidata_edits_icon"
-      app:layout_constraintEnd_toStartOf="@+id/images_nearby_info_icon"
-      app:layout_constraintStart_toEndOf="@+id/wikidata_edits_icon"
-      app:layout_constraintTop_toTopOf="@+id/wikidata_edits_icon" />
+    <!--    <TextView-->
+<!--      android:id="@+id/images_nearby_data"-->
+<!--      style="?android:textAppearanceMedium"-->
+<!--      android:layout_width="0dp"-->
+<!--      android:layout_height="wrap_content"-->
+<!--      android:layout_marginStart="16dp"-->
+<!--      android:layout_marginEnd="16dp"-->
+<!--      android:text="@string/statistics_wikidata_edits"-->
+<!--      app:layout_constraintBottom_toBottomOf="@+id/wikidata_edits_icon"-->
+<!--      app:layout_constraintEnd_toStartOf="@+id/images_nearby_info_icon"-->
+<!--      app:layout_constraintStart_toEndOf="@+id/wikidata_edits_icon"-->
+<!--      app:layout_constraintTop_toTopOf="@+id/wikidata_edits_icon" />-->
 
-    <ImageView
-      android:id="@+id/images_nearby_info_icon"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_marginEnd="16dp"
-      app:layout_constraintBottom_toBottomOf="@+id/images_nearby_data"
-      app:layout_constraintEnd_toStartOf="@+id/wikidata_edits"
-      app:layout_constraintTop_toTopOf="@+id/images_nearby_data"
-      app:srcCompat="@drawable/ic_info_outline_24dp"
-      app:tint="@color/black" />
+<!--    <ImageView-->
+<!--      android:id="@+id/images_nearby_info_icon"-->
+<!--      android:layout_width="wrap_content"-->
+<!--      android:layout_height="wrap_content"-->
+<!--      android:layout_marginEnd="16dp"-->
+<!--      app:layout_constraintBottom_toBottomOf="@+id/images_nearby_data"-->
+<!--      app:layout_constraintEnd_toStartOf="@+id/wikidata_edits"-->
+<!--      app:layout_constraintTop_toTopOf="@+id/images_nearby_data"-->
+<!--      app:srcCompat="@drawable/ic_info_outline_24dp"-->
+<!--      app:tint="@color/black" />-->
 
-    <TextView
-      android:id="@+id/wikidata_edits"
-      style="?android:textAppearanceMedium"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_marginEnd="@dimen/activity_margin_horizontal"
-      app:layout_constraintBottom_toBottomOf="@+id/images_nearby_info_icon"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintTop_toTopOf="@+id/images_nearby_info_icon"
-      tools:text="2" />
+<!--    <TextView-->
+<!--      android:id="@+id/wikidata_edits"-->
+<!--      style="?android:textAppearanceMedium"-->
+<!--      android:layout_width="wrap_content"-->
+<!--      android:layout_height="wrap_content"-->
+<!--      android:layout_marginEnd="@dimen/activity_margin_horizontal"-->
+<!--      app:layout_constraintBottom_toBottomOf="@+id/images_nearby_info_icon"-->
+<!--      app:layout_constraintEnd_toEndOf="parent"-->
+<!--      app:layout_constraintTop_toTopOf="@+id/images_nearby_info_icon"-->
+<!--      tools:text="2" />-->
 
-    <com.google.android.material.divider.MaterialDivider
-      android:id="@+id/materialDivider3"
+<!--    <com.google.android.material.divider.MaterialDivider-->
+<!--      android:id="@+id/materialDivider3"-->
+<!--      android:layout_width="match_parent"-->
+<!--      android:layout_height="wrap_content"-->
+<!--      android:layout_marginStart="@dimen/activity_margin_horizontal"-->
+<!--      android:layout_marginTop="@dimen/activity_margin_horizontal"-->
+<!--      android:layout_marginEnd="@dimen/activity_margin_horizontal"-->
+<!--      app:layout_constraintEnd_toEndOf="parent"-->
+<!--      app:layout_constraintStart_toStartOf="parent"-->
+<!--      app:layout_constraintTop_toBottomOf="@+id/wikidata_edits_icon" />-->
+
+
+
+
+<!--    <TextView-->
+<!--      android:id="@+id/images_featured_data"-->
+<!--      style="?android:textAppearanceMedium"-->
+<!--      android:layout_width="0dp"-->
+<!--      android:layout_height="wrap_content"-->
+<!--      android:layout_marginStart="@dimen/activity_margin_horizontal"-->
+<!--      android:layout_marginEnd="@dimen/activity_margin_horizontal"-->
+<!--      android:text="@string/statistics_featured"-->
+<!--      app:layout_constraintBottom_toBottomOf="@+id/featured_image_icon"-->
+<!--      app:layout_constraintEnd_toStartOf="@+id/images_nearby_info_icon"-->
+<!--      app:layout_constraintStart_toEndOf="@+id/featured_image_icon"-->
+<!--      app:layout_constraintTop_toTopOf="@+id/featured_image_icon" />-->
+
+
+
+
+<!--    <TextView-->
+<!--      android:id="@+id/image_featured"-->
+<!--      style="?android:textAppearanceMedium"-->
+<!--      android:layout_width="wrap_content"-->
+<!--      android:layout_height="wrap_content"-->
+<!--      android:layout_marginEnd="@dimen/activity_margin_horizontal"-->
+<!--      app:layout_constraintBottom_toBottomOf="@+id/images_featured_info_icon"-->
+<!--      app:layout_constraintEnd_toEndOf="parent"-->
+<!--      app:layout_constraintTop_toTopOf="@+id/images_featured_info_icon"-->
+<!--      tools:text="2" />-->
+
+<!--    <com.google.android.material.divider.MaterialDivider-->
+<!--      android:id="@+id/materialDivider4"-->
+<!--      android:layout_width="match_parent"-->
+<!--      android:layout_height="wrap_content"-->
+<!--      android:layout_marginStart="@dimen/activity_margin_horizontal"-->
+<!--      android:layout_marginTop="@dimen/activity_margin_horizontal"-->
+<!--      android:layout_marginEnd="@dimen/activity_margin_horizontal"-->
+<!--      app:layout_constraintEnd_toEndOf="parent"-->
+<!--      app:layout_constraintStart_toStartOf="parent"-->
+<!--      app:layout_constraintTop_toBottomOf="@+id/featured_image_icon" />-->
+
+
+    <LinearLayout
+      android:id="@+id/badgesItems"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_marginStart="@dimen/activity_margin_horizontal"
-      android:layout_marginTop="@dimen/activity_margin_horizontal"
       android:layout_marginEnd="@dimen/activity_margin_horizontal"
+      android:orientation="horizontal"
+      android:padding="@dimen/activity_margin_horizontal"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/wikidata_edits_icon" />
+      app:layout_constraintTop_toBottomOf="@+id/tv_statistics">
 
-    <!--Featured Image Statistics-->
+      <!--Nearby Places Statistics-->
+      <ImageView
+        android:id="@+id/wikidata_edits_icon"
+        android:layout_width="@dimen/dimen_40"
+        android:layout_height="@dimen/dimen_40"
+        android:layout_marginEnd="@dimen/medium_width"
+        app:srcCompat="@drawable/ic_custom_map_marker" />
 
-    <ImageView
-      android:id="@+id/featured_image_icon"
-      android:layout_width="@dimen/dimen_40"
-      android:layout_height="@dimen/dimen_40"
-      android:layout_marginStart="@dimen/activity_margin_horizontal"
-      android:layout_marginTop="@dimen/activity_margin_horizontal"
-      app:layout_constraintLeft_toLeftOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/materialDivider3"
-      app:srcCompat="@drawable/featured" />
+      <!--Featured Image Statistics-->
+      <ImageView
+        android:id="@+id/featured_image_icon"
+        android:layout_width="@dimen/dimen_40"
+        android:layout_height="@dimen/dimen_40"
+        android:layout_marginEnd="@dimen/medium_width"
+        app:srcCompat="@drawable/featured" />
 
-    <TextView
-      android:id="@+id/images_featured_data"
-      style="?android:textAppearanceMedium"
-      android:layout_width="0dp"
-      android:layout_height="wrap_content"
-      android:layout_marginStart="@dimen/activity_margin_horizontal"
-      android:layout_marginEnd="@dimen/activity_margin_horizontal"
-      android:text="@string/statistics_featured"
-      app:layout_constraintBottom_toBottomOf="@+id/featured_image_icon"
-      app:layout_constraintEnd_toStartOf="@+id/images_nearby_info_icon"
-      app:layout_constraintStart_toEndOf="@+id/featured_image_icon"
-      app:layout_constraintTop_toTopOf="@+id/featured_image_icon" />
+      <!--Quality Image Statistics-->
+      <ImageView
+        android:id="@+id/quality_image_icon"
+        android:layout_width="@dimen/dimen_40"
+        android:layout_height="@dimen/dimen_40"
+        android:layout_marginEnd="@dimen/medium_width"
+        app:srcCompat="@drawable/ic_quality_images_logo" />
 
+      <!--Thank Image Statistics-->
+      <ImageView
+        android:id="@+id/thanks_image_icon"
+        android:layout_width="@dimen/dimen_40"
+        android:layout_height="@dimen/dimen_40"
 
-    <ImageView
-      android:id="@+id/images_featured_info_icon"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_marginEnd="16dp"
-      app:layout_constraintBottom_toBottomOf="@+id/images_featured_data"
-      app:layout_constraintEnd_toStartOf="@+id/wikidata_edits"
-      app:layout_constraintTop_toTopOf="@+id/images_featured_data"
-      app:srcCompat="@drawable/ic_info_outline_24dp"
-      app:tint="@color/black" />
+        android:layout_marginEnd="@dimen/medium_width"
+        app:srcCompat="@drawable/ic_thanks" />
 
 
-    <TextView
-      android:id="@+id/image_featured"
-      style="?android:textAppearanceMedium"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_marginEnd="@dimen/activity_margin_horizontal"
-      app:layout_constraintBottom_toBottomOf="@+id/images_featured_info_icon"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintTop_toTopOf="@+id/images_featured_info_icon"
-      tools:text="2" />
+    </LinearLayout>
 
-    <com.google.android.material.divider.MaterialDivider
-      android:id="@+id/materialDivider4"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_marginStart="@dimen/activity_margin_horizontal"
-      android:layout_marginTop="@dimen/activity_margin_horizontal"
-      android:layout_marginEnd="@dimen/activity_margin_horizontal"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/featured_image_icon" />
+<!--    <TextView-->
+<!--      android:id="@+id/quality_images_data"-->
+<!--      style="?android:textAppearanceMedium"-->
+<!--      android:layout_width="0dp"-->
+<!--      android:layout_height="wrap_content"-->
+<!--      android:layout_marginStart="@dimen/activity_margin_horizontal"-->
+<!--      android:layout_marginEnd="@dimen/activity_margin_horizontal"-->
+<!--      android:text="@string/statistics_quality"-->
+<!--      app:layout_constraintBottom_toBottomOf="@+id/quality_image_icon"-->
+<!--      app:layout_constraintEnd_toStartOf="@+id/images_nearby_info_icon"-->
+<!--      app:layout_constraintStart_toEndOf="@+id/quality_image_icon"-->
+<!--      app:layout_constraintTop_toTopOf="@+id/quality_image_icon" />-->
 
-    <!--Quality Image Statistics-->
+<!--    <ImageView-->
+<!--      android:id="@+id/quality_images_info_icon"-->
+<!--      android:layout_width="wrap_content"-->
+<!--      android:layout_height="wrap_content"-->
+<!--      android:layout_marginEnd="16dp"-->
+<!--      app:layout_constraintBottom_toBottomOf="@+id/quality_images_data"-->
+<!--      app:layout_constraintEnd_toStartOf="@+id/quality_images"-->
+<!--      app:layout_constraintTop_toTopOf="@+id/quality_images_data"-->
+<!--      app:srcCompat="@drawable/ic_info_outline_24dp"-->
+<!--      app:tint="@color/black" />-->
 
-    <ImageView
-      android:id="@+id/quality_image_icon"
-      android:layout_width="@dimen/dimen_40"
-      android:layout_height="@dimen/dimen_40"
-      android:layout_marginStart="@dimen/activity_margin_horizontal"
-      android:layout_marginTop="@dimen/activity_margin_horizontal"
-      app:layout_constraintLeft_toLeftOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/materialDivider4"
-      app:srcCompat="@drawable/ic_quality_images_logo" />
+<!--    <TextView-->
+<!--      android:id="@+id/quality_images"-->
+<!--      style="?android:textAppearanceMedium"-->
+<!--      android:layout_width="wrap_content"-->
+<!--      android:layout_height="wrap_content"-->
+<!--      android:layout_marginEnd="@dimen/activity_margin_horizontal"-->
+<!--      app:layout_constraintBottom_toBottomOf="@+id/quality_images_info_icon"-->
+<!--      app:layout_constraintEnd_toEndOf="parent"-->
+<!--      app:layout_constraintTop_toTopOf="@+id/quality_images_info_icon"-->
+<!--      tools:text="2" />-->
 
-    <TextView
-      android:id="@+id/quality_images_data"
-      style="?android:textAppearanceMedium"
-      android:layout_width="0dp"
-      android:layout_height="wrap_content"
-      android:layout_marginStart="@dimen/activity_margin_horizontal"
-      android:layout_marginEnd="@dimen/activity_margin_horizontal"
-      android:text="@string/statistics_quality"
-      app:layout_constraintBottom_toBottomOf="@+id/quality_image_icon"
-      app:layout_constraintEnd_toStartOf="@+id/images_nearby_info_icon"
-      app:layout_constraintStart_toEndOf="@+id/quality_image_icon"
-      app:layout_constraintTop_toTopOf="@+id/quality_image_icon" />
+<!--    <com.google.android.material.divider.MaterialDivider-->
+<!--      android:id="@+id/materialDivider5"-->
+<!--      android:layout_width="match_parent"-->
+<!--      android:layout_height="wrap_content"-->
+<!--      android:layout_marginStart="@dimen/activity_margin_horizontal"-->
+<!--      android:layout_marginTop="@dimen/activity_margin_horizontal"-->
+<!--      android:layout_marginEnd="@dimen/activity_margin_horizontal"-->
+<!--      app:layout_constraintEnd_toEndOf="parent"-->
+<!--      app:layout_constraintStart_toStartOf="parent"-->
+<!--      app:layout_constraintTop_toBottomOf="@+id/quality_image_icon" />-->
 
-    <ImageView
-      android:id="@+id/quality_images_info_icon"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_marginEnd="16dp"
-      app:layout_constraintBottom_toBottomOf="@+id/quality_images_data"
-      app:layout_constraintEnd_toStartOf="@+id/quality_images"
-      app:layout_constraintTop_toTopOf="@+id/quality_images_data"
-      app:srcCompat="@drawable/ic_info_outline_24dp"
-      app:tint="@color/black" />
 
-    <TextView
-      android:id="@+id/quality_images"
-      style="?android:textAppearanceMedium"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_marginEnd="@dimen/activity_margin_horizontal"
-      app:layout_constraintBottom_toBottomOf="@+id/quality_images_info_icon"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintTop_toTopOf="@+id/quality_images_info_icon"
-      tools:text="2" />
 
-    <com.google.android.material.divider.MaterialDivider
-      android:id="@+id/materialDivider5"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_marginStart="@dimen/activity_margin_horizontal"
-      android:layout_marginTop="@dimen/activity_margin_horizontal"
-      android:layout_marginEnd="@dimen/activity_margin_horizontal"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/quality_image_icon" />
 
-    <!--Thank Image Statistics-->
+<!--    <TextView-->
+<!--      android:id="@+id/thanks_received_data"-->
+<!--      style="?android:textAppearanceMedium"-->
+<!--      android:layout_width="0dp"-->
+<!--      android:layout_height="wrap_content"-->
+<!--      android:layout_marginStart="@dimen/activity_margin_horizontal"-->
+<!--      android:layout_marginEnd="@dimen/activity_margin_horizontal"-->
+<!--      android:text="@string/statistics_thanks"-->
+<!--      app:layout_constraintBottom_toBottomOf="@+id/thanks_image_icon"-->
+<!--      app:layout_constraintEnd_toStartOf="@+id/images_nearby_info_icon"-->
+<!--      app:layout_constraintStart_toEndOf="@+id/thanks_image_icon"-->
+<!--      app:layout_constraintTop_toTopOf="@+id/thanks_image_icon" />-->
 
-    <ImageView
-      android:id="@+id/thanks_image_icon"
-      android:layout_width="@dimen/dimen_40"
-      android:layout_height="@dimen/dimen_40"
-      android:layout_marginStart="@dimen/activity_margin_horizontal"
-      android:layout_marginTop="@dimen/activity_margin_horizontal"
-      app:layout_constraintLeft_toLeftOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/materialDivider5"
-      app:srcCompat="@drawable/ic_thanks" />
+<!--    <ImageView-->
+<!--      android:id="@+id/thanks_received_info_icon"-->
+<!--      android:layout_width="wrap_content"-->
+<!--      android:layout_height="wrap_content"-->
+<!--      android:layout_marginEnd="@dimen/activity_margin_horizontal"-->
+<!--      app:layout_constraintBottom_toBottomOf="@+id/thanks_received_data"-->
+<!--      app:layout_constraintEnd_toStartOf="@+id/quality_images"-->
+<!--      app:layout_constraintTop_toTopOf="@+id/thanks_received_data"-->
+<!--      app:srcCompat="@drawable/ic_info_outline_24dp"-->
+<!--      app:tint="@color/black" />-->
 
-    <TextView
-      android:id="@+id/thanks_received_data"
-      style="?android:textAppearanceMedium"
-      android:layout_width="0dp"
-      android:layout_height="wrap_content"
-      android:layout_marginStart="@dimen/activity_margin_horizontal"
-      android:layout_marginEnd="@dimen/activity_margin_horizontal"
-      android:text="@string/statistics_thanks"
-      app:layout_constraintBottom_toBottomOf="@+id/thanks_image_icon"
-      app:layout_constraintEnd_toStartOf="@+id/images_nearby_info_icon"
-      app:layout_constraintStart_toEndOf="@+id/thanks_image_icon"
-      app:layout_constraintTop_toTopOf="@+id/thanks_image_icon" />
-
-    <ImageView
-      android:id="@+id/thanks_received_info_icon"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_marginEnd="@dimen/activity_margin_horizontal"
-      app:layout_constraintBottom_toBottomOf="@+id/thanks_received_data"
-      app:layout_constraintEnd_toStartOf="@+id/quality_images"
-      app:layout_constraintTop_toTopOf="@+id/thanks_received_data"
-      app:srcCompat="@drawable/ic_info_outline_24dp"
-      app:tint="@color/black" />
-
-    <TextView
-      android:id="@+id/thanks_received"
-      style="?android:textAppearanceMedium"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_marginEnd="@dimen/activity_margin_horizontal"
-      app:layout_constraintBottom_toBottomOf="@+id/thanks_received_info_icon"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintTop_toTopOf="@+id/thanks_received_info_icon"
-      tools:text="2" />
+<!--    <TextView-->
+<!--      android:id="@+id/thanks_received"-->
+<!--      style="?android:textAppearanceMedium"-->
+<!--      android:layout_width="wrap_content"-->
+<!--      android:layout_height="wrap_content"-->
+<!--      android:layout_marginEnd="@dimen/activity_margin_horizontal"-->
+<!--      app:layout_constraintBottom_toBottomOf="@+id/thanks_received_info_icon"-->
+<!--      app:layout_constraintEnd_toEndOf="parent"-->
+<!--      app:layout_constraintTop_toTopOf="@+id/thanks_received_info_icon"-->
+<!--      tools:text="2" />-->
 
 
     <ProgressBar

@@ -6,10 +6,14 @@ import android.util.DisplayMetrics
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewTreeObserver
 import android.widget.Toast
 import androidx.appcompat.view.ContextThemeWrapper
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat
+import com.google.android.material.badge.BadgeDrawable
+import com.google.android.material.badge.BadgeUtils
+import com.google.android.material.badge.ExperimentalBadgeUtils
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.Utils
 import fr.free.nrw.commons.auth.SessionManager
@@ -64,9 +68,9 @@ class AchievementsFragment : CommonsDaggerSupportFragment(){
         binding.imagesUploadInfoIcon.setOnClickListener { showUploadInfo() }
         binding.imagesRevertedInfoIcon.setOnClickListener { showRevertedInfo() }
         binding.imagesUsedByWikiInfoIcon.setOnClickListener { showUsedByWikiInfo() }
-        binding.imagesNearbyInfoIcon.setOnClickListener { showImagesViaNearbyInfo() }
-        binding.imagesFeaturedInfoIcon.setOnClickListener { showFeaturedImagesInfo() }
-        binding.thanksReceivedInfoIcon.setOnClickListener { showThanksReceivedInfo() }
+        //binding.imagesNearbyInfoIcon.setOnClickListener { showImagesViaNearbyInfo() }
+        //binding.imagesFeaturedInfoIcon.setOnClickListener { showFeaturedImagesInfo() }
+        //binding.thanksReceivedInfoIcon.setOnClickListener { showThanksReceivedInfo() }
         binding.qualityImageIcon.setOnClickListener { showQualityImagesInfo() }
 
         // DisplayMetrics used to fetch the size of the screen
@@ -84,9 +88,6 @@ class AchievementsFragment : CommonsDaggerSupportFragment(){
         binding.progressBar.visibility = View.VISIBLE
 
         setHasOptionsMenu(true)
-
-        // Set the initial value of WikiData edits to 0
-        binding.wikidataEdits.text = "0"
         if (sessionManager.userName == null || sessionManager.userName == userName) {
             binding.tvAchievementsOfUser.visibility = View.GONE
         } else {
@@ -94,14 +95,7 @@ class AchievementsFragment : CommonsDaggerSupportFragment(){
             binding.tvAchievementsOfUser.text = getString(R.string.achievements_of_user, userName)
         }
         if (isBetaFlavour) {
-            binding.progressBar.visibility = View.GONE
-            binding.imagesUsedCount.setText(R.string.no_image)
-            binding.imagesRevertedText.setText(R.string.no_image_reverted)
-            binding.imagesUploadTextParam.setText(R.string.no_image_uploaded)
-            binding.wikidataEdits.text = "0"
-            binding.imageFeatured.text = "0"
-            binding.qualityImages.text = "0"
-            binding.achievementLevel.text = "0"
+            binding.layout.visibility = View.GONE
             setMenuVisibility(true)
             return binding.root
         }
@@ -212,7 +206,7 @@ class AchievementsFragment : CommonsDaggerSupportFragment(){
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ edits: Int ->
                     numberOfEdits = edits
-                    binding.wikidataEdits.text = edits.toString()
+                    showBadgesWithCount(view = binding.wikidataEditsIcon, count = edits)
                 }, { e: Throwable ->
                     Timber.e("Error:$e")
                 })
@@ -351,15 +345,22 @@ class AchievementsFragment : CommonsDaggerSupportFragment(){
      * and assign badge and level. Also stores the achievements level of the user in BasicKvStore to display in menu
      * @param achievements
      */
+//    @OptIn(ExperimentalBadgeUtils::class)
     private fun inflateAchievements(achievements: Achievements) {
-//        binding.imagesUsedByWikiProgressBar.setVisibility(View.VISIBLE);
-        binding.thanksReceived.text = achievements.thanksReceived.toString()
+
+        // Thanks Received Badge
+        showBadgesWithCount(view = binding.thanksImageIcon, count =  achievements.thanksReceived)
+
+        // Featured Images Badge
+        showBadgesWithCount(view = binding.featuredImageIcon, count =  achievements.featuredImages)
+
+        // Quality Images Badge
+        showBadgesWithCount(view = binding.qualityImageIcon, count =  achievements.qualityImages)
+
         binding.imagesUsedByWikiProgressBar.progress =
             100 * achievements.uniqueUsedImages / levelInfo.maxUniqueImages
         binding.imagesUsedCount.text = (achievements.uniqueUsedImages.toString() + "/"
                 + levelInfo.maxUniqueImages)
-        binding.imageFeatured.text = achievements.featuredImages.toString()
-        binding.qualityImages.text = achievements.qualityImages.toString()
 
         binding.achievementLevel.text = getString(R.string.level,levelInfo.levelNumber)
         binding.achievementBadgeImage.setImageDrawable(
@@ -373,6 +374,49 @@ class AchievementsFragment : CommonsDaggerSupportFragment(){
         store.putString("userAchievementsLevel", levelInfo.levelNumber.toString())
     }
 
+    /**
+     * This function is used to show badge on any view (button, imageView, etc)
+     * @param view The View on which the badge will be displayed eg (button, imageView, etc)
+     * @param count The number to be displayed inside the badge.
+     * @param backgroundColor The badge background color. Default is R.attr.colorPrimary
+     * @param badgeTextColor The badge text color. Default is R.attr.colorPrimary
+     * @param badgeGravity The position of the badge [TOP_END,TOP_START,BOTTOM_END,BOTTOM_START]. Default is TOP_END
+     * @return if the number is 0, then it will not create badge for it and hide the view
+     * @see https://developer.android.com/reference/com/google/android/material/badge/BadgeDrawable
+     */
+
+    private fun showBadgesWithCount(
+        view: View,
+        count: Int,
+        backgroundColor: Int = R.attr.colorPrimary,
+        badgeTextColor: Int = R.attr.textEnabled,
+        badgeGravity: Int = BadgeDrawable.TOP_END
+    ) {
+        //https://stackoverflow.com/a/67742035
+        if (count == 0) {
+            view.visibility = View.GONE
+            return
+        }
+
+        view.viewTreeObserver.addOnGlobalLayoutListener(object :
+            ViewTreeObserver.OnGlobalLayoutListener {
+            /**
+             * Callback method to be invoked when the global layout state or the visibility of views
+             * within the view tree changes
+             */
+            @ExperimentalBadgeUtils
+            override fun onGlobalLayout() {
+                view.visibility = View.VISIBLE
+                val badgeDrawable = BadgeDrawable.create(requireActivity())
+                badgeDrawable.number = count
+                badgeDrawable.badgeGravity = badgeGravity
+                badgeDrawable.badgeTextColor = badgeTextColor
+                badgeDrawable.backgroundColor = backgroundColor
+                BadgeUtils.attachBadgeDrawable(badgeDrawable, binding.wikidataEditsIcon)
+                view.getViewTreeObserver().removeOnGlobalLayoutListener(this)
+            }
+        })
+    }
 
     /**
      * to hide progressbar

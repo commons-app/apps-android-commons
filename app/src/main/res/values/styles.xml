@@ -1,6 +1,6 @@
 <resources>
 
-    <style name="DarkAppTheme" parent="Theme.AppCompat.NoActionBar">
+    <style name="DarkAppTheme" parent="Theme.MaterialComponents.NoActionBar">
         <item name="contributionsListBackground">@color/contributionListDarkBackground</item>
         <item name="tabBackground">@color/contributionListDarkBackground</item>
         <item name="tabIndicatorColor">@color/white</item>
@@ -62,7 +62,7 @@
         <item name="android:splitMotionEvents">false</item>
     </style>
 
-    <style name="LightAppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="LightAppTheme" parent="Theme.MaterialComponents.NoActionBar">
         <item name="contributionsListBackground">@color/white</item>
         <item name="tabBackground">@color/card_light_grey</item>
         <item name="tabIndicatorColor">@color/primaryDarkColor</item>
@@ -73,6 +73,7 @@
         <item name="drawerHeaderBackground">@color/drawerHeader_background_light</item>
         <item name="tutorialBackground">@color/tutorial_background_light</item>
         <item name="icon">@color/secondaryTextColor</item>
+        <item name="colorPrimary">@color/primaryDarkColor</item>
         <item name="colorPrimaryDark">@color/primaryDarkColor</item>
         <item name="colorAccent">@color/primaryColor</item>
         <item name="colorButtonNormal">@color/primaryColor</item>
