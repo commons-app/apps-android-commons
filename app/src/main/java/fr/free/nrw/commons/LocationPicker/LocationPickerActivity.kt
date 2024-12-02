@@ -423,7 +423,7 @@ class LocationPickerActivity : BaseActivity(), LocationPermissionCallback {
      * Moves map to GPS location
      */
     private fun moveMapToGPSLocation() {
-        locationManager.lastLocationVar?.let {
+        locationManager.getLastLocation()?.let {
             moveMapTo(GeoPoint(it.latitude, it.longitude))
         }
     }
@@ -606,7 +606,7 @@ class LocationPickerActivity : BaseActivity(), LocationPermissionCallback {
      * Adds a marker at the user's GPS location
      */
     private fun addMarkerAtGPSLocation() {
-        locationManager.lastLocationVar?.let {
+        locationManager.getLastLocation()?.let {
             addLocationMarker(GeoPoint(it.latitude, it.longitude))
             markerImage.translationY = 0f
         }

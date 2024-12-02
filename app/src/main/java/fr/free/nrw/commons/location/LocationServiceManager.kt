@@ -23,7 +23,7 @@ class LocationServiceManager(private val context: Context) : LocationListener {
 
     private val locationManager: LocationManager =
         context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
-    var lastLocationVar: Location? = null
+    private var lastLocationVar: Location? = null
     private val locationListeners = CopyOnWriteArrayList<LocationUpdateListener>()
     private var isLocationManagerRegistered = false
     private val locationExplanationDisplayed = mutableSetOf<Activity>()
