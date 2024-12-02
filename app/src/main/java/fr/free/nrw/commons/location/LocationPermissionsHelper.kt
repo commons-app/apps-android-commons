@@ -1,18 +1,16 @@
-package fr.free.nrw.commons.location;
+package fr.free.nrw.commons.location
 
-import android.Manifest;
-import android.Manifest.permission;
-import android.app.Activity;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.net.Uri;
-import android.provider.Settings;
-import android.widget.Toast;
-import androidx.core.app.ActivityCompat;
-import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.filepicker.Constants.RequestCodes;
-import fr.free.nrw.commons.utils.DialogUtil;
-import fr.free.nrw.commons.utils.PermissionUtils;
+import android.Manifest.permission
+import android.app.Activity
+import android.content.Intent
+import android.net.Uri
+import android.provider.Settings
+import android.widget.Toast
+import androidx.core.app.ActivityCompat
+import fr.free.nrw.commons.R
+import fr.free.nrw.commons.filepicker.Constants.RequestCodes
+import fr.free.nrw.commons.utils.DialogUtil
+import fr.free.nrw.commons.utils.PermissionUtils
 
 /**
  * Helper class to handle location permissions.
@@ -37,51 +35,58 @@ import fr.free.nrw.commons.utils.PermissionUtils;
  * Do whatever is required by that particular activity / fragment using current location.
  *
  */
-public class LocationPermissionsHelper {
-
-    Activity activity;
-    LocationServiceManager locationManager;
-    LocationPermissionCallback callback;
-
-    public LocationPermissionsHelper(Activity activity, LocationServiceManager locationManager,
-        LocationPermissionCallback callback) {
-        this.activity = activity;
-        this.locationManager = locationManager;
-        this.callback = callback;
-    }
+class LocationPermissionsHelper(
+    private val activity: Activity,
+    private val locationManager: LocationServiceManager,
+    private val callback: LocationPermissionCallback?
+) {
 
     /**
      * Ask for location permission if the user agrees on attaching location with pictures and the
      * app does not have the access to location
      *
-     * @param dialogTitleResource Resource id of the title of the dialog 
-     * @param dialogTextResource Resource id of the text of the dialog 
+     * @param dialogTitleResource Resource id of the title of the dialog
+     * @param dialogTextResource Resource id of the text of the dialog
      */
-    public void requestForLocationAccess(
-        int dialogTitleResource,
-        int dialogTextResource
+    fun requestForLocationAccess(
+        dialogTitleResource: Int,
+        dialogTextResource: Int
     ) {
         if (checkLocationPermission(activity)) {
-            callback.onLocationPermissionGranted();
+            callback?.onLocationPermissionGranted()
         } else {
-            if (ActivityCompat.shouldShowRequestPermissionRationale(activity,
-                permission.ACCESS_FINE_LOCATION)) {
-                DialogUtil.showAlertDialog(activity, activity.getString(dialogTitleResource),
+            if (ActivityCompat.shouldShowRequestPermissionRationale(
+                    activity,
+                    permission.ACCESS_FINE_LOCATION
+                )
+            ) {
+                DialogUtil.showAlertDialog(
+                    activity,
+                    activity.getString(dialogTitleResource),
                     activity.getString(dialogTextResource),
                     activity.getString(android.R.string.ok),
                     activity.getString(android.R.string.cancel),
-                    () -> {
-                        ActivityCompat.requestPermissions(activity,
-                            new String[]{permission.ACCESS_FINE_LOCATION}, 1);
+                    {
+                        ActivityCompat.requestPermissions(
+                            activity,
+                            arrayOf(permission.ACCESS_FINE_LOCATION),
+                            1
+                        )
                     },
-                    () -> callback.onLocationPermissionDenied(
-                        activity.getString(R.string.upload_map_location_access)),
+                    {
+                        callback?.onLocationPermissionDenied(
+                            activity.getString(R.string.upload_map_location_access)
+                        )
+                    },
                     null,
-                    false);
+                    false
+                )
             } else {
-                ActivityCompat.requestPermissions(activity,
-                    new String[]{permission.ACCESS_FINE_LOCATION},
-                    RequestCodes.LOCATION);
+                ActivityCompat.requestPermissions(
+                    activity,
+                    arrayOf(permission.ACCESS_FINE_LOCATION),
+                    RequestCodes.LOCATION
+                )
             }
         }
     }
@@ -92,33 +97,38 @@ public class LocationPermissionsHelper {
      * @param activity Activity object
      * @param dialogTextResource int id of the required string resource
      */
-    public void showLocationOffDialog(Activity activity, int dialogTextResource) {
-        DialogUtil
-            .showAlertDialog(activity,
-                activity.getString(R.string.ask_to_turn_location_on),
-                activity.getString(dialogTextResource),
-                activity.getString(R.string.title_app_shortcut_setting),
-                activity.getString(R.string.cancel),
-                () -> openLocationSettings(activity),
-                () -> Toast.makeText(activity, activity.getString(dialogTextResource),
-                    Toast.LENGTH_LONG).show()
-            );
+    fun showLocationOffDialog(activity: Activity, dialogTextResource: Int) {
+        DialogUtil.showAlertDialog(
+            activity,
+            activity.getString(R.string.ask_to_turn_location_on),
+            activity.getString(dialogTextResource),
+            activity.getString(R.string.title_app_shortcut_setting),
+            activity.getString(R.string.cancel),
+            { openLocationSettings(activity) },
+            {
+                Toast.makeText(
+                    activity,
+                    activity.getString(dialogTextResource),
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+        )
     }
 
     /**
      * Opens the location access page in settings, for user to turn on location services
      *
-     * @param activity Activtiy object
+     * @param activity Activity object
      */
-    public void openLocationSettings(Activity activity) {
-        final Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-        final PackageManager packageManager = activity.getPackageManager();
+    fun openLocationSettings(activity: Activity) {
+        val intent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
+        val packageManager = activity.packageManager
 
         if (intent.resolveActivity(packageManager) != null) {
-            activity.startActivity(intent);
+            activity.startActivity(intent)
         } else {
             Toast.makeText(activity, R.string.cannot_open_location_settings, Toast.LENGTH_LONG)
-                .show();
+                .show()
         }
     }
 
@@ -128,16 +138,22 @@ public class LocationPermissionsHelper {
      * @param activity Activity object
      * @param dialogTextResource int id of the required string resource
      */
-    public void showAppSettingsDialog(Activity activity, int dialogTextResource) {
-        DialogUtil
-            .showAlertDialog(activity, activity.getString(R.string.location_permission_title),
-                activity.getString(dialogTextResource),
-                activity.getString(R.string.title_app_shortcut_setting),
-                activity.getString(R.string.cancel),
-                () -> openAppSettings(activity),
-                () -> Toast.makeText(activity, activity.getString(dialogTextResource),
-                    Toast.LENGTH_LONG).show()
-            );
+    fun showAppSettingsDialog(activity: Activity, dialogTextResource: Int) {
+        DialogUtil.showAlertDialog(
+            activity,
+            activity.getString(R.string.location_permission_title),
+            activity.getString(dialogTextResource),
+            activity.getString(R.string.title_app_shortcut_setting),
+            activity.getString(R.string.cancel),
+            { openAppSettings(activity) },
+            {
+                Toast.makeText(
+                    activity,
+                    activity.getString(dialogTextResource),
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+        )
     }
 
     /**
@@ -145,22 +161,20 @@ public class LocationPermissionsHelper {
      *
      * @param activity Activity object
      */
-    public void openAppSettings(Activity activity) {
-        Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-        Uri uri = Uri.fromParts("package", activity.getPackageName(), null);
-        intent.setData(uri);
-        activity.startActivity(intent);
+    private fun openAppSettings(activity: Activity) {
+        val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+        val uri = Uri.fromParts("package", activity.packageName, null)
+        intent.data = uri
+        activity.startActivity(intent)
     }
-
 
     /**
      * Check if apps have access to location even after having individual access
      *
      * @return Returns true if location services are on and false otherwise
      */
-    public boolean isLocationAccessToAppsTurnedOn() {
-        return (locationManager.isNetworkProviderEnabled()
-            || locationManager.isGPSProviderEnabled());
+    fun isLocationAccessToAppsTurnedOn(): Boolean {
+        return locationManager.isNetworkProviderEnabled() || locationManager.isGPSProviderEnabled()
     }
 
     /**
@@ -169,18 +183,18 @@ public class LocationPermissionsHelper {
      * @param activity Activity object
      * @return Returns true if location permission is granted and false otherwise
      */
-    public boolean checkLocationPermission(Activity activity) {
-        return PermissionUtils.hasPermission(activity,
-            new String[]{Manifest.permission.ACCESS_FINE_LOCATION});
+    fun checkLocationPermission(activity: Activity): Boolean {
+        return PermissionUtils.hasPermission(
+            activity,
+            arrayOf(permission.ACCESS_FINE_LOCATION)
+        )
     }
 
     /**
      * Handle onPermissionDenied within individual classes based on the requirements
      */
-    public interface LocationPermissionCallback {
-
-        void onLocationPermissionDenied(String toastMessage);
-
-        void onLocationPermissionGranted();
+    interface LocationPermissionCallback {
+        fun onLocationPermissionDenied(toastMessage: String)
+        fun onLocationPermissionGranted()
     }
 }

@@ -423,7 +423,7 @@ class LocationPickerActivity : BaseActivity(), LocationPermissionCallback {
      * Moves map to GPS location
      */
     private fun moveMapToGPSLocation() {
-        locationManager.lastLocation?.let {
+        locationManager.lastLocationVar?.let {
             moveMapTo(GeoPoint(it.latitude, it.longitude))
         }
     }
@@ -591,7 +591,7 @@ class LocationPickerActivity : BaseActivity(), LocationPermissionCallback {
 
     override fun onLocationPermissionGranted() {
         if (moveToCurrentLocation || activity != "MediaActivity") {
-            if (locationPermissionsHelper.isLocationAccessToAppsTurnedOn) {
+            if (locationPermissionsHelper.isLocationAccessToAppsTurnedOn()) {
                 locationManager.requestLocationUpdatesFromProvider(LocationManager.NETWORK_PROVIDER)
                 locationManager.requestLocationUpdatesFromProvider(LocationManager.GPS_PROVIDER)
                 addMarkerAtGPSLocation()
@@ -606,7 +606,7 @@ class LocationPickerActivity : BaseActivity(), LocationPermissionCallback {
      * Adds a marker at the user's GPS location
      */
     private fun addMarkerAtGPSLocation() {
-        locationManager.lastLocation?.let {
+        locationManager.lastLocationVar?.let {
             addLocationMarker(GeoPoint(it.latitude, it.longitude))
             markerImage.translationY = 0f
         }

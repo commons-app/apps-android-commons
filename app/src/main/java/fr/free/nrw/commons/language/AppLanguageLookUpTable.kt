@@ -1,116 +1,111 @@
-package fr.free.nrw.commons.language;
+package fr.free.nrw.commons.language
 
-import android.content.Context;
-import android.content.res.Resources;
-import android.text.TextUtils;
+import android.content.Context
+import android.content.res.Resources
+import android.text.TextUtils
 
-import androidx.annotation.ArrayRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
+import androidx.annotation.ArrayRes
+import fr.free.nrw.commons.R
+import java.lang.ref.SoftReference
+import java.util.Arrays
+import java.util.Locale
 
-import fr.free.nrw.commons.R;
-import java.lang.ref.SoftReference;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Locale;
 
 /** Immutable look up table for all app supported languages. All article languages may not be
-  * present in this table as it is statically bundled with the app. */
-public class AppLanguageLookUpTable {
-    public static final String SIMPLIFIED_CHINESE_LANGUAGE_CODE = "zh-hans";
-    public static final String TRADITIONAL_CHINESE_LANGUAGE_CODE = "zh-hant";
-    public static final String CHINESE_CN_LANGUAGE_CODE = "zh-cn";
-    public static final String CHINESE_HK_LANGUAGE_CODE = "zh-hk";
-    public static final String CHINESE_MO_LANGUAGE_CODE = "zh-mo";
-    public static final String CHINESE_SG_LANGUAGE_CODE = "zh-sg";
-    public static final String CHINESE_TW_LANGUAGE_CODE = "zh-tw";
-    public static final String CHINESE_YUE_LANGUAGE_CODE = "zh-yue";
-    public static final String CHINESE_LANGUAGE_CODE = "zh";
-    public static final String NORWEGIAN_LEGACY_LANGUAGE_CODE = "no";
-    public static final String NORWEGIAN_BOKMAL_LANGUAGE_CODE = "nb";
-    public static final String TEST_LANGUAGE_CODE = "test";
-    public static final String FALLBACK_LANGUAGE_CODE = "en"; // Must exist in preference_language_keys.
+ * present in this table as it is statically bundled with the app. */
+class AppLanguageLookUpTable(context: Context) {
 
-    @NonNull private final Resources resources;
+    companion object {
+        const val SIMPLIFIED_CHINESE_LANGUAGE_CODE = "zh-hans"
+        const val TRADITIONAL_CHINESE_LANGUAGE_CODE = "zh-hant"
+        const val CHINESE_CN_LANGUAGE_CODE = "zh-cn"
+        const val CHINESE_HK_LANGUAGE_CODE = "zh-hk"
+        const val CHINESE_MO_LANGUAGE_CODE = "zh-mo"
+        const val CHINESE_SG_LANGUAGE_CODE = "zh-sg"
+        const val CHINESE_TW_LANGUAGE_CODE = "zh-tw"
+        const val CHINESE_YUE_LANGUAGE_CODE = "zh-yue"
+        const val CHINESE_LANGUAGE_CODE = "zh"
+        const val NORWEGIAN_LEGACY_LANGUAGE_CODE = "no"
+        const val NORWEGIAN_BOKMAL_LANGUAGE_CODE = "nb"
+        const val TEST_LANGUAGE_CODE = "test"
+        const val FALLBACK_LANGUAGE_CODE = "en" // Must exist in preference_language_keys.
+    }
+
+    private val resources: Resources = context.resources
 
     // Language codes for all app supported languages in fixed order. The special code representing
     // the dynamic system language is null.
-    @NonNull private SoftReference<List<String>> codesRef = new SoftReference<>(null);
+    private var codesRef = SoftReference<List<String>>(null)
 
     // English names for all app supported languages in fixed order.
-    @NonNull private SoftReference<List<String>> canonicalNamesRef = new SoftReference<>(null);
+    private var canonicalNamesRef = SoftReference<List<String>>(null)
 
     // Native names for all app supported languages in fixed order.
-    @NonNull private SoftReference<List<String>> localizedNamesRef = new SoftReference<>(null);
-
-    public AppLanguageLookUpTable(@NonNull Context context) {
-        resources = context.getResources();
-    }
+    private var localizedNamesRef = SoftReference<List<String>>(null)
 
     /**
      * @return Nonnull immutable list. The special code representing the dynamic system language is
      *         null.
      */
-    @NonNull
-    public List<String> getCodes() {
-        List<String> codes = codesRef.get();
+    fun getCodes(): List<String> {
+        var codes = codesRef.get()
         if (codes == null) {
-            codes = getStringList(R.array.preference_language_keys);
-            codesRef = new SoftReference<>(codes);
+            codes = getStringList(R.array.preference_language_keys)
+            codesRef = SoftReference(codes)
         }
-        return codes;
+        return codes
     }
 
-    @Nullable
-    public String getCanonicalName(@Nullable String code) {
-        String name = defaultIndex(getCanonicalNames(), indexOfCode(code), null);
-        if (TextUtils.isEmpty(name) && !TextUtils.isEmpty(code)) {
-            if (code.equals(Locale.CHINESE.getLanguage())) {
-                name = Locale.CHINESE.getDisplayName(Locale.ENGLISH);
-            } else if (code.equals(NORWEGIAN_LEGACY_LANGUAGE_CODE)) {
-                name = defaultIndex(getCanonicalNames(), indexOfCode(NORWEGIAN_BOKMAL_LANGUAGE_CODE), null);
+    fun getCanonicalName(code: String?): String? {
+        var name = defaultIndex(getCanonicalNames(), indexOfCode(code), null)
+        if (name.isNullOrEmpty() && !code.isNullOrEmpty()) {
+            name = when (code) {
+                Locale.CHINESE.language -> Locale.CHINESE.getDisplayName(Locale.ENGLISH)
+                NORWEGIAN_LEGACY_LANGUAGE_CODE ->
+                    defaultIndex(getCanonicalNames(), indexOfCode(NORWEGIAN_BOKMAL_LANGUAGE_CODE), null)
+                else -> null
             }
         }
-        return name;
+        return name
     }
 
-    @Nullable
-    public String getLocalizedName(@Nullable String code) {
-        String name = defaultIndex(getLocalizedNames(), indexOfCode(code), null);
-        if (TextUtils.isEmpty(name) && !TextUtils.isEmpty(code)) {
-            if (code.equals(Locale.CHINESE.getLanguage())) {
-                name = Locale.CHINESE.getDisplayName(Locale.CHINESE);
-            } else if (code.equals(NORWEGIAN_LEGACY_LANGUAGE_CODE)) {
-                name = defaultIndex(getLocalizedNames(), indexOfCode(NORWEGIAN_BOKMAL_LANGUAGE_CODE), null);
+    fun getLocalizedName(code: String?): String? {
+        var name = defaultIndex(getLocalizedNames(), indexOfCode(code), null)
+        if (name.isNullOrEmpty() && !code.isNullOrEmpty()) {
+            name = when (code) {
+                Locale.CHINESE.language -> Locale.CHINESE.getDisplayName(Locale.CHINESE)
+                NORWEGIAN_LEGACY_LANGUAGE_CODE ->
+                    defaultIndex(getLocalizedNames(), indexOfCode(NORWEGIAN_BOKMAL_LANGUAGE_CODE), null)
+                else -> null
             }
         }
-        return name;
+        return name
     }
 
-    public List<String> getCanonicalNames() {
-        List<String> names = canonicalNamesRef.get();
+    fun getCanonicalNames(): List<String> {
+        var names = canonicalNamesRef.get()
         if (names == null) {
-            names = getStringList(R.array.preference_language_canonical_names);
-            canonicalNamesRef = new SoftReference<>(names);
+            names = getStringList(R.array.preference_language_canonical_names)
+            canonicalNamesRef = SoftReference(names)
         }
-        return names;
+        return names
     }
 
-    public List<String> getLocalizedNames() {
-        List<String> names = localizedNamesRef.get();
+    fun getLocalizedNames(): List<String> {
+        var names = localizedNamesRef.get()
         if (names == null) {
-            names = getStringList(R.array.preference_language_local_names);
-            localizedNamesRef = new SoftReference<>(names);
+            names = getStringList(R.array.preference_language_local_names)
+            localizedNamesRef = SoftReference(names)
         }
-        return names;
+        return names
     }
 
-    public boolean isSupportedCode(@Nullable String code) {
-        return getCodes().contains(code);
+    fun isSupportedCode(code: String?): Boolean {
+        return getCodes().contains(code)
     }
 
-    private <T> T defaultIndex(List<T> list, int index, T defaultValue) {
-        return inBounds(list, index) ? list.get(index) : defaultValue;
+    private fun <T> defaultIndex(list: List<T>, index: Int, defaultValue: T?): T? {
+        return if (inBounds(list, index)) list[index] else defaultValue
     }
 
     /**
@@ -121,21 +116,20 @@ public class AppLanguageLookUpTable {
      *             language is null.
      * @return The index of the language code or -1 if the code is not supported.
      */
-    private int indexOfCode(@Nullable String code) {
-        return getCodes().indexOf(code);
+    private fun indexOfCode(code: String?): Int {
+        return getCodes().indexOf(code)
     }
 
     /** @return Nonnull immutable list. */
-    @NonNull
-    private List<String> getStringList(int id) {
-        return Arrays.asList(getStringArray(id));
+    private fun getStringList(id: Int): List<String> {
+        return getStringArray(id).toList()
     }
 
-    private boolean inBounds(List<?> list, int index) {
-        return index >= 0 && index < list.size();
+    private fun inBounds(list: List<*>, index: Int): Boolean {
+        return index in list.indices
     }
 
-    public String[] getStringArray(@ArrayRes int id) {
-        return resources.getStringArray(id);
+    fun getStringArray(@ArrayRes id: Int): Array<String> {
+        return resources.getStringArray(id)
     }
 }

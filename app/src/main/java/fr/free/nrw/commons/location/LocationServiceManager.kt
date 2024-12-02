@@ -1,90 +1,85 @@
-package fr.free.nrw.commons.location;
+package fr.free.nrw.commons.location
 
-import android.Manifest.permission;
-import android.app.Activity;
-import android.content.Context;
-import android.content.pm.PackageManager;
-import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
-import android.os.Bundle;
-import androidx.core.app.ActivityCompat;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.concurrent.CopyOnWriteArrayList;
+import android.Manifest
+import android.app.Activity
+import android.content.Context
+import android.content.pm.PackageManager
+import android.location.Location
+import android.location.LocationListener
+import android.location.LocationManager
+import android.os.Bundle
+import androidx.core.app.ActivityCompat
+import timber.log.Timber
+import java.util.concurrent.CopyOnWriteArrayList
 
-import timber.log.Timber;
 
-public class LocationServiceManager implements LocationListener {
+class LocationServiceManager(private val context: Context) : LocationListener {
 
-    // Maybe these values can be improved for efficiency
-    private static final long MIN_LOCATION_UPDATE_REQUEST_TIME_IN_MILLIS = 10 * 100;
-    private static final long MIN_LOCATION_UPDATE_REQUEST_DISTANCE_IN_METERS = 1;
+    companion object {
+        // Maybe these values can be improved for efficiency
+        private const val MIN_LOCATION_UPDATE_REQUEST_TIME_IN_MILLIS = 10 * 100L
+        private const val MIN_LOCATION_UPDATE_REQUEST_DISTANCE_IN_METERS = 1f
+    }
 
-    private LocationManager locationManager;
-    private Location lastLocation;
-    //private Location lastLocationDuplicate; // Will be used for nearby card view on contributions activity
-    private final List<LocationUpdateListener> locationListeners = new CopyOnWriteArrayList<>();
-    private boolean isLocationManagerRegistered = false;
-    private Set<Activity> locationExplanationDisplayed = new HashSet<>();
-    private Context context;
+    private val locationManager: LocationManager =
+        context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
+    var lastLocationVar: Location? = null
+    private val locationListeners = CopyOnWriteArrayList<LocationUpdateListener>()
+    private var isLocationManagerRegistered = false
+    private val locationExplanationDisplayed = mutableSetOf<Activity>()
 
     /**
      * Constructs a new instance of LocationServiceManager.
      *
-     * @param context the context
      */
-    public LocationServiceManager(Context context) {
-        this.context = context;
-        this.locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
+    fun getLastLocation(): LatLng? {
+        if (lastLocationVar == null) {
+            lastLocationVar = getLastKnownLocation()
+            return lastLocationVar?.let { LatLng.from(it) }
+        }
+        return LatLng.from(lastLocationVar!!)
     }
 
-    public LatLng getLastLocation() {
-        if (lastLocation == null) {
-                lastLocation = getLastKnownLocation();
-                if(lastLocation != null) {
-                    return LatLng.from(lastLocation);
-                }
-                else {
-                    return null;
-                }
-        }
-        return LatLng.from(lastLocation);
-    }
+    private fun getLastKnownLocation(): Location? {
+        val providers = locationManager.getProviders(true)
+        var bestLocation: Location? = null
+        for (provider in providers) {
+            val location: Location? = if (
+                ActivityCompat.checkSelfPermission(
+                    context,
+                    Manifest.permission.ACCESS_FINE_LOCATION)
+                ==
+                PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(
+                    context,
+                    Manifest.permission.ACCESS_COARSE_LOCATION)
+                ==
+                PackageManager.PERMISSION_GRANTED
+            ) {
+                locationManager.getLastKnownLocation(provider)
+            } else {
+                null
+            }
 
-    private Location getLastKnownLocation() {
-        List<String> providers = locationManager.getProviders(true);
-        Location bestLocation = null;
-        for (String provider : providers) {
-            Location l=null;
-            if (ActivityCompat.checkSelfPermission(context, permission.ACCESS_FINE_LOCATION)
-                == PackageManager.PERMISSION_GRANTED
-                && ActivityCompat.checkSelfPermission(context, permission.ACCESS_COARSE_LOCATION)
-                == PackageManager.PERMISSION_GRANTED) {
-                l = locationManager.getLastKnownLocation(provider);
-            }
-            if (l == null) {
-                continue;
-            }
-            if (bestLocation == null
-                || l.getAccuracy() < bestLocation.getAccuracy()) {
-                bestLocation = l;
+            if (
+                location != null
+                &&
+                (bestLocation == null || location.accuracy < bestLocation.accuracy)
+            ) {
+                bestLocation = location
             }
         }
-        if (bestLocation == null) {
-            return null;
-        }
-        return bestLocation;
+        return bestLocation
     }
 
     /**
      * Registers a LocationManager to listen for current location.
      */
-    public void registerLocationManager() {
+    fun registerLocationManager() {
         if (!isLocationManagerRegistered) {
-            isLocationManagerRegistered = requestLocationUpdatesFromProvider(LocationManager.NETWORK_PROVIDER)
-                    && requestLocationUpdatesFromProvider(LocationManager.GPS_PROVIDER);
+            isLocationManagerRegistered =
+                requestLocationUpdatesFromProvider(LocationManager.NETWORK_PROVIDER) &&
+                    requestLocationUpdatesFromProvider(LocationManager.GPS_PROVIDER)
         }
     }
 
@@ -94,100 +89,86 @@ public class LocationServiceManager implements LocationListener {
      * @param locationProvider the location provider
      * @return true if successful
      */
-    public boolean requestLocationUpdatesFromProvider(String locationProvider) {
-        try {
-            // If both providers are not available
-            if (locationManager == null || !(locationManager.getAllProviders().contains(locationProvider))) {
-                return false;
-            }
-            locationManager.requestLocationUpdates(locationProvider,
+    fun requestLocationUpdatesFromProvider(locationProvider: String): Boolean {
+        return try {
+            if (locationManager.allProviders.contains(locationProvider)) {
+                locationManager.requestLocationUpdates(
+                    locationProvider,
                     MIN_LOCATION_UPDATE_REQUEST_TIME_IN_MILLIS,
                     MIN_LOCATION_UPDATE_REQUEST_DISTANCE_IN_METERS,
-                    this);
-            return true;
-        } catch (IllegalArgumentException e) {
-            Timber.e(e, "Illegal argument exception");
-            return false;
-        } catch (SecurityException e) {
-            Timber.e(e, "Security exception");
-            return false;
+                    this
+                )
+                true
+            } else {
+                false
+            }
+        } catch (e: IllegalArgumentException) {
+            Timber.e(e, "Illegal argument exception")
+            false
+        } catch (e: SecurityException) {
+            Timber.e(e, "Security exception")
+            false
         }
     }
 
     /**
      * Returns whether a given location is better than the current best location.
      *
-     * @param location            the location to be tested
+     * @param location the location to be tested
      * @param currentBestLocation the current best location
      * @return LOCATION_SIGNIFICANTLY_CHANGED if location changed significantly
      * LOCATION_SLIGHTLY_CHANGED if location changed slightly
      */
-    private LocationChangeType isBetterLocation(Location location, Location currentBestLocation) {
-
+    private fun isBetterLocation(location: Location, currentBestLocation: Location?): LocationChangeType {
         if (currentBestLocation == null) {
-            // A new location is always better than no location
-            return LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED;
+            return LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED
         }
 
-        // Check whether the new location fix is newer or older
-        long timeDelta = location.getTime() - currentBestLocation.getTime();
-        boolean isSignificantlyNewer = timeDelta > MIN_LOCATION_UPDATE_REQUEST_TIME_IN_MILLIS;
-        boolean isNewer = timeDelta > 0;
+        val timeDelta = location.time - currentBestLocation.time
+        val isSignificantlyNewer = timeDelta > MIN_LOCATION_UPDATE_REQUEST_TIME_IN_MILLIS
+        val isNewer = timeDelta > 0
+        val accuracyDelta = (location.accuracy - currentBestLocation.accuracy).toInt()
+        val isMoreAccurate = accuracyDelta < 0
+        val isSignificantlyLessAccurate = accuracyDelta > 200
+        val isFromSameProvider = isSameProvider(location.provider, currentBestLocation.provider)
 
-        // Check whether the new location fix is more or less accurate
-        int accuracyDelta = (int) (location.getAccuracy() - currentBestLocation.getAccuracy());
-        boolean isLessAccurate = accuracyDelta > 0;
-        boolean isMoreAccurate = accuracyDelta < 0;
-        boolean isSignificantlyLessAccurate = accuracyDelta > 200;
-
-        // Check if the old and new location are from the same provider
-        boolean isFromSameProvider = isSameProvider(location.getProvider(),
-                currentBestLocation.getProvider());
-
-        float[] results = new float[5];
+        val results = FloatArray(5)
         Location.distanceBetween(
-                        currentBestLocation.getLatitude(),
-                        currentBestLocation.getLongitude(),
-                        location.getLatitude(),
-                        location.getLongitude(),
-                        results);
+            currentBestLocation.latitude, currentBestLocation.longitude,
+            location.latitude, location.longitude,
+            results
+        )
 
-        // If it's been more than two minutes since the current location, use the new location
-        // because the user has likely moved
-        if (isSignificantlyNewer
-                || isMoreAccurate
-                || (isNewer && !isLessAccurate)
-                || (isNewer && !isSignificantlyLessAccurate && isFromSameProvider)) {
-            if (results[0] < 1000) { // Means change is smaller than 1000 meter
-                return LocationChangeType.LOCATION_SLIGHTLY_CHANGED;
-            } else {
-                return LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED;
+        return when {
+            isSignificantlyNewer
+                    ||
+                    isMoreAccurate
+                    ||
+                    (isNewer && !isSignificantlyLessAccurate && isFromSameProvider) -> {
+                if (results[0] < 1000) LocationChangeType.LOCATION_SLIGHTLY_CHANGED
+                else LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED
             }
-        } else{
-            return LocationChangeType.LOCATION_NOT_CHANGED;
+            else -> LocationChangeType.LOCATION_NOT_CHANGED
         }
     }
 
     /**
      * Checks whether two providers are the same
      */
-    private boolean isSameProvider(String provider1, String provider2) {
-        if (provider1 == null) {
-            return provider2 == null;
-        }
-        return provider1.equals(provider2);
+    private fun isSameProvider(provider1: String?, provider2: String?): Boolean {
+        return provider1 == provider2
     }
 
     /**
      * Unregisters location manager.
      */
-    public void unregisterLocationManager() {
-        isLocationManagerRegistered = false;
-        locationExplanationDisplayed.clear();
+    fun unregisterLocationManager() {
+        isLocationManagerRegistered = false
+        locationExplanationDisplayed.clear()
         try {
-            locationManager.removeUpdates(this);
-        } catch (SecurityException e) {
-            Timber.e(e, "Security exception");
+            locationManager.removeUpdates(this)
+        } catch (e: SecurityException) {
+            Timber.e(e, "Security exception")
         }
     }
 
@@ -196,9 +177,9 @@ public class LocationServiceManager implements LocationListener {
      *
      * @param listener the new listener
      */
-    public void addLocationListener(LocationUpdateListener listener) {
+    fun addLocationListener(listener: LocationUpdateListener) {
         if (!locationListeners.contains(listener)) {
-            locationListeners.add(listener);
+            locationListeners.add(listener)
         }
     }
 
@@ -207,64 +188,55 @@ public class LocationServiceManager implements LocationListener {
      *
      * @param listener the listener to be removed
      */
-    public void removeLocationListener(LocationUpdateListener listener) {
-        locationListeners.remove(listener);
+    fun removeLocationListener(listener: LocationUpdateListener) {
+        locationListeners.remove(listener)
     }
 
-    @Override
-    public void onLocationChanged(Location location) {
-        Timber.d("on location changed");
-            if (isBetterLocation(location, lastLocation)
-                    .equals(LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED)) {
-                lastLocation = location;
-                //lastLocationDuplicate = location;
-                for (LocationUpdateListener listener : locationListeners) {
-                    listener.onLocationChangedSignificantly(LatLng.from(lastLocation));
-                }
-            } else if (location.distanceTo(lastLocation) >= 500) {
-                // Update nearby notification card at every 500 meters.
-                for (LocationUpdateListener listener : locationListeners) {
-                    listener.onLocationChangedMedium(LatLng.from(lastLocation));
-                }
-            }
-
-            else if (isBetterLocation(location, lastLocation)
-                    .equals(LocationChangeType.LOCATION_SLIGHTLY_CHANGED)) {
-                lastLocation = location;
-                //lastLocationDuplicate = location;
-                for (LocationUpdateListener listener : locationListeners) {
-                    listener.onLocationChangedSlightly(LatLng.from(lastLocation));
-                }
-            }
+    override fun onLocationChanged(location: Location) {
+        Timber.d("on location changed")
+        val changeType = isBetterLocation(location, lastLocationVar)
+        if (changeType == LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED) {
+            lastLocationVar = location
+            locationListeners.forEach { it.onLocationChangedSignificantly(LatLng.from(location)) }
+        } else if (lastLocationVar?.let { location.distanceTo(it) }!! >= 500) {
+            locationListeners.forEach { it.onLocationChangedMedium(LatLng.from(location)) }
+        } else if (changeType == LocationChangeType.LOCATION_SLIGHTLY_CHANGED) {
+            lastLocationVar = location
+            locationListeners.forEach { it.onLocationChangedSlightly(LatLng.from(location)) }
+        }
     }
 
-    @Override
-    public void onStatusChanged(String provider, int status, Bundle extras) {
-        Timber.d("%s's status changed to %d", provider, status);
+    @Deprecated("Deprecated in Java", ReplaceWith(
+        "Timber.d(\"%s's status changed to %d\", provider, status)",
+        "timber.log.Timber"
+    )
+    )
+    override fun onStatusChanged(provider: String?, status: Int, extras: Bundle?) {
+        Timber.d("%s's status changed to %d", provider, status)
     }
 
-    @Override
-    public void onProviderEnabled(String provider) {
-        Timber.d("Provider %s enabled", provider);
+
+
+    override fun onProviderEnabled(provider: String) {
+        Timber.d("Provider %s enabled", provider)
     }
 
-    @Override
-    public void onProviderDisabled(String provider) {
-        Timber.d("Provider %s disabled", provider);
+    override fun onProviderDisabled(provider: String) {
+        Timber.d("Provider %s disabled", provider)
     }
 
-    public boolean isNetworkProviderEnabled() {
-        return locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+    fun isNetworkProviderEnabled(): Boolean {
+        return locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
     }
 
-    public boolean isGPSProviderEnabled() {
-        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+    fun isGPSProviderEnabled(): Boolean {
+        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
     }
 
-    public enum LocationChangeType{
-        LOCATION_SIGNIFICANTLY_CHANGED, //Went out of borders of nearby markers
-        LOCATION_SLIGHTLY_CHANGED,      //User might be walking or driving
-        LOCATION_MEDIUM_CHANGED,      //Between slight and significant changes, will be used for nearby card view updates.
+    enum class LocationChangeType {
+        LOCATION_SIGNIFICANTLY_CHANGED,
+        LOCATION_SLIGHTLY_CHANGED,
+        LOCATION_MEDIUM_CHANGED,
         LOCATION_NOT_CHANGED,
         PERMISSION_JUST_GRANTED,
         MAP_UPDATED,
@@ -272,3 +244,12 @@ public class LocationServiceManager implements LocationListener {
         CUSTOM_QUERY
     }
 }
+
+
+
+
+
+
+
+
+

@@ -1,7 +1,12 @@
-package fr.free.nrw.commons.location;
+package fr.free.nrw.commons.location
 
-public interface LocationUpdateListener {
-    void onLocationChangedSignificantly(LatLng latLng); // Will be used to update all nearby markers on the map
-    void onLocationChangedSlightly(LatLng latLng); // Will be used to track users motion
-    void onLocationChangedMedium(LatLng latLng); // Will be used updating nearby card view notification
+interface LocationUpdateListener {
+    // Will be used to update all nearby markers on the map
+    fun onLocationChangedSignificantly(latLng: LatLng)
+
+    // Will be used to track users motion
+    fun onLocationChangedSlightly(latLng: LatLng)
+
+    // Will be used updating nearby card view notification
+    fun onLocationChangedMedium(latLng: LatLng)
 }

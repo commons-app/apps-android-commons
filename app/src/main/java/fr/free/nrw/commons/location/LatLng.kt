@@ -1,132 +1,106 @@
-package fr.free.nrw.commons.location;
+package fr.free.nrw.commons.location
 
-import android.location.Location;
-import android.net.Uri;
-import android.os.Parcel;
-import android.os.Parcelable;
+import android.location.Location
+import android.net.Uri
+import android.os.Parcel
+import android.os.Parcelable
+import kotlin.math.abs
+import kotlin.math.max
+import kotlin.math.min
+import kotlin.math.round
 
-import androidx.annotation.NonNull;
 
 /**
- * a latitude and longitude point with accuracy information, often of a picture
+ * A latitude and longitude point with accuracy information, often of a picture.
  */
-public class LatLng implements Parcelable {
-
-    private final double latitude;
-    private final double longitude;
-    private final float accuracy;
+data class LatLng(
+    var latitude: Double,
+    var longitude: Double,
+    val accuracy: Float
+) : Parcelable {
 
     /**
      * Accepts latitude and longitude.
      * North and South values are cut off at 90°
-     *
-     * @param latitude the latitude
-     * @param longitude the longitude
-     * @param accuracy the accuracy
      *
      * Examples:
      * the Statue of Liberty is located at 40.69° N, 74.04° W
      * The Statue of Liberty could be constructed as LatLng(40.69, -74.04, 1.0)
      * where positive signifies north, east and negative signifies south, west.
      */
-    public LatLng(double latitude, double longitude, float accuracy) {
-        if (-180.0D <= longitude && longitude < 180.0D) {
-            this.longitude = longitude;
-        } else {
-            this.longitude = ((longitude - 180.0D) % 360.0D + 360.0D) % 360.0D - 180.0D;
+    init {
+        val adjustedLongitude = when {
+            longitude in -180.0..180.0 -> longitude
+            else -> ((longitude - 180.0) % 360.0 + 360.0) % 360.0 - 180.0
         }
-        this.latitude = Math.max(-90.0D, Math.min(90.0D, latitude));
-        this.accuracy = accuracy;
+        latitude = max(-90.0, min(90.0, latitude))
+        longitude = adjustedLongitude
     }
+
+    /**
+     * Accepts a non-null [Location] and converts it to a [LatLng].
+     */
+    companion object {
+        /**
+         * gets the latitude and longitude of a given non-null location
+         * @param location the non-null location of the user
+         * @return LatLng the Latitude and Longitude of a given location
+         */
+        @JvmStatic
+        fun from(location: Location): LatLng {
+            return LatLng(location.latitude, location.longitude, location.accuracy)
+        }
+
+        @JvmField
+        val CREATOR: Parcelable.Creator<LatLng> = object : Parcelable.Creator<LatLng> {
+            override fun createFromParcel(parcel: Parcel): LatLng {
+                return LatLng(parcel)
+            }
+
+            override fun newArray(size: Int): Array<LatLng?> {
+                return arrayOfNulls(size)
+            }
+        }
+    }
+
     /**
      * An alternate constructor for this class.
-     * @param in A parcelable which contains the latitude, longitude, and accuracy
+     * @param parcel A parcelable which contains the latitude, longitude, and accuracy
      */
-    public LatLng(Parcel in) {
-        latitude = in.readDouble();
-        longitude = in.readDouble();
-        accuracy = in.readFloat();
+    private constructor(parcel: Parcel) : this(
+        latitude = parcel.readDouble(),
+        longitude = parcel.readDouble(),
+        accuracy = parcel.readFloat()
+    )
+
+    /**
+     * Creates a hash code for the latitude and longitude.
+     */
+    override fun hashCode(): Int {
+        var result = 1
+        val latitudeBits = latitude.toBits()
+        result = 31 * result + (latitudeBits xor (latitudeBits ushr 32)).toInt()
+        val longitudeBits = longitude.toBits()
+        result = 31 * result + (longitudeBits xor (longitudeBits ushr 32)).toInt()
+        return result
     }
 
     /**
-     * gets the latitude and longitude of a given non-null location
-     * @param location the non-null location of the user
-     * @return LatLng the Latitude and Longitude of a given location
+     * Checks for equality of two LatLng objects.
+     * @param other the second LatLng object
      */
-    public static LatLng from(@NonNull Location location) {
-        return new LatLng(location.getLatitude(), location.getLongitude(), location.getAccuracy());
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other !is LatLng) return false
+        return latitude.toBits() == other.latitude.toBits() &&
+                longitude.toBits() == other.longitude.toBits()
     }
 
     /**
-     * creates a hash code for the longitude and longitude
+     * Returns a string representation of the latitude and longitude.
      */
-    public int hashCode() {
-        byte var1 = 1;
-        long var2 = Double.doubleToLongBits(this.latitude);
-        int var3 = 31 * var1 + (int)(var2 ^ var2 >>> 32);
-        var2 = Double.doubleToLongBits(this.longitude);
-        var3 = 31 * var3 + (int)(var2 ^ var2 >>> 32);
-        return var3;
-    }
-
-    /**
-     * checks for equality of two LatLng objects
-     * @param o the second LatLng object
-     */
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        } else if (!(o instanceof LatLng)) {
-            return false;
-        } else {
-            LatLng var2 = (LatLng)o;
-            return Double.doubleToLongBits(this.latitude) == Double.doubleToLongBits(var2.latitude) && Double.doubleToLongBits(this.longitude) == Double.doubleToLongBits(var2.longitude);
-        }
-    }
-
-    /**
-     * returns a string representation of the latitude and longitude
-     */
-    public String toString() {
-        return "lat/lng: (" + this.latitude + "," + this.longitude + ")";
-    }
-
-    /**
-     * Rounds the float to 4 digits and returns absolute value.
-     *
-     * @param coordinate A coordinate value as string.
-     * @return String of the rounded number.
-     */
-    private String formatCoordinate(double coordinate) {
-        double roundedNumber = Math.round(coordinate * 10000d) / 10000d;
-        double absoluteNumber = Math.abs(roundedNumber);
-        return String.valueOf(absoluteNumber);
-    }
-
-    /**
-     * Returns "N" or "S" depending on the latitude.
-     *
-     * @return "N" or "S".
-     */
-    private String getNorthSouth() {
-        if (this.latitude < 0) {
-            return "S";
-        }
-
-        return "N";
-    }
-
-    /**
-     * Returns "E" or "W" depending on the longitude.
-     *
-     * @return "E" or "W".
-     */
-    private String getEastWest() {
-        if (this.longitude >= 0 && this.longitude < 180) {
-            return "E";
-        }
-
-        return "W";
+    override fun toString(): String {
+        return "lat/lng: ($latitude,$longitude)"
     }
 
     /**
@@ -135,64 +109,42 @@ public class LatLng implements Parcelable {
      *
      * @return The formatted string.
      */
-    public String getPrettyCoordinateString() {
-        return formatCoordinate(this.latitude) + " " + this.getNorthSouth() + ", "
-               + formatCoordinate(this.longitude) + " " + this.getEastWest();
+    fun getPrettyCoordinateString(): String {
+        return "${formatCoordinate(latitude)} ${getNorthSouth()}, " +
+                "${formatCoordinate(longitude)} ${getEastWest()}"
     }
 
     /**
-     * Return the location accuracy in meter.
-     *
-     * @return float
+     * Gets a URI for a Google Maps intent at the location.
      */
-    public float getAccuracy() {
-        return accuracy;
+    fun getGmmIntentUri(): Uri {
+        return Uri.parse("geo:$latitude,$longitude?z=16")
+    }
+
+    override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeDouble(latitude)
+        parcel.writeDouble(longitude)
+        parcel.writeFloat(accuracy)
+    }
+
+    override fun describeContents(): Int = 0
+
+    private fun formatCoordinate(coordinate: Double): String {
+        val roundedNumber = round(coordinate * 10000) / 10000
+        return abs(roundedNumber).toString()
     }
 
     /**
-     * Return the longitude in degrees.
+     * Returns "N" or "S" depending on the latitude.
      *
-     * @return double
+     * @return "N" or "S".
      */
-    public double getLongitude() {
-        return longitude;
-    }
+    private fun getNorthSouth(): String = if (latitude < 0) "S" else "N"
 
     /**
-     * Return the latitude in degrees.
+     * Returns "E" or "W" depending on the longitude.
      *
-     * @return double
+     * @return "E" or "W".
      */
-    public double getLatitude() {
-        return latitude;
-    }
-
-    public Uri getGmmIntentUri() {
-        return Uri.parse("geo:" + latitude + "," + longitude + "?z=16");
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeDouble(latitude);
-        dest.writeDouble(longitude);
-        dest.writeFloat(accuracy);
-    }
-
-    public static final Creator<LatLng> CREATOR = new Creator<LatLng>() {
-        @Override
-        public LatLng createFromParcel(Parcel in) {
-            return new LatLng(in);
-        }
-
-        @Override
-        public LatLng[] newArray(int size) {
-            return new LatLng[size];
-        }
-    };
+    private fun getEastWest(): String = if (longitude in 0.0..179.999) "E" else "W"
 }
-
