@@ -28,9 +28,9 @@ import fr.free.nrw.commons.customselector.helper.CustomSelectorConstants
 import fr.free.nrw.commons.customselector.helper.CustomSelectorConstants.SHOULD_REFRESH
 import fr.free.nrw.commons.customselector.helper.ImageHelper
 import fr.free.nrw.commons.customselector.helper.OnSwipeTouchListener
-import fr.free.nrw.commons.customselector.model.CallbackStatus
-import fr.free.nrw.commons.customselector.model.Image
-import fr.free.nrw.commons.customselector.model.Result
+import fr.free.nrw.commons.customselector.domain.model.CallbackStatus
+import fr.free.nrw.commons.customselector.domain.model.Image
+import fr.free.nrw.commons.customselector.domain.model.Result
 import fr.free.nrw.commons.customselector.ui.selector.CustomSelectorViewModel
 import fr.free.nrw.commons.customselector.ui.selector.CustomSelectorViewModelFactory
 import fr.free.nrw.commons.databinding.ActivityZoomableBinding
