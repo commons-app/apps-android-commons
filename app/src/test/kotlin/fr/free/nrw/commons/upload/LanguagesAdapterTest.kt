@@ -54,8 +54,8 @@ class LanguagesAdapterTest {
                 .from(context)
                 .inflate(R.layout.row_item_languages_spinner, null) as View
 
-        languageNamesList = language.localizedNames
-        languageCodesList = language.codes
+        languageNamesList = language.getLocalizedNames()
+        languageCodesList = language.getCodes()
 
         languagesAdapter = LanguagesAdapter(context, selectedLanguages)
     }
@@ -124,12 +124,12 @@ class LanguagesAdapterTest {
         var i = 0
         var s = 0
         while (i < length) {
-            val key: String = language.codes[i]
-            val value: String = language.localizedNames[i]
+            val key: String = language.getCodes()[i]
+            val value: String = language.getLocalizedNames()[i]
             if (value.contains(constraint, true) ||
                 Locale(key)
                     .getDisplayName(
-                        Locale(language.codes[defaultlanguagecode!!]),
+                        Locale(language.getCodes()[defaultlanguagecode!!]),
                     ).contains(constraint, true)
             ) {
                 s++
