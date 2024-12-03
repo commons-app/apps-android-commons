@@ -45,7 +45,7 @@ class OkHttpJsonApiClient @Inject constructor(
     private val gson: Gson
 ) {
     fun getLeaderboard(
-        userName: String, duration: String?,
+        userName: String?, duration: String?,
         category: String?, limit: String?, offset: String?
     ): Observable<LeaderboardResponse> {
         val fetchLeaderboardUrlTemplate =
@@ -80,7 +80,7 @@ class OkHttpJsonApiClient @Inject constructor(
         })
     }
 
-    fun setAvatar(username: String, avatar: String?): Single<UpdateAvatarResponse?> {
+    fun setAvatar(username: String?, avatar: String?): Single<UpdateAvatarResponse?> {
         val urlTemplate = wikiMediaToolforgeUrl
             .toString() + LeaderboardConstants.UPDATE_AVATAR_END_POINT
         return Single.fromCallable<UpdateAvatarResponse?>({
