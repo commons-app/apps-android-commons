@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.edit
 
+import android.Manifest
 import android.animation.Animator
 import android.animation.Animator.AnimatorListener
 import android.animation.ValueAnimator
@@ -20,6 +21,11 @@ import androidx.lifecycle.ViewModelProvider
 import fr.free.nrw.commons.databinding.ActivityEditBinding
 import timber.log.Timber
 import java.io.File
+import androidx.core.content.ContextCompat
+import android.content.pm.PackageManager
+import androidx.core.app.ActivityCompat
+
+
 
 /**
  * An activity class for editing and rotating images using LLJTran with EXIF attribute preservation.
@@ -34,6 +40,8 @@ class EditActivity : AppCompatActivity() {
     private lateinit var vm: EditViewModel
     private val sourceExifAttributeList = mutableListOf<Pair<String, String?>>()
     private lateinit var binding: ActivityEditBinding
+
+    private final var WRITE_EXTERNAL_STORAGE_PERMISSION_REQUEST_CODE = 7747;
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -239,6 +247,12 @@ class EditActivity : AppCompatActivity() {
      * as a result, and finishes the current activity.
      */
     fun getRotatedImage() {
+        //Get Permission to access
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+            != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), WRITE_EXTERNAL_STORAGE_PERMISSION_REQUEST_CODE)
+        }
+
         val filePath = imageUri.toUri().path
         val file = filePath?.let { File(it) }
 
