@@ -7,6 +7,8 @@ import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.auth.csrf.InvalidLoginTokenException
 import fr.free.nrw.commons.bookmarks.items.BookmarkItemsController
 import fr.free.nrw.commons.di.CommonsApplicationModule
+import fr.free.nrw.commons.di.CommonsApplicationModule.Companion.IO_THREAD
+import fr.free.nrw.commons.di.CommonsApplicationModule.Companion.MAIN_THREAD
 import fr.free.nrw.commons.repository.UploadRepository
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
 import fr.free.nrw.commons.wikidata.WikidataDisambiguationItems
@@ -31,8 +33,8 @@ class DepictsPresenter
     @Inject
     constructor(
         private val repository: UploadRepository,
-        @param:Named(CommonsApplicationModule.IO_THREAD) private val ioScheduler: Scheduler,
-        @param:Named(CommonsApplicationModule.MAIN_THREAD) private val mainThreadScheduler: Scheduler,
+        @param:Named(IO_THREAD) private val ioScheduler: Scheduler,
+        @param:Named(MAIN_THREAD) private val mainThreadScheduler: Scheduler,
     ) : DepictsContract.UserActionListener {
         companion object {
             private val DUMMY = proxy<DepictsContract.View>()

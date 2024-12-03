@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.upload;
 
 
+import static fr.free.nrw.commons.di.CommonsApplicationModule.IO_THREAD;
 import static fr.free.nrw.commons.utils.ImageUtils.IMAGE_OK;
 
 import android.content.Context;
@@ -53,7 +54,7 @@ public class PendingUploadsPresenter implements UserActionListener {
         final ContributionsRemoteDataSource contributionsRemoteDataSource,
         final ContributionsRepository contributionsRepository,
         final UploadRepository uploadRepository,
-        @Named(CommonsApplicationModule.IO_THREAD) final Scheduler ioThreadScheduler) {
+        @Named(IO_THREAD) final Scheduler ioThreadScheduler) {
         this.contributionBoundaryCallback = contributionBoundaryCallback;
         this.contributionsRepository = contributionsRepository;
         this.uploadRepository = uploadRepository;

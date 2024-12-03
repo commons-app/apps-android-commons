@@ -1,7 +1,7 @@
 package fr.free.nrw.commons.contributions
 
 import androidx.paging.ItemKeyedDataSource
-import fr.free.nrw.commons.di.CommonsApplicationModule
+import fr.free.nrw.commons.di.CommonsApplicationModule.Companion.IO_THREAD
 import fr.free.nrw.commons.media.MediaClient
 import io.reactivex.Scheduler
 import io.reactivex.disposables.CompositeDisposable
@@ -16,7 +16,7 @@ class ContributionsRemoteDataSource
     @Inject
     constructor(
         private val mediaClient: MediaClient,
-        @param:Named(CommonsApplicationModule.IO_THREAD) private val ioThreadScheduler: Scheduler,
+        @param:Named(IO_THREAD) private val ioThreadScheduler: Scheduler,
     ) : ItemKeyedDataSource<Int, Contribution>() {
         private val compositeDisposable: CompositeDisposable = CompositeDisposable()
         var userName: String? = null
