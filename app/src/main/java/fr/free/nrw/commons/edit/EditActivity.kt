@@ -6,6 +6,7 @@ import android.animation.ValueAnimator
 import android.content.Intent
 import android.graphics.BitmapFactory
 import android.graphics.Matrix
+//noinspection ExifInterface TODO Issue : #5994
 import android.media.ExifInterface
 import android.os.Bundle
 import android.view.animation.AccelerateDecelerateInterpolator
@@ -44,6 +45,9 @@ class EditActivity : AppCompatActivity() {
         imageUri = intent.getStringExtra("image") ?: ""
         vm = ViewModelProvider(this)[EditViewModel::class.java]
         val sourceExif = imageUri.toUri().path?.let { ExifInterface(it) }
+        // TODO(Deprecation : 'TAG_APERTURE: String' is deprecated. Deprecated in Java)
+        // TODO(Deprecation : 'TAG_ISO: String' is deprecated. Deprecated in Java)
+        @Suppress("DEPRECATION")
         val exifTags =
             arrayOf(
                 ExifInterface.TAG_APERTURE,
