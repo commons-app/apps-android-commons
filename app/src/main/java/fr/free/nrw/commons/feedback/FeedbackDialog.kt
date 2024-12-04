@@ -23,6 +23,8 @@ class FeedbackDialog(
     private val onFeedbackSubmitCallback: OnFeedbackSubmitCallback) : Dialog(context) {
     private var _binding: DialogFeedbackBinding? = null
     private val binding get() = _binding!!
+    // TODO("Remove Deprecation") //'fromHtml(String!): Spanned!' is deprecated. Deprecated in Java
+    @Suppress("DEPRECATION")
     private var feedbackDestinationHtml: Spanned = Html.fromHtml(
         context.getString(R.string.feedback_destination_note))
 
@@ -33,6 +35,8 @@ class FeedbackDialog(
         setContentView(binding.root)
         binding.feedbackDestination.text = feedbackDestinationHtml
         binding.feedbackDestination.movementMethod = LinkMovementMethod.getInstance()
+        // TODO("DEPRECATION") // 'SOFT_INPUT_ADJUST_RESIZE: Int' is deprecated. Deprecated in Java
+        @Suppress("DEPRECATION")
         window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
         binding.btnSubmitFeedback.setOnClickListener {
             submitFeedback()
