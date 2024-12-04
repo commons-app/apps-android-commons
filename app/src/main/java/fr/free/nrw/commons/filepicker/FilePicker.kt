@@ -29,7 +29,6 @@ object FilePicker : Constants {
      * Returns the uri of the clicked image so that it can be put in MediaStore
      */
     @Throws(IOException::class)
-
     @JvmStatic
     private fun createCameraPictureFile(context: Context): Uri {
         val imagePath = PickedFiles.getCameraPicturesLocation(context)
