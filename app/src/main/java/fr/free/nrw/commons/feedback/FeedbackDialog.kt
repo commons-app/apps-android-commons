@@ -27,7 +27,7 @@ class FeedbackDialog(
         context.getString(R.string.feedback_destination_note))
 
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+    public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         _binding = DialogFeedbackBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -40,7 +40,7 @@ class FeedbackDialog(
 
     }
 
-    private fun submitFeedback() {
+    fun submitFeedback() {
         if (binding.feedbackItemEditText.getText().toString() == "") {
             binding.feedbackItemEditText.error = context.getString(R.string.enter_description)
             return
