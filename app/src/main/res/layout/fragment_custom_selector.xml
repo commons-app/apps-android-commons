@@ -18,6 +18,18 @@
     android:padding="@dimen/dimen_10"
     android:checked="true" />
 
+  <TextView
+    android:id="@+id/appreciationText"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:textSize="18sp"
+    android:visibility="gone"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    android:padding="10dp"
+    android:text="@string/appreciation_text"/>
+
+
   <com.simplecityapps.recyclerview_fastscroll.views.FastScrollRecyclerView
     android:id="@+id/selector_rv"
     android:layout_width="match_parent"
