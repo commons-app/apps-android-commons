@@ -1,67 +1,62 @@
-package fr.free.nrw.commons.filepicker;
+package fr.free.nrw.commons.filepicker
 
-import android.content.ContentResolver;
-import android.content.Context;
-import android.media.MediaScannerConnection;
-import android.net.Uri;
-import android.os.Environment;
-import android.webkit.MimeTypeMap;
+import android.content.ContentResolver
+import android.content.Context
+import android.media.MediaScannerConnection
+import android.net.Uri
+import android.os.Environment
+import android.webkit.MimeTypeMap
+import androidx.core.content.FileProvider
+import fr.free.nrw.commons.filepicker.Constants.Companion.DEFAULT_FOLDER_NAME
+import timber.log.Timber
+import java.io.File
+import java.io.FileInputStream
+import java.io.FileOutputStream
+import java.io.IOException
+import java.io.InputStream
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
+import java.util.UUID
 
-import androidx.annotation.NonNull;
-import androidx.core.content.FileProvider;
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
-import java.util.UUID;
-
-import timber.log.Timber;
 
 /**
  * PickedFiles.
  * Process the upload items.
  */
-public class PickedFiles implements Constants {
+object PickedFiles : Constants {
 
     /**
      * Get Folder Name
-     * @param context
      * @return default application folder name.
      */
-    private static String getFolderName(@NonNull Context context) {
-        return FilePicker.configuration(context).getFolderName();
+    private fun getFolderName(context: Context): String {
+        return FilePicker.configuration(context).getFolderName()
     }
 
     /**
      * tempImageDirectory
-     * @param context
      * @return temporary image directory to copy and perform exif changes.
      */
-    private static File tempImageDirectory(@NonNull Context context) {
-        File privateTempDir = new File(context.getCacheDir(), DEFAULT_FOLDER_NAME);
-        if (!privateTempDir.exists()) privateTempDir.mkdirs();
-        return privateTempDir;
+    private fun tempImageDirectory(context: Context): File {
+        val privateTempDir = File(context.cacheDir, DEFAULT_FOLDER_NAME)
+        if (!privateTempDir.exists()) privateTempDir.mkdirs()
+        return privateTempDir
     }
 
     /**
      * writeToFile
-     * writes inputStream data to the destination file.
-     * @param in input stream of source file.
-     * @param file destination file
+     * Writes inputStream data to the destination file.
      */
-    private static void writeToFile(InputStream in, File file) throws IOException {
-        try (OutputStream out = new FileOutputStream(file)) {
-            byte[] buf = new byte[1024];
-            int len;
-            while ((len = in.read(buf)) > 0) {
-                out.write(buf, 0, len);
+    @Throws(IOException::class)
+    private fun writeToFile(inputStream: InputStream, file: File) {
+        inputStream.use { input ->
+            FileOutputStream(file).use { output ->
+                val buffer = ByteArray(1024)
+                var length: Int
+                while (input.read(buffer).also { length = it } > 0) {
+                    output.write(buffer, 0, length)
+                }
             }
         }
     }
@@ -69,129 +64,111 @@ public class PickedFiles implements Constants {
     /**
      * Copy file function.
      * Copies source file to destination file.
-     * @param src source file
-     * @param dst destination file
-     * @throws IOException (File input stream exception)
      */
-    private static void copyFile(File src, File dst) throws IOException {
-        try (InputStream in = new FileInputStream(src)) {
-            writeToFile(in, dst);
+    @Throws(IOException::class)
+    private fun copyFile(src: File, dst: File) {
+        FileInputStream(src).use { inputStream ->
+            writeToFile(inputStream, dst)
         }
     }
 
     /**
      * Copy files in separate thread.
      * Copies all the uploadable files to the temp image folder on background thread.
-     * @param context
-     * @param filesToCopy uploadable file list to be copied.
      */
-    static void copyFilesInSeparateThread(final Context context, final List<UploadableFile> filesToCopy) {
-        new Thread(() -> {
-            List<File> copiedFiles = new ArrayList<>();
-            int i = 1;
-            for (UploadableFile uploadableFile : filesToCopy) {
-                File fileToCopy = uploadableFile.getFile();
-                File dstDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), getFolderName(context));
-                if (!dstDir.exists()) {
-                    dstDir.mkdirs();
-                }
+    fun copyFilesInSeparateThread(context: Context, filesToCopy: List<UploadableFile>) {
+        Thread {
+            val copiedFiles = mutableListOf<File>()
+            var index = 1
+            filesToCopy.forEach { uploadableFile ->
+                val fileToCopy = uploadableFile.file
+                val dstDir = File(
+                    Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES),
+                    getFolderName(context)
+                )
+                if (!dstDir.exists()) dstDir.mkdirs()
 
-                String[] filenameSplit = fileToCopy.getName().split("\\.");
-                String extension = "." + filenameSplit[filenameSplit.length - 1];
-                String filename = String.format("IMG_%s_%d.%s", new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime()), i, extension);
+                val filenameSplit = fileToCopy.name.split(".")
+                val extension = ".${filenameSplit.last()}"
+                val filename = "IMG_${SimpleDateFormat(
+                    "yyyyMMdd_HHmmss",
+                    Locale.getDefault()).format(Date())}_$index$extension"
+                val dstFile = File(dstDir, filename)
 
-                File dstFile = new File(dstDir, filename);
                 try {
-                    dstFile.createNewFile();
-                    copyFile(fileToCopy, dstFile);
-                    copiedFiles.add(dstFile);
-                } catch (IOException e) {
-                    e.printStackTrace();
+                    dstFile.createNewFile()
+                    copyFile(fileToCopy, dstFile)
+                    copiedFiles.add(dstFile)
+                } catch (e: IOException) {
+                    e.printStackTrace()
                 }
-                i++;
+                index++
             }
-            scanCopiedImages(context, copiedFiles);
-        }).run();
+            scanCopiedImages(context, copiedFiles)
+        }.start()
     }
 
     /**
-     * singleFileList.
-     * converts a single uploadableFile to list of uploadableFile.
-     * @param file uploadable file
-     * @return
+     * singleFileList
+     * Converts a single uploadableFile to list of uploadableFile.
      */
-    static List<UploadableFile> singleFileList(UploadableFile file) {
-        List<UploadableFile> list = new ArrayList<>();
-        list.add(file);
-        return list;
+    fun singleFileList(file: UploadableFile): List<UploadableFile> {
+        return listOf(file)
     }
 
     /**
      * ScanCopiedImages
-     * Scan copied images metadata using media scanner.
-     * @param context
-     * @param copiedImages copied images list.
+     * Scans copied images metadata using media scanner.
      */
-    static void scanCopiedImages(Context context, List<File> copiedImages) {
-        String[] paths = new String[copiedImages.size()];
-        for (int i = 0; i < copiedImages.size(); i++) {
-            paths[i] = copiedImages.get(i).toString();
+    fun scanCopiedImages(context: Context, copiedImages: List<File>) {
+        val paths = copiedImages.map { it.toString() }.toTypedArray()
+        MediaScannerConnection.scanFile(context, paths, null) { path, uri ->
+            Timber.d("Scanned $path:")
+            Timber.d("-> uri=$uri")
         }
-
-        MediaScannerConnection.scanFile(context,
-                paths, null,
-                (path, uri) -> {
-                    Timber.d("Scanned " + path + ":");
-                    Timber.d("-> uri=%s", uri);
-                });
     }
 
     /**
      * pickedExistingPicture
-     * convert the image into uploadable file.
-     * @param photoUri Uri of the image.
-     * @return Uploadable file ready for tag redaction.
+     * Convert the image into uploadable file.
      */
-    public static UploadableFile pickedExistingPicture(@NonNull Context context, Uri photoUri) throws IOException, SecurityException {// SecurityException for those file providers who share URI but forget to grant necessary permissions
-        File directory = tempImageDirectory(context);
-        File photoFile = new File(directory, UUID.randomUUID().toString() + "." + getMimeType(context, photoUri));
+    @Throws(IOException::class, SecurityException::class)
+    fun pickedExistingPicture(context: Context, photoUri: Uri): UploadableFile {
+        val directory = tempImageDirectory(context)
+        val mimeType = getMimeType(context, photoUri)
+        val photoFile = File(directory, "${UUID.randomUUID()}.$mimeType")
+
         if (photoFile.createNewFile()) {
-            try (InputStream pictureInputStream = context.getContentResolver().openInputStream(photoUri)) {
-                writeToFile(pictureInputStream, photoFile);
+            context.contentResolver.openInputStream(photoUri)?.use { inputStream ->
+                writeToFile(inputStream, photoFile)
             }
         } else {
-            throw new IOException("could not create photoFile to write upon");
+            throw IOException("Could not create photoFile to write upon")
         }
-        return new UploadableFile(photoUri, photoFile);
+        return UploadableFile(photoUri, photoFile)
     }
 
     /**
      * getCameraPictureLocation
      */
-    static File getCameraPicturesLocation(@NonNull Context context) throws IOException {
-        File dir = tempImageDirectory(context);
-        return File.createTempFile(UUID.randomUUID().toString(), ".jpg", dir);
+    @Throws(IOException::class)
+    fun getCameraPicturesLocation(context: Context): File {
+        val dir = tempImageDirectory(context)
+        return File.createTempFile(UUID.randomUUID().toString(), ".jpg", dir)
     }
 
     /**
-     * To find out the extension of required object in given uri
-     * Solution by http://stackoverflow.com/a/36514823/1171484
+     * To find out the extension of the required object in a given uri
      */
-    private static String getMimeType(@NonNull Context context, @NonNull Uri uri) {
-        String extension;
-
-        //Check uri format to avoid null
-        if (uri.getScheme().equals(ContentResolver.SCHEME_CONTENT)) {
-            //If scheme is a content
-            extension = MimeTypeMapWrapper.getExtensionFromMimeType(context.getContentResolver().getType(uri));
+    private fun getMimeType(context: Context, uri: Uri): String {
+        return if (uri.scheme == ContentResolver.SCHEME_CONTENT) {
+            context.contentResolver.getType(uri)
+                ?.let { MimeTypeMapWrapper.getExtensionFromMimeType(it) }
         } else {
-            //If scheme is a File
-            //This will replace white spaces with %20 and also other special characters. This will avoid returning null values on file name with spaces and special characters.
-            extension = MimeTypeMap.getFileExtensionFromUrl(Uri.fromFile(new File(uri.getPath())).toString());
-
-        }
-
-        return extension;
+            MimeTypeMap.getFileExtensionFromUrl(
+                Uri.fromFile(uri.path?.let { File(it) }).toString()
+            )
+        } ?: "jpg" // Default to jpg if unable to determine type
     }
 
     /**
@@ -199,10 +176,9 @@ public class PickedFiles implements Constants {
      * @param file get uri of file
      * @return uri of requested file.
      */
-    static Uri getUriToFile(@NonNull Context context, @NonNull File file) {
-        String packageName = context.getApplicationContext().getPackageName();
-        String authority = packageName + ".provider";
-        return FileProvider.getUriForFile(context, authority, file);
+    fun getUriToFile(context: Context, file: File): Uri {
+        val packageName = context.applicationContext.packageName
+        val authority = "$packageName.provider"
+        return FileProvider.getUriForFile(context, authority, file)
     }
-
 }

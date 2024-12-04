@@ -1,44 +1,46 @@
-package fr.free.nrw.commons.filepicker;
+package fr.free.nrw.commons.filepicker
 
-import android.content.Context;
-import androidx.preference.PreferenceManager;
+import android.content.Context
+import androidx.preference.PreferenceManager
 
-public class FilePickerConfiguration implements Constants {
+class FilePickerConfiguration(
+    private val context: Context
+): Constants {
 
-    private Context context;
-
-    FilePickerConfiguration(Context context) {
-        this.context = context;
-    }
-
-    public FilePickerConfiguration setAllowMultiplePickInGallery(boolean allowMultiple) {
+    fun setAllowMultiplePickInGallery(allowMultiple: Boolean): FilePickerConfiguration {
         PreferenceManager.getDefaultSharedPreferences(context).edit()
-                .putBoolean(BundleKeys.ALLOW_MULTIPLE, allowMultiple)
-                .apply();
-        return this;
+            .putBoolean(Constants.BundleKeys.ALLOW_MULTIPLE, allowMultiple)
+            .apply()
+        return this
     }
 
-    public FilePickerConfiguration setCopyTakenPhotosToPublicGalleryAppFolder(boolean copy) {
+    fun setCopyTakenPhotosToPublicGalleryAppFolder(copy: Boolean): FilePickerConfiguration {
         PreferenceManager.getDefaultSharedPreferences(context).edit()
-                .putBoolean(BundleKeys.COPY_TAKEN_PHOTOS, copy)
-                .apply();
-        return this;
+            .putBoolean(Constants.BundleKeys.COPY_TAKEN_PHOTOS, copy)
+            .apply()
+        return this
     }
 
-    public String getFolderName() {
-        return PreferenceManager.getDefaultSharedPreferences(context).getString(BundleKeys.FOLDER_NAME, DEFAULT_FOLDER_NAME);
+    fun getFolderName(): String {
+        return PreferenceManager.getDefaultSharedPreferences(context)
+            .getString(
+                Constants.BundleKeys.FOLDER_NAME,
+                Constants.DEFAULT_FOLDER_NAME
+            ) ?: Constants.DEFAULT_FOLDER_NAME
     }
 
-    public boolean allowsMultiplePickingInGallery() {
-        return PreferenceManager.getDefaultSharedPreferences(context).getBoolean(BundleKeys.ALLOW_MULTIPLE, false);
+    fun allowsMultiplePickingInGallery(): Boolean {
+        return PreferenceManager.getDefaultSharedPreferences(context)
+            .getBoolean(Constants.BundleKeys.ALLOW_MULTIPLE, false)
     }
 
-    public boolean shouldCopyTakenPhotosToPublicGalleryAppFolder() {
-        return PreferenceManager.getDefaultSharedPreferences(context).getBoolean(BundleKeys.COPY_TAKEN_PHOTOS, false);
+    fun shouldCopyTakenPhotosToPublicGalleryAppFolder(): Boolean {
+        return PreferenceManager.getDefaultSharedPreferences(context)
+            .getBoolean(Constants.BundleKeys.COPY_TAKEN_PHOTOS, false)
     }
 
-    public boolean shouldCopyPickedImagesToPublicGalleryAppFolder() {
-        return PreferenceManager.getDefaultSharedPreferences(context).getBoolean(BundleKeys.COPY_PICKED_IMAGES, false);
+    fun shouldCopyPickedImagesToPublicGalleryAppFolder(): Boolean {
+        return PreferenceManager.getDefaultSharedPreferences(context)
+            .getBoolean(Constants.BundleKeys.COPY_PICKED_IMAGES, false)
     }
-
 }

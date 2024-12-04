@@ -1,213 +1,168 @@
-package fr.free.nrw.commons.filepicker;
+package fr.free.nrw.commons.filepicker
 
-import android.annotation.SuppressLint;
-import android.content.Context;
-import android.database.Cursor;
-import android.net.Uri;
-import android.os.Parcel;
-import android.os.Parcelable;
+import android.annotation.SuppressLint
+import android.content.Context
+import android.database.Cursor
+import android.net.Uri
+import android.os.Parcel
+import android.os.Parcelable
 
-import androidx.annotation.Nullable;
-import androidx.exifinterface.media.ExifInterface;
+import androidx.exifinterface.media.ExifInterface
 
-import fr.free.nrw.commons.upload.FileUtils;
-import java.io.File;
-import java.io.IOException;
-import java.util.Date;
-import timber.log.Timber;
+import fr.free.nrw.commons.upload.FileUtils
+import java.io.File
+import java.io.IOException
+import java.util.Date
+import timber.log.Timber
 
-public class UploadableFile implements Parcelable {
-    public static final Creator<UploadableFile> CREATOR = new Creator<UploadableFile>() {
-        @Override
-        public UploadableFile createFromParcel(Parcel in) {
-            return new UploadableFile(in);
-        }
+class UploadableFile : Parcelable {
 
-        @Override
-        public UploadableFile[] newArray(int size) {
-            return new UploadableFile[size];
-        }
-    };
+    val contentUri: Uri
+    val file: File
 
-    private final Uri contentUri;
-    private final File file;
-
-    public UploadableFile(Uri contentUri, File file) {
-        this.contentUri = contentUri;
-        this.file = file;
+    constructor(contentUri: Uri, file: File) {
+        this.contentUri = contentUri
+        this.file = file
     }
 
-    public UploadableFile(File file) {
-        this.file = file;
-        this.contentUri = Uri.fromFile(new File(file.getPath()));
+    constructor(file: File) {
+        this.file = file
+        this.contentUri = Uri.fromFile(File(file.path))
     }
 
-    public UploadableFile(Parcel in) {
-        this.contentUri = in.readParcelable(Uri.class.getClassLoader());
-        file = (File) in.readSerializable();
+    private constructor(parcel: Parcel) {
+        contentUri = parcel.readParcelable(Uri::class.java.classLoader)!!
+        file = parcel.readSerializable() as File
     }
 
-    public Uri getContentUri() {
-        return contentUri;
+    fun getFilePath(): String {
+        return file.path
     }
 
-    public File getFile() {
-        return file;
+    fun getMediaUri(): Uri {
+        return Uri.parse(getFilePath())
     }
 
-    public String getFilePath() {
-        return file.getPath();
+    fun getMimeType(context: Context): String? {
+        return FileUtils.getMimeType(context, getMediaUri())
     }
 
-    public Uri getMediaUri() {
-        return Uri.parse(getFilePath());
-    }
+    override fun describeContents(): Int = 0
 
-    public String getMimeType(Context context) {
-        return FileUtils.getMimeType(context, getMediaUri());
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
+    /**
+     * First try to get the file creation date from EXIF, else fall back to Content Provider (CP)
+     */
+    fun getFileCreatedDate(context: Context): DateTimeWithSource? {
+        return getDateTimeFromExif() ?: getFileCreatedDateFromCP(context)
     }
 
     /**
-     * First try to get the file creation date from EXIF else fall back to CP
-     * @param context
-     * @return
+     * Get filePath creation date from URI using all possible content providers
      */
-    @Nullable
-    public DateTimeWithSource getFileCreatedDate(Context context) {
-        DateTimeWithSource dateTimeFromExif = getDateTimeFromExif();
-        if (dateTimeFromExif == null) {
-            return getFileCreatedDateFromCP(context);
-        } else {
-            return dateTimeFromExif;
-        }
-    }
-
-    /**
-     * Get filePath creation date from uri from all possible content providers
-     *
-     * @return
-     */
-    private DateTimeWithSource getFileCreatedDateFromCP(Context context) {
-        try {
-            Cursor cursor = context.getContentResolver().query(contentUri, null, null, null, null);
-            if (cursor == null) {
-                return null;//Could not fetch last_modified
+    private fun getFileCreatedDateFromCP(context: Context): DateTimeWithSource? {
+        return try {
+            val cursor: Cursor? = context.contentResolver.query(contentUri, null, null, null, null)
+            cursor?.use {
+                val lastModifiedColumnIndex = cursor
+                    .getColumnIndex(
+                        "last_modified"
+                    ).takeIf { it != -1 }
+                    ?: cursor.getColumnIndex("datetaken")
+                if (lastModifiedColumnIndex == -1) return null // No valid column found
+                cursor.moveToFirst()
+                DateTimeWithSource(
+                    cursor.getLong(
+                        lastModifiedColumnIndex
+                    ), DateTimeWithSource.CP_SOURCE)
             }
-            //Content provider contracts for opening gallery from the app and that by sharing from gallery from outside are different and we need to handle both the cases
-            int lastModifiedColumnIndex = cursor.getColumnIndex("last_modified");//If gallery is opened from in app
-            if (lastModifiedColumnIndex == -1) {
-                lastModifiedColumnIndex = cursor.getColumnIndex("datetaken");
-            }
-            //If both the content providers do not give the data, lets leave it to Jesus
-            if (lastModifiedColumnIndex == -1) {
-                cursor.close();
-                return null;
-            }
-            cursor.moveToFirst();
-            return new DateTimeWithSource(cursor.getLong(lastModifiedColumnIndex), DateTimeWithSource.CP_SOURCE);
-        } catch (Exception e) {
-            return null;////Could not fetch last_modified
+        } catch (e: Exception) {
+            Timber.tag("UploadableFile").d(e)
+            null
         }
     }
 
     /**
-     * Indicate whether the EXIF contains the location (both latitude and longitude).
-     *
-     * @return whether the location exists for the file's EXIF
+     * Indicates whether the EXIF contains the location (both latitude and longitude).
      */
-    public boolean hasLocation() {
-        try {
-            ExifInterface exif = new ExifInterface(file.getAbsolutePath());
-            final String latitude = exif.getAttribute(ExifInterface.TAG_GPS_LATITUDE);
-            final String longitude = exif.getAttribute(ExifInterface.TAG_GPS_LATITUDE);
-            return latitude != null && longitude != null;
-        } catch (IOException | NumberFormatException | IndexOutOfBoundsException e) {
-            Timber.tag("UploadableFile");
-            Timber.d(e);
+    fun hasLocation(): Boolean {
+        return try {
+            val exif = ExifInterface(file.absolutePath)
+            val latitude = exif.getAttribute(ExifInterface.TAG_GPS_LATITUDE)
+            val longitude = exif.getAttribute(ExifInterface.TAG_GPS_LONGITUDE)
+            latitude != null && longitude != null
+        } catch (e: IOException) {
+            Timber.tag("UploadableFile").d(e)
+            false
         }
-        return false;
     }
 
     /**
-     * Get filePath creation date from uri from EXIF
-     *
-     * @return
+     * Get filePath creation date from URI using EXIF data
      */
-    private DateTimeWithSource getDateTimeFromExif() {
-        try {
-            ExifInterface exif = new ExifInterface(file.getAbsolutePath());
-            // TAG_DATETIME returns the last edited date, we need TAG_DATETIME_ORIGINAL for creation date
-            // See issue https://github.com/commons-app/apps-android-commons/issues/1971
-            String dateTimeSubString = exif.getAttribute(ExifInterface.TAG_DATETIME_ORIGINAL);
-            if (dateTimeSubString!=null) { //getAttribute may return null
-                String year = dateTimeSubString.substring(0,4);
-                String month = dateTimeSubString.substring(5,7);
-                String day = dateTimeSubString.substring(8,10);
-                // This date is stored as a string (not as a date), the rason is we don't want to include timezones
-                String dateCreatedString = String.format("%04d-%02d-%02d", Integer.parseInt(year), Integer.parseInt(month), Integer.parseInt(day));
-                if (dateCreatedString.length() == 10) { //yyyy-MM-dd format of date is expected
-                    @SuppressLint("RestrictedApi") Long dateTime = exif.getDateTimeOriginal();
-                    if(dateTime != null){
-                        Date date = new Date(dateTime);
-                        return new DateTimeWithSource(date, dateCreatedString, DateTimeWithSource.EXIF_SOURCE);
+    private fun getDateTimeFromExif(): DateTimeWithSource? {
+        return try {
+            val exif = ExifInterface(file.absolutePath)
+            val dateTimeSubString = exif.getAttribute(ExifInterface.TAG_DATETIME_ORIGINAL)
+            if (dateTimeSubString != null) {
+                val year = dateTimeSubString.substring(0, 4).toInt()
+                val month = dateTimeSubString.substring(5, 7).toInt()
+                val day = dateTimeSubString.substring(8, 10).toInt()
+                val dateCreatedString = "%04d-%02d-%02d".format(year, month, day)
+                if (dateCreatedString.length == 10) {
+                    @SuppressLint("RestrictedApi")
+                    val dateTime = exif.dateTimeOriginal
+                    if (dateTime != null) {
+                        val date = Date(dateTime)
+                        return DateTimeWithSource(date, dateCreatedString, DateTimeWithSource.EXIF_SOURCE)
                     }
                 }
             }
-        } catch (IOException | NumberFormatException | IndexOutOfBoundsException e) {
-            Timber.tag("UploadableFile");
-            Timber.d(e);
+            null
+        } catch (e: Exception) {
+            Timber.tag("UploadableFile").d(e)
+            null
         }
-        return null;
     }
 
-    @Override
-    public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeParcelable(contentUri, 0);
-        parcel.writeSerializable(file);
+    override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeParcelable(contentUri, flags)
+        parcel.writeSerializable(file)
     }
 
-    /**
-     * This class contains the epochDate along with the source from which it was extracted
-     */
-    public class DateTimeWithSource {
-        public static final String CP_SOURCE = "contentProvider";
-        public static final String EXIF_SOURCE = "exif";
-
-        private final long epochDate;
-        private String dateString; // this does not includes timezone information
-        private final String source;
-
-        public DateTimeWithSource(long epochDate, String source) {
-            this.epochDate = epochDate;
-            this.source = source;
+    class DateTimeWithSource {
+        companion object {
+            const val CP_SOURCE = "contentProvider"
+            const val EXIF_SOURCE = "exif"
         }
 
-        public DateTimeWithSource(Date date, String source) {
-            this.epochDate = date.getTime();
-            this.source = source;
+        val epochDate: Long
+        var dateString: String? = null
+        val source: String
+
+        constructor(epochDate: Long, source: String) {
+            this.epochDate = epochDate
+            this.source = source
         }
 
-        public DateTimeWithSource(Date date, String dateString, String source) {
-            this.epochDate = date.getTime();
-            this.dateString = dateString;
-            this.source = source;
+        constructor(date: Date, source: String) {
+            epochDate = date.time
+            this.source = source
         }
 
-        public long getEpochDate() {
-            return epochDate;
+        constructor(date: Date, dateString: String, source: String) {
+            epochDate = date.time
+            this.dateString = dateString
+            this.source = source
+        }
+    }
+
+    companion object CREATOR : Parcelable.Creator<UploadableFile> {
+        override fun createFromParcel(parcel: Parcel): UploadableFile {
+            return UploadableFile(parcel)
         }
 
-        public String getDateString() {
-            return dateString;
-        }
-
-        public String getSource() {
-            return source;
+        override fun newArray(size: Int): Array<UploadableFile?> {
+            return arrayOfNulls(size)
         }
     }
 }

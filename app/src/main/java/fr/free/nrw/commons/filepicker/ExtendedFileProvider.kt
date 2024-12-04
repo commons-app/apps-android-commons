@@ -1,7 +1,5 @@
-package fr.free.nrw.commons.filepicker;
+package fr.free.nrw.commons.filepicker
 
-import androidx.core.content.FileProvider;
+import androidx.core.content.FileProvider
 
-public class ExtendedFileProvider extends FileProvider {
-
-}
+class ExtendedFileProvider: FileProvider() {}

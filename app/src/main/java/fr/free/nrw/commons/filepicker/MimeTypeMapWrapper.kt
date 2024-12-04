@@ -1,26 +1,24 @@
-package fr.free.nrw.commons.filepicker;
+package fr.free.nrw.commons.filepicker
 
-import android.webkit.MimeTypeMap;
+import android.webkit.MimeTypeMap
 
-import com.facebook.common.internal.ImmutableMap;
+class MimeTypeMapWrapper {
 
-import java.util.Map;
+    companion object {
+        private val sMimeTypeMap = MimeTypeMap.getSingleton()
 
-public class MimeTypeMapWrapper {
+        private val sMimeTypeToExtensionMap = mapOf(
+            "image/heif" to "heif",
+            "image/heic" to "heic"
+        )
 
-    private static final MimeTypeMap sMimeTypeMap = MimeTypeMap.getSingleton();
-
-    private static final Map<String, String> sMimeTypeToExtensionMap =
-            ImmutableMap.of(
-                    "image/heif", "heif",
-                    "image/heic", "heic");
-
-    public static String getExtensionFromMimeType(String mimeType) {
-        String result = sMimeTypeToExtensionMap.get(mimeType);
-        if (result != null) {
-            return result;
+        @JvmStatic
+        fun getExtensionFromMimeType(mimeType: String): String? {
+            val result = sMimeTypeToExtensionMap[mimeType]
+            if (result != null) {
+                return result
+            }
+            return sMimeTypeMap.getExtensionFromMimeType(mimeType)
         }
-        return sMimeTypeMap.getExtensionFromMimeType(mimeType);
     }
-
 }

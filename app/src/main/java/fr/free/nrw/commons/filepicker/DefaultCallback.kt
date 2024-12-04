@@ -1,16 +1,12 @@
-package fr.free.nrw.commons.filepicker;
+package fr.free.nrw.commons.filepicker
 
 /**
  * Provides abstract methods which are overridden while handling Contribution Results
- * inside the ContributionsController 
+ * inside the ContributionsController
  */
-public abstract class DefaultCallback implements FilePicker.Callbacks {
+abstract class DefaultCallback: FilePicker.Callbacks {
 
-    @Override
-    public void onImagePickerError(Exception e, FilePicker.ImageSource source, int type) {
-    }
+    override fun onImagePickerError(e: Exception, source: FilePicker.ImageSource, type: Int) {}
 
-    @Override
-    public void onCanceled(FilePicker.ImageSource source, int type) {
-    }
+    override fun onCanceled(source: FilePicker.ImageSource, type: Int) {}
 }
