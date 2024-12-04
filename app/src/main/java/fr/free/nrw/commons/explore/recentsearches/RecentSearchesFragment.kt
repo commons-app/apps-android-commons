@@ -1,147 +1,167 @@
-package fr.free.nrw.commons.explore.recentsearches;
+package fr.free.nrw.commons.explore.recentsearches
 
-import android.content.Context;
-import android.content.DialogInterface;
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.Toast;
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.databinding.FragmentSearchHistoryBinding;
-import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
-import fr.free.nrw.commons.explore.SearchActivity;
-import java.util.List;
-import java.util.Locale;
-import javax.inject.Inject;
-
+import android.content.Context
+import android.content.DialogInterface
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.ArrayAdapter
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+import fr.free.nrw.commons.R
+import fr.free.nrw.commons.databinding.FragmentSearchHistoryBinding
+import fr.free.nrw.commons.di.CommonsDaggerSupportFragment
+import fr.free.nrw.commons.explore.SearchActivity
+import javax.inject.Inject
 
 /**
  * Displays the recent searches screen.
  */
-public class RecentSearchesFragment extends CommonsDaggerSupportFragment {
+class RecentSearchesFragment : CommonsDaggerSupportFragment() {
 
-    @Inject
-    RecentSearchesDao recentSearchesDao;
-    List<String> recentSearches;
-    ArrayAdapter adapter;
+    @set:Inject
+    var recentSearchesDao: RecentSearchesDao? = null
+    private var _binding: FragmentSearchHistoryBinding? = null
+    private val binding get() = _binding!!
+    private var recentSearches: List<String> = emptyList()
+    var adapter: ArrayAdapter<String>? = null
 
-    private FragmentSearchHistoryBinding binding;
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-        Bundle savedInstanceState) {
-        binding = FragmentSearchHistoryBinding.inflate(inflater, container, false);
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = FragmentSearchHistoryBinding.inflate(inflater, container, false)
 
-        recentSearches = recentSearchesDao.recentSearches(10);
+        val recentSearches = recentSearchesDao?.recentSearches(10) ?: emptyList()
 
         if (recentSearches.isEmpty()) {
-            binding.recentSearchesDeleteButton.setVisibility(View.GONE);
-            binding.recentSearchesTextView.setText(R.string.no_recent_searches);
+            binding.recentSearchesDeleteButton.visibility = View.GONE
+            binding.recentSearchesTextView.setText(R.string.no_recent_searches)
         }
 
-        binding.recentSearchesDeleteButton.setOnClickListener(v -> {
-            showDeleteRecentAlertDialog(requireContext());
-        });
+        binding.recentSearchesDeleteButton.setOnClickListener {
+            showDeleteRecentAlertDialog(requireContext())
+        }
 
-        adapter = new ArrayAdapter<>(requireContext(), R.layout.item_recent_searches,
-            recentSearches);
-        binding.recentSearchesList.setAdapter(adapter);
-        binding.recentSearchesList.setOnItemClickListener((parent, view, position, id) -> (
-            (SearchActivity) getContext()).updateText(recentSearches.get(position)));
-        binding.recentSearchesList.setOnItemLongClickListener((parent, view, position, id) -> {
-            showDeleteAlertDialog(requireContext(), position);
-            return true;
-        });
-        updateRecentSearches();
+        adapter = ArrayAdapter(
+            requireContext(), R.layout.item_recent_searches,
+            recentSearches
+        )
+        binding.recentSearchesList.adapter = adapter
+        binding.recentSearchesList.setOnItemClickListener { _, _, position, _ ->
+            (context as SearchActivity).updateText(
+                recentSearches[position]
+            )
+        }
+        binding.recentSearchesList.setOnItemLongClickListener { _, _, position, _ ->
+            showDeleteAlertDialog(requireContext(), position)
+            true
+        }
+        updateRecentSearches()
 
-        return binding.getRoot();
+        return binding.root
     }
 
-    private void showDeleteRecentAlertDialog(@NonNull final Context context) {
-        new AlertDialog.Builder(context)
+    private fun showDeleteRecentAlertDialog(context: Context) {
+        AlertDialog.Builder(context)
             .setMessage(getString(R.string.delete_recent_searches_dialog))
-            .setPositiveButton(android.R.string.yes,
-                (dialog, which) -> setDeleteRecentPositiveButton(context, dialog))
-            .setNegativeButton(android.R.string.no, null)
+            .setPositiveButton(
+                R.string.yes
+            ) { dialog: DialogInterface?, _ ->
+                if (dialog != null) {
+                    setDeleteRecentPositiveButton(
+                        context,
+                        dialog
+                    )
+                }
+            }
+            .setNegativeButton(R.string.no, null)
             .create()
-            .show();
+            .show()
     }
 
-    private void setDeleteRecentPositiveButton(@NonNull final Context context,
-        final DialogInterface dialog) {
-        recentSearchesDao.deleteAll();
-        if (binding != null) {
-            binding.recentSearchesDeleteButton.setVisibility(View.GONE);
-            binding.recentSearchesTextView.setText(R.string.no_recent_searches);
-            Toast.makeText(getContext(), getString(R.string.search_history_deleted),
-                Toast.LENGTH_SHORT).show();
-            recentSearches = recentSearchesDao.recentSearches(10);
-            adapter = new ArrayAdapter<>(context, R.layout.item_recent_searches,
-                recentSearches);
-            binding.recentSearchesList.setAdapter(adapter);
-            adapter.notifyDataSetChanged();
-        }
-        dialog.dismiss();
+    private fun setDeleteRecentPositiveButton(
+        context: Context,
+        dialog: DialogInterface
+    ) {
+        recentSearchesDao!!.deleteAll()
+        binding.recentSearchesDeleteButton.visibility = View.GONE
+        binding.recentSearchesTextView.setText(R.string.no_recent_searches)
+        Toast.makeText(
+            getContext(), getString(R.string.search_history_deleted),
+            Toast.LENGTH_SHORT
+        ).show()
+        recentSearches = recentSearchesDao!!.recentSearches(10)
+        adapter = ArrayAdapter(
+            context, R.layout.item_recent_searches,
+            recentSearches
+        )
+        binding.recentSearchesList.adapter = adapter
+        adapter?.notifyDataSetChanged()
+        dialog.dismiss()
     }
 
-    private void showDeleteAlertDialog(@NonNull final Context context, final int position) {
-        new AlertDialog.Builder(context)
+    private fun showDeleteAlertDialog(context: Context, position: Int) {
+        AlertDialog.Builder(context)
             .setMessage(R.string.delete_search_dialog)
-            .setPositiveButton(getString(R.string.delete).toUpperCase(Locale.ROOT),
-                ((dialog, which) -> setDeletePositiveButton(context, dialog, position)))
+            .setPositiveButton(
+                getString(R.string.delete).uppercase(),
+                (DialogInterface.OnClickListener { dialog: DialogInterface?, _: Int ->
+                    dialog?.let {
+                        setDeletePositiveButton(
+                            context,
+                            it,
+                            position
+                        )
+                    }
+                })
+            )
             .setNegativeButton(android.R.string.cancel, null)
             .create()
-            .show();
+            .show()
     }
 
-    private void setDeletePositiveButton(@NonNull final Context context,
-        final DialogInterface dialog, final int position) {
-        recentSearchesDao.delete(recentSearchesDao.find(recentSearches.get(position)));
-        recentSearches = recentSearchesDao.recentSearches(10);
-        adapter = new ArrayAdapter<>(context, R.layout.item_recent_searches,
-            recentSearches);
-        if (binding != null){
-            binding.recentSearchesList.setAdapter(adapter);
-            adapter.notifyDataSetChanged();
-        }
-        dialog.dismiss();
+    private fun setDeletePositiveButton(
+        context: Context,
+        dialog: DialogInterface, position: Int
+    ) {
+        recentSearchesDao?.delete(recentSearchesDao?.find(recentSearches[position]))
+        recentSearches = recentSearchesDao!!.recentSearches(10)
+        adapter = ArrayAdapter(
+            context, R.layout.item_recent_searches,
+            recentSearches
+        )
+        binding.recentSearchesList.adapter = adapter
+        adapter?.notifyDataSetChanged()
+        dialog.dismiss()
     }
 
     /**
      * This method is called on back press of activity so we are updating the list from database to
      * refresh the recent searches list.
      */
-    @Override
-    public void onResume() {
-        updateRecentSearches();
-        super.onResume();
+    override fun onResume() {
+        updateRecentSearches()
+        super.onResume()
     }
 
     /**
      * This method is called when search query is null to update Recent Searches
      */
-    public void updateRecentSearches() {
-        recentSearches = recentSearchesDao.recentSearches(10);
-        adapter.notifyDataSetChanged();
+    fun updateRecentSearches() {
+        recentSearches = recentSearchesDao!!.recentSearches(10)
+        adapter?.notifyDataSetChanged()
 
-        if (!recentSearches.isEmpty()) {
-            if (binding!= null) {
-                binding.recentSearchesDeleteButton.setVisibility(View.VISIBLE);
-                binding.recentSearchesTextView.setText(R.string.search_recent_header);
-            }
+        if (recentSearches.isNotEmpty()) {
+            binding.recentSearchesDeleteButton.visibility = View.VISIBLE
+            binding.recentSearchesTextView.setText(R.string.search_recent_header)
         }
     }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-
-        if (binding != null) {
-            binding = null;
-        }
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 }
