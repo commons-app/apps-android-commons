@@ -21,6 +21,7 @@
 * Okkerem
 * Oyuncu
 * Rapsar
+* RuzDD
 * SaldırganSincap
 * Sayginer
 * Sezgin İbiş
@@ -146,6 +147,7 @@
   <string name="categories_search_text_hint">Kategori ara</string>
   <string name="depicts_search_text_hint">Medyanızın tasvir ettiği ögeleri arayın (dağ, Tac Mahal, vb.)</string>
   <string name="menu_save_categories">Kaydet</string>
+  <string name="menu_overflow_desc">Taşma menüsü</string>
   <string name="refresh_button">Yenile</string>
   <string name="display_list_button">Liste</string>
   <string name="contributions_subtitle_zero">!Henüz yükleme yok)</string>
@@ -800,6 +802,7 @@
   <string name="please_enter_some_comments">Lütfen bir yorum girin</string>
   <string name="talk">Tartışma</string>
   <string name="write_something_about_the_item">\' %1$s \' öğesi hakkında bir şeyler yazın. Herkes tarafından görülebilir olacaktır.</string>
+  <string name="does_not_exist_anymore_no_picture_can_ever_be_taken_of_it">\'%1$s\' artık yok, dolayısı ile resmi çekilemez.</string>
   <string name="other_problem_or_information_please_explain_below">Diğer sorun veya bilgi (lütfen aşağıda açıklayınız).</string>
   <string name="feedback_destination_note">Geri bildiriminiz aşağıdaki wiki sayfasına gönderilir:  &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Mobile_app/Feedback\"&gt;Commons:Mobile app/Feedback&lt;/a&gt;</string>
   <string name="are_you_sure_that_you_want_cancel_all_the_uploads">Tüm yüklemeleri iptal etmek istediğinizden emin misiniz?</string>
@@ -807,5 +810,10 @@
   <string name="uploads">Yüklemeler</string>
   <string name="pending">Beklemede</string>
   <string name="failed">Başarısız</string>
+  <string name="custom_selector_delete">Sil</string>
+  <string name="custom_selector_cancel">İptal</string>
+  <string name="custom_selector_folder_deleted_success">%1$s klasörü başarıyla silindi</string>
+  <string name="custom_selector_folder_deleted_failure">%1$s klasörü silinemedi</string>
   <string name="green_pin">Bu yerin zaten bir resmi var.</string>
+  <string name="grey_pin">Şimdi bu yerin bir resime sahip olup olmadığı denetleniyor.</string>
 </resources>
