@@ -38,6 +38,7 @@ import fr.free.nrw.commons.campaigns.CampaignView
 import fr.free.nrw.commons.contributions.ContributionController
 import fr.free.nrw.commons.contributions.MainActivity
 import fr.free.nrw.commons.di.ApplicationlessInjection
+import fr.free.nrw.commons.filepicker.FilePicker
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.location.LocationServiceManager
 import fr.free.nrw.commons.logging.CommonsLogSender
@@ -83,9 +84,17 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
     private val cameraPickLauncherForResult: ActivityResultLauncher<Intent> =
         registerForActivityResult(StartActivityForResult()) { result ->
-        contributionController.handleActivityResultWithCallback(requireActivity()) { callbacks ->
-            contributionController.onPictureReturnedFromCamera(result, requireActivity(), callbacks)
-        }
+        contributionController.handleActivityResultWithCallback(
+            requireActivity(),
+            object: FilePicker.HandleActivityResult {
+                override fun onHandleActivityResult(callbacks: FilePicker.Callbacks) {
+                    contributionController.onPictureReturnedFromCamera(
+                        result,
+                        requireActivity(),
+                        callbacks
+                    )
+                }
+        })
     }
 
     /**
