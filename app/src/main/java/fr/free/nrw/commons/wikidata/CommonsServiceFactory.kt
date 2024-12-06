@@ -10,11 +10,10 @@ class CommonsServiceFactory(
 ) {
     val builder: Retrofit.Builder by lazy {
         // All instances of retrofit share this configuration, but create it lazily
-        Retrofit
-            .Builder()
+        Retrofit.Builder()
             .client(okHttpClient)
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-            .addConverterFactory(GsonConverterFactory.create(GsonUtil.getDefaultGson()))
+            .addConverterFactory(GsonConverterFactory.create(GsonUtil.defaultGson))
     }
 
     val retrofitCache: MutableMap<String, Retrofit> = mutableMapOf()

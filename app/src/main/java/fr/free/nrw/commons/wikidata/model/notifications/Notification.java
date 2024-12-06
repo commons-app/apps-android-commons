@@ -148,7 +148,7 @@ public class Notification {
                 return null;
             }
             if (primaryLink == null && primary instanceof JsonObject) {
-                primaryLink = GsonUtil.getDefaultGson().fromJson(primary, Link.class);
+                primaryLink = GsonUtil.INSTANCE.getDefaultGson().fromJson(primary, Link.class);
             }
             return primaryLink;
         }
