@@ -45,8 +45,8 @@ class EditActivity : AppCompatActivity() {
         imageUri = intent.getStringExtra("image") ?: ""
         vm = ViewModelProvider(this)[EditViewModel::class.java]
         val sourceExif = imageUri.toUri().path?.let { ExifInterface(it) }
-        // TODO(Deprecation : 'TAG_APERTURE: String' is deprecated. Deprecated in Java)
-        // TODO(Deprecation : 'TAG_ISO: String' is deprecated. Deprecated in Java)
+        //TODO(Deprecation : 'TAG_APERTURE: String' is deprecated. Deprecated in Java) Issue : #6001
+        // TODO(Deprecation : 'TAG_ISO: String' is deprecated. Deprecated in Java) Issue : #6001
         @Suppress("DEPRECATION")
         val exifTags =
             arrayOf(
