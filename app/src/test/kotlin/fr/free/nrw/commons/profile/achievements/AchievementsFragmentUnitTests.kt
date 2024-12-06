@@ -79,7 +79,7 @@ class AchievementsFragmentUnitTests {
         fragmentTransaction.commitNowAllowingStateLoss()
 
         layoutInflater = LayoutInflater.from(activity)
-        view = fragment.onCreateView(layoutInflater, activity.findViewById(R.id.container), null)!!
+        view = fragment.onCreateView(layoutInflater, activity.findViewById(R.id.container), null)
 
         achievements = Achievements(0, 0, 0, 0, 0, 0, 0)
     }
