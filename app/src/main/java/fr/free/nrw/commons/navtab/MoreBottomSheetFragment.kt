@@ -111,10 +111,18 @@ class MoreBottomSheetFragment : BottomSheetDialogFragment() {
     private fun setUserName() {
         val store = BasicKvStore(requireContext(), getUserName())
         val level = store.getString("userAchievementsLevel", "0")
-        binding?.moreProfile?.text = if (level == "0") {
-            "${getUserName()} (${getString(R.string.see_your_achievements)})"
+        if (level == "0"){
+            binding?.moreProfile?.text = getString(
+                R.string.profileLevel,
+                getUserName(),
+                getString(R.string.see_your_achievements) // Second argument
+            )
         } else {
-            "${getUserName()} (${getString(R.string.level)} $level)"
+            binding?.moreProfile?.text = getString(
+                R.string.profileLevel,
+                getUserName(),
+                level
+            )
         }
     }
 

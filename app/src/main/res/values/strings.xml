@@ -371,11 +371,13 @@
   <string name="delete">Delete</string>
   <string name="Achievements">Achievements</string>
   <string name="Profile">Profile</string>
+  <string name="badges">Badges</string>
   <string name="statistics">Statistics</string>
   <string name="statistics_thanks">Thanks Received</string>
   <string name="statistics_featured">Featured Images</string>
   <string name="statistics_wikidata_edits">Images via \"Nearby Places\"</string>
-  <string name="level">Level</string>
+  <string name="level">Level %d</string>
+  <string name="profileLevel">%s (Level %s)</string>
   <string name="images_uploaded">Images Uploaded</string>
   <string name="image_reverts">Images Not Reverted</string>
   <string name="images_used_by_wiki">Images Used</string>
