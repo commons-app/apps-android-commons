@@ -52,12 +52,12 @@ class CampaignsPresenter @Inject constructor(
                 return
             }
 
-            okHttpJsonApiClient.campaigns
+            okHttpJsonApiClient.getCampaigns()
                 .observeOn(mainThreadScheduler)
                 .subscribeOn(ioScheduler)
                 .doOnSubscribe { disposable = it }
                 .subscribe({ campaignResponseDTO ->
-                    val campaigns = campaignResponseDTO.campaigns?.toMutableList()
+                    val campaigns = campaignResponseDTO?.campaigns?.toMutableList()
                     if (campaigns.isNullOrEmpty()) {
                         Timber.e("The campaigns list is empty")
                         view!!.showCampaigns(null)

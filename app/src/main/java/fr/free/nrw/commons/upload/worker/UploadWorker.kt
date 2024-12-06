@@ -496,14 +496,14 @@ class UploadWorker(
 
                 withContext(Dispatchers.Main) {
                     wikidataEditService.handleImageClaimResult(
-                        contribution.wikidataPlace,
+                        contribution.wikidataPlace!!,
                         revisionID,
                     )
                 }
             } else {
                 withContext(Dispatchers.Main) {
                     wikidataEditService.handleImageClaimResult(
-                        contribution.wikidataPlace,
+                        contribution.wikidataPlace!!,
                         null,
                     )
                 }
