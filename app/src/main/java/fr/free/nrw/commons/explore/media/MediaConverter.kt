@@ -11,7 +11,6 @@ import fr.free.nrw.commons.wikidata.model.Entities
 import fr.free.nrw.commons.wikidata.model.gallery.ExtMetadata
 import fr.free.nrw.commons.wikidata.model.gallery.ImageInfo
 import fr.free.nrw.commons.wikidata.mwapi.MwQueryPage
-import org.apache.commons.lang3.StringUtils
 import java.text.ParseException
 import java.util.Date
 import javax.inject.Inject
@@ -41,7 +40,7 @@ class MediaConverter
                 metadata.prefixedLicenseUrl,
                 getAuthor(metadata),
                 getAuthor(metadata),
-                MediaDataExtractorUtil.extractCategoriesFromList(metadata.categories),
+                MediaDataExtractorUtil.extractCategoriesFromList(metadata.categories()),
                 metadata.latLng,
                 entity.labels().mapValues { it.value.value() },
                 entity.descriptions().mapValues { it.value.value() },
@@ -104,9 +103,5 @@ private val ExtMetadata.prefixedLicenseUrl: String
         }
 
 private val ExtMetadata.latLng: LatLng?
-    get() =
-        if (!StringUtils.isBlank(gpsLatitude) && !StringUtils.isBlank(gpsLongitude)) {
-            LatLng(gpsLatitude.toDouble(), gpsLongitude.toDouble(), 0.0f)
-        } else {
-            null
-        }
+    get() = LatLng.latLongOrNull(gpsLatitude(), gpsLongitude())
+
