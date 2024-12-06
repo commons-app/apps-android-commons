@@ -62,7 +62,7 @@ class UploadPresenterTest {
         `when`(repository.buildContributions()).thenReturn(Observable.just(contribution))
         uploadableFiles.add(uploadableFile)
         `when`(view.uploadableFiles).thenReturn(uploadableFiles)
-        `when`(uploadableFile.filePath).thenReturn("data://test")
+        `when`(uploadableFile.getFilePath()).thenReturn("data://test")
     }
 
     /**
