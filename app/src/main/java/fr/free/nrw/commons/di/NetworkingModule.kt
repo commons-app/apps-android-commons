@@ -44,7 +44,6 @@ import okhttp3.logging.HttpLoggingInterceptor
 import okhttp3.logging.HttpLoggingInterceptor.Level
 import timber.log.Timber
 import java.io.File
-import java.util.Locale
 import java.util.concurrent.TimeUnit
 import javax.inject.Named
 import javax.inject.Singleton
@@ -293,9 +292,8 @@ class NetworkingModule {
     @Provides
     @Singleton
     @Named(NAMED_LANGUAGE_WIKI_PEDIA_WIKI_SITE)
-    fun provideLanguageWikipediaSite(): WikiSite {
-        return WikiSite.forLanguageCode(Locale.getDefault().language)
-    }
+    fun provideLanguageWikipediaSite(): WikiSite =
+        WikiSite.forDefaultLocaleLanguageCode()
 
     companion object {
         private const val WIKIDATA_SPARQL_QUERY_URL = "https://query.wikidata.org/sparql"
