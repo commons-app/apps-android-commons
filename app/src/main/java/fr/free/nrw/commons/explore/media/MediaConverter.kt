@@ -23,7 +23,7 @@ class MediaConverter
             entity: Entities.Entity,
             imageInfo: ImageInfo,
         ): Media {
-            val metadata = imageInfo.metadata
+            val metadata = imageInfo.getMetadata()
             requireNotNull(metadata) { "No metadata" }
             // Stores mapping of title attribute to hidden attribute of each category
             val myMap = mutableMapOf<String, Boolean>()
@@ -31,8 +31,8 @@ class MediaConverter
 
             return Media(
                 page.pageId().toString(),
-                imageInfo.thumbUrl.takeIf { it.isNotBlank() } ?: imageInfo.originalUrl,
-                imageInfo.originalUrl,
+                imageInfo.getThumbUrl().takeIf { it.isNotBlank() } ?: imageInfo.getOriginalUrl(),
+                imageInfo.getOriginalUrl(),
                 page.title(),
                 metadata.imageDescription(),
                 safeParseDate(metadata.dateTime()),
