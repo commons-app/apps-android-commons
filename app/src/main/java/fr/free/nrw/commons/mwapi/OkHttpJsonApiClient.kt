@@ -90,11 +90,9 @@ class OkHttpJsonApiClient @Inject constructor(
         val urlBuilder = BuildConfig.FILE_USAGES_BASE_URL.toHttpUrlOrNull()!!.newBuilder()
         urlBuilder.addQueryParameter("prop", "fileusage")
         urlBuilder.addQueryParameter("titles", fileName)
-        //TODO[Parry] might need pagination
         urlBuilder.addQueryParameter("fulimit", pageSize.toString())
 
         Timber.i("Url %s", urlBuilder.toString())
-        println(urlBuilder.build())
         val request: Request = Request.Builder()
             .url(urlBuilder.toString())
             .build()
@@ -109,11 +107,9 @@ class OkHttpJsonApiClient @Inject constructor(
                         FileUsagesResponse::class.java
                     )
                 } catch (e: java.lang.Exception) {
-                    println("exception raised " + e.message)
                     return@fromCallable null
                 }
             }
-            println("something else happend error")
             null
         })
     }
@@ -125,11 +121,9 @@ class OkHttpJsonApiClient @Inject constructor(
         val urlBuilder = BuildConfig.FILE_USAGES_BASE_URL.toHttpUrlOrNull()!!.newBuilder()
         urlBuilder.addQueryParameter("prop", "globalusage")
         urlBuilder.addQueryParameter("titles", fileName)
-        //TODO[Parry] might need pagination
         urlBuilder.addQueryParameter("gulimit", pageSize.toString())
 
         Timber.i("Url %s", urlBuilder.toString())
-        println(urlBuilder.build())
         val request: Request = Request.Builder()
             .url(urlBuilder.toString())
             .build()

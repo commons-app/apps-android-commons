@@ -31,10 +31,6 @@ class MediaDetailViewModel(
         MutableStateFlow<FileUsagesContainerState>(FileUsagesContainerState.Initial)
     val globalContainerState = _globalContainerState.asStateFlow()
 
-    init {
-        println("on this init ${hashCode()}")
-    }
-
     fun loadFileUsagesCommons(fileName: String) {
 
         viewModelScope.launch(Dispatchers.IO) {
@@ -93,11 +89,6 @@ class MediaDetailViewModel(
             }
         }
 
-    }
-
-    override fun onCleared() {
-        println("on this ${hashCode()} viewModel cleared")
-        super.onCleared()
     }
 
     sealed class FileUsagesContainerState {
