@@ -1158,12 +1158,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
         resultSingle
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(s -> {
-                if(applicationKvStore.getBoolean(String.format(NOMINATING_FOR_DELETION_MEDIA, media.getImageUrl()), false)) {
-                    applicationKvStore.remove(String.format(NOMINATING_FOR_DELETION_MEDIA, media.getImageUrl()));
-                    callback.nominatingForDeletion(index);
-                }
-            });
+            .subscribe(this::handleDeletionResult, this::handleDeletionError);
     }
 
     @SuppressLint("CheckResult")
@@ -1175,12 +1170,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
         resultSingletext
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(s -> {
-                if(applicationKvStore.getBoolean(String.format(NOMINATING_FOR_DELETION_MEDIA, media.getImageUrl()), false)) {
-                    applicationKvStore.remove(String.format(NOMINATING_FOR_DELETION_MEDIA, media.getImageUrl()));
-                    callback.nominatingForDeletion(index);
-                }
-            });
+            .subscribe(this::handleDeletionResult, this::handleDeletionError);
     }
 
     public void onSeeMoreClicked(){
@@ -1210,6 +1200,47 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
         binding.progressBarDeletion.setVisibility(VISIBLE);
         binding.nominateDeletion.setText("Nominating for Deletion");
         isDeleted = true;
+    }
+
+    /**
+     * Disables Progress Bar and Update delete button text.
+     */
+    private void disableProgressBar() {
+        if (getActivity() == null) {
+            return; // Prevent NullPointerException when fragment is not attached to activity
+        }
+        getActivity().runOnUiThread(() -> {
+            if (progressBarDeletion != null) {
+                progressBarDeletion.setVisibility(GONE);
+            }
+        });
+    }
+
+    private void handleDeletionResult(final boolean success) {
+        if (success) {
+            Timber.d("Nominated for Deletion : Success");
+            delete.setText("Nominated for Deletion");
+            ViewUtil.showLongSnackbar(requireView(),
+                "Nominating for deletion : Success");
+            disableProgressBar();
+            checkAndClearDeletionFlag();
+        } else {
+            disableProgressBar();
+        }
+    }
+
+    private void handleDeletionError(final Throwable throwable) {
+        // Log error or show error message to the user
+        Timber.e(throwable.getLocalizedMessage());
+        disableProgressBar();
+        checkAndClearDeletionFlag();
+    }
+
+    private void checkAndClearDeletionFlag() {
+        if (applicationKvStore.getBoolean(String.format(NOMINATING_FOR_DELETION_MEDIA, media.getImageUrl()), false)) {
+            applicationKvStore.remove(String.format(NOMINATING_FOR_DELETION_MEDIA, media.getImageUrl()));
+            callback.nominatingForDeletion(index); // Notify that nomination for deletion has proceeded
+        }
     }
 
     private void rebuildCatList(List<String> categories) {
