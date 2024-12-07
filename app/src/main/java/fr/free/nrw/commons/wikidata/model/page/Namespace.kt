@@ -1,34 +1,28 @@
-package fr.free.nrw.commons.wikidata.model.page;
+package fr.free.nrw.commons.wikidata.model.page
 
-import androidx.annotation.NonNull;
-
-import fr.free.nrw.commons.wikidata.model.EnumCode;
-import fr.free.nrw.commons.wikidata.model.EnumCodeMap;
+import fr.free.nrw.commons.wikidata.model.EnumCode
+import fr.free.nrw.commons.wikidata.model.EnumCodeMap
 
 /** An enumeration describing the different possible namespace codes. Do not attempt to use this
- *  class to preserve URL path information such as Talk: or User: or localization.
- *  @see <a href='https://en.wikipedia.org/wiki/Wikipedia:Namespace'>Wikipedia:Namespace</a>
- *  @see <a href='https://www.mediawiki.org/wiki/Extension_default_namespaces'>Extension default namespaces</a>
- *  @see <a href='https://github.com/wikimedia/wikipedia-ios/blob/master/Wikipedia/Code/NSNumber+MWKTitleNamespace.h'>NSNumber+MWKTitleNamespace.h (iOS implementation)</a>
- *  @see <a href='https://www.mediawiki.org/wiki/Manual:Namespace#Built-in_namespaces'>Manual:Namespace</a>
- *  @see <a href='https://en.wikipedia.org/w/api.php?action=query&meta=siteinfo&siprop=namespaces|namespacealiases'>Namespaces reported by API</a>
+ * class to preserve URL path information such as Talk: or User: or localization.
+ *
+ * @see [Wikipedia:Namespace](https://en.wikipedia.org/wiki/Wikipedia:Namespace)
+ * @see [Extension default namespaces](https://www.mediawiki.org/wiki/Extension_default_namespaces)
+ * @see [NSNumber+MWKTitleNamespace.h
+ * @see [Manual:Namespace](https://www.mediawiki.org/wiki/Manual:Namespace.Built-in_namespaces)
+ * @see [Namespaces reported by API](https://en.wikipedia.org/w/api.php?action=query&meta=siteinfo&siprop=namespaces|namespacealiases)](https://github.com/wikimedia/wikipedia-ios/blob/master/Wikipedia/Code/NSNumber+MWKTitleNamespace.h)
  */
-public enum Namespace implements EnumCode {
+enum class Namespace(private val code: Int) : EnumCode {
     MEDIA(-2),
-    SPECIAL(-1) {
-        @Override
-        public boolean talk() {
-            return false;
-        }
-    },
-    MAIN(0), // Main or Article
+    SPECIAL(-1) { override fun talk(): Boolean = false },
+    MAIN(0),  // Main or Article
     TALK(1),
     USER(2),
     USER_TALK(3),
-    PROJECT(4), // WP alias
-    PROJECT_TALK(5), // WT alias
-    FILE(6), // Image alias
-    FILE_TALK(7), // Image talk alias
+    PROJECT(4),  // WP alias
+    PROJECT_TALK(5),  // WT alias
+    FILE(6),  // Image alias
+    FILE_TALK(7),  // Image talk alias
     MEDIAWIKI(8),
     MEDIAWIKI_TALK(9),
     TEMPLATE(10),
@@ -137,38 +131,20 @@ public enum Namespace implements EnumCode {
     GADGET_DEFINITION_TALK(2303),
     TOPIC(2600);
 
-    private static final int TALK_MASK = 0x1;
-    private static final EnumCodeMap<Namespace> MAP = new EnumCodeMap<>(Namespace.class);
+    override fun code(): Int = code
 
-    private final int code;
+    fun special(): Boolean = this === SPECIAL
 
-    @NonNull
-    public static Namespace of(int code) {
-        return MAP.get(code);
-    }
+    fun main(): Boolean = this === MAIN
 
-    @Override
-    public int code() {
-        return code;
-    }
+    fun file(): Boolean = this === FILE
 
-    public boolean special() {
-        return this == SPECIAL;
-    }
+    open fun talk(): Boolean = (code and TALK_MASK) == TALK_MASK
 
-    public boolean main() {
-        return this == MAIN;
-    }
+    companion object {
+        private const val TALK_MASK = 0x1
+        private val MAP = EnumCodeMap(Namespace::class.java)
 
-    public boolean file() {
-        return this == FILE;
-    }
-
-    public boolean talk() {
-        return (code & TALK_MASK) == TALK_MASK;
-    }
-
-    Namespace(int code) {
-        this.code = code;
+        fun of(code: Int): Namespace = MAP[code]
     }
 }
