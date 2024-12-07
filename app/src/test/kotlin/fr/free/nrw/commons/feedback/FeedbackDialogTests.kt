@@ -34,7 +34,7 @@ class FeedbackDialogTests {
     private lateinit var dialogFeedbackBinding: DialogFeedbackBinding
 
     @Mock
-    private val onFeedbackSubmitCallback: OnFeedbackSubmitCallback? = null
+    private lateinit var onFeedbackSubmitCallback: OnFeedbackSubmitCallback
     private lateinit var dialog: FeedbackDialog
 
     private lateinit var context: Context
@@ -53,7 +53,7 @@ class FeedbackDialogTests {
         dialog.show()
 
         Whitebox.setInternalState(dialog, "onFeedbackSubmitCallback", onFeedbackSubmitCallback)
-        Whitebox.setInternalState(dialog, "dialogFeedbackBinding", dialogFeedbackBinding)
+        Whitebox.setInternalState(dialog, "_binding", dialogFeedbackBinding)
     }
 
     @Test

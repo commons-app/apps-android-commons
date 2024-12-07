@@ -10,7 +10,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -25,6 +24,7 @@ import fr.free.nrw.commons.databinding.FragmentMoreBottomSheetBinding
 import fr.free.nrw.commons.di.ApplicationlessInjection
 import fr.free.nrw.commons.feedback.FeedbackContentCreator
 import fr.free.nrw.commons.feedback.FeedbackDialog
+import fr.free.nrw.commons.feedback.OnFeedbackSubmitCallback
 import fr.free.nrw.commons.feedback.model.Feedback
 import fr.free.nrw.commons.kvstore.BasicKvStore
 import fr.free.nrw.commons.kvstore.JsonKvStore
@@ -156,7 +156,11 @@ class MoreBottomSheetFragment : BottomSheetDialogFragment() {
      * Creates and shows a dialog asking feedback from users
      */
     private fun showFeedbackDialog() {
-        FeedbackDialog(requireContext()) { uploadFeedback(it) }.show()
+        FeedbackDialog(requireContext(), object : OnFeedbackSubmitCallback{
+            override fun onFeedbackSubmit(feedback: Feedback) {
+                uploadFeedback(feedback)
+            }
+        }).show()
     }
 
     /**
@@ -168,8 +172,8 @@ class MoreBottomSheetFragment : BottomSheetDialogFragment() {
 
         val single = pageEditClient.createNewSection(
             "Commons:Mobile_app/Feedback",
-            feedbackContentCreator.sectionTitle,
-            feedbackContentCreator.sectionText,
+            feedbackContentCreator.getSectionTitle(),
+            feedbackContentCreator.getSectionText(),
             "New feedback on version ${feedback.version} of the app"
         )
             .flatMapSingle { Single.just(it) }
