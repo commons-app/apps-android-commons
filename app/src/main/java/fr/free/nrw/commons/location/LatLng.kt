@@ -41,6 +41,13 @@ data class LatLng(
      * Accepts a non-null [Location] and converts it to a [LatLng].
      */
     companion object {
+        fun latLongOrNull(latitude: String?, longitude: String?): LatLng? =
+            if (!latitude.isNullOrBlank() && !longitude.isNullOrBlank()) {
+                LatLng(latitude.toDouble(), longitude.toDouble(), 0.0f)
+            } else {
+                null
+            }
+
         /**
          * gets the latitude and longitude of a given non-null location
          * @param location the non-null location of the user
