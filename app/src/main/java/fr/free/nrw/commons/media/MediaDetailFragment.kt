@@ -80,9 +80,9 @@ import fr.free.nrw.commons.MediaDataExtractor
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.Utils
 import fr.free.nrw.commons.actions.ThanksClient
-import fr.free.nrw.commons.auth.AccountUtil
 import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.auth.csrf.InvalidLoginTokenException
+import fr.free.nrw.commons.auth.getUserName
 import fr.free.nrw.commons.category.CATEGORY_NEEDING_CATEGORIES
 import fr.free.nrw.commons.category.CATEGORY_UNCATEGORISED
 import fr.free.nrw.commons.category.CategoryClient
@@ -495,8 +495,8 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
             enableProgressBar()
         }
 
-        if (AccountUtil.getUserName(context) != null && media != null && AccountUtil.getUserName(
-                context
+        if (getUserName(requireContext()) != null && media != null && getUserName(
+                requireContext()
             ) == media!!.author
         ) {
             binding.sendThanks.visibility = View.GONE
@@ -610,7 +610,7 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
     }
 
     private fun onDeletionPageExists(deletionPageExists: Boolean) {
-        if (AccountUtil.getUserName(context) == null && AccountUtil.getUserName(context) != media!!.author) {
+        if (getUserName(requireContext()) == null && getUserName(requireContext()) != media!!.author) {
             binding.nominateDeletion.visibility = View.GONE
             binding.nominatedDeletionBanner.visibility = View.GONE
         } else if (deletionPageExists) {
@@ -1050,16 +1050,19 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
             defaultLatitude = media!!.coordinates!!.latitude
             defaultLongitude = media!!.coordinates!!.longitude
         } else {
-            if (locationManager.lastLocation != null) {
-                defaultLatitude = locationManager.lastLocation.latitude
-                defaultLongitude = locationManager.lastLocation.longitude
+            if (locationManager.getLastLocation() != null) {
+                defaultLatitude = locationManager.getLastLocation()!!.latitude
+                defaultLongitude = locationManager.getLastLocation()!!.longitude
             } else {
-                val lastLocation: Array<String> = applicationKvStore.getString(
+                val lastLocation: Array<String>? = applicationKvStore.getString(
                     UploadMediaDetailFragment.LAST_LOCATION,
                     ("$defaultLatitude,$defaultLongitude")
-                ).split(",".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
-                defaultLatitude = lastLocation[0].toDouble()
-                defaultLongitude = lastLocation[1].toDouble()
+                )?.split(",".toRegex())?.dropLastWhile { it.isEmpty() }?.toTypedArray()
+
+                if (lastLocation != null) {
+                    defaultLatitude = lastLocation[0].toDouble()
+                    defaultLongitude = lastLocation[1].toDouble()
+                }
             }
         }
 
@@ -1068,8 +1071,8 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
             LocationPicker.IntentBuilder()
                 .defaultLocation(CameraPosition(defaultLatitude, defaultLongitude, 16.0))
                 .activityKey("MediaActivity")
-                .media(media)
-                .build(activity)
+                .media(media!!)
+                .build(requireActivity())
         )
     }
 
@@ -1572,7 +1575,7 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
 
     @SuppressLint("StringFormatInvalid")
     fun onDeleteButtonClicked() {
-        if (AccountUtil.getUserName(context) != null && AccountUtil.getUserName(context) == media!!.author) {
+        if (getUserName(requireContext()) != null && getUserName(requireContext()) == media!!.author) {
             val languageAdapter: ArrayAdapter<String> = ArrayAdapter(
                 requireActivity(),
                 R.layout.simple_spinner_dropdown_list, reasonList
@@ -1599,7 +1602,7 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
             if (isDeleted) {
                 dialog!!.getButton(AlertDialog.BUTTON_POSITIVE).isEnabled = false
             }
-        } else if (AccountUtil.getUserName(context) != null) {
+        } else if (getUserName(requireContext()) != null) {
             val input = EditText(activity)
             input.requestFocus()
             val d: AlertDialog? = showAlertDialog(
@@ -1886,7 +1889,7 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
         if (media.coordinates == null) {
             return getString(R.string.media_detail_coordinates_empty)
         }
-        return media.coordinates!!.prettyCoordinateString
+        return media.coordinates!!.getPrettyCoordinateString()
     }
 
     override fun updateCategoryDisplay(categories: List<String>?): Boolean {

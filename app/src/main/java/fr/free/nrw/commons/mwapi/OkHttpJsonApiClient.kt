@@ -2,8 +2,11 @@ package fr.free.nrw.commons.mwapi
 
 import android.text.TextUtils
 import com.google.gson.Gson
+import fr.free.nrw.commons.BuildConfig
 import fr.free.nrw.commons.campaigns.CampaignResponseDTO
 import fr.free.nrw.commons.explore.depictions.DepictsClient
+import fr.free.nrw.commons.fileusages.FileUsagesResponse
+import fr.free.nrw.commons.fileusages.GlobalFileUsagesResponse
 import fr.free.nrw.commons.location.LatLng
 import fr.free.nrw.commons.nearby.Place
 import fr.free.nrw.commons.nearby.model.ItemsClass
@@ -77,6 +80,74 @@ class OkHttpJsonApiClient @Inject constructor(
                 }
             }
             LeaderboardResponse()
+        })
+    }
+
+    fun getFileUsagesOnCommons(
+        fileName: String?,
+        pageSize: Int
+    ): Observable<FileUsagesResponse?> {
+        val urlBuilder = BuildConfig.FILE_USAGES_BASE_URL.toHttpUrlOrNull()!!.newBuilder()
+        urlBuilder.addQueryParameter("prop", "fileusage")
+        urlBuilder.addQueryParameter("titles", fileName)
+        //TODO[Parry] might need pagination
+        urlBuilder.addQueryParameter("fulimit", pageSize.toString())
+
+        Timber.i("Url %s", urlBuilder.toString())
+        println(urlBuilder.build())
+        val request: Request = Request.Builder()
+            .url(urlBuilder.toString())
+            .build()
+
+        return Observable.fromCallable({
+            val response: Response = okHttpClient.newCall(request).execute()
+            if (response.body != null && response.isSuccessful) {
+                val json: String = response.body!!.string()
+                try {
+                    return@fromCallable gson.fromJson<FileUsagesResponse>(
+                        json,
+                        FileUsagesResponse::class.java
+                    )
+                } catch (e: java.lang.Exception) {
+                    println("exception raised " + e.message)
+                    return@fromCallable null
+                }
+            }
+            println("something else happend error")
+            null
+        })
+    }
+
+    fun getGlobalFileUsages(
+        fileName: String?,
+        pageSize: Int
+    ): Observable<GlobalFileUsagesResponse?> {
+        val urlBuilder = BuildConfig.FILE_USAGES_BASE_URL.toHttpUrlOrNull()!!.newBuilder()
+        urlBuilder.addQueryParameter("prop", "globalusage")
+        urlBuilder.addQueryParameter("titles", fileName)
+        //TODO[Parry] might need pagination
+        urlBuilder.addQueryParameter("gulimit", pageSize.toString())
+
+        Timber.i("Url %s", urlBuilder.toString())
+        println(urlBuilder.build())
+        val request: Request = Request.Builder()
+            .url(urlBuilder.toString())
+            .build()
+
+        return Observable.fromCallable({
+            val response: Response = okHttpClient.newCall(request).execute()
+            if (response.body != null && response.isSuccessful) {
+                val json: String = response.body!!.string()
+                try {
+                    return@fromCallable gson.fromJson<GlobalFileUsagesResponse>(
+                        json,
+                        GlobalFileUsagesResponse::class.java
+                    )
+                } catch (e: java.lang.Exception) {
+                    return@fromCallable null
+                }
+            }
+            null
         })
     }
 
