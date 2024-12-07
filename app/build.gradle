@@ -52,13 +52,14 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
 
     // Jetpack Compose
-    def composeBom = platform('androidx.compose:compose-bom:2024.08.00')
+    def composeBom = platform('androidx.compose:compose-bom:2024.11.00')
 
-    implementation "androidx.activity:activity-compose:1.9.1"
+    implementation "androidx.activity:activity-compose:1.9.3"
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.8.4"
     implementation (composeBom)
     implementation "androidx.compose.runtime:runtime"
     implementation "androidx.compose.ui:ui"
+    implementation "androidx.compose.ui:ui-viewbinding"
     implementation "androidx.compose.ui:ui-graphics"
     implementation "androidx.compose.ui:ui-tooling"
     implementation "androidx.compose.foundation:foundation"
@@ -113,6 +114,7 @@ dependencies {
     testImplementation "org.junit.jupiter:junit-jupiter-api:5.10.0"
     testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:5.10.0"
     testImplementation 'com.facebook.soloader:soloader:0.10.5'
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-rx2:1.9.0"
     testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3"
     debugImplementation("androidx.fragment:fragment-testing:1.6.2")
     testImplementation "commons-io:commons-io:2.6"

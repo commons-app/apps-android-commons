@@ -24,8 +24,46 @@ import android.widget.LinearLayout
 import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.KeyboardArrowDown
+import androidx.compose.material.icons.filled.KeyboardArrowUp
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.LinearProgressIndicator
+import androidx.compose.material3.ListItem
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
+import androidx.compose.material3.darkColorScheme
+import androidx.compose.material3.lightColorScheme
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalUriHandler
+import androidx.compose.ui.platform.ViewCompositionStrategy
+import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextDecoration
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
+import androidx.fragment.app.viewModels
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.facebook.drawee.controller.BaseControllerListener
 import com.facebook.drawee.controller.ControllerListener
@@ -105,6 +143,9 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
     private val callback: Callback? = null
 
     @Inject
+    lateinit var mediaDetailViewModelFactory: MediaDetailViewModel.MediaDetailViewModelProviderFactory
+
+    @Inject
     lateinit var locationManager: LocationServiceManager
 
 
@@ -144,6 +185,8 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
     @Inject
     @field:Named("default_preferences")
     lateinit var applicationKvStore: JsonKvStore
+
+    private val viewModel: MediaDetailViewModel by viewModels<MediaDetailViewModel> { mediaDetailViewModelFactory }
 
     private var initialListTop: Int = 0
 
@@ -316,6 +359,47 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
         binding.coordinateEdit.setOnClickListener { onUpdateCoordinatesClicked() }
         binding.copyWikicode.setOnClickListener { onCopyWikicodeClicked() }
 
+        binding.fileUsagesComposeView.apply {
+            setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
+            setContent {
+                MaterialTheme(
+                    colorScheme = if (isSystemInDarkTheme()) darkColorScheme(
+                        primary = colorResource(R.color.primaryDarkColor),
+                        surface = colorResource(R.color.main_background_dark),
+                        background = colorResource(R.color.main_background_dark)
+                    ) else lightColorScheme(
+                        primary = colorResource(R.color.primaryColor),
+                        surface = colorResource(R.color.main_background_light),
+                        background = colorResource(R.color.main_background_light)
+                    )
+                ) {
+
+                    val commonsContainerState by viewModel.commonsContainerState.collectAsState()
+                    val globalContainerState by viewModel.globalContainerState.collectAsState()
+
+                    Surface {
+                        Column {
+                            Text(
+                                text = stringResource(R.string.file_usages_container_heading),
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(top = 6.dp),
+                                textAlign = TextAlign.Center,
+                                fontWeight = FontWeight.SemiBold,
+                                fontSize = 16.sp,
+                            )
+                            FileUsagesContainer(
+                                modifier = Modifier.padding(start = 16.dp, end = 16.dp),
+                                commonsContainerState = commonsContainerState,
+                                globalContainerState = globalContainerState
+                            )
+                        }
+                    }
+
+
+                }
+            }
+        }
 
         /**
          * Gets the height of the frame layout as soon as the view is ready and updates aspect ratio
@@ -343,6 +427,16 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
                 R.string.read_storage_permission_rationale,
                 *PERMISSIONS_STORAGE
             )
+        }
+    }
+
+    private fun fetchFileUsages(fileName: String) {
+        if (viewModel.commonsContainerState.value == MediaDetailViewModel.FileUsagesContainerState.Initial) {
+            viewModel.loadFileUsagesCommons(fileName)
+        }
+
+        if (viewModel.globalContainerState.value == MediaDetailViewModel.FileUsagesContainerState.Initial) {
+            viewModel.loadGlobalFileUsages(fileName)
         }
     }
 
@@ -422,6 +516,7 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
                     oldWidthOfImageView = binding.mediaDetailScrollView.width
                     if (media != null) {
                         displayMediaDetails()
+                        fetchFileUsages(media?.filename!!)
                     }
                 }
             }
@@ -677,7 +772,7 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
         }
 
         compositeDisposable.clear()
-        _binding = null
+
         super.onDestroyView()
     }
 
@@ -1961,5 +2056,175 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
         }
 
         const val NOMINATING_FOR_DELETION_MEDIA: String = "Nominating for deletion %s"
+    }
+}
+
+@Composable
+fun FileUsagesContainer(
+    modifier: Modifier = Modifier,
+    commonsContainerState: MediaDetailViewModel.FileUsagesContainerState,
+    globalContainerState: MediaDetailViewModel.FileUsagesContainerState,
+) {
+    var isCommonsListExpanded by rememberSaveable { mutableStateOf(true) }
+    var isOtherWikisListExpanded by rememberSaveable { mutableStateOf(true) }
+
+    val uriHandle = LocalUriHandler.current
+
+    Column(modifier = modifier) {
+
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+
+            Text(
+                text = stringResource(R.string.usages_on_commons_heading),
+                textAlign = TextAlign.Center,
+                style = MaterialTheme.typography.titleSmall
+            )
+
+            IconButton(onClick = {
+                isCommonsListExpanded = !isCommonsListExpanded
+            }) {
+                Icon(
+                    imageVector = if (isCommonsListExpanded) Icons.Default.KeyboardArrowUp
+                    else Icons.Default.KeyboardArrowDown,
+                    contentDescription = null
+                )
+            }
+        }
+
+        if (isCommonsListExpanded) {
+            when (commonsContainerState) {
+                MediaDetailViewModel.FileUsagesContainerState.Loading -> {
+                    LinearProgressIndicator()
+                }
+
+                is MediaDetailViewModel.FileUsagesContainerState.Success -> {
+
+                    val data = commonsContainerState.data
+
+                    if (data.isNullOrEmpty()) {
+                        ListItem(headlineContent = {
+                            Text(
+                                text = stringResource(R.string.no_usages_found),
+                                style = MaterialTheme.typography.titleSmall
+                            )
+                        })
+                    } else {
+                        data.forEach { usage ->
+                            ListItem(
+                                leadingContent = {
+                                    Text(
+                                        text = stringResource(R.string.bullet_point),
+                                        fontWeight = FontWeight.Bold
+                                    )
+                                },
+                                headlineContent = {
+                                    Text(
+                                        modifier = Modifier.clickable {
+                                            uriHandle.openUri(usage.link!!)
+                                        },
+                                        text = usage.title,
+                                        style = MaterialTheme.typography.titleSmall.copy(
+                                            color = Color(0xFF5A6AEC),
+                                            textDecoration = TextDecoration.Underline
+                                        )
+                                    )
+                                })
+                        }
+                    }
+                }
+
+                is MediaDetailViewModel.FileUsagesContainerState.Error -> {
+                    ListItem(headlineContent = {
+                        Text(
+                            text = commonsContainerState.errorMessage,
+                            color = Color.Red,
+                            style = MaterialTheme.typography.titleSmall
+                        )
+                    })
+                }
+
+                MediaDetailViewModel.FileUsagesContainerState.Initial -> {}
+            }
+        }
+
+
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            Text(
+                text = stringResource(R.string.usages_on_other_wikis_heading),
+                textAlign = TextAlign.Center,
+                style = MaterialTheme.typography.titleSmall
+            )
+
+            IconButton(onClick = {
+                isOtherWikisListExpanded = !isOtherWikisListExpanded
+            }) {
+                Icon(
+                    imageVector = if (isOtherWikisListExpanded) Icons.Default.KeyboardArrowUp
+                    else Icons.Default.KeyboardArrowDown,
+                    contentDescription = null
+                )
+            }
+        }
+
+        if (isOtherWikisListExpanded) {
+            when (globalContainerState) {
+                MediaDetailViewModel.FileUsagesContainerState.Loading -> {
+                    LinearProgressIndicator()
+                }
+
+                is MediaDetailViewModel.FileUsagesContainerState.Success -> {
+
+                    val data = globalContainerState.data
+
+                    if (data.isNullOrEmpty()) {
+                        ListItem(headlineContent = {
+                            Text(
+                                text = stringResource(R.string.no_usages_found),
+                                style = MaterialTheme.typography.titleSmall
+                            )
+                        })
+                    } else {
+                        data.forEach { usage ->
+                            ListItem(
+                                leadingContent = {
+                                    Text(
+                                        text = stringResource(R.string.bullet_point),
+                                        fontWeight = FontWeight.Bold
+                                    )
+                                },
+                                headlineContent = {
+                                    Text(
+                                        text = usage.title,
+                                        style = MaterialTheme.typography.titleSmall.copy(
+                                            textDecoration = TextDecoration.Underline
+                                        )
+                                    )
+                                })
+                        }
+                    }
+                }
+
+                is MediaDetailViewModel.FileUsagesContainerState.Error -> {
+                    ListItem(headlineContent = {
+                        Text(
+                            text = globalContainerState.errorMessage,
+                            color = Color.Red,
+                            style = MaterialTheme.typography.titleSmall
+                        )
+                    })
+                }
+
+                MediaDetailViewModel.FileUsagesContainerState.Initial -> {}
+            }
+        }
+
     }
 }

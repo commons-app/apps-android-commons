@@ -849,4 +849,12 @@ Upload your first media by tapping on the add button.</string>
   <string name="red_pin">This place has no picture yet, go take one!</string>
   <string name="green_pin">This place has a picture already.</string>
   <string name="grey_pin">Now checking whether this place has a picture.</string>
+
+  <string name="error_while_loading">Error while loading</string>
+  <string name="no_usages_found">No usages found</string>
+  <string name="usages_on_commons_heading">Commons</string>
+  <string name="usages_on_other_wikis_heading">Other wikis</string>
+  <string name="bullet_point">•</string>
+  <string name="file_usages_container_heading">File usages</string>
+
 </resources>
