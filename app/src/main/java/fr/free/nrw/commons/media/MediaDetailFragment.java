@@ -786,7 +786,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
         }
 
         Observable.defer((Callable<ObservableSource<Boolean>>) () -> thanksClient.thank(
-                firstRevision.getRevisionId()))
+                firstRevision.revisionId()))
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(result -> {

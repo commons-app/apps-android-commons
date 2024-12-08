@@ -95,11 +95,11 @@ class ReviewHelperTest {
     @Test
     fun getFirstRevisionOfFile() {
         val rev1 = mock<MwQueryPage.Revision>()
-        whenever(rev1.user).thenReturn("TestUser")
-        whenever(rev1.revisionId).thenReturn(1L)
+        whenever(rev1.user()).thenReturn("TestUser")
+        whenever(rev1.revisionId()).thenReturn(1L)
         val rev2 = mock<MwQueryPage.Revision>()
-        whenever(rev2.user).thenReturn("TestUser")
-        whenever(rev2.revisionId).thenReturn(2L)
+        whenever(rev2.user()).thenReturn("TestUser")
+        whenever(rev2.revisionId()).thenReturn(2L)
 
         val page = setupMedia("Test.jpg", rev1, rev2)
         whenever(mwQueryResult.firstPage()).thenReturn(page)
@@ -107,7 +107,7 @@ class ReviewHelperTest {
 
         val firstRevisionOfFile = reviewHelper.getFirstRevisionOfFile("Test.jpg").blockingFirst()
 
-        assertEquals(1, firstRevisionOfFile.revisionId)
+        assertEquals(1, firstRevisionOfFile.revisionId())
     }
 
     @Test
