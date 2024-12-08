@@ -6,8 +6,6 @@ import android.animation.ValueAnimator
 import android.content.Intent
 import android.graphics.BitmapFactory
 import android.graphics.Matrix
-//noinspection ExifInterface TODO Issue : #5994
-import android.media.ExifInterface
 import android.os.Bundle
 import android.view.animation.AccelerateDecelerateInterpolator
 import android.widget.ImageView
@@ -16,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.graphics.rotationMatrix
 import androidx.core.graphics.scaleMatrix
 import androidx.core.net.toUri
+import androidx.exifinterface.media.ExifInterface
 import androidx.lifecycle.ViewModelProvider
 import fr.free.nrw.commons.databinding.ActivityEditBinding
 import timber.log.Timber
@@ -45,12 +44,10 @@ class EditActivity : AppCompatActivity() {
         imageUri = intent.getStringExtra("image") ?: ""
         vm = ViewModelProvider(this)[EditViewModel::class.java]
         val sourceExif = imageUri.toUri().path?.let { ExifInterface(it) }
-        //TODO(Deprecation : 'TAG_APERTURE: String' is deprecated. Deprecated in Java) Issue : #6001
-        // TODO(Deprecation : 'TAG_ISO: String' is deprecated. Deprecated in Java) Issue : #6001
-        @Suppress("DEPRECATION")
+
         val exifTags =
             arrayOf(
-                ExifInterface.TAG_APERTURE,
+                ExifInterface.TAG_F_NUMBER,
                 ExifInterface.TAG_DATETIME,
                 ExifInterface.TAG_EXPOSURE_TIME,
                 ExifInterface.TAG_FLASH,
@@ -66,13 +63,13 @@ class EditActivity : AppCompatActivity() {
                 ExifInterface.TAG_GPS_TIMESTAMP,
                 ExifInterface.TAG_IMAGE_LENGTH,
                 ExifInterface.TAG_IMAGE_WIDTH,
-                ExifInterface.TAG_ISO,
+                ExifInterface.TAG_PHOTOGRAPHIC_SENSITIVITY,
                 ExifInterface.TAG_MAKE,
                 ExifInterface.TAG_MODEL,
                 ExifInterface.TAG_ORIENTATION,
                 ExifInterface.TAG_WHITE_BALANCE,
-                ExifInterface.WHITEBALANCE_AUTO,
-                ExifInterface.WHITEBALANCE_MANUAL,
+                ExifInterface.WHITE_BALANCE_AUTO,
+                ExifInterface.WHITE_BALANCE_MANUAL,
             )
         for (tag in exifTags) {
             val attribute = sourceExif?.getAttribute(tag.toString())
