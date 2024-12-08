@@ -183,8 +183,22 @@ class DeleteHelperTest {
     @Test
     fun alertDialogPositiveButtonDisableTest() {
         val mContext = RuntimeEnvironment.getApplication().applicationContext
-        deleteHelper.askReasonAndExecute(media, mContext, "My Question", ReviewController.DeleteReason.COPYRIGHT_VIOLATION, callback)
-        assertEquals(false, deleteHelper.getDialog()?.getButton(AlertDialog.BUTTON_POSITIVE)?.isEnabled)
+        deleteHelper.askReasonAndExecute(
+            media,
+            mContext,
+            "My Question",
+            ReviewController.DeleteReason.COPYRIGHT_VIOLATION, callback
+        )
+
+        deleteHelper.getListener()?.onClick(
+            deleteHelper.getDialog(),
+            1,
+            true
+        )
+        assertEquals(
+            true,
+            deleteHelper.getDialog()?.getButton(AlertDialog.BUTTON_POSITIVE)?.isEnabled
+        )
     }
 
     @Test
