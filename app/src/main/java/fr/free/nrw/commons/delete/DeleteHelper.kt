@@ -48,8 +48,15 @@ class DeleteHelper @Inject constructor(
      * @param reason
      * @return
      */
-    fun makeDeletion(context: Context, media: Media, reason: String): Single<Boolean> {
-        viewUtil.showShortToast(context, "Trying to nominate ${media.displayTitle} for deletion")
+    fun makeDeletion(
+        context: Context,
+        media: Media,
+        reason: String
+    ): Single<Boolean> {
+        viewUtil.showShortToast(
+            context,
+            "Trying to nominate ${media.displayTitle} for deletion"
+        )
 
         return delete(media, reason)
             .flatMapSingle { result ->
@@ -144,7 +151,11 @@ class DeleteHelper @Inject constructor(
     }
 
     @SuppressLint("StringFormatInvalid")
-    private fun showDeletionNotification(context: Context, media: Media, result: Boolean): Boolean {
+    private fun showDeletionNotification(
+        context: Context,
+        media: Media,
+        result: Boolean
+    ): Boolean {
         val title: String
         val message: String
         var baseTitle = context.getString(R.string.delete_helper_show_deletion_title)
