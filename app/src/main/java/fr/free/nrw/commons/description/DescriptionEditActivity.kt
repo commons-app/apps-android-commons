@@ -272,7 +272,7 @@ class DescriptionEditActivity :
                         .addCaption(
                             applicationContext,
                             media,
-                            mediaDetail.languageCode,
+                            mediaDetail.languageCode!!,
                             mediaDetail.captionText,
                         ).subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
