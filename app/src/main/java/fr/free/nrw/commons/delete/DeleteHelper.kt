@@ -233,21 +233,13 @@ class DeleteHelper @Inject constructor(
                 )
                 reasonListEnglish = arrayOf(
                     getLocalizedResources(context, Locale.ENGLISH)
-                        .getString(
-                            R.string.delete_helper_ask_reason_copyright_press_photo
-                        ),
+                        .getString(R.string.delete_helper_ask_reason_copyright_press_photo),
                     getLocalizedResources(context, Locale.ENGLISH)
-                        .getString(
-                            R.string.delete_helper_ask_reason_copyright_internet_photo
-                        ),
+                        .getString(R.string.delete_helper_ask_reason_copyright_internet_photo),
                     getLocalizedResources(context, Locale.ENGLISH)
-                        .getString(
-                            R.string.delete_helper_ask_reason_copyright_logo
-                        ),
+                        .getString(R.string.delete_helper_ask_reason_copyright_logo),
                     getLocalizedResources(context, Locale.ENGLISH)
-                        .getString(
-                            R.string.delete_helper_ask_reason_copyright_no_freedom_of_panorama
-                        )
+                        .getString(R.string.delete_helper_ask_reason_copyright_no_freedom_of_panorama)
                 )
             }
             else -> {
@@ -256,19 +248,16 @@ class DeleteHelper @Inject constructor(
             }
         }
 
-        alert.setMultiChoiceItems(
-            reasonList,
-            checkedItems
-        ) { dialogInterface, position, isChecked ->
+        alert.setMultiChoiceItems(reasonList, checkedItems) { dialogInterface, position, isChecked ->
             if (isChecked) {
                 mUserReason.add(position)
             } else {
                 mUserReason.remove(position)
             }
 
-            // disable the OK button if no reason selected
-            (dialogInterface as AlertDialog)
-                .getButton(AlertDialog.BUTTON_POSITIVE).isEnabled = mUserReason.isNotEmpty()
+            // Safely enable or disable the OK button based on selection
+            val dialog = dialogInterface as? AlertDialog
+            dialog?.getButton(AlertDialog.BUTTON_POSITIVE)?.isEnabled = mUserReason.isNotEmpty()
         }
 
         alert.setPositiveButton(context.getString(R.string.ok)) { _, _ ->
@@ -291,7 +280,7 @@ class DeleteHelper @Inject constructor(
 
             Timber.d("thread is askReasonAndExecute %s", Thread.currentThread().name)
 
-            if(media != null) {
+            if (media != null) {
                 Single.defer { makeDeletion(context, media, reason) }
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
@@ -305,13 +294,17 @@ class DeleteHelper @Inject constructor(
             }
         }
         alert.setNegativeButton(
-            context.getString(R.string.cancel)) { _, _ -> reviewCallback.onFailure() }
-        d = alert.create()
-        d?.show()
+            context.getString(R.string.cancel)
+        ) { _, _ -> reviewCallback.onFailure() }
 
-        // disable the OK button by default
-        d?.getButton(AlertDialog.BUTTON_POSITIVE)?.isEnabled = false
+        d = alert.create()
+        d?.setOnShowListener {
+            // Safely initialize the OK button state after the dialog is fully shown
+            d?.getButton(AlertDialog.BUTTON_POSITIVE)?.isEnabled = false
+        }
+        d?.show()
     }
+
 
     /**
      * returns the instance of shown AlertDialog,
