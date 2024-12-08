@@ -1,50 +1,49 @@
-package fr.free.nrw.commons.data;
+package fr.free.nrw.commons.data
 
-import android.content.Context;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteException;
-import android.database.sqlite.SQLiteOpenHelper;
-import fr.free.nrw.commons.bookmarks.items.BookmarkItemsDao;
-import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao;
-import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesDao;
-import fr.free.nrw.commons.category.CategoryDao;
-import fr.free.nrw.commons.explore.recentsearches.RecentSearchesDao;
-import fr.free.nrw.commons.recentlanguages.RecentLanguagesDao;
+import android.content.Context
+import android.database.sqlite.SQLiteDatabase
+import android.database.sqlite.SQLiteException
+import android.database.sqlite.SQLiteOpenHelper
+import fr.free.nrw.commons.bookmarks.items.BookmarkItemsDao
+import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao
+import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesDao
+import fr.free.nrw.commons.category.CategoryDao
+import fr.free.nrw.commons.explore.recentsearches.RecentSearchesDao
+import fr.free.nrw.commons.recentlanguages.RecentLanguagesDao
 
-public class DBOpenHelper  extends SQLiteOpenHelper {
 
-    private static final String DATABASE_NAME = "commons.db";
-    private static final int DATABASE_VERSION = 20;
-    public static final String CONTRIBUTIONS_TABLE = "contributions";
-    private final String DROP_TABLE_STATEMENT="DROP TABLE IF EXISTS %s";
+class DBOpenHelper(
+    context: Context
+): SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
+
+    companion object {
+        private const val DATABASE_NAME = "commons.db"
+        private const val DATABASE_VERSION = 20
+        const val CONTRIBUTIONS_TABLE = "contributions"
+        private const val DROP_TABLE_STATEMENT = "DROP TABLE IF EXISTS %s"
+    }
 
     /**
      * Do not use directly - @Inject an instance where it's needed and let
      * dependency injection take care of managing this as a singleton.
      */
-    public DBOpenHelper(Context context) {
-        super(context, DATABASE_NAME, null, DATABASE_VERSION);
+    override fun onCreate(db: SQLiteDatabase) {
+        CategoryDao.Table.onCreate(db)
+        BookmarkPicturesDao.Table.onCreate(db)
+        BookmarkLocationsDao.Table.onCreate(db)
+        BookmarkItemsDao.Table.onCreate(db)
+        RecentSearchesDao.Table.onCreate(db)
+        RecentLanguagesDao.Table.onCreate(db)
     }
 
-    @Override
-    public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        CategoryDao.Table.onCreate(sqLiteDatabase);
-        BookmarkPicturesDao.Table.onCreate(sqLiteDatabase);
-        BookmarkLocationsDao.Table.onCreate(sqLiteDatabase);
-        BookmarkItemsDao.Table.onCreate(sqLiteDatabase);
-        RecentSearchesDao.Table.onCreate(sqLiteDatabase);
-        RecentLanguagesDao.Table.onCreate(sqLiteDatabase);
-    }
-
-    @Override
-    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int from, int to) {
-        CategoryDao.Table.onUpdate(sqLiteDatabase, from, to);
-        BookmarkPicturesDao.Table.onUpdate(sqLiteDatabase, from, to);
-        BookmarkLocationsDao.Table.onUpdate(sqLiteDatabase, from, to);
-        BookmarkItemsDao.Table.onUpdate(sqLiteDatabase, from, to);
-        RecentSearchesDao.Table.onUpdate(sqLiteDatabase, from, to);
-        RecentLanguagesDao.Table.onUpdate(sqLiteDatabase, from, to);
-        deleteTable(sqLiteDatabase,CONTRIBUTIONS_TABLE);
+    override fun onUpgrade(db: SQLiteDatabase, from: Int, to: Int) {
+        CategoryDao.Table.onUpdate(db, from, to)
+        BookmarkPicturesDao.Table.onUpdate(db, from, to)
+        BookmarkLocationsDao.Table.onUpdate(db, from, to)
+        BookmarkItemsDao.Table.onUpdate(db, from, to)
+        RecentSearchesDao.Table.onUpdate(db, from, to)
+        RecentLanguagesDao.Table.onUpdate(db, from, to)
+        deleteTable(db, CONTRIBUTIONS_TABLE)
     }
 
     /**
@@ -52,12 +51,12 @@ public class DBOpenHelper  extends SQLiteOpenHelper {
      * @param db
      * @param tableName
      */
-    public void deleteTable(SQLiteDatabase db, String tableName) {
+    fun deleteTable(db: SQLiteDatabase, tableName: String) {
         try {
-            db.execSQL(String.format(DROP_TABLE_STATEMENT, tableName));
-            onCreate(db);
-        } catch (SQLiteException e) {
-            e.printStackTrace();
+            db.execSQL(String.format(DROP_TABLE_STATEMENT, tableName))
+            onCreate(db)
+        } catch (e: SQLiteException) {
+            e.printStackTrace()
         }
     }
 }

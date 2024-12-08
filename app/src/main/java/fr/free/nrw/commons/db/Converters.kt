@@ -1,31 +1,28 @@
-package fr.free.nrw.commons.db;
+package fr.free.nrw.commons.db
 
-import android.net.Uri;
-import androidx.room.TypeConverter;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import fr.free.nrw.commons.CommonsApplication;
-import fr.free.nrw.commons.contributions.ChunkInfo;
-import fr.free.nrw.commons.di.ApplicationlessInjection;
-import fr.free.nrw.commons.location.LatLng;
-import fr.free.nrw.commons.nearby.Sitelinks;
-import fr.free.nrw.commons.upload.WikidataPlace;
-import fr.free.nrw.commons.upload.structure.depictions.DepictedItem;
-import java.lang.reflect.Type;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import android.net.Uri
+import androidx.room.TypeConverter
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
+import fr.free.nrw.commons.CommonsApplication
+import fr.free.nrw.commons.contributions.ChunkInfo
+import fr.free.nrw.commons.di.ApplicationlessInjection
+import fr.free.nrw.commons.location.LatLng
+import fr.free.nrw.commons.nearby.Sitelinks
+import fr.free.nrw.commons.upload.WikidataPlace
+import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
+import java.util.Date
 
 /**
- * This class supplies converters to write/read types to/from the database.
+ * This object supplies converters to write/read types to/from the database.
  */
-public class Converters {
+object Converters {
 
-    public static Gson getGson() {
+    fun getGson(): Gson {
         return ApplicationlessInjection
-            .getInstance(CommonsApplication.getInstance())
-            .getCommonsApplicationComponent()
-            .gson();
+            .getInstance(CommonsApplication.instance)
+            .commonsApplicationComponent
+            .gson()
     }
 
     /**
@@ -34,132 +31,152 @@ public class Converters {
      * output Example -> string
      */
     @TypeConverter
-    public static String depictsItemToString(DepictedItem objects) {
-        return writeObjectToString(objects);
+    @JvmStatic
+    fun depictsItemToString(objects: DepictedItem?): String? {
+        return writeObjectToString(objects)
     }
 
     /**
      * convert string to DepictedItem object
      * output Example -> DepictedItem depictedItem=new DepictedItem ()
-     * input Example -> string 
+     * input Example -> string
      */
     @TypeConverter
-    public static DepictedItem stringToDepicts(String objectList) {
-        return readObjectWithTypeToken(objectList, new TypeToken<DepictedItem>() {
-        });
+    @JvmStatic
+    fun stringToDepicts(objectList: String?): DepictedItem? {
+        return readObjectWithTypeToken(objectList, object : TypeToken<DepictedItem>() {})
     }
 
     @TypeConverter
-    public static Date fromTimestamp(Long value) {
-        return value == null ? null : new Date(value);
+    @JvmStatic
+    fun fromTimestamp(value: Long?): Date? {
+        return value?.let { Date(it) }
     }
 
     @TypeConverter
-    public static Long dateToTimestamp(Date date) {
-        return date == null ? null : date.getTime();
+    @JvmStatic
+    fun dateToTimestamp(date: Date?): Long? {
+        return date?.time
     }
 
     @TypeConverter
-    public static Uri fromString(String value) {
-        return value == null ? null : Uri.parse(value);
+    @JvmStatic
+    fun fromString(value: String?): Uri? {
+        return value?.let { Uri.parse(it) }
     }
 
     @TypeConverter
-    public static String uriToString(Uri uri) {
-        return uri == null ? null : uri.toString();
+    @JvmStatic
+    fun uriToString(uri: Uri?): String? {
+        return uri?.toString()
     }
 
     @TypeConverter
-    public static String listObjectToString(List<String> objectList) {
-        return writeObjectToString(objectList);
+    @JvmStatic
+    fun listObjectToString(objectList: List<String>?): String? {
+        return writeObjectToString(objectList)
     }
 
     @TypeConverter
-    public static List<String> stringToListObject(String objectList) {
-        return readObjectWithTypeToken(objectList, new TypeToken<List<String>>() {});
+    @JvmStatic
+    fun stringToListObject(objectList: String?): List<String>? {
+        return readObjectWithTypeToken(objectList, object : TypeToken<List<String>>() {})
     }
 
     @TypeConverter
-    public static String mapObjectToString(Map<String,String> objectList) {
-        return writeObjectToString(objectList);
+    @JvmStatic
+    fun mapObjectToString(objectList: Map<String, String>?): String? {
+        return writeObjectToString(objectList)
     }
 
     @TypeConverter
-    public static String mapObjectToString2(Map<String,Boolean> objectList) {
-        return writeObjectToString(objectList);
+    @JvmStatic
+    fun mapObjectToString2(objectList: Map<String, Boolean>?): String? {
+        return writeObjectToString(objectList)
     }
 
     @TypeConverter
-    public static Map<String,String> stringToMap(String objectList) {
-        return readObjectWithTypeToken(objectList, new TypeToken<Map<String,String>>(){});
+    @JvmStatic
+    fun stringToMap(objectList: String?): Map<String, String>? {
+        return readObjectWithTypeToken(objectList, object : TypeToken<Map<String, String>>() {})
     }
 
     @TypeConverter
-    public static Map<String,Boolean> stringToMap2(String objectList) {
-        return readObjectWithTypeToken(objectList, new TypeToken<Map<String,Boolean>>(){});
+    @JvmStatic
+    fun stringToMap2(objectList: String?): Map<String, Boolean>? {
+        return readObjectWithTypeToken(objectList, object : TypeToken<Map<String, Boolean>>() {})
     }
 
     @TypeConverter
-    public static String latlngObjectToString(LatLng latlng) {
-        return writeObjectToString(latlng);
+    @JvmStatic
+    fun latlngObjectToString(latlng: LatLng?): String? {
+        return writeObjectToString(latlng)
     }
 
     @TypeConverter
-    public static LatLng stringToLatLng(String objectList) {
-        return readObjectFromString(objectList,LatLng.class);
+    @JvmStatic
+    fun stringToLatLng(objectList: String?): LatLng? {
+        return readObjectFromString(objectList, LatLng::class.java)
     }
 
     @TypeConverter
-    public static String wikidataPlaceToString(WikidataPlace wikidataPlace) {
-        return writeObjectToString(wikidataPlace);
+    @JvmStatic
+    fun wikidataPlaceToString(wikidataPlace: WikidataPlace?): String? {
+        return writeObjectToString(wikidataPlace)
     }
 
     @TypeConverter
-    public static WikidataPlace stringToWikidataPlace(String wikidataPlace) {
-        return readObjectFromString(wikidataPlace, WikidataPlace.class);
+    @JvmStatic
+    fun stringToWikidataPlace(wikidataPlace: String?): WikidataPlace? {
+        return readObjectFromString(wikidataPlace, WikidataPlace::class.java)
     }
 
     @TypeConverter
-    public static String chunkInfoToString(ChunkInfo chunkInfo) {
-        return writeObjectToString(chunkInfo);
+    @JvmStatic
+    fun chunkInfoToString(chunkInfo: ChunkInfo?): String? {
+        return writeObjectToString(chunkInfo)
     }
 
     @TypeConverter
-    public static ChunkInfo stringToChunkInfo(String chunkInfo) {
-        return readObjectFromString(chunkInfo, ChunkInfo.class);
+    @JvmStatic
+    fun stringToChunkInfo(chunkInfo: String?): ChunkInfo? {
+        return readObjectFromString(chunkInfo, ChunkInfo::class.java)
     }
 
     @TypeConverter
-    public static String depictionListToString(List<DepictedItem> depictedItems) {
-        return writeObjectToString(depictedItems);
+    @JvmStatic
+    fun depictionListToString(depictedItems: List<DepictedItem>?): String? {
+        return writeObjectToString(depictedItems)
     }
 
     @TypeConverter
-    public static List<DepictedItem> stringToList(String depictedItems) {
-        return readObjectWithTypeToken(depictedItems, new TypeToken<List<DepictedItem>>() {});
+    @JvmStatic
+    fun stringToList(depictedItems: String?): List<DepictedItem>? {
+        return readObjectWithTypeToken(depictedItems, object : TypeToken<List<DepictedItem>>() {})
     }
 
     @TypeConverter
-    public static Sitelinks sitelinksFromString(String value) {
-        Type type = new TypeToken<Sitelinks>() {}.getType();
-        return new Gson().fromJson(value, type);
+    @JvmStatic
+    fun sitelinksFromString(value: String?): Sitelinks? {
+        val type = object : TypeToken<Sitelinks>() {}.type
+        return Gson().fromJson(value, type)
     }
 
     @TypeConverter
-    public static String fromSitelinks(Sitelinks sitelinks) {
-        Gson gson = new Gson();
-        return gson.toJson(sitelinks);
+    @JvmStatic
+    fun fromSitelinks(sitelinks: Sitelinks?): String? {
+        return Gson().toJson(sitelinks)
     }
 
-    private static String writeObjectToString(Object object) {
-        return object == null ? null : getGson().toJson(object);
+    private fun writeObjectToString(`object`: Any?): String? {
+        return `object`?.let { getGson().toJson(it) }
     }
 
-    private static<T> T readObjectFromString(String objectAsString, Class<T> clazz) {
-        return objectAsString == null ? null : getGson().fromJson(objectAsString, clazz);
+    private fun <T> readObjectFromString(objectAsString: String?, clazz: Class<T>): T? {
+        return objectAsString?.let { getGson().fromJson(it, clazz) }
     }
 
-    private static <T> T readObjectWithTypeToken(String objectList, TypeToken<T> typeToken) {
-        return objectList == null ? null : getGson().fromJson(objectList, typeToken.getType());
+    private fun <T> readObjectWithTypeToken(objectList: String?, typeToken: TypeToken<T>): T? {
+        return objectList?.let { getGson().fromJson(it, typeToken.type) }
     }
 }
