@@ -21,9 +21,10 @@ import fr.free.nrw.commons.upload.FileUtilsWrapper
 import io.reactivex.Single
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.test.TestCoroutineDispatcher
+import kotlinx.coroutines.test.StandardTestDispatcher
+import kotlinx.coroutines.test.TestScope
 import kotlinx.coroutines.test.resetMain
-import kotlinx.coroutines.test.runBlockingTest
+import kotlinx.coroutines.test.runTest
 import kotlinx.coroutines.test.setMain
 import org.junit.After
 import org.junit.Assert
@@ -45,7 +46,6 @@ import java.io.File
 import java.io.FileInputStream
 import java.util.Calendar
 import java.util.Date
-import kotlin.collections.HashMap
 
 /**
  * Image Loader Test.
@@ -92,7 +92,7 @@ class ImageLoaderTest {
     private lateinit var contentResolver: ContentResolver
 
     @ExperimentalCoroutinesApi
-    private val testDispacher = TestCoroutineDispatcher()
+    private val testDispacher = StandardTestDispatcher()
 
     private lateinit var imageLoader: ImageLoader
     private var mapImageSHA1: HashMap<Uri, String> = HashMap()
@@ -153,7 +153,6 @@ class ImageLoaderTest {
     @ExperimentalCoroutinesApi
     fun tearDown() {
         Dispatchers.resetMain()
-        testDispacher.cleanupTestCoroutines()
         mockedPickedFiles.close()
     }
 
@@ -162,7 +161,7 @@ class ImageLoaderTest {
      */
     @Test
     fun testQueryAndSetViewUploadedStatusNull() =
-        testDispacher.runBlockingTest {
+        TestScope(testDispacher).runTest {
             whenever(uploadedStatusDao.getUploadedFromImageSHA1(any())).thenReturn(null)
             whenever(notForUploadStatusDao.find(any())).thenReturn(0)
             mapModifiedImageSHA1[image] = "testSha1"
@@ -182,7 +181,7 @@ class ImageLoaderTest {
      */
     @Test
     fun testQueryAndSetViewUploadedStatusNotNull() =
-        testDispacher.runBlockingTest {
+        TestScope(testDispacher).runTest {
             whenever(uploadedStatusDao.getUploadedFromImageSHA1(any())).thenReturn(uploadedStatus)
             whenever(notForUploadStatusDao.find(any())).thenReturn(0)
             whenever(context.getSharedPreferences("custom_selector", 0))
@@ -195,7 +194,7 @@ class ImageLoaderTest {
      */
     @Test
     fun testNextActionableImage() =
-        testDispacher.runBlockingTest {
+        TestScope(testDispacher).runTest {
             whenever(notForUploadStatusDao.find(any())).thenReturn(0)
             whenever(uploadedStatusDao.findByImageSHA1(any(), any())).thenReturn(0)
             whenever(uploadedStatusDao.findByModifiedImageSHA1(any(), any())).thenReturn(0)
@@ -208,16 +207,40 @@ class ImageLoaderTest {
             whenever(PickedFiles.pickedExistingPicture(context, Uri.parse("test"))).thenReturn(
                 uploadableFile,
             )
-            imageLoader.nextActionableImage(listOf(image), testDispacher, testDispacher, 0, emptyList())
+            imageLoader.nextActionableImage(
+                listOf(image),
+                testDispacher,
+                testDispacher,
+                0,
+                emptyList()
+            )
 
             whenever(notForUploadStatusDao.find(any())).thenReturn(1)
-            imageLoader.nextActionableImage(listOf(image), testDispacher, testDispacher, 0, emptyList())
+            imageLoader.nextActionableImage(
+                listOf(image),
+                testDispacher,
+                testDispacher,
+                0,
+                emptyList()
+            )
 
             whenever(uploadedStatusDao.findByImageSHA1(any(), any())).thenReturn(2)
-            imageLoader.nextActionableImage(listOf(image), testDispacher, testDispacher, 0, emptyList())
+            imageLoader.nextActionableImage(
+                listOf(image),
+                testDispacher,
+                testDispacher,
+                0,
+                emptyList()
+            )
 
             whenever(uploadedStatusDao.findByModifiedImageSHA1(any(), any())).thenReturn(2)
-            imageLoader.nextActionableImage(listOf(image), testDispacher, testDispacher, 0, emptyList())
+            imageLoader.nextActionableImage(
+                listOf(image),
+                testDispacher,
+                testDispacher,
+                0,
+                emptyList()
+            )
         }
 
     /**
@@ -226,7 +249,7 @@ class ImageLoaderTest {
     @Test
     @ExperimentalCoroutinesApi
     fun testGetSha1() =
-        testDispacher.runBlockingTest {
+        TestScope(testDispacher).runTest {
             BDDMockito
                 .given(PickedFiles.pickedExistingPicture(context, image.uri))
                 .willReturn(UploadableFile(uri, File("ABC")))

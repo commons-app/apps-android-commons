@@ -52,13 +52,14 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
 
     // Jetpack Compose
-    def composeBom = platform('androidx.compose:compose-bom:2024.08.00')
+    def composeBom = platform('androidx.compose:compose-bom:2024.11.00')
 
-    implementation "androidx.activity:activity-compose:1.9.1"
+    implementation "androidx.activity:activity-compose:1.9.3"
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.8.4"
     implementation (composeBom)
     implementation "androidx.compose.runtime:runtime"
     implementation "androidx.compose.ui:ui"
+    implementation "androidx.compose.ui:ui-viewbinding"
     implementation "androidx.compose.ui:ui-graphics"
     implementation "androidx.compose.ui:ui-tooling"
     implementation "androidx.compose.foundation:foundation"
@@ -313,6 +314,7 @@ android {
             buildConfigField "String", "SIGNUP_SUCCESS_REDIRECTION_URL", "\"https://commons.m.wikimedia.org/w/index.php?title=Main_Page&welcome=yes\""
             buildConfigField "String", "FORGOT_PASSWORD_URL", "\"https://commons.wikimedia.org/wiki/Special:PasswordReset\""
             buildConfigField "String", "PRIVACY_POLICY_URL", "\"https://github.com/commons-app/commons-app-documentation/blob/master/android/Privacy-policy.md\""
+            buildConfigField "String", "FILE_USAGES_BASE_URL", "\"https://commons.wikimedia.org/w/api.php?action=query&format=json&formatversion=2\""
             buildConfigField "String", "ACCOUNT_TYPE", "\"fr.free.nrw.commons\""
             buildConfigField "String", "CONTRIBUTION_AUTHORITY", "\"fr.free.nrw.commons.contributions.contentprovider\""
             buildConfigField "String", "MODIFICATION_AUTHORITY", "\"fr.free.nrw.commons.modifications.contentprovider\""
@@ -348,6 +350,7 @@ android {
             buildConfigField "String", "SIGNUP_SUCCESS_REDIRECTION_URL", "\"https://commons.m.wikimedia.beta.wmflabs.org/w/index.php?title=Main_Page&welcome=yes\""
             buildConfigField "String", "FORGOT_PASSWORD_URL", "\"https://commons.wikimedia.beta.wmflabs.org/wiki/Special:PasswordReset\""
             buildConfigField "String", "PRIVACY_POLICY_URL", "\"https://github.com/commons-app/commons-app-documentation/blob/master/android/Privacy-policy.md\""
+            buildConfigField "String", "FILE_USAGES_BASE_URL", "\"https://commons.wikimedia.org/w/api.php?action=query&format=json&formatversion=2\""
             buildConfigField "String", "ACCOUNT_TYPE", "\"fr.free.nrw.commons.beta\""
             buildConfigField "String", "CONTRIBUTION_AUTHORITY", "\"fr.free.nrw.commons.beta.contributions.contentprovider\""
             buildConfigField "String", "MODIFICATION_AUTHORITY", "\"fr.free.nrw.commons.beta.modifications.contentprovider\""

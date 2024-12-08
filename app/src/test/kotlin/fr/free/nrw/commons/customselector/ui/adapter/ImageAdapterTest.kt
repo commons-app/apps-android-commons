@@ -17,7 +17,7 @@ import fr.free.nrw.commons.customselector.ui.selector.ImageLoader
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.runBlocking
-import kotlinx.coroutines.test.TestCoroutineDispatcher
+import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.setMain
 import org.junit.After
@@ -34,7 +34,6 @@ import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 import java.lang.reflect.Field
 import java.util.TreeMap
-import kotlin.collections.ArrayList
 
 /**
  * Custom Selector image adapter test.
@@ -65,7 +64,7 @@ class ImageAdapterTest {
     private lateinit var selectedImageField: Field
     private var uri: Uri = Mockito.mock(Uri::class.java)
     private lateinit var image: Image
-    private val testDispatcher = TestCoroutineDispatcher()
+    private val testDispatcher = StandardTestDispatcher()
 
     /**
      * Set up variables.
@@ -91,7 +90,6 @@ class ImageAdapterTest {
     @After
     fun tearDown() {
         Dispatchers.resetMain()
-        testDispatcher.cleanupTestCoroutines()
     }
 
     /**
