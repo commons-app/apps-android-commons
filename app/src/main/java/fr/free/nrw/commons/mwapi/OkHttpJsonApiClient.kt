@@ -23,6 +23,8 @@ import fr.free.nrw.commons.utils.ConfigUtils.isBetaFlavour
 import fr.free.nrw.commons.wikidata.model.GetWikidataEditCountResponse
 import io.reactivex.Observable
 import io.reactivex.Single
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import okhttp3.HttpUrl
 import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 import okhttp3.OkHttpClient
@@ -53,8 +55,10 @@ class OkHttpJsonApiClient @Inject constructor(
     ): Observable<LeaderboardResponse> {
         val fetchLeaderboardUrlTemplate =
             wikiMediaToolforgeUrl.toString() + LeaderboardConstants.LEADERBOARD_END_POINT
-        val url = String.format(Locale.ENGLISH,
-            fetchLeaderboardUrlTemplate, userName, duration, category, limit, offset)
+        val url = String.format(
+            Locale.ENGLISH,
+            fetchLeaderboardUrlTemplate, userName, duration, category, limit, offset
+        )
         val urlBuilder: HttpUrl.Builder = url.toHttpUrlOrNull()!!.newBuilder()
             .addQueryParameter("user", userName)
             .addQueryParameter("duration", duration)
@@ -83,66 +87,72 @@ class OkHttpJsonApiClient @Inject constructor(
         })
     }
 
-    fun getFileUsagesOnCommons(
+    suspend fun getFileUsagesOnCommons(
         fileName: String?,
         pageSize: Int
-    ): Observable<FileUsagesResponse?> {
-        val urlBuilder = BuildConfig.FILE_USAGES_BASE_URL.toHttpUrlOrNull()!!.newBuilder()
-        urlBuilder.addQueryParameter("prop", "fileusage")
-        urlBuilder.addQueryParameter("titles", fileName)
-        urlBuilder.addQueryParameter("fulimit", pageSize.toString())
+    ): FileUsagesResponse? {
+        return withContext(Dispatchers.IO) {
 
-        Timber.i("Url %s", urlBuilder.toString())
-        val request: Request = Request.Builder()
-            .url(urlBuilder.toString())
-            .build()
+            return@withContext try {
 
-        return Observable.fromCallable({
-            val response: Response = okHttpClient.newCall(request).execute()
-            if (response.body != null && response.isSuccessful) {
-                val json: String = response.body!!.string()
-                try {
-                    return@fromCallable gson.fromJson<FileUsagesResponse>(
+                val urlBuilder = BuildConfig.FILE_USAGES_BASE_URL.toHttpUrlOrNull()!!.newBuilder()
+                urlBuilder.addQueryParameter("prop", "fileusage")
+                urlBuilder.addQueryParameter("titles", fileName)
+                urlBuilder.addQueryParameter("fulimit", pageSize.toString())
+
+                Timber.i("Url %s", urlBuilder.toString())
+                val request: Request = Request.Builder()
+                    .url(urlBuilder.toString())
+                    .build()
+
+                val response: Response = okHttpClient.newCall(request).execute()
+                if (response.body != null && response.isSuccessful) {
+                    val json: String = response.body!!.string()
+                    gson.fromJson<FileUsagesResponse>(
                         json,
                         FileUsagesResponse::class.java
                     )
-                } catch (e: java.lang.Exception) {
-                    return@fromCallable null
-                }
+                } else null
+            } catch (e: Exception) {
+                Timber.e(e)
+                null
             }
-            null
-        })
+        }
     }
 
-    fun getGlobalFileUsages(
+    suspend fun getGlobalFileUsages(
         fileName: String?,
         pageSize: Int
-    ): Observable<GlobalFileUsagesResponse?> {
-        val urlBuilder = BuildConfig.FILE_USAGES_BASE_URL.toHttpUrlOrNull()!!.newBuilder()
-        urlBuilder.addQueryParameter("prop", "globalusage")
-        urlBuilder.addQueryParameter("titles", fileName)
-        urlBuilder.addQueryParameter("gulimit", pageSize.toString())
+    ): GlobalFileUsagesResponse? {
 
-        Timber.i("Url %s", urlBuilder.toString())
-        val request: Request = Request.Builder()
-            .url(urlBuilder.toString())
-            .build()
+        return withContext(Dispatchers.IO) {
 
-        return Observable.fromCallable({
-            val response: Response = okHttpClient.newCall(request).execute()
-            if (response.body != null && response.isSuccessful) {
-                val json: String = response.body!!.string()
-                try {
-                    return@fromCallable gson.fromJson<GlobalFileUsagesResponse>(
+            return@withContext try {
+
+                val urlBuilder = BuildConfig.FILE_USAGES_BASE_URL.toHttpUrlOrNull()!!.newBuilder()
+                urlBuilder.addQueryParameter("prop", "globalusage")
+                urlBuilder.addQueryParameter("titles", fileName)
+                urlBuilder.addQueryParameter("gulimit", pageSize.toString())
+
+                Timber.i("Url %s", urlBuilder.toString())
+                val request: Request = Request.Builder()
+                    .url(urlBuilder.toString())
+                    .build()
+
+                val response: Response = okHttpClient.newCall(request).execute()
+                if (response.body != null && response.isSuccessful) {
+                    val json: String = response.body!!.string()
+
+                    gson.fromJson<GlobalFileUsagesResponse>(
                         json,
                         GlobalFileUsagesResponse::class.java
                     )
-                } catch (e: java.lang.Exception) {
-                    return@fromCallable null
-                }
+                } else null
+            } catch (e: Exception) {
+                Timber.e(e)
+                null
             }
-            null
-        })
+        }
     }
 
     fun setAvatar(username: String?, avatar: String?): Single<UpdateAvatarResponse?> {

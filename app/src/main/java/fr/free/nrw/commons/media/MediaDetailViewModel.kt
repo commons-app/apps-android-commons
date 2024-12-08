@@ -8,12 +8,10 @@ import fr.free.nrw.commons.R
 import fr.free.nrw.commons.fileusages.FileUsagesUiModel
 import fr.free.nrw.commons.fileusages.toUiModel
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.rx2.awaitSingle
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -33,13 +31,13 @@ class MediaDetailViewModel(
 
     fun loadFileUsagesCommons(fileName: String) {
 
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch {
 
             _commonsContainerState.update { FileUsagesContainerState.Loading }
 
             try {
                 val result =
-                    okHttpJsonApiClient.getFileUsagesOnCommons(fileName, 10).awaitSingle()
+                    okHttpJsonApiClient.getFileUsagesOnCommons(fileName, 10)
 
                 val data = result?.query?.pages?.first()?.fileUsage?.map { it.toUiModel() }
 
@@ -64,12 +62,12 @@ class MediaDetailViewModel(
 
     fun loadGlobalFileUsages(fileName: String) {
 
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch {
 
             _globalContainerState.update { FileUsagesContainerState.Loading }
 
             try {
-                val result = okHttpJsonApiClient.getGlobalFileUsages(fileName, 10).awaitSingle()
+                val result = okHttpJsonApiClient.getGlobalFileUsages(fileName, 10)
 
                 val data = result?.query?.pages?.first()?.fileUsage?.map { it.toUiModel() }
 
