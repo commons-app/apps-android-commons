@@ -201,7 +201,7 @@ class ReviewActivity : BaseActivity() {
                     val caption = getString(
                         R.string.review_is_uploaded_by,
                         fileName,
-                        revision.user
+                        revision.user()
                     )
                     binding.tvImageCaption.text = caption
                     binding.pbReviewImage.visibility = View.GONE
