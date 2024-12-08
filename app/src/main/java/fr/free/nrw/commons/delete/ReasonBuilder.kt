@@ -35,7 +35,10 @@ class ReasonBuilder @Inject constructor(
      * @param reason
      * @return
      */
-    fun getReason(media: Media, reason: String): Single<String> {
+    fun getReason(media: Media?, reason: String?): Single<String> {
+        if (media == null || reason == null) {
+            return Single.just("Not known")
+        }
         return fetchArticleNumber(media, reason)
     }
 

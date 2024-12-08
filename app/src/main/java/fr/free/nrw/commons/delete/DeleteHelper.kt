@@ -49,27 +49,34 @@ class DeleteHelper @Inject constructor(
      * @return
      */
     fun makeDeletion(
-        context: Context,
-        media: Media,
-        reason: String
-    ): Single<Boolean> {
+        context: Context?,
+        media: Media?,
+        reason: String?
+    ): Single<Boolean>? {
+
+        if(context == null && media == null) {
+            return null
+        }
+
         viewUtil.showShortToast(
-            context,
-            "Trying to nominate ${media.displayTitle} for deletion"
+            context!!,
+            "Trying to nominate ${media?.displayTitle} for deletion"
         )
 
-        return delete(media, reason)
-            .flatMapSingle { result ->
-                Single.just(showDeletionNotification(context, media, result))
-            }
-            .firstOrError()
-            .onErrorResumeNext { throwable ->
-                if (throwable is InvalidLoginTokenException) {
-                    Single.error(throwable)
-                } else {
-                    Single.error(throwable)
+        return reason?.let {
+            delete(media!!, it)
+                .flatMapSingle { result ->
+                    Single.just(showDeletionNotification(context, media, result))
                 }
-            }
+                .firstOrError()
+                .onErrorResumeNext { throwable ->
+                    if (throwable is InvalidLoginTokenException) {
+                        Single.error(throwable)
+                    } else {
+                        Single.error(throwable)
+                    }
+                }
+        }
     }
 
     /**
@@ -239,7 +246,9 @@ class DeleteHelper @Inject constructor(
                     getLocalizedResources(context, Locale.ENGLISH)
                         .getString(R.string.delete_helper_ask_reason_copyright_logo),
                     getLocalizedResources(context, Locale.ENGLISH)
-                        .getString(R.string.delete_helper_ask_reason_copyright_no_freedom_of_panorama)
+                        .getString(
+                            R.string.delete_helper_ask_reason_copyright_no_freedom_of_panorama
+                        )
                 )
             }
             else -> {
@@ -248,7 +257,10 @@ class DeleteHelper @Inject constructor(
             }
         }
 
-        alert.setMultiChoiceItems(reasonList, checkedItems) { dialogInterface, position, isChecked ->
+        alert.setMultiChoiceItems(
+            reasonList,
+            checkedItems
+        ) { dialogInterface, position, isChecked ->
             if (isChecked) {
                 mUserReason.add(position)
             } else {
@@ -286,7 +298,8 @@ class DeleteHelper @Inject constructor(
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe({ reviewCallback.onSuccess() }, { throwable ->
                         when (throwable) {
-                            is InvalidLoginTokenException -> reviewCallback.onTokenException(throwable)
+                            is InvalidLoginTokenException ->
+                                reviewCallback.onTokenException(throwable)
                             else -> reviewCallback.onFailure()
                         }
                         reviewCallback.enableButtons()

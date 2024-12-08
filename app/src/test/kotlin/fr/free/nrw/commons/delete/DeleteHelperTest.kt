@@ -102,7 +102,7 @@ class DeleteHelperTest {
             context,
             media,
             "Test reason"
-        ).blockingGet()
+        )?.blockingGet()
         assertNotNull(makeDeletion)
         assertTrue(makeDeletion!!)
         verify(pageEditClient).appendEdit(eq("User_Talk:$creatorName"), ArgumentMatchers.anyString(), ArgumentMatchers.anyString())
@@ -190,22 +190,9 @@ class DeleteHelperTest {
     @Test
     fun alertDialogPositiveButtonEnableTest() {
         val mContext = RuntimeEnvironment.getApplication().applicationContext
-
-        deleteHelper.askReasonAndExecute(
-            media,
-            mContext,
-            "My Question",
-            ReviewController.DeleteReason.COPYRIGHT_VIOLATION, callback
-        )
-
-        deleteHelper.getListener()?.onClick(
-            deleteHelper.getDialog(),
-            1,
-            true)
-        assertEquals(
-            true,
-            deleteHelper.getDialog()?.getButton(AlertDialog.BUTTON_POSITIVE)?.isEnabled
-        )
+        deleteHelper.askReasonAndExecute(media, mContext, "My Question", ReviewController.DeleteReason.COPYRIGHT_VIOLATION, callback)
+        deleteHelper.getListener()?.onClick(deleteHelper.getDialog(), 1, true)
+        assertEquals(true, deleteHelper.getDialog()?.getButton(AlertDialog.BUTTON_POSITIVE)?.isEnabled)
     }
 
     @Test(expected = RuntimeException::class)

@@ -27,6 +27,7 @@ import com.facebook.drawee.backends.pipeline.Fresco
 import com.facebook.drawee.generic.GenericDraweeHierarchy
 import com.facebook.drawee.view.SimpleDraweeView
 import com.facebook.soloader.SoLoader
+import com.nhaarman.mockitokotlin2.anyOrNull
 import com.nhaarman.mockitokotlin2.doReturn
 import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.LocationPicker.LocationPickerActivity
@@ -768,9 +769,16 @@ class MediaDetailFragmentUnitTests {
         ).thenReturn(true)
         doReturn(
             Single.just(true),
-        ).`when`(deleteHelper).makeDeletion(ArgumentMatchers.any(), ArgumentMatchers.any(), ArgumentMatchers.any())
+        ).`when`(deleteHelper).makeDeletion(
+            ArgumentMatchers.any(),
+            ArgumentMatchers.any(),
+            ArgumentMatchers.any()
+        )
 
-        doReturn(Single.just("")).`when`(reasonBuilder).getReason(ArgumentMatchers.any(), ArgumentMatchers.any())
+        doReturn(Single.just("")).`when`(reasonBuilder).getReason(
+            ArgumentMatchers.any(),
+            ArgumentMatchers.any()
+        )
 
         val method: Method =
             MediaDetailFragment::class.java.getDeclaredMethod(
