@@ -78,7 +78,13 @@ class CategoriesModel
 
             // Newly used category...
             if (category == null) {
-                category = Category(null, item.name, item.description, item.thumbnail, Date(), 0)
+                category = Category(
+                    null, item.name,
+                    item.description,
+                    item.thumbnail,
+                    Date(),
+                    0
+                )
             }
             category.incTimesUsed()
             categoryDao.save(category)

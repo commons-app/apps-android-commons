@@ -1,72 +1,59 @@
-package fr.free.nrw.commons.category;
+package fr.free.nrw.commons.category
 
-import android.content.Context;
-import android.text.TextUtils;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.TextView;
+import android.annotation.SuppressLint
+import android.content.Context
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.ArrayAdapter
+import android.widget.TextView
+import com.facebook.drawee.view.SimpleDraweeView
+import fr.free.nrw.commons.Media
+import fr.free.nrw.commons.R
 
-import androidx.annotation.Nullable;
-
-import com.facebook.drawee.view.SimpleDraweeView;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import fr.free.nrw.commons.Media;
-import fr.free.nrw.commons.R;
 
 /**
  * This is created to only display UI implementation. Needs to be changed in real implementation
  */
+class GridViewAdapter(
+    context: Context,
+    layoutResourceId: Int,
+    private var data: MutableList<Media>?
+) : ArrayAdapter<Media>(context, layoutResourceId, data ?: mutableListOf()) {
 
-public class GridViewAdapter extends ArrayAdapter {
-    private List<Media> data;
-
-    public GridViewAdapter(Context context, int layoutResourceId, List<Media> data) {
-        super(context, layoutResourceId, data);
-        this.data = data;
+    /**
+     * Adds more items to the list
+     * It's triggered on scrolling down in the list
+     * @param images
+     */
+    fun addItems(images: List<Media>) {
+        if (data == null) {
+            data = mutableListOf()
+        }
+        data?.addAll(images)
+        notifyDataSetChanged()
     }
 
     /**
-     * Adds more item to the list
-     * Its triggered on scrolling down in the list
+     * Checks the first item in the new list with the old list and returns true if they are the same
+     * It's triggered on a successful response of the fetch images API.
      * @param images
      */
-    public void addItems(List<Media> images) {
-        if (data == null) {
-            data = new ArrayList<>();
+    fun containsAll(images: List<Media>?): Boolean {
+        if (images.isNullOrEmpty()) {
+            return false
         }
-        data.addAll(images);
-        notifyDataSetChanged();
+        if (data.isNullOrEmpty()) {
+            data = mutableListOf()
+            return false
+        }
+        val fileName = data?.get(0)?.filename
+        val imageName = images[0].filename
+        return imageName == fileName
     }
 
-    /**
-     * Check the first item in the new list with old list and returns true if they are same
-     * Its triggered on successful response of the fetch images API.
-     * @param images
-     */
-    public boolean containsAll(List<Media> images){
-        if (images == null || images.isEmpty()) {
-            return false;
-        }
-        if (data == null) {
-            data = new ArrayList<>();
-            return false;
-        }
-        if (data.isEmpty()) {
-            return false;
-        }
-        String fileName = data.get(0).getFilename();
-        String imageName = images.get(0).getFilename();
-        return imageName.equals(fileName);
-    }
-
-    @Override
-    public boolean isEmpty() {
-        return data == null || data.isEmpty();
+    override fun isEmpty(): Boolean {
+        return data.isNullOrEmpty()
     }
 
     /**
@@ -76,44 +63,49 @@ public class GridViewAdapter extends ArrayAdapter {
      * @param parent
      * @return
      */
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
+        val view = convertView ?: LayoutInflater.from(context).inflate(
+            R.layout.layout_category_images,
+            parent,
+            false
+        )
 
-        if (convertView == null) {
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.layout_category_images, null);
+        val item = data?.get(position)
+        val imageView = view.findViewById<SimpleDraweeView>(R.id.categoryImageView)
+        val fileName = view.findViewById<TextView>(R.id.categoryImageTitle)
+        val uploader = view.findViewById<TextView>(R.id.categoryImageAuthor)
+
+        item?.let {
+            fileName.text = it.mostRelevantCaption
+            setUploaderView(it, uploader)
+            imageView.setImageURI(it.thumbUrl)
         }
 
-        Media item = data.get(position);
-        SimpleDraweeView imageView = convertView.findViewById(R.id.categoryImageView);
-        TextView fileName = convertView.findViewById(R.id.categoryImageTitle);
-        TextView uploader = convertView.findViewById(R.id.categoryImageAuthor);
-        fileName.setText(item.getMostRelevantCaption());
-        setUploaderView(item, uploader);
-        imageView.setImageURI(item.getThumbUrl());
-        return convertView;
+        return view
     }
 
     /**
      * @return the Media item at the given position
      */
-    @Nullable
-    @Override
-    public Media getItem(int position) {
-        return data.get(position);
+    override fun getItem(position: Int): Media? {
+        return data?.get(position)
     }
 
-
     /**
-     * Shows author information if its present
+     * Shows author information if it's present
      * @param item
      * @param uploader
      */
-    private void setUploaderView(Media item, TextView uploader) {
-        if (!TextUtils.isEmpty(item.getAuthor())) {
-            uploader.setVisibility(View.VISIBLE);
-            uploader.setText(getContext().getString(R.string.image_uploaded_by, item.getUser()));
+    @SuppressLint("StringFormatInvalid")
+    private fun setUploaderView(item: Media, uploader: TextView) {
+        if (!item.author.isNullOrEmpty()) {
+            uploader.visibility = View.VISIBLE
+            uploader.text = context.getString(
+                R.string.image_uploaded_by,
+                item.user
+            )
         } else {
-            uploader.setVisibility(View.GONE);
+            uploader.visibility = View.GONE
         }
     }
 }

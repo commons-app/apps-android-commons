@@ -1,141 +1,130 @@
-package fr.free.nrw.commons.category;
+package fr.free.nrw.commons.category
 
-import static fr.free.nrw.commons.category.CategoryClientKt.CATEGORY_PREFIX;
+import android.content.Context
+import android.content.Intent
+import android.net.Uri
+import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
+import android.view.View
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import fr.free.nrw.commons.Media
+import fr.free.nrw.commons.R
+import fr.free.nrw.commons.Utils
+import fr.free.nrw.commons.ViewPagerAdapter
+import fr.free.nrw.commons.databinding.ActivityCategoryDetailsBinding
+import fr.free.nrw.commons.explore.categories.media.CategoriesMediaFragment
+import fr.free.nrw.commons.explore.categories.parent.ParentCategoriesFragment
+import fr.free.nrw.commons.explore.categories.sub.SubCategoriesFragment
+import fr.free.nrw.commons.media.MediaDetailPagerFragment
+import fr.free.nrw.commons.theme.BaseActivity
 
-import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
-import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.FrameLayout;
-import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.viewpager.widget.ViewPager;
-import com.google.android.material.tabs.TabLayout;
-import fr.free.nrw.commons.Media;
-import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.Utils;
-import fr.free.nrw.commons.ViewPagerAdapter;
-import fr.free.nrw.commons.databinding.ActivityCategoryDetailsBinding;
-import fr.free.nrw.commons.explore.categories.media.CategoriesMediaFragment;
-import fr.free.nrw.commons.explore.categories.parent.ParentCategoriesFragment;
-import fr.free.nrw.commons.explore.categories.sub.SubCategoriesFragment;
-import fr.free.nrw.commons.media.MediaDetailPagerFragment;
-import fr.free.nrw.commons.theme.BaseActivity;
-import java.util.ArrayList;
-import java.util.List;
-import fr.free.nrw.commons.wikidata.model.page.PageTitle;
 
 /**
  * This activity displays details of a particular category
  * Its generic and simply takes the name of category name in its start intent to load all images, subcategories in
  * a particular category on wikimedia commons.
  */
+class CategoryDetailsActivity : BaseActivity(),
+    MediaDetailPagerFragment.MediaDetailProvider,
+    CategoryImagesCallback {
 
-public class CategoryDetailsActivity extends BaseActivity
-        implements MediaDetailPagerFragment.MediaDetailProvider, CategoryImagesCallback {
+    private lateinit var supportFragmentManager: FragmentManager
+    private lateinit var categoriesMediaFragment: CategoriesMediaFragment
+    private var mediaDetails: MediaDetailPagerFragment? = null
+    private var categoryName: String? = null
+    private lateinit var viewPagerAdapter: ViewPagerAdapter
 
+    private lateinit var binding: ActivityCategoryDetailsBinding
 
-    private FragmentManager supportFragmentManager;
-    private CategoriesMediaFragment categoriesMediaFragment;
-    private MediaDetailPagerFragment mediaDetails;
-    private String categoryName;
-    ViewPagerAdapter viewPagerAdapter;
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
 
-    private ActivityCategoryDetailsBinding binding;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        binding = ActivityCategoryDetailsBinding.inflate(getLayoutInflater());
-        final View view = binding.getRoot();
-        setContentView(view);
-        supportFragmentManager = getSupportFragmentManager();
-        viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
-        binding.viewPager.setAdapter(viewPagerAdapter);
-        binding.viewPager.setOffscreenPageLimit(2);
-        binding.tabLayout.setupWithViewPager(binding.viewPager);
-        setSupportActionBar(binding.toolbarBinding.toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        setTabs();
-        setPageTitle();
+        binding = ActivityCategoryDetailsBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
+        supportFragmentManager = getSupportFragmentManager()
+        viewPagerAdapter = ViewPagerAdapter(supportFragmentManager)
+        binding.viewPager.adapter = viewPagerAdapter
+        binding.viewPager.offscreenPageLimit = 2
+        binding.tabLayout.setupWithViewPager(binding.viewPager)
+        setSupportActionBar(binding.toolbarBinding.toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        setTabs()
+        setPageTitle()
     }
 
     /**
      * This activity contains 3 tabs and a viewpager. This method is used to set the titles of tab,
      * Set the fragments according to the tab selected in the viewPager.
      */
-    private void setTabs() {
-        List<Fragment> fragmentList = new ArrayList<>();
-        List<String> titleList = new ArrayList<>();
-        categoriesMediaFragment = new CategoriesMediaFragment();
-        SubCategoriesFragment subCategoryListFragment = new SubCategoriesFragment();
-        ParentCategoriesFragment parentCategoriesFragment = new ParentCategoriesFragment();
-        categoryName = getIntent().getStringExtra("categoryName");
-        if (getIntent() != null && categoryName != null) {
-            Bundle arguments = new Bundle();
-            arguments.putString("categoryName", categoryName);
-            categoriesMediaFragment.setArguments(arguments);
-            subCategoryListFragment.setArguments(arguments);
-            parentCategoriesFragment.setArguments(arguments);
+    private fun setTabs() {
+        val fragmentList = mutableListOf<Fragment>()
+        val titleList = mutableListOf<String>()
+        categoriesMediaFragment = CategoriesMediaFragment()
+        val subCategoryListFragment = SubCategoriesFragment()
+        val parentCategoriesFragment = ParentCategoriesFragment()
+        categoryName = intent?.getStringExtra("categoryName")
+        if (intent != null && categoryName != null) {
+            val arguments = Bundle().apply {
+                putString("categoryName", categoryName)
+            }
+            categoriesMediaFragment.arguments = arguments
+            subCategoryListFragment.arguments = arguments
+            parentCategoriesFragment.arguments = arguments
         }
-        fragmentList.add(categoriesMediaFragment);
-        titleList.add("MEDIA");
-        fragmentList.add(subCategoryListFragment);
-        titleList.add("SUBCATEGORIES");
-        fragmentList.add(parentCategoriesFragment);
-        titleList.add("PARENT CATEGORIES");
-        viewPagerAdapter.setTabData(fragmentList, titleList);
-        viewPagerAdapter.notifyDataSetChanged();
-
+        fragmentList.add(categoriesMediaFragment)
+        titleList.add("MEDIA")
+        fragmentList.add(subCategoryListFragment)
+        titleList.add("SUBCATEGORIES")
+        fragmentList.add(parentCategoriesFragment)
+        titleList.add("PARENT CATEGORIES")
+        viewPagerAdapter.setTabData(fragmentList, titleList)
+        viewPagerAdapter.notifyDataSetChanged()
     }
 
     /**
      * Gets the passed categoryName from the intents and displays it as the page title
      */
-    private void setPageTitle() {
-        if (getIntent() != null && getIntent().getStringExtra("categoryName") != null) {
-            setTitle(getIntent().getStringExtra("categoryName"));
+    private fun setPageTitle() {
+        intent?.getStringExtra("categoryName")?.let {
+            title = it
         }
     }
 
     /**
      * This method is called onClick of media inside category details (CategoryImageListFragment).
      */
-    @Override
-    public void onMediaClicked(int position) {
-        binding.tabLayout.setVisibility(View.GONE);
-        binding.viewPager.setVisibility(View.GONE);
-        binding.mediaContainer.setVisibility(View.VISIBLE);
-        if (mediaDetails == null || !mediaDetails.isVisible()) {
+    override fun onMediaClicked(position: Int) {
+        binding.tabLayout.visibility = View.GONE
+        binding.viewPager.visibility = View.GONE
+        binding.mediaContainer.visibility = View.VISIBLE
+        if (mediaDetails == null || mediaDetails?.isVisible == false) {
             // set isFeaturedImage true for featured images, to include author field on media detail
-            mediaDetails = MediaDetailPagerFragment.newInstance(false, true);
-            FragmentManager supportFragmentManager = getSupportFragmentManager();
-            supportFragmentManager
-                    .beginTransaction()
-                    .replace(R.id.mediaContainer, mediaDetails)
-                    .addToBackStack(null)
-                    .commit();
-            supportFragmentManager.executePendingTransactions();
+            mediaDetails = MediaDetailPagerFragment.newInstance(false, true)
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.mediaContainer, mediaDetails!!)
+                .addToBackStack(null)
+                .commit()
+            supportFragmentManager.executePendingTransactions()
         }
-        mediaDetails.showImage(position);
+        mediaDetails?.showImage(position)
     }
 
 
-    /**
-     * Consumers should be simply using this method to use this activity.
-     * @param context  A Context of the application package implementing this class.
-     * @param categoryName Name of the category for displaying its details
-     */
-    public static void startYourself(Context context, String categoryName) {
-        Intent intent = new Intent(context, CategoryDetailsActivity.class);
-        intent.putExtra("categoryName", categoryName);
-        context.startActivity(intent);
+    companion object {
+        /**
+         * Consumers should be simply using this method to use this activity.
+         * @param context  A Context of the application package implementing this class.
+         * @param categoryName Name of the category for displaying its details
+         */
+        fun startYourself(context: Context?, categoryName: String) {
+            val intent = Intent(context, CategoryDetailsActivity::class.java).apply {
+                putExtra("categoryName", categoryName)
+            }
+            context?.startActivity(intent)
+        }
     }
 
     /**
@@ -144,9 +133,8 @@ public class CategoryDetailsActivity extends BaseActivity
      *          current index of viewPager.
      * @return Media Object
      */
-    @Override
-    public Media getMediaAtPosition(int i) {
-        return categoriesMediaFragment.getMediaAtPosition(i);
+    override fun getMediaAtPosition(i: Int): Media? {
+        return categoriesMediaFragment.getMediaAtPosition(i)
     }
 
     /**
@@ -154,14 +142,12 @@ public class CategoryDetailsActivity extends BaseActivity
      * The viewpager will contain same number of media items as that of media elements in adapter.
      * @return Total Media count in the adapter
      */
-    @Override
-    public int getTotalMediaCount() {
-        return categoriesMediaFragment.getTotalMediaCount();
+    override fun getTotalMediaCount(): Int {
+        return categoriesMediaFragment.getTotalMediaCount()
     }
 
-    @Override
-    public Integer getContributionStateAt(int position) {
-        return null;
+    override fun getContributionStateAt(position: Int): Int? {
+        return null
     }
 
     /**
@@ -169,42 +155,37 @@ public class CategoryDetailsActivity extends BaseActivity
      *
      * @param index item position that has been nominated
      */
-    @Override
-    public void refreshNominatedMedia(int index) {
-        if (getSupportFragmentManager().getBackStackEntryCount() == 1) {
-            onBackPressed();
-            onMediaClicked(index);
+    override fun refreshNominatedMedia(index: Int) {
+        if (supportFragmentManager.backStackEntryCount == 1) {
+            onBackPressed()
+            onMediaClicked(index)
         }
     }
 
     /**
      * This method inflates the menu in the toolbar
      */
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.fragment_category_detail, menu);
-        return super.onCreateOptionsMenu(menu);
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.fragment_category_detail, menu)
+        return super.onCreateOptionsMenu(menu)
     }
 
     /**
      * This method handles the logic on ItemSelect in toolbar menu
      * Currently only 1 choice is available to open category details page in browser
      */
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        // Handle item selection
-        switch (item.getItemId()) {
-            case R.id.menu_browser_current_category:
-                PageTitle title = Utils.getPageTitle(CATEGORY_PREFIX + categoryName);
-                Utils.handleWebUrl(this, Uri.parse(title.getCanonicalUri()));
-                return true;
-            case android.R.id.home:
-                onBackPressed();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.menu_browser_current_category -> {
+                val title = Utils.getPageTitle(CATEGORY_PREFIX + categoryName)
+                Utils.handleWebUrl(this, Uri.parse(title.canonicalUri))
+                true
+            }
+            android.R.id.home -> {
+                onBackPressed()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
         }
     }
 
@@ -212,25 +193,24 @@ public class CategoryDetailsActivity extends BaseActivity
      * This method is called on backPressed of anyFragment in the activity.
      * If condition is called when mediaDetailFragment is opened.
      */
-    @Override
-    public void onBackPressed() {
-        if (supportFragmentManager.getBackStackEntryCount() == 1){
-            binding.tabLayout.setVisibility(View.VISIBLE);
-            binding.viewPager.setVisibility(View.VISIBLE);
-            binding.mediaContainer.setVisibility(View.GONE);
+    @Deprecated("This method has been deprecated in favor of using the" +
+            "{@link OnBackPressedDispatcher} via {@link #getOnBackPressedDispatcher()}." +
+            "The OnBackPressedDispatcher controls how back button events are dispatched" +
+            "to one or more {@link OnBackPressedCallback} objects.")
+    override fun onBackPressed() {
+        if (supportFragmentManager.backStackEntryCount == 1) {
+            binding.tabLayout.visibility = View.VISIBLE
+            binding.viewPager.visibility = View.VISIBLE
+            binding.mediaContainer.visibility = View.GONE
         }
-        super.onBackPressed();
+        super.onBackPressed()
     }
 
     /**
      * This method is called on success of API call for Images inside a category.
      * The viewpager will notified that number of items have changed.
      */
-    @Override
-    public void viewPagerNotifyDataSetChanged() {
-        if (mediaDetails!=null){
-            mediaDetails.notifyDataSetChanged();
-        }
+    override fun viewPagerNotifyDataSetChanged() {
+        mediaDetails?.notifyDataSetChanged()
     }
-
 }

@@ -1,13 +1,7 @@
-package fr.free.nrw.commons.category;
+package fr.free.nrw.commons.category
 
-/**
- * Callback for notifying the viewpager that the number of items have changed
- * and for requesting more images when the viewpager has been scrolled to its end.
- */
+interface CategoryImagesCallback {
+    fun viewPagerNotifyDataSetChanged()
 
-public interface CategoryImagesCallback {
-   void viewPagerNotifyDataSetChanged();
-   void onMediaClicked(int position);
+    fun onMediaClicked(position: Int)
 }
-
-
