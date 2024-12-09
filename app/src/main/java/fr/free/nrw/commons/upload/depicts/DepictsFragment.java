@@ -114,7 +114,7 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
         setDepictsSubTitle();
         binding.tooltip.setOnClickListener(v -> DialogUtil
             .showAlertDialog(getActivity(), getString(R.string.depicts_step_title),
-                getString(R.string.depicts_tooltip), getString(android.R.string.ok), null, true));
+                getString(R.string.depicts_tooltip), getString(android.R.string.ok), null));
         if (media == null) {
             presenter.onAttachView(this);
         } else {

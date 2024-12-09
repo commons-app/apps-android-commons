@@ -291,8 +291,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                             askForLocationPermission();
                         },
                         null,
-                        null,
-                        false);
+                        null
+                    );
                 } else {
                     if (isPermissionDenied) {
                         locationPermissionsHelper.showAppSettingsDialog(getActivity(),

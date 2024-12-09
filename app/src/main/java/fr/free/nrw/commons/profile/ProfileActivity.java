@@ -206,8 +206,8 @@ public class ProfileActivity extends BaseActivity {
             getString(R.string.cancel),
             () -> shareScreen(screenshot),
             () -> {},
-            view,
-            true);
+            view
+        );
     }
 
     /**

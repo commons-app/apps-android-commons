@@ -566,8 +566,8 @@ public class ContributionsFragment
             getString(R.string.nearby_card_permission_explanation),
             this::requestLocationPermission,
             this::displayYouWontSeeNearbyMessage,
-            checkBoxView,
-            false);
+            checkBoxView
+        );
     }
 
     private void displayYouWontSeeNearbyMessage() {

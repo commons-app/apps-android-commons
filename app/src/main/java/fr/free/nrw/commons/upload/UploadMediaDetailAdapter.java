@@ -346,7 +346,7 @@ public class UploadMediaDetailAdapter extends
                 public void onClick(View view) {
                     Dialog dialog = new Dialog(view.getContext());
                     dialog.setContentView(R.layout.dialog_select_language);
-                    dialog.setCanceledOnTouchOutside(true);
+                    dialog.setCancelable(false);
                     dialog.getWindow().setLayout(
                         (int) (view.getContext().getResources().getDisplayMetrics().widthPixels
                             * 0.90),
