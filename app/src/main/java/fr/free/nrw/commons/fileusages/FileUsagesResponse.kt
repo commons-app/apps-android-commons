@@ -2,7 +2,9 @@ package fr.free.nrw.commons.fileusages
 
 import com.google.gson.annotations.SerializedName
 
-
+/**
+ * Show where file is being used on Commons and oher wikis.
+ */
 data class FileUsagesResponse(
     @SerializedName("continue") val continueResponse: CommonsContinue?,
     @SerializedName("batchcomplete") val batchComplete: Boolean,
