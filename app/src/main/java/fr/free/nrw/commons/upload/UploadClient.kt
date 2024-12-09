@@ -7,7 +7,9 @@ import fr.free.nrw.commons.auth.csrf.CsrfTokenClient
 import fr.free.nrw.commons.contributions.ChunkInfo
 import fr.free.nrw.commons.contributions.Contribution
 import fr.free.nrw.commons.contributions.ContributionDao
+import fr.free.nrw.commons.di.NetworkingModule
 import fr.free.nrw.commons.upload.worker.UploadWorker.NotificationUpdateProgressListener
+import fr.free.nrw.commons.utils.TimeProvider
 import fr.free.nrw.commons.wikidata.mwapi.MwException
 import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
@@ -26,6 +28,7 @@ import java.util.concurrent.atomic.AtomicBoolean
 import java.util.concurrent.atomic.AtomicInteger
 import java.util.concurrent.atomic.AtomicReference
 import javax.inject.Inject
+import javax.inject.Named
 import javax.inject.Singleton
 
 @Singleton
@@ -33,7 +36,7 @@ class UploadClient
     @Inject
     constructor(
         private val uploadInterface: UploadInterface,
-        private val csrfTokenClient: CsrfTokenClient,
+        @Named(NetworkingModule.NAMED_COMMONS_CSRF) private val csrfTokenClient: CsrfTokenClient,
         private val pageContentsCreator: PageContentsCreator,
         private val fileUtilsWrapper: FileUtilsWrapper,
         private val gson: Gson,
@@ -278,11 +281,7 @@ class UploadClient
                 Timber.e(throwable, "Exception occurred in uploading file from stash")
                 Observable.error(throwable)
             }
-
-        fun interface TimeProvider {
-            fun currentTimeMillis(): Long
-        }
-    }
+}
 
 private fun canProcess(
     contributionDao: ContributionDao,
