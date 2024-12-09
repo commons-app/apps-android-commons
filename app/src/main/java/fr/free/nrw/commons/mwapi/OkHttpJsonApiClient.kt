@@ -87,6 +87,9 @@ class OkHttpJsonApiClient @Inject constructor(
         })
     }
 
+    /**
+     * Show where file is being used on Commons.
+     */
     suspend fun getFileUsagesOnCommons(
         fileName: String?,
         pageSize: Int
@@ -120,6 +123,9 @@ class OkHttpJsonApiClient @Inject constructor(
         }
     }
 
+    /**
+     * Show where file is being used on non-Commons wikis, typically the Wikipedias in various languages.
+     */
     suspend fun getGlobalFileUsages(
         fileName: String?,
         pageSize: Int
