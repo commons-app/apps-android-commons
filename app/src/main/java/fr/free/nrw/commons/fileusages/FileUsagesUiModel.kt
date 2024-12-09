@@ -1,5 +1,8 @@
 package fr.free.nrw.commons.fileusages
 
+/**
+ * Show where file is being used on Commons and oher wikis.
+ */
 data class FileUsagesUiModel(
     val title: String,
     val link: String?
