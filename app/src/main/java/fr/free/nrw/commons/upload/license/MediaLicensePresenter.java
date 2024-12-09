@@ -71,7 +71,7 @@ public class MediaLicensePresenter implements MediaLicenseContract.UserActionLis
      * @param licenseName
      */
     @Override
-    public void selectLicense(@NonNull final String licenseName) {
+    public void selectLicense(final String licenseName) {
         repository.setSelectedLicense(licenseName);
         view.updateLicenseSummary(repository.getSelectedLicense(), repository.getCount());
     }
