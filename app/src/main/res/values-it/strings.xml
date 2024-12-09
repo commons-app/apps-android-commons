@@ -375,11 +375,13 @@
   <string name="delete">Cancella</string>
   <string name="Achievements">Risultati</string>
   <string name="Profile">Profilo</string>
+  <string name="badges">Distintivi</string>
   <string name="statistics">Statistiche</string>
   <string name="statistics_thanks">Ringraziamenti ricevuti</string>
   <string name="statistics_featured">Immagini in evidenza</string>
   <string name="statistics_wikidata_edits">Immagini tramite \"Luoghi nelle vicinanze\"</string>
-  <string name="level">Livello</string>
+  <string name="level">Livello %d</string>
+  <string name="profileLevel">%s (Livello %s)</string>
   <string name="images_uploaded">Immagini caricate</string>
   <string name="image_reverts">Immagini non ripristinate</string>
   <string name="images_used_by_wiki">Immagini utilizzate</string>

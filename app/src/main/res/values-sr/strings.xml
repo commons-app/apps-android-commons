@@ -362,7 +362,7 @@
   <string name="statistics_thanks">Захваљивања</string>
   <string name="statistics_featured">Изабране слике</string>
   <string name="statistics_wikidata_edits">Слике преко „Места у близини”</string>
-  <string name="level">Ниво</string>
+  <string name="level" fuzzy="true">Ниво</string>
   <string name="images_uploaded">Отпремљене слике</string>
   <string name="image_reverts">Слике које нису уклоњене</string>
   <string name="images_used_by_wiki">Искоришћене слике</string>

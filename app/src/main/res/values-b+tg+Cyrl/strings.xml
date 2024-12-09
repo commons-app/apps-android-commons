@@ -130,7 +130,7 @@
   <string name="nominate_delete">Номзад барои ҳазф</string>
   <string name="delete">Ҳазв</string>
   <string name="statistics">Омор</string>
-  <string name="level">Сатҳ</string>
+  <string name="level" fuzzy="true">Сатҳ</string>
   <string name="list_sheet">Рӯйхат</string>
   <string name="next">Баъдӣ</string>
   <string name="previous">Пешина</string>

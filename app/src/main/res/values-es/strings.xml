@@ -411,7 +411,7 @@
   <string name="statistics_thanks">Agradecimientos recibidos</string>
   <string name="statistics_featured">Imágenes destacadas</string>
   <string name="statistics_wikidata_edits">Imágenes vía \"Sitios Cercanos\"</string>
-  <string name="level">Nivel</string>
+  <string name="level" fuzzy="true">Nivel</string>
   <string name="images_uploaded">Imágenes subidas</string>
   <string name="image_reverts">Imágenes no revertidas</string>
   <string name="images_used_by_wiki">Imágenes utilizadas</string>
