@@ -456,6 +456,11 @@
                       android:layout_height="match_parent" />
                 </LinearLayout>
 
+                <androidx.compose.ui.platform.ComposeView
+                  android:id="@+id/file_usages_compose_view"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content" />
+
                 <Button
                   android:id="@+id/copyWikicode"
                   android:layout_width="match_parent"

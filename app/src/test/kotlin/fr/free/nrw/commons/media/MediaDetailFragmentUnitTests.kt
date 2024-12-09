@@ -162,7 +162,7 @@ class MediaDetailFragmentUnitTests {
     @Mock
     private lateinit var mockSharedPreferencesEditor: SharedPreferences.Editor
 
-    private lateinit var binding: FragmentMediaDetailBinding
+    private lateinit var _binding: FragmentMediaDetailBinding
 
     @Before
     fun setUp() {
@@ -185,12 +185,12 @@ class MediaDetailFragmentUnitTests {
 
         layoutInflater = LayoutInflater.from(activity)
 
-        binding = FragmentMediaDetailBinding.inflate(layoutInflater)
+        _binding = FragmentMediaDetailBinding.inflate(layoutInflater)
 
-        scrollView = binding.mediaDetailScrollView
+        scrollView = _binding.mediaDetailScrollView
 
-        progressBarDeletion = binding.progressBarDeletion
-        delete = binding.nominateDeletion
+        progressBarDeletion = _binding.progressBarDeletion
+        delete = _binding.nominateDeletion
 
         Whitebox.setInternalState(fragment, "media", media)
         Whitebox.setInternalState(fragment, "isDeleted", isDeleted)
@@ -198,13 +198,13 @@ class MediaDetailFragmentUnitTests {
         Whitebox.setInternalState(fragment, "reasonListEnglishMappings", reasonListEnglishMappings)
         Whitebox.setInternalState(fragment, "reasonBuilder", reasonBuilder)
         Whitebox.setInternalState(fragment, "deleteHelper", deleteHelper)
-        Whitebox.setInternalState(fragment, "binding", binding)
+        Whitebox.setInternalState(fragment, "_binding", _binding)
         Whitebox.setInternalState(fragment, "detailProvider", detailProvider)
-        Whitebox.setInternalState(binding, "mediaDetailImageView", simpleDraweeView)
-        Whitebox.setInternalState(binding, "mediaDetailTitle", textView)
-        Whitebox.setInternalState(binding, "mediaDetailDepictionContainer", linearLayout)
-        Whitebox.setInternalState(binding, "dummyCaptionDescriptionContainer", linearLayout)
-        Whitebox.setInternalState(binding, "depictionsEditButton", button)
+        Whitebox.setInternalState(_binding, "mediaDetailImageView", simpleDraweeView)
+        Whitebox.setInternalState(_binding, "mediaDetailTitle", textView)
+        Whitebox.setInternalState(_binding, "mediaDetailDepictionContainer", linearLayout)
+        Whitebox.setInternalState(_binding, "dummyCaptionDescriptionContainer", linearLayout)
+        Whitebox.setInternalState(_binding, "depictionsEditButton", button)
         Whitebox.setInternalState(fragment, "locationManager", locationManager)
 
         `when`(simpleDraweeView.hierarchy).thenReturn(genericDraweeHierarchy)
@@ -241,7 +241,7 @@ class MediaDetailFragmentUnitTests {
     @Throws(Exception::class)
     fun testLaunchZoomActivity() {
         `when`(media.imageUrl).thenReturn("")
-        fragment.launchZoomActivity(binding.root)
+        fragment.launchZoomActivity(_binding.root)
     }
 
     @Test
