@@ -61,7 +61,7 @@ class UploadPresenterTest {
         uploadPresenter.onAttachView(view)
         `when`(repository.buildContributions()).thenReturn(Observable.just(contribution))
         uploadableFiles.add(uploadableFile)
-        `when`(view.uploadableFiles).thenReturn(uploadableFiles)
+        `when`(view.getUploadableFiles()).thenReturn(uploadableFiles)
         `when`(uploadableFile.getFilePath()).thenReturn("data://test")
     }
 
@@ -71,9 +71,9 @@ class UploadPresenterTest {
     @Ignore
     @Test
     fun handleSubmitTestUserLoggedIn() {
-        `when`(view.isLoggedIn).thenReturn(true)
+        `when`(view.isLoggedIn()).thenReturn(true)
         uploadPresenter.handleSubmit()
-        verify(view).isLoggedIn
+        verify(view).isLoggedIn()
         verify(view).showProgress(true)
         verify(repository).buildContributions()
         verify(repository).buildContributions()
@@ -130,9 +130,9 @@ class UploadPresenterTest {
                     false,
                 ),
         ).thenReturn(true)
-        `when`(view.isLoggedIn).thenReturn(true)
+        `when`(view.isLoggedIn()).thenReturn(true)
         uploadPresenter.handleSubmit()
-        verify(view).isLoggedIn
+        verify(view).isLoggedIn()
         verify(view).showProgress(true)
         verify(repository).buildContributions()
         verify(repository).buildContributions()
@@ -144,9 +144,9 @@ class UploadPresenterTest {
     @Ignore
     @Test
     fun handleSubmitTestUserNotLoggedIn() {
-        `when`(view.isLoggedIn).thenReturn(false)
+        `when`(view.isLoggedIn()).thenReturn(false)
         uploadPresenter.handleSubmit()
-        verify(view).isLoggedIn
+        verify(view).isLoggedIn()
         verify(view).askUserToLogIn()
     }
 
