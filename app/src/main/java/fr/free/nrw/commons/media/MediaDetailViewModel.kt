@@ -15,6 +15,9 @@ import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
 
+/**
+ * Show where file is being used on Commons and oher wikis.
+ */
 class MediaDetailViewModel(
     private val applicationContext: Context,
     private val okHttpJsonApiClient: OkHttpJsonApiClient
