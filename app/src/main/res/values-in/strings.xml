@@ -367,7 +367,7 @@
   <string name="statistics_thanks">Ucapan terima kasih diterima</string>
   <string name="statistics_featured">Gambar Pilihan</string>
   <string name="statistics_wikidata_edits">Gambar via \"Tempat di Sekitar\"</string>
-  <string name="level">Tingkat</string>
+  <string name="level" fuzzy="true">Tingkat</string>
   <string name="images_uploaded">Gambar Diunggah</string>
   <string name="image_reverts">Gambar Tidak Dikembalikan</string>
   <string name="images_used_by_wiki">Gambar Digunakan</string>

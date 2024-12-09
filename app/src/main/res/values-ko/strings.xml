@@ -366,11 +366,13 @@
   <string name="delete">삭제</string>
   <string name="Achievements">성과</string>
   <string name="Profile">프로파일</string>
+  <string name="badges">배지</string>
   <string name="statistics">통계</string>
   <string name="statistics_thanks">받은 감사</string>
   <string name="statistics_featured">알찬 그림</string>
   <string name="statistics_wikidata_edits">\"주변 장소\" 경유 이미지</string>
-  <string name="level">레벨</string>
+  <string name="level">레벨 %d</string>
+  <string name="profileLevel">%s (레벨 %s)</string>
   <string name="images_uploaded">사진 업로드됨</string>
   <string name="images_used_by_wiki">사용된 이미지</string>
   <string name="achievements_share_message">친구와 성과를 공유하세요!</string>

@@ -169,7 +169,7 @@
   <string name="Achievements">کامیابیاں</string>
   <string name="Profile">پروفائل</string>
   <string name="statistics">شماريات</string>
-  <string name="level">درجہ</string>
+  <string name="level" fuzzy="true">درجہ</string>
   <string name="images_used_by_wiki">ورتیل تصویراں</string>
   <string name="error_occurred">خرابی تھی ڳئی ہے!</string>
   <string name="contributions_fragment">ونگاراں</string>

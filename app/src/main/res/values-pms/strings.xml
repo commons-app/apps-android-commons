@@ -357,11 +357,13 @@
   <string name="delete">Dëscancelé</string>
   <string name="Achievements">Realisassion</string>
   <string name="Profile">Profil</string>
+  <string name="badges">Distintiv</string>
   <string name="statistics">Statìstiche</string>
   <string name="statistics_thanks">Aringrassiament arseivù</string>
   <string name="statistics_featured">Plance an evidensa</string>
   <string name="statistics_wikidata_edits">Plance për \"Pòst davzin\"</string>
-  <string name="level">Livel</string>
+  <string name="level">Livel %d</string>
+  <string name="profileLevel">%s (Livel %s)</string>
   <string name="images_uploaded">Plance carià</string>
   <string name="image_reverts">Plance nen anulà</string>
   <string name="images_used_by_wiki">Plance dovrà</string>

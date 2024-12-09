@@ -346,7 +346,7 @@
   <string name="statistics_thanks">คำขอบคุณที่ได้รับแล้ว</string>
   <string name="statistics_featured">ภาพคัดสรร</string>
   <string name="statistics_wikidata_edits">ภาพผ่านทาง \"สถานที่ใกล้เคียง\"</string>
-  <string name="level">ระดับ</string>
+  <string name="level" fuzzy="true">ระดับ</string>
   <string name="images_uploaded">ภาพที่อัปโหลดแล้ว</string>
   <string name="image_reverts">รูปภาพไม่เปลี่ยนกลับ</string>
   <string name="images_used_by_wiki">ภาพที่ใช้แล้ว</string>

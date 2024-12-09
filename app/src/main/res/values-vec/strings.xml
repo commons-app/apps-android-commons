@@ -302,7 +302,7 @@
   <string name="statistics_thanks">Ringrasiamenti rivai</string>
   <string name="statistics_featured">Imajini in evidensa</string>
   <string name="statistics_wikidata_edits">Imajini catae co \"Posti cuà rente\"</string>
-  <string name="level">Livèło:</string>
+  <string name="level" fuzzy="true">Livèło:</string>
   <string name="images_uploaded">Imajini cargae</string>
   <string name="image_reverts">Imajini no trate fora</string>
   <string name="images_used_by_wiki">Imajini doparae</string>
