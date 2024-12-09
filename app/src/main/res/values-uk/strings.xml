@@ -327,10 +327,6 @@
   <string name="about_translate_proceed">Виконується</string>
   <string name="about_translate_cancel">Скасувати</string>
   <string name="retry">Повторити</string>
-  <string name="showcase_view_whole_nearby_activity">Це місця поблизу, про які є статті Вікіпедії, але які потребують ілюстрацій.\n\nПісля натискання кнопки \"Шукати в цій зоні\" карта фіксується та відбувається пошук поблизу вказаного місця.</string>
-  <string name="showcase_view_needs_photo">Цьому місцю бракує фото.</string>
-  <string name="showcase_view_has_photo">Це місце уже має фото.</string>
-  <string name="showcase_view_no_longer_exists">Це місце більше не існує.</string>
   <string name="no_images_found">Зображень не знайдено!</string>
   <string name="error_loading_images">Сталася помилка при завантаженні зображень.</string>
   <string name="image_uploaded_by">Завантажено: %1$s</string>

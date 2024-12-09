@@ -289,8 +289,6 @@
   <string name="about_translate_proceed">ادامه</string>
   <string name="about_translate_cancel">لغو</string>
   <string name="retry">سعى دوباره</string>
-  <string name="showcase_view_needs_photo">به تصویری از این مکان نیاز است.</string>
-  <string name="showcase_view_has_photo">هم‌اکنون تصویری از این مکان وجود دارد.</string>
   <string name="no_images_found">تصویری یافت نشد!</string>
   <string name="error_loading_images">خطایی هنگام بارگذاری پرونده‌ها رخ داد.</string>
   <string name="image_uploaded_by">بارگذاری‌شده توسط: %1$s</string>

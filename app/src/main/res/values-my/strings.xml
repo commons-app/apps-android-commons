@@ -217,9 +217,6 @@
   <string name="about_translate_proceed">ဆက်လက်လုပ်ဆောင်ရန်</string>
   <string name="about_translate_cancel">မလုပ်တော့ပါ</string>
   <string name="retry">ပြန်လုပ်</string>
-  <string name="showcase_view_needs_photo">ဤနေရာသည် ဓါတ်ပုံတခုလိုအပ်သည်။</string>
-  <string name="showcase_view_has_photo">ဤနေရာတွင် ဓါတ်ပုံတခုရှိနှင့်ပြီးဖြစ်သည်။</string>
-  <string name="showcase_view_no_longer_exists">ဤနေရာ မတည်ရှိတော့ပါ။</string>
   <string name="no_images_found">ရုပ်ပုံများ မတွေ့ပါ</string>
   <string name="error_loading_images">ရုပ်ပုံများကို ဝန်ဆွဲတင်နေစဉ် အမှားဖြစ်ပွားခဲ့ပါသည်။</string>
   <string name="image_uploaded_by">အက်ပလုတ်တင်သူ: %1$s</string>
