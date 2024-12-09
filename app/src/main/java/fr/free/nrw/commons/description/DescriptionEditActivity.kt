@@ -121,7 +121,8 @@ class DescriptionEditActivity :
                 savedLanguageValue,
                 descriptionAndCaptions,
                 recentLanguagesDao,
-                voiceInputResultLauncher
+                voiceInputResultLauncher,
+                CommonsApplication.instance.isVoiceRecognitionAvailable
             )
         uploadMediaDetailAdapter.setCallback { titleStringID: Int, messageStringId: Int ->
             showInfoAlert(

@@ -25,6 +25,7 @@ import androidx.annotation.Nullable;
 import androidx.exifinterface.media.ExifInterface;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import fr.free.nrw.commons.CameraPosition;
+import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.LocationPicker.LocationPicker;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.contributions.MainActivity;
@@ -295,7 +296,8 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
      */
     private void initRecyclerView() {
         uploadMediaDetailAdapter = new UploadMediaDetailAdapter(this,
-            defaultKvStore.getString(Prefs.DESCRIPTION_LANGUAGE, ""), recentLanguagesDao, voiceInputResultLauncher);
+            defaultKvStore.getString(Prefs.DESCRIPTION_LANGUAGE, ""), recentLanguagesDao, voiceInputResultLauncher,
+            CommonsApplication.getInstance().isVoiceRecognitionAvailable());
         uploadMediaDetailAdapter.setCallback(this::showInfoAlert);
         uploadMediaDetailAdapter.setEventListener(this);
         binding.rvDescriptions.setLayoutManager(new LinearLayoutManager(getContext()));
