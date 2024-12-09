@@ -356,7 +356,7 @@
   <string name="statistics_thanks">Regratiamentos recipite</string>
   <string name="statistics_featured">Imagines eminente</string>
   <string name="statistics_wikidata_edits">Imagines via “Locos a proximitate”</string>
-  <string name="level">Nivello</string>
+  <string name="level" fuzzy="true">Nivello</string>
   <string name="images_uploaded">Imagines incargate</string>
   <string name="image_reverts">Imagines non revertite</string>
   <string name="images_used_by_wiki">Imagines usate</string>

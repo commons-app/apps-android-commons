@@ -417,7 +417,7 @@
   <string name="statistics_thanks">Получены благодарности</string>
   <string name="statistics_featured">Избранные изображения</string>
   <string name="statistics_wikidata_edits">Изображения мест поблизости</string>
-  <string name="level">Уровень</string>
+  <string name="level" fuzzy="true">Уровень</string>
   <string name="images_uploaded">Загружено изображений</string>
   <string name="image_reverts">Изображения, которые не откатывались</string>
   <string name="images_used_by_wiki">Использовано изображений</string>

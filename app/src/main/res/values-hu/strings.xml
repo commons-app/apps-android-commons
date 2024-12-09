@@ -325,7 +325,7 @@
   <string name="statistics_thanks">Kapott köszönetek</string>
   <string name="statistics_featured">Kiemelt képek</string>
   <string name="statistics_wikidata_edits">Képek a \"közeli helyek\" segítségével</string>
-  <string name="level">Szint</string>
+  <string name="level" fuzzy="true">Szint</string>
   <string name="images_uploaded">Feltöltött képek</string>
   <string name="images_used_by_wiki">Felhasznált képek</string>
   <string name="achievements_share_message">Oszd meg eredményeidet a barátaiddal!</string>

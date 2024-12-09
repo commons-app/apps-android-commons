@@ -401,11 +401,13 @@
   <string name="delete">Supprimer</string>
   <string name="Achievements">Accomplissements</string>
   <string name="Profile">Profil</string>
+  <string name="badges">Badges</string>
   <string name="statistics">Statistiques</string>
   <string name="statistics_thanks">Remerciements reçus</string>
   <string name="statistics_featured">Images remarquables</string>
   <string name="statistics_wikidata_edits">Images par « Lieux à proximité »</string>
-  <string name="level">Niveau</string>
+  <string name="level">Niveau %d</string>
+  <string name="profileLevel">%s (niveau %s)</string>
   <string name="images_uploaded">Images téléversées</string>
   <string name="image_reverts">Images non annulées</string>
   <string name="images_used_by_wiki">Images utilisées</string>

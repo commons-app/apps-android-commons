@@ -381,7 +381,7 @@
   <string name="statistics_thanks">Obdržané poďakovania</string>
   <string name="statistics_featured">Najlepšie obrázky</string>
   <string name="statistics_wikidata_edits">Obrázky cez „Miesta v okolí“</string>
-  <string name="level">Úroveň</string>
+  <string name="level" fuzzy="true">Úroveň</string>
   <string name="images_uploaded">Nahrané obrázky</string>
   <string name="image_reverts">Nerevertované obrázky</string>
   <string name="images_used_by_wiki">Použité obrázky</string>

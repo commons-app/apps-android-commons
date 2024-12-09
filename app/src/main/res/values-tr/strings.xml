@@ -391,7 +391,7 @@
   <string name="statistics_thanks">Teşekkür Alındı</string>
   <string name="statistics_featured">Seçkin Resimler</string>
   <string name="statistics_wikidata_edits">\"Yakındaki Yerler\"den Resimler</string>
-  <string name="level">Seviye</string>
+  <string name="level" fuzzy="true">Seviye</string>
   <string name="images_uploaded">Resimler Yüklendi</string>
   <string name="image_reverts">Resimler Geri Alınmadı</string>
   <string name="images_used_by_wiki">Resimler Kullanıldı</string>

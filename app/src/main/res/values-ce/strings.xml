@@ -240,7 +240,7 @@
   <string name="statistics">Статистика</string>
   <string name="statistics_thanks">Баркаллаш кхаьчна</string>
   <string name="statistics_featured">Хаьржина суьрташ</string>
-  <string name="level">Локхалла</string>
+  <string name="level" fuzzy="true">Локхалла</string>
   <string name="images_uploaded">Суьрташ чудаьхна</string>
   <string name="image_reverts">Йуха ца дерзийна суьрташ</string>
   <string name="images_used_by_wiki">Суьрташ лелийна</string>
