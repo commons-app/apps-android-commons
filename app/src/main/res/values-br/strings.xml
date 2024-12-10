@@ -312,7 +312,7 @@
   <string name="statistics_thanks">Trugarekadennoù resevet</string>
   <string name="statistics_featured">Skeudennoù lakaet a-wel</string>
   <string name="statistics_wikidata_edits">Skeudennoù dre \"Lec\'hioù nepell\"</string>
-  <string name="level">Live</string>
+  <string name="level" fuzzy="true">Live</string>
   <string name="images_uploaded">Skeudennoù pellgarget</string>
   <string name="image_reverts">Skeudennoù nann nullet</string>
   <string name="images_used_by_wiki">Skeudennoù implijet</string>

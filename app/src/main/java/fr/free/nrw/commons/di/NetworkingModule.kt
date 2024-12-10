@@ -44,7 +44,6 @@ import okhttp3.logging.HttpLoggingInterceptor
 import okhttp3.logging.HttpLoggingInterceptor.Level
 import timber.log.Timber
 import java.io.File
-import java.util.Locale
 import java.util.concurrent.TimeUnit
 import javax.inject.Named
 import javax.inject.Singleton
@@ -170,14 +169,13 @@ class NetworkingModule {
     @Named(NAMED_WIKI_DATA_WIKI_SITE)
     fun provideWikidataWikiSite(): WikiSite = WikiSite(BuildConfig.WIKIDATA_URL)
 
-
     /**
      * Gson objects are very heavy. The app should ideally be using just one instance of it instead of creating new instances everywhere.
      * @return returns a singleton Gson instance
      */
     @Provides
     @Singleton
-    fun provideGson(): Gson = GsonUtil.getDefaultGson()
+    fun provideGson(): Gson = GsonUtil.defaultGson
 
     @Provides
     @Singleton
@@ -294,9 +292,8 @@ class NetworkingModule {
     @Provides
     @Singleton
     @Named(NAMED_LANGUAGE_WIKI_PEDIA_WIKI_SITE)
-    fun provideLanguageWikipediaSite(): WikiSite {
-        return WikiSite.forLanguageCode(Locale.getDefault().language)
-    }
+    fun provideLanguageWikipediaSite(): WikiSite =
+        WikiSite.forDefaultLocaleLanguageCode()
 
     companion object {
         private const val WIKIDATA_SPARQL_QUERY_URL = "https://query.wikidata.org/sparql"

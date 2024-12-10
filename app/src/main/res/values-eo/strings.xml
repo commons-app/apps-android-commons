@@ -366,7 +366,7 @@
   <string name="statistics_thanks">Ricevitaj dankoj</string>
   <string name="statistics_featured">Elstaraj Bildoj</string>
   <string name="statistics_wikidata_edits">Bildoj per \"Apudaj Lokoj\"</string>
-  <string name="level">Nivelo</string>
+  <string name="level" fuzzy="true">Nivelo</string>
   <string name="images_uploaded">Alŝutitaj Bildoj</string>
   <string name="image_reverts">Bildoj Ne Malfaritaj</string>
   <string name="images_used_by_wiki">Uzataj Bildoj</string>

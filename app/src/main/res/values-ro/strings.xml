@@ -352,7 +352,7 @@
   <string name="statistics_thanks">Mulțumiri primite</string>
   <string name="statistics_featured">Imagini recomandate</string>
   <string name="statistics_wikidata_edits">Imagini prin „Locații în apropiere”</string>
-  <string name="level">Nivel</string>
+  <string name="level" fuzzy="true">Nivel</string>
   <string name="images_uploaded">Imaginile au fost încărcate</string>
   <string name="image_reverts">Imaginile nu au fost reluate</string>
   <string name="images_used_by_wiki">Imaginile folosite</string>

@@ -358,7 +358,7 @@
   <string name="statistics_thanks">Danki recevita</string>
   <string name="statistics_featured">Remarkinda imaji</string>
   <string name="statistics_wikidata_edits">Imaji tra \"Loki Vicina\"</string>
-  <string name="level">Nivelo</string>
+  <string name="level" fuzzy="true">Nivelo</string>
   <string name="images_uploaded">Imaji sendita</string>
   <string name="image_reverts">Imaji ne reversionita</string>
   <string name="images_used_by_wiki">Imaji uzita</string>

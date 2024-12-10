@@ -217,7 +217,7 @@
   <string name="statistics">तथ्याङ्कहरू</string>
   <string name="statistics_thanks">धन्यवाद प्राप्त भयाे</string>
   <string name="statistics_featured">विशेष तस्वीरहरू</string>
-  <string name="level">स्तर</string>
+  <string name="level" fuzzy="true">स्तर</string>
   <string name="images_used_by_wiki">प्रयाेग भएका तस्वीरहरू</string>
   <string name="notifications_channel_name_all">कमन्स सूचना</string>
   <string name="contributions_fragment">योगदानहरू</string>

@@ -313,7 +313,7 @@
   <string name="statistics_thanks">Pʋ\'ʋsʋg di\'eya</string>
   <string name="statistics_featured">Footo banɛ nwɛn taaba</string>
   <string name="statistics_wikidata_edits">Footo banɛ dɔlis  zin\'ibanɛ bɛ yamma.</string>
-  <string name="level">Zi\'esim</string>
+  <string name="level" fuzzy="true">Zi\'esim</string>
   <string name="images_uploaded">Footonam kpɛn\'ɛya</string>
   <string name="image_reverts">Ba pʋ lɛbis Footo din aan si\'em</string>
   <string name="images_used_by_wiki">Footonam tʋmya</string>

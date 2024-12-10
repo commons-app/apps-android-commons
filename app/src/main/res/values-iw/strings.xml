@@ -393,7 +393,7 @@
   <string name="statistics_thanks">התודה התקבלה</string>
   <string name="statistics_featured">תמונות מומלצות</string>
   <string name="statistics_wikidata_edits">תמונות דרך \"מקומות בסביבה\"</string>
-  <string name="level">רמה</string>
+  <string name="level" fuzzy="true">רמה</string>
   <string name="images_uploaded">תמונות שהועלו</string>
   <string name="image_reverts">תמונות שלא שוחזרו</string>
   <string name="images_used_by_wiki">תמונות בשימוש</string>

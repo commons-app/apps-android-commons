@@ -282,7 +282,7 @@
   <string name="statistics_thanks">مھربانيون مليل</string>
   <string name="statistics_featured">چونڊ عڪس</string>
   <string name="statistics_wikidata_edits">\"ويجھيون جڳھون\" ذريعي عڪس</string>
-  <string name="level">سطح</string>
+  <string name="level" fuzzy="true">سطح</string>
   <string name="images_uploaded">عڪس چڙھيا</string>
   <string name="images_used_by_wiki">استعمال ڪيل عڪس</string>
   <string name="achievements_share_message">پنھنجون ڪاميابيون پنھنجن دوست سان ونڊيو!</string>
