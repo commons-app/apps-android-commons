@@ -349,7 +349,7 @@
   <string name="statistics_thanks">Gauta padėka</string>
   <string name="statistics_featured">Rinktiniai paveikslėliai</string>
   <string name="statistics_wikidata_edits">Vaizdai per „Netoliese esančios vietos“</string>
-  <string name="level">Lygis</string>
+  <string name="level" fuzzy="true">Lygis</string>
   <string name="images_uploaded">Vaizdai įkelti</string>
   <string name="image_reverts">Paveikslėliai negrąžinti</string>
   <string name="images_used_by_wiki">Naudoti vaizdai</string>

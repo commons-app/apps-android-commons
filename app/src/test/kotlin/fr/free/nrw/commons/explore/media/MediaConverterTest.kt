@@ -42,22 +42,22 @@ class MediaConverterTest {
 
     @Test
     fun testConvertIfThumbUrlBlank() {
-        Mockito.`when`(imageInfo.metadata).thenReturn(metadata)
-        Mockito.`when`(imageInfo.thumbUrl).thenReturn("")
-        Mockito.`when`(imageInfo.originalUrl).thenReturn("originalUrl")
-        Mockito.`when`(imageInfo.metadata?.licenseUrl()).thenReturn("licenseUrl")
-        Mockito.`when`(imageInfo.metadata?.dateTime()).thenReturn("yyyy-MM-dd HH:mm:ss")
+        Mockito.`when`(imageInfo.getMetadata()).thenReturn(metadata)
+        Mockito.`when`(imageInfo.getThumbUrl()).thenReturn("")
+        Mockito.`when`(imageInfo.getOriginalUrl()).thenReturn("originalUrl")
+        Mockito.`when`(imageInfo.getMetadata()?.licenseUrl()).thenReturn("licenseUrl")
+        Mockito.`when`(imageInfo.getMetadata()?.dateTime()).thenReturn("yyyy-MM-dd HH:mm:ss")
         media = mediaConverter.convert(page, entity, imageInfo)
         assertEquals(media.thumbUrl, media.imageUrl, "originalUrl")
     }
 
     @Test
     fun testConvertIfThumbUrlNotBlank() {
-        Mockito.`when`(imageInfo.metadata).thenReturn(metadata)
-        Mockito.`when`(imageInfo.thumbUrl).thenReturn("thumbUrl")
-        Mockito.`when`(imageInfo.originalUrl).thenReturn("originalUrl")
-        Mockito.`when`(imageInfo.metadata?.licenseUrl()).thenReturn("licenseUrl")
-        Mockito.`when`(imageInfo.metadata?.dateTime()).thenReturn("yyyy-MM-dd HH:mm:ss")
+        Mockito.`when`(imageInfo.getMetadata()).thenReturn(metadata)
+        Mockito.`when`(imageInfo.getThumbUrl()).thenReturn("thumbUrl")
+        Mockito.`when`(imageInfo.getOriginalUrl()).thenReturn("originalUrl")
+        Mockito.`when`(imageInfo.getMetadata()?.licenseUrl()).thenReturn("licenseUrl")
+        Mockito.`when`(imageInfo.getMetadata()?.dateTime()).thenReturn("yyyy-MM-dd HH:mm:ss")
         media = mediaConverter.convert(page, entity, imageInfo)
         assertEquals(media.thumbUrl, "thumbUrl")
     }

@@ -359,7 +359,7 @@
   <string name="statistics_thanks">Bildirilgan minnatdorchiliklar</string>
   <string name="statistics_featured">Tanlangan tasvirlar</string>
   <string name="statistics_wikidata_edits">\"Yaqin atrofdan\" olingan tasvirlar</string>
-  <string name="level">Bosqich</string>
+  <string name="level" fuzzy="true">Bosqich</string>
   <string name="images_uploaded">Yuklangan rasmlar</string>
   <string name="image_reverts">Tasvirlar qayta tiklanmadi</string>
   <string name="images_used_by_wiki">Foydalanilgan tasvirlar</string>

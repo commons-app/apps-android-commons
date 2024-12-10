@@ -359,11 +359,13 @@
   <string name="delete">Избриши</string>
   <string name="Achievements">Достигнувања</string>
   <string name="Profile">Профил</string>
+  <string name="badges">Значки</string>
   <string name="statistics">Статистика</string>
   <string name="statistics_thanks">Примени благодарници</string>
   <string name="statistics_featured">Избрани слики</string>
   <string name="statistics_wikidata_edits">Слики преку „Околни места“</string>
-  <string name="level">Степен</string>
+  <string name="level">Степен %d</string>
+  <string name="profileLevel">%s (Степен %s)</string>
   <string name="images_uploaded">Подигнати слики</string>
   <string name="image_reverts">Неоткажани слики</string>
   <string name="images_used_by_wiki">Употребени слики</string>
