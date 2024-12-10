@@ -38,7 +38,7 @@ class GridViewAdapterUnitTest {
     private lateinit var parent: ViewGroup
 
     @Mock
-    private lateinit var images: List<Media>
+    private lateinit var images: MutableList<Media>
 
     @Mock
     private lateinit var textView: TextView
@@ -82,20 +82,20 @@ class GridViewAdapterUnitTest {
 
     @Test
     fun testContainsAllDataEmpty() {
-        gridViewAdapter = GridViewAdapter(context, 0, listOf())
+        gridViewAdapter = GridViewAdapter(context, 0, mutableListOf())
         Assert.assertEquals(gridViewAdapter.containsAll(images), false)
     }
 
     @Test
     fun testContainsAll() {
-        gridViewAdapter = GridViewAdapter(context, 0, listOf(media1))
+        gridViewAdapter = GridViewAdapter(context, 0, mutableListOf(media1))
         `when`(media1.filename).thenReturn("")
         Assert.assertEquals(gridViewAdapter.containsAll(listOf(media1)), true)
     }
 
     @Test
     fun testGetItem() {
-        gridViewAdapter = GridViewAdapter(context, 0, listOf(media1))
+        gridViewAdapter = GridViewAdapter(context, 0, mutableListOf(media1))
         Assert.assertEquals(gridViewAdapter.getItem(0), media1)
     }
 
@@ -107,7 +107,7 @@ class GridViewAdapterUnitTest {
 
     @Test
     fun testGetView() {
-        gridViewAdapter = GridViewAdapter(context, 0, listOf(media1))
+        gridViewAdapter = GridViewAdapter(context, 0, mutableListOf(media1))
         `when`(media1.mostRelevantCaption).thenReturn("")
         Assert.assertEquals(gridViewAdapter.getView(0, convertView, parent), convertView)
     }

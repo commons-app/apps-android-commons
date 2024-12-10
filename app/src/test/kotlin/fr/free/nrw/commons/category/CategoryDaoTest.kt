@@ -17,8 +17,6 @@ import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.TestCommonsApplication
-import fr.free.nrw.commons.category.CategoryContentProvider.BASE_URI
-import fr.free.nrw.commons.category.CategoryContentProvider.uriForId
 import fr.free.nrw.commons.category.CategoryDao.Table.ALL_FIELDS
 import fr.free.nrw.commons.category.CategoryDao.Table.COLUMN_DESCRIPTION
 import fr.free.nrw.commons.category.CategoryDao.Table.COLUMN_ID
@@ -31,6 +29,7 @@ import fr.free.nrw.commons.category.CategoryDao.Table.DROP_TABLE_STATEMENT
 import fr.free.nrw.commons.category.CategoryDao.Table.onCreate
 import fr.free.nrw.commons.category.CategoryDao.Table.onDelete
 import fr.free.nrw.commons.category.CategoryDao.Table.onUpdate
+import fr.free.nrw.commons.explore.recentsearches.RecentSearchesContentProvider.uriForId
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
 import org.junit.Assert.assertNull
@@ -85,21 +84,21 @@ class CategoryDaoTest {
     @Test
     fun migrateTableVersionFrom_v1_to_v2() {
         onUpdate(database, 1, 2)
-        // Table didnt exist before v5
+        // Table didn't exist before v5
         verifyNoInteractions(database)
     }
 
     @Test
     fun migrateTableVersionFrom_v2_to_v3() {
         onUpdate(database, 2, 3)
-        // Table didnt exist before v5
+        // Table didn't exist before v5
         verifyNoInteractions(database)
     }
 
     @Test
     fun migrateTableVersionFrom_v3_to_v4() {
         onUpdate(database, 3, 4)
-        // Table didnt exist before v5
+        // Table didn't exist before v5
         verifyNoInteractions(database)
     }
 
@@ -112,21 +111,21 @@ class CategoryDaoTest {
     @Test
     fun migrateTableVersionFrom_v5_to_v6() {
         onUpdate(database, 5, 6)
-        // Table didnt change in version 6
+        // Table didn't change in version 6
         verifyNoInteractions(database)
     }
 
     @Test
     fun migrateTableVersionFrom_v6_to_v7() {
         onUpdate(database, 6, 7)
-        // Table didnt change in version 7
+        // Table didn't change in version 7
         verifyNoInteractions(database)
     }
 
     @Test
     fun migrateTableVersionFrom_v7_to_v8() {
         onUpdate(database, 7, 8)
-        // Table didnt change in version 8
+        // Table didn't change in version 8
         verifyNoInteractions(database)
     }
 
@@ -135,9 +134,9 @@ class CategoryDaoTest {
         createCursor(1).let { cursor ->
             cursor.moveToFirst()
             testObject.fromCursor(cursor).let {
-                assertEquals(uriForId(1), it.contentUri)
+                assertEquals(CategoryContentProvider.uriForId(1), it.contentUri)
                 assertEquals("showImageWithItem", it.name)
-                assertEquals(123, it.lastUsed.time)
+                assertEquals(123L, it.lastUsed?.time)
                 assertEquals(2, it.timesUsed)
             }
         }
@@ -150,13 +149,18 @@ class CategoryDaoTest {
 
             testObject.save(category)
 
-            verify(client).update(eq(category.contentUri), captor.capture(), isNull(), isNull())
+            verify(client).update(
+                eq(category.contentUri)!!,
+                captor.capture(),
+                isNull(),
+                isNull()
+            )
             captor.firstValue.let { cv ->
                 assertEquals(5, cv.size())
                 assertEquals(category.name, cv.getAsString(COLUMN_NAME))
                 assertEquals(category.description, cv.getAsString(COLUMN_DESCRIPTION))
                 assertEquals(category.thumbnail, cv.getAsString(COLUMN_THUMBNAIL))
-                assertEquals(category.lastUsed.time, cv.getAsLong(COLUMN_LAST_USED))
+                assertEquals(category.lastUsed?.time, cv.getAsLong(COLUMN_LAST_USED))
                 assertEquals(category.timesUsed, cv.getAsInteger(COLUMN_TIMES_USED))
             }
         }
@@ -164,7 +168,7 @@ class CategoryDaoTest {
 
     @Test
     fun saveNewCategory() {
-        val contentUri = CategoryContentProvider.uriForId(111)
+        val contentUri = uriForId(111)
         whenever(client.insert(isA(), isA())).thenReturn(contentUri)
         val category =
             Category(
@@ -178,13 +182,13 @@ class CategoryDaoTest {
 
         testObject.save(category)
 
-        verify(client).insert(eq(BASE_URI), captor.capture())
+        verify(client).insert(eq(CategoryContentProvider.BASE_URI), captor.capture())
         captor.firstValue.let { cv ->
             assertEquals(5, cv.size())
             assertEquals(category.name, cv.getAsString(COLUMN_NAME))
             assertEquals(category.description, cv.getAsString(COLUMN_DESCRIPTION))
             assertEquals(category.thumbnail, cv.getAsString(COLUMN_THUMBNAIL))
-            assertEquals(category.lastUsed.time, cv.getAsLong(COLUMN_LAST_USED))
+            assertEquals(category.lastUsed?.time, cv.getAsLong(COLUMN_LAST_USED))
             assertEquals(category.timesUsed, cv.getAsInteger(COLUMN_TIMES_USED))
             assertEquals(contentUri, category.contentUri)
         }
@@ -226,7 +230,7 @@ class CategoryDaoTest {
         val category = testObject.find("showImageWithItem")
         assertNotNull(category)
 
-        assertEquals(uriForId(1), category?.contentUri)
+        assertEquals(CategoryContentProvider.uriForId(1), category?.contentUri)
         assertEquals("showImageWithItem", category?.name)
         assertEquals("description", category?.description)
         assertEquals("image", category?.thumbnail)
@@ -234,7 +238,7 @@ class CategoryDaoTest {
         assertEquals(2, category?.timesUsed)
 
         verify(client).query(
-            eq(BASE_URI),
+            eq(CategoryContentProvider.BASE_URI),
             eq(ALL_FIELDS),
             eq("$COLUMN_NAME=?"),
             queryCaptor.capture(),
@@ -288,7 +292,7 @@ class CategoryDaoTest {
         assertEquals("showImageWithItem", result[0].name)
 
         verify(client).query(
-            eq(BASE_URI),
+            eq(CategoryContentProvider.BASE_URI),
             eq(ALL_FIELDS),
             isNull(),
             queryCaptor.capture(),
