@@ -135,7 +135,7 @@ class CategoryEditHelper @Inject constructor(
     }
 
     interface Callback {
-        fun updateCategoryDisplay(categories: List<String>): Boolean
+        fun updateCategoryDisplay(categories: List<String>?): Boolean
     }
 
     companion object {
