@@ -14,6 +14,7 @@ import android.net.wifi.WifiManager
 import android.os.Build
 import android.os.Bundle
 import android.telephony.TelephonyManager
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,6 +22,7 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.google.android.material.snackbar.Snackbar
 import fr.free.nrw.commons.AboutActivity
 import fr.free.nrw.commons.BuildConfig
 import fr.free.nrw.commons.CommonsApplication
@@ -43,6 +45,7 @@ import fr.free.nrw.commons.settings.SettingsActivity
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import java.lang.ref.WeakReference
 import javax.inject.Inject
 import javax.inject.Named
 
@@ -179,7 +182,24 @@ class MoreBottomSheetFragment : BottomSheetDialogFragment() {
         val feedbackContentCreator = FeedbackContentCreator(requireContext(), feedback)
 
         if (!isInternetConnectionAvailable(requireContext())) {
-            Toast.makeText(requireContext(), R.string.error_feedback, Toast.LENGTH_LONG).show()
+            val rootView = activity?.findViewById<View>(android.R.id.content)
+                ?: activity?.window?.decorView?.rootView
+
+            rootView?.let {
+                Snackbar.make(it, R.string.error_feedback, Snackbar.LENGTH_LONG)
+                    .setAction("Retry") {
+                        if (isAdded && context != null) {
+                            uploadFeedback(feedback)
+                        } else {
+                            Toast.makeText(
+                                it.context,
+                                R.string.error_feedback,
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                    }
+                    .show()
+            }
             return
         }
 
@@ -195,14 +215,17 @@ class MoreBottomSheetFragment : BottomSheetDialogFragment() {
         Single.defer { single }
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe { success ->
+            .subscribe({ success ->
                 val messageResId = if (success) {
                     R.string.thanks_feedback
                 } else {
                     R.string.error_feedback
                 }
                 Toast.makeText(requireContext(), getString(messageResId), Toast.LENGTH_SHORT).show()
-            }
+            }, { error ->
+                error.printStackTrace()
+                Toast.makeText(requireContext(), R.string.error_feedback, Toast.LENGTH_SHORT).show()
+            })
     }
 
     /**
