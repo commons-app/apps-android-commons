@@ -334,7 +334,7 @@
   <string name="statistics_thanks">ధన్యవాదాలు అందాయి</string>
   <string name="statistics_featured">విశేష చిత్రాలు</string>
   <string name="statistics_wikidata_edits">\"దగ్గర లోని స్థలాల\" ద్వారా బొమ్మలు</string>
-  <string name="level">స్థాయి</string>
+  <string name="level" fuzzy="true">స్థాయి</string>
   <string name="images_uploaded">బొమ్మలను ఎక్కించాం</string>
   <string name="image_reverts">బొమ్మలను తిరక్కొట్టలేదు</string>
   <string name="images_used_by_wiki">వాడిన బొమ్మలు</string>

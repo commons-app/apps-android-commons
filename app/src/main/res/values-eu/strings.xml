@@ -318,7 +318,7 @@
   <string name="statistics">Estatistikak</string>
   <string name="statistics_thanks">Jasotako eskerrak</string>
   <string name="statistics_featured">Nabarmendutako irudiak</string>
-  <string name="level">Maila</string>
+  <string name="level" fuzzy="true">Maila</string>
   <string name="images_uploaded">Irudiak igo dira</string>
   <string name="images_used_by_wiki">Erabilitako irudiak</string>
   <string name="achievements_share_message">Partekatu zure lorpenak lagunekin!</string>

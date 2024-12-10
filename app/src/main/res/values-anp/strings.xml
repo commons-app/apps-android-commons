@@ -152,7 +152,7 @@
   <string name="statistics">सांख्यिकी</string>
   <string name="statistics_thanks">धन्यवाद प्राप्त करलखौ</string>
   <string name="statistics_featured">निर्वाचित चित्र</string>
-  <string name="level">स्तर</string>
+  <string name="level" fuzzy="true">स्तर</string>
   <string name="images_uploaded">चित्र अपलोड होलौं</string>
   <string name="contributions_fragment">योगदान</string>
   <string name="nearby_fragment">ठामे मँ</string>

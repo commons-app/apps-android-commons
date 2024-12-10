@@ -416,7 +416,7 @@
   <string name="statistics_thanks">已收到感谢</string>
   <string name="statistics_featured">特色图片</string>
   <string name="statistics_wikidata_edits">来自“附近地点”的图片</string>
-  <string name="level">等级</string>
+  <string name="level" fuzzy="true">等级</string>
   <string name="images_uploaded">已上传图片</string>
   <string name="image_reverts">未还原图片</string>
   <string name="images_used_by_wiki">使用过的图片</string>

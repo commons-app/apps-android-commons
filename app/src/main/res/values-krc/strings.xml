@@ -361,7 +361,7 @@
   <string name="statistics_thanks">Бюсюреуле Алындыла</string>
   <string name="statistics_featured">Сайланнган Суратла</string>
   <string name="statistics_wikidata_edits">\"Джууукъдагъы Джерле\" юсю бла суратла</string>
-  <string name="level">Дараджа</string>
+  <string name="level" fuzzy="true">Дараджа</string>
   <string name="images_uploaded">Суратла Джюклендиле</string>
   <string name="image_reverts">Суратла Кери Алынмадыла</string>
   <string name="images_used_by_wiki">Суратла Хайырландыла</string>

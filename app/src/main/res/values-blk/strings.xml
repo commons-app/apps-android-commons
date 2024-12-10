@@ -156,7 +156,7 @@
   <string name="no_recent_searches">ထိုမ်ႏခါꩻမုꩻဖုံႏ အဝ်ႏတဝ်း</string>
   <string name="delete">ယားကုဲင်</string>
   <string name="statistics">စာႏရင်ꩻဖုံႏ</string>
-  <string name="level">အရန်း</string>
+  <string name="level" fuzzy="true">အရန်း</string>
   <string name="notifications_channel_name_all">ကောင်မွဥ်း ဖေႏသေချက်</string>
   <string name="contributions_fragment">ခွုမ်မာꩻချက်ဖုံႏ</string>
   <string name="notifications">ဖေႏသေချက်ဖုံႏ</string>

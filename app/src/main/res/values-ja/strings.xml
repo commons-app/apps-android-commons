@@ -359,7 +359,7 @@
   <string name="statistics_thanks">受け取った感謝</string>
   <string name="statistics_featured">秀逸な画像</string>
   <string name="statistics_wikidata_edits">「近くの場所」機能でアップロードした画像</string>
-  <string name="level">レベル</string>
+  <string name="level" fuzzy="true">レベル</string>
   <string name="images_uploaded">アップロードした画像</string>
   <string name="image_reverts">却下されなかった画像</string>
   <string name="images_used_by_wiki">使用された画像</string>

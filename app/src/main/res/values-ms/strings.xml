@@ -224,7 +224,7 @@
   <string name="Achievements">Pencapaian</string>
   <string name="Profile">Profil</string>
   <string name="statistics">Statistik</string>
-  <string name="level">Tahap</string>
+  <string name="level" fuzzy="true">Tahap</string>
   <string name="images_uploaded">Imej Dimuat Naik</string>
   <string name="images_used_by_wiki">Imej Digunakan</string>
   <string name="achievements_share_message">Kongsi pencapaian anda dengan kawan anda!</string>

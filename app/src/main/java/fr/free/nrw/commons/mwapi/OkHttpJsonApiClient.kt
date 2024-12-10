@@ -2,8 +2,11 @@ package fr.free.nrw.commons.mwapi
 
 import android.text.TextUtils
 import com.google.gson.Gson
+import fr.free.nrw.commons.BuildConfig
 import fr.free.nrw.commons.campaigns.CampaignResponseDTO
 import fr.free.nrw.commons.explore.depictions.DepictsClient
+import fr.free.nrw.commons.fileusages.FileUsagesResponse
+import fr.free.nrw.commons.fileusages.GlobalFileUsagesResponse
 import fr.free.nrw.commons.location.LatLng
 import fr.free.nrw.commons.nearby.Place
 import fr.free.nrw.commons.nearby.model.ItemsClass
@@ -20,6 +23,8 @@ import fr.free.nrw.commons.utils.ConfigUtils.isBetaFlavour
 import fr.free.nrw.commons.wikidata.model.GetWikidataEditCountResponse
 import io.reactivex.Observable
 import io.reactivex.Single
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import okhttp3.HttpUrl
 import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 import okhttp3.OkHttpClient
@@ -50,8 +55,10 @@ class OkHttpJsonApiClient @Inject constructor(
     ): Observable<LeaderboardResponse> {
         val fetchLeaderboardUrlTemplate =
             wikiMediaToolforgeUrl.toString() + LeaderboardConstants.LEADERBOARD_END_POINT
-        val url = String.format(Locale.ENGLISH,
-            fetchLeaderboardUrlTemplate, userName, duration, category, limit, offset)
+        val url = String.format(
+            Locale.ENGLISH,
+            fetchLeaderboardUrlTemplate, userName, duration, category, limit, offset
+        )
         val urlBuilder: HttpUrl.Builder = url.toHttpUrlOrNull()!!.newBuilder()
             .addQueryParameter("user", userName)
             .addQueryParameter("duration", duration)
@@ -78,6 +85,80 @@ class OkHttpJsonApiClient @Inject constructor(
             }
             LeaderboardResponse()
         })
+    }
+
+    /**
+     * Show where file is being used on Commons.
+     */
+    suspend fun getFileUsagesOnCommons(
+        fileName: String?,
+        pageSize: Int
+    ): FileUsagesResponse? {
+        return withContext(Dispatchers.IO) {
+
+            return@withContext try {
+
+                val urlBuilder = BuildConfig.FILE_USAGES_BASE_URL.toHttpUrlOrNull()!!.newBuilder()
+                urlBuilder.addQueryParameter("prop", "fileusage")
+                urlBuilder.addQueryParameter("titles", fileName)
+                urlBuilder.addQueryParameter("fulimit", pageSize.toString())
+
+                Timber.i("Url %s", urlBuilder.toString())
+                val request: Request = Request.Builder()
+                    .url(urlBuilder.toString())
+                    .build()
+
+                val response: Response = okHttpClient.newCall(request).execute()
+                if (response.body != null && response.isSuccessful) {
+                    val json: String = response.body!!.string()
+                    gson.fromJson<FileUsagesResponse>(
+                        json,
+                        FileUsagesResponse::class.java
+                    )
+                } else null
+            } catch (e: Exception) {
+                Timber.e(e)
+                null
+            }
+        }
+    }
+
+    /**
+     * Show where file is being used on non-Commons wikis, typically the Wikipedias in various languages.
+     */
+    suspend fun getGlobalFileUsages(
+        fileName: String?,
+        pageSize: Int
+    ): GlobalFileUsagesResponse? {
+
+        return withContext(Dispatchers.IO) {
+
+            return@withContext try {
+
+                val urlBuilder = BuildConfig.FILE_USAGES_BASE_URL.toHttpUrlOrNull()!!.newBuilder()
+                urlBuilder.addQueryParameter("prop", "globalusage")
+                urlBuilder.addQueryParameter("titles", fileName)
+                urlBuilder.addQueryParameter("gulimit", pageSize.toString())
+
+                Timber.i("Url %s", urlBuilder.toString())
+                val request: Request = Request.Builder()
+                    .url(urlBuilder.toString())
+                    .build()
+
+                val response: Response = okHttpClient.newCall(request).execute()
+                if (response.body != null && response.isSuccessful) {
+                    val json: String = response.body!!.string()
+
+                    gson.fromJson<GlobalFileUsagesResponse>(
+                        json,
+                        GlobalFileUsagesResponse::class.java
+                    )
+                } else null
+            } catch (e: Exception) {
+                Timber.e(e)
+                null
+            }
+        }
     }
 
     fun setAvatar(username: String?, avatar: String?): Single<UpdateAvatarResponse?> {

@@ -365,11 +365,13 @@
   <string name="delete">Slet</string>
   <string name="Achievements">Præstationer</string>
   <string name="Profile">Profil</string>
+  <string name="badges">Emblemer</string>
   <string name="statistics">Statistik</string>
   <string name="statistics_thanks">Tak modtaget</string>
   <string name="statistics_featured">Udvalgte billeder</string>
   <string name="statistics_wikidata_edits">Billeder via \"Steder i nærheden\"</string>
-  <string name="level">Niveau</string>
+  <string name="level">Niveau %d</string>
+  <string name="profileLevel">%s (Niveau %s)</string>
   <string name="images_uploaded">Uploadede billeder</string>
   <string name="image_reverts">Billeder, som ikke er blevet trukket tilbage</string>
   <string name="images_used_by_wiki">Billeder brugt</string>

@@ -366,7 +366,7 @@
   <string name="statistics_thanks">Takk mottatt</string>
   <string name="statistics_featured">Utvalgte bilder</string>
   <string name="statistics_wikidata_edits">Bilder via «steder i nærheten»</string>
-  <string name="level">Nivå</string>
+  <string name="level" fuzzy="true">Nivå</string>
   <string name="images_uploaded">Opplastede bilder</string>
   <string name="image_reverts">Bilder som ikke har blitt tilbakestilt</string>
   <string name="images_used_by_wiki">Bilder brukt</string>

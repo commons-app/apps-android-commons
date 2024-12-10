@@ -383,7 +383,7 @@
   <string name="statistics_thanks">Ευχαριστίες που έχετε λάβει</string>
   <string name="statistics_featured">Προβεβλημμένες εικόνες</string>
   <string name="statistics_wikidata_edits">Εικόνες μέσω «Κοντινά μέρη»</string>
-  <string name="level">Επίπεδο</string>
+  <string name="level" fuzzy="true">Επίπεδο</string>
   <string name="images_uploaded">Εικόνες που μεταφορτώθηκαν</string>
   <string name="image_reverts">Εικόνες που δεν ανεστράφησαν</string>
   <string name="images_used_by_wiki">Εικόνες που χρησιμοποιήθηκαν</string>

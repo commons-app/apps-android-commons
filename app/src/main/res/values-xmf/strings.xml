@@ -341,7 +341,7 @@
   <string name="statistics_thanks">მარდი მეღებული რე</string>
   <string name="statistics_featured">გიშნაგორა სურათეფი</string>
   <string name="statistics_wikidata_edits">გოხოლუაშ აბანეფიშ სურათეფი</string>
-  <string name="level">დონე</string>
+  <string name="level" fuzzy="true">დონე</string>
   <string name="images_uploaded">სურათეფი ეხარგილი რე</string>
   <string name="image_reverts">სურათეფი ვადორთელენა</string>
   <string name="images_used_by_wiki">სურათეფი გჷმირინუაფუ</string>

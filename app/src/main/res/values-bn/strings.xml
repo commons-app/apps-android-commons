@@ -345,7 +345,7 @@
   <string name="statistics">পরিসংখ্যান</string>
   <string name="statistics_thanks">ধন্যবাদ পেয়েছেন</string>
   <string name="statistics_featured">নির্বাচিত ছবি</string>
-  <string name="level">স্তর</string>
+  <string name="level" fuzzy="true">স্তর</string>
   <string name="images_uploaded">আপলোডকৃত চিত্র</string>
   <string name="image_reverts">ছবিগুলো প্রত্যাবর্তন করা হয়নি</string>
   <string name="images_used_by_wiki">ব্যবহৃত ছবি</string>

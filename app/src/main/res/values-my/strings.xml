@@ -262,7 +262,7 @@
   <string name="statistics_thanks">ကျေးဇူးစကား လက်ခံရရှိ</string>
   <string name="statistics_featured">အထူးဓာတ်ပုံများ</string>
   <string name="statistics_wikidata_edits">\"အနီးအနားနေရာများ\" မှတဆင့် ရုပ်ပုံများ</string>
-  <string name="level">အဆင့်</string>
+  <string name="level" fuzzy="true">အဆင့်</string>
   <string name="images_uploaded">ရုပ်ပုံများ အက်ပလုတ်တင်ပြီးပြီ</string>
   <string name="achievements_share_message">သင်၏အောင်မြင်မှုများကို မိတ်ဆွေများနှင့် မျှဝေလိုက်ပါ</string>
   <string name="achievements_revert_limit_message">အနည်းဆုံး လိုအပ်ချက်:</string>
