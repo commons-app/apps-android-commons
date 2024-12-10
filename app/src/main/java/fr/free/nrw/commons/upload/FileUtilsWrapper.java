@@ -29,19 +29,19 @@ public class FileUtilsWrapper {
     }
 
     public String getFileExt(String fileName) {
-        return FileUtils.getFileExt(fileName);
+        return FileUtils.INSTANCE.getFileExt(fileName);
     }
 
     public String getSHA1(InputStream is) {
-        return FileUtils.getSHA1(is);
+        return FileUtils.INSTANCE.getSHA1(is);
     }
 
     public FileInputStream getFileInputStream(String filePath) throws FileNotFoundException {
-        return FileUtils.getFileInputStream(filePath);
+        return FileUtils.INSTANCE.getFileInputStream(filePath);
     }
 
     public String getGeolocationOfFile(String filePath, LatLng inAppPictureLocation) {
-        return FileUtils.getGeolocationOfFile(filePath, inAppPictureLocation);
+        return FileUtils.INSTANCE.getGeolocationOfFile(filePath, inAppPictureLocation);
     }
 
     public String getMimeType(File file) {
@@ -49,7 +49,7 @@ public class FileUtilsWrapper {
     }
 
     public String getMimeType(Uri uri) {
-        return FileUtils.getMimeType(context, uri);
+        return FileUtils.INSTANCE.getMimeType(context, uri);
     }
 
     /**
