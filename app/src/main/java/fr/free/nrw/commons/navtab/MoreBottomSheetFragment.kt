@@ -6,12 +6,19 @@ import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
 import android.net.ConnectivityManager
+import android.net.Network
+import android.net.NetworkCapabilities
+import android.net.NetworkInfo
 import android.net.Uri
+import android.net.wifi.WifiManager
+import android.os.Build
 import android.os.Bundle
+import android.telephony.TelephonyManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import fr.free.nrw.commons.AboutActivity
@@ -171,7 +178,7 @@ class MoreBottomSheetFragment : BottomSheetDialogFragment() {
     fun uploadFeedback(feedback: Feedback) {
         val feedbackContentCreator = FeedbackContentCreator(requireContext(), feedback)
 
-        if (!isNetworkAvailable(requireContext())) {
+        if (!isInternetConnectionAvailable(requireContext())) {
             Toast.makeText(requireContext(), R.string.error_feedback, Toast.LENGTH_LONG).show()
             return
         }
@@ -201,11 +208,19 @@ class MoreBottomSheetFragment : BottomSheetDialogFragment() {
     /**
      * This method is to check whether internet connection is available or not
      */
-    fun isNetworkAvailable(context: Context): Boolean {
+    fun isInternetConnectionAvailable(context: Context): Boolean {
         val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        val activeNetwork = connectivityManager.activeNetworkInfo
-        return activeNetwork != null && activeNetwork.isConnected
+
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            val activeNetwork: Network? = connectivityManager.activeNetwork
+            val networkCapabilities = connectivityManager.getNetworkCapabilities(activeNetwork)
+            networkCapabilities?.hasCapability(android.net.NetworkCapabilities.NET_CAPABILITY_INTERNET) == true
+        } else {
+            val activeNetworkInfo: NetworkInfo? = connectivityManager.activeNetworkInfo
+            activeNetworkInfo != null && activeNetworkInfo.isConnected
+        }
     }
+
 
     /**
      * This method shows the alert dialog when a user wants to send feedback about the app.
