@@ -139,7 +139,7 @@ class ReviewControllerTest {
     @Test
     fun testSendThanks() {
         shadowOf(Looper.getMainLooper()).idle()
-        whenever(firstRevision.revisionId).thenReturn(1)
+        whenever(firstRevision.revisionId()).thenReturn(1)
         Whitebox.setInternalState(controller, "firstRevision", firstRevision)
         controller.sendThanks(activity)
         assertEquals(

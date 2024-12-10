@@ -12,7 +12,6 @@ import fr.free.nrw.commons.auth.csrf.InvalidLoginTokenException
 import fr.free.nrw.commons.wikidata.mwapi.MwQueryPage
 
 import java.util.ArrayList
-import java.util.concurrent.Callable
 
 import javax.inject.Inject
 import javax.inject.Named
@@ -27,7 +26,6 @@ import fr.free.nrw.commons.delete.DeleteHelper
 import fr.free.nrw.commons.di.ApplicationlessInjection
 import fr.free.nrw.commons.utils.ViewUtil
 import io.reactivex.Observable
-import io.reactivex.ObservableSource
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
@@ -175,7 +173,7 @@ class ReviewController @Inject constructor(
         if (firstRevision == null) return
 
         Observable.defer {
-            thanksClient.thank(firstRevision!!.revisionId)
+            thanksClient.thank(firstRevision!!.revisionId())
         }
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())

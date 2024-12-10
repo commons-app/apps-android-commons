@@ -237,7 +237,7 @@ class LoginClient(
         .subscribe({ response: MwQueryResponse? ->
             loginResult.userId = response?.query()?.userInfo()?.id() ?: 0
             loginResult.groups =
-                response?.query()?.getUserResponse(userName)?.groups ?: emptySet()
+                response?.query()?.getUserResponse(userName)?.getGroups() ?: emptySet()
             cb.success(loginResult)
         }, { caught: Throwable ->
             Timber.e(caught, "Login succeeded but getting group information failed. ")
