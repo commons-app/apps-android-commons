@@ -196,6 +196,7 @@ class ZoomableActivity : BaseActivity() {
         val dialog = Dialog(this)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setContentView(R.layout.full_screen_mode_info_dialog)
+        dialog.setCancelable(false)
         (dialog.findViewById(R.id.btn_ok) as Button).setOnClickListener { dialog.dismiss() }
         dialog.show()
     }

@@ -170,6 +170,7 @@ public class DeleteHelper {
                                     ReviewController.DeleteReason problem,
                                     ReviewController.ReviewCallback reviewCallback) {
         AlertDialog.Builder alert = new AlertDialog.Builder(context);
+        alert.setCancelable(false);
         alert.setTitle(question);
 
         boolean[] checkedItems = {false, false, false, false};

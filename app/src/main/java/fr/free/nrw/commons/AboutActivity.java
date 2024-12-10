@@ -180,8 +180,8 @@ public class AboutActivity extends BaseActivity {
             getString(R.string.about_translate_cancel),
             positiveButtonRunnable,
             () -> {},
-            spinner,
-            true);
+            spinner
+        );
     }
 
 }

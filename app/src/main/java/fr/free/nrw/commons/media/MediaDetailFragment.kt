@@ -1596,8 +1596,7 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
                 getString(R.string.about_translate_cancel),
                 { onDeleteClicked(spinner) },
                 {},
-                spinner,
-                true
+                spinner
             )
             if (isDeleted) {
                 dialog!!.getButton(AlertDialog.BUTTON_POSITIVE).isEnabled = false
@@ -1616,8 +1615,7 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
                     onDeleteClickeddialogtext(reason)
                 },
                 {},
-                input,
-                true
+                input
             )
             input.addTextChangedListener(object : TextWatcher {
                 fun handleText() {
