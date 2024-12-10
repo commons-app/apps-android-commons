@@ -938,7 +938,7 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
 
         Observable.defer {
             thanksClient.thank(
-                firstRevision.revisionId
+                firstRevision.revisionId()
             )
         }
             .subscribeOn(Schedulers.io())

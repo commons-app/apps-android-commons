@@ -34,7 +34,7 @@ class ReviewHelper
             reviewInterface
                 .getRecentChanges()
                 .map { it.query()?.pages() }
-                .map(MutableList<MwQueryPage>::shuffled)
+                .map { it.shuffled() }
                 .flatMapIterable { changes: List<MwQueryPage>? -> changes }
                 .filter { isChangeReviewable(it) }
 
