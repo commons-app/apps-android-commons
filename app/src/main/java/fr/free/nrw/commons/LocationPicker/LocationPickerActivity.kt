@@ -372,16 +372,18 @@ class LocationPickerActivity : BaseActivity(), LocationPermissionCallback {
      */
     private fun removeLocationFromImage() {
         media?.let {
-            compositeDisposable.add(
-                coordinateEditHelper.makeCoordinatesEdit(
-                    applicationContext, it, "0.0", "0.0", "0.0f"
-                )
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe { _ ->
-                        Timber.d("Coordinates removed from the image")
-                    }
+            coordinateEditHelper.makeCoordinatesEdit(
+                applicationContext, it, "0.0", "0.0", "0.0f"
             )
+                ?.subscribeOn(Schedulers.io())
+                ?.observeOn(AndroidSchedulers.mainThread())
+                ?.subscribe { _ ->
+                    Timber.d("Coordinates removed from the image")
+                }?.let { it1 ->
+                    compositeDisposable.add(
+                        it1
+                    )
+                }
         }
         setResult(RESULT_OK, Intent())
         finish()
@@ -473,19 +475,21 @@ class LocationPickerActivity : BaseActivity(), LocationPermissionCallback {
     fun updateCoordinates(latitude: String, longitude: String, accuracy: String) {
         media?.let {
             try {
-                compositeDisposable.add(
-                    coordinateEditHelper.makeCoordinatesEdit(
-                        applicationContext,
-                        it,
-                        latitude,
-                        longitude,
-                        accuracy
-                    ).subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe { _ ->
-                            Timber.d("Coordinates updated")
-                        }
-                )
+                coordinateEditHelper.makeCoordinatesEdit(
+                    applicationContext,
+                    it,
+                    latitude,
+                    longitude,
+                    accuracy
+                )?.subscribeOn(Schedulers.io())
+                    ?.observeOn(AndroidSchedulers.mainThread())
+                    ?.subscribe { _ ->
+                        Timber.d("Coordinates updated")
+                    }?.let { it1 ->
+                        compositeDisposable.add(
+                            it1
+                        )
+                    }
             } catch (e: Exception) {
                 if (e.localizedMessage == CsrfTokenClient.ANONYMOUS_TOKEN_MESSAGE) {
                     val username = sessionManager.userName

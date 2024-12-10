@@ -15,11 +15,14 @@ import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
 import org.junit.Assert.assertTrue
 import org.junit.Before
+import fr.free.nrw.commons.R
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.ArgumentMatchers
 import org.mockito.Mock
+import org.mockito.Mockito.spy
 import org.mockito.MockitoAnnotations
+import org.powermock.api.mockito.PowerMockito.`when`
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.RuntimeEnvironment
 import org.robolectric.annotation.Config
@@ -44,7 +47,7 @@ class DeleteHelperTest {
     @Mock
     internal lateinit var media: Media
 
-    lateinit var deleteHelper: DeleteHelper
+    private lateinit var deleteHelper: DeleteHelper
 
     /**
      * Init mocks for test
@@ -60,19 +63,46 @@ class DeleteHelperTest {
      */
     @Test
     fun makeDeletion() {
-        whenever(pageEditClient.prependEdit(ArgumentMatchers.anyString(), ArgumentMatchers.anyString(), ArgumentMatchers.anyString()))
-            .thenReturn(Observable.just(true))
-        whenever(pageEditClient.appendEdit(ArgumentMatchers.anyString(), ArgumentMatchers.anyString(), ArgumentMatchers.anyString()))
-            .thenReturn(Observable.just(true))
-        whenever(pageEditClient.edit(ArgumentMatchers.anyString(), ArgumentMatchers.anyString(), ArgumentMatchers.anyString()))
-            .thenReturn(Observable.just(true))
+        whenever(pageEditClient.prependEdit(
+            ArgumentMatchers.anyString(),
+            ArgumentMatchers.anyString(),
+            ArgumentMatchers.anyString())
+        ).thenReturn(Observable.just(true))
+
+        whenever(pageEditClient.appendEdit(
+            ArgumentMatchers.anyString(),
+            ArgumentMatchers.anyString(),
+            ArgumentMatchers.anyString())
+        ).thenReturn(Observable.just(true))
+
+        whenever(pageEditClient.edit(
+            ArgumentMatchers.anyString(),
+            ArgumentMatchers.anyString(),
+            ArgumentMatchers.anyString())
+        ).thenReturn(Observable.just(true))
 
         whenever(media.displayTitle).thenReturn("Test file")
+
+        `when`(context.getString(R.string.delete_helper_show_deletion_title))
+            .thenReturn("Deletion Notification")
+        `when`(context.getString(R.string.delete_helper_show_deletion_title_success))
+            .thenReturn("Success")
+        `when`(context.getString(R.string.delete_helper_show_deletion_title_failed))
+            .thenReturn("Failed")
+        `when`(context.getString(R.string.delete_helper_show_deletion_message_else))
+            .thenReturn("Media deletion failed")
+        `when`(context.getString(
+            R.string.delete_helper_show_deletion_message_if, media.displayTitle)
+        ).thenReturn("Media successfully deleted: Test Media Title")
 
         val creatorName = "Creator"
         whenever(media.author).thenReturn("$creatorName")
         whenever(media.filename).thenReturn("Test file.jpg")
-        val makeDeletion = deleteHelper.makeDeletion(context, media, "Test reason")?.blockingGet()
+        val makeDeletion = deleteHelper.makeDeletion(
+            context,
+            media,
+            "Test reason"
+        )?.blockingGet()
         assertNotNull(makeDeletion)
         assertTrue(makeDeletion!!)
         verify(pageEditClient).appendEdit(eq("User_Talk:$creatorName"), ArgumentMatchers.anyString(), ArgumentMatchers.anyString())
@@ -83,12 +113,24 @@ class DeleteHelperTest {
      */
     @Test(expected = RuntimeException::class)
     fun makeDeletionForPrependEditFailure() {
-        whenever(pageEditClient.prependEdit(ArgumentMatchers.anyString(), ArgumentMatchers.anyString(), ArgumentMatchers.anyString()))
-            .thenReturn(Observable.just(false))
-        whenever(pageEditClient.appendEdit(ArgumentMatchers.anyString(), ArgumentMatchers.anyString(), ArgumentMatchers.anyString()))
-            .thenReturn(Observable.just(true))
-        whenever(pageEditClient.edit(ArgumentMatchers.anyString(), ArgumentMatchers.anyString(), ArgumentMatchers.anyString()))
-            .thenReturn(Observable.just(true))
+        whenever(pageEditClient.prependEdit(
+            ArgumentMatchers.anyString(),
+            ArgumentMatchers.anyString(),
+            ArgumentMatchers.anyString())
+        ).thenReturn(Observable.just(false))
+
+        whenever(pageEditClient.appendEdit(
+            ArgumentMatchers.anyString(),
+            ArgumentMatchers.anyString(),
+            ArgumentMatchers.anyString())
+        ).thenReturn(Observable.just(true))
+
+        whenever(pageEditClient.edit(
+            ArgumentMatchers.anyString(),
+            ArgumentMatchers.anyString(),
+            ArgumentMatchers.anyString())
+        ).thenReturn(Observable.just(true))
+
         whenever(media.displayTitle).thenReturn("Test file")
         whenever(media.filename).thenReturn("Test file.jpg")
         whenever(media.author).thenReturn("Creator (page does not exist)")
@@ -141,16 +183,30 @@ class DeleteHelperTest {
     @Test
     fun alertDialogPositiveButtonDisableTest() {
         val mContext = RuntimeEnvironment.getApplication().applicationContext
-        deleteHelper.askReasonAndExecute(media, mContext, "My Question", ReviewController.DeleteReason.COPYRIGHT_VIOLATION, callback)
-        assertEquals(false, deleteHelper.dialog.getButton(AlertDialog.BUTTON_POSITIVE).isEnabled)
+        deleteHelper.askReasonAndExecute(
+            media,
+            mContext,
+            "My Question",
+            ReviewController.DeleteReason.COPYRIGHT_VIOLATION, callback
+        )
+
+        deleteHelper.getListener()?.onClick(
+            deleteHelper.getDialog(),
+            1,
+            true
+        )
+        assertEquals(
+            true,
+            deleteHelper.getDialog()?.getButton(AlertDialog.BUTTON_POSITIVE)?.isEnabled
+        )
     }
 
     @Test
     fun alertDialogPositiveButtonEnableTest() {
         val mContext = RuntimeEnvironment.getApplication().applicationContext
         deleteHelper.askReasonAndExecute(media, mContext, "My Question", ReviewController.DeleteReason.COPYRIGHT_VIOLATION, callback)
-        deleteHelper.listener.onClick(deleteHelper.dialog, 1, true)
-        assertEquals(true, deleteHelper.dialog.getButton(AlertDialog.BUTTON_POSITIVE).isEnabled)
+        deleteHelper.getListener()?.onClick(deleteHelper.getDialog(), 1, true)
+        assertEquals(true, deleteHelper.getDialog()?.getButton(AlertDialog.BUTTON_POSITIVE)?.isEnabled)
     }
 
     @Test(expected = RuntimeException::class)
