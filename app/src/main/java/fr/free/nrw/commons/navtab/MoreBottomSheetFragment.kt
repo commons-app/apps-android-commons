@@ -5,6 +5,7 @@ import android.annotation.SuppressLint
 import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
+import android.net.ConnectivityManager
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -170,6 +171,11 @@ class MoreBottomSheetFragment : BottomSheetDialogFragment() {
     fun uploadFeedback(feedback: Feedback) {
         val feedbackContentCreator = FeedbackContentCreator(requireContext(), feedback)
 
+        if (!isNetworkAvailable(requireContext())) {
+            Toast.makeText(requireContext(), R.string.error_feedback, Toast.LENGTH_LONG).show()
+            return
+        }
+
         val single = pageEditClient.createNewSection(
             "Commons:Mobile_app/Feedback",
             feedbackContentCreator.getSectionTitle(),
@@ -190,6 +196,15 @@ class MoreBottomSheetFragment : BottomSheetDialogFragment() {
                 }
                 Toast.makeText(requireContext(), getString(messageResId), Toast.LENGTH_SHORT).show()
             }
+    }
+
+    /**
+     * This method is to check whether internet connection is available or not
+     */
+    fun isNetworkAvailable(context: Context): Boolean {
+        val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val activeNetwork = connectivityManager.activeNetworkInfo
+        return activeNetwork != null && activeNetwork.isConnected
     }
 
     /**
