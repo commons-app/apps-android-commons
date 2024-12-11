@@ -23,6 +23,8 @@ import fr.free.nrw.commons.utils.DeviceInfoUtil.getConnectionType
 import fr.free.nrw.commons.utils.DeviceInfoUtil.getDevice
 import fr.free.nrw.commons.utils.DeviceInfoUtil.getDeviceManufacturer
 import fr.free.nrw.commons.utils.DeviceInfoUtil.getDeviceModel
+import java.net.ConnectException
+import java.net.UnknownHostException
 
 class FeedbackDialog(
     context: Context,
@@ -47,12 +49,24 @@ class FeedbackDialog(
         @Suppress("DEPRECATION")
         window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
         binding.btnSubmitFeedback.setOnClickListener {
-            if (isInternetConnectionAvailable(context) ) {
+            try {
                 submitFeedback()
+            } catch (e: Exception) {
+                when (e) {
+                    is UnknownHostException -> {
+                        Toast.makeText(context, R.string.error_feedback, Toast.LENGTH_SHORT).show()
+                    }
+
+                    is ConnectException -> {
+                        Toast.makeText(context, R.string.error_feedback, Toast.LENGTH_SHORT).show()
+                    }
+
+                    else -> {
+                        Toast.makeText(context, R.string.error_feedback, Toast.LENGTH_SHORT).show()
+                    }
+                }
             }
-            else {
-                Toast.makeText(context,R.string.error_feedback, Toast.LENGTH_SHORT).show()
-            }
+
         }
     }
 
