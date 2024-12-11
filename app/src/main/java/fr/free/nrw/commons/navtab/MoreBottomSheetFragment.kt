@@ -5,24 +5,14 @@ import android.annotation.SuppressLint
 import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
-import android.net.ConnectivityManager
-import android.net.Network
-import android.net.NetworkCapabilities
-import android.net.NetworkInfo
 import android.net.Uri
-import android.net.wifi.WifiManager
-import android.os.Build
 import android.os.Bundle
-import android.telephony.TelephonyManager
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.google.android.material.snackbar.Snackbar
 import fr.free.nrw.commons.AboutActivity
 import fr.free.nrw.commons.BuildConfig
 import fr.free.nrw.commons.CommonsApplication
@@ -45,7 +35,6 @@ import fr.free.nrw.commons.settings.SettingsActivity
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import java.lang.ref.WeakReference
 import javax.inject.Inject
 import javax.inject.Named
 
@@ -181,28 +170,6 @@ class MoreBottomSheetFragment : BottomSheetDialogFragment() {
     fun uploadFeedback(feedback: Feedback) {
         val feedbackContentCreator = FeedbackContentCreator(requireContext(), feedback)
 
-        if (!isInternetConnectionAvailable(requireContext())) {
-            val rootView = activity?.findViewById<View>(android.R.id.content)
-                ?: activity?.window?.decorView?.rootView
-
-            rootView?.let {
-                Snackbar.make(it, R.string.error_feedback, Snackbar.LENGTH_LONG)
-                    .setAction("Retry") {
-                        if (isAdded && context != null) {
-                            uploadFeedback(feedback)
-                        } else {
-                            Toast.makeText(
-                                it.context,
-                                R.string.error_feedback,
-                                Toast.LENGTH_SHORT
-                            ).show()
-                        }
-                    }
-                    .show()
-            }
-            return
-        }
-
         val single = pageEditClient.createNewSection(
             "Commons:Mobile_app/Feedback",
             feedbackContentCreator.getSectionTitle(),
@@ -227,23 +194,6 @@ class MoreBottomSheetFragment : BottomSheetDialogFragment() {
                 Toast.makeText(requireContext(), R.string.error_feedback, Toast.LENGTH_SHORT).show()
             })
     }
-
-    /**
-     * This method is to check whether internet connection is available or not
-     */
-    fun isInternetConnectionAvailable(context: Context): Boolean {
-        val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-
-        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            val activeNetwork: Network? = connectivityManager.activeNetwork
-            val networkCapabilities = connectivityManager.getNetworkCapabilities(activeNetwork)
-            networkCapabilities?.hasCapability(android.net.NetworkCapabilities.NET_CAPABILITY_INTERNET) == true
-        } else {
-            val activeNetworkInfo: NetworkInfo? = connectivityManager.activeNetworkInfo
-            activeNetworkInfo != null && activeNetworkInfo.isConnected
-        }
-    }
-
 
     /**
      * This method shows the alert dialog when a user wants to send feedback about the app.
