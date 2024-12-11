@@ -78,8 +78,7 @@ class LocationPermissionsHelper(
                             activity.getString(R.string.upload_map_location_access)
                         )
                     },
-                    null,
-                    false
+                    null
                 )
             } else {
                 ActivityCompat.requestPermissions(
