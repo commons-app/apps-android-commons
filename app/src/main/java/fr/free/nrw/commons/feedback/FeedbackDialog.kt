@@ -7,7 +7,7 @@ import android.text.Html
 import android.text.Spanned
 import android.text.method.LinkMovementMethod
 import android.view.WindowManager
-import android.widget.Toast
+import com.google.android.material.snackbar.Snackbar
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.databinding.DialogFeedbackBinding
 import fr.free.nrw.commons.feedback.model.Feedback
@@ -49,15 +49,21 @@ class FeedbackDialog(
             } catch (e: Exception) {
                 when (e) {
                     is UnknownHostException -> {
-                        Toast.makeText(context, R.string.error_feedback, Toast.LENGTH_SHORT).show()
+                        Snackbar.make(findViewById(android.R.id.content),
+                            R.string.error_feedback,
+                            Snackbar.LENGTH_SHORT).show()
                     }
 
                     is ConnectException -> {
-                        Toast.makeText(context, R.string.error_feedback, Toast.LENGTH_SHORT).show()
+                        Snackbar.make(findViewById(android.R.id.content),
+                            R.string.error_feedback,
+                            Snackbar.LENGTH_SHORT).show()
                     }
 
                     else -> {
-                        Toast.makeText(context, R.string.error_feedback, Toast.LENGTH_SHORT).show()
+                        Snackbar.make(findViewById(android.R.id.content),
+                             R.string.error_feedback,
+                            Snackbar.LENGTH_SHORT).show()
                     }
                 }
             }

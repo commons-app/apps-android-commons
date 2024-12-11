@@ -35,6 +35,7 @@ import fr.free.nrw.commons.settings.SettingsActivity
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import timber.log.Timber
 import javax.inject.Inject
 import javax.inject.Named
 
@@ -190,7 +191,7 @@ class MoreBottomSheetFragment : BottomSheetDialogFragment() {
                 }
                 Toast.makeText(requireContext(), getString(messageResId), Toast.LENGTH_SHORT).show()
             }, { error ->
-                error.printStackTrace()
+                Timber.e(error)
                 Toast.makeText(requireContext(), R.string.error_feedback, Toast.LENGTH_SHORT).show()
             })
     }
