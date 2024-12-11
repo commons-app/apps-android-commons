@@ -186,7 +186,7 @@ object PermissionUtils {
                                         activity.isShowPermissionsDialog = true
                                     }
                                 },
-                                null, null, activity !is UploadActivity
+                                null, null
                             )
                         }
                         else -> Thread(onPermissionDenied).start()
@@ -223,7 +223,7 @@ object PermissionUtils {
                                 activity.finish()
                             }
                         },
-                        null, false
+                        null
                     )
                 }
             }).onSameThread().check()

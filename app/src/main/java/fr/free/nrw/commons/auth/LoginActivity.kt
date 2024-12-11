@@ -319,7 +319,7 @@ class LoginActivity : AccountAuthenticatorActivity() {
             isIndeterminate = true
             setTitle(getString(R.string.logging_in_title))
             setMessage(getString(R.string.logging_in_message))
-            setCanceledOnTouchOutside(false)
+            setCancelable(false)
         }
         progressDialog!!.show()
     }

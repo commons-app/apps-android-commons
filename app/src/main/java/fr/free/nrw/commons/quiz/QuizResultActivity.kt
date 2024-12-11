@@ -181,6 +181,7 @@ class QuizResultActivity : AppCompatActivity() {
         val shareMessage = view.findViewById<TextView>(R.id.alert_text)
         shareMessage.setText(R.string.quiz_result_share_message)
         alertadd.setView(view)
+        alertadd.setCancelable(false)
         alertadd.setPositiveButton(R.string.about_translate_proceed) { dialog, _ ->
             shareScreen(screenshot)
         }

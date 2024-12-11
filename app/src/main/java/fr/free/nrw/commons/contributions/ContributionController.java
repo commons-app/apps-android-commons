@@ -171,8 +171,8 @@ public class ContributionController {
             },
             () -> locationPermissionCallback.onLocationPermissionDenied(
                 activity.getString(R.string.in_app_camera_location_permission_denied)),
-            null,
-            false);
+            null
+        );
     }
 
     /**
@@ -204,8 +204,8 @@ public class ContributionController {
                 defaultKvStore.putBoolean("inAppCameraLocationPref", false);
                 initiateCameraUpload(activity, resultLauncher);
             },
-            null,
-            true);
+            null
+        );
     }
 
     /**

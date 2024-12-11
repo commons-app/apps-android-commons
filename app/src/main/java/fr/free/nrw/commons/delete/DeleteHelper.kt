@@ -205,6 +205,7 @@ class DeleteHelper @Inject constructor(
         reviewCallback: ReviewController.ReviewCallback
     ) {
         val alert = AlertDialog.Builder(context)
+        alert.setCancelable(false)
         alert.setTitle(question)
 
         val checkedItems = booleanArrayOf(false, false, false, false)
