@@ -309,7 +309,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
      */
     private void showInfoAlert(int titleStringID, int messageStringId) {
         DialogUtil.showAlertDialog(getActivity(), getString(titleStringID),
-            getString(messageStringId), getString(android.R.string.ok), null, true);
+            getString(messageStringId), getString(android.R.string.ok), null);
     }
 
 
@@ -336,6 +336,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         BasicKvStore basicKvStore = new BasicKvStore(getActivity(), "IsAnyImageCancelled");
         if (!basicKvStore.getBoolean("IsAnyImageCancelled", false)) {
             SimilarImageDialogFragment newFragment = new SimilarImageDialogFragment();
+            newFragment.setCancelable(false);
             newFragment.setCallback(new SimilarImageDialogFragment.Callback() {
                 @Override
                 public void onPositiveResponse() {
@@ -450,7 +451,8 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
                     // Execute when user cancels the upload of the specified place
                     UploadActivity.nearbyPopupAnswers.put(place, false);
                 },
-                customLayout, true);
+                customLayout
+            );
         }
     }
 
@@ -526,8 +528,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
                     uploadItem.setImageQuality(ImageUtils.IMAGE_KEEP);
                     onImageValidationSuccess();
                 }, null,
-                checkBoxView,
-                false);
+                checkBoxView);
         } else {
             uploadItem.setImageQuality(ImageUtils.IMAGE_KEEP);
             onImageValidationSuccess();
@@ -588,8 +589,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
                         basicKvStore.putBoolean(keyForShowingAlertDialog, false);
                         activity.finish();
                     },
-                    null,
-                    false
+                    null
                 );
             }
         } catch (Exception e) {

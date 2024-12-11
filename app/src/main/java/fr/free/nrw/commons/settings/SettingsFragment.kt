@@ -273,8 +273,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
             getString(R.string.read_help_link),
             { },
             { Utils.handleWebUrl(requireContext(), Uri.parse(GET_CONTENT_PICKER_HELP_URL)) },
-            null,
-            true
+            null
         )
     }
 
@@ -333,7 +332,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
         val dialog = Dialog(requireActivity())
         dialog.setContentView(R.layout.dialog_select_language)
-        dialog.setCanceledOnTouchOutside(true)
+        dialog.setCancelable(false)
         dialog.window?.setLayout(
             (resources.displayMetrics.widthPixels * 0.90).toInt(),
             (resources.displayMetrics.heightPixels * 0.90).toInt()

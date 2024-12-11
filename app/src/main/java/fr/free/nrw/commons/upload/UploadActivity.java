@@ -270,8 +270,7 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
                 getString(R.string.block_notification_title),
                 getString(R.string.block_notification),
                 getString(R.string.ok),
-                this::finish,
-                true)));
+                this::finish)));
     }
 
     public void checkStoragePermissions() {
@@ -418,16 +417,14 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
                                 getString(R.string.storage_permissions_denied),
                                 getString(R.string.unable_to_share_upload_item),
                                 getString(android.R.string.ok),
-                                this::finish,
-                                false);
+                                this::finish);
                         } else {
                             DialogUtil.showAlertDialog(this,
                                 getString(R.string.storage_permission_title),
                                 getString(
                                     R.string.write_storage_permission_rationale_for_image_share),
                                 getString(android.R.string.ok),
-                                this::checkStoragePermissions,
-                                false);
+                                this::checkStoragePermissions);
                         }
                     }
                 }
@@ -754,8 +751,7 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
             "",
             getString(messageResourceId),
             getString(R.string.ok),
-            onPositiveClick,
-            false);
+            onPositiveClick);
     }
 
     @Override

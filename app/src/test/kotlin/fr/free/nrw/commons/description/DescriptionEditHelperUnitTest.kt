@@ -10,6 +10,7 @@ import org.junit.Test
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.mockito.ArgumentMatchers.anyString
 import org.mockito.Mock
+import fr.free.nrw.commons.R
 import org.mockito.Mockito.times
 import org.mockito.Mockito.verify
 import org.mockito.Mockito.`when`
@@ -73,6 +74,15 @@ class DescriptionEditHelperUnitTest {
 
     @Test
     fun testShowCaptionEditNotificationCaseFalse() {
+        `when`(context.getString(R.string.caption_edit_helper_show_edit_title))
+            .thenReturn("Edit Caption")
+        `when`(context.getString(R.string.coordinates_edit_helper_show_edit_title_success))
+            .thenReturn("Success")
+        `when`(context.getString(R.string.caption_edit_helper_show_edit_message))
+            .thenReturn("Edit caption was successful")
+        `when`(context.getString(R.string.caption_edit_helper_edit_message_else))
+            .thenReturn("Edit caption failed")
+
         val method: Method =
             DescriptionEditHelper::class.java.getDeclaredMethod(
                 "showCaptionEditNotification",
@@ -86,6 +96,15 @@ class DescriptionEditHelperUnitTest {
 
     @Test
     fun testShowCaptionEditNotificationCaseTrue() {
+        `when`(context.getString(R.string.caption_edit_helper_show_edit_title))
+            .thenReturn("Edit Caption")
+        `when`(context.getString(R.string.coordinates_edit_helper_show_edit_title_success))
+            .thenReturn("Success")
+        `when`(context.getString(R.string.caption_edit_helper_show_edit_message))
+            .thenReturn("Edit caption was successful")
+        `when`(context.getString(R.string.caption_edit_helper_edit_message_else))
+            .thenReturn("Edit caption failed")
+
         val method: Method =
             DescriptionEditHelper::class.java.getDeclaredMethod(
                 "showCaptionEditNotification",
@@ -99,6 +118,15 @@ class DescriptionEditHelperUnitTest {
 
     @Test
     fun testShowDescriptionEditNotificationCaseFalse() {
+        `when`(context.getString(R.string.description_edit_helper_show_edit_title))
+            .thenReturn("Edit Description")
+        `when`(context.getString(R.string.coordinates_edit_helper_show_edit_title_success))
+            .thenReturn("Success")
+        `when`(context.getString(R.string.description_edit_helper_show_edit_message))
+            .thenReturn("Edit message")
+        `when`(context.getString(R.string.description_edit_helper_edit_message_else))
+            .thenReturn("Edit failed")
+
         val method: Method =
             DescriptionEditHelper::class.java.getDeclaredMethod(
                 "showDescriptionEditNotification",
@@ -112,6 +140,15 @@ class DescriptionEditHelperUnitTest {
 
     @Test
     fun testShowDescriptionEditNotificationCaseTrue() {
+        `when`(context.getString(R.string.description_edit_helper_show_edit_title))
+            .thenReturn("Edit Description")
+        `when`(context.getString(R.string.coordinates_edit_helper_show_edit_title_success))
+            .thenReturn("Success")
+        `when`(context.getString(R.string.description_edit_helper_show_edit_message))
+            .thenReturn("Edit message")
+        `when`(context.getString(R.string.description_edit_helper_edit_message_else))
+            .thenReturn("Edit failed")
+
         val method: Method =
             DescriptionEditHelper::class.java.getDeclaredMethod(
                 "showDescriptionEditNotification",

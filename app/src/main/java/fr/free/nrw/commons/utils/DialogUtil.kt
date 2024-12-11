@@ -79,7 +79,6 @@ object DialogUtil {
         onPositiveBtnClick: Runnable?,
         onNegativeBtnClick: Runnable?,
         customView: View?,
-        cancelable: Boolean,
     ): AlertDialog? =
         createAndShowDialogSafely(
             activity = activity,
@@ -90,7 +89,6 @@ object DialogUtil {
             onPositiveBtnClick = onPositiveBtnClick,
             onNegativeBtnClick = onNegativeBtnClick,
             customView = customView,
-            cancelable = cancelable,
         )
 
     @JvmStatic
@@ -103,7 +101,6 @@ object DialogUtil {
         onPositiveBtnClick: Runnable?,
         onNegativeBtnClick: Runnable?,
         customView: View?,
-        cancelable: Boolean,
     ): AlertDialog? =
         createAndShowDialogSafely(
             activity = activity,
@@ -114,7 +111,6 @@ object DialogUtil {
             onPositiveBtnClick = onPositiveBtnClick,
             onNegativeBtnClick = onNegativeBtnClick,
             customView = customView,
-            cancelable = cancelable,
         )
 
     @JvmStatic
@@ -124,7 +120,6 @@ object DialogUtil {
         message: String?,
         positiveButtonText: String?,
         onPositiveBtnClick: Runnable?,
-        cancelable: Boolean,
     ): AlertDialog? =
         createAndShowDialogSafely(
             activity = activity,
@@ -132,7 +127,6 @@ object DialogUtil {
             message = message,
             positiveButtonText = positiveButtonText,
             onPositiveBtnClick = onPositiveBtnClick,
-            cancelable = cancelable,
         )
 
     /**
@@ -156,7 +150,7 @@ object DialogUtil {
         onPositiveBtnClick: Runnable? = null,
         onNegativeBtnClick: Runnable? = null,
         customView: View? = null,
-        cancelable: Boolean = true,
+        cancelable: Boolean = false,
     ): AlertDialog? {
         /* If the custom view already has a parent, there is already a dialog showing with the view
          * This happens for on resume - return to avoid creating a second dialog - the first one
