@@ -286,10 +286,6 @@
   <string name="about_translate_proceed">გაგრძელება</string>
   <string name="about_translate_cancel">გაუქმება</string>
   <string name="retry">გამეორება</string>
-  <string name="showcase_view_whole_nearby_activity">ეს ის ადგილებია თქვენს მახლობლად, რომლებსაც სჭირდებათ სურათები ვიკიპედიის სტატიების საილუსტრაციოდ.\n\n„ამ ტერიტორიის ძიებაზე“ დაწკაპუნებით ფოკუსირდება რუკა და იწყებს ძებნას ამ მდებარეობის გარშემო.</string>
-  <string name="showcase_view_needs_photo">ამ ადგილს ფოტო სჭირდება.</string>
-  <string name="showcase_view_has_photo">ამ ადგილს უკვე აქვს ფოტო.</string>
-  <string name="showcase_view_no_longer_exists">ეს ადგილი აღარ არსებობს.</string>
   <string name="no_images_found">სურათები ვერ მოიძებნა!</string>
   <string name="error_loading_images">სურათის ჩატვირთვისას მოხდა შეცდომა.</string>
   <string name="block_notification_title">დაბლოკილია</string>
