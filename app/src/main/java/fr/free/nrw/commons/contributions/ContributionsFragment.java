@@ -303,9 +303,9 @@ public class ContributionsFragment
     }
 
     /**
-     * This section of code was originally used to set the visibility of the upload icon based on the number of failed and pending
-     * According to Issue5847 and the owner's request: "make the upload icon always visible and adjust the count accordingly,"
-     * This section of code has been temporarily commented out
+     * Temporarily disabled, see issue [https://github.com/commons-app/apps-android-commons/issues/5847]
+     * Sets the visibility of the upload icon based on the number of failed and pending
+     * contributions.
      */
 //    public void setUploadIconVisibility() {
 //        contributionController.getFailedAndPendingContributions();
@@ -532,7 +532,7 @@ public class ContributionsFragment
             if (!isUserProfile) {
                 setNotificationCount();
                 fetchCampaigns();
-                 //Comment out this function to make the UploadIcon always visible(Issue 5847).
+                // Temporarily disabled, see issue [https://github.com/commons-app/apps-android-commons/issues/5847]
                 // setUploadIconVisibility();
                 setUploadIconCount();
             }
@@ -759,9 +759,7 @@ public class ContributionsFragment
     }
 
     /**
-     * This section of code was originally used to update the visibility of the pending uploads ImageView based on the given count.
-     * According to Issue5847 and the owner's request: "make the upload icon always visible and adjust the count accordingly,"
-     * This section of code has been temporarily commented out.
+     * Temporarily disabled, see issue [https://github.com/commons-app/apps-android-commons/issues/5847]
      * @param count The number of pending uploads.
      */
 //    public void updateUploadIcon(int count) {

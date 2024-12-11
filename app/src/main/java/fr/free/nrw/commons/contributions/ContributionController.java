@@ -46,7 +46,7 @@ public class ContributionController {
     private boolean isInAppCameraUpload;
     public LocationPermissionCallback locationPermissionCallback;
     private LocationPermissionsHelper locationPermissionsHelper;
-      // originally called by function getFailedAndPendingContributions,comment out to make the Upload Icon always visible(Issue 5847),
+    // Temporarily disabled, see issue [https://github.com/commons-app/apps-android-commons/issues/5847]
     // LiveData<PagedList<Contribution>> failedAndPendingContributionList;
     LiveData<PagedList<Contribution>> pendingContributionList;
     LiveData<PagedList<Contribution>> failedContributionList;
@@ -384,10 +384,9 @@ public class ContributionController {
     }
 
     /**
-     * This section of code was originally used to fetch the contributions with the state "IN_PROGRESS", "QUEUED", "PAUSED" and "FAILED" and
+     * Temporarily disabled, see issue [https://github.com/commons-app/apps-android-commons/issues/5847]
+     * Fetches the contributions with the state "IN_PROGRESS", "QUEUED", "PAUSED" and "FAILED" and
      * then it populates the `failedAndPendingContributionList`.
-     * According to Issue5847 and the owner's request: "make the upload icon always visible and adjust the count accordingly,"
-     * This section of code has been temporarily commented out
      **/
 //    void getFailedAndPendingContributions() {
 //        final PagedList.Config pagedListConfig =
