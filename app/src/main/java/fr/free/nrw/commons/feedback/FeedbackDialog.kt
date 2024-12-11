@@ -2,11 +2,17 @@ package fr.free.nrw.commons.feedback
 
 import android.app.Dialog
 import android.content.Context
+import android.net.ConnectivityManager
+import android.net.Network
+import android.net.NetworkCapabilities
+import android.net.NetworkInfo
+import android.os.Build
 import android.os.Bundle
 import android.text.Html
 import android.text.Spanned
 import android.text.method.LinkMovementMethod
 import android.view.WindowManager
+import android.widget.Toast
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.databinding.DialogFeedbackBinding
 import fr.free.nrw.commons.feedback.model.Feedback
@@ -41,10 +47,45 @@ class FeedbackDialog(
         @Suppress("DEPRECATION")
         window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
         binding.btnSubmitFeedback.setOnClickListener {
-            submitFeedback()
+            if (isInternetConnectionAvailable(context) ) {
+                submitFeedback()
+            }
+            else {
+                Toast.makeText(context,R.string.error_feedback, Toast.LENGTH_SHORT).show()
+            }
         }
-
     }
+
+
+    /**
+     * This method is to check whether internet connection is available or not
+     */
+    fun isInternetConnectionAvailable(context: Context): Boolean {
+        val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            val activeNetwork: Network? = connectivityManager.activeNetwork
+            val networkCapabilities = connectivityManager.getNetworkCapabilities(activeNetwork)
+
+            return if (networkCapabilities != null) {
+                val hasInternet = networkCapabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
+                val hasValidation = networkCapabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_VALIDATED)
+                val downlinkBandwidth = networkCapabilities.linkDownstreamBandwidthKbps
+                val uplinkBandwidth = networkCapabilities.linkUpstreamBandwidthKbps
+                val isBandwidthSufficient = downlinkBandwidth >= 150 && uplinkBandwidth >= 100
+
+                hasInternet && hasValidation && isBandwidthSufficient
+            } else {
+                false
+            }
+        } else {
+            @Suppress("DEPRECATION")
+            val activeNetworkInfo: NetworkInfo? = connectivityManager.activeNetworkInfo
+            return activeNetworkInfo != null && activeNetworkInfo.isConnected
+        }
+    }
+
+
 
     fun submitFeedback() {
         if (binding.feedbackItemEditText.getText().toString() == "") {
