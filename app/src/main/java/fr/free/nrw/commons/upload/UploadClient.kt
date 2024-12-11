@@ -69,7 +69,7 @@ class UploadClient
 
             val file = contribution.localUriPath
             val fileChunks = fileUtilsWrapper.getFileChunks(file, chunkSize)
-            val mediaType = fileUtilsWrapper.getMimeType(file).toMediaTypeOrNull()
+            val mediaType = fileUtilsWrapper.getMimeType(file)?.toMediaTypeOrNull()
 
             val chunkInfo = AtomicReference<ChunkInfo?>()
             if (isStashValid(contribution)) {
