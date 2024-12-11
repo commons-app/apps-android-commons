@@ -303,16 +303,17 @@ public class ContributionsFragment
     }
 
     /**
+     * Temporarily disabled, see issue [https://github.com/commons-app/apps-android-commons/issues/5847]
      * Sets the visibility of the upload icon based on the number of failed and pending
      * contributions.
      */
-    public void setUploadIconVisibility() {
-        contributionController.getFailedAndPendingContributions();
-        contributionController.failedAndPendingContributionList.observe(getViewLifecycleOwner(),
-            list -> {
-                updateUploadIcon(list.size());
-            });
-    }
+//    public void setUploadIconVisibility() {
+//        contributionController.getFailedAndPendingContributions();
+//        contributionController.failedAndPendingContributionList.observe(getViewLifecycleOwner(),
+//            list -> {
+//                updateUploadIcon(list.size());
+//            });
+//    }
 
     /**
      * Sets the count for the upload icon based on the number of pending and failed contributions.
@@ -531,7 +532,8 @@ public class ContributionsFragment
             if (!isUserProfile) {
                 setNotificationCount();
                 fetchCampaigns();
-                setUploadIconVisibility();
+                // Temporarily disabled, see issue [https://github.com/commons-app/apps-android-commons/issues/5847]
+                // setUploadIconVisibility();
                 setUploadIconCount();
             }
         }
@@ -757,19 +759,18 @@ public class ContributionsFragment
     }
 
     /**
-     * Updates the visibility of the pending uploads ImageView based on the given count.
-     *
+     * Temporarily disabled, see issue [https://github.com/commons-app/apps-android-commons/issues/5847]
      * @param count The number of pending uploads.
      */
-    public void updateUploadIcon(int count) {
-        if (pendingUploadsImageView != null) {
-            if (count != 0) {
-                pendingUploadsImageView.setVisibility(View.VISIBLE);
-            } else {
-                pendingUploadsImageView.setVisibility(View.GONE);
-            }
-        }
-    }
+//    public void updateUploadIcon(int count) {
+//        if (pendingUploadsImageView != null) {
+//            if (count != 0) {
+//                pendingUploadsImageView.setVisibility(View.VISIBLE);
+//            } else {
+//                pendingUploadsImageView.setVisibility(View.GONE);
+//            }
+//        }
+//    }
 
     /**
      * Replace whatever is in the current contributionsFragmentContainer view with
