@@ -413,7 +413,11 @@ class LocationPickerActivity : BaseActivity(), LocationPermissionCallback {
         val position = when {
             //location metadata is available
             activity == "UploadActivity" && cameraPosition != null -> {
-                fr.free.nrw.commons.location.LatLng(cameraPosition!!.latitude, cameraPosition!!.longitude, 0.0f)
+                fr.free.nrw.commons.location.LatLng(
+                    cameraPosition!!.latitude,
+                    cameraPosition!!.longitude,
+                    0.0f
+                )
             }
             //location metadata is not available
             mapView != null -> {
@@ -471,7 +475,11 @@ class LocationPickerActivity : BaseActivity(), LocationPermissionCallback {
             val intent = Intent().apply {
                 putExtra(
                     LocationPickerConstants.MAP_CAMERA_POSITION,
-                    CameraPosition(mapView?.mapCenter?.latitude!!, mapView?.mapCenter?.longitude!!, 14.0)
+                    CameraPosition(
+                        mapView?.mapCenter?.latitude!!,
+                        mapView?.mapCenter?.longitude!!,
+                        14.0
+                    )
                 )
             }
             setResult(RESULT_OK, intent)
@@ -573,8 +581,15 @@ class LocationPickerActivity : BaseActivity(), LocationPermissionCallback {
         )
     }
 
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
-        if (requestCode == Constants.RequestCodes.LOCATION && grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        if (requestCode == Constants.RequestCodes.LOCATION &&
+            grantResults.isNotEmpty() &&
+            grantResults[0] == PackageManager.PERMISSION_GRANTED
+        ) {
             onLocationPermissionGranted()
         } else {
             onLocationPermissionDenied(getString(R.string.upload_map_location_access))
@@ -594,12 +609,18 @@ class LocationPickerActivity : BaseActivity(), LocationPermissionCallback {
 
     override fun onLocationPermissionDenied(toastMessage: String) {
         val isDeniedBefore = store.getBoolean("isPermissionDenied", false)
-        val showRationale = ActivityCompat.shouldShowRequestPermissionRationale(this, permission.ACCESS_FINE_LOCATION)
+        val showRationale = ActivityCompat.shouldShowRequestPermissionRationale(
+            this,
+            permission.ACCESS_FINE_LOCATION
+        )
 
         if (!showRationale) {
             if (!locationPermissionsHelper.checkLocationPermission(this)) {
                 if (isDeniedBefore) {
-                    locationPermissionsHelper.showAppSettingsDialog(this, R.string.upload_map_location_access)
+                    locationPermissionsHelper.showAppSettingsDialog(
+                        this,
+                        R.string.upload_map_location_access
+                    )
                 } else {
                     Toast.makeText(this, toastMessage, Toast.LENGTH_LONG).show()
                 }
@@ -618,7 +639,10 @@ class LocationPickerActivity : BaseActivity(), LocationPermissionCallback {
                 addMarkerAtGPSLocation()
             } else {
                 addMarkerAtGPSLocation()
-                locationPermissionsHelper.showLocationOffDialog(this, R.string.ask_to_turn_location_on_text)
+                locationPermissionsHelper.showLocationOffDialog(
+                    this,
+                    R.string.ask_to_turn_location_on_text
+                )
             }
         }
     }
@@ -669,7 +693,10 @@ class LocationPickerActivity : BaseActivity(), LocationPermissionCallback {
                 Marker.ANCHOR_CENTER,
                 Marker.ANCHOR_BOTTOM
             )
-            icon = ContextCompat.getDrawable(this@LocationPickerActivity, R.drawable.current_location_marker)
+            icon = ContextCompat.getDrawable(
+                this@LocationPickerActivity,
+                R.drawable.current_location_marker
+            )
             title = "Your Location"
             textLabelFontSize = 24
         }
