@@ -218,7 +218,7 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
     }
 
     @Override
-    public void showError(Boolean value) {
+    public void showError(boolean value) {
         if (binding == null) {
             return;
         }

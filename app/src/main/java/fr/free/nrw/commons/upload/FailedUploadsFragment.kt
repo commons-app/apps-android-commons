@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.contributions.Contribution
+import fr.free.nrw.commons.contributions.Contribution.Companion.STATE_FAILED
 import fr.free.nrw.commons.databinding.FragmentFailedUploadsBinding
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment
 import fr.free.nrw.commons.media.MediaClient
@@ -43,7 +44,7 @@ class FailedUploadsFragment :
 
     private lateinit var adapter: FailedUploadsAdapter
 
-    var contributionsList = ArrayList<Contribution>()
+    var contributionsList = mutableListOf<Contribution>()
 
     private lateinit var uploadProgressActivity: UploadProgressActivity
 
@@ -71,7 +72,7 @@ class FailedUploadsFragment :
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View? {
+    ): View {
         binding = FragmentFailedUploadsBinding.inflate(layoutInflater)
         pendingUploadsPresenter.onAttachView(this)
         initAdapter()
@@ -99,9 +100,9 @@ class FailedUploadsFragment :
         pendingUploadsPresenter.getFailedContributions()
         pendingUploadsPresenter.failedContributionList.observe(
             viewLifecycleOwner,
-        ) { list: PagedList<Contribution?> ->
+        ) { list: PagedList<Contribution> ->
             adapter.submitList(list)
-            contributionsList = ArrayList()
+            contributionsList = mutableListOf()
             list.forEach {
                 if (it != null) {
                     contributionsList.add(it)
@@ -124,26 +125,22 @@ class FailedUploadsFragment :
      * Restarts all the failed uploads.
      */
     fun restartUploads() {
-        if (contributionsList != null) {
-            pendingUploadsPresenter.restartUploads(
-                contributionsList,
-                0,
-                this.requireContext().applicationContext,
-            )
-        }
+        pendingUploadsPresenter.restartUploads(
+            contributionsList,
+            0,
+            requireContext().applicationContext,
+        )
     }
 
     /**
      * Restarts a specific upload.
      */
     override fun restartUpload(index: Int) {
-        if (contributionsList != null) {
-            pendingUploadsPresenter.restartUpload(
-                contributionsList,
-                index,
-                this.requireContext().applicationContext,
-            )
-        }
+        pendingUploadsPresenter.restartUpload(
+            contributionsList,
+            index,
+            requireContext().applicationContext,
+        )
     }
 
     /**
@@ -166,7 +163,7 @@ class FailedUploadsFragment :
                 ViewUtil.showShortToast(context, R.string.cancelling_upload)
                 pendingUploadsPresenter.deleteUpload(
                     contribution,
-                    this.requireContext().applicationContext,
+                    requireContext().applicationContext,
                 )
             },
             {},
@@ -177,28 +174,24 @@ class FailedUploadsFragment :
      * Deletes all the uploads after getting a confirmation from the user using Dialog.
      */
     fun deleteUploads() {
-        if (contributionsList != null) {
-            DialogUtil.showAlertDialog(
-                requireActivity(),
-                String.format(
-                    Locale.getDefault(),
-                    requireActivity().getString(R.string.cancelling_all_the_uploads),
-                ),
-                String.format(
-                    Locale.getDefault(),
-                    requireActivity().getString(R.string.are_you_sure_that_you_want_cancel_all_the_uploads),
-                ),
-                String.format(Locale.getDefault(), requireActivity().getString(R.string.yes)),
-                String.format(Locale.getDefault(), requireActivity().getString(R.string.no)),
-                {
-                    ViewUtil.showShortToast(context, R.string.cancelling_upload)
-                    uploadProgressActivity.hidePendingIcons()
-                    pendingUploadsPresenter.deleteUploads(
-                        listOf(Contribution.STATE_FAILED),
-                    )
-                },
-                {},
-            )
-        }
+        DialogUtil.showAlertDialog(
+            requireActivity(),
+            String.format(
+                Locale.getDefault(),
+                requireActivity().getString(R.string.cancelling_all_the_uploads),
+            ),
+            String.format(
+                Locale.getDefault(),
+                requireActivity().getString(R.string.are_you_sure_that_you_want_cancel_all_the_uploads),
+            ),
+            String.format(Locale.getDefault(), requireActivity().getString(R.string.yes)),
+            String.format(Locale.getDefault(), requireActivity().getString(R.string.no)),
+            {
+                ViewUtil.showShortToast(context, R.string.cancelling_upload)
+                uploadProgressActivity.hidePendingIcons()
+                pendingUploadsPresenter.deleteUploads(listOf(STATE_FAILED))
+            },
+            {},
+        )
     }
 }

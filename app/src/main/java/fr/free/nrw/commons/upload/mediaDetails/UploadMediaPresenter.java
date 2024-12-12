@@ -79,10 +79,10 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
     public static boolean isCategoriesDialogShowing;
 
     @Inject
-    public UploadMediaPresenter(UploadRepository uploadRepository,
-        @Named("default_preferences") JsonKvStore defaultKVStore,
-                                @Named(IO_THREAD) Scheduler ioScheduler,
-                                @Named(MAIN_THREAD) Scheduler mainThreadScheduler) {
+    public UploadMediaPresenter(final UploadRepository uploadRepository,
+        @Named("default_preferences") final JsonKvStore defaultKVStore,
+                                @Named(IO_THREAD) final Scheduler ioScheduler,
+                                @Named(MAIN_THREAD) final Scheduler mainThreadScheduler) {
         this.repository = uploadRepository;
         this.defaultKVStore = defaultKVStore;
         this.ioScheduler = ioScheduler;
@@ -91,7 +91,7 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
     }
 
     @Override
-    public void onAttachView(View view) {
+    public void onAttachView(final View view) {
         this.view = view;
     }
 
@@ -103,23 +103,18 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
 
     /**
      * Sets the Upload Media Details for the corresponding upload item
-     *
-     * @param uploadMediaDetails
-     * @param uploadItemIndex
      */
     @Override
-    public void setUploadMediaDetails(List<UploadMediaDetail> uploadMediaDetails, int uploadItemIndex) {
+    public void setUploadMediaDetails(final List<UploadMediaDetail> uploadMediaDetails, final int uploadItemIndex) {
         repository.getUploads().get(uploadItemIndex).setMediaDetails(uploadMediaDetails);
     }
 
     /**
      * Receives the corresponding uploadable file, processes it and return the view with and uplaod item
-     *  @param uploadableFile
-     * @param place
      */
     @Override
     public void receiveImage(final UploadableFile uploadableFile, final Place place,
-                            LatLng inAppPictureLocation) {
+                            final LatLng inAppPictureLocation) {
         view.showProgress(true);
         compositeDisposable.add(
             repository
@@ -186,7 +181,6 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
 
     /**
      * This method checks for the nearest location that needs images and suggests it to the user.
-     * @param uploadItem
      */
     private void checkNearbyPlaces(final UploadItem uploadItem) {
         final Disposable checkNearbyPlaces = Maybe.fromCallable(() -> repository
@@ -213,10 +207,10 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
      * @param hasUserRemovedLocation True if user has removed location from the image
      */
     @Override
-    public void displayLocDialog(int uploadItemIndex, LatLng inAppPictureLocation,
-        boolean hasUserRemovedLocation) {
+    public void displayLocDialog(final int uploadItemIndex, final LatLng inAppPictureLocation,
+        final boolean hasUserRemovedLocation) {
         final List<UploadItem> uploadItems = repository.getUploads();
-        UploadItem uploadItem = uploadItems.get(uploadItemIndex);
+        final UploadItem uploadItem = uploadItems.get(uploadItemIndex);
         if (uploadItem.getGpsCoords().getDecimalCoords() == null && inAppPictureLocation == null
             && !hasUserRemovedLocation) {
             final Runnable onSkipClicked = () -> {
@@ -233,7 +227,7 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
      *
      * @param uploadItem UploadItem whose caption is checked
      */
-    private void verifyCaptionQuality(UploadItem uploadItem) {
+    private void verifyCaptionQuality(final UploadItem uploadItem) {
         view.showProgress(true);
         compositeDisposable.add(
             repository
@@ -262,7 +256,7 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
      * @param errorCode Error code of the UploadItem
      * @param uploadItem UploadItem whose caption is checked
      */
-    public void handleCaptionResult(Integer errorCode, UploadItem uploadItem) {
+    public void handleCaptionResult(final Integer errorCode, final UploadItem uploadItem) {
         // If errorCode is empty caption show message
         if (errorCode == EMPTY_CAPTION) {
             Timber.d("Captions are empty. Showing toast");
@@ -285,11 +279,9 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
 
     /**
      * Copies the caption and description of the current item to the subsequent media
-     *
-     * @param indexInViewFlipper
      */
     @Override
-    public void copyTitleAndDescriptionToSubsequentMedia(int indexInViewFlipper) {
+    public void copyTitleAndDescriptionToSubsequentMedia(final int indexInViewFlipper) {
       for(int i = indexInViewFlipper+1; i < repository.getCount(); i++){
         final UploadItem subsequentUploadItem = repository.getUploads().get(i);
         subsequentUploadItem.setMediaDetails(deepCopy(repository.getUploads().get(indexInViewFlipper).getUploadMediaDetails()));
@@ -298,36 +290,34 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
 
   /**
    * Fetches and set the caption and description of the item
-   *
-   * @param indexInViewFlipper
    */
   @Override
-  public void fetchTitleAndDescription(int indexInViewFlipper) {
+  public void fetchTitleAndDescription(final int indexInViewFlipper) {
     final UploadItem currentUploadItem = repository.getUploads().get(indexInViewFlipper);
     view.updateMediaDetails(currentUploadItem.getUploadMediaDetails());
   }
 
   @NotNull
-  private List<UploadMediaDetail> deepCopy(List<UploadMediaDetail> uploadMediaDetails) {
+  private List<UploadMediaDetail> deepCopy(final List<UploadMediaDetail> uploadMediaDetails) {
     final ArrayList<UploadMediaDetail> newList = new ArrayList<>();
-    for (UploadMediaDetail uploadMediaDetail : uploadMediaDetails) {
+    for (final UploadMediaDetail uploadMediaDetail : uploadMediaDetails) {
       newList.add(uploadMediaDetail.javaCopy());
     }
     return newList;
   }
 
   @Override
-  public void useSimilarPictureCoordinates(ImageCoordinates imageCoordinates, int uploadItemIndex) {
+  public void useSimilarPictureCoordinates(final ImageCoordinates imageCoordinates, final int uploadItemIndex) {
     repository.useSimilarPictureCoordinates(imageCoordinates, uploadItemIndex);
   }
 
   @Override
-  public void onMapIconClicked(int indexInViewFlipper) {
+  public void onMapIconClicked(final int indexInViewFlipper) {
     view.showExternalMap(repository.getUploads().get(indexInViewFlipper));
   }
 
   @Override
-  public void onEditButtonClicked(int indexInViewFlipper){
+  public void onEditButtonClicked(final int indexInViewFlipper){
       view.showEditActivity(repository.getUploads().get(indexInViewFlipper));
   }
 
@@ -338,9 +328,9 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
    * @param place The place to be associated with the uploads.
    */
   @Override
-  public void onUserConfirmedUploadIsOfPlace(Place place) {
+  public void onUserConfirmedUploadIsOfPlace(final Place place) {
       final List<UploadItem> uploads = repository.getUploads();
-      for (UploadItem uploadItem : uploads) {
+      for (final UploadItem uploadItem : uploads) {
           uploadItem.setPlace(place);
           final List<UploadMediaDetail> uploadMediaDetails = uploadItem.getUploadMediaDetails();
           // Update UploadMediaDetail object for this UploadItem
@@ -362,11 +352,11 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
      * @return true if no internal error occurs, else returns false
      */
     @Override
-    public boolean getImageQuality(int uploadItemIndex, LatLng inAppPictureLocation,
-        Activity activity) {
+    public boolean getImageQuality(final int uploadItemIndex, final LatLng inAppPictureLocation,
+        final Activity activity) {
         final List<UploadItem> uploadItems = repository.getUploads();
         view.showProgress(true);
-        if (uploadItems.size() == 0) {
+        if (uploadItems.isEmpty()) {
             view.showProgress(false);
             // No internationalization required for this error message because it's an internal error.
             view.showMessage(
@@ -374,7 +364,7 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
                 R.color.color_error);
             return false;
         }
-        UploadItem uploadItem = uploadItems.get(uploadItemIndex);
+        final UploadItem uploadItem = uploadItems.get(uploadItemIndex);
         compositeDisposable.add(
             repository
                 .getImageQuality(uploadItem, inAppPictureLocation)
@@ -404,12 +394,12 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
      * @param activity        Context reference
      * @param uploadItem      UploadItem whose quality is to be checked
      */
-    private void storeImageQuality(Integer imageResult, int uploadItemIndex, Activity activity,
-        UploadItem uploadItem) {
-        BasicKvStore store = new BasicKvStore(activity,
+    private void storeImageQuality(final Integer imageResult, final int uploadItemIndex, final Activity activity,
+        final UploadItem uploadItem) {
+        final BasicKvStore store = new BasicKvStore(activity,
             UploadActivity.storeNameForCurrentUploadImagesSize);
-        String value = store.getString(keyForCurrentUploadImageQualities, null);
-        JSONObject jsonObject;
+        final String value = store.getString(keyForCurrentUploadImageQualities, null);
+        final JSONObject jsonObject;
         try {
             if (value != null) {
                 jsonObject = new JSONObject(value);
@@ -418,7 +408,8 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
             }
             jsonObject.put("UploadItem" + uploadItemIndex, imageResult);
             store.putString(keyForCurrentUploadImageQualities, jsonObject.toString());
-        } catch (Exception e) {
+        } catch (final Exception e) {
+            Timber.e(e);
         }
 
         if (uploadItemIndex == 0) {
@@ -438,20 +429,20 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
      * @param index      Index of the UploadItem whose quality is to be checked
      */
     @Override
-    public void checkImageQuality(UploadItem uploadItem, int index) {
+    public void checkImageQuality(final UploadItem uploadItem, final int index) {
         if ((uploadItem.getImageQuality() != IMAGE_OK) && (uploadItem.getImageQuality()
             != IMAGE_KEEP)) {
-            BasicKvStore store = new BasicKvStore(activity,
+            final BasicKvStore store = new BasicKvStore(activity,
                 UploadActivity.storeNameForCurrentUploadImagesSize);
-            String value = store.getString(keyForCurrentUploadImageQualities, null);
-            JSONObject jsonObject;
+            final String value = store.getString(keyForCurrentUploadImageQualities, null);
+            final JSONObject jsonObject;
             try {
                 if (value != null) {
                     jsonObject = new JSONObject(value);
                 } else {
                     jsonObject = new JSONObject();
                 }
-                Integer imageQuality = (int) jsonObject.get("UploadItem" + index);
+                final Integer imageQuality = (int) jsonObject.get("UploadItem" + index);
                 view.showProgress(false);
                 if (imageQuality == IMAGE_OK) {
                     uploadItem.setHasInvalidLocation(false);
@@ -459,7 +450,7 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
                 } else {
                     handleBadImage(imageQuality, uploadItem, index);
                 }
-            } catch (Exception e) {
+            } catch (final Exception e) {
             }
         }
     }
@@ -471,11 +462,11 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
      * @param index Index of the UploadItem which was deleted
      */
     @Override
-    public void updateImageQualitiesJSON(int size, int index) {
-        BasicKvStore store = new BasicKvStore(activity,
+    public void updateImageQualitiesJSON(final int size, final int index) {
+        final BasicKvStore store = new BasicKvStore(activity,
             UploadActivity.storeNameForCurrentUploadImagesSize);
-        String value = store.getString(keyForCurrentUploadImageQualities, null);
-        JSONObject jsonObject;
+        final String value = store.getString(keyForCurrentUploadImageQualities, null);
+        final JSONObject jsonObject;
         try {
             if (value != null) {
                 jsonObject = new JSONObject(value);
@@ -487,7 +478,8 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
             }
             jsonObject.remove("UploadItem" + (size - 1));
             store.putString(keyForCurrentUploadImageQualities, jsonObject.toString());
-        } catch (Exception e) {
+        } catch (final Exception e) {
+            Timber.e(e);
         }
     }
 
@@ -498,8 +490,8 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
      * @param uploadItem UploadItem whose quality is bad
      * @param index Index of item whose quality is bad
      */
-    public void handleBadImage(Integer errorCode,
-        UploadItem uploadItem, int index) {
+    public void handleBadImage(final Integer errorCode,
+        final UploadItem uploadItem, final int index) {
         Timber.d("Handle bad picture with error code %d", errorCode);
         if (errorCode >= 8) { // If location of image and nearby does not match
             uploadItem.setHasInvalidLocation(true);
@@ -520,9 +512,9 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
      * @param activity   Context reference
      * @param uploadItem UploadItem which has problems
      */
-    public void showBadImagePopup(Integer errorCode,
-        int index, Activity activity, UploadItem uploadItem) {
-        String errorMessageForResult = getErrorMessageForResult(activity, errorCode);
+    public void showBadImagePopup(final Integer errorCode,
+        final int index, final Activity activity, final UploadItem uploadItem) {
+        final String errorMessageForResult = getErrorMessageForResult(activity, errorCode);
         if (!StringUtils.isBlank(errorMessageForResult)) {
             DialogUtil.showAlertDialog(activity,
                 activity.getString(R.string.upload_problem_image),
@@ -537,20 +529,16 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
                     presenterCallback.deletePictureAtIndex(index);
                 }
             ).setCancelable(false);
-        } else {
         }
         //If the error message is null, we will probably not show anything
     }
 
     /**
      * notifies the user that a similar image exists
-     * @param originalFilePath
-     * @param possibleFilePath
-     * @param similarImageCoordinates
      */
     @Override
-    public void showSimilarImageFragment(String originalFilePath, String possibleFilePath,
-        ImageCoordinates similarImageCoordinates) {
+    public void showSimilarImageFragment(final String originalFilePath, final String possibleFilePath,
+        final ImageCoordinates similarImageCoordinates) {
         view.showSimilarImageFragment(originalFilePath, possibleFilePath,
             similarImageCoordinates
         );

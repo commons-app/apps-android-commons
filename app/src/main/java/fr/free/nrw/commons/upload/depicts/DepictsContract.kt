@@ -1,129 +1,125 @@
-package fr.free.nrw.commons.upload.depicts;
+package fr.free.nrw.commons.upload.depicts
 
-import android.content.Context;
-import androidx.annotation.NonNull;
-import androidx.lifecycle.LiveData;
-import fr.free.nrw.commons.BasePresenter;
-import fr.free.nrw.commons.Media;
-import fr.free.nrw.commons.upload.structure.depictions.DepictedItem;
-import java.util.List;
+import android.content.Context
+import androidx.lifecycle.LiveData
+import fr.free.nrw.commons.BasePresenter
+import fr.free.nrw.commons.Media
+import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
 
 /**
  * The contract with which DepictsFragment and its presenter would talk to each other
  */
-public interface DepictsContract {
-
+interface DepictsContract {
     interface View {
         /**
          * Go to category screen
          */
-        void goToNextScreen();
+        fun goToNextScreen()
 
         /**
          * Go to media detail screen
          */
-        void goToPreviousScreen();
+        fun goToPreviousScreen()
 
         /**
          * show error in case of no depiction selected
          */
-        void noDepictionSelected();
+        fun noDepictionSelected()
 
         /**
          * Show progress/Hide progress depending on the boolean value
          */
-        void showProgress(boolean shouldShow);
+        fun showProgress(shouldShow: Boolean)
 
         /**
          * decides whether to show error values or not depending on the boolean value
          */
-        void showError(Boolean value);
+        fun showError(value: Boolean)
 
         /**
          * add depictions to list
          */
-        void setDepictsList(List<DepictedItem> depictedItemList);
+        fun setDepictsList(depictedItemList: List<DepictedItem>)
 
         /**
          * Returns required context
          */
-        Context getFragmentContext();
+        fun getFragmentContext(): Context
 
         /**
          * Returns to previous fragment
          */
-        void goBackToPreviousScreen();
+        fun goBackToPreviousScreen()
 
         /**
          * Gets existing depictions IDs from media
          */
-        List<String> getExistingDepictions();
+        fun getExistingDepictions(): List<String>?
 
         /**
          * Shows the progress dialog
          */
-        void showProgressDialog();
+        fun showProgressDialog()
 
         /**
          * Hides the progress dialog
          */
-        void dismissProgressDialog();
+        fun dismissProgressDialog()
 
         /**
          * Update the depictions
          */
-        void updateDepicts();
+        fun updateDepicts()
 
         /**
          * Navigate the user to Login Activity
          */
-        void navigateToLoginScreen();
+        fun navigateToLoginScreen()
     }
 
-    interface UserActionListener extends BasePresenter<View> {
-
+    interface UserActionListener : BasePresenter<View> {
         /**
          * Takes to previous screen
          */
-        void onPreviousButtonClicked();
+        fun onPreviousButtonClicked()
 
         /**
          * Listener for the depicted items selected from the list
          */
-        void onDepictItemClicked(DepictedItem depictedItem);
+        fun onDepictItemClicked(depictedItem: DepictedItem)
 
         /**
          * asks the repository to fetch depictions for the query
-         *  @param query
+         * @param query
          */
-        void searchForDepictions(String query);
+        fun searchForDepictions(query: String)
 
         /**
          * Selects all associated places (if any) as depictions
          */
-        void selectPlaceDepictions();
+        fun selectPlaceDepictions()
 
         /**
          * Check if depictions were selected
          * from the depiction list
          */
-        void verifyDepictions();
+        fun verifyDepictions()
 
         /**
          * Clears previous selections
          */
-        void clearPreviousSelection();
+        fun clearPreviousSelection()
 
-        LiveData<List<DepictedItem>> getDepictedItems();
+        fun getDepictedItems(): LiveData<List<DepictedItem>>
 
         /**
          * Update the depictions
          */
-        void updateDepictions(Media media);
+        fun updateDepictions(media: Media)
 
         /**
          * Attaches view and media
          */
-        void onAttachViewWithMedia(@NonNull View view, Media media);
+        fun onAttachViewWithMedia(view: View, media: Media)
     }
 }

@@ -258,7 +258,7 @@ class DepictsFragmentUnitTests {
     @Test
     @Throws(Exception::class)
     fun testGetFragmentContext() {
-        fragment.fragmentContext
+        fragment.getFragmentContext()
     }
 
     @Test

@@ -29,6 +29,7 @@ import fr.free.nrw.commons.settings.Prefs
 import fr.free.nrw.commons.upload.UploadController
 import fr.free.nrw.commons.upload.depicts.DepictsDao
 import fr.free.nrw.commons.utils.ConfigUtils.isBetaFlavour
+import fr.free.nrw.commons.utils.TimeProvider
 import fr.free.nrw.commons.wikidata.WikidataEditListener
 import fr.free.nrw.commons.wikidata.WikidataEditListenerImpl
 import io.reactivex.Scheduler
@@ -223,6 +224,11 @@ open class CommonsApplicationModule(private val applicationContext: Context) {
     @Provides
     fun providesContentResolver(context: Context): ContentResolver =
         context.contentResolver
+
+    @Provides
+    fun provideTimeProvider(): TimeProvider {
+        return TimeProvider(System::currentTimeMillis)
+    }
 
     companion object {
         const val IO_THREAD: String = "io_thread"
