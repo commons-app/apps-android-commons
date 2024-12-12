@@ -8,8 +8,7 @@ import android.graphics.Color
 import android.graphics.Paint
 import android.location.LocationManager
 import android.os.Bundle
-import android.preference.PreferenceManager
-import android.text.Html
+import androidx.preference.PreferenceManager
 import android.text.method.LinkMovementMethod
 import android.view.MotionEvent
 import android.view.View
@@ -23,6 +22,8 @@ import androidx.appcompat.widget.AppCompatTextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.content.IntentCompat
+import androidx.core.os.BundleCompat
 import androidx.core.text.HtmlCompat
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import fr.free.nrw.commons.CameraPosition
@@ -182,13 +183,25 @@ class LocationPickerActivity : BaseActivity(), LocationPermissionCallback {
         setContentView(R.layout.activity_location_picker)
 
         if (savedInstanceState == null) {
-            cameraPosition = intent.getParcelableExtra(LocationPickerConstants.MAP_CAMERA_POSITION)
+            cameraPosition = IntentCompat.getParcelableExtra(
+                intent,
+                LocationPickerConstants.MAP_CAMERA_POSITION,
+                CameraPosition::class.java
+            )
             activity = intent.getStringExtra(LocationPickerConstants.ACTIVITY_KEY)
-            media = intent.getParcelableExtra(LocationPickerConstants.MEDIA)
+            media = IntentCompat.getParcelableExtra(
+                intent,
+                LocationPickerConstants.MEDIA,
+                Media::class.java
+            )
         } else {
-            cameraPosition = savedInstanceState.getParcelable(CAMERA_POS)
+            cameraPosition = BundleCompat.getParcelable(
+                savedInstanceState,
+                CAMERA_POS,
+                CameraPosition::class.java
+            )
             activity = savedInstanceState.getString(ACTIVITY)
-            media = savedInstanceState.getParcelable("sMedia")
+            media = BundleCompat.getParcelable(savedInstanceState, "sMedia", Media::class.java)
         }
 
         bindViews()
