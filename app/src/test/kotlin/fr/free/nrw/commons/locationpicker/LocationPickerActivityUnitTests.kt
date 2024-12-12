@@ -165,13 +165,13 @@ class LocationPickerActivityUnitTests {
                 "placeSelected",
             )
         `when`(mapView.mapCenter).thenReturn(position)
-        `when`(mapView.zoomLevel).thenReturn(15)
+        `when`(mapView.zoomLevelDouble).thenReturn(15.0)
         method.isAccessible = true
         method.invoke(activity)
         verify(applicationKvStore, times(1)).putString(
             LAST_LOCATION,
             position.latitude.toString() + "," + position.longitude.toString(),
         )
-        verify(applicationKvStore, times(1)).putString(LAST_ZOOM, mapView.zoomLevel.toString())
+        verify(applicationKvStore, times(1)).putString(LAST_ZOOM, mapView.zoomLevelDouble.toString())
     }
 }

@@ -447,7 +447,7 @@ class LocationPickerActivity : BaseActivity(), LocationPermissionCallback {
                 LAST_LOCATION,
                 "${mapView?.mapCenter?.latitude},${mapView?.mapCenter?.longitude}"
             )
-            applicationKvStore.putString(LAST_ZOOM, mapView?.zoomLevel?.toString()!!)
+            applicationKvStore.putString(LAST_ZOOM, mapView?.zoomLevelDouble?.toString()!!)
         }
 
         if (media == null) {
