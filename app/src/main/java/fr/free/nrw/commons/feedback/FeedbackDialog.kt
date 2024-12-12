@@ -7,6 +7,7 @@ import android.text.Html
 import android.text.Spanned
 import android.text.method.LinkMovementMethod
 import android.view.WindowManager
+import com.google.android.material.snackbar.Snackbar
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.databinding.DialogFeedbackBinding
 import fr.free.nrw.commons.feedback.model.Feedback
@@ -17,6 +18,8 @@ import fr.free.nrw.commons.utils.DeviceInfoUtil.getConnectionType
 import fr.free.nrw.commons.utils.DeviceInfoUtil.getDevice
 import fr.free.nrw.commons.utils.DeviceInfoUtil.getDeviceManufacturer
 import fr.free.nrw.commons.utils.DeviceInfoUtil.getDeviceModel
+import java.net.ConnectException
+import java.net.UnknownHostException
 
 class FeedbackDialog(
     context: Context,
@@ -41,9 +44,31 @@ class FeedbackDialog(
         @Suppress("DEPRECATION")
         window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
         binding.btnSubmitFeedback.setOnClickListener {
-            submitFeedback()
-        }
+            try {
+                submitFeedback()
+            } catch (e: Exception) {
+                when (e) {
+                    is UnknownHostException -> {
+                        Snackbar.make(findViewById(android.R.id.content),
+                            R.string.error_feedback,
+                            Snackbar.LENGTH_SHORT).show()
+                    }
 
+                    is ConnectException -> {
+                        Snackbar.make(findViewById(android.R.id.content),
+                            R.string.error_feedback,
+                            Snackbar.LENGTH_SHORT).show()
+                    }
+
+                    else -> {
+                        Snackbar.make(findViewById(android.R.id.content),
+                             R.string.error_feedback,
+                            Snackbar.LENGTH_SHORT).show()
+                    }
+                }
+            }
+
+        }
     }
 
     fun submitFeedback() {
