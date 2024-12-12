@@ -105,7 +105,11 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
         binding.tooltip.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(final View v) {
-                DialogUtil.showAlertDialog(requireActivity(), getString(R.string.categories_activity_title), getString(R.string.categories_tooltip), getString(android.R.string.ok), null, true);
+                DialogUtil.showAlertDialog(requireActivity(),
+                    getString(R.string.categories_activity_title),
+                    getString(R.string.categories_tooltip),
+                    getString(android.R.string.ok),
+                    null);
             }
         });
         if (media == null) {
