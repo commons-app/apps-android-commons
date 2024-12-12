@@ -43,6 +43,7 @@
 * Miguel2706
 * Mirzali
 * No se
+* Osvaldorino
 * Pompilos
 * Raos10
 * Rodney Araujo
@@ -407,6 +408,7 @@
   <string name="delete">Borrar</string>
   <string name="Achievements">Logros</string>
   <string name="Profile">Perfil</string>
+  <string name="badges">Las insignias</string>
   <string name="statistics">Estadísticas</string>
   <string name="statistics_thanks">Agradecimientos recibidos</string>
   <string name="statistics_featured">Imágenes destacadas</string>

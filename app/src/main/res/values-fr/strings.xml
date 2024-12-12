@@ -842,4 +842,10 @@
   <string name="red_pin">Cet endroit n\'a pas encore de photo, allez en prendre une !</string>
   <string name="green_pin">Cet endroit a déjà une photo.</string>
   <string name="grey_pin">Je vérifie maintenant si cet endroit a une photo.</string>
+  <string name="error_while_loading">Erreur lors du chargement</string>
+  <string name="no_usages_found">Aucune utilisation trouvée</string>
+  <string name="usages_on_commons_heading">Commons</string>
+  <string name="usages_on_other_wikis_heading">Autres wikis</string>
+  <string name="bullet_point">•</string>
+  <string name="file_usages_container_heading">Utilisations du fichier</string>
 </resources>

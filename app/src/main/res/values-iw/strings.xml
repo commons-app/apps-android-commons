@@ -389,11 +389,13 @@
   <string name="delete">מחיקה</string>
   <string name="Achievements">הישגים</string>
   <string name="Profile">פרופיל</string>
+  <string name="badges">סמלים</string>
   <string name="statistics">סטטיסטיקה</string>
   <string name="statistics_thanks">התודה התקבלה</string>
   <string name="statistics_featured">תמונות מומלצות</string>
   <string name="statistics_wikidata_edits">תמונות דרך \"מקומות בסביבה\"</string>
-  <string name="level" fuzzy="true">רמה</string>
+  <string name="level">רמה %d</string>
+  <string name="profileLevel">%s (רמה %s)</string>
   <string name="images_uploaded">תמונות שהועלו</string>
   <string name="image_reverts">תמונות שלא שוחזרו</string>
   <string name="images_used_by_wiki">תמונות בשימוש</string>
@@ -834,4 +836,10 @@
   <string name="red_pin">אין עדיין תמונה למקום הזה, אפשר פשוט לצלם אחת!</string>
   <string name="green_pin">למקום הזה כבר יש תמונה.</string>
   <string name="grey_pin">עכשיו מתבצעת בדיקה האם למקום הזה יש תמונה.</string>
+  <string name="error_while_loading">אירעה שגיאה בעת טעינה</string>
+  <string name="no_usages_found">לא נמצאו שימושים</string>
+  <string name="usages_on_commons_heading">ויקישיתוף</string>
+  <string name="usages_on_other_wikis_heading">אתרי ויקי אחרים</string>
+  <string name="bullet_point">•</string>
+  <string name="file_usages_container_heading">שימושים בקובץ</string>
 </resources>

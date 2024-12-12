@@ -800,4 +800,10 @@
   <string name="red_pin">Местово сè уште нема слика. Направете ја!</string>
   <string name="green_pin">Местово веќе има слика.</string>
   <string name="grey_pin">Проверувам дали местово има слика.</string>
+  <string name="error_while_loading">Грешка при вчитување</string>
+  <string name="no_usages_found">Не најдов употреби</string>
+  <string name="usages_on_commons_heading">Ризница</string>
+  <string name="usages_on_other_wikis_heading">Други викија</string>
+  <string name="bullet_point">•</string>
+  <string name="file_usages_container_heading">Употреби на податотеката</string>
 </resources>

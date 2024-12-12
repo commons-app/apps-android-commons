@@ -770,4 +770,7 @@
   <string name="red_pin">Questo posto non ha ancora una foto, scattane una!</string>
   <string name="green_pin">Questo posto ha già una foto.</string>
   <string name="grey_pin">Ora controlliamo se questo posto ha una foto.</string>
+  <string name="usages_on_commons_heading">Commons</string>
+  <string name="usages_on_other_wikis_heading">Altri wiki</string>
+  <string name="file_usages_container_heading">Utilizzi del file</string>
 </resources>
