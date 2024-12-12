@@ -23,6 +23,7 @@ import androidx.appcompat.widget.AppCompatTextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.text.HtmlCompat
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import fr.free.nrw.commons.CameraPosition
 import fr.free.nrw.commons.CommonsApplication
@@ -270,7 +271,10 @@ class LocationPickerActivity : BaseActivity(), LocationPermissionCallback {
      * For showing credits
      */
     private fun addCredits() {
-        tvAttribution.text = Html.fromHtml(getString(R.string.map_attribution))
+        tvAttribution.text = HtmlCompat.fromHtml(
+            getString(R.string.map_attribution),
+            HtmlCompat.FROM_HTML_MODE_LEGACY
+        )
         tvAttribution.movementMethod = LinkMovementMethod.getInstance()
     }
 
