@@ -1,214 +1,198 @@
-package fr.free.nrw.commons.bookmarks.locations;
+package fr.free.nrw.commons.bookmarks.locations
 
-import android.annotation.SuppressLint;
-import android.content.ContentProviderClient;
-import android.content.ContentValues;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteException;
-import android.os.RemoteException;
 
-import androidx.annotation.NonNull;
+import android.annotation.SuppressLint
+import android.content.ContentProviderClient
+import android.content.ContentValues
+import android.database.Cursor
+import android.database.sqlite.SQLiteDatabase
+import android.database.sqlite.SQLiteException
+import android.os.RemoteException
+import fr.free.nrw.commons.location.LatLng
+import fr.free.nrw.commons.nearby.Label
+import fr.free.nrw.commons.nearby.NearbyController
+import fr.free.nrw.commons.nearby.Place
+import fr.free.nrw.commons.nearby.Sitelinks
+import timber.log.Timber
+import javax.inject.Inject
+import javax.inject.Named
+import javax.inject.Provider
 
-import fr.free.nrw.commons.nearby.NearbyController;
-import java.util.ArrayList;
-import java.util.List;
 
-import javax.inject.Inject;
-import javax.inject.Named;
-import javax.inject.Provider;
-
-import fr.free.nrw.commons.location.LatLng;
-import fr.free.nrw.commons.nearby.Label;
-import fr.free.nrw.commons.nearby.Place;
-import fr.free.nrw.commons.nearby.Sitelinks;
-import timber.log.Timber;
-
-import static fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsContentProvider.BASE_URI;
-
-public class BookmarkLocationsDao {
-
-    private final Provider<ContentProviderClient> clientProvider;
-
-    @Inject
-    public BookmarkLocationsDao(@Named("bookmarksLocation") Provider<ContentProviderClient> clientProvider) {
-        this.clientProvider = clientProvider;
-    }
+class BookmarkLocationsDao @Inject constructor(
+    @Named("bookmarksLocation") private val clientProvider: Provider<ContentProviderClient>
+) {
 
     /**
-     *  Find all persisted locations bookmarks on database
-     *
+     * Find all persisted location bookmarks in the database
      * @return list of Place
      */
-    @NonNull
-    public List<Place> getAllBookmarksLocations() {
-        List<Place> items = new ArrayList<>();
-        Cursor cursor = null;
-        ContentProviderClient db = clientProvider.get();
+    fun getAllBookmarksLocations(): List<Place> {
+        val items = mutableListOf<Place>()
+        var cursor: Cursor? = null
+        val db = clientProvider.get()
         try {
             cursor = db.query(
                 BookmarkLocationsContentProvider.BASE_URI,
                 Table.ALL_FIELDS,
                 null,
-                new String[]{},
-                null);
-            while (cursor != null && cursor.moveToNext()) {
-                items.add(fromCursor(cursor));
+                arrayOf(),
+                null
+            )
+            while (cursor?.moveToNext() == true) {
+                items.add(fromCursor(cursor))
             }
-        } catch (RemoteException e) {
-            throw new RuntimeException(e);
+        } catch (e: RemoteException) {
+            throw RuntimeException(e)
         } finally {
-            if (cursor != null) {
-                cursor.close();
-            }
-            db.release();
+            cursor?.close()
+            db.close()
         }
-        return items;
+        return items
     }
 
     /**
-     * Look for a place in bookmarks table in order to insert or delete it
-     *
-     * @param bookmarkLocation : Place object
-     * @return is Place now fav ?
+     * Look for a place in bookmarks table to insert or delete it
+     * @param bookmarkLocation: Place object
+     * @return is Place now a favorite?
      */
-    public boolean updateBookmarkLocation(Place bookmarkLocation) {
-        boolean bookmarkExists = findBookmarkLocation(bookmarkLocation);
+    fun updateBookmarkLocation(bookmarkLocation: Place): Boolean {
+        val bookmarkExists = findBookmarkLocation(bookmarkLocation)
         if (bookmarkExists) {
-            deleteBookmarkLocation(bookmarkLocation);
-            NearbyController.updateMarkerLabelListBookmark(bookmarkLocation, false);
+            deleteBookmarkLocation(bookmarkLocation)
+            NearbyController.updateMarkerLabelListBookmark(bookmarkLocation, false)
         } else {
-            addBookmarkLocation(bookmarkLocation);
-            NearbyController.updateMarkerLabelListBookmark(bookmarkLocation, true);
+            addBookmarkLocation(bookmarkLocation)
+            NearbyController.updateMarkerLabelListBookmark(bookmarkLocation, true)
         }
-        return !bookmarkExists;
+        return !bookmarkExists
     }
 
     /**
      * Add a Place to bookmarks table
-     *
-     * @param bookmarkLocation : Place to add
+     * @param bookmarkLocation: Place to add
      */
-    private void addBookmarkLocation(Place bookmarkLocation) {
-        ContentProviderClient db = clientProvider.get();
+    private fun addBookmarkLocation(bookmarkLocation: Place) {
+        val db = clientProvider.get()
         try {
-            db.insert(BASE_URI, toContentValues(bookmarkLocation));
-        } catch (RemoteException e) {
-            throw new RuntimeException(e);
+            db.insert(BookmarkLocationsContentProvider.BASE_URI, toContentValues(bookmarkLocation))
+        } catch (e: RemoteException) {
+            throw RuntimeException(e)
         } finally {
-            db.release();
+            db.close()
         }
     }
 
     /**
      * Delete a Place from bookmarks table
-     *
-     * @param bookmarkLocation : Place to delete
+     * @param bookmarkLocation: Place to delete
      */
-    private void deleteBookmarkLocation(Place bookmarkLocation) {
-        ContentProviderClient db = clientProvider.get();
+    private fun deleteBookmarkLocation(bookmarkLocation: Place) {
+        val db = clientProvider.get()
         try {
-            db.delete(BookmarkLocationsContentProvider.uriForName(bookmarkLocation.name), null, null);
-        } catch (RemoteException e) {
-            throw new RuntimeException(e);
+            db.delete(
+                BookmarkLocationsContentProvider.uriForName(bookmarkLocation.name),
+                null,
+                null
+            )
+        } catch (e: RemoteException) {
+            throw RuntimeException(e)
         } finally {
-            db.release();
+            db.close()
         }
     }
 
     /**
      * Find a Place from database based on its name
-     *
-     * @param bookmarkLocation : Place to find
-     * @return boolean : is Place in database ?
+     * @param bookmarkLocation: Place to find
+     * @return is Place in the database?
      */
-    public boolean findBookmarkLocation(Place bookmarkLocation) {
-        Cursor cursor = null;
-        ContentProviderClient db = clientProvider.get();
+    fun findBookmarkLocation(bookmarkLocation: Place): Boolean {
+        var cursor: Cursor? = null
+        val db = clientProvider.get()
         try {
             cursor = db.query(
                 BookmarkLocationsContentProvider.BASE_URI,
                 Table.ALL_FIELDS,
-                Table.COLUMN_NAME + "=?",
-                new String[]{bookmarkLocation.name},
-                null);
-            if (cursor != null && cursor.moveToFirst()) {
-                return true;
+                "${Table.COLUMN_NAME}=?",
+                arrayOf(bookmarkLocation.name),
+                null
+            )
+            if (cursor?.moveToFirst() == true) {
+                return true
             }
-        } catch (RemoteException e) {
-            // This feels lazy, but to hell with checked exceptions. :)
-            throw new RuntimeException(e);
+        } catch (e: RemoteException) {
+            throw RuntimeException(e)
         } finally {
-            if (cursor != null) {
-                cursor.close();
-            }
-            db.release();
+            cursor?.close()
+            db.close()
         }
-        return false;
+        return false
     }
 
     @SuppressLint("Range")
-    @NonNull
-    Place fromCursor(final Cursor cursor) {
-        final LatLng location = new LatLng(cursor.getDouble(cursor.getColumnIndex(Table.COLUMN_LAT)),
-            cursor.getDouble(cursor.getColumnIndex(Table.COLUMN_LONG)), 1F);
+    private fun fromCursor(cursor: Cursor): Place {
+        val location = LatLng(
+            cursor.getDouble(cursor.getColumnIndex(Table.COLUMN_LAT)),
+            cursor.getDouble(cursor.getColumnIndex(Table.COLUMN_LONG)),
+            1f
+        )
 
-        final Sitelinks.Builder builder = new Sitelinks.Builder();
-        builder.setWikipediaLink(cursor.getString(cursor.getColumnIndex(Table.COLUMN_WIKIPEDIA_LINK)));
-        builder.setWikidataLink(cursor.getString(cursor.getColumnIndex(Table.COLUMN_WIKIDATA_LINK)));
-        builder.setCommonsLink(cursor.getString(cursor.getColumnIndex(Table.COLUMN_COMMONS_LINK)));
+        val builder = Sitelinks.Builder().apply {
+            setWikipediaLink(cursor.getString(cursor.getColumnIndex(Table.COLUMN_WIKIPEDIA_LINK)))
+            setWikidataLink(cursor.getString(cursor.getColumnIndex(Table.COLUMN_WIKIDATA_LINK)))
+            setCommonsLink(cursor.getString(cursor.getColumnIndex(Table.COLUMN_COMMONS_LINK)))
+        }
 
-        return new Place(
+        return Place(
             cursor.getString(cursor.getColumnIndex(Table.COLUMN_LANGUAGE)),
             cursor.getString(cursor.getColumnIndex(Table.COLUMN_NAME)),
-            Label.fromText((cursor.getString(cursor.getColumnIndex(Table.COLUMN_LABEL_TEXT)))),
+            Label.fromText(cursor.getString(cursor.getColumnIndex(Table.COLUMN_LABEL_TEXT))),
             cursor.getString(cursor.getColumnIndex(Table.COLUMN_DESCRIPTION)),
             location,
             cursor.getString(cursor.getColumnIndex(Table.COLUMN_CATEGORY)),
             builder.build(),
             cursor.getString(cursor.getColumnIndex(Table.COLUMN_PIC)),
-            Boolean.parseBoolean(cursor.getString(cursor.getColumnIndex(Table.COLUMN_EXISTS)))
-        );
+            cursor.getString(cursor.getColumnIndex(Table.COLUMN_EXISTS)).toBoolean()
+        )
     }
 
-    private ContentValues toContentValues(Place bookmarkLocation) {
-        ContentValues cv = new ContentValues();
-        cv.put(BookmarkLocationsDao.Table.COLUMN_NAME, bookmarkLocation.getName());
-        cv.put(BookmarkLocationsDao.Table.COLUMN_LANGUAGE, bookmarkLocation.getLanguage());
-        cv.put(BookmarkLocationsDao.Table.COLUMN_DESCRIPTION, bookmarkLocation.getLongDescription());
-        cv.put(BookmarkLocationsDao.Table.COLUMN_CATEGORY, bookmarkLocation.getCategory());
-        cv.put(BookmarkLocationsDao.Table.COLUMN_LABEL_TEXT, bookmarkLocation.getLabel()!=null ? bookmarkLocation.getLabel().getText() : "");
-        cv.put(BookmarkLocationsDao.Table.COLUMN_LABEL_ICON, bookmarkLocation.getLabel()!=null ? bookmarkLocation.getLabel().getIcon() : null);
-        cv.put(BookmarkLocationsDao.Table.COLUMN_WIKIPEDIA_LINK, bookmarkLocation.siteLinks.getWikipediaLink().toString());
-        cv.put(BookmarkLocationsDao.Table.COLUMN_WIKIDATA_LINK, bookmarkLocation.siteLinks.getWikidataLink().toString());
-        cv.put(BookmarkLocationsDao.Table.COLUMN_COMMONS_LINK, bookmarkLocation.siteLinks.getCommonsLink().toString());
-        cv.put(BookmarkLocationsDao.Table.COLUMN_LAT, bookmarkLocation.location.getLatitude());
-        cv.put(BookmarkLocationsDao.Table.COLUMN_LONG, bookmarkLocation.location.getLongitude());
-        cv.put(BookmarkLocationsDao.Table.COLUMN_PIC, bookmarkLocation.pic);
-        cv.put(BookmarkLocationsDao.Table.COLUMN_EXISTS, bookmarkLocation.exists.toString());
-        return cv;
+    private fun toContentValues(bookmarkLocation: Place): ContentValues {
+        return ContentValues().apply {
+            put(Table.COLUMN_NAME, bookmarkLocation.name)
+            put(Table.COLUMN_LANGUAGE, bookmarkLocation.language)
+            put(Table.COLUMN_DESCRIPTION, bookmarkLocation.longDescription)
+            put(Table.COLUMN_CATEGORY, bookmarkLocation.category)
+            put(Table.COLUMN_LABEL_TEXT, bookmarkLocation.label?.text ?: "")
+            put(Table.COLUMN_LABEL_ICON, bookmarkLocation.label?.icon)
+            put(Table.COLUMN_WIKIPEDIA_LINK, bookmarkLocation.siteLinks.wikipediaLink.toString())
+            put(Table.COLUMN_WIKIDATA_LINK, bookmarkLocation.siteLinks.wikidataLink.toString())
+            put(Table.COLUMN_COMMONS_LINK, bookmarkLocation.siteLinks.commonsLink.toString())
+            put(Table.COLUMN_LAT, bookmarkLocation.location.latitude)
+            put(Table.COLUMN_LONG, bookmarkLocation.location.longitude)
+            put(Table.COLUMN_PIC, bookmarkLocation.pic)
+            put(Table.COLUMN_EXISTS, bookmarkLocation.exists.toString())
+        }
     }
 
-    public static class Table {
-        public static final String TABLE_NAME = "bookmarksLocations";
+    object Table {
+        const val TABLE_NAME = "bookmarksLocations"
+        const val COLUMN_NAME = "location_name"
+        const val COLUMN_LANGUAGE = "location_language"
+        const val COLUMN_DESCRIPTION = "location_description"
+        const val COLUMN_LAT = "location_lat"
+        const val COLUMN_LONG = "location_long"
+        const val COLUMN_CATEGORY = "location_category"
+        const val COLUMN_LABEL_TEXT = "location_label_text"
+        const val COLUMN_LABEL_ICON = "location_label_icon"
+        const val COLUMN_IMAGE_URL = "location_image_url"
+        const val COLUMN_WIKIPEDIA_LINK = "location_wikipedia_link"
+        const val COLUMN_WIKIDATA_LINK = "location_wikidata_link"
+        const val COLUMN_COMMONS_LINK = "location_commons_link"
+        const val COLUMN_PIC = "location_pic"
+        const val COLUMN_EXISTS = "location_exists"
 
-        static final String COLUMN_NAME = "location_name";
-        static final String COLUMN_LANGUAGE = "location_language";
-        static final String COLUMN_DESCRIPTION = "location_description";
-        static final String COLUMN_LAT = "location_lat";
-        static final String COLUMN_LONG = "location_long";
-        static final String COLUMN_CATEGORY = "location_category";
-        static final String COLUMN_LABEL_TEXT = "location_label_text";
-        static final String COLUMN_LABEL_ICON = "location_label_icon";
-        static final String COLUMN_IMAGE_URL = "location_image_url";
-        static final String COLUMN_WIKIPEDIA_LINK = "location_wikipedia_link";
-        static final String COLUMN_WIKIDATA_LINK = "location_wikidata_link";
-        static final String COLUMN_COMMONS_LINK = "location_commons_link";
-        static final String COLUMN_PIC = "location_pic";
-        static final String COLUMN_EXISTS = "location_exists";
-
-        // NOTE! KEEP IN SAME ORDER AS THEY ARE DEFINED UP THERE. HELPS HARD CODE COLUMN INDICES.
-        public static final String[] ALL_FIELDS = {
+        val ALL_FIELDS = arrayOf(
             COLUMN_NAME,
             COLUMN_LANGUAGE,
             COLUMN_DESCRIPTION,
@@ -222,90 +206,95 @@ public class BookmarkLocationsDao {
             COLUMN_WIKIDATA_LINK,
             COLUMN_COMMONS_LINK,
             COLUMN_PIC,
-            COLUMN_EXISTS,
-        };
+            COLUMN_EXISTS
+        )
 
-        static final String DROP_TABLE_STATEMENT = "DROP TABLE IF EXISTS " + TABLE_NAME;
+        private const val DROP_TABLE_STATEMENT = "DROP TABLE IF EXISTS $TABLE_NAME"
 
-        static final String CREATE_TABLE_STATEMENT = "CREATE TABLE " + TABLE_NAME + " ("
-            + COLUMN_NAME + " STRING PRIMARY KEY,"
-            + COLUMN_LANGUAGE + " STRING,"
-            + COLUMN_DESCRIPTION + " STRING,"
-            + COLUMN_CATEGORY + " STRING,"
-            + COLUMN_LABEL_TEXT + " STRING,"
-            + COLUMN_LABEL_ICON + " INTEGER,"
-            + COLUMN_LAT + " DOUBLE,"
-            + COLUMN_LONG + " DOUBLE,"
-            + COLUMN_IMAGE_URL + " STRING,"
-            + COLUMN_WIKIPEDIA_LINK + " STRING,"
-            + COLUMN_WIKIDATA_LINK + " STRING,"
-            + COLUMN_COMMONS_LINK + " STRING,"
-            + COLUMN_PIC + " STRING,"
-            + COLUMN_EXISTS + " STRING"
-            + ");";
+        private const val CREATE_TABLE_STATEMENT = """
+        CREATE TABLE $TABLE_NAME (
+            $COLUMN_NAME STRING PRIMARY KEY,
+            $COLUMN_LANGUAGE STRING,
+            $COLUMN_DESCRIPTION STRING,
+            $COLUMN_CATEGORY STRING,
+            $COLUMN_LABEL_TEXT STRING,
+            $COLUMN_LABEL_ICON INTEGER,
+            $COLUMN_LAT DOUBLE,
+            $COLUMN_LONG DOUBLE,
+            $COLUMN_IMAGE_URL STRING,
+            $COLUMN_WIKIPEDIA_LINK STRING,
+            $COLUMN_WIKIDATA_LINK STRING,
+            $COLUMN_COMMONS_LINK STRING,
+            $COLUMN_PIC STRING,
+            $COLUMN_EXISTS STRING
+        )
+    """
 
-        public static void onCreate(SQLiteDatabase db) {
-            db.execSQL(CREATE_TABLE_STATEMENT);
+        fun onCreate(db: SQLiteDatabase) {
+            db.execSQL(CREATE_TABLE_STATEMENT)
         }
 
-        public static void onDelete(SQLiteDatabase db) {
-            db.execSQL(DROP_TABLE_STATEMENT);
-            onCreate(db);
+        fun onDelete(db: SQLiteDatabase) {
+            db.execSQL(DROP_TABLE_STATEMENT)
+            onCreate(db)
         }
 
-        public static void onUpdate(final SQLiteDatabase db, int from, final int to) {
-            Timber.d("bookmarksLocations db is updated from:"+from+", to:"+to);
-            if (from == to) {
-                return;
-            }
+        @SuppressLint("SQLiteString")
+        fun onUpdate(db: SQLiteDatabase, from: Int, to: Int) {
+            Timber.d("bookmarksLocations db is updated from: $from, to: $to")
+            if (from == to) return
+
             if (from < 7) {
                 // doesn't exist yet
-                from++;
-                onUpdate(db, from, to);
-                return;
+                onUpdate(db, from + 1, to)
+                return
             }
+
             if (from == 7) {
                 // table added in version 8
-                onCreate(db);
-                from++;
-                onUpdate(db, from, to);
-                return;
+                onCreate(db)
+                onUpdate(db, from + 1, to)
+                return
             }
+
             if (from < 10) {
-                from++;
-                onUpdate(db, from, to);
-                return;
+                onUpdate(db, from + 1, to)
+                return
             }
+
             if (from == 10) {
-                //This is safe, and can be called clean, as we/I do not remember the appropriate version for this
-                //We are anyways switching to room, these things won't be necessary then
-                try {
-                    db.execSQL("ALTER TABLE bookmarksLocations ADD COLUMN location_pic STRING;");
-                }catch (SQLiteException exception){
-                    Timber.e(exception);//
-                }
-                return;
-            }
-            if (from >= 12) {
+                // Adding column `location_pic`
                 try {
                     db.execSQL(
-                        "ALTER TABLE bookmarksLocations ADD COLUMN location_destroyed STRING;");
-                } catch (SQLiteException exception) {
-                    Timber.e(exception);
+                        "ALTER TABLE $TABLE_NAME ADD COLUMN location_pic STRING;"
+                    )
+                } catch (exception: SQLiteException) {
+                    Timber.e(exception)
+                }
+                return
+            }
+
+            if (from >= 12) {
+                try {
+                    db.execSQL("ALTER TABLE $TABLE_NAME ADD COLUMN location_destroyed STRING;")
+                } catch (exception: SQLiteException) {
+                    Timber.e(exception)
                 }
             }
-            if (from >= 13){
+
+            if (from >= 13) {
                 try {
-                    db.execSQL("ALTER TABLE bookmarksLocations ADD COLUMN location_language STRING;");
-                } catch (SQLiteException exception){
-                    Timber.e(exception);
+                    db.execSQL("ALTER TABLE $TABLE_NAME ADD COLUMN location_language STRING;")
+                } catch (exception: SQLiteException) {
+                    Timber.e(exception)
                 }
             }
-            if (from >= 14){
+
+            if (from >= 14) {
                 try {
-                    db.execSQL("ALTER TABLE bookmarksLocations ADD COLUMN location_exists STRING;");
-                } catch (SQLiteException exception){
-                    Timber.e(exception);
+                    db.execSQL("ALTER TABLE $TABLE_NAME ADD COLUMN location_exists STRING;")
+                } catch (exception: SQLiteException) {
+                    Timber.e(exception)
                 }
             }
         }

@@ -1,137 +1,139 @@
-package fr.free.nrw.commons.bookmarks.locations;
+package fr.free.nrw.commons.bookmarks.locations
 
-import android.Manifest.permission;
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import androidx.activity.result.ActivityResultCallback;
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import dagger.android.support.DaggerFragment;
-import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.contributions.ContributionController;
-import fr.free.nrw.commons.databinding.FragmentBookmarksLocationsBinding;
-import fr.free.nrw.commons.nearby.Place;
-import fr.free.nrw.commons.nearby.fragments.CommonPlaceClickActions;
-import fr.free.nrw.commons.nearby.fragments.PlaceAdapter;
-import java.util.List;
-import java.util.Map;
-import javax.inject.Inject;
-import kotlin.Unit;
+import android.Manifest.permission
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts.RequestMultiplePermissions
+import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult
+import androidx.recyclerview.widget.LinearLayoutManager
+import dagger.android.support.DaggerFragment
+import fr.free.nrw.commons.R
+import fr.free.nrw.commons.contributions.ContributionController
+import fr.free.nrw.commons.databinding.FragmentBookmarksLocationsBinding
+import fr.free.nrw.commons.filepicker.FilePicker
+import fr.free.nrw.commons.nearby.fragments.CommonPlaceClickActions
+import fr.free.nrw.commons.nearby.fragments.PlaceAdapter
+import javax.inject.Inject
 
-public class BookmarkLocationsFragment extends DaggerFragment {
 
-    public FragmentBookmarksLocationsBinding binding;
+class BookmarkLocationsFragment : DaggerFragment() {
 
-    @Inject BookmarkLocationsController controller;
-    @Inject ContributionController contributionController;
-    @Inject BookmarkLocationsDao bookmarkLocationDao;
-    @Inject CommonPlaceClickActions commonPlaceClickActions;
-    private PlaceAdapter adapter;
+    private var _binding: FragmentBookmarksLocationsBinding? = null
+    private val binding get() = _binding!!
 
-    private final ActivityResultLauncher<Intent> cameraPickLauncherForResult =
-        registerForActivityResult(new StartActivityForResult(),
-        result -> {
-            contributionController.handleActivityResultWithCallback(requireActivity(), callbacks -> {
-                contributionController.onPictureReturnedFromCamera(result, requireActivity(), callbacks);
-            });
-        });
+    @Inject lateinit var controller: BookmarkLocationsController
+    @Inject lateinit var contributionController: ContributionController
+    @Inject lateinit var bookmarkLocationDao: BookmarkLocationsDao
+    @Inject lateinit var commonPlaceClickActions: CommonPlaceClickActions
 
-      private final ActivityResultLauncher<Intent> galleryPickLauncherForResult =
-          registerForActivityResult(new StartActivityForResult(),
-        result -> {
-              contributionController.handleActivityResultWithCallback(requireActivity(), callbacks -> {
-                contributionController.onPictureReturnedFromGallery(result, requireActivity(), callbacks);
-            });
-        });
+    private lateinit var adapter: PlaceAdapter
+    private lateinit var inAppCameraLocationPermissionLauncher
+    : ActivityResultLauncher<Array<String>>
 
-    private ActivityResultLauncher<String[]> inAppCameraLocationPermissionLauncher = registerForActivityResult(new ActivityResultContracts.RequestMultiplePermissions(), new ActivityResultCallback<Map<String, Boolean>>() {
-        @Override
-        public void onActivityResult(Map<String, Boolean> result) {
-            boolean areAllGranted = true;
-            for(final boolean b : result.values()) {
-                areAllGranted = areAllGranted && b;
-            }
+    private val cameraPickLauncherForResult =
+        registerForActivityResult(StartActivityForResult()) { result ->
+            contributionController.handleActivityResultWithCallback(
+                requireActivity(),
+                object: FilePicker.HandleActivityResult {
+                    override fun onHandleActivityResult(callbacks: FilePicker.Callbacks) {
+                        contributionController.onPictureReturnedFromCamera(
+                            result,
+                            requireActivity(),
+                            callbacks
+                        )
+                    }
+                })
+        }
 
-            if (areAllGranted) {
-                contributionController.locationPermissionCallback.onLocationPermissionGranted();
-            } else {
-                if (shouldShowRequestPermissionRationale(permission.ACCESS_FINE_LOCATION)) {
-                    contributionController.handleShowRationaleFlowCameraLocation(getActivity(), inAppCameraLocationPermissionLauncher, cameraPickLauncherForResult);
+    private val galleryPickLauncherForResult =
+        registerForActivityResult(StartActivityForResult()) { result ->
+            contributionController.handleActivityResultWithCallback(
+                requireActivity(),
+                object: FilePicker.HandleActivityResult {
+                    override fun onHandleActivityResult(callbacks: FilePicker.Callbacks) {
+                        contributionController.onPictureReturnedFromGallery(
+                            result,
+                            requireActivity(),
+                            callbacks
+                        )
+                    }
+                })
+        }
+
+    companion object {
+        fun newInstance(): BookmarkLocationsFragment = BookmarkLocationsFragment()
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = FragmentBookmarksLocationsBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.loadingImagesProgressBar.visibility = View.VISIBLE
+        binding.listView.layoutManager = LinearLayoutManager(context)
+
+        inAppCameraLocationPermissionLauncher =
+            registerForActivityResult(RequestMultiplePermissions()) { result ->
+                val areAllGranted = result.values.all { it }
+
+                if (areAllGranted) {
+                    contributionController.locationPermissionCallback.onLocationPermissionGranted()
                 } else {
-                    contributionController.locationPermissionCallback.onLocationPermissionDenied(getActivity().getString(R.string.in_app_camera_location_permission_denied));
+                    if (shouldShowRequestPermissionRationale(permission.ACCESS_FINE_LOCATION)) {
+                        contributionController.handleShowRationaleFlowCameraLocation(
+                            activity,
+                            inAppCameraLocationPermissionLauncher,
+                            cameraPickLauncherForResult
+                        )
+                    } else {
+                        contributionController.locationPermissionCallback.onLocationPermissionDenied(
+                            getString(R.string.in_app_camera_location_permission_denied)
+                        )
+                    }
                 }
             }
-        }
-    });
 
-    /**
-     * Create an instance of the fragment with the right bundle parameters
-     * @return an instance of the fragment
-     */
-    public static BookmarkLocationsFragment newInstance() {
-        return new BookmarkLocationsFragment();
-    }
-
-    @Override
-    public View onCreateView(
-            @NonNull LayoutInflater inflater,
-            ViewGroup container,
-            Bundle savedInstanceState
-    ) {
-        binding = FragmentBookmarksLocationsBinding.inflate(inflater, container, false);
-        return binding.getRoot();
-    }
-
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        binding.loadingImagesProgressBar.setVisibility(View.VISIBLE);
-        binding.listView.setLayoutManager(new LinearLayoutManager(getContext()));
-        adapter = new PlaceAdapter(bookmarkLocationDao,
-            place -> Unit.INSTANCE,
-            (place, isBookmarked) -> {
-                adapter.remove(place);
-                return Unit.INSTANCE;
+        adapter = PlaceAdapter(
+            bookmarkLocationsDao = bookmarkLocationDao,
+            onBookmarkClicked = { place, _ ->
+                adapter.remove(place)
             },
-            commonPlaceClickActions,
-            inAppCameraLocationPermissionLauncher,
-            galleryPickLauncherForResult,
-            cameraPickLauncherForResult
-        );
-        binding.listView.setAdapter(adapter);
+            commonPlaceClickActions = commonPlaceClickActions,
+            inAppCameraLocationPermissionLauncher = inAppCameraLocationPermissionLauncher,
+            galleryPickLauncherForResult = galleryPickLauncherForResult,
+            cameraPickLauncherForResult = cameraPickLauncherForResult
+        )
+        binding.listView.adapter = adapter
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        initList();
+    override fun onResume() {
+        super.onResume()
+        initList()
     }
 
-    /**
-     * Initialize the recycler view with bookmarked locations
-     */
-    private void initList() {
-        List<Place> places = controller.loadFavoritesLocations();
-        adapter.setItems(places);
-        binding.loadingImagesProgressBar.setVisibility(View.GONE);
-        if (places.size() <= 0) {
-            binding.statusMessage.setText(R.string.bookmark_empty);
-            binding.statusMessage.setVisibility(View.VISIBLE);
+    private fun initList() {
+        val places = controller.loadFavoritesLocations()
+        adapter.items = places
+        binding.loadingImagesProgressBar.visibility = View.GONE
+        if (places.isEmpty()) {
+            binding.statusMessage.setText(R.string.bookmark_empty)
+            binding.statusMessage.visibility = View.VISIBLE
         } else {
-            binding.statusMessage.setVisibility(View.GONE);
+            binding.statusMessage.visibility = View.GONE
         }
     }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        binding = null;
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }
