@@ -528,7 +528,9 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             final Bundle bundle = new Bundle();
             try {
                 bundle.putString("query",
-                    FileUtils.readFromResource("/queries/radius_query_for_upload_wizard.rq"));
+                    FileUtils.INSTANCE.readFromResource(
+                        "/queries/radius_query_for_upload_wizard.rq")
+                );
             } catch (IOException e) {
                 Timber.e(e);
             }
