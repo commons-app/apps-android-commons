@@ -1,6 +1,5 @@
 package fr.free.nrw.commons.media
 
-import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
@@ -19,7 +18,6 @@ import android.widget.ProgressBar
 import android.widget.ScrollView
 import android.widget.Spinner
 import android.widget.TextView
-import androidx.activity.result.ActivityResult
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.test.core.app.ApplicationProvider
@@ -27,10 +25,9 @@ import com.facebook.drawee.backends.pipeline.Fresco
 import com.facebook.drawee.generic.GenericDraweeHierarchy
 import com.facebook.drawee.view.SimpleDraweeView
 import com.facebook.soloader.SoLoader
-import com.nhaarman.mockitokotlin2.anyOrNull
 import com.nhaarman.mockitokotlin2.doReturn
 import com.nhaarman.mockitokotlin2.whenever
-import fr.free.nrw.commons.LocationPicker.LocationPickerActivity
+import fr.free.nrw.commons.locationpicker.LocationPickerActivity
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.OkHttpConnectionFactory
 import fr.free.nrw.commons.TestCommonsApplication

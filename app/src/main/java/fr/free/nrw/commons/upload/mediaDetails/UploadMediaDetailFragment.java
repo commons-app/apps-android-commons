@@ -25,7 +25,7 @@ import androidx.annotation.Nullable;
 import androidx.exifinterface.media.ExifInterface;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import fr.free.nrw.commons.CameraPosition;
-import fr.free.nrw.commons.LocationPicker.LocationPicker;
+import fr.free.nrw.commons.locationpicker.LocationPicker;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.databinding.FragmentUploadMediaDetailFragmentBinding;

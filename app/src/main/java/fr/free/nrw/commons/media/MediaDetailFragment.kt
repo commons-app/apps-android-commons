@@ -74,7 +74,7 @@ import fr.free.nrw.commons.BuildConfig
 import fr.free.nrw.commons.CameraPosition
 import fr.free.nrw.commons.CommonsApplication
 import fr.free.nrw.commons.CommonsApplication.Companion.instance
-import fr.free.nrw.commons.LocationPicker.LocationPicker
+import fr.free.nrw.commons.locationpicker.LocationPicker
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.MediaDataExtractor
 import fr.free.nrw.commons.R

@@ -1,4 +1,4 @@
-package fr.free.nrw.commons.LocationPicker
+package fr.free.nrw.commons.locationpicker
 
 import android.app.Activity
 import android.content.Intent
@@ -32,7 +32,7 @@ object LocationPicker {
         /**
          * Gets and puts location in intent
          * @param position CameraPosition
-         * @return LocationPicker.IntentBuilder
+         * @return locationpicker.IntentBuilder
          */
         fun defaultLocation(position: CameraPosition): IntentBuilder {
             intent.putExtra(LocationPickerConstants.MAP_CAMERA_POSITION, position)
@@ -42,7 +42,7 @@ object LocationPicker {
         /**
          * Gets and puts activity name in intent
          * @param activity activity key
-         * @return LocationPicker.IntentBuilder
+         * @return locationpicker.IntentBuilder
          */
         fun activityKey(activity: String): IntentBuilder {
             intent.putExtra(LocationPickerConstants.ACTIVITY_KEY, activity)
@@ -52,7 +52,7 @@ object LocationPicker {
         /**
          * Gets and puts media in intent
          * @param media Media
-         * @return LocationPicker.IntentBuilder
+         * @return locationpicker.IntentBuilder
          */
         fun media(media: Media): IntentBuilder {
             intent.putExtra(LocationPickerConstants.MEDIA, media)
