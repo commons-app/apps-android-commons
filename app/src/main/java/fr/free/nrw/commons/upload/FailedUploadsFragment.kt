@@ -17,19 +17,16 @@ import fr.free.nrw.commons.profile.ProfileActivity
 import fr.free.nrw.commons.utils.DialogUtil
 import fr.free.nrw.commons.utils.ViewUtil
 import org.apache.commons.lang3.StringUtils
-import java.util.Locale
 import javax.inject.Inject
 
 /**
- * Fragment for displaying a list of failed uploads in Upload Progress Activity. This fragment provides
+ * Fragment for displaying a list of failed uploads in Upload Progress Activity. It provides
  * functionality for the user to retry or cancel failed uploads.
  */
 class FailedUploadsFragment :
     CommonsDaggerSupportFragment(),
     PendingUploadsContract.View,
     FailedUploadsAdapter.Callback {
-    @Inject
-    lateinit var pendingUploadsPresenter: PendingUploadsPresenter
 
     @Inject
     lateinit var mediaClient: MediaClient
@@ -38,14 +35,11 @@ class FailedUploadsFragment :
     lateinit var sessionManager: SessionManager
 
     private var userName: String? = null
-
-    lateinit var binding: FragmentFailedUploadsBinding
-
+    private lateinit var binding: FragmentFailedUploadsBinding
     private lateinit var adapter: FailedUploadsAdapter
-
-    var contributionsList = ArrayList<Contribution>()
-
+    private val contributionsList = ArrayList<Contribution>()
     private lateinit var uploadProgressActivity: UploadProgressActivity
+    lateinit var pendingUploadsPresenter: PendingUploadsPresenter
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -56,12 +50,8 @@ class FailedUploadsFragment :
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        // Now that we are allowing this fragment to be started for
-        // any userName- we expect it to be passed as an argument
-        if (arguments != null) {
-            userName = requireArguments().getString(ProfileActivity.KEY_USERNAME)
-        }
-
+        // Expecting userName as an argument; fallback to sessionManager's userName if not provided
+        userName = arguments?.getString(ProfileActivity.KEY_USERNAME)
         if (StringUtils.isEmpty(userName)) {
             userName = sessionManager.userName
         }
@@ -71,14 +61,14 @@ class FailedUploadsFragment :
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View? {
-        binding = FragmentFailedUploadsBinding.inflate(layoutInflater)
+    ): View {
+        binding = FragmentFailedUploadsBinding.inflate(inflater, container, false)
         pendingUploadsPresenter.onAttachView(this)
         initAdapter()
         return binding.root
     }
 
-    fun initAdapter() {
+    private fun initAdapter() {
         adapter = FailedUploadsAdapter(this)
     }
 
@@ -93,21 +83,19 @@ class FailedUploadsFragment :
     /**
      * Initializes the recycler view.
      */
-    fun initRecyclerView() {
-        binding.failedUploadsRecyclerView.setLayoutManager(LinearLayoutManager(this.context))
+    private fun initRecyclerView() {
+        binding.failedUploadsRecyclerView.layoutManager = LinearLayoutManager(context)
         binding.failedUploadsRecyclerView.adapter = adapter
         pendingUploadsPresenter.getFailedContributions()
         pendingUploadsPresenter.failedContributionList.observe(
             viewLifecycleOwner,
         ) { list: PagedList<Contribution?> ->
             adapter.submitList(list)
-            contributionsList = ArrayList()
-            list.forEach {
-                if (it != null) {
-                    contributionsList.add(it)
-                }
+            contributionsList.clear()
+            list.forEach { contribution ->
+                contribution?.let { contributionsList.add(it) }
             }
-            if (list.size == 0) {
+            if (list.isEmpty()) {
                 uploadProgressActivity.setErrorIconsVisibility(false)
                 binding.nofailedTextView.visibility = View.VISIBLE
                 binding.failedUplaodsLl.visibility = View.GONE
@@ -115,7 +103,7 @@ class FailedUploadsFragment :
                 uploadProgressActivity.setErrorIconsVisibility(true)
                 binding.nofailedTextView.visibility = View.GONE
                 binding.failedUplaodsLl.visibility = View.VISIBLE
-                binding.failedUploadsRecyclerView.setAdapter(adapter)
+                // Setting the adapter again is redundant; it's already set above
             }
         }
     }
@@ -124,26 +112,22 @@ class FailedUploadsFragment :
      * Restarts all the failed uploads.
      */
     fun restartUploads() {
-        if (contributionsList != null) {
-            pendingUploadsPresenter.restartUploads(
-                contributionsList,
-                0,
-                this.requireContext().applicationContext,
-            )
-        }
+        pendingUploadsPresenter.restartUploads(
+            contributionsList,
+            0,
+            requireContext().applicationContext,
+        )
     }
 
     /**
      * Restarts a specific upload.
      */
     override fun restartUpload(index: Int) {
-        if (contributionsList != null) {
-            pendingUploadsPresenter.restartUpload(
-                contributionsList,
-                index,
-                this.requireContext().applicationContext,
-            )
-        }
+        pendingUploadsPresenter.restartUpload(
+            contributionsList,
+            index,
+            requireContext().applicationContext,
+        )
     }
 
     /**
@@ -152,24 +136,18 @@ class FailedUploadsFragment :
     override fun deleteUpload(contribution: Contribution?) {
         DialogUtil.showAlertDialog(
             requireActivity(),
-            String.format(
-                Locale.getDefault(),
-                requireActivity().getString(R.string.cancelling_upload),
-            ),
-            String.format(
-                Locale.getDefault(),
-                requireActivity().getString(R.string.cancel_upload_dialog),
-            ),
-            String.format(Locale.getDefault(), requireActivity().getString(R.string.yes)),
-            String.format(Locale.getDefault(), requireActivity().getString(R.string.no)),
+            getString(R.string.cancelling_upload),
+            getString(R.string.cancel_upload_dialog),
+            getString(R.string.yes),
+            getString(R.string.no),
             {
                 ViewUtil.showShortToast(context, R.string.cancelling_upload)
                 pendingUploadsPresenter.deleteUpload(
                     contribution,
-                    this.requireContext().applicationContext,
+                    requireContext().applicationContext,
                 )
             },
-            {},
+            {}
         )
     }
 
@@ -177,28 +155,20 @@ class FailedUploadsFragment :
      * Deletes all the uploads after getting a confirmation from the user using Dialog.
      */
     fun deleteUploads() {
-        if (contributionsList != null) {
-            DialogUtil.showAlertDialog(
-                requireActivity(),
-                String.format(
-                    Locale.getDefault(),
-                    requireActivity().getString(R.string.cancelling_all_the_uploads),
-                ),
-                String.format(
-                    Locale.getDefault(),
-                    requireActivity().getString(R.string.are_you_sure_that_you_want_cancel_all_the_uploads),
-                ),
-                String.format(Locale.getDefault(), requireActivity().getString(R.string.yes)),
-                String.format(Locale.getDefault(), requireActivity().getString(R.string.no)),
-                {
-                    ViewUtil.showShortToast(context, R.string.cancelling_upload)
-                    uploadProgressActivity.hidePendingIcons()
-                    pendingUploadsPresenter.deleteUploads(
-                        listOf(Contribution.STATE_FAILED),
-                    )
-                },
-                {},
-            )
-        }
+        DialogUtil.showAlertDialog(
+            requireActivity(),
+            getString(R.string.cancelling_all_the_uploads),
+            getString(R.string.are_you_sure_that_you_want_cancel_all_the_uploads),
+            getString(R.string.yes),
+            getString(R.string.no),
+            {
+                ViewUtil.showShortToast(context, R.string.cancelling_upload)
+                uploadProgressActivity.hidePendingIcons()
+                pendingUploadsPresenter.deleteUploads(
+                    listOf(Contribution.STATE_FAILED),
+                )
+            },
+            {}
+        )
     }
 }
