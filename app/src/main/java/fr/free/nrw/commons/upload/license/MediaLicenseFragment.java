@@ -69,7 +69,7 @@ public class MediaLicenseFragment extends UploadBaseFragment implements MediaLic
                 getString(R.string.license_step_title),
                 getString(R.string.license_tooltip),
                 getString(android.R.string.ok),
-                null, true)
+                null)
         );
 
         initPresenter();
@@ -141,7 +141,7 @@ public class MediaLicenseFragment extends UploadBaseFragment implements MediaLic
     }
 
     @Override
-    public void updateLicenseSummary(String licenseSummary, int numberOfItems) {
+    public void updateLicenseSummary(String licenseSummary, Integer numberOfItems) {
         String licenseHyperLink = "<a href='" + Utils.licenseUrlFor(licenseSummary) + "'>" +
                 getString(Utils.licenseNameFor(licenseSummary)) + "</a><br>";
 

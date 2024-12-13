@@ -1,8 +1,8 @@
 package fr.free.nrw.commons.upload;
 
 import static fr.free.nrw.commons.contributions.ContributionController.ACTION_INTERNAL_UPLOADS;
-import static fr.free.nrw.commons.utils.PermissionUtils.PERMISSIONS_STORAGE;
 import static fr.free.nrw.commons.utils.PermissionUtils.checkPermissionsAndPerformAction;
+import static fr.free.nrw.commons.utils.PermissionUtils.getPERMISSIONS_STORAGE;
 import static fr.free.nrw.commons.wikidata.WikidataConstants.PLACE_OBJECT;
 import static fr.free.nrw.commons.wikidata.WikidataConstants.SELECTED_NEARBY_PLACE;
 import static fr.free.nrw.commons.wikidata.WikidataConstants.SELECTED_NEARBY_PLACE_CATEGORY;
@@ -32,7 +32,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 import androidx.work.ExistingWorkPolicy;
-import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.LoginActivity;
 import fr.free.nrw.commons.auth.SessionManager;
@@ -73,7 +72,8 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import timber.log.Timber;
 
-public class UploadActivity extends BaseActivity implements UploadContract.View, UploadBaseFragment.Callback, ThumbnailsAdapter.OnThumbnailDeletedListener {
+public class UploadActivity extends BaseActivity implements
+    UploadContract.View, UploadBaseFragment.Callback, ThumbnailsAdapter.OnThumbnailDeletedListener {
 
     @Inject
     ContributionController contributionController;
@@ -149,7 +149,7 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
 
     @SuppressLint("CheckResult")
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         binding = ActivityUploadBinding.inflate(getLayoutInflater());
@@ -161,9 +161,9 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
          */
         if (savedInstanceState != null) {
             isFragmentsSaved = true;
-            List<Fragment> fragmentList = getSupportFragmentManager().getFragments();
+            final List<Fragment> fragmentList = getSupportFragmentManager().getFragments();
             fragments = new ArrayList<>();
-            for (Fragment fragment : fragmentList) {
+            for (final Fragment fragment : fragmentList) {
                 fragments.add((UploadBaseFragment) fragment);
             }
         }
@@ -175,8 +175,8 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
         nearbyPopupAnswers = new HashMap<>();
         //getting the current dpi of the device and if it is less than 320dp i.e. overlapping
         //threshold, thumbnails automatically minimizes
-        DisplayMetrics metrics = getResources().getDisplayMetrics();
-        float dpi = (metrics.widthPixels)/(metrics.density);
+        final DisplayMetrics metrics = getResources().getDisplayMetrics();
+        final float dpi = (metrics.widthPixels)/(metrics.density);
         if (dpi<=321) {
             onRlContainerTitleClicked();
         }
@@ -218,13 +218,13 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
         binding.vpUpload.setAdapter(uploadImagesAdapter);
         binding.vpUpload.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
-            public void onPageScrolled(int position, float positionOffset,
-                int positionOffsetPixels) {
+            public void onPageScrolled(final int position, final float positionOffset,
+                final int positionOffsetPixels) {
 
             }
 
             @Override
-            public void onPageSelected(int position) {
+            public void onPageSelected(final int position) {
                 currentSelectedPosition = position;
                 if (position >= uploadableFiles.size()) {
                     binding.cvContainerTopCard.setVisibility(View.GONE);
@@ -236,7 +236,7 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
             }
 
             @Override
-            public void onPageScrollStateChanged(int state) {
+            public void onPageScrollStateChanged(final int state) {
 
             }
         });
@@ -271,13 +271,12 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
                 getString(R.string.block_notification_title),
                 getString(R.string.block_notification),
                 getString(R.string.ok),
-                this::finish,
-                true)));
+                this::finish)));
     }
 
     public void checkStoragePermissions() {
         // Check if all required permissions are granted
-        final boolean hasAllPermissions = PermissionUtils.hasPermission(this, PERMISSIONS_STORAGE);
+        final boolean hasAllPermissions = PermissionUtils.hasPermission(this, getPERMISSIONS_STORAGE());
         final boolean hasPartialAccess = PermissionUtils.hasPartialAccess(this);
         if (hasAllPermissions || hasPartialAccess) {
             // All required permissions are granted, so enable UI elements and perform actions
@@ -297,7 +296,7 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
                         },
                     R.string.storage_permission_title,
                     R.string.write_storage_permission_rationale_for_image_share,
-                    PERMISSIONS_STORAGE);
+                    getPERMISSIONS_STORAGE());
             }
         }
         /* If all permissions are not granted and a dialog is already showing on screen
@@ -321,10 +320,18 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
     }
 
     /**
+     * go to the uploadProgress activity to check the status of uploading
+     */
+    @Override
+    public void goToUploadProgressActivity() {
+        startActivity(new Intent(this, UploadProgressActivity.class));
+    }
+
+    /**
      * Show/Hide the progress dialog
      */
     @Override
-    public void showProgress(boolean shouldShow) {
+    public void showProgress(final boolean shouldShow) {
         if (shouldShow) {
             if (!progressDialog.isShowing()) {
                 progressDialog.show();
@@ -337,7 +344,7 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
     }
 
     @Override
-    public int getIndexInViewFlipper(UploadBaseFragment fragment) {
+    public int getIndexInViewFlipper(final UploadBaseFragment fragment) {
         return fragments.indexOf(fragment);
     }
 
@@ -352,7 +359,7 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
     }
 
     @Override
-    public void showMessage(int messageResourceId) {
+    public void showMessage(final int messageResourceId) {
         ViewUtil.showLongToast(this, messageResourceId);
     }
 
@@ -362,12 +369,12 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
     }
 
     @Override
-    public void showHideTopCard(boolean shouldShow) {
+    public void showHideTopCard(final boolean shouldShow) {
         binding.llContainerTopCard.setVisibility(shouldShow ? View.VISIBLE : View.GONE);
     }
 
     @Override
-    public void onUploadMediaDeleted(int index) {
+    public void onUploadMediaDeleted(final int index) {
         fragments.remove(index);//Remove the corresponding fragment
         uploadableFiles.remove(index);//Remove the files from the list
         thumbnailsAdapter.notifyItemRemoved(index); //Notify the thumbnails adapter
@@ -390,7 +397,7 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
     public void askUserToLogIn() {
         Timber.d("current session is null, asking user to login");
         ViewUtil.showLongToast(this, getString(R.string.user_not_logged_in));
-        Intent loginIntent = new Intent(UploadActivity.this, LoginActivity.class);
+        final Intent loginIntent = new Intent(UploadActivity.this, LoginActivity.class);
         startActivity(loginIntent);
     }
 
@@ -402,25 +409,23 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
         if (requestCode == RequestCodes.STORAGE) {
             if (VERSION.SDK_INT >= VERSION_CODES.M) {
                 for (int i = 0; i < grantResults.length; i++) {
-                    String permission = permissions[i];
+                    final String permission = permissions[i];
                     areAllGranted = grantResults[i] == PackageManager.PERMISSION_GRANTED;
                     if (grantResults[i] == PackageManager.PERMISSION_DENIED) {
-                        boolean showRationale = shouldShowRequestPermissionRationale(permission);
+                        final boolean showRationale = shouldShowRequestPermissionRationale(permission);
                         if (!showRationale) {
                             DialogUtil.showAlertDialog(this,
                                 getString(R.string.storage_permissions_denied),
                                 getString(R.string.unable_to_share_upload_item),
                                 getString(android.R.string.ok),
-                                this::finish,
-                                false);
+                                this::finish);
                         } else {
                             DialogUtil.showAlertDialog(this,
                                 getString(R.string.storage_permission_title),
                                 getString(
                                     R.string.write_storage_permission_rationale_for_image_share),
                                 getString(android.R.string.ok),
-                                this::checkStoragePermissions,
-                                false);
+                                this::checkStoragePermissions);
                         }
                     }
                 }
@@ -433,27 +438,19 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == CommonsApplication.OPEN_APPLICATION_DETAIL_SETTINGS) {
-            //TODO: Confirm if handling manual permission enabled is required
-        }
-    }
-
     /**
      * Sets the flag indicating whether the upload is of a specific place.
      *
      * @param uploadOfAPlace a boolean value indicating whether the upload is of place.
      */
-    public static void setUploadIsOfAPlace(boolean uploadOfAPlace) {
+    public static void setUploadIsOfAPlace(final boolean uploadOfAPlace) {
         uploadIsOfAPlace = uploadOfAPlace;
     }
 
     private void receiveSharedItems() {
-        thumbnailsAdapter.context=this;
-        Intent intent = getIntent();
-        String action = intent.getAction();
+        ThumbnailsAdapter.context=this;
+        final Intent intent = getIntent();
+        final String action = intent.getAction();
         if (Intent.ACTION_SEND.equals(action) || Intent.ACTION_SEND_MULTIPLE.equals(action)) {
             receiveExternalSharedItems();
         } else if (ACTION_INTERNAL_UPLOADS.equals(action)) {
@@ -485,8 +482,8 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
             }
 
 
-            for (UploadableFile uploadableFile : uploadableFiles) {
-                UploadMediaDetailFragment uploadMediaDetailFragment = new UploadMediaDetailFragment();
+            for (final UploadableFile uploadableFile : uploadableFiles) {
+                final UploadMediaDetailFragment uploadMediaDetailFragment = new UploadMediaDetailFragment();
 
                 if (!uploadIsOfAPlace) {
                     handleLocation();
@@ -496,9 +493,9 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
                     uploadMediaDetailFragment.setImageToBeUploaded(uploadableFile, place, currLocation);
                 }
 
-                UploadMediaDetailFragmentCallback uploadMediaDetailFragmentCallback = new UploadMediaDetailFragmentCallback() {
+                final UploadMediaDetailFragmentCallback uploadMediaDetailFragmentCallback = new UploadMediaDetailFragmentCallback() {
                     @Override
-                    public void deletePictureAtIndex(int index) {
+                    public void deletePictureAtIndex(final int index) {
                         store.putInt(keyForCurrentUploadImagesSize,
                             (store.getInt(keyForCurrentUploadImagesSize) - 1));
                         presenter.deletePictureAtIndex(index);
@@ -515,29 +512,29 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
                      * @param filepath The file path of the new thumbnail image.
                      */
                     @Override
-                    public void changeThumbnail(int index, String filepath) {
+                    public void changeThumbnail(final int index, final String filepath) {
                         uploadableFiles.remove(index);
                         uploadableFiles.add(index, new UploadableFile(new File(filepath)));
                         binding.rvThumbnails.getAdapter().notifyDataSetChanged();
                     }
 
                     @Override
-                    public void onNextButtonClicked(int index) {
+                    public void onNextButtonClicked(final int index) {
                         UploadActivity.this.onNextButtonClicked(index);
                     }
 
                     @Override
-                    public void onPreviousButtonClicked(int index) {
+                    public void onPreviousButtonClicked(final int index) {
                         UploadActivity.this.onPreviousButtonClicked(index);
                     }
 
                     @Override
-                    public void showProgress(boolean shouldShow) {
+                    public void showProgress(final boolean shouldShow) {
                         UploadActivity.this.showProgress(shouldShow);
                     }
 
                     @Override
-                    public int getIndexInViewFlipper(UploadBaseFragment fragment) {
+                    public int getIndexInViewFlipper(final UploadBaseFragment fragment) {
                         return fragments.indexOf(fragment);
                     }
 
@@ -553,7 +550,7 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
                 };
 
                 if(isFragmentsSaved){
-                    UploadMediaDetailFragment fragment = (UploadMediaDetailFragment) fragments.get(0);
+                    final UploadMediaDetailFragment fragment = (UploadMediaDetailFragment) fragments.get(0);
                     fragment.setCallback(uploadMediaDetailFragmentCallback);
                 }else{
                     uploadMediaDetailFragment.setCallback(uploadMediaDetailFragmentCallback);
@@ -566,7 +563,7 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
             if(!isFragmentsSaved){
                 uploadCategoriesFragment = new UploadCategoriesFragment();
                 if (place != null) {
-                    Bundle categoryBundle = new Bundle();
+                    final Bundle categoryBundle = new Bundle();
                     categoryBundle.putString(SELECTED_NEARBY_PLACE_CATEGORY, place.getCategory());
                     uploadCategoriesFragment.setArguments(categoryBundle);
                 }
@@ -574,7 +571,7 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
                 uploadCategoriesFragment.setCallback(this);
 
                 depictsFragment = new DepictsFragment();
-                Bundle placeBundle = new Bundle();
+                final Bundle placeBundle = new Bundle();
                 placeBundle.putParcelable(SELECTED_NEARBY_PLACE, place);
                 depictsFragment.setArguments(placeBundle);
                 depictsFragment.setCallback(this);
@@ -590,7 +587,7 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
                 for(int i=1;i<fragments.size();i++){
                     fragments.get(i).setCallback(new Callback() {
                         @Override
-                        public void onNextButtonClicked(int index) {
+                        public void onNextButtonClicked(final int index) {
                             if (index < fragments.size() - 1) {
                                 binding.vpUpload.setCurrentItem(index + 1, false);
                                 fragments.get(index + 1).onBecameVisible();
@@ -602,7 +599,7 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
 
                         }
                         @Override
-                        public void onPreviousButtonClicked(int index) {
+                        public void onPreviousButtonClicked(final int index) {
                             if (index != 0) {
                                 binding.vpUpload.setCurrentItem(index - 1, true);
                                 fragments.get(index - 1).onBecameVisible();
@@ -611,7 +608,7 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
                             }
                         }
                         @Override
-                        public void showProgress(boolean shouldShow) {
+                        public void showProgress(final boolean shouldShow) {
                             if (shouldShow) {
                                 if (!progressDialog.isShowing()) {
                                     progressDialog.show();
@@ -623,7 +620,7 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
                             }
                         }
                         @Override
-                        public int getIndexInViewFlipper(UploadBaseFragment fragment) {
+                        public int getIndexInViewFlipper(final UploadBaseFragment fragment) {
                             return fragments.indexOf(fragment);
                         }
 
@@ -652,10 +649,9 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
      * Users may uncheck Location tag from the Manage EXIF tags setting any time.
      * So, their location must not be shared in this case.
      *
-     * @return
      */
     private boolean isLocationTagUncheckedInTheSettings() {
-        Set<String> prefExifTags = defaultKvStore.getStringSet(Prefs.MANAGED_EXIF_TAGS);
+        final Set<String> prefExifTags = defaultKvStore.getStringSet(Prefs.MANAGED_EXIF_TAGS);
         if (prefExifTags.contains(getString(R.string.exif_tag_location))) {
             return false;
         }
@@ -670,7 +666,7 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
      * @param maxSize Max size of the {@code uploadableFiles}
      */
     @Override
-    public void highlightNextImageOnCancelledImage(int index, int maxSize) {
+    public void highlightNextImageOnCancelledImage(final int index, final int maxSize) {
         if (binding.vpUpload != null && index < (maxSize)) {
             binding.vpUpload.setCurrentItem(index + 1, false);
             binding.vpUpload.setCurrentItem(index, false);
@@ -685,8 +681,8 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
      * @param isCancelled Is true when user has cancelled upload of any image in current upload
      */
     @Override
-    public void setImageCancelled(boolean isCancelled) {
-        BasicKvStore basicKvStore = new BasicKvStore(this,"IsAnyImageCancelled");
+    public void setImageCancelled(final boolean isCancelled) {
+        final BasicKvStore basicKvStore = new BasicKvStore(this,"IsAnyImageCancelled");
         basicKvStore.putBoolean("IsAnyImageCancelled", isCancelled);
     }
 
@@ -694,15 +690,12 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
      * Calculate the difference between current location and
      * location recorded before capturing the image
      *
-     * @param currLocation
-     * @param prevLocation
-     * @return
      */
-    private float getLocationDifference(LatLng currLocation, LatLng prevLocation) {
+    private float getLocationDifference(final LatLng currLocation, final LatLng prevLocation) {
         if (prevLocation == null) {
             return 0.0f;
         }
-        float[] distance = new float[2];
+        final float[] distance = new float[2];
         Location.distanceBetween(
             currLocation.getLatitude(), currLocation.getLongitude(),
             prevLocation.getLatitude(), prevLocation.getLongitude(), distance);
@@ -714,7 +707,7 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
     }
 
     private void receiveInternalSharedItems() {
-        Intent intent = getIntent();
+        final Intent intent = getIntent();
 
         Timber.d("Received intent %s with action %s", intent.toString(), intent.getAction());
 
@@ -750,17 +743,16 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
 
 
     @Override
-    public void showAlertDialog(int messageResourceId, Runnable onPositiveClick) {
+    public void showAlertDialog(final int messageResourceId, @NonNull final Runnable onPositiveClick) {
         DialogUtil.showAlertDialog(this,
             "",
             getString(messageResourceId),
             getString(R.string.ok),
-            onPositiveClick,
-            false);
+            onPositiveClick);
     }
 
     @Override
-    public void onNextButtonClicked(int index) {
+    public void onNextButtonClicked(final int index) {
         if (index < fragments.size() - 1) {
             binding.vpUpload.setCurrentItem(index + 1, false);
             fragments.get(index + 1).onBecameVisible();
@@ -776,7 +768,7 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
     }
 
     @Override
-    public void onPreviousButtonClicked(int index) {
+    public void onPreviousButtonClicked(final int index) {
         if (index != 0) {
             binding.vpUpload.setCurrentItem(index - 1, true);
             fragments.get(index - 1).onBecameVisible();
@@ -791,7 +783,7 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
     }
 
     @Override
-    public void onThumbnailDeleted(int position) {
+    public void onThumbnailDeleted(final int position) {
         presenter.deletePictureAtIndex(position);
     }
 
@@ -800,21 +792,22 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
      */
 
 
-    private class UploadImageAdapter extends FragmentStatePagerAdapter {
+    private static class UploadImageAdapter extends FragmentStatePagerAdapter {
         List<UploadBaseFragment> fragments;
 
-        public UploadImageAdapter(FragmentManager fragmentManager) {
+        public UploadImageAdapter(final FragmentManager fragmentManager) {
             super(fragmentManager);
             this.fragments = new ArrayList<>();
         }
 
-        public void setFragments(List<UploadBaseFragment> fragments) {
+        public void setFragments(final List<UploadBaseFragment> fragments) {
             this.fragments = fragments;
             notifyDataSetChanged();
         }
 
+        @NonNull
         @Override
-        public Fragment getItem(int position) {
+        public Fragment getItem(final int position) {
             return fragments.get(position);
         }
 
@@ -824,7 +817,7 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
         }
 
         @Override
-        public int getItemPosition(Object object) {
+        public int getItemPosition(@NonNull final Object item) {
             return PagerAdapter.POSITION_NONE;
         }
     }
@@ -898,11 +891,11 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
     private void showAlertDialogForCategories() {
         UploadMediaPresenter.isCategoriesDialogShowing = true;
         // Inflate the custom layout
-        LayoutInflater inflater = getLayoutInflater();
-        View view = inflater.inflate(R.layout.activity_upload_categories_dialog, null);
-        CheckBox checkBox = view.findViewById(R.id.categories_checkbox);
+        final LayoutInflater inflater = getLayoutInflater();
+        final View view = inflater.inflate(R.layout.activity_upload_categories_dialog, null);
+        final CheckBox checkBox = view.findViewById(R.id.categories_checkbox);
         // Create the alert dialog
-        AlertDialog alertDialog = new AlertDialog.Builder(this)
+        final AlertDialog alertDialog = new AlertDialog.Builder(this)
             .setView(view)
             .setTitle(getString(R.string.multiple_files_depiction_header))
             .setMessage(getString(R.string.multiple_files_depiction))
@@ -948,7 +941,7 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
                            it shows a list of all the apps on the device and allows users to
                            turn battery optimisation off.
                          */
-                        Intent batteryOptimisationSettingsIntent = new Intent(
+                        final Intent batteryOptimisationSettingsIntent = new Intent(
                             Settings.ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS);
                         startActivity(batteryOptimisationSettingsIntent);
                         // calling checkImageQuality after battery dialog is interacted with
@@ -969,15 +962,15 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
      * conditions are met, returns current location of the user.
      */
     private void handleLocation(){
-        LocationPermissionsHelper locationPermissionsHelper = new LocationPermissionsHelper(
+        final LocationPermissionsHelper locationPermissionsHelper = new LocationPermissionsHelper(
             this, locationManager, null);
         if (locationPermissionsHelper.isLocationAccessToAppsTurnedOn()) {
             currLocation = locationManager.getLastLocation();
         }
 
         if (currLocation != null) {
-            float locationDifference = getLocationDifference(currLocation, prevLocation);
-            boolean isLocationTagUnchecked = isLocationTagUncheckedInTheSettings();
+            final float locationDifference = getLocationDifference(currLocation, prevLocation);
+            final boolean isLocationTagUnchecked = isLocationTagUncheckedInTheSettings();
                     /* Remove location if the user has unchecked the Location EXIF tag in the
                        Manage EXIF Tags setting or turned "Record location for in-app shots" off.
                        Also, location information is discarded if the difference between

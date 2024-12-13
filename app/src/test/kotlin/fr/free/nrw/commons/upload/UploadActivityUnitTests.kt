@@ -5,7 +5,6 @@ import android.content.Intent
 import androidx.test.core.app.ApplicationProvider
 import androidx.work.Configuration
 import androidx.work.testing.WorkManagerTestInitHelper
-import fr.free.nrw.commons.CommonsApplication
 import fr.free.nrw.commons.OkHttpConnectionFactory
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestCommonsApplication
@@ -75,7 +74,7 @@ class UploadActivityUnitTests {
     @Test
     @Throws(Exception::class)
     fun testIsLoggedIn() {
-        activity.isLoggedIn
+        activity.isLoggedIn()
     }
 
     @Test
@@ -139,7 +138,7 @@ class UploadActivityUnitTests {
     @Test
     @Throws(Exception::class)
     fun testGetUploadableFiles() {
-        activity.uploadableFiles
+        activity.getUploadableFiles()
     }
 
     @Test
@@ -165,20 +164,6 @@ class UploadActivityUnitTests {
     @Throws(Exception::class)
     fun testMakeUploadRequest() {
         activity.makeUploadRequest()
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun testOnActivityResult() {
-        val method: Method =
-            UploadActivity::class.java.getDeclaredMethod(
-                "onActivityResult",
-                Int::class.java,
-                Int::class.java,
-                Intent::class.java,
-            )
-        method.isAccessible = true
-        method.invoke(activity, CommonsApplication.OPEN_APPLICATION_DETAIL_SETTINGS, 0, Intent())
     }
 
     @Test

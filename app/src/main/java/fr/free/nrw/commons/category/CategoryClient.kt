@@ -124,7 +124,9 @@ class CategoryClient
                 }.map {
                     it
                         .filter { page ->
-                            page.categoryInfo() == null || !page.categoryInfo().isHidden
+                            // Null check is not redundant because some values could be null
+                            // for mocks when running unit tests
+                            page.categoryInfo()?.isHidden != true
                         }.map {
                             CategoryItem(
                                 it.title().replace(CATEGORY_PREFIX, ""),

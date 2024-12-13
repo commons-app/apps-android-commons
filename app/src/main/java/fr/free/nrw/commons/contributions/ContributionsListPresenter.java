@@ -1,5 +1,7 @@
 package fr.free.nrw.commons.contributions;
 
+import static fr.free.nrw.commons.di.CommonsApplicationModule.IO_THREAD;
+
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.paging.DataSource;
@@ -34,7 +36,7 @@ public class ContributionsListPresenter implements UserActionListener {
         final ContributionBoundaryCallback contributionBoundaryCallback,
         final ContributionsRemoteDataSource contributionsRemoteDataSource,
         final ContributionsRepository repository,
-        @Named(CommonsApplicationModule.IO_THREAD) final Scheduler ioThreadScheduler) {
+        @Named(IO_THREAD) final Scheduler ioThreadScheduler) {
         this.contributionBoundaryCallback = contributionBoundaryCallback;
         this.repository = repository;
         this.ioThreadScheduler = ioThreadScheduler;

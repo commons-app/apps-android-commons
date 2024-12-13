@@ -187,7 +187,7 @@ public class UploadModel {
     public Observable<Contribution> buildContributions() {
         return Observable.fromIterable(items).map(item ->
         {
-            String imageSHA1 = FileUtils.getSHA1(context.getContentResolver().openInputStream(item.getContentUri()));
+            String imageSHA1 = FileUtils.INSTANCE.getSHA1(context.getContentResolver().openInputStream(item.getContentUri()));
 
             final Contribution contribution = new Contribution(
                 item, sessionManager, newListOf(selectedDepictions), newListOf(selectedCategories), imageSHA1);

@@ -125,6 +125,7 @@
   <string name="categories_search_text_hint">Sök kategorier</string>
   <string name="depicts_search_text_hint">Sök efter objekt som din mediafil skildrar (berg, Taj Mahal, etc.)</string>
   <string name="menu_save_categories">Spara</string>
+  <string name="menu_overflow_desc">Överflödesmeny</string>
   <string name="refresh_button">Uppdatera</string>
   <string name="display_list_button">Lista</string>
   <string name="contributions_subtitle_zero">(Inga uppladdningar ännu)</string>
@@ -368,7 +369,7 @@
   <string name="statistics_thanks">Mottagna tack</string>
   <string name="statistics_featured">Utvalda bilder</string>
   <string name="statistics_wikidata_edits">Bilder via \"Platser i närheten\"</string>
-  <string name="level">Nivå</string>
+  <string name="level" fuzzy="true">Nivå</string>
   <string name="images_uploaded">Uppladdade bilder</string>
   <string name="image_reverts">Bilder som inte har återställts</string>
   <string name="images_used_by_wiki">Bilder som används</string>
@@ -481,6 +482,7 @@
   <string name="no_notification">Du har inga olästa aviseringar</string>
   <string name="no_read_notification">Du har inga lästa aviseringar</string>
   <string name="share_logs_using">Dela loggar med hjälp av</string>
+  <string name="check_your_email_inbox">Kontrollera inkorgen för din e-post</string>
   <string name="menu_option_read">Visa lästa</string>
   <string name="menu_option_unread">Visa olästa</string>
   <string name="error_occurred_in_picking_images">Fel uppstod när bilder valdes ut</string>
@@ -788,4 +790,16 @@
   <string name="pending">Pågår</string>
   <string name="failed">Misslyckades</string>
   <string name="could_not_load_place_data">Kunde inte läsa in platsdata</string>
+  <string name="custom_selector_delete_folder">Radera mapp</string>
+  <string name="custom_selector_confirm_deletion_title">Bekräfta radering</string>
+  <string name="custom_selector_confirm_deletion_message">Vill du verkligen radera mappen %1$s som innehåller %2$d objekt?</string>
+  <string name="custom_selector_delete">Radera</string>
+  <string name="custom_selector_cancel">Avbryt</string>
+  <string name="custom_selector_folder_deleted_success">Mappen %1$s har raderats</string>
+  <string name="custom_selector_folder_deleted_failure">Kunde inte radera mappen %1$s</string>
+  <string name="custom_selector_error_trashing_folder_contents">Fel vid kassering av mappinnehållet: %1$s</string>
+  <string name="custom_selector_folder_not_found_error">Kunde inte hämta mappsökväg för bucket-ID: %1$d</string>
+  <string name="red_pin">Det här platsen har ännu ingen bild. Gå och ta en!</string>
+  <string name="green_pin">Det här platsen har redan en bild.</string>
+  <string name="grey_pin">Kollar nu om den här platsen har en bild.</string>
 </resources>

@@ -5,7 +5,6 @@ import static fr.free.nrw.commons.contributions.Contribution.STATE_FAILED;
 import static fr.free.nrw.commons.contributions.Contribution.STATE_PAUSED;
 import static fr.free.nrw.commons.nearby.fragments.NearbyParentFragment.WLM_URL;
 import static fr.free.nrw.commons.profile.ProfileActivity.KEY_USERNAME;
-import static fr.free.nrw.commons.utils.ImageUtils.IMAGE_OK;
 import static fr.free.nrw.commons.utils.LengthUtils.computeBearing;
 import static fr.free.nrw.commons.utils.LengthUtils.formatDistanceBetween;
 
@@ -23,12 +22,10 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.MenuItem.OnMenuItemClickListener;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.activity.result.ActivityResultCallback;
@@ -39,7 +36,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager.OnBackStackChangedListener;
 import androidx.fragment.app.FragmentTransaction;
-import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.databinding.FragmentContributionsBinding;
@@ -293,7 +289,7 @@ public class ContributionsFragment
             });
         }
         notification.setOnClickListener(view -> {
-            NotificationActivity.startYourself(getContext(), "unread");
+            NotificationActivity.Companion.startYourself(getContext(), "unread");
         });
     }
 
@@ -307,16 +303,17 @@ public class ContributionsFragment
     }
 
     /**
+     * Temporarily disabled, see issue [https://github.com/commons-app/apps-android-commons/issues/5847]
      * Sets the visibility of the upload icon based on the number of failed and pending
      * contributions.
      */
-    public void setUploadIconVisibility() {
-        contributionController.getFailedAndPendingContributions();
-        contributionController.failedAndPendingContributionList.observe(getViewLifecycleOwner(),
-            list -> {
-                updateUploadIcon(list.size());
-            });
-    }
+//    public void setUploadIconVisibility() {
+//        contributionController.getFailedAndPendingContributions();
+//        contributionController.failedAndPendingContributionList.observe(getViewLifecycleOwner(),
+//            list -> {
+//                updateUploadIcon(list.size());
+//            });
+//    }
 
     /**
      * Sets the count for the upload icon based on the number of pending and failed contributions.
@@ -535,7 +532,8 @@ public class ContributionsFragment
             if (!isUserProfile) {
                 setNotificationCount();
                 fetchCampaigns();
-                setUploadIconVisibility();
+                // Temporarily disabled, see issue [https://github.com/commons-app/apps-android-commons/issues/5847]
+                // setUploadIconVisibility();
                 setUploadIconCount();
             }
         }
@@ -570,8 +568,8 @@ public class ContributionsFragment
             getString(R.string.nearby_card_permission_explanation),
             this::requestLocationPermission,
             this::displayYouWontSeeNearbyMessage,
-            checkBoxView,
-            false);
+            checkBoxView
+        );
     }
 
     private void displayYouWontSeeNearbyMessage() {
@@ -761,19 +759,18 @@ public class ContributionsFragment
     }
 
     /**
-     * Updates the visibility of the pending uploads ImageView based on the given count.
-     *
+     * Temporarily disabled, see issue [https://github.com/commons-app/apps-android-commons/issues/5847]
      * @param count The number of pending uploads.
      */
-    public void updateUploadIcon(int count) {
-        if (pendingUploadsImageView != null) {
-            if (count != 0) {
-                pendingUploadsImageView.setVisibility(View.VISIBLE);
-            } else {
-                pendingUploadsImageView.setVisibility(View.GONE);
-            }
-        }
-    }
+//    public void updateUploadIcon(int count) {
+//        if (pendingUploadsImageView != null) {
+//            if (count != 0) {
+//                pendingUploadsImageView.setVisibility(View.VISIBLE);
+//            } else {
+//                pendingUploadsImageView.setVisibility(View.GONE);
+//            }
+//        }
+//    }
 
     /**
      * Replace whatever is in the current contributionsFragmentContainer view with

@@ -211,7 +211,7 @@
   <string name="delete_search_dialog">Áiggutgo don duođaid dán ohcama sihkkut?</string>
   <string name="delete">Sihko</string>
   <string name="statistics">Statistihkka</string>
-  <string name="level">Dássi</string>
+  <string name="level" fuzzy="true">Dássi</string>
   <string name="notifications">Almmuhusat</string>
   <string name="list_sheet">Listu</string>
   <string name="next">Čuovvovaš</string>

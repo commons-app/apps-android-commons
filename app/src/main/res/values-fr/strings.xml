@@ -22,6 +22,7 @@
 * JenyxGym
 * KATRINE1992
 * Koreller
+* Mahabarata
 * McDutchie
 * Melissadeba95
 * Metroitendo
@@ -160,6 +161,7 @@
   <string name="categories_search_text_hint">Rechercher des catégories</string>
   <string name="depicts_search_text_hint">Rechercher les éléments que votre média représente (montagne, Taj Mahal, etc.).</string>
   <string name="menu_save_categories">Enregistrer</string>
+  <string name="menu_overflow_desc">Menu de débordement</string>
   <string name="refresh_button">Actualiser</string>
   <string name="display_list_button">Lister</string>
   <string name="contributions_subtitle_zero">(Pas encore de téléversement)</string>
@@ -399,11 +401,13 @@
   <string name="delete">Supprimer</string>
   <string name="Achievements">Accomplissements</string>
   <string name="Profile">Profil</string>
+  <string name="badges">Badges</string>
   <string name="statistics">Statistiques</string>
   <string name="statistics_thanks">Remerciements reçus</string>
   <string name="statistics_featured">Images remarquables</string>
   <string name="statistics_wikidata_edits">Images par « Lieux à proximité »</string>
-  <string name="level">Niveau</string>
+  <string name="level">Niveau %d</string>
+  <string name="profileLevel">%s (niveau %s)</string>
   <string name="images_uploaded">Images téléversées</string>
   <string name="image_reverts">Images non annulées</string>
   <string name="images_used_by_wiki">Images utilisées</string>
@@ -516,6 +520,7 @@
   <string name="no_notification">Vous n’avez aucune notification non lue</string>
   <string name="no_read_notification">Vous n’avez aucune notification lue</string>
   <string name="share_logs_using">Partager les journaux en utilisant</string>
+  <string name="check_your_email_inbox">Vérifiez votre boîte de réception</string>
   <string name="menu_option_read">Afficher les lus</string>
   <string name="menu_option_unread">Afficher les non lus</string>
   <string name="error_occurred_in_picking_images">Une erreur est survenue lors de la sélection des images</string>
@@ -825,4 +830,22 @@
   <string name="pending">En attente</string>
   <string name="failed">Échec</string>
   <string name="could_not_load_place_data">Les données du lieu n\'ont pas pu être chargées</string>
+  <string name="custom_selector_delete_folder">Supprimer le dossier</string>
+  <string name="custom_selector_confirm_deletion_title">Confirmer la suppression</string>
+  <string name="custom_selector_confirm_deletion_message">Êtes-vous sûr de vouloir supprimer le dossier %1$s contenant %2$d éléments ?</string>
+  <string name="custom_selector_delete">Supprimer</string>
+  <string name="custom_selector_cancel">Annuler</string>
+  <string name="custom_selector_folder_deleted_success">Le dossier %1$s a été supprimé avec succès</string>
+  <string name="custom_selector_folder_deleted_failure">Impossible de supprimer le dossier %1$s</string>
+  <string name="custom_selector_error_trashing_folder_contents">Erreur lors de la suppression du contenu du dossier : %1$s</string>
+  <string name="custom_selector_folder_not_found_error">Échec de la récupération du chemin d\'accès au dossier pour le bucket ID : %1$d</string>
+  <string name="red_pin">Cet endroit n\'a pas encore de photo, allez en prendre une !</string>
+  <string name="green_pin">Cet endroit a déjà une photo.</string>
+  <string name="grey_pin">Je vérifie maintenant si cet endroit a une photo.</string>
+  <string name="error_while_loading">Erreur lors du chargement</string>
+  <string name="no_usages_found">Aucune utilisation trouvée</string>
+  <string name="usages_on_commons_heading">Commons</string>
+  <string name="usages_on_other_wikis_heading">Autres wikis</string>
+  <string name="bullet_point">•</string>
+  <string name="file_usages_container_heading">Utilisations du fichier</string>
 </resources>

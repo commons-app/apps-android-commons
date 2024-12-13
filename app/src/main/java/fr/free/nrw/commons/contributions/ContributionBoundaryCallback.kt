@@ -3,6 +3,7 @@ package fr.free.nrw.commons.contributions
 import androidx.paging.PagedList.BoundaryCallback
 import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.di.CommonsApplicationModule
+import fr.free.nrw.commons.di.CommonsApplicationModule.Companion.IO_THREAD
 import fr.free.nrw.commons.media.MediaClient
 import io.reactivex.Scheduler
 import io.reactivex.disposables.CompositeDisposable
@@ -20,7 +21,7 @@ class ContributionBoundaryCallback
         private val repository: ContributionsRepository,
         private val sessionManager: SessionManager,
         private val mediaClient: MediaClient,
-        @param:Named(CommonsApplicationModule.IO_THREAD) private val ioThreadScheduler: Scheduler,
+        @param:Named(IO_THREAD) private val ioThreadScheduler: Scheduler,
     ) : BoundaryCallback<Contribution>() {
         private val compositeDisposable: CompositeDisposable = CompositeDisposable()
         var userName: String? = null

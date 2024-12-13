@@ -270,7 +270,7 @@
   <string name="statistics">Statistik</string>
   <string name="statistics_thanks">Haturan Suksma Katampi</string>
   <string name="statistics_featured">Gambar Pilihan</string>
-  <string name="level">Tingkat</string>
+  <string name="level" fuzzy="true">Tingkat</string>
   <string name="images_uploaded">Gambar Kaupload</string>
   <string name="images_used_by_wiki">Gambar Kaanggén</string>
   <string name="contributions_fragment">Pituut</string>

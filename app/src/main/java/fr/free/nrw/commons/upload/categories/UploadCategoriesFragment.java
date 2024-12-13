@@ -65,14 +65,14 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull final LayoutInflater inflater, @Nullable final ViewGroup container,
+                             @Nullable final Bundle savedInstanceState) {
         binding = UploadCategoriesFragmentBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull final View view, @Nullable final Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         final Bundle bundle = getArguments();
         if (bundle != null) {
@@ -104,8 +104,12 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
         setTvSubTitle();
         binding.tooltip.setOnClickListener(new OnClickListener() {
             @Override
-            public void onClick(View v) {
-                DialogUtil.showAlertDialog(getActivity(), getString(R.string.categories_activity_title), getString(R.string.categories_tooltip), getString(android.R.string.ok), null, true);
+            public void onClick(final View v) {
+                DialogUtil.showAlertDialog(requireActivity(),
+                    getString(R.string.categories_activity_title),
+                    getString(R.string.categories_tooltip),
+                    getString(android.R.string.ok),
+                    null);
             }
         });
         if (media == null) {
@@ -146,7 +150,7 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
         }
     }
 
-    private void searchForCategory(String query) {
+    private void searchForCategory(final String query) {
         presenter.searchForCategories(query);
     }
 
@@ -170,28 +174,28 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
     }
 
     @Override
-    public void showProgress(boolean shouldShow) {
+    public void showProgress(final boolean shouldShow) {
         if (binding != null) {
             binding.pbCategories.setVisibility(shouldShow ? View.VISIBLE : View.GONE);
         }
     }
 
     @Override
-    public void showError(String error) {
+    public void showError(final String error) {
         if (binding != null) {
             binding.tilContainerSearch.setError(error);
         }
     }
 
     @Override
-    public void showError(int stringResourceId) {
+    public void showError(final int stringResourceId) {
         if (binding != null) {
             binding.tilContainerSearch.setError(getString(stringResourceId));
         }
     }
 
     @Override
-    public void setCategories(List<CategoryItem> categories) {
+    public void setCategories(final List<CategoryItem> categories) {
         if (categories == null) {
             adapter.clear();
         } else {
@@ -229,12 +233,12 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
     @Override
     public void showNoCategorySelected() {
         if (media == null) {
-            DialogUtil.showAlertDialog(getActivity(),
+            DialogUtil.showAlertDialog(requireActivity(),
                 getString(R.string.no_categories_selected),
                 getString(R.string.no_categories_selected_warning_desc),
                 getString(R.string.continue_message),
                 getString(R.string.cancel),
-                () -> goToNextScreen(),
+                this::goToNextScreen,
                 null);
         } else {
             Toast.makeText(requireContext(), getString(R.string.no_categories_selected),
@@ -256,6 +260,7 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
     /**
      * Returns required context
      */
+    @NonNull
     @Override
     public Context getFragmentContext() {
         return requireContext();
@@ -306,7 +311,7 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
     public void navigateToLoginScreen() {
         final String username = sessionManager.getUserName();
         final CommonsApplication.BaseLogoutListener logoutListener = new CommonsApplication.BaseLogoutListener(
-            getActivity(),
+            requireActivity(),
             requireActivity().getString(R.string.invalid_login_message),
             username
         );
@@ -372,7 +377,7 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
                 return false;
             });
 
-            Objects.requireNonNull(getView()).setFocusableInTouchMode(true);
+            requireView().setFocusableInTouchMode(true);
             getView().requestFocus();
             getView().setOnKeyListener((v, keyCode, event) -> {
                 if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK) {
@@ -387,7 +392,7 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
             });
 
             Objects.requireNonNull(
-                ((AppCompatActivity) Objects.requireNonNull(getActivity())).getSupportActionBar())
+                ((AppCompatActivity) requireActivity()).getSupportActionBar())
                 .hide();
 
             if (getParentFragment().getParentFragment().getParentFragment()
@@ -407,7 +412,7 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
         super.onStop();
         if (media != null) {
             Objects.requireNonNull(
-                ((AppCompatActivity) Objects.requireNonNull(getActivity())).getSupportActionBar())
+                ((AppCompatActivity) requireActivity()).getSupportActionBar())
                 .show();
         }
     }

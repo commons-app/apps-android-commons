@@ -117,6 +117,7 @@
   <string name="categories_search_text_hint">Sërché dle categorìe</string>
   <string name="depicts_search_text_hint">Arserché j\'element che sò mojen a arpresenta (montagna, Taj Mahal, e via fòrt)</string>
   <string name="menu_save_categories">Argistré</string>
+  <string name="menu_overflow_desc">Mnu dë strabordament</string>
   <string name="refresh_button">Agiorné</string>
   <string name="display_list_button">Lista</string>
   <string name="contributions_subtitle_zero">(Ancor gnun cariament)</string>
@@ -356,11 +357,13 @@
   <string name="delete">Dëscancelé</string>
   <string name="Achievements">Realisassion</string>
   <string name="Profile">Profil</string>
+  <string name="badges">Distintiv</string>
   <string name="statistics">Statìstiche</string>
   <string name="statistics_thanks">Aringrassiament arseivù</string>
   <string name="statistics_featured">Plance an evidensa</string>
   <string name="statistics_wikidata_edits">Plance për \"Pòst davzin\"</string>
-  <string name="level">Livel</string>
+  <string name="level">Livel %d</string>
+  <string name="profileLevel">%s (Livel %s)</string>
   <string name="images_uploaded">Plance carià</string>
   <string name="image_reverts">Plance nen anulà</string>
   <string name="images_used_by_wiki">Plance dovrà</string>
@@ -473,6 +476,7 @@
   <string name="no_notification">A l\'ha gnun-e notìfiche nen lesùe</string>
   <string name="no_read_notification">A l\'ha gnun-e notìfiche lesùe</string>
   <string name="share_logs_using">Partagé j\'argistr dovrand</string>
+  <string name="check_your_email_inbox">Ch\'a contròla soa casela ëd pòsta eletrònica</string>
   <string name="menu_option_read">Vëdde lòn ch\'a l\'é stàit lesù</string>
   <string name="menu_option_unread">Vëdde lòn ch\'a l\'é ancor nen ëstàit lesù</string>
   <string name="error_occurred_in_picking_images">A-i é staje n\'eror an selessionand le plance</string>
@@ -780,4 +784,22 @@
   <string name="pending">An atèisa</string>
   <string name="failed">Falì</string>
   <string name="could_not_load_place_data">Impossìbil carié ij dàit dël pòst</string>
+  <string name="custom_selector_delete_folder">Eliminé ëd dossié</string>
+  <string name="custom_selector_confirm_deletion_title">Confirmé l\'eliminassion</string>
+  <string name="custom_selector_confirm_deletion_message">É-lo sigur ëd vorèj eliminé ël dossié %1$s ch\'a content %2$d element?</string>
+  <string name="custom_selector_delete">Eliminé</string>
+  <string name="custom_selector_cancel">Anulé</string>
+  <string name="custom_selector_folder_deleted_success">Ël dossié %1$s a l\'é stàit eliminà për da bin</string>
+  <string name="custom_selector_folder_deleted_failure">Impossìbil eliminé ël dossié %1$s</string>
+  <string name="custom_selector_error_trashing_folder_contents">Eror durant l\'eliminassion dël contnù dël dossié: %1$s</string>
+  <string name="custom_selector_folder_not_found_error">Falì a arcuperé ël sënté d\'acess al dossié për ël sigilin d\'ID: %1$d</string>
+  <string name="red_pin">Ës pòst a l\'ha ancor gnun-e fòto, ch\'a na pija un-a!</string>
+  <string name="green_pin">Ës pòst a l\'ha già dle fòto.</string>
+  <string name="grey_pin">An camin ch\'as verìfica si cost pòst -sì a l\'ha dle fòto.</string>
+  <string name="error_while_loading">Eror durant ël cariament</string>
+  <string name="no_usages_found">Gnun usagi trovà</string>
+  <string name="usages_on_commons_heading">Commons</string>
+  <string name="usages_on_other_wikis_heading">Àutre wiki</string>
+  <string name="bullet_point">•</string>
+  <string name="file_usages_container_heading">Usagi dl\'archivi</string>
 </resources>

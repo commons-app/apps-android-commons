@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.customselector.ui.selector
 
 import android.app.Activity
+import android.content.Context
 import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences
 import android.os.Bundle
@@ -279,11 +280,17 @@ class ImageFragment :
                 filteredImages = ImageHelper.filterImages(images, bucketId)
                 allImages = ArrayList(filteredImages)
                 imageAdapter.init(filteredImages, allImages, TreeMap(), uploadingContributions)
+                viewModel?.selectedImages?.value?.let { selectedImages ->
+                    imageAdapter.setSelectedImages(selectedImages)
+                }
+                imageAdapter.notifyDataSetChanged()
                 selectorRV?.let {
                     it.visibility = View.VISIBLE
-                    lastItemId?.let { pos ->
-                        (it.layoutManager as GridLayoutManager)
-                            .scrollToPosition(ImageHelper.getIndexFromId(filteredImages, pos))
+                    if (switch?.isChecked == false) {
+                        lastItemId?.let { pos ->
+                            (it.layoutManager as GridLayoutManager)
+                                .scrollToPosition(ImageHelper.getIndexFromId(filteredImages, pos))
+                        }
                     }
                 }
             } else {
@@ -340,7 +347,7 @@ class ImageFragment :
                 context
                     .getSharedPreferences(
                         "CustomSelector",
-                        BaseActivity.MODE_PRIVATE,
+                        MODE_PRIVATE,
                     )?.let { prefs ->
                         prefs.edit()?.let { editor ->
                             editor.putLong("ItemId", imageAdapter.getImageIdAt(position))?.apply()
@@ -382,14 +389,6 @@ class ImageFragment :
         selectedImages: ArrayList<Image>,
         shouldRefresh: Boolean,
     ) {
-        imageAdapter.setSelectedImages(selectedImages)
-
-        val uploadingContributions = getUploadingContributions()
-
-        if (!showAlreadyActionedImages && shouldRefresh) {
-            imageAdapter.init(filteredImages, allImages, TreeMap(), uploadingContributions)
-            imageAdapter.setSelectedImages(selectedImages)
-        }
     }
 
     /**

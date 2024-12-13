@@ -69,7 +69,7 @@ public abstract class MockWebServerTest {
                 .baseUrl(url)
                 .callbackExecutor(new ImmediateExecutor())
                 .client(okHttpClient)
-                .addConverterFactory(GsonConverterFactory.create(GsonUtil.getDefaultGson()))
+                .addConverterFactory(GsonConverterFactory.create(GsonUtil.INSTANCE.getDefaultGson()))
                 .build()
                 .create(clazz);
     }

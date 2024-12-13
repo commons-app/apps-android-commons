@@ -271,7 +271,7 @@
   <string name="Profile">Podatci o suradnici/suradniku</string>
   <string name="statistics">Statistike</string>
   <string name="statistics_thanks">Primljeno zahvala</string>
-  <string name="level">Razina</string>
+  <string name="level" fuzzy="true">Razina</string>
   <string name="error_occurred">Došlo je do pogrješke!</string>
   <string name="notifications_channel_name_all">Obavijesti Zajedničkoga poslužitelja</string>
   <string name="title_page_bookmarks_pictures">Slike</string>

@@ -275,7 +275,9 @@
   <string name="copy_wikicode">Kopioi wikiteksti leikepöydälle</string>
   <string name="wikicode_copied">Wikiteksti kopioitiin leikepöydälle</string>
   <string name="nearby_location_not_available">Nearby ei välttämättä toimi, sillä sijainti ei käytettävissä.</string>
+  <string name="upload_location_access_denied">Sijainnin käyttö kielletty. Aseta sijaintisi manuaalisesti käyttääksesi tätä ominaisuutta.</string>
   <string name="location_permission_rationale_nearby">Lupa vaaditaan läheisten paikkojen luettelon näyttämiseen</string>
+  <string name="location_permission_rationale_explore">Lupa vaaditaan läheltä otettujen kuvien luettelon näyttämiseen</string>
   <string name="nearby_directions">Reitit</string>
   <string name="nearby_wikidata">Wikidata</string>
   <string name="nearby_wikipedia">Wikipedia</string>
@@ -343,6 +345,8 @@
   <string name="share_app_title">Jaa sovellus</string>
   <string name="rotate">Kierrä</string>
   <string name="error_fetching_nearby_places">Virhe läheisiä paikkoja ladatessa</string>
+  <string name="no_pictures_in_this_area">Ei kuvia tältä alueelta</string>
+  <string name="no_nearby_places_around">Ei lähistöllä olevia paikkoja</string>
   <string name="error_fetching_nearby_monuments">Virhe läheisiä monumentteja haettaessa.</string>
   <string name="no_recent_searches">Ei viimeaikaisia hakuja</string>
   <string name="delete_recent_searches_dialog">Haluatko varmasti tyhjentää hakuhistoriasi?</string>
@@ -357,7 +361,8 @@
   <string name="statistics_thanks">Kiitos vastaanotettu</string>
   <string name="statistics_featured">Suositellut kuvat</string>
   <string name="statistics_wikidata_edits">Kuvia läheltä</string>
-  <string name="level">Taso</string>
+  <string name="level">Taso %d</string>
+  <string name="profileLevel">%s (taso %s)</string>
   <string name="images_uploaded">Kuvia tallennettu</string>
   <string name="image_reverts">Kuvia ei palautettu</string>
   <string name="images_used_by_wiki">Kuvia käytetty</string>

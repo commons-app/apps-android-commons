@@ -105,7 +105,7 @@ class AboutActivityTest {
     fun testLaunchTranslate() {
         Espresso.onView(ViewMatchers.withId(R.id.about_translate)).perform(ViewActions.click())
         Espresso.onView(ViewMatchers.withId(android.R.id.button1)).perform(ViewActions.click())
-        val langCode = CommonsApplication.getInstance().languageLookUpTable.codes[0]
+        val langCode = CommonsApplication.instance.languageLookUpTable!!.getCodes()[0]
         Intents.intended(
             CoreMatchers.allOf(
                 IntentMatchers.hasAction(Intent.ACTION_VIEW),

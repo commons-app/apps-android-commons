@@ -72,8 +72,9 @@
   <string name="upload_completed_notification_text">Dréckt fir de Fichier ze gesinn deen Dir eropgelueden hutt</string>
   <string name="upload_progress_notification_title_start">Fichier eroplueden: %s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s gëtt eropgelueden</string>
-  <string name="upload_progress_notification_title_finishing">Eroplueden vu(n) %1$s ofschléissen</string>
+  <string name="upload_progress_notification_title_finishing">Eropluede vu(n) %1$s ofschléissen</string>
   <string name="upload_failed_notification_title">%1$s konnt net eropgeluede ginn</string>
+  <string name="upload_paused_notification_title">Eropluede vu(n) %1$s pauséiert</string>
   <string name="upload_failed_notification_subtitle">Dréckt fir nach eng Kéier ze probéieren</string>
   <string name="upload_paused_notification_subtitle">Tippe fir ze kucken</string>
   <string name="title_activity_contributions">Meng rezent eropgeluede Fichieren</string>
@@ -86,6 +87,7 @@
   <string name="menu_nearby">Nobäi</string>
   <string name="provider_contributions">Meng eropgeluede Fichieren</string>
   <string name="menu_share">Deelen</string>
+  <string name="menu_view_file_page">Fichierssäit weisen</string>
   <string name="share_title_hint">Beschrëftung (obligatoresch)</string>
   <string name="add_caption_toast">Gitt wgl. eng Beschrëftung fir dëse Fichier un</string>
   <string name="share_description_hint">Beschreiwung</string>
@@ -93,6 +95,7 @@
   <string name="login_failed_network">Aloggen huet net funktionéiert – Problemer mam Reseau</string>
   <string name="login_failed_throttled">Ze dacks ouni Succès probéiert. Probéiert wgl. an e puer Minutten nach eng Kéier.</string>
   <string name="login_failed_blocked">Pardon, dëse Benotzer ass op Commons gespaart</string>
+  <string name="login_failed_2fa_needed">Dir musst de Code vun Ärer Zwee-Facteur-Authentifizéierung uginn.</string>
   <string name="login_failed_generic">Aloggen huet net funktionéiert</string>
   <string name="share_upload_button">Eroplueden</string>
   <string name="multiple_share_base_title">Gitt dëser Biller een Numm</string>
@@ -295,7 +298,8 @@
   <string name="statistics">Statistiken</string>
   <string name="statistics_thanks">Mercie kritt</string>
   <string name="statistics_featured">Bemierkenswäert Biller</string>
-  <string name="level">Niveau</string>
+  <string name="level">Niveau %d</string>
+  <string name="profileLevel">%s (Niveau %s)</string>
   <string name="images_uploaded">Eropgeluede Biller</string>
   <string name="image_reverts">Biller net zréckgesat</string>
   <string name="images_used_by_wiki">Benotzte Biller</string>
@@ -498,11 +502,20 @@
   <string name="report_content">Dësen Inhalt mellen</string>
   <string name="request_user_block">Ufroe fir dëse Benotzer ze spären</string>
   <string name="learn_how_to_write_a_useful_caption">Léiert, wéi een nëtzlech Beschrëftunge schreift</string>
+  <string name="edit_image">Bild änneren</string>
+  <string name="edit_location">Plaz änneren</string>
   <string name="location_updated">Plaz aktualiséiert!</string>
   <string name="remove_location">Plaz ewechhuelen</string>
   <string name="remove_location_warning_title">Plaz-Ewechhuele-Warnung</string>
   <string name="remove_location_warning_desc">Duerch Plaze sinn d\'Biller méi nëtzlech a besser sichbar. Wëllt Dir wierklech d\'Plaz vun dësem Bild ewechhuelen?</string>
   <string name="location_removed">Plat ewechgeholl!</string>
+  <string name="send_thanks_to_author">Dem Auteur Merci soen</string>
+  <string name="error_sending_thanks">Feeler beim Schécke vun engem Merci un den Auteur.</string>
+  <string name="file_saved_successfully">Fichier erfollegräich gespäichert</string>
+  <string name="do_you_want_to_open_gpx_file">Wëllt Dir de GPW-Fichier opmaachen?</string>
+  <string name="do_you_want_to_open_kml_file">Wëllt Dir de KML-Fichier opmaachen?</string>
+  <string name="failed_to_save_kml_file">De KML-Fichier konnt net gespäichert ginn.</string>
+  <string name="failed_to_save_gpx_file">De GPX-Fichier konnt net gespäichert ginn.</string>
   <string name="saving_kml_file">KML-Fichier späicheren</string>
   <string name="saving_gpx_file">GPX-Fichier späicheren</string>
   <plurals name="custom_picker_images_selected_title_appendix">
@@ -510,4 +523,10 @@
     <item quantity="other">%d Biller ausgewielt</item>
   </plurals>
   <string name="does_not_exist_anymore_no_picture_can_ever_be_taken_of_it">\'%1$s\' gëtt et net méi, et kann keng Foto méi dovunner gemaach ginn.</string>
+  <string name="custom_selector_confirm_deletion_title">Läsche confirméieren</string>
+  <string name="custom_selector_delete">Läschen</string>
+  <string name="custom_selector_cancel">Ofbriechen</string>
+  <string name="error_while_loading">Feeler beim Lueden</string>
+  <string name="usages_on_commons_heading">Commons</string>
+  <string name="usages_on_other_wikis_heading">Aner Wikien</string>
 </resources>

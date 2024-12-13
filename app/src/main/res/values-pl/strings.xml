@@ -398,7 +398,7 @@
   <string name="statistics_thanks">Otrzymane Dzięki</string>
   <string name="statistics_featured">Wyróżnione ilustracje</string>
   <string name="statistics_wikidata_edits">Obrazy za pośrednictwem \"Pobliskie miejsca\"</string>
-  <string name="level">Poziom</string>
+  <string name="level" fuzzy="true">Poziom</string>
   <string name="images_uploaded">Przesłane obrazy</string>
   <string name="image_reverts">Nie wycofane obrazy</string>
   <string name="images_used_by_wiki">Wykorzystane obrazy</string>
@@ -769,6 +769,8 @@
   <string name="set_up_avatar_toast_string">Aby skonfigurować swojego awatara rankingu, dotknij \'Ustaw jako awatar\' w menu z trzema kropkami dowolnego obrazu.</string>
   <string name="similar_coordinate_description_auto_set">Współrzędne nie są dokładnymi współrzędnymi, ale osoba, która przesłała to zdjęcie, uważa, że są wystarczająco blisko.</string>
   <string name="unable_to_share_upload_item">Nie można udostępnić tego elementu</string>
+  <string name="learn_how_to_write_a_useful_description">Przeczytaj jak napisać użyteczny opis</string>
+  <string name="learn_how_to_write_a_useful_caption">Przeczytaj jak napisać użyteczny podpis</string>
   <string name="edit_image">Edytuj obraz</string>
   <string name="edit_location">Edytuj lokalizację</string>
   <string name="location_updated">Lokalizacja zaktualizowana!</string>

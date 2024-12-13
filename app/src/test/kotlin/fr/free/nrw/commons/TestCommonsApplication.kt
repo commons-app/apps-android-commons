@@ -6,7 +6,6 @@ import android.content.Context
 import androidx.collection.LruCache
 import com.google.gson.Gson
 import com.nhaarman.mockitokotlin2.mock
-import fr.free.nrw.commons.auth.AccountUtil
 import fr.free.nrw.commons.data.DBOpenHelper
 import fr.free.nrw.commons.di.CommonsApplicationComponent
 import fr.free.nrw.commons.di.CommonsApplicationModule
@@ -38,10 +37,8 @@ class TestCommonsApplication : Application() {
 }
 
 @Suppress("MemberVisibilityCanBePrivate")
-class MockCommonsApplicationModule(
-    appContext: Context,
-) : CommonsApplicationModule(appContext) {
-    val accountUtil: AccountUtil = mock()
+class MockCommonsApplicationModule(appContext: Context) : CommonsApplicationModule(appContext) {
+
     val defaultSharedPreferences: JsonKvStore = mock()
     val locationServiceManager: LocationServiceManager = mock()
     val mockDbOpenHelper: DBOpenHelper = mock()
@@ -52,18 +49,13 @@ class MockCommonsApplicationModule(
     val modificationClient: ContentProviderClient = mock()
     val uploadPrefs: JsonKvStore = mock()
 
-    override fun provideCategoryContentProviderClient(context: Context?): ContentProviderClient = categoryClient
+    override fun provideCategoryContentProviderClient(context: Context): ContentProviderClient = categoryClient
 
-    override fun provideContributionContentProviderClient(context: Context?): ContentProviderClient = contributionClient
+    override fun provideContributionContentProviderClient(context: Context): ContentProviderClient = contributionClient
 
-    override fun provideModificationContentProviderClient(context: Context?): ContentProviderClient = modificationClient
+    override fun provideModificationContentProviderClient(context: Context): ContentProviderClient = modificationClient
 
-    override fun providesAccountUtil(context: Context): AccountUtil = accountUtil
-
-    override fun providesDefaultKvStore(
-        context: Context,
-        gson: Gson,
-    ): JsonKvStore = defaultSharedPreferences
+    override fun providesDefaultKvStore(context: Context, gson: Gson): JsonKvStore = defaultSharedPreferences
 
     override fun provideLocationServiceManager(context: Context): LocationServiceManager = locationServiceManager
 

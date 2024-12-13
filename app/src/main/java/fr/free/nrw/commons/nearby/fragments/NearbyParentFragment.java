@@ -48,10 +48,12 @@ import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts.RequestMultiplePermissions;
 import androidx.activity.result.contract.ActivityResultContracts.RequestPermission;
+import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog.Builder;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -105,6 +107,7 @@ import fr.free.nrw.commons.utils.NetworkUtils;
 import fr.free.nrw.commons.utils.SystemThemeUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import fr.free.nrw.commons.wikidata.WikidataEditListener;
+import io.reactivex.Completable;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
@@ -218,9 +221,36 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     private LatLng updatedLatLng;
     private boolean searchable;
 
+    private ConstraintLayout nearbyLegend;
+
     private GridLayoutManager gridLayoutManager;
     private List<BottomSheetItem> dataList;
     private BottomSheetAdapter bottomSheetAdapter;
+
+    private final ActivityResultLauncher<Intent> galleryPickLauncherForResult =
+        registerForActivityResult(new StartActivityForResult(),
+        result -> {
+            controller.handleActivityResultWithCallback(requireActivity(), callbacks -> {
+                controller.onPictureReturnedFromGallery(result, requireActivity(), callbacks);
+            });
+        });
+
+    private final ActivityResultLauncher<Intent> customSelectorLauncherForResult =
+        registerForActivityResult(new StartActivityForResult(),
+        result -> {
+            controller.handleActivityResultWithCallback(requireActivity(), callbacks -> {
+                controller.onPictureReturnedFromCustomSelector(result, requireActivity(), callbacks);
+            });
+        });
+
+    private final ActivityResultLauncher<Intent> cameraPickLauncherForResult =
+        registerForActivityResult(new StartActivityForResult(),
+        result -> {
+            controller.handleActivityResultWithCallback(requireActivity(), callbacks -> {
+                controller.onPictureReturnedFromCamera(result, requireActivity(), callbacks);
+            });
+        });
+
     private ActivityResultLauncher<String[]> inAppCameraLocationPermissionLauncher = registerForActivityResult(
         new RequestMultiplePermissions(),
         new ActivityResultCallback<Map<String, Boolean>>() {
@@ -236,7 +266,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                 } else {
                     if (shouldShowRequestPermissionRationale(permission.ACCESS_FINE_LOCATION)) {
                         controller.handleShowRationaleFlowCameraLocation(getActivity(),
-                            inAppCameraLocationPermissionLauncher);
+                            inAppCameraLocationPermissionLauncher, cameraPickLauncherForResult);
                     } else {
                         controller.locationPermissionCallback.onLocationPermissionDenied(
                             getActivity().getString(
@@ -261,8 +291,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                             askForLocationPermission();
                         },
                         null,
-                        null,
-                        false);
+                        null
+                    );
                 } else {
                     if (isPermissionDenied) {
                         locationPermissionsHelper.showAppSettingsDialog(getActivity(),
@@ -302,6 +332,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         progressDialog.setCancelable(false);
         progressDialog.setMessage("Saving in progress...");
         setHasOptionsMenu(true);
+
         // Inflate the layout for this fragment
         return view;
 
@@ -311,9 +342,21 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     public void onCreateOptionsMenu(@NonNull final Menu menu,
         @NonNull final MenuInflater inflater) {
         inflater.inflate(R.menu.nearby_fragment_menu, menu);
+        MenuItem refreshButton = menu.findItem(R.id.item_refresh);
         MenuItem listMenu = menu.findItem(R.id.list_sheet);
         MenuItem saveAsGPXButton = menu.findItem(R.id.list_item_gpx);
         MenuItem saveAsKMLButton = menu.findItem(R.id.list_item_kml);
+        refreshButton.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                try {
+                    emptyCache();
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+                return false;
+            }
+        });
         listMenu.setOnMenuItemClickListener(new OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
@@ -362,6 +405,16 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         }
         locationPermissionsHelper = new LocationPermissionsHelper(getActivity(), locationManager,
             this);
+
+        // Set up the floating activity button to toggle the visibility of the legend
+        binding.fabLegend.setOnClickListener(v -> {
+            if (binding.nearbyLegendLayout.getRoot().getVisibility() == View.VISIBLE) {
+                binding.nearbyLegendLayout.getRoot().setVisibility(View.GONE);
+            } else {
+                binding.nearbyLegendLayout.getRoot().setVisibility(View.VISIBLE);
+            }
+        });
+
         presenter.attachView(this);
         isPermissionDenied = false;
         recenterToUserLocation = false;
@@ -475,7 +528,9 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             final Bundle bundle = new Bundle();
             try {
                 bundle.putString("query",
-                    FileUtils.readFromResource("/queries/radius_query_for_upload_wizard.rq"));
+                    FileUtils.INSTANCE.readFromResource(
+                        "/queries/radius_query_for_upload_wizard.rq")
+                );
             } catch (IOException e) {
                 Timber.e(e);
             }
@@ -555,7 +610,9 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                 return Unit.INSTANCE;
             },
             commonPlaceClickActions,
-            inAppCameraLocationPermissionLauncher
+            inAppCameraLocationPermissionLauncher,
+            galleryPickLauncherForResult,
+            cameraPickLauncherForResult
         );
         binding.bottomSheetNearby.rvNearbyList.setAdapter(adapter);
     }
@@ -645,7 +702,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                 = new LatLng(Double.parseDouble(locationLatLng[0]),
                 Double.parseDouble(locationLatLng[1]), 1f);
         } else {
-            lastKnownLocation = MapUtils.defaultLatLng;
+            lastKnownLocation = MapUtils.getDefaultLatLng();
         }
         if (binding.map != null) {
             moveCameraToPosition(
@@ -737,7 +794,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         hideBottomSheet();
         binding.nearbyFilter.searchViewLayout.searchView.setOnQueryTextFocusChangeListener(
             (v, hasFocus) -> {
-                LayoutUtils.setLayoutHeightAllignedToWidth(1.25,
+                LayoutUtils.setLayoutHeightAlignedToWidth(1.25,
                     binding.nearbyFilterList.getRoot());
                 if (hasFocus) {
                     binding.nearbyFilterList.getRoot().setVisibility(View.VISIBLE);
@@ -778,7 +835,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             .getLayoutParams().width = (int) LayoutUtils.getScreenWidth(getActivity(),
             0.75);
         binding.nearbyFilterList.searchListView.setAdapter(nearbyFilterSearchRecyclerViewAdapter);
-        LayoutUtils.setLayoutHeightAllignedToWidth(1.25, binding.nearbyFilterList.getRoot());
+        LayoutUtils.setLayoutHeightAlignedToWidth(1.25, binding.nearbyFilterList.getRoot());
         compositeDisposable.add(
             RxSearchView.queryTextChanges(binding.nearbyFilter.searchViewLayout.searchView)
                 .takeUntil(RxView.detaches(binding.nearbyFilter.searchViewLayout.searchView))
@@ -910,6 +967,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                 lastPlaceToCenter.location.getLatitude() - cameraShift,
                 lastPlaceToCenter.getLocation().getLongitude(), 0));
         }
+        highlightNearestPlace(place);
     }
 
 
@@ -1113,6 +1171,48 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         if (recenterToUserLocation) {
             recenterToUserLocation = false;
         }
+    }
+
+    /**
+     *  Reloads the Nearby map
+     *  Clears all location markers, refreshes them, reinserts them into the map.
+     *
+     */
+    private void reloadMap() {
+        clearAllMarkers(); // Clear the list of markers
+        binding.map.getController().setZoom(ZOOM_LEVEL); // Reset the zoom level
+        binding.map.getController().setCenter(lastMapFocus); // Recenter the focus
+        if (locationPermissionsHelper.checkLocationPermission(getActivity())) {
+            locationPermissionGranted(); // Reload map with user's location
+        } else {
+            startMapWithoutPermission(); // Reload map without user's location
+        }
+        binding.map.invalidate(); // Invalidate the map
+        presenter.updateMapAndList(LOCATION_SIGNIFICANTLY_CHANGED); // Restart the map
+        Timber.d("Reloaded Map Successfully");
+    }
+
+
+    /**
+     * Clears the Nearby local cache and then calls for the map to be reloaded
+     *
+     */
+    private void emptyCache() {
+        // reload the map once the cache is cleared
+        compositeDisposable.add(
+            placesRepository.clearCache()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .andThen(Completable.fromAction(this::reloadMap))
+                .subscribe(
+                    () -> {
+                        Timber.d("Nearby Cache cleared successfully.");
+                    },
+                    throwable -> {
+                        Timber.e(throwable, "Failed to clear the Nearby Cache");
+                    }
+                )
+        );
     }
 
     private void savePlacesAsKML() {
@@ -1904,7 +2004,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
      *
      * @param nearestPlace nearest place, which has to be highlighted
      */
-    private void highlightNearestPlace(Place nearestPlace) {
+    private void highlightNearestPlace(final Place nearestPlace) {
+        binding.bottomSheetDetails.icon.setVisibility(View.VISIBLE);
         passInfoToSheet(nearestPlace);
         hideBottomSheet();
         bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
@@ -1918,32 +2019,37 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
      * @return returns the drawable of marker according to the place information
      */
     private @DrawableRes int getIconFor(Place place, Boolean isBookmarked) {
-        if (nearestPlace != null) {
-            if (place.name.equals(nearestPlace.name)) {
-                // Highlight nearest place only when user clicks on the home nearby banner
-                highlightNearestPlace(place);
-                return (isBookmarked ?
-                    R.drawable.ic_custom_map_marker_purple_bookmarked :
-                    R.drawable.ic_custom_map_marker_purple);
-            }
+        if (nearestPlace != null && place.name.equals(nearestPlace.name)) {
+            // Highlight nearest place only when user clicks on the home nearby banner
+//            highlightNearestPlace(place);
+            return (isBookmarked ?
+                R.drawable.ic_custom_map_marker_purple_bookmarked :
+                R.drawable.ic_custom_map_marker_purple
+            );
         }
+
         if (place.isMonument()) {
             return R.drawable.ic_custom_map_marker_monuments;
-        } else if (!place.pic.trim().isEmpty()) {
+        }
+        if (!place.pic.trim().isEmpty()) {
             return (isBookmarked ?
                 R.drawable.ic_custom_map_marker_green_bookmarked :
-                R.drawable.ic_custom_map_marker_green);
-        } else if (!place.exists) { // Means that the topic of the Wikidata item does not exist in the real world anymore, for instance it is a past event, or a place that was destroyed
+                R.drawable.ic_custom_map_marker_green
+            );
+        }
+        if (!place.exists) { // Means that the topic of the Wikidata item does not exist in the real world anymore, for instance it is a past event, or a place that was destroyed
             return (R.drawable.ic_clear_black_24dp);
-        }else if (place.name == "") {
+        }
+        if (place.name.isEmpty()) {
             return (isBookmarked ?
                 R.drawable.ic_custom_map_marker_grey_bookmarked :
-                R.drawable.ic_custom_map_marker_grey);
-        } else {
-            return (isBookmarked ?
-                R.drawable.ic_custom_map_marker_red_bookmarked :
-                R.drawable.ic_custom_map_marker_red);
+                R.drawable.ic_custom_map_marker_grey
+            );
         }
+        return (isBookmarked ?
+            R.drawable.ic_custom_map_marker_red_bookmarked :
+            R.drawable.ic_custom_map_marker_red
+        );
     }
 
     /**
@@ -2186,7 +2292,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             if (binding.fabCamera.isShown()) {
                 Timber.d("Camera button tapped. Place: %s", selectedPlace.toString());
                 storeSharedPrefs(selectedPlace);
-                controller.initiateCameraPick(getActivity(), inAppCameraLocationPermissionLauncher);
+                controller.initiateCameraPick(getActivity(), inAppCameraLocationPermissionLauncher, cameraPickLauncherForResult);
             }
         });
 
@@ -2195,6 +2301,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                 Timber.d("Gallery button tapped. Place: %s", selectedPlace.toString());
                 storeSharedPrefs(selectedPlace);
                 controller.initiateGalleryPick(getActivity(),
+                    galleryPickLauncherForResult,
                     false);
             }
         });
@@ -2203,7 +2310,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             if (binding.fabCustomGallery.isShown()) {
                 Timber.d("Gallery button tapped. Place: %s", selectedPlace.toString());
                 storeSharedPrefs(selectedPlace);
-                controller.initiateCustomGalleryPickWithPermission(getActivity());
+                controller.initiateCustomGalleryPickWithPermission(getActivity(), customSelectorLauncherForResult);
             }
         });
     }

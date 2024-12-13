@@ -10,6 +10,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import fr.free.nrw.commons.CommonsApplication
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.contributions.Contribution
+import fr.free.nrw.commons.contributions.Contribution.Companion.STATE_IN_PROGRESS
+import fr.free.nrw.commons.contributions.Contribution.Companion.STATE_PAUSED
+import fr.free.nrw.commons.contributions.Contribution.Companion.STATE_QUEUED
 import fr.free.nrw.commons.databinding.FragmentPendingUploadsBinding
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment
 import fr.free.nrw.commons.utils.DialogUtil.showAlertDialog
@@ -35,7 +38,8 @@ class PendingUploadsFragment :
     private lateinit var adapter: PendingUploadsAdapter
 
     private var contributionsSize = 0
-    var contributionsList = ArrayList<Contribution>()
+
+    private var contributionsList = mutableListOf<Contribution>()
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -48,7 +52,7 @@ class PendingUploadsFragment :
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View? {
+    ): View {
         super.onCreate(savedInstanceState)
         binding = FragmentPendingUploadsBinding.inflate(inflater, container, false)
         pendingUploadsPresenter.onAttachView(this)
@@ -71,27 +75,24 @@ class PendingUploadsFragment :
     /**
      * Initializes the recycler view.
      */
-    fun initRecyclerView() {
+    private fun initRecyclerView() {
         binding.pendingUploadsRecyclerView.setLayoutManager(LinearLayoutManager(this.context))
         binding.pendingUploadsRecyclerView.adapter = adapter
-        pendingUploadsPresenter!!.setup()
-        pendingUploadsPresenter!!.totalContributionList.observe(
-            viewLifecycleOwner,
-        ) { list: PagedList<Contribution?> ->
+        pendingUploadsPresenter.setup()
+        pendingUploadsPresenter.totalContributionList
+            .observe(viewLifecycleOwner) { list: PagedList<Contribution> ->
             contributionsSize = list.size
-            contributionsList = ArrayList()
+            contributionsList = mutableListOf()
             var pausedOrQueuedUploads = 0
             list.forEach {
                 if (it != null) {
-                    if (it.state == Contribution.STATE_PAUSED ||
-                        it.state == Contribution.STATE_QUEUED ||
-                        it.state == Contribution.STATE_IN_PROGRESS
+                    if (it.state == STATE_PAUSED ||
+                        it.state == STATE_QUEUED ||
+                        it.state == STATE_IN_PROGRESS
                     ) {
                         contributionsList.add(it)
                     }
-                    if (it.state == Contribution.STATE_PAUSED ||
-                        it.state == Contribution.STATE_QUEUED
-                    ) {
+                    if (it.state == STATE_PAUSED || it.state == STATE_QUEUED) {
                         pausedOrQueuedUploads++
                     }
                 }
@@ -104,7 +105,7 @@ class PendingUploadsFragment :
                 binding.nopendingTextView.visibility = View.GONE
                 binding.pendingUplaodsLl.visibility = View.VISIBLE
                 adapter.submitList(list)
-                binding.progressTextView.setText(contributionsSize.toString() + " uploads left")
+                binding.progressTextView.setText("$contributionsSize uploads left")
                 if ((pausedOrQueuedUploads == contributionsSize) || CommonsApplication.isPaused) {
                     uploadProgressActivity.setPausedIcon(true)
                 } else {
@@ -119,25 +120,20 @@ class PendingUploadsFragment :
      * And if the deleted upload is the last one, will set app off paused, allowing a fresh new start for future uploads.
      */
     override fun deleteUpload(contribution: Contribution?) {
+        val activity = requireActivity()
+        val locale = Locale.getDefault()
         showAlertDialog(
-            requireActivity(),
-            String.format(
-                Locale.getDefault(),
-                requireActivity().getString(R.string.cancelling_upload),
-            ),
-            String.format(
-                Locale.getDefault(),
-                requireActivity().getString(R.string.cancel_upload_dialog),
-            ),
-            String.format(Locale.getDefault(), requireActivity().getString(R.string.yes)),
-            String.format(Locale.getDefault(), requireActivity().getString(R.string.no)),
+            activity,
+            String.format(locale, activity.getString(R.string.cancelling_upload)),
+            String.format(locale, activity.getString(R.string.cancel_upload_dialog)),
+            String.format(locale, activity.getString(R.string.yes)),
+            String.format(locale, activity.getString(R.string.no)),
             {
                 if(contributionsList.size== 1)
                 {CommonsApplication.isPaused = false}
                 ViewUtil.showShortToast(context, R.string.cancelling_upload)
                 pendingUploadsPresenter.deleteUpload(
-                    contribution,
-                    this.requireContext().applicationContext,
+                    contribution, requireContext().applicationContext,
                 )
             },
             {},
@@ -147,47 +143,35 @@ class PendingUploadsFragment :
     /**
      * Restarts all the paused uploads.
      */
-    fun restartUploads() {
-        if (contributionsList != null) {
-            pendingUploadsPresenter.restartUploads(
-                contributionsList,
-                0,
-                this.requireContext().applicationContext,
-            )
-        }
-    }
+    fun restartUploads() = pendingUploadsPresenter.restartUploads(
+        contributionsList, 0, requireContext().applicationContext
+    )
 
     /**
      * Pauses all the ongoing uploads.
      */
-    fun pauseUploads() {
-        pendingUploadsPresenter.pauseUploads()
-    }
+    fun pauseUploads() = pendingUploadsPresenter.pauseUploads()
 
     /**
      * Cancels all the uploads after getting a confirmation from the user using Dialog.
      */
     fun deleteUploads() {
+        val activity = requireActivity()
+        val locale = Locale.getDefault()
         showAlertDialog(
-            requireActivity(),
-            String.format(
-                Locale.getDefault(),
-                requireActivity().getString(R.string.cancelling_all_the_uploads),
-            ),
-            String.format(
-                Locale.getDefault(),
-                requireActivity().getString(R.string.are_you_sure_that_you_want_cancel_all_the_uploads),
-            ),
-            String.format(Locale.getDefault(), requireActivity().getString(R.string.yes)),
-            String.format(Locale.getDefault(), requireActivity().getString(R.string.no)),
+            activity,
+            String.format(locale, activity.getString(R.string.cancelling_all_the_uploads)),
+            String.format(locale, activity.getString(R.string.are_you_sure_that_you_want_cancel_all_the_uploads)),
+            String.format(locale, activity.getString(R.string.yes)),
+            String.format(locale, activity.getString(R.string.no)),
             {
                 ViewUtil.showShortToast(context, R.string.cancelling_upload)
                 uploadProgressActivity.hidePendingIcons()
                 pendingUploadsPresenter.deleteUploads(
                     listOf(
-                        Contribution.STATE_QUEUED,
-                        Contribution.STATE_IN_PROGRESS,
-                        Contribution.STATE_PAUSED,
+                        STATE_QUEUED,
+                        STATE_IN_PROGRESS,
+                        STATE_PAUSED,
                     ),
                 )
             },

@@ -375,7 +375,7 @@
   <string name="statistics_thanks">Prejete zahvale</string>
   <string name="statistics_featured">Izbrane slike</string>
   <string name="statistics_wikidata_edits">Slike iz »Bližnji kraji«</string>
-  <string name="level">Raven</string>
+  <string name="level" fuzzy="true">Raven</string>
   <string name="images_uploaded">Naložene slike</string>
   <string name="image_reverts">Nevrnjene slike</string>
   <string name="images_used_by_wiki">Uporabljene slike</string>

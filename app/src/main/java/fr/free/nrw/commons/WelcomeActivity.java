@@ -50,6 +50,7 @@ public class WelcomeActivity extends BaseActivity {
             copyrightBinding = PopupForCopyrightBinding.inflate(getLayoutInflater());
             final View contactPopupView = copyrightBinding.getRoot();
             dialogBuilder.setView(contactPopupView);
+            dialogBuilder.setCancelable(false);
             dialog = dialogBuilder.create();
             dialog.show();
 

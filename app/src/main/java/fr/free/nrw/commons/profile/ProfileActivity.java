@@ -16,7 +16,6 @@ import androidx.annotation.NonNull;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import com.google.android.material.tabs.TabLayout;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.ViewPagerAdapter;
@@ -32,6 +31,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import javax.inject.Inject;
 
 /**
@@ -139,14 +139,14 @@ public class ProfileActivity extends BaseActivity {
         leaderboardFragment.setArguments(leaderBoardBundle);
 
         fragmentList.add(leaderboardFragment);
-        titleList.add(getResources().getString(R.string.leaderboard_tab_title).toUpperCase());
+        titleList.add(getResources().getString(R.string.leaderboard_tab_title).toUpperCase(Locale.ROOT));
 
         contributionsFragment = new ContributionsFragment();
         Bundle contributionsListBundle = new Bundle();
         contributionsListBundle.putString(KEY_USERNAME, userName);
         contributionsFragment.setArguments(contributionsListBundle);
         fragmentList.add(contributionsFragment);
-        titleList.add(getString(R.string.contributions_fragment).toUpperCase());
+        titleList.add(getString(R.string.contributions_fragment).toUpperCase(Locale.ROOT));
 
         viewPagerAdapter.setTabData(fragmentList, titleList);
         viewPagerAdapter.notifyDataSetChanged();
@@ -156,7 +156,7 @@ public class ProfileActivity extends BaseActivity {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        compositeDisposable.clear();
+        getCompositeDisposable().clear();
     }
 
     /**
@@ -206,8 +206,8 @@ public class ProfileActivity extends BaseActivity {
             getString(R.string.cancel),
             () -> shareScreen(screenshot),
             () -> {},
-            view,
-            true);
+            view
+        );
     }
 
     /**

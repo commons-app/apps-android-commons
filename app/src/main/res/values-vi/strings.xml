@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
 * Bluetpp
+* Băng Tỏa
 * Caden99
 * Harriettruong3
 * Keo010122
@@ -24,6 +25,7 @@
   <string name="commons_github">Mã nguồn Commons tại GitHub</string>
   <string name="commons_logo">Biểu trưng Commons</string>
   <string name="commons_website">Trang Web Commons</string>
+  <string name="add_another_description">Thêm mô tả</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">%1$d tập tin đang được tải lên</item>
     <item quantity="other">%1$d tập tin đang được tải lên</item>

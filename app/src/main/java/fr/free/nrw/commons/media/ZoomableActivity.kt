@@ -196,6 +196,7 @@ class ZoomableActivity : BaseActivity() {
         val dialog = Dialog(this)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setContentView(R.layout.full_screen_mode_info_dialog)
+        dialog.setCancelable(false)
         (dialog.findViewById(R.id.btn_ok) as Button).setOnClickListener { dialog.dismiss() }
         dialog.show()
     }
@@ -219,7 +220,7 @@ class ZoomableActivity : BaseActivity() {
                 onSwipe()
             }
         }
-        binding.zoomProgressBar?.let {
+        binding.zoomProgressBar.let {
             it.visibility = if (result.status is CallbackStatus.FETCHING) View.VISIBLE else View.GONE
         }
     }
@@ -234,7 +235,7 @@ class ZoomableActivity : BaseActivity() {
             sharedPreferences.getBoolean(ImageHelper.SHOW_ALREADY_ACTIONED_IMAGES_PREFERENCE_KEY, true)
 
         if (!images.isNullOrEmpty()) {
-            binding.zoomable!!.setOnTouchListener(
+            binding.zoomable.setOnTouchListener(
                 object : OnSwipeTouchListener(this) {
                     // Swipe left to view next image in the folder. (if available)
                     override fun onSwipeLeft() {
@@ -271,7 +272,7 @@ class ZoomableActivity : BaseActivity() {
      * Handles down swipe action
      */
     private fun onDownSwiped() {
-        if (binding.zoomable?.zoomableController?.isIdentity == false) {
+        if (binding.zoomable.zoomableController?.isIdentity == false) {
             return
         }
 
@@ -341,7 +342,7 @@ class ZoomableActivity : BaseActivity() {
      * Handles up swipe action
      */
     private fun onUpSwiped() {
-        if (binding.zoomable?.zoomableController?.isIdentity == false) {
+        if (binding.zoomable.zoomableController?.isIdentity == false) {
             return
         }
 
@@ -414,7 +415,7 @@ class ZoomableActivity : BaseActivity() {
      * Handles right swipe action
      */
     private fun onRightSwiped(showAlreadyActionedImages: Boolean) {
-        if (binding.zoomable?.zoomableController?.isIdentity == false) {
+        if (binding.zoomable.zoomableController?.isIdentity == false) {
             return
         }
 
@@ -451,7 +452,7 @@ class ZoomableActivity : BaseActivity() {
      * Handles left swipe action
      */
     private fun onLeftSwiped(showAlreadyActionedImages: Boolean) {
-        if (binding.zoomable?.zoomableController?.isIdentity == false) {
+        if (binding.zoomable.zoomableController?.isIdentity == false) {
             return
         }
 
@@ -646,7 +647,7 @@ class ZoomableActivity : BaseActivity() {
                     .setProgressBarImage(ProgressBarDrawable())
                     .setProgressBarImageScaleType(ScalingUtils.ScaleType.FIT_CENTER)
                     .build()
-            with(binding.zoomable!!) {
+            with(binding.zoomable) {
                 setHierarchy(hierarchy)
                 setAllowTouchInterceptionWhileZoomed(true)
                 setIsLongpressEnabled(false)
@@ -658,10 +659,10 @@ class ZoomableActivity : BaseActivity() {
                     .setUri(imageUri)
                     .setControllerListener(loadingListener)
                     .build()
-            binding.zoomable!!.controller = controller
+            binding.zoomable.controller = controller
 
             if (photoBackgroundColor != null) {
-                binding.zoomable!!.setBackgroundColor(photoBackgroundColor!!)
+                binding.zoomable.setBackgroundColor(photoBackgroundColor!!)
             }
 
             if (!images.isNullOrEmpty()) {

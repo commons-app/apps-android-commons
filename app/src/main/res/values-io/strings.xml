@@ -358,7 +358,7 @@
   <string name="statistics_thanks">Danki recevita</string>
   <string name="statistics_featured">Remarkinda imaji</string>
   <string name="statistics_wikidata_edits">Imaji tra \"Loki Vicina\"</string>
-  <string name="level">Nivelo</string>
+  <string name="level" fuzzy="true">Nivelo</string>
   <string name="images_uploaded">Imaji sendita</string>
   <string name="image_reverts">Imaji ne reversionita</string>
   <string name="images_used_by_wiki">Imaji uzita</string>
@@ -525,6 +525,7 @@
   <string name="learn_more">SAVEZ PLUSE</string>
   <string name="need_permission">Bezonas permiso</string>
   <string name="menu_view_user_page" fuzzy="true">Vidar uzeropagino</string>
+  <string name="no_location_found_message">Ka vu deziras informar la loko de ube vu obtenis ca imajo?\nInformo pri la lokizo helpos editeri trovar vua imajo, do ol divenos plu utila.\nDanko!</string>
   <string name="image_selected">Imajo selektita</string>
   <string name="image_marked_as_not_for_upload">Ca imajo indikesis por ne sendesar</string>
   <string name="menu_view_report">Raporto</string>

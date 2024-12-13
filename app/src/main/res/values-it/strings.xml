@@ -375,11 +375,13 @@
   <string name="delete">Cancella</string>
   <string name="Achievements">Risultati</string>
   <string name="Profile">Profilo</string>
+  <string name="badges">Distintivi</string>
   <string name="statistics">Statistiche</string>
   <string name="statistics_thanks">Ringraziamenti ricevuti</string>
   <string name="statistics_featured">Immagini in evidenza</string>
   <string name="statistics_wikidata_edits">Immagini tramite \"Luoghi nelle vicinanze\"</string>
-  <string name="level">Livello</string>
+  <string name="level">Livello %d</string>
+  <string name="profileLevel">%s (Livello %s)</string>
   <string name="images_uploaded">Immagini caricate</string>
   <string name="image_reverts">Immagini non ripristinate</string>
   <string name="images_used_by_wiki">Immagini utilizzate</string>
@@ -760,4 +762,15 @@
     <item quantity="one">%d immagine selezionata</item>
     <item quantity="other">%d immagini selezionate</item>
   </plurals>
+  <string name="custom_selector_delete_folder">Cancella cartella</string>
+  <string name="custom_selector_confirm_deletion_title">Conferma cancellazione</string>
+  <string name="custom_selector_delete">Cancella</string>
+  <string name="custom_selector_cancel">Annulla</string>
+  <string name="custom_selector_folder_deleted_success">Cartella %1$s cancellata correttamente</string>
+  <string name="red_pin">Questo posto non ha ancora una foto, scattane una!</string>
+  <string name="green_pin">Questo posto ha già una foto.</string>
+  <string name="grey_pin">Ora controlliamo se questo posto ha una foto.</string>
+  <string name="usages_on_commons_heading">Commons</string>
+  <string name="usages_on_other_wikis_heading">Altri wiki</string>
+  <string name="file_usages_container_heading">Utilizzi del file</string>
 </resources>

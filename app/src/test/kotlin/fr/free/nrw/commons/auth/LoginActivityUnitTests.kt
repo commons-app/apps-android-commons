@@ -16,6 +16,7 @@ import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.auth.login.LoginResult
 import fr.free.nrw.commons.createTestClient
 import fr.free.nrw.commons.kvstore.JsonKvStore
+import io.mockk.mockk
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
@@ -66,11 +67,11 @@ class LoginActivityUnitTests {
     @Mock
     private lateinit var account: Account
 
-    @Mock
     private lateinit var loginResult: LoginResult
 
     @Before
     fun setUp() {
+        loginResult = mockk()
         MockitoAnnotations.openMocks(this)
         OkHttpConnectionFactory.CLIENT = createTestClient()
         activity = Robolectric.buildActivity(LoginActivity::class.java).create().get()
@@ -212,17 +213,6 @@ class LoginActivityUnitTests {
         val method: Method =
             LoginActivity::class.java.getDeclaredMethod(
                 "showPasswordResetPrompt",
-            )
-        method.isAccessible = true
-        method.invoke(activity)
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun testHideProgress() {
-        val method: Method =
-            LoginActivity::class.java.getDeclaredMethod(
-                "hideProgress",
             )
         method.isAccessible = true
         method.invoke(activity)

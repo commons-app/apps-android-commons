@@ -114,7 +114,7 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
         setDepictsSubTitle();
         binding.tooltip.setOnClickListener(v -> DialogUtil
             .showAlertDialog(getActivity(), getString(R.string.depicts_step_title),
-                getString(R.string.depicts_tooltip), getString(android.R.string.ok), null, true));
+                getString(R.string.depicts_tooltip), getString(android.R.string.ok), null));
         if (media == null) {
             presenter.onAttachView(this);
         } else {
@@ -218,7 +218,7 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
     }
 
     @Override
-    public void showError(Boolean value) {
+    public void showError(boolean value) {
         if (binding == null) {
             return;
         }
@@ -398,7 +398,7 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
                 return false;
             });
 
-            Objects.requireNonNull(getView()).setFocusableInTouchMode(true);
+            requireView().setFocusableInTouchMode(true);
             getView().requestFocus();
             getView().setOnKeyListener((v, keyCode, event) -> {
                 if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK) {
@@ -411,7 +411,7 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
             });
 
             Objects.requireNonNull(
-                ((AppCompatActivity) Objects.requireNonNull(getActivity())).getSupportActionBar())
+                ((AppCompatActivity) requireActivity()).getSupportActionBar())
                 .hide();
 
             if (getParentFragment().getParentFragment().getParentFragment()
@@ -431,7 +431,7 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
         super.onStop();
         if (media != null) {
             Objects.requireNonNull(
-                ((AppCompatActivity) Objects.requireNonNull(getActivity())).getSupportActionBar())
+                ((AppCompatActivity) requireActivity()).getSupportActionBar())
                 .show();
         }
     }

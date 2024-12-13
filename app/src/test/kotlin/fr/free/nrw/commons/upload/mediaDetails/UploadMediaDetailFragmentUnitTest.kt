@@ -11,6 +11,7 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.activity.result.ActivityResult
 import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.AppCompatImageButton
 import androidx.fragment.app.FragmentManager
@@ -20,8 +21,8 @@ import androidx.test.core.app.ApplicationProvider
 import com.github.chrisbanes.photoview.PhotoView
 import com.nhaarman.mockitokotlin2.mock
 import fr.free.nrw.commons.CameraPosition
-import fr.free.nrw.commons.LocationPicker.LocationPicker
-import fr.free.nrw.commons.LocationPicker.LocationPickerActivity
+import fr.free.nrw.commons.locationpicker.LocationPicker
+import fr.free.nrw.commons.locationpicker.LocationPickerActivity
 import fr.free.nrw.commons.OkHttpConnectionFactory
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestCommonsApplication
@@ -348,7 +349,7 @@ class UploadMediaDetailFragmentUnitTest {
 
     @Test
     @Throws(Exception::class)
-    fun testOnActivityResultOnMapIconClicked() {
+    fun testOnCameraPositionCallbackOnMapIconClicked() {
         shadowOf(Looper.getMainLooper()).idle()
         Mockito.mock(LocationPicker::class.java)
         val intent = Mockito.mock(Intent::class.java)
@@ -363,13 +364,18 @@ class UploadMediaDetailFragmentUnitTest {
         `when`(latLng.latitude).thenReturn(0.0)
         `when`(latLng.longitude).thenReturn(0.0)
         `when`(uploadItem.gpsCoords).thenReturn(imageCoordinates)
-        fragment.onActivityResult(1211, Activity.RESULT_OK, intent)
+        val activityResult = ActivityResult(Activity.RESULT_OK, intent)
+
+        val handleResultMethod = UploadMediaDetailFragment::class.java.getDeclaredMethod("onCameraPosition", ActivityResult::class.java)
+        handleResultMethod.isAccessible = true
+
+        handleResultMethod.invoke(fragment, activityResult)
         Mockito.verify(presenter, Mockito.times(0)).getImageQuality(0, location, activity)
     }
 
     @Test
     @Throws(Exception::class)
-    fun testOnActivityResultAddLocationDialog() {
+    fun testOnCameraPositionCallbackAddLocationDialog() {
         shadowOf(Looper.getMainLooper()).idle()
         Mockito.mock(LocationPicker::class.java)
         val intent = Mockito.mock(Intent::class.java)
@@ -387,7 +393,13 @@ class UploadMediaDetailFragmentUnitTest {
         `when`(latLng.latitude).thenReturn(0.0)
         `when`(latLng.longitude).thenReturn(0.0)
         `when`(uploadItem.gpsCoords).thenReturn(imageCoordinates)
-        fragment.onActivityResult(1211, Activity.RESULT_OK, intent)
+
+        val activityResult = ActivityResult(Activity.RESULT_OK,intent)
+
+        val handleResultMethod = UploadMediaDetailFragment::class.java.getDeclaredMethod("onCameraPosition", ActivityResult::class.java)
+        handleResultMethod.isAccessible = true
+
+        handleResultMethod.invoke(fragment, activityResult)
         Mockito.verify(presenter, Mockito.times(1)).displayLocDialog(0, null, false)
     }
 

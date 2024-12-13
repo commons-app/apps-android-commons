@@ -6,7 +6,8 @@ import androidx.lifecycle.MutableLiveData
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.auth.csrf.InvalidLoginTokenException
 import fr.free.nrw.commons.bookmarks.items.BookmarkItemsController
-import fr.free.nrw.commons.di.CommonsApplicationModule
+import fr.free.nrw.commons.di.CommonsApplicationModule.Companion.IO_THREAD
+import fr.free.nrw.commons.di.CommonsApplicationModule.Companion.MAIN_THREAD
 import fr.free.nrw.commons.repository.UploadRepository
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
 import fr.free.nrw.commons.wikidata.WikidataDisambiguationItems
@@ -31,8 +32,8 @@ class DepictsPresenter
     @Inject
     constructor(
         private val repository: UploadRepository,
-        @param:Named(CommonsApplicationModule.IO_THREAD) private val ioScheduler: Scheduler,
-        @param:Named(CommonsApplicationModule.MAIN_THREAD) private val mainThreadScheduler: Scheduler,
+        @param:Named(IO_THREAD) private val ioScheduler: Scheduler,
+        @param:Named(MAIN_THREAD) private val mainThreadScheduler: Scheduler,
     ) : DepictsContract.UserActionListener {
         companion object {
             private val DUMMY = proxy<DepictsContract.View>()
@@ -93,14 +94,14 @@ class DepictsPresenter
                 return repository
                     .searchAllEntities(querystring)
                     .subscribeOn(ioScheduler)
-                    .map { repository.selectedDepictions + it + recentDepictedItemList + controller.loadFavoritesItems() }
+                    .map { repository.getSelectedDepictions() + it + recentDepictedItemList + controller.loadFavoritesItems() }
                     .map { it.filterNot { item -> WikidataDisambiguationItems.isDisambiguationItem(item.instanceOfs) } }
                     .map { it.distinctBy(DepictedItem::id) }
             } else {
                 return Flowable
                     .zip(
                         repository
-                            .getDepictions(repository.selectedExistingDepictions)
+                            .getDepictions(repository.getSelectedExistingDepictions())
                             .map { list ->
                                 list.map {
                                     DepictedItem(
@@ -118,7 +119,7 @@ class DepictsPresenter
                     ) { it1, it2 ->
                         it1 + it2
                     }.subscribeOn(ioScheduler)
-                    .map { repository.selectedDepictions + it + recentDepictedItemList + controller.loadFavoritesItems() }
+                    .map { repository.getSelectedDepictions() + it + recentDepictedItemList + controller.loadFavoritesItems() }
                     .map { it.filterNot { item -> WikidataDisambiguationItems.isDisambiguationItem(item.instanceOfs) } }
                     .map { it.distinctBy(DepictedItem::id) }
             }
@@ -135,7 +136,7 @@ class DepictsPresenter
          */
         override fun selectPlaceDepictions() {
             compositeDisposable.add(
-                repository.placeDepictions
+                repository.getPlaceDepictions()
                     .subscribeOn(ioScheduler)
                     .observeOn(mainThreadScheduler)
                     .subscribe(::selectNewDepictions),
@@ -188,10 +189,10 @@ class DepictsPresenter
          * from the depiction list
          */
         override fun verifyDepictions() {
-            if (repository.selectedDepictions.isNotEmpty()) {
+            if (repository.getSelectedDepictions().isNotEmpty()) {
                 if (::depictsDao.isInitialized) {
                     // save all the selected Depicted item in room Database
-                    depictsDao.savingDepictsInRoomDataBase(repository.selectedDepictions)
+                    depictsDao.savingDepictsInRoomDataBase(repository.getSelectedDepictions())
                 }
                 view.goToNextScreen()
             } else {
@@ -205,25 +206,25 @@ class DepictsPresenter
          */
         @SuppressLint("CheckResult")
         override fun updateDepictions(media: Media) {
-            if (repository.selectedDepictions.isNotEmpty() ||
-                repository.selectedExistingDepictions.size != view.existingDepictions.size
+            if (repository.getSelectedDepictions().isNotEmpty() ||
+                repository.getSelectedExistingDepictions().size != view.getExistingDepictions()?.size
             ) {
                 view.showProgressDialog()
                 val selectedDepictions: MutableList<String> =
                     (
-                        repository.selectedDepictions.map { it.id }.toMutableList() +
-                            repository.selectedExistingDepictions
+                        repository.getSelectedDepictions().map { it.id }.toMutableList() +
+                            repository.getSelectedExistingDepictions()
                     ).toMutableList()
 
                 if (selectedDepictions.isNotEmpty()) {
                     if (::depictsDao.isInitialized) {
                         // save all the selected Depicted item in room Database
-                        depictsDao.savingDepictsInRoomDataBase(repository.selectedDepictions)
+                        depictsDao.savingDepictsInRoomDataBase(repository.getSelectedDepictions())
                     }
 
                     compositeDisposable.add(
                         depictsHelper
-                            .makeDepictionEdit(view.fragmentContext, media, selectedDepictions)
+                            .makeDepictionEdit(view.getFragmentContext(), media, selectedDepictions)
                             .subscribeOn(Schedulers.io())
                             .observeOn(AndroidSchedulers.mainThread())
                             .subscribe({
@@ -254,7 +255,7 @@ class DepictsPresenter
         ) {
             this.view = view
             this.media = media
-            repository.selectedExistingDepictions = view.existingDepictions
+            repository.setSelectedExistingDepictions(view.getExistingDepictions() ?: emptyList())
             compositeDisposable.add(
                 searchTerm
                     .observeOn(mainThreadScheduler)

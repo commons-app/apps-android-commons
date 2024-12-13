@@ -354,4 +354,7 @@
   <string name="uploads">अपलोड</string>
   <string name="pending">लंबित</string>
   <string name="failed">विफल हुआ</string>
+  <string name="custom_selector_delete_folder">फ़ोल्डर हटाएँ</string>
+  <string name="custom_selector_delete">हटाएँ</string>
+  <string name="custom_selector_cancel">रद्द करें</string>
 </resources>

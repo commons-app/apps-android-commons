@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 import fr.free.nrw.commons.R;
+import java.util.Locale;
 
 public class NearbyFilterSearchRecyclerViewAdapter
         extends RecyclerView.Adapter<NearbyFilterSearchRecyclerViewAdapter.RecyclerViewHolder>
@@ -121,11 +122,11 @@ public class NearbyFilterSearchRecyclerViewAdapter
                     results.count = labels.size();
                     results.values = labels;
                 } else {
-                    constraint = constraint.toString().toLowerCase();
+                    constraint = constraint.toString().toLowerCase(Locale.ROOT);
 
                     for (Label label : labels) {
                         String data = label.toString();
-                        if (data.toLowerCase().startsWith(constraint.toString())) {
+                        if (data.toLowerCase(Locale.ROOT).startsWith(constraint.toString())) {
                             filteredArrayList.add(Label.fromText(label.getText()));
                         }
                     }

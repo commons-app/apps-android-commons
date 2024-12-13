@@ -119,6 +119,7 @@
   <string name="categories_search_text_hint">Пребарај категории</string>
   <string name="depicts_search_text_hint">Пребарајте ги предметите прикажани на сликата или снимката (планина, Лесновски манастир итн.)</string>
   <string name="menu_save_categories">Зачувај</string>
+  <string name="menu_overflow_desc">Преливно мени</string>
   <string name="refresh_button">Превчитај</string>
   <string name="display_list_button">Список</string>
   <string name="contributions_subtitle_zero">(Сè уште нема подигања)</string>
@@ -358,11 +359,13 @@
   <string name="delete">Избриши</string>
   <string name="Achievements">Достигнувања</string>
   <string name="Profile">Профил</string>
+  <string name="badges">Значки</string>
   <string name="statistics">Статистика</string>
   <string name="statistics_thanks">Примени благодарници</string>
   <string name="statistics_featured">Избрани слики</string>
   <string name="statistics_wikidata_edits">Слики преку „Околни места“</string>
-  <string name="level">Степен</string>
+  <string name="level">Степен %d</string>
+  <string name="profileLevel">%s (Степен %s)</string>
   <string name="images_uploaded">Подигнати слики</string>
   <string name="image_reverts">Неоткажани слики</string>
   <string name="images_used_by_wiki">Употребени слики</string>
@@ -475,6 +478,7 @@
   <string name="no_notification">Немате непрочитани известувања</string>
   <string name="no_read_notification">Немате прочитани известувања</string>
   <string name="share_logs_using">Споделувај дневници користејќи</string>
+  <string name="check_your_email_inbox">Проверете си ја дојдовната е-пошта</string>
   <string name="menu_option_read">Погл. прочитани</string>
   <string name="menu_option_unread">Погл. непрочитани</string>
   <string name="error_occurred_in_picking_images">Се јави грешка при избирањето на сликите</string>
@@ -651,7 +655,7 @@
   <string name="menu_view_category_page">Погл. категориска страница</string>
   <string name="menu_view_item_page">Погл. страница на предметот</string>
   <string name="app_ui_language">Јазик на прилогот</string>
-  <string name="remove">Острани толкување и опис</string>
+  <string name="remove">Отстрани толкување и опис</string>
   <string name="read_help_link">Прочитајте повеќе</string>
   <string name="media_detail_in_all_languages">На сите јазици</string>
   <string name="choose_a_location">Изберете местоположба</string>
@@ -784,4 +788,22 @@
   <string name="pending">Во исчекување</string>
   <string name="failed">Неуспешно</string>
   <string name="could_not_load_place_data">Не можев да ги вчитам податоците за место</string>
+  <string name="custom_selector_delete_folder">Избриши папка</string>
+  <string name="custom_selector_confirm_deletion_title">Потврдете бришење</string>
+  <string name="custom_selector_confirm_deletion_message">Дали сигурно сакате да ја избришете папката %1$s, која содржи %2$d ставки?</string>
+  <string name="custom_selector_delete">Избриши</string>
+  <string name="custom_selector_cancel">Откажи</string>
+  <string name="custom_selector_folder_deleted_success">Папката %1$s е успешно избришана</string>
+  <string name="custom_selector_folder_deleted_failure">Не успеав да ја избришам папката %1$s</string>
+  <string name="custom_selector_error_trashing_folder_contents">Не можев да ја префрлам содржината на папката во ѓубре: %1$s</string>
+  <string name="custom_selector_folder_not_found_error">Не успеав да ја добијам патеката на папката за групата со назнака: %1$d</string>
+  <string name="red_pin">Местово сè уште нема слика. Направете ја!</string>
+  <string name="green_pin">Местово веќе има слика.</string>
+  <string name="grey_pin">Проверувам дали местово има слика.</string>
+  <string name="error_while_loading">Грешка при вчитување</string>
+  <string name="no_usages_found">Не најдов употреби</string>
+  <string name="usages_on_commons_heading">Ризница</string>
+  <string name="usages_on_other_wikis_heading">Други викија</string>
+  <string name="bullet_point">•</string>
+  <string name="file_usages_container_heading">Употреби на податотеката</string>
 </resources>

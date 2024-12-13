@@ -8,14 +8,13 @@ import com.nhaarman.mockitokotlin2.anyOrNull
 import com.nhaarman.mockitokotlin2.argumentCaptor
 import com.nhaarman.mockitokotlin2.eq
 import com.nhaarman.mockitokotlin2.mock
-import com.nhaarman.mockitokotlin2.times
 import com.nhaarman.mockitokotlin2.whenever
-import fr.free.nrw.commons.CommonsApplication.DEFAULT_EDIT_SUMMARY
+import fr.free.nrw.commons.CommonsApplication.Companion.DEFAULT_EDIT_SUMMARY
 import fr.free.nrw.commons.auth.csrf.CsrfTokenClient
 import fr.free.nrw.commons.contributions.ChunkInfo
 import fr.free.nrw.commons.contributions.Contribution
 import fr.free.nrw.commons.contributions.ContributionDao
-import fr.free.nrw.commons.upload.UploadClient.TimeProvider
+import fr.free.nrw.commons.utils.TimeProvider
 import fr.free.nrw.commons.wikidata.mwapi.MwException
 import fr.free.nrw.commons.wikidata.mwapi.MwServiceError
 import io.reactivex.Observable

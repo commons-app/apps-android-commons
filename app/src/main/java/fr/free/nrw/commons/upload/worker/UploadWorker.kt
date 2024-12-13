@@ -41,12 +41,13 @@ import fr.free.nrw.commons.upload.UploadProgressActivity
 import fr.free.nrw.commons.upload.UploadResult
 import fr.free.nrw.commons.wikidata.WikidataEditService
 import io.reactivex.schedulers.Schedulers
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import timber.log.Timber
 import java.util.Date
+import java.util.Random
 import java.util.regex.Pattern
 import javax.inject.Inject
 
@@ -438,7 +439,7 @@ class UploadWorker(
                                 username,
                             )
                         CommonsApplication
-                            .getInstance()
+                            .instance!!
                             .clearApplicationData(appContext, logoutListener)
                     }
                 }
@@ -495,14 +496,14 @@ class UploadWorker(
 
                 withContext(Dispatchers.Main) {
                     wikidataEditService.handleImageClaimResult(
-                        contribution.wikidataPlace,
+                        contribution.wikidataPlace!!,
                         revisionID,
                     )
                 }
             } else {
                 withContext(Dispatchers.Main) {
                     wikidataEditService.handleImageClaimResult(
-                        contribution.wikidataPlace,
+                        contribution.wikidataPlace!!,
                         null,
                     )
                 }
@@ -534,7 +535,7 @@ class UploadWorker(
         contribution.contentUri?.let {
             val imageSha1 = contribution.imageSHA1.toString()
             val modifiedSha1 = fileUtilsWrapper.getSHA1(fileUtilsWrapper.getFileInputStream(contribution.localUri?.path))
-            MainScope().launch {
+            CoroutineScope(Dispatchers.IO).launch {
                 uploadedStatusDao.insertUploaded(
                     UploadedStatus(
                         imageSha1,
@@ -548,33 +549,30 @@ class UploadWorker(
     }
 
     private fun findUniqueFileName(fileName: String): String {
-        var sequenceFileName: String?
-        var sequenceNumber = 1
-        while (true) {
+        var sequenceFileName: String? = fileName
+        val random = Random()
+
+        // Loops until sequenceFileName does not match any existing file names
+        while (mediaClient
+                .checkPageExistsUsingTitle(
+                    String.format(
+                        "File:%s",
+                        sequenceFileName,
+                    ),
+                ).blockingGet()) {
+
+            // Generate a random 5-character alphanumeric string
+            val randomHash = (random.nextInt(90000) + 10000).toString()
+
             sequenceFileName =
-                if (sequenceNumber == 1) {
-                    fileName
+                if (fileName.indexOf('.') == -1) {
+                    "$fileName #$randomHash"
                 } else {
-                    if (fileName.indexOf('.') == -1) {
-                        "$fileName $sequenceNumber"
-                    } else {
-                        val regex =
-                            Pattern.compile("^(.*)(\\..+?)$")
-                        val regexMatcher = regex.matcher(fileName)
-                        regexMatcher.replaceAll("$1 $sequenceNumber$2")
-                    }
+                    val regex =
+                        Pattern.compile("^(.*)(\\..+?)$")
+                    val regexMatcher = regex.matcher(fileName)
+                    regexMatcher.replaceAll("$1 #$randomHash")
                 }
-            if (!mediaClient
-                    .checkPageExistsUsingTitle(
-                        String.format(
-                            "File:%s",
-                            sequenceFileName,
-                        ),
-                    ).blockingGet()
-            ) {
-                break
-            }
-            sequenceNumber++
         }
         return sequenceFileName!!
     }

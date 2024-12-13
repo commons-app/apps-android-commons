@@ -131,7 +131,7 @@
   <string name="login_failed_network">Aanmelden niet mogelijk. Er is een probleem met het netwerk</string>
   <string name="login_failed_throttled">Te veel mislukte pogingen. Probeer het over een paar minuten opnieuw.</string>
   <string name="login_failed_blocked">Deze gebruiker is helaas geblokkeerd op Wikimedia Commons</string>
-  <string name="login_failed_2fa_needed">U moet uw code voor tweefactor-authenticatie opgeven.</string>
+  <string name="login_failed_2fa_needed">U moet uw code voor tweetrapsauthenticatie opgeven.</string>
   <string name="login_failed_generic">Aanmelden mislukt</string>
   <string name="share_upload_button">Uploaden</string>
   <string name="multiple_share_base_title">Geef deze verzameling een naam</string>
@@ -140,6 +140,7 @@
   <string name="categories_search_text_hint">Categorieën zoeken</string>
   <string name="depicts_search_text_hint">Objecten zoeken die in uw bestand worden weergeven (berg, Taj Mahal, enz.)</string>
   <string name="menu_save_categories">Opslaan</string>
+  <string name="menu_overflow_desc">Overloopmenu</string>
   <string name="refresh_button">Vernieuwen</string>
   <string name="display_list_button">Lijst</string>
   <string name="contributions_subtitle_zero">(Nog geen uploads)</string>
@@ -379,11 +380,13 @@
   <string name="delete">Verwijderen</string>
   <string name="Achievements">Prestaties</string>
   <string name="Profile">Profiel</string>
+  <string name="badges">Badges</string>
   <string name="statistics">Statistieken</string>
   <string name="statistics_thanks">Ontvangen bedankjes</string>
   <string name="statistics_featured">Uitgelichte afbeeldingen</string>
   <string name="statistics_wikidata_edits">Afbeeldingen via \"Plaatsen in de buurt\"</string>
-  <string name="level">Niveau</string>
+  <string name="level">Niveau %d</string>
+  <string name="profileLevel">%s (Niveau %s)</string>
   <string name="images_uploaded">Geüploade afbeeldingen</string>
   <string name="image_reverts">Afbeeldingen niet teruggedraaid</string>
   <string name="images_used_by_wiki">Gebruikte afbeeldingen</string>
@@ -496,6 +499,7 @@
   <string name="no_notification">U heeft geen ongelezen meldingen</string>
   <string name="no_read_notification">U heeft geen gelezen meldingen</string>
   <string name="share_logs_using">Logboeken delen via</string>
+  <string name="check_your_email_inbox">Bekijk uw e-mailinbox</string>
   <string name="menu_option_read">Bekijk gelezen</string>
   <string name="menu_option_unread">Ongelezen bekijken</string>
   <string name="error_occurred_in_picking_images">Er is een fout opgetreden bij het kiezen van afbeeldingen</string>
@@ -805,4 +809,16 @@
   <string name="pending">In behandeling</string>
   <string name="failed">Mislukt</string>
   <string name="could_not_load_place_data">Plaatsgegevens konden niet geladen worden</string>
+  <string name="custom_selector_delete_folder">Map verwijderen</string>
+  <string name="custom_selector_confirm_deletion_title">Bevestig verwijdering</string>
+  <string name="custom_selector_confirm_deletion_message">Weet u zeker dat u de map %1$s met %2$d onderdelen wilt verwijderen?</string>
+  <string name="custom_selector_delete">Verwijderen</string>
+  <string name="custom_selector_cancel">Annuleren</string>
+  <string name="custom_selector_folder_deleted_success">De map %1$s is verwijderd</string>
+  <string name="custom_selector_folder_deleted_failure">Het is niet gelukt de map %1$s te verwijderen</string>
+  <string name="custom_selector_error_trashing_folder_contents">Fout bij het weggooien van de inhoud van de map: %1$s</string>
+  <string name="custom_selector_folder_not_found_error">Het is niet gelukt om het mappad voor bucket-ID %1$d op te halen</string>
+  <string name="red_pin">Er is nog geen foto van deze plek, maak er eentje!</string>
+  <string name="green_pin">Er is al een foto van deze plek.</string>
+  <string name="grey_pin">We controleren nu of er een foto van deze plek is.</string>
 </resources>
