@@ -3,7 +3,7 @@ package fr.free.nrw.commons.di
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 import fr.free.nrw.commons.AboutActivity
-import fr.free.nrw.commons.LocationPicker.LocationPickerActivity
+import fr.free.nrw.commons.locationpicker.LocationPickerActivity
 import fr.free.nrw.commons.WelcomeActivity
 import fr.free.nrw.commons.auth.LoginActivity
 import fr.free.nrw.commons.auth.SignupActivity

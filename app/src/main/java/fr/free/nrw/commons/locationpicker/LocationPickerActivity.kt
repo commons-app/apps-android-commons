@@ -1,4 +1,4 @@
-package fr.free.nrw.commons.LocationPicker
+package fr.free.nrw.commons.locationpicker
 
 import android.Manifest.permission
 import android.annotation.SuppressLint
@@ -8,8 +8,7 @@ import android.graphics.Color
 import android.graphics.Paint
 import android.location.LocationManager
 import android.os.Bundle
-import android.preference.PreferenceManager
-import android.text.Html
+import androidx.preference.PreferenceManager
 import android.text.method.LinkMovementMethod
 import android.view.MotionEvent
 import android.view.View
@@ -23,6 +22,9 @@ import androidx.appcompat.widget.AppCompatTextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.content.IntentCompat
+import androidx.core.os.BundleCompat
+import androidx.core.text.HtmlCompat
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import fr.free.nrw.commons.CameraPosition
 import fr.free.nrw.commons.CommonsApplication
@@ -181,13 +183,25 @@ class LocationPickerActivity : BaseActivity(), LocationPermissionCallback {
         setContentView(R.layout.activity_location_picker)
 
         if (savedInstanceState == null) {
-            cameraPosition = intent.getParcelableExtra(LocationPickerConstants.MAP_CAMERA_POSITION)
+            cameraPosition = IntentCompat.getParcelableExtra(
+                intent,
+                LocationPickerConstants.MAP_CAMERA_POSITION,
+                CameraPosition::class.java
+            )
             activity = intent.getStringExtra(LocationPickerConstants.ACTIVITY_KEY)
-            media = intent.getParcelableExtra(LocationPickerConstants.MEDIA)
+            media = IntentCompat.getParcelableExtra(
+                intent,
+                LocationPickerConstants.MEDIA,
+                Media::class.java
+            )
         } else {
-            cameraPosition = savedInstanceState.getParcelable(CAMERA_POS)
+            cameraPosition = BundleCompat.getParcelable(
+                savedInstanceState,
+                CAMERA_POS,
+                CameraPosition::class.java
+            )
             activity = savedInstanceState.getString(ACTIVITY)
-            media = savedInstanceState.getParcelable("sMedia")
+            media = BundleCompat.getParcelable(savedInstanceState, "sMedia", Media::class.java)
         }
 
         bindViews()
@@ -270,7 +284,10 @@ class LocationPickerActivity : BaseActivity(), LocationPermissionCallback {
      * For showing credits
      */
     private fun addCredits() {
-        tvAttribution.text = Html.fromHtml(getString(R.string.map_attribution))
+        tvAttribution.text = HtmlCompat.fromHtml(
+            getString(R.string.map_attribution),
+            HtmlCompat.FROM_HTML_MODE_LEGACY
+        )
         tvAttribution.movementMethod = LinkMovementMethod.getInstance()
     }
 
@@ -396,7 +413,11 @@ class LocationPickerActivity : BaseActivity(), LocationPermissionCallback {
         val position = when {
             //location metadata is available
             activity == "UploadActivity" && cameraPosition != null -> {
-                fr.free.nrw.commons.location.LatLng(cameraPosition!!.latitude, cameraPosition!!.longitude, 0.0f)
+                fr.free.nrw.commons.location.LatLng(
+                    cameraPosition!!.latitude,
+                    cameraPosition!!.longitude,
+                    0.0f
+                )
             }
             //location metadata is not available
             mapView != null -> {
@@ -447,14 +468,18 @@ class LocationPickerActivity : BaseActivity(), LocationPermissionCallback {
                 LAST_LOCATION,
                 "${mapView?.mapCenter?.latitude},${mapView?.mapCenter?.longitude}"
             )
-            applicationKvStore.putString(LAST_ZOOM, mapView?.zoomLevel?.toString()!!)
+            applicationKvStore.putString(LAST_ZOOM, mapView?.zoomLevelDouble?.toString()!!)
         }
 
         if (media == null) {
             val intent = Intent().apply {
                 putExtra(
                     LocationPickerConstants.MAP_CAMERA_POSITION,
-                    CameraPosition(mapView?.mapCenter?.latitude!!, mapView?.mapCenter?.longitude!!, 14.0)
+                    CameraPosition(
+                        mapView?.mapCenter?.latitude!!,
+                        mapView?.mapCenter?.longitude!!,
+                        14.0
+                    )
                 )
             }
             setResult(RESULT_OK, intent)
@@ -556,8 +581,15 @@ class LocationPickerActivity : BaseActivity(), LocationPermissionCallback {
         )
     }
 
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
-        if (requestCode == Constants.RequestCodes.LOCATION && grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        if (requestCode == Constants.RequestCodes.LOCATION &&
+            grantResults.isNotEmpty() &&
+            grantResults[0] == PackageManager.PERMISSION_GRANTED
+        ) {
             onLocationPermissionGranted()
         } else {
             onLocationPermissionDenied(getString(R.string.upload_map_location_access))
@@ -577,12 +609,18 @@ class LocationPickerActivity : BaseActivity(), LocationPermissionCallback {
 
     override fun onLocationPermissionDenied(toastMessage: String) {
         val isDeniedBefore = store.getBoolean("isPermissionDenied", false)
-        val showRationale = ActivityCompat.shouldShowRequestPermissionRationale(this, permission.ACCESS_FINE_LOCATION)
+        val showRationale = ActivityCompat.shouldShowRequestPermissionRationale(
+            this,
+            permission.ACCESS_FINE_LOCATION
+        )
 
         if (!showRationale) {
             if (!locationPermissionsHelper.checkLocationPermission(this)) {
                 if (isDeniedBefore) {
-                    locationPermissionsHelper.showAppSettingsDialog(this, R.string.upload_map_location_access)
+                    locationPermissionsHelper.showAppSettingsDialog(
+                        this,
+                        R.string.upload_map_location_access
+                    )
                 } else {
                     Toast.makeText(this, toastMessage, Toast.LENGTH_LONG).show()
                 }
@@ -601,7 +639,10 @@ class LocationPickerActivity : BaseActivity(), LocationPermissionCallback {
                 addMarkerAtGPSLocation()
             } else {
                 addMarkerAtGPSLocation()
-                locationPermissionsHelper.showLocationOffDialog(this, R.string.ask_to_turn_location_on_text)
+                locationPermissionsHelper.showLocationOffDialog(
+                    this,
+                    R.string.ask_to_turn_location_on_text
+                )
             }
         }
     }
@@ -652,7 +693,10 @@ class LocationPickerActivity : BaseActivity(), LocationPermissionCallback {
                 Marker.ANCHOR_CENTER,
                 Marker.ANCHOR_BOTTOM
             )
-            icon = ContextCompat.getDrawable(this@LocationPickerActivity, R.drawable.current_location_marker)
+            icon = ContextCompat.getDrawable(
+                this@LocationPickerActivity,
+                R.drawable.current_location_marker
+            )
             title = "Your Location"
             textLabelFontSize = 24
         }
