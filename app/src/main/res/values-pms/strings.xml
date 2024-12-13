@@ -796,4 +796,10 @@
   <string name="red_pin">Ës pòst a l\'ha ancor gnun-e fòto, ch\'a na pija un-a!</string>
   <string name="green_pin">Ës pòst a l\'ha già dle fòto.</string>
   <string name="grey_pin">An camin ch\'as verìfica si cost pòst -sì a l\'ha dle fòto.</string>
+  <string name="error_while_loading">Eror durant ël cariament</string>
+  <string name="no_usages_found">Gnun usagi trovà</string>
+  <string name="usages_on_commons_heading">Commons</string>
+  <string name="usages_on_other_wikis_heading">Àutre wiki</string>
+  <string name="bullet_point">•</string>
+  <string name="file_usages_container_heading">Usagi dl\'archivi</string>
 </resources>

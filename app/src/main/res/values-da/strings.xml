@@ -804,4 +804,10 @@
   <string name="red_pin">Dette sted har endnu ikke noget billede, så gå hen og tag et!</string>
   <string name="green_pin">Dette sted har allerede et billede.</string>
   <string name="grey_pin">Tjekker nu, om dette sted har et billede.</string>
+  <string name="error_while_loading">Fejl under indlæsning</string>
+  <string name="no_usages_found">Ingen anvendelser fundet</string>
+  <string name="usages_on_commons_heading">Commons</string>
+  <string name="usages_on_other_wikis_heading">Andre wikier</string>
+  <string name="bullet_point">•</string>
+  <string name="file_usages_container_heading">Filanvendelser</string>
 </resources>
