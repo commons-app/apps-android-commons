@@ -1,4 +1,4 @@
-package fr.free.nrw.commons.LocationPicker
+package fr.free.nrw.commons.locationpicker
 
 /**
  * Constants need for location picking

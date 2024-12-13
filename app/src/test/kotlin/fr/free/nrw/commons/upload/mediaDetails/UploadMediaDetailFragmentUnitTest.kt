@@ -21,8 +21,8 @@ import androidx.test.core.app.ApplicationProvider
 import com.github.chrisbanes.photoview.PhotoView
 import com.nhaarman.mockitokotlin2.mock
 import fr.free.nrw.commons.CameraPosition
-import fr.free.nrw.commons.LocationPicker.LocationPicker
-import fr.free.nrw.commons.LocationPicker.LocationPickerActivity
+import fr.free.nrw.commons.locationpicker.LocationPicker
+import fr.free.nrw.commons.locationpicker.LocationPickerActivity
 import fr.free.nrw.commons.OkHttpConnectionFactory
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestCommonsApplication

@@ -11,7 +11,6 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.nhaarman.mockitokotlin2.times
 import com.nhaarman.mockitokotlin2.verify
 import fr.free.nrw.commons.CameraPosition
-import fr.free.nrw.commons.LocationPicker.LocationPickerActivity
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment.LAST_LOCATION
