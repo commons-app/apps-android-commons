@@ -526,4 +526,7 @@
   <string name="custom_selector_confirm_deletion_title">Läsche confirméieren</string>
   <string name="custom_selector_delete">Läschen</string>
   <string name="custom_selector_cancel">Ofbriechen</string>
+  <string name="error_while_loading">Feeler beim Lueden</string>
+  <string name="usages_on_commons_heading">Commons</string>
+  <string name="usages_on_other_wikis_heading">Aner Wikien</string>
 </resources>

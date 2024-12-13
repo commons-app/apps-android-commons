@@ -194,6 +194,7 @@
   <string name="Achievements">ਪ੍ਰਾਪਤੀਆਂ</string>
   <string name="statistics">ਅੰਕੜੇ</string>
   <string name="statistics_thanks">ਧੰਨਵਾਦ ਪ੍ਰਾਪਤ ਹੋਏ</string>
+  <string name="level">ਪੱਧਰ %d</string>
   <string name="achievements_share_message">ਆਪਣੀਆਂ ਪ੍ਰਾਪਤੀਆਂ ਨੂੰ ਆਪਣੇ ਦੋਸਤਾਂ ਨਾਲ ਸਾਂਝਾ ਕਰੋ!</string>
   <string name="read_notifications">ਸੂਚਨਾਵਾਂ (ਪੜ੍ਹਿਆਂ)</string>
   <string name="list_sheet">ਸੂਚੀ</string>
@@ -215,4 +216,9 @@
   <string name="leaderboard_column_user">ਵਰਤੋਂਕਾਰ</string>
   <string name="location_updated">ਟਿਕਾਣਾ ਨਵਿਆਈਆ ਗਿਆ</string>
   <string name="invalid_login_message">ਤੁਹਾਡੇ ਦਾਖਲੇ ਦੀ ਮਿਆਦ ਪੁੱਗ ਗਈ ਹੈ। ਕਿਰਪਾ ਕਰਕੇ ਦੁਬਾਰਾ ਦਾਖਲ ਹੋਵੋ।</string>
+  <string name="error_while_loading">ਲੱਦਨ ਵਿੱਚ ਗਲਤੀ</string>
+  <string name="no_usages_found">ਕੋਈ ਵਰਤੋਂ ਨਹੀਂ ਲੱਭੀ</string>
+  <string name="usages_on_commons_heading">ਸ਼ਾਮਲਾਟ</string>
+  <string name="usages_on_other_wikis_heading">ਹੋਰ ਵਿਕੀਆਂ</string>
+  <string name="file_usages_container_heading">ਫ਼ਾਈਲ ਦੀ ਵਰਤੋਂ</string>
 </resources>
