@@ -1,83 +1,67 @@
-package fr.free.nrw.commons.bookmarks.pictures;
+package fr.free.nrw.commons.bookmarks.pictures
 
-import android.annotation.SuppressLint;
-import android.content.ContentProviderClient;
-import android.content.ContentValues;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.os.RemoteException;
 
-import androidx.annotation.NonNull;
+import android.annotation.SuppressLint
+import android.content.ContentProviderClient
+import android.content.ContentValues
+import android.database.Cursor
+import android.database.sqlite.SQLiteDatabase
+import android.os.RemoteException
+import fr.free.nrw.commons.bookmarks.models.Bookmark
+import javax.inject.Inject
+import javax.inject.Named
+import javax.inject.Provider
+import javax.inject.Singleton
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.inject.Inject;
-import javax.inject.Named;
-import javax.inject.Provider;
-import javax.inject.Singleton;
-
-import fr.free.nrw.commons.bookmarks.models.Bookmark;
-
-import static fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesContentProvider.BASE_URI;
 
 @Singleton
-public class BookmarkPicturesDao {
-
-    private final Provider<ContentProviderClient> clientProvider;
-
-    @Inject
-    public BookmarkPicturesDao(@Named("bookmarks") Provider<ContentProviderClient> clientProvider) {
-        this.clientProvider = clientProvider;
-    }
-
+class BookmarkPicturesDao @Inject constructor(
+    @Named("bookmarks") private val clientProvider: Provider<ContentProviderClient>
+) {
 
     /**
      * Find all persisted pictures bookmarks on database
      *
      * @return list of bookmarks
      */
-    @NonNull
-    public List<Bookmark> getAllBookmarks() {
-        List<Bookmark> items = new ArrayList<>();
-        Cursor cursor = null;
-        ContentProviderClient db = clientProvider.get();
+    fun getAllBookmarks(): List<Bookmark> {
+        val items = mutableListOf<Bookmark>()
+        var cursor: Cursor? = null
+        val db = clientProvider.get()
         try {
             cursor = db.query(
-                    BookmarkPicturesContentProvider.BASE_URI,
-                    Table.ALL_FIELDS,
-                    null,
-                    new String[]{},
-                    null);
-            while (cursor != null && cursor.moveToNext()) {
-                items.add(fromCursor(cursor));
+                BookmarkPicturesContentProvider.BASE_URI,
+                Table.ALL_FIELDS,
+                null,
+                emptyArray(),
+                null
+            )
+            while (cursor?.moveToNext() == true) {
+                items.add(fromCursor(cursor))
             }
-        } catch (RemoteException e) {
-            throw new RuntimeException(e);
+        } catch (e: RemoteException) {
+            throw RuntimeException(e)
         } finally {
-            if (cursor != null) {
-                cursor.close();
-            }
-            db.release();
+            cursor?.close()
+            db.close()
         }
-        return items;
+        return items
     }
-
 
     /**
      * Look for a bookmark in database and in order to insert or delete it
      *
      * @param bookmark : Bookmark object
-     * @return boolean : is bookmark now fav ?
+     * @return boolean : is bookmark now fav?
      */
-    public boolean updateBookmark(Bookmark bookmark) {
-        boolean bookmarkExists = findBookmark(bookmark);
+    fun updateBookmark(bookmark: Bookmark): Boolean {
+        val bookmarkExists = findBookmark(bookmark)
         if (bookmarkExists) {
-            deleteBookmark(bookmark);
+            deleteBookmark(bookmark)
         } else {
-            addBookmark(bookmark);
+            addBookmark(bookmark)
         }
-        return !bookmarkExists;
+        return !bookmarkExists
     }
 
     /**
@@ -85,14 +69,14 @@ public class BookmarkPicturesDao {
      *
      * @param bookmark : Bookmark to add
      */
-    private void addBookmark(Bookmark bookmark) {
-        ContentProviderClient db = clientProvider.get();
+    private fun addBookmark(bookmark: Bookmark) {
+        val db = clientProvider.get()
         try {
-            db.insert(BASE_URI, toContentValues(bookmark));
-        } catch (RemoteException e) {
-            throw new RuntimeException(e);
+            db.insert(BookmarkPicturesContentProvider.BASE_URI, toContentValues(bookmark))
+        } catch (e: RemoteException) {
+            throw RuntimeException(e)
         } finally {
-            db.release();
+            db.close()
         }
     }
 
@@ -101,18 +85,19 @@ public class BookmarkPicturesDao {
      *
      * @param bookmark : Bookmark to delete
      */
-    private void deleteBookmark(Bookmark bookmark) {
-        ContentProviderClient db = clientProvider.get();
+    private fun deleteBookmark(bookmark: Bookmark) {
+        val db = clientProvider.get()
         try {
-            if (bookmark.getContentUri() == null) {
-                throw new RuntimeException("tried to delete item with no content URI");
+            val contentUri = bookmark.contentUri
+            if (contentUri == null) {
+                throw RuntimeException("Tried to delete item with no content URI")
             } else {
-                db.delete(bookmark.getContentUri(), null, null);
+                db.delete(contentUri, null, null)
             }
-        } catch (RemoteException e) {
-            throw new RuntimeException(e);
+        } catch (e: RemoteException) {
+            throw RuntimeException(e)
         } finally {
-            db.release();
+            db.close()
         }
     }
 
@@ -120,107 +105,102 @@ public class BookmarkPicturesDao {
      * Find a bookmark from database based on its name
      *
      * @param bookmark : Bookmark to find
-     * @return boolean : is bookmark in database ?
+     * @return boolean : is bookmark in database?
      */
-    public boolean findBookmark(Bookmark bookmark) {
-        if (bookmark == null) {//Avoiding NPE's
-            return false;
+    fun findBookmark(bookmark: Bookmark?): Boolean {
+        if (bookmark == null) {
+            // Avoiding NPEs
+            return false
         }
 
-        Cursor cursor = null;
-        ContentProviderClient db = clientProvider.get();
+        var cursor: Cursor? = null
+        val db = clientProvider.get()
         try {
             cursor = db.query(
-                    BookmarkPicturesContentProvider.BASE_URI,
-                    Table.ALL_FIELDS,
-                    Table.COLUMN_MEDIA_NAME + "=?",
-                    new String[]{bookmark.getMediaName()},
-                    null);
-            if (cursor != null && cursor.moveToFirst()) {
-                return true;
+                BookmarkPicturesContentProvider.BASE_URI,
+                Table.ALL_FIELDS,
+                "${Table.COLUMN_MEDIA_NAME} = ?",
+                arrayOf(bookmark.mediaName),
+                null
+            )
+            if (cursor?.moveToFirst() == true) {
+                return true
             }
-        } catch (RemoteException e) {
+        } catch (e: RemoteException) {
             // This feels lazy, but to hell with checked exceptions. :)
-            throw new RuntimeException(e);
+            throw RuntimeException(e)
         } finally {
-            if (cursor != null) {
-                cursor.close();
-            }
-            db.release();
+            cursor?.close()
+            db.close()
         }
-        return false;
+        return false
     }
 
     @SuppressLint("Range")
-    @NonNull
-    Bookmark fromCursor(Cursor cursor) {
-        String fileName = cursor.getString(cursor.getColumnIndex(Table.COLUMN_MEDIA_NAME));
-        return new Bookmark(
-                fileName,
-                cursor.getString(cursor.getColumnIndex(Table.COLUMN_CREATOR)),
-                BookmarkPicturesContentProvider.uriForName(fileName)
-        );
+    private fun fromCursor(cursor: Cursor): Bookmark {
+        val fileName = cursor.getString(cursor.getColumnIndex(Table.COLUMN_MEDIA_NAME))
+        return Bookmark(
+            fileName,
+            cursor.getString(cursor.getColumnIndex(Table.COLUMN_CREATOR)),
+            BookmarkPicturesContentProvider.uriForName(fileName)
+        )
     }
 
-    private ContentValues toContentValues(Bookmark bookmark) {
-        ContentValues cv = new ContentValues();
-        cv.put(BookmarkPicturesDao.Table.COLUMN_MEDIA_NAME, bookmark.getMediaName());
-        cv.put(BookmarkPicturesDao.Table.COLUMN_CREATOR, bookmark.getMediaCreator());
-        return cv;
+    private fun toContentValues(bookmark: Bookmark): ContentValues {
+        return ContentValues().apply {
+            put(Table.COLUMN_MEDIA_NAME, bookmark.mediaName)
+            put(Table.COLUMN_CREATOR, bookmark.mediaCreator)
+        }
     }
 
+    object Table {
+        const val TABLE_NAME = "bookmarks"
 
-    public static class Table {
-        public static final String TABLE_NAME = "bookmarks";
-
-        public static final String COLUMN_MEDIA_NAME = "media_name";
-        public static final String COLUMN_CREATOR = "media_creator";
+        const val COLUMN_MEDIA_NAME = "media_name"
+        const val COLUMN_CREATOR = "media_creator"
 
         // NOTE! KEEP IN SAME ORDER AS THEY ARE DEFINED UP THERE. HELPS HARD CODE COLUMN INDICES.
-        public static final String[] ALL_FIELDS = {
-                COLUMN_MEDIA_NAME,
-                COLUMN_CREATOR
-        };
+        val ALL_FIELDS = arrayOf(
+            COLUMN_MEDIA_NAME,
+            COLUMN_CREATOR
+        )
 
-        public static final String DROP_TABLE_STATEMENT = "DROP TABLE IF EXISTS " + TABLE_NAME;
+        const val DROP_TABLE_STATEMENT = "DROP TABLE IF EXISTS $TABLE_NAME"
 
-        public static final String CREATE_TABLE_STATEMENT = "CREATE TABLE " + TABLE_NAME + " ("
-                + COLUMN_MEDIA_NAME + " STRING PRIMARY KEY,"
-                + COLUMN_CREATOR + " STRING"
-                + ");";
+        const val CREATE_TABLE_STATEMENT = """
+            CREATE TABLE $TABLE_NAME (
+                $COLUMN_MEDIA_NAME STRING PRIMARY KEY,
+                $COLUMN_CREATOR STRING
+            );
+        """
 
-        public static void onCreate(SQLiteDatabase db) {
-            db.execSQL(CREATE_TABLE_STATEMENT);
+        fun onCreate(db: SQLiteDatabase) {
+            db.execSQL(CREATE_TABLE_STATEMENT)
         }
 
-        public static void onDelete(SQLiteDatabase db) {
-            db.execSQL(DROP_TABLE_STATEMENT);
-            onCreate(db);
+        fun onDelete(db: SQLiteDatabase) {
+            db.execSQL(DROP_TABLE_STATEMENT)
+            onCreate(db)
         }
 
-        public static void onUpdate(SQLiteDatabase db, int from, int to) {
-            if (from == to) {
-                return;
-            }
+        fun onUpdate(db: SQLiteDatabase, from: Int, to: Int) {
+            if (from == to) return
+
             if (from < 7) {
                 // doesn't exist yet
-                from++;
-                onUpdate(db, from, to);
-                return;
+                onUpdate(db, from + 1, to)
+                return
             }
 
             if (from == 7) {
                 // table added in version 8
-                onCreate(db);
-                from++;
-                onUpdate(db, from, to);
-                return;
+                onCreate(db)
+                onUpdate(db, from + 1, to)
+                return
             }
 
             if (from == 8) {
-                from++;
-                onUpdate(db, from, to);
-                return;
+                onUpdate(db, from + 1, to)
             }
         }
     }

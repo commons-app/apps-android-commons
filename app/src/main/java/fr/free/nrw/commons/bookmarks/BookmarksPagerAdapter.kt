@@ -1,94 +1,104 @@
-package fr.free.nrw.commons.bookmarks;
+package fr.free.nrw.commons.bookmarks
 
-import android.content.Context;
-import android.os.Bundle;
-import android.widget.ListAdapter;
+import android.content.Context
+import android.os.Bundle
+import android.widget.ListAdapter
 
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentPagerAdapter
 
-import java.util.ArrayList;
+import java.util.ArrayList
 
-import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesFragment;
+import fr.free.nrw.commons.R
+import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesFragment
 
-public class BookmarksPagerAdapter extends FragmentPagerAdapter {
 
-    private ArrayList<BookmarkPages> pages;
+class BookmarksPagerAdapter(
+    fm: FragmentManager,
+    private val context: Context,
+    onlyPictures: Boolean
+) : FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 
-    /**
-     * Default Constructor
-     * @param fm
-     * @param context
-     * @param onlyPictures is true if the fragment requires only BookmarkPictureFragment
-     *                     (i.e. when no user is logged in).
-     */
-    BookmarksPagerAdapter(FragmentManager fm, Context context,boolean onlyPictures) {
-        super(fm);
-        pages = new ArrayList<>();
-        Bundle picturesBundle = new Bundle();
-        picturesBundle.putString("categoryName", context.getString(R.string.title_page_bookmarks_pictures));
-        picturesBundle.putInt("order", 0);
-        pages.add(new BookmarkPages(
-                new BookmarkListRootFragment(picturesBundle, this),
-                context.getString(R.string.title_page_bookmarks_pictures)));
-        if (!onlyPictures) {
-            // if onlyPictures is false we also add the location fragment.
-            Bundle locationBundle = new Bundle();
-            locationBundle.putString("categoryName",
-                context.getString(R.string.title_page_bookmarks_locations));
-            locationBundle.putInt("order", 1);
-            pages.add(new BookmarkPages(
-                new BookmarkListRootFragment(locationBundle, this),
-                context.getString(R.string.title_page_bookmarks_locations)));
+    private val pages: ArrayList<BookmarkPages> = ArrayList()
 
-            locationBundle.putInt("orderItem", 2);
-            pages.add(new BookmarkPages(
-                new BookmarkListRootFragment(locationBundle, this),
-                context.getString(R.string.title_page_bookmarks_items)));
+    init {
+        val picturesBundle = Bundle().apply {
+            putString("categoryName", context.getString(R.string.title_page_bookmarks_pictures))
+            putInt("order", 0)
         }
-        final Bundle categoriesBundle = new Bundle();
-        categoriesBundle.putString("categoryName",
-            context.getString(R.string.title_page_bookmarks_categories));
-        categoriesBundle.putInt("order", 3);
-        pages.add(new BookmarkPages(
-            new BookmarkListRootFragment(categoriesBundle, this),
-            context.getString(R.string.title_page_bookmarks_categories)));
-        notifyDataSetChanged();
+        pages.add(
+            BookmarkPages(
+                BookmarkListRootFragment(picturesBundle, this),
+                context.getString(R.string.title_page_bookmarks_pictures)
+            )
+        )
+
+        if (!onlyPictures) {
+            // Add the location fragment if onlyPictures is false
+            val locationBundle = Bundle().apply {
+                putString("categoryName", context.getString(
+                    R.string.title_page_bookmarks_locations
+                ))
+                putInt("order", 1)
+            }
+            pages.add(
+                BookmarkPages(
+                    BookmarkListRootFragment(locationBundle, this),
+                    context.getString(R.string.title_page_bookmarks_locations)
+                )
+            )
+
+            locationBundle.putInt("orderItem", 2)
+            pages.add(
+                BookmarkPages(
+                    BookmarkListRootFragment(locationBundle, this),
+                    context.getString(R.string.title_page_bookmarks_items)
+                )
+            )
+        }
+        val categoriesBundle = Bundle().apply {
+            putString("categoryName", context.getString(R.string.title_page_bookmarks_categories))
+            putInt("order", 3)
+        }
+
+        pages.add(
+            BookmarkPages(
+                BookmarkListRootFragment(categoriesBundle, this),
+                context.getString(R.string.title_page_bookmarks_categories)
+            )
+        )
+
+        notifyDataSetChanged()
     }
 
-    @Override
-    public Fragment getItem(int position) {
-        return pages.get(position).getPage();
+    override fun getItem(position: Int): Fragment {
+        return pages[position].page!!
     }
 
-    @Override
-    public int getCount() {
-        return pages.size();
+    override fun getCount(): Int {
+        return pages.size
     }
 
-    @Nullable
-    @Override
-    public CharSequence getPageTitle(int position) {
-        return pages.get(position).getTitle();
+    override fun getPageTitle(position: Int): CharSequence? {
+        return pages[position].title
     }
 
     /**
-     * Return the Adapter used to display the picture gridview
+     * Return the adapter used to display the picture gridview
      * @return adapter
      */
-    public ListAdapter getMediaAdapter() {
-        BookmarkPicturesFragment fragment = (BookmarkPicturesFragment)(((BookmarkListRootFragment)pages.get(0).getPage()).listFragment);
-        return fragment.getAdapter();
+    fun getMediaAdapter(): ListAdapter? {
+        val fragment = (pages[0].page as BookmarkListRootFragment).listFragment
+                as BookmarkPicturesFragment
+        return fragment.getAdapter()
     }
 
     /**
      * Update the pictures list for the bookmark fragment
      */
-    public void requestPictureListUpdate() {
-        BookmarkPicturesFragment fragment = (BookmarkPicturesFragment)(((BookmarkListRootFragment)pages.get(0).getPage()).listFragment);
-        fragment.onResume();
+    fun requestPictureListUpdate() {
+        val fragment = (pages[0].page as BookmarkListRootFragment).listFragment as BookmarkPicturesFragment
+        fragment.onResume()
     }
 }

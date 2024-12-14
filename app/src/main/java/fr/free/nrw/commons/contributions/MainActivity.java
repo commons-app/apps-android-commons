@@ -344,7 +344,7 @@ public class MainActivity extends BaseActivity
             loadFragment(ExploreFragment.newInstance(), false);
         } else if (fragmentName.equals(ActiveFragment.BOOKMARK.name())) {
             setTitle(getString(R.string.bookmarks));
-            loadFragment(BookmarkFragment.newInstance(), false);
+            loadFragment(BookmarkFragment.Companion.newInstance(), false);
         }
     }
 

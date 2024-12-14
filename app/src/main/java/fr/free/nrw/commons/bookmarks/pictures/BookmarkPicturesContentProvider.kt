@@ -1,46 +1,42 @@
-package fr.free.nrw.commons.bookmarks.pictures;
+package fr.free.nrw.commons.bookmarks.pictures
 
-import android.content.ContentValues;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteQueryBuilder;
-// We can get uri using java.Net.Uri, but andoid implimentation is faster (but it's forgiving with handling exceptions though)
-import android.net.Uri;
-import android.text.TextUtils;
 
-import androidx.annotation.NonNull;
+import android.content.ContentValues
+import android.database.Cursor
+import android.database.sqlite.SQLiteQueryBuilder
+import android.net.Uri
+import fr.free.nrw.commons.BuildConfig
+import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesDao.Table.COLUMN_MEDIA_NAME
+import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesDao.Table.TABLE_NAME
+import fr.free.nrw.commons.data.DBOpenHelper
+import fr.free.nrw.commons.di.CommonsDaggerContentProvider
+import timber.log.Timber
+import javax.inject.Inject
 
-import javax.inject.Inject;
-
-import fr.free.nrw.commons.BuildConfig;
-import fr.free.nrw.commons.data.DBOpenHelper;
-import fr.free.nrw.commons.di.CommonsDaggerContentProvider;
-import timber.log.Timber;
-
-import static fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesDao.Table.COLUMN_MEDIA_NAME;
-import static fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesDao.Table.TABLE_NAME;
 
 /**
  * Handles private storage for Bookmark pictures
  */
-public class BookmarkPicturesContentProvider extends CommonsDaggerContentProvider {
+class BookmarkPicturesContentProvider : CommonsDaggerContentProvider() {
 
-    private static final String BASE_PATH = "bookmarks";
-    public static final Uri BASE_URI = Uri.parse("content://" + BuildConfig.BOOKMARK_AUTHORITY + "/" + BASE_PATH);
+    companion object {
+        private const val BASE_PATH = "bookmarks"
+        val BASE_URI: Uri = Uri
+            .parse("content://" + BuildConfig.BOOKMARK_AUTHORITY + "/" + BASE_PATH)
 
-    /**
-     * Append bookmark pictures name to the base uri 
-     */
-    public static Uri uriForName(String name) {
-        return Uri.parse(BASE_URI.toString() + "/" + name);
+        /**
+         * Append bookmark pictures name to the base uri
+         */
+        fun uriForName(name: String): Uri {
+            return Uri.parse("$BASE_URI/$name")
+        }
     }
 
     @Inject
-    DBOpenHelper dbOpenHelper;
+    lateinit var dbOpenHelper: DBOpenHelper
 
-    @Override
-    public String getType(@NonNull Uri uri) {
-        return null;
+    override fun getType(uri: Uri): String? {
+        return null
     }
 
     /**
@@ -51,70 +47,88 @@ public class BookmarkPicturesContentProvider extends CommonsDaggerContentProvide
      * @param selectionArgs : the condition of Where clause
      * @param sortOrder : ascending or descending
      */
-    @SuppressWarnings("ConstantConditions")
-    @Override
-    public Cursor query(@NonNull Uri uri, String[] projection, String selection,
-                        String[] selectionArgs, String sortOrder) {
-        SQLiteQueryBuilder queryBuilder = new SQLiteQueryBuilder();
-        queryBuilder.setTables(TABLE_NAME);
+    override fun query(
+        uri: Uri,
+        projection: Array<out String>?,
+        selection: String?,
+        selectionArgs: Array<out String>?,
+        sortOrder: String?
+    ): Cursor? {
+        val queryBuilder = SQLiteQueryBuilder().apply {
+            tables = TABLE_NAME
+        }
 
-        SQLiteDatabase db = dbOpenHelper.getReadableDatabase();
-        Cursor cursor = queryBuilder.query(db, projection, selection, selectionArgs, null, null, sortOrder);
-        cursor.setNotificationUri(getContext().getContentResolver(), uri);
+        val db = dbOpenHelper.readableDatabase
+        val cursor = queryBuilder.query(
+            db,
+            projection,
+            selection,
+            selectionArgs,
+            null,
+            null,
+            sortOrder
+        )
+        cursor.setNotificationUri(context?.contentResolver, uri)
 
-        return cursor;
+        return cursor
     }
 
     /**
-     * Handles the update query of local SQLite Database 
+     * Handles the update query of local SQLite Database
      * @param uri : contains the uri for bookmark pictures
      * @param contentValues : new values to be entered to db
      * @param selection : handles Where
      * @param selectionArgs : the condition of Where clause
      */
-    @SuppressWarnings("ConstantConditions")
-    @Override
-    public int update(@NonNull Uri uri, ContentValues contentValues, String selection,
-                      String[] selectionArgs) {
-        SQLiteDatabase sqlDB = dbOpenHelper.getWritableDatabase();
-        int rowsUpdated;
-        if (TextUtils.isEmpty(selection)) {
-            int id = Integer.valueOf(uri.getLastPathSegment());
-            rowsUpdated = sqlDB.update(TABLE_NAME,
-                    contentValues,
-                    COLUMN_MEDIA_NAME + " = ?",
-                    new String[]{String.valueOf(id)});
+    override fun update(
+        uri: Uri,
+        contentValues: ContentValues?,
+        selection: String?,
+        selectionArgs: Array<out String>?
+    ): Int {
+        val sqlDB = dbOpenHelper.writableDatabase
+        val rowsUpdated: Int
+
+        if (selection.isNullOrEmpty()) {
+            val id = uri.lastPathSegment?.toInt()
+                ?: throw IllegalArgumentException("Invalid ID in URI")
+            rowsUpdated = sqlDB.update(
+                TABLE_NAME,
+                contentValues,
+                "$COLUMN_MEDIA_NAME = ?",
+                arrayOf(id.toString())
+            )
         } else {
-            throw new IllegalArgumentException(
-                    "Parameter `selection` should be empty when updating an ID");
+            throw IllegalArgumentException(
+                "Parameter `selection` should be empty when updating an ID"
+            )
         }
-        getContext().getContentResolver().notifyChange(uri, null);
-        return rowsUpdated;
+
+        context?.contentResolver?.notifyChange(uri, null)
+        return rowsUpdated
     }
 
     /**
      * Handles the insertion of new bookmark pictures record to local SQLite Database
      */
-    @SuppressWarnings("ConstantConditions")
-    @Override
-    public Uri insert(@NonNull Uri uri, ContentValues contentValues) {
-        SQLiteDatabase sqlDB = dbOpenHelper.getWritableDatabase();
-        long id = sqlDB.insert(BookmarkPicturesDao.Table.TABLE_NAME, null, contentValues);
-        getContext().getContentResolver().notifyChange(uri, null);
-        return Uri.parse(BASE_URI + "/" + id);
+    override fun insert(uri: Uri, contentValues: ContentValues?): Uri? {
+        val sqlDB = dbOpenHelper.writableDatabase
+        val id = sqlDB.insert(TABLE_NAME, null, contentValues)
+        context?.contentResolver?.notifyChange(uri, null)
+        return Uri.parse("$BASE_URI/$id")
     }
 
-    @SuppressWarnings("ConstantConditions")
-    @Override
-    public int delete(@NonNull Uri uri, String s, String[] strings) {
-        int rows;
-        SQLiteDatabase db = dbOpenHelper.getReadableDatabase();
-        Timber.d("Deleting bookmark name %s", uri.getLastPathSegment());
-        rows = db.delete(TABLE_NAME,
-                "media_name = ?",
-                new String[]{uri.getLastPathSegment()}
-        );
-        getContext().getContentResolver().notifyChange(uri, null);
-        return rows;
+    override fun delete(uri: Uri, selection: String?, selectionArgs: Array<out String>?): Int {
+        val db = dbOpenHelper.readableDatabase
+        Timber.d("Deleting bookmark name %s", uri.lastPathSegment)
+
+        val rows = db.delete(
+            TABLE_NAME,
+            "media_name = ?",
+            arrayOf(uri.lastPathSegment)
+        )
+
+        context?.contentResolver?.notifyChange(uri, null)
+        return rows
     }
 }

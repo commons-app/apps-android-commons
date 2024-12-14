@@ -422,7 +422,7 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
                     bookmark = new Bookmark(
                             m.getFilename(),
                             m.getAuthor(),
-                            BookmarkPicturesContentProvider.uriForName(m.getFilename())
+                            BookmarkPicturesContentProvider.Companion.uriForName(m.getFilename())
                     );
                     updateBookmarkState(menu.findItem(R.id.menu_bookmark_current_image));
                     final Integer contributionState = provider.getContributionStateAt(position);

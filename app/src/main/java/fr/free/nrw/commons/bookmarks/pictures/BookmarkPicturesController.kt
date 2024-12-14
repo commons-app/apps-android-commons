@@ -1,63 +1,53 @@
-package fr.free.nrw.commons.bookmarks.pictures;
+package fr.free.nrw.commons.bookmarks.pictures
 
-import fr.free.nrw.commons.Media;
-import fr.free.nrw.commons.bookmarks.models.Bookmark;
-import fr.free.nrw.commons.media.MediaClient;
-import io.reactivex.Observable;
-import io.reactivex.ObservableSource;
-import io.reactivex.Single;
-import io.reactivex.functions.Function;
-import java.util.ArrayList;
-import java.util.List;
-import javax.inject.Inject;
-import javax.inject.Singleton;
+import fr.free.nrw.commons.Media
+import fr.free.nrw.commons.bookmarks.models.Bookmark
+import fr.free.nrw.commons.media.MediaClient
+import io.reactivex.Observable
+import io.reactivex.Single
+import javax.inject.Inject
+import javax.inject.Singleton
+
 
 @Singleton
-public class BookmarkPicturesController {
+class BookmarkPicturesController @Inject constructor(
+    private val mediaClient: MediaClient,
+    private val bookmarkDao: BookmarkPicturesDao
+) {
 
-    private final MediaClient mediaClient;
-    private final BookmarkPicturesDao bookmarkDao;
-
-    private List<Bookmark> currentBookmarks;
-
-    @Inject
-    public BookmarkPicturesController(MediaClient mediaClient, BookmarkPicturesDao bookmarkDao) {
-        this.mediaClient = mediaClient;
-        this.bookmarkDao = bookmarkDao;
-        currentBookmarks = new ArrayList<>();
-    }
+    private var currentBookmarks: List<Bookmark> = emptyList()
 
     /**
      * Loads the Media objects from the raw data stored in DB and the API.
      * @return a list of bookmarked Media object
      */
-    Single<List<Media>> loadBookmarkedPictures() {
-        List<Bookmark> bookmarks = bookmarkDao.getAllBookmarks();
-        currentBookmarks = bookmarks;
+    fun loadBookmarkedPictures(): Single<List<Media>> {
+        val bookmarks = bookmarkDao.getAllBookmarks()
+        currentBookmarks = bookmarks
         return Observable.fromIterable(bookmarks)
-                .flatMap((Function<Bookmark, ObservableSource<Media>>) this::getMediaFromBookmark)
-                .toList();
+            .flatMap { bookmark -> getMediaFromBookmark(bookmark) }
+            .toList()
     }
 
-    private Observable<Media> getMediaFromBookmark(Bookmark bookmark) {
-        return mediaClient.getMedia(bookmark.getMediaName())
-                .toObservable()
-            .onErrorResumeNext(Observable.empty());
+    private fun getMediaFromBookmark(bookmark: Bookmark): Observable<Media> {
+        return mediaClient.getMedia(bookmark.mediaName)
+            .toObservable()
+            .onErrorResumeNext(Observable.empty())
     }
 
     /**
      * Loads the Media objects from the raw data stored in DB and the API.
      * @return a list of bookmarked Media object
      */
-    boolean needRefreshBookmarkedPictures() {
-        List<Bookmark> bookmarks = bookmarkDao.getAllBookmarks();
-        return bookmarks.size() != currentBookmarks.size();
+    fun needRefreshBookmarkedPictures(): Boolean {
+        val bookmarks = bookmarkDao.getAllBookmarks()
+        return bookmarks.size != currentBookmarks.size
     }
 
     /**
      * Cancels the requests to the API and the DB
      */
-    void stop() {
-        //noop
+    fun stop() {
+        // noop
     }
 }

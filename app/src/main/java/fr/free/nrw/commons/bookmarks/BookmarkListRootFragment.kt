@@ -1,266 +1,192 @@
-package fr.free.nrw.commons.bookmarks;
+package fr.free.nrw.commons.bookmarks
 
-import android.content.Context;
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import fr.free.nrw.commons.Media;
-import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.bookmarks.category.BookmarkCategoriesFragment;
-import fr.free.nrw.commons.bookmarks.items.BookmarkItemsFragment;
-import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsFragment;
-import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesFragment;
-import fr.free.nrw.commons.category.CategoryImagesCallback;
-import fr.free.nrw.commons.category.GridViewAdapter;
-import fr.free.nrw.commons.contributions.MainActivity;
-import fr.free.nrw.commons.databinding.FragmentFeaturedRootBinding;
-import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
-import fr.free.nrw.commons.media.MediaDetailPagerFragment;
-import fr.free.nrw.commons.navtab.NavTab;
-import java.util.ArrayList;
-import java.util.Iterator;
-import timber.log.Timber;
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.AdapterView
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import fr.free.nrw.commons.Media
+import fr.free.nrw.commons.R
+import fr.free.nrw.commons.bookmarks.category.BookmarkCategoriesFragment
+import fr.free.nrw.commons.bookmarks.items.BookmarkItemsFragment
+import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsFragment
+import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesFragment
+import fr.free.nrw.commons.category.CategoryImagesCallback
+import fr.free.nrw.commons.category.GridViewAdapter
+import fr.free.nrw.commons.contributions.MainActivity
+import fr.free.nrw.commons.databinding.FragmentFeaturedRootBinding
+import fr.free.nrw.commons.di.CommonsDaggerSupportFragment
+import fr.free.nrw.commons.media.MediaDetailPagerFragment
+import fr.free.nrw.commons.navtab.NavTab
+import timber.log.Timber
 
-public class BookmarkListRootFragment extends CommonsDaggerSupportFragment implements
+
+class BookmarkListRootFragment : CommonsDaggerSupportFragment,
     FragmentManager.OnBackStackChangedListener,
     MediaDetailPagerFragment.MediaDetailProvider,
-    AdapterView.OnItemClickListener, CategoryImagesCallback {
+    AdapterView.OnItemClickListener,
+    CategoryImagesCallback {
 
-    private MediaDetailPagerFragment mediaDetails;
-    //private BookmarkPicturesFragment bookmarkPicturesFragment;
-    private BookmarkLocationsFragment bookmarkLocationsFragment;
-    public Fragment listFragment;
-    private BookmarksPagerAdapter bookmarksPagerAdapter;
+    private var mediaDetails: MediaDetailPagerFragment? = null
+    private var bookmarkLocationsFragment: BookmarkLocationsFragment? = null
+    var listFragment: Fragment? = null
+    private var bookmarksPagerAdapter: BookmarksPagerAdapter? = null
 
-    FragmentFeaturedRootBinding binding;
+    private var binding: FragmentFeaturedRootBinding? = null
 
-    public BookmarkListRootFragment() {
-        //empty constructor necessary otherwise crashes on recreate
+    constructor() : super() {
+        // Empty constructor necessary otherwise crashes on recreate
     }
 
-    public BookmarkListRootFragment(Bundle bundle, BookmarksPagerAdapter bookmarksPagerAdapter) {
-        String title = bundle.getString("categoryName");
-        int order = bundle.getInt("order");
-        final int orderItem = bundle.getInt("orderItem");
-
-        switch (order){
-            case 0: listFragment = new BookmarkPicturesFragment();
-            break;
-
-            case 1: listFragment = new BookmarkLocationsFragment();
-            break;
-
-            case 3: listFragment = new BookmarkCategoriesFragment();
-            break;
+    constructor(bundle: Bundle, bookmarksPagerAdapter: BookmarksPagerAdapter) : this() {
+        val title = bundle.getString("categoryName")
+        val order = bundle.getInt("order")
+        val orderItem = bundle.getInt("orderItem")
+        listFragment = when (order) {
+            0 -> BookmarkPicturesFragment()
+            1 -> BookmarkLocationsFragment()
+            3 -> BookmarkCategoriesFragment()
+            else -> null
         }
-            if(orderItem == 2) {
-                listFragment = new BookmarkItemsFragment();
-            }
 
-        Bundle featuredArguments = new Bundle();
-        featuredArguments.putString("categoryName", title);
-        listFragment.setArguments(featuredArguments);
-        this.bookmarksPagerAdapter = bookmarksPagerAdapter;
+        if(orderItem == 2) {
+            listFragment = BookmarkItemsFragment()
+        }
+
+        val featuredArguments = Bundle().apply {
+            putString("categoryName", title)
+        }
+        listFragment?.arguments = featuredArguments
+        this.bookmarksPagerAdapter = bookmarksPagerAdapter
     }
 
-    @Nullable
-    @Override
-    public View onCreateView(@NonNull final LayoutInflater inflater,
-        @Nullable final ViewGroup container,
-        @Nullable final Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        binding = FragmentFeaturedRootBinding.inflate(inflater, container, false);
-        return binding.getRoot();
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        super.onCreateView(inflater, container, savedInstanceState)
+        binding = FragmentFeaturedRootBinding.inflate(inflater, container, false)
+        return binding?.root
     }
 
-    @Override
-    public void onViewCreated(@NonNull final View view, @Nullable final Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         if (savedInstanceState == null) {
-            setFragment(listFragment, mediaDetails);
+            setFragment(listFragment, mediaDetails)
         }
     }
 
-    public void setFragment(Fragment fragment, Fragment otherFragment) {
-        if (fragment.isAdded() && otherFragment != null) {
-            getChildFragmentManager()
-                .beginTransaction()
-                .hide(otherFragment)
-                .show(fragment)
-                .addToBackStack("CONTRIBUTION_LIST_FRAGMENT_TAG")
-                .commit();
-            getChildFragmentManager().executePendingTransactions();
-        } else if (fragment.isAdded() && otherFragment == null) {
-            getChildFragmentManager()
-                .beginTransaction()
-                .show(fragment)
-                .addToBackStack("CONTRIBUTION_LIST_FRAGMENT_TAG")
-                .commit();
-            getChildFragmentManager().executePendingTransactions();
-        } else if (!fragment.isAdded() && otherFragment != null) {
-            getChildFragmentManager()
-                .beginTransaction()
-                .hide(otherFragment)
-                .add(R.id.explore_container, fragment)
-                .addToBackStack("CONTRIBUTION_LIST_FRAGMENT_TAG")
-                .commit();
-            getChildFragmentManager().executePendingTransactions();
-        } else if (!fragment.isAdded()) {
-            getChildFragmentManager()
-                .beginTransaction()
-                .replace(R.id.explore_container, fragment)
-                .addToBackStack("CONTRIBUTION_LIST_FRAGMENT_TAG")
-                .commit();
-            getChildFragmentManager().executePendingTransactions();
+    fun setFragment(fragment: Fragment?, otherFragment: Fragment?) {
+        val transaction = childFragmentManager.beginTransaction()
+        when {
+            fragment?.isAdded == true && otherFragment != null -> {
+                transaction.hide(otherFragment).show(fragment)
+            }
+            fragment?.isAdded == true && otherFragment == null -> {
+                transaction.show(fragment)
+            }
+            fragment?.isAdded == false && otherFragment != null -> {
+                transaction.hide(otherFragment).add(R.id.explore_container, fragment)
+            }
+            fragment?.isAdded == false -> {
+                transaction.replace(R.id.explore_container, fragment)
+            }
+        }
+        transaction.addToBackStack("CONTRIBUTION_LIST_FRAGMENT_TAG").commit()
+        childFragmentManager.executePendingTransactions()
+    }
+
+    fun removeFragment(fragment: Fragment) {
+        childFragmentManager.beginTransaction().remove(fragment).commit()
+        childFragmentManager.executePendingTransactions()
+    }
+
+    override fun onMediaClicked(position: Int) {
+        Timber.tag("deneme8").d("on media clicked")
+        // container.setVisibility(View.VISIBLE);
+        // ((BookmarkFragment)getParentFragment()).tabLayout.setVisibility(View.GONE);
+        // mediaDetails = new MediaDetailPagerFragment(false, true, position);
+        // setFragment(mediaDetails, bookmarkPicturesFragment);
+    }
+
+    override fun getMediaAtPosition(i: Int): Media? {
+        return bookmarksPagerAdapter?.getMediaAdapter()?.let {
+            it.getItem(i) as? Media
         }
     }
 
-    public void removeFragment(Fragment fragment) {
-        getChildFragmentManager()
-            .beginTransaction()
-            .remove(fragment)
-            .commit();
-        getChildFragmentManager().executePendingTransactions();
+    override fun getTotalMediaCount(): Int {
+        return bookmarksPagerAdapter?.getMediaAdapter()?.count ?: 0
     }
 
-    @Override
-    public void onAttach(final Context context) {
-        super.onAttach(context);
+    override fun getContributionStateAt(position: Int): Int? {
+        return null
     }
 
-    @Override
-    public void onMediaClicked(int position) {
-        Timber.d("on media clicked");
-    /*container.setVisibility(View.VISIBLE);
-    ((BookmarkFragment)getParentFragment()).tabLayout.setVisibility(View.GONE);
-    mediaDetails = new MediaDetailPagerFragment(false, true, position);
-    setFragment(mediaDetails, bookmarkPicturesFragment);*/
-    }
-
-    /**
-     * This method is called mediaDetailPagerFragment. It returns the Media Object at that Index
-     *
-     * @param i It is the index of which media object is to be returned which is same as current
-     *          index of viewPager.
-     * @return Media Object
-     */
-    @Override
-    public Media getMediaAtPosition(int i) {
-        if (bookmarksPagerAdapter.getMediaAdapter() == null) {
-            // not yet ready to return data
-            return null;
-        } else {
-            return (Media) bookmarksPagerAdapter.getMediaAdapter().getItem(i);
+    override fun refreshNominatedMedia(index: Int) {
+        if (mediaDetails != null && listFragment?.isVisible == false) {
+            removeFragment(mediaDetails!!)
+            mediaDetails = MediaDetailPagerFragment.newInstance(false, true)
+            (parentFragment as? BookmarkFragment)?.setScroll(false)
+            setFragment(mediaDetails, listFragment)
+            mediaDetails?.showImage(index)
         }
     }
 
-    /**
-     * This method is called on from getCount of MediaDetailPagerFragment The viewpager will contain
-     * same number of media items as that of media elements in adapter.
-     *
-     * @return Total Media count in the adapter
-     */
-    @Override
-    public int getTotalMediaCount() {
-        if (bookmarksPagerAdapter.getMediaAdapter() == null) {
-            return 0;
-        }
-        return bookmarksPagerAdapter.getMediaAdapter().getCount();
+    override fun viewPagerNotifyDataSetChanged() {
+        mediaDetails?.notifyDataSetChanged()
     }
 
-    @Override
-    public Integer getContributionStateAt(int position) {
-        return null;
-    }
-
-    /**
-     * Reload media detail fragment once media is nominated
-     *
-     * @param index item position that has been nominated
-     */
-    @Override
-    public void refreshNominatedMedia(int index) {
-        if (mediaDetails != null && !listFragment.isVisible()) {
-            removeFragment(mediaDetails);
-            mediaDetails = MediaDetailPagerFragment.newInstance(false, true);
-            ((BookmarkFragment) getParentFragment()).setScroll(false);
-            setFragment(mediaDetails, listFragment);
-            mediaDetails.showImage(index);
-        }
-    }
-
-    /**
-     * This method is called on success of API call for featured images or mobile uploads. The
-     * viewpager will notified that number of items have changed.
-     */
-    @Override
-    public void viewPagerNotifyDataSetChanged() {
+    fun backPressed(): Boolean {
         if (mediaDetails != null) {
-            mediaDetails.notifyDataSetChanged();
-        }
-    }
-
-    public boolean backPressed() {
-        //check mediaDetailPage fragment is not null then we check mediaDetail.is Visible or not to avoid NullPointerException
-        if (mediaDetails != null) {
-            if (mediaDetails.isVisible()) {
-                // todo add get list fragment
-                ((BookmarkFragment) getParentFragment()).setupTabLayout();
-                ArrayList<Integer> removed = mediaDetails.getRemovedItems();
-                removeFragment(mediaDetails);
-                ((BookmarkFragment) getParentFragment()).setScroll(true);
-                setFragment(listFragment, mediaDetails);
-                ((MainActivity) getActivity()).showTabs();
-                if (listFragment instanceof BookmarkPicturesFragment) {
-                    GridViewAdapter adapter = ((GridViewAdapter) ((BookmarkPicturesFragment) listFragment)
-                        .getAdapter());
-                    Iterator i = removed.iterator();
-                    while (i.hasNext()) {
-                        adapter.remove(adapter.getItem((int) i.next()));
+            if (mediaDetails!!.isVisible) {
+                (parentFragment as? BookmarkFragment)?.setupTabLayout()
+                val removed = mediaDetails!!.removedItems
+                removeFragment(mediaDetails!!)
+                (parentFragment as? BookmarkFragment)?.setScroll(true)
+                setFragment(listFragment, mediaDetails)
+                (activity as? MainActivity)?.showTabs()
+                if (listFragment is BookmarkPicturesFragment) {
+                    val adapter = (listFragment as BookmarkPicturesFragment).getAdapter()
+                            as GridViewAdapter
+                    for (i in removed) {
+                        adapter.remove(adapter.getItem(i))
                     }
-                    mediaDetails.clearRemoved();
-
+                    mediaDetails!!.clearRemoved()
                 }
             } else {
-                moveToContributionsFragment();
+                moveToContributionsFragment()
             }
         } else {
-            moveToContributionsFragment();
+            moveToContributionsFragment()
         }
-        // notify mediaDetails did not handled the backPressed further actions required.
-        return false;
+        return false
     }
 
-    void moveToContributionsFragment() {
-        ((MainActivity) getActivity()).setSelectedItemId(NavTab.CONTRIBUTIONS.code());
-        ((MainActivity) getActivity()).showTabs();
+    private fun moveToContributionsFragment() {
+        (activity as? MainActivity)?.apply {
+            setSelectedItemId(NavTab.CONTRIBUTIONS.code())
+            showTabs()
+        }
     }
 
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Timber.d("on media clicked");
-        binding.exploreContainer.setVisibility(View.VISIBLE);
-        ((BookmarkFragment) getParentFragment()).binding.tabLayout.setVisibility(View.GONE);
-        mediaDetails = MediaDetailPagerFragment.newInstance(false, true);
-        ((BookmarkFragment) getParentFragment()).setScroll(false);
-        setFragment(mediaDetails, listFragment);
-        mediaDetails.showImage(position);
+    override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+        Timber.tag("deneme8").d("on media clicked")
+        binding?.exploreContainer?.visibility = View.VISIBLE
+        (parentFragment as? BookmarkFragment)?.binding?.tabLayout?.visibility = View.GONE
+        mediaDetails = MediaDetailPagerFragment.newInstance(false, true)
+        (parentFragment as? BookmarkFragment)?.setScroll(false)
+        setFragment(mediaDetails, listFragment)
+        mediaDetails?.showImage(position)
     }
 
-    @Override
-    public void onBackStackChanged() {
+    override fun onBackStackChanged() {}
 
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        binding = null;
+    override fun onDestroy() {
+        super.onDestroy()
+        binding = null
     }
 }

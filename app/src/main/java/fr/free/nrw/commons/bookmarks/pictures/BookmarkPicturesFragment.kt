@@ -1,89 +1,82 @@
-package fr.free.nrw.commons.bookmarks.pictures;
+package fr.free.nrw.commons.bookmarks.pictures
 
-import static android.view.View.GONE;
-import static android.view.View.VISIBLE;
+import android.annotation.SuppressLint
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ListAdapter
+import dagger.android.support.DaggerFragment
+import fr.free.nrw.commons.Media
+import fr.free.nrw.commons.R
+import fr.free.nrw.commons.bookmarks.BookmarkListRootFragment
+import fr.free.nrw.commons.category.GridViewAdapter
+import fr.free.nrw.commons.databinding.FragmentBookmarksPicturesBinding
+import fr.free.nrw.commons.utils.NetworkUtils
+import fr.free.nrw.commons.utils.ViewUtil
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.schedulers.Schedulers
+import timber.log.Timber
+import javax.inject.Inject
 
-import android.annotation.SuppressLint;
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ListAdapter;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import dagger.android.support.DaggerFragment;
-import fr.free.nrw.commons.Media;
-import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.bookmarks.BookmarkListRootFragment;
-import fr.free.nrw.commons.category.GridViewAdapter;
-import fr.free.nrw.commons.databinding.FragmentBookmarksPicturesBinding;
-import fr.free.nrw.commons.utils.NetworkUtils;
-import fr.free.nrw.commons.utils.ViewUtil;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.schedulers.Schedulers;
-import java.util.List;
-import javax.inject.Inject;
-import timber.log.Timber;
 
-public class BookmarkPicturesFragment extends DaggerFragment {
+class BookmarkPicturesFragment : DaggerFragment() {
 
-    private GridViewAdapter gridAdapter;
-    private CompositeDisposable compositeDisposable = new CompositeDisposable();
+    private var gridAdapter: GridViewAdapter? = null
+    private val compositeDisposable = CompositeDisposable()
 
-    private FragmentBookmarksPicturesBinding binding;
+    private var binding: FragmentBookmarksPicturesBinding? = null
+
     @Inject
-    BookmarkPicturesController controller;
+    lateinit var controller: BookmarkPicturesController
 
     /**
      * Create an instance of the fragment with the right bundle parameters
      * @return an instance of the fragment
      */
-    public static BookmarkPicturesFragment newInstance() {
-        return new BookmarkPicturesFragment();
+    companion object {
+        fun newInstance(): BookmarkPicturesFragment {
+            return BookmarkPicturesFragment()
+        }
     }
 
-    @Override
-    public View onCreateView(
-            @NonNull LayoutInflater inflater,
-            ViewGroup container,
-            Bundle savedInstanceState
-    ) {
-        binding = FragmentBookmarksPicturesBinding.inflate(inflater, container, false);
-        return binding.getRoot();
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        binding = FragmentBookmarksPicturesBinding.inflate(inflater, container, false)
+        return binding?.root
     }
 
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        binding.bookmarkedPicturesList.setOnItemClickListener((AdapterView.OnItemClickListener) getParentFragment());
-        initList();
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding?.bookmarkedPicturesList?.onItemClickListener = parentFragment as? AdapterView.OnItemClickListener
+        initList()
     }
 
-    @Override
-    public void onStop() {
-        super.onStop();
-        controller.stop();
+    override fun onStop() {
+        super.onStop()
+        controller.stop()
     }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        compositeDisposable.clear();
-        binding = null;
+    override fun onDestroy() {
+        super.onDestroy()
+        compositeDisposable.clear()
+        binding = null
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
+    override fun onResume() {
+        super.onResume()
         if (controller.needRefreshBookmarkedPictures()) {
-            binding.bookmarkedPicturesList.setVisibility(GONE);
-            if (gridAdapter != null) {
-                gridAdapter.clear();
-                ((BookmarkListRootFragment)getParentFragment()).viewPagerNotifyDataSetChanged();
+            binding?.bookmarkedPicturesList?.visibility = View.GONE
+            gridAdapter?.let {
+                it.clear()
+                (parentFragment as? BookmarkListRootFragment)?.viewPagerNotifyDataSetChanged()
             }
-            initList();
+            initList()
         }
     }
 
@@ -92,31 +85,37 @@ public class BookmarkPicturesFragment extends DaggerFragment {
      * the recycler view with bookmarked pictures
      */
     @SuppressLint("CheckResult")
-    private void initList() {
-        if (!NetworkUtils.isInternetConnectionEstablished(getContext())) {
-            handleNoInternet();
-            return;
+    private fun initList() {
+        if (!NetworkUtils.isInternetConnectionEstablished(requireContext())) {
+            handleNoInternet()
+            return
         }
 
-        binding.loadingImagesProgressBar.setVisibility(VISIBLE);
-        binding.statusMessage.setVisibility(GONE);
+        binding?.apply {
+            loadingImagesProgressBar.visibility = View.VISIBLE
+            statusMessage.visibility = View.GONE
+        }
 
-        compositeDisposable.add(controller.loadBookmarkedPictures()
+        compositeDisposable.add(
+            controller.loadBookmarkedPictures()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(this::handleSuccess, this::handleError));
+                .subscribe(::handleSuccess, ::handleError)
+        )
     }
 
     /**
      * Handles the UI updates for no internet scenario
      */
-    private void handleNoInternet() {
-        binding.loadingImagesProgressBar.setVisibility(GONE);
-        if (gridAdapter == null || gridAdapter.isEmpty()) {
-            binding.statusMessage.setVisibility(VISIBLE);
-            binding.statusMessage.setText(getString(R.string.no_internet));
-        } else {
-            ViewUtil.showShortSnackbar(binding.parentLayout, R.string.no_internet);
+    private fun handleNoInternet() {
+        binding?.apply {
+            loadingImagesProgressBar.visibility = View.GONE
+            if (gridAdapter == null || gridAdapter?.isEmpty == true) {
+                statusMessage.visibility = View.VISIBLE
+                statusMessage.text = getString(R.string.no_internet)
+            } else {
+                ViewUtil.showShortSnackbar(parentLayout, R.string.no_internet)
+            }
         }
     }
 
@@ -124,39 +123,43 @@ public class BookmarkPicturesFragment extends DaggerFragment {
      * Logs and handles API error scenario
      * @param throwable
      */
-    private void handleError(Throwable throwable) {
-        Timber.e(throwable, "Error occurred while loading images inside a category");
-        try{
-            ViewUtil.showShortSnackbar(binding.getRoot(), R.string.error_loading_images);
-            initErrorView();
-        }catch (Exception e){
-            e.printStackTrace();
+    private fun handleError(throwable: Throwable) {
+        Timber.e(throwable, "Error occurred while loading images inside a category")
+        try {
+            ViewUtil.showShortSnackbar(binding?.root ?: return, R.string.error_loading_images)
+            initErrorView()
+        } catch (e: Exception) {
+            e.printStackTrace()
         }
     }
 
     /**
-     * Handles the UI updates for a error scenario
+     * Handles the UI updates for an error scenario
      */
-    private void initErrorView() {
-        binding.loadingImagesProgressBar.setVisibility(GONE);
-        if (gridAdapter == null || gridAdapter.isEmpty()) {
-            binding.statusMessage.setVisibility(VISIBLE);
-            binding.statusMessage.setText(getString(R.string.no_images_found));
-        } else {
-            binding.statusMessage.setVisibility(GONE);
+    private fun initErrorView() {
+        binding?.apply {
+            loadingImagesProgressBar.visibility = View.GONE
+            if (gridAdapter == null || gridAdapter?.isEmpty == true) {
+                statusMessage.visibility = View.VISIBLE
+                statusMessage.text = getString(R.string.no_images_found)
+            } else {
+                statusMessage.visibility = View.GONE
+            }
         }
     }
 
     /**
-     * Handles the UI updates when there is no bookmarks
+     * Handles the UI updates when there are no bookmarks
      */
-    private void initEmptyBookmarkListView() {
-        binding.loadingImagesProgressBar.setVisibility(GONE);
-        if (gridAdapter == null || gridAdapter.isEmpty()) {
-            binding.statusMessage.setVisibility(VISIBLE);
-            binding.statusMessage.setText(getString(R.string.bookmark_empty));
-        } else {
-            binding.statusMessage.setVisibility(GONE);
+    private fun initEmptyBookmarkListView() {
+        binding?.apply {
+            loadingImagesProgressBar.visibility = View.GONE
+            if (gridAdapter == null || gridAdapter?.isEmpty == true) {
+                statusMessage.visibility = View.VISIBLE
+                statusMessage.text = getString(R.string.bookmark_empty)
+            } else {
+                statusMessage.visibility = View.GONE
+            }
         }
     }
 
@@ -165,54 +168,57 @@ public class BookmarkPicturesFragment extends DaggerFragment {
      * On first load, it initializes the grid view. On subsequent loads, it adds items to the adapter
      * @param collection List of new Media to be displayed
      */
-    private void handleSuccess(List<Media> collection) {
+    private fun handleSuccess(collection: List<Media>?) {
         if (collection == null) {
-            initErrorView();
-            return;
+            initErrorView()
+            return
         }
         if (collection.isEmpty()) {
-            initEmptyBookmarkListView();
-            return;
+            initEmptyBookmarkListView()
+            return
         }
 
         if (gridAdapter == null) {
-            setAdapter(collection);
+            setAdapter(collection)
         } else {
-            if (gridAdapter.containsAll(collection)) {
-                binding.loadingImagesProgressBar.setVisibility(GONE);
-                binding.statusMessage.setVisibility(GONE);
-                binding.bookmarkedPicturesList.setVisibility(VISIBLE);
-                binding.bookmarkedPicturesList.setAdapter(gridAdapter);
-                return;
+            if (gridAdapter?.containsAll(collection) == true) {
+                binding?.apply {
+                    loadingImagesProgressBar.visibility = View.GONE
+                    statusMessage.visibility = View.GONE
+                    bookmarkedPicturesList.visibility = View.VISIBLE
+                    bookmarkedPicturesList.adapter = gridAdapter
+                }
+                return
             }
-            gridAdapter.addItems(collection);
-            ((BookmarkListRootFragment) getParentFragment()).viewPagerNotifyDataSetChanged();
+            gridAdapter?.addItems(collection)
+            (parentFragment as? BookmarkListRootFragment)?.viewPagerNotifyDataSetChanged()
         }
-        binding.loadingImagesProgressBar.setVisibility(GONE);
-        binding.statusMessage.setVisibility(GONE);
-        binding.bookmarkedPicturesList.setVisibility(VISIBLE);
+        binding?.apply {
+            loadingImagesProgressBar.visibility = View.GONE
+            statusMessage.visibility = View.GONE
+            bookmarkedPicturesList.visibility = View.VISIBLE
+        }
     }
 
     /**
      * Initializes the adapter with a list of Media objects
      * @param mediaList List of new Media to be displayed
      */
-    private void setAdapter(List<Media> mediaList) {
-        gridAdapter = new GridViewAdapter(
-                this.getContext(),
-                R.layout.layout_category_images,
-                mediaList
-        );
-        binding.bookmarkedPicturesList.setAdapter(gridAdapter);
+    private fun setAdapter(mediaList: List<Media>) {
+        gridAdapter = GridViewAdapter(
+            requireContext(),
+            R.layout.layout_category_images,
+            mediaList.toMutableList()
+        )
+        binding?.bookmarkedPicturesList?.adapter = gridAdapter
     }
 
     /**
-     * It return an instance of gridView adapter which helps in extracting media details
+     * It returns an instance of gridView adapter which helps in extracting media details
      * used by the gridView
-     * @return  GridView Adapter
+     * @return GridView Adapter
      */
-    public ListAdapter getAdapter() {
-        return binding.bookmarkedPicturesList.getAdapter();
+    fun getAdapter(): ListAdapter? {
+        return binding?.bookmarkedPicturesList?.adapter
     }
-
 }
