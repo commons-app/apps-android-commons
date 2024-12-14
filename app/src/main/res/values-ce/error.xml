@@ -3,5 +3,8 @@
 * Умар
 -->
 <resources>
+  <string name="crash_dialog_title">Викилармин гӀалат</string>
+  <string name="crash_dialog_text">Упс. Цхьа хӀума нийса дац!</string>
+  <string name="crash_dialog_comment_prompt">Дийца ахьа хӀу динера, электронан поштехула тхоьга йазде. Цуьнах проблема нисйан гӀо хира ду!</string>
   <string name="crash_dialog_ok_toast">Баркалла!</string>
 </resources>

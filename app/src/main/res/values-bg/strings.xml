@@ -2,6 +2,7 @@
 <!-- Authors:
 * DCLXVI
 * Datawiki30
+* Kareyac
 * MegaAlex
 * Spiritia
 * StanProg
@@ -13,7 +14,7 @@
 <resources>
   <string name="commons_facebook">Facebook страница на Общомедия</string>
   <string name="commons_logo">Лого на Общомедия</string>
-  <string name="commons_website">Общомедия</string>
+  <string name="commons_website">Сайт на Общомедия</string>
   <string name="submit">Изпращане</string>
   <plurals name="starting_multiple_uploads">
     <item quantity="one">Обработване на %d качване</item>
@@ -41,7 +42,6 @@
   <string name="preference_category_feedback">Обратна връзка</string>
   <string name="preference_category_privacy">Поверителност</string>
   <string name="app_name">Общомедия</string>
-  <string name="bullet">•</string>
   <string name="menu_settings">Настройки</string>
   <string name="intent_share_upload_label">Качване в Общомедия</string>
   <string name="username">Потребителско име</string>
@@ -55,14 +55,14 @@
   <string name="login_success">Успешно влизане.</string>
   <string name="login_failed">Неуспешно влизане!</string>
   <string name="upload_failed">Файлът не е намерен. Моля, опитайте с друг файл.</string>
-  <string name="authentication_failed">Заверката е неуспешна. Влезете отново.</string>
+  <string name="authentication_failed">Неуспешен опит за удостоверяване. Моля, влезете отново.</string>
   <string name="uploading_started">Качването започна!</string>
   <string name="upload_completed_notification_title">Файл %1$s е качен!</string>
   <string name="upload_completed_notification_text">Докоснете, за да видите качения файл</string>
   <string name="upload_progress_notification_title_start">Качване на файл: %s</string>
   <string name="upload_progress_notification_title_in_progress">„%1$s“ е в процес на качване</string>
   <string name="upload_progress_notification_title_finishing">Завършвам с качване на „%1$s“</string>
-  <string name="upload_failed_notification_title" fuzzy="true">Качването на „%1$s“ е неуспешно</string>
+  <string name="upload_failed_notification_title">Качването на „%1$s“ е неуспешно</string>
   <string name="upload_failed_notification_subtitle">Докоснете, за да видите</string>
   <string name="title_activity_contributions">Моите последни качвания</string>
   <string name="contribution_state_failed">Неуспешно</string>
@@ -157,7 +157,6 @@
   <string name="location_permission_title">Изисква се разрешение за съхранение на геолокационни данни</string>
   <string name="ok">Добре</string>
   <string name="warning">Предупреждение</string>
-  <string name="duplicate_image_found">Открит е дубликат на файла</string>
   <string name="upload">Качване</string>
   <string name="yes">Да</string>
   <string name="no">Не</string>
@@ -218,7 +217,7 @@
   <string name="nominated_see_more">Вижте по-подробна информация на уеб страницата</string>
   <string name="skip_login">Пропускане</string>
   <string name="navigation_item_login">Влизане</string>
-  <string name="skip_login_message">Трябва да влезете в системата, за да можете в бъдеще да качвате изображения.</string>
+  <string name="skip_login_message" fuzzy="true">Трябва да влезете в системата, за да можете в бъдеще да качвате изображения.</string>
   <string name="login_alert_message">Влезте в сметката си, за да използвате тази функционалност.</string>
   <string name="copy_wikicode">Копиране на уикитекста в кеша</string>
   <string name="wikicode_copied">Уикитекстът е копиран в кеша</string>
@@ -230,6 +229,7 @@
   <string name="about_rate_us">Оценете ни!</string>
   <string name="about_faq">ЧЗВ</string>
   <string name="no_internet">Няма връзка с интернет</string>
+  <string name="about_translate">Превеждане</string>
   <string name="about_translate_title">Езици</string>
   <string name="about_translate_cancel">Отказ</string>
   <string name="showcase_view_needs_photo">Това място има нужда от снимка.</string>
@@ -270,6 +270,7 @@
   <string name="preference_author_name_toggle">Използване на персонализирано авторско име</string>
   <string name="preference_author_name_toggle_summary">При качването използвайте персонализирано авторско име вместо потребителското си име</string>
   <string name="preference_author_name">Персонализирано авторско име</string>
+  <string name="nearby_fragment">Наблизо</string>
   <string name="read_notifications">Известия (прочетени)</string>
   <string name="list_sheet">Списък</string>
   <string name="next">Следваща</string>
@@ -292,7 +293,7 @@
   <string name="display_campaigns">Показване на кампании</string>
   <string name="display_campaigns_explanation">Вижте текущите кампании</string>
   <string name="nearby_campaign_dismiss_message">Вече няма да ви се показват кампаниите. Ако промените решението си, ще намерите тази настройка в Настройки.</string>
-  <string name="this_function_needs_network_connection">Тази опция изисква да сте свързани към мрежата. Проверете настройките за връзка.</string>
+  <string name="this_function_needs_network_connection">Тази опция изисква да сте свързани към мрежата. Моля, проверете настройките за връзка.</string>
   <string name="error_processing_image">Възникна грешка при обработката на картината. Моля, опитайте отново!</string>
   <string name="no_image">Няма използвани изображения</string>
   <string name="no_image_reverted">Няма върнати изображения</string>
@@ -304,4 +305,7 @@
   <string name="menu_option_unread">Преглеждане на непрочетени</string>
   <string name="error_occurred_in_picking_images">Възникна грешка при избирането на изображенията</string>
   <string name="please_wait">Моля, изчакайте...</string>
+  <string name="delete_helper_ask_spam_blurry">напълно размазано</string>
+  <string name="leaderboard_nearby">Наблизо</string>
+  <string name="read_help_link">Прочетете повече</string>
 </resources>

@@ -15,5 +15,7 @@ interface PageMediaInterface {
      * @param title the title of the page
      */
     @GET("api/rest_v1/page/media-list/{title}")
-    fun getMediaList(@Path("title") title: String?): Single<PageMediaListResponse>
+    fun getMediaList(
+        @Path("title") title: String?,
+    ): Single<PageMediaListResponse>
 }

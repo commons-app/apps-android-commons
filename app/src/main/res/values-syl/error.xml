@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* Sadidmibzalhan
 * ꠢꠣꠍꠘ ꠞꠣꠎꠣ
 -->
 <resources>
   <string name="crash_dialog_title">ꠇꠝꠧꠘ ꠇꠦꠔꠞꠣꠁ ꠉꠦꠌꠦ</string>
   <string name="crash_dialog_text">ꠀꠢ꠆ꠢꠣ।। ꠇꠥꠘ꠆ꠔꠣꠔ ꠛꠦꠠꠣ ꠟꠣꠉꠌꠦ!</string>
   <string name="crash_dialog_comment_prompt">ꠀꠝꠞꠣꠞꠦ ꠎꠣꠘꠣꠃꠇ꠆ꠇꠣ ꠀꠙꠘꠦ ꠇꠤꠔꠣ ꠇꠞꠣꠔ ꠀꠌꠟꠣ, ꠔꠣꠞꠛꠣꠖꠦ ꠀꠝꠞꠣꠞꠉꠦꠌꠦ ꠁꠝꠦꠁꠟꠖꠤ ꠙꠣꠑꠣꠃꠇ꠆ꠇꠣ।। ꠁꠇꠣꠘꠦ ꠑꠤꠇ ꠇꠣꠀꠔ ꠀꠝꠞꠣꠞꠦ ꠡꠣꠗ ꠖꠤꠛꠧ</string>
-  <string name="crash_dialog_ok_toast">ꠗꠁꠘ꠆ꠘꠛꠣꠖ!</string>
+  <string name="crash_dialog_ok_toast">ꠡꠥꠇꠞꠤꠀ! ꠗꠁꠘ꠆ꠘꠛꠣꠖ!</string>
 </resources>

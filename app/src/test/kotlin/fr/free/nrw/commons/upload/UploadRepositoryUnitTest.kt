@@ -15,18 +15,18 @@ import fr.free.nrw.commons.repository.UploadRepository
 import fr.free.nrw.commons.upload.structure.depictions.DepictModel
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
 import io.reactivex.Completable
+import io.reactivex.Observable
 import io.reactivex.Single
 import org.junit.Before
 import org.junit.Test
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.mockito.Mock
-import org.mockito.Mockito.`when`
 import org.mockito.Mockito.mock
+import org.mockito.Mockito.`when`
 import org.mockito.MockitoAnnotations
 import java.lang.reflect.Method
 
 class UploadRepositoryUnitTest {
-
     private lateinit var repository: UploadRepository
 
     @Mock
@@ -63,6 +63,9 @@ class UploadRepositoryUnitTest {
     private lateinit var place: Place
 
     @Mock
+    private var location: LatLng? = null
+
+    @Mock
     private lateinit var similarImageInterface: SimilarImageInterface
 
     @Mock
@@ -79,15 +82,16 @@ class UploadRepositoryUnitTest {
 
     @Before
     fun setUp() {
-        MockitoAnnotations.initMocks(this)
-        repository = UploadRepository(
-            uploadModel,
-            uploadController,
-            categoriesModel,
-            nearbyPlaces,
-            depictModel,
-            contributionDao
-        )
+        MockitoAnnotations.openMocks(this)
+        repository =
+            UploadRepository(
+                uploadModel,
+                uploadController,
+                categoriesModel,
+                nearbyPlaces,
+                depictModel,
+                contributionDao,
+            )
         `when`(contributionDao.save(contribution)).thenReturn(completable)
     }
 
@@ -100,7 +104,7 @@ class UploadRepositoryUnitTest {
     fun testPrepareMedia() {
         assertEquals(
             repository.prepareMedia(contribution),
-            uploadController.prepareMedia(contribution)
+            uploadController.prepareMedia(contribution),
         )
     }
 
@@ -108,13 +112,13 @@ class UploadRepositoryUnitTest {
     fun testSaveContribution() {
         assertEquals(
             repository.saveContribution(contribution),
-            contributionDao.save(contribution).blockingAwait()
+            contributionDao.save(contribution).blockingAwait(),
         )
     }
 
     @Test
     fun testGetUploads() {
-        assertEquals(repository.uploads, uploadModel.uploads)
+        assertEquals(repository.getUploads(), uploadModel.uploads)
     }
 
     @Test
@@ -127,14 +131,14 @@ class UploadRepositoryUnitTest {
 
     @Test
     fun testGetSelectedCategories() {
-        assertEquals(repository.selectedCategories, categoriesModel.getSelectedCategories())
+        assertEquals(repository.getSelectedCategories(), categoriesModel.getSelectedCategories())
     }
 
     @Test
     fun testSearchAll() {
         assertEquals(
             repository.searchAll("", listOf(), listOf()),
-            categoriesModel.searchAll("", listOf(), listOf())
+            categoriesModel.searchAll("", listOf(), listOf()),
         )
     }
 
@@ -153,38 +157,47 @@ class UploadRepositoryUnitTest {
     @Test
     fun testContainsYear() {
         assertEquals(
-            repository.containsYear(""), categoriesModel.containsYear("")
+            repository.isSpammyCategory(""),
+            categoriesModel.isSpammyCategory(""),
         )
     }
 
     @Test
     fun testGetLicenses() {
-        assertEquals(repository.licenses, uploadModel.licenses)
+        assertEquals(repository.getLicenses(), uploadModel.licenses)
     }
 
     @Test
     fun testGetSelectedLicense() {
-        assertEquals(repository.selectedLicense, uploadModel.selectedLicense)
+        assertEquals(repository.getSelectedLicense(), uploadModel.selectedLicense)
     }
 
     @Test
     fun testGetCount() {
-        assertEquals(repository.count, uploadModel.count)
+        assertEquals(repository.getCount(), uploadModel.count)
     }
 
     @Test
     fun testPreProcessImage() {
         assertEquals(
-            repository.preProcessImage(uploadableFile, place, similarImageInterface),
-            uploadModel.preProcessImage(uploadableFile, place, similarImageInterface)
+            repository.preProcessImage(uploadableFile, place, similarImageInterface, location),
+            uploadModel.preProcessImage(uploadableFile, place, similarImageInterface, location),
         )
     }
 
     @Test
     fun testGetImageQuality() {
         assertEquals(
-            repository.getImageQuality(uploadItem),
-            uploadModel.getImageQuality(uploadItem)
+            repository.getImageQuality(uploadItem, location),
+            uploadModel.getImageQuality(uploadItem, location),
+        )
+    }
+
+    @Test
+    fun testGetCaptionQuality() {
+        assertEquals(
+            repository.getCaptionQuality(uploadItem),
+            uploadModel.getCaptionQuality(uploadItem)
         )
     }
 
@@ -198,7 +211,7 @@ class UploadRepositoryUnitTest {
         `when`(uploadModel.items).thenReturn(listOf(uploadItem))
         assertEquals(
             repository.getUploadItem(0),
-            uploadModel.items[0]
+            uploadModel.items[0],
         )
     }
 
@@ -214,33 +227,35 @@ class UploadRepositoryUnitTest {
 
     @Test
     fun testSetSelectedExistingDepictions() {
-        assertEquals(repository.setSelectedExistingDepictions(listOf("")),
-            uploadModel.setSelectedExistingDepictions(listOf("")))
+        assertEquals(
+            repository.setSelectedExistingDepictions(listOf("")),
+            uploadModel.setSelectedExistingDepictions(listOf("")),
+        )
     }
 
     @Test
     fun testOnDepictItemClicked() {
         assertEquals(
             repository.onDepictItemClicked(depictedItem, mock()),
-            uploadModel.onDepictItemClicked(depictedItem, mock())
+            uploadModel.onDepictItemClicked(depictedItem, mock()),
         )
     }
 
     @Test
     fun testGetSelectedDepictions() {
-        assertEquals(repository.selectedDepictions, uploadModel.selectedDepictions)
+        assertEquals(repository.getSelectedDepictions(), uploadModel.selectedDepictions)
     }
 
     @Test
     fun testGetSelectedExistingDepictions() {
-        assertEquals(repository.selectedExistingDepictions, uploadModel.selectedExistingDepictions)
+        assertEquals(repository.getSelectedExistingDepictions(), uploadModel.selectedExistingDepictions)
     }
 
     @Test
     fun testSearchAllEntities() {
         assertEquals(
             repository.searchAllEntities(""),
-            depictModel.searchAllEntities("", repository)
+            depictModel.searchAllEntities("", repository),
         )
     }
 
@@ -250,8 +265,8 @@ class UploadRepositoryUnitTest {
         `when`(uploadItem.place).thenReturn(place)
         `when`(place.wikiDataEntityId).thenReturn("1")
         assertEquals(
-            repository.placeDepictions,
-            depictModel.getPlaceDepictions(listOf("1"))
+            repository.getPlaceDepictions(),
+            depictModel.getPlaceDepictions(listOf("1")),
         )
     }
 
@@ -260,13 +275,16 @@ class UploadRepositoryUnitTest {
         `when`(
             nearbyPlaces.getFromWikidataQuery(
                 LatLng(0.0, 0.0, 0.0f),
-                java.util.Locale.getDefault().language, 0.1,
-                false, null
-            )
+                java.util.Locale
+                    .getDefault()
+                    .language,
+                0.1,
+                null,
+            ),
         ).thenReturn(listOf(place))
         assertEquals(
             repository.checkNearbyPlaces(0.0, 0.0),
-            place
+            place,
         )
     }
 
@@ -274,7 +292,7 @@ class UploadRepositoryUnitTest {
     fun testCheckNearbyPlacesWithoutExceptionCaseNull() {
         assertEquals(
             repository.checkNearbyPlaces(0.0, 0.0),
-            null
+            null,
         )
     }
 
@@ -283,13 +301,16 @@ class UploadRepositoryUnitTest {
         `when`(
             nearbyPlaces.getFromWikidataQuery(
                 LatLng(0.0, 0.0, 0.0f),
-                java.util.Locale.getDefault().language, 0.1,
-                false, null
-            )
+                java.util.Locale
+                    .getDefault()
+                    .language,
+                0.1,
+                null,
+            ),
         ).thenThrow(Exception())
         assertEquals(
             repository.checkNearbyPlaces(0.0, 0.0),
-            null
+            null,
         )
     }
 
@@ -297,7 +318,7 @@ class UploadRepositoryUnitTest {
     fun testUseSimilarPictureCoordinates() {
         assertEquals(
             repository.useSimilarPictureCoordinates(imageCoordinates, 0),
-            uploadModel.useSimilarPictureCoordinates(imageCoordinates, 0)
+            uploadModel.useSimilarPictureCoordinates(imageCoordinates, 0),
         )
     }
 
@@ -306,8 +327,8 @@ class UploadRepositoryUnitTest {
         `when`(uploadModel.items).thenReturn(listOf(uploadItem))
         `when`(uploadItem.isWLMUpload).thenReturn(true)
         assertEquals(
-            repository.isWMLSupportedForThisPlace,
-            true
+            repository.isWMLSupportedForThisPlace(),
+            true,
         )
     }
 
@@ -315,49 +336,59 @@ class UploadRepositoryUnitTest {
     fun testGetDepictions() {
         `when`(depictModel.getDepictions("Q12"))
             .thenReturn(Single.just(listOf(mock(DepictedItem::class.java))))
-        val method: Method = UploadRepository::class.java.getDeclaredMethod(
-            "getDepictions",
-            List::class.java
-        )
+        val method: Method =
+            UploadRepository::class.java.getDeclaredMethod(
+                "getDepictions",
+                List::class.java,
+            )
         method.isAccessible = true
         method.invoke(repository, listOf("Q12"))
     }
 
     @Test
     fun testJoinIDs() {
-        val method: Method = UploadRepository::class.java.getDeclaredMethod(
-            "joinQIDs",
-            List::class.java
-        )
+        val method: Method =
+            UploadRepository::class.java.getDeclaredMethod(
+                "joinQIDs",
+                List::class.java,
+            )
         method.isAccessible = true
         method.invoke(repository, listOf("Q12", "Q23"))
     }
 
     @Test
     fun `test joinIDs when depictIDs is null`() {
-        val method: Method = UploadRepository::class.java.getDeclaredMethod(
-            "joinQIDs",
-            List::class.java
-        )
+        val method: Method =
+            UploadRepository::class.java.getDeclaredMethod(
+                "joinQIDs",
+                List::class.java,
+            )
         method.isAccessible = true
         method.invoke(repository, null)
     }
 
     @Test
     fun testGetSelectedExistingCategories() {
-        assertEquals(repository.selectedExistingCategories,
-            categoriesModel.getSelectedExistingCategories())
+        assertEquals(
+            repository.getSelectedExistingCategories(),
+            categoriesModel.getSelectedExistingCategories(),
+        )
     }
 
     @Test
     fun testSetSelectedExistingCategories() {
-        assertEquals(repository.setSelectedExistingCategories(listOf("Test")),
-            categoriesModel.setSelectedExistingCategories(mutableListOf("Test")))
+        assertEquals(
+            repository.setSelectedExistingCategories(listOf("Test")),
+            categoriesModel.setSelectedExistingCategories(mutableListOf("Test")),
+        )
     }
 
     @Test
     fun testGetCategories() {
-        assertEquals(repository.getCategories(listOf("Test")),
-            categoriesModel.getCategoriesByName(mutableListOf("Test")))
+        assertEquals(
+            repository.getCategories(listOf("Test")),
+            categoriesModel.getCategoriesByName(mutableListOf("Test"))
+                ?: Observable.empty<List<CategoryItem>>()
+        )
     }
 }

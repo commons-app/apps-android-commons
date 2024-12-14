@@ -3,29 +3,28 @@ package fr.free.nrw.commons.auth
 import android.accounts.Account
 import android.accounts.AccountManager
 import android.content.Context
+import androidx.test.core.app.ApplicationProvider
 import fr.free.nrw.commons.TestCommonsApplication
+import fr.free.nrw.commons.auth.login.LoginResult
 import fr.free.nrw.commons.kvstore.JsonKvStore
+import io.mockk.every
+import io.mockk.mockk
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.MockitoAnnotations
-import org.powermock.api.mockito.PowerMockito.`when`
 import org.robolectric.RobolectricTestRunner
-import org.robolectric.RuntimeEnvironment
 import org.robolectric.Shadows.shadowOf
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
-import org.wikipedia.login.LoginResult
 import java.lang.reflect.Method
-
 
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
 @LooperMode(LooperMode.Mode.PAUSED)
 class SessionManagerUnitTests {
-
     private lateinit var sessionManager: SessionManager
     private lateinit var accountManager: AccountManager
 
@@ -35,7 +34,6 @@ class SessionManagerUnitTests {
     @Mock
     private lateinit var defaultKvStore: JsonKvStore
 
-    @Mock
     private lateinit var loginResult: LoginResult
 
     @Mock
@@ -43,11 +41,12 @@ class SessionManagerUnitTests {
 
     @Before
     fun setUp() {
-        MockitoAnnotations.initMocks(this)
-        accountManager = AccountManager.get(RuntimeEnvironment.application)
+        loginResult = mockk()
+        MockitoAnnotations.openMocks(this)
+        accountManager = AccountManager.get(ApplicationProvider.getApplicationContext())
         shadowOf(accountManager).addAccount(account)
         sessionManager =
-            SessionManager(RuntimeEnvironment.application.applicationContext, defaultKvStore)
+            SessionManager(ApplicationProvider.getApplicationContext(), defaultKvStore)
     }
 
     @Test
@@ -59,9 +58,10 @@ class SessionManagerUnitTests {
     @Test
     @Throws(Exception::class)
     fun testRemoveAccountCaseNull() {
-        val method: Method = SessionManager::class.java.getDeclaredMethod(
-            "removeAccount"
-        )
+        val method: Method =
+            SessionManager::class.java.getDeclaredMethod(
+                "removeAccount",
+            )
         method.isAccessible = true
         method.invoke(sessionManager)
     }
@@ -69,12 +69,13 @@ class SessionManagerUnitTests {
     @Test
     @Throws(Exception::class)
     fun testUpdateAccount() {
-        `when`(loginResult.userName).thenReturn("username")
-        `when`(loginResult.password).thenReturn("password")
-        val method: Method = SessionManager::class.java.getDeclaredMethod(
-            "updateAccount",
-            LoginResult::class.java
-        )
+        every { loginResult.userName } returns "username"
+        every { loginResult.password } returns "password"
+        val method: Method =
+            SessionManager::class.java.getDeclaredMethod(
+                "updateAccount",
+                LoginResult::class.java,
+            )
         method.isAccessible = true
         method.invoke(sessionManager, loginResult)
     }
@@ -118,11 +119,12 @@ class SessionManagerUnitTests {
     @Test
     @Throws(Exception::class)
     fun testCreateAccount() {
-        val method: Method = SessionManager::class.java.getDeclaredMethod(
-            "createAccount",
-            String::class.java,
-            String::class.java
-        )
+        val method: Method =
+            SessionManager::class.java.getDeclaredMethod(
+                "createAccount",
+                String::class.java,
+                String::class.java,
+            )
         method.isAccessible = true
         Assert.assertEquals(method.invoke(sessionManager, "username", "password"), true)
     }
@@ -130,10 +132,11 @@ class SessionManagerUnitTests {
     @Test
     @Throws(Exception::class)
     fun testSetUserLoggedIn() {
-        val method: Method = SessionManager::class.java.getDeclaredMethod(
-            "setUserLoggedIn",
-            Boolean::class.java
-        )
+        val method: Method =
+            SessionManager::class.java.getDeclaredMethod(
+                "setUserLoggedIn",
+                Boolean::class.java,
+            )
         method.isAccessible = true
         method.invoke(sessionManager, true)
     }
@@ -141,9 +144,10 @@ class SessionManagerUnitTests {
     @Test
     @Throws(Exception::class)
     fun testGetUserName() {
-        val method: Method = SessionManager::class.java.getDeclaredMethod(
-            "getUserName"
-        )
+        val method: Method =
+            SessionManager::class.java.getDeclaredMethod(
+                "getUserName",
+            )
         method.isAccessible = true
         Assert.assertEquals(method.invoke(sessionManager), null)
     }
@@ -151,11 +155,11 @@ class SessionManagerUnitTests {
     @Test
     @Throws(Exception::class)
     fun testGetPassword() {
-        val method: Method = SessionManager::class.java.getDeclaredMethod(
-            "getPassword"
-        )
+        val method: Method =
+            SessionManager::class.java.getDeclaredMethod(
+                "getPassword",
+            )
         method.isAccessible = true
         Assert.assertEquals(method.invoke(sessionManager), null)
     }
-
 }

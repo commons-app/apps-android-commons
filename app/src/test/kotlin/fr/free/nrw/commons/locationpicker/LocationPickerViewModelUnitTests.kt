@@ -2,12 +2,11 @@ package fr.free.nrw.commons.locationpicker
 
 import android.app.Application
 import androidx.lifecycle.MutableLiveData
-import com.mapbox.mapboxsdk.camera.CameraPosition
 import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.times
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
-import fr.free.nrw.commons.LocationPicker.LocationPickerViewModel
+import fr.free.nrw.commons.CameraPosition
 import org.junit.Before
 import org.junit.Test
 import org.mockito.Mock
@@ -18,7 +17,6 @@ import retrofit2.Call
 import retrofit2.Response
 
 class LocationPickerViewModelUnitTests {
-
     private lateinit var viewModel: LocationPickerViewModel
 
     @Mock
@@ -68,5 +66,4 @@ class LocationPickerViewModelUnitTests {
     fun testGetResult() {
         viewModel.result
     }
-
 }

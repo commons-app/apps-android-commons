@@ -37,7 +37,6 @@
   <string name="preference_category_feedback">Povratna informacija</string>
   <string name="preference_category_privacy">Privatnost</string>
   <string name="app_name">Zajednički poslužitelj</string>
-  <string name="bullet">•</string>
   <string name="menu_settings">Postavke</string>
   <string name="intent_share_upload_label">Prenesi na Zajednički poslužitelj</string>
   <string name="username">Suradničko ime</string>
@@ -48,10 +47,10 @@
   <string name="signup">Otvori račun</string>
   <string name="logging_in_title">Prijava</string>
   <string name="logging_in_message">Molimo pričekajte ...</string>
-  <string name="login_success">Prijava uspješna!</string>
-  <string name="login_failed">Prijava neuspješna!</string>
+  <string name="login_success" fuzzy="true">Prijava uspješna!</string>
+  <string name="login_failed" fuzzy="true">Prijava neuspješna!</string>
   <string name="upload_failed">Datoteka nije pronađena. Molimo probajte drugu.</string>
-  <string name="authentication_failed">Autentifikacija neuspješna. Molimo, prijavite se ponovno</string>
+  <string name="authentication_failed" fuzzy="true">Autentifikacija neuspješna. Molimo, prijavite se ponovno</string>
   <string name="uploading_started">Postavljanje započeto!</string>
   <string name="upload_completed_notification_title">%1$s postavljeno!</string>
   <string name="upload_completed_notification_text">Dodirnite da biste vidjeli datoteku</string>
@@ -74,11 +73,11 @@
   <string name="menu_share">Podijeli</string>
   <string name="share_title_hint" fuzzy="true">Naziv (obavezno)</string>
   <string name="share_description_hint">Opis</string>
-  <string name="login_failed_network">Prijava nije moguća – mrežna pogreška</string>
-  <string name="login_failed_throttled">Previše neuspješnih pokušaja, molimo probajte opet za par minuta.</string>
+  <string name="login_failed_network" fuzzy="true">Prijava nije moguća – mrežna pogreška</string>
+  <string name="login_failed_throttled">Previše neuspješnih pokušaja. Molimo probajte opet za nekoliko minuta.</string>
   <string name="login_failed_blocked">Ispričavamo se, ovaj je suradnik blokiran na Zajedničkom poslužitelju</string>
   <string name="login_failed_2fa_needed">Morate upisati autetifikacijski kôd od dva faktora</string>
-  <string name="login_failed_generic">Prijava neuspješna</string>
+  <string name="login_failed_generic" fuzzy="true">Prijava neuspješna</string>
   <string name="share_upload_button">Postavljanje</string>
   <string name="multiple_share_base_title">Imenujte ovaj set</string>
   <string name="provider_modifications">Promjene</string>
@@ -137,7 +136,7 @@
   <string name="tutorial_4_subtext_1">Naziv: Sydneyjska opera</string>
   <string name="tutorial_4_subtext_2">Opis: Sydneyjska opera viđena iz zaljeva</string>
   <string name="tutorial_4_subtext_3">Kategorije: Sydney Opera House from the west, Sydney Opera House remote views</string>
-  <string name="welcome_wikipedia_text">Dijelite Vaše slike. Pomozite da članci na Wikipediji zažive!</string>
+  <string name="welcome_wikipedia_text">Pridonesite svojim slikama. Pomozite da članci na Wikipediji zažive!</string>
   <string name="welcome_wikipedia_subtext">Slike na wikipediji su sa Zajedničkog poslužitelja.</string>
   <string name="welcome_copyright_text">Vaše slike pomažu u edukaciji ljudi diljem svijeta.</string>
   <string name="welcome_copyright_subtext">Izbjegavajte materijale s autorskim pravima koje ste pronašli na internetu (slike plakata, naslovnice knjiga, i slično).</string>
@@ -154,7 +153,6 @@
   <string name="write_storage_permission_rationale">Potrebno dopuštenje spremanja na vanjsku pohranu. Bez toga aplikacija ne može pristupiti Vašoj kameri/galeriji.</string>
   <string name="ok">U redu</string>
   <string name="warning">Upozorenje</string>
-  <string name="duplicate_image_found">Pronađena duplirana slika</string>
   <string name="upload">Postavi</string>
   <string name="yes">Da</string>
   <string name="no">Ne</string>
@@ -217,8 +215,8 @@
   <string name="nominated_see_more">Pogledajte mrežnu stranicu za više informacija</string>
   <string name="skip_login">Preskoči</string>
   <string name="navigation_item_login">Prijavite se</string>
-  <string name="skip_login_title">Želite li zbilja preskočiti prijavu?</string>
-  <string name="skip_login_message">U budućnosti ćete se morati prijaviti kako biste postavili slike.</string>
+  <string name="skip_login_title" fuzzy="true">Želite li zbilja preskočiti prijavu?</string>
+  <string name="skip_login_message" fuzzy="true">U budućnosti ćete se morati prijaviti kako biste postavili slike.</string>
   <string name="login_alert_message">Molimo da se prijavite kako biste se mogli koristiti ovom mogućnošću</string>
   <string name="nearby_location_not_available">„U blizini“ možda ne radi kako treba. Lokacija nije dostupna.</string>
   <string name="location_permission_rationale_nearby">Potrebno je dopuštenje za popis mjesta u blizini</string>
@@ -260,20 +258,20 @@
   <string name="quiz_back_button">Ako nastavite postavljati slike koje je potrebno izbrisati, Vaš će račun vjerojatno biti blokiran. Jeste li sigurni da želite završiti kviz?</string>
   <string name="construction_event_answer">Slike koje prikazuju tehnologiju ili kulturu dobrodošle su na Zajedničkom poslužitelju.</string>
   <string name="warning_for_no_answer">Izaberite jednu opciju od dvije da biste odgovorili na pitanje</string>
-  <string name="user_not_logged_in">Sesija prijavljivanja istekla je, molimo Vas, prijavite se ponovo.</string>
+  <string name="user_not_logged_in" fuzzy="true">Sesija prijavljivanja istekla je, molimo Vas, prijavite se ponovo.</string>
   <string name="quiz_result_share_message">Podijelite kviz s prijateljima!</string>
   <string name="correct">Točan odgovor</string>
   <string name="wrong">Pogrešan odgovor</string>
   <string name="quiz_screenshot_question">Želite li postaviti ovu snimku zaslona?</string>
   <string name="share_app_title">Aplikacija za dijeljenje</string>
-  <string name="error_fetching_nearby_places">Pogreška prilikom dohvaćanja mjesta u blizini.</string>
+  <string name="error_fetching_nearby_places" fuzzy="true">Pogreška prilikom dohvaćanja mjesta u blizini.</string>
   <string name="delete_search_dialog">Želite li izbrisati ovu pretragu?</string>
   <string name="nominate_delete">Predloži za brisanje</string>
   <string name="delete">Izbriši</string>
   <string name="Profile">Podatci o suradnici/suradniku</string>
   <string name="statistics">Statistike</string>
   <string name="statistics_thanks">Primljeno zahvala</string>
-  <string name="level">Razina</string>
+  <string name="level" fuzzy="true">Razina</string>
   <string name="error_occurred">Došlo je do pogrješke!</string>
   <string name="notifications_channel_name_all">Obavijesti Zajedničkoga poslužitelja</string>
   <string name="title_page_bookmarks_pictures">Slike</string>

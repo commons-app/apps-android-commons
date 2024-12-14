@@ -14,7 +14,6 @@
       style="@style/Widget.AppCompat.Button.Borderless"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_centerInParent="true"
       android:layout_marginLeft="@dimen/activity_margin_horizontal"
       android:layout_marginTop="@dimen/activity_margin_horizontal"
       android:layout_marginRight="@dimen/activity_margin_horizontal"
@@ -30,34 +29,28 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/content_layout"
-        android:layout_centerInParent="true"
       android:orientation="horizontal"
         >
 
         <ProgressBar
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/progressBar"
-            android:layout_centerInParent="true"
-            />
+            android:id="@+id/progressBar" />
 
         <ImageView
             android:id="@+id/nearby_icon"
             android:layout_width="@dimen/dimen_40"
             android:layout_height="@dimen/dimen_40"
-            android:layout_marginLeft="@dimen/standard_gap"
             android:layout_marginStart="@dimen/standard_gap"
             android:scaleType="centerCrop"
             app:srcCompat="@drawable/ic_location_white_24dp"
-            android:tint="?attr/card_item_color"
-          />
+          app:tint="?attr/card_item_color" />
 
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:orientation="horizontal"
+          android:orientation="horizontal"
             android:layout_gravity="center_vertical"
             android:gravity="center_vertical"
             android:weightSum="4"
@@ -68,8 +61,7 @@
                 android:layout_width="@dimen/dimen_0"
                 android:layout_height="wrap_content"
                 android:layout_weight="3"
-                android:layout_centerInParent="true"
-                android:layout_marginLeft="@dimen/standard_gap"
+              android:layout_marginLeft="@dimen/standard_gap"
                 android:layout_marginRight="@dimen/standard_gap"
                 tools:text="test distance"
                 android:textColor="?attr/card_item_color"
@@ -92,6 +84,13 @@
                 >
 
             </TextView>
+
+            <ImageView
+              android:id="@+id/nearby_compass"
+              android:layout_width="40dp"
+              android:layout_height="40dp"
+              android:layout_marginEnd="16dp"
+              app:srcCompat="@drawable/baseline_arrow_upward_24"/>
 
         </LinearLayout>
 

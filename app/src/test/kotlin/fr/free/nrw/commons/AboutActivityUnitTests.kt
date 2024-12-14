@@ -4,6 +4,7 @@ import android.content.Context
 import android.net.Uri
 import android.view.Menu
 import android.view.MenuItem
+import androidx.test.core.app.ApplicationProvider
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
@@ -11,29 +12,26 @@ import org.junit.runner.RunWith
 import org.mockito.MockitoAnnotations
 import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
-import org.robolectric.RuntimeEnvironment
 import org.robolectric.Shadows
 import org.robolectric.annotation.Config
 import org.robolectric.fakes.RoboMenu
 import org.robolectric.fakes.RoboMenuItem
 import org.robolectric.shadows.ShadowActivity
 
-
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
 class AboutActivityUnitTests {
-
     private lateinit var activity: AboutActivity
 
     private lateinit var context: Context
 
     @Before
     fun setUp() {
-        MockitoAnnotations.initMocks(this)
+        MockitoAnnotations.openMocks(this)
 
         activity = Robolectric.buildActivity(AboutActivity::class.java).create().get()
 
-        context = RuntimeEnvironment.application.applicationContext
+        context = ApplicationProvider.getApplicationContext()
     }
 
     @Test
@@ -116,5 +114,4 @@ class AboutActivityUnitTests {
     fun testOnSupportNavigateUp() {
         activity.onSupportNavigateUp()
     }
-
 }

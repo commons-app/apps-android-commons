@@ -6,53 +6,65 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
-import androidx.appcompat.widget.AppCompatButton
-import androidx.appcompat.widget.AppCompatEditText
+import android.widget.Button
+import android.widget.EditText
 import androidx.fragment.app.Fragment
-import fr.free.nrw.commons.R
-import kotlinx.android.synthetic.main.fragment_advance_query.*
+import fr.free.nrw.commons.databinding.FragmentAdvanceQueryBinding
 
 class AdvanceQueryFragment : Fragment() {
+    private var _binding: FragmentAdvanceQueryBinding? = null
+    val binding get() = _binding
 
-    lateinit var originalQuery: String
     lateinit var callback: Callback
-    lateinit var etQuery: AppCompatEditText
-    lateinit var btnApply: AppCompatButton
-    lateinit var btnReset: AppCompatButton
+
+    /**
+     * View Elements
+     */
+    private var etQuery: EditText? = null
+    private var btnApply: Button? = null
+    private var btnReset: Button? = null
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_advance_query, container, false)
-        originalQuery = arguments?.getString("query")!!
+        _binding = FragmentAdvanceQueryBinding.inflate(inflater, container, false)
+        etQuery = binding?.etQuery
+        btnApply = binding?.btnApply
+        btnReset = binding?.btnReset
         setHasOptionsMenu(false)
-        return view
+        return binding?.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         super.onViewCreated(view, savedInstanceState)
-        etQuery = view.findViewById(R.id.et_query)
-        btnApply = view.findViewById(R.id.btn_apply)
-        btnReset = view.findViewById(R.id.btn_reset)
 
-        etQuery.setText(originalQuery)
-        btnReset.setOnClickListener {
-            btnReset.post {
-                etQuery.setText(originalQuery)
-                etQuery.clearFocus()
-                hideKeyBoard()
-                callback.reset()
-            }
+        setUi()
+
+        setClickListeners()
+    }
+
+    private fun setUi() {
+        etQuery?.setText(arguments?.getString("query")!!)
+    }
+
+    private fun setClickListeners() {
+        btnReset?.setOnClickListener {
+            etQuery?.setText(arguments?.getString("query")!!)
+            etQuery?.clearFocus()
+            hideKeyBoard()
+            callback.reset()
         }
 
-        btnApply.setOnClickListener {
-            btnApply.post {
-                etQuery.clearFocus()
-                hideKeyBoard()
-                callback.apply(etQuery.text.toString())
-                callback.close()
-            }
+        btnApply?.setOnClickListener {
+            etQuery?.clearFocus()
+            hideKeyBoard()
+            callback.apply(etQuery?.text.toString())
+            callback.close()
         }
     }
 
@@ -62,9 +74,16 @@ class AdvanceQueryFragment : Fragment() {
         inputMethodManager?.hideSoftInputFromWindow(view?.windowToken, 0)
     }
 
+    override fun onDestroyView() {
+        _binding = null
+        super.onDestroyView()
+    }
+
     interface Callback {
         fun reset()
+
         fun apply(query: String)
+
         fun close()
     }
 }

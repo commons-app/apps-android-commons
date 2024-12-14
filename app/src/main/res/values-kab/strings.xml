@@ -49,8 +49,8 @@
   <string name="signup">Jerred</string>
   <string name="logging_in_title">Tuqqna...</string>
   <string name="logging_in_message">Rǧu...</string>
-  <string name="login_success">Tuqqna tedda!</string>
-  <string name="login_failed">Tqqna ur teddi ara!</string>
+  <string name="login_success" fuzzy="true">Tuqqna tedda!</string>
+  <string name="login_failed" fuzzy="true">Tqqna ur teddi ara!</string>
   <string name="upload_failed">Ulac afaylu. Ɛreḍ wayeḍ ma ulac aɣilif.</string>
   <string name="authentication_failed" fuzzy="true">Asesteb yecceḍ!</string>
   <string name="uploading_started">Asali yebda!</string>
@@ -73,11 +73,11 @@
   <string name="menu_share">Bḍu</string>
   <string name="share_title_hint" fuzzy="true">Azwel</string>
   <string name="share_description_hint">Aglam</string>
-  <string name="login_failed_network">Ur izmir ara ad yeqqen - tuccḍa n uẓeṭṭa</string>
+  <string name="login_failed_network" fuzzy="true">Ur izmir ara ad yeqqen - tuccḍa n uẓeṭṭa</string>
   <string name="login_failed_throttled">Ddeq n uɛraḍ ur yeddin ara. Ɛreḍ akka di kra n tisdatin</string>
   <string name="login_failed_blocked">Suref-aɣ, aseqdac-agi yewḥel di Commons</string>
   <string name="login_failed_2fa_needed">Yessefk ad d-muddeḍ tangalt n n usesbteb s snat n tarrayin.</string>
-  <string name="login_failed_generic">Tuqqna ur teddi ara</string>
+  <string name="login_failed_generic" fuzzy="true">Tuqqna ur teddi ara</string>
   <string name="share_upload_button">Sali</string>
   <string name="multiple_share_base_title">Semmi tagrumma-agi</string>
   <string name="provider_modifications">Tiẓrigin</string>

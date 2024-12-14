@@ -20,7 +20,7 @@ class PageableParentDepictionsDataSourceTest {
 
     @Before
     fun setUp() {
-        MockitoAnnotations.initMocks(this)
+        MockitoAnnotations.openMocks(this)
     }
 
     @Test
@@ -33,4 +33,3 @@ class PageableParentDepictionsDataSourceTest {
         Assert.assertEquals(dataSource.loadFunction(1, 0), listOf(depictedItem()))
     }
 }
-

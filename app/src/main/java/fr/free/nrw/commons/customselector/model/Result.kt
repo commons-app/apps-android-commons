@@ -7,10 +7,9 @@ data class Result(
     /**
      * CallbackStatus : stores the result status
      */
-    val status:CallbackStatus,
-
+    val status: CallbackStatus,
     /**
      * Images : images retrieved
      */
-    val images: ArrayList<Image>) {
-}
+    val images: ArrayList<Image>,
+)

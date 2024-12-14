@@ -26,7 +26,7 @@ class LoggedOutBookmarksPagerAdapterTests {
      */
     @Before
     fun setUp() {
-        MockitoAnnotations.initMocks(this)
+        MockitoAnnotations.openMocks(this)
         bookmarksPagerAdapter = BookmarksPagerAdapter(fragmentManager, context, true)
     }
 

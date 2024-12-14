@@ -8,17 +8,21 @@ import android.widget.ListAdapter
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
+import androidx.test.core.app.ApplicationProvider
 import com.google.android.material.tabs.TabLayout
 import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.times
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.Media
+import fr.free.nrw.commons.OkHttpConnectionFactory
 import fr.free.nrw.commons.R
-import fr.free.nrw.commons.TestAppAdapter
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesFragment
 import fr.free.nrw.commons.contributions.MainActivity
+import fr.free.nrw.commons.createTestClient
+import fr.free.nrw.commons.databinding.FragmentBookmarksBinding
+import fr.free.nrw.commons.databinding.FragmentFeaturedRootBinding
 import fr.free.nrw.commons.explore.ParentViewPager
 import fr.free.nrw.commons.media.MediaDetailPagerFragment
 import org.junit.Assert
@@ -32,17 +36,14 @@ import org.powermock.api.mockito.PowerMockito.mock
 import org.powermock.reflect.Whitebox
 import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
-import org.robolectric.RuntimeEnvironment
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
-import org.wikipedia.AppAdapter
 import java.lang.reflect.Field
 
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
 @LooperMode(LooperMode.Mode.PAUSED)
 class BookmarkListRootFragmentUnitTest {
-
     private lateinit var fragment: BookmarkListRootFragment
     private lateinit var fragmentManager: FragmentManager
     private lateinit var layoutInflater: LayoutInflater
@@ -81,12 +82,14 @@ class BookmarkListRootFragmentUnitTest {
     @Mock
     private lateinit var adapter: BookmarksPagerAdapter
 
+    private lateinit var binding: FragmentFeaturedRootBinding
+
     @Before
     fun setUp() {
-        MockitoAnnotations.initMocks(this)
-        AppAdapter.set(TestAppAdapter())
+        MockitoAnnotations.openMocks(this)
+        OkHttpConnectionFactory.CLIENT = createTestClient()
         activity = Robolectric.buildActivity(MainActivity::class.java).create().get()
-        context = RuntimeEnvironment.application.applicationContext
+        context = ApplicationProvider.getApplicationContext()
 
         fragment = BookmarkListRootFragment()
         fragmentManager = activity.supportFragmentManager
@@ -95,14 +98,17 @@ class BookmarkListRootFragmentUnitTest {
         fragmentTransaction.commitNowAllowingStateLoss()
 
         bookmarkFragment = BookmarkFragment()
+        bookmarkFragment.binding = FragmentBookmarksBinding.inflate(LayoutInflater.from(activity))
+
+        binding = FragmentFeaturedRootBinding.inflate(LayoutInflater.from(activity))
 
         Whitebox.setInternalState(fragment, "mChildFragmentManager", childFragmentManager)
         Whitebox.setInternalState(fragment, "mParentFragment", bookmarkFragment)
         Whitebox.setInternalState(fragment, "listFragment", listFragment)
         Whitebox.setInternalState(fragment, "mediaDetails", mediaDetails)
         Whitebox.setInternalState(fragment, "bookmarksPagerAdapter", bookmarksPagerAdapter)
-        Whitebox.setInternalState(bookmarkFragment, "tabLayout", tabLayout)
-        Whitebox.setInternalState(bookmarkFragment, "viewPager", viewPager)
+        Whitebox.setInternalState(bookmarkFragment.binding, "tabLayout", tabLayout)
+        Whitebox.setInternalState(bookmarkFragment.binding, "viewPagerBookmarks", viewPager)
         Whitebox.setInternalState(bookmarkFragment, "adapter", adapter)
 
         whenever(childFragmentManager.beginTransaction()).thenReturn(childFragmentTransaction)
@@ -321,5 +327,4 @@ class BookmarkListRootFragmentUnitTest {
         field.set(fragment, null)
         Assert.assertEquals(fragment.backPressed(), false)
     }
-
 }

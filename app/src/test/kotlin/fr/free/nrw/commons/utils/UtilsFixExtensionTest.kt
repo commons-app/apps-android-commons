@@ -5,7 +5,6 @@ import org.junit.Assert.assertEquals
 import org.junit.Test
 
 class UtilsFixExtensionTest {
-
     @Test
     fun jpegResultsInJpg() {
         assertEquals("SampleFile.jpg", fixExtension("SampleFile.jpeg", "jpeg"))

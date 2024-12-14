@@ -4,7 +4,8 @@
   xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
   android:layout_width="match_parent"
-  android:layout_height="match_parent">
+  android:layout_height="match_parent"
+  android:background="?attr/achievementBackground">
 
   <LinearLayout
     android:id="@+id/filters"
@@ -38,6 +39,10 @@
     android:layout_width="match_parent"
     android:layout_height="0dp"
     android:layout_marginTop="10dp"
+    android:scrollbars="vertical"
+    android:fadeScrollbars="false"
+    android:scrollbarThumbVertical="@color/primaryColor"
+    android:scrollbarSize="@dimen/dimen_6"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"

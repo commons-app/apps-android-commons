@@ -15,6 +15,12 @@
   <string name="commons_logo">Logoy Commonsi</string>
   <string name="commons_website">Websitey Commonsi</string>
   <string name="submit">Bırışe</string>
+  <string name="show_captions">Bınnuşte</string>
+  <string name="row_item_language_description">Şınasnayışê zıwani</string>
+  <string name="row_item_caption">Bınnuşte</string>
+  <string name="show_captions_description">Şınasnayış</string>
+  <string name="nearby_row_image">Resım</string>
+  <string name="nearby_all">Pêro</string>
   <string name="appwidget_img">Fotrafê roci</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">1 dosya bar bena</item>
@@ -47,7 +53,6 @@
   <string name="preference_category_feedback">Peyderıştış</string>
   <string name="preference_category_privacy">Dızdêniye</string>
   <string name="app_name">Commons</string>
-  <string name="bullet">•</string>
   <string name="menu_settings">Eyari</string>
   <string name="intent_share_upload_label">Barê Embari ke</string>
   <string name="username">Namey karberi</string>
@@ -59,10 +64,10 @@
   <string name="logging_in_title">Kewno cı</string>
   <string name="logging_in_message">Kerem kerên, bıpawên...</string>
   <string name="updating_caption_message">Kerem ke, bıpawe...</string>
-  <string name="login_success">Cıkewtış hewl bi.</string>
-  <string name="login_failed">Nidekeweya de</string>
+  <string name="login_success" fuzzy="true">Cıkewtış hewl bi.</string>
+  <string name="login_failed" fuzzy="true">Nidekeweya de</string>
   <string name="upload_failed">Dosya nêvineya. Dosyê da bine bıcerebnê.</string>
-  <string name="authentication_failed">Araşt kerdışê kamiye de xırabe vıciyê, reyna cıkewe</string>
+  <string name="authentication_failed" fuzzy="true">Araşt kerdışê kamiye de xırabe vıciyê, reyna cıkewe</string>
   <string name="uploading_started">Barkerdış sertera!</string>
   <string name="upload_completed_notification_title">%1$s bar bi!</string>
   <string name="upload_completed_notification_text">Barkerdışê xo pıro bıde.</string>
@@ -87,11 +92,11 @@
   <string name="add_caption_toast">Kerem ke, seba na dosya rê yew bınnuşte cı ke</string>
   <string name="share_description_hint">Şınasnayış</string>
   <string name="share_caption_hint">Bınnuşte</string>
-  <string name="login_failed_network">Xırabiya kewten-network xeta</string>
+  <string name="login_failed_network" fuzzy="true">Xırabiya kewten-network xeta</string>
   <string name="login_failed_throttled">Şıma xeylê rayi kerd ke cı kewê, a ser nêvıst. Şıma rê zehmet 2-3 deqey ra tepeya reyna bıcerrebnên.</string>
   <string name="login_failed_blocked">Qısur mewni rê, Karber commons dı bloqe biyo.</string>
   <string name="login_failed_2fa_needed">Kodê kamiya raştkerdışi dıfaktorın gani cı kewê.</string>
-  <string name="login_failed_generic">Nidekeweya de</string>
+  <string name="login_failed_generic" fuzzy="true">Nidekeweya de</string>
   <string name="share_upload_button">Bar ke</string>
   <string name="multiple_share_base_title">Saze ne nami</string>
   <string name="provider_modifications">Modifikasyoni</string>
@@ -153,7 +158,6 @@
   <string name="location_permission_title">Mısadey Waştışê Lokasyoni</string>
   <string name="ok">TEMAM</string>
   <string name="warning">Tembe kem</string>
-  <string name="duplicate_image_found">Resımo tekrarın nêvineya</string>
   <string name="upload">Bar ke</string>
   <string name="yes">Eya</string>
   <string name="no">Nê</string>
@@ -260,7 +264,7 @@
   <string name="statistics_thanks">Teşekurê gêriyayi</string>
   <string name="statistics_featured">Resımê weçinıteyi</string>
   <string name="statistics_wikidata_edits">\"Cayê nezdı\" ra resımi</string>
-  <string name="level">Sewiya</string>
+  <string name="level" fuzzy="true">Sewiya</string>
   <string name="images_uploaded">Resımi biyê bar</string>
   <string name="image_reverts">Resımi peyser nêgeriyaye</string>
   <string name="images_used_by_wiki">Gureyniyaye resımi</string>
@@ -284,6 +288,9 @@
   <string name="provider_bookmarks">Nişan</string>
   <string name="provider_bookmarks_location">Nişani</string>
   <string name="no_categories_selected">Kategoriyê ke nêweçiniyê</string>
+  <string name="back_button_warning">Barkerdışi bıtexelne</string>
+  <string name="option_allow">Mısade bıde</string>
+  <string name="option_dismiss">Red ke</string>
   <string name="nominate_for_deletion_done">Temam</string>
   <string name="review_thanks_yes_button_text" fuzzy="true">Eya, çıra mebo</string>
   <string name="review_thanks_no_button_text" fuzzy="true">Resımo bahdoyên</string>
@@ -298,8 +305,8 @@
   <string name="exif_tag_name_location">Herune</string>
   <string name="exif_tag_name_cameraModel">Modelê kamera</string>
   <string name="image_info">Melumatê resımi</string>
-  <string name="delete_helper_ask_spam_blurry">Xesratın</string>
-  <string name="delete_helper_ask_spam_nonsense">Bêmena</string>
+  <string name="delete_helper_ask_spam_blurry" fuzzy="true">Xesratın</string>
+  <string name="delete_helper_ask_spam_nonsense" fuzzy="true">Bêmena</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">Fotrafi çap kerê</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">İnternet ra resimo raştameye</string>
   <string name="delete_helper_ask_reason_copyright_logo">Logo</string>
@@ -337,9 +344,9 @@
   <string name="leaderboard_nearby">Nezdı ra</string>
   <string name="leaderboard_used">Gureyniyaye</string>
   <string name="leaderboard_my_rank_button_text">Rêza mı</string>
-  <string name="mapbox_telemetry" fuzzy="true">Telemetreyi Devre ra vece</string>
   <string name="license_step_title">Lisansê Medya</string>
   <string name="media_detail_step_title">Teferuatê medya</string>
   <string name="read_help_link">Tayêna bıwane</string>
+  <string name="description">Şınasnayış</string>
   <string name="reset">Raçarne</string>
 </resources>

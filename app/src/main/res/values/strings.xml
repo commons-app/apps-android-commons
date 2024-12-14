@@ -59,9 +59,9 @@
   <string name="preference_category_feedback">Feedback</string>
   <string name="preference_category_privacy">Privacy</string>
   <string name="app_name">Commons</string>
-  <string name="bullet">&#8226;</string>
   <string name="menu_settings">Settings</string>
   <string name="intent_share_upload_label">Upload to Commons</string>
+  <string name="upload_in_progress">Upload in progress</string>
   <string name="username">Username</string>
   <string name="password">Password</string>
   <string name="login_credential">Log in to your Commons Beta account</string>
@@ -72,10 +72,13 @@
   <string name="logging_in_message">Please wait…</string>
   <string name="updating_caption_title">Updating captions and descriptions</string>
   <string name="updating_caption_message">Please wait…</string>
-  <string name="login_success">Login success!</string>
-  <string name="login_failed">Login failed!</string>
+  <string name="login_success">Log-in success!</string>
+  <string name="login_failed">Log-in failed!</string>
   <string name="upload_failed">File not found. Please try another file.</string>
-  <string name="authentication_failed">Authentication failed, please login again</string>
+  <string name="retry_limit_reached">Maximum retry limit reached! Please cancel the upload and try again</string>
+  <string name="unrestricted_battery_mode">Turn battery optimization off?</string>
+  <string name="suggest_unrestricted_mode">Uploading more than 3 images works more reliably when the battery optimization is turned off. Please turn battery optimization off for the Commons app from the settings for a smooth upload experience. \n\nPossible steps to turn battery optimization off:\n\nStep 1: Tap on the \'Settings\' button below.\n\nStep 2: Switch from \'Not optimized\' to \'All apps\'.\n\nStep 3: Search for \"Commons\" or \"fr.free.nrw.commons\".\n\nStep 4: Tap it and select \'Don\'t optimize\'.\n\nStep 5: Press \'Done\'.</string>
+  <string name="authentication_failed">Authentication failed. Please log in again.</string>
   <string name="uploading_started">Upload started!</string>
   <string name="uploading_queued">Upload queued (limited connection mode enabled)</string>
   <string name="upload_completed_notification_title">%1$s uploaded!</string>
@@ -104,11 +107,11 @@
   <string name="add_caption_toast">Please provide a caption for this file</string>
   <string name="share_description_hint">Description</string>
   <string name="share_caption_hint">Caption</string>
-  <string name="login_failed_network">Unable to login - network failure</string>
+  <string name="login_failed_network">Unable to log in - network failure</string>
   <string name="login_failed_throttled">Too many unsuccessful attempts. Please try again in a few minutes.</string>
   <string name="login_failed_blocked">Sorry, this user has been blocked on Commons</string>
   <string name="login_failed_2fa_needed">You must provide your two factor authentication code.</string>
-  <string name="login_failed_generic">Login failed</string>
+  <string name="login_failed_generic">Log-in failed</string>
   <string name="share_upload_button">Upload</string>
   <string name="multiple_share_base_title">Name this set</string>
   <string name="provider_modifications">Modifications</string>
@@ -116,6 +119,7 @@
   <string name="categories_search_text_hint">Search categories</string>
   <string name="depicts_search_text_hint">Search for items that your media depicts (mountain, Taj Mahal, etc.)</string>
   <string name="menu_save_categories">Save</string>
+  <string name="menu_overflow_desc">Overflow menu</string>
   <string name="refresh_button">Refresh</string>
   <string name="display_list_button">List</string>
   <string name="contributions_subtitle_zero">(No uploads yet)</string>
@@ -192,9 +196,11 @@
   <string name="read_storage_permission_rationale">Required permission: Read external storage. App cannot access your gallery without this.</string>
   <string name="write_storage_permission_rationale">Required permission: Write external storage. App cannot access your camera/gallery without this.</string>
   <string name="location_permission_title">Requesting Location Permission</string>
+  <string name="in_app_camera_location_permission_title">Record location for in-app shots</string>
+  <string name="in_app_camera_location_switch_pref_summary">Enable this to record location with in-app shots in case the device camera does not record it</string>
   <string name="ok">OK</string>
   <string name="warning">Warning</string>
-  <string name="duplicate_image_found">Duplicate Image Found</string>
+  <string name="duplicate_file_name">Duplicate File Name found</string>
   <string name="upload">Upload</string>
   <string name="yes">Yes</string>
   <string name="no">No</string>
@@ -211,7 +217,6 @@
   <string name="become_a_tester_title">Become a Beta Tester</string>
   <string name="become_a_tester_description">Opt-in to our beta channel on Google Play and get early access to new features and bug fixes</string>
   <string name="beta_opt_in_link">https://play.google.com/apps/testing/fr.free.nrw.commons</string>
-  <string name="mapbox_commons_app_token">pk.eyJ1IjoibWFza2FyYXZpdmVrIiwiYSI6ImNqMmxvdzFjMTAwMHYzM283ZWM3eW5tcDAifQ.ib5SZ9EVjwJe6GSKve0bcg</string>
   <string name="_2fa_code">2FA Code</string>
   <string name="logout_verification">Do you really want to logout?</string>
   <string name="mediaimage_failed">Media Image Failed</string>
@@ -233,6 +238,7 @@
   <string name="navigation_item_about">About</string>
   <string name="navigation_item_settings">Settings</string>
   <string name="navigation_item_feedback">Feedback</string>
+  <string name="navigation_item_feedback_github">Feedback via GitHub</string>
   <string name="navigation_item_logout">Logout</string>
   <string name="navigation_item_info">Tutorial</string>
   <string name="navigation_item_notification">Notifications</string>
@@ -269,14 +275,17 @@
   <string name="nominated_see_more">See webpage for details</string>
   <string name="skip_login">Skip</string>
   <string name="navigation_item_login">Log in</string>
-  <string name="skip_login_title">Do you really want to skip login?</string>
-  <string name="skip_login_message">You would have to log in to upload pictures in the future.</string>
+  <string name="skip_login_title">Do you really want to skip log-in?</string>
+  <string name="skip_login_message">You will have to log in to upload pictures in the future.</string>
   <string name="login_alert_message">Please log in to use this feature</string>
 
   <string name="copy_wikicode">Copy the wikitext to the clipboard</string>
   <string name="wikicode_copied">The wikitext was copied to the clipboard</string>
   <string name="nearby_location_not_available">Nearby might not work properly, Location not available.</string>
+  <string name="upload_location_access_denied">Location access denied. Please set your location manually to use this feature.</string>
   <string name="location_permission_rationale_nearby">Permission required to display a list of nearby places</string>
+  <string name="location_permission_rationale_explore">Permission required to display a list of nearby images</string>
+
 
   <string name="nearby_directions">Directions</string>
   <string name="nearby_wikidata">Wikidata</string>
@@ -341,15 +350,17 @@
   <string name="construction_event_answer">Pictures showing technology or culture are very welcome on Commons.</string>
   <string name="congratulatory_message_quiz">You got %1$s of the answers correct. Congratulations!</string>
   <string name="warning_for_no_answer">Select one of the two options to answer the question</string>
-  <string name="user_not_logged_in">Login session expired, please log in again.</string>
+  <string name="user_not_logged_in">Log-in expired. Please log in again.</string>
   <string name="quiz_result_share_message">Share your quiz with your friends!</string>
   <string name="continue_message">Continue</string>
   <string name="correct">Correct Answer</string>
   <string name="wrong">Wrong Answer</string>
   <string name="quiz_screenshot_question">Is this screenshot OK to upload?</string>
   <string name="share_app_title">Share App</string>
+  <string name="rotate">Rotate</string>
 
-  <string name="error_fetching_nearby_places">Error fetching nearby places.</string>
+  <string name="error_fetching_nearby_places">Could not load nearby places</string>
+  <string name="no_pictures_in_this_area">No pictures in this area</string>
   <string name="no_nearby_places_around">No nearby places around</string>
   <string name="error_fetching_nearby_monuments">Error fetching nearby monuments.</string>
   <string name="no_recent_searches">No recent searches</string>
@@ -362,11 +373,13 @@
   <string name="delete">Delete</string>
   <string name="Achievements">Achievements</string>
   <string name="Profile">Profile</string>
+  <string name="badges">Badges</string>
   <string name="statistics">Statistics</string>
   <string name="statistics_thanks">Thanks Received</string>
   <string name="statistics_featured">Featured Images</string>
   <string name="statistics_wikidata_edits">Images via \"Nearby Places\"</string>
-  <string name="level">Level</string>
+  <string name="level">Level %d</string>
+  <string name="profileLevel">%s (Level %s)</string>
   <string name="images_uploaded">Images Uploaded</string>
   <string name="image_reverts">Images Not Reverted</string>
   <string name="images_used_by_wiki">Images Used</string>
@@ -437,14 +450,24 @@ Upload your first media by tapping on the add button.</string>
   <string name="never_ask_again">Never ask this again</string>
   <string name="display_location_permission_title">Ask for location permission</string>
   <string name="display_location_permission_explanation">Ask for location permission when needed for nearby notification card view feature.</string>
-  <string name="achievements_fetch_failed">Something went wrong, We could not fetch your achievements</string>
+  <string name="achievements_fetch_failed">Something went wrong, We could not fetch achievements</string>
   <string name="achievements_fetch_failed_ultimate_achievement">You\'ve made so many contributions our achievements calculation system can\'t cope. This is the ultimate achievement.</string>
   <string name="ends_on">Ends on:</string>
   <string name="display_campaigns">Display campaigns</string>
   <string name="display_campaigns_explanation">See the ongoing campaigns</string>
+  <string name="in_app_camera_location_access_explanation">Allow the app to fetch location in case the camera does not record it. Some device cameras do not record location. In such cases, letting the app fetch and attach location to it makes your contribution more useful. You may change this any time from the Settings</string>
+  <string name="option_allow">Allow</string>
+  <string name="option_dismiss">Dismiss</string>
+  <string name="in_app_camera_needs_location">Please turn on location access from the Settings and try again. \n\nNote: The upload may not have location if app is unable to retrieve location from device within a short interval.</string>
+  <string name="in_app_camera_location_permission_rationale">In-app camera needs location permission to attach it to your images in case location is not available in EXIF. Please allow the app to access your location and try again.\n\nNote: The upload may not have location if app is unable to retrieve location from device within a short interval.</string>
+  <string name="in_app_camera_location_permission_denied">The app would not record location along with in-shots due to lack of location permission</string>
+  <string name="in_app_camera_location_unavailable">The app would not record location along with in-shots as the GPS is turned off</string>
+  <string name="open_document_photo_picker_title">Use document based photo picker</string>
+  <string name="open_document_photo_picker_explanation">The new Android photo picker risks losing location information. Enable if you seem to be using it.</string>
+  <string name="location_loss_warning">Turning this off could trigger the new Android photo picker. It risks losing location information.\n\nTap on \'Read more\' for more information.</string>
 
   <string name="nearby_campaign_dismiss_message">You won\'t see the campaigns anymore. However, you can re-enable this notification in Settings if you wish.</string>
-  <string name="this_function_needs_network_connection">This function requires network connection, please check your connection settings.</string>
+  <string name="this_function_needs_network_connection">This function requires network connection. Please check your connection settings.</string>
   <string name="error_processing_image">Error occurred while processing the image. Please try again!</string>
   <string name="getting_edit_token">Getting token for editing</string>
   <string name="check_category_adding_template">Adding template for category check</string>
@@ -486,6 +509,7 @@ Upload your first media by tapping on the add button.</string>
   <string name="no_notification">You have no unread notifications</string>
   <string name="no_read_notification">You have no read notifications</string>
   <string name="share_logs_using">Share logs using</string>
+  <string name="check_your_email_inbox">Check your email inbox</string>
   <string name="menu_option_read">View read</string>
   <string name="menu_option_unread">View unread</string>
 
@@ -513,6 +537,9 @@ Upload your first media by tapping on the add button.</string>
   <string name="exif_tag_name_serialNumbers">Serial Numbers</string>
   <string name="exif_tag_name_software">Software</string>
 
+  <string name="media_location_permission_denied">Media location access denied</string>
+  <string name="add_location_manually">We may not be able to automatically obtain location data from pictures you upload. Please add the appropriate location for each picture before submitting</string>
+
   <string name="share_text">Upload photos to Wikimedia Commons directly from your phone. Download the Commons App now: %1$s</string>
   <string name="share_via">Share app via...</string>
   <string name="image_info">Image Info</string>
@@ -528,12 +555,13 @@ Upload your first media by tapping on the add button.</string>
   <string name="delete_helper_show_deletion_message_if">Nominated %1$s for deletion.</string>
   <string name="delete_helper_show_deletion_title_failed">Failed</string>
   <string name="delete_helper_show_deletion_message_else">Could not request deletion.</string>
-  <string name="delete_helper_ask_spam_selfie">A selfie</string>
-  <string name="delete_helper_ask_spam_blurry">Blurry</string>
-  <string name="delete_helper_ask_spam_nonsense">Nonsense</string>
+  <string name="delete_helper_ask_spam_selfie">a selfie which is not used in any article</string>
+  <string name="delete_helper_ask_spam_blurry">totally blurry</string>
+  <string name="delete_helper_ask_spam_nonsense">nonsense, absolutely unusable in any article</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">Press photo</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">Random photo from internet</string>
   <string name="delete_helper_ask_reason_copyright_logo">Logo</string>
+  <string name="delete_helper_ask_reason_copyright_no_freedom_of_panorama">Breach of Freedom of Panorama</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">Because it is</string>
 
   <string name="category_edit_helper_make_edit_toast">Trying to update categories.</string>
@@ -565,7 +593,7 @@ Upload your first media by tapping on the add button.</string>
   <string name="coordinates_edit_helper_edit_message_else">Could not add coordinates.</string>
   <string name="description_edit_helper_edit_message_else">Could not add descriptions.</string>
   <string name="caption_edit_helper_edit_message_else">Could not add caption.</string>
-  <string name="coordinates_picking_unsuccessful">Unable to get coordinates.</string>
+  <string name="coordinates_picking_unsuccessful">Image\'s coordinates not updated</string>
   <string name="descriptions_picking_unsuccessful">Unable to get descriptions.</string>
   <string name="description_activity_title">Edit descriptions and captions</string>
 
@@ -581,13 +609,14 @@ Upload your first media by tapping on the add button.</string>
   <string name="place_state_needs_photo">Needs Photo</string>
   <string name="place_type">Place type:</string>
   <string name="nearby_search_hint">Bridge, museum, hotel etc.</string>
-  <string name="you_must_reset_your_passsword">Something went wrong with login, you must reset your password !!</string>
+  <string name="you_must_reset_your_passsword">Something went wrong with log-in. You must reset your password!</string>
   <string name="title_for_media">MEDIA</string>
   <string name="title_for_child_classes">CHILD CLASSES</string>
   <string name="title_for_parent_classes">PARENT CLASSES</string>
 
   <string name="upload_nearby_place_found_title">Nearby Place Found</string>
-  <string name="upload_nearby_place_found_description">Is this a photo of Place %1$s?</string>
+  <string name="upload_nearby_place_found_description_plural">Are these pictures of %1$s?</string>
+  <string name="upload_nearby_place_found_description_singular">Is this a picture of %1$s?</string>
   <string name="title_app_shortcut_bookmark">Bookmarks</string>
   <string name="title_app_shortcut_setting">Settings</string>
   <string name="remove_bookmark">Removed from bookmarks</string>
@@ -602,7 +631,10 @@ Upload your first media by tapping on the add button.</string>
   <string name="cannot_open_location_settings">Failed to open location settings. Please turn on location manually</string>
   <string name="recommend_high_accuracy_mode">For best results, choose the High Accuracy mode.</string>
   <string name="ask_to_turn_location_on">Turn on location?</string>
+  <string name="ask_to_turn_location_on_text">Kindly turn on location services for the app show your current location</string>
   <string name="nearby_needs_location">Nearby needs location enabled to work properly</string>
+  <string name="explore_map_needs_location">Explore map needs location permission to display nearby images</string>
+  <string name="upload_map_location_access">You need to give location permission to set location automatically.</string>
   <string name="use_location_from_similar_image">Did you shoot these two pictures at the same place? Do you want to use the latitude/longitude of the picture on the right?</string>
   <string name="load_more">Load More</string>
   <string name="nearby_no_results">No places found, try changing your search criteria.</string>
@@ -647,9 +679,7 @@ Upload your first media by tapping on the add button.</string>
   <string name="leaderboard_nearby">Nearby</string>
   <string name="leaderboard_used">Used</string>
   <string name="leaderboard_my_rank_button_text">My Rank</string>
-  <string name="mapbox_telemetry">Mapbox Telemetry</string>
-  <string name="telemetry_opt_out_summary">Send anonymized location and usage data to Mapbox when using Nearby feature</string>
-  <string name="map_attribution" translatable="false"><![CDATA[&#169; <a href="https://www.mapbox.com/about/maps/">Mapbox</a> &#169; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> <a href="https://www.mapbox.com/map-feedback/">Improve this map</a>]]></string>
+  <string name="map_attribution" translatable="false"><![CDATA[&#169; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>]]></string>
   <string name="limited_connection_enabled">Limited connection mode enabled!</string>
   <string name="limited_connection_disabled">Limited connection mode disabled. Pending uploads will resume now.</string>
   <string name="limited_connection_mode">Limited Connection Mode</string>
@@ -697,6 +727,10 @@ Upload your first media by tapping on the add button.</string>
   <string name="custom_selector_info_text2">Unlike the picture on the left, the picture on the right has the Commons logo indicating it is already uploaded. \n Touch and hold for image preview.</string>
   <string name="welcome_custom_selector_ok">Awesome</string>
   <string name="custom_selector_already_uploaded_image_text">This image has already been uploaded to Commons.</string>
+  <string name="custom_selector_over_limit_warning">For technical reasons, the app can\'t reliably upload more than %1$d pictures at once. The upload limit of %1$d has been exceeded by %2$d.</string>
+  <string name="custom_selector_dismiss_limit_warning_button_text">Dismiss</string>
+  <string name="custom_selector_button_limit_text">Max: %1$d</string>
+  <string name="custom_selector_limit_error_desc">Error: Upload Limit Exceeded</string>
   <string name="place_state_wlm">WLM</string>
   <string name="wlm_upload_info">This image will be entered into the Wiki Loves Monuments contest</string>
   <string name="display_monuments">Display monuments</string>
@@ -709,7 +743,7 @@ Upload your first media by tapping on the add button.</string>
 
   <string name="contributions_of_user">Contributions of User: %s</string>
   <string name="achievements_of_user">Achievements of User: %s</string>
-  <string name="menu_view_user_page">View user page</string>
+  <string name="menu_view_user_page">View user profile</string>
   <string name="edit_depictions">Edit depictions</string>
   <string name="edit_categories">Edit categories</string>
   <string name="advanced_options">Advanced Options</string>
@@ -722,8 +756,8 @@ Upload your first media by tapping on the add button.</string>
   <string name="add_location">Add location</string>
   <string name="feedback_sharing_data_alert">Please remove from this email any information that you are not comfortable sharing publicly. Also, please be aware that your email address with which you are posting, and the associated name and profile picture, will be visible publicly.</string>
   <string name="explore_map_details">Details</string>
-  <string name="achievements_unavailable_beta">Achievements are only available in the prod flavor, please check the developer documentation.</string>
-  <string name="leaderboard_unavailable_beta">The leaderboard is only available in the prod flavor, please check the developer documentation.</string>
+  <string name="achievements_unavailable_beta">Achievements are only available in the prod flavor. Please check the developer documentation.</string>
+  <string name="leaderboard_unavailable_beta">The leaderboard is only available in the prod flavor. Please check the developer documentation.</string>
   <string name="copyright_popup">Please only upload pictures you have taken by yourself. Uploaders of copyrighted images will be blocked. This applies to the beta flavor too. Thank you for testing the app!</string>
   <string name="select_feedback_data_choice">Please deselect any information that you are not comfortable sharing publicly.</string>
   <string name="api_level">API level</string>
@@ -738,6 +772,8 @@ Upload your first media by tapping on the add button.</string>
   <string name="your_feedback">Your feedback</string>
   <string name="mark_as_not_for_upload">Mark as not for upload</string>
   <string name="unmark_as_not_for_upload">Unmark as not for upload</string>
+  <string name="marking_as_not_for_upload">Marking as not for upload</string>
+  <string name="unmarking_as_not_for_upload">Unmarking as not for upload</string>
   <string name="show_already_actioned_pictures">Show already actioned pictures</string>
   <string name="hiding_already_actioned_pictures">Hiding already actioned pictures</string>
   <string name="no_more_images_found">No more images found</string>
@@ -746,6 +782,8 @@ Upload your first media by tapping on the add button.</string>
   <string name="image_selected">Image selected</string>
   <string name="image_marked_as_not_for_upload">Image marked as not for upload</string>
   <string name="menu_view_report">Report</string>
+  <string name="menu_view_set_white_background">Set white background</string>
+  <string name="menu_view_set_black_background">Set black background</string>
   <string name="report_violation">Report violation</string>
   <string name="report_user">Report this user</string>
   <string name="report_content">Report this content</string>
@@ -753,4 +791,72 @@ Upload your first media by tapping on the add button.</string>
   <string name="welcome_to_full_screen_mode_text">Welcome to Full-Screen Selection Mode</string>
   <string name="full_screen_mode_zoom_info">Use two fingers to zoom in and out.</string>
   <string name="full_screen_mode_features_info">Swipe fast and long to perform these actions: \n- Left/Right: Go to previous/next \n- Up: Select\n- Down: Mark as not for upload.</string>
+  <string name="set_up_avatar_toast_string">To set up your leaderboard avatar, tap \"Set as avatar\" in the three-dots menu of any image.</string>
+  <string name="similar_coordinate_description_auto_set">The coordinates are not the exact coordinates, but the person who uploaded this picture thinks they are close enough.</string>
+  <string name="storage_permissions_denied">Storage Permissions Denied</string>
+  <string name="unable_to_share_upload_item">Unable to share this item</string>
+  <string name="permissions_are_required_for_functionality">Permissions are required for functionality</string>
+  <string name="learn_how_to_write_a_useful_description">Learn how to write a useful description</string>
+  <string name="learn_how_to_write_a_useful_caption">Learn how to write a useful caption</string>
+  <string name="see_your_achievements">See your achievements</string>
+  <string name="edit_image">Edit Image</string>
+  <string name="edit_location">Edit Location</string>
+  <string name="location_updated">Location updated!</string>
+  <string name="remove_location">Remove Location</string>
+  <string name="remove_location_warning_title">Remove Location Warning</string>
+  <string name="remove_location_warning_desc">Location makes pictures more useful and findable. Do you really wish to remove location from this picture?</string>
+  <string name="location_removed">Location removed!</string>
+  <string name="send_thanks_to_author">Thank the author</string>
+  <string name="error_sending_thanks">Error sending thanks to author.</string>
+  <string name="invalid_login_message">Your log-in has expired. Please log in again.</string>
+  <string name="no_application_available_to_open_gpx_files">No application available to open GPX files</string>
+  <string name="file_saved_successfully">File Saved Successfully</string>
+  <string name="do_you_want_to_open_gpx_file">Do you want to open GPX file?</string>
+  <string name="do_you_want_to_open_kml_file">Do you want to open KML file?</string>
+  <string name="failed_to_save_kml_file">Failed to save KML file.</string>
+  <string name="failed_to_save_gpx_file">Failed to save GPX file.</string>
+  <string name="saving_kml_file">Saving KML File</string>
+  <string name="saving_gpx_file">Saving GPX File</string>
+  <plurals name="custom_picker_images_selected_title_appendix">
+    <item quantity="one">%d image selected</item>
+    <item quantity="other">%d images selected</item>
+  </plurals>
+  <string name="multiple_files_depiction">Please remember that all images in a multi-upload get the same categories and depictions. If the images do not share depictions and categories, please perform several separate uploads.</string>
+  <string name="multiple_files_depiction_header">Note about multi-uploads</string>
+  <string name="nearby_wikitalk">Report a problem about this item to Wikidata</string>
+  <string name="please_enter_some_comments">Please enter some comments</string>
+  <string name="talk">Talk</string>
+  <string name="write_something_about_the_item">Write something about the \'%1$s\' item. It will be publicly visible.</string>
+  <string name="does_not_exist_anymore_no_picture_can_ever_be_taken_of_it">\'%1$s\' does not exist anymore, no picture can ever be taken of it.</string>
+  <string name="is_at_a_different_place_please_specify_the_correct_place_below_if_possible_tell_us_the_correct_latitude_longitude">\'%1$s\' is at a different place. Please specify the correct place below, and if possible, write the correct latitude and longitude.</string>
+  <string name="other_problem_or_information_please_explain_below">Other problem or information (please explain below).</string>
+  <string name="feedback_destination_note">Your feedback gets posted to the following wiki page: <![CDATA[ <a href="https://commons.wikimedia.org/wiki/Commons:Mobile_app/Feedback">Commons:Mobile app/Feedback</a> ]]></string>
+  <string name="are_you_sure_that_you_want_cancel_all_the_uploads">Are you sure that you want cancel all the uploads?</string>
+  <string name="cancelling_all_the_uploads">Cancelling all the uploads...</string>
+  <string name="uploads">Uploads</string>
+  <string name="pending">Pending</string>
+  <string name="failed">Failed</string>
+  <string name="could_not_load_place_data">Could not load place data</string>
+
+  <string name="custom_selector_delete_folder">Delete Folder</string>
+  <string name="custom_selector_confirm_deletion_title">Confirm Deletion</string>
+  <string name="custom_selector_confirm_deletion_message">Are you sure you want to delete folder %1$s containing %2$d items?</string>
+  <string name="custom_selector_delete">Delete</string>
+  <string name="custom_selector_cancel">Cancel</string>
+  <string name="custom_selector_folder_deleted_success">Folder %1$s deleted successfully</string>
+  <string name="custom_selector_folder_deleted_failure">Failed to delete folder %1$s</string>
+  <string name="custom_selector_error_trashing_folder_contents">Error in trashing folder contents: %1$s</string>
+  <string name="custom_selector_folder_not_found_error">Failed to retrieve folder path for bucket ID: %1$d</string>
+
+  <string name="red_pin">This place has no picture yet, go take one!</string>
+  <string name="green_pin">This place has a picture already.</string>
+  <string name="grey_pin">Now checking whether this place has a picture.</string>
+
+  <string name="error_while_loading">Error while loading</string>
+  <string name="no_usages_found">No usages found</string>
+  <string name="usages_on_commons_heading">Commons</string>
+  <string name="usages_on_other_wikis_heading">Other wikis</string>
+  <string name="bullet_point">•</string>
+  <string name="file_usages_container_heading">File usages</string>
+
 </resources>

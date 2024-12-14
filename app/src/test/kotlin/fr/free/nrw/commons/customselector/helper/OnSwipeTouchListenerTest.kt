@@ -4,24 +4,25 @@ import android.content.Context
 import android.view.GestureDetector
 import android.view.MotionEvent
 import android.view.View
+import androidx.test.core.app.ApplicationProvider
 import com.nhaarman.mockitokotlin2.whenever
-import fr.free.nrw.commons.TestAppAdapter
+import fr.free.nrw.commons.OkHttpConnectionFactory
 import fr.free.nrw.commons.TestCommonsApplication
+import fr.free.nrw.commons.TestUtility.setFinalStatic
+import fr.free.nrw.commons.createTestClient
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.MockitoAnnotations
-import org.powermock.reflect.Whitebox
+import org.powermock.core.classloader.annotations.PrepareForTest
 import org.robolectric.RobolectricTestRunner
-import org.robolectric.RuntimeEnvironment
 import org.robolectric.annotation.Config
-import org.wikipedia.AppAdapter
 
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
+@PrepareForTest(OnSwipeTouchListener::class)
 internal class OnSwipeTouchListenerTest {
-
     private lateinit var context: Context
     private lateinit var onSwipeTouchListener: OnSwipeTouchListener
     private lateinit var gesListener: OnSwipeTouchListener.GestureListener
@@ -41,14 +42,15 @@ internal class OnSwipeTouchListenerTest {
     @Before
     fun setUp() {
         MockitoAnnotations.initMocks(this)
-        AppAdapter.set(TestAppAdapter())
+        OkHttpConnectionFactory.CLIENT = createTestClient()
 
-        context = RuntimeEnvironment.application.applicationContext
+        context = ApplicationProvider.getApplicationContext()
         onSwipeTouchListener = OnSwipeTouchListener(context)
         gesListener = OnSwipeTouchListener(context).GestureListener()
-
-        Whitebox.setInternalState(onSwipeTouchListener, "gestureDetector", gestureDetector)
-
+        setFinalStatic(
+            OnSwipeTouchListener::class.java.getDeclaredField("gestureDetector"),
+            gestureDetector,
+        )
     }
 
     /**
@@ -56,11 +58,11 @@ internal class OnSwipeTouchListenerTest {
      */
     @Test
     fun onTouch() {
+        val motionEvent = MotionEvent.obtain(200, 300, MotionEvent.ACTION_MOVE, 15.0f, 10.0f, 0)
         val func = onSwipeTouchListener.javaClass.getDeclaredMethod("onTouch", View::class.java, MotionEvent::class.java)
         func.isAccessible = true
-        func.invoke(onSwipeTouchListener, view, motionEvent1)
+        func.invoke(onSwipeTouchListener, view, motionEvent)
     }
-
 
     /**
      * Test onSwipeRight

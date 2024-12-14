@@ -10,18 +10,16 @@ import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.browser.customtabs.CustomTabColorSchemeParams;
 import androidx.browser.customtabs.CustomTabsIntent;
 import androidx.core.content.ContextCompat;
 
-import fr.free.nrw.commons.kvstore.JsonKvStore;
 import java.util.Calendar;
 import java.util.Date;
-import org.wikipedia.dataclient.WikiSite;
-import org.wikipedia.page.PageTitle;
+import fr.free.nrw.commons.wikidata.model.WikiSite;
+import fr.free.nrw.commons.wikidata.model.page.PageTitle;
 
 import java.util.Locale;
 import java.util.regex.Pattern;
@@ -30,9 +28,6 @@ import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.utils.ViewUtil;
 import timber.log.Timber;
-
-import static android.widget.Toast.LENGTH_SHORT;
-import static fr.free.nrw.commons.campaigns.CampaignView.CAMPAIGNS_DEFAULT_PREFERENCE;
 
 public class Utils {
 
@@ -137,12 +132,6 @@ public class Utils {
      */
     public static void handleWebUrl(Context context, Uri url) {
         Timber.d("Launching web url %s", url.toString());
-        Intent browserIntent = new Intent(Intent.ACTION_VIEW, url);
-        if (browserIntent.resolveActivity(context.getPackageManager()) == null) {
-            Toast toast = Toast.makeText(context, context.getString(R.string.no_web_browser), LENGTH_SHORT);
-            toast.show();
-            return;
-        }
 
         final CustomTabColorSchemeParams color = new CustomTabColorSchemeParams.Builder()
             .setToolbarColor(ContextCompat.getColor(context, R.color.primaryColor))

@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.bookmarks.pictures;
 
+import android.annotation.SuppressLint;
 import android.content.ContentProviderClient;
 import android.content.ContentValues;
 import android.database.Cursor;
@@ -150,6 +151,7 @@ public class BookmarkPicturesDao {
         return false;
     }
 
+    @SuppressLint("Range")
     @NonNull
     Bookmark fromCursor(Cursor cursor) {
         String fileName = cursor.getString(cursor.getColumnIndex(Table.COLUMN_MEDIA_NAME));

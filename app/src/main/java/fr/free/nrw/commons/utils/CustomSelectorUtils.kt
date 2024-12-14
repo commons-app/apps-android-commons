@@ -5,8 +5,8 @@ import android.content.Context
 import android.net.Uri
 import androidx.exifinterface.media.ExifInterface
 import fr.free.nrw.commons.customselector.model.Image
-import fr.free.nrw.commons.filepicker.PickedFiles
 import fr.free.nrw.commons.customselector.ui.selector.ImageLoader
+import fr.free.nrw.commons.filepicker.PickedFiles
 import fr.free.nrw.commons.media.MediaClient
 import fr.free.nrw.commons.upload.FileProcessor
 import fr.free.nrw.commons.upload.FileUtilsWrapper
@@ -22,7 +22,6 @@ import java.net.UnknownHostException
  */
 class CustomSelectorUtils {
     companion object {
-
         /**
          * Get image sha1 from uri, used to retrieve the original image sha1.
          */
@@ -30,10 +29,9 @@ class CustomSelectorUtils {
             uri: Uri,
             ioDispatcher: CoroutineDispatcher,
             fileUtilsWrapper: FileUtilsWrapper,
-            contentResolver: ContentResolver
-        ): String {
-            return withContext(ioDispatcher) {
-
+            contentResolver: ContentResolver,
+        ): String =
+            withContext(ioDispatcher) {
                 try {
                     val result = fileUtilsWrapper.getSHA1(contentResolver.openInputStream(uri))
                     result
@@ -42,7 +40,6 @@ class CustomSelectorUtils {
                     ""
                 }
             }
-        }
 
         /**
          * Generates modified SHA1 of an image
@@ -52,37 +49,37 @@ class CustomSelectorUtils {
             defaultDispatcher: CoroutineDispatcher,
             context: Context,
             fileProcessor: FileProcessor,
-            fileUtilsWrapper: FileUtilsWrapper
-        ): String {
-            return withContext(defaultDispatcher) {
+            fileUtilsWrapper: FileUtilsWrapper,
+        ): String =
+            withContext(defaultDispatcher) {
                 val uploadableFile = PickedFiles.pickedExistingPicture(context, image.uri)
-                val exifInterface: ExifInterface? = try {
-                    ExifInterface(uploadableFile.file!!)
-                } catch (e: IOException) {
-                    Timber.e(e)
-                    null
-                }
+                val exifInterface: ExifInterface? =
+                    try {
+                        ExifInterface(uploadableFile.file!!)
+                    } catch (e: IOException) {
+                        Timber.e(e)
+                        null
+                    }
                 fileProcessor.redactExifTags(exifInterface, fileProcessor.getExifTagsToRedact())
                 val sha1 =
                     fileUtilsWrapper.getSHA1(
-                        fileUtilsWrapper.getFileInputStream(uploadableFile.filePath)
+                        fileUtilsWrapper.getFileInputStream(uploadableFile.getFilePath()),
                     )
                 uploadableFile.file.delete()
                 sha1
             }
-        }
 
         /**
          * Query SHA1, return result if previously queried, otherwise start a new query.
          *
          * @return true if the image exists on Commons, false otherwise.
          */
-        suspend fun checkWhetherFileExistsOnCommonsUsingSHA1(SHA1: String,
-                                                             ioDispatcher : CoroutineDispatcher,
-                                                             mediaClient: MediaClient
-        ): ImageLoader.Result {
-            return withContext(ioDispatcher) {
-
+        suspend fun checkWhetherFileExistsOnCommonsUsingSHA1(
+            SHA1: String,
+            ioDispatcher: CoroutineDispatcher,
+            mediaClient: MediaClient,
+        ): ImageLoader.Result =
+            withContext(ioDispatcher) {
                 var result: ImageLoader.Result = ImageLoader.Result.FALSE
                 try {
                     if (mediaClient.checkFileExistsUsingSha(SHA1).blockingGet()) {
@@ -98,6 +95,5 @@ class CustomSelectorUtils {
                 }
                 result
             }
-        }
     }
 }

@@ -7,7 +7,11 @@ import com.jraska.livedata.test
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
-import fr.free.nrw.commons.explore.paging.*
+import fr.free.nrw.commons.explore.paging.BasePagingPresenter
+import fr.free.nrw.commons.explore.paging.FooterItem
+import fr.free.nrw.commons.explore.paging.LoadingState
+import fr.free.nrw.commons.explore.paging.PageableBaseDataSource
+import fr.free.nrw.commons.explore.paging.PagingContract
 import io.reactivex.processors.PublishProcessor
 import io.reactivex.schedulers.TestScheduler
 import org.junit.Before
@@ -17,7 +21,6 @@ import org.mockito.Mock
 import org.mockito.MockitoAnnotations
 
 class BasePagingPresenterTest {
-
     @Rule
     @JvmField
     var instantTaskExecutorRule = InstantTaskExecutorRule()
@@ -42,10 +45,10 @@ class BasePagingPresenterTest {
     @Before
     @Throws(Exception::class)
     fun setUp() {
-        MockitoAnnotations.initMocks(this)
+        MockitoAnnotations.openMocks(this)
         whenever(pageableBaseDataSource.pagingResults).thenReturn(searchResults)
         whenever(pageableBaseDataSource.loadingStates).thenReturn(loadingStates)
-        whenever(pageableBaseDataSource.noItemsLoadedQueries)
+        whenever(pageableBaseDataSource.noItemsLoadedEvent)
             .thenReturn(noItemLoadedQueries)
         testScheduler = TestScheduler()
         basePagingPresenter =
@@ -70,7 +73,8 @@ class BasePagingPresenterTest {
     @Test
     fun `Complete offers an empty list item and hides initial loader`() {
         onLoadingState(LoadingState.Complete)
-        basePagingPresenter.listFooterData.test()
+        basePagingPresenter.listFooterData
+            .test()
             .assertValue(emptyList())
         verify(view).hideInitialLoadProgress()
     }

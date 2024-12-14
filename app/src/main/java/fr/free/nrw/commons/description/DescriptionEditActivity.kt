@@ -4,13 +4,19 @@ import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Bundle
 import android.os.Parcelable
+import android.speech.RecognizerIntent
 import android.view.View
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import fr.free.nrw.commons.CommonsApplication
+import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.R
+import fr.free.nrw.commons.auth.SessionManager
+import fr.free.nrw.commons.auth.csrf.InvalidLoginTokenException
 import fr.free.nrw.commons.databinding.ActivityDescriptionEditBinding
 import fr.free.nrw.commons.description.EditDescriptionConstants.LIST_OF_DESCRIPTION_AND_CAPTION
-import fr.free.nrw.commons.description.EditDescriptionConstants.UPDATED_WIKITEXT
 import fr.free.nrw.commons.description.EditDescriptionConstants.WIKITEXT
 import fr.free.nrw.commons.recentlanguages.RecentLanguagesDao
 import fr.free.nrw.commons.settings.Prefs
@@ -18,12 +24,18 @@ import fr.free.nrw.commons.theme.BaseActivity
 import fr.free.nrw.commons.upload.UploadMediaDetail
 import fr.free.nrw.commons.upload.UploadMediaDetailAdapter
 import fr.free.nrw.commons.utils.DialogUtil.showAlertDialog
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.functions.Consumer
+import io.reactivex.schedulers.Schedulers
+import timber.log.Timber
 import javax.inject.Inject
 
 /**
  * Activity for populating and editing existing description and caption
  */
-class DescriptionEditActivity : BaseActivity(), UploadMediaDetailAdapter.EventListener {
+class DescriptionEditActivity :
+    BaseActivity(),
+    UploadMediaDetailAdapter.EventListener {
     /**
      * Adapter for showing UploadMediaDetail in the activity
      */
@@ -41,6 +53,11 @@ class DescriptionEditActivity : BaseActivity(), UploadMediaDetailAdapter.EventLi
     var wikiText: String? = null
 
     /**
+     * Media object
+     */
+    var media: Media? = null
+
+    /**
      * Saved language
      */
     private lateinit var savedLanguageValue: String
@@ -55,6 +72,18 @@ class DescriptionEditActivity : BaseActivity(), UploadMediaDetailAdapter.EventLi
 
     private lateinit var binding: ActivityDescriptionEditBinding
 
+    private var descriptionAndCaptions: ArrayList<UploadMediaDetail>? = null
+
+    private val voiceInputResultLauncher = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result: ActivityResult ->
+        onVoiceInput(result)
+    }
+
+    @Inject lateinit var descriptionEditHelper: DescriptionEditHelper
+
+    @Inject lateinit var sessionManager: SessionManager
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -62,13 +91,21 @@ class DescriptionEditActivity : BaseActivity(), UploadMediaDetailAdapter.EventLi
         setContentView(binding.root)
 
         val bundle = intent.extras
-        val descriptionAndCaptions: ArrayList<UploadMediaDetail> =
-            bundle!!.getParcelableArrayList(LIST_OF_DESCRIPTION_AND_CAPTION)!!
-        wikiText = bundle.getString(WIKITEXT)
-        savedLanguageValue = bundle.getString(Prefs.DESCRIPTION_LANGUAGE)!!
+
+        if (savedInstanceState != null) {
+            descriptionAndCaptions = savedInstanceState.getParcelableArrayList(LIST_OF_DESCRIPTION_AND_CAPTION)
+            wikiText = savedInstanceState.getString(WIKITEXT)
+            savedLanguageValue = savedInstanceState.getString(Prefs.DESCRIPTION_LANGUAGE)!!
+            media = savedInstanceState.getParcelable("media")
+        } else {
+            descriptionAndCaptions =
+                bundle!!.getParcelableArrayList(LIST_OF_DESCRIPTION_AND_CAPTION)!!
+            wikiText = bundle.getString(WIKITEXT)
+            savedLanguageValue = bundle.getString(Prefs.DESCRIPTION_LANGUAGE)!!
+            media = bundle.getParcelable("media")
+        }
         initRecyclerView(descriptionAndCaptions)
 
-        binding.btnAddDescription.setOnClickListener(::onButtonAddDescriptionClicked)
         binding.btnEditSubmit.setOnClickListener(::onSubmitButtonClicked)
         binding.toolbarBackButton.setOnClickListener(::onBackButtonClicked)
     }
@@ -78,12 +115,18 @@ class DescriptionEditActivity : BaseActivity(), UploadMediaDetailAdapter.EventLi
      * @param descriptionAndCaptions list of description and caption
      */
     private fun initRecyclerView(descriptionAndCaptions: ArrayList<UploadMediaDetail>?) {
-        uploadMediaDetailAdapter = UploadMediaDetailAdapter(
-            savedLanguageValue, descriptionAndCaptions, recentLanguagesDao)
+        uploadMediaDetailAdapter =
+            UploadMediaDetailAdapter(
+                this,
+                savedLanguageValue,
+                descriptionAndCaptions,
+                recentLanguagesDao,
+                voiceInputResultLauncher
+            )
         uploadMediaDetailAdapter.setCallback { titleStringID: Int, messageStringId: Int ->
             showInfoAlert(
                 titleStringID,
-                messageStringId
+                messageStringId,
             )
         }
         uploadMediaDetailAdapter.setEventListener(this)
@@ -97,25 +140,42 @@ class DescriptionEditActivity : BaseActivity(), UploadMediaDetailAdapter.EventLi
      * @param titleStringID Title ID
      * @param messageStringId Message ID
      */
-    private fun showInfoAlert(titleStringID: Int, messageStringId: Int) {
+    private fun showInfoAlert(
+        titleStringID: Int,
+        messageStringId: Int,
+    ) {
         showAlertDialog(
-            this, getString(titleStringID),
-            getString(messageStringId), getString(android.R.string.ok),
-            null, true
+            this,
+            getString(titleStringID),
+            getString(messageStringId),
+            getString(android.R.string.ok),
+            null
         )
     }
 
     override fun onPrimaryCaptionTextChange(isNotEmpty: Boolean) {}
 
-    private fun onBackButtonClicked(view: View) {
-        onBackPressed()
+    private fun onVoiceInput(result: ActivityResult) {
+        if (result.resultCode == RESULT_OK && result.data != null) {
+            val resultData = result.data!!.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)
+            uploadMediaDetailAdapter.handleSpeechResult(resultData!![0])
+        } else {
+            Timber.e("Error %s", result.resultCode)
+        }
     }
 
-    private fun onButtonAddDescriptionClicked(view: View) {
+    /**
+     * Adds new language item to RecyclerView
+     */
+    override fun addLanguage() {
         val uploadMediaDetail = UploadMediaDetail()
-        uploadMediaDetail.isManuallyAdded = true //This was manually added by the user
+        uploadMediaDetail.isManuallyAdded = true // This was manually added by the user
         uploadMediaDetailAdapter.addDescription(uploadMediaDetail)
         rvDescriptions!!.smoothScrollToPosition(uploadMediaDetailAdapter.itemCount - 1)
+    }
+
+    private fun onBackButtonClicked(view: View) {
+        onBackPressedDispatcher.onBackPressed()
     }
 
     private fun onSubmitButtonClicked(view: View) {
@@ -139,10 +199,11 @@ class DescriptionEditActivity : BaseActivity(), UploadMediaDetailAdapter.EventLi
             val descriptionStart = wikiText!!.substring(0, descriptionIndex + 12)
             val descriptionToEnd = wikiText!!.substring(descriptionIndex + 12)
             val descriptionEndIndex = descriptionToEnd.indexOf("\n")
-            val descriptionEnd = wikiText!!.substring(
-                descriptionStart.length
-                        + descriptionEndIndex
-            )
+            val descriptionEnd =
+                wikiText!!.substring(
+                    descriptionStart.length +
+                        descriptionEndIndex,
+                )
             buffer.append(descriptionStart)
             for (i in uploadMediaDetails.indices) {
                 val uploadDetails = uploadMediaDetails[i]
@@ -151,20 +212,90 @@ class DescriptionEditActivity : BaseActivity(), UploadMediaDetailAdapter.EventLi
                     buffer.append(uploadDetails.languageCode)
                     buffer.append("|1=")
                     buffer.append(uploadDetails.descriptionText)
-                    buffer.append("}}, ")
+                    buffer.append("}}")
                 }
             }
             buffer.replace(", $".toRegex(), "")
             buffer.append(descriptionEnd)
         }
-        val returningIntent = Intent()
-        returningIntent.putExtra(UPDATED_WIKITEXT, buffer.toString())
-        returningIntent.putParcelableArrayListExtra(
-            LIST_OF_DESCRIPTION_AND_CAPTION,
-            uploadMediaDetails as ArrayList<out Parcelable?>
-        )
-        setResult(RESULT_OK, returningIntent)
+        editDescription(media!!, buffer.toString(), uploadMediaDetails as ArrayList<UploadMediaDetail>)
+
         finish()
+    }
+
+    /**
+     * Edits description and caption
+     * @param media media object
+     * @param updatedWikiText updated wiki text
+     * @param uploadMediaDetails descriptions and captions
+     */
+    private fun editDescription(
+        media: Media,
+        updatedWikiText: String,
+        uploadMediaDetails: ArrayList<UploadMediaDetail>,
+    ) {
+        try {
+            descriptionEditHelper
+                .addDescription(
+                    applicationContext,
+                    media,
+                    updatedWikiText,
+                )?.subscribeOn(Schedulers.io())
+                ?.observeOn(AndroidSchedulers.mainThread())
+                ?.subscribe(Consumer<Boolean> { s: Boolean? -> Timber.d("Descriptions are added.") })
+                ?.let {
+                    compositeDisposable.add(
+                        it,
+                    )
+                }
+        } catch (e: InvalidLoginTokenException) {
+            val username: String? = sessionManager.userName
+            val logoutListener =
+                CommonsApplication.BaseLogoutListener(
+                    this,
+                    getString(R.string.invalid_login_message),
+                    username,
+                )
+
+            val commonsApplication = CommonsApplication.instance
+            if (commonsApplication != null) {
+                commonsApplication.clearApplicationData(this, logoutListener)
+            }
+        }
+
+        val updatedCaptions = LinkedHashMap<String, String>()
+        for (mediaDetail in uploadMediaDetails) {
+            try {
+                compositeDisposable.add(
+                    descriptionEditHelper
+                        .addCaption(
+                            applicationContext,
+                            media,
+                            mediaDetail.languageCode!!,
+                            mediaDetail.captionText,
+                        ).subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe { s: Boolean? ->
+                            updatedCaptions[mediaDetail.languageCode!!] = mediaDetail.captionText
+                            media.captions = updatedCaptions
+                            Timber.d("Caption is added.")
+                        },
+                )
+            } catch (e: InvalidLoginTokenException) {
+                val username = sessionManager.userName
+                val logoutListener =
+                    CommonsApplication.BaseLogoutListener(
+                        this,
+                        getString(R.string.invalid_login_message),
+                        username,
+                    )
+
+                val commonsApplication = CommonsApplication.instance
+                if (commonsApplication != null) {
+                    commonsApplication.clearApplicationData(this, logoutListener)
+                }
+            }
+        }
     }
 
     private fun showLoggingProgressBar() {
@@ -172,7 +303,17 @@ class DescriptionEditActivity : BaseActivity(), UploadMediaDetailAdapter.EventLi
         progressDialog!!.isIndeterminate = true
         progressDialog!!.setTitle(getString(R.string.updating_caption_title))
         progressDialog!!.setMessage(getString(R.string.updating_caption_message))
-        progressDialog!!.setCanceledOnTouchOutside(false)
+        progressDialog!!.setCancelable(false)
         progressDialog!!.show()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+
+        outState.putParcelableArrayList(LIST_OF_DESCRIPTION_AND_CAPTION, uploadMediaDetailAdapter.items as ArrayList<out Parcelable?>)
+        outState.putString(WIKITEXT, wikiText)
+        outState.putString(Prefs.DESCRIPTION_LANGUAGE, savedLanguageValue)
+        // save Media
+        outState.putParcelable("media", media)
     }
 }

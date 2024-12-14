@@ -1,5 +1,7 @@
 package fr.free.nrw.commons.upload.depicts;
 
+import static fr.free.nrw.commons.wikidata.WikidataConstants.SELECTED_NEARBY_PLACE;
+
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -8,28 +10,22 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-import com.google.android.material.textfield.TextInputLayout;
 import com.jakewharton.rxbinding2.view.RxView;
 import com.jakewharton.rxbinding2.widget.RxTextView;
+import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.contributions.ContributionsFragment;
+import fr.free.nrw.commons.databinding.UploadDepictsFragmentBinding;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.media.MediaDetailFragment;
-import fr.free.nrw.commons.ui.PasteSensitiveTextInputEditText;
+import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.upload.UploadActivity;
 import fr.free.nrw.commons.upload.UploadBaseFragment;
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem;
@@ -50,24 +46,6 @@ import timber.log.Timber;
  */
 public class DepictsFragment extends UploadBaseFragment implements DepictsContract.View {
 
-    @BindView(R.id.depicts_title)
-    TextView depictsTitle;
-    @BindView(R.id.depicts_subtitle)
-    TextView depictsSubTitle;
-    @BindView(R.id.depicts_search_container)
-    TextInputLayout depictsSearchContainer;
-    @BindView(R.id.depicts_search)
-    PasteSensitiveTextInputEditText depictsSearch;
-    @BindView(R.id.depictsSearchInProgress)
-    ProgressBar depictsSearchInProgress;
-    @BindView(R.id.depicts_recycler_view)
-    RecyclerView depictsRecyclerView;
-    @BindView(R.id.tooltip)
-    ImageView tooltip;
-    @BindView(R.id.depicts_next)
-    Button btnNext;
-    @BindView(R.id.depicts_previous)
-    Button btnPrevious;
     @Inject
     @Named("default_preferences")
     public
@@ -83,26 +61,35 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
      * Determines each encounter of edit depicts
      */
     private int count;
+    private Place nearbyPlace;
+
+    private UploadDepictsFragmentBinding binding;
+
+    @Inject
+    SessionManager sessionManager;
 
     @Nullable
     @Override
     public android.view.View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                                           @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.upload_depicts_fragment, container, false);
+        binding = UploadDepictsFragmentBinding.inflate(inflater, container, false);
+        return binding.getRoot();
     }
 
     @Override
     public void onViewCreated(@NonNull android.view.View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        ButterKnife.bind(this, view);
         Bundle bundle = getArguments();
         if (bundle != null) {
             media = bundle.getParcelable("Existing_Depicts");
+            nearbyPlace = bundle.getParcelable(SELECTED_NEARBY_PLACE);
         }
 
-        init();
-        presenter.getDepictedItems().observe(getViewLifecycleOwner(), this::setDepictsList);
+        if(callback!=null || media!=null){
+            init();
+            presenter.getDepictedItems().observe(getViewLifecycleOwner(), this::setDepictsList);
+        }
     }
 
     /**
@@ -110,21 +97,24 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
      */
     private void init() {
 
+        if (binding == null) {
+            return;
+        }
+
         if (media == null) {
-            depictsTitle
-                .setText(getString(R.string.step_count, callback.getIndexInViewFlipper(this) + 1,
+            binding.depictsTitle.setText(String.format(getString(R.string.step_count), callback.getIndexInViewFlipper(this) + 1,
                     callback.getTotalNumberOfSteps(), getString(R.string.depicts_step_title)));
         } else {
-            depictsTitle.setText(R.string.edit_depictions);
-            depictsSubTitle.setVisibility(View.GONE);
-            btnNext.setText(R.string.menu_save_categories);
-            btnPrevious.setText(R.string.menu_cancel_upload);
+            binding.depictsTitle.setText(R.string.edit_depictions);
+            binding.depictsSubtitle.setVisibility(View.GONE);
+            binding.depictsNext.setText(R.string.menu_save_categories);
+            binding.depictsPrevious.setText(R.string.menu_cancel_upload);
         }
 
         setDepictsSubTitle();
-        tooltip.setOnClickListener(v -> DialogUtil
+        binding.tooltip.setOnClickListener(v -> DialogUtil
             .showAlertDialog(getActivity(), getString(R.string.depicts_step_title),
-                getString(R.string.depicts_tooltip), getString(android.R.string.ok), null, true));
+                getString(R.string.depicts_tooltip), getString(android.R.string.ok), null));
         if (media == null) {
             presenter.onAttachView(this);
         } else {
@@ -132,6 +122,9 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
         }
         initRecyclerView();
         addTextChangeListenerToSearchBox();
+
+        binding.depictsNext.setOnClickListener(v->onNextButtonClicked());
+        binding.depictsPrevious.setOnClickListener(v->onPreviousButtonClicked());
     }
 
     /**
@@ -143,7 +136,7 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
         if (activity instanceof UploadActivity) {
             final boolean isMultipleFileSelected = ((UploadActivity) activity).getIsMultipleFilesSelected();
             if (!isMultipleFileSelected) {
-                depictsSubTitle.setVisibility(View.GONE);
+                binding.depictsSubtitle.setVisibility(View.GONE);
             }
         }
     }
@@ -156,15 +149,18 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
             adapter = new UploadDepictsAdapter(categoryItem -> {
                 presenter.onDepictItemClicked(categoryItem);
                 return Unit.INSTANCE;
-            });
+            }, nearbyPlace);
         } else {
             adapter = new UploadDepictsAdapter(item -> {
                 presenter.onDepictItemClicked(item);
                 return Unit.INSTANCE;
-            });
+            }, nearbyPlace);
         }
-        depictsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        depictsRecyclerView.setAdapter(adapter);
+        if (binding == null) {
+            return;
+        }
+        binding.depictsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        binding.depictsRecyclerView.setAdapter(adapter);
     }
 
     @Override
@@ -215,15 +211,21 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
 
     @Override
     public void showProgress(boolean shouldShow) {
-        depictsSearchInProgress.setVisibility(shouldShow ? View.VISIBLE : View.GONE);
+        if (binding == null) {
+            return;
+        }
+        binding.depictsSearchInProgress.setVisibility(shouldShow ? View.VISIBLE : View.GONE);
     }
 
     @Override
-    public void showError(Boolean value) {
+    public void showError(boolean value) {
+        if (binding == null) {
+            return;
+        }
         if (value) {
-            depictsSearchContainer.setError(getString(R.string.no_depiction_found));
+            binding.depictsSearchContainer.setError(getString(R.string.no_depiction_found));
         } else {
-            depictsSearchContainer.setErrorEnabled(false);
+            binding.depictsSearchContainer.setErrorEnabled(false);
         }
     }
 
@@ -242,7 +244,24 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
                 adapter.setItems(depictedItemList);
             }
         }
-        depictsRecyclerView.smoothScrollToPosition(0);
+
+        if (binding == null) {
+            return;
+        }
+        // Nested waiting for search result data to load into the depicted item
+        // list and smoothly scroll to the top of the search result list.
+        binding.depictsRecyclerView.post(new Runnable() {
+            @Override
+            public void run() {
+                binding.depictsRecyclerView.smoothScrollToPosition(0);
+                binding.depictsRecyclerView.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        binding.depictsRecyclerView.smoothScrollToPosition(0);
+                    }
+                });
+            }
+        });
     }
 
     /**
@@ -298,9 +317,24 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
     }
 
     /**
+     * Navigates to the login Activity
+     */
+    @Override
+    public void navigateToLoginScreen() {
+        final String username = sessionManager.getUserName();
+        final CommonsApplication.BaseLogoutListener logoutListener = new CommonsApplication.BaseLogoutListener(
+            getActivity(),
+            requireActivity().getString(R.string.invalid_login_message),
+            username
+        );
+
+        CommonsApplication.getInstance().clearApplicationData(
+            requireActivity(), logoutListener);
+    }
+
+    /**
      * Determines the calling fragment by media nullability and act accordingly
      */
-    @OnClick(R.id.depicts_next)
     public void onNextButtonClicked() {
         if(media != null){
             presenter.updateDepictions(media);
@@ -312,7 +346,6 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
     /**
      * Determines the calling fragment by media nullability and act accordingly
      */
-    @OnClick(R.id.depicts_previous)
     public void onPreviousButtonClicked() {
         if(media != null){
             presenter.clearPreviousSelection();
@@ -327,9 +360,9 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
      * Text change listener for the edit text view of depicts
      */
     private void addTextChangeListenerToSearchBox() {
-        subscribe = RxTextView.textChanges(depictsSearch)
-                .doOnEach(v -> depictsSearchContainer.setError(null))
-                .takeUntil(RxView.detaches(depictsSearch))
+        subscribe = RxTextView.textChanges(binding.depictsSearch)
+                .doOnEach(v -> binding.depictsSearchContainer.setError(null))
+                .takeUntil(RxView.detaches(binding.depictsSearch))
                 .debounce(500, TimeUnit.MILLISECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(filter -> searchForDepictions(filter.toString()), Timber::e);
@@ -354,9 +387,9 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
         super.onResume();
 
         if (media != null) {
-            depictsSearch.setOnKeyListener((v, keyCode, event) -> {
+            binding.depictsSearch.setOnKeyListener((v, keyCode, event) -> {
                 if (keyCode == KeyEvent.KEYCODE_BACK) {
-                    depictsSearch.clearFocus();
+                    binding.depictsSearch.clearFocus();
                     presenter.clearPreviousSelection();
                     updateDepicts();
                     goBackToPreviousScreen();
@@ -365,7 +398,7 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
                 return false;
             });
 
-            Objects.requireNonNull(getView()).setFocusableInTouchMode(true);
+            requireView().setFocusableInTouchMode(true);
             getView().requestFocus();
             getView().setOnKeyListener((v, keyCode, event) -> {
                 if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK) {
@@ -378,13 +411,13 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
             });
 
             Objects.requireNonNull(
-                ((AppCompatActivity) Objects.requireNonNull(getActivity())).getSupportActionBar())
+                ((AppCompatActivity) requireActivity()).getSupportActionBar())
                 .hide();
 
             if (getParentFragment().getParentFragment().getParentFragment()
                 instanceof ContributionsFragment) {
                 ((ContributionsFragment) (getParentFragment()
-                    .getParentFragment().getParentFragment())).nearbyNotificationCardView
+                    .getParentFragment().getParentFragment())).binding.cardViewNearby
                     .setVisibility(View.GONE);
             }
         }
@@ -398,8 +431,14 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
         super.onStop();
         if (media != null) {
             Objects.requireNonNull(
-                ((AppCompatActivity) Objects.requireNonNull(getActivity())).getSupportActionBar())
+                ((AppCompatActivity) requireActivity()).getSupportActionBar())
                 .show();
         }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        binding = null;
     }
 }

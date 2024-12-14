@@ -13,15 +13,16 @@ import java.util.ArrayList
 class BookmarkLocationControllerTest {
     @Mock
     var bookmarkDao: BookmarkLocationsDao? = null
+
     @InjectMocks
     lateinit var bookmarkLocationsController: BookmarkLocationsController
 
-     @Before
-     fun setup() {
-         MockitoAnnotations.initMocks(this)
-         whenever(bookmarkDao!!.allBookmarksLocations)
-             .thenReturn(mockBookmarkList)
-     }
+    @Before
+    fun setup() {
+        MockitoAnnotations.initMocks(this)
+        whenever(bookmarkDao!!.allBookmarksLocations)
+            .thenReturn(mockBookmarkList)
+    }
 
     /**
      * Get mock bookmark list
@@ -32,7 +33,17 @@ class BookmarkLocationControllerTest {
             val list = ArrayList<Place>()
             list.add(
                 Place(
-                    "en", "a place", null, "a description", null, "a cat", null, null, true)
+                    "en",
+                    "a place",
+                    null,
+                    "a description",
+                    null,
+                    "a cat",
+                    null,
+                    null,
+                    true,
+                    "entityID",
+                ),
             )
             list.add(
                 Place(
@@ -44,8 +55,9 @@ class BookmarkLocationControllerTest {
                     "another cat",
                     null,
                     null,
-                    true
-                )
+                    true,
+                    "entityID",
+                ),
             )
             return list
         }

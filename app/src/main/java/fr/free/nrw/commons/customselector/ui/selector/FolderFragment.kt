@@ -5,28 +5,30 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import fr.free.nrw.commons.R
 import fr.free.nrw.commons.customselector.helper.ImageHelper
-import fr.free.nrw.commons.customselector.model.Result
 import fr.free.nrw.commons.customselector.listeners.FolderClickListener
 import fr.free.nrw.commons.customselector.model.CallbackStatus
 import fr.free.nrw.commons.customselector.model.Folder
+import fr.free.nrw.commons.customselector.model.Result
 import fr.free.nrw.commons.customselector.ui.adapter.FolderAdapter
+import fr.free.nrw.commons.databinding.FragmentCustomSelectorBinding
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment
 import fr.free.nrw.commons.media.MediaClient
 import fr.free.nrw.commons.upload.FileProcessor
-import kotlinx.android.synthetic.main.fragment_custom_selector.*
-import kotlinx.android.synthetic.main.fragment_custom_selector.view.*
 import javax.inject.Inject
 
 /**
  * Custom selector folder fragment.
  */
 class FolderFragment : CommonsDaggerSupportFragment() {
+    /**
+     * ViewBinding
+     */
+    private var _binding: FragmentCustomSelectorBinding? = null
+    val binding get() = _binding
 
     /**
      * View Model for images.
@@ -50,6 +52,7 @@ class FolderFragment : CommonsDaggerSupportFragment() {
 
     var mediaClient: MediaClient? = null
         @Inject set
+
     /**
      * Folder Adapter.
      */
@@ -63,15 +66,13 @@ class FolderFragment : CommonsDaggerSupportFragment() {
     /**
      * Folder List.
      */
-    private lateinit var folders : ArrayList<Folder>
+    private lateinit var folders: ArrayList<Folder>
 
     /**
      * Companion newInstance.
      */
-    companion object{
-        fun newInstance(): FolderFragment {
-            return FolderFragment()
-        }
+    companion object {
+        fun newInstance(): FolderFragment = FolderFragment()
     }
 
     /**
@@ -80,29 +81,32 @@ class FolderFragment : CommonsDaggerSupportFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        viewModel = ViewModelProvider(requireActivity(),customSelectorViewModelFactory!!).get(CustomSelectorViewModel::class.java)
-
+        viewModel = ViewModelProvider(requireActivity(), customSelectorViewModelFactory!!).get(CustomSelectorViewModel::class.java)
     }
 
     /**
      * OnCreateView.
      * Inflate Layout, init adapter, init gridLayoutManager, setUp recycler view, observe the view model for result.
      */
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val root = inflater.inflate(R.layout.fragment_custom_selector, container, false)
-        folderAdapter = FolderAdapter(activity!!, activity as FolderClickListener)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
+    ): View? {
+        _binding = FragmentCustomSelectorBinding.inflate(inflater, container, false)
+        folderAdapter = FolderAdapter(requireActivity(), activity as FolderClickListener)
         gridLayoutManager = GridLayoutManager(context, columnCount())
-        selectorRV = root.selector_rv
-        loader = root.loader
-        with(root.selector_rv){
-            this.layoutManager = gridLayoutManager
-            setHasFixedSize(true)
-            this.adapter = folderAdapter
+        selectorRV = binding?.selectorRv
+        loader = binding?.loader
+        with(binding?.selectorRv) {
+            this?.layoutManager = gridLayoutManager
+            this?.setHasFixedSize(true)
+            this?.adapter = folderAdapter
         }
-        viewModel?.result?.observe(viewLifecycleOwner, Observer {
+        viewModel?.result?.observe(viewLifecycleOwner) {
             handleResult(it)
-        })
-        return root
+        }
+        return binding?.root
     }
 
     /**
@@ -111,12 +115,15 @@ class FolderFragment : CommonsDaggerSupportFragment() {
      * Load adapter.
      */
     private fun handleResult(result: Result) {
-        if(result.status is CallbackStatus.SUCCESS){
+        if (result.status is CallbackStatus.SUCCESS) {
             val images = result.images
-            if(images.isNullOrEmpty())
-            {
-                empty_text?.let {
+            if (images.isEmpty()) {
+                binding?.emptyText?.let {
                     it.visibility = View.VISIBLE
+                }
+            } else {
+                binding?.emptyText?.let {
+                    it.visibility = View.GONE
                 }
             }
             folders = ImageHelper.folderListFromImages(result.images)
@@ -138,6 +145,15 @@ class FolderFragment : CommonsDaggerSupportFragment() {
     override fun onResume() {
         folderAdapter.notifyDataSetChanged()
         super.onResume()
+    }
+
+    /**
+     * onDestroyView
+     * clearing view binding
+     */
+    override fun onDestroyView() {
+        _binding = null
+        super.onDestroyView()
     }
 
     /**

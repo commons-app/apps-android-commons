@@ -5,6 +5,7 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import androidx.test.core.app.ApplicationProvider
 import fr.free.nrw.commons.TestCommonsApplication
 import org.junit.Assert
 import org.junit.Before
@@ -13,16 +14,13 @@ import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.MockitoAnnotations
 import org.robolectric.RobolectricTestRunner
-import org.robolectric.RuntimeEnvironment
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
-import java.util.*
 
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
 @LooperMode(LooperMode.Mode.PAUSED)
 class NearbyFilterSearchRecyclerViewAdapterUnitTests {
-
     private lateinit var context: Context
     private lateinit var adapter: NearbyFilterSearchRecyclerViewAdapter
 
@@ -46,8 +44,8 @@ class NearbyFilterSearchRecyclerViewAdapterUnitTests {
 
     @Before
     fun setUp() {
-        MockitoAnnotations.initMocks(this)
-        context = RuntimeEnvironment.application.applicationContext
+        MockitoAnnotations.openMocks(this)
+        context = ApplicationProvider.getApplicationContext()
         adapter = NearbyFilterSearchRecyclerViewAdapter(context, ArrayList<Label>(Label.valuesAsList()), recyclerView)
         viewHolder.placeTypeIcon = imageView
         viewHolder.placeTypeLabel = textView
@@ -101,5 +99,4 @@ class NearbyFilterSearchRecyclerViewAdapterUnitTests {
     fun testSetRecyclerViewAdapterAllSelected() {
         adapter.setRecyclerViewAdapterAllSelected()
     }
-
 }

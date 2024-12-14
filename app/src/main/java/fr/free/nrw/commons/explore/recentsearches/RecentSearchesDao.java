@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.explore.recentsearches;
 
+import android.annotation.SuppressLint;
 import android.content.ContentProviderClient;
 import android.content.ContentValues;
 import android.database.Cursor;
@@ -178,6 +179,7 @@ public class RecentSearchesDao {
      * @return RecentSearch object
      */
     @NonNull
+    @SuppressLint("Range")
     RecentSearch fromCursor(Cursor cursor) {
         // Hardcoding column positions!
         return new RecentSearch(

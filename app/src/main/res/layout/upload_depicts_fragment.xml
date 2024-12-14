@@ -40,7 +40,7 @@
               android:id="@+id/tooltip"
               android:layout_width="wrap_content"
               android:layout_height="match_parent"
-              android:src="@drawable/mapbox_info_icon_default" />
+              android:src="@drawable/maplibre_info_icon_default" />
         </LinearLayout>
 
     <TextView
@@ -116,6 +116,10 @@
         android:layout_marginEnd="@dimen/standard_gap"
         android:layout_marginRight="@dimen/standard_gap"
         android:layout_above="@+id/button_divider"
+        android:scrollbars="vertical"
+        android:fadeScrollbars="false"
+        android:scrollbarThumbVertical="@color/primaryColor"
+        android:scrollbarSize="@dimen/dimen_6"
         android:layout_below="@id/depicts_search_layout" />
     </LinearLayout>
 

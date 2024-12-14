@@ -5,7 +5,6 @@ import android.content.Context
 import android.os.Bundle
 import android.os.Looper.getMainLooper
 import android.view.LayoutInflater
-import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.widget.GridView
@@ -14,14 +13,16 @@ import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
+import androidx.test.core.app.ApplicationProvider
 import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.times
 import com.nhaarman.mockitokotlin2.verify
 import fr.free.nrw.commons.Media
-import fr.free.nrw.commons.R
-import fr.free.nrw.commons.TestAppAdapter
+import fr.free.nrw.commons.OkHttpConnectionFactory
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.category.GridViewAdapter
+import fr.free.nrw.commons.createTestClient
+import fr.free.nrw.commons.databinding.FragmentBookmarksPicturesBinding
 import fr.free.nrw.commons.media.MediaClient
 import fr.free.nrw.commons.profile.ProfileActivity
 import media
@@ -34,24 +35,20 @@ import org.mockito.MockitoAnnotations
 import org.powermock.reflect.Whitebox
 import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
-import org.robolectric.RuntimeEnvironment
 import org.robolectric.Shadows.shadowOf
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
-import org.wikipedia.AppAdapter
 import java.lang.reflect.Method
-
 
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
 @LooperMode(LooperMode.Mode.PAUSED)
 class BookmarkPicturesFragmentUnitTests {
-
     private lateinit var fragment: BookmarkPicturesFragment
 
-    private lateinit var context: Context
+    private lateinit var binding: FragmentBookmarksPicturesBinding
 
-    private lateinit var view: View
+    private lateinit var context: Context
 
     @Mock
     lateinit var statusTextView: TextView
@@ -88,8 +85,8 @@ class BookmarkPicturesFragmentUnitTests {
     @Before
     fun setUp() {
         MockitoAnnotations.initMocks(this)
-        context = RuntimeEnvironment.application.applicationContext
-        AppAdapter.set(TestAppAdapter())
+        context = ApplicationProvider.getApplicationContext()
+        OkHttpConnectionFactory.CLIENT = createTestClient()
         val activity = Robolectric.buildActivity(ProfileActivity::class.java).create().get()
         fragment = BookmarkPicturesFragment.newInstance()
         val fragmentManager: FragmentManager = activity.supportFragmentManager
@@ -97,13 +94,7 @@ class BookmarkPicturesFragmentUnitTests {
         fragmentTransaction.add(fragment, null)
         fragmentTransaction.commit()
 
-        view = LayoutInflater.from(activity)
-            .inflate(R.layout.fragment_bookmarks_pictures, null) as View
-
-        fragment.statusTextView = statusTextView
-        fragment.progressBar = progressBar
-        fragment.gridView = gridView
-        fragment.parentLayout = parentLayout
+        binding = FragmentBookmarksPicturesBinding.inflate(LayoutInflater.from(activity))
 
         val bookmarkDao = BookmarkPicturesDao { client }
 
@@ -111,11 +102,21 @@ class BookmarkPicturesFragmentUnitTests {
 
         fragment.controller = controller
 
-        Whitebox.setInternalState(fragment, "gridAdapter", GridViewAdapter(
-            context,
-            0,
-            listOf(media())
-        ))
+        Whitebox.setInternalState(
+            fragment,
+            "gridAdapter",
+            GridViewAdapter(
+                context,
+                0,
+                mutableListOf(media()),
+            ),
+        )
+        Whitebox.setInternalState(fragment, "binding", binding)
+
+        Whitebox.setInternalState(binding, "statusMessage", statusTextView)
+        Whitebox.setInternalState(binding, "loadingImagesProgressBar", progressBar)
+        Whitebox.setInternalState(binding, "bookmarkedPicturesList", gridView)
+        Whitebox.setInternalState(binding, "parentLayout", parentLayout)
     }
 
     @Test
@@ -127,7 +128,7 @@ class BookmarkPicturesFragmentUnitTests {
     @Test
     @Throws(Exception::class)
     fun testOnViewCreated() {
-        fragment.onViewCreated(view, savedInstanceState)
+        fragment.onViewCreated(binding.root, savedInstanceState)
     }
 
     @Test
@@ -176,10 +177,11 @@ class BookmarkPicturesFragmentUnitTests {
     @Test
     @Throws(Exception::class)
     fun testHandleError() {
-        val method: Method = BookmarkPicturesFragment::class.java.getDeclaredMethod(
-            "handleError",
-            Throwable::class.java
-        )
+        val method: Method =
+            BookmarkPicturesFragment::class.java.getDeclaredMethod(
+                "handleError",
+                Throwable::class.java,
+            )
         method.isAccessible = true
         method.invoke(fragment, throwable)
     }
@@ -188,10 +190,11 @@ class BookmarkPicturesFragmentUnitTests {
     @Throws(Exception::class)
     fun testHandleSuccess() {
         gridAdapter.addItems(listOf(media()))
-        val method: Method = BookmarkPicturesFragment::class.java.getDeclaredMethod(
-            "handleSuccess",
-            List::class.java
-        )
+        val method: Method =
+            BookmarkPicturesFragment::class.java.getDeclaredMethod(
+                "handleSuccess",
+                List::class.java,
+            )
         method.isAccessible = true
         method.invoke(fragment, listOf(media()))
         verify(progressBar, times(1)).setVisibility(GONE)

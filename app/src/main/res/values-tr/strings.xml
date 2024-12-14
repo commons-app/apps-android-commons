@@ -5,17 +5,23 @@
 * Chansey
 * Dual
 * Emperyan
+* Ft.Rath
 * Grkn gll
 * Hedda
 * Incelemeelemani
+* JackUKElliott
+* Jelican9
 * Joseph
 * McAang
+* McDutchie
 * Mirzali
+* MrSchipunov
 * MuratTheTurkish
 * Neslihan Turan
 * Okkerem
 * Oyuncu
 * Rapsar
+* RuzDD
 * SaldırganSincap
 * Sayginer
 * Sezgin İbiş
@@ -45,6 +51,7 @@
   <string name="nearby_row_image">Resim</string>
   <string name="nearby_all">Hepsi</string>
   <string name="nearby_filter_toggle">Aç/Kapat</string>
+  <string name="nearby_filter_search">Arama Görünümü</string>
   <string name="nearby_filter_state">Yer Durumu</string>
   <string name="appwidget_img">Günün Resmi</string>
   <plurals name="uploads_pending_notification_indicator">
@@ -82,9 +89,9 @@
   <string name="preference_category_feedback">Geri bildirim</string>
   <string name="preference_category_privacy">Gizlilik</string>
   <string name="app_name">Commons</string>
-  <string name="bullet">•</string>
   <string name="menu_settings">Ayarlar</string>
   <string name="intent_share_upload_label">Commons\'a yükle</string>
+  <string name="upload_in_progress">Yükleme devam etmekte</string>
   <string name="username">Kullanıcı adı</string>
   <string name="password">Parola</string>
   <string name="login_credential">Commons Beta hesabınıza giriş yapın</string>
@@ -98,7 +105,10 @@
   <string name="login_success">Oturum açma başarılı!</string>
   <string name="login_failed">Oturum açma başarısız oldu!</string>
   <string name="upload_failed">Dosya bulunamadı. Lütfen başka bir dosya deneyin.</string>
-  <string name="authentication_failed">Kimlik doğrulama başarısız oldu, lütfen tekrar giriş yapın</string>
+  <string name="retry_limit_reached">Tekrar deneme sınırına ulaşıldı! Lütfen yüklemeyi iptal edin ve tekrar deneyin.</string>
+  <string name="unrestricted_battery_mode">Pil optimizasyonu kapatılsın mı ?</string>
+  <string name="suggest_unrestricted_mode">Batarya optimizasyonu kapatıldığında 3\'den fazla görüntü yüklemek daha güvenilir bir yoldur. Lütfen sorunsuz bir yükleme deneyimi için Commons uygulamasının ayarlar kısmından batarya optimizasyonunu kapatın.\n\nBatarya Optimizasyonunu kapatmak için yapılabilecek adımlar:\n\nAdım 1: Aşağı kısımdan\"Ayarlar\" butonuna basın\n\nAdım 2: \"Optimizasyon yapılmamış\" seçeneğini \"Tüm uygulamalar\" olarak değiştirin\"\n\nAdım 3: \"Commons\" veya \"fr.free.nrw.commons\" olacak şekilde arama yapın\n\nAdım 4: Tıklayın ve \"Optimize Etme\" seçeneğini seçin.\n\nAdım 5: \"Yapıldı\" seçeneğine basın.</string>
+  <string name="authentication_failed">Kimlik doğrulama başarısız oldu. Lütfen tekrar giriş yapın.</string>
   <string name="uploading_started">Yükleme başladı!</string>
   <string name="uploading_queued">Yükleme kuyruğunda (sınırlı bağlantı modu etkin)</string>
   <string name="upload_completed_notification_title">%1$s yüklendi!</string>
@@ -137,6 +147,7 @@
   <string name="categories_search_text_hint">Kategori ara</string>
   <string name="depicts_search_text_hint">Medyanızın tasvir ettiği ögeleri arayın (dağ, Tac Mahal, vb.)</string>
   <string name="menu_save_categories">Kaydet</string>
+  <string name="menu_overflow_desc">Taşma menüsü</string>
   <string name="refresh_button">Yenile</string>
   <string name="display_list_button">Liste</string>
   <string name="contributions_subtitle_zero">!Henüz yükleme yok)</string>
@@ -155,7 +166,7 @@
   <string name="menu_about">Hakkında</string>
   <string name="about_license">Wikimedia Commons uygulaması, Wikimedia topluluğunun hibeleri ve gönüllüleri tarafından oluşturulan ve sürdürülen açık kaynaklı bir uygulamadır. Wikimedia Vakfı, uygulamanın oluşturulması, geliştirilmesi veya bakımı ile ilgili değildir.</string>
   <string name="about_improve">Hata raporları ve önerileri için yeni bir &lt;a href=\"%1$s\"&gt;GitHub sorunu&lt;/a&gt; oluşturun.</string>
-  <string name="about_privacy_policy">Gizlilik ilkesi</string>
+  <string name="about_privacy_policy">Gizlilik politikası</string>
   <string name="about_credits">Katkıda bulunanlar</string>
   <string name="title_activity_about">Hakkında</string>
   <string name="menu_feedback">Geri Bildirim Gönder (E-posta ile)</string>
@@ -212,9 +223,11 @@
   <string name="read_storage_permission_rationale">Gerekli izin: Harici depolama birimini okuma. Uygulama, bu olmadan galerinize erişemez.</string>
   <string name="write_storage_permission_rationale">Gerekli izin: Harici depolama alanına yazma. Uygulama, bu olmadan kameranıza/galerinize erişemez.</string>
   <string name="location_permission_title">Konum İzni İsteği</string>
+  <string name="in_app_camera_location_permission_title">Uygulama içi çekimlerin kaydedilen yeri</string>
+  <string name="in_app_camera_location_switch_pref_summary">Cihaz kamerasının kaydetmemesi durumunda konumu uygulama içi çekimlerle kaydetmek için bunu etkinleştirin</string>
   <string name="ok">Tamam</string>
   <string name="warning">Uyarı</string>
-  <string name="duplicate_image_found">Yinelenen Resim Bulundu</string>
+  <string name="duplicate_file_name">Yinelenen Dosya Adı bulundu</string>
   <string name="upload">Yükle</string>
   <string name="yes">Evet</string>
   <string name="no">Hayır</string>
@@ -251,6 +264,7 @@
   <string name="navigation_item_about">Hakkında</string>
   <string name="navigation_item_settings">Ayarlar</string>
   <string name="navigation_item_feedback">Geri bildirim</string>
+  <string name="navigation_item_feedback_github">GitHub aracılığıyla geri bildirim</string>
   <string name="navigation_item_logout">Oturumu kapat</string>
   <string name="navigation_item_info">Eğitim</string>
   <string name="navigation_item_notification">Bildirimler</string>
@@ -285,12 +299,14 @@
   <string name="skip_login">Atla</string>
   <string name="navigation_item_login">Oturum aç</string>
   <string name="skip_login_title">Gerçekten oturum açmayı atlamak istiyor musunuz?</string>
-  <string name="skip_login_message">İleride resim yüklemek için giriş yapmanız gerekir.</string>
+  <string name="skip_login_message">İleride resim yüklemek için giriş yapmanız gerekecek.</string>
   <string name="login_alert_message">Bu özelliği kullanmak için lütfen giriş yapın</string>
   <string name="copy_wikicode">Vikimetnini panoya kopyala</string>
   <string name="wikicode_copied">Vikimetin panoya kopyalandı</string>
   <string name="nearby_location_not_available">Yakınımdakiler düzgün çalışmayabilir, Konum kullanılamıyor.</string>
+  <string name="upload_location_access_denied">Konum erişimi reddedildi. Bu özelliği kullanmak için lütfen konumunuzu manuel olarak ayarlayın.</string>
   <string name="location_permission_rationale_nearby">Yakındaki yerler listesini görüntülemek için izin vermeniz gerekiyor</string>
+  <string name="location_permission_rationale_explore">Yakındaki resimlerin listesini görüntülemek için izin gerekli</string>
   <string name="nearby_directions">Talimatlar</string>
   <string name="nearby_wikidata">Vikiveri</string>
   <string name="nearby_wikipedia">Vikipedi</string>
@@ -350,14 +366,16 @@
   <string name="construction_event_answer">Commons\'ta teknoloji veya kültür resimleri oldukça hoş karşılanır.</string>
   <string name="congratulatory_message_quiz">Doğru cevap sayınız: %1$s. Tebrikler!</string>
   <string name="warning_for_no_answer">Soruyu cevaplamak için iki seçenekten birini seçin</string>
-  <string name="user_not_logged_in">Giriş oturumunuzun süresi doldu, lütfen tekrar giriş yapın.</string>
+  <string name="user_not_logged_in">Giriş oturumunuzun süresi doldu. Lütfen tekrar giriş yapın.</string>
   <string name="quiz_result_share_message">Sınavınızı arkadaşlarınızla paylaşın!</string>
   <string name="continue_message">Devam</string>
   <string name="correct">Doğru Cevap</string>
   <string name="wrong">Yanlış Cevap</string>
   <string name="quiz_screenshot_question">Bu ekran görüntüsü yüklemeye uygun mu?</string>
   <string name="share_app_title">Uygulamayı Paylaş</string>
-  <string name="error_fetching_nearby_places">Yakındaki yerler getirilirken hata oluştu.</string>
+  <string name="rotate">Döndür</string>
+  <string name="error_fetching_nearby_places">Yakındaki yerler yüklenemedi</string>
+  <string name="no_pictures_in_this_area">Bu bölgede resim yok</string>
   <string name="no_nearby_places_around">Yakınlarda yer bulunamadı</string>
   <string name="error_fetching_nearby_monuments">Yakındaki anıtlar getirilirken hata oluştu.</string>
   <string name="no_recent_searches">Son arama yok</string>
@@ -373,7 +391,7 @@
   <string name="statistics_thanks">Teşekkür Alındı</string>
   <string name="statistics_featured">Seçkin Resimler</string>
   <string name="statistics_wikidata_edits">\"Yakındaki Yerler\"den Resimler</string>
-  <string name="level">Seviye</string>
+  <string name="level" fuzzy="true">Seviye</string>
   <string name="images_uploaded">Resimler Yüklendi</string>
   <string name="image_reverts">Resimler Geri Alınmadı</string>
   <string name="images_used_by_wiki">Resimler Kullanıldı</string>
@@ -432,13 +450,23 @@
   <string name="never_ask_again">Bunu bir daha sorma</string>
   <string name="display_location_permission_title">Konum izni isteyin</string>
   <string name="display_location_permission_explanation">Yakındaki bildirim kartı görüntüleme özelliği için gerektiğinde konum izni isteyin.</string>
-  <string name="achievements_fetch_failed">Bir şeyler ters gitti, başarılarınızı getiremedik</string>
+  <string name="achievements_fetch_failed">Bir şeyler ters gitti, başarıları getiremedik</string>
   <string name="achievements_fetch_failed_ultimate_achievement">Başarı hesaplama sistemimizin üstesinden gelemeyeceği pek çok katkı yaptınız. Bu nihai başarıdır.</string>
   <string name="ends_on">Bitiş:</string>
   <string name="display_campaigns">Kampanyaları göster</string>
   <string name="display_campaigns_explanation">Devam eden çalışmaları görün</string>
+  <string name="in_app_camera_location_access_explanation">Kameranın kaydetmemesi durumunda uygulamanın konumu almasına izin verin. Bazı cihaz kameraları konum kaydetmez. Bu gibi durumlarda uygulamanın konum alıp eklemesine izin vermeniz katkınızı daha faydalı hale getirir. Bunu istediğiniz zaman Ayarlar\'dan değiştirebilirsiniz.</string>
+  <string name="option_allow">İzin ver</string>
+  <string name="option_dismiss">Kapat</string>
+  <string name="in_app_camera_needs_location">Lütfen Ayarlar\'dan konum erişimini açın ve tekrar deneyin. \n\nNot: Uygulama, kısa bir süre içinde cihazdan konum alamazsa yüklemede konum bilgisi olmayabilir.</string>
+  <string name="in_app_camera_location_permission_rationale">EXIF\'de konumun mevcut olmaması durumunda, uygulama içi kameranın konumunuzu görsellerinize ekleyebilmesi için konum iznine ihtiyacı vardır. Lütfen uygulamanın konumunuza erişmesine izin verin ve tekrar deneyin.\n\nNot: Uygulama, kısa bir süre içinde cihazdan konum alamazsa yüklemede konum bilgisi olmayabilir.</string>
+  <string name="in_app_camera_location_permission_denied">Uygulama, konum izninin olmaması nedeniyle, çekimlerin yanı sıra konumu da kaydetmiyor</string>
+  <string name="in_app_camera_location_unavailable">GPS kapalı olduğundan uygulama, çekimlerin yanı sıra konumu da kaydetmiyor</string>
+  <string name="open_document_photo_picker_title">Belge tabanlı fotoğraf seçiciyi kullanın</string>
+  <string name="open_document_photo_picker_explanation">Yeni Android fotoğraf seçici, konum bilgilerini kaybetme riskini taşımaktadır. Kullanıyor gibi görünüyorsa etkinleştirin.</string>
+  <string name="location_loss_warning">Bunu kapatmak, yeni Android fotoğraf seçiciyi etkinleştirebilir. Konum bilgisini kaybetme riski vardır.\n\nDaha fazla bilgi için \'Daha fazlasını oku\'ya dokunun.</string>
   <string name="nearby_campaign_dismiss_message">Artık çalışmaları görmeyeceksiniz. Ancak isterseniz bu bildirimi Ayarlar\'dan yeniden etkinleştirebilirsiniz.</string>
-  <string name="this_function_needs_network_connection">Bu işlev ağ bağlantısı gerektirir, lütfen bağlantı ayarlarınızı kontrol edin.</string>
+  <string name="this_function_needs_network_connection">Bu işlev ağ bağlantısı gerektirir. Lütfen bağlantı ayarlarınızı kontrol edin.</string>
   <string name="error_processing_image">Görüntü işlenirken hata oluştu. Lütfen tekrar deneyin!</string>
   <string name="getting_edit_token">Düzenleme için anahtar alınıyor</string>
   <string name="check_category_adding_template">Kategori kontrolü için şablon ekleme</string>
@@ -476,6 +504,7 @@
   <string name="no_notification">Okunmamış bildiriminiz yok</string>
   <string name="no_read_notification">Okundu bildiriminiz yok</string>
   <string name="share_logs_using">Günlükleri kullanarak paylaş</string>
+  <string name="check_your_email_inbox">E-posta kutunuzu denetleyin</string>
   <string name="menu_option_read">Okunanları görüntüle</string>
   <string name="menu_option_unread">Okunmayanları görüntüle</string>
   <string name="error_occurred_in_picking_images">Resimler seçilirken hata oluştu</string>
@@ -498,6 +527,8 @@
   <string name="exif_tag_name_lensModel">Lens Modeli</string>
   <string name="exif_tag_name_serialNumbers">Seri Numaraları</string>
   <string name="exif_tag_name_software">Yazılım</string>
+  <string name="media_location_permission_denied">Medya konumu erişimi reddedildi</string>
+  <string name="add_location_manually">Yüklediğiniz resimlerden konum verilerini otomatik olarak elde edemeyebiliriz. Lütfen göndermeden önce her resim için uygun konumu ekleyin</string>
   <string name="share_text">Fotoğrafları doğrudan telefonunuzdan Wikimedia Commons\'a yükleyin. Commons Uygulamasını şimdi indirin: %1$s</string>
   <string name="share_via">Uygulamayı şununla paylaşın:</string>
   <string name="image_info">Resim Bilgisi</string>
@@ -513,12 +544,13 @@
   <string name="delete_helper_show_deletion_message_if">%1$s, silme için aday gösterildi.</string>
   <string name="delete_helper_show_deletion_title_failed">Başarısız</string>
   <string name="delete_helper_show_deletion_message_else">Silme işlemi istenemedi.</string>
-  <string name="delete_helper_ask_spam_selfie">Selfie</string>
-  <string name="delete_helper_ask_spam_blurry">Bulanık</string>
-  <string name="delete_helper_ask_spam_nonsense">Anlamsız</string>
+  <string name="delete_helper_ask_spam_selfie">hiçbir maddede kullanılmayan bir selfie</string>
+  <string name="delete_helper_ask_spam_blurry">tamamen bulanık</string>
+  <string name="delete_helper_ask_spam_nonsense">anlamsız, herhangi bir makalede kesinlikle kullanılamaz</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">Basın fotoğrafı</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">İnternetten rastgele fotoğraf</string>
   <string name="delete_helper_ask_reason_copyright_logo">Logo</string>
+  <string name="delete_helper_ask_reason_copyright_no_freedom_of_panorama">Panorama Özgürlüğünün İhlali</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">Çünkü</string>
   <string name="category_edit_helper_make_edit_toast">Kategorileri güncellemeye çalışıyor.</string>
   <string name="category_edit_helper_show_edit_title">Kategori güncellemesi</string>
@@ -547,7 +579,7 @@
   <string name="coordinates_edit_helper_edit_message_else">Koordinatlar eklenemedi.</string>
   <string name="description_edit_helper_edit_message_else">Açıklamalar eklenemedi.</string>
   <string name="caption_edit_helper_edit_message_else">Başlık eklenemedi.</string>
-  <string name="coordinates_picking_unsuccessful">Koordinatlar alınamadı.</string>
+  <string name="coordinates_picking_unsuccessful">Görselin koordinatları güncellenmedi</string>
   <string name="descriptions_picking_unsuccessful">Açıklamalar alınamadı.</string>
   <string name="description_activity_title">Açıklamaları ve başlıkları düzenle</string>
   <string name="share_image_via">Resmi şununla paylaş</string>
@@ -562,12 +594,13 @@
   <string name="place_state_needs_photo">Fotoğrafa İhtiyaç Var</string>
   <string name="place_type">Yer türü:</string>
   <string name="nearby_search_hint">Köprü, müze, otel vb.</string>
-  <string name="you_must_reset_your_passsword">Giriş ile ilgili bir sorun oluştu, şifrenizi sıfırlamanız gerekiyor !!</string>
+  <string name="you_must_reset_your_passsword">Giriş ile ilgili bir sorun oluştu. Şifrenizi sıfırlamanız gerekiyor!</string>
   <string name="title_for_media">MEDYA</string>
   <string name="title_for_child_classes">ALT SINIFLAR</string>
   <string name="title_for_parent_classes">ÜST SINIFLAR</string>
   <string name="upload_nearby_place_found_title">Yakındaki Yer Bulundu</string>
-  <string name="upload_nearby_place_found_description">Bu fotoğraf, %1$s yerinin bir fotoğrafı mı?</string>
+  <string name="upload_nearby_place_found_description_plural">Bunlar %1$s resimleri mi?</string>
+  <string name="upload_nearby_place_found_description_singular">Bu bir %1$s resmi mi?</string>
   <string name="title_app_shortcut_bookmark">Yer imleri</string>
   <string name="title_app_shortcut_setting">Ayarlar</string>
   <string name="remove_bookmark">Yer işaretlerinden kaldırıldı</string>
@@ -581,7 +614,10 @@
   <string name="cannot_open_location_settings">Konum ayarları açılamadı. Lütfen konumu manuel olarak açın</string>
   <string name="recommend_high_accuracy_mode">En iyi sonuçlar için Yüksek Hassasiyet modunu seçin.</string>
   <string name="ask_to_turn_location_on">Konum açılsın mı?</string>
+  <string name="ask_to_turn_location_on_text">Uygulamanın mevcut konumunuzu göstermesi için lütfen konum hizmetlerini açın</string>
   <string name="nearby_needs_location">Yakınımdakilerin düzgün çalışması için konumun açık olması gerekiyor</string>
+  <string name="explore_map_needs_location">Keşfet haritasının yakındaki resimleri görüntülemek için konum iznine ihtiyacı var</string>
+  <string name="upload_map_location_access">Konumu otomatik olarak ayarlamak için konum erişim izni vermeniz gerekir.</string>
   <string name="use_location_from_similar_image">Bu iki fotoğrafı aynı yerde mi çektiniz? Sağdaki resmin enlem/boylamını kullanmak ister misiniz?</string>
   <string name="load_more">Daha Fazla Yükle</string>
   <string name="nearby_no_results">Yer bulunamadı, arama kriterlerinizi değiştirmeyi deneyin.</string>
@@ -624,9 +660,6 @@
   <string name="leaderboard_nearby">Yakınımdakiler</string>
   <string name="leaderboard_used">Kullanılan</string>
   <string name="leaderboard_my_rank_button_text">Sıralamam</string>
-  <string name="mapbox_telemetry">Mapbox Telemetrisi</string>
-  <string name="telemetry_opt_out_summary">Yakındaki özelliğini kullanırken anonim konum ve kullanım verilerini Mapbox\'a gönderin</string>
-  <string name="map_attribution">&amp;#169; &lt;a href=\"https://www.mapbox.com/about/maps/\"&gt;Mapbox&lt;/a&gt; &amp;#169; &lt;a href=\"https://www.openstreetmap.org/copyright\"&gt;OpenStreetMap&lt;/a&gt; &lt;a href=\"https://www.mapbox.com/map-feedback/\"&gt;Bu haritayı geliştirin&lt;/a&gt;</string>
   <string name="limited_connection_enabled">Sınırlı bağlantı modu etkinleştirildi!</string>
   <string name="limited_connection_disabled">Sınırlı bağlantı modu devre dışı bırakıldı. Bekleyen yüklemeler şimdi devam ettirilecek.</string>
   <string name="limited_connection_mode">Sınırlı Bağlantı Modu</string>
@@ -672,7 +705,11 @@
   <string name="custom_selector_info_text2">Soldaki resimden farklı olarak, sağdaki resimde zaten yüklendiğini belirten Commons logosu var.\n Resim ön izlemesi için dokunup basılı tutun.</string>
   <string name="welcome_custom_selector_ok">Harika</string>
   <string name="custom_selector_already_uploaded_image_text">Bu resim zaten Commons\'a yüklendi.</string>
-  <string name="wlm_upload_info">Bu resim Viki, Anıtları Seviyor 2021 yarışmasına katılacaktır</string>
+  <string name="custom_selector_over_limit_warning">Teknik nedenlerden dolayı uygulama aynı anda %1$d fotoğraftan fazlasını güvenilir bir şekilde yükleyemiyor. %1$d olan yükleme sınırı %2$d ile aşıldı.</string>
+  <string name="custom_selector_dismiss_limit_warning_button_text">Reddet</string>
+  <string name="custom_selector_button_limit_text">Maks: %1$d</string>
+  <string name="custom_selector_limit_error_desc">Hata: Yükleme Sınırı Aşıldı</string>
+  <string name="wlm_upload_info">Bu resim, Viki Anıtları Seviyor yarışmasına katılacaktır</string>
   <string name="display_monuments">Anıtları göster</string>
   <string name="wlm_month_message">Viki, Anıtları Seviyor ayı!</string>
   <string name="learn_more">DAHA FAZLA BİLGİ EDİN</string>
@@ -681,7 +718,7 @@
   <string name="read_phone_state_permission_message">Yakındaki haritalar düzgün çalışmak için TELEFON DURUMUNU okumaya ihtiyaç duyuyor</string>
   <string name="contributions_of_user">Kullanıcının katkıları: %s</string>
   <string name="achievements_of_user">Kullanıcının başarıları: %s</string>
-  <string name="menu_view_user_page">Kullanıcı sayfasını görüntüle</string>
+  <string name="menu_view_user_page">Kullanıcı profilini görüntüle</string>
   <string name="edit_depictions">Betimlemeleri düzenle</string>
   <string name="edit_categories">Kategorileri düzenle</string>
   <string name="advanced_options">Gelişmiş Seçenekler</string>
@@ -694,6 +731,8 @@
   <string name="add_location">Konum ekle</string>
   <string name="feedback_sharing_data_alert">Lütfen herkese açık olarak paylaşmaktan çekindiğiniz tüm bilgileri bu e-postadan kaldırın. Ayrıca gönderi paylaştığınız e-posta adresinizin ve ilgili ad ve profil resminizin herkese açık olarak görüneceğini lütfen unutmayın.</string>
   <string name="explore_map_details">Ayrıntılar</string>
+  <string name="achievements_unavailable_beta">Başarılar yalnızca prod sürümünde mevcuttur. Lütfen geliştirici belgelerini denetleyin.</string>
+  <string name="leaderboard_unavailable_beta">Liderlik tablosu yalnızca prod sürümünde mevcuttur. Lütfen geliştirici belgelerini denetleyin.</string>
   <string name="copyright_popup">Lütfen sadece kendi çektiğiniz fotoğrafları yükleyin. Telif hakkıyla korunan resimleri yükleyenler engellenecektir. Bu beta için de geçerlidir. Uygulamayı test ettiğiniz için teşekkür ederiz!</string>
   <string name="select_feedback_data_choice">Lütfen herkese açık olarak paylaşmaktan çekindiğiniz bilgilerin seçimini kaldırın.</string>
   <string name="api_level">API seviyesi</string>
@@ -708,14 +747,73 @@
   <string name="your_feedback">Geri bildiriminiz</string>
   <string name="mark_as_not_for_upload">Yükleme için değil olarak işaretle</string>
   <string name="unmark_as_not_for_upload">Yükleme için değil işaretini kaldır</string>
+  <string name="marking_as_not_for_upload">Yükleme için değil olarak işaretleniyor</string>
+  <string name="unmarking_as_not_for_upload">Yükleme için değil işareti kaldırılıyor</string>
+  <string name="show_already_actioned_pictures">Halihazırda işlem görmüş resimleri göster</string>
+  <string name="hiding_already_actioned_pictures">Halihazırda işlem görmüş resimler gizleniyor</string>
   <string name="no_more_images_found">Başka resim bulunamadı</string>
   <string name="this_image_is_already_uploaded">Bu resim zaten yüklendi</string>
   <string name="can_not_select_this_image_for_upload">Bu resim yüklemek için seçilemiyor</string>
   <string name="image_selected">Resim seçildi</string>
   <string name="image_marked_as_not_for_upload">Resim, yükleme için değil olarak işaretlendi</string>
   <string name="menu_view_report">Bildir</string>
+  <string name="menu_view_set_white_background">Beyaz arka planı ayarla</string>
+  <string name="menu_view_set_black_background">Siyah arka planı ayarla</string>
   <string name="report_violation">İhlal bildir</string>
   <string name="report_user">Bu kullanıcıyı bildir</string>
   <string name="report_content">Bu içeriği bildir</string>
   <string name="request_user_block">Bu kullanıcının engellemesini iste</string>
+  <string name="welcome_to_full_screen_mode_text">Tam Ekran Seçim Moduna Hoş Geldiniz</string>
+  <string name="full_screen_mode_zoom_info">Yakınlaştırmak ve uzaklaştırmak için iki parmağınızı kullanın.</string>
+  <string name="full_screen_mode_features_info">Bu eylemleri gerçekleştirmek için hızlı ve uzun kaydırın: \n- Sol/Sağ: Önceki/sonraki \n- Yukarı: Seç\n- Aşağı: Yükleme için değil olarak işaretle.</string>
+  <string name="set_up_avatar_toast_string">Liderlik sıralaması avatarınızı ayarlamak için herhangi bir görselin üç noktalı menüsünde \"Avatar olarak ayarla\"ya dokunun.</string>
+  <string name="similar_coordinate_description_auto_set">Koordinatlar, tam koordinatlar olmasa da bu resmi yükleyen kişi bu koordinatların yeterince yakın olduğunu düşünüyor.</string>
+  <string name="storage_permissions_denied">Depolama İzni Reddedildi</string>
+  <string name="unable_to_share_upload_item">Bu öge paylaşılamıyor</string>
+  <string name="permissions_are_required_for_functionality">İşlevsellik için izinler gereklidir</string>
+  <string name="learn_how_to_write_a_useful_description">Yararlı bir açıklamanın nasıl yazılacağını öğrenin</string>
+  <string name="learn_how_to_write_a_useful_caption">Nasıl faydalı bir alt yazı yazılacağını öğrenin</string>
+  <string name="see_your_achievements">Başarılarınızı görün</string>
+  <string name="edit_image">Görseli düzenle</string>
+  <string name="edit_location">Konumu Düzenle</string>
+  <string name="location_updated">Konum güncellendi!</string>
+  <string name="remove_location">Konumu Kaldır</string>
+  <string name="remove_location_warning_title">Konum Uyarısını Kaldır</string>
+  <string name="remove_location_warning_desc">Konum, görselleri daha kullanışlı ve bulunabilir hale getirir. Bu resimden konumu gerçekten kaldırmak istiyor musunuz?</string>
+  <string name="location_removed">Konum kaldırıldı!</string>
+  <string name="send_thanks_to_author">Yazara teşekkür et</string>
+  <string name="error_sending_thanks">Yazara teşekkür gönderme hatası.</string>
+  <string name="invalid_login_message">Oturum açma süreniz doldu. Lütfen tekrar giriş yapın.</string>
+  <string name="no_application_available_to_open_gpx_files">GPX dosyalarını açacak uygulama yok</string>
+  <string name="file_saved_successfully">Dosya Başarıyla Kaydedildi</string>
+  <string name="do_you_want_to_open_gpx_file">GPX dosyasını açmak istiyor musunuz?</string>
+  <string name="do_you_want_to_open_kml_file">KML dosyasını açmak istiyor musunuz?</string>
+  <string name="failed_to_save_kml_file">KML dosyası kaydedilemedi.</string>
+  <string name="failed_to_save_gpx_file">GPX dosyası kaydedilemedi.</string>
+  <string name="saving_kml_file">KML Dosyasını Kaydetme</string>
+  <string name="saving_gpx_file">GPX Dosyasını Kaydetme</string>
+  <plurals name="custom_picker_images_selected_title_appendix">
+    <item quantity="one">%d resim seçildi</item>
+    <item quantity="other">%d resim seçildi</item>
+  </plurals>
+  <string name="multiple_files_depiction">Lütfen çoklu yüklemedeki tüm görsellerin aynı kategorilere ve tasvirlere sahip olduğunu unutmayın. Görseller tasvirleri ve kategorileri paylaşmıyorsa, lütfen birkaç ayrı yükleme gerçekleştirin.</string>
+  <string name="multiple_files_depiction_header">Çoklu yüklemelerle ilgili not</string>
+  <string name="nearby_wikitalk">Bu öge ile ilgili bir sorunu Vikiveri\'ye bildirin</string>
+  <string name="please_enter_some_comments">Lütfen bir yorum girin</string>
+  <string name="talk">Tartışma</string>
+  <string name="write_something_about_the_item">\' %1$s \' öğesi hakkında bir şeyler yazın. Herkes tarafından görülebilir olacaktır.</string>
+  <string name="does_not_exist_anymore_no_picture_can_ever_be_taken_of_it">\'%1$s\' artık yok, dolayısı ile resmi çekilemez.</string>
+  <string name="other_problem_or_information_please_explain_below">Diğer sorun veya bilgi (lütfen aşağıda açıklayınız).</string>
+  <string name="feedback_destination_note">Geri bildiriminiz aşağıdaki wiki sayfasına gönderilir:  &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Mobile_app/Feedback\"&gt;Commons:Mobile app/Feedback&lt;/a&gt;</string>
+  <string name="are_you_sure_that_you_want_cancel_all_the_uploads">Tüm yüklemeleri iptal etmek istediğinizden emin misiniz?</string>
+  <string name="cancelling_all_the_uploads">Tüm yüklemeler iptal ediliyor...</string>
+  <string name="uploads">Yüklemeler</string>
+  <string name="pending">Beklemede</string>
+  <string name="failed">Başarısız</string>
+  <string name="custom_selector_delete">Sil</string>
+  <string name="custom_selector_cancel">İptal</string>
+  <string name="custom_selector_folder_deleted_success">%1$s klasörü başarıyla silindi</string>
+  <string name="custom_selector_folder_deleted_failure">%1$s klasörü silinemedi</string>
+  <string name="green_pin">Bu yerin zaten bir resmi var.</string>
+  <string name="grey_pin">Şimdi bu yerin bir resime sahip olup olmadığı denetleniyor.</string>
 </resources>

@@ -3,10 +3,12 @@ package fr.free.nrw.commons.media
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import androidx.test.core.app.ApplicationProvider
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.facebook.soloader.SoLoader
-import fr.free.nrw.commons.TestAppAdapter
+import fr.free.nrw.commons.OkHttpConnectionFactory
 import fr.free.nrw.commons.TestCommonsApplication
+import fr.free.nrw.commons.createTestClient
 import fr.free.nrw.commons.customselector.model.CallbackStatus
 import fr.free.nrw.commons.customselector.model.Image
 import fr.free.nrw.commons.customselector.model.Result
@@ -19,17 +21,14 @@ import org.mockito.MockitoAnnotations
 import org.powermock.reflect.Whitebox
 import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
-import org.robolectric.RuntimeEnvironment
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
-import org.wikipedia.AppAdapter
 import java.lang.reflect.Field
 
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
 @LooperMode(LooperMode.Mode.PAUSED)
 class ZoomableActivityUnitTests {
-
     private lateinit var context: Context
     private lateinit var activity: ZoomableActivity
     private lateinit var viewModelField: Field
@@ -43,9 +42,9 @@ class ZoomableActivityUnitTests {
 
     @Before
     fun setUp() {
-        MockitoAnnotations.initMocks(this)
-        AppAdapter.set(TestAppAdapter())
-        context = RuntimeEnvironment.application.applicationContext
+        MockitoAnnotations.openMocks(this)
+        OkHttpConnectionFactory.CLIENT = createTestClient()
+        context = ApplicationProvider.getApplicationContext()
         SoLoader.setInTestMode()
         Fresco.initialize(context)
         val intent = Intent().setData(uri)
@@ -70,18 +69,18 @@ class ZoomableActivityUnitTests {
      * Test handleResult.
      */
     @Test
-    fun testHandleResult(){
+    fun testHandleResult() {
         val func = activity.javaClass.getDeclaredMethod("handleResult", Result::class.java)
         func.isAccessible = true
         func.invoke(activity, Result(CallbackStatus.SUCCESS, arrayListOf()))
-        func.invoke(activity, Result(CallbackStatus.SUCCESS, arrayListOf(image,image)))
+        func.invoke(activity, Result(CallbackStatus.SUCCESS, arrayListOf(image, image)))
     }
 
     /**
      * Test onLeftSwiped.
      */
     @Test
-    fun testOnLeftSwiped(){
+    fun testOnLeftSwiped() {
         val func = activity.javaClass.getDeclaredMethod("onLeftSwiped", Boolean::class.java)
         func.isAccessible = true
         func.invoke(activity, true)
@@ -97,7 +96,7 @@ class ZoomableActivityUnitTests {
      * Test onRightSwiped.
      */
     @Test
-    fun testOnRightSwiped(){
+    fun testOnRightSwiped() {
         val func = activity.javaClass.getDeclaredMethod("onRightSwiped", Boolean::class.java)
         func.isAccessible = true
         func.invoke(activity, true)
@@ -113,7 +112,7 @@ class ZoomableActivityUnitTests {
      * Test onUpSwiped.
      */
     @Test
-    fun testOnUpSwiped(){
+    fun testOnUpSwiped() {
         val func = activity.javaClass.getDeclaredMethod("onUpSwiped")
         func.isAccessible = true
         func.invoke(activity)
@@ -123,7 +122,7 @@ class ZoomableActivityUnitTests {
      * Test onDownSwiped.
      */
     @Test
-    fun testOnDownSwiped(){
+    fun testOnDownSwiped() {
         val func = activity.javaClass.getDeclaredMethod("onDownSwiped")
         func.isAccessible = true
         func.invoke(activity)
@@ -133,18 +132,17 @@ class ZoomableActivityUnitTests {
      * Test onBackPressed.
      */
     @Test
-    fun testOnBackPressed(){
+    fun testOnBackPressed() {
         val func = activity.javaClass.getDeclaredMethod("onBackPressed")
         func.isAccessible = true
         func.invoke(activity)
     }
 
-
     /**
      * Test onDestroy.
      */
     @Test
-    fun testOnDestroy(){
+    fun testOnDestroy() {
         val func = activity.javaClass.getDeclaredMethod("onDestroy")
         func.isAccessible = true
         func.invoke(activity)

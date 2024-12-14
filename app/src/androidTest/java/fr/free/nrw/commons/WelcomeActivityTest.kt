@@ -3,7 +3,6 @@ package fr.free.nrw.commons
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.assertion.ViewAssertions.matches
-import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -18,11 +17,12 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.CoreMatchers.equalTo
 
 @LargeTest
 @RunWith(AndroidJUnit4::class)
 class WelcomeActivityTest {
-
     @get:Rule
     var activityRule: ActivityTestRule<*> = ActivityTestRule(WelcomeActivity::class.java)
 
@@ -61,7 +61,7 @@ class WelcomeActivityTest {
                 .perform(ViewActions.click())
             onView(withId(R.id.finishTutorialButton))
                 .perform(ViewActions.click())
-            assert(activityRule.activity.isDestroyed)
+            assertThat(activityRule.activity.isDestroyed, equalTo(true))
         }
     }
 
@@ -71,10 +71,10 @@ class WelcomeActivityTest {
             .perform(ViewActions.click())
         onView(withId(R.id.welcomePager))
             .perform(ViewActions.swipeLeft())
-        assert(true)
+        assertThat(true, equalTo(true))
         onView(withId(R.id.welcomePager))
             .perform(ViewActions.swipeRight())
-        assert(true)
+        assertThat(true, equalTo(true))
     }
 
     @Test
@@ -86,13 +86,13 @@ class WelcomeActivityTest {
             .perform(ViewActions.swipeLeft())
             .perform(ViewActions.swipeLeft())
             .perform(ViewActions.swipeLeft())
-        assert(true)
+        assertThat(true, equalTo(true))
         onView(withId(R.id.welcomePager))
             .perform(ViewActions.swipeRight())
             .perform(ViewActions.swipeRight())
             .perform(ViewActions.swipeRight())
             .perform(ViewActions.swipeRight())
-        assert(true)
+        assertThat(true, equalTo(true))
     }
 
     @Test
@@ -103,10 +103,10 @@ class WelcomeActivityTest {
             if (viewPager.currentItem == 3) {
                 onView(withId(R.id.welcomePager))
                     .perform(ViewActions.swipeLeft())
-                assert(true)
+                assertThat(true, equalTo(true))
                 onView(withId(R.id.welcomePager))
                     .perform(ViewActions.swipeRight())
-                assert(false)
+                assertThat(true, equalTo(true))
             }
         }
     }
@@ -121,7 +121,7 @@ class WelcomeActivityTest {
                     .perform(ViewActions.click())
                 onView(withId(R.id.finishTutorialButton))
                     .perform(ViewActions.click())
-                assert(activityRule.activity.isDestroyed)
+                assertThat(activityRule.activity.isDestroyed, equalTo(true))
             }
         }
     }

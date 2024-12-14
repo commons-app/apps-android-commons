@@ -60,7 +60,6 @@
   <string name="preference_category_feedback">Umsagnir</string>
   <string name="preference_category_privacy">Persónuvernd</string>
   <string name="app_name">Commons</string>
-  <string name="bullet">•  \\</string>
   <string name="menu_settings">Stillingar</string>
   <string name="intent_share_upload_label">Senda inn á Commons</string>
   <string name="username">Notandanafn</string>
@@ -73,10 +72,10 @@
   <string name="logging_in_message">Hinkraðu aðeins…</string>
   <string name="updating_caption_title">Uppfæri skýringartexta og lýsingar</string>
   <string name="updating_caption_message">Hinkraðu aðeins…</string>
-  <string name="login_success">Innskráning tókst!</string>
-  <string name="login_failed">Innskráning mistókst!</string>
+  <string name="login_success" fuzzy="true">Innskráning tókst!</string>
+  <string name="login_failed" fuzzy="true">Innskráning mistókst!</string>
   <string name="upload_failed">Skráin fannst ekki. Prófaðu aðra skrá.</string>
-  <string name="authentication_failed">Auðkenning mistókst, skráðu þig inn aftur</string>
+  <string name="authentication_failed" fuzzy="true">Auðkenning mistókst, skráðu þig inn aftur</string>
   <string name="uploading_started">Innsending í gangi!</string>
   <string name="uploading_queued">Innsending í bið (hamur fyrir takmarkaðar tengingar er virkur)</string>
   <string name="upload_completed_notification_title">%1$s var sent inn!</string>
@@ -103,11 +102,11 @@
   <string name="add_caption_toast">Gefðu upp skýringartexta fyrir þessa skrá</string>
   <string name="share_description_hint">Lýsing</string>
   <string name="share_caption_hint">Skýringatexti</string>
-  <string name="login_failed_network">Innskráning mistókst - bilun í neti</string>
+  <string name="login_failed_network" fuzzy="true">Innskráning mistókst - bilun í neti</string>
   <string name="login_failed_throttled">Of margar misteknar tilraunir. Reyndu aftur eftir nokkrar mínútur.</string>
   <string name="login_failed_blocked">Því miður, þessi notandi hefur verið bannaður á Commons</string>
   <string name="login_failed_2fa_needed">Þú verður að setja inn tveggja-þrepa auðkenningarkóðann þinn.</string>
-  <string name="login_failed_generic">Innskráning mistókst</string>
+  <string name="login_failed_generic" fuzzy="true">Innskráning mistókst</string>
   <string name="share_upload_button">Senda inn skrár</string>
   <string name="multiple_share_base_title">Settu nafn á þetta sett</string>
   <string name="provider_modifications">Breytingar</string>
@@ -192,7 +191,7 @@
   <string name="location_permission_title">Biður um aðgang að staðsetningu</string>
   <string name="ok">Í lagi</string>
   <string name="warning">Aðvörun</string>
-  <string name="duplicate_image_found">Tvítekin mynd fannst</string>
+  <string name="duplicate_file_name">Tvítekið skráarheiti fannst</string>
   <string name="upload">Senda inn</string>
   <string name="yes">Já</string>
   <string name="no">Nei</string>
@@ -262,8 +261,8 @@
   <string name="nominated_see_more">Sjá nánar á vefsíðunni</string>
   <string name="skip_login">Sleppa</string>
   <string name="navigation_item_login">Skrá inn</string>
-  <string name="skip_login_title">Viltu í alvörunni sleppa innskráningu?</string>
-  <string name="skip_login_message">Þú munt í framtíðinni þurfa að skrá þig inn til geta sent inn myndir.</string>
+  <string name="skip_login_title" fuzzy="true">Viltu í alvörunni sleppa innskráningu?</string>
+  <string name="skip_login_message" fuzzy="true">Þú munt í framtíðinni þurfa að skrá þig inn til geta sent inn myndir.</string>
   <string name="login_alert_message">Skráðu þig inn til að nota þennan eiginleika</string>
   <string name="copy_wikicode">Afrita wiki-textann á klippispjaldið</string>
   <string name="wikicode_copied">Wiki-textinn var afritaður á klippispjaldið</string>
@@ -328,14 +327,14 @@
   <string name="construction_event_answer">Myndir sem sýna tæknileg atriði eða menningarleg eru meira en vel þegnar á Commons.</string>
   <string name="congratulatory_message_quiz">Þú varst með %1$s af svörunum rétt. Til hamingju!</string>
   <string name="warning_for_no_answer">Veldu annan af kostunum hér fyrir neðan til að svara spurningunni</string>
-  <string name="user_not_logged_in">Innskráningarsetan þín rann út, skráðu þig inn aftur.</string>
+  <string name="user_not_logged_in" fuzzy="true">Innskráningarsetan þín rann út, skráðu þig inn aftur.</string>
   <string name="quiz_result_share_message">Deildu spurningaleiknum með vinum þínum!</string>
   <string name="continue_message">Halda áfram</string>
   <string name="correct">Rétt svar</string>
   <string name="wrong">Rangt svar</string>
   <string name="quiz_screenshot_question">Er í lagi að senda inn þessa skjámynd?</string>
   <string name="share_app_title">Deila forriti</string>
-  <string name="error_fetching_nearby_places">Villa við að sækja nálæga staði.</string>
+  <string name="error_fetching_nearby_places" fuzzy="true">Villa við að sækja nálæga staði.</string>
   <string name="no_nearby_places_around">Engir staðir fundust í nágrenninu</string>
   <string name="error_fetching_nearby_monuments">Villa við að sækja nálæg minnismerki.</string>
   <string name="no_recent_searches">Engar nýlegar leitir</string>
@@ -351,7 +350,7 @@
   <string name="statistics_thanks">Mótteknar þakkir</string>
   <string name="statistics_featured">Áberandi myndir</string>
   <string name="statistics_wikidata_edits">Myndir gegnum \"Nálægir staðir\"</string>
-  <string name="level">Stig</string>
+  <string name="level" fuzzy="true">Stig</string>
   <string name="images_uploaded">Myndir sendar inn</string>
   <string name="image_reverts">Myndir ekki hafnað</string>
   <string name="images_used_by_wiki">Myndir notaðar</string>
@@ -410,13 +409,13 @@
   <string name="never_ask_again">Ekki spyrja þessa aftur</string>
   <string name="display_location_permission_title">Biðja um aðgang að staðsetningu</string>
   <string name="display_location_permission_explanation">Biðja um heimild til að sjá staðsetningu þegar þess er þörf fyrir tilkynningaspjald um næsta nágrenni.</string>
-  <string name="achievements_fetch_failed">Eitthvað fór úrskeiðis. Gat ekki sótt frammistöðuna þína</string>
+  <string name="achievements_fetch_failed" fuzzy="true">Eitthvað fór úrskeiðis. Gat ekki sótt frammistöðuna þína</string>
   <string name="achievements_fetch_failed_ultimate_achievement">Þú hefur lagt af mörkum svo mörg framlög að frammistöðuútreikningakerfið okkar ræður ekki við þetta. Það myndi teljast vera framúrskarandi frammistaða.</string>
   <string name="ends_on">Endar þann:</string>
   <string name="display_campaigns">Birta herferðir</string>
   <string name="display_campaigns_explanation">Sjá yfirstandandi herferðir</string>
   <string name="nearby_campaign_dismiss_message">Þú munt ekki lengur sjá neinar herferðir. Hinsvegar geturðu, ef þú vilt, endurvirkjað þessar tilkynningar í stillingunum.</string>
-  <string name="this_function_needs_network_connection">Þessi aðgerð krefst nettengingar, athugaðu tengistillingarnar þínar.</string>
+  <string name="this_function_needs_network_connection" fuzzy="true">Þessi aðgerð krefst nettengingar, athugaðu tengistillingarnar þínar.</string>
   <string name="error_processing_image">Villa kom upp við að vinna með myndina. Prófaðu aftur!</string>
   <string name="getting_edit_token">Næ í teikn fyrir breytingar</string>
   <string name="check_category_adding_template">Bæti við sniðmáti fyrir athugun á flokkum</string>
@@ -476,6 +475,7 @@
   <string name="exif_tag_name_lensModel">Tegund linsu</string>
   <string name="exif_tag_name_serialNumbers">Raðnúmer</string>
   <string name="exif_tag_name_software">Hugbúnaður</string>
+  <string name="media_location_permission_denied">Aðgangi að staðsetningu gagnamiðla hafnað</string>
   <string name="share_text">Sendu myndir inn á Wikimedia Commons beint úr símanum þínum. Sæktu Commons-appið núna: %1$s</string>
   <string name="share_via">Deila forriti með...</string>
   <string name="image_info">Upplýsingar í mynd</string>
@@ -491,9 +491,9 @@
   <string name="delete_helper_show_deletion_message_if">Tilnefndi %1$s til eyðingar.</string>
   <string name="delete_helper_show_deletion_title_failed">Mistókst</string>
   <string name="delete_helper_show_deletion_message_else">Gat ekki beðið um eyðingu.</string>
-  <string name="delete_helper_ask_spam_selfie">Sjálfsmynd</string>
-  <string name="delete_helper_ask_spam_blurry">Móskuleg</string>
-  <string name="delete_helper_ask_spam_nonsense">Vitleysa</string>
+  <string name="delete_helper_ask_spam_selfie">sjálfsmynd sem er ekki notuð í neinni grein</string>
+  <string name="delete_helper_ask_spam_blurry">algjörlega óskýr</string>
+  <string name="delete_helper_ask_spam_nonsense">bull, algjörlega ónothæft í hvaða grein sem er</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">Fréttaljósmynd</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">Einhver mynd af internetinu</string>
   <string name="delete_helper_ask_reason_copyright_logo">Táknmynd</string>
@@ -525,7 +525,7 @@
   <string name="coordinates_edit_helper_edit_message_else">Gat ekki bætt við hnitum.</string>
   <string name="description_edit_helper_edit_message_else">Gat ekki bætt við lýsingum.</string>
   <string name="caption_edit_helper_edit_message_else">Gat ekki bætt við skýringatexta.</string>
-  <string name="coordinates_picking_unsuccessful">Gat ekki náð í hnit.</string>
+  <string name="coordinates_picking_unsuccessful" fuzzy="true">Gat ekki náð í hnit.</string>
   <string name="descriptions_picking_unsuccessful">Gat ekki náð í lýsingar.</string>
   <string name="description_activity_title">Breyta lýsingum og skýringatextum</string>
   <string name="share_image_via">Deila mynd með</string>
@@ -540,12 +540,12 @@
   <string name="place_state_needs_photo">Þarf ljósmynd</string>
   <string name="place_type">Tegund staðar:</string>
   <string name="nearby_search_hint">Brú, safn, hótel o.s.frv.</string>
-  <string name="you_must_reset_your_passsword">Eitthvað fór úrskeiðis varðandi innskráningu, þú þarft að endurstilla lykilorðið þitt !!</string>
+  <string name="you_must_reset_your_passsword" fuzzy="true">Eitthvað fór úrskeiðis varðandi innskráningu, þú þarft að endurstilla lykilorðið þitt !!</string>
   <string name="title_for_media">GAGNAMIÐLAR</string>
   <string name="title_for_child_classes">AFLEIDDIR FLOKKAR</string>
   <string name="title_for_parent_classes">YFIRFLOKKAR</string>
   <string name="upload_nearby_place_found_title">Staður í nágrenninu fannst</string>
-  <string name="upload_nearby_place_found_description">Er þetta mynd af staðnum %1$s?</string>
+  <string name="upload_nearby_place_found_description_singular" fuzzy="true">Er þetta mynd af staðnum %1$s?</string>
   <string name="title_app_shortcut_bookmark">Bókamerki</string>
   <string name="title_app_shortcut_setting">Stillingar</string>
   <string name="remove_bookmark">Fjarlægt úr bókamerkjum</string>
@@ -602,9 +602,6 @@
   <string name="leaderboard_nearby">Í nágrenninu</string>
   <string name="leaderboard_used">Notað</string>
   <string name="leaderboard_my_rank_button_text">Tign mín</string>
-  <string name="mapbox_telemetry">Fjarmælingar Mapbox</string>
-  <string name="telemetry_opt_out_summary">Senda nafnlausar upplýsingar um staðsetningu og notkun til Mapbox þegar verið er að nota \'Í næsta nágrenni\'-eiginleikann</string>
-  <string name="map_attribution">&amp;#169; &lt;a href=\"https://www.mapbox.com/about/maps/\"&gt;Mapbox&lt;/a&gt; &amp;#169; &lt;a href=\"https://www.openstreetmap.org/copyright\"&gt;OpenStreetMap&lt;/a&gt; &lt;a href=\"https://www.mapbox.com/map-feedback/\"&gt;Bæta þetta landakort&lt;/a&gt;</string>
   <string name="limited_connection_enabled">Hamur fyrir takmarkaðar tengingar er virkur!</string>
   <string name="limited_connection_disabled">Hamur fyrir takmarkaðar tengingar er óvirkur. Innsendingar í bið munu halda áfram núna.</string>
   <string name="limited_connection_mode">Hamur fyrir takmarkaðar tengingar</string>
@@ -646,7 +643,7 @@
   <string name="done">Lokið</string>
   <string name="back">Til baka</string>
   <string name="welcome_custom_picture_selector_text">Velkomin í sérsniðinn myndaveljara</string>
-  <string name="custom_selector_info_text1" fuzzy="true">Þessi veljari birtir þær myndir öðruvísi sem þegar er búið að senda inn í Commons.</string>
+  <string name="custom_selector_info_text1">Þessi veljari sýnir þér hvaða myndir sé þegar er búið að senda inn í Commons.</string>
   <string name="custom_selector_info_text2">Ólíkt myndinni til vinstri, er hægri myndin með Commons-táknmyndina til að sýna að hún hefur þegar verið send inn. \n Ýttu og haltu niðri til að sjá forskoðun á myndinni.</string>
   <string name="welcome_custom_selector_ok">Æðislegt</string>
   <string name="custom_selector_already_uploaded_image_text">Þessa mynd er þegar búið að senda inn í Commons.</string>
@@ -661,7 +658,7 @@
   <string name="read_phone_state_permission_message">Kort í nágrenninu þurfa að geta lesið STÖÐU SÍMANS til að virka almennilega</string>
   <string name="contributions_of_user">Framlög notanda: %s</string>
   <string name="achievements_of_user">Frammistaða notanda: %s</string>
-  <string name="menu_view_user_page">Skoða notandasíðu</string>
+  <string name="menu_view_user_page" fuzzy="true">Skoða notandasíðu</string>
   <string name="edit_depictions">Breyta myndlýsingum</string>
   <string name="edit_categories">Breyta flokkum</string>
   <string name="advanced_options">Ítarlegir valkostir</string>
@@ -674,8 +671,8 @@
   <string name="add_location">Bæta við staðsetningu</string>
   <string name="feedback_sharing_data_alert">Fjarlægðu úr þessum tölvupósti allar þær upplýsingar sem þér er ekki vel við að deila opinberlega. Hafðu líka í huga að tölvupóstfangið sem þú sendir úr, ásamt tengdu nafni og auðkennismynd, verður sýnilegt opinberlega.</string>
   <string name="explore_map_details">Nánar</string>
-  <string name="achievements_unavailable_beta">Frammistaða er aðeins í boði í vinnsluútgáfunni, skoðaðu nánari upplýsingar í hjálparskjölum þróunaraðila.</string>
-  <string name="leaderboard_unavailable_beta">Samantektarspjaldið er aðeins í boði í vinnsluútgáfunni (ekki prófunarútgáfum), skoðaðu nánari upplýsingar í hjálparskjölum þróunaraðila.</string>
+  <string name="achievements_unavailable_beta" fuzzy="true">Frammistaða er aðeins í boði í vinnsluútgáfunni, skoðaðu nánari upplýsingar í hjálparskjölum þróunaraðila.</string>
+  <string name="leaderboard_unavailable_beta" fuzzy="true">Samantektarspjaldið er aðeins í boði í vinnsluútgáfunni (ekki prófunarútgáfum), skoðaðu nánari upplýsingar í hjálparskjölum þróunaraðila.</string>
   <string name="copyright_popup">Sendu aðeins inn myndir sem þú hefur tekið sjálf/ur. Þeir sem senda inn höfundarréttarvarðar myndir verða bannaðir. Þetta á líka við í beta-prófunarútgáfum. Takk annars fyrir að prófa forritið!</string>
   <string name="select_feedback_data_choice">Afveldu allar þær upplýsingar sem þér er ekki vel við að deila opinberlega.</string>
   <string name="api_level">Stig API-viðmóts</string>
@@ -688,4 +685,22 @@
   <string name="error_feedback">Villa við að senda umsögn</string>
   <string name="enter_description">Hver er umsögnin þín?</string>
   <string name="your_feedback">Umsögn þín</string>
+  <string name="mark_as_not_for_upload">Merkja sem ekki fyrir innsendingu</string>
+  <string name="unmark_as_not_for_upload">Afmerkja sem ekki fyrir innsendingu</string>
+  <string name="show_already_actioned_pictures">Sýna myndir sem þegar hafa verið afgreiddar</string>
+  <string name="hiding_already_actioned_pictures">Fel myndir sem þegar hefur verið átt við</string>
+  <string name="no_more_images_found">Engar fleiri myndir fundust</string>
+  <string name="this_image_is_already_uploaded">Þessa mynd er þegar búið að senda inn</string>
+  <string name="can_not_select_this_image_for_upload">Get ekki valið þessa mynd til innsendingar</string>
+  <string name="image_selected">Mynd valin</string>
+  <string name="image_marked_as_not_for_upload">Mynd merkt sem ekki til innsendingar</string>
+  <string name="menu_view_report">Kæra</string>
+  <string name="report_violation">Tilkynna brot</string>
+  <string name="report_user">Kæra þennan notanda</string>
+  <string name="report_content">Kæra þetta efni</string>
+  <string name="request_user_block">Biðja um að loka á þennan notanda</string>
+  <string name="welcome_to_full_screen_mode_text">Velkomin í val á fullum skjá</string>
+  <string name="full_screen_mode_zoom_info">Notaðu tvo fingur til að renna að og frá.</string>
+  <string name="full_screen_mode_features_info">Strjúktu hratt og lengi til að framkvæma þessar aðgerðir: \n- Vinstri/Hægri: Fara í fyrri/næsta \n- Upp: Velja\n- Niður: Merkja sem ekki til innsendingar.</string>
+  <string name="similar_coordinate_description_auto_set">Þessi hnit eru ekki nákvæm, en sá sem sendi inn þessa mynd telur að þau séu nógu nálægt lagi.</string>
 </resources>

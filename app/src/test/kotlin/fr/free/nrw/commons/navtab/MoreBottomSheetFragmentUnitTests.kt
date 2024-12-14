@@ -1,6 +1,5 @@
 package fr.free.nrw.commons.navtab
 
-import android.app.Dialog
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
@@ -9,53 +8,45 @@ import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Button
-import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
+import androidx.test.core.app.ApplicationProvider
 import fr.free.nrw.commons.CommonsApplication
+import fr.free.nrw.commons.OkHttpConnectionFactory
 import fr.free.nrw.commons.R
-import fr.free.nrw.commons.TestAppAdapter
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.actions.PageEditClient
-import fr.free.nrw.commons.feedback.FeedbackDialog
+import fr.free.nrw.commons.createTestClient
 import fr.free.nrw.commons.feedback.model.Feedback
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.profile.ProfileActivity
-import fr.free.nrw.commons.utils.ConfigUtils
-import fr.free.nrw.commons.utils.ConfigUtils.getVersionNameWithSha
 import io.reactivex.Observable
-import io.reactivex.Single
-import io.reactivex.SingleSource
-import io.reactivex.functions.Function
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.ArgumentMatchers
 import org.mockito.Mock
-import org.mockito.Mockito.*
+import org.mockito.Mockito.anyString
+import org.mockito.Mockito.doReturn
+import org.mockito.Mockito.mock
+import org.mockito.Mockito.`when`
 import org.mockito.MockitoAnnotations
 import org.powermock.reflect.Whitebox
 import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
-import org.robolectric.RuntimeEnvironment
 import org.robolectric.Shadows
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
 import org.robolectric.shadows.ShadowActivity
 import org.robolectric.shadows.ShadowAlertDialog
 import org.robolectric.shadows.ShadowDialog
-import org.wikipedia.AppAdapter
 import java.lang.reflect.Method
-import java.util.concurrent.Callable
-
 
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
 @LooperMode(LooperMode.Mode.PAUSED)
 class MoreBottomSheetFragmentUnitTests {
-
     private lateinit var fragment: MoreBottomSheetFragment
     private lateinit var view: View
     private lateinit var layoutInflater: LayoutInflater
@@ -66,16 +57,13 @@ class MoreBottomSheetFragmentUnitTests {
     private lateinit var store: JsonKvStore
 
     @Mock
-    private lateinit var morePeerReview: TextView
-
-    @Mock
     private lateinit var pageEditClient: PageEditClient
 
     @Before
     fun setUp() {
-        MockitoAnnotations.initMocks(this)
-        context = RuntimeEnvironment.application.applicationContext
-        AppAdapter.set(TestAppAdapter())
+        MockitoAnnotations.openMocks(this)
+        context = ApplicationProvider.getApplicationContext()
+        OkHttpConnectionFactory.CLIENT = createTestClient()
 
         activity = Robolectric.buildActivity(ProfileActivity::class.java).create().get()
         fragment = MoreBottomSheetFragment()
@@ -85,11 +73,10 @@ class MoreBottomSheetFragmentUnitTests {
         fragmentTransaction.commitNowAllowingStateLoss()
 
         Whitebox.setInternalState(fragment, "store", store)
-        Whitebox.setInternalState(fragment, "morePeerReview", morePeerReview)
         Whitebox.setInternalState(fragment, "pageEditClient", pageEditClient)
 
         `when`(store.getBoolean(CommonsApplication.IS_LIMITED_CONNECTION_MODE_ENABLED)).thenReturn(
-            true
+            true,
         )
 
         layoutInflater = LayoutInflater.from(activity)
@@ -133,7 +120,7 @@ class MoreBottomSheetFragmentUnitTests {
         val feedback = mock(Feedback::class.java)
         val observable: Observable<Boolean> = Observable.just(false)
         val observable2: Observable<Boolean> = Observable.just(true)
-        doReturn(observable, observable2).`when`(pageEditClient).prependEdit(anyString(), anyString(), anyString())
+        doReturn(observable, observable2).`when`(pageEditClient).createNewSection(anyString(), anyString(), anyString(), anyString())
         fragment.uploadFeedback(feedback)
     }
 
@@ -211,8 +198,7 @@ class MoreBottomSheetFragmentUnitTests {
         Assert.assertEquals(startedIntent.`data`, Uri.parse("mailto:"))
         Assert.assertEquals(
             startedIntent.extras?.get(Intent.EXTRA_SUBJECT),
-            CommonsApplication.FEEDBACK_EMAIL_SUBJECT
+            CommonsApplication.FEEDBACK_EMAIL_SUBJECT,
         )
     }
-
 }

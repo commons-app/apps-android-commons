@@ -1,7 +1,6 @@
 package fr.free.nrw.commons.nearby;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,15 +11,13 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearSmoothScroller;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.nearby.presenter.NearbyParentFragmentPresenter;
-import java.util.Collections;
+import java.util.Locale;
 
 public class NearbyFilterSearchRecyclerViewAdapter
         extends RecyclerView.Adapter<NearbyFilterSearchRecyclerViewAdapter.RecyclerViewHolder>
@@ -125,11 +122,11 @@ public class NearbyFilterSearchRecyclerViewAdapter
                     results.count = labels.size();
                     results.values = labels;
                 } else {
-                    constraint = constraint.toString().toLowerCase();
+                    constraint = constraint.toString().toLowerCase(Locale.ROOT);
 
                     for (Label label : labels) {
                         String data = label.toString();
-                        if (data.toLowerCase().startsWith(constraint.toString())) {
+                        if (data.toLowerCase(Locale.ROOT).startsWith(constraint.toString())) {
                             filteredArrayList.add(Label.fromText(label.getText()));
                         }
                     }

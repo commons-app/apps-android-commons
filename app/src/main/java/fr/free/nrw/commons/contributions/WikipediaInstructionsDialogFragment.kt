@@ -13,26 +13,30 @@ import fr.free.nrw.commons.databinding.DialogAddToWikipediaInstructionsBinding
  * Dialog fragment for displaying instructions for editing wikipedia
  */
 class WikipediaInstructionsDialogFragment : DialogFragment() {
-
     var callback: Callback? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ) = DialogAddToWikipediaInstructionsBinding.inflate(inflater, container, false).apply {
-        val contribution: Contribution? = arguments!!.getParcelable(ARG_CONTRIBUTION)
-        tvWikicode.setText(contribution?.media?.wikiCode)
-        instructionsCancel.setOnClickListener { dismiss() }
-        instructionsConfirm.setOnClickListener {
-            callback?.onConfirmClicked(contribution, checkboxCopyWikicode.isChecked)
-        }
-    }.root
+        savedInstanceState: Bundle?,
+    ) = DialogAddToWikipediaInstructionsBinding
+        .inflate(inflater, container, false)
+        .apply {
+            val contribution: Contribution? = requireArguments().getParcelable(ARG_CONTRIBUTION)
+            tvWikicode.setText(contribution?.media?.wikiCode)
+            instructionsCancel.setOnClickListener { dismiss() }
+            instructionsConfirm.setOnClickListener {
+                callback?.onConfirmClicked(contribution, checkboxCopyWikicode.isChecked)
+            }
+        }.root
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         super.onViewCreated(view, savedInstanceState)
         dialog!!.window?.setSoftInputMode(
-            WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
+            WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN,
         )
     }
 
@@ -40,15 +44,19 @@ class WikipediaInstructionsDialogFragment : DialogFragment() {
      * Callback for handling confirm button clicked
      */
     interface Callback {
-        fun onConfirmClicked(contribution: Contribution?, copyWikicode: Boolean)
+        fun onConfirmClicked(
+            contribution: Contribution?,
+            copyWikicode: Boolean,
+        )
     }
 
     companion object {
         const val ARG_CONTRIBUTION = "contribution"
 
         @JvmStatic
-        fun newInstance(contribution: Contribution) = WikipediaInstructionsDialogFragment().apply {
-            arguments = bundleOf(ARG_CONTRIBUTION to contribution)
-        }
+        fun newInstance(contribution: Contribution) =
+            WikipediaInstructionsDialogFragment().apply {
+                arguments = bundleOf(ARG_CONTRIBUTION to contribution)
+            }
     }
 }

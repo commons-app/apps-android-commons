@@ -37,15 +37,15 @@
     app:layout_constraintTop_toBottomOf="@+id/location_picker_toolbar_primary_text_view" />
 
   <ImageView
-    android:id="@+id/mapbox_place_picker_toolbar_back_button"
+    android:id="@+id/maplibre_place_picker_toolbar_back_button"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginStart="16dp"
     android:contentDescription="@string/exit_location_picker"
-    android:tint="@color/white"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintLeft_toLeftOf="parent"
     app:layout_constraintTop_toTopOf="parent"
-    app:srcCompat="@drawable/ic_arrow_back_white"/>
+    app:srcCompat="@drawable/ic_arrow_back_white"
+    app:tint="@color/white" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

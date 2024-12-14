@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.quiz
 
 import android.app.Activity
+import androidx.test.core.app.ApplicationProvider
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.facebook.soloader.SoLoader
 import com.nhaarman.mockitokotlin2.any
@@ -20,14 +21,12 @@ import org.mockito.MockitoAnnotations
 import org.powermock.reflect.Whitebox
 import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
-import org.robolectric.RuntimeEnvironment
 import org.robolectric.annotation.Config
 import java.lang.reflect.Method
 
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
 class QuizCheckerUnitTest {
-
     private lateinit var quizChecker: QuizChecker
     private lateinit var activity: Activity
 
@@ -45,14 +44,15 @@ class QuizCheckerUnitTest {
 
     @Before
     fun setUp() {
-        MockitoAnnotations.initMocks(this)
+        MockitoAnnotations.openMocks(this)
         SoLoader.setInTestMode()
-        Fresco.initialize(RuntimeEnvironment.application.applicationContext)
+        Fresco.initialize(ApplicationProvider.getApplicationContext())
         activity = Robolectric.buildActivity(QuizActivity::class.java).create().get()
         quizChecker = QuizChecker(sessionManager, okHttpJsonApiClient, jsonKvStore)
         Mockito.`when`(sessionManager.userName).thenReturn("")
         Mockito.`when`(okHttpJsonApiClient.getUploadCount(any())).thenReturn(Single.just(0))
-        Mockito.`when`(okHttpJsonApiClient.getAchievements(any()))
+        Mockito
+            .`when`(okHttpJsonApiClient.getAchievements(any()))
             .thenReturn(Single.just(feedbackResponse))
     }
 
@@ -77,10 +77,11 @@ class QuizCheckerUnitTest {
     @Test
     @Throws(Exception::class)
     fun testSetTotalUploadCount() {
-        val method: Method = QuizChecker::class.java.getDeclaredMethod(
-            "setTotalUploadCount",
-            Int::class.java
-        )
+        val method: Method =
+            QuizChecker::class.java.getDeclaredMethod(
+                "setTotalUploadCount",
+                Int::class.java,
+            )
         method.isAccessible = true
         method.invoke(quizChecker, -1)
     }
@@ -88,10 +89,11 @@ class QuizCheckerUnitTest {
     @Test
     @Throws(Exception::class)
     fun testSetRevertParameter() {
-        val method: Method = QuizChecker::class.java.getDeclaredMethod(
-            "setRevertParameter",
-            Int::class.java
-        )
+        val method: Method =
+            QuizChecker::class.java.getDeclaredMethod(
+                "setRevertParameter",
+                Int::class.java,
+            )
         method.isAccessible = true
         method.invoke(quizChecker, -1)
     }
@@ -100,10 +102,11 @@ class QuizCheckerUnitTest {
     @Throws(Exception::class)
     fun testCalculateRevertParameterAndShowQuiz() {
         Whitebox.setInternalState(quizChecker, "revertCount", -1)
-        val method: Method = QuizChecker::class.java.getDeclaredMethod(
-            "calculateRevertParameterAndShowQuiz",
-            Activity::class.java
-        )
+        val method: Method =
+            QuizChecker::class.java.getDeclaredMethod(
+                "calculateRevertParameterAndShowQuiz",
+                Activity::class.java,
+            )
         method.isAccessible = true
         method.invoke(quizChecker, activity)
     }
@@ -115,10 +118,11 @@ class QuizCheckerUnitTest {
         Whitebox.setInternalState(quizChecker, "isUploadCountFetched", true)
         Whitebox.setInternalState(quizChecker, "totalUploadCount", 5)
         Whitebox.setInternalState(quizChecker, "revertCount", 5)
-        val method: Method = QuizChecker::class.java.getDeclaredMethod(
-            "calculateRevertParameterAndShowQuiz",
-            Activity::class.java
-        )
+        val method: Method =
+            QuizChecker::class.java.getDeclaredMethod(
+                "calculateRevertParameterAndShowQuiz",
+                Activity::class.java,
+            )
         method.isAccessible = true
         method.invoke(quizChecker, activity)
     }
@@ -126,12 +130,12 @@ class QuizCheckerUnitTest {
     @Test
     @Throws(Exception::class)
     fun testStartQuizActivity() {
-        val method: Method = QuizChecker::class.java.getDeclaredMethod(
-            "startQuizActivity",
-            Activity::class.java
-        )
+        val method: Method =
+            QuizChecker::class.java.getDeclaredMethod(
+                "startQuizActivity",
+                Activity::class.java,
+            )
         method.isAccessible = true
         method.invoke(quizChecker, activity)
     }
-
 }

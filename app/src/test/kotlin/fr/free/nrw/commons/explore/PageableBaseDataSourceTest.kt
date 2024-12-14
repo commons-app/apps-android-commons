@@ -2,7 +2,12 @@ package fr.free.nrw.commons.explore
 
 import androidx.lifecycle.LiveData
 import androidx.paging.PagedList
-import com.nhaarman.mockitokotlin2.*
+import com.nhaarman.mockitokotlin2.KArgumentCaptor
+import com.nhaarman.mockitokotlin2.argumentCaptor
+import com.nhaarman.mockitokotlin2.mock
+import com.nhaarman.mockitokotlin2.spy
+import com.nhaarman.mockitokotlin2.verify
+import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.explore.depictions.search.LoadFunction
 import fr.free.nrw.commons.explore.paging.LiveDataConverter
 import fr.free.nrw.commons.explore.paging.PageableBaseDataSource
@@ -14,7 +19,6 @@ import org.mockito.Mock
 import org.mockito.MockitoAnnotations
 
 class PageableBaseDataSourceTest {
-
     @Mock
     private lateinit var liveDataConverter: LiveDataConverter
 
@@ -22,18 +26,19 @@ class PageableBaseDataSourceTest {
 
     @Before
     fun setUp() {
-        MockitoAnnotations.initMocks(this)
-        pageableBaseDataSource = object: PageableBaseDataSource<String>(liveDataConverter){
-            override val loadFunction: LoadFunction<String>
-                get() = mock()
-
-        }
+        MockitoAnnotations.openMocks(this)
+        pageableBaseDataSource =
+            object : PageableBaseDataSource<String>(liveDataConverter) {
+                override val loadFunction: LoadFunction<String>
+                    get() = mock()
+            }
     }
 
     @Test
     fun `onQueryUpdated emits new liveData`() {
         val (_, liveData) = expectNewLiveData()
-        pageableBaseDataSource.pagingResults.test()
+        pageableBaseDataSource.pagingResults
+            .test()
             .also { pageableBaseDataSource.onQueryUpdated("test") }
             .assertValue(liveData)
     }
@@ -42,14 +47,15 @@ class PageableBaseDataSourceTest {
     fun `onQueryUpdated invokes livedatconverter with no items emitter`() {
         val (zeroItemsFuncCaptor, _) = expectNewLiveData()
         pageableBaseDataSource.onQueryUpdated("test")
-        pageableBaseDataSource.noItemsLoadedQueries.test()
+        pageableBaseDataSource.noItemsLoadedEvent
+            .test()
             .also { zeroItemsFuncCaptor.firstValue.invoke() }
             .assertValue("test")
     }
 
     /*
-    * Just for coverage, no way to really assert this
-    * */
+     * Just for coverage, no way to really assert this
+     * */
     @Test
     fun `retryFailedRequest does nothing without a factory`() {
         pageableBaseDataSource.retryFailedRequest()
@@ -65,7 +71,11 @@ class PageableBaseDataSourceTest {
         verify(dataSourceFactory).retryFailedRequest()
     }
 
-    private fun expectNewLiveData(): Triple<KArgumentCaptor<() -> Unit>, LiveData<PagedList<String>>, KArgumentCaptor<PagingDataSourceFactory<String>>> {
+    private fun expectNewLiveData(): Triple<
+        KArgumentCaptor<() -> Unit>,
+        LiveData<PagedList<String>>,
+        KArgumentCaptor<PagingDataSourceFactory<String>>,
+    > {
         val captor = argumentCaptor<() -> Unit>()
         val dataSourceFactoryCaptor = argumentCaptor<PagingDataSourceFactory<String>>()
         val liveData: LiveData<PagedList<String>> = mock()

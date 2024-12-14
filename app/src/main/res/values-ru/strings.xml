@@ -3,8 +3,10 @@
 * Alexander Yukal
 * Alexandr Efremov
 * Av6
+* Butko
 * DDPAT
 * Deltaspace
+* Dirruw'o
 * Eleferen
 * Envlh
 * Facenapalm
@@ -16,7 +18,9 @@
 * Jesusmc
 * Kaganer
 * Kareyac
+* Lutece398
 * MaxBioHazard
+* McDutchie
 * Megakott
 * Monirec
 * Movses
@@ -28,8 +32,10 @@
 * Redredsonia
 * Rubin16
 * StarryFairy
+* Stjn
 * Tanzun
 * Thothsum
+* Ukhant Erdemt
 * Vlad5250
 * VoxelJ
 * Wikisaurus
@@ -41,7 +47,7 @@
 -->
 <resources>
   <string name="commons_facebook">Facebook-страница Викисклада</string>
-  <string name="commons_github">Исходные коды Викисклада на гитхабе</string>
+  <string name="commons_github">Исходный код Викисклада на гитхабе</string>
   <string name="commons_logo">Логотип Викисклада</string>
   <string name="commons_website">Веб-сайт Викисклада</string>
   <string name="exit_location_picker">Выйти из окна выбора местоположения</string>
@@ -73,7 +79,7 @@
     <item quantity="many">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
-  <string name="starting_uploads">Начало загрузки</string>
+  <string name="starting_uploads">Загрузка начинается</string>
   <plurals name="starting_multiple_uploads">
     <item quantity="one">Обработка %d загрузки</item>
     <item quantity="few">Обработка %d загрузок</item>
@@ -110,9 +116,9 @@
   <string name="preference_category_feedback">Обратная связь</string>
   <string name="preference_category_privacy">Конфиденциальность</string>
   <string name="app_name">Викисклад</string>
-  <string name="bullet">•</string>
   <string name="menu_settings">Настройки</string>
   <string name="intent_share_upload_label">Загрузить на Викисклад</string>
+  <string name="upload_in_progress">Идёт загрузка…</string>
   <string name="username">Имя пользователя</string>
   <string name="password">Пароль</string>
   <string name="login_credential">Войдите в свою учётную запись Commons Beta</string>
@@ -126,7 +132,10 @@
   <string name="login_success">Вход выполнен успешно!</string>
   <string name="login_failed">Ошибка входа в систему!</string>
   <string name="upload_failed">Файл не найден. Попробуйте другой файл.</string>
-  <string name="authentication_failed">Ошибка аутентификации. Пожалуйста, авторизуйтесь ещё раз.</string>
+  <string name="retry_limit_reached">Достигнут максимальный лимит повторов! Пожалуйста, отмените загрузку и повторите попытку.</string>
+  <string name="unrestricted_battery_mode">Выключить оптимизацию батареи?</string>
+  <string name="suggest_unrestricted_mode">Загрузка более 3 изображений работает более надежно, если оптимизация заряда батареи отключена. Пожалуйста, отключите оптимизацию заряда батареи для приложения Викисклада в настройках, чтобы обеспечить плавную загрузку. \n\nВозможные действия по отключению оптимизации заряда батареи:\n\nШаг 1: Нажмите кнопку \'Настройки\' ниже.\n\nШаг 2: Переключитесь с \'Не оптимизировано\' на \'Все приложения\'.\n\nШаг 3. Найдите «Викисклад» или «fr.free.nrw.commons».\n\nШаг 4. Нажмите на него и выберите \'Не оптимизировать\'.\n\nШаг 5: Нажмите \'Готово\'.</string>
+  <string name="authentication_failed">Аутентификация не прошла. Пожалуйста, авторизуйтесь ещё раз.</string>
   <string name="uploading_started">Загрузка началась!</string>
   <string name="uploading_queued">Загрузка в очереди (включен режим ограниченного подключения)</string>
   <string name="upload_completed_notification_title">%1$s загружен!</string>
@@ -157,7 +166,7 @@
   <string name="login_failed_throttled">Слишком много неудачных попыток. Пожалуйста, попробуйте ещё раз через несколько минут.</string>
   <string name="login_failed_blocked">Извините, но участник с таким именем был заблокирован на Викискладе</string>
   <string name="login_failed_2fa_needed">Вы должны ввести код двухфакторной аутентификации.</string>
-  <string name="login_failed_generic">Ошибка входа в систему!</string>
+  <string name="login_failed_generic">Ошибка входа в систему</string>
   <string name="share_upload_button">Загрузка</string>
   <string name="multiple_share_base_title">Введите название для этой группы файлов</string>
   <string name="provider_modifications">Изменения</string>
@@ -222,14 +231,14 @@
   <string name="tutorial_4_subtext_2">Описание: Сиднейский оперный театр, вид через залив</string>
   <string name="tutorial_4_subtext_3">Категории: Sydney Opera House from the west, Sydney Opera House remote views</string>
   <string name="welcome_wikipedia_text">Загрузите свои изображения. Помогите Википедии оживить статьи!</string>
-  <string name="welcome_wikipedia_subtext">Изображения, используемые в Википедии хранятся на Викискладе.</string>
+  <string name="welcome_wikipedia_subtext">Изображения, используемые в Википедии, хранятся на Викискладе.</string>
   <string name="welcome_copyright_text">Ваши изображения могут помочь образованию людей во всём мире.</string>
   <string name="welcome_copyright_subtext">Избегайте материалов, защищённых авторским правом, например, найденных в Интернете, изображений плакатов, книжных обложек и т.п.</string>
   <string name="welcome_final_text">Вам это понятно?</string>
   <string name="welcome_final_button_text">Да!</string>
   <string name="welcome_help_button_text">Подробнее</string>
   <string name="detail_panel_cats_label">Категории</string>
-  <string name="detail_panel_cats_loading">Загрузка…</string>
+  <string name="detail_panel_cats_loading">Загружается…</string>
   <string name="detail_panel_cats_none">Ничего не выбрано</string>
   <string name="detail_caption_empty">Без подписи</string>
   <string name="detail_description_empty">Нет описания</string>
@@ -240,9 +249,11 @@
   <string name="read_storage_permission_rationale">Требуемые разрешения: чтение с внешнего носителя. Приложение не сможет получить доступ к вашей галерее без этого разрешения.</string>
   <string name="write_storage_permission_rationale">Требуемые разрешения: запись на внешнее хранилище. Приложение не сможет получить доступ к галерее/камере без этого разрешения.</string>
   <string name="location_permission_title">Запрос на определение местоположения</string>
+  <string name="in_app_camera_location_permission_title">Записывать местоположение для снимков в приложении</string>
+  <string name="in_app_camera_location_switch_pref_summary">Включите эту опцию, чтобы записывать местоположение вместе со снимками в приложении, если камера устройства не записывает его.</string>
   <string name="ok">OK</string>
   <string name="warning">Внимание</string>
-  <string name="duplicate_image_found">Найден дубликат изображения</string>
+  <string name="duplicate_file_name">Обнаружено повторяющееся имя файла</string>
   <string name="upload">Загрузить</string>
   <string name="yes">Да</string>
   <string name="no">Нет</string>
@@ -279,6 +290,7 @@
   <string name="navigation_item_about">О приложении</string>
   <string name="navigation_item_settings">Настройки</string>
   <string name="navigation_item_feedback">Обратная связь</string>
+  <string name="navigation_item_feedback_github">Обратная связь через GitHub</string>
   <string name="navigation_item_logout">Выйти</string>
   <string name="navigation_item_info">Руководство</string>
   <string name="navigation_item_notification">Уведомления</string>
@@ -313,18 +325,20 @@
   <string name="skip_login">Пропустить</string>
   <string name="navigation_item_login">Войти</string>
   <string name="skip_login_title">Вы действительно хотите пропустить авторизацию?</string>
-  <string name="skip_login_message">Вам следует залогиниться чтобы загружать изображения.</string>
+  <string name="skip_login_message">Вам придётся войти в систему, чтобы загружать фотографии в будущем.</string>
   <string name="login_alert_message">Войдите, чтобы использовать эту функцию</string>
   <string name="copy_wikicode">Копирование викикода в буфер обмена</string>
   <string name="wikicode_copied">Викикод скопирован в буфер обмена</string>
   <string name="nearby_location_not_available">Функция «Поблизости» может работать некорректно, определение местоположения недоступно.</string>
+  <string name="upload_location_access_denied">Доступ к местоположению запрещён. Чтобы использовать эту функцию, укажите своё местоположение вручную.</string>
   <string name="location_permission_rationale_nearby">Необходимо разрешение для отображения списка мест поблизости</string>
+  <string name="location_permission_rationale_explore">Необходимо разрешение для отображения списка мест поблизости</string>
   <string name="nearby_directions">Направления</string>
   <string name="nearby_wikidata">Викиданные</string>
   <string name="nearby_wikipedia">Википедия</string>
   <string name="nearby_commons">Викисклад</string>
   <string name="about_rate_us">Оцените нас</string>
-  <string name="about_faq">Часто задаваемые вопросы</string>
+  <string name="about_faq">ЧЗВ</string>
   <string name="user_guide">Руководство пользователя</string>
   <string name="welcome_skip_button">Пропустить руководство</string>
   <string name="no_internet">Интернет недоступен</string>
@@ -385,7 +399,9 @@
   <string name="wrong">Неверный ответ</string>
   <string name="quiz_screenshot_question">Этот скриншот подходит для загрузки на Викисклад?</string>
   <string name="share_app_title">Поделиться приложением</string>
+  <string name="rotate">Повернуть</string>
   <string name="error_fetching_nearby_places">Ошибка получения мест поблизости</string>
+  <string name="no_pictures_in_this_area">Здесь нет никаких фотографий</string>
   <string name="no_nearby_places_around">Нет мест поблизости</string>
   <string name="error_fetching_nearby_monuments">Ошибка получения мест поблизости.</string>
   <string name="no_recent_searches">История поиска пуста</string>
@@ -401,7 +417,7 @@
   <string name="statistics_thanks">Получены благодарности</string>
   <string name="statistics_featured">Избранные изображения</string>
   <string name="statistics_wikidata_edits">Изображения мест поблизости</string>
-  <string name="level">Уровень</string>
+  <string name="level" fuzzy="true">Уровень</string>
   <string name="images_uploaded">Загружено изображений</string>
   <string name="image_reverts">Изображения, которые не откатывались</string>
   <string name="images_used_by_wiki">Использовано изображений</string>
@@ -465,8 +481,18 @@
   <string name="ends_on">Заканчивается:</string>
   <string name="display_campaigns">Показ кампаний</string>
   <string name="display_campaigns_explanation">Просмотр текущих кампаний</string>
+  <string name="in_app_camera_location_access_explanation">Разрешите приложению определять местоположение, если камера его не записывает. Камеры некоторых устройств не записывают местоположение. В таких случаях, если вы позволите приложению извлекать и привязывать к нему местоположение, ваш вклад станет более полезным. Вы можете изменить это в любое время в настройках.</string>
+  <string name="option_allow">Разрешить</string>
+  <string name="option_dismiss">Отменить</string>
+  <string name="in_app_camera_needs_location">Пожалуйста, включите доступ к местоположению в настройках и повторите попытку. \n\nПримечание. При загрузке может отсутствовать местоположение, если в течение короткого интервала времени приложению не удаётся получить местоположение с устройства.</string>
+  <string name="in_app_camera_location_permission_rationale">Камере приложения требуется разрешение на определение местоположения, чтобы прикрепить его к вашим изображениям, если местоположение недоступно в метаданных (EXIF). Разрешите приложению доступ к вашему местоположению и повторите попытку.\n\nОбратите внимание: если приложению не удастся получить местоположение с устройства в течение короткого интервала времени, при загрузке данные о местоположении могут отсутствовать.</string>
+  <string name="in_app_camera_location_permission_denied">Приложение не будет записывать местоположение вместе со снимками из-за отсутствия разрешения на доступ к местоположению</string>
+  <string name="in_app_camera_location_unavailable">Приложение не записывает местоположение вместе со снимками, поскольку GPS отключён</string>
+  <string name="open_document_photo_picker_title">Использовать средство выбора фотографий на основе документа</string>
+  <string name="open_document_photo_picker_explanation">Новый инструмент выбора фотографий Android рискует потерять информацию о местоположении. Включите, если вы собираетесь его использовать</string>
+  <string name="location_loss_warning">Отключение может привести к запуску нового средства выбора фотографий Android. Из-за этого может потеряться информация о местоположении.\n\nНажмите «Подробнее» для получения дополнительной информации.</string>
   <string name="nearby_campaign_dismiss_message">Вы больше не увидите кампаний. Однако, если захочете, вы сможете включить нотификации о кампаниях в настройках.</string>
-  <string name="this_function_needs_network_connection">Для этой функции требуется доступ к интернет. Пожалуйста, проверьте своё подключение.</string>
+  <string name="this_function_needs_network_connection">Для этой функции требуется доступ к интернет. Пожалуйста, проверьте свои настройки подключения.</string>
   <string name="error_processing_image">Произошла ошибка при загрузке файла. Пожалуйста, попробуйте позднее!</string>
   <string name="getting_edit_token">Получение токена редактирования</string>
   <string name="check_category_adding_template">Добавление шаблона о проверке категорий</string>
@@ -504,6 +530,7 @@
   <string name="no_notification">У вас нет непрочитанных уведомлений</string>
   <string name="no_read_notification">Нет прочитанных уведомлений</string>
   <string name="share_logs_using">Поделиться лог-файлами</string>
+  <string name="check_your_email_inbox">Проверьте свой почтовый ящик</string>
   <string name="menu_option_read">Просмотр прочитанного</string>
   <string name="menu_option_unread">См. непрочитанные</string>
   <string name="error_occurred_in_picking_images">Произошла ошибка при загрузке изображений</string>
@@ -526,6 +553,8 @@
   <string name="exif_tag_name_lensModel">Модель объектива</string>
   <string name="exif_tag_name_serialNumbers">Серийный номер</string>
   <string name="exif_tag_name_software">Программное обеспечение</string>
+  <string name="media_location_permission_denied">Отказано в доступе к местоположению файла</string>
+  <string name="add_location_manually">Возможно, мы не сможем автоматически получать данные о местоположении из загруженных вами изображений. Пожалуйста, добавьте подходящее место для каждого изображения перед отправкой</string>
   <string name="share_text">Загружайте фото на Викисклад прямо с телефона. Скачайте приложение Wikimedia Commons прямо сейчас: %1$s</string>
   <string name="share_via">Поделиться приложением с помощью...</string>
   <string name="image_info">Информация об изображении</string>
@@ -541,12 +570,13 @@
   <string name="delete_helper_show_deletion_message_if">Номинировано %1$s на удаление.</string>
   <string name="delete_helper_show_deletion_title_failed">Не удалось</string>
   <string name="delete_helper_show_deletion_message_else">Невозможно запросить удаление.</string>
-  <string name="delete_helper_ask_spam_selfie">Селфи</string>
-  <string name="delete_helper_ask_spam_blurry">Размыто</string>
-  <string name="delete_helper_ask_spam_nonsense">Бессмыслица</string>
+  <string name="delete_helper_ask_spam_selfie">селфи, которое не используется ни в одной статье</string>
+  <string name="delete_helper_ask_spam_blurry">полностью размыто</string>
+  <string name="delete_helper_ask_spam_nonsense">бессмыслица, абсолютно неуместная ни в какой статье</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">Новостное фото</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">Случайное фото из интернет</string>
   <string name="delete_helper_ask_reason_copyright_logo">Логотип</string>
+  <string name="delete_helper_ask_reason_copyright_no_freedom_of_panorama">Нарушение Свободы панорамы</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">Поскольку</string>
   <string name="category_edit_helper_make_edit_toast">Обновление категорий.</string>
   <string name="category_edit_helper_show_edit_title">Обновление категории</string>
@@ -594,12 +624,13 @@
   <string name="place_state_needs_photo">Нуждается в фото</string>
   <string name="place_type">Тип места:</string>
   <string name="nearby_search_hint">Мост, музей, гостиница и т. д.</string>
-  <string name="you_must_reset_your_passsword">Что-то пошло не так со входом, вы должны сбросить пароль!</string>
+  <string name="you_must_reset_your_passsword">Что-то пошло не так со входом. Вы должны сбросить пароль!</string>
   <string name="title_for_media">МЕДИА</string>
   <string name="title_for_child_classes">ДЕТСКИЕ КЛАССЫ</string>
   <string name="title_for_parent_classes">РОДИТЕЛЬСКИЕ КЛАССЫ</string>
   <string name="upload_nearby_place_found_title">Место поблизости найдено</string>
-  <string name="upload_nearby_place_found_description">Является ли это фото местом %1$s?</string>
+  <string name="upload_nearby_place_found_description_plural">На этих изображениях %1$s?</string>
+  <string name="upload_nearby_place_found_description_singular">На этом изображении %1$s?</string>
   <string name="title_app_shortcut_bookmark">Закладки</string>
   <string name="title_app_shortcut_setting">Настройки</string>
   <string name="remove_bookmark">Удалено из закладок</string>
@@ -613,7 +644,10 @@
   <string name="cannot_open_location_settings">Не удалось открыть настройки местоположения. Пожалуйста, включите местоположение вручную</string>
   <string name="recommend_high_accuracy_mode">Для достижения наилучших результатов выберите режим высокой точности.</string>
   <string name="ask_to_turn_location_on">Включить местоположение?</string>
+  <string name="ask_to_turn_location_on_text">Пожалуйста, включите службы определения местоположения, чтобы приложение показывало ваше текущее местоположение.</string>
   <string name="nearby_needs_location">Рядом необходимо, чтобы местоположение было включено для правильной работы.</string>
+  <string name="explore_map_needs_location">Для просмотра близлежащих изображений карте «Исследование» требуется разрешение на определение местоположения.</string>
+  <string name="upload_map_location_access">Вам необходимо предоставить доступ к вашему текущему местоположению, чтобы установить местоположение автоматически.</string>
   <string name="use_location_from_similar_image">Вы снимали эти две фотографии в одном месте? Хотите использовать широту/долготу изображения справа?</string>
   <string name="load_more">Загрузить ещё</string>
   <string name="nearby_no_results">Мест не найдено, попытайтесь изменить критерии поиска.</string>
@@ -656,9 +690,6 @@
   <string name="leaderboard_nearby">Поблизости</string>
   <string name="leaderboard_used">Использовано</string>
   <string name="leaderboard_my_rank_button_text">Мой ранг</string>
-  <string name="mapbox_telemetry">Телеметрия Mapbox</string>
-  <string name="telemetry_opt_out_summary">Отправлять анонимизированные данные о местоположении и использовании в Mapbox при применении функции «Поблизости»</string>
-  <string name="map_attribution">&amp;#169; &lt;a href=\"https://www.mapbox.com/about/maps/\"&gt;Mapbox&lt;/a&gt; &amp;#169; &lt;a href=\"https://www.openstreetmap.org/copyright\"&gt;OpenStreetMap&lt;/a&gt; &lt;a href=\"https://www.mapbox.com/map-feedback/\"&gt;Улучшить эту карту&lt;/a&gt;</string>
   <string name="limited_connection_enabled">Включен режим ограниченного подключения!</string>
   <string name="limited_connection_disabled">Отключен режим ограниченного подключения. Незавершенные загрузки будут возобновлены сейчас.</string>
   <string name="limited_connection_mode">Режим ограниченного подключения</string>
@@ -704,16 +735,22 @@
   <string name="custom_selector_info_text2">В отличие от изображения слева, изображение справа имеет логотип Commons, указывающий, что оно уже загружено.\n Нажмите и удерживайте для предварительного просмотра изображения.</string>
   <string name="welcome_custom_selector_ok">Потрясающе</string>
   <string name="custom_selector_already_uploaded_image_text">Это изображение уже было загружено на Викисклад.</string>
-  <string name="wlm_upload_info">Это изображение будет участвовать в конкурсе «Вики любит памятники — 2021».</string>
+  <string name="custom_selector_over_limit_warning">По техническим причинам приложение не может одновременно загрузить более %1$d изображений. Предел загрузки в %1$d шт. был превышен на %2$d шт.</string>
+  <string name="custom_selector_dismiss_limit_warning_button_text">Отменить</string>
+  <string name="custom_selector_button_limit_text">Максимально: %1$d</string>
+  <string name="custom_selector_limit_error_desc">Ошибка: превышен лимит загрузки</string>
+  <string name="place_state_wlm">ВЛП</string>
+  <string name="wlm_upload_info">Это изображение будет участвовать в конкурсе «Вики любит памятники».</string>
   <string name="display_monuments">Показать памятники</string>
   <string name="wlm_month_message">Это месяц «Вики любит памятники»!</string>
   <string name="learn_more">УЗНАТЬ ПОДРОБНЕЕ</string>
+  <string name="wlm_campaign_title">Вики любит памятники</string>
   <string name="wlm_campaign_description">«Вики любит памятники» — международный фотоконкурс памятников, организованный Викимедиа</string>
   <string name="need_permission">Нужно разрешение</string>
   <string name="read_phone_state_permission_message">Для правильной работы картам поблизости необходимо иметь доступ к СОСТОЯНИЮ ТЕЛЕФОНА.</string>
   <string name="contributions_of_user">Вклад участника: %s</string>
   <string name="achievements_of_user">Достижения участника: %s</string>
-  <string name="menu_view_user_page">Посмотреть страницу участника</string>
+  <string name="menu_view_user_page">Посмотреть профиль участника</string>
   <string name="edit_depictions">Редактировать описания</string>
   <string name="edit_categories">Изменить категории</string>
   <string name="advanced_options">Расширенные настройки</string>
@@ -742,6 +779,8 @@
   <string name="your_feedback">Обратная связь от вас</string>
   <string name="mark_as_not_for_upload">Отметить как не подлежащее загрузке</string>
   <string name="unmark_as_not_for_upload">Снять пометку как не подлежащее загрузке</string>
+  <string name="marking_as_not_for_upload">Помечено как не предназначенное для загрузки</string>
+  <string name="unmarking_as_not_for_upload">Снять пометку «не для загрузки»</string>
   <string name="show_already_actioned_pictures">Показать уже обработанные изображения</string>
   <string name="hiding_already_actioned_pictures">Скрытие уже обработанных изображений</string>
   <string name="no_more_images_found">Больше изображений не найдено</string>
@@ -750,6 +789,8 @@
   <string name="image_selected">Изображение выбрано</string>
   <string name="image_marked_as_not_for_upload">Изображение помечено как не подлежащее загрузке</string>
   <string name="menu_view_report">Отчёт</string>
+  <string name="menu_view_set_white_background">Установить белый фон</string>
+  <string name="menu_view_set_black_background">Установить черный фон</string>
   <string name="report_violation">Сообщить о нарушении</string>
   <string name="report_user">Пожаловаться на участника_цу</string>
   <string name="report_content">Пожаловаться на это содержимое</string>
@@ -757,4 +798,63 @@
   <string name="welcome_to_full_screen_mode_text">Добро пожаловать в полноэкранный режим выбора</string>
   <string name="full_screen_mode_zoom_info">Используйте два пальца для увеличения и уменьшения масштаба.</string>
   <string name="full_screen_mode_features_info">Проведите быстро и широко, чтобы выполнить следующие действия: \n- Влево/вправо: переход к предыдущему/следующему \n- Вверх: выбрать\n- Вниз: пометить как не для загрузки.</string>
+  <string name="set_up_avatar_toast_string">Чтобы установить свой аватар в таблице лидеров, на любом изображении в меню с тремя точками нажмите «Установить как аватар».</string>
+  <string name="similar_coordinate_description_auto_set">Координаты не являются точными, но человек, загрузивший эту фотографию, считает, что они достаточно близки.</string>
+  <string name="storage_permissions_denied">Доступ к хранилищу запрещён</string>
+  <string name="unable_to_share_upload_item">Невозможно поделиться этим объектом</string>
+  <string name="permissions_are_required_for_functionality">Для функционирования требуются разрешения</string>
+  <string name="learn_how_to_write_a_useful_description">Узнайте, как написать полезное описание</string>
+  <string name="learn_how_to_write_a_useful_caption">Узнайте, как написать полезную подпись</string>
+  <string name="see_your_achievements">Посмотрите свои достижения</string>
+  <string name="edit_image">Редактировать изображение</string>
+  <string name="edit_location">Изменить местоположение</string>
+  <string name="location_updated">Местоположение обновлено!</string>
+  <string name="remove_location">Удалить местоположение</string>
+  <string name="remove_location_warning_title">Удалить предупреждение о местоположении</string>
+  <string name="remove_location_warning_desc">Местоположение делает фотографии более полезными и доступными для поиска. Вы действительно хотите удалить местоположение с этого изображения?</string>
+  <string name="location_removed">Местоположение удалено!</string>
+  <string name="send_thanks_to_author">Поблагодарить автора</string>
+  <string name="error_sending_thanks">Ошибка при отправке благодарности автору.</string>
+  <string name="invalid_login_message">Срок Вашего сеанса в системе закончился. Пожалуйста, войдите снова.</string>
+  <string name="no_application_available_to_open_gpx_files">Нет доступного приложения для открытия файлов GPX.</string>
+  <string name="file_saved_successfully">Успешно сохранено</string>
+  <string name="do_you_want_to_open_gpx_file">Вы хотите открыть файл GPX?</string>
+  <string name="do_you_want_to_open_kml_file">Вы хотите открыть файл KML?</string>
+  <string name="failed_to_save_kml_file">Не удалось сохранить лексему.</string>
+  <string name="failed_to_save_gpx_file">Не удалось сохранить лексему.</string>
+  <string name="saving_kml_file">Сохранение файла KML</string>
+  <string name="saving_gpx_file">Сохранение файла GPX</string>
+  <plurals name="custom_picker_images_selected_title_appendix">
+    <item quantity="one">выбрано %d изображение</item>
+    <item quantity="few">выбрано %d изображения</item>
+    <item quantity="many">выбрано %d изображений</item>
+    <item quantity="other"/>
+  </plurals>
+  <string name="multiple_files_depiction">Помните, что все изображения при мультизагрузке получают одинаковые категории и описания. Если изображения не имеют одинаковых описаний и категорий, выполните несколько отдельных загрузок.</string>
+  <string name="multiple_files_depiction_header">Замечание о мультизагрузках</string>
+  <string name="nearby_wikitalk">Сообщить о проблеме с этим элементом в Викиданные</string>
+  <string name="please_enter_some_comments">Пожалуйста, добавьте какие-то комментарии</string>
+  <string name="talk">Обсуждение</string>
+  <string name="write_something_about_the_item">Напишите что-нибудь об элементе \'%1$s\'. Это будет видно всем.</string>
+  <string name="does_not_exist_anymore_no_picture_can_ever_be_taken_of_it">\'%1$s\' больше не существует, его невозможно сфотографировать.</string>
+  <string name="is_at_a_different_place_please_specify_the_correct_place_below_if_possible_tell_us_the_correct_latitude_longitude">\'%1$s\' находится в другом месте. Пожалуйста, укажите правильное место ниже и, если возможно, напишите правильную широту и долготу.</string>
+  <string name="other_problem_or_information_please_explain_below">Другая проблема или информация (пожалуйста, объясните ниже).</string>
+  <string name="feedback_destination_note">Ваш отзыв будет опубликован на следующей вики-странице: &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Mobile_app/Feedback\"&gt;Commons:Mobile app/Feedback&lt;/a&gt;</string>
+  <string name="are_you_sure_that_you_want_cancel_all_the_uploads">Вы уверены, что хотите отменить все загрузки?</string>
+  <string name="cancelling_all_the_uploads">Отмена всех загрузок...</string>
+  <string name="uploads">Загрузки</string>
+  <string name="pending">В ожидании</string>
+  <string name="failed">Не удалось</string>
+  <string name="could_not_load_place_data">Не удалось загрузить данные о месте</string>
+  <string name="custom_selector_delete_folder">Удалить папку</string>
+  <string name="custom_selector_confirm_deletion_title">Подтвердите удаление</string>
+  <string name="custom_selector_confirm_deletion_message">Вы уверены, что хотите удалить папку %1$s содержащую %2$d шт. вложенных элементов?</string>
+  <string name="custom_selector_delete">Удалить</string>
+  <string name="custom_selector_cancel">Отмена</string>
+  <string name="custom_selector_folder_deleted_success">Папка %1$s успешно удалена</string>
+  <string name="custom_selector_folder_deleted_failure">Не получилось удалить папку %1$s</string>
+  <string name="custom_selector_error_trashing_folder_contents">Ошибка при удалении содержимого папки: %1$s</string>
+  <string name="red_pin">У этого места пока нет фотографий, так что сделайте несколько!</string>
+  <string name="green_pin">У этого места уже есть фотография.</string>
+  <string name="grey_pin">Сейчас проверим, есть ли у этого места фотография.</string>
 </resources>

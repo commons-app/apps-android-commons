@@ -6,24 +6,43 @@ import android.database.Cursor
 import android.database.MatrixCursor
 import android.database.sqlite.SQLiteDatabase
 import android.os.RemoteException
-import com.nhaarman.mockitokotlin2.*
+import com.nhaarman.mockitokotlin2.any
+import com.nhaarman.mockitokotlin2.anyOrNull
+import com.nhaarman.mockitokotlin2.argumentCaptor
+import com.nhaarman.mockitokotlin2.eq
+import com.nhaarman.mockitokotlin2.inOrder
+import com.nhaarman.mockitokotlin2.isA
+import com.nhaarman.mockitokotlin2.isNull
+import com.nhaarman.mockitokotlin2.mock
+import com.nhaarman.mockitokotlin2.verify
+import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.explore.models.RecentSearch
 import fr.free.nrw.commons.explore.recentsearches.RecentSearchesContentProvider.BASE_URI
 import fr.free.nrw.commons.explore.recentsearches.RecentSearchesContentProvider.uriForId
-import fr.free.nrw.commons.explore.recentsearches.RecentSearchesDao.Table.*
-import org.junit.Assert.*
+import fr.free.nrw.commons.explore.recentsearches.RecentSearchesDao.Table.ALL_FIELDS
+import fr.free.nrw.commons.explore.recentsearches.RecentSearchesDao.Table.COLUMN_ID
+import fr.free.nrw.commons.explore.recentsearches.RecentSearchesDao.Table.COLUMN_LAST_USED
+import fr.free.nrw.commons.explore.recentsearches.RecentSearchesDao.Table.COLUMN_NAME
+import fr.free.nrw.commons.explore.recentsearches.RecentSearchesDao.Table.CREATE_TABLE_STATEMENT
+import fr.free.nrw.commons.explore.recentsearches.RecentSearchesDao.Table.DROP_TABLE_STATEMENT
+import fr.free.nrw.commons.explore.recentsearches.RecentSearchesDao.Table.onCreate
+import fr.free.nrw.commons.explore.recentsearches.RecentSearchesDao.Table.onDelete
+import fr.free.nrw.commons.explore.recentsearches.RecentSearchesDao.Table.onUpdate
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNotNull
+import org.junit.Assert.assertNull
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.mockito.Mockito.verifyNoInteractions
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
-import java.util.*
+import java.util.Date
 
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
 class RecentSearchesDaoTest {
-
     private val columns = arrayOf(COLUMN_ID, COLUMN_NAME, COLUMN_LAST_USED)
     private val client: ContentProviderClient = mock()
     private val database: SQLiteDatabase = mock()
@@ -65,7 +84,7 @@ class RecentSearchesDaoTest {
     fun migrateTableVersionFrom_v1_to_v2() {
         onUpdate(database, 1, 2)
         // Table didnt exist before v7
-        verifyZeroInteractions(database)
+        verifyNoInteractions(database)
     }
 
     /**
@@ -75,7 +94,7 @@ class RecentSearchesDaoTest {
     fun migrateTableVersionFrom_v2_to_v3() {
         onUpdate(database, 2, 3)
         // Table didnt exist before v7
-        verifyZeroInteractions(database)
+        verifyNoInteractions(database)
     }
 
     /**
@@ -85,7 +104,7 @@ class RecentSearchesDaoTest {
     fun migrateTableVersionFrom_v3_to_v4() {
         onUpdate(database, 3, 4)
         // Table didnt exist before v7
-        verifyZeroInteractions(database)
+        verifyNoInteractions(database)
     }
 
     /**
@@ -95,7 +114,7 @@ class RecentSearchesDaoTest {
     fun migrateTableVersionFrom_v4_to_v5() {
         onUpdate(database, 4, 5)
         // Table didnt exist before v7
-        verifyZeroInteractions(database)
+        verifyNoInteractions(database)
     }
 
     /**
@@ -105,7 +124,7 @@ class RecentSearchesDaoTest {
     fun migrateTableVersionFrom_v5_to_v6() {
         onUpdate(database, 5, 6)
         // Table didnt exist before v7
-        verifyZeroInteractions(database)
+        verifyNoInteractions(database)
     }
 
     /**
@@ -124,7 +143,7 @@ class RecentSearchesDaoTest {
     fun migrateTableVersionFrom_v7_to_v8() {
         onUpdate(database, 7, 8)
         // Table didnt change in version 8
-        verifyZeroInteractions(database)
+        verifyNoInteractions(database)
     }
 
     /**
@@ -237,11 +256,11 @@ class RecentSearchesDaoTest {
         assertEquals(123L, recentSearch?.lastSearched?.time)
 
         verify(client).query(
-                eq(BASE_URI),
-                eq(ALL_FIELDS),
-                eq("$COLUMN_NAME=?"),
-                queryCaptor.capture(),
-                isNull()
+            eq(BASE_URI),
+            eq(ALL_FIELDS),
+            eq("$COLUMN_NAME=?"),
+            queryCaptor.capture(),
+            isNull(),
         )
         assertEquals("butterfly", queryCaptor.firstValue[0])
     }
@@ -273,11 +292,11 @@ class RecentSearchesDaoTest {
         assertEquals("butterfly", result[0])
 
         verify(client).query(
-                eq(BASE_URI),
-                eq(ALL_FIELDS),
-                isNull(),
-                queryCaptor.capture(),
-                eq("$COLUMN_LAST_USED DESC")
+            eq(BASE_URI),
+            eq(ALL_FIELDS),
+            isNull(),
+            queryCaptor.capture(),
+            eq("$COLUMN_LAST_USED DESC"),
         )
         assertEquals(0, queryCaptor.firstValue.size)
     }
@@ -298,10 +317,10 @@ class RecentSearchesDaoTest {
      * Unit Test for creating entries in recent searches database.
      * @param rowCount No of rows
      */
-    private fun createCursor(rowCount: Int) = MatrixCursor(columns, rowCount).apply {
-        for (i in 0 until rowCount) {
-            addRow(listOf("1", "butterfly", "123"))
+    private fun createCursor(rowCount: Int) =
+        MatrixCursor(columns, rowCount).apply {
+            for (i in 0 until rowCount) {
+                addRow(listOf("1", "butterfly", "123"))
+            }
         }
-    }
-
 }
