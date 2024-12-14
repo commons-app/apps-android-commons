@@ -117,6 +117,6 @@ interface UploadMediaDetailsContract {
 
         fun onEditButtonClicked(indexInViewFlipper: Int)
 
-        fun onUserConfirmedUploadIsOfPlace(place: Place?)
+        fun onUserConfirmedUploadIsOfPlace(place: Place?, uploadItemIndex: Int)
     }
 }
