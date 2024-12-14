@@ -12,4 +12,3 @@ class SearchMediaFragment : PageableMediaFragment() {
     override val injectedPresenter
         get() = presenter
 }
-

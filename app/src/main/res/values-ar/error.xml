@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
 * Ali1
+* FiberAhmed
 * Mido
+* أَحمد
 -->
 <resources>
   <string name="crash_dialog_title">لقد تعطل كومنز</string>
-  <string name="crash_dialog_text">عفوا. حدث خطأ!</string>
+  <string name="crash_dialog_text">عفوًا. حدث خطأ!</string>
   <string name="crash_dialog_comment_prompt">أخبرنا ماذا كنت تفعل، ثم أرسلها لنا بالبريد الإلكتروني. سوف يساعدنا هذا في الحل!</string>
-  <string name="crash_dialog_ok_toast">شكرا لك!</string>
+  <string name="crash_dialog_ok_toast">شكرًا لك!</string>
 </resources>

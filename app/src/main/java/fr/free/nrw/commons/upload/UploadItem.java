@@ -14,7 +14,7 @@ import java.util.List;
 
 public class UploadItem {
 
-    private final Uri mediaUri;
+    private Uri mediaUri;
     private final String mimeType;
     private ImageCoordinates gpsCoords;
     private List<UploadMediaDetail> uploadMediaDetails;
@@ -25,12 +25,13 @@ public class UploadItem {
     private boolean hasInvalidLocation;
     private boolean isWLMUpload = false;
     private String countryCode;
+    private String fileCreatedDateString; //according to EXIF data
 
     /**
      * Uri of uploadItem
      * Uri points to image location or name, eg content://media/external/images/camera/10495 (Android 10)
      */
-    private final Uri contentUri;
+    private  Uri contentUri;
 
 
     @SuppressLint("CheckResult")
@@ -40,7 +41,8 @@ public class UploadItem {
         final Place place,
         final long createdTimestamp,
         final String createdTimestampSource,
-        final Uri contentUri) {
+        final Uri contentUri,
+        final String fileCreatedDateString) {
         this.createdTimestampSource = createdTimestampSource;
         uploadMediaDetails = new ArrayList<>(Collections.singletonList(new UploadMediaDetail()));
         this.place = place;
@@ -50,6 +52,7 @@ public class UploadItem {
         this.createdTimestamp = createdTimestamp;
         this.contentUri = contentUri;
         imageQuality = BehaviorSubject.createDefault(ImageUtils.IMAGE_WAIT);
+        this.fileCreatedDateString = fileCreatedDateString;
     }
 
     public String getCreatedTimestampSource() {
@@ -82,6 +85,8 @@ public class UploadItem {
      * Uri points to image location or name, eg content://media/external/images/camera/10495 (Android 10)
      */
     public Uri getContentUri() { return contentUri; }
+
+    public String getFileCreatedDateString() { return fileCreatedDateString; }
 
     public void setImageQuality(final int imageQuality) {
       this.imageQuality.onNext(imageQuality);
@@ -154,5 +159,17 @@ public class UploadItem {
     @Nullable
     public String getCountryCode() {
         return countryCode;
+    }
+
+    /**
+     * Sets both the contentUri and mediaUri to the specified Uri.
+     * This method allows you to assign the same Uri to both the contentUri and mediaUri
+     * properties.
+     *
+     * @param uri The Uri to be set as both the contentUri and mediaUri.
+     */
+    public void setContentUri(Uri uri) {
+        contentUri = uri;
+        mediaUri = uri;
     }
 }

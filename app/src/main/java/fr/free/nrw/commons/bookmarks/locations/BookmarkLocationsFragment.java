@@ -1,41 +1,75 @@
 package fr.free.nrw.commons.bookmarks.locations;
 
+import android.Manifest.permission;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import dagger.android.support.DaggerFragment;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.contributions.ContributionController;
+import fr.free.nrw.commons.databinding.FragmentBookmarksLocationsBinding;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.nearby.fragments.CommonPlaceClickActions;
 import fr.free.nrw.commons.nearby.fragments.PlaceAdapter;
 import java.util.List;
+import java.util.Map;
 import javax.inject.Inject;
 import kotlin.Unit;
 
 public class BookmarkLocationsFragment extends DaggerFragment {
 
-    @BindView(R.id.statusMessage) TextView statusTextView;
-    @BindView(R.id.loadingImagesProgressBar) ProgressBar progressBar;
-    @BindView(R.id.listView) RecyclerView recyclerView;
-    @BindView(R.id.parentLayout) RelativeLayout parentLayout;
+    public FragmentBookmarksLocationsBinding binding;
 
     @Inject BookmarkLocationsController controller;
     @Inject ContributionController contributionController;
     @Inject BookmarkLocationsDao bookmarkLocationDao;
     @Inject CommonPlaceClickActions commonPlaceClickActions;
     private PlaceAdapter adapter;
+
+    private final ActivityResultLauncher<Intent> cameraPickLauncherForResult =
+        registerForActivityResult(new StartActivityForResult(),
+        result -> {
+            contributionController.handleActivityResultWithCallback(requireActivity(), callbacks -> {
+                contributionController.onPictureReturnedFromCamera(result, requireActivity(), callbacks);
+            });
+        });
+
+      private final ActivityResultLauncher<Intent> galleryPickLauncherForResult =
+          registerForActivityResult(new StartActivityForResult(),
+        result -> {
+              contributionController.handleActivityResultWithCallback(requireActivity(), callbacks -> {
+                contributionController.onPictureReturnedFromGallery(result, requireActivity(), callbacks);
+            });
+        });
+
+    private ActivityResultLauncher<String[]> inAppCameraLocationPermissionLauncher = registerForActivityResult(new ActivityResultContracts.RequestMultiplePermissions(), new ActivityResultCallback<Map<String, Boolean>>() {
+        @Override
+        public void onActivityResult(Map<String, Boolean> result) {
+            boolean areAllGranted = true;
+            for(final boolean b : result.values()) {
+                areAllGranted = areAllGranted && b;
+            }
+
+            if (areAllGranted) {
+                contributionController.locationPermissionCallback.onLocationPermissionGranted();
+            } else {
+                if (shouldShowRequestPermissionRationale(permission.ACCESS_FINE_LOCATION)) {
+                    contributionController.handleShowRationaleFlowCameraLocation(getActivity(), inAppCameraLocationPermissionLauncher, cameraPickLauncherForResult);
+                } else {
+                    contributionController.locationPermissionCallback.onLocationPermissionDenied(getActivity().getString(R.string.in_app_camera_location_permission_denied));
+                }
+            }
+        }
+    });
 
     /**
      * Create an instance of the fragment with the right bundle parameters
@@ -51,25 +85,27 @@ public class BookmarkLocationsFragment extends DaggerFragment {
             ViewGroup container,
             Bundle savedInstanceState
     ) {
-        View v = inflater.inflate(R.layout.fragment_bookmarks_locations, container, false);
-        ButterKnife.bind(this, v);
-        return v;
+        binding = FragmentBookmarksLocationsBinding.inflate(inflater, container, false);
+        return binding.getRoot();
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        progressBar.setVisibility(View.VISIBLE);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        binding.loadingImagesProgressBar.setVisibility(View.VISIBLE);
+        binding.listView.setLayoutManager(new LinearLayoutManager(getContext()));
         adapter = new PlaceAdapter(bookmarkLocationDao,
             place -> Unit.INSTANCE,
             (place, isBookmarked) -> {
                 adapter.remove(place);
                 return Unit.INSTANCE;
             },
-            commonPlaceClickActions
+            commonPlaceClickActions,
+            inAppCameraLocationPermissionLauncher,
+            galleryPickLauncherForResult,
+            cameraPickLauncherForResult
         );
-        recyclerView.setAdapter(adapter);
+        binding.listView.setAdapter(adapter);
     }
 
     @Override
@@ -84,17 +120,18 @@ public class BookmarkLocationsFragment extends DaggerFragment {
     private void initList() {
         List<Place> places = controller.loadFavoritesLocations();
         adapter.setItems(places);
-        progressBar.setVisibility(View.GONE);
+        binding.loadingImagesProgressBar.setVisibility(View.GONE);
         if (places.size() <= 0) {
-            statusTextView.setText(R.string.bookmark_empty);
-            statusTextView.setVisibility(View.VISIBLE);
+            binding.statusMessage.setText(R.string.bookmark_empty);
+            binding.statusMessage.setVisibility(View.VISIBLE);
         } else {
-            statusTextView.setVisibility(View.GONE);
+            binding.statusMessage.setVisibility(View.GONE);
         }
     }
 
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        contributionController.handleActivityResult(getActivity(), requestCode, resultCode, data);
+    public void onDestroy() {
+        super.onDestroy();
+        binding = null;
     }
 }

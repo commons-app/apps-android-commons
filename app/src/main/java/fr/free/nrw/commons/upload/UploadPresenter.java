@@ -7,6 +7,7 @@ import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.filepicker.UploadableFile;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.repository.UploadRepository;
+import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailsContract;
 import io.reactivex.Observer;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
@@ -30,10 +31,14 @@ public class UploadPresenter implements UploadContract.UserActionListener {
     private final UploadRepository repository;
     private final JsonKvStore defaultKvStore;
     private UploadContract.View view = DUMMY;
+    @Inject
+    UploadMediaDetailsContract.UserActionListener presenter;
 
     private CompositeDisposable compositeDisposable;
     public static final String COUNTER_OF_CONSECUTIVE_UPLOADS_WITHOUT_COORDINATES
         = "number_of_consecutive_uploads_without_coordinates";
+
+    public static final int CONSECUTIVE_UPLOADS_WITHOUT_COORDINATES_REMINDER_THRESHOLD = 10;
 
 
     @Inject
@@ -51,6 +56,31 @@ public class UploadPresenter implements UploadContract.UserActionListener {
     @SuppressLint("CheckResult")
     @Override
     public void handleSubmit() {
+        boolean hasLocationProvidedForNewUploads = false;
+        for (UploadItem item : repository.getUploads()) {
+            if (item.getGpsCoords().getImageCoordsExists()) {
+                hasLocationProvidedForNewUploads = true;
+            }
+        }
+        boolean hasManyConsecutiveUploadsWithoutLocation = defaultKvStore.getInt(
+            COUNTER_OF_CONSECUTIVE_UPLOADS_WITHOUT_COORDINATES, 0) >=
+            CONSECUTIVE_UPLOADS_WITHOUT_COORDINATES_REMINDER_THRESHOLD;
+
+        if (hasManyConsecutiveUploadsWithoutLocation && !hasLocationProvidedForNewUploads) {
+            defaultKvStore.putInt(COUNTER_OF_CONSECUTIVE_UPLOADS_WITHOUT_COORDINATES, 0);
+            view.showAlertDialog(
+                R.string.location_message,
+                () -> {defaultKvStore.putInt(
+                    COUNTER_OF_CONSECUTIVE_UPLOADS_WITHOUT_COORDINATES,
+                    0);
+                    processContributionsForSubmission();
+                });
+        } else {
+            processContributionsForSubmission();
+        }
+    }
+
+    private void processContributionsForSubmission() {
         if (view.isLoggedIn()) {
             view.showProgress(true);
             repository.buildContributions()
@@ -72,9 +102,8 @@ public class UploadPresenter implements UploadContract.UserActionListener {
 
                         @Override
                         public void onNext(Contribution contribution) {
-                            if(contribution.getDecimalCoords() == null){
-                                final int recentCount
-                                    = defaultKvStore.getInt(
+                            if (contribution.getDecimalCoords() == null) {
+                                final int recentCount = defaultKvStore.getInt(
                                     COUNTER_OF_CONSECUTIVE_UPLOADS_WITHOUT_COORDINATES, 0);
                                 defaultKvStore.putInt(
                                     COUNTER_OF_CONSECUTIVE_UPLOADS_WITHOUT_COORDINATES, recentCount + 1);
@@ -94,6 +123,9 @@ public class UploadPresenter implements UploadContract.UserActionListener {
                             view.returnToMainActivity();
                             compositeDisposable.clear();
                             Timber.e("failed to upload: " + e.getMessage());
+
+                            //is submission error, not need to go to the uploadActivity
+                            //not start the uploading progress
                         }
 
                         @Override
@@ -102,6 +134,10 @@ public class UploadPresenter implements UploadContract.UserActionListener {
                             repository.cleanup();
                             view.returnToMainActivity();
                             compositeDisposable.clear();
+
+                            //after finish the uploadActivity, if successful,
+                            //directly go to the upload progress activity
+                            view.goToUploadProgressActivity();
                         }
                     });
         } else {
@@ -109,19 +145,42 @@ public class UploadPresenter implements UploadContract.UserActionListener {
         }
     }
 
+    /**
+     * Calls checkImageQuality of UploadMediaPresenter to check image quality of next image
+     *
+     * @param uploadItemIndex Index of next image, whose quality is to be checked
+     */
+    @Override
+    public void checkImageQuality(int uploadItemIndex) {
+        UploadItem uploadItem = repository.getUploadItem(uploadItemIndex);
+        presenter.checkImageQuality(uploadItem, uploadItemIndex);
+    }
+
+
     @Override
     public void deletePictureAtIndex(int index) {
         List<UploadableFile> uploadableFiles = view.getUploadableFiles();
-        if (index == uploadableFiles.size() - 1) {//If the next fragment to be shown is not one of the MediaDetailsFragment, lets hide the top card
+        if (index == uploadableFiles.size() - 1) {
+            // If the next fragment to be shown is not one of the MediaDetailsFragment
+            // lets hide the top card so that it doesn't appear on the other fragments
             view.showHideTopCard(false);
         }
+        view.setImageCancelled(true);
         repository.deletePicture(uploadableFiles.get(index).getFilePath());
         if (uploadableFiles.size() == 1) {
             view.showMessage(R.string.upload_cancelled);
             view.finish();
             return;
         } else {
+            if (presenter != null) {
+                presenter.updateImageQualitiesJSON(uploadableFiles.size(), index);
+            }
             view.onUploadMediaDeleted(index);
+            if (!(index == uploadableFiles.size()) && index != 0) {
+                // if the deleted image was not the last item to be uploaded, check quality of next
+                UploadItem uploadItem = repository.getUploadItem(index);
+                presenter.checkImageQuality(uploadItem, index);
+            }
         }
         if (uploadableFiles.size() < 2) {
             view.showHideTopCard(false);

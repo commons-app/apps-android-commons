@@ -21,7 +21,7 @@
       <TextView
         android:id="@+id/tv_review_question"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="wrap_content"
         android:gravity="center_vertical"
         tools:text="testing1"
         android:textAlignment="center"

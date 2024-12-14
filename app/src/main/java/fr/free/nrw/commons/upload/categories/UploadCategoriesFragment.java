@@ -1,34 +1,39 @@
 package fr.free.nrw.commons.upload.categories;
 
+import static fr.free.nrw.commons.wikidata.WikidataConstants.SELECTED_NEARBY_PLACE_CATEGORY;
+
 import android.app.Activity;
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.text.Editable;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.ProgressBar;
-import android.widget.TextView;
+import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-import com.google.android.material.textfield.TextInputLayout;
 import com.jakewharton.rxbinding2.view.RxView;
 import com.jakewharton.rxbinding2.widget.RxTextView;
+import fr.free.nrw.commons.CommonsApplication;
+import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.category.CategoryItem;
-import fr.free.nrw.commons.ui.PasteSensitiveTextInputEditText;
+import fr.free.nrw.commons.contributions.ContributionsFragment;
+import fr.free.nrw.commons.databinding.UploadCategoriesFragmentBinding;
+import fr.free.nrw.commons.media.MediaDetailFragment;
 import fr.free.nrw.commons.upload.UploadActivity;
 import fr.free.nrw.commons.upload.UploadBaseFragment;
 import fr.free.nrw.commons.utils.DialogUtil;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 import javax.inject.Inject;
 import kotlin.Unit;
@@ -36,59 +41,96 @@ import timber.log.Timber;
 
 public class UploadCategoriesFragment extends UploadBaseFragment implements CategoriesContract.View {
 
-    @BindView(R.id.tv_title)
-    TextView tvTitle;
-    @BindView(R.id.tv_subtitle)
-    TextView tvSubTitle;
-    @BindView(R.id.til_container_search)
-    TextInputLayout tilContainerEtSearch;
-    @BindView(R.id.et_search)
-    PasteSensitiveTextInputEditText etSearch;
-    @BindView(R.id.pb_categories)
-    ProgressBar pbCategories;
-    @BindView(R.id.rv_categories)
-    RecyclerView rvCategories;
-    @BindView(R.id.tooltip)
-    ImageView tooltip;
-
     @Inject
     CategoriesContract.UserActionListener presenter;
+    @Inject
+    SessionManager sessionManager;
     private UploadCategoryAdapter adapter;
     private Disposable subscribe;
+    /**
+     * Current media
+     */
+    private Media media;
+    /**
+     * Progress Dialog for showing background process
+     */
+    private ProgressDialog progressDialog;
+    /**
+     * WikiText from the server
+     */
+    private String wikiText;
+    private String nearbyPlaceCategory;
+
+    private UploadCategoriesFragmentBinding binding;
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.upload_categories_fragment, container, false);
+    public View onCreateView(@NonNull final LayoutInflater inflater, @Nullable final ViewGroup container,
+                             @Nullable final Bundle savedInstanceState) {
+        binding = UploadCategoriesFragmentBinding.inflate(inflater, container, false);
+        return binding.getRoot();
     }
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull final View view, @Nullable final Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        ButterKnife.bind(this, view);
+        final Bundle bundle = getArguments();
+        if (bundle != null) {
+            media = bundle.getParcelable("Existing_Categories");
+            wikiText = bundle.getString("WikiText");
+            nearbyPlaceCategory = bundle.getString(SELECTED_NEARBY_PLACE_CATEGORY);
+        }
         init();
+        presenter.getCategories().observe(getViewLifecycleOwner(), this::setCategories);
+
     }
 
     private void init() {
-        tvTitle.setText(getString(R.string.step_count, callback.getIndexInViewFlipper(this) + 1,
-            callback.getTotalNumberOfSteps(), getString(R.string.categories_activity_title)));
+        if (binding == null) {
+            return;
+        }
+        if (media == null) {
+            if (callback != null) {
+                binding.tvTitle.setText(getString(R.string.step_count, callback.getIndexInViewFlipper(this) + 1,
+                    callback.getTotalNumberOfSteps(), getString(R.string.categories_activity_title)));
+            }
+        } else {
+            binding.tvTitle.setText(R.string.edit_categories);
+            binding.tvSubtitle.setVisibility(View.GONE);
+            binding.btnNext.setText(R.string.menu_save_categories);
+            binding.btnPrevious.setText(R.string.menu_cancel_upload);
+        }
+
         setTvSubTitle();
-        tooltip.setOnClickListener(new OnClickListener() {
+        binding.tooltip.setOnClickListener(new OnClickListener() {
             @Override
-            public void onClick(View v) {
-                DialogUtil.showAlertDialog(getActivity(), getString(R.string.categories_activity_title), getString(R.string.categories_tooltip), getString(android.R.string.ok), null, true);
+            public void onClick(final View v) {
+                DialogUtil.showAlertDialog(requireActivity(),
+                    getString(R.string.categories_activity_title),
+                    getString(R.string.categories_tooltip),
+                    getString(android.R.string.ok),
+                    null);
             }
         });
-        presenter.onAttachView(this);
+        if (media == null) {
+            presenter.onAttachView(this);
+        } else {
+            presenter.onAttachViewWithMedia(this, media);
+        }
+        binding.btnNext.setOnClickListener(v -> onNextButtonClicked());
+        binding.btnPrevious.setOnClickListener(v -> onPreviousButtonClicked());
+
         initRecyclerView();
         addTextChangeListenerToEtSearch();
     }
 
     private void addTextChangeListenerToEtSearch() {
-        subscribe = RxTextView.textChanges(etSearch)
-                .doOnEach(v -> tilContainerEtSearch.setError(null))
-                .takeUntil(RxView.detaches(etSearch))
+        if (binding == null) {
+            return;
+        }
+        subscribe = RxTextView.textChanges(binding.etSearch)
+                .doOnEach(v -> binding.tilContainerSearch.setError(null))
+                .takeUntil(RxView.detaches(binding.etSearch))
                 .debounce(500, TimeUnit.MILLISECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(filter -> searchForCategory(filter.toString()), Timber::e);
@@ -103,12 +145,12 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
         if (activity instanceof UploadActivity) {
             final boolean isMultipleFileSelected = ((UploadActivity) activity).getIsMultipleFilesSelected();
             if (!isMultipleFileSelected) {
-                tvSubTitle.setVisibility(View.GONE);
+                binding.tvSubtitle.setVisibility(View.GONE);
             }
         }
     }
 
-    private void searchForCategory(String query) {
+    private void searchForCategory(final String query) {
         presenter.searchForCategories(query);
     }
 
@@ -116,9 +158,12 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
         adapter = new UploadCategoryAdapter(categoryItem -> {
             presenter.onCategoryItemClicked(categoryItem);
             return Unit.INSTANCE;
-        });
-        rvCategories.setLayoutManager(new LinearLayoutManager(getContext()));
-        rvCategories.setAdapter(adapter);
+        }, nearbyPlaceCategory);
+
+        if (binding!=null) {
+            binding.rvCategories.setLayoutManager(new LinearLayoutManager(getContext()));
+            binding.rvCategories.setAdapter(adapter);
+        }
     }
 
     @Override
@@ -129,63 +174,252 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
     }
 
     @Override
-    public void showProgress(boolean shouldShow) {
-        pbCategories.setVisibility(shouldShow ? View.VISIBLE : View.GONE);
-    }
-
-    @Override
-    public void showError(String error) {
-        tilContainerEtSearch.setError(error);
-    }
-
-    @Override
-    public void showError(int stringResourceId) {
-        tilContainerEtSearch.setError(getString(stringResourceId));
-    }
-
-    @Override
-    public void setCategories(List<CategoryItem> categories) {
-        if(categories==null) {
-            adapter.clear();
+    public void showProgress(final boolean shouldShow) {
+        if (binding != null) {
+            binding.pbCategories.setVisibility(shouldShow ? View.VISIBLE : View.GONE);
         }
-        else{
+    }
+
+    @Override
+    public void showError(final String error) {
+        if (binding != null) {
+            binding.tilContainerSearch.setError(error);
+        }
+    }
+
+    @Override
+    public void showError(final int stringResourceId) {
+        if (binding != null) {
+            binding.tilContainerSearch.setError(getString(stringResourceId));
+        }
+    }
+
+    @Override
+    public void setCategories(final List<CategoryItem> categories) {
+        if (categories == null) {
+            adapter.clear();
+        } else {
             adapter.setItems(categories);
         }
+        adapter.notifyDataSetChanged();
+
+
+        if (binding == null) {
+            return;
+        }
+        // Nested waiting for search result data to load into the category
+        // list and smoothly scroll to the top of the search result list.
+        binding.rvCategories.post(new Runnable() {
+            @Override
+            public void run() {
+                binding.rvCategories.smoothScrollToPosition(0);
+                binding.rvCategories.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        binding.rvCategories.smoothScrollToPosition(0);
+                    }
+                });
+            }
+        });
     }
 
     @Override
     public void goToNextScreen() {
-        callback.onNextButtonClicked(callback.getIndexInViewFlipper(this));
+        if (callback != null){
+            callback.onNextButtonClicked(callback.getIndexInViewFlipper(this));
+        }
     }
 
     @Override
     public void showNoCategorySelected() {
-        DialogUtil.showAlertDialog(getActivity(),
+        if (media == null) {
+            DialogUtil.showAlertDialog(requireActivity(),
                 getString(R.string.no_categories_selected),
                 getString(R.string.no_categories_selected_warning_desc),
                 getString(R.string.continue_message),
                 getString(R.string.cancel),
-                () -> goToNextScreen(),
+                this::goToNextScreen,
                 null);
+        } else {
+            Toast.makeText(requireContext(), getString(R.string.no_categories_selected),
+                Toast.LENGTH_SHORT).show();
+            presenter.clearPreviousSelection();
+            goBackToPreviousScreen();
+        }
 
     }
 
-    @OnClick(R.id.btn_next)
+    /**
+     * Gets existing categories from media
+     */
+    @Override
+    public List<String> getExistingCategories() {
+        return (media == null) ? null : media.getCategories();
+    }
+
+    /**
+     * Returns required context
+     */
+    @NonNull
+    @Override
+    public Context getFragmentContext() {
+        return requireContext();
+    }
+
+    /**
+     * Returns to previous fragment
+     */
+    @Override
+    public void goBackToPreviousScreen() {
+        getFragmentManager().popBackStack();
+    }
+
+    /**
+     * Shows the progress dialog
+     */
+    @Override
+    public void showProgressDialog() {
+        progressDialog = new ProgressDialog(requireContext());
+        progressDialog.setMessage(getString(R.string.please_wait));
+        progressDialog.show();
+    }
+
+    /**
+     * Hides the progress dialog
+     */
+    @Override
+    public void dismissProgressDialog() {
+        if (progressDialog != null) {
+            progressDialog.dismiss();
+        }
+    }
+
+    /**
+     * Refreshes the categories
+     */
+    @Override
+    public void refreshCategories() {
+        final MediaDetailFragment mediaDetailFragment = (MediaDetailFragment) getParentFragment();
+        assert mediaDetailFragment != null;
+        mediaDetailFragment.updateCategories();
+    }
+
+    /**
+     *
+     */
+    @Override
+    public void navigateToLoginScreen() {
+        final String username = sessionManager.getUserName();
+        final CommonsApplication.BaseLogoutListener logoutListener = new CommonsApplication.BaseLogoutListener(
+            requireActivity(),
+            requireActivity().getString(R.string.invalid_login_message),
+            username
+        );
+
+        CommonsApplication.getInstance().clearApplicationData(
+            requireActivity(), logoutListener);
+    }
+
     public void onNextButtonClicked() {
-        presenter.verifyCategories();
+        if (media != null) {
+            presenter.updateCategories(media, wikiText);
+        } else {
+            presenter.verifyCategories();
+        }
     }
 
-    @OnClick(R.id.btn_previous)
     public void onPreviousButtonClicked() {
-        callback.onPreviousButtonClicked(callback.getIndexInViewFlipper(this));
+        if (media != null) {
+            presenter.clearPreviousSelection();
+            adapter.setItems(null);
+            final MediaDetailFragment mediaDetailFragment = (MediaDetailFragment) getParentFragment();
+            assert mediaDetailFragment != null;
+            mediaDetailFragment.onResume();
+            goBackToPreviousScreen();
+        } else {
+            if (callback != null) {
+                callback.onPreviousButtonClicked(callback.getIndexInViewFlipper(this));
+            }
+        }
     }
 
     @Override
     protected void onBecameVisible() {
         super.onBecameVisible();
-        final Editable text = etSearch.getText();
+        if (binding == null) {
+           return;
+        }
+        presenter.selectCategories();
+        final Editable text = binding.etSearch.getText();
         if (text != null) {
             presenter.searchForCategories(text.toString());
         }
+    }
+
+    /**
+     * Hides the action bar while opening editing fragment
+     */
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        if (media != null) {
+            binding.etSearch.setOnKeyListener((v, keyCode, event) -> {
+                if (keyCode == KeyEvent.KEYCODE_BACK) {
+                    binding.etSearch.clearFocus();
+                    presenter.clearPreviousSelection();
+                    final MediaDetailFragment mediaDetailFragment = (MediaDetailFragment) getParentFragment();
+                    assert mediaDetailFragment != null;
+                    mediaDetailFragment.onResume();
+                    goBackToPreviousScreen();
+                    return true;
+                }
+                return false;
+            });
+
+            requireView().setFocusableInTouchMode(true);
+            getView().requestFocus();
+            getView().setOnKeyListener((v, keyCode, event) -> {
+                if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK) {
+                    presenter.clearPreviousSelection();
+                    final MediaDetailFragment mediaDetailFragment = (MediaDetailFragment) getParentFragment();
+                    assert mediaDetailFragment != null;
+                    mediaDetailFragment.onResume();
+                    goBackToPreviousScreen();
+                    return true;
+                }
+                return false;
+            });
+
+            Objects.requireNonNull(
+                ((AppCompatActivity) requireActivity()).getSupportActionBar())
+                .hide();
+
+            if (getParentFragment().getParentFragment().getParentFragment()
+                instanceof ContributionsFragment) {
+                ((ContributionsFragment) (getParentFragment()
+                    .getParentFragment().getParentFragment())).binding.cardViewNearby
+                    .setVisibility(View.GONE);
+            }
+        }
+    }
+
+    /**
+     * Shows the action bar while closing editing fragment
+     */
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (media != null) {
+            Objects.requireNonNull(
+                ((AppCompatActivity) requireActivity()).getSupportActionBar())
+                .show();
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        binding = null;
     }
 }

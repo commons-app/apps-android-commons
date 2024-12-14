@@ -1,47 +1,59 @@
 package fr.free.nrw.commons.contributions;
 
+import static android.content.Context.SENSOR_SERVICE;
 import static fr.free.nrw.commons.contributions.Contribution.STATE_FAILED;
 import static fr.free.nrw.commons.contributions.Contribution.STATE_PAUSED;
 import static fr.free.nrw.commons.nearby.fragments.NearbyParentFragment.WLM_URL;
+import static fr.free.nrw.commons.profile.ProfileActivity.KEY_USERNAME;
+import static fr.free.nrw.commons.utils.LengthUtils.computeBearing;
 import static fr.free.nrw.commons.utils.LengthUtils.formatDistanceBetween;
 
 import android.Manifest;
+import android.Manifest.permission;
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.MenuItem.OnMenuItemClickListener;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
-import android.widget.LinearLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager.OnBackStackChangedListener;
 import androidx.fragment.app.FragmentTransaction;
-import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.auth.SessionManager;
-import fr.free.nrw.commons.notification.Notification;
+import fr.free.nrw.commons.databinding.FragmentContributionsBinding;
+import fr.free.nrw.commons.notification.models.Notification;
 import fr.free.nrw.commons.notification.NotificationController;
+import fr.free.nrw.commons.profile.ProfileActivity;
 import fr.free.nrw.commons.theme.BaseActivity;
-import java.text.ParseException;
+import fr.free.nrw.commons.upload.UploadProgressActivity;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import javax.inject.Inject;
 import javax.inject.Named;
 import androidx.work.WorkManager;
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.campaigns.Campaign;
+import fr.free.nrw.commons.campaigns.models.Campaign;
 import fr.free.nrw.commons.campaigns.CampaignView;
 import fr.free.nrw.commons.campaigns.CampaignsPresenter;
 import fr.free.nrw.commons.campaigns.ICampaignsView;
@@ -72,18 +84,29 @@ import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
 public class ContributionsFragment
-        extends CommonsDaggerSupportFragment
-        implements
-        OnBackStackChangedListener,
-        LocationUpdateListener,
+    extends CommonsDaggerSupportFragment
+    implements
+    OnBackStackChangedListener,
+    LocationUpdateListener,
     MediaDetailProvider,
-    ICampaignsView, ContributionsContract.View, Callback{
-    @Inject @Named("default_preferences") JsonKvStore store;
-    @Inject NearbyController nearbyController;
-    @Inject OkHttpJsonApiClient okHttpJsonApiClient;
-    @Inject CampaignsPresenter presenter;
-    @Inject LocationServiceManager locationManager;
-    @Inject NotificationController notificationController;
+    SensorEventListener,
+    ICampaignsView, ContributionsContract.View, Callback {
+
+    @Inject
+    @Named("default_preferences")
+    JsonKvStore store;
+    @Inject
+    NearbyController nearbyController;
+    @Inject
+    OkHttpJsonApiClient okHttpJsonApiClient;
+    @Inject
+    CampaignsPresenter presenter;
+    @Inject
+    LocationServiceManager locationManager;
+    @Inject
+    NotificationController notificationController;
+    @Inject
+    ContributionController contributionController;
 
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
@@ -91,27 +114,64 @@ public class ContributionsFragment
     private static final String CONTRIBUTION_LIST_FRAGMENT_TAG = "ContributionListFragmentTag";
     private MediaDetailPagerFragment mediaDetailPagerFragment;
     static final String MEDIA_DETAIL_PAGER_FRAGMENT_TAG = "MediaDetailFragmentTag";
+    private static final int MAX_RETRIES = 10;
 
-    @BindView(R.id.card_view_nearby) public NearbyNotificationCardView nearbyNotificationCardView;
-    @BindView(R.id.campaigns_view) CampaignView campaignView;
-    @BindView(R.id.limited_connection_enabled_layout) LinearLayout limitedConnectionEnabledLayout;
-    @BindView(R.id.limited_connection_description_text_view) TextView limitedConnectionDescriptionTextView;
+    public FragmentContributionsBinding binding;
 
-    @Inject ContributionsPresenter contributionsPresenter;
+    @Inject
+    ContributionsPresenter contributionsPresenter;
 
     @Inject
     SessionManager sessionManager;
 
-    private LatLng curLatLng;
+    private LatLng currentLatLng;
 
-    private boolean firstLocationUpdate = true;
     private boolean isFragmentAttachedBefore = false;
     private View checkBoxView;
     private CheckBox checkBox;
 
     public TextView notificationCount;
 
+    public TextView pendingUploadsCountTextView;
+
+    public TextView uploadsErrorTextView;
+
+    public ImageView pendingUploadsImageView;
+
     private Campaign wlmCampaign;
+
+    String userName;
+    private boolean isUserProfile;
+
+    private SensorManager mSensorManager;
+    private Sensor mLight;
+    private float direction;
+    private ActivityResultLauncher<String[]> nearbyLocationPermissionLauncher = registerForActivityResult(
+        new ActivityResultContracts.RequestMultiplePermissions(),
+        new ActivityResultCallback<Map<String, Boolean>>() {
+            @Override
+            public void onActivityResult(Map<String, Boolean> result) {
+                boolean areAllGranted = true;
+                for (final boolean b : result.values()) {
+                    areAllGranted = areAllGranted && b;
+                }
+
+                if (areAllGranted) {
+                    onLocationPermissionGranted();
+                } else {
+                    if (shouldShowRequestPermissionRationale(
+                        Manifest.permission.ACCESS_FINE_LOCATION)
+                        && store.getBoolean("displayLocationPermissionForCardView", true)
+                        && !store.getBoolean("doNotAskForLocationPermission", false)
+                        && (((MainActivity) getActivity()).activeFragment
+                        == ActiveFragment.CONTRIBUTIONS)) {
+                        binding.cardViewNearby.permissionType = NearbyNotificationCardView.PermissionType.ENABLE_LOCATION_PERMISSION;
+                    } else {
+                        displayYouWontSeeNearbyMessage();
+                    }
+                }
+            }
+        });
 
     @NonNull
     public static ContributionsFragment newInstance() {
@@ -125,23 +185,31 @@ public class ContributionsFragment
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (getArguments() != null && getArguments().getString(KEY_USERNAME) != null) {
+            userName = getArguments().getString(KEY_USERNAME);
+            isUserProfile = true;
+        }
+        mSensorManager = (SensorManager) getActivity().getSystemService(SENSOR_SERVICE);
+        mLight = mSensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION);
     }
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_contributions, container, false);
-        ButterKnife.bind(this, view);
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
+        @Nullable Bundle savedInstanceState) {
+
+        binding = FragmentContributionsBinding.inflate(inflater, container, false);
+
         initWLMCampaign();
         presenter.onAttachView(this);
         contributionsPresenter.onAttachView(this);
-        campaignView.setVisibility(View.GONE);
+        binding.campaignsView.setVisibility(View.GONE);
         checkBoxView = View.inflate(getActivity(), R.layout.nearby_permission_dialog, null);
         checkBox = (CheckBox) checkBoxView.findViewById(R.id.never_ask_again);
         checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
                 // Do not ask for permission on activity start again
-                store.putBoolean("displayLocationPermissionForCardView",false);
+                store.putBoolean("displayLocationPermissionForCardView", false);
             }
         });
 
@@ -154,10 +222,12 @@ public class ContributionsFragment
         }
 
         initFragments();
-        upDateUploadCount();
-        if(shouldShowMediaDetailsFragment){
+        if (!isUserProfile) {
+            upDateUploadCount();
+        }
+        if (shouldShowMediaDetailsFragment) {
             showMediaDetailPagerFragment();
-        }else{
+        } else {
             if (mediaDetailPagerFragment != null) {
                 removeFragment(mediaDetailPagerFragment);
             }
@@ -165,12 +235,11 @@ public class ContributionsFragment
         }
 
         if (!ConfigUtils.isBetaFlavour() && sessionManager.isUserLoggedIn()
-            && sessionManager.getCurrentAccount() != null) {
+            && sessionManager.getCurrentAccount() != null && !isUserProfile) {
             setUploadCount();
         }
-        limitedConnectionEnabledLayout.setOnClickListener(toggleDescriptionListener);
         setHasOptionsMenu(true);
-        return view;
+        return binding.getRoot();
     }
 
     /**
@@ -183,16 +252,45 @@ public class ContributionsFragment
     }
 
     @Override
-    public void onCreateOptionsMenu(@NonNull final Menu menu, @NonNull final MenuInflater inflater) {
+    public void onCreateOptionsMenu(@NonNull final Menu menu,
+        @NonNull final MenuInflater inflater) {
+
+        // Removing contributions menu items for ProfileActivity
+        if (getActivity() instanceof ProfileActivity) {
+            return;
+        }
+
         inflater.inflate(R.menu.contribution_activity_notification_menu, menu);
 
         MenuItem notificationsMenuItem = menu.findItem(R.id.notifications);
         final View notification = notificationsMenuItem.getActionView();
         notificationCount = notification.findViewById(R.id.notification_count_badge);
+        MenuItem uploadMenuItem = menu.findItem(R.id.upload_tab);
+        final View uploadMenuItemActionView = uploadMenuItem.getActionView();
+        pendingUploadsCountTextView = uploadMenuItemActionView.findViewById(
+            R.id.pending_uploads_count_badge);
+        uploadsErrorTextView = uploadMenuItemActionView.findViewById(
+            R.id.uploads_error_count_badge);
+        pendingUploadsImageView = uploadMenuItemActionView.findViewById(
+            R.id.pending_uploads_image_view);
+        if (pendingUploadsImageView != null) {
+            pendingUploadsImageView.setOnClickListener(view -> {
+                startActivity(new Intent(getContext(), UploadProgressActivity.class));
+            });
+        }
+        if (pendingUploadsCountTextView != null) {
+            pendingUploadsCountTextView.setOnClickListener(view -> {
+                startActivity(new Intent(getContext(), UploadProgressActivity.class));
+            });
+        }
+        if (uploadsErrorTextView != null) {
+            uploadsErrorTextView.setOnClickListener(view -> {
+                startActivity(new Intent(getContext(), UploadProgressActivity.class));
+            });
+        }
         notification.setOnClickListener(view -> {
-            NotificationActivity.startYourself(getContext(), "unread");
+            NotificationActivity.Companion.startYourself(getContext(), "unread");
         });
-        updateLimitedConnectionToggle(menu);
     }
 
     @SuppressLint("CheckResult")
@@ -204,7 +302,35 @@ public class ContributionsFragment
                 throwable -> Timber.e(throwable, "Error occurred while loading notifications")));
     }
 
-    public void scrollToTop( ){
+    /**
+     * Temporarily disabled, see issue [https://github.com/commons-app/apps-android-commons/issues/5847]
+     * Sets the visibility of the upload icon based on the number of failed and pending
+     * contributions.
+     */
+//    public void setUploadIconVisibility() {
+//        contributionController.getFailedAndPendingContributions();
+//        contributionController.failedAndPendingContributionList.observe(getViewLifecycleOwner(),
+//            list -> {
+//                updateUploadIcon(list.size());
+//            });
+//    }
+
+    /**
+     * Sets the count for the upload icon based on the number of pending and failed contributions.
+     */
+    public void setUploadIconCount() {
+        contributionController.getPendingContributions();
+        contributionController.pendingContributionList.observe(getViewLifecycleOwner(),
+            list -> {
+                updatePendingIcon(list.size());
+            });
+        contributionController.getFailedContributions();
+        contributionController.failedContributionList.observe(getViewLifecycleOwner(), list -> {
+            updateErrorIcon(list.size());
+        });
+    }
+
+    public void scrollToTop() {
         if (contributionsListFragment != null) {
             contributionsListFragment.scrollToTop();
         }
@@ -218,34 +344,6 @@ public class ContributionsFragment
             notificationCount.setVisibility(View.VISIBLE);
             notificationCount.setText(String.valueOf(notificationList.size()));
         }
-    }
-
-    public void updateLimitedConnectionToggle(Menu menu) {
-        MenuItem checkable = menu.findItem(R.id.toggle_limited_connection_mode);
-        boolean isEnabled = store
-            .getBoolean(CommonsApplication.IS_LIMITED_CONNECTION_MODE_ENABLED, false);
-
-        checkable.setChecked(isEnabled);
-        if (isEnabled) {
-            limitedConnectionEnabledLayout.setVisibility(View.VISIBLE);
-        } else {
-            limitedConnectionEnabledLayout.setVisibility(View.GONE);
-        }
-        checkable.setIcon((isEnabled) ? R.drawable.ic_baseline_cloud_off_24:R.drawable.ic_baseline_cloud_queue_24);
-        checkable.setOnMenuItemClickListener(new OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                ((MainActivity) getActivity()).toggleLimitedConnectionMode();
-                boolean isEnabled = store.getBoolean(CommonsApplication.IS_LIMITED_CONNECTION_MODE_ENABLED, false);
-                if (isEnabled) {
-                    limitedConnectionEnabledLayout.setVisibility(View.VISIBLE);
-                } else {
-                    limitedConnectionEnabledLayout.setVisibility(View.GONE);
-                }
-                checkable.setIcon((isEnabled) ? R.drawable.ic_baseline_cloud_off_24:R.drawable.ic_baseline_cloud_queue_24);
-                return false;
-            }
-        });
     }
 
     @Override
@@ -269,28 +367,31 @@ public class ContributionsFragment
      */
     private void showContributionsListFragment() {
         // show nearby card view on contributions list is visible
-        if (nearbyNotificationCardView != null) {
+        if (binding.cardViewNearby != null && !isUserProfile) {
             if (store.getBoolean("displayNearbyCardView", true)) {
-                if (nearbyNotificationCardView.cardViewVisibilityState
+                if (binding.cardViewNearby.cardViewVisibilityState
                     == NearbyNotificationCardView.CardViewVisibilityState.READY) {
-                    nearbyNotificationCardView.setVisibility(View.VISIBLE);
+                    binding.cardViewNearby.setVisibility(View.VISIBLE);
                 }
             } else {
-                nearbyNotificationCardView.setVisibility(View.GONE);
+                binding.cardViewNearby.setVisibility(View.GONE);
             }
         }
-        showFragment(contributionsListFragment, CONTRIBUTION_LIST_FRAGMENT_TAG, mediaDetailPagerFragment);
+        showFragment(contributionsListFragment, CONTRIBUTION_LIST_FRAGMENT_TAG,
+            mediaDetailPagerFragment);
     }
 
     private void showMediaDetailPagerFragment() {
         // hide nearby card view on media detail is visible
         setupViewForMediaDetails();
-        showFragment(mediaDetailPagerFragment, MEDIA_DETAIL_PAGER_FRAGMENT_TAG, contributionsListFragment);
+        showFragment(mediaDetailPagerFragment, MEDIA_DETAIL_PAGER_FRAGMENT_TAG,
+            contributionsListFragment);
     }
 
     private void setupViewForMediaDetails() {
-        campaignView.setVisibility(View.GONE);
-        nearbyNotificationCardView.setVisibility(View.GONE);
+        if (binding != null) {
+            binding.campaignsView.setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -301,6 +402,9 @@ public class ContributionsFragment
     private void initFragments() {
         if (null == contributionsListFragment) {
             contributionsListFragment = new ContributionsListFragment();
+            Bundle contributionsListBundle = new Bundle();
+            contributionsListBundle.putString(KEY_USERNAME, userName);
+            contributionsListFragment.setArguments(contributionsListBundle);
         }
 
         if (shouldShowMediaDetailsFragment) {
@@ -309,7 +413,8 @@ public class ContributionsFragment
             showContributionsListFragment();
         }
 
-        showFragment(contributionsListFragment, CONTRIBUTION_LIST_FRAGMENT_TAG, mediaDetailPagerFragment);
+        showFragment(contributionsListFragment, CONTRIBUTION_LIST_FRAGMENT_TAG,
+            mediaDetailPagerFragment);
     }
 
     /**
@@ -324,23 +429,23 @@ public class ContributionsFragment
         if (fragment.isAdded() && otherFragment != null) {
             transaction.hide(otherFragment);
             transaction.show(fragment);
-            transaction.addToBackStack(CONTRIBUTION_LIST_FRAGMENT_TAG);
+            transaction.addToBackStack(tag);
             transaction.commit();
             getChildFragmentManager().executePendingTransactions();
         } else if (fragment.isAdded() && otherFragment == null) {
             transaction.show(fragment);
-            transaction.addToBackStack(CONTRIBUTION_LIST_FRAGMENT_TAG);
+            transaction.addToBackStack(tag);
             transaction.commit();
             getChildFragmentManager().executePendingTransactions();
-        }else if (!fragment.isAdded() && otherFragment != null ) {
+        } else if (!fragment.isAdded() && otherFragment != null) {
             transaction.hide(otherFragment);
             transaction.add(R.id.root_frame, fragment, tag);
-            transaction.addToBackStack(CONTRIBUTION_LIST_FRAGMENT_TAG);
+            transaction.addToBackStack(tag);
             transaction.commit();
             getChildFragmentManager().executePendingTransactions();
         } else if (!fragment.isAdded()) {
             transaction.replace(R.id.root_frame, fragment, tag);
-            transaction.addToBackStack(CONTRIBUTION_LIST_FRAGMENT_TAG);
+            transaction.addToBackStack(tag);
             transaction.commit();
             getChildFragmentManager().executePendingTransactions();
         }
@@ -357,21 +462,21 @@ public class ContributionsFragment
     @SuppressWarnings("ConstantConditions")
     private void setUploadCount() {
         compositeDisposable.add(okHttpJsonApiClient
-                .getUploadCount(((MainActivity)getActivity()).sessionManager.getCurrentAccount().name)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(this::displayUploadCount,
-                        t -> Timber.e(t, "Fetching upload count failed")
-                ));
+            .getUploadCount(((MainActivity) getActivity()).sessionManager.getCurrentAccount().name)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(this::displayUploadCount,
+                t -> Timber.e(t, "Fetching upload count failed")
+            ));
     }
 
     private void displayUploadCount(Integer uploadCount) {
         if (getActivity().isFinishing()
-                || getResources() == null) {
+            || getResources() == null) {
             return;
         }
 
-        ((MainActivity)getActivity()).setNumOfUploads(uploadCount);
+        ((MainActivity) getActivity()).setNumOfUploads(uploadCount);
 
     }
 
@@ -380,6 +485,7 @@ public class ContributionsFragment
         super.onPause();
         locationManager.removeLocationListener(this);
         locationManager.unregisterLocationManager();
+        mSensorManager.unregisterListener(this);
     }
 
     @Override
@@ -391,100 +497,138 @@ public class ContributionsFragment
     public void onResume() {
         super.onResume();
         contributionsPresenter.onAttachView(this);
-        firstLocationUpdate = true;
         locationManager.addLocationListener(this);
-        nearbyNotificationCardView.permissionRequestButton.setOnClickListener(v -> {
+
+        if (binding == null) {
+            return;
+        }
+
+        binding.cardViewNearby.permissionRequestButton.setOnClickListener(v -> {
             showNearbyCardPermissionRationale();
         });
 
         // Notification cards should only be seen on contributions list, not in media details
-        if (mediaDetailPagerFragment == null) {
+        if (mediaDetailPagerFragment == null && !isUserProfile) {
             if (store.getBoolean("displayNearbyCardView", true)) {
                 checkPermissionsAndShowNearbyCardView();
-                if (nearbyNotificationCardView.cardViewVisibilityState == NearbyNotificationCardView.CardViewVisibilityState.READY) {
-                    nearbyNotificationCardView.setVisibility(View.VISIBLE);
+
+                // Calling nearby card to keep showing it even when user clicks on it and comes back
+                try {
+                    updateClosestNearbyCardViewInfo();
+                } catch (Exception e) {
+                    Timber.e(e);
+                }
+                if (binding.cardViewNearby.cardViewVisibilityState
+                    == NearbyNotificationCardView.CardViewVisibilityState.READY) {
+                    binding.cardViewNearby.setVisibility(View.VISIBLE);
                 }
 
             } else {
                 // Hide nearby notification card view if related shared preferences is false
-                nearbyNotificationCardView.setVisibility(View.GONE);
+                binding.cardViewNearby.setVisibility(View.GONE);
             }
 
-            setNotificationCount();
-            fetchCampaigns();
+            // Notification Count and Campaigns should not be set, if it is used in User Profile
+            if (!isUserProfile) {
+                setNotificationCount();
+                fetchCampaigns();
+                // Temporarily disabled, see issue [https://github.com/commons-app/apps-android-commons/issues/5847]
+                // setUploadIconVisibility();
+                setUploadIconCount();
+            }
         }
+        mSensorManager.registerListener(this, mLight, SensorManager.SENSOR_DELAY_UI);
     }
 
     private void checkPermissionsAndShowNearbyCardView() {
-        if (PermissionUtils.hasPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION)) {
+        if (PermissionUtils.hasPermission(getActivity(),
+            new String[]{Manifest.permission.ACCESS_FINE_LOCATION})) {
             onLocationPermissionGranted();
         } else if (shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_FINE_LOCATION)
-                && store.getBoolean("displayLocationPermissionForCardView", true)
-                && !store.getBoolean("doNotAskForLocationPermission", false)
-                && (((MainActivity) getActivity()).activeFragment == ActiveFragment.CONTRIBUTIONS)) {
-            nearbyNotificationCardView.permissionType = NearbyNotificationCardView.PermissionType.ENABLE_LOCATION_PERMISSION;
+            && store.getBoolean("displayLocationPermissionForCardView", true)
+            && !store.getBoolean("doNotAskForLocationPermission", false)
+            && (((MainActivity) getActivity()).activeFragment == ActiveFragment.CONTRIBUTIONS)) {
+            binding.cardViewNearby.permissionType = NearbyNotificationCardView.PermissionType.ENABLE_LOCATION_PERMISSION;
             showNearbyCardPermissionRationale();
         }
     }
 
     private void requestLocationPermission() {
-        PermissionUtils.checkPermissionsAndPerformAction(getActivity(),
-                Manifest.permission.ACCESS_FINE_LOCATION,
-                this::onLocationPermissionGranted,
-                this::displayYouWontSeeNearbyMessage,
-                -1,
-                -1);
+        nearbyLocationPermissionLauncher.launch(new String[]{permission.ACCESS_FINE_LOCATION});
     }
 
     private void onLocationPermissionGranted() {
-        nearbyNotificationCardView.permissionType = NearbyNotificationCardView.PermissionType.NO_PERMISSION_NEEDED;
+        binding.cardViewNearby.permissionType = NearbyNotificationCardView.PermissionType.NO_PERMISSION_NEEDED;
         locationManager.registerLocationManager();
     }
 
     private void showNearbyCardPermissionRationale() {
         DialogUtil.showAlertDialog(getActivity(),
-                getString(R.string.nearby_card_permission_title),
-                getString(R.string.nearby_card_permission_explanation),
-                this::requestLocationPermission,
-                this::displayYouWontSeeNearbyMessage,
-                checkBoxView,
-                false);
+            getString(R.string.nearby_card_permission_title),
+            getString(R.string.nearby_card_permission_explanation),
+            this::requestLocationPermission,
+            this::displayYouWontSeeNearbyMessage,
+            checkBoxView
+        );
     }
 
     private void displayYouWontSeeNearbyMessage() {
-        ViewUtil.showLongToast(getActivity(), getResources().getString(R.string.unable_to_display_nearest_place));
+        ViewUtil.showLongToast(getActivity(),
+            getResources().getString(R.string.unable_to_display_nearest_place));
+        // Set to true as the user doesn't want the app to ask for location permission anymore
         store.putBoolean("doNotAskForLocationPermission", true);
     }
 
 
     private void updateClosestNearbyCardViewInfo() {
-        curLatLng = locationManager.getLastLocation();
+        currentLatLng = locationManager.getLastLocation();
         compositeDisposable.add(Observable.fromCallable(() -> nearbyController
-                .loadAttractionsFromLocation(curLatLng, curLatLng, true, false, false)) // thanks to boolean, it will only return closest result
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(this::updateNearbyNotification,
-                        throwable -> {
-                            Timber.d(throwable);
-                            updateNearbyNotification(null);
-                        }));
+                .loadAttractionsFromLocation(currentLatLng, currentLatLng, true,
+                    false)) // thanks to boolean, it will only return closest result
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(this::updateNearbyNotification,
+                throwable -> {
+                    Timber.d(throwable);
+                    updateNearbyNotification(null);
+                }));
     }
 
-    private void updateNearbyNotification(@Nullable NearbyController.NearbyPlacesInfo nearbyPlacesInfo) {
-        if (nearbyPlacesInfo != null && nearbyPlacesInfo.placeList != null && nearbyPlacesInfo.placeList.size() > 0) {
-            Place closestNearbyPlace = nearbyPlacesInfo.placeList.get(0);
-            String distance = formatDistanceBetween(curLatLng, closestNearbyPlace.location);
-            closestNearbyPlace.setDistance(distance);
-            nearbyNotificationCardView.updateContent(closestNearbyPlace);
+    private void updateNearbyNotification(
+        @Nullable NearbyController.NearbyPlacesInfo nearbyPlacesInfo) {
+        if (nearbyPlacesInfo != null && nearbyPlacesInfo.placeList != null
+            && nearbyPlacesInfo.placeList.size() > 0) {
+            Place closestNearbyPlace = null;
+            // Find the first nearby place that has no image and exists
+            for (Place place : nearbyPlacesInfo.placeList) {
+                if (place.pic.equals("") && place.exists) {
+                    closestNearbyPlace = place;
+                    break;
+                }
+            }
+
+            if (closestNearbyPlace == null) {
+                binding.cardViewNearby.setVisibility(View.GONE);
+            } else {
+                String distance = formatDistanceBetween(currentLatLng, closestNearbyPlace.location);
+                closestNearbyPlace.setDistance(distance);
+                direction = (float) computeBearing(currentLatLng, closestNearbyPlace.location);
+                binding.cardViewNearby.updateContent(closestNearbyPlace);
+            }
         } else {
             // Means that no close nearby place is found
-            nearbyNotificationCardView.setVisibility(View.GONE);
+            binding.cardViewNearby.setVisibility(View.GONE);
+        }
+
+        // Prevent Nearby banner from appearing in Media Details, fixing bug https://github.com/commons-app/apps-android-commons/issues/4731
+        if (mediaDetailPagerFragment != null && !contributionsListFragment.isVisible()) {
+            binding.cardViewNearby.setVisibility(View.GONE);
         }
     }
 
     @Override
     public void onDestroy() {
-        try{
+        try {
             compositeDisposable.clear();
             getChildFragmentManager().removeOnBackStackChangedListener(this);
             locationManager.unregisterLocationManager();
@@ -498,22 +642,17 @@ public class ContributionsFragment
     @Override
     public void onLocationChangedSignificantly(LatLng latLng) {
         // Will be called if location changed more than 1000 meter
-        // Do nothing on slight changes for using network efficiently
-        firstLocationUpdate = false;
         updateClosestNearbyCardViewInfo();
     }
 
     @Override
     public void onLocationChangedSlightly(LatLng latLng) {
         /* Update closest nearby notification card onLocationChangedSlightly
-        If first time to update location after onResume, then no need to wait for significant
-        location change. Any closest location is better than no location
-        */
-        if (firstLocationUpdate) {
+         */
+        try {
             updateClosestNearbyCardViewInfo();
-            // Turn it to false, since it is not first location update anymore. To change closest location
-            // notification, we need to wait for a significant location change.
-            firstLocationUpdate = false;
+        } catch (Exception e) {
+            Timber.e(e);
         }
     }
 
@@ -523,7 +662,8 @@ public class ContributionsFragment
         updateClosestNearbyCardViewInfo();
     }
 
-    @Override public void onViewCreated(@NonNull View view,
+    @Override
+    public void onViewCreated(@NonNull View view,
         @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
     }
@@ -535,26 +675,35 @@ public class ContributionsFragment
      */
     private void fetchCampaigns() {
         if (Utils.isMonumentsEnabled(new Date())) {
-            campaignView.setCampaign(wlmCampaign);
-            campaignView.setVisibility(View.VISIBLE);
+            if (binding != null) {
+                binding.campaignsView.setCampaign(wlmCampaign);
+                binding.campaignsView.setVisibility(View.VISIBLE);
+            }
         } else if (store.getBoolean(CampaignView.CAMPAIGNS_DEFAULT_PREFERENCE, true)) {
             presenter.getCampaigns();
         } else {
-            campaignView.setVisibility(View.GONE);
+            if (binding != null) {
+                binding.campaignsView.setVisibility(View.GONE);
+            }
         }
     }
 
-    @Override public void showMessage(String message) {
+    @Override
+    public void showMessage(String message) {
         Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
     }
 
-    @Override public void showCampaigns(Campaign campaign) {
-        if (campaign != null) {
-            campaignView.setCampaign(campaign);
+    @Override
+    public void showCampaigns(Campaign campaign) {
+        if (campaign != null && !isUserProfile) {
+            if (binding != null) {
+                binding.campaignsView.setCampaign(campaign);
+            }
         }
     }
 
-    @Override public void onDestroyView() {
+    @Override
+    public void onDestroyView() {
         super.onDestroyView();
         presenter.onDetachView();
     }
@@ -564,40 +713,6 @@ public class ContributionsFragment
         if (mediaDetailPagerFragment != null) {
             mediaDetailPagerFragment.notifyDataSetChanged();
         }
-    }
-
-    /**
-     * Retry upload when it is failed
-     *
-     * @param contribution contribution to be retried
-     */
-    @Override
-    public void retryUpload(Contribution contribution) {
-        if (NetworkUtils.isInternetConnectionEstablished(getContext())) {
-            if (contribution.getState() == STATE_FAILED || contribution.getState() == STATE_PAUSED || contribution.getState()==Contribution.STATE_QUEUED_LIMITED_CONNECTION_MODE) {
-                contribution.setState(Contribution.STATE_QUEUED);
-                contributionsPresenter.saveContribution(contribution);
-                Timber.d("Restarting for %s", contribution.toString());
-            } else {
-                Timber.d("Skipping re-upload for non-failed %s", contribution.toString());
-            }
-        } else {
-            ViewUtil.showLongToast(getContext(), R.string.this_function_needs_network_connection);
-        }
-
-    }
-
-    /**
-     * Pauses the upload
-     * @param contribution
-     */
-    @Override
-    public void pauseUpload(Contribution contribution) {
-        //Pause the upload in the global singleton
-        CommonsApplication.pauseUploads.put(contribution.getPageId(), true);
-        //Retain the paused state in DB
-        contribution.setState(STATE_PAUSED);
-        contributionsPresenter.saveContribution(contribution);
     }
 
     /**
@@ -611,14 +726,64 @@ public class ContributionsFragment
     }
 
     /**
+     * Updates the visibility and text of the pending uploads count TextView based on the given
+     * count.
+     *
+     * @param pendingCount The number of pending uploads.
+     */
+    public void updatePendingIcon(int pendingCount) {
+        if (pendingUploadsCountTextView != null) {
+            if (pendingCount != 0) {
+                pendingUploadsCountTextView.setVisibility(View.VISIBLE);
+                pendingUploadsCountTextView.setText(String.valueOf(pendingCount));
+            } else {
+                pendingUploadsCountTextView.setVisibility(View.INVISIBLE);
+            }
+        }
+    }
+
+    /**
+     * Updates the visibility and text of the error uploads TextView based on the given count.
+     *
+     * @param errorCount The number of error uploads.
+     */
+    public void updateErrorIcon(int errorCount) {
+        if (uploadsErrorTextView != null) {
+            if (errorCount != 0) {
+                uploadsErrorTextView.setVisibility(View.VISIBLE);
+                uploadsErrorTextView.setText(String.valueOf(errorCount));
+            } else {
+                uploadsErrorTextView.setVisibility(View.GONE);
+            }
+        }
+    }
+
+    /**
+     * Temporarily disabled, see issue [https://github.com/commons-app/apps-android-commons/issues/5847]
+     * @param count The number of pending uploads.
+     */
+//    public void updateUploadIcon(int count) {
+//        if (pendingUploadsImageView != null) {
+//            if (count != 0) {
+//                pendingUploadsImageView.setVisibility(View.VISIBLE);
+//            } else {
+//                pendingUploadsImageView.setVisibility(View.GONE);
+//            }
+//        }
+//    }
+
+    /**
      * Replace whatever is in the current contributionsFragmentContainer view with
-     * mediaDetailPagerFragment, and preserve previous state in back stack. Called when user selects a
-     * contribution.
+     * mediaDetailPagerFragment, and preserve previous state in back stack. Called when user selects
+     * a contribution.
      */
     @Override
     public void showDetail(int position, boolean isWikipediaButtonDisplayed) {
         if (mediaDetailPagerFragment == null || !mediaDetailPagerFragment.isVisible()) {
-            mediaDetailPagerFragment = new MediaDetailPagerFragment();
+            mediaDetailPagerFragment = MediaDetailPagerFragment.newInstance(false, true);
+            if (isUserProfile) {
+                ((ProfileActivity) getActivity()).setScroll(false);
+            }
             showMediaDetailPagerFragment();
         }
         mediaDetailPagerFragment.showImage(position, isWikipediaButtonDisplayed);
@@ -640,19 +805,31 @@ public class ContributionsFragment
     }
 
     public boolean backButtonClicked() {
-        if (null != mediaDetailPagerFragment && mediaDetailPagerFragment.isVisible()) {
-            if (store.getBoolean("displayNearbyCardView", true)) {
-                if (nearbyNotificationCardView.cardViewVisibilityState == NearbyNotificationCardView.CardViewVisibilityState.READY) {
-                    nearbyNotificationCardView.setVisibility(View.VISIBLE);
+        if (mediaDetailPagerFragment != null && mediaDetailPagerFragment.isVisible()) {
+            if (store.getBoolean("displayNearbyCardView", true) && !isUserProfile) {
+                if (binding.cardViewNearby.cardViewVisibilityState
+                    == NearbyNotificationCardView.CardViewVisibilityState.READY) {
+                    binding.cardViewNearby.setVisibility(View.VISIBLE);
                 }
             } else {
-                nearbyNotificationCardView.setVisibility(View.GONE);
+                binding.cardViewNearby.setVisibility(View.GONE);
             }
             removeFragment(mediaDetailPagerFragment);
-            showFragment(contributionsListFragment, CONTRIBUTION_LIST_FRAGMENT_TAG, mediaDetailPagerFragment);
-            ((BaseActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-            ((MainActivity)getActivity()).showTabs();
-            fetchCampaigns();
+            showFragment(contributionsListFragment, CONTRIBUTION_LIST_FRAGMENT_TAG,
+                mediaDetailPagerFragment);
+            if (isUserProfile) {
+                // Fragment is associated with ProfileActivity
+                // Enable ParentViewPager Scroll
+                ((ProfileActivity) getActivity()).setScroll(true);
+            } else {
+                fetchCampaigns();
+            }
+            if (getActivity() instanceof MainActivity) {
+                // Fragment is associated with MainActivity
+                ((BaseActivity) getActivity()).getSupportActionBar()
+                    .setDisplayHomeAsUpEnabled(false);
+                ((MainActivity) getActivity()).showTabs();
+            }
             return true;
         }
         return false;
@@ -670,13 +847,67 @@ public class ContributionsFragment
     void upDateUploadCount() {
         WorkManager.getInstance(getContext())
             .getWorkInfosForUniqueWorkLiveData(UploadWorker.class.getSimpleName()).observe(
-            getViewLifecycleOwner(), workInfos -> {
-                if (workInfos.size() > 0) {
-                    setUploadCount();
-                }
-            });
+                getViewLifecycleOwner(), workInfos -> {
+                    if (workInfos.size() > 0) {
+                        setUploadCount();
+                    }
+                });
     }
 
+
+    /**
+     * Restarts the upload process for a contribution
+     *
+     * @param contribution
+     */
+    public void restartUpload(Contribution contribution) {
+        contribution.setDateUploadStarted(Calendar.getInstance().getTime());
+        if (contribution.getState() == Contribution.STATE_FAILED) {
+            if (contribution.getErrorInfo() == null) {
+                contribution.setChunkInfo(null);
+                contribution.setTransferred(0);
+            }
+            contributionsPresenter.checkDuplicateImageAndRestartContribution(contribution);
+        } else {
+            contribution.setState(Contribution.STATE_QUEUED);
+            contributionsPresenter.saveContribution(contribution);
+            Timber.d("Restarting for %s", contribution.toString());
+        }
+    }
+
+    /**
+     * Retry upload when it is failed
+     *
+     * @param contribution contribution to be retried
+     */
+    public void retryUpload(Contribution contribution) {
+        if (NetworkUtils.isInternetConnectionEstablished(getContext())) {
+            if (contribution.getState() == STATE_PAUSED) {
+                restartUpload(contribution);
+            } else if (contribution.getState() == STATE_FAILED) {
+                int retries = contribution.getRetries();
+                // TODO: Improve UX. Additional details: https://github.com/commons-app/apps-android-commons/pull/5257#discussion_r1304662562
+                /* Limit the number of retries for a failed upload
+                   to handle cases like invalid filename as such uploads
+                   will never be successful */
+                if (retries < MAX_RETRIES) {
+                    contribution.setRetries(retries + 1);
+                    Timber.d("Retried uploading %s %d times", contribution.getMedia().getFilename(),
+                        retries + 1);
+                    restartUpload(contribution);
+                } else {
+                    // TODO: Show the exact reason for failure
+                    Toast.makeText(getContext(),
+                        R.string.retry_limit_reached, Toast.LENGTH_SHORT).show();
+                }
+            } else {
+                Timber.d("Skipping re-upload for non-failed %s", contribution.toString());
+            }
+        } else {
+            ViewUtil.showLongToast(getContext(), R.string.this_function_needs_network_connection);
+        }
+
+    }
 
     /**
      * Reload media detail fragment once media is nominated
@@ -685,29 +916,25 @@ public class ContributionsFragment
      */
     @Override
     public void refreshNominatedMedia(int index) {
-        if(mediaDetailPagerFragment != null && !contributionsListFragment.isVisible()) {
+        if (mediaDetailPagerFragment != null && !contributionsListFragment.isVisible()) {
             removeFragment(mediaDetailPagerFragment);
-            mediaDetailPagerFragment = new MediaDetailPagerFragment(false, true);
+            mediaDetailPagerFragment = MediaDetailPagerFragment.newInstance(false, true);
             mediaDetailPagerFragment.showImage(index);
             showMediaDetailPagerFragment();
         }
     }
 
-  // click listener to toggle description that means uses can press the limited connection
-  // banner and description will hide. Tap again to show description.
-  private View.OnClickListener toggleDescriptionListener = new View.OnClickListener() {
+    /**
+     * When the device rotates, rotate the Nearby banner's compass arrow in tandem.
+     */
+    @Override
+    public void onSensorChanged(SensorEvent event) {
+        float rotateDegree = Math.round(event.values[0]);
+        binding.cardViewNearby.rotateCompass(rotateDegree, direction);
+    }
 
-      @Override
-      public void onClick(View view) {
-          View view2 = limitedConnectionDescriptionTextView;
-          if (view2.getVisibility() == View.GONE) {
-              view2.setVisibility(View.VISIBLE);
-          } else {
-              view2.setVisibility(View.GONE);
-          }
-      }
-  };
-
-
+    @Override
+    public void onAccuracyChanged(Sensor sensor, int accuracy) {
+        // Nothing to do.
+    }
 }
-

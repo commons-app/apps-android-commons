@@ -8,6 +8,11 @@
         android:title="@string/menu_bookmark"
         app:showAsAction="always" />
     <item
+      android:id="@+id/menu_copy_link"
+      android:icon="@drawable/menu_ic_copy_link_24dp"
+      android:title="@string/menu_copy_link"
+      app:showAsAction="always" />
+    <item
         android:id="@+id/menu_share_current_image"
         android:icon="@drawable/menu_ic_share_24dp"
         android:title="@string/menu_share"
@@ -33,6 +38,30 @@
     <item
       android:id="@+id/menu_view_user_page"
       android:title="@string/menu_view_user_page"
+      app:showAsAction="never" />
+    <item
+      android:id="@+id/menu_view_report"
+      android:title="@string/menu_view_report"
+      app:showAsAction="never" />
+<!-- 
+Setting visible and enabled to false as default because 
+we only want to show it in a very specific case 
+-->
+    <item
+      android:id="@+id/menu_view_set_white_background"
+      android:title="@string/menu_view_set_white_background"
+      android:visible="false"
+      android:enabled="false"
+      app:showAsAction="never" />
+<!-- 
+Setting visible and enabled to false as default because 
+we only want to show it in a very specific case 
+-->
+    <item
+      android:id="@+id/menu_view_set_black_background"
+      android:title="@string/menu_view_set_black_background"
+      android:visible="false"
+      android:enabled="false"
       app:showAsAction="never" />
 
 </menu>

@@ -1,17 +1,25 @@
 package fr.free.nrw.commons.upload
 
+import androidx.lifecycle.MutableLiveData
 import categoryItem
-import com.nhaarman.mockitokotlin2.*
+import com.nhaarman.mockitokotlin2.any
+import com.nhaarman.mockitokotlin2.mock
+import com.nhaarman.mockitokotlin2.verify
+import com.nhaarman.mockitokotlin2.verifyNoMoreInteractions
+import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.R
+import fr.free.nrw.commons.category.CategoryItem
 import fr.free.nrw.commons.repository.UploadRepository
 import fr.free.nrw.commons.upload.categories.CategoriesContract
 import fr.free.nrw.commons.upload.categories.CategoriesPresenter
 import io.reactivex.Observable
 import io.reactivex.schedulers.TestScheduler
+import media
 import org.junit.Before
 import org.junit.Test
 import org.mockito.Mock
 import org.mockito.MockitoAnnotations
+import java.lang.reflect.Method
 
 /**
  * The class contains unit test cases for CategoriesPresenter
@@ -33,10 +41,32 @@ class CategoriesPresenterTest {
     @Before
     @Throws(Exception::class)
     fun setUp() {
-        MockitoAnnotations.initMocks(this)
+        MockitoAnnotations.openMocks(this)
         testScheduler = TestScheduler()
         categoriesPresenter = CategoriesPresenter(repository, testScheduler, testScheduler)
-        categoriesPresenter.onAttachView(view)
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testOnAttachViewWithMedia() {
+        categoriesPresenter.onAttachViewWithMedia(view, media())
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun `Test onAttachViewWithMedia when media is not null`() {
+        categoriesPresenter.onAttachViewWithMedia(view, media())
+        whenever(repository.getCategories(repository.getSelectedExistingCategories()))
+            .thenReturn(Observable.just(mutableListOf(categoryItem())))
+        whenever(repository.searchAll("mock", emptyList(), repository.getSelectedDepictions()))
+            .thenReturn(Observable.just(mutableListOf(categoryItem())))
+        val method: Method =
+            CategoriesPresenter::class.java.getDeclaredMethod(
+                "searchResults",
+                String::class.java,
+            )
+        method.isAccessible = true
+        method.invoke(categoriesPresenter, "mock")
     }
 
     /**
@@ -44,53 +74,74 @@ class CategoriesPresenterTest {
      */
     @Test
     fun `searchForCategories combines selection and search results without years distinctly`() {
+        categoriesPresenter.onAttachView(view)
+        val liveData = MutableLiveData<List<CategoryItem>>()
+        categoriesPresenter.setCategoryList(liveData)
+        categoriesPresenter.setCategoryListValue(
+            listOf(
+                categoryItem("selected", "", "", true),
+            ),
+        )
         val nonEmptyCaptionUploadItem = mock<UploadItem>()
         whenever(nonEmptyCaptionUploadItem.uploadMediaDetails)
             .thenReturn(listOf(UploadMediaDetail(captionText = "nonEmpty")))
         val emptyCaptionUploadItem = mock<UploadItem>()
         whenever(emptyCaptionUploadItem.uploadMediaDetails)
             .thenReturn(listOf(UploadMediaDetail(captionText = "")))
-        whenever(repository.uploads).thenReturn(
+        whenever(repository.getUploads()).thenReturn(
             listOf(
                 nonEmptyCaptionUploadItem,
-                emptyCaptionUploadItem
-            )
+                emptyCaptionUploadItem,
+            ),
         )
-        whenever(repository.searchAll("test", listOf("nonEmpty"), repository.selectedDepictions))
+        whenever(repository.searchAll(any(), any(), any()))
             .thenReturn(
                 Observable.just(
                     listOf(
                         categoryItem("selected"),
-                        categoryItem("doesContainYear")
-                    )
-                )
+                        categoryItem("doesContainYear"),
+                    ),
+                ),
             )
-        whenever(repository.containsYear("selected")).thenReturn(false)
-        whenever(repository.containsYear("doesContainYear")).thenReturn(true)
-        whenever(repository.selectedCategories).thenReturn(listOf(
-            categoryItem("selected", "", "",true)))
+        whenever(repository.isSpammyCategory("selected")).thenReturn(false)
+        whenever(repository.isSpammyCategory("doesContainYear")).thenReturn(true)
+        whenever(repository.getSelectedCategories()).thenReturn(
+            listOf(
+                categoryItem("selected", "", "", true),
+            ),
+        )
         categoriesPresenter.searchForCategories("test")
         testScheduler.triggerActions()
         verify(view).showProgress(true)
-        verify(view).showError(null)
-        verify(view).setCategories(null)
-        verify(view).setCategories(listOf(
-            categoryItem("selected", "", "", true)))
         verify(view).showProgress(false)
         verifyNoMoreInteractions(view)
     }
 
     @Test
     fun `searchForCategoriesTest sets Error when list is empty`() {
-        whenever(repository.uploads).thenReturn(listOf())
-        whenever(repository.searchAll(any(), any(), any())).thenReturn(Observable.just(listOf()))
-        whenever(repository.selectedCategories).thenReturn(listOf())
-        categoriesPresenter.searchForCategories("test")
+        categoriesPresenter.onAttachView(view)
+        val liveData = MutableLiveData<List<CategoryItem>>()
+        categoriesPresenter.setCategoryList(liveData)
+        // Arrange
+        val query = "testQuery"
+        val emptyCategories = ArrayList<CategoryItem>()
+
+        liveData.postValue(emptyCategories)
+
+        whenever(repository.searchAll(any(), any(), any()))
+            .thenReturn(Observable.just(emptyCategories))
+        whenever(repository.getSelectedCategories()).thenReturn(listOf())
+        categoriesPresenter.searchForCategories(query)
         testScheduler.triggerActions()
+        val method: Method =
+            CategoriesPresenter::class.java.getDeclaredMethod(
+                "searchResults",
+                String::class.java,
+            )
+        method.isAccessible = true
+        method.invoke(categoriesPresenter, query)
+
         verify(view).showProgress(true)
-        verify(view).showError(null)
-        verify(view).setCategories(null)
-        verify(view).setCategories(listOf())
         verify(view).showProgress(false)
         verify(view).showError(R.string.no_categories_found)
         verifyNoMoreInteractions(view)
@@ -101,8 +152,9 @@ class CategoriesPresenterTest {
      */
     @Test
     fun `verifyCategories with non empty selection goes to next screen`() {
+        categoriesPresenter.onAttachView(view)
         val item = categoryItem()
-        whenever(repository.selectedCategories).thenReturn(listOf(item))
+        whenever(repository.getSelectedCategories()).thenReturn(listOf(item))
         categoriesPresenter.verifyCategories()
         verify(repository).setSelectedCategories(listOf(item.name))
         verify(view).goToNextScreen()
@@ -110,7 +162,8 @@ class CategoriesPresenterTest {
 
     @Test
     fun `verifyCategories with empty selection show no category selected`() {
-        whenever(repository.selectedCategories).thenReturn(listOf())
+        categoriesPresenter.onAttachView(view)
+        whenever(repository.getSelectedCategories()).thenReturn(listOf())
         categoriesPresenter.verifyCategories()
         verify(view).showNoCategorySelected()
     }
@@ -122,6 +175,17 @@ class CategoriesPresenterTest {
     fun onCategoryItemClickedTest() {
         val categoryItem = categoryItem()
         categoriesPresenter.onCategoryItemClicked(categoryItem)
-        verify(repository).onCategoryClicked(categoryItem)
+        verify(repository).onCategoryClicked(categoryItem, null)
+    }
+
+    @Test
+    fun testClearPreviousSelection() {
+        categoriesPresenter.clearPreviousSelection()
+    }
+
+    @Test
+    fun testUpdateCategories() {
+        categoriesPresenter.onAttachView(view)
+        categoriesPresenter.updateCategories(media(), "[[Category:Test]]")
     }
 }

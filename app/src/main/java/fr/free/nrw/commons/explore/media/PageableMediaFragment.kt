@@ -8,11 +8,10 @@ import fr.free.nrw.commons.R
 import fr.free.nrw.commons.category.CategoryImagesCallback
 import fr.free.nrw.commons.explore.paging.BasePagingFragment
 import fr.free.nrw.commons.media.MediaDetailPagerFragment.MediaDetailProvider
-import kotlinx.android.synthetic.main.fragment_search_paginated.*
 
-
-abstract class PageableMediaFragment : BasePagingFragment<Media>(), MediaDetailProvider {
-
+abstract class PageableMediaFragment :
+    BasePagingFragment<Media>(),
+    MediaDetailProvider {
     override val pagedListAdapter by lazy {
         PagedMediaAdapter(categoryImagesCallback::onMediaClicked)
     }
@@ -35,7 +34,10 @@ abstract class PageableMediaFragment : BasePagingFragment<Media>(), MediaDetailP
     private val simpleDataObserver =
         SimpleDataObserver { categoryImagesCallback.viewPagerNotifyDataSetChanged() }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         super.onViewCreated(view, savedInstanceState)
         pagedListAdapter.registerAdapterDataObserver(simpleDataObserver)
     }
@@ -46,10 +48,12 @@ abstract class PageableMediaFragment : BasePagingFragment<Media>(), MediaDetailP
     }
 
     override fun getMediaAtPosition(position: Int): Media? =
-        pagedListAdapter.currentList?.get(position)?.takeIf { it.filename != null }
+        pagedListAdapter.currentList
+            ?.get(position)
+            ?.takeIf { it.filename != null }
             .also {
                 pagedListAdapter.currentList?.loadAround(position)
-                paginatedSearchResultsList.scrollToPosition(position)
+                binding.paginatedSearchResultsList.scrollToPosition(position)
             }
 
     override fun getTotalMediaCount(): Int = pagedListAdapter.itemCount

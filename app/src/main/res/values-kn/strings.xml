@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
 * Anoop rao
+* Anzx
 * Mahadevaiah Siddaiah
 * Omshivaprakash
 * VASANTH S.N.
@@ -8,6 +9,10 @@
 * ಮಲ್ನಾಡಾಚ್ ಕೊಂಕ್ಣೊ
 -->
 <resources>
+  <string name="commons_facebook">ಕಾಮನ್ಸ್ ಫೇಸ್ಬುಕ್ ಪುಟ</string>
+  <string name="commons_website">ಕಾಮನ್ಸ್ ಜಾಲತಾಣ</string>
+  <string name="submit">ಸಲ್ಲಿಸಿ</string>
+  <string name="appwidget_img">ದಿನದ ಚಿತ್ರ</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">%1$d ಕಡತ ಅಪ್ಲೋಡ್ ಅಗುತ್ತಿದೆ</item>
     <item quantity="other">%1$d ಕಡತಗಳು ಅಪ್ಲೋಡ್ ಅಗುತ್ತಿದೆ</item>
@@ -23,17 +28,17 @@
   <string name="signup">ಸೈನ್ ಅಪ್</string>
   <string name="logging_in_title">ಲಾಗಿನ್ ಆಗುತ್ತಿದ್ದೀರಿ</string>
   <string name="logging_in_message">ದಯವಿಟ್ಟು ನಿರೀಕ್ಷಿಸಿ…</string>
-  <string name="login_success">ಲಾಗಿನ್ ಯಶಸ್ವಿ!</string>
-  <string name="login_failed">ಲಾಗಿನ್ ಸಾಧ್ಯವಾಗಿಲ್ಲ!</string>
+  <string name="login_success" fuzzy="true">ಲಾಗಿನ್ ಯಶಸ್ವಿ!</string>
+  <string name="login_failed" fuzzy="true">ಲಾಗಿನ್ ಸಾಧ್ಯವಾಗಿಲ್ಲ!</string>
   <string name="upload_failed">ಈ ಕಡತ ಕಂಡುಬಂದಿಲ್ಲ. ದಯವಿಟ್ಟು ಇನ್ನೊಂದು ಕಡತ ಪ್ರಯತ್ನಿಸಿ.</string>
-  <string name="authentication_failed">ದೃಢೀಕರಣ ವಿಫಲ, ದಯವಿಟ್ಟು ಮತ್ತೊಮ್ಮೆ ಲಾಗ್ ಇನ್ ಆಗಿ</string>
+  <string name="authentication_failed" fuzzy="true">ದೃಢೀಕರಣ ವಿಫಲ, ದಯವಿಟ್ಟು ಮತ್ತೊಮ್ಮೆ ಲಾಗ್ ಇನ್ ಆಗಿ</string>
   <string name="uploading_started">ಅಪ್ಲೋಡ್ ಪ್ರಾರಂಭವಾಗಿದೆ!</string>
   <string name="upload_completed_notification_title">%1$s ಅಪ್ಲೋಡ್ ಆಗಿದೆ!</string>
   <string name="upload_completed_notification_text">ನಿಮ್ಮ ನಕಲೇರಿಕೆಯನ್ನು ನೋಡಲು ಮೆಲ್ಲಗೆ ತಟ್ಟಿ</string>
   <string name="upload_progress_notification_title_start">ಕಡತ ಅಪ್‌ಲೋಡ್ ಆಗುತ್ತಿದೆ: %s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s ನಕಲೇರಿಕೆ  ಆಗಿದೆ!</string>
   <string name="upload_progress_notification_title_finishing">%1$s ಅಪ್ಲೋಡ್ ಮಾಡುವಿಕೆಯನ್ನು ಪೂರ್ಣಗೊಳಿಸಲಾಗುತ್ತಿದೆ</string>
-  <string name="upload_failed_notification_title">%1$s ಅಪ್ಲೋಡ್ ಮಾಡುವಿಕೆ ವಿಫಲವಾಗಿದೆ</string>
+  <string name="upload_failed_notification_title">%1$s ಅನ್ನು ಅಪ್‌ಲೋಡ್ ಮಾಡಲು ವಿಫಲವಾಗಿದೆ</string>
   <string name="upload_failed_notification_subtitle">ನೋಡಲು ಮೆಲ್ಲಗೆ ತಟ್ಟಿ</string>
   <string name="title_activity_contributions">ನನ್ನ ಇತ್ತಿಚಿನ ಅಪ್ಲೋಡ್ಗಳು</string>
   <string name="contribution_state_queued">ಸರತಿಸಾಲಿನಲ್ಲಿದೆ</string>
@@ -49,11 +54,11 @@
   <string name="share_title_hint">ತಲೆಬರಹ (ಕಡ್ಡಾಯ)</string>
   <string name="share_description_hint">ವಿವರ</string>
   <string name="share_caption_hint">ತಲೆಬರಹ</string>
-  <string name="login_failed_network">ಲಾಗಿನ್ ಮಾಡಲಾಗಲಿಲ್ಲ - ನೆಟ್ವರ್ಕ್ ವೈಫಲ್ಯ</string>
+  <string name="login_failed_network" fuzzy="true">ಲಾಗಿನ್ ಮಾಡಲಾಗಲಿಲ್ಲ - ನೆಟ್ವರ್ಕ್ ವೈಫಲ್ಯ</string>
   <string name="login_failed_throttled">ಹಲವಾರು ವಿಫಲ ಪ್ರಯತ್ನಗಳು. ದಯವಿಟ್ಟು ಕೆಲವು ನಿಮಿಷಗಳಲ್ಲಿ ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ.</string>
   <string name="login_failed_blocked">ಕ್ಷಮಿಸಿ, ಈ ಬಳಕೆದಾರರನ್ನು ಕಾಮನ್ಸ್ನಲ್ಲಿ ನಿರ್ಬಂಧಿಸಲಾಗಿದೆ</string>
   <string name="login_failed_2fa_needed">ನಿಮ್ಮ ಎರಡು ಅಂಶ ದೃಢೀಕರಣ ಕೋಡ್ ಅನ್ನು ನೀವು ಒದಗಿಸಬೇಕು.</string>
-  <string name="login_failed_generic">ಲಾಗಿನ್ ಸಾಧ್ಯವಾಗಿಲ್ಲ</string>
+  <string name="login_failed_generic" fuzzy="true">ಲಾಗಿನ್ ಸಾಧ್ಯವಾಗಿಲ್ಲ</string>
   <string name="share_upload_button">ಅಪ್ಲೋಡ್</string>
   <string name="multiple_share_base_title">ಈ ಸೆಟ್ ಹೆಸರಿಸಿ</string>
   <string name="provider_modifications">ಬದಲಾವಣೆಗಳು</string>
@@ -106,8 +111,6 @@
   <string name="media_detail_discussion">ಚರ್ಚೆ</string>
   <string name="media_detail_author">ಕರ್ತೃ</string>
   <string name="media_detail_license">ಪರವಾನಗಿ</string>
-  <string name="commons_website">ಕಾಮನ್ಸ್ ಜಾಲತಾಣ</string>
-  <string name="commons_facebook">ಕಾಮನ್ಸ್ ಫೇಸ್ಬುಕ್ ಪುಟ</string>
   <string name="welcome_image_mount_zao">ಮೌಂಟ್ ಜಾವ್</string>
   <string name="welcome_image_llamas">ಲಾಮಾಗಳು</string>
   <string name="welcome_image_tulip">ಟ್ಯೂಲಿಪ್</string>
@@ -144,7 +147,6 @@
   <string name="retry">ಪುನಃ ಪ್ರಯತ್ನಿಸಿ</string>
   <string name="no_images_found">ಯಾವುದೇ ಚಿತ್ರಗಳು ಸಿಗಲಿಲ್ಲ!</string>
   <string name="block_notification_title">ನಿರ್ಬಂಧಿಸಲಾಗಿದೆ</string>
-  <string name="appwidget_img">ದಿನದ ಚಿತ್ರ</string>
   <string name="app_widget_heading">ದಿನದ ಚಿತ್ರ</string>
   <string name="menu_search_button">ಹುಡುಕು</string>
   <string name="search_commons">ಕಾಮನ್ಸ್ ಹುಡುಕಿ</string>
@@ -167,7 +169,6 @@
   <string name="notifications">ಅಧಿಸೂಚನೆಗಳು</string>
   <string name="read_notifications">ಅಧಿಸೂಚನೆಗಳು (ಓದಲಾದ)</string>
   <string name="list_sheet">ಪಟ್ಟಿ</string>
-  <string name="submit">ಸಲ್ಲಿಸಿ</string>
   <string name="title_page_bookmarks_pictures">ಚಿತ್ರಗಳು</string>
   <string name="review_thanks_yes_button_text">ಮುಂದಿನ ಚಿತ್ರ</string>
   <string name="please_wait">ದಯವಿಟ್ಟು ನಿರೀಕ್ಷಿಸಿ…</string>

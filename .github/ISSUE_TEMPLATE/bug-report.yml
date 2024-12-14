@@ -1,0 +1,85 @@
+name: "\U0001F41E Bug report"
+description: Create a report to help us improve.
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        - Before creating an issue, please search the existing issues to see if a similar one has already been created.
+        - You can search issues by specific labels (e.g. `label:nearby`) or just by typing keywords into the search filter.
+  - type: textarea
+    attributes:
+      label: Summary
+      description: Summarize your issue (what goes wrong, what did you expect to happen)
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Steps to reproduce
+      description: How can we reproduce the issue?
+      placeholder: |
+        1. Have the app open..
+        2. Go to..
+        3. Click on..
+        4. Observe..
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Expected behaviour
+      placeholder: A menu should open..
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Actual behaviour
+      placeholder: The app closes unexpectedly..
+    validations:
+      required: true
+  - type: markdown
+    attributes:
+      value: |
+        # Device information
+  - type: input
+    attributes:
+      label: Device name
+      description: What make and model device did you encounter this on?
+      placeholder: Samsung J7
+    validations:
+      required: false
+  - type: input
+    attributes:
+      label: Android version
+      description: What Android version (e.g., Android 6.0 Marshmallow or Android 11) are you running? Is it the stock version from the manufacturer or a custom ROM ?
+      placeholder: Android 10
+    validations:
+      required: true
+  - type: input
+    attributes:
+      label: Commons app version
+      description: You can find this information by clicking the right-most menu in the bottom navigation bar in the app and tapping 'About'. If you are building from our codebase instead of downloading the app, please also mention the branch and build variant (e.g. `master` and `prodDebug`).
+      placeholder: 3.1.1
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Device logs
+      description: Add logcat files here (if possible). Need help? See "[Getting app logs from Android Studio](https://commons-app.github.io/docs.html#getting-app-logs-from-android-studio)".
+    validations:
+      required: false
+  - type: textarea
+    attributes:
+      label: Screen-shots
+      description: Add screenshots related to the issue (if available). Can be created by pressing the Volume Down and Power Button at the same time on Android 4.0 and higher.
+    validations:
+      required: false
+  - type: dropdown
+    attributes:
+      label: Would you like to work on the issue?
+      description: Please let us know whether you want to fix the issue by yourself. If not, anyone can get the issue assigned to them.
+      options:
+        - "Yes"
+        - Prefer not
+    validations:
+      required: false

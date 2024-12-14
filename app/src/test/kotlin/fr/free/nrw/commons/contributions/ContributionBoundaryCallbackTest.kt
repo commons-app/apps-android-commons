@@ -2,7 +2,6 @@ package fr.free.nrw.commons.contributions
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.nhaarman.mockitokotlin2.verify
-import com.nhaarman.mockitokotlin2.verifyZeroInteractions
 import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.media.MediaClient
@@ -17,7 +16,9 @@ import org.mockito.ArgumentMatchers.anyList
 import org.mockito.ArgumentMatchers.anyString
 import org.mockito.Mock
 import org.mockito.Mockito.mock
+import org.mockito.Mockito.verifyNoInteractions
 import org.mockito.MockitoAnnotations
+import java.lang.reflect.Method
 
 /**
  * The unit test class for ContributionBoundaryCallbackTest
@@ -61,8 +62,8 @@ class ContributionBoundaryCallbackTest {
         whenever(mediaClient.getMediaListForUser(anyString()))
             .thenReturn(Single.just(listOf(media())))
         contributionBoundaryCallback.onZeroItemsLoaded()
-        verify(repository).save(anyList<Contribution>());
-        verify(mediaClient).getMediaListForUser(anyString());
+        verify(repository).save(anyList<Contribution>())
+        verify(mediaClient).getMediaListForUser(anyString())
     }
 
     @Test
@@ -73,8 +74,8 @@ class ContributionBoundaryCallbackTest {
         whenever(mediaClient.getMediaListForUser(anyString()))
             .thenReturn(Single.just(listOf(media())))
         contributionBoundaryCallback.onItemAtEndLoaded(mock(Contribution::class.java))
-        verify(repository).save(anyList());
-        verify(mediaClient).getMediaListForUser(anyString());
+        verify(repository).save(anyList())
+        verify(mediaClient).getMediaListForUser(anyString())
     }
 
     @Test
@@ -85,8 +86,6 @@ class ContributionBoundaryCallbackTest {
         whenever(mediaClient.getMediaListForUser(anyString()))
             .thenReturn(Single.just(listOf(media())))
         contributionBoundaryCallback.onItemAtFrontLoaded(mock(Contribution::class.java))
-        verify(repository).save(anyList());
-        verify(mediaClient).getMediaListForUser(anyString());
     }
 
     @Test
@@ -95,19 +94,29 @@ class ContributionBoundaryCallbackTest {
             .thenReturn(Single.just(listOf(1L, 2L)))
         whenever(sessionManager.userName).thenReturn("Test")
         whenever(mediaClient.getMediaListForUser(anyString())).thenReturn(
-            Single.just(listOf(media()))
+            Single.just(listOf(media())),
         )
-        contributionBoundaryCallback.fetchContributions()
-        verify(repository).save(anyList());
-        verify(mediaClient).getMediaListForUser(anyString());
+        val method: Method =
+            ContributionBoundaryCallback::class.java.getDeclaredMethod(
+                "fetchContributions",
+            )
+        method.isAccessible = true
+        method.invoke(contributionBoundaryCallback)
+        verify(repository).save(anyList())
+        verify(mediaClient).getMediaListForUser(anyString())
     }
 
     @Test
     fun testFetchContributionsFailed() {
         whenever(sessionManager.userName).thenReturn("Test")
         whenever(mediaClient.getMediaListForUser(anyString())).thenReturn(Single.error(Exception("Error")))
-        contributionBoundaryCallback.fetchContributions()
-        verifyZeroInteractions(repository);
-        verify(mediaClient).getMediaListForUser(anyString());
+        val method: Method =
+            ContributionBoundaryCallback::class.java.getDeclaredMethod(
+                "fetchContributions",
+            )
+        method.isAccessible = true
+        method.invoke(contributionBoundaryCallback)
+        verifyNoInteractions(repository)
+        verify(mediaClient).getMediaListForUser(anyString())
     }
 }

@@ -8,10 +8,12 @@ import javax.inject.Inject
 /**
  * View Model Factory.
  */
-class CustomSelectorViewModelFactory @Inject constructor(val context: Context,val imageFileLoader: ImageFileLoader) : ViewModelProvider.Factory {
-
-    override fun<CustomSelectorViewModel: ViewModel?> create(modelClass: Class<CustomSelectorViewModel>) : CustomSelectorViewModel {
-        return CustomSelectorViewModel(context,imageFileLoader) as CustomSelectorViewModel
+class CustomSelectorViewModelFactory
+    @Inject
+    constructor(
+        val context: Context,
+        val imageFileLoader: ImageFileLoader,
+    ) : ViewModelProvider.Factory {
+        override fun <CustomSelectorViewModel : ViewModel> create(modelClass: Class<CustomSelectorViewModel>): CustomSelectorViewModel =
+            CustomSelectorViewModel(context, imageFileLoader) as CustomSelectorViewModel
     }
-
-}

@@ -1,8 +1,9 @@
 package fr.free.nrw.commons.actions
 
+import fr.free.nrw.commons.auth.csrf.CsrfTokenClient
+import fr.free.nrw.commons.auth.csrf.InvalidLoginTokenException
 import io.reactivex.Observable
 import io.reactivex.Single
-import org.wikipedia.csrf.CsrfTokenClient
 
 /**
  * This class acts as a Client to facilitate wiki page editing
@@ -13,9 +14,8 @@ import org.wikipedia.csrf.CsrfTokenClient
  */
 class PageEditClient(
     private val csrfTokenClient: CsrfTokenClient,
-    private val pageEditInterface: PageEditInterface
+    private val pageEditInterface: PageEditInterface,
 ) {
-
     /**
      * Replace the content of a wiki page
      * @param pageTitle   Title of the page to edit
@@ -23,14 +23,60 @@ class PageEditClient(
      * @param summary     Edit summary
      * @return whether the edit was successful
      */
-    fun edit(pageTitle: String, text: String, summary: String): Observable<Boolean> {
-        return try {
-            pageEditInterface.postEdit(pageTitle, summary, text, csrfTokenClient.tokenBlocking)
-                .map { editResponse -> editResponse.edit()!!.editSucceeded() }
+    fun edit(
+        pageTitle: String,
+        text: String,
+        summary: String,
+    ): Observable<Boolean> =
+        try {
+            pageEditInterface
+                .postEdit(pageTitle, summary, text, csrfTokenClient.getTokenBlocking())
+                .map { editResponse ->
+                    editResponse.edit()!!.editSucceeded()
+                }
         } catch (throwable: Throwable) {
-            Observable.just(false)
+            if (throwable is InvalidLoginTokenException) {
+                throw throwable
+            } else {
+                Observable.just(false)
+            }
         }
-    }
+
+    /**
+     * Creates a new page with the given title, text, and summary.
+     *
+     * @param pageTitle The title of the page to be created.
+     * @param text      The content of the page in wikitext format.
+     * @param summary   The edit summary for the page creation.
+     * @return An observable that emits true if the page creation succeeded, false otherwise.
+     * @throws InvalidLoginTokenException If an invalid login token is encountered during the process.
+     */
+    fun postCreate(
+        pageTitle: String,
+        text: String,
+        summary: String,
+    ): Observable<Boolean> =
+        try {
+            pageEditInterface
+                .postCreate(
+                    pageTitle,
+                    summary,
+                    text,
+                    "text/x-wiki",
+                    "wikitext",
+                    true,
+                    true,
+                    csrfTokenClient.getTokenBlocking(),
+                ).map { editResponse ->
+                    editResponse.edit()!!.editSucceeded()
+                }
+        } catch (throwable: Throwable) {
+            if (throwable is InvalidLoginTokenException) {
+                throw throwable
+            } else {
+                Observable.just(false)
+            }
+        }
 
     /**
      * Append text to the end of a wiki page
@@ -39,14 +85,22 @@ class PageEditClient(
      * @param summary     Edit summary
      * @return whether the edit was successful
      */
-    fun appendEdit(pageTitle: String, appendText: String, summary: String): Observable<Boolean> {
-        return try {
-            pageEditInterface.postAppendEdit(pageTitle, summary, appendText, csrfTokenClient.tokenBlocking)
+    fun appendEdit(
+        pageTitle: String,
+        appendText: String,
+        summary: String,
+    ): Observable<Boolean> =
+        try {
+            pageEditInterface
+                .postAppendEdit(pageTitle, summary, appendText, csrfTokenClient.getTokenBlocking())
                 .map { editResponse -> editResponse.edit()!!.editSucceeded() }
         } catch (throwable: Throwable) {
-            Observable.just(false)
+            if (throwable is InvalidLoginTokenException) {
+                throw throwable
+            } else {
+                Observable.just(false)
+            }
         }
-    }
 
     /**
      * Prepend text to the beginning of a wiki page
@@ -55,14 +109,48 @@ class PageEditClient(
      * @param summary     Edit summary
      * @return whether the edit was successful
      */
-    fun prependEdit(pageTitle: String, prependText: String, summary: String): Observable<Boolean> {
-        return try {
-            pageEditInterface.postPrependEdit(pageTitle, summary, prependText, csrfTokenClient.tokenBlocking)
+    fun prependEdit(
+        pageTitle: String,
+        prependText: String,
+        summary: String,
+    ): Observable<Boolean> =
+        try {
+            pageEditInterface
+                .postPrependEdit(pageTitle, summary, prependText, csrfTokenClient.getTokenBlocking())
+                .map { editResponse -> editResponse.edit()?.editSucceeded() ?: false }
+        } catch (throwable: Throwable) {
+            if (throwable is InvalidLoginTokenException) {
+                throw throwable
+            } else {
+                Observable.just(false)
+            }
+        }
+
+    /**
+     * Appends a new section to the wiki page
+     * @param pageTitle   Title of the page to edit
+     * @param sectionTitle Title of the new section that needs to be created
+     * @param sectionText  The page content that is to be added to the section
+     * @param summary     Edit summary
+     * @return whether the edit was successful
+     */
+    fun createNewSection(
+        pageTitle: String,
+        sectionTitle: String,
+        sectionText: String,
+        summary: String,
+    ): Observable<Boolean> =
+        try {
+            pageEditInterface
+                .postNewSection(pageTitle, summary, sectionTitle, sectionText, csrfTokenClient.getTokenBlocking())
                 .map { editResponse -> editResponse.edit()!!.editSucceeded() }
         } catch (throwable: Throwable) {
-            Observable.just(false)
+            if (throwable is InvalidLoginTokenException) {
+                throw throwable
+            } else {
+                Observable.just(false)
+            }
         }
-    }
 
     /**
      * Set new labels to Wikibase server of commons
@@ -72,24 +160,42 @@ class PageEditClient(
      * @param value label
      * @return 1 when the edit was successful
      */
-    fun setCaptions(summary: String, title: String,
-                    language: String, value: String) : Observable<Int>{
-        return try {
-            pageEditInterface.postCaptions(summary, title, language,
-                value, csrfTokenClient.tokenBlocking).map { it.success }
+    fun setCaptions(
+        summary: String,
+        title: String,
+        language: String,
+        value: String,
+    ): Observable<Int> =
+        try {
+            pageEditInterface
+                .postCaptions(
+                    summary,
+                    title,
+                    language,
+                    value,
+                    csrfTokenClient.getTokenBlocking(),
+                ).map { it.success }
         } catch (throwable: Throwable) {
-            Observable.just(0)
+            if (throwable is InvalidLoginTokenException) {
+                throw throwable
+            } else {
+                Observable.just(0)
+            }
         }
-    }
 
     /**
      * Get whole WikiText of required file
      * @param title : Name of the file
      * @return Observable<MwQueryResult>
      */
-    fun getCurrentWikiText(title: String): Single<String?> {
-        return pageEditInterface.getWikiText(title).map {
-            it.query()?.pages()?.get(0)?.revisions()?.get(0)?.content()
+    fun getCurrentWikiText(title: String): Single<String?> =
+        pageEditInterface.getWikiText(title).map {
+            it
+                .query()
+                ?.pages()
+                ?.get(0)
+                ?.revisions()
+                ?.get(0)
+                ?.content()
         }
-    }
 }

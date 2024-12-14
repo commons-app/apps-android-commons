@@ -30,6 +30,8 @@
   <string name="menu_from_gallery">从图库</string>
   <string name="menu_from_camera">拍照</string>
   <string name="provider_contributions">我的上传</string>
+  <string name="menu_copy_link">复制链接</string>
+  <string name="menu_link_copied">链接已复制到剪贴板</string>
   <string name="menu_share">分享</string>
   <string name="menu_open_in_browser">在浏览器中查看</string>
   <string name="share_title_hint">标题</string>
@@ -111,4 +113,5 @@
   <string name="detail_description_empty">没有说明</string>
   <string name="detail_license_empty">未知授权协议</string>
   <string name="menu_refresh">刷新</string>
+  <string name="check_your_email_inbox">请查看你的电子邮箱</string>
 </resources>

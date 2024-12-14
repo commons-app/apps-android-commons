@@ -1,13 +1,18 @@
 package fr.free.nrw.commons.explore.depictions
 
+import android.annotation.SuppressLint
 import fr.free.nrw.commons.mwapi.Binding
 import fr.free.nrw.commons.mwapi.SparqlResponse
 import fr.free.nrw.commons.upload.depicts.DepictsInterface
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
+import fr.free.nrw.commons.upload.structure.depictions.get
+import fr.free.nrw.commons.wikidata.WikidataProperties
+import fr.free.nrw.commons.wikidata.model.DataValue
 import fr.free.nrw.commons.wikidata.model.DepictSearchItem
+import fr.free.nrw.commons.wikidata.model.Entities
+import fr.free.nrw.commons.wikidata.model.StatementPartial
 import io.reactivex.Single
-import org.wikipedia.wikidata.Entities
-import java.util.*
+import java.util.Locale
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -15,30 +20,101 @@ import javax.inject.Singleton
  * Depicts Client to handle custom calls to Commons Wikibase APIs
  */
 @Singleton
-class DepictsClient @Inject constructor(private val depictsInterface: DepictsInterface) {
+class DepictsClient
+    @Inject
+    constructor(
+        private val depictsInterface: DepictsInterface,
+    ) {
+        /**
+         * Search for depictions using the search item
+         * @return list of depicted items
+         */
+        fun searchForDepictions(
+            query: String?,
+            limit: Int,
+            offset: Int,
+        ): Single<List<DepictedItem>> {
+            val language = Locale.getDefault().language
+            return depictsInterface
+                .searchForDepicts(query, "$limit", language, language, "$offset")
+                .map { it.search.joinToString("|", transform = DepictSearchItem::id) }
+                .mapToDepictions()
+        }
 
-    /**
-     * Search for depictions using the search item
-     * @return list of depicted items
-     */
-    fun searchForDepictions(query: String?, limit: Int, offset: Int): Single<List<DepictedItem>> {
-        val language = Locale.getDefault().language
-        return depictsInterface.searchForDepicts(query, "$limit", language, language, "$offset")
-            .map { it.search.joinToString("|", transform = DepictSearchItem::id) }
-            .mapToDepictions()
+        fun getEntities(ids: String): Single<Entities> = depictsInterface.getEntities(ids)
+
+        fun toDepictions(sparqlResponse: Single<SparqlResponse>): Single<List<DepictedItem>> =
+            sparqlResponse
+                .map {
+                    it.results.bindings.joinToString("|", transform = Binding::id)
+                }.mapToDepictions()
+
+        /**
+         * Fetches Entities from ids ex. "Q1233|Q546" and converts them into DepictedItem
+         */
+        @SuppressLint("CheckResult")
+        private fun Single<String>.mapToDepictions() =
+            flatMap(::getEntities)
+                .map { entities ->
+                    entities.entities().values.map { entity ->
+                        mapToDepictItem(entity)
+                    }
+                }
+
+        /**
+         * Convert different entities into DepictedItem
+         */
+        private fun mapToDepictItem(entity: Entities.Entity): DepictedItem =
+            if (entity.descriptions().byLanguageOrFirstOrEmpty() == "") {
+                val instanceOfIDs =
+                    entity[WikidataProperties.INSTANCE_OF]
+                        .toIds()
+                if (instanceOfIDs.isNotEmpty()) {
+                    val entities: Entities = getEntities(instanceOfIDs[0]).blockingGet()
+                    val nameAsDescription =
+                        entities
+                            .entities()
+                            .values
+                            .first()
+                            .labels()
+                            .byLanguageOrFirstOrEmpty()
+                    DepictedItem(
+                        entity,
+                        entity.labels().byLanguageOrFirstOrEmpty(),
+                        nameAsDescription,
+                    )
+                } else {
+                    DepictedItem(
+                        entity,
+                        entity.labels().byLanguageOrFirstOrEmpty(),
+                        "",
+                    )
+                }
+            } else {
+                DepictedItem(
+                    entity,
+                    entity.labels().byLanguageOrFirstOrEmpty(),
+                    entity.descriptions().byLanguageOrFirstOrEmpty(),
+                )
+            }
+
+        /**
+         * Tries to get Entities.Label by default language from the map.
+         * If that returns null, Tries to retrieve first element from the map.
+         * If that still returns null, function returns "".
+         */
+        private fun Map<String, Entities.Label>.byLanguageOrFirstOrEmpty() =
+            let {
+                it[Locale.getDefault().language] ?: it.values.firstOrNull()
+            }?.value() ?: ""
+
+        /**
+         * returns list of id ex. "Q2323" from Statement_partial
+         */
+        private fun List<StatementPartial>?.toIds(): List<String> =
+            this
+                ?.map { it.mainSnak.dataValue }
+                ?.filterIsInstance<DataValue.EntityId>()
+                ?.map { it.value.id }
+                ?: emptyList()
     }
-
-    fun getEntities(ids: String): Single<Entities> {
-        return depictsInterface.getEntities(ids)
-    }
-
-    fun toDepictions(sparqlResponse: Single<SparqlResponse>): Single<List<DepictedItem>> {
-        return sparqlResponse.map {
-            it.results.bindings.joinToString("|", transform = Binding::id)
-        }.mapToDepictions()
-    }
-
-    private fun Single<String>.mapToDepictions() =
-        flatMap(::getEntities)
-        .map { it.entities().values.map(::DepictedItem) }
-}

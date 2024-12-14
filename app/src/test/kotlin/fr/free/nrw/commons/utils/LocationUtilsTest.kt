@@ -1,6 +1,5 @@
 package fr.free.nrw.commons.utils
 
-import fr.free.nrw.commons.location.LatLng
 import org.junit.Test
 import org.junit.jupiter.api.Assertions.assertEquals
 
@@ -8,27 +7,17 @@ import org.junit.jupiter.api.Assertions.assertEquals
  * Test class for location utils
  */
 class LocationUtilsTest {
-
-    /**
-     * MapBox LatLng to commons LatLng test.
-     */
     @Test
-    fun testMapBoxLatLngToCommonsLatLng() {
-        val commonsLatLngTest = LocationUtils.mapBoxLatLngToCommonsLatLng(com.mapbox.mapboxsdk.geometry.LatLng(0.0, 0.0))
-        assertEquals(0.0, commonsLatLngTest.latitude)
-        assertEquals(0.0, commonsLatLngTest.longitude)
-        assertEquals(0f, commonsLatLngTest.accuracy)
-    }
+    fun testCalculateDistance() {
+        val lat1 = 37.7749
+        val lon1 = -122.4194
+        val lat2 = 34.0522
+        val lon2 = -118.2437
 
-    /**
-     * Commons LatLng to MapBox LatLng test.
-     */
-    @Test
-    fun testCommonsLatLngToMapBoxLatLng() {
-        val geoLatLngTest = LocationUtils.commonsLatLngToMapBoxLatLng(LatLng(0.0, 0.0, 0f))
-        assertEquals(0.0, geoLatLngTest.latitude)
-        assertEquals(0.0, geoLatLngTest.longitude)
-        assertEquals(0.0, geoLatLngTest.altitude)
-    }
+        val expectedDistance = 559.02 // Expected distance in kilometers
 
+        val actualDistance = LocationUtils.calculateDistance(lat1, lon1, lat2, lon2)
+
+        assertEquals(expectedDistance, actualDistance, 0.2) // Tolerance = 0.2 km
+    }
 }

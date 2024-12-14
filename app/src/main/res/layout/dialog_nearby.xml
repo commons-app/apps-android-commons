@@ -25,7 +25,7 @@
       android:layout_height="wrap_content"
       android:layout_weight="0"
       android:scaleType="fitCenter"
-      app:srcCompat="@drawable/ic_custom_map_marker" />
+      app:srcCompat="@drawable/ic_custom_map_marker_dark" />
 
     <TextView
       android:layout_width="wrap_content"
@@ -44,7 +44,7 @@
     android:layout_height="wrap_content"
     android:layout_weight="0"
     android:scaleType="fitCenter"
-    app:srcCompat="@drawable/ic_custom_map_marker_green" />
+    app:srcCompat="@drawable/ic_custom_map_marker_green_dark" />
 
   <TextView
     android:layout_width="wrap_content"

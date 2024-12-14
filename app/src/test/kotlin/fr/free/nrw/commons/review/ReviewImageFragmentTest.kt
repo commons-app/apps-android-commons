@@ -9,25 +9,30 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
+import androidx.test.core.app.ApplicationProvider
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.facebook.soloader.SoLoader
+import com.nhaarman.mockitokotlin2.doReturn
+import fr.free.nrw.commons.Media
+import fr.free.nrw.commons.OkHttpConnectionFactory
 import fr.free.nrw.commons.R
-import fr.free.nrw.commons.TestAppAdapter
 import fr.free.nrw.commons.TestCommonsApplication
+import fr.free.nrw.commons.createTestClient
+import fr.free.nrw.commons.databinding.FragmentReviewImageBinding
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.runner.RunWith
 import org.mockito.Mock
+import org.mockito.Mockito.mock
 import org.mockito.MockitoAnnotations
+import org.powermock.reflect.Whitebox
 import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
-import org.robolectric.RuntimeEnvironment
 import org.robolectric.Shadows.shadowOf
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
-import org.wikipedia.AppAdapter
 import java.lang.reflect.Method
 
 @RunWith(RobolectricTestRunner::class)
@@ -51,17 +56,19 @@ class ReviewImageFragmentTest {
     @Mock
     private lateinit var savedInstanceState: Bundle
 
+    private lateinit var activity: ReviewActivity
+
+    private lateinit var binding: FragmentReviewImageBinding
 
     @Before
     fun setUp() {
-
-        MockitoAnnotations.initMocks(this)
-        context = RuntimeEnvironment.application.applicationContext
-        AppAdapter.set(TestAppAdapter())
+        MockitoAnnotations.openMocks(this)
+        context = ApplicationProvider.getApplicationContext()
+        OkHttpConnectionFactory.CLIENT = createTestClient()
         SoLoader.setInTestMode()
 
         Fresco.initialize(context)
-        val activity = Robolectric.buildActivity(ReviewActivity::class.java).create().get()
+        activity = Robolectric.buildActivity(ReviewActivity::class.java).create().get()
         fragment = ReviewImageFragment()
         val bundle = Bundle()
         bundle.putInt("position", 1)
@@ -71,18 +78,22 @@ class ReviewImageFragmentTest {
         fragmentTransaction.add(fragment, null)
         fragmentTransaction.commit()
 
-        view = LayoutInflater.from(activity)
-            .inflate(R.layout.fragment_review_image, null) as View
+        view =
+            LayoutInflater
+                .from(activity)
+                .inflate(R.layout.fragment_review_image, null) as View
+        binding = FragmentReviewImageBinding.inflate(LayoutInflater.from(activity))
 
         noButton = view.findViewById(R.id.button_no)
         yesButton = view.findViewById(R.id.button_yes)
         textViewQuestion = view.findViewById(R.id.tv_review_question)
         textViewQuestionContext = view.findViewById(R.id.tv_review_question_context)
 
-        fragment.noButton = noButton
-        fragment.yesButton = yesButton
-        fragment.textViewQuestion = textViewQuestion
-        fragment.textViewQuestionContext = textViewQuestionContext
+        Whitebox.setInternalState(fragment, "binding", binding)
+        Whitebox.setInternalState(binding, "buttonYes", yesButton)
+        Whitebox.setInternalState(binding, "buttonNo", noButton)
+        Whitebox.setInternalState(binding, "tvReviewQuestion", textViewQuestion)
+        Whitebox.setInternalState(binding, "tvReviewQuestionContext", textViewQuestionContext)
     }
 
     @Test
@@ -95,7 +106,6 @@ class ReviewImageFragmentTest {
         assertEquals(noButton.alpha, 0.5f)
     }
 
-
     @Test
     @Throws(Exception::class)
     fun testOnEnableButton() {
@@ -106,14 +116,20 @@ class ReviewImageFragmentTest {
         assertEquals(noButton.alpha, 1f)
     }
 
-
     @Test
     @Throws(Exception::class)
     fun testOnUpdateCategoriesQuestion() {
+        shadowOf(Looper.getMainLooper()).idle()
+        val media = mock(Media::class.java)
+        Whitebox.setInternalState(activity, "media", media)
+        Assert.assertNotNull(media)
+        val categories = mapOf<String, Boolean>("Category:" to false)
+        doReturn(categories).`when`(media).categoriesHiddenStatus
+        Assert.assertNotNull(media.categoriesHiddenStatus)
+        Assert.assertNotNull(fragment.isAdded)
         val method: Method =
             ReviewImageFragment::class.java.getDeclaredMethod("updateCategoriesQuestion")
         method.isAccessible = true
-        shadowOf(Looper.getMainLooper()).idle()
         method.invoke(fragment)
     }
 

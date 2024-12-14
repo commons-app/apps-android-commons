@@ -2,13 +2,14 @@ package fr.free.nrw.commons.upload;
 
 import android.content.Context;
 import android.net.Uri;
+import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.filepicker.UploadableFile;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
+import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.settings.Prefs;
-import fr.free.nrw.commons.upload.depicts.DepictsFragment;
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem;
 import io.reactivex.Observable;
 import io.reactivex.Single;
@@ -40,6 +41,10 @@ public class UploadModel {
     private final ImageProcessingService imageProcessingService;
     private final List<String> selectedCategories = new ArrayList<>();
     private final List<DepictedItem> selectedDepictions = new ArrayList<>();
+    /**
+     * Existing depicts which are selected
+     */
+    private List<String> selectedExistingDepictions = new ArrayList<>();
 
     @Inject
     UploadModel(@Named("licenses") final List<String> licenses,
@@ -68,6 +73,7 @@ public class UploadModel {
         items.clear();
         selectedCategories.clear();
         selectedDepictions.clear();
+        selectedExistingDepictions.clear();
     }
 
     public void setSelectedCategories(List<String> selectedCategories) {
@@ -80,34 +86,74 @@ public class UploadModel {
      */
     public Observable<UploadItem> preProcessImage(final UploadableFile uploadableFile,
         final Place place,
-        final SimilarImageInterface similarImageInterface) {
+        final SimilarImageInterface similarImageInterface,
+        LatLng inAppPictureLocation) {
         return Observable.just(
-            createAndAddUploadItem(uploadableFile, place, similarImageInterface));
+            createAndAddUploadItem(uploadableFile, place, similarImageInterface, inAppPictureLocation));
     }
 
-    public Single<Integer> getImageQuality(final UploadItem uploadItem) {
-        return imageProcessingService.validateImage(uploadItem);
+    /**
+     * Calls validateImage() of ImageProcessingService to check quality of image
+     *
+     * @param uploadItem UploadItem whose quality is to be checked
+     * @param inAppPictureLocation In app picture location (if any)
+     * @return Quality of UploadItem
+     */
+    public Single<Integer> getImageQuality(final UploadItem uploadItem, LatLng inAppPictureLocation) {
+        return imageProcessingService.validateImage(uploadItem, inAppPictureLocation);
+    }
+
+    /**
+     * Calls checkDuplicateImage() of ImageProcessingService to check if image is duplicate
+     *
+     * @param filePath file to be checked
+     * @return IMAGE_DUPLICATE or IMAGE_OK
+     */
+    public Single<Integer> checkDuplicateImage(String filePath){
+        return imageProcessingService.checkDuplicateImage(filePath);
+    }
+
+    /**
+     * Calls validateCaption() of ImageProcessingService to check caption of image
+     *
+     * @param uploadItem UploadItem whose caption is to be checked
+     * @return Quality of caption of the UploadItem
+     */
+    public Single<Integer> getCaptionQuality(final UploadItem uploadItem) {
+        return imageProcessingService.validateCaption(uploadItem);
     }
 
     private UploadItem createAndAddUploadItem(final UploadableFile uploadableFile,
         final Place place,
-        final SimilarImageInterface similarImageInterface) {
+        final SimilarImageInterface similarImageInterface,
+        LatLng inAppPictureLocation) {
         final UploadableFile.DateTimeWithSource dateTimeWithSource = uploadableFile
                 .getFileCreatedDate(context);
         long fileCreatedDate = -1;
         String createdTimestampSource = "";
+        String fileCreatedDateString = "";
         if (dateTimeWithSource != null) {
             fileCreatedDate = dateTimeWithSource.getEpochDate();
+            fileCreatedDateString = dateTimeWithSource.getDateString();
             createdTimestampSource = dateTimeWithSource.getSource();
         }
         Timber.d("File created date is %d", fileCreatedDate);
         final ImageCoordinates imageCoordinates = fileProcessor
-                .processFileCoordinates(similarImageInterface, uploadableFile.getFilePath());
+                .processFileCoordinates(similarImageInterface, uploadableFile.getFilePath(),
+                    inAppPictureLocation);
         final UploadItem uploadItem = new UploadItem(
             Uri.parse(uploadableFile.getFilePath()),
                 uploadableFile.getMimeType(context), imageCoordinates, place, fileCreatedDate,
                 createdTimestampSource,
-                uploadableFile.getContentUri());
+                uploadableFile.getContentUri(),
+                fileCreatedDateString);
+
+        // If an uploadItem of the same uploadableFile has been created before, we return that.
+        // This is to avoid multiple instances of uploadItem of same file passed around.
+        if (items.contains(uploadItem)) {
+            return items.get(items.indexOf(uploadItem));
+        }
+
         if (place != null) {
             uploadItem.getUploadMediaDetails().set(0, new UploadMediaDetail(place));
         }
@@ -141,8 +187,10 @@ public class UploadModel {
     public Observable<Contribution> buildContributions() {
         return Observable.fromIterable(items).map(item ->
         {
+            String imageSHA1 = FileUtils.INSTANCE.getSHA1(context.getContentResolver().openInputStream(item.getContentUri()));
+
             final Contribution contribution = new Contribution(
-                item, sessionManager, newListOf(selectedDepictions), newListOf(selectedCategories));
+                item, sessionManager, newListOf(selectedDepictions), newListOf(selectedCategories), imageSHA1);
 
             contribution.setHasInvalidLocation(item.hasInvalidLocation());
 
@@ -185,11 +233,33 @@ public class UploadModel {
         return items;
     }
 
-    public void onDepictItemClicked(DepictedItem depictedItem) {
-        if (depictedItem.isSelected()) {
-            selectedDepictions.add(depictedItem);
+    public void onDepictItemClicked(DepictedItem depictedItem, Media media) {
+        if (media == null) {
+            if (depictedItem.isSelected()) {
+                selectedDepictions.add(depictedItem);
+            } else {
+                selectedDepictions.remove(depictedItem);
+            }
         } else {
-            selectedDepictions.remove(depictedItem);
+            if (depictedItem.isSelected()) {
+                if (media.getDepictionIds().contains(depictedItem.getId())) {
+                    selectedExistingDepictions.add(depictedItem.getId());
+                } else {
+                    selectedDepictions.add(depictedItem);
+                }
+            } else {
+                if (media.getDepictionIds().contains(depictedItem.getId())) {
+                    selectedExistingDepictions.remove(depictedItem.getId());
+                    if (!media.getDepictionIds().contains(depictedItem.getId())) {
+                        final List<String> depictsList = new ArrayList<>();
+                        depictsList.add(depictedItem.getId());
+                        depictsList.addAll(media.getDepictionIds());
+                        media.setDepictionIds(depictsList);
+                    }
+                } else {
+                    selectedDepictions.remove(depictedItem);
+                }
+            }
         }
     }
 
@@ -207,4 +277,21 @@ public class UploadModel {
         return selectedDepictions;
     }
 
+    /**
+     * Provides selected existing depicts
+     *
+     * @return selected existing depicts
+     */
+    public List<String> getSelectedExistingDepictions() {
+        return selectedExistingDepictions;
+    }
+
+    /**
+     * Initialize existing depicts
+     *
+     * @param selectedExistingDepictions existing depicts
+     */
+    public void setSelectedExistingDepictions(final List<String> selectedExistingDepictions) {
+        this.selectedExistingDepictions = selectedExistingDepictions;
+    }
 }

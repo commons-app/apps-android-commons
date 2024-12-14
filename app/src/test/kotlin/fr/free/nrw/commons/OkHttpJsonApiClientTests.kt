@@ -27,8 +27,6 @@ class OkHttpJsonApiClientTests {
     @Mock
     lateinit var wikiMediaToolforgeUrl: HttpUrl
 
-    @Mock
-    lateinit var wikiMediaTestToolforgeUrl: HttpUrl
     var sparqlQueryUrl: String = "https://www.testqparql.com"
     var campaignsUrl: String = "https://www.testcampaignsurl.com"
 
@@ -47,43 +45,43 @@ class OkHttpJsonApiClientTests {
 
     @Before
     fun setUp() {
-        MockitoAnnotations.initMocks(this)
-        okHttpJsonApiClient = OkHttpJsonApiClient(
-            okhttpClient,
-            depictsClient,
-            wikiMediaToolforgeUrl,
-            wikiMediaTestToolforgeUrl,
-            sparqlQueryUrl,
-            campaignsUrl,
-            gson
-        )
+        MockitoAnnotations.openMocks(this)
+        okHttpJsonApiClient =
+            OkHttpJsonApiClient(
+                okhttpClient,
+                depictsClient,
+                wikiMediaToolforgeUrl,
+                sparqlQueryUrl,
+                campaignsUrl,
+                gson,
+            )
         Mockito.`when`(okhttpClient.newCall(any())).thenReturn(call)
         Mockito.`when`(call.execute()).thenReturn(response)
     }
 
     @Test
     fun testGetNearbyPlacesCustomQuery() {
-        Mockito.`when`(response.message()).thenReturn("test")
+        Mockito.`when`(response.message).thenReturn("test")
         try {
-            okHttpJsonApiClient.getNearbyPlaces(latLng, "test", 10.0, true, "test")
+            okHttpJsonApiClient.getNearbyPlaces(latLng, "test", 10.0, "test")
+            okHttpJsonApiClient.getNearbyPlaces(latLng, latLng, "test", true, "test")
         } catch (e: Exception) {
             assert(e.message.equals("test"))
         }
         verify(okhttpClient).newCall(any())
         verify(call).execute()
-
     }
 
     @Test
     fun testGetNearbyPlaces() {
-        Mockito.`when`(response.message()).thenReturn("test")
+        Mockito.`when`(response.message).thenReturn("test")
         try {
-            okHttpJsonApiClient.getNearbyPlaces(latLng, "test", 10.0, true)
+            okHttpJsonApiClient.getNearbyPlaces(latLng, "test", 10.0, null)
+            okHttpJsonApiClient.getNearbyPlaces(latLng, latLng, "test", true, null)
         } catch (e: Exception) {
             assert(e.message.equals("test"))
         }
         verify(okhttpClient).newCall(any())
         verify(call).execute()
-
     }
 }

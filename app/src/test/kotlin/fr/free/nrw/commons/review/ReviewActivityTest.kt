@@ -1,30 +1,43 @@
 package fr.free.nrw.commons.review
 
 import android.content.Context
+import android.os.Looper.getMainLooper
 import android.view.Menu
 import android.view.MenuItem
+import androidx.test.core.app.ApplicationProvider
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.facebook.soloader.SoLoader
-import fr.free.nrw.commons.TestAppAdapter
+import com.nhaarman.mockitokotlin2.doNothing
+import fr.free.nrw.commons.Media
+import fr.free.nrw.commons.OkHttpConnectionFactory
 import fr.free.nrw.commons.TestCommonsApplication
+import fr.free.nrw.commons.createTestClient
+import fr.free.nrw.commons.databinding.ActivityReviewBinding
+import io.reactivex.Single
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.mockito.ArgumentMatchers
+import org.mockito.Mock
+import org.mockito.Mockito.anyInt
+import org.mockito.Mockito.doReturn
+import org.mockito.Mockito.mock
 import org.mockito.MockitoAnnotations
+import org.powermock.reflect.Whitebox
 import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
-import org.robolectric.RuntimeEnvironment
+import org.robolectric.Shadows.shadowOf
 import org.robolectric.annotation.Config
+import org.robolectric.annotation.LooperMode
 import org.robolectric.fakes.RoboMenu
 import org.robolectric.fakes.RoboMenuItem
-import org.wikipedia.AppAdapter
 import java.lang.reflect.Method
 
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
+@LooperMode(LooperMode.Mode.PAUSED)
 class ReviewActivityTest {
-
     private lateinit var activity: ReviewActivity
 
     private lateinit var menuItem: MenuItem
@@ -33,25 +46,45 @@ class ReviewActivityTest {
 
     private lateinit var context: Context
 
+    @Mock
+    private lateinit var reviewPagerAdapter: ReviewPagerAdapter
+
+    @Mock
+    var reviewPager: ReviewViewPager? = null
+
+    var hasNonHiddenCategories: Boolean = false
+
+    @Mock
+    var reviewHelper: ReviewHelper? = null
+
+    @Mock
+    private lateinit var reviewImageFragment: ReviewImageFragment
+
+    private lateinit var binding: ActivityReviewBinding
+
     @Before
     fun setUp() {
-        MockitoAnnotations.initMocks(this)
+        MockitoAnnotations.openMocks(this)
 
-        context = RuntimeEnvironment.application.applicationContext
+        context = ApplicationProvider.getApplicationContext()
 
-        AppAdapter.set(TestAppAdapter())
+        OkHttpConnectionFactory.CLIENT = createTestClient()
 
         SoLoader.setInTestMode()
 
         Fresco.initialize(context)
 
         activity = Robolectric.buildActivity(ReviewActivity::class.java).create().get()
+        binding = ActivityReviewBinding.inflate(activity.layoutInflater)
 
         menuItem = RoboMenuItem(null)
 
         menu = RoboMenu(context)
-
-
+        Whitebox.setInternalState(binding, "viewPagerReview", reviewPager)
+        Whitebox.setInternalState(activity, "hasNonHiddenCategories", hasNonHiddenCategories)
+        Whitebox.setInternalState(activity, "reviewHelper", reviewHelper)
+        Whitebox.setInternalState(activity, "reviewImageFragment", reviewImageFragment)
+        Whitebox.setInternalState(activity, "reviewPagerAdapter", reviewPagerAdapter)
     }
 
     @Test
@@ -69,7 +102,42 @@ class ReviewActivityTest {
     @Test
     @Throws(Exception::class)
     fun testSwipeToNext() {
+        shadowOf(getMainLooper()).idle()
+        doReturn(1, 2).`when`(reviewPager)?.currentItem
         activity.swipeToNext()
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testSwipeToLastFragment() {
+        shadowOf(getMainLooper()).idle()
+        doReturn(3).`when`(reviewPager)?.currentItem
+        val media = mock(Media::class.java)
+
+        doReturn(mapOf<String, Boolean>("test" to false)).`when`(media).categoriesHiddenStatus
+        doReturn(Single.just(media)).`when`(reviewHelper)?.getRandomMedia()
+        Assert.assertNotNull(reviewHelper?.getRandomMedia())
+        reviewHelper
+            ?.getRandomMedia()
+            ?.test()
+            ?.assertValue(media)
+        activity.swipeToNext()
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testFindNonHiddenCategories() {
+        shadowOf(getMainLooper()).idle()
+        val media = mock(Media::class.java)
+        doReturn(mapOf<String, Boolean>("test" to false)).`when`(media).categoriesHiddenStatus
+        doReturn(mock(ReviewImageFragment::class.java)).`when`(reviewPagerAdapter).instantiateItem(ArgumentMatchers.any(), anyInt())
+        doReturn("").`when`(media).filename
+        doNothing().`when`(reviewImageFragment).disableButtons()
+
+        var findNonHiddenCategory: Method =
+            ReviewActivity::class.java.getDeclaredMethod("findNonHiddenCategories", Media::class.java)
+        findNonHiddenCategory.isAccessible = true
+        findNonHiddenCategory.invoke(activity, media)
     }
 
     @Test
@@ -125,5 +193,4 @@ class ReviewActivityTest {
     fun testOnBackPressed() {
         activity.onBackPressed()
     }
-
 }

@@ -1,0 +1,13 @@
+name: "✋🏻 Need help"
+description: Describe the situation which you need help with.
+labels: ["help needed"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        - Describe the situation which you need help with with as much information as possible.
+  - type: textarea
+    attributes:
+      label: Description
+    validations:
+      required: true

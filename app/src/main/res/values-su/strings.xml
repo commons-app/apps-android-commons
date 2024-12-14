@@ -6,6 +6,25 @@
 * Uchup19
 -->
 <resources>
+  <string name="commons_facebook">Kaca Facebook Commons</string>
+  <string name="commons_github">Kode Sumber Github Commons</string>
+  <string name="commons_logo">Logo Commons</string>
+  <string name="commons_website">Situs wéb Commons</string>
+  <string name="exit_location_picker">Kaluar ti pamilih lokasi</string>
+  <string name="submit">Kirim</string>
+  <string name="add_another_description">Tambahkeun pedaran séjén</string>
+  <string name="add_new_contribution">Tambahkeun kontribusi anyar</string>
+  <string name="add_contribution_from_camera">Tambahkeun kontribusi ti kaméra</string>
+  <string name="add_contribution_from_photos">Tambahkeun kontribusi ti Poto</string>
+  <string name="add_contribution_from_contributions_gallery">Tambahkeun kontribusi ti galeri kontribusi saméméhna</string>
+  <string name="show_captions">Pertélaan</string>
+  <string name="row_item_language_description">Pedaran Basa</string>
+  <string name="row_item_caption">Pertélaan</string>
+  <string name="show_captions_description">Pedaran</string>
+  <string name="nearby_row_image">Gambar</string>
+  <string name="nearby_all">Kabéh</string>
+  <string name="nearby_filter_toggle">Togel ka Luhur</string>
+  <string name="appwidget_img">Gambar poé ieu</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">ngunjal %1$d berkas</item>
     <item quantity="other">ngunjal %1$d berkas</item>
@@ -41,7 +60,6 @@
   <string name="preference_category_feedback">Eupan balik</string>
   <string name="preference_category_privacy">Privasi</string>
   <string name="app_name">Commons</string>
-  <string name="bullet">•</string>
   <string name="menu_settings">Séting</string>
   <string name="intent_share_upload_label">Unjal ka Commons</string>
   <string name="username">Sandiasma</string>
@@ -54,10 +72,10 @@
   <string name="logging_in_message">Tungguan…</string>
   <string name="updating_caption_title">Nganyarkeun pertélaan jeung pedaran</string>
   <string name="updating_caption_message">Mangga tungguan...</string>
-  <string name="login_success">Laksana login!</string>
-  <string name="login_failed">Gagal login!</string>
+  <string name="login_success" fuzzy="true">Laksana login!</string>
+  <string name="login_failed" fuzzy="true">Gagal login!</string>
   <string name="upload_failed">Berkas teu kapanggih. Coba berkas séjén.</string>
-  <string name="authentication_failed">Oténtikasi gagal! mangga asup log deui</string>
+  <string name="authentication_failed" fuzzy="true">Oténtikasi gagal! mangga asup log deui</string>
   <string name="uploading_started">Mitembeyan ngunjal!</string>
   <string name="uploading_queued">Muatan geus ngantri (sambungan diwates dijalankeun)</string>
   <string name="upload_completed_notification_title">%1$s diunjal!</string>
@@ -65,7 +83,7 @@
   <string name="upload_progress_notification_title_start">Ngamuat berkas: %s</string>
   <string name="upload_progress_notification_title_in_progress">Ngunjal %1$s</string>
   <string name="upload_progress_notification_title_finishing">Méréskeun unjalan %1$s</string>
-  <string name="upload_failed_notification_title">Ngunjal %1$s gagal</string>
+  <string name="upload_failed_notification_title">Gagal ngunjal %1$s</string>
   <string name="upload_paused_notification_title">Ngamuat %1$s eureun heula</string>
   <string name="upload_failed_notification_subtitle">Toél pikeun nempo</string>
   <string name="upload_paused_notification_subtitle">Toél pikeun nempo</string>
@@ -84,11 +102,11 @@
   <string name="add_caption_toast">Sadiakeun pertélaan pikeun ieu berkas</string>
   <string name="share_description_hint">Pedaran</string>
   <string name="share_caption_hint">Takarir</string>
-  <string name="login_failed_network">Teu bisa login - gangguan jaringan</string>
+  <string name="login_failed_network" fuzzy="true">Teu bisa login - gangguan jaringan</string>
   <string name="login_failed_throttled">Loba teuing nu gagalna. Mangga cobian sababaraha menit deui mah</string>
   <string name="login_failed_blocked">Punten, ieu kontributor geus diblokir di Commons</string>
   <string name="login_failed_2fa_needed">Anjeun kudu nyayagakeun kodeu oténtikasi dua faktor.</string>
-  <string name="login_failed_generic">Gagal login</string>
+  <string name="login_failed_generic" fuzzy="true">Gagal login</string>
   <string name="share_upload_button">Unjal</string>
   <string name="multiple_share_base_title">Ngaranan ieu sét</string>
   <string name="provider_modifications">Modifikasi</string>
@@ -108,6 +126,7 @@
   <string name="title_activity_settings">Séting</string>
   <string name="title_activity_signup">Daptar</string>
   <string name="title_activity_featured_images">Gambar petingan</string>
+  <string name="title_activity_custom_selector">Pamilih Kustom</string>
   <string name="title_activity_category_details">Kategori</string>
   <string name="title_activity_review">Titénan Sawawa</string>
   <string name="menu_about">Ngeunaan</string>
@@ -177,6 +196,7 @@
   <string name="no">Henteu</string>
   <string name="media_detail_caption">Pertélaan</string>
   <string name="media_detail_title">Judul</string>
+  <string name="media_detail_depiction">Katrangan</string>
   <string name="media_detail_description">Déskripsi</string>
   <string name="media_detail_discussion">Sawala</string>
   <string name="media_detail_author">Pangarang</string>
@@ -188,10 +208,6 @@
   <string name="become_a_tester_description">Pilihan asup kana saluran béta kami di Google Play sarta meunangkeun aksés munggaran pikeun fitur anyar jeung pameneran kutu</string>
   <string name="_2fa_code">Kode 2FA</string>
   <string name="logout_verification">Yakin anjeun rék kaluar?</string>
-  <string name="commons_logo">Logo Commons</string>
-  <string name="commons_website">Situs wéb Commons</string>
-  <string name="commons_facebook">Kaca Facebook Commons</string>
-  <string name="commons_github">Kode Sumber Github Commons</string>
   <string name="mediaimage_failed">Gambar Média Gagal</string>
   <string name="no_subcategory_found">Euweuh subkategorian</string>
   <string name="no_parentcategory_found">Euweuh kategorian</string>
@@ -220,6 +236,7 @@
   <string name="nearby_info_menu_wikidata_article">item Wikidata</string>
   <string name="nearby_info_menu_wikipedia_article">Artikel Wikipédia</string>
   <string name="description_info">Pék émbarkeun wincikan média saloba-lobabana: Dimana éta dicokot? Naon nu titojokeunna? Naon kontéksna? Pék jéntrékeun obyék atawa jalmana. Ébré informasi anu teu gampang kajudi, kawas wayah mun éta mangrupa pamandangan. Ari média nu némbongkeun perkara nu teu guyub, pék jéntrékeun naon nu ngabalukarkeun éta téh teu guyub.</string>
+  <string name="caption_info">Mangga tuliskeun pedaran pondok ngeunaan gambarna. Katrangan mimiti bakal dipaké jadi Judul gambarna. Wates 255 karakter.</string>
   <string name="upload_problem_exist">Ponténsi masalah na ieu gambar :</string>
   <string name="upload_problem_image_dark">Gambar poék teuing.</string>
   <string name="upload_problem_image_blurry">Gambar rumeuk.</string>
@@ -227,6 +244,9 @@
   <string name="upload_problem_different_geolocation">Ieu gambar dicomot ti lokasi nu béda.</string>
   <string name="upload_problem_fbmd">Wayahna nguunjal gambarna hasil sorangan hungkul. Ulah ngunjal gambar nu meunang manggih tina akun Facebook batur.</string>
   <string name="upload_problem_do_you_continue">Anjeun keukeuh rék ngunjal ieu gambar?</string>
+  <string name="upload_connection_error_alert_title">Galat Sambungan</string>
+  <string name="upload_connection_error_alert_detail">Prosés ngunggah butuh sambungan internét. Mangga pariksa sambungan jaringan anjeun.</string>
+  <string name="upload_problem_image">Aya masalah dina gambar</string>
   <string name="internet_downloaded">Wayahna nguunjal gambarna hasil sorangan hungkul. Ulah ngunjal gambar nu meunang ngundeur ti internet.</string>
   <string name="use_external_storage" fuzzy="true">Paké panyimpenan éksternal</string>
   <string name="use_external_storage_summary" fuzzy="true">Simpen gambar nu nyomotna ku aplikasi kaména na parangkat anjeun</string>
@@ -240,8 +260,8 @@
   <string name="nominated_see_more" fuzzy="true">&lt;u&gt;Témbong kaca wéb pikeun wincikan&lt;/u&gt;</string>
   <string name="skip_login">Liwatan</string>
   <string name="navigation_item_login">Asup log</string>
-  <string name="skip_login_title">Anjeun yakin rék ngaliwatan asup log?</string>
-  <string name="skip_login_message">Anjeun kudu asup log pikeun ngunjal gambar engké mah.</string>
+  <string name="skip_login_title" fuzzy="true">Anjeun yakin rék ngaliwatan asup log?</string>
+  <string name="skip_login_message" fuzzy="true">Anjeun kudu asup log pikeun ngunjal gambar engké mah.</string>
   <string name="login_alert_message">Mangga asup log pikeun maké ieu fitur</string>
   <string name="copy_wikicode">Tiron wikitéks kana papan klip</string>
   <string name="wikicode_copied">Wikitéks geus ditiron kana papan klip</string>
@@ -269,7 +289,6 @@
   <string name="image_uploaded_by">Diunjal ku: %1$s</string>
   <string name="block_notification_title">Dipeungpeuk</string>
   <string name="block_notification">Anjeung dipeungpeuk tina ngédit Commons</string>
-  <string name="appwidget_img">Gambar poé ieu</string>
   <string name="app_widget_heading">Gambar poé ieu</string>
   <string name="menu_search_button">Paluruh</string>
   <string name="search_commons">Paluruh Commons</string>
@@ -295,14 +314,14 @@
   <string name="construction_event_answer">Gambar nu némbongkeun téhnologi atawa budaya kacida dipiharep di Commons.</string>
   <string name="congratulatory_message_quiz">Anjeun meunang %1$s tina jawaban bener. Wilujeng!</string>
   <string name="warning_for_no_answer">Pilih hiji atawa dua pilihan pikeun ngajawab patanyaan</string>
-  <string name="user_not_logged_in">Sési asup log kadaluwarsa, prak geura asup log deui.</string>
+  <string name="user_not_logged_in" fuzzy="true">Sési asup log kadaluwarsa, prak geura asup log deui.</string>
   <string name="quiz_result_share_message">Bagikeun kuis anjeun ka babaturan!</string>
   <string name="continue_message">Tuluykeun</string>
   <string name="correct">Jawaban bener</string>
   <string name="wrong">Jawaban salah</string>
   <string name="quiz_screenshot_question">Ieu téwakan layar geus OKÉH jang unjalkeuneun?</string>
   <string name="share_app_title">Bagikeun Aplikasi</string>
-  <string name="error_fetching_nearby_places">Éror pas nyomot tempat sabudeureun.</string>
+  <string name="error_fetching_nearby_places" fuzzy="true">Éror pas nyomot tempat sabudeureun.</string>
   <string name="no_recent_searches">Taya pamaluruhan kiwari</string>
   <string name="delete_recent_searches_dialog">Anjeun yakin rék mupus jujutan pamaluruhan anjeun?</string>
   <string name="delete_search_dialog">Yakin rék miceun ieu pamaluruhan?</string>
@@ -314,7 +333,7 @@
   <string name="statistics_thanks">Panuhun Katampa</string>
   <string name="statistics_featured">Gambar petingan</string>
   <string name="statistics_wikidata_edits">Gambar liwat \"Tempat Sabudeureun\"</string>
-  <string name="level">Tingkat</string>
+  <string name="level" fuzzy="true">Tingkat</string>
   <string name="images_uploaded">Gambar Diunjal</string>
   <string name="image_reverts">Gambar Teu Dibalikkeun</string>
   <string name="images_used_by_wiki">Gambar Dipaké</string>
@@ -332,7 +351,6 @@
   <string name="storage_permission">Idin Panyimpenan</string>
   <string name="next">Saterusna</string>
   <string name="previous">Saméméhna</string>
-  <string name="submit">Kirim</string>
   <string name="title_page_bookmarks_pictures">Gambar</string>
   <string name="title_page_bookmarks_locations">Perenah</string>
   <string name="menu_bookmark">Tambah/Piceun tatanda buku</string>

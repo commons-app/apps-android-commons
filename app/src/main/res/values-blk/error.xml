@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* ခွန်ဖန်ဒွဲ့
+-->
+<resources>
+  <string name="crash_dialog_title">ကောင်မွန်း ထဲ့ကုဲင်ထိုꩻ</string>
+  <string name="crash_dialog_text">အဝ်း။ အမာႏထိုꩻလဲဉ်းသွူတစွိုးစွိုး!</string>
+  <string name="crash_dialog_comment_prompt">နာꩻမာꩻတမုဲင်ꩻကရိုꩻနဝ်ꩻခြုဲင်းနယ်သွော့ꩻနီယို၊ အဝ်ႏနဝ်ꩻထွူ အဝ်ႏEmailယိုတရန်း ဖန်းဖြယ်လွဉ်သွော့ꩻနီထျꩻယို။ နီစွဲးကမ်းစေလီစဲင်းဖေႏနာꩻ!</string>
+  <string name="crash_dialog_ok_toast">ကေꩻဇူꩻတင်ႏငါႏဩ!</string>
+</resources>

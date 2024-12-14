@@ -1,16 +1,14 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-
-    <item android:id="@+id/toggle_limited_connection_mode"
-      android:title="@string/limited_connection_mode"
-      app:showAsAction="always"
-      android:checkable="true"
-      android:icon="@drawable/ic_baseline_cloud_queue_24"
-      />
-    <item android:id="@+id/notifications"
-        android:title="@string/notifications"
-        app:showAsAction="ifRoom|withText"
-        android:menuCategory="secondary"
-        app:actionLayout="@layout/notification_icon"
-        />
+  xmlns:app="http://schemas.android.com/apk/res-auto">
+  <item
+    android:id="@+id/upload_tab"
+    android:title="Upload"
+    app:actionLayout="@layout/pending_uploads_icon"
+    app:showAsAction="ifRoom|withText" />
+  <item
+    android:id="@+id/notifications"
+    android:menuCategory="secondary"
+    android:title="@string/notifications"
+    app:actionLayout="@layout/notification_icon"
+    app:showAsAction="ifRoom|withText" />
 </menu>

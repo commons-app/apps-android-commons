@@ -12,15 +12,16 @@ import org.junit.Test
 import org.mockito.Mock
 import org.mockito.MockitoAnnotations
 
-class PageableSubCategoriesDataSourceTest{
+class PageableSubCategoriesDataSourceTest {
     @Mock
     lateinit var categoryClient: CategoryClient
+
     @Mock
     lateinit var liveDataConverter: LiveDataConverter
 
     @Before
     fun setUp() {
-        MockitoAnnotations.initMocks(this)
+        MockitoAnnotations.openMocks(this)
     }
 
     @Test

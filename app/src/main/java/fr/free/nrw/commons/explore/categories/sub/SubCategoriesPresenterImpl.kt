@@ -9,8 +9,10 @@ import javax.inject.Named
 
 interface SubCategoriesPresenter : PagingContract.Presenter<String>
 
-class SubCategoriesPresenterImpl @Inject constructor(
-    @Named(CommonsApplicationModule.MAIN_THREAD) mainThreadScheduler: Scheduler,
-    dataSourceFactory: PageableSubCategoriesDataSource
-) : BasePagingPresenter<String>(mainThreadScheduler, dataSourceFactory),
-    SubCategoriesPresenter
+class SubCategoriesPresenterImpl
+    @Inject
+    constructor(
+        @Named(CommonsApplicationModule.MAIN_THREAD) mainThreadScheduler: Scheduler,
+        dataSourceFactory: PageableSubCategoriesDataSource,
+    ) : BasePagingPresenter<String>(mainThreadScheduler, dataSourceFactory),
+        SubCategoriesPresenter

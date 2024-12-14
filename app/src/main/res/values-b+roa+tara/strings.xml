@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
 * Joetaras
+* S4b1nuz E.656
 -->
 <resources>
+  <string name="submit">Conferme</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">%1$d fail in caricamende</item>
     <item quantity="other">%1$d fail in caricamende</item>
@@ -30,7 +32,6 @@
   <string name="preference_category_feedback">Segnalazione</string>
   <string name="preference_category_privacy">Privacy</string>
   <string name="app_name">Commons</string>
-  <string name="bullet">•</string>
   <string name="menu_settings">\'Mbostaziune</string>
   <string name="intent_share_upload_label">Careche sus a Commons</string>
   <string name="username">Nome de l\'utende</string>
@@ -41,10 +42,10 @@
   <string name="signup">Reggistrate</string>
   <string name="logging_in_title">Stoche a tràse...</string>
   <string name="logging_in_message">Aspitte...</string>
-  <string name="login_success">E\' trasute!</string>
-  <string name="login_failed">Non g\'è trasute!</string>
+  <string name="login_success" fuzzy="true">E\' trasute!</string>
+  <string name="login_failed" fuzzy="true">Non g\'è trasute!</string>
   <string name="upload_failed">File non acchiate. Pruève \'n\'otre file.</string>
-  <string name="authentication_failed">Autenticazione sciute a male, tràse arrete</string>
+  <string name="authentication_failed" fuzzy="true">Autenticazione sciute a male, tràse arrete</string>
   <string name="uploading_started">Carecamende accumenzate!</string>
   <string name="upload_completed_notification_title">%1$s carecate!</string>
   <string name="menu_share">Condivide</string>
@@ -88,7 +89,7 @@
   <string name="upload_problem_different_geolocation">Sta fote ha state pigghiate da \'nu luèche diverse.</string>
   <string name="navigation_item_login">Tràse</string>
   <string name="nearby_directions">Direziune</string>
-  <string name="nearby_wikidata">Uicchidata</string>
+  <string name="nearby_wikidata">Uicchidate</string>
   <string name="nearby_wikipedia">Uicchipèdie</string>
   <string name="nearby_commons">Commons</string>
   <string name="block_notification_title">Bloccate</string>
@@ -100,7 +101,7 @@
   <string name="no_recent_searches">Nisciuna recerche recende</string>
   <string name="delete">Scangìlle</string>
   <string name="statistics">Statisteche</string>
-  <string name="level">Levèlle</string>
+  <string name="level" fuzzy="true">Levèlle</string>
   <string name="contributions_fragment">Condrebbute</string>
   <string name="nearby_fragment">Vicine a</string>
   <string name="notifications">Notifeche</string>
@@ -108,7 +109,6 @@
   <string name="step_count">Passe %1$d de %2$d: %3$s</string>
   <string name="next">Prossime</string>
   <string name="previous">Precedende</string>
-  <string name="submit">Conferme</string>
   <string name="title_page_bookmarks_pictures">Fote</string>
   <string name="title_page_bookmarks_locations">Luèche</string>
   <string name="menu_bookmark">Aggiungi/Live le signalibbre</string>

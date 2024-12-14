@@ -5,6 +5,7 @@
 * Chmee2
 * Clon
 * Dvorapa
+* Fjuro
 * Frettie
 * Georg101
 * Ilimanaq29
@@ -24,29 +25,62 @@
 * Walter Klosse
 -->
 <resources>
-  <plurals name="uploads_pending_notification_indicator" fuzzy="true">
-    <item quantity="one">%1$d soubor se nahrává</item>
-    <item quantity="other">%1$d souborů se nahrává</item>
+  <string name="commons_facebook">Facebooková stránka Commons</string>
+  <string name="commons_github">Zdrojový kód Commons na GitHubu</string>
+  <string name="commons_logo">Logo Wikimedia Commons</string>
+  <string name="commons_website">Stránka Commons</string>
+  <string name="exit_location_picker">Ukončit výběr polohy</string>
+  <string name="submit">Odeslat</string>
+  <string name="add_another_description">Přidat další popis</string>
+  <string name="add_new_contribution">Přidat nový příspěvek</string>
+  <string name="add_contribution_from_camera">Přidat příspěvek z fotoaparátu</string>
+  <string name="add_contribution_from_photos">Přidat příspěvek z fotek</string>
+  <string name="add_contribution_from_contributions_gallery">Přidat příspěvek z galerie předchozích příspěvků</string>
+  <string name="show_captions">Titulky</string>
+  <string name="row_item_language_description">Popis jazyka</string>
+  <string name="row_item_caption">Titulek</string>
+  <string name="show_captions_description">Popis</string>
+  <string name="nearby_row_image">Obrázek</string>
+  <string name="nearby_all">Vše</string>
+  <string name="nearby_filter_toggle">Přepnout nahoru</string>
+  <string name="nearby_filter_search">Zobrazení vyhledávání</string>
+  <string name="nearby_filter_state">Stát místa</string>
+  <string name="appwidget_img">Obrázek dne</string>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="one">Nahrávání %1$d souboru</item>
+    <item quantity="few">Nahrávání %1$d souborů</item>
+    <item quantity="many">Nahrávání %1$d souborů</item>
+    <item quantity="other">Nahrávání %1$d souborů</item>
   </plurals>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">\@string/contributions_subtitle_zero</item>
+  <plurals name="contributions_subtitle">
     <item quantity="one">(%1$d)</item>
+    <item quantity="few">(%1$d)</item>
+    <item quantity="many">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
-  <plurals name="starting_multiple_uploads" fuzzy="true">
-    <item quantity="one">Spouští se nahrávání %1$d souboru</item>
-    <item quantity="other">Spouští se nahrávání %1$d souborů</item>
+  <string name="starting_uploads">Spouštění nahrávání</string>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">Zpracovávání %d nahrání</item>
+    <item quantity="few">Zpracovávání %d nahrání</item>
+    <item quantity="many">Zpracovávání %d nahrání</item>
+    <item quantity="other">Zpracovávání %d nahrání</item>
   </plurals>
-  <plurals name="multiple_uploads_title" fuzzy="true">
-    <item quantity="one">%1$d nahrávání</item>
-    <item quantity="other">%1$d nahrávání</item>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">%d nahrávání</item>
+    <item quantity="few">%d nahrávání</item>
+    <item quantity="many">%d nahrávání</item>
+    <item quantity="other">%d nahrávání</item>
   </plurals>
-  <plurals name="share_license_summary" fuzzy="true">
+  <plurals name="share_license_summary">
     <item quantity="one">Tento obrázek bude zveřejněn pod licencí %1$s</item>
+    <item quantity="few">Tyto obrázky budou zveřejněny pod licencí %1$s</item>
+    <item quantity="many">Tyto obrázky budou zveřejněny pod licencí %1$s</item>
     <item quantity="other">Tyto obrázky budou zveřejněny pod licencí %1$s</item>
   </plurals>
-  <plurals name="upload_count_title" fuzzy="true">
+  <plurals name="upload_count_title">
     <item quantity="one">%1$d nahrání</item>
+    <item quantity="few">%1$d nahrání</item>
+    <item quantity="many">%1$d nahrání</item>
     <item quantity="other">%1$d nahrání</item>
   </plurals>
   <plurals name="receiving_shared_content" fuzzy="true">
@@ -59,9 +93,9 @@
   <string name="preference_category_feedback">Zpětná vazba</string>
   <string name="preference_category_privacy">Soukromí</string>
   <string name="app_name">Commons</string>
-  <string name="bullet">•</string>
   <string name="menu_settings">Nastavení</string>
   <string name="intent_share_upload_label">Nahrát na Commons</string>
+  <string name="upload_in_progress">Probíhá nahrávání</string>
   <string name="username">Uživatelské jméno</string>
   <string name="password">Heslo</string>
   <string name="login_credential">Přihlásit se do svého Commons beta účtu</string>
@@ -70,17 +104,19 @@
   <string name="signup">Zaregistrovat se</string>
   <string name="logging_in_title">Přihlášení</string>
   <string name="logging_in_message">Čekejte prosím…</string>
-  <string name="login_success">Přihlášení uspělo!</string>
-  <string name="login_failed">Přihlášení se nezdařilo!</string>
+  <string name="updating_caption_title">Nahrávání titulků a popisů</string>
+  <string name="updating_caption_message">Čekejte prosím…</string>
+  <string name="login_success">Úspěšně přihlášeni!</string>
+  <string name="login_failed" fuzzy="true">Přihlášení se nezdařilo!</string>
   <string name="upload_failed">Soubor nebyl nalezen. Prosím, zkuste jiný soubor.</string>
-  <string name="authentication_failed">Ověření se nezdařilo, prosím přihlaste se znovu</string>
+  <string name="authentication_failed" fuzzy="true">Ověření se nezdařilo, prosím přihlaste se znovu</string>
   <string name="uploading_started">Nahrávání začalo!</string>
   <string name="upload_completed_notification_title">%1$s nahráno!</string>
   <string name="upload_completed_notification_text">Klepnutím zobrazíte upload</string>
   <string name="upload_progress_notification_title_start">Načítání souboru: %s</string>
   <string name="upload_progress_notification_title_in_progress">Nahrává se soubor %1$s</string>
   <string name="upload_progress_notification_title_finishing">Dokončení nahrávání souboru %1$s</string>
-  <string name="upload_failed_notification_title">Načítání souboru %1$s se nezdařilo</string>
+  <string name="upload_failed_notification_title">Nepodařilo se nahrát soubor %1$s</string>
   <string name="upload_paused_notification_title">Načítání souboru %1$s bylo pozastaveno</string>
   <string name="upload_failed_notification_subtitle">Klepnutím zobrazíte</string>
   <string name="upload_paused_notification_subtitle">Klepnutím zobrazíte</string>
@@ -98,11 +134,11 @@
   <string name="add_caption_toast">Prosím, zadejte titulek pro tento soubor</string>
   <string name="share_description_hint">Popis</string>
   <string name="share_caption_hint" fuzzy="true">Popisek (max. 255 znaků)</string>
-  <string name="login_failed_network">Nelze se přihlásit - selhání sítě</string>
+  <string name="login_failed_network" fuzzy="true">Nelze se přihlásit - selhání sítě</string>
   <string name="login_failed_throttled">Příliš mnoho neúspěšných pokusů. Zkuste to prosím znovu za několik minut.</string>
   <string name="login_failed_blocked">Omlouváme se, tento uživatel byl na Commons zablokován</string>
   <string name="login_failed_2fa_needed">Prosím vložte kód pro své dvoufázové ověření.</string>
-  <string name="login_failed_generic">Přihlášení se nezdařilo</string>
+  <string name="login_failed_generic" fuzzy="true">Přihlášení se nezdařilo</string>
   <string name="share_upload_button">Nahrát</string>
   <string name="multiple_share_base_title">Pojmenujte tuto sadu</string>
   <string name="provider_modifications">Úpravy</string>
@@ -198,10 +234,6 @@
   <string name="become_a_tester_description">Přihlásit se do našeho beta kanálu na Google Play a dostávat včasný přístup k novinkám a opravám chyb</string>
   <string name="_2fa_code">Kód pro dvoufázové ověření (2FA)</string>
   <string name="logout_verification">Opravdu se chcete odhlásit?</string>
-  <string name="commons_logo">Logo Wikimedia Commons</string>
-  <string name="commons_website">Stránka Commons</string>
-  <string name="commons_facebook">Facebooková stránka Commons</string>
-  <string name="commons_github">Zdrojový kód Commons na GitHubu</string>
   <string name="mediaimage_failed">Obrázek</string>
   <string name="no_subcategory_found">Nebyly nalezeny podkategorie</string>
   <string name="no_parentcategory_found">Nebyly nalezeny rodičovské kategorie</string>
@@ -250,8 +282,8 @@
   <string name="nominated_see_more">Zobrazit webovou stránku pro více informací</string>
   <string name="skip_login">Přeskočit</string>
   <string name="navigation_item_login">Přihlásit se</string>
-  <string name="skip_login_title">Opravdu chcete přeskočit přihlášení?</string>
-  <string name="skip_login_message">Budete-li chtít nahrát obrázky v budoucnu, musíte se přihlásit.</string>
+  <string name="skip_login_title" fuzzy="true">Opravdu chcete přeskočit přihlášení?</string>
+  <string name="skip_login_message" fuzzy="true">Budete-li chtít nahrát obrázky v budoucnu, musíte se přihlásit.</string>
   <string name="login_alert_message">K použití této funkce se musíte přihlásit</string>
   <string name="copy_wikicode">Zkopírovat wikitext do schránky</string>
   <string name="wikicode_copied">Wikitext byl zkopírován do schránky</string>
@@ -283,7 +315,6 @@
   <string name="image_uploaded_by">Nahrál/a: %1$s</string>
   <string name="block_notification_title">Zablokováno</string>
   <string name="block_notification">Máte zablokovanou možnost editace Wikimedia Commons.</string>
-  <string name="appwidget_img">Obrázek dne</string>
   <string name="app_widget_heading">Obrázek dne</string>
   <string name="menu_search_button">Hledat</string>
   <string name="search_commons">Hledat na Commons</string>
@@ -313,14 +344,14 @@
   <string name="construction_event_answer">Obrázky s technickou či kulturní tematikou jsou na Commons vítány.</string>
   <string name="congratulatory_message_quiz">Zodpověděli jste správně %1$s otázek. Gratulujeme!</string>
   <string name="warning_for_no_answer">Vyberte správnou možnost</string>
-  <string name="user_not_logged_in">Došlo k odhlášení, prosím přihlašte se.</string>
+  <string name="user_not_logged_in" fuzzy="true">Došlo k odhlášení, prosím přihlašte se.</string>
   <string name="quiz_result_share_message">Sdílejte váš kvíz s přáteli!</string>
   <string name="continue_message">Pokračovat</string>
   <string name="correct">Správná odpověď</string>
   <string name="wrong">Nesprávná odpověď</string>
   <string name="quiz_screenshot_question">Je v pořádku nahrát tento snímek obrazovky?</string>
   <string name="share_app_title">Sdílet aplikaci</string>
-  <string name="error_fetching_nearby_places">Nastala chyba při hledání míst v okolí.</string>
+  <string name="error_fetching_nearby_places" fuzzy="true">Nastala chyba při hledání míst v okolí.</string>
   <string name="no_recent_searches">Zatím žádné vyhledávání</string>
   <string name="delete_recent_searches_dialog">Opravdu chcete vyčistit historii vašeho hledání?</string>
   <string name="delete_search_dialog">Chcete odstranit toto hledání?</string>
@@ -333,7 +364,7 @@
   <string name="statistics_thanks">Obdržená poděkování</string>
   <string name="statistics_featured">Nejlepší obrázky</string>
   <string name="statistics_wikidata_edits">Obrázky přes „Místa v okolí“</string>
-  <string name="level">Úroveň</string>
+  <string name="level" fuzzy="true">Úroveň</string>
   <string name="images_uploaded">Nahrané obrázky</string>
   <string name="image_reverts">Nerevertované obrázky</string>
   <string name="images_used_by_wiki">Použitých obrázků</string>
@@ -361,7 +392,6 @@
   <string name="step_count">Krok %1$d z %2$d: %3$s</string>
   <string name="next">Další</string>
   <string name="previous">Předchozí</string>
-  <string name="submit">Odeslat</string>
   <string name="upload_title_duplicate" fuzzy="true">Soubor s názvem %1$s již existuje. Opravdu chcete pokračovat?</string>
   <string name="map_application_missing">Na vašem zařízení nebyla nalezena žádná kompatibilní aplikace poskytující mapy. Pro použití této funkce nainstalujte aplikaci poskytující mapy.</string>
   <string name="title_page_bookmarks_pictures">Obrázky</string>
@@ -388,12 +418,12 @@
   <string name="never_ask_again">Znovu nezobrazovat</string>
   <string name="display_location_permission_title" fuzzy="true">Zobrazit oprávnění k umístění</string>
   <string name="display_location_permission_explanation">Požádejte o oprávnění k umístění, pokud je zapotřebí pro funkci zobrazení pohledu v blízkosti.</string>
-  <string name="achievements_fetch_failed">Nastala neočekávaná chyba. Nemohli jsme dokončit akci</string>
+  <string name="achievements_fetch_failed">Nastala neočekávaná chyba. Nemohli jsme načíst vaše úspěchy</string>
   <string name="ends_on">Končí:</string>
   <string name="display_campaigns">Zobrazovat kampaně</string>
   <string name="display_campaigns_explanation">Podívejte se na probíhající kampaně</string>
   <string name="nearby_campaign_dismiss_message">Kampaně již neuvidíte. Toto oznámení však můžete znovu zapnout v Nastavení.</string>
-  <string name="this_function_needs_network_connection">Tato funkce vyžaduje připojení k síti, zkontrolujte prosím nastavení připojení.</string>
+  <string name="this_function_needs_network_connection" fuzzy="true">Tato funkce vyžaduje připojení k síti, zkontrolujte prosím nastavení připojení.</string>
   <string name="error_processing_image">Během zpracování obrázku došlo k chybě. Prosím zkuste to znovu!</string>
   <string name="getting_edit_token">Probíhá získávání tokenu pro editaci</string>
   <string name="check_category_adding_template">Probíhá přidávání šablony na zkontrolování kategorie</string>
@@ -424,7 +454,7 @@
   <string name="review_thanks_yes_button_text">Další obrázek</string>
   <string name="review_thanks_no_button_text">Ano, proč ne</string>
   <string name="skip_image_explanation">Kliknutím na toto tlačítko se zobrazí další nedávno nahraný obrázek z Wikimedia Commons</string>
-  <string name="review_image_explanation">Můžete kontrolovat obrázky a zlepšit kvalitu Wikimedia Commons.\n\nTři aspekty, které se posuzují:\n  - Je tento obrázek v pořádku?\n  - Dodržuje tento obrázok pravidla autorských práv?\n  - Je tento obrázek správně kategorizován?\n\nPokud je vše v pořádku, autorovi můžete poděkovat.</string>
+  <string name="review_image_explanation" fuzzy="true">Můžete kontrolovat obrázky a zlepšit kvalitu Wikimedia Commons.\n\nTři aspekty, které se posuzují:\n  - Je tento obrázek v pořádku?\n  - Dodržuje tento obrázok pravidla autorských práv?\n  - Je tento obrázek správně kategorizován?\n\nPokud je vše v pořádku, autorovi můžete poděkovat.</string>
   <string name="no_image">Nejsou použity žádné obrázky</string>
   <string name="no_image_reverted">Žádné revertované obrázky</string>
   <string name="no_image_uploaded">Žádné nahrané obrázky</string>
@@ -467,16 +497,15 @@
   <string name="delete_helper_show_deletion_message_if">Soubor %1$s byl nominován na smazání.</string>
   <string name="delete_helper_show_deletion_title_failed">Chyba</string>
   <string name="delete_helper_show_deletion_message_else">Nepodařilo se požádat o smazání.</string>
-  <string name="delete_helper_ask_spam_selfie">Selfie</string>
-  <string name="delete_helper_ask_spam_blurry">Rozmazané</string>
-  <string name="delete_helper_ask_spam_nonsense">Nesmysl</string>
+  <string name="delete_helper_ask_spam_selfie" fuzzy="true">Selfie</string>
+  <string name="delete_helper_ask_spam_blurry" fuzzy="true">Rozmazané</string>
+  <string name="delete_helper_ask_spam_nonsense" fuzzy="true">Nesmysl</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">Tisková fotka</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">Náhodná fotka z internetu</string>
   <string name="delete_helper_ask_reason_copyright_logo">Logo</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">Pretože to je</string>
   <string name="category_edit_helper_show_edit_title_success">Úspěch</string>
   <string name="share_image_via">Sdílet obrázek pomocí</string>
-  <string name="you_have_no_achievements_yet">Zatím nemáte žádné příspěvky</string>
   <string name="no_achievements_yet">Zatím nemáte žádné příspěvky</string>
   <string name="account_created">Účet byl založen!</string>
   <string name="text_copy">Text byl zkopírován do schránky.</string>
@@ -487,10 +516,13 @@
   <string name="place_state_needs_photo">Potřebuje fotku</string>
   <string name="place_type">Typ místa:</string>
   <string name="nearby_search_hint">Most, muzeum, hotel atd.</string>
-  <string name="you_must_reset_your_passsword">Při přihlášení nastala chyba, musíte si resetovat vaše heslo!</string>
+  <string name="you_must_reset_your_passsword" fuzzy="true">Při přihlášení nastala chyba, musíte si resetovat vaše heslo!</string>
   <string name="upload_nearby_place_found_title">Místo v okolí nalezeno</string>
-  <string name="upload_nearby_place_found_description">Je toto fotka místa %1$s?</string>
+  <string name="upload_nearby_place_found_description_singular" fuzzy="true">Je toto fotka místa %1$s?</string>
+  <string name="title_app_shortcut_bookmark">Záložky</string>
   <string name="title_app_shortcut_setting">Nastavení</string>
+  <string name="remove_bookmark">Odebráno ze záložek</string>
+  <string name="add_bookmark">Přidáno do záložek</string>
   <string name="wallpaper_set_unsuccessfully">Něco se pokazilo. Tapetu se nepodařilo nastavit</string>
   <string name="setting_wallpaper_dialog_title">Nastavit jako tapetu</string>
   <string name="setting_wallpaper_dialog_message">Nastavování tapety. Prosím, čekejte…</string>
@@ -534,6 +566,4 @@
   <string name="leaderboard_weekly">Týdně</string>
   <string name="leaderboard_upload">Nahrát</string>
   <string name="read_help_link">Číst dál</string>
-  <string name="need_permission">Zobrazit oprávnění</string>
-  <string name="menu_view_user_page">Prohlédnout si uživatelskou stránku</string>
 </resources>

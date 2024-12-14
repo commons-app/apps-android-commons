@@ -5,10 +5,13 @@
 * Silraks
 -->
 <resources>
+  <string name="commons_logo">Commons logo</string>
+  <string name="commons_website">Commons mājaslapa</string>
+  <string name="submit">Iesniegt</string>
+  <string name="appwidget_img">Dienas attēls</string>
   <string name="preference_category_feedback">Atsauksmes</string>
   <string name="preference_category_privacy">Konfidencialitāte</string>
   <string name="app_name">Commons</string>
-  <string name="bullet">•</string>
   <string name="menu_settings">Iestatījumi</string>
   <string name="intent_share_upload_label">Augšupielādēt Commons</string>
   <string name="username">Lietotājvārds</string>
@@ -19,15 +22,15 @@
   <string name="logging_in_title">Pieslēdzas</string>
   <string name="logging_in_message">Lūdzu, uzgaidiet…</string>
   <string name="updating_caption_message">Lūdzu, uzgaidi...</string>
-  <string name="login_success">Ieiešana veiksmīga</string>
-  <string name="login_failed">Pieteikšanās neizdevās.</string>
+  <string name="login_success" fuzzy="true">Ieiešana veiksmīga</string>
+  <string name="login_failed" fuzzy="true">Pieteikšanās neizdevās.</string>
   <string name="authentication_failed" fuzzy="true">Autentifikācija neizdevās!</string>
   <string name="uploading_started">Augšupielāde sākās!</string>
   <string name="upload_completed_notification_title">%1$s augšupielādēti!</string>
   <string name="upload_progress_notification_title_start" fuzzy="true">Uzsāk %1$s augšupielādi</string>
   <string name="upload_progress_notification_title_in_progress">%1$s augšupielādēti</string>
   <string name="upload_progress_notification_title_finishing">Pabeidz %1$s augšupielādi</string>
-  <string name="upload_failed_notification_title">Neizdevās augšupielādēt %1$s</string>
+  <string name="upload_failed_notification_title" fuzzy="true">Neizdevās augšupielādēt %1$s</string>
   <string name="upload_failed_notification_subtitle">Pieskarieties, lai skatītu</string>
   <string name="title_activity_contributions">Manas nesenās augšupielādes</string>
   <string name="contribution_state_queued">Rindā iekļauts</string>
@@ -42,7 +45,7 @@
   <string name="share_title_hint" fuzzy="true">Nosaukums (obligāts)</string>
   <string name="share_description_hint">Apraksts</string>
   <string name="login_failed_blocked">Atvainojiet, šis lietotājs tika bloķēts uz Commons</string>
-  <string name="login_failed_generic">Pieteikšanās neizdevās</string>
+  <string name="login_failed_generic" fuzzy="true">Pieteikšanās neizdevās</string>
   <string name="share_upload_button">Augšupielādēt</string>
   <string name="provider_modifications">Izmaiņas</string>
   <string name="menu_upload_single">Augšupielādēt</string>
@@ -93,8 +96,6 @@
   <string name="media_detail_coordinates">Koordinātas</string>
   <string name="media_detail_coordinates_empty">Nav norādītas</string>
   <string name="_2fa_code">2FA kods</string>
-  <string name="commons_logo">Commons logo</string>
-  <string name="commons_website">Commons mājaslapa</string>
   <string name="welcome_image_llamas">Lama</string>
   <string name="welcome_image_rainbow_bridge">Varavīksnes tilts</string>
   <string name="welcome_image_tulip">Tulpe</string>
@@ -130,7 +131,6 @@
   <string name="about_translate_cancel">Atcelt</string>
   <string name="retry">Mēģināt vēlreiz</string>
   <string name="block_notification_title">Bloķēts</string>
-  <string name="appwidget_img">Dienas attēls</string>
   <string name="app_widget_heading">Dienas attēls</string>
   <string name="menu_search_button">Meklēt</string>
   <string name="title_activity_search">Meklēt</string>
@@ -145,12 +145,11 @@
   <string name="delete">Dzēst</string>
   <string name="Profile">Profils</string>
   <string name="statistics">Statistika</string>
-  <string name="level">Līmenis</string>
+  <string name="level" fuzzy="true">Līmenis</string>
   <string name="nearby_fragment">Tuvumā</string>
   <string name="list_sheet">Saraksts</string>
   <string name="next">Nākamais</string>
   <string name="previous">Iepriekšējais</string>
-  <string name="submit">Iesniegt</string>
   <string name="title_page_bookmarks_pictures">Attēli</string>
   <string name="title_page_bookmarks_locations">Atrašanās vietas</string>
   <string name="menu_bookmark">Pievienot/noņemt no grāmatzīmēm</string>
@@ -174,8 +173,8 @@
   <string name="exif_tag_name_serialNumbers">Sērijas numuri</string>
   <string name="exif_tag_name_software">Programmatūra</string>
   <string name="delete_helper_show_deletion_title_failed">Neizdevās</string>
-  <string name="delete_helper_ask_spam_selfie">Pašbilde</string>
-  <string name="delete_helper_ask_spam_blurry">Miglains</string>
+  <string name="delete_helper_ask_spam_selfie" fuzzy="true">Pašbilde</string>
+  <string name="delete_helper_ask_spam_blurry" fuzzy="true">Miglains</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">Nejaušs foto no interneta</string>
   <string name="delete_helper_ask_reason_copyright_logo">Logotips</string>
   <string name="account_created">Konts izveidots!</string>

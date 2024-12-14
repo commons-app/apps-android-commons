@@ -1,7 +1,6 @@
 package fr.free.nrw.commons.customselector.ui.adapter
 
 import android.content.ContentResolver
-import fr.free.nrw.commons.R
 import android.content.Context
 import android.net.Uri
 import android.view.LayoutInflater
@@ -9,6 +8,7 @@ import android.view.View
 import android.widget.GridLayout
 import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.whenever
+import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.customselector.listeners.FolderClickListener
 import fr.free.nrw.commons.customselector.model.Folder
@@ -21,7 +21,6 @@ import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.MockitoAnnotations
-import org.powermock.reflect.Whitebox
 import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
@@ -32,7 +31,6 @@ import org.robolectric.annotation.Config
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
 class FolderAdapterTest {
-
     private var uri: Uri = Mockito.mock(Uri::class.java)
     private lateinit var activity: CustomSelectorActivity
     private lateinit var folderAdapter: FolderAdapter
@@ -49,7 +47,7 @@ class FolderAdapterTest {
     @Before
     @Throws(Exception::class)
     fun setUp() {
-        MockitoAnnotations.initMocks(this)
+        MockitoAnnotations.openMocks(this)
 
         activity = Robolectric.buildActivity(CustomSelectorActivity::class.java).get()
         image = Image(1, "image", uri, "abc/abc", 1, "bucket1")
@@ -76,7 +74,6 @@ class FolderAdapterTest {
 
         whenever(context.contentResolver).thenReturn(mockContentResolver)
         whenever(mockContentResolver.getType(any())).thenReturn("jpg")
-        Whitebox.setInternalState(folderAdapter, "context", context)
         folderAdapter.init(folderList)
         folderAdapter.onBindViewHolder(FolderAdapter.FolderViewHolder(listItemView), 0)
     }

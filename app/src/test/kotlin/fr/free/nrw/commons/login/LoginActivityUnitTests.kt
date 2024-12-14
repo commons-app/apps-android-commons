@@ -5,10 +5,12 @@ import android.content.Context
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import androidx.test.core.app.ApplicationProvider
+import fr.free.nrw.commons.OkHttpConnectionFactory
 import fr.free.nrw.commons.R
-import fr.free.nrw.commons.TestAppAdapter
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.auth.LoginActivity
+import fr.free.nrw.commons.createTestClient
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
@@ -17,17 +19,13 @@ import org.mockito.Mock
 import org.mockito.MockitoAnnotations
 import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
-import org.robolectric.RuntimeEnvironment
 import org.robolectric.annotation.Config
 import org.robolectric.fakes.RoboMenuItem
-import org.wikipedia.AppAdapter
 import java.lang.reflect.Field
-
 
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
 class LoginActivityUnitTests {
-
     @Mock
     private lateinit var activity: LoginActivity
 
@@ -46,14 +44,13 @@ class LoginActivityUnitTests {
 
     @Before
     fun setUp() {
+        MockitoAnnotations.openMocks(this)
 
-        MockitoAnnotations.initMocks(this)
-
-        AppAdapter.set(TestAppAdapter())
+        OkHttpConnectionFactory.CLIENT = createTestClient()
 
         activity = Robolectric.buildActivity(LoginActivity::class.java).create().get()
 
-        context = RuntimeEnvironment.application.applicationContext
+        context = ApplicationProvider.getApplicationContext()
 
         val fieldProgressDialog: Field =
             LoginActivity::class.java.getDeclaredField("progressDialog")
@@ -116,5 +113,4 @@ class LoginActivityUnitTests {
     fun testSetContentView() {
         activity.setContentView(view, params)
     }
-
 }

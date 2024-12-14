@@ -3,49 +3,55 @@ package fr.free.nrw.commons.contributions
 import android.content.Context
 import android.os.Bundle
 import android.os.Looper
-import android.view.*
+import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
+import android.view.View
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
+import androidx.test.core.app.ApplicationProvider
+import fr.free.nrw.commons.OkHttpConnectionFactory
 import fr.free.nrw.commons.R
-import fr.free.nrw.commons.TestAppAdapter
 import fr.free.nrw.commons.TestCommonsApplication
-import fr.free.nrw.commons.campaigns.Campaign
 import fr.free.nrw.commons.campaigns.CampaignView
+import fr.free.nrw.commons.campaigns.models.Campaign
+import fr.free.nrw.commons.createTestClient
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.media.MediaDetailPagerFragment
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient
 import fr.free.nrw.commons.nearby.NearbyNotificationCardView
-import fr.free.nrw.commons.notification.Notification
 import fr.free.nrw.commons.notification.NotificationController
-import fr.free.nrw.commons.notification.NotificationType
+import fr.free.nrw.commons.notification.models.Notification
+import fr.free.nrw.commons.notification.models.NotificationType
 import io.reactivex.Single
 import io.reactivex.disposables.CompositeDisposable
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.ArgumentMatchers.*
+import org.mockito.ArgumentMatchers.any
+import org.mockito.ArgumentMatchers.anyBoolean
+import org.mockito.ArgumentMatchers.anyInt
+import org.mockito.ArgumentMatchers.anyString
 import org.mockito.Mock
-import org.mockito.Mockito.`when`
 import org.mockito.Mockito.verify
+import org.mockito.Mockito.`when`
 import org.mockito.MockitoAnnotations
 import org.powermock.reflect.Whitebox
 import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
-import org.robolectric.RuntimeEnvironment
 import org.robolectric.Shadows
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
-import org.wikipedia.AppAdapter
 import java.lang.reflect.Method
 
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
 @LooperMode(LooperMode.Mode.PAUSED)
 class ContributionsFragmentUnitTests {
-
     @Mock
     private lateinit var mediaDetailPagerFragment: MediaDetailPagerFragment
 
@@ -99,11 +105,10 @@ class ContributionsFragmentUnitTests {
     fun setUp() {
         MockitoAnnotations.initMocks(this)
 
-        AppAdapter.set(TestAppAdapter())
+        OkHttpConnectionFactory.CLIENT = createTestClient()
 
-        context = RuntimeEnvironment.application.applicationContext
+        context = ApplicationProvider.getApplicationContext()
         activity = Robolectric.buildActivity(MainActivity::class.java).create().get()
-
 
         fragment = ContributionsFragment.newInstance()
         val fragmentManager: FragmentManager = activity.supportFragmentManager
@@ -112,29 +117,20 @@ class ContributionsFragmentUnitTests {
         fragmentTransaction.commit()
 
         layoutInflater = LayoutInflater.from(activity)
-        view = LayoutInflater.from(activity)
-            .inflate(R.layout.fragment_contributions, null) as View
+        view =
+            LayoutInflater
+                .from(activity)
+                .inflate(R.layout.fragment_contributions, null) as View
 
         nearbyNotificationCardView = view.findViewById(R.id.card_view_nearby)
         campaignView = view.findViewById(R.id.campaigns_view)
 
         Whitebox.setInternalState(fragment, "contributionsListFragment", contributionsListFragment)
         Whitebox.setInternalState(fragment, "store", store)
-        Whitebox.setInternalState(
-            fragment,
-            "limitedConnectionEnabledLayout",
-            limitedConnectionEnabledLayout
-        )
         Whitebox.setInternalState(fragment, "notificationCount", notificationCount)
         Whitebox.setInternalState(fragment, "notificationController", notificationController)
         Whitebox.setInternalState(fragment, "compositeDisposable", compositeDisposable)
         Whitebox.setInternalState(fragment, "okHttpJsonApiClient", okHttpJsonApiClient)
-        Whitebox.setInternalState(
-            fragment,
-            "nearbyNotificationCardView",
-            nearbyNotificationCardView
-        )
-        Whitebox.setInternalState(fragment, "campaignView", campaignView)
     }
 
     @Test
@@ -167,17 +163,20 @@ class ContributionsFragmentUnitTests {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
         `when`(notificationController.getNotifications(anyBoolean())).thenReturn(singleNotification)
         `when`(notificationController.getNotifications(anyBoolean()).subscribeOn(any())).thenReturn(
-            singleNotification
+            singleNotification,
         )
         `when`(
             notificationController.getNotifications(anyBoolean()).subscribeOn(any()).observeOn(
-                any()
-            )
+                any(),
+            ),
         ).thenReturn(singleNotification)
         `when`(
-            notificationController.getNotifications(anyBoolean()).subscribeOn(any()).observeOn(
-                any()
-            ).subscribe()
+            notificationController
+                .getNotifications(anyBoolean())
+                .subscribeOn(any())
+                .observeOn(
+                    any(),
+                ).subscribe(),
         ).thenReturn(compositeDisposable)
         fragment.setNotificationCount()
     }
@@ -186,10 +185,11 @@ class ContributionsFragmentUnitTests {
     @Throws(Exception::class)
     fun testInitNotificationViewsCaseEmptyList() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
-        val method: Method = ContributionsFragment::class.java.getDeclaredMethod(
-            "initNotificationViews",
-            List::class.java
-        )
+        val method: Method =
+            ContributionsFragment::class.java.getDeclaredMethod(
+                "initNotificationViews",
+                List::class.java,
+            )
         method.isAccessible = true
         method.invoke(fragment, listOf<Notification>())
     }
@@ -200,10 +200,11 @@ class ContributionsFragmentUnitTests {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
         val list: List<Notification> =
             listOf(Notification(NotificationType.UNKNOWN, "", "", "", "", ""))
-        val method: Method = ContributionsFragment::class.java.getDeclaredMethod(
-            "initNotificationViews",
-            List::class.java
-        )
+        val method: Method =
+            ContributionsFragment::class.java.getDeclaredMethod(
+                "initNotificationViews",
+                List::class.java,
+            )
         method.isAccessible = true
         method.invoke(fragment, list)
     }
@@ -215,12 +216,11 @@ class ContributionsFragmentUnitTests {
         `when`(menu.findItem(anyInt())).thenReturn(menuItem)
         `when`(menuItem.actionView).thenReturn(notification)
         `when`(store.getBoolean(anyString(), anyBoolean())).thenReturn(true)
-        fragment.updateLimitedConnectionToggle(menu)
     }
 
     @Test
     @Throws(Exception::class)
-    fun testScrollToTop(){
+    fun testScrollToTop() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
         fragment.scrollToTop()
         verify(contributionsListFragment).scrollToTop()
@@ -359,5 +359,4 @@ class ContributionsFragmentUnitTests {
         `when`(mediaDetailPagerFragment.isVisible).thenReturn(false)
         fragment.showDetail(0, false)
     }
-
 }

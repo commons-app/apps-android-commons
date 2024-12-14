@@ -42,15 +42,15 @@ public class CustomOkHttpNetworkFetcher
     private final Call.Factory mCallFactory;
     private final @Nullable
     CacheControl mCacheControl;
-    private Executor mCancellationExecutor;
-    private JsonKvStore defaultKvStore;
+    private final Executor mCancellationExecutor;
+    private final JsonKvStore defaultKvStore;
 
     /**
      * @param okHttpClient client to use
      */
     @Inject
-    public CustomOkHttpNetworkFetcher(OkHttpClient okHttpClient,
-        @Named("default_preferences") JsonKvStore defaultKvStore) {
+    public CustomOkHttpNetworkFetcher(final OkHttpClient okHttpClient,
+        @Named("default_preferences") final JsonKvStore defaultKvStore) {
         this(okHttpClient, okHttpClient.dispatcher().executorService(), defaultKvStore);
     }
 
@@ -59,8 +59,9 @@ public class CustomOkHttpNetworkFetcher
      * @param cancellationExecutor executor on which fetching cancellation is performed if
      *                             cancellation is requested from the UI Thread
      */
-    public CustomOkHttpNetworkFetcher(Call.Factory callFactory, Executor cancellationExecutor,
-        JsonKvStore defaultKvStore) {
+    public CustomOkHttpNetworkFetcher(final Call.Factory callFactory,
+        final Executor cancellationExecutor,
+        final JsonKvStore defaultKvStore) {
         this(callFactory, cancellationExecutor, defaultKvStore, true);
     }
 
@@ -71,8 +72,9 @@ public class CustomOkHttpNetworkFetcher
      * @param disableOkHttpCache   true if network requests should not be cached by OkHttp
      */
     public CustomOkHttpNetworkFetcher(
-        Call.Factory callFactory, Executor cancellationExecutor, JsonKvStore defaultKvStore,
-        boolean disableOkHttpCache) {
+        final Call.Factory callFactory, final Executor cancellationExecutor,
+        final JsonKvStore defaultKvStore,
+        final boolean disableOkHttpCache) {
         this.defaultKvStore = defaultKvStore;
         mCallFactory = callFactory;
         mCancellationExecutor = cancellationExecutor;
@@ -81,7 +83,7 @@ public class CustomOkHttpNetworkFetcher
 
     @Override
     public OkHttpNetworkFetchState createFetchState(
-        Consumer<EncodedImage> consumer, ProducerContext context) {
+        final Consumer<EncodedImage> consumer, final ProducerContext context) {
         return new OkHttpNetworkFetchState(consumer, context);
     }
 
@@ -111,20 +113,21 @@ public class CustomOkHttpNetworkFetcher
             }
 
             fetchWithRequest(fetchState, callback, requestBuilder.build());
-        } catch (Exception e) {
+        } catch (final Exception e) {
             // handle error while creating the request
             callback.onFailure(e);
         }
     }
 
     @Override
-    public void onFetchCompletion(OkHttpNetworkFetchState fetchState, int byteSize) {
+    public void onFetchCompletion(final OkHttpNetworkFetchState fetchState, final int byteSize) {
         fetchState.fetchCompleteTime = SystemClock.elapsedRealtime();
     }
 
     @Override
-    public Map<String, String> getExtraMap(OkHttpNetworkFetchState fetchState, int byteSize) {
-        Map<String, String> extraMap = new HashMap<>(4);
+    public Map<String, String> getExtraMap(final OkHttpNetworkFetchState fetchState,
+        final int byteSize) {
+        final Map<String, String> extraMap = new HashMap<>(4);
         extraMap.put(QUEUE_TIME, Long.toString(fetchState.responseTime - fetchState.submitTime));
         extraMap
             .put(FETCH_TIME, Long.toString(fetchState.fetchCompleteTime - fetchState.responseTime));
@@ -146,69 +149,69 @@ public class CustomOkHttpNetworkFetcher
                 new BaseProducerContextCallbacks() {
                     @Override
                     public void onCancellationRequested() {
-                        if (Looper.myLooper() != Looper.getMainLooper()) {
-                            call.cancel();
-                        } else {
-                            mCancellationExecutor.execute(
-                                new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        call.cancel();
-                                    }
-                                });
-                        }
+                        onFetchCancellationRequested(call);
                     }
                 });
 
         call.enqueue(
             new okhttp3.Callback() {
                 @Override
-                public void onResponse(Call call, Response response) throws IOException {
-                    fetchState.responseTime = SystemClock.elapsedRealtime();
-                    final ResponseBody body = response.body();
-                    try {
-                        if (!response.isSuccessful()) {
-                            handleException(
-                                call, new IOException("Unexpected HTTP code " + response),
-                                callback);
-                            return;
-                        }
-
-                        BytesRange responseRange =
-                            BytesRange.fromContentRangeHeader(response.header("Content-Range"));
-                        if (responseRange != null
-                            && !(responseRange.from == 0
-                            && responseRange.to == BytesRange.TO_END_OF_CONTENT)) {
-                            // Only treat as a partial image if the range is not all of the content
-                            fetchState.setResponseBytesRange(responseRange);
-                            fetchState.setOnNewResultStatusFlags(Consumer.IS_PARTIAL_RESULT);
-                        }
-
-                        long contentLength = body.contentLength();
-                        if (contentLength < 0) {
-                            contentLength = 0;
-                        }
-                        callback.onResponse(body.byteStream(), (int) contentLength);
-                    } catch (Exception e) {
-                        handleException(call, e, callback);
-                    } finally {
-                        body.close();
-                    }
+                public void onResponse(final Call call, final Response response) {
+                    onFetchResponse(fetchState, call, response, callback);
                 }
 
                 @Override
-                public void onFailure(Call call, IOException e) {
+                public void onFailure(final Call call, final IOException e) {
                     handleException(call, e, callback);
                 }
             });
+    }
+
+    private void onFetchCancellationRequested(final Call call) {
+        if (Looper.myLooper() != Looper.getMainLooper()) {
+            call.cancel();
+        } else {
+            mCancellationExecutor.execute(call::cancel);
+        }
+    }
+
+    private void onFetchResponse(final OkHttpNetworkFetchState fetchState, final Call call,
+        final Response response,
+        final NetworkFetcher.Callback callback) {
+        fetchState.responseTime = SystemClock.elapsedRealtime();
+        try (final ResponseBody body = response.body()) {
+            if (!response.isSuccessful()) {
+                handleException(
+                    call, new IOException("Unexpected HTTP code " + response),
+                    callback);
+                return;
+            }
+
+            final BytesRange responseRange =
+                BytesRange.fromContentRangeHeader(response.header("Content-Range"));
+            if (responseRange != null
+                && !(responseRange.from == 0
+                && responseRange.to == BytesRange.TO_END_OF_CONTENT)) {
+                // Only treat as a partial image if the range is not all of the content
+                fetchState.setResponseBytesRange(responseRange);
+                fetchState.setOnNewResultStatusFlags(Consumer.IS_PARTIAL_RESULT);
+            }
+
+            long contentLength = body.contentLength();
+            if (contentLength < 0) {
+                contentLength = 0;
+            }
+            callback.onResponse(body.byteStream(), (int) contentLength);
+        } catch (final Exception e) {
+            handleException(call, e, callback);
+        }
     }
 
     /**
      * Handles exceptions.
      *
      * <p>OkHttp notifies callers of cancellations via an IOException. If IOException is caught
-     * after
-     * request cancellation, then the exception is interpreted as successful cancellation and
+     * after request cancellation, then the exception is interpreted as successful cancellation and
      * onCancellation is called. Otherwise onFailure is called.
      */
     private void handleException(final Call call, final Exception e, final Callback callback) {
@@ -226,7 +229,7 @@ public class CustomOkHttpNetworkFetcher
         public long fetchCompleteTime;
 
         public OkHttpNetworkFetchState(
-            Consumer<EncodedImage> consumer, ProducerContext producerContext) {
+            final Consumer<EncodedImage> consumer, final ProducerContext producerContext) {
             super(consumer, producerContext);
         }
     }

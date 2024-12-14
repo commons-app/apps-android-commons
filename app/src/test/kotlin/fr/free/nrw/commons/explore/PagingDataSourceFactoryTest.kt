@@ -10,7 +10,6 @@ import fr.free.nrw.commons.explore.paging.PagingDataSourceFactory
 import io.reactivex.processors.PublishProcessor
 import org.hamcrest.CoreMatchers.instanceOf
 import org.hamcrest.MatcherAssert
-import org.junit.Assert
 import org.junit.Before
 import org.junit.Ignore
 import org.junit.Test
@@ -19,7 +18,6 @@ import org.mockito.Mockito
 import org.mockito.MockitoAnnotations
 
 class PagingDataSourceFactoryTest {
-
     @Mock
     private lateinit var depictsClient: DepictsClient
 
@@ -31,17 +29,18 @@ class PagingDataSourceFactoryTest {
 
     @Before
     fun setUp() {
-        MockitoAnnotations.initMocks(this)
-        factory = object : PagingDataSourceFactory<String>(loadingStates) {
-            override val loadFunction get() = function
-        }
+        MockitoAnnotations.openMocks(this)
+        factory =
+            object : PagingDataSourceFactory<String>(loadingStates) {
+                override val loadFunction get() = function
+            }
     }
 
     @Test
     fun `create returns a dataSource`() {
         MatcherAssert.assertThat(
             factory.create(),
-            instanceOf(PagingDataSource::class.java)
+            instanceOf(PagingDataSource::class.java),
         )
     }
 

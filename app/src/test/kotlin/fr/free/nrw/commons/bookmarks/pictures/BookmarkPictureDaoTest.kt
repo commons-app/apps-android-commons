@@ -7,23 +7,39 @@ import android.database.MatrixCursor
 import android.database.sqlite.SQLiteDatabase
 import android.net.Uri
 import android.os.RemoteException
-import com.nhaarman.mockitokotlin2.*
-import fr.free.nrw.commons.BuildConfig
+import com.nhaarman.mockitokotlin2.any
+import com.nhaarman.mockitokotlin2.anyOrNull
+import com.nhaarman.mockitokotlin2.argumentCaptor
+import com.nhaarman.mockitokotlin2.eq
+import com.nhaarman.mockitokotlin2.inOrder
+import com.nhaarman.mockitokotlin2.isA
+import com.nhaarman.mockitokotlin2.isNull
+import com.nhaarman.mockitokotlin2.mock
+import com.nhaarman.mockitokotlin2.verify
+import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.TestCommonsApplication
-import fr.free.nrw.commons.bookmarks.Bookmark
+import fr.free.nrw.commons.bookmarks.models.Bookmark
 import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesContentProvider.BASE_URI
-import org.junit.runner.RunWith
-import org.robolectric.RobolectricTestRunner
-import org.robolectric.annotation.Config
-import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesDao.Table.*
-import org.junit.Assert.*
+import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesDao.Table.COLUMN_CREATOR
+import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesDao.Table.COLUMN_MEDIA_NAME
+import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesDao.Table.CREATE_TABLE_STATEMENT
+import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesDao.Table.DROP_TABLE_STATEMENT
+import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesDao.Table.onCreate
+import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesDao.Table.onDelete
+import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesDao.Table.onUpdate
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertFalse
+import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
+import org.junit.runner.RunWith
+import org.mockito.Mockito.verifyNoInteractions
+import org.robolectric.RobolectricTestRunner
+import org.robolectric.annotation.Config
 
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
 class BookmarkPictureDaoTest {
-
     private val columns = arrayOf(COLUMN_MEDIA_NAME, COLUMN_CREATOR)
     private val client: ContentProviderClient = mock()
     private val database: SQLiteDatabase = mock()
@@ -70,8 +86,7 @@ class BookmarkPictureDaoTest {
 
         var result = testObject.allBookmarks
 
-        assertEquals(14,(result.size))
-
+        assertEquals(14, (result.size))
     }
 
     @Test(expected = RuntimeException::class)
@@ -102,7 +117,6 @@ class BookmarkPictureDaoTest {
 
         verify(mockCursor).close()
     }
-
 
     @Test
     fun updateNewBookmark() {
@@ -166,42 +180,42 @@ class BookmarkPictureDaoTest {
     fun migrateTableVersionFrom_v1_to_v2() {
         onUpdate(database, 1, 2)
         // Table didn't exist before v5
-        verifyZeroInteractions(database)
+        verifyNoInteractions(database)
     }
 
     @Test
     fun migrateTableVersionFrom_v2_to_v3() {
         onUpdate(database, 2, 3)
         // Table didn't exist before v5
-        verifyZeroInteractions(database)
+        verifyNoInteractions(database)
     }
 
     @Test
     fun migrateTableVersionFrom_v3_to_v4() {
         onUpdate(database, 3, 4)
         // Table didn't exist before v5
-        verifyZeroInteractions(database)
+        verifyNoInteractions(database)
     }
 
     @Test
     fun migrateTableVersionFrom_v4_to_v5() {
         onUpdate(database, 4, 5)
         // Table didn't change in version 5
-        verifyZeroInteractions(database)
+        verifyNoInteractions(database)
     }
 
     @Test
     fun migrateTableVersionFrom_v5_to_v6() {
         onUpdate(database, 5, 6)
         // Table didn't change in version 6
-        verifyZeroInteractions(database)
+        verifyNoInteractions(database)
     }
 
     @Test
     fun migrateTableVersionFrom_v6_to_v7() {
         onUpdate(database, 6, 7)
         // Table didn't change in version 7
-        verifyZeroInteractions(database)
+        verifyNoInteractions(database)
     }
 
     @Test
@@ -210,9 +224,10 @@ class BookmarkPictureDaoTest {
         verify(database).execSQL(CREATE_TABLE_STATEMENT)
     }
 
-    private fun createCursor(rowCount: Int) = MatrixCursor(columns, rowCount).apply {
-        for (i in 0 until rowCount) {
-            addRow(listOf("mediaName", "creatorName"))
+    private fun createCursor(rowCount: Int) =
+        MatrixCursor(columns, rowCount).apply {
+            for (i in 0 until rowCount) {
+                addRow(listOf("mediaName", "creatorName"))
+            }
         }
-    }
 }

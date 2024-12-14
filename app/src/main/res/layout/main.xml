@@ -7,7 +7,9 @@
     android:gravity="center_horizontal"
     android:orientation="vertical">
 
-    <include layout="@layout/toolbar" />
+    <include
+      android:id="@+id/toolbarBinding"
+      layout="@layout/toolbar" />
 
     <RelativeLayout
         android:layout_width="match_parent"

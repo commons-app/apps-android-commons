@@ -7,12 +7,13 @@
 * چۈشكۈن
 -->
 <resources>
+  <string name="commons_logo">بايلىقتىن ئورتاق بەھرىمەن بولۇش بەلگىسى</string>
+  <string name="commons_website">ئورتاق بەھرىمان بولىدىغان توربەت بايلىقى</string>
   <string name="navigation_item_explore">ئىزدىنىش</string>
   <string name="preference_category_appearance">تاشقى كۆرۈنۈش</string>
   <string name="preference_category_general">ئادەتتە</string>
   <string name="preference_category_feedback">ئىنكاس</string>
   <string name="app_name">بايلىق ھەمبەھىرلەش</string>
-  <string name="bullet">.</string>
   <string name="menu_settings">تەڭشەكلەر</string>
   <string name="intent_share_upload_label">ئورۇن بايلىقىنى يوللاش</string>
   <string name="username">ئىشلەتكۇچى ئىسمى</string>
@@ -22,17 +23,17 @@
   <string name="signup">خەتلىتىش</string>
   <string name="logging_in_title">تىزىمغا كىرىۋاتىدۇ</string>
   <string name="logging_in_message">سەل كۈتۈڭ…</string>
-  <string name="login_success">تىزىمغا كىرىش مۇۋەپپەقىيەتلىك!</string>
-  <string name="login_failed">تىزىمغا كىرەلمىدى!</string>
+  <string name="login_success" fuzzy="true">تىزىمغا كىرىش مۇۋەپپەقىيەتلىك!</string>
+  <string name="login_failed" fuzzy="true">تىزىمغا كىرەلمىدى!</string>
   <string name="upload_failed">ھۆججەت تېپىلمىدى . سىناپ بېقىڭ ، باشقا ھۆججەتلەر .</string>
-  <string name="authentication_failed">سالاھىيەتنى تەكشۈرەلمىدى، قايتىدىن كىرىڭ</string>
+  <string name="authentication_failed" fuzzy="true">سالاھىيەتنى تەكشۈرەلمىدى، قايتىدىن كىرىڭ</string>
   <string name="uploading_started">يۈكلەش باشلاندى!</string>
   <string name="upload_completed_notification_title">%1$s يۈكلەندى!</string>
   <string name="upload_completed_notification_text">چېكىپ كۆرۈپ بېقىڭ ، سىزنىڭ يۇقىرىغا يوللاش</string>
   <string name="upload_progress_notification_title_start" fuzzy="true">باشلىنىۋاتىدۇ %1$s يۈكلەندى</string>
   <string name="upload_progress_notification_title_in_progress">%1$s يۈكلىنىۋاتىدۇ!</string>
   <string name="upload_progress_notification_title_finishing"> %1$s يۈكلەش تاماملىنىۋاتىدۇ</string>
-  <string name="upload_failed_notification_title">يۈكلىنىۋاتىدۇ %1$s مەغلۇپ بولدى</string>
+  <string name="upload_failed_notification_title" fuzzy="true">يۈكلىنىۋاتىدۇ %1$s مەغلۇپ بولدى</string>
   <string name="upload_failed_notification_subtitle">چېكىپ كۆرۈش</string>
   <string name="title_activity_contributions">يىقىندا يوللىغىنىم</string>
   <string name="contribution_state_queued">ئادەم كىردى</string>
@@ -47,11 +48,11 @@
   <string name="share_title_hint" fuzzy="true">ماۋزۇ</string>
   <string name="add_caption_toast">بۇ ھۆججەتنىڭ ئىزاھاتىنى تەمىنلەڭ</string>
   <string name="share_description_hint">چۈشەندۈرۈش</string>
-  <string name="login_failed_network">تىزىملىتىش - تور كاشىلىسى</string>
+  <string name="login_failed_network" fuzzy="true">تىزىملىتىش - تور كاشىلىسى</string>
   <string name="login_failed_throttled">مەغلۇپ بولغان قېتىم سانى بەك كۆپ .  نەچچە مىنۇتتىن كېيىن قايتا سىناڭ .</string>
   <string name="login_failed_blocked">كەچۈرۈڭ، بۇ ئابونت ئاللىقاچان ئورتاق بەھرىمەن بولىدىغان بايلىق مەنبەسى دائىرىلىك</string>
   <string name="login_failed_2fa_needed">سىز چوقۇم سىزنىڭ قوش ئامىل تەكشۈرۈش كودىنى تاپشۇرىسىز .</string>
-  <string name="login_failed_generic">تىزىملاش مەغلۇپ بولدى</string>
+  <string name="login_failed_generic" fuzzy="true">تىزىملاش مەغلۇپ بولدى</string>
   <string name="share_upload_button">يۈكلەڭ</string>
   <string name="multiple_share_base_title">نام بېرىش بۇ گۇرۇپپا سۈرەت</string>
   <string name="provider_modifications">ئۇقتۇرۇشلار</string>
@@ -102,8 +103,6 @@
   <string name="become_a_tester_description">بىز كىرگەن Google Play، ئۈستىدىكى ئۆلچەش قانىلى ، ھەمدە تېخىمۇ بالدۇر يېڭى ئىقتىدارى ۋە خاتا ئەسلىگە كەلتۈرۈش</string>
   <string name="_2fa_code">2FAكودى</string>
   <string name="logout_verification">سىز راستتىنلا چېكىنىپ چىقامسىز ؟</string>
-  <string name="commons_logo">بايلىقتىن ئورتاق بەھرىمەن بولۇش بەلگىسى</string>
-  <string name="commons_website">ئورتاق بەھرىمان بولىدىغان توربەت بايلىقى</string>
   <string name="mediaimage_failed">ۋاستە رەسىمى مەغلۇپ بولدى</string>
   <string name="welcome_image_rainbow_bridge">ھەسەت ھۈسەن كۆۋرۈك</string>
   <string name="review_thanks_yes_button_text">كېيىنكى سۈرەت</string>

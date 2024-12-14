@@ -1,5 +1,173 @@
 # Wikimedia Commons for Android
 
+## v5.0.2
+
+- Enhanced multi-upload functionality with user prompts to clarify that all images would share the
+  same category and depictions.
+- Show Wikidata description on currently active Nearby pin to provide more useful information.
+- Improve the visibility of map markers by dynamically adjusting their colors based on the app's
+  theme. The map markers will now appear lighter when the app is in dark mode and darker when the
+  app is in light mode. This change aims to enhance marker visibility and improve the overall user
+  experience.
+- Added information on where user feedback is posted, helping users track existing feedback and
+  monitor their own submissions.
+- Enhanced the edit location screen of the upload screen by centering the map on the picture's
+  location from metadata when editing, or on the device's GPS location if metadata is unavailable,
+  improving accuracy and user experience.
+- Ensured the 'Add Location' button is renamed to 'Edit Location' when copying the location of a
+  recently uploaded image, enhancing clarity and user experience.
+- Added a ProgressBar to the media detail screen to indicate image loading status, enhancing user
+  experience by showing loading progress until the image is fully loaded.
+- Fixed an issue where caption and description fields would intermittently disappear when using
+  voice input, ensuring text remains visible and stable across all entries.
+- Fixed a crash that occurred when attempting to remove multiple instances of caption/description
+  fields after initially adding them.
+- Improve the text in the prompt shown when skipping login to sound more natural.
+- Modified feedback addition logic to append new sections at the bottom of the page, ensuring
+  auto-archiving of sections functions correctly on the feedback page.
+- Resolved issue where the app failed to clear cookies upon logout.
+
+## v5.0.1
+
+Same as v5.0.0 except this fixes some R8 rules to ensure that the release
+variants of the app work as intended.
+
+## v5.0.0
+
+### What's Changed
+
+- Redesigned the map feature to **replace Mapbox with the osmdroid library**.
+  Key elements like pin visualization and user-centered display are still
+  included in this redesign. This is done to guard against possible misuse of
+  the Mapbox token and, more crucially, to keep the app from becoming dependent
+  on a service that charges for usage but offers a free tier.
+
+  With this change, the app retrieves the map tiles from [Wikimedia maps](https://maps.wikimedia.org).
+- Add the ability to **export locations of nearby missing pictures in GPX and
+  KML formats**. This allows users to browse the locations with desired radius
+  for offline use in their favourite map apps like OsmAnd or Maps.me, enhancing
+  accessibility  and offline functionality.
+- **Limited the uploads via the custom image picker** to a maximum of 20.
+- Added two menu choices for **transparent image backgrounds**, giving users the
+  option of either a black or white background, increasing adaptability to
+  various theme settings.
+
+  User customization option has been provided with the
+  ability to save background color selections permanently on a per image basis.
+- Implemented functionality to **automatically resume uploads** that become
+  stuck due to app termination or device reboot.
+- Added a **compass arrow in the Nearby banner** shown in the "Contributions"
+  screen to guide users towards the nearest item, thus providing the missing
+  directional cues. The arrow dynamically adjusts based on device rotation,
+  aligning with the calculated bearing towards the  target location. Further,
+  the distance and direction are updated as the user moves.
+- Implemented **voice input feature** for caption and description fields,
+  enabling users to dictate text directly into these fields.
+- Improved various flows in the app to **redirect users to the login page** and
+  display a  persistent message **if their session becomes invalid** due to a
+  password  change, enhancing user guidance and security measures.
+
+### Revamps and refactorings
+
+- **Revamped initial upload screen layout and the description edit screen layout**
+  for enhanced user experience and ensuring better symmetry in the design.
+- **Replaced Butterknife with ViewBinding** in various places of the app.
+- Transferred essential code from **the redundant data-client module** to the
+  main Commons app code, enabling its integration and facilitating the removal
+  of the redundant module. Further, convert various parts of the code to Kotlin.
+- **Revamped the various location permission flows** to ensure consistency for
+  the sake of a better user experience.
+
+### Bug fixes and various changes
+
+- Resolved an issue where paused uploads that were subsequently cancelled were
+  still being uploaded.
+- Fixed an issue where some user information such as upload count were not
+  displayed in the "Contributions" and "Profile" screens.
+- Fixed the long-standing broken *"Picture of the Day" widget* to restore its
+  usability.
+- Resolved an issue where some categories were hidden at the top of Upload
+  Wizard suggestions.
+- Resolved an issue where there was a grey empty screen at Upload wizard when
+  the app was denied the files permission.
+- Implemented logic to bypass media in Peer Review if the current reviewer is
+  also the user who uploaded the media.
+- Corrected arrow image behaviour in the first upload screen: now displays down
+  arrow when details card is fully visible, aligning with expected user
+  interaction.
+- Updated app icon to improve visibility and recognition on F-Droid.
+- Fixed issue causing all pictures to disappear and activity to reload fully in
+  the custom image selector after marking a picture as 'not for  upload', now
+  ensuring only the selected picture is removed as expected.
+
+What's listed here is only a subset of all the changes. Check the full-list of
+the changes in [this link](https://github.com/commons-app/apps-android-commons/compare/v4.2.1...v5.0.0).
+Alternatively, checkout [this release on GitHub releases page](https://github.com/commons-app/apps-android-commons/releases/tag/v5.0.0)
+for an exhaustive list of changes and the various contributors who contributed the same.
+
+## v4.2.1
+
+- Provide the ability to edit an image to losslessly rotate it while uploading
+- Fix a bug in v4.2.0 where the nearby places were not loading
+- Fix a bug where editing depictions was showing a progress bar indefinitely
+- In the upload screen, use different map icons to indicate if image is being uploaded with location
+  metadata
+- For nearby uploads, it is no longer possible to deselect the item's category and depiction
+- The Mapbox account key used by the app has been changed
+- Category search now shows exact matches without any discrepancies
+- Various bug and crash fixes
+
+## v4.2.0
+- Dark mode colour improvements
+- Enhancements done to address location metadata loss including the metadata loss that occurs in
+  latest Android versions
+- Enhancements done to address the issue where uploads get stuck in queued state
+- Fix the inability to upload via the in-app camera option
+- Provide the ability to optionally include location metadata for in-app camera uploads in case the
+  device camera app does not provide location metadata
+- Use geo location URL that works consistently across all map applications
+- Fix crash when clicking on location target icon while trying to edit the location of an upload
+- Fix crash that occurs randomly while returning to the app after leaving it in the background
+- Fix crash in Sign up activity on Android version 5.0 and 5.1
+- Android 13 compatibility changes
+
+## v4.1.0
+- Location of pictures uploaded via custom picture selector are now recognized
+- Improvements to the custom picture selector
+- Ensure the WLM pictures are associated with the correct templates for each year
+- Only show pictures uploaded via app in peer review
+- Improve the variety of images show in peer review
+- Allow going to current location in location edit dialog while uploading a picture
+- Switch to using MapLibre instead of Mapbox and thereby disable telemetry sent to Mapbox
+- Fixed various bugs
+
+## v4.0.5
+- Bumped min SDK to 29 to try and solve Google policy issue
+- Reverted dialog
+- Note: This encompasses versions 1031, 1032, and 1033, due to the Play Store's requirements to overwrite all the tracks with a post-fix version (otherwise no single track can be published)
+
+## v4.0.4
+- Added dialog for Google's location policy
+
+## v4.0.3
+- Added "Report" button for Google UGC policy
+
+## v4.0.2
+- Fixed bug with wrong dates taken from EXIF
+- Fixed various crashes
+
+## v4.0.1
+- Fixed bug with no browser found
+- Updated Mapbox SDK to fix hamburger crash
+
+## v4.0.0
+- Added map showing nearby Commons pictures
+- Added custom SPARQL queries
+- Added user profiles
+- Added custom picture selector
+- Various bugfixes
+- Updated target SDK to 30
+
 ## v3.1.1
 - Optimized Nearby query
 - Added Sweden's property for WLM 2021

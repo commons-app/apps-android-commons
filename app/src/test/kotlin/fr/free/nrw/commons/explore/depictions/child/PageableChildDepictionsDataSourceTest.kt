@@ -14,12 +14,13 @@ import org.mockito.MockitoAnnotations
 class PageableChildDepictionsDataSourceTest {
     @Mock
     lateinit var okHttpJsonApiClient: OkHttpJsonApiClient
+
     @Mock
     lateinit var liveDataConverter: LiveDataConverter
 
     @Before
     fun setUp() {
-        MockitoAnnotations.initMocks(this)
+        MockitoAnnotations.openMocks(this)
     }
 
     @Test

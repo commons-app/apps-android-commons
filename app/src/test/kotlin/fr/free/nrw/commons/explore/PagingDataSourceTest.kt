@@ -1,7 +1,11 @@
 package fr.free.nrw.commons.explore
 
 import androidx.paging.PositionalDataSource
-import com.nhaarman.mockitokotlin2.*
+import com.nhaarman.mockitokotlin2.any
+import com.nhaarman.mockitokotlin2.mock
+import com.nhaarman.mockitokotlin2.never
+import com.nhaarman.mockitokotlin2.verify
+import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.explore.depictions.search.LoadingStates
 import fr.free.nrw.commons.explore.paging.LoadingState
 import fr.free.nrw.commons.explore.paging.PagingDataSource
@@ -12,10 +16,10 @@ import org.junit.After
 import org.junit.Before
 import org.junit.Test
 import org.mockito.Mock
+import org.mockito.Mockito.verifyNoInteractions
 import org.mockito.MockitoAnnotations
 
 class PagingDataSourceTest {
-
     private lateinit var loadingStates: PublishProcessor<LoadingState>
     private lateinit var searchDepictionsDataSource: TestPagingDataSource
 
@@ -25,12 +29,12 @@ class PagingDataSourceTest {
     @Before
     fun setUp() {
         RxJavaPlugins.setIoSchedulerHandler { Schedulers.trampoline() }
-        MockitoAnnotations.initMocks(this)
+        MockitoAnnotations.openMocks(this)
         loadingStates = PublishProcessor.create()
         searchDepictionsDataSource =
             TestPagingDataSource(
                 loadingStates,
-                mockGetItems
+                mockGetItems,
             )
     }
 
@@ -88,7 +92,7 @@ class PagingDataSourceTest {
     @Test
     fun `retryFailedRequest does nothing when null`() {
         searchDepictionsDataSource.retryFailedRequest()
-        verifyNoMoreInteractions(mockGetItems)
+        verifyNoInteractions(mockGetItems)
     }
 
     @Test
@@ -96,7 +100,8 @@ class PagingDataSourceTest {
         val callback: PositionalDataSource.LoadRangeCallback<String> = mock()
         val params = PositionalDataSource.LoadRangeParams(0, 1)
         whenever(mockGetItems.getItems(params.loadSize, params.startPosition))
-            .thenThrow(RuntimeException()).thenReturn(emptyList())
+            .thenThrow(RuntimeException())
+            .thenReturn(emptyList())
         val testSubscriber = loadingStates.test()
         searchDepictionsDataSource.loadRange(params, callback)
         verify(callback, never()).onResult(any())
@@ -106,17 +111,24 @@ class PagingDataSourceTest {
             LoadingState.Loading,
             LoadingState.Error,
             LoadingState.Loading,
-            LoadingState.Complete
+            LoadingState.Complete,
         )
     }
 }
 
-class TestPagingDataSource(loadingStates: LoadingStates, val mockGetItems: MockGetItems) :
-    PagingDataSource<String>(loadingStates) {
-    override fun getItems(loadSize: Int, startPosition: Int): List<String> =
-        mockGetItems.getItems(loadSize, startPosition)
+class TestPagingDataSource(
+    loadingStates: LoadingStates,
+    val mockGetItems: MockGetItems,
+) : PagingDataSource<String>(loadingStates) {
+    override fun getItems(
+        loadSize: Int,
+        startPosition: Int,
+    ): List<String> = mockGetItems.getItems(loadSize, startPosition)
 }
 
 interface MockGetItems {
-    fun getItems(loadSize: Int, startPosition: Int): List<String>
+    fun getItems(
+        loadSize: Int,
+        startPosition: Int,
+    ): List<String>
 }

@@ -1,18 +1,22 @@
 package fr.free.nrw.commons.profile.achievements
 
+import android.accounts.Account
 import android.content.Context
 import android.os.Looper
+import android.view.LayoutInflater
 import android.view.MenuItem
-import android.widget.ImageView
-import android.widget.ProgressBar
-import android.widget.TextView
+import android.view.View
+import android.view.ViewGroup
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
-import com.dinuscxj.progressbar.CircleProgressBar
-import fr.free.nrw.commons.TestAppAdapter
+import androidx.test.core.app.ApplicationProvider
+import fr.free.nrw.commons.OkHttpConnectionFactory
+import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.auth.SessionManager
+import fr.free.nrw.commons.createTestClient
 import fr.free.nrw.commons.profile.ProfileActivity
+import fr.free.nrw.commons.utils.ConfigUtils
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
@@ -23,20 +27,17 @@ import org.mockito.MockitoAnnotations
 import org.powermock.reflect.Whitebox
 import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
-import org.robolectric.RuntimeEnvironment
 import org.robolectric.Shadows
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
 import org.robolectric.fakes.RoboMenuItem
-import org.wikipedia.AppAdapter
+import org.robolectric.shadows.ShadowToast
 import java.lang.reflect.Method
-
 
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
 @LooperMode(LooperMode.Mode.PAUSED)
 class AchievementsFragmentUnitTests {
-
     private lateinit var fragment: AchievementsFragment
 
     private lateinit var context: Context
@@ -45,101 +46,48 @@ class AchievementsFragmentUnitTests {
 
     private lateinit var achievements: Achievements
 
-    @Mock
-    private lateinit var imageView: ImageView
+    private lateinit var view: View
 
-    @Mock
-    private lateinit var badgeText: TextView
-
-    @Mock
-    private lateinit var levelNumber: TextView
-
-    @Mock
-    private lateinit var thanksReceived: TextView
-
-    @Mock
-    private lateinit var imagesUploadedProgressbar: CircleProgressBar
-
-    @Mock
-    private lateinit var imagesUsedByWikiProgressBar: CircleProgressBar
-
-    @Mock
-    private lateinit var imageRevertsProgressbar: CircleProgressBar
-
-    @Mock
-    private lateinit var imagesFeatured: TextView
-
-    @Mock
-    private lateinit var tvQualityImages: TextView
-
-    @Mock
-    private lateinit var imagesRevertLimitText: TextView
-
-    @Mock
-    private lateinit var imageByWikiText: TextView
-
-    @Mock
-    private lateinit var imageRevertedText: TextView
-
-    @Mock
-    private lateinit var imageUploadedText: TextView
-
-    @Mock
-    private lateinit var progressBar: ProgressBar
+    private lateinit var layoutInflater: LayoutInflater
 
     @Mock
     private lateinit var sessionManager: SessionManager
 
+    @Mock
+    private lateinit var parentView: ViewGroup
+
+    @Mock
+    private lateinit var account: Account
+
     @Before
     fun setUp() {
-        MockitoAnnotations.initMocks(this)
-        context = RuntimeEnvironment.application.applicationContext
-        menuItem = RoboMenuItem(context)
-        AppAdapter.set(TestAppAdapter())
-        val activity = Robolectric.buildActivity(ProfileActivity::class.java).create().get()
+        MockitoAnnotations.openMocks(this)
+
         fragment = AchievementsFragment()
+        Whitebox.setInternalState(fragment, "sessionManager", sessionManager)
+        Mockito.`when`(sessionManager.userName).thenReturn("Test")
+        Mockito.`when`(sessionManager.currentAccount).thenReturn(account)
+
+        context = ApplicationProvider.getApplicationContext()
+        menuItem = RoboMenuItem(context)
+        OkHttpConnectionFactory.CLIENT = createTestClient()
+
+        val activity = Robolectric.buildActivity(ProfileActivity::class.java).create().get()
         val fragmentManager: FragmentManager = activity.supportFragmentManager
         val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
         fragmentTransaction.add(fragment, null)
-        fragmentTransaction.commit()
+        fragmentTransaction.commitNowAllowingStateLoss()
+
+        layoutInflater = LayoutInflater.from(activity)
+        view = fragment.onCreateView(layoutInflater, activity.findViewById(R.id.container), null)
 
         achievements = Achievements(0, 0, 0, 0, 0, 0, 0)
+    }
 
-        Whitebox.setInternalState(fragment, "thanksReceived", thanksReceived)
-        Whitebox.setInternalState(
-            fragment,
-            "imagesUsedByWikiProgressBar",
-            imagesUsedByWikiProgressBar
-        )
-        Whitebox.setInternalState(
-            fragment,
-            "imagesUsedByWikiProgressBar",
-            imagesUsedByWikiProgressBar
-        )
-        Whitebox.setInternalState(fragment, "imagesFeatured", imagesFeatured)
-        Whitebox.setInternalState(fragment, "tvQualityImages", tvQualityImages)
-        Whitebox.setInternalState(fragment, "levelNumber", levelNumber)
-        Whitebox.setInternalState(fragment, "imageView", imageView)
-        Whitebox.setInternalState(fragment, "badgeText", badgeText)
-        Whitebox.setInternalState(fragment, "imagesUploadedProgressbar", imagesUploadedProgressbar)
-        Whitebox.setInternalState(fragment, "imageRevertsProgressbar", imageRevertsProgressbar)
-        Whitebox.setInternalState(
-            fragment,
-            "imagesUsedByWikiProgressBar",
-            imagesUsedByWikiProgressBar
-        )
-        Whitebox.setInternalState(fragment, "imageView", imageView)
-        Whitebox.setInternalState(fragment, "imageByWikiText", imageByWikiText)
-        Whitebox.setInternalState(fragment, "imageRevertedText", imageRevertedText)
-        Whitebox.setInternalState(fragment, "imageUploadedText", imageUploadedText)
-        Whitebox.setInternalState(fragment, "imageView", imageView)
-        Whitebox.setInternalState(fragment, "progressBar", progressBar)
-        Whitebox.setInternalState(fragment, "imagesRevertLimitText", imagesRevertLimitText)
-        Whitebox.setInternalState(fragment, "item", menuItem)
-        Whitebox.setInternalState(fragment, "sessionManager", sessionManager)
-
-        Mockito.`when`(sessionManager.userName).thenReturn("Test")
-
+    @Test
+    @Throws(Exception::class)
+    fun testOnCreateView() {
+        fragment.onCreateView(layoutInflater, null, null)
     }
 
     @Test
@@ -215,11 +163,12 @@ class AchievementsFragmentUnitTests {
     @Throws(Exception::class)
     fun testLaunchAlert() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
-        val method: Method = AchievementsFragment::class.java.getDeclaredMethod(
-            "launchAlert",
-            String::class.java,
-            String::class.java
-        )
+        val method: Method =
+            AchievementsFragment::class.java.getDeclaredMethod(
+                "launchAlert",
+                String::class.java,
+                String::class.java,
+            )
         method.isAccessible = true
         method.invoke(fragment, "", "")
     }
@@ -228,10 +177,11 @@ class AchievementsFragmentUnitTests {
     @Throws(Exception::class)
     fun testHideProgressBar() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
-        val method: Method = AchievementsFragment::class.java.getDeclaredMethod(
-            "hideProgressBar",
-            Achievements::class.java
-        )
+        val method: Method =
+            AchievementsFragment::class.java.getDeclaredMethod(
+                "hideProgressBar",
+                Achievements::class.java,
+            )
         method.isAccessible = true
         method.invoke(fragment, achievements)
     }
@@ -240,11 +190,12 @@ class AchievementsFragmentUnitTests {
     @Throws(Exception::class)
     fun testSetAchievementsUploadCount() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
-        val method: Method = AchievementsFragment::class.java.getDeclaredMethod(
-            "setAchievementsUploadCount",
-            Achievements::class.java,
-            Int::class.java
-        )
+        val method: Method =
+            AchievementsFragment::class.java.getDeclaredMethod(
+                "setAchievementsUploadCount",
+                Achievements::class.java,
+                Int::class.java,
+            )
         method.isAccessible = true
         method.invoke(fragment, achievements, 0)
     }
@@ -253,9 +204,10 @@ class AchievementsFragmentUnitTests {
     @Throws(Exception::class)
     fun testCheckAccount() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
-        val method: Method = AchievementsFragment::class.java.getDeclaredMethod(
-            "checkAccount"
-        )
+        val method: Method =
+            AchievementsFragment::class.java.getDeclaredMethod(
+                "checkAccount",
+            )
         method.isAccessible = true
         method.invoke(fragment)
     }
@@ -264,10 +216,11 @@ class AchievementsFragmentUnitTests {
     @Throws(Exception::class)
     fun testSetUploadCount() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
-        val method: Method = AchievementsFragment::class.java.getDeclaredMethod(
-            "setUploadCount",
-            Achievements::class.java
-        )
+        val method: Method =
+            AchievementsFragment::class.java.getDeclaredMethod(
+                "setUploadCount",
+                Achievements::class.java,
+            )
         method.isAccessible = true
         method.invoke(fragment, achievements)
     }
@@ -276,9 +229,10 @@ class AchievementsFragmentUnitTests {
     @Throws(Exception::class)
     fun testOnError() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
-        val method: Method = AchievementsFragment::class.java.getDeclaredMethod(
-            "onError"
-        )
+        val method: Method =
+            AchievementsFragment::class.java.getDeclaredMethod(
+                "onError",
+            )
         method.isAccessible = true
         method.invoke(fragment)
     }
@@ -287,9 +241,11 @@ class AchievementsFragmentUnitTests {
     @Throws(Exception::class)
     fun testShowSnackBarWithRetryTrue() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
-        val method: Method = AchievementsFragment::class.java.getDeclaredMethod(
-            "showSnackBarWithRetry", Boolean::class.java
-        )
+        val method: Method =
+            AchievementsFragment::class.java.getDeclaredMethod(
+                "showSnackBarWithRetry",
+                Boolean::class.java,
+            )
         method.isAccessible = true
         method.invoke(fragment, true)
     }
@@ -298,9 +254,11 @@ class AchievementsFragmentUnitTests {
     @Throws(Exception::class)
     fun testShowSnackBarWithRetryFalse() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
-        val method: Method = AchievementsFragment::class.java.getDeclaredMethod(
-            "showSnackBarWithRetry", Boolean::class.java
-        )
+        val method: Method =
+            AchievementsFragment::class.java.getDeclaredMethod(
+                "showSnackBarWithRetry",
+                Boolean::class.java,
+            )
         method.isAccessible = true
         method.invoke(fragment, false)
     }
@@ -309,9 +267,10 @@ class AchievementsFragmentUnitTests {
     @Throws(Exception::class)
     fun testSetWikidataEditCount() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
-        val method: Method = AchievementsFragment::class.java.getDeclaredMethod(
-            "setWikidataEditCount"
-        )
+        val method: Method =
+            AchievementsFragment::class.java.getDeclaredMethod(
+                "setWikidataEditCount",
+            )
         method.isAccessible = true
         method.invoke(fragment)
     }
@@ -320,10 +279,54 @@ class AchievementsFragmentUnitTests {
     @Throws(Exception::class)
     fun testSetAchievements() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
-        val method: Method = AchievementsFragment::class.java.getDeclaredMethod(
-            "setAchievements"
-        )
+        val method: Method =
+            AchievementsFragment::class.java.getDeclaredMethod(
+                "setAchievements",
+            )
         method.isAccessible = true
         method.invoke(fragment)
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testMenuVisibilityOverrideNotVisible() {
+        Shadows.shadowOf(Looper.getMainLooper()).idle()
+        val method: Method =
+            AchievementsFragment::class.java.getDeclaredMethod(
+                "setMenuVisibility",
+                Boolean::class.java,
+            )
+        method.isAccessible = true
+        method.invoke(fragment, false)
+        assertToast()
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testMenuVisibilityOverrideVisibleWithContext() {
+        Shadows.shadowOf(Looper.getMainLooper()).idle()
+        Mockito.`when`(parentView.context).thenReturn(context)
+        val method: Method =
+            AchievementsFragment::class.java.getDeclaredMethod(
+                "setMenuVisibility",
+                Boolean::class.java,
+            )
+        method.isAccessible = true
+        method.invoke(fragment, true)
+        assertToast()
+    }
+
+    private fun assertToast() {
+        if (ConfigUtils.isBetaFlavour) {
+            Assert.assertEquals(
+                ShadowToast.getTextOfLatestToast().toString(),
+                context.getString(R.string.achievements_unavailable_beta),
+            )
+        } else {
+            Assert.assertEquals(
+                context.getString(R.string.user_not_logged_in),
+                ShadowToast.getTextOfLatestToast().toString(),
+            )
+        }
     }
 }
