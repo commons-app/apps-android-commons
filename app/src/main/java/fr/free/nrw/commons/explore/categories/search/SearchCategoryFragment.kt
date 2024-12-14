@@ -14,5 +14,8 @@ class SearchCategoryFragment : PageableCategoryFragment() {
     override val injectedPresenter
         get() = presenter
 
-    override fun getEmptyText(query: String) = getString(R.string.categories_not_found, query.trim())
+    override fun getEmptyText(query: String): String {
+        val placeholder = getString(R.string.categories_not_found)
+        return "$placeholder ${query.trim()}"
+    }
 }
