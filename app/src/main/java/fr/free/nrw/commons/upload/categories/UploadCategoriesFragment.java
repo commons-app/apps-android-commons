@@ -151,7 +151,7 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
     }
 
     private void searchForCategory(final String query) {
-        presenter.searchForCategories(query);
+        presenter.searchForCategories(query.strip());
     }
 
     private void initRecyclerView() {
@@ -352,7 +352,7 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
         presenter.selectCategories();
         final Editable text = binding.etSearch.getText();
         if (text != null) {
-            presenter.searchForCategories(text.toString());
+            presenter.searchForCategories(text.toString().strip());
         }
     }
 
