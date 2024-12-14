@@ -398,7 +398,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
                 final boolean response = UploadActivity.nearbyPopupAnswers.get(nearbyPlace);
                 if (response) {
                     if (callback != null) {
-                        presenter.onUserConfirmedUploadIsOfPlace(nearbyPlace);
+                        presenter.onUserConfirmedUploadIsOfPlace(nearbyPlace, indexOfFragment);
                     }
                 }
             } else {
@@ -445,7 +445,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
                 () -> {
                     // Execute when user confirms the upload is of the specified place
                     UploadActivity.nearbyPopupAnswers.put(place, true);
-                    presenter.onUserConfirmedUploadIsOfPlace(place);
+                    presenter.onUserConfirmedUploadIsOfPlace(place, indexOfFragment);
                 },
                 () -> {
                     // Execute when user cancels the upload of the specified place
@@ -486,7 +486,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
             if (UploadActivity.nearbyPopupAnswers.containsKey(nearbyPlace)) {
                 final boolean response = UploadActivity.nearbyPopupAnswers.get(nearbyPlace);
                 if (response) {
-                    presenter.onUserConfirmedUploadIsOfPlace(nearbyPlace);
+                    presenter.onUserConfirmedUploadIsOfPlace(nearbyPlace, indexOfFragment);
                 }
             } else {
                 showNearbyPlaceFound(nearbyPlace);
