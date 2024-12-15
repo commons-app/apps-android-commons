@@ -7,13 +7,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.FrameLayout;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.bookmarks.category.BookmarkCategoriesFragment;
 import fr.free.nrw.commons.bookmarks.items.BookmarkItemsFragment;
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsFragment;
 import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesFragment;
@@ -48,14 +48,21 @@ public class BookmarkListRootFragment extends CommonsDaggerSupportFragment imple
         String title = bundle.getString("categoryName");
         int order = bundle.getInt("order");
         final int orderItem = bundle.getInt("orderItem");
-        if (order == 0) {
-            listFragment = new BookmarkPicturesFragment();
-        } else {
-            listFragment = new BookmarkLocationsFragment();
+
+        switch (order){
+            case 0: listFragment = new BookmarkPicturesFragment();
+            break;
+
+            case 1: listFragment = new BookmarkLocationsFragment();
+            break;
+
+            case 3: listFragment = new BookmarkCategoriesFragment();
+            break;
+        }
             if(orderItem == 2) {
                 listFragment = new BookmarkItemsFragment();
             }
-        }
+
         Bundle featuredArguments = new Bundle();
         featuredArguments.putString("categoryName", title);
         listFragment.setArguments(featuredArguments);

@@ -5,7 +5,6 @@
 
     <item
       android:id="@+id/menu_bookmark_current_category"
-      android:icon="@drawable/menu_icon_bookmark_selector"
       android:title="@string/menu_bookmark"
       app:showAsAction="ifRoom" />
 
