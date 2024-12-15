@@ -205,7 +205,6 @@ class CategoryDetailsActivity : BaseActivity(),
             }
 
             R.id.menu_bookmark_current_category -> {
-                //TODO: most likely won't be null
                 categoryName?.let {
                     viewModel.onBookmarkClick(categoryName = it)
                 }

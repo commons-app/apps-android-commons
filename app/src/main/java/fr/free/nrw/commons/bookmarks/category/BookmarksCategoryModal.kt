@@ -1,4 +1,4 @@
-package fr.free.nrw.commons.bookmarks.models
+package fr.free.nrw.commons.bookmarks.category
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import fr.free.nrw.commons.bookmarks.category.BookmarkCategoriesDao
-import fr.free.nrw.commons.bookmarks.models.BookmarksCategoryModal
+import fr.free.nrw.commons.bookmarks.category.BookmarksCategoryModal
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
@@ -43,7 +43,6 @@ class CategoryDetailsViewModel(
 
     private fun addBookmark(categoryName: String) {
         viewModelScope.launch {
-            // TODO [Parry] view only knows about `name` see if we can have more data
             val categoryItem = BookmarksCategoryModal(
                 categoryName = categoryName
             )

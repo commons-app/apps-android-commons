@@ -4,7 +4,7 @@ import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import fr.free.nrw.commons.bookmarks.category.BookmarkCategoriesDao
-import fr.free.nrw.commons.bookmarks.models.BookmarksCategoryModal
+import fr.free.nrw.commons.bookmarks.category.BookmarksCategoryModal
 import fr.free.nrw.commons.contributions.Contribution
 import fr.free.nrw.commons.contributions.ContributionDao
 import fr.free.nrw.commons.customselector.database.NotForUploadStatus
