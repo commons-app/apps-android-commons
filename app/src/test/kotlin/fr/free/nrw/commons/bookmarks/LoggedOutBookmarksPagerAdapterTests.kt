@@ -53,7 +53,7 @@ class LoggedOutBookmarksPagerAdapterTests {
      */
     @Test
     fun testGetCount() {
-        Assert.assertEquals(bookmarksPagerAdapter.count, 1)
+        Assert.assertEquals(bookmarksPagerAdapter.count, 2)
     }
 
     /**
