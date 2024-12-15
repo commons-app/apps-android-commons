@@ -223,13 +223,15 @@ class CategoryDetailsActivity : BaseActivity(),
     override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
         menu?.run {
           val bookmarkMenuItem = findItem(R.id.menu_bookmark_current_category)
-            val icon = if(viewModel.bookmarkState.value){
-                R.drawable.menu_ic_round_star_filled_24px
-            } else {
-                R.drawable.menu_ic_round_star_border_24px
-            }
+            if (bookmarkMenuItem != null) {
+                val icon = if(viewModel.bookmarkState.value){
+                    R.drawable.menu_ic_round_star_filled_24px
+                } else {
+                    R.drawable.menu_ic_round_star_border_24px
+                }
 
-            bookmarkMenuItem.setIcon(icon)
+                bookmarkMenuItem.setIcon(icon)
+            }
         }
         return super.onPrepareOptionsMenu(menu)
     }
