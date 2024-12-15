@@ -2,6 +2,13 @@
 
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+      android:id="@+id/menu_bookmark_current_category"
+      android:icon="@drawable/menu_icon_bookmark_selector"
+      android:title="@string/menu_bookmark"
+      app:showAsAction="ifRoom" />
+
     <item
         android:id="@+id/menu_browser_current_category"
         android:title="@string/menu_view_category_page"

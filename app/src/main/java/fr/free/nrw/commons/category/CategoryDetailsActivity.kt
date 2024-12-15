@@ -7,8 +7,12 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.Utils
@@ -19,6 +23,8 @@ import fr.free.nrw.commons.explore.categories.parent.ParentCategoriesFragment
 import fr.free.nrw.commons.explore.categories.sub.SubCategoriesFragment
 import fr.free.nrw.commons.media.MediaDetailPagerFragment
 import fr.free.nrw.commons.theme.BaseActivity
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 
 /**
@@ -38,6 +44,11 @@ class CategoryDetailsActivity : BaseActivity(),
 
     private lateinit var binding: ActivityCategoryDetailsBinding
 
+    @Inject
+    lateinit var categoryViewModelFactory: CategoryDetailsViewModel.ViewModelFactory
+
+    private val viewModel: CategoryDetailsViewModel by viewModels<CategoryDetailsViewModel> { categoryViewModelFactory }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -53,6 +64,15 @@ class CategoryDetailsActivity : BaseActivity(),
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         setTabs()
         setPageTitle()
+
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED){
+                viewModel.bookmarkState.collect {
+                    invalidateOptionsMenu()
+                }
+            }
+        }
+
     }
 
     /**
@@ -73,6 +93,8 @@ class CategoryDetailsActivity : BaseActivity(),
             categoriesMediaFragment.arguments = arguments
             subCategoryListFragment.arguments = arguments
             parentCategoriesFragment.arguments = arguments
+
+            viewModel.onCheckIfBookmarked(categoryName!!)
         }
         fragmentList.add(categoriesMediaFragment)
         titleList.add("MEDIA")
@@ -181,12 +203,35 @@ class CategoryDetailsActivity : BaseActivity(),
                 Utils.handleWebUrl(this, Uri.parse(title.canonicalUri))
                 true
             }
+
+            R.id.menu_bookmark_current_category -> {
+                //TODO: most likely won't be null
+                categoryName?.let {
+                    viewModel.onBookmarkClick(categoryName = it)
+                }
+                true
+            }
+
             android.R.id.home -> {
                 onBackPressed()
                 true
             }
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
+        menu?.run {
+          val bookmarkMenuItem = findItem(R.id.menu_bookmark_current_category)
+            val icon = if(viewModel.bookmarkState.value){
+                R.drawable.menu_ic_round_star_filled_24px
+            } else {
+                R.drawable.menu_ic_round_star_border_24px
+            }
+
+            bookmarkMenuItem.setIcon(icon)
+        }
+        return super.onPrepareOptionsMenu(menu)
     }
 
     /**
