@@ -143,6 +143,8 @@
   <string name="menu_from_camera">Prendre une photo</string>
   <string name="menu_nearby">À proximité</string>
   <string name="provider_contributions">Mes téléversements</string>
+  <string name="menu_copy_link">Copier le lien</string>
+  <string name="menu_link_copied">Le lien a été copié dans le presse-papiers</string>
   <string name="menu_share">Partager</string>
   <string name="menu_view_file_page">Voir la page du fichier</string>
   <string name="share_title_hint">Légende (obligatoire)</string>

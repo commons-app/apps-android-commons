@@ -54,6 +54,7 @@
   <string name="menu_from_camera">فوٹو چھکو</string>
   <string name="menu_nearby">نیڑے</string>
   <string name="provider_contributions">میݙے اپ لوڈ</string>
+  <string name="menu_copy_link">لنک نقل کرو</string>
   <string name="menu_share">شیئر</string>
   <string name="menu_view_file_page">فائل آلا ورقہ ݙیکھو</string>
   <string name="share_title_hint">عنوان (ضروری ہے)</string>
@@ -274,4 +275,5 @@
   <string name="failed">ناکام تھیا</string>
   <string name="custom_selector_delete">مٹاؤ</string>
   <string name="custom_selector_cancel">منسوخ</string>
+  <string name="usages_on_commons_heading">کامنز</string>
 </resources>

@@ -22,6 +22,7 @@
 * MaxBioHazard
 * McDutchie
 * Megakott
+* Mitte27
 * Monirec
 * Movses
 * Nastua Buldakova
@@ -156,6 +157,8 @@
   <string name="menu_from_camera">Сфотографировать</string>
   <string name="menu_nearby">Поблизости</string>
   <string name="provider_contributions">Мои загрузки</string>
+  <string name="menu_copy_link">Скопировать ссылку</string>
+  <string name="menu_link_copied">Ссылка скопирована в буфер обмена</string>
   <string name="menu_share">Поделиться</string>
   <string name="menu_view_file_page">Просмотреть страницу файла</string>
   <string name="share_title_hint">Подпись (Обязательна)</string>
@@ -857,4 +860,6 @@
   <string name="red_pin">У этого места пока нет фотографий, так что сделайте несколько!</string>
   <string name="green_pin">У этого места уже есть фотография.</string>
   <string name="grey_pin">Сейчас проверим, есть ли у этого места фотография.</string>
+  <string name="usages_on_commons_heading">Викисклад</string>
+  <string name="usages_on_other_wikis_heading">Другие вики</string>
 </resources>

@@ -101,6 +101,8 @@
   <string name="menu_from_camera">Направи слика</string>
   <string name="menu_nearby">Во близина</string>
   <string name="provider_contributions">Мои подигања</string>
+  <string name="menu_copy_link">Копирај врска</string>
+  <string name="menu_link_copied">Врската е прекопирана во меѓускладот.</string>
   <string name="menu_share">Сподели</string>
   <string name="menu_view_file_page">Погл. податотечната страница</string>
   <string name="share_title_hint">Толкување (задолж.)</string>
