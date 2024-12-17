@@ -39,7 +39,9 @@ import fr.free.nrw.commons.R
 import fr.free.nrw.commons.category.CategoryDetailsActivity
 import javax.inject.Inject
 
-
+/**
+ * Tab fragment to show list of bookmarked Categories
+ */
 class BookmarkCategoriesFragment : DaggerFragment() {
 
     @Inject

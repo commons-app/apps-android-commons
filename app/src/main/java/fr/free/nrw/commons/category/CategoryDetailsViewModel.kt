@@ -11,6 +11,9 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+/**
+ * ViewModal for [CategoryDetailsActivity]
+ */
 class CategoryDetailsViewModel(
     private val bookmarkCategoriesDao: BookmarkCategoriesDao
 ) : ViewModel() {
@@ -18,6 +21,12 @@ class CategoryDetailsViewModel(
     private val _bookmarkState = MutableStateFlow(false)
     val bookmarkState = _bookmarkState.asStateFlow()
 
+
+    /**
+     * Used to check if bookmark exists for the given category in DB
+     * based on that bookmark state is updated
+     * @param categoryName
+     */
     fun onCheckIfBookmarked(categoryName: String) {
         viewModelScope.launch {
             val isBookmarked = bookmarkCategoriesDao.doesExist(categoryName)
@@ -27,6 +36,12 @@ class CategoryDetailsViewModel(
         }
     }
 
+    /**
+     * Handles event when bookmark button is clicked from view
+     * based on that category is bookmarked or removed in/from in the DB
+     * and bookmark state is update as well
+     * @param categoryName
+     */
     fun onBookmarkClick(categoryName: String) {
         if (_bookmarkState.value) {
             deleteBookmark(categoryName)
@@ -41,6 +56,12 @@ class CategoryDetailsViewModel(
         }
     }
 
+
+    /**
+     * Add bookmark into DB
+     *
+     * @param categoryName
+     */
     private fun addBookmark(categoryName: String) {
         viewModelScope.launch {
             val categoryItem = BookmarksCategoryModal(
@@ -51,6 +72,12 @@ class CategoryDetailsViewModel(
         }
     }
 
+
+    /**
+     * Delete bookmark from DB
+     *
+     * @param categoryName
+     */
     private fun deleteBookmark(categoryName: String) {
         viewModelScope.launch {
             bookmarkCategoriesDao.delete(
@@ -61,6 +88,12 @@ class CategoryDetailsViewModel(
         }
     }
 
+    /**
+     * View model factory to create [CategoryDetailsViewModel]
+     *
+     * @property bookmarkCategoriesDao
+     * @constructor Create empty View model factory
+     */
     class ViewModelFactory @Inject constructor(
         private val bookmarkCategoriesDao: BookmarkCategoriesDao
     ) : ViewModelProvider.Factory {
