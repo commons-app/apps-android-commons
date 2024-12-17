@@ -243,7 +243,6 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     private Runnable searchRunnable;
     private static final long SCROLL_DELAY = 800; // Delay for debounce of onscroll, in milliseconds.
 
-//    private List<Place> updatedPlacesList;
     private LatLng updatedLatLng;
     private boolean searchable;
 
@@ -1407,7 +1406,6 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                         lastFocusLocation = searchLatLng;
                         lastMapFocus = new GeoPoint(searchLatLng.getLatitude(),
                             searchLatLng.getLongitude());
-//                        loadPlacesDataAsync(nearbyPlacesInfo.placeList, nearbyPlacesInfo.currentLatLng);
                     }
                 },
                 throwable -> {
@@ -1452,7 +1450,6 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                         lastMapFocus = new GeoPoint(searchLatLng.getLatitude(),
                             searchLatLng.getLongitude());
                         stopQuery();
-//                        loadPlacesDataAsync(nearbyPlacesInfo.placeList, nearbyPlacesInfo.currentLatLng);
                     }
                 },
                 throwable -> {
@@ -1463,167 +1460,6 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                     presenter.lockUnlockNearby(false);
                     setFilterState();
                 }));
-    }
-
-    public void loadPlacesDataAsync(List<Place> placeList, LatLng curLatLng) {
-        List<Place> places = new ArrayList<>(placeList);
-
-        // Instead of loading all pins in a single SPARQL query, we query in batches.
-        // This variable controls the number of pins queried per batch.
-        int batchSize = 3;
-
-        updatedLatLng = curLatLng;
-//        updatedPlacesList = new ArrayList<>(placeList);
-
-        // Sorts the places by distance to ensure the nearest pins are ready for the user as soon
-        // as possible.
-        if (VERSION.SDK_INT >= VERSION_CODES.N) {
-            Collections.sort(places,
-                Comparator.comparingDouble(place -> place.getDistanceInDouble(getMapFocus())));
-        }
-        stopQuery = false;
-//        processBatchesSequentially(places, batchSize, updatedPlacesList, curLatLng, 0);
-    }
-
-    /**
-     * Processes a list of places in batches sequentially. This method handles the asynchronous
-     * processing of places, updating the map markers and updates the list of updated places accordingly.
-     *
-     * @param places           The list of Place objects to be processed.
-     * @param batchSize        The size of each batch to be processed.
-     * @param updatedPlaceList The list of Place objects to be updated.
-     * @param curLatLng        The current location of the user.
-     * @param startIndex       The starting index for the current batch.
-     */
-    @SuppressLint("CheckResult")
-    private void processBatchesSequentially(List<Place> places, int batchSize,
-        List<Place> updatedPlaceList, LatLng curLatLng, int startIndex) {
-        Timber.tag("temptagfour").d("processBatchesSequentially called with startIndex %d", startIndex);
-        if (startIndex >= places.size() || stopQuery) {
-            return;
-        }
-
-        int endIndex = Math.min(startIndex + batchSize, places.size());
-        List<Place> batch = places.subList(startIndex, endIndex);
-        for (int i = 0; i < batch.size(); i++) {
-            if (i == batch.size() - 1 && batch.get(i).name != "") {
-                processBatchesSequentially(places, batchSize, updatedPlaceList, curLatLng,
-                    endIndex + batchSize);
-                return;
-            }
-            if (batch.get(i).name == "") {
-                if (i == 0) {
-                    break;
-                }
-                processBatchesSequentially(places, batchSize, updatedPlaceList, curLatLng,
-                    endIndex + i);
-                return;
-            }
-        }
-
-        Disposable disposable = processBatch(batch, updatedPlaceList)
-            .subscribe(p -> {
-                if (stopQuery) {
-                    return;
-                }
-                if (!p.isEmpty() && p != updatedPlaceList) {
-                    synchronized (updatedPlaceList) {
-                        updatedPlaceList.clear();
-                        updatedPlaceList.addAll((Collection<? extends Place>) p);
-                    }
-                }
-                updateMapMarkers(new ArrayList<>(updatedPlaceList), curLatLng, false);
-                processBatchesSequentially(places, batchSize, updatedPlaceList, curLatLng, endIndex);
-            }, throwable -> {
-                Timber.e(throwable);
-                showErrorMessage(getString(R.string.error_fetching_nearby_places) + throwable.getLocalizedMessage());
-                setFilterState();
-            });
-
-        compositeDisposable.add(disposable);
-    }
-
-    /**
-     * Processes a batch of places, updating the provided place list with fetched or updated data.
-     * This method handles the asynchronous fetching and updating of places from the repository.
-     *
-     * @param batch     The batch of Place objects to be processed.
-     * @param placeList The list of Place objects to be updated.
-     * @return An Observable emitting the updated list of Place objects.
-     */
-    private Observable<List<?>> processBatch(List<Place> batch, List<Place> placeList) {
-        List<Place> toBeProcessed = new ArrayList<>();
-
-        List<Observable<Place>> placeObservables = new ArrayList<>();
-
-        for (Place place : batch) {
-            Observable<Place> placeObservable = Observable
-                .fromCallable(() -> {
-                    Place fetchedPlace = placesRepository.fetchPlace(place.entityID);
-                    return fetchedPlace != null ? fetchedPlace : place;
-                })
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .doOnNext(placeData -> {
-                    if (placeData.equals(place)) {
-                        toBeProcessed.add(place);
-                    } else {
-                        for (int i = 0; i < placeList.size(); i++) {
-                            Place pl = placeList.get(i);
-                            if (pl.location.equals(place.location)) {
-                                placeList.set(i, placeData);
-                                break;
-                            }
-                        }
-                    }
-                });
-
-            placeObservables.add(placeObservable);
-        }
-
-        return Observable.zip(placeObservables, objects -> toBeProcessed)
-            .flatMap(processedList -> {
-                if (processedList.isEmpty()) {
-                    return Observable.just(placeList);
-                }
-                return Observable.fromCallable(() -> nearbyController.getPlaces(processedList))
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .map(places -> {
-                        if (stopQuery) {
-                            return Collections.emptyList();
-                        }
-                        if (places == null || places.isEmpty()) {
-                            return Collections.emptyList();
-                        } else {
-                            List<Place> updatedPlaceList = new ArrayList<>(placeList);
-                            for (Place place : places) {
-                                for (Place foundPlace : placeList) {
-                                    if (place.siteLinks.getWikidataLink()
-                                        .equals(foundPlace.siteLinks.getWikidataLink())) {
-                                        place.location = foundPlace.location;
-                                        place.distance = foundPlace.distance;
-                                        place.setMonument(foundPlace.isMonument());
-                                        int index = updatedPlaceList.indexOf(foundPlace);
-                                        if (index != -1) {
-                                            updatedPlaceList.set(index, place);
-                                            savePlaceToDatabase(place);
-                                        }
-                                        break;
-                                    }
-                                }
-                            }
-                            return updatedPlaceList;
-                        }
-                    })
-                    .onErrorReturn(throwable -> {
-                        Timber.e(throwable);
-                        showErrorMessage(getString(R.string.error_fetching_nearby_places) + " "
-                            + throwable.getLocalizedMessage());
-                        setFilterState();
-                        return Collections.emptyList();
-                    });
-            });
     }
 
     public Place getPlaceFromRepository(String entityID) {
