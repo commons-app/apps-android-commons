@@ -28,7 +28,6 @@ import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
-import android.os.Looper;
 import android.preference.PreferenceManager;
 import android.provider.Settings;
 import android.text.Html;
@@ -96,6 +95,7 @@ import fr.free.nrw.commons.nearby.PlacesRepository;
 import fr.free.nrw.commons.nearby.WikidataFeedback;
 import fr.free.nrw.commons.nearby.contract.NearbyParentFragmentContract;
 import fr.free.nrw.commons.nearby.fragments.AdvanceQueryFragment.Callback;
+import fr.free.nrw.commons.nearby.helper.Experiment;
 import fr.free.nrw.commons.nearby.helper.JustExperimenting;
 import fr.free.nrw.commons.nearby.model.BottomSheetItem;
 import fr.free.nrw.commons.nearby.presenter.NearbyParentFragmentPresenter;
@@ -127,7 +127,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
-import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.TimeUnit;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -159,6 +158,29 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     FragmentNearbyParentBinding binding;
 
     private JustExperimenting justExperimenting;
+
+    public final MapEventsOverlay mapEventsOverlay =  new MapEventsOverlay(new MapEventsReceiver() {
+        @Override
+        public boolean singleTapConfirmedHelper(GeoPoint p) {
+            if (clickedMarker != null) {
+                clickedMarker.closeInfoWindow();
+            } else {
+                Timber.e("CLICKED MARKER IS NULL");
+            }
+            if (isListBottomSheetExpanded()) {
+                // Back should first hide the bottom sheet if it is expanded
+                hideBottomSheet();
+            } else if (isDetailsBottomSheetVisible()) {
+                hideBottomDetailsSheet();
+            }
+            return true;
+        }
+
+        @Override
+        public boolean longPressHelper(GeoPoint p) {
+            return false;
+        }
+    });
 
     @Inject
     LocationServiceManager locationManager;
@@ -459,28 +481,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         binding.map.getOverlays().add(scaleBarOverlay);
         binding.map.getZoomController().setVisibility(Visibility.NEVER);
         binding.map.getController().setZoom(ZOOM_LEVEL);
-        binding.map.getOverlays().add(new MapEventsOverlay(new MapEventsReceiver() {
-            @Override
-            public boolean singleTapConfirmedHelper(GeoPoint p) {
-                if (clickedMarker != null) {
-                    clickedMarker.closeInfoWindow();
-                } else {
-                    Timber.e("CLICKED MARKER IS NULL");
-                }
-                if (isListBottomSheetExpanded()) {
-                    // Back should first hide the bottom sheet if it is expanded
-                    hideBottomSheet();
-                } else if (isDetailsBottomSheetVisible()) {
-                    hideBottomDetailsSheet();
-                }
-                return true;
-            }
-
-            @Override
-            public boolean longPressHelper(GeoPoint p) {
-                return false;
-            }
-        }));
+        binding.map.getOverlays().add(mapEventsOverlay);
 
         binding.map.addMapListener(new MapListener() {
             @Override
@@ -677,19 +678,20 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         registerNetworkReceiver();
         if (isResumed() && ((MainActivity) getActivity()).activeFragment == ActiveFragment.NEARBY) {
             if (locationPermissionsHelper.checkLocationPermission(getActivity())) {
-                if (lastFocusLocation == null && lastKnownLocation == null) {
-                    locationPermissionGranted();
-                } else{
-                    if (updatedPlacesList != null) {
-                        if (!updatedPlacesList.isEmpty()) {
-                            loadPlacesDataAsync(updatedPlacesList, updatedLatLng);
-                        } else {
-                            updateMapMarkers(updatedPlacesList, getLastMapFocus(), false);
-                        }
-                    }else {
-                        locationPermissionGranted();
-                    }
-                }
+//                if (lastFocusLocation == null && lastKnownLocation == null) {
+//                    locationPermissionGranted();
+//                } else{
+//                    if (updatedPlacesList != null) {
+//                        if (!updatedPlacesList.isEmpty()) {
+//                            loadPlacesDataAsync(updatedPlacesList, updatedLatLng);
+//                        } else {
+//                            updateMapMarkers(updatedPlacesList, getLastMapFocus(), false);
+//                        }
+//                    }else {
+//                        locationPermissionGranted();
+//                    }
+//                }
+                locationPermissionGranted();
             } else {
                 startMapWithoutPermission();
             }
@@ -1424,7 +1426,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                         lastFocusLocation = searchLatLng;
                         lastMapFocus = new GeoPoint(searchLatLng.getLatitude(),
                             searchLatLng.getLongitude());
-                        loadPlacesDataAsync(nearbyPlacesInfo.placeList, nearbyPlacesInfo.currentLatLng);
+//                        loadPlacesDataAsync(nearbyPlacesInfo.placeList, nearbyPlacesInfo.currentLatLng);
                     }
                 },
                 throwable -> {
@@ -1469,7 +1471,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                         lastMapFocus = new GeoPoint(searchLatLng.getLatitude(),
                             searchLatLng.getLongitude());
                         stopQuery();
-                        loadPlacesDataAsync(nearbyPlacesInfo.placeList, nearbyPlacesInfo.currentLatLng);
+//                        loadPlacesDataAsync(nearbyPlacesInfo.placeList, nearbyPlacesInfo.currentLatLng);
                     }
                 },
                 throwable -> {
@@ -1935,8 +1937,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         final boolean displayWlm = false;
         // Remove the previous markers before updating them
 //        clearAllMarkers(); // moved
-        int debugcount = 0;
-        ArrayList<Experiment> es = new ArrayList<>();
+        ArrayList<MarkerPlaceGroup> es = new ArrayList<>();
         for (final MarkerPlaceGroup markerPlaceGroup : NearbyController.markerLabelList) {
             final Place place = markerPlaceGroup.getPlace();
             // When label filter is engaged
@@ -1977,29 +1978,27 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             }
 
             if (shouldUpdateMarker) {
-                ++debugcount;
-                Experiment e = new Experiment();
-                e.place = place;
-                e.isBookmarked = markerPlaceGroup.getIsBookmarked();
+                Experiment e = new Experiment(place, markerPlaceGroup.getIsBookmarked());
 //                updateMarker(markerPlaceGroup.getIsBookmarked(), place,
 //                    NearbyController.currentLocation);
                 es.add(e);
             }
         }
-        experimenting(es);
-        Timber.tag("temptagtwo").e("n+1 C 2: "+debugcount);
+        justExperimenting.loadNewMarkers(es);
 //        Timber.tag("temptagtwo").e("iscowa: "+(binding.map.getOverlays() instanceof CopyOnWriteArrayList<Overlay>));
 //        Timber.tag("temptagtwo").e("additional debug info: "+(Looper.myLooper() == Looper.getMainLooper()));
-        if (selectedLabels == null || selectedLabels.size() == 0) {
-            ArrayList<BaseMarker> markerArrayList = new ArrayList<>();
-            for (final MarkerPlaceGroup markerPlaceGroup : NearbyController.markerLabelList) {
-                BaseMarker nearbyBaseMarker = new BaseMarker();
-                nearbyBaseMarker.setPlace(markerPlaceGroup.getPlace());
-                markerArrayList.add(nearbyBaseMarker);
-            }
-            //TODO experimentation touncomment
+
+        //TODO experimentation touncomment
+//        if (selectedLabels == null || selectedLabels.size() == 0) {
+//            ArrayList<BaseMarker> markerArrayList = new ArrayList<>();
+//            for (final MarkerPlaceGroup markerPlaceGroup : NearbyController.markerLabelList) {
+//                BaseMarker nearbyBaseMarker = new BaseMarker();
+//                nearbyBaseMarker.setPlace(markerPlaceGroup.getPlace());
+//                markerArrayList.add(nearbyBaseMarker);
+//            }
 //            addMarkersToMap(markerArrayList);
-        }
+//        }
+
     }
 
     @Override
@@ -2016,6 +2015,9 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
      */
     public void updateMarker(final boolean isBookmarked, final Place place,
         @Nullable final LatLng currentLatLng) {
+        if(true) {
+            return; // TODO move this method to new overlay mangement logic
+        }
         addMarkerToMap(place, isBookmarked);
     }
 
@@ -2118,7 +2120,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         Timber.tag("temptag").d("added marker");
     }
 
-    private Marker convertToMarker(Place place, Boolean isBookMarked) {
+    public Marker convertToMarker(Place place, Boolean isBookMarked) {
         Drawable icon = ContextCompat.getDrawable(getContext(), getIconFor(place, isBookMarked));
         GeoPoint point = new GeoPoint(place.location.getLatitude(), place.location.getLongitude());
         Marker marker = new Marker(binding.map);
@@ -2157,20 +2159,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         return marker;
     }
 
-    private class Experiment {
-        public Place place;
-        public Boolean isBookmarked;
-    }
-
-    private void experimenting(final List<Experiment> pubs) {
-//        if(System.currentTimeMillis()>1734359981239L) {return;}
-        ArrayList<Marker> ms = new ArrayList<>(pubs.size());
-        for(Experiment e: pubs){
-            ms.add(convertToMarker(e.place,e.isBookmarked));
-        }
-        justExperimenting.updateMarkersState(ms);
-    }
-    public void experimentingPartTwo(final List<Marker> ms){
+    public void replaceMarkerOverlays(final List<Marker> ms){
         clearAllMarkers();
         binding.map.getOverlays().addAll(ms);
     }
@@ -2513,28 +2502,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         scaleBarOverlay.setBackgroundPaint(barPaint);
         scaleBarOverlay.enableScaleBar();
         binding.map.getOverlays().add(scaleBarOverlay);
-        binding.map.getOverlays().add(new MapEventsOverlay(new MapEventsReceiver() {
-            @Override
-            public boolean singleTapConfirmedHelper(GeoPoint p) {
-                if (clickedMarker != null) {
-                    clickedMarker.closeInfoWindow();
-                } else {
-                    Timber.e("CLICKED MARKER IS NULL");
-                }
-                if (isListBottomSheetExpanded()) {
-                    // Back should first hide the bottom sheet if it is expanded
-                    hideBottomSheet();
-                } else if (isDetailsBottomSheetVisible()) {
-                    hideBottomDetailsSheet();
-                }
-                return true;
-            }
-
-            @Override
-            public boolean longPressHelper(GeoPoint p) {
-                return false;
-            }
-        }));
+        binding.map.getOverlays().add(mapEventsOverlay);
         binding.map.setMultiTouchControls(true);
     }
 
