@@ -13,13 +13,9 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.ensureActive
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.osmdroid.views.overlay.Marker
-import timber.log.Timber
 import java.util.ArrayList
 import java.util.concurrent.CopyOnWriteArrayList
 
@@ -41,9 +37,11 @@ class JustExperimenting(frag: NearbyParentFragment) {
     fun loadNewMarkers(es: ArrayList<MarkerPlaceGroup>) = scope.launch {
         markerBaseDataChannel.send(es)
     }
-    suspend fun updateMarkersState(markers: List<Marker>){
+
+    suspend fun updateMarkersState(markers: List<Marker>) {
         markersStateChannel.send(markers)
     }
+
     init {
         scope.launch(Dispatchers.Default) {
             var pinStateUpdateJob: Job? = null
@@ -63,7 +61,7 @@ class JustExperimenting(frag: NearbyParentFragment) {
         }
         scope.launch(Dispatchers.Default) {
             var loadPinDetailsJob: Job? = null
-            for(markerBaseDataList in markerBaseDataChannel) {
+            for (markerBaseDataList in markerBaseDataChannel) {
                 loadPinDetailsJob?.cancel()
                 loadPinDetailsJob = launch {
                     loadPinsDetails(frag, markerBaseDataList, this)
@@ -71,7 +69,7 @@ class JustExperimenting(frag: NearbyParentFragment) {
             }
         }
 
-        frag.viewLifecycleOwner.lifecycle.addObserver(object: DefaultLifecycleObserver {
+        frag.viewLifecycleOwner.lifecycle.addObserver(object : DefaultLifecycleObserver {
             override fun onDestroy(owner: LifecycleOwner) {
                 performCleanup()
             }
@@ -85,11 +83,9 @@ class JustExperimenting(frag: NearbyParentFragment) {
     ) {
         // make sure the grey pins are loaded immediately:
         skippedCount = skipLimit
-        updateMarkersState(
-            markerBaseDataList.map {
-                frag.convertToMarker(it.place, it.isBookmarked)
-            }
-        )
+        updateMarkersState(markerBaseDataList.map {
+            frag.convertToMarker(it.place, it.isBookmarked)
+        })
 
         // now load the pin details:
         clickedPlaces.clear()
@@ -110,7 +106,7 @@ class JustExperimenting(frag: NearbyParentFragment) {
             val toUpdateMarkersFrom = currentIndex
 
             val placesToFetch = mutableListOf<Int>()
-            while (currentIndex<=endIndex && placesToFetch.size < batchSize) {
+            while (currentIndex <= endIndex && placesToFetch.size < batchSize) {
                 val existingPlace = markerBaseDataList[currentIndex].place
                 if (existingPlace.name != "") {
                     ++currentIndex
@@ -119,7 +115,7 @@ class JustExperimenting(frag: NearbyParentFragment) {
                 val repoPlace = withContext(Dispatchers.IO) {
                     frag.getPlaceFromRepository(existingPlace.entityID)
                 }
-                if (repoPlace != null && repoPlace.name != ""){
+                if (repoPlace != null && repoPlace.name != "") {
                     markerBaseDataList[currentIndex] =
                         MarkerPlaceGroup(markerBaseDataList[currentIndex].isBookmarked, repoPlace)
                     ++currentIndex
@@ -138,29 +134,43 @@ class JustExperimenting(frag: NearbyParentFragment) {
                 for (fetchedPlace in fetchedPlaces) {
                     for (index in placesToFetch) { // nesting okay here as batch size is small
                         val existingPlace = markerBaseDataList[index].place
-                        if (existingPlace.siteLinks.wikidataLink == fetchedPlace.siteLinks.wikidataLink){
+                        if (existingPlace.siteLinks.wikidataLink ==
+                            fetchedPlace.siteLinks.wikidataLink
+                        ) {
                             fetchedPlace.location = existingPlace.location
                             fetchedPlace.distance = existingPlace.distance
                             fetchedPlace.isMonument = existingPlace.isMonument
-                            markerBaseDataList[index] = MarkerPlaceGroup(markerBaseDataList[index].isBookmarked, fetchedPlace)
+                            markerBaseDataList[index] = MarkerPlaceGroup(
+                                markerBaseDataList[index].isBookmarked, fetchedPlace
+                            )
                             frag.savePlaceToDatabase(fetchedPlace)
                         }
                     }
                 }
             }
             for (i in toUpdateMarkersFrom..<currentIndex) {
-                updatedMarkers[i] = frag.convertToMarker(markerBaseDataList[i].place, markerBaseDataList[i].isBookmarked)
+                updatedMarkers[i] = frag.convertToMarker(
+                    markerBaseDataList[i].place, markerBaseDataList[i].isBookmarked
+                )
             }
-            if(clickedPlacesIndex < clickedPlaces.size) {
+            if (clickedPlacesIndex < clickedPlaces.size) {
                 val clickedPlacesBacklog = hashMapOf<LatLng, Place>()
                 while (clickedPlacesIndex < clickedPlaces.size) {
-                    clickedPlacesBacklog.put(clickedPlaces[clickedPlacesIndex].location, clickedPlaces[clickedPlacesIndex])
+                    clickedPlacesBacklog.put(
+                        clickedPlaces[clickedPlacesIndex].location,
+                        clickedPlaces[clickedPlacesIndex]
+                    )
                     ++clickedPlacesIndex
                 }
                 for (i in currentIndex..endIndex) {
                     if (clickedPlacesBacklog.containsKey(markerBaseDataList[i].place.location)) {
-                        markerBaseDataList[i] = MarkerPlaceGroup(markerBaseDataList[i].isBookmarked, clickedPlacesBacklog[markerBaseDataList[i].place.location])
-                        updatedMarkers[i] = frag.convertToMarker(markerBaseDataList[i].place, markerBaseDataList[i].isBookmarked)
+                        markerBaseDataList[i] = MarkerPlaceGroup(
+                            markerBaseDataList[i].isBookmarked,
+                            clickedPlacesBacklog[markerBaseDataList[i].place.location]
+                        )
+                        updatedMarkers[i] = frag.convertToMarker(
+                            markerBaseDataList[i].place, markerBaseDataList[i].isBookmarked
+                        )
                     }
                 }
             }

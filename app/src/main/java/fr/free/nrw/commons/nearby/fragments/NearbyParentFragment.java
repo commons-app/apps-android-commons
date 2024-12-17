@@ -158,7 +158,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
     private JustExperimenting justExperimenting;
 
-    public final MapEventsOverlay mapEventsOverlay =  new MapEventsOverlay(new MapEventsReceiver() {
+    public final MapEventsOverlay mapEventsOverlay = new MapEventsOverlay(new MapEventsReceiver() {
         @Override
         public boolean singleTapConfirmedHelper(GeoPoint p) {
             if (clickedMarker != null) {
@@ -677,19 +677,6 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         registerNetworkReceiver();
         if (isResumed() && ((MainActivity) getActivity()).activeFragment == ActiveFragment.NEARBY) {
             if (locationPermissionsHelper.checkLocationPermission(getActivity())) {
-//                if (lastFocusLocation == null && lastKnownLocation == null) {
-//                    locationPermissionGranted();
-//                } else{
-//                    if (updatedPlacesList != null) {
-//                        if (!updatedPlacesList.isEmpty()) {
-//                            loadPlacesDataAsync(updatedPlacesList, updatedLatLng);
-//                        } else {
-//                            updateMapMarkers(updatedPlacesList, getLastMapFocus(), false);
-//                        }
-//                    }else {
-//                        locationPermissionGranted();
-//                    }
-//                }
                 locationPermissionGranted();
             } else {
                 startMapWithoutPermission();
@@ -2023,7 +2010,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
      */
     public void updateMarker(final boolean isBookmarked, final Place place,
         @Nullable final LatLng currentLatLng) {
-        if(true) {
+        if (true) {
             return; // TODO move this method to new overlay mangement logic
         }
         addMarkerToMap(place, isBookmarked);
@@ -2132,7 +2119,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         return marker;
     }
 
-    public void replaceMarkerOverlays(final List<Marker> ms){
+    public void replaceMarkerOverlays(final List<Marker> ms) {
         clearAllMarkers();
         binding.map.getOverlays().addAll(ms);
     }
@@ -2144,7 +2131,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
      *                          locations.
      */
     private void addMarkersToMap(List<BaseMarker> nearbyBaseMarkers) {
-        Timber.tag("temptagtwo").e("another n+1 C 2: "+nearbyBaseMarkers.size());
+        Timber.tag("temptagtwo").e("another n+1 C 2: " + nearbyBaseMarkers.size());
         for(int i = 0; i< nearbyBaseMarkers.size(); i++){
             addMarkerToMap(nearbyBaseMarkers.get(i).getPlace(), false);
         }
