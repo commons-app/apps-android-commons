@@ -96,8 +96,14 @@ public class ContributionsListPresenter implements UserActionListener {
         contributionBoundaryCallback.dispose();
     }
 
+    /**
+     * It is used to refresh list.
+     *
+     * @param swipeRefreshLayout used to stop refresh animation when
+     * refresh finishes.
+     */
     @Override
-    public void refreshList(SwipeRefreshLayout swipeRefreshLayout) {
+    public void refreshList(final SwipeRefreshLayout swipeRefreshLayout) {
         contributionBoundaryCallback.refreshList(() -> {
             swipeRefreshLayout.setRefreshing(false);
             return Unit.INSTANCE;

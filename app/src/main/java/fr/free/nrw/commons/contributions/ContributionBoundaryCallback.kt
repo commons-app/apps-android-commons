@@ -47,6 +47,12 @@ class ContributionBoundaryCallback
             fetchContributions()
         }
 
+        /**
+         * Fetch list from network and save it to local DB.
+         *
+         * @param onRefreshFinish callback to invoke when operations finishes
+         * with either error or success.
+         */
         fun refreshList(onRefreshFinish: () -> Unit = {}){
             if (sessionManager.userName != null) {
                 mediaClient.resetUserNameContinuation(sessionManager.userName!!)
@@ -56,6 +62,9 @@ class ContributionBoundaryCallback
 
         /**
          * Fetches contributions using the MediaWiki API
+         *
+         *   @param onRefreshFinish callback to invoke when operations finishes
+         *   with either error or success.
          */
         private fun fetchContributions(onRefreshFinish: () -> Unit = {}) {
             if (sessionManager.userName != null) {
@@ -89,6 +98,8 @@ class ContributionBoundaryCallback
 
         /**
          * Saves the contributions the the local DB
+         *
+         * @param onRefreshFinish callback to invoke when successfully saved to DB.
          */
         private fun saveContributionsToDB(contributions: List<Contribution>, onRefreshFinish: () -> Unit) {
             compositeDisposable.add(
