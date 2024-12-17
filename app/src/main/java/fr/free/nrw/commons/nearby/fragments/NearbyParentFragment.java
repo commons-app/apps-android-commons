@@ -95,7 +95,6 @@ import fr.free.nrw.commons.nearby.PlacesRepository;
 import fr.free.nrw.commons.nearby.WikidataFeedback;
 import fr.free.nrw.commons.nearby.contract.NearbyParentFragmentContract;
 import fr.free.nrw.commons.nearby.fragments.AdvanceQueryFragment.Callback;
-import fr.free.nrw.commons.nearby.helper.Experiment;
 import fr.free.nrw.commons.nearby.helper.JustExperimenting;
 import fr.free.nrw.commons.nearby.model.BottomSheetItem;
 import fr.free.nrw.commons.nearby.presenter.NearbyParentFragmentPresenter;
@@ -244,7 +243,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     private Runnable searchRunnable;
     private static final long SCROLL_DELAY = 800; // Delay for debounce of onscroll, in milliseconds.
 
-    private List<Place> updatedPlacesList;
+//    private List<Place> updatedPlacesList;
     private LatLng updatedLatLng;
     private boolean searchable;
 
@@ -1376,13 +1375,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                             ? getTextBetweenParentheses(
                             updatedPlace.getLongDescription()) : updatedPlace.getLongDescription());
                     marker.showInfoWindow();
-                    for (int i = 0; i < updatedPlacesList.size(); i++) {
-                        Place pl = updatedPlacesList.get(i);
-                        if (pl.location == updatedPlace.location) {
-                            updatedPlacesList.set(i, updatedPlace);
-                            savePlaceToDatabase(place);
-                        }
-                    }
+                    justExperimenting.handlePlaceClicked(updatedPlace);
+                    savePlaceToDatabase(place);
                     Drawable icon = ContextCompat.getDrawable(getContext(),
                         getIconFor(updatedPlace, isBookMarked));
                     marker.setIcon(icon);
@@ -1492,7 +1486,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         int batchSize = 3;
 
         updatedLatLng = curLatLng;
-        updatedPlacesList = new ArrayList<>(placeList);
+//        updatedPlacesList = new ArrayList<>(placeList);
 
         // Sorts the places by distance to ensure the nearest pins are ready for the user as soon
         // as possible.
@@ -1501,7 +1495,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                 Comparator.comparingDouble(place -> place.getDistanceInDouble(getMapFocus())));
         }
         stopQuery = false;
-        processBatchesSequentially(places, batchSize, updatedPlacesList, curLatLng, 0);
+//        processBatchesSequentially(places, batchSize, updatedPlacesList, curLatLng, 0);
     }
 
     /**
@@ -1978,7 +1972,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             }
 
             if (shouldUpdateMarker) {
-                Experiment e = new Experiment(place, markerPlaceGroup.getIsBookmarked());
+                MarkerPlaceGroup e = new MarkerPlaceGroup(markerPlaceGroup.getIsBookmarked(), place);
 //                updateMarker(markerPlaceGroup.getIsBookmarked(), place,
 //                    NearbyController.currentLocation);
                 es.add(e);
@@ -2081,43 +2075,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
      * @param isBookMarked A Boolean flag indicating whether the place is bookmarked or not.
      */
     private void addMarkerToMap(Place place, Boolean isBookMarked) {
-        Drawable icon = ContextCompat.getDrawable(getContext(), getIconFor(place, isBookMarked));
-        GeoPoint point = new GeoPoint(place.location.getLatitude(), place.location.getLongitude());
-        Marker marker = new Marker(binding.map);
-        marker.setPosition(point);
-        marker.setIcon(icon);
-        if (!Objects.equals(place.name, "")) {
-            marker.setTitle(place.name);
-            marker.setSnippet(
-                containsParentheses(place.getLongDescription())
-                    ? getTextBetweenParentheses(
-                    place.getLongDescription()) : place.getLongDescription());
-        }
-        marker.setTextLabelFontSize(40);
-        marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_TOP);
-        marker.setOnMarkerClickListener((marker1, mapView) -> {
-            if (clickedMarker != null) {
-                clickedMarker.closeInfoWindow();
-            }
-            clickedMarker = marker1;
-            binding.bottomSheetDetails.dataCircularProgress.setVisibility(View.VISIBLE);
-            binding.bottomSheetDetails.icon.setVisibility(View.GONE);
-            binding.bottomSheetDetails.wikiDataLl.setVisibility(View.GONE);
-            if (Objects.equals(place.name, "")) {
-                getPlaceData(place.getWikiDataEntityId(), place, marker1, isBookMarked);
-            } else {
-                marker.showInfoWindow();
-                binding.bottomSheetDetails.dataCircularProgress.setVisibility(View.GONE);
-                binding.bottomSheetDetails.icon.setVisibility(View.VISIBLE);
-                binding.bottomSheetDetails.wikiDataLl.setVisibility(View.VISIBLE);
-                passInfoToSheet(place);
-                hideBottomSheet();
-            }
-            bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
-            return true;
-        });
-        binding.map.getOverlays().add(marker);
-        Timber.tag("temptag").d("added marker");
+        binding.map.getOverlays().add(convertToMarker(place, isBookMarked));
+        Timber.tag("temptag").d("added marker THE OLD WAY");
     }
 
     public Marker convertToMarker(Place place, Boolean isBookMarked) {
