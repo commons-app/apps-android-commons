@@ -217,7 +217,7 @@ public class NearbyParentFragmentPresenter
     public void updateMapMarkers(List<Place> nearbyPlaces, LatLng currentLatLng,
         boolean shouldTrackPosition) {
         if (null != nearbyParentFragmentView) {
-            nearbyParentFragmentView.clearAllMarkers();
+//            nearbyParentFragmentView.clearAllMarkers();
             List<BaseMarker> baseMarkers = NearbyController
                 .loadAttractionsFromLocationToBaseMarkerOptions(currentLatLng,
                     // Curlatlang will be used to calculate distances

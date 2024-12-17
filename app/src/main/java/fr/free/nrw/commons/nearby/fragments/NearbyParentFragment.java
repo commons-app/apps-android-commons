@@ -28,6 +28,7 @@ import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
+import android.os.Looper;
 import android.preference.PreferenceManager;
 import android.provider.Settings;
 import android.text.Html;
@@ -95,6 +96,7 @@ import fr.free.nrw.commons.nearby.PlacesRepository;
 import fr.free.nrw.commons.nearby.WikidataFeedback;
 import fr.free.nrw.commons.nearby.contract.NearbyParentFragmentContract;
 import fr.free.nrw.commons.nearby.fragments.AdvanceQueryFragment.Callback;
+import fr.free.nrw.commons.nearby.helper.JustExperimenting;
 import fr.free.nrw.commons.nearby.model.BottomSheetItem;
 import fr.free.nrw.commons.nearby.presenter.NearbyParentFragmentPresenter;
 import fr.free.nrw.commons.upload.FileUtils;
@@ -125,6 +127,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.TimeUnit;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -154,6 +157,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     LocationPermissionCallback, BottomSheetAdapter.ItemClickListener {
 
     FragmentNearbyParentBinding binding;
+
+    private JustExperimenting justExperimenting;
 
     @Inject
     LocationServiceManager locationManager;
@@ -325,6 +330,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         final Bundle savedInstanceState) {
         binding = FragmentNearbyParentBinding.inflate(inflater, container, false);
         view = binding.getRoot();
+
+        justExperimenting = new JustExperimenting(this);
 
         initNetworkBroadCastReceiver();
         presenter = new NearbyParentFragmentPresenter(bookmarkLocationDao);
@@ -1508,6 +1515,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     @SuppressLint("CheckResult")
     private void processBatchesSequentially(List<Place> places, int batchSize,
         List<Place> updatedPlaceList, LatLng curLatLng, int startIndex) {
+        Timber.tag("temptagfour").d("processBatchesSequentially called with startIndex %d", startIndex);
         if (startIndex >= places.size() || stopQuery) {
             return;
         }
@@ -1926,7 +1934,9 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         final boolean displayNeedsPhoto= false;
         final boolean displayWlm = false;
         // Remove the previous markers before updating them
-        clearAllMarkers();
+//        clearAllMarkers(); // moved
+        int debugcount = 0;
+        ArrayList<Experiment> es = new ArrayList<>();
         for (final MarkerPlaceGroup markerPlaceGroup : NearbyController.markerLabelList) {
             final Place place = markerPlaceGroup.getPlace();
             // When label filter is engaged
@@ -1967,10 +1977,19 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             }
 
             if (shouldUpdateMarker) {
-                updateMarker(markerPlaceGroup.getIsBookmarked(), place,
-                    NearbyController.currentLocation);
+                ++debugcount;
+                Experiment e = new Experiment();
+                e.place = place;
+                e.isBookmarked = markerPlaceGroup.getIsBookmarked();
+//                updateMarker(markerPlaceGroup.getIsBookmarked(), place,
+//                    NearbyController.currentLocation);
+                es.add(e);
             }
         }
+        experimenting(es);
+        Timber.tag("temptagtwo").e("n+1 C 2: "+debugcount);
+//        Timber.tag("temptagtwo").e("iscowa: "+(binding.map.getOverlays() instanceof CopyOnWriteArrayList<Overlay>));
+//        Timber.tag("temptagtwo").e("additional debug info: "+(Looper.myLooper() == Looper.getMainLooper()));
         if (selectedLabels == null || selectedLabels.size() == 0) {
             ArrayList<BaseMarker> markerArrayList = new ArrayList<>();
             for (final MarkerPlaceGroup markerPlaceGroup : NearbyController.markerLabelList) {
@@ -1978,7 +1997,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                 nearbyBaseMarker.setPlace(markerPlaceGroup.getPlace());
                 markerArrayList.add(nearbyBaseMarker);
             }
-            addMarkersToMap(markerArrayList);
+            //TODO experimentation touncomment
+//            addMarkersToMap(markerArrayList);
         }
     }
 
@@ -2095,6 +2115,64 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             return true;
         });
         binding.map.getOverlays().add(marker);
+        Timber.tag("temptag").d("added marker");
+    }
+
+    private Marker convertToMarker(Place place, Boolean isBookMarked) {
+        Drawable icon = ContextCompat.getDrawable(getContext(), getIconFor(place, isBookMarked));
+        GeoPoint point = new GeoPoint(place.location.getLatitude(), place.location.getLongitude());
+        Marker marker = new Marker(binding.map);
+        marker.setPosition(point);
+        marker.setIcon(icon);
+        if (!Objects.equals(place.name, "")) {
+            marker.setTitle(place.name);
+            marker.setSnippet(
+                containsParentheses(place.getLongDescription())
+                    ? getTextBetweenParentheses(
+                    place.getLongDescription()) : place.getLongDescription());
+        }
+        marker.setTextLabelFontSize(40);
+        marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_TOP);
+        marker.setOnMarkerClickListener((marker1, mapView) -> {
+            if (clickedMarker != null) {
+                clickedMarker.closeInfoWindow();
+            }
+            clickedMarker = marker1;
+            binding.bottomSheetDetails.dataCircularProgress.setVisibility(View.VISIBLE);
+            binding.bottomSheetDetails.icon.setVisibility(View.GONE);
+            binding.bottomSheetDetails.wikiDataLl.setVisibility(View.GONE);
+            if (Objects.equals(place.name, "")) {
+                getPlaceData(place.getWikiDataEntityId(), place, marker1, isBookMarked);
+            } else {
+                marker.showInfoWindow();
+                binding.bottomSheetDetails.dataCircularProgress.setVisibility(View.GONE);
+                binding.bottomSheetDetails.icon.setVisibility(View.VISIBLE);
+                binding.bottomSheetDetails.wikiDataLl.setVisibility(View.VISIBLE);
+                passInfoToSheet(place);
+                hideBottomSheet();
+            }
+            bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+            return true;
+        });
+        return marker;
+    }
+
+    private class Experiment {
+        public Place place;
+        public Boolean isBookmarked;
+    }
+
+    private void experimenting(final List<Experiment> pubs) {
+//        if(System.currentTimeMillis()>1734359981239L) {return;}
+        ArrayList<Marker> ms = new ArrayList<>(pubs.size());
+        for(Experiment e: pubs){
+            ms.add(convertToMarker(e.place,e.isBookmarked));
+        }
+        justExperimenting.updateMarkersState(ms);
+    }
+    public void experimentingPartTwo(final List<Marker> ms){
+        clearAllMarkers();
+        binding.map.getOverlays().addAll(ms);
     }
 
     /**
@@ -2104,7 +2182,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
      *                          locations.
      */
     private void addMarkersToMap(List<BaseMarker> nearbyBaseMarkers) {
-
+        Timber.tag("temptagtwo").e("another n+1 C 2: "+nearbyBaseMarkers.size());
         for(int i = 0; i< nearbyBaseMarkers.size(); i++){
             addMarkerToMap(nearbyBaseMarkers.get(i).getPlace(), false);
         }
@@ -2396,6 +2474,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
      */
     @Override
     public void clearAllMarkers() {
+        Timber.tag("temptagtwo").e("clearallmarkerscalled");
         binding.map.getOverlayManager().clear();
         binding.map.invalidate();
         GeoPoint geoPoint = mapCenter;
