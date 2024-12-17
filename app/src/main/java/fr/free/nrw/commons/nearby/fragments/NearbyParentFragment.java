@@ -1639,7 +1639,21 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             });
     }
 
-    private void savePlaceToDatabase(Place place) {
+    public Place getPlaceFromRepository(String entityID) {
+        return placesRepository.fetchPlace(entityID);
+    }
+
+    public List<Place> getPlacesFromController(List<Place> places) {
+        List<Place> results = new ArrayList<Place>();
+        try {
+            results = nearbyController.getPlaces(places);
+        } catch (Exception e) {
+            Timber.tag("Nearby Pin Details").e(e);
+        }
+        return results;
+    }
+
+    public void savePlaceToDatabase(Place place) {
         compositeDisposable.add(placesRepository
             .save(place)
             .subscribeOn(Schedulers.io())
