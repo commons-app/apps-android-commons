@@ -191,6 +191,10 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
 
         initAdapter();
 
+        binding.swipeRefreshLayout.setOnRefreshListener(() -> {
+            contributionsListPresenter.refreshList(binding.swipeRefreshLayout);
+        });
+
         return binding.getRoot();
     }
 

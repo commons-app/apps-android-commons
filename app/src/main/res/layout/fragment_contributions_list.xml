@@ -1,125 +1,129 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
+
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:id="@+id/swipe_refresh_layout"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent">
+
+  <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?attr/contributionsListBackground"
-    >
+    android:orientation="vertical">
+
 
     <TextView
-        android:id="@+id/noContributionsYet"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/no_uploads"
-        android:gravity="center"
-        android:layout_centerInParent="true"
-        android:visibility="gone"
-        android:layout_marginRight="@dimen/tiny_gap"
-        android:layout_marginEnd="@dimen/tiny_gap"
-        />
+      android:id="@+id/noContributionsYet"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_centerInParent="true"
+      android:layout_marginEnd="@dimen/tiny_gap"
+      android:layout_marginRight="@dimen/tiny_gap"
+      android:gravity="center"
+      android:text="@string/no_uploads"
+      android:visibility="gone" />
 
     <ProgressBar
       android:id="@+id/loadingContributionsProgressBar"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_centerInParent="true"
-      android:visibility="gone"
-      />
+      android:visibility="gone" />
 
     <RelativeLayout
       android:layout_width="match_parent"
       android:layout_height="match_parent"
       android:orientation="vertical">
 
-        <androidx.appcompat.widget.AppCompatTextView
-          android:id="@+id/tv_contributions_of_user"
-          style="@style/MediaDetailTextLabel"
-          tools:text="Contributions of user : Ashish"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:padding="10dp"
-          tools:visibility="visible"
-          android:visibility="gone" />
+      <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_contributions_of_user"
+        style="@style/MediaDetailTextLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:visibility="gone"
+        tools:text="Contributions of user : Ashish"
+        tools:visibility="visible" />
 
-        <androidx.recyclerview.widget.RecyclerView
-          android:id="@+id/contributionsList"
-          android:layout_width="match_parent"
-          android:layout_height="match_parent"
-          android:layout_below="@id/tv_contributions_of_user"
-          android:scrollbars="vertical"
-          android:fadeScrollbars="true"
-          android:scrollbarThumbVertical="@color/primaryColor"
-          android:scrollbarSize="@dimen/dimen_6"/>
+      <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/contributionsList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/tv_contributions_of_user"
+        android:fadeScrollbars="true"
+        android:scrollbarSize="@dimen/dimen_6"
+        android:scrollbarThumbVertical="@color/primaryColor"
+        android:scrollbars="vertical" />
     </RelativeLayout>
 
     <LinearLayout
-        android:id="@+id/fab_layout"
+      android:id="@+id/fab_layout"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignParentEnd="true"
+      android:layout_alignParentRight="true"
+      android:layout_alignParentBottom="true"
+      android:layout_marginRight="@dimen/medium_height"
+      android:layout_marginBottom="@dimen/activity_margin_horizontal"
+      android:gravity="center"
+      android:orientation="vertical">
+
+      <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_camera"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="@dimen/medium_height"
-        android:layout_marginBottom="@dimen/activity_margin_horizontal"
-        android:orientation="vertical"
-        android:gravity="center"
-        >
+        android:contentDescription="@string/add_contribution_from_camera"
+        android:tint="@color/button_blue"
+        android:visibility="gone"
+        app:backgroundTint="@color/main_background_light"
+        app:elevation="@dimen/tiny_margin"
+        app:fabSize="mini"
+        app:srcCompat="@drawable/ic_photo_camera_white_24dp"
+        app:useCompatPadding="true" />
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-          android:id="@+id/fab_camera"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:contentDescription="@string/add_contribution_from_camera"
-          android:tint="@color/button_blue"
-          android:visibility="gone"
-          app:backgroundTint="@color/main_background_light"
-          app:elevation="@dimen/tiny_margin"
-          app:fabSize="mini"
-          app:srcCompat="@drawable/ic_photo_camera_white_24dp"
-          app:useCompatPadding="true" />
+      <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_gallery"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/add_contribution_from_photos"
+        android:tint="@color/button_blue"
+        android:visibility="gone"
+        app:backgroundTint="@color/main_background_light"
+        app:elevation="@dimen/tiny_margin"
+        app:fabSize="mini"
+        app:srcCompat="@drawable/ic_photo_white_24dp"
+        app:useCompatPadding="true" />
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-          android:id="@+id/fab_gallery"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:contentDescription="@string/add_contribution_from_photos"
-          android:tint="@color/button_blue"
-          android:visibility="gone"
-          app:backgroundTint="@color/main_background_light"
-          app:elevation="@dimen/tiny_margin"
-          app:fabSize="mini"
-          app:srcCompat="@drawable/ic_photo_white_24dp"
-          app:useCompatPadding="true" />
+      <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_custom_gallery"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/commons"
+        android:contentDescription="@string/add_contribution_from_contributions_gallery"
+        android:tint="@color/button_blue"
+        android:visibility="gone"
+        app:backgroundTint="@color/main_background_light"
+        app:elevation="@dimen/tiny_margin"
+        app:fabSize="mini"
+        app:srcCompat="@drawable/ic_custom_image_picker"
+        app:useCompatPadding="true" />
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-          android:id="@+id/fab_custom_gallery"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:background="@drawable/commons"
-          android:contentDescription="@string/add_contribution_from_contributions_gallery"
-          android:tint="@color/button_blue"
-          android:visibility="gone"
-          app:backgroundTint="@color/main_background_light"
-          app:elevation="@dimen/tiny_margin"
-          app:fabSize="mini"
-          app:srcCompat="@drawable/ic_custom_image_picker"
-          app:useCompatPadding="true" />
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-          android:id="@+id/fab_plus"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:contentDescription="@string/add_new_contribution"
-          android:gravity="center_vertical"
-          android:visibility="visible"
-          app:backgroundTint="@color/status_bar_blue"
-          app:elevation="@dimen/tiny_margin"
-          app:srcCompat="@drawable/ic_add_white_24dp"
-          app:useCompatPadding="true" />
+      <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_plus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/add_new_contribution"
+        android:gravity="center_vertical"
+        android:visibility="visible"
+        app:backgroundTint="@color/status_bar_blue"
+        app:elevation="@dimen/tiny_margin"
+        app:srcCompat="@drawable/ic_add_white_24dp"
+        app:useCompatPadding="true" />
 
     </LinearLayout>
 
-</RelativeLayout>
+  </RelativeLayout>
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
