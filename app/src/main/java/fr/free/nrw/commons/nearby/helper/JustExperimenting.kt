@@ -14,6 +14,7 @@ import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.ensureActive
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -29,7 +30,7 @@ class JustExperimenting(frag: NearbyParentFragment) {
     private val skipLimit = 2
     private val skipDelayMs = 1000L
 
-    private var markersState = MutableStateFlow(emptyList<Marker>())
+    private var markersStateChannel = Channel<List<Marker>>(Channel.CONFLATED)
     private val markerBaseDataChannel = Channel<ArrayList<MarkerPlaceGroup>>(Channel.CONFLATED)
 
     private val clickedPlaces = CopyOnWriteArrayList<Place>()
@@ -40,23 +41,24 @@ class JustExperimenting(frag: NearbyParentFragment) {
     fun loadNewMarkers(es: ArrayList<MarkerPlaceGroup>) = scope.launch {
         markerBaseDataChannel.send(es)
     }
-    fun updateMarkersState(markers: List<Marker>){
-        Timber.tag("nearbyperformancefixes").d("should be here in a bit")
-        markersState.value = markers
+    suspend fun updateMarkersState(markers: List<Marker>){
+        markersStateChannel.send(markers)
     }
     init {
         scope.launch(Dispatchers.Default) {
-            markersState.collectLatest {
-                Timber.tag("nearbyperformancefixes").d("here lol")
-                if (it.isEmpty()) {
-                    return@collectLatest
+            var pinStateUpdateJob: Job? = null
+            for (markers in markersStateChannel) {
+                pinStateUpdateJob?.cancel()
+                pinStateUpdateJob = launch {
+                    if (markers.isEmpty()) {
+                        return@launch
+                    }
+                    if (skippedCount++ < skipLimit) {
+                        delay(skipDelayMs)
+                    }
+                    skippedCount = 0
+                    frag.replaceMarkerOverlays(markers)
                 }
-//                if (skippedCount++ < skipLimit) {
-//                    delay(skipDelayMs)
-//                }
-                skippedCount = 0
-                Timber.tag("temptagtwo").d("here: ${it.size}")
-                frag.replaceMarkerOverlays(it)
             }
         }
         scope.launch(Dispatchers.Default) {
@@ -103,9 +105,7 @@ class JustExperimenting(frag: NearbyParentFragment) {
         val batchSize = 3
         var currentIndex = 0
         val endIndex = markerBaseDataList.lastIndex
-        Timber.tag("nearbyperformancefixes").d("loaded %d gray pins", endIndex+1)
         while (currentIndex <= endIndex) {
-            Timber.tag("nearbyperformancefixes").d("loading pins from %d", currentIndex)
             scope.ensureActive()
             val toUpdateMarkersFrom = currentIndex
 
@@ -155,6 +155,7 @@ class JustExperimenting(frag: NearbyParentFragment) {
                 val clickedPlacesBacklog = hashMapOf<LatLng, Place>()
                 while (clickedPlacesIndex < clickedPlaces.size) {
                     clickedPlacesBacklog.put(clickedPlaces[clickedPlacesIndex].location, clickedPlaces[clickedPlacesIndex])
+                    ++clickedPlacesIndex
                 }
                 for (i in currentIndex..endIndex) {
                     if (clickedPlacesBacklog.containsKey(markerBaseDataList[i].place.location)) {
@@ -168,6 +169,7 @@ class JustExperimenting(frag: NearbyParentFragment) {
     }
 
     private fun performCleanup() {
+        markersStateChannel.close()
         markerBaseDataChannel.close()
     }
 
