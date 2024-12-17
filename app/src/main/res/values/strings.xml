@@ -415,6 +415,7 @@
   <string name="map_application_missing">No compatible map application could be found on your device. Please install a map application to use this feature.</string>
   <string name="title_page_bookmarks_pictures">Pictures</string>
   <string name="title_page_bookmarks_locations">Locations</string>
+  <string name="title_page_bookmarks_categories">Categories</string>
   <string name="menu_bookmark">Add/Remove to bookmarks</string>
   <string name="provider_bookmarks">Bookmarks</string>
   <string name="bookmark_empty">You haven\'t added any bookmarks</string>
