@@ -78,7 +78,7 @@ class UploadMediaDetailAdapterUnitTest {
         uploadMediaDetails = mutableListOf(uploadMediaDetail, uploadMediaDetail)
         activity = Robolectric.buildActivity(UploadActivity::class.java).get()
         fragment = mock(UploadMediaDetailFragment::class.java)
-        adapter = UploadMediaDetailAdapter(fragment, "", recentLanguagesDao, mockResultLauncher)
+        adapter = UploadMediaDetailAdapter(fragment, "", recentLanguagesDao, mockResultLauncher, true)
         context = ApplicationProvider.getApplicationContext()
         Whitebox.setInternalState(adapter, "uploadMediaDetails", uploadMediaDetails)
         Whitebox.setInternalState(adapter, "eventListener", eventListener)
