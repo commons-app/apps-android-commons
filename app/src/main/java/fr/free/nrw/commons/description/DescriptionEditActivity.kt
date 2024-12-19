@@ -202,7 +202,7 @@ class DescriptionEditActivity :
             val descriptionEnd =
                 wikiText!!.substring(
                     descriptionStart.length +
-                        descriptionEndIndex,
+                            descriptionEndIndex,
                 )
             buffer.append(descriptionStart)
             for (i in uploadMediaDetails.indices) {
@@ -240,14 +240,23 @@ class DescriptionEditActivity :
                     applicationContext,
                     media,
                     updatedWikiText,
-                )?.subscribeOn(Schedulers.io())
-                ?.observeOn(AndroidSchedulers.mainThread())
-                ?.subscribe(Consumer<Boolean> { s: Boolean? -> Timber.d("Descriptions are added.") })
-                ?.let {
-                    compositeDisposable.add(
-                        it,
-                    )
-                }
+                )?.let { observable -> observable.subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe({ success ->
+                            // Log success status
+                            Timber.d("Descriptions are added: $success")
+                        }, { throwable ->
+                            // Log any error if occurs
+                            Timber.e(throwable, "Error adding description.")
+                        })?.let { disposable ->
+                            // Add to compositeDisposable if the observable is non-null
+                            compositeDisposable.add(disposable)
+                        }
+                } ?: run {
+                Timber.e("Description addition failed: Observable was null.")
+            }
+
+
         } catch (e: InvalidLoginTokenException) {
             val username: String? = sessionManager.userName
             val logoutListener =
