@@ -286,7 +286,6 @@ public class NearbyController extends MapController {
         if (placeList == null) {
             return baseMarkersList;
         }
-        Timber.tag("temptagthree").e("loadAttractionsFromLocationToBaseMarkerOptions called with %d places", placeList.size());
         placeList = placeList.subList(0, Math.min(placeList.size(), MAX_RESULTS));
         for (Place place : placeList) {
             BaseMarker baseMarker = new BaseMarker();

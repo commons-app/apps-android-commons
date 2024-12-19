@@ -325,10 +325,6 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
      * WLM URL
      */
     public static final String WLM_URL = "https://commons.wikimedia.org/wiki/Commons:Mobile_app/Contributing_to_WLM_using_the_app";
-    /**
-     * Saves response of list of places for the first time
-     */
-    private List<Place> places = new ArrayList<>();
 
     @NonNull
     public static NearbyParentFragment newInstance() {
@@ -957,7 +953,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
     @Override
     public void updateListFragment(final List<Place> placeList) {
-        places = placeList;
+        adapter.clear();
         adapter.setItems(placeList);
         binding.bottomSheetNearby.noResultsMessage.setVisibility(
             placeList.isEmpty() ? View.VISIBLE : View.GONE);
@@ -1875,7 +1871,6 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
      */
     private void addMarkerToMap(Place place, Boolean isBookMarked) {
         binding.map.getOverlays().add(convertToMarker(place, isBookMarked));
-        Timber.tag("temptag").d("added marker THE OLD WAY");
     }
 
     public Marker convertToMarker(Place place, Boolean isBookMarked) {
@@ -2214,7 +2209,6 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
      */
     @Override
     public void clearAllMarkers() {
-        Timber.tag("temptagtwo").e("clearallmarkerscalled");
         binding.map.getOverlayManager().clear();
         binding.map.invalidate();
         GeoPoint geoPoint = mapCenter;

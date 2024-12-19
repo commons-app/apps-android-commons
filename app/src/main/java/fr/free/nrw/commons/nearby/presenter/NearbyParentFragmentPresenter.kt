@@ -20,6 +20,7 @@ import fr.free.nrw.commons.nearby.contract.NearbyParentFragmentContract
 import fr.free.nrw.commons.utils.LocationUtils
 import fr.free.nrw.commons.wikidata.WikidataConstants.PLACE_OBJECT
 import fr.free.nrw.commons.wikidata.WikidataEditListener.WikidataP18EditListener
+import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.channels.Channel
@@ -27,13 +28,11 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.ensureActive
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import org.osmdroid.views.overlay.Marker
 import timber.log.Timber
 import java.lang.reflect.InvocationHandler
 import java.lang.reflect.Method
 import java.lang.reflect.Proxy
 import java.util.concurrent.CopyOnWriteArrayList
-import java.util.concurrent.CopyOnWriteArraySet
 
 class NearbyParentFragmentPresenter
     (
@@ -310,9 +309,10 @@ class NearbyParentFragmentPresenter
                         }
                     )
                     updatedGroups[index] = finalPlaceGroup
-                    launch {
-                        placesRepository.save(finalPlaceGroup.place)
-                    }
+                    placesRepository
+                        .save(finalPlaceGroup.place)
+                        .subscribeOn(Schedulers.io())
+                        .subscribe()
                 }
                 // handle any places clicked
                 if (clickedPlacesIndex < clickedPlaces.size) {
