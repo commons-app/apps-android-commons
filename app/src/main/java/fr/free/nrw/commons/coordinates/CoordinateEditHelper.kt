@@ -84,8 +84,8 @@ class CoordinateEditHelper @Inject constructor(
         }
 
         if (Latitude != null) {
-            buffer.append("\n{{Location|").append(Latitude).append("|").append(Longitude)
-                .append("|").append(Accuracy).append("}}")
+            buffer.append("\n{{Location|$Latitude|$Longitude|$Accuracy}}")
+
         }
 
         val editedLocation = buffer.toString()
