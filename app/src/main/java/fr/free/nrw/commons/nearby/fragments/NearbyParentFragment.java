@@ -56,6 +56,8 @@ import androidx.appcompat.app.AlertDialog.Builder;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.LifecycleOwnerKt;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -156,7 +158,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
     FragmentNearbyParentBinding binding;
 
-    private JustExperimenting justExperimenting;
+//    private JustExperimenting justExperimenting;
 
     public final MapEventsOverlay mapEventsOverlay = new MapEventsOverlay(new MapEventsReceiver() {
         @Override
@@ -351,7 +353,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         binding = FragmentNearbyParentBinding.inflate(inflater, container, false);
         view = binding.getRoot();
 
-        justExperimenting = new JustExperimenting(this);
+//        justExperimenting = new JustExperimenting(this);
 
         initNetworkBroadCastReceiver();
         presenter = new NearbyParentFragmentPresenter(bookmarkLocationDao);
@@ -1361,7 +1363,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                             ? getTextBetweenParentheses(
                             updatedPlace.getLongDescription()) : updatedPlace.getLongDescription());
                     marker.showInfoWindow();
-                    justExperimenting.handlePlaceClicked(updatedPlace);
+//                    justExperimenting.handlePlaceClicked(updatedPlace);
                     savePlaceToDatabase(place);
                     Drawable icon = ContextCompat.getDrawable(getContext(),
                         getIconFor(updatedPlace, isBookMarked));
@@ -1502,8 +1504,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
      */
     private void updateMapMarkers(final List<Place> nearbyPlaces, final LatLng curLatLng,
         final boolean shouldUpdateSelectedMarker) {
-        presenter.updateMapMarkers(nearbyPlaces, curLatLng, shouldUpdateSelectedMarker);
-        setFilterState();
+        presenter.updateMapMarkers(nearbyPlaces, curLatLng,
+            LifecycleOwnerKt.getLifecycleScope(getViewLifecycleOwner()));
     }
 
 
@@ -1766,8 +1768,10 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         final boolean displayExists = false;
         final boolean displayNeedsPhoto= false;
         final boolean displayWlm = false;
-        // Remove the previous markers before updating them
-//        clearAllMarkers(); // moved
+        if (selectedLabels == null || selectedLabels.size() == 0) {
+            replaceMarkerOverlays(NearbyController.markerLabelList);
+            return;
+        }
         ArrayList<MarkerPlaceGroup> es = new ArrayList<>();
         for (final MarkerPlaceGroup markerPlaceGroup : NearbyController.markerLabelList) {
             final Place place = markerPlaceGroup.getPlace();
@@ -1810,26 +1814,10 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
             if (shouldUpdateMarker) {
                 MarkerPlaceGroup e = new MarkerPlaceGroup(markerPlaceGroup.getIsBookmarked(), place);
-//                updateMarker(markerPlaceGroup.getIsBookmarked(), place,
-//                    NearbyController.currentLocation);
                 es.add(e);
             }
         }
-        justExperimenting.loadNewMarkers(es);
-//        Timber.tag("temptagtwo").e("iscowa: "+(binding.map.getOverlays() instanceof CopyOnWriteArrayList<Overlay>));
-//        Timber.tag("temptagtwo").e("additional debug info: "+(Looper.myLooper() == Looper.getMainLooper()));
-
-        //TODO experimentation touncomment
-//        if (selectedLabels == null || selectedLabels.size() == 0) {
-//            ArrayList<BaseMarker> markerArrayList = new ArrayList<>();
-//            for (final MarkerPlaceGroup markerPlaceGroup : NearbyController.markerLabelList) {
-//                BaseMarker nearbyBaseMarker = new BaseMarker();
-//                nearbyBaseMarker.setPlace(markerPlaceGroup.getPlace());
-//                markerArrayList.add(nearbyBaseMarker);
-//            }
-//            addMarkersToMap(markerArrayList);
-//        }
-
+        replaceMarkerOverlays(es);
     }
 
     @Override
@@ -1955,9 +1943,14 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         return marker;
     }
 
-    public void replaceMarkerOverlays(final List<Marker> ms) {
+    public void replaceMarkerOverlays(final List<MarkerPlaceGroup> markerPlaceGroups) {
+        ArrayList<Marker> newMarkers = new ArrayList<>(markerPlaceGroups.size());
+        for (MarkerPlaceGroup markerPlaceGroup : markerPlaceGroups) {
+            newMarkers.add(
+                convertToMarker(markerPlaceGroup.getPlace(), markerPlaceGroup.getIsBookmarked()));
+        }
         clearAllMarkers();
-        binding.map.getOverlays().addAll(ms);
+        binding.map.getOverlays().addAll(newMarkers);
     }
 
     /**

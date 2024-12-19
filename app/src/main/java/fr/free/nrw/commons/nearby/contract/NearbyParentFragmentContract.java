@@ -2,6 +2,7 @@ package fr.free.nrw.commons.nearby.contract;
 
 import android.content.Context;
 import androidx.annotation.Nullable;
+import androidx.lifecycle.LifecycleCoroutineScope;
 import fr.free.nrw.commons.BaseMarker;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LatLng;

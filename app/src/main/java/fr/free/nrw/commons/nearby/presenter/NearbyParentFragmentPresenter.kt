@@ -3,6 +3,7 @@ package fr.free.nrw.commons.nearby.presenter
 import android.location.Location
 import android.view.View
 import androidx.annotation.MainThread
+import androidx.lifecycle.LifecycleCoroutineScope
 import fr.free.nrw.commons.BaseMarker
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao
 import fr.free.nrw.commons.kvstore.JsonKvStore
@@ -18,6 +19,11 @@ import fr.free.nrw.commons.nearby.contract.NearbyParentFragmentContract
 import fr.free.nrw.commons.utils.LocationUtils
 import fr.free.nrw.commons.wikidata.WikidataConstants.PLACE_OBJECT
 import fr.free.nrw.commons.wikidata.WikidataEditListener.WikidataP18EditListener
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import timber.log.Timber
 import java.lang.reflect.InvocationHandler
 import java.lang.reflect.Method
@@ -34,6 +40,25 @@ class NearbyParentFragmentPresenter
     private var customQuery: String? = null
 
     private var nearbyParentFragmentView: NearbyParentFragmentContract.View = DUMMY
+
+    private var loadPlacesDataAyncJob: Job? = null
+    private var schedulePlacesUpdateJob: Job? = null
+    private object schedulePlacesUpdateOptions {
+        var skippedCount = 0
+        val skipLimit = 2
+        val skipDelayMs = 1000L
+    }
+    suspend fun schedulePlacesUpdate(markerPlaceGroups: List<MarkerPlaceGroup>) = withContext(Dispatchers.Main) {
+        if (markerPlaceGroups.isEmpty()) return@withContext
+        schedulePlacesUpdateJob?.cancel()
+        schedulePlacesUpdateJob = launch {
+            if (schedulePlacesUpdateOptions.skippedCount++ < schedulePlacesUpdateOptions.skipLimit) {
+                delay(schedulePlacesUpdateOptions.skipDelayMs)
+            }
+            schedulePlacesUpdateOptions.skippedCount = 0
+            updatePlaceGroupsToControllerAndRender(markerPlaceGroups)
+        }
+    }
 
     override fun attachView(view: NearbyParentFragmentContract.View) {
         this.nearbyParentFragmentView = view
@@ -111,7 +136,7 @@ class NearbyParentFragmentPresenter
      *
      * @param locationChangeType defines if location changed significantly or slightly
      */
-    override fun updateMapAndList(locationChangeType: LocationChangeType) {
+    override fun updateMapAndList(locationChangeType: LocationChangeType?) {
         Timber.d("Presenter updates map and list")
         if (isNearbyLocked) {
             Timber.d("Nearby is locked, so updateMapAndList returns")
@@ -172,21 +197,32 @@ class NearbyParentFragmentPresenter
      * @param nearbyPlaces This variable has placeToCenter list information and distances.
      */
     fun updateMapMarkers(
-        nearbyPlaces: MutableList<Place?>?, currentLatLng: LatLng?,
-        shouldTrackPosition: Boolean
+        nearbyPlaces: List<Place>?, currentLatLng: LatLng,
+        scope: LifecycleCoroutineScope?
     ) {
+        val nearbyPlaces: MutableList<Place> =
+            nearbyPlaces?.sortedBy { it.getDistanceInDouble(currentLatLng) }
+                ?.take(NearbyController.MAX_RESULTS)
+                ?.toMutableList()
+                ?: return
 
-//            nearbyParentFragmentView.clearAllMarkers();
-        val baseMarkers = NearbyController
-            .loadAttractionsFromLocationToBaseMarkerOptions(
-                currentLatLng,  // Curlatlang will be used to calculate distances
-                nearbyPlaces
-            )
-        nearbyParentFragmentView.updateMapMarkers(baseMarkers)
+        loadPlacesDataAyncJob?.cancel()
         lockUnlockNearby(false) // So that new location updates wont come
         nearbyParentFragmentView.setProgressBarVisibility(false)
-        nearbyParentFragmentView.updateListFragment(nearbyPlaces)
 
+        updatePlaceGroupsToControllerAndRender(nearbyPlaces.map {
+            MarkerPlaceGroup(
+                // currently only the place's location is known, but bookmarks are stored by name
+                false,
+                it
+            )
+        })
+
+        loadPlacesDataAyncJob = scope?.launch(Dispatchers.IO) {
+            withContext(Dispatchers.Main) {
+
+            }
+        }
     }
 
     /**
@@ -219,7 +255,7 @@ class NearbyParentFragmentPresenter
     }
 
     override fun filterByMarkerType(
-        selectedLabels: MutableList<Label?>?, state: Int,
+        selectedLabels: List<Label?>?, state: Int,
         filterForPlaceState: Boolean, filterForAllNoneType: Boolean
     ) {
         if (filterForAllNoneType) { // Means we will set labels based on states
@@ -260,6 +296,14 @@ class NearbyParentFragmentPresenter
                 )
             )
         }
+    }
+
+    @MainThread
+    fun updatePlaceGroupsToControllerAndRender(markerPlaceGroups: List<MarkerPlaceGroup>) {
+        NearbyController.markerLabelList.clear()
+        NearbyController.markerLabelList.addAll(markerPlaceGroups)
+        nearbyParentFragmentView.setFilterState()
+        nearbyParentFragmentView.updateListFragment(markerPlaceGroups.map { it.place })
     }
 
     override fun setCheckboxUnknown() {

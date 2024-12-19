@@ -55,7 +55,7 @@ class JustExperimenting(frag: NearbyParentFragment) {
                         delay(skipDelayMs)
                     }
                     skippedCount = 0
-                    frag.replaceMarkerOverlays(markers)
+//                    frag.replaceMarkerOverlays(markers)
                 }
             }
         }
