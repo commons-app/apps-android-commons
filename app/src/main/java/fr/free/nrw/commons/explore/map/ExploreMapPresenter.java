@@ -205,17 +205,17 @@ public class ExploreMapPresenter
      * @return Returns true if search this area button is used around our current location
      */
     public boolean searchCloseToCurrentLocation() {
-        if (null == exploreMapFragmentView.getLastMapFocus()) {
+        if (exploreMapFragmentView.getLastMapFocus() == null || exploreMapFragmentView.getMapFocus() == null) {
             return true;
         }
 
-        Location mylocation = new Location("");
-        Location dest_location = new Location("");
+        final Location mylocation = new Location("");
+        final Location dest_location = new Location("");
         dest_location.setLatitude(exploreMapFragmentView.getMapFocus().getLatitude());
         dest_location.setLongitude(exploreMapFragmentView.getMapFocus().getLongitude());
         mylocation.setLatitude(exploreMapFragmentView.getLastMapFocus().getLatitude());
         mylocation.setLongitude(exploreMapFragmentView.getLastMapFocus().getLongitude());
-        Float distance = mylocation.distanceTo(dest_location);
+        final float distance = mylocation.distanceTo(dest_location);
 
         if (distance > 2000.0 * 3 / 4) {
             return false;
