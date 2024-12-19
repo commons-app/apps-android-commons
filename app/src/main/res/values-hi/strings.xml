@@ -317,6 +317,7 @@
   <string name="previous">पिछला</string>
   <string name="title_page_bookmarks_pictures">चित्र</string>
   <string name="title_page_bookmarks_locations">स्थान</string>
+  <string name="title_page_bookmarks_categories">श्रेणियाँ</string>
   <string name="menu_bookmark">बुकमार्क से जोड़ें/हटायें</string>
   <string name="provider_bookmarks">बुकमार्क</string>
   <string name="bookmark_empty">आपने कोई बुकमार्क नहीं जोड़ा है</string>

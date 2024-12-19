@@ -394,6 +394,7 @@
   <string name="map_application_missing">Није могуће пронаћи апликацију компатибилне мапе на вашем уређају. Инсталирајте апликацију мапе да бисте користили ову функцију.</string>
   <string name="title_page_bookmarks_pictures">Слике</string>
   <string name="title_page_bookmarks_locations">Локације</string>
+  <string name="title_page_bookmarks_categories">Категорије</string>
   <string name="menu_bookmark">Додај/уклони обележивач</string>
   <string name="provider_bookmarks">Обележивачи</string>
   <string name="bookmark_empty">Нисте додали ниједан обележивач</string>

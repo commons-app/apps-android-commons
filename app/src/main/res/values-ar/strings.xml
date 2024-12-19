@@ -452,6 +452,7 @@
   <string name="map_application_missing">لا يمكن العثور على تطبيق خرائط متوافق على جهازك; الرجاء تثبيت تطبيق خرائط لاستخدام هذه الميزة.</string>
   <string name="title_page_bookmarks_pictures">الصور</string>
   <string name="title_page_bookmarks_locations">المواقع</string>
+  <string name="title_page_bookmarks_categories">التصنيفات</string>
   <string name="menu_bookmark">إضافة إلى/إزالة من العلامات</string>
   <string name="provider_bookmarks">العلامات</string>
   <string name="bookmark_empty">أنت لم تضف أي علامات</string>

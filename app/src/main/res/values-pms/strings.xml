@@ -100,6 +100,7 @@
   <string name="menu_nearby">Davzin</string>
   <string name="provider_contributions">Ij mè cariament</string>
   <string name="menu_copy_link">Copié la liura</string>
+  <string name="menu_link_copied">La liura a l\'é stàita copià ant ël quàder dij feuj.</string>
   <string name="menu_share">Partagé</string>
   <string name="menu_view_file_page">Vëdde la pàgina dl\'archivi</string>
   <string name="share_title_hint">Legenda (obligatòria)</string>
@@ -396,6 +397,7 @@
   <string name="map_application_missing">Gnun-a aplicassion cartogràfica compatìbil a l\'é trovasse an sò angign. Për piasì, ch\'a na anstala un-a për dovré costa fonsionalità.</string>
   <string name="title_page_bookmarks_pictures">Plance</string>
   <string name="title_page_bookmarks_locations">Locassion</string>
+  <string name="title_page_bookmarks_categories">Categorìe</string>
   <string name="menu_bookmark">Gionté/Gavé dij marcapàgine</string>
   <string name="provider_bookmarks">Marcapàgine</string>
   <string name="bookmark_empty">A l\'ha giontà gnun marcapàgina</string>

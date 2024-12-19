@@ -441,6 +441,7 @@
   <string name="map_application_missing">Aucune application cartographique compatible n’a été trouvée sur votre appareil. Veuillez en installer une pour utiliser cette fonctionnalité.</string>
   <string name="title_page_bookmarks_pictures">Images</string>
   <string name="title_page_bookmarks_locations">Lieux</string>
+  <string name="title_page_bookmarks_categories">Catégories</string>
   <string name="menu_bookmark">Ajouter ou supprimer des signets</string>
   <string name="provider_bookmarks">Signets</string>
   <string name="bookmark_empty">Vous n’avez ajouté aucun signet</string>

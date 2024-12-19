@@ -404,6 +404,7 @@
   <string name="map_application_missing">장치에서 호환되는 지도 애플리케이션을 찾지 못했습니다. 이 기능을 사용하려면 지도 애플리케이션을 설치해 주십시오.</string>
   <string name="title_page_bookmarks_pictures">사진</string>
   <string name="title_page_bookmarks_locations">위치</string>
+  <string name="title_page_bookmarks_categories">분류</string>
   <string name="menu_bookmark">북마크에 추가/제거</string>
   <string name="provider_bookmarks">북마크</string>
   <string name="bookmark_empty">북마크를 추가하지 않았습니다</string>

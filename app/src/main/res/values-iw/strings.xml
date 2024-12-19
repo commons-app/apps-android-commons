@@ -429,6 +429,7 @@
   <string name="map_application_missing">לא נמצא יישום מפה תואם במכשיר שלך. נא להתקין יישום מפה כדי להשתמש בתכונה זו.</string>
   <string name="title_page_bookmarks_pictures">תמונות</string>
   <string name="title_page_bookmarks_locations">מיקומים</string>
+  <string name="title_page_bookmarks_categories">קטגוריות</string>
   <string name="menu_bookmark">הוספה / הסרה של סימנייה</string>
   <string name="provider_bookmarks">סימניות</string>
   <string name="bookmark_empty">לא הוספת שום סימנייה</string>
