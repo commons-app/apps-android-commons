@@ -61,7 +61,10 @@ object DownloadUtils {
         req: DownloadManager.Request,
     ) {
         val systemService =
-            activity.getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
-        systemService?.enqueue(req)
+            activity.getSystemService(Context.DOWNLOAD_SERVICE) as? DownloadManager
+        if (systemService != null) {
+            systemService.enqueue(req)
+        }
+        else { Timber.e("DownloadManager service not available.") }
     }
 }
