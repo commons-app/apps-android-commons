@@ -19,6 +19,7 @@ import org.mockito.Mockito.mock
 import org.mockito.Mockito.verifyNoInteractions
 import org.mockito.MockitoAnnotations
 import java.lang.reflect.Method
+import kotlin.reflect.jvm.internal.impl.builtins.functions.FunctionTypeKind
 
 /**
  * The unit test class for ContributionBoundaryCallbackTest
@@ -99,9 +100,10 @@ class ContributionBoundaryCallbackTest {
         val method: Method =
             ContributionBoundaryCallback::class.java.getDeclaredMethod(
                 "fetchContributions",
+                Function0::class.java
             )
         method.isAccessible = true
-        method.invoke(contributionBoundaryCallback)
+        method.invoke(contributionBoundaryCallback, {})
         verify(repository).save(anyList())
         verify(mediaClient).getMediaListForUser(anyString())
     }
@@ -113,9 +115,10 @@ class ContributionBoundaryCallbackTest {
         val method: Method =
             ContributionBoundaryCallback::class.java.getDeclaredMethod(
                 "fetchContributions",
+                Function0::class.java
             )
         method.isAccessible = true
-        method.invoke(contributionBoundaryCallback)
+        method.invoke(contributionBoundaryCallback, {})
         verifyNoInteractions(repository)
         verify(mediaClient).getMediaListForUser(anyString())
     }
