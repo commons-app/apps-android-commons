@@ -15,12 +15,14 @@ import fr.free.nrw.commons.nearby.Label
 import fr.free.nrw.commons.nearby.MarkerPlaceGroup
 import fr.free.nrw.commons.nearby.NearbyController
 import fr.free.nrw.commons.nearby.Place
+import fr.free.nrw.commons.nearby.PlacesRepository
 import fr.free.nrw.commons.nearby.contract.NearbyParentFragmentContract
 import fr.free.nrw.commons.utils.LocationUtils
 import fr.free.nrw.commons.wikidata.WikidataConstants.PLACE_OBJECT
 import fr.free.nrw.commons.wikidata.WikidataEditListener.WikidataP18EditListener
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -30,8 +32,10 @@ import java.lang.reflect.Method
 import java.lang.reflect.Proxy
 
 class NearbyParentFragmentPresenter
-    (var bookmarkLocationDao: BookmarkLocationsDao) : NearbyParentFragmentContract.UserActions,
+    (val bookmarkLocationDao: BookmarkLocationsDao, val placesRepository: PlacesRepository) :
+    NearbyParentFragmentContract.UserActions,
     WikidataP18EditListener, LocationUpdateListener {
+
     private var isNearbyLocked = false
     private var currentLatLng: LatLng? = null
 
@@ -42,23 +46,30 @@ class NearbyParentFragmentPresenter
     private var nearbyParentFragmentView: NearbyParentFragmentContract.View = DUMMY
 
     private var loadPlacesDataAyncJob: Job? = null
+    private object LoadPlacesAsyncOptions {
+        val batchSize = 3
+        val connectionCount = 5
+    }
+
     private var schedulePlacesUpdateJob: Job? = null
-    private object schedulePlacesUpdateOptions {
+    private object SchedulePlacesUpdateOptions {
         var skippedCount = 0
-        val skipLimit = 2
-        val skipDelayMs = 1000L
+        val skipLimit = 3
+        val skipDelayMs = 500L
     }
-    suspend fun schedulePlacesUpdate(markerPlaceGroups: List<MarkerPlaceGroup>) = withContext(Dispatchers.Main) {
-        if (markerPlaceGroups.isEmpty()) return@withContext
-        schedulePlacesUpdateJob?.cancel()
-        schedulePlacesUpdateJob = launch {
-            if (schedulePlacesUpdateOptions.skippedCount++ < schedulePlacesUpdateOptions.skipLimit) {
-                delay(schedulePlacesUpdateOptions.skipDelayMs)
+
+    suspend fun schedulePlacesUpdate(markerPlaceGroups: List<MarkerPlaceGroup>) =
+        withContext(Dispatchers.Main) {
+            if (markerPlaceGroups.isEmpty()) return@withContext
+            schedulePlacesUpdateJob?.cancel()
+            schedulePlacesUpdateJob = launch {
+                if (SchedulePlacesUpdateOptions.skippedCount++ < SchedulePlacesUpdateOptions.skipLimit) {
+                    delay(SchedulePlacesUpdateOptions.skipDelayMs)
+                }
+                SchedulePlacesUpdateOptions.skippedCount = 0
+                updatePlaceGroupsToControllerAndRender(markerPlaceGroups)
             }
-            schedulePlacesUpdateOptions.skippedCount = 0
-            updatePlaceGroupsToControllerAndRender(markerPlaceGroups)
         }
-    }
 
     override fun attachView(view: NearbyParentFragmentContract.View) {
         this.nearbyParentFragmentView = view
@@ -200,27 +211,55 @@ class NearbyParentFragmentPresenter
         nearbyPlaces: List<Place>?, currentLatLng: LatLng,
         scope: LifecycleCoroutineScope?
     ) {
-        val nearbyPlaces: MutableList<Place> =
-            nearbyPlaces?.sortedBy { it.getDistanceInDouble(currentLatLng) }
+        val nearbyPlaceGroups = nearbyPlaces?.sortedBy { it.getDistanceInDouble(currentLatLng) }
                 ?.take(NearbyController.MAX_RESULTS)
-                ?.toMutableList()
+                ?.map {
+                    // currently only the place's location is known but bookmarks are stored by name
+                    MarkerPlaceGroup(
+                        false,
+                        it
+                    )
+                }
                 ?: return
 
         loadPlacesDataAyncJob?.cancel()
         lockUnlockNearby(false) // So that new location updates wont come
         nearbyParentFragmentView.setProgressBarVisibility(false)
 
-        updatePlaceGroupsToControllerAndRender(nearbyPlaces.map {
-            MarkerPlaceGroup(
-                // currently only the place's location is known, but bookmarks are stored by name
-                false,
-                it
-            )
-        })
+        updatePlaceGroupsToControllerAndRender(nearbyPlaceGroups)
 
         loadPlacesDataAyncJob = scope?.launch(Dispatchers.IO) {
-            withContext(Dispatchers.Main) {
+            val updatedGroups = nearbyPlaceGroups.toMutableList()
+            // first load cached places:
+            val indicesToUpdate = mutableListOf<Int>()
+            for (i in 0..updatedGroups.lastIndex) {
+                val repoPlace = placesRepository.fetchPlace(updatedGroups[i].place.entityID)
+                if (repoPlace != null && repoPlace.name != ""){
+                    updatedGroups[i] = MarkerPlaceGroup(
+                        bookmarkLocationDao.findBookmarkLocation(repoPlace),
+                        repoPlace
+                    )
+                } else {
+                    indicesToUpdate.add(i)
+                }
+            }
+            if (indicesToUpdate.size < updatedGroups.size) {
+                schedulePlacesUpdate(updatedGroups)
+            }
+            val fetchPlacesChannel = Channel<List<Int>>(Channel.UNLIMITED);
+            for (i in indicesToUpdate.indices step LoadPlacesAsyncOptions.batchSize) {
+                fetchPlacesChannel.send(
+                    indicesToUpdate.slice(
+                        i until (i + LoadPlacesAsyncOptions.batchSize).coerceAtMost(
+                            indicesToUpdate.size
+                        )
+                    )
+                )
+            }
+            repeat(LoadPlacesAsyncOptions.connectionCount) {
+                launch(Dispatchers.IO) {
 
+                }
             }
         }
     }

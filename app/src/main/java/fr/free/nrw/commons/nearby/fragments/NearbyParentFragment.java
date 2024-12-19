@@ -356,7 +356,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 //        justExperimenting = new JustExperimenting(this);
 
         initNetworkBroadCastReceiver();
-        presenter = new NearbyParentFragmentPresenter(bookmarkLocationDao);
+        presenter = new NearbyParentFragmentPresenter(bookmarkLocationDao, placesRepository);
         progressDialog = new ProgressDialog(getActivity());
         progressDialog.setCancelable(false);
         progressDialog.setMessage("Saving in progress...");
