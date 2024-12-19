@@ -143,6 +143,8 @@
   <string name="menu_from_camera">Prendre une photo</string>
   <string name="menu_nearby">À proximité</string>
   <string name="provider_contributions">Mes téléversements</string>
+  <string name="menu_copy_link">Copier le lien</string>
+  <string name="menu_link_copied">Le lien a été copié dans le presse-papiers</string>
   <string name="menu_share">Partager</string>
   <string name="menu_view_file_page">Voir la page du fichier</string>
   <string name="share_title_hint">Légende (obligatoire)</string>
@@ -439,6 +441,7 @@
   <string name="map_application_missing">Aucune application cartographique compatible n’a été trouvée sur votre appareil. Veuillez en installer une pour utiliser cette fonctionnalité.</string>
   <string name="title_page_bookmarks_pictures">Images</string>
   <string name="title_page_bookmarks_locations">Lieux</string>
+  <string name="title_page_bookmarks_categories">Catégories</string>
   <string name="menu_bookmark">Ajouter ou supprimer des signets</string>
   <string name="provider_bookmarks">Signets</string>
   <string name="bookmark_empty">Vous n’avez ajouté aucun signet</string>

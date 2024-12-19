@@ -67,12 +67,13 @@
   <string name="menu_from_camera">ਤਸਵੀਰ ਲਵੋ</string>
   <string name="menu_nearby">ਨੇੜੇ-ਤੇੜੇ</string>
   <string name="provider_contributions">ਮੇਰੇ ਅੱਪਲੋਡ</string>
+  <string name="menu_copy_link">ਕੜੀ ਦੀ ਨਕਲ ਕਰੋ</string>
   <string name="menu_share">ਸਾਂਝਾ ਕਰੋ</string>
   <string name="share_title_hint">ਸੁਰਖੀ (ਲੋੜੀਂਦੀ)</string>
   <string name="share_description_hint">ਵੇਰਵਾ</string>
   <string name="login_failed_network">ਦਾਖ਼ਲ ਹੋਣ ਵਿੱਚ ਅਸਮਰੱਥ - ਨੈੱਟਵਰਕ ਫੇਲ੍ਹ ਹੋਇਆ ਹੈ</string>
   <string name="login_failed_throttled">ਬਹੁਤ ਸਾਰੀਆਂ ਅਸਫ਼ਲ ਕੋਸ਼ਿਸ਼ਾਂ। ਥੋੜ੍ਹੀ ਦੇਰ ਬਾਅਦ ਕੋਸ਼ਿਸ਼ ਕਰੋ ਜੀ।</string>
-  <string name="login_failed_blocked">ਅਫ਼ਸੋਸ, ਇਹ ਵਰਤੋਂਕਾਰ ਕਾਮਨਜ਼ ਉੱਤੇ ਬਲਾਕ ਕਰ ਦਿੱਤਾ ਗਿਆ ਹੈ</string>
+  <string name="login_failed_blocked">ਅਫ਼ਸੋਸ, ਇਹ ਵਰਤੋਂਕਾਰ ਨੂੰ ਕਾਮਨਜ਼ ਤੇ ਰੋਕ ਲਾਈ ਗਈ ਹੈ।</string>
   <string name="login_failed_generic">ਦਾਖ਼ਲ ਹੋਣਾ ਅਸਫ਼ਲ!</string>
   <string name="share_upload_button">ਚੜ੍ਹਾਉ</string>
   <string name="multiple_share_base_title">ਇਸ ਸੈੱਟ ਨੂੰ ਨਾਂ ਦਿਓ</string>

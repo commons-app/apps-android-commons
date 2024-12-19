@@ -362,7 +362,7 @@
   <string name="statistics_thanks">Захваљивања</string>
   <string name="statistics_featured">Изабране слике</string>
   <string name="statistics_wikidata_edits">Слике преко „Места у близини”</string>
-  <string name="level" fuzzy="true">Ниво</string>
+  <string name="level">Ниво %d</string>
   <string name="images_uploaded">Отпремљене слике</string>
   <string name="image_reverts">Слике које нису уклоњене</string>
   <string name="images_used_by_wiki">Искоришћене слике</string>
@@ -394,6 +394,7 @@
   <string name="map_application_missing">Није могуће пронаћи апликацију компатибилне мапе на вашем уређају. Инсталирајте апликацију мапе да бисте користили ову функцију.</string>
   <string name="title_page_bookmarks_pictures">Слике</string>
   <string name="title_page_bookmarks_locations">Локације</string>
+  <string name="title_page_bookmarks_categories">Категорије</string>
   <string name="menu_bookmark">Додај/уклони обележивач</string>
   <string name="provider_bookmarks">Обележивачи</string>
   <string name="bookmark_empty">Нисте додали ниједан обележивач</string>

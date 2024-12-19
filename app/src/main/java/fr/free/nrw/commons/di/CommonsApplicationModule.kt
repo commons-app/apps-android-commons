@@ -15,6 +15,7 @@ import dagger.Provides
 import fr.free.nrw.commons.BuildConfig
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.auth.SessionManager
+import fr.free.nrw.commons.bookmarks.category.BookmarkCategoriesDao
 import fr.free.nrw.commons.contributions.ContributionDao
 import fr.free.nrw.commons.customselector.database.NotForUploadStatusDao
 import fr.free.nrw.commons.customselector.database.UploadedStatusDao
@@ -220,6 +221,10 @@ open class CommonsApplicationModule(private val applicationContext: Context) {
     @Provides
     fun providesReviewDao(appDatabase: AppDatabase): ReviewDao =
         appDatabase.ReviewDao()
+
+    @Provides
+    fun providesBookmarkCategoriesDao (appDatabase: AppDatabase): BookmarkCategoriesDao =
+        appDatabase.bookmarkCategoriesDao()
 
     @Provides
     fun providesContentResolver(context: Context): ContentResolver =

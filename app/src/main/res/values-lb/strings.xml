@@ -86,6 +86,8 @@
   <string name="menu_from_camera">Foto maachen</string>
   <string name="menu_nearby">Nobäi</string>
   <string name="provider_contributions">Meng eropgeluede Fichieren</string>
+  <string name="menu_copy_link">Link kopéieren</string>
+  <string name="menu_link_copied">De Link gouf an den Tëschespäicher kopéiert</string>
   <string name="menu_share">Deelen</string>
   <string name="menu_view_file_page">Fichierssäit weisen</string>
   <string name="share_title_hint">Beschrëftung (obligatoresch)</string>
