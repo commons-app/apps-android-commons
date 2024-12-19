@@ -1,4 +1,5 @@
 package fr.free.nrw.commons.category
+import android.util.Log
 
 import android.content.Context
 import android.content.Intent
@@ -199,8 +200,15 @@ class CategoryDetailsActivity : BaseActivity(),
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.menu_browser_current_category -> {
-                val title = Utils.getPageTitle(CATEGORY_PREFIX + categoryName)
-                Utils.handleWebUrl(this, Uri.parse(title.canonicalUri))
+                // Encode the category name to ensure special characters are handled properly
+                val encodedCategoryName = Uri.encode(categoryName)
+                val fullUrl = "$CATEGORY_PREFIX$encodedCategoryName"
+
+                // Log the generated URL for debugging
+                Log.d("CategoryLinkDebug", "Generated URL: $fullUrl")
+
+                // Handle the URL (open in a browser or WebView)
+                Utils.handleWebUrl(this, Uri.parse(fullUrl))
                 true
             }
 
@@ -209,15 +217,18 @@ class CategoryDetailsActivity : BaseActivity(),
                     viewModel.onBookmarkClick(categoryName = it)
                 }
                 true
+
             }
 
             android.R.id.home -> {
                 onBackPressed()
                 true
             }
+
             else -> super.onOptionsItemSelected(item)
         }
     }
+
 
     override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
         menu?.run {
