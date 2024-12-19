@@ -23,8 +23,6 @@ import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.location.LocationManager;
 import android.net.Uri;
-import android.os.Build.VERSION;
-import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -56,7 +54,6 @@ import androidx.appcompat.app.AlertDialog.Builder;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
-import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LifecycleOwnerKt;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -97,7 +94,6 @@ import fr.free.nrw.commons.nearby.PlacesRepository;
 import fr.free.nrw.commons.nearby.WikidataFeedback;
 import fr.free.nrw.commons.nearby.contract.NearbyParentFragmentContract;
 import fr.free.nrw.commons.nearby.fragments.AdvanceQueryFragment.Callback;
-import fr.free.nrw.commons.nearby.helper.JustExperimenting;
 import fr.free.nrw.commons.nearby.model.BottomSheetItem;
 import fr.free.nrw.commons.nearby.presenter.NearbyParentFragmentPresenter;
 import fr.free.nrw.commons.upload.FileUtils;
@@ -113,16 +109,12 @@ import fr.free.nrw.commons.wikidata.WikidataEditListener;
 import io.reactivex.Completable;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -157,8 +149,6 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     LocationPermissionCallback, BottomSheetAdapter.ItemClickListener {
 
     FragmentNearbyParentBinding binding;
-
-//    private JustExperimenting justExperimenting;
 
     public final MapEventsOverlay mapEventsOverlay = new MapEventsOverlay(new MapEventsReceiver() {
         @Override
@@ -352,8 +342,6 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         final Bundle savedInstanceState) {
         binding = FragmentNearbyParentBinding.inflate(inflater, container, false);
         view = binding.getRoot();
-
-//        justExperimenting = new JustExperimenting(this);
 
         initNetworkBroadCastReceiver();
         presenter = new NearbyParentFragmentPresenter(bookmarkLocationDao, placesRepository, nearbyController);
@@ -1363,7 +1351,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                             ? getTextBetweenParentheses(
                             updatedPlace.getLongDescription()) : updatedPlace.getLongDescription());
                     marker.showInfoWindow();
-//                    justExperimenting.handlePlaceClicked(updatedPlace);
+                    presenter.handlePinClicked(updatedPlace);
                     savePlaceToDatabase(place);
                     Drawable icon = ContextCompat.getDrawable(getContext(),
                         getIconFor(updatedPlace, isBookMarked));
@@ -1462,20 +1450,6 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                     presenter.lockUnlockNearby(false);
                     setFilterState();
                 }));
-    }
-
-    public Place getPlaceFromRepository(String entityID) {
-        return placesRepository.fetchPlace(entityID);
-    }
-
-    public List<Place> getPlacesFromController(List<Place> places) {
-        List<Place> results = new ArrayList<Place>();
-        try {
-            results = nearbyController.getPlaces(places);
-        } catch (Exception e) {
-            Timber.tag("Nearby Pin Details").e(e);
-        }
-        return results;
     }
 
     public void savePlaceToDatabase(Place place) {
@@ -1953,18 +1927,6 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         binding.map.getOverlays().addAll(newMarkers);
     }
 
-    /**
-     * Adds multiple markers representing places to the map and handles item gestures.
-     *
-     * @param nearbyBaseMarkers The list of Place objects containing information about the
-     *                          locations.
-     */
-    private void addMarkersToMap(List<BaseMarker> nearbyBaseMarkers) {
-        Timber.tag("temptagtwo").e("another n+1 C 2: " + nearbyBaseMarkers.size());
-        for(int i = 0; i< nearbyBaseMarkers.size(); i++){
-            addMarkerToMap(nearbyBaseMarkers.get(i).getPlace(), false);
-        }
-    }
 
     /**
      * Extracts text between the first occurrence of '(' and its corresponding ')' in the input
@@ -2257,7 +2219,6 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         binding.map.invalidate();
         GeoPoint geoPoint = mapCenter;
         if (geoPoint != null) {
-            List<Overlay> overlays = binding.map.getOverlays();
             ScaleDiskOverlay diskOverlay =
                 new ScaleDiskOverlay(this.getContext(),
                     geoPoint, 2000, UnitOfMeasure.foot);

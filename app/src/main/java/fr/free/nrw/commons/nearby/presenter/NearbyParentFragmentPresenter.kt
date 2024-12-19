@@ -32,6 +32,8 @@ import timber.log.Timber
 import java.lang.reflect.InvocationHandler
 import java.lang.reflect.Method
 import java.lang.reflect.Proxy
+import java.util.concurrent.CopyOnWriteArrayList
+import java.util.concurrent.CopyOnWriteArraySet
 
 class NearbyParentFragmentPresenter
     (
@@ -50,6 +52,11 @@ class NearbyParentFragmentPresenter
     private var customQuery: String? = null
 
     private var nearbyParentFragmentView: NearbyParentFragmentContract.View = DUMMY
+
+    private val clickedPlaces = CopyOnWriteArrayList<Place>()
+    fun handlePinClicked(place: Place) {
+        clickedPlaces.add(place)
+    }
 
     private var loadPlacesDataAyncJob: Job? = null
     private object LoadPlacesAsyncOptions {
@@ -235,6 +242,8 @@ class NearbyParentFragmentPresenter
         updatePlaceGroupsToControllerAndRender(nearbyPlaceGroups)
 
         loadPlacesDataAyncJob = scope?.launch(Dispatchers.IO) {
+            clickedPlaces.clear() // clear past clicks
+            var clickedPlacesIndex = 0
             val updatedGroups = nearbyPlaceGroups.toMutableList()
             // first load cached places:
             val indicesToUpdate = mutableListOf<Int>()
@@ -303,6 +312,25 @@ class NearbyParentFragmentPresenter
                     updatedGroups[index] = finalPlaceGroup
                     launch {
                         placesRepository.save(finalPlaceGroup.place)
+                    }
+                }
+                // handle any places clicked
+                if (clickedPlacesIndex < clickedPlaces.size) {
+                    val clickedPlacesBacklog = hashMapOf<LatLng, Place>()
+                    while (clickedPlacesIndex < clickedPlaces.size) {
+                        clickedPlacesBacklog.put(
+                            clickedPlaces[clickedPlacesIndex].location,
+                            clickedPlaces[clickedPlacesIndex]
+                        )
+                        ++clickedPlacesIndex
+                    }
+                    for ((index, group) in updatedGroups.withIndex()) {
+                        if (clickedPlacesBacklog.containsKey(group.place.location)) {
+                            updatedGroups[index] = MarkerPlaceGroup(
+                                updatedGroups[index].isBookmarked,
+                                clickedPlacesBacklog[group.place.location]
+                            )
+                        }
                     }
                 }
                 schedulePlacesUpdate(updatedGroups)
