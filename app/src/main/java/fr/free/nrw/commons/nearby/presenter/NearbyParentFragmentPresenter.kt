@@ -70,7 +70,9 @@ class NearbyParentFragmentPresenter
         val skipDelayMs = 500L
     }
 
-    suspend fun schedulePlacesUpdate(markerPlaceGroups: List<MarkerPlaceGroup>) =
+    private var bookmarkChangedPlaces = CopyOnWriteArrayList<Place>()
+
+    private suspend fun schedulePlacesUpdate(markerPlaceGroups: List<MarkerPlaceGroup>) =
         withContext(Dispatchers.Main) {
             if (markerPlaceGroups.isEmpty()) return@withContext
             schedulePlacesUpdateJob?.cancel()
@@ -82,6 +84,19 @@ class NearbyParentFragmentPresenter
                 updatePlaceGroupsToControllerAndRender(markerPlaceGroups)
             }
         }
+
+    override fun toggleBookmarkedStatus(place: Place?) {
+        if (place == null) return
+        val nowBookmarked = bookmarkLocationDao.updateBookmarkLocation(place)
+        bookmarkChangedPlaces.add(place)
+        val placeIndex =
+            NearbyController.markerLabelList.indexOfFirst { it.place.location == place.location }
+        NearbyController.markerLabelList[placeIndex] = MarkerPlaceGroup(
+            nowBookmarked,
+            NearbyController.markerLabelList[placeIndex].place
+        )
+        nearbyParentFragmentView.setFilterState()
+    }
 
     override fun attachView(view: NearbyParentFragmentContract.View) {
         this.nearbyParentFragmentView = view
@@ -241,8 +256,12 @@ class NearbyParentFragmentPresenter
         updatePlaceGroupsToControllerAndRender(nearbyPlaceGroups)
 
         loadPlacesDataAyncJob = scope?.launch(Dispatchers.IO) {
-            clickedPlaces.clear() // clear past clicks
+            // clear past clicks and bookmarkChanged queues
+            clickedPlaces.clear()
+            bookmarkChangedPlaces.clear()
             var clickedPlacesIndex = 0
+            var bookmarkChangedPlacesIndex = 0
+
             val updatedGroups = nearbyPlaceGroups.toMutableList()
             // first load cached places:
             val indicesToUpdate = mutableListOf<Int>()
@@ -329,6 +348,26 @@ class NearbyParentFragmentPresenter
                             updatedGroups[index] = MarkerPlaceGroup(
                                 updatedGroups[index].isBookmarked,
                                 clickedPlacesBacklog[group.place.location]
+                            )
+                        }
+                    }
+                }
+                // handle any bookmarks toggled
+                if (bookmarkChangedPlacesIndex < bookmarkChangedPlaces.size) {
+                    val bookmarkChangedPlacesBacklog = hashMapOf<LatLng, Place>()
+                    while (bookmarkChangedPlacesIndex < bookmarkChangedPlaces.size) {
+                        bookmarkChangedPlacesBacklog.put(
+                            bookmarkChangedPlaces[bookmarkChangedPlacesIndex].location,
+                            bookmarkChangedPlaces[bookmarkChangedPlacesIndex]
+                        )
+                        ++bookmarkChangedPlacesIndex
+                    }
+                    for ((index, group) in updatedGroups.withIndex()) {
+                        if (bookmarkChangedPlacesBacklog.containsKey(group.place.location)) {
+                            updatedGroups[index] = MarkerPlaceGroup(
+                                bookmarkLocationDao
+                                    .findBookmarkLocation(updatedGroups[index].place),
+                                updatedGroups[index].place
                             )
                         }
                     }

@@ -597,8 +597,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                 return Unit.INSTANCE;
             },
             (place, isBookmarked) -> {
-                updateMarker(isBookmarked, place, null);
-                binding.map.invalidate();
+                presenter.toggleBookmarkedStatus(place);
                 return Unit.INSTANCE;
             },
             commonPlaceClickActions,
@@ -1796,21 +1795,6 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     }
 
     /**
-     * Sets marker icon according to marker status. Sets title and distance.
-     *
-     * @param isBookmarked  true if place is bookmarked
-     * @param place
-     * @param currentLatLng current location
-     */
-    public void updateMarker(final boolean isBookmarked, final Place place,
-        @Nullable final LatLng currentLatLng) {
-        if (true) {
-            return; // TODO move this method to new overlay mangement logic
-        }
-        addMarkerToMap(place, isBookmarked);
-    }
-
-    /**
      * Highlights nearest place when user clicks on home nearby banner
      *
      * @param nearestPlace nearest place, which has to be highlighted
@@ -1861,16 +1845,6 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             R.drawable.ic_custom_map_marker_red_bookmarked :
             R.drawable.ic_custom_map_marker_red
         );
-    }
-
-    /**
-     * Adds a marker representing a place to the map with optional bookmark icon.
-     *
-     * @param place        The Place object containing information about the location.
-     * @param isBookMarked A Boolean flag indicating whether the place is bookmarked or not.
-     */
-    private void addMarkerToMap(Place place, Boolean isBookMarked) {
-        binding.map.getOverlays().add(convertToMarker(place, isBookMarked));
     }
 
     public Marker convertToMarker(Place place, Boolean isBookMarked) {
@@ -2301,21 +2275,14 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     @Override
     public void onBottomSheetItemClick(@Nullable View view, int position) {
         BottomSheetItem item = dataList.get(position);
-        boolean isBookmarked = bookmarkLocationDao.findBookmarkLocation(selectedPlace);
         switch (item.getImageResourceId()) {
             case R.drawable.ic_round_star_border_24px:
-                bookmarkLocationDao.updateBookmarkLocation(selectedPlace);
+                presenter.toggleBookmarkedStatus(selectedPlace);
                 updateBookmarkButtonImage(selectedPlace);
-                isBookmarked = bookmarkLocationDao.findBookmarkLocation(selectedPlace);
-                updateMarker(isBookmarked, selectedPlace, locationManager.getLastLocation());
-                binding.map.invalidate();
                 break;
             case R.drawable.ic_round_star_filled_24px:
-                bookmarkLocationDao.updateBookmarkLocation(selectedPlace);
+                presenter.toggleBookmarkedStatus(selectedPlace);
                 updateBookmarkButtonImage(selectedPlace);
-                isBookmarked = bookmarkLocationDao.findBookmarkLocation(selectedPlace);
-                updateMarker(isBookmarked, selectedPlace, locationManager.getLastLocation());
-                binding.map.invalidate();
                 break;
             case R.drawable.ic_directions_black_24dp:
                 Utils.handleGeoCoordinates(this.getContext(), selectedPlace.getLocation());

@@ -128,5 +128,7 @@ public interface NearbyParentFragmentContract {
         void setCheckboxUnknown();
 
         void setAdvancedQuery(String query);
+
+        void toggleBookmarkedStatus(Place place);
     }
 }
