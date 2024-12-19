@@ -24,15 +24,21 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.ensureActive
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import org.osmdroid.views.overlay.Marker
 import timber.log.Timber
 import java.lang.reflect.InvocationHandler
 import java.lang.reflect.Method
 import java.lang.reflect.Proxy
 
 class NearbyParentFragmentPresenter
-    (val bookmarkLocationDao: BookmarkLocationsDao, val placesRepository: PlacesRepository) :
+    (
+    val bookmarkLocationDao: BookmarkLocationsDao,
+    val placesRepository: PlacesRepository,
+    val nearbyController: NearbyController
+) :
     NearbyParentFragmentContract.UserActions,
     WikidataP18EditListener, LocationUpdateListener {
 
@@ -48,7 +54,7 @@ class NearbyParentFragmentPresenter
     private var loadPlacesDataAyncJob: Job? = null
     private object LoadPlacesAsyncOptions {
         val batchSize = 3
-        val connectionCount = 5
+        val connectionCount = 3
     }
 
     private var schedulePlacesUpdateJob: Job? = null
@@ -247,7 +253,9 @@ class NearbyParentFragmentPresenter
                 schedulePlacesUpdate(updatedGroups)
             }
             val fetchPlacesChannel = Channel<List<Int>>(Channel.UNLIMITED);
+            var totalBatches = 0
             for (i in indicesToUpdate.indices step LoadPlacesAsyncOptions.batchSize) {
+                ++totalBatches
                 fetchPlacesChannel.send(
                     indicesToUpdate.slice(
                         i until (i + LoadPlacesAsyncOptions.batchSize).coerceAtMost(
@@ -256,9 +264,50 @@ class NearbyParentFragmentPresenter
                     )
                 )
             }
+            fetchPlacesChannel.close()
+            val collectResults = Channel<List<Pair<Int, MarkerPlaceGroup>>>(totalBatches);
             repeat(LoadPlacesAsyncOptions.connectionCount) {
                 launch(Dispatchers.IO) {
-
+                    for (indices in fetchPlacesChannel) {
+                        ensureActive()
+                        try {
+                            val fetchedPlaces =
+                                nearbyController.getPlaces(indices.map { updatedGroups[it].place })
+                            collectResults.send(
+                                fetchedPlaces.mapIndexed { index, place ->
+                                    Pair(indices[index], MarkerPlaceGroup(
+                                        bookmarkLocationDao.findBookmarkLocation(place),
+                                        place
+                                    ))
+                                }
+                            )
+                        } catch (e: Exception) {
+                            Timber.tag("NearbyPinDetails").e(e);
+                            collectResults.send(indices.map { Pair(it, updatedGroups[it]) })
+                        }
+                    }
+                }
+            }
+            var collectCount = 0
+            for (resultList in collectResults) {
+                for ((index, fetchedPlaceGroup) in resultList) {
+                    val existingPlace = updatedGroups[index].place
+                    val finalPlaceGroup = MarkerPlaceGroup(
+                        fetchedPlaceGroup.isBookmarked,
+                        fetchedPlaceGroup.place.apply {
+                            location = existingPlace.location
+                            distance = existingPlace.distance
+                            isMonument = existingPlace.isMonument
+                        }
+                    )
+                    updatedGroups[index] = finalPlaceGroup
+                    launch {
+                        placesRepository.save(finalPlaceGroup.place)
+                    }
+                }
+                schedulePlacesUpdate(updatedGroups)
+                if (collectCount++ == totalBatches) {
+                    break
                 }
             }
         }
@@ -394,11 +443,7 @@ class NearbyParentFragmentPresenter
         mylocation.setLongitude(nearbyParentFragmentView.getLastMapFocus().longitude)
         val distance = mylocation.distanceTo(dest_location)
 
-        return if (distance > 2000.0 * 3 / 4) {
-            false
-        } else {
-            true
-        }
+        return (distance <= 2000.0 * 3 / 4)
     }
 
     fun onMapReady() {
