@@ -373,10 +373,11 @@ class NearbyParentFragmentPresenter
                     }
                 }
                 schedulePlacesUpdate(updatedGroups)
-                if (collectCount++ == totalBatches) {
+                if (++collectCount == totalBatches) {
                     break
                 }
             }
+            collectResults.close()
         }
     }
 
