@@ -23,6 +23,9 @@ dependencies {
         // Forcing dependency versions using force = true on a first-level dependency has been deprecated.
         //  Ref: https://docs.gradle.org/7.5/userguide/upgrading_version_5.html#forced_dependencies
         //force = true //API 19 support
+        implementation 'androidx.fragment:fragment-ktx:1.5.5'  // Fragment KTX for viewModels
+        implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1' // ViewModel KTX
+
     }
     implementation 'com.squareup.retrofit2:retrofit:2.8.1'
     implementation "com.squareup.retrofit2:converter-gson:2.8.1"
@@ -83,7 +86,7 @@ dependencies {
         exclude group: 'com.google.android', module: 'android'
     }
     implementation "com.squareup.okhttp3:logging-interceptor:$OKHTTP_VERSION"
-
+    implementation 'com.jakewharton.timber:timber:4.7.1'
     // Dependency injector
     implementation "com.google.dagger:dagger-android:$DAGGER_VERSION"
     implementation "com.google.dagger:dagger-android-support:$DAGGER_VERSION"

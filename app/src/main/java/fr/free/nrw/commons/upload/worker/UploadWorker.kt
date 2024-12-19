@@ -409,14 +409,17 @@ class UploadWorker(
                         }
                     }
                 }
+
                 StashUploadState.PAUSED -> {
                     showPausedNotification(contribution)
                     contribution.state = Contribution.STATE_PAUSED
                     contributionDao.saveSynchronous(contribution)
                 }
+
                 StashUploadState.CANCELLED -> {
                     showCancelledNotification(contribution)
                 }
+
                 else -> {
                     Timber.e("""upload file to stash failed with status: ${stashUploadResult.state}""")
 
@@ -438,9 +441,12 @@ class UploadWorker(
                                 appContext.getString(R.string.invalid_login_message),
                                 username,
                             )
-                        CommonsApplication
-                            .instance!!
-                            .clearApplicationData(appContext, logoutListener)
+                        CommonsApplication.instance?.clearApplicationData(
+                            appContext,
+                            logoutListener
+                        )
+                            ?: Timber.e("CommonsApplication instance is null.")
+
                     }
                 }
             }
@@ -534,7 +540,8 @@ class UploadWorker(
     private fun saveIntoUploadedStatus(contribution: Contribution) {
         contribution.contentUri?.let {
             val imageSha1 = contribution.imageSHA1.toString()
-            val modifiedSha1 = fileUtilsWrapper.getSHA1(fileUtilsWrapper.getFileInputStream(contribution.localUri?.path))
+            val modifiedSha1 =
+                fileUtilsWrapper.getSHA1(fileUtilsWrapper.getFileInputStream(contribution.localUri?.path))
             CoroutineScope(Dispatchers.IO).launch {
                 uploadedStatusDao.insertUploaded(
                     UploadedStatus(
@@ -559,7 +566,8 @@ class UploadWorker(
                         "File:%s",
                         sequenceFileName,
                     ),
-                ).blockingGet()) {
+                ).blockingGet()
+        ) {
 
             // Generate a random 5-character alphanumeric string
             val randomHash = (random.nextInt(90000) + 10000).toString()

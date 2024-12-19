@@ -295,11 +295,11 @@ class NearbyParentFragmentPresenterTest {
     @Test
     fun testSearchCloseToCurrentLocationWhenFar() {
         whenever(nearbyParentFragmentView.lastMapFocus).thenReturn(LatLng(2.0, 1.0, 0.0F))
-        whenever(nearbyParentFragmentView.mapFocus).thenReturn(LatLng(2.0, 1.0, 0.0F))
-        // 111.19 km real distance, return false if 148306.444306 >  currentLocationSearchRadius
+        whenever(nearbyParentFragmentView.mapFocus).thenReturn(LatLng(2.0, 1.02, 0.0F))
         NearbyController.currentLocationSearchRadius = 148306.0
-        val isClose = nearbyPresenter?.searchCloseToCurrentLocation()
-        assertFalse(isClose!!.equals(false))
+        // 111.19 km real distance, return false if 148306.444306 >  currentLocationSearchRadius
+        val isClose = nearbyPresenter.searchCloseToCurrentLocation()
+        assertFalse(isClose)
     }
 
     /**
@@ -310,8 +310,8 @@ class NearbyParentFragmentPresenterTest {
         whenever(nearbyParentFragmentView.getCameraTarget()).thenReturn(LatLng(2.0, 1.0, 0.0F))
         // 111.19 km real distance, return false if 148253.333 >  currentLocationSearchRadius
         NearbyController.currentLocationSearchRadius = 148307.0
-        val isClose = nearbyPresenter?.searchCloseToCurrentLocation()
-        assertTrue(isClose!!)
+        val isClose = nearbyPresenter.searchCloseToCurrentLocation()
+        assertTrue(isClose)
     }
 
     fun expectMapAndListUpdate() {

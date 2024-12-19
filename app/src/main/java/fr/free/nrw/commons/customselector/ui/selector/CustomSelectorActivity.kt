@@ -1,5 +1,7 @@
 package fr.free.nrw.commons.customselector.ui.selector
 
+import timber.log.Timber
+
 import android.Manifest
 import android.app.Activity
 import android.app.Dialog
@@ -158,11 +160,9 @@ class CustomSelectorActivity :
     /**
      * Waits for confirmation of delete folder
      */
-    private val startForFolderDeletionResult = registerForActivityResult(ActivityResultContracts.StartIntentSenderForResult()){
-        result -> onDeleteFolderResultReceived(result)
-    }
+    private val startForFolderDeletionResult = registerForActivityResult(ActivityResultContracts.StartIntentSenderForResult()) { result -> onDeleteFolderResultReceived(result) }
 
-    private val startForResult = registerForActivityResult(StartActivityForResult()){ result ->
+    private val startForResult = registerForActivityResult(StartActivityForResult()) { result ->
         onFullScreenDataReceived(result)
     }
 
@@ -193,9 +193,9 @@ class CustomSelectorActivity :
                     }
                 },
                 modifier =
-                    Modifier
-                        .padding(vertical = 8.dp, horizontal = 4.dp)
-                        .fillMaxWidth(),
+                Modifier
+                    .padding(vertical = 8.dp, horizontal = 4.dp)
+                    .fillMaxWidth(),
             )
         }
         val view = binding.root
@@ -245,22 +245,25 @@ class CustomSelectorActivity :
     /**
      * When data will be send from full screen mode, it will be passed to fragment
      */
-    private fun onFullScreenDataReceived(result: ActivityResult){
+    private fun onFullScreenDataReceived(result: ActivityResult) {
         if (result.resultCode == Activity.RESULT_OK) {
-            val selectedImages: ArrayList<Image> =
-                result.data!!
-                    .getParcelableArrayListExtra(CustomSelectorConstants.NEW_SELECTED_IMAGES)!!
-            viewModel?.selectedImages?.value = selectedImages
+            result.data?.getParcelableArrayListExtra<Image>(CustomSelectorConstants.NEW_SELECTED_IMAGES)
+                ?.let { selectedImages ->
+                    // Check if viewModel is not null before updating selectedImages
+                    viewModel?.selectedImages?.value = selectedImages
+                } ?: run {
+                // Handle the case where selectedImages is null
+                Timber.e("No images selected or data is null")
+            }
         }
     }
 
-    private fun onDeleteFolderResultReceived(result: ActivityResult){
-        if (result.resultCode == Activity.RESULT_OK){
+    private fun onDeleteFolderResultReceived(result: ActivityResult) {
+        if (result.resultCode == Activity.RESULT_OK) {
             FolderDeletionHelper.showSuccess(this, "Folder deleted successfully", bucketName)
             navigateToCustomSelector()
         }
     }
-
 
 
     /**
@@ -423,10 +426,11 @@ class CustomSelectorActivity :
             var titleWithAppendedImageCount = title
             if (selectedImageCount > 0) {
                 titleWithAppendedImageCount += " (${resources.getQuantityString(
-                    R.plurals.custom_picker_images_selected_title_appendix,
-                    selectedImageCount,
-                    selectedImageCount,
-                )})"
+                        R.plurals.custom_picker_images_selected_title_appendix,
+                        selectedImageCount,
+                        selectedImageCount,
+                    )
+                })"
             }
             if (titleText != null) {
                 titleText.text = titleWithAppendedImageCount
@@ -482,7 +486,7 @@ class CustomSelectorActivity :
 
         val folder = File(folderPath)
         if (!folder.exists() || !folder.isDirectory) {
-            FolderDeletionHelper.showError(this,"Folder not found or is not a directory", bucketName)
+            FolderDeletionHelper.showError(this, "Folder not found or is not a directory", bucketName)
             return
         }
 
@@ -500,7 +504,6 @@ class CustomSelectorActivity :
     }
 
 
-
     /**
      * Navigates back to the main `FolderFragment`, refreshes the MediaStore, resets UI states,
      * and reloads folder data.
@@ -511,7 +514,7 @@ class CustomSelectorActivity :
         val folder = File(folderPath)
 
         supportFragmentManager.popBackStack(null,
-                                androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE)
+            androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE)
 
         //refresh MediaStore for the deleted folder path to ensure metadata updates
         FolderDeletionHelper.refreshMediaStore(this, folder)
@@ -733,9 +736,9 @@ fun partialStorageAccessIndicator(
         OutlinedCard(
             modifier = modifier,
             colors =
-                CardDefaults.cardColors(
-                    containerColor = colorResource(R.color.primarySuperLightColor),
-                ),
+            CardDefaults.cardColors(
+                containerColor = colorResource(R.color.primarySuperLightColor),
+            ),
             border = BorderStroke(0.5.dp, color = colorResource(R.color.primaryColor)),
             shape = RoundedCornerShape(8.dp),
         ) {
@@ -748,9 +751,9 @@ fun partialStorageAccessIndicator(
                     onClick = onManage,
                     modifier = Modifier.align(Alignment.Bottom),
                     colors =
-                        ButtonDefaults.buttonColors(
-                            containerColor = colorResource(R.color.primaryColor),
-                        ),
+                    ButtonDefaults.buttonColors(
+                        containerColor = colorResource(R.color.primaryColor),
+                    ),
                     shape = RoundedCornerShape(8.dp),
                 ) {
                     Text(
@@ -772,9 +775,9 @@ fun partialStorageAccessIndicatorPreview() {
             isVisible = true,
             onManage = {},
             modifier =
-                Modifier
-                    .padding(vertical = 8.dp, horizontal = 4.dp)
-                    .fillMaxWidth(),
+            Modifier
+                .padding(vertical = 8.dp, horizontal = 4.dp)
+                .fillMaxWidth(),
         )
     }
 }

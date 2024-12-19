@@ -53,14 +53,17 @@ class CustomSelectorUtils {
         ): String =
             withContext(defaultDispatcher) {
                 val uploadableFile = PickedFiles.pickedExistingPicture(context, image.uri)
-                val exifInterface: ExifInterface? =
+                val exifInterface: ExifInterface? = uploadableFile.file?.let { file ->
                     try {
-                        ExifInterface(uploadableFile.file!!)
+                        ExifInterface(file)  // Only create ExifInterface if file is not null
                     } catch (e: IOException) {
-                        Timber.e(e)
+                        Timber.e(e, "Error reading EXIF data")
                         null
                     }
-                fileProcessor.redactExifTags(exifInterface, fileProcessor.getExifTagsToRedact())
+                }
+                // Redact EXIF tags if exifInterface is not null
+                exifInterface?.let {
+                    fileProcessor.redactExifTags(exifInterface, fileProcessor.getExifTagsToRedact()) }
                 val sha1 =
                     fileUtilsWrapper.getSHA1(
                         fileUtilsWrapper.getFileInputStream(uploadableFile.getFilePath()),
