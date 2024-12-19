@@ -48,29 +48,33 @@ class JsonKvStoreTest {
 
     @Test
     fun getJson() {
-        whenever(prefs.getString("key", null)).thenReturn(expected)
+        val key = "key"  // Define the key variable
 
-        val result = store.getJson("key", Person::class.java)
+        whenever(prefs.getString(key, null)).thenReturn(expected)
+
+        val result = store.getJson(key, Person::class.java)
 
         Assert.assertEquals(testData, result)
     }
 
     @Test
     fun getJsonInTheFuture() {
-        whenever(prefs.getString("key", null)).thenReturn(expected)
+        val key = "key"  // Define the key variable
+        whenever(prefs.getString(key, null)).thenReturn(expected)
 
-        val resultOne: Person? = store.getJson("key")
+        val resultOne: Person? = store.getJson(key)
         Assert.assertEquals(testData, resultOne)
 
-        val resultTwo = store.getJson<Person?>("key")
+        val resultTwo = store.getJson<Person?>(key)
         Assert.assertEquals(testData, resultTwo)
     }
 
     @Test
     fun getJsonHandlesMalformedJson() {
-        whenever(prefs.getString("key", null)).thenReturn("junk")
+        val key = "key"  // Define the key variable
+        whenever(prefs.getString(key, null)).thenReturn("junk")
 
-        val result = store.getJson("key", Person::class.java)
+        val result = store.getJson(key, Person::class.java)
 
         Assert.assertNull(result)
     }
