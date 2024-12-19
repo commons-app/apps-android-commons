@@ -146,7 +146,11 @@ class LoginActivity : AccountAuthenticatorActivity() {
             loginTwoFactor.removeTextChangedListener(textWatcher)
         }
         delegate.onDestroy()
-        loginClient?.cancel()
+        loginClient?.cancel() // This is already a safe call, so it's fine if it's null
+        loginClient?.let {
+            it.cancel()
+        }
+
         binding = null
         super.onDestroy()
     }
@@ -184,32 +188,32 @@ class LoginActivity : AccountAuthenticatorActivity() {
         // if progressDialog is visible during the configuration change  then store state as  true else false so that
         // we maintain visibility of progressDailog after configuration change
         if (progressDialog != null && progressDialog!!.isShowing) {
-            outState.putBoolean(saveProgressDailog, true)
+            outState.putBoolean(SAVEPROGRESSDAILOG, true)
         } else {
-            outState.putBoolean(saveProgressDailog, false)
+            outState.putBoolean(SAVEPROGRESSDAILOG, false)
         }
         outState.putString(
-            saveErrorMessage,
+            SAVEERRORMESSAGE,
             binding!!.errorMessage.text.toString()
         ) //Save the errorMessage
         outState.putString(
-            saveUsername,
+            SAVEUSERNAME,
             binding!!.loginUsername.text.toString()
         ) // Save the username
         outState.putString(
-            savePassword,
+            SAVEPASSWORD,
             binding!!.loginPassword.text.toString()
         ) // Save the password
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         super.onRestoreInstanceState(savedInstanceState)
-        binding!!.loginUsername.setText(savedInstanceState.getString(saveUsername))
-        binding!!.loginPassword.setText(savedInstanceState.getString(savePassword))
-        if (savedInstanceState.getBoolean(saveProgressDailog)) {
+        binding!!.loginUsername.setText(savedInstanceState.getString(SAVEUSERNAME))
+        binding!!.loginPassword.setText(savedInstanceState.getString(SAVEPASSWORD))
+        if (savedInstanceState.getBoolean(SAVEPROGRESSDAILOG)) {
             performLogin()
         }
-        val errorMessage = savedInstanceState.getString(saveErrorMessage)
+        val errorMessage = savedInstanceState.getString(SAVEERRORMESSAGE)
         if (sessionManager.isUserLoggedIn) {
             showMessage(R.string.login_success, R.color.primaryDarkColor)
         } else {
@@ -396,9 +400,9 @@ class LoginActivity : AccountAuthenticatorActivity() {
         fun startYourself(context: Context) =
             context.startActivity(Intent(context, LoginActivity::class.java))
 
-        const val saveProgressDailog: String = "ProgressDailog_state"
-        const val saveErrorMessage: String = "errorMessage"
-        const val saveUsername: String = "username"
-        const val savePassword: String = "password"
+        const val SAVEPROGRESSDAILOG: String = "ProgressDailog_state"
+        const val SAVEERRORMESSAGE: String = "errorMessage"
+        const val SAVEUSERNAME: String = "username"
+        const val SAVEPASSWORD: String = "password"
     }
 }
