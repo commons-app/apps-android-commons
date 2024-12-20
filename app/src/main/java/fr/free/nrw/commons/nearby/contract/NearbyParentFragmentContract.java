@@ -8,6 +8,7 @@ import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType;
 import fr.free.nrw.commons.nearby.Label;
+import fr.free.nrw.commons.nearby.MarkerPlaceGroup;
 import fr.free.nrw.commons.nearby.Place;
 import java.util.List;
 
@@ -69,7 +70,7 @@ public interface NearbyParentFragmentContract {
 
         Context getContext();
 
-        void updateMapMarkers(List<BaseMarker> BaseMarkers);
+        void replaceMarkerOverlays(List<MarkerPlaceGroup> markerPlaceGroups);
 
         void filterOutAllMarkers();
 

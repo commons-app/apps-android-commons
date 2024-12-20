@@ -162,9 +162,12 @@ class NearbyParentFragmentPresenter
     /**
      * Sets click listeners of FABs, and 2 bottom sheets
      */
-    override fun setActionListeners(applicationKvStore: JsonKvStore) {
+    override fun setActionListeners(applicationKvStore: JsonKvStore?) {
         nearbyParentFragmentView.setFABPlusAction(View.OnClickListener { v: View? ->
-            if (applicationKvStore.getBoolean("login_skipped", false)) {
+            if (applicationKvStore != null && applicationKvStore.getBoolean(
+                    "login_skipped", false
+                )
+            ) {
                 // prompt the user to login
                 nearbyParentFragmentView.displayLoginSkippedWarning()
             } else {
@@ -497,8 +500,15 @@ class NearbyParentFragmentPresenter
         }
     }
 
+    /**
+     * Sends the supplied markerPlaceGroups to `NearbyController` and nearby list fragment,
+     * and tells nearby parent fragment to filter the updated values to be rendered as overlays
+     * on the map
+     *
+     * @param markerPlaceGroups the new/updated list of places along with their bookmarked status
+     */
     @MainThread
-    fun updatePlaceGroupsToControllerAndRender(markerPlaceGroups: List<MarkerPlaceGroup>) {
+    private fun updatePlaceGroupsToControllerAndRender(markerPlaceGroups: List<MarkerPlaceGroup>) {
         NearbyController.markerLabelList.clear()
         NearbyController.markerLabelList.addAll(markerPlaceGroups)
         nearbyParentFragmentView.setFilterState()

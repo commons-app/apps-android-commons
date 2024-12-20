@@ -1710,13 +1710,6 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     }
 
     @Override
-    public void updateMapMarkers(final List<BaseMarker> BaseMarkers) {
-        if (binding.map != null) {
-            presenter.updateMapMarkersToController(BaseMarkers);
-        }
-    }
-
-    @Override
     public void filterOutAllMarkers() {
         clearAllMarkers();
     }
@@ -1739,7 +1732,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             replaceMarkerOverlays(NearbyController.markerLabelList);
             return;
         }
-        ArrayList<MarkerPlaceGroup> placeGroupsToShow = new ArrayList<>();
+        final ArrayList<MarkerPlaceGroup> placeGroupsToShow = new ArrayList<>();
         for (final MarkerPlaceGroup markerPlaceGroup : NearbyController.markerLabelList) {
             final Place place = markerPlaceGroup.getPlace();
             // When label filter is engaged
@@ -1891,6 +1884,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
      * @param markerPlaceGroups The list of marker place groups containing the places and
      *                          their bookmarked status
      */
+    @Override
     public void replaceMarkerOverlays(final List<MarkerPlaceGroup> markerPlaceGroups) {
         ArrayList<Marker> newMarkers = new ArrayList<>(markerPlaceGroups.size());
         for (MarkerPlaceGroup markerPlaceGroup : markerPlaceGroups) {
