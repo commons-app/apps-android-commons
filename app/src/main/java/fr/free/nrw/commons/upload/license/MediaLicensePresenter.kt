@@ -51,7 +51,7 @@ class MediaLicensePresenter @Inject constructor(
     /**
      * ask the repository to select a license for the current upload
      */
-    override fun selectLicense(licenseName: String) {
+    override fun selectLicense(licenseName: String?) {
         repository.setSelectedLicense(licenseName)
         view.updateLicenseSummary(repository.getSelectedLicense(), repository.getCount())
     }
