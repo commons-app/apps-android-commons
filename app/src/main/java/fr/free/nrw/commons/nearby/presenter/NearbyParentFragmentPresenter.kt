@@ -72,8 +72,8 @@ class NearbyParentFragmentPresenter
      * - **connnectionCount**: number of parallel requests
      */
     private object LoadPlacesAsyncOptions {
-        val batchSize = 3
-        val connectionCount = 3
+        const val BATCH_SIZE = 3
+        const val CONNECTION_COUNT = 3
     }
 
     private var schedulePlacesUpdateJob: Job? = null
@@ -86,9 +86,9 @@ class NearbyParentFragmentPresenter
      * @see schedulePlacesUpdate
      */
     private object SchedulePlacesUpdateOptions {
-        var skippedCount = 0  //
-        val skipLimit = 3 //
-        val skipDelayMs = 500L //
+        var skippedCount = 0
+        const val SKIP_LIMIT = 3
+        const val SKIP_DELAY_MS = 500L
     }
 
     // used to tell the asynchronous place detail loading job that the places' bookmarked status
@@ -110,8 +110,10 @@ class NearbyParentFragmentPresenter
             if (markerPlaceGroups.isEmpty()) return@withContext
             schedulePlacesUpdateJob?.cancel()
             schedulePlacesUpdateJob = launch {
-                if (SchedulePlacesUpdateOptions.skippedCount++ < SchedulePlacesUpdateOptions.skipLimit) {
-                    delay(SchedulePlacesUpdateOptions.skipDelayMs)
+                if (SchedulePlacesUpdateOptions.skippedCount++
+                    < SchedulePlacesUpdateOptions.SKIP_LIMIT
+                ) {
+                    delay(SchedulePlacesUpdateOptions.SKIP_DELAY_MS)
                 }
                 SchedulePlacesUpdateOptions.skippedCount = 0
                 updatePlaceGroupsToControllerAndRender(markerPlaceGroups)
@@ -320,21 +322,21 @@ class NearbyParentFragmentPresenter
                 schedulePlacesUpdate(updatedGroups)
             }
             // channel for lists of indices of places, each list to be fetched in a single request
-            val fetchPlacesChannel = Channel<List<Int>>(Channel.UNLIMITED);
+            val fetchPlacesChannel = Channel<List<Int>>(Channel.UNLIMITED)
             var totalBatches = 0
-            for (i in indicesToUpdate.indices step LoadPlacesAsyncOptions.batchSize) {
+            for (i in indicesToUpdate.indices step LoadPlacesAsyncOptions.BATCH_SIZE) {
                 ++totalBatches
                 fetchPlacesChannel.send(
                     indicesToUpdate.slice(
-                        i until (i + LoadPlacesAsyncOptions.batchSize).coerceAtMost(
+                        i until (i + LoadPlacesAsyncOptions.BATCH_SIZE).coerceAtMost(
                             indicesToUpdate.size
                         )
                     )
                 )
             }
             fetchPlacesChannel.close()
-            val collectResults = Channel<List<Pair<Int, MarkerPlaceGroup>>>(totalBatches);
-            repeat(LoadPlacesAsyncOptions.connectionCount) {
+            val collectResults = Channel<List<Pair<Int, MarkerPlaceGroup>>>(totalBatches)
+            repeat(LoadPlacesAsyncOptions.CONNECTION_COUNT) {
                 launch(Dispatchers.IO) {
                     for (indices in fetchPlacesChannel) {
                         ensureActive()
@@ -350,7 +352,7 @@ class NearbyParentFragmentPresenter
                                 }
                             )
                         } catch (e: Exception) {
-                            Timber.tag("NearbyPinDetails").e(e);
+                            Timber.tag("NearbyPinDetails").e(e)
                             collectResults.send(indices.map { Pair(it, updatedGroups[it]) })
                         }
                     }
@@ -485,7 +487,7 @@ class NearbyParentFragmentPresenter
     override fun updateMapMarkersToController(baseMarkers: MutableList<BaseMarker>) {
         NearbyController.markerLabelList.clear()
         for (i in baseMarkers.indices) {
-            val nearbyBaseMarker = baseMarkers.get(i)
+            val nearbyBaseMarker = baseMarkers[i]
             NearbyController.markerLabelList.add(
                 MarkerPlaceGroup(
                     bookmarkLocationDao.findBookmarkLocation(nearbyBaseMarker.place),
@@ -544,13 +546,13 @@ class NearbyParentFragmentPresenter
             return true
         }
         //TODO
-        val mylocation = Location("")
-        val dest_location = Location("")
-        dest_location.setLatitude(nearbyParentFragmentView.getMapFocus().latitude)
-        dest_location.setLongitude(nearbyParentFragmentView.getMapFocus().longitude)
-        mylocation.setLatitude(nearbyParentFragmentView.getLastMapFocus().latitude)
-        mylocation.setLongitude(nearbyParentFragmentView.getLastMapFocus().longitude)
-        val distance = mylocation.distanceTo(dest_location)
+        val myLocation = Location("")
+        val destLocation = Location("")
+        destLocation.latitude = nearbyParentFragmentView.getMapFocus().latitude
+        destLocation.longitude = nearbyParentFragmentView.getMapFocus().longitude
+        myLocation.latitude = nearbyParentFragmentView.getLastMapFocus().latitude
+        myLocation.longitude = nearbyParentFragmentView.getLastMapFocus().longitude
+        val distance = myLocation.distanceTo(destLocation)
 
         return (distance <= 2000.0 * 3 / 4)
     }
@@ -564,17 +566,17 @@ class NearbyParentFragmentPresenter
             NearbyParentFragmentContract.View::class.java.getClassLoader(),
             arrayOf<Class<*>>(NearbyParentFragmentContract.View::class.java),
             InvocationHandler { proxy: Any?, method: Method?, args: Array<Any?>? ->
-                if (method!!.getName() == "onMyEvent") {
+                if (method!!.name == "onMyEvent") {
                     return@InvocationHandler null
-                } else if (String::class.java == method.getReturnType()) {
+                } else if (String::class.java == method.returnType) {
                     return@InvocationHandler ""
-                } else if (Int::class.java == method.getReturnType()) {
+                } else if (Int::class.java == method.returnType) {
                     return@InvocationHandler 0
-                } else if (Int::class.javaPrimitiveType == method.getReturnType()) {
+                } else if (Int::class.javaPrimitiveType == method.returnType) {
                     return@InvocationHandler 0
-                } else if (Boolean::class.java == method.getReturnType()) {
+                } else if (Boolean::class.java == method.returnType) {
                     return@InvocationHandler java.lang.Boolean.FALSE
-                } else if (Boolean::class.javaPrimitiveType == method.getReturnType()) {
+                } else if (Boolean::class.javaPrimitiveType == method.returnType) {
                     return@InvocationHandler false
                 } else {
                     return@InvocationHandler null
