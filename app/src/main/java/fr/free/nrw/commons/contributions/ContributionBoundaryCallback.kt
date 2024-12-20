@@ -2,7 +2,6 @@ package fr.free.nrw.commons.contributions
 
 import androidx.paging.PagedList.BoundaryCallback
 import fr.free.nrw.commons.auth.SessionManager
-import fr.free.nrw.commons.di.CommonsApplicationModule
 import fr.free.nrw.commons.di.CommonsApplicationModule.Companion.IO_THREAD
 import fr.free.nrw.commons.media.MediaClient
 import io.reactivex.Scheduler
@@ -31,10 +30,7 @@ class ContributionBoundaryCallback
          * network
          */
         override fun onZeroItemsLoaded() {
-            if (sessionManager.userName != null) {
-                mediaClient.resetUserNameContinuation(sessionManager.userName!!)
-            }
-            fetchContributions()
+            refreshList()
         }
 
         /**
@@ -52,9 +48,25 @@ class ContributionBoundaryCallback
         }
 
         /**
-         * Fetches contributions using the MediaWiki API
+         * Fetch list from network and save it to local DB.
+         *
+         * @param onRefreshFinish callback to invoke when operations finishes
+         * with either error or success.
          */
-        private fun fetchContributions() {
+        fun refreshList(onRefreshFinish: () -> Unit = {}){
+            if (sessionManager.userName != null) {
+                mediaClient.resetUserNameContinuation(sessionManager.userName!!)
+            }
+            fetchContributions(onRefreshFinish)
+        }
+
+        /**
+         * Fetches contributions using the MediaWiki API
+         *
+         *   @param onRefreshFinish callback to invoke when operations finishes
+         *   with either error or success.
+         */
+        private fun fetchContributions(onRefreshFinish: () -> Unit = {}) {
             if (sessionManager.userName != null) {
                 userName
                     ?.let { userName ->
@@ -65,12 +77,15 @@ class ContributionBoundaryCallback
                                     Contribution(media = media, state = Contribution.STATE_COMPLETED)
                                 }
                             }.subscribeOn(ioThreadScheduler)
-                            .subscribe(::saveContributionsToDB) { error: Throwable ->
+                            .subscribe({ list ->
+                                saveContributionsToDB(list, onRefreshFinish)
+                            },{ error ->
+                                onRefreshFinish()
                                 Timber.e(
                                     "Failed to fetch contributions: %s",
                                     error.message,
                                 )
-                            }
+                            })
                     }?.let {
                         compositeDisposable.add(
                             it,
@@ -83,13 +98,16 @@ class ContributionBoundaryCallback
 
         /**
          * Saves the contributions the the local DB
+         *
+         * @param onRefreshFinish callback to invoke when successfully saved to DB.
          */
-        private fun saveContributionsToDB(contributions: List<Contribution>) {
+        private fun saveContributionsToDB(contributions: List<Contribution>, onRefreshFinish: () -> Unit) {
             compositeDisposable.add(
                 repository
                     .save(contributions)
                     .subscribeOn(ioThreadScheduler)
                     .subscribe { longs: List<Long?>? ->
+                        onRefreshFinish()
                         repository["last_fetch_timestamp"] = System.currentTimeMillis()
                     },
             )
