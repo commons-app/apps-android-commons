@@ -1386,8 +1386,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                         setProgressBarVisibility(false);
                         presenter.lockUnlockNearby(false);
                     } else {
-                        updateMapMarkers(nearbyPlacesInfo.placeList, nearbyPlacesInfo.currentLatLng,
-                            true);
+                        updateMapMarkers(nearbyPlacesInfo.placeList, searchLatLng, true);
                         lastFocusLocation = searchLatLng;
                         lastMapFocus = new GeoPoint(searchLatLng.getLatitude(),
                             searchLatLng.getLongitude());
@@ -1430,8 +1429,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
                         // curLatLng is used to calculate distance from the current location to the place
                         // and distance is later on populated to the place
-                        updateMapMarkers(nearbyPlacesInfo.placeList, nearbyPlacesInfo.currentLatLng,
-                            false);
+                        updateMapMarkers(nearbyPlacesInfo.placeList, searchLatLng, false);
                         lastMapFocus = new GeoPoint(searchLatLng.getLatitude(),
                             searchLatLng.getLongitude());
                         stopQuery();
