@@ -354,10 +354,6 @@
   <string name="about_translate_proceed">Перейти к переводу</string>
   <string name="about_translate_cancel">Отмена</string>
   <string name="retry">Повторить</string>
-  <string name="showcase_view_whole_nearby_activity">Это места поблизости, статьи о которых нуждаются в иллюстрациях.\n\nПосле нажатия кнопки \"Искать в этой области\" карта фиксируется и происходит поиск вокруг указанного места.</string>
-  <string name="showcase_view_needs_photo">Это место нуждается в фотографии.</string>
-  <string name="showcase_view_has_photo">У этого места уже есть фотография.</string>
-  <string name="showcase_view_no_longer_exists">Это место больше не существует.</string>
   <string name="no_images_found">Изображений не найдено!</string>
   <string name="error_loading_images">Произошла ошибка при загрузке изображений.</string>
   <string name="image_uploaded_by">Загружено участником %1$s</string>

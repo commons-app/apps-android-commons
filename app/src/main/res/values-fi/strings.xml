@@ -296,10 +296,6 @@
   <string name="about_translate_proceed">Jatka</string>
   <string name="about_translate_cancel">Peruuta</string>
   <string name="retry">Yritä uudelleen</string>
-  <string name="showcase_view_whole_nearby_activity">Nämä ovat lähelläsi olevia paikkoja, jotka tarvitsevat kuvia havainnollistamaan Wikipedia-artikkeleitaan.\n\nNapsauttamalla \"haku tällä alueella\", lukitsee kartan ja käynnistää läheisen haun kyseisen sijainnin ympärillä.</string>
-  <string name="showcase_view_needs_photo">Tämä paikka tarvitsee kuvan.</string>
-  <string name="showcase_view_has_photo">Tässä paikassa on jo valokuva.</string>
-  <string name="showcase_view_no_longer_exists">Tätä paikkaa ei ole enää olemassa.</string>
   <string name="no_images_found">Kuvia ei löytynyt!</string>
   <string name="error_loading_images">Virhe ladattaessa kuvia.</string>
   <string name="image_uploaded_by">Tallentanut: %1$s</string>

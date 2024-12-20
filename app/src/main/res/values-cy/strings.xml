@@ -247,10 +247,6 @@
   <string name="about_translate_proceed">Parhau</string>
   <string name="about_translate_cancel">Diddymu (canslo)</string>
   <string name="retry">Ailgeisio</string>
-  <string name="showcase_view_whole_nearby_activity">Dyma\'r llefydd sydd angen lluniau ohonyn nhw ar gyfer erthyglau Wicipedia.\n\nMae clicio ar \'Archwilio\'r Lleoliad Hwn\'yn cloi\'r map ac yn lansio archwiliad cyfagos.</string>
-  <string name="showcase_view_needs_photo">Mae\'r lleoliad yma wirioneddol angen llun ohono!</string>
-  <string name="showcase_view_has_photo">Mae gan y lleoliad yma lun.</string>
-  <string name="showcase_view_no_longer_exists">Dyw\'r lle yma ddim bellach yn bodoli.</string>
   <string name="no_images_found">Dim delweddau!</string>
   <string name="error_loading_images">Cafwyd nam tra\'n llwytho delweddau.</string>
   <string name="image_uploaded_by">%1$s wedi uwchlwytho</string>

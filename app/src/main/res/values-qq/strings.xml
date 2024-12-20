@@ -159,7 +159,6 @@
   <string name="about_translate_title">{{Identical|Language}}</string>
   <string name="about_translate_cancel">{{Identical|Cancel}}</string>
   <string name="retry">{{Identical|Retry}}</string>
-  <string name="showcase_view_whole_nearby_activity">\"Search this area\" refers to {{msg-wm|Commons-android-strings-search this area}}.</string>
   <string name="menu_search_button">{{Identical|Search}}</string>
   <string name="title_activity_search">{{Identical|Search}}</string>
   <string name="error_loading_depictions">{{Doc-commons-app-depicts}}</string>
