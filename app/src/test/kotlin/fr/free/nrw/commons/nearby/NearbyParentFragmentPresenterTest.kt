@@ -32,6 +32,12 @@ class NearbyParentFragmentPresenterTest {
     internal lateinit var bookmarkLocationsDao: BookmarkLocationsDao
 
     @Mock
+    internal lateinit var placesRepository: PlacesRepository
+
+    @Mock
+    internal lateinit var nearbyController: NearbyController
+
+    @Mock
     internal lateinit var latestLocation: LatLng
 
     @Mock
@@ -52,7 +58,8 @@ class NearbyParentFragmentPresenterTest {
     @Throws(Exception::class)
     fun setUp() {
         MockitoAnnotations.openMocks(this)
-        nearbyPresenter = NearbyParentFragmentPresenter(bookmarkLocationsDao)
+        nearbyPresenter =
+            NearbyParentFragmentPresenter(bookmarkLocationsDao, placesRepository, nearbyController)
         nearbyPresenter.attachView(nearbyParentFragmentView)
     }
 
@@ -322,7 +329,7 @@ class NearbyParentFragmentPresenterTest {
 
     @Test
     fun testSetActionListeners() {
-        nearbyPresenter.setActionListeners(any())
+        nearbyPresenter.setActionListeners(null)
         verify(nearbyParentFragmentView).setFABPlusAction(any())
         verify(nearbyParentFragmentView).setFABRecenterAction(any())
     }
@@ -454,11 +461,11 @@ class NearbyParentFragmentPresenterTest {
         nearbyPlacesInfo.boundaryCoordinates = arrayOf()
         nearbyPlacesInfo.currentLatLng = latestLocation
         nearbyPlacesInfo.searchLatLng = latestLocation
-        nearbyPlacesInfo.placeList = null
+        nearbyPlacesInfo.placeList = emptyList<Place>()
 
         whenever(bookmarkLocationsDao.allBookmarksLocations).thenReturn(Collections.emptyList())
-        nearbyPresenter.updateMapMarkers(nearbyPlacesInfo.placeList, latestLocation, true)
-        Mockito.verify(nearbyParentFragmentView).updateMapMarkers(any())
+        nearbyPresenter.updateMapMarkers(nearbyPlacesInfo.placeList, latestLocation, null)
+        Mockito.verify(nearbyParentFragmentView).setFilterState()
         Mockito.verify(nearbyParentFragmentView).setProgressBarVisibility(false)
         Mockito.verify(nearbyParentFragmentView).updateListFragment(nearbyPlacesInfo.placeList)
     }
