@@ -53,25 +53,58 @@ class NearbyParentFragmentPresenter
     private var nearbyParentFragmentView: NearbyParentFragmentContract.View = DUMMY
 
     private val clickedPlaces = CopyOnWriteArrayList<Place>()
+
+    /**
+     * used to tell the asynchronous place detail loading job that a pin was clicked
+     * so as to prevent it from turning grey on the next pin detail update
+     *
+     * @param place the place whose details have already been loaded because clicked pin
+     */
     fun handlePinClicked(place: Place) {
         clickedPlaces.add(place)
     }
 
+    // the currently running job for async loading of pin details, cancelled when new pins are come
     private var loadPlacesDataAyncJob: Job? = null
+
+    /**
+     * - **batchSize**: number of places to fetch details of in a single request
+     * - **connnectionCount**: number of parallel requests
+     */
     private object LoadPlacesAsyncOptions {
         val batchSize = 3
         val connectionCount = 3
     }
 
     private var schedulePlacesUpdateJob: Job? = null
+
+    /**
+     * - **skippedCount**: stores the number of updates skipped
+     * - **skipLimit**: maximum number of consecutive updates that can be skipped
+     * - **skipDelayMs**: The delay (in milliseconds) to wait for a new update.
+     *
+     * @see schedulePlacesUpdate
+     */
     private object SchedulePlacesUpdateOptions {
-        var skippedCount = 0
-        val skipLimit = 3
-        val skipDelayMs = 500L
+        var skippedCount = 0  //
+        val skipLimit = 3 //
+        val skipDelayMs = 500L //
     }
 
+    // used to tell the asynchronous place detail loading job that the places' bookmarked status
+    // changed so as to prevent inconsistencies
     private var bookmarkChangedPlaces = CopyOnWriteArrayList<Place>()
 
+    /**
+     * Schedules a UI update for the provided list of `MarkerPlaceGroup` objects. Since, the update
+     * is performed on the main thread, it waits for a `SchedulePlacesUpdateOptions.skipDelayMs`
+     * to see if a new update comes, and if one does, it discards the scheduled UI update.
+     *
+     * @param markerPlaceGroups The new list of `MarkerPlaceGroup` objects. If the list is empty, no
+     *                          update will be performed.
+     *
+     * @see SchedulePlacesUpdateOptions
+     */
     private suspend fun schedulePlacesUpdate(markerPlaceGroups: List<MarkerPlaceGroup>) =
         withContext(Dispatchers.Main) {
             if (markerPlaceGroups.isEmpty()) return@withContext
@@ -85,6 +118,13 @@ class NearbyParentFragmentPresenter
             }
         }
 
+    /**
+     * Handles the user action of toggling the bookmarked status of a given place. Updates the
+     * bookmark status in the database, updates the UI to reflect the new state.
+     *
+     * @param place The place whose bookmarked status is to be toggled. If the place is `null`,
+     *              the operation is skipped.
+     */
     override fun toggleBookmarkedStatus(place: Place?) {
         if (place == null) return
         val nowBookmarked = bookmarkLocationDao.updateBookmarkLocation(place)
@@ -229,10 +269,10 @@ class NearbyParentFragmentPresenter
     }
 
     /**
-     * Populates places for custom location, should be used for finding nearby places around a
-     * location where you are not at.
+     * Update places on the map, and asynchronously load their details from cache and Wikidata query
      *
-     * @param nearbyPlaces This variable has placeToCenter list information and distances.
+     * @param nearbyPlaces This variable has the list of placecs
+     * @param scope the lifecycle scope of `nearbyParentFragment`'s `viewLifecycleOwner`
      */
     fun updateMapMarkers(
         nearbyPlaces: List<Place>?, currentLatLng: LatLng,
@@ -279,6 +319,7 @@ class NearbyParentFragmentPresenter
             if (indicesToUpdate.size < updatedGroups.size) {
                 schedulePlacesUpdate(updatedGroups)
             }
+            // channel for lists of indices of places, each list to be fetched in a single request
             val fetchPlacesChannel = Channel<List<Int>>(Channel.UNLIMITED);
             var totalBatches = 0
             for (i in indicesToUpdate.indices step LoadPlacesAsyncOptions.batchSize) {
