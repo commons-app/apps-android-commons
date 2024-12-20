@@ -70,7 +70,7 @@ public class UploadMediaDetailInputFilter implements InputFilter {
     public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart,
         int dend) {
         if (checkBlocklisted(source)) {
-            if (start == dstart) {
+            if (start == dstart && dest.length() > 0) {
                 return dest;
             }
 
