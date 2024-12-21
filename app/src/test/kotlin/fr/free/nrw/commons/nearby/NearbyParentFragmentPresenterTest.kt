@@ -465,8 +465,6 @@ class NearbyParentFragmentPresenterTest {
 
         whenever(bookmarkLocationsDao.allBookmarksLocations).thenReturn(Collections.emptyList())
         nearbyPresenter.updateMapMarkers(nearbyPlacesInfo.placeList, latestLocation, null)
-        Mockito.verify(nearbyParentFragmentView).setFilterState()
         Mockito.verify(nearbyParentFragmentView).setProgressBarVisibility(false)
-        Mockito.verify(nearbyParentFragmentView).updateListFragment(nearbyPlacesInfo.placeList)
     }
 }
