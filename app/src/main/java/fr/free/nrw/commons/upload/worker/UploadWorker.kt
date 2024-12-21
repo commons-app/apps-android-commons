@@ -121,6 +121,7 @@ class UploadWorker(
         private var notificationFinishingTitle: String?,
         var contribution: Contribution?,
     ) {
+        @SuppressLint("MissingPermission")
         fun onProgress(
             transferred: Long,
             total: Long,
@@ -175,6 +176,7 @@ class UploadWorker(
             .setProgress(100, 0, true)
             .setOngoing(true)
 
+    @SuppressLint("MissingPermission")
     override suspend fun doWork(): Result {
         try {
             var totalUploadsStarted = 0
@@ -298,7 +300,7 @@ class UploadWorker(
      * Upload the contribution
      * @param contribution
      */
-    @SuppressLint("StringFormatInvalid", "CheckResult")
+    @SuppressLint("StringFormatInvalid", "CheckResult", "MissingPermission")
     private suspend fun uploadContribution(contribution: Contribution) {
         if (contribution.localUri == null || contribution.localUri.path == null) {
             Timber.e("""upload: ${contribution.media.filename} failed, file path is null""")
@@ -439,7 +441,7 @@ class UploadWorker(
                                 username,
                             )
                         CommonsApplication
-                            .instance!!
+                            .instance
                             .clearApplicationData(appContext, logoutListener)
                     }
                 }
@@ -581,7 +583,7 @@ class UploadWorker(
      * Notify that the current upload has succeeded
      * @param contribution
      */
-    @SuppressLint("StringFormatInvalid")
+    @SuppressLint("StringFormatInvalid", "MissingPermission")
     private fun showSuccessNotification(contribution: Contribution) {
         val displayTitle = contribution.media.displayTitle
         contribution.state = Contribution.STATE_COMPLETED
@@ -606,7 +608,7 @@ class UploadWorker(
      * Notify that the current upload has failed
      * @param contribution
      */
-    @SuppressLint("StringFormatInvalid")
+    @SuppressLint("StringFormatInvalid", "MissingPermission")
     private fun showFailedNotification(contribution: Contribution) {
         val displayTitle = contribution.media.displayTitle
         currentNotification.setContentIntent(getPendingIntent(UploadProgressActivity::class.java))
@@ -626,7 +628,7 @@ class UploadWorker(
         )
     }
 
-    @SuppressLint("StringFormatInvalid")
+    @SuppressLint("StringFormatInvalid", "MissingPermission")
     private fun showInvalidLoginNotification(contribution: Contribution) {
         val displayTitle = contribution.media.displayTitle
         currentNotification
@@ -648,7 +650,7 @@ class UploadWorker(
     /**
      * Shows a notification for a failed contribution upload.
      */
-    @SuppressLint("StringFormatInvalid")
+    @SuppressLint("StringFormatInvalid", "MissingPermission")
     private fun showErrorNotification(contribution: Contribution) {
         val displayTitle = contribution.media.displayTitle
         currentNotification
@@ -671,6 +673,7 @@ class UploadWorker(
      * Notify that the current upload is paused
      * @param contribution
      */
+    @SuppressLint("MissingPermission")
     private fun showPausedNotification(contribution: Contribution) {
         val displayTitle = contribution.media.displayTitle
 
@@ -695,6 +698,7 @@ class UploadWorker(
      * Notify that the current upload is cancelled
      * @param contribution
      */
+    @SuppressLint("MissingPermission")
     private fun showCancelledNotification(contribution: Contribution) {
         val displayTitle = contribution.media.displayTitle
         currentNotification.setContentIntent(getPendingIntent(UploadProgressActivity::class.java))

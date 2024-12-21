@@ -62,6 +62,6 @@ object DownloadUtils {
     ) {
         val systemService =
             activity.getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
-        systemService?.enqueue(req)
+        systemService.enqueue(req)
     }
 }

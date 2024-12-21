@@ -68,7 +68,7 @@ class BookmarkLocationControllerTest {
     @Test
     fun loadBookmarkedLocations() {
         val bookmarkedLocations =
-            bookmarkLocationsController!!.loadFavoritesLocations()
+            bookmarkLocationsController.loadFavoritesLocations()
         Assert.assertEquals(2, bookmarkedLocations.size.toLong())
     }
 }

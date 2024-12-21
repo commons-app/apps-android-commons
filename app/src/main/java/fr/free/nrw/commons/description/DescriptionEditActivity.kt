@@ -240,7 +240,7 @@ class DescriptionEditActivity :
                     applicationContext,
                     media,
                     updatedWikiText,
-                )?.subscribeOn(Schedulers.io())
+                ).subscribeOn(Schedulers.io())
                 ?.observeOn(AndroidSchedulers.mainThread())
                 ?.subscribe(Consumer<Boolean> { s: Boolean? -> Timber.d("Descriptions are added.") })
                 ?.let {

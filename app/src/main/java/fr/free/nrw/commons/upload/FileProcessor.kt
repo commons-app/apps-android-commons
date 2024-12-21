@@ -86,7 +86,7 @@ class FileProcessor
          */
         fun getExifTagsToRedact(): Set<String> {
             val prefManageEXIFTags =
-                defaultKvStore.getStringSet(Prefs.MANAGED_EXIF_TAGS) ?: emptySet()
+                defaultKvStore.getStringSet(Prefs.MANAGED_EXIF_TAGS)
             val redactTags: Set<String> =
                 context.resources.getStringArray(R.array.pref_exifTag_values).toSet()
             return redactTags - prefManageEXIFTags

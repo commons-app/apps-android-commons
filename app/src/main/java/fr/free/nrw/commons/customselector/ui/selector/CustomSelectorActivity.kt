@@ -250,7 +250,7 @@ class CustomSelectorActivity :
             val selectedImages: ArrayList<Image> =
                 result.data!!
                     .getParcelableArrayListExtra(CustomSelectorConstants.NEW_SELECTED_IMAGES)!!
-            viewModel?.selectedImages?.value = selectedImages
+            viewModel.selectedImages?.value = selectedImages
         }
     }
 

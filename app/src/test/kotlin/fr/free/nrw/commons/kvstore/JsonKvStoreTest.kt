@@ -50,7 +50,7 @@ class JsonKvStoreTest {
     fun getJson() {
         whenever(prefs.getString("key", null)).thenReturn(expected)
 
-        val result = store.getJson("key", Person::class.java)
+        val result = store.getJson<Person>("key")
 
         Assert.assertEquals(testData, result)
     }
@@ -70,7 +70,7 @@ class JsonKvStoreTest {
     fun getJsonHandlesMalformedJson() {
         whenever(prefs.getString("key", null)).thenReturn("junk")
 
-        val result = store.getJson("key", Person::class.java)
+        val result = store.getJson<Person>("key")
 
         Assert.assertNull(result)
     }
