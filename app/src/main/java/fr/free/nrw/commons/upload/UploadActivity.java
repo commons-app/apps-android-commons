@@ -448,7 +448,6 @@ public class UploadActivity extends BaseActivity implements
     }
 
     private void receiveSharedItems() {
-        ThumbnailsAdapter.context=this;
         final Intent intent = getIntent();
         final String action = intent.getAction();
         if (Intent.ACTION_SEND.equals(action) || Intent.ACTION_SEND_MULTIPLE.equals(action)) {
