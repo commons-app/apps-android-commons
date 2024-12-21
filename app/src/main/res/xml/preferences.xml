@@ -31,6 +31,13 @@
           app:singleLineTitle="false"
           android:title="@string/default_description_language" />
 
+        <!-- New Secondary Language Picker -->
+        <Preference
+          android:key="descriptionSecondaryLanguagesPref"
+          app:useSimpleSummaryProvider="true"
+          app:singleLineTitle="false"
+          android:title="@string/secondary_description_languages" />
+
         <SwitchPreference
           android:defaultValue="true"
           android:key="displayNearbyCardView"
