@@ -176,7 +176,7 @@ class WikidataEditService @Inject constructor(
                 SnakPartial(
                     "value",
                     MEDIA_LEGENDS.propertyName, MonoLingualText(
-                        WikiBaseMonolingualTextValue(value!!, key!!)
+                        WikiBaseMonolingualTextValue(value, key)
                     )
                 )
             )

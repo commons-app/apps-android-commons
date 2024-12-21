@@ -14,7 +14,7 @@ data class UploadResult(
     constructor(parcel: Parcel) : this(
         parcel.readString() ?: "",
         parcel.readString() ?: "",
-        parcel.readInt() ?: 0,
+        parcel.readInt(),
         parcel.readString() ?: "",
     ) {
     }
