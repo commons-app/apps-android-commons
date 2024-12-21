@@ -182,11 +182,11 @@ class LoginActivity : AccountAuthenticatorActivity() {
 
     override fun onSaveInstanceState(outState: Bundle) {
         // if progressDialog is visible during the configuration change  then store state as  true else false so that
-        // we maintain visibility of progressDailog after configuration change
+        // we maintain visibility of progressDialog after configuration change
         if (progressDialog != null && progressDialog!!.isShowing) {
-            outState.putBoolean(saveProgressDailog, true)
+            outState.putBoolean(saveProgressDialog, true)
         } else {
-            outState.putBoolean(saveProgressDailog, false)
+            outState.putBoolean(saveProgressDialog, false)
         }
         outState.putString(
             saveErrorMessage,
@@ -206,7 +206,7 @@ class LoginActivity : AccountAuthenticatorActivity() {
         super.onRestoreInstanceState(savedInstanceState)
         binding!!.loginUsername.setText(savedInstanceState.getString(saveUsername))
         binding!!.loginPassword.setText(savedInstanceState.getString(savePassword))
-        if (savedInstanceState.getBoolean(saveProgressDailog)) {
+        if (savedInstanceState.getBoolean(saveProgressDialog)) {
             performLogin()
         }
         val errorMessage = savedInstanceState.getString(saveErrorMessage)
@@ -396,7 +396,7 @@ class LoginActivity : AccountAuthenticatorActivity() {
         fun startYourself(context: Context) =
             context.startActivity(Intent(context, LoginActivity::class.java))
 
-        const val saveProgressDailog: String = "ProgressDailog_state"
+        const val saveProgressDialog: String = "ProgressDialog_state"
         const val saveErrorMessage: String = "errorMessage"
         const val saveUsername: String = "username"
         const val savePassword: String = "password"
