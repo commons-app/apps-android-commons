@@ -2,6 +2,8 @@ package fr.free.nrw.commons.wikidata
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.os.Build
+import androidx.annotation.RequiresApi
 import com.google.gson.Gson
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.contributions.Contribution
@@ -111,12 +113,14 @@ class WikidataEditService @Inject constructor(
             .blockingFirst()
     }
 
+    @SuppressLint("StringFormatInvalid")
     private fun showSuccessToast(wikiItemName: String) {
         val successStringTemplate = context.getString(R.string.successful_wikidata_edit)
         val successMessage = String.format(Locale.getDefault(), successStringTemplate, wikiItemName)
         showLongToast(context, successMessage)
     }
 
+    @RequiresApi(Build.VERSION_CODES.N)
     @SuppressLint("CheckResult")
     private fun addCaption(
         fileEntityId: Long, languageCode: String,
