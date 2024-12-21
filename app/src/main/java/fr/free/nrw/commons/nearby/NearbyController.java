@@ -23,8 +23,8 @@ import timber.log.Timber;
 
 public class NearbyController extends MapController {
 
-    private static final int MAX_RESULTS = 1000;
     private final NearbyPlaces nearbyPlaces;
+    public static final int MAX_RESULTS = 1000;
     public static double currentLocationSearchRadius = 10.0; //in kilometers
     public static LatLng currentLocation; // Users latest fetched location
     public static LatLng latestSearchLocation; // Can be current and camera target on search this area button is used

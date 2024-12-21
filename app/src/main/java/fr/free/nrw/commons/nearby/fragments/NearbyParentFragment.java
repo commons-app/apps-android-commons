@@ -23,8 +23,6 @@ import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.location.LocationManager;
 import android.net.Uri;
-import android.os.Build.VERSION;
-import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -56,6 +54,7 @@ import androidx.appcompat.app.AlertDialog.Builder;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
+import androidx.lifecycle.LifecycleOwnerKt;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -110,16 +109,12 @@ import fr.free.nrw.commons.wikidata.WikidataEditListener;
 import io.reactivex.Completable;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -154,6 +149,29 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     LocationPermissionCallback, BottomSheetAdapter.ItemClickListener {
 
     FragmentNearbyParentBinding binding;
+
+    public final MapEventsOverlay mapEventsOverlay = new MapEventsOverlay(new MapEventsReceiver() {
+        @Override
+        public boolean singleTapConfirmedHelper(GeoPoint p) {
+            if (clickedMarker != null) {
+                clickedMarker.closeInfoWindow();
+            } else {
+                Timber.e("CLICKED MARKER IS NULL");
+            }
+            if (isListBottomSheetExpanded()) {
+                // Back should first hide the bottom sheet if it is expanded
+                hideBottomSheet();
+            } else if (isDetailsBottomSheetVisible()) {
+                hideBottomDetailsSheet();
+            }
+            return true;
+        }
+
+        @Override
+        public boolean longPressHelper(GeoPoint p) {
+            return false;
+        }
+    });
 
     @Inject
     LocationServiceManager locationManager;
@@ -217,7 +235,6 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     private Runnable searchRunnable;
     private static final long SCROLL_DELAY = 800; // Delay for debounce of onscroll, in milliseconds.
 
-    private List<Place> updatedPlacesList;
     private LatLng updatedLatLng;
     private boolean searchable;
 
@@ -308,10 +325,6 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
      * WLM URL
      */
     public static final String WLM_URL = "https://commons.wikimedia.org/wiki/Commons:Mobile_app/Contributing_to_WLM_using_the_app";
-    /**
-     * Saves response of list of places for the first time
-     */
-    private List<Place> places = new ArrayList<>();
 
     @NonNull
     public static NearbyParentFragment newInstance() {
@@ -327,7 +340,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         view = binding.getRoot();
 
         initNetworkBroadCastReceiver();
-        presenter = new NearbyParentFragmentPresenter(bookmarkLocationDao);
+        presenter = new NearbyParentFragmentPresenter(bookmarkLocationDao, placesRepository, nearbyController);
         progressDialog = new ProgressDialog(getActivity());
         progressDialog.setCancelable(false);
         progressDialog.setMessage("Saving in progress...");
@@ -452,28 +465,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         binding.map.getOverlays().add(scaleBarOverlay);
         binding.map.getZoomController().setVisibility(Visibility.NEVER);
         binding.map.getController().setZoom(ZOOM_LEVEL);
-        binding.map.getOverlays().add(new MapEventsOverlay(new MapEventsReceiver() {
-            @Override
-            public boolean singleTapConfirmedHelper(GeoPoint p) {
-                if (clickedMarker != null) {
-                    clickedMarker.closeInfoWindow();
-                } else {
-                    Timber.e("CLICKED MARKER IS NULL");
-                }
-                if (isListBottomSheetExpanded()) {
-                    // Back should first hide the bottom sheet if it is expanded
-                    hideBottomSheet();
-                } else if (isDetailsBottomSheetVisible()) {
-                    hideBottomDetailsSheet();
-                }
-                return true;
-            }
-
-            @Override
-            public boolean longPressHelper(GeoPoint p) {
-                return false;
-            }
-        }));
+        binding.map.getOverlays().add(mapEventsOverlay);
 
         binding.map.addMapListener(new MapListener() {
             @Override
@@ -605,8 +597,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                 return Unit.INSTANCE;
             },
             (place, isBookmarked) -> {
-                updateMarker(isBookmarked, place, null);
-                binding.map.invalidate();
+                presenter.toggleBookmarkedStatus(place);
                 return Unit.INSTANCE;
             },
             commonPlaceClickActions,
@@ -670,19 +661,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         registerNetworkReceiver();
         if (isResumed() && ((MainActivity) getActivity()).activeFragment == ActiveFragment.NEARBY) {
             if (locationPermissionsHelper.checkLocationPermission(getActivity())) {
-                if (lastFocusLocation == null && lastKnownLocation == null) {
-                    locationPermissionGranted();
-                } else{
-                    if (updatedPlacesList != null) {
-                        if (!updatedPlacesList.isEmpty()) {
-                            loadPlacesDataAsync(updatedPlacesList, updatedLatLng);
-                        } else {
-                            updateMapMarkers(updatedPlacesList, getLastMapFocus(), false);
-                        }
-                    }else {
-                        locationPermissionGranted();
-                    }
-                }
+                locationPermissionGranted();
             } else {
                 startMapWithoutPermission();
             }
@@ -973,7 +952,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
     @Override
     public void updateListFragment(final List<Place> placeList) {
-        places = placeList;
+        adapter.clear();
         adapter.setItems(placeList);
         binding.bottomSheetNearby.noResultsMessage.setVisibility(
             placeList.isEmpty() ? View.VISIBLE : View.GONE);
@@ -1367,13 +1346,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                             ? getTextBetweenParentheses(
                             updatedPlace.getLongDescription()) : updatedPlace.getLongDescription());
                     marker.showInfoWindow();
-                    for (int i = 0; i < updatedPlacesList.size(); i++) {
-                        Place pl = updatedPlacesList.get(i);
-                        if (pl.location == updatedPlace.location) {
-                            updatedPlacesList.set(i, updatedPlace);
-                            savePlaceToDatabase(place);
-                        }
-                    }
+                    presenter.handlePinClicked(updatedPlace);
+                    savePlaceToDatabase(place);
                     Drawable icon = ContextCompat.getDrawable(getContext(),
                         getIconFor(updatedPlace, isBookMarked));
                     marker.setIcon(icon);
@@ -1412,12 +1386,10 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                         setProgressBarVisibility(false);
                         presenter.lockUnlockNearby(false);
                     } else {
-                        updateMapMarkers(nearbyPlacesInfo.placeList, nearbyPlacesInfo.currentLatLng,
-                            true);
+                        updateMapMarkers(nearbyPlacesInfo.placeList, searchLatLng, true);
                         lastFocusLocation = searchLatLng;
                         lastMapFocus = new GeoPoint(searchLatLng.getLatitude(),
                             searchLatLng.getLongitude());
-                        loadPlacesDataAsync(nearbyPlacesInfo.placeList, nearbyPlacesInfo.currentLatLng);
                     }
                 },
                 throwable -> {
@@ -1457,12 +1429,10 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
                         // curLatLng is used to calculate distance from the current location to the place
                         // and distance is later on populated to the place
-                        updateMapMarkers(nearbyPlacesInfo.placeList, nearbyPlacesInfo.currentLatLng,
-                            false);
+                        updateMapMarkers(nearbyPlacesInfo.placeList, searchLatLng, false);
                         lastMapFocus = new GeoPoint(searchLatLng.getLatitude(),
                             searchLatLng.getLongitude());
                         stopQuery();
-                        loadPlacesDataAsync(nearbyPlacesInfo.placeList, nearbyPlacesInfo.currentLatLng);
                     }
                 },
                 throwable -> {
@@ -1475,167 +1445,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                 }));
     }
 
-    public void loadPlacesDataAsync(List<Place> placeList, LatLng curLatLng) {
-        List<Place> places = new ArrayList<>(placeList);
-
-        // Instead of loading all pins in a single SPARQL query, we query in batches.
-        // This variable controls the number of pins queried per batch.
-        int batchSize = 3;
-
-        updatedLatLng = curLatLng;
-        updatedPlacesList = new ArrayList<>(placeList);
-
-        // Sorts the places by distance to ensure the nearest pins are ready for the user as soon
-        // as possible.
-        if (VERSION.SDK_INT >= VERSION_CODES.N) {
-            Collections.sort(places,
-                Comparator.comparingDouble(place -> place.getDistanceInDouble(getMapFocus())));
-        }
-        stopQuery = false;
-        processBatchesSequentially(places, batchSize, updatedPlacesList, curLatLng, 0);
-    }
-
-    /**
-     * Processes a list of places in batches sequentially. This method handles the asynchronous
-     * processing of places, updating the map markers and updates the list of updated places accordingly.
-     *
-     * @param places           The list of Place objects to be processed.
-     * @param batchSize        The size of each batch to be processed.
-     * @param updatedPlaceList The list of Place objects to be updated.
-     * @param curLatLng        The current location of the user.
-     * @param startIndex       The starting index for the current batch.
-     */
-    @SuppressLint("CheckResult")
-    private void processBatchesSequentially(List<Place> places, int batchSize,
-        List<Place> updatedPlaceList, LatLng curLatLng, int startIndex) {
-        if (startIndex >= places.size() || stopQuery) {
-            return;
-        }
-
-        int endIndex = Math.min(startIndex + batchSize, places.size());
-        List<Place> batch = places.subList(startIndex, endIndex);
-        for (int i = 0; i < batch.size(); i++) {
-            if (i == batch.size() - 1 && batch.get(i).name != "") {
-                processBatchesSequentially(places, batchSize, updatedPlaceList, curLatLng,
-                    endIndex + batchSize);
-                return;
-            }
-            if (batch.get(i).name == "") {
-                if (i == 0) {
-                    break;
-                }
-                processBatchesSequentially(places, batchSize, updatedPlaceList, curLatLng,
-                    endIndex + i);
-                return;
-            }
-        }
-
-        Disposable disposable = processBatch(batch, updatedPlaceList)
-            .subscribe(p -> {
-                if (stopQuery) {
-                    return;
-                }
-                if (!p.isEmpty() && p != updatedPlaceList) {
-                    synchronized (updatedPlaceList) {
-                        updatedPlaceList.clear();
-                        updatedPlaceList.addAll((Collection<? extends Place>) p);
-                    }
-                }
-                updateMapMarkers(new ArrayList<>(updatedPlaceList), curLatLng, false);
-                processBatchesSequentially(places, batchSize, updatedPlaceList, curLatLng, endIndex);
-            }, throwable -> {
-                Timber.e(throwable);
-                showErrorMessage(getString(R.string.error_fetching_nearby_places) + throwable.getLocalizedMessage());
-                setFilterState();
-            });
-
-        compositeDisposable.add(disposable);
-    }
-
-    /**
-     * Processes a batch of places, updating the provided place list with fetched or updated data.
-     * This method handles the asynchronous fetching and updating of places from the repository.
-     *
-     * @param batch     The batch of Place objects to be processed.
-     * @param placeList The list of Place objects to be updated.
-     * @return An Observable emitting the updated list of Place objects.
-     */
-    private Observable<List<?>> processBatch(List<Place> batch, List<Place> placeList) {
-        List<Place> toBeProcessed = new ArrayList<>();
-
-        List<Observable<Place>> placeObservables = new ArrayList<>();
-
-        for (Place place : batch) {
-            Observable<Place> placeObservable = Observable
-                .fromCallable(() -> {
-                    Place fetchedPlace = placesRepository.fetchPlace(place.entityID);
-                    return fetchedPlace != null ? fetchedPlace : place;
-                })
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .doOnNext(placeData -> {
-                    if (placeData.equals(place)) {
-                        toBeProcessed.add(place);
-                    } else {
-                        for (int i = 0; i < placeList.size(); i++) {
-                            Place pl = placeList.get(i);
-                            if (pl.location.equals(place.location)) {
-                                placeList.set(i, placeData);
-                                break;
-                            }
-                        }
-                    }
-                });
-
-            placeObservables.add(placeObservable);
-        }
-
-        return Observable.zip(placeObservables, objects -> toBeProcessed)
-            .flatMap(processedList -> {
-                if (processedList.isEmpty()) {
-                    return Observable.just(placeList);
-                }
-                return Observable.fromCallable(() -> nearbyController.getPlaces(processedList))
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .map(places -> {
-                        if (stopQuery) {
-                            return Collections.emptyList();
-                        }
-                        if (places == null || places.isEmpty()) {
-                            return Collections.emptyList();
-                        } else {
-                            List<Place> updatedPlaceList = new ArrayList<>(placeList);
-                            for (Place place : places) {
-                                for (Place foundPlace : placeList) {
-                                    if (place.siteLinks.getWikidataLink()
-                                        .equals(foundPlace.siteLinks.getWikidataLink())) {
-                                        place.location = foundPlace.location;
-                                        place.distance = foundPlace.distance;
-                                        place.setMonument(foundPlace.isMonument());
-                                        int index = updatedPlaceList.indexOf(foundPlace);
-                                        if (index != -1) {
-                                            updatedPlaceList.set(index, place);
-                                            savePlaceToDatabase(place);
-                                        }
-                                        break;
-                                    }
-                                }
-                            }
-                            return updatedPlaceList;
-                        }
-                    })
-                    .onErrorReturn(throwable -> {
-                        Timber.e(throwable);
-                        showErrorMessage(getString(R.string.error_fetching_nearby_places) + " "
-                            + throwable.getLocalizedMessage());
-                        setFilterState();
-                        return Collections.emptyList();
-                    });
-            });
-    }
-
-    private void savePlaceToDatabase(Place place) {
+    public void savePlaceToDatabase(Place place) {
         compositeDisposable.add(placesRepository
             .save(place)
             .subscribeOn(Schedulers.io())
@@ -1661,8 +1471,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
      */
     private void updateMapMarkers(final List<Place> nearbyPlaces, final LatLng curLatLng,
         final boolean shouldUpdateSelectedMarker) {
-        presenter.updateMapMarkers(nearbyPlaces, curLatLng, shouldUpdateSelectedMarker);
-        setFilterState();
+        presenter.updateMapMarkers(nearbyPlaces, curLatLng,
+            LifecycleOwnerKt.getLifecycleScope(getViewLifecycleOwner()));
     }
 
 
@@ -1900,13 +1710,6 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     }
 
     @Override
-    public void updateMapMarkers(final List<BaseMarker> BaseMarkers) {
-        if (binding.map != null) {
-            presenter.updateMapMarkersToController(BaseMarkers);
-        }
-    }
-
-    @Override
     public void filterOutAllMarkers() {
         clearAllMarkers();
     }
@@ -1925,8 +1728,11 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         final boolean displayExists = false;
         final boolean displayNeedsPhoto= false;
         final boolean displayWlm = false;
-        // Remove the previous markers before updating them
-        clearAllMarkers();
+        if (selectedLabels == null || selectedLabels.size() == 0) {
+            replaceMarkerOverlays(NearbyController.markerLabelList);
+            return;
+        }
+        final ArrayList<MarkerPlaceGroup> placeGroupsToShow = new ArrayList<>();
         for (final MarkerPlaceGroup markerPlaceGroup : NearbyController.markerLabelList) {
             final Place place = markerPlaceGroup.getPlace();
             // When label filter is engaged
@@ -1967,36 +1773,17 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             }
 
             if (shouldUpdateMarker) {
-                updateMarker(markerPlaceGroup.getIsBookmarked(), place,
-                    NearbyController.currentLocation);
+                placeGroupsToShow.add(
+                    new MarkerPlaceGroup(markerPlaceGroup.getIsBookmarked(), place)
+                );
             }
         }
-        if (selectedLabels == null || selectedLabels.size() == 0) {
-            ArrayList<BaseMarker> markerArrayList = new ArrayList<>();
-            for (final MarkerPlaceGroup markerPlaceGroup : NearbyController.markerLabelList) {
-                BaseMarker nearbyBaseMarker = new BaseMarker();
-                nearbyBaseMarker.setPlace(markerPlaceGroup.getPlace());
-                markerArrayList.add(nearbyBaseMarker);
-            }
-            addMarkersToMap(markerArrayList);
-        }
+        replaceMarkerOverlays(placeGroupsToShow);
     }
 
     @Override
     public LatLng getCameraTarget() {
         return binding.map == null ? null : getMapFocus();
-    }
-
-    /**
-     * Sets marker icon according to marker status. Sets title and distance.
-     *
-     * @param isBookmarked  true if place is bookmarked
-     * @param place
-     * @param currentLatLng current location
-     */
-    public void updateMarker(final boolean isBookmarked, final Place place,
-        @Nullable final LatLng currentLatLng) {
-        addMarkerToMap(place, isBookmarked);
     }
 
     /**
@@ -2052,13 +1839,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         );
     }
 
-    /**
-     * Adds a marker representing a place to the map with optional bookmark icon.
-     *
-     * @param place        The Place object containing information about the location.
-     * @param isBookMarked A Boolean flag indicating whether the place is bookmarked or not.
-     */
-    private void addMarkerToMap(Place place, Boolean isBookMarked) {
+    public Marker convertToMarker(Place place, boolean isBookMarked) {
         Drawable icon = ContextCompat.getDrawable(getContext(), getIconFor(place, isBookMarked));
         GeoPoint point = new GeoPoint(place.location.getLatitude(), place.location.getLongitude());
         Marker marker = new Marker(binding.map);
@@ -2094,21 +1875,26 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
             return true;
         });
-        binding.map.getOverlays().add(marker);
+        return marker;
     }
 
     /**
      * Adds multiple markers representing places to the map and handles item gestures.
      *
-     * @param nearbyBaseMarkers The list of Place objects containing information about the
-     *                          locations.
+     * @param markerPlaceGroups The list of marker place groups containing the places and
+     *                          their bookmarked status
      */
-    private void addMarkersToMap(List<BaseMarker> nearbyBaseMarkers) {
-
-        for(int i = 0; i< nearbyBaseMarkers.size(); i++){
-            addMarkerToMap(nearbyBaseMarkers.get(i).getPlace(), false);
+    @Override
+    public void replaceMarkerOverlays(final List<MarkerPlaceGroup> markerPlaceGroups) {
+        ArrayList<Marker> newMarkers = new ArrayList<>(markerPlaceGroups.size());
+        for (MarkerPlaceGroup markerPlaceGroup : markerPlaceGroups) {
+            newMarkers.add(
+                convertToMarker(markerPlaceGroup.getPlace(), markerPlaceGroup.getIsBookmarked()));
         }
+        clearAllMarkers();
+        binding.map.getOverlays().addAll(newMarkers);
     }
+
 
     /**
      * Extracts text between the first occurrence of '(' and its corresponding ')' in the input
@@ -2400,7 +2186,6 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         binding.map.invalidate();
         GeoPoint geoPoint = mapCenter;
         if (geoPoint != null) {
-            List<Overlay> overlays = binding.map.getOverlays();
             ScaleDiskOverlay diskOverlay =
                 new ScaleDiskOverlay(this.getContext(),
                     geoPoint, 2000, UnitOfMeasure.foot);
@@ -2434,28 +2219,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         scaleBarOverlay.setBackgroundPaint(barPaint);
         scaleBarOverlay.enableScaleBar();
         binding.map.getOverlays().add(scaleBarOverlay);
-        binding.map.getOverlays().add(new MapEventsOverlay(new MapEventsReceiver() {
-            @Override
-            public boolean singleTapConfirmedHelper(GeoPoint p) {
-                if (clickedMarker != null) {
-                    clickedMarker.closeInfoWindow();
-                } else {
-                    Timber.e("CLICKED MARKER IS NULL");
-                }
-                if (isListBottomSheetExpanded()) {
-                    // Back should first hide the bottom sheet if it is expanded
-                    hideBottomSheet();
-                } else if (isDetailsBottomSheetVisible()) {
-                    hideBottomDetailsSheet();
-                }
-                return true;
-            }
-
-            @Override
-            public boolean longPressHelper(GeoPoint p) {
-                return false;
-            }
-        }));
+        binding.map.getOverlays().add(mapEventsOverlay);
         binding.map.setMultiTouchControls(true);
     }
 
@@ -2510,21 +2274,14 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     @Override
     public void onBottomSheetItemClick(@Nullable View view, int position) {
         BottomSheetItem item = dataList.get(position);
-        boolean isBookmarked = bookmarkLocationDao.findBookmarkLocation(selectedPlace);
         switch (item.getImageResourceId()) {
             case R.drawable.ic_round_star_border_24px:
-                bookmarkLocationDao.updateBookmarkLocation(selectedPlace);
+                presenter.toggleBookmarkedStatus(selectedPlace);
                 updateBookmarkButtonImage(selectedPlace);
-                isBookmarked = bookmarkLocationDao.findBookmarkLocation(selectedPlace);
-                updateMarker(isBookmarked, selectedPlace, locationManager.getLastLocation());
-                binding.map.invalidate();
                 break;
             case R.drawable.ic_round_star_filled_24px:
-                bookmarkLocationDao.updateBookmarkLocation(selectedPlace);
+                presenter.toggleBookmarkedStatus(selectedPlace);
                 updateBookmarkButtonImage(selectedPlace);
-                isBookmarked = bookmarkLocationDao.findBookmarkLocation(selectedPlace);
-                updateMarker(isBookmarked, selectedPlace, locationManager.getLastLocation());
-                binding.map.invalidate();
                 break;
             case R.drawable.ic_directions_black_24dp:
                 Utils.handleGeoCoordinates(this.getContext(), selectedPlace.getLocation());
