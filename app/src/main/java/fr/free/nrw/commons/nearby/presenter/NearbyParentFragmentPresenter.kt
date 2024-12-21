@@ -105,12 +105,15 @@ class NearbyParentFragmentPresenter
      *
      * @see SchedulePlacesUpdateOptions
      */
-    private suspend fun schedulePlacesUpdate(markerPlaceGroups: List<MarkerPlaceGroup>) =
+    private suspend fun schedulePlacesUpdate(
+        markerPlaceGroups: List<MarkerPlaceGroup>,
+        force: Boolean = false
+    ) =
         withContext(Dispatchers.Main) {
             if (markerPlaceGroups.isEmpty()) return@withContext
             schedulePlacesUpdateJob?.cancel()
             schedulePlacesUpdateJob = launch {
-                if (SchedulePlacesUpdateOptions.skippedCount++
+                if (!force && SchedulePlacesUpdateOptions.skippedCount++
                     < SchedulePlacesUpdateOptions.SKIP_LIMIT
                 ) {
                     delay(SchedulePlacesUpdateOptions.SKIP_DELAY_MS)
@@ -298,8 +301,6 @@ class NearbyParentFragmentPresenter
         lockUnlockNearby(false) // So that new location updates wont come
         nearbyParentFragmentView.setProgressBarVisibility(false)
 
-        updatePlaceGroupsToControllerAndRender(nearbyPlaceGroups)
-
         loadPlacesDataAyncJob = scope?.launch(Dispatchers.IO) {
             // clear past clicks and bookmarkChanged queues
             clickedPlaces.clear()
@@ -312,18 +313,20 @@ class NearbyParentFragmentPresenter
             val indicesToUpdate = mutableListOf<Int>()
             for (i in 0..updatedGroups.lastIndex) {
                 val repoPlace = placesRepository.fetchPlace(updatedGroups[i].place.entityID)
-                if (repoPlace != null && repoPlace.name != ""){
-                    updatedGroups[i] = MarkerPlaceGroup(
-                        bookmarkLocationDao.findBookmarkLocation(repoPlace),
-                        repoPlace
-                    )
+                if (repoPlace != null && repoPlace.name != null && repoPlace.name != ""){
+                    updatedGroups[i].isBookmarked = bookmarkLocationDao.findBookmarkLocation(repoPlace)
+                    updatedGroups[i].place.apply {
+                        name = repoPlace.name
+                        isMonument = repoPlace.isMonument
+                        pic = repoPlace.pic ?: ""
+                        exists = repoPlace.exists ?: true
+                        longDescription = repoPlace.longDescription ?: ""
+                    }
                 } else {
                     indicesToUpdate.add(i)
                 }
             }
-            if (indicesToUpdate.size < updatedGroups.size) {
-                schedulePlacesUpdate(updatedGroups)
-            }
+            schedulePlacesUpdate(updatedGroups, force = true)
             // channel for lists of indices of places, each list to be fetched in a single request
             val fetchPlacesChannel = Channel<List<Int>>(Channel.UNLIMITED)
             var totalBatches = 0
