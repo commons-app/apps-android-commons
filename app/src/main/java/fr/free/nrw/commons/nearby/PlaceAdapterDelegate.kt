@@ -5,10 +5,12 @@ import android.view.View
 import android.view.View.GONE
 import android.view.View.INVISIBLE
 import android.view.View.VISIBLE
+import android.widget.RelativeLayout
 import androidx.activity.result.ActivityResultLauncher
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.transition.TransitionManager
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.hannesdorfmann.adapterdelegates4.dsl.AdapterDelegateViewBindingViewHolder
 import com.hannesdorfmann.adapterdelegates4.dsl.adapterDelegateViewBinding
 import fr.free.nrw.commons.R
@@ -42,7 +44,10 @@ fun placeAdapterDelegate(
         root.setOnFocusChangeListener { view1: View?, hasFocus: Boolean ->
             if (!hasFocus && nearbyButtonLayout.buttonLayout.isShown) {
                 nearbyButtonLayout.buttonLayout.visibility = GONE
-            } else if (hasFocus && !nearbyButtonLayout.buttonLayout.isShown) {
+            } else if (hasFocus && !nearbyButtonLayout.buttonLayout.isShown &&
+                BottomSheetBehavior.from(root.parent.parent.parent as RelativeLayout).state !=
+                BottomSheetBehavior.STATE_HIDDEN
+            ) {
                 showOrHideAndScrollToIfLast()
                 onItemClick?.invoke(item)
             }
