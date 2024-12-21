@@ -1839,7 +1839,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         );
     }
 
-    public Marker convertToMarker(Place place, Boolean isBookMarked) {
+    public Marker convertToMarker(Place place, boolean isBookMarked) {
         Drawable icon = ContextCompat.getDrawable(getContext(), getIconFor(place, isBookMarked));
         GeoPoint point = new GeoPoint(place.location.getLatitude(), place.location.getLongitude());
         Marker marker = new Marker(binding.map);
