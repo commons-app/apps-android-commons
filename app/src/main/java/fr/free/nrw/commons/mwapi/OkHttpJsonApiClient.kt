@@ -388,19 +388,65 @@ class OkHttpJsonApiClient @Inject constructor(
 
     @Throws(IOException::class)
     fun getPlaces(
-        placeList: List<Place>, language: String
+        placeList: List<Place>, primaryLanguage: String, secondaryLanguages: String
     ): List<Place>? {
         val wikidataQuery = FileUtils.readFromResource("/queries/query_for_item.rq")
+
+        // Split the secondary languages string into an array to use in fallback queries
+        val secondaryLanguagesArray = secondaryLanguages.split(",\\s*".toRegex())
+
+        // Prepare the Wikidata entity IDs (QIDs) for each place in the list
         var qids = ""
         for (place in placeList) {
-            qids += """
-${"wd:" + place.wikiDataEntityId}"""
+            qids += "\nwd:${place.wikiDataEntityId}"
         }
+
+        // Build fallback descriptions for secondary languages in case the primary language is unavailable
+        val fallBackDescription = StringBuilder()
+        secondaryLanguagesArray.forEachIndexed { index, lang ->
+            fallBackDescription.append("OPTIONAL {?item schema:description ?itemDescriptionPreferredLanguage_")
+                .append(index + 1)
+                .append(". FILTER (lang(?itemDescriptionPreferredLanguage_")
+                .append(index + 1)
+                .append(") = \"")
+                .append(lang)
+                .append("\")}\n")
+        }
+
+        // Build fallback labels for secondary languages
+        val fallbackLabel = StringBuilder()
+        secondaryLanguagesArray.forEachIndexed { index, lang ->
+            fallbackLabel.append("OPTIONAL {?item rdfs:label ?itemLabelPreferredLanguage_")
+                .append(index + 1)
+                .append(". FILTER (lang(?itemLabelPreferredLanguage_")
+                .append(index + 1)
+                .append(") = \"")
+                .append(lang)
+                .append("\")}\n")
+        }
+
+        // Build fallback class labels for secondary languages
+        val fallbackClassLabel = StringBuilder()
+        secondaryLanguagesArray.forEachIndexed { index, lang ->
+            fallbackClassLabel.append("OPTIONAL {?class rdfs:label ?classLabelPreferredLanguage_")
+                .append(index + 1)
+                .append(". FILTER (lang(?classLabelPreferredLanguage_")
+                .append(index + 1)
+                .append(") = \"")
+                .append(lang)
+                .append("\")}\n")
+        }
+
+        // Replace placeholders in the query with actual data: QIDs, language codes, and fallback options
         val query = wikidataQuery
             .replace("\${ENTITY}", qids)
-            .replace("\${LANG}", language)
-        val urlBuilder: HttpUrl.Builder = sparqlQueryUrl.toHttpUrlOrNull()!!
-            .newBuilder()
+            .replace("\${LANG}", primaryLanguage)
+            .replace("\${SECONDARYDESCRIPTION}", fallBackDescription.toString())
+            .replace("\${SECONDARYLABEL}", fallbackLabel.toString())
+            .replace("\${SECONDARYCLASSLABEL}", fallbackClassLabel.toString())
+
+        // Build the URL for the SparQL query with the formatted query string
+        val urlBuilder = sparqlQueryUrl.toHttpUrlOrNull()!!.newBuilder()
             .addQueryParameter("query", query)
             .addQueryParameter("format", "json")
 
@@ -418,10 +464,11 @@ ${"wd:" + place.wikiDataEntityId}"""
                 }
                 return places
             } else {
-                throw IOException("Unexpected response code: " + response.code)
+                throw IOException("Unexpected response code: ${response.code}")
             }
         }
     }
+
 
     @Throws(Exception::class)
     fun getPlacesAsKML(leftLatLng: LatLng, rightLatLng: LatLng): String? {
