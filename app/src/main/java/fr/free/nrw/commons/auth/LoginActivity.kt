@@ -146,7 +146,7 @@ class LoginActivity : AccountAuthenticatorActivity() {
             loginTwoFactor.removeTextChangedListener(textWatcher)
         }
         delegate.onDestroy()
-        loginClient?.cancel()
+        loginClient.cancel()
         binding = null
         super.onDestroy()
     }
