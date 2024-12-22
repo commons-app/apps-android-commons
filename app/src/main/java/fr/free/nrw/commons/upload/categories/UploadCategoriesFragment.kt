@@ -220,7 +220,7 @@ class UploadCategoriesFragment : UploadBaseFragment(), CategoriesContract.View {
     }
 
     override fun goToNextScreen() {
-        callback?.onNextButtonClicked(callback.getIndexInViewFlipper(this))
+        callback.onNextButtonClicked(callback.getIndexInViewFlipper(this))
     }
 
     override fun showNoCategorySelected() {
@@ -322,7 +322,7 @@ class UploadCategoriesFragment : UploadBaseFragment(), CategoriesContract.View {
             mediaDetailFragment.onResume()
             goBackToPreviousScreen()
         } else {
-            callback?.onPreviousButtonClicked(callback.getIndexInViewFlipper(this))
+            callback.onPreviousButtonClicked(callback.getIndexInViewFlipper(this))
         }
     }
 
