@@ -2,7 +2,6 @@ package fr.free.nrw.commons.bookmarks;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +25,7 @@ import fr.free.nrw.commons.media.MediaDetailPagerFragment;
 import fr.free.nrw.commons.navtab.NavTab;
 import java.util.ArrayList;
 import java.util.Iterator;
+import timber.log.Timber;
 
 public class BookmarkListRootFragment extends CommonsDaggerSupportFragment implements
     FragmentManager.OnBackStackChangedListener,
@@ -136,7 +136,7 @@ public class BookmarkListRootFragment extends CommonsDaggerSupportFragment imple
 
     @Override
     public void onMediaClicked(int position) {
-        Log.d("deneme8", "on media clicked");
+        Timber.tag("deneme8").d("on media clicked");
     /*container.setVisibility(View.VISIBLE);
     ((BookmarkFragment)getParentFragment()).tabLayout.setVisibility(View.GONE);
     mediaDetails = new MediaDetailPagerFragment(false, true, position);
@@ -244,7 +244,7 @@ public class BookmarkListRootFragment extends CommonsDaggerSupportFragment imple
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Log.d("deneme8", "on media clicked");
+        Timber.tag("deneme8").d("on media clicked");
         binding.exploreContainer.setVisibility(View.VISIBLE);
         ((BookmarkFragment) getParentFragment()).binding.tabLayout.setVisibility(View.GONE);
         mediaDetails = MediaDetailPagerFragment.newInstance(false, true);
