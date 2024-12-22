@@ -175,7 +175,7 @@ class OkHttpJsonApiClient @Inject constructor(
                 .build()
             val response: Response = okHttpClient.newCall(request).execute()
             if (response.body != null && response.isSuccessful) {
-                val json: String = response.body!!.string() ?: return@fromCallable null
+                val json: String = response.body!!.string()
                 try {
                     return@fromCallable gson.fromJson<UpdateAvatarResponse>(
                         json,

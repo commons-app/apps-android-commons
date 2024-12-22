@@ -55,7 +55,7 @@ class CustomSelectorUtils {
                 val uploadableFile = PickedFiles.pickedExistingPicture(context, image.uri)
                 val exifInterface: ExifInterface? =
                     try {
-                        ExifInterface(uploadableFile.file!!)
+                        ExifInterface(uploadableFile.file)
                     } catch (e: IOException) {
                         Timber.e(e)
                         null
