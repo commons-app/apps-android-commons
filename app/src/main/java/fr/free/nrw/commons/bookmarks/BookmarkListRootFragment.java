@@ -136,7 +136,7 @@ public class BookmarkListRootFragment extends CommonsDaggerSupportFragment imple
 
     @Override
     public void onMediaClicked(int position) {
-        Timber.tag("deneme8").d("on media clicked");
+        Timber.d("on media clicked");
     /*container.setVisibility(View.VISIBLE);
     ((BookmarkFragment)getParentFragment()).tabLayout.setVisibility(View.GONE);
     mediaDetails = new MediaDetailPagerFragment(false, true, position);
@@ -244,7 +244,7 @@ public class BookmarkListRootFragment extends CommonsDaggerSupportFragment imple
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Timber.tag("deneme8").d("on media clicked");
+        Timber.d("on media clicked");
         binding.exploreContainer.setVisibility(View.VISIBLE);
         ((BookmarkFragment) getParentFragment()).binding.tabLayout.setVisibility(View.GONE);
         mediaDetails = MediaDetailPagerFragment.newInstance(false, true);
