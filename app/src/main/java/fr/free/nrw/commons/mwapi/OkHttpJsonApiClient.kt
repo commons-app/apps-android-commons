@@ -2,6 +2,7 @@ package fr.free.nrw.commons.mwapi
 
 import android.text.TextUtils
 import com.google.gson.Gson
+import com.google.gson.JsonParser
 import fr.free.nrw.commons.BuildConfig
 import fr.free.nrw.commons.campaigns.CampaignResponseDTO
 import fr.free.nrw.commons.explore.depictions.DepictsClient
@@ -326,6 +327,74 @@ class OkHttpJsonApiClient @Inject constructor(
                 places.add(placeFromNearbyItem)
             }
             return places
+        }
+        throw Exception(response.message)
+    }
+
+    @Throws(Exception::class)
+    fun getNearbyItemCount(
+        screenTopRight: LatLng, screenBottomLeft: LatLng
+    ): Int {
+        val wikidataQuery: String =
+            FileUtils.readFromResource("/queries/rectangle_query_for_item_count.rq")
+
+        val westCornerLat = screenTopRight.latitude
+        val westCornerLong = screenTopRight.longitude
+        val eastCornerLat = screenBottomLeft.latitude
+        val eastCornerLong = screenBottomLeft.longitude
+
+        val query = wikidataQuery
+            .replace("\${LAT_WEST}", String.format(Locale.ROOT, "%.4f", westCornerLat))
+            .replace("\${LONG_WEST}", String.format(Locale.ROOT, "%.4f", westCornerLong))
+            .replace("\${LAT_EAST}", String.format(Locale.ROOT, "%.4f", eastCornerLat))
+            .replace("\${LONG_EAST}", String.format(Locale.ROOT, "%.4f", eastCornerLong))
+
+        val urlBuilder: HttpUrl.Builder = sparqlQueryUrl.toHttpUrlOrNull()!!
+            .newBuilder()
+            .addQueryParameter("query", query)
+            .addQueryParameter("format", "json")
+
+        val request: Request = Request.Builder()
+            .url(urlBuilder.build())
+            .build()
+
+        val response = okHttpClient.newCall(request).execute()
+        if (response.body != null && response.isSuccessful) {
+            val json = response.body!!.string()
+            return JsonParser.parseString(json).getAsJsonObject().getAsJsonObject("results")
+                .getAsJsonArray("bindings").get(0).getAsJsonObject().getAsJsonObject("count")
+                .get("value").asInt
+        }
+        throw Exception(response.message)
+    }
+
+    @Throws(Exception::class)
+    fun getNearbyItemCount(
+        center: LatLng, radius: Double
+    ): Int {
+        val wikidataQuery: String =
+            FileUtils.readFromResource("/queries/radius_query_for_item_count.rq")
+
+        val query = wikidataQuery
+            .replace("\${LAT}", String.format(Locale.ROOT, "%.4f", center.latitude))
+            .replace("\${LONG}", String.format(Locale.ROOT, "%.4f", center.longitude))
+            .replace("\${RAD}", String.format(Locale.ROOT, "%.2f", radius))
+
+        val urlBuilder: HttpUrl.Builder = sparqlQueryUrl.toHttpUrlOrNull()!!
+            .newBuilder()
+            .addQueryParameter("query", query)
+            .addQueryParameter("format", "json")
+
+        val request: Request = Request.Builder()
+            .url(urlBuilder.build())
+            .build()
+
+        val response = okHttpClient.newCall(request).execute()
+        if (response.body != null && response.isSuccessful) {
+            val json = response.body!!.string()
+            return JsonParser.parseString(json).getAsJsonObject().getAsJsonObject("results")
+                .getAsJsonArray("bindings").get(0).getAsJsonObject().getAsJsonObject("count")
+                .get("value").asInt
         }
         throw Exception(response.message)
     }

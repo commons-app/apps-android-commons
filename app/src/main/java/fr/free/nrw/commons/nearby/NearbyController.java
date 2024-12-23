@@ -196,8 +196,9 @@ public class NearbyController extends MapController {
             return null;
         }
 
-        List<Place> places = nearbyPlaces.getFromWikidataQuery(screenTopRight, screenBottomLeft,
-            Locale.getDefault().getLanguage(), shouldQueryForMonuments, customQuery);
+        List<Place> places = nearbyPlaces.getFromWikidataQuery(currentLatLng, screenTopRight,
+            screenBottomLeft, Locale.getDefault().getLanguage(), shouldQueryForMonuments,
+            customQuery);
 
         if (null != places && places.size() > 0) {
             LatLng[] boundaryCoordinates = {

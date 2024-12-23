@@ -101,6 +101,7 @@ public class NearbyPlaces {
      * Retrieves a list of places from a Wikidata query based on screen coordinates and optional
      * parameters.
      *
+     * @param centerPoint             The center of the map, used for radius queries if required.
      * @param screenTopRight          The top right corner of the screen (latitude, longitude).
      * @param screenBottomLeft        The bottom left corner of the screen (latitude, longitude).
      * @param lang                    The language for the query.
@@ -111,13 +112,22 @@ public class NearbyPlaces {
      * @throws Exception If an error occurs during the retrieval process.
      */
     public List<Place> getFromWikidataQuery(
+        final fr.free.nrw.commons.location.LatLng centerPoint,
         final fr.free.nrw.commons.location.LatLng screenTopRight,
         final fr.free.nrw.commons.location.LatLng screenBottomLeft, final String lang,
         final boolean shouldQueryForMonuments,
         @Nullable final String customQuery) throws Exception {
-        return okHttpJsonApiClient
-            .getNearbyPlaces(screenTopRight, screenBottomLeft, lang, shouldQueryForMonuments,
-                customQuery);
+        if (customQuery != null){
+            return okHttpJsonApiClient
+                .getNearbyPlaces(screenTopRight, screenBottomLeft, lang, shouldQueryForMonuments,
+                    customQuery);
+        }
+        final double east = screenTopRight.getLongitude();
+        final double west = screenBottomLeft.getLongitude();
+        final double north = screenTopRight.getLatitude();
+        final double south = screenBottomLeft.getLatitude();
+
+        return new java.util.ArrayList<Place>(); // TODO replace with actual method call
     }
 
     /**
