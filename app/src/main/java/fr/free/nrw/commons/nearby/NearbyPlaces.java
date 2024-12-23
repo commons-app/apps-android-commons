@@ -148,7 +148,8 @@ public class NearbyPlaces {
         }
 
         // minRadius, targetRadius and maxRadius are radii in decameters
-        // unlike other
+        // unlike other radii here, which are in kilometers, to avoid looping over
+        // floating point values
         int minRadius = 0, maxRadius = Math.round(Math.min(300f, Math.min(longGap, latGap))) * 100;
         int targetRadius = maxRadius / 2;
         while (minRadius < maxRadius) {

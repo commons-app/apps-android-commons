@@ -332,6 +332,12 @@ class OkHttpJsonApiClient @Inject constructor(
         throw Exception(response.message)
     }
 
+    /**
+     * Returns the count of items in the specified area by querying Wikidata.
+     *
+     * @param queryParams: a `NearbyQueryParam` specifying the geographical area.
+     * @return The count of items in the specified area.
+     */
     @Throws(Exception::class)
     fun getNearbyItemCount(
         queryParams: NearbyQueryParams
