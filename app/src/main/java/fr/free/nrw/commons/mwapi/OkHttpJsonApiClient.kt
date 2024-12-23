@@ -362,7 +362,7 @@ class OkHttpJsonApiClient @Inject constructor(
         if (response.body != null && response.isSuccessful) {
             val json = response.body!!.string()
             return JsonParser.parseString(json).getAsJsonObject().getAsJsonObject("results")
-                .getAsJsonArray("bindings").get(0).getAsJsonObject().getAsJsonObject("count")
+                .getAsJsonArray("bindings").get(0).getAsJsonObject().getAsJsonObject("itemCount")
                 .get("value").asInt
         }
         throw Exception(response.message)
@@ -370,7 +370,7 @@ class OkHttpJsonApiClient @Inject constructor(
 
     @Throws(Exception::class)
     fun getNearbyItemCount(
-        center: LatLng, radius: Double
+        center: LatLng, radius: Float
     ): Int {
         val wikidataQuery: String =
             FileUtils.readFromResource("/queries/radius_query_for_item_count.rq")
@@ -393,7 +393,7 @@ class OkHttpJsonApiClient @Inject constructor(
         if (response.body != null && response.isSuccessful) {
             val json = response.body!!.string()
             return JsonParser.parseString(json).getAsJsonObject().getAsJsonObject("results")
-                .getAsJsonArray("bindings").get(0).getAsJsonObject().getAsJsonObject("count")
+                .getAsJsonArray("bindings").get(0).getAsJsonObject().getAsJsonObject("itemCount")
                 .get("value").asInt
         }
         throw Exception(response.message)

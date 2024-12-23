@@ -1,4 +1,4 @@
-SELECT (COUNT(DISTINCT ?item) AS ?count)
+SELECT (COUNT(?item) AS ?itemCount)
 WHERE {
   SERVICE wikibase:box {
     ?item wdt:P625 ?location.
@@ -6,4 +6,3 @@ WHERE {
     bd:serviceParam wikibase:cornerEast "Point(${LONG_EAST} ${LAT_EAST})"^^geo:wktLiteral.
   }
 }
-&format=json
