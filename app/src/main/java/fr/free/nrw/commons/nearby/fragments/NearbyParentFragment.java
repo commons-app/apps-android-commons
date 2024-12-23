@@ -1101,19 +1101,19 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                 eastCornerLong, 0);
             if (currentLatLng.equals(
                 getLastMapFocus())) { // Means we are checking around current location
-                populatePlacesForCurrentLocation(getLastMapFocus(), screenTopRightLatLng,
+                populatePlacesForCurrentLocation(getMapFocus(), screenTopRightLatLng,
                     screenBottomLeftLatLng, currentLatLng, null);
             } else {
-                populatePlacesForAnotherLocation(getLastMapFocus(), screenTopRightLatLng,
+                populatePlacesForAnotherLocation(getMapFocus(), screenTopRightLatLng,
                     screenBottomLeftLatLng, currentLatLng, null);
             }
         } else {
             if (currentLatLng.equals(
                 getLastMapFocus())) { // Means we are checking around current location
-                populatePlacesForCurrentLocation(getLastMapFocus(), screenTopRightLatLng,
+                populatePlacesForCurrentLocation(getMapFocus(), screenTopRightLatLng,
                     screenBottomLeftLatLng, currentLatLng, null);
             } else {
-                populatePlacesForAnotherLocation(getLastMapFocus(), screenTopRightLatLng,
+                populatePlacesForAnotherLocation(getMapFocus(), screenTopRightLatLng,
                     screenBottomLeftLatLng, currentLatLng, null);
             }
         }
