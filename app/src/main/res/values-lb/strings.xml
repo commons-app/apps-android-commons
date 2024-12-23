@@ -318,6 +318,7 @@
   <string name="previous">Vireg</string>
   <string name="title_page_bookmarks_pictures">Biller</string>
   <string name="title_page_bookmarks_locations">Plazen</string>
+  <string name="title_page_bookmarks_categories">Kategorien</string>
   <string name="provider_bookmarks">Lieszeechen</string>
   <string name="bookmark_empty">Dir hutt keng Lieszeechen derbäigesat</string>
   <string name="provider_bookmarks_location">Lieszeechen</string>
