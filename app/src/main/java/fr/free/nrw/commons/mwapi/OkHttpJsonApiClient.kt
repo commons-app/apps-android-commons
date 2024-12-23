@@ -359,7 +359,7 @@ class OkHttpJsonApiClient @Inject constructor(
                         "\${LONG}",
                         String.format(Locale.ROOT, "%.4f", queryParams.center.longitude)
                     )
-                    .replace("\${RAD}", String.format(Locale.ROOT, "%.2f", queryParams.radius))
+                    .replace("\${RAD}", String.format(Locale.ROOT, "%.2f", queryParams.radiusInKm))
             }
         }
 
@@ -425,7 +425,7 @@ class OkHttpJsonApiClient @Inject constructor(
                     ).replace(
                         "\${LONG}", String.format(locale, "%.4f", queryParams.center.longitude)
                     )
-                    .replace("\${RAD}", String.format(locale, "%.2f", queryParams.radius))
+                    .replace("\${RAD}", String.format(locale, "%.2f", queryParams.radiusInKm))
             }
 
             is NearbyQueryParams.Rectangular -> {

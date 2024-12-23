@@ -147,7 +147,9 @@ public class NearbyPlaces {
             }
         }
 
-        int minRadius = 0, maxRadius = Math.round(Math.min(100f, Math.min(longGap, latGap))) * 100;
+        // minRadius, targetRadius and maxRadius are radii in decameters
+        // unlike other
+        int minRadius = 0, maxRadius = Math.round(Math.min(300f, Math.min(longGap, latGap))) * 100;
         int targetRadius = maxRadius / 2;
         while (minRadius < maxRadius) {
             targetRadius = minRadius + (maxRadius - minRadius + 1) / 2;
@@ -156,8 +158,14 @@ public class NearbyPlaces {
             if (itemCount >= lowerLimit && itemCount < upperLimit) {
                 break;
             }
-            if (targetRadius > maxRadius / 2 && itemCount < lowerLimit / 5) {
-                minRadius = targetRadius + (maxRadius - targetRadius + 1) / 2;
+            if (targetRadius > maxRadius / 2 && itemCount < lowerLimit / 5) { // fast forward
+                minRadius = targetRadius;
+                targetRadius = minRadius + (maxRadius - minRadius + 1) / 2;
+                minRadius = targetRadius;
+                if (itemCount < lowerLimit / 10 && minRadius < maxRadius) { // fast forward again
+                    targetRadius = minRadius + (maxRadius - minRadius + 1) / 2;
+                    minRadius = targetRadius;
+                }
                 continue;
             }
             if (itemCount < upperLimit) {
