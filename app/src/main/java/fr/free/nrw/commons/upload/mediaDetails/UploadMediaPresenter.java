@@ -106,7 +106,7 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
      */
     @Override
     public void setUploadMediaDetails(final List<UploadMediaDetail> uploadMediaDetails, final int uploadItemIndex) {
-        repository.getUploads().get(uploadItemIndex).setMediaDetails(uploadMediaDetails);
+        repository.getUploads().get(uploadItemIndex).setUploadMediaDetails(uploadMediaDetails);
     }
 
     /**
@@ -284,7 +284,7 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
     public void copyTitleAndDescriptionToSubsequentMedia(final int indexInViewFlipper) {
       for(int i = indexInViewFlipper+1; i < repository.getCount(); i++){
         final UploadItem subsequentUploadItem = repository.getUploads().get(i);
-        subsequentUploadItem.setMediaDetails(deepCopy(repository.getUploads().get(indexInViewFlipper).getUploadMediaDetails()));
+        subsequentUploadItem.setUploadMediaDetails(deepCopy(repository.getUploads().get(indexInViewFlipper).getUploadMediaDetails()));
       }
     }
 

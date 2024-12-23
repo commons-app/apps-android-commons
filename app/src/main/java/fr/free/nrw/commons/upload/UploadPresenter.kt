@@ -41,7 +41,7 @@ class UploadPresenter @Inject internal constructor(
     override fun handleSubmit() {
         var hasLocationProvidedForNewUploads = false
         for (item in repository.getUploads()) {
-            if (item.gpsCoords.imageCoordsExists) {
+            if (item.gpsCoords?.imageCoordsExists == true) {
                 hasLocationProvidedForNewUploads = true
             }
         }

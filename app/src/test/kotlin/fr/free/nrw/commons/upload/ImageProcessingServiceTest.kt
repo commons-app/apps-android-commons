@@ -64,7 +64,7 @@ class ImageProcessingServiceTest {
         `when`(uploadItem.uploadMediaDetails).thenReturn(mockTitle as MutableList<UploadMediaDetail>?)
 
         `when`(uploadItem.place).thenReturn(mockPlace)
-        `when`(uploadItem.fileName).thenReturn("File:jpg")
+        `when`(uploadItem.filename).thenReturn("File:jpg")
 
         `when`(fileUtilsWrapper!!.getFileInputStream(ArgumentMatchers.anyString()))
             .thenReturn(mock(FileInputStream::class.java))

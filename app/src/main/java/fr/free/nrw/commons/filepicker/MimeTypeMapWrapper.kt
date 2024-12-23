@@ -13,7 +13,7 @@ class MimeTypeMapWrapper {
         )
 
         @JvmStatic
-        fun getExtensionFromMimeType(mimeType: String): String? {
+        fun getExtensionFromMimeType(mimeType: String?): String? {
             val result = sMimeTypeToExtensionMap[mimeType]
             if (result != null) {
                 return result

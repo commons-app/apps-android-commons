@@ -137,7 +137,7 @@ class UploadMediaPresenterTest {
         whenever(uploadItem.imageQuality).thenReturn(0)
         whenever(uploadItem.gpsCoords)
             .thenReturn(imageCoordinates)
-        whenever(uploadItem.gpsCoords.decimalCoords)
+        whenever(uploadItem.gpsCoords?.decimalCoords)
             .thenReturn("imageCoordinates")
         uploadMediaPresenter.getImageQuality(0, location, mockActivity)
         verify(view).showProgress(true)
@@ -155,7 +155,7 @@ class UploadMediaPresenterTest {
         whenever(uploadItem.imageQuality).thenReturn(0)
         whenever(uploadItem.gpsCoords)
             .thenReturn(imageCoordinates)
-        whenever(uploadItem.gpsCoords.decimalCoords)
+        whenever(uploadItem.gpsCoords?.decimalCoords)
             .thenReturn(null)
         uploadMediaPresenter.getImageQuality(0, location, mockActivity)
         testScheduler.triggerActions()
@@ -195,7 +195,7 @@ class UploadMediaPresenterTest {
         uploadMediaDetail.languageCode = "en"
         val uploadMediaDetailList: ArrayList<UploadMediaDetail> = ArrayList()
         uploadMediaDetailList.add(uploadMediaDetail)
-        uploadItem.setMediaDetails(uploadMediaDetailList)
+        uploadItem.uploadMediaDetails = uploadMediaDetailList
         Mockito.`when`(repository.getImageQuality(uploadItem, location)).then {
             verify(view).showProgress(true)
             testScheduler.triggerActions()
@@ -211,7 +211,7 @@ class UploadMediaPresenterTest {
         uploadMediaDetail.languageCode = "en"
         uploadMediaDetail.captionText = "added caption"
         uploadMediaDetail.languageCode = "eo"
-        uploadItem.setMediaDetails(Collections.singletonList(uploadMediaDetail))
+        uploadItem.uploadMediaDetails = Collections.singletonList(uploadMediaDetail)
         Mockito.`when`(repository.getImageQuality(uploadItem, location)).then {
             verify(view).showProgress(true)
             testScheduler.triggerActions()
