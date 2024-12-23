@@ -272,11 +272,11 @@ class DescriptionEditActivity :
                             applicationContext,
                             media,
                             mediaDetail.languageCode!!,
-                            mediaDetail.captionText,
+                            mediaDetail.captionText!!,
                         ).subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe { s: Boolean? ->
-                            updatedCaptions[mediaDetail.languageCode!!] = mediaDetail.captionText
+                            updatedCaptions[mediaDetail.languageCode!!] = mediaDetail.captionText!!
                             media.captions = updatedCaptions
                             Timber.d("Caption is added.")
                         },

@@ -69,7 +69,7 @@ class UploadRepository @Inject constructor(
      * @return
      */
     fun getUploads(): List<UploadItem> {
-        return uploadModel.getUploads()
+        return uploadModel.uploads
     }
 
     /**
@@ -275,7 +275,7 @@ class UploadRepository @Inject constructor(
      * @param selectedExistingDepictions existing depicts
      */
     fun setSelectedExistingDepictions(selectedExistingDepictions: List<String>) {
-        uploadModel.selectedExistingDepictions = selectedExistingDepictions
+        uploadModel.selectedExistingDepictions = selectedExistingDepictions.toMutableList()
     }
 
     /**

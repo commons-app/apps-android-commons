@@ -1569,7 +1569,7 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
         mediaDetail: UploadMediaDetail,
         updatedCaptions: MutableMap<String, String>
     ) {
-        updatedCaptions[mediaDetail.languageCode!!] = mediaDetail.captionText
+        updatedCaptions[mediaDetail.languageCode!!] = mediaDetail.captionText!!
         media!!.captions = updatedCaptions
     }
 
