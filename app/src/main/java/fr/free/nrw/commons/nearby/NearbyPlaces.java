@@ -119,51 +119,56 @@ public class NearbyPlaces {
         final fr.free.nrw.commons.location.LatLng screenBottomLeft, final String lang,
         final boolean shouldQueryForMonuments,
         @Nullable final String customQuery) throws Exception {
-        if (customQuery != null){
+        if (customQuery != null) {
             return okHttpJsonApiClient
-                .getNearbyPlaces(screenTopRight, screenBottomLeft, lang, shouldQueryForMonuments,
+                .getNearbyPlaces(
+                    new NearbyQueryParams.Rectangular(screenTopRight, screenBottomLeft), lang,
+                    shouldQueryForMonuments,
                     customQuery);
         }
 
-        final int lowerLimit = 1000, upperLimit=1500;
+        final int lowerLimit = 1000, upperLimit = 1500;
 
         final float[] results = new float[1];
         Location.distanceBetween(centerPoint.getLatitude(), screenTopRight.getLongitude(),
             centerPoint.getLatitude(), screenBottomLeft.getLongitude(), results);
-        final float longGap = results[0]/1000f;
+        final float longGap = results[0] / 1000f;
         Location.distanceBetween(screenTopRight.getLatitude(), centerPoint.getLongitude(),
             screenBottomLeft.getLatitude(), centerPoint.getLongitude(), results);
-        final float latGap = results[0]/1000f;
+        final float latGap = results[0] / 1000f;
 
-        if (Math.max(longGap,latGap)<100f){
+        if (Math.max(longGap, latGap) < 100f) {
             final int itemCount = okHttpJsonApiClient.getNearbyItemCount(
                 new NearbyQueryParams.Rectangular(screenTopRight, screenBottomLeft));
-            if(itemCount<upperLimit) {
-                return okHttpJsonApiClient.getNearbyPlaces(screenTopRight, screenBottomLeft, lang,
+            if (itemCount < upperLimit) {
+                return okHttpJsonApiClient.getNearbyPlaces(
+                    new NearbyQueryParams.Rectangular(screenTopRight, screenBottomLeft), lang,
                     shouldQueryForMonuments, null);
             }
         }
 
-        int minRadius = 0, maxRadius = Math.round(Math.min(100f, Math.min(longGap, latGap)))*100;
-        int targetRadius = maxRadius/2;
-        while (minRadius<maxRadius) {
+        int minRadius = 0, maxRadius = Math.round(Math.min(100f, Math.min(longGap, latGap))) * 100;
+        int targetRadius = maxRadius / 2;
+        while (minRadius < maxRadius) {
             targetRadius = minRadius + (maxRadius - minRadius + 1) / 2;
             final int itemCount = okHttpJsonApiClient.getNearbyItemCount(
                 new NearbyQueryParams.Radial(centerPoint, targetRadius / 100f));
-            if (itemCount >= lowerLimit && itemCount < upperLimit){
+            if (itemCount >= lowerLimit && itemCount < upperLimit) {
                 break;
             }
-            if (targetRadius>maxRadius/2 && itemCount<lowerLimit/5) {
+            if (targetRadius > maxRadius / 2 && itemCount < lowerLimit / 5) {
                 minRadius = targetRadius + (maxRadius - targetRadius + 1) / 2;
                 continue;
             }
-            if (itemCount<upperLimit) {
+            if (itemCount < upperLimit) {
                 minRadius = targetRadius;
             } else {
-                 maxRadius = targetRadius - 1;
+                maxRadius = targetRadius - 1;
             }
         }
-        return new java.util.ArrayList<Place>();
+        return okHttpJsonApiClient.getNearbyPlaces(
+            new NearbyQueryParams.Radial(centerPoint, targetRadius / 100f), lang, shouldQueryForMonuments,
+            null);
     }
 
     /**
