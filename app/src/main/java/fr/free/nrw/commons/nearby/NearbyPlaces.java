@@ -2,6 +2,7 @@ package fr.free.nrw.commons.nearby;
 
 import android.location.Location;
 import androidx.annotation.Nullable;
+import fr.free.nrw.commons.nearby.model.NearbyQueryParams;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
@@ -135,8 +136,8 @@ public class NearbyPlaces {
         final float latGap = results[0]/1000f;
 
         if (Math.max(longGap,latGap)<100f){
-            final int itemCount = okHttpJsonApiClient.getNearbyItemCount(screenTopRight,
-                screenBottomLeft);
+            final int itemCount = okHttpJsonApiClient.getNearbyItemCount(
+                new NearbyQueryParams.Rectangular(screenTopRight, screenBottomLeft));
             if(itemCount<upperLimit) {
                 return okHttpJsonApiClient.getNearbyPlaces(screenTopRight, screenBottomLeft, lang,
                     shouldQueryForMonuments, null);
@@ -147,8 +148,8 @@ public class NearbyPlaces {
         int targetRadius = maxRadius/2;
         while (minRadius<maxRadius) {
             targetRadius = minRadius + (maxRadius - minRadius + 1) / 2;
-            final int itemCount = okHttpJsonApiClient.getNearbyItemCount(centerPoint,
-                targetRadius / 100f);
+            final int itemCount = okHttpJsonApiClient.getNearbyItemCount(
+                new NearbyQueryParams.Radial(centerPoint, targetRadius / 100f));
             if (itemCount >= lowerLimit && itemCount < upperLimit){
                 break;
             }
@@ -162,7 +163,7 @@ public class NearbyPlaces {
                  maxRadius = targetRadius - 1;
             }
         }
-        return new java.util.ArrayList<Place>(); // TODO make actual query
+        return new java.util.ArrayList<Place>();
     }
 
     /**
