@@ -1887,9 +1887,12 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     @Override
     public void replaceMarkerOverlays(final List<MarkerPlaceGroup> markerPlaceGroups) {
         ArrayList<Marker> newMarkers = new ArrayList<>(markerPlaceGroups.size());
-        for (MarkerPlaceGroup markerPlaceGroup : markerPlaceGroups) {
+        // iterate in reverse so that the nearest pins get rendered on top
+        for (int i = markerPlaceGroups.size() - 1; i >= 0; i--) {
             newMarkers.add(
-                convertToMarker(markerPlaceGroup.getPlace(), markerPlaceGroup.getIsBookmarked()));
+                convertToMarker(markerPlaceGroups.get(i).getPlace(),
+                markerPlaceGroups.get(i).getIsBookmarked())
+            );
         }
         clearAllMarkers();
         binding.map.getOverlays().addAll(newMarkers);
