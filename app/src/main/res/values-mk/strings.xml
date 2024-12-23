@@ -399,6 +399,7 @@
   <string name="map_application_missing">Не пронајдов складен картографски прилог на вашиот уред. Преземете еден таков за да можете да ја користите оваа можност.</string>
   <string name="title_page_bookmarks_pictures">Слики</string>
   <string name="title_page_bookmarks_locations">Места</string>
+  <string name="title_page_bookmarks_categories">Категории</string>
   <string name="menu_bookmark">Додај/отстрани обележани</string>
   <string name="provider_bookmarks">Обележани</string>
   <string name="bookmark_empty">Немате додадено ниеден бележник</string>
