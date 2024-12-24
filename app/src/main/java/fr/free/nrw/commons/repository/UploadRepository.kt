@@ -243,7 +243,7 @@ class UploadRepository @Inject constructor(
      *
      * @param licenseName
      */
-    fun setSelectedLicense(licenseName: String) {
+    fun setSelectedLicense(licenseName: String?) {
         uploadModel.selectedLicense = licenseName
     }
 

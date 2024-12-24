@@ -62,6 +62,7 @@ class UploadCategoriesFragmentUnitTests {
         OkHttpConnectionFactory.CLIENT = createTestClient()
         val activity = Robolectric.buildActivity(UploadActivity::class.java).create().get()
         fragment = UploadCategoriesFragment()
+        fragment.callback = callback
         fragmentManager = activity.supportFragmentManager
         val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
         fragmentTransaction.add(fragment, null)

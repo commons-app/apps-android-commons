@@ -45,7 +45,7 @@ class ImageProcessingService @Inject constructor(
         }
 
         Timber.d("Checking the validity of image")
-        val filePath = uploadItem.mediaUri.path
+        val filePath = uploadItem.mediaUri?.path
 
         return Single.zip(
             checkDuplicateImage(filePath),
@@ -107,7 +107,7 @@ class ImageProcessingService @Inject constructor(
             return Single.just(EMPTY_CAPTION)
         }
 
-        return mediaClient.checkPageExistsUsingTitle("File:" + uploadItem.fileName)
+        return mediaClient.checkPageExistsUsingTitle("File:" + uploadItem.filename)
             .map { doesFileExist: Boolean ->
                 Timber.d("Result for valid title is %s", doesFileExist)
                 if (doesFileExist) FILE_NAME_EXISTS else IMAGE_OK
