@@ -47,20 +47,20 @@ class MediaLicenseFragment : UploadBaseFragment(), MediaLicenseContract.View {
 
         binding.tvTitle.text = getString(
             R.string.step_count,
-            callback.getIndexInViewFlipper(this) + 1,
-            callback.totalNumberOfSteps,
+            callback!!.getIndexInViewFlipper(this) + 1,
+            callback!!.totalNumberOfSteps,
             getString(R.string.license_step_title)
         )
         setTvSubTitle()
         binding.btnPrevious.setOnClickListener {
-            callback.onPreviousButtonClicked(
-                callback.getIndexInViewFlipper(this)
+            callback!!.onPreviousButtonClicked(
+                callback!!.getIndexInViewFlipper(this)
             )
         }
 
         binding.btnSubmit.setOnClickListener {
-            callback.onNextButtonClicked(
-                callback.getIndexInViewFlipper(this)
+            callback!!.onNextButtonClicked(
+                callback!!.getIndexInViewFlipper(this)
             )
         }
 
@@ -201,6 +201,6 @@ class MediaLicenseFragment : UploadBaseFragment(), MediaLicenseContract.View {
          * Show the wlm info message if the upload is a WLM upload
          */
         binding.llInfoMonumentUpload.visibility =
-            if (callback.isWLMUpload && presenter.isWLMSupportedForThisPlace()) View.VISIBLE else View.GONE
+            if (callback!!.isWLMUpload && presenter.isWLMSupportedForThisPlace()) View.VISIBLE else View.GONE
     }
 }

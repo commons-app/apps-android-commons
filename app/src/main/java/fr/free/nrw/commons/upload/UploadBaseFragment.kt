@@ -6,7 +6,7 @@ import fr.free.nrw.commons.di.CommonsDaggerSupportFragment
  * The base fragment of the fragments in upload
  */
 abstract class UploadBaseFragment : CommonsDaggerSupportFragment() {
-    lateinit var callback: Callback
+    var callback: Callback? = null
 
     protected open fun onBecameVisible() = Unit
 
