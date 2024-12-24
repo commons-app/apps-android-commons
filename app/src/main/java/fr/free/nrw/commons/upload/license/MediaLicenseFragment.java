@@ -2,6 +2,7 @@ package fr.free.nrw.commons.upload.license;
 
 import android.app.Activity;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.SpannableStringBuilder;
@@ -151,7 +152,9 @@ public class MediaLicenseFragment extends UploadBaseFragment implements MediaLic
     }
 
     private void setTextViewHTML(TextView textView, String text) {
-        CharSequence sequence = Html.fromHtml(text);
+        CharSequence sequence = (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) ?
+            Html.fromHtml(text, Html.FROM_HTML_MODE_LEGACY) : Html.fromHtml(text);
+
         SpannableStringBuilder strBuilder = new SpannableStringBuilder(sequence);
         URLSpan[] urls = strBuilder.getSpans(0, sequence.length(), URLSpan.class);
         for (URLSpan span : urls) {
