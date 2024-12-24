@@ -2,6 +2,7 @@ package fr.free.nrw.commons.mwapi
 
 import android.text.TextUtils
 import com.google.gson.Gson
+import com.google.gson.JsonParser
 import fr.free.nrw.commons.BuildConfig
 import fr.free.nrw.commons.campaigns.CampaignResponseDTO
 import fr.free.nrw.commons.explore.depictions.DepictsClient
@@ -10,6 +11,7 @@ import fr.free.nrw.commons.fileusages.GlobalFileUsagesResponse
 import fr.free.nrw.commons.location.LatLng
 import fr.free.nrw.commons.nearby.Place
 import fr.free.nrw.commons.nearby.model.ItemsClass
+import fr.free.nrw.commons.nearby.model.NearbyQueryParams
 import fr.free.nrw.commons.nearby.model.NearbyResponse
 import fr.free.nrw.commons.nearby.model.PlaceBindings
 import fr.free.nrw.commons.profile.achievements.FeaturedImages
@@ -330,36 +332,130 @@ class OkHttpJsonApiClient @Inject constructor(
         throw Exception(response.message)
     }
 
+    /**
+     * Returns the count of items in the specified area by querying Wikidata.
+     *
+     * @param queryParams: a `NearbyQueryParam` specifying the geographical area.
+     * @return The count of items in the specified area.
+     */
+    @Throws(Exception::class)
+    fun getNearbyItemCount(
+        queryParams: NearbyQueryParams
+    ): Int {
+        val wikidataQuery: String = when (queryParams) {
+            is NearbyQueryParams.Rectangular -> {
+                val westCornerLat = queryParams.screenTopRight.latitude
+                val westCornerLong = queryParams.screenTopRight.longitude
+                val eastCornerLat = queryParams.screenBottomLeft.latitude
+                val eastCornerLong = queryParams.screenBottomLeft.longitude
+                FileUtils.readFromResource("/queries/rectangle_query_for_item_count.rq")
+                    .replace("\${LAT_WEST}", String.format(Locale.ROOT, "%.4f", westCornerLat))
+                    .replace("\${LONG_WEST}", String.format(Locale.ROOT, "%.4f", westCornerLong))
+                    .replace("\${LAT_EAST}", String.format(Locale.ROOT, "%.4f", eastCornerLat))
+                    .replace("\${LONG_EAST}", String.format(Locale.ROOT, "%.4f", eastCornerLong))
+            }
+
+            is NearbyQueryParams.Radial -> {
+                FileUtils.readFromResource("/queries/radius_query_for_item_count.rq")
+                    .replace(
+                        "\${LAT}",
+                        String.format(Locale.ROOT, "%.4f", queryParams.center.latitude)
+                    )
+                    .replace(
+                        "\${LONG}",
+                        String.format(Locale.ROOT, "%.4f", queryParams.center.longitude)
+                    )
+                    .replace("\${RAD}", String.format(Locale.ROOT, "%.2f", queryParams.radiusInKm))
+            }
+        }
+
+        val urlBuilder: HttpUrl.Builder = sparqlQueryUrl.toHttpUrlOrNull()!!
+            .newBuilder()
+            .addQueryParameter("query", wikidataQuery)
+            .addQueryParameter("format", "json")
+
+        val request: Request = Request.Builder()
+            .url(urlBuilder.build())
+            .build()
+
+        val response = okHttpClient.newCall(request).execute()
+        if (response.body != null && response.isSuccessful) {
+            val json = response.body!!.string()
+            return JsonParser.parseString(json).getAsJsonObject().getAsJsonObject("results")
+                .getAsJsonArray("bindings").get(0).getAsJsonObject().getAsJsonObject("itemCount")
+                .get("value").asInt
+        }
+        throw Exception(response.message)
+    }
+
     @Throws(Exception::class)
     fun getNearbyPlaces(
-        screenTopRight: LatLng,
-        screenBottomLeft: LatLng, language: String,
+        queryParams: NearbyQueryParams, language: String,
         shouldQueryForMonuments: Boolean, customQuery: String?
     ): List<Place>? {
         Timber.d("CUSTOM_SPARQL: %s", (customQuery != null).toString())
 
+        val locale = Locale.ROOT;
         val wikidataQuery: String = if (customQuery != null) {
-            customQuery
-        } else if (!shouldQueryForMonuments) {
-            FileUtils.readFromResource("/queries/rectangle_query_for_nearby.rq")
-        } else {
-            FileUtils.readFromResource("/queries/rectangle_query_for_nearby_monuments.rq")
+                when (queryParams) {
+                    is NearbyQueryParams.Rectangular -> {
+                        val westCornerLat = queryParams.screenTopRight.latitude
+                        val westCornerLong = queryParams.screenTopRight.longitude
+                        val eastCornerLat = queryParams.screenBottomLeft.latitude
+                        val eastCornerLong = queryParams.screenBottomLeft.longitude
+                        customQuery
+                            .replace("\${LAT_WEST}", String.format(locale, "%.4f", westCornerLat))
+                            .replace("\${LONG_WEST}", String.format(locale, "%.4f", westCornerLong))
+                            .replace("\${LAT_EAST}", String.format(locale, "%.4f", eastCornerLat))
+                            .replace("\${LONG_EAST}", String.format(locale, "%.4f", eastCornerLong))
+                            .replace("\${LANG}", language)
+                    }
+                    is NearbyQueryParams.Radial -> {
+                        Timber.e(
+                            "%s%s",
+                            "okHttpJsonApiClient.getNearbyPlaces invoked with custom query",
+                            "and radial coordinates. This is currently not supported."
+                        )
+                        ""
+                    }
+                }
+        } else when (queryParams) {
+            is NearbyQueryParams.Radial -> {
+                val placeHolderQuery: String = if (!shouldQueryForMonuments) {
+                    FileUtils.readFromResource("/queries/radius_query_for_nearby.rq")
+                } else {
+                    FileUtils.readFromResource("/queries/radius_query_for_nearby_monuments.rq")
+                }
+                placeHolderQuery.replace(
+                        "\${LAT}", String.format(locale, "%.4f", queryParams.center.latitude)
+                    ).replace(
+                        "\${LONG}", String.format(locale, "%.4f", queryParams.center.longitude)
+                    )
+                    .replace("\${RAD}", String.format(locale, "%.2f", queryParams.radiusInKm))
+            }
+
+            is NearbyQueryParams.Rectangular -> {
+                val placeHolderQuery: String = if (!shouldQueryForMonuments) {
+                    FileUtils.readFromResource("/queries/rectangle_query_for_nearby.rq")
+                } else {
+                    FileUtils.readFromResource("/queries/rectangle_query_for_nearby_monuments.rq")
+                }
+                val westCornerLat = queryParams.screenTopRight.latitude
+                val westCornerLong = queryParams.screenTopRight.longitude
+                val eastCornerLat = queryParams.screenBottomLeft.latitude
+                val eastCornerLong = queryParams.screenBottomLeft.longitude
+                placeHolderQuery
+                    .replace("\${LAT_WEST}", String.format(locale, "%.4f", westCornerLat))
+                    .replace("\${LONG_WEST}", String.format(locale, "%.4f", westCornerLong))
+                    .replace("\${LAT_EAST}", String.format(locale, "%.4f", eastCornerLat))
+                    .replace("\${LONG_EAST}", String.format(locale, "%.4f", eastCornerLong))
+                    .replace("\${LANG}", language)
+            }
         }
 
-        val westCornerLat = screenTopRight.latitude
-        val westCornerLong = screenTopRight.longitude
-        val eastCornerLat = screenBottomLeft.latitude
-        val eastCornerLong = screenBottomLeft.longitude
-
-        val query = wikidataQuery
-            .replace("\${LAT_WEST}", String.format(Locale.ROOT, "%.4f", westCornerLat))
-            .replace("\${LONG_WEST}", String.format(Locale.ROOT, "%.4f", westCornerLong))
-            .replace("\${LAT_EAST}", String.format(Locale.ROOT, "%.4f", eastCornerLat))
-            .replace("\${LONG_EAST}", String.format(Locale.ROOT, "%.4f", eastCornerLong))
-            .replace("\${LANG}", language)
         val urlBuilder: HttpUrl.Builder = sparqlQueryUrl.toHttpUrlOrNull()!!
             .newBuilder()
-            .addQueryParameter("query", query)
+            .addQueryParameter("query", wikidataQuery)
             .addQueryParameter("format", "json")
 
         val request: Request = Request.Builder()
