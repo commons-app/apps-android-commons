@@ -8,11 +8,11 @@ import fr.free.nrw.commons.utils.ImageUtils
 import io.reactivex.subjects.BehaviorSubject
 
 class UploadItem(
-    var mediaUri: Uri,
+    var mediaUri: Uri?,
     val mimeType: String?,
     var gpsCoords: ImageCoordinates?,
-    var place: Place,
-    val createdTimestamp: Long,
+    var place: Place?,
+    val createdTimestamp: Long?,
     val createdTimestampSource: String?,
     /**
      * Uri of uploadItem
@@ -23,7 +23,7 @@ class UploadItem(
     val fileCreatedDateString: String?
 ) {
     var imageQuality: Int = ImageUtils.IMAGE_WAIT
-    var uploadMediaDetails: List<UploadMediaDetail> = listOf(UploadMediaDetail())
+    var uploadMediaDetails: MutableList<UploadMediaDetail> = mutableListOf(UploadMediaDetail())
     var hasInvalidLocation = false
     var isWLMUpload = false
     var countryCode: String? = null

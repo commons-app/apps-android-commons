@@ -45,7 +45,7 @@ class ImageProcessingService @Inject constructor(
         }
 
         Timber.d("Checking the validity of image")
-        val filePath = uploadItem.mediaUri.path
+        val filePath = uploadItem.mediaUri?.path
 
         return Single.zip(
             checkDuplicateImage(filePath),

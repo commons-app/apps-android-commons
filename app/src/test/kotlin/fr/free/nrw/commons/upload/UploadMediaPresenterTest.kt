@@ -228,7 +228,7 @@ class UploadMediaPresenterTest {
         whenever(repository.getUploads()).thenReturn(listOf(uploadItem))
         whenever(repository.getUploadItem(ArgumentMatchers.anyInt()))
             .thenReturn(uploadItem)
-        whenever(uploadItem.uploadMediaDetails).thenReturn(listOf())
+        whenever(uploadItem.uploadMediaDetails).thenReturn(mutableListOf())
 
         uploadMediaPresenter.fetchTitleAndDescription(0)
         verify(view).updateMediaDetails(ArgumentMatchers.any())
