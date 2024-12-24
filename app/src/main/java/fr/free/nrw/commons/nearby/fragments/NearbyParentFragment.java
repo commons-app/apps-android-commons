@@ -23,6 +23,7 @@ import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.location.LocationManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -511,7 +512,12 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         moveCameraToPosition(lastMapFocus);
         initRvNearbyList();
         onResume();
-        binding.tvAttribution.setText(Html.fromHtml(getString(R.string.map_attribution)));
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            binding.tvAttribution.setText(Html.fromHtml(getString(R.string.map_attribution), Html.FROM_HTML_MODE_LEGACY));
+        } else {
+            //noinspection deprecation
+            binding.tvAttribution.setText(Html.fromHtml(getString(R.string.map_attribution)));
+        }
         binding.tvAttribution.setMovementMethod(LinkMovementMethod.getInstance());
         binding.nearbyFilterList.btnAdvancedOptions.setOnClickListener(v -> {
             binding.nearbyFilter.searchViewLayout.searchView.clearFocus();

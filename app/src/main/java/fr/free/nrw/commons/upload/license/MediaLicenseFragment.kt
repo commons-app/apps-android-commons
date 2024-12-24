@@ -2,6 +2,7 @@ package fr.free.nrw.commons.upload.license
 
 import android.app.Activity
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.text.Html
 import android.text.SpannableStringBuilder
@@ -151,7 +152,11 @@ class MediaLicenseFragment : UploadBaseFragment(), MediaLicenseContract.View {
     }
 
     private fun setTextViewHTML(textView: TextView, text: String) {
-        val sequence: CharSequence = Html.fromHtml(text)
+        val sequence: CharSequence = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            Html.fromHtml(text, Html.FROM_HTML_MODE_LEGACY)
+        } else {
+            Html.fromHtml(text)
+        }
         val strBuilder = SpannableStringBuilder(sequence)
         val urls = strBuilder.getSpans(
             0, sequence.length,
