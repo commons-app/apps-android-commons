@@ -2,6 +2,7 @@ package fr.free.nrw.commons.feedback
 
 import android.app.Dialog
 import android.content.Context
+import android.os.Build
 import android.os.Bundle
 import android.text.Html
 import android.text.Spanned
@@ -26,11 +27,13 @@ class FeedbackDialog(
     private val onFeedbackSubmitCallback: OnFeedbackSubmitCallback) : Dialog(context) {
     private var _binding: DialogFeedbackBinding? = null
     private val binding get() = _binding!!
-    // TODO("Remove Deprecation") Issue : #6002
-    // 'fromHtml(String!): Spanned!' is deprecated. Deprecated in Java
-    @Suppress("DEPRECATION")
-    private var feedbackDestinationHtml: Spanned = Html.fromHtml(
-        context.getString(R.string.feedback_destination_note))
+    // Refactored to handle deprecation for Html.fromHtml()
+    private var feedbackDestinationHtml: Spanned = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+        Html.fromHtml(context.getString(R.string.feedback_destination_note), Html.FROM_HTML_MODE_LEGACY)
+    } else {
+        @Suppress("DEPRECATION")
+        Html.fromHtml(context.getString(R.string.feedback_destination_note))
+    }
 
 
     public override fun onCreate(savedInstanceState: Bundle?) {
