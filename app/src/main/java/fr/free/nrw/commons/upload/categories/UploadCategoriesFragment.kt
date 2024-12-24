@@ -95,12 +95,10 @@ class UploadCategoriesFragment : UploadBaseFragment(), CategoriesContract.View {
         }
         if (media == null) {
             if (callback != null) {
-                binding!!.tvTitle.text = getString(
-                    R.string.step_count, callback!!.getIndexInViewFlipper(
-                        this
-                    ) + 1,
-                    callback!!.totalNumberOfSteps, getString(R.string.categories_activity_title)
-                )
+                binding!!.tvTitle.text = getString(R.string.step_count,
+                    callback!!.getIndexInViewFlipper(this) + 1,
+                    callback!!.totalNumberOfSteps,
+                    getString(R.string.categories_activity_title))
             }
         } else {
             binding!!.tvTitle.setText(R.string.edit_categories)
@@ -220,7 +218,7 @@ class UploadCategoriesFragment : UploadBaseFragment(), CategoriesContract.View {
     }
 
     override fun goToNextScreen() {
-        callback.let { it.onNextButtonClicked(it.getIndexInViewFlipper(this)) }
+        callback?.let { it.onNextButtonClicked(it.getIndexInViewFlipper(this)) }
     }
 
     override fun showNoCategorySelected() {
@@ -322,7 +320,7 @@ class UploadCategoriesFragment : UploadBaseFragment(), CategoriesContract.View {
             mediaDetailFragment.onResume()
             goBackToPreviousScreen()
         } else {
-            callback.let { it.onPreviousButtonClicked(it.getIndexInViewFlipper(this)) }
+            callback?.let { it.onPreviousButtonClicked(it.getIndexInViewFlipper(this)) }
         }
     }
 

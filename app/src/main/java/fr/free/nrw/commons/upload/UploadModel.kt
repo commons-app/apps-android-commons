@@ -175,7 +175,7 @@ class UploadModel @Inject internal constructor(
             Timber.d(
                 "Created timestamp while building contribution is %s, %s",
                 item.createdTimestamp,
-                Date(item.createdTimestamp)
+                Date(item.createdTimestamp!!)
             )
 
             if (item.createdTimestamp != -1L) {

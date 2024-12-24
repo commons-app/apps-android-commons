@@ -422,7 +422,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         final Activity activity = getActivity();
 
         if (activity instanceof UploadActivity) {
-            final boolean isMultipleFilesSelected = ((UploadActivity) activity).getIsMultipleFilesSelected();
+            final boolean isMultipleFilesSelected = ((UploadActivity) activity).isMultipleFilesSelected();
 
             // Determine the message based on the selection status
             String message;
@@ -476,7 +476,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
      * This method gets called whenever the next/previous button is pressed
      */
     @Override
-    protected void onBecameVisible() {
+    public void onBecameVisible() {
         super.onBecameVisible();
         if (callback == null) {
             return;
