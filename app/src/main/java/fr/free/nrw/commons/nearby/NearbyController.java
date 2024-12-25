@@ -147,7 +147,8 @@ public class NearbyController extends MapController {
      */
     public List<Place> getPlaces(List<Place> placeList) throws Exception {
         String secondaryLanguages = defaultKvStore.getString(Prefs.SECONDARY_LANGUAGES, "");
-        return nearbyPlaces.getPlaces(placeList, Locale.getDefault().getLanguage(), secondaryLanguages);
+        String primaryLanguage = defaultKvStore.getString(Prefs.DESCRIPTION_LANGUAGE, "");
+        return nearbyPlaces.getPlaces(placeList, primaryLanguage, secondaryLanguages);
     }
 
     public static LatLng calculateNorthEast(double latitude, double longitude, double distance) {

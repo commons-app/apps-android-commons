@@ -309,14 +309,23 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
     private fun prepareSecondaryLanguagesDialog() {
         val languageCode = getCurrentLanguageCode("descriptionSecondaryLanguagesPref")
+        val defaultCode = getCurrentLanguageCode("descriptionDefaultLanguagePref")
         val selectedLanguages = hashMapOf<Int, String>()
+
+        var deflocale = Locale.getDefault()
+
+
+        if (defaultCode != null){
+            deflocale = createLocale(defaultCode)
+        }
+
         languageCode?.let {
-            selectedLanguages[0] = Locale.getDefault().language
+            selectedLanguages[0] = deflocale.language
         }
 
         val savedLanguages = arrayListOf<Language>()
         languageCode?.split(",\\s*".toRegex())?.forEach { code ->
-            if (code != Locale.getDefault().language) {
+            if (code != deflocale.language) {
                 val locale = Locale(code)
                 savedLanguages.add(Language(locale.displayLanguage, code))
             }
