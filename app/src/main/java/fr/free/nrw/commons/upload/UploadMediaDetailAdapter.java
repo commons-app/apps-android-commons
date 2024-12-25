@@ -14,6 +14,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -357,12 +358,15 @@ public class UploadMediaDetailAdapter extends
 
                     EditText editText = dialog.findViewById(R.id.search_language);
                     ListView listView = dialog.findViewById(R.id.language_list);
+                    final Button cancelButton = dialog.findViewById(R.id.cancel_button);
                     languageHistoryListView = dialog.findViewById(R.id.language_history_list);
                     recentLanguagesTextView = dialog.findViewById(R.id.recent_searches);
                     separator = dialog.findViewById(R.id.separator);
                     setUpRecentLanguagesSection(recentLanguages);
 
                     listView.setAdapter(languagesAdapter);
+
+                    cancelButton.setOnClickListener(v -> dialog.dismiss());
 
                     editText.addTextChangedListener(new TextWatcher() {
                         @Override

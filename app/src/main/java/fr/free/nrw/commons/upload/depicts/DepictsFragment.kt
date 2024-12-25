@@ -285,6 +285,7 @@ class DepictsFragment : UploadBaseFragment(), DepictsContract.View {
     override fun showProgressDialog() {
         progressDialog = ProgressDialog(requireContext())
         progressDialog!!.setMessage(getString(R.string.please_wait))
+        progressDialog!!.setCancelable(false)
         progressDialog!!.show()
     }
 

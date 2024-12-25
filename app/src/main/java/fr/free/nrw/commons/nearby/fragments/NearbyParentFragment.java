@@ -1614,6 +1614,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             // prompt the user to login
             new Builder(getContext())
                 .setMessage(R.string.login_alert_message)
+                .setCancelable(false)
+                .setNegativeButton(R.string.cancel, (dialog, which) -> {})
                 .setPositiveButton(R.string.login, (dialog, which) -> {
                     // logout of the app
                     BaseLogoutListener logoutListener = new BaseLogoutListener(getActivity());

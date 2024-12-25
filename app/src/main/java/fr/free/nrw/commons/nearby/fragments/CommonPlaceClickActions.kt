@@ -128,6 +128,8 @@ class CommonPlaceClickActions
             AlertDialog
                 .Builder(activity)
                 .setMessage(R.string.login_alert_message)
+                .setCancelable(false)
+                .setNegativeButton(R.string.cancel){_,_ -> }
                 .setPositiveButton(R.string.login) { dialog, which ->
                     setPositiveButton()
                 }.show()
