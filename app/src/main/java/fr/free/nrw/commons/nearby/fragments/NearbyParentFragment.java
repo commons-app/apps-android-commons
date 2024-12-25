@@ -23,6 +23,7 @@ import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.location.LocationManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -511,7 +512,12 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         moveCameraToPosition(lastMapFocus);
         initRvNearbyList();
         onResume();
-        binding.tvAttribution.setText(Html.fromHtml(getString(R.string.map_attribution)));
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            binding.tvAttribution.setText(Html.fromHtml(getString(R.string.map_attribution), Html.FROM_HTML_MODE_LEGACY));
+        } else {
+            //noinspection deprecation
+            binding.tvAttribution.setText(Html.fromHtml(getString(R.string.map_attribution)));
+        }
         binding.tvAttribution.setMovementMethod(LinkMovementMethod.getInstance());
         binding.nearbyFilterList.btnAdvancedOptions.setOnClickListener(v -> {
             binding.nearbyFilter.searchViewLayout.searchView.clearFocus();
@@ -1101,19 +1107,19 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                 eastCornerLong, 0);
             if (currentLatLng.equals(
                 getLastMapFocus())) { // Means we are checking around current location
-                populatePlacesForCurrentLocation(getLastMapFocus(), screenTopRightLatLng,
+                populatePlacesForCurrentLocation(getMapFocus(), screenTopRightLatLng,
                     screenBottomLeftLatLng, currentLatLng, null);
             } else {
-                populatePlacesForAnotherLocation(getLastMapFocus(), screenTopRightLatLng,
+                populatePlacesForAnotherLocation(getMapFocus(), screenTopRightLatLng,
                     screenBottomLeftLatLng, currentLatLng, null);
             }
         } else {
             if (currentLatLng.equals(
                 getLastMapFocus())) { // Means we are checking around current location
-                populatePlacesForCurrentLocation(getLastMapFocus(), screenTopRightLatLng,
+                populatePlacesForCurrentLocation(getMapFocus(), screenTopRightLatLng,
                     screenBottomLeftLatLng, currentLatLng, null);
             } else {
-                populatePlacesForAnotherLocation(getLastMapFocus(), screenTopRightLatLng,
+                populatePlacesForAnotherLocation(getMapFocus(), screenTopRightLatLng,
                     screenBottomLeftLatLng, currentLatLng, null);
             }
         }
@@ -1887,9 +1893,12 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     @Override
     public void replaceMarkerOverlays(final List<MarkerPlaceGroup> markerPlaceGroups) {
         ArrayList<Marker> newMarkers = new ArrayList<>(markerPlaceGroups.size());
-        for (MarkerPlaceGroup markerPlaceGroup : markerPlaceGroups) {
+        // iterate in reverse so that the nearest pins get rendered on top
+        for (int i = markerPlaceGroups.size() - 1; i >= 0; i--) {
             newMarkers.add(
-                convertToMarker(markerPlaceGroup.getPlace(), markerPlaceGroup.getIsBookmarked()));
+                convertToMarker(markerPlaceGroups.get(i).getPlace(),
+                markerPlaceGroups.get(i).getIsBookmarked())
+            );
         }
         clearAllMarkers();
         binding.map.getOverlays().addAll(newMarkers);

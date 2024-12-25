@@ -11,6 +11,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.KeyEvent
 import android.view.View
 import android.widget.AdapterView
 import android.widget.EditText
@@ -425,11 +426,20 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
         val dialog = Dialog(requireActivity())
         dialog.setContentView(R.layout.dialog_select_language)
-        dialog.setCancelable(false)
+        dialog.setCancelable(true)// Allow dialog to close with the back button
         dialog.window?.setLayout(
             (resources.displayMetrics.widthPixels * 0.90).toInt(),
             (resources.displayMetrics.heightPixels * 0.90).toInt()
         )
+        // Handle back button explicitly to dismiss the dialog
+        dialog.setOnKeyListener { _, keyCode, event ->
+            if (keyCode == KeyEvent.KEYCODE_BACK && event.action == KeyEvent.ACTION_UP) {
+                dialog.dismiss() // Close the dialog when the back button is pressed
+                true
+            } else {
+                false
+            }
+        }
         dialog.show()
 
         val editText: EditText = dialog.findViewById(R.id.search_language)
@@ -471,10 +481,12 @@ class SettingsFragment : PreferenceFragmentCompat() {
             if (keyListPreference == "appUiDefaultLanguagePref") {
                 appUiLanguageListPreference?.summary = defLocale.getDisplayLanguage(defLocale)
                 setLocale(requireActivity(), lCode)
-                requireActivity().recreate()
                 val intent = Intent(requireActivity(), MainActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
+                requireActivity().finish()
                 startActivity(intent)
-            } else {
+            }
+                else {
                 descriptionLanguageListPreference?.summary = defLocale.getDisplayLanguage(defLocale)
             }
             dialog.dismiss()

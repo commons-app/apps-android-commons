@@ -107,6 +107,8 @@
   <string name="menu_from_camera">Фотографиши</string>
   <string name="menu_nearby">У близини</string>
   <string name="provider_contributions">Моја отпремања</string>
+  <string name="menu_copy_link">Копирај везу</string>
+  <string name="menu_link_copied">Веза је копирана</string>
   <string name="menu_share">Дели</string>
   <string name="menu_view_file_page">Види страницу датотеке</string>
   <string name="share_title_hint">Опис (обавезно)</string>

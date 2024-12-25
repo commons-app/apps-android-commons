@@ -521,7 +521,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
                 getString(R.string.duplicate_file_name),
                 String.format(Locale.getDefault(),
                     uploadTitleFormat,
-                    uploadItem.getFileName()),
+                    uploadItem.getFilename()),
                 getString(R.string.upload),
                 getString(R.string.cancel),
                 () -> {
@@ -714,7 +714,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
                 if (binding != null){
                     binding.backgroundImage.setImageURI(Uri.fromFile(new File(path)));
                 }
-                editableUploadItem.setContentUri(Uri.fromFile(new File(path)));
+                editableUploadItem.setContentAndMediaUri(Uri.fromFile(new File(path)));
                 callback.changeThumbnail(indexOfFragment,
                     path);
             } catch (Exception e) {
