@@ -258,7 +258,7 @@
   <string name="navigation_item_feedback">意見回饋</string>
   <string name="navigation_item_feedback_github">透過 GitHub 回饋</string>
   <string name="navigation_item_logout">登出</string>
-  <string name="navigation_item_info">教程</string>
+  <string name="navigation_item_info">教學</string>
   <string name="navigation_item_notification">通知</string>
   <string name="navigation_item_review">檢閱</string>
   <string name="no_description_found">找不到描述</string>
@@ -306,7 +306,7 @@
   <string name="about_rate_us">為我們評分</string>
   <string name="about_faq">常見問題</string>
   <string name="user_guide">使用者指南</string>
-  <string name="welcome_skip_button">跳過敎程</string>
+  <string name="welcome_skip_button">跳過教學</string>
   <string name="no_internet">網路不可用</string>
   <string name="error_notifications">檢索通知時出錯</string>
   <string name="error_review">獲取圖像以供審核時出錯。按刷新重試。</string>
@@ -350,7 +350,7 @@
   <string name="question">問題</string>
   <string name="result">結果</string>
   <string name="quiz_back_button">如果您持續上傳需要刪除的圖片，您的帳號可能會被封禁。你確定要結束測驗嗎？</string>
-  <string name="quiz_alert_message">您上傳的圖片已有%1$s遭到刪除。如果您持續上傳需要刪除的圖片，您的帳號可能會遭到封禁。\n\n您要不要重新閱覽教程，然後再做一次測驗，以幫助您分辨哪些類型的圖片可以上傳、哪些不可以？</string>
+  <string name="quiz_alert_message">您上傳的圖片已有%1$s遭到刪除。如果您持續上傳需要刪除的圖片，您的帳號可能會遭到封鎖。\n\n您要不要重新閱覽教學，然後再做一次測驗，以幫助您分辨哪些類型的圖片可以上傳、哪些不可以？</string>
   <string name="selfie_answer">自拍照沒有百科價值。除非維基百科上已經有介紹您的條目，否則請不要上傳您自己的照片。</string>
   <string name="taj_mahal_answer">在大多數的國家，上傳古蹟或室外景的照片是沒有問題的。請留意，臨時性的戶外裝置藝術常常是有著作權保護的，不可上傳。</string>
   <string name="screenshot_answer">網站的螢幕截圖被視為衍生作品，受到該網站本身所有著作權保護。這些截圖可以在獲得原作者許可之後使用。若未經許可，您根據他們的作品而創作的任何藝術品，在法律上均會被視為未經原作者許可的複製品。</string>
