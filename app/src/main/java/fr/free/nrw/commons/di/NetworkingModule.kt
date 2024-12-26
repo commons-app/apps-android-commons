@@ -25,6 +25,7 @@ import fr.free.nrw.commons.media.PageMediaInterface
 import fr.free.nrw.commons.media.WikidataMediaInterface
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient
 import fr.free.nrw.commons.mwapi.UserInterface
+import fr.free.nrw.commons.network.APIService
 import fr.free.nrw.commons.notification.NotificationInterface
 import fr.free.nrw.commons.review.ReviewInterface
 import fr.free.nrw.commons.upload.UploadInterface
@@ -42,6 +43,8 @@ import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import okhttp3.logging.HttpLoggingInterceptor.Level
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import timber.log.Timber
 import java.io.File
 import java.util.concurrent.TimeUnit
@@ -295,6 +298,32 @@ class NetworkingModule {
     fun provideLanguageWikipediaSite(): WikiSite =
         WikiSite.forDefaultLocaleLanguageCode()
 
+    @Provides
+    @Named("tool_wmflabs_base_url")
+    fun provideToolWmflabsBaseUrl() : HttpUrl =
+        "https://tools.wmflabs.org/commons-android-app/tool-commons-android-app/".toHttpUrlOrNull()!!
+
+    @Singleton
+    @Provides
+    @Named("tool_wmflabs_retrofit")
+    fun provideToolWmflabsBaseUrlRetrofit(
+        @Named("tool_wmflabs_base_url") baseUrl: HttpUrl,
+        okHttpClient: OkHttpClient
+    ) : Retrofit {
+        return Retrofit.Builder()
+            .baseUrl(baseUrl)
+            .client(okHttpClient)
+            .addConverterFactory(GsonConverterFactory.create())
+//            .addCallAdapterFactory(CoroutineCallAdapterFactory())
+            .build()
+    }
+
+    @Provides
+    @Singleton
+    fun provideAPIService(
+        @Named("tool_wmflabs_retrofit") retrofit: Retrofit
+    ): APIService = retrofit.create(APIService::class.java)
+    
     companion object {
         private const val WIKIDATA_SPARQL_QUERY_URL = "https://query.wikidata.org/sparql"
         private const val TOOLS_FORGE_URL =
