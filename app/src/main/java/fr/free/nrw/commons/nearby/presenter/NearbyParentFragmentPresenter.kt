@@ -52,6 +52,9 @@ class NearbyParentFragmentPresenter
 
     private var nearbyParentFragmentView: NearbyParentFragmentContract.View = DUMMY
 
+    private var placeSearchJob: Job? = null
+    private var isSearchInProgress = false
+
     private val clickedPlaces = CopyOnWriteArrayList<Place>()
 
     /**
@@ -489,17 +492,21 @@ class NearbyParentFragmentPresenter
         }
     }
 
-    @MainThread
-    override fun updateMapMarkersToController(baseMarkers: MutableList<BaseMarker>) {
-        NearbyController.markerLabelList.clear()
-        for (i in baseMarkers.indices) {
-            val nearbyBaseMarker = baseMarkers[i]
-            NearbyController.markerLabelList.add(
-                MarkerPlaceGroup(
-                    bookmarkLocationDao.findBookmarkLocation(nearbyBaseMarker.place),
-                    nearbyBaseMarker.place
-                )
-            )
+    @Override
+    override fun handleMapScrolled(scope: LifecycleCoroutineScope?) {
+        scope ?: return
+        placeSearchJob?.cancel()
+        placeSearchJob = scope.launch {
+            delay(SCROLL_DELAY)
+            if (!isSearchInProgress) {
+                isSearchInProgress = true; // search executing flag
+                // Start Search
+                try {
+                    searchInTheArea();
+                } finally {
+                    isSearchInProgress = false;
+                }
+            }
         }
     }
 
@@ -575,6 +582,7 @@ class NearbyParentFragmentPresenter
     }
 
     companion object {
+        private const val SCROLL_DELAY = 800L; // Delay for debounce of onscroll, in milliseconds.
         private val DUMMY = Proxy.newProxyInstance(
             NearbyParentFragmentContract.View::class.java.getClassLoader(),
             arrayOf<Class<*>>(NearbyParentFragmentContract.View::class.java),

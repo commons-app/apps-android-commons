@@ -55,6 +55,7 @@ import androidx.appcompat.app.AlertDialog.Builder;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
+import androidx.lifecycle.LifecycleCoroutineScope;
 import androidx.lifecycle.LifecycleOwnerKt;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -208,6 +209,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     private boolean isNetworkErrorOccurred;
     private Snackbar snackbar;
     private View view;
+    private LifecycleCoroutineScope scope;
     private NearbyParentFragmentPresenter presenter;
     private boolean isDarkTheme;
     private boolean isFABsExpanded;
@@ -231,10 +233,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     private Place nearestPlace;
     private volatile boolean stopQuery;
 
-    private boolean isSearchInProgress = false;
     private final Handler searchHandler = new Handler();
     private Runnable searchRunnable;
-    private static final long SCROLL_DELAY = 800; // Delay for debounce of onscroll, in milliseconds.
 
     private LatLng updatedLatLng;
     private boolean searchable;
@@ -341,6 +341,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         view = binding.getRoot();
 
         initNetworkBroadCastReceiver();
+        scope = LifecycleOwnerKt.getLifecycleScope(getViewLifecycleOwner());
         presenter = new NearbyParentFragmentPresenter(bookmarkLocationDao, placesRepository, nearbyController);
         progressDialog = new ProgressDialog(getActivity());
         progressDialog.setCancelable(false);
@@ -471,28 +472,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         binding.map.addMapListener(new MapListener() {
             @Override
             public boolean onScroll(ScrollEvent event) {
-
-                // Remove any pending search runnables
-                searchHandler.removeCallbacks(searchRunnable);
-
-                // Set a runnable to call the Search after a delay
-                searchRunnable = new Runnable() {
-                    @Override
-                    public void run() {
-                        if (!isSearchInProgress) {
-                            isSearchInProgress = true; // search executing flag
-                            // Start Search
-                            try {
-                                presenter.searchInTheArea();
-                            } finally {
-                                isSearchInProgress = false;
-                            }
-                        }
-                    }
-                };
-                // post runnable with configured SCROLL_DELAY
-                searchHandler.postDelayed(searchRunnable, SCROLL_DELAY);
-
+                presenter.handleMapScrolled(scope);
                 return true;
             }
 
@@ -1477,8 +1457,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
      */
     private void updateMapMarkers(final List<Place> nearbyPlaces, final LatLng curLatLng,
         final boolean shouldUpdateSelectedMarker) {
-        presenter.updateMapMarkers(nearbyPlaces, curLatLng,
-            LifecycleOwnerKt.getLifecycleScope(getViewLifecycleOwner()));
+        presenter.updateMapMarkers(nearbyPlaces, curLatLng, scope);
     }
 
 

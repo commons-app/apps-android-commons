@@ -122,8 +122,6 @@ public interface NearbyParentFragmentContract {
         void filterByMarkerType(List<Label> selectedLabels, int state, boolean filterForPlaceState,
             boolean filterForAllNoneType);
 
-        void updateMapMarkersToController(List<BaseMarker> baseMarkers);
-
         void searchViewGainedFocus();
 
         void setCheckboxUnknown();
@@ -131,5 +129,7 @@ public interface NearbyParentFragmentContract {
         void setAdvancedQuery(String query);
 
         void toggleBookmarkedStatus(Place place);
+
+        void handleMapScrolled(LifecycleCoroutineScope scope);
     }
 }
