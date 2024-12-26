@@ -492,6 +492,12 @@ class NearbyParentFragmentPresenter
         }
     }
 
+    /**
+     * Handles the map scroll user action for `NearbyParentFragment`
+     *
+     * @param scope The lifecycle scope of `nearbyParentFragment`'s `viewLifecycleOwner`
+     * @param isNetworkAvailable Whether to load pins from the internet or from the cache.
+     */
     @Override
     override fun handleMapScrolled(scope: LifecycleCoroutineScope?, isNetworkAvailable: Boolean) {
         scope ?: return

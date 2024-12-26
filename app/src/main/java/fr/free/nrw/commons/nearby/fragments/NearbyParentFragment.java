@@ -1039,6 +1039,11 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         };
     }
 
+    /**
+     * Updates the internet unavailable snackbar to reflect whether cached pins are shown.
+     *
+     * @param offlinePinsShown Whether there are pins currently being shown on map.
+     */
     @Override
     public void updateSnackbar(final boolean offlinePinsShown) {
         if (!isNetworkErrorOccurred || snackbar == null) {
@@ -1065,6 +1070,11 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         }
     }
 
+    /**
+     * Returns the location of the top right corner of the map view.
+     *
+     * @return a `LatLng` object denoting the location of the top right corner of the map.
+     */
     @Override
     public LatLng getScreenTopRight() {
         final IGeoPoint screenTopRight = binding.map.getProjection()
@@ -1073,6 +1083,11 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             screenTopRight.getLatitude(), screenTopRight.getLongitude(), 0);
     }
 
+    /**
+     * Returns the location of the bottom left corner of the map view.
+     *
+     * @return a `LatLng` object denoting the location of the bottom left corner of the map.
+     */
     @Override
     public LatLng getScreenBottomLeft() {
         final IGeoPoint screenBottomLeft = binding.map.getProjection()

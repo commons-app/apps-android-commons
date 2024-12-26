@@ -40,6 +40,13 @@ public class PlacesRepository {
         return localDataSource.fetchPlace(entityID);
     }
 
+    /**
+     * Retrieves a list of places within the geographical area specified by map's opposite corners.
+     *
+     * @param mapBottomLeft Bottom left corner of the map.
+     * @param mapTopRight Top right corner of the map.
+     * @return The list of saved places within the map's view.
+     */
     public List<Place> fetchPlaces(final LatLng mapBottomLeft, final LatLng mapTopRight) {
         return localDataSource.fetchPlaces(mapBottomLeft, mapTopRight);
     }
