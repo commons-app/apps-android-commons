@@ -55,6 +55,7 @@ import androidx.appcompat.app.AlertDialog.Builder;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
+import androidx.lifecycle.LifecycleCoroutineScope;
 import androidx.lifecycle.LifecycleOwnerKt;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -64,7 +65,6 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior.BottomSheetCa
 import com.google.android.material.snackbar.Snackbar;
 import com.jakewharton.rxbinding2.view.RxView;
 import com.jakewharton.rxbinding3.appcompat.RxSearchView;
-import fr.free.nrw.commons.BaseMarker;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.CommonsApplication.BaseLogoutListener;
 import fr.free.nrw.commons.MapController.NearbyPlacesInfo;
@@ -208,6 +208,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     private boolean isNetworkErrorOccurred;
     private Snackbar snackbar;
     private View view;
+    private LifecycleCoroutineScope scope;
     private NearbyParentFragmentPresenter presenter;
     private boolean isDarkTheme;
     private boolean isFABsExpanded;
@@ -231,10 +232,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     private Place nearestPlace;
     private volatile boolean stopQuery;
 
-    private boolean isSearchInProgress = false;
     private final Handler searchHandler = new Handler();
     private Runnable searchRunnable;
-    private static final long SCROLL_DELAY = 800; // Delay for debounce of onscroll, in milliseconds.
 
     private LatLng updatedLatLng;
     private boolean searchable;
@@ -341,6 +340,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         view = binding.getRoot();
 
         initNetworkBroadCastReceiver();
+        scope = LifecycleOwnerKt.getLifecycleScope(getViewLifecycleOwner());
         presenter = new NearbyParentFragmentPresenter(bookmarkLocationDao, placesRepository, nearbyController);
         progressDialog = new ProgressDialog(getActivity());
         progressDialog.setCancelable(false);
@@ -471,28 +471,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         binding.map.addMapListener(new MapListener() {
             @Override
             public boolean onScroll(ScrollEvent event) {
-
-                // Remove any pending search runnables
-                searchHandler.removeCallbacks(searchRunnable);
-
-                // Set a runnable to call the Search after a delay
-                searchRunnable = new Runnable() {
-                    @Override
-                    public void run() {
-                        if (!isSearchInProgress) {
-                            isSearchInProgress = true; // search executing flag
-                            // Start Search
-                            try {
-                                presenter.searchInTheArea();
-                            } finally {
-                                isSearchInProgress = false;
-                            }
-                        }
-                    }
-                };
-                // post runnable with configured SCROLL_DELAY
-                searchHandler.postDelayed(searchRunnable, SCROLL_DELAY);
-
+                presenter.handleMapScrolled(scope, !isNetworkErrorOccurred);
                 return true;
             }
 
@@ -1061,6 +1040,23 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     }
 
     /**
+     * Updates the internet unavailable snackbar to reflect whether cached pins are shown.
+     *
+     * @param offlinePinsShown Whether there are pins currently being shown on map.
+     */
+    @Override
+    public void updateSnackbar(final boolean offlinePinsShown) {
+        if (!isNetworkErrorOccurred || snackbar == null) {
+            return;
+        }
+        if (offlinePinsShown) {
+            snackbar.setText(R.string.nearby_showing_pins_offline);
+        } else {
+            snackbar.setText(R.string.no_internet);
+        }
+    }
+
+    /**
      * Hide or expand bottom sheet according to states of all sheets
      */
     @Override
@@ -1074,16 +1070,38 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         }
     }
 
+    /**
+     * Returns the location of the top right corner of the map view.
+     *
+     * @return a `LatLng` object denoting the location of the top right corner of the map.
+     */
+    @Override
+    public LatLng getScreenTopRight() {
+        final IGeoPoint screenTopRight = binding.map.getProjection()
+            .fromPixels(binding.map.getWidth(), 0);
+        return new LatLng(
+            screenTopRight.getLatitude(), screenTopRight.getLongitude(), 0);
+    }
+
+    /**
+     * Returns the location of the bottom left corner of the map view.
+     *
+     * @return a `LatLng` object denoting the location of the bottom left corner of the map.
+     */
+    @Override
+    public LatLng getScreenBottomLeft() {
+        final IGeoPoint screenBottomLeft = binding.map.getProjection()
+            .fromPixels(0, binding.map.getHeight());
+        return new LatLng(
+            screenBottomLeft.getLatitude(), screenBottomLeft.getLongitude(), 0);
+    }
+
     @Override
     public void populatePlaces(final LatLng currentLatLng) {
-            IGeoPoint screenTopRight = binding.map.getProjection()
-            .fromPixels(binding.map.getWidth(), 0);
-        IGeoPoint screenBottomLeft = binding.map.getProjection()
-            .fromPixels(0, binding.map.getHeight());
-        LatLng screenTopRightLatLng = new LatLng(
-            screenBottomLeft.getLatitude(), screenBottomLeft.getLongitude(), 0);
-        LatLng screenBottomLeftLatLng = new LatLng(
-            screenTopRight.getLatitude(), screenTopRight.getLongitude(), 0);
+        // these two variables have historically been assigned values the opposite of what their
+        // names imply, and quite some existing code depends on this fact
+        LatLng screenTopRightLatLng = getScreenBottomLeft();
+        LatLng screenBottomLeftLatLng = getScreenTopRight();
 
         // When the nearby fragment is opened immediately upon app launch, the {screenTopRightLatLng}
         // and {screenBottomLeftLatLng} variables return {LatLng(0.0,0.0)} as output.
@@ -1136,14 +1154,10 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             populatePlaces(currentLatLng);
             return;
         }
-        IGeoPoint screenTopRight = binding.map.getProjection()
-            .fromPixels(binding.map.getWidth(), 0);
-        IGeoPoint screenBottomLeft = binding.map.getProjection()
-            .fromPixels(0, binding.map.getHeight());
-        LatLng screenTopRightLatLng = new LatLng(
-            screenBottomLeft.getLatitude(), screenBottomLeft.getLongitude(), 0);
-        LatLng screenBottomLeftLatLng = new LatLng(
-            screenTopRight.getLatitude(), screenTopRight.getLongitude(), 0);
+        // these two variables have historically been assigned values the opposite of what their
+        // names imply, and quite some existing code depends on this fact
+        final LatLng screenTopRightLatLng = getScreenBottomLeft();
+        final LatLng screenBottomLeftLatLng = getScreenTopRight();
 
         if (currentLatLng.equals(lastFocusLocation) || lastFocusLocation == null
             || recenterToUserLocation) { // Means we are checking around current location
@@ -1477,8 +1491,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
      */
     private void updateMapMarkers(final List<Place> nearbyPlaces, final LatLng curLatLng,
         final boolean shouldUpdateSelectedMarker) {
-        presenter.updateMapMarkers(nearbyPlaces, curLatLng,
-            LifecycleOwnerKt.getLifecycleScope(getViewLifecycleOwner()));
+        presenter.updateMapMarkers(nearbyPlaces, curLatLng, scope);
     }
 
 
@@ -1865,20 +1878,24 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                 clickedMarker.closeInfoWindow();
             }
             clickedMarker = marker1;
-            binding.bottomSheetDetails.dataCircularProgress.setVisibility(View.VISIBLE);
-            binding.bottomSheetDetails.icon.setVisibility(View.GONE);
-            binding.bottomSheetDetails.wikiDataLl.setVisibility(View.GONE);
-            if (Objects.equals(place.name, "")) {
-                getPlaceData(place.getWikiDataEntityId(), place, marker1, isBookMarked);
+            if (!isNetworkErrorOccurred) {
+                binding.bottomSheetDetails.dataCircularProgress.setVisibility(View.VISIBLE);
+                binding.bottomSheetDetails.icon.setVisibility(View.GONE);
+                binding.bottomSheetDetails.wikiDataLl.setVisibility(View.GONE);
+                if (Objects.equals(place.name, "")) {
+                    getPlaceData(place.getWikiDataEntityId(), place, marker1, isBookMarked);
+                } else {
+                    marker.showInfoWindow();
+                    binding.bottomSheetDetails.dataCircularProgress.setVisibility(View.GONE);
+                    binding.bottomSheetDetails.icon.setVisibility(View.VISIBLE);
+                    binding.bottomSheetDetails.wikiDataLl.setVisibility(View.VISIBLE);
+                    passInfoToSheet(place);
+                    hideBottomSheet();
+                }
+                bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
             } else {
                 marker.showInfoWindow();
-                binding.bottomSheetDetails.dataCircularProgress.setVisibility(View.GONE);
-                binding.bottomSheetDetails.icon.setVisibility(View.VISIBLE);
-                binding.bottomSheetDetails.wikiDataLl.setVisibility(View.VISIBLE);
-                passInfoToSheet(place);
-                hideBottomSheet();
             }
-            bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
             return true;
         });
         return marker;
