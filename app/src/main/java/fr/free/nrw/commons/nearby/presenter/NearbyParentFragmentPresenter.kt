@@ -494,27 +494,29 @@ class NearbyParentFragmentPresenter
     }
 
     @Override
-    override fun handleMapScrolled(scope: LifecycleCoroutineScope?) {
+    override fun handleMapScrolled(scope: LifecycleCoroutineScope?, isNetworkAvailable: Boolean) {
         scope ?: return
 
         placeSearchJob?.cancel()
-        placeSearchJob = scope.launch(Dispatchers.Main) {
-            delay(SCROLL_DELAY)
-            if (!isSearchInProgress) {
-                isSearchInProgress = true; // search executing flag
-                // Start Search
-                try {
-                    searchInTheArea();
-                } finally {
-                    isSearchInProgress = false;
+        localPlaceSearchJob?.cancel()
+        if (isNetworkAvailable) {
+            placeSearchJob = scope.launch(Dispatchers.Main) {
+                delay(SCROLL_DELAY)
+                if (!isSearchInProgress) {
+                    isSearchInProgress = true; // search executing flag
+                    // Start Search
+                    try {
+                        searchInTheArea();
+                    } finally {
+                        isSearchInProgress = false;
+                    }
                 }
             }
-        }
+        } else {
+            localPlaceSearchJob = scope.launch {
+                delay(LOCAL_SCROLL_DELAY)
 
-        localPlaceSearchJob?.cancel()
-        localPlaceSearchJob = scope.launch {
-            delay(LOCAL_SCROLL_DELAY)
-
+            }
         }
     }
 

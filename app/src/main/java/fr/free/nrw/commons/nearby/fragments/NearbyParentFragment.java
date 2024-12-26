@@ -472,7 +472,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         binding.map.addMapListener(new MapListener() {
             @Override
             public boolean onScroll(ScrollEvent event) {
-                presenter.handleMapScrolled(scope);
+                presenter.handleMapScrolled(scope, !isNetworkErrorOccurred);
                 return true;
             }
 
@@ -1055,15 +1055,27 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     }
 
     @Override
-    public void populatePlaces(final LatLng currentLatLng) {
-            IGeoPoint screenTopRight = binding.map.getProjection()
+    public LatLng getScreenTopRight() {
+        final IGeoPoint screenTopRight = binding.map.getProjection()
             .fromPixels(binding.map.getWidth(), 0);
-        IGeoPoint screenBottomLeft = binding.map.getProjection()
-            .fromPixels(0, binding.map.getHeight());
-        LatLng screenTopRightLatLng = new LatLng(
-            screenBottomLeft.getLatitude(), screenBottomLeft.getLongitude(), 0);
-        LatLng screenBottomLeftLatLng = new LatLng(
+        return new LatLng(
             screenTopRight.getLatitude(), screenTopRight.getLongitude(), 0);
+    }
+
+    @Override
+    public LatLng getScreenBottomLeft() {
+        final IGeoPoint screenBottomLeft = binding.map.getProjection()
+            .fromPixels(0, binding.map.getHeight());
+        return new LatLng(
+            screenBottomLeft.getLatitude(), screenBottomLeft.getLongitude(), 0);
+    }
+
+    @Override
+    public void populatePlaces(final LatLng currentLatLng) {
+        // these two variables have historically been assigned values the opposite of what their
+        // names imply, and quite some existing code depends on this fact
+        LatLng screenTopRightLatLng = getScreenBottomLeft();
+        LatLng screenBottomLeftLatLng = getScreenTopRight();
 
         // When the nearby fragment is opened immediately upon app launch, the {screenTopRightLatLng}
         // and {screenBottomLeftLatLng} variables return {LatLng(0.0,0.0)} as output.
@@ -1116,14 +1128,10 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             populatePlaces(currentLatLng);
             return;
         }
-        IGeoPoint screenTopRight = binding.map.getProjection()
-            .fromPixels(binding.map.getWidth(), 0);
-        IGeoPoint screenBottomLeft = binding.map.getProjection()
-            .fromPixels(0, binding.map.getHeight());
-        LatLng screenTopRightLatLng = new LatLng(
-            screenBottomLeft.getLatitude(), screenBottomLeft.getLongitude(), 0);
-        LatLng screenBottomLeftLatLng = new LatLng(
-            screenTopRight.getLatitude(), screenTopRight.getLongitude(), 0);
+        // these two variables have historically been assigned values the opposite of what their
+        // names imply, and quite some existing code depends on this fact
+        final LatLng screenTopRightLatLng = getScreenBottomLeft();
+        final LatLng screenBottomLeftLatLng = getScreenTopRight();
 
         if (currentLatLng.equals(lastFocusLocation) || lastFocusLocation == null
             || recenterToUserLocation) { // Means we are checking around current location

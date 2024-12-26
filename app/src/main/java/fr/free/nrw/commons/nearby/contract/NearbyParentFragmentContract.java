@@ -91,6 +91,10 @@ public interface NearbyParentFragmentContract {
 
         LatLng getMapFocus();
 
+        LatLng getScreenTopRight();
+
+        LatLng getScreenBottomLeft();
+
         boolean isAdvancedQueryFragmentVisible();
 
         void showHideAdvancedQueryFragment(boolean shouldShow);
@@ -130,6 +134,6 @@ public interface NearbyParentFragmentContract {
 
         void toggleBookmarkedStatus(Place place);
 
-        void handleMapScrolled(LifecycleCoroutineScope scope);
+        void handleMapScrolled(LifecycleCoroutineScope scope, boolean isNetworkAvailable);
     }
 }
