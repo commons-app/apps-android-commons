@@ -33,7 +33,7 @@ public abstract class PlaceDao {
     @Query("SELECT * from place WHERE entityID=:entity")
     public abstract Place getPlace(String entity);
 
-    @Query("SELECT * from place WHERE latitude>=:latBegin AND longitude>=:lngBegin "
+    @Query("SELECT * from place WHERE name!='' AND latitude>=:latBegin AND longitude>=:lngBegin "
         + "AND latitude<:latEnd AND longitude<:lngEnd")
     public abstract List<Place> fetchPlaces(double latBegin, double lngBegin,
         double latEnd, double lngEnd);

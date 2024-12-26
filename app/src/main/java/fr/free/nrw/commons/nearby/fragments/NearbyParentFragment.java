@@ -1852,20 +1852,24 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                 clickedMarker.closeInfoWindow();
             }
             clickedMarker = marker1;
-            binding.bottomSheetDetails.dataCircularProgress.setVisibility(View.VISIBLE);
-            binding.bottomSheetDetails.icon.setVisibility(View.GONE);
-            binding.bottomSheetDetails.wikiDataLl.setVisibility(View.GONE);
-            if (Objects.equals(place.name, "")) {
-                getPlaceData(place.getWikiDataEntityId(), place, marker1, isBookMarked);
+            if (!isNetworkErrorOccurred) {
+                binding.bottomSheetDetails.dataCircularProgress.setVisibility(View.VISIBLE);
+                binding.bottomSheetDetails.icon.setVisibility(View.GONE);
+                binding.bottomSheetDetails.wikiDataLl.setVisibility(View.GONE);
+                if (Objects.equals(place.name, "")) {
+                    getPlaceData(place.getWikiDataEntityId(), place, marker1, isBookMarked);
+                } else {
+                    marker.showInfoWindow();
+                    binding.bottomSheetDetails.dataCircularProgress.setVisibility(View.GONE);
+                    binding.bottomSheetDetails.icon.setVisibility(View.VISIBLE);
+                    binding.bottomSheetDetails.wikiDataLl.setVisibility(View.VISIBLE);
+                    passInfoToSheet(place);
+                    hideBottomSheet();
+                }
+                bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
             } else {
                 marker.showInfoWindow();
-                binding.bottomSheetDetails.dataCircularProgress.setVisibility(View.GONE);
-                binding.bottomSheetDetails.icon.setVisibility(View.VISIBLE);
-                binding.bottomSheetDetails.wikiDataLl.setVisibility(View.VISIBLE);
-                passInfoToSheet(place);
-                hideBottomSheet();
             }
-            bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
             return true;
         });
         return marker;

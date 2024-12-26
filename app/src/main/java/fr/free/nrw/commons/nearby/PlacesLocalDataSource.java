@@ -5,6 +5,7 @@ import io.reactivex.Completable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
+import timber.log.Timber;
 
 /**
  * The LocalDataSource class for Places
@@ -29,7 +30,7 @@ public class PlacesLocalDataSource {
         return placeDao.getPlace(entityID);
     }
 
-    public List<Place> fetchPlaces(final LatLng mapTopRight, final LatLng mapBottomLeft) {
+    public List<Place> fetchPlaces(final LatLng mapBottomLeft, final LatLng mapTopRight) {
         class Constraint {
 
             final double latBegin;

@@ -512,9 +512,22 @@ class NearbyParentFragmentPresenter
                 }
             }
         } else {
-            localPlaceSearchJob = scope.launch {
+            loadPlacesDataAyncJob?.cancel()
+            localPlaceSearchJob = scope.launch(Dispatchers.IO) {
                 delay(LOCAL_SCROLL_DELAY)
-
+                val mapFocus = nearbyParentFragmentView.mapFocus
+                val markerPlaceGroups = placesRepository.fetchPlaces(
+                    nearbyParentFragmentView.screenBottomLeft,
+                    nearbyParentFragmentView.screenTopRight
+                ).sortedBy { it.getDistanceInDouble(mapFocus) }.take(NearbyController.MAX_RESULTS)
+                    .map {
+                        MarkerPlaceGroup(
+                            bookmarkLocationDao.findBookmarkLocation(it), it
+                        )
+                    }
+                ensureActive()
+                NearbyController.currentLocation = mapFocus
+                schedulePlacesUpdate(markerPlaceGroups, force = true)
             }
         }
     }
