@@ -4,7 +4,6 @@ import android.location.Location
 import android.view.View
 import androidx.annotation.MainThread
 import androidx.lifecycle.LifecycleCoroutineScope
-import fr.free.nrw.commons.BaseMarker
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.location.LatLng

@@ -40,9 +40,8 @@ public class PlacesRepository {
         return localDataSource.fetchPlace(entityID);
     }
 
-    public List<Place> fetchPlaces(final double latBegin, final double lngBegin,
-        final double latEnd, final double lngEnd) {
-        return localDataSource.fetchPlaces(latBegin, lngBegin, latEnd, lngEnd);
+    public List<Place> fetchPlaces(final LatLng mapBottomLeft, final LatLng mapTopRight) {
+        return localDataSource.fetchPlaces(mapBottomLeft, mapTopRight);
     }
 
     /**

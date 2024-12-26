@@ -1,6 +1,8 @@
 package fr.free.nrw.commons.nearby;
 
+import fr.free.nrw.commons.location.LatLng;
 import io.reactivex.Completable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
 
@@ -27,9 +29,71 @@ public class PlacesLocalDataSource {
         return placeDao.getPlace(entityID);
     }
 
-    public List<Place> fetchPlaces(final double latBegin, final double lngBegin,
-        final double latEnd, final double lngEnd) {
-        return placeDao.fetchPlaces(latBegin, lngBegin, latEnd, lngEnd);
+    public List<Place> fetchPlaces(final LatLng mapTopRight, final LatLng mapBottomLeft) {
+        class Constraint {
+
+            final double latBegin;
+            final double lngBegin;
+            final double latEnd;
+            final double lngEnd;
+
+            public Constraint(final double latBegin, final double lngBegin, final double latEnd,
+                final double lngEnd) {
+                this.latBegin = latBegin;
+                this.lngBegin = lngBegin;
+                this.latEnd = latEnd;
+                this.lngEnd = lngEnd;
+            }
+        }
+
+        final List<Constraint> constraints = new ArrayList<>();
+
+        if (mapTopRight.getLatitude() < mapBottomLeft.getLatitude()) {
+            if (mapTopRight.getLongitude() < mapBottomLeft.getLongitude()) {
+                constraints.add(
+                    new Constraint(mapBottomLeft.getLatitude(), mapBottomLeft.getLongitude(), 90.0,
+                        180.0));
+                constraints.add(new Constraint(mapBottomLeft.getLatitude(), -180.0, 90.0,
+                    mapTopRight.getLongitude()));
+                constraints.add(
+                    new Constraint(-90.0, mapBottomLeft.getLongitude(), mapTopRight.getLatitude(),
+                        180.0));
+                constraints.add(new Constraint(-90.0, -180.0, mapTopRight.getLatitude(),
+                    mapTopRight.getLongitude()));
+            } else {
+                constraints.add(
+                    new Constraint(mapBottomLeft.getLatitude(), mapBottomLeft.getLongitude(), 90.0,
+                        mapTopRight.getLongitude()));
+                constraints.add(
+                    new Constraint(-90.0, mapBottomLeft.getLongitude(), mapTopRight.getLatitude(),
+                        mapTopRight.getLongitude()));
+            }
+        } else {
+            if (mapTopRight.getLongitude() < mapBottomLeft.getLongitude()) {
+                constraints.add(
+                    new Constraint(mapBottomLeft.getLatitude(), mapBottomLeft.getLongitude(),
+                        mapTopRight.getLatitude(), 180.0));
+                constraints.add(
+                    new Constraint(mapBottomLeft.getLatitude(), -180.0, mapTopRight.getLatitude(),
+                        mapTopRight.getLongitude()));
+            } else {
+                constraints.add(
+                    new Constraint(mapBottomLeft.getLatitude(), mapBottomLeft.getLongitude(),
+                        mapTopRight.getLatitude(), mapTopRight.getLongitude()));
+            }
+        }
+
+        final List<Place> cachedPlaces = new ArrayList<>();
+        for (final Constraint constraint : constraints) {
+            cachedPlaces.addAll(placeDao.fetchPlaces(
+                constraint.latBegin,
+                constraint.lngBegin,
+                constraint.latEnd,
+                constraint.lngEnd
+            ));
+        }
+
+        return cachedPlaces;
     }
 
     /**
