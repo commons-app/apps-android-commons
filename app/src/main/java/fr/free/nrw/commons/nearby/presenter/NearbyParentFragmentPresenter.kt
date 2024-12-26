@@ -528,6 +528,9 @@ class NearbyParentFragmentPresenter
                 ensureActive()
                 NearbyController.currentLocation = mapFocus
                 schedulePlacesUpdate(markerPlaceGroups, force = true)
+                withContext(Dispatchers.Main) {
+                    nearbyParentFragmentView.updateSnackbar(!markerPlaceGroups.isEmpty())
+                }
             }
         }
     }

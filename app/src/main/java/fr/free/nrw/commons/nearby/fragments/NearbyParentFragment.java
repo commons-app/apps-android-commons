@@ -65,7 +65,6 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior.BottomSheetCa
 import com.google.android.material.snackbar.Snackbar;
 import com.jakewharton.rxbinding2.view.RxView;
 import com.jakewharton.rxbinding3.appcompat.RxSearchView;
-import fr.free.nrw.commons.BaseMarker;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.CommonsApplication.BaseLogoutListener;
 import fr.free.nrw.commons.MapController.NearbyPlacesInfo;
@@ -1038,6 +1037,18 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                 }
             }
         };
+    }
+
+    @Override
+    public void updateSnackbar(final boolean offlinePinsShown) {
+        if (!isNetworkErrorOccurred || snackbar == null) {
+            return;
+        }
+        if (offlinePinsShown) {
+            snackbar.setText(R.string.nearby_showing_pins_offline);
+        } else {
+            snackbar.setText(R.string.no_internet);
+        }
     }
 
     /**

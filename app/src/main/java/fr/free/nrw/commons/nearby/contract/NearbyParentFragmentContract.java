@@ -18,6 +18,8 @@ public interface NearbyParentFragmentContract {
 
         boolean isNetworkConnectionEstablished();
 
+        void updateSnackbar(boolean offlinePinsShown);
+
         void listOptionMenuItemClicked();
 
         void populatePlaces(LatLng currentLatLng);
