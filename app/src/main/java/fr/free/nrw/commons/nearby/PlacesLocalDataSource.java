@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.nearby;
 
 import io.reactivex.Completable;
+import java.util.List;
 import javax.inject.Inject;
 
 /**
@@ -24,6 +25,11 @@ public class PlacesLocalDataSource {
      */
     public Place fetchPlace(String entityID){
         return placeDao.getPlace(entityID);
+    }
+
+    public List<Place> fetchPlaces(final double latBegin, final double lngBegin,
+        final double latEnd, final double lngEnd) {
+        return placeDao.fetchPlaces(latBegin, lngBegin, latEnd, lngEnd);
     }
 
     /**

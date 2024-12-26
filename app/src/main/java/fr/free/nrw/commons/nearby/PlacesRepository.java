@@ -4,6 +4,7 @@ import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.location.LatLng;
 import io.reactivex.Completable;
 import io.reactivex.schedulers.Schedulers;
+import java.util.List;
 import javax.inject.Inject;
 
 /**
@@ -37,6 +38,11 @@ public class PlacesRepository {
      */
     public Place fetchPlace(String entityID){
         return localDataSource.fetchPlace(entityID);
+    }
+
+    public List<Place> fetchPlaces(final double latBegin, final double lngBegin,
+        final double latEnd, final double lngEnd) {
+        return localDataSource.fetchPlaces(latBegin, lngBegin, latEnd, lngEnd);
     }
 
     /**

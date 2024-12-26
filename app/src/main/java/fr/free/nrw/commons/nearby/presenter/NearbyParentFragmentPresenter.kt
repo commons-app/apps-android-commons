@@ -54,6 +54,7 @@ class NearbyParentFragmentPresenter
 
     private var placeSearchJob: Job? = null
     private var isSearchInProgress = false
+    private var localPlaceSearchJob: Job? = null
 
     private val clickedPlaces = CopyOnWriteArrayList<Place>()
 
@@ -495,8 +496,9 @@ class NearbyParentFragmentPresenter
     @Override
     override fun handleMapScrolled(scope: LifecycleCoroutineScope?) {
         scope ?: return
+
         placeSearchJob?.cancel()
-        placeSearchJob = scope.launch {
+        placeSearchJob = scope.launch(Dispatchers.Main) {
             delay(SCROLL_DELAY)
             if (!isSearchInProgress) {
                 isSearchInProgress = true; // search executing flag
@@ -507,6 +509,12 @@ class NearbyParentFragmentPresenter
                     isSearchInProgress = false;
                 }
             }
+        }
+
+        localPlaceSearchJob?.cancel()
+        localPlaceSearchJob = scope.launch {
+            delay(LOCAL_SCROLL_DELAY)
+
         }
     }
 
@@ -583,6 +591,7 @@ class NearbyParentFragmentPresenter
 
     companion object {
         private const val SCROLL_DELAY = 800L; // Delay for debounce of onscroll, in milliseconds.
+        private const val LOCAL_SCROLL_DELAY = 200L; // SCROLL_DELAY but for local db place search
         private val DUMMY = Proxy.newProxyInstance(
             NearbyParentFragmentContract.View::class.java.getClassLoader(),
             arrayOf<Class<*>>(NearbyParentFragmentContract.View::class.java),
