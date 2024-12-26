@@ -41,15 +41,18 @@ fun placeAdapterDelegate(
             showOrHideAndScrollToIfLast()
             onItemClick?.invoke(item)
         }
-        root.setOnFocusChangeListener { view1: View?, hasFocus: Boolean ->
+        root.setOnFocusChangeListener { _: View?, hasFocus: Boolean ->
+            val parentView = root.parent.parent.parent as? RelativeLayout
+            val bottomSheetBehavior = parentView?.let { BottomSheetBehavior.from(it) }
+
+            // Hide button layout if focus is lost, otherwise show it if it's not already visible
             if (!hasFocus && nearbyButtonLayout.buttonLayout.isShown) {
                 nearbyButtonLayout.buttonLayout.visibility = GONE
-            } else if (hasFocus && !nearbyButtonLayout.buttonLayout.isShown &&
-                BottomSheetBehavior.from(root.parent.parent.parent as RelativeLayout).state !=
-                BottomSheetBehavior.STATE_HIDDEN
-            ) {
-                showOrHideAndScrollToIfLast()
-                onItemClick?.invoke(item)
+            } else if (hasFocus && !nearbyButtonLayout.buttonLayout.isShown) {
+                if (bottomSheetBehavior?.state != BottomSheetBehavior.STATE_HIDDEN) {
+                    showOrHideAndScrollToIfLast()
+                    onItemClick?.invoke(item)
+                }
             }
         }
         nearbyButtonLayout.cameraButton.setOnClickListener { onCameraClicked(item, inAppCameraLocationPermissionLauncher, cameraPickLauncherForResult) }
