@@ -268,6 +268,7 @@ class CustomSelectorActivity :
      */
     private fun showWelcomeDialog() {
         val dialog = Dialog(this)
+        dialog.setCancelable(false)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setContentView(R.layout.custom_selector_info_dialog)
         (dialog.findViewById(R.id.btn_ok) as Button).setOnClickListener { dialog.dismiss() }
@@ -683,6 +684,7 @@ class CustomSelectorActivity :
      */
     private fun displayUploadLimitWarning() {
         val dialog = Dialog(this)
+        dialog.setCancelable(false)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setContentView(R.layout.custom_selector_limit_dialog)
         (dialog.findViewById(R.id.btn_dismiss_limit_warning) as Button).setOnClickListener { dialog.dismiss() }

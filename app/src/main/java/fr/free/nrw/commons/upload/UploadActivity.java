@@ -898,6 +898,7 @@ public class UploadActivity extends BaseActivity implements
             .setView(view)
             .setTitle(getString(R.string.multiple_files_depiction_header))
             .setMessage(getString(R.string.multiple_files_depiction))
+            .setCancelable(false)
             .setPositiveButton("OK", (dialog, which) -> {
                 if (checkBox.isChecked()) {
                     // Save the user's choice to not show the dialog again

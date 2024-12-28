@@ -161,7 +161,10 @@ class MoreBottomSheetFragment : BottomSheetDialogFragment() {
             override fun onFeedbackSubmit(feedback: Feedback) {
                 uploadFeedback(feedback)
             }
-        }).show()
+        }).apply {
+            setCancelable(false)
+            show()
+        }
     }
 
     /**

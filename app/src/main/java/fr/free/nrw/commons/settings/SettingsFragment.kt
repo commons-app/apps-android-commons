@@ -14,6 +14,7 @@ import android.text.TextWatcher
 import android.view.KeyEvent
 import android.view.View
 import android.widget.AdapterView
+import android.widget.Button
 import android.widget.EditText
 import android.widget.ListView
 import android.widget.TextView
@@ -333,24 +334,16 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
         val dialog = Dialog(requireActivity())
         dialog.setContentView(R.layout.dialog_select_language)
-        dialog.setCancelable(true)// Allow dialog to close with the back button
+        dialog.setCancelable(false)
         dialog.window?.setLayout(
             (resources.displayMetrics.widthPixels * 0.90).toInt(),
             (resources.displayMetrics.heightPixels * 0.90).toInt()
         )
-        // Handle back button explicitly to dismiss the dialog
-        dialog.setOnKeyListener { _, keyCode, event ->
-            if (keyCode == KeyEvent.KEYCODE_BACK && event.action == KeyEvent.ACTION_UP) {
-                dialog.dismiss() // Close the dialog when the back button is pressed
-                true
-            } else {
-                false
-            }
-        }
         dialog.show()
 
         val editText: EditText = dialog.findViewById(R.id.search_language)
         val listView: ListView = dialog.findViewById(R.id.language_list)
+        val cancelButton = dialog.findViewById<Button>(R.id.cancel_button)
         languageHistoryListView = dialog.findViewById(R.id.language_history_list)
         recentLanguagesTextView = dialog.findViewById(R.id.recent_searches)
         separator = dialog.findViewById(R.id.separator)
@@ -358,6 +351,8 @@ class SettingsFragment : PreferenceFragmentCompat() {
         setUpRecentLanguagesSection(recentLanguages, selectedLanguages)
 
         listView.adapter = languagesAdapter
+
+        cancelButton.setOnClickListener { dialog.dismiss() }
 
         editText.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(charSequence: CharSequence, start: Int, count: Int, after: Int) {
