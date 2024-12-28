@@ -9,6 +9,7 @@
 * Dr-Taher
 * Dr. Mohammed
 * FiberAhmed
+* Hhaboh162002
 * Kassem7899
 * LaMagiaaa
 * Meno25
@@ -153,6 +154,8 @@
   <string name="menu_from_camera">التقط صورة</string>
   <string name="menu_nearby">بالقرب من هنا</string>
   <string name="provider_contributions">مرفوعاتي</string>
+  <string name="menu_copy_link">نسخ الوصلة</string>
+  <string name="menu_link_copied">تَمَّ نَّسخ الوصلة إلى الحافظة</string>
   <string name="menu_share">انشرها</string>
   <string name="menu_view_file_page">عرض صفحة الملف</string>
   <string name="share_title_hint">العنوان (مطلوب)</string>
@@ -411,11 +414,13 @@
   <string name="delete">حذف</string>
   <string name="Achievements">الإنجازات</string>
   <string name="Profile">الملف الشخصي</string>
+  <string name="badges">أوسمة</string>
   <string name="statistics">إحصاءات</string>
   <string name="statistics_thanks">تم تلقي الشكر</string>
   <string name="statistics_featured">الصور المختارة</string>
   <string name="statistics_wikidata_edits">صور عبر \"الأماكن المجاورة\"</string>
   <string name="level">المستوى %d</string>
+  <string name="profileLevel">%s (المستوى %s)</string>
   <string name="images_uploaded">الصور المرفوعة</string>
   <string name="image_reverts">لم يتم إرجاع الصور</string>
   <string name="images_used_by_wiki">الصور المستخدمة</string>
@@ -447,6 +452,7 @@
   <string name="map_application_missing">لا يمكن العثور على تطبيق خرائط متوافق على جهازك; الرجاء تثبيت تطبيق خرائط لاستخدام هذه الميزة.</string>
   <string name="title_page_bookmarks_pictures">الصور</string>
   <string name="title_page_bookmarks_locations">المواقع</string>
+  <string name="title_page_bookmarks_categories">التصنيفات</string>
   <string name="menu_bookmark">إضافة إلى/إزالة من العلامات</string>
   <string name="provider_bookmarks">العلامات</string>
   <string name="bookmark_empty">أنت لم تضف أي علامات</string>
@@ -863,4 +869,9 @@
   <string name="red_pin">هذا المكان ليس له صورة بعد، اذهب والتقط واحدة!</string>
   <string name="green_pin">هذا المكان لديه صورة بالفعل.</string>
   <string name="grey_pin">الآن التحقق ما إذا كان هذا المكان لديه صورة.</string>
+  <string name="error_while_loading">خطأ أثناء التحميل</string>
+  <string name="no_usages_found">لم يتم العثور على حالات استخدام</string>
+  <string name="usages_on_commons_heading">كومنز</string>
+  <string name="usages_on_other_wikis_heading">مواقع ويكي أخرى</string>
+  <string name="file_usages_container_heading">حالات استخدام الملف</string>
 </resources>

@@ -99,6 +99,8 @@
   <string name="menu_from_camera">Fé na fòto</string>
   <string name="menu_nearby">Davzin</string>
   <string name="provider_contributions">Ij mè cariament</string>
+  <string name="menu_copy_link">Copié la liura</string>
+  <string name="menu_link_copied">La liura a l\'é stàita copià ant ël quàder dij feuj.</string>
   <string name="menu_share">Partagé</string>
   <string name="menu_view_file_page">Vëdde la pàgina dl\'archivi</string>
   <string name="share_title_hint">Legenda (obligatòria)</string>
@@ -395,6 +397,7 @@
   <string name="map_application_missing">Gnun-a aplicassion cartogràfica compatìbil a l\'é trovasse an sò angign. Për piasì, ch\'a na anstala un-a për dovré costa fonsionalità.</string>
   <string name="title_page_bookmarks_pictures">Plance</string>
   <string name="title_page_bookmarks_locations">Locassion</string>
+  <string name="title_page_bookmarks_categories">Categorìe</string>
   <string name="menu_bookmark">Gionté/Gavé dij marcapàgine</string>
   <string name="provider_bookmarks">Marcapàgine</string>
   <string name="bookmark_empty">A l\'ha giontà gnun marcapàgina</string>
@@ -796,4 +799,10 @@
   <string name="red_pin">Ës pòst a l\'ha ancor gnun-e fòto, ch\'a na pija un-a!</string>
   <string name="green_pin">Ës pòst a l\'ha già dle fòto.</string>
   <string name="grey_pin">An camin ch\'as verìfica si cost pòst -sì a l\'ha dle fòto.</string>
+  <string name="error_while_loading">Eror durant ël cariament</string>
+  <string name="no_usages_found">Gnun usagi trovà</string>
+  <string name="usages_on_commons_heading">Commons</string>
+  <string name="usages_on_other_wikis_heading">Àutre wiki</string>
+  <string name="bullet_point">•</string>
+  <string name="file_usages_container_heading">Usagi dl\'archivi</string>
 </resources>

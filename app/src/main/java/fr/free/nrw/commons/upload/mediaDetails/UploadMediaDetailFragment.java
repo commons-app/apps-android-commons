@@ -25,7 +25,7 @@ import androidx.annotation.Nullable;
 import androidx.exifinterface.media.ExifInterface;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import fr.free.nrw.commons.CameraPosition;
-import fr.free.nrw.commons.LocationPicker.LocationPicker;
+import fr.free.nrw.commons.locationpicker.LocationPicker;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.databinding.FragmentUploadMediaDetailFragmentBinding;
@@ -309,7 +309,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
      */
     private void showInfoAlert(int titleStringID, int messageStringId) {
         DialogUtil.showAlertDialog(getActivity(), getString(titleStringID),
-            getString(messageStringId), getString(android.R.string.ok), null, true);
+            getString(messageStringId), getString(android.R.string.ok), null);
     }
 
 
@@ -336,6 +336,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         BasicKvStore basicKvStore = new BasicKvStore(getActivity(), "IsAnyImageCancelled");
         if (!basicKvStore.getBoolean("IsAnyImageCancelled", false)) {
             SimilarImageDialogFragment newFragment = new SimilarImageDialogFragment();
+            newFragment.setCancelable(false);
             newFragment.setCallback(new SimilarImageDialogFragment.Callback() {
                 @Override
                 public void onPositiveResponse() {
@@ -397,7 +398,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
                 final boolean response = UploadActivity.nearbyPopupAnswers.get(nearbyPlace);
                 if (response) {
                     if (callback != null) {
-                        presenter.onUserConfirmedUploadIsOfPlace(nearbyPlace);
+                        presenter.onUserConfirmedUploadIsOfPlace(nearbyPlace, indexOfFragment);
                     }
                 }
             } else {
@@ -444,13 +445,14 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
                 () -> {
                     // Execute when user confirms the upload is of the specified place
                     UploadActivity.nearbyPopupAnswers.put(place, true);
-                    presenter.onUserConfirmedUploadIsOfPlace(place);
+                    presenter.onUserConfirmedUploadIsOfPlace(place, indexOfFragment);
                 },
                 () -> {
                     // Execute when user cancels the upload of the specified place
                     UploadActivity.nearbyPopupAnswers.put(place, false);
                 },
-                customLayout, true);
+                customLayout
+            );
         }
     }
 
@@ -484,7 +486,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
             if (UploadActivity.nearbyPopupAnswers.containsKey(nearbyPlace)) {
                 final boolean response = UploadActivity.nearbyPopupAnswers.get(nearbyPlace);
                 if (response) {
-                    presenter.onUserConfirmedUploadIsOfPlace(nearbyPlace);
+                    presenter.onUserConfirmedUploadIsOfPlace(nearbyPlace, indexOfFragment);
                 }
             } else {
                 showNearbyPlaceFound(nearbyPlace);
@@ -519,15 +521,14 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
                 getString(R.string.duplicate_file_name),
                 String.format(Locale.getDefault(),
                     uploadTitleFormat,
-                    uploadItem.getFileName()),
+                    uploadItem.getFilename()),
                 getString(R.string.upload),
                 getString(R.string.cancel),
                 () -> {
                     uploadItem.setImageQuality(ImageUtils.IMAGE_KEEP);
                     onImageValidationSuccess();
                 }, null,
-                checkBoxView,
-                false);
+                checkBoxView);
         } else {
             uploadItem.setImageQuality(ImageUtils.IMAGE_KEEP);
             onImageValidationSuccess();
@@ -588,8 +589,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
                         basicKvStore.putBoolean(keyForShowingAlertDialog, false);
                         activity.finish();
                     },
-                    null,
-                    false
+                    null
                 );
             }
         } catch (Exception e) {
@@ -714,7 +714,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
                 if (binding != null){
                     binding.backgroundImage.setImageURI(Uri.fromFile(new File(path)));
                 }
-                editableUploadItem.setContentUri(Uri.fromFile(new File(path)));
+                editableUploadItem.setContentAndMediaUri(Uri.fromFile(new File(path)));
                 callback.changeThumbnail(indexOfFragment,
                     path);
             } catch (Exception e) {

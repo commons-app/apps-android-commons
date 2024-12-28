@@ -323,8 +323,7 @@ class AchievementsFragment : CommonsDaggerSupportFragment(){
             null,
             message,
             getString(R.string.ok),
-            {},
-            true
+            {}
         )
 
 //        binding.imagesUploadedProgressbar.setVisibility(View.INVISIBLE);
@@ -510,8 +509,7 @@ class AchievementsFragment : CommonsDaggerSupportFragment(){
             title,
             message,
             getString(R.string.ok),
-            {},
-            true
+            {}
         )
     }
 
@@ -527,8 +525,7 @@ class AchievementsFragment : CommonsDaggerSupportFragment(){
             getString(R.string.read_help_link),
             {},
             { Utils.handleWebUrl(requireContext(), Uri.parse(helpLinkUrl)) },
-            null,
-            true
+            null
         )
     }
     /**

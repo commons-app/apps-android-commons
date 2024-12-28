@@ -122,6 +122,8 @@
   <string name="menu_from_camera">Foto nemen</string>
   <string name="menu_nearby">In de buurt</string>
   <string name="provider_contributions">Mijn uploads</string>
+  <string name="menu_copy_link">Koppeling kopiëren</string>
+  <string name="menu_link_copied">De koppeling is naar het klembord gekopieerd</string>
   <string name="menu_share">Delen</string>
   <string name="menu_view_file_page">Bestandspagina bekijken</string>
   <string name="share_title_hint">Titel (verplicht)</string>
@@ -418,6 +420,7 @@
   <string name="map_application_missing">Er is geen compatibele kaarttoepassing gevonden op uw apparaat. Installeer een kaarttoepassing om deze functie te gebruiken.</string>
   <string name="title_page_bookmarks_pictures">Afbeeldingen</string>
   <string name="title_page_bookmarks_locations">Locaties</string>
+  <string name="title_page_bookmarks_categories">Categorieën</string>
   <string name="menu_bookmark">Toevoegen/verwijderen van bladwijzers</string>
   <string name="provider_bookmarks">Bladwijzers</string>
   <string name="bookmark_empty">U hebt geen bladwijzers toegevoegd</string>
@@ -821,4 +824,9 @@
   <string name="red_pin">Er is nog geen foto van deze plek, maak er eentje!</string>
   <string name="green_pin">Er is al een foto van deze plek.</string>
   <string name="grey_pin">We controleren nu of er een foto van deze plek is.</string>
+  <string name="error_while_loading">Fout bij het laden</string>
+  <string name="no_usages_found">Geen gebruik gevonden</string>
+  <string name="usages_on_commons_heading">Commons</string>
+  <string name="usages_on_other_wikis_heading">Andere wiki’s</string>
+  <string name="file_usages_container_heading">Bestandsgebruik</string>
 </resources>

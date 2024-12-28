@@ -263,17 +263,8 @@ object FilePicker : Constants {
     ) {
         if (result.resultCode == Activity.RESULT_OK && !isPhoto(result.data)) {
             try {
-                val photoPath = result.data?.data
-                val photoFile = PickedFiles.pickedExistingPicture(activity, photoPath!!)
-                callbacks.onImagesPicked(
-                    singleFileList(photoFile),
-                    ImageSource.DOCUMENTS,
-                    restoreType(activity)
-                )
-
-                if (configuration(activity).shouldCopyPickedImagesToPublicGalleryAppFolder()) {
-                    PickedFiles.copyFilesInSeparateThread(activity, singleFileList(photoFile))
-                }
+                val files = getFilesFromGalleryPictures(result.data, activity)
+                callbacks.onImagesPicked(files, ImageSource.DOCUMENTS, restoreType(activity))
             } catch (e: Exception) {
                 e.printStackTrace()
                 callbacks.onImagePickerError(e, ImageSource.DOCUMENTS, restoreType(activity))

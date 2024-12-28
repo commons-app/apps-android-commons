@@ -15,6 +15,7 @@ import dagger.Provides
 import fr.free.nrw.commons.BuildConfig
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.auth.SessionManager
+import fr.free.nrw.commons.bookmarks.category.BookmarkCategoriesDao
 import fr.free.nrw.commons.contributions.ContributionDao
 import fr.free.nrw.commons.customselector.database.NotForUploadStatusDao
 import fr.free.nrw.commons.customselector.database.UploadedStatusDao
@@ -29,6 +30,7 @@ import fr.free.nrw.commons.settings.Prefs
 import fr.free.nrw.commons.upload.UploadController
 import fr.free.nrw.commons.upload.depicts.DepictsDao
 import fr.free.nrw.commons.utils.ConfigUtils.isBetaFlavour
+import fr.free.nrw.commons.utils.TimeProvider
 import fr.free.nrw.commons.wikidata.WikidataEditListener
 import fr.free.nrw.commons.wikidata.WikidataEditListenerImpl
 import io.reactivex.Scheduler
@@ -221,8 +223,17 @@ open class CommonsApplicationModule(private val applicationContext: Context) {
         appDatabase.ReviewDao()
 
     @Provides
+    fun providesBookmarkCategoriesDao (appDatabase: AppDatabase): BookmarkCategoriesDao =
+        appDatabase.bookmarkCategoriesDao()
+
+    @Provides
     fun providesContentResolver(context: Context): ContentResolver =
         context.contentResolver
+
+    @Provides
+    fun provideTimeProvider(): TimeProvider {
+        return TimeProvider(System::currentTimeMillis)
+    }
 
     companion object {
         const val IO_THREAD: String = "io_thread"

@@ -31,6 +31,7 @@ import com.google.android.material.snackbar.Snackbar;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.bookmarks.models.Bookmark;
 import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesContentProvider;
@@ -211,6 +212,13 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
                 snackbar.show();
                 updateBookmarkState(item);
                 return true;
+            case R.id.menu_copy_link:
+                String uri = m.getPageTitle().getCanonicalUri();
+                Utils.copy("shareLink", uri, requireContext());
+                Timber.d("Copied share link to clipboard: %s", uri);
+                Toast.makeText(requireContext(), getString(R.string.menu_link_copied),
+                    Toast.LENGTH_SHORT).show();
+                return true;
             case R.id.menu_share_current_image:
                 Intent shareIntent = new Intent(Intent.ACTION_SEND);
                 shareIntent.setType("text/plain");
@@ -283,6 +291,7 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
         builder.setItems(R.array.report_violation_options, (dialog, which) -> {
             sendReportEmail(media, values[which]);
         });
+        builder.setCancelable(false);
         builder.show();
     }
 
@@ -389,6 +398,7 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
                 if (m != null) {
                     // Enable default set of actions, then re-enable different set of actions only if it is a failed contrib
                     menu.findItem(R.id.menu_browser_current_image).setEnabled(true).setVisible(true);
+                    menu.findItem(R.id.menu_copy_link).setEnabled(true).setVisible(true);
                     menu.findItem(R.id.menu_share_current_image).setEnabled(true).setVisible(true);
                     menu.findItem(R.id.menu_download_current_image).setEnabled(true).setVisible(true);
                     menu.findItem(R.id.menu_bookmark_current_image).setEnabled(true).setVisible(true);
@@ -422,6 +432,8 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
                             case Contribution.STATE_QUEUED:
                                 menu.findItem(R.id.menu_browser_current_image).setEnabled(false)
                                         .setVisible(false);
+                                menu.findItem(R.id.menu_copy_link).setEnabled(false)
+                                    .setVisible(false);
                                 menu.findItem(R.id.menu_share_current_image).setEnabled(false)
                                         .setVisible(false);
                                 menu.findItem(R.id.menu_download_current_image).setEnabled(false)
@@ -439,6 +451,8 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
                 } else {
                     menu.findItem(R.id.menu_browser_current_image).setEnabled(false)
                             .setVisible(false);
+                    menu.findItem(R.id.menu_copy_link).setEnabled(false)
+                        .setVisible(false);
                     menu.findItem(R.id.menu_share_current_image).setEnabled(false)
                             .setVisible(false);
                     menu.findItem(R.id.menu_download_current_image).setEnabled(false)

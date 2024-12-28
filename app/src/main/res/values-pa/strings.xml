@@ -67,17 +67,18 @@
   <string name="menu_from_camera">ਤਸਵੀਰ ਲਵੋ</string>
   <string name="menu_nearby">ਨੇੜੇ-ਤੇੜੇ</string>
   <string name="provider_contributions">ਮੇਰੇ ਅੱਪਲੋਡ</string>
+  <string name="menu_copy_link">ਕੜੀ ਦੀ ਨਕਲ ਕਰੋ</string>
   <string name="menu_share">ਸਾਂਝਾ ਕਰੋ</string>
   <string name="share_title_hint">ਸੁਰਖੀ (ਲੋੜੀਂਦੀ)</string>
   <string name="share_description_hint">ਵੇਰਵਾ</string>
   <string name="login_failed_network">ਦਾਖ਼ਲ ਹੋਣ ਵਿੱਚ ਅਸਮਰੱਥ - ਨੈੱਟਵਰਕ ਫੇਲ੍ਹ ਹੋਇਆ ਹੈ</string>
   <string name="login_failed_throttled">ਬਹੁਤ ਸਾਰੀਆਂ ਅਸਫ਼ਲ ਕੋਸ਼ਿਸ਼ਾਂ। ਥੋੜ੍ਹੀ ਦੇਰ ਬਾਅਦ ਕੋਸ਼ਿਸ਼ ਕਰੋ ਜੀ।</string>
-  <string name="login_failed_blocked">ਅਫ਼ਸੋਸ, ਇਹ ਵਰਤੋਂਕਾਰ ਕਾਮਨਜ਼ ਉੱਤੇ ਬਲਾਕ ਕਰ ਦਿੱਤਾ ਗਿਆ ਹੈ</string>
+  <string name="login_failed_blocked">ਅਫ਼ਸੋਸ, ਇਹ ਵਰਤੋਂਕਾਰ ਨੂੰ ਕਾਮਨਜ਼ ਤੇ ਰੋਕ ਲਾਈ ਗਈ ਹੈ।</string>
   <string name="login_failed_generic">ਦਾਖ਼ਲ ਹੋਣਾ ਅਸਫ਼ਲ!</string>
   <string name="share_upload_button">ਚੜ੍ਹਾਉ</string>
   <string name="multiple_share_base_title">ਇਸ ਸੈੱਟ ਨੂੰ ਨਾਂ ਦਿਓ</string>
   <string name="provider_modifications">ਸੋਧਾਂ</string>
-  <string name="menu_upload_single">ਅੱਪਲੋਡ</string>
+  <string name="menu_upload_single">ਚੜ੍ਹਾਉ</string>
   <string name="categories_search_text_hint">ਸ਼੍ਰੇਣੀਆਂ ਖੋਜੋ</string>
   <string name="menu_save_categories">ਸਾਂਭੋ</string>
   <string name="refresh_button">ਤਾਜ਼ਾ ਕਰੋ</string>
@@ -194,12 +195,14 @@
   <string name="Achievements">ਪ੍ਰਾਪਤੀਆਂ</string>
   <string name="statistics">ਅੰਕੜੇ</string>
   <string name="statistics_thanks">ਧੰਨਵਾਦ ਪ੍ਰਾਪਤ ਹੋਏ</string>
+  <string name="level">ਪੱਧਰ %d</string>
   <string name="achievements_share_message">ਆਪਣੀਆਂ ਪ੍ਰਾਪਤੀਆਂ ਨੂੰ ਆਪਣੇ ਦੋਸਤਾਂ ਨਾਲ ਸਾਂਝਾ ਕਰੋ!</string>
   <string name="read_notifications">ਸੂਚਨਾਵਾਂ (ਪੜ੍ਹਿਆਂ)</string>
   <string name="list_sheet">ਸੂਚੀ</string>
   <string name="next">ਅੱਗੇ</string>
   <string name="previous">ਪਿਛਲਾ</string>
   <string name="title_page_bookmarks_locations">ਟਿਕਾਣਾ</string>
+  <string name="title_page_bookmarks_categories">ਸ਼੍ਰੇਣੀਆਂ</string>
   <string name="ends_on">ਨੂੰ ਮਿਆਦ ਪੁਗਦੀ</string>
   <string name="display_campaigns">ਮੁਹਿੰਮਾਂ ਵੇਖਾਓ</string>
   <string name="option_allow">ਇਜਾਜ਼ਤ ਦਿਓ</string>
@@ -215,4 +218,9 @@
   <string name="leaderboard_column_user">ਵਰਤੋਂਕਾਰ</string>
   <string name="location_updated">ਟਿਕਾਣਾ ਨਵਿਆਈਆ ਗਿਆ</string>
   <string name="invalid_login_message">ਤੁਹਾਡੇ ਦਾਖਲੇ ਦੀ ਮਿਆਦ ਪੁੱਗ ਗਈ ਹੈ। ਕਿਰਪਾ ਕਰਕੇ ਦੁਬਾਰਾ ਦਾਖਲ ਹੋਵੋ।</string>
+  <string name="error_while_loading">ਲੱਦਨ ਵਿੱਚ ਗਲਤੀ</string>
+  <string name="no_usages_found">ਕੋਈ ਵਰਤੋਂ ਨਹੀਂ ਲੱਭੀ</string>
+  <string name="usages_on_commons_heading">ਸ਼ਾਮਲਾਟ</string>
+  <string name="usages_on_other_wikis_heading">ਹੋਰ ਵਿਕੀਆਂ</string>
+  <string name="file_usages_container_heading">ਫ਼ਾਈਲ ਦੀ ਵਰਤੋਂ</string>
 </resources>

@@ -302,8 +302,9 @@ public class UploadMediaDetailAdapter extends
 
             removeButton.setOnClickListener(v -> removeDescription(uploadMediaDetail, position));
             captionListener = new AbstractTextWatcher(
-                captionText -> uploadMediaDetail.setCaptionText(convertIdeographicSpaceToLatinSpace(
-                        removeLeadingAndTrailingWhitespace(captionText))));
+                captionText -> uploadMediaDetail.setCaptionText(
+                    convertIdeographicSpaceToLatinSpace(captionText.strip()))
+            );
             descriptionListener = new AbstractTextWatcher(
                 descriptionText -> uploadMediaDetail.setDescriptionText(descriptionText));
             captionItemEditText.addTextChangedListener(captionListener);
@@ -346,7 +347,7 @@ public class UploadMediaDetailAdapter extends
                 public void onClick(View view) {
                     Dialog dialog = new Dialog(view.getContext());
                     dialog.setContentView(R.layout.dialog_select_language);
-                    dialog.setCanceledOnTouchOutside(true);
+                    dialog.setCancelable(false);
                     dialog.getWindow().setLayout(
                         (int) (view.getContext().getResources().getDisplayMetrics().widthPixels
                             * 0.90),
@@ -545,39 +546,6 @@ public class UploadMediaDetailAdapter extends
                     languageHistoryListView.setAdapter(recentLanguagesAdapter);
                 }
             }
-        }
-
-        /**
-         * Removes any leading and trailing whitespace from the source text.
-         *
-         * @param source input string
-         * @return a string without leading and trailing whitespace
-         */
-        public String removeLeadingAndTrailingWhitespace(String source) {
-            // This method can be replaced with the inbuilt String::strip when updated to JDK 11.
-            // Note that String::trim does not adequately remove all whitespace chars.
-            int firstNonWhitespaceIndex = 0;
-            while (firstNonWhitespaceIndex < source.length()) {
-                if (Character.isWhitespace(source.charAt(firstNonWhitespaceIndex))) {
-                    firstNonWhitespaceIndex++;
-                } else {
-                    break;
-                }
-            }
-            if (firstNonWhitespaceIndex == source.length()) {
-                return "";
-            }
-
-            int lastNonWhitespaceIndex = source.length() - 1;
-            while (lastNonWhitespaceIndex > firstNonWhitespaceIndex) {
-                if (Character.isWhitespace(source.charAt(lastNonWhitespaceIndex))) {
-                    lastNonWhitespaceIndex--;
-                } else {
-                    break;
-                }
-            }
-
-            return source.substring(firstNonWhitespaceIndex, lastNonWhitespaceIndex + 1);
         }
 
         /**

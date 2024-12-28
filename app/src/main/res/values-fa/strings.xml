@@ -106,6 +106,8 @@
   <string name="menu_from_camera">گرفتن عکس</string>
   <string name="menu_nearby">در نزدیکی</string>
   <string name="provider_contributions">بارگذاری‌های من</string>
+  <string name="menu_copy_link">رونویسی پیوند</string>
+  <string name="menu_link_copied">پیوند به بریده‌دان منتقل شد</string>
   <string name="menu_share">به اشتراک‌گذاشتن</string>
   <string name="menu_view_file_page">مشاهدهٔ صفحهٔ پرونده</string>
   <string name="share_title_hint">برنگاشت (الزامی)</string>
@@ -364,6 +366,7 @@
   <string name="upload_title_duplicate" fuzzy="true">پرونده‌ای با نام %1$s وجود دارد. آیا اطمینان دارید که می‌خواهید ادامه دهید؟</string>
   <string name="title_page_bookmarks_pictures">تصویرها</string>
   <string name="title_page_bookmarks_locations">مکان‌ها</string>
+  <string name="title_page_bookmarks_categories">رده‌ها</string>
   <string name="menu_bookmark">افزودن/حذف نشانک‌ها</string>
   <string name="provider_bookmarks">نشانک‌ها</string>
   <string name="bookmark_empty">شما هیچ bookmarkی اضافه نکرده‌اید</string>

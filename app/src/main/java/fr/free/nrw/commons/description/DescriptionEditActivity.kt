@@ -149,8 +149,7 @@ class DescriptionEditActivity :
             getString(titleStringID),
             getString(messageStringId),
             getString(android.R.string.ok),
-            null,
-            true,
+            null
         )
     }
 
@@ -241,7 +240,7 @@ class DescriptionEditActivity :
                     applicationContext,
                     media,
                     updatedWikiText,
-                )?.subscribeOn(Schedulers.io())
+                ).subscribeOn(Schedulers.io())
                 ?.observeOn(AndroidSchedulers.mainThread())
                 ?.subscribe(Consumer<Boolean> { s: Boolean? -> Timber.d("Descriptions are added.") })
                 ?.let {
@@ -272,7 +271,7 @@ class DescriptionEditActivity :
                         .addCaption(
                             applicationContext,
                             media,
-                            mediaDetail.languageCode,
+                            mediaDetail.languageCode!!,
                             mediaDetail.captionText,
                         ).subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
@@ -304,7 +303,7 @@ class DescriptionEditActivity :
         progressDialog!!.isIndeterminate = true
         progressDialog!!.setTitle(getString(R.string.updating_caption_title))
         progressDialog!!.setMessage(getString(R.string.updating_caption_message))
-        progressDialog!!.setCanceledOnTouchOutside(false)
+        progressDialog!!.setCancelable(false)
         progressDialog!!.show()
     }
 

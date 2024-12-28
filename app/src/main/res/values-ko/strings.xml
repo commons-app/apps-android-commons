@@ -111,6 +111,8 @@
   <string name="menu_from_camera">사진 찍기</string>
   <string name="menu_nearby">근처</string>
   <string name="provider_contributions">내 올린 파일</string>
+  <string name="menu_copy_link">링크 복사</string>
+  <string name="menu_link_copied">이 링크는 클립보드로 복사되었습니다</string>
   <string name="menu_share">공유</string>
   <string name="menu_view_file_page">파일 문서 보기</string>
   <string name="share_title_hint">캡션 (필수)</string>
@@ -402,6 +404,7 @@
   <string name="map_application_missing">장치에서 호환되는 지도 애플리케이션을 찾지 못했습니다. 이 기능을 사용하려면 지도 애플리케이션을 설치해 주십시오.</string>
   <string name="title_page_bookmarks_pictures">사진</string>
   <string name="title_page_bookmarks_locations">위치</string>
+  <string name="title_page_bookmarks_categories">분류</string>
   <string name="menu_bookmark">북마크에 추가/제거</string>
   <string name="provider_bookmarks">북마크</string>
   <string name="bookmark_empty">북마크를 추가하지 않았습니다</string>
@@ -700,4 +703,7 @@
   <string name="red_pin">이 장소에 아직 사진이 없습니다. 사진을 찍어보세요!</string>
   <string name="green_pin">이 장소에 이미 사진이 있습니다.</string>
   <string name="grey_pin">지금 이 장소에 사진이 있는지 확인 중입니다.</string>
+  <string name="usages_on_commons_heading">공용</string>
+  <string name="usages_on_other_wikis_heading">다른 위키</string>
+  <string name="file_usages_container_heading">이 파일을 사용하는 문서</string>
 </resources>

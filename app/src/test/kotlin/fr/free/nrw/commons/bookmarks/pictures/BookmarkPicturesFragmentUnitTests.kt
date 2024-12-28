@@ -108,7 +108,7 @@ class BookmarkPicturesFragmentUnitTests {
             GridViewAdapter(
                 context,
                 0,
-                listOf(media()),
+                mutableListOf(media()),
             ),
         )
         Whitebox.setInternalState(fragment, "binding", binding)

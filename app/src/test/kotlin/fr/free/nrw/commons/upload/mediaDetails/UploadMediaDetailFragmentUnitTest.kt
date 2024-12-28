@@ -21,8 +21,8 @@ import androidx.test.core.app.ApplicationProvider
 import com.github.chrisbanes.photoview.PhotoView
 import com.nhaarman.mockitokotlin2.mock
 import fr.free.nrw.commons.CameraPosition
-import fr.free.nrw.commons.LocationPicker.LocationPicker
-import fr.free.nrw.commons.LocationPicker.LocationPickerActivity
+import fr.free.nrw.commons.locationpicker.LocationPicker
+import fr.free.nrw.commons.locationpicker.LocationPickerActivity
 import fr.free.nrw.commons.OkHttpConnectionFactory
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestCommonsApplication
@@ -481,7 +481,7 @@ class UploadMediaDetailFragmentUnitTest {
         `when`(imageCoordinates.zoomLevel).thenReturn(14.0)
         `when`(defaultKvStore.getString(LAST_ZOOM)).thenReturn(null)
         fragment.showExternalMap(uploadItem)
-        Mockito.verify(uploadItem.gpsCoords, Mockito.times(1)).zoomLevel
+        Mockito.verify(uploadItem.gpsCoords, Mockito.times(1))?.zoomLevel
         val shadowActivity: ShadowActivity = shadowOf(activity)
         val startedIntent = shadowActivity.nextStartedActivity
         val shadowIntent: ShadowIntent = shadowOf(startedIntent)

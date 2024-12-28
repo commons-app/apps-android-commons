@@ -17,6 +17,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.location.LocationManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.text.Html;
@@ -133,8 +134,8 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
                             askForLocationPermission();
                         },
                         null,
-                        null,
-                        false);
+                        null
+                    );
                 } else {
                     if (isPermissionDenied) {
                         locationPermissionsHelper.showAppSettingsDialog(getActivity(),
@@ -167,7 +168,11 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
     public void onViewCreated(@NonNull final View view, @Nullable final Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         setSearchThisAreaButtonVisibility(false);
-        binding.tvAttribution.setText(Html.fromHtml(getString(R.string.map_attribution)));
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            binding.tvAttribution.setText(Html.fromHtml(getString(R.string.map_attribution), Html.FROM_HTML_MODE_LEGACY));
+        } else {
+            binding.tvAttribution.setText(Html.fromHtml(getString(R.string.map_attribution)));
+        }
         initNetworkBroadCastReceiver();
         locationPermissionsHelper = new LocationPermissionsHelper(getActivity(),locationManager,this);
         if (presenter == null) {

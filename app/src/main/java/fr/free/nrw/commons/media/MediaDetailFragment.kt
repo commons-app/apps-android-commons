@@ -74,7 +74,7 @@ import fr.free.nrw.commons.BuildConfig
 import fr.free.nrw.commons.CameraPosition
 import fr.free.nrw.commons.CommonsApplication
 import fr.free.nrw.commons.CommonsApplication.Companion.instance
-import fr.free.nrw.commons.LocationPicker.LocationPicker
+import fr.free.nrw.commons.locationpicker.LocationPicker
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.MediaDataExtractor
 import fr.free.nrw.commons.R
@@ -938,7 +938,7 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
 
         Observable.defer {
             thanksClient.thank(
-                firstRevision.revisionId
+                firstRevision.revisionId()
             )
         }
             .subscribeOn(Schedulers.io())
@@ -1596,8 +1596,7 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
                 getString(R.string.about_translate_cancel),
                 { onDeleteClicked(spinner) },
                 {},
-                spinner,
-                true
+                spinner
             )
             if (isDeleted) {
                 dialog!!.getButton(AlertDialog.BUTTON_POSITIVE).isEnabled = false
@@ -1616,8 +1615,7 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
                     onDeleteClickeddialogtext(reason)
                 },
                 {},
-                input,
-                true
+                input
             )
             input.addTextChangedListener(object : TextWatcher {
                 fun handleText() {

@@ -191,6 +191,15 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
 
         initAdapter();
 
+        // pull down to refresh only enabled for self user.
+        if(Objects.equals(sessionManager.getUserName(), userName)){
+            binding.swipeRefreshLayout.setOnRefreshListener(() -> {
+                contributionsListPresenter.refreshList(binding.swipeRefreshLayout);
+            });
+        } else {
+            binding.swipeRefreshLayout.setEnabled(false);
+        }
+
         return binding.getRoot();
     }
 

@@ -6,7 +6,6 @@ import androidx.lifecycle.MutableLiveData
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.auth.csrf.InvalidLoginTokenException
 import fr.free.nrw.commons.bookmarks.items.BookmarkItemsController
-import fr.free.nrw.commons.di.CommonsApplicationModule
 import fr.free.nrw.commons.di.CommonsApplicationModule.Companion.IO_THREAD
 import fr.free.nrw.commons.di.CommonsApplicationModule.Companion.MAIN_THREAD
 import fr.free.nrw.commons.repository.UploadRepository
@@ -208,7 +207,7 @@ class DepictsPresenter
         @SuppressLint("CheckResult")
         override fun updateDepictions(media: Media) {
             if (repository.getSelectedDepictions().isNotEmpty() ||
-                repository.getSelectedExistingDepictions().size != view.existingDepictions.size
+                repository.getSelectedExistingDepictions().size != view.getExistingDepictions()?.size
             ) {
                 view.showProgressDialog()
                 val selectedDepictions: MutableList<String> =
@@ -225,7 +224,7 @@ class DepictsPresenter
 
                     compositeDisposable.add(
                         depictsHelper
-                            .makeDepictionEdit(view.fragmentContext, media, selectedDepictions)
+                            .makeDepictionEdit(view.getFragmentContext(), media, selectedDepictions)
                             .subscribeOn(Schedulers.io())
                             .observeOn(AndroidSchedulers.mainThread())
                             .subscribe({
@@ -256,7 +255,7 @@ class DepictsPresenter
         ) {
             this.view = view
             this.media = media
-            repository.setSelectedExistingDepictions(view.existingDepictions)
+            repository.setSelectedExistingDepictions(view.getExistingDepictions() ?: emptyList())
             compositeDisposable.add(
                 searchTerm
                     .observeOn(mainThreadScheduler)

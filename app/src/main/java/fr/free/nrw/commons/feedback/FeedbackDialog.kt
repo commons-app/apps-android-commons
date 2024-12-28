@@ -2,12 +2,13 @@ package fr.free.nrw.commons.feedback
 
 import android.app.Dialog
 import android.content.Context
+import android.os.Build
 import android.os.Bundle
 import android.text.Html
 import android.text.Spanned
 import android.text.method.LinkMovementMethod
 import android.view.WindowManager
-import android.widget.Toast
+import com.google.android.material.snackbar.Snackbar
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.databinding.DialogFeedbackBinding
 import fr.free.nrw.commons.feedback.model.Feedback
@@ -26,11 +27,13 @@ class FeedbackDialog(
     private val onFeedbackSubmitCallback: OnFeedbackSubmitCallback) : Dialog(context) {
     private var _binding: DialogFeedbackBinding? = null
     private val binding get() = _binding!!
-    // TODO("Remove Deprecation") Issue : #6002
-    // 'fromHtml(String!): Spanned!' is deprecated. Deprecated in Java
-    @Suppress("DEPRECATION")
-    private var feedbackDestinationHtml: Spanned = Html.fromHtml(
-        context.getString(R.string.feedback_destination_note))
+    // Refactored to handle deprecation for Html.fromHtml()
+    private var feedbackDestinationHtml: Spanned = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+        Html.fromHtml(context.getString(R.string.feedback_destination_note), Html.FROM_HTML_MODE_LEGACY)
+    } else {
+        @Suppress("DEPRECATION")
+        Html.fromHtml(context.getString(R.string.feedback_destination_note))
+    }
 
 
     public override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,26 +47,31 @@ class FeedbackDialog(
         @Suppress("DEPRECATION")
         window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
         binding.btnSubmitFeedback.setOnClickListener {
-        try {
-            submitFeedback()
-        }
-        catch (e: Exception) {
-            when(e) {
-                is UnknownHostException -> {
-                    Toast.makeText(context,R.string.error_feedback, Toast.LENGTH_SHORT).show()
-                }
-                is ConnectException -> {
-                    Toast.makeText(context,R.string.error_feedback, Toast.LENGTH_SHORT).show()
-                }
-                else -> {
-                    Toast.makeText(context,R.string.error_feedback, Toast.LENGTH_SHORT).show()
+            try {
+                submitFeedback()
+            } catch (e: Exception) {
+                when (e) {
+                    is UnknownHostException -> {
+                        Snackbar.make(findViewById(android.R.id.content),
+                            R.string.error_feedback,
+                            Snackbar.LENGTH_SHORT).show()
+                    }
+
+                    is ConnectException -> {
+                        Snackbar.make(findViewById(android.R.id.content),
+                            R.string.error_feedback,
+                            Snackbar.LENGTH_SHORT).show()
+                    }
+
+                    else -> {
+                        Snackbar.make(findViewById(android.R.id.content),
+                             R.string.error_feedback,
+                            Snackbar.LENGTH_SHORT).show()
+                    }
                 }
             }
+
         }
-
-
-    }
-
     }
 
     fun submitFeedback() {
