@@ -1,5 +1,14 @@
 # Wikimedia Commons for Android
 
+## v5.1.1
+
+### What's changed
+
+* Use a Android new EXIF interface that to mitigate security issues in old
+  EXIF interface.
+* Make the icon that helps view the upload queue always visible as it ensures
+  that the queue accessible at all times.
+
 ## v5.1.0
 
 ### What's Changed
