@@ -4,7 +4,7 @@
 
 ### What's changed
 
-* Use a Android new EXIF interface that to mitigate security issues in old
+* Use Android's new EXIF interface to mitigate security issues in old
   EXIF interface.
 * Make the icon that helps view the upload queue always visible as it ensures
   that the queue accessible at all times.
