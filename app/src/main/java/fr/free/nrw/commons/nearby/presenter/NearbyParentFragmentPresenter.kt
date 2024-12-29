@@ -300,10 +300,27 @@ class NearbyParentFragmentPresenter
                 }
                 ?: return
 
-        loadPlacesDataAyncJob?.cancel()
         lockUnlockNearby(false) // So that new location updates wont come
         nearbyParentFragmentView.setProgressBarVisibility(false)
+        loadPlacesDataAsync(nearbyPlaceGroups, scope)
+    }
 
+    /**
+     * Load the places' details from cache and Wikidata query, and update these details on the map
+     * as and when they arrive.
+     *
+     * @param nearbyPlaceGroups The list of `MarkerPlaceGroup` objects to be rendered on the map.
+     * Note that the supplied objects' `isBookmarked` property can be set false as the actual
+     * value is retrieved from the bookmarks db eventually.
+     * @param scope the lifecycle scope of `nearbyParentFragment`'s `viewLifecycleOwner`
+     *
+     * @see LoadPlacesAsyncOptions
+     */
+    fun loadPlacesDataAsync(
+        nearbyPlaceGroups: List<MarkerPlaceGroup>,
+        scope: LifecycleCoroutineScope?
+    ) {
+        loadPlacesDataAyncJob?.cancel()
         loadPlacesDataAyncJob = scope?.launch(Dispatchers.IO) {
             // clear past clicks and bookmarkChanged queues
             clickedPlaces.clear()
