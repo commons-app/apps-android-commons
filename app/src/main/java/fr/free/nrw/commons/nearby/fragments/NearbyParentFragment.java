@@ -1870,7 +1870,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                     place.getLongDescription()) : place.getLongDescription());
         }
         marker.setTextLabelFontSize(40);
-        marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_TOP);
+        // anchorV is 21.707/28.0 as icon height is 28dp while the pin base is at 21.707dp from top
+        marker.setAnchor(Marker.ANCHOR_CENTER, 0.77525f);
         marker.setOnMarkerClickListener((marker1, mapView) -> {
             if (clickedMarker != null) {
                 clickedMarker.closeInfoWindow();
