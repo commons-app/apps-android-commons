@@ -94,6 +94,7 @@ class WikidataFeedback : BaseActivity() {
                     }, { throwable: Throwable? ->
                         Timber.e(throwable!!)
                     })
+                finish()
             }
         }
     }

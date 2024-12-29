@@ -94,6 +94,7 @@ class MoreBottomSheetLoggedOutFragment : BottomSheetDialogFragment() {
             .setMessage(R.string.feedback_sharing_data_alert)
             .setCancelable(false)
             .setPositiveButton(R.string.ok) { _, _ -> sendFeedback() }
+            .setNegativeButton(R.string.cancel){_,_ -> }
             .show()
     }
 

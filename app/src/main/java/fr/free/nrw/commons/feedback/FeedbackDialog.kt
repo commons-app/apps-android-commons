@@ -46,6 +46,7 @@ class FeedbackDialog(
         // 'SOFT_INPUT_ADJUST_RESIZE: Int' is deprecated. Deprecated in Java
         @Suppress("DEPRECATION")
         window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
+        binding.btnCancel.setOnClickListener { dismiss() }
         binding.btnSubmitFeedback.setOnClickListener {
             try {
                 submitFeedback()

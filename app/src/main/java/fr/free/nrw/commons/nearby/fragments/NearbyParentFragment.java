@@ -92,6 +92,7 @@ import fr.free.nrw.commons.nearby.NearbyFilterSearchRecyclerViewAdapter;
 import fr.free.nrw.commons.nearby.NearbyFilterState;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.nearby.PlacesRepository;
+import fr.free.nrw.commons.nearby.Sitelinks;
 import fr.free.nrw.commons.nearby.WikidataFeedback;
 import fr.free.nrw.commons.nearby.contract.NearbyParentFragmentContract;
 import fr.free.nrw.commons.nearby.fragments.AdvanceQueryFragment.Callback;
@@ -1173,27 +1174,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     }
 
     /**
-     *  Reloads the Nearby map
-     *  Clears all location markers, refreshes them, reinserts them into the map.
-     *
-     */
-    private void reloadMap() {
-        clearAllMarkers(); // Clear the list of markers
-        binding.map.getController().setZoom(ZOOM_LEVEL); // Reset the zoom level
-        binding.map.getController().setCenter(lastMapFocus); // Recenter the focus
-        if (locationPermissionsHelper.checkLocationPermission(getActivity())) {
-            locationPermissionGranted(); // Reload map with user's location
-        } else {
-            startMapWithoutPermission(); // Reload map without user's location
-        }
-        binding.map.invalidate(); // Invalidate the map
-        presenter.updateMapAndList(LOCATION_SIGNIFICANTLY_CHANGED); // Restart the map
-        Timber.d("Reloaded Map Successfully");
-    }
-
-
-    /**
-     * Clears the Nearby local cache and then calls for the map to be reloaded
+     * Clears the Nearby local cache and then calls for pin details to be fetched afresh.
      *
      */
     private void emptyCache() {
@@ -1202,7 +1183,22 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             placesRepository.clearCache()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .andThen(Completable.fromAction(this::reloadMap))
+                .andThen(Completable.fromAction(() -> {
+                    // reload only the pin details, by making all loaded pins gray:
+                    ArrayList<MarkerPlaceGroup> newPlaceGroups = new ArrayList<>(
+                        NearbyController.markerLabelList.size());
+                    for (final MarkerPlaceGroup placeGroup : NearbyController.markerLabelList) {
+                        final Place place = new Place("", "", placeGroup.getPlace().getLabel(), "",
+                            placeGroup.getPlace().getLocation(), "",
+                            placeGroup.getPlace().siteLinks, "", placeGroup.getPlace().exists,
+                            placeGroup.getPlace().entityID);
+                        place.setDistance(placeGroup.getPlace().distance);
+                        place.setMonument(placeGroup.getPlace().isMonument());
+                        newPlaceGroups.add(
+                            new MarkerPlaceGroup(placeGroup.getIsBookmarked(), place));
+                    }
+                    presenter.loadPlacesDataAsync(newPlaceGroups, scope);
+                }))
                 .subscribe(
                     () -> {
                         Timber.d("Nearby Cache cleared successfully.");
@@ -1627,6 +1623,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             // prompt the user to login
             new Builder(getContext())
                 .setMessage(R.string.login_alert_message)
+                .setCancelable(false)
+                .setNegativeButton(R.string.cancel, (dialog, which) -> {})
                 .setPositiveButton(R.string.login, (dialog, which) -> {
                     // logout of the app
                     BaseLogoutListener logoutListener = new BaseLogoutListener(getActivity());
