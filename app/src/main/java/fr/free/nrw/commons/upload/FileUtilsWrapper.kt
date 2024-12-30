@@ -49,9 +49,10 @@ class FileUtilsWrapper @Inject constructor(private val context: Context) {
                 while ((bis.read(buffer).also { size = it }) > 0) {
                     buffers.add(
                         writeToFile(
-                            buffer.copyOf(size),
+                            buffer,
                             file.name ?: "",
-                            getFileExt(file.name)
+                            getFileExt(file.name),
+                            size
                         )
                     )
                 }
@@ -67,7 +68,7 @@ class FileUtilsWrapper @Inject constructor(private val context: Context) {
      * Create a temp file containing the passed byte data.
      */
     @Throws(IOException::class)
-    private fun writeToFile(data: ByteArray, fileName: String, fileExtension: String): File {
+    private fun writeToFile(data: ByteArray, fileName: String, fileExtension: String, size: Int): File {
         val file = File.createTempFile(fileName, fileExtension, context.cacheDir)
         try {
             if (!file.exists()) {
@@ -75,7 +76,7 @@ class FileUtilsWrapper @Inject constructor(private val context: Context) {
             }
 
             FileOutputStream(file).use { fos ->
-                fos.write(data)
+                fos.write(data, 0, size)
             }
         } catch (throwable: Exception) {
             Timber.e(throwable, "Failed to create file")
