@@ -276,6 +276,7 @@
   <string name="copy_wikicode">Copié ël test wiki ant ël pògia-feuj</string>
   <string name="wikicode_copied">Ël test wiki a l\'é stàit copià ant ël pògia-feuj</string>
   <string name="nearby_location_not_available">«A prossimità» a podrìa marcé nen bin, soa posission a l\'é nen disponìbil.</string>
+  <string name="nearby_showing_pins_offline">Aragnà nen disponìbil. As mostro mach ij pòst an memòria local.</string>
   <string name="upload_location_access_denied">Acess a la localisassion arfudà. Për piasì, ch\'a definissa soa localisassion a man për dovré costa fonsionalità.</string>
   <string name="location_permission_rationale_nearby">A-i é da manca dël përmess pr\'ësmon-e na lista dij pòst davzin</string>
   <string name="location_permission_rationale_explore">A-i é da manca dël përmess pr\'ësmon-e na lista dle plance pijà lì-davzin</string>

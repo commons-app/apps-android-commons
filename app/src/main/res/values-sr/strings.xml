@@ -278,6 +278,7 @@
   <string name="copy_wikicode">Копирај викитекст</string>
   <string name="wikicode_copied">Викитекст је копиран у привремену меморију</string>
   <string name="nearby_location_not_available">„У близини” можда не ради како треба. Локација није доступна.</string>
+  <string name="nearby_showing_pins_offline">Нема Интернета. Приказана само кеширана места.</string>
   <string name="upload_location_access_denied">Приступ локацији је онемогућен. Одаберите вашу локацију ручно да би сте користили ову могућност.</string>
   <string name="location_permission_rationale_nearby">Потребна је дозвола за приказивање листе локација у близини</string>
   <string name="location_permission_rationale_explore">Потребна је дозвола за приказивање списка слика у близини</string>
