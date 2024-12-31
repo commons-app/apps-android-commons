@@ -336,8 +336,7 @@ class UploadMediaPresenter @Inject constructor(
      */
     override fun checkImageQuality(uploadItem: UploadItem, index: Int) {
         if ((uploadItem.imageQuality != IMAGE_OK) && (uploadItem.imageQuality != IMAGE_KEEP)) {
-            val store = BasicKvStore(
-                UploadMediaDetailFragment.activity,
+            val store = view.createBasicKvStore(
                 UploadActivity.storeNameForCurrentUploadImagesSize
             )
             val value = store.getString(UPLOAD_QUALITIES_KEY, null)
@@ -363,8 +362,7 @@ class UploadMediaPresenter @Inject constructor(
      * @param index Index of the UploadItem which was deleted
      */
     override fun updateImageQualitiesJSON(size: Int, index: Int) {
-        val store = BasicKvStore(
-            UploadMediaDetailFragment.activity,
+        val store = view.createBasicKvStore(
             UploadActivity.storeNameForCurrentUploadImagesSize
         )
         val value = store.getString(UPLOAD_QUALITIES_KEY, null)
@@ -399,36 +397,7 @@ class UploadMediaPresenter @Inject constructor(
 
         // If image has some other problems, show popup accordingly
         if (errorCode != EMPTY_CAPTION && errorCode != FILE_NAME_EXISTS) {
-            showBadImagePopup(errorCode, index, UploadMediaDetailFragment.activity, uploadItem)
-        }
-    }
-
-    /**
-     * Shows a dialog describing the potential problems in the current image
-     *
-     * @param errorCode  Has the potential problems in the current image
-     * @param index      Index of the UploadItem which has problems
-     * @param activity   Context reference
-     * @param uploadItem UploadItem which has problems
-     */
-    private fun showBadImagePopup(
-        errorCode: Int, index: Int, activity: Activity, uploadItem: UploadItem
-    ) {
-        //If the error message is null, we will probably not show anything
-        val errorMessageForResult = getErrorMessageForResult(activity, errorCode)
-        if (errorMessageForResult.isNotEmpty()) {
-            showAlertDialog(activity,
-                activity.getString(R.string.upload_problem_image),
-                errorMessageForResult,
-                activity.getString(R.string.upload),
-                activity.getString(R.string.cancel),
-                {
-                    view.showProgress(false)
-                    uploadItem.imageQuality = IMAGE_OK
-                }, {
-                    presenterCallback!!.deletePictureAtIndex(index)
-                }
-            )?.setCancelable(false)
+            view.showBadImagePopup(errorCode, index, uploadItem)
         }
     }
 

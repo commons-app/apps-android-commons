@@ -34,7 +34,7 @@ import fr.free.nrw.commons.upload.ImageCoordinates
 import fr.free.nrw.commons.upload.UploadActivity
 import fr.free.nrw.commons.upload.UploadItem
 import fr.free.nrw.commons.upload.UploadMediaDetailAdapter
-import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment.LAST_ZOOM
+import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment.Companion.LAST_ZOOM
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
@@ -155,12 +155,6 @@ class UploadMediaDetailFragmentUnitTest {
 
     @Test
     @Throws(Exception::class)
-    fun testSetCallback() {
-        fragment.setCallback(null)
-    }
-
-    @Test
-    @Throws(Exception::class)
     fun testOnCreate() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
         fragment.onCreate(Bundle())
@@ -227,22 +221,6 @@ class UploadMediaDetailFragmentUnitTest {
             )
         method.isAccessible = true
         method.invoke(fragment, R.string.media_detail_step_title, R.string.media_details_tooltip)
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun testOnNextButtonClicked() {
-        Shadows.shadowOf(Looper.getMainLooper()).idle()
-        Whitebox.setInternalState(fragment, "presenter", presenter)
-        fragment.onNextButtonClicked()
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun testOnPreviousButtonClicked() {
-        Shadows.shadowOf(Looper.getMainLooper()).idle()
-        Whitebox.setInternalState(fragment, "presenter", presenter)
-        fragment.onPreviousButtonClicked()
     }
 
     @Test
@@ -366,7 +344,10 @@ class UploadMediaDetailFragmentUnitTest {
         `when`(uploadItem.gpsCoords).thenReturn(imageCoordinates)
         val activityResult = ActivityResult(Activity.RESULT_OK, intent)
 
-        val handleResultMethod = UploadMediaDetailFragment::class.java.getDeclaredMethod("onCameraPosition", ActivityResult::class.java)
+        val handleResultMethod = UploadMediaDetailFragment::class.java.getDeclaredMethod(
+            "onCameraPosition",
+            ActivityResult::class.java
+        )
         handleResultMethod.isAccessible = true
 
         handleResultMethod.invoke(fragment, activityResult)
@@ -382,7 +363,7 @@ class UploadMediaDetailFragmentUnitTest {
         val cameraPosition = Mockito.mock(CameraPosition::class.java)
         val latLng = Mockito.mock(LatLng::class.java)
 
-        Whitebox.setInternalState(fragment, "callback", callback)
+        Whitebox.setInternalState(fragment, "fragmentCallback", callback)
         Whitebox.setInternalState(cameraPosition, "latitude", latLng.latitude)
         Whitebox.setInternalState(cameraPosition, "longitude", latLng.longitude)
         Whitebox.setInternalState(fragment, "editableUploadItem", uploadItem)
@@ -394,9 +375,12 @@ class UploadMediaDetailFragmentUnitTest {
         `when`(latLng.longitude).thenReturn(0.0)
         `when`(uploadItem.gpsCoords).thenReturn(imageCoordinates)
 
-        val activityResult = ActivityResult(Activity.RESULT_OK,intent)
+        val activityResult = ActivityResult(Activity.RESULT_OK, intent)
 
-        val handleResultMethod = UploadMediaDetailFragment::class.java.getDeclaredMethod("onCameraPosition", ActivityResult::class.java)
+        val handleResultMethod = UploadMediaDetailFragment::class.java.getDeclaredMethod(
+            "onCameraPosition",
+            ActivityResult::class.java
+        )
         handleResultMethod.isAccessible = true
 
         handleResultMethod.invoke(fragment, activityResult)
@@ -415,21 +399,6 @@ class UploadMediaDetailFragmentUnitTest {
     fun testOnDestroyView() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
         fragment.onDestroyView()
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun testOnLlContainerTitleClicked() {
-        Shadows.shadowOf(Looper.getMainLooper()).idle()
-        fragment.onLlContainerTitleClicked()
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun testOnIbMapClicked() {
-        Shadows.shadowOf(Looper.getMainLooper()).idle()
-        Whitebox.setInternalState(fragment, "presenter", presenter)
-        fragment.onIbMapClicked()
     }
 
     @Test

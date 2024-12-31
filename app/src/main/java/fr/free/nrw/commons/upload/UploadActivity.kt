@@ -511,11 +511,11 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
                          * ensuring that the thumbnail change is reflected in the UI.
                          *
                          * @param index The index of the UploadableFile to be updated.
-                         * @param filepath The file path of the new thumbnail image.
+                         * @param uri The file path of the new thumbnail image.
                          */
-                        override fun changeThumbnail(index: Int, filepath: String) {
+                        override fun changeThumbnail(index: Int, uri: String) {
                             uploadableFiles.removeAt(index)
-                            uploadableFiles.add(index, UploadableFile(File(filepath)))
+                            uploadableFiles.add(index, UploadableFile(File(uri)))
                             binding.rvThumbnails.adapter!!.notifyDataSetChanged()
                         }
 
@@ -544,9 +544,9 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
 
                 if (isFragmentsSaved) {
                     val fragment = fragments!![0] as UploadMediaDetailFragment?
-                    fragment!!.setCallback(uploadMediaDetailFragmentCallback)
+                    fragment!!.fragmentCallback = uploadMediaDetailFragmentCallback
                 } else {
-                    uploadMediaDetailFragment.setCallback(uploadMediaDetailFragmentCallback)
+                    uploadMediaDetailFragment.fragmentCallback = uploadMediaDetailFragmentCallback
                     fragments!!.add(uploadMediaDetailFragment)
                 }
             }

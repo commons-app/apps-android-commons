@@ -3,6 +3,7 @@ package fr.free.nrw.commons.upload.mediaDetails
 import android.app.Activity
 import fr.free.nrw.commons.BasePresenter
 import fr.free.nrw.commons.filepicker.UploadableFile
+import fr.free.nrw.commons.kvstore.BasicKvStore
 import fr.free.nrw.commons.location.LatLng
 import fr.free.nrw.commons.nearby.Place
 import fr.free.nrw.commons.upload.ImageCoordinates
@@ -25,7 +26,7 @@ interface UploadMediaDetailsContract {
 
         fun showMessage(stringResourceId: Int, colorResourceId: Int)
 
-        fun showMessage(message: String?, colorResourceId: Int)
+        fun showMessage(message: String, colorResourceId: Int)
 
         fun showDuplicatePicturePopup(uploadItem: UploadItem)
 
@@ -49,6 +50,10 @@ interface UploadMediaDetailsContract {
         fun updateMediaDetails(uploadMediaDetails: List<UploadMediaDetail>)
 
         fun displayAddLocationDialog(runnable: Runnable)
+
+        fun createBasicKvStore(storeName: String): BasicKvStore
+
+        fun showBadImagePopup(errorCode: Int, index: Int, uploadItem: UploadItem)
     }
 
     interface UserActionListener : BasePresenter<View?> {
