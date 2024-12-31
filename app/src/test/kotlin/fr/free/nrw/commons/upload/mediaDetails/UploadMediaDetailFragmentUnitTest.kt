@@ -100,7 +100,7 @@ class UploadMediaDetailFragmentUnitTest {
     private lateinit var place: Place
 
     @Mock
-    private var location: fr.free.nrw.commons.location.LatLng? = null
+    private lateinit var location: LatLng
 
     @Mock
     private lateinit var defaultKvStore: JsonKvStore
@@ -194,7 +194,7 @@ class UploadMediaDetailFragmentUnitTest {
         Whitebox.setInternalState(fragment, "presenter", presenter)
         val method: Method =
             UploadMediaDetailFragment::class.java.getDeclaredMethod(
-                "init",
+                "initializeFragment",
             )
         method.isAccessible = true
         method.invoke(fragment)
@@ -209,7 +209,7 @@ class UploadMediaDetailFragmentUnitTest {
         `when`(callback.totalNumberOfSteps).thenReturn(5)
         val method: Method =
             UploadMediaDetailFragment::class.java.getDeclaredMethod(
-                "init",
+                "initializeFragment",
             )
         method.isAccessible = true
         method.invoke(fragment)
@@ -258,7 +258,7 @@ class UploadMediaDetailFragmentUnitTest {
     fun testOnImageProcessed() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
         `when`(uploadItem.mediaUri).thenReturn(mediaUri)
-        fragment.onImageProcessed(uploadItem, place)
+        fragment.onImageProcessed(uploadItem)
     }
 
     @Test
@@ -407,7 +407,7 @@ class UploadMediaDetailFragmentUnitTest {
     @Throws(Exception::class)
     fun testUpdateMediaDetails() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
-        fragment.updateMediaDetails(null)
+        fragment.updateMediaDetails(mock())
     }
 
     @Test

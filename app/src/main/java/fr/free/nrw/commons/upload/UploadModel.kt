@@ -175,11 +175,11 @@ class UploadModel @Inject internal constructor(
             Timber.d(
                 "Created timestamp while building contribution is %s, %s",
                 item.createdTimestamp,
-                Date(item.createdTimestamp!!)
+                item.createdTimestamp?.let { Date(it) }
             )
 
             if (item.createdTimestamp != -1L) {
-                contribution.dateCreated = Date(item.createdTimestamp)
+                contribution.dateCreated = item.createdTimestamp?.let { Date(it) }
                 contribution.dateCreatedSource = item.createdTimestampSource
                 //Set the date only if you have it, else the upload service is gonna try it the other way
             }

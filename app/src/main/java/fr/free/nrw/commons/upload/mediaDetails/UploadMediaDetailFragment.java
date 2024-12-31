@@ -56,6 +56,7 @@ import java.util.Locale;
 import java.util.Objects;
 import javax.inject.Inject;
 import javax.inject.Named;
+import org.jetbrains.annotations.NotNull;
 import timber.log.Timber;
 
 public class UploadMediaDetailFragment extends UploadBaseFragment implements
@@ -154,7 +155,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
 
     public void setCallback(UploadMediaDetailFragmentCallback callback) {
         this.callback = callback;
-        UploadMediaPresenter.presenterCallback = callback;
+        UploadMediaPresenter.Companion.setPresenterCallback(callback);
     }
 
     @Override
@@ -190,12 +191,12 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        activity = getActivity();
+        activity = requireActivity();
         basicKvStore = new BasicKvStore(activity, "CurrentUploadImageQualities");
 
         if (callback != null) {
             indexOfFragment = callback.getIndexInViewFlipper(this);
-            init();
+            initializeFragment();
         }
 
         if(savedInstanceState!=null){
@@ -207,7 +208,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         }
 
         try {
-            if(!presenter.getImageQuality(indexOfFragment, inAppPictureLocation, getActivity())) {
+            if(!presenter.getImageQuality(indexOfFragment, inAppPictureLocation, requireActivity())) {
                 ActivityUtils.startActivityWithFlags(
                 getActivity(), MainActivity.class, Intent.FLAG_ACTIVITY_CLEAR_TOP,
                 Intent.FLAG_ACTIVITY_SINGLE_TOP);
@@ -217,7 +218,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
 
     }
 
-    private void init() {
+    private void initializeFragment() {
         if (binding == null) {
             return;
         }
@@ -373,7 +374,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     }
 
     @Override
-    public void onImageProcessed(UploadItem uploadItem, Place place) {
+    public void onImageProcessed(@NotNull UploadItem uploadItem) {
         if (binding == null) {
             return;
         }
@@ -386,7 +387,8 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
      * @param place
      */
     @Override
-    public void onNearbyPlaceFound(UploadItem uploadItem, Place place) {
+    public void onNearbyPlaceFound(
+        @NotNull UploadItem uploadItem, @org.jetbrains.annotations.Nullable Place place) {
         nearbyPlace = place;
         this.uploadItem = uploadItem;
         showNearbyFound = true;
@@ -506,7 +508,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     }
 
     @Override
-    public void showDuplicatePicturePopup(UploadItem uploadItem) {
+    public void showDuplicatePicturePopup(@NotNull UploadItem uploadItem) {
         if (defaultKvStore.getBoolean("showDuplicatePicturePopup", true)) {
             String uploadTitleFormat = getString(R.string.upload_title_duplicate);
             View checkBoxView = View
@@ -517,7 +519,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
                     defaultKvStore.putBoolean("showDuplicatePicturePopup", false);
                 }
             });
-            DialogUtil.showAlertDialog(getActivity(),
+            DialogUtil.showAlertDialog(requireActivity(),
                 getString(R.string.duplicate_file_name),
                 String.format(Locale.getDefault(),
                     uploadTitleFormat,
@@ -597,7 +599,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     }
 
     @Override
-    public void showExternalMap(final UploadItem uploadItem) {
+    public void showExternalMap(@NotNull final UploadItem uploadItem) {
         goToLocationPickerActivity(uploadItem);
     }
 
@@ -612,7 +614,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
      * is started using resultLauncher that handles the result in respective callback.
      */
     @Override
-    public void showEditActivity(UploadItem uploadItem) {
+    public void showEditActivity(@NotNull UploadItem uploadItem) {
         editableUploadItem = uploadItem;
         Intent intent = new Intent(getContext(), EditActivity.class);
         intent.putExtra("image", uploadableFile.getFilePath().toString());
@@ -789,7 +791,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     }
 
     @Override
-    public void updateMediaDetails(List<UploadMediaDetail> uploadMediaDetails) {
+    public void updateMediaDetails(@NotNull List<UploadMediaDetail> uploadMediaDetails) {
         uploadMediaDetailAdapter.setItems(uploadMediaDetails);
         showNearbyFound =
             showNearbyFound && (
@@ -823,7 +825,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
      * @param onSkipClicked proceed for verifying image quality
      */
     @Override
-    public void displayAddLocationDialog(final Runnable onSkipClicked) {
+    public void displayAddLocationDialog(@NotNull final Runnable onSkipClicked) {
         isMissingLocationDialog = true;
         DialogUtil.showAlertDialog(requireActivity(),
             getString(R.string.no_location_found_title),

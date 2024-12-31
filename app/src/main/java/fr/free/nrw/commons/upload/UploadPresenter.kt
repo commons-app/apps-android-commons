@@ -1,7 +1,6 @@
 package fr.free.nrw.commons.upload
 
 import android.annotation.SuppressLint
-import fr.free.nrw.commons.CommonsApplication
 import fr.free.nrw.commons.CommonsApplication.Companion.IS_LIMITED_CONNECTION_MODE_ENABLED
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.contributions.Contribution
@@ -69,8 +68,7 @@ class UploadPresenter @Inject internal constructor(
     private fun processContributionsForSubmission() {
         if (view.isLoggedIn()) {
             view.showProgress(true)
-            repository.buildContributions()
-                ?.observeOn(Schedulers.io())
+            repository.buildContributions().observeOn(Schedulers.io())
                 ?.subscribe(object : Observer<Contribution> {
                     override fun onSubscribe(d: Disposable) {
                         view.showProgress(false)
@@ -133,8 +131,9 @@ class UploadPresenter @Inject internal constructor(
      * @param uploadItemIndex Index of next image, whose quality is to be checked
      */
     override fun checkImageQuality(uploadItemIndex: Int) {
-        val uploadItem = repository.getUploadItem(uploadItemIndex)
-        presenter.checkImageQuality(uploadItem, uploadItemIndex)
+        repository.getUploadItem(uploadItemIndex)?.let {
+            presenter.checkImageQuality(it, uploadItemIndex)
+        }
     }
 
     override fun deletePictureAtIndex(index: Int) {
@@ -156,8 +155,9 @@ class UploadPresenter @Inject internal constructor(
         view.onUploadMediaDeleted(index)
         if (index != uploadableFiles.size && index != 0) {
             // if the deleted image was not the last item to be uploaded, check quality of next
-            val uploadItem = repository.getUploadItem(index)
-            presenter.checkImageQuality(uploadItem, index)
+            repository.getUploadItem(index)?.let {
+                presenter.checkImageQuality(it, index)
+            }
         }
 
         if (uploadableFiles.size < 2) {
