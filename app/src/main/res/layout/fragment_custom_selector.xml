@@ -49,6 +49,20 @@
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent" />
 
+  <TextView
+    android:id="@+id/all_images_uploaded_or_marked"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:visibility="gone"
+    android:textSize="16sp"
+    android:padding="@dimen/standard_gap"
+    android:textColor="@color/text_color_selector"
+    android:text="Congratulations, all pictures in this album have been either uploaded or marked as not for upload."
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    />
 
   <ProgressBar
     android:id="@+id/loader"
