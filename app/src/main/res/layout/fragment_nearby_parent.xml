@@ -117,12 +117,12 @@
           android:layout_alignParentRight="true"
           android:clickable="true"
           android:visibility="visible"
-          app:backgroundTint="@color/main_background_light"
+          android:layout_margin="16dp"
+          app:backgroundTint="?attr/mainBackground"
           app:elevation="@dimen/dimen_6"
           app:fabSize="normal"
           app:layout_anchorGravity="top|right|end"
-          app:srcCompat="@drawable/ic_my_location_black_24dp"
-          app:useCompatPadding="true" />
+          app:srcCompat="@drawable/ic_my_location_black_24dp" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
           android:id="@+id/fab_legend"
@@ -133,12 +133,12 @@
           android:layout_alignParentRight="true"
           android:clickable="true"
           android:visibility="visible"
-          app:backgroundTint="@color/main_background_light"
+          android:layout_margin="16dp"
+          app:backgroundTint="?attr/mainBackground"
           app:elevation="@dimen/dimen_6"
           app:fabSize="normal"
           app:layout_anchorGravity="top|right|end"
-          app:srcCompat="@drawable/ic_info_outline_24dp"
-          app:useCompatPadding="true" />
+          app:srcCompat="@drawable/ic_info_outline_24dp" />
 
         <include
           android:id="@+id/nearby_legend_layout"
