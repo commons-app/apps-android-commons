@@ -217,6 +217,8 @@
   <string name="next">Čuovvovaš</string>
   <string name="title_page_bookmarks_pictures">Govat</string>
   <string name="title_page_bookmarks_locations">Sajit</string>
+  <string name="no_categories_selected">Ii oktage kategoriija leat válljejuvvon</string>
+  <string name="no_depictions_selected">Ii oktage govvádus leat válljejuvvon</string>
   <string name="back_button_warning">Gaskkalduhte fiilla vurkema</string>
   <string name="review_thanks_yes_button_text">Čuovvovaš govva</string>
   <string name="exif_tag_name_author">Vuoigŋadahkki</string>
