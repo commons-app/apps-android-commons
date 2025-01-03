@@ -7,8 +7,6 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.constraintlayout.widget.Group
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -26,6 +24,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.cancel
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import java.util.TreeMap
 import kotlin.collections.ArrayList
@@ -108,8 +107,8 @@ class ImageAdapter(
     /**
      * Stores the number of images currently visible on the screen
      */
-    private val _currentImagesCount = MutableLiveData(0)
-    val currentImagesCountLiveData: LiveData<Int> = _currentImagesCount
+    private val _currentImagesCount = MutableStateFlow(0)
+    val currentImagesCount = _currentImagesCount
 
     /**
      * Coroutine Dispatchers and Scope.
