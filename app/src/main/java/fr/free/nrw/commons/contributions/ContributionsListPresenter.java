@@ -45,7 +45,7 @@ public class ContributionsListPresenter implements UserActionListener {
     // Timer for polling new contributions
     private Handler pollingHandler;
     private Runnable pollingRunnable;
-    private long pollingInterval = 1 * 60 * 1000L; // Poll every 15 seconds
+    private long pollingInterval = 1 * 60 * 1000L; // Poll every 1 minutes
 
     @Inject
     ContributionsListPresenter(
