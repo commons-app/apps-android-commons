@@ -2,8 +2,12 @@ package fr.free.nrw.commons.contributions;
 
 import static fr.free.nrw.commons.di.CommonsApplicationModule.IO_THREAD;
 
+import android.os.Handler;
+import android.os.Looper;
+
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 import androidx.paging.DataSource;
 import androidx.paging.DataSource.Factory;
 import androidx.paging.LivePagedListBuilder;
@@ -12,7 +16,9 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import fr.free.nrw.commons.contributions.ContributionsListContract.UserActionListener;
 import io.reactivex.Scheduler;
 import io.reactivex.disposables.CompositeDisposable;
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Named;
 import kotlin.Unit;
@@ -31,6 +37,15 @@ public class ContributionsListPresenter implements UserActionListener {
     private final ContributionsRemoteDataSource contributionsRemoteDataSource;
 
     LiveData<PagedList<Contribution>> contributionList;
+
+    private MutableLiveData<List<Contribution>> liveData = new MutableLiveData<>();
+
+    private List<Contribution> existingContributions = new ArrayList<>();
+
+    // Timer for polling new contributions
+    private Handler pollingHandler;
+    private Runnable pollingRunnable;
+    private long pollingInterval = 1 * 60 * 1000L; // Poll every minute
 
     @Inject
     ContributionsListPresenter(
@@ -87,6 +102,15 @@ public class ContributionsListPresenter implements UserActionListener {
         }
 
         contributionList = livePagedListBuilder.build();
+        contributionList.observeForever(pagedList -> {
+            if (pagedList != null) {
+                existingContributions.clear();
+                existingContributions.addAll(pagedList);
+                liveData.setValue(existingContributions); // Update liveData with the latest list
+            }
+        });
+        // Start polling for new contributions
+        startPollingForNewContributions();
     }
 
     @Override
@@ -94,6 +118,7 @@ public class ContributionsListPresenter implements UserActionListener {
         compositeDisposable.clear();
         contributionsRemoteDataSource.dispose();
         contributionBoundaryCallback.dispose();
+        stopPollingForNewContributions();
     }
 
     /**
@@ -109,4 +134,55 @@ public class ContributionsListPresenter implements UserActionListener {
             return Unit.INSTANCE;
         });
     }
+
+    /**
+     * Start polling for new contributions every 15 minutes.
+     */
+    private void startPollingForNewContributions() {
+        if (pollingHandler != null) {
+            stopPollingForNewContributions();
+        }
+
+        pollingHandler = new Handler(Looper.getMainLooper());
+        pollingRunnable = new Runnable() {
+            @Override
+            public void run() {
+                fetchNewContributions(); // Fetch new contributions in background
+                pollingHandler.postDelayed(this, pollingInterval); // Repeat after the interval
+            }
+        };
+        pollingHandler.post(pollingRunnable); // Start polling immediately
+    }
+
+    /**
+     * Stop the polling task when the view is detached or the activity is paused.
+     */
+    private void stopPollingForNewContributions() {
+        if (pollingHandler != null && pollingRunnable != null) {
+            pollingHandler.removeCallbacks(pollingRunnable);
+            pollingHandler = null;
+            pollingRunnable = null;
+        }
+    }
+
+    public void appendContributions(List<Contribution> newContributions) {
+        if (newContributions != null && !newContributions.isEmpty()) {
+            existingContributions.addAll(newContributions);
+            liveData.postValue(existingContributions);
+        }
+    }
+    /**
+     * Fetch new contributions from the server and append them to the existing list.
+     */
+    private void fetchNewContributions() {
+        contributionsRemoteDataSource.fetchContributions(new ContributionsRemoteDataSource.LoadCallback<Contribution>() {
+            @Override
+            public void onResult(List<Contribution> newContributions) {
+                if (newContributions != null && !newContributions.isEmpty()) {
+                    appendContributions(newContributions); // Add new contributions
+                }
+            }
+        });
+    }
+
 }

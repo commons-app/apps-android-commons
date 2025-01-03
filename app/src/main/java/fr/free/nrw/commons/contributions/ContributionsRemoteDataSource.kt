@@ -46,7 +46,13 @@ class ContributionsRemoteDataSource
         /**
          * Fetches contributions using the MediaWiki API
          */
-        private fun fetchContributions(callback: LoadCallback<Contribution>) {
+        public fun fetchContributions(callback: LoadCallback<Contribution>) {
+            if (userName.isNullOrEmpty()) {
+                Timber.e("Failed to fetch contributions: userName is null or empty")
+                return
+            }
+            Timber.d("Fetching contributions for user: $userName")
+
             compositeDisposable.add(
                 mediaClient
                     .getMediaListForUser(userName!!)
