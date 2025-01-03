@@ -24,6 +24,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.cancel
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import java.util.TreeMap
 import kotlin.collections.ArrayList
@@ -102,6 +103,12 @@ class ImageAdapter(
      * Helps to maintain the increasing sequence of the position. eg- 0, 1, 2, 3
      */
     private var imagePositionAsPerIncreasingOrder = 0
+
+    /**
+     * Stores the number of images currently visible on the screen
+     */
+    private val _currentImagesCount = MutableStateFlow(0)
+    val currentImagesCount = _currentImagesCount
 
     /**
      * Coroutine Dispatchers and Scope.
@@ -252,6 +259,7 @@ class ImageAdapter(
                 actionableImagesMap[next] = allImages[next]
                 alreadyAddedPositions.add(imagePositionAsPerIncreasingOrder)
                 imagePositionAsPerIncreasingOrder++
+                _currentImagesCount.value = imagePositionAsPerIncreasingOrder
                 Glide
                     .with(holder.image)
                     .load(allImages[next].uri)
@@ -382,6 +390,7 @@ class ImageAdapter(
         reachedEndOfFolder = false
         selectedImages = ArrayList()
         imagePositionAsPerIncreasingOrder = 0
+        _currentImagesCount.value = imagePositionAsPerIncreasingOrder
         val diffResult =
             DiffUtil.calculateDiff(
                 ImagesDiffCallback(oldImageList, newImageList),
@@ -441,6 +450,7 @@ class ImageAdapter(
                 val entry = iterator.next()
                 if (entry.value == image) {
                     imagePositionAsPerIncreasingOrder -= 1
+                    _currentImagesCount.value = imagePositionAsPerIncreasingOrder
                     iterator.remove()
                     alreadyAddedPositions.removeAt(alreadyAddedPositions.size - 1)
                     notifyItemRemoved(index)
