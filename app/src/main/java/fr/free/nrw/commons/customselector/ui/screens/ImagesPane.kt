@@ -85,6 +85,9 @@ fun ImagesPane(
                 .windowWidthSizeClass == WindowWidthSizeClass.COMPACT
         }
     }
+    val isSelectedImageNotForUpload by remember(uiState.selectedImageIds) {
+        derivedStateOf { uiState.selectedImageIds.any { uiState.imagesNotForUpload[it] == true } }
+    }
 
     LaunchedEffect(autoScrollSpeed) {
         if (autoScrollSpeed != 0f) {
@@ -117,8 +120,16 @@ fun ImagesPane(
                 Surface(tonalElevation = 1.dp) {
                     CustomSelectorBottomBar(
                         onPrimaryAction = { /*TODO("Implement action to upload selected images")*/ },
-                        onSecondaryAction = { /*TODO("Implement action to mark/unmark as not for upload")*/ },
-                        modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)
+                        onSecondaryAction = {
+                            if(isSelectedImageNotForUpload) {
+                                onEvent(CustomSelectorEvent.UnmarkAsNotForUpload)
+                            } else {
+                                onEvent(CustomSelectorEvent.MarkAsNotForUpload)
+                            }
+                        },
+                        isAnyImageNotForUpload = isSelectedImageNotForUpload,
+                        modifier = Modifier
+                            .padding(horizontal = 16.dp, vertical = 8.dp)
                             .navigationBarsPadding()
                     )
                 }
@@ -161,6 +172,10 @@ fun ImagesPane(
                         imagePainter = rememberAsyncImagePainter(model = image.uri),
                         isSelected = isSelected,
                         inSelectionMode = uiState.inSelectionMode,
+                        isNotForUpload = image.isNotForUpload,
+                        onImageStatusChange = { scope ->
+                            onEvent(CustomSelectorEvent.OnUpdateImageStatus(scope, image))
+                        },
                         modifier = Modifier.combinedClickable(
                             onClick = {
                                 if (uiState.inSelectionMode) {
@@ -184,9 +199,16 @@ fun ImagesPane(
 fun ImageItem(
     imagePainter: Painter,
     isSelected: Boolean,
+    onImageStatusChange: (scope: CoroutineScope) -> Unit,
     modifier: Modifier = Modifier,
-    inSelectionMode: Boolean = false
+    inSelectionMode: Boolean = false,
+    isNotForUpload: Boolean = false
 ) {
+    // This side-effect updates the image status, like:- isNotForUpload, for visible image only
+    LaunchedEffect(Unit) {
+        onImageStatusChange(this)
+    }
+
     Box(modifier = modifier.clip(RoundedCornerShape(12.dp))) {
         Image(
             painter = imagePainter,
@@ -217,10 +239,24 @@ fun ImageItem(
                     modifier = Modifier
                         .size(24.dp)
                         .clip(RoundedCornerShape(bottomEnd = 12.dp))
-                        .background(color = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.5f))
-                        .padding(2.dp)
+                        .background(
+                            color = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.5f)
+                        ).padding(2.dp)
                 )
             }
+        }
+
+        if(isNotForUpload) {
+            Icon(
+                painter = painterResource(id = R.drawable.not_for_upload),
+                contentDescription = null,
+                tint = MaterialTheme.colorScheme.error,
+                modifier = Modifier
+                    .align(Alignment.TopEnd)
+                    .clip(RoundedCornerShape(bottomStart = 12.dp))
+                    .background(color = MaterialTheme.colorScheme.errorContainer)
+                    .padding(4.dp)
+            )
         }
     }
 }
@@ -234,6 +270,8 @@ private fun ImageItemPreview() {
                 imagePainter = painterResource(id = R.drawable.image_placeholder_96),
                 isSelected = false,
                 inSelectionMode = true,
+                isNotForUpload = true,
+                onImageStatusChange = { },
                 modifier = Modifier
                     .padding(16.dp)
                     .size(116.dp)

@@ -1,6 +1,5 @@
 package fr.free.nrw.commons.customselector.ui.screens
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import fr.free.nrw.commons.customselector.domain.ImageRepository
@@ -83,6 +82,75 @@ class CustomSelectorViewModel @Inject constructor(
             CustomSelectorEvent.OnUnselectAll-> {
                 _uiState.update { it.copy(selectedImageIds = emptySet()) }
             }
+
+            is CustomSelectorEvent.OnUpdateImageStatus -> {
+                e.scope.launch { updateNotForUploadStatus(e.image) }
+            }
+
+            is CustomSelectorEvent.MarkAsNotForUpload -> {
+                viewModelScope.launch {
+                    val selectedImageIds = _uiState.value.selectedImageIds
+
+                    val selectedImages = allImages.filter { image ->
+                        selectedImageIds.contains(image.id)
+                    }
+
+                    selectedImages.forEach { image ->
+                        cacheSHA1[image.id]?.let { sha ->
+                            if(!imageRepository.isNotForUpload(sha)) {
+                                imageRepository.markAsNotForUpload(sha)
+                                updateImageStatus(true, image.id)
+                                _uiState.update { it.copy(selectedImageIds = emptySet()) }
+                            }
+                        }
+                    }
+                }
+            }
+
+            CustomSelectorEvent.UnmarkAsNotForUpload -> {
+                viewModelScope.launch {
+                    val selectedImageIds = _uiState.value.selectedImageIds
+
+                    val selectedImages = allImages.filter { image ->
+                        selectedImageIds.contains(image.id)
+                    }
+
+                    selectedImages.forEach { image ->
+                        cacheSHA1[image.id]?.let { sha ->
+                            if(imageRepository.isNotForUpload(sha)) {
+                                imageRepository.unmarkAsNotForUpload(sha)
+                                updateImageStatus(false, image.id)
+                                _uiState.update { it.copy(selectedImageIds = emptySet()) }
+                            }
+                        }
+                    }
+                }
+            }
         }
+    }
+
+    private fun updateImageStatus(isNotForUpload: Boolean, imageId: Long) {
+        _uiState.update { state ->
+            val updatedImages = state.filteredImages.map {
+                if (it.id == imageId) {
+                    it.copy(isNotForUpload = isNotForUpload)
+                } else {
+                    it
+                }
+            }
+            val updateMap = state.imagesNotForUpload.toMutableMap()
+            updateMap[imageId] = isNotForUpload
+
+            state.copy(filteredImages = updatedImages, imagesNotForUpload = updateMap)
+        }
+    }
+
+    private suspend fun updateNotForUploadStatus(image: ImageUiState) {
+        val imageSHA = cacheSHA1.getOrPut(image.id) {
+            imageUseCase.getImageSHA1(image.uri).also { sha -> cacheSHA1[image.id] = sha }
+        }
+
+        val isNotForUpload = imageRepository.isNotForUpload(imageSHA)
+        updateImageStatus(isNotForUpload, image.id)
     }
 }
