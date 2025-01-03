@@ -216,14 +216,15 @@ class ImageFragment :
         switch = binding?.switchWidget
         switch?.visibility = View.VISIBLE
         switch?.setOnCheckedChangeListener { _, isChecked -> onChangeSwitchState(isChecked) }
+
         imageAdapter.currentImagesCountLiveData.observe(viewLifecycleOwner, Observer {
-            if(switch!= null && switch?.isChecked == false && it==0&& switch?.isVisible==true) {
+            if (switch?.isChecked == false && it == 0 && switch?.isVisible == true) {
                 binding?.allImagesUploadedOrMarked?.isVisible = true
-            }
-            else {
+            } else {
                 binding?.allImagesUploadedOrMarked?.isVisible = false
             }
         })
+
         selectorRV = binding?.selectorRv
         loader = binding?.loader
         progressLayout = binding?.progressLayout
