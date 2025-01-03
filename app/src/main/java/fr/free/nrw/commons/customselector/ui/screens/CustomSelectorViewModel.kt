@@ -1,44 +1,67 @@
 package fr.free.nrw.commons.customselector.ui.screens
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import fr.free.nrw.commons.customselector.data.MediaReader
-import fr.free.nrw.commons.customselector.model.Image
+import fr.free.nrw.commons.customselector.domain.ImageRepository
+import fr.free.nrw.commons.customselector.domain.model.Image
+import fr.free.nrw.commons.customselector.domain.use_case.ImageUseCase
+import fr.free.nrw.commons.customselector.ui.states.CustomSelectorUiState
+import fr.free.nrw.commons.customselector.ui.states.ImageUiState
+import fr.free.nrw.commons.customselector.ui.states.toImageUiState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class CustomSelectorViewModel(private val mediaReader: MediaReader): ViewModel() {
+typealias imageId = Long
+typealias imageSHA = String
 
-    private val _uiState = MutableStateFlow(CustomSelectorState())
+class CustomSelectorViewModel @Inject constructor(
+    private val imageRepository: ImageRepository,
+    private val imageUseCase: ImageUseCase
+): ViewModel() {
+
+    private val _uiState = MutableStateFlow(CustomSelectorUiState())
     val uiState = _uiState.asStateFlow()
 
+    private val cacheSHA1 = mutableMapOf<imageId, imageSHA>()
+
+    private val allImages = mutableListOf<ImageUiState>()
     private val foldersMap = mutableMapOf<Long, MutableList<Image>>()
 
     init {
-        _uiState.update { it.copy(isLoading = true) }
         viewModelScope.launch {
-            mediaReader.getImages().collect { image->
+            imageRepository.getImagesFromDevice().collect { image ->
                 val bucketId = image.bucketId
+
+                allImages.add(image.toImageUiState())
                 foldersMap.getOrPut(bucketId) { mutableListOf() }.add(image)
             }
-            val foldersList = foldersMap.map { (bucketId, images)->
+            val folders = foldersMap.map { (bucketId, images)->
                 val firstImage = images.first()
                 Folder(
-                    bucketId = bucketId, bucketName = firstImage.bucketName,
-                    preview = firstImage.uri, itemsCount = images.size
+                    bucketId = bucketId,
+                    bucketName = firstImage.bucketName,
+                    preview = firstImage.uri,
+                    itemsCount = images.size,
+                    images = images
                 )
             }
-            _uiState.update { it.copy(isLoading = false, folders = foldersList) }
+            _uiState.update { it.copy(isLoading = false, folders = folders) }
         }
     }
 
     fun onEvent(e: CustomSelectorEvent) {
         when(e) {
-            is CustomSelectorEvent.OnFolderClick-> {
+            is CustomSelectorEvent.OnFolderClick -> {
                 _uiState.update {
-                    it.copy(filteredImages = foldersMap[e.bucketId]?.toList() ?: emptyList())
+                    it.copy(
+                        filteredImages = foldersMap[e.bucketId]?.map {
+                            img -> img.toImageUiState()
+                        } ?: emptyList()
+                    )
                 }
             }
 
@@ -46,7 +69,7 @@ class CustomSelectorViewModel(private val mediaReader: MediaReader): ViewModel()
                 _uiState.update { state ->
                     val updatedSelectedIds = if (state.selectedImageIds.contains(e.imageId)) {
                         state.selectedImageIds - e.imageId // Remove if already selected
-                    } else{
+                    } else {
                         state.selectedImageIds + e.imageId // Add if not selected
                     }
                     state.copy(selectedImageIds = updatedSelectedIds)

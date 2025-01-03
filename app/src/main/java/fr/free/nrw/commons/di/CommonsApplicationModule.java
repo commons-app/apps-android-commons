@@ -17,8 +17,12 @@ import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.AccountUtil;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.contributions.ContributionDao;
+import fr.free.nrw.commons.customselector.data.ImageRepositoryImpl;
+import fr.free.nrw.commons.customselector.data.MediaReader;
 import fr.free.nrw.commons.customselector.database.NotForUploadStatusDao;
 import fr.free.nrw.commons.customselector.database.UploadedStatusDao;
+import fr.free.nrw.commons.customselector.domain.ImageRepository;
+import fr.free.nrw.commons.customselector.domain.use_case.ImageUseCase;
 import fr.free.nrw.commons.customselector.ui.selector.ImageFileLoader;
 import fr.free.nrw.commons.data.DBOpenHelper;
 import fr.free.nrw.commons.db.AppDatabase;
@@ -316,5 +320,14 @@ public class CommonsApplicationModule {
     @Provides
     public ContentResolver providesContentResolver(Context context){
         return context.getContentResolver();
+    }
+
+    @Provides
+    public ImageRepository providesImageRepository(
+        MediaReader mediaReader,
+        NotForUploadStatusDao notForUploadStatusDao,
+        ImageUseCase imageUseCase
+    ) {
+        return new ImageRepositoryImpl(mediaReader, notForUploadStatusDao);
     }
 }

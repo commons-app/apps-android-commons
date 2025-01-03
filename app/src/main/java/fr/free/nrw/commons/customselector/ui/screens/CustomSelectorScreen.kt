@@ -56,12 +56,14 @@ import fr.free.nrw.commons.R
 import fr.free.nrw.commons.customselector.ui.components.CustomSelectorBottomBar
 import fr.free.nrw.commons.customselector.ui.components.CustomSelectorTopBar
 import fr.free.nrw.commons.customselector.ui.components.PartialStorageAccessDialog
+import fr.free.nrw.commons.customselector.ui.states.CustomSelectorUiState
+import fr.free.nrw.commons.customselector.ui.states.ImageUiState
 import fr.free.nrw.commons.ui.theme.CommonsTheme
 
 @OptIn(ExperimentalMaterial3AdaptiveApi::class)
 @Composable
 fun CustomSelectorScreen(
-    uiState: CustomSelectorState,
+    uiState: CustomSelectorUiState,
     onEvent: (CustomSelectorEvent)-> Unit,
     selectedImageIds: ()-> Set<Long>,
     onViewImage: (id: Long)-> Unit,
@@ -112,7 +114,7 @@ fun CustomSelectorScreen(
 
 @Composable
 fun FoldersPane(
-    uiState: CustomSelectorState,
+    uiState: CustomSelectorUiState,
     onFolderClick: (Folder)-> Unit,
     onUnselectAll: ()-> Unit,
     adaptiveInfo: WindowAdaptiveInfo,
@@ -270,7 +272,7 @@ private fun FolderItemPreview() {
 private fun CustomSelectorScreenPreview() {
     CommonsTheme {
         CustomSelectorScreen(
-            uiState = CustomSelectorState(),
+            uiState = CustomSelectorUiState(),
             onViewImage = { },
             onEvent = { },
             selectedImageIds = { emptySet() },

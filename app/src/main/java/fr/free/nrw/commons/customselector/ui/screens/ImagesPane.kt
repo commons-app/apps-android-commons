@@ -39,6 +39,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Offset
@@ -54,18 +55,20 @@ import androidx.compose.ui.unit.toIntRect
 import androidx.window.core.layout.WindowWidthSizeClass
 import coil.compose.rememberAsyncImagePainter
 import fr.free.nrw.commons.R
-import fr.free.nrw.commons.customselector.domain.model.Image
 import fr.free.nrw.commons.customselector.ui.components.CustomSelectorBottomBar
 import fr.free.nrw.commons.customselector.ui.components.CustomSelectorTopBar
 import fr.free.nrw.commons.customselector.ui.components.PartialStorageAccessDialog
+import fr.free.nrw.commons.customselector.ui.states.CustomSelectorUiState
+import fr.free.nrw.commons.customselector.ui.states.ImageUiState
 import fr.free.nrw.commons.ui.theme.CommonsTheme
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun ImagesPane(
-    uiState: CustomSelectorState,
+    uiState: CustomSelectorUiState,
     selectedFolder: Folder,
     selectedImages: () -> Set<Long>,
     onNavigateBack: () -> Unit,
@@ -74,7 +77,6 @@ fun ImagesPane(
     adaptiveInfo: WindowAdaptiveInfo,
     hasPartialAccess: Boolean = false
 ) {
-//    val inSelectionMode by remember { derivedStateOf { selectedImages().isNotEmpty() } }
     val lazyGridState = rememberLazyGridState()
     var autoScrollSpeed by remember { mutableFloatStateOf(0f) }
     val isCompatWidth by remember(adaptiveInfo.windowSizeClass) {
@@ -255,7 +257,7 @@ private fun ImageItemPreview() {
  */
 fun Modifier.imageGridDragHandler(
     gridState: LazyGridState,
-    imageList: List<Image>,
+    imageList: List<ImageUiState>,
     selectedImageIds: () -> Set<Long>,
     autoScrollThreshold: Float,
     setSelectedImageIds: (Set<Long>) -> Unit,
@@ -337,7 +339,7 @@ fun Modifier.imageGridDragHandler(
  * @param pointerKey The ending index of the range.
  * @return A set of image IDs within the specified range.
  */
-fun List<Image>.getImageIdsInRange(initialKey: Int, pointerKey: Int): Set<Long> {
+fun List<ImageUiState>.getImageIdsInRange(initialKey: Int, pointerKey: Int): Set<Long> {
     val setOfKeys = mutableSetOf<Long>()
     if (initialKey < pointerKey) {
         (initialKey..pointerKey).forEach {

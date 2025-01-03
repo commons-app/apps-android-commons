@@ -27,21 +27,20 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import fr.free.nrw.commons.R
-import fr.free.nrw.commons.customselector.data.MediaReader
 import fr.free.nrw.commons.customselector.database.NotForUploadStatus
 import fr.free.nrw.commons.customselector.database.NotForUploadStatusDao
+import fr.free.nrw.commons.customselector.domain.model.Image
 import fr.free.nrw.commons.customselector.helper.CustomSelectorConstants
 import fr.free.nrw.commons.customselector.helper.FolderDeletionHelper
 import fr.free.nrw.commons.customselector.listeners.FolderClickListener
 import fr.free.nrw.commons.customselector.listeners.ImageSelectListener
-import fr.free.nrw.commons.customselector.domain.model.Image
 import fr.free.nrw.commons.customselector.ui.screens.CustomSelectorScreen
 import fr.free.nrw.commons.customselector.ui.screens.ViewImageScreen
+import fr.free.nrw.commons.customselector.utils.CustomSelectorViewModelFactory
 import fr.free.nrw.commons.databinding.ActivityCustomSelectorBinding
 import fr.free.nrw.commons.databinding.CustomSelectorBottomLayoutBinding
 import fr.free.nrw.commons.databinding.CustomSelectorToolbarBinding
@@ -191,17 +190,11 @@ class CustomSelectorActivity :
 //        setContentView(view)
 
         prefs = applicationContext.getSharedPreferences("CustomSelector", MODE_PRIVATE)
-        viewModel =
-            ViewModelProvider(this, customSelectorViewModelFactory).get(
-                CustomSelectorViewModel::class.java,
-            )
-
-        val mediaReader = MediaReader(this)
 
         setContent {
-            val csViewModel = viewModel<fr.free.nrw.commons.customselector.ui.screens.CustomSelectorViewModel> {
-                fr.free.nrw.commons.customselector.ui.screens.CustomSelectorViewModel(mediaReader)
-            }
+            val csViewModel = ViewModelProvider(this, customSelectorViewModelFactory).get(
+                fr.free.nrw.commons.customselector.ui.screens.CustomSelectorViewModel::class.java
+            )
 
             val uiState by csViewModel.uiState.collectAsStateWithLifecycle()
 
@@ -265,7 +258,7 @@ class CustomSelectorActivity :
 
     override fun onResume() {
         super.onResume()
-        fetchData()
+//        fetchData()
     }
 
     /**
