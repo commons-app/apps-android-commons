@@ -22,12 +22,14 @@ fun PrimaryButton(
     text: String,
     onClick: ()-> Unit,
     modifier: Modifier = Modifier,
+    enabled: Boolean = true,
     shape: Shape = RoundedCornerShape(12.dp),
 ) {
     Button(
         onClick = onClick,
         modifier = modifier,
         shape = shape,
+        enabled = enabled,
         contentPadding = PaddingValues(horizontal = 24.dp, vertical = 4.dp)
     ) {
         Text(
@@ -42,11 +44,13 @@ fun SecondaryButton(
     text: String,
     onClick: ()-> Unit,
     modifier: Modifier = Modifier,
+    enabled: Boolean = true,
     shape: Shape = RoundedCornerShape(12.dp),
 ) {
     OutlinedButton(
         onClick = onClick,
         modifier = modifier,
+        enabled = enabled,
         border = BorderStroke(1.dp, color = MaterialTheme.colorScheme.primary),
         shape = shape,
         contentPadding = PaddingValues(horizontal = 16.dp, vertical = 4.dp)

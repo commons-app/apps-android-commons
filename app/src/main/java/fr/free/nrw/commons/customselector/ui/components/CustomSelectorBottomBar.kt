@@ -19,14 +19,21 @@ import fr.free.nrw.commons.ui.theme.CommonsTheme
 fun CustomSelectorBottomBar(
     onPrimaryAction: ()-> Unit,
     onSecondaryAction: ()-> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    isAnyImageNotForUpload: Boolean = false
 ) {
+    val buttonText = if (isAnyImageNotForUpload) {
+        R.string.unmark_as_not_for_upload
+    } else {
+        R.string.mark_as_not_for_upload
+    }
+
     Row(
         modifier = modifier,
         horizontalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         SecondaryButton(
-            text = stringResource(R.string.mark_as_not_for_upload).uppercase(),
+            text = stringResource(buttonText).uppercase(),
             onClick = onSecondaryAction,
             modifier = Modifier.weight(1f)
         )
@@ -34,6 +41,7 @@ fun CustomSelectorBottomBar(
         PrimaryButton(
             text = stringResource(R.string.upload).uppercase(),
             onClick = onPrimaryAction,
+            enabled = !isAnyImageNotForUpload,
             modifier = Modifier
                 .weight(1f)
                 .height(IntrinsicSize.Max)
