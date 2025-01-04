@@ -1,7 +1,6 @@
 package fr.free.nrw.commons.settings
 
 import android.Manifest.permission
-import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.Dialog
 import android.content.Context.MODE_PRIVATE
@@ -11,7 +10,6 @@ import android.net.Uri
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.view.KeyEvent
 import android.view.View
 import android.widget.AdapterView
 import android.widget.Button
@@ -131,7 +129,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
         inAppCameraLocationPref?.setOnPreferenceChangeListener { _, newValue ->
             val isInAppCameraLocationTurnedOn = newValue as Boolean
             if (isInAppCameraLocationTurnedOn) {
-                createDialogsAndHandleLocationPermissions(requireActivity())
+                createDialogsAndHandleLocationPermissions()
             }
             true
         }
@@ -256,7 +254,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
      *
      * @param activity
      */
-    private fun createDialogsAndHandleLocationPermissions(activity: Activity) {
+    private fun createDialogsAndHandleLocationPermissions() {
         inAppCameraLocationPermissionLauncher.launch(arrayOf(permission.ACCESS_FINE_LOCATION))
     }
 
@@ -284,7 +282,6 @@ class SettingsFragment : PreferenceFragmentCompat() {
         return object : PreferenceGroupAdapter(preferenceScreen) {
             override fun onBindViewHolder(holder: PreferenceViewHolder, position: Int) {
                 super.onBindViewHolder(holder, position)
-                val preference = getItem(position)
                 val iconFrame: View? = holder.itemView.findViewById(R.id.icon_frame)
                 iconFrame?.visibility = View.GONE
             }

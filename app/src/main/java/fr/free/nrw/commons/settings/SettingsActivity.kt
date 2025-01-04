@@ -12,7 +12,6 @@ import fr.free.nrw.commons.theme.BaseActivity
 class SettingsActivity : BaseActivity() {
 
     private lateinit var binding: ActivitySettingsBinding
-//    private var settingsDelegate: AppCompatDelegate? = null
 
     /**
      * to be called when the activity starts
