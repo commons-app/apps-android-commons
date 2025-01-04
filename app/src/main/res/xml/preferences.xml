@@ -129,4 +129,14 @@
           android:title="@string/send_log_file" />
 
     </PreferenceCategory>
+
+    <PreferenceCategory
+      android:title="@string/account">
+
+        <Preference
+          android:key="vanishAccount"
+          app:singleLineTitle="false"
+          android:title="@string/vanish_account"/>
+
+    </PreferenceCategory>
 </PreferenceScreen>

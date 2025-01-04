@@ -56,6 +56,10 @@
     tools:ignore="GoogleAppIndexingWarning"
     tools:replace="android:appComponentFactory">
     <activity
+      android:name=".activity.SingleWebViewActivity"
+      android:exported="false"
+      android:label="@string/title_activity_single_web_view" />
+    <activity
       android:name=".nearby.WikidataFeedback"
       android:exported="false" />
     <activity
