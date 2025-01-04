@@ -22,7 +22,6 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Named;
 import kotlin.Unit;
-import kotlin.jvm.functions.Function0;
 
 /**
  * The presenter class for Contributions
@@ -45,7 +44,7 @@ public class ContributionsListPresenter implements UserActionListener {
     // Timer for polling new contributions
     private Handler pollingHandler;
     private Runnable pollingRunnable;
-    private long pollingInterval = 1 * 60 * 1000L; // Poll every minute
+    private long pollingInterval = 24 * 60 * 60 * 1000L; // Poll every day
 
     @Inject
     ContributionsListPresenter(
@@ -136,7 +135,7 @@ public class ContributionsListPresenter implements UserActionListener {
     }
 
     /**
-     * Start polling for new contributions every 15 minutes.
+     * Start polling for new contributions every 24 hour.
      */
     private void startPollingForNewContributions() {
         if (pollingHandler != null) {
@@ -147,7 +146,7 @@ public class ContributionsListPresenter implements UserActionListener {
         pollingRunnable = new Runnable() {
             @Override
             public void run() {
-                fetchNewContributions(); // Fetch new contributions in background
+                checkForNewContributions();
                 pollingHandler.postDelayed(this, pollingInterval); // Repeat after the interval
             }
         };
@@ -164,22 +163,33 @@ public class ContributionsListPresenter implements UserActionListener {
             pollingRunnable = null;
         }
     }
+    private String lastKnownIdentifier = null; // Declare and initialize
 
-    public void appendContributions(List<Contribution> newContributions) {
-        if (newContributions != null && !newContributions.isEmpty()) {
-            existingContributions.addAll(newContributions);
-            liveData.postValue(existingContributions);
-        }
+    /**
+     * Check for new contributions by comparing the latest contribution identifier.
+     */
+    private void checkForNewContributions() {
+        contributionsRemoteDataSource.fetchLatestContributionIdentifier(latestIdentifier -> {
+            if (latestIdentifier != null && !latestIdentifier.equals(lastKnownIdentifier)) {
+                lastKnownIdentifier = latestIdentifier;
+                fetchAllContributions(); // Fetch the full list of contributions
+            }
+            return Unit.INSTANCE; // Explicitly return Unit for Kotlin compatibility
+        });
+
     }
+
     /**
      * Fetch new contributions from the server and append them to the existing list.
      */
-    private void fetchNewContributions() {
-        contributionsRemoteDataSource.fetchContributions(new ContributionsRemoteDataSource.LoadCallback<Contribution>() {
+    private void fetchAllContributions() {
+        contributionsRemoteDataSource.fetchAllContributions(new ContributionsRemoteDataSource.LoadCallback<Contribution>() {
             @Override
             public void onResult(List<Contribution> newContributions) {
                 if (newContributions != null && !newContributions.isEmpty()) {
-                    appendContributions(newContributions); // Add new contributions
+                    existingContributions.clear();
+                    existingContributions.addAll(newContributions);
+                    liveData.postValue(existingContributions); // Update liveData with the new list
                 }
             }
         });
