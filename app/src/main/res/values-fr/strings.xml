@@ -320,6 +320,7 @@
   <string name="copy_wikicode">Copier le texte wiki dans le presse-papiers</string>
   <string name="wikicode_copied">Texte wiki copié dans le presse-papiers</string>
   <string name="nearby_location_not_available">« À proximité » pourrait ne pas fonctionner correctement, votre emplacement étant indisponible.</string>
+  <string name="nearby_showing_pins_offline">Internet indisponible. Affichage uniquement des éléments mis en cache.</string>
   <string name="upload_location_access_denied">Refus d’accès à la localisation. Veuillez définir manuellement votre localisation pour utiliser cette fonctionnalité.</string>
   <string name="location_permission_rationale_nearby">Une permission est requise pour afficher une liste de lieux à proximité</string>
   <string name="location_permission_rationale_explore">Permission nécessaire pour afficher une liste d’images à proximité</string>

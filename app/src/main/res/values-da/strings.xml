@@ -284,6 +284,7 @@
   <string name="copy_wikicode">Kopier wikiteksten til udklipsholderen</string>
   <string name="wikicode_copied">Wikiteksten blev kopieret til udklipsholderen</string>
   <string name="nearby_location_not_available">I nærheden fungerer muligvis ikke korrekt. Placeringen er ikke tilgængelig.</string>
+  <string name="nearby_showing_pins_offline">Internet ikke tilgængeligt. Viser kun cachelagrede steder.</string>
   <string name="upload_location_access_denied">Placeringsadgang nægtet. Indstil din placering manuelt for at bruge denne funktion.</string>
   <string name="location_permission_rationale_nearby">Tilladelse kræves for at vise en liste over steder i nærheden</string>
   <string name="location_permission_rationale_explore">Der kræves tilladelse til at vise en liste over billeder i nærheden</string>

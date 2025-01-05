@@ -26,6 +26,7 @@
 * Reedy
 * RucolaSpacecat
 * Sebastian Wallroth
+* SergeCroise
 * SpaceEnergy
 * Sujan
 * Sushi
@@ -313,6 +314,7 @@
   <string name="copy_wikicode">Den Wikitext in die Zwischenablage kopieren</string>
   <string name="wikicode_copied">Der Wikitext wurde in die Zwischenablage kopiert</string>
   <string name="nearby_location_not_available">„In der Nähe“ arbeiten möglicherwiese nicht richtig. Der Standort ist nicht verfügbar.</string>
+  <string name="nearby_showing_pins_offline">Internet ist nicht verfügbar. Es werden nur zwischengespeicherte Orte angezeigt.</string>
   <string name="upload_location_access_denied">Standortzugriff verweigert. Bitte lege deinen Standort manuell fest, um diese Funktion nutzen zu können.</string>
   <string name="location_permission_rationale_nearby">Berechtigung zur Anzeige einer Liste mit Orten in der Nähe erforderlich</string>
   <string name="location_permission_rationale_explore">Berechtigung zur Anzeige einer Liste mit Orten in der Nähe erforderlich</string>

@@ -331,6 +331,7 @@
   <string name="copy_wikicode">انسخ نص الويكي إلى الكليب بورد</string>
   <string name="wikicode_copied">نص الويكي تم نسخه إلى الكليب بورد</string>
   <string name="nearby_location_not_available">قد لا تعمل الأجهزة المجاورة بشكل صحيح، الموقع غير متوفر.</string>
+  <string name="nearby_showing_pins_offline">الإنترنت غير متاح. يتم عرض الأماكن المخزنة مؤقتًا فقط.</string>
   <string name="upload_location_access_denied">رُفض الوصول إلى الموقع. يرجى ضبط موقعك يدويًا لاستخدام هذه الميزة.</string>
   <string name="location_permission_rationale_nearby">صلاحية مطلوبة لعرض قائمة بالأماكن القريبة</string>
   <string name="location_permission_rationale_explore">الإذن مطلوب لعرض قائمة الصور القريبة</string>

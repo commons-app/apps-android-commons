@@ -4,6 +4,7 @@
 * Astralnet
 * Domdomegg
 * Evropi
+* Fotis A.
 * Geraki
 * Giannaras99
 * Giorgos456
@@ -296,6 +297,7 @@
   <string name="copy_wikicode">Αντιγράψτε το wikitext στο πρόχειρο</string>
   <string name="wikicode_copied">Το wikitext αντιγράφηκε στο πρόχειρο</string>
   <string name="nearby_location_not_available">Η λειτουργία «Κοντά σας» ενδέχεται να μη δουλεύει σωστά, η Τοποθεσία δεν είναι διαθέσιμη.</string>
+  <string name="nearby_showing_pins_offline">Το Διαδίκτυο δεν είναι διαθέσιμο. Εμφάνιση μόνο αποθηκευμένων τοποθεσιών.</string>
   <string name="upload_location_access_denied">Δεν επιτρέπεται η πρόσβαση στην τοποθεσία. Ρυθμίστε την τοποθεσία σας με χειροκίνητο τρόπο για να χρησιμοποιήσετε αυτήν τη δυνατότητα.</string>
   <string name="location_permission_rationale_nearby">Απαιτείται άδεια για την εμφάνιση καταλόγου κοντινών σημείων</string>
   <string name="location_permission_rationale_explore">Απαιτείται άδεια για την εμφάνιση καταλόγου κοντινών εικόνων</string>
