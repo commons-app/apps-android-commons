@@ -154,7 +154,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
         inAppCameraLocationPref?.setOnPreferenceChangeListener { _, newValue ->
             val isInAppCameraLocationTurnedOn = newValue as Boolean
             if (isInAppCameraLocationTurnedOn) {
-                createDialogsAndHandleLocationPermissions(requireActivity())
+                createDialogsAndHandleLocationPermissions()
             }
             true
         }
@@ -279,7 +279,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
      *
      * @param activity
      */
-    private fun createDialogsAndHandleLocationPermissions(activity: Activity) {
+    private fun createDialogsAndHandleLocationPermissions() {
         inAppCameraLocationPermissionLauncher.launch(arrayOf(permission.ACCESS_FINE_LOCATION))
     }
 
@@ -307,7 +307,6 @@ class SettingsFragment : PreferenceFragmentCompat() {
         return object : PreferenceGroupAdapter(preferenceScreen) {
             override fun onBindViewHolder(holder: PreferenceViewHolder, position: Int) {
                 super.onBindViewHolder(holder, position)
-                val preference = getItem(position)
                 val iconFrame: View? = holder.itemView.findViewById(R.id.icon_frame)
                 iconFrame?.visibility = View.GONE
             }
