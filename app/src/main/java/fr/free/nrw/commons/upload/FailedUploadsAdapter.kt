@@ -1,5 +1,8 @@
 package fr.free.nrw.commons.upload
 
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context.CLIPBOARD_SERVICE
 import android.net.Uri
 import android.text.TextUtils
 import android.view.LayoutInflater
@@ -13,6 +16,7 @@ import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.facebook.imagepipeline.request.ImageRequest
+import com.google.android.material.snackbar.Snackbar
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.contributions.Contribution
 import java.io.File
@@ -51,6 +55,17 @@ class FailedUploadsAdapter(
         position: Int,
     ) {
         val item: Contribution? = getItem(position)
+        val itemView = holder.itemView
+        val clipboardManager =
+            itemView.context.getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
+
+        itemView.setOnLongClickListener {
+            val clip = ClipData.newPlainText("Caption", item?.media?.displayTitle)
+            clipboardManager.setPrimaryClip(clip)
+            Snackbar.make(itemView, "Caption copied to clipboard", Snackbar.LENGTH_SHORT).show()
+            true
+        }
+
         if (item != null) {
             holder.titleTextView.setText(item.media.displayTitle)
         }
