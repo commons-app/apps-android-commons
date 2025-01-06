@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-      android:layout_gravity="center_vertical">
+        android:layout_gravity="center_vertical">
 
         <FrameLayout
             android:layout_width="@dimen/landscape_width"
