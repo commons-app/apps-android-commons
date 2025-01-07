@@ -860,5 +860,7 @@ Upload your first media by tapping on the add button.</string>
   <string name="usages_on_other_wikis_heading">Other wikis</string>
   <string name="bullet_point">•</string>
   <string name="file_usages_container_heading">File usages</string>
+  <string name="caption">Caption</string>
+  <string name="caption_copied_to_clipboard">Caption copied to clipboard</string>
 
 </resources>
