@@ -1,39 +1,40 @@
-package fr.free.nrw.commons.concurrency;
+package fr.free.nrw.commons.concurrency
 
-import java.util.concurrent.CancellationException;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Future;
-import java.util.concurrent.ScheduledThreadPoolExecutor;
-import java.util.concurrent.ThreadFactory;
+import java.util.concurrent.CancellationException
+import java.util.concurrent.ExecutionException
+import java.util.concurrent.Future
+import java.util.concurrent.ScheduledThreadPoolExecutor
+import java.util.concurrent.ThreadFactory
 
-class ExceptionAwareThreadPoolExecutor extends ScheduledThreadPoolExecutor {
 
-    private final ExceptionHandler exceptionHandler;
+class ExceptionAwareThreadPoolExecutor(
+    corePoolSize: Int,
+    threadFactory: ThreadFactory,
+    private val exceptionHandler: ExceptionHandler?
+) : ScheduledThreadPoolExecutor(corePoolSize, threadFactory) {
 
-    public ExceptionAwareThreadPoolExecutor(int corePoolSize, ThreadFactory threadFactory,
-                                            ExceptionHandler exceptionHandler) {
-        super(corePoolSize, threadFactory);
-        this.exceptionHandler = exceptionHandler;
-    }
+    override fun afterExecute(r: Runnable, t: Throwable?) {
+        super.afterExecute(r, t)
+        var throwable = t
 
-    @Override
-    protected void afterExecute(Runnable r, Throwable t) {
-        super.afterExecute(r, t);
-        if (t == null && r instanceof Future<?>) {
+        if (throwable == null && r is Future<*>) {
             try {
-                Future<?> future = (Future<?>) r;
-                if (future.isDone()) future.get();
-            } catch (CancellationException | InterruptedException e) {
-                //ignore
-            } catch (ExecutionException e) {
-                t = e.getCause() != null ? e.getCause() : e;
-            } catch (Exception e) {
-                t = e;
+                if (r.isDone) {
+                    r.get()
+                }
+            } catch (e: CancellationException) {
+                // ignore
+            } catch (e: InterruptedException) {
+                // ignore
+            } catch (e: ExecutionException) {
+                throwable = e.cause ?: e
+            } catch (e: Exception) {
+                throwable = e
             }
         }
 
-        if (t != null) {
-            exceptionHandler.onException(t);
+        throwable?.let {
+            exceptionHandler?.onException(it)
         }
     }
 }

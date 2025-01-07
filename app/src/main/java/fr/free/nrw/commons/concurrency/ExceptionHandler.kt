@@ -1,7 +1,7 @@
-package fr.free.nrw.commons.concurrency;
+package fr.free.nrw.commons.concurrency
 
-import androidx.annotation.NonNull;
+interface ExceptionHandler {
 
-public interface ExceptionHandler {
-    void onException(@NonNull Throwable t);
+    fun onException(t: Throwable)
+
 }
