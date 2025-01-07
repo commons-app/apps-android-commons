@@ -131,7 +131,7 @@ class BookmarkLocationsDao @Inject constructor(
     }
 
     @SuppressLint("Range")
-    private fun fromCursor(cursor: Cursor): Place {
+    fun fromCursor(cursor: Cursor): Place {
         val location = LatLng(
             cursor.getDouble(cursor.getColumnIndex(Table.COLUMN_LAT)),
             cursor.getDouble(cursor.getColumnIndex(Table.COLUMN_LONG)),
@@ -209,9 +209,9 @@ class BookmarkLocationsDao @Inject constructor(
             COLUMN_EXISTS
         )
 
-        private const val DROP_TABLE_STATEMENT = "DROP TABLE IF EXISTS $TABLE_NAME"
+        const val DROP_TABLE_STATEMENT = "DROP TABLE IF EXISTS $TABLE_NAME"
 
-        private const val CREATE_TABLE_STATEMENT = """
+        const val CREATE_TABLE_STATEMENT = """
         CREATE TABLE $TABLE_NAME (
             $COLUMN_NAME STRING PRIMARY KEY,
             $COLUMN_LANGUAGE STRING,

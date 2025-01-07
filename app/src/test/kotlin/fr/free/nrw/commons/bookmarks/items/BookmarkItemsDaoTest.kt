@@ -135,7 +135,7 @@ class BookmarkItemsDaoTest {
         whenever(client.query(any(), any(), anyOrNull(), any(), anyOrNull()))
             .thenReturn(createCursor(14))
 
-        val result = testObject.allBookmarksItems
+        val result = testObject.getAllBookmarksItems()
 
         Assert.assertEquals(14, (result.size))
     }
@@ -145,20 +145,20 @@ class BookmarkItemsDaoTest {
         whenever(client.query(any(), any(), anyOrNull(), any(), anyOrNull())).thenThrow(
             RemoteException(""),
         )
-        testObject.allBookmarksItems
+        testObject.getAllBookmarksItems()
     }
 
     @Test
     fun getAllItemsBookmarksReturnsEmptyList_emptyCursor() {
         whenever(client.query(any(), any(), anyOrNull(), any(), anyOrNull()))
             .thenReturn(createCursor(0))
-        Assert.assertTrue(testObject.allBookmarksItems.isEmpty())
+        Assert.assertTrue(testObject.getAllBookmarksItems().isEmpty())
     }
 
     @Test
     fun getAllItemsBookmarksReturnsEmptyList_nullCursor() {
         whenever(client.query(any(), any(), anyOrNull(), any(), anyOrNull())).thenReturn(null)
-        Assert.assertTrue(testObject.allBookmarksItems.isEmpty())
+        Assert.assertTrue(testObject.getAllBookmarksItems().isEmpty())
     }
 
     @Test
@@ -167,7 +167,7 @@ class BookmarkItemsDaoTest {
         whenever(client.query(any(), any(), anyOrNull(), any(), anyOrNull())).thenReturn(mockCursor)
         whenever(mockCursor.moveToFirst()).thenReturn(false)
 
-        testObject.allBookmarksItems
+        testObject.getAllBookmarksItems()
 
         verify(mockCursor).close()
     }

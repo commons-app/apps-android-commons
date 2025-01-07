@@ -251,8 +251,8 @@ class BookmarkItemsDao @Inject constructor(
             COLUMN_ID
         )
 
-        private const val DROP_TABLE_STATEMENT = "DROP TABLE IF EXISTS $TABLE_NAME"
-        private const val CREATE_TABLE_STATEMENT = """
+        const val DROP_TABLE_STATEMENT = "DROP TABLE IF EXISTS $TABLE_NAME"
+        const val CREATE_TABLE_STATEMENT = """
             CREATE TABLE $TABLE_NAME (
                 $COLUMN_NAME STRING,
                 $COLUMN_DESCRIPTION STRING,
