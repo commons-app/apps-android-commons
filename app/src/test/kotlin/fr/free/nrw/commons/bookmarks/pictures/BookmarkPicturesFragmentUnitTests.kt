@@ -162,7 +162,7 @@ class BookmarkPicturesFragmentUnitTests {
     @Test
     @Throws(Exception::class)
     fun testGetAdapter() {
-        fragment.adapter
+        fragment.getAdapter()
     }
 
     @Test

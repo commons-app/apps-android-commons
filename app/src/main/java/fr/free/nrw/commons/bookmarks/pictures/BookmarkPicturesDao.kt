@@ -137,7 +137,7 @@ class BookmarkPicturesDao @Inject constructor(
     }
 
     @SuppressLint("Range")
-    private fun fromCursor(cursor: Cursor): Bookmark {
+    fun fromCursor(cursor: Cursor): Bookmark {
         val fileName = cursor.getString(cursor.getColumnIndex(Table.COLUMN_MEDIA_NAME))
         return Bookmark(
             fileName,
