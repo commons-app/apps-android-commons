@@ -50,6 +50,7 @@ dependencies {
     implementation "com.google.android.material:material:1.12.0"
     implementation 'com.karumi:dexter:5.0.0'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+    implementation 'androidx.lifecycle:lifecycle-runtime-compose-android:2.8.7'
 
     // Jetpack Compose
     def composeBom = platform('androidx.compose:compose-bom:2024.11.00')
