@@ -111,6 +111,12 @@ class ImageAdapter(
     val currentImagesCount = _currentImagesCount
 
     /**
+     * Stores whether images are being loaded or not
+     */
+    private val _isLoadingImages = MutableStateFlow(false)
+    val isLoadingImages = _isLoadingImages
+
+    /**
      * Coroutine Dispatchers and Scope.
      */
     private var defaultDispatcher: CoroutineDispatcher = Dispatchers.Default
@@ -191,8 +197,12 @@ class ImageAdapter(
                     // If the position is not already visited, that means the position is new then
                     // finds the next actionable image position from all images
                     if (!alreadyAddedPositions.contains(position)) {
-                        processThumbnailForActionedImage(holder, position, uploadingContributionList)
-
+                        processThumbnailForActionedImage(
+                            holder,
+                            position,
+                            uploadingContributionList
+                        )
+                        _isLoadingImages.value = false
                         // If the position is already visited, that means the image is already present
                         // inside map, so it will fetch the image from the map and load in the holder
                     } else {
@@ -238,6 +248,7 @@ class ImageAdapter(
         position: Int,
         uploadingContributionList: List<Contribution>,
     ) {
+        _isLoadingImages.value = true
         val next =
             imageLoader.nextActionableImage(
                 allImages,
@@ -275,6 +286,7 @@ class ImageAdapter(
             reachedEndOfFolder = true
             notifyItemRemoved(position)
         }
+        _isLoadingImages.value = false
     }
 
     /**
@@ -380,6 +392,7 @@ class ImageAdapter(
         emptyMap: TreeMap<Int, Image>,
         uploadedImages: List<Contribution> = ArrayList(),
     ) {
+        _isLoadingImages.value = true
         allImages = fixedImages
         val oldImageList: ArrayList<Image> = images
         val newImageList: ArrayList<Image> = ArrayList(newImages)

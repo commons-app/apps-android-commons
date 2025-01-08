@@ -258,12 +258,13 @@ class ImageFragment :
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 combine(
                     imageAdapter.currentImagesCount,
-                    switchState
-                ) { imageCount, isChecked ->
-                    imageCount to isChecked
-                }.collect { (imageCount, isChecked) ->
+                    switchState,
+                    imageAdapter.isLoadingImages
+                ) { imageCount, isChecked, isLoadingImages ->
+                    Triple(imageCount, isChecked, isLoadingImages)
+                }.collect { (imageCount, isChecked, isLoadingImages) ->
                     binding?.allImagesUploadedOrMarked?.isVisible =
-                        !isChecked && imageCount == 0 && (switch?.isVisible == true)
+                        !isLoadingImages && !isChecked && imageCount == 0 && (switch?.isVisible == true)
                 }
             }
         }
