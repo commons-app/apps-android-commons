@@ -233,21 +233,6 @@ class ImageFragment :
             onChangeSwitchState(isChecked)
             _switchState.value = isChecked
         }
-
-        viewLifecycleOwner.lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
-                combine(
-                    imageAdapter.currentImagesCount,
-                    switchState
-                ) { imageCount, isChecked ->
-                    imageCount to isChecked
-                }.collect { (imageCount, isChecked) ->
-                    binding?.allImagesUploadedOrMarked?.isVisible =
-                        !isChecked && imageCount == 0 && (switch?.isVisible == true)
-                }
-            }
-        }
-
         selectorRV = binding?.selectorRv
         loader = binding?.loader
         progressLayout = binding?.progressLayout
@@ -265,6 +250,23 @@ class ImageFragment :
         progressDialog = builder.create()
 
         return binding?.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        viewLifecycleOwner.lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                combine(
+                    imageAdapter.currentImagesCount,
+                    switchState
+                ) { imageCount, isChecked ->
+                    imageCount to isChecked
+                }.collect { (imageCount, isChecked) ->
+                    binding?.allImagesUploadedOrMarked?.isVisible =
+                        !isChecked && imageCount == 0 && (switch?.isVisible == true)
+                }
+            }
+        }
     }
 
     private fun onChangeSwitchState(checked: Boolean) {
