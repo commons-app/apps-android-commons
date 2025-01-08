@@ -20,8 +20,8 @@ import timber.log.Timber;
 
 public class NearbyController extends MapController {
 
-    private static final int MAX_RESULTS = 1000;
     private final NearbyPlaces nearbyPlaces;
+    public static final int MAX_RESULTS = 1000;
     public static double currentLocationSearchRadius = 10.0; //in kilometers
     public static LatLng currentLocation; // Users latest fetched location
     public static LatLng latestSearchLocation; // Can be current and camera target on search this area button is used
@@ -196,8 +196,9 @@ public class NearbyController extends MapController {
             return null;
         }
 
-        List<Place> places = nearbyPlaces.getFromWikidataQuery(screenTopRight, screenBottomLeft,
-            Locale.getDefault().getLanguage(), shouldQueryForMonuments, customQuery);
+        List<Place> places = nearbyPlaces.getFromWikidataQuery(currentLatLng, screenTopRight,
+            screenBottomLeft, Locale.getDefault().getLanguage(), shouldQueryForMonuments,
+            customQuery);
 
         if (null != places && places.size() > 0) {
             LatLng[] boundaryCoordinates = {

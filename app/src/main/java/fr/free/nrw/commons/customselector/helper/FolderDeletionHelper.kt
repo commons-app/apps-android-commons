@@ -42,6 +42,7 @@ object FolderDeletionHelper {
 
             AlertDialog.Builder(context)
                 .setTitle(context.getString(R.string.custom_selector_confirm_deletion_title))
+                .setCancelable(false)
                 .setMessage(
                     context.getString(
                         R.string.custom_selector_confirm_deletion_message,

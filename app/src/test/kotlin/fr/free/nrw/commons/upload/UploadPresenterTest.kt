@@ -83,7 +83,7 @@ class UploadPresenterTest {
     @Test
     fun handleSubmitImagesNoLocationWithConsecutiveNoLocationUploads() {
         `when`(imageCoords.imageCoordsExists).thenReturn(false)
-        `when`(uploadItem.getGpsCoords()).thenReturn(imageCoords)
+        `when`(uploadItem.gpsCoords).thenReturn(imageCoords)
         `when`(repository.getUploads()).thenReturn(uploadableItems)
         uploadableItems.add(uploadItem)
 
@@ -111,7 +111,7 @@ class UploadPresenterTest {
             defaultKvStore.getInt(UploadPresenter.COUNTER_OF_CONSECUTIVE_UPLOADS_WITHOUT_COORDINATES, 0),
         ).thenReturn(UploadPresenter.CONSECUTIVE_UPLOADS_WITHOUT_COORDINATES_REMINDER_THRESHOLD)
         `when`(imageCoords.imageCoordsExists).thenReturn(true)
-        `when`(uploadItem.getGpsCoords()).thenReturn(imageCoords)
+        `when`(uploadItem.gpsCoords).thenReturn(imageCoords)
         `when`(repository.getUploads()).thenReturn(uploadableItems)
         uploadableItems.add(uploadItem)
         uploadPresenter.handleSubmit()

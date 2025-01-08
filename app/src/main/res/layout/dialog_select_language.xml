@@ -66,9 +66,18 @@
     android:layout_height="0dp"
     android:layout_marginTop="8dp"
     android:id="@+id/language_list"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintBottom_toTopOf="@id/cancel_button"
     app:layout_constraintTop_toBottomOf="@+id/all_languages" />
+
+
+  <Button
+    android:id="@+id/cancel_button"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="@string/cancel"
+    android:textColor="@color/primaryColor"
+    android:background="@android:color/transparent"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

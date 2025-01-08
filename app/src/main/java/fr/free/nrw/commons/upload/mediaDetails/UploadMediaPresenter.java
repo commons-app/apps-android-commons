@@ -106,7 +106,7 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
      */
     @Override
     public void setUploadMediaDetails(final List<UploadMediaDetail> uploadMediaDetails, final int uploadItemIndex) {
-        repository.getUploads().get(uploadItemIndex).setMediaDetails(uploadMediaDetails);
+        repository.getUploads().get(uploadItemIndex).setUploadMediaDetails(uploadMediaDetails);
     }
 
     /**
@@ -284,7 +284,7 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
     public void copyTitleAndDescriptionToSubsequentMedia(final int indexInViewFlipper) {
       for(int i = indexInViewFlipper+1; i < repository.getCount(); i++){
         final UploadItem subsequentUploadItem = repository.getUploads().get(i);
-        subsequentUploadItem.setMediaDetails(deepCopy(repository.getUploads().get(indexInViewFlipper).getUploadMediaDetails()));
+        subsequentUploadItem.setUploadMediaDetails(deepCopy(repository.getUploads().get(indexInViewFlipper).getUploadMediaDetails()));
       }
     }
 
@@ -322,23 +322,24 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
   }
 
   /**
-   * Updates the information regarding the specified place for uploads
+   * Updates the information regarding the specified place for the specified upload item
    * when the user confirms the suggested nearby place.
    *
    * @param place The place to be associated with the uploads.
+   * @param uploadItemIndex Index of the uploadItem whose detected place has been confirmed
    */
   @Override
-  public void onUserConfirmedUploadIsOfPlace(final Place place) {
-      final List<UploadItem> uploads = repository.getUploads();
-      for (final UploadItem uploadItem : uploads) {
-          uploadItem.setPlace(place);
-          final List<UploadMediaDetail> uploadMediaDetails = uploadItem.getUploadMediaDetails();
-          // Update UploadMediaDetail object for this UploadItem
-          uploadMediaDetails.set(0, new UploadMediaDetail(place));
-      }
-      // Now that all UploadItems and their associated UploadMediaDetail objects have been updated,
+  public void onUserConfirmedUploadIsOfPlace(final Place place, final int uploadItemIndex) {
+      final UploadItem uploadItem = repository.getUploads().get(uploadItemIndex);
+
+      uploadItem.setPlace(place);
+      final List<UploadMediaDetail> uploadMediaDetails = uploadItem.getUploadMediaDetails();
+      // Update UploadMediaDetail object for this UploadItem
+      uploadMediaDetails.set(0, new UploadMediaDetail(place));
+
+      // Now that the UploadItem and its associated UploadMediaDetail objects have been updated,
       // update the view with the modified media details of the first upload item
-      view.updateMediaDetails(uploads.get(0).getUploadMediaDetails());
+      view.updateMediaDetails(uploadMediaDetails);
       UploadActivity.setUploadIsOfAPlace(true);
   }
 

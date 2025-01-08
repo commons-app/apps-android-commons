@@ -2,18 +2,17 @@ package fr.free.nrw.commons.bookmarks;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.FrameLayout;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.bookmarks.category.BookmarkCategoriesFragment;
 import fr.free.nrw.commons.bookmarks.items.BookmarkItemsFragment;
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsFragment;
 import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesFragment;
@@ -26,6 +25,7 @@ import fr.free.nrw.commons.media.MediaDetailPagerFragment;
 import fr.free.nrw.commons.navtab.NavTab;
 import java.util.ArrayList;
 import java.util.Iterator;
+import timber.log.Timber;
 
 public class BookmarkListRootFragment extends CommonsDaggerSupportFragment implements
     FragmentManager.OnBackStackChangedListener,
@@ -48,14 +48,21 @@ public class BookmarkListRootFragment extends CommonsDaggerSupportFragment imple
         String title = bundle.getString("categoryName");
         int order = bundle.getInt("order");
         final int orderItem = bundle.getInt("orderItem");
-        if (order == 0) {
-            listFragment = new BookmarkPicturesFragment();
-        } else {
-            listFragment = new BookmarkLocationsFragment();
+
+        switch (order){
+            case 0: listFragment = new BookmarkPicturesFragment();
+            break;
+
+            case 1: listFragment = new BookmarkLocationsFragment();
+            break;
+
+            case 3: listFragment = new BookmarkCategoriesFragment();
+            break;
+        }
             if(orderItem == 2) {
                 listFragment = new BookmarkItemsFragment();
             }
-        }
+
         Bundle featuredArguments = new Bundle();
         featuredArguments.putString("categoryName", title);
         listFragment.setArguments(featuredArguments);
@@ -129,7 +136,7 @@ public class BookmarkListRootFragment extends CommonsDaggerSupportFragment imple
 
     @Override
     public void onMediaClicked(int position) {
-        Log.d("deneme8", "on media clicked");
+        Timber.d("on media clicked");
     /*container.setVisibility(View.VISIBLE);
     ((BookmarkFragment)getParentFragment()).tabLayout.setVisibility(View.GONE);
     mediaDetails = new MediaDetailPagerFragment(false, true, position);
@@ -237,7 +244,7 @@ public class BookmarkListRootFragment extends CommonsDaggerSupportFragment imple
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Log.d("deneme8", "on media clicked");
+        Timber.d("on media clicked");
         binding.exploreContainer.setVisibility(View.VISIBLE);
         ((BookmarkFragment) getParentFragment()).binding.tabLayout.setVisibility(View.GONE);
         mediaDetails = MediaDetailPagerFragment.newInstance(false, true);

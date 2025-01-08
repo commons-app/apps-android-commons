@@ -67,6 +67,7 @@ public class RecentSearchesFragment extends CommonsDaggerSupportFragment {
             .setPositiveButton(android.R.string.yes,
                 (dialog, which) -> setDeleteRecentPositiveButton(context, dialog))
             .setNegativeButton(android.R.string.no, null)
+            .setCancelable(false)
             .create()
             .show();
     }
@@ -94,6 +95,7 @@ public class RecentSearchesFragment extends CommonsDaggerSupportFragment {
             .setPositiveButton(getString(R.string.delete).toUpperCase(Locale.ROOT),
                 ((dialog, which) -> setDeletePositiveButton(context, dialog, position)))
             .setNegativeButton(android.R.string.cancel, null)
+            .setCancelable(false)
             .create()
             .show();
     }

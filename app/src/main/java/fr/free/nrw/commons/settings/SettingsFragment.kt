@@ -1,7 +1,6 @@
 package fr.free.nrw.commons.settings
 
 import android.Manifest.permission
-import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.Dialog
 import android.content.Context.MODE_PRIVATE
@@ -13,6 +12,7 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import android.widget.AdapterView
+import android.widget.Button
 import android.widget.EditText
 import android.widget.ListView
 import android.widget.TextView
@@ -129,7 +129,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
         inAppCameraLocationPref?.setOnPreferenceChangeListener { _, newValue ->
             val isInAppCameraLocationTurnedOn = newValue as Boolean
             if (isInAppCameraLocationTurnedOn) {
-                createDialogsAndHandleLocationPermissions(requireActivity())
+                createDialogsAndHandleLocationPermissions()
             }
             true
         }
@@ -254,7 +254,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
      *
      * @param activity
      */
-    private fun createDialogsAndHandleLocationPermissions(activity: Activity) {
+    private fun createDialogsAndHandleLocationPermissions() {
         inAppCameraLocationPermissionLauncher.launch(arrayOf(permission.ACCESS_FINE_LOCATION))
     }
 
@@ -282,7 +282,6 @@ class SettingsFragment : PreferenceFragmentCompat() {
         return object : PreferenceGroupAdapter(preferenceScreen) {
             override fun onBindViewHolder(holder: PreferenceViewHolder, position: Int) {
                 super.onBindViewHolder(holder, position)
-                val preference = getItem(position)
                 val iconFrame: View? = holder.itemView.findViewById(R.id.icon_frame)
                 iconFrame?.visibility = View.GONE
             }
@@ -341,6 +340,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
         val editText: EditText = dialog.findViewById(R.id.search_language)
         val listView: ListView = dialog.findViewById(R.id.language_list)
+        val cancelButton = dialog.findViewById<Button>(R.id.cancel_button)
         languageHistoryListView = dialog.findViewById(R.id.language_history_list)
         recentLanguagesTextView = dialog.findViewById(R.id.recent_searches)
         separator = dialog.findViewById(R.id.separator)
@@ -348,6 +348,8 @@ class SettingsFragment : PreferenceFragmentCompat() {
         setUpRecentLanguagesSection(recentLanguages, selectedLanguages)
 
         listView.adapter = languagesAdapter
+
+        cancelButton.setOnClickListener { dialog.dismiss() }
 
         editText.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(charSequence: CharSequence, start: Int, count: Int, after: Int) {
@@ -378,10 +380,12 @@ class SettingsFragment : PreferenceFragmentCompat() {
             if (keyListPreference == "appUiDefaultLanguagePref") {
                 appUiLanguageListPreference?.summary = defLocale.getDisplayLanguage(defLocale)
                 setLocale(requireActivity(), lCode)
-                requireActivity().recreate()
                 val intent = Intent(requireActivity(), MainActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
+                requireActivity().finish()
                 startActivity(intent)
-            } else {
+            }
+                else {
                 descriptionLanguageListPreference?.summary = defLocale.getDisplayLanguage(defLocale)
             }
             dialog.dismiss()

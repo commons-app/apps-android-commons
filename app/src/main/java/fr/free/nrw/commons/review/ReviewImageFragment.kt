@@ -61,7 +61,12 @@ class ReviewImageFragment : CommonsDaggerSupportFragment() {
                     R.string.review_category_explanation,
                     formattedCatString
                 )
-                return Html.fromHtml(stringToConvertHtml).toString()
+                val formattedString = if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+                    Html.fromHtml(stringToConvertHtml, Html.FROM_HTML_MODE_LEGACY).toString()
+                } else {
+                    Html.fromHtml(stringToConvertHtml).toString()
+                }
+                return formattedString
             }
         }
         return getString(R.string.review_no_category)

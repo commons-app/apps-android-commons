@@ -481,7 +481,7 @@ class UploadMediaDetailFragmentUnitTest {
         `when`(imageCoordinates.zoomLevel).thenReturn(14.0)
         `when`(defaultKvStore.getString(LAST_ZOOM)).thenReturn(null)
         fragment.showExternalMap(uploadItem)
-        Mockito.verify(uploadItem.gpsCoords, Mockito.times(1)).zoomLevel
+        Mockito.verify(uploadItem.gpsCoords, Mockito.times(1))?.zoomLevel
         val shadowActivity: ShadowActivity = shadowOf(activity)
         val startedIntent = shadowActivity.nextStartedActivity
         val shadowIntent: ShadowIntent = shadowOf(startedIntent)

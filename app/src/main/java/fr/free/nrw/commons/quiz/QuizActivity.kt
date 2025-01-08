@@ -139,6 +139,7 @@ class QuizActivity : AppCompatActivity() {
             .setTitle(title)
             .setMessage(message)
             .setCancelable(false)
+            .setNegativeButton(R.string.cancel){_,_ -> }
             .setPositiveButton(R.string.continue_message) { dialog, _ ->
                 questionIndex++
                 if (questionIndex == quiz.size) {

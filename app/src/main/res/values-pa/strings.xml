@@ -67,17 +67,18 @@
   <string name="menu_from_camera">ਤਸਵੀਰ ਲਵੋ</string>
   <string name="menu_nearby">ਨੇੜੇ-ਤੇੜੇ</string>
   <string name="provider_contributions">ਮੇਰੇ ਅੱਪਲੋਡ</string>
+  <string name="menu_copy_link">ਕੜੀ ਦੀ ਨਕਲ ਕਰੋ</string>
   <string name="menu_share">ਸਾਂਝਾ ਕਰੋ</string>
   <string name="share_title_hint">ਸੁਰਖੀ (ਲੋੜੀਂਦੀ)</string>
   <string name="share_description_hint">ਵੇਰਵਾ</string>
   <string name="login_failed_network">ਦਾਖ਼ਲ ਹੋਣ ਵਿੱਚ ਅਸਮਰੱਥ - ਨੈੱਟਵਰਕ ਫੇਲ੍ਹ ਹੋਇਆ ਹੈ</string>
   <string name="login_failed_throttled">ਬਹੁਤ ਸਾਰੀਆਂ ਅਸਫ਼ਲ ਕੋਸ਼ਿਸ਼ਾਂ। ਥੋੜ੍ਹੀ ਦੇਰ ਬਾਅਦ ਕੋਸ਼ਿਸ਼ ਕਰੋ ਜੀ।</string>
-  <string name="login_failed_blocked">ਅਫ਼ਸੋਸ, ਇਹ ਵਰਤੋਂਕਾਰ ਕਾਮਨਜ਼ ਉੱਤੇ ਬਲਾਕ ਕਰ ਦਿੱਤਾ ਗਿਆ ਹੈ</string>
+  <string name="login_failed_blocked">ਅਫ਼ਸੋਸ, ਇਹ ਵਰਤੋਂਕਾਰ ਨੂੰ ਕਾਮਨਜ਼ ਤੇ ਰੋਕ ਲਾਈ ਗਈ ਹੈ।</string>
   <string name="login_failed_generic">ਦਾਖ਼ਲ ਹੋਣਾ ਅਸਫ਼ਲ!</string>
   <string name="share_upload_button">ਚੜ੍ਹਾਉ</string>
   <string name="multiple_share_base_title">ਇਸ ਸੈੱਟ ਨੂੰ ਨਾਂ ਦਿਓ</string>
   <string name="provider_modifications">ਸੋਧਾਂ</string>
-  <string name="menu_upload_single">ਅੱਪਲੋਡ</string>
+  <string name="menu_upload_single">ਚੜ੍ਹਾਉ</string>
   <string name="categories_search_text_hint">ਸ਼੍ਰੇਣੀਆਂ ਖੋਜੋ</string>
   <string name="menu_save_categories">ਸਾਂਭੋ</string>
   <string name="refresh_button">ਤਾਜ਼ਾ ਕਰੋ</string>
@@ -118,7 +119,7 @@
   <string name="license_name_cc_by_4_0">CC BY 4.0</string>
   <string name="tutorial_1_text">ਵਿਕੀਮੀਡੀਆ ਕਾਮਨਜ਼ ਜ਼ਿਆਦਾਤਰ ਉਹ ਤਸਵੀਰਾਂ ਦਾ ਭੰਡਾਰ ਹੈ ਜੋ ਵਿਕੀਪੀਡੀਆ \'ਤੇ ਵਰਤੀਆਂ ਜਾਂਦੀਆਂ ਹਨ।</string>
   <string name="tutorial_1_subtext">ਤੁਹਾਡੀਆਂ ਤਸਵੀਰਾਂ ਵਿਸ਼ਵ ਦੇ ਬਾਕੀ ਲੋਕਾਂ ਨੂੰ ਸਿੱਖਿਅਤ ਕਰਨ ਲਈ ਸਹਾਈ ਹਨ!</string>
-  <string name="tutorial_2_text">ਕਿਰਪਾ ਕਰਕੇ ਉਹ ਤਸਵੀਰਾਂ ਅਪਲੋਡ ਕਰੋ ਜੋ ਤੁਹਾਡੇ ਦੁਆਰਾ ਲਈਆਂ ਗਈਆਂ ਹਨ ਜਾਂ ਬਣਾਈਆਂ ਗਈਆਂ ਹਨ:</string>
+  <string name="tutorial_2_text">ਕਿਰਪਾ ਕਰਕੇ ਉਹ ਤਸਵੀਰਾਂ  ਨੂੰ ਚੜ੍ਹਾਉ ਜੋ ਤੁਹਾਡੇ ਵੱਲੋਂ ਲਈਆਂ ਗਈਆਂ ਹਨ ਜਾਂ ਬਣਾਈਆਂ ਗਈਆਂ ਹਨ:</string>
   <string name="tutorial_3_text">ਕਿਰਪਾ ਕਰਕੇ ਅਪਲੋਡ ਨਾ ਕਰੋ:</string>
   <string name="tutorial_4_text">ਉਦਾਹਰਣ ਵਜੋਂ ਇਹ ਅਪਲੋਡ:</string>
   <string name="welcome_wikipedia_text">ਆਪਣੀਆਂ ਤਸਵੀਰਾਂ ਦਾ ਯੋਗਦਾਨ ਪਾਓ। ਵਿਕੀਪੀਡੀਆ ਲੇਖਾਂ ਨੂੰ ਸੁਰਜੀਤ ਕਰ ਦਿਓ!</string>
@@ -201,6 +202,7 @@
   <string name="next">ਅੱਗੇ</string>
   <string name="previous">ਪਿਛਲਾ</string>
   <string name="title_page_bookmarks_locations">ਟਿਕਾਣਾ</string>
+  <string name="title_page_bookmarks_categories">ਸ਼੍ਰੇਣੀਆਂ</string>
   <string name="ends_on">ਨੂੰ ਮਿਆਦ ਪੁਗਦੀ</string>
   <string name="display_campaigns">ਮੁਹਿੰਮਾਂ ਵੇਖਾਓ</string>
   <string name="option_allow">ਇਜਾਜ਼ਤ ਦਿਓ</string>

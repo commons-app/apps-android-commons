@@ -154,6 +154,8 @@
   <string name="menu_from_camera">拍照</string>
   <string name="menu_nearby">附近</string>
   <string name="provider_contributions">我的上传</string>
+  <string name="menu_copy_link">复制链接</string>
+  <string name="menu_link_copied">链接已复制到剪贴板。</string>
   <string name="menu_share">分享</string>
   <string name="menu_view_file_page">查看文件页面</string>
   <string name="share_title_hint">说明（必需）</string>
@@ -329,6 +331,7 @@
   <string name="copy_wikicode">复制wikitext到剪贴板</string>
   <string name="wikicode_copied">wikitext已经复制到剪贴板</string>
   <string name="nearby_location_not_available">附近可能无法正常工作，位置不可用。</string>
+  <string name="nearby_showing_pins_offline">互联网不可用。仅显示缓存的位置。</string>
   <string name="upload_location_access_denied">位置权限被拒绝。请手动设置您的位置以使用此功能。</string>
   <string name="location_permission_rationale_nearby">需要权限以显示附近地点列表</string>
   <string name="location_permission_rationale_explore">需要权限以显示附近图片列表</string>
@@ -412,11 +415,13 @@
   <string name="delete">删除</string>
   <string name="Achievements">成就</string>
   <string name="Profile">个人资料</string>
+  <string name="badges">徽章</string>
   <string name="statistics">统计</string>
   <string name="statistics_thanks">已收到感谢</string>
   <string name="statistics_featured">特色图片</string>
   <string name="statistics_wikidata_edits">来自“附近地点”的图片</string>
-  <string name="level" fuzzy="true">等级</string>
+  <string name="level">等级%d</string>
+  <string name="profileLevel">%s（%s級）</string>
   <string name="images_uploaded">已上传图片</string>
   <string name="image_reverts">未还原图片</string>
   <string name="images_used_by_wiki">使用过的图片</string>
@@ -448,6 +453,7 @@
   <string name="map_application_missing">您的设备上无法找到兼容的地图应用程序。请安装地图应用程序来使用此功能。</string>
   <string name="title_page_bookmarks_pictures">图片</string>
   <string name="title_page_bookmarks_locations">方位</string>
+  <string name="title_page_bookmarks_categories">分类</string>
   <string name="menu_bookmark">添加/删除书签</string>
   <string name="provider_bookmarks">书签</string>
   <string name="bookmark_empty">您还未加入任何书签</string>
@@ -850,4 +856,8 @@
   <string name="red_pin">这个地点还没有照片，快去拍一张吧！</string>
   <string name="green_pin">这个地点已经有照片了。</string>
   <string name="grey_pin">现在检查这个地点是否有照片。</string>
+  <string name="error_while_loading">加载时出错</string>
+  <string name="usages_on_commons_heading">维基共享资源</string>
+  <string name="usages_on_other_wikis_heading">其它wiki</string>
+  <string name="file_usages_container_heading">文件用途</string>
 </resources>

@@ -10,6 +10,7 @@ import android.os.Parcelable
 import androidx.exifinterface.media.ExifInterface
 
 import fr.free.nrw.commons.upload.FileUtils
+import fr.free.nrw.commons.upload.ImageCoordinates
 import java.io.File
 import java.io.IOException
 import java.util.Date
@@ -87,9 +88,7 @@ class UploadableFile : Parcelable {
     fun hasLocation(): Boolean {
         return try {
             val exif = ExifInterface(file.absolutePath)
-            val latitude = exif.getAttribute(ExifInterface.TAG_GPS_LATITUDE)
-            val longitude = exif.getAttribute(ExifInterface.TAG_GPS_LONGITUDE)
-            latitude != null && longitude != null
+            ImageCoordinates(exif, null).imageCoordsExists
         } catch (e: IOException) {
             Timber.tag("UploadableFile").d(e)
             false

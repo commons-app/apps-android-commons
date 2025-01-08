@@ -131,6 +131,8 @@
   <string name="menu_from_camera">צילום תמונה</string>
   <string name="menu_nearby">בסביבה</string>
   <string name="provider_contributions">ההעלאות שלי</string>
+  <string name="menu_copy_link">העתקת קישור</string>
+  <string name="menu_link_copied">הקישור הועתק ללוח</string>
   <string name="menu_share">שיתוף</string>
   <string name="menu_view_file_page">הצגת דף קובץ</string>
   <string name="share_title_hint">כיתוב (נדרש)</string>
@@ -306,6 +308,7 @@
   <string name="copy_wikicode">העתקת קוד ויקי ללוח</string>
   <string name="wikicode_copied">קוד הוויקי הועתק ללוח</string>
   <string name="nearby_location_not_available">ייתכן ש\"בסביבה\" לא יפעל כראוי, משום שהמיקום אינו זמין.</string>
+  <string name="nearby_showing_pins_offline">האינטרנט אינו זמין. מוצגים רק מקומות שמורים.</string>
   <string name="upload_location_access_denied">הגישה למיקום נדחתה. נא להגדיר את המקום שלך ידנית כדי להשתמש ביכולת הזאת.</string>
   <string name="location_permission_rationale_nearby">נדרשת הרשאה כדי להציג רשימה של מקומות בסביבה</string>
   <string name="location_permission_rationale_explore">נדרשת הרשאה להצגת רשימת התמונות בסביבתך</string>
@@ -427,6 +430,7 @@
   <string name="map_application_missing">לא נמצא יישום מפה תואם במכשיר שלך. נא להתקין יישום מפה כדי להשתמש בתכונה זו.</string>
   <string name="title_page_bookmarks_pictures">תמונות</string>
   <string name="title_page_bookmarks_locations">מיקומים</string>
+  <string name="title_page_bookmarks_categories">קטגוריות</string>
   <string name="menu_bookmark">הוספה / הסרה של סימנייה</string>
   <string name="provider_bookmarks">סימניות</string>
   <string name="bookmark_empty">לא הוספת שום סימנייה</string>
