@@ -9,6 +9,7 @@ import android.content.Intent
 import android.database.sqlite.SQLiteException
 import android.os.Build
 import android.os.Process
+import android.speech.SpeechRecognizer
 import android.util.Log
 import androidx.multidex.MultiDexApplication
 import com.facebook.drawee.backends.pipeline.Fresco
@@ -90,6 +91,13 @@ class CommonsApplication : MultiDexApplication() {
 
     @Inject
     lateinit var contributionDao: ContributionDao
+
+    /**
+     * Flag to check if speech recognition is available.
+     */
+    val isVoiceRecognitionAvailable by lazy {
+        SpeechRecognizer.isRecognitionAvailable(this)
+    }
 
     /**
      * Used to declare and initialize various components and dependencies
