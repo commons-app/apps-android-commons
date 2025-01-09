@@ -30,8 +30,8 @@ import fr.free.nrw.commons.contributions.MainActivity
 class QuizResultActivity : AppCompatActivity() {
 
     private var binding: ActivityQuizResultBinding? = null
-    private val NUMBER_OF_QUESTIONS = 5
-    private val MULTIPLIER_TO_GET_PERCENTAGE = 20
+    private val numberOfQuestions = 5
+    private val multiplierToGetPercentage = 20
 
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -67,9 +67,9 @@ class QuizResultActivity : AppCompatActivity() {
      */
     @SuppressLint("StringFormatInvalid", "SetTextI18n")
     fun setScore(score: Int) {
-        val scorePercent = score * MULTIPLIER_TO_GET_PERCENTAGE
+        val scorePercent = score * multiplierToGetPercentage
         binding?.resultProgressBar?.progress = scorePercent
-        binding?.tvResultProgress?.text = "$score / $NUMBER_OF_QUESTIONS"
+        binding?.tvResultProgress?.text = "$score / $numberOfQuestions"
         val message = resources.getString(R.string.congratulatory_message_quiz, "$scorePercent%")
         binding?.congratulatoryMessage?.text = message
     }
