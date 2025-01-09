@@ -806,4 +806,6 @@
   <string name="usages_on_other_wikis_heading">Àutre wiki</string>
   <string name="bullet_point">•</string>
   <string name="file_usages_container_heading">Usagi dl\'archivi</string>
+  <string name="caption">Legenda</string>
+  <string name="caption_copied_to_clipboard">Legenda copià an sla taulëtta</string>
 </resources>

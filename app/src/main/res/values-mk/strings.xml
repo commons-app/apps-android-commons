@@ -810,4 +810,6 @@
   <string name="usages_on_other_wikis_heading">Други викија</string>
   <string name="bullet_point">•</string>
   <string name="file_usages_container_heading">Употреби на податотеката</string>
+  <string name="caption">Толкување</string>
+  <string name="caption_copied_to_clipboard">Толкувањето е ставено во меѓускладот</string>
 </resources>

@@ -743,4 +743,6 @@
   <string name="failed">Није успело</string>
   <string name="green_pin">Ово место већ има слику</string>
   <string name="grey_pin">Проверавање да ли ово место има слику.</string>
+  <string name="caption">Поднапис</string>
+  <string name="caption_copied_to_clipboard">Поднапис копиран</string>
 </resources>
