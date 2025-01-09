@@ -218,7 +218,7 @@ class BookmarkListRootFragmentUnitTest {
     @Test
     @Throws(Exception::class)
     fun testGetMediaAtPositionCaseNull() {
-        whenever(bookmarksPagerAdapter.mediaAdapter).thenReturn(null)
+        whenever(bookmarksPagerAdapter.getMediaAdapter()).thenReturn(null)
         Assert.assertEquals(fragment.getMediaAtPosition(0), null)
     }
 
@@ -226,7 +226,7 @@ class BookmarkListRootFragmentUnitTest {
     @Throws(Exception::class)
     fun testGetMediaAtPositionCaseNonNull() {
         val listAdapter = mock(ListAdapter::class.java)
-        whenever(bookmarksPagerAdapter.mediaAdapter).thenReturn(listAdapter)
+        whenever(bookmarksPagerAdapter.getMediaAdapter()).thenReturn(listAdapter)
         whenever(listAdapter.getItem(0)).thenReturn(media)
         Assert.assertEquals(fragment.getMediaAtPosition(0), media)
     }
@@ -234,7 +234,7 @@ class BookmarkListRootFragmentUnitTest {
     @Test
     @Throws(Exception::class)
     fun testGetTotalMediaCountCaseNull() {
-        whenever(bookmarksPagerAdapter.mediaAdapter).thenReturn(null)
+        whenever(bookmarksPagerAdapter.getMediaAdapter()).thenReturn(null)
         Assert.assertEquals(fragment.totalMediaCount, 0)
     }
 
@@ -242,7 +242,7 @@ class BookmarkListRootFragmentUnitTest {
     @Throws(Exception::class)
     fun testGetTotalMediaCountCaseNonNull() {
         val listAdapter = mock(ListAdapter::class.java)
-        whenever(bookmarksPagerAdapter.mediaAdapter).thenReturn(listAdapter)
+        whenever(bookmarksPagerAdapter.getMediaAdapter()).thenReturn(listAdapter)
         whenever(listAdapter.count).thenReturn(1)
         Assert.assertEquals(fragment.totalMediaCount, 1)
     }

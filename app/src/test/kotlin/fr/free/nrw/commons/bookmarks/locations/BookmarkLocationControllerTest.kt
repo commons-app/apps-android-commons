@@ -20,7 +20,7 @@ class BookmarkLocationControllerTest {
     @Before
     fun setup() {
         MockitoAnnotations.initMocks(this)
-        whenever(bookmarkDao!!.allBookmarksLocations)
+        whenever(bookmarkDao!!.getAllBookmarksLocations())
             .thenReturn(mockBookmarkList)
     }
 
