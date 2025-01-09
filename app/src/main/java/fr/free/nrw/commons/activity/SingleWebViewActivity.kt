@@ -30,6 +30,10 @@ import androidx.compose.ui.viewinterop.AndroidView
 import fr.free.nrw.commons.R
 import timber.log.Timber
 
+/**
+ * SingleWebViewActivity is a reusable activity webView based on a given url(initial url) and
+ * closes itself when a specified success URL is reached to success url.
+ */
 class SingleWebViewActivity : ComponentActivity() {
     @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {
