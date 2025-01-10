@@ -773,4 +773,6 @@
   <string name="usages_on_commons_heading">Commons</string>
   <string name="usages_on_other_wikis_heading">Altri wiki</string>
   <string name="file_usages_container_heading">Utilizzi del file</string>
+  <string name="caption">Didascalia</string>
+  <string name="caption_copied_to_clipboard">Didascalia copiata negli appunti</string>
 </resources>

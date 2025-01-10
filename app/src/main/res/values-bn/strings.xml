@@ -529,4 +529,6 @@
   <string name="uploads">আপলোড</string>
   <string name="pending">অমীমাংসিত</string>
   <string name="failed">ব্যর্থ হয়েছে</string>
+  <string name="caption">ক্যাপশন</string>
+  <string name="caption_copied_to_clipboard">ক্যাপশন ক্লিপবোর্ডে অনুলিপি করা হয়েছে</string>
 </resources>

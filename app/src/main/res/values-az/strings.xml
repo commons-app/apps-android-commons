@@ -56,8 +56,8 @@
   <string name="login_success">Uğurlu giriş!</string>
   <string name="login_failed">Giriş baş tutmadı!</string>
   <string name="upload_failed">Fayl tapılmadı. Xahiş edirik başqa bir fayl üzərində cəhd edin.</string>
-  <string name="retry_limit_reached">Maksimum təkrar cəhd limitinə çatdınız! Yükləməni ləğv edin və yenidən cəhd edin</string>
-  <string name="unrestricted_battery_mode">Batareya optimallaşdırılmasını söndürmək?</string>
+  <string name="retry_limit_reached">Maksimum təkrar cəhd limitinə çatdınız! Zəhmət olmasa, yükləməni ləğv edin və yenidən cəhd edin</string>
+  <string name="unrestricted_battery_mode">Batareya optimallaşdırılması söndürülsün?</string>
   <string name="authentication_failed" fuzzy="true">Doğrulama alınmadı, xahiş edirəm yenidən daxil olun</string>
   <string name="uploading_started">Yükləmə başladı!</string>
   <string name="upload_completed_notification_title">%1$s yükləndi!</string>

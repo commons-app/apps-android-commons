@@ -814,4 +814,6 @@
   <string name="usages_on_other_wikis_heading">Andre wikier</string>
   <string name="bullet_point">•</string>
   <string name="file_usages_container_heading">Filanvendelser</string>
+  <string name="caption">Billedtekst</string>
+  <string name="caption_copied_to_clipboard">Billedtekst kopieret til udklipsholder</string>
 </resources>

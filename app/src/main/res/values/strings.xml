@@ -860,5 +860,12 @@ Upload your first media by tapping on the add button.</string>
   <string name="usages_on_other_wikis_heading">Other wikis</string>
   <string name="bullet_point">•</string>
   <string name="file_usages_container_heading">File usages</string>
+  <string name="title_activity_single_web_view">SingleWebViewActivity</string>
+  <string name="account">Account</string>
+  <string name="vanish_account">Vanish Account</string>
+  <string name="account_vanish_request_confirm_title">Vanish account warning</string>
+  <string name="account_vanish_request_confirm"><![CDATA[Vanishing is a <b>last resort</b> and should <b>only be used when you wish to stop editing forever</b> and also to hide as many of your past associations as possible.<br/><br/>Account deletion on Wikimedia Commons is done by changing your account name to make it so others cannot recognize your contributions in a process called account vanishing. <b>Vanishing does not guarantee complete anonymity or remove contributions to the projects</b>.]]></string>
+  <string name="caption">Caption</string>
+  <string name="caption_copied_to_clipboard">Caption copied to clipboard</string>
 
 </resources>
