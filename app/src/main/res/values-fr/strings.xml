@@ -32,6 +32,7 @@
 * Orikrin1998
 * Paraboule
 * Patrick Star
+* Pols12
 * Robins7
 * Sherbrooke
 * SleaY
@@ -852,4 +853,6 @@
   <string name="usages_on_other_wikis_heading">Autres wikis</string>
   <string name="bullet_point">•</string>
   <string name="file_usages_container_heading">Utilisations du fichier</string>
+  <string name="caption">Légende</string>
+  <string name="caption_copied_to_clipboard">Légende copiée dans le presse-papier</string>
 </resources>
