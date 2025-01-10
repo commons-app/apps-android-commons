@@ -271,7 +271,7 @@ class CustomSelectorActivity :
         dialog.setCancelable(false)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setContentView(R.layout.custom_selector_info_dialog)
-        (dialog.findViewById(R.id.btn_ok) as Button).setOnClickListener { dialog.dismiss() }
+        (dialog.findViewById<Button>(R.id.btn_ok))?.setOnClickListener { dialog.dismiss() }
         dialog.show()
     }
 
@@ -687,8 +687,8 @@ class CustomSelectorActivity :
         dialog.setCancelable(false)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setContentView(R.layout.custom_selector_limit_dialog)
-        (dialog.findViewById(R.id.btn_dismiss_limit_warning) as Button).setOnClickListener { dialog.dismiss() }
-        (dialog.findViewById(R.id.upload_limit_warning) as TextView).text =
+        (dialog.findViewById<Button>(R.id.btn_dismiss_limit_warning))?.setOnClickListener { dialog.dismiss() }
+        (dialog.findViewById<TextView>(R.id.upload_limit_warning))?.text =
             resources.getString(
                 R.string.custom_selector_over_limit_warning,
                 uploadLimit,
