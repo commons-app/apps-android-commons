@@ -333,8 +333,8 @@ class NearbyParentFragmentUnitTest {
     fun testPrepareViewsForSheetPositionCaseCollapsed() {
         Whitebox.setInternalState(fragment, "isFABsExpanded", true)
         Whitebox.setInternalState(fragment, "mView", view)
-        whenever(view.findViewById<View>(R.id.empty_view)).thenReturn(view)
-        whenever(view.findViewById<View>(R.id.empty_view1)).thenReturn(view)
+        whenever(view.findViewById(R.id.empty_view) as View?).thenReturn(view)
+        whenever(view.findViewById(R.id.empty_view1) as View?).thenReturn(view)
         whenever(view.id).thenReturn(0)
         fragment.prepareViewsForSheetPosition(BottomSheetBehavior.STATE_COLLAPSED)
         verify(fab).isShown
@@ -345,8 +345,8 @@ class NearbyParentFragmentUnitTest {
     fun testPrepareViewsForSheetPositionCaseHidden() {
         Whitebox.setInternalState(fragment, "isFABsExpanded", true)
         Whitebox.setInternalState(fragment, "mView", view)
-        whenever(view.findViewById<View>(R.id.empty_view)).thenReturn(view)
-        whenever(view.findViewById<View>(R.id.empty_view1)).thenReturn(view)
+        whenever(view.findViewById(R.id.empty_view) as View?).thenReturn(view)
+        whenever(view.findViewById(R.id.empty_view1) as View?).thenReturn(view)
         whenever(view.id).thenReturn(0)
         whenever(fab.layoutParams).thenReturn(mock(CoordinatorLayout.LayoutParams::class.java))
         fragment.prepareViewsForSheetPosition(BottomSheetBehavior.STATE_HIDDEN)
