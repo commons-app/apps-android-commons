@@ -5,6 +5,7 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import android.widget.ImageView
 import android.widget.TextView
@@ -133,6 +134,10 @@ class ProfileActivity : BaseActivity() {
             R.id.share_app_icon -> {
                 val rootView = window.decorView.findViewById<View>(android.R.id.content)
                 val screenShot = Utils.getScreenShot(rootView)
+                if (screenShot == null) {
+                    Log.e("ERROR", "ScreenShot is null")
+                    return false
+                }
                 showAlert(screenShot)
                 true
             }
