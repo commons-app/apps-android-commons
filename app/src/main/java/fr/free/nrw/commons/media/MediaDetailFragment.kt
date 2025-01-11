@@ -467,6 +467,27 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
         }
     }
 
+    /**
+     * Retrieves the ContributionsFragment that is potentially the parent, grandparent, etc
+     * fragment of this fragment.
+     *
+     * @return The ContributionsFragment instance. If the ContributionsFragment instance could not
+     * be found, null is returned.
+     */
+    private fun getContributionsFragmentParent(): ContributionsFragment? {
+        var fragment: Fragment? = this
+
+        while (fragment != null && fragment !is ContributionsFragment) {
+            fragment = fragment.parentFragment
+        }
+
+        if (fragment == null) {
+            return null
+        }
+
+        return fragment as ContributionsFragment
+    }
+
     override fun onResume() {
         super.onResume()
         if (parentFragment != null && requireParentFragment().parentFragment != null) {
