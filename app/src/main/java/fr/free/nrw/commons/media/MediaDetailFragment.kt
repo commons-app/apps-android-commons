@@ -490,16 +490,12 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
 
     override fun onResume() {
         super.onResume()
-        if (parentFragment != null && requireParentFragment().parentFragment != null) {
-            // Added a check because, not necessarily, the parent fragment
-            // will have a parent fragment, say in the case when MediaDetailPagerFragment
-            // is directly started by the CategoryImagesActivity
-            if (parentFragment is ContributionsFragment) {
-                (((parentFragment as ContributionsFragment)
-                    .parentFragment) as ContributionsFragment).binding.cardViewNearby.visibility =
-                    View.GONE
-            }
+
+        val contributionsFragment: ContributionsFragment? = this.getContributionsFragmentParent()
+        if (contributionsFragment?.binding != null) {
+            contributionsFragment.binding.cardViewNearby.visibility = View.GONE
         }
+
         // detail provider is null when fragment is shown in review activity
         media = if (detailProvider != null) {
             detailProvider!!.getMediaAtPosition(index)
