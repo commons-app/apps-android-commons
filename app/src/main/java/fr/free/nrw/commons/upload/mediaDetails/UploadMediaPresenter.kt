@@ -16,12 +16,10 @@ import fr.free.nrw.commons.upload.UploadActivity.Companion.setUploadIsOfAPlace
 import fr.free.nrw.commons.upload.UploadItem
 import fr.free.nrw.commons.upload.UploadMediaDetail
 import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment.UploadMediaDetailFragmentCallback
-import fr.free.nrw.commons.utils.DialogUtil.showAlertDialog
 import fr.free.nrw.commons.utils.ImageUtils.EMPTY_CAPTION
 import fr.free.nrw.commons.utils.ImageUtils.FILE_NAME_EXISTS
 import fr.free.nrw.commons.utils.ImageUtils.IMAGE_KEEP
 import fr.free.nrw.commons.utils.ImageUtils.IMAGE_OK
-import fr.free.nrw.commons.utils.ImageUtils.getErrorMessageForResult
 import io.github.coordinates2country.Coordinates2Country
 import io.reactivex.Maybe
 import io.reactivex.Scheduler
@@ -53,6 +51,7 @@ class UploadMediaPresenter @Inject constructor(
             }
         }
     }
+    lateinit var basicKvStoreFactory: (String) -> BasicKvStore
 
     override fun onAttachView(view: UploadMediaDetailsContract.View) {
         this.view = view
@@ -71,6 +70,10 @@ class UploadMediaPresenter @Inject constructor(
         uploadItemIndex: Int
     ) {
         repository.getUploads()[uploadItemIndex].uploadMediaDetails = uploadMediaDetails.toMutableList()
+    }
+
+    override fun setupBasicKvStoreFactory(factory: (String) -> BasicKvStore) {
+        basicKvStoreFactory = factory
     }
 
     /**
@@ -336,10 +339,8 @@ class UploadMediaPresenter @Inject constructor(
      */
     override fun checkImageQuality(uploadItem: UploadItem, index: Int) {
         if ((uploadItem.imageQuality != IMAGE_OK) && (uploadItem.imageQuality != IMAGE_KEEP)) {
-            val store = view.createBasicKvStore(
-                UploadActivity.storeNameForCurrentUploadImagesSize
-            )
-            val value = store.getString(UPLOAD_QUALITIES_KEY, null)
+            val value = basicKvStoreFactory(UploadActivity.storeNameForCurrentUploadImagesSize)
+                .getString(UPLOAD_QUALITIES_KEY, null)
             try {
                 val imageQuality = value.asJsonObject()["UploadItem$index"] as Int
                 view.showProgress(false)
@@ -362,10 +363,8 @@ class UploadMediaPresenter @Inject constructor(
      * @param index Index of the UploadItem which was deleted
      */
     override fun updateImageQualitiesJSON(size: Int, index: Int) {
-        val store = view.createBasicKvStore(
-            UploadActivity.storeNameForCurrentUploadImagesSize
-        )
-        val value = store.getString(UPLOAD_QUALITIES_KEY, null)
+        val value = basicKvStoreFactory(UploadActivity.storeNameForCurrentUploadImagesSize)
+            .getString(UPLOAD_QUALITIES_KEY, null)
         try {
             val jsonObject = value.asJsonObject().apply {
                 for (i in index until (size - 1)) {
@@ -373,7 +372,8 @@ class UploadMediaPresenter @Inject constructor(
                 }
                 remove("UploadItem" + (size - 1))
             }
-            store.putString(UPLOAD_QUALITIES_KEY, jsonObject.toString())
+            basicKvStoreFactory(UploadActivity.storeNameForCurrentUploadImagesSize)
+                .putString(UPLOAD_QUALITIES_KEY, jsonObject.toString())
         } catch (e: Exception) {
             Timber.e(e)
         }

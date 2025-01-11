@@ -197,6 +197,8 @@ class UploadMediaDetailFragment : UploadBaseFragment(), UploadMediaDetailsContra
             )
         }
         presenter.onAttachView(this)
+        presenter.setupBasicKvStoreFactory { BasicKvStore(requireActivity(), it) }
+
         presenter.receiveImage(uploadableFile, place, inAppPictureLocation)
         initRecyclerView()
 
@@ -800,9 +802,6 @@ class UploadMediaDetailFragment : UploadBaseFragment(), UploadMediaDetailsContra
             runnable
         )
     }
-
-    override fun createBasicKvStore(storeName: String): BasicKvStore =
-        BasicKvStore(requireActivity(), storeName)
 
     override fun showBadImagePopup(errorCode: Int, index: Int, uploadItem: UploadItem) {
         //If the error message is null, we will probably not show anything

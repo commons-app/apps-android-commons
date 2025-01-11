@@ -51,12 +51,12 @@ interface UploadMediaDetailsContract {
 
         fun displayAddLocationDialog(runnable: Runnable)
 
-        fun createBasicKvStore(storeName: String): BasicKvStore
-
         fun showBadImagePopup(errorCode: Int, index: Int, uploadItem: UploadItem)
     }
 
     interface UserActionListener : BasePresenter<View?> {
+        fun setupBasicKvStoreFactory(factory: (String) -> BasicKvStore)
+
         fun receiveImage(
             uploadableFile: UploadableFile?,
             place: Place?,

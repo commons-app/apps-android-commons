@@ -836,6 +836,7 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
                     // Save the user's choice to not show the dialog again
                     defaultKvStore.putBoolean("hasAlreadyLaunchedCategoriesDialog", true)
                 }
+                presenter!!.setupBasicKvStoreFactory { BasicKvStore(this@UploadActivity, it) }
                 presenter!!.checkImageQuality(0)
                 UploadMediaPresenter.isCategoriesDialogShowing = false
             }
