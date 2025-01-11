@@ -31,7 +31,7 @@ import javax.inject.Inject
  */
 class ProfileActivity : BaseActivity() {
 
-    private lateinit var binding: ActivityProfileBinding
+    lateinit var binding: ActivityProfileBinding
 
     @Inject
     lateinit var sessionManager: SessionManager
@@ -118,7 +118,7 @@ class ProfileActivity : BaseActivity() {
         viewPagerAdapter.notifyDataSetChanged()
     }
 
-    override fun onDestroy() {
+    public override fun onDestroy() {
         super.onDestroy()
         compositeDisposable.clear()
     }
