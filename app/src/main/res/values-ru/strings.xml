@@ -869,4 +869,7 @@
   <string name="usages_on_commons_heading">Викисклад</string>
   <string name="usages_on_other_wikis_heading">Другие вики</string>
   <string name="file_usages_container_heading">Использование файла</string>
+  <string name="account">Учётная запись</string>
+  <string name="caption">Подпись</string>
+  <string name="caption_copied_to_clipboard">Подпись скопирована в буфер обмена</string>
 </resources>

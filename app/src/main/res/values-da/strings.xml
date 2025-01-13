@@ -814,6 +814,10 @@
   <string name="usages_on_other_wikis_heading">Andre wikier</string>
   <string name="bullet_point">•</string>
   <string name="file_usages_container_heading">Filanvendelser</string>
+  <string name="account">Konto</string>
+  <string name="vanish_account">Få konto til at forsvinde</string>
+  <string name="account_vanish_request_confirm_title">Advarsel om forsvinding af konto</string>
+  <string name="account_vanish_request_confirm">Forsvinding er en &lt;b&gt;sidste udvej&lt;/b&gt; og bør &lt;b&gt;kun bruges, når du for altid ønsker at stoppe med at redigere&lt;/b&gt; og også for at skjule så mange af dine tidligere tilknytninger som muligt.&lt;br/&gt;&lt;br/&gt; Kontosletning på Wikipedia Commons sker ved at ændre dit kontonavn, således at andre ikke kan genkende dine bidrag i en proces, der kaldes kontoforsvinding (Vanishing). &lt;b&gt;Forsvinding garanterer ikke fuldstændig anonymitet eller fjerner bidrag til projekterne&lt;/b&gt; .</string>
   <string name="caption">Billedtekst</string>
   <string name="caption_copied_to_clipboard">Billedtekst kopieret til udklipsholder</string>
 </resources>

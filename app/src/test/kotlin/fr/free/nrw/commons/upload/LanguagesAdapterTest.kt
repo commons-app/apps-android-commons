@@ -30,7 +30,7 @@ class LanguagesAdapterTest {
     private lateinit var context: Context
 
     @Mock
-    private lateinit var selectedLanguages: HashMap<Integer, String>
+    private lateinit var selectedLanguages: MutableMap<Int, String>
 
     @Mock
     private lateinit var parent: ViewGroup
@@ -41,7 +41,7 @@ class LanguagesAdapterTest {
 
     private lateinit var languagesAdapter: LanguagesAdapter
     private lateinit var convertView: View
-    private var selectLanguages: HashMap<Integer, String> = HashMap()
+    private var selectLanguages: MutableMap<Int, String> = mutableMapOf()
 
     @Before
     @Throws(Exception::class)
@@ -94,8 +94,8 @@ class LanguagesAdapterTest {
 
     @Test
     fun testSelectLanguageNotEmpty() {
-        selectLanguages[Integer(0)] = "es"
-        selectLanguages[Integer(1)] = "de"
+        selectLanguages[0] = "es"
+        selectLanguages[1] = "de"
         languagesAdapter = LanguagesAdapter(context, selectLanguages)
 
         Assertions.assertEquals(false, languagesAdapter.isEnabled(languagesAdapter.getIndexOfLanguageCode("es")))
