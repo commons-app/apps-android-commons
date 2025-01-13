@@ -17,7 +17,7 @@ import java.util.HashMap
 class RecentLanguagesAdapter constructor(
     context: Context,
     var recentLanguages: List<Language>,
-    private val selectedLanguages: HashMap<*, String>,
+    private val selectedLanguages: MutableMap<Int, String>,
 ) : ArrayAdapter<String?>(context, R.layout.row_item_languages_spinner) {
     /**
      * Selected language code in UploadMediaDetailAdapter

@@ -3,6 +3,7 @@ package fr.free.nrw.commons.upload.mediaDetails
 import android.app.Activity
 import fr.free.nrw.commons.BasePresenter
 import fr.free.nrw.commons.filepicker.UploadableFile
+import fr.free.nrw.commons.kvstore.BasicKvStore
 import fr.free.nrw.commons.location.LatLng
 import fr.free.nrw.commons.nearby.Place
 import fr.free.nrw.commons.upload.ImageCoordinates
@@ -15,9 +16,9 @@ import fr.free.nrw.commons.upload.UploadMediaDetail
  */
 interface UploadMediaDetailsContract {
     interface View : SimilarImageInterface {
-        fun onImageProcessed(uploadItem: UploadItem?, place: Place?)
+        fun onImageProcessed(uploadItem: UploadItem)
 
-        fun onNearbyPlaceFound(uploadItem: UploadItem?, place: Place?)
+        fun onNearbyPlaceFound(uploadItem: UploadItem, place: Place?)
 
         fun showProgress(shouldShow: Boolean)
 
@@ -25,9 +26,9 @@ interface UploadMediaDetailsContract {
 
         fun showMessage(stringResourceId: Int, colorResourceId: Int)
 
-        fun showMessage(message: String?, colorResourceId: Int)
+        fun showMessage(message: String, colorResourceId: Int)
 
-        fun showDuplicatePicturePopup(uploadItem: UploadItem?)
+        fun showDuplicatePicturePopup(uploadItem: UploadItem)
 
         /**
          * Shows a dialog alerting the user that internet connection is required for upload process
@@ -42,16 +43,20 @@ interface UploadMediaDetailsContract {
          */
         fun showConnectionErrorPopupForCaptionCheck()
 
-        fun showExternalMap(uploadItem: UploadItem?)
+        fun showExternalMap(uploadItem: UploadItem)
 
-        fun showEditActivity(uploadItem: UploadItem?)
+        fun showEditActivity(uploadItem: UploadItem)
 
-        fun updateMediaDetails(uploadMediaDetails: List<UploadMediaDetail?>?)
+        fun updateMediaDetails(uploadMediaDetails: List<UploadMediaDetail>)
 
-        fun displayAddLocationDialog(runnable: Runnable?)
+        fun displayAddLocationDialog(runnable: Runnable)
+
+        fun showBadImagePopup(errorCode: Int, index: Int, uploadItem: UploadItem)
     }
 
     interface UserActionListener : BasePresenter<View?> {
+        fun setupBasicKvStoreFactory(factory: (String) -> BasicKvStore)
+
         fun receiveImage(
             uploadableFile: UploadableFile?,
             place: Place?,
@@ -59,7 +64,7 @@ interface UploadMediaDetailsContract {
         )
 
         fun setUploadMediaDetails(
-            uploadMediaDetails: List<UploadMediaDetail?>?,
+            uploadMediaDetails: List<UploadMediaDetail>,
             uploadItemIndex: Int
         )
 
@@ -74,7 +79,7 @@ interface UploadMediaDetailsContract {
         fun getImageQuality(
             uploadItemIndex: Int,
             inAppPictureLocation: LatLng?,
-            activity: Activity?
+            activity: Activity
         ): Boolean
 
         /**
@@ -87,7 +92,8 @@ interface UploadMediaDetailsContract {
          * @param hasUserRemovedLocation True if user has removed location from the image
          */
         fun displayLocDialog(
-            uploadItemIndex: Int, inAppPictureLocation: LatLng?,
+            uploadItemIndex: Int,
+            inAppPictureLocation: LatLng?,
             hasUserRemovedLocation: Boolean
         )
 
@@ -97,7 +103,7 @@ interface UploadMediaDetailsContract {
          * @param uploadItem UploadItem whose quality is to be checked
          * @param index Index of the UploadItem whose quality is to be checked
          */
-        fun checkImageQuality(uploadItem: UploadItem?, index: Int)
+        fun checkImageQuality(uploadItem: UploadItem, index: Int)
 
         /**
          * Updates the image qualities stored in JSON, whenever an image is deleted
@@ -111,7 +117,7 @@ interface UploadMediaDetailsContract {
 
         fun fetchTitleAndDescription(indexInViewFlipper: Int)
 
-        fun useSimilarPictureCoordinates(imageCoordinates: ImageCoordinates?, uploadItemIndex: Int)
+        fun useSimilarPictureCoordinates(imageCoordinates: ImageCoordinates, uploadItemIndex: Int)
 
         fun onMapIconClicked(indexInViewFlipper: Int)
 
