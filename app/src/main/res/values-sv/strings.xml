@@ -107,6 +107,8 @@
   <string name="menu_from_camera">Ta foto</string>
   <string name="menu_nearby">I närheten</string>
   <string name="provider_contributions">Mina uppladdningar</string>
+  <string name="menu_copy_link">Kopiera länk</string>
+  <string name="menu_link_copied">Länken har kopierats till urklipp</string>
   <string name="menu_share">Dela</string>
   <string name="menu_view_file_page">Visa filsida</string>
   <string name="share_title_hint">Bildtext (obligatoriskt)</string>
@@ -282,6 +284,7 @@
   <string name="copy_wikicode">Kopiera wikitexten till urklipp</string>
   <string name="wikicode_copied">Wikitexten kopierades till urklipp</string>
   <string name="nearby_location_not_available">\"I närheten\" kanske inte fungerar ordentligt. Platsen är inte tillgänglig.</string>
+  <string name="nearby_showing_pins_offline">Internet inte tillgängligt. Visar endast cachade platser.</string>
   <string name="upload_location_access_denied">Platsåtkomst nekad. Ange din plats manuellt för att använda den här funktionen.</string>
   <string name="location_permission_rationale_nearby">Behörighet krävs för att visa en lista över platser i närheten</string>
   <string name="location_permission_rationale_explore">Behörighet krävs för att visa en lista över bilder i närheten</string>
@@ -365,11 +368,13 @@
   <string name="delete">Radera</string>
   <string name="Achievements">Prestationer</string>
   <string name="Profile">Profil</string>
+  <string name="badges">Märken</string>
   <string name="statistics">Statistik</string>
   <string name="statistics_thanks">Mottagna tack</string>
   <string name="statistics_featured">Utvalda bilder</string>
   <string name="statistics_wikidata_edits">Bilder via \"Platser i närheten\"</string>
-  <string name="level" fuzzy="true">Nivå</string>
+  <string name="level">Nivå %d</string>
+  <string name="profileLevel">%s (Nivå %s)</string>
   <string name="images_uploaded">Uppladdade bilder</string>
   <string name="image_reverts">Bilder som inte har återställts</string>
   <string name="images_used_by_wiki">Bilder som används</string>
@@ -401,6 +406,7 @@
   <string name="map_application_missing">Ingen kompatibel kartapp hittades på din enhet. Installera en kartapp för att använda denna funktion.</string>
   <string name="title_page_bookmarks_pictures">Bilder</string>
   <string name="title_page_bookmarks_locations">Platser</string>
+  <string name="title_page_bookmarks_categories">Kategorier</string>
   <string name="menu_bookmark">Lägg till/ta bort bokmärke</string>
   <string name="provider_bookmarks">Bokmärken</string>
   <string name="bookmark_empty">Du har inte lagt till några bokmärken</string>
@@ -802,4 +808,12 @@
   <string name="red_pin">Det här platsen har ännu ingen bild. Gå och ta en!</string>
   <string name="green_pin">Det här platsen har redan en bild.</string>
   <string name="grey_pin">Kollar nu om den här platsen har en bild.</string>
+  <string name="error_while_loading">Fel med inladdning</string>
+  <string name="no_usages_found">Inga användningar hittades</string>
+  <string name="usages_on_commons_heading">Commons</string>
+  <string name="usages_on_other_wikis_heading">Andra wikier</string>
+  <string name="file_usages_container_heading">Filanvändning</string>
+  <string name="account">Konto</string>
+  <string name="caption">Bildtext</string>
+  <string name="caption_copied_to_clipboard">Bildtext kopierades till urklipp</string>
 </resources>
