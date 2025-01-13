@@ -85,7 +85,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
     private var languageHistoryListView: ListView? = null
 
     private lateinit var inAppCameraLocationPermissionLauncher: ActivityResultLauncher<Array<String>>
-    private val GET_CONTENT_PICKER_HELP_URL = "https://commons-app.github.io/docs.html#get-content"
+    private val getContentPickerHelpUrl = "https://commons-app.github.io/docs.html#get-content"
 
     private val cameraPickLauncherForResult: ActivityResultLauncher<Intent> =
         registerForActivityResult(StartActivityForResult()) { result ->
@@ -297,7 +297,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
             getString(R.string.ok),
             getString(R.string.read_help_link),
             { },
-            { Utils.handleWebUrl(requireContext(), Uri.parse(GET_CONTENT_PICKER_HELP_URL)) },
+            { Utils.handleWebUrl(requireContext(), Uri.parse(getContentPickerHelpUrl)) },
             null
         )
     }

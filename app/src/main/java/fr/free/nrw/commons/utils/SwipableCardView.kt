@@ -23,7 +23,7 @@ abstract class SwipableCardView @JvmOverloads constructor(
 
     private var x1 = 0f
     private var x2 = 0f
-    private val MINIMUM_THRESHOLD_FOR_SWIPE = 100f
+    private val minimumThresholdForSwipe = 100f
 
     init {
         interceptOnTouchListener()
@@ -45,7 +45,7 @@ abstract class SwipableCardView @JvmOverloads constructor(
                     isSwipe = deltaX != 0f
                 }
             }
-            if (isSwipe && pixelToDp(abs(deltaX)) > MINIMUM_THRESHOLD_FOR_SWIPE) {
+            if (isSwipe && pixelToDp(abs(deltaX)) > minimumThresholdForSwipe) {
                 onSwipe(v)
                 return@setOnTouchListener true
             }
