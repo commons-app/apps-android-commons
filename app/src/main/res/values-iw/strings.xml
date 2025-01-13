@@ -846,4 +846,9 @@
   <string name="usages_on_other_wikis_heading">אתרי ויקי אחרים</string>
   <string name="bullet_point">•</string>
   <string name="file_usages_container_heading">שימושים בקובץ</string>
+  <string name="account">חשבון</string>
+  <string name="vanish_account">העלמת חשבון</string>
+  <string name="account_vanish_request_confirm_title">אזהרת העלמת חשבון</string>
+  <string name="caption">כותרת</string>
+  <string name="caption_copied_to_clipboard">הכותרת הועתקה ללוח</string>
 </resources>

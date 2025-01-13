@@ -2,6 +2,7 @@ package fr.free.nrw.commons.upload
 
 import fr.free.nrw.commons.BasePresenter
 import fr.free.nrw.commons.filepicker.UploadableFile
+import fr.free.nrw.commons.kvstore.BasicKvStore
 
 /**
  * The contract using which the UplaodActivity would communicate with its presenter
@@ -73,5 +74,7 @@ interface UploadContract {
          * @param uploadItemIndex Index of next image, whose quality is to be checked
          */
         fun checkImageQuality(uploadItemIndex: Int)
+
+        fun setupBasicKvStoreFactory(factory: (String) -> BasicKvStore)
     }
 }

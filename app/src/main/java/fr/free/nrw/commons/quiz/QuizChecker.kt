@@ -40,10 +40,10 @@ class QuizChecker @Inject constructor(
 
     private val compositeDisposable = CompositeDisposable()
 
-    private val UPLOAD_COUNT_THRESHOLD = 5
-    private val REVERT_PERCENTAGE_FOR_MESSAGE = "50%"
-    private val REVERT_SHARED_PREFERENCE = "revertCount"
-    private val UPLOAD_SHARED_PREFERENCE = "uploadCount"
+    private val uploadCountThreshold = 5
+    private val revertPercentageForMessage = "50%"
+    private val revertSharedPreference = "revertCount"
+    private val uploadSharedPreference = "uploadCount"
 
     /**
      * Initializes quiz check by calculating revert parameters and showing quiz if necessary
@@ -80,12 +80,12 @@ class QuizChecker @Inject constructor(
      */
     private fun setTotalUploadCount(uploadCount: Int) {
         totalUploadCount = uploadCount - revertKvStore.getInt(
-            UPLOAD_SHARED_PREFERENCE,
+            uploadSharedPreference,
             0
         )
         if (totalUploadCount < 0) {
             totalUploadCount = 0
-            revertKvStore.putInt(UPLOAD_SHARED_PREFERENCE, 0)
+            revertKvStore.putInt(uploadSharedPreference, 0)
         }
         isUploadCountFetched = true
     }
@@ -112,10 +112,10 @@ class QuizChecker @Inject constructor(
      * @param revertCountFetched Count of deleted uploads
      */
     private fun setRevertParameter(revertCountFetched: Int) {
-        revertCount = revertCountFetched - revertKvStore.getInt(REVERT_SHARED_PREFERENCE, 0)
+        revertCount = revertCountFetched - revertKvStore.getInt(revertSharedPreference, 0)
         if (revertCount < 0) {
             revertCount = 0
-            revertKvStore.putInt(REVERT_SHARED_PREFERENCE, 0)
+            revertKvStore.putInt(revertSharedPreference, 0)
         }
         isRevertCountFetched = true
     }
@@ -128,13 +128,13 @@ class QuizChecker @Inject constructor(
         setRevertCount()
 
         if (revertCount < 0 || totalUploadCount < 0) {
-            revertKvStore.putInt(REVERT_SHARED_PREFERENCE, 0)
-            revertKvStore.putInt(UPLOAD_SHARED_PREFERENCE, 0)
+            revertKvStore.putInt(revertSharedPreference, 0)
+            revertKvStore.putInt(uploadSharedPreference, 0)
             return
         }
 
         if (isRevertCountFetched && isUploadCountFetched &&
-            totalUploadCount >= UPLOAD_COUNT_THRESHOLD &&
+            totalUploadCount >= uploadCountThreshold &&
             (revertCount * 100) / totalUploadCount >= 50
         ) {
             callQuiz(activity)
@@ -149,7 +149,7 @@ class QuizChecker @Inject constructor(
         DialogUtil.showAlertDialog(
             activity,
             activity.getString(R.string.quiz),
-            activity.getString(R.string.quiz_alert_message, REVERT_PERCENTAGE_FOR_MESSAGE),
+            activity.getString(R.string.quiz_alert_message, revertPercentageForMessage),
             activity.getString(R.string.about_translate_proceed),
             activity.getString(android.R.string.cancel),
             { startQuizActivity(activity) },
@@ -161,11 +161,11 @@ class QuizChecker @Inject constructor(
      * Starts the quiz activity and updates preferences for revert and upload counts
      */
     private fun startQuizActivity(activity: Activity) {
-        val newRevertSharedPrefs = revertCount + revertKvStore.getInt(REVERT_SHARED_PREFERENCE, 0)
-        revertKvStore.putInt(REVERT_SHARED_PREFERENCE, newRevertSharedPrefs)
+        val newRevertSharedPrefs = revertCount + revertKvStore.getInt(revertSharedPreference, 0)
+        revertKvStore.putInt(revertSharedPreference, newRevertSharedPrefs)
 
-        val newUploadCount = totalUploadCount + revertKvStore.getInt(UPLOAD_SHARED_PREFERENCE, 0)
-        revertKvStore.putInt(UPLOAD_SHARED_PREFERENCE, newUploadCount)
+        val newUploadCount = totalUploadCount + revertKvStore.getInt(uploadSharedPreference, 0)
+        revertKvStore.putInt(uploadSharedPreference, newUploadCount)
 
         val intent = Intent(activity, WelcomeActivity::class.java).apply {
             putExtra("isQuiz", true)

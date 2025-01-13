@@ -707,4 +707,7 @@
   <string name="usages_on_commons_heading">공용</string>
   <string name="usages_on_other_wikis_heading">다른 위키</string>
   <string name="file_usages_container_heading">이 파일을 사용하는 문서</string>
+  <string name="account">계정</string>
+  <string name="caption">캡션</string>
+  <string name="caption_copied_to_clipboard">캡션이 클립보드에 복사되었습니다</string>
 </resources>

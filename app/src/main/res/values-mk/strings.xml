@@ -810,4 +810,11 @@
   <string name="usages_on_other_wikis_heading">Други викија</string>
   <string name="bullet_point">•</string>
   <string name="file_usages_container_heading">Употреби на податотеката</string>
+  <string name="title_activity_single_web_view">SingleWebViewActivity</string>
+  <string name="account">Сметка</string>
+  <string name="vanish_account">Исчезни сметка</string>
+  <string name="account_vanish_request_confirm_title">Предупредување за исчезнување на сметка</string>
+  <string name="account_vanish_request_confirm">Исчезнувањето е &lt;b&gt;крајна мерка&lt;/b&gt; и треба да се користи само ако сакате да престанете да уредувате засекогаш/b&gt; и да скриете што повеќе од вашите досегашни врски.&lt;br/&gt;&lt;br/&gt;Бришењето сметки на Википедија се врши со менување на името на вашата сметка, така што другите не би можеле да ги препознаат вашите придонеси во постапка наречена „исчезнување“ на сметка.&lt;b&gt;Исчезнувањето не гарантира целосна анонимност и не ги отстранува придонесите на проектите&lt;/b&gt;.</string>
+  <string name="caption">Толкување</string>
+  <string name="caption_copied_to_clipboard">Толкувањето е ставено во меѓускладот</string>
 </resources>

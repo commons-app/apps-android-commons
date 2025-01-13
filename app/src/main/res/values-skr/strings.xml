@@ -277,4 +277,6 @@
   <string name="custom_selector_delete">مٹاؤ</string>
   <string name="custom_selector_cancel">منسوخ</string>
   <string name="usages_on_commons_heading">کامنز</string>
+  <string name="account">کھاتہ</string>
+  <string name="caption">عنوان</string>
 </resources>

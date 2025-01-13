@@ -61,16 +61,16 @@ class CoordinateEditHelper @Inject constructor(
     /**
      * Replaces new coordinates
      * @param media to be added
-     * @param Latitude to be added
-     * @param Longitude to be added
-     * @param Accuracy to be added
+     * @param latitude to be added
+     * @param longitude to be added
+     * @param accuracy to be added
      * @return Observable<Boolean>
      */
     private fun addCoordinates(
         media: Media,
-        Latitude: String,
-        Longitude: String,
-        Accuracy: String
+        latitude: String,
+        longitude: String,
+        accuracy: String
     ): Observable<Boolean>? {
         Timber.d("thread is coordinates adding %s", Thread.currentThread().getName())
         val summary = "Adding Coordinates"
@@ -83,9 +83,9 @@ class CoordinateEditHelper @Inject constructor(
                 .blockingGet()
         }
 
-        if (Latitude != null) {
-            buffer.append("\n{{Location|").append(Latitude).append("|").append(Longitude)
-                .append("|").append(Accuracy).append("}}")
+        if (latitude != null) {
+            buffer.append("\n{{Location|").append(latitude).append("|").append(longitude)
+                .append("|").append(accuracy).append("}}")
         }
 
         val editedLocation = buffer.toString()
@@ -141,7 +141,7 @@ class CoordinateEditHelper @Inject constructor(
      * @param media to be added
      * @param latitude to be added
      * @param longitude to be added
-     * @param Accuracy to be added
+     * @param accuracy to be added
      * @param result to be added
      * @return boolean
      */
@@ -150,7 +150,7 @@ class CoordinateEditHelper @Inject constructor(
         media: Media,
         latitude: String,
         longitude: String,
-        Accuracy: String,
+        accuracy: String,
         result: Boolean
     ): Boolean {
         val message: String
@@ -160,7 +160,7 @@ class CoordinateEditHelper @Inject constructor(
             media.coordinates = fr.free.nrw.commons.location.LatLng(
                 latitude.toDouble(),
                 longitude.toDouble(),
-                Accuracy.toFloat()
+                accuracy.toFloat()
             )
             title += ": " + context.getString(R.string.coordinates_edit_helper_show_edit_title_success)
             val coordinatesInMessage = StringBuilder()

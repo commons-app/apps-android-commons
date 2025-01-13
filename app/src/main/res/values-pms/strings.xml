@@ -806,4 +806,11 @@
   <string name="usages_on_other_wikis_heading">Àutre wiki</string>
   <string name="bullet_point">•</string>
   <string name="file_usages_container_heading">Usagi dl\'archivi</string>
+  <string name="title_activity_single_web_view">SingleWebViewActivity</string>
+  <string name="account">Cont</string>
+  <string name="vanish_account">Flambé ël cont</string>
+  <string name="account_vanish_request_confirm_title">Avis d\'eliminassion dël cont</string>
+  <string name="account_vanish_request_confirm">L\'eliminassion a l\'é &lt;b&gt;l\'ùltima arsorsa&lt;/b&gt; e a dovrìa &lt;b&gt;esse dovrà mach si chiel a veul chité ëd modifiché për sempe&lt;/b&gt; e ëdcò s\'a veul ëstërmé pi che possìbil soe assossiassion passà.&lt;br/&gt;&lt;br/&gt;La dëscancelassion ëd cont su Wikimedia a l\'é fàita an modificand sò stranòm an manera che j\'àutri a peulo pa arconòsse soe contribussion ant un process ciamà dëscancelassion ëd cont. &lt;b&gt;La sparission a garantiss pa l\'anonimà complet ni a gava le contribussion dai proget&lt;/b&gt;.</string>
+  <string name="caption">Legenda</string>
+  <string name="caption_copied_to_clipboard">Legenda copià an sla taulëtta</string>
 </resources>

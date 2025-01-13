@@ -1,10 +1,10 @@
 package fr.free.nrw.commons.upload
 
 import android.annotation.SuppressLint
-import fr.free.nrw.commons.CommonsApplication
 import fr.free.nrw.commons.CommonsApplication.Companion.IS_LIMITED_CONNECTION_MODE_ENABLED
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.contributions.Contribution
+import fr.free.nrw.commons.kvstore.BasicKvStore
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.repository.UploadRepository
 import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailsContract
@@ -33,6 +33,8 @@ class UploadPresenter @Inject internal constructor(
     lateinit var presenter: UploadMediaDetailsContract.UserActionListener
 
     private val compositeDisposable = CompositeDisposable()
+
+    lateinit var basicKvStoreFactory: (String) -> BasicKvStore
 
     /**
      * Called by the submit button in [UploadActivity]
@@ -69,8 +71,7 @@ class UploadPresenter @Inject internal constructor(
     private fun processContributionsForSubmission() {
         if (view.isLoggedIn()) {
             view.showProgress(true)
-            repository.buildContributions()
-                ?.observeOn(Schedulers.io())
+            repository.buildContributions().observeOn(Schedulers.io())
                 ?.subscribe(object : Observer<Contribution> {
                     override fun onSubscribe(d: Disposable) {
                         view.showProgress(false)
@@ -127,14 +128,20 @@ class UploadPresenter @Inject internal constructor(
         }
     }
 
+    override fun setupBasicKvStoreFactory(factory: (String) -> BasicKvStore) {
+        basicKvStoreFactory = factory
+    }
+
     /**
      * Calls checkImageQuality of UploadMediaPresenter to check image quality of next image
      *
      * @param uploadItemIndex Index of next image, whose quality is to be checked
      */
     override fun checkImageQuality(uploadItemIndex: Int) {
-        val uploadItem = repository.getUploadItem(uploadItemIndex)
-        presenter.checkImageQuality(uploadItem, uploadItemIndex)
+        repository.getUploadItem(uploadItemIndex)?.let {
+            presenter.setupBasicKvStoreFactory(basicKvStoreFactory)
+            presenter.checkImageQuality(it, uploadItemIndex)
+        }
     }
 
     override fun deletePictureAtIndex(index: Int) {
@@ -156,8 +163,9 @@ class UploadPresenter @Inject internal constructor(
         view.onUploadMediaDeleted(index)
         if (index != uploadableFiles.size && index != 0) {
             // if the deleted image was not the last item to be uploaded, check quality of next
-            val uploadItem = repository.getUploadItem(index)
-            presenter.checkImageQuality(uploadItem, index)
+            repository.getUploadItem(index)?.let {
+                presenter.checkImageQuality(it, index)
+            }
         }
 
         if (uploadableFiles.size < 2) {

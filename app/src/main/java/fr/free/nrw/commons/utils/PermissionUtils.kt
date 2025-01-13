@@ -208,7 +208,7 @@ object PermissionUtils {
                         activity.getString(android.R.string.cancel),
                         {
                             if (activity is UploadActivity) {
-                                activity.setShowPermissionsDialog(true)
+                                activity.isShowPermissionsDialog = true
                             }
                             token.continuePermissionRequest()
                         },

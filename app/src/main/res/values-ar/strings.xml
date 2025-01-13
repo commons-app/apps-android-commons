@@ -875,4 +875,6 @@
   <string name="usages_on_commons_heading">كومنز</string>
   <string name="usages_on_other_wikis_heading">مواقع ويكي أخرى</string>
   <string name="file_usages_container_heading">حالات استخدام الملف</string>
+  <string name="caption">الشرح</string>
+  <string name="caption_copied_to_clipboard">تم نسخ التسمية التوضيحية إلى الحافظة</string>
 </resources>

@@ -223,7 +223,7 @@ class SettingsFragmentUnitTests {
                 RecentLanguagesAdapter(
                     context,
                     listOf(Language("English", "en")),
-                    hashMapOf<String, String>(),
+                    mutableMapOf(),
                 ),
             )
         val method: Method =

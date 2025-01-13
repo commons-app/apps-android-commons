@@ -140,7 +140,7 @@ class CategoriesPresenter
          */
         private fun getImageTitleList(): List<String> =
             repository.getUploads()
-                .map { it.uploadMediaDetails[0].captionText }
+                .map { it.uploadMediaDetails[0].captionText!! }
                 .filterNot { TextUtils.isEmpty(it) }
 
         /**
