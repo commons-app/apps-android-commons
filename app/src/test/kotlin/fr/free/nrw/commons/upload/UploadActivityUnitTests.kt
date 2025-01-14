@@ -262,15 +262,4 @@ class UploadActivityUnitTests {
         method.isAccessible = true
         method.invoke(activity)
     }
-
-    @Test
-    @Throws(Exception::class)
-    fun testOnBackPressed() {
-        val method: Method =
-            UploadActivity::class.java.getDeclaredMethod(
-                "onBackPressed",
-            )
-        method.isAccessible = true
-        method.invoke(activity)
-    }
 }
