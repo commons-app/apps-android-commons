@@ -528,7 +528,7 @@ class UploadMediaDetailFragment : UploadBaseFragment(), UploadMediaDetailsContra
                         basicKvStore!!.putBoolean(keyForShowingAlertDialog, false)
                         if (isInternetConnectionEstablished(requireActivity())) {
                             val sizeOfUploads = basicKvStore!!.getInt(
-                                UploadActivity.keyForCurrentUploadImagesSize
+                                UploadActivity.KEY_FOR_CURRENT_UPLOAD_IMAGE_SIZE
                             )
                             for (i in indexOfFragment until sizeOfUploads) {
                                 presenter.getImageQuality(
