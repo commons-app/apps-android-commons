@@ -1,7 +1,9 @@
 package fr.free.nrw.commons.category
 
 import categoryItem
+import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.mock
+import com.nhaarman.mockitokotlin2.times
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import depictedItem
@@ -90,14 +92,18 @@ class CategoriesModelTest {
         val depictedItem =
             depictedItem(
                 commonsCategories =
-                    listOf(
-                        CategoryItem(
-                            "depictionCategory",
-                            "",
-                            "",
-                            false,
-                        ),
+                listOf(
+                    CategoryItem(
+                        "depictionCategory",
+                        "",
+                        "",
+                        false,
                     ),
+                ),
+            )
+        val depictedItemWithoutCategories =
+            depictedItem(
+                primaryImage = "P18"
             )
 
         whenever(gpsCategoryModel.categoriesFromLocation)
@@ -159,6 +165,23 @@ class CategoriesModelTest {
                 ),
             ),
         )
+        whenever(
+            categoryClient.getCategoriesOfImage(
+                "P18",
+                25,
+            ),
+        ).thenReturn(
+            Single.just(
+                listOf(
+                    CategoryItem(
+                        "categoriesOfP18",
+                        "",
+                        "",
+                        false,
+                    ),
+                ),
+            ),
+        )
         val imageTitleList = listOf("Test")
         CategoriesModel(categoryClient, categoryDao, gpsCategoryModel)
             .searchAll("", imageTitleList, listOf(depictedItem))
@@ -171,8 +194,21 @@ class CategoriesModelTest {
                     categoryItem("recentCategories"),
                 ),
             )
+        CategoriesModel(categoryClient, categoryDao, gpsCategoryModel)
+            .searchAll("", imageTitleList, listOf(depictedItemWithoutCategories))
+            .test()
+            .assertValue(
+                listOf(
+                    categoryItem("categoriesOfP18"),
+                    categoryItem("gpsCategory"),
+                    categoryItem("titleSearch"),
+                    categoryItem("recentCategories"),
+                ),
+            )
         imageTitleList.forEach {
-            verify(categoryClient).searchCategories(it, CategoriesModel.SEARCH_CATS_LIMIT)
+            verify(categoryClient, times(2)).searchCategories(it, CategoriesModel.SEARCH_CATS_LIMIT)
+            verify(categoryClient).getCategoriesByName(any(), any(), any(), any())
+            verify(categoryClient).getCategoriesOfImage(any(), any())
         }
     }
 
