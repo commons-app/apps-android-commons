@@ -29,7 +29,7 @@ const val THUMB_IMAGE_SIZE = "70px"
 data class DepictedItem constructor(
     override val name: String,
     val description: String?,
-    val imageUrl: String?,
+    val primaryImage: String?,
     val instanceOfs: List<String>,
     val commonsCategories: List<CategoryItem>,
     var isSelected: Boolean,
@@ -51,9 +51,7 @@ data class DepictedItem constructor(
     constructor(entity: Entities.Entity, name: String, description: String) : this(
         name,
         description,
-        entity[IMAGE].primaryImageValue?.let {
-            getImageUrl(it.value, THUMB_IMAGE_SIZE)
-        },
+        entity[IMAGE].primaryImageValue?.value,
         entity[INSTANCE_OF].toIds(),
         entity[COMMONS_CATEGORY]?.map {
             CategoryItem(
@@ -67,6 +65,9 @@ data class DepictedItem constructor(
         false,
         entity.id(),
     )
+
+    val imageUrl: String?
+        get() = primaryImage?.let { getImageUrl(it, THUMB_IMAGE_SIZE) }
 
     override fun equals(other: Any?) =
         when {
