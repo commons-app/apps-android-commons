@@ -750,7 +750,10 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
         }
     }
 
-    override fun onThumbnailDeleted(position: Int) = presenter!!.deletePictureAtIndex(position)
+    override fun onThumbnailDeleted(position: Int) {
+        presenter!!.deletePictureAtIndex(position)
+        thumbnailsAdapter?.notifyItemRemoved(position)
+    }
 
     /**
      * The adapter used to show image upload intermediate fragments
