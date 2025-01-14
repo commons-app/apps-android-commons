@@ -14,6 +14,7 @@ import android.os.Bundle
 import android.provider.Settings
 import android.view.View
 import android.widget.CheckBox
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -166,12 +167,31 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
     private var _binding: ActivityUploadBinding? = null
     private val binding: ActivityUploadBinding get() = _binding!!
 
+    private lateinit var onBackPressedCallback: OnBackPressedCallback
+
     @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         _binding = ActivityUploadBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        // Overrides the back button to make sure the user is prepared to lose their progress
+        onBackPressedCallback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                showAlertDialog(
+                    this@UploadActivity,
+                    getString(R.string.back_button_warning),
+                    getString(R.string.back_button_warning_desc),
+                    getString(R.string.back_button_continue),
+                    getString(R.string.back_button_warning),
+                    null
+                ) {
+                    finish()
+                }
+            }
+        }
+        onBackPressedDispatcher.addCallback(this, onBackPressedCallback)
 
         /*
          If Configuration of device is changed then get the new fragments
@@ -803,20 +823,7 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
         if (uploadCategoriesFragment != null) {
             uploadCategoriesFragment!!.callback = null
         }
-    }
-
-    /**
-     * Overrides the back button to make sure the user is prepared to lose their progress
-     */
-    override fun onBackPressed() {
-        showAlertDialog(
-            this,
-            getString(R.string.back_button_warning),
-            getString(R.string.back_button_warning_desc),
-            getString(R.string.back_button_continue),
-            getString(R.string.back_button_warning),
-            null
-        ) { finish() }
+        onBackPressedCallback.remove()
     }
 
     /**
