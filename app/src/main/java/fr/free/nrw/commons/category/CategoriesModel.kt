@@ -127,30 +127,64 @@ class CategoriesModel
         /**
          * Fetches details of every category associated with selected depictions, converts them into
          * CategoryItem and returns them in a list.
+         * If a selected depiction has no categories, the categories in which its P18 belongs are
+         * returned in the list.
          *
          * @param selectedDepictions selected DepictItems
          * @return List of CategoryItem associated with selected depictions
          */
-        private fun categoriesFromDepiction(selectedDepictions: List<DepictedItem>): Observable<MutableList<CategoryItem>>? =
-            Observable
-                .fromIterable(
-                    selectedDepictions.map { it.commonsCategories }.flatten(),
-                ).map { categoryItem ->
-                    categoryClient
-                        .getCategoriesByName(
-                            categoryItem.name,
-                            categoryItem.name,
-                            SEARCH_CATS_LIMIT,
-                        ).map {
-                            CategoryItem(
-                                it[0].name,
-                                it[0].description,
-                                it[0].thumbnail,
-                                it[0].isSelected,
-                            )
-                        }.blockingGet()
-                }.toList()
-                .toObservable()
+        private fun categoriesFromDepiction(selectedDepictions: List<DepictedItem>): Observable<MutableList<CategoryItem>>? {
+            val observables =  selectedDepictions.map { depictedItem ->
+                if (depictedItem.commonsCategories.isEmpty()) {
+                    if (depictedItem.primaryImage == null) {
+                        return@map Observable.just(emptyList<CategoryItem>())
+                    }
+                    Observable.just(
+                            depictedItem.primaryImage
+                        ).map { image ->
+                            categoryClient
+                                .getCategoriesOfImage(
+                                    image,
+                                    SEARCH_CATS_LIMIT,
+                                ).map {
+                                    it.map { category ->
+                                        CategoryItem(
+                                            category.name,
+                                            category.description,
+                                            category.thumbnail,
+                                            category.isSelected,
+                                        )
+                                    }
+                                }.blockingGet()
+                        }.flatMapIterable { it }.toList()
+                        .toObservable()
+                } else {
+                    Observable
+                        .fromIterable(
+                            depictedItem.commonsCategories,
+                        ).map { categoryItem ->
+                            categoryClient
+                                .getCategoriesByName(
+                                    categoryItem.name,
+                                    categoryItem.name,
+                                    SEARCH_CATS_LIMIT,
+                                ).map {
+                                    CategoryItem(
+                                        it[0].name,
+                                        it[0].description,
+                                        it[0].thumbnail,
+                                        it[0].isSelected,
+                                    )
+                                }.blockingGet()
+                        }.toList()
+                        .toObservable()
+                }
+            }
+            return Observable.concat(observables)
+                .scan(mutableListOf<CategoryItem>()) { accumulator, currentList ->
+                    accumulator.apply { addAll(currentList) }
+                }
+        }
 
         /**
          * Fetches details of every category by their name, converts them into
