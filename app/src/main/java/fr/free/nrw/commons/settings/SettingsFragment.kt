@@ -271,6 +271,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
             findPreference<Preference>("managed_exif_tags")?.isEnabled = false
             findPreference<Preference>("openDocumentPhotoPickerPref")?.isEnabled = false
             findPreference<Preference>("inAppCameraLocationPref")?.isEnabled = false
+            findPreference<Preference>("vanishAccount")?.isEnabled = false
         }
     }
 
