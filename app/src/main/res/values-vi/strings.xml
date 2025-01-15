@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
 * Bluetpp
+* Băng Tỏa
+* Caden99
 * Harriettruong3
 * Keo010122
 * Leducthn
 * Leduyquang753
 * Minh Nguyen
+* Ngoxuannguyenchuong
+* NguoiDungKhongDinhDanh
+* Nguyenphutrong2
 * Nguyễn Mạnh An
 * Nhatminh01
 * Phjtieudoc
@@ -16,6 +21,11 @@
 * Yuki Wulf
 -->
 <resources>
+  <string name="commons_facebook">Trang Commons tại Facebook</string>
+  <string name="commons_github">Mã nguồn Commons tại GitHub</string>
+  <string name="commons_logo">Biểu trưng Commons</string>
+  <string name="commons_website">Trang Web Commons</string>
+  <string name="add_another_description">Thêm mô tả</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">%1$d tập tin đang được tải lên</item>
     <item quantity="other">%1$d tập tin đang được tải lên</item>
@@ -40,7 +50,6 @@
   <string name="preference_category_feedback">Phản hồi</string>
   <string name="preference_category_privacy">Sự riêng tư</string>
   <string name="app_name">Commons</string>
-  <string name="bullet">•</string>
   <string name="menu_settings">Thiết lập</string>
   <string name="intent_share_upload_label">Đăng tải lên Commons</string>
   <string name="username">Tên người dùng</string>
@@ -52,10 +61,10 @@
   <string name="logging_in_title">Đang đăng nhập</string>
   <string name="logging_in_message">Vui lòng chờ…</string>
   <string name="updating_caption_message">Vui lòng chờ…</string>
-  <string name="login_success">Đã đăng nhập thành công!</string>
-  <string name="login_failed">Đăng nhập thất bại!</string>
+  <string name="login_success" fuzzy="true">Đã đăng nhập thành công!</string>
+  <string name="login_failed" fuzzy="true">Đăng nhập thất bại!</string>
   <string name="upload_failed">Không tìm thấy tập tin. Xin vui lòng thử tập tin khác.</string>
-  <string name="authentication_failed">Xác thực thất bại, vui lòng đăng nhập lại</string>
+  <string name="authentication_failed" fuzzy="true">Xác thực thất bại, vui lòng đăng nhập lại</string>
   <string name="uploading_started">Đã bắt đầu tải lên!</string>
   <string name="upload_completed_notification_title">Đã tải lên %1$s!</string>
   <string name="upload_completed_notification_text">Chạm để xem những tập tin tải lên của bạn</string>
@@ -76,11 +85,11 @@
   <string name="menu_share">Chia sẻ</string>
   <string name="share_title_hint" fuzzy="true">Tựa đề (Yêu cầu)</string>
   <string name="share_description_hint">Miêu tả</string>
-  <string name="login_failed_network">Không thể đăng nhập – có lỗi mạng</string>
+  <string name="login_failed_network" fuzzy="true">Không thể đăng nhập – có lỗi mạng</string>
   <string name="login_failed_throttled">Đã đăng nhập thất bại quá nhiều lần. Xin vui lòng thử lại trong vòng vài phút.</string>
   <string name="login_failed_blocked">Rất tiếc, người dùng này đã bị cấm tại Commons</string>
   <string name="login_failed_2fa_needed">Bạn phải cung cấp mã xác thực dùng hai nhân tố.</string>
-  <string name="login_failed_generic">Đăng nhập thất bại</string>
+  <string name="login_failed_generic" fuzzy="true">Đăng nhập thất bại</string>
   <string name="share_upload_button">Tải lên</string>
   <string name="multiple_share_base_title">Đặt tên nhóm này</string>
   <string name="provider_modifications">Sửa đổi</string>
@@ -171,10 +180,6 @@
   <string name="become_a_tester_description">Tham gia kênh thử nghiệm của chúng tôi trên Google Play và nhận các tính năng mới cùng những bản sửa lỗi sớm hơn</string>
   <string name="_2fa_code">Mã Hai Nhân tố</string>
   <string name="logout_verification">Bạn có chắc chắn muốn đăng xuất?</string>
-  <string name="commons_logo">Biểu trưng Commons</string>
-  <string name="commons_website">Trang Web Commons</string>
-  <string name="commons_facebook">Trang Commons tại Facebook</string>
-  <string name="commons_github">Mã nguồn Commons tại GitHub</string>
   <string name="mediaimage_failed">Hình ảnh bị Thất bại</string>
   <string name="welcome_image_mount_zao">Núi Zaō</string>
   <string name="welcome_image_llamas">Lạc đà không bướu</string>
@@ -213,7 +218,7 @@
   <string name="send_log_file_description" fuzzy="true">Gửi tập tin nhật trình cho nhà phát triển qua thư điện tử</string>
   <string name="no_web_browser">Không tìm thấy trình duyệt để mở URL</string>
   <string name="null_url">Lỗi! Không tìm thấy URL</string>
-  <string name="nominate_deletion">Bầu chọn để xóa</string>
+  <string name="nominate_deletion">Đề nghị xóa</string>
   <string name="nominated_for_deletion">Có đề nghị xóa hình này.</string>
   <string name="skip_login">Bỏ qua</string>
   <string name="navigation_item_login">Đăng nhập</string>
@@ -241,7 +246,7 @@
   <string name="menu_set_wallpaper">Đặt làm hình nền</string>
   <string name="taj_mahal_answer">Hình chứa di tích và cảnh vật thiên nhiên thường được chấp nhận tải lên ở hầu hết các quốc gia. Xin lưu ý rằng các công trình nghệ thuật được trưng bày tạm thời thường có bản quyền và không được chấp nhận tải lên.</string>
   <string name="share_app_title">Chia sẻ Ứng dụng</string>
-  <string name="error_fetching_nearby_places">Lỗi khi lấy các nơi lân cận.</string>
+  <string name="error_fetching_nearby_places" fuzzy="true">Lỗi khi lấy các nơi lân cận.</string>
   <string name="search_this_area">Tìm kiếm khu vực này</string>
   <string name="category_edit_helper_make_edit_toast">Đang cố gắng cập nhật danh mục.</string>
   <string name="category_edit_helper_show_edit_title">Cập nhật danh mục</string>
@@ -253,4 +258,6 @@
   <string name="missing_category">- Thêm danh mục vào hình ảnh này để cải thiện khả năng sử dụng.</string>
   <string name="missing_article">- Thêm hình ảnh này vào bài viết Wikipedia được liên kết không có hình ảnh.</string>
   <string name="bookmarks">Dấu trang</string>
+  <string name="android_version">Phiên bản Android</string>
+  <string name="full_screen_mode_features_info">Vuốt nhanh và lâu để thực hiện các thao tác sau: - Trái/Phải: Đi tới trước/tiếp theo - Lên: Chọn - Xuống: Đánh dấu là không tải lên.</string>
 </resources>

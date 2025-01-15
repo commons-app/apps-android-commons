@@ -2,31 +2,30 @@ package fr.free.nrw.commons.bookmarks;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.FrameLayout;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.bookmarks.category.BookmarkCategoriesFragment;
 import fr.free.nrw.commons.bookmarks.items.BookmarkItemsFragment;
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsFragment;
 import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesFragment;
 import fr.free.nrw.commons.category.CategoryImagesCallback;
 import fr.free.nrw.commons.category.GridViewAdapter;
 import fr.free.nrw.commons.contributions.MainActivity;
+import fr.free.nrw.commons.databinding.FragmentFeaturedRootBinding;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
 import fr.free.nrw.commons.navtab.NavTab;
 import java.util.ArrayList;
 import java.util.Iterator;
+import timber.log.Timber;
 
 public class BookmarkListRootFragment extends CommonsDaggerSupportFragment implements
     FragmentManager.OnBackStackChangedListener,
@@ -39,8 +38,7 @@ public class BookmarkListRootFragment extends CommonsDaggerSupportFragment imple
     public Fragment listFragment;
     private BookmarksPagerAdapter bookmarksPagerAdapter;
 
-    @BindView(R.id.explore_container)
-    FrameLayout container;
+    FragmentFeaturedRootBinding binding;
 
     public BookmarkListRootFragment() {
         //empty constructor necessary otherwise crashes on recreate
@@ -50,14 +48,21 @@ public class BookmarkListRootFragment extends CommonsDaggerSupportFragment imple
         String title = bundle.getString("categoryName");
         int order = bundle.getInt("order");
         final int orderItem = bundle.getInt("orderItem");
-        if (order == 0) {
-            listFragment = new BookmarkPicturesFragment();
-        } else {
-            listFragment = new BookmarkLocationsFragment();
+
+        switch (order){
+            case 0: listFragment = new BookmarkPicturesFragment();
+            break;
+
+            case 1: listFragment = new BookmarkLocationsFragment();
+            break;
+
+            case 3: listFragment = new BookmarkCategoriesFragment();
+            break;
+        }
             if(orderItem == 2) {
                 listFragment = new BookmarkItemsFragment();
             }
-        }
+
         Bundle featuredArguments = new Bundle();
         featuredArguments.putString("categoryName", title);
         listFragment.setArguments(featuredArguments);
@@ -70,9 +75,8 @@ public class BookmarkListRootFragment extends CommonsDaggerSupportFragment imple
         @Nullable final ViewGroup container,
         @Nullable final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        View view = inflater.inflate(R.layout.fragment_featured_root, container, false);
-        ButterKnife.bind(this, view);
-        return view;
+        binding = FragmentFeaturedRootBinding.inflate(inflater, container, false);
+        return binding.getRoot();
     }
 
     @Override
@@ -132,7 +136,7 @@ public class BookmarkListRootFragment extends CommonsDaggerSupportFragment imple
 
     @Override
     public void onMediaClicked(int position) {
-        Log.d("deneme8", "on media clicked");
+        Timber.d("on media clicked");
     /*container.setVisibility(View.VISIBLE);
     ((BookmarkFragment)getParentFragment()).tabLayout.setVisibility(View.GONE);
     mediaDetails = new MediaDetailPagerFragment(false, true, position);
@@ -184,7 +188,7 @@ public class BookmarkListRootFragment extends CommonsDaggerSupportFragment imple
     public void refreshNominatedMedia(int index) {
         if (mediaDetails != null && !listFragment.isVisible()) {
             removeFragment(mediaDetails);
-            mediaDetails = new MediaDetailPagerFragment(false, true);
+            mediaDetails = MediaDetailPagerFragment.newInstance(false, true);
             ((BookmarkFragment) getParentFragment()).setScroll(false);
             setFragment(mediaDetails, listFragment);
             mediaDetails.showImage(index);
@@ -206,10 +210,6 @@ public class BookmarkListRootFragment extends CommonsDaggerSupportFragment imple
         //check mediaDetailPage fragment is not null then we check mediaDetail.is Visible or not to avoid NullPointerException
         if (mediaDetails != null) {
             if (mediaDetails.isVisible()) {
-                if (mediaDetails.backButtonClicked()) {
-                    // mediaDetails handled the back clicked , no further action required.
-                    return true;
-                }
                 // todo add get list fragment
                 ((BookmarkFragment) getParentFragment()).setupTabLayout();
                 ArrayList<Integer> removed = mediaDetails.getRemovedItems();
@@ -244,10 +244,10 @@ public class BookmarkListRootFragment extends CommonsDaggerSupportFragment imple
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Log.d("deneme8", "on media clicked");
-        container.setVisibility(View.VISIBLE);
-        ((BookmarkFragment) getParentFragment()).tabLayout.setVisibility(View.GONE);
-        mediaDetails = new MediaDetailPagerFragment(false, true);
+        Timber.d("on media clicked");
+        binding.exploreContainer.setVisibility(View.VISIBLE);
+        ((BookmarkFragment) getParentFragment()).binding.tabLayout.setVisibility(View.GONE);
+        mediaDetails = MediaDetailPagerFragment.newInstance(false, true);
         ((BookmarkFragment) getParentFragment()).setScroll(false);
         setFragment(mediaDetails, listFragment);
         mediaDetails.showImage(position);
@@ -256,5 +256,11 @@ public class BookmarkListRootFragment extends CommonsDaggerSupportFragment imple
     @Override
     public void onBackStackChanged() {
 
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        binding = null;
     }
 }

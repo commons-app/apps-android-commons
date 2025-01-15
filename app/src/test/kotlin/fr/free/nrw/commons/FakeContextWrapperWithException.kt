@@ -7,20 +7,23 @@ import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.MockitoAnnotations
 
-class FakeContextWrapperWithException(base: Context?) : ContextWrapper(base) {
-
+class FakeContextWrapperWithException(
+    base: Context?,
+) : ContextWrapper(base) {
     @Mock
     private lateinit var mMockAccountManager: AccountManager
 
-    override fun getSystemService(name: String): Any {
-        return if (ACCOUNT_SERVICE == name) {
+    override fun getSystemService(name: String): Any =
+        if (ACCOUNT_SERVICE == name) {
             mMockAccountManager
-        } else super.getSystemService(name)
-    }
+        } else {
+            super.getSystemService(name)
+        }
 
     init {
-        MockitoAnnotations.initMocks(this)
-        Mockito.`when`(mMockAccountManager.getAccountsByType(BuildConfig.ACCOUNT_TYPE))
+        MockitoAnnotations.openMocks(this)
+        Mockito
+            .`when`(mMockAccountManager.getAccountsByType(BuildConfig.ACCOUNT_TYPE))
             .thenThrow(SecurityException("Permission Denied"))
     }
 }

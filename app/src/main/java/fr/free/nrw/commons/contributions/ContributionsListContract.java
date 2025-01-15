@@ -1,7 +1,7 @@
 package fr.free.nrw.commons.contributions;
 
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import fr.free.nrw.commons.BasePresenter;
-import java.util.List;
 
 /**
  * The contract for Contributions list View & Presenter
@@ -19,6 +19,7 @@ public class ContributionsListContract {
 
     public interface UserActionListener extends BasePresenter<View> {
 
-        void deleteUpload(Contribution contribution);
+        void refreshList(SwipeRefreshLayout swipeRefreshLayout);
+
     }
 }

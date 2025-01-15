@@ -5,17 +5,19 @@ import android.os.Bundle
 import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
-import fr.free.nrw.commons.customselector.model.Result
 import android.widget.ProgressBar
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.RecyclerView
+import androidx.test.core.app.ApplicationProvider
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.facebook.soloader.SoLoader
+import fr.free.nrw.commons.OkHttpConnectionFactory
 import fr.free.nrw.commons.R
-import fr.free.nrw.commons.TestAppAdapter
 import fr.free.nrw.commons.TestCommonsApplication
+import fr.free.nrw.commons.createTestClient
 import fr.free.nrw.commons.customselector.model.CallbackStatus
+import fr.free.nrw.commons.customselector.model.Result
 import fr.free.nrw.commons.customselector.ui.adapter.FolderAdapter
 import org.junit.Before
 import org.junit.Test
@@ -26,11 +28,9 @@ import org.mockito.MockitoAnnotations
 import org.powermock.reflect.Whitebox
 import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
-import org.robolectric.RuntimeEnvironment
 import org.robolectric.Shadows
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
-import org.wikipedia.AppAdapter
 import java.lang.reflect.Field
 
 /**
@@ -40,14 +40,13 @@ import java.lang.reflect.Field
 @Config(sdk = [21], application = TestCommonsApplication::class)
 @LooperMode(LooperMode.Mode.PAUSED)
 class FolderFragmentTest {
-
     private lateinit var fragment: FolderFragment
     private lateinit var view: View
-    private lateinit var selectorRV : RecyclerView
-    private lateinit var loader : ProgressBar
+    private lateinit var selectorRV: RecyclerView
+    private lateinit var loader: ProgressBar
     private lateinit var layoutInflater: LayoutInflater
     private lateinit var context: Context
-    private lateinit var viewModelField:Field
+    private lateinit var viewModelField: Field
 
     @Mock
     private lateinit var adapter: FolderAdapter
@@ -61,8 +60,8 @@ class FolderFragmentTest {
     @Before
     fun setUp() {
         MockitoAnnotations.initMocks(this)
-        context = RuntimeEnvironment.application.applicationContext
-        AppAdapter.set(TestAppAdapter())
+        context = ApplicationProvider.getApplicationContext()
+        OkHttpConnectionFactory.CLIENT = createTestClient()
         SoLoader.setInTestMode()
         Fresco.initialize(context)
         val activity = Robolectric.buildActivity(CustomSelectorActivity::class.java).create().get()
@@ -80,7 +79,7 @@ class FolderFragmentTest {
         loader = view.findViewById(R.id.loader)
 
         Whitebox.setInternalState(fragment, "folderAdapter", adapter)
-        Whitebox.setInternalState(fragment, "selectorRV", selectorRV )
+        Whitebox.setInternalState(fragment, "selectorRV", selectorRV)
         Whitebox.setInternalState(fragment, "loader", loader)
 
         viewModelField = fragment.javaClass.getDeclaredField("viewModel")
@@ -137,5 +136,4 @@ class FolderFragmentTest {
         func.isAccessible = true
         func.invoke(fragment)
     }
-
 }

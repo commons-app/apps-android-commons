@@ -6,11 +6,13 @@
     android:orientation="vertical">
 
     <ScrollView
+      android:id="@+id/scroll_view_more_bottom_sheet"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
       android:nestedScrollingEnabled="true">
 
         <LinearLayout
+          android:id="@+id/linear_layout_more_bottom_sheet"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:orientation="vertical">
@@ -68,6 +70,17 @@
               android:drawablePadding="12dp"
               android:padding="8dp"
               android:text="@string/navigation_item_feedback"
+              android:textSize="18sp" />
+
+            <TextView
+              android:id="@+id/more_feedback_github"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_margin="12dp"
+              android:drawableLeft="@drawable/ic_action_github"
+              android:drawablePadding="12dp"
+              android:padding="8dp"
+              android:text="@string/navigation_item_feedback_github"
               android:textSize="18sp" />
 
             <TextView

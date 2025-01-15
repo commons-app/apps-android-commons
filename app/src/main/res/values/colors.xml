@@ -79,5 +79,6 @@
     <color name="card_light_grey">#EDEDED</color>
 
     <color name="wikimedia_green">#339966</color>
+    <color name="primary_color_night">#1e8cab</color>
 
 </resources>

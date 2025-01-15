@@ -4,7 +4,8 @@
   xmlns:tools="http://schemas.android.com/tools"
   android:id="@+id/drawer_layout"
   android:layout_width="match_parent"
-  android:layout_height="match_parent">
+  android:layout_height="match_parent"
+  android:background="?attr/mainBackground">
 
   <FrameLayout
     android:id="@+id/mediaDetailContainer"
@@ -19,7 +20,9 @@
     android:orientation="vertical"
     android:visibility="visible">
 
-    <include layout="@layout/toolbar" />
+    <include
+      android:id="@+id/toolbarBinding"
+      layout="@layout/toolbar" />
 
 
     <androidx.appcompat.widget.AppCompatButton

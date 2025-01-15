@@ -1,17 +1,22 @@
 package fr.free.nrw.commons.contributions;
 
+import static fr.free.nrw.commons.di.CommonsApplicationModule.IO_THREAD;
+
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.paging.DataSource;
 import androidx.paging.DataSource.Factory;
 import androidx.paging.LivePagedListBuilder;
 import androidx.paging.PagedList;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import fr.free.nrw.commons.contributions.ContributionsListContract.UserActionListener;
-import fr.free.nrw.commons.di.CommonsApplicationModule;
 import io.reactivex.Scheduler;
 import io.reactivex.disposables.CompositeDisposable;
+import java.util.Collections;
 import javax.inject.Inject;
 import javax.inject.Named;
+import kotlin.Unit;
+import kotlin.jvm.functions.Function0;
 
 /**
  * The presenter class for Contributions
@@ -32,11 +37,11 @@ public class ContributionsListPresenter implements UserActionListener {
         final ContributionBoundaryCallback contributionBoundaryCallback,
         final ContributionsRemoteDataSource contributionsRemoteDataSource,
         final ContributionsRepository repository,
-        @Named(CommonsApplicationModule.IO_THREAD) final Scheduler ioThreadScheduler) {
+        @Named(IO_THREAD) final Scheduler ioThreadScheduler) {
         this.contributionBoundaryCallback = contributionBoundaryCallback;
         this.repository = repository;
         this.ioThreadScheduler = ioThreadScheduler;
-        this.contributionsRemoteDataSource=contributionsRemoteDataSource;
+        this.contributionsRemoteDataSource = contributionsRemoteDataSource;
         compositeDisposable = new CompositeDisposable();
     }
 
@@ -71,10 +76,12 @@ public class ContributionsListPresenter implements UserActionListener {
         } else {
             contributionBoundaryCallback.setUserName(userName);
             shouldSetBoundaryCallback = true;
-            factory = repository.fetchContributions();
+            factory = repository.fetchContributionsWithStates(
+                Collections.singletonList(Contribution.STATE_COMPLETED));
         }
 
-        LivePagedListBuilder livePagedListBuilder = new LivePagedListBuilder(factory, pagedListConfig);
+        LivePagedListBuilder livePagedListBuilder = new LivePagedListBuilder(factory,
+            pagedListConfig);
         if (shouldSetBoundaryCallback) {
             livePagedListBuilder.setBoundaryCallback(contributionBoundaryCallback);
         }
@@ -90,14 +97,16 @@ public class ContributionsListPresenter implements UserActionListener {
     }
 
     /**
-     * Delete a failed contribution from the local db
+     * It is used to refresh list.
+     *
+     * @param swipeRefreshLayout used to stop refresh animation when
+     * refresh finishes.
      */
     @Override
-    public void deleteUpload(final Contribution contribution) {
-        compositeDisposable.add(repository
-            .deleteContributionFromDB(contribution)
-            .subscribeOn(ioThreadScheduler)
-            .subscribe());
+    public void refreshList(final SwipeRefreshLayout swipeRefreshLayout) {
+        contributionBoundaryCallback.refreshList(() -> {
+            swipeRefreshLayout.setRefreshing(false);
+            return Unit.INSTANCE;
+        });
     }
-
 }

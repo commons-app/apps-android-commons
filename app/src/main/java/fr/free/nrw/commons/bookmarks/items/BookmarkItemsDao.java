@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.bookmarks.items;
 
+import android.annotation.SuppressLint;
 import android.content.ContentProviderClient;
 import android.content.ContentValues;
 import android.database.Cursor;
@@ -134,6 +135,7 @@ public class BookmarkItemsDao {
      * @param cursor : Object for storing database data
      * @return DepictedItem
      */
+    @SuppressLint("Range")
     DepictedItem fromCursor(final Cursor cursor) {
         final String fileName = cursor.getString(cursor.getColumnIndex(Table.COLUMN_NAME));
         final String description
@@ -309,20 +311,16 @@ public class BookmarkItemsDao {
             if (from == to) {
                 return;
             }
-            if (from < 7) {
+            if (from < 18) {
+                // doesn't exist yet
                 from++;
                 onUpdate(db, from, to);
                 return;
             }
 
-            if (from == 7) {
+            if (from == 18) {
+                // table added in version 19
                 onCreate(db);
-                from++;
-                onUpdate(db, from, to);
-                return;
-            }
-
-            if (from == 8) {
                 from++;
                 onUpdate(db, from, to);
             }

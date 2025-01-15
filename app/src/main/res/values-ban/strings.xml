@@ -4,6 +4,27 @@
 * Joseagush
 -->
 <resources>
+  <string name="commons_facebook">Kaca Facebook Commons</string>
+  <string name="commons_github">Kode Wit Commons ring Github</string>
+  <string name="commons_logo">Logo Commons</string>
+  <string name="commons_website">Situs Commons</string>
+  <string name="exit_location_picker">Medal pamilihan genah</string>
+  <string name="submit">Kumpulang</string>
+  <string name="add_another_description">Wewehin déskripsi liyanan</string>
+  <string name="add_new_contribution">Wewehin pituut anyar</string>
+  <string name="add_contribution_from_camera">Nambah kontributor saking kaméra</string>
+  <string name="add_contribution_from_photos">Nambah kontributor saking poto</string>
+  <string name="add_contribution_from_contributions_gallery">Wewehin pituut saking galéri pituut sadurungné</string>
+  <string name="show_captions">Sesirah</string>
+  <string name="row_item_language_description">Déskripsi basa</string>
+  <string name="row_item_caption">Sesirah</string>
+  <string name="show_captions_description">Déskripsi</string>
+  <string name="nearby_row_image">Gambar</string>
+  <string name="nearby_all">Makejang</string>
+  <string name="nearby_filter_toggle">Alih Duur</string>
+  <string name="nearby_filter_search">Cingakan Panyelehan</string>
+  <string name="nearby_filter_state">Genah Negara</string>
+  <string name="appwidget_img">Gambar rahina mangkin</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">%1$d berkas kaunggah</item>
     <item quantity="other">%1$d berkas kaunggah</item>
@@ -30,9 +51,9 @@
   <string name="preference_category_feedback">Umpan walik</string>
   <string name="preference_category_privacy">Paragaan</string>
   <string name="app_name">Commons</string>
-  <string name="bullet">•</string>
   <string name="menu_settings">Setélan</string>
   <string name="intent_share_upload_label">Unggah nuju Commons</string>
+  <string name="upload_in_progress">Pangunggahan kantun mamargi</string>
   <string name="username">Peséngan sang anganggé</string>
   <string name="password">Kruna sandi</string>
   <string name="login_credential">Majing nuju akun Commons Béta Ida</string>
@@ -54,7 +75,7 @@
   <string name="upload_progress_notification_title_start">Munggahang berkas: %s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s kaunggah</string>
   <string name="upload_progress_notification_title_finishing">Muputang pangunggahan %1$s</string>
-  <string name="upload_failed_notification_title" fuzzy="true">Ngunggahin %1$s wangdé</string>
+  <string name="upload_failed_notification_title">Ngunggahang %1$s gagal</string>
   <string name="upload_paused_notification_title">Ngunggahin %1$s katunda</string>
   <string name="upload_failed_notification_subtitle">Gecek antuk nyingakin</string>
   <string name="upload_paused_notification_subtitle">Gecek antuk nyingakin</string>
@@ -149,7 +170,6 @@
   <string name="menu_refresh">Segerang</string>
   <string name="ok">OK</string>
   <string name="warning">Paingetan</string>
-  <string name="duplicate_image_found">Katemuin Gambar Kaduplikat</string>
   <string name="upload">Unggah</string>
   <string name="yes">Inggih</string>
   <string name="no">Nénten</string>
@@ -164,10 +184,6 @@
   <string name="media_detail_coordinates_empty">Tan kaicain</string>
   <string name="_2fa_code">Kode O2F</string>
   <string name="logout_verification">Napiké ragané yakti jagi medal log?</string>
-  <string name="commons_logo">Logo Commons</string>
-  <string name="commons_website">Situs Commons</string>
-  <string name="commons_facebook">Kaca Facebook Commons</string>
-  <string name="commons_github">Kode Wit Commons ring Github</string>
   <string name="welcome_image_mount_zao">Gunung Zao</string>
   <string name="welcome_image_llamas">Llama</string>
   <string name="welcome_image_rainbow_bridge">Titi Kakuwung</string>
@@ -214,16 +230,17 @@
   <string name="nearby_wikipedia">Wikipédia</string>
   <string name="nearby_commons">Commons</string>
   <string name="about_rate_us">Rating iraga</string>
+  <string name="user_guide">Panduan Anganggé</string>
   <string name="welcome_skip_button">Liwatin Tutorial</string>
   <string name="about_translate">Pangalih basa</string>
   <string name="about_translate_title">Basa</string>
   <string name="about_translate_proceed">Kamargiang</string>
   <string name="about_translate_cancel">Wangdé</string>
   <string name="retry">Indayang malih</string>
+  <string name="showcase_view_needs_photo">Genah puniki perlu photo</string>
   <string name="no_images_found">Gambar ten katemu!</string>
   <string name="image_uploaded_by">Kaunggah olih: %1$s</string>
   <string name="block_notification_title">Kacadel</string>
-  <string name="appwidget_img">Gambar rahina mangkin</string>
   <string name="app_widget_heading">Gambar rahina mangkin</string>
   <string name="menu_search_button">Rereh</string>
   <string name="search_commons">Rereh Commons</string>
@@ -233,6 +250,8 @@
   <string name="search_tab_title_media">Média</string>
   <string name="search_tab_title_categories">Kategori</string>
   <string name="explore_tab_title_mobile">Kaunggah saking sélulér</string>
+  <string name="explore_tab_title_map">Peta</string>
+  <string name="successful_wikidata_edit">Gambar kawewehin nuju %1$s ring Wikidata!</string>
   <string name="menu_set_wallpaper">Dadosang wallpaper</string>
   <string name="wallpaper_set_successfully">Wallpaper sampun kapasang!</string>
   <string name="quiz_question_string">Napiké gambar puniki OK antuk kaunggah?</string>
@@ -244,14 +263,14 @@
   <string name="delete_recent_searches_dialog">Napiké Ida jagi ngaresikin lelintihan parerehan Ida?</string>
   <string name="delete_search_dialog">Napiké ragané jagi ngusap parerehan puniki?</string>
   <string name="search_history_deleted">Lelintihan parerehan kausap</string>
-  <string name="nominate_delete">Usulan Pangusapan</string>
+  <string name="nominate_delete">Usulan Antuk Kaapus</string>
   <string name="delete">Usap</string>
   <string name="Achievements">Panghargaan</string>
   <string name="Profile">Profil</string>
   <string name="statistics">Statistik</string>
   <string name="statistics_thanks">Haturan Suksma Katampi</string>
   <string name="statistics_featured">Gambar Pilihan</string>
-  <string name="level">Tingkat</string>
+  <string name="level" fuzzy="true">Tingkat</string>
   <string name="images_uploaded">Gambar Kaupload</string>
   <string name="images_used_by_wiki">Gambar Kaanggén</string>
   <string name="contributions_fragment">Pituut</string>
@@ -261,7 +280,6 @@
   <string name="step_count">Langkat %1$d saking %2$d: %3$s</string>
   <string name="next">Salanturné</string>
   <string name="previous">Sadurungné</string>
-  <string name="submit">Kumpulang</string>
   <string name="title_page_bookmarks_pictures">Gambar</string>
   <string name="title_page_bookmarks_locations">Genah</string>
   <string name="back_button_warning">Wangdé Unggah</string>
@@ -289,17 +307,21 @@
   <string name="image_info">Pidarta Gambar</string>
   <string name="upload_cancelled">Pangunggahan Kawangdé</string>
   <string name="review_is_uploaded_by">%1$s kaunggah olih: %2$s</string>
+  <string name="delete_helper_show_deletion_title">Pangusulan antuk kaapus</string>
   <string name="delete_helper_show_deletion_title_success">Suksés</string>
   <string name="delete_helper_ask_reason_copyright_logo">Logo</string>
+  <string name="category_edit_helper_show_edit_title">Panganyaran kategori</string>
   <string name="category_edit_helper_show_edit_title_success">Suksés</string>
   <string name="coordinates_edit_helper_show_edit_title_success">Suksés</string>
   <string name="place_type">Soroh genah:</string>
   <string name="nearby_search_hint">Kreteg, museum, hotél, msl.</string>
   <string name="title_for_media">MÉDIA</string>
+  <string name="title_app_shortcut_bookmark">Chinabuku</string>
   <string name="title_app_shortcut_setting">Pangaturan</string>
   <string name="theme_dark_name">Peteng</string>
   <string name="theme_light_name">Galang</string>
   <string name="load_more">Muat luwih akéh</string>
+  <string name="confirm">Konfirmasi</string>
   <string name="instructions_title">Patunjuk</string>
   <string name="pause">rérén</string>
   <string name="resume">lanjut</string>
@@ -317,13 +339,16 @@
   <string name="leaderboard_nearby">Nampek</string>
   <string name="leaderboard_used">Kaanggén</string>
   <string name="leaderboard_my_rank_button_text">Paringkat Titiang</string>
-  <string name="mapbox_telemetry">Télémétri Mapbox</string>
   <string name="statistics_quality">Kualitas Gambar</string>
   <string name="resuming_upload">Ngalanturang unggahan...</string>
   <string name="pausing_upload">Ngarérénang unggahan…</string>
+  <string name="cancel_upload">Wangdé Unggah</string>
   <string name="license_step_title">Lisénsi Média</string>
   <string name="read_help_link">Wacén malih</string>
   <string name="media_detail_in_all_languages">Ring samian basa</string>
   <string name="choose_a_location">Pilihin genah</string>
   <string name="select_location_location_picker">Pilih Genah</string>
+  <string name="done">Puput</string>
+  <string name="back">Mawali</string>
+  <string name="welcome_custom_selector_ok">Becik pisan</string>
 </resources>

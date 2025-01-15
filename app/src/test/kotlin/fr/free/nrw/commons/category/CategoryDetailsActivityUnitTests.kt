@@ -3,8 +3,10 @@ package fr.free.nrw.commons.category
 import android.content.Context
 import android.view.Menu
 import android.view.MenuItem
-import fr.free.nrw.commons.TestAppAdapter
+import androidx.test.core.app.ApplicationProvider
+import fr.free.nrw.commons.OkHttpConnectionFactory
 import fr.free.nrw.commons.TestCommonsApplication
+import fr.free.nrw.commons.createTestClient
 import fr.free.nrw.commons.explore.categories.media.CategoriesMediaFragment
 import org.junit.Assert
 import org.junit.Before
@@ -14,17 +16,14 @@ import org.mockito.Mock
 import org.mockito.MockitoAnnotations
 import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
-import org.robolectric.RuntimeEnvironment
 import org.robolectric.annotation.Config
 import org.robolectric.fakes.RoboMenu
 import org.robolectric.fakes.RoboMenuItem
-import org.wikipedia.AppAdapter
 import java.lang.reflect.Field
 
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
 class CategoryDetailsActivityUnitTests {
-
     private lateinit var activity: CategoryDetailsActivity
 
     private lateinit var context: Context
@@ -38,12 +37,11 @@ class CategoryDetailsActivityUnitTests {
 
     @Before
     fun setUp() {
+        MockitoAnnotations.openMocks(this)
 
-        MockitoAnnotations.initMocks(this)
+        OkHttpConnectionFactory.CLIENT = createTestClient()
 
-        AppAdapter.set(TestAppAdapter())
-
-        context = RuntimeEnvironment.application.applicationContext
+        context = ApplicationProvider.getApplicationContext()
 
         activity = Robolectric.buildActivity(CategoryDetailsActivity::class.java).create().get()
 
@@ -110,5 +108,4 @@ class CategoryDetailsActivityUnitTests {
     fun testViewPagerNotifyDataSetChanged() {
         activity.viewPagerNotifyDataSetChanged()
     }
-
 }

@@ -3,18 +3,26 @@ package fr.free.nrw.commons.customselector.ui.selector
 import android.content.ContentUris
 import android.content.Context
 import android.provider.MediaStore
+import android.text.format.DateFormat
 import fr.free.nrw.commons.customselector.listeners.ImageLoaderListener
 import fr.free.nrw.commons.customselector.model.Image
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.io.File
+import java.util.Calendar
+import java.util.Date
+import java.util.Locale
 import kotlin.coroutines.CoroutineContext
 
 /**
  * Custom Selector Image File Loader.
  * Loads device images.
  */
-class ImageFileLoader(val context: Context) : CoroutineScope{
-
+class ImageFileLoader(
+    val context: Context,
+) : CoroutineScope {
     /**
      * Coroutine context for fetching images.
      */
@@ -23,12 +31,15 @@ class ImageFileLoader(val context: Context) : CoroutineScope{
     /**
      * Media paramerters required.
      */
-    private val projection = arrayOf(
-        MediaStore.Images.Media._ID,
-        MediaStore.Images.Media.DISPLAY_NAME,
-        MediaStore.Images.Media.DATA,
-        MediaStore.Images.Media.BUCKET_ID,
-        MediaStore.Images.Media.BUCKET_DISPLAY_NAME)
+    private val projection =
+        arrayOf(
+            MediaStore.Images.Media._ID,
+            MediaStore.Images.Media.DISPLAY_NAME,
+            MediaStore.Images.Media.DATA,
+            MediaStore.Images.Media.BUCKET_ID,
+            MediaStore.Images.Media.BUCKET_DISPLAY_NAME,
+            MediaStore.Images.Media.DATE_ADDED,
+        )
 
     /**
      * Load Device Images under coroutine.
@@ -41,12 +52,18 @@ class ImageFileLoader(val context: Context) : CoroutineScope{
         }
     }
 
-
     /**
      * Load Device images using cursor
      */
-    private fun getImages(listener:ImageLoaderListener) {
-        val cursor = context.contentResolver.query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, projection, null, null, MediaStore.Images.Media.DATE_ADDED + " DESC")
+    private fun getImages(listener: ImageLoaderListener) {
+        val cursor =
+            context.contentResolver.query(
+                MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+                projection,
+                null,
+                null,
+                MediaStore.Images.Media.DATE_ADDED + " DESC",
+            )
         if (cursor == null) {
             listener.onFailed(NullPointerException())
             return
@@ -57,6 +74,7 @@ class ImageFileLoader(val context: Context) : CoroutineScope{
         val dataColumn = cursor.getColumnIndex(MediaStore.Images.Media.DATA)
         val bucketIdColumn = cursor.getColumnIndex(MediaStore.Images.Media.BUCKET_ID)
         val bucketNameColumn = cursor.getColumnIndex(MediaStore.Images.Media.BUCKET_DISPLAY_NAME)
+        val dateColumn = cursor.getColumnIndex(MediaStore.Images.Media.DATE_ADDED)
 
         val images = arrayListOf<Image>()
         if (cursor.moveToFirst()) {
@@ -70,37 +88,57 @@ class ImageFileLoader(val context: Context) : CoroutineScope{
                 val path = cursor.getString(dataColumn)
                 val bucketId = cursor.getLong(bucketIdColumn)
                 val bucketName = cursor.getString(bucketNameColumn)
+                val date = cursor.getLong(dateColumn)
 
                 val file =
                     if (path == null || path.isEmpty()) {
                         null
-                    } else try {
-                        File(path)
-                    } catch (ignored: Exception) {
-                        null
+                    } else {
+                        try {
+                            File(path)
+                        } catch (ignored: Exception) {
+                            null
+                        }
                     }
 
-
-                if (file != null && file.exists()) {
-                    if (name != null && path != null && bucketName != null) {
-                        val uri = ContentUris.withAppendedId(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, id)
-                        val image = Image(id, name, uri, path, bucketId, bucketName)
-                        images.add(image)
+                if (file != null && file.exists() && name != null && path != null && bucketName != null) {
+                    val extension = path.substringAfterLast(".", "")
+                    // Check if the extension is one of the allowed types
+                    if (extension.lowercase(Locale.ROOT) !in arrayOf("jpg", "jpeg", "png", "svg", "gif", "tiff", "webp", "xcf")) {
+                        continue
                     }
+
+                    val uri = ContentUris.withAppendedId(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, id)
+
+                    val calendar = Calendar.getInstance()
+                    calendar.timeInMillis = date * 1000L
+                    val date: Date = calendar.time
+                    val dateFormat = DateFormat.getMediumDateFormat(context)
+                    val formattedDate = dateFormat.format(date)
+
+                    val image =
+                        Image(
+                            id,
+                            name,
+                            uri,
+                            path,
+                            bucketId,
+                            bucketName,
+                            date = (formattedDate),
+                        )
+                    images.add(image)
                 }
-
             } while (cursor.moveToNext())
         }
         cursor.close()
         listener.onImageLoaded(images)
     }
 
-
     /**
      * Abort loading images.
      */
-    fun abortLoadImage(){
-        //todo Abort loading images.
+    fun abortLoadImage() {
+        // todo Abort loading images.
     }
 
     /*

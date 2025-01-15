@@ -35,5 +35,6 @@
     android:layout_below="@+id/copyright_messege"
     android:layout_centerHorizontal="true"
     android:layout_marginTop="37dp"
+    android:contentDescription="@string/ok"
     android:text="@string/ok" />
 </RelativeLayout>

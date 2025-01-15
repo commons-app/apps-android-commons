@@ -1,7 +1,6 @@
 package fr.free.nrw.commons;
 
 import android.annotation.SuppressLint;
-import android.app.AlertDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -16,6 +15,7 @@ import androidx.annotation.NonNull;
 import fr.free.nrw.commons.databinding.ActivityAboutBinding;
 import fr.free.nrw.commons.theme.BaseActivity;
 import fr.free.nrw.commons.utils.ConfigUtils;
+import fr.free.nrw.commons.utils.DialogUtil;
 import java.util.Collections;
 import java.util.List;
 
@@ -64,6 +64,7 @@ public class AboutActivity extends BaseActivity {
 
         Utils.setUnderlinedText(binding.aboutFaq, R.string.about_faq, getApplicationContext());
         Utils.setUnderlinedText(binding.aboutRateUs, R.string.about_rate_us, getApplicationContext());
+        Utils.setUnderlinedText(binding.aboutUserGuide, R.string.user_guide, getApplicationContext());
         Utils.setUnderlinedText(binding.aboutPrivacyPolicy, R.string.about_privacy_policy, getApplicationContext());
         Utils.setUnderlinedText(binding.aboutTranslate, R.string.about_translate, getApplicationContext());
         Utils.setUnderlinedText(binding.aboutCredits, R.string.about_credits, getApplicationContext());
@@ -77,6 +78,7 @@ public class AboutActivity extends BaseActivity {
         binding.aboutRateUs.setOnClickListener(this::launchRatings);
         binding.aboutCredits.setOnClickListener(this::launchCredits);
         binding.aboutPrivacyPolicy.setOnClickListener(this::launchPrivacyPolicy);
+        binding.aboutUserGuide.setOnClickListener(this::launchUserGuide);
         binding.aboutFaq.setOnClickListener(this::launchFrequentlyAskedQuesions);
         binding.aboutTranslate.setOnClickListener(this::launchTranslate);
     }
@@ -99,7 +101,14 @@ public class AboutActivity extends BaseActivity {
     }
 
     public void launchGithub(View view) {
-        Utils.handleWebUrl(this, Uri.parse(Urls.GITHUB_REPO_URL));
+        Intent intent;
+        try {
+            intent = new Intent(Intent.ACTION_VIEW, Uri.parse(Urls.GITHUB_REPO_URL));
+            intent.setPackage(Urls.GITHUB_PACKAGE_NAME);
+            startActivity(intent);
+        } catch (Exception e) {
+            Utils.handleWebUrl(this, Uri.parse(Urls.GITHUB_REPO_URL));
+        }
     }
 
     public void launchWebsite(View view) {
@@ -112,6 +121,10 @@ public class AboutActivity extends BaseActivity {
 
     public void launchCredits(View view) {
         Utils.handleWebUrl(this, Uri.parse(Urls.CREDITS_URL));
+    }
+
+    public void launchUserGuide(View view) {
+        Utils.handleWebUrl(this, Uri.parse(Urls.USER_GUIDE_URL));
     }
 
     public void launchPrivacyPolicy(View view) {
@@ -155,17 +168,20 @@ public class AboutActivity extends BaseActivity {
         spinner.setAdapter(languageAdapter);
         spinner.setGravity(17);
         spinner.setPadding(50,0,0,0);
-        AlertDialog.Builder builder = new AlertDialog.Builder(AboutActivity.this);
-        builder.setView(spinner);
-        builder.setTitle(R.string.about_translate_title)
-                .setMessage(R.string.about_translate_message)
-                .setPositiveButton(R.string.about_translate_proceed, (dialog, which) -> {
-                    String langCode = CommonsApplication.getInstance().getLanguageLookUpTable().getCodes().get(spinner.getSelectedItemPosition());
-                    Utils.handleWebUrl(AboutActivity.this, Uri.parse(Urls.TRANSLATE_WIKI_URL + langCode));
-                });
-        builder.setNegativeButton(R.string.about_translate_cancel, (dialog, which) -> dialog.cancel());
-        builder.create().show();
 
+        Runnable positiveButtonRunnable = () -> {
+            String langCode = CommonsApplication.getInstance().getLanguageLookUpTable().getCodes().get(spinner.getSelectedItemPosition());
+            Utils.handleWebUrl(AboutActivity.this, Uri.parse(Urls.TRANSLATE_WIKI_URL + langCode));
+        };
+        DialogUtil.showAlertDialog(this,
+            getString(R.string.about_translate_title),
+            getString(R.string.about_translate_message),
+            getString(R.string.about_translate_proceed),
+            getString(R.string.about_translate_cancel),
+            positiveButtonRunnable,
+            () -> {},
+            spinner
+        );
     }
 
 }

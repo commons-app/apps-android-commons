@@ -7,18 +7,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.databinding.FragmentSearchHistoryBinding;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.explore.SearchActivity;
 import java.util.List;
+import java.util.Locale;
 import javax.inject.Inject;
 
 
@@ -29,42 +26,39 @@ public class RecentSearchesFragment extends CommonsDaggerSupportFragment {
 
     @Inject
     RecentSearchesDao recentSearchesDao;
-    @BindView(R.id.recent_searches_list)
-    ListView recentSearchesList;
     List<String> recentSearches;
     ArrayAdapter adapter;
-    @BindView(R.id.recent_searches_delete_button)
-    ImageView recent_searches_delete_button;
-    @BindView(R.id.recent_searches_text_view)
-    TextView recent_searches_text_view;
+
+    private FragmentSearchHistoryBinding binding;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
         Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_search_history, container, false);
-        ButterKnife.bind(this, rootView);
+        binding = FragmentSearchHistoryBinding.inflate(inflater, container, false);
+
         recentSearches = recentSearchesDao.recentSearches(10);
 
         if (recentSearches.isEmpty()) {
-            recent_searches_delete_button.setVisibility(View.GONE);
-            recent_searches_text_view.setText(R.string.no_recent_searches);
+            binding.recentSearchesDeleteButton.setVisibility(View.GONE);
+            binding.recentSearchesTextView.setText(R.string.no_recent_searches);
         }
 
-        recent_searches_delete_button.setOnClickListener(v -> {
+        binding.recentSearchesDeleteButton.setOnClickListener(v -> {
             showDeleteRecentAlertDialog(requireContext());
         });
 
         adapter = new ArrayAdapter<>(requireContext(), R.layout.item_recent_searches,
             recentSearches);
-        recentSearchesList.setAdapter(adapter);
-        recentSearchesList.setOnItemClickListener((parent, view, position, id) -> (
+        binding.recentSearchesList.setAdapter(adapter);
+        binding.recentSearchesList.setOnItemClickListener((parent, view, position, id) -> (
             (SearchActivity) getContext()).updateText(recentSearches.get(position)));
-        recentSearchesList.setOnItemLongClickListener((parent, view, position, id) -> {
+        binding.recentSearchesList.setOnItemLongClickListener((parent, view, position, id) -> {
             showDeleteAlertDialog(requireContext(), position);
             return true;
         });
         updateRecentSearches();
-        return rootView;
+
+        return binding.getRoot();
     }
 
     private void showDeleteRecentAlertDialog(@NonNull final Context context) {
@@ -73,6 +67,7 @@ public class RecentSearchesFragment extends CommonsDaggerSupportFragment {
             .setPositiveButton(android.R.string.yes,
                 (dialog, which) -> setDeleteRecentPositiveButton(context, dialog))
             .setNegativeButton(android.R.string.no, null)
+            .setCancelable(false)
             .create()
             .show();
     }
@@ -80,24 +75,27 @@ public class RecentSearchesFragment extends CommonsDaggerSupportFragment {
     private void setDeleteRecentPositiveButton(@NonNull final Context context,
         final DialogInterface dialog) {
         recentSearchesDao.deleteAll();
-        recent_searches_delete_button.setVisibility(View.GONE);
-        recent_searches_text_view.setText(R.string.no_recent_searches);
-        Toast.makeText(getContext(), getString(R.string.search_history_deleted),
-            Toast.LENGTH_SHORT).show();
-        recentSearches = recentSearchesDao.recentSearches(10);
-        adapter = new ArrayAdapter<>(context, R.layout.item_recent_searches,
-            recentSearches);
-        recentSearchesList.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
+        if (binding != null) {
+            binding.recentSearchesDeleteButton.setVisibility(View.GONE);
+            binding.recentSearchesTextView.setText(R.string.no_recent_searches);
+            Toast.makeText(getContext(), getString(R.string.search_history_deleted),
+                Toast.LENGTH_SHORT).show();
+            recentSearches = recentSearchesDao.recentSearches(10);
+            adapter = new ArrayAdapter<>(context, R.layout.item_recent_searches,
+                recentSearches);
+            binding.recentSearchesList.setAdapter(adapter);
+            adapter.notifyDataSetChanged();
+        }
         dialog.dismiss();
     }
 
     private void showDeleteAlertDialog(@NonNull final Context context, final int position) {
         new AlertDialog.Builder(context)
             .setMessage(R.string.delete_search_dialog)
-            .setPositiveButton(getString(R.string.delete).toUpperCase(),
+            .setPositiveButton(getString(R.string.delete).toUpperCase(Locale.ROOT),
                 ((dialog, which) -> setDeletePositiveButton(context, dialog, position)))
             .setNegativeButton(android.R.string.cancel, null)
+            .setCancelable(false)
             .create()
             .show();
     }
@@ -108,8 +106,10 @@ public class RecentSearchesFragment extends CommonsDaggerSupportFragment {
         recentSearches = recentSearchesDao.recentSearches(10);
         adapter = new ArrayAdapter<>(context, R.layout.item_recent_searches,
             recentSearches);
-        recentSearchesList.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
+        if (binding != null){
+            binding.recentSearchesList.setAdapter(adapter);
+            adapter.notifyDataSetChanged();
+        }
         dialog.dismiss();
     }
 
@@ -131,8 +131,19 @@ public class RecentSearchesFragment extends CommonsDaggerSupportFragment {
         adapter.notifyDataSetChanged();
 
         if (!recentSearches.isEmpty()) {
-            recent_searches_delete_button.setVisibility(View.VISIBLE);
-            recent_searches_text_view.setText(R.string.search_recent_header);
+            if (binding!= null) {
+                binding.recentSearchesDeleteButton.setVisibility(View.VISIBLE);
+                binding.recentSearchesTextView.setText(R.string.search_recent_header);
+            }
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+
+        if (binding != null) {
+            binding = null;
         }
     }
 }

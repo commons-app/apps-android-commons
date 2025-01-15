@@ -1,10 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* Fugithora
 * Fwolff
 * Joris Darlington Quarshie
 * Naudefj
+* Whym
 -->
 <resources>
+  <string name="commons_facebook">Commons Facebook bladsy</string>
+  <string name="commons_github">Commons Github-bronkode</string>
+  <string name="commons_logo">Commons logo</string>
+  <string name="commons_website">Commons webwerf</string>
+  <string name="submit">Indien</string>
+  <string name="add_another_description">Tilføj en anden beskrivelse</string>
+  <string name="add_new_contribution">Tilføj nyt bidrag</string>
+  <string name="add_contribution_from_camera">Tilføj bidrag fra kamera</string>
+  <string name="add_contribution_from_photos">Tilføj bidrag fra fotos</string>
+  <string name="appwidget_img">Foto van die dag</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">%1$d lêer aan die uploaden</item>
     <item quantity="other">%1$d lêers aan die uploaden</item>
@@ -46,10 +58,10 @@
   <string name="signup">Teken aan</string>
   <string name="logging_in_title">Besig met aanmelding</string>
   <string name="logging_in_message">\'n ogenblik geduld…</string>
-  <string name="login_success">Aanmelding geslaagd</string>
-  <string name="login_failed">Aanmelding gefaal</string>
+  <string name="login_success" fuzzy="true">Aanmelding geslaagd</string>
+  <string name="login_failed" fuzzy="true">Aanmelding gefaal</string>
   <string name="upload_failed">Lêer nie gevind. Probeer \'n andere lêer.</string>
-  <string name="authentication_failed">Verifiëring is mislukt. Meld jou weer aan.</string>
+  <string name="authentication_failed" fuzzy="true">Verifiëring is mislukt. Meld jou weer aan.</string>
   <string name="uploading_started">Oplaai het begin!</string>
   <string name="upload_completed_notification_title">%1$s opgelaai!</string>
   <string name="upload_completed_notification_text">Vat om u oplaaie te sien</string>
@@ -70,11 +82,11 @@
   <string name="menu_share">Deel</string>
   <string name="share_title_hint" fuzzy="true">Titel (verplig)</string>
   <string name="share_description_hint">Beskrywing</string>
-  <string name="login_failed_network">Aanmelding nie moontlik - probleem met netwerk</string>
+  <string name="login_failed_network" fuzzy="true">Aanmelding nie moontlik - probleem met netwerk</string>
   <string name="login_failed_throttled">Te veel onsuksesvolle pogings. Probeer \'n paar minute weer.</string>
   <string name="login_failed_blocked">Die gebruiker is op Commons geblokkeer</string>
   <string name="login_failed_2fa_needed">U moet u twee-faktor-verifikasiekode verskaf.</string>
-  <string name="login_failed_generic">Aanmelding het gefaal</string>
+  <string name="login_failed_generic" fuzzy="true">Aanmelding het gefaal</string>
   <string name="share_upload_button">Laai op</string>
   <string name="multiple_share_base_title">Gee hierdie versameling \'n naam</string>
   <string name="provider_modifications">Wysigings</string>
@@ -162,10 +174,6 @@
   <string name="become_a_tester_description">Sluit aan by ons beta-kanaal op Google Play en kry vroeë toegang tot nuwe funksies en foutoplossings</string>
   <string name="_2fa_code">2FA-kode</string>
   <string name="logout_verification">Wil u regtig afmeld?</string>
-  <string name="commons_logo">Commons logo</string>
-  <string name="commons_website">Commons webwerf</string>
-  <string name="commons_facebook">Commons Facebook bladsy</string>
-  <string name="commons_github">Commons Github-bronkode</string>
   <string name="mediaimage_failed">Mediabeeld misluk</string>
   <string name="no_subcategory_found">Geen subkategorieë gevind nie</string>
   <string name="no_parentcategory_found">Geen ouerkategorieë gevind nie</string>
@@ -214,8 +222,8 @@
   <string name="nominated_see_more" fuzzy="true">&lt;u&gt;Sien webbladsy vir details se&lt;/u&gt;</string>
   <string name="skip_login">Huppel</string>
   <string name="navigation_item_login">Teken aan</string>
-  <string name="skip_login_title">Wil u regtig die aanmelding oorslaan?</string>
-  <string name="skip_login_message">U sal moet aanmeld om in die toekoms foto\'s op te laai.</string>
+  <string name="skip_login_title" fuzzy="true">Wil u regtig die aanmelding oorslaan?</string>
+  <string name="skip_login_message" fuzzy="true">U sal moet aanmeld om in die toekoms foto\'s op te laai.</string>
   <string name="login_alert_message">Meld u aan om hierdie funksie te gebruik</string>
   <string name="copy_wikicode">Kopieer die wikitext na die knipbord</string>
   <string name="wikicode_copied">Die wikitext is na die knipbord gekopieër</string>
@@ -244,7 +252,6 @@
   <string name="image_uploaded_by">Opgelaai deur:%$1s</string>
   <string name="block_notification_title">geblokkeer</string>
   <string name="block_notification">U word geblokkeer om Commons te redigeer</string>
-  <string name="appwidget_img">Foto van die dag</string>
   <string name="app_widget_heading">Foto van die dag</string>
   <string name="menu_search_button">Soek</string>
   <string name="search_commons">Commons deursoek</string>
@@ -256,7 +263,7 @@
   <string name="search_tab_title_categories">Kategorieë</string>
   <string name="explore_tab_title_featured">Gewilde</string>
   <string name="explore_tab_title_mobile">Opgelaai via selfoon</string>
-  <string name="successful_wikidata_edit">Beeld is bygevoeg tot% 1 $ s op Wikidata!</string>
+  <string name="successful_wikidata_edit">Beeld is bygevoeg tot %1$s op Wikidata!</string>
   <string name="wikidata_edit_failure">Kon nie die ooreenstemmende Wikidata-entiteit opdateer nie!</string>
   <string name="menu_set_wallpaper">Stel as agtergrond</string>
   <string name="wallpaper_set_successfully">Agtergrond suksesvol gestel!</string>
@@ -265,7 +272,7 @@
   <string name="question">Vraag</string>
   <string name="result">Gevolg</string>
   <string name="quiz_back_button">As u prente oplaai wat verwyder moet word, sal u rekening waarskynlik verbied word. Is u seker dat u die vasvra wil beëindig?</string>
-  <string name="quiz_alert_message">Meer as% 1 $ s van die prente wat u opgelaai het, is uitgevee. As u prente oplaai wat verwyder moet word, sal u rekening waarskynlik verbied word.\n\nWil u die tutoriaal weer sien en dan \'n vasvra neem om u te help om watter soort beelde u moet oplaai of nie moet oplaai nie?</string>
+  <string name="quiz_alert_message">Meer as %1$s van die prente wat u opgelaai het, is uitgevee. As u prente oplaai wat verwyder moet word, sal u rekening waarskynlik verbied word.\n\nWil u die tutoriaal weer sien en dan \'n vasvra neem om u te help om watter soort beelde u moet oplaai of nie moet oplaai nie?</string>
   <string name="selfie_answer">Selfies het nie veel ensiklopediese waarde nie. Moenie \'n foto van u self oplaai nie, tensy u reeds \'n Wikipedia-artikel oor u het.</string>
   <string name="taj_mahal_answer">In die meeste lande kan foto\'s van monumente en natuurskoon buite opgevoer word. Let daarop dat tydelike kunsinstallasies buite outeursregtelik beskerm word en nie goed is om op te laai nie.</string>
   <string name="screenshot_answer">Skermfoto\'s van webwerwe word as afgeleide werke beskou en is onderhewig aan enige outeursreg op die webwerf self. Dit kan gebruik word na toestemming van die outeur. Sonder sodanige toestemming word enige kuns wat u maak op grond van hul werk wettiglik beskou as \'n ongelisensieerde eksemplaar wat deur die oorspronklike outeur besit word.</string>
@@ -273,14 +280,14 @@
   <string name="construction_event_answer">Foto\'s wat tegnologie of kultuur toon, is baie welkom op Commons.</string>
   <string name="congratulatory_message_quiz">U het %1$s van die antwoorde korrek. Baie geluk!</string>
   <string name="warning_for_no_answer">Kies een van die twee opsies om die vraag te beantwoord</string>
-  <string name="user_not_logged_in">Aanmeldingsessie is verval, meld weer aan.</string>
+  <string name="user_not_logged_in" fuzzy="true">Aanmeldingsessie is verval, meld weer aan.</string>
   <string name="quiz_result_share_message">Deel jou vasvra met jou vriende!</string>
   <string name="continue_message">Aanhou</string>
   <string name="correct">Korrekte antwoord</string>
   <string name="wrong">Verkeerde antwoord</string>
   <string name="quiz_screenshot_question">Is hierdie skermkiekie OK om op te laai?</string>
   <string name="share_app_title">Toepassing dele</string>
-  <string name="error_fetching_nearby_places">Kon nie nabygeleë plekke gaan haal nie.</string>
+  <string name="error_fetching_nearby_places" fuzzy="true">Kon nie nabygeleë plekke gaan haal nie.</string>
   <string name="no_recent_searches">Geen onlangse soektogte nie</string>
   <string name="delete_recent_searches_dialog">Is u seker dat u u soekgeskiedenis wil uitvee?</string>
   <string name="delete_search_dialog">Wil u hierdie soektog uitvee?</string>
@@ -292,7 +299,7 @@
   <string name="statistics_thanks">Dankie ontvang</string>
   <string name="statistics_featured">Voorgestelde beelde</string>
   <string name="statistics_wikidata_edits">Beelde via \"Plekke in die buurt\"</string>
-  <string name="level">Vlak</string>
+  <string name="level" fuzzy="true">Vlak</string>
   <string name="images_uploaded">Beelde opgelaai</string>
   <string name="image_reverts">Beelde nie teruggestel nie</string>
   <string name="images_used_by_wiki">Beelde gebruik</string>
@@ -320,7 +327,6 @@
   <string name="step_count" fuzzy="true">Stap %1$d van %2$d</string>
   <string name="next">volgende</string>
   <string name="previous">Vorige</string>
-  <string name="submit">Indien</string>
   <string name="upload_title_duplicate" fuzzy="true">\'N Lêer met die lêernaam %1$s bestaan. Is u seker dat u wil voortgaan?</string>
   <string name="map_application_missing">Geen versoenbare kaarttoepassing kon op u toestel gevind word nie. Installeer \'n kaarttoepassing om hierdie funksie te gebruik.</string>
   <string name="title_page_bookmarks_pictures">Pictures</string>
@@ -347,12 +353,12 @@
   <string name="never_ask_again">Moet dit nooit weer vra nie</string>
   <string name="display_location_permission_title" fuzzy="true">Wys toestemming vir ligging</string>
   <string name="display_location_permission_explanation">Vra vir liggingstoestemming indien nodig vir die nabygeleë kennisgewingkaartweergawe.</string>
-  <string name="achievements_fetch_failed">Iets het verkeerd geloop. Ons kon nie u prestasies haal nie</string>
+  <string name="achievements_fetch_failed" fuzzy="true">Iets het verkeerd geloop. Ons kon nie u prestasies haal nie</string>
   <string name="ends_on">Eindig op:</string>
   <string name="display_campaigns">Vertoon veldtogte</string>
   <string name="display_campaigns_explanation">Kyk na die lopende veldtogte</string>
   <string name="nearby_campaign_dismiss_message">U sal nie meer die veldtogte sien nie. U kan hierdie kennisgewing egter weer instel in Instellings as u wil.</string>
-  <string name="this_function_needs_network_connection">Kontroleer u verbindinginstellings vir hierdie funksie.</string>
+  <string name="this_function_needs_network_connection" fuzzy="true">Kontroleer u verbindinginstellings vir hierdie funksie.</string>
   <string name="error_processing_image">Fout het voorgekom tydens die verwerking van die prent. Probeer asseblief weer!</string>
   <string name="getting_edit_token">Kry teken vir redigering</string>
   <string name="check_category_adding_template">Voeg sjabloon by vir kategorie-kontrole</string>
@@ -362,5 +368,6 @@
   <string name="check_category_failure_title">Kategorie-tjekversoek het nie gewerk nie</string>
   <string name="check_category_success_message">Versoek kategorie-toets vir %1$s</string>
   <string name="upload_nearby_place_found_title">Nabygeleë plek gevind</string>
-  <string name="upload_nearby_place_found_description">Is dit \'n foto van Plek %1$s?</string>
+  <string name="upload_nearby_place_found_description_singular" fuzzy="true">Is dit \'n foto van Plek %1$s?</string>
+  <string name="full_screen_mode_zoom_info">Brug to fingre for at zoome ind og ud.</string>
 </resources>

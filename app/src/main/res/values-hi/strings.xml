@@ -4,6 +4,7 @@
 * Abijeet Patro
 * Anamdas
 * Anandra
+* AnupamM
 * Bhatakati aatma
 * Gopalindians
 * Nilesh shukla
@@ -12,15 +13,27 @@
 * Rajatkatiyar10
 * Rishi.Singh
 * Sachinkatiyar
+* Saurmandal
 * Sfic
 * Shypoetess
 * Siddhartha Ghai
 * Smtchahal
+* Suyash.dwivedi
 * Swapnil.Karambelkar
 * चक्रपाणी
 * संजीव कुमार
 -->
 <resources>
+  <string name="commons_facebook">कॉमन्स फेसबुक पृष्ठ</string>
+  <string name="commons_github">कॉमन्स गिटहब सोर्स कोड</string>
+  <string name="commons_logo">कॉमन्स का प्रतीक चिन्ह</string>
+  <string name="commons_website">कॉमन्स का जालस्थान</string>
+  <string name="submit">जमा करें</string>
+  <string name="row_item_caption">कैप्शन</string>
+  <string name="show_captions_description">विवरण</string>
+  <string name="nearby_row_image">चित्र</string>
+  <string name="nearby_all">सभी</string>
+  <string name="appwidget_img">आज का चित्र</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">%1$d फ़ाइल अपलोड हो रही</item>
     <item quantity="other">%1$d फ़ाइलें अपलोड हो रहीं</item>
@@ -46,8 +59,8 @@
   <string name="preference_category_appearance">स्वरूप</string>
   <string name="preference_category_general">सामान्य</string>
   <string name="preference_category_feedback">आपके सुझाव</string>
+  <string name="preference_category_privacy">गोपनीयता</string>
   <string name="app_name">कॉमन्स</string>
-  <string name="bullet">•</string>
   <string name="menu_settings">सेटिंग्स</string>
   <string name="intent_share_upload_label">कॉमन्स पर अपलोड करें</string>
   <string name="username">सदस्य नाम</string>
@@ -56,24 +69,25 @@
   <string name="login">प्रवेश</string>
   <string name="forgot_password">पासवर्ड भूल गये?</string>
   <string name="signup">खाता बनायें</string>
-  <string name="logging_in_title">प्रवेश हो रहा</string>
-  <string name="logging_in_message">प्रतीक्षा करें…</string>
-  <string name="login_success">प्रवेश में सफल हुआ!</string>
-  <string name="login_failed">प्रवेश विफल हुआ!</string>
+  <string name="logging_in_title">लॉग इन हो रहा है</string>
+  <string name="logging_in_message">कृपया प्रतीक्षा करें...</string>
+  <string name="updating_caption_message">कृपया प्रतीक्षा करें...</string>
+  <string name="login_success" fuzzy="true">लॉग इन सफल!</string>
+  <string name="login_failed" fuzzy="true">लॉग इन विफल!</string>
   <string name="upload_failed">फ़ाइल नहीं मिली, कृपया अन्य फ़ाइल से प्रयास करें।</string>
-  <string name="authentication_failed">प्रमाणीकरण विफल, पुनः लॉगिन करें</string>
+  <string name="authentication_failed" fuzzy="true">प्रमाणीकरण विफल, पुनः लॉगिन करें</string>
   <string name="uploading_started">अपलोड आरंभ!</string>
   <string name="upload_completed_notification_title">%1$s अपलोड हुआ!</string>
   <string name="upload_completed_notification_text">अपना अपलोड देखने के लिए टैप करें</string>
   <string name="upload_progress_notification_title_start" fuzzy="true">%1$s का अपलोड शुरू हुआ</string>
   <string name="upload_progress_notification_title_in_progress">%1$s अपलोड हो रहा</string>
-  <string name="upload_progress_notification_title_finishing">%1$s का अपलोड पूरा हुआ</string>
+  <string name="upload_progress_notification_title_finishing">%1$s का अपलोड पूर्ण हुआ</string>
   <string name="upload_failed_notification_title" fuzzy="true">%1$s का अपलोड विफल हुआ</string>
   <string name="upload_failed_notification_subtitle">देखने हेतु टैप करें</string>
   <string name="title_activity_contributions">मेरे ताज़ा अपलोड</string>
   <string name="contribution_state_queued">प्रतीक्षा में</string>
   <string name="contribution_state_failed">विफल</string>
-  <string name="contribution_state_in_progress">%1$d%% पूरा हुआ</string>
+  <string name="contribution_state_in_progress">%1$d%% पूर्ण हुआ</string>
   <string name="contribution_state_starting">अपलोड हो रहा</string>
   <string name="menu_from_gallery">गैलरी से</string>
   <string name="menu_from_camera">फ़ोटो लें</string>
@@ -83,11 +97,11 @@
   <string name="share_title_hint" fuzzy="true">शीर्षक (आवश्यक)</string>
   <string name="share_description_hint">विवरण</string>
   <string name="share_caption_hint">शीर्षक</string>
-  <string name="login_failed_network">प्रवेश नहीं हो रहा - नेटवर्क विफल</string>
+  <string name="login_failed_network" fuzzy="true">प्रवेश नहीं हो रहा - नेटवर्क विफल</string>
   <string name="login_failed_throttled">ढेर सारे असफल प्रयास होने के कारण कुछ मिनटों के बाद प्रयास करें।</string>
   <string name="login_failed_blocked">क्षमा करें, यह सदस्य कॉमन्स में अवरोधित है</string>
   <string name="login_failed_2fa_needed">आपको अपना दो कारक प्रमाणन कोड प्रदान करना होगा।</string>
-  <string name="login_failed_generic">प्रवेश विफल</string>
+  <string name="login_failed_generic" fuzzy="true">प्रवेश विफल</string>
   <string name="share_upload_button">अपलोड</string>
   <string name="multiple_share_base_title">सूचियों को नाम दें</string>
   <string name="provider_modifications">बदलाव</string>
@@ -161,10 +175,12 @@
   <string name="write_storage_permission_rationale" fuzzy="true">अनिवार्य अनुमति:बाहरी कंप्यूटर स्टोरेज लिखना|इसके बिना एप कार्य नहीं करेगा।</string>
   <string name="ok">ठीक है</string>
   <string name="warning">चेतावनी</string>
+  <string name="upload">अपलोड करें</string>
   <string name="yes">हाँ</string>
   <string name="no">नहीं</string>
   <string name="media_detail_title">शीर्षक</string>
   <string name="media_detail_description">विवरण</string>
+  <string name="media_detail_discussion">चर्चा</string>
   <string name="media_detail_author">लेखक</string>
   <string name="media_detail_uploaded_date">अपलोड की गई दिनांक</string>
   <string name="media_detail_license">लाइसेंस</string>
@@ -174,10 +190,6 @@
   <string name="become_a_tester_description">गूगल प्ले पर हमारे बीटा चैनल का चयन करें और नई सुविधाओं व त्रुटिसुधारों तक पहले पहुँचे</string>
   <string name="_2fa_code">2 एफए कोड</string>
   <string name="logout_verification">क्या आप वास्तव में निकास करना चाहते हैं?</string>
-  <string name="commons_logo">कॉमन्स का प्रतीक चिन्ह</string>
-  <string name="commons_website">कॉमन्स जालस्थान</string>
-  <string name="commons_facebook">कॉमन्स फेसबुक पृष्ठ</string>
-  <string name="commons_github">कॉमन्स गिटहब स्त्रोत कूटशब्द</string>
   <string name="mediaimage_failed">मीडिया छवि विफल</string>
   <string name="no_subcategory_found">कोई उपश्रेणी नहीं मिली</string>
   <string name="no_parentcategory_found">कोई मूल श्रेणी नहीं मिली</string>
@@ -200,9 +212,10 @@
   <string name="navigation_item_logout">प्रस्थान करें</string>
   <string name="navigation_item_info">अनुशिक्षण</string>
   <string name="navigation_item_notification">सूचनायें</string>
+  <string name="navigation_item_review">पुनरीक्षण</string>
   <string name="no_description_found">कोई विवरण नहीं मिला</string>
   <string name="nearby_info_menu_commons_article">कॉमन्स फाइल पृष्ठ</string>
-  <string name="nearby_info_menu_wikidata_article">विकिडाटा वस्तु</string>
+  <string name="nearby_info_menu_wikidata_article">विकिडेटा आयटम</string>
   <string name="nearby_info_menu_wikipedia_article">विकीपीडिया लेख</string>
   <string name="description_info">कृपया मीडिया जितना संभव हो उतना बताएं: यह कहां लिया गया? यह क्या दिखाता है? संदर्भ क्या है? कृपया वस्तुओं या व्यक्तियों का वर्णन करें। ऐसी जानकारी का खुलासा करें जिसे आसानी से अनुमानित नहीं किया जा सकता, उदाहरण के लिए दिन का समय यदि यह परिदृश्य है। अगर मीडिया कुछ असामान्य दिखाता है, तो कृपया बताएं कि इसे क्या असामान्य बनाता है।</string>
   <string name="upload_problem_exist">इस चित्र के साथ सम्भावित समस्या:</string>
@@ -223,8 +236,8 @@
   <string name="nominated_see_more" fuzzy="true">&lt;u&gt;विवरण के लिये वेबपेज खोलें&lt;/u&gt;</string>
   <string name="skip_login">छोड़ें</string>
   <string name="navigation_item_login">लॉगिन</string>
-  <string name="skip_login_title">क्या आप वास्तव में लॉगिन नहीं करना चाहते?</string>
-  <string name="skip_login_message">भविष्य में चित्र अपलोड करने के लिये आपको लॉग इन कर लेना चाहिये।</string>
+  <string name="skip_login_title" fuzzy="true">क्या आप वास्तव में लॉगिन नहीं करना चाहते?</string>
+  <string name="skip_login_message" fuzzy="true">भविष्य में चित्र अपलोड करने के लिये आपको लॉग इन कर लेना चाहिये।</string>
   <string name="login_alert_message">इस सुविधा का उपयोग करने के लिये लॉग इन करें</string>
   <string name="copy_wikicode">विकिटेक्स्ट को क्लिपबोर्ड पर कॉपी करें</string>
   <string name="wikicode_copied">विकिटेक्सट क्लिपबोर्ड पर कॉपी किया जा चुका है</string>
@@ -249,7 +262,6 @@
   <string name="error_loading_images">चित्र अपलोड करते समय त्रुटि उत्पन्न हुई।</string>
   <string name="image_uploaded_by">अपलोड: %1$s</string>
   <string name="block_notification">कॉमन्स पर सम्पादन से आप अवरोधित हो चुके हैं</string>
-  <string name="appwidget_img">आज का चित्र</string>
   <string name="app_widget_heading">आज का चित्र</string>
   <string name="menu_search_button">खोजें</string>
   <string name="search_commons">कॉमन्स में खोजें</string>
@@ -260,6 +272,7 @@
   <string name="search_tab_title_media" fuzzy="true">मीडिया</string>
   <string name="search_tab_title_categories">श्रेणियाँ</string>
   <string name="explore_tab_title_featured">निर्वाचित</string>
+  <string name="explore_tab_title_map">नक्शा</string>
   <string name="successful_wikidata_edit" fuzzy="true">चित्र सफ़लतापूर्वक विकिडाटा के %1$s पर सफलतापूर्वक जोड़ दिया गया है।</string>
   <string name="menu_set_wallpaper">वॉलपेपर के रूप में लगायें</string>
   <string name="wallpaper_set_successfully">वॉलपेपर सफलतापूर्वक लग गया!</string>
@@ -269,14 +282,15 @@
   <string name="result">परिणाम</string>
   <string name="selfie_answer">सेल्फी की ज्ञानकोषीय महत्ता बहुत अधिक नहीं है। कृपया अपना चित्र तब तक अपलोड न करें जबतक आपके बारे में कोई विकिपीडिया लेख पहले से उपलब्ध नहीं है।</string>
   <string name="warning_for_no_answer">उत्तर हेतु प्रश्न के दो विकल्प में से कोई एक चुने</string>
-  <string name="user_not_logged_in">लॉग इन सत्र समाप्त हो गया, कृपया पुनः लॉग इन करें।</string>
+  <string name="user_not_logged_in" fuzzy="true">लॉग इन सत्र समाप्त हो गया, कृपया पुनः लॉग इन करें।</string>
   <string name="quiz_result_share_message">अपनी प्रश्नोत्तरी अपने मित्रों के साथ साझा करें!</string>
   <string name="continue_message">जारी रखें</string>
   <string name="correct">सही उत्तर</string>
   <string name="wrong">गलत उत्तर</string>
   <string name="quiz_screenshot_question">क्या यह स्क्रीनशॉट अपलोड होने के लिये तैयार है?</string>
   <string name="share_app_title">एप साझा करें</string>
-  <string name="error_fetching_nearby_places">निकट के स्थान लाने में त्रुटि हुई।</string>
+  <string name="rotate">घुमाएँ</string>
+  <string name="error_fetching_nearby_places" fuzzy="true">निकट के स्थान लाने में त्रुटि हुई।</string>
   <string name="no_recent_searches">हाल में कोई खोज नहीं</string>
   <string name="delete_recent_searches_dialog">क्या आप सचमुच अपना खोज इतिहास मिटाना चाहते हैं?</string>
   <string name="search_history_deleted">खोज इतिहास मिट गया</string>
@@ -301,9 +315,9 @@
   <string name="storage_permission">स्टोरेज अनुमति</string>
   <string name="next">अगला</string>
   <string name="previous">पिछला</string>
-  <string name="submit">जमा करें</string>
   <string name="title_page_bookmarks_pictures">चित्र</string>
   <string name="title_page_bookmarks_locations">स्थान</string>
+  <string name="title_page_bookmarks_categories">श्रेणियाँ</string>
   <string name="menu_bookmark">बुकमार्क से जोड़ें/हटायें</string>
   <string name="provider_bookmarks">बुकमार्क</string>
   <string name="bookmark_empty">आपने कोई बुकमार्क नहीं जोड़ा है</string>
@@ -334,4 +348,15 @@
   <string name="menu_option_unread">अपठित देखें</string>
   <string name="category_edit_helper_show_edit_title_success">सफल</string>
   <string name="leaderboard_column_count">गणना</string>
+  <string name="custom_selector_dismiss_limit_warning_button_text">रद्द करें</string>
+  <string name="talk">वार्ता</string>
+  <string name="are_you_sure_that_you_want_cancel_all_the_uploads">क्या आप वाकई सभी अपलोड रद्द करना चाहते हैं?</string>
+  <string name="cancelling_all_the_uploads">सभी अपलोड रद्द किये जा रहे हैं...</string>
+  <string name="uploads">अपलोड</string>
+  <string name="pending">लंबित</string>
+  <string name="failed">विफल हुआ</string>
+  <string name="custom_selector_delete_folder">फ़ोल्डर हटाएँ</string>
+  <string name="custom_selector_delete">हटाएँ</string>
+  <string name="custom_selector_cancel">रद्द करें</string>
+  <string name="caption">कैप्शन</string>
 </resources>

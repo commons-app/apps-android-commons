@@ -11,8 +11,8 @@
   <string name="login">Rita inn</string>
   <string name="logging_in_title">Ritar inn</string>
   <string name="logging_in_message" fuzzy="true">Vinarliga bíða…</string>
-  <string name="login_success">Innritan væleydnað!</string>
-  <string name="login_failed">Innritan miseydnaðist</string>
+  <string name="login_success" fuzzy="true">Innritan væleydnað!</string>
+  <string name="login_failed" fuzzy="true">Innritan miseydnaðist</string>
   <string name="authentication_failed" fuzzy="true">Góðkenning miseydnaðist!</string>
   <string name="uploading_started">Upplóting er byrjað!</string>
   <string name="upload_completed_notification_title">%1$s er lagt út!</string>
@@ -33,10 +33,10 @@
   <string name="menu_share">Deil</string>
   <string name="share_title_hint" fuzzy="true">Heiti</string>
   <string name="share_description_hint">Frágreiðing</string>
-  <string name="login_failed_network">Ómøguligt at rita inn - feilur í netsambandinum</string>
+  <string name="login_failed_network" fuzzy="true">Ómøguligt at rita inn - feilur í netsambandinum</string>
   <string name="login_failed_throttled" fuzzy="true">Ov nógv miseydnaðar royndir. Vinarliga royn aftur um fáir minuttir</string>
   <string name="login_failed_blocked">Haldið okkum tilgóðar, hesin brúkari er blivin sperraður á Commons</string>
-  <string name="login_failed_generic">Login miseydnaðist</string>
+  <string name="login_failed_generic" fuzzy="true">Login miseydnaðist</string>
   <string name="share_upload_button">Legg út</string>
   <string name="multiple_share_base_title">Gev hesi mappuni navn</string>
   <string name="provider_modifications">Broytingar</string>

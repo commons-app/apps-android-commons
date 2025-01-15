@@ -1,111 +1,45 @@
 package fr.free.nrw.commons.profile.achievements
 
 /**
- * Represents Achievements class and stores all the parameters
+ * Represents Achievements data class and stores all the parameters.
+ * Immutable version with default values for optional properties.
  */
-class Achievements {
+data class Achievements(
+    val uniqueUsedImages: Int = 0,
+    val articlesUsingImages: Int = 0,
+    val thanksReceived: Int = 0,
+    val featuredImages: Int = 0,
+    val qualityImages: Int = 0,
+    val imagesUploaded: Int = 0,
+    val revertCount: Int = 0
+) {
     /**
-     * getter function to get count of unique images used by wiki
-     * @return
-     */
-    /**
-     * setter function to set count of uniques images used by wiki
-     * @param uniqueUsedImages
-     */
-    var uniqueUsedImages = 0
-    private var articlesUsingImages = 0
-    /**
-     * getter function to get count of thanks received
-     * @return
-     */
-    /**
-     * setter function to set count of thanks received
-     * @param thanksReceived
-     */
-    var thanksReceived = 0
-    /**
-     * getter function to get count of featured images
-     * @return
-     */
-    /**
-     * setter function to set count of featured images
-     * @param featuredImages
-     */
-    var featuredImages = 0
-    /**
-     * getter function to get count of featured images
-     * @return
-     */
-    /**
-     * setter function to set count of featured images
-     * @param featuredImages
-     */
-    var qualityImages = 0
-    /**
-     * getter function to get count of images uploaded
-     * @return
-     */
-    /**
-     * setter function to count of images uploaded
-     * @param imagesUploaded
-     */
-    var imagesUploaded = 0
-    private var revertCount = 0
-
-    constructor() {}
-    /**
-     * constructor for achievements class to set its data members
-     * @param uniqueUsedImages
-     * @param articlesUsingImages
-     * @param thanksReceived
-     * @param featuredImages
-     * @param imagesUploaded
-     * @param revertCount
-     */
-    constructor(uniqueUsedImages: Int,
-                articlesUsingImages: Int,
-                thanksReceived: Int,
-                featuredImages: Int,
-                qualityImages: Int,
-                imagesUploaded: Int,
-                revertCount: Int) {
-        this.uniqueUsedImages = uniqueUsedImages
-        this.articlesUsingImages = articlesUsingImages
-        this.thanksReceived = thanksReceived
-        this.featuredImages = featuredImages
-        this.qualityImages = qualityImages
-        this.imagesUploaded = imagesUploaded
-        this.revertCount = revertCount
-    }
-
-    /**
-     * used to calculate the percentages of images that haven't been reverted
-     * @return
+     * Used to calculate the percentages of images that haven't been reverted.
+     * Returns 100 if imagesUploaded is 0 to avoid division by zero.
      */
     val notRevertPercentage: Int
-        get() = try {
+        get() = if (imagesUploaded > 0) {
             (imagesUploaded - revertCount) * 100 / imagesUploaded
-        } catch (divideByZero: ArithmeticException) {
+        } else {
             100
         }
 
     companion object {
         /**
-         * Get Achievements object from FeedbackResponse
+         * Get Achievements object from FeedbackResponse.
          *
-         * @param response
-         * @return
+         * @param response The feedback response to convert.
+         * @return An Achievements object with values from the response.
          */
         @JvmStatic
-        fun from(response: FeedbackResponse): Achievements {
-            return Achievements(
-                response.uniqueUsedImages,
-                response.articlesUsingImages,
-                response.thanksReceived,
-                response.featuredImages.featuredPicturesOnWikimediaCommons,
-                response.featuredImages.qualityImages, 0,
-                response.deletedUploads
-            )
-        }
+        fun from(response: FeedbackResponse): Achievements = Achievements(
+            uniqueUsedImages = response.uniqueUsedImages,
+            articlesUsingImages = response.articlesUsingImages,
+            thanksReceived = response.thanksReceived,
+            featuredImages = response.featuredImages.featuredPicturesOnWikimediaCommons,
+            qualityImages = response.featuredImages.qualityImages,
+            imagesUploaded = 0,  // Assuming imagesUploaded should be 0
+            revertCount = response.deletedUploads
+        )
     }
 }

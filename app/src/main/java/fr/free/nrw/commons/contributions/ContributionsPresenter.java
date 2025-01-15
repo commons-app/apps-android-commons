@@ -1,27 +1,27 @@
 package fr.free.nrw.commons.contributions;
 
+import static fr.free.nrw.commons.di.CommonsApplicationModule.IO_THREAD;
+import static fr.free.nrw.commons.utils.ImageUtils.IMAGE_OK;
+
 import androidx.work.ExistingWorkPolicy;
-import androidx.work.OneTimeWorkRequest;
-import androidx.work.WorkManager;
 import fr.free.nrw.commons.MediaDataExtractor;
 import fr.free.nrw.commons.contributions.ContributionsContract.UserActionListener;
 import fr.free.nrw.commons.di.CommonsApplicationModule;
-import fr.free.nrw.commons.upload.worker.UploadWorker;
+import fr.free.nrw.commons.repository.UploadRepository;
+import fr.free.nrw.commons.upload.worker.WorkRequestHelper;
 import io.reactivex.Scheduler;
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.functions.Action;
-import io.reactivex.functions.Consumer;
-import java.util.Collections;
-import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Named;
+import timber.log.Timber;
 
 /**
  * The presenter class for Contributions
  */
 public class ContributionsPresenter implements UserActionListener {
 
-    private final ContributionsRepository repository;
+    private final ContributionsRepository contributionsRepository;
+    private final UploadRepository uploadRepository;
     private final Scheduler ioThreadScheduler;
     private CompositeDisposable compositeDisposable;
     private ContributionsContract.View view;
@@ -31,15 +31,17 @@ public class ContributionsPresenter implements UserActionListener {
 
     @Inject
     ContributionsPresenter(ContributionsRepository repository,
-        @Named(CommonsApplicationModule.IO_THREAD) Scheduler ioThreadScheduler) {
-        this.repository = repository;
-        this.ioThreadScheduler=ioThreadScheduler;
+        UploadRepository uploadRepository,
+        @Named(IO_THREAD) Scheduler ioThreadScheduler) {
+        this.contributionsRepository = repository;
+        this.uploadRepository = uploadRepository;
+        this.ioThreadScheduler = ioThreadScheduler;
     }
 
     @Override
     public void onAttachView(ContributionsContract.View view) {
         this.view = view;
-        compositeDisposable=new CompositeDisposable();
+        compositeDisposable = new CompositeDisposable();
     }
 
     @Override
@@ -50,19 +52,30 @@ public class ContributionsPresenter implements UserActionListener {
 
     @Override
     public Contribution getContributionsWithTitle(String title) {
-        return repository.getContributionWithFileName(title);
+        return contributionsRepository.getContributionWithFileName(title);
     }
 
     /**
-     * Delete a failed contribution from the local db
-     * @param contribution
+     * Checks if a contribution is a duplicate and restarts the contribution process if it is not.
+     *
+     * @param contribution The contribution to check and potentially restart.
      */
-    @Override
-    public void deleteUpload(Contribution contribution) {
-        compositeDisposable.add(repository
-            .deleteContributionFromDB(contribution)
+    public void checkDuplicateImageAndRestartContribution(Contribution contribution) {
+        compositeDisposable.add(uploadRepository
+            .checkDuplicateImage(contribution.getLocalUriPath().getPath())
             .subscribeOn(ioThreadScheduler)
-            .subscribe());
+            .subscribe(imageCheckResult -> {
+                if (imageCheckResult == IMAGE_OK) {
+                    contribution.setState(Contribution.STATE_QUEUED);
+                    saveContribution(contribution);
+                } else {
+                    Timber.e("Contribution already exists");
+                    compositeDisposable.add(contributionsRepository
+                        .deleteContributionFromDB(contribution)
+                        .subscribeOn(ioThreadScheduler)
+                        .subscribe());
+                }
+            }));
     }
 
     /**
@@ -71,16 +84,11 @@ public class ContributionsPresenter implements UserActionListener {
      *
      * @param contribution
      */
-    @Override
     public void saveContribution(Contribution contribution) {
-        compositeDisposable.add(repository
+        compositeDisposable.add(contributionsRepository
             .save(contribution)
             .subscribeOn(ioThreadScheduler)
-            .subscribe(() -> {
-                WorkManager.getInstance(view.getContext().getApplicationContext())
-                    .enqueueUniqueWork(
-                        UploadWorker.class.getSimpleName(),
-                        ExistingWorkPolicy.KEEP, OneTimeWorkRequest.from(UploadWorker.class));
-            }));
+            .subscribe(() -> WorkRequestHelper.Companion.makeOneTimeWorkRequest(
+                view.getContext().getApplicationContext(), ExistingWorkPolicy.KEEP)));
     }
 }

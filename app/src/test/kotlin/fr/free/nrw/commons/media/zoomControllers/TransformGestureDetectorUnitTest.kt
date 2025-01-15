@@ -14,7 +14,6 @@ import org.powermock.reflect.Whitebox
 import java.lang.reflect.Method
 
 class TransformGestureDetectorUnitTest {
-
     private lateinit var detector: TransformGestureDetector
 
     @Mock
@@ -28,7 +27,7 @@ class TransformGestureDetectorUnitTest {
 
     @Before
     fun setUp() {
-        MockitoAnnotations.initMocks(this)
+        MockitoAnnotations.openMocks(this)
         detector = TransformGestureDetector(MultiPointerGestureDetector())
         detector = TransformGestureDetector.newInstance()
         detector.setListener(listener)
@@ -155,7 +154,6 @@ class TransformGestureDetectorUnitTest {
         Assert.assertEquals(detector.rotation, 0f)
     }
 
-
     @Test
     @Throws(Exception::class)
     fun testGetRotationCaseGreaterThan2() {
@@ -177,11 +175,13 @@ class TransformGestureDetectorUnitTest {
         val array = FloatArray(2)
         array[0] = 0.0f
         array[1] = 1.0f
-        val method: Method = TransformGestureDetector::class.java.getDeclaredMethod(
-            "calcAverage", FloatArray::class.java, Int::class.java
-        )
+        val method: Method =
+            TransformGestureDetector::class.java.getDeclaredMethod(
+                "calcAverage",
+                FloatArray::class.java,
+                Int::class.java,
+            )
         method.isAccessible = true
         Assert.assertEquals(method.invoke(detector, array, 2), 0.5f)
     }
-
 }

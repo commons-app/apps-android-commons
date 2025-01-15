@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
 * Maksat
+* Элдин беги
 -->
 <resources>
   <string name="crash_dialog_title">Кыйроо</string>
-  <string name="crash_dialog_text">Уупс. Бир нерсе туура эмес болду!</string>
-  <string name="crash_dialog_comment_prompt">Сиздин иш аракетиңиз тууралуу бизге электрондук кат жөнөтүңүз. Бул кийнки каталарды оңдоого жарам берет!</string>
+  <string name="crash_dialog_text">Ай ботом, бир нерсе туура эмес болду!</string>
+  <string name="crash_dialog_comment_prompt">Сиздин иш аракетиңиз тууралуу бизге электрондук кат жөнөтүңүз. Бул кийнки каталарды оңдоого жардам берет!</string>
   <string name="crash_dialog_ok_toast">Ыракмат!</string>
 </resources>

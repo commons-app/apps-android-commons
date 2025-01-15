@@ -19,13 +19,6 @@
     <PreferenceCategory
       android:title="@string/preference_category_general">
 
-        <SwitchPreference
-          android:defaultValue="true"
-          android:key="useExternalStorage"
-          app:singleLineTitle="false"
-          android:summary="@string/use_external_storage_summary"
-          android:title="@string/use_external_storage" />
-
         <Preference
           android:key="appUiDefaultLanguagePref"
           app:useSimpleSummaryProvider="true"
@@ -37,19 +30,6 @@
           app:useSimpleSummaryProvider="true"
           app:singleLineTitle="false"
           android:title="@string/default_description_language" />
-
-        <SwitchPreference
-          android:key="useAuthorName"
-          app:singleLineTitle="false"
-          android:summary="@string/preference_author_name_toggle_summary"
-          android:title="@string/preference_author_name_toggle" />
-
-        <EditTextPreference
-          android:key="authorName"
-          app:singleLineTitle="false"
-          app:dependency="useAuthorName"
-          app:useSimpleSummaryProvider="true"
-          android:title="@string/preference_author_name" />
 
         <SwitchPreference
           android:defaultValue="true"
@@ -70,6 +50,51 @@
           app:singleLineTitle="false"
           android:summary="@string/display_campaigns_explanation"
           android:title="@string/display_campaigns" />
+
+        <SwitchPreference
+          android:defaultValue="false"
+          android:key="displayDeletionButton"
+          app:singleLineTitle="false"
+          android:summary="Enable the &quot;Delete folder&quot; button in the custom picker"
+          android:title="Show Deletion Button" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="Uploads">
+
+        <SwitchPreference
+
+          android:defaultValue="true"
+          android:key="useExternalStorage"
+          app:singleLineTitle="false"
+          android:summary="@string/use_external_storage_summary"
+          android:title="@string/use_external_storage" />
+
+        <SwitchPreference
+          android:key="inAppCameraLocationPref"
+          android:title="@string/in_app_camera_location_permission_title"
+          android:summary="@string/in_app_camera_location_switch_pref_summary"/>
+
+        <SwitchPreference
+          android:defaultValue="true"
+          android:key="openDocumentPhotoPickerPref"
+          android:summary="@string/open_document_photo_picker_explanation"
+          android:title="@string/open_document_photo_picker_title"/>
+
+        <SwitchPreference
+          android:key="useAuthorName"
+          app:singleLineTitle="false"
+          android:summary="@string/preference_author_name_toggle_summary"
+          android:title="@string/preference_author_name_toggle" />
+
+        <EditTextPreference
+          android:key="authorName"
+          app:singleLineTitle="false"
+          app:dependency="useAuthorName"
+          app:useSimpleSummaryProvider="true"
+          android:title="@string/preference_author_name" />
+
     </PreferenceCategory>
 
     <PreferenceCategory
@@ -82,13 +107,6 @@
           app:singleLineTitle="false"
           android:summary="@string/manage_exif_tags_summary"
           android:title="@string/manage_exif_tags" />
-
-        <SwitchPreference
-          android:defaultValue="true"
-          android:key="telemetryOptOut"
-          app:singleLineTitle="false"
-          android:summary="@string/telemetry_opt_out_summary"
-          android:title="@string/mapbox_telemetry" />
 
     </PreferenceCategory>
 
@@ -109,6 +127,16 @@
           android:summary="@string/send_log_file_description"
           app:singleLineTitle="false"
           android:title="@string/send_log_file" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+      android:title="@string/account">
+
+        <Preference
+          android:key="vanishAccount"
+          app:singleLineTitle="false"
+          android:title="@string/vanish_account"/>
 
     </PreferenceCategory>
 </PreferenceScreen>

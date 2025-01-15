@@ -1,29 +1,44 @@
 package fr.free.nrw.commons.upload
 
+import android.app.Dialog
 import android.content.Context
+import android.content.Intent
+import android.view.View
+import android.widget.AdapterView
 import android.widget.GridLayout
+import android.widget.ListView
+import android.widget.TextView
+import androidx.activity.result.ActivityResultLauncher
+import androidx.test.core.app.ApplicationProvider
+import com.nhaarman.mockitokotlin2.any
+import com.nhaarman.mockitokotlin2.times
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.TestCommonsApplication
+import fr.free.nrw.commons.recentlanguages.Language
+import fr.free.nrw.commons.recentlanguages.RecentLanguagesAdapter
+import fr.free.nrw.commons.recentlanguages.RecentLanguagesDao
+import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
+import org.mockito.Mockito
+import org.mockito.Mockito.mock
 import org.mockito.MockitoAnnotations
 import org.powermock.reflect.Whitebox
 import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
-import org.robolectric.RuntimeEnvironment
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
 import java.lang.reflect.Field
+import java.lang.reflect.Method
 
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
 @LooperMode(LooperMode.Mode.PAUSED)
 class UploadMediaDetailAdapterUnitTest {
-
     private lateinit var adapter: UploadMediaDetailAdapter
     private lateinit var context: Context
     private lateinit var viewHolder: UploadMediaDetailAdapter.ViewHolder
@@ -36,15 +51,40 @@ class UploadMediaDetailAdapterUnitTest {
     @Mock
     private lateinit var eventListener: UploadMediaDetailAdapter.EventListener
 
+    @Mock
+    private lateinit var recentLanguagesDao: RecentLanguagesDao
+
+    @Mock
+    private lateinit var textView: TextView
+
+    @Mock
+    private lateinit var fragment: UploadMediaDetailFragment
+
+    @Mock
+    private lateinit var view: View
+
+    @Mock
+    private lateinit var listView: ListView
+
+    @Mock
+    private lateinit var adapterView: AdapterView<RecentLanguagesAdapter>
+
+    @Mock
+    private lateinit var mockResultLauncher: ActivityResultLauncher<Intent>
+
     @Before
     fun setUp() {
-        MockitoAnnotations.initMocks(this)
+        MockitoAnnotations.openMocks(this)
         uploadMediaDetails = mutableListOf(uploadMediaDetail, uploadMediaDetail)
         activity = Robolectric.buildActivity(UploadActivity::class.java).get()
-        adapter = UploadMediaDetailAdapter("")
-        context = RuntimeEnvironment.application.applicationContext
+        fragment = mock(UploadMediaDetailFragment::class.java)
+        adapter = UploadMediaDetailAdapter(fragment, "", recentLanguagesDao, mockResultLauncher)
+        context = ApplicationProvider.getApplicationContext()
         Whitebox.setInternalState(adapter, "uploadMediaDetails", uploadMediaDetails)
         Whitebox.setInternalState(adapter, "eventListener", eventListener)
+        Whitebox.setInternalState(adapter, "recentLanguagesTextView", textView)
+        Whitebox.setInternalState(adapter, "separator", view)
+        Whitebox.setInternalState(adapter, "languageHistoryListView", listView)
         viewHolder = adapter.onCreateViewHolder(GridLayout(activity), 0)
     }
 
@@ -145,4 +185,94 @@ class UploadMediaDetailAdapterUnitTest {
         verify(uploadMediaDetail).isManuallyAdded
     }
 
+    @Test
+    fun testHideRecentLanguagesSection() {
+        val method: Method =
+            UploadMediaDetailAdapter.ViewHolder::class.java.getDeclaredMethod(
+                "hideRecentLanguagesSection",
+            )
+        method.isAccessible = true
+        method.invoke(viewHolder)
+        verify(listView, times(1)).visibility = View.GONE
+        verify(view, times(1)).visibility = View.GONE
+        verify(textView, times(1)).visibility = View.GONE
+    }
+
+    @Test
+    fun `Test setUpRecentLanguagesSection when list is empty`() {
+        val method: Method =
+            UploadMediaDetailAdapter.ViewHolder::class.java.getDeclaredMethod(
+                "setUpRecentLanguagesSection",
+                List::class.java,
+            )
+        method.isAccessible = true
+        method.invoke(viewHolder, emptyList<Language>())
+        verify(listView, times(1)).visibility = View.GONE
+        verify(view, times(1)).visibility = View.GONE
+        verify(textView, times(1)).visibility = View.GONE
+    }
+
+    @Test
+    fun `Test setUpRecentLanguagesSection when list is not empty`() {
+        val method: Method =
+            UploadMediaDetailAdapter.ViewHolder::class.java.getDeclaredMethod(
+                "setUpRecentLanguagesSection",
+                List::class.java,
+            )
+        method.isAccessible = true
+        method.invoke(
+            viewHolder,
+            listOf(
+                Language("Bengali", "bn"),
+                Language("Bengali", "bn"),
+                Language("Bengali", "bn"),
+                Language("Bengali", "bn"),
+                Language("Bengali", "bn"),
+                Language("Bengali", "bn"),
+            ),
+        )
+        verify(listView, times(1)).visibility = View.VISIBLE
+        verify(view, times(1)).visibility = View.VISIBLE
+        verify(textView, times(1)).visibility = View.VISIBLE
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testOnRecentLanguageClicked() {
+        whenever(recentLanguagesDao.findRecentLanguage(any()))
+            .thenReturn(true)
+        whenever(adapterView.adapter)
+            .thenReturn(
+                RecentLanguagesAdapter(
+                    context,
+                    listOf(Language("English", "en")),
+                    mutableMapOf(),
+                ),
+            )
+        val method: Method =
+            UploadMediaDetailAdapter.ViewHolder::class.java.getDeclaredMethod(
+                "onRecentLanguageClicked",
+                Dialog::class.java,
+                AdapterView::class.java,
+                Int::class.java,
+                UploadMediaDetail::class.java,
+            )
+        method.isAccessible = true
+        method.invoke(
+            viewHolder,
+            Mockito.mock(Dialog::class.java),
+            adapterView,
+            0,
+            Mockito.mock(UploadMediaDetail::class.java),
+        )
+        verify(recentLanguagesDao, times(1)).findRecentLanguage(any())
+        verify(adapterView, times(3)).adapter
+    }
+
+    @Test
+    fun testCaptionJapaneseCharacters() {
+        val test1 = "テスト　テスト"
+        val expected1 = "テスト テスト"
+        Assert.assertEquals(expected1, viewHolder.convertIdeographicSpaceToLatinSpace(test1))
+    }
 }

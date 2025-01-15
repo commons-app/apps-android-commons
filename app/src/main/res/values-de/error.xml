@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* Brettchenweber
 * Metalhead64
 -->
 <resources>
   <string name="crash_dialog_title">Commons ist abgestürzt</string>
   <string name="crash_dialog_text">Huch! Etwas ist schiefgelaufen.</string>
-  <string name="crash_dialog_comment_prompt">Erzähl uns, was du gemacht hast und teile es per E-Mail mit uns. Dies wird uns helfen, das Problem zu beheben!</string>
+  <string name="crash_dialog_comment_prompt">Erzähl uns, was du gemacht hast, und teile es per E-Mail mit uns. Dies wird uns helfen, das Problem zu beheben!</string>
   <string name="crash_dialog_ok_toast">Vielen Dank!</string>
 </resources>

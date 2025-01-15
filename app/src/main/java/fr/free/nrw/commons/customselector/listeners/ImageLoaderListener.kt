@@ -7,7 +7,6 @@ import fr.free.nrw.commons.customselector.model.Image
  * responds to the device image query.
  */
 interface ImageLoaderListener {
-
     /**
      * On image loaded
      * @param images : queried device images.

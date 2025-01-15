@@ -3,7 +3,10 @@ package fr.free.nrw.commons.wikidata
 import com.google.gson.Gson
 import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.wikidata.model.PageInfo
+import fr.free.nrw.commons.wikidata.model.StatementPartial
 import fr.free.nrw.commons.wikidata.model.WbCreateClaimResponse
+import fr.free.nrw.commons.wikidata.mwapi.MwQueryResponse
+import fr.free.nrw.commons.wikidata.mwapi.MwQueryResult
 import io.reactivex.Observable
 import org.junit.Before
 import org.junit.Test
@@ -11,15 +14,11 @@ import org.mockito.ArgumentMatchers.any
 import org.mockito.ArgumentMatchers.anyString
 import org.mockito.InjectMocks
 import org.mockito.Mock
-import org.mockito.Mockito.`when`
 import org.mockito.Mockito.mock
+import org.mockito.Mockito.`when`
 import org.mockito.MockitoAnnotations
-import org.wikipedia.dataclient.mwapi.MwQueryResponse
-import org.wikipedia.dataclient.mwapi.MwQueryResult
-import org.wikipedia.wikidata.Statement_partial
 
 class WikidataClientTest {
-
     @Mock
     internal var wikidataInterface: WikidataInterface? = null
 
@@ -32,7 +31,7 @@ class WikidataClientTest {
     @Before
     @Throws(Exception::class)
     fun setUp() {
-        MockitoAnnotations.initMocks(this)
+        MockitoAnnotations.openMocks(this)
         val mwQueryResponse = mock(MwQueryResponse::class.java)
         val mwQueryResult = mock(MwQueryResult::class.java)
         `when`(mwQueryResult!!.csrfToken()).thenReturn("test_token")
@@ -49,10 +48,13 @@ class WikidataClientTest {
         whenever(response.pageinfo).thenReturn(pageInfo)
         `when`(wikidataInterface!!.postSetClaim(anyString(), anyString(), anyString()))
             .thenReturn(Observable.just(response))
-        whenever(gson!!.toJson(any(Statement_partial::class.java))).thenReturn("claim")
-        val request = mock(Statement_partial::class.java)
+        whenever(gson!!.toJson(any(StatementPartial::class.java))).thenReturn("claim")
+        val request = mock(StatementPartial::class.java)
 
-        val claim = wikidataClient!!.setClaim(request, "test").test()
-            .assertValue(1L)
+        val claim =
+            wikidataClient!!
+                .setClaim(request, "test")
+                .test()
+                .assertValue(1L)
     }
 }

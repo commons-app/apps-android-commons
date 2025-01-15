@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.explore.recentsearches;
 
+import android.annotation.SuppressLint;
 import android.content.ContentProviderClient;
 import android.content.ContentValues;
 import android.database.Cursor;
@@ -9,6 +10,7 @@ import android.os.RemoteException;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import fr.free.nrw.commons.explore.models.RecentSearch;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -177,6 +179,7 @@ public class RecentSearchesDao {
      * @return RecentSearch object
      */
     @NonNull
+    @SuppressLint("Range")
     RecentSearch fromCursor(Cursor cursor) {
         // Hardcoding column positions!
         return new RecentSearch(

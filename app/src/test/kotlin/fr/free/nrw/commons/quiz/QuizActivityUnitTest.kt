@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Button
+import androidx.test.core.app.ApplicationProvider
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.facebook.soloader.SoLoader
 import fr.free.nrw.commons.R
@@ -19,15 +20,13 @@ import org.powermock.api.mockito.PowerMockito.mock
 import org.powermock.reflect.Whitebox
 import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
-import org.robolectric.RuntimeEnvironment
 import org.robolectric.annotation.Config
 
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
 class QuizActivityUnitTest {
-
-    private val SAMPLE_ALERT_TITLE_VALUE = "Title"
-    private val SAMPLE_ALERT_MESSAGE_VALUE = "Message"
+    private val sampleAlertTitleValue = "Title"
+    private val sampleAlertMessageValue = "Message"
 
     private lateinit var activity: QuizActivity
     private lateinit var positiveAnswer: Button
@@ -40,21 +39,22 @@ class QuizActivityUnitTest {
 
     @Before
     fun setUp() {
-        MockitoAnnotations.initMocks(this)
+        MockitoAnnotations.openMocks(this)
         SoLoader.setInTestMode()
-        Fresco.initialize(RuntimeEnvironment.application.applicationContext)
+        Fresco.initialize(ApplicationProvider.getApplicationContext())
         activity = Robolectric.buildActivity(QuizActivity::class.java).create().get()
         context = mock(Context::class.java)
-        view = LayoutInflater.from(activity)
-            .inflate(R.layout.answer_layout, null) as View
-        Mockito.`when`(context.getString(Mockito.any(Int::class.java)))
+        view =
+            LayoutInflater
+                .from(activity)
+                .inflate(R.layout.answer_layout, null) as View
+        Mockito
+            .`when`(context.getString(Mockito.any(Int::class.java)))
             .thenReturn("")
         quizController = QuizController()
         quizController.initialize(context)
         positiveAnswer = view.findViewById(R.id.quiz_positive_answer)
         negativeAnswer = view.findViewById(R.id.quiz_negative_answer)
-        activity.positiveAnswer = positiveAnswer
-        activity.negativeAnswer = negativeAnswer
     }
 
     @Test
@@ -88,7 +88,6 @@ class QuizActivityUnitTest {
     @Test
     @Throws(Exception::class)
     fun testCustomAlert() {
-        activity.customAlert(SAMPLE_ALERT_TITLE_VALUE, SAMPLE_ALERT_MESSAGE_VALUE)
+        activity.customAlert(sampleAlertTitleValue, sampleAlertMessageValue)
     }
-
 }

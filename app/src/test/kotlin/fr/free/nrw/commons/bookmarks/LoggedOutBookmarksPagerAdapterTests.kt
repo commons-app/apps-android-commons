@@ -26,7 +26,7 @@ class LoggedOutBookmarksPagerAdapterTests {
      */
     @Before
     fun setUp() {
-        MockitoAnnotations.initMocks(this)
+        MockitoAnnotations.openMocks(this)
         bookmarksPagerAdapter = BookmarksPagerAdapter(fragmentManager, context, true)
     }
 
@@ -53,7 +53,7 @@ class LoggedOutBookmarksPagerAdapterTests {
      */
     @Test
     fun testGetCount() {
-        Assert.assertEquals(bookmarksPagerAdapter.count, 1)
+        Assert.assertEquals(bookmarksPagerAdapter.count, 2)
     }
 
     /**

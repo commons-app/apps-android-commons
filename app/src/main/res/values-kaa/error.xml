@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Inabat Allanova
+-->
+<resources>
+  <string name="crash_dialog_title">Commons isten shıqtı</string>
+  <string name="crash_dialog_text">Birnársede qátelik júz berdi!</string>
+  <string name="crash_dialog_comment_prompt">Ne zattı qılıp atırǵanlıǵıńızdı bayanlań, soń email arqalı bizge jiberiń. Ońlawǵa járdem etiń!</string>
+  <string name="crash_dialog_ok_toast">Raxmet!</string>
+</resources>
