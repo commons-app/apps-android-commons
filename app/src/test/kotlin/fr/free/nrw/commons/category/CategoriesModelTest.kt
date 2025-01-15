@@ -103,7 +103,7 @@ class CategoriesModelTest {
             )
         val depictedItemWithoutCategories =
             depictedItem(
-                primaryImage = "P18"
+                imageUrl = "testUrl"
             )
 
         whenever(gpsCategoryModel.categoriesFromLocation)
@@ -167,7 +167,7 @@ class CategoriesModelTest {
         )
         whenever(
             categoryClient.getCategoriesOfImage(
-                "P18",
+                "testUrl",
                 25,
             ),
         ).thenReturn(

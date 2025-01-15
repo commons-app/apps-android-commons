@@ -18,7 +18,7 @@ import java.util.Date
 fun depictedItem(
     name: String = "label",
     description: String = "desc",
-    primaryImage: String = "",
+    imageUrl: String = "",
     instanceOfs: List<String> = listOf(),
     commonsCategories: List<CategoryItem> = listOf(),
     isSelected: Boolean = false,
@@ -26,7 +26,7 @@ fun depictedItem(
 ) = DepictedItem(
     name = name,
     description = description,
-    primaryImage = primaryImage,
+    imageUrl = imageUrl,
     instanceOfs = instanceOfs,
     commonsCategories = commonsCategories,
     isSelected = isSelected,
