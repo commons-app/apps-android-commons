@@ -36,7 +36,7 @@ public class MwQueryPage extends BaseModel {
         return title;
     }
 
-    @NonNull public CategoryInfo categoryInfo() {
+    public CategoryInfo categoryInfo() {
         return categoryinfo;
     }
 
