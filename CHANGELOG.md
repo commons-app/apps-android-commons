@@ -1,5 +1,11 @@
 # Wikimedia Commons for Android
 
+## v5.1.2
+
+### What's changed
+
+* Fix the broken category search in the explore screen
+
 ## v5.1.1
 
 ### What's changed
