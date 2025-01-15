@@ -33,6 +33,7 @@ import com.karumi.dexter.MultiplePermissionsReport
 import com.karumi.dexter.PermissionToken
 import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener
+import fr.free.nrw.commons.BuildConfig.MOBILE_HOME_URL
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.Utils
 import fr.free.nrw.commons.activity.SingleWebViewActivity
@@ -511,8 +512,8 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
     @Suppress("LongLine")
     companion object {
-        private const val VANISH_ACCOUNT_URL = "https://meta.m.wikimedia.org/wiki/Special:Contact/accountvanishapps"
-        private const val VANISH_ACCOUNT_SUCCESS_URL = "https://meta.m.wikimedia.org/wiki/Special:GlobalVanishRequest/vanished"
+        private const val VANISH_ACCOUNT_URL = MOBILE_HOME_URL + "Special:GlobalVanishRequest"
+        private const val VANISH_ACCOUNT_SUCCESS_URL = MOBILE_HOME_URL + "Special:GlobalVanishRequest/vanished"
         /**
          * Create Locale based on different types of language codes
          * @param languageCode
