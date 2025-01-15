@@ -41,8 +41,8 @@ import fr.free.nrw.commons.location.LocationPermissionsHelper
 import fr.free.nrw.commons.location.LocationPermissionsHelper.LocationPermissionCallback
 import fr.free.nrw.commons.location.LocationServiceManager
 import fr.free.nrw.commons.theme.BaseActivity
-import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment.LAST_LOCATION
-import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment.LAST_ZOOM
+import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment.Companion.LAST_LOCATION
+import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment.Companion.LAST_ZOOM
 import fr.free.nrw.commons.utils.DialogUtil
 import fr.free.nrw.commons.utils.MapUtils.ZOOM_LEVEL
 import io.reactivex.android.schedulers.AndroidSchedulers

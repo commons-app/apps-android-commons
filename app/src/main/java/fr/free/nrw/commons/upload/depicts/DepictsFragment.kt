@@ -96,11 +96,10 @@ class DepictsFragment : UploadBaseFragment(), DepictsContract.View {
 
         if (media == null) {
             binding.depictsTitle.text =
-                String.format(
-                    getString(R.string.step_count), callback!!.getIndexInViewFlipper(
-                        this
-                    ) + 1,
-                    callback!!.totalNumberOfSteps, getString(R.string.depicts_step_title)
+                String.format(getString(R.string.step_count),
+                    callback!!.getIndexInViewFlipper(this) + 1,
+                    callback!!.totalNumberOfSteps,
+                    getString(R.string.depicts_step_title)
                 )
         } else {
             binding.depictsTitle.setText(R.string.edit_depictions)

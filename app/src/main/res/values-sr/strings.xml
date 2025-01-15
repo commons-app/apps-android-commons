@@ -743,6 +743,9 @@
   <string name="failed">Није успело</string>
   <string name="green_pin">Ово место већ има слику</string>
   <string name="grey_pin">Проверавање да ли ово место има слику.</string>
+  <string name="account">Налог</string>
+  <string name="vanish_account">Учтиви нестанак</string>
+  <string name="account_vanish_request_confirm">Нестајање је &lt;b&gt;последња опција&lt;/b&gt; и треба је користити &lt;b&gt;само када желите да заувек престанете са уређивањем&lt;/b&gt;, као и да сакријете што више својих прошлих асоцијација.&lt;br/&gt;&lt;br/&gt;Брисање налога на Викимедијној остави се врши променом назива налога тако да други не могу да препознају Ваше доприносе у процесу који се зове учтиви нестанак. &lt;b&gt;Нестајање не гарантује потпуну анонимност и не уклања доприносе на пројектима&lt;/b&gt;.</string>
   <string name="caption">Поднапис</string>
   <string name="caption_copied_to_clipboard">Поднапис копиран</string>
 </resources>

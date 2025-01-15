@@ -533,6 +533,8 @@
   <string name="error_while_loading">Feeler beim Lueden</string>
   <string name="usages_on_commons_heading">Commons</string>
   <string name="usages_on_other_wikis_heading">Aner Wikien</string>
+  <string name="account">Kont</string>
+  <string name="vanish_account">Kont opléisen</string>
   <string name="caption">Beschrëftung</string>
   <string name="caption_copied_to_clipboard">Text an den Tëschespäicher kopéiert</string>
 </resources>

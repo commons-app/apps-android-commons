@@ -45,8 +45,7 @@ class MediaLicenseFragment : UploadBaseFragment(), MediaLicenseContract.View {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.tvTitle.text = getString(
-            R.string.step_count,
+        binding.tvTitle.text = getString(R.string.step_count,
             callback!!.getIndexInViewFlipper(this) + 1,
             callback!!.totalNumberOfSteps,
             getString(R.string.license_step_title)
