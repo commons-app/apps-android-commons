@@ -102,6 +102,9 @@ abstract class FragmentBuilderModule {
     abstract fun bindBookmarkCategoriesListFragment(): BookmarkCategoriesFragment
 
     @ContributesAndroidInjector
+    abstract fun bindBookmarkLocationsListFragment(): BookmarkLocationsFragment
+
+    @ContributesAndroidInjector
     abstract fun bindReviewOutOfContextFragment(): ReviewImageFragment
 
     @ContributesAndroidInjector

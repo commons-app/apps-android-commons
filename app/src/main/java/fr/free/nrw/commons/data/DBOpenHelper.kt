@@ -30,7 +30,6 @@ class DBOpenHelper(
     override fun onCreate(db: SQLiteDatabase) {
         CategoryDao.Table.onCreate(db)
         BookmarkPicturesDao.Table.onCreate(db)
-        BookmarkLocationsDao.Table.onCreate(db)
         BookmarkItemsDao.Table.onCreate(db)
         RecentSearchesDao.Table.onCreate(db)
         RecentLanguagesDao.Table.onCreate(db)
@@ -39,7 +38,6 @@ class DBOpenHelper(
     override fun onUpgrade(db: SQLiteDatabase, from: Int, to: Int) {
         CategoryDao.Table.onUpdate(db, from, to)
         BookmarkPicturesDao.Table.onUpdate(db, from, to)
-        BookmarkLocationsDao.Table.onUpdate(db, from, to)
         BookmarkItemsDao.Table.onUpdate(db, from, to)
         RecentSearchesDao.Table.onUpdate(db, from, to)
         RecentLanguagesDao.Table.onUpdate(db, from, to)

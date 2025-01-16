@@ -134,7 +134,7 @@ public interface NearbyParentFragmentContract {
 
         void setAdvancedQuery(String query);
 
-        void toggleBookmarkedStatus(Place place);
+        void toggleBookmarkedStatus(Place place, LifecycleCoroutineScope scope);
 
         void handleMapScrolled(LifecycleCoroutineScope scope, boolean isNetworkAvailable);
     }
