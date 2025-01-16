@@ -46,7 +46,7 @@ class UploadRepository @Inject constructor(
      *
      * @return
      */
-    fun buildContributions(): Observable<Contribution>? {
+    fun buildContributions(): Observable<Contribution> {
         return uploadModel.buildContributions()
     }
 
@@ -69,7 +69,7 @@ class UploadRepository @Inject constructor(
      * @return
      */
     fun getUploads(): List<UploadItem> {
-        return uploadModel.getUploads()
+        return uploadModel.uploads
     }
 
     /**
@@ -177,7 +177,7 @@ class UploadRepository @Inject constructor(
         place: Place?,
         similarImageInterface: SimilarImageInterface?,
         inAppPictureLocation: LatLng?
-    ): Observable<UploadItem>? {
+    ): Observable<UploadItem> {
         return uploadModel.preProcessImage(
             uploadableFile,
             place,
@@ -193,7 +193,7 @@ class UploadRepository @Inject constructor(
      * @param location Location of the image
      * @return Quality of UploadItem
      */
-    fun getImageQuality(uploadItem: UploadItem, location: LatLng?): Single<Int>? {
+    fun getImageQuality(uploadItem: UploadItem, location: LatLng?): Single<Int> {
         return uploadModel.getImageQuality(uploadItem, location)
     }
 
@@ -213,7 +213,7 @@ class UploadRepository @Inject constructor(
      * @param uploadItem UploadItem whose caption is to be checked
      * @return Quality of caption of the UploadItem
      */
-    fun getCaptionQuality(uploadItem: UploadItem): Single<Int>? {
+    fun getCaptionQuality(uploadItem: UploadItem): Single<Int> {
         return uploadModel.getCaptionQuality(uploadItem)
     }
 
@@ -275,7 +275,7 @@ class UploadRepository @Inject constructor(
      * @param selectedExistingDepictions existing depicts
      */
     fun setSelectedExistingDepictions(selectedExistingDepictions: List<String>) {
-        uploadModel.selectedExistingDepictions = selectedExistingDepictions
+        uploadModel.selectedExistingDepictions = selectedExistingDepictions.toMutableList()
     }
 
     /**

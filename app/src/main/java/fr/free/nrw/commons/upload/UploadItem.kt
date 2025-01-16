@@ -5,7 +5,6 @@ import fr.free.nrw.commons.Utils
 import fr.free.nrw.commons.filepicker.MimeTypeMapWrapper.Companion.getExtensionFromMimeType
 import fr.free.nrw.commons.nearby.Place
 import fr.free.nrw.commons.utils.ImageUtils
-import io.reactivex.subjects.BehaviorSubject
 
 class UploadItem(
     var mediaUri: Uri?,

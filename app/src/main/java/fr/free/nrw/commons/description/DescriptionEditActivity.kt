@@ -1,7 +1,6 @@
 package fr.free.nrw.commons.description
 
 import android.app.ProgressDialog
-import android.content.Intent
 import android.os.Bundle
 import android.os.Parcelable
 import android.speech.RecognizerIntent
@@ -72,7 +71,7 @@ class DescriptionEditActivity :
 
     private lateinit var binding: ActivityDescriptionEditBinding
 
-    private var descriptionAndCaptions: ArrayList<UploadMediaDetail>? = null
+    private var descriptionAndCaptions: MutableList<UploadMediaDetail>? = null
 
     private val voiceInputResultLauncher = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
@@ -114,22 +113,18 @@ class DescriptionEditActivity :
      * Initializes the RecyclerView
      * @param descriptionAndCaptions list of description and caption
      */
-    private fun initRecyclerView(descriptionAndCaptions: ArrayList<UploadMediaDetail>?) {
+    private fun initRecyclerView(descriptionAndCaptions: MutableList<UploadMediaDetail>?) {
         uploadMediaDetailAdapter =
             UploadMediaDetailAdapter(
                 this,
                 savedLanguageValue,
-                descriptionAndCaptions,
+                descriptionAndCaptions ?: mutableListOf(),
                 recentLanguagesDao,
                 voiceInputResultLauncher
             )
-        uploadMediaDetailAdapter.setCallback { titleStringID: Int, messageStringId: Int ->
-            showInfoAlert(
-                titleStringID,
-                messageStringId,
-            )
-        }
-        uploadMediaDetailAdapter.setEventListener(this)
+
+        uploadMediaDetailAdapter.callback = UploadMediaDetailAdapter.Callback(::showInfoAlert)
+        uploadMediaDetailAdapter.eventListener = this
         rvDescriptions = binding.rvDescriptionsCaptions
         rvDescriptions!!.layoutManager = LinearLayoutManager(this)
         rvDescriptions!!.adapter = uploadMediaDetailAdapter

@@ -52,7 +52,7 @@ class FileProcessor
          * Processes filePath coordinates, either from EXIF data or user location
          */
         fun processFileCoordinates(
-            similarImageInterface: SimilarImageInterface,
+            similarImageInterface: SimilarImageInterface?,
             filePath: String?,
             inAppPictureLocation: LatLng?,
         ): ImageCoordinates {
@@ -146,7 +146,7 @@ class FileProcessor
          */
         private fun findOtherImages(
             fileBeingProcessed: File,
-            similarImageInterface: SimilarImageInterface,
+            similarImageInterface: SimilarImageInterface?,
         ) {
             val oneHundredAndTwentySeconds = 120 * 1000L
             // Time when the original image was created
@@ -161,7 +161,7 @@ class FileProcessor
                 .map { Pair(it, readImageCoordinates(it)) }
                 .firstOrNull { it.second?.decimalCoords != null }
                 ?.let { fileCoordinatesPair ->
-                    similarImageInterface.showSimilarImageFragment(
+                    similarImageInterface?.showSimilarImageFragment(
                         fileBeingProcessed.path,
                         fileCoordinatesPair.first.absolutePath,
                         fileCoordinatesPair.second,
