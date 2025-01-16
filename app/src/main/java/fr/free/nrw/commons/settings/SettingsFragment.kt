@@ -85,7 +85,6 @@ class SettingsFragment : PreferenceFragmentCompat() {
     private var languageHistoryListView: ListView? = null
 
     private lateinit var inAppCameraLocationPermissionLauncher: ActivityResultLauncher<Array<String>>
-    private val getContentPickerHelpUrl = "https://commons-app.github.io/docs.html#get-content"
 
     private val cameraPickLauncherForResult: ActivityResultLauncher<Intent> =
         registerForActivityResult(StartActivityForResult()) { result ->
@@ -297,7 +296,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
             getString(R.string.ok),
             getString(R.string.read_help_link),
             { },
-            { Utils.handleWebUrl(requireContext(), Uri.parse(getContentPickerHelpUrl)) },
+            { Utils.handleWebUrl(requireContext(), Uri.parse(GET_CONTENT_PICKER_HELP_URL)) },
             null
         )
     }
@@ -511,6 +510,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
     @Suppress("LongLine")
     companion object {
+        const val GET_CONTENT_PICKER_HELP_URL = "https://commons-app.github.io/docs.html#get-content"
         private const val VANISH_ACCOUNT_URL = "https://meta.m.wikimedia.org/wiki/Special:Contact/accountvanishapps"
         private const val VANISH_ACCOUNT_SUCCESS_URL = "https://meta.m.wikimedia.org/wiki/Special:GlobalVanishRequest/vanished"
         /**
