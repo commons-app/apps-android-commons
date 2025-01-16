@@ -6,6 +6,7 @@ import dagger.android.AndroidInjectionModule
 import dagger.android.AndroidInjector
 import dagger.android.support.AndroidSupportInjectionModule
 import fr.free.nrw.commons.CommonsApplication
+import fr.free.nrw.commons.activity.SingleWebViewActivity
 import fr.free.nrw.commons.auth.LoginActivity
 import fr.free.nrw.commons.contributions.ContributionsModule
 import fr.free.nrw.commons.explore.SearchModule
@@ -50,6 +51,8 @@ interface CommonsApplicationComponent : AndroidInjector<ApplicationlessInjection
     fun inject(worker: UploadWorker)
 
     fun inject(activity: LoginActivity)
+
+    fun inject(activity: SingleWebViewActivity)
 
     fun inject(fragment: SettingsFragment)
 

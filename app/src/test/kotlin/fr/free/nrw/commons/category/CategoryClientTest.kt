@@ -133,6 +133,45 @@ class CategoryClientTest {
     }
 
     @Test
+    fun getCategoriesByTitlesFound() {
+        val mockResponse = withMockResponse("Category:Test")
+        whenever(
+            categoryInterface.getCategoriesByTitles(
+                anyString(),
+                anyInt(),
+            ),
+        ).thenReturn(Single.just(mockResponse))
+        categoryClient
+            .getCategoriesOfImage("tes", 10)
+            .test()
+            .assertValues(
+                listOf(
+                    CategoryItem(
+                        "Test",
+                        "",
+                        "",
+                        false,
+                    ),
+                ),
+            )
+        categoryClient
+            .getCategoriesOfImage(
+                "tes",
+                10,
+            ).test()
+            .assertValues(
+                listOf(
+                    CategoryItem(
+                        "Test",
+                        "",
+                        "",
+                        false,
+                    ),
+                ),
+            )
+    }
+
+    @Test
     fun getCategoriesByNameNull() {
         val mockResponse = withNullPages()
         whenever(
@@ -155,6 +194,29 @@ class CategoryClientTest {
                 "tes",
                 "tes",
                 10,
+                10,
+            ).test()
+            .assertValues(emptyList())
+    }
+
+    @Test
+    fun getCategoriesByTitlesNull() {
+        val mockResponse = withNullPages()
+        whenever(
+            categoryInterface.getCategoriesByTitles(
+                anyString(),
+                anyInt(),
+            ),
+        ).thenReturn(Single.just(mockResponse))
+        categoryClient
+            .getCategoriesOfImage(
+                "tes",
+                10,
+            ).test()
+            .assertValues(emptyList())
+        categoryClient
+            .getCategoriesOfImage(
+                "tes",
                 10,
             ).test()
             .assertValues(emptyList())
