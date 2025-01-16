@@ -1,26 +1,17 @@
-package fr.free.nrw.commons.bookmarks.locations;
+package fr.free.nrw.commons.bookmarks.locations
 
-import java.util.List;
-
-import javax.inject.Inject;
-import javax.inject.Singleton;
-
-import fr.free.nrw.commons.nearby.Place;
+import fr.free.nrw.commons.nearby.Place
+import javax.inject.Inject
+import javax.inject.Singleton
 
 @Singleton
-public class BookmarkLocationsController {
-
-    @Inject
-    BookmarkLocationsDao bookmarkLocationDao;
-
-    @Inject
-    public BookmarkLocationsController() {}
+class BookmarkLocationsController @Inject constructor(
+    private val bookmarkLocationDao: BookmarkLocationsDao
+) {
 
     /**
-     * Load from DB the bookmarked locations
+     * Load bookmarked locations from the database.
      * @return a list of Place objects.
      */
-    public List<Place> loadFavoritesLocations() {
-        return bookmarkLocationDao.getAllBookmarksLocations();
-    }
+    fun loadFavoritesLocations(): List<Place> = bookmarkLocationDao.getAllBookmarksLocations()
 }

@@ -18,7 +18,6 @@ import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.TestCommonsApplication
-import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsContentProvider.BASE_URI
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao.Table.COLUMN_CATEGORY
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao.Table.COLUMN_COMMONS_LINK
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao.Table.COLUMN_DESCRIPTION
@@ -149,7 +148,7 @@ class BookMarkLocationDaoTest {
     fun getAllLocationBookmarks() {
         whenever(client.query(any(), any(), anyOrNull(), any(), anyOrNull())).thenReturn(createCursor(14))
 
-        var result = testObject.allBookmarksLocations
+        var result = testObject.getAllBookmarksLocations()
 
         assertEquals(14, result.size)
     }
@@ -157,19 +156,19 @@ class BookMarkLocationDaoTest {
     @Test(expected = RuntimeException::class)
     fun getAllLocationBookmarksTranslatesExceptions() {
         whenever(client.query(any(), any(), anyOrNull(), any(), anyOrNull())).thenThrow(RemoteException(""))
-        testObject.allBookmarksLocations
+        testObject.getAllBookmarksLocations()
     }
 
     @Test
     fun getAllLocationBookmarksReturnsEmptyList_emptyCursor() {
         whenever(client.query(any(), any(), anyOrNull(), any(), anyOrNull())).thenReturn(createCursor(0))
-        assertTrue(testObject.allBookmarksLocations.isEmpty())
+        assertTrue(testObject.getAllBookmarksLocations().isEmpty())
     }
 
     @Test
     fun getAllLocationBookmarksReturnsEmptyList_nullCursor() {
         whenever(client.query(any(), any(), anyOrNull(), any(), anyOrNull())).thenReturn(null)
-        assertTrue(testObject.allBookmarksLocations.isEmpty())
+        assertTrue(testObject.getAllBookmarksLocations().isEmpty())
     }
 
     @Test
@@ -178,7 +177,7 @@ class BookMarkLocationDaoTest {
         whenever(client.query(any(), any(), anyOrNull(), any(), anyOrNull())).thenReturn(mockCursor)
         whenever(mockCursor.moveToFirst()).thenReturn(false)
 
-        testObject.allBookmarksLocations
+        testObject.getAllBookmarksLocations()
 
         verify(mockCursor).close()
     }
@@ -189,7 +188,7 @@ class BookMarkLocationDaoTest {
         whenever(client.query(any(), any(), any(), any(), anyOrNull())).thenReturn(null)
 
         assertTrue(testObject.updateBookmarkLocation(examplePlaceBookmark))
-        verify(client).insert(eq(BASE_URI), captor.capture())
+        verify(client).insert(eq(BookmarkLocationsContentProvider.BASE_URI), captor.capture())
         captor.firstValue.let { cv ->
             assertEquals(13, cv.size())
             assertEquals(examplePlaceBookmark.name, cv.getAsString(COLUMN_NAME))
