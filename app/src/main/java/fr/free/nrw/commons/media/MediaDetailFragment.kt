@@ -467,18 +467,35 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
         }
     }
 
+    /**
+     * Retrieves the ContributionsFragment that is potentially the parent, grandparent, etc
+     * fragment of this fragment.
+     *
+     * @return The ContributionsFragment instance. If the ContributionsFragment instance could not
+     * be found, null is returned.
+     */
+    private fun getContributionsFragmentParent(): ContributionsFragment? {
+        var fragment: Fragment? = this
+
+        while (fragment != null && fragment !is ContributionsFragment) {
+            fragment = fragment.parentFragment
+        }
+
+        if (fragment == null) {
+            return null
+        }
+
+        return fragment as ContributionsFragment
+    }
+
     override fun onResume() {
         super.onResume()
-        if (parentFragment != null && requireParentFragment().parentFragment != null) {
-            // Added a check because, not necessarily, the parent fragment
-            // will have a parent fragment, say in the case when MediaDetailPagerFragment
-            // is directly started by the CategoryImagesActivity
-            if (parentFragment is ContributionsFragment) {
-                (((parentFragment as ContributionsFragment)
-                    .parentFragment) as ContributionsFragment).binding.cardViewNearby.visibility =
-                    View.GONE
-            }
+
+        val contributionsFragment: ContributionsFragment? = this.getContributionsFragmentParent()
+        if (contributionsFragment?.binding != null) {
+            contributionsFragment.binding.cardViewNearby.visibility = View.GONE
         }
+
         // detail provider is null when fragment is shown in review activity
         media = if (detailProvider != null) {
             detailProvider!!.getMediaAtPosition(index)
@@ -1569,7 +1586,7 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
         mediaDetail: UploadMediaDetail,
         updatedCaptions: MutableMap<String, String>
     ) {
-        updatedCaptions[mediaDetail.languageCode!!] = mediaDetail.captionText!!
+        updatedCaptions[mediaDetail.languageCode!!] = mediaDetail.captionText
         media!!.captions = updatedCaptions
     }
 
@@ -1737,10 +1754,11 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
             return
         }
         ProfileActivity.startYourself(
-            activity,
-            media!!.user,
-            sessionManager.userName != media!!.user
+            requireActivity(),  // Ensure this is a non-null Activity context
+            media?.user ?: "",  // Provide a fallback value if media?.user is null
+            sessionManager.userName != media?.user  // This can remain as is, null check will apply
         )
+
     }
 
     /**

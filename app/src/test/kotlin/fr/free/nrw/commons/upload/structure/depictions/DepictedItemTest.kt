@@ -181,4 +181,20 @@ class DepictedItemTest {
     fun `hashCode returns different values for objects with different name`() {
         Assert.assertNotEquals(depictedItem(name = "a").hashCode(), depictedItem(name = "b").hashCode())
     }
+
+    @Test
+    fun `primaryImage is derived correctly from imageUrl`() {
+        Assert.assertEquals(
+            DepictedItem(
+                entity(
+                    statements = mapOf(
+                        WikidataProperties.IMAGE.propertyName to listOf(
+                            statement(snak(dataValue = valueString("prefix: example_image name"))),
+                        ),
+                    ),
+                ),
+            ).primaryImage,
+            "_example_image_name",
+        )
+    }
 }

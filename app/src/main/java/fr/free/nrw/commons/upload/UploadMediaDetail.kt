@@ -23,14 +23,14 @@ data class UploadMediaDetail(
      * The caption text for the item being uploaded.
      * @param captionText The caption text.
      */
-    var captionText: String? = "",
+    var captionText: String = "",
 ) : Parcelable {
     fun javaCopy() = copy()
 
     constructor(place: Place?) : this(
         place?.language,
         place?.longDescription,
-        place?.name,
+        place?.name ?: "",
     )
 
     /**

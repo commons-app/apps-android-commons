@@ -20,6 +20,7 @@
         <item name="reviewHeading">@color/white</item>
         <item name="aboutIconsColor">@color/white</item>
         <item name="caption_description_text_color">@color/white</item>
+        <item name="android:statusBarColor">@color/main_background_dark</item>
 
         <item name="semitransparentText">@color/commons_app_blue_dark</item>
         <item name="subBackground">@color/sub_background_dark</item>

@@ -101,7 +101,7 @@ data class Contribution constructor(
          */
         fun formatCaptions(uploadMediaDetails: List<UploadMediaDetail>) =
             uploadMediaDetails
-                .associate { it.languageCode!! to it.captionText!! }
+                .associate { it.languageCode!! to it.captionText }
                 .filter { it.value.isNotBlank() }
 
         /**
