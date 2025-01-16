@@ -16,11 +16,11 @@ class QuizController {
 
     companion object{
 
-        const val urlForSelfie = "https://i.imgur.com/0fMYcpM.jpg"
-        const val urlForTajMahal = "https://upload.wikimedia.org/wikipedia/commons/1/15/Taj_Mahal-03.jpg"
-        const val urlForBlurryImage = "https://i.imgur.com/Kepb5jR.jpg"
-        const val urlForScreenshot = "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Social_media_app_mockup_screenshot.svg/500px-Social_media_app_mockup_screenshot.svg.png"
-        const val urlForEvent = "https://upload.wikimedia.org/wikipedia/commons/5/51/HouseBuildingInNorthernVietnam.jpg"
+        const val URL_FOR_SELFIE = "https://i.imgur.com/0fMYcpM.jpg"
+        const val URL_FOR_TAJ_MAHAL = "https://upload.wikimedia.org/wikipedia/commons/1/15/Taj_Mahal-03.jpg"
+        const val URL_FOR_BLURRY_IMAGE = "https://i.imgur.com/Kepb5jR.jpg"
+        const val URL_FOR_SCREENSHOT = "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Social_media_app_mockup_screenshot.svg/500px-Social_media_app_mockup_screenshot.svg.png"
+        const val RL_FOR_EVENT = "https://upload.wikimedia.org/wikipedia/commons/5/51/HouseBuildingInNorthernVietnam.jpg"
     }
 
 
@@ -28,7 +28,7 @@ class QuizController {
         val q1 = QuizQuestion(
             1,
             context.getString(R.string.quiz_question_string),
-            urlForSelfie,
+            URL_FOR_SELFIE,
             false,
             context.getString(R.string.selfie_answer)
         )
@@ -37,7 +37,7 @@ class QuizController {
         val q2 = QuizQuestion(
             2,
             context.getString(R.string.quiz_question_string),
-            urlForTajMahal,
+            URL_FOR_TAJ_MAHAL,
             true,
             context.getString(R.string.taj_mahal_answer)
         )
@@ -46,7 +46,7 @@ class QuizController {
         val q3 = QuizQuestion(
             3,
             context.getString(R.string.quiz_question_string),
-            urlForBlurryImage,
+            URL_FOR_BLURRY_IMAGE,
             false,
             context.getString(R.string.blurry_image_answer)
         )
@@ -55,7 +55,7 @@ class QuizController {
         val q4 = QuizQuestion(
             4,
             context.getString(R.string.quiz_screenshot_question),
-            urlForScreenshot,
+            URL_FOR_SCREENSHOT,
             false,
             context.getString(R.string.screenshot_answer)
         )
@@ -64,7 +64,7 @@ class QuizController {
         val q5 = QuizQuestion(
             5,
             context.getString(R.string.quiz_question_string),
-            urlForEvent,
+            RL_FOR_EVENT,
             true,
             context.getString(R.string.construction_event_answer)
         )
