@@ -20,7 +20,7 @@ class QuizController {
         const val URL_FOR_TAJ_MAHAL = "https://upload.wikimedia.org/wikipedia/commons/1/15/Taj_Mahal-03.jpg"
         const val URL_FOR_BLURRY_IMAGE = "https://i.imgur.com/Kepb5jR.jpg"
         const val URL_FOR_SCREENSHOT = "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Social_media_app_mockup_screenshot.svg/500px-Social_media_app_mockup_screenshot.svg.png"
-        const val RL_FOR_EVENT = "https://upload.wikimedia.org/wikipedia/commons/5/51/HouseBuildingInNorthernVietnam.jpg"
+        const val URL_FOR_EVENT = "https://upload.wikimedia.org/wikipedia/commons/5/51/HouseBuildingInNorthernVietnam.jpg"
     }
 
 
@@ -64,7 +64,7 @@ class QuizController {
         val q5 = QuizQuestion(
             5,
             context.getString(R.string.quiz_question_string),
-            RL_FOR_EVENT,
+            URL_FOR_EVENT,
             true,
             context.getString(R.string.construction_event_answer)
         )
