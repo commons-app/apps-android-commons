@@ -90,6 +90,7 @@ import fr.free.nrw.commons.nearby.MarkerPlaceGroup;
 import fr.free.nrw.commons.nearby.NearbyController;
 import fr.free.nrw.commons.nearby.NearbyFilterSearchRecyclerViewAdapter;
 import fr.free.nrw.commons.nearby.NearbyFilterState;
+import fr.free.nrw.commons.nearby.NearbyUtil;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.nearby.PlacesRepository;
 import fr.free.nrw.commons.nearby.Sitelinks;
@@ -126,6 +127,7 @@ import java.util.concurrent.TimeUnit;
 import javax.inject.Inject;
 import javax.inject.Named;
 import kotlin.Unit;
+import kotlinx.coroutines.BuildersKt;
 import org.jetbrains.annotations.NotNull;
 import org.osmdroid.api.IGeoPoint;
 import org.osmdroid.events.MapEventsReceiver;
@@ -577,13 +579,14 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         binding.bottomSheetNearby.rvNearbyList.setLayoutManager(
             new LinearLayoutManager(getContext()));
         adapter = new PlaceAdapter(bookmarkLocationDao,
+            scope,
             place -> {
                 moveCameraToPosition(
                     new GeoPoint(place.location.getLatitude(), place.location.getLongitude()));
                 return Unit.INSTANCE;
             },
             (place, isBookmarked) -> {
-                presenter.toggleBookmarkedStatus(place);
+                presenter.toggleBookmarkedStatus(place, scope);
                 return Unit.INSTANCE;
             },
             commonPlaceClickActions,
@@ -2135,7 +2138,11 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
     private void updateBookmarkButtonImage(final Place place) {
         final int bookmarkIcon;
-        if (bookmarkLocationDao.findBookmarkLocation(place)) {
+        if (NearbyUtil.INSTANCE.getBookmarkLocationExists(
+            bookmarkLocationDao,
+            place.getName(),
+            scope
+        )) {
             bookmarkIcon = R.drawable.ic_round_star_filled_24px;
         } else {
             bookmarkIcon = R.drawable.ic_round_star_border_24px;
@@ -2301,11 +2308,11 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         BottomSheetItem item = dataList.get(position);
         switch (item.getImageResourceId()) {
             case R.drawable.ic_round_star_border_24px:
-                presenter.toggleBookmarkedStatus(selectedPlace);
+                presenter.toggleBookmarkedStatus(selectedPlace, scope);
                 updateBookmarkButtonImage(selectedPlace);
                 break;
             case R.drawable.ic_round_star_filled_24px:
-                presenter.toggleBookmarkedStatus(selectedPlace);
+                presenter.toggleBookmarkedStatus(selectedPlace, scope);
                 updateBookmarkButtonImage(selectedPlace);
                 break;
             case R.drawable.ic_directions_black_24dp:

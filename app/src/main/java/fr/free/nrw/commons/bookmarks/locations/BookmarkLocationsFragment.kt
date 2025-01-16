@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts.RequestMultiplePermissions
 import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.android.support.DaggerFragment
 import fr.free.nrw.commons.R
@@ -108,6 +109,7 @@ class BookmarkLocationsFragment : DaggerFragment() {
 
         adapter = PlaceAdapter(
             bookmarkLocationDao,
+            scope = lifecycleScope,
             { },
             { place, _ ->
                 adapter.remove(place)
