@@ -133,7 +133,7 @@ object PermissionUtils {
         vararg permissions: String
     ) {
         if (hasPartialAccess(activity)) {
-            Thread(onPermissionGranted).start()
+            CoroutineScope(Dispatchers.Main).launch { onPermissionGranted.run() }
             return
         }
         checkPermissionsAndPerformAction(
