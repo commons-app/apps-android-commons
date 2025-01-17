@@ -2145,6 +2145,10 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         );
     }
 
+    private void toggleBookmarkButtonImage() {
+        bottomSheetAdapter.toggleBookmarkIcon();
+    }
+
     @Override
     public void onAttach(final Context context) {
         super.onAttach(context);
@@ -2304,11 +2308,11 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         switch (item.getImageResourceId()) {
             case R.drawable.ic_round_star_border_24px:
                 presenter.toggleBookmarkedStatus(selectedPlace, scope);
-                updateBookmarkButtonImage(selectedPlace);
+                toggleBookmarkButtonImage();
                 break;
             case R.drawable.ic_round_star_filled_24px:
                 presenter.toggleBookmarkedStatus(selectedPlace, scope);
-                updateBookmarkButtonImage(selectedPlace);
+                toggleBookmarkButtonImage();
                 break;
             case R.drawable.ic_directions_black_24dp:
                 Utils.handleGeoCoordinates(this.getContext(), selectedPlace.getLocation());
