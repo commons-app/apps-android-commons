@@ -142,29 +142,26 @@ class NearbyParentFragmentPresenter
         scope: LifecycleCoroutineScope?
     ) {
         if (place == null) return
-        var nowBookmarked: Boolean? = null
+        var nowBookmarked: Boolean
         scope?.launch {
             nowBookmarked = bookmarkLocationDao.updateBookmarkLocation(place)
-
-        }
-        bookmarkChangedPlaces.add(place)
-        val placeIndex =
-            NearbyController.markerLabelList.indexOfFirst { it.place.location == place.location }
-        NearbyController.markerLabelList[placeIndex] = nowBookmarked?.let {
-            MarkerPlaceGroup(
-                it,
+            bookmarkChangedPlaces.add(place)
+            val placeIndex =
+                NearbyController.markerLabelList.indexOfFirst { it.place.location == place.location }
+            NearbyController.markerLabelList[placeIndex] = MarkerPlaceGroup(
+                nowBookmarked,
                 NearbyController.markerLabelList[placeIndex].place
             )
+            nearbyParentFragmentView.setFilterState()
         }
-        nearbyParentFragmentView.setFilterState()
     }
 
     override fun attachView(view: NearbyParentFragmentContract.View) {
-        this.nearbyParentFragmentView = view
+        nearbyParentFragmentView = view
     }
 
     override fun detachView() {
-        this.nearbyParentFragmentView = DUMMY
+        nearbyParentFragmentView = DUMMY
     }
 
     override fun removeNearbyPreferences(applicationKvStore: JsonKvStore) {

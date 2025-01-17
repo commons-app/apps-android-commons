@@ -1,8 +1,9 @@
 package fr.free.nrw.commons.nearby
 
+import android.util.Log
 import androidx.lifecycle.LifecycleCoroutineScope
+import fr.free.nrw.commons.R
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao
-import fr.free.nrw.commons.bookmarks.locations.BookmarksLocations
 import kotlinx.coroutines.launch
 
 object NearbyUtil {
@@ -10,13 +11,17 @@ object NearbyUtil {
     fun getBookmarkLocationExists(
         bookmarksLocationsDao: BookmarkLocationsDao,
         name: String,
-        scope: LifecycleCoroutineScope?
-    ): Boolean {
-        var isBookmarked = false
+        scope: LifecycleCoroutineScope?,
+        bottomSheetAdapter: BottomSheetAdapter,
+    ) {
         scope?.launch {
-            isBookmarked = bookmarksLocationsDao.findBookmarkLocation(name)
+            val isBookmarked = bookmarksLocationsDao.findBookmarkLocation(name)
+            Log.d("isBookmarked", isBookmarked.toString())
+            if (isBookmarked) {
+                bottomSheetAdapter.updateBookmarkIcon(R.drawable.ic_round_star_filled_24px)
+            } else {
+                bottomSheetAdapter.updateBookmarkIcon(R.drawable.ic_round_star_border_24px)
+            }
         }
-
-        return isBookmarked
     }
 }

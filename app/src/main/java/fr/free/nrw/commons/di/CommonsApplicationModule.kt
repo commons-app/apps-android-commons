@@ -112,11 +112,6 @@ open class CommonsApplicationModule(private val applicationContext: Context) {
         context.contentResolver.acquireContentProviderClient(BuildConfig.BOOKMARK_AUTHORITY)
 
     @Provides
-    @Named("bookmarksLocation")
-    fun provideBookmarkLocationContentProviderClient(context: Context): ContentProviderClient? =
-        context.contentResolver.acquireContentProviderClient(BuildConfig.BOOKMARK_LOCATIONS_AUTHORITY)
-
-    @Provides
     @Named("bookmarksItem")
     fun provideBookmarkItemContentProviderClient(context: Context): ContentProviderClient? =
         context.contentResolver.acquireContentProviderClient(BuildConfig.BOOKMARK_ITEMS_AUTHORITY)
