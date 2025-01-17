@@ -685,8 +685,6 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
     private fun receiveInternalSharedItems() {
         val intent = intent
         Timber.d("Intent has EXTRA_FILES: ${EXTRA_FILES}")
-
-
         uploadableFiles = try {
             // Check if intent has the extra before trying to read it
             if (!intent.hasExtra(EXTRA_FILES)) {
