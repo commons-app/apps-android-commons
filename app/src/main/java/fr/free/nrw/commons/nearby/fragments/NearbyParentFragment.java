@@ -2137,17 +2137,12 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     }
 
     private void updateBookmarkButtonImage(final Place place) {
-        final int bookmarkIcon;
-        if (NearbyUtil.INSTANCE.getBookmarkLocationExists(
+        NearbyUtil.INSTANCE.getBookmarkLocationExists(
             bookmarkLocationDao,
             place.getName(),
-            scope
-        )) {
-            bookmarkIcon = R.drawable.ic_round_star_filled_24px;
-        } else {
-            bookmarkIcon = R.drawable.ic_round_star_border_24px;
-        }
-        bottomSheetAdapter.updateBookmarkIcon(bookmarkIcon);
+            scope,
+            bottomSheetAdapter
+        );
     }
 
     @Override

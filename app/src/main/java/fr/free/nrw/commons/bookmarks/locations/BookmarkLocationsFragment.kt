@@ -109,7 +109,7 @@ class BookmarkLocationsFragment : DaggerFragment() {
 
         adapter = PlaceAdapter(
             bookmarkLocationDao,
-            scope = lifecycleScope,
+            lifecycleScope,
             { },
             { place, _ ->
                 adapter.remove(place)
