@@ -684,17 +684,66 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
 
     private fun receiveInternalSharedItems() {
         val intent = intent
+        Timber.d("Intent has EXTRA_FILES: ${EXTRA_FILES}")
 
-        Timber.d("Received intent %s with action %s", intent.toString(), intent.action)
 
-        uploadableFiles = mutableListOf<UploadableFile>().apply {
-            addAll(intent.getParcelableArrayListExtra(EXTRA_FILES) ?: emptyList())
+        uploadableFiles = try {
+            // Check if intent has the extra before trying to read it
+            if (!intent.hasExtra(EXTRA_FILES)) {
+                Timber.w("No EXTRA_FILES found in intent")
+                mutableListOf()
+            } else {
+                // Try to get the files as Parcelable array
+                val files = if (VERSION.SDK_INT >= VERSION_CODES.TIRAMISU) {
+                    intent.getParcelableArrayListExtra(EXTRA_FILES, UploadableFile::class.java)
+                } else {
+                    @Suppress("DEPRECATION")
+                    intent.getParcelableArrayListExtra<UploadableFile>(EXTRA_FILES)
+                }
+
+                // Convert to mutable list or return empty list if null
+                files?.toMutableList() ?: run {
+                    Timber.w("Files array was null")
+                    mutableListOf()
+                }
+            }
+        } catch (e: Exception) {
+            Timber.e(e, "Error reading files from intent")
+            mutableListOf()
         }
-        isMultipleFilesSelected = uploadableFiles!!.size > 1
-        Timber.i("Received multiple upload %s", uploadableFiles!!.size)
 
-        place = intent.getParcelableExtra<Place>(PLACE_OBJECT)
-        prevLocation = intent.getParcelableExtra(LOCATION_BEFORE_IMAGE_CAPTURE)
+        // Log the result for debugging
+        isMultipleFilesSelected = uploadableFiles.size > 1
+        Timber.i("Received files count: ${uploadableFiles.size}")
+        uploadableFiles.forEachIndexed { index, file ->
+            Timber.d("File $index path: ${file.getFilePath()}")
+        }
+
+        // Handle other extras with null safety
+        place = try {
+            if (VERSION.SDK_INT >= VERSION_CODES.TIRAMISU) {
+                intent.getParcelableExtra(PLACE_OBJECT, Place::class.java)
+            } else {
+                @Suppress("DEPRECATION")
+                intent.getParcelableExtra(PLACE_OBJECT)
+            }
+        } catch (e: Exception) {
+            Timber.e(e, "Error reading place")
+            null
+        }
+
+        prevLocation = try {
+            if (VERSION.SDK_INT >= VERSION_CODES.TIRAMISU) {
+                intent.getParcelableExtra(LOCATION_BEFORE_IMAGE_CAPTURE, LatLng::class.java)
+            } else {
+                @Suppress("DEPRECATION")
+                intent.getParcelableExtra(LOCATION_BEFORE_IMAGE_CAPTURE)
+            }
+        } catch (e: Exception) {
+            Timber.e(e, "Error reading location")
+            null
+        }
+
         isInAppCameraUpload = intent.getBooleanExtra(IN_APP_CAMERA_UPLOAD, false)
         resetDirectPrefs()
     }
@@ -803,6 +852,7 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
     /**
      * Overrides the back button to make sure the user is prepared to lose their progress
      */
+    @SuppressLint("MissingSuperCall")
     override fun onBackPressed() {
         showAlertDialog(
             this,
@@ -920,7 +970,7 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
 
     companion object {
         private var uploadIsOfAPlace = false
-        const val EXTRA_FILES: String = "commons_image_exta"
+        const val EXTRA_FILES: String = "commons_image_extra"
         const val LOCATION_BEFORE_IMAGE_CAPTURE: String = "user_location_before_image_capture"
         const val IN_APP_CAMERA_UPLOAD: String = "in_app_camera_upload"
 
