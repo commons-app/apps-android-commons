@@ -774,7 +774,7 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
 
     override fun onThumbnailDeleted(position: Int) {
         presenter!!.deletePictureAtIndex(position)
-        thumbnailsAdapter?.notifyItemRemoved(position)
+        thumbnailsAdapter?.notifyDataSetChanged()
     }
 
     /**
