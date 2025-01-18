@@ -8,7 +8,7 @@
   android:fillViewport="true"
   tools:ignore="ContentDescription" >
 
-<!-- TODO Add ContentDescription For ALL Images Added ignore to suppress Lints -->
+  <!-- TODO Add ContentDescription For ALL Images Added ignore to suppress Lints -->
 
   <androidx.constraintlayout.widget.ConstraintLayout
     android:id="@+id/layout"

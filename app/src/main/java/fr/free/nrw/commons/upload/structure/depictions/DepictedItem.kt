@@ -68,6 +68,9 @@ data class DepictedItem constructor(
         entity.id(),
     )
 
+    val primaryImage: String?
+        get() = imageUrl?.split('-')?.lastOrNull()
+
     override fun equals(other: Any?) =
         when {
             this === other -> true

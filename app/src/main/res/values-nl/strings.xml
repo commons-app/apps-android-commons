@@ -831,4 +831,8 @@
   <string name="usages_on_commons_heading">Commons</string>
   <string name="usages_on_other_wikis_heading">Andere wiki’s</string>
   <string name="file_usages_container_heading">Bestandsgebruik</string>
+  <string name="title_activity_single_web_view">Activiteit enkele webraadpleging</string>
+  <string name="account">Account</string>
+  <string name="vanish_account">Account laten verdwijnen</string>
+  <string name="account_vanish_request_confirm_title">Waarschuwing verwijdering account</string>
 </resources>

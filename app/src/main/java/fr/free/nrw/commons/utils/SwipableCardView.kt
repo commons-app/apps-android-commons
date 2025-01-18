@@ -21,9 +21,14 @@ abstract class SwipableCardView @JvmOverloads constructor(
     defStyleAttr: Int = 0
 ) : CardView(context, attrs, defStyleAttr) {
 
+
+    companion object{
+        const val MINIMUM_THRESHOLD_FOR_SWIPE = 100f
+    }
+
     private var x1 = 0f
     private var x2 = 0f
-    private val MINIMUM_THRESHOLD_FOR_SWIPE = 100f
+
 
     init {
         interceptOnTouchListener()

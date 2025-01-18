@@ -16,6 +16,9 @@ import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.upload.UploadActivity
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 
 object PermissionUtils {
@@ -130,7 +133,7 @@ object PermissionUtils {
         vararg permissions: String
     ) {
         if (hasPartialAccess(activity)) {
-            Thread(onPermissionGranted).start()
+            CoroutineScope(Dispatchers.Main).launch { onPermissionGranted.run() }
             return
         }
         checkPermissionsAndPerformAction(
@@ -166,13 +169,15 @@ object PermissionUtils {
         rationaleMessage: Int,
         vararg permissions: String
     ) {
+        val scope = CoroutineScope(Dispatchers.Main)
+
         Dexter.withActivity(activity)
             .withPermissions(*permissions)
             .withListener(object : MultiplePermissionsListener {
                 override fun onPermissionsChecked(report: MultiplePermissionsReport) {
                     when {
                         report.areAllPermissionsGranted() || hasPartialAccess(activity) ->
-                            Thread(onPermissionGranted).start()
+                            scope.launch { onPermissionGranted.run() }
                         report.isAnyPermissionPermanentlyDenied -> {
                             DialogUtil.showAlertDialog(
                                 activity,
@@ -189,7 +194,7 @@ object PermissionUtils {
                                 null, null
                             )
                         }
-                        else -> Thread(onPermissionDenied).start()
+                        else -> scope.launch { onPermissionDenied?.run() }
                     }
                 }
 

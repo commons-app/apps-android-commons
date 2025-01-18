@@ -58,7 +58,7 @@ class LeaderboardListAdapter : PagedListAdapter<LeaderboardList, ListViewHolder>
             if (view.context is ProfileActivity) {
                 ((view.context) as Activity).finish()
             }
-            ProfileActivity.startYourself(view.context, item.username, true)
+            ProfileActivity.startYourself(view.context, item.username?:"", true)
         }
     }
 }

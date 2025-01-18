@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.webkit.ConsoleMessage
+import android.webkit.CookieManager
 import android.webkit.WebChromeClient
 import android.webkit.WebResourceRequest
 import android.webkit.WebView
@@ -28,13 +29,20 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.viewinterop.AndroidView
 import fr.free.nrw.commons.R
+import fr.free.nrw.commons.di.ApplicationlessInjection
+import fr.free.nrw.commons.wikidata.cookies.CommonsCookieJar
+import okhttp3.HttpUrl.Companion.toHttpUrl
 import timber.log.Timber
+import javax.inject.Inject
 
 /**
  * SingleWebViewActivity is a reusable activity webView based on a given url(initial url) and
  * closes itself when a specified success URL is reached to success url.
  */
 class SingleWebViewActivity : ComponentActivity() {
+    @Inject
+    lateinit var cookieJar: CommonsCookieJar
+
     @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,6 +52,11 @@ class SingleWebViewActivity : ComponentActivity() {
             finish()
             return
         }
+        ApplicationlessInjection
+            .getInstance(applicationContext)
+            .commonsApplicationComponent
+            .inject(this)
+        setCookies(url)
         enableEdgeToEdge()
         setContent {
             Scaffold(
@@ -131,6 +144,7 @@ class SingleWebViewActivity : ComponentActivity() {
 
                         override fun onPageFinished(view: WebView?, url: String?) {
                             super.onPageFinished(view, url)
+                            setCookies(url.orEmpty())
                         }
 
                     }
@@ -150,6 +164,20 @@ class SingleWebViewActivity : ComponentActivity() {
             }
         )
 
+    }
+
+    /**
+     * Sets cookies for the given URL using the cookies stored in the `CommonsCookieJar`.
+     *
+     * @param url The URL for which cookies need to be set.
+     */
+    private fun setCookies(url: String) {
+        CookieManager.getInstance().let {
+            val cookies = cookieJar.loadForRequest(url.toHttpUrl())
+            for (cookie in cookies) {
+                it.setCookie(url, cookie.toString())
+            }
+        }
     }
 
     companion object {

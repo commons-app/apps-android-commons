@@ -33,6 +33,7 @@ import com.karumi.dexter.MultiplePermissionsReport
 import com.karumi.dexter.PermissionToken
 import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener
+import fr.free.nrw.commons.BuildConfig.MOBILE_META_URL
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.Utils
 import fr.free.nrw.commons.activity.SingleWebViewActivity
@@ -85,7 +86,6 @@ class SettingsFragment : PreferenceFragmentCompat() {
     private var languageHistoryListView: ListView? = null
 
     private lateinit var inAppCameraLocationPermissionLauncher: ActivityResultLauncher<Array<String>>
-    private val GET_CONTENT_PICKER_HELP_URL = "https://commons-app.github.io/docs.html#get-content"
 
     private val cameraPickLauncherForResult: ActivityResultLauncher<Intent> =
         registerForActivityResult(StartActivityForResult()) { result ->
@@ -271,6 +271,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
             findPreference<Preference>("managed_exif_tags")?.isEnabled = false
             findPreference<Preference>("openDocumentPhotoPickerPref")?.isEnabled = false
             findPreference<Preference>("inAppCameraLocationPref")?.isEnabled = false
+            findPreference<Preference>("vanishAccount")?.isEnabled = false
         }
     }
 
@@ -511,6 +512,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
     @Suppress("LongLine")
     companion object {
+        const val GET_CONTENT_PICKER_HELP_URL = "https://commons-app.github.io/docs.html#get-content"
         private const val VANISH_ACCOUNT_URL = "https://meta.m.wikimedia.org/wiki/Special:Contact/accountvanishapps"
         private const val VANISH_ACCOUNT_SUCCESS_URL = "https://meta.m.wikimedia.org/wiki/Special:GlobalVanishRequest/vanished"
         /**

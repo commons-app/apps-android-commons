@@ -1586,7 +1586,7 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
         mediaDetail: UploadMediaDetail,
         updatedCaptions: MutableMap<String, String>
     ) {
-        updatedCaptions[mediaDetail.languageCode!!] = mediaDetail.captionText!!
+        updatedCaptions[mediaDetail.languageCode!!] = mediaDetail.captionText
         media!!.captions = updatedCaptions
     }
 
@@ -1754,10 +1754,11 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
             return
         }
         ProfileActivity.startYourself(
-            activity,
-            media!!.user,
-            sessionManager.userName != media!!.user
+            requireActivity(),  // Ensure this is a non-null Activity context
+            media?.user ?: "",  // Provide a fallback value if media?.user is null
+            sessionManager.userName != media?.user  // This can remain as is, null check will apply
         )
+
     }
 
     /**

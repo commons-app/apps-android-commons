@@ -813,7 +813,11 @@
   <string name="usages_on_commons_heading">Commons</string>
   <string name="usages_on_other_wikis_heading">Andra wikier</string>
   <string name="file_usages_container_heading">Filanvändning</string>
+  <string name="title_activity_single_web_view">SingleWebViewActivity</string>
   <string name="account">Konto</string>
+  <string name="vanish_account">Få kontot att försvinna</string>
+  <string name="account_vanish_request_confirm_title">Varning om försvinnande konto</string>
+  <string name="account_vanish_request_confirm">Att få kontot att försvinna är en &lt;b&gt;sista utväg&lt;/b&gt; och bör &lt;b&gt;endast användas när du vill sluta redigera för alltid&lt;/b&gt; och även dölja så många av dina tidigare associationer som möjligt.&lt;br/&gt;&lt;br/&gt;Konton raderas på Wikimedia Commons genom att ändra kontonamnet för att göra så att andra inte kan känna igen bidragen i en process som kallas kontoförsvinnande. &lt;b&gt;Försvinnande garanterar inte fullständig anonymitet eller att bidrag tas bort från projekten&lt;/b&gt;.</string>
   <string name="caption">Bildtext</string>
   <string name="caption_copied_to_clipboard">Bildtext kopierades till urklipp</string>
 </resources>
