@@ -15,6 +15,6 @@ class BookmarkLocationsController @Inject constructor(
      * Load bookmarked locations from the database.
      * @return a list of Place objects.
      */
-    fun loadFavoritesLocations(): Flow<List<Place>> =
+    suspend fun loadFavoritesLocations(): List<Place> =
         bookmarkLocationDao.getAllBookmarksLocationsPlace()
 }

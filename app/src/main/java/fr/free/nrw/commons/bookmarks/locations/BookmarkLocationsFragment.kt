@@ -130,13 +130,14 @@ class BookmarkLocationsFragment : DaggerFragment() {
     }
 
     private fun initList() {
-        var places: List<Place> = listOf()
+        var places: List<Place>
         viewLifecycleOwner.lifecycleScope.launch {
-            controller.loadFavoritesLocations().collect {
-                adapter.items = it
-                places = it
-            }
+            places = controller.loadFavoritesLocations()
+            updateUIList(places)
         }
+    }
+
+    private fun updateUIList(places: List<Place>) {
         adapter.items = places
         binding?.loadingImagesProgressBar?.visibility = View.GONE
         if (places.isEmpty()) {
