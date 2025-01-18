@@ -2098,7 +2098,6 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             ? descriptionText : descriptionText.replaceFirst(".$", ""));
         // Set the short description after we remove place name from long description
         binding.bottomSheetDetails.description.setText(descriptionText);
-
         binding.fabCamera.setOnClickListener(view -> {
             if (binding.fabCamera.isShown()) {
                 Timber.d("Camera button tapped. Place: %s", selectedPlace.toString());
