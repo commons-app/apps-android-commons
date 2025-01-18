@@ -10,7 +10,6 @@ import fr.free.nrw.commons.utils.ImageUtils.IMAGE_KEEP
 import fr.free.nrw.commons.utils.ImageUtils.IMAGE_OK
 import fr.free.nrw.commons.utils.ImageUtilsWrapper
 import io.reactivex.Single
-import io.reactivex.functions.Function
 import io.reactivex.schedulers.Schedulers
 import org.apache.commons.lang3.StringUtils
 import timber.log.Timber
@@ -26,7 +25,7 @@ class ImageProcessingService @Inject constructor(
     private val fileUtilsWrapper: FileUtilsWrapper,
     private val imageUtilsWrapper: ImageUtilsWrapper,
     private val readFBMD: ReadFBMD,
-    private val EXIFReader: EXIFReader,
+    private val exifReader: EXIFReader,
     private val mediaClient: MediaClient
 ) {
     /**
@@ -94,7 +93,7 @@ class ImageProcessingService @Inject constructor(
      * the presence of some basic Exif metadata.
      */
     private fun checkEXIF(filepath: String): Single<Int> =
-        EXIFReader.processMetadata(filepath)
+        exifReader.processMetadata(filepath)
 
 
     /**

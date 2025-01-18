@@ -86,7 +86,6 @@ class SettingsFragment : PreferenceFragmentCompat() {
     private var languageHistoryListView: ListView? = null
 
     private lateinit var inAppCameraLocationPermissionLauncher: ActivityResultLauncher<Array<String>>
-    private val GET_CONTENT_PICKER_HELP_URL = "https://commons-app.github.io/docs.html#get-content"
 
     private val cameraPickLauncherForResult: ActivityResultLauncher<Intent> =
         registerForActivityResult(StartActivityForResult()) { result ->
@@ -513,10 +512,9 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
     @Suppress("LongLine")
     companion object {
-        // TODO: consider changing these to MOBILE_HOME_URL after the following task is resolved:
-        // https://phabricator.wikimedia.org/T380527
-        private const val VANISH_ACCOUNT_URL = MOBILE_META_URL + "Special:GlobalVanishRequest"
-        private const val VANISH_ACCOUNT_SUCCESS_URL = MOBILE_META_URL + "Special:GlobalVanishRequest/vanished"
+        const val GET_CONTENT_PICKER_HELP_URL = "https://commons-app.github.io/docs.html#get-content"
+        private const val VANISH_ACCOUNT_URL = "https://meta.m.wikimedia.org/wiki/Special:Contact/accountvanishapps"
+        private const val VANISH_ACCOUNT_SUCCESS_URL = "https://meta.m.wikimedia.org/wiki/Special:GlobalVanishRequest/vanished"
         /**
          * Create Locale based on different types of language codes
          * @param languageCode

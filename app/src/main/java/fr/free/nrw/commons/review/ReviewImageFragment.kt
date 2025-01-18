@@ -31,7 +31,7 @@ class ReviewImageFragment : CommonsDaggerSupportFragment() {
     lateinit var sessionManager: SessionManager
 
     // Constant variable used to store user's key name for onSaveInstanceState method
-    private val SAVED_USER = "saved_user"
+    private val savedUser = "saved_user"
 
     // Variable that stores the value of user
     private var user: String? = null
@@ -129,7 +129,7 @@ class ReviewImageFragment : CommonsDaggerSupportFragment() {
                 question = getString(R.string.review_thanks)
 
                 user = reviewActivity.reviewController.firstRevision?.user()
-                    ?: savedInstanceState?.getString(SAVED_USER)
+                    ?: savedInstanceState?.getString(savedUser)
 
                 //if the user is null because of whatsoever reason, review will not be sent anyways
                 if (!user.isNullOrEmpty()) {
@@ -172,7 +172,7 @@ class ReviewImageFragment : CommonsDaggerSupportFragment() {
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         //Save user name when configuration changes happen
-        outState.putString(SAVED_USER, user)
+        outState.putString(savedUser, user)
     }
 
     private val reviewCallback: ReviewController.ReviewCallback
