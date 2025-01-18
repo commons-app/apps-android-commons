@@ -8,8 +8,8 @@ class BookmarkLocationsViewModel(
     private val bookmarkLocationsDao: BookmarkLocationsDao
 ): ViewModel() {
 
-    fun getAllBookmarkLocations(): Flow<List<Place>> {
-        return bookmarkLocationsDao.getAllBookmarksLocationsPlace()
-    }
+//    fun getAllBookmarkLocations(): List<Place> {
+//        return bookmarkLocationsDao.getAllBookmarksLocationsPlace()
+//    }
 
 }

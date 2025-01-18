@@ -9,6 +9,7 @@ import fr.free.nrw.commons.nearby.NearbyController
 import fr.free.nrw.commons.nearby.Place
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.map
 
 @Dao
 abstract class BookmarkLocationsDao {
@@ -17,7 +18,7 @@ abstract class BookmarkLocationsDao {
     abstract suspend fun addBookmarkLocation(bookmarkLocation: BookmarksLocations)
 
     @Query("SELECT * FROM bookmarks_locations")
-    abstract suspend fun getAllBookmarksLocations(): List<BookmarksLocations>
+    abstract fun getAllBookmarksLocations(): Flow<List<BookmarksLocations>>
 
     @Query("SELECT EXISTS (SELECT 1 FROM bookmarks_locations WHERE location_name = :name)")
     abstract suspend fun findBookmarkLocation(name: String): Boolean
@@ -44,6 +45,6 @@ abstract class BookmarkLocationsDao {
     }
 
     fun getAllBookmarksLocationsPlace(): Flow<List<Place>> {
-        return flow { getAllBookmarksLocations().map { it.toPlace() } }
+        return flow { getAllBookmarksLocations().map { it.map { it1 -> it1.toPlace() } } }
     }
 }
