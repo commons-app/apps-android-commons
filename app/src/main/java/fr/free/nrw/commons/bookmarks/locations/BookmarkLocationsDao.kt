@@ -18,7 +18,7 @@ abstract class BookmarkLocationsDao {
     abstract suspend fun addBookmarkLocation(bookmarkLocation: BookmarksLocations)
 
     @Query("SELECT * FROM bookmarks_locations")
-    abstract fun getAllBookmarksLocations(): Flow<List<BookmarksLocations>>
+    abstract suspend fun getAllBookmarksLocations(): List<BookmarksLocations>
 
     @Query("SELECT EXISTS (SELECT 1 FROM bookmarks_locations WHERE location_name = :name)")
     abstract suspend fun findBookmarkLocation(name: String): Boolean
@@ -44,7 +44,7 @@ abstract class BookmarkLocationsDao {
         return !bookmarkLocationExists
     }
 
-    fun getAllBookmarksLocationsPlace(): Flow<List<Place>> {
-        return flow { getAllBookmarksLocations().map { it.map { it1 -> it1.toPlace() } } }
+    suspend fun getAllBookmarksLocationsPlace(): List<Place> {
+        return getAllBookmarksLocations().map { it.toPlace() }
     }
 }
