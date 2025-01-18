@@ -235,6 +235,7 @@ class WikidataEditService @Inject constructor(
             }
     }
 
+    @SuppressLint("NewApi")
     private fun captionEdits(contribution: Contribution, fileEntityId: Long): Observable<Boolean> {
         return Observable.fromIterable(contribution.media.captions.entries)
             .concatMap { addCaption(fileEntityId, it.key, it.value) }

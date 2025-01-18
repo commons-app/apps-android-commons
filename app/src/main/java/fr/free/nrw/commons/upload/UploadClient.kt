@@ -261,6 +261,7 @@ class UploadClient
             fileKey: String?,
         ): Observable<UploadResult?> =
             try {
+                Timber.d( "Step 1")
                 uploadInterface
                     .uploadFileFromStash(
                         csrfTokenClient.getTokenBlocking(),
@@ -269,12 +270,25 @@ class UploadClient
                         uniqueFileName!!,
                         fileKey!!,
                     ).map { uploadResponse: JsonObject? ->
+                        Timber.d("Step 2")
+                        Timber.d(uploadResponse.toString())
                         val uploadResult = gson.fromJson(uploadResponse, UploadResponse::class.java)
+                        Timber.d("Step 3: Upload result - ${uploadResult.upload}")
+
                         if (uploadResult.upload == null) {
+                            // Parse the error to MwException
                             val exception = gson.fromJson(uploadResponse, MwException::class.java)
                             Timber.e(exception, "Error in uploading file from stash")
-                            throw Exception(exception.errorCode)
+
+                            // Handle abuse filter warning explicitly
+                            if (exception.errorCode?.contains("abusefilter-warning") == true) {
+                                Timber.w("Abuse filter triggered: ${exception.errorCode}")
+                                throw Exception("Abuse filter warning: ${exception.errorCode}. Please verify file content or metadata.")
+                            } else {
+                                throw Exception(exception.errorCode)
+                            }
                         }
+                        Timber.d("Step 4")
                         uploadResult.upload
                     }
             } catch (throwable: Throwable) {
