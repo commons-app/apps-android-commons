@@ -15,7 +15,7 @@ class ResultTuple {
     }
 
     constructor() {
-        language = ""
+        language = "en"
         type = ""
         value = ""
     }
