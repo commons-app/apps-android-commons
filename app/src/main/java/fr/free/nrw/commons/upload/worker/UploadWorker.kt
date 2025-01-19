@@ -525,7 +525,6 @@ class UploadWorker(
                 .blockingGet()
         contributionFromUpload.dateModified = Date()
         contributionDao.deleteAndSaveContribution(contribution, contributionFromUpload)
-
         // Upload success, save to uploaded status.
         saveIntoUploadedStatus(contribution)
     }
