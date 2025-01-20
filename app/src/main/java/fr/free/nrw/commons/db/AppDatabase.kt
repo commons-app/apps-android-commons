@@ -1,8 +1,12 @@
 package fr.free.nrw.commons.db
 
+import android.content.Context
 import androidx.room.Database
+import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
+import androidx.room.migration.Migration
+import androidx.sqlite.db.SupportSQLiteDatabase
 import fr.free.nrw.commons.bookmarks.category.BookmarkCategoriesDao
 import fr.free.nrw.commons.bookmarks.category.BookmarksCategoryModal
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao
