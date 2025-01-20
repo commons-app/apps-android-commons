@@ -875,6 +875,12 @@
   <string name="usages_on_commons_heading">كومنز</string>
   <string name="usages_on_other_wikis_heading">مواقع ويكي أخرى</string>
   <string name="file_usages_container_heading">حالات استخدام الملف</string>
+  <string name="title_activity_single_web_view">نشاط عرض ويب واحد</string>
+  <string name="account">حساب</string>
+  <string name="vanish_account">حذف الحساب</string>
+  <string name="account_vanish_request_confirm_title">تحذير من اختفاء الحساب</string>
+  <string name="account_vanish_request_confirm">الاختفاء هو &lt;b&gt;الملاذ الأخير&lt;/b&gt; ويجب &lt;b&gt;استخدامه فقط عندما ترغب في التوقف عن التحرير إلى الأبد&lt;/b&gt; وأيضًا لإخفاء أكبر عدد ممكن من ارتباطاتك السابقة.&lt;br/&gt;&lt;br/&gt; يتم حذف الحساب على ويكيميديا كومنز عن طريق تغيير اسم حسابك بحيث لا يتمكن الآخرون من التعرف على مساهماتك في عملية تسمى اختفاء الحساب. &lt;b&gt;لا يضمن الاختفاء عدم الكشف عن الهوية تمامًا أو إزالة المساهمات في المشاريع&lt;/b&gt; .</string>
   <string name="caption">الشرح</string>
   <string name="caption_copied_to_clipboard">تم نسخ التسمية التوضيحية إلى الحافظة</string>
+  <string name="congratulations_all_pictures_in_this_album_have_been_either_uploaded_or_marked_as_not_for_upload">مبروك، جميع الصور الموجودة في هذا الألبوم تم تحميلها أو تم وضع علامة عليها بأنها غير قابلة للتحميل.</string>
 </resources>
