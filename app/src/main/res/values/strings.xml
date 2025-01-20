@@ -869,4 +869,5 @@ Upload your first media by tapping on the add button.</string>
   <string name="caption_copied_to_clipboard">Caption copied to clipboard</string>
   <string name="congratulations_all_pictures_in_this_album_have_been_either_uploaded_or_marked_as_not_for_upload">Congratulations, all pictures in this album have been either uploaded or marked as not for upload.</string>
 
+  <string name="show_in_explore">Show in Explore</string>
 </resources>
