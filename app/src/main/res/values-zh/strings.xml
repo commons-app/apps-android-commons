@@ -61,7 +61,7 @@
 <resources>
   <string name="commons_facebook">共享资源Facebook页面</string>
   <string name="commons_github">共享资源Github源代码</string>
-  <string name="commons_logo">共享资源标志</string>
+  <string name="commons_logo">共享资源标识</string>
   <string name="commons_website">共享资源网站</string>
   <string name="exit_location_picker">退出位置选择器</string>
   <string name="submit">提交</string>
@@ -857,7 +857,16 @@
   <string name="green_pin">这个地点已经有照片了。</string>
   <string name="grey_pin">现在检查这个地点是否有照片。</string>
   <string name="error_while_loading">加载时出错</string>
+  <string name="no_usages_found">未找到用法</string>
   <string name="usages_on_commons_heading">维基共享资源</string>
   <string name="usages_on_other_wikis_heading">其它wiki</string>
   <string name="file_usages_container_heading">文件用途</string>
+  <string name="title_activity_single_web_view">单一网页视图活动</string>
+  <string name="account">账号</string>
+  <string name="vanish_account">隐退账号</string>
+  <string name="account_vanish_request_confirm_title">隐退账号警告</string>
+  <string name="account_vanish_request_confirm">消失是一个&lt;b&gt;最后的手段&lt;/b&gt;，应该&lt;b&gt;仅在您希望永远停止编辑时使用&lt;/b&gt;，并尽可能隐藏您过去的关联。&lt;br/&gt;&lt;br/&gt;在维基媒体共享资源上删除账户是通过更改您的账户名称，使其他人无法识别您的贡献，这个过程称为账户消失。&lt;b&gt;消失并不能保证完全匿名，也无法删除对项目的贡献&lt;/b&gt;。</string>
+  <string name="caption">说明</string>
+  <string name="caption_copied_to_clipboard">已复制到剪贴板</string>
+  <string name="congratulations_all_pictures_in_this_album_have_been_either_uploaded_or_marked_as_not_for_upload">恭喜，专辑中的所有图片都已上传或标记为不上传。</string>
 </resources>
