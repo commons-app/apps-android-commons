@@ -42,8 +42,7 @@ import org.robolectric.annotation.Config
 @Config(sdk = [21], application = TestCommonsApplication::class)
 class BookMarkLocationDaoTest {
 
-    @Mock
-    var bookmarkLocationsDao: BookmarkLocationsDao? = null
+    private lateinit var bookmarkLocationsDao: BookmarkLocationsDao
 
     private lateinit var database: AppDatabase
 
@@ -92,17 +91,67 @@ class BookMarkLocationDaoTest {
     }
 
     @Test
-    fun insertAndRetrieveBookmark() = runBlocking {
-        // Insert a bookmark
-        bookmarkLocationsDao?.addBookmarkLocation(examplePlaceBookmark.toBookmarksLocations())
+    fun testForAddAndGetAllBookmarkLocations() = runBlocking {
+        bookmarkLocationsDao.addBookmarkLocation(examplePlaceBookmark.toBookmarksLocations())
 
-        // Retrieve all bookmarks
-        val bookmarks = bookmarkLocationsDao?.getAllBookmarksLocations()
+        val bookmarks = bookmarkLocationsDao.getAllBookmarksLocations()
 
-        // Assert the bookmark exists
-        assertEquals(1, bookmarks?.size)
-        val retrievedBookmark = bookmarks?.first()
-        assertEquals(examplePlaceBookmark.name, retrievedBookmark?.locationName)
-        assertEquals(examplePlaceBookmark.language, retrievedBookmark?.locationLanguage)
+        assertEquals(1, bookmarks.size)
+        val retrievedBookmark = bookmarks.first()
+        assertEquals(examplePlaceBookmark.name, retrievedBookmark.locationName)
+        assertEquals(examplePlaceBookmark.language, retrievedBookmark.locationLanguage)
+    }
+
+    @Test
+    fun testFindBookmarkByNameForTrue() = runBlocking {
+        bookmarkLocationsDao.addBookmarkLocation(examplePlaceBookmark.toBookmarksLocations())
+
+        val exists = bookmarkLocationsDao.findBookmarkLocation(examplePlaceBookmark.name)
+        assertTrue(exists)
+    }
+
+    @Test
+    fun testFindBookmarkByNameForFalse() = runBlocking {
+        bookmarkLocationsDao.addBookmarkLocation(examplePlaceBookmark.toBookmarksLocations())
+
+        val exists = bookmarkLocationsDao.findBookmarkLocation("xyz")
+        assertFalse(exists)
+    }
+
+    @Test
+    fun testDeleteBookmark() = runBlocking {
+        val bookmarkLocation = examplePlaceBookmark.toBookmarksLocations()
+        bookmarkLocationsDao.addBookmarkLocation(bookmarkLocation)
+
+        bookmarkLocationsDao.deleteBookmarkLocation(bookmarkLocation)
+
+        val bookmarks = bookmarkLocationsDao.getAllBookmarksLocations()
+        assertTrue(bookmarks.isEmpty())
+    }
+
+    @Test
+    fun testUpdateBookmarkForTrue() = runBlocking {
+        val exists = bookmarkLocationsDao.updateBookmarkLocation(examplePlaceBookmark)
+
+        assertTrue(exists)
+    }
+
+    @Test
+    fun testUpdateBookmarkForFalse() = runBlocking {
+        val newBookmark = examplePlaceBookmark.toBookmarksLocations()
+        bookmarkLocationsDao.addBookmarkLocation(newBookmark)
+
+        val exists = bookmarkLocationsDao.updateBookmarkLocation(examplePlaceBookmark)
+        assertFalse(exists)
+    }
+
+    @Test
+    fun testGetAllBookmarksLocationsPlace() = runBlocking {
+        val bookmarkLocation = examplePlaceBookmark.toBookmarksLocations()
+        bookmarkLocationsDao.addBookmarkLocation(bookmarkLocation)
+
+        val bookmarks = bookmarkLocationsDao.getAllBookmarksLocationsPlace()
+        assertEquals(1, bookmarks.size)
+        assertEquals(examplePlaceBookmark.name, bookmarks.first().name)
     }
 }

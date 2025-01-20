@@ -129,7 +129,7 @@ class BookmarkLocationsFragment : DaggerFragment() {
         initList()
     }
 
-    private fun initList() {
+    fun initList() {
         var places: List<Place>
         viewLifecycleOwner.lifecycleScope.launch {
             places = controller.loadFavoritesLocations()
