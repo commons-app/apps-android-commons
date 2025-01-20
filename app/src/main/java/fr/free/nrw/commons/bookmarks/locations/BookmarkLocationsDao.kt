@@ -7,43 +7,58 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import fr.free.nrw.commons.nearby.NearbyController
 import fr.free.nrw.commons.nearby.Place
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.map
 
+/**
+ * DAO for managing bookmark locations in the database.
+ */
 @Dao
 abstract class BookmarkLocationsDao {
 
+    /**
+     * Adds or updates a bookmark location in the database.
+     */
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     abstract suspend fun addBookmarkLocation(bookmarkLocation: BookmarksLocations)
 
+    /**
+     * Fetches all bookmark locations from the database.
+     */
     @Query("SELECT * FROM bookmarks_locations")
     abstract suspend fun getAllBookmarksLocations(): List<BookmarksLocations>
 
+    /**
+     * Checks if a bookmark location exists by name.
+     */
     @Query("SELECT EXISTS (SELECT 1 FROM bookmarks_locations WHERE location_name = :name)")
     abstract suspend fun findBookmarkLocation(name: String): Boolean
 
+    /**
+     * Deletes a bookmark location from the database.
+     */
     @Delete
     abstract suspend fun deleteBookmarkLocation(bookmarkLocation: BookmarksLocations)
 
+    /**
+     * Adds or removes a bookmark location and updates markers.
+     * @return `true` if added, `false` if removed.
+     */
     suspend fun updateBookmarkLocation(bookmarkLocation: Place): Boolean {
-        val bookmarkLocationExists = findBookmarkLocation(bookmarkLocation.name)
+        val exists = findBookmarkLocation(bookmarkLocation.name)
 
-        if(bookmarkLocationExists) {
-            deleteBookmarkLocation(
-                bookmarkLocation.toBookmarksLocations()
-            )
+        if (exists) {
+            deleteBookmarkLocation(bookmarkLocation.toBookmarksLocations())
             NearbyController.updateMarkerLabelListBookmark(bookmarkLocation, false)
         } else {
-            addBookmarkLocation(
-                bookmarkLocation.toBookmarksLocations()
-            )
+            addBookmarkLocation(bookmarkLocation.toBookmarksLocations())
             NearbyController.updateMarkerLabelListBookmark(bookmarkLocation, true)
         }
 
-        return !bookmarkLocationExists
+        return !exists
     }
 
+    /**
+     * Fetches all bookmark locations as `Place` objects.
+     */
     suspend fun getAllBookmarksLocationsPlace(): List<Place> {
         return getAllBookmarksLocations().map { it.toPlace() }
     }

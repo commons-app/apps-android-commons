@@ -2,6 +2,7 @@ package fr.free.nrw.commons.bookmarks.locations
 
 import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.nearby.Place
+import kotlinx.coroutines.runBlocking
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
@@ -19,9 +20,11 @@ class BookmarkLocationControllerTest {
 
     @Before
     fun setup() {
-        MockitoAnnotations.initMocks(this)
-        whenever(bookmarkDao!!.getAllBookmarksLocations())
-            .thenReturn(mockBookmarkList)
+        MockitoAnnotations.openMocks(this)
+        runBlocking {
+            whenever(bookmarkDao!!.getAllBookmarksLocationsPlace())
+                .thenReturn(mockBookmarkList)
+        }
     }
 
     /**
@@ -66,7 +69,7 @@ class BookmarkLocationControllerTest {
      * Test case where all bookmark locations are fetched and media is found against it
      */
     @Test
-    fun loadBookmarkedLocations() {
+    fun loadBookmarkedLocations()  = runBlocking {
         val bookmarkedLocations =
             bookmarkLocationsController.loadFavoritesLocations()
         Assert.assertEquals(2, bookmarkedLocations.size.toLong())

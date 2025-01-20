@@ -22,6 +22,7 @@ import fr.free.nrw.commons.nearby.Place
 import fr.free.nrw.commons.nearby.fragments.CommonPlaceClickActions
 import fr.free.nrw.commons.nearby.fragments.PlaceAdapter
 import fr.free.nrw.commons.profile.ProfileActivity
+import kotlinx.coroutines.runBlocking
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
@@ -129,7 +130,9 @@ class BookmarkLocationFragmentUnitTests {
      */
     @Test
     fun testInitNonEmpty() {
-        whenever(controller.loadFavoritesLocations()).thenReturn(mockBookmarkList)
+        runBlocking {
+            whenever(controller.loadFavoritesLocations()).thenReturn(mockBookmarkList)
+        }
         val method: Method =
             BookmarkLocationsFragment::class.java.getDeclaredMethod("initList")
         method.isAccessible = true

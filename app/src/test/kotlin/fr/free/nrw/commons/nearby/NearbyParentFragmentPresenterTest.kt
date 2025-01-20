@@ -8,6 +8,7 @@ import fr.free.nrw.commons.location.LatLng
 import fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType
 import fr.free.nrw.commons.nearby.contract.NearbyParentFragmentContract
 import fr.free.nrw.commons.nearby.presenter.NearbyParentFragmentPresenter
+import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Before
@@ -463,7 +464,9 @@ class NearbyParentFragmentPresenterTest {
         nearbyPlacesInfo.searchLatLng = latestLocation
         nearbyPlacesInfo.placeList = emptyList<Place>()
 
-        whenever(bookmarkLocationsDao.getAllBookmarksLocations()).thenReturn(Collections.emptyList())
+        runBlocking {
+            whenever(bookmarkLocationsDao.getAllBookmarksLocations()).thenReturn(Collections.emptyList())
+        }
         nearbyPresenter.updateMapMarkers(nearbyPlacesInfo.placeList, latestLocation, null)
         Mockito.verify(nearbyParentFragmentView).setProgressBarVisibility(false)
     }
