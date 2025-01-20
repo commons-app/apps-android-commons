@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.bookmarks.locations
 
 import android.Manifest.permission
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,7 +9,9 @@ import android.view.ViewGroup
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts.RequestMultiplePermissions
 import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.android.support.DaggerFragment
 import fr.free.nrw.commons.R
@@ -131,9 +134,11 @@ class BookmarkLocationsFragment : DaggerFragment() {
 
     fun initList() {
         var places: List<Place>
-        viewLifecycleOwner.lifecycleScope.launch {
-            places = controller.loadFavoritesLocations()
-            updateUIList(places)
+        if(view != null) {
+            viewLifecycleOwner.lifecycleScope.launch {
+                places = controller.loadFavoritesLocations()
+                updateUIList(places)
+            }
         }
     }
 
