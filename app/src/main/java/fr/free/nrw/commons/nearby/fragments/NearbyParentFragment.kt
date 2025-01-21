@@ -306,11 +306,7 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(), NearbyParentFragmen
      */
     val WLM_URL = "https://commons.wikimedia.org/wiki/Commons:Mobile_app/Contributing_to_WLM_using_the_app"
 
-    fun newInstance(): NearbyParentFragment {
-        val fragment = NearbyParentFragment()
-        fragment.retainInstance = true
-        return fragment
-    }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -701,9 +697,18 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(), NearbyParentFragmen
 
     override fun onDestroyView() {
         super.onDestroyView()
-        searchHandler.removeCallbacks(searchRunnable!!)
-        presenter!!.removeNearbyPreferences(applicationKvStore!!)
+        searchRunnable?.let {
+            searchHandler.removeCallbacks(it)
+        } ?: run {
+            Timber.w("NearbyParentFragment: searchRunnable is null")
+        }
+
+        if (presenter == null) Timber.w("NearbyParentFragment: presenter is null")
+        if (applicationKvStore == null) Timber.w("NearbyParentFragment: applicationKvStore is null")
+
+        presenter?.removeNearbyPreferences(applicationKvStore ?: return)
     }
+
 
     private fun initViews() {
         Timber.d("init views called")
@@ -1340,6 +1345,7 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(), NearbyParentFragmen
             return false
         }
     }
+
 
     private fun showOpenFileDialog(context: Context, fileName: String, isGPX: Boolean) {
         val title = getString(R.string.file_saved_successfully)
@@ -2486,32 +2492,14 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(), NearbyParentFragmen
         const val WLM_URL: String =
             "https://commons.wikimedia.org/wiki/Commons:Mobile_app/Contributing_to_WLM_using_the_app"
 
+        @JvmStatic  // This makes it callable as a static method from Java
         fun newInstance(): NearbyParentFragment {
             val fragment = NearbyParentFragment()
             fragment.retainInstance = true
             return fragment
         }
 
-        fun saveFile(string: String, fileName: String): Boolean {
-            if (!isExternalStorageWritable) {
-                return false
-            }
 
-            val downloadsDir = Environment.getExternalStoragePublicDirectory(
-                Environment.DIRECTORY_DOWNLOADS
-            )
-            val kmlFile = File(downloadsDir, fileName)
-
-            try {
-                val fos = FileOutputStream(kmlFile)
-                fos.write(string.toByteArray())
-                fos.close()
-                return true
-            } catch (e: IOException) {
-                e.printStackTrace()
-                return false
-            }
-        }
 
         private val isExternalStorageWritable: Boolean
             get() {
