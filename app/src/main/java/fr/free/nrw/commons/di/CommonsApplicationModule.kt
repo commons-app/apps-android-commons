@@ -138,6 +138,7 @@ open class CommonsApplicationModule(private val applicationContext: Context) {
      */
     @Provides
     @Named("default_preferences")
+    @Singleton
     open fun providesDefaultKvStore(context: Context, gson: Gson): JsonKvStore =
         JsonKvStore(context, "${context.packageName}_preferences", gson)
 
