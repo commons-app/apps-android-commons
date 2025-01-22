@@ -34,7 +34,7 @@ interface CategoryInterface {
      * @return
      */
     @GET(
-        "w/api.php?action=query&format=json&formatversion=2&generator=allcategories&prop=categoryinfo|description|pageimages&piprop=thumbnail&pithumbsize=70",
+        "w/api.php?action=query&format=json&formatversion=2&redirects=true&generator=allcategories&prop=categoryinfo|description|pageimages&piprop=thumbnail&pithumbsize=70",
     )
     fun searchCategoriesForPrefix(
         @Query("gacprefix") prefix: String?,
