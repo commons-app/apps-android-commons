@@ -432,6 +432,44 @@ public class MainActivity extends BaseActivity
             });
     }
 
+    /**
+     * Launch the Explore fragment from Nearby fragment. This method is called when a user clicks
+     * the 'Show in Explore' option in the 3-dots menu in Nearby.
+     *
+     * @param zoom      current zoom of Nearby map
+     * @param latitude  current latitude of Nearby map
+     * @param longitude current longitude of Nearby map
+     **/
+    public void loadExploreMapFromNearby(double zoom, double latitude, double longitude) {
+        Bundle bundle = new Bundle();
+        bundle.putDouble("prev_zoom", zoom);
+        bundle.putDouble("prev_latitude", latitude);
+        bundle.putDouble("prev_longitude", longitude);
+
+        loadFragment(ExploreFragment.newInstance(), false);
+        exploreFragment.setArguments(bundle);
+        setSelectedItemId(NavTab.EXPLORE.code());
+    }
+
+    /**
+     * Launch the Nearby fragment from Explore fragment. This method is called when a user clicks
+     * the 'Show in Nearby' option in the 3-dots menu in Explore.
+     *
+     * @param zoom      current zoom of Explore map
+     * @param latitude  current latitude of Explore map
+     * @param longitude current longitude of Explore map
+     **/
+    public void loadNearbyMapFromExplore(double zoom, double latitude, double longitude) {
+        Bundle bundle = new Bundle();
+        bundle.putDouble("prev_zoom", zoom);
+        bundle.putDouble("prev_latitude", latitude);
+        bundle.putDouble("prev_longitude", longitude);
+
+        loadFragment(NearbyParentFragment.newInstance(), false);
+        nearbyParentFragment.setArguments(bundle);
+        setSelectedItemId(NavTab.NEARBY.code());
+    }
+
     @Override
     protected void onResume() {
         super.onResume();
