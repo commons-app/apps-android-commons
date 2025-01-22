@@ -147,10 +147,10 @@ public class MainActivity extends BaseActivity
                 if (applicationKvStore.getBoolean("last_opened_nearby")) {
                     setTitle(getString(R.string.nearby_fragment));
                     showNearby();
-                    loadFragment(NearbyParentFragment.newInstance(), false);
+                    loadFragment(NearbyParentFragment.newInstance(), false, null);
                 } else {
                     setTitle(getString(R.string.contributions_fragment));
-                    loadFragment(ContributionsFragment.newInstance(), false);
+                    loadFragment(ContributionsFragment.newInstance(), false, null);
                 }
             }
             setUpPager();
@@ -188,25 +188,30 @@ public class MainActivity extends BaseActivity
                 applicationKvStore.putBoolean("last_opened_nearby",
                     item.getTitle().equals(getString(R.string.nearby_fragment)));
                 final Fragment fragment = NavTab.of(item.getOrder()).newInstance();
-                return loadFragment(fragment, true);
+                return loadFragment(fragment, true, null);
             });
     }
 
     private void setUpLoggedOutPager() {
-        loadFragment(ExploreFragment.newInstance(), false);
+        loadFragment(ExploreFragment.newInstance(), false, null);
         binding.fragmentMainNavTabLayout.setOnNavigationItemSelectedListener(item -> {
             if (!item.getTitle().equals(getString(R.string.more))) {
                 // do not change title for more fragment
                 setTitle(item.getTitle());
             }
             Fragment fragment = NavTabLoggedOut.of(item.getOrder()).newInstance();
-            return loadFragment(fragment, true);
+            return loadFragment(fragment, true, null);
         });
     }
 
-    private boolean loadFragment(Fragment fragment, boolean showBottom) {
+    private boolean loadFragment(Fragment fragment, boolean showBottom, Bundle args) {
         //showBottom so that we do not show the bottom tray again when constructing
         //from the saved instance state.
+
+        if (fragment != null && args != null) {
+            fragment.setArguments(args);
+        }
+
         if (fragment instanceof ContributionsFragment) {
             if (activeFragment == ActiveFragment.CONTRIBUTIONS) {
                 // scroll to top if already on the Contributions tab
@@ -335,16 +340,16 @@ public class MainActivity extends BaseActivity
     private void restoreActiveFragment(@NonNull String fragmentName) {
         if (fragmentName.equals(ActiveFragment.CONTRIBUTIONS.name())) {
             setTitle(getString(R.string.contributions_fragment));
-            loadFragment(ContributionsFragment.newInstance(), false);
+            loadFragment(ContributionsFragment.newInstance(), false, null);
         } else if (fragmentName.equals(ActiveFragment.NEARBY.name())) {
             setTitle(getString(R.string.nearby_fragment));
-            loadFragment(NearbyParentFragment.newInstance(), false);
+            loadFragment(NearbyParentFragment.newInstance(), false, null);
         } else if (fragmentName.equals(ActiveFragment.EXPLORE.name())) {
             setTitle(getString(R.string.navigation_item_explore));
-            loadFragment(ExploreFragment.newInstance(), false);
+            loadFragment(ExploreFragment.newInstance(), false, null);
         } else if (fragmentName.equals(ActiveFragment.BOOKMARK.name())) {
             setTitle(getString(R.string.bookmarks));
-            loadFragment(BookmarkFragment.newInstance(), false);
+            loadFragment(BookmarkFragment.newInstance(), false, null);
         }
     }
 
@@ -446,8 +451,7 @@ public class MainActivity extends BaseActivity
         bundle.putDouble("prev_latitude", latitude);
         bundle.putDouble("prev_longitude", longitude);
 
-        loadFragment(ExploreFragment.newInstance(), false);
-        exploreFragment.setArguments(bundle);
+        loadFragment(ExploreFragment.newInstance(), false, bundle);
         setSelectedItemId(NavTab.EXPLORE.code());
     }
 
@@ -465,8 +469,7 @@ public class MainActivity extends BaseActivity
         bundle.putDouble("prev_latitude", latitude);
         bundle.putDouble("prev_longitude", longitude);
 
-        loadFragment(NearbyParentFragment.newInstance(), false);
-        nearbyParentFragment.setArguments(bundle);
+        loadFragment(NearbyParentFragment.newInstance(), false, bundle);
         setSelectedItemId(NavTab.NEARBY.code());
     }
 
