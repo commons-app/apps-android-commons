@@ -253,9 +253,6 @@
   <string name="about_translate_proceed">Procedeix</string>
   <string name="about_translate_cancel">Cancel·la</string>
   <string name="retry">Torna-ho a provar</string>
-  <string name="showcase_view_needs_photo">Aquest lloc necessita una foto.</string>
-  <string name="showcase_view_has_photo">Aquest lloc ja té una foto.</string>
-  <string name="showcase_view_no_longer_exists">Aquest lloc ja no existeix.</string>
   <string name="no_images_found">No s’ha trobat cap imatge.</string>
   <string name="error_loading_images">S\'ha produït un error en carregar les imatges.</string>
   <string name="image_uploaded_by">Carregada per: %1$s</string>

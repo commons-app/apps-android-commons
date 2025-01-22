@@ -336,10 +336,6 @@
   <string name="about_translate_proceed">Fortfahren</string>
   <string name="about_translate_cancel">Abbrechen</string>
   <string name="retry">Erneut versuchen</string>
-  <string name="showcase_view_whole_nearby_activity">Dies sind die Orte in deiner Nähe, die Bilder zur Illustration ihrer Wikipedia-Artikel benötigen.\n\nEin Klick auf „DIESEN BEREICH DURCHSUCHEN“ sperrt die Karte und startet eine Suche um diesen Standort.</string>
-  <string name="showcase_view_needs_photo">Dieser Ort braucht ein Foto.</string>
-  <string name="showcase_view_has_photo">Dieser Ort hat bereits ein Foto.</string>
-  <string name="showcase_view_no_longer_exists">Dieser Ort existiert nicht mehr.</string>
   <string name="no_images_found">Keine Bilder gefunden!</string>
   <string name="error_loading_images">Beim Laden der Bilder ist ein Fehler aufgetreten.</string>
   <string name="image_uploaded_by">Hochgeladen von: %1$s</string>

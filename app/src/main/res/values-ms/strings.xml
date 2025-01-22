@@ -204,9 +204,6 @@
   <string name="about_translate_title">Bahasa</string>
   <string name="about_translate_cancel">Batalkan</string>
   <string name="retry">Cuba lagi</string>
-  <string name="showcase_view_needs_photo">Tempat ini memerlukan foto.</string>
-  <string name="showcase_view_has_photo">Tempat ini sudah mempunyai foto.</string>
-  <string name="showcase_view_no_longer_exists">Tempat ini tidak lagi wujud.</string>
   <string name="no_images_found">Tiada imej dijumpai!</string>
   <string name="block_notification_title">Disekat</string>
   <string name="block_notification">Anda disekat daripada menyunting Commons</string>

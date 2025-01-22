@@ -332,10 +332,6 @@
   <string name="about_translate_proceed">Dalej</string>
   <string name="about_translate_cancel">Anuluj</string>
   <string name="retry">Ponów próbę</string>
-  <string name="showcase_view_whole_nearby_activity">Kliknięcie „WYSZUKAJ TEN OBSZAR” blokuje mapę i rozpoczyna pobliskie wyszukiwanie w tej lokalizacji.</string>
-  <string name="showcase_view_needs_photo">To miejsce wymaga zdjęcia.</string>
-  <string name="showcase_view_has_photo">To miejsce już posiada zdjęcie.</string>
-  <string name="showcase_view_no_longer_exists">To miejsce już nie istnieje.</string>
   <string name="no_images_found">Nie znaleziono grafik!</string>
   <string name="error_loading_images">Wystąpił błąd podczas wczytywania grafik.</string>
   <string name="image_uploaded_by">Przesłano przez %1$s</string>

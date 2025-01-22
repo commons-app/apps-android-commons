@@ -232,9 +232,6 @@
   <string name="about_translate">Превеждане</string>
   <string name="about_translate_title">Езици</string>
   <string name="about_translate_cancel">Отказ</string>
-  <string name="showcase_view_needs_photo">Това място има нужда от снимка.</string>
-  <string name="showcase_view_has_photo">От това място вече има снимка.</string>
-  <string name="showcase_view_no_longer_exists">Това място вече не съществува.</string>
   <string name="no_images_found">Не са открити изображения!</string>
   <string name="menu_search_button">Търсене</string>
   <string name="search_commons">Търсене в Общомедия</string>

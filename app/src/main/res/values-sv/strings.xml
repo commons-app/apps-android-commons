@@ -306,10 +306,6 @@
   <string name="about_translate_proceed">Fortsätt</string>
   <string name="about_translate_cancel">Avbryt</string>
   <string name="retry">Försök igen</string>
-  <string name="showcase_view_whole_nearby_activity">Detta är platserna nära dig som behöver bilder för att illustrera deras Wikipediaartiklar.\n\nNär du klickar på \"SÖK I DETTA OMRÅDE\" kommer kartan låsas och en sökning startas i närheten runt detta plats.</string>
-  <string name="showcase_view_needs_photo">Den här platsen behöver ett foto.</string>
-  <string name="showcase_view_has_photo">Den här platsen har redan ett foto.</string>
-  <string name="showcase_view_no_longer_exists">Den här platsen finns inte längre.</string>
   <string name="no_images_found">Inga bilder hittades!</string>
   <string name="error_loading_images">Ett fel uppstod vid inläsning av bilder.</string>
   <string name="image_uploaded_by">Uppladdad av: %1$s</string>

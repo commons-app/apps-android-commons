@@ -307,10 +307,6 @@
   <string name="about_translate_proceed">진행</string>
   <string name="about_translate_cancel">취소</string>
   <string name="retry">다시 시도</string>
-  <string name="showcase_view_whole_nearby_activity">위키백과 글을 꾸며 줄 당신 주변의 사진 장소입니다.\n\n\'이 지역을 검색\'을 눌러 지도에서 장소 주변 검색을 시작하세요.</string>
-  <string name="showcase_view_needs_photo">이 장소에는 사진이 필요합니다.</string>
-  <string name="showcase_view_has_photo">이 장소의 사진이 이미 있습니다.</string>
-  <string name="showcase_view_no_longer_exists">이 장소는 더 이상 있지 않습니다.</string>
   <string name="no_images_found">그림이 없습니다!</string>
   <string name="error_loading_images">그림을 불러오는 동안 오류가 발생했습니다.</string>
   <string name="image_uploaded_by">올린이: %1$s</string>

@@ -293,10 +293,6 @@
   <string name="about_translate_proceed">Himoyalash</string>
   <string name="about_translate_cancel">Bekor qilish</string>
   <string name="retry">Qayta urinish</string>
-  <string name="showcase_view_whole_nearby_activity">Bu joylar Sizga Vikipediyadagi maqolalarini tasvirlash uchun yaqinlari hisoblanadi.\n\n“SHU HUDUDDAN IZLASH” tugmasini bosish xaritani qulflaydi va oʻsha joy atrofida yaqin atrofdagi qidiruvni boshlaydi.</string>
-  <string name="showcase_view_needs_photo">Bu joyga rasm kerak.</string>
-  <string name="showcase_view_has_photo">Bu joyning rasmi bor.</string>
-  <string name="showcase_view_no_longer_exists">Bu endi mavjud emas.</string>
   <string name="no_images_found">Rasm topilmadi!</string>
   <string name="error_loading_images">Rasmlarni joylashda xatolik yuz berdi.</string>
   <string name="image_uploaded_by">%1$s tomonidan joylangan</string>

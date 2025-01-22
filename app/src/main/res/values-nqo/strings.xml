@@ -257,10 +257,6 @@
   <string name="about_translate_proceed">ߊ߬ ߣߐ߬ߝߍ߬ߜߍ߲߫</string>
   <string name="about_translate_cancel">ߊ߬ ߘߐߛߊ߬</string>
   <string name="retry">ߊ߬ ߡߊߝߍߣߍ߲߫ ߕߎ߲߯</string>
-  <string name="showcase_view_whole_nearby_activity">ߦߙߐ ߘߏ߫ ߟߎ߫ ߦߴߌ ߕߙߐߝߍ߬ ߡߍ߲ ߠߎ߬ ߡߊ߬ߞߏ ߦߋ߫ ߖߌ߬ߦߊ߬ߓߍ ߟߊ߫ ߞߵߊ߬ߟߎ߫ ߟߊ߫ ߥߞߌߐߔߋߘߌߦߊ ߞߎߡߘߊ ߟߎ߬ ߡߊߦߋߙߋ߲߫.\n\nߴߴߴߘߌ߲߬ߞߌߙߊ ߣߌ߲߬ ߢߌߣߌ߲ߴߴߴ ߛߐ߲߬ߞߌ߲ ߘߌ߫ ߔߊ߬ߔߘߊ ߛߐ߰ ߞߊ߬ ߛߌ߰ߢߐ߲߰ ߘߌ߲ߞߌߙߊ ߢߌߣߌ߲ ߘߊߡߌ߬ߣߊ߬ ߌ ߟߊߡߌߣߌ߲ ߘߐ߫.</string>
-  <string name="showcase_view_needs_photo">ߦߙߐ ߡߊ߬ߞߏ ߦߋ߫ ߖߌ߬ߦߊ߬ߓߍ ߟߊ߫</string>
-  <string name="showcase_view_has_photo">ߖߌ߬ߦߊ߬ߓߍ ߘߏ߫ ߦߋ߫ ߦߙߐ ߣߌ߲߬ ߘߐ߫ ߞߘߐ߬ߡߊ߲߫</string>
-  <string name="showcase_view_no_longer_exists">ߦߙߐ ߣߌ߲߬ ߕߍߣߊ߬ ߡߍ߲߫ ߠߊ߫ ߓߍߓߊ߯ߦߊ ߘߐ߫ ߏ߬ ߞߐ߫.</string>
   <string name="no_images_found">ߖߌ߬ߦߊ߬ߓߍ߫ ߡߊ߫ ߛߐ߬ߘߐ߲߬</string>
   <string name="error_loading_images">ߝߎ߬ߕߎ߲߬ߕߌ ߓߌ߬ߟߊ߬ߣߍ߲߫ ߊ߬ ߘߐ߫ ߞߵߌ ߕߏ߫ ߖߌ߬ߦߊ߬ߓߍ ߟߊߦߍ߬ߟߍ ߞߊ߲߬.</string>
   <string name="image_uploaded_by">ߖߌ߬ߦߊ߬ߓߍ ߟߊ߬ߦߟߍ߬ߣߍ߲߬ ߦߋ߫:  %1$s ߟߋ߬ ߓߟߏ߫</string>

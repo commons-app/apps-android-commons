@@ -300,10 +300,6 @@
   <string name="about_translate_proceed">Настави</string>
   <string name="about_translate_cancel">Откажи</string>
   <string name="retry">Покушај поново</string>
-  <string name="showcase_view_whole_nearby_activity">Ово су места у Вашој близини којима је потребна слика да илуструје њихове чланке на Википедији.\n\nКликом на \"ПРЕТРАЖИТЕ ОВУ ОБЛАСТ\" закључава се мапа и покреће претрагу у близини те локације.</string>
-  <string name="showcase_view_needs_photo">Овом месту је потребна фотографија.</string>
-  <string name="showcase_view_has_photo">Ово место већ има фотографију.</string>
-  <string name="showcase_view_no_longer_exists">Ово место више не постоји.</string>
   <string name="no_images_found">Слике нису пронађене.</string>
   <string name="error_loading_images">Дошло је до грешке при учитавању слика.</string>
   <string name="image_uploaded_by">Отпремио/ла: %1$s</string>

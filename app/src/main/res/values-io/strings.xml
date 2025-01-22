@@ -297,10 +297,6 @@
   <string name="about_translate_proceed">Durigar</string>
   <string name="about_translate_cancel">Nuligar</string>
   <string name="retry">Probar itere</string>
-  <string name="showcase_view_whole_nearby_activity">Yen loki proxim vu qui bezonas imaji por ilustrar lia artikli che Wikipedio.\n\nKliktez \'SERCHEZ CA ZONO\' (\'SEARCH THIS AREA\') konjelas la mapo, e lansas serchado en regioni proxima de ta lokizo.</string>
-  <string name="showcase_view_needs_photo">Ca loko bezonas fotografuro.</string>
-  <string name="showcase_view_has_photo">Ca loko ja havas fotografuro.</string>
-  <string name="showcase_view_no_longer_exists">Ca loko ne pluse existas.</string>
   <string name="no_images_found">Nula imajo trovesis!</string>
   <string name="error_loading_images">Eventis eroro dum charjado di imaji.</string>
   <string name="image_uploaded_by">Adkargita da: %1$s</string>

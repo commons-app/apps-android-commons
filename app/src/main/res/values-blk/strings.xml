@@ -142,8 +142,6 @@
   <string name="about_translate_proceed">ခွုမ်မာꩻသွုပ်ထဲင်း</string>
   <string name="about_translate_cancel">မာꩻတဝ်းဒွုမ်</string>
   <string name="retry">မာꩻချာယင်း</string>
-  <string name="showcase_view_needs_photo">ခင်ႏလမ်းယိုနဝ်ꩻ အဝ်ႏလိုႏဓာတ်ပုင်ႏသြ။</string>
-  <string name="showcase_view_has_photo">ခင်ႏလမ်းယိုနဝ်ꩻ ဓာတ်ပုင်ႏအဝ်ႏထွူလဲဉ်းတပုင်ႏသြ။</string>
   <string name="no_images_found">မော့ꩻတဝ်းဓာတ်ပုင်ႏ</string>
   <string name="block_notification_title">ပေ့ꩻဗိဉ်ႏခါꩻ</string>
   <string name="app_widget_heading">ဟန်ႏနီꩻ ဓာတ်ပုင်ႏတဲးဝါး</string>

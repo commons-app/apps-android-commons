@@ -322,10 +322,6 @@
   <string name="about_translate_proceed">Doorgaan</string>
   <string name="about_translate_cancel">Annuleren</string>
   <string name="retry">Opnieuw proberen</string>
-  <string name="showcase_view_whole_nearby_activity">Dit zijn de plaatsen bij u in de buurt die foto\'s nodig hebben om bijbehorende Wikipedia-artikelen te illustreren.\n\nHet klikken op \'ZOEK IN DIT GEBIED\' vergrendelt de kaart en start een zoekopdracht in de buurt rond de locatie.</string>
-  <string name="showcase_view_needs_photo">Deze plaats heeft een foto nodig.</string>
-  <string name="showcase_view_has_photo">Deze plaats heeft al een foto.</string>
-  <string name="showcase_view_no_longer_exists">Deze plek bestaat niet meer.</string>
   <string name="no_images_found">Geen afbeeldingen gevonden!</string>
   <string name="error_loading_images">Er is een fout opgetreden tijdens het laden van de afbeeldingen.</string>
   <string name="image_uploaded_by">Geüpload door: %1$s</string>
