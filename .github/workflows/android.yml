@@ -89,7 +89,7 @@ jobs:
         run: bash ./gradlew assembleBetaDebug --stacktrace
 
       - name: Upload betaDebug APK
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: betaDebugAPK
           path: app/build/outputs/apk/beta/debug/app-*.apk
@@ -98,7 +98,7 @@ jobs:
         run: bash ./gradlew assembleProdDebug --stacktrace
 
       - name: Upload prodDebug APK
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: prodDebugAPK
           path: app/build/outputs/apk/prod/debug/app-*.apk
