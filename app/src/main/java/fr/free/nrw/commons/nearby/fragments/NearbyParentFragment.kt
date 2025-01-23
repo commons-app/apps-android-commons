@@ -709,7 +709,6 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(), NearbyParentFragmen
         presenter?.removeNearbyPreferences(applicationKvStore ?: return)
     }
 
-
     private fun initViews() {
         Timber.d("init views called")
         initBottomSheets()
