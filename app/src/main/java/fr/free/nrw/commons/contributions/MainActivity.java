@@ -1,5 +1,7 @@
 package fr.free.nrw.commons.contributions;
 
+import static android.mediautil.MediaUtil.getContext;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
@@ -7,13 +9,19 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentManager.OnBackStackChangedListener;
 import androidx.work.ExistingWorkPolicy;
+import com.google.android.material.bottomnavigation.BottomNavigationView.OnNavigationItemSelectedListener;
 import fr.free.nrw.commons.databinding.MainBinding;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.WelcomeActivity;
@@ -22,6 +30,7 @@ import fr.free.nrw.commons.bookmarks.BookmarkFragment;
 import fr.free.nrw.commons.explore.ExploreFragment;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LocationServiceManager;
+import fr.free.nrw.commons.media.MediaClient;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
 import fr.free.nrw.commons.navtab.MoreBottomSheetFragment;
 import fr.free.nrw.commons.navtab.MoreBottomSheetLoggedOutFragment;
@@ -32,6 +41,7 @@ import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.nearby.fragments.NearbyParentFragment;
 import fr.free.nrw.commons.nearby.fragments.NearbyParentFragment.NearbyParentFragmentInstanceReadyCallback;
 import fr.free.nrw.commons.notification.NotificationActivity;
+import fr.free.nrw.commons.notification.NotificationActivity.Companion;
 import fr.free.nrw.commons.notification.NotificationController;
 import fr.free.nrw.commons.quiz.QuizChecker;
 import fr.free.nrw.commons.settings.SettingsFragment;
@@ -41,16 +51,20 @@ import fr.free.nrw.commons.upload.worker.WorkRequestHelper;
 import fr.free.nrw.commons.utils.PermissionUtils;
 import fr.free.nrw.commons.utils.ViewUtilWrapper;
 import io.reactivex.Completable;
+import io.reactivex.Scheduler;
+import io.reactivex.Single;
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Named;
+import kotlin.Unit;
 import timber.log.Timber;
 
 public class MainActivity extends BaseActivity
-    implements FragmentManager.OnBackStackChangedListener {
+    implements OnBackStackChangedListener {
 
     @Inject
     SessionManager sessionManager;
@@ -59,13 +73,18 @@ public class MainActivity extends BaseActivity
     @Inject
     ContributionDao contributionDao;
 
+    @Inject
+    ContributionsListPresenter contributionsListPresenter;
+    @Inject
+    ContributionsRemoteDataSource dataSource;
+
     private ContributionsFragment contributionsFragment;
     private NearbyParentFragment nearbyParentFragment;
     private ExploreFragment exploreFragment;
     private BookmarkFragment bookmarkFragment;
     public ActiveFragment activeFragment;
     private MediaDetailPagerFragment mediaDetailPagerFragment;
-    private NavTabLayout.OnNavigationItemSelectedListener navListener;
+    private OnNavigationItemSelectedListener navListener;
 
     @Inject
     public LocationServiceManager locationManager;
@@ -413,13 +432,46 @@ public class MainActivity extends BaseActivity
                 startActivity(new Intent(this, UploadProgressActivity.class));
                 return true;
             case R.id.notifications:
-                // Starts notification activity on click to notification icon
                 NotificationActivity.Companion.startYourself(this, "unread");
+                return true;
+            case R.id.menu_refresh:
+                // Refresh button handled in onCreateOptionsMenu through action layout
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        menu.clear(); // Clear the old menu to prevent duplication
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.contribution_activity_notification_menu, menu);
+
+        // Handle refresh button click
+        MenuItem refreshItem = menu.findItem(R.id.menu_refresh);
+        if (refreshItem != null) {
+            View actionView = refreshItem.getActionView();
+            if (actionView != null) {
+                ImageView refreshIcon = actionView.findViewById(R.id.refresh_icon);
+                if (refreshIcon != null) {
+                    refreshIcon.setOnClickListener(v -> {
+                        // Clear previous animation and start new one
+                        v.clearAnimation();
+                        Animation rotateAnimation = AnimationUtils.loadAnimation(this, R.anim.rotate);
+                        v.startAnimation(rotateAnimation);
+
+                        // Trigger refresh logic
+                        contributionsListPresenter.checkForNewContributions();
+                    });
+                }
+            }
+        }
+
+        return true;
+    }
+
 
     public void centerMapToPlace(Place place) {
         setSelectedItemId(NavTab.NEARBY.code());
@@ -435,14 +487,16 @@ public class MainActivity extends BaseActivity
     @Override
     protected void onResume() {
         super.onResume();
-
-        if ((applicationKvStore.getBoolean("firstrun", true)) &&
-            (!applicationKvStore.getBoolean("login_skipped"))) {
+        // Check if it's the first run and the user hasn't skipped login
+        if (applicationKvStore.getBoolean("firstrun", true) &&
+            !applicationKvStore.getBoolean("login_skipped")) {
             defaultKvStore.putBoolean("inAppCameraFirstRun", true);
             WelcomeActivity.startYourself(this);
         }
 
         retryAllFailedUploads();
+        // Background check for new contributions
+        contributionsListPresenter.checkForNewContributions();
     }
 
     @Override
@@ -480,7 +534,7 @@ public class MainActivity extends BaseActivity
         settingsFragment.setLocale(this, language);
     }
 
-    public NavTabLayout.OnNavigationItemSelectedListener getNavListener() {
+    public OnNavigationItemSelectedListener getNavListener() {
         return navListener;
     }
 }

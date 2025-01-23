@@ -1,14 +1,18 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto">
   <item
+    android:id="@+id/menu_refresh"
+    android:title="Refresh"
+    app:actionLayout="@layout/refresh_button_icon"
+    app:showAsAction="ifRoom|withText" />
+  <item
     android:id="@+id/upload_tab"
     android:title="Upload"
     app:actionLayout="@layout/pending_uploads_icon"
     app:showAsAction="ifRoom|withText" />
   <item
     android:id="@+id/notifications"
-    android:menuCategory="secondary"
-    android:title="@string/notifications"
+    android:title="Notifications"
     app:actionLayout="@layout/notification_icon"
     app:showAsAction="ifRoom|withText" />
 </menu>

@@ -2,9 +2,6 @@ package fr.free.nrw.commons.contributions;
 
 import static fr.free.nrw.commons.di.CommonsApplicationModule.IO_THREAD;
 
-import android.os.Handler;
-import android.os.Looper;
-
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -13,6 +10,7 @@ import androidx.paging.DataSource.Factory;
 import androidx.paging.LivePagedListBuilder;
 import androidx.paging.PagedList;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.contributions.ContributionsListContract.UserActionListener;
 import io.reactivex.Scheduler;
 import io.reactivex.disposables.CompositeDisposable;
@@ -22,6 +20,7 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Named;
 import kotlin.Unit;
+import timber.log.Timber;
 
 /**
  * The presenter class for Contributions
@@ -33,18 +32,17 @@ public class ContributionsListPresenter implements UserActionListener {
     private final Scheduler ioThreadScheduler;
 
     private final CompositeDisposable compositeDisposable;
-    private final ContributionsRemoteDataSource contributionsRemoteDataSource;
+    @Inject
+    ContributionsRemoteDataSource contributionsRemoteDataSource;
+
+    @Inject
+    SessionManager sessionManager;
 
     LiveData<PagedList<Contribution>> contributionList;
 
     private MutableLiveData<List<Contribution>> liveData = new MutableLiveData<>();
 
     private List<Contribution> existingContributions = new ArrayList<>();
-
-    // Timer for polling new contributions
-    private Handler pollingHandler;
-    private Runnable pollingRunnable;
-    private long pollingInterval = 24 * 60 * 60 * 1000L; // Poll every day
 
     @Inject
     ContributionsListPresenter(
@@ -107,9 +105,7 @@ public class ContributionsListPresenter implements UserActionListener {
                 existingContributions.addAll(pagedList);
                 liveData.setValue(existingContributions); // Update liveData with the latest list
             }
-        });
-        // Start polling for new contributions
-        startPollingForNewContributions();
+    });
     }
 
     @Override
@@ -117,7 +113,6 @@ public class ContributionsListPresenter implements UserActionListener {
         compositeDisposable.clear();
         contributionsRemoteDataSource.dispose();
         contributionBoundaryCallback.dispose();
-        stopPollingForNewContributions();
     }
 
     /**
@@ -134,65 +129,42 @@ public class ContributionsListPresenter implements UserActionListener {
         });
     }
 
-    /**
-     * Start polling for new contributions every 24 hour.
-     */
-    private void startPollingForNewContributions() {
-        if (pollingHandler != null) {
-            stopPollingForNewContributions();
-        }
-
-        pollingHandler = new Handler(Looper.getMainLooper());
-        pollingRunnable = new Runnable() {
-            @Override
-            public void run() {
-                checkForNewContributions();
-                pollingHandler.postDelayed(this, pollingInterval); // Repeat after the interval
-            }
-        };
-        pollingHandler.post(pollingRunnable); // Start polling immediately
-    }
-
-    /**
-     * Stop the polling task when the view is detached or the activity is paused.
-     */
-    private void stopPollingForNewContributions() {
-        if (pollingHandler != null && pollingRunnable != null) {
-            pollingHandler.removeCallbacks(pollingRunnable);
-            pollingHandler = null;
-            pollingRunnable = null;
-        }
-    }
     private String lastKnownIdentifier = null; // Declare and initialize
 
     /**
      * Check for new contributions by comparing the latest contribution identifier.
      */
-    private void checkForNewContributions() {
+    void checkForNewContributions() {
+
+        // Set the username before fetching contributions
+        contributionsRemoteDataSource.setUserName(sessionManager.getUserName());
+
         contributionsRemoteDataSource.fetchLatestContributionIdentifier(latestIdentifier -> {
             if (latestIdentifier != null && !latestIdentifier.equals(lastKnownIdentifier)) {
                 lastKnownIdentifier = latestIdentifier;
                 fetchAllContributions(); // Fetch the full list of contributions
             }
-            return Unit.INSTANCE; // Explicitly return Unit for Kotlin compatibility
+            return Unit.INSTANCE;
         });
-
     }
 
     /**
      * Fetch new contributions from the server and append them to the existing list.
      */
-    private void fetchAllContributions() {
-        contributionsRemoteDataSource.fetchAllContributions(new ContributionsRemoteDataSource.LoadCallback<Contribution>() {
-            @Override
-            public void onResult(List<Contribution> newContributions) {
-                if (newContributions != null && !newContributions.isEmpty()) {
-                    existingContributions.clear();
-                    existingContributions.addAll(newContributions);
-                    liveData.postValue(existingContributions); // Update liveData with the new list
+    void fetchAllContributions() {
+        contributionsRemoteDataSource.fetchContributions(
+            new ContributionsRemoteDataSource.LoadCallback<>() {
+
+                @Override
+                public void onResult(List<Contribution> newContributions) {
+                    if (newContributions != null && !newContributions.isEmpty()) {
+                        existingContributions.clear();
+                        existingContributions.addAll(newContributions);
+                        liveData.postValue(
+                            existingContributions); // Update liveData with the new list
+                    }
                 }
-            }
-        });
+            });
     }
 
 }

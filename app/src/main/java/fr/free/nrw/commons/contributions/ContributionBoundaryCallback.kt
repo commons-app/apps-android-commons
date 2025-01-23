@@ -59,6 +59,12 @@ class ContributionBoundaryCallback
             }
             fetchContributions(onRefreshFinish)
         }
+        /**
+        * Public method to fetch contributions, which internally calls the private fetchContributions().
+        */
+        fun fetchContributionsPublic(onRefreshFinish: () -> Unit = {}) {
+            fetchContributions(onRefreshFinish)
+        }
 
         /**
          * Fetches contributions using the MediaWiki API
