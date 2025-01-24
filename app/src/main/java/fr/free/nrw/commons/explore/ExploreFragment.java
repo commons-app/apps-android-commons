@@ -42,9 +42,13 @@ public class ExploreFragment extends CommonsDaggerSupportFragment {
     @Named("default_preferences")
     public JsonKvStore applicationKvStore;
 
-    public void setScroll(boolean canScroll){
-        if (binding != null)
-        {
+    // Nearby map state (for if we came from Nearby fragment)
+    private double prevZoom;
+    private double prevLatitude;
+    private double prevLongitude;
+
+    public void setScroll(boolean canScroll) {
+        if (binding != null) {
             binding.viewPager.setCanScroll(canScroll);
         }
     }
@@ -60,6 +64,7 @@ public class ExploreFragment extends CommonsDaggerSupportFragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
         @Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        loadNearbyMapData();
         binding = FragmentExploreBinding.inflate(inflater, container, false);
 
         viewPagerAdapter = new ViewPagerAdapter(getChildFragmentManager());
@@ -89,6 +94,11 @@ public class ExploreFragment extends CommonsDaggerSupportFragment {
         });
         setTabs();
         setHasOptionsMenu(true);
+
+        // if we came from 'Show in Explore' in Nearby, jump to Map tab
+        if (isCameFromNearbyMap()) {
+            binding.viewPager.setCurrentItem(2);
+        }
         return binding.getRoot();
     }
 
@@ -108,6 +118,13 @@ public class ExploreFragment extends CommonsDaggerSupportFragment {
         Bundle mapArguments = new Bundle();
         mapArguments.putString("categoryName", EXPLORE_MAP);
 
+        // if we came from 'Show in Explore' in Nearby, pass on zoom and center to Explore map root
+        if (isCameFromNearbyMap()) {
+            mapArguments.putDouble("prev_zoom", prevZoom);
+            mapArguments.putDouble("prev_latitude", prevLatitude);
+            mapArguments.putDouble("prev_longitude", prevLongitude);
+        }
+
         featuredRootFragment = new ExploreListRootFragment(featuredArguments);
         mobileRootFragment = new ExploreListRootFragment(mobileArguments);
         mapRootFragment = new ExploreMapRootFragment(mapArguments);
@@ -120,11 +137,33 @@ public class ExploreFragment extends CommonsDaggerSupportFragment {
         fragmentList.add(mapRootFragment);
         titleList.add(getString(R.string.explore_tab_title_map).toUpperCase(Locale.ROOT));
 
-        ((MainActivity)getActivity()).showTabs();
+        ((MainActivity) getActivity()).showTabs();
         ((BaseActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 
         viewPagerAdapter.setTabData(fragmentList, titleList);
         viewPagerAdapter.notifyDataSetChanged();
+    }
+
+    /**
+     * Fetch Nearby map camera data from fragment arguments if any.
+     */
+    public void loadNearbyMapData() {
+        // get fragment arguments
+        if (getArguments() != null) {
+            prevZoom = getArguments().getDouble("prev_zoom");
+            prevLatitude = getArguments().getDouble("prev_latitude");
+            prevLongitude = getArguments().getDouble("prev_longitude");
+        }
+    }
+
+    /**
+     * Checks if fragment arguments contain data from Nearby map, indicating that the user navigated
+     * from Nearby using 'Show in Explore'.
+     *
+     * @return true if user navigated from Nearby map
+     **/
+    public boolean isCameFromNearbyMap() {
+        return prevZoom != 0.0 || prevLatitude != 0.0 || prevLongitude != 0.0;
     }
 
     public boolean onBackPressed() {

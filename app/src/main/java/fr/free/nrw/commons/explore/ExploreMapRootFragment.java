@@ -39,10 +39,22 @@ public class ExploreMapRootFragment extends CommonsDaggerSupportFragment impleme
     }
 
     public ExploreMapRootFragment(Bundle bundle) {
+        // get fragment arguments
         String title = bundle.getString("categoryName");
+        double zoom = bundle.getDouble("prev_zoom");
+        double latitude = bundle.getDouble("prev_latitude");
+        double longitude = bundle.getDouble("prev_longitude");
+
         mapFragment = new ExploreMapFragment();
         Bundle featuredArguments = new Bundle();
         featuredArguments.putString("categoryName", title);
+
+        // if we came from 'Show in Explore' in Nearby, pass on zoom and center
+        if (zoom != 0.0 || latitude != 0.0 || longitude != 0.0) {
+            featuredArguments.putDouble("prev_zoom", zoom);
+            featuredArguments.putDouble("prev_latitude", latitude);
+            featuredArguments.putDouble("prev_longitude", longitude);
+        }
         mapFragment.setArguments(featuredArguments);
     }
 
@@ -198,7 +210,8 @@ public class ExploreMapRootFragment extends CommonsDaggerSupportFragment impleme
             ((MainActivity) getActivity()).showTabs();
             return true;
 
-        } if (mapFragment != null && mapFragment.isVisible()) {
+        }
+        if (mapFragment != null && mapFragment.isVisible()) {
             if (mapFragment.backButtonClicked()) {
                 // Explore map fragment handled the event no further action required.
                 return true;
