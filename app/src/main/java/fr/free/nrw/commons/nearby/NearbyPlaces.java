@@ -1,6 +1,8 @@
 package fr.free.nrw.commons.nearby;
 
+import android.location.Location;
 import androidx.annotation.Nullable;
+import fr.free.nrw.commons.nearby.model.NearbyQueryParams;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
@@ -101,6 +103,7 @@ public class NearbyPlaces {
      * Retrieves a list of places from a Wikidata query based on screen coordinates and optional
      * parameters.
      *
+     * @param centerPoint             The center of the map, used for radius queries if required.
      * @param screenTopRight          The top right corner of the screen (latitude, longitude).
      * @param screenBottomLeft        The bottom left corner of the screen (latitude, longitude).
      * @param lang                    The language for the query.
@@ -111,13 +114,86 @@ public class NearbyPlaces {
      * @throws Exception If an error occurs during the retrieval process.
      */
     public List<Place> getFromWikidataQuery(
+        final fr.free.nrw.commons.location.LatLng centerPoint,
         final fr.free.nrw.commons.location.LatLng screenTopRight,
         final fr.free.nrw.commons.location.LatLng screenBottomLeft, final String lang,
         final boolean shouldQueryForMonuments,
         @Nullable final String customQuery) throws Exception {
+        if (customQuery != null) {
+            return okHttpJsonApiClient
+                .getNearbyPlaces(
+                    new NearbyQueryParams.Rectangular(screenTopRight, screenBottomLeft), lang,
+                    shouldQueryForMonuments,
+                    customQuery);
+        }
+
+        final int lowerLimit = 1000, upperLimit = 1500;
+
+        final float[] results = new float[1];
+        Location.distanceBetween(centerPoint.getLatitude(), screenTopRight.getLongitude(),
+            centerPoint.getLatitude(), screenBottomLeft.getLongitude(), results);
+        final float longGap = results[0] / 1000f;
+        Location.distanceBetween(screenTopRight.getLatitude(), centerPoint.getLongitude(),
+            screenBottomLeft.getLatitude(), centerPoint.getLongitude(), results);
+        final float latGap = results[0] / 1000f;
+
+        if (Math.max(longGap, latGap) < 100f) {
+            final int itemCount = okHttpJsonApiClient.getNearbyItemCount(
+                new NearbyQueryParams.Rectangular(screenTopRight, screenBottomLeft));
+            if (itemCount < upperLimit) {
+                return okHttpJsonApiClient.getNearbyPlaces(
+                    new NearbyQueryParams.Rectangular(screenTopRight, screenBottomLeft), lang,
+                    shouldQueryForMonuments, null);
+            }
+        }
+
+        // minRadius, targetRadius and maxRadius are radii in decameters
+        // unlike other radii here, which are in kilometers, to avoid looping over
+        // floating point values
+        int minRadius = 0, maxRadius = Math.round(Math.min(300f, Math.min(longGap, latGap))) * 100;
+        int targetRadius = maxRadius / 2;
+        while (minRadius < maxRadius) {
+            targetRadius = minRadius + (maxRadius - minRadius + 1) / 2;
+            final int itemCount = okHttpJsonApiClient.getNearbyItemCount(
+                new NearbyQueryParams.Radial(centerPoint, targetRadius / 100f));
+            if (itemCount >= lowerLimit && itemCount < upperLimit) {
+                break;
+            }
+            if (targetRadius > maxRadius / 2 && itemCount < lowerLimit / 5) { // fast forward
+                minRadius = targetRadius;
+                targetRadius = minRadius + (maxRadius - minRadius + 1) / 2;
+                minRadius = targetRadius;
+                if (itemCount < lowerLimit / 10 && minRadius < maxRadius) { // fast forward again
+                    targetRadius = minRadius + (maxRadius - minRadius + 1) / 2;
+                    minRadius = targetRadius;
+                }
+                continue;
+            }
+            if (itemCount < upperLimit) {
+                minRadius = targetRadius;
+            } else {
+                maxRadius = targetRadius - 1;
+            }
+        }
+        return okHttpJsonApiClient.getNearbyPlaces(
+            new NearbyQueryParams.Radial(centerPoint, targetRadius / 100f), lang, shouldQueryForMonuments,
+            null);
+    }
+
+    /**
+     * Retrieves a list of places based on the provided list of places and language.
+     *
+     * This method fetches place information from a Wikidata query using the specified language.
+     *
+     * @param placeList A list of Place objects for which to fetch information.
+     * @param lang      The language code to use for the query.
+     * @return A list of Place objects obtained from the Wikidata query.
+     * @throws Exception If an error occurs during the retrieval process.
+     */
+    public List<Place> getPlaces(final List<Place> placeList,
+        final String lang) throws Exception {
         return okHttpJsonApiClient
-            .getNearbyPlaces(screenTopRight, screenBottomLeft, lang, shouldQueryForMonuments,
-                customQuery);
+            .getPlaces(placeList, lang);
     }
 
     /**

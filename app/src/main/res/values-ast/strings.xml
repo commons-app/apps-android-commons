@@ -63,7 +63,6 @@
   <string name="preference_category_feedback">La to opinión</string>
   <string name="preference_category_privacy">Intimidá</string>
   <string name="app_name">Commons</string>
-  <string name="bullet">•</string>
   <string name="menu_settings">Configuración</string>
   <string name="intent_share_upload_label">Xubir a Commons</string>
   <string name="username">Nome d\'usuariu</string>
@@ -266,7 +265,7 @@
   <string name="skip_login">Saltar</string>
   <string name="navigation_item_login">Aniciar sesión</string>
   <string name="skip_login_title" fuzzy="true">¿Realmente quiés saltar l\'aniciu de sesión?</string>
-  <string name="skip_login_message">Tendríes d\'aniciar sesión para xubir imaxes nel futuru.</string>
+  <string name="skip_login_message" fuzzy="true">Tendríes d\'aniciar sesión para xubir imaxes nel futuru.</string>
   <string name="login_alert_message">Anicia sesión pa usar esta función</string>
   <string name="copy_wikicode">Copiar el testu wiki al cartafueyu</string>
   <string name="wikicode_copied">Copióse\'l testu wiki al cartafueyu</string>
@@ -354,7 +353,7 @@
   <string name="statistics_thanks">Agradecimientos recibíos</string>
   <string name="statistics_featured">Imáxenes destacaes</string>
   <string name="statistics_wikidata_edits">Imaxes vía «Sitios Cercanos»</string>
-  <string name="level">Nivel</string>
+  <string name="level" fuzzy="true">Nivel</string>
   <string name="images_uploaded">Imáxenes xubíes</string>
   <string name="image_reverts">Imáxenes ensin revertir</string>
   <string name="images_used_by_wiki">Imáxenes utilizaes</string>
@@ -518,7 +517,7 @@
   <string name="title_for_child_classes">CLASES FÍES</string>
   <string name="title_for_parent_classes">CLASES PADRES</string>
   <string name="upload_nearby_place_found_title">Llugar cercanu alcontráu</string>
-  <string name="upload_nearby_place_found_description" fuzzy="true">¿Ye esta una foto del Llugar %1$s?</string>
+  <string name="upload_nearby_place_found_description_singular" fuzzy="true">¿Ye esta una foto del Llugar %1$s?</string>
   <string name="title_app_shortcut_bookmark">Marcadores</string>
   <string name="title_app_shortcut_setting">Configuración</string>
   <string name="remove_bookmark">Desaniciáu de los marcadores</string>

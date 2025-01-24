@@ -6,6 +6,7 @@ import com.nhaarman.mockitokotlin2.verify
 import fr.free.nrw.commons.explore.depictions.DepictsClient
 import fr.free.nrw.commons.location.LatLng
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient
+import fr.free.nrw.commons.nearby.model.NearbyQueryParams
 import okhttp3.Call
 import okhttp3.HttpUrl
 import okhttp3.OkHttpClient
@@ -14,6 +15,7 @@ import org.junit.Before
 import org.junit.Test
 import org.mockito.Mock
 import org.mockito.Mockito
+import org.mockito.Mockito.times
 import org.mockito.MockitoAnnotations
 import java.lang.Exception
 
@@ -46,14 +48,15 @@ class OkHttpJsonApiClientTests {
     @Before
     fun setUp() {
         MockitoAnnotations.openMocks(this)
-        okHttpJsonApiClient = OkHttpJsonApiClient(
-            okhttpClient,
-            depictsClient,
-            wikiMediaToolforgeUrl,
-            sparqlQueryUrl,
-            campaignsUrl,
-            gson
-        )
+        okHttpJsonApiClient =
+            OkHttpJsonApiClient(
+                okhttpClient,
+                depictsClient,
+                wikiMediaToolforgeUrl,
+                sparqlQueryUrl,
+                campaignsUrl,
+                gson,
+            )
         Mockito.`when`(okhttpClient.newCall(any())).thenReturn(call)
         Mockito.`when`(call.execute()).thenReturn(response)
     }
@@ -63,13 +66,16 @@ class OkHttpJsonApiClientTests {
         Mockito.`when`(response.message).thenReturn("test")
         try {
             okHttpJsonApiClient.getNearbyPlaces(latLng, "test", 10.0, "test")
-            okHttpJsonApiClient.getNearbyPlaces(latLng, latLng, "test", true, "test")
         } catch (e: Exception) {
             assert(e.message.equals("test"))
         }
-        verify(okhttpClient).newCall(any())
-        verify(call).execute()
-
+        try {
+            okHttpJsonApiClient.getNearbyPlaces(NearbyQueryParams.Rectangular(latLng, latLng), "test", true, "test")
+        } catch (e: Exception) {
+            assert(e.message.equals("test"))
+        }
+        verify(okhttpClient, times(2)).newCall(any())
+        verify(call, times(2)).execute()
     }
 
     @Test
@@ -77,12 +83,48 @@ class OkHttpJsonApiClientTests {
         Mockito.`when`(response.message).thenReturn("test")
         try {
             okHttpJsonApiClient.getNearbyPlaces(latLng, "test", 10.0, null)
-            okHttpJsonApiClient.getNearbyPlaces(latLng, latLng, "test", true, null)
         } catch (e: Exception) {
             assert(e.message.equals("test"))
         }
-        verify(okhttpClient).newCall(any())
-        verify(call).execute()
+        try {
+            okHttpJsonApiClient.getNearbyPlaces(
+                NearbyQueryParams.Rectangular(latLng, latLng),
+                "test",
+                true,
+                null
+            )
 
+        } catch (e: Exception) {
+            assert(e.message.equals("test"))
+        }
+        try {
+            okHttpJsonApiClient.getNearbyPlaces(
+                NearbyQueryParams.Radial(latLng, 10f),
+                "test",
+                true,
+                null
+            )
+        } catch (e: Exception) {
+            assert(e.message.equals("test"))
+        }
+        verify(okhttpClient, times(3)).newCall(any())
+        verify(call, times(3)).execute()
+    }
+
+    @Test
+    fun testGetNearbyItemCount() {
+        Mockito.`when`(response.message).thenReturn("test")
+        try {
+            okHttpJsonApiClient.getNearbyItemCount(NearbyQueryParams.Radial(latLng, 10f))
+        } catch (e: Exception) {
+            assert(e.message.equals("test"))
+        }
+        try {
+            okHttpJsonApiClient.getNearbyItemCount(NearbyQueryParams.Rectangular(latLng, latLng))
+        } catch (e: Exception) {
+            assert(e.message.equals("test"))
+        }
+        verify(okhttpClient, times(2)).newCall(any())
+        verify(call, times(2)).execute()
     }
 }

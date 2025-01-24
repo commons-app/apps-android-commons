@@ -19,7 +19,6 @@ import org.robolectric.fakes.RoboMenu
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
 class QuizResultActivityUnitTest {
-
     private lateinit var activity: QuizResultActivity
     private lateinit var quizResultActivity: QuizResultActivity
     private lateinit var menu: RoboMenu
@@ -84,5 +83,4 @@ class QuizResultActivityUnitTest {
     fun tesShareScreen() {
         activity.shareScreen(bitmap)
     }
-
 }

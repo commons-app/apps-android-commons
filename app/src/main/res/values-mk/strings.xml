@@ -61,7 +61,6 @@
   <string name="preference_category_feedback">Мислења</string>
   <string name="preference_category_privacy">Лични податоци</string>
   <string name="app_name">Ризница</string>
-  <string name="bullet">•</string>
   <string name="menu_settings">Поставки</string>
   <string name="intent_share_upload_label">Подигни на Ризницата</string>
   <string name="upload_in_progress">Подигањето е во тек</string>
@@ -102,6 +101,8 @@
   <string name="menu_from_camera">Направи слика</string>
   <string name="menu_nearby">Во близина</string>
   <string name="provider_contributions">Мои подигања</string>
+  <string name="menu_copy_link">Копирај врска</string>
+  <string name="menu_link_copied">Врската е прекопирана во меѓускладот.</string>
   <string name="menu_share">Сподели</string>
   <string name="menu_view_file_page">Погл. податотечната страница</string>
   <string name="share_title_hint">Толкување (задолж.)</string>
@@ -120,6 +121,7 @@
   <string name="categories_search_text_hint">Пребарај категории</string>
   <string name="depicts_search_text_hint">Пребарајте ги предметите прикажани на сликата или снимката (планина, Лесновски манастир итн.)</string>
   <string name="menu_save_categories">Зачувај</string>
+  <string name="menu_overflow_desc">Преливно мени</string>
   <string name="refresh_button">Превчитај</string>
   <string name="display_list_button">Список</string>
   <string name="contributions_subtitle_zero">(Сè уште нема подигања)</string>
@@ -276,6 +278,7 @@
   <string name="copy_wikicode">Прекопирај го викитекстот во меѓускладот</string>
   <string name="wikicode_copied">Викитекстот е прекопиран во меѓускладот</string>
   <string name="nearby_location_not_available">„Во близина“ може да не работи како што треба. Местоположбата е недостапна.</string>
+  <string name="nearby_showing_pins_offline">Семрежјето е недостапно. Прикажувам само меѓускладирани места.</string>
   <string name="upload_location_access_denied">Пристапот до местоположбата е одбиен. Задајте ја местоположбата рачно за да ја користите оваа функција.</string>
   <string name="location_permission_rationale_nearby">Се бара дозвола за приказ на список на околни места</string>
   <string name="location_permission_rationale_explore">Се бара дозвола за приказ на список на околни слики</string>
@@ -359,11 +362,13 @@
   <string name="delete">Избриши</string>
   <string name="Achievements">Достигнувања</string>
   <string name="Profile">Профил</string>
+  <string name="badges">Значки</string>
   <string name="statistics">Статистика</string>
   <string name="statistics_thanks">Примени благодарници</string>
   <string name="statistics_featured">Избрани слики</string>
   <string name="statistics_wikidata_edits">Слики преку „Околни места“</string>
-  <string name="level">Степен</string>
+  <string name="level">Степен %d</string>
+  <string name="profileLevel">%s (Степен %s)</string>
   <string name="images_uploaded">Подигнати слики</string>
   <string name="image_reverts">Неоткажани слики</string>
   <string name="images_used_by_wiki">Употребени слики</string>
@@ -395,6 +400,7 @@
   <string name="map_application_missing">Не пронајдов складен картографски прилог на вашиот уред. Преземете еден таков за да можете да ја користите оваа можност.</string>
   <string name="title_page_bookmarks_pictures">Слики</string>
   <string name="title_page_bookmarks_locations">Места</string>
+  <string name="title_page_bookmarks_categories">Категории</string>
   <string name="menu_bookmark">Додај/отстрани обележани</string>
   <string name="provider_bookmarks">Обележани</string>
   <string name="bookmark_empty">Немате додадено ниеден бележник</string>
@@ -476,6 +482,7 @@
   <string name="no_notification">Немате непрочитани известувања</string>
   <string name="no_read_notification">Немате прочитани известувања</string>
   <string name="share_logs_using">Споделувај дневници користејќи</string>
+  <string name="check_your_email_inbox">Проверете си ја дојдовната е-пошта</string>
   <string name="menu_option_read">Погл. прочитани</string>
   <string name="menu_option_unread">Погл. непрочитани</string>
   <string name="error_occurred_in_picking_images">Се јави грешка при избирањето на сликите</string>
@@ -570,7 +577,8 @@
   <string name="title_for_child_classes">ЗАВИСНИ КЛАСИ</string>
   <string name="title_for_parent_classes">МАТИЧНИ КЛАСИ</string>
   <string name="upload_nearby_place_found_title">Пронајдено околно место</string>
-  <string name="upload_nearby_place_found_description">Дали ова е слика од %1$s?</string>
+  <string name="upload_nearby_place_found_description_plural">Дали ова се слики на %1$s?</string>
+  <string name="upload_nearby_place_found_description_singular">Дали ова е слика на %1$s?</string>
   <string name="title_app_shortcut_bookmark">Обележани</string>
   <string name="title_app_shortcut_setting">Нагодувања</string>
   <string name="remove_bookmark">Отстрането од обележани</string>
@@ -651,7 +659,7 @@
   <string name="menu_view_category_page">Погл. категориска страница</string>
   <string name="menu_view_item_page">Погл. страница на предметот</string>
   <string name="app_ui_language">Јазик на прилогот</string>
-  <string name="remove">Острани толкување и опис</string>
+  <string name="remove">Отстрани толкување и опис</string>
   <string name="read_help_link">Прочитајте повеќе</string>
   <string name="media_detail_in_all_languages">На сите јазици</string>
   <string name="choose_a_location">Изберете местоположба</string>
@@ -690,7 +698,7 @@
   <string name="read_phone_state_permission_message">Картите со блиски места треба можат да ја прочитаат СОСТОЈБАТА НА ТЕЛЕФОНОТ за да работат правилно</string>
   <string name="contributions_of_user">Придонеси на корисникот: %s</string>
   <string name="achievements_of_user">Достигнувања на корисникот: %s</string>
-  <string name="menu_view_user_page">Преглед на корисничката страница</string>
+  <string name="menu_view_user_page">Погл. кориснички профил</string>
   <string name="edit_depictions">Уреди прикази</string>
   <string name="edit_categories">Уреди категории</string>
   <string name="advanced_options">Напредни можности</string>
@@ -768,4 +776,46 @@
     <item quantity="one">Избрана е %d слика</item>
     <item quantity="other">Избрани се %d слики</item>
   </plurals>
+  <string name="multiple_files_depiction">Запомнете дека сите слики што ги подигате наеднаш се очекуваат да ја прикажуваат истата работа и ги добиваат истите категории и описи. Ако сликите прикажуваат различни нешта и треба да имаат различни категории, извршете неколку одделни подигања.</string>
+  <string name="multiple_files_depiction_header">Напомена за подигање повеќе слики наеднаш</string>
+  <string name="nearby_wikitalk">Пријавете проблем со овој предмет на Википодатоци</string>
+  <string name="please_enter_some_comments">Внесете коментар</string>
+  <string name="talk">Разговор</string>
+  <string name="write_something_about_the_item">Напишете нешто за предметот „%1$s“. Ова ќе биде јавно видливо.</string>
+  <string name="does_not_exist_anymore_no_picture_can_ever_be_taken_of_it">„%1$s“ повеќе не постои, нема да може да се фотографира.</string>
+  <string name="is_at_a_different_place_please_specify_the_correct_place_below_if_possible_tell_us_the_correct_latitude_longitude">„%1$s“ се наоѓа на друго место. Подолу укажете го исправното место и, ако е можно, ставете исправна географска ширина и должина.</string>
+  <string name="other_problem_or_information_please_explain_below">Друг проблем или информација (објаснете подолу).</string>
+  <string name="feedback_destination_note">Вашите мислења се објавуваат на следнава викистраница:  &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Mobile_app/Feedback\"&gt;Commons:Mobile app/Feedback&lt;/a&gt;</string>
+  <string name="are_you_sure_that_you_want_cancel_all_the_uploads">Дали сигурно сакате да ги откажете сите подигања?</string>
+  <string name="cancelling_all_the_uploads">Ги откажувам сите подигања...</string>
+  <string name="uploads">Подигања</string>
+  <string name="pending">Во исчекување</string>
+  <string name="failed">Неуспешно</string>
+  <string name="could_not_load_place_data">Не можев да ги вчитам податоците за место</string>
+  <string name="custom_selector_delete_folder">Избриши папка</string>
+  <string name="custom_selector_confirm_deletion_title">Потврдете бришење</string>
+  <string name="custom_selector_confirm_deletion_message">Дали сигурно сакате да ја избришете папката %1$s, која содржи %2$d ставки?</string>
+  <string name="custom_selector_delete">Избриши</string>
+  <string name="custom_selector_cancel">Откажи</string>
+  <string name="custom_selector_folder_deleted_success">Папката %1$s е успешно избришана</string>
+  <string name="custom_selector_folder_deleted_failure">Не успеав да ја избришам папката %1$s</string>
+  <string name="custom_selector_error_trashing_folder_contents">Не можев да ја префрлам содржината на папката во ѓубре: %1$s</string>
+  <string name="custom_selector_folder_not_found_error">Не успеав да ја добијам патеката на папката за групата со назнака: %1$d</string>
+  <string name="red_pin">Местово сè уште нема слика. Направете ја!</string>
+  <string name="green_pin">Местово веќе има слика.</string>
+  <string name="grey_pin">Проверувам дали местово има слика.</string>
+  <string name="error_while_loading">Грешка при вчитување</string>
+  <string name="no_usages_found">Не најдов употреби</string>
+  <string name="usages_on_commons_heading">Ризница</string>
+  <string name="usages_on_other_wikis_heading">Други викија</string>
+  <string name="bullet_point">•</string>
+  <string name="file_usages_container_heading">Употреби на податотеката</string>
+  <string name="title_activity_single_web_view">SingleWebViewActivity</string>
+  <string name="account">Сметка</string>
+  <string name="vanish_account">Исчезни сметка</string>
+  <string name="account_vanish_request_confirm_title">Предупредување за исчезнување на сметка</string>
+  <string name="account_vanish_request_confirm">Исчезнувањето е &lt;b&gt;крајна мерка&lt;/b&gt; и треба да се користи само ако сакате да престанете да уредувате засекогаш/b&gt; и да скриете што повеќе од вашите досегашни врски.&lt;br/&gt;&lt;br/&gt;Бришењето сметки на Википедија се врши со менување на името на вашата сметка, така што другите не би можеле да ги препознаат вашите придонеси во постапка наречена „исчезнување“ на сметка.&lt;b&gt;Исчезнувањето не гарантира целосна анонимност и не ги отстранува придонесите на проектите&lt;/b&gt;.</string>
+  <string name="caption">Толкување</string>
+  <string name="caption_copied_to_clipboard">Толкувањето е ставено во меѓускладот</string>
+  <string name="congratulations_all_pictures_in_this_album_have_been_either_uploaded_or_marked_as_not_for_upload">Честитаме. Сите слики од овој албум се подигнати или обележани за неподигање.</string>
 </resources>

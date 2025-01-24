@@ -64,7 +64,6 @@
   <string name="preference_category_feedback">Feedback</string>
   <string name="preference_category_privacy">Confidențialitate</string>
   <string name="app_name">Commons</string>
-  <string name="bullet">•</string>
   <string name="menu_settings">Setări</string>
   <string name="intent_share_upload_label">Încarcă la Commons</string>
   <string name="upload_in_progress">Încărcare în curs</string>
@@ -269,7 +268,7 @@
   <string name="skip_login">Omite</string>
   <string name="navigation_item_login">Autentificare</string>
   <string name="skip_login_title" fuzzy="true">Chiar vrei să ignori datele de autentificare?</string>
-  <string name="skip_login_message">Va trebui să vă conectați pentru a încărca imagini în viitor.</string>
+  <string name="skip_login_message" fuzzy="true">Va trebui să vă conectați pentru a încărca imagini în viitor.</string>
   <string name="login_alert_message">Conectați-vă pentru a utiliza această caracteristică</string>
   <string name="copy_wikicode">Copiați wikitext-ul în clipboard</string>
   <string name="wikicode_copied">Wikitext-ul a fost copiat în clipboard</string>
@@ -353,7 +352,7 @@
   <string name="statistics_thanks">Mulțumiri primite</string>
   <string name="statistics_featured">Imagini recomandate</string>
   <string name="statistics_wikidata_edits">Imagini prin „Locații în apropiere”</string>
-  <string name="level">Nivel</string>
+  <string name="level" fuzzy="true">Nivel</string>
   <string name="images_uploaded">Imaginile au fost încărcate</string>
   <string name="image_reverts">Imaginile nu au fost reluate</string>
   <string name="images_used_by_wiki">Imaginile folosite</string>
@@ -532,7 +531,7 @@
   <string name="title_for_child_classes">CLASE COPIl</string>
   <string name="title_for_parent_classes">CLASE PĂRINTE</string>
   <string name="upload_nearby_place_found_title">Locație Găsită în Apropiere</string>
-  <string name="upload_nearby_place_found_description" fuzzy="true">Este o fotografie a Locului %1$s?</string>
+  <string name="upload_nearby_place_found_description_singular" fuzzy="true">Este o fotografie a Locului %1$s?</string>
   <string name="title_app_shortcut_bookmark">Semne de carte</string>
   <string name="title_app_shortcut_setting">Setări</string>
   <string name="remove_bookmark">Eliminat din semne de carte</string>

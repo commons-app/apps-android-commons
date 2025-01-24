@@ -20,7 +20,6 @@ import java.lang.reflect.Field
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
 class NotificationHelperUnitTests {
-
     private lateinit var notificationHelper: NotificationHelper
     private lateinit var context: Context
 
@@ -63,7 +62,7 @@ class NotificationHelperUnitTests {
             date = "",
             link = "",
             iconUrl = "",
-            notificationId = ""
+            notificationId = "",
         )
     }
 
@@ -76,8 +75,7 @@ class NotificationHelperUnitTests {
             date = "",
             link = "",
             iconUrl = "",
-            notificationId = ""
+            notificationId = "",
         )
     }
-
 }

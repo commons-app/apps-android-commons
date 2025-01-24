@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.contributions;
 
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import fr.free.nrw.commons.BasePresenter;
 
 /**
@@ -18,6 +19,7 @@ public class ContributionsListContract {
 
     public interface UserActionListener extends BasePresenter<View> {
 
-        void deleteUpload(Contribution contribution);
+        void refreshList(SwipeRefreshLayout swipeRefreshLayout);
+
     }
 }

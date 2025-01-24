@@ -9,8 +9,8 @@ import androidx.test.core.app.ApplicationProvider
 import fr.free.nrw.commons.OkHttpConnectionFactory
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestCommonsApplication
-import fr.free.nrw.commons.createTestClient
 import fr.free.nrw.commons.auth.LoginActivity
+import fr.free.nrw.commons.createTestClient
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
@@ -23,11 +23,9 @@ import org.robolectric.annotation.Config
 import org.robolectric.fakes.RoboMenuItem
 import java.lang.reflect.Field
 
-
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
 class LoginActivityUnitTests {
-
     @Mock
     private lateinit var activity: LoginActivity
 
@@ -46,7 +44,6 @@ class LoginActivityUnitTests {
 
     @Before
     fun setUp() {
-
         MockitoAnnotations.openMocks(this)
 
         OkHttpConnectionFactory.CLIENT = createTestClient()
@@ -116,5 +113,4 @@ class LoginActivityUnitTests {
     fun testSetContentView() {
         activity.setContentView(view, params)
     }
-
 }

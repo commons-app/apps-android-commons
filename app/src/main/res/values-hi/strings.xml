@@ -4,6 +4,7 @@
 * Abijeet Patro
 * Anamdas
 * Anandra
+* AnupamM
 * Bhatakati aatma
 * Gopalindians
 * Nilesh shukla
@@ -28,6 +29,7 @@
   <string name="commons_logo">कॉमन्स का प्रतीक चिन्ह</string>
   <string name="commons_website">कॉमन्स का जालस्थान</string>
   <string name="submit">जमा करें</string>
+  <string name="row_item_caption">कैप्शन</string>
   <string name="show_captions_description">विवरण</string>
   <string name="nearby_row_image">चित्र</string>
   <string name="nearby_all">सभी</string>
@@ -59,7 +61,6 @@
   <string name="preference_category_feedback">आपके सुझाव</string>
   <string name="preference_category_privacy">गोपनीयता</string>
   <string name="app_name">कॉमन्स</string>
-  <string name="bullet">•</string>
   <string name="menu_settings">सेटिंग्स</string>
   <string name="intent_share_upload_label">कॉमन्स पर अपलोड करें</string>
   <string name="username">सदस्य नाम</string>
@@ -70,6 +71,7 @@
   <string name="signup">खाता बनायें</string>
   <string name="logging_in_title">लॉग इन हो रहा है</string>
   <string name="logging_in_message">कृपया प्रतीक्षा करें...</string>
+  <string name="updating_caption_message">कृपया प्रतीक्षा करें...</string>
   <string name="login_success" fuzzy="true">लॉग इन सफल!</string>
   <string name="login_failed" fuzzy="true">लॉग इन विफल!</string>
   <string name="upload_failed">फ़ाइल नहीं मिली, कृपया अन्य फ़ाइल से प्रयास करें।</string>
@@ -178,6 +180,7 @@
   <string name="no">नहीं</string>
   <string name="media_detail_title">शीर्षक</string>
   <string name="media_detail_description">विवरण</string>
+  <string name="media_detail_discussion">चर्चा</string>
   <string name="media_detail_author">लेखक</string>
   <string name="media_detail_uploaded_date">अपलोड की गई दिनांक</string>
   <string name="media_detail_license">लाइसेंस</string>
@@ -234,7 +237,7 @@
   <string name="skip_login">छोड़ें</string>
   <string name="navigation_item_login">लॉगिन</string>
   <string name="skip_login_title" fuzzy="true">क्या आप वास्तव में लॉगिन नहीं करना चाहते?</string>
-  <string name="skip_login_message">भविष्य में चित्र अपलोड करने के लिये आपको लॉग इन कर लेना चाहिये।</string>
+  <string name="skip_login_message" fuzzy="true">भविष्य में चित्र अपलोड करने के लिये आपको लॉग इन कर लेना चाहिये।</string>
   <string name="login_alert_message">इस सुविधा का उपयोग करने के लिये लॉग इन करें</string>
   <string name="copy_wikicode">विकिटेक्स्ट को क्लिपबोर्ड पर कॉपी करें</string>
   <string name="wikicode_copied">विकिटेक्सट क्लिपबोर्ड पर कॉपी किया जा चुका है</string>
@@ -269,6 +272,7 @@
   <string name="search_tab_title_media" fuzzy="true">मीडिया</string>
   <string name="search_tab_title_categories">श्रेणियाँ</string>
   <string name="explore_tab_title_featured">निर्वाचित</string>
+  <string name="explore_tab_title_map">नक्शा</string>
   <string name="successful_wikidata_edit" fuzzy="true">चित्र सफ़लतापूर्वक विकिडाटा के %1$s पर सफलतापूर्वक जोड़ दिया गया है।</string>
   <string name="menu_set_wallpaper">वॉलपेपर के रूप में लगायें</string>
   <string name="wallpaper_set_successfully">वॉलपेपर सफलतापूर्वक लग गया!</string>
@@ -285,6 +289,7 @@
   <string name="wrong">गलत उत्तर</string>
   <string name="quiz_screenshot_question">क्या यह स्क्रीनशॉट अपलोड होने के लिये तैयार है?</string>
   <string name="share_app_title">एप साझा करें</string>
+  <string name="rotate">घुमाएँ</string>
   <string name="error_fetching_nearby_places" fuzzy="true">निकट के स्थान लाने में त्रुटि हुई।</string>
   <string name="no_recent_searches">हाल में कोई खोज नहीं</string>
   <string name="delete_recent_searches_dialog">क्या आप सचमुच अपना खोज इतिहास मिटाना चाहते हैं?</string>
@@ -312,6 +317,7 @@
   <string name="previous">पिछला</string>
   <string name="title_page_bookmarks_pictures">चित्र</string>
   <string name="title_page_bookmarks_locations">स्थान</string>
+  <string name="title_page_bookmarks_categories">श्रेणियाँ</string>
   <string name="menu_bookmark">बुकमार्क से जोड़ें/हटायें</string>
   <string name="provider_bookmarks">बुकमार्क</string>
   <string name="bookmark_empty">आपने कोई बुकमार्क नहीं जोड़ा है</string>
@@ -343,4 +349,14 @@
   <string name="category_edit_helper_show_edit_title_success">सफल</string>
   <string name="leaderboard_column_count">गणना</string>
   <string name="custom_selector_dismiss_limit_warning_button_text">रद्द करें</string>
+  <string name="talk">वार्ता</string>
+  <string name="are_you_sure_that_you_want_cancel_all_the_uploads">क्या आप वाकई सभी अपलोड रद्द करना चाहते हैं?</string>
+  <string name="cancelling_all_the_uploads">सभी अपलोड रद्द किये जा रहे हैं...</string>
+  <string name="uploads">अपलोड</string>
+  <string name="pending">लंबित</string>
+  <string name="failed">विफल हुआ</string>
+  <string name="custom_selector_delete_folder">फ़ोल्डर हटाएँ</string>
+  <string name="custom_selector_delete">हटाएँ</string>
+  <string name="custom_selector_cancel">रद्द करें</string>
+  <string name="caption">कैप्शन</string>
 </resources>

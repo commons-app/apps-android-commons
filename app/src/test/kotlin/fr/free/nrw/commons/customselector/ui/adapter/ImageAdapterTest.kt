@@ -10,7 +10,6 @@ import android.widget.GridLayout
 import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestCommonsApplication
-import fr.free.nrw.commons.TestUtility.setFinalStatic
 import fr.free.nrw.commons.customselector.listeners.ImageSelectListener
 import fr.free.nrw.commons.customselector.model.Image
 import fr.free.nrw.commons.customselector.ui.selector.CustomSelectorActivity
@@ -18,7 +17,7 @@ import fr.free.nrw.commons.customselector.ui.selector.ImageLoader
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.runBlocking
-import kotlinx.coroutines.test.TestCoroutineDispatcher
+import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.setMain
 import org.junit.After
@@ -34,9 +33,7 @@ import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 import java.lang.reflect.Field
-import java.lang.reflect.Modifier
-import java.util.*
-import kotlin.collections.ArrayList
+import java.util.TreeMap
 
 /**
  * Custom Selector image adapter test.
@@ -47,24 +44,27 @@ import kotlin.collections.ArrayList
 class ImageAdapterTest {
     @Mock
     private lateinit var imageLoader: ImageLoader
+
     @Mock
     private lateinit var imageSelectListener: ImageSelectListener
+
     @Mock
     private lateinit var context: Context
+
     @Mock
     private lateinit var mockContentResolver: ContentResolver
+
     @Mock
     private lateinit var sharedPreferences: SharedPreferences
 
     private lateinit var activity: CustomSelectorActivity
     private lateinit var imageAdapter: ImageAdapter
-    private lateinit var images : ArrayList<Image>
+    private lateinit var images: ArrayList<Image>
     private lateinit var holder: ImageAdapter.ImageViewHolder
     private lateinit var selectedImageField: Field
     private var uri: Uri = Mockito.mock(Uri::class.java)
     private lateinit var image: Image
-    private val testDispatcher = TestCoroutineDispatcher()
-
+    private val testDispatcher = StandardTestDispatcher()
 
     /**
      * Set up variables.
@@ -90,7 +90,6 @@ class ImageAdapterTest {
     @After
     fun tearDown() {
         Dispatchers.resetMain()
-        testDispatcher.cleanupTestCoroutines()
     }
 
     /**
@@ -106,7 +105,6 @@ class ImageAdapterTest {
      */
     @Test
     fun onBindViewHolder() {
-
         whenever(context.contentResolver).thenReturn(mockContentResolver)
         whenever(mockContentResolver.getType(uri)).thenReturn("jpg")
         // Parameters.
@@ -125,22 +123,38 @@ class ImageAdapterTest {
      * Test processThumbnailForActionedImage
      */
     @Test
-    fun processThumbnailForActionedImage() = runBlocking {
-        Whitebox.setInternalState(imageAdapter, "allImages", listOf(image))
-        whenever(imageLoader.nextActionableImage(listOf(image), Dispatchers.IO, Dispatchers.Default,
-        0, emptyList())).thenReturn(0)
-        imageAdapter.processThumbnailForActionedImage(holder, 0, emptyList())
-    }
+    fun processThumbnailForActionedImage() =
+        runBlocking {
+            Whitebox.setInternalState(imageAdapter, "allImages", listOf(image))
+            whenever(
+                imageLoader.nextActionableImage(
+                    listOf(image),
+                    Dispatchers.IO,
+                    Dispatchers.Default,
+                    0,
+                    emptyList(),
+                ),
+            ).thenReturn(0)
+            imageAdapter.processThumbnailForActionedImage(holder, 0, emptyList())
+        }
 
     /**
      * Test processThumbnailForActionedImage
      */
     @Test
-    fun `processThumbnailForActionedImage when reached end of the folder`() = runBlocking {
-        whenever(imageLoader.nextActionableImage(ArrayList(), Dispatchers.IO, Dispatchers.Default,
-            0, emptyList())).thenReturn(-1)
-        imageAdapter.processThumbnailForActionedImage(holder, 0, emptyList())
-    }
+    fun `processThumbnailForActionedImage when reached end of the folder`() =
+        runBlocking {
+            whenever(
+                imageLoader.nextActionableImage(
+                    ArrayList(),
+                    Dispatchers.IO,
+                    Dispatchers.Default,
+                    0,
+                    emptyList(),
+                ),
+            ).thenReturn(-1)
+            imageAdapter.processThumbnailForActionedImage(holder, 0, emptyList())
+        }
 
     /**
      * Test init.
@@ -156,7 +170,12 @@ class ImageAdapterTest {
     @Test
     fun selectOrRemoveImage() {
         // Access function
-        val func = imageAdapter.javaClass.getDeclaredMethod("selectOrRemoveImage", ImageAdapter.ImageViewHolder::class.java, Int::class.java)
+        val func =
+            imageAdapter.javaClass.getDeclaredMethod(
+                "selectOrRemoveImage",
+                ImageAdapter.ImageViewHolder::class.java,
+                Int::class.java,
+            )
         func.isAccessible = true
 
         // Parameters
@@ -183,11 +202,12 @@ class ImageAdapterTest {
         images.add(image)
         Whitebox.setInternalState(imageAdapter, "images", images)
         // Access function
-        val func = imageAdapter.javaClass.getDeclaredMethod(
-            "onThumbnailClicked",
-            Int::class.java,
-            ImageAdapter.ImageViewHolder::class.java
-        )
+        val func =
+            imageAdapter.javaClass.getDeclaredMethod(
+                "onThumbnailClicked",
+                Int::class.java,
+                ImageAdapter.ImageViewHolder::class.java,
+            )
         func.isAccessible = true
         func.invoke(imageAdapter, 0, holder)
     }

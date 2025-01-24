@@ -1,13 +1,10 @@
 package fr.free.nrw.commons.contributions;
 
-import android.Manifest.permission;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.Build.VERSION;
-import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -16,10 +13,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.viewpager.widget.ViewPager;
 import androidx.work.ExistingWorkPolicy;
 import fr.free.nrw.commons.databinding.MainBinding;
-import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.WelcomeActivity;
 import fr.free.nrw.commons.auth.SessionManager;
@@ -41,18 +36,20 @@ import fr.free.nrw.commons.notification.NotificationController;
 import fr.free.nrw.commons.quiz.QuizChecker;
 import fr.free.nrw.commons.settings.SettingsFragment;
 import fr.free.nrw.commons.theme.BaseActivity;
+import fr.free.nrw.commons.upload.UploadProgressActivity;
 import fr.free.nrw.commons.upload.worker.WorkRequestHelper;
 import fr.free.nrw.commons.utils.PermissionUtils;
 import fr.free.nrw.commons.utils.ViewUtilWrapper;
 import io.reactivex.Completable;
 import io.reactivex.schedulers.Schedulers;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Named;
 import timber.log.Timber;
 
-public class MainActivity  extends BaseActivity
+public class MainActivity extends BaseActivity
     implements FragmentManager.OnBackStackChangedListener {
 
     @Inject
@@ -142,17 +139,18 @@ public class MainActivity  extends BaseActivity
         } else {
             if (applicationKvStore.getBoolean("firstrun", true)) {
                 applicationKvStore.putBoolean("hasAlreadyLaunchedBigMultiupload", false);
+                applicationKvStore.putBoolean("hasAlreadyLaunchedCategoriesDialog", false);
             }
-            if(savedInstanceState == null){
+            if (savedInstanceState == null) {
                 //starting a fresh fragment.
                 // Open Last opened screen if it is Contributions or Nearby, otherwise Contributions
-                if(applicationKvStore.getBoolean("last_opened_nearby")){
+                if (applicationKvStore.getBoolean("last_opened_nearby")) {
                     setTitle(getString(R.string.nearby_fragment));
                     showNearby();
-                    loadFragment(NearbyParentFragment.newInstance(),false);
-                }else{
+                    loadFragment(NearbyParentFragment.newInstance(), false);
+                } else {
                     setTitle(getString(R.string.contributions_fragment));
-                    loadFragment(ContributionsFragment.newInstance(),false);
+                    loadFragment(ContributionsFragment.newInstance(), false);
                 }
             }
             setUpPager();
@@ -161,14 +159,16 @@ public class MainActivity  extends BaseActivity
              * so that location in the EXIF metadata of the images shared by the user
              * is retained on devices running Android 10 or above
              */
-            if (VERSION.SDK_INT >= VERSION_CODES.Q) {
-                PermissionUtils.checkPermissionsAndPerformAction(
-                    this,
-                    () -> {},
-                    R.string.media_location_permission_denied,
-                    R.string.add_location_manually,
-                    permission.ACCESS_MEDIA_LOCATION);
-            }
+//            if (VERSION.SDK_INT >= VERSION_CODES.Q) {
+//                ActivityCompat.requestPermissions(this,
+//                    new String[]{Manifest.permission.ACCESS_MEDIA_LOCATION}, 0);
+//                PermissionUtils.checkPermissionsAndPerformAction(
+//                    this,
+//                    () -> {},
+//                    R.string.media_location_permission_denied,
+//                    R.string.add_location_manually,
+//                    permission.ACCESS_MEDIA_LOCATION);
+//            }
             checkAndResumeStuckUploads();
         }
     }
@@ -178,32 +178,33 @@ public class MainActivity  extends BaseActivity
     }
 
     private void setUpPager() {
-        binding.fragmentMainNavTabLayout.setOnNavigationItemSelectedListener(navListener = (item) -> {
-            if (!item.getTitle().equals(getString(R.string.more))) {
-                // do not change title for more fragment
-                setTitle(item.getTitle());
-            }
-            // set last_opened_nearby true if item is nearby screen else set false
-            applicationKvStore.putBoolean("last_opened_nearby",
-                item.getTitle().equals(getString(R.string.nearby_fragment)));
-            final Fragment fragment = NavTab.of(item.getOrder()).newInstance();
-            return loadFragment(fragment, true);
-        });
+        binding.fragmentMainNavTabLayout.setOnNavigationItemSelectedListener(
+            navListener = (item) -> {
+                if (!item.getTitle().equals(getString(R.string.more))) {
+                    // do not change title for more fragment
+                    setTitle(item.getTitle());
+                }
+                // set last_opened_nearby true if item is nearby screen else set false
+                applicationKvStore.putBoolean("last_opened_nearby",
+                    item.getTitle().equals(getString(R.string.nearby_fragment)));
+                final Fragment fragment = NavTab.of(item.getOrder()).newInstance();
+                return loadFragment(fragment, true);
+            });
     }
 
     private void setUpLoggedOutPager() {
-        loadFragment(ExploreFragment.newInstance(),false);
+        loadFragment(ExploreFragment.newInstance(), false);
         binding.fragmentMainNavTabLayout.setOnNavigationItemSelectedListener(item -> {
             if (!item.getTitle().equals(getString(R.string.more))) {
                 // do not change title for more fragment
                 setTitle(item.getTitle());
             }
             Fragment fragment = NavTabLoggedOut.of(item.getOrder()).newInstance();
-            return loadFragment(fragment,true);
+            return loadFragment(fragment, true);
         });
     }
 
-    private boolean loadFragment(Fragment fragment,boolean showBottom ) {
+    private boolean loadFragment(Fragment fragment, boolean showBottom) {
         //showBottom so that we do not show the bottom tray again when constructing
         //from the saved instance state.
         if (fragment instanceof ContributionsFragment) {
@@ -233,7 +234,8 @@ public class MainActivity  extends BaseActivity
             bookmarkFragment = (BookmarkFragment) fragment;
             activeFragment = ActiveFragment.BOOKMARK;
         } else if (fragment == null && showBottom) {
-            if (applicationKvStore.getBoolean("login_skipped") == true) { // If logged out, more sheet is different
+            if (applicationKvStore.getBoolean("login_skipped")
+                == true) { // If logged out, more sheet is different
                 MoreBottomSheetLoggedOutFragment bottomSheet = new MoreBottomSheetLoggedOutFragment();
                 bottomSheet.show(getSupportFragmentManager(),
                     "MoreBottomSheetLoggedOut");
@@ -263,28 +265,30 @@ public class MainActivity  extends BaseActivity
     }
 
     /**
-     * Adds number of uploads next to tab text "Contributions" then it will look like
-     * "Contributions (NUMBER)"
+     * Adds number of uploads next to tab text "Contributions" then it will look like "Contributions
+     * (NUMBER)"
+     *
      * @param uploadCount
      */
     public void setNumOfUploads(int uploadCount) {
         if (activeFragment == ActiveFragment.CONTRIBUTIONS) {
-            setTitle(getResources().getString(R.string.contributions_fragment) +" "+ (
+            setTitle(getResources().getString(R.string.contributions_fragment) + " " + (
                 !(uploadCount == 0) ?
-                getResources()
-                .getQuantityString(R.plurals.contributions_subtitle,
-                    uploadCount, uploadCount):getString(R.string.contributions_subtitle_zero)));
+                    getResources()
+                        .getQuantityString(R.plurals.contributions_subtitle,
+                            uploadCount, uploadCount)
+                    : getString(R.string.contributions_subtitle_zero)));
         }
     }
 
     /**
-     * Resume the uploads that got stuck because of the app being killed
-     * or the device being rebooted.
-     *
+     * Resume the uploads that got stuck because of the app being killed or the device being
+     * rebooted.
+     * <p>
      * When the app is terminated or the device is restarted, contributions remain in the
-     * 'STATE_IN_PROGRESS' state. This status persists and doesn't change during these events.
-     * So, retrieving contributions labeled as 'STATE_IN_PROGRESS'
-     * from the database will provide the list of uploads that appear as stuck on opening the app again
+     * 'STATE_IN_PROGRESS' state. This status persists and doesn't change during these events. So,
+     * retrieving contributions labeled as 'STATE_IN_PROGRESS' from the database will provide the
+     * list of uploads that appear as stuck on opening the app again
      */
     @SuppressLint("CheckResult")
     private void checkAndResumeStuckUploads() {
@@ -293,9 +297,10 @@ public class MainActivity  extends BaseActivity
             .subscribeOn(Schedulers.io())
             .blockingGet();
         Timber.d("Resuming " + stuckUploads.size() + " uploads...");
-        if(!stuckUploads.isEmpty()) {
-            for(Contribution contribution: stuckUploads) {
+        if (!stuckUploads.isEmpty()) {
+            for (Contribution contribution : stuckUploads) {
                 contribution.setState(Contribution.STATE_QUEUED);
+                contribution.setDateUploadStarted(Calendar.getInstance().getTime());
                 Completable.fromAction(() -> contributionDao.saveSynchronous(contribution))
                     .subscribeOn(Schedulers.io())
                     .subscribe();
@@ -322,24 +327,24 @@ public class MainActivity  extends BaseActivity
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
         String activeFragmentName = savedInstanceState.getString("activeFragment");
-        if(activeFragmentName != null) {
+        if (activeFragmentName != null) {
             restoreActiveFragment(activeFragmentName);
         }
     }
 
     private void restoreActiveFragment(@NonNull String fragmentName) {
-        if(fragmentName.equals(ActiveFragment.CONTRIBUTIONS.name())) {
+        if (fragmentName.equals(ActiveFragment.CONTRIBUTIONS.name())) {
             setTitle(getString(R.string.contributions_fragment));
-            loadFragment(ContributionsFragment.newInstance(),false);
-        }else if(fragmentName.equals(ActiveFragment.NEARBY.name())) {
+            loadFragment(ContributionsFragment.newInstance(), false);
+        } else if (fragmentName.equals(ActiveFragment.NEARBY.name())) {
             setTitle(getString(R.string.nearby_fragment));
-            loadFragment(NearbyParentFragment.newInstance(),false);
-        }else if(fragmentName.equals(ActiveFragment.EXPLORE.name())) {
+            loadFragment(NearbyParentFragment.newInstance(), false);
+        } else if (fragmentName.equals(ActiveFragment.EXPLORE.name())) {
             setTitle(getString(R.string.navigation_item_explore));
-            loadFragment(ExploreFragment.newInstance(),false);
-        }else if(fragmentName.equals(ActiveFragment.BOOKMARK.name())) {
+            loadFragment(ExploreFragment.newInstance(), false);
+        } else if (fragmentName.equals(ActiveFragment.BOOKMARK.name())) {
             setTitle(getString(R.string.bookmarks));
-            loadFragment(BookmarkFragment.newInstance(),false);
+            loadFragment(BookmarkFragment.newInstance(), false);
         }
     }
 
@@ -355,8 +360,9 @@ public class MainActivity  extends BaseActivity
             // Means that nearby fragment is visible
             /* If function nearbyParentFragment.backButtonClick() returns false, it means that the bottomsheet is
               not expanded. So if the back button is pressed, then go back to the Contributions tab */
-            if(!nearbyParentFragment.backButtonClicked()){
-                getSupportFragmentManager().beginTransaction().remove(nearbyParentFragment).commit();
+            if (!nearbyParentFragment.backButtonClicked()) {
+                getSupportFragmentManager().beginTransaction().remove(nearbyParentFragment)
+                    .commit();
                 setSelectedItemId(NavTab.CONTRIBUTIONS.code());
             }
         } else if (exploreFragment != null && activeFragment == ActiveFragment.EXPLORE) {
@@ -381,18 +387,6 @@ public class MainActivity  extends BaseActivity
         //initBackButton();
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.notifications:
-                // Starts notification activity on click to notification icon
-                NotificationActivity.startYourself(this, "unread");
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-
     /**
      * Retry all failed uploads as soon as the user returns to the app
      */
@@ -402,43 +396,40 @@ public class MainActivity  extends BaseActivity
             getContribution(Collections.singletonList(Contribution.STATE_FAILED))
             .subscribeOn(Schedulers.io())
             .subscribe(failedUploads -> {
-                for (Contribution contribution: failedUploads) {
+                for (Contribution contribution : failedUploads) {
                     contributionsFragment.retryUpload(contribution);
                 }
             });
     }
 
-    public void toggleLimitedConnectionMode() {
-        defaultKvStore.putBoolean(CommonsApplication.IS_LIMITED_CONNECTION_MODE_ENABLED,
-            !defaultKvStore
-                .getBoolean(CommonsApplication.IS_LIMITED_CONNECTION_MODE_ENABLED, false));
-        if (defaultKvStore
-            .getBoolean(CommonsApplication.IS_LIMITED_CONNECTION_MODE_ENABLED, false)) {
-            viewUtilWrapper
-                .showShortToast(getBaseContext(), getString(R.string.limited_connection_enabled));
-        } else {
-            WorkRequestHelper.Companion.makeOneTimeWorkRequest(getApplicationContext(),
-                ExistingWorkPolicy.APPEND_OR_REPLACE);
-            viewUtilWrapper
-                .showShortToast(getBaseContext(), getString(R.string.limited_connection_disabled));
+    /**
+     * Handles item selection in the options menu. This method is called when a user interacts with
+     * the options menu in the Top Bar.
+     */
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.upload_tab:
+                startActivity(new Intent(this, UploadProgressActivity.class));
+                return true;
+            case R.id.notifications:
+                // Starts notification activity on click to notification icon
+                NotificationActivity.Companion.startYourself(this, "unread");
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
     }
 
     public void centerMapToPlace(Place place) {
         setSelectedItemId(NavTab.NEARBY.code());
-        nearbyParentFragment.setNearbyParentFragmentInstanceReadyCallback(new NearbyParentFragmentInstanceReadyCallback() {
-            @Override
-            public void onReady() {
-                nearbyParentFragment.centerMapToPlace(place);
-            }
-        });
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Timber.d(data!=null?data.toString():"onActivityResult data is null");
-        super.onActivityResult(requestCode, resultCode, data);
-        controller.handleActivityResult(this, requestCode, resultCode, data);
+        nearbyParentFragment.setNearbyParentFragmentInstanceReadyCallback(
+            new NearbyParentFragmentInstanceReadyCallback() {
+                @Override
+                public void onReady() {
+                    nearbyParentFragment.centerMapToPlace(place);
+                }
+            });
     }
 
     @Override
@@ -481,14 +472,15 @@ public class MainActivity  extends BaseActivity
     /**
      * Load default language in onCreate from SharedPreferences
      */
-    private void loadLocale(){
-        final SharedPreferences preferences = getSharedPreferences("Settings", Activity.MODE_PRIVATE);
+    private void loadLocale() {
+        final SharedPreferences preferences = getSharedPreferences("Settings",
+            Activity.MODE_PRIVATE);
         final String language = preferences.getString("language", "");
         final SettingsFragment settingsFragment = new SettingsFragment();
         settingsFragment.setLocale(this, language);
     }
 
-    public NavTabLayout.OnNavigationItemSelectedListener getNavListener(){
+    public NavTabLayout.OnNavigationItemSelectedListener getNavListener() {
         return navListener;
     }
 }

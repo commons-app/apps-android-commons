@@ -47,10 +47,10 @@
   <string name="logging_in_message">Vuordil...</string>
   <string name="updating_caption_title">Ođasmáhttá govvateavsttaid ja govvádusaid</string>
   <string name="updating_caption_message">Vuordil...</string>
-  <string name="login_success" fuzzy="true">Sisačáliheapmi lihkostuvai!</string>
-  <string name="login_failed" fuzzy="true">Sisačáliheapmi ii lihkostuvvan!</string>
+  <string name="login_success">Sisačáliheapmi lihkostuvai!</string>
+  <string name="login_failed">Sisačáliheapmi ii lihkostuvvan!</string>
   <string name="upload_failed">Fiila ii gávdnon. Geahččal áinnas eará fiilla.</string>
-  <string name="authentication_failed" fuzzy="true">Autentiseren ii doaibman, čálit mes oktii vel sisa</string>
+  <string name="authentication_failed">Autentiseren ii doaibman. Čálit mes oktii vel sisa.</string>
   <string name="uploading_started">Bajásluđen álggahuvvui!</string>
   <string name="uploading_queued">Bajásluđen ráiduduvvon (ráddjejuvvon čatnasanvuohki doaimmas)</string>
   <string name="upload_completed_notification_title">%1$s bajásluđejuvvon!</string>
@@ -77,11 +77,11 @@
   <string name="add_caption_toast">Atte mes govvateavstta dán fiilii</string>
   <string name="share_description_hint">Govvádus</string>
   <string name="share_caption_hint">Govvateaksta</string>
-  <string name="login_failed_network" fuzzy="true">Ii sáhte čálihit sisa - fierpmádagas feaila</string>
+  <string name="login_failed_network">Ii sáhte čálihit sisa - fierpmádagas feaila</string>
   <string name="login_failed_throttled">Beare máŋga eahpelihkostuvvan geahččaleami. Geahččal mat fas moatti minuvtta geahčen</string>
   <string name="login_failed_blocked">Dađibahábuht, dát geavaheaddji lea hehttejuvvon Commons:is</string>
   <string name="login_failed_2fa_needed">Fertet addit iežat guovtteceahkat dovddaldatkoda.</string>
-  <string name="login_failed_generic" fuzzy="true">Sisačáliheapmi ii lihkostuvvan</string>
+  <string name="login_failed_generic">Sisačáliheapmi ii lihkostuvvan</string>
   <string name="share_upload_button">Vurke</string>
   <string name="multiple_share_base_title">Nammat dán ráiddu</string>
   <string name="provider_modifications">Rievdadusat</string>
@@ -144,7 +144,7 @@
   <string name="welcome_help_button_text">Lassedieđut</string>
   <string name="detail_panel_cats_label">Kategoriijat</string>
   <string name="detail_panel_cats_loading">Luđeme...</string>
-  <string name="detail_panel_cats_none">Ii guhtege válljejuvvon</string>
+  <string name="detail_panel_cats_none">Ii oktage válljejuvvon</string>
   <string name="detail_caption_empty">Ii leat govvateaksta</string>
   <string name="detail_description_empty">Ii gávdno govvádus</string>
   <string name="detail_discussion_empty">Ii digaštallojuvvo</string>
@@ -190,7 +190,7 @@
   <string name="nearby_info_menu_wikipedia_article">Wikipedia-artihkal</string>
   <string name="login_to_your_account">Čálit sisa du dovddaldahkii</string>
   <string name="navigation_item_login">Čálit sisa</string>
-  <string name="skip_login_title" fuzzy="true">Áiggutgo don duođaid joatkit čálitkeahttá sisa?</string>
+  <string name="skip_login_title">Áiggutgo don duođaid joatkit čálitkeahttá sisa?</string>
   <string name="nearby_wikidata">Wikidata</string>
   <string name="nearby_wikipedia">Wikipedia</string>
   <string name="nearby_commons">Commons</string>
@@ -211,12 +211,17 @@
   <string name="delete_search_dialog">Áiggutgo don duođaid dán ohcama sihkkut?</string>
   <string name="delete">Sihko</string>
   <string name="statistics">Statistihkka</string>
-  <string name="level">Dássi</string>
+  <string name="level" fuzzy="true">Dássi</string>
   <string name="notifications">Almmuhusat</string>
   <string name="list_sheet">Listu</string>
   <string name="next">Čuovvovaš</string>
   <string name="title_page_bookmarks_pictures">Govat</string>
   <string name="title_page_bookmarks_locations">Sajit</string>
+  <string name="title_page_bookmarks_categories">Kategoriijat</string>
+  <string name="provider_bookmarks">Girjemearkkat</string>
+  <string name="provider_bookmarks_location">Girjemearkkat</string>
+  <string name="no_categories_selected">Ii oktage kategoriija leat válljejuvvon</string>
+  <string name="no_depictions_selected">Ii oktage govvádus leat válljejuvvon</string>
   <string name="back_button_warning">Gaskkalduhte fiilla vurkema</string>
   <string name="review_thanks_yes_button_text">Čuovvovaš govva</string>
   <string name="exif_tag_name_author">Vuoigŋadahkki</string>
@@ -230,8 +235,11 @@
   <string name="caption_edit_helper_edit_message_else">Govvateavstta lasiheapmi ii lihkostuvvan.</string>
   <string name="description_activity_title">Rievdat govvádusaid ja govvateavsttaid</string>
   <string name="nearby_search_hint">Šaldi, musea, hotealla jna.</string>
+  <string name="title_app_shortcut_bookmark">Girjemearkkat</string>
+  <string name="load_more">Luđe lasi</string>
   <string name="add_picture_to_wikipedia_article_title">Lasit gova Wikipediai</string>
   <string name="resume">joatkke</string>
+  <string name="bookmarks">Girjemearkkat</string>
   <string name="leaderboard_column_user">Geavaheaddji</string>
   <string name="cancelling_upload">Fiilla vurkema gaskkalduhttomin…</string>
   <string name="license_step_title">Medialiseansa</string>
@@ -242,7 +250,7 @@
   <string name="media_detail_in_all_languages">Buot gielaide</string>
   <string name="description">Govvádus</string>
   <string name="learn_more">LASSEDIEĐUT</string>
-  <string name="menu_view_user_page">Čájet geavaheaddjisiiddu</string>
+  <string name="menu_view_user_page" fuzzy="true">Čájet geavaheaddjisiiddu</string>
   <string name="edit_categories">Rievdat kategoriijaid</string>
   <string name="advanced_options">Lasseásahusat</string>
   <string name="apply">Geavat</string>

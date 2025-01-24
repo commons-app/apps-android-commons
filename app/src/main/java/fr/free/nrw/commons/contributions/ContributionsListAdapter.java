@@ -70,16 +70,8 @@ public class ContributionsListAdapter extends
 
     public interface Callback {
 
-        void retryUpload(Contribution contribution);
-
-        void deleteUpload(Contribution contribution);
-
         void openMediaDetail(int contribution, boolean isWikipediaPageExists);
 
         void addImageToWikipedia(Contribution contribution);
-
-        void pauseUpload(Contribution contribution);
-
-        void resumeUpload(Contribution contribution);
     }
 }

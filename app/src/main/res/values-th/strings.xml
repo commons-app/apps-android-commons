@@ -61,7 +61,6 @@
   <string name="preference_category_feedback">คำติชม</string>
   <string name="preference_category_privacy">ความเป็นส่วนตัว</string>
   <string name="app_name">คอมมอนส์</string>
-  <string name="bullet">•</string>
   <string name="menu_settings">การตั้งค่า</string>
   <string name="intent_share_upload_label">อัปโหลดไปคอมมอนส์</string>
   <string name="username">ชื่อผู้ใช้</string>
@@ -99,7 +98,7 @@
   <string name="provider_contributions">การอัปโหลดของฉัน</string>
   <string name="menu_share">แชร์</string>
   <string name="menu_view_file_page">ดูหน้าไฟล์</string>
-  <string name="share_title_hint">คำบรรยาย (จำเป็น)</string>
+  <string name="share_title_hint">คำอธิบาย (จำเป็น)</string>
   <string name="add_caption_toast">โปรดระบุคำอธิบายสำหรับไฟล์นี้</string>
   <string name="share_description_hint">คำอธิบาย</string>
   <string name="share_caption_hint">คำอธิบาย</string>
@@ -262,7 +261,7 @@
   <string name="skip_login">ข้าม</string>
   <string name="navigation_item_login">เข้าสู่ระบบ</string>
   <string name="skip_login_title" fuzzy="true">คุณต้องการข้ามการเข้าสู่ระบบหรือไม่?</string>
-  <string name="skip_login_message">คุณควรที่จะเข้าสู่ระบบก่อนที่จะอัพโหลดรูปภาพใดๆ</string>
+  <string name="skip_login_message" fuzzy="true">คุณควรที่จะเข้าสู่ระบบก่อนที่จะอัพโหลดรูปภาพใดๆ</string>
   <string name="login_alert_message">กรุณาเข้าสู่ระบบเพื่อใช้คุณลักษณะนี้</string>
   <string name="copy_wikicode">คัดลอก Wikitext ไปที่คลิปบอร์ด</string>
   <string name="wikicode_copied">wikitext ถูกคัดลอกไปที่คลิปบอร์ดแล้ว</string>
@@ -342,19 +341,19 @@
   <string name="nominate_delete">เสนอให้ลบ</string>
   <string name="delete">ลบ</string>
   <string name="Achievements">ความสำเร็จ</string>
-  <string name="Profile">โปรไฟล์</string>
+  <string name="Profile">โพรไฟล์</string>
   <string name="statistics">สถิติ</string>
   <string name="statistics_thanks">คำขอบคุณที่ได้รับแล้ว</string>
   <string name="statistics_featured">ภาพคัดสรร</string>
   <string name="statistics_wikidata_edits">ภาพผ่านทาง \"สถานที่ใกล้เคียง\"</string>
-  <string name="level">ระดับ</string>
+  <string name="level" fuzzy="true">ระดับ</string>
   <string name="images_uploaded">ภาพที่อัปโหลดแล้ว</string>
   <string name="image_reverts">รูปภาพไม่เปลี่ยนกลับ</string>
   <string name="images_used_by_wiki">ภาพที่ใช้แล้ว</string>
   <string name="achievements_share_message">แชร์ความสำเร็จให้กับเพื่อนของคุณ!</string>
   <string name="achievements_revert_limit_message">ที่ต้องการขั้นต่ำ:</string>
   <string name="error_occurred">เกิดข้อผิดพลาด!</string>
-  <string name="contributions_fragment">การมีส่วนร่วม</string>
+  <string name="contributions_fragment">ส่วนร่วม</string>
   <string name="nearby_fragment">ใกล้เคียง</string>
   <string name="notifications">การแจ้งเตือน</string>
   <string name="list_sheet">รายการ</string>

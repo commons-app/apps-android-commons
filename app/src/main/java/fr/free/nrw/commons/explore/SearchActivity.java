@@ -28,6 +28,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 import javax.inject.Inject;
 import timber.log.Timber;
@@ -95,15 +96,15 @@ public class SearchActivity extends BaseActivity
         searchDepictionsFragment = new SearchDepictionsFragment();
         searchCategoryFragment= new SearchCategoryFragment();
         fragmentList.add(searchMediaFragment);
-        titleList.add(getResources().getString(R.string.search_tab_title_media).toUpperCase());
+        titleList.add(getResources().getString(R.string.search_tab_title_media).toUpperCase(Locale.ROOT));
         fragmentList.add(searchCategoryFragment);
-        titleList.add(getResources().getString(R.string.search_tab_title_categories).toUpperCase());
+        titleList.add(getResources().getString(R.string.search_tab_title_categories).toUpperCase(Locale.ROOT));
         fragmentList.add(searchDepictionsFragment);
-        titleList.add(getResources().getString(R.string.search_tab_title_depictions).toUpperCase());
+        titleList.add(getResources().getString(R.string.search_tab_title_depictions).toUpperCase(Locale.ROOT));
 
         viewPagerAdapter.setTabData(fragmentList, titleList);
         viewPagerAdapter.notifyDataSetChanged();
-        compositeDisposable.add(RxSearchView.queryTextChanges(binding.searchBox)
+        getCompositeDisposable().add(RxSearchView.queryTextChanges(binding.searchBox)
                 .takeUntil(RxView.detaches(binding.searchBox))
                 .debounce(500, TimeUnit.MILLISECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
@@ -283,7 +284,7 @@ public class SearchActivity extends BaseActivity
     @Override protected void onDestroy() {
         super.onDestroy();
         //Dispose the disposables when the activity is destroyed
-        compositeDisposable.dispose();
+        getCompositeDisposable().dispose();
         binding = null;
     }
 }

@@ -1,24 +1,28 @@
 package fr.free.nrw.commons.nearby
 
+import android.content.Intent
 import android.view.View
-import android.view.View.*
+import android.view.View.GONE
+import android.view.View.INVISIBLE
+import android.view.View.VISIBLE
+import android.widget.RelativeLayout
 import androidx.activity.result.ActivityResultLauncher
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.transition.TransitionManager
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.hannesdorfmann.adapterdelegates4.dsl.AdapterDelegateViewBindingViewHolder
 import com.hannesdorfmann.adapterdelegates4.dsl.adapterDelegateViewBinding
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao
 import fr.free.nrw.commons.databinding.ItemPlaceBinding
 
-
 fun placeAdapterDelegate(
     bookmarkLocationDao: BookmarkLocationsDao,
     onItemClick: ((Place) -> Unit)? = null,
-    onCameraClicked: (Place, ActivityResultLauncher<Array<String>>) -> Unit,
+    onCameraClicked: (Place, ActivityResultLauncher<Array<String>>, ActivityResultLauncher<Intent>) -> Unit,
     onCameraLongPressed: () -> Boolean,
-    onGalleryClicked: (Place) -> Unit,
+    onGalleryClicked: (Place, ActivityResultLauncher<Intent>) -> Unit,
     onGalleryLongPressed: () -> Boolean,
     onBookmarkClicked: (Place, Boolean) -> Unit,
     onBookmarkLongPressed: () -> Boolean,
@@ -26,7 +30,9 @@ fun placeAdapterDelegate(
     onOverFlowLongPressed: () -> Boolean,
     onDirectionsClicked: (Place) -> Unit,
     onDirectionsLongPressed: () -> Boolean,
-    inAppCameraLocationPermissionLauncher: ActivityResultLauncher<Array<String>>
+    inAppCameraLocationPermissionLauncher: ActivityResultLauncher<Array<String>>,
+    cameraPickLauncherForResult: ActivityResultLauncher<Intent>,
+    galleryPickLauncherForResult: ActivityResultLauncher<Intent>
 ) = adapterDelegateViewBinding<Place, Place, ItemPlaceBinding>({ layoutInflater, parent ->
     ItemPlaceBinding.inflate(layoutInflater, parent, false)
 }) {
@@ -35,29 +41,35 @@ fun placeAdapterDelegate(
             showOrHideAndScrollToIfLast()
             onItemClick?.invoke(item)
         }
-        root.setOnFocusChangeListener { view1: View?, hasFocus: Boolean ->
+        root.setOnFocusChangeListener { _: View?, hasFocus: Boolean ->
+            val parentView = root.parent.parent.parent as? RelativeLayout
+            val bottomSheetBehavior = parentView?.let { BottomSheetBehavior.from(it) }
+
+            // Hide button layout if focus is lost, otherwise show it if it's not already visible
             if (!hasFocus && nearbyButtonLayout.buttonLayout.isShown) {
                 nearbyButtonLayout.buttonLayout.visibility = GONE
             } else if (hasFocus && !nearbyButtonLayout.buttonLayout.isShown) {
-                showOrHideAndScrollToIfLast()
-                onItemClick?.invoke(item)
+                if (bottomSheetBehavior?.state != BottomSheetBehavior.STATE_HIDDEN) {
+                    showOrHideAndScrollToIfLast()
+                    onItemClick?.invoke(item)
+                }
             }
         }
-        nearbyButtonLayout.cameraButton.setOnClickListener { onCameraClicked(item, inAppCameraLocationPermissionLauncher) }
+        nearbyButtonLayout.cameraButton.setOnClickListener { onCameraClicked(item, inAppCameraLocationPermissionLauncher, cameraPickLauncherForResult) }
         nearbyButtonLayout.cameraButton.setOnLongClickListener { onCameraLongPressed() }
 
-        nearbyButtonLayout.galleryButton.setOnClickListener { onGalleryClicked(item) }
-        nearbyButtonLayout.galleryButton.setOnLongClickListener{onGalleryLongPressed()}
+        nearbyButtonLayout.galleryButton.setOnClickListener { onGalleryClicked(item, galleryPickLauncherForResult) }
+        nearbyButtonLayout.galleryButton.setOnLongClickListener { onGalleryLongPressed() }
         bookmarkButtonImage.setOnClickListener {
             val isBookmarked = bookmarkLocationDao.updateBookmarkLocation(item)
             bookmarkButtonImage.setImageResource(
-                if (isBookmarked) R.drawable.ic_round_star_filled_24px else R.drawable.ic_round_star_border_24px
+                if (isBookmarked) R.drawable.ic_round_star_filled_24px else R.drawable.ic_round_star_border_24px,
             )
             onBookmarkClicked(item, isBookmarked)
         }
-        bookmarkButtonImage.setOnLongClickListener{onBookmarkLongPressed()}
+        bookmarkButtonImage.setOnLongClickListener { onBookmarkLongPressed() }
         nearbyButtonLayout.iconOverflow.setOnClickListener { onOverflowIconClicked(item, it) }
-        nearbyButtonLayout.iconOverflow.setOnLongClickListener{onOverFlowLongPressed()}
+        nearbyButtonLayout.iconOverflow.setOnLongClickListener { onOverFlowLongPressed() }
         nearbyButtonLayout.directionsButton.setOnClickListener { onDirectionsClicked(item) }
         bind {
             tvName.text = item.name
@@ -68,23 +80,28 @@ fun placeAdapterDelegate(
             } else {
                 // Remove the label and display only texts inside pharentheses (description) since too long
                 tvDesc.text =
-                    descriptionText.substringAfter(tvName.text.toString() + " (")
-                        .substringBeforeLast(")");
+                    descriptionText
+                        .substringAfter(tvName.text.toString() + " (")
+                        .substringBeforeLast(")")
             }
             distance.text = item.distance
             icon.setImageResource(item.label.icon)
             nearbyButtonLayout.iconOverflow.visibility =
-                if (item.hasCommonsLink() || item.hasWikidataLink()) VISIBLE
-                else GONE
+                if (item.hasCommonsLink() || item.hasWikidataLink()) {
+                    VISIBLE
+                } else {
+                    GONE
+                }
 
             bookmarkButtonImage.setImageResource(
-                if (bookmarkLocationDao.findBookmarkLocation(item))
+                if (bookmarkLocationDao.findBookmarkLocation(item)) {
                     R.drawable.ic_round_star_filled_24px
-                else
+                } else {
                     R.drawable.ic_round_star_border_24px
+                },
             )
         }
-        nearbyButtonLayout.directionsButton.setOnLongClickListener{onDirectionsLongPressed()}
+        nearbyButtonLayout.directionsButton.setOnLongClickListener { onDirectionsLongPressed() }
     }
 }
 
@@ -101,7 +118,7 @@ private fun AdapterDelegateViewBindingViewHolder<Place, ItemPlaceBinding>.showOr
                 (recyclerView.layoutManager as LinearLayoutManager?)
                     ?.scrollToPositionWithOffset(
                         lastPosition,
-                        nearbyButtonLayout.buttonLayout.height
+                        nearbyButtonLayout.buttonLayout.height,
                     )
             }
         }

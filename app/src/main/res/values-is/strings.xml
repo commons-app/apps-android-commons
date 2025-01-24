@@ -60,7 +60,6 @@
   <string name="preference_category_feedback">Umsagnir</string>
   <string name="preference_category_privacy">Persónuvernd</string>
   <string name="app_name">Commons</string>
-  <string name="bullet">•  \\</string>
   <string name="menu_settings">Stillingar</string>
   <string name="intent_share_upload_label">Senda inn á Commons</string>
   <string name="username">Notandanafn</string>
@@ -263,7 +262,7 @@
   <string name="skip_login">Sleppa</string>
   <string name="navigation_item_login">Skrá inn</string>
   <string name="skip_login_title" fuzzy="true">Viltu í alvörunni sleppa innskráningu?</string>
-  <string name="skip_login_message">Þú munt í framtíðinni þurfa að skrá þig inn til geta sent inn myndir.</string>
+  <string name="skip_login_message" fuzzy="true">Þú munt í framtíðinni þurfa að skrá þig inn til geta sent inn myndir.</string>
   <string name="login_alert_message">Skráðu þig inn til að nota þennan eiginleika</string>
   <string name="copy_wikicode">Afrita wiki-textann á klippispjaldið</string>
   <string name="wikicode_copied">Wiki-textinn var afritaður á klippispjaldið</string>
@@ -351,7 +350,7 @@
   <string name="statistics_thanks">Mótteknar þakkir</string>
   <string name="statistics_featured">Áberandi myndir</string>
   <string name="statistics_wikidata_edits">Myndir gegnum \"Nálægir staðir\"</string>
-  <string name="level">Stig</string>
+  <string name="level" fuzzy="true">Stig</string>
   <string name="images_uploaded">Myndir sendar inn</string>
   <string name="image_reverts">Myndir ekki hafnað</string>
   <string name="images_used_by_wiki">Myndir notaðar</string>
@@ -546,7 +545,7 @@
   <string name="title_for_child_classes">AFLEIDDIR FLOKKAR</string>
   <string name="title_for_parent_classes">YFIRFLOKKAR</string>
   <string name="upload_nearby_place_found_title">Staður í nágrenninu fannst</string>
-  <string name="upload_nearby_place_found_description">Er þetta mynd af staðnum %1$s?</string>
+  <string name="upload_nearby_place_found_description_singular" fuzzy="true">Er þetta mynd af staðnum %1$s?</string>
   <string name="title_app_shortcut_bookmark">Bókamerki</string>
   <string name="title_app_shortcut_setting">Stillingar</string>
   <string name="remove_bookmark">Fjarlægt úr bókamerkjum</string>
@@ -659,7 +658,7 @@
   <string name="read_phone_state_permission_message">Kort í nágrenninu þurfa að geta lesið STÖÐU SÍMANS til að virka almennilega</string>
   <string name="contributions_of_user">Framlög notanda: %s</string>
   <string name="achievements_of_user">Frammistaða notanda: %s</string>
-  <string name="menu_view_user_page">Skoða notandasíðu</string>
+  <string name="menu_view_user_page" fuzzy="true">Skoða notandasíðu</string>
   <string name="edit_depictions">Breyta myndlýsingum</string>
   <string name="edit_categories">Breyta flokkum</string>
   <string name="advanced_options">Ítarlegir valkostir</string>

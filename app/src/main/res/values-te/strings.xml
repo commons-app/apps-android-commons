@@ -50,7 +50,6 @@
   <string name="preference_category_feedback">ప్రతిస్పందన</string>
   <string name="preference_category_privacy">అంతరంగికత</string>
   <string name="app_name">కామన్స్</string>
-  <string name="bullet">•</string>
   <string name="menu_settings">అమరికలు</string>
   <string name="intent_share_upload_label">కామన్స్ లోకి ఎక్కించండి</string>
   <string name="username">వాడుకరిపేరు</string>
@@ -248,7 +247,7 @@
   <string name="skip_login">దాటవేయి</string>
   <string name="navigation_item_login">లాగినవండి</string>
   <string name="skip_login_title" fuzzy="true">నిజంగానే లాగినవరా?</string>
-  <string name="skip_login_message">భవిష్యత్తులో మీరు బొమ్మలు ఎక్కించాలంటే, లాగినవాల్సి ఉంటుంది.</string>
+  <string name="skip_login_message" fuzzy="true">భవిష్యత్తులో మీరు బొమ్మలు ఎక్కించాలంటే, లాగినవాల్సి ఉంటుంది.</string>
   <string name="login_alert_message">ఈ అంశాన్ని వాడాలంటే లాగినవండి</string>
   <string name="copy_wikicode">వికీటెక్స్టును క్లిప్‌బోర్డుకు కాపీ చెయ్యి</string>
   <string name="wikicode_copied">వికీటెక్స్టును క్లిప్‌బోర్డుకు కాపీ చేసాం</string>
@@ -335,7 +334,7 @@
   <string name="statistics_thanks">ధన్యవాదాలు అందాయి</string>
   <string name="statistics_featured">విశేష చిత్రాలు</string>
   <string name="statistics_wikidata_edits">\"దగ్గర లోని స్థలాల\" ద్వారా బొమ్మలు</string>
-  <string name="level">స్థాయి</string>
+  <string name="level" fuzzy="true">స్థాయి</string>
   <string name="images_uploaded">బొమ్మలను ఎక్కించాం</string>
   <string name="image_reverts">బొమ్మలను తిరక్కొట్టలేదు</string>
   <string name="images_used_by_wiki">వాడిన బొమ్మలు</string>
@@ -517,7 +516,7 @@
   <string name="title_for_child_classes">చైల్డ్ క్లాస్</string>
   <string name="title_for_parent_classes">పేరెంట్ క్లాస్</string>
   <string name="upload_nearby_place_found_title">సమీపంలోని స్థలాలు కనబడ్డాయి</string>
-  <string name="upload_nearby_place_found_description" fuzzy="true">ఇది %1$s ప్రాంతపు ఫొటోనా?</string>
+  <string name="upload_nearby_place_found_description_singular" fuzzy="true">ఇది %1$s ప్రాంతపు ఫొటోనా?</string>
   <string name="title_app_shortcut_bookmark">ఇష్టాంశాలు</string>
   <string name="title_app_shortcut_setting">అమరికలు</string>
   <string name="remove_bookmark">బుక్‌మార్కుల నుండి తీసేసాం</string>
@@ -611,7 +610,7 @@
   <string name="need_permission">అనుమతి కావాలి</string>
   <string name="contributions_of_user">వాడుకరి తోడ్పాట్లు: %s</string>
   <string name="achievements_of_user">వాడుకరి సాధించినవి: %s</string>
-  <string name="menu_view_user_page">వాడుకరి పేజీ చూడండి</string>
+  <string name="menu_view_user_page" fuzzy="true">వాడుకరి పేజీ చూడండి</string>
   <string name="edit_categories">వర్గాల్లో దిద్దుబాట్లు</string>
   <string name="advanced_options">ఉన్నత ఎంపికలు</string>
   <string name="advanced_query_info_text">సమీపంలోని క్వెరీని మీరు ఇష్టానుసారం పెట్టుకోవచ్చు. లోపాలేమైనా ఎదురైతే, రిసెట్ చేసి, అప్లై చెయ్యండి.</string>

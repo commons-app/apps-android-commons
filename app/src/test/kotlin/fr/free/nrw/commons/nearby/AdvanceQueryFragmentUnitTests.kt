@@ -34,7 +34,6 @@ import org.robolectric.annotation.LooperMode
 @Config(sdk = [21], application = TestCommonsApplication::class)
 @LooperMode(LooperMode.Mode.PAUSED)
 class AdvanceQueryFragmentUnitTests {
-
     private lateinit var view: View
     private lateinit var activity: MainActivity
     private lateinit var layoutInflater: LayoutInflater
@@ -104,7 +103,6 @@ class AdvanceQueryFragmentUnitTests {
         fragment.onViewCreated(view, bundle)
         assertEquals(defaultQuery, etQuery.text.toString())
     }
-
 
     @Test
     fun `when no query is passed in fragment argument, nothing is visible in text field`() {

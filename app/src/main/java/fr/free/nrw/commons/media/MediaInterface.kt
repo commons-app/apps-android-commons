@@ -19,7 +19,9 @@ interface MediaInterface {
      * @return
      */
     @GET("w/api.php?action=query&format=json&formatversion=2")
-    fun checkPageExistsUsingTitle(@Query("titles") title: String?): Single<MwQueryResponse>
+    fun checkPageExistsUsingTitle(
+        @Query("titles") title: String?,
+    ): Single<MwQueryResponse>
 
     /**
      * Check if file exists
@@ -28,7 +30,9 @@ interface MediaInterface {
      * @return
      */
     @GET("w/api.php?action=query&format=json&formatversion=2&list=allimages")
-    fun checkFileExistsUsingSha(@Query("aisha1") aisha1: String?): Single<MwQueryResponse>
+    fun checkFileExistsUsingSha(
+        @Query("aisha1") aisha1: String?,
+    ): Single<MwQueryResponse>
 
     /**
      * This method retrieves a list of Media objects filtered using image generator query
@@ -39,13 +43,13 @@ interface MediaInterface {
      * @return
      */
     @GET(
-        "w/api.php?action=query&format=json&formatversion=2" +                                  //Basic parameters
-        "&generator=categorymembers&gcmtype=file&gcmsort=timestamp&gcmdir=desc$MEDIA_PARAMS"    //Category parameters
+        "w/api.php?action=query&format=json&formatversion=2" + // Basic parameters
+            "&generator=categorymembers&gcmtype=file&gcmsort=timestamp&gcmdir=desc$MEDIA_PARAMS", // Category parameters
     )
     fun getMediaListFromCategory(
         @Query("gcmtitle") category: String?,
         @Query("gcmlimit") itemLimit: Int,
-        @QueryMap continuation: Map<String, String>
+        @QueryMap continuation: Map<String, String>,
     ): Single<MwQueryResponse>
 
     /**
@@ -57,13 +61,13 @@ interface MediaInterface {
      * @return
      */
     @GET(
-        "w/api.php?action=query&format=json&formatversion=2" +  //Basic parameters
-        "&generator=allimages&gaisort=timestamp&gaidir=older$MEDIA_PARAMS"
+        "w/api.php?action=query&format=json&formatversion=2" + // Basic parameters
+            "&generator=allimages&gaisort=timestamp&gaidir=older$MEDIA_PARAMS",
     )
     fun getMediaListForUser(
         @Query("gaiuser") username: String?,
         @Query("gailimit") itemLimit: Int,
-        @QueryMap(encoded = true) continuation: Map<String, String>
+        @QueryMap(encoded = true) continuation: Map<String, String>,
     ): Single<MwQueryResponse>
 
     /**
@@ -75,12 +79,13 @@ interface MediaInterface {
      * @return
      */
     @GET(
-        "w/api.php?action=query&format=json&formatversion=2" +          //Basic parameters
-        "&generator=search&gsrwhat=text&gsrnamespace=6$MEDIA_PARAMS"    //Search parameters
+        "w/api.php?action=query&format=json&formatversion=2" + // Basic parameters
+            "&generator=search&gsrwhat=text&gsrnamespace=6$MEDIA_PARAMS", // Search parameters
     )
     fun getMediaListFromSearch(
         @Query("gsrsearch") keyword: String?,
-        @Query("gsrlimit") itemLimit: Int, @Query("gsroffset") offset: Int
+        @Query("gsrlimit") itemLimit: Int,
+        @Query("gsroffset") offset: Int,
     ): Single<MwQueryResponse>
 
     /**
@@ -91,13 +96,13 @@ interface MediaInterface {
      * @return
      */
     @GET(
-        "w/api.php?action=query&format=json&formatversion=2" +      //Basic parameters
-        "&generator=geosearch&ggsnamespace=6$MEDIA_PARAMS"          //Search parameters
+        "w/api.php?action=query&format=json&formatversion=2" + // Basic parameters
+            "&generator=geosearch&ggsnamespace=6$MEDIA_PARAMS", // Search parameters
     )
     fun getMediaListFromGeoSearch(
         @Query("ggscoord") location: String?,
         @Query("ggslimit") itemLimit: Int,
-        @Query("ggsradius") radius: Int
+        @Query("ggsradius") radius: Int,
     ): Single<MwQueryResponse>
 
     /**
@@ -107,7 +112,9 @@ interface MediaInterface {
      * @return
      */
     @GET("w/api.php?action=query&format=json&formatversion=2$MEDIA_PARAMS_WITH_CATEGORY_DETAILS")
-    fun getMedia(@Query("titles") title: String?): Single<MwQueryResponse>
+    fun getMedia(
+        @Query("titles") title: String?,
+    ): Single<MwQueryResponse>
 
     /**
      * Fetches Media object from the imageInfo API but suppress (known) errors
@@ -117,7 +124,9 @@ interface MediaInterface {
      */
     @GET("w/api.php?action=query&format=json&formatversion=2$MEDIA_PARAMS_WITH_CATEGORY_DETAILS")
     @Headers(SUPPRESS_ERROR_LOG_HEADER)
-    fun getMediaSuppressingErrors(@Query("titles") title: String?): Single<MwQueryResponse>
+    fun getMediaSuppressingErrors(
+        @Query("titles") title: String?,
+    ): Single<MwQueryResponse>
 
     /**
      * Fetches Media object from the imageInfo API
@@ -127,7 +136,9 @@ interface MediaInterface {
      */
     @GET("w/api.php?action=query&format=json&formatversion=2$MEDIA_PARAMS")
     @Headers(SUPPRESS_ERROR_LOG_HEADER)
-    fun getMediaById(@Query("pageids") pageIds: String?): Single<MwQueryResponse>
+    fun getMediaById(
+        @Query("pageids") pageIds: String?,
+    ): Single<MwQueryResponse>
 
     /**
      * Fetches Media object from the imageInfo API
@@ -137,11 +148,15 @@ interface MediaInterface {
      * @return
      */
     @GET("w/api.php?action=query&format=json&formatversion=2&generator=images$MEDIA_PARAMS")
-    fun getMediaWithGenerator(@Query("titles") title: String?): Single<MwQueryResponse>
+    fun getMediaWithGenerator(
+        @Query("titles") title: String?,
+    ): Single<MwQueryResponse>
 
     @GET("w/api.php?format=json&action=parse&prop=text")
     @Headers(SUPPRESS_ERROR_LOG_HEADER)
-    fun getPageHtml(@Query("page") title: String?): Single<MwParseResponse>
+    fun getPageHtml(
+        @Query("page") title: String?,
+    ): Single<MwParseResponse>
 
     /**
      * Fetches caption using file name
@@ -151,7 +166,7 @@ interface MediaInterface {
     @GET("w/api.php?action=wbgetentities&props=labels&format=json&languagefallback=1")
     fun fetchCaptionByFilename(
         @Query("language") language: String?,
-        @Query("titles") filename: String?
+        @Query("titles") filename: String?,
     ): Single<MwQueryResponse>
 
     /**
@@ -161,12 +176,13 @@ interface MediaInterface {
      * @param sroffset number od depictions already fetched, this is useful in implementing pagination
      */
     @GET(
-        "w/api.php?action=query&format=json&formatversion=2" +  //Basic parameters
-        "&generator=search&gsrnamespace=6$MEDIA_PARAMS"         //Search parameters
+        "w/api.php?action=query&format=json&formatversion=2" + // Basic parameters
+            "&generator=search&gsrnamespace=6$MEDIA_PARAMS", // Search parameters
     )
     fun fetchImagesForDepictedItem(
         @Query("gsrsearch") query: String?,
-        @Query("gsrlimit") srlimit: String?, @Query("gsroffset") sroffset: String?
+        @Query("gsrlimit") srlimit: String?,
+        @Query("gsroffset") sroffset: String?,
     ): Single<MwQueryResponse>
 
     companion object {

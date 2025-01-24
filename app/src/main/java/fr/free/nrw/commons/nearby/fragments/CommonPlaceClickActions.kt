@@ -21,109 +21,128 @@ import timber.log.Timber
 import javax.inject.Inject
 import javax.inject.Named
 
-
-class CommonPlaceClickActions @Inject constructor(
-    @Named("default_preferences") private val applicationKvStore: JsonKvStore,
-    private val activity: Activity,
-    private val contributionController: ContributionController
-) {
-
-    fun onCameraClicked(): (Place, ActivityResultLauncher<Array<String>>) -> Unit = { place, launcher ->
-        if (applicationKvStore.getBoolean("login_skipped", false)) {
-            showLoginDialog()
-        } else {
-            Timber.d("Camera button tapped. Image title: ${place.getName()}Image desc: ${place.longDescription}")
-            storeSharedPrefs(place)
-            contributionController.initiateCameraPick(activity, launcher)
-        }
-    }
-
-    /**
-    * Shows the Label for the Icon when it's long pressed
-     **/
-    fun onCameraLongPressed(): () -> Boolean = {
-        Toast.makeText(activity, R.string.menu_from_camera, Toast.LENGTH_SHORT).show()
-        true
-    }
-    fun onGalleryLongPressed(): () -> Boolean = {
-        Toast.makeText(activity, R.string.menu_from_gallery, Toast.LENGTH_SHORT).show()
-        true
-    }
-    fun onBookmarkLongPressed(): () -> Boolean = {
-        Toast.makeText(activity, R.string.menu_bookmark, Toast.LENGTH_SHORT).show()
-        true
-    }
-    fun onDirectionsLongPressed(): () -> Boolean = {
-        Toast.makeText(activity, R.string.nearby_directions, Toast.LENGTH_SHORT).show()
-        true
-    }
-    fun onOverflowLongPressed(): () -> Boolean = {
-        Toast.makeText(activity, R.string.more, Toast.LENGTH_SHORT).show()
-        true
-    }
-
-    fun onGalleryClicked(): (Place) -> Unit = {
-        if (applicationKvStore.getBoolean("login_skipped", false)) {
-            showLoginDialog()
-        } else {
-            Timber.d("Gallery button tapped. Image title: ${it.getName()}Image desc: ${it.getLongDescription()}")
-            storeSharedPrefs(it)
-            contributionController.initiateGalleryPick(activity, false)
-        }
-    }
-
-    fun onOverflowClicked(): (Place, View) -> Unit = { place, view ->
-        PopupMenu(view.context, view).apply {
-            inflate(R.menu.nearby_info_dialog_options)
-            enableBy(R.id.nearby_info_menu_commons_article, place.hasCommonsLink())
-            enableBy(R.id.nearby_info_menu_wikidata_article, place.hasWikidataLink())
-            enableBy(R.id.nearby_info_menu_wikipedia_article, place.hasWikipediaLink())
-            setOnMenuItemClickListener { item: MenuItem ->
-                when (item.itemId) {
-                    R.id.nearby_info_menu_commons_article -> openWebView(place.siteLinks.commonsLink)
-                    R.id.nearby_info_menu_wikidata_article -> openWebView(place.siteLinks.wikidataLink)
-                    R.id.nearby_info_menu_wikipedia_article -> openWebView(place.siteLinks.wikipediaLink)
-                    else -> false
+class CommonPlaceClickActions
+    @Inject
+    constructor(
+        @Named("default_preferences") private val applicationKvStore: JsonKvStore,
+        private val activity: Activity,
+        private val contributionController: ContributionController,
+    ) {
+        fun onCameraClicked(): (Place, ActivityResultLauncher<Array<String>>, ActivityResultLauncher<Intent>) -> Unit =
+            { place, launcher, resultLauncher ->
+                if (applicationKvStore.getBoolean("login_skipped", false)) {
+                    showLoginDialog()
+                } else {
+                    Timber.d("Camera button tapped. Image title: ${place.getName()}Image desc: ${place.longDescription}")
+                    storeSharedPrefs(place)
+                    contributionController.initiateCameraPick(activity, launcher, resultLauncher)
                 }
             }
-        }.show()
-    }
 
-    fun onDirectionsClicked(): (Place) -> Unit = {
-        Utils.handleGeoCoordinates(activity, it.getLocation())
-    }
-
-    private fun storeSharedPrefs(selectedPlace: Place) {
-        Timber.d("Store place object %s", selectedPlace.toString())
-        applicationKvStore.putJson(WikidataConstants.PLACE_OBJECT, selectedPlace)
-    }
-
-    private fun openWebView(link: Uri): Boolean {
-        Utils.handleWebUrl(activity, link)
-        return true
-    }
-
-    private fun PopupMenu.enableBy(menuId: Int, hasLink: Boolean) {
-        menu.findItem(menuId).isEnabled = hasLink
-    }
-
-    private fun showLoginDialog() {
-        AlertDialog.Builder(activity)
-            .setMessage(R.string.login_alert_message)
-            .setPositiveButton(R.string.login) { dialog, which ->
-                setPositiveButton()
+        /**
+         * Shows the Label for the Icon when it's long pressed
+         **/
+        fun onCameraLongPressed(): () -> Boolean =
+            {
+                Toast.makeText(activity, R.string.menu_from_camera, Toast.LENGTH_SHORT).show()
+                true
             }
-            .show()
-    }
 
-    private fun setPositiveButton() {
-        ActivityUtils.startActivityWithFlags(
-            activity,
-            LoginActivity::class.java,
-            Intent.FLAG_ACTIVITY_CLEAR_TOP,
-            Intent.FLAG_ACTIVITY_SINGLE_TOP
-        )
-        applicationKvStore.putBoolean("login_skipped", false)
-        activity.finish()
+        fun onGalleryLongPressed(): () -> Boolean =
+            {
+                Toast.makeText(activity, R.string.menu_from_gallery, Toast.LENGTH_SHORT).show()
+                true
+            }
+
+        fun onBookmarkLongPressed(): () -> Boolean =
+            {
+                Toast.makeText(activity, R.string.menu_bookmark, Toast.LENGTH_SHORT).show()
+                true
+            }
+
+        fun onDirectionsLongPressed(): () -> Boolean =
+            {
+                Toast.makeText(activity, R.string.nearby_directions, Toast.LENGTH_SHORT).show()
+                true
+            }
+
+        fun onOverflowLongPressed(): () -> Boolean =
+            {
+                Toast.makeText(activity, R.string.more, Toast.LENGTH_SHORT).show()
+                true
+            }
+
+        fun onGalleryClicked(): (Place, ActivityResultLauncher<Intent>) -> Unit =
+            {place, galleryPickLauncherForResult ->
+                if (applicationKvStore.getBoolean("login_skipped", false)) {
+                    showLoginDialog()
+                } else {
+                    Timber.d("Gallery button tapped. Image title: ${place.getName()}Image desc: ${place.getLongDescription()}")
+                    storeSharedPrefs(place)
+                    contributionController.initiateGalleryPick(activity, galleryPickLauncherForResult, false)
+                }
+            }
+
+        fun onOverflowClicked(): (Place, View) -> Unit =
+            { place, view ->
+                PopupMenu(view.context, view)
+                    .apply {
+                        inflate(R.menu.nearby_info_dialog_options)
+                        enableBy(R.id.nearby_info_menu_commons_article, place.hasCommonsLink())
+                        enableBy(R.id.nearby_info_menu_wikidata_article, place.hasWikidataLink())
+                        enableBy(R.id.nearby_info_menu_wikipedia_article, place.hasWikipediaLink())
+                        setOnMenuItemClickListener { item: MenuItem ->
+                            when (item.itemId) {
+                                R.id.nearby_info_menu_commons_article -> openWebView(place.siteLinks.commonsLink)
+                                R.id.nearby_info_menu_wikidata_article -> openWebView(place.siteLinks.wikidataLink)
+                                R.id.nearby_info_menu_wikipedia_article -> openWebView(place.siteLinks.wikipediaLink)
+                                else -> false
+                            }
+                        }
+                    }.show()
+            }
+
+        fun onDirectionsClicked(): (Place) -> Unit =
+            {
+                Utils.handleGeoCoordinates(activity, it.getLocation())
+            }
+
+        private fun storeSharedPrefs(selectedPlace: Place) {
+            Timber.d("Store place object %s", selectedPlace.toString())
+            applicationKvStore.putJson(WikidataConstants.PLACE_OBJECT, selectedPlace)
+        }
+
+        private fun openWebView(link: Uri): Boolean {
+            Utils.handleWebUrl(activity, link)
+            return true
+        }
+
+        private fun PopupMenu.enableBy(
+            menuId: Int,
+            hasLink: Boolean,
+        ) {
+            menu.findItem(menuId).isEnabled = hasLink
+        }
+
+        private fun showLoginDialog() {
+            AlertDialog
+                .Builder(activity)
+                .setMessage(R.string.login_alert_message)
+                .setCancelable(false)
+                .setNegativeButton(R.string.cancel){_,_ -> }
+                .setPositiveButton(R.string.login) { dialog, which ->
+                    setPositiveButton()
+                }.show()
+        }
+
+        private fun setPositiveButton() {
+            ActivityUtils.startActivityWithFlags(
+                activity,
+                LoginActivity::class.java,
+                Intent.FLAG_ACTIVITY_CLEAR_TOP,
+                Intent.FLAG_ACTIVITY_SINGLE_TOP,
+            )
+            applicationKvStore.putBoolean("login_skipped", false)
+            activity.finish()
+        }
     }
-}

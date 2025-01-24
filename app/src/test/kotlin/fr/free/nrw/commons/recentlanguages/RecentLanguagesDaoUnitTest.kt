@@ -6,9 +6,19 @@ import android.database.Cursor
 import android.database.MatrixCursor
 import android.database.sqlite.SQLiteDatabase
 import android.os.RemoteException
-import com.nhaarman.mockitokotlin2.*
+import com.nhaarman.mockitokotlin2.anyOrNull
+import com.nhaarman.mockitokotlin2.argumentCaptor
+import com.nhaarman.mockitokotlin2.inOrder
+import com.nhaarman.mockitokotlin2.mock
+import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.TestCommonsApplication
-import fr.free.nrw.commons.recentlanguages.RecentLanguagesDao.Table.*
+import fr.free.nrw.commons.recentlanguages.RecentLanguagesDao.Table.COLUMN_CODE
+import fr.free.nrw.commons.recentlanguages.RecentLanguagesDao.Table.COLUMN_NAME
+import fr.free.nrw.commons.recentlanguages.RecentLanguagesDao.Table.CREATE_TABLE_STATEMENT
+import fr.free.nrw.commons.recentlanguages.RecentLanguagesDao.Table.DROP_TABLE_STATEMENT
+import fr.free.nrw.commons.recentlanguages.RecentLanguagesDao.Table.onCreate
+import fr.free.nrw.commons.recentlanguages.RecentLanguagesDao.Table.onDelete
+import fr.free.nrw.commons.recentlanguages.RecentLanguagesDao.Table.onUpdate
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
@@ -17,18 +27,17 @@ import org.mockito.ArgumentMatchers.any
 import org.mockito.ArgumentMatchers.eq
 import org.mockito.Mockito.verify
 import org.mockito.Mockito.verifyNoInteractions
-import org.mockito.Mockito.verifyNoInteractions
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
 class RecentLanguagesDaoUnitTest {
-
-    private val columns = arrayOf(
-        COLUMN_NAME,
-        COLUMN_CODE
-    )
+    private val columns =
+        arrayOf(
+            COLUMN_NAME,
+            COLUMN_CODE,
+        )
 
     private val client: ContentProviderClient = mock()
     private val database: SQLiteDatabase = mock()
@@ -76,31 +85,30 @@ class RecentLanguagesDaoUnitTest {
         whenever(client.query(any(), any(), anyOrNull(), any(), anyOrNull()))
             .thenReturn(createCursor(14))
 
-        val result = testObject.recentLanguages
+        val result = testObject.getRecentLanguages()
 
         Assert.assertEquals(14, (result.size))
-
     }
 
     @Test(expected = RuntimeException::class)
     fun getGetRecentLanguagesTranslatesExceptions() {
         whenever(client.query(any(), any(), anyOrNull(), any(), anyOrNull())).thenThrow(
-            RemoteException("")
+            RemoteException(""),
         )
-        testObject.recentLanguages
+        testObject.getRecentLanguages()
     }
 
     @Test
     fun getGetRecentLanguagesReturnsEmptyList_emptyCursor() {
         whenever(client.query(any(), any(), anyOrNull(), any(), anyOrNull()))
             .thenReturn(createCursor(0))
-        Assert.assertTrue(testObject.recentLanguages.isEmpty())
+        Assert.assertTrue(testObject.getRecentLanguages().isEmpty())
     }
 
     @Test
     fun getGetRecentLanguagesReturnsEmptyList_nullCursor() {
         whenever(client.query(any(), any(), anyOrNull(), any(), anyOrNull())).thenReturn(null)
-        Assert.assertTrue(testObject.recentLanguages.isEmpty())
+        Assert.assertTrue(testObject.getRecentLanguages().isEmpty())
     }
 
     @Test
@@ -109,7 +117,7 @@ class RecentLanguagesDaoUnitTest {
         whenever(client.query(any(), any(), anyOrNull(), any(), anyOrNull())).thenReturn(mockCursor)
         whenever(mockCursor.moveToFirst()).thenReturn(false)
 
-        testObject.recentLanguages
+        testObject.getRecentLanguages()
 
         verify(mockCursor).close()
     }
@@ -123,7 +131,7 @@ class RecentLanguagesDaoUnitTest {
     @Test(expected = RuntimeException::class)
     fun findLanguageTranslatesExceptions() {
         whenever(client.query(any(), any(), anyOrNull(), any(), anyOrNull())).thenThrow(
-            RemoteException("")
+            RemoteException(""),
         )
         testObject.findRecentLanguage(exampleLanguage.languageCode)
     }
@@ -291,11 +299,11 @@ class RecentLanguagesDaoUnitTest {
             Assert.assertEquals(2, cv.size())
             Assert.assertEquals(
                 exampleLanguage.languageName,
-                cv.getAsString(COLUMN_NAME)
+                cv.getAsString(COLUMN_NAME),
             )
             Assert.assertEquals(
                 exampleLanguage.languageCode,
-                cv.getAsString(COLUMN_CODE)
+                cv.getAsString(COLUMN_CODE),
             )
         }
     }
@@ -306,10 +314,10 @@ class RecentLanguagesDaoUnitTest {
         testObject.deleteRecentLanguage(exampleLanguage.languageCode)
     }
 
-    private fun createCursor(rowCount: Int) = MatrixCursor(columns, rowCount).apply {
-
-        for (i in 0 until rowCount) {
-            addRow(listOf("languageName", "languageCode"))
+    private fun createCursor(rowCount: Int) =
+        MatrixCursor(columns, rowCount).apply {
+            for (i in 0 until rowCount) {
+                addRow(listOf("languageName", "languageCode"))
+            }
         }
-    }
 }

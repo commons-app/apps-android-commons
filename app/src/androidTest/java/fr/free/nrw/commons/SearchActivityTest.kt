@@ -16,7 +16,6 @@ import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 class SearchActivityTest {
-
     @get:Rule
     var activityRule = ActivityTestRule(SearchActivity::class.java)
 
@@ -31,21 +30,22 @@ class SearchActivityTest {
 
     @Test
     fun exploreActivityTest() {
-        val searchAutoComplete = Espresso.onView(
-            Matchers.allOf(
-                UITestHelper.childAtPosition(
-                    Matchers.allOf(
-                        ViewMatchers.withClassName(Matchers.`is`("android.widget.LinearLayout")),
-                        UITestHelper.childAtPosition(
+        val searchAutoComplete =
+            Espresso.onView(
+                Matchers.allOf(
+                    UITestHelper.childAtPosition(
+                        Matchers.allOf(
                             ViewMatchers.withClassName(Matchers.`is`("android.widget.LinearLayout")),
-                            1
-                        )
+                            UITestHelper.childAtPosition(
+                                ViewMatchers.withClassName(Matchers.`is`("android.widget.LinearLayout")),
+                                1,
+                            ),
+                        ),
+                        0,
                     ),
-                    0
+                    ViewMatchers.isDisplayed(),
                 ),
-                ViewMatchers.isDisplayed()
             )
-        )
         searchAutoComplete.perform(ViewActions.replaceText("cat"), ViewActions.closeSoftKeyboard())
         UITestHelper.sleep(5000)
         device.swipe(1000, 1400, 500, 1400, 20)

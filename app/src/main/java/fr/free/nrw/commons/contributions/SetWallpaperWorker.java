@@ -5,14 +5,11 @@ import android.app.NotificationManager;
 import android.app.WallpaperManager;
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
-import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
-import androidx.work.Data;
 import androidx.work.Worker;
 import androidx.work.WorkerParameters;
 import com.facebook.common.executors.CallerThreadExecutor;
@@ -25,7 +22,6 @@ import com.facebook.imagepipeline.image.CloseableImage;
 import com.facebook.imagepipeline.request.ImageRequest;
 import com.facebook.imagepipeline.request.ImageRequestBuilder;
 import fr.free.nrw.commons.R;
-import java.io.IOException;
 import timber.log.Timber;
 
 public class SetWallpaperWorker extends Worker {

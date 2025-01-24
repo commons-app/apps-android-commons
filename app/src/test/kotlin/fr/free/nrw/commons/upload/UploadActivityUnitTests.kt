@@ -5,12 +5,11 @@ import android.content.Intent
 import androidx.test.core.app.ApplicationProvider
 import androidx.work.Configuration
 import androidx.work.testing.WorkManagerTestInitHelper
-import fr.free.nrw.commons.CommonsApplication
 import fr.free.nrw.commons.OkHttpConnectionFactory
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestCommonsApplication
-import fr.free.nrw.commons.createTestClient
 import fr.free.nrw.commons.contributions.ContributionController
+import fr.free.nrw.commons.createTestClient
 import fr.free.nrw.commons.filepicker.UploadableFile
 import fr.free.nrw.commons.upload.categories.UploadCategoriesFragment
 import fr.free.nrw.commons.upload.license.MediaLicenseFragment
@@ -28,12 +27,10 @@ import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
 import java.lang.reflect.Method
 
-
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
 @LooperMode(LooperMode.Mode.PAUSED)
 class UploadActivityUnitTests {
-
     private lateinit var activity: UploadActivity
     private lateinit var context: Context
 
@@ -77,15 +74,16 @@ class UploadActivityUnitTests {
     @Test
     @Throws(Exception::class)
     fun testIsLoggedIn() {
-        activity.isLoggedIn
+        activity.isLoggedIn()
     }
 
     @Test
     @Throws(Exception::class)
     fun testOnResume() {
-        val method: Method = UploadActivity::class.java.getDeclaredMethod(
-            "onResume"
-        )
+        val method: Method =
+            UploadActivity::class.java.getDeclaredMethod(
+                "onResume",
+            )
         method.isAccessible = true
         method.invoke(activity)
     }
@@ -93,9 +91,10 @@ class UploadActivityUnitTests {
     @Test
     @Throws(Exception::class)
     fun testOnStop() {
-        val method: Method = UploadActivity::class.java.getDeclaredMethod(
-            "onStop"
-        )
+        val method: Method =
+            UploadActivity::class.java.getDeclaredMethod(
+                "onStop",
+            )
         method.isAccessible = true
         method.invoke(activity)
     }
@@ -139,7 +138,7 @@ class UploadActivityUnitTests {
     @Test
     @Throws(Exception::class)
     fun testGetUploadableFiles() {
-        activity.uploadableFiles
+        activity.getUploadableFiles()
     }
 
     @Test
@@ -169,23 +168,11 @@ class UploadActivityUnitTests {
 
     @Test
     @Throws(Exception::class)
-    fun testOnActivityResult() {
-        val method: Method = UploadActivity::class.java.getDeclaredMethod(
-            "onActivityResult",
-            Int::class.java,
-            Int::class.java,
-            Intent::class.java
-        )
-        method.isAccessible = true
-        method.invoke(activity, CommonsApplication.OPEN_APPLICATION_DETAIL_SETTINGS, 0, Intent())
-    }
-
-    @Test
-    @Throws(Exception::class)
     fun testReceiveSharedItems() {
-        val method: Method = UploadActivity::class.java.getDeclaredMethod(
-            "receiveSharedItems"
-        )
+        val method: Method =
+            UploadActivity::class.java.getDeclaredMethod(
+                "receiveSharedItems",
+            )
         method.isAccessible = true
         method.invoke(activity)
     }
@@ -193,9 +180,10 @@ class UploadActivityUnitTests {
     @Test
     @Throws(Exception::class)
     fun testReceiveExternalSharedItems() {
-        val method: Method = UploadActivity::class.java.getDeclaredMethod(
-            "receiveExternalSharedItems"
-        )
+        val method: Method =
+            UploadActivity::class.java.getDeclaredMethod(
+                "receiveExternalSharedItems",
+            )
         method.isAccessible = true
         method.invoke(activity)
     }
@@ -203,9 +191,10 @@ class UploadActivityUnitTests {
     @Test
     @Throws(Exception::class)
     fun testReceiveInternalSharedItems() {
-        val method: Method = UploadActivity::class.java.getDeclaredMethod(
-            "receiveInternalSharedItems"
-        )
+        val method: Method =
+            UploadActivity::class.java.getDeclaredMethod(
+                "receiveInternalSharedItems",
+            )
         method.isAccessible = true
         method.invoke(activity)
     }
@@ -225,9 +214,10 @@ class UploadActivityUnitTests {
     @Test
     @Throws(Exception::class)
     fun testHandleNullMedia() {
-        val method: Method = UploadActivity::class.java.getDeclaredMethod(
-            "handleNullMedia"
-        )
+        val method: Method =
+            UploadActivity::class.java.getDeclaredMethod(
+                "handleNullMedia",
+            )
         method.isAccessible = true
         method.invoke(activity)
     }
@@ -256,16 +246,19 @@ class UploadActivityUnitTests {
         Whitebox.setInternalState(
             activity,
             "mediaLicenseFragment",
-            mock(MediaLicenseFragment::class.java)
+            mock(MediaLicenseFragment::class.java),
         )
         Whitebox.setInternalState(
-            activity, "uploadCategoriesFragment", mock(
-                UploadCategoriesFragment::class.java
+            activity,
+            "uploadCategoriesFragment",
+            mock(
+                UploadCategoriesFragment::class.java,
+            ),
+        )
+        val method: Method =
+            UploadActivity::class.java.getDeclaredMethod(
+                "onDestroy",
             )
-        )
-        val method: Method = UploadActivity::class.java.getDeclaredMethod(
-            "onDestroy"
-        )
         method.isAccessible = true
         method.invoke(activity)
     }
@@ -273,11 +266,11 @@ class UploadActivityUnitTests {
     @Test
     @Throws(Exception::class)
     fun testOnBackPressed() {
-        val method: Method = UploadActivity::class.java.getDeclaredMethod(
-            "onBackPressed"
-        )
+        val method: Method =
+            UploadActivity::class.java.getDeclaredMethod(
+                "onBackPressed",
+            )
         method.isAccessible = true
         method.invoke(activity)
     }
-
 }

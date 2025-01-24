@@ -18,9 +18,11 @@
 * Jesusmc
 * Kaganer
 * Kareyac
+* Lutece398
 * MaxBioHazard
 * McDutchie
 * Megakott
+* Mitte27
 * Monirec
 * Movses
 * Nastua Buldakova
@@ -115,7 +117,6 @@
   <string name="preference_category_feedback">Обратная связь</string>
   <string name="preference_category_privacy">Конфиденциальность</string>
   <string name="app_name">Викисклад</string>
-  <string name="bullet">•</string>
   <string name="menu_settings">Настройки</string>
   <string name="intent_share_upload_label">Загрузить на Викисклад</string>
   <string name="upload_in_progress">Идёт загрузка…</string>
@@ -156,6 +157,8 @@
   <string name="menu_from_camera">Сфотографировать</string>
   <string name="menu_nearby">Поблизости</string>
   <string name="provider_contributions">Мои загрузки</string>
+  <string name="menu_copy_link">Скопировать ссылку</string>
+  <string name="menu_link_copied">Ссылка скопирована в буфер обмена</string>
   <string name="menu_share">Поделиться</string>
   <string name="menu_view_file_page">Просмотреть страницу файла</string>
   <string name="share_title_hint">Подпись (Обязательна)</string>
@@ -325,7 +328,7 @@
   <string name="skip_login">Пропустить</string>
   <string name="navigation_item_login">Войти</string>
   <string name="skip_login_title">Вы действительно хотите пропустить авторизацию?</string>
-  <string name="skip_login_message">Вам следует залогиниться чтобы загружать изображения.</string>
+  <string name="skip_login_message">Вам придётся войти в систему, чтобы загружать фотографии в будущем.</string>
   <string name="login_alert_message">Войдите, чтобы использовать эту функцию</string>
   <string name="copy_wikicode">Копирование викикода в буфер обмена</string>
   <string name="wikicode_copied">Викикод скопирован в буфер обмена</string>
@@ -413,11 +416,13 @@
   <string name="delete">Удалить</string>
   <string name="Achievements">Достижения</string>
   <string name="Profile">Профиль</string>
+  <string name="badges">Значки</string>
   <string name="statistics">Статистика</string>
   <string name="statistics_thanks">Получены благодарности</string>
   <string name="statistics_featured">Избранные изображения</string>
   <string name="statistics_wikidata_edits">Изображения мест поблизости</string>
-  <string name="level">Уровень</string>
+  <string name="level">Уровень %d</string>
+  <string name="profileLevel">%s (Уровень %s)</string>
   <string name="images_uploaded">Загружено изображений</string>
   <string name="image_reverts">Изображения, которые не откатывались</string>
   <string name="images_used_by_wiki">Использовано изображений</string>
@@ -449,6 +454,7 @@
   <string name="map_application_missing">Не найдено совместимое картографическое приложение на вашем устройстве. Установите его, чтобы вы могли использовать эту функцию.</string>
   <string name="title_page_bookmarks_pictures">Изображения</string>
   <string name="title_page_bookmarks_locations">Места</string>
+  <string name="title_page_bookmarks_categories">Категории</string>
   <string name="menu_bookmark">Добавить/удалить закладки</string>
   <string name="provider_bookmarks">Закладки</string>
   <string name="bookmark_empty">Вы не добавили ни одной закладки</string>
@@ -530,6 +536,7 @@
   <string name="no_notification">У вас нет непрочитанных уведомлений</string>
   <string name="no_read_notification">Нет прочитанных уведомлений</string>
   <string name="share_logs_using">Поделиться лог-файлами</string>
+  <string name="check_your_email_inbox">Проверьте свой почтовый ящик</string>
   <string name="menu_option_read">Просмотр прочитанного</string>
   <string name="menu_option_unread">См. непрочитанные</string>
   <string name="error_occurred_in_picking_images">Произошла ошибка при загрузке изображений</string>
@@ -628,7 +635,8 @@
   <string name="title_for_child_classes">ДЕТСКИЕ КЛАССЫ</string>
   <string name="title_for_parent_classes">РОДИТЕЛЬСКИЕ КЛАССЫ</string>
   <string name="upload_nearby_place_found_title">Место поблизости найдено</string>
-  <string name="upload_nearby_place_found_description">На этом фото %1$s?</string>
+  <string name="upload_nearby_place_found_description_plural">На этих изображениях %1$s?</string>
+  <string name="upload_nearby_place_found_description_singular">На этом изображении %1$s?</string>
   <string name="title_app_shortcut_bookmark">Закладки</string>
   <string name="title_app_shortcut_setting">Настройки</string>
   <string name="remove_bookmark">Удалено из закладок</string>
@@ -748,7 +756,7 @@
   <string name="read_phone_state_permission_message">Для правильной работы картам поблизости необходимо иметь доступ к СОСТОЯНИЮ ТЕЛЕФОНА.</string>
   <string name="contributions_of_user">Вклад участника: %s</string>
   <string name="achievements_of_user">Достижения участника: %s</string>
-  <string name="menu_view_user_page">Посмотреть страницу участника</string>
+  <string name="menu_view_user_page">Посмотреть профиль участника</string>
   <string name="edit_depictions">Редактировать описания</string>
   <string name="edit_categories">Изменить категории</string>
   <string name="advanced_options">Расширенные настройки</string>
@@ -828,4 +836,40 @@
     <item quantity="many">выбрано %d изображений</item>
     <item quantity="other"/>
   </plurals>
+  <string name="multiple_files_depiction">Помните, что все изображения при мультизагрузке получают одинаковые категории и описания. Если изображения не имеют одинаковых описаний и категорий, выполните несколько отдельных загрузок.</string>
+  <string name="multiple_files_depiction_header">Замечание о мультизагрузках</string>
+  <string name="nearby_wikitalk">Сообщить о проблеме с этим элементом в Викиданные</string>
+  <string name="please_enter_some_comments">Пожалуйста, добавьте какие-то комментарии</string>
+  <string name="talk">Обсуждение</string>
+  <string name="write_something_about_the_item">Напишите что-нибудь об элементе \'%1$s\'. Это будет видно всем.</string>
+  <string name="does_not_exist_anymore_no_picture_can_ever_be_taken_of_it">\'%1$s\' больше не существует, его невозможно сфотографировать.</string>
+  <string name="is_at_a_different_place_please_specify_the_correct_place_below_if_possible_tell_us_the_correct_latitude_longitude">\'%1$s\' находится в другом месте. Пожалуйста, укажите правильное место ниже и, если возможно, напишите правильную широту и долготу.</string>
+  <string name="other_problem_or_information_please_explain_below">Другая проблема или информация (пожалуйста, объясните ниже).</string>
+  <string name="feedback_destination_note">Ваш отзыв будет опубликован на следующей вики-странице: &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Mobile_app/Feedback\"&gt;Commons:Mobile app/Feedback&lt;/a&gt;</string>
+  <string name="are_you_sure_that_you_want_cancel_all_the_uploads">Вы уверены, что хотите отменить все загрузки?</string>
+  <string name="cancelling_all_the_uploads">Отмена всех загрузок...</string>
+  <string name="uploads">Загрузки</string>
+  <string name="pending">В ожидании</string>
+  <string name="failed">Не удалось</string>
+  <string name="could_not_load_place_data">Не удалось загрузить данные о месте</string>
+  <string name="custom_selector_delete_folder">Удалить папку</string>
+  <string name="custom_selector_confirm_deletion_title">Подтвердите удаление</string>
+  <string name="custom_selector_confirm_deletion_message">Вы уверены, что хотите удалить папку %1$s содержащую %2$d шт. вложенных элементов?</string>
+  <string name="custom_selector_delete">Удалить</string>
+  <string name="custom_selector_cancel">Отмена</string>
+  <string name="custom_selector_folder_deleted_success">Папка %1$s успешно удалена</string>
+  <string name="custom_selector_folder_deleted_failure">Не получилось удалить папку %1$s</string>
+  <string name="custom_selector_error_trashing_folder_contents">Ошибка при удалении содержимого папки: %1$s</string>
+  <string name="custom_selector_folder_not_found_error">Не удалось получить путь к папке для ID контейнера: %1$d</string>
+  <string name="red_pin">У этого места пока нет фотографий, так что сделайте несколько!</string>
+  <string name="green_pin">У этого места уже есть фотография.</string>
+  <string name="grey_pin">Сейчас проверим, есть ли у этого места фотография.</string>
+  <string name="error_while_loading">Ошибка при загрузке</string>
+  <string name="no_usages_found">Не найдено ни одного использования</string>
+  <string name="usages_on_commons_heading">Викисклад</string>
+  <string name="usages_on_other_wikis_heading">Другие вики</string>
+  <string name="file_usages_container_heading">Использование файла</string>
+  <string name="account">Учётная запись</string>
+  <string name="caption">Подпись</string>
+  <string name="caption_copied_to_clipboard">Подпись скопирована в буфер обмена</string>
 </resources>

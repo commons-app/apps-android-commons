@@ -18,7 +18,7 @@ import org.robolectric.annotation.LooperMode
 @Config(sdk = [21], application = TestCommonsApplication::class)
 @LooperMode(LooperMode.Mode.PAUSED)
 class ReviewDaoTest {
-    private lateinit var  reviewDao: ReviewDao
+    private lateinit var reviewDao: ReviewDao
     private lateinit var database: AppDatabase
 
     /**
@@ -26,10 +26,11 @@ class ReviewDaoTest {
      */
     @Before
     fun createDb() {
-        database = inMemoryDatabaseBuilder(
-            context = ApplicationProvider.getApplicationContext(),
-            klass = AppDatabase::class.java
-        ).allowMainThreadQueries().build()
+        database =
+            inMemoryDatabaseBuilder(
+                context = ApplicationProvider.getApplicationContext(),
+                klass = AppDatabase::class.java,
+            ).allowMainThreadQueries().build()
         reviewDao = database.ReviewDao()
     }
 

@@ -91,7 +91,6 @@
   <string name="preference_category_feedback">משוב</string>
   <string name="preference_category_privacy">פרטיות</string>
   <string name="app_name">ויקישיתוף</string>
-  <string name="bullet">•</string>
   <string name="menu_settings">הגדרות</string>
   <string name="intent_share_upload_label">להעלות לוויקישיתוף</string>
   <string name="upload_in_progress">מתבצעת העלאה</string>
@@ -115,7 +114,7 @@
   <string name="uploading_started">ההעלאה התחילה!</string>
   <string name="uploading_queued">ההעלאות בתור (מופעל מצב חיבור מוגבל)</string>
   <string name="upload_completed_notification_title">הקובץ %1$s הועלה!</string>
-  <string name="upload_completed_notification_text">ללחוץ כאן כדי לצפות בהעלאה שלך</string>
+  <string name="upload_completed_notification_text">נא ללחוץ כאן כדי לצפות בהעלאה שלך</string>
   <string name="upload_progress_notification_title_start">העלאת קובץ: %s</string>
   <string name="upload_progress_notification_title_in_progress">מתבצעת העלאת %1$s</string>
   <string name="upload_progress_notification_title_finishing">העלאת %1$s מסתיימת</string>
@@ -124,7 +123,7 @@
   <string name="upload_failed_notification_subtitle">לחץ כדי להציג</string>
   <string name="upload_paused_notification_subtitle">יש לגעת כדי לראות</string>
   <string name="title_activity_contributions">ההעלאות האחרונות שלי</string>
-  <string name="contribution_state_queued">בתור</string>
+  <string name="contribution_state_queued">הוכנסה בתור</string>
   <string name="contribution_state_failed">נכשלה</string>
   <string name="contribution_state_in_progress">%1$d%% הושלמו</string>
   <string name="contribution_state_starting">העלאה</string>
@@ -132,6 +131,8 @@
   <string name="menu_from_camera">צילום תמונה</string>
   <string name="menu_nearby">בסביבה</string>
   <string name="provider_contributions">ההעלאות שלי</string>
+  <string name="menu_copy_link">העתקת קישור</string>
+  <string name="menu_link_copied">הקישור הועתק ללוח</string>
   <string name="menu_share">שיתוף</string>
   <string name="menu_view_file_page">הצגת דף קובץ</string>
   <string name="share_title_hint">כיתוב (נדרש)</string>
@@ -150,6 +151,7 @@
   <string name="categories_search_text_hint">חיפוש קטגוריות</string>
   <string name="depicts_search_text_hint">חפשו פריטים שהמדיה שלך מציגה (הר, טאג\' מהאל, וכו\')</string>
   <string name="menu_save_categories">שמירה</string>
+  <string name="menu_overflow_desc">תפריט גלישה</string>
   <string name="refresh_button">רענון</string>
   <string name="display_list_button">רשימה</string>
   <string name="contributions_subtitle_zero">(לא הועלה עדיין שום דבר)</string>
@@ -301,11 +303,12 @@
   <string name="skip_login">לדלג</string>
   <string name="navigation_item_login">כניסה לחשבון</string>
   <string name="skip_login_title">לדלג על הכניסה לחשבון?</string>
-  <string name="skip_login_message">יהיה עליך להיכנס כדי להעלות תמונות בעתיד.</string>
+  <string name="skip_login_message">יש להיכנס כדי להעלות תמונות בעתיד.</string>
   <string name="login_alert_message">נא להיכנס לחשבון כדי להשתמש באפשרות הזאת</string>
   <string name="copy_wikicode">העתקת קוד ויקי ללוח</string>
   <string name="wikicode_copied">קוד הוויקי הועתק ללוח</string>
   <string name="nearby_location_not_available">ייתכן ש\"בסביבה\" לא יפעל כראוי, משום שהמיקום אינו זמין.</string>
+  <string name="nearby_showing_pins_offline">האינטרנט אינו זמין. מוצגים רק מקומות שמורים.</string>
   <string name="upload_location_access_denied">הגישה למיקום נדחתה. נא להגדיר את המקום שלך ידנית כדי להשתמש ביכולת הזאת.</string>
   <string name="location_permission_rationale_nearby">נדרשת הרשאה כדי להציג רשימה של מקומות בסביבה</string>
   <string name="location_permission_rationale_explore">נדרשת הרשאה להצגת רשימת התמונות בסביבתך</string>
@@ -389,11 +392,13 @@
   <string name="delete">מחיקה</string>
   <string name="Achievements">הישגים</string>
   <string name="Profile">פרופיל</string>
+  <string name="badges">סמלים</string>
   <string name="statistics">סטטיסטיקה</string>
   <string name="statistics_thanks">התודה התקבלה</string>
   <string name="statistics_featured">תמונות מומלצות</string>
   <string name="statistics_wikidata_edits">תמונות דרך \"מקומות בסביבה\"</string>
-  <string name="level">רמה</string>
+  <string name="level">רמה %d</string>
+  <string name="profileLevel">%s (רמה %s)</string>
   <string name="images_uploaded">תמונות שהועלו</string>
   <string name="image_reverts">תמונות שלא שוחזרו</string>
   <string name="images_used_by_wiki">תמונות בשימוש</string>
@@ -425,6 +430,7 @@
   <string name="map_application_missing">לא נמצא יישום מפה תואם במכשיר שלך. נא להתקין יישום מפה כדי להשתמש בתכונה זו.</string>
   <string name="title_page_bookmarks_pictures">תמונות</string>
   <string name="title_page_bookmarks_locations">מיקומים</string>
+  <string name="title_page_bookmarks_categories">קטגוריות</string>
   <string name="menu_bookmark">הוספה / הסרה של סימנייה</string>
   <string name="provider_bookmarks">סימניות</string>
   <string name="bookmark_empty">לא הוספת שום סימנייה</string>
@@ -506,6 +512,7 @@
   <string name="no_notification">אין לך התראות שלא נקראו</string>
   <string name="no_read_notification">אין לך התראות שנקראו</string>
   <string name="share_logs_using">שיתוף יומנים בעזרת</string>
+  <string name="check_your_email_inbox">לבדוק את תיבת הדוא״ל הנכנס שלך</string>
   <string name="menu_option_read">הצגת התראות שנקראו</string>
   <string name="menu_option_unread">הצגת התראות שלא נקראו</string>
   <string name="error_occurred_in_picking_images">אירעה שגיאה בעת בחירת תמונות</string>
@@ -541,9 +548,9 @@
   <string name="review_is_uploaded_by">%1$s הועלה על ידי: %2$s</string>
   <string name="default_description_language">שפת התיאור כבררת מחדל</string>
   <string name="delete_helper_show_deletion_title">העמדה למחיקה</string>
-  <string name="delete_helper_show_deletion_title_success">הצלחה</string>
+  <string name="delete_helper_show_deletion_title_success">זה עבד</string>
   <string name="delete_helper_show_deletion_message_if">הקובץ %1$s הועמד למחיקה.</string>
-  <string name="delete_helper_show_deletion_title_failed">כשלון</string>
+  <string name="delete_helper_show_deletion_title_failed">זה לא עבד</string>
   <string name="delete_helper_show_deletion_message_else">לא ניתן לבקש מחיקה</string>
   <string name="delete_helper_ask_spam_selfie">תמונה עצמית (סלפי) שלא משמשת בשום ערך</string>
   <string name="delete_helper_ask_spam_blurry">תמונה מטושטשת לגמרי</string>
@@ -604,7 +611,8 @@
   <string name="title_for_child_classes">מחלקות יורשות</string>
   <string name="title_for_parent_classes">מחלקות מורישות</string>
   <string name="upload_nearby_place_found_title">נמצא בקרבת מקום</string>
-  <string name="upload_nearby_place_found_description">האם זאת תמונה של %1$s?</string>
+  <string name="upload_nearby_place_found_description_plural">האם אלו תמונות של %1$s?</string>
+  <string name="upload_nearby_place_found_description_singular">האם זאת תמונה של %1$s?</string>
   <string name="title_app_shortcut_bookmark">סימניות</string>
   <string name="title_app_shortcut_setting">הגדרות</string>
   <string name="remove_bookmark">הוסר מסימניות</string>
@@ -673,13 +681,13 @@
   <string name="pausing_upload">ההעלאה מושהית…</string>
   <string name="cancelling_upload">ביטול ההעלאה...</string>
   <string name="cancel_upload">ביטול ההעלאה</string>
-  <string name="limited_connection_explanation">הפעלת מצב חיבור מוגבל. כל ההעלאות מושהות ותמשכנה לאחר השבתת המצב הזה.</string>
+  <string name="limited_connection_explanation">הפעלת מצב חיבור מוגבל. כל ההעלאות מושהות והן תימשכנה לאחר השבתת המצב הזה.</string>
   <string name="limited_connection_is_on">מצב חיבור מוגבל פעיל.</string>
   <string name="media_details_tooltip">נא לכתוב תיאור קצר שמסביר מה מופיע בתמונה. בתיאור, כדאי לכתוב מה הופך את התמונה הזאת למעניינת, טיפוסית או נדירה ולהסביר את ההקשר, בין אם גלוי או סמוי. יש להשתמש במינוח מדויק ככל הניתן.</string>
   <string name="depicts_tooltip">נא למצוא ולבחור את כל העקרונות שהתמונה הזאת מתארת. נא לשמור על דיוק מרבי. אם התמונה מתארת מגוון פריטים, נא לבחור אותם בגבולות הסביר. לא לבחור תגיות גנריות אם יש תגיות יותר נקודתית זמינות.</string>
   <string name="categories_tooltip">נא לבחור את הקטגוריות המתאימות. בניגוד למאפייני \"מציג\", הקטגוריות כתובות רק באנגלית.</string>
   <string name="license_tooltip">ויקישיתוף הופך את התמונות שלך לזמינות לשימוש חוזר ולהתאמה על ידי כל אחד. בא לך לוותר על כל הזכויות? שייחסו את היצירה אליך? שההתאמות ישתמשו באותו הרישיון?</string>
-  <string name="depicts_step_title">מציג</string>
+  <string name="depicts_step_title">מוצג</string>
   <string name="license_step_title">רישיון מדיה</string>
   <string name="media_detail_step_title">פרטי מדיה</string>
   <string name="menu_view_category_page">הצגת דף הקטגוריה</string>
@@ -706,7 +714,7 @@
   <string name="back">חזרה</string>
   <string name="welcome_custom_picture_selector_text">ברוך בואך לבוחר התמונות המותאמות</string>
   <string name="custom_selector_info_text1">הבורר מציג לך אילו תמונות כבר העלית לוויקישיתוף.</string>
-  <string name="custom_selector_info_text2">בניגוד לתמונה מימין, על התמונה שמשמאל יש את הלוגו של ויקישיתוף שמעיד שהיא כבר הועלתה. יש לגעת ולהחזיר לקבלת תצוגה מקדימה של התמונה.</string>
+  <string name="custom_selector_info_text2">בניגוד לתמונה מימין, על התמונה שמשמאל מופיע הסמל של ויקישיתוף שמציין שהיא כבר הועלתה. יש לגעת ולהחזיק לקבלת תצוגה מקדימה של התמונה.</string>
   <string name="welcome_custom_selector_ok">מגניב</string>
   <string name="custom_selector_already_uploaded_image_text">התמונה הזאת כבר הועלתה לוויקישיתוף.</string>
   <string name="custom_selector_over_limit_warning">מסיבות טכניות, היישום לא יכול להעלות יותר מ־%1$d תמונות בבת אחת בצורה מהימנה. חרגת ממגבלת ההעלאה על סך %1$d ב־%2$d.</string>
@@ -724,7 +732,7 @@
   <string name="read_phone_state_permission_message">מפות בסביבה זקוקות להרשאה מצב הטלפון כדי לפעול כראוי</string>
   <string name="contributions_of_user">תרומות של המשתמש: %s</string>
   <string name="achievements_of_user">הישגי המשתמש: %s</string>
-  <string name="menu_view_user_page">הצגת דף המשתמש</string>
+  <string name="menu_view_user_page">הצגת פרופיל המשתמש</string>
   <string name="edit_depictions">עריכת מוצגים</string>
   <string name="edit_categories">עריכת קטגוריות</string>
   <string name="advanced_options">אפשרויות מתקדמות</string>
@@ -804,4 +812,43 @@
     <item quantity="many">נבחרו %d תמונות</item>
     <item quantity="other">נבחרו %d תמונות</item>
   </plurals>
+  <string name="multiple_files_depiction">נא לזכור שכשמועלות כמה תמונות, כולן מקבלות את אותן הקטגוריות והמוצגים. אם התמונות אינן חולקות מוצגים וקטגוריות, נא לעשות כמה העלאות נפרדות.</string>
+  <string name="multiple_files_depiction_header">הערה על העלאות מרובות</string>
+  <string name="nearby_wikitalk">דווח על בעיה בפריט הזה לוויקינתונים</string>
+  <string name="please_enter_some_comments">נא להזין הערות כלשהן</string>
+  <string name="talk">שיחה</string>
+  <string name="write_something_about_the_item">נא לכתוב משהו על פריט \"%1$s\". זה יוצג לציבור.</string>
+  <string name="does_not_exist_anymore_no_picture_can_ever_be_taken_of_it">\"%1$s\" כבר לא קיים, אי־אפשר לצלם אותו.</string>
+  <string name="is_at_a_different_place_please_specify_the_correct_place_below_if_possible_tell_us_the_correct_latitude_longitude">\"%1$s\" נמצא במקום אחר. נא לציין את המקום הנכון למטה, ואם אפשר, לכתוב את קו הרוחב ואת קו האורך הנכונים.</string>
+  <string name="other_problem_or_information_please_explain_below">בעיה אחרת או מידע אחר (נא להסביר הלאה).</string>
+  <string name="feedback_destination_note">המשוב שלך מתפרסם בדף הוויקי הבא: &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Mobile_app/Feedback\"&gt;Commons:Mobile app/Feedback&lt;/a&gt;</string>
+  <string name="are_you_sure_that_you_want_cancel_all_the_uploads">האם ברצונך באמת לבטל את כל ההעלאות?</string>
+  <string name="cancelling_all_the_uploads">ביטול כל ההעלאות...</string>
+  <string name="uploads">העלאות</string>
+  <string name="pending">ממתינות</string>
+  <string name="failed">נכשלו</string>
+  <string name="could_not_load_place_data">לא היה אפשר לטעון את נתוני המקום</string>
+  <string name="custom_selector_delete_folder">מחיקת תיקייה</string>
+  <string name="custom_selector_confirm_deletion_title">אישור מחיקה</string>
+  <string name="custom_selector_confirm_deletion_message">למחוק את התיקייה %1$s על כל %2$d פריטיה?</string>
+  <string name="custom_selector_delete">למחוק</string>
+  <string name="custom_selector_cancel">ביטול</string>
+  <string name="custom_selector_folder_deleted_success">התיקייה %1$s נמחקה</string>
+  <string name="custom_selector_folder_deleted_failure">מחיקת התיקייה %1$s נכשלה</string>
+  <string name="custom_selector_error_trashing_folder_contents">שגיאה בהעברת תוכן התיקייה לאשפה: %1$s</string>
+  <string name="custom_selector_folder_not_found_error">נכשל אחזור נתיב התיקייה למזהה ההקבצה: %1$d</string>
+  <string name="red_pin">אין עדיין תמונה למקום הזה, אפשר פשוט לצלם אחת!</string>
+  <string name="green_pin">למקום הזה כבר יש תמונה.</string>
+  <string name="grey_pin">עכשיו מתבצעת בדיקה האם למקום הזה יש תמונה.</string>
+  <string name="error_while_loading">אירעה שגיאה בעת טעינה</string>
+  <string name="no_usages_found">לא נמצאו שימושים</string>
+  <string name="usages_on_commons_heading">ויקישיתוף</string>
+  <string name="usages_on_other_wikis_heading">אתרי ויקי אחרים</string>
+  <string name="bullet_point">•</string>
+  <string name="file_usages_container_heading">שימושים בקובץ</string>
+  <string name="account">חשבון</string>
+  <string name="vanish_account">העלמת חשבון</string>
+  <string name="account_vanish_request_confirm_title">אזהרת העלמת חשבון</string>
+  <string name="caption">כותרת</string>
+  <string name="caption_copied_to_clipboard">הכותרת הועתקה ללוח</string>
 </resources>

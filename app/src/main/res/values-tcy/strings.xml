@@ -46,7 +46,6 @@
   <string name="preference_category_general">ಸಾಮಾನ್ಯೊ</string>
   <string name="preference_category_feedback">ಅಬಿಪ್ರಾಯೊ</string>
   <string name="app_name">ಕಾಮನ್ಸ್</string>
-  <string name="bullet">•</string>
   <string name="menu_settings">ಸಂಯೋಜನೆಲು</string>
   <string name="intent_share_upload_label">ಕಾಮನ್ಸ್ ಗ್ ಸೆರಲೆ</string>
   <string name="username">ಬಳಕೆದಾರೆರೆಪುದರ್</string>
@@ -159,7 +158,7 @@
   <string name="storage_permission_title">ಶೇಖರಣ ಅನುಮತಿ ಕೇಣುನು</string>
   <string name="read_storage_permission_rationale">ಅಗತ್ಯ ಇಪ್ಪುನ ಅನುಮತಿ: ಬಾಹ್ಯ ಸಂಗ್ರಹಣೆನ್ ಓದಿ. ಇದೆಂಡ್ತ್ ಇರ್ ಗ್ಯಾಲರಿಗ್ ಅಪ್ಲಿಕೇಶನ್ ಪ್ರವೇಶಗ್ ಸಾಧ್ಯ ಇಜ್ಜಿ.</string>
   <string name="write_storage_permission_rationale" fuzzy="true">ಅಗತ್ಯ ಇಪ್ಪುನ ಅನುಮತಿ: ಬಾಹ್ಯ ಸಂಗ್ರಹಣೆನ್ ಬರೆಲೆ. ಇದೆಂಡ್ತ್ ಅಪ್ಲಿಕೇಶನ್ ಇರೆನ ಕ್ಯಾಮರೊನ್ ಪ್ರವೇಶ ಮಾಲ್ಪಯರ ಸಾಧ್ಯಿಜ್ಜಿ.</string>
-  <string name="ok">ಅವು</string>
+  <string name="ok">ಆವು</string>
   <string name="warning">ಎಚ್ಚರಿಕೆ</string>
   <string name="yes">ಅಂದ್</string>
   <string name="no">ಅತ್ತ್</string>
@@ -221,7 +220,7 @@
   <string name="skip_login">ಬುಡ್ಲೆ</string>
   <string name="navigation_item_login">ಲಾಗಿನ್ ಆಲೆ</string>
   <string name="skip_login_title" fuzzy="true">ಇರ್ ನಿಜವಾತ್ ಲಾಗಿನ್ ಬುಡಿಯರ ಬಯಸುವರಾ?</string>
-  <string name="skip_login_message">ದುಂಬಗ್ ಚಿತ್ರೊಲೆನ್ ಮಿತೇರಾವರೆ ಈರ್ ಉಳಗಮನ ಮಲ್ಪೊಡಾವು.</string>
+  <string name="skip_login_message" fuzzy="true">ದುಂಬಗ್ ಚಿತ್ರೊಲೆನ್ ಮಿತೇರಾವರೆ ಈರ್ ಉಳಗಮನ ಮಲ್ಪೊಡಾವು.</string>
   <string name="login_alert_message">ದಯಮಾಲ್ತ್ ಲಾಗೀನ್ ಆಲೆ ಬುಕ್ಕ ಉಪಯೋಗ ಮಾಲ್ಪುಲೆ.</string>
   <string name="copy_wikicode">ವಿಕಿಪಠ್ಯೊನ್ ಪಿಡಿಪಲಾಯಿಗ್ ನಕಲ್ ಮಲ್ಪುಲೆ.</string>
   <string name="wikicode_copied">ವಿಕಿಪಠ್ಯೊನ್ ಪಿಡಿಪಲಾಯಿಗ್ ನಕಲ್ ಮಲ್ತ್ಂಡ್.</string>

@@ -68,7 +68,6 @@
   <string name="preference_category_feedback">Palaute</string>
   <string name="preference_category_privacy">Yksityisyys</string>
   <string name="app_name">Commons</string>
-  <string name="bullet">•</string>
   <string name="menu_settings">Asetukset</string>
   <string name="intent_share_upload_label">Tallenna Commonsiin</string>
   <string name="upload_in_progress">Tallennus käynnissä</string>
@@ -271,12 +270,14 @@
   <string name="skip_login">Ohita</string>
   <string name="navigation_item_login">Kirjaudu sisään</string>
   <string name="skip_login_title">Haluatko todella ohittaa kirjautumisen?</string>
-  <string name="skip_login_message">Sinun täytyy kirjautua sisään tallentaaksesi kuvia tulevaisuudessa.</string>
+  <string name="skip_login_message" fuzzy="true">Sinun täytyy kirjautua sisään tallentaaksesi kuvia tulevaisuudessa.</string>
   <string name="login_alert_message">Kirjaudu sisään käyttääksesi tätä ominaisuutta</string>
   <string name="copy_wikicode">Kopioi wikiteksti leikepöydälle</string>
   <string name="wikicode_copied">Wikiteksti kopioitiin leikepöydälle</string>
   <string name="nearby_location_not_available">Nearby ei välttämättä toimi, sillä sijainti ei käytettävissä.</string>
+  <string name="upload_location_access_denied">Sijainnin käyttö kielletty. Aseta sijaintisi manuaalisesti käyttääksesi tätä ominaisuutta.</string>
   <string name="location_permission_rationale_nearby">Lupa vaaditaan läheisten paikkojen luettelon näyttämiseen</string>
+  <string name="location_permission_rationale_explore">Lupa vaaditaan läheltä otettujen kuvien luettelon näyttämiseen</string>
   <string name="nearby_directions">Reitit</string>
   <string name="nearby_wikidata">Wikidata</string>
   <string name="nearby_wikipedia">Wikipedia</string>
@@ -343,7 +344,9 @@
   <string name="quiz_screenshot_question">Onko tämä kuvakaappaus OK tallennettavaksi?</string>
   <string name="share_app_title">Jaa sovellus</string>
   <string name="rotate">Kierrä</string>
-  <string name="error_fetching_nearby_places" fuzzy="true">Virhe paikkoja haettaessa.</string>
+  <string name="error_fetching_nearby_places">Virhe läheisiä paikkoja ladatessa</string>
+  <string name="no_pictures_in_this_area">Ei kuvia tältä alueelta</string>
+  <string name="no_nearby_places_around">Ei lähistöllä olevia paikkoja</string>
   <string name="error_fetching_nearby_monuments">Virhe läheisiä monumentteja haettaessa.</string>
   <string name="no_recent_searches">Ei viimeaikaisia hakuja</string>
   <string name="delete_recent_searches_dialog">Haluatko varmasti tyhjentää hakuhistoriasi?</string>
@@ -358,7 +361,8 @@
   <string name="statistics_thanks">Kiitos vastaanotettu</string>
   <string name="statistics_featured">Suositellut kuvat</string>
   <string name="statistics_wikidata_edits">Kuvia läheltä</string>
-  <string name="level">Taso</string>
+  <string name="level">Taso %d</string>
+  <string name="profileLevel">%s (taso %s)</string>
   <string name="images_uploaded">Kuvia tallennettu</string>
   <string name="image_reverts">Kuvia ei palautettu</string>
   <string name="images_used_by_wiki">Kuvia käytetty</string>
@@ -540,7 +544,7 @@
   <string name="you_must_reset_your_passsword">Jokin meni pieleen kirjautumisessa. Sinun on nollattava salasanasi!</string>
   <string name="title_for_media">MEDIA</string>
   <string name="upload_nearby_place_found_title">Lähipaikka löytyi</string>
-  <string name="upload_nearby_place_found_description" fuzzy="true">Onko tämä kuva paikasta %1$s?</string>
+  <string name="upload_nearby_place_found_description_singular" fuzzy="true">Onko tämä kuva paikasta %1$s?</string>
   <string name="title_app_shortcut_bookmark">Kirjanmerkit</string>
   <string name="title_app_shortcut_setting">Asetukset</string>
   <string name="remove_bookmark">Poistettu kirjanmerkeistä</string>
@@ -631,7 +635,7 @@
   <string name="need_permission">Tarvitaan käyttöoikeus</string>
   <string name="contributions_of_user">Käyttäjän muokkaukset: %s</string>
   <string name="achievements_of_user">Käyttäjän saavutukset: %s</string>
-  <string name="menu_view_user_page">Näytä käyttäjäsivu</string>
+  <string name="menu_view_user_page" fuzzy="true">Näytä käyttäjäsivu</string>
   <string name="edit_categories">Muokkaa luokkia</string>
   <string name="advanced_options">Lisäasetukset</string>
   <string name="apply">Käytä</string>
@@ -669,6 +673,10 @@
   <string name="location_removed">Sijainti poistettu!</string>
   <string name="send_thanks_to_author">Kiitä tekijää</string>
   <string name="file_saved_successfully">Tiedosto tallennettu onnistuneesti</string>
+  <string name="do_you_want_to_open_gpx_file">Haluatko avata GPX-tiedoston?</string>
+  <string name="do_you_want_to_open_kml_file">Haluatko avata KML-tiedoston?</string>
+  <string name="failed_to_save_kml_file">KML-tiedoston tallentaminen epäonnistui.</string>
+  <string name="failed_to_save_gpx_file">GPX-tiedoston tallentaminen epäonnistui.</string>
   <plurals name="custom_picker_images_selected_title_appendix">
     <item quantity="one">%d kuva valittu</item>
     <item quantity="other">%d kuvaa valittu</item>

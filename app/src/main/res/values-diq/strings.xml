@@ -53,7 +53,6 @@
   <string name="preference_category_feedback">Peyderıştış</string>
   <string name="preference_category_privacy">Dızdêniye</string>
   <string name="app_name">Commons</string>
-  <string name="bullet">•</string>
   <string name="menu_settings">Eyari</string>
   <string name="intent_share_upload_label">Barê Embari ke</string>
   <string name="username">Namey karberi</string>
@@ -265,7 +264,7 @@
   <string name="statistics_thanks">Teşekurê gêriyayi</string>
   <string name="statistics_featured">Resımê weçinıteyi</string>
   <string name="statistics_wikidata_edits">\"Cayê nezdı\" ra resımi</string>
-  <string name="level">Sewiya</string>
+  <string name="level" fuzzy="true">Sewiya</string>
   <string name="images_uploaded">Resımi biyê bar</string>
   <string name="image_reverts">Resımi peyser nêgeriyaye</string>
   <string name="images_used_by_wiki">Gureyniyaye resımi</string>

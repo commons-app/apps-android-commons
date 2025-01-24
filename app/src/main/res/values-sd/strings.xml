@@ -57,7 +57,6 @@
   <string name="preference_category_feedback">موٽ</string>
   <string name="preference_category_privacy">نويڪلائي</string>
   <string name="app_name">العام</string>
-  <string name="bullet">•</string>
   <string name="menu_settings">ترتيبون</string>
   <string name="intent_share_upload_label">العام ۾ چاڙهيو</string>
   <string name="username">واپرائيندڙنانءُ</string>
@@ -233,7 +232,7 @@
   <string name="skip_login">ڇڏيو</string>
   <string name="navigation_item_login">داخل ٿيو</string>
   <string name="skip_login_title" fuzzy="true">ڇا توھان سچ ۾ داخل-ٿيڻ ڇڏڻ چاھيو ٿا؟</string>
-  <string name="skip_login_message">توھان کي تصويرون چاڙھڻ لاءِ مستقبل ۾ داخل ٿيڻو پوندو.</string>
+  <string name="skip_login_message" fuzzy="true">توھان کي تصويرون چاڙھڻ لاءِ مستقبل ۾ داخل ٿيڻو پوندو.</string>
   <string name="login_alert_message">مھرباني فرمائي هن خصوصيت کي استعمال ڪرڻ لاءِ داخل ٿيو</string>
   <string name="nearby_location_not_available">\'\'\'ويجها\'\'\' ٿي سگهي ٿو صحيح طرح ڪم نہ ڪري، مڪانيت دستياب نہ آھي.</string>
   <string name="location_permission_rationale_nearby">ويجهين جڳھن جي فھرست ڏيکارڻ لاءِ اجازت گهربل آھي</string>
@@ -283,7 +282,7 @@
   <string name="statistics_thanks">مھربانيون مليل</string>
   <string name="statistics_featured">چونڊ عڪس</string>
   <string name="statistics_wikidata_edits">\"ويجھيون جڳھون\" ذريعي عڪس</string>
-  <string name="level">سطح</string>
+  <string name="level" fuzzy="true">سطح</string>
   <string name="images_uploaded">عڪس چڙھيا</string>
   <string name="images_used_by_wiki">استعمال ڪيل عڪس</string>
   <string name="achievements_share_message">پنھنجون ڪاميابيون پنھنجن دوست سان ونڊيو!</string>

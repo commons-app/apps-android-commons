@@ -14,6 +14,7 @@ import java.util.ArrayList
 class BookmarkItemsControllerTest {
     @Mock
     var bookmarkDao: BookmarkItemsDao? = null
+
     @InjectMocks
     lateinit var bookmarkItemsController: BookmarkItemsController
 
@@ -33,9 +34,21 @@ class BookmarkItemsControllerTest {
             val list = ArrayList<DepictedItem>()
             list.add(
                 DepictedItem(
-                    "name", "description", "image url", listOf("instance"),
-                    listOf(CategoryItem("category name", "category description",
-                    "category thumbnail", false)), true, "id")
+                    "name",
+                    "description",
+                    "image url",
+                    listOf("instance"),
+                    listOf(
+                        CategoryItem(
+                            "category name",
+                            "category description",
+                            "category thumbnail",
+                            false,
+                        ),
+                    ),
+                    true,
+                    "id",
+                ),
             )
             return list
         }

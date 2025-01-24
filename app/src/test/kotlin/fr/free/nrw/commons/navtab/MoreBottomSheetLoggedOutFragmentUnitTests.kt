@@ -5,6 +5,7 @@ import androidx.fragment.app.testing.FragmentScenario
 import androidx.fragment.app.testing.launchFragmentInContainer
 import androidx.lifecycle.Lifecycle
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestCommonsApplication
 import org.junit.Before
 import org.junit.Test
@@ -12,7 +13,6 @@ import org.junit.runner.RunWith
 import org.robolectric.Shadows
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
-import fr.free.nrw.commons.R
 
 @RunWith(AndroidJUnit4::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
@@ -22,12 +22,13 @@ class MoreBottomSheetLoggedOutFragmentUnitTests {
 
     @Before
     fun setUp() {
-        scenario = launchFragmentInContainer(
-            initialState = Lifecycle.State.RESUMED,
-            themeResId = R.style.LightAppTheme
-        ) {
-            MoreBottomSheetLoggedOutFragment()
-        }
+        scenario =
+            launchFragmentInContainer(
+                initialState = Lifecycle.State.RESUMED,
+                themeResId = R.style.LightAppTheme,
+            ) {
+                MoreBottomSheetLoggedOutFragment()
+            }
     }
 
     @Test

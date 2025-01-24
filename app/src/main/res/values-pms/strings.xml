@@ -59,7 +59,6 @@
   <string name="preference_category_feedback">Sugeriment</string>
   <string name="preference_category_privacy">Confidensialità</string>
   <string name="app_name">Comun</string>
-  <string name="bullet">•</string>
   <string name="menu_settings">Paràmeter</string>
   <string name="intent_share_upload_label">Carié su Commons</string>
   <string name="upload_in_progress">Cariament an cors</string>
@@ -100,6 +99,8 @@
   <string name="menu_from_camera">Fé na fòto</string>
   <string name="menu_nearby">Davzin</string>
   <string name="provider_contributions">Ij mè cariament</string>
+  <string name="menu_copy_link">Copié la liura</string>
+  <string name="menu_link_copied">La liura a l\'é stàita copià ant ël quàder dij feuj.</string>
   <string name="menu_share">Partagé</string>
   <string name="menu_view_file_page">Vëdde la pàgina dl\'archivi</string>
   <string name="share_title_hint">Legenda (obligatòria)</string>
@@ -118,6 +119,7 @@
   <string name="categories_search_text_hint">Sërché dle categorìe</string>
   <string name="depicts_search_text_hint">Arserché j\'element che sò mojen a arpresenta (montagna, Taj Mahal, e via fòrt)</string>
   <string name="menu_save_categories">Argistré</string>
+  <string name="menu_overflow_desc">Mnu dë strabordament</string>
   <string name="refresh_button">Agiorné</string>
   <string name="display_list_button">Lista</string>
   <string name="contributions_subtitle_zero">(Ancor gnun cariament)</string>
@@ -274,6 +276,7 @@
   <string name="copy_wikicode">Copié ël test wiki ant ël pògia-feuj</string>
   <string name="wikicode_copied">Ël test wiki a l\'é stàit copià ant ël pògia-feuj</string>
   <string name="nearby_location_not_available">«A prossimità» a podrìa marcé nen bin, soa posission a l\'é nen disponìbil.</string>
+  <string name="nearby_showing_pins_offline">Aragnà nen disponìbil. As mostro mach ij pòst an memòria local.</string>
   <string name="upload_location_access_denied">Acess a la localisassion arfudà. Për piasì, ch\'a definissa soa localisassion a man për dovré costa fonsionalità.</string>
   <string name="location_permission_rationale_nearby">A-i é da manca dël përmess pr\'ësmon-e na lista dij pòst davzin</string>
   <string name="location_permission_rationale_explore">A-i é da manca dël përmess pr\'ësmon-e na lista dle plance pijà lì-davzin</string>
@@ -357,11 +360,13 @@
   <string name="delete">Dëscancelé</string>
   <string name="Achievements">Realisassion</string>
   <string name="Profile">Profil</string>
+  <string name="badges">Distintiv</string>
   <string name="statistics">Statìstiche</string>
   <string name="statistics_thanks">Aringrassiament arseivù</string>
   <string name="statistics_featured">Plance an evidensa</string>
   <string name="statistics_wikidata_edits">Plance për \"Pòst davzin\"</string>
-  <string name="level">Livel</string>
+  <string name="level">Livel %d</string>
+  <string name="profileLevel">%s (Livel %s)</string>
   <string name="images_uploaded">Plance carià</string>
   <string name="image_reverts">Plance nen anulà</string>
   <string name="images_used_by_wiki">Plance dovrà</string>
@@ -393,6 +398,7 @@
   <string name="map_application_missing">Gnun-a aplicassion cartogràfica compatìbil a l\'é trovasse an sò angign. Për piasì, ch\'a na anstala un-a për dovré costa fonsionalità.</string>
   <string name="title_page_bookmarks_pictures">Plance</string>
   <string name="title_page_bookmarks_locations">Locassion</string>
+  <string name="title_page_bookmarks_categories">Categorìe</string>
   <string name="menu_bookmark">Gionté/Gavé dij marcapàgine</string>
   <string name="provider_bookmarks">Marcapàgine</string>
   <string name="bookmark_empty">A l\'ha giontà gnun marcapàgina</string>
@@ -474,6 +480,7 @@
   <string name="no_notification">A l\'ha gnun-e notìfiche nen lesùe</string>
   <string name="no_read_notification">A l\'ha gnun-e notìfiche lesùe</string>
   <string name="share_logs_using">Partagé j\'argistr dovrand</string>
+  <string name="check_your_email_inbox">Ch\'a contròla soa casela ëd pòsta eletrònica</string>
   <string name="menu_option_read">Vëdde lòn ch\'a l\'é stàit lesù</string>
   <string name="menu_option_unread">Vëdde lòn ch\'a l\'é ancor nen ëstàit lesù</string>
   <string name="error_occurred_in_picking_images">A-i é staje n\'eror an selessionand le plance</string>
@@ -568,7 +575,8 @@
   <string name="title_for_child_classes">CLASSE MASNÀ</string>
   <string name="title_for_parent_classes">CLASSE CE</string>
   <string name="upload_nearby_place_found_title">Trovà un pòst davzin</string>
-  <string name="upload_nearby_place_found_description">É-lo na fòto ëd %1$s?</string>
+  <string name="upload_nearby_place_found_description_plural">Son-lo le fòto ëd %1$s?</string>
+  <string name="upload_nearby_place_found_description_singular">É-lo na fòto ëd %1$s?</string>
   <string name="title_app_shortcut_bookmark">Marcapàgine</string>
   <string name="title_app_shortcut_setting">Paràmeter</string>
   <string name="remove_bookmark">Gavà dai marca-pàgina</string>
@@ -686,7 +694,7 @@
   <string name="read_phone_state_permission_message">Le carte dj\'anviron a l\'han damanca ëd lese lë STAT DËL TELÉFON për marcé për da bin</string>
   <string name="contributions_of_user">Contribussion ëd l\'utent: %s</string>
   <string name="achievements_of_user">Arzultà ëd l\'utent: %s</string>
-  <string name="menu_view_user_page">Vëdde la pàgina ëd l\'utent</string>
+  <string name="menu_view_user_page">Vëdde ël profil ëd l\'utent</string>
   <string name="edit_depictions">Modifiché le descrission</string>
   <string name="edit_categories">Modifiché le categorìe</string>
   <string name="advanced_options">Opsion avansà</string>
@@ -764,4 +772,46 @@
     <item quantity="one">%d plancia selessionà</item>
     <item quantity="other">%d plance selessionà</item>
   </plurals>
+  <string name="multiple_files_depiction">Ch\'a ten-a da ment che tute le plance ant un cariament mùltipl a pijo j\'istesse categorìe e descrission. Si le plance a partagio nen descrission e categorìe, për piasì ch\'a fasa tanti cariament separà.</string>
+  <string name="multiple_files_depiction_header">Nòta an sij cariament mùltipl</string>
+  <string name="nearby_wikitalk">Signalé un problema su cost element a Wikidata</string>
+  <string name="please_enter_some_comments">Për piasì, ch\'a buta dij coment</string>
+  <string name="talk">Ciaciarade</string>
+  <string name="write_something_about_the_item">Scrive cheicòs a propòsit ëd l\'element \'%1$s\'. Sòn a sarà visìbil për tuti.</string>
+  <string name="does_not_exist_anymore_no_picture_can_ever_be_taken_of_it">\'%1$s\' a esist pi nen, a peul pa esse fotografà.</string>
+  <string name="is_at_a_different_place_please_specify_the_correct_place_below_if_possible_tell_us_the_correct_latitude_longitude">\'%1$s\' a l\'é ant un pòst diferent. Për piasì, ch\'a spessìfica ël pòst giust sì-sota e, si possìbil, ch\'a scriva latitùdin e longitùdin giuste.</string>
+  <string name="other_problem_or_information_please_explain_below">Àutr problema o anformassion (për piasì, ch\'a spiega sì-sota).</string>
+  <string name="feedback_destination_note">Ij sò sugeriment a saran giontà a coste pàgine wiki:  &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Mobile_app/Feedback\"&gt;Commons:Mobile app/Feedback&lt;/a&gt;</string>
+  <string name="are_you_sure_that_you_want_cancel_all_the_uploads">É-lo sigur ëd vorèj anulé tuti ij cariament?</string>
+  <string name="cancelling_all_the_uploads">Anulament ëd tuti ij cariament...</string>
+  <string name="uploads">Cariament</string>
+  <string name="pending">An atèisa</string>
+  <string name="failed">Falì</string>
+  <string name="could_not_load_place_data">Impossìbil carié ij dàit dël pòst</string>
+  <string name="custom_selector_delete_folder">Eliminé ëd dossié</string>
+  <string name="custom_selector_confirm_deletion_title">Confirmé l\'eliminassion</string>
+  <string name="custom_selector_confirm_deletion_message">É-lo sigur ëd vorèj eliminé ël dossié %1$s ch\'a content %2$d element?</string>
+  <string name="custom_selector_delete">Eliminé</string>
+  <string name="custom_selector_cancel">Anulé</string>
+  <string name="custom_selector_folder_deleted_success">Ël dossié %1$s a l\'é stàit eliminà për da bin</string>
+  <string name="custom_selector_folder_deleted_failure">Impossìbil eliminé ël dossié %1$s</string>
+  <string name="custom_selector_error_trashing_folder_contents">Eror durant l\'eliminassion dël contnù dël dossié: %1$s</string>
+  <string name="custom_selector_folder_not_found_error">Falì a arcuperé ël sënté d\'acess al dossié për ël sigilin d\'ID: %1$d</string>
+  <string name="red_pin">Ës pòst a l\'ha ancor gnun-e fòto, ch\'a na pija un-a!</string>
+  <string name="green_pin">Ës pòst a l\'ha già dle fòto.</string>
+  <string name="grey_pin">An camin ch\'as verìfica si cost pòst -sì a l\'ha dle fòto.</string>
+  <string name="error_while_loading">Eror durant ël cariament</string>
+  <string name="no_usages_found">Gnun usagi trovà</string>
+  <string name="usages_on_commons_heading">Commons</string>
+  <string name="usages_on_other_wikis_heading">Àutre wiki</string>
+  <string name="bullet_point">•</string>
+  <string name="file_usages_container_heading">Usagi dl\'archivi</string>
+  <string name="title_activity_single_web_view">SingleWebViewActivity</string>
+  <string name="account">Cont</string>
+  <string name="vanish_account">Flambé ël cont</string>
+  <string name="account_vanish_request_confirm_title">Avis d\'eliminassion dël cont</string>
+  <string name="account_vanish_request_confirm">L\'eliminassion a l\'é &lt;b&gt;l\'ùltima arsorsa&lt;/b&gt; e a dovrìa &lt;b&gt;esse dovrà mach si chiel a veul chité ëd modifiché për sempe&lt;/b&gt; e ëdcò s\'a veul ëstërmé pi che possìbil soe assossiassion passà.&lt;br/&gt;&lt;br/&gt;La dëscancelassion ëd cont su Wikimedia a l\'é fàita an modificand sò stranòm an manera che j\'àutri a peulo pa arconòsse soe contribussion ant un process ciamà dëscancelassion ëd cont. &lt;b&gt;La sparission a garantiss pa l\'anonimà complet ni a gava le contribussion dai proget&lt;/b&gt;.</string>
+  <string name="caption">Legenda</string>
+  <string name="caption_copied_to_clipboard">Legenda copià an sla taulëtta</string>
+  <string name="congratulations_all_pictures_in_this_album_have_been_either_uploaded_or_marked_as_not_for_upload">Congratulassion, tute le fòto ëd s\'àlbom a son ëstàita carià opura marcà coma da nen carié.</string>
 </resources>

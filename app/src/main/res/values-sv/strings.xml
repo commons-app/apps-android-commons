@@ -67,7 +67,6 @@
   <string name="preference_category_feedback">Återkoppling</string>
   <string name="preference_category_privacy">Integritet</string>
   <string name="app_name">Commons</string>
-  <string name="bullet">•</string>
   <string name="menu_settings">Inställningar</string>
   <string name="intent_share_upload_label">Ladda upp till Commons</string>
   <string name="upload_in_progress">Uppladdning pågår</string>
@@ -108,6 +107,8 @@
   <string name="menu_from_camera">Ta foto</string>
   <string name="menu_nearby">I närheten</string>
   <string name="provider_contributions">Mina uppladdningar</string>
+  <string name="menu_copy_link">Kopiera länk</string>
+  <string name="menu_link_copied">Länken har kopierats till urklipp</string>
   <string name="menu_share">Dela</string>
   <string name="menu_view_file_page">Visa filsida</string>
   <string name="share_title_hint">Bildtext (obligatoriskt)</string>
@@ -126,6 +127,7 @@
   <string name="categories_search_text_hint">Sök kategorier</string>
   <string name="depicts_search_text_hint">Sök efter objekt som din mediafil skildrar (berg, Taj Mahal, etc.)</string>
   <string name="menu_save_categories">Spara</string>
+  <string name="menu_overflow_desc">Överflödesmeny</string>
   <string name="refresh_button">Uppdatera</string>
   <string name="display_list_button">Lista</string>
   <string name="contributions_subtitle_zero">(Inga uppladdningar ännu)</string>
@@ -277,13 +279,15 @@
   <string name="skip_login">Hoppa över</string>
   <string name="navigation_item_login">Logga in</string>
   <string name="skip_login_title">Vill du verkligen hoppa över inloggningen?</string>
-  <string name="skip_login_message">Du behöver logga in för att ladda upp bilder i framtiden.</string>
+  <string name="skip_login_message">Du kommer behöva logga in för att ladda upp bilder i framtiden.</string>
   <string name="login_alert_message">Logga in för att använda denna funktion</string>
   <string name="copy_wikicode">Kopiera wikitexten till urklipp</string>
   <string name="wikicode_copied">Wikitexten kopierades till urklipp</string>
   <string name="nearby_location_not_available">\"I närheten\" kanske inte fungerar ordentligt. Platsen är inte tillgänglig.</string>
+  <string name="nearby_showing_pins_offline">Internet inte tillgängligt. Visar endast cachade platser.</string>
   <string name="upload_location_access_denied">Platsåtkomst nekad. Ange din plats manuellt för att använda den här funktionen.</string>
   <string name="location_permission_rationale_nearby">Behörighet krävs för att visa en lista över platser i närheten</string>
+  <string name="location_permission_rationale_explore">Behörighet krävs för att visa en lista över bilder i närheten</string>
   <string name="nearby_directions">Vägbeskrivning</string>
   <string name="nearby_wikidata">Wikidata</string>
   <string name="nearby_wikipedia">Wikipedia</string>
@@ -351,7 +355,7 @@
   <string name="quiz_screenshot_question">Är det okej att ladda upp denna skärmdump?</string>
   <string name="share_app_title">Dela app</string>
   <string name="rotate">Rotera</string>
-  <string name="error_fetching_nearby_places" fuzzy="true">Fel uppstod när platser i närheten hämtades.</string>
+  <string name="error_fetching_nearby_places">Kunde inte ladda in platser i närheten</string>
   <string name="no_pictures_in_this_area">Inga bilder i detta område</string>
   <string name="no_nearby_places_around">Inga platser i närheten</string>
   <string name="error_fetching_nearby_monuments">Fel uppstod när monument i närheten hämtades.</string>
@@ -364,11 +368,13 @@
   <string name="delete">Radera</string>
   <string name="Achievements">Prestationer</string>
   <string name="Profile">Profil</string>
+  <string name="badges">Märken</string>
   <string name="statistics">Statistik</string>
   <string name="statistics_thanks">Mottagna tack</string>
   <string name="statistics_featured">Utvalda bilder</string>
   <string name="statistics_wikidata_edits">Bilder via \"Platser i närheten\"</string>
-  <string name="level">Nivå</string>
+  <string name="level">Nivå %d</string>
+  <string name="profileLevel">%s (Nivå %s)</string>
   <string name="images_uploaded">Uppladdade bilder</string>
   <string name="image_reverts">Bilder som inte har återställts</string>
   <string name="images_used_by_wiki">Bilder som används</string>
@@ -400,6 +406,7 @@
   <string name="map_application_missing">Ingen kompatibel kartapp hittades på din enhet. Installera en kartapp för att använda denna funktion.</string>
   <string name="title_page_bookmarks_pictures">Bilder</string>
   <string name="title_page_bookmarks_locations">Platser</string>
+  <string name="title_page_bookmarks_categories">Kategorier</string>
   <string name="menu_bookmark">Lägg till/ta bort bokmärke</string>
   <string name="provider_bookmarks">Bokmärken</string>
   <string name="bookmark_empty">Du har inte lagt till några bokmärken</string>
@@ -481,6 +488,7 @@
   <string name="no_notification">Du har inga olästa aviseringar</string>
   <string name="no_read_notification">Du har inga lästa aviseringar</string>
   <string name="share_logs_using">Dela loggar med hjälp av</string>
+  <string name="check_your_email_inbox">Kontrollera inkorgen för din e-post</string>
   <string name="menu_option_read">Visa lästa</string>
   <string name="menu_option_unread">Visa olästa</string>
   <string name="error_occurred_in_picking_images">Fel uppstod när bilder valdes ut</string>
@@ -555,7 +563,7 @@
   <string name="coordinates_edit_helper_edit_message_else">Kunde inte lägga till koordinater.</string>
   <string name="description_edit_helper_edit_message_else">Kunde inte lägga till beskrivningar.</string>
   <string name="caption_edit_helper_edit_message_else">Kunde inte lägga till bildtext.</string>
-  <string name="coordinates_picking_unsuccessful" fuzzy="true">Kunde inte hämta koordinater.</string>
+  <string name="coordinates_picking_unsuccessful">Bildens koordinater är inte uppdaterade</string>
   <string name="descriptions_picking_unsuccessful">Kunde inte hämta beskrivningar.</string>
   <string name="description_activity_title">Redigera beskrivningar och bildtexter</string>
   <string name="share_image_via">Dela bild via</string>
@@ -575,7 +583,8 @@
   <string name="title_for_child_classes">UNDERORDNADE KLASSER</string>
   <string name="title_for_parent_classes">ÖVERORDNADE KLASSER</string>
   <string name="upload_nearby_place_found_title">Hittade platser i närheten</string>
-  <string name="upload_nearby_place_found_description">Är detta ett foto på %1$s?</string>
+  <string name="upload_nearby_place_found_description_plural">Föreställer de här bilderna %1$s?</string>
+  <string name="upload_nearby_place_found_description_singular">Är detta en bild på %1$s?</string>
   <string name="title_app_shortcut_bookmark">Bokmärken</string>
   <string name="title_app_shortcut_setting">Inställningar</string>
   <string name="remove_bookmark">Togs bort från bokmärken</string>
@@ -589,8 +598,10 @@
   <string name="cannot_open_location_settings">Misslyckades att öppna platsinställningar. Aktivera plats manuellt</string>
   <string name="recommend_high_accuracy_mode">För bästa resultat väljer du alternativet \"Öka precisionen\".</string>
   <string name="ask_to_turn_location_on">Aktivera plats?</string>
+  <string name="ask_to_turn_location_on_text">Aktivera platstjänster för appen för att visa din aktuella plats</string>
   <string name="nearby_needs_location">\"I närheten\" behöver ha plats aktiverat för att fungera ordentligt</string>
-  <string name="upload_map_location_access" fuzzy="true">Du måste ge åtkomst till din nuvarande plats för att ange platsen automatiskt.</string>
+  <string name="explore_map_needs_location">Utforska kartan behöver platsbehörighet för att visa bilder i närheten</string>
+  <string name="upload_map_location_access">Du måste ge platsbehörighet för att automatiskt ange plats.</string>
   <string name="use_location_from_similar_image">Tog du dessa två bilder på samma plats? Vill du använda den högra bildens latitud/longitud?</string>
   <string name="load_more">Läs in fler</string>
   <string name="nearby_no_results">Inga platser hittades, försök ändra dina sökkriterier.</string>
@@ -691,7 +702,7 @@
   <string name="read_phone_state_permission_message">Kartor i närheten behöver läsa TELEFONENS TILLSTÅND för att fungera ordentligt</string>
   <string name="contributions_of_user">Bidrag av användare: %s</string>
   <string name="achievements_of_user">Prestationer av användare: %s</string>
-  <string name="menu_view_user_page">Visa användarsida</string>
+  <string name="menu_view_user_page">Visa användarprofil</string>
   <string name="edit_depictions">Redigera beskrivningar</string>
   <string name="edit_categories">Redigera kategorier</string>
   <string name="advanced_options">Avancerade alternativ</string>
@@ -769,4 +780,44 @@
     <item quantity="one">%d markerad bild</item>
     <item quantity="other">%d markerade bilder</item>
   </plurals>
+  <string name="multiple_files_depiction">Kom ihåg att när du laddar upp flera bilder får alla bilder samma kategorier och motiv. Om bilder inte bör dela beskrivningar och motiv bör du ladda upp de en och en istället.</string>
+  <string name="multiple_files_depiction_header">Anmärkning om att ladda upp flera bilder</string>
+  <string name="nearby_wikitalk">Rapportera ett problem om detta objekt till Wikidata</string>
+  <string name="please_enter_some_comments">Skriv en kommentar</string>
+  <string name="talk">Diskussion</string>
+  <string name="write_something_about_the_item">Skriv någonting om objektet \"%1$s\". Det kommer att visas offentligt.</string>
+  <string name="does_not_exist_anymore_no_picture_can_ever_be_taken_of_it">\"%1$s\" finns inte längre och inga bilder kan någonsin tas på det.</string>
+  <string name="is_at_a_different_place_please_specify_the_correct_place_below_if_possible_tell_us_the_correct_latitude_longitude">\"%1$s\" är på en annan plats. Ange den korrekta platsen nedan samt ange latitud och longitud om det är möjligt.</string>
+  <string name="other_problem_or_information_please_explain_below">Andra problem eller information (ange nedan).</string>
+  <string name="feedback_destination_note">Din återkoppling kommer att skickas till följande wikisida:  &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Mobile_app/Feedback\"&gt;Commons:Mobilapp/Återkoppling&lt;/a&gt;</string>
+  <string name="are_you_sure_that_you_want_cancel_all_the_uploads">Är du säker på att du vill avbryta alla uppladdningar?</string>
+  <string name="cancelling_all_the_uploads">Avbryter alla uppladdningar...</string>
+  <string name="uploads">Uppladdningar</string>
+  <string name="pending">Pågår</string>
+  <string name="failed">Misslyckades</string>
+  <string name="could_not_load_place_data">Kunde inte läsa in platsdata</string>
+  <string name="custom_selector_delete_folder">Radera mapp</string>
+  <string name="custom_selector_confirm_deletion_title">Bekräfta radering</string>
+  <string name="custom_selector_confirm_deletion_message">Vill du verkligen radera mappen %1$s som innehåller %2$d objekt?</string>
+  <string name="custom_selector_delete">Radera</string>
+  <string name="custom_selector_cancel">Avbryt</string>
+  <string name="custom_selector_folder_deleted_success">Mappen %1$s har raderats</string>
+  <string name="custom_selector_folder_deleted_failure">Kunde inte radera mappen %1$s</string>
+  <string name="custom_selector_error_trashing_folder_contents">Fel vid kassering av mappinnehållet: %1$s</string>
+  <string name="custom_selector_folder_not_found_error">Kunde inte hämta mappsökväg för bucket-ID: %1$d</string>
+  <string name="red_pin">Det här platsen har ännu ingen bild. Gå och ta en!</string>
+  <string name="green_pin">Det här platsen har redan en bild.</string>
+  <string name="grey_pin">Kollar nu om den här platsen har en bild.</string>
+  <string name="error_while_loading">Fel med inladdning</string>
+  <string name="no_usages_found">Inga användningar hittades</string>
+  <string name="usages_on_commons_heading">Commons</string>
+  <string name="usages_on_other_wikis_heading">Andra wikier</string>
+  <string name="file_usages_container_heading">Filanvändning</string>
+  <string name="title_activity_single_web_view">SingleWebViewActivity</string>
+  <string name="account">Konto</string>
+  <string name="vanish_account">Få kontot att försvinna</string>
+  <string name="account_vanish_request_confirm_title">Varning om försvinnande konto</string>
+  <string name="account_vanish_request_confirm">Att få kontot att försvinna är en &lt;b&gt;sista utväg&lt;/b&gt; och bör &lt;b&gt;endast användas när du vill sluta redigera för alltid&lt;/b&gt; och även dölja så många av dina tidigare associationer som möjligt.&lt;br/&gt;&lt;br/&gt;Konton raderas på Wikimedia Commons genom att ändra kontonamnet för att göra så att andra inte kan känna igen bidragen i en process som kallas kontoförsvinnande. &lt;b&gt;Försvinnande garanterar inte fullständig anonymitet eller att bidrag tas bort från projekten&lt;/b&gt;.</string>
+  <string name="caption">Bildtext</string>
+  <string name="caption_copied_to_clipboard">Bildtext kopierades till urklipp</string>
 </resources>

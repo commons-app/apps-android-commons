@@ -11,15 +11,14 @@ import org.mockito.MockitoAnnotations
  * Test for the Level Controller Class for Achievements
  */
 class LevelControllerTest {
-
     @Mock
     private lateinit var levelController: LevelController
 
-    private val IMAGES_UPLOADED_SAMPLE_VALUE = 0
+    private val imagesUploadedSampleValue = 0
 
-    private val UNIQUE_IMAGES_USED_SAMPLE_VALUE = 0
+    private val uniqueImagesUsedSampleValue = 0
 
-    private val NON_REVERT_RATE_SAMPLE_VALUE = 0
+    private val nonRevertRateSampleValue = 0
 
     private lateinit var levelInfo: LevelController.LevelInfo
 
@@ -30,11 +29,12 @@ class LevelControllerTest {
     fun setUp() {
         MockitoAnnotations.openMocks(this)
         levelController = LevelController()
-        levelInfo = LevelController.LevelInfo.from(
-            IMAGES_UPLOADED_SAMPLE_VALUE,
-            UNIQUE_IMAGES_USED_SAMPLE_VALUE,
-            NON_REVERT_RATE_SAMPLE_VALUE
-        )
+        levelInfo =
+            LevelController.LevelInfo.from(
+                imagesUploadedSampleValue,
+                uniqueImagesUsedSampleValue,
+                nonRevertRateSampleValue,
+            )
     }
 
     /**

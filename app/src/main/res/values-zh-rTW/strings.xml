@@ -16,6 +16,7 @@
 * Simon Shek
 * StephDC
 * Tranve
+* Wehwei
 * Winston Sung
 * Wwycheuk
 * ZhaoGang
@@ -82,7 +83,6 @@
   <string name="preference_category_feedback">意見回饋</string>
   <string name="preference_category_privacy">隱私權政策</string>
   <string name="app_name">維基共享資源</string>
-  <string name="bullet">•</string>
   <string name="menu_settings">設定</string>
   <string name="intent_share_upload_label">上傳至維基共享資源</string>
   <string name="upload_in_progress">正在上傳</string>
@@ -123,6 +123,8 @@
   <string name="menu_from_camera">拍照</string>
   <string name="menu_nearby">附近</string>
   <string name="provider_contributions">我的上傳</string>
+  <string name="menu_copy_link">複製連結</string>
+  <string name="menu_link_copied">連結已複製到剪貼簿。</string>
   <string name="menu_share">分享</string>
   <string name="menu_view_file_page">檢視檔案頁面</string>
   <string name="share_title_hint">說明（必填）</string>
@@ -141,6 +143,7 @@
   <string name="categories_search_text_hint">搜尋分類</string>
   <string name="depicts_search_text_hint">搜尋您的媒體描繪項目（山、泰姬瑪哈陵等）</string>
   <string name="menu_save_categories">儲存</string>
+  <string name="menu_overflow_desc">溢出選單</string>
   <string name="refresh_button">重新整理</string>
   <string name="display_list_button">清單</string>
   <string name="contributions_subtitle_zero">（尚未上傳）</string>
@@ -259,7 +262,7 @@
   <string name="navigation_item_feedback">意見回饋</string>
   <string name="navigation_item_feedback_github">透過 GitHub 回饋</string>
   <string name="navigation_item_logout">登出</string>
-  <string name="navigation_item_info">教程</string>
+  <string name="navigation_item_info">教學</string>
   <string name="navigation_item_notification">通知</string>
   <string name="navigation_item_review">檢閱</string>
   <string name="no_description_found">找不到描述</string>
@@ -292,11 +295,12 @@
   <string name="skip_login">略過</string>
   <string name="navigation_item_login">登入</string>
   <string name="skip_login_title">您確定要略過登入嗎？</string>
-  <string name="skip_login_message">之後您需要登入才能上傳圖片。</string>
+  <string name="skip_login_message">您之後需要登入才能上傳圖片。</string>
   <string name="login_alert_message">請登入來使用此功能</string>
   <string name="copy_wikicode">複製 wikitext 到剪貼簿</string>
   <string name="wikicode_copied">Wikitext 已複製到剪貼簿</string>
   <string name="nearby_location_not_available">位置無效，應用程式在此地附近可能無法正常運作。</string>
+  <string name="nearby_showing_pins_offline">網路無法使用。僅顯示快取位置。</string>
   <string name="upload_location_access_denied">位置存取遭拒。請手動設定您的位置才能使用此功能。</string>
   <string name="location_permission_rationale_nearby">需權限來顯示附近地點清單</string>
   <string name="location_permission_rationale_explore">需要權限來顯示附近圖片清單</string>
@@ -307,7 +311,7 @@
   <string name="about_rate_us">為我們評分</string>
   <string name="about_faq">常見問題</string>
   <string name="user_guide">使用者指南</string>
-  <string name="welcome_skip_button">跳過敎程</string>
+  <string name="welcome_skip_button">跳過教學</string>
   <string name="no_internet">網路不可用</string>
   <string name="error_notifications">檢索通知時出錯</string>
   <string name="error_review">獲取圖像以供審核時出錯。按刷新重試。</string>
@@ -351,7 +355,7 @@
   <string name="question">問題</string>
   <string name="result">結果</string>
   <string name="quiz_back_button">如果您持續上傳需要刪除的圖片，您的帳號可能會被封禁。你確定要結束測驗嗎？</string>
-  <string name="quiz_alert_message">您上傳的圖片已有%1$s遭到刪除。如果您持續上傳需要刪除的圖片，您的帳號可能會遭到封禁。\n\n您要不要重新閱覽教程，然後再做一次測驗，以幫助您分辨哪些類型的圖片可以上傳、哪些不可以？</string>
+  <string name="quiz_alert_message">您上傳的圖片已有%1$s遭到刪除。如果您持續上傳需要刪除的圖片，您的帳號可能會遭到封鎖。\n\n您要不要重新閱覽教學，然後再做一次測驗，以幫助您分辨哪些類型的圖片可以上傳、哪些不可以？</string>
   <string name="selfie_answer">自拍照沒有百科價值。除非維基百科上已經有介紹您的條目，否則請不要上傳您自己的照片。</string>
   <string name="taj_mahal_answer">在大多數的國家，上傳古蹟或室外景的照片是沒有問題的。請留意，臨時性的戶外裝置藝術常常是有著作權保護的，不可上傳。</string>
   <string name="screenshot_answer">網站的螢幕截圖被視為衍生作品，受到該網站本身所有著作權保護。這些截圖可以在獲得原作者許可之後使用。若未經許可，您根據他們的作品而創作的任何藝術品，在法律上均會被視為未經原作者許可的複製品。</string>
@@ -380,11 +384,13 @@
   <string name="delete">刪除</string>
   <string name="Achievements">成果</string>
   <string name="Profile">個人檔案</string>
+  <string name="badges">徽章：</string>
   <string name="statistics">統計內容</string>
   <string name="statistics_thanks">已收到的感謝</string>
   <string name="statistics_featured">特色圖片</string>
   <string name="statistics_wikidata_edits">圖片來自“附近的地方”</string>
-  <string name="level">等級</string>
+  <string name="level">等級 %d</string>
+  <string name="profileLevel">%s（%s級）</string>
   <string name="images_uploaded">已上傳的圖片</string>
   <string name="image_reverts">沒有被還原回復的圖片</string>
   <string name="images_used_by_wiki">有被使用到的圖片</string>
@@ -416,6 +422,7 @@
   <string name="map_application_missing">在您的裝置上找不到相容的地圖應用程式，請安裝地圖應用程式來使用此功能。</string>
   <string name="title_page_bookmarks_pictures">圖片</string>
   <string name="title_page_bookmarks_locations">位置</string>
+  <string name="title_page_bookmarks_categories">分類</string>
   <string name="menu_bookmark">添加/移除至書籤</string>
   <string name="provider_bookmarks">書籤</string>
   <string name="bookmark_empty">您尚未添加任何書籤</string>
@@ -497,6 +504,7 @@
   <string name="no_notification">您有尚未讀取的通知</string>
   <string name="no_read_notification">您沒有已讀的通知</string>
   <string name="share_logs_using">分享日誌使用</string>
+  <string name="check_your_email_inbox">請查看你的電子郵件信箱</string>
   <string name="menu_option_read">檢視已讀</string>
   <string name="menu_option_unread">檢視未讀</string>
   <string name="error_occurred_in_picking_images">選擇圖片時發生錯誤</string>
@@ -591,7 +599,8 @@
   <string name="title_for_child_classes">子類別</string>
   <string name="title_for_parent_classes">父類別</string>
   <string name="upload_nearby_place_found_title">找到附近地點</string>
-  <string name="upload_nearby_place_found_description">這是%1$s的照片嗎？</string>
+  <string name="upload_nearby_place_found_description_plural">這些是%1$s的圖片嗎？</string>
+  <string name="upload_nearby_place_found_description_singular">這是%1$s的圖片嗎？</string>
   <string name="title_app_shortcut_bookmark">書籤</string>
   <string name="title_app_shortcut_setting">設定</string>
   <string name="remove_bookmark">已從書籤刪除</string>
@@ -711,7 +720,7 @@
   <string name="read_phone_state_permission_message">附近地圖需要讀取手機狀態來正常運作</string>
   <string name="contributions_of_user">使用者貢獻：%s</string>
   <string name="achievements_of_user">使用者成果：%s</string>
-  <string name="menu_view_user_page">檢視使用者頁面</string>
+  <string name="menu_view_user_page">檢視使用者個人檔案</string>
   <string name="edit_depictions">編輯描寫</string>
   <string name="edit_categories">編輯分類</string>
   <string name="advanced_options">進階選項</string>
@@ -789,4 +798,37 @@
     <item quantity="one">已選 %d 張圖片</item>
     <item quantity="other">已選 %d 張圖片</item>
   </plurals>
+  <string name="multiple_files_depiction">請記住，多重上傳中的所有圖片都會取得相同的分類和描述。如果圖片不要共享描述和分類，請執行多次單筆上傳。</string>
+  <string name="multiple_files_depiction_header">關於多次上傳的註釋</string>
+  <string name="nearby_wikitalk">向維基數據回報關於此項目的問題</string>
+  <string name="please_enter_some_comments">請輸入一些意見。</string>
+  <string name="talk">討論</string>
+  <string name="write_something_about_the_item">填寫一些關於「%1$s」項目的事物。內容將公開可見。</string>
+  <string name="does_not_exist_anymore_no_picture_can_ever_be_taken_of_it">「%1$s」已不存在，無法拍攝它的照片。</string>
+  <string name="is_at_a_different_place_please_specify_the_correct_place_below_if_possible_tell_us_the_correct_latitude_longitude">「%1$s」位於不同的位置。請在下面指定正確的位置，可以的話請填寫正確的經緯度。</string>
+  <string name="other_problem_or_information_please_explain_below">其他問題或資訊（請在下方解釋）。</string>
+  <string name="feedback_destination_note">您的回饋已發布到以下 wiki 頁面：&lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Mobile_app/Feedback\"&gt;Commons:Mobile app/Feedback&lt;/a&gt;</string>
+  <string name="are_you_sure_that_you_want_cancel_all_the_uploads">您確定要取消所有上傳嗎？</string>
+  <string name="cancelling_all_the_uploads">正在取消所有上傳…</string>
+  <string name="uploads">上傳</string>
+  <string name="pending">待處理</string>
+  <string name="failed">失敗</string>
+  <string name="could_not_load_place_data">無法載入地點資料</string>
+  <string name="custom_selector_delete_folder">刪除資料夾</string>
+  <string name="custom_selector_confirm_deletion_title">確認刪除</string>
+  <string name="custom_selector_confirm_deletion_message">您確定要刪除包含%2$d項目的資料夾%1$s嗎？</string>
+  <string name="custom_selector_delete">刪除</string>
+  <string name="custom_selector_cancel">取消</string>
+  <string name="custom_selector_folder_deleted_success">%1$s資料夾刪除成功</string>
+  <string name="custom_selector_folder_deleted_failure">無法刪除資料夾%1$s</string>
+  <string name="custom_selector_error_trashing_folder_contents">刪除資料夾內容時發生錯誤： %1$s</string>
+  <string name="custom_selector_folder_not_found_error">無法取得儲存桶 ID 的資料夾路徑： %1$d</string>
+  <string name="red_pin">這個地點還沒有照片，來拍一張吧！</string>
+  <string name="green_pin">這個地點已有照片。</string>
+  <string name="grey_pin">現在檢查這個地點是否有照片。</string>
+  <string name="error_while_loading">載入時出錯</string>
+  <string name="no_usages_found">找不到頁面。</string>
+  <string name="usages_on_commons_heading">維基共享資源</string>
+  <string name="usages_on_other_wikis_heading">其它 wiki</string>
+  <string name="file_usages_container_heading">檔案用途</string>
 </resources>

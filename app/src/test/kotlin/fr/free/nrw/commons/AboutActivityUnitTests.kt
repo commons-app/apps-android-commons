@@ -18,11 +18,9 @@ import org.robolectric.fakes.RoboMenu
 import org.robolectric.fakes.RoboMenuItem
 import org.robolectric.shadows.ShadowActivity
 
-
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
 class AboutActivityUnitTests {
-
     private lateinit var activity: AboutActivity
 
     private lateinit var context: Context
@@ -116,5 +114,4 @@ class AboutActivityUnitTests {
     fun testOnSupportNavigateUp() {
         activity.onSupportNavigateUp()
     }
-
 }

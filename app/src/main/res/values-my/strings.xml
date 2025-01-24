@@ -41,7 +41,6 @@
   <string name="preference_category_feedback">အကြံပေးရန်</string>
   <string name="preference_category_privacy">ကိုယ်ရေးမူဝါဒ</string>
   <string name="app_name">ကွန်မွန်းစ်</string>
-  <string name="bullet">•</string>
   <string name="menu_settings">အပြင်အဆင်များ</string>
   <string name="intent_share_upload_label">ကွန်မွန့်စ်တွင် တင်ရန်</string>
   <string name="username">အသုံးပြုသူအမည်</string>
@@ -200,7 +199,7 @@
   <string name="skip_login">ကျော်ရန်</string>
   <string name="navigation_item_login">အကောင့်ဝင်ရန်</string>
   <string name="skip_login_title" fuzzy="true">အကောင့်ထဲဝင်ခြင်းကို အမှန်တကယ် ကျော်သွားလိုပါသလား</string>
-  <string name="skip_login_message">အနာဂတ်ကာလတွင် ရုပ်ပုံများတင်ရန် အကောင့်ထဲဝင်ရပါမည်။</string>
+  <string name="skip_login_message" fuzzy="true">အနာဂတ်ကာလတွင် ရုပ်ပုံများတင်ရန် အကောင့်ထဲဝင်ရပါမည်။</string>
   <string name="login_alert_message">ဤအင်္ဂါရပ်ကို အသုံးပြုရန် အကောင့်ထဲသို့ဝင်ပါ</string>
   <string name="nearby_location_not_available">အနီးအနား ကောင်းမွန်စွာ အလုပ်မလုပ်ပါ၊ တည်နေရာ မရရှိနိုင်ပါ။</string>
   <string name="location_permission_rationale_nearby">အနီးအနားနေရာများစာရင်းကို ပြသပေးရန် ခွင့်ပြုချက် လိုအပ်ပါသည်</string>
@@ -263,7 +262,7 @@
   <string name="statistics_thanks">ကျေးဇူးစကား လက်ခံရရှိ</string>
   <string name="statistics_featured">အထူးဓာတ်ပုံများ</string>
   <string name="statistics_wikidata_edits">\"အနီးအနားနေရာများ\" မှတဆင့် ရုပ်ပုံများ</string>
-  <string name="level">အဆင့်</string>
+  <string name="level" fuzzy="true">အဆင့်</string>
   <string name="images_uploaded">ရုပ်ပုံများ အက်ပလုတ်တင်ပြီးပြီ</string>
   <string name="achievements_share_message">သင်၏အောင်မြင်မှုများကို မိတ်ဆွေများနှင့် မျှဝေလိုက်ပါ</string>
   <string name="achievements_revert_limit_message">အနည်းဆုံး လိုအပ်ချက်:</string>
@@ -398,7 +397,7 @@
   <string name="need_permission">ခွင့်ပြုချက် လိုအပ်</string>
   <string name="contributions_of_user">အသုံးပြုသူ၏ ပံ့ပိုးမှုများ- %s</string>
   <string name="achievements_of_user">အသုံးပြုသူ၏ အောင်မြင်မှုများ- %s</string>
-  <string name="menu_view_user_page">အသုံးပြုသူ၏ စာမျက်နှာကို ကြည့်ရန်</string>
+  <string name="menu_view_user_page" fuzzy="true">အသုံးပြုသူ၏ စာမျက်နှာကို ကြည့်ရန်</string>
   <string name="edit_categories">ကဏ္ဍများ တည်းဖြတ်ရန်</string>
   <string name="advanced_options">အဆင့်မြင့်ရွေးချယ်ရန်များ</string>
   <string name="no_location_found_title">တည်နေရာမတွေ့ပါ</string>

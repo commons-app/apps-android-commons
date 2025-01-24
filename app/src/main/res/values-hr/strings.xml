@@ -37,7 +37,6 @@
   <string name="preference_category_feedback">Povratna informacija</string>
   <string name="preference_category_privacy">Privatnost</string>
   <string name="app_name">Zajednički poslužitelj</string>
-  <string name="bullet">•</string>
   <string name="menu_settings">Postavke</string>
   <string name="intent_share_upload_label">Prenesi na Zajednički poslužitelj</string>
   <string name="username">Suradničko ime</string>
@@ -217,7 +216,7 @@
   <string name="skip_login">Preskoči</string>
   <string name="navigation_item_login">Prijavite se</string>
   <string name="skip_login_title" fuzzy="true">Želite li zbilja preskočiti prijavu?</string>
-  <string name="skip_login_message">U budućnosti ćete se morati prijaviti kako biste postavili slike.</string>
+  <string name="skip_login_message" fuzzy="true">U budućnosti ćete se morati prijaviti kako biste postavili slike.</string>
   <string name="login_alert_message">Molimo da se prijavite kako biste se mogli koristiti ovom mogućnošću</string>
   <string name="nearby_location_not_available">„U blizini“ možda ne radi kako treba. Lokacija nije dostupna.</string>
   <string name="location_permission_rationale_nearby">Potrebno je dopuštenje za popis mjesta u blizini</string>
@@ -272,7 +271,7 @@
   <string name="Profile">Podatci o suradnici/suradniku</string>
   <string name="statistics">Statistike</string>
   <string name="statistics_thanks">Primljeno zahvala</string>
-  <string name="level">Razina</string>
+  <string name="level" fuzzy="true">Razina</string>
   <string name="error_occurred">Došlo je do pogrješke!</string>
   <string name="notifications_channel_name_all">Obavijesti Zajedničkoga poslužitelja</string>
   <string name="title_page_bookmarks_pictures">Slike</string>

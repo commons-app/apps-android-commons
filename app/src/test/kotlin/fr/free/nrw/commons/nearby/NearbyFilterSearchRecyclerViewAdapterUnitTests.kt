@@ -16,13 +16,11 @@ import org.mockito.MockitoAnnotations
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
-import java.util.*
 
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
 @LooperMode(LooperMode.Mode.PAUSED)
 class NearbyFilterSearchRecyclerViewAdapterUnitTests {
-
     private lateinit var context: Context
     private lateinit var adapter: NearbyFilterSearchRecyclerViewAdapter
 
@@ -101,5 +99,4 @@ class NearbyFilterSearchRecyclerViewAdapterUnitTests {
     fun testSetRecyclerViewAdapterAllSelected() {
         adapter.setRecyclerViewAdapterAllSelected()
     }
-
 }

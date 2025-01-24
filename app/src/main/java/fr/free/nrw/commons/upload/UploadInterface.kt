@@ -21,7 +21,7 @@ interface UploadInterface {
         @Part("offset") offset: RequestBody?,
         @Part("filekey") fileKey: RequestBody?,
         @Part("token") token: RequestBody?,
-        @Part filePart: MultipartBodyPart
+        @Part filePart: MultipartBodyPart,
     ): Observable<UploadResponse>
 
     @Headers("Cache-Control: no-cache")
@@ -32,6 +32,6 @@ interface UploadInterface {
         @Field("text") text: String,
         @Field("comment") comment: String,
         @Field("filename") filename: String,
-        @Field("filekey") filekey: String
+        @Field("filekey") filekey: String,
     ): Observable<JsonObject>
 }

@@ -7,9 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
-import androidx.recyclerview.widget.RecyclerView
 import androidx.test.core.app.ApplicationProvider
-import com.google.android.material.textfield.TextInputLayout
 import com.nhaarman.mockitokotlin2.whenever
 import depictedItem
 import fr.free.nrw.commons.Media
@@ -18,7 +16,6 @@ import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.createTestClient
 import fr.free.nrw.commons.kvstore.JsonKvStore
-import fr.free.nrw.commons.ui.PasteSensitiveTextInputEditText
 import fr.free.nrw.commons.upload.UploadActivity
 import fr.free.nrw.commons.upload.UploadBaseFragment
 import io.reactivex.disposables.Disposable
@@ -39,7 +36,6 @@ import java.lang.reflect.Method
 @Config(sdk = [21], application = TestCommonsApplication::class)
 @LooperMode(LooperMode.Mode.PAUSED)
 class DepictsFragmentUnitTests {
-
     private lateinit var fragment: DepictsFragment
     private lateinit var fragmentManager: FragmentManager
     private lateinit var layoutInflater: LayoutInflater
@@ -82,9 +78,10 @@ class DepictsFragmentUnitTests {
 
         layoutInflater = LayoutInflater.from(activity)
 
-        view = LayoutInflater.from(activity)
-            .inflate(R.layout.upload_depicts_fragment, null) as View
-
+        view =
+            LayoutInflater
+                .from(activity)
+                .inflate(R.layout.upload_depicts_fragment, null) as View
 
         Whitebox.setInternalState(fragment, "callback", callback)
         Whitebox.setInternalState(fragment, "subscribe", disposable)
@@ -106,9 +103,10 @@ class DepictsFragmentUnitTests {
     @Test
     @Throws(Exception::class)
     fun testInit() {
-        val method: Method = DepictsFragment::class.java.getDeclaredMethod(
-            "init"
-        )
+        val method: Method =
+            DepictsFragment::class.java.getDeclaredMethod(
+                "init",
+            )
         method.isAccessible = true
         method.invoke(fragment)
     }
@@ -117,9 +115,10 @@ class DepictsFragmentUnitTests {
     @Throws(Exception::class)
     fun `Test init when media is not null`() {
         Whitebox.setInternalState(fragment, "media", media)
-        val method: Method = DepictsFragment::class.java.getDeclaredMethod(
-            "init"
-        )
+        val method: Method =
+            DepictsFragment::class.java.getDeclaredMethod(
+                "init",
+            )
         method.isAccessible = true
         method.invoke(fragment)
     }
@@ -127,9 +126,10 @@ class DepictsFragmentUnitTests {
     @Test
     @Throws(Exception::class)
     fun testOnBecameVisible() {
-        val method: Method = DepictsFragment::class.java.getDeclaredMethod(
-            "onBecameVisible"
-        )
+        val method: Method =
+            DepictsFragment::class.java.getDeclaredMethod(
+                "onBecameVisible",
+            )
         method.isAccessible = true
         method.invoke(fragment)
     }
@@ -211,10 +211,11 @@ class DepictsFragmentUnitTests {
     @Test
     @Throws(Exception::class)
     fun testSearchForDepictions() {
-        val method: Method = DepictsFragment::class.java.getDeclaredMethod(
-            "searchForDepictions",
-            String::class.java
-        )
+        val method: Method =
+            DepictsFragment::class.java.getDeclaredMethod(
+                "searchForDepictions",
+                String::class.java,
+            )
         method.isAccessible = true
         method.invoke(fragment, "")
     }
@@ -234,9 +235,10 @@ class DepictsFragmentUnitTests {
     @Test
     @Throws(Exception::class)
     fun testInitRecyclerView() {
-        val method: Method = DepictsFragment::class.java.getDeclaredMethod(
-            "initRecyclerView"
-        )
+        val method: Method =
+            DepictsFragment::class.java.getDeclaredMethod(
+                "initRecyclerView",
+            )
         method.isAccessible = true
         method.invoke(fragment)
     }
@@ -245,9 +247,10 @@ class DepictsFragmentUnitTests {
     @Throws(Exception::class)
     fun `Test initRecyclerView when media is not null`() {
         Whitebox.setInternalState(fragment, "media", media)
-        val method: Method = DepictsFragment::class.java.getDeclaredMethod(
-            "initRecyclerView"
-        )
+        val method: Method =
+            DepictsFragment::class.java.getDeclaredMethod(
+                "initRecyclerView",
+            )
         method.isAccessible = true
         method.invoke(fragment)
     }
@@ -255,7 +258,7 @@ class DepictsFragmentUnitTests {
     @Test
     @Throws(Exception::class)
     fun testGetFragmentContext() {
-        fragment.fragmentContext
+        fragment.getFragmentContext()
     }
 
     @Test

@@ -26,6 +26,6 @@ interface WikidataInterface {
     fun postSetClaim(
         @Field("claim") request: String,
         @Field("tags") tags: String,
-        @Field("token") token: String
+        @Field("token") token: String,
     ): Observable<WbCreateClaimResponse>
 }

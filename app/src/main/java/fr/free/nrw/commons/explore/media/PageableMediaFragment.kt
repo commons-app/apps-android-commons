@@ -2,24 +2,16 @@ package fr.free.nrw.commons.explore.media
 
 import android.content.Context
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.category.CategoryImagesCallback
-import fr.free.nrw.commons.databinding.FragmentSearchPaginatedBinding
 import fr.free.nrw.commons.explore.paging.BasePagingFragment
 import fr.free.nrw.commons.media.MediaDetailPagerFragment.MediaDetailProvider
 
-abstract class PageableMediaFragment : BasePagingFragment<Media>(), MediaDetailProvider {
-
-    /**
-     * ViewBinding
-     */
-    private var _binding: FragmentSearchPaginatedBinding? = null
-    private val binding get() = _binding!!
-
+abstract class PageableMediaFragment :
+    BasePagingFragment<Media>(),
+    MediaDetailProvider {
     override val pagedListAdapter by lazy {
         PagedMediaAdapter(categoryImagesCallback::onMediaClicked)
     }
@@ -39,31 +31,26 @@ abstract class PageableMediaFragment : BasePagingFragment<Media>(), MediaDetailP
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentSearchPaginatedBinding.inflate(inflater, container, false)
-        return binding.root
-    }
-
     private val simpleDataObserver =
         SimpleDataObserver { categoryImagesCallback.viewPagerNotifyDataSetChanged() }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         super.onViewCreated(view, savedInstanceState)
         pagedListAdapter.registerAdapterDataObserver(simpleDataObserver)
     }
 
     override fun onDestroyView() {
-        _binding = null
         super.onDestroyView()
         pagedListAdapter.unregisterAdapterDataObserver(simpleDataObserver)
     }
 
     override fun getMediaAtPosition(position: Int): Media? =
-        pagedListAdapter.currentList?.get(position)?.takeIf { it.filename != null }
+        pagedListAdapter.currentList
+            ?.get(position)
+            ?.takeIf { it.filename != null }
             .also {
                 pagedListAdapter.currentList?.loadAround(position)
                 binding.paginatedSearchResultsList.scrollToPosition(position)

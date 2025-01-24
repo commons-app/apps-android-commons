@@ -12,9 +12,8 @@ import androidx.fragment.app.Fragment
 import fr.free.nrw.commons.databinding.FragmentAdvanceQueryBinding
 
 class AdvanceQueryFragment : Fragment() {
-
     private var _binding: FragmentAdvanceQueryBinding? = null
-    private val binding get() = _binding
+    val binding get() = _binding
 
     lateinit var callback: Callback
 
@@ -28,7 +27,7 @@ class AdvanceQueryFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
         _binding = FragmentAdvanceQueryBinding.inflate(inflater, container, false)
         etQuery = binding?.etQuery
@@ -38,7 +37,10 @@ class AdvanceQueryFragment : Fragment() {
         return binding?.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         super.onViewCreated(view, savedInstanceState)
 
         setUi()
@@ -79,7 +81,9 @@ class AdvanceQueryFragment : Fragment() {
 
     interface Callback {
         fun reset()
+
         fun apply(query: String)
+
         fun close()
     }
 }

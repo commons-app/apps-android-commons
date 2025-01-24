@@ -16,8 +16,8 @@ import fr.free.nrw.commons.CommonsApplication
 import fr.free.nrw.commons.OkHttpConnectionFactory
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestCommonsApplication
-import fr.free.nrw.commons.createTestClient
 import fr.free.nrw.commons.actions.PageEditClient
+import fr.free.nrw.commons.createTestClient
 import fr.free.nrw.commons.feedback.model.Feedback
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.profile.ProfileActivity
@@ -27,7 +27,10 @@ import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
-import org.mockito.Mockito.*
+import org.mockito.Mockito.anyString
+import org.mockito.Mockito.doReturn
+import org.mockito.Mockito.mock
+import org.mockito.Mockito.`when`
 import org.mockito.MockitoAnnotations
 import org.powermock.reflect.Whitebox
 import org.robolectric.Robolectric
@@ -40,12 +43,10 @@ import org.robolectric.shadows.ShadowAlertDialog
 import org.robolectric.shadows.ShadowDialog
 import java.lang.reflect.Method
 
-
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
 @LooperMode(LooperMode.Mode.PAUSED)
 class MoreBottomSheetFragmentUnitTests {
-
     private lateinit var fragment: MoreBottomSheetFragment
     private lateinit var view: View
     private lateinit var layoutInflater: LayoutInflater
@@ -75,7 +76,7 @@ class MoreBottomSheetFragmentUnitTests {
         Whitebox.setInternalState(fragment, "pageEditClient", pageEditClient)
 
         `when`(store.getBoolean(CommonsApplication.IS_LIMITED_CONNECTION_MODE_ENABLED)).thenReturn(
-            true
+            true,
         )
 
         layoutInflater = LayoutInflater.from(activity)
@@ -119,7 +120,7 @@ class MoreBottomSheetFragmentUnitTests {
         val feedback = mock(Feedback::class.java)
         val observable: Observable<Boolean> = Observable.just(false)
         val observable2: Observable<Boolean> = Observable.just(true)
-        doReturn(observable, observable2).`when`(pageEditClient).prependEdit(anyString(), anyString(), anyString())
+        doReturn(observable, observable2).`when`(pageEditClient).createNewSection(anyString(), anyString(), anyString(), anyString())
         fragment.uploadFeedback(feedback)
     }
 
@@ -197,8 +198,7 @@ class MoreBottomSheetFragmentUnitTests {
         Assert.assertEquals(startedIntent.`data`, Uri.parse("mailto:"))
         Assert.assertEquals(
             startedIntent.extras?.get(Intent.EXTRA_SUBJECT),
-            CommonsApplication.FEEDBACK_EMAIL_SUBJECT
+            CommonsApplication.FEEDBACK_EMAIL_SUBJECT,
         )
     }
-
 }

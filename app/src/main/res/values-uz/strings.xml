@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* Jamshid Nurkulov
 * Malikxan
 * Mirishkorlik
 * Zafar Shamsiddinov
@@ -231,6 +232,7 @@
   <string name="navigation_item_about">Haqida</string>
   <string name="navigation_item_settings">Sozlamalar</string>
   <string name="navigation_item_feedback">Fikr-mulohazalar</string>
+  <string name="navigation_item_feedback_github">GitHub orqali fikr bildirish</string>
   <string name="navigation_item_logout">Chiqish</string>
   <string name="navigation_item_info">Qoʻllanma</string>
   <string name="navigation_item_notification">Bildirishnomalar</string>
@@ -265,12 +267,14 @@
   <string name="skip_login">Oʻtkazib yuborish</string>
   <string name="navigation_item_login">Kirish</string>
   <string name="skip_login_title" fuzzy="true">Haqiqatan ham kirishni oʻtkazib yubormoqchimisiz?</string>
-  <string name="skip_login_message">Kelajakda rasmlarni yuklash uchun tizimga kirishingiz kerak boʻladi.</string>
+  <string name="skip_login_message" fuzzy="true">Kelajakda rasmlarni yuklash uchun tizimga kirishingiz kerak boʻladi.</string>
   <string name="login_alert_message">Ushbu xususiyatdan foydalanish uchun tizimga kiring</string>
   <string name="copy_wikicode">Vikimatndan nusxa olish</string>
   <string name="wikicode_copied">Vikimatndan nusxa olindi</string>
   <string name="nearby_location_not_available">Joylashuv mavjud boʻlmaganda, yaqin atrofdagilar aniq ishlamasligi mumkin.</string>
+  <string name="upload_location_access_denied">Joylashuv maʼlumotlariga kirish taqiqlangan. Iltimos, ushbu funksiyadan foydalanish uchun joylashuv maʼlumotlaringizni qoʻlda kiriting.</string>
   <string name="location_permission_rationale_nearby">Yaqin-atrofdagi joylar roʻyxatini koʻrsatish uchun ruxsat kerak</string>
+  <string name="location_permission_rationale_explore">Yaqin atrofdagi suratlar roʻyxatini koʻrish uchun ruxsat talab etiladi</string>
   <string name="nearby_directions">Tomon</string>
   <string name="nearby_wikidata">Vikimaʼlumotlar</string>
   <string name="nearby_wikipedia">Vikipediya</string>
@@ -317,21 +321,67 @@
   <string name="wikidata_edit_failure">Tegishli Wikidata obyektini yangilab boʻlmadi!</string>
   <string name="menu_set_wallpaper">Fon rasmi sifatida qoʻyish</string>
   <string name="wallpaper_set_successfully">Fon rasmi oʻrnatildi!</string>
+  <string name="quiz">Test</string>
   <string name="quiz_question_string">Ushbu rasmni joylasa boʻladimi?</string>
   <string name="question">Savol</string>
   <string name="result">Natija</string>
+  <string name="quiz_back_button">Siz oʻchirilishi talab etiladigan suratlarni yuklashda davom etsangiz akkauntingiz bloklanishi mumkin. Testni davom ettirishni istaysizmi?</string>
+  <string name="quiz_alert_message">Siz yuklagan %1$s dan ortiq tasvirlar oʻchirildi. Agar oʻchirilishi talab etiladigan tasvirlarni yuklashda davom etsangiz akkauntingiz bloklanishi mumkin.\n\nQanday tasvirlarni yuklash yo yuklamaslik kerakligini oʻrganish uchun qoʻllanmani yana bir marta oʻqishni, undan soʻng test qilib koʻrishni istaysizmi?</string>
+  <string name="selfie_answer">Selfi tasvirlar u qadar ensiklopedik ahamiyat kasb etmaydi. Iltimos, Vikipediyada siz haqingizda maqola mavjud boʻlmasa, oʻz suratingizni yuklamang.</string>
+  <string name="taj_mahal_answer">Koʻplab davlatlarda tashqi manzaralar va haykallarning suratlarini yukash mumkin. Eʼtibor bering, jamoat joylarida vaqtinchalik oʻrnatilgan koʻplab badiiy installyatsiyalar koʻp hollarda mualliflik huquqlari bilan himoyalangan boʻladi. Ularni tasvirga olib yuklab boʻlmaydi.</string>
+  <string name="screenshot_answer">Ekran tasvirlari (skrinshotlar) ham mehnat mahsuli hisoblanadi, ular veb saytning oʻzida har qanday mualliflik huquqlari buzilishiga olib kelishi mumkin. Ularni muallif ruxsatidan keyin yuklashingiz mumkin. Boshqa mualliflarning ishlaridan foydalanib yaratilgan har qanday sanʼat asari, agar muallifdan ruxsat olinmagan boʻlsa, yuridik jihatdan birlamchi muallifga tegishli mahsulotning litsenziyasiz nusxasi hisoblanadi.</string>
+  <string name="blurry_image_answer">Vikiomborning maqsadlaridan biri — sifatli tasvirlarni yigʻish. Shu sababli xira, shuvalib ketgan tasvirlarni yuklamang. Doim yaxshi yoritilgan joyda olingan sifatli rasmlarni yuklashga harakat qiling.</string>
+  <string name="construction_event_answer">Texnologiyalar yoki madaniyatlarni namoyon etuvchi tasvirlar Vikiomborga mamnuniyat bilan qabul qilinadi.</string>
+  <string name="congratulatory_message_quiz">Siz %1$s ta toʻgʻri javob berdingiz. Tabriklaymiz!</string>
+  <string name="warning_for_no_answer">Savolga javob berish uchun ikkita variantdan birini tanlang</string>
+  <string name="user_not_logged_in">Kirish muddati tugadi. Iltimos, qayta kiring.</string>
+  <string name="quiz_result_share_message">Natijangizni doʻstlaringizga ham ulashing!</string>
   <string name="continue_message">Davom etish</string>
   <string name="correct">Toʻgʻri javob</string>
   <string name="wrong">Xato javob</string>
+  <string name="quiz_screenshot_question">Bu skrinshotni yuklash mumkinmi?</string>
   <string name="share_app_title">Ilovani ulashish</string>
+  <string name="rotate">Aylantirish</string>
+  <string name="error_fetching_nearby_places">Yaqin atrofdagi joylarni yuklab bo‘lmadi</string>
+  <string name="no_pictures_in_this_area">Bu hududda rasm yoʻq</string>
+  <string name="no_nearby_places_around">Yaqin atrofda joy yoʻq</string>
+  <string name="error_fetching_nearby_monuments">Yaqin atrofdagi yodgorliklarni olishda xatolik yuz berdi.</string>
+  <string name="no_recent_searches">Soʻnggi qidiruvlar yoʻq</string>
+  <string name="delete_recent_searches_dialog">Qidiruv tarixini tozalamoqchimisiz?</string>
+  <string name="cancel_upload_dialog">Ushbu yuklashni bekor qilmoqchimisiz?</string>
+  <string name="delete_search_dialog">Bu qidiruvni oʻchirib tashlamoqchimisiz?</string>
+  <string name="search_history_deleted">Qidiruv tarixi oʻchirildi</string>
+  <string name="nominate_delete">Oʻchirish uchun nomzod</string>
   <string name="delete">Oʻchirish</string>
+  <string name="Achievements">Yutuqlar</string>
   <string name="Profile">Profil</string>
   <string name="statistics">Statistika</string>
+  <string name="statistics_thanks">Bildirilgan minnatdorchiliklar</string>
   <string name="statistics_featured">Tanlangan tasvirlar</string>
+  <string name="statistics_wikidata_edits">\"Yaqin atrofdan\" olingan tasvirlar</string>
+  <string name="level" fuzzy="true">Bosqich</string>
+  <string name="images_uploaded">Yuklangan rasmlar</string>
+  <string name="image_reverts">Tasvirlar qayta tiklanmadi</string>
+  <string name="images_used_by_wiki">Foydalanilgan tasvirlar</string>
+  <string name="achievements_share_message">Muvaffaqiyatlaringiz haqida doʻstlaringizga xabar bering!</string>
+  <string name="achievements_info_message">Ushbu talablarni bajargan sari sizning darajangiz oshib boradi. Darajangizni koʻzdan kechirganda \"statistika\" boʻlimidagi elementlar hisobga olinmaydi.</string>
+  <string name="achievements_revert_limit_message">eng kichik talab:</string>
+  <string name="images_uploaded_explanation">Istalgan dasturiy taʼminot yordamida siz Vikiomborga yuklagan tasvirlar soni</string>
+  <string name="images_reverted_explanation">Siz tomoningizdan Vikiomborga yuklangan va oʻchirilmagan tasvirlar foizi</string>
+  <string name="images_used_explanation">Siz tomoningizdan Vikiomborga yuklangan va Vikimedia maqolalarida foydalanilgan tasvirlar soni</string>
+  <string name="error_occurred">Xatolik yuz berdi!</string>
+  <string name="notifications_channel_name_all">Vikiombor bildirishnomasi</string>
+  <string name="preference_author_name_toggle">Muallif nomini kiriting</string>
+  <string name="preference_author_name_toggle_summary">Fotografiyalarni yuklash vaqtida oʻz foydalanuvchi nomingizdan emas, muallif nomidan foydalaning</string>
+  <string name="preference_author_name">Muallif nomi</string>
   <string name="contributions_fragment">Hissam</string>
   <string name="nearby_fragment">Yonida</string>
   <string name="notifications">Bildirishnomalar</string>
+  <string name="read_notifications">Bildirishnomalar (oʻqish)</string>
+  <string name="display_nearby_notification">Yondosh bildirishnomalarni koʻrsatish</string>
+  <string name="display_nearby_notification_summary">Dasturda rasmga olish kerak boʻlgan yondosh hududlar haqidagi bildirishnomani koʻrsatish</string>
   <string name="list_sheet">Roʻyxat</string>
+  <string name="storage_permission">Saqlash uchun ruxsat</string>
   <string name="next">Keyingisi</string>
   <string name="previous">Avvalgisi</string>
   <string name="title_page_bookmarks_pictures">Tasvirlar</string>

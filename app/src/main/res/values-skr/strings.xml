@@ -23,7 +23,6 @@
   <string name="preference_category_feedback">تہاڈی رائے</string>
   <string name="preference_category_privacy">رازداری</string>
   <string name="app_name">کامنز</string>
-  <string name="bullet">•</string>
   <string name="menu_settings">ترتیباں</string>
   <string name="intent_share_upload_label">کامنز تے اپ لوڈ کرو</string>
   <string name="username">ورتݨ آلا ناں</string>
@@ -34,8 +33,8 @@
   <string name="logging_in_title">لاگ ان تھیندا پئے</string>
   <string name="logging_in_message">انتظار کرو۔۔۔</string>
   <string name="updating_caption_message">انتظار کرو۔۔۔</string>
-  <string name="login_success" fuzzy="true">لاگ ان کامیاب!</string>
-  <string name="login_failed" fuzzy="true">لاگ ان ناکام!</string>
+  <string name="login_success">لاگ ان کامیاب!</string>
+  <string name="login_failed">لاگ ان ناکام!</string>
   <string name="upload_failed">فائل کائنی لبھی،ٻئی فائل کیتے کوشش کرو۔</string>
   <string name="authentication_failed" fuzzy="true">تصدیق ناکام، ولدا لاڳ ان تھیوو</string>
   <string name="uploading_started">اپ لوڈ شروع!</string>
@@ -55,12 +54,13 @@
   <string name="menu_from_camera">فوٹو چھکو</string>
   <string name="menu_nearby">نیڑے</string>
   <string name="provider_contributions">میݙے اپ لوڈ</string>
+  <string name="menu_copy_link">لنک نقل کرو</string>
   <string name="menu_share">شیئر</string>
   <string name="menu_view_file_page">فائل آلا ورقہ ݙیکھو</string>
   <string name="share_title_hint">عنوان (ضروری ہے)</string>
   <string name="share_description_hint">تفصیل</string>
   <string name="share_caption_hint">عنوان</string>
-  <string name="login_failed_generic" fuzzy="true">لاگ ان ناکام</string>
+  <string name="login_failed_generic">لاگ ان ناکام</string>
   <string name="share_upload_button">اپلوڈ</string>
   <string name="multiple_share_base_title">ایں سیٹ دا ناں ݙسو</string>
   <string name="provider_modifications">تبدیلیاں</string>
@@ -170,7 +170,7 @@
   <string name="Achievements">کامیابیاں</string>
   <string name="Profile">پروفائل</string>
   <string name="statistics">شماريات</string>
-  <string name="level">درجہ</string>
+  <string name="level" fuzzy="true">درجہ</string>
   <string name="images_used_by_wiki">ورتیل تصویراں</string>
   <string name="error_occurred">خرابی تھی ڳئی ہے!</string>
   <string name="contributions_fragment">ونگاراں</string>
@@ -181,6 +181,7 @@
   <string name="previous">پچھلا</string>
   <string name="title_page_bookmarks_pictures">تصویراں</string>
   <string name="title_page_bookmarks_locations">محل وقوع</string>
+  <string name="title_page_bookmarks_categories">ونکیاں</string>
   <string name="provider_bookmarks">کتاب نشان</string>
   <string name="provider_bookmarks_location">کتاب نشان</string>
   <string name="back_button_warning">اپ لوڈ منسوخ کرو</string>
@@ -253,7 +254,7 @@
   <string name="custom_selector_dismiss_limit_warning_button_text">مکاؤ</string>
   <string name="learn_more">ٻیا سکھو</string>
   <string name="need_permission">اجازت دی لوڑ ہے</string>
-  <string name="menu_view_user_page">ورتݨ آلے دا ورقہ ݙیکھو</string>
+  <string name="menu_view_user_page">ورتݨ آلے دی پروفائل ݙیکھو</string>
   <string name="edit_categories">ونکیاں وچ تبدیلی کرو</string>
   <string name="advanced_options">اعلیٰ اختیارات</string>
   <string name="apply">لاڳو کرو</string>
@@ -269,4 +270,13 @@
   <string name="image_selected">تصویر چݨیج ڳئی</string>
   <string name="menu_view_report">رپورٹ</string>
   <string name="error_sending_thanks">مصنف کوں شکریہ بھیڄݨ وچ خرابی۔</string>
+  <string name="talk">ڳالھ مہاڑ</string>
+  <string name="uploads">اپلوڈاں</string>
+  <string name="pending">وچار ہیٹھ</string>
+  <string name="failed">ناکام تھیا</string>
+  <string name="custom_selector_delete">مٹاؤ</string>
+  <string name="custom_selector_cancel">منسوخ</string>
+  <string name="usages_on_commons_heading">کامنز</string>
+  <string name="account">کھاتہ</string>
+  <string name="caption">عنوان</string>
 </resources>

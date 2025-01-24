@@ -4,14 +4,12 @@ import static fr.free.nrw.commons.location.LocationServiceManager.LocationChange
 import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.LOCATION_SLIGHTLY_CHANGED;
 import static fr.free.nrw.commons.utils.MapUtils.ZOOM_LEVEL;
 
-import android.Manifest;
 import android.Manifest.permission;
 import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -19,24 +17,20 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.location.LocationManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.provider.Settings;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.Toast;
-import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.AppCompatTextView;
 import androidx.core.content.ContextCompat;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import fr.free.nrw.commons.BaseMarker;
 import fr.free.nrw.commons.MapController;
@@ -48,7 +42,6 @@ import fr.free.nrw.commons.databinding.FragmentExploreMapBinding;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.explore.ExploreMapRootFragment;
 import fr.free.nrw.commons.explore.paging.LiveDataConverter;
-import fr.free.nrw.commons.filepicker.Constants;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.location.LocationPermissionsHelper;
@@ -60,7 +53,6 @@ import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.utils.DialogUtil;
 import fr.free.nrw.commons.utils.MapUtils;
 import fr.free.nrw.commons.utils.NetworkUtils;
-import fr.free.nrw.commons.utils.PermissionUtils;
 import fr.free.nrw.commons.utils.SystemThemeUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.Observable;
@@ -142,8 +134,8 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
                             askForLocationPermission();
                         },
                         null,
-                        null,
-                        false);
+                        null
+                    );
                 } else {
                     if (isPermissionDenied) {
                         locationPermissionsHelper.showAppSettingsDialog(getActivity(),
@@ -176,7 +168,11 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
     public void onViewCreated(@NonNull final View view, @Nullable final Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         setSearchThisAreaButtonVisibility(false);
-        binding.tvAttribution.setText(Html.fromHtml(getString(R.string.map_attribution)));
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            binding.tvAttribution.setText(Html.fromHtml(getString(R.string.map_attribution), Html.FROM_HTML_MODE_LEGACY));
+        } else {
+            binding.tvAttribution.setText(Html.fromHtml(getString(R.string.map_attribution)));
+        }
         initNetworkBroadCastReceiver();
         locationPermissionsHelper = new LocationPermissionsHelper(getActivity(),locationManager,this);
         if (presenter == null) {
@@ -310,7 +306,7 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
     }
 
     private void startMapWithoutPermission() {
-        lastKnownLocation = MapUtils.defaultLatLng;
+        lastKnownLocation = MapUtils.getDefaultLatLng();
         moveCameraToPosition(
             new GeoPoint(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude()));
         presenter.onMapReady(exploreMapController);
@@ -331,7 +327,7 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
             !locationPermissionsHelper.checkLocationPermission(getActivity())) {
             isPermissionDenied = true;
         }
-        lastKnownLocation = MapUtils.defaultLatLng;
+        lastKnownLocation = MapUtils.getDefaultLatLng();
         moveCameraToPosition(
             new GeoPoint(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude()));
         presenter.onMapReady(exploreMapController);

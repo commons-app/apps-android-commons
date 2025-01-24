@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* Beqabai
 * David1010
 * Mehman97
 * Გიო ოქრო
@@ -9,7 +10,20 @@
   <string name="commons_github">ვიკისაწყობის წყაროს კოდი Github-ზე</string>
   <string name="commons_logo">ვიკისაწყობის ლოგო</string>
   <string name="commons_website">ვიკისაწყობის საიტი</string>
+  <string name="exit_location_picker">მდებარეობის ამრჩევიდან გასვლა</string>
   <string name="submit">გაგზავნა</string>
+  <string name="add_another_description">დაამატეთ სხვა აღწერა</string>
+  <string name="add_new_contribution">ახალი წვლილი</string>
+  <string name="add_contribution_from_camera">დამატება კამერიდან</string>
+  <string name="add_contribution_from_photos">დამატება ფოტოებიდან</string>
+  <string name="add_contribution_from_contributions_gallery">დაამატეთ წვლილი წინა წვლილის გალერეიდან</string>
+  <string name="show_captions">აღწერები</string>
+  <string name="row_item_language_description">ენის აღწერა</string>
+  <string name="row_item_caption">წარწერა</string>
+  <string name="show_captions_description">აღწერა</string>
+  <string name="nearby_row_image">სურათი</string>
+  <string name="nearby_all">ყველა</string>
+  <string name="nearby_filter_search">ძებნა</string>
   <string name="appwidget_img">დღის სურათი</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">%1$d ფაილი იტვირთება</item>
@@ -39,9 +53,9 @@
   <string name="preference_category_feedback">უკუკავშირი</string>
   <string name="preference_category_privacy">კონფიდენციალურობა</string>
   <string name="app_name">ვიკისაწყობი</string>
-  <string name="bullet">•</string>
   <string name="menu_settings">კონფიგურაცია</string>
   <string name="intent_share_upload_label">ვიკისაწყობში ატვირთვა</string>
+  <string name="upload_in_progress">მიმდინარეობს ატვირთვა</string>
   <string name="username">მომხმარებლის სახელი</string>
   <string name="password">პაროლი</string>
   <string name="login_credential">შესვლა ვიკისაწყობის ბეტა ანგარიშზე</string>
@@ -50,10 +64,15 @@
   <string name="signup">რეგისტრაცია</string>
   <string name="logging_in_title">სისტემაში შესვლა</string>
   <string name="logging_in_message">გთხოვთ მოიცადოთ…</string>
-  <string name="login_success" fuzzy="true">სისტემაში შესვლა წარმატებით განხორციელდა!</string>
-  <string name="login_failed" fuzzy="true">სისტემაში შესვლა ვერ განხორციელდა!</string>
+  <string name="updating_caption_title">წარწერებისა და აღწერების განახლება</string>
+  <string name="updating_caption_message">გთხოვთ, მოიცადოთ…</string>
+  <string name="login_success">სისტემაში შესვლა წარმატებით განხორციელდა!</string>
+  <string name="login_failed">სისტემაში შესვლა ვერ მოხერხდა!</string>
   <string name="upload_failed">ფაილი არ მოიძებნა. გთხოვთ, სცადოთ სხვა ფაილი.</string>
-  <string name="authentication_failed" fuzzy="true">ავთენტიფიკაცია ვერ მოხერხდა, გთხოვთ შედით ხელახლა</string>
+  <string name="retry_limit_reached">ხელახლა ცდის მაქსიმალური ლიმიტი მიღწეულია! გთხოვთ, შეწყვიტოთ ატვირთვა და ცადოთ ხელახლა</string>
+  <string name="unrestricted_battery_mode">გავთიშოთ ენერგიის დამზოგველი?</string>
+  <string name="suggest_unrestricted_mode">3 სურათზე მეტის ატვირთვის პროცესი უკეთ მუშაობს, როდესაც ბატარეის დამზოგველი გამორთულია. თანადროული ატვირთვის გაუმჯობესებისთვის, გამორთეთ ბატარეის დამზოგველი ვიკისაწყობის პროგრამისთვის პარამეტრებიდან.\n\nბატარეის ოპტიმიზაციის გამორთვის შესაძლო ნაბიჯები:\n\nნაბიჯი 1 : ქვემოთ დააჭირეთ „პარამეტრების“ ღილაკს.\n\nნაბიჯი 2: გადაერთეთ „არაოპტიმიზებული“ ვარიანტიდან „ყველა პროგრამაზე“.\n\nნაბიჯი 3: მოძებნეთ „Commons“ ან „fr.free.nrw.commons“.\n    \nნაბიჯი 3: დააჭირეთ მას და გათიშეთ დაზოგვის რეჟიმი.\n\nნაბიჯი 3: დააჭირეთ „დასრულებას“.</string>
+  <string name="authentication_failed">ავთენტიფიკაცია ვერ მოხერხდა, გთხოვთ შედით ხელახლა.</string>
   <string name="uploading_started">ატვირთვა დაიწყო!</string>
   <string name="uploading_queued">ატვირთვა რიგშია (შეზღუდული კავშირის რეჟიმი ჩართულია)</string>
   <string name="upload_completed_notification_title">%1$ ატვირთულია!</string>
@@ -80,27 +99,31 @@
   <string name="add_caption_toast">გთხოვთ, მიუთითოთ ამ ფაილის წარწერა</string>
   <string name="share_description_hint">აღწერა</string>
   <string name="share_caption_hint">წარწერა</string>
-  <string name="login_failed_network" fuzzy="true">შესვლა ვერ ხერხდება - ქსელის შეცდომა</string>
+  <string name="login_failed_network">შესვლა ვერ ხერხდება - ქსელის შეცდომა</string>
   <string name="login_failed_throttled">ძალიან ბევრი წარუმატებელი მცდელობა. გთხოვთ, რამდენიმე წუთში სცადეთ კვლავ.</string>
   <string name="login_failed_blocked">უკაცრავად, ეს მომხმარებელი დაბლოკილია ვიკისაწყობში</string>
   <string name="login_failed_2fa_needed">თქვენ უნდა შეიყვანოთ ორფაქტორიანი ავტორიზაციის კოდი.</string>
-  <string name="login_failed_generic" fuzzy="true">შესვლა ვერ მოხერხდა</string>
+  <string name="login_failed_generic">შესვლა ვერ მოხერხდა</string>
   <string name="share_upload_button">ატვირთვა</string>
   <string name="multiple_share_base_title">სერიის სახელი</string>
   <string name="provider_modifications">მოდიფიკაციები</string>
   <string name="menu_upload_single">ატვირთვა</string>
   <string name="categories_search_text_hint">კატეგორიის არჩევა</string>
+  <string name="depicts_search_text_hint">მოძებნეთ რაიმე, რაც თქვენს ფაილზეა ასახული (მთა, ტაჯ მაჰალი და ა.შ.)</string>
   <string name="menu_save_categories">შენახვა</string>
   <string name="refresh_button">განახლება</string>
   <string name="display_list_button">სია</string>
   <string name="contributions_subtitle_zero">(ატვირთვები არ არის)</string>
   <string name="categories_not_found">შესატყვისი კატეგორიები „%1$s“ ვერ მოიძებნა</string>
+  <string name="depictions_not_found">არანაირი Wikidata- ს ობიექტი არ აღმოაჩნდა, რომელიც შეესაბამებოდა %1$s- ს</string>
   <string name="categories_skip_explanation">დაამატეთ კატეგორიები, რომ თქვენი სურათები უფრო აღმოსაჩენი იყოს ვიკისაწყობში.\nდაიწყეთ წერა კატეგორიების დასამატებლად.</string>
   <string name="categories_activity_title">კატეგორია</string>
   <string name="title_activity_settings">კონფიგურაცია</string>
   <string name="title_activity_signup">რეგისტრაცია</string>
   <string name="title_activity_featured_images">რჩეული სურათები</string>
+  <string name="title_activity_custom_selector">მორგებული ამრჩევი</string>
   <string name="title_activity_category_details">კატეგორია</string>
+  <string name="title_activity_review">პარტნიორული გადახედვა</string>
   <string name="menu_about">პროგრამის შესახებ</string>
   <string name="about_license">ღია კოდის მქონე აპლიკაცია, ვრცელდება ლიცენზიით &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;. ვიკისაწყობი და მისი ლოგო ფონდი ვიკიმედიის სავაჭრო ნიშნებია და ფონდი ვიკიმედიის ნებართვით გამოიყენება. ჩვენ არ ვართ დაკავშირებული ფონდ ვიკიმედიასთან.</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;წყარო&lt;/a&gt; და &lt;a href=\"https://commons-app.github.io/\"&gt;საიტი&lt;/a&gt; GitHub-ზე. შეცდომის შესატყობინებლად ან წინადადებისათვის შექმენით ახალი &lt;a href=\"%1$s\"&gt;მოთხოვნა GitHub-ზე&lt;/a&gt;.</string>
@@ -152,6 +175,7 @@
   <string name="detail_panel_cats_label">კატეგორიები</string>
   <string name="detail_panel_cats_loading">იტვირთება…</string>
   <string name="detail_panel_cats_none">არჩეული არაფერია</string>
+  <string name="detail_caption_empty">წარწერის გარეშე</string>
   <string name="detail_description_empty">არ არის აღწერა</string>
   <string name="detail_discussion_empty">განხილვა არ არის</string>
   <string name="detail_license_empty">უცნობი ლიცენზია</string>
@@ -160,12 +184,17 @@
   <string name="read_storage_permission_rationale">ნებართვა: გარე მეხსიერების წაკითხვა. აპლიკაცია ვერ მიწვდება თქვენს გალერეას ამის გარეშე.</string>
   <string name="write_storage_permission_rationale">საჭირო ნებართვა: გარე მეხსიერების გამოყენება. ამის გარეშე აპლიკაცია ვერ მიიღებს წვდომას თქვენს კამერაზე/გალერეაზე.</string>
   <string name="location_permission_title">მდებარეობის გამოყენების მოთხოვნა</string>
+  <string name="in_app_camera_location_permission_title">აპლიკაციაში გადაღებული მასალისთვის ადგილმდებარეობის ჩართვა</string>
+  <string name="in_app_camera_location_switch_pref_summary">ჩართეთ ეს მდებარეობის ჩასაწერად აპში გადაღებული კადრებისთვის, თუ მოწყობილობის კამერა არ ჩაიწერს მას</string>
   <string name="ok">კარგი</string>
   <string name="warning">გაფრთხილება</string>
+  <string name="duplicate_file_name">აღმოჩენილია განმეორებული ფაილის სახელი</string>
   <string name="upload">ატვირთვა</string>
   <string name="yes">დიახ</string>
   <string name="no">არა</string>
+  <string name="media_detail_caption">წარწერა</string>
   <string name="media_detail_title">სათაური</string>
+  <string name="media_detail_depiction">გამოსახულებები</string>
   <string name="media_detail_description">აღწერა</string>
   <string name="media_detail_discussion">განხილვა</string>
   <string name="media_detail_author">ავტორი</string>
@@ -174,6 +203,7 @@
   <string name="media_detail_coordinates">კოორდინატები</string>
   <string name="media_detail_coordinates_empty">არ არის გათვალისწინებული</string>
   <string name="become_a_tester_title">ბეტა ტესტირებაში მონაწილეობა</string>
+  <string name="become_a_tester_description">ჩაერთეთ Beta-ზე წვდომა Google Play-ზე და მიიღეთ ადრეული წვდომა ახალ ფუნქციებზე და შეცდომების აღმოფხვრაზე</string>
   <string name="_2fa_code">2ფა კოდი</string>
   <string name="logout_verification">ნამდვილად გსურთ გასვლა?</string>
   <string name="mediaimage_failed">მედიაგამოსახულების შეცდომა</string>
@@ -195,6 +225,7 @@
   <string name="navigation_item_about">პროგრამის შესახებ</string>
   <string name="navigation_item_settings">კონფიგურაცია</string>
   <string name="navigation_item_feedback">გამოხმაურება</string>
+  <string name="navigation_item_feedback_github">უკუკავშირი GitHub-ით</string>
   <string name="navigation_item_logout">გასვლა</string>
   <string name="navigation_item_info">სახელმძღვანელო</string>
   <string name="navigation_item_notification">შეტყობინებები</string>
@@ -203,48 +234,97 @@
   <string name="nearby_info_menu_commons_article">ვიკისაწყობის ფაილის გვერდი</string>
   <string name="nearby_info_menu_wikidata_article">ვიკიმონაცემების ელემენტი</string>
   <string name="nearby_info_menu_wikipedia_article">ვიკიპედიის სტატია</string>
+  <string name="description_info">გთხოვთ, შეძლებისდაგვარად აღწეროთ ფაილი: სად არის გადაღებული? რას აჩვენებს? რა არის კონტექსტი? გთხოვთ აღწეროთ ობიექტები ან პირები. აჩვენეთ ინფორმაცია, რომლის გამოცნობაც შეუძლებელია, მაგალითად, დღის დრო, თუ ეს პეიზაჟია. თუ მედია აჩვენებს რაიმე უჩვეულოს, გთხოვთ, განმარტოთ, რა ხდის მას ასეთად.</string>
+  <string name="caption_info">გთხოვთ, დაწეროთ სურათის მოკლე აღწერა. პირველი წარწერა გამოიყენება როგორც სურათის სათაური. შეზღუდვა 255 სიმბოლოა.</string>
   <string name="upload_problem_exist">ამ სურათთან დაკავშირებული სავარაუდო პრობლემები:</string>
   <string name="upload_problem_image_dark">სურათი ძალიან ბნელია.</string>
   <string name="upload_problem_image_blurry">სურათი გაბუნტებულია.</string>
   <string name="upload_problem_image_duplicate">სურათი უკვე არის ვიკისაწყობში.</string>
   <string name="upload_problem_different_geolocation">ეს სურათი სხვა ადგილას არის გადაღებული.</string>
+  <string name="upload_problem_fbmd">გთხოვთ, ატვირთოთ მხოლოდ თქვენი გადაღებული სურათები. არ ატვირთოთ სურათები, რომლებიც იპოვეთ სხვა ადამიანების Facebook ანგარიშებზე.</string>
   <string name="upload_problem_do_you_continue">მაინც გსურთ ამ სურათის ატვირთვა?</string>
+  <string name="upload_connection_error_alert_title">კავშირის შეცდომა</string>
+  <string name="upload_connection_error_alert_detail">ატვირთვის პროცესი მოითხოვს ინტერნეტს. გთხოვთ, შეამოწმოთ თქვენი ინტერნეტ კავშირი.</string>
+  <string name="upload_problem_image">სურათზე ნაპოვნი პრობლემები</string>
+  <string name="internet_downloaded">გთხოვთ, ატვირთოთ მხოლოდ თქვენი გადაღებული სურათები. არ ატვირთოთ სურათები, რომლებიც ჩამოტვირთეთ ინტერნეტიდან.</string>
   <string name="use_external_storage">აპლიკაციით გადაღებულის შენახვა</string>
+  <string name="use_external_storage_summary">შეინახეთ აპს-შიდა კამერით გადაღებული სურათები თქვენი მოწყობილობის მეხსიერებაში</string>
+  <string name="login_to_your_account">ანგარიშში შესვლა</string>
+  <string name="send_log_file">ლოგ ფაილის გაგზავნა</string>
+  <string name="send_log_file_description">გაუგზავნეთ ლოგ ფაილი დეველოპერებს ელფოსტით, რათა დაგეხმაროთ აპის პრობლემების გამართვაში. შენიშვნა: ლოგ ფაილები შესაძლოა შეიცავდეს საიდენტიფიკაციო ინფორმაციას</string>
+  <string name="no_web_browser">URL-ის გასახსნელად ვებ ბრაუზერი ვერ მოიძებნა</string>
   <string name="null_url">შეცდომა! URL ვერ მოიძებნა</string>
   <string name="nominate_deletion">წაშლაზე ნომინირება</string>
   <string name="nominated_for_deletion">ეს სურათი წარდგენილია წაშლაზე</string>
   <string name="nominated_see_more">დეტალებისთვის ვებგვერდის ნახვა</string>
   <string name="skip_login">გამოტოვება</string>
   <string name="navigation_item_login">შესვლა</string>
-  <string name="skip_login_title" fuzzy="true">ნამდვილად გსურთ შესვლის გამოტოვება?</string>
+  <string name="skip_login_title">ნამდვილად გსურთ შესვლის გამოტოვება?</string>
+  <string name="skip_login_message">მომავალში სურათების ასატვირთად უნდა შეხვიდეთ სისტემაში.</string>
+  <string name="login_alert_message">გთხოვთ შეხვიდეთ ამ ფუნქციის გამოსაყენებლად</string>
+  <string name="copy_wikicode">დააკოპირეთ ვიკიტექსტი</string>
+  <string name="wikicode_copied">ვიკიტექსტი დაკოპირდა</string>
+  <string name="nearby_location_not_available">Nearby ფუნქცია შეიძლება არ მუშაობდეს სწორად, მდებარეობა მიუწვდომელია.</string>
+  <string name="upload_location_access_denied">მდებარეობაზე წვდომა უარყოფილია. გთხოვთ, დააყენოთ თქვენი მდებარეობა ხელით ამ ფუნქციის გამოსაყენებლად.</string>
+  <string name="location_permission_rationale_nearby">საჭიროა ნებართვა ახლომდებარე ადგილების სიის საჩვენებლად</string>
+  <string name="location_permission_rationale_explore">ახლომდებარე სურათების სიის საჩვენებლად საჭიროა ნებართვა</string>
+  <string name="nearby_directions">მიმართულება</string>
   <string name="nearby_wikidata">ვიკიმონაცემები</string>
   <string name="nearby_wikipedia">ვიკიპედია</string>
   <string name="nearby_commons">ვიკისაწყობი</string>
   <string name="about_rate_us">შეგვაფასეთ</string>
   <string name="about_faq">ხდშ</string>
+  <string name="user_guide">მომხმარებლის სახელმძღვანელო</string>
   <string name="welcome_skip_button">სახელმძღვანელოს გამოტოვება</string>
   <string name="no_internet">ინტერნეტი არ არის</string>
+  <string name="error_notifications">შეცდომა შეტყობინებების მიღებისას</string>
+  <string name="error_review">შეცდომა სურათის განსახილველად მიღებისას. დააჭირეთ განახლებას ხელახლა საცდელად.</string>
+  <string name="no_notifications">შეტყობინებები ვერ მოიძებნა</string>
   <string name="about_translate">თარგმნა</string>
   <string name="about_translate_title">ენები</string>
+  <string name="about_translate_message">აირჩიეთ ენა, რომელზეც გსურთ თარგმანების გაგზავნა</string>
   <string name="about_translate_proceed">გაგრძელება</string>
   <string name="about_translate_cancel">გაუქმება</string>
   <string name="retry">გამეორება</string>
+  <string name="showcase_view_whole_nearby_activity">ეს ის ადგილებია თქვენს მახლობლად, რომლებსაც სჭირდებათ სურათები ვიკიპედიის სტატიების საილუსტრაციოდ.\n\n„ამ ტერიტორიის ძიებაზე“ დაწკაპუნებით ფოკუსირდება რუკა და იწყებს ძებნას ამ მდებარეობის გარშემო.</string>
+  <string name="showcase_view_needs_photo">ამ ადგილს ფოტო სჭირდება.</string>
+  <string name="showcase_view_has_photo">ამ ადგილს უკვე აქვს ფოტო.</string>
+  <string name="showcase_view_no_longer_exists">ეს ადგილი აღარ არსებობს.</string>
   <string name="no_images_found">სურათები ვერ მოიძებნა!</string>
+  <string name="error_loading_images">სურათის ჩატვირთვისას მოხდა შეცდომა.</string>
+  <string name="block_notification_title">დაბლოკილია</string>
+  <string name="block_notification">თქვენ დაბლოკილი გაქვთ Commons-ის რედაქტირების ფუნქცია</string>
   <string name="app_widget_heading">დღის სურათი</string>
   <string name="menu_search_button">ძიება</string>
   <string name="search_commons">ვიკისაწყობში ძებნა</string>
   <string name="title_activity_search">ძებნა</string>
   <string name="search_recent_header">ბოლოს მოძიებულები:</string>
   <string name="provider_searches">ცოტა ხნის წინ მოძიებული მოთხოვნები</string>
+  <string name="provider_recent_languages">უახლესი ენობრივი მოთხოვნები</string>
+  <string name="error_loading_categories">სურათის ჩატვირთვისას მოხდა შეცდომა.</string>
+  <string name="error_loading_depictions">გამოსახულებების ჩატვირთვისას მოხდა შეცდომა.</string>
   <string name="search_tab_title_media">მულტიმედია</string>
   <string name="search_tab_title_categories">კატეგორიები</string>
+  <string name="search_tab_title_depictions">ელემენტი</string>
   <string name="explore_tab_title_featured">რჩეული</string>
   <string name="explore_tab_title_mobile">მობილურით ატვირთული</string>
+  <string name="explore_tab_title_map">რუკა</string>
+  <string name="successful_wikidata_edit">სურათი დაემატა %1$s-ის Wikidata-ზე!</string>
+  <string name="wikidata_edit_failure">ვერ მოხერხდა შესაბამისი ვიკიმონაცემების ერთეულის განახლება!</string>
   <string name="menu_set_wallpaper">ფონად დაყენება</string>
   <string name="wallpaper_set_successfully">ფონი წარმატებით დაყენდა!</string>
   <string name="quiz">გამოკითხვა</string>
+  <string name="quiz_question_string">კარგია ეს სურათი ასატვირთად?</string>
   <string name="question">შეკითხვა</string>
   <string name="result">შედეგი</string>
+  <string name="quiz_back_button">თუ გააგრძელებთ სურათების ატვირთვას, რომლებიც წასაშლელია, თქვენი ანგარიში სავარაუდოდ დაიბლოკება. დარწმუნებული ხართ, რომ გსურთ დაასრულოთ ქვიზი?</string>
+  <string name="quiz_alert_message">თქვენ მიერ ატვირთული სურათებიდან %1$s-ზე მეტი წაიშალა. თუ განაგრძობთ სურათების ატვირთვას, რომლებიც იშლება, თქვენი ანგარიში სავარაუდოდ დაიბლოკება.\n\nგსურთ ხელახლა ნახოთ სახელმძღვანელო და შემდეგ გაიაროთ ქვიზი რომელიც დაგეხმარებათ გაიგოთ, რა ტიპის სურათების ატვირთვა შეიძლება და რა - არა?</string>
+  <string name="selfie_answer">სელფებს დიდი ენციკლოპედიური ღირებულება არ აქვს. გთხოვთ, არ ატვირთოთ თქვენი სურათი, თუ უკვე არ არსებობს ვიკიპედიის სტატია თქვენს შესახებ.</string>
+  <string name="taj_mahal_answer">ძეგლების სურათები და გარე პეიზაჟების ფოტოების გამოქვეყნება ნებადართულია უმეტეს ქვეყნებში. გთხოვთ, გაითვალისწინოთ, რომ დროებითი ხელოვნების ინსტალაციები გარეთ ხშირად დაცულია საავტორო უფლებებით და არ არის სწორი მათი ფოტოების ატვირთვა.</string>
+  <string name="screenshot_answer">ვებსაიტების სკრინშოტები ითვლება წარმოებულ ნამუშევრებად და ექვემდებარება ნებისმიერ საავტორო უფლებას თავად ვებსაიტზე. მათი გამოყენება შესაძლებელია ავტორის ნებართვის შემდეგ. ასეთი ნებართვის გარეშე, ნებისმიერი ხელოვნება, რომელსაც თქვენ ქმნით მათ ნამუშევრებზე დაყრდნობით, იურიდიულად განიხილება ორიგინალური ავტორის საკუთრებაში არსებულ არალიცენზირებულ ასლად.</string>
+  <string name="blurry_image_answer">Commons-ის ერთ-ერთი მიზანია ხარისხიანი სურათების შეგროვება. ამიტომ ბუნდოვანი სურათები არ უნდა აიტვირთოს. ყოველთვის ეცადეთ გადაიღოთ ლამაზი სურათები კარგი განათებით.</string>
+  <string name="construction_event_answer">სურათები, რომლებიც აჩვენებს ტექნოლოგიას ან კულტურას, ძალიან მისასალმებელია Commons-ზე.</string>
+  <string name="congratulatory_message_quiz">თქვენ მიიღეთ %1$s სწორი პასუხიდან. გილოცავ!</string>
   <string name="continue_message">გაგრძელება</string>
   <string name="correct">სწორი პასუხი</string>
   <string name="wrong">პასუხი არასწორია</string>
@@ -259,7 +339,7 @@
   <string name="statistics">სტატისტიკა</string>
   <string name="statistics_thanks">მადლობა მიღებულია</string>
   <string name="statistics_featured">რჩეული სურათები</string>
-  <string name="level">დონე</string>
+  <string name="level" fuzzy="true">დონე</string>
   <string name="images_uploaded">სურათები ატვირთულია</string>
   <string name="image_reverts">სურათები არ დაბრუნებულა</string>
   <string name="images_used_by_wiki">სურათები გამოიყენება</string>

@@ -16,6 +16,7 @@
 * DannyS712
 * Destinid10 2
 * DiegoAmbrocio
+* EmicraftNoob
 * Eulalio
 * Fewasser Traduce
 * Fitoschido
@@ -28,9 +29,11 @@
 * Jduranboger
 * Jelou
 * Johnny243
+* Josuert
 * Juanman
 * Keneth Urrutia
 * Ktranz
+* Laquin
 * Luisangelrg
 * Macofe
 * Madamebiblio
@@ -40,6 +43,7 @@
 * Miguel2706
 * Mirzali
 * No se
+* Osvaldorino
 * Pompilos
 * Raos10
 * Rodney Araujo
@@ -106,7 +110,6 @@
   <string name="preference_category_feedback">Sugerencias</string>
   <string name="preference_category_privacy">Privacidad</string>
   <string name="app_name">Commons</string>
-  <string name="bullet">•</string>
   <string name="menu_settings">Configuración</string>
   <string name="intent_share_upload_label">Subir a Commons</string>
   <string name="upload_in_progress">Carga en curso</string>
@@ -165,6 +168,7 @@
   <string name="categories_search_text_hint">Buscar categorías</string>
   <string name="depicts_search_text_hint">Buscar elementos que tu archivo multimedia representa (montaña, Taj Mahal, etc.)</string>
   <string name="menu_save_categories">Guardar</string>
+  <string name="menu_overflow_desc">Menú de desbordamiento</string>
   <string name="refresh_button">Actualizar</string>
   <string name="display_list_button">Lista</string>
   <string name="contributions_subtitle_zero">(No hay subidas aún)</string>
@@ -316,7 +320,7 @@
   <string name="skip_login">Omitir</string>
   <string name="navigation_item_login">Acceder</string>
   <string name="skip_login_title">¿Quieres realmente omitir el inicio de sesión?</string>
-  <string name="skip_login_message">Deberías iniciar sesión para subir imágenes en el futuro.</string>
+  <string name="skip_login_message">Debes iniciar sesión para subir imágenes en el futuro.</string>
   <string name="login_alert_message">Por favor inicia sesion para usar esta característica</string>
   <string name="copy_wikicode">Copia el wikitexto al portapapeles</string>
   <string name="wikicode_copied">El wikitexto fue copiado al portapapeles</string>
@@ -404,11 +408,12 @@
   <string name="delete">Borrar</string>
   <string name="Achievements">Logros</string>
   <string name="Profile">Perfil</string>
+  <string name="badges">Las insignias</string>
   <string name="statistics">Estadísticas</string>
   <string name="statistics_thanks">Agradecimientos recibidos</string>
   <string name="statistics_featured">Imágenes destacadas</string>
   <string name="statistics_wikidata_edits">Imágenes vía \"Sitios Cercanos\"</string>
-  <string name="level">Nivel</string>
+  <string name="level" fuzzy="true">Nivel</string>
   <string name="images_uploaded">Imágenes subidas</string>
   <string name="image_reverts">Imágenes no revertidas</string>
   <string name="images_used_by_wiki">Imágenes utilizadas</string>
@@ -521,6 +526,7 @@
   <string name="no_notification">No tienes notificaciones sin leer</string>
   <string name="no_read_notification">No tienes ninguna notificación leída</string>
   <string name="share_logs_using">Compartir registros usando</string>
+  <string name="check_your_email_inbox">Revisa tu bandeja de entrada</string>
   <string name="menu_option_read">Ver leídas</string>
   <string name="menu_option_unread">Ver no leidas</string>
   <string name="error_occurred_in_picking_images">Ocurrió un error mientras se elegían imagenes</string>
@@ -615,7 +621,8 @@
   <string name="title_for_child_classes">CLASES HIJAS</string>
   <string name="title_for_parent_classes">CLASES PADRES</string>
   <string name="upload_nearby_place_found_title">Lugar cercano encontrado</string>
-  <string name="upload_nearby_place_found_description">¿Esta foto es de %1$s?</string>
+  <string name="upload_nearby_place_found_description_plural">¿Son estas imágenes de %1$s?</string>
+  <string name="upload_nearby_place_found_description_singular">¿Es esta una imagen de %1$s?</string>
   <string name="title_app_shortcut_bookmark">Marcadores</string>
   <string name="title_app_shortcut_setting">Configuración</string>
   <string name="remove_bookmark">removido de marcadores</string>
@@ -733,7 +740,7 @@
   <string name="read_phone_state_permission_message">Los mapas cercanos necesitan leer ESTADO DEL TELÉFONO para funcionar correctamente</string>
   <string name="contributions_of_user">Contribuciones del usuario: %s</string>
   <string name="achievements_of_user">Logros del usuario: %s</string>
-  <string name="menu_view_user_page">Ver página de usuario</string>
+  <string name="menu_view_user_page">Ver perfil de usuario</string>
   <string name="edit_depictions">Editar las descripciones</string>
   <string name="edit_categories">Editar categorías</string>
   <string name="advanced_options">Opciones avanzadas</string>
@@ -786,11 +793,18 @@
   <string name="storage_permissions_denied">Se denegaron los permisos de almacenamiento</string>
   <string name="unable_to_share_upload_item">No se puede compartir este elemento</string>
   <string name="permissions_are_required_for_functionality">Se requieren permisos para la funcionalidad</string>
+  <string name="learn_how_to_write_a_useful_description">Aprenda a escribir una descripción útil</string>
+  <string name="learn_how_to_write_a_useful_caption">Aprenda a escribir una leyenda útil</string>
+  <string name="see_your_achievements">Ver sus logros</string>
+  <string name="edit_image">Editar Imagen</string>
+  <string name="edit_location">Editar Ubicación</string>
   <string name="location_updated">¡Ubicación actualizada!</string>
   <string name="remove_location">Quitar ubicación</string>
   <string name="remove_location_warning_title">Eliminar el aviso de ubicación</string>
   <string name="remove_location_warning_desc">La ubicación hace que las imágenes sean más útiles y accesibles. ¿De verdad quieres eliminar la ubicación de esta foto?</string>
   <string name="location_removed">¡Ubicación eliminada!</string>
+  <string name="send_thanks_to_author">Agradecer al autor</string>
+  <string name="error_sending_thanks">Error al enviar gracias al autor.</string>
   <string name="invalid_login_message">Su sesión ha caducado. Inicie sesión de nuevo.</string>
   <string name="no_application_available_to_open_gpx_files">No hay ninguna aplicación disponible para abrir archivos GPX</string>
   <string name="file_saved_successfully">Guardado correctamente</string>
@@ -804,4 +818,32 @@
     <item quantity="one">%d imagen seleccionada</item>
     <item quantity="other">%d imagenes seleccionadas</item>
   </plurals>
+  <string name="multiple_files_depiction">Recuerde que todas las imágenes en una carga múltiple tienen la misma categoría y representación. Si las imágenes no comparten representación y categoría, haga varias cargas por separado.</string>
+  <string name="multiple_files_depiction_header">Nota sobre cargas múltiples</string>
+  <string name="nearby_wikitalk">Informar a Wikidata sobre un problema relacionado con este elemento</string>
+  <string name="please_enter_some_comments">Por favor, escriba algunos comentarios.</string>
+  <string name="talk">Discusión</string>
+  <string name="write_something_about_the_item">Escriba algo sobre el elemento \'%1$s\'. Será visible públicamente.</string>
+  <string name="does_not_exist_anymore_no_picture_can_ever_be_taken_of_it">\' %1$s \' ya no existe, nunca se podrá tomar ninguna fotografía de él.</string>
+  <string name="is_at_a_different_place_please_specify_the_correct_place_below_if_possible_tell_us_the_correct_latitude_longitude">\' %1$s \' está en un lugar diferente. Especifique el lugar correcto a continuación y, si es posible, escriba la latitud y longitud correctas.</string>
+  <string name="other_problem_or_information_please_explain_below">Otro problema o información (por favor explique a continuación).</string>
+  <string name="feedback_destination_note">Sus comentarios se publicarán en la siguiente página wiki: &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Mobile_app/Feedback\"&gt;Commons:Mobile_app/Feedback&lt;/a&gt;</string>
+  <string name="are_you_sure_that_you_want_cancel_all_the_uploads">¿Estás seguro de que deseas cancelar todas las subidas?</string>
+  <string name="cancelling_all_the_uploads">Cancelando todas las subidas...</string>
+  <string name="uploads">Subidas</string>
+  <string name="pending">Pendiente</string>
+  <string name="failed">Falló</string>
+  <string name="could_not_load_place_data">No se pudieron cargar los datos del lugar</string>
+  <string name="custom_selector_delete_folder">Eliminar carpeta</string>
+  <string name="custom_selector_confirm_deletion_title">Confirmar eliminación</string>
+  <string name="custom_selector_confirm_deletion_message">¿Está seguro de que deseas eliminar la carpeta %1$s que contiene %2$d elementos?</string>
+  <string name="custom_selector_delete">Eliminar</string>
+  <string name="custom_selector_cancel">Cancelar</string>
+  <string name="custom_selector_folder_deleted_success">La carpeta %1$s se eliminó correctamente</string>
+  <string name="custom_selector_folder_deleted_failure">No se pudo eliminar la carpeta %1$s</string>
+  <string name="custom_selector_error_trashing_folder_contents">Error al eliminar el contenido de la carpeta: %1$s</string>
+  <string name="custom_selector_folder_not_found_error">No se pudo recuperar la ruta de la carpeta para el ID del bucket: %1$d</string>
+  <string name="red_pin">Este lugar aún no tiene foto, ¡ve y toma una!</string>
+  <string name="green_pin">Este lugar ya tiene una foto.</string>
+  <string name="grey_pin">Ahora comprobando si este lugar tiene una foto.</string>
 </resources>

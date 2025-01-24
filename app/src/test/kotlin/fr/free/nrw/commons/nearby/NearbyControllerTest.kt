@@ -22,13 +22,13 @@ import org.powermock.reflect.Whitebox
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
-import java.util.*
+import java.util.Collections
+import java.util.Locale
 
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
 @LooperMode(LooperMode.Mode.PAUSED)
 class NearbyControllerTest {
-
     @Mock
     private lateinit var place: Place
 
@@ -46,7 +46,6 @@ class NearbyControllerTest {
 
     @Mock
     private lateinit var currentLatLng: LatLng
-
 
     private lateinit var context: Context
     private var customQuery: String = "test"
@@ -69,7 +68,7 @@ class NearbyControllerTest {
             searchLatLong,
             false,
             true,
-            customQuery
+            customQuery,
         )
         nearbyController.loadAttractionsFromLocation(
             currentLatLng,
@@ -79,13 +78,13 @@ class NearbyControllerTest {
             false,
             true,
             false,
-            customQuery
+            customQuery,
         )
         Mockito.verify(nearbyPlaces).radiusExpander(
             eq(searchLatLong),
             any(String::class.java),
             eq(false),
-            eq(customQuery)
+            eq(customQuery),
         )
     }
 
@@ -98,13 +97,13 @@ class NearbyControllerTest {
             searchLatLong,
             false,
             true,
-            null
+            null,
         )
         Mockito.verify(nearbyPlaces).radiusExpander(
             eq(searchLatLong),
             any(String::class.java),
             eq(false),
-            eq(null)
+            eq(null),
         )
     }
 
@@ -116,48 +115,56 @@ class NearbyControllerTest {
                 null,
                 false,
                 true,
-                customQuery
-            ), null
+                customQuery,
+            ),
+            null,
         )
     }
 
     @Test
     fun testLoadAttractionsFromLocationCase1() {
-        val place1 = Place(
-            "en",
-            "placeName",
-            Label.FOREST,
-            "placeDescription",
-            LatLng(0.0, 0.0, 1.0F),
-            "placeCategory",
-            Sitelinks.Builder().build(),
-            "picName",
-            false
-        )
-        val place2 = Place(
-            "en",
-            "placeName",
-            Label.FOREST,
-            "placeDescription",
-            LatLng(-40.69, -74.04, 1.0F),
-            "placeCategory",
-            Sitelinks.Builder().build(),
-            "picName",
-            false
-        )
+        val place1 =
+            Place(
+                "en",
+                "placeName",
+                Label.FOREST,
+                "placeDescription",
+                LatLng(0.0, 0.0, 1.0F),
+                "placeCategory",
+                Sitelinks.Builder().build(),
+                "picName",
+                false,
+                "entityID",
+            )
+        val place2 =
+            Place(
+                "en",
+                "placeName",
+                Label.FOREST,
+                "placeDescription",
+                LatLng(-40.69, -74.04, 1.0F),
+                "placeCategory",
+                Sitelinks.Builder().build(),
+                "picName",
+                false,
+                "entityID",
+            )
         `when`(
             nearbyPlaces.radiusExpander(
-                searchLatLong, Locale.getDefault().language, false,
-                customQuery
-            )
+                searchLatLong,
+                Locale.getDefault().language,
+                false,
+                customQuery,
+            ),
         ).thenReturn(mutableListOf(place1, place2))
-        val result = nearbyController.loadAttractionsFromLocation(
-            currentLatLng,
-            searchLatLong,
-            false,
-            true,
-            customQuery
-        )
+        val result =
+            nearbyController.loadAttractionsFromLocation(
+                currentLatLng,
+                searchLatLong,
+                false,
+                true,
+                customQuery,
+            )
         nearbyController.loadAttractionsFromLocation(
             currentLatLng,
             screenTopRight,
@@ -166,7 +173,7 @@ class NearbyControllerTest {
             false,
             true,
             false,
-            customQuery
+            customQuery,
         )
         assertEquals(result.currentLatLng, currentLatLng)
         assertEquals(result.searchLatLng, searchLatLong)
@@ -174,82 +181,96 @@ class NearbyControllerTest {
 
     @Test
     fun testLoadAttractionsFromLocationCase2() {
-        val place1 = Place(
-            "en",
-            "placeName",
-            Label.FOREST,
-            "placeDescription",
-            LatLng(0.0, 0.0, 1.0F),
-            "placeCategory",
-            Sitelinks.Builder().build(),
-            "picName",
-            false
-        )
-        val place2 = Place(
-            "en",
-            "placeName",
-            Label.FOREST,
-            "placeDescription",
-            LatLng(40.69, -74.04, 1.0F),
-            "placeCategory",
-            Sitelinks.Builder().build(),
-            "picName",
-            false
-        )
+        val place1 =
+            Place(
+                "en",
+                "placeName",
+                Label.FOREST,
+                "placeDescription",
+                LatLng(0.0, 0.0, 1.0F),
+                "placeCategory",
+                Sitelinks.Builder().build(),
+                "picName",
+                false,
+                "entityID",
+            )
+        val place2 =
+            Place(
+                "en",
+                "placeName",
+                Label.FOREST,
+                "placeDescription",
+                LatLng(40.69, -74.04, 1.0F),
+                "placeCategory",
+                Sitelinks.Builder().build(),
+                "picName",
+                false,
+                "entityID",
+            )
         `when`(
             nearbyPlaces.radiusExpander(
-                searchLatLong, Locale.getDefault().language, false,
-                customQuery
-            )
+                searchLatLong,
+                Locale.getDefault().language,
+                false,
+                customQuery,
+            ),
         ).thenReturn(mutableListOf(place1, place2))
-        val result = nearbyController.loadAttractionsFromLocation(
-            currentLatLng,
-            searchLatLong,
-            false,
-            true,
-            customQuery
-        )
+        val result =
+            nearbyController.loadAttractionsFromLocation(
+                currentLatLng,
+                searchLatLong,
+                false,
+                true,
+                customQuery,
+            )
         assertEquals(result.currentLatLng, currentLatLng)
         assertEquals(result.searchLatLng, searchLatLong)
     }
 
     @Test
     fun testLoadAttractionsFromLocationCase3() {
-        val place1 = Place(
-            "en",
-            "placeName",
-            Label.FOREST,
-            "placeDescription",
-            LatLng(0.0, 0.0, 1.0F),
-            "placeCategory",
-            Sitelinks.Builder().build(),
-            "picName",
-            false
-        )
-        val place2 = Place(
-            "en",
-            "placeName",
-            Label.FOREST,
-            "placeDescription",
-            LatLng(40.69, 74.04, 1.0F),
-            "placeCategory",
-            Sitelinks.Builder().build(),
-            "picName",
-            false
-        )
+        val place1 =
+            Place(
+                "en",
+                "placeName",
+                Label.FOREST,
+                "placeDescription",
+                LatLng(0.0, 0.0, 1.0F),
+                "placeCategory",
+                Sitelinks.Builder().build(),
+                "picName",
+                false,
+                "entityID",
+            )
+        val place2 =
+            Place(
+                "en",
+                "placeName",
+                Label.FOREST,
+                "placeDescription",
+                LatLng(40.69, 74.04, 1.0F),
+                "placeCategory",
+                Sitelinks.Builder().build(),
+                "picName",
+                false,
+                "entityID",
+            )
         `when`(
             nearbyPlaces.radiusExpander(
-                searchLatLong, Locale.getDefault().language, false,
-                customQuery
-            )
+                searchLatLong,
+                Locale.getDefault().language,
+                false,
+                customQuery,
+            ),
         ).thenReturn(mutableListOf(place1, place2))
-        val result = nearbyController.loadAttractionsFromLocation(
-            currentLatLng,
-            searchLatLong,
-            false,
-            true,
-            customQuery
-        )
+        val result =
+            nearbyController.loadAttractionsFromLocation(
+                currentLatLng,
+                searchLatLong,
+                false,
+                true,
+                customQuery,
+            )
         assertEquals(result.currentLatLng, currentLatLng)
         assertEquals(result.searchLatLng, searchLatLong)
     }
@@ -259,104 +280,117 @@ class NearbyControllerTest {
         assertEquals(
             loadAttractionsFromLocationToBaseMarkerOptions(
                 currentLatLng,
-                null
-            ), listOf<BaseMarker>()
+                null,
+            ),
+            listOf<BaseMarker>(),
         )
     }
 
     @Test
     fun testLoadAttractionsFromLocationToBaseMarkerOptionsCaseIsMonument() {
-        place = Place(
-            "en",
-            "placeName",
-            Label.FOREST,
-            "placeDescription",
-            currentLatLng,
-            "placeCategory",
-            Sitelinks.Builder().build(),
-            "picName",
-            false
-        )
+        place =
+            Place(
+                "en",
+                "placeName",
+                Label.FOREST,
+                "placeDescription",
+                currentLatLng,
+                "placeCategory",
+                Sitelinks.Builder().build(),
+                "picName",
+                false,
+                "entityID",
+            )
         place.isMonument = true
         `when`(currentLatLng.latitude).thenReturn(0.0)
         `when`(currentLatLng.longitude).thenReturn(0.0)
         assertEquals(
             loadAttractionsFromLocationToBaseMarkerOptions(
                 currentLatLng,
-                listOf(place)
-            )[0].place, place
+                listOf(place),
+            )[0].place,
+            place,
         )
     }
 
     @Test
     fun testLoadAttractionsFromLocationToBaseMarkerOptionsCaseIsNotMonumentPicNotEmpty() {
-        place = Place(
-            "en",
-            "placeName",
-            Label.FOREST,
-            "placeDescription",
-            currentLatLng,
-            "placeCategory",
-            Sitelinks.Builder().build(),
-            "picName",
-            false
-        )
+        place =
+            Place(
+                "en",
+                "placeName",
+                Label.FOREST,
+                "placeDescription",
+                currentLatLng,
+                "placeCategory",
+                Sitelinks.Builder().build(),
+                "picName",
+                false,
+                "entityID",
+            )
         place.isMonument = false
         `when`(currentLatLng.latitude).thenReturn(0.0)
         `when`(currentLatLng.longitude).thenReturn(0.0)
         assertEquals(
             loadAttractionsFromLocationToBaseMarkerOptions(
                 currentLatLng,
-                listOf(place)
-            )[0].place, place
+                listOf(place),
+            )[0].place,
+            place,
         )
     }
 
     @Test
     fun testLoadAttractionsFromLocationToBaseMarkerOptionsCaseIsNotMonumentPicEmptyPlaceDoesNotExists() {
-        place = Place(
-            "en",
-            "placeName",
-            Label.FOREST,
-            "placeDescription",
-            currentLatLng,
-            "placeCategory",
-            Sitelinks.Builder().build(),
-            "",
-            false
-        )
+        place =
+            Place(
+                "en",
+                "placeName",
+                Label.FOREST,
+                "placeDescription",
+                currentLatLng,
+                "placeCategory",
+                Sitelinks.Builder().build(),
+                "",
+                false,
+                "entityID",
+            )
         place.isMonument = false
         `when`(currentLatLng.latitude).thenReturn(0.0)
         `when`(currentLatLng.longitude).thenReturn(0.0)
         assertEquals(
             loadAttractionsFromLocationToBaseMarkerOptions(
                 currentLatLng,
-                listOf(place)
-            )[0].place, place
+                listOf(place),
+            )[0].place,
+            place,
         )
     }
 
     @Test
     fun testLoadAttractionsFromLocationToBaseMarkerOptionsCaseIsNotMonumentPicEmptyPlaceExists() {
-        place = Place(
-            "en",
-            "placeName",
-            Label.FOREST,
-            "placeDescription",
-            currentLatLng,
-            "placeCategory",
-            Sitelinks.Builder().build(),
-            "",
-            true
-        )
+        place =
+            Place(
+                "en",
+                "placeName",
+                Label.FOREST,
+                "placeDescription",
+                currentLatLng,
+                "placeCategory",
+                Sitelinks.Builder().build(),
+                "",
+                true,
+                "entityID",
+            )
         place.isMonument = false
         `when`(currentLatLng.latitude).thenReturn(0.0)
         `when`(currentLatLng.longitude).thenReturn(0.0)
         assertEquals(
             loadAttractionsFromLocationToBaseMarkerOptions(
                 currentLatLng,
-                listOf(place)
-            )[0].place, place
+                listOf(place),
+            )[0].place,
+            place,
         )
     }
 
@@ -368,7 +402,7 @@ class NearbyControllerTest {
         Whitebox.setInternalState(
             NearbyController::class.java,
             "markerLabelList",
-            list
+            list,
         )
         updateMarkerLabelListBookmark(place, false)
         assertEquals(list[0].isBookmarked, false)
@@ -383,7 +417,7 @@ class NearbyControllerTest {
         Whitebox.setInternalState(
             NearbyController::class.java,
             "markerLabelList",
-            list
+            list,
         )
         updateMarkerLabelListBookmark(place, true)
         assertEquals(list[0].isBookmarked, true)

@@ -1,5 +1,116 @@
 # Wikimedia Commons for Android
 
+## v5.1.2
+
+### What's changed
+
+* Fix the broken category search in the explore screen
+
+## v5.1.1
+
+### What's changed
+
+* Use Android's new EXIF interface to mitigate security issues in old
+  EXIF interface.
+* Make the icon that helps view the upload queue always visible as it ensures
+  that the queue accessible at all times.
+
+## v5.1.0
+
+### What's Changed
+
+* Enhanced **upload queue management** in the Commons app for smoother, sequential
+  processing, clearer progress tracking, prevention of stuck or duplicate
+  uploads. As part of this improvement, the "Limited Connection mode" has been
+  removed.
+* Added an option in "Nearby" feature enabling users to **provide feedback on
+  Wikidata items**. Users can report if an item doesn’t exist, is at a different
+  location, or has other issues, with submissions tagged for easy tracking and
+  updates.
+* Improved the "Nearby" feature by splitting the query into two parts for faster
+  loading and **better performance, especially in areas with dense amount of
+  places**. This update also resolves issues with pins overlapping place names.
+* Upgraded AGP and **target/compile SDK to 34** and make necessary adjustments to
+  the app such as adding **"Partial Access" support**. Also includes some minor
+  refactoring, and replacement of deprecated circular progress bars.
+* Fixed an **UI issue where the 'Subcategories' and 'Parent Categories' tabs
+  appeared blank** in the Category Details screen. Resolved by optimizing view
+  binding handling in the parent fragments.
+* Fixed an issue where editing depictions removed all other structured data from
+  images. Now, **only depictions are updated, preserving other associated data**.
+* Fixed **map centering** in the image upload flow to **use GPS EXIF tag location**
+  from pictures and ensured "Show in map app" accurately reflects this location.
+* Fixed navigation **after uploading via Nearby by directing users to the Uploads
+  activity** instead of returning to Nearby, preventing confusion about needing to
+  upload again.
+
+### Bug fixes and various changes
+
+* Improved the "Nearby" feature to fetch labels based on the user's preferred
+  language instead of defaulting to English.
+* Added a legend to the "Nearby" feature indicating pin statuses: red for items
+  without pictures, green for those with pictures, and grey for items being
+  checked. A floating action button now allows users to toggle the legend's
+  visibility.
+* Fixed an issue where the "Nominate for deletion" option is shown to logged out
+  users, preventing app errors and crashes.
+* Updated the regex pattern that filters categories with an year in it to also
+  filter the 2020s.
+* Fix an issue where past depictions were not shown as suggestions, despite
+  being saved correctly.
+* Fixed an issue in custom image picker where exiting the media preview showed
+  only the first image and cleared selections. Now, previously selected images
+  are restored correctly after exiting the preview. This was contributed.
+* Fixed an issue in custom image picker where scrolling behavior did not
+  maintain position after exiting fullscreen preview, ensuring users remain at
+  the same point in their image roll unless actioned images are filtered. This
+  was contributed.
+* Fixed Nearby map not showing new pins on map move by removing the 2000m scroll
+  threshold and adding an 800ms debounce for smoother pin updates when the map
+  is moved. Queued searches are now canceled on fragment destruction.
+* Revised author information retrieval to emphasize the custom author name from
+  the metadata instead of the default registered username.
+* Enhanced notification classification to properly identify "email" type
+  notifications and prompting users to check their e-mail inbox when such
+  notifications are clicked.
+* Resolved a bug in the language chooser that incorrectly greyed-out previously
+  selected languages, ensuring only the current language is non-selectable during
+  image upload.
+* Resolved pin color update issue in "Nearby" feature where the pin colour
+  failed to be updated after a successful image upload.
+
+What's listed here is only a subset of all the changes. Check the full-list of
+the changes in [this link](https://github.com/commons-app/apps-android-commons/compare/v5.0.2...v5.1.0).
+Alternatively, checkout [this release on GitHub releases page](https://github.com/commons-app/apps-android-commons/releases/tag/v5.1.0)
+for an exhaustive list of changes and the various contributors who contributed the same.
+
+## v5.0.2
+
+- Enhanced multi-upload functionality with user prompts to clarify that all images would share the
+  same category and depictions.
+- Show Wikidata description on currently active Nearby pin to provide more useful information.
+- Improve the visibility of map markers by dynamically adjusting their colors based on the app's
+  theme. The map markers will now appear lighter when the app is in dark mode and darker when the
+  app is in light mode. This change aims to enhance marker visibility and improve the overall user
+  experience.
+- Added information on where user feedback is posted, helping users track existing feedback and
+  monitor their own submissions.
+- Enhanced the edit location screen of the upload screen by centering the map on the picture's
+  location from metadata when editing, or on the device's GPS location if metadata is unavailable,
+  improving accuracy and user experience.
+- Ensured the 'Add Location' button is renamed to 'Edit Location' when copying the location of a
+  recently uploaded image, enhancing clarity and user experience.
+- Added a ProgressBar to the media detail screen to indicate image loading status, enhancing user
+  experience by showing loading progress until the image is fully loaded.
+- Fixed an issue where caption and description fields would intermittently disappear when using
+  voice input, ensuring text remains visible and stable across all entries.
+- Fixed a crash that occurred when attempting to remove multiple instances of caption/description
+  fields after initially adding them.
+- Improve the text in the prompt shown when skipping login to sound more natural.
+- Modified feedback addition logic to append new sections at the bottom of the page, ensuring
+  auto-archiving of sections functions correctly on the feedback page.
+- Resolved issue where the app failed to clear cookies upon logout.
+
 ## v5.0.1
 
 Same as v5.0.0 except this fixes some R8 rules to ensure that the release

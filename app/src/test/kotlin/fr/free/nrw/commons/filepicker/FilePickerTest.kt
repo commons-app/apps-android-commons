@@ -6,18 +6,23 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.net.Uri
+import android.provider.MediaStore
+import androidx.activity.result.ActivityResultLauncher
 import androidx.preference.PreferenceManager
 import androidx.test.core.app.ApplicationProvider
+import com.nhaarman.mockitokotlin2.KArgumentCaptor
+import com.nhaarman.mockitokotlin2.argumentCaptor
 import com.nhaarman.mockitokotlin2.verify
 import fr.free.nrw.commons.TestCommonsApplication
-import fr.free.nrw.commons.filepicker.Constants.RequestCodes
+import fr.free.nrw.commons.customselector.ui.selector.CustomSelectorActivity
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.*
-import org.mockito.Mockito.`when`
+import org.mockito.Mock
 import org.mockito.Mockito.mock
+import org.mockito.Mockito.`when`
+import org.mockito.MockitoAnnotations
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
@@ -28,11 +33,10 @@ import kotlin.random.Random.Default.nextBoolean
 @Config(
     sdk = [21],
     application = TestCommonsApplication::class,
-    shadows = [ShadowFileProvider::class]
+    shadows = [ShadowFileProvider::class],
 )
 @LooperMode(LooperMode.Mode.PAUSED)
 class FilePickerTest {
-
     @Mock
     internal lateinit var activity: Activity
 
@@ -45,8 +49,10 @@ class FilePickerTest {
     @Mock
     var unit: Unit? = null
 
-    @Captor
-    var requestCodeCaptor: ArgumentCaptor<Integer>? = null
+    @Mock
+    private lateinit var mockResultLauncher: ActivityResultLauncher<Intent>
+
+    private val intentCaptor: KArgumentCaptor<Intent> = argumentCaptor()
 
     private lateinit var context: Context
 
@@ -61,12 +67,19 @@ class FilePickerTest {
         `when`(PreferenceManager.getDefaultSharedPreferences(activity)).thenReturn(sharedPref)
         `when`(sharedPref.edit()).thenReturn(sharedPreferencesEditor)
         `when`(sharedPref.edit().putInt("type", 0)).thenReturn(sharedPreferencesEditor)
-        FilePicker.openGallery(activity, 0, nextBoolean())
-        verify(activity).startActivityForResult(
-            ArgumentMatchers.any(),
-            requestCodeCaptor?.capture()?.toInt()!!
-        )
-        assertEquals(requestCodeCaptor?.value, RequestCodes.PICK_PICTURE_FROM_GALLERY)
+        val openDocumentPreferred = nextBoolean()
+
+        FilePicker.openGallery(activity, mockResultLauncher, 0, openDocumentPreferred)
+
+        verify(mockResultLauncher).launch(intentCaptor.capture())
+
+        val capturedIntent = intentCaptor.firstValue
+
+        if (openDocumentPreferred) {
+            assertEquals(Intent.ACTION_OPEN_DOCUMENT, capturedIntent.action)
+        } else {
+            assertEquals(Intent.ACTION_GET_CONTENT, capturedIntent.action)
+        }
     }
 
     @Test
@@ -76,21 +89,23 @@ class FilePickerTest {
         `when`(sharedPref.edit().putInt("type", 0)).thenReturn(sharedPreferencesEditor)
         val mockApplication = mock(Application::class.java)
         `when`(activity.applicationContext).thenReturn(mockApplication)
-        FilePicker.openCameraForImage(activity, 0)
-        verify(activity).startActivityForResult(
-            ArgumentMatchers.any(),
-            requestCodeCaptor?.capture()?.toInt()!!
-        )
-        assertEquals(requestCodeCaptor?.value, RequestCodes.TAKE_PICTURE)
+        FilePicker.openCameraForImage(activity, mockResultLauncher, 0)
+
+        verify(mockResultLauncher).launch(intentCaptor.capture())
+
+        val capturedIntent = intentCaptor.firstValue
+        
+        assertEquals(MediaStore.ACTION_IMAGE_CAPTURE, capturedIntent.action)
     }
 
     @Test
     fun testCreateCameraPictureFile() {
         val mockFilePicker = mock(FilePicker::class.java)
-        val method: Method = FilePicker::class.java.getDeclaredMethod(
-            "createCameraPictureFile",
-            Context::class.java
-        )
+        val method: Method =
+            FilePicker::class.java.getDeclaredMethod(
+                "createCameraPictureFile",
+                Context::class.java,
+            )
         method.isAccessible = true
         method.invoke(mockFilePicker, context)
     }
@@ -98,11 +113,12 @@ class FilePickerTest {
     @Test
     fun testCreateCameraForImageIntent() {
         val mockFilePicker = mock(FilePicker::class.java)
-        val method: Method = FilePicker::class.java.getDeclaredMethod(
-            "createCameraForImageIntent",
-            Context::class.java,
-            Int::class.java
-        )
+        val method: Method =
+            FilePicker::class.java.getDeclaredMethod(
+                "createCameraForImageIntent",
+                Context::class.java,
+                Int::class.java,
+            )
         method.isAccessible = true
         method.invoke(mockFilePicker, context, 0)
     }
@@ -112,11 +128,12 @@ class FilePickerTest {
         val mockFilePicker = mock(FilePicker::class.java)
         val mockUri = mock(Uri::class.java)
         val mockContext = mock(Context::class.java)
-        val method: Method = FilePicker::class.java.getDeclaredMethod(
-            "revokeWritePermission",
-            Context::class.java,
-            Uri::class.java
-        )
+        val method: Method =
+            FilePicker::class.java.getDeclaredMethod(
+                "revokeWritePermission",
+                Context::class.java,
+                Uri::class.java,
+            )
         method.isAccessible = true
         method.invoke(mockFilePicker, mockContext, mockUri)
     }
@@ -124,10 +141,11 @@ class FilePickerTest {
     @Test
     fun testRestoreType() {
         val mockFilePicker = mock(FilePicker::class.java)
-        val method: Method = FilePicker::class.java.getDeclaredMethod(
-            "restoreType",
-            Context::class.java
-        )
+        val method: Method =
+            FilePicker::class.java.getDeclaredMethod(
+                "restoreType",
+                Context::class.java,
+            )
         method.isAccessible = true
         method.invoke(mockFilePicker, context)
     }
@@ -135,10 +153,11 @@ class FilePickerTest {
     @Test
     fun testTakenCameraPicture() {
         val mockFilePicker = mock(FilePicker::class.java)
-        val method: Method = FilePicker::class.java.getDeclaredMethod(
-            "takenCameraPicture",
-            Context::class.java
-        )
+        val method: Method =
+            FilePicker::class.java.getDeclaredMethod(
+                "takenCameraPicture",
+                Context::class.java,
+            )
         method.isAccessible = true
         method.invoke(mockFilePicker, context)
     }
@@ -148,34 +167,11 @@ class FilePickerTest {
         val mockFilePicker = mock(FilePicker::class.java)
         `when`(PreferenceManager.getDefaultSharedPreferences(activity)).thenReturn(sharedPref)
         `when`(sharedPref.getString("last_photo", null)).thenReturn("")
-        val method: Method = FilePicker::class.java.getDeclaredMethod(
-            "takenCameraPicture",
-            Context::class.java
-        )
-        method.isAccessible = true
-        method.invoke(mockFilePicker, activity)
-    }
-
-    @Test
-    fun testTakenCameraVideo() {
-        val mockFilePicker = mock(FilePicker::class.java)
-        val method: Method = FilePicker::class.java.getDeclaredMethod(
-            "takenCameraVideo",
-            Context::class.java
-        )
-        method.isAccessible = true
-        method.invoke(mockFilePicker, context)
-    }
-
-    @Test
-    fun testTakenCameraVideoCaseTrue() {
-        val mockFilePicker = mock(FilePicker::class.java)
-        `when`(PreferenceManager.getDefaultSharedPreferences(activity)).thenReturn(sharedPref)
-        `when`(sharedPref.getString("last_video", null)).thenReturn("")
-        val method: Method = FilePicker::class.java.getDeclaredMethod(
-            "takenCameraVideo",
-            Context::class.java
-        )
+        val method: Method =
+            FilePicker::class.java.getDeclaredMethod(
+                "takenCameraPicture",
+                Context::class.java,
+            )
         method.isAccessible = true
         method.invoke(mockFilePicker, activity)
     }
@@ -184,41 +180,13 @@ class FilePickerTest {
     fun testIsPhoto() {
         val mockFilePicker = mock(FilePicker::class.java)
         val mockIntent = mock(Intent::class.java)
-        val method: Method = FilePicker::class.java.getDeclaredMethod(
-            "isPhoto",
-            Intent::class.java
-        )
+        val method: Method =
+            FilePicker::class.java.getDeclaredMethod(
+                "isPhoto",
+                Intent::class.java,
+            )
         method.isAccessible = true
         method.invoke(mockFilePicker, mockIntent)
-    }
-
-    @Test
-    fun testHandleActivityResultCaseOne() {
-        val mockIntent = mock(Intent::class.java)
-        FilePicker.handleActivityResult(
-            RequestCodes.FILE_PICKER_IMAGE_IDENTIFICATOR,
-            Activity.RESULT_OK,
-            mockIntent,
-            activity,
-            object : DefaultCallback() {
-                override fun onCanceled(source: FilePicker.ImageSource, type: Int) {
-                    super.onCanceled(source, type)
-                }
-
-                override fun onImagePickerError(
-                    e: Exception,
-                    source: FilePicker.ImageSource,
-                    type: Int
-                ) {
-                }
-
-                override fun onImagesPicked(
-                    imagesFiles: List<UploadableFile>,
-                    source: FilePicker.ImageSource,
-                    type: Int
-                ) {
-                }
-            })
     }
 
     @Test
@@ -226,8 +194,15 @@ class FilePickerTest {
         `when`(PreferenceManager.getDefaultSharedPreferences(activity)).thenReturn(sharedPref)
         `when`(sharedPref.edit()).thenReturn(sharedPreferencesEditor)
         `when`(sharedPref.edit().putInt("type", 0)).thenReturn(sharedPreferencesEditor)
-        FilePicker.openCustomSelector(activity, 0)
-        verify(activity).startActivityForResult(ArgumentMatchers.any(), requestCodeCaptor?.capture()?.toInt()!!)
-        assertEquals(requestCodeCaptor?.value, RequestCodes.PICK_PICTURE_FROM_CUSTOM_SELECTOR)
+        FilePicker.openCustomSelector(activity, mockResultLauncher, 0)
+
+        verify(mockResultLauncher).launch(intentCaptor.capture())
+
+        val capturedIntent = intentCaptor.firstValue
+
+        assertEquals(
+            CustomSelectorActivity.Companion::class.java.declaringClass.name,
+            capturedIntent.component?.className
+        )
     }
 }

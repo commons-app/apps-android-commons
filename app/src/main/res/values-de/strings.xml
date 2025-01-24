@@ -11,21 +11,27 @@
 * FF11
 * Ferdinand0101
 * Icke
+* Ignatgg
 * Inkowik
 * Justman10000
 * Kghbln
 * Killarnee
 * ManuelFranz
+* Mcliquid
 * Metalhead64
+* Mukeber
 * Nekky-chan
 * Ngschaider
 * Pyscowicz
 * Reedy
+* RucolaSpacecat
 * Sebastian Wallroth
+* SergeCroise
 * SpaceEnergy
 * Sujan
 * Sushi
 * Tacsipacsi
+* TheRabbit22
 * ThisCarthing
 * Tobi 406
 * TomatoCake
@@ -89,12 +95,11 @@
     <item quantity="other">Der geteilte Inhalt wird abgerufen. Die Verarbeitung der Bilder kann einige Zeit in Anspruch nehmen, abhängig von der Größe der Bilder und deines Gerätes.</item>
   </plurals>
   <string name="navigation_item_explore">Entdecken</string>
-  <string name="preference_category_appearance">Erscheinung</string>
+  <string name="preference_category_appearance">Erscheinungsbild</string>
   <string name="preference_category_general">Allgemein</string>
   <string name="preference_category_feedback">Rückmeldung</string>
   <string name="preference_category_privacy">Datenschutz</string>
   <string name="app_name">Commons</string>
-  <string name="bullet">•</string>
   <string name="menu_settings">Einstellungen</string>
   <string name="intent_share_upload_label">Zu Commons hochladen</string>
   <string name="upload_in_progress">Hochladen läuft</string>
@@ -304,13 +309,15 @@
   <string name="skip_login">Überspringen</string>
   <string name="navigation_item_login">Anmelden</string>
   <string name="skip_login_title">Möchtest du wirklich die Anmeldung überspringen?</string>
-  <string name="skip_login_message">Du wirst dich anmelden müssen, um in Zukunft Bilder hochladen zu können.</string>
+  <string name="skip_login_message">In Zukunft musst du dich anmelden, um Bilder hochzuladen.</string>
   <string name="login_alert_message">Bitte melde dich an, um diese Funktion zu nutzen.</string>
   <string name="copy_wikicode">Den Wikitext in die Zwischenablage kopieren</string>
   <string name="wikicode_copied">Der Wikitext wurde in die Zwischenablage kopiert</string>
   <string name="nearby_location_not_available">„In der Nähe“ arbeiten möglicherwiese nicht richtig. Der Standort ist nicht verfügbar.</string>
+  <string name="nearby_showing_pins_offline">Internet ist nicht verfügbar. Es werden nur zwischengespeicherte Orte angezeigt.</string>
   <string name="upload_location_access_denied">Standortzugriff verweigert. Bitte lege deinen Standort manuell fest, um diese Funktion nutzen zu können.</string>
   <string name="location_permission_rationale_nearby">Berechtigung zur Anzeige einer Liste mit Orten in der Nähe erforderlich</string>
+  <string name="location_permission_rationale_explore">Berechtigung zur Anzeige einer Liste mit Orten in der Nähe erforderlich</string>
   <string name="nearby_directions">Richtungen</string>
   <string name="nearby_wikidata">Wikidata</string>
   <string name="nearby_wikipedia">Wikipedia</string>
@@ -395,7 +402,7 @@
   <string name="statistics_thanks">Erhaltene Dankeschöns</string>
   <string name="statistics_featured">Vorgestellte Bilder</string>
   <string name="statistics_wikidata_edits">Bilder über „Orte in der Nähe“</string>
-  <string name="level">Niveau</string>
+  <string name="level" fuzzy="true">Niveau</string>
   <string name="images_uploaded">Hochgeladene Bilder</string>
   <string name="image_reverts">Bilder nicht zurückgesetzt</string>
   <string name="images_used_by_wiki">Verwendete Bilder</string>
@@ -508,6 +515,7 @@
   <string name="no_notification">Du hast keine ungelesenen Benachrichtigungen</string>
   <string name="no_read_notification">Du hast keine gelesenen Benachrichtigungen</string>
   <string name="share_logs_using">Protokolle freigeben mit</string>
+  <string name="check_your_email_inbox">Überprüfe deinen E-Mail-Posteingang</string>
   <string name="menu_option_read">Gelesene ansehen</string>
   <string name="menu_option_unread">Ungelesene ansehen</string>
   <string name="error_occurred_in_picking_images">Beim Auswählen der Bilder ist ein Fehler aufgetreten</string>
@@ -599,7 +607,8 @@
   <string name="title_for_child_classes">CHILD CLASSES</string>
   <string name="title_for_parent_classes">PARENT CLASSES</string>
   <string name="upload_nearby_place_found_title">Ort in der Nähe gefunden</string>
-  <string name="upload_nearby_place_found_description">Ist das ein Foto von %1$s?</string>
+  <string name="upload_nearby_place_found_description_plural">Sind das Bilder von %1$s ?</string>
+  <string name="upload_nearby_place_found_description_singular">Ist das ein Foto von %1$s?</string>
   <string name="title_app_shortcut_bookmark">Lesezeichen</string>
   <string name="title_app_shortcut_setting">Einstellungen</string>
   <string name="remove_bookmark">aus den Lesezeichen entfernt</string>
@@ -613,7 +622,9 @@
   <string name="cannot_open_location_settings">Die Standorteinstellungen konnten nicht geöffnet werden. Bitte schalte den Standort manuell ein</string>
   <string name="recommend_high_accuracy_mode">Die besten Ergebnisse erzielst du, wenn du den Modus „Hohe Genauigkeit“ wählst.</string>
   <string name="ask_to_turn_location_on">Standort einschalten?</string>
+  <string name="ask_to_turn_location_on_text">Bitte aktiviere die Ortungsdienste für die App, damit Dein aktueller Standort angezeigt wird</string>
   <string name="nearby_needs_location">Für die Funktion „in der Nähe“ muss der Standort aktiviert sein, um richtig zu funktionieren</string>
+  <string name="explore_map_needs_location">Zur Anzeige von Bildern in der Nähe ist eine Standortberechtigung für die Karte „Erkunden“ erforderlich.</string>
   <string name="upload_map_location_access">Um den Standort automatisch festlegen zu können, musst du die Berechtigung dazu erteilen.</string>
   <string name="use_location_from_similar_image">Hast du diese beiden Bilder am selben Ort aufgenommen? Möchtest du den Breiten- und Längengrad des rechten Bildes verwenden?</string>
   <string name="load_more">Mehr laden</string>
@@ -793,4 +804,31 @@
     <item quantity="one">Ein Bild ausgewählt</item>
     <item quantity="other">%d Bilder ausgewählt</item>
   </plurals>
+  <string name="multiple_files_depiction">Bitte beachte, dass bei einem Multiupload alle Bilder die gleichen Kategorien und Bezeichnungen erhalten. Sollten die Bilder keine gemeinsamen Bezeichnungen und Kategorien haben, führe bitte mehrere separate Uploads durch.</string>
+  <string name="multiple_files_depiction_header">Hinweis zu Mehrfach-Uploads</string>
+  <string name="nearby_wikitalk">Melde ein Problem mit diesem Datenobjekt an Wikidata</string>
+  <string name="please_enter_some_comments">Bitte gib einige Kommentare ein</string>
+  <string name="talk">Diskussion</string>
+  <string name="write_something_about_the_item">Schreibe etwas über das Objekt ‚%1$s‘. Deine Beschreibung wird öffentlich sichtbar sein.</string>
+  <string name="does_not_exist_anymore_no_picture_can_ever_be_taken_of_it">‚%1$s‘ existiert nicht mehr, es kann kein Foto mehr davon gemacht werden.</string>
+  <string name="is_at_a_different_place_please_specify_the_correct_place_below_if_possible_tell_us_the_correct_latitude_longitude">‚%1$s‘ ist jetzt an einem anderen Ort. Bitte gib den richtigen Ort und, wenn möglich, den Breiten- und Längengrad an.</string>
+  <string name="other_problem_or_information_please_explain_below">Sonstiges Problem oder Information (bitte unten erläutern).</string>
+  <string name="feedback_destination_note">Dein Feedback wird auf der folgenden Wiki-Seite veröffentlicht werden: &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Mobile_app/Feedback\"&gt;Commons:Mobile app/Feedback&lt;/a&gt;</string>
+  <string name="are_you_sure_that_you_want_cancel_all_the_uploads">Möchtest du wirklich alle Uploads abbrechen?</string>
+  <string name="cancelling_all_the_uploads">Alle Uploads werden abgebrochen…</string>
+  <string name="uploads">Hochgeladene Dateien</string>
+  <string name="pending">Ausstehend</string>
+  <string name="failed">Fehlgeschlagen</string>
+  <string name="could_not_load_place_data">Ortsdaten konnten nicht geladen werden</string>
+  <string name="custom_selector_delete_folder">Ordner löschen</string>
+  <string name="custom_selector_confirm_deletion_title">Löschung bestätigen</string>
+  <string name="custom_selector_confirm_deletion_message">Bist du sicher, dass du den Ordner %1$s löschen möchten, der %2$d Datenobjekte enthält?</string>
+  <string name="custom_selector_delete">Löschen</string>
+  <string name="custom_selector_cancel">Abbrechen</string>
+  <string name="custom_selector_folder_deleted_success">Ordner %1$s erfolgreich gelöscht</string>
+  <string name="custom_selector_folder_deleted_failure">Ordner %1$s konnte nicht gelöscht werden</string>
+  <string name="custom_selector_error_trashing_folder_contents">Fehler beim Löschen des Ordnerinhalts: %1$s</string>
+  <string name="red_pin">Von diesem Ort gibt es noch kein Bild. Mach eins!</string>
+  <string name="green_pin">Dieser Ort hat bereits ein Bild.</string>
+  <string name="grey_pin">Jetzt wird geprüft, ob dieser Ort bereits ein Bild hat.</string>
 </resources>

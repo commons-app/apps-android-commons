@@ -22,7 +22,7 @@ class FeedbackContentCreatorUnitTests {
     private lateinit var feedback: Feedback
 
     private lateinit var context: Context
-    
+
     @Before
     fun setup() {
         MockitoAnnotations.openMocks(this)
@@ -34,7 +34,7 @@ class FeedbackContentCreatorUnitTests {
     fun testToString() {
         feedback = Feedback("123", "apiLevel", "title", "androidVersion", "deviceModel", "mfg", "deviceName", "wifi")
         creator = FeedbackContentCreator(context, feedback)
-        Assert.assertNotNull(creator.toString())
+        Assert.assertNotNull(creator.getSectionText())
+        Assert.assertNotNull(creator.getSectionTitle())
     }
-
 }

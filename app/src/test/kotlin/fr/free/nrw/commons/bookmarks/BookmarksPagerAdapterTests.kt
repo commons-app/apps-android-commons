@@ -37,7 +37,7 @@ class BookmarksPagerAdapterTests {
 
     @Test
     fun testGetCount() {
-        Assert.assertEquals(bookmarksPagerAdapter.count, 3)
+        Assert.assertEquals(bookmarksPagerAdapter.count, 4)
     }
 
     @Test

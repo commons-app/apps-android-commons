@@ -68,7 +68,6 @@
   <string name="preference_category_feedback">Prikomentado</string>
   <string name="preference_category_privacy">Privateco</string>
   <string name="app_name">Komunejo</string>
-  <string name="bullet">•</string>
   <string name="menu_settings">Agordoj</string>
   <string name="intent_share_upload_label">Alŝuti al la Komunejo</string>
   <string name="upload_in_progress">Alŝutante</string>
@@ -277,7 +276,7 @@
   <string name="skip_login">Preterpasi</string>
   <string name="navigation_item_login">Ensaluti</string>
   <string name="skip_login_title" fuzzy="true">Ĉu vere vi volas transpasi la ensalutadon?</string>
-  <string name="skip_login_message">Vi devas ensaluti por alŝuti bildojn.</string>
+  <string name="skip_login_message" fuzzy="true">Vi devas ensaluti por alŝuti bildojn.</string>
   <string name="login_alert_message">Bonvolu ensaluti por uzi ĉi tiun eblon</string>
   <string name="copy_wikicode">Kopii la vikitekston en la tondujon</string>
   <string name="wikicode_copied">La vikiteksto kopiiĝis en la tondujon</string>
@@ -367,7 +366,7 @@
   <string name="statistics_thanks">Ricevitaj dankoj</string>
   <string name="statistics_featured">Elstaraj Bildoj</string>
   <string name="statistics_wikidata_edits">Bildoj per \"Apudaj Lokoj\"</string>
-  <string name="level">Nivelo</string>
+  <string name="level" fuzzy="true">Nivelo</string>
   <string name="images_uploaded">Alŝutitaj Bildoj</string>
   <string name="image_reverts">Bildoj Ne Malfaritaj</string>
   <string name="images_used_by_wiki">Uzataj Bildoj</string>
@@ -574,7 +573,7 @@
   <string name="title_for_child_classes">SUBKLASOJ</string>
   <string name="title_for_parent_classes">PLI ALTAJ KLASOJ</string>
   <string name="upload_nearby_place_found_title">Oni trovis lokon en proksimo</string>
-  <string name="upload_nearby_place_found_description">Ĉu ĉi tio estas foto de %1$s?</string>
+  <string name="upload_nearby_place_found_description_singular" fuzzy="true">Ĉu ĉi tio estas foto de %1$s?</string>
   <string name="title_app_shortcut_bookmark">Legosignoj</string>
   <string name="title_app_shortcut_setting">Agordoj</string>
   <string name="remove_bookmark">Forigi el legosignoj</string>
@@ -690,7 +689,7 @@
   <string name="read_phone_state_permission_message">Mapoj de Apude bezonas legi TELEFONAN STATON por funkcii bone</string>
   <string name="contributions_of_user">Kontribuoj de Uzanto: %s</string>
   <string name="achievements_of_user">Atingoj de Uzanto: %s</string>
-  <string name="menu_view_user_page">Vidi la uzantopaĝon</string>
+  <string name="menu_view_user_page" fuzzy="true">Vidi la uzantopaĝon</string>
   <string name="edit_depictions">Redakti priskribojn</string>
   <string name="edit_categories">Redakti kategoriojn</string>
   <string name="advanced_options">Elekteblecoj kromaj</string>

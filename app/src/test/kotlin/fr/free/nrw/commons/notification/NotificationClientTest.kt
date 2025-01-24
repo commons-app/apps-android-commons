@@ -2,7 +2,12 @@ package fr.free.nrw.commons.notification
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import fr.free.nrw.commons.TestCommonsApplication
+import fr.free.nrw.commons.auth.csrf.CsrfTokenClient
 import fr.free.nrw.commons.notification.models.NotificationType
+import fr.free.nrw.commons.wikidata.GsonUtil
+import fr.free.nrw.commons.wikidata.model.notifications.Notification
+import fr.free.nrw.commons.wikidata.mwapi.MwQueryResponse
+import fr.free.nrw.commons.wikidata.mwapi.MwQueryResult
 import io.reactivex.Observable
 import junit.framework.TestCase.assertEquals
 import org.junit.Before
@@ -17,17 +22,11 @@ import org.mockito.Mockito.verify
 import org.mockito.MockitoAnnotations
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
-import fr.free.nrw.commons.auth.csrf.CsrfTokenClient
-import fr.free.nrw.commons.wikidata.mwapi.MwQueryResponse
-import fr.free.nrw.commons.wikidata.mwapi.MwQueryResult
-import fr.free.nrw.commons.wikidata.GsonUtil
-import fr.free.nrw.commons.wikidata.model.notifications.Notification
 
 @RunWith(AndroidJUnit4::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
 @LooperMode(LooperMode.Mode.PAUSED)
 class NotificationClientTest {
-
     @Mock
     private lateinit var service: NotificationInterface
 
@@ -61,7 +60,8 @@ class NotificationClientTest {
 
     @Test
     fun getNotificationTest() {
-        Mockito.`when`(service.getAllNotifications(anyString(), anyString(), any()))
+        Mockito
+            .`when`(service.getAllNotifications(anyString(), anyString(), any()))
             .thenReturn(Observable.just(mQueryResponse))
         Mockito.`when`(mQueryResponse.query()).thenReturn(mQueryResult)
         Mockito.`when`(mQueryResult.notifications()).thenReturn(mQueryResultNotificationsList)
@@ -71,9 +71,9 @@ class NotificationClientTest {
                     primaryUrl = "foo",
                     compactHeader = "header",
                     timestamp = "2024-01-22T10:12:00Z",
-                    notificationId = 1234L
-                )
-            )
+                    notificationId = 1234L,
+                ),
+            ),
         )
 
         val result = notificationClient.getNotifications(true).test().values()
@@ -81,7 +81,7 @@ class NotificationClientTest {
         verify(service).getAllNotifications(
             eq("wikidatawiki|commonswiki|enwiki"),
             eq("read"),
-            eq(null)
+            eq(null),
         )
 
         val notificationList = result.first()
@@ -103,7 +103,8 @@ class NotificationClientTest {
     @Test
     fun markNotificationAsReadTest() {
         Mockito.`when`(csrfTokenClient.getTokenBlocking()).thenReturn("test")
-        Mockito.`when`(service.markRead(anyString(), anyString(), anyString()))
+        Mockito
+            .`when`(service.markRead(anyString(), anyString(), anyString()))
             .thenReturn(Observable.just(mQueryResponse))
         Mockito.`when`(mQueryResponse.success()).thenReturn(true)
         notificationClient.markNotificationAsRead("test")
@@ -112,23 +113,22 @@ class NotificationClientTest {
 
     @Suppress("SameParameterValue")
     private fun createWikimediaNotification(
-        primaryUrl: String, compactHeader: String, timestamp: String, notificationId: Long
+        primaryUrl: String,
+        compactHeader: String,
+        timestamp: String,
+        notificationId: Long,
     ) = Notification().apply {
         setId(notificationId)
 
-        setTimestamp(Notification.Timestamp().apply {
-            setUtciso8601(timestamp)
-        })
+        setTimestamp(Notification.Timestamp().apply { setUtciso8601(timestamp) })
 
         contents = Notification.Contents().apply {
-            setCompactHeader(compactHeader)
+            this.compactHeader = compactHeader
 
             links = Notification.Links().apply {
-                setPrimary(
-                    GsonUtil.getDefaultGson().toJsonTree(Notification.Link().apply {
-                        setUrl(primaryUrl)
-                    })
-                )
+                setPrimary(GsonUtil.defaultGson.toJsonTree(
+                    Notification.Link().apply { url = primaryUrl }
+                ))
             }
         }
     }

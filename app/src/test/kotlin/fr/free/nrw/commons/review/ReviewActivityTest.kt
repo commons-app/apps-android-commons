@@ -20,7 +20,9 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.ArgumentMatchers
 import org.mockito.Mock
-import org.mockito.Mockito.*
+import org.mockito.Mockito.anyInt
+import org.mockito.Mockito.doReturn
+import org.mockito.Mockito.mock
 import org.mockito.MockitoAnnotations
 import org.powermock.reflect.Whitebox
 import org.robolectric.Robolectric
@@ -36,7 +38,6 @@ import java.lang.reflect.Method
 @Config(sdk = [21], application = TestCommonsApplication::class)
 @LooperMode(LooperMode.Mode.PAUSED)
 class ReviewActivityTest {
-
     private lateinit var activity: ReviewActivity
 
     private lateinit var menuItem: MenuItem
@@ -79,12 +80,11 @@ class ReviewActivityTest {
         menuItem = RoboMenuItem(null)
 
         menu = RoboMenu(context)
-        Whitebox.setInternalState(binding, "viewPagerReview", reviewPager);
-        Whitebox.setInternalState(activity, "hasNonHiddenCategories", hasNonHiddenCategories);
-        Whitebox.setInternalState(activity, "reviewHelper", reviewHelper);
-        Whitebox.setInternalState(activity, "reviewImageFragment", reviewImageFragment);
-        Whitebox.setInternalState(activity, "reviewPagerAdapter", reviewPagerAdapter);
-
+        Whitebox.setInternalState(binding, "viewPagerReview", reviewPager)
+        Whitebox.setInternalState(activity, "hasNonHiddenCategories", hasNonHiddenCategories)
+        Whitebox.setInternalState(activity, "reviewHelper", reviewHelper)
+        Whitebox.setInternalState(activity, "reviewImageFragment", reviewImageFragment)
+        Whitebox.setInternalState(activity, "reviewPagerAdapter", reviewPagerAdapter)
     }
 
     @Test
@@ -103,7 +103,7 @@ class ReviewActivityTest {
     @Throws(Exception::class)
     fun testSwipeToNext() {
         shadowOf(getMainLooper()).idle()
-        doReturn(1,2).`when`(reviewPager)?.currentItem
+        doReturn(1, 2).`when`(reviewPager)?.currentItem
         activity.swipeToNext()
     }
 
@@ -120,7 +120,7 @@ class ReviewActivityTest {
         reviewHelper
             ?.getRandomMedia()
             ?.test()
-            ?.assertValue(media);
+            ?.assertValue(media)
         activity.swipeToNext()
     }
 
@@ -135,11 +135,9 @@ class ReviewActivityTest {
         doNothing().`when`(reviewImageFragment).disableButtons()
 
         var findNonHiddenCategory: Method =
-            ReviewActivity::class.java.getDeclaredMethod("findNonHiddenCategories"
-                , Media::class.java)
+            ReviewActivity::class.java.getDeclaredMethod("findNonHiddenCategories", Media::class.java)
         findNonHiddenCategory.isAccessible = true
         findNonHiddenCategory.invoke(activity, media)
-
     }
 
     @Test
@@ -195,5 +193,4 @@ class ReviewActivityTest {
     fun testOnBackPressed() {
         activity.onBackPressed()
     }
-
 }

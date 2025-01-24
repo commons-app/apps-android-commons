@@ -4,6 +4,7 @@
 * Chrumps
 * CiaPan
 * DeRudySoulStorm
+* Frozengeist
 * IOIOI
 * InternerowyGołąb
 * Kareyac
@@ -12,6 +13,7 @@
 * Matma Rex
 * Mazab IZW
 * Olaf
+* PanWor
 * Rail
 * Railfail536
 * Rainbow P
@@ -96,7 +98,6 @@
   <string name="preference_category_feedback">Opinia</string>
   <string name="preference_category_privacy">Prywatność</string>
   <string name="app_name">Commons</string>
-  <string name="bullet">•</string>
   <string name="menu_settings">Ustawienia</string>
   <string name="intent_share_upload_label">Prześlij do Commons</string>
   <string name="upload_in_progress">Przesyłanie w toku</string>
@@ -115,6 +116,7 @@
   <string name="upload_failed">Nie znaleziono pliku. Spróbuj znaleźć inny.</string>
   <string name="retry_limit_reached">Osiągnięto maksymalny limit ponownych prób! Anuluj przesyłanie i spróbuj ponownie</string>
   <string name="unrestricted_battery_mode">Wyłączyć optymalizację baterii?</string>
+  <string name="suggest_unrestricted_mode">Przesyłanie więcej niż 3 obrazów działa bardziej niezawodnie, gdy optymalizacja baterii jest wyłączona. Wyłącz optymalizację baterii dla aplikacji Commons w ustawieniach, aby zapewnić płynne przesyłanie. \n\nMożliwe kroki, aby wyłączyć optymalizację baterii:\n\nKrok 1: Stuknij przycisk „Ustawienia” poniżej.\n\nKrok 2: Przełącz z „Niezoptymalizowane” na „Wszystkie aplikacje”.\n\nKrok 3: Wyszukaj „Commons” lub „fr.free.nrw.commons”.\n\nKrok 4: Stuknij i wybierz „Nie optymalizuj”.\n\nKrok 5: Naciśnij „Gotowe”.</string>
   <string name="authentication_failed">Uwierzytelnianie nie powiodło się, zaloguj się ponownie, proszę.</string>
   <string name="uploading_started">Wysyłanie rozpoczęte!</string>
   <string name="uploading_queued">Prześlij w kolejce (włączony tryb ograniczonego połączenia)</string>
@@ -136,6 +138,8 @@
   <string name="menu_from_camera">Zrób zdjęcie</string>
   <string name="menu_nearby">W pobliżu</string>
   <string name="provider_contributions">Wysłane przeze mnie pliki</string>
+  <string name="menu_copy_link">Skopiuj link</string>
+  <string name="menu_link_copied">Link został skopiowany do schowka</string>
   <string name="menu_share">Udostępnij</string>
   <string name="menu_view_file_page">Pokaż stronę pliku</string>
   <string name="share_title_hint">Podpis (wymagany)</string>
@@ -154,6 +158,7 @@
   <string name="categories_search_text_hint">Szukaj kategorii</string>
   <string name="depicts_search_text_hint">Wyszukiwanie elementów, które przedstawiają twoje media (góra, Tadż Mahal itp.)</string>
   <string name="menu_save_categories">Zapisz</string>
+  <string name="menu_overflow_desc">Rozszerzone menu</string>
   <string name="refresh_button">Odśwież</string>
   <string name="display_list_button">Lista</string>
   <string name="contributions_subtitle_zero">(Nie ma jeszcze przesłanych plików)</string>
@@ -305,11 +310,12 @@
   <string name="skip_login">Pomiń</string>
   <string name="navigation_item_login">Zaloguj się</string>
   <string name="skip_login_title">Czy na pewno chcesz pominąć logowanie?</string>
-  <string name="skip_login_message">Musisz się zalogować, aby przesłać zdjęcia w przyszłości</string>
+  <string name="skip_login_message">Aby w przyszłości przesyłać zdjęcia, będziesz musiał się zalogować.</string>
   <string name="login_alert_message">Zaloguj się, aby skorzystać z tej funkcji</string>
   <string name="copy_wikicode">Skopiuj wikitext do schowka</string>
   <string name="wikicode_copied">Wikitext został skopiowany do schowka</string>
   <string name="nearby_location_not_available">W pobliżu może nie działać poprawnie, Lokalizacja jest niedostępna.</string>
+  <string name="nearby_showing_pins_offline">Brak połączenia z internetem. Wyświetlane są tylko miejsca z pamięci podręcznej.</string>
   <string name="upload_location_access_denied">Odmowa dostępu do lokalizacji. Aby skorzystać z tej funkcji, ustaw swoją lokalizację ręcznie.</string>
   <string name="location_permission_rationale_nearby">Uprawnienie wymagane do wyświetlania listy pobliskich miejsc</string>
   <string name="location_permission_rationale_explore">Uprawnienie wymagane do wyświetlania listy pobliskich zdjęć</string>
@@ -393,11 +399,13 @@
   <string name="delete">Usuń</string>
   <string name="Achievements">Osiągnięcia</string>
   <string name="Profile">Profil</string>
+  <string name="badges">Odznaki</string>
   <string name="statistics">Statystyki</string>
   <string name="statistics_thanks">Otrzymane Dzięki</string>
   <string name="statistics_featured">Wyróżnione ilustracje</string>
   <string name="statistics_wikidata_edits">Obrazy za pośrednictwem \"Pobliskie miejsca\"</string>
-  <string name="level">Poziom</string>
+  <string name="level">Poziom %d</string>
+  <string name="profileLevel">%s (Poziom %s)</string>
   <string name="images_uploaded">Przesłane obrazy</string>
   <string name="image_reverts">Nie wycofane obrazy</string>
   <string name="images_used_by_wiki">Wykorzystane obrazy</string>
@@ -461,8 +469,11 @@
   <string name="ends_on">Kończy się na:</string>
   <string name="display_campaigns">Wyświetl kampanie</string>
   <string name="display_campaigns_explanation">Zobacz trwające kampanie</string>
+  <string name="in_app_camera_location_access_explanation">Zezwól aplikacji na pobieranie lokalizacji, jeśli kamera jej nie rejestruje. Niektóre kamery urządzeń nie rejestrują lokalizacji. W takich przypadkach pozwolenie aplikacji na pobieranie i dołączanie do niej lokalizacji sprawia, że Twój wkład jest bardziej użyteczny. Możesz to zmienić w dowolnym momencie w Ustawieniach</string>
   <string name="option_allow">Zezwól</string>
   <string name="option_dismiss">Odrzuć</string>
+  <string name="in_app_camera_needs_location">Zezwól na dostęp do lokalizacji w Ustawieniach, a następnie spróbuj ponownie.\n\nUwaga: Jeśli aplikacja nie będzie w stanie uzyskać danych o lokalizacji z urządzenia w krótkim czasie, przesłany plik może nie zawierać tych informacji.</string>
+  <string name="in_app_camera_location_permission_rationale">Aparat w aplikacji potrzebuje uprawnień na dostęp do lokalizacji, aby dołączyć ją do zdjęć, jeśli nie jest dostępna w danych EXIF. Zezwól aplikacji na dostęp do lokalizacji, a następnie spróbuj ponownie.\n\nUwaga: Jeśli aplikacja nie będzie w stanie uzyskać danych o lokalizacji z urządzenia w krótkim czasie, przesłany plik może nie zawierać tych informacji.</string>
   <string name="location_loss_warning" fuzzy="true">Upewnij się, że ten nowy selektor Androida nie usuwa lokalizacji ze zdjęć.</string>
   <string name="nearby_campaign_dismiss_message">Kampanie już nie będą widoczne. Jednak w razie potrzeby możesz ponownie włączyć to powiadomienie w ustawieniach.</string>
   <string name="this_function_needs_network_connection" fuzzy="true">Ta funkcja wymaga połączenia sieciowego, sprawdź ustawienia połączenia.</string>
@@ -601,7 +612,7 @@
   <string name="title_for_child_classes">KLASY POTOMNE</string>
   <string name="title_for_parent_classes">KLASY NADRZĘDNE</string>
   <string name="upload_nearby_place_found_title">Znaleziono miejsce w pobliżu</string>
-  <string name="upload_nearby_place_found_description">Czy to zdjęcie %1$s?</string>
+  <string name="upload_nearby_place_found_description_singular" fuzzy="true">Czy to zdjęcie %1$s?</string>
   <string name="title_app_shortcut_bookmark">Zakładki</string>
   <string name="title_app_shortcut_setting">Ustawienia</string>
   <string name="remove_bookmark">Usunięto z zakładek</string>
@@ -716,7 +727,7 @@
   <string name="read_phone_state_permission_message">Mapy znajdujące się w pobliżu muszą odczytywać STAN TELEFONU, aby działały poprawnie</string>
   <string name="contributions_of_user">Wkład użytkownika: %s</string>
   <string name="achievements_of_user">Osiągnięcia użytkownika: %s</string>
-  <string name="menu_view_user_page">Wyświetl stronę użytkownika</string>
+  <string name="menu_view_user_page" fuzzy="true">Wyświetl stronę użytkownika</string>
   <string name="edit_depictions">Edycja przedstawień</string>
   <string name="edit_categories">Edycja kategorii</string>
   <string name="advanced_options">Opcje zaawansowane</string>
@@ -767,8 +778,18 @@
   <string name="set_up_avatar_toast_string">Aby skonfigurować swojego awatara rankingu, dotknij \'Ustaw jako awatar\' w menu z trzema kropkami dowolnego obrazu.</string>
   <string name="similar_coordinate_description_auto_set">Współrzędne nie są dokładnymi współrzędnymi, ale osoba, która przesłała to zdjęcie, uważa, że są wystarczająco blisko.</string>
   <string name="unable_to_share_upload_item">Nie można udostępnić tego elementu</string>
+  <string name="learn_how_to_write_a_useful_description">Przeczytaj jak napisać użyteczny opis</string>
+  <string name="learn_how_to_write_a_useful_caption">Przeczytaj jak napisać użyteczny podpis</string>
   <string name="edit_image">Edytuj obraz</string>
   <string name="edit_location">Edytuj lokalizację</string>
+  <string name="location_updated">Lokalizacja zaktualizowana!</string>
   <string name="send_thanks_to_author">Dziękuję autorowi</string>
   <string name="error_sending_thanks">Błąd wysyłania podziękowań do autora.</string>
+  <string name="file_saved_successfully">Pomyślnie zapisano</string>
+  <string name="do_you_want_to_open_gpx_file">Chcesz otworzyć plik GPX?</string>
+  <string name="do_you_want_to_open_kml_file">Chcesz otworzyć plik KML?</string>
+  <string name="failed_to_save_kml_file">Nie udało się zapisać pliku KML.</string>
+  <string name="failed_to_save_gpx_file">Nie udało się zapisać pliku GPX.</string>
+  <string name="talk">Dyskusja</string>
+  <string name="custom_selector_delete">Usuń</string>
 </resources>

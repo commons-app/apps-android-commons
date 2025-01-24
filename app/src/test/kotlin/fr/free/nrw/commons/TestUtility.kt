@@ -5,7 +5,10 @@ import java.lang.reflect.Modifier
 
 object TestUtility {
     @Throws(java.lang.Exception::class)
-    fun setFinalStatic(field: Field, newValue: Any?) {
+    fun setFinalStatic(
+        field: Field,
+        newValue: Any?,
+    ) {
         try {
             field.isAccessible = true
             // remove final modifier from field

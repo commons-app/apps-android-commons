@@ -33,4 +33,3 @@ class PageableParentDepictionsDataSourceTest {
         Assert.assertEquals(dataSource.loadFunction(1, 0), listOf(depictedItem()))
     }
 }
-

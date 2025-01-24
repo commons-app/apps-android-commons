@@ -22,5 +22,3 @@ class MediaTest {
         assertEquals("Example 1 2", m.displayTitle)
     }
 }
-
-

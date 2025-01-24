@@ -30,7 +30,6 @@ import java.lang.reflect.Method
 @Config(sdk = [21], application = TestCommonsApplication::class)
 @LooperMode(LooperMode.Mode.PAUSED)
 class ContributionsListFragmentUnitTests {
-
     private lateinit var scenario: FragmentScenario<ContributionsListFragment>
     private lateinit var fragment: ContributionsListFragment
 
@@ -43,17 +42,19 @@ class ContributionsListFragmentUnitTests {
     fun setUp() {
         OkHttpConnectionFactory.CLIENT = createTestClient()
 
-        scenario = launchFragmentInContainer(
-            initialState = Lifecycle.State.RESUMED,
-            themeResId = R.style.LightAppTheme
-        ) {
-            ContributionsListFragment().apply {
-                contributionsListPresenter = mock()
-                callback = mock()
-            }.also {
-                fragment = it
+        scenario =
+            launchFragmentInContainer(
+                initialState = Lifecycle.State.RESUMED,
+                themeResId = R.style.LightAppTheme,
+            ) {
+                ContributionsListFragment()
+                    .apply {
+                        contributionsListPresenter = mock()
+                        callback = mock()
+                    }.also {
+                        fragment = it
+                    }
             }
-        }
 
         scenario.onFragment {
             it.adapter = adapter
@@ -129,26 +130,13 @@ class ContributionsListFragmentUnitTests {
     @Throws(Exception::class)
     fun testShowAddImageToWikipediaInstructions() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
-        val method: Method = ContributionsListFragment::class.java.getDeclaredMethod(
-            "showAddImageToWikipediaInstructions",
-            Contribution::class.java
-        )
+        val method: Method =
+            ContributionsListFragment::class.java.getDeclaredMethod(
+                "showAddImageToWikipediaInstructions",
+                Contribution::class.java,
+            )
         method.isAccessible = true
         method.invoke(fragment, contribution)
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun testResumeUpload() {
-        Shadows.shadowOf(Looper.getMainLooper()).idle()
-        fragment.resumeUpload(contribution)
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun testPauseUpload() {
-        Shadows.shadowOf(Looper.getMainLooper()).idle()
-        fragment.pauseUpload(contribution)
     }
 
     @Test
@@ -163,20 +151,6 @@ class ContributionsListFragmentUnitTests {
     fun testOpenMediaDetail() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
         fragment.openMediaDetail(0, true)
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun testDeleteUpload() {
-        Shadows.shadowOf(Looper.getMainLooper()).idle()
-        fragment.deleteUpload(contribution)
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun testRetryUpload() {
-        Shadows.shadowOf(Looper.getMainLooper()).idle()
-        fragment.retryUpload(contribution)
     }
 
     @Test
@@ -221,10 +195,11 @@ class ContributionsListFragmentUnitTests {
         scenario.onFragment {
             it.requireView().findViewById<FloatingActionButton>(R.id.fab_plus).hide()
         }
-        val method: Method = ContributionsListFragment::class.java.getDeclaredMethod(
-            "animateFAB",
-            Boolean::class.java
-        )
+        val method: Method =
+            ContributionsListFragment::class.java.getDeclaredMethod(
+                "animateFAB",
+                Boolean::class.java,
+            )
         method.isAccessible = true
         method.invoke(fragment, true)
     }
@@ -236,10 +211,11 @@ class ContributionsListFragmentUnitTests {
         scenario.onFragment {
             it.requireView().findViewById<FloatingActionButton>(R.id.fab_plus).show()
         }
-        val method: Method = ContributionsListFragment::class.java.getDeclaredMethod(
-            "animateFAB",
-            Boolean::class.java
-        )
+        val method: Method =
+            ContributionsListFragment::class.java.getDeclaredMethod(
+                "animateFAB",
+                Boolean::class.java,
+            )
         method.isAccessible = true
         method.invoke(fragment, true)
     }
@@ -251,10 +227,11 @@ class ContributionsListFragmentUnitTests {
         scenario.onFragment {
             it.requireView().findViewById<FloatingActionButton>(R.id.fab_plus).show()
         }
-        val method: Method = ContributionsListFragment::class.java.getDeclaredMethod(
-            "animateFAB",
-            Boolean::class.java
-        )
+        val method: Method =
+            ContributionsListFragment::class.java.getDeclaredMethod(
+                "animateFAB",
+                Boolean::class.java,
+            )
         method.isAccessible = true
         method.invoke(fragment, false)
     }
@@ -263,9 +240,10 @@ class ContributionsListFragmentUnitTests {
     @Throws(Exception::class)
     fun testSetListeners() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
-        val method: Method = ContributionsListFragment::class.java.getDeclaredMethod(
-            "setListeners"
-        )
+        val method: Method =
+            ContributionsListFragment::class.java.getDeclaredMethod(
+                "setListeners",
+            )
         method.isAccessible = true
         method.invoke(fragment)
     }
@@ -274,9 +252,10 @@ class ContributionsListFragmentUnitTests {
     @Throws(Exception::class)
     fun testInitializeAnimations() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
-        val method: Method = ContributionsListFragment::class.java.getDeclaredMethod(
-            "initializeAnimations"
-        )
+        val method: Method =
+            ContributionsListFragment::class.java.getDeclaredMethod(
+                "initializeAnimations",
+            )
         method.isAccessible = true
         method.invoke(fragment)
     }

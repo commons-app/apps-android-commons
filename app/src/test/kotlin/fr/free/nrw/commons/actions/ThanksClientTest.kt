@@ -3,6 +3,9 @@ package fr.free.nrw.commons.actions
 import com.nhaarman.mockitokotlin2.eq
 import com.nhaarman.mockitokotlin2.verify
 import fr.free.nrw.commons.CommonsApplication
+import fr.free.nrw.commons.auth.csrf.CsrfTokenClient
+import io.mockk.every
+import io.mockk.mockkObject
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -14,13 +17,13 @@ import org.mockito.Mockito.`when`
 import org.mockito.MockitoAnnotations
 import org.powermock.core.classloader.annotations.PrepareForTest
 import org.robolectric.RobolectricTestRunner
-import fr.free.nrw.commons.auth.csrf.CsrfTokenClient
 
 @RunWith(RobolectricTestRunner::class)
 @PrepareForTest(CommonsApplication::class)
 class ThanksClientTest {
     @Mock
     private lateinit var csrfTokenClient: CsrfTokenClient
+
     @Mock
     private lateinit var service: ThanksInterface
 
@@ -28,7 +31,6 @@ class ThanksClientTest {
     private lateinit var commonsApplication: CommonsApplication
 
     private lateinit var thanksClient: ThanksClient
-    private lateinit var mockedApplication: MockedStatic<CommonsApplication>
 
     /**
      * initial setup, test environment
@@ -37,8 +39,8 @@ class ThanksClientTest {
     @Throws(Exception::class)
     fun setUp() {
         MockitoAnnotations.openMocks(this)
-        mockedApplication = Mockito.mockStatic(CommonsApplication::class.java)
-        `when`(CommonsApplication.getInstance()).thenReturn(commonsApplication)
+        mockkObject(CommonsApplication)
+        every { CommonsApplication.instance }.returns(commonsApplication)
         thanksClient = ThanksClient(csrfTokenClient, service)
     }
 

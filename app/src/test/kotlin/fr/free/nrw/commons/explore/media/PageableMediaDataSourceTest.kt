@@ -13,6 +13,7 @@ import org.mockito.MockitoAnnotations
 class PageableMediaDataSourceTest {
     @Mock
     lateinit var mediaConverter: MediaConverter
+
     @Mock
     lateinit var mediaClient: MediaClient
 
@@ -27,6 +28,6 @@ class PageableMediaDataSourceTest {
             .thenReturn(Single.just(emptyList()))
         val pageableMediaDataSource = PageableMediaDataSource(mock(), mediaClient)
         pageableMediaDataSource.onQueryUpdated("test")
-        Assert.assertEquals(pageableMediaDataSource.loadFunction(0,1), emptyList<String>())
+        Assert.assertEquals(pageableMediaDataSource.loadFunction(0, 1), emptyList<String>())
     }
 }

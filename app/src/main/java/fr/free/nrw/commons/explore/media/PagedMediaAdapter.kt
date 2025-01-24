@@ -10,28 +10,41 @@ import fr.free.nrw.commons.databinding.LayoutCategoryImagesBinding
 import fr.free.nrw.commons.explore.paging.BaseViewHolder
 import fr.free.nrw.commons.explore.paging.inflate
 
-class PagedMediaAdapter(private val onImageClicked: (Int) -> Unit) :
-    PagedListAdapter<Media, SearchImagesViewHolder>(object : DiffUtil.ItemCallback<Media>() {
-        override fun areItemsTheSame(oldItem: Media, newItem: Media) =
-            oldItem.pageId == newItem.pageId
+class PagedMediaAdapter(
+    private val onImageClicked: (Int) -> Unit,
+) : PagedListAdapter<Media, SearchImagesViewHolder>(
+        object : DiffUtil.ItemCallback<Media>() {
+            override fun areItemsTheSame(
+                oldItem: Media,
+                newItem: Media,
+            ) = oldItem.pageId == newItem.pageId
 
-        override fun areContentsTheSame(oldItem: Media, newItem: Media) =
-            oldItem.pageId == newItem.pageId
-    }) {
+            override fun areContentsTheSame(
+                oldItem: Media,
+                newItem: Media,
+            ) = oldItem.pageId == newItem.pageId
+        },
+    ) {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int,
+    ) = SearchImagesViewHolder(
+        parent.inflate(R.layout.layout_category_images),
+        onImageClicked,
+    )
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
-        SearchImagesViewHolder(
-            parent.inflate(R.layout.layout_category_images),
-            onImageClicked
-        )
-
-    override fun onBindViewHolder(holder: SearchImagesViewHolder, position: Int) {
+    override fun onBindViewHolder(
+        holder: SearchImagesViewHolder,
+        position: Int,
+    ) {
         holder.bind(getItem(position)!! to position)
     }
 }
 
-class SearchImagesViewHolder(containerView: View, val onImageClicked: (Int) -> Unit) :
-    BaseViewHolder<Pair<Media, Int>>(containerView) {
+class SearchImagesViewHolder(
+    containerView: View,
+    val onImageClicked: (Int) -> Unit,
+) : BaseViewHolder<Pair<Media, Int>>(containerView) {
     val binding = LayoutCategoryImagesBinding.bind(itemView)
 
     override fun bind(item: Pair<Media, Int>) {
@@ -47,5 +60,4 @@ class SearchImagesViewHolder(containerView: View, val onImageClicked: (Int) -> U
             binding.categoryImageAuthor.visibility = View.GONE
         }
     }
-
 }

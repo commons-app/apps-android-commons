@@ -14,11 +14,9 @@ import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 
-
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
 class SignupActivityTest {
-
     private lateinit var activity: SignupActivity
 
     @Mock

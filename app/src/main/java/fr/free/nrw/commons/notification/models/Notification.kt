@@ -9,5 +9,5 @@ data class Notification(
     var date: String,
     var link: String,
     var iconUrl: String,
-    var notificationId: String
+    var notificationId: String,
 )

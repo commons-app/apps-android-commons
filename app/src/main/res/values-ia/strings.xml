@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* Karmwiki
 * McDutchie
 -->
 <resources>
@@ -99,6 +100,8 @@
   <string name="menu_from_camera">Prender photo</string>
   <string name="menu_nearby">A proximitate</string>
   <string name="provider_contributions">Mi incargamentos</string>
+  <string name="menu_copy_link">Copiar ligamine</string>
+  <string name="menu_link_copied">Le ligamine ha essite copiate al area de transferentia</string>
   <string name="menu_share">Condivider</string>
   <string name="menu_view_file_page">Visitar le pagina del file</string>
   <string name="share_title_hint">Legenda (obligatori)</string>
@@ -117,6 +120,7 @@
   <string name="categories_search_text_hint">Cercar categorias</string>
   <string name="depicts_search_text_hint">Cerca elementos que tu file representa (montania, Taj Mahal, etc.)</string>
   <string name="menu_save_categories">Salveguardar</string>
+  <string name="menu_overflow_desc">Menu de disbordamento</string>
   <string name="refresh_button">Refrescar</string>
   <string name="display_list_button">Listar</string>
   <string name="contributions_subtitle_zero">(Nihil incargate ancora)</string>
@@ -263,11 +267,12 @@
   <string name="skip_login">Saltar</string>
   <string name="navigation_item_login">Aperir session</string>
   <string name="skip_login_title">Vole tu vermente saltar le apertura de session?</string>
-  <string name="skip_login_message">Tu debera alora aperir session pro incargar imagines plus tarde.</string>
+  <string name="skip_login_message">Tu debera aperir session pro incargar imagines in le futuro.</string>
   <string name="login_alert_message">Per favor aperi session pro usar iste function</string>
   <string name="copy_wikicode">Copiar le wikitexto al area de transferentia</string>
   <string name="wikicode_copied">Le wikitexto ha essite copiate al area de transferentia</string>
   <string name="nearby_location_not_available">“A proximitate” poterea non functionar perque le localisation non es disponibile.</string>
+  <string name="nearby_showing_pins_offline">Internet indisponibile. Appare solmente le locos in cache.</string>
   <string name="upload_location_access_denied">Le accesso al localisation ha essite refusate. Per favor indica tu localisation manualmente pro usar iste function.</string>
   <string name="location_permission_rationale_nearby">Permission necessari pro monstrar un lista de locos a proximitate</string>
   <string name="location_permission_rationale_explore">Permission necessari pro monstrar un lista de imagines a proximitate</string>
@@ -351,11 +356,13 @@
   <string name="delete">Deler</string>
   <string name="Achievements">Realisationes</string>
   <string name="Profile">Profilo</string>
+  <string name="badges">Insignias</string>
   <string name="statistics">Statisticas</string>
   <string name="statistics_thanks">Regratiamentos recipite</string>
   <string name="statistics_featured">Imagines eminente</string>
   <string name="statistics_wikidata_edits">Imagines via “Locos a proximitate”</string>
-  <string name="level">Nivello</string>
+  <string name="level">Nivello %d</string>
+  <string name="profileLevel">%s (Nivello %s)</string>
   <string name="images_uploaded">Imagines incargate</string>
   <string name="image_reverts">Imagines non revertite</string>
   <string name="images_used_by_wiki">Imagines usate</string>
@@ -387,6 +394,7 @@
   <string name="map_application_missing">Necun application cartographic compatibile pote esser trovate sur tu apparato. Per favor installa un application cartographic pro usar iste function.</string>
   <string name="title_page_bookmarks_pictures">Imagines</string>
   <string name="title_page_bookmarks_locations">Locos</string>
+  <string name="title_page_bookmarks_categories">Categorias</string>
   <string name="menu_bookmark">Adder al/Remover del marcapaginas</string>
   <string name="provider_bookmarks">Marcapaginas</string>
   <string name="bookmark_empty">Tu non ha addite alcun marcapagina</string>
@@ -468,6 +476,7 @@
   <string name="no_notification">Tu non ha notificationes non legite</string>
   <string name="no_read_notification">Tu non ha notificationes legite</string>
   <string name="share_logs_using">Condivider registros usante</string>
+  <string name="check_your_email_inbox">Consulta tu cassa de entrata</string>
   <string name="menu_option_read">Vider legites</string>
   <string name="menu_option_unread">Vider non legites</string>
   <string name="error_occurred_in_picking_images">Un error ha occurrite durante le selection de imagines</string>
@@ -562,7 +571,8 @@
   <string name="title_for_child_classes">CLASSES FILIO</string>
   <string name="title_for_parent_classes">CLASSES GENITOR</string>
   <string name="upload_nearby_place_found_title">Loco a proximitate trovate</string>
-  <string name="upload_nearby_place_found_description">Es isto un photo de %1$s?</string>
+  <string name="upload_nearby_place_found_description_plural">Es istes imagines de %1$s?</string>
+  <string name="upload_nearby_place_found_description_singular">Es isto un imagine de %1$s?</string>
   <string name="title_app_shortcut_bookmark">Marcapaginas</string>
   <string name="title_app_shortcut_setting">Configurationes</string>
   <string name="remove_bookmark">Removite del marcapaginas</string>
@@ -680,7 +690,7 @@
   <string name="read_phone_state_permission_message">Le cartas a proximitate debe leger le STATO DEL TELEPHONO pro functionar correctemente</string>
   <string name="contributions_of_user">Contributiones del usator: %s</string>
   <string name="achievements_of_user">Realisationes del usator: %s</string>
-  <string name="menu_view_user_page">Visitar le pagina del usator</string>
+  <string name="menu_view_user_page">Vider le profilo del usator</string>
   <string name="edit_depictions">Modificar representationes</string>
   <string name="edit_categories">Modificar categorias</string>
   <string name="advanced_options">Optiones avantiate</string>
@@ -758,4 +768,37 @@
     <item quantity="one">%d imagine seligite</item>
     <item quantity="other">%d imagines seligite</item>
   </plurals>
+  <string name="multiple_files_depiction">Nota ben que tote le imagines in un multi-incargamento habera le mesme categorias e representationes. Si le imagines non condivide representationes e categorias, per favor exeque plure incargamentos separate.</string>
+  <string name="multiple_files_depiction_header">Aviso sur le multi-incargamentos</string>
+  <string name="nearby_wikitalk">Signalar a Wikidata un problema sur iste elemento</string>
+  <string name="please_enter_some_comments">Per favor insere alcun commentos</string>
+  <string name="talk">Discussion</string>
+  <string name="write_something_about_the_item">Scribe qualcosa sur le elemento ‘%1$s’. Isto essera visibile publicamente.</string>
+  <string name="does_not_exist_anymore_no_picture_can_ever_be_taken_of_it">‘%1$s’ non existe plus, necun imagine pote jammais esser prendite de illo.</string>
+  <string name="is_at_a_different_place_please_specify_the_correct_place_below_if_possible_tell_us_the_correct_latitude_longitude">‘%1$s’ es in un altere loco. Per favor specifica le loco correcte hic infra, e si possibile, indica le latitude e longitude correcte.</string>
+  <string name="other_problem_or_information_please_explain_below">Altere problema o information (per favor explica hic infra).</string>
+  <string name="feedback_destination_note">Tu retroaction apparera sur le sequente pagina wiki: &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Mobile_app/Feedback\"&gt;Commons:Mobile app/Feedback&lt;/a&gt;</string>
+  <string name="are_you_sure_that_you_want_cancel_all_the_uploads">Es tu secur de voler cancellar tote le incargamentos?</string>
+  <string name="cancelling_all_the_uploads">Cancella tote le incargamentos…</string>
+  <string name="uploads">Incargamentos</string>
+  <string name="pending">Pendente</string>
+  <string name="failed">Fallite</string>
+  <string name="could_not_load_place_data">Non poteva cargar le datos del loco</string>
+  <string name="custom_selector_delete_folder">Deler dossier</string>
+  <string name="custom_selector_confirm_deletion_title">Confirmar deletion</string>
+  <string name="custom_selector_confirm_deletion_message">Es tu secur de voler deler le dossier %1$s que contine %2$d objectos?</string>
+  <string name="custom_selector_delete">Deler</string>
+  <string name="custom_selector_cancel">Cancellar</string>
+  <string name="custom_selector_folder_deleted_success">Le dossier %1$s ha essite delite</string>
+  <string name="custom_selector_folder_deleted_failure">Le dossier %1$s non ha potite esser delite</string>
+  <string name="custom_selector_error_trashing_folder_contents">Error durante le elimination del contento del dossier: %1$s</string>
+  <string name="custom_selector_folder_not_found_error">Non poteva recuperar le percurso al dossier pro le “bucket ID” %1$d</string>
+  <string name="red_pin">Iste loco non ha ancora un photo. Proque non prender un?</string>
+  <string name="green_pin">Iste loco ja ha un photo.</string>
+  <string name="grey_pin">Ora se verifica si iste loco ha un photo.</string>
+  <string name="error_while_loading">Error durante le cargamento</string>
+  <string name="no_usages_found">Necun uso trovate</string>
+  <string name="usages_on_commons_heading">Commons</string>
+  <string name="usages_on_other_wikis_heading">Altere wikis</string>
+  <string name="file_usages_container_heading">Usos del file</string>
 </resources>

@@ -7,6 +7,7 @@
 * Eduardoaddad
 * Felipe L. Ewald
 * Fitoschido
+* Flaviane da Silva
 * Fúlvio
 * Gusta
 * HenriqueCrang
@@ -84,7 +85,6 @@
   <string name="preference_category_feedback">Comentário</string>
   <string name="preference_category_privacy">Privacidade</string>
   <string name="app_name">Commons</string>
-  <string name="bullet">•</string>
   <string name="menu_settings">Configurações</string>
   <string name="intent_share_upload_label">Carregar no Commons</string>
   <string name="upload_in_progress">Upload em progresso</string>
@@ -293,7 +293,7 @@
   <string name="skip_login">Pular</string>
   <string name="navigation_item_login">Entrar</string>
   <string name="skip_login_title" fuzzy="true">Você realmente quer pular a entrada?</string>
-  <string name="skip_login_message">Você teria que entrar para enviar fotos no futuro.</string>
+  <string name="skip_login_message" fuzzy="true">Você teria que entrar para enviar fotos no futuro.</string>
   <string name="login_alert_message">Entre para usar esta funcionalidade</string>
   <string name="copy_wikicode">Copie o wikitexto para a área de transferência</string>
   <string name="wikicode_copied">O wikitexto foi copiado para a área de transferência</string>
@@ -383,7 +383,7 @@
   <string name="statistics_thanks">Agradecimentos recebidos</string>
   <string name="statistics_featured">Imagens destacadas</string>
   <string name="statistics_wikidata_edits">Imagens via \"Locais próximos\"</string>
-  <string name="level">Nível</string>
+  <string name="level" fuzzy="true">Nível</string>
   <string name="images_uploaded">Imagens carregadas</string>
   <string name="image_reverts">Imagens não revertidas</string>
   <string name="images_used_by_wiki">Imagens usadas</string>
@@ -590,7 +590,7 @@
   <string name="title_for_child_classes">CLASSES INFANTIS</string>
   <string name="title_for_parent_classes">CLASSES PAIS</string>
   <string name="upload_nearby_place_found_title">Local próximo encontrado</string>
-  <string name="upload_nearby_place_found_description">Esta é uma foto de %1$s?</string>
+  <string name="upload_nearby_place_found_description_singular" fuzzy="true">Esta é uma foto de %1$s?</string>
   <string name="title_app_shortcut_bookmark">Favoritos</string>
   <string name="title_app_shortcut_setting">Configurações</string>
   <string name="remove_bookmark">Removido dos favoritos</string>
@@ -704,7 +704,7 @@
   <string name="read_phone_state_permission_message">Os mapas próximos precisam ler ESTADO DO TELEFONE para funcionar corretamente</string>
   <string name="contributions_of_user">Contribuições do usuário: %s</string>
   <string name="achievements_of_user">Conquistas do usuário: %s</string>
-  <string name="menu_view_user_page">Ver página de usuário</string>
+  <string name="menu_view_user_page" fuzzy="true">Ver página de usuário</string>
   <string name="edit_depictions">Editar representações</string>
   <string name="edit_categories">Editar categorias</string>
   <string name="advanced_options">Opções avançadas</string>
@@ -769,4 +769,5 @@
     <item quantity="one">%d imagem selecinada</item>
     <item quantity="other">%d imagens selecionadas</item>
   </plurals>
+  <string name="write_something_about_the_item">Escreva algo sobre o item %1$s. Isso será visivel publicamente.</string>
 </resources>

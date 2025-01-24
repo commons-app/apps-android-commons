@@ -10,6 +10,7 @@ object BetaConstants {
      * production server where beta server does not work
      */
     const val COMMONS_URL = "https://commons.wikimedia.org/"
+
     /**
      * Commons production's depicts property which is used in beta for some specific GET calls on
      * production server where beta server does not work

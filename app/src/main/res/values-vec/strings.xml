@@ -226,7 +226,7 @@
   <string name="skip_login">Salta</string>
   <string name="navigation_item_login">Va drento a l\'uxuario</string>
   <string name="skip_login_title" fuzzy="true">Vuto da vero saltar l\'entrada n\'tel uxuario?</string>
-  <string name="skip_login_message">Te garisi da ndar drento a l\'uxuario par cargar łe foto in futuro</string>
+  <string name="skip_login_message" fuzzy="true">Te garisi da ndar drento a l\'uxuario par cargar łe foto in futuro</string>
   <string name="login_alert_message">Fa l\'entrada al uxuario par doparar sta funsion</string>
   <string name="copy_wikicode">Copia el Wikitesto n\'tel aponti</string>
   <string name="wikicode_copied">El Wikitesto el xé sta copià in tei aponti</string>
@@ -302,7 +302,7 @@
   <string name="statistics_thanks">Ringrasiamenti rivai</string>
   <string name="statistics_featured">Imajini in evidensa</string>
   <string name="statistics_wikidata_edits">Imajini catae co \"Posti cuà rente\"</string>
-  <string name="level">Livèło:</string>
+  <string name="level" fuzzy="true">Livèło:</string>
   <string name="images_uploaded">Imajini cargae</string>
   <string name="image_reverts">Imajini no trate fora</string>
   <string name="images_used_by_wiki">Imajini doparae</string>
@@ -454,7 +454,7 @@
   <string name="nearby_search_hint">Ponti, muxei, alberghi etc.</string>
   <string name="you_must_reset_your_passsword" fuzzy="true">Se ga verifegà on erore co te jeri drio entrare n\'te l\'utensa, xé neçesario rinpostar ła ciave.</string>
   <string name="upload_nearby_place_found_title">Posto cuà rente catà</string>
-  <string name="upload_nearby_place_found_description" fuzzy="true">Sta cuà ła xé na foto del posto %1$s?</string>
+  <string name="upload_nearby_place_found_description_singular" fuzzy="true">Sta cuà ła xé na foto del posto %1$s?</string>
   <string name="title_app_shortcut_bookmark">Segnałibri</string>
   <string name="title_app_shortcut_setting">Inpostasion</string>
   <string name="remove_bookmark">Cava dai favorii</string>

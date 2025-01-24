@@ -59,7 +59,6 @@
   <string name="preference_category_feedback">Feedback</string>
   <string name="preference_category_privacy">Privacy</string>
   <string name="app_name">Commons</string>
-  <string name="bullet">&#8226;</string>
   <string name="menu_settings">Settings</string>
   <string name="intent_share_upload_label">Upload to Commons</string>
   <string name="upload_in_progress">Upload in progress</string>
@@ -100,6 +99,8 @@
   <string name="menu_from_camera">Take photo</string>
   <string name="menu_nearby">Nearby</string>
   <string name="provider_contributions">My uploads</string>
+  <string name="menu_copy_link">Copy link</string>
+  <string name="menu_link_copied">The link has been copied to the clipboard</string>
   <string name="menu_share">Share</string>
   <string name="menu_view_file_page">View file page</string>
   <string name="share_title_hint">Caption (Required)</string>
@@ -118,6 +119,7 @@
   <string name="categories_search_text_hint">Search categories</string>
   <string name="depicts_search_text_hint">Search for items that your media depicts (mountain, Taj Mahal, etc.)</string>
   <string name="menu_save_categories">Save</string>
+  <string name="menu_overflow_desc">Overflow menu</string>
   <string name="refresh_button">Refresh</string>
   <string name="display_list_button">List</string>
   <string name="contributions_subtitle_zero">(No uploads yet)</string>
@@ -274,12 +276,13 @@
   <string name="skip_login">Skip</string>
   <string name="navigation_item_login">Log in</string>
   <string name="skip_login_title">Do you really want to skip log-in?</string>
-  <string name="skip_login_message">You would have to log in to upload pictures in the future.</string>
+  <string name="skip_login_message">You will have to log in to upload pictures in the future.</string>
   <string name="login_alert_message">Please log in to use this feature</string>
 
   <string name="copy_wikicode">Copy the wikitext to the clipboard</string>
   <string name="wikicode_copied">The wikitext was copied to the clipboard</string>
   <string name="nearby_location_not_available">Nearby might not work properly, Location not available.</string>
+  <string name="nearby_showing_pins_offline">Internet unavailable. Showing only cached places.</string>
   <string name="upload_location_access_denied">Location access denied. Please set your location manually to use this feature.</string>
   <string name="location_permission_rationale_nearby">Permission required to display a list of nearby places</string>
   <string name="location_permission_rationale_explore">Permission required to display a list of nearby images</string>
@@ -371,11 +374,13 @@
   <string name="delete">Delete</string>
   <string name="Achievements">Achievements</string>
   <string name="Profile">Profile</string>
+  <string name="badges">Badges</string>
   <string name="statistics">Statistics</string>
   <string name="statistics_thanks">Thanks Received</string>
   <string name="statistics_featured">Featured Images</string>
   <string name="statistics_wikidata_edits">Images via \"Nearby Places\"</string>
-  <string name="level">Level</string>
+  <string name="level">Level %d</string>
+  <string name="profileLevel">%s (Level %s)</string>
   <string name="images_uploaded">Images Uploaded</string>
   <string name="image_reverts">Images Not Reverted</string>
   <string name="images_used_by_wiki">Images Used</string>
@@ -411,6 +416,7 @@
   <string name="map_application_missing">No compatible map application could be found on your device. Please install a map application to use this feature.</string>
   <string name="title_page_bookmarks_pictures">Pictures</string>
   <string name="title_page_bookmarks_locations">Locations</string>
+  <string name="title_page_bookmarks_categories">Categories</string>
   <string name="menu_bookmark">Add/Remove to bookmarks</string>
   <string name="provider_bookmarks">Bookmarks</string>
   <string name="bookmark_empty">You haven\'t added any bookmarks</string>
@@ -505,6 +511,7 @@ Upload your first media by tapping on the add button.</string>
   <string name="no_notification">You have no unread notifications</string>
   <string name="no_read_notification">You have no read notifications</string>
   <string name="share_logs_using">Share logs using</string>
+  <string name="check_your_email_inbox">Check your email inbox</string>
   <string name="menu_option_read">View read</string>
   <string name="menu_option_unread">View unread</string>
 
@@ -610,7 +617,8 @@ Upload your first media by tapping on the add button.</string>
   <string name="title_for_parent_classes">PARENT CLASSES</string>
 
   <string name="upload_nearby_place_found_title">Nearby Place Found</string>
-  <string name="upload_nearby_place_found_description">Is this a photo of %1$s?</string>
+  <string name="upload_nearby_place_found_description_plural">Are these pictures of %1$s?</string>
+  <string name="upload_nearby_place_found_description_singular">Is this a picture of %1$s?</string>
   <string name="title_app_shortcut_bookmark">Bookmarks</string>
   <string name="title_app_shortcut_setting">Settings</string>
   <string name="remove_bookmark">Removed from bookmarks</string>
@@ -737,7 +745,7 @@ Upload your first media by tapping on the add button.</string>
 
   <string name="contributions_of_user">Contributions of User: %s</string>
   <string name="achievements_of_user">Achievements of User: %s</string>
-  <string name="menu_view_user_page">View user page</string>
+  <string name="menu_view_user_page">View user profile</string>
   <string name="edit_depictions">Edit depictions</string>
   <string name="edit_categories">Edit categories</string>
   <string name="advanced_options">Advanced Options</string>
@@ -818,4 +826,50 @@ Upload your first media by tapping on the add button.</string>
     <item quantity="one">%d image selected</item>
     <item quantity="other">%d images selected</item>
   </plurals>
+  <string name="multiple_files_depiction">Please remember that all images in a multi-upload get the same categories and depictions. If the images do not share depictions and categories, please perform several separate uploads.</string>
+  <string name="multiple_files_depiction_header">Note about multi-uploads</string>
+  <string name="nearby_wikitalk">Report a problem about this item to Wikidata</string>
+  <string name="please_enter_some_comments">Please enter some comments</string>
+  <string name="talk">Talk</string>
+  <string name="write_something_about_the_item">Write something about the \'%1$s\' item. It will be publicly visible.</string>
+  <string name="does_not_exist_anymore_no_picture_can_ever_be_taken_of_it">\'%1$s\' does not exist anymore, no picture can ever be taken of it.</string>
+  <string name="is_at_a_different_place_please_specify_the_correct_place_below_if_possible_tell_us_the_correct_latitude_longitude">\'%1$s\' is at a different place. Please specify the correct place below, and if possible, write the correct latitude and longitude.</string>
+  <string name="other_problem_or_information_please_explain_below">Other problem or information (please explain below).</string>
+  <string name="feedback_destination_note">Your feedback gets posted to the following wiki page: <![CDATA[ <a href="https://commons.wikimedia.org/wiki/Commons:Mobile_app/Feedback">Commons:Mobile app/Feedback</a> ]]></string>
+  <string name="are_you_sure_that_you_want_cancel_all_the_uploads">Are you sure that you want cancel all the uploads?</string>
+  <string name="cancelling_all_the_uploads">Cancelling all the uploads...</string>
+  <string name="uploads">Uploads</string>
+  <string name="pending">Pending</string>
+  <string name="failed">Failed</string>
+  <string name="could_not_load_place_data">Could not load place data</string>
+
+  <string name="custom_selector_delete_folder">Delete Folder</string>
+  <string name="custom_selector_confirm_deletion_title">Confirm Deletion</string>
+  <string name="custom_selector_confirm_deletion_message">Are you sure you want to delete folder %1$s containing %2$d items?</string>
+  <string name="custom_selector_delete">Delete</string>
+  <string name="custom_selector_cancel">Cancel</string>
+  <string name="custom_selector_folder_deleted_success">Folder %1$s deleted successfully</string>
+  <string name="custom_selector_folder_deleted_failure">Failed to delete folder %1$s</string>
+  <string name="custom_selector_error_trashing_folder_contents">Error in trashing folder contents: %1$s</string>
+  <string name="custom_selector_folder_not_found_error">Failed to retrieve folder path for bucket ID: %1$d</string>
+
+  <string name="red_pin">This place has no picture yet, go take one!</string>
+  <string name="green_pin">This place has a picture already.</string>
+  <string name="grey_pin">Now checking whether this place has a picture.</string>
+
+  <string name="error_while_loading">Error while loading</string>
+  <string name="no_usages_found">No usages found</string>
+  <string name="usages_on_commons_heading">Commons</string>
+  <string name="usages_on_other_wikis_heading">Other wikis</string>
+  <string name="bullet_point">•</string>
+  <string name="file_usages_container_heading">File usages</string>
+  <string name="title_activity_single_web_view">SingleWebViewActivity</string>
+  <string name="account">Account</string>
+  <string name="vanish_account">Vanish Account</string>
+  <string name="account_vanish_request_confirm_title">Vanish account warning</string>
+  <string name="account_vanish_request_confirm"><![CDATA[Vanishing is a <b>last resort</b> and should <b>only be used when you wish to stop editing forever</b> and also to hide as many of your past associations as possible.<br/><br/>Account deletion on Wikimedia Commons is done by changing your account name to make it so others cannot recognize your contributions in a process called account vanishing. <b>Vanishing does not guarantee complete anonymity or remove contributions to the projects</b>.]]></string>
+  <string name="caption">Caption</string>
+  <string name="caption_copied_to_clipboard">Caption copied to clipboard</string>
+  <string name="congratulations_all_pictures_in_this_album_have_been_either_uploaded_or_marked_as_not_for_upload">Congratulations, all pictures in this album have been either uploaded or marked as not for upload.</string>
+
 </resources>

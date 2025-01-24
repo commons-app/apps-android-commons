@@ -5,42 +5,39 @@ import android.os.Parcelable
 
 private const val RESULT_SUCCESS = "Success"
 
-
 data class UploadResult(
     val result: String,
     val filekey: String,
     val offset: Int,
-    val filename: String
+    val filename: String,
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
-        parcel.readString()?:"",
-        parcel.readString()?:"",
-        parcel.readInt()?:0,
-        parcel.readString()?:""
+        parcel.readString() ?: "",
+        parcel.readString() ?: "",
+        parcel.readInt(),
+        parcel.readString() ?: "",
     ) {
     }
 
     fun isSuccessful(): Boolean = result == RESULT_SUCCESS
 
     fun createCanonicalFileName() = "File:$filename"
-    override fun writeToParcel(parcel: Parcel, flags: Int) {
+
+    override fun writeToParcel(
+        parcel: Parcel,
+        flags: Int,
+    ) {
         parcel.writeString(result)
         parcel.writeString(filekey)
         parcel.writeInt(offset)
         parcel.writeString(filename)
     }
 
-    override fun describeContents(): Int {
-        return 0
-    }
+    override fun describeContents(): Int = 0
 
     companion object CREATOR : Parcelable.Creator<UploadResult> {
-        override fun createFromParcel(parcel: Parcel): UploadResult {
-            return UploadResult(parcel)
-        }
+        override fun createFromParcel(parcel: Parcel): UploadResult = UploadResult(parcel)
 
-        override fun newArray(size: Int): Array<UploadResult?> {
-            return arrayOfNulls(size)
-        }
+        override fun newArray(size: Int): Array<UploadResult?> = arrayOfNulls(size)
     }
 }

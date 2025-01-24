@@ -156,8 +156,9 @@
   <string name="no_recent_searches">ထိုမ်ႏခါꩻမုꩻဖုံႏ အဝ်ႏတဝ်း</string>
   <string name="delete">ယားကုဲင်</string>
   <string name="statistics">စာႏရင်ꩻဖုံႏ</string>
-  <string name="level">အရန်း</string>
+  <string name="level" fuzzy="true">အရန်း</string>
   <string name="notifications_channel_name_all">ကောင်မွဥ်း ဖေႏသေချက်</string>
+  <string name="contributions_fragment">ခွုမ်မာꩻချက်ဖုံႏ</string>
   <string name="notifications">ဖေႏသေချက်ဖုံႏ</string>
   <string name="list_sheet">စာႏရင်ꩻ</string>
   <string name="next">လွေꩻငါ</string>
@@ -166,5 +167,5 @@
   <string name="exif_tag_name_author">တဲမ်းလိတ်သား</string>
   <string name="exif_tag_name_copyright">နမ်းပဲင်ႏခွင်ꩻမူ</string>
   <string name="exif_tag_name_cameraModel">ကဉ်မရာမော်ဒယ်</string>
-  <string name="menu_view_user_page">ထွား ကေားသုင်ꩻသားလိတ်မဲ့ငါ</string>
+  <string name="menu_view_user_page" fuzzy="true">ထွား ကေားသုင်ꩻသားလိတ်မဲ့ငါ</string>
 </resources>

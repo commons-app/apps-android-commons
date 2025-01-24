@@ -244,7 +244,7 @@
   <string name="skip_login">Gaŋim gaad</string>
   <string name="navigation_item_login">Kpɛn\'ɛm</string>
   <string name="skip_login_title" fuzzy="true">Fʋ sid bɔɔdi fʋ gaŋ kpɛn\'ɛbɔ?</string>
-  <string name="skip_login_message">Di nar ye fʋ kpɛn\' nya\'aŋi kpɛn\'ɛs footonam.</string>
+  <string name="skip_login_message" fuzzy="true">Di nar ye fʋ kpɛn\' nya\'aŋi kpɛn\'ɛs footonam.</string>
   <string name="login_alert_message">M bɛlimnɛ kpɛn\'ɛm pʋʋgin ka nɔk bʋnkaŋa tʋm</string>
   <string name="copy_wikicode">Kopim wikisɔbʋg la niŋ clipboard</string>
   <string name="nearby_directions">Suoya pa\'alʋg</string>
@@ -313,7 +313,7 @@
   <string name="statistics_thanks">Pʋ\'ʋsʋg di\'eya</string>
   <string name="statistics_featured">Footo banɛ nwɛn taaba</string>
   <string name="statistics_wikidata_edits">Footo banɛ dɔlis  zin\'ibanɛ bɛ yamma.</string>
-  <string name="level">Zi\'esim</string>
+  <string name="level" fuzzy="true">Zi\'esim</string>
   <string name="images_uploaded">Footonam kpɛn\'ɛya</string>
   <string name="image_reverts">Ba pʋ lɛbis Footo din aan si\'em</string>
   <string name="images_used_by_wiki">Footonam tʋmya</string>
@@ -485,7 +485,7 @@
   <string name="title_for_child_classes">CHILD\n CLASSES</string>
   <string name="title_for_parent_classes">PARENT CLASSES</string>
   <string name="upload_nearby_place_found_title">Gban\'e zin\'ibanɛ bɛ yamma</string>
-  <string name="upload_nearby_place_found_description">Nɛ\' anɛ %1$s footo?</string>
+  <string name="upload_nearby_place_found_description_singular" fuzzy="true">Nɛ\' anɛ %1$s footo?</string>
   <string name="title_app_shortcut_bookmark">Bookmark nam</string>
   <string name="title_app_shortcut_setting">Maalʋg</string>
   <string name="remove_bookmark">Yisi yi Bookmarknamin</string>
@@ -577,7 +577,7 @@
   <string name="read_phone_state_permission_message">Map banɛ bɛ yamma bɔɔd ye ba karim Moba zi\'esim ka nyaŋi tʋm sʋ\'ʋŋa</string>
   <string name="contributions_of_user">Tʋmtʋm tʋʋma: %s</string>
   <string name="achievements_of_user">Tʋmtʋm nyɔɔd: %s</string>
-  <string name="menu_view_user_page">Gɔsim tʋmtʋm lakir zin\'ig</string>
+  <string name="menu_view_user_page" fuzzy="true">Gɔsim tʋmtʋm lakir zin\'ig</string>
   <string name="edit_depictions">Dɛmisim nwɛnnɛmnam</string>
   <string name="edit_categories">Dɛmisim buudinam</string>
   <string name="advanced_options">Tuon ken gaansʋg</string>

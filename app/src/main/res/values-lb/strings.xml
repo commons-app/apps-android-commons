@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* GilPe
 * Les Meloures
 * Robby
 * Soued031
@@ -15,9 +16,9 @@
   <string name="add_new_contribution">Neie Bäitrag derbäiasetzen</string>
   <string name="add_contribution_from_camera">Bäitrag vun der Kamera derbäisetzen</string>
   <string name="add_contribution_from_photos">Bäitrag vun de Fotoen derbäisetzen</string>
-  <string name="show_captions">Beschreiwungen</string>
+  <string name="show_captions">Beschrëftungen</string>
   <string name="row_item_language_description">Sprooch-Beschreiwung</string>
-  <string name="row_item_caption">Beschreiwung</string>
+  <string name="row_item_caption">Beschrëftung</string>
   <string name="show_captions_description">Beschreiwung</string>
   <string name="nearby_row_image">Bild</string>
   <string name="nearby_all">All</string>
@@ -49,7 +50,6 @@
   <string name="preference_category_feedback">Feedback</string>
   <string name="preference_category_privacy">Dateschutz</string>
   <string name="app_name">Commons</string>
-  <string name="bullet">•</string>
   <string name="menu_settings">Astellungen</string>
   <string name="intent_share_upload_label">Op Commons eroplueden</string>
   <string name="upload_in_progress">Eroplueden amgaang</string>
@@ -61,18 +61,21 @@
   <string name="signup">Schreift Iech an</string>
   <string name="logging_in_title">Aloggen</string>
   <string name="logging_in_message">Waart wgl. …</string>
+  <string name="updating_caption_title">Beschrëftungen a Beschreiwungen aktualiséieren</string>
   <string name="updating_caption_message">Waart wgl. ...</string>
   <string name="login_success">Umeldung huet geklappt!</string>
   <string name="login_failed">D\'Aloggen huet net funktionéiert!</string>
   <string name="upload_failed">Fichier net fonnt. Probéiert wgl. en anere Fichier.</string>
+  <string name="unrestricted_battery_mode">Batterieoptiméierung deaktivieren?</string>
   <string name="authentication_failed">D\'Authentifizéierung huet net funktionéiert. Loggt Iech wgl. nach eng Kéier an.</string>
   <string name="uploading_started">D\'Eroplueden huet ugefaang!</string>
   <string name="upload_completed_notification_title">%1$s eropgelueden!</string>
   <string name="upload_completed_notification_text">Dréckt fir de Fichier ze gesinn deen Dir eropgelueden hutt</string>
   <string name="upload_progress_notification_title_start">Fichier eroplueden: %s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s gëtt eropgelueden</string>
-  <string name="upload_progress_notification_title_finishing">Eroplueden vu(n) %1$s ofschléissen</string>
+  <string name="upload_progress_notification_title_finishing">Eropluede vu(n) %1$s ofschléissen</string>
   <string name="upload_failed_notification_title">%1$s konnt net eropgeluede ginn</string>
+  <string name="upload_paused_notification_title">Eropluede vu(n) %1$s pauséiert</string>
   <string name="upload_failed_notification_subtitle">Dréckt fir nach eng Kéier ze probéieren</string>
   <string name="upload_paused_notification_subtitle">Tippe fir ze kucken</string>
   <string name="title_activity_contributions">Meng rezent eropgeluede Fichieren</string>
@@ -84,12 +87,18 @@
   <string name="menu_from_camera">Foto maachen</string>
   <string name="menu_nearby">Nobäi</string>
   <string name="provider_contributions">Meng eropgeluede Fichieren</string>
+  <string name="menu_copy_link">Link kopéieren</string>
+  <string name="menu_link_copied">De Link gouf an den Tëschespäicher kopéiert</string>
   <string name="menu_share">Deelen</string>
-  <string name="share_title_hint">Erklärung (Obligatoresch)</string>
+  <string name="menu_view_file_page">Fichierssäit weisen</string>
+  <string name="share_title_hint">Beschrëftung (obligatoresch)</string>
+  <string name="add_caption_toast">Gitt wgl. eng Beschrëftung fir dëse Fichier un</string>
   <string name="share_description_hint">Beschreiwung</string>
+  <string name="share_caption_hint">Beschrëftung</string>
   <string name="login_failed_network">Aloggen huet net funktionéiert – Problemer mam Reseau</string>
   <string name="login_failed_throttled">Ze dacks ouni Succès probéiert. Probéiert wgl. an e puer Minutten nach eng Kéier.</string>
   <string name="login_failed_blocked">Pardon, dëse Benotzer ass op Commons gespaart</string>
+  <string name="login_failed_2fa_needed">Dir musst de Code vun Ärer Zwee-Facteur-Authentifizéierung uginn.</string>
   <string name="login_failed_generic">Aloggen huet net funktionéiert</string>
   <string name="share_upload_button">Eroplueden</string>
   <string name="multiple_share_base_title">Gitt dëser Biller een Numm</string>
@@ -158,6 +167,7 @@
   <string name="detail_panel_cats_label">Kategorien</string>
   <string name="detail_panel_cats_loading">Lueden…</string>
   <string name="detail_panel_cats_none">Näischt ausgewielt</string>
+  <string name="detail_caption_empty">Keng Beschrëftung</string>
   <string name="detail_description_empty">Keng Beschreiwung</string>
   <string name="detail_discussion_empty">Keng Diskussioun</string>
   <string name="detail_license_empty">Onbekannt Lizenz</string>
@@ -169,6 +179,7 @@
   <string name="upload">Eroplueden</string>
   <string name="yes">Jo</string>
   <string name="no">Neen</string>
+  <string name="media_detail_caption">Beschrëftung</string>
   <string name="media_detail_title">Titel</string>
   <string name="media_detail_description">Beschreiwung</string>
   <string name="media_detail_discussion">Diskussioun</string>
@@ -228,6 +239,7 @@
   <string name="skip_login">Iwwersprangen</string>
   <string name="navigation_item_login">Aloggen</string>
   <string name="skip_login_title">Wëllt Dir wierklech d\'Aloggen iwwersprangen?</string>
+  <string name="skip_login_message">An Zukunft musst Dir Iech alogge fir Biller eropzelueden.</string>
   <string name="login_alert_message">Mellt Iech wgl. u fir dës Funktioun ze benotzen</string>
   <string name="copy_wikicode">De Wikitext an den Tëschespäicher kopéieren</string>
   <string name="wikicode_copied">De Wikitext gouf an den Tëschespäicher kopéiert</string>
@@ -267,7 +279,7 @@
   <string name="explore_tab_title_mobile">mobil eropgelueden</string>
   <string name="explore_tab_title_map">Kaart</string>
   <string name="successful_wikidata_edit">Bild bei %1$s op Wikidata derbäigesat!</string>
-  <string name="wikidata_edit_failure">Déi entspriechend Wikidata-Entitéit konnt net aktualiséiert ginn!</string>
+  <string name="wikidata_edit_failure">Den entspriechende Wikidata-Objet konnt net aktualiséiert ginn!</string>
   <string name="menu_set_wallpaper">Als Hannergrondbild festleeën</string>
   <string name="wallpaper_set_successfully">Hannergrondbild festgeluecht</string>
   <string name="quiz">Quiz</string>
@@ -289,7 +301,8 @@
   <string name="statistics">Statistiken</string>
   <string name="statistics_thanks">Mercie kritt</string>
   <string name="statistics_featured">Bemierkenswäert Biller</string>
-  <string name="level">Niveau</string>
+  <string name="level">Niveau %d</string>
+  <string name="profileLevel">%s (Niveau %s)</string>
   <string name="images_uploaded">Eropgeluede Biller</string>
   <string name="image_reverts">Biller net zréckgesat</string>
   <string name="images_used_by_wiki">Benotzte Biller</string>
@@ -306,6 +319,7 @@
   <string name="previous">Vireg</string>
   <string name="title_page_bookmarks_pictures">Biller</string>
   <string name="title_page_bookmarks_locations">Plazen</string>
+  <string name="title_page_bookmarks_categories">Kategorien</string>
   <string name="provider_bookmarks">Lieszeechen</string>
   <string name="bookmark_empty">Dir hutt keng Lieszeechen derbäigesat</string>
   <string name="provider_bookmarks_location">Lieszeechen</string>
@@ -378,8 +392,12 @@
   <string name="category_edit_helper_edit_message_else">Kategorie konnten net derbäigesat ginn.</string>
   <string name="category_edit_button_text">Kategorien aktualiséieren</string>
   <string name="coordinates_edit_helper_show_edit_title">Aktualiséierung vun de Koordinaten</string>
+  <string name="caption_edit_helper_show_edit_title">Aktualiséierung vun der Beschrëftung</string>
   <string name="coordinates_edit_helper_show_edit_title_success">Succès</string>
   <string name="coordinates_edit_helper_show_edit_message">Koordinaten %1$s ginn derbäigesat.</string>
+  <string name="caption_edit_helper_show_edit_message">D\'Beschrëftung gouf derbäigesat.</string>
+  <string name="caption_edit_helper_edit_message_else">D\'Beschrëftung konnt net derbäigesat ginn.</string>
+  <string name="description_activity_title">Beschreiwungen a Beschrëftungen änneren</string>
   <string name="share_image_via">Bild deelen iwwer</string>
   <string name="you_have_no_achievements_yet">Dir hutt nach keng Kontributioune gemaach</string>
   <string name="no_achievements_yet">%s huet nach keng Kontributioune gemaach</string>
@@ -393,7 +411,8 @@
   <string name="nearby_search_hint">Bréck, Musée, Hotel etc.</string>
   <string name="you_must_reset_your_passsword">Beim Aloggen ass eppes schif gaang. Dir musst Äert Passwuert zrécksetzen!</string>
   <string name="upload_nearby_place_found_title">Plaz nobäi fonnt</string>
-  <string name="upload_nearby_place_found_description">Ass dëst eng Foto vun %1$s?</string>
+  <string name="upload_nearby_place_found_description_plural">Sinn dëst Biller vun %1$s?</string>
+  <string name="upload_nearby_place_found_description_singular">Ass dëst e Bild vun %1$s?</string>
   <string name="title_app_shortcut_bookmark">Lieszeechen</string>
   <string name="title_app_shortcut_setting">Astellungen</string>
   <string name="remove_bookmark">Vun de Lieszeechen ewechgeholl</string>
@@ -447,6 +466,7 @@
   <string name="cancel_upload">Eroplueden ofbriechen</string>
   <string name="menu_view_category_page">Kategoriesäit weisen</string>
   <string name="app_ui_language">Sprooch vum Interface vum Benotzer vun der App</string>
+  <string name="remove">Hëlt eng Beschrëftung a Beschreiwung ewech</string>
   <string name="read_help_link">Liest méi</string>
   <string name="media_detail_in_all_languages">An alle Sproochen</string>
   <string name="choose_a_location">Eng Plaz eraussichen</string>
@@ -467,7 +487,7 @@
   <string name="need_permission">Autorisatioun gëtt gebraucht</string>
   <string name="contributions_of_user">Kontributioune vum Benotzer: %s</string>
   <string name="achievements_of_user">Leeschtunge vum Benotzer: %s</string>
-  <string name="menu_view_user_page">Benotzersäit weisen</string>
+  <string name="menu_view_user_page">Benotzerprofil weisen</string>
   <string name="edit_categories">Kategorien änneren</string>
   <string name="advanced_options">Erweidert Optiounen</string>
   <string name="advanced_query_info_text">Dir kënnt d\'Nobäi-Ufroen upassen. Falls Dir eng Feelermeldung kritt, setzt zeréck a probéiert nach eng Kéier.</string>
@@ -485,15 +505,36 @@
   <string name="report_user">Dëse Benotzer mellen</string>
   <string name="report_content">Dësen Inhalt mellen</string>
   <string name="request_user_block">Ufroe fir dëse Benotzer ze spären</string>
+  <string name="learn_how_to_write_a_useful_caption">Léiert, wéi een nëtzlech Beschrëftunge schreift</string>
+  <string name="edit_image">Bild änneren</string>
+  <string name="edit_location">Plaz änneren</string>
   <string name="location_updated">Plaz aktualiséiert!</string>
   <string name="remove_location">Plaz ewechhuelen</string>
   <string name="remove_location_warning_title">Plaz-Ewechhuele-Warnung</string>
   <string name="remove_location_warning_desc">Duerch Plaze sinn d\'Biller méi nëtzlech a besser sichbar. Wëllt Dir wierklech d\'Plaz vun dësem Bild ewechhuelen?</string>
   <string name="location_removed">Plat ewechgeholl!</string>
+  <string name="send_thanks_to_author">Dem Auteur Merci soen</string>
+  <string name="error_sending_thanks">Feeler beim Schécke vun engem Merci un den Auteur.</string>
+  <string name="file_saved_successfully">Fichier erfollegräich gespäichert</string>
+  <string name="do_you_want_to_open_gpx_file">Wëllt Dir de GPW-Fichier opmaachen?</string>
+  <string name="do_you_want_to_open_kml_file">Wëllt Dir de KML-Fichier opmaachen?</string>
+  <string name="failed_to_save_kml_file">De KML-Fichier konnt net gespäichert ginn.</string>
+  <string name="failed_to_save_gpx_file">De GPX-Fichier konnt net gespäichert ginn.</string>
   <string name="saving_kml_file">KML-Fichier späicheren</string>
   <string name="saving_gpx_file">GPX-Fichier späicheren</string>
   <plurals name="custom_picker_images_selected_title_appendix">
     <item quantity="one">%d Bild ausgewielt</item>
     <item quantity="other">%d Biller ausgewielt</item>
   </plurals>
+  <string name="does_not_exist_anymore_no_picture_can_ever_be_taken_of_it">\'%1$s\' gëtt et net méi, et kann keng Foto méi dovunner gemaach ginn.</string>
+  <string name="custom_selector_confirm_deletion_title">Läsche confirméieren</string>
+  <string name="custom_selector_delete">Läschen</string>
+  <string name="custom_selector_cancel">Ofbriechen</string>
+  <string name="error_while_loading">Feeler beim Lueden</string>
+  <string name="usages_on_commons_heading">Commons</string>
+  <string name="usages_on_other_wikis_heading">Aner Wikien</string>
+  <string name="account">Kont</string>
+  <string name="vanish_account">Kont opléisen</string>
+  <string name="caption">Beschrëftung</string>
+  <string name="caption_copied_to_clipboard">Text an den Tëschespäicher kopéiert</string>
 </resources>

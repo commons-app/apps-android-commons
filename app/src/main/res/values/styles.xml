@@ -1,6 +1,6 @@
 <resources>
 
-    <style name="DarkAppTheme" parent="Theme.AppCompat.NoActionBar">
+    <style name="DarkAppTheme" parent="Theme.MaterialComponents.NoActionBar.Bridge">
         <item name="contributionsListBackground">@color/contributionListDarkBackground</item>
         <item name="tabBackground">@color/contributionListDarkBackground</item>
         <item name="tabIndicatorColor">@color/white</item>
@@ -20,6 +20,7 @@
         <item name="reviewHeading">@color/white</item>
         <item name="aboutIconsColor">@color/white</item>
         <item name="caption_description_text_color">@color/white</item>
+        <item name="android:statusBarColor">@color/main_background_dark</item>
 
         <item name="semitransparentText">@color/commons_app_blue_dark</item>
         <item name="subBackground">@color/sub_background_dark</item>
@@ -48,6 +49,7 @@
         <item name="more_bottom_sheet_style">@style/DarkMoreBottomSheetStyle</item>
         <item name="more_bottom_sheet_drawable_color">@color/white</item>
         <item name="card_item_color">@color/white</item>
+        <item name="upload_icon_drawable">@drawable/ic_upload_white_24dp</item>
         <item name="notification_icon_drawable">@drawable/ic_notifications_white_24dp</item>
         <item name="notification_icon_text_color">@color/white</item>
         <item name="toggle_theme">@style/SwitchThemeDark</item>
@@ -61,7 +63,7 @@
         <item name="android:splitMotionEvents">false</item>
     </style>
 
-    <style name="LightAppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="LightAppTheme" parent="Theme.MaterialComponents.Light.NoActionBar.Bridge">
         <item name="contributionsListBackground">@color/white</item>
         <item name="tabBackground">@color/card_light_grey</item>
         <item name="tabIndicatorColor">@color/primaryDarkColor</item>
@@ -72,6 +74,7 @@
         <item name="drawerHeaderBackground">@color/drawerHeader_background_light</item>
         <item name="tutorialBackground">@color/tutorial_background_light</item>
         <item name="icon">@color/secondaryTextColor</item>
+        <item name="colorPrimary">@color/primaryDarkColor</item>
         <item name="colorPrimaryDark">@color/primaryDarkColor</item>
         <item name="colorAccent">@color/primaryColor</item>
         <item name="colorButtonNormal">@color/primaryColor</item>
@@ -108,6 +111,7 @@
         <item name="more_bottom_sheet_style">@style/LightMoreBottomSheetStyle</item>
         <item name="more_bottom_sheet_drawable_color">@color/black</item>
         <item name="card_item_color">@color/primaryDarkColor</item>
+        <item name="upload_icon_drawable">@drawable/ic_upload_blue_24dp</item>
         <item name="notification_icon_drawable">@drawable/ic_notifications_blue_24dp</item>
         <item name="notification_icon_text_color">@color/primaryDarkColor</item>
         <item name="toggle_theme">@style/SwitchThemeLight</item>

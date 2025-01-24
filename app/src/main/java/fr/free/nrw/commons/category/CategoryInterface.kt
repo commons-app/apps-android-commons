@@ -17,11 +17,13 @@ interface CategoryInterface {
      * @param itemLimit How many results are returned
      * @return
      */
-    @GET("w/api.php?action=query&format=json&formatversion=2&generator=search&prop=description|pageimages&piprop=thumbnail&pithumbsize=70&gsrnamespace=14")
+    @GET(
+        "w/api.php?action=query&format=json&formatversion=2&generator=search&prop=description|pageimages&piprop=thumbnail&pithumbsize=70&gsrnamespace=14",
+    )
     fun searchCategories(
         @Query("gsrsearch") filter: String?,
         @Query("gsrlimit") itemLimit: Int,
-        @Query("gsroffset") offset: Int
+        @Query("gsroffset") offset: Int,
     ): Single<MwQueryResponse>
 
     /**
@@ -31,11 +33,13 @@ interface CategoryInterface {
      * @param itemLimit How many results are returned
      * @return
      */
-    @GET("w/api.php?action=query&format=json&formatversion=2&generator=allcategories&prop=categoryinfo|description|pageimages&piprop=thumbnail&pithumbsize=70")
+    @GET(
+        "w/api.php?action=query&format=json&formatversion=2&generator=allcategories&prop=categoryinfo|description|pageimages&piprop=thumbnail&pithumbsize=70",
+    )
     fun searchCategoriesForPrefix(
         @Query("gacprefix") prefix: String?,
         @Query("gaclimit") itemLimit: Int,
-        @Query("gacoffset") offset: Int
+        @Query("gacoffset") offset: Int,
     ): Single<MwQueryResponse>
 
     /**
@@ -47,23 +51,40 @@ interface CategoryInterface {
      * @param offset offset
      * @return MwQueryResponse
      */
-    @GET("w/api.php?action=query&format=json&formatversion=2&generator=allcategories&prop=categoryinfo|description|pageimages&piprop=thumbnail&pithumbsize=70")
+    @GET(
+        "w/api.php?action=query&format=json&formatversion=2&generator=allcategories&prop=categoryinfo|description|pageimages&piprop=thumbnail&pithumbsize=70",
+    )
     fun getCategoriesByName(
         @Query("gacfrom") startingCategory: String?,
         @Query("gacto") endingCategory: String?,
         @Query("gaclimit") itemLimit: Int,
-        @Query("gacoffset") offset: Int
+        @Query("gacoffset") offset: Int,
+    ): Single<MwQueryResponse>
+
+    /**
+     * Fetches non-hidden categories by titles.
+     *
+     * @param titles titles to fetch categories for (e.g. File:<P18 of a wikidata entity>)
+     * @param itemLimit How many categories to return
+     * @return MwQueryResponse
+     */
+    @GET(
+        "w/api.php?action=query&format=json&formatversion=2&generator=categories&prop=categoryinfo|description|pageimages&piprop=thumbnail&pithumbsize=70&gclshow=!hidden",
+    )
+    fun getCategoriesByTitles(
+        @Query("titles") titles: String?,
+        @Query("gcllimit") itemLimit: Int,
     ): Single<MwQueryResponse>
 
     @GET("w/api.php?action=query&format=json&formatversion=2&generator=categorymembers&gcmtype=subcat&prop=info&gcmlimit=50")
     fun getSubCategoryList(
         @Query("gcmtitle") categoryName: String,
-        @QueryMap(encoded = true) continuation: Map<String, String>
+        @QueryMap(encoded = true) continuation: Map<String, String>,
     ): Single<MwQueryResponse>
 
     @GET("w/api.php?action=query&format=json&formatversion=2&generator=categories&prop=info&gcllimit=50")
     fun getParentCategoryList(
         @Query("titles") categoryName: String?,
-        @QueryMap(encoded = true) continuation: Map<String, String>
+        @QueryMap(encoded = true) continuation: Map<String, String>,
     ): Single<MwQueryResponse>
 }

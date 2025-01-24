@@ -2,11 +2,13 @@ package fr.free.nrw.commons.nearby.contract;
 
 import android.content.Context;
 import androidx.annotation.Nullable;
+import androidx.lifecycle.LifecycleCoroutineScope;
 import fr.free.nrw.commons.BaseMarker;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType;
 import fr.free.nrw.commons.nearby.Label;
+import fr.free.nrw.commons.nearby.MarkerPlaceGroup;
 import fr.free.nrw.commons.nearby.Place;
 import java.util.List;
 
@@ -15,6 +17,8 @@ public interface NearbyParentFragmentContract {
     interface View {
 
         boolean isNetworkConnectionEstablished();
+
+        void updateSnackbar(boolean offlinePinsShown);
 
         void listOptionMenuItemClicked();
 
@@ -42,10 +46,6 @@ public interface NearbyParentFragmentContract {
 
         void hideBottomDetailsSheet();
 
-        void addSearchThisAreaButtonAction();
-
-        void setSearchThisAreaButtonVisibility(boolean isVisible);
-
         void setProgressBarVisibility(boolean isVisible);
 
         boolean isDetailsBottomSheetVisible();
@@ -72,12 +72,11 @@ public interface NearbyParentFragmentContract {
 
         Context getContext();
 
-        void updateMapMarkers(List<BaseMarker> BaseMarkers);
+        void replaceMarkerOverlays(List<MarkerPlaceGroup> markerPlaceGroups);
 
         void filterOutAllMarkers();
 
-        void filterMarkersByLabels(List<Label> selectedLabels, boolean existsSelected,
-            boolean needPhotoSelected, boolean wlmSelected, boolean filterForPlaceState,
+        void filterMarkersByLabels(List<Label> selectedLabels, boolean filterForPlaceState,
             boolean filterForAllNoneType);
 
         LatLng getCameraTarget();
@@ -94,9 +93,15 @@ public interface NearbyParentFragmentContract {
 
         LatLng getMapFocus();
 
+        LatLng getScreenTopRight();
+
+        LatLng getScreenBottomLeft();
+
         boolean isAdvancedQueryFragmentVisible();
 
         void showHideAdvancedQueryFragment(boolean shouldShow);
+
+        void stopQuery();
     }
 
     interface NearbyListView {
@@ -123,12 +128,14 @@ public interface NearbyParentFragmentContract {
         void filterByMarkerType(List<Label> selectedLabels, int state, boolean filterForPlaceState,
             boolean filterForAllNoneType);
 
-        void updateMapMarkersToController(List<BaseMarker> baseMarkers);
-
         void searchViewGainedFocus();
 
         void setCheckboxUnknown();
 
         void setAdvancedQuery(String query);
+
+        void toggleBookmarkedStatus(Place place);
+
+        void handleMapScrolled(LifecycleCoroutineScope scope, boolean isNetworkAvailable);
     }
 }

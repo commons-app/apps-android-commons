@@ -230,7 +230,7 @@
   <string name="skip_login">Omet</string>
   <string name="navigation_item_login">Inicia una sessió</string>
   <string name="skip_login_title" fuzzy="true">Realment voleu ometre l\'inici de sessió?</string>
-  <string name="skip_login_message">Caldrà que inicieu una sessió per carregar imatges en un futur.</string>
+  <string name="skip_login_message" fuzzy="true">Caldrà que inicieu una sessió per carregar imatges en un futur.</string>
   <string name="login_alert_message">Inicieu una sessió per utilitzar aquesta característica</string>
   <string name="copy_wikicode">Copia el wikitext al portaretalls</string>
   <string name="wikicode_copied">S\'ha copiat el wikitext al portaretalls</string>
@@ -303,7 +303,7 @@
   <string name="statistics_thanks">Agraïments rebuts</string>
   <string name="statistics_featured">Imatges destacades</string>
   <string name="statistics_wikidata_edits">Imatges per proximitat</string>
-  <string name="level">Nivell</string>
+  <string name="level" fuzzy="true">Nivell</string>
   <string name="images_uploaded">Imatges carregades</string>
   <string name="image_reverts">Imatges no revertides</string>
   <string name="images_used_by_wiki">Imatges utilitzades</string>

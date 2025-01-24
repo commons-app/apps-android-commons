@@ -2,6 +2,7 @@
 <!-- Authors:
 * Eleassar
 * HairyFotr
+* Kaartic
 * McDutchie
 * Upwinxp
 -->
@@ -76,7 +77,6 @@
   <string name="preference_category_feedback">Povratne informacije</string>
   <string name="preference_category_privacy">Zasebnost</string>
   <string name="app_name">Zbirka</string>
-  <string name="bullet">•</string>
   <string name="menu_settings">Nastavitve</string>
   <string name="intent_share_upload_label">Naloži v Zbirko</string>
   <string name="upload_in_progress">Nalaganje poteka</string>
@@ -111,7 +111,7 @@
   <string name="title_activity_contributions">Moje nedavne naložitve</string>
   <string name="contribution_state_queued">V čakalni vrsti</string>
   <string name="contribution_state_failed">Spodletelo</string>
-  <string name="contribution_state_in_progress">Opravljeno %1$d%&amp;nbsp;% nalaganja</string>
+  <string name="contribution_state_in_progress">Opravljeno %1$d%&amp;nbsp;%% nalaganja</string>
   <string name="contribution_state_starting">Nalagam</string>
   <string name="menu_from_gallery">Iz galerije</string>
   <string name="menu_from_camera">Posnemi fotografijo</string>
@@ -285,7 +285,7 @@
   <string name="skip_login">Preskoči</string>
   <string name="navigation_item_login">Prijava</string>
   <string name="skip_login_title" fuzzy="true">Ali res želite preskočiti prijavo?</string>
-  <string name="skip_login_message">V prihodnosti se boste morali za nalaganje slik prijaviti.</string>
+  <string name="skip_login_message" fuzzy="true">V prihodnosti se boste morali za nalaganje slik prijaviti.</string>
   <string name="login_alert_message">Za uporabo te možnosti se prijavite</string>
   <string name="copy_wikicode">Kopiraj vikibesedilo v odložišče</string>
   <string name="wikicode_copied">Vikibesedilo je skopirano v odložišče</string>
@@ -375,7 +375,7 @@
   <string name="statistics_thanks">Prejete zahvale</string>
   <string name="statistics_featured">Izbrane slike</string>
   <string name="statistics_wikidata_edits">Slike iz »Bližnji kraji«</string>
-  <string name="level">Raven</string>
+  <string name="level" fuzzy="true">Raven</string>
   <string name="images_uploaded">Naložene slike</string>
   <string name="image_reverts">Nevrnjene slike</string>
   <string name="images_used_by_wiki">Uporabljene slike</string>
@@ -586,7 +586,7 @@
   <string name="title_for_child_classes">PODREJENI RAZREDI</string>
   <string name="title_for_parent_classes">NADREJENI RAZREDI</string>
   <string name="upload_nearby_place_found_title">Najden bližnji kraj</string>
-  <string name="upload_nearby_place_found_description">Ali je to fotografija kraja %1$s?</string>
+  <string name="upload_nearby_place_found_description_singular" fuzzy="true">Ali je to fotografija kraja %1$s?</string>
   <string name="title_app_shortcut_bookmark">Zaznamki</string>
   <string name="title_app_shortcut_setting">Nastavitve</string>
   <string name="remove_bookmark">Odstranjeno iz zaznamkov</string>
@@ -704,7 +704,7 @@
   <string name="read_phone_state_permission_message">Bližnji zemljevidi morajo za pravilno delovanje prebrati STANJE TELEFONA</string>
   <string name="contributions_of_user">Prispevki uporabnika: %s</string>
   <string name="achievements_of_user">Dosežki uporabnika: %s</string>
-  <string name="menu_view_user_page">Ogled uporabniške strani</string>
+  <string name="menu_view_user_page" fuzzy="true">Ogled uporabniške strani</string>
   <string name="edit_depictions">Uredi slike</string>
   <string name="edit_categories">Uredi kategorije</string>
   <string name="advanced_options">Napredne možnosti</string>
@@ -770,4 +770,5 @@
     <item quantity="few">%d izbranih slik</item>
     <item quantity="other">%d izbranih slik</item>
   </plurals>
+  <string name="is_at_a_different_place_please_specify_the_correct_place_below_if_possible_tell_us_the_correct_latitude_longitude">»%1$s« je na drugem kraju. Spodaj navedite pravi kraj in, če je mogoče, napišite pravilno zemljepisno širino in dolžino.</string>
 </resources>

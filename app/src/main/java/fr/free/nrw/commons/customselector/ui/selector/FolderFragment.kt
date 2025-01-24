@@ -9,10 +9,10 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import fr.free.nrw.commons.customselector.helper.ImageHelper
-import fr.free.nrw.commons.customselector.model.Result
 import fr.free.nrw.commons.customselector.listeners.FolderClickListener
 import fr.free.nrw.commons.customselector.model.CallbackStatus
 import fr.free.nrw.commons.customselector.model.Folder
+import fr.free.nrw.commons.customselector.model.Result
 import fr.free.nrw.commons.customselector.ui.adapter.FolderAdapter
 import fr.free.nrw.commons.databinding.FragmentCustomSelectorBinding
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment
@@ -24,12 +24,11 @@ import javax.inject.Inject
  * Custom selector folder fragment.
  */
 class FolderFragment : CommonsDaggerSupportFragment() {
-
     /**
      * ViewBinding
      */
     private var _binding: FragmentCustomSelectorBinding? = null
-    private val binding get() = _binding
+    val binding get() = _binding
 
     /**
      * View Model for images.
@@ -53,6 +52,7 @@ class FolderFragment : CommonsDaggerSupportFragment() {
 
     var mediaClient: MediaClient? = null
         @Inject set
+
     /**
      * Folder Adapter.
      */
@@ -66,15 +66,13 @@ class FolderFragment : CommonsDaggerSupportFragment() {
     /**
      * Folder List.
      */
-    private lateinit var folders : ArrayList<Folder>
+    private lateinit var folders: ArrayList<Folder>
 
     /**
      * Companion newInstance.
      */
-    companion object{
-        fun newInstance(): FolderFragment {
-            return FolderFragment()
-        }
+    companion object {
+        fun newInstance(): FolderFragment = FolderFragment()
     }
 
     /**
@@ -83,21 +81,24 @@ class FolderFragment : CommonsDaggerSupportFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        viewModel = ViewModelProvider(requireActivity(),customSelectorViewModelFactory!!).get(CustomSelectorViewModel::class.java)
-
+        viewModel = ViewModelProvider(requireActivity(), customSelectorViewModelFactory!!).get(CustomSelectorViewModel::class.java)
     }
 
     /**
      * OnCreateView.
      * Inflate Layout, init adapter, init gridLayoutManager, setUp recycler view, observe the view model for result.
      */
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
+    ): View? {
         _binding = FragmentCustomSelectorBinding.inflate(inflater, container, false)
         folderAdapter = FolderAdapter(requireActivity(), activity as FolderClickListener)
         gridLayoutManager = GridLayoutManager(context, columnCount())
         selectorRV = binding?.selectorRv
         loader = binding?.loader
-        with(binding?.selectorRv){
+        with(binding?.selectorRv) {
             this?.layoutManager = gridLayoutManager
             this?.setHasFixedSize(true)
             this?.adapter = folderAdapter
@@ -114,12 +115,15 @@ class FolderFragment : CommonsDaggerSupportFragment() {
      * Load adapter.
      */
     private fun handleResult(result: Result) {
-        if(result.status is CallbackStatus.SUCCESS){
+        if (result.status is CallbackStatus.SUCCESS) {
             val images = result.images
-            if(images.isNullOrEmpty())
-            {
+            if (images.isEmpty()) {
                 binding?.emptyText?.let {
                     it.visibility = View.VISIBLE
+                }
+            } else {
+                binding?.emptyText?.let {
+                    it.visibility = View.GONE
                 }
             }
             folders = ImageHelper.folderListFromImages(result.images)

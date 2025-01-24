@@ -1,6 +1,5 @@
 package fr.free.nrw.commons.nearby
 
-import android.app.AlertDialog
 import android.content.Context
 import android.content.res.Configuration
 import android.net.Uri
@@ -24,9 +23,9 @@ import fr.free.nrw.commons.BaseMarker
 import fr.free.nrw.commons.OkHttpConnectionFactory
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestCommonsApplication
-import fr.free.nrw.commons.createTestClient
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao
 import fr.free.nrw.commons.contributions.MainActivity
+import fr.free.nrw.commons.createTestClient
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.location.LocationServiceManager
 import fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType
@@ -39,7 +38,9 @@ import org.junit.Ignore
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
-import org.mockito.Mockito.*
+import org.mockito.Mockito.mock
+import org.mockito.Mockito.times
+import org.mockito.Mockito.`when`
 import org.mockito.MockitoAnnotations
 import org.osmdroid.util.GeoPoint
 import org.powermock.reflect.Whitebox
@@ -49,14 +50,12 @@ import org.robolectric.Shadows
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
 import org.robolectric.shadows.ShadowActivity
-import org.robolectric.shadows.ShadowAlertDialog
 import java.lang.reflect.Method
 
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
 @LooperMode(LooperMode.Mode.PAUSED)
 class NearbyParentFragmentUnitTest {
-
     @Mock
     private lateinit var mapView: org.osmdroid.views.MapView
 
@@ -165,51 +164,59 @@ class NearbyParentFragmentUnitTest {
         Whitebox.setInternalState(
             fragment,
             "nearbyParentFragmentInstanceReadyCallback",
-            nearbyParentFragmentInstanceReadyCallback
+            nearbyParentFragmentInstanceReadyCallback,
         )
     }
 
     @Test @Ignore
     @Throws(Exception::class)
     fun `Start map without gps test when last location known`() {
-        val method: Method = NearbyParentFragment::class.java.getDeclaredMethod(
-            "startMapWithCondition",
-            String::class.java
-        )
+        val method: Method =
+            NearbyParentFragment::class.java.getDeclaredMethod(
+                "startMapWithCondition",
+                String::class.java,
+            )
         method.isAccessible = true
         method.invoke(fragment, "Without GPS")
         verify(applicationKvStore, times(1)).getString("LastLocation")
         verify(presenter, times(1)).onMapReady()
-        val position = GeoPoint(51.50550,
-            -0.07520)
+        val position =
+            GeoPoint(
+                51.50550,
+                -0.07520,
+            )
         verify(mapView, times(1))
-            .controller.animateTo(position)
+            .controller
+            .animateTo(position)
     }
 
     @Test @Ignore
     @Throws(Exception::class)
     fun `Start map without gps test when last location unknown`() {
         `when`(applicationKvStore.getString("LastLocation")).thenReturn("23.76,56.876")
-        val method: Method = NearbyParentFragment::class.java.getDeclaredMethod(
-            "startMapWithCondition",
-            String::class.java
-        )
+        val method: Method =
+            NearbyParentFragment::class.java.getDeclaredMethod(
+                "startMapWithCondition",
+                String::class.java,
+            )
         method.isAccessible = true
         method.invoke(fragment, "Without GPS")
         verify(applicationKvStore, times(2)).getString("LastLocation")
         verify(presenter, times(1)).onMapReady()
-        val position = GeoPoint(23.76,56.876)
+        val position = GeoPoint(23.76, 56.876)
         verify(mapView, times(1))
-            .controller.animateTo(position)
+            .controller
+            .animateTo(position)
     }
 
     @Test @Ignore
     @Throws(Exception::class)
     fun `Start map without location permission test when last location known`() {
-        val method: Method = NearbyParentFragment::class.java.getDeclaredMethod(
-            "startMapWithCondition",
-            String::class.java
-        )
+        val method: Method =
+            NearbyParentFragment::class.java.getDeclaredMethod(
+                "startMapWithCondition",
+                String::class.java,
+            )
         method.isAccessible = true
         method.invoke(fragment, "Without Permission")
         verify(applicationKvStore, times(1)).getString("LastLocation")
@@ -222,34 +229,17 @@ class NearbyParentFragmentUnitTest {
     @Throws(Exception::class)
     fun `Start map without location permission test when last location unknown`() {
         `when`(applicationKvStore.getString("LastLocation")).thenReturn("23.76,56.876")
-        val method: Method = NearbyParentFragment::class.java.getDeclaredMethod(
-            "startMapWithCondition",
-            String::class.java
-        )
+        val method: Method =
+            NearbyParentFragment::class.java.getDeclaredMethod(
+                "startMapWithCondition",
+                String::class.java,
+            )
         method.isAccessible = true
         method.invoke(fragment, "Without Permission")
         verify(applicationKvStore, times(2)).getString("LastLocation")
         verify(applicationKvStore, times(1))
             .putBoolean("doNotAskForLocationPermission", true)
         verify(presenter, times(1)).onMapReady()
-    }
-
-    @Test @Ignore
-    @Throws(Exception::class)
-    fun testOnToggleChipsClickedCaseVisible() {
-        `when`(view.visibility).thenReturn(View.VISIBLE)
-        fragment.onToggleChipsClicked()
-        verify(view).visibility = View.GONE
-        verify(ivToggleChips).rotation = ivToggleChips.rotation + 180
-    }
-
-    @Test @Ignore
-    @Throws(Exception::class)
-    fun testOnToggleChipsClickedCaseNotVisible() {
-        `when`(view.visibility).thenReturn(View.GONE)
-        fragment.onToggleChipsClicked()
-        verify(view).visibility = View.VISIBLE
-        verify(ivToggleChips).rotation = ivToggleChips.rotation + 180
     }
 
     @Test @Ignore
@@ -274,20 +264,22 @@ class NearbyParentFragmentUnitTest {
     @Throws(Exception::class)
     fun testSetNearbyParentFragmentInstanceReadyCallback() {
         fragment.setNearbyParentFragmentInstanceReadyCallback(
-            nearbyParentFragmentInstanceReadyCallback
+            nearbyParentFragmentInstanceReadyCallback,
         )
         Assert.assertEquals(
             nearbyParentFragmentInstanceReadyCallback,
-            nearbyParentFragmentInstanceReadyCallback
+            nearbyParentFragmentInstanceReadyCallback,
         )
     }
 
     @Test @Ignore
     @Throws(Exception::class)
     fun testSetUserVisibleHintCaseFalse() {
-        val method: Method = NearbyParentFragment::class.java.getDeclaredMethod(
-            "setUserVisibleHint", Boolean::class.java
-        )
+        val method: Method =
+            NearbyParentFragment::class.java.getDeclaredMethod(
+                "setUserVisibleHint",
+                Boolean::class.java,
+            )
         method.isAccessible = true
         method.invoke(fragment, false)
         verify(bottomSheetBehavior, times(2)).state = BottomSheetBehavior.STATE_HIDDEN
@@ -297,9 +289,11 @@ class NearbyParentFragmentUnitTest {
     @Throws(Exception::class)
     fun testSetUserVisibleHintCaseTrue() {
         Whitebox.setInternalState(fragment, "mState", 4)
-        val method: Method = NearbyParentFragment::class.java.getDeclaredMethod(
-            "setUserVisibleHint", Boolean::class.java
-        )
+        val method: Method =
+            NearbyParentFragment::class.java.getDeclaredMethod(
+                "setUserVisibleHint",
+                Boolean::class.java,
+            )
         method.isAccessible = true
         method.invoke(fragment, true)
     }
@@ -331,7 +325,7 @@ class NearbyParentFragmentUnitTest {
     @Throws(Exception::class)
     fun testOnDestroy() {
         fragment.onDestroy()
-        verify(wikidataEditListener).setAuthenticationStateListener(null)
+        verify(wikidataEditListener).authenticationStateListener = null
     }
 
     @Test @Ignore
@@ -378,5 +372,4 @@ class NearbyParentFragmentUnitTest {
         val shadowActivity: ShadowActivity = Shadows.shadowOf(activity)
         Assert.assertEquals(shadowActivity.nextStartedActivityForResult, null)
     }
-
 }

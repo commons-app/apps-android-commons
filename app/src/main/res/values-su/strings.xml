@@ -60,7 +60,6 @@
   <string name="preference_category_feedback">Eupan balik</string>
   <string name="preference_category_privacy">Privasi</string>
   <string name="app_name">Commons</string>
-  <string name="bullet">•</string>
   <string name="menu_settings">Séting</string>
   <string name="intent_share_upload_label">Unjal ka Commons</string>
   <string name="username">Sandiasma</string>
@@ -262,7 +261,7 @@
   <string name="skip_login">Liwatan</string>
   <string name="navigation_item_login">Asup log</string>
   <string name="skip_login_title" fuzzy="true">Anjeun yakin rék ngaliwatan asup log?</string>
-  <string name="skip_login_message">Anjeun kudu asup log pikeun ngunjal gambar engké mah.</string>
+  <string name="skip_login_message" fuzzy="true">Anjeun kudu asup log pikeun ngunjal gambar engké mah.</string>
   <string name="login_alert_message">Mangga asup log pikeun maké ieu fitur</string>
   <string name="copy_wikicode">Tiron wikitéks kana papan klip</string>
   <string name="wikicode_copied">Wikitéks geus ditiron kana papan klip</string>
@@ -334,7 +333,7 @@
   <string name="statistics_thanks">Panuhun Katampa</string>
   <string name="statistics_featured">Gambar petingan</string>
   <string name="statistics_wikidata_edits">Gambar liwat \"Tempat Sabudeureun\"</string>
-  <string name="level">Tingkat</string>
+  <string name="level" fuzzy="true">Tingkat</string>
   <string name="images_uploaded">Gambar Diunjal</string>
   <string name="image_reverts">Gambar Teu Dibalikkeun</string>
   <string name="images_used_by_wiki">Gambar Dipaké</string>

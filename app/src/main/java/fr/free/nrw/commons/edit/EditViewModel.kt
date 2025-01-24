@@ -9,8 +9,7 @@ import java.io.File
  * This ViewModel class is responsible for managing image editing operations, such as
  * rotating images. It utilizes a TransformImage implementation to perform image transformations.
  */
-class EditViewModel() : ViewModel() {
-
+class EditViewModel : ViewModel() {
     // Ideally should be injected using DI
     private val transformImage: TransformImage = TransformImageImpl()
 
@@ -21,7 +20,8 @@ class EditViewModel() : ViewModel() {
      * @param imageFile The File representing the image to be rotated.
      * @return The rotated image File, or null if the rotation operation fails.
      */
-    fun rotateImage(degree: Int, imageFile: File): File? {
-        return transformImage.rotateImage(imageFile, degree)
-    }
+    fun rotateImage(
+        degree: Int,
+        imageFile: File,
+    ): File? = transformImage.rotateImage(imageFile, degree)
 }
