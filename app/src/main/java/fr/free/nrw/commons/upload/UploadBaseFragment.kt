@@ -8,7 +8,7 @@ import fr.free.nrw.commons.di.CommonsDaggerSupportFragment
 abstract class UploadBaseFragment : CommonsDaggerSupportFragment() {
     var callback: Callback? = null
 
-    protected open fun onBecameVisible() = Unit
+    open fun onBecameVisible() = Unit
 
     interface Callback {
         val totalNumberOfSteps: Int

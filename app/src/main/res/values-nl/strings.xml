@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
 * A67-A67
+* ABPMAB
 * Bouman4
 * Ciell
 * Dutchy45
@@ -299,6 +300,7 @@
   <string name="copy_wikicode">Kopieer de wikitekst naar het klembord</string>
   <string name="wikicode_copied">De wikitekst is gekopieerd naar het klembord</string>
   <string name="nearby_location_not_available">In de buurt werkt mogelijk niet naar behoren. Locatie niet beschikbaar.</string>
+  <string name="nearby_showing_pins_offline">Internet niet beschikbaar. Alleen gecachte plaatsen worden getoond.</string>
   <string name="upload_location_access_denied">Locatietoegang geweigerd. Stel uw locatie handmatig in om deze functie te gebruiken.</string>
   <string name="location_permission_rationale_nearby">Toestemming vereist om een lijst van nabije plaatsen weer te geven</string>
   <string name="location_permission_rationale_explore">Toestemming vereist om een lijst van nabije afbeeldingen weer te geven</string>
@@ -829,4 +831,8 @@
   <string name="usages_on_commons_heading">Commons</string>
   <string name="usages_on_other_wikis_heading">Andere wiki’s</string>
   <string name="file_usages_container_heading">Bestandsgebruik</string>
+  <string name="title_activity_single_web_view">Activiteit enkele webraadpleging</string>
+  <string name="account">Account</string>
+  <string name="vanish_account">Account laten verdwijnen</string>
+  <string name="account_vanish_request_confirm_title">Waarschuwing verwijdering account</string>
 </resources>

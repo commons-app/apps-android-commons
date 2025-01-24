@@ -34,7 +34,7 @@ class MwQueryPage : BaseModel() {
 
     fun title(): String = title!!
 
-    fun categoryInfo(): CategoryInfo = categoryinfo!!
+    fun categoryInfo(): CategoryInfo? = categoryinfo
 
     fun index(): Int = index
 

@@ -308,6 +308,7 @@
   <string name="copy_wikicode">העתקת קוד ויקי ללוח</string>
   <string name="wikicode_copied">קוד הוויקי הועתק ללוח</string>
   <string name="nearby_location_not_available">ייתכן ש\"בסביבה\" לא יפעל כראוי, משום שהמיקום אינו זמין.</string>
+  <string name="nearby_showing_pins_offline">האינטרנט אינו זמין. מוצגים רק מקומות שמורים.</string>
   <string name="upload_location_access_denied">הגישה למיקום נדחתה. נא להגדיר את המקום שלך ידנית כדי להשתמש ביכולת הזאת.</string>
   <string name="location_permission_rationale_nearby">נדרשת הרשאה כדי להציג רשימה של מקומות בסביבה</string>
   <string name="location_permission_rationale_explore">נדרשת הרשאה להצגת רשימת התמונות בסביבתך</string>
@@ -845,4 +846,9 @@
   <string name="usages_on_other_wikis_heading">אתרי ויקי אחרים</string>
   <string name="bullet_point">•</string>
   <string name="file_usages_container_heading">שימושים בקובץ</string>
+  <string name="account">חשבון</string>
+  <string name="vanish_account">העלמת חשבון</string>
+  <string name="account_vanish_request_confirm_title">אזהרת העלמת חשבון</string>
+  <string name="caption">כותרת</string>
+  <string name="caption_copied_to_clipboard">הכותרת הועתקה ללוח</string>
 </resources>

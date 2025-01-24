@@ -278,6 +278,7 @@
   <string name="copy_wikicode">Прекопирај го викитекстот во меѓускладот</string>
   <string name="wikicode_copied">Викитекстот е прекопиран во меѓускладот</string>
   <string name="nearby_location_not_available">„Во близина“ може да не работи како што треба. Местоположбата е недостапна.</string>
+  <string name="nearby_showing_pins_offline">Семрежјето е недостапно. Прикажувам само меѓускладирани места.</string>
   <string name="upload_location_access_denied">Пристапот до местоположбата е одбиен. Задајте ја местоположбата рачно за да ја користите оваа функција.</string>
   <string name="location_permission_rationale_nearby">Се бара дозвола за приказ на список на околни места</string>
   <string name="location_permission_rationale_explore">Се бара дозвола за приказ на список на околни слики</string>
@@ -809,4 +810,12 @@
   <string name="usages_on_other_wikis_heading">Други викија</string>
   <string name="bullet_point">•</string>
   <string name="file_usages_container_heading">Употреби на податотеката</string>
+  <string name="title_activity_single_web_view">SingleWebViewActivity</string>
+  <string name="account">Сметка</string>
+  <string name="vanish_account">Исчезни сметка</string>
+  <string name="account_vanish_request_confirm_title">Предупредување за исчезнување на сметка</string>
+  <string name="account_vanish_request_confirm">Исчезнувањето е &lt;b&gt;крајна мерка&lt;/b&gt; и треба да се користи само ако сакате да престанете да уредувате засекогаш/b&gt; и да скриете што повеќе од вашите досегашни врски.&lt;br/&gt;&lt;br/&gt;Бришењето сметки на Википедија се врши со менување на името на вашата сметка, така што другите не би можеле да ги препознаат вашите придонеси во постапка наречена „исчезнување“ на сметка.&lt;b&gt;Исчезнувањето не гарантира целосна анонимност и не ги отстранува придонесите на проектите&lt;/b&gt;.</string>
+  <string name="caption">Толкување</string>
+  <string name="caption_copied_to_clipboard">Толкувањето е ставено во меѓускладот</string>
+  <string name="congratulations_all_pictures_in_this_album_have_been_either_uploaded_or_marked_as_not_for_upload">Честитаме. Сите слики од овој албум се подигнати или обележани за неподигање.</string>
 </resources>

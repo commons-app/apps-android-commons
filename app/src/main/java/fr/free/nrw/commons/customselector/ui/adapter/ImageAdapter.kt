@@ -24,6 +24,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.cancel
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import java.util.TreeMap
 import kotlin.collections.ArrayList
@@ -102,6 +103,18 @@ class ImageAdapter(
      * Helps to maintain the increasing sequence of the position. eg- 0, 1, 2, 3
      */
     private var imagePositionAsPerIncreasingOrder = 0
+
+    /**
+     * Stores the number of images currently visible on the screen
+     */
+    private val _currentImagesCount = MutableStateFlow(0)
+    val currentImagesCount = _currentImagesCount
+
+    /**
+     * Stores whether images are being loaded or not
+     */
+    private val _isLoadingImages = MutableStateFlow(false)
+    val isLoadingImages = _isLoadingImages
 
     /**
      * Coroutine Dispatchers and Scope.
@@ -184,8 +197,12 @@ class ImageAdapter(
                     // If the position is not already visited, that means the position is new then
                     // finds the next actionable image position from all images
                     if (!alreadyAddedPositions.contains(position)) {
-                        processThumbnailForActionedImage(holder, position, uploadingContributionList)
-
+                        processThumbnailForActionedImage(
+                            holder,
+                            position,
+                            uploadingContributionList
+                        )
+                        _isLoadingImages.value = false
                         // If the position is already visited, that means the image is already present
                         // inside map, so it will fetch the image from the map and load in the holder
                     } else {
@@ -231,6 +248,7 @@ class ImageAdapter(
         position: Int,
         uploadingContributionList: List<Contribution>,
     ) {
+        _isLoadingImages.value = true
         val next =
             imageLoader.nextActionableImage(
                 allImages,
@@ -252,6 +270,7 @@ class ImageAdapter(
                 actionableImagesMap[next] = allImages[next]
                 alreadyAddedPositions.add(imagePositionAsPerIncreasingOrder)
                 imagePositionAsPerIncreasingOrder++
+                _currentImagesCount.value = imagePositionAsPerIncreasingOrder
                 Glide
                     .with(holder.image)
                     .load(allImages[next].uri)
@@ -267,6 +286,7 @@ class ImageAdapter(
             reachedEndOfFolder = true
             notifyItemRemoved(position)
         }
+        _isLoadingImages.value = false
     }
 
     /**
@@ -372,6 +392,7 @@ class ImageAdapter(
         emptyMap: TreeMap<Int, Image>,
         uploadedImages: List<Contribution> = ArrayList(),
     ) {
+        _isLoadingImages.value = true
         allImages = fixedImages
         val oldImageList: ArrayList<Image> = images
         val newImageList: ArrayList<Image> = ArrayList(newImages)
@@ -382,6 +403,7 @@ class ImageAdapter(
         reachedEndOfFolder = false
         selectedImages = ArrayList()
         imagePositionAsPerIncreasingOrder = 0
+        _currentImagesCount.value = imagePositionAsPerIncreasingOrder
         val diffResult =
             DiffUtil.calculateDiff(
                 ImagesDiffCallback(oldImageList, newImageList),
@@ -441,6 +463,7 @@ class ImageAdapter(
                 val entry = iterator.next()
                 if (entry.value == image) {
                     imagePositionAsPerIncreasingOrder -= 1
+                    _currentImagesCount.value = imagePositionAsPerIncreasingOrder
                     iterator.remove()
                     alreadyAddedPositions.removeAt(alreadyAddedPositions.size - 1)
                     notifyItemRemoved(index)

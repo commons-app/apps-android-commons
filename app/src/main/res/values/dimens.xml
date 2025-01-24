@@ -20,6 +20,7 @@
     <dimen name="gigantic_gap">64dp</dimen>
     <dimen name="standard_gap">16dp</dimen>
     <dimen name="small_gap">8dp</dimen>
+    <dimen name="login_gap">20dp</dimen>
     <dimen name="small_height">7dp</dimen>
     <dimen name="tiny_gap">4dp</dimen>
     <dimen name="very_tiny_gap">2dp</dimen>

@@ -4,7 +4,6 @@ import android.location.Location
 import android.view.View
 import androidx.annotation.MainThread
 import androidx.lifecycle.LifecycleCoroutineScope
-import fr.free.nrw.commons.BaseMarker
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.location.LatLng
@@ -51,6 +50,10 @@ class NearbyParentFragmentPresenter
     private var customQuery: String? = null
 
     private var nearbyParentFragmentView: NearbyParentFragmentContract.View = DUMMY
+
+    private var placeSearchJob: Job? = null
+    private var isSearchInProgress = false
+    private var localPlaceSearchJob: Job? = null
 
     private val clickedPlaces = CopyOnWriteArrayList<Place>()
 
@@ -297,10 +300,27 @@ class NearbyParentFragmentPresenter
                 }
                 ?: return
 
-        loadPlacesDataAyncJob?.cancel()
         lockUnlockNearby(false) // So that new location updates wont come
         nearbyParentFragmentView.setProgressBarVisibility(false)
+        loadPlacesDataAsync(nearbyPlaceGroups, scope)
+    }
 
+    /**
+     * Load the places' details from cache and Wikidata query, and update these details on the map
+     * as and when they arrive.
+     *
+     * @param nearbyPlaceGroups The list of `MarkerPlaceGroup` objects to be rendered on the map.
+     * Note that the supplied objects' `isBookmarked` property can be set false as the actual
+     * value is retrieved from the bookmarks db eventually.
+     * @param scope the lifecycle scope of `nearbyParentFragment`'s `viewLifecycleOwner`
+     *
+     * @see LoadPlacesAsyncOptions
+     */
+    fun loadPlacesDataAsync(
+        nearbyPlaceGroups: List<MarkerPlaceGroup>,
+        scope: LifecycleCoroutineScope?
+    ) {
+        loadPlacesDataAyncJob?.cancel()
         loadPlacesDataAyncJob = scope?.launch(Dispatchers.IO) {
             // clear past clicks and bookmarkChanged queues
             clickedPlaces.clear()
@@ -489,17 +509,52 @@ class NearbyParentFragmentPresenter
         }
     }
 
-    @MainThread
-    override fun updateMapMarkersToController(baseMarkers: MutableList<BaseMarker>) {
-        NearbyController.markerLabelList.clear()
-        for (i in baseMarkers.indices) {
-            val nearbyBaseMarker = baseMarkers[i]
-            NearbyController.markerLabelList.add(
-                MarkerPlaceGroup(
-                    bookmarkLocationDao.findBookmarkLocation(nearbyBaseMarker.place),
-                    nearbyBaseMarker.place
-                )
-            )
+    /**
+     * Handles the map scroll user action for `NearbyParentFragment`
+     *
+     * @param scope The lifecycle scope of `nearbyParentFragment`'s `viewLifecycleOwner`
+     * @param isNetworkAvailable Whether to load pins from the internet or from the cache.
+     */
+    @Override
+    override fun handleMapScrolled(scope: LifecycleCoroutineScope?, isNetworkAvailable: Boolean) {
+        scope ?: return
+
+        placeSearchJob?.cancel()
+        localPlaceSearchJob?.cancel()
+        if (isNetworkAvailable) {
+            placeSearchJob = scope.launch(Dispatchers.Main) {
+                delay(SCROLL_DELAY)
+                if (!isSearchInProgress) {
+                    isSearchInProgress = true; // search executing flag
+                    // Start Search
+                    try {
+                        searchInTheArea();
+                    } finally {
+                        isSearchInProgress = false;
+                    }
+                }
+            }
+        } else {
+            loadPlacesDataAyncJob?.cancel()
+            localPlaceSearchJob = scope.launch(Dispatchers.IO) {
+                delay(LOCAL_SCROLL_DELAY)
+                val mapFocus = nearbyParentFragmentView.mapFocus
+                val markerPlaceGroups = placesRepository.fetchPlaces(
+                    nearbyParentFragmentView.screenBottomLeft,
+                    nearbyParentFragmentView.screenTopRight
+                ).sortedBy { it.getDistanceInDouble(mapFocus) }.take(NearbyController.MAX_RESULTS)
+                    .map {
+                        MarkerPlaceGroup(
+                            bookmarkLocationDao.findBookmarkLocation(it), it
+                        )
+                    }
+                ensureActive()
+                NearbyController.currentLocation = mapFocus
+                schedulePlacesUpdate(markerPlaceGroups, force = true)
+                withContext(Dispatchers.Main) {
+                    nearbyParentFragmentView.updateSnackbar(!markerPlaceGroups.isEmpty())
+                }
+            }
         }
     }
 
@@ -575,6 +630,8 @@ class NearbyParentFragmentPresenter
     }
 
     companion object {
+        private const val SCROLL_DELAY = 800L; // Delay for debounce of onscroll, in milliseconds.
+        private const val LOCAL_SCROLL_DELAY = 200L; // SCROLL_DELAY but for local db place search
         private val DUMMY = Proxy.newProxyInstance(
             NearbyParentFragmentContract.View::class.java.getClassLoader(),
             arrayOf<Class<*>>(NearbyParentFragmentContract.View::class.java),

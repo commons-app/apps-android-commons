@@ -184,32 +184,32 @@ class LoginActivity : AccountAuthenticatorActivity() {
         // if progressDialog is visible during the configuration change  then store state as  true else false so that
         // we maintain visibility of progressDialog after configuration change
         if (progressDialog != null && progressDialog!!.isShowing) {
-            outState.putBoolean(saveProgressDialog, true)
+            outState.putBoolean(SAVE_PROGRESS_DIALOG, true)
         } else {
-            outState.putBoolean(saveProgressDialog, false)
+            outState.putBoolean(SAVE_PROGRESS_DIALOG, false)
         }
         outState.putString(
-            saveErrorMessage,
+            SAVE_ERROR_MESSAGE,
             binding!!.errorMessage.text.toString()
         ) //Save the errorMessage
         outState.putString(
-            saveUsername,
+            SAVE_USERNAME,
             binding!!.loginUsername.text.toString()
         ) // Save the username
         outState.putString(
-            savePassword,
+            SAVE_PASSWORD,
             binding!!.loginPassword.text.toString()
         ) // Save the password
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         super.onRestoreInstanceState(savedInstanceState)
-        binding!!.loginUsername.setText(savedInstanceState.getString(saveUsername))
-        binding!!.loginPassword.setText(savedInstanceState.getString(savePassword))
-        if (savedInstanceState.getBoolean(saveProgressDialog)) {
+        binding!!.loginUsername.setText(savedInstanceState.getString(SAVE_USERNAME))
+        binding!!.loginPassword.setText(savedInstanceState.getString(SAVE_PASSWORD))
+        if (savedInstanceState.getBoolean(SAVE_PROGRESS_DIALOG)) {
             performLogin()
         }
-        val errorMessage = savedInstanceState.getString(saveErrorMessage)
+        val errorMessage = savedInstanceState.getString(SAVE_ERROR_MESSAGE)
         if (sessionManager.isUserLoggedIn) {
             showMessage(R.string.login_success, R.color.primaryDarkColor)
         } else {
@@ -396,9 +396,9 @@ class LoginActivity : AccountAuthenticatorActivity() {
         fun startYourself(context: Context) =
             context.startActivity(Intent(context, LoginActivity::class.java))
 
-        const val saveProgressDialog: String = "ProgressDialog_state"
-        const val saveErrorMessage: String = "errorMessage"
-        const val saveUsername: String = "username"
-        const val savePassword: String = "password"
+        const val SAVE_PROGRESS_DIALOG: String = "ProgressDialog_state"
+        const val SAVE_ERROR_MESSAGE: String = "errorMessage"
+        const val SAVE_USERNAME: String = "username"
+        const val SAVE_PASSWORD: String = "password"
     }
 }

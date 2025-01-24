@@ -481,8 +481,8 @@ class UploadWorker(
                         )
                     if (null != revisionID) {
                         withContext(Dispatchers.IO) {
-                            val place = placesRepository.fetchPlace(wikiDataPlace.id);
-                            place.name = wikiDataPlace.name;
+                            val place = placesRepository.fetchPlace(wikiDataPlace.id)
+                            place.name = wikiDataPlace.name
                             place.pic = HOME_URL + uploadResult.createCanonicalFileName()
                             placesRepository
                                 .save(place)
@@ -568,12 +568,18 @@ class UploadWorker(
 
             sequenceFileName =
                 if (fileName.indexOf('.') == -1) {
-                    "$fileName #$randomHash"
+                    // Append the random hash in parentheses if no file extension is present
+                    "$fileName ($randomHash)"
                 } else {
                     val regex =
                         Pattern.compile("^(.*)(\\..+?)$")
                     val regexMatcher = regex.matcher(fileName)
-                    regexMatcher.replaceAll("$1 #$randomHash")
+                    // Append the random hash in parentheses before the file extension
+                    if (regexMatcher.find()) {
+                        "${regexMatcher.group(1)} ($randomHash)${regexMatcher.group(2)}"
+                    } else {
+                        "$fileName ($randomHash)"
+                    }
                 }
         }
         return sequenceFileName!!

@@ -282,6 +282,7 @@
   <string name="copy_wikicode">Copy the wikitext to the clipboard</string>
   <string name="wikicode_copied">The wikitext was copied to the clipboard</string>
   <string name="nearby_location_not_available">Nearby might not work properly, Location not available.</string>
+  <string name="nearby_showing_pins_offline">Internet unavailable. Showing only cached places.</string>
   <string name="upload_location_access_denied">Location access denied. Please set your location manually to use this feature.</string>
   <string name="location_permission_rationale_nearby">Permission required to display a list of nearby places</string>
   <string name="location_permission_rationale_explore">Permission required to display a list of nearby images</string>
@@ -860,5 +861,13 @@ Upload your first media by tapping on the add button.</string>
   <string name="usages_on_other_wikis_heading">Other wikis</string>
   <string name="bullet_point">•</string>
   <string name="file_usages_container_heading">File usages</string>
+  <string name="title_activity_single_web_view">SingleWebViewActivity</string>
+  <string name="account">Account</string>
+  <string name="vanish_account">Vanish Account</string>
+  <string name="account_vanish_request_confirm_title">Vanish account warning</string>
+  <string name="account_vanish_request_confirm"><![CDATA[Vanishing is a <b>last resort</b> and should <b>only be used when you wish to stop editing forever</b> and also to hide as many of your past associations as possible.<br/><br/>Account deletion on Wikimedia Commons is done by changing your account name to make it so others cannot recognize your contributions in a process called account vanishing. <b>Vanishing does not guarantee complete anonymity or remove contributions to the projects</b>.]]></string>
+  <string name="caption">Caption</string>
+  <string name="caption_copied_to_clipboard">Caption copied to clipboard</string>
+  <string name="congratulations_all_pictures_in_this_album_have_been_either_uploaded_or_marked_as_not_for_upload">Congratulations, all pictures in this album have been either uploaded or marked as not for upload.</string>
 
 </resources>

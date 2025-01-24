@@ -291,6 +291,7 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
         builder.setItems(R.array.report_violation_options, (dialog, which) -> {
             sendReportEmail(media, values[which]);
         });
+        builder.setNegativeButton(R.string.cancel, (dialog, which) -> {});
         builder.setCancelable(false);
         builder.show();
     }

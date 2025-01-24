@@ -5,6 +5,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.room.Embedded;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 import fr.free.nrw.commons.location.LatLng;
@@ -24,6 +25,7 @@ public class Place implements Parcelable {
     public String name;
     private Label label;
     private String longDescription;
+    @Embedded
     public LatLng location;
     @PrimaryKey @NonNull
     public String entityID;

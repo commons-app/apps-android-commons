@@ -18,6 +18,8 @@ public interface NearbyParentFragmentContract {
 
         boolean isNetworkConnectionEstablished();
 
+        void updateSnackbar(boolean offlinePinsShown);
+
         void listOptionMenuItemClicked();
 
         void populatePlaces(LatLng currentLatLng);
@@ -91,6 +93,10 @@ public interface NearbyParentFragmentContract {
 
         LatLng getMapFocus();
 
+        LatLng getScreenTopRight();
+
+        LatLng getScreenBottomLeft();
+
         boolean isAdvancedQueryFragmentVisible();
 
         void showHideAdvancedQueryFragment(boolean shouldShow);
@@ -122,8 +128,6 @@ public interface NearbyParentFragmentContract {
         void filterByMarkerType(List<Label> selectedLabels, int state, boolean filterForPlaceState,
             boolean filterForAllNoneType);
 
-        void updateMapMarkersToController(List<BaseMarker> baseMarkers);
-
         void searchViewGainedFocus();
 
         void setCheckboxUnknown();
@@ -131,5 +135,7 @@ public interface NearbyParentFragmentContract {
         void setAdvancedQuery(String query);
 
         void toggleBookmarkedStatus(Place place);
+
+        void handleMapScrolled(LifecycleCoroutineScope scope, boolean isNetworkAvailable);
     }
 }

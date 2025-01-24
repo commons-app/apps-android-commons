@@ -284,6 +284,7 @@
   <string name="copy_wikicode">Kopier wikiteksten til udklipsholderen</string>
   <string name="wikicode_copied">Wikiteksten blev kopieret til udklipsholderen</string>
   <string name="nearby_location_not_available">I nærheden fungerer muligvis ikke korrekt. Placeringen er ikke tilgængelig.</string>
+  <string name="nearby_showing_pins_offline">Internet ikke tilgængeligt. Viser kun cachelagrede steder.</string>
   <string name="upload_location_access_denied">Placeringsadgang nægtet. Indstil din placering manuelt for at bruge denne funktion.</string>
   <string name="location_permission_rationale_nearby">Tilladelse kræves for at vise en liste over steder i nærheden</string>
   <string name="location_permission_rationale_explore">Der kræves tilladelse til at vise en liste over billeder i nærheden</string>
@@ -813,4 +814,11 @@
   <string name="usages_on_other_wikis_heading">Andre wikier</string>
   <string name="bullet_point">•</string>
   <string name="file_usages_container_heading">Filanvendelser</string>
+  <string name="account">Konto</string>
+  <string name="vanish_account">Få konto til at forsvinde</string>
+  <string name="account_vanish_request_confirm_title">Advarsel om forsvinding af konto</string>
+  <string name="account_vanish_request_confirm">Forsvinding er en &lt;b&gt;sidste udvej&lt;/b&gt; og bør &lt;b&gt;kun bruges, når du for altid ønsker at stoppe med at redigere&lt;/b&gt; og også for at skjule så mange af dine tidligere tilknytninger som muligt.&lt;br/&gt;&lt;br/&gt; Kontosletning på Wikipedia Commons sker ved at ændre dit kontonavn, således at andre ikke kan genkende dine bidrag i en proces, der kaldes kontoforsvinding (Vanishing). &lt;b&gt;Forsvinding garanterer ikke fuldstændig anonymitet eller fjerner bidrag til projekterne&lt;/b&gt; .</string>
+  <string name="caption">Billedtekst</string>
+  <string name="caption_copied_to_clipboard">Billedtekst kopieret til udklipsholder</string>
+  <string name="congratulations_all_pictures_in_this_album_have_been_either_uploaded_or_marked_as_not_for_upload">Tillykke, alle billeder i dette album er enten blevet uploadet eller markeret som ikke til upload.</string>
 </resources>
