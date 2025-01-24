@@ -247,27 +247,28 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
     private final ActivityResultLauncher<Intent> galleryPickLauncherForResult =
         registerForActivityResult(new StartActivityForResult(),
-        result -> {
-            controller.handleActivityResultWithCallback(requireActivity(), callbacks -> {
-                controller.onPictureReturnedFromGallery(result, requireActivity(), callbacks);
+            result -> {
+                controller.handleActivityResultWithCallback(requireActivity(), callbacks -> {
+                    controller.onPictureReturnedFromGallery(result, requireActivity(), callbacks);
+                });
             });
-        });
 
     private final ActivityResultLauncher<Intent> customSelectorLauncherForResult =
         registerForActivityResult(new StartActivityForResult(),
-        result -> {
-            controller.handleActivityResultWithCallback(requireActivity(), callbacks -> {
-                controller.onPictureReturnedFromCustomSelector(result, requireActivity(), callbacks);
+            result -> {
+                controller.handleActivityResultWithCallback(requireActivity(), callbacks -> {
+                    controller.onPictureReturnedFromCustomSelector(result, requireActivity(),
+                        callbacks);
+                });
             });
-        });
 
     private final ActivityResultLauncher<Intent> cameraPickLauncherForResult =
         registerForActivityResult(new StartActivityForResult(),
-        result -> {
-            controller.handleActivityResultWithCallback(requireActivity(), callbacks -> {
-                controller.onPictureReturnedFromCamera(result, requireActivity(), callbacks);
+            result -> {
+                controller.handleActivityResultWithCallback(requireActivity(), callbacks -> {
+                    controller.onPictureReturnedFromCamera(result, requireActivity(), callbacks);
+                });
             });
-        });
 
     private ActivityResultLauncher<String[]> inAppCameraLocationPermissionLauncher = registerForActivityResult(
         new RequestMultiplePermissions(),
@@ -342,7 +343,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
         initNetworkBroadCastReceiver();
         scope = LifecycleOwnerKt.getLifecycleScope(getViewLifecycleOwner());
-        presenter = new NearbyParentFragmentPresenter(bookmarkLocationDao, placesRepository, nearbyController);
+        presenter = new NearbyParentFragmentPresenter(bookmarkLocationDao, placesRepository,
+            nearbyController);
         progressDialog = new ProgressDialog(getActivity());
         progressDialog.setCancelable(false);
         progressDialog.setMessage("Saving in progress...");
@@ -359,6 +361,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         inflater.inflate(R.menu.nearby_fragment_menu, menu);
         MenuItem refreshButton = menu.findItem(R.id.item_refresh);
         MenuItem listMenu = menu.findItem(R.id.list_sheet);
+        MenuItem showInExploreButton = menu.findItem(R.id.list_item_show_in_explore);
         MenuItem saveAsGPXButton = menu.findItem(R.id.list_item_gpx);
         MenuItem saveAsKMLButton = menu.findItem(R.id.list_item_kml);
         refreshButton.setOnMenuItemClickListener(new OnMenuItemClickListener() {
@@ -376,6 +379,17 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 listOptionMenuItemClicked();
+                return false;
+            }
+        });
+        showInExploreButton.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(@NonNull MenuItem item) {
+                ((MainActivity) getContext()).loadExploreMapFromNearby(
+                    binding.map.getZoomLevelDouble(),
+                    binding.map.getMapCenter().getLatitude(),
+                    binding.map.getMapCenter().getLongitude()
+                );
                 return false;
             }
         });
@@ -493,7 +507,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         initRvNearbyList();
         onResume();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            binding.tvAttribution.setText(Html.fromHtml(getString(R.string.map_attribution), Html.FROM_HTML_MODE_LEGACY));
+            binding.tvAttribution.setText(
+                Html.fromHtml(getString(R.string.map_attribution), Html.FROM_HTML_MODE_LEGACY));
         } else {
             //noinspection deprecation
             binding.tvAttribution.setText(Html.fromHtml(getString(R.string.map_attribution)));
@@ -739,8 +754,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     }
 
     /**
-     * Determines the number of spans (columns) in the RecyclerView based on device orientation
-     * and adapter item count.
+     * Determines the number of spans (columns) in the RecyclerView based on device orientation and
+     * adapter item count.
      *
      * @return The number of spans to be used in the RecyclerView.
      */
@@ -1175,7 +1190,6 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
     /**
      * Clears the Nearby local cache and then calls for pin details to be fetched afresh.
-     *
      */
     private void emptyCache() {
         // reload the map once the cache is cleared
@@ -1338,7 +1352,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     }
 
     /**
-     * Fetches and updates the data for a specific place, then updates the corresponding marker on the map.
+     * Fetches and updates the data for a specific place, then updates the corresponding marker on
+     * the map.
      *
      * @param entity       The entity ID of the place.
      * @param place        The Place object containing the initial place data.
@@ -1469,9 +1484,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     }
 
     /**
-     * Stops any ongoing queries and clears all disposables.
-     * This method sets the stopQuery flag to true and clears the compositeDisposable
-     * to prevent any further processing.
+     * Stops any ongoing queries and clears all disposables. This method sets the stopQuery flag to
+     * true and clears the compositeDisposable to prevent any further processing.
      */
     @Override
     public void stopQuery() {
@@ -1624,7 +1638,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             new Builder(getContext())
                 .setMessage(R.string.login_alert_message)
                 .setCancelable(false)
-                .setNegativeButton(R.string.cancel, (dialog, which) -> {})
+                .setNegativeButton(R.string.cancel, (dialog, which) -> {
+                })
                 .setPositiveButton(R.string.login, (dialog, which) -> {
                     // logout of the app
                     BaseLogoutListener logoutListener = new BaseLogoutListener(getActivity());
@@ -1743,7 +1758,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         final boolean filterForPlaceState,
         final boolean filterForAllNoneType) {
         final boolean displayExists = false;
-        final boolean displayNeedsPhoto= false;
+        final boolean displayNeedsPhoto = false;
         final boolean displayWlm = false;
         if (selectedLabels == null || selectedLabels.size() == 0) {
             replaceMarkerOverlays(NearbyController.markerLabelList);
@@ -1903,8 +1918,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     /**
      * Adds multiple markers representing places to the map and handles item gestures.
      *
-     * @param markerPlaceGroups The list of marker place groups containing the places and
-     *                          their bookmarked status
+     * @param markerPlaceGroups The list of marker place groups containing the places and their
+     *                          bookmarked status
      */
     @Override
     public void replaceMarkerOverlays(final List<MarkerPlaceGroup> markerPlaceGroups) {
@@ -1913,7 +1928,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         for (int i = markerPlaceGroups.size() - 1; i >= 0; i--) {
             newMarkers.add(
                 convertToMarker(markerPlaceGroups.get(i).getPlace(),
-                markerPlaceGroups.get(i).getIsBookmarked())
+                    markerPlaceGroups.get(i).getIsBookmarked())
             );
         }
         clearAllMarkers();
@@ -2103,7 +2118,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             if (binding.fabCamera.isShown()) {
                 Timber.d("Camera button tapped. Place: %s", selectedPlace.toString());
                 storeSharedPrefs(selectedPlace);
-                controller.initiateCameraPick(getActivity(), inAppCameraLocationPermissionLauncher, cameraPickLauncherForResult);
+                controller.initiateCameraPick(getActivity(), inAppCameraLocationPermissionLauncher,
+                    cameraPickLauncherForResult);
             }
         });
 
@@ -2121,7 +2137,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             if (binding.fabCustomGallery.isShown()) {
                 Timber.d("Gallery button tapped. Place: %s", selectedPlace.toString());
                 storeSharedPrefs(selectedPlace);
-                controller.initiateCustomGalleryPickWithPermission(getActivity(), customSelectorLauncherForResult);
+                controller.initiateCustomGalleryPickWithPermission(getActivity(),
+                    customSelectorLauncherForResult);
             }
         });
     }
