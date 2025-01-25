@@ -48,6 +48,7 @@
 * Yfdyh000
 * Zhang8569
 * ZhaoGang
+* 七八年再来一次
 * 予弦
 * 佛壁灯
 * 列维劳德
@@ -345,7 +346,7 @@
   <string name="welcome_skip_button">跳过教程</string>
   <string name="no_internet">互联网不可用</string>
   <string name="error_notifications">检索通知时出错</string>
-  <string name="error_review">获取审查图片错误。按刷新键重试。</string>
+  <string name="error_review">获取审查用图片错误。按刷新键重试。</string>
   <string name="no_notifications">找不到通知</string>
   <string name="about_translate">翻译</string>
   <string name="about_translate_title">语言</string>
@@ -378,13 +379,13 @@
   <string name="explore_tab_title_mobile">通过移动端上传</string>
   <string name="explore_tab_title_map">地图</string>
   <string name="successful_wikidata_edit">图片已添加到维基数据上的%1$s！</string>
-  <string name="wikidata_edit_failure">更新对应维基数据实体失败！</string>
+  <string name="wikidata_edit_failure">更新对应维基数据项目失败！</string>
   <string name="menu_set_wallpaper">设为壁纸</string>
   <string name="wallpaper_set_successfully">壁纸已成功设置！</string>
   <string name="quiz">测验</string>
   <string name="quiz_question_string">这个图片可以上传吗？</string>
   <string name="question">问题</string>
-  <string name="result">成绩</string>
+  <string name="result">结果</string>
   <string name="quiz_back_button">如果您继续上传需要删除的图片，您的帐户可能会被封禁。你确定要结束测验吗？</string>
   <string name="quiz_alert_message">您上传的图片超过%1$s已被删除。如果您继续上传需要删除的图片，您的帐户可能会被封禁。\n\n您是否希望再次查看该教程，然后进行测验以帮助您了解应该或不应上传的图像类型？</string>
   <string name="selfie_answer">自拍没有太多的百科全书价值。除非您已经有关于您的维基百科文章，否则请不要上传自己的照片。</string>
@@ -467,7 +468,7 @@
   <string name="uploaded_by_myself">由我自己上传在%1$s，使用于%2$d个条目。</string>
   <string name="no_uploads">欢迎使用共享资源！\n\n通过点击添加按钮以上传您的首个媒体。</string>
   <string name="no_categories_selected">未提交分类</string>
-  <string name="no_categories_selected_warning_desc">没有类别的图像很少可用。确实要继续而不选择类别吗？</string>
+  <string name="no_categories_selected_warning_desc">不带分类的图片很难有机会被利用到，您确定您要不选择分类来继续吗？</string>
   <string name="no_depictions_selected">没有选择描写</string>
   <string name="no_depictions_selected_warning_desc">带有描述的图像更容易被发现并且更可能被使用。您确定不选择描述继续吗？</string>
   <string name="back_button_warning">取消上传</string>
@@ -477,12 +478,12 @@
   <string name="search_this_area">搜索这个区域</string>
   <string name="nearby_card_permission_title">权限申请</string>
   <string name="nearby_card_permission_explanation">您希望我们获取您当前的位置来显示最近的需要图片的地方吗？</string>
-  <string name="unable_to_display_nearest_place">无法显示没有位置权限的需要图片的最近位置</string>
+  <string name="unable_to_display_nearest_place">没有位置权限，无法显示需要图片的最近地点</string>
   <string name="never_ask_again">不再询问</string>
   <string name="display_location_permission_title">申请位置权限</string>
   <string name="display_location_permission_explanation">申请附近通知卡查看功能所必需的位置权限。</string>
   <string name="achievements_fetch_failed">出了点问题，我们无法获取成就</string>
-  <string name="achievements_fetch_failed_ultimate_achievement">您做出了许多贡献，我们的计算系统无法应对。这是最终的成就。</string>
+  <string name="achievements_fetch_failed_ultimate_achievement">您做出的贡献多到让我们的成就计算系统无法应对，此为最终成果。</string>
   <string name="ends_on">结束时间：</string>
   <string name="display_campaigns">显示活动</string>
   <string name="display_campaigns_explanation">显示正在进行的活动</string>
@@ -558,7 +559,7 @@
   <string name="exif_tag_name_lensModel">镜头型号</string>
   <string name="exif_tag_name_serialNumbers">序列号</string>
   <string name="exif_tag_name_software">软件</string>
-  <string name="media_location_permission_denied">已拒绝访问媒体位置</string>
+  <string name="media_location_permission_denied">被拒绝访问媒体位置</string>
   <string name="add_location_manually">我们可能无法自动从你上传的图片中获取位置数据。提交前请为每张图片添加适当的位置</string>
   <string name="share_text">直接在您手机上的维基共享资源应用中上传照片。立即下载共享资源应用：%1$s</string>
   <string name="share_via">分享到...</string>
@@ -799,7 +800,7 @@
   <string name="full_screen_mode_zoom_info">用两根手指放大和缩小。</string>
   <string name="full_screen_mode_features_info">快速长距离滑动来执行以下操作：\n- 向左/右：前往上一个/下一个\n- 向上：选择\n- 向下：标记为不上传</string>
   <string name="set_up_avatar_toast_string">要设置你的排行榜头像，请点击任意图片上三点式菜单中的\"设置为头像\"</string>
-  <string name="similar_coordinate_description_auto_set">图片坐标并不是准确的坐标，但上传这张图片的人认为它们足够接近。</string>
+  <string name="similar_coordinate_description_auto_set">坐标虽不准确，但上传这张图片的人认为已经足够接近了。</string>
   <string name="storage_permissions_denied">存储权限被拒绝</string>
   <string name="unable_to_share_upload_item">无法分享此项目</string>
   <string name="permissions_are_required_for_functionality">功能需要权限</string>
@@ -828,7 +829,7 @@
     <item quantity="one">已选择%d个图像</item>
     <item quantity="other">已选择%d个图像</item>
   </plurals>
-  <string name="multiple_files_depiction">请记住，每次多图片上传会为其中的所有图片标注相同的分类和描述。如果这些图片并不共享同样的描述和分类，请分别进行多次上传。</string>
+  <string name="multiple_files_depiction">请记住，多重上传中的所有图片都会标注相同的分类和描述。如果这些图片并不共享同样的描述和分类，请分别多次单独进行上传。</string>
   <string name="multiple_files_depiction_header">关于多图片上传的提醒</string>
   <string name="nearby_wikitalk">向维基数据报告关于该项的问题</string>
   <string name="please_enter_some_comments">请输入一些评论。</string>
@@ -865,7 +866,7 @@
   <string name="account">账号</string>
   <string name="vanish_account">隐退账号</string>
   <string name="account_vanish_request_confirm_title">隐退账号警告</string>
-  <string name="account_vanish_request_confirm">消失是一个&lt;b&gt;最后的手段&lt;/b&gt;，应该&lt;b&gt;仅在您希望永远停止编辑时使用&lt;/b&gt;，并尽可能隐藏您过去的关联。&lt;br/&gt;&lt;br/&gt;在维基媒体共享资源上删除账户是通过更改您的账户名称，使其他人无法识别您的贡献，这个过程称为账户消失。&lt;b&gt;消失并不能保证完全匿名，也无法删除对项目的贡献&lt;/b&gt;。</string>
+  <string name="account_vanish_request_confirm">隐退是一个&lt;b&gt;最后的手段&lt;/b&gt;，应该&lt;b&gt;仅在您希望永远停止编辑&lt;/b&gt;，并尽可能隐藏您过去的关联时使用。&lt;br/&gt;&lt;br/&gt;在维基媒体共享资源上删除账户是通过更改您的账户名称，使其他人无法识别您的贡献，这个过程称为账户隐退。&lt;b&gt;隐退并不能保证完全匿名，也无法删除对项目的贡献&lt;/b&gt;。</string>
   <string name="caption">说明</string>
   <string name="caption_copied_to_clipboard">已复制到剪贴板</string>
   <string name="congratulations_all_pictures_in_this_album_have_been_either_uploaded_or_marked_as_not_for_upload">恭喜，专辑中的所有图片都已上传或标记为不上传。</string>
