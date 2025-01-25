@@ -198,6 +198,12 @@ public class ExploreFragment extends CommonsDaggerSupportFragment {
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.explore_fragment_menu, menu);
 
+        MenuItem others = menu.findItem(R.id.list_item_show_in_nearby);
+
+        if (binding.viewPager.getCurrentItem() == 2) {
+            others.setVisible(true);
+        }
+
         // if on Map tab, show all menu options, else only show search
         binding.viewPager.addOnPageChangeListener(new OnPageChangeListener() {
             @Override
@@ -207,8 +213,7 @@ public class ExploreFragment extends CommonsDaggerSupportFragment {
 
             @Override
             public void onPageSelected(int position) {
-                MenuItem other = menu.findItem(R.id.list_item_show_in_nearby);
-                other.setVisible((position == 2));
+                others.setVisible((position == 2));
             }
 
             @Override

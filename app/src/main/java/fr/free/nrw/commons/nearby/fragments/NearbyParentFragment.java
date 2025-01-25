@@ -233,6 +233,11 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     private Place nearestPlace;
     private volatile boolean stopQuery;
 
+    // Explore map data (for if we came from Explore)
+    private double prevZoom;
+    private double prevLatitude;
+    private double prevLongitude;
+
     private final Handler searchHandler = new Handler();
     private Runnable searchRunnable;
 
@@ -338,6 +343,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     @Override
     public View onCreateView(@NonNull final LayoutInflater inflater, final ViewGroup container,
         final Bundle savedInstanceState) {
+        loadExploreMapData();
+
         binding = FragmentNearbyParentBinding.inflate(inflater, container, false);
         view = binding.getRoot();
 
@@ -481,6 +488,14 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         binding.map.getOverlays().add(scaleBarOverlay);
         binding.map.getZoomController().setVisibility(Visibility.NEVER);
         binding.map.getController().setZoom(ZOOM_LEVEL);
+        // if we came from Explore map using 'Show in Nearby', load Explore map camera position
+        if (isCameFromExploreMap()) {
+            moveCameraToPosition(
+                new GeoPoint(prevLatitude, prevLongitude),
+                prevZoom,
+                2L
+            );
+        }
         binding.map.getOverlays().add(mapEventsOverlay);
 
         binding.map.addMapListener(new MapListener() {
@@ -503,7 +518,9 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         }
         initNearbyFilter();
         addCheckBoxCallback();
-        moveCameraToPosition(lastMapFocus);
+        if (!isCameFromExploreMap()) {
+            moveCameraToPosition(lastMapFocus);
+        }
         initRvNearbyList();
         onResume();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
@@ -558,6 +575,28 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         if (!locationPermissionsHelper.checkLocationPermission(getActivity())) {
             askForLocationPermission();
         }
+    }
+
+    /**
+     * Fetch Explore map camera data from fragment arguments if any.
+     */
+    public void loadExploreMapData() {
+        // get fragment arguments
+        if (getArguments() != null) {
+            prevZoom = getArguments().getDouble("prev_zoom");
+            prevLatitude = getArguments().getDouble("prev_latitude");
+            prevLongitude = getArguments().getDouble("prev_longitude");
+        }
+    }
+
+    /**
+     * Checks if fragment arguments contain data from Explore map. if present, then the user
+     * navigated from Explore using 'Show in Nearby'.
+     *
+     * @return true if user navigated from Explore map
+     **/
+    public boolean isCameFromExploreMap() {
+        return prevZoom != 0.0 || prevLatitude != 0.0 || prevLongitude != 0.0;
     }
 
     /**
@@ -640,7 +679,9 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             mapCenter = targetP;
             binding.map.getController().setCenter(targetP);
             recenterMarkerToPosition(targetP);
-            moveCameraToPosition(targetP);
+            if (!isCameFromExploreMap()) {
+                moveCameraToPosition(targetP);
+            }
         } else if (locationManager.isGPSProviderEnabled()
             || locationManager.isNetworkProviderEnabled()) {
             locationManager.requestLocationUpdatesFromProvider(LocationManager.NETWORK_PROVIDER);
@@ -684,7 +725,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         } else {
             lastKnownLocation = MapUtils.getDefaultLatLng();
         }
-        if (binding.map != null) {
+        if (binding.map != null && !isCameFromExploreMap()) {
             moveCameraToPosition(
                 new GeoPoint(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude()));
         }
@@ -2311,6 +2352,18 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
     private void moveCameraToPosition(GeoPoint geoPoint) {
         binding.map.getController().animateTo(geoPoint);
+    }
+
+    /**
+     * Moves the camera of the map view to the specified GeoPoint at specified zoom level and speed
+     * using an animation.
+     *
+     * @param geoPoint The GeoPoint representing the new camera position for the map.
+     * @param zoom     Zoom level of the map camera
+     * @param speed    Speed of animation
+     */
+    private void moveCameraToPosition(GeoPoint geoPoint, double zoom, long speed) {
+        binding.map.getController().animateTo(geoPoint, zoom, speed);
     }
 
     @Override

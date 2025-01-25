@@ -452,7 +452,6 @@ public class MainActivity extends BaseActivity
         bundle.putDouble("prev_longitude", longitude);
 
         loadFragment(ExploreFragment.newInstance(), false, bundle);
-        setSelectedItemId(NavTab.EXPLORE.code());
     }
 
     /**
@@ -470,7 +469,6 @@ public class MainActivity extends BaseActivity
         bundle.putDouble("prev_longitude", longitude);
 
         loadFragment(NearbyParentFragment.newInstance(), false, bundle);
-        setSelectedItemId(NavTab.NEARBY.code());
     }
 
     @Override
