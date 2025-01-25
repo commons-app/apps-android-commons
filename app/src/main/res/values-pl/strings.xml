@@ -13,6 +13,7 @@
 * Matma Rex
 * Mazab IZW
 * Olaf
+* PanWor
 * Rail
 * Railfail536
 * Rainbow P
@@ -137,6 +138,8 @@
   <string name="menu_from_camera">Zrób zdjęcie</string>
   <string name="menu_nearby">W pobliżu</string>
   <string name="provider_contributions">Wysłane przeze mnie pliki</string>
+  <string name="menu_copy_link">Skopiuj link</string>
+  <string name="menu_link_copied">Link został skopiowany do schowka</string>
   <string name="menu_share">Udostępnij</string>
   <string name="menu_view_file_page">Pokaż stronę pliku</string>
   <string name="share_title_hint">Podpis (wymagany)</string>
@@ -155,6 +158,7 @@
   <string name="categories_search_text_hint">Szukaj kategorii</string>
   <string name="depicts_search_text_hint">Wyszukiwanie elementów, które przedstawiają twoje media (góra, Tadż Mahal itp.)</string>
   <string name="menu_save_categories">Zapisz</string>
+  <string name="menu_overflow_desc">Rozszerzone menu</string>
   <string name="refresh_button">Odśwież</string>
   <string name="display_list_button">Lista</string>
   <string name="contributions_subtitle_zero">(Nie ma jeszcze przesłanych plików)</string>
@@ -311,6 +315,7 @@
   <string name="copy_wikicode">Skopiuj wikitext do schowka</string>
   <string name="wikicode_copied">Wikitext został skopiowany do schowka</string>
   <string name="nearby_location_not_available">W pobliżu może nie działać poprawnie, Lokalizacja jest niedostępna.</string>
+  <string name="nearby_showing_pins_offline">Brak połączenia z internetem. Wyświetlane są tylko miejsca z pamięci podręcznej.</string>
   <string name="upload_location_access_denied">Odmowa dostępu do lokalizacji. Aby skorzystać z tej funkcji, ustaw swoją lokalizację ręcznie.</string>
   <string name="location_permission_rationale_nearby">Uprawnienie wymagane do wyświetlania listy pobliskich miejsc</string>
   <string name="location_permission_rationale_explore">Uprawnienie wymagane do wyświetlania listy pobliskich zdjęć</string>
@@ -394,11 +399,13 @@
   <string name="delete">Usuń</string>
   <string name="Achievements">Osiągnięcia</string>
   <string name="Profile">Profil</string>
+  <string name="badges">Odznaki</string>
   <string name="statistics">Statystyki</string>
   <string name="statistics_thanks">Otrzymane Dzięki</string>
   <string name="statistics_featured">Wyróżnione ilustracje</string>
   <string name="statistics_wikidata_edits">Obrazy za pośrednictwem \"Pobliskie miejsca\"</string>
-  <string name="level" fuzzy="true">Poziom</string>
+  <string name="level">Poziom %d</string>
+  <string name="profileLevel">%s (Poziom %s)</string>
   <string name="images_uploaded">Przesłane obrazy</string>
   <string name="image_reverts">Nie wycofane obrazy</string>
   <string name="images_used_by_wiki">Wykorzystane obrazy</string>
@@ -465,6 +472,8 @@
   <string name="in_app_camera_location_access_explanation">Zezwól aplikacji na pobieranie lokalizacji, jeśli kamera jej nie rejestruje. Niektóre kamery urządzeń nie rejestrują lokalizacji. W takich przypadkach pozwolenie aplikacji na pobieranie i dołączanie do niej lokalizacji sprawia, że Twój wkład jest bardziej użyteczny. Możesz to zmienić w dowolnym momencie w Ustawieniach</string>
   <string name="option_allow">Zezwól</string>
   <string name="option_dismiss">Odrzuć</string>
+  <string name="in_app_camera_needs_location">Zezwól na dostęp do lokalizacji w Ustawieniach, a następnie spróbuj ponownie.\n\nUwaga: Jeśli aplikacja nie będzie w stanie uzyskać danych o lokalizacji z urządzenia w krótkim czasie, przesłany plik może nie zawierać tych informacji.</string>
+  <string name="in_app_camera_location_permission_rationale">Aparat w aplikacji potrzebuje uprawnień na dostęp do lokalizacji, aby dołączyć ją do zdjęć, jeśli nie jest dostępna w danych EXIF. Zezwól aplikacji na dostęp do lokalizacji, a następnie spróbuj ponownie.\n\nUwaga: Jeśli aplikacja nie będzie w stanie uzyskać danych o lokalizacji z urządzenia w krótkim czasie, przesłany plik może nie zawierać tych informacji.</string>
   <string name="location_loss_warning" fuzzy="true">Upewnij się, że ten nowy selektor Androida nie usuwa lokalizacji ze zdjęć.</string>
   <string name="nearby_campaign_dismiss_message">Kampanie już nie będą widoczne. Jednak w razie potrzeby możesz ponownie włączyć to powiadomienie w ustawieniach.</string>
   <string name="this_function_needs_network_connection" fuzzy="true">Ta funkcja wymaga połączenia sieciowego, sprawdź ustawienia połączenia.</string>
@@ -781,4 +790,6 @@
   <string name="do_you_want_to_open_kml_file">Chcesz otworzyć plik KML?</string>
   <string name="failed_to_save_kml_file">Nie udało się zapisać pliku KML.</string>
   <string name="failed_to_save_gpx_file">Nie udało się zapisać pliku GPX.</string>
+  <string name="talk">Dyskusja</string>
+  <string name="custom_selector_delete">Usuń</string>
 </resources>
