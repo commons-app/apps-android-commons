@@ -233,6 +233,9 @@ public class ExploreFragment extends CommonsDaggerSupportFragment {
             case R.id.action_search:
                 ActivityUtils.startActivityWithFlags(getActivity(), SearchActivity.class);
                 return true;
+            case R.id.list_item_show_in_nearby:
+                mapRootFragment.loadNearbyMapFromExplore();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }

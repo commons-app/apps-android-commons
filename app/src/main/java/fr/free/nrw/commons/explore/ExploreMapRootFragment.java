@@ -226,6 +226,10 @@ public class ExploreMapRootFragment extends CommonsDaggerSupportFragment impleme
         return false;
     }
 
+    public void loadNearbyMapFromExplore() {
+        mapFragment.loadNearbyMapFromExplore();
+    }
+
     @Override
     public void onDestroy() {
         super.onDestroy();

@@ -38,6 +38,7 @@ import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao;
+import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.databinding.FragmentExploreMapBinding;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.explore.ExploreMapRootFragment;
@@ -62,7 +63,6 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Named;
-import org.osmdroid.api.IGeoPoint;
 import org.osmdroid.events.MapEventsReceiver;
 import org.osmdroid.events.MapListener;
 import org.osmdroid.events.ScrollEvent;
@@ -373,6 +373,14 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
      **/
     public boolean isCameFromNearbyMap() {
         return prevZoom != 0.0 || prevLatitude != 0.0 || prevLongitude != 0.0;
+    }
+
+    public void loadNearbyMapFromExplore() {
+        ((MainActivity) getContext()).loadNearbyMapFromExplore(
+            binding.mapView.getZoomLevelDouble(),
+            binding.mapView.getMapCenter().getLatitude(),
+            binding.mapView.getMapCenter().getLongitude()
+        );
     }
 
     private void initViews() {
