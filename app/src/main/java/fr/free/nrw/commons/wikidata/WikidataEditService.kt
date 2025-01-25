@@ -37,11 +37,6 @@ import javax.inject.Inject
 import javax.inject.Named
 import javax.inject.Singleton
 
-
-/**
- * This class is meant to handle the Wikidata edits made through the app It will talk with MediaWiki
- * Apis to make the necessary calls, log the edits and fire listeners on successful edits
- */
 @Singleton
 class WikidataEditService @Inject constructor(
     private val context: Context,
@@ -55,6 +50,7 @@ class WikidataEditService @Inject constructor(
         fileEntityId: String,
         depictedItems: List<String>
     ): Observable<Boolean> {
+        Timber.d("Entering addDepictsProperty with fileEntityId: %s and depictedItems: %s", fileEntityId, depictedItems)
         val data = EditClaim.from(
             if (isBetaFlavour) listOf("Q10") else depictedItems, DEPICTS.propertyName
         )
@@ -72,6 +68,7 @@ class WikidataEditService @Inject constructor(
                 showLongToast(context, throwable.toString())
             }
             .subscribeOn(Schedulers.io())
+            .doOnComplete { Timber.d("Exiting addDepictsProperty") }
     }
 
     @SuppressLint("CheckResult")
@@ -79,10 +76,10 @@ class WikidataEditService @Inject constructor(
         fileEntityId: String?,
         depictedItems: List<String>
     ): Observable<Boolean> {
+        Timber.d("Entering updateDepictsProperty with fileEntityId: %s and depictedItems: %s", fileEntityId, depictedItems)
         val entityId: String = PAGE_ID_PREFIX + fileEntityId
         val claimIds = getDepictionsClaimIds(entityId)
 
-        /* Please consider removeClaim scenario for BetaDebug */
         val data = RemoveClaim.from(if (isBetaFlavour) listOf("Q10") else claimIds)
 
         return wikiBaseClient.postDeleteClaims(entityId, gson.toJson(data))
@@ -104,20 +101,26 @@ class WikidataEditService @Inject constructor(
                     return@switchMap Observable.empty<Boolean>()
                 }
             }
+            .doOnComplete { Timber.d("Exiting updateDepictsProperty") }
     }
 
     @SuppressLint("CheckResult")
     private fun getDepictionsClaimIds(entityId: String): List<String> {
-        return wikiBaseClient.getClaimIdsByProperty(entityId, DEPICTS.propertyName)
+        Timber.d("Entering getDepictionsClaimIds with entityId: %s", entityId)
+        val claimIds = wikiBaseClient.getClaimIdsByProperty(entityId, DEPICTS.propertyName)
             .subscribeOn(Schedulers.io())
             .blockingFirst()
+        Timber.d("Exiting getDepictionsClaimIds with claimIds: %s", claimIds)
+        return claimIds
     }
 
     @SuppressLint("StringFormatInvalid")
     private fun showSuccessToast(wikiItemName: String) {
+        Timber.d("Entering showSuccessToast with wikiItemName: %s", wikiItemName)
         val successStringTemplate = context.getString(R.string.successful_wikidata_edit)
         val successMessage = String.format(Locale.getDefault(), successStringTemplate, wikiItemName)
         showLongToast(context, successMessage)
+        Timber.d("Exiting showSuccessToast")
     }
 
     @RequiresApi(Build.VERSION_CODES.N)
@@ -126,6 +129,7 @@ class WikidataEditService @Inject constructor(
         fileEntityId: Long, languageCode: String,
         captionValue: String
     ): Observable<Boolean> {
+        Timber.d("Entering addCaption with fileEntityId: %s, languageCode: %s, captionValue: %s", fileEntityId, languageCode, captionValue)
         return wikiBaseClient.addLabelsToWikidata(fileEntityId, languageCode, captionValue)
             .doOnNext { mwPostResponse: MwPostResponse? ->
                 onAddCaptionResponse(
@@ -141,33 +145,40 @@ class WikidataEditService @Inject constructor(
                 )
             }
             .map(Objects::nonNull)
+            .doOnComplete { Timber.d("Exiting addCaption") }
     }
 
     private fun onAddCaptionResponse(fileEntityId: Long, response: MwPostResponse?) {
+        Timber.d("Entering onAddCaptionResponse with fileEntityId: %s and response: %s", fileEntityId, response)
         if (response != null) {
             Timber.d("Caption successfully set, revision id = %s", response)
         } else {
             Timber.d("Error occurred while setting Captions, fileEntityId = %s", fileEntityId)
         }
+        Timber.d("Exiting onAddCaptionResponse")
     }
 
     fun createClaim(
         wikidataPlace: WikidataPlace?, fileName: String,
         captions: Map<String, String>
     ): Long? {
+        Timber.d("Entering createClaim with wikidataPlace: %s, fileName: %s, captions: %s", wikidataPlace, fileName, captions)
         if (!(directKvStore.getBoolean("Picture_Has_Correct_Location", true))) {
             Timber.d(
                 "Image location and nearby place location mismatched, so Wikidata item won't be edited"
             )
             return null
         }
-        return addImageAndMediaLegends(wikidataPlace!!, fileName, captions)
+        val result = addImageAndMediaLegends(wikidataPlace!!, fileName, captions)
+        Timber.d("Exiting createClaim with result: %s", result)
+        return result
     }
 
     fun addImageAndMediaLegends(
         wikidataItem: WikidataItem, fileName: String,
         captions: Map<String, String>
     ): Long {
+        Timber.d("Entering addImageAndMediaLegends with wikidataItem: %s, fileName: %s, captions: %s", wikidataItem, fileName, captions)
         val p18 = SnakPartial(
             "value",
             IMAGE.propertyName,
@@ -193,10 +204,13 @@ class WikidataEditService @Inject constructor(
             ), Arrays.asList(MEDIA_LEGENDS.propertyName)
         )
 
-        return wikidataClient.setClaim(claim, COMMONS_APP_TAG).blockingSingle()
+        val result = wikidataClient.setClaim(claim, COMMONS_APP_TAG).blockingSingle()
+        Timber.d("Exiting addImageAndMediaLegends with result: %s", result)
+        return result
     }
 
     fun handleImageClaimResult(wikidataItem: WikidataItem, revisionId: Long?) {
+        Timber.d("Entering handleImageClaimResult with wikidataItem: %s and revisionId: %s", wikidataItem, revisionId)
         if (revisionId != null) {
             wikidataEditListener?.onSuccessfulWikidataEdit()
             showSuccessToast(wikidataItem.name)
@@ -204,12 +218,14 @@ class WikidataEditService @Inject constructor(
             Timber.d("Unable to make wiki data edit for entity %s", wikidataItem)
             showLongToast(context, context.getString(R.string.wikidata_edit_failure))
         }
+        Timber.d("Exiting handleImageClaimResult")
     }
 
     fun addDepictionsAndCaptions(
         uploadResult: UploadResult,
         contribution: Contribution
     ): Observable<Boolean> {
+        Timber.d("Entering addDepictionsAndCaptions with uploadResult: %s and contribution: %s", uploadResult, contribution)
         return wikiBaseClient.getFileEntityId(uploadResult)
             .doOnError { throwable: Throwable? ->
                 Timber.e(
@@ -233,25 +249,33 @@ class WikidataEditService @Inject constructor(
                     return@switchMap Observable.empty<Boolean>()
                 }
             }
+            .doOnComplete { Timber.d("Exiting addDepictionsAndCaptions") }
     }
 
     @SuppressLint("NewApi")
     private fun captionEdits(contribution: Contribution, fileEntityId: Long): Observable<Boolean> {
-        return Observable.fromIterable(contribution.media.captions.entries)
+        Timber.d("Entering captionEdits with contribution: %s and fileEntityId: %s", contribution, fileEntityId)
+        val result = Observable.fromIterable(contribution.media.captions.entries)
             .concatMap { addCaption(fileEntityId, it.key, it.value) }
+        Timber.d("Exiting captionEdits")
+        return result
     }
 
     private fun depictionEdits(
         contribution: Contribution,
         fileEntityId: Long
-    ): Observable<Boolean> = addDepictsProperty(fileEntityId.toString(), buildList {
-        for ((_, _, _, _, _, _, id) in contribution.depictedItems) {
-            add(id)
-        }
-    })
+    ): Observable<Boolean> {
+        Timber.d("Entering depictionEdits with contribution: %s and fileEntityId: %s", contribution, fileEntityId)
+        val result = addDepictsProperty(fileEntityId.toString(), buildList {
+            for ((_, _, _, _, _, _, id) in contribution.depictedItems) {
+                add(id)
+            }
+        })
+        Timber.d("Exiting depictionEdits")
+        return result
+    }
 
     companion object {
         const val COMMONS_APP_TAG: String = "wikimedia-commons-app"
     }
 }
-
