@@ -1,5 +1,7 @@
 package fr.free.nrw.commons.explore;
 
+import static androidx.viewpager.widget.ViewPager.SCROLL_STATE_IDLE;
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -157,8 +159,8 @@ public class ExploreFragment extends CommonsDaggerSupportFragment {
     }
 
     /**
-     * Checks if fragment arguments contain data from Nearby map, indicating that the user navigated
-     * from Nearby using 'Show in Explore'.
+     * Checks if fragment arguments contain data from Nearby map. if present, then the user
+     * navigated from Nearby using 'Show in Explore'.
      *
      * @return true if user navigated from Nearby map
      **/
@@ -194,7 +196,28 @@ public class ExploreFragment extends CommonsDaggerSupportFragment {
      */
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.menu_search, menu);
+        inflater.inflate(R.menu.explore_fragment_menu, menu);
+
+        // if on Map tab, show all menu options, else only show search
+        binding.viewPager.addOnPageChangeListener(new OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset,
+                int positionOffsetPixels) {
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                MenuItem other = menu.findItem(R.id.list_item_show_in_nearby);
+                other.setVisible((position == 2));
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+                if (state == SCROLL_STATE_IDLE && binding.viewPager.getCurrentItem() == 2) {
+                    onPageSelected(2);
+                }
+            }
+        });
         super.onCreateOptionsMenu(menu, inflater);
     }
 
