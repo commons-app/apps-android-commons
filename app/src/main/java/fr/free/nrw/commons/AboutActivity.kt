@@ -33,7 +33,7 @@ class AboutActivity : BaseActivity() {
      *
      * @param savedInstanceState Data bundle
      */
-    @SuppressLint("StringFormatInvalid")
+    @SuppressLint("StringFormatInvalid")  //TODO:
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -53,7 +53,8 @@ class AboutActivity : BaseActivity() {
          */
         binding!!.aboutLicense.setHtmlText(aboutText)
 
-        @SuppressLint("StringFormatMatches") val improveText =
+        @SuppressLint("StringFormatMatches") // TODO:
+        val improveText =
             String.format(getString(R.string.about_improve), Urls.NEW_ISSUE_URL)
         binding!!.aboutImprove.setHtmlText(improveText)
         binding!!.aboutVersion.text = applicationContext.getVersionNameWithSha()
@@ -86,51 +87,15 @@ class AboutActivity : BaseActivity() {
         /*
           To set listeners, we can create a separate method and use lambda syntax.
         */
-        binding!!.facebookLaunchIcon.setOnClickListener { view: View? ->
-            this.launchFacebook(
-                view
-            )
-        }
-        binding!!.githubLaunchIcon.setOnClickListener { view: View? ->
-            this.launchGithub(
-                view
-            )
-        }
-        binding!!.websiteLaunchIcon.setOnClickListener { view: View? ->
-            this.launchWebsite(
-                view
-            )
-        }
-        binding!!.aboutRateUs.setOnClickListener { view: View? ->
-            this.launchRatings(
-                view
-            )
-        }
-        binding!!.aboutCredits.setOnClickListener { view: View? ->
-            this.launchCredits(
-                view
-            )
-        }
-        binding!!.aboutPrivacyPolicy.setOnClickListener { view: View? ->
-            this.launchPrivacyPolicy(
-                view
-            )
-        }
-        binding!!.aboutUserGuide.setOnClickListener { view: View? ->
-            this.launchUserGuide(
-                view
-            )
-        }
-        binding!!.aboutFaq.setOnClickListener { view: View? ->
-            this.launchFrequentlyAskedQuesions(
-                view
-            )
-        }
-        binding!!.aboutTranslate.setOnClickListener { view: View? ->
-            this.launchTranslate(
-                view
-            )
-        }
+        binding!!.facebookLaunchIcon.setOnClickListener(::launchFacebook)
+        binding!!.githubLaunchIcon.setOnClickListener(::launchGithub)
+        binding!!.websiteLaunchIcon.setOnClickListener(::launchWebsite)
+        binding!!.aboutRateUs.setOnClickListener(::launchRatings)
+        binding!!.aboutCredits.setOnClickListener(::launchCredits)
+        binding!!.aboutPrivacyPolicy.setOnClickListener(::launchPrivacyPolicy)
+        binding!!.aboutUserGuide.setOnClickListener(::launchUserGuide)
+        binding!!.aboutFaq.setOnClickListener(::launchFrequentlyAskedQuesions)
+        binding!!.aboutTranslate.setOnClickListener(::launchTranslate)
     }
 
     override fun onSupportNavigateUp(): Boolean {
