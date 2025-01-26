@@ -76,7 +76,7 @@ constructor(
     /**
      * Fetches the latest contribution identifier only
      */
-    fun fetchLatestContributionIdentifier(callback: (String?) -> Unit) {
+    fun fetchLatestContributionIdentifier(callback: (Long?) -> Unit) {
         if (userName.isNullOrEmpty()) {
             Timber.e("Failed to fetch latest contribution: userName is null or empty")
             return
@@ -86,11 +86,13 @@ constructor(
         compositeDisposable.add(
             mediaClient.getMediaListForUser(userName!!)
                 .map { mediaList ->
-                    mediaList.firstOrNull()?.pageId.toString() // Extract the first contribution's pageId
+                    mediaList.firstOrNull()?.pageId // Extract the first contribution's pageId as Long
                 }
                 .subscribeOn(ioThreadScheduler)
                 .subscribe({ latestIdentifier ->
-                    callback(latestIdentifier)
+                    if (latestIdentifier != null) {
+                        callback(latestIdentifier.toLong())
+                    }
                 }) { error: Throwable ->
                     Timber.e("Failed to fetch latest contribution identifier: %s", error.message)
                     callback(null)

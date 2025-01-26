@@ -129,7 +129,7 @@ public class ContributionsListPresenter implements UserActionListener {
         });
     }
 
-    private String lastKnownIdentifier = null; // Declare and initialize
+    private long lastKnownIdentifier ; // Declare and initialize
 
     /**
      * Check for new contributions by comparing the latest contribution identifier.
@@ -140,31 +140,14 @@ public class ContributionsListPresenter implements UserActionListener {
         contributionsRemoteDataSource.setUserName(sessionManager.getUserName());
 
         contributionsRemoteDataSource.fetchLatestContributionIdentifier(latestIdentifier -> {
+            Timber.d("Latest identifier: %s", latestIdentifier);
+            Timber.d("Last known identifier: %s", lastKnownIdentifier);
             if (latestIdentifier != null && !latestIdentifier.equals(lastKnownIdentifier)) {
                 lastKnownIdentifier = latestIdentifier;
-                fetchAllContributions(); // Fetch the full list of contributions
+                contributionBoundaryCallback.refreshList(() -> Unit.INSTANCE);
             }
             return Unit.INSTANCE;
         });
-    }
-
-    /**
-     * Fetch new contributions from the server and append them to the existing list.
-     */
-    void fetchAllContributions() {
-        contributionsRemoteDataSource.fetchContributions(
-            new ContributionsRemoteDataSource.LoadCallback<>() {
-
-                @Override
-                public void onResult(List<Contribution> newContributions) {
-                    if (newContributions != null && !newContributions.isEmpty()) {
-                        existingContributions.clear();
-                        existingContributions.addAll(newContributions);
-                        liveData.postValue(
-                            existingContributions); // Update liveData with the new list
-                    }
-                }
-            });
     }
 
 }

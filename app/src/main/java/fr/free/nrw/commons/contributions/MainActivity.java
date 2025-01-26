@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -457,7 +458,6 @@ public class MainActivity extends BaseActivity
                 ImageView refreshIcon = actionView.findViewById(R.id.refresh_icon);
                 if (refreshIcon != null) {
                     refreshIcon.setOnClickListener(v -> {
-                        // Clear previous animation and start new one
                         v.clearAnimation();
                         Animation rotateAnimation = AnimationUtils.loadAnimation(this, R.anim.rotate);
                         v.startAnimation(rotateAnimation);
@@ -471,7 +471,6 @@ public class MainActivity extends BaseActivity
 
         return true;
     }
-
 
     public void centerMapToPlace(Place place) {
         setSelectedItemId(NavTab.NEARBY.code());
