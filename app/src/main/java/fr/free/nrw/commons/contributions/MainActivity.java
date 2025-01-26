@@ -463,7 +463,7 @@ public class MainActivity extends BaseActivity
                         v.startAnimation(rotateAnimation);
 
                         // Trigger refresh logic
-                        contributionsListPresenter.checkForNewContributions();
+                        contributionsListPresenter.fetchContributions();
                     });
                 }
             }
@@ -495,7 +495,7 @@ public class MainActivity extends BaseActivity
 
         retryAllFailedUploads();
         // Background check for new contributions
-        contributionsListPresenter.checkForNewContributions();
+        contributionsListPresenter.fetchContributions();
     }
 
     @Override

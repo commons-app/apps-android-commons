@@ -129,25 +129,11 @@ public class ContributionsListPresenter implements UserActionListener {
         });
     }
 
-    private long lastKnownIdentifier ; // Declare and initialize
-
     /**
      * Check for new contributions by comparing the latest contribution identifier.
      */
-    void checkForNewContributions() {
-
-        // Set the username before fetching contributions
-        contributionsRemoteDataSource.setUserName(sessionManager.getUserName());
-
-        contributionsRemoteDataSource.fetchLatestContributionIdentifier(latestIdentifier -> {
-            Timber.d("Latest identifier: %s", latestIdentifier);
-            Timber.d("Last known identifier: %s", lastKnownIdentifier);
-            if (latestIdentifier != null && !latestIdentifier.equals(lastKnownIdentifier)) {
-                lastKnownIdentifier = latestIdentifier;
-                contributionBoundaryCallback.refreshList(() -> Unit.INSTANCE);
-            }
-            return Unit.INSTANCE;
-        });
+    void fetchContributions() {
+        contributionBoundaryCallback.refreshList(() -> Unit.INSTANCE);
     }
 
 }
