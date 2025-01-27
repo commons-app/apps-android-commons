@@ -129,11 +129,4 @@ public class ContributionsListPresenter implements UserActionListener {
         });
     }
 
-    /**
-     * Check for new contributions by comparing the latest contribution identifier.
-     */
-    void fetchContributions() {
-        contributionBoundaryCallback.refreshList(() -> Unit.INSTANCE);
-    }
-
 }

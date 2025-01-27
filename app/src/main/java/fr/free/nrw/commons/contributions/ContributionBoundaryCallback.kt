@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.contributions
 
+import android.annotation.SuppressLint
 import androidx.paging.PagedList.BoundaryCallback
 import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.di.CommonsApplicationModule.Companion.IO_THREAD
@@ -66,31 +67,34 @@ class ContributionBoundaryCallback
          *   with either error or success.
          */
         private fun fetchContributions(onRefreshFinish: () -> Unit = {}) {
+
             if (sessionManager.userName != null) {
-                userName
-                    ?.let { userName ->
-                        mediaClient
-                            .getMediaListForUser(userName)
-                            .map { mediaList ->
-                                mediaList.map { media ->
-                                    Contribution(media = media, state = Contribution.STATE_COMPLETED)
-                                }
-                            }.subscribeOn(ioThreadScheduler)
-                            .subscribe({ list ->
-                                saveContributionsToDB(list, onRefreshFinish)
-                            },{ error ->
-                                onRefreshFinish()
-                                Timber.e(
-                                    "Failed to fetch contributions: %s",
-                                    error.message,
-                                )
-                            })
-                    }?.let {
-                        compositeDisposable.add(
-                            it,
-                        )
-                    }
+
+                sessionManager.userName?.let { userName ->
+
+                    mediaClient
+                        .getMediaListForUser(userName)
+                        .map { mediaList ->
+                            Timber.d("Mapping media list of size: ${mediaList.size}")
+                            mediaList.map { media ->
+                                Contribution(media = media, state = Contribution.STATE_COMPLETED)
+                            }
+                        }.subscribeOn(ioThreadScheduler)
+                        .subscribe({ list ->
+                            saveContributionsToDB(list, onRefreshFinish)
+                        },{ error ->
+                            Timber.e("Failed to fetch contributions: ${error.message}")
+                            Timber.e(error) // Log full stack trace
+                            onRefreshFinish()
+                        })
+                }?.let {
+                    compositeDisposable.add(it)
+                } ?: run {
+                    // Add logging if userName?.let returns null
+                    Timber.d("userName?.let returned null")
+                }
             } else {
+                Timber.d("SessionManager userName is null, clearing disposable")
                 compositeDisposable.clear()
             }
         }
