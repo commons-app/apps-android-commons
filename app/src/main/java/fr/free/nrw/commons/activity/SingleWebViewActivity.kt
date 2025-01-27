@@ -27,6 +27,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.viewinterop.AndroidView
+import fr.free.nrw.commons.CommonsApplication
+import fr.free.nrw.commons.CommonsApplication.ActivityLogoutListener
 import fr.free.nrw.commons.R
 import timber.log.Timber
 
@@ -72,7 +74,12 @@ class SingleWebViewActivity : ComponentActivity() {
                         url = url,
                         successUrl = successUrl,
                         onSuccess = {
-                            // TODO Redirect the user to login screen like we do when the user logout's
+                            //Redirect the user to login screen like we do when the user logout's
+                            val app = applicationContext as CommonsApplication
+                            app.clearApplicationData(
+                                applicationContext,
+                                ActivityLogoutListener(activity = this, ctx = applicationContext)
+                            )
                             finish()
                         },
                         modifier = Modifier
