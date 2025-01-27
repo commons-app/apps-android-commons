@@ -545,8 +545,9 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
      * @param place Place of clicked nearby marker
      */
     private void passInfoToSheet(final Place place) {
-        binding.bottomSheetDetailsBinding.directionsButton.setOnClickListener(view -> Utils.handleGeoCoordinates(getActivity(),
-            place.getLocation()));
+        binding.bottomSheetDetailsBinding.directionsButton.setOnClickListener(
+            view -> Utils.handleGeoCoordinates(getActivity(),
+                place.getLocation(), binding.mapView.getZoomLevelDouble()));
 
         binding.bottomSheetDetailsBinding.commonsButton.setVisibility(place.hasCommonsLink() ? View.VISIBLE : View.GONE);
         binding.bottomSheetDetailsBinding.commonsButton.setOnClickListener(
