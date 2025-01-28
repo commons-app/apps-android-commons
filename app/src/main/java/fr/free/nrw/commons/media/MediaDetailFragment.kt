@@ -650,10 +650,8 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
     }
 
     private fun onDepictionsLoaded(idAndCaptions: List<IdAndCaptions>) {
-        binding.depictsLayout.visibility =
-            if (idAndCaptions.isEmpty()) View.GONE else View.VISIBLE
-        binding.depictionsEditButton.visibility =
-            if (idAndCaptions.isEmpty()) View.GONE else View.VISIBLE
+        binding.depictsLayout.visibility = View.VISIBLE
+        binding.depictionsEditButton.visibility = View.VISIBLE
         buildDepictionList(idAndCaptions)
     }
 
