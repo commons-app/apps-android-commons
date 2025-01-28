@@ -188,7 +188,7 @@ class ReviewActivity : BaseActivity() {
             return
         }
 
-        binding.reviewImageView.setImageURI(media.imageUrl)
+        binding.reviewImageView.setImageURI(media.thumbUrl)
 
         reviewController.onImageRefreshed(media)    // filename is updated
         compositeDisposable.add(
