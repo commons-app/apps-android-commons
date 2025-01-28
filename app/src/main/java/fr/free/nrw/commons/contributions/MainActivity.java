@@ -552,6 +552,7 @@ public class MainActivity extends BaseActivity
     /**
      * Load default language in onCreate from SharedPreferences
      */
+
     private void loadLocale() {
         final SharedPreferences preferences = getSharedPreferences("Settings",
             Activity.MODE_PRIVATE);
