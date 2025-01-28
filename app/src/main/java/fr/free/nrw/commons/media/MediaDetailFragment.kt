@@ -201,7 +201,7 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
     /**
      * Depicts is a feature part of Structured data.
      * Multiple Depictions can be added for an image just like categories.
-     * However unlike categories depictions is multi-lingualmedia
+     * However unlike categories depictions is multi-lingual
      * Ex: key: en value: monument
      */
     private var imageInfoCache: ImageInfo? = null
