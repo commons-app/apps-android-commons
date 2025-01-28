@@ -201,7 +201,7 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
     /**
      * Depicts is a feature part of Structured data.
      * Multiple Depictions can be added for an image just like categories.
-     * However unlike categories depictions is multi-lingual
+     * However unlike categories depictions is multi-lingualmedia
      * Ex: key: en value: monument
      */
     private var imageInfoCache: ImageInfo? = null
@@ -861,8 +861,22 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
      */
     private fun buildDepictionList(idAndCaptions: List<IdAndCaptions>) {
         binding.mediaDetailDepictionContainer.removeAllViews()
+
+        // Create a mutable list from the original list
+        val mutableIdAndCaptions = idAndCaptions.toMutableList()
+
+        if (mutableIdAndCaptions.isEmpty()) {
+            // Create a placeholder IdAndCaptions object and add it to the list
+            mutableIdAndCaptions.add(
+                IdAndCaptions(
+                    id = media?.pageId ?: "", // Use an empty string if media?.pageId is null
+                    captions = mapOf(Locale.getDefault().language to getString(R.string.detail_panel_cats_none)) // Create a Map with the language as the key and the message as the value
+                )
+            )
+        }
+
         val locale: String = Locale.getDefault().language
-        for (idAndCaption: IdAndCaptions in idAndCaptions) {
+        for (idAndCaption: IdAndCaptions in mutableIdAndCaptions) {
             binding.mediaDetailDepictionContainer.addView(
                 buildDepictLabel(
                     getDepictionCaption(idAndCaption, locale),
@@ -872,6 +886,7 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
             )
         }
     }
+
 
     private fun getDepictionCaption(idAndCaption: IdAndCaptions, locale: String): String? {
         // Check if the Depiction Caption is available in user's locale
