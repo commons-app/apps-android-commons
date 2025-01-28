@@ -147,7 +147,15 @@ public class MainActivity extends BaseActivity
         binding.toolbarBinding.toolbar.setNavigationOnClickListener(view -> {
             onSupportNavigateUp();
         });
+        /*
+        "first_edit_depict" is a key for getting information about opening the depiction editor
+        screen for the first time after opening the app.
 
+        Getting true by the key means the depiction editor screen is opened for the first time
+        after opening the app.
+        Getting false by the key means the depiction editor screen is not opened for the first time
+        after opening the app.
+         */
         applicationKvStore.putBoolean("first_edit_depict", true);
         if (applicationKvStore.getBoolean("login_skipped") == true) {
             setTitle(getString(R.string.navigation_item_explore));
@@ -158,6 +166,8 @@ public class MainActivity extends BaseActivity
                 applicationKvStore.putBoolean("hasAlreadyLaunchedCategoriesDialog", false);
             }
             if (savedInstanceState == null) {
+                //starting a fresh fragment.
+                // Open Last opened screen if it is Contributions or Nearby, otherwise Contributions
                 if (applicationKvStore.getBoolean("last_opened_nearby")) {
                     setTitle(getString(R.string.nearby_fragment));
                     showNearby();
@@ -176,6 +186,21 @@ public class MainActivity extends BaseActivity
                 userName = sessionManager.getUserName();
             }
             setUpPager();
+            /**
+             * Ask the user for media location access just after login
+             * so that location in the EXIF metadata of the images shared by the user
+             * is retained on devices running Android 10 or above
+             */
+//            if (VERSION.SDK_INT >= VERSION_CODES.Q) {
+//                ActivityCompat.requestPermissions(this,
+//                    new String[]{Manifest.permission.ACCESS_MEDIA_LOCATION}, 0);
+//                PermissionUtils.checkPermissionsAndPerformAction(
+//                    this,
+//                    () -> {},
+//                    R.string.media_location_permission_denied,
+//                    R.string.add_location_manually,
+//                    permission.ACCESS_MEDIA_LOCATION);
+//            }
             checkAndResumeStuckUploads();
         }
     }
@@ -188,8 +213,10 @@ public class MainActivity extends BaseActivity
         binding.fragmentMainNavTabLayout.setOnNavigationItemSelectedListener(
             navListener = (item) -> {
                 if (!item.getTitle().equals(getString(R.string.more))) {
+                    // do not change title for more fragment
                     setTitle(item.getTitle());
                 }
+                // set last_opened_nearby true if item is nearby screen else set false
                 applicationKvStore.putBoolean("last_opened_nearby",
                     item.getTitle().equals(getString(R.string.nearby_fragment)));
                 final Fragment fragment = NavTab.of(item.getOrder()).newInstance();
@@ -201,6 +228,7 @@ public class MainActivity extends BaseActivity
         loadFragment(ExploreFragment.newInstance(), false);
         binding.fragmentMainNavTabLayout.setOnNavigationItemSelectedListener(item -> {
             if (!item.getTitle().equals(getString(R.string.more))) {
+                // do not change title for more fragment
                 setTitle(item.getTitle());
             }
             Fragment fragment = NavTabLoggedOut.of(item.getOrder()).newInstance();
@@ -209,33 +237,36 @@ public class MainActivity extends BaseActivity
     }
 
     private boolean loadFragment(Fragment fragment, boolean showBottom) {
+        //showBottom so that we do not show the bottom tray again when constructing
+        //from the saved instance state.
         if (fragment instanceof ContributionsFragment) {
             if (activeFragment == ActiveFragment.CONTRIBUTIONS) {
+                // scroll to top if already on the Contributions tab
                 contributionsFragment.scrollToTop();
                 return true;
             }
             contributionsFragment = (ContributionsFragment) fragment;
             activeFragment = ActiveFragment.CONTRIBUTIONS;
         } else if (fragment instanceof NearbyParentFragment) {
-            if (activeFragment == ActiveFragment.NEARBY) {
+            if (activeFragment == ActiveFragment.NEARBY) {// Do nothing if same tab
                 return true;
             }
             nearbyParentFragment = (NearbyParentFragment) fragment;
             activeFragment = ActiveFragment.NEARBY;
         } else if (fragment instanceof ExploreFragment) {
-            if (activeFragment == ActiveFragment.EXPLORE) {
+            if (activeFragment == ActiveFragment.EXPLORE) {// Do nothing if same tab
                 return true;
             }
             exploreFragment = (ExploreFragment) fragment;
             activeFragment = ActiveFragment.EXPLORE;
         } else if (fragment instanceof BookmarkFragment) {
-            if (activeFragment == ActiveFragment.BOOKMARK) {
+            if (activeFragment == ActiveFragment.BOOKMARK) {// Do nothing if same tab
                 return true;
             }
             bookmarkFragment = (BookmarkFragment) fragment;
             activeFragment = ActiveFragment.BOOKMARK;
         } else if (fragment == null && showBottom) {
-            if (applicationKvStore.getBoolean("login_skipped") == true) {
+            if (applicationKvStore.getBoolean("login_skipped") == true) {// If logged out, more sheet is different
                 MoreBottomSheetLoggedOutFragment bottomSheet = new MoreBottomSheetLoggedOutFragment();
                 bottomSheet.show(getSupportFragmentManager(), "MoreBottomSheetLoggedOut");
             } else {
@@ -261,7 +292,12 @@ public class MainActivity extends BaseActivity
     public void showTabs() {
         binding.fragmentMainNavTabLayout.setVisibility(View.VISIBLE);
     }
-
+    /**
+     * Adds number of uploads next to tab text "Contributions" then it will look like "Contributions
+     * (NUMBER)"
+     *
+     * @param uploadCount
+     */
     public void setNumOfUploads(int uploadCount) {
         if (activeFragment == ActiveFragment.CONTRIBUTIONS) {
             setTitle(getResources().getString(R.string.contributions_fragment) + " " + (
@@ -272,7 +308,15 @@ public class MainActivity extends BaseActivity
                     : getString(R.string.contributions_subtitle_zero)));
         }
     }
-
+    /**
+     * Resume the uploads that got stuck because of the app being killed or the device being
+     * rebooted.
+     * <p>
+     * When the app is terminated or the device is restarted, contributions remain in the
+     * 'STATE_IN_PROGRESS' state. This status persists and doesn't change during these events. So,
+     * retrieving contributions labeled as 'STATE_IN_PROGRESS' from the database will provide the
+     * list of uploads that appear as stuck on opening the app again
+     */
     @SuppressLint("CheckResult")
     private void checkAndResumeStuckUploads() {
         List<Contribution> stuckUploads = contributionDao.getContribution(
@@ -296,6 +340,7 @@ public class MainActivity extends BaseActivity
     @Override
     protected void onPostCreate(@Nullable Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
+        //quizChecker.initQuizCheck(this);
     }
 
     @Override
@@ -333,16 +378,22 @@ public class MainActivity extends BaseActivity
     @Override
     public void onBackPressed() {
         if (contributionsFragment != null && activeFragment == ActiveFragment.CONTRIBUTIONS) {
-            if (!contributionsFragment.backButtonClicked()) {
+            // Means that contribution fragment is visible
+            if (!contributionsFragment.backButtonClicked()) {//If this one does not wan't to handle
+                // the back press, let the activity do so
                 super.onBackPressed();
             }
         } else if (nearbyParentFragment != null && activeFragment == ActiveFragment.NEARBY) {
+            // Means that nearby fragment is visible
+            /* If function nearbyParentFragment.backButtonClick() returns false, it means that the bottomsheet is
+              not expanded. So if the back button is pressed, then go back to the Contributions tab */
             if (!nearbyParentFragment.backButtonClicked()) {
                 getSupportFragmentManager().beginTransaction().remove(nearbyParentFragment)
                     .commit();
                 setSelectedItemId(NavTab.CONTRIBUTIONS.code());
             }
         } else if (exploreFragment != null && activeFragment == ActiveFragment.EXPLORE) {
+            // Means that explore fragment is visible
             if (!exploreFragment.onBackPressed()) {
                 if (applicationKvStore.getBoolean("login_skipped")) {
                     super.onBackPressed();
@@ -351,6 +402,7 @@ public class MainActivity extends BaseActivity
                 }
             }
         } else if (bookmarkFragment != null && activeFragment == ActiveFragment.BOOKMARK) {
+            // Means that bookmark fragment is visible
             bookmarkFragment.onBackPressed();
         } else {
             super.onBackPressed();
@@ -359,8 +411,11 @@ public class MainActivity extends BaseActivity
 
     @Override
     public void onBackStackChanged() {
+        //initBackButton();
     }
-
+    /**
+     * Retry all failed uploads as soon as the user returns to the app
+     */
     @SuppressLint("CheckResult")
     private void retryAllFailedUploads() {
         contributionDao.
@@ -372,7 +427,10 @@ public class MainActivity extends BaseActivity
                 }
             });
     }
-
+    /**
+     * Handles item selection in the options menu. This method is called when a user interacts with
+     * the options menu in the Top Bar.
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -380,6 +438,7 @@ public class MainActivity extends BaseActivity
                 startActivity(new Intent(this, UploadProgressActivity.class));
                 return true;
             case R.id.notifications:
+                // Starts notification activity on click to notification icon
                 NotificationActivity.Companion.startYourself(this, "unread");
                 return true;
             case R.id.menu_refresh:
@@ -473,14 +532,16 @@ public class MainActivity extends BaseActivity
     protected void onDestroy() {
         quizChecker.cleanup();
         locationManager.unregisterLocationManager();
+        // Remove ourself from hashmap to prevent memory leaks
         locationManager = null;
         super.onDestroy();
     }
-
+    /**
+     * Public method to show nearby from the reference of this.
+     */
     public void showNearby() {
         binding.fragmentMainNavTabLayout.setSelectedItemId(NavTab.NEARBY.code());
     }
-
     public enum ActiveFragment {
         CONTRIBUTIONS,
         NEARBY,
@@ -488,7 +549,9 @@ public class MainActivity extends BaseActivity
         BOOKMARK,
         MORE
     }
-
+    /**
+     * Load default language in onCreate from SharedPreferences
+     */
     private void loadLocale() {
         final SharedPreferences preferences = getSharedPreferences("Settings",
             Activity.MODE_PRIVATE);
