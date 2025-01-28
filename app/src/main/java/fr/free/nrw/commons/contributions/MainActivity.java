@@ -208,6 +208,8 @@ public class MainActivity extends BaseActivity
         //showBottom so that we do not show the bottom tray again when constructing
         //from the saved instance state.
 
+        freeUpFragments();
+
         if (fragment != null && args != null) {
             fragment.setArguments(args);
         }
@@ -259,6 +261,19 @@ public class MainActivity extends BaseActivity
             return true;
         }
         return false;
+    }
+
+    /**
+     * Old implementation of loadFragment() was causing memory leaks, due to MainActivity holding
+     * references to cleared fragments. This function frees up all fragment references.
+     * <p>
+     * Called in loadFragment() before doing the actual loading.
+     **/
+    public void freeUpFragments() {
+        contributionsFragment = null;
+        nearbyParentFragment = null;
+        exploreFragment = null;
+        bookmarkFragment = null;
     }
 
     public void hideTabs() {
@@ -452,6 +467,7 @@ public class MainActivity extends BaseActivity
         bundle.putDouble("prev_longitude", longitude);
 
         loadFragment(ExploreFragment.newInstance(), false, bundle);
+        setSelectedItemId(NavTab.EXPLORE.code());
     }
 
     /**
@@ -469,6 +485,7 @@ public class MainActivity extends BaseActivity
         bundle.putDouble("prev_longitude", longitude);
 
         loadFragment(NearbyParentFragment.newInstance(), false, bundle);
+        setSelectedItemId(NavTab.NEARBY.code());
     }
 
     @Override

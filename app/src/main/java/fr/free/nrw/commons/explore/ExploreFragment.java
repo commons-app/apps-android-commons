@@ -196,33 +196,38 @@ public class ExploreFragment extends CommonsDaggerSupportFragment {
      */
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.explore_fragment_menu, menu);
+        // if logged in 'Show in Nearby' menu item is visible
+        if (applicationKvStore.getBoolean("login_skipped") == false) {
+            inflater.inflate(R.menu.explore_fragment_menu, menu);
 
-        MenuItem others = menu.findItem(R.id.list_item_show_in_nearby);
+            MenuItem others = menu.findItem(R.id.list_item_show_in_nearby);
 
-        if (binding.viewPager.getCurrentItem() == 2) {
-            others.setVisible(true);
-        }
-
-        // if on Map tab, show all menu options, else only show search
-        binding.viewPager.addOnPageChangeListener(new OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset,
-                int positionOffsetPixels) {
+            if (binding.viewPager.getCurrentItem() == 2) {
+                others.setVisible(true);
             }
 
-            @Override
-            public void onPageSelected(int position) {
-                others.setVisible((position == 2));
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-                if (state == SCROLL_STATE_IDLE && binding.viewPager.getCurrentItem() == 2) {
-                    onPageSelected(2);
+            // if on Map tab, show all menu options, else only show search
+            binding.viewPager.addOnPageChangeListener(new OnPageChangeListener() {
+                @Override
+                public void onPageScrolled(int position, float positionOffset,
+                    int positionOffsetPixels) {
                 }
-            }
-        });
+
+                @Override
+                public void onPageSelected(int position) {
+                    others.setVisible((position == 2));
+                }
+
+                @Override
+                public void onPageScrollStateChanged(int state) {
+                    if (state == SCROLL_STATE_IDLE && binding.viewPager.getCurrentItem() == 2) {
+                        onPageSelected(2);
+                    }
+                }
+            });
+        } else {
+            inflater.inflate(R.menu.menu_search, menu);
+        }
         super.onCreateOptionsMenu(menu, inflater);
     }
 

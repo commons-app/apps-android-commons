@@ -493,7 +493,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             moveCameraToPosition(
                 new GeoPoint(prevLatitude, prevLongitude),
                 prevZoom,
-                2L
+                1L
             );
         }
         binding.map.getOverlays().add(mapEventsOverlay);

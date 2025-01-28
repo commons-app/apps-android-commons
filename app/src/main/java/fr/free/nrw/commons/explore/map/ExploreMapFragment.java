@@ -216,7 +216,11 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
         binding.mapView.getZoomController()
             .setVisibility(CustomZoomButtonsController.Visibility.NEVER);
         binding.mapView.setMultiTouchControls(true);
-        binding.mapView.getController().setZoom(ZOOM_LEVEL);
+
+        if (!isCameFromNearbyMap()) {
+            binding.mapView.getController().setZoom(ZOOM_LEVEL);
+        }
+
         performMapReadyActions();
 
         binding.mapView.getOverlays().add(new MapEventsOverlay(new MapEventsReceiver() {
@@ -344,7 +348,7 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
             moveCameraToPosition(
                 new GeoPoint(prevLatitude, prevLongitude),
                 prevZoom,
-                2L
+                1L
             );
         } else {
             moveCameraToPosition(
@@ -919,7 +923,9 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
                     -0.07483536015053005, 1f);
             }
         }
-        moveCameraToPosition(new GeoPoint(latLnge.getLatitude(), latLnge.getLongitude()));
+        if (!isCameFromNearbyMap()) {
+            moveCameraToPosition(new GeoPoint(latLnge.getLatitude(), latLnge.getLongitude()));
+        }
         return latLnge;
     }
 
