@@ -2309,7 +2309,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                 updateBookmarkButtonImage(selectedPlace);
                 break;
             case R.drawable.ic_directions_black_24dp:
-                Utils.handleGeoCoordinates(this.getContext(), selectedPlace.getLocation());
+                Utils.handleGeoCoordinates(this.getContext(), selectedPlace.getLocation(),
+                    binding.map.getZoomLevelDouble());
                 break;
             case R.drawable.ic_wikidata_logo_24dp:
                 Utils.handleWebUrl(this.getContext(), selectedPlace.siteLinks.getWikidataLink());
