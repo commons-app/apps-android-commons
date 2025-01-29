@@ -147,10 +147,10 @@ public class MainActivity extends BaseActivity
                 if (applicationKvStore.getBoolean("last_opened_nearby")) {
                     setTitle(getString(R.string.nearby_fragment));
                     showNearby();
-                    loadFragment(NearbyParentFragment.newInstance(), false, null);
+                    loadFragment(NearbyParentFragment.newInstance(), false);
                 } else {
                     setTitle(getString(R.string.contributions_fragment));
-                    loadFragment(ContributionsFragment.newInstance(), false, null);
+                    loadFragment(ContributionsFragment.newInstance(), false);
                 }
             }
             setUpPager();
@@ -188,31 +188,27 @@ public class MainActivity extends BaseActivity
                 applicationKvStore.putBoolean("last_opened_nearby",
                     item.getTitle().equals(getString(R.string.nearby_fragment)));
                 final Fragment fragment = NavTab.of(item.getOrder()).newInstance();
-                return loadFragment(fragment, true, null);
+                return loadFragment(fragment, true);
             });
     }
 
     private void setUpLoggedOutPager() {
-        loadFragment(ExploreFragment.newInstance(), false, null);
+        loadFragment(ExploreFragment.newInstance(), false);
         binding.fragmentMainNavTabLayout.setOnNavigationItemSelectedListener(item -> {
             if (!item.getTitle().equals(getString(R.string.more))) {
                 // do not change title for more fragment
                 setTitle(item.getTitle());
             }
             Fragment fragment = NavTabLoggedOut.of(item.getOrder()).newInstance();
-            return loadFragment(fragment, true, null);
+            return loadFragment(fragment, true);
         });
     }
 
-    private boolean loadFragment(Fragment fragment, boolean showBottom, Bundle args) {
+    private boolean loadFragment(Fragment fragment, boolean showBottom) {
         //showBottom so that we do not show the bottom tray again when constructing
         //from the saved instance state.
 
         freeUpFragments();
-
-        if (fragment != null && args != null) {
-            fragment.setArguments(args);
-        }
 
         if (fragment instanceof ContributionsFragment) {
             if (activeFragment == ActiveFragment.CONTRIBUTIONS) {
@@ -264,13 +260,25 @@ public class MainActivity extends BaseActivity
     }
 
     /**
+     * loadFragment() overload that supports passing extras to fragments
+     **/
+    private boolean loadFragment(Fragment fragment, boolean showBottom, Bundle args) {
+        if (fragment != null && args != null) {
+            fragment.setArguments(args);
+        }
+
+        return loadFragment(fragment, showBottom);
+    }
+
+    /**
      * Old implementation of loadFragment() was causing memory leaks, due to MainActivity holding
      * references to cleared fragments. This function frees up all fragment references.
      * <p>
      * Called in loadFragment() before doing the actual loading.
      **/
     public void freeUpFragments() {
-        contributionsFragment = null;
+        // free all fragments except contributionsFragment because several tests depend on it.
+        // hence, contributionsFragment is probably still a leak
         nearbyParentFragment = null;
         exploreFragment = null;
         bookmarkFragment = null;
@@ -355,16 +363,16 @@ public class MainActivity extends BaseActivity
     private void restoreActiveFragment(@NonNull String fragmentName) {
         if (fragmentName.equals(ActiveFragment.CONTRIBUTIONS.name())) {
             setTitle(getString(R.string.contributions_fragment));
-            loadFragment(ContributionsFragment.newInstance(), false, null);
+            loadFragment(ContributionsFragment.newInstance(), false);
         } else if (fragmentName.equals(ActiveFragment.NEARBY.name())) {
             setTitle(getString(R.string.nearby_fragment));
-            loadFragment(NearbyParentFragment.newInstance(), false, null);
+            loadFragment(NearbyParentFragment.newInstance(), false);
         } else if (fragmentName.equals(ActiveFragment.EXPLORE.name())) {
             setTitle(getString(R.string.navigation_item_explore));
-            loadFragment(ExploreFragment.newInstance(), false, null);
+            loadFragment(ExploreFragment.newInstance(), false);
         } else if (fragmentName.equals(ActiveFragment.BOOKMARK.name())) {
             setTitle(getString(R.string.bookmarks));
-            loadFragment(BookmarkFragment.newInstance(), false, null);
+            loadFragment(BookmarkFragment.newInstance(), false);
         }
     }
 
