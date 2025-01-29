@@ -1,52 +1,51 @@
-package fr.free.nrw.commons.contributions;
+package fr.free.nrw.commons.contributions
 
-import android.database.sqlite.SQLiteException;
-import androidx.paging.DataSource;
-import androidx.room.Dao;
-import androidx.room.Delete;
-import androidx.room.Insert;
-import androidx.room.OnConflictStrategy;
-import androidx.room.Query;
-import androidx.room.Transaction;
-import androidx.room.Update;
-import io.reactivex.Completable;
-import io.reactivex.Single;
-import java.util.Calendar;
-import java.util.List;
-import timber.log.Timber;
+import android.database.sqlite.SQLiteException
+import androidx.paging.DataSource
+import androidx.room.Dao
+import androidx.room.Delete
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
+import androidx.room.Transaction
+import androidx.room.Update
+import io.reactivex.Completable
+import io.reactivex.Single
+import java.util.Calendar
 
 @Dao
-public abstract class ContributionDao {
-
+abstract class ContributionDao {
     @Query("SELECT * FROM contribution order by media_dateUploaded DESC")
-    abstract DataSource.Factory<Integer, Contribution> fetchContributions();
+    abstract fun fetchContributions(): DataSource.Factory<Int, Contribution>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    public abstract void saveSynchronous(Contribution contribution);
+    abstract fun saveSynchronous(contribution: Contribution)
 
-    public Completable save(final Contribution contribution) {
+    fun save(contribution: Contribution): Completable {
         return Completable
-            .fromAction(() -> {
-                contribution.setDateModified(Calendar.getInstance().getTime());
-                if (contribution.getDateUploadStarted() == null) {
-                    contribution.setDateUploadStarted(Calendar.getInstance().getTime());
+            .fromAction {
+                contribution.dateModified = Calendar.getInstance().time
+                if (contribution.dateUploadStarted == null) {
+                    contribution.dateUploadStarted = Calendar.getInstance().time
                 }
-                saveSynchronous(contribution);
-            });
+                saveSynchronous(contribution)
+            }
     }
 
     @Transaction
-    public void deleteAndSaveContribution(final Contribution oldContribution,
-        final Contribution newContribution) {
-        deleteSynchronous(oldContribution);
-        saveSynchronous(newContribution);
+    open fun deleteAndSaveContribution(
+        oldContribution: Contribution,
+        newContribution: Contribution
+    ) {
+        deleteSynchronous(oldContribution)
+        saveSynchronous(newContribution)
     }
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    public abstract Single<List<Long>> save(List<Contribution> contribution);
+    abstract fun save(contribution: List<Contribution>): Single<List<Long>>
 
     @Delete
-    public abstract void deleteSynchronous(Contribution contribution);
+    abstract fun deleteSynchronous(contribution: Contribution)
 
     /**
      * Deletes contributions with specific states from the database.
@@ -55,12 +54,12 @@ public abstract class ContributionDao {
      * @throws SQLiteException If an SQLite error occurs.
      */
     @Query("DELETE FROM contribution WHERE state IN (:states)")
-    public abstract void deleteContributionsWithStatesSynchronous(List<Integer> states)
-        throws SQLiteException;
+    @Throws(SQLiteException::class)
+    abstract fun deleteContributionsWithStatesSynchronous(states: List<Int>)
 
-    public Completable delete(final Contribution contribution) {
+    fun delete(contribution: Contribution): Completable {
         return Completable
-            .fromAction(() -> deleteSynchronous(contribution));
+            .fromAction { deleteSynchronous(contribution) }
     }
 
     /**
@@ -69,19 +68,19 @@ public abstract class ContributionDao {
      * @param states The states of the contributions to delete.
      * @return A Completable indicating the result of the operation.
      */
-    public Completable deleteContributionsWithStates(List<Integer> states) {
+    fun deleteContributionsWithStates(states: List<Int>): Completable {
         return Completable
-            .fromAction(() -> deleteContributionsWithStatesSynchronous(states));
+            .fromAction { deleteContributionsWithStatesSynchronous(states) }
     }
 
     @Query("SELECT * from contribution WHERE media_filename=:fileName")
-    public abstract List<Contribution> getContributionWithTitle(String fileName);
+    abstract fun getContributionWithTitle(fileName: String): List<Contribution>
 
     @Query("SELECT * from contribution WHERE pageId=:pageId")
-    public abstract Contribution getContribution(String pageId);
+    abstract fun getContribution(pageId: String): Contribution
 
     @Query("SELECT * from contribution WHERE state IN (:states) order by media_dateUploaded DESC")
-    public abstract Single<List<Contribution>> getContribution(List<Integer> states);
+    abstract fun getContribution(states: List<Int>): Single<List<Contribution>>
 
     /**
      * Gets contributions with specific states in descending order by the date they were uploaded.
@@ -90,8 +89,9 @@ public abstract class ContributionDao {
      * @return A DataSource factory for paginated contributions with the specified states.
      */
     @Query("SELECT * from contribution WHERE state IN (:states) order by media_dateUploaded DESC")
-    public abstract DataSource.Factory<Integer, Contribution> getContributions(
-        List<Integer> states);
+    abstract fun getContributions(
+        states: List<Int>
+    ): DataSource.Factory<Int, Contribution>
 
     /**
      * Gets contributions with specific states in ascending order by the date the upload started.
@@ -100,17 +100,19 @@ public abstract class ContributionDao {
      * @return A DataSource factory for paginated contributions with the specified states.
      */
     @Query("SELECT * from contribution WHERE state IN (:states) order by dateUploadStarted ASC")
-    public abstract DataSource.Factory<Integer, Contribution> getContributionsSortedByDateUploadStarted(
-        List<Integer> states);
+    abstract fun getContributionsSortedByDateUploadStarted(
+        states: List<Int>
+    ): DataSource.Factory<Int, Contribution>
 
     @Query("SELECT COUNT(*) from contribution WHERE state in (:toUpdateStates)")
-    public abstract Single<Integer> getPendingUploads(int[] toUpdateStates);
+    abstract fun getPendingUploads(toUpdateStates: IntArray): Single<Int>
 
     @Query("Delete FROM contribution")
-    public abstract void deleteAll() throws SQLiteException;
+    @Throws(SQLiteException::class)
+    abstract fun deleteAll()
 
     @Update
-    public abstract void updateSynchronous(Contribution contribution);
+    abstract fun updateSynchronous(contribution: Contribution)
 
     /**
      * Updates the state of contributions with specific states.
@@ -119,15 +121,16 @@ public abstract class ContributionDao {
      * @param newState The new state to set.
      */
     @Query("UPDATE contribution SET state = :newState WHERE state IN (:states)")
-    public abstract void updateContributionsState(List<Integer> states, int newState);
+    abstract fun updateContributionsState(states: List<Int>, newState: Int)
 
-    public Completable update(final Contribution contribution) {
-        return Completable
-            .fromAction(() -> {
-                contribution.setDateModified(Calendar.getInstance().getTime());
-                updateSynchronous(contribution);
-            });
+    fun update(contribution: Contribution): Completable {
+        return Completable.fromAction {
+            contribution.dateModified = Calendar.getInstance().time
+            updateSynchronous(contribution)
+        }
     }
+
+
 
     /**
      * Updates the state of contributions with specific states asynchronously.
@@ -136,10 +139,10 @@ public abstract class ContributionDao {
      * @param newState The new state to set.
      * @return A Completable indicating the result of the operation.
      */
-    public Completable updateContributionsWithStates(List<Integer> states, int newState) {
+    fun updateContributionsWithStates(states: List<Int>, newState: Int): Completable {
         return Completable
-            .fromAction(() -> {
-                updateContributionsState(states, newState);
-            });
+            .fromAction {
+                updateContributionsState(states, newState)
+            }
     }
 }
