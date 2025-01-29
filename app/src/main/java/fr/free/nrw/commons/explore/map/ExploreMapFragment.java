@@ -605,7 +605,7 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
     private void passInfoToSheet(final Place place) {
         binding.bottomSheetDetailsBinding.directionsButton.setOnClickListener(
             view -> Utils.handleGeoCoordinates(getActivity(),
-                place.getLocation()));
+                place.getLocation(), binding.mapView.getZoomLevelDouble()));
 
         binding.bottomSheetDetailsBinding.commonsButton.setVisibility(
             place.hasCommonsLink() ? View.VISIBLE : View.GONE);
