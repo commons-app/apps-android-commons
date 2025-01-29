@@ -701,40 +701,43 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
      * @param nearbyBaseMarker The NearbyBaseMarker object representing the marker to be added.
      */
     private void addMarkerToMap(BaseMarker nearbyBaseMarker) {
-        ArrayList<OverlayItem> items = new ArrayList<>();
-        Bitmap icon = nearbyBaseMarker.getIcon();
-        Drawable d = new BitmapDrawable(getResources(), icon);
-        GeoPoint point = new GeoPoint(
-            nearbyBaseMarker.getPlace().location.getLatitude(),
-            nearbyBaseMarker.getPlace().location.getLongitude());
-        OverlayItem item = new OverlayItem(nearbyBaseMarker.getPlace().name, null,
-            point);
-        item.setMarker(d);
-        items.add(item);
-        ItemizedOverlayWithFocus overlay = new ItemizedOverlayWithFocus(items,
-            new OnItemGestureListener<OverlayItem>() {
-                @Override
-                public boolean onItemSingleTapUp(int index, OverlayItem item) {
-                    final Place place = nearbyBaseMarker.getPlace();
-                    if (clickedMarker != null) {
-                        removeMarker(clickedMarker);
-                        addMarkerToMap(clickedMarker);
-                        bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
-                        bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+        if (isAttachedToActivity()) {
+            ArrayList<OverlayItem> items = new ArrayList<>();
+            Bitmap icon = nearbyBaseMarker.getIcon();
+            Drawable d = new BitmapDrawable(getResources(), icon);
+            GeoPoint point = new GeoPoint(
+                nearbyBaseMarker.getPlace().location.getLatitude(),
+                nearbyBaseMarker.getPlace().location.getLongitude());
+            OverlayItem item = new OverlayItem(nearbyBaseMarker.getPlace().name, null,
+                point);
+            item.setMarker(d);
+            items.add(item);
+            ItemizedOverlayWithFocus overlay = new ItemizedOverlayWithFocus(items,
+                new OnItemGestureListener<OverlayItem>() {
+                    @Override
+                    public boolean onItemSingleTapUp(int index, OverlayItem item) {
+                        final Place place = nearbyBaseMarker.getPlace();
+                        if (clickedMarker != null) {
+                            removeMarker(clickedMarker);
+                            addMarkerToMap(clickedMarker);
+                            bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+                            bottomSheetDetailsBehavior.setState(
+                                BottomSheetBehavior.STATE_COLLAPSED);
+                        }
+                        clickedMarker = nearbyBaseMarker;
+                        passInfoToSheet(place);
+                        return true;
                     }
-                    clickedMarker = nearbyBaseMarker;
-                    passInfoToSheet(place);
-                    return true;
-                }
 
-                @Override
-                public boolean onItemLongPress(int index, OverlayItem item) {
-                    return false;
-                }
-            }, getContext());
+                    @Override
+                    public boolean onItemLongPress(int index, OverlayItem item) {
+                        return false;
+                    }
+                }, getContext());
 
-        overlay.setFocusItemsOnTap(true);
-        binding.mapView.getOverlays().add(overlay); // Add the overlay to the map
+            overlay.setFocusItemsOnTap(true);
+            binding.mapView.getOverlays().add(overlay); // Add the overlay to the map
+        }
     }
 
     /**
@@ -768,68 +771,72 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
      */
     @Override
     public void clearAllMarkers() {
-        binding.mapView.getOverlayManager().clear();
-        GeoPoint geoPoint = mapCenter;
-        if (geoPoint != null) {
-            List<Overlay> overlays = binding.mapView.getOverlays();
-            ScaleDiskOverlay diskOverlay =
-                new ScaleDiskOverlay(this.getContext(),
-                    geoPoint, 2000, GeoConstants.UnitOfMeasure.foot);
-            Paint circlePaint = new Paint();
-            circlePaint.setColor(Color.rgb(128, 128, 128));
-            circlePaint.setStyle(Paint.Style.STROKE);
-            circlePaint.setStrokeWidth(2f);
-            diskOverlay.setCirclePaint2(circlePaint);
-            Paint diskPaint = new Paint();
-            diskPaint.setColor(Color.argb(40, 128, 128, 128));
-            diskPaint.setStyle(Paint.Style.FILL_AND_STROKE);
-            diskOverlay.setCirclePaint1(diskPaint);
-            diskOverlay.setDisplaySizeMin(900);
-            diskOverlay.setDisplaySizeMax(1700);
-            binding.mapView.getOverlays().add(diskOverlay);
-            org.osmdroid.views.overlay.Marker startMarker = new org.osmdroid.views.overlay.Marker(
-                binding.mapView);
-            startMarker.setPosition(geoPoint);
-            startMarker.setAnchor(org.osmdroid.views.overlay.Marker.ANCHOR_CENTER,
-                org.osmdroid.views.overlay.Marker.ANCHOR_BOTTOM);
-            startMarker.setIcon(
-                ContextCompat.getDrawable(this.getContext(), R.drawable.current_location_marker));
-            startMarker.setTitle("Your Location");
-            startMarker.setTextLabelFontSize(24);
-            binding.mapView.getOverlays().add(startMarker);
-        }
-        ScaleBarOverlay scaleBarOverlay = new ScaleBarOverlay(binding.mapView);
-        scaleBarOverlay.setScaleBarOffset(15, 25);
-        Paint barPaint = new Paint();
-        barPaint.setARGB(200, 255, 250, 250);
-        scaleBarOverlay.setBackgroundPaint(barPaint);
-        scaleBarOverlay.enableScaleBar();
-        binding.mapView.getOverlays().add(scaleBarOverlay);
-        binding.mapView.getOverlays().add(new MapEventsOverlay(new MapEventsReceiver() {
-            @Override
-            public boolean singleTapConfirmedHelper(GeoPoint p) {
-                if (clickedMarker != null) {
-                    removeMarker(clickedMarker);
-                    addMarkerToMap(clickedMarker);
-                    binding.mapView.invalidate();
-                } else {
-                    Timber.e("CLICKED MARKER IS NULL");
-                }
-                if (bottomSheetDetailsBehavior.getState() == BottomSheetBehavior.STATE_EXPANDED) {
-                    // Back should first hide the bottom sheet if it is expanded
-                    bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
-                } else if (isDetailsBottomSheetVisible()) {
-                    hideBottomDetailsSheet();
-                }
-                return true;
+        if (isAttachedToActivity()) {
+            binding.mapView.getOverlayManager().clear();
+            GeoPoint geoPoint = mapCenter;
+            if (geoPoint != null) {
+                List<Overlay> overlays = binding.mapView.getOverlays();
+                ScaleDiskOverlay diskOverlay =
+                    new ScaleDiskOverlay(this.getContext(),
+                        geoPoint, 2000, GeoConstants.UnitOfMeasure.foot);
+                Paint circlePaint = new Paint();
+                circlePaint.setColor(Color.rgb(128, 128, 128));
+                circlePaint.setStyle(Paint.Style.STROKE);
+                circlePaint.setStrokeWidth(2f);
+                diskOverlay.setCirclePaint2(circlePaint);
+                Paint diskPaint = new Paint();
+                diskPaint.setColor(Color.argb(40, 128, 128, 128));
+                diskPaint.setStyle(Paint.Style.FILL_AND_STROKE);
+                diskOverlay.setCirclePaint1(diskPaint);
+                diskOverlay.setDisplaySizeMin(900);
+                diskOverlay.setDisplaySizeMax(1700);
+                binding.mapView.getOverlays().add(diskOverlay);
+                org.osmdroid.views.overlay.Marker startMarker = new org.osmdroid.views.overlay.Marker(
+                    binding.mapView);
+                startMarker.setPosition(geoPoint);
+                startMarker.setAnchor(org.osmdroid.views.overlay.Marker.ANCHOR_CENTER,
+                    org.osmdroid.views.overlay.Marker.ANCHOR_BOTTOM);
+                startMarker.setIcon(
+                    ContextCompat.getDrawable(this.getContext(),
+                        R.drawable.current_location_marker));
+                startMarker.setTitle("Your Location");
+                startMarker.setTextLabelFontSize(24);
+                binding.mapView.getOverlays().add(startMarker);
             }
+            ScaleBarOverlay scaleBarOverlay = new ScaleBarOverlay(binding.mapView);
+            scaleBarOverlay.setScaleBarOffset(15, 25);
+            Paint barPaint = new Paint();
+            barPaint.setARGB(200, 255, 250, 250);
+            scaleBarOverlay.setBackgroundPaint(barPaint);
+            scaleBarOverlay.enableScaleBar();
+            binding.mapView.getOverlays().add(scaleBarOverlay);
+            binding.mapView.getOverlays().add(new MapEventsOverlay(new MapEventsReceiver() {
+                @Override
+                public boolean singleTapConfirmedHelper(GeoPoint p) {
+                    if (clickedMarker != null) {
+                        removeMarker(clickedMarker);
+                        addMarkerToMap(clickedMarker);
+                        binding.mapView.invalidate();
+                    } else {
+                        Timber.e("CLICKED MARKER IS NULL");
+                    }
+                    if (bottomSheetDetailsBehavior.getState()
+                        == BottomSheetBehavior.STATE_EXPANDED) {
+                        // Back should first hide the bottom sheet if it is expanded
+                        bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+                    } else if (isDetailsBottomSheetVisible()) {
+                        hideBottomDetailsSheet();
+                    }
+                    return true;
+                }
 
-            @Override
-            public boolean longPressHelper(GeoPoint p) {
-                return false;
-            }
-        }));
-        binding.mapView.setMultiTouchControls(true);
+                @Override
+                public boolean longPressHelper(GeoPoint p) {
+                    return false;
+                }
+            }));
+            binding.mapView.setMultiTouchControls(true);
+        }
     }
 
     /**
@@ -984,6 +991,14 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
                 }
             }
         };
+    }
+
+    /**
+     * helper function to confirm that this fragment has been attached.
+     **/
+    public boolean isAttachedToActivity() {
+        boolean attached = isVisible() && getActivity() != null;
+        return attached;
     }
 
     @Override
