@@ -480,11 +480,9 @@ class UploadWorker(
                         uploadResult.filename,
                         contribution.media.captions,
                     )
-                    Timber.d(revisionID.toString())
+
                     if (revisionID != null) {
-                        Timber.d("Updating WikiItem place with image")
                         withContext(Dispatchers.IO) {
-                            Timber.d("Updating WikiItem place with image")
                             // Fetch and update place details
                             val place = placesRepository.fetchPlace(wikiDataPlace.id)
                             place.name = wikiDataPlace.name
@@ -520,7 +518,6 @@ class UploadWorker(
         saveCompletedContribution(contribution, uploadResult)
     }
 
-
     private fun saveCompletedContribution(
         contribution: Contribution,
         uploadResult: UploadResult,
@@ -532,6 +529,7 @@ class UploadWorker(
                 .blockingGet()
         contributionFromUpload.dateModified = Date()
         contributionDao.deleteAndSaveContribution(contribution, contributionFromUpload)
+
         // Upload success, save to uploaded status.
         saveIntoUploadedStatus(contribution)
     }

@@ -78,23 +78,23 @@ class WikiBaseClient
                         .toLong()
                 }
 
-    fun addLabelsToWikidata(
-        fileEntityId: Long,
-        languageCode: String?,
-        captionValue: String?
-    ): Observable<MwPostResponse> {
-        return csrfToken().switchMap { editToken ->
-            wikiBaseInterface.addLabelstoWikidata(
-                PAGE_ID_PREFIX + fileEntityId,
-                editToken,
-                languageCode,
-                captionValue
-            )
-        }
-    }
-
-    private fun csrfToken(): Observable<String> =
-            Observable.fromCallable {
-                csrfTokenClient.getTokenBlocking()
+        fun addLabelsToWikidata(
+            fileEntityId: Long,
+            languageCode: String?,
+            captionValue: String?
+        ): Observable<MwPostResponse> {
+            return csrfToken().switchMap { editToken ->
+                wikiBaseInterface.addLabelstoWikidata(
+                    PAGE_ID_PREFIX + fileEntityId,
+                    editToken,
+                    languageCode,
+                    captionValue
+                )
             }
+        }
+
+        private fun csrfToken(): Observable<String> =
+                Observable.fromCallable {
+                    csrfTokenClient.getTokenBlocking()
+                }
     }

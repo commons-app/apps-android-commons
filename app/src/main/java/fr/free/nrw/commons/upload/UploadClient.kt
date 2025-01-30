@@ -261,7 +261,6 @@ class UploadClient
             fileKey: String?,
         ): Observable<UploadResult?> =
             try {
-                Timber.d( "Step 1")
                 uploadInterface
                     .uploadFileFromStash(
                         csrfTokenClient.getTokenBlocking(),
@@ -270,10 +269,8 @@ class UploadClient
                         uniqueFileName!!,
                         fileKey!!,
                     ).map { uploadResponse: JsonObject? ->
-                        Timber.d("Step 2")
                         Timber.d(uploadResponse.toString())
                         val uploadResult = gson.fromJson(uploadResponse, UploadResponse::class.java)
-                        Timber.d("Step 3: Upload result - ${uploadResult.upload}")
 
                         if (uploadResult.upload == null) {
                             // Parse the error to MwException
@@ -288,7 +285,6 @@ class UploadClient
                                 throw Exception(exception.errorCode)
                             }
                         }
-                        Timber.d("Step 4")
                         uploadResult.upload
                     }
             } catch (throwable: Throwable) {
