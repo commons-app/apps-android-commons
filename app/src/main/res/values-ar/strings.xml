@@ -20,6 +20,7 @@
 * NancyMilad
 * OsamaK
 * Tala Ali
+* XIDME
 * أيوب
 * أَحمد
 * ترجمان05
@@ -408,7 +409,7 @@
   <string name="error_fetching_nearby_monuments">خطأ في جلب المعالم القريبة.</string>
   <string name="no_recent_searches">لا توجد عمليات بحث حديثة</string>
   <string name="delete_recent_searches_dialog">هل أنت متأكد من أنك تريد مسح سجل بحثك؟</string>
-  <string name="cancel_upload_dialog">هل انت متأكد انك تريد الغاء هذا التحميل</string>
+  <string name="cancel_upload_dialog">هل أنت متأكد أنك تريد إلغاء هذا التحميل؟</string>
   <string name="delete_search_dialog">هل تريد حذف هذا البحث؟</string>
   <string name="search_history_deleted">تم حذف سجل البحث</string>
   <string name="nominate_delete">ترشيح للحذف</string>
