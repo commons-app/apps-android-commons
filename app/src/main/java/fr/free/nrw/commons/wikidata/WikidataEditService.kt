@@ -37,6 +37,7 @@ import javax.inject.Inject
 import javax.inject.Named
 import javax.inject.Singleton
 
+
 /**
  * This class is meant to handle the Wikidata edits made through the app It will talk with MediaWiki
  * Apis to make the necessary calls, log the edits and fire listeners on successful edits
@@ -54,7 +55,6 @@ class WikidataEditService @Inject constructor(
         fileEntityId: String,
         depictedItems: List<String>
     ): Observable<Boolean> {
-
         val data = EditClaim.from(
             if (isBetaFlavour) listOf("Q10") else depictedItems, DEPICTS.propertyName
         )
@@ -79,7 +79,6 @@ class WikidataEditService @Inject constructor(
         fileEntityId: String?,
         depictedItems: List<String>
     ): Observable<Boolean> {
-
         val entityId: String = PAGE_ID_PREFIX + fileEntityId
         val claimIds = getDepictionsClaimIds(entityId)
 
@@ -164,8 +163,7 @@ class WikidataEditService @Inject constructor(
             )
             return null
         }
-        val result = addImageAndMediaLegends(wikidataPlace!!, fileName, captions)
-        return result
+        return addImageAndMediaLegends(wikidataPlace!!, fileName, captions)
     }
 
     fun addImageAndMediaLegends(
@@ -197,8 +195,7 @@ class WikidataEditService @Inject constructor(
             ), Arrays.asList(MEDIA_LEGENDS.propertyName)
         )
 
-        val result = wikidataClient.setClaim(claim, COMMONS_APP_TAG).blockingSingle()
-        return result
+        return wikidataClient.setClaim(claim, COMMONS_APP_TAG).blockingSingle()
     }
 
     fun handleImageClaimResult(wikidataItem: WikidataItem, revisionId: Long?) {
@@ -242,22 +239,18 @@ class WikidataEditService @Inject constructor(
 
     @SuppressLint("NewApi")
     private fun captionEdits(contribution: Contribution, fileEntityId: Long): Observable<Boolean> {
-        val result = Observable.fromIterable(contribution.media.captions.entries)
+        return Observable.fromIterable(contribution.media.captions.entries)
             .concatMap { addCaption(fileEntityId, it.key, it.value) }
-        return result
     }
 
     private fun depictionEdits(
         contribution: Contribution,
         fileEntityId: Long
-    ): Observable<Boolean> {
-        val result = addDepictsProperty(fileEntityId.toString(), buildList {
-            for ((_, _, _, _, _, _, id) in contribution.depictedItems) {
-                add(id)
-            }
-        })
-        return result
-    }
+    ): Observable<Boolean> = addDepictsProperty(fileEntityId.toString(), buildList {
+        for ((_, _, _, _, _, _, id) in contribution.depictedItems) {
+            add(id)
+        }
+    })
 
     companion object {
         const val COMMONS_APP_TAG: String = "wikimedia-commons-app"

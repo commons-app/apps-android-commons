@@ -481,7 +481,7 @@ class UploadWorker(
                         contribution.media.captions,
                     )
 
-                    if (revisionID != null) {
+                    if (null != revisionID) {
                         withContext(Dispatchers.IO) {
                             // Fetch and update place details
                             val place = placesRepository.fetchPlace(wikiDataPlace.id)
