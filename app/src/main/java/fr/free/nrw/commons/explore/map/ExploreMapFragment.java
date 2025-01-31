@@ -467,7 +467,7 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
             nearbyPlacesInfoObservable = presenter.loadAttractionsFromLocation(getLastMapFocus(),
                 currentLatLng, false);
         }
-        compositeDisposable.add(nearbyPlacesInfoObservable
+            getCompositeDisposable().add(nearbyPlacesInfoObservable
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(explorePlacesInfo -> {
