@@ -709,6 +709,7 @@
   <string name="file_usages_container_heading">이 파일을 사용하는 문서</string>
   <string name="account">계정</string>
   <string name="vanish_account">계정 버리기</string>
+  <string name="account_vanish_request_confirm">버리기는 &lt;b&gt;최후의 수단&lt;/b&gt;이며 &lt;b&gt;영원히 편집을 중단하고 싶을 때&lt;/b&gt;와 가능한 한 많은 과거 연관성을 숨기고 싶을 때만 사용해야 합니다.&lt;br/&gt;&lt;br/&gt;위키미디어 공용에서 계정을 삭제하려면 계정 이름을 변경하여 다른 사람이 기여한 내용을 알아볼 수 없도록 하는 계정 버리기라는 프로세스를 거쳐야 합니다. &lt;b&gt;버리기는 완전한 익명성을 보장하지 않으며 프로젝트에 수행한 기여를 제거하지 않습니다&lt;/b&gt;.</string>
   <string name="caption">캡션</string>
   <string name="caption_copied_to_clipboard">캡션이 클립보드에 복사되었습니다</string>
 </resources>
