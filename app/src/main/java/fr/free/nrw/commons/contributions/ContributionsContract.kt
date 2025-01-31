@@ -1,23 +1,19 @@
-package fr.free.nrw.commons.contributions;
+package fr.free.nrw.commons.contributions
 
-import android.content.Context;
-import fr.free.nrw.commons.BasePresenter;
+import android.content.Context
+import fr.free.nrw.commons.BasePresenter
 
 /**
  * The contract for Contributions View & Presenter
  */
-public class ContributionsContract {
+interface ContributionsContract {
 
-    public interface View {
-
-        void showMessage(String localizedMessage);
-
-        Context getContext();
+    interface View {
+        fun showMessage(localizedMessage: String)
+        fun getContext(): Context
     }
 
-    public interface UserActionListener extends BasePresenter<ContributionsContract.View> {
-
-        Contribution getContributionsWithTitle(String uri);
-
+    interface UserActionListener : BasePresenter<View> {
+        fun getContributionsWithTitle(uri: String): Contribution
     }
 }

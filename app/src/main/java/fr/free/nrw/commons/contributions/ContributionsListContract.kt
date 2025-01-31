@@ -1,25 +1,21 @@
-package fr.free.nrw.commons.contributions;
+package fr.free.nrw.commons.contributions
 
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-import fr.free.nrw.commons.BasePresenter;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import fr.free.nrw.commons.BasePresenter
 
 /**
  * The contract for Contributions list View & Presenter
  */
-public class ContributionsListContract {
+class ContributionsListContract {
+    interface View {
+        fun showWelcomeTip(numberOfUploads: Boolean)
 
-    public interface View {
+        fun showProgress(shouldShow: Boolean)
 
-        void showWelcomeTip(boolean numberOfUploads);
-
-        void showProgress(boolean shouldShow);
-
-        void showNoContributionsUI(boolean shouldShow);
+        fun showNoContributionsUI(shouldShow: Boolean)
     }
 
-    public interface UserActionListener extends BasePresenter<View> {
-
-        void refreshList(SwipeRefreshLayout swipeRefreshLayout);
-
+    interface UserActionListener : BasePresenter<View?> {
+        fun refreshList(swipeRefreshLayout: SwipeRefreshLayout?)
     }
 }

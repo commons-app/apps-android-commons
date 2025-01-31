@@ -493,7 +493,7 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
 
         val contributionsFragment: ContributionsFragment? = this.getContributionsFragmentParent()
         if (contributionsFragment?.binding != null) {
-            contributionsFragment.binding.cardViewNearby.visibility = View.GONE
+            contributionsFragment.binding!!.cardViewNearby.visibility = View.GONE
         }
 
         // detail provider is null when fragment is shown in review activity
