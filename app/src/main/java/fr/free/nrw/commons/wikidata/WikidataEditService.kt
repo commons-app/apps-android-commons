@@ -108,11 +108,9 @@ class WikidataEditService @Inject constructor(
 
     @SuppressLint("CheckResult")
     private fun getDepictionsClaimIds(entityId: String): List<String> {
-        val claimIds = wikiBaseClient.getClaimIdsByProperty(entityId, DEPICTS.propertyName)
+        return wikiBaseClient.getClaimIdsByProperty(entityId, DEPICTS.propertyName)
             .subscribeOn(Schedulers.io())
             .blockingFirst()
-
-        return claimIds
     }
 
     @SuppressLint("StringFormatInvalid")
