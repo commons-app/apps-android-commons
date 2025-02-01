@@ -45,12 +45,12 @@ class ReviewActivity : BaseActivity() {
     private var hasNonHiddenCategories = false
     var media: Media? = null
 
-    private val SAVED_MEDIA = "saved_media"
+    private val savedMedia = "saved_media"
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         media?.let {
-            outState.putParcelable(SAVED_MEDIA, it)
+            outState.putParcelable(savedMedia, it)
         }
     }
 
@@ -90,8 +90,8 @@ class ReviewActivity : BaseActivity() {
             PorterDuff.Mode.SRC_IN
         )
 
-        if (savedInstanceState?.getParcelable<Media>(SAVED_MEDIA) != null) {
-            updateImage(savedInstanceState.getParcelable(SAVED_MEDIA)!!)
+        if (savedInstanceState?.getParcelable<Media>(savedMedia) != null) {
+            updateImage(savedInstanceState.getParcelable(savedMedia)!!)
             setUpMediaDetailOnOrientation()
         } else {
             runRandomizer()
@@ -188,7 +188,7 @@ class ReviewActivity : BaseActivity() {
             return
         }
 
-        binding.reviewImageView.setImageURI(media.imageUrl)
+        binding.reviewImageView.setImageURI(media.thumbUrl)
 
         reviewController.onImageRefreshed(media)    // filename is updated
         compositeDisposable.add(

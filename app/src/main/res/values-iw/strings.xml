@@ -851,4 +851,5 @@
   <string name="account_vanish_request_confirm_title">אזהרת העלמת חשבון</string>
   <string name="caption">כותרת</string>
   <string name="caption_copied_to_clipboard">הכותרת הועתקה ללוח</string>
+  <string name="congratulations_all_pictures_in_this_album_have_been_either_uploaded_or_marked_as_not_for_upload">ברכותינו, כל התמונות באלבום הזה הועלו או שסומנו לא להעלאה.</string>
 </resources>

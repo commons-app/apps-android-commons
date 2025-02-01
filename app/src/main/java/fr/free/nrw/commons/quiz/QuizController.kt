@@ -14,11 +14,15 @@ class QuizController {
 
     private val quiz: ArrayList<QuizQuestion> = ArrayList()
 
-    private val URL_FOR_SELFIE = "https://i.imgur.com/0fMYcpM.jpg"
-    private val URL_FOR_TAJ_MAHAL = "https://upload.wikimedia.org/wikipedia/commons/1/15/Taj_Mahal-03.jpg"
-    private val URL_FOR_BLURRY_IMAGE = "https://i.imgur.com/Kepb5jR.jpg"
-    private val URL_FOR_SCREENSHOT = "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Social_media_app_mockup_screenshot.svg/500px-Social_media_app_mockup_screenshot.svg.png"
-    private val URL_FOR_EVENT = "https://upload.wikimedia.org/wikipedia/commons/5/51/HouseBuildingInNorthernVietnam.jpg"
+    companion object{
+
+        const val URL_FOR_SELFIE = "https://i.imgur.com/0fMYcpM.jpg"
+        const val URL_FOR_TAJ_MAHAL = "https://upload.wikimedia.org/wikipedia/commons/1/15/Taj_Mahal-03.jpg"
+        const val URL_FOR_BLURRY_IMAGE = "https://i.imgur.com/Kepb5jR.jpg"
+        const val URL_FOR_SCREENSHOT = "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Social_media_app_mockup_screenshot.svg/500px-Social_media_app_mockup_screenshot.svg.png"
+        const val URL_FOR_EVENT = "https://upload.wikimedia.org/wikipedia/commons/5/51/HouseBuildingInNorthernVietnam.jpg"
+    }
+
 
     fun initialize(context: Context) {
         val q1 = QuizQuestion(
