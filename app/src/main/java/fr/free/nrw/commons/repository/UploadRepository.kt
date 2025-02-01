@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.repository
 
+import android.net.Uri
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.category.CategoriesModel
 import fr.free.nrw.commons.category.CategoryItem
@@ -203,8 +204,8 @@ class UploadRepository @Inject constructor(
      * @param filePath file to be checked
      * @return IMAGE_DUPLICATE or IMAGE_OK
      */
-    fun checkDuplicateImage(filePath: String): Single<Int> {
-        return uploadModel.checkDuplicateImage(filePath)
+    fun checkDuplicateImage(originalFilePath: Uri, modifiedFilePath: Uri): Single<Int> {
+        return uploadModel.checkDuplicateImage(originalFilePath, modifiedFilePath)
     }
 
     /**
