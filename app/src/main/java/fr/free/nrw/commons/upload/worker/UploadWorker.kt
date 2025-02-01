@@ -475,9 +475,9 @@ class UploadWorker(
                 try {
                     revisionID =
                         wikidataEditService.createClaim(
-                        wikiDataPlace,
-                        uploadResult.filename,
-                        contribution.media.captions,
+                            wikiDataPlace,
+                            uploadResult.filename,
+                            contribution.media.captions,
                     )
                     if (null != revisionID) {
                         withContext(Dispatchers.IO) {
