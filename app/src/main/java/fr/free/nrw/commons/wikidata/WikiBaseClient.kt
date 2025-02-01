@@ -38,7 +38,7 @@ class WikiBaseClient
          * @param filename name of the file
          * @param data data of the depicts to be uploaded
          * @return Observable<Boolean>
-        </Boolean> */
+         </Boolean> */
         fun postEditEntityByFilename(
             filename: String?,
             data: String?,

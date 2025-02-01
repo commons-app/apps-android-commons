@@ -469,21 +469,18 @@ class UploadWorker(
         contribution: Contribution,
     ) {
         val wikiDataPlace = contribution.wikidataPlace
-
         if (wikiDataPlace != null) {
             if (!contribution.hasInvalidLocation()) {
                 var revisionID: Long? = null
                 try {
-                    // Always attempt to update the image claim with the latest photo
-                    revisionID = wikidataEditService.createClaim(
+                    revisionID =
+                        wikidataEditService.createClaim(
                         wikiDataPlace,
                         uploadResult.filename,
                         contribution.media.captions,
                     )
-
                     if (null != revisionID) {
                         withContext(Dispatchers.IO) {
-                            // Fetch and update place details
                             val place = placesRepository.fetchPlace(wikiDataPlace.id)
                             place.name = wikiDataPlace.name
                             place.pic = HOME_URL + uploadResult.createCanonicalFileName()
@@ -514,7 +511,6 @@ class UploadWorker(
                 }
             }
         }
-
         saveCompletedContribution(contribution, uploadResult)
     }
 

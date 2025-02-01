@@ -269,11 +269,8 @@ class UploadClient
                         uniqueFileName!!,
                         fileKey!!,
                     ).map { uploadResponse: JsonObject? ->
-                        Timber.d(uploadResponse.toString())
                         val uploadResult = gson.fromJson(uploadResponse, UploadResponse::class.java)
-
                         if (uploadResult.upload == null) {
-                            // Parse the error to MwException
                             val exception = gson.fromJson(uploadResponse, MwException::class.java)
                             Timber.e(exception, "Error in uploading file from stash")
 
