@@ -36,37 +36,35 @@ class CategoriesModel
          * @return
          */
         fun isSpammyCategory(item: String): Boolean {
-            // Check for current and previous year to exclude these categories from removal
-            val now = Calendar.getInstance()
-            val curYear = now[Calendar.YEAR]
-            val curYearInString = curYear.toString()
-            val prevYear = curYear - 1
-            val prevYearInString = prevYear.toString()
-            Timber.d("Previous year: %s", prevYearInString)
-
-            val mentionsDecade = item.matches(".*0s.*".toRegex())
-            val recentDecade = item.matches(".*20[0-2]0s.*".toRegex())
-            val spammyCategory =
-                item.matches("(.*)needing(.*)".toRegex()) ||
-                    item.matches("(.*)taken on(.*)".toRegex())
 
             // always skip irrelevant categories such as Media_needing_categories_as_of_16_June_2017(Issue #750)
+            val spammyCategory = item.matches("(.*)needing(.*)".toRegex())
+                    || item.matches("(.*)taken on(.*)".toRegex())
+
+            // checks for
+            // dd/mm/yyyy or yy
+            // yyyy or yy/mm/dd
+            // yyyy or yy/mm
+            // mm/yyyy or yy
+            // for `yy` it is assumed that 20XX is implicit.
+            // with separators [., /, -]
+            val isIrrelevantCategory =
+                item.contains("""\d{1,2}[-/.]\d{1,2}[-/.]\d{2,4}|\d{2,4}[-/.]\d{1,2}[-/.]\d{1,2}|\d{2,4}[-/.]\d{1,2}|\d{1,2}[-/.]\d{2,4}""".toRegex())
+
+
             if (spammyCategory) {
                 return true
             }
 
-            if (mentionsDecade) {
-                // Check if the year in the form of XX(X)0s is recent/relevant, i.e. in the 2000s or 2010s/2020s as stated in Issue #1029
-                // Example: "2020s" is OK, but "1920s" is not (and should be skipped)
-                return !recentDecade
-            } else {
-                // If it is not an year in decade form (e.g. 19xxs/20xxs), then check if item contains a 4-digit year
-                // anywhere within the string (.* is wildcard) (Issue #47)
-                // And that item does not equal the current year or previous year
-                return item.matches(".*(19|20)\\d{2}.*".toRegex()) &&
-                    !item.contains(curYearInString) &&
-                    !item.contains(prevYearInString)
+            if(isIrrelevantCategory){
+                return true
             }
+
+            val hasYear = item.matches("(.*\\d{4}.*)".toRegex())
+            val validYearsRange = item.matches(".*(20[0-9]{2}).*".toRegex())
+
+            // finally if there's 4 digits year exists in XXXX it should only be in 20XX range.
+            return  hasYear && !validYearsRange
         }
 
         /**
