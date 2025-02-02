@@ -191,9 +191,9 @@ public class NearbyPlaces {
      * @throws Exception If an error occurs during the retrieval process.
      */
     public List<Place> getPlaces(final List<Place> placeList,
-        final String lang) throws Exception {
+        final String lang, final String lang2) throws Exception {
         return okHttpJsonApiClient
-            .getPlaces(placeList, lang);
+            .getPlaces(placeList, lang, lang2);
     }
 
     /**
