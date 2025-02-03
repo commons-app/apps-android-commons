@@ -34,14 +34,12 @@ class ContributionsLocalDataSource @Inject constructor(
      * @param uri
      * @return
      */
-    fun getContributionWithFileName(uri: String): Contribution? {
-        val contributionWithUri = contributionDao.getContributionWithTitle(
-            uri
-        )
-        if (!contributionWithUri.isEmpty()) {
+    fun getContributionWithFileName(uri: String): Contribution {
+        val contributionWithUri = contributionDao.getContributionWithTitle(uri)
+        if (contributionWithUri.isNotEmpty()) {
             return contributionWithUri[0]
         }
-        return null
+        throw IllegalArgumentException("Contribution not found for URI: $uri")
     }
 
     /**

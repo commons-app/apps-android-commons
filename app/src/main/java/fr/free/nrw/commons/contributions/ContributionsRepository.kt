@@ -42,7 +42,7 @@ class ContributionsRepository @Inject constructor(private val localDataSource: C
      * @param fileName
      * @return
      */
-    fun getContributionWithFileName(fileName: String): Contribution? {
+    fun getContributionWithFileName(fileName: String): Contribution {
         return localDataSource.getContributionWithFileName(fileName)
     }
 
