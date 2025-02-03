@@ -1,7 +1,6 @@
 package fr.free.nrw.commons.nearby.fragments
 
 import android.Manifest.permission
-import android.fr.free.nrw.commons.R
 import android.annotation.SuppressLint
 import android.app.ProgressDialog
 import android.content.ActivityNotFoundException
@@ -51,7 +50,6 @@ import com.jakewharton.rxbinding2.view.RxView
 import com.jakewharton.rxbinding3.appcompat.queryTextChanges
 import fr.free.nrw.commons.CommonsApplication
 import fr.free.nrw.commons.MapController.NearbyPlacesInfo
-import fr.free.nrw.commons.R
 import fr.free.nrw.commons.Utils
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao
 import fr.free.nrw.commons.contributions.ContributionController
@@ -127,7 +125,7 @@ import javax.inject.Named
 import kotlin.concurrent.Volatile
 
 
-class       NearbyParentFragment : CommonsDaggerSupportFragment(), NearbyParentFragmentContract.View,
+class NearbyParentFragment : CommonsDaggerSupportFragment(), NearbyParentFragmentContract.View,
     WikidataP18EditListener, LocationUpdateListener, LocationPermissionCallback, ItemClickListener {
     var binding: FragmentNearbyParentBinding? = null
 
@@ -240,36 +238,50 @@ class       NearbyParentFragment : CommonsDaggerSupportFragment(), NearbyParentF
 
     private val galleryPickLauncherForResult =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-            controller?.handleActivityResultWithCallback(requireActivity(), object : FilePicker.HandleActivityResult {
-                override fun onHandleActivityResult(callbacks: FilePicker.Callbacks) {
-                    // Handle the result from the gallery
-                    controller?.onPictureReturnedFromGallery(result, requireActivity(), callbacks)
-                }
-            })
+            controller?.handleActivityResultWithCallback(
+                requireActivity(),
+                object : FilePicker.HandleActivityResult {
+                    override fun onHandleActivityResult(callbacks: FilePicker.Callbacks) {
+                        // Handle the result from the gallery
+                        controller?.onPictureReturnedFromGallery(
+                            result,
+                            requireActivity(),
+                            callbacks
+                        )
+                    }
+                })
         }
 
 
     private val customSelectorLauncherForResult =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult? ->
-            controller?.handleActivityResultWithCallback(requireActivity(), object : FilePicker.HandleActivityResult {
-                override fun onHandleActivityResult(callbacks: FilePicker.Callbacks) {
-                    controller?.onPictureReturnedFromCustomSelector(
-                        result,
-                        requireActivity(),
-                        callbacks
-                    )
-                }
-            })
+            controller?.handleActivityResultWithCallback(
+                requireActivity(),
+                object : FilePicker.HandleActivityResult {
+                    override fun onHandleActivityResult(callbacks: FilePicker.Callbacks) {
+                        controller?.onPictureReturnedFromCustomSelector(
+                            result,
+                            requireActivity(),
+                            callbacks
+                        )
+                    }
+                })
         }
 
 
     private val cameraPickLauncherForResult =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult? ->
-            controller?.handleActivityResultWithCallback(requireActivity(), object : FilePicker.HandleActivityResult {
-                override fun onHandleActivityResult(callbacks: FilePicker.Callbacks) {
-                    controller?.onPictureReturnedFromCamera(result, requireActivity(), callbacks)
-                }
-            })
+            controller?.handleActivityResultWithCallback(
+                requireActivity(),
+                object : FilePicker.HandleActivityResult {
+                    override fun onHandleActivityResult(callbacks: FilePicker.Callbacks) {
+                        controller?.onPictureReturnedFromCamera(
+                            result,
+                            requireActivity(),
+                            callbacks
+                        )
+                    }
+                })
         }
 
 
@@ -309,8 +321,8 @@ class       NearbyParentFragment : CommonsDaggerSupportFragment(), NearbyParentF
     /**
      * WLM URL
      */
-    val WLM_URL = "https://commons.wikimedia.org/wiki/Commons:Mobile_app/Contributing_to_WLM_using_the_app"
-
+    val WLM_URL =
+        "https://commons.wikimedia.org/wiki/Commons:Mobile_app/Contributing_to_WLM_using_the_app"
 
 
     override fun onCreateView(
@@ -360,16 +372,15 @@ class       NearbyParentFragment : CommonsDaggerSupportFragment(), NearbyParentF
             false
         }
 
-        showInExploreButton.setOnMenuItemClickListener(object : OnMenuItemClickListener() {
-            fun onMenuItemClick(@NonNull item: MenuItem?): Boolean {
-                (context as MainActivity).loadExploreMapFromNearby(
-                    binding!!.map.zoomLevelDouble,
-                    binding!!.map.mapCenter.latitude,
-                    binding!!.map.mapCenter.longitude
-                )
-                return false
-            }
-        })
+        showInExploreButton.setOnMenuItemClickListener { item ->
+            (context as MainActivity).loadExploreMapFromNearby(
+                binding?.map?.zoomLevelDouble ?: 0.0,  // Using safe calls to avoid NPE
+                binding?.map?.mapCenter?.latitude ?: 0.0,
+                binding?.map?.mapCenter?.longitude ?: 0.0
+            )
+            return@setOnMenuItemClickListener true
+        }
+
 
         saveAsGPXButton.setOnMenuItemClickListener {
             try {
@@ -396,25 +407,26 @@ class       NearbyParentFragment : CommonsDaggerSupportFragment(), NearbyParentF
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         // Initialize the launcher in the appropriate lifecycle method (e.g., onViewCreated)
-        inAppCameraLocationPermissionLauncher = registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { result ->
-            val areAllGranted = result.values.all { it }
+        inAppCameraLocationPermissionLauncher =
+            registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { result ->
+                val areAllGranted = result.values.all { it }
 
-            if (areAllGranted) {
-                controller?.locationPermissionCallback?.onLocationPermissionGranted()
-            } else {
-                if (shouldShowRequestPermissionRationale(permission.ACCESS_FINE_LOCATION)) {
-                    controller?.handleShowRationaleFlowCameraLocation(
-                        requireActivity(),
-                        inAppCameraLocationPermissionLauncher,  // Reference it directly
-                        cameraPickLauncherForResult
-                    )
+                if (areAllGranted) {
+                    controller?.locationPermissionCallback?.onLocationPermissionGranted()
                 } else {
-                    controller?.locationPermissionCallback?.onLocationPermissionDenied(
-                        getString(fr.free.nrw.commons.R.string.in_app_camera_location_permission_denied)
-                    )
+                    if (shouldShowRequestPermissionRationale(permission.ACCESS_FINE_LOCATION)) {
+                        controller?.handleShowRationaleFlowCameraLocation(
+                            requireActivity(),
+                            inAppCameraLocationPermissionLauncher,  // Reference it directly
+                            cameraPickLauncherForResult
+                        )
+                    } else {
+                        controller?.locationPermissionCallback?.onLocationPermissionDenied(
+                            getString(fr.free.nrw.commons.R.string.in_app_camera_location_permission_denied)
+                        )
+                    }
                 }
             }
-        }
         isDarkTheme = systemThemeUtils?.isDeviceInNightMode() == true
         if (Utils.isMonumentsEnabled(Date())) {
             binding?.rlContainerWlmMonthMessage?.visibility = View.VISIBLE
@@ -439,14 +451,16 @@ class       NearbyParentFragment : CommonsDaggerSupportFragment(), NearbyParentF
         initThemePreferences()
         initViews()
         presenter?.setActionListeners(applicationKvStore)
-        org.osmdroid.config.Configuration.getInstance().load(requireContext(), PreferenceManager.getDefaultSharedPreferences(requireContext()))
+        org.osmdroid.config.Configuration.getInstance()
+            .load(requireContext(), PreferenceManager.getDefaultSharedPreferences(requireContext()))
 
         // Use the Wikimedia tile server, rather than OpenStreetMap (Mapnik)
         binding?.map?.setTileSource(TileSourceFactory.WIKIMEDIA)
         binding?.map?.setTilesScaledToDpi(true)
 
         // Add referer HTTP header because the Wikimedia tile server requires it.
-        org.osmdroid.config.Configuration.getInstance().getAdditionalHttpRequestProperties().put("Referer", "http://maps.wikimedia.org/")
+        org.osmdroid.config.Configuration.getInstance().getAdditionalHttpRequestProperties()
+            .put("Referer", "http://maps.wikimedia.org/")
 
         if (applicationKvStore?.getString("LastLocation") != null) { // Checking for last searched location
             val locationLatLng = applicationKvStore!!.getString("LastLocation")!!.split(",")
@@ -463,7 +477,8 @@ class       NearbyParentFragment : CommonsDaggerSupportFragment(), NearbyParentF
         scaleBarOverlay.setBackgroundPaint(barPaint)
         scaleBarOverlay.enableScaleBar()
         binding?.map?.overlays?.add(scaleBarOverlay)
-        binding?.map?.getZoomController()?.setVisibility(CustomZoomButtonsController.Visibility.NEVER)
+        binding?.map?.getZoomController()
+            ?.setVisibility(CustomZoomButtonsController.Visibility.NEVER)
         binding?.map?.controller?.setZoom(ZOOM_LEVEL.toInt())
 
         // if we came from Explore map using 'Show in Nearby', load Explore map camera position
@@ -499,10 +514,14 @@ class       NearbyParentFragment : CommonsDaggerSupportFragment(), NearbyParentF
         onResume()
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            binding?.tvAttribution?.text = Html.fromHtml(getString(fr.free.nrw.commons.R.string.map_attribution), Html.FROM_HTML_MODE_LEGACY)
+            binding?.tvAttribution?.text = Html.fromHtml(
+                getString(fr.free.nrw.commons.R.string.map_attribution),
+                Html.FROM_HTML_MODE_LEGACY
+            )
         } else {
             @Suppress("DEPRECATION")
-            binding?.tvAttribution?.text = Html.fromHtml(getString(fr.free.nrw.commons.R.string.map_attribution))
+            binding?.tvAttribution?.text =
+                Html.fromHtml(getString(fr.free.nrw.commons.R.string.map_attribution))
         }
         binding?.tvAttribution?.movementMethod = LinkMovementMethod.getInstance()
 
@@ -512,7 +531,10 @@ class       NearbyParentFragment : CommonsDaggerSupportFragment(), NearbyParentF
             val fragment = AdvanceQueryFragment()
             val bundle = Bundle()
             try {
-                bundle.putString("query", FileUtils.readFromResource("/queries/radius_query_for_upload_wizard.rq"))
+                bundle.putString(
+                    "query",
+                    FileUtils.readFromResource("/queries/radius_query_for_upload_wizard.rq")
+                )
             } catch (e: IOException) {
                 Timber.e(e)
             }
@@ -554,9 +576,9 @@ class       NearbyParentFragment : CommonsDaggerSupportFragment(), NearbyParentF
     fun loadExploreMapData() {
         // get fragment arguments
         if (arguments != null) {
-            prevZoom = arguments!!.getDouble("prev_zoom")
-            prevLatitude = arguments!!.getDouble("prev_latitude")
-            prevLongitude = arguments!!.getDouble("prev_longitude")
+            prevZoom = requireArguments().getDouble("prev_zoom")
+            prevLatitude = requireArguments().getDouble("prev_latitude")
+            prevLongitude = requireArguments().getDouble("prev_longitude")
         }
     }
 
@@ -580,7 +602,7 @@ class       NearbyParentFragment : CommonsDaggerSupportFragment(), NearbyParentF
                 requireContext().resources.getColor(fr.free.nrw.commons.R.color.contributionListDarkBackground)
             )
             binding!!.nearbyFilterList.checkboxTriStates.setTextColor(
-                requireContext().resources.getColor(android.fr.free.nrw.commons.R.color.white)
+                requireContext().resources.getColor(fr.free.nrw.commons.R.color.white)
             )
             binding!!.nearbyFilterList.checkboxTriStates.setTextColor(
                 requireContext().resources.getColor(fr.free.nrw.commons.R.color.white)
@@ -715,7 +737,7 @@ class       NearbyParentFragment : CommonsDaggerSupportFragment(), NearbyParentF
         } else {
             lastKnownLocation = defaultLatLng
         }
-        if (binding?.map ?:  != null && !isCameFromExploreMap()) {
+        if (binding!!.map != null && !isCameFromExploreMap()) {
             moveCameraToPosition(
                 GeoPoint(lastKnownLocation!!.latitude, lastKnownLocation!!.longitude)
             )
@@ -940,8 +962,10 @@ class       NearbyParentFragment : CommonsDaggerSupportFragment(), NearbyParentF
     private fun loadAnimations() {
         fab_open = AnimationUtils.loadAnimation(activity, fr.free.nrw.commons.R.anim.fab_open)
         fab_close = AnimationUtils.loadAnimation(activity, fr.free.nrw.commons.R.anim.fab_close)
-        rotate_forward = AnimationUtils.loadAnimation(activity, fr.free.nrw.commons.R.anim.rotate_forward)
-        rotate_backward = AnimationUtils.loadAnimation(activity, fr.free.nrw.commons.R.anim.rotate_backward)
+        rotate_forward =
+            AnimationUtils.loadAnimation(activity, fr.free.nrw.commons.R.anim.rotate_forward)
+        rotate_backward =
+            AnimationUtils.loadAnimation(activity, fr.free.nrw.commons.R.anim.rotate_backward)
     }
 
     /**
@@ -953,7 +977,8 @@ class       NearbyParentFragment : CommonsDaggerSupportFragment(), NearbyParentF
                 "place", binding!!.bottomSheetDetails.title.text.toString(),
                 context
             )
-            Toast.makeText(context, fr.free.nrw.commons.R.string.text_copy, Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, fr.free.nrw.commons.R.string.text_copy, Toast.LENGTH_SHORT)
+                .show()
             true
         }
 
@@ -1327,7 +1352,7 @@ class       NearbyParentFragment : CommonsDaggerSupportFragment(), NearbyParentF
                         Timber.d(throwable)
                         showErrorMessage(
                             getString(fr.free.nrw.commons.R.string.error_fetching_nearby_places)
-                                + throwable.localizedMessage
+                                    + throwable.localizedMessage
                         )
                         setProgressBarVisibility(false)
                         presenter!!.lockUnlockNearby(false)
@@ -1371,7 +1396,7 @@ class       NearbyParentFragment : CommonsDaggerSupportFragment(), NearbyParentF
                         Timber.d(throwable)
                         showErrorMessage(
                             getString(fr.free.nrw.commons.R.string.error_fetching_nearby_places)
-                                + throwable.localizedMessage
+                                    + throwable.localizedMessage
                         )
                         setProgressBarVisibility(false)
                         presenter!!.lockUnlockNearby(false)
@@ -1379,6 +1404,7 @@ class       NearbyParentFragment : CommonsDaggerSupportFragment(), NearbyParentF
                     })
         )
     }
+
     fun saveFile(string: String, fileName: String?): Boolean {
         if (!isExternalStorageWritable) {
             return false
@@ -1488,7 +1514,7 @@ class       NearbyParentFragment : CommonsDaggerSupportFragment(), NearbyParentF
                         Timber.d(throwable)
                         showErrorMessage(
                             getString(fr.free.nrw.commons.R.string.could_not_load_place_data)
-                                + throwable.localizedMessage
+                                    + throwable.localizedMessage
                         )
                     })
         )
@@ -1538,7 +1564,7 @@ class       NearbyParentFragment : CommonsDaggerSupportFragment(), NearbyParentF
                         Timber.d(throwable)
                         showErrorMessage(
                             getString(fr.free.nrw.commons.R.string.error_fetching_nearby_places)
-                                + throwable.localizedMessage
+                                    + throwable.localizedMessage
                         )
                         setProgressBarVisibility(false)
                         presenter!!.lockUnlockNearby(false)
@@ -1599,7 +1625,7 @@ class       NearbyParentFragment : CommonsDaggerSupportFragment(), NearbyParentF
                         Timber.e(throwable)
                         showErrorMessage(
                             getString(fr.free.nrw.commons.R.string.error_fetching_nearby_places)
-                                + throwable.localizedMessage
+                                    + throwable.localizedMessage
                         )
                         setProgressBarVisibility(false)
                         presenter!!.lockUnlockNearby(false)
@@ -1905,8 +1931,8 @@ class       NearbyParentFragment : CommonsDaggerSupportFragment(), NearbyParentF
             // then compare it against place's label
             if (selectedLabels != null && (selectedLabels.size != 0 || !filterForPlaceState)
                 && (!selectedLabels.contains(place.label)
-                    && !(selectedLabels.contains(Label.BOOKMARKS)
-                    && markerPlaceGroup.isBookmarked))
+                        && !(selectedLabels.contains(Label.BOOKMARKS)
+                        && markerPlaceGroup.isBookmarked))
             ) {
                 continue
             }
@@ -1977,7 +2003,7 @@ class       NearbyParentFragment : CommonsDaggerSupportFragment(), NearbyParentF
             // Highlight nearest place only when user clicks on the home nearby banner
 //            highlightNearestPlace(place);
             return (if (isBookmarked) fr.free.nrw.commons.R.drawable.ic_custom_map_marker_purple_bookmarked else fr.free.nrw.commons.R.drawable.ic_custom_map_marker_purple
-                )
+                    )
         }
 
         if (place.isMonument) {
@@ -1985,17 +2011,17 @@ class       NearbyParentFragment : CommonsDaggerSupportFragment(), NearbyParentF
         }
         if (!place.pic.trim { it <= ' ' }.isEmpty()) {
             return (if (isBookmarked) fr.free.nrw.commons.R.drawable.ic_custom_map_marker_green_bookmarked else fr.free.nrw.commons.R.drawable.ic_custom_map_marker_green
-                )
+                    )
         }
         if (!place.exists) { // Means that the topic of the Wikidata item does not exist in the real world anymore, for instance it is a past event, or a place that was destroyed
             return (fr.free.nrw.commons.R.drawable.ic_clear_black_24dp)
         }
         if (place.name.isEmpty()) {
             return (if (isBookmarked) fr.free.nrw.commons.R.drawable.ic_custom_map_marker_grey_bookmarked else fr.free.nrw.commons.R.drawable.ic_custom_map_marker_grey
-                )
+                    )
         }
         return (if (isBookmarked) fr.free.nrw.commons.R.drawable.ic_custom_map_marker_red_bookmarked else fr.free.nrw.commons.R.drawable.ic_custom_map_marker_red
-            )
+                )
     }
 
     fun convertToMarker(place: Place, isBookMarked: Boolean): Marker {
@@ -2129,10 +2155,18 @@ class       NearbyParentFragment : CommonsDaggerSupportFragment(), NearbyParentF
 
         if (intent.resolveActivity(packageManager) != null) {
             startActivity(intent)
-            Toast.makeText(context, fr.free.nrw.commons.R.string.recommend_high_accuracy_mode, Toast.LENGTH_LONG)
+            Toast.makeText(
+                context,
+                fr.free.nrw.commons.R.string.recommend_high_accuracy_mode,
+                Toast.LENGTH_LONG
+            )
                 .show()
         } else {
-            Toast.makeText(context, fr.free.nrw.commons.R.string.cannot_open_location_settings, Toast.LENGTH_LONG)
+            Toast.makeText(
+                context,
+                fr.free.nrw.commons.R.string.cannot_open_location_settings,
+                Toast.LENGTH_LONG
+            )
                 .show()
         }
     }
@@ -2180,7 +2214,12 @@ class       NearbyParentFragment : CommonsDaggerSupportFragment(), NearbyParentF
         selectedPlace = place
         dataList = ArrayList()
         // TODO: Decide button text for fitting in the screen
-        (dataList as ArrayList<BottomSheetItem>).add(BottomSheetItem(fr.free.nrw.commons.R.drawable.ic_round_star_border_24px, ""))
+        (dataList as ArrayList<BottomSheetItem>).add(
+            BottomSheetItem(
+                fr.free.nrw.commons.R.drawable.ic_round_star_border_24px,
+                ""
+            )
+        )
         (dataList as ArrayList<BottomSheetItem>).add(
             BottomSheetItem(
                 fr.free.nrw.commons.R.drawable.ic_directions_black_24dp,
@@ -2220,7 +2259,8 @@ class       NearbyParentFragment : CommonsDaggerSupportFragment(), NearbyParentF
         val spanCount = spanCount
         gridLayoutManager = GridLayoutManager(this.context, spanCount)
         binding!!.bottomSheetDetails.bottomSheetRecyclerView.layoutManager = gridLayoutManager
-        bottomSheetAdapter = BottomSheetAdapter(this.context,
+        bottomSheetAdapter = BottomSheetAdapter(
+            this.context,
             dataList as ArrayList<BottomSheetItem>
         )
         bottomSheetAdapter!!.setClickListener(this)
@@ -2277,7 +2317,8 @@ class       NearbyParentFragment : CommonsDaggerSupportFragment(), NearbyParentF
 
     private fun storeSharedPrefs(selectedPlace: Place) {
         applicationKvStore!!.putJson<Place>(WikidataConstants.PLACE_OBJECT, selectedPlace)
-        val place = applicationKvStore!!.getJson<Place>(WikidataConstants.PLACE_OBJECT, Place::class.java)
+        val place =
+            applicationKvStore!!.getJson<Place>(WikidataConstants.PLACE_OBJECT, Place::class.java)
 
         Timber.d("Stored place object %s", place.toString())
     }
@@ -2380,7 +2421,10 @@ class       NearbyParentFragment : CommonsDaggerSupportFragment(), NearbyParentF
                 Marker.ANCHOR_BOTTOM
             )
             startMarker.icon =
-                ContextCompat.getDrawable(this.requireContext(), fr.free.nrw.commons.R.drawable.current_location_marker)
+                ContextCompat.getDrawable(
+                    this.requireContext(),
+                    fr.free.nrw.commons.R.drawable.current_location_marker
+                )
             startMarker.title = "Your Location"
             startMarker.textLabelFontSize = 24
             binding!!.map.overlays.add(startMarker)
@@ -2438,7 +2482,10 @@ class       NearbyParentFragment : CommonsDaggerSupportFragment(), NearbyParentF
                 Marker.ANCHOR_BOTTOM
             )
             startMarker.icon =
-                ContextCompat.getDrawable(this.requireContext(), fr.free.nrw.commons.R.drawable.current_location_marker)
+                ContextCompat.getDrawable(
+                    this.requireContext(),
+                    fr.free.nrw.commons.R.drawable.current_location_marker
+                )
             startMarker.title = "Your Location"
             startMarker.textLabelFontSize = 24
             binding!!.map.overlays.add(startMarker)
@@ -2571,7 +2618,6 @@ class       NearbyParentFragment : CommonsDaggerSupportFragment(), NearbyParentF
             fragment.retainInstance = true
             return fragment
         }
-
 
 
         private val isExternalStorageWritable: Boolean
