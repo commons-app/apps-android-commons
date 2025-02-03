@@ -818,4 +818,6 @@
   <string name="caption">Толкување</string>
   <string name="caption_copied_to_clipboard">Толкувањето е ставено во меѓускладот</string>
   <string name="congratulations_all_pictures_in_this_album_have_been_either_uploaded_or_marked_as_not_for_upload">Честитаме. Сите слики од овој албум се подигнати или обележани за неподигање.</string>
+  <string name="show_in_explore">Прикажи во „Истражи“</string>
+  <string name="show_in_nearby">Прикажи во „Во близина“</string>
 </resources>
