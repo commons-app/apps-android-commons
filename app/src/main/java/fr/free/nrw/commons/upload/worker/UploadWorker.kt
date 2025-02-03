@@ -302,13 +302,16 @@ class UploadWorker(
      */
     @SuppressLint("StringFormatInvalid", "CheckResult", "MissingPermission")
     private suspend fun uploadContribution(contribution: Contribution) {
+        Timber.d("Starting uploadContribution for: ${contribution.media.filename}")
+
         if (contribution.localUri == null || contribution.localUri.path == null) {
-            Timber.e("""upload: ${contribution.media.filename} failed, file path is null""")
+            Timber.e("upload: ${contribution.media.filename} failed, file path is null")
         }
 
         val media = contribution.media
         val displayTitle = contribution.media.displayTitle
 
+        Timber.d("Setting up notification for: $displayTitle")
         currentNotificationTag = contribution.localUri.toString()
         currentNotificationID =
             (contribution.localUri.toString() + contribution.media.filename).hashCode()
@@ -329,6 +332,7 @@ class UploadWorker(
         )
 
         val filename = media.filename
+        Timber.d("Filename for upload: $filename")
 
         val notificationProgressUpdater =
             NotificationUpdateProgressListener(
@@ -340,7 +344,7 @@ class UploadWorker(
             )
 
         try {
-            // Upload the file to stash
+            Timber.d("Uploading file to stash: $filename")
             val stashUploadResult =
                 uploadClient
                     .uploadFileToStash(
@@ -348,21 +352,23 @@ class UploadWorker(
                         contribution,
                         notificationProgressUpdater,
                     ).onErrorReturn {
+                        Timber.e("Error during stash upload: ${it.message}")
                         return@onErrorReturn StashUploadResult(
                             StashUploadState.FAILED,
                             fileKey = null,
                             errorMessage = it.message,
                         )
                     }.blockingSingle()
+
+            Timber.d("Stash upload state: ${stashUploadResult.state}")
+
             when (stashUploadResult.state) {
                 StashUploadState.SUCCESS -> {
-                    // If the stash upload succeeds
                     Timber.d("Upload to stash success for fileName: $filename")
-                    Timber.d("Ensure uniqueness of filename")
+                    Timber.d("Ensuring uniqueness of filename")
                     val uniqueFileName = findUniqueFileName(filename)
-
                     try {
-                        // Upload the file from stash
+                        Timber.d("Uploading file from stash: $uniqueFileName")
                         val uploadResult =
                             uploadClient
                                 .uploadFileFromStash(
@@ -370,26 +376,20 @@ class UploadWorker(
                                     uniqueFileName,
                                     stashUploadResult.fileKey,
                                 ).onErrorReturn {
+                                    Timber.e("Error during upload from stash")
                                     return@onErrorReturn null
                                 }.blockingSingle()
 
-                        if (null != uploadResult && uploadResult.isSuccessful()) {
-                            Timber.d(
-                                "Stash Upload success..proceeding to make wikidata edit",
-                            )
-
+                        if (uploadResult != null && uploadResult.isSuccessful()) {
+                            Timber.d("Upload from stash successful, proceeding with WikiData edits")
                             wikidataEditService
                                 .addDepictionsAndCaptions(uploadResult, contribution)
                                 .blockingSubscribe()
                             if (contribution.wikidataPlace == null) {
-                                Timber.d(
-                                    "WikiDataEdit not required, upload success",
-                                )
+                                Timber.d("WikiDataEdit not required, upload success")
                                 saveCompletedContribution(contribution, uploadResult)
                             } else {
-                                Timber.d(
-                                    "WikiDataEdit required, making wikidata edit",
-                                )
+                                Timber.d("WikiDataEdit required, making wikidata edit")
                                 makeWikiDataEdit(uploadResult, contribution)
                             }
                             showSuccessNotification(contribution)
@@ -401,8 +401,7 @@ class UploadWorker(
                             contributionDao.save(contribution).blockingAwait()
                         }
                     } catch (exception: Exception) {
-                        Timber.e(exception)
-                        Timber.e("Upload from stash failed for contribution : $filename")
+                        Timber.e(exception, "Upload from stash failed for contribution: $filename")
                         showFailedNotification(contribution)
                         contribution.state = Contribution.STATE_FAILED
                         contributionDao.saveSynchronous(contribution)
@@ -412,16 +411,17 @@ class UploadWorker(
                     }
                 }
                 StashUploadState.PAUSED -> {
+                    Timber.d("Upload paused for: $filename")
                     showPausedNotification(contribution)
                     contribution.state = Contribution.STATE_PAUSED
                     contributionDao.saveSynchronous(contribution)
                 }
                 StashUploadState.CANCELLED -> {
+                    Timber.d("Upload cancelled for: $filename")
                     showCancelledNotification(contribution)
                 }
                 else -> {
-                    Timber.e("""upload file to stash failed with status: ${stashUploadResult.state}""")
-
+                    Timber.e("Upload to stash failed with status: ${stashUploadResult.state}")
                     contribution.state = Contribution.STATE_FAILED
                     contribution.chunkInfo = null
                     contribution.errorInfo = stashUploadResult.errorMessage
@@ -447,14 +447,14 @@ class UploadWorker(
                 }
             }
         } catch (exception: Exception) {
-            Timber.e(exception)
-            Timber.e("Stash upload failed for contribution: $filename")
+            Timber.e(exception, "Stash upload failed for contribution: $filename")
             showFailedNotification(contribution)
             contribution.errorInfo = exception.message
             contribution.state = Contribution.STATE_FAILED
             clearChunks(contribution)
         }
     }
+
 
     private fun clearChunks(contribution: Contribution) {
         contribution.chunkInfo = null
@@ -470,60 +470,72 @@ class UploadWorker(
     ) {
         val wikiDataPlace = contribution.wikidataPlace
         if (wikiDataPlace != null) {
+            Timber.d("Initiating WikiData edit for place: ${wikiDataPlace.name}, File: ${uploadResult.filename}")
+
             if (!contribution.hasInvalidLocation()) {
                 var revisionID: Long? = null
                 try {
-                    revisionID =
-                        wikidataEditService.createClaim(
-                            wikiDataPlace,
-                            uploadResult.filename,
-                            contribution.media.captions,
-                        )
-                    if (null != revisionID) {
+                    Timber.d("Creating WikiData claim for place: ${wikiDataPlace.id} with filename: ${uploadResult.filename}")
+                    revisionID = wikidataEditService.createClaim(
+                        wikiDataPlace,
+                        uploadResult.filename,
+                        contribution.media.captions
+                    )
+
+                    if (revisionID != null) {
+                        Timber.d("WikiData edit successful with revision ID: $revisionID")
+
                         withContext(Dispatchers.IO) {
                             val place = placesRepository.fetchPlace(wikiDataPlace.id)
                             place.name = wikiDataPlace.name
                             place.pic = HOME_URL + uploadResult.createCanonicalFileName()
-                            placesRepository
-                                .save(place)
+                            placesRepository.save(place)
                                 .subscribeOn(Schedulers.io())
                                 .blockingAwait()
-                            Timber.d("Updated WikiItem place ${place.name} with image ${place.pic}")
+
+                            Timber.d("Updated WikiData place: ${place.name} with new image: ${place.pic}")
                         }
                         showSuccessNotification(contribution)
                     }
                 } catch (exception: Exception) {
-                    Timber.e(exception)
+                    Timber.e(exception, "Error while editing WikiData for place: ${wikiDataPlace.id}")
                 }
 
                 withContext(Dispatchers.Main) {
-                    wikidataEditService.handleImageClaimResult(
-                        contribution.wikidataPlace!!,
-                        revisionID,
-                    )
+                    Timber.d("Handling WikiData edit result for ${wikiDataPlace.id}")
+                    wikidataEditService.handleImageClaimResult(wikiDataPlace, revisionID)
                 }
             } else {
+                Timber.w("Invalid location detected for WikiData edit, skipping...")
                 withContext(Dispatchers.Main) {
-                    wikidataEditService.handleImageClaimResult(
-                        contribution.wikidataPlace!!,
-                        null,
-                    )
+                    wikidataEditService.handleImageClaimResult(wikiDataPlace, null)
                 }
             }
+        } else {
+            Timber.d("No WikiData place associated, skipping WikiData edit.")
         }
+
+        Timber.d("Saving completed contribution after WikiData edit for file: ${uploadResult.filename}")
         saveCompletedContribution(contribution, uploadResult)
     }
 
+    /**
+     * Save completed contribution details
+     */
     private fun saveCompletedContribution(
         contribution: Contribution,
         uploadResult: UploadResult,
     ) {
+        Timber.d("Fetching media details for uploaded file: ${uploadResult.filename}")
+
         val contributionFromUpload =
-            mediaClient
-                .getMedia("File:" + uploadResult.filename)
-                .map { media: Media? -> contribution.completeWith(media!!) }
+            mediaClient.getMedia("File:" + uploadResult.filename)
+                .map { media -> contribution.completeWith(media!!) }
                 .blockingGet()
+
         contributionFromUpload.dateModified = Date()
+
+        Timber.d("Saving completed contribution to database for file: ${uploadResult.filename}")
         contributionDao.deleteAndSaveContribution(contribution, contributionFromUpload)
 
         // Upload success, save to uploaded status.
@@ -531,24 +543,29 @@ class UploadWorker(
     }
 
     /**
-     * Save to uploadedStatusDao.
+     * Save to uploadedStatusDao
      */
     private fun saveIntoUploadedStatus(contribution: Contribution) {
         contribution.contentUri?.let {
             val imageSha1 = contribution.imageSHA1.toString()
             val modifiedSha1 = fileUtilsWrapper.getSHA1(fileUtilsWrapper.getFileInputStream(contribution.localUri?.path))
+
+            Timber.d("Saving uploaded status: SHA1 match: ${imageSha1 == modifiedSha1} for file: ${contribution.media.filename}")
+
             CoroutineScope(Dispatchers.IO).launch {
                 uploadedStatusDao.insertUploaded(
                     UploadedStatus(
                         imageSha1,
                         modifiedSha1,
                         imageSha1 == modifiedSha1,
-                        true,
-                    ),
+                        true
+                    )
                 )
+                Timber.d("Uploaded status saved successfully for file: ${contribution.media.filename}")
             }
-        }
+        } ?: Timber.w("Content URI is null, skipping uploaded status save for file: ${contribution.media.filename}")
     }
+
 
     private fun findUniqueFileName(fileName: String): String {
         var sequenceFileName: String? = fileName
