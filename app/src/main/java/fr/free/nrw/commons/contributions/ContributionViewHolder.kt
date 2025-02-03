@@ -1,110 +1,96 @@
-package fr.free.nrw.commons.contributions;
+package fr.free.nrw.commons.contributions
 
-import android.net.Uri;
-import android.text.TextUtils;
-import android.view.View;
-import android.webkit.URLUtil;
-import android.widget.ImageButton;
-import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AlertDialog.Builder;
-import androidx.recyclerview.widget.RecyclerView;
-import com.facebook.drawee.view.SimpleDraweeView;
-import com.facebook.imagepipeline.request.ImageRequest;
-import com.facebook.imagepipeline.request.ImageRequestBuilder;
-import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.contributions.ContributionsListAdapter.Callback;
-import fr.free.nrw.commons.databinding.LayoutContributionBinding;
-import fr.free.nrw.commons.media.MediaClient;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.schedulers.Schedulers;
-import java.io.File;
+import android.net.Uri
+import android.text.TextUtils
+import android.view.View
+import android.webkit.URLUtil
+import androidx.appcompat.app.AlertDialog
+import androidx.recyclerview.widget.RecyclerView
+import com.facebook.imagepipeline.request.ImageRequest
+import com.facebook.imagepipeline.request.ImageRequestBuilder
+import fr.free.nrw.commons.R
+import fr.free.nrw.commons.databinding.LayoutContributionBinding
+import fr.free.nrw.commons.media.MediaClient
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.schedulers.Schedulers
+import java.io.File
 
-public class ContributionViewHolder extends RecyclerView.ViewHolder {
+class ContributionViewHolder internal constructor(
+    private val parent: View, private val callback: ContributionsListAdapter.Callback,
+    private val mediaClient: MediaClient
+) : RecyclerView.ViewHolder(parent) {
+    var binding: LayoutContributionBinding = LayoutContributionBinding.bind(parent)
 
-    private final Callback callback;
+    private var position = 0
+    private var contribution: Contribution? = null
+    private val compositeDisposable = CompositeDisposable()
+    private var isWikipediaButtonDisplayed = false
+    private val pausingPopUp: AlertDialog
+    var imageRequest: ImageRequest? = null
+        private set
 
-    LayoutContributionBinding binding;
-
-    private int position;
-    private Contribution contribution;
-    private final CompositeDisposable compositeDisposable = new CompositeDisposable();
-    private final MediaClient mediaClient;
-    private boolean isWikipediaButtonDisplayed;
-    private AlertDialog pausingPopUp;
-    private View parent;
-    private ImageRequest imageRequest;
-
-    ContributionViewHolder(final View parent, final Callback callback,
-        final MediaClient mediaClient) {
-        super(parent);
-        this.parent = parent;
-        this.mediaClient = mediaClient;
-        this.callback = callback;
-
-        binding = LayoutContributionBinding.bind(parent);
-
-        binding.contributionImage.setOnClickListener(v -> imageClicked());
-        binding.wikipediaButton.setOnClickListener(v -> wikipediaButtonClicked());
+    init {
+        binding.contributionImage.setOnClickListener { v: View? -> imageClicked() }
+        binding.wikipediaButton.setOnClickListener { v: View? -> wikipediaButtonClicked() }
 
         /* Set a dialog indicating that the upload is being paused. This is needed because pausing
-        an upload might take a dozen seconds. */
-        AlertDialog.Builder builder = new Builder(parent.getContext());
-        builder.setCancelable(false);
-        builder.setView(R.layout.progress_dialog);
-        pausingPopUp = builder.create();
+an upload might take a dozen seconds. */
+        val builder = AlertDialog.Builder(
+            parent.context
+        )
+        builder.setCancelable(false)
+        builder.setView(R.layout.progress_dialog)
+        pausingPopUp = builder.create()
     }
 
-    public void init(final int position, final Contribution contribution) {
-
+    fun init(position: Int, contribution: Contribution?) {
         //handling crashes when the contribution is null.
+
         if (null == contribution) {
-            return;
+            return
         }
 
-        this.contribution = contribution;
-        this.position = position;
-        binding.contributionTitle.setText(contribution.getMedia().getMostRelevantCaption());
-        binding.authorView.setText(contribution.getMedia().getAuthor());
+        this.contribution = contribution
+        this.position = position
+        binding.contributionTitle.text = contribution.media.mostRelevantCaption
+        binding.authorView.text = contribution.media.author
 
         //Removes flicker of loading image.
-        binding.contributionImage.getHierarchy().setFadeDuration(0);
+        binding.contributionImage.hierarchy.fadeDuration = 0
 
-        binding.contributionImage.getHierarchy().setPlaceholderImage(R.drawable.image_placeholder);
-        binding.contributionImage.getHierarchy().setFailureImage(R.drawable.image_placeholder);
+        binding.contributionImage.hierarchy.setPlaceholderImage(R.drawable.image_placeholder)
+        binding.contributionImage.hierarchy.setFailureImage(R.drawable.image_placeholder)
 
-        final String imageSource = chooseImageSource(contribution.getMedia().getThumbUrl(),
-            contribution.getLocalUri());
+        val imageSource = chooseImageSource(
+            contribution.media.thumbUrl,
+            contribution.localUri
+        )
         if (!TextUtils.isEmpty(imageSource)) {
             if (URLUtil.isHttpsUrl(imageSource)) {
                 imageRequest = ImageRequestBuilder.newBuilderWithSource(Uri.parse(imageSource))
                     .setProgressiveRenderingEnabled(true)
-                    .build();
+                    .build()
             } else if (URLUtil.isFileUrl(imageSource)) {
-                imageRequest = ImageRequest.fromUri(Uri.parse(imageSource));
+                imageRequest = ImageRequest.fromUri(Uri.parse(imageSource))
             } else if (imageSource != null) {
-                final File file = new File(imageSource);
-                imageRequest = ImageRequest.fromFile(file);
+                val file = File(imageSource)
+                imageRequest = ImageRequest.fromFile(file)
             }
 
             if (imageRequest != null) {
-                binding.contributionImage.setImageRequest(imageRequest);
+                binding.contributionImage.setImageRequest(imageRequest)
             }
         }
 
-        binding.contributionSequenceNumber.setText(String.valueOf(position + 1));
-        binding.contributionSequenceNumber.setVisibility(View.VISIBLE);
-        binding.wikipediaButton.setVisibility(View.GONE);
-        binding.contributionState.setVisibility(View.GONE);
-        binding.contributionProgress.setVisibility(View.GONE);
-        binding.imageOptions.setVisibility(View.GONE);
-        binding.contributionState.setText("");
-        checkIfMediaExistsOnWikipediaPage(contribution);
-
+        binding.contributionSequenceNumber.text = (position + 1).toString()
+        binding.contributionSequenceNumber.visibility = View.VISIBLE
+        binding.wikipediaButton.visibility = View.GONE
+        binding.contributionState.visibility = View.GONE
+        binding.contributionProgress.visibility = View.GONE
+        binding.imageOptions.visibility = View.GONE
+        binding.contributionState.text = ""
+        checkIfMediaExistsOnWikipediaPage(contribution)
     }
 
     /**
@@ -113,18 +99,20 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder {
      *
      * @param contribution
      */
-    private void checkIfMediaExistsOnWikipediaPage(final Contribution contribution) {
-        if (contribution.getWikidataPlace() == null
-            || contribution.getWikidataPlace().getWikipediaArticle() == null) {
-            return;
+    private fun checkIfMediaExistsOnWikipediaPage(contribution: Contribution) {
+        if (contribution.wikidataPlace == null
+            || contribution.wikidataPlace!!.wikipediaArticle == null
+        ) {
+            return
         }
-        final String wikipediaArticle = contribution.getWikidataPlace().getWikipediaPageTitle();
-        compositeDisposable.add(mediaClient.doesPageContainMedia(wikipediaArticle)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(mediaExists -> {
-                displayWikipediaButton(mediaExists);
-            }));
+        val wikipediaArticle = contribution.wikidataPlace!!.getWikipediaPageTitle()
+        compositeDisposable.add(
+            mediaClient.doesPageContainMedia(wikipediaArticle)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe { mediaExists: Boolean ->
+                    displayWikipediaButton(mediaExists)
+                })
     }
 
     /**
@@ -134,11 +122,11 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder {
      *
      * @param mediaExists
      */
-    private void displayWikipediaButton(Boolean mediaExists) {
+    private fun displayWikipediaButton(mediaExists: Boolean) {
         if (!mediaExists) {
-            binding.wikipediaButton.setVisibility(View.VISIBLE);
-            isWikipediaButtonDisplayed = true;
-            binding.imageOptions.setVisibility(View.VISIBLE);
+            binding.wikipediaButton.visibility = View.VISIBLE
+            isWikipediaButtonDisplayed = true
+            binding.imageOptions.visibility = View.VISIBLE
         }
     }
 
@@ -150,22 +138,15 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder {
      * @param localUri
      * @return
      */
-    @Nullable
-    private String chooseImageSource(final String thumbUrl, final Uri localUri) {
-        return !TextUtils.isEmpty(thumbUrl) ? thumbUrl :
-            localUri != null ? localUri.toString() :
-                null;
+    private fun chooseImageSource(thumbUrl: String?, localUri: Uri?): String? {
+        return if (!TextUtils.isEmpty(thumbUrl)) thumbUrl else localUri?.toString()
     }
 
-    public void imageClicked() {
-        callback.openMediaDetail(position, isWikipediaButtonDisplayed);
+    fun imageClicked() {
+        callback.openMediaDetail(position, isWikipediaButtonDisplayed)
     }
 
-    public void wikipediaButtonClicked() {
-        callback.addImageToWikipedia(contribution);
-    }
-
-    public ImageRequest getImageRequest() {
-        return imageRequest;
+    fun wikipediaButtonClicked() {
+        callback.addImageToWikipedia(contribution)
     }
 }

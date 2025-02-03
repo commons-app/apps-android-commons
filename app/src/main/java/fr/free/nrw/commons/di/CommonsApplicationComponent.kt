@@ -9,6 +9,7 @@ import fr.free.nrw.commons.CommonsApplication
 import fr.free.nrw.commons.activity.SingleWebViewActivity
 import fr.free.nrw.commons.auth.LoginActivity
 import fr.free.nrw.commons.contributions.ContributionsModule
+import fr.free.nrw.commons.contributions.ContributionsProvidesModule
 import fr.free.nrw.commons.explore.SearchModule
 import fr.free.nrw.commons.explore.categories.CategoriesModule
 import fr.free.nrw.commons.explore.depictions.DepictionModule
@@ -40,6 +41,7 @@ import javax.inject.Singleton
         ContentProviderBuilderModule::class,
         UploadModule::class,
         ContributionsModule::class,
+        ContributionsProvidesModule::class,
         SearchModule::class,
         DepictionModule::class,
         CategoriesModule::class

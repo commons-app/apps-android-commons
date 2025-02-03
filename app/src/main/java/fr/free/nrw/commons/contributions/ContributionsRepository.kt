@@ -1,30 +1,19 @@
-package fr.free.nrw.commons.contributions;
+package fr.free.nrw.commons.contributions
 
-import androidx.paging.DataSource.Factory;
-import io.reactivex.Completable;
-import java.util.List;
-
-import javax.inject.Inject;
-
-import io.reactivex.Single;
+import androidx.paging.DataSource
+import io.reactivex.Completable
+import io.reactivex.Single
+import javax.inject.Inject
 
 /**
  * The repository class for contributions
  */
-public class ContributionsRepository {
-
-    private ContributionsLocalDataSource localDataSource;
-
-    @Inject
-    public ContributionsRepository(ContributionsLocalDataSource localDataSource) {
-        this.localDataSource = localDataSource;
-    }
-
+class ContributionsRepository @Inject constructor(private val localDataSource: ContributionsLocalDataSource) {
     /**
      * Fetch default number of contributions to be show, based on user preferences
      */
-    public String getString(String key) {
-        return localDataSource.getString(key);
+    fun getString(key: String): String? {
+        return localDataSource.getString(key)
     }
 
     /**
@@ -33,8 +22,8 @@ public class ContributionsRepository {
      * @param contribution
      * @return
      */
-    public Completable deleteContributionFromDB(Contribution contribution) {
-        return localDataSource.deleteContribution(contribution);
+    fun deleteContributionFromDB(contribution: Contribution): Completable {
+        return localDataSource.deleteContribution(contribution)
     }
 
     /**
@@ -43,8 +32,8 @@ public class ContributionsRepository {
      * @param states The states of the contributions to delete.
      * @return A Completable indicating the result of the operation.
      */
-    public Completable deleteContributionsFromDBWithStates(List<Integer> states) {
-        return localDataSource.deleteContributionsWithStates(states);
+    fun deleteContributionsFromDBWithStates(states: List<Int>): Completable {
+        return localDataSource.deleteContributionsWithStates(states)
     }
 
     /**
@@ -53,12 +42,12 @@ public class ContributionsRepository {
      * @param fileName
      * @return
      */
-    public Contribution getContributionWithFileName(String fileName) {
-        return localDataSource.getContributionWithFileName(fileName);
+    fun getContributionWithFileName(fileName: String): Contribution? {
+        return localDataSource.getContributionWithFileName(fileName)
     }
 
-    public Factory<Integer, Contribution> fetchContributions() {
-        return localDataSource.getContributions();
+    fun fetchContributions(): DataSource.Factory<Int, Contribution> {
+        return localDataSource.contributions
     }
 
     /**
@@ -67,8 +56,8 @@ public class ContributionsRepository {
      * @param states The states of the contributions to fetch.
      * @return A DataSource factory for paginated contributions with the specified states.
      */
-    public Factory<Integer, Contribution> fetchContributionsWithStates(List<Integer> states) {
-        return localDataSource.getContributionsWithStates(states);
+    fun fetchContributionsWithStates(states: List<Int>): DataSource.Factory<Int, Contribution> {
+        return localDataSource.getContributionsWithStates(states)
     }
 
     /**
@@ -78,25 +67,26 @@ public class ContributionsRepository {
      * @return A DataSource factory for paginated contributions with the specified states sorted by
      * date upload started.
      */
-    public Factory<Integer, Contribution> fetchContributionsWithStatesSortedByDateUploadStarted(
-        List<Integer> states) {
-        return localDataSource.getContributionsWithStatesSortedByDateUploadStarted(states);
+    fun fetchContributionsWithStatesSortedByDateUploadStarted(
+        states: List<Int>
+    ): DataSource.Factory<Int, Contribution> {
+        return localDataSource.getContributionsWithStatesSortedByDateUploadStarted(states)
     }
 
-    public Single<List<Long>> save(List<Contribution> contributions) {
-        return localDataSource.saveContributions(contributions);
+    fun save(contributions: List<Contribution>): Single<List<Long>> {
+        return localDataSource.saveContributions(contributions)
     }
 
-    public Completable save(Contribution contributions) {
-        return localDataSource.saveContributions(contributions);
+    fun save(contributions: Contribution): Completable {
+        return localDataSource.saveContributions(contributions)
     }
 
-    public void set(String key, long value) {
-        localDataSource.set(key, value);
+    operator fun set(key: String, value: Long) {
+        localDataSource.set(key, value)
     }
 
-    public Completable updateContribution(Contribution contribution) {
-        return localDataSource.updateContribution(contribution);
+    fun updateContribution(contribution: Contribution): Completable {
+        return localDataSource.updateContribution(contribution)
     }
 
     /**
@@ -106,7 +96,7 @@ public class ContributionsRepository {
      * @param newState The new state to set.
      * @return A Completable indicating the result of the operation.
      */
-    public Completable updateContributionsWithStates(List<Integer> states, int newState) {
-        return localDataSource.updateContributionsWithStates(states, newState);
+    fun updateContributionsWithStates(states: List<Int>, newState: Int): Completable {
+        return localDataSource.updateContributionsWithStates(states, newState)
     }
 }

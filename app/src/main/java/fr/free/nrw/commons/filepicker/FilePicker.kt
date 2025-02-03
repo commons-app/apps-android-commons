@@ -426,7 +426,7 @@ object FilePicker : Constants {
         fun onCanceled(source: ImageSource, type: Int)
     }
 
-    interface HandleActivityResult {
+    fun interface HandleActivityResult {
         fun onHandleActivityResult(callbacks: Callbacks)
     }
 }

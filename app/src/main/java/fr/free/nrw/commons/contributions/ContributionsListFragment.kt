@@ -1,273 +1,286 @@
-package fr.free.nrw.commons.contributions;
+package fr.free.nrw.commons.contributions
 
-import static android.view.View.GONE;
-import static android.view.View.VISIBLE;
-import static fr.free.nrw.commons.di.NetworkingModule.NAMED_LANGUAGE_WIKI_PEDIA_WIKI_SITE;
-
-import android.Manifest.permission;
-import android.content.Context;
-import android.content.Intent;
-import android.content.res.Configuration;
-import android.net.Uri;
-import android.os.Bundle;
-import android.os.Parcelable;
-import android.view.LayoutInflater;
-import android.view.MotionEvent;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.widget.LinearLayout;
-import androidx.activity.result.ActivityResultCallback;
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts.RequestMultiplePermissions;
-import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.VisibleForTesting;
-import androidx.fragment.app.FragmentManager;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.recyclerview.widget.RecyclerView.AdapterDataObserver;
-import androidx.recyclerview.widget.RecyclerView.ItemAnimator;
-import androidx.recyclerview.widget.RecyclerView.OnItemTouchListener;
-import androidx.recyclerview.widget.SimpleItemAnimator;
-import fr.free.nrw.commons.Media;
-import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.Utils;
-import fr.free.nrw.commons.auth.SessionManager;
-import fr.free.nrw.commons.contributions.ContributionsListAdapter.Callback;
-import fr.free.nrw.commons.databinding.FragmentContributionsListBinding;
-import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
-import fr.free.nrw.commons.media.MediaClient;
-import fr.free.nrw.commons.profile.ProfileActivity;
-import fr.free.nrw.commons.utils.DialogUtil;
-import fr.free.nrw.commons.utils.SystemThemeUtils;
-import fr.free.nrw.commons.utils.ViewUtil;
-import java.util.Map;
-import java.util.Objects;
-import javax.inject.Inject;
-import javax.inject.Named;
-import org.apache.commons.lang3.StringUtils;
-import fr.free.nrw.commons.wikidata.model.WikiSite;
+import android.Manifest.permission
+import android.annotation.SuppressLint
+import android.content.Context
+import android.content.Intent
+import android.content.res.Configuration
+import android.net.Uri
+import android.os.Bundle
+import android.os.Parcelable
+import android.view.LayoutInflater
+import android.view.MotionEvent
+import android.view.View
+import android.view.ViewGroup
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
+import android.widget.LinearLayout
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts.RequestMultiplePermissions
+import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult
+import androidx.annotation.VisibleForTesting
+import androidx.paging.PagedList
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.AdapterDataObserver
+import androidx.recyclerview.widget.RecyclerView.OnItemTouchListener
+import androidx.recyclerview.widget.SimpleItemAnimator
+import fr.free.nrw.commons.Media
+import fr.free.nrw.commons.R
+import fr.free.nrw.commons.Utils
+import fr.free.nrw.commons.auth.SessionManager
+import fr.free.nrw.commons.contributions.WikipediaInstructionsDialogFragment.Companion.newInstance
+import fr.free.nrw.commons.databinding.FragmentContributionsListBinding
+import fr.free.nrw.commons.di.CommonsDaggerSupportFragment
+import fr.free.nrw.commons.di.NetworkingModule
+import fr.free.nrw.commons.filepicker.FilePicker
+import fr.free.nrw.commons.media.MediaClient
+import fr.free.nrw.commons.profile.ProfileActivity
+import fr.free.nrw.commons.utils.DialogUtil.showAlertDialog
+import fr.free.nrw.commons.utils.SystemThemeUtils
+import fr.free.nrw.commons.utils.ViewUtil.showShortToast
+import fr.free.nrw.commons.wikidata.model.WikiSite
+import org.apache.commons.lang3.StringUtils
+import javax.inject.Inject
+import javax.inject.Named
 
 
 /**
  * Created by root on 01.06.2018.
  */
+class ContributionsListFragment : CommonsDaggerSupportFragment(), ContributionsListContract.View,
+    ContributionsListAdapter.Callback, WikipediaInstructionsDialogFragment.Callback {
+    @JvmField
+    @Inject
+    var systemThemeUtils: SystemThemeUtils? = null
 
-public class ContributionsListFragment extends CommonsDaggerSupportFragment implements
-    ContributionsListContract.View, Callback,
-    WikipediaInstructionsDialogFragment.Callback {
+    @JvmField
+    @Inject
+    var controller: ContributionController? = null
 
-    private static final String RV_STATE = "rv_scroll_state";
+    @JvmField
+    @Inject
+    var mediaClient: MediaClient? = null
 
+    @JvmField
+    @Named(NetworkingModule.NAMED_LANGUAGE_WIKI_PEDIA_WIKI_SITE)
     @Inject
-    SystemThemeUtils systemThemeUtils;
-    @Inject
-    ContributionController controller;
-    @Inject
-    MediaClient mediaClient;
-    @Named(NAMED_LANGUAGE_WIKI_PEDIA_WIKI_SITE)
-    @Inject
-    WikiSite languageWikipediaSite;
-    @Inject
-    ContributionsListPresenter contributionsListPresenter;
-    @Inject
-    SessionManager sessionManager;
+    var languageWikipediaSite: WikiSite? = null
 
-    private FragmentContributionsListBinding binding;
-    private Animation fab_close;
-    private Animation fab_open;
-    private Animation rotate_forward;
-    private Animation rotate_backward;
-    private boolean isFabOpen;
+    @JvmField
+    @Inject
+    var contributionsListPresenter: ContributionsListPresenter? = null
+
+    @JvmField
+    @Inject
+    var sessionManager: SessionManager? = null
+
+    private var binding: FragmentContributionsListBinding? = null
+    private var fab_close: Animation? = null
+    private var fab_open: Animation? = null
+    private var rotate_forward: Animation? = null
+    private var rotate_backward: Animation? = null
+    private var isFabOpen = false
+
+    private lateinit var inAppCameraLocationPermissionLauncher: ActivityResultLauncher<Array<String>>
+
     @VisibleForTesting
-    protected RecyclerView rvContributionsList;
+    var rvContributionsList: RecyclerView? = null
 
     @VisibleForTesting
-    protected ContributionsListAdapter adapter;
+    var adapter: ContributionsListAdapter? = null
 
-    @Nullable
     @VisibleForTesting
-    protected Callback callback;
+    var callback: Callback? = null
 
-    private final int SPAN_COUNT_LANDSCAPE = 3;
-    private final int SPAN_COUNT_PORTRAIT = 1;
+    private val SPAN_COUNT_LANDSCAPE = 3
+    private val SPAN_COUNT_PORTRAIT = 1
 
-    private int contributionsSize;
-    private String userName;
+    private var contributionsSize = 0
+    private var userName: String? = null
 
-    private final ActivityResultLauncher<Intent> galleryPickLauncherForResult =
-        registerForActivityResult(new StartActivityForResult(),
-        result -> {
-            controller.handleActivityResultWithCallback(requireActivity(), callbacks -> {
-                controller.onPictureReturnedFromGallery(result, requireActivity(), callbacks);
-            });
-        });
+    private val galleryPickLauncherForResult = registerForActivityResult<Intent, ActivityResult>(
+        StartActivityForResult()
+    ) { result: ActivityResult? ->
+        controller!!.handleActivityResultWithCallback(requireActivity()
+        ) { callbacks: FilePicker.Callbacks? ->
+            controller!!.onPictureReturnedFromGallery(
+                result!!, requireActivity(), callbacks!!
+            )
+        }
+    }
 
-    private final ActivityResultLauncher<Intent> customSelectorLauncherForResult =
-        registerForActivityResult(new StartActivityForResult(),
-        result -> {
-            controller.handleActivityResultWithCallback(requireActivity(), callbacks -> {
-                controller.onPictureReturnedFromCustomSelector(result, requireActivity(), callbacks);
-            });
-        });
+    private val customSelectorLauncherForResult = registerForActivityResult<Intent, ActivityResult>(
+        StartActivityForResult()
+    ) { result: ActivityResult? ->
+        controller!!.handleActivityResultWithCallback(requireActivity()
+        ) { callbacks: FilePicker.Callbacks? ->
+            controller!!.onPictureReturnedFromCustomSelector(
+                result!!, requireActivity(), callbacks!!
+            )
+        }
+    }
 
-    private final ActivityResultLauncher<Intent> cameraPickLauncherForResult =
-        registerForActivityResult(new StartActivityForResult(),
-        result -> {
-            controller.handleActivityResultWithCallback(requireActivity(), callbacks -> {
-                controller.onPictureReturnedFromCamera(result, requireActivity(), callbacks);
-            });
-        });
+    private val cameraPickLauncherForResult = registerForActivityResult<Intent, ActivityResult>(
+        StartActivityForResult()
+    ) { result: ActivityResult? ->
+        controller!!.handleActivityResultWithCallback(requireActivity()
+        ) { callbacks: FilePicker.Callbacks? ->
+            controller!!.onPictureReturnedFromCamera(
+                result!!, requireActivity(), callbacks!!
+            )
+        }
+    }
 
-    private ActivityResultLauncher<String[]> inAppCameraLocationPermissionLauncher = registerForActivityResult(
-        new RequestMultiplePermissions(),
-        new ActivityResultCallback<Map<String, Boolean>>() {
-            @Override
-            public void onActivityResult(Map<String, Boolean> result) {
-                boolean areAllGranted = true;
-                for (final boolean b : result.values()) {
-                    areAllGranted = areAllGranted && b;
-                }
-
-                if (areAllGranted) {
-                    controller.locationPermissionCallback.onLocationPermissionGranted();
-                } else {
-                    if (shouldShowRequestPermissionRationale(permission.ACCESS_FINE_LOCATION)) {
-                        controller.handleShowRationaleFlowCameraLocation(getActivity(),
-                            inAppCameraLocationPermissionLauncher, cameraPickLauncherForResult);
-                    } else {
-                        controller.locationPermissionCallback.onLocationPermissionDenied(
-                            getActivity().getString(
-                                R.string.in_app_camera_location_permission_denied));
-                    }
-                }
-            }
-        });
-
-
-    @Override
-    public void onCreate(
-        @Nullable @org.jetbrains.annotations.Nullable final Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    @SuppressLint("NewApi")
+    override fun onCreate(
+        savedInstanceState: Bundle?
+    ) {
+        super.onCreate(savedInstanceState)
         //Now that we are allowing this fragment to be started for
         // any userName- we expect it to be passed as an argument
-        if (getArguments() != null) {
-            userName = getArguments().getString(ProfileActivity.KEY_USERNAME);
+        if (arguments != null) {
+            userName = requireArguments().getString(ProfileActivity.KEY_USERNAME)
         }
 
         if (StringUtils.isEmpty(userName)) {
-            userName = sessionManager.getUserName();
+            userName = sessionManager!!.userName
+        }
+        inAppCameraLocationPermissionLauncher =
+        registerForActivityResult(RequestMultiplePermissions()) { result ->
+            val areAllGranted = result.values.all { it }
+
+            if (areAllGranted) {
+                controller?.locationPermissionCallback?.onLocationPermissionGranted()
+            } else {
+                activity?.let { currentActivity ->
+                    if (currentActivity.shouldShowRequestPermissionRationale(permission.ACCESS_FINE_LOCATION)) {
+                        controller?.handleShowRationaleFlowCameraLocation(
+                            currentActivity,
+                            inAppCameraLocationPermissionLauncher, // Pass launcher
+                            cameraPickLauncherForResult
+                        )
+                    } else {
+                        controller?.locationPermissionCallback?.onLocationPermissionDenied(
+                            currentActivity.getString(R.string.in_app_camera_location_permission_denied)
+                        )
+                    }
+                }
+            }
         }
     }
 
-    @Override
-    public View onCreateView(
-        final LayoutInflater inflater, @Nullable final ViewGroup container,
-        @Nullable final Bundle savedInstanceState) {
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         binding = FragmentContributionsListBinding.inflate(
             inflater, container, false
-        );
-        rvContributionsList = binding.contributionsList;
+        )
+        rvContributionsList = binding!!.contributionsList
 
-        contributionsListPresenter.onAttachView(this);
-        binding.fabCustomGallery.setOnClickListener(v -> launchCustomSelector());
-        binding.fabCustomGallery.setOnLongClickListener(view -> {
-            ViewUtil.showShortToast(getContext(), R.string.custom_selector_title);
-            return true;
-        });
-
-        if (Objects.equals(sessionManager.getUserName(), userName)) {
-            binding.tvContributionsOfUser.setVisibility(GONE);
-            binding.fabLayout.setVisibility(VISIBLE);
-        } else {
-            binding.tvContributionsOfUser.setVisibility(VISIBLE);
-            binding.tvContributionsOfUser.setText(
-                getString(R.string.contributions_of_user, userName));
-            binding.fabLayout.setVisibility(GONE);
+        contributionsListPresenter!!.onAttachView(this)
+        binding!!.fabCustomGallery.setOnClickListener { v: View? -> launchCustomSelector() }
+        binding!!.fabCustomGallery.setOnLongClickListener { view: View? ->
+            showShortToast(context, fr.free.nrw.commons.R.string.custom_selector_title)
+            true
         }
 
-        initAdapter();
+        if (sessionManager!!.userName == userName) {
+            binding!!.tvContributionsOfUser.visibility = View.GONE
+            binding!!.fabLayout.visibility = View.VISIBLE
+        } else {
+            binding!!.tvContributionsOfUser.visibility = View.VISIBLE
+            binding!!.tvContributionsOfUser.text =
+                getString(fr.free.nrw.commons.R.string.contributions_of_user, userName)
+            binding!!.fabLayout.visibility = View.GONE
+        }
+
+        initAdapter()
 
         // pull down to refresh only enabled for self user.
-        if(Objects.equals(sessionManager.getUserName(), userName)){
-            binding.swipeRefreshLayout.setOnRefreshListener(() -> {
-                contributionsListPresenter.refreshList(binding.swipeRefreshLayout);
-            });
+        if (sessionManager!!.userName == userName) {
+            binding!!.swipeRefreshLayout.setOnRefreshListener {
+                contributionsListPresenter!!.refreshList(
+                    binding!!.swipeRefreshLayout
+                )
+            }
         } else {
-            binding.swipeRefreshLayout.setEnabled(false);
+            binding!!.swipeRefreshLayout.isEnabled = false
         }
 
-        return binding.getRoot();
+        return binding!!.root
     }
 
-    @Override
-    public void onDestroyView() {
-        binding = null;
-        super.onDestroyView();
+    override fun onDestroyView() {
+        binding = null
+        super.onDestroyView()
     }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (getParentFragment() != null && getParentFragment() instanceof ContributionsFragment) {
-            callback = ((ContributionsFragment) getParentFragment());
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        if (parentFragment != null && parentFragment is ContributionsFragment) {
+            callback = (parentFragment as ContributionsFragment)
         }
     }
 
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        callback = null;//To avoid possible memory leak
+    override fun onDetach() {
+        super.onDetach()
+        callback = null //To avoid possible memory leak
     }
 
-    private void initAdapter() {
-        adapter = new ContributionsListAdapter(this, mediaClient);
+    private fun initAdapter() {
+        adapter = ContributionsListAdapter(this, mediaClient!!)
     }
 
-    @Override
-    public void onViewCreated(final View view, @Nullable final Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        initRecyclerView();
-        initializeAnimations();
-        setListeners();
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initRecyclerView()
+        initializeAnimations()
+        setListeners()
     }
 
-    private void initRecyclerView() {
-        final GridLayoutManager layoutManager = new GridLayoutManager(getContext(),
-            getSpanCount(getResources().getConfiguration().orientation));
-        rvContributionsList.setLayoutManager(layoutManager);
+    private fun initRecyclerView() {
+        val layoutManager = GridLayoutManager(
+            context,
+            getSpanCount(resources.configuration.orientation)
+        )
+        rvContributionsList!!.layoutManager = layoutManager
 
         //Setting flicker animation of recycler view to false.
-        final ItemAnimator animator = rvContributionsList.getItemAnimator();
-        if (animator instanceof SimpleItemAnimator) {
-            ((SimpleItemAnimator) animator).setSupportsChangeAnimations(false);
+        val animator = rvContributionsList!!.itemAnimator
+        if (animator is SimpleItemAnimator) {
+            animator.supportsChangeAnimations = false
         }
 
-        contributionsListPresenter.setup(userName,
-            Objects.equals(sessionManager.getUserName(), userName));
-        contributionsListPresenter.contributionList.observe(getViewLifecycleOwner(), list -> {
-            contributionsSize = list.size();
-            adapter.submitList(list);
-            if (callback != null) {
-                callback.notifyDataSetChanged();
+        contributionsListPresenter!!.setup(
+            userName,
+            sessionManager!!.userName == userName
+        )
+        contributionsListPresenter!!.contributionList?.observe(
+            viewLifecycleOwner
+        ) { list: PagedList<Contribution>? ->
+            if (list != null) {
+                contributionsSize = list.size
             }
-        });
-        rvContributionsList.setAdapter(adapter);
-        adapter.registerAdapterDataObserver(new AdapterDataObserver() {
-            @Override
-            public void onItemRangeInserted(int positionStart, int itemCount) {
-                super.onItemRangeInserted(positionStart, itemCount);
-                contributionsSize = adapter.getItemCount();
+            adapter!!.submitList(list)
+            if (callback != null) {
+                callback!!.notifyDataSetChanged()
+            }
+        }
+        rvContributionsList!!.adapter = adapter
+        adapter!!.registerAdapterDataObserver(object : AdapterDataObserver() {
+            override fun onItemRangeInserted(positionStart: Int, itemCount: Int) {
+                super.onItemRangeInserted(positionStart, itemCount)
+                contributionsSize = adapter!!.itemCount
                 if (callback != null) {
-                    callback.notifyDataSetChanged();
+                    callback!!.notifyDataSetChanged()
                 }
                 if (itemCount > 0 && positionStart == 0) {
-                    if (adapter.getContributionForPosition(positionStart) != null) {
-                        rvContributionsList
-                            .scrollToPosition(0);//Newly upload items are always added to the top
+                    if (adapter!!.getContributionForPosition(positionStart) != null) {
+                        rvContributionsList!!
+                            .scrollToPosition(0) //Newly upload items are always added to the top
                     }
                 }
             }
@@ -276,146 +289,148 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
              * Called whenever items in the list have changed
              * Calls viewPagerNotifyDataSetChanged() that will notify the viewpager
              */
-            @Override
-            public void onItemRangeChanged(final int positionStart, final int itemCount) {
-                super.onItemRangeChanged(positionStart, itemCount);
+            override fun onItemRangeChanged(positionStart: Int, itemCount: Int) {
+                super.onItemRangeChanged(positionStart, itemCount)
                 if (callback != null) {
-                    callback.viewPagerNotifyDataSetChanged();
+                    callback!!.viewPagerNotifyDataSetChanged()
                 }
             }
-        });
+        })
 
         //Fab close on touch outside (Scrolling or taping on item triggers this action).
-        rvContributionsList.addOnItemTouchListener(new OnItemTouchListener() {
-
+        rvContributionsList!!.addOnItemTouchListener(object : OnItemTouchListener {
             /**
              * Silently observe and/or take over touch events sent to the RecyclerView before
              * they are handled by either the RecyclerView itself or its child views.
              */
-            @Override
-            public boolean onInterceptTouchEvent(@NonNull RecyclerView rv, @NonNull MotionEvent e) {
-                if (e.getAction() == MotionEvent.ACTION_DOWN) {
+            override fun onInterceptTouchEvent(rv: RecyclerView, e: MotionEvent): Boolean {
+                if (e.action == MotionEvent.ACTION_DOWN) {
                     if (isFabOpen) {
-                        animateFAB(isFabOpen);
+                        animateFAB(isFabOpen)
                     }
                 }
-                return false;
+                return false
             }
 
             /**
              * Process a touch event as part of a gesture that was claimed by returning true
-             * from a previous call to {@link #onInterceptTouchEvent}.
+             * from a previous call to [.onInterceptTouchEvent].
              *
              * @param rv
              * @param e  MotionEvent describing the touch event. All coordinates are in the
-             *           RecyclerView's coordinate system.
+             * RecyclerView's coordinate system.
              */
-            @Override
-            public void onTouchEvent(@NonNull RecyclerView rv, @NonNull MotionEvent e) {
+            override fun onTouchEvent(rv: RecyclerView, e: MotionEvent) {
                 //required abstract method DO NOT DELETE
             }
 
             /**
              * Called when a child of RecyclerView does not want RecyclerView and its ancestors
-             * to intercept touch events with {@link ViewGroup#onInterceptTouchEvent(MotionEvent)}.
+             * to intercept touch events with [ViewGroup.onInterceptTouchEvent].
              *
              * @param disallowIntercept True if the child does not want the parent to intercept
-             *                          touch events.
+             * touch events.
              */
-            @Override
-            public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
+            override fun onRequestDisallowInterceptTouchEvent(disallowIntercept: Boolean) {
                 //required abstract method DO NOT DELETE
             }
-
-        });
+        })
     }
 
-    private int getSpanCount(final int orientation) {
-        return orientation == Configuration.ORIENTATION_LANDSCAPE ?
-            SPAN_COUNT_LANDSCAPE : SPAN_COUNT_PORTRAIT;
+    private fun getSpanCount(orientation: Int): Int {
+        return if (orientation == Configuration.ORIENTATION_LANDSCAPE) SPAN_COUNT_LANDSCAPE else SPAN_COUNT_PORTRAIT
     }
 
-    @Override
-    public void onConfigurationChanged(final Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
         // check orientation
-        binding.fabLayout.setOrientation(
-            newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE ?
-                LinearLayout.HORIZONTAL : LinearLayout.VERTICAL);
+        binding!!.fabLayout.orientation =
+            if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) LinearLayout.HORIZONTAL else LinearLayout.VERTICAL
         rvContributionsList
-            .setLayoutManager(
-                new GridLayoutManager(getContext(), getSpanCount(newConfig.orientation)));
+            ?.setLayoutManager(
+                GridLayoutManager(context, getSpanCount(newConfig.orientation))
+            )
     }
 
-    private void initializeAnimations() {
-        fab_open = AnimationUtils.loadAnimation(getActivity(), R.anim.fab_open);
-        fab_close = AnimationUtils.loadAnimation(getActivity(), R.anim.fab_close);
-        rotate_forward = AnimationUtils.loadAnimation(getActivity(), R.anim.rotate_forward);
-        rotate_backward = AnimationUtils.loadAnimation(getActivity(), R.anim.rotate_backward);
+    private fun initializeAnimations() {
+        fab_open = AnimationUtils.loadAnimation(activity, fr.free.nrw.commons.R.anim.fab_open)
+        fab_close = AnimationUtils.loadAnimation(activity, fr.free.nrw.commons.R.anim.fab_close)
+        rotate_forward = AnimationUtils.loadAnimation(activity, fr.free.nrw.commons.R.anim.rotate_forward)
+        rotate_backward = AnimationUtils.loadAnimation(activity, fr.free.nrw.commons.R.anim.rotate_backward)
     }
 
-    private void setListeners() {
-        binding.fabPlus.setOnClickListener(view -> animateFAB(isFabOpen));
-        binding.fabCamera.setOnClickListener(view -> {
-            controller.initiateCameraPick(getActivity(), inAppCameraLocationPermissionLauncher, cameraPickLauncherForResult);
-            animateFAB(isFabOpen);
-        });
-        binding.fabCamera.setOnLongClickListener(view -> {
-            ViewUtil.showShortToast(getContext(), R.string.add_contribution_from_camera);
-            return true;
-        });
-        binding.fabGallery.setOnClickListener(view -> {
-            controller.initiateGalleryPick(getActivity(), galleryPickLauncherForResult, true);
-            animateFAB(isFabOpen);
-        });
-        binding.fabGallery.setOnLongClickListener(view -> {
-            ViewUtil.showShortToast(getContext(), R.string.menu_from_gallery);
-            return true;
-        });
+    private fun setListeners() {
+        binding!!.fabPlus.setOnClickListener { view: View? -> animateFAB(isFabOpen) }
+        binding!!.fabCamera.setOnClickListener { view: View? ->
+            controller!!.initiateCameraPick(
+                requireActivity(),
+                inAppCameraLocationPermissionLauncher,
+                cameraPickLauncherForResult
+            )
+            animateFAB(isFabOpen)
+        }
+        binding!!.fabCamera.setOnLongClickListener { view: View? ->
+            showShortToast(
+                context,
+                fr.free.nrw.commons.R.string.add_contribution_from_camera
+            )
+            true
+        }
+        binding!!.fabGallery.setOnClickListener { view: View? ->
+            controller!!.initiateGalleryPick(requireActivity(), galleryPickLauncherForResult, true)
+            animateFAB(isFabOpen)
+        }
+        binding!!.fabGallery.setOnLongClickListener { view: View? ->
+            showShortToast(context, fr.free.nrw.commons.R.string.menu_from_gallery)
+            true
+        }
     }
 
     /**
      * Launch Custom Selector.
      */
-    protected void launchCustomSelector() {
-        controller.initiateCustomGalleryPickWithPermission(getActivity(), customSelectorLauncherForResult);
-        animateFAB(isFabOpen);
+    protected fun launchCustomSelector() {
+        controller!!.initiateCustomGalleryPickWithPermission(
+            requireActivity(),
+            customSelectorLauncherForResult
+        )
+        animateFAB(isFabOpen)
     }
 
-    public void scrollToTop() {
-        rvContributionsList.smoothScrollToPosition(0);
+    fun scrollToTop() {
+        rvContributionsList!!.smoothScrollToPosition(0)
     }
 
-    private void animateFAB(final boolean isFabOpen) {
-        this.isFabOpen = !isFabOpen;
-        if (binding.fabPlus.isShown()) {
+    private fun animateFAB(isFabOpen: Boolean) {
+        this.isFabOpen = !isFabOpen
+        if (binding!!.fabPlus.isShown) {
             if (isFabOpen) {
-                binding.fabPlus.startAnimation(rotate_backward);
-                binding.fabCamera.startAnimation(fab_close);
-                binding.fabGallery.startAnimation(fab_close);
-                binding.fabCustomGallery.startAnimation(fab_close);
-                binding.fabCamera.hide();
-                binding.fabGallery.hide();
-                binding.fabCustomGallery.hide();
+                binding!!.fabPlus.startAnimation(rotate_backward)
+                binding!!.fabCamera.startAnimation(fab_close)
+                binding!!.fabGallery.startAnimation(fab_close)
+                binding!!.fabCustomGallery.startAnimation(fab_close)
+                binding!!.fabCamera.hide()
+                binding!!.fabGallery.hide()
+                binding!!.fabCustomGallery.hide()
             } else {
-                binding.fabPlus.startAnimation(rotate_forward);
-                binding.fabCamera.startAnimation(fab_open);
-                binding.fabGallery.startAnimation(fab_open);
-                binding.fabCustomGallery.startAnimation(fab_open);
-                binding.fabCamera.show();
-                binding.fabGallery.show();
-                binding.fabCustomGallery.show();
+                binding!!.fabPlus.startAnimation(rotate_forward)
+                binding!!.fabCamera.startAnimation(fab_open)
+                binding!!.fabGallery.startAnimation(fab_open)
+                binding!!.fabCustomGallery.startAnimation(fab_open)
+                binding!!.fabCamera.show()
+                binding!!.fabGallery.show()
+                binding!!.fabCustomGallery.show()
             }
-            this.isFabOpen = !isFabOpen;
+            this.isFabOpen = !isFabOpen
         }
     }
 
     /**
      * Shows welcome message if user has no contributions yet i.e. new user.
      */
-    @Override
-    public void showWelcomeTip(final boolean shouldShow) {
-        binding.noContributionsYet.setVisibility(shouldShow ? VISIBLE : GONE);
+    override fun showWelcomeTip(shouldShow: Boolean) {
+        binding!!.noContributionsYet.visibility =
+            if (shouldShow) View.VISIBLE else View.GONE
     }
 
     /**
@@ -423,37 +438,34 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
      *
      * @param shouldShow True when contributions list should be hidden.
      */
-    @Override
-    public void showProgress(final boolean shouldShow) {
-        binding.loadingContributionsProgressBar.setVisibility(shouldShow ? VISIBLE : GONE);
+    override fun showProgress(shouldShow: Boolean) {
+        binding!!.loadingContributionsProgressBar.visibility =
+            if (shouldShow) View.VISIBLE else View.GONE
     }
 
-    @Override
-    public void showNoContributionsUI(final boolean shouldShow) {
-        binding.noContributionsYet.setVisibility(shouldShow ? VISIBLE : GONE);
+    override fun showNoContributionsUI(shouldShow: Boolean) {
+        binding!!.noContributionsYet.visibility =
+            if (shouldShow) View.VISIBLE else View.GONE
     }
 
-    @Override
-    public void onSaveInstanceState(@NonNull Bundle outState) {
-        super.onSaveInstanceState(outState);
-        final GridLayoutManager layoutManager = (GridLayoutManager) rvContributionsList
-            .getLayoutManager();
-        outState.putParcelable(RV_STATE, layoutManager.onSaveInstanceState());
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        val layoutManager = rvContributionsList
+            ?.getLayoutManager() as GridLayoutManager?
+        outState.putParcelable(RV_STATE, layoutManager!!.onSaveInstanceState())
     }
 
-    @Override
-    public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
-        super.onViewStateRestored(savedInstanceState);
+    override fun onViewStateRestored(savedInstanceState: Bundle?) {
+        super.onViewStateRestored(savedInstanceState)
         if (null != savedInstanceState) {
-            final Parcelable savedRecyclerLayoutState = savedInstanceState.getParcelable(RV_STATE);
-            rvContributionsList.getLayoutManager().onRestoreInstanceState(savedRecyclerLayoutState);
+            val savedRecyclerLayoutState = savedInstanceState.getParcelable<Parcelable>(RV_STATE)
+            rvContributionsList!!.layoutManager!!.onRestoreInstanceState(savedRecyclerLayoutState)
         }
     }
 
-    @Override
-    public void openMediaDetail(final int position, boolean isWikipediaButtonDisplayed) {
-        if (null != callback) {//Just being safe, ideally they won't be called when detached
-            callback.showDetail(position, isWikipediaButtonDisplayed);
+    override fun openMediaDetail(position: Int, isWikipediaButtonDisplayed: Boolean) {
+        if (null != callback) { //Just being safe, ideally they won't be called when detached
+            callback!!.showDetail(position, isWikipediaButtonDisplayed)
         }
     }
 
@@ -462,16 +474,16 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
      *
      * @param contribution
      */
-    @Override
-    public void addImageToWikipedia(Contribution contribution) {
-        DialogUtil.showAlertDialog(getActivity(),
-            getString(R.string.add_picture_to_wikipedia_article_title),
-            getString(R.string.add_picture_to_wikipedia_article_desc),
-            () -> {
-                showAddImageToWikipediaInstructions(contribution);
-            }, () -> {
-                // do nothing
-            });
+    override fun addImageToWikipedia(contribution: Contribution?) {
+        showAlertDialog(
+            requireActivity(),
+            getString(fr.free.nrw.commons.R.string.add_picture_to_wikipedia_article_title),
+            getString(fr.free.nrw.commons.R.string.add_picture_to_wikipedia_article_desc),
+            {
+                if (contribution != null) {
+                    showAddImageToWikipediaInstructions(contribution)
+                }
+            }, {})
     }
 
     /**
@@ -479,56 +491,61 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
      *
      * @param contribution
      */
-    private void showAddImageToWikipediaInstructions(Contribution contribution) {
-        FragmentManager fragmentManager = getFragmentManager();
-        WikipediaInstructionsDialogFragment fragment = WikipediaInstructionsDialogFragment
-            .newInstance(contribution);
-        fragment.setCallback(this::onConfirmClicked);
-        fragment.show(fragmentManager, "WikimediaFragment");
+    private fun showAddImageToWikipediaInstructions(contribution: Contribution) {
+        val fragmentManager = fragmentManager
+        val fragment = newInstance(contribution)
+        fragment.callback =
+            WikipediaInstructionsDialogFragment.Callback { contribution: Contribution?, copyWikicode: Boolean ->
+                this.onConfirmClicked(
+                    contribution,
+                    copyWikicode
+                )
+            }
+        fragment.show(fragmentManager!!, "WikimediaFragment")
     }
 
 
-    public Media getMediaAtPosition(final int i) {
-        if (adapter.getContributionForPosition(i) != null) {
-            return adapter.getContributionForPosition(i).getMedia();
+    fun getMediaAtPosition(i: Int): Media? {
+        if (adapter!!.getContributionForPosition(i) != null) {
+            return adapter!!.getContributionForPosition(i)!!.media
         }
-        return null;
+        return null
     }
 
-    public int getTotalMediaCount() {
-        return contributionsSize;
-    }
+    val totalMediaCount: Int
+        get() = contributionsSize
 
     /**
      * Open the editor for the language Wikipedia
      *
      * @param contribution
      */
-    @Override
-    public void onConfirmClicked(@Nullable Contribution contribution, boolean copyWikicode) {
+    override fun onConfirmClicked(contribution: Contribution?, copyWikicode: Boolean) {
         if (copyWikicode) {
-            String wikicode = contribution.getMedia().getWikiCode();
-            Utils.copy("wikicode", wikicode, getContext());
+            val wikicode = contribution!!.media.wikiCode
+            Utils.copy("wikicode", wikicode, context)
         }
 
-        final String url =
-            languageWikipediaSite.mobileUrl() + "/wiki/" + contribution.getWikidataPlace()
-                .getWikipediaPageTitle();
-        Utils.handleWebUrl(getContext(), Uri.parse(url));
+        val url =
+            languageWikipediaSite!!.mobileUrl() + "/wiki/" + (contribution!!.wikidataPlace
+                ?.getWikipediaPageTitle())
+        Utils.handleWebUrl(context, Uri.parse(url))
     }
 
-    public Integer getContributionStateAt(int position) {
-        return adapter.getContributionForPosition(position).getState();
+    fun getContributionStateAt(position: Int): Int {
+        return adapter!!.getContributionForPosition(position)!!.state
     }
 
-    public interface Callback {
+     interface Callback {
+        fun notifyDataSetChanged()
 
-        void notifyDataSetChanged();
-
-        void showDetail(int position, boolean isWikipediaButtonDisplayed);
+        fun showDetail(position: Int, isWikipediaButtonDisplayed: Boolean)
 
         // Notify the viewpager that number of items have changed.
-        void viewPagerNotifyDataSetChanged();
+        fun viewPagerNotifyDataSetChanged()
+    }
 
+    companion object {
+        private const val RV_STATE = "rv_scroll_state"
     }
 }

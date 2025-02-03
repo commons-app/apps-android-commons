@@ -1,159 +1,156 @@
-package fr.free.nrw.commons.contributions;
+package fr.free.nrw.commons.contributions
 
-import android.annotation.SuppressLint;
-import android.app.Activity;
-import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.work.ExistingWorkPolicy;
-import fr.free.nrw.commons.databinding.MainBinding;
-import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.WelcomeActivity;
-import fr.free.nrw.commons.auth.SessionManager;
-import fr.free.nrw.commons.bookmarks.BookmarkFragment;
-import fr.free.nrw.commons.explore.ExploreFragment;
-import fr.free.nrw.commons.kvstore.JsonKvStore;
-import fr.free.nrw.commons.location.LocationServiceManager;
-import fr.free.nrw.commons.media.MediaDetailPagerFragment;
-import fr.free.nrw.commons.navtab.MoreBottomSheetFragment;
-import fr.free.nrw.commons.navtab.MoreBottomSheetLoggedOutFragment;
-import fr.free.nrw.commons.navtab.NavTab;
-import fr.free.nrw.commons.navtab.NavTabLayout;
-import fr.free.nrw.commons.navtab.NavTabLoggedOut;
-import fr.free.nrw.commons.nearby.Place;
-import fr.free.nrw.commons.nearby.fragments.NearbyParentFragment;
-import fr.free.nrw.commons.nearby.fragments.NearbyParentFragment.NearbyParentFragmentInstanceReadyCallback;
-import fr.free.nrw.commons.notification.NotificationActivity;
-import fr.free.nrw.commons.notification.NotificationController;
-import fr.free.nrw.commons.quiz.QuizChecker;
-import fr.free.nrw.commons.settings.SettingsFragment;
-import fr.free.nrw.commons.theme.BaseActivity;
-import fr.free.nrw.commons.upload.UploadProgressActivity;
-import fr.free.nrw.commons.upload.worker.WorkRequestHelper;
-import fr.free.nrw.commons.utils.PermissionUtils;
-import fr.free.nrw.commons.utils.ViewUtilWrapper;
-import io.reactivex.Completable;
-import io.reactivex.schedulers.Schedulers;
-import java.util.Calendar;
-import java.util.Collections;
-import java.util.List;
-import javax.inject.Inject;
-import javax.inject.Named;
-import timber.log.Timber;
+import android.annotation.SuppressLint
+import android.content.Context
+import android.content.Intent
+import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
+import android.view.View
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.work.ExistingWorkPolicy
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import fr.free.nrw.commons.R
+import fr.free.nrw.commons.WelcomeActivity
+import fr.free.nrw.commons.auth.SessionManager
+import fr.free.nrw.commons.bookmarks.BookmarkFragment
+import fr.free.nrw.commons.contributions.ContributionsFragment.Companion.newInstance
+import fr.free.nrw.commons.databinding.MainBinding
+import fr.free.nrw.commons.explore.ExploreFragment
+import fr.free.nrw.commons.kvstore.JsonKvStore
+import fr.free.nrw.commons.location.LocationServiceManager
+import fr.free.nrw.commons.media.MediaDetailPagerFragment
+import fr.free.nrw.commons.navtab.MoreBottomSheetFragment
+import fr.free.nrw.commons.navtab.MoreBottomSheetLoggedOutFragment
+import fr.free.nrw.commons.navtab.NavTab
+import fr.free.nrw.commons.navtab.NavTabLayout
+import fr.free.nrw.commons.navtab.NavTabLoggedOut
+import fr.free.nrw.commons.nearby.Place
+import fr.free.nrw.commons.nearby.fragments.NearbyParentFragment
+import fr.free.nrw.commons.notification.NotificationActivity.Companion.startYourself
+import fr.free.nrw.commons.notification.NotificationController
+import fr.free.nrw.commons.quiz.QuizChecker
+import fr.free.nrw.commons.settings.SettingsFragment
+import fr.free.nrw.commons.theme.BaseActivity
+import fr.free.nrw.commons.upload.UploadProgressActivity
+import fr.free.nrw.commons.upload.worker.WorkRequestHelper.Companion.makeOneTimeWorkRequest
+import fr.free.nrw.commons.utils.ViewUtilWrapper
+import io.reactivex.Completable
+import io.reactivex.functions.Consumer
+import io.reactivex.schedulers.Schedulers
+import timber.log.Timber
+import java.util.Calendar
+import javax.inject.Inject
+import javax.inject.Named
 
-public class MainActivity extends BaseActivity
-    implements FragmentManager.OnBackStackChangedListener {
 
+class MainActivity : BaseActivity(), FragmentManager.OnBackStackChangedListener {
+    @JvmField
     @Inject
-    SessionManager sessionManager;
-    @Inject
-    ContributionController controller;
-    @Inject
-    ContributionDao contributionDao;
+    var sessionManager: SessionManager? = null
 
-    private ContributionsFragment contributionsFragment;
-    private NearbyParentFragment nearbyParentFragment;
-    private ExploreFragment exploreFragment;
-    private BookmarkFragment bookmarkFragment;
-    public ActiveFragment activeFragment;
-    private MediaDetailPagerFragment mediaDetailPagerFragment;
-    private NavTabLayout.OnNavigationItemSelectedListener navListener;
+    @JvmField
+    @Inject
+    var controller: ContributionController? = null
 
+    @JvmField
     @Inject
-    public LocationServiceManager locationManager;
+    var contributionDao: ContributionDao? = null
+
+    private var contributionsFragment: ContributionsFragment? = null
+    private var nearbyParentFragment: NearbyParentFragment? = null
+    private var exploreFragment: ExploreFragment? = null
+    private var bookmarkFragment: BookmarkFragment? = null
+    @JvmField
+    var activeFragment: ActiveFragment? = null
+    private val mediaDetailPagerFragment: MediaDetailPagerFragment? = null
+    var navListener: BottomNavigationView.OnNavigationItemSelectedListener? = null
+        private set
+
+    @JvmField
     @Inject
-    NotificationController notificationController;
+    var locationManager: LocationServiceManager? = null
+
+    @JvmField
     @Inject
-    QuizChecker quizChecker;
+    var notificationController: NotificationController? = null
+
+    @JvmField
+    @Inject
+    var quizChecker: QuizChecker? = null
+
+    @JvmField
     @Inject
     @Named("default_preferences")
-    public
-    JsonKvStore applicationKvStore;
+    var applicationKvStore: JsonKvStore? = null
+
+    @JvmField
     @Inject
-    ViewUtilWrapper viewUtilWrapper;
+    var viewUtilWrapper: ViewUtilWrapper? = null
 
-    public Menu menu;
+    var menu: Menu? = null
 
-    public MainBinding binding;
+    @JvmField
+    var binding: MainBinding? = null
 
-    NavTabLayout tabLayout;
+    var tabLayout: NavTabLayout? = null
 
 
-    /**
-     * Consumers should be simply using this method to use this activity.
-     *
-     * @param context A Context of the application package implementing this class.
-     */
-    public static void startYourself(Context context) {
-        Intent intent = new Intent(context, MainActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-        context.startActivity(intent);
-    }
-
-    @Override
-    public boolean onSupportNavigateUp() {
+    override fun onSupportNavigateUp(): Boolean {
         if (activeFragment == ActiveFragment.CONTRIBUTIONS) {
-            if (!contributionsFragment.backButtonClicked()) {
-                return false;
+            if (!contributionsFragment!!.backButtonClicked()) {
+                return false
             }
         } else {
-            onBackPressed();
-            showTabs();
+            onBackPressed()
+            showTabs()
         }
-        return true;
+        return true
     }
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        binding = MainBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
-        setSupportActionBar(binding.toolbarBinding.toolbar);
-        tabLayout = binding.fragmentMainNavTabLayout;
-        loadLocale();
+    public override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        binding = MainBinding.inflate(layoutInflater)
+        setContentView(binding!!.root)
+        setSupportActionBar(binding!!.toolbarBinding.toolbar)
+        tabLayout = binding!!.fragmentMainNavTabLayout
+        loadLocale()
 
-        binding.toolbarBinding.toolbar.setNavigationOnClickListener(view -> {
-            onSupportNavigateUp();
-        });
+        binding!!.toolbarBinding.toolbar.setNavigationOnClickListener { view: View? ->
+            onSupportNavigateUp()
+        }
         /*
-        "first_edit_depict" is a key for getting information about opening the depiction editor
-        screen for the first time after opening the app.
+"first_edit_depict" is a key for getting information about opening the depiction editor
+screen for the first time after opening the app.
 
-        Getting true by the key means the depiction editor screen is opened for the first time
-        after opening the app.
-        Getting false by the key means the depiction editor screen is not opened for the first time
-        after opening the app.
-         */
-        applicationKvStore.putBoolean("first_edit_depict", true);
-        if (applicationKvStore.getBoolean("login_skipped") == true) {
-            setTitle(getString(R.string.navigation_item_explore));
-            setUpLoggedOutPager();
+Getting true by the key means the depiction editor screen is opened for the first time
+after opening the app.
+Getting false by the key means the depiction editor screen is not opened for the first time
+after opening the app.
+ */
+        applicationKvStore!!.putBoolean("first_edit_depict", true)
+        if (applicationKvStore!!.getBoolean("login_skipped") == true) {
+            title = getString(R.string.navigation_item_explore)
+            setUpLoggedOutPager()
         } else {
-            if (applicationKvStore.getBoolean("firstrun", true)) {
-                applicationKvStore.putBoolean("hasAlreadyLaunchedBigMultiupload", false);
-                applicationKvStore.putBoolean("hasAlreadyLaunchedCategoriesDialog", false);
+            if (applicationKvStore!!.getBoolean("firstrun", true)) {
+                applicationKvStore!!.putBoolean("hasAlreadyLaunchedBigMultiupload", false)
+                applicationKvStore!!.putBoolean("hasAlreadyLaunchedCategoriesDialog", false)
             }
             if (savedInstanceState == null) {
                 //starting a fresh fragment.
                 // Open Last opened screen if it is Contributions or Nearby, otherwise Contributions
-                if (applicationKvStore.getBoolean("last_opened_nearby")) {
-                    setTitle(getString(R.string.nearby_fragment));
-                    showNearby();
-                    loadFragment(NearbyParentFragment.newInstance(), false);
+                if (applicationKvStore!!.getBoolean("last_opened_nearby")) {
+                    title = getString(R.string.nearby_fragment)
+                    showNearby()
+                    loadFragment(NearbyParentFragment.newInstance(), false)
                 } else {
-                    setTitle(getString(R.string.contributions_fragment));
-                    loadFragment(ContributionsFragment.newInstance(), false);
+                    title = getString(R.string.contributions_fragment)
+                    loadFragment(newInstance(), false)
                 }
             }
-            setUpPager();
+            setUpPager()
             /**
              * Ask the user for media location access just after login
              * so that location in the EXIF metadata of the images shared by the user
@@ -169,99 +166,107 @@ public class MainActivity extends BaseActivity
 //                    R.string.add_location_manually,
 //                    permission.ACCESS_MEDIA_LOCATION);
 //            }
-            checkAndResumeStuckUploads();
+            checkAndResumeStuckUploads()
         }
     }
 
-    public void setSelectedItemId(int id) {
-        binding.fragmentMainNavTabLayout.setSelectedItemId(id);
+    fun setSelectedItemId(id: Int) {
+        binding!!.fragmentMainNavTabLayout.selectedItemId = id
     }
 
-    private void setUpPager() {
-        binding.fragmentMainNavTabLayout.setOnNavigationItemSelectedListener(
-            navListener = (item) -> {
-                if (!item.getTitle().equals(getString(R.string.more))) {
+    private fun setUpPager() {
+        binding!!.fragmentMainNavTabLayout.setOnNavigationItemSelectedListener(
+            BottomNavigationView.OnNavigationItemSelectedListener { item: MenuItem ->
+                if (item.title != getString(R.string.more)) {
                     // do not change title for more fragment
-                    setTitle(item.getTitle());
+                    title = item.title
                 }
                 // set last_opened_nearby true if item is nearby screen else set false
-                applicationKvStore.putBoolean("last_opened_nearby",
-                    item.getTitle().equals(getString(R.string.nearby_fragment)));
-                final Fragment fragment = NavTab.of(item.getOrder()).newInstance();
-                return loadFragment(fragment, true);
-            });
+                applicationKvStore!!.putBoolean(
+                    "last_opened_nearby",
+                    item.title == getString(R.string.nearby_fragment)
+                )
+                val fragment = NavTab.of(item.order).newInstance()
+                loadFragment(fragment, true)
+            }.also { navListener = it })
     }
 
-    private void setUpLoggedOutPager() {
-        loadFragment(ExploreFragment.newInstance(), false);
-        binding.fragmentMainNavTabLayout.setOnNavigationItemSelectedListener(item -> {
-            if (!item.getTitle().equals(getString(R.string.more))) {
+    private fun setUpLoggedOutPager() {
+        loadFragment(ExploreFragment.newInstance(), false)
+        binding!!.fragmentMainNavTabLayout.setOnNavigationItemSelectedListener { item: MenuItem ->
+            if (item.title != getString(R.string.more)) {
                 // do not change title for more fragment
-                setTitle(item.getTitle());
+                title = item.title
             }
-            Fragment fragment = NavTabLoggedOut.of(item.getOrder()).newInstance();
-            return loadFragment(fragment, true);
-        });
+            val fragment =
+                NavTabLoggedOut.of(item.order).newInstance()
+            loadFragment(fragment, true)
+        }
     }
 
-    private boolean loadFragment(Fragment fragment, boolean showBottom) {
+    private fun loadFragment(fragment: Fragment?, showBottom: Boolean): Boolean {
         //showBottom so that we do not show the bottom tray again when constructing
         //from the saved instance state.
-        if (fragment instanceof ContributionsFragment) {
+        if (fragment is ContributionsFragment) {
             if (activeFragment == ActiveFragment.CONTRIBUTIONS) {
                 // scroll to top if already on the Contributions tab
-                contributionsFragment.scrollToTop();
-                return true;
+                contributionsFragment!!.scrollToTop()
+                return true
             }
-            contributionsFragment = (ContributionsFragment) fragment;
-            activeFragment = ActiveFragment.CONTRIBUTIONS;
-        } else if (fragment instanceof NearbyParentFragment) {
+            contributionsFragment = fragment
+            activeFragment = ActiveFragment.CONTRIBUTIONS
+        } else if (fragment is NearbyParentFragment) {
             if (activeFragment == ActiveFragment.NEARBY) { // Do nothing if same tab
-                return true;
+                return true
             }
-            nearbyParentFragment = (NearbyParentFragment) fragment;
-            activeFragment = ActiveFragment.NEARBY;
-        } else if (fragment instanceof ExploreFragment) {
+            nearbyParentFragment = fragment
+            activeFragment = ActiveFragment.NEARBY
+        } else if (fragment is ExploreFragment) {
             if (activeFragment == ActiveFragment.EXPLORE) { // Do nothing if same tab
-                return true;
+                return true
             }
-            exploreFragment = (ExploreFragment) fragment;
-            activeFragment = ActiveFragment.EXPLORE;
-        } else if (fragment instanceof BookmarkFragment) {
+            exploreFragment = fragment
+            activeFragment = ActiveFragment.EXPLORE
+        } else if (fragment is BookmarkFragment) {
             if (activeFragment == ActiveFragment.BOOKMARK) { // Do nothing if same tab
-                return true;
+                return true
             }
-            bookmarkFragment = (BookmarkFragment) fragment;
-            activeFragment = ActiveFragment.BOOKMARK;
+            bookmarkFragment = fragment
+            activeFragment = ActiveFragment.BOOKMARK
         } else if (fragment == null && showBottom) {
-            if (applicationKvStore.getBoolean("login_skipped")
-                == true) { // If logged out, more sheet is different
-                MoreBottomSheetLoggedOutFragment bottomSheet = new MoreBottomSheetLoggedOutFragment();
-                bottomSheet.show(getSupportFragmentManager(),
-                    "MoreBottomSheetLoggedOut");
+            if (applicationKvStore!!.getBoolean("login_skipped")
+                == true
+            ) { // If logged out, more sheet is different
+                val bottomSheet = MoreBottomSheetLoggedOutFragment()
+                bottomSheet.show(
+                    supportFragmentManager,
+                    "MoreBottomSheetLoggedOut"
+                )
             } else {
-                MoreBottomSheetFragment bottomSheet = new MoreBottomSheetFragment();
-                bottomSheet.show(getSupportFragmentManager(),
-                    "MoreBottomSheet");
+                val bottomSheet = MoreBottomSheetFragment()
+                bottomSheet.show(
+                    supportFragmentManager,
+                    "MoreBottomSheet"
+                )
             }
         }
 
         if (fragment != null) {
-            getSupportFragmentManager()
+            supportFragmentManager
                 .beginTransaction()
                 .replace(R.id.fragmentContainer, fragment)
-                .commit();
-            return true;
+                .commit()
+            return true
         }
-        return false;
+        return false
     }
 
-    public void hideTabs() {
-        binding.fragmentMainNavTabLayout.setVisibility(View.GONE);
+    fun hideTabs() {
+        binding!!.fragmentMainNavTabLayout.visibility = View.GONE
     }
 
-    public void showTabs() {
-        binding.fragmentMainNavTabLayout.setVisibility(View.VISIBLE);
+    fun showTabs() {
+        binding!!.fragmentMainNavTabLayout.visibility = View.VISIBLE
     }
 
     /**
@@ -270,120 +275,121 @@ public class MainActivity extends BaseActivity
      *
      * @param uploadCount
      */
-    public void setNumOfUploads(int uploadCount) {
+    fun setNumOfUploads(uploadCount: Int) {
         if (activeFragment == ActiveFragment.CONTRIBUTIONS) {
-            setTitle(getResources().getString(R.string.contributions_fragment) + " " + (
-                !(uploadCount == 0) ?
-                    getResources()
-                        .getQuantityString(R.plurals.contributions_subtitle,
-                            uploadCount, uploadCount)
-                    : getString(R.string.contributions_subtitle_zero)));
+            title =
+                resources.getString(R.string.contributions_fragment) + " " + (if (uploadCount != 0)
+                    resources
+                        .getQuantityString(
+                            R.plurals.contributions_subtitle,
+                            uploadCount, uploadCount
+                        )
+                else
+                    getString(R.string.contributions_subtitle_zero))
         }
     }
 
     /**
      * Resume the uploads that got stuck because of the app being killed or the device being
      * rebooted.
-     * <p>
+     *
+     *
      * When the app is terminated or the device is restarted, contributions remain in the
      * 'STATE_IN_PROGRESS' state. This status persists and doesn't change during these events. So,
      * retrieving contributions labeled as 'STATE_IN_PROGRESS' from the database will provide the
      * list of uploads that appear as stuck on opening the app again
      */
     @SuppressLint("CheckResult")
-    private void checkAndResumeStuckUploads() {
-        List<Contribution> stuckUploads = contributionDao.getContribution(
-                Collections.singletonList(Contribution.STATE_IN_PROGRESS))
+    private fun checkAndResumeStuckUploads() {
+        val stuckUploads = contributionDao!!.getContribution(
+            listOf(Contribution.STATE_IN_PROGRESS)
+        )
             .subscribeOn(Schedulers.io())
-            .blockingGet();
-        Timber.d("Resuming " + stuckUploads.size() + " uploads...");
+            .blockingGet()
+        Timber.d("Resuming " + stuckUploads.size + " uploads...")
         if (!stuckUploads.isEmpty()) {
-            for (Contribution contribution : stuckUploads) {
-                contribution.setState(Contribution.STATE_QUEUED);
-                contribution.setDateUploadStarted(Calendar.getInstance().getTime());
-                Completable.fromAction(() -> contributionDao.saveSynchronous(contribution))
+            for (contribution in stuckUploads) {
+                contribution.state = Contribution.STATE_QUEUED
+                contribution.dateUploadStarted = Calendar.getInstance().time
+                Completable.fromAction { contributionDao!!.saveSynchronous(contribution) }
                     .subscribeOn(Schedulers.io())
-                    .subscribe();
+                    .subscribe()
             }
-            WorkRequestHelper.Companion.makeOneTimeWorkRequest(
-                this, ExistingWorkPolicy.APPEND_OR_REPLACE);
+            makeOneTimeWorkRequest(
+                this, ExistingWorkPolicy.APPEND_OR_REPLACE
+            )
         }
     }
 
-    @Override
-    protected void onPostCreate(@Nullable Bundle savedInstanceState) {
-        super.onPostCreate(savedInstanceState);
+    override fun onPostCreate(savedInstanceState: Bundle?) {
+        super.onPostCreate(savedInstanceState)
         //quizChecker.initQuizCheck(this);
     }
 
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putInt("viewPagerCurrentItem", binding.pager.getCurrentItem());
-        outState.putString("activeFragment", activeFragment.name());
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putInt("viewPagerCurrentItem", binding!!.pager.currentItem)
+        outState.putString("activeFragment", activeFragment!!.name)
     }
 
-    @Override
-    protected void onRestoreInstanceState(Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
-        String activeFragmentName = savedInstanceState.getString("activeFragment");
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        super.onRestoreInstanceState(savedInstanceState)
+        val activeFragmentName = savedInstanceState.getString("activeFragment")
         if (activeFragmentName != null) {
-            restoreActiveFragment(activeFragmentName);
+            restoreActiveFragment(activeFragmentName)
         }
     }
 
-    private void restoreActiveFragment(@NonNull String fragmentName) {
-        if (fragmentName.equals(ActiveFragment.CONTRIBUTIONS.name())) {
-            setTitle(getString(R.string.contributions_fragment));
-            loadFragment(ContributionsFragment.newInstance(), false);
-        } else if (fragmentName.equals(ActiveFragment.NEARBY.name())) {
-            setTitle(getString(R.string.nearby_fragment));
-            loadFragment(NearbyParentFragment.newInstance(), false);
-        } else if (fragmentName.equals(ActiveFragment.EXPLORE.name())) {
-            setTitle(getString(R.string.navigation_item_explore));
-            loadFragment(ExploreFragment.newInstance(), false);
-        } else if (fragmentName.equals(ActiveFragment.BOOKMARK.name())) {
-            setTitle(getString(R.string.bookmarks));
-            loadFragment(BookmarkFragment.newInstance(), false);
+    private fun restoreActiveFragment(fragmentName: String) {
+        if (fragmentName == ActiveFragment.CONTRIBUTIONS.name) {
+            title = getString(R.string.contributions_fragment)
+            loadFragment(newInstance(), false)
+        } else if (fragmentName == ActiveFragment.NEARBY.name) {
+            title = getString(R.string.nearby_fragment)
+            loadFragment(NearbyParentFragment.newInstance(), false)
+        } else if (fragmentName == ActiveFragment.EXPLORE.name) {
+            title = getString(R.string.navigation_item_explore)
+            loadFragment(ExploreFragment.newInstance(), false)
+        } else if (fragmentName == ActiveFragment.BOOKMARK.name) {
+            title = getString(R.string.bookmarks)
+            loadFragment(BookmarkFragment.newInstance(), false)
         }
     }
 
-    @Override
-    public void onBackPressed() {
+    override fun onBackPressed() {
         if (contributionsFragment != null && activeFragment == ActiveFragment.CONTRIBUTIONS) {
             // Means that contribution fragment is visible
-            if (!contributionsFragment.backButtonClicked()) {//If this one does not wan't to handle
+            if (!contributionsFragment!!.backButtonClicked()) { //If this one does not wan't to handle
                 // the back press, let the activity do so
-                super.onBackPressed();
+                super.onBackPressed()
             }
         } else if (nearbyParentFragment != null && activeFragment == ActiveFragment.NEARBY) {
             // Means that nearby fragment is visible
             /* If function nearbyParentFragment.backButtonClick() returns false, it means that the bottomsheet is
               not expanded. So if the back button is pressed, then go back to the Contributions tab */
-            if (!nearbyParentFragment.backButtonClicked()) {
-                getSupportFragmentManager().beginTransaction().remove(nearbyParentFragment)
-                    .commit();
-                setSelectedItemId(NavTab.CONTRIBUTIONS.code());
+            if (!nearbyParentFragment!!.backButtonClicked()) {
+                supportFragmentManager.beginTransaction().remove(nearbyParentFragment!!)
+                    .commit()
+                setSelectedItemId(NavTab.CONTRIBUTIONS.code())
             }
         } else if (exploreFragment != null && activeFragment == ActiveFragment.EXPLORE) {
             // Means that explore fragment is visible
-            if (!exploreFragment.onBackPressed()) {
-                if (applicationKvStore.getBoolean("login_skipped")) {
-                    super.onBackPressed();
+            if (!exploreFragment!!.onBackPressed()) {
+                if (applicationKvStore!!.getBoolean("login_skipped")) {
+                    super.onBackPressed()
                 } else {
-                    setSelectedItemId(NavTab.CONTRIBUTIONS.code());
+                    setSelectedItemId(NavTab.CONTRIBUTIONS.code())
                 }
             }
         } else if (bookmarkFragment != null && activeFragment == ActiveFragment.BOOKMARK) {
             // Means that bookmark fragment is visible
-            bookmarkFragment.onBackPressed();
+            bookmarkFragment!!.onBackPressed()
         } else {
-            super.onBackPressed();
+            super.onBackPressed()
         }
     }
 
-    @Override
-    public void onBackStackChanged() {
+    override fun onBackStackChanged() {
         //initBackButton();
     }
 
@@ -391,77 +397,76 @@ public class MainActivity extends BaseActivity
      * Retry all failed uploads as soon as the user returns to the app
      */
     @SuppressLint("CheckResult")
-    private void retryAllFailedUploads() {
-        contributionDao.
-            getContribution(Collections.singletonList(Contribution.STATE_FAILED))
-            .subscribeOn(Schedulers.io())
-            .subscribe(failedUploads -> {
-                for (Contribution contribution : failedUploads) {
-                    contributionsFragment.retryUpload(contribution);
+    private fun retryAllFailedUploads() {
+        contributionDao
+            ?.getContribution(listOf(Contribution.STATE_FAILED))
+            ?.subscribeOn(Schedulers.io())
+            ?.subscribe { failedUploads ->
+                failedUploads.forEach { contribution ->
+                    contributionsFragment?.retryUpload(contribution)
                 }
-            });
+            }
     }
 
     /**
      * Handles item selection in the options menu. This method is called when a user interacts with
      * the options menu in the Top Bar.
      */
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.upload_tab:
-                startActivity(new Intent(this, UploadProgressActivity.class));
-                return true;
-            case R.id.notifications:
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.upload_tab -> {
+                startActivity(Intent(this, UploadProgressActivity::class.java))
+                return true
+            }
+
+            R.id.notifications -> {
                 // Starts notification activity on click to notification icon
-                NotificationActivity.Companion.startYourself(this, "unread");
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
+                startYourself(this, "unread")
+                return true
+            }
+
+            else -> return super.onOptionsItemSelected(item)
         }
     }
 
-    public void centerMapToPlace(Place place) {
-        setSelectedItemId(NavTab.NEARBY.code());
-        nearbyParentFragment.setNearbyParentFragmentInstanceReadyCallback(
-            new NearbyParentFragmentInstanceReadyCallback() {
-                @Override
-                public void onReady() {
-                    nearbyParentFragment.centerMapToPlace(place);
-                }
-            });
+    fun centerMapToPlace(place: Place?) {
+        setSelectedItemId(NavTab.NEARBY.code())
+        nearbyParentFragment!!.setNearbyParentFragmentInstanceReadyCallback {
+            nearbyParentFragment!!.centerMapToPlace(
+                place
+            )
+        }
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
+    override fun onResume() {
+        super.onResume()
 
-        if ((applicationKvStore.getBoolean("firstrun", true)) &&
-            (!applicationKvStore.getBoolean("login_skipped"))) {
-            defaultKvStore.putBoolean("inAppCameraFirstRun", true);
-            WelcomeActivity.startYourself(this);
+        if ((applicationKvStore!!.getBoolean("firstrun", true)) &&
+            (!applicationKvStore!!.getBoolean("login_skipped"))
+        ) {
+            defaultKvStore.putBoolean("inAppCameraFirstRun", true)
+            WelcomeActivity.startYourself(this)
         }
 
-        retryAllFailedUploads();
+        retryAllFailedUploads()
     }
 
-    @Override
-    protected void onDestroy() {
-        quizChecker.cleanup();
-        locationManager.unregisterLocationManager();
+    override fun onDestroy() {
+        quizChecker!!.cleanup()
+        locationManager!!.unregisterLocationManager()
         // Remove ourself from hashmap to prevent memory leaks
-        locationManager = null;
-        super.onDestroy();
+        locationManager = null
+        super.onDestroy()
     }
 
     /**
      * Public method to show nearby from the reference of this.
      */
-    public void showNearby() {
-        binding.fragmentMainNavTabLayout.setSelectedItemId(NavTab.NEARBY.code());
+    fun showNearby() {
+        binding!!.fragmentMainNavTabLayout.selectedItemId = NavTab.NEARBY.code()
     }
 
-    public enum ActiveFragment {
+    enum class ActiveFragment {
         CONTRIBUTIONS,
         NEARBY,
         EXPLORE,
@@ -472,15 +477,26 @@ public class MainActivity extends BaseActivity
     /**
      * Load default language in onCreate from SharedPreferences
      */
-    private void loadLocale() {
-        final SharedPreferences preferences = getSharedPreferences("Settings",
-            Activity.MODE_PRIVATE);
-        final String language = preferences.getString("language", "");
-        final SettingsFragment settingsFragment = new SettingsFragment();
-        settingsFragment.setLocale(this, language);
+    private fun loadLocale() {
+        val preferences = getSharedPreferences(
+            "Settings",
+            MODE_PRIVATE
+        )
+        val language = preferences.getString("language", "")!!
+        val settingsFragment = SettingsFragment()
+        settingsFragment.setLocale(this, language)
     }
 
-    public NavTabLayout.OnNavigationItemSelectedListener getNavListener() {
-        return navListener;
+    companion object {
+        /**
+         * Consumers should be simply using this method to use this activity.
+         *
+         * @param context A Context of the application package implementing this class.
+         */
+        fun startYourself(context: Context) {
+            val intent = Intent(context, MainActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT or Intent.FLAG_ACTIVITY_SINGLE_TOP)
+            context.startActivity(intent)
+        }
     }
 }

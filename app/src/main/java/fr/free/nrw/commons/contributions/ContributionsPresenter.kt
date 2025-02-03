@@ -1,58 +1,45 @@
-package fr.free.nrw.commons.contributions;
+package fr.free.nrw.commons.contributions
 
-import static fr.free.nrw.commons.di.CommonsApplicationModule.IO_THREAD;
-import static fr.free.nrw.commons.utils.ImageUtils.IMAGE_OK;
-
-import androidx.work.ExistingWorkPolicy;
-import fr.free.nrw.commons.MediaDataExtractor;
-import fr.free.nrw.commons.contributions.ContributionsContract.UserActionListener;
-import fr.free.nrw.commons.di.CommonsApplicationModule;
-import fr.free.nrw.commons.repository.UploadRepository;
-import fr.free.nrw.commons.upload.worker.WorkRequestHelper;
-import io.reactivex.Scheduler;
-import io.reactivex.disposables.CompositeDisposable;
-import javax.inject.Inject;
-import javax.inject.Named;
-import timber.log.Timber;
+import fr.free.nrw.commons.utils.ImageUtils
+import androidx.work.ExistingWorkPolicy
+import fr.free.nrw.commons.MediaDataExtractor
+import fr.free.nrw.commons.di.CommonsApplicationModule
+import fr.free.nrw.commons.repository.UploadRepository
+import fr.free.nrw.commons.upload.worker.WorkRequestHelper.Companion.makeOneTimeWorkRequest
+import io.reactivex.Scheduler
+import io.reactivex.disposables.CompositeDisposable
+import timber.log.Timber
+import javax.inject.Inject
+import javax.inject.Named
 
 /**
  * The presenter class for Contributions
  */
-public class ContributionsPresenter implements UserActionListener {
+class ContributionsPresenter @Inject internal constructor(
+    private val contributionsRepository: ContributionsRepository,
+    private val uploadRepository: UploadRepository,
+    @param:Named(CommonsApplicationModule.IO_THREAD) private val ioThreadScheduler: Scheduler
+) : ContributionsContract.UserActionListener {
+    private var compositeDisposable: CompositeDisposable? = null
+    private var view: ContributionsContract.View? = null
 
-    private final ContributionsRepository contributionsRepository;
-    private final UploadRepository uploadRepository;
-    private final Scheduler ioThreadScheduler;
-    private CompositeDisposable compositeDisposable;
-    private ContributionsContract.View view;
-
+    @JvmField
     @Inject
-    MediaDataExtractor mediaDataExtractor;
+    var mediaDataExtractor: MediaDataExtractor? = null
 
-    @Inject
-    ContributionsPresenter(ContributionsRepository repository,
-        UploadRepository uploadRepository,
-        @Named(IO_THREAD) Scheduler ioThreadScheduler) {
-        this.contributionsRepository = repository;
-        this.uploadRepository = uploadRepository;
-        this.ioThreadScheduler = ioThreadScheduler;
+    override fun onAttachView(view: ContributionsContract.View) {
+        this.view = view
+        compositeDisposable = CompositeDisposable()
     }
 
-    @Override
-    public void onAttachView(ContributionsContract.View view) {
-        this.view = view;
-        compositeDisposable = new CompositeDisposable();
+    override fun onDetachView() {
+        this.view = null
+        compositeDisposable!!.clear()
     }
 
-    @Override
-    public void onDetachView() {
-        this.view = null;
-        compositeDisposable.clear();
-    }
-
-    @Override
-    public Contribution getContributionsWithTitle(String title) {
-        return contributionsRepository.getContributionWithFileName(title);
+    override fun getContributionsWithTitle(title: String): Contribution {
+        return contributionsRepository.getContributionWithFileName(title)
+            ?: throw IllegalArgumentException("Contribution not found for title: $title")
     }
 
     /**
@@ -60,22 +47,25 @@ public class ContributionsPresenter implements UserActionListener {
      *
      * @param contribution The contribution to check and potentially restart.
      */
-    public void checkDuplicateImageAndRestartContribution(Contribution contribution) {
-        compositeDisposable.add(uploadRepository
-            .checkDuplicateImage(contribution.getLocalUriPath().getPath())
-            .subscribeOn(ioThreadScheduler)
-            .subscribe(imageCheckResult -> {
-                if (imageCheckResult == IMAGE_OK) {
-                    contribution.setState(Contribution.STATE_QUEUED);
-                    saveContribution(contribution);
-                } else {
-                    Timber.e("Contribution already exists");
-                    compositeDisposable.add(contributionsRepository
-                        .deleteContributionFromDB(contribution)
-                        .subscribeOn(ioThreadScheduler)
-                        .subscribe());
-                }
-            }));
+    fun checkDuplicateImageAndRestartContribution(contribution: Contribution) {
+        compositeDisposable!!.add(
+            uploadRepository
+                .checkDuplicateImage(contribution.localUriPath!!.path)
+                .subscribeOn(ioThreadScheduler)
+                .subscribe { imageCheckResult: Int ->
+                    if (imageCheckResult == ImageUtils.IMAGE_OK) {
+                        contribution.state = Contribution.STATE_QUEUED
+                        saveContribution(contribution)
+                    } else {
+                        Timber.e("Contribution already exists")
+                        compositeDisposable!!.add(
+                            contributionsRepository
+                                .deleteContributionFromDB(contribution)
+                                .subscribeOn(ioThreadScheduler)
+                                .subscribe()
+                        )
+                    }
+                })
     }
 
     /**
@@ -84,11 +74,14 @@ public class ContributionsPresenter implements UserActionListener {
      *
      * @param contribution
      */
-    public void saveContribution(Contribution contribution) {
-        compositeDisposable.add(contributionsRepository
+    fun saveContribution(contribution: Contribution) {
+        compositeDisposable!!.add(contributionsRepository
             .save(contribution)
             .subscribeOn(ioThreadScheduler)
-            .subscribe(() -> WorkRequestHelper.Companion.makeOneTimeWorkRequest(
-                view.getContext().getApplicationContext(), ExistingWorkPolicy.KEEP)));
+            .subscribe {
+                makeOneTimeWorkRequest(
+                    view!!.getContext().applicationContext, ExistingWorkPolicy.KEEP
+                )
+            })
     }
 }

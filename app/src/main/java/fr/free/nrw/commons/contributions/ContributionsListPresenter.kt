@@ -1,52 +1,30 @@
-package fr.free.nrw.commons.contributions;
+package fr.free.nrw.commons.contributions
 
-import static fr.free.nrw.commons.di.CommonsApplicationModule.IO_THREAD;
-
-import androidx.annotation.NonNull;
-import androidx.lifecycle.LiveData;
-import androidx.paging.DataSource;
-import androidx.paging.DataSource.Factory;
-import androidx.paging.LivePagedListBuilder;
-import androidx.paging.PagedList;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-import fr.free.nrw.commons.contributions.ContributionsListContract.UserActionListener;
-import io.reactivex.Scheduler;
-import io.reactivex.disposables.CompositeDisposable;
-import java.util.Collections;
-import javax.inject.Inject;
-import javax.inject.Named;
-import kotlin.Unit;
-import kotlin.jvm.functions.Function0;
+import androidx.lifecycle.LiveData
+import androidx.paging.DataSource
+import androidx.paging.LivePagedListBuilder
+import androidx.paging.PagedList
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import fr.free.nrw.commons.di.CommonsApplicationModule
+import io.reactivex.Scheduler
+import io.reactivex.disposables.CompositeDisposable
+import javax.inject.Inject
+import javax.inject.Named
 
 /**
  * The presenter class for Contributions
  */
-public class ContributionsListPresenter implements UserActionListener {
+class ContributionsListPresenter @Inject internal constructor(
+    private val contributionBoundaryCallback: ContributionBoundaryCallback,
+    private val contributionsRemoteDataSource: ContributionsRemoteDataSource,
+    private val repository: ContributionsRepository,
+    @param:Named(CommonsApplicationModule.IO_THREAD) private val ioThreadScheduler: Scheduler
+) : ContributionsListContract.UserActionListener {
+    private val compositeDisposable = CompositeDisposable()
 
-    private final ContributionBoundaryCallback contributionBoundaryCallback;
-    private final ContributionsRepository repository;
-    private final Scheduler ioThreadScheduler;
+    var contributionList: LiveData<PagedList<Contribution>>? = null
 
-    private final CompositeDisposable compositeDisposable;
-    private final ContributionsRemoteDataSource contributionsRemoteDataSource;
-
-    LiveData<PagedList<Contribution>> contributionList;
-
-    @Inject
-    ContributionsListPresenter(
-        final ContributionBoundaryCallback contributionBoundaryCallback,
-        final ContributionsRemoteDataSource contributionsRemoteDataSource,
-        final ContributionsRepository repository,
-        @Named(IO_THREAD) final Scheduler ioThreadScheduler) {
-        this.contributionBoundaryCallback = contributionBoundaryCallback;
-        this.repository = repository;
-        this.ioThreadScheduler = ioThreadScheduler;
-        this.contributionsRemoteDataSource = contributionsRemoteDataSource;
-        compositeDisposable = new CompositeDisposable();
-    }
-
-    @Override
-    public void onAttachView(final ContributionsListContract.View view) {
+    override fun onAttachView(view: ContributionsListContract.View) {
     }
 
     /**
@@ -54,46 +32,46 @@ public class ContributionsListPresenter implements UserActionListener {
      * the live data object. This method can be tweaked to update the lazy loading behavior of the
      * contributions list
      */
-    void setup(String userName, boolean isSelf) {
-        final PagedList.Config pagedListConfig =
-            (new PagedList.Config.Builder())
+    fun setup(userName: String?, isSelf: Boolean) {
+        val pagedListConfig =
+            (PagedList.Config.Builder())
                 .setPrefetchDistance(50)
-                .setPageSize(10).build();
-        Factory<Integer, Contribution> factory;
-        boolean shouldSetBoundaryCallback;
+                .setPageSize(10).build()
+        val factory: DataSource.Factory<Int, Contribution>
+        val shouldSetBoundaryCallback: Boolean
         if (!isSelf) {
             //We don't want to persist contributions for other user's, therefore
             // creating a new DataSource for them
-            contributionsRemoteDataSource.setUserName(userName);
-            factory = new Factory<Integer, Contribution>() {
-                @NonNull
-                @Override
-                public DataSource<Integer, Contribution> create() {
-                    return contributionsRemoteDataSource;
+            contributionsRemoteDataSource.userName = userName
+            factory = object : DataSource.Factory<Int, Contribution>() {
+                override fun create(): DataSource<Int, Contribution> {
+                    return contributionsRemoteDataSource
                 }
-            };
-            shouldSetBoundaryCallback = false;
+            }
+            shouldSetBoundaryCallback = false
         } else {
-            contributionBoundaryCallback.setUserName(userName);
-            shouldSetBoundaryCallback = true;
+            contributionBoundaryCallback.userName = userName
+            shouldSetBoundaryCallback = true
             factory = repository.fetchContributionsWithStates(
-                Collections.singletonList(Contribution.STATE_COMPLETED));
+                listOf(Contribution.STATE_COMPLETED)
+            )
         }
 
-        LivePagedListBuilder livePagedListBuilder = new LivePagedListBuilder(factory,
-            pagedListConfig);
+        val livePagedListBuilder: LivePagedListBuilder<Int, Contribution> = LivePagedListBuilder(
+            factory,
+            pagedListConfig
+        )
         if (shouldSetBoundaryCallback) {
-            livePagedListBuilder.setBoundaryCallback(contributionBoundaryCallback);
+            livePagedListBuilder.setBoundaryCallback(contributionBoundaryCallback)
         }
 
-        contributionList = livePagedListBuilder.build();
+        contributionList = livePagedListBuilder.build()
     }
 
-    @Override
-    public void onDetachView() {
-        compositeDisposable.clear();
-        contributionsRemoteDataSource.dispose();
-        contributionBoundaryCallback.dispose();
+    override fun onDetachView() {
+        compositeDisposable.clear()
+        contributionsRemoteDataSource.dispose()
+        contributionBoundaryCallback.dispose()
     }
 
     /**
@@ -102,11 +80,12 @@ public class ContributionsListPresenter implements UserActionListener {
      * @param swipeRefreshLayout used to stop refresh animation when
      * refresh finishes.
      */
-    @Override
-    public void refreshList(final SwipeRefreshLayout swipeRefreshLayout) {
-        contributionBoundaryCallback.refreshList(() -> {
-            swipeRefreshLayout.setRefreshing(false);
-            return Unit.INSTANCE;
-        });
+    override fun refreshList(swipeRefreshLayout: SwipeRefreshLayout?) {
+        contributionBoundaryCallback.refreshList {
+            if (swipeRefreshLayout != null) {
+                swipeRefreshLayout.isRefreshing = false
+            }
+            Unit
+        }
     }
 }

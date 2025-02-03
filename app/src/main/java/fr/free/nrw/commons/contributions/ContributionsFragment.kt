@@ -500,7 +500,7 @@ class ContributionsFragment
 
     private fun setUploadCount() {
         okHttpJsonApiClient
-            ?.getUploadCount((activity as MainActivity).sessionManager.currentAccount!!.name)
+            ?.getUploadCount((activity as MainActivity).sessionManager?.currentAccount!!.name)
             ?.subscribeOn(Schedulers.io())
             ?.observeOn(AndroidSchedulers.mainThread())?.let {
                 compositeDisposable.add(
@@ -838,7 +838,7 @@ class ContributionsFragment
         mediaDetailPagerFragment!!.showImage(position, isWikipediaButtonDisplayed)
     }
 
-    override fun getMediaAtPosition(i: Int): Media {
+    override fun getMediaAtPosition(i: Int): Media? {
         return contributionsListFragment!!.getMediaAtPosition(i)
     }
 
