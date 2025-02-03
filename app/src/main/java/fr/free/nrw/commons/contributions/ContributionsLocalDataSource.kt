@@ -64,8 +64,9 @@ class ContributionsLocalDataSource @Inject constructor(
         return contributionDao.deleteContributionsWithStates(states)
     }
 
-    val contributions: DataSource.Factory<Int, Contribution>
-        get() = contributionDao.fetchContributions()
+    fun getContributions(): DataSource.Factory<Int, Contribution> {
+        return contributionDao.fetchContributions()
+    }
 
     /**
      * Fetches contributions with specific states.

@@ -47,7 +47,7 @@ class ContributionsRepository @Inject constructor(private val localDataSource: C
     }
 
     fun fetchContributions(): DataSource.Factory<Int, Contribution> {
-        return localDataSource.contributions
+        return localDataSource.getContributions()
     }
 
     /**

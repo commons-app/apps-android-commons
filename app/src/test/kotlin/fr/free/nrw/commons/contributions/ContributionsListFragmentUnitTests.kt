@@ -89,7 +89,7 @@ class ContributionsListFragmentUnitTests {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
         fragment.rvContributionsList = mock()
         fragment.scrollToTop()
-        verify(fragment.rvContributionsList).smoothScrollToPosition(0)
+        verify(fragment.rvContributionsList)?.smoothScrollToPosition(0)
     }
 
     @Test
