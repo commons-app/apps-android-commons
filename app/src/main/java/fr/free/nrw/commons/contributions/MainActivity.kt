@@ -37,7 +37,6 @@ import fr.free.nrw.commons.upload.UploadProgressActivity
 import fr.free.nrw.commons.upload.worker.WorkRequestHelper.Companion.makeOneTimeWorkRequest
 import fr.free.nrw.commons.utils.ViewUtilWrapper
 import io.reactivex.Completable
-import io.reactivex.functions.Consumer
 import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
 import java.util.Calendar
@@ -207,6 +206,9 @@ after opening the app.
     private fun loadFragment(fragment: Fragment?, showBottom: Boolean): Boolean {
         //showBottom so that we do not show the bottom tray again when constructing
         //from the saved instance state.
+
+        freeUpFragments();
+
         if (fragment is ContributionsFragment) {
             if (activeFragment == ActiveFragment.CONTRIBUTIONS) {
                 // scroll to top if already on the Contributions tab
@@ -260,6 +262,33 @@ after opening the app.
         }
         return false
     }
+
+    /**
+     * loadFragment() overload that supports passing extras to fragments
+     */
+    private fun loadFragment(fragment: Fragment?, showBottom: Boolean, args: Bundle?): Boolean {
+        if (fragment != null && args != null) {
+            fragment.arguments = args
+        }
+
+        return loadFragment(fragment, showBottom)
+    }
+
+    /**
+     * Old implementation of loadFragment() was causing memory leaks, due to MainActivity holding
+     * references to cleared fragments. This function frees up all fragment references.
+     *
+     *
+     * Called in loadFragment() before doing the actual loading.
+     */
+    fun freeUpFragments() {
+        // free all fragments except contributionsFragment because several tests depend on it.
+        // hence, contributionsFragment is probably still a leak
+        nearbyParentFragment = null
+        exploreFragment = null
+        bookmarkFragment = null
+    }
+
 
     fun hideTabs() {
         binding!!.fragmentMainNavTabLayout.visibility = View.GONE
@@ -436,6 +465,42 @@ after opening the app.
                 place
             )
         }
+    }
+
+    /**
+     * Launch the Explore fragment from Nearby fragment. This method is called when a user clicks
+     * the 'Show in Explore' option in the 3-dots menu in Nearby.
+     *
+     * @param zoom      current zoom of Nearby map
+     * @param latitude  current latitude of Nearby map
+     * @param longitude current longitude of Nearby map
+     */
+    fun loadExploreMapFromNearby(zoom: Double, latitude: Double, longitude: Double) {
+        val bundle = Bundle()
+        bundle.putDouble("prev_zoom", zoom)
+        bundle.putDouble("prev_latitude", latitude)
+        bundle.putDouble("prev_longitude", longitude)
+
+        loadFragment(ExploreFragment.newInstance(), false, bundle)
+        setSelectedItemId(NavTab.EXPLORE.code())
+    }
+
+    /**
+     * Launch the Nearby fragment from Explore fragment. This method is called when a user clicks
+     * the 'Show in Nearby' option in the 3-dots menu in Explore.
+     *
+     * @param zoom      current zoom of Explore map
+     * @param latitude  current latitude of Explore map
+     * @param longitude current longitude of Explore map
+     */
+    fun loadNearbyMapFromExplore(zoom: Double, latitude: Double, longitude: Double) {
+        val bundle = Bundle()
+        bundle.putDouble("prev_zoom", zoom)
+        bundle.putDouble("prev_latitude", latitude)
+        bundle.putDouble("prev_longitude", longitude)
+
+        loadFragment(NearbyParentFragment.newInstance(), false, bundle)
+        setSelectedItemId(NavTab.NEARBY.code())
     }
 
     override fun onResume() {
