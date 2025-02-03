@@ -855,4 +855,6 @@
   <string name="file_usages_container_heading">Utilisations du fichier</string>
   <string name="caption">Légende</string>
   <string name="caption_copied_to_clipboard">Légende copiée dans le presse-papier</string>
+  <string name="show_in_explore">Afficher dans Explorer</string>
+  <string name="show_in_nearby">Afficher à proximité</string>
 </resources>
