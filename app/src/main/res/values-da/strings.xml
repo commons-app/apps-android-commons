@@ -820,4 +820,7 @@
   <string name="account_vanish_request_confirm">Forsvinding er en &lt;b&gt;sidste udvej&lt;/b&gt; og bør &lt;b&gt;kun bruges, når du for altid ønsker at stoppe med at redigere&lt;/b&gt; og også for at skjule så mange af dine tidligere tilknytninger som muligt.&lt;br/&gt;&lt;br/&gt; Kontosletning på Wikipedia Commons sker ved at ændre dit kontonavn, således at andre ikke kan genkende dine bidrag i en proces, der kaldes kontoforsvinding (Vanishing). &lt;b&gt;Forsvinding garanterer ikke fuldstændig anonymitet eller fjerner bidrag til projekterne&lt;/b&gt; .</string>
   <string name="caption">Billedtekst</string>
   <string name="caption_copied_to_clipboard">Billedtekst kopieret til udklipsholder</string>
+  <string name="congratulations_all_pictures_in_this_album_have_been_either_uploaded_or_marked_as_not_for_upload">Tillykke, alle billeder i dette album er enten blevet uploadet eller markeret som ikke til upload.</string>
+  <string name="show_in_explore">Vis i Udforsk</string>
+  <string name="show_in_nearby">Vis i I nærheden</string>
 </resources>

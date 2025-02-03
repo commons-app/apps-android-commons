@@ -233,6 +233,11 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     private Place nearestPlace;
     private volatile boolean stopQuery;
 
+    // Explore map data (for if we came from Explore)
+    private double prevZoom;
+    private double prevLatitude;
+    private double prevLongitude;
+
     private final Handler searchHandler = new Handler();
     private Runnable searchRunnable;
 
@@ -247,27 +252,28 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
     private final ActivityResultLauncher<Intent> galleryPickLauncherForResult =
         registerForActivityResult(new StartActivityForResult(),
-        result -> {
-            controller.handleActivityResultWithCallback(requireActivity(), callbacks -> {
-                controller.onPictureReturnedFromGallery(result, requireActivity(), callbacks);
+            result -> {
+                controller.handleActivityResultWithCallback(requireActivity(), callbacks -> {
+                    controller.onPictureReturnedFromGallery(result, requireActivity(), callbacks);
+                });
             });
-        });
 
     private final ActivityResultLauncher<Intent> customSelectorLauncherForResult =
         registerForActivityResult(new StartActivityForResult(),
-        result -> {
-            controller.handleActivityResultWithCallback(requireActivity(), callbacks -> {
-                controller.onPictureReturnedFromCustomSelector(result, requireActivity(), callbacks);
+            result -> {
+                controller.handleActivityResultWithCallback(requireActivity(), callbacks -> {
+                    controller.onPictureReturnedFromCustomSelector(result, requireActivity(),
+                        callbacks);
+                });
             });
-        });
 
     private final ActivityResultLauncher<Intent> cameraPickLauncherForResult =
         registerForActivityResult(new StartActivityForResult(),
-        result -> {
-            controller.handleActivityResultWithCallback(requireActivity(), callbacks -> {
-                controller.onPictureReturnedFromCamera(result, requireActivity(), callbacks);
+            result -> {
+                controller.handleActivityResultWithCallback(requireActivity(), callbacks -> {
+                    controller.onPictureReturnedFromCamera(result, requireActivity(), callbacks);
+                });
             });
-        });
 
     private ActivityResultLauncher<String[]> inAppCameraLocationPermissionLauncher = registerForActivityResult(
         new RequestMultiplePermissions(),
@@ -337,12 +343,15 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     @Override
     public View onCreateView(@NonNull final LayoutInflater inflater, final ViewGroup container,
         final Bundle savedInstanceState) {
+        loadExploreMapData();
+
         binding = FragmentNearbyParentBinding.inflate(inflater, container, false);
         view = binding.getRoot();
 
         initNetworkBroadCastReceiver();
         scope = LifecycleOwnerKt.getLifecycleScope(getViewLifecycleOwner());
-        presenter = new NearbyParentFragmentPresenter(bookmarkLocationDao, placesRepository, nearbyController);
+        presenter = new NearbyParentFragmentPresenter(bookmarkLocationDao, placesRepository,
+            nearbyController);
         progressDialog = new ProgressDialog(getActivity());
         progressDialog.setCancelable(false);
         progressDialog.setMessage("Saving in progress...");
@@ -359,6 +368,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         inflater.inflate(R.menu.nearby_fragment_menu, menu);
         MenuItem refreshButton = menu.findItem(R.id.item_refresh);
         MenuItem listMenu = menu.findItem(R.id.list_sheet);
+        MenuItem showInExploreButton = menu.findItem(R.id.list_item_show_in_explore);
         MenuItem saveAsGPXButton = menu.findItem(R.id.list_item_gpx);
         MenuItem saveAsKMLButton = menu.findItem(R.id.list_item_kml);
         refreshButton.setOnMenuItemClickListener(new OnMenuItemClickListener() {
@@ -376,6 +386,17 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 listOptionMenuItemClicked();
+                return false;
+            }
+        });
+        showInExploreButton.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(@NonNull MenuItem item) {
+                ((MainActivity) getContext()).loadExploreMapFromNearby(
+                    binding.map.getZoomLevelDouble(),
+                    binding.map.getMapCenter().getLatitude(),
+                    binding.map.getMapCenter().getLongitude()
+                );
                 return false;
             }
         });
@@ -467,6 +488,14 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         binding.map.getOverlays().add(scaleBarOverlay);
         binding.map.getZoomController().setVisibility(Visibility.NEVER);
         binding.map.getController().setZoom(ZOOM_LEVEL);
+        // if we came from Explore map using 'Show in Nearby', load Explore map camera position
+        if (isCameFromExploreMap()) {
+            moveCameraToPosition(
+                new GeoPoint(prevLatitude, prevLongitude),
+                prevZoom,
+                1L
+            );
+        }
         binding.map.getOverlays().add(mapEventsOverlay);
 
         binding.map.addMapListener(new MapListener() {
@@ -489,11 +518,14 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         }
         initNearbyFilter();
         addCheckBoxCallback();
-        moveCameraToPosition(lastMapFocus);
+        if (!isCameFromExploreMap()) {
+            moveCameraToPosition(lastMapFocus);
+        }
         initRvNearbyList();
         onResume();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            binding.tvAttribution.setText(Html.fromHtml(getString(R.string.map_attribution), Html.FROM_HTML_MODE_LEGACY));
+            binding.tvAttribution.setText(
+                Html.fromHtml(getString(R.string.map_attribution), Html.FROM_HTML_MODE_LEGACY));
         } else {
             //noinspection deprecation
             binding.tvAttribution.setText(Html.fromHtml(getString(R.string.map_attribution)));
@@ -543,6 +575,28 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         if (!locationPermissionsHelper.checkLocationPermission(getActivity())) {
             askForLocationPermission();
         }
+    }
+
+    /**
+     * Fetch Explore map camera data from fragment arguments if any.
+     */
+    public void loadExploreMapData() {
+        // get fragment arguments
+        if (getArguments() != null) {
+            prevZoom = getArguments().getDouble("prev_zoom");
+            prevLatitude = getArguments().getDouble("prev_latitude");
+            prevLongitude = getArguments().getDouble("prev_longitude");
+        }
+    }
+
+    /**
+     * Checks if fragment arguments contain data from Explore map. if present, then the user
+     * navigated from Explore using 'Show in Nearby'.
+     *
+     * @return true if user navigated from Explore map
+     **/
+    public boolean isCameFromExploreMap() {
+        return prevZoom != 0.0 || prevLatitude != 0.0 || prevLongitude != 0.0;
     }
 
     /**
@@ -625,7 +679,9 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             mapCenter = targetP;
             binding.map.getController().setCenter(targetP);
             recenterMarkerToPosition(targetP);
-            moveCameraToPosition(targetP);
+            if (!isCameFromExploreMap()) {
+                moveCameraToPosition(targetP);
+            }
         } else if (locationManager.isGPSProviderEnabled()
             || locationManager.isNetworkProviderEnabled()) {
             locationManager.requestLocationUpdatesFromProvider(LocationManager.NETWORK_PROVIDER);
@@ -669,7 +725,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         } else {
             lastKnownLocation = MapUtils.getDefaultLatLng();
         }
-        if (binding.map != null) {
+        if (binding.map != null && !isCameFromExploreMap()) {
             moveCameraToPosition(
                 new GeoPoint(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude()));
         }
@@ -739,8 +795,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     }
 
     /**
-     * Determines the number of spans (columns) in the RecyclerView based on device orientation
-     * and adapter item count.
+     * Determines the number of spans (columns) in the RecyclerView based on device orientation and
+     * adapter item count.
      *
      * @return The number of spans to be used in the RecyclerView.
      */
@@ -1175,7 +1231,6 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
     /**
      * Clears the Nearby local cache and then calls for pin details to be fetched afresh.
-     *
      */
     private void emptyCache() {
         // reload the map once the cache is cleared
@@ -1338,7 +1393,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     }
 
     /**
-     * Fetches and updates the data for a specific place, then updates the corresponding marker on the map.
+     * Fetches and updates the data for a specific place, then updates the corresponding marker on
+     * the map.
      *
      * @param entity       The entity ID of the place.
      * @param place        The Place object containing the initial place data.
@@ -1469,9 +1525,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     }
 
     /**
-     * Stops any ongoing queries and clears all disposables.
-     * This method sets the stopQuery flag to true and clears the compositeDisposable
-     * to prevent any further processing.
+     * Stops any ongoing queries and clears all disposables. This method sets the stopQuery flag to
+     * true and clears the compositeDisposable to prevent any further processing.
      */
     @Override
     public void stopQuery() {
@@ -1624,7 +1679,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             new Builder(getContext())
                 .setMessage(R.string.login_alert_message)
                 .setCancelable(false)
-                .setNegativeButton(R.string.cancel, (dialog, which) -> {})
+                .setNegativeButton(R.string.cancel, (dialog, which) -> {
+                })
                 .setPositiveButton(R.string.login, (dialog, which) -> {
                     // logout of the app
                     BaseLogoutListener logoutListener = new BaseLogoutListener(getActivity());
@@ -1743,7 +1799,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         final boolean filterForPlaceState,
         final boolean filterForAllNoneType) {
         final boolean displayExists = false;
-        final boolean displayNeedsPhoto= false;
+        final boolean displayNeedsPhoto = false;
         final boolean displayWlm = false;
         if (selectedLabels == null || selectedLabels.size() == 0) {
             replaceMarkerOverlays(NearbyController.markerLabelList);
@@ -1903,8 +1959,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     /**
      * Adds multiple markers representing places to the map and handles item gestures.
      *
-     * @param markerPlaceGroups The list of marker place groups containing the places and
-     *                          their bookmarked status
+     * @param markerPlaceGroups The list of marker place groups containing the places and their
+     *                          bookmarked status
      */
     @Override
     public void replaceMarkerOverlays(final List<MarkerPlaceGroup> markerPlaceGroups) {
@@ -1913,7 +1969,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         for (int i = markerPlaceGroups.size() - 1; i >= 0; i--) {
             newMarkers.add(
                 convertToMarker(markerPlaceGroups.get(i).getPlace(),
-                markerPlaceGroups.get(i).getIsBookmarked())
+                    markerPlaceGroups.get(i).getIsBookmarked())
             );
         }
         clearAllMarkers();
@@ -2103,7 +2159,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             if (binding.fabCamera.isShown()) {
                 Timber.d("Camera button tapped. Place: %s", selectedPlace.toString());
                 storeSharedPrefs(selectedPlace);
-                controller.initiateCameraPick(getActivity(), inAppCameraLocationPermissionLauncher, cameraPickLauncherForResult);
+                controller.initiateCameraPick(getActivity(), inAppCameraLocationPermissionLauncher,
+                    cameraPickLauncherForResult);
             }
         });
 
@@ -2121,7 +2178,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             if (binding.fabCustomGallery.isShown()) {
                 Timber.d("Gallery button tapped. Place: %s", selectedPlace.toString());
                 storeSharedPrefs(selectedPlace);
-                controller.initiateCustomGalleryPickWithPermission(getActivity(), customSelectorLauncherForResult);
+                controller.initiateCustomGalleryPickWithPermission(getActivity(),
+                    customSelectorLauncherForResult);
             }
         });
     }
@@ -2296,6 +2354,18 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         binding.map.getController().animateTo(geoPoint);
     }
 
+    /**
+     * Moves the camera of the map view to the specified GeoPoint at specified zoom level and speed
+     * using an animation.
+     *
+     * @param geoPoint The GeoPoint representing the new camera position for the map.
+     * @param zoom     Zoom level of the map camera
+     * @param speed    Speed of animation
+     */
+    private void moveCameraToPosition(GeoPoint geoPoint, double zoom, long speed) {
+        binding.map.getController().animateTo(geoPoint, zoom, speed);
+    }
+
     @Override
     public void onBottomSheetItemClick(@Nullable View view, int position) {
         BottomSheetItem item = dataList.get(position);
@@ -2309,7 +2379,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                 updateBookmarkButtonImage(selectedPlace);
                 break;
             case R.drawable.ic_directions_black_24dp:
-                Utils.handleGeoCoordinates(this.getContext(), selectedPlace.getLocation());
+                Utils.handleGeoCoordinates(this.getContext(), selectedPlace.getLocation(),
+                    binding.map.getZoomLevelDouble());
                 break;
             case R.drawable.ic_wikidata_logo_24dp:
                 Utils.handleWebUrl(this.getContext(), selectedPlace.siteLinks.getWikidataLink());
