@@ -455,7 +455,6 @@ class UploadWorker(
         }
     }
 
-
     private fun clearChunks(contribution: Contribution) {
         contribution.chunkInfo = null
         contributionDao.saveSynchronous(contribution)
@@ -565,7 +564,6 @@ class UploadWorker(
             }
         } ?: Timber.w("Content URI is null, skipping uploaded status save for file: ${contribution.media.filename}")
     }
-
 
     private fun findUniqueFileName(fileName: String): String {
         var sequenceFileName: String? = fileName
