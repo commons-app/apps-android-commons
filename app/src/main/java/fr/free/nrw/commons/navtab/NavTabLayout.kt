@@ -31,8 +31,8 @@ class NavTabLayout : BottomNavigationView {
 
     private fun setTabViews() {
         val isLoginSkipped = (context as MainActivity)
-            .applicationKvStore.getBoolean("login_skipped")
-        if (isLoginSkipped) {
+            .applicationKvStore?.getBoolean("login_skipped")
+        if (isLoginSkipped == true) {
             for (i in 0 until NavTabLoggedOut.size()) {
                 val navTab = NavTabLoggedOut.of(i)
                 menu.add(Menu.NONE, i, i, navTab.text()).setIcon(navTab.icon())
