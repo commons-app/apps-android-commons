@@ -175,33 +175,6 @@ class AchievementsFragmentUnitTests {
 
     @Test
     @Throws(Exception::class)
-    fun testHideProgressBar() {
-        Shadows.shadowOf(Looper.getMainLooper()).idle()
-        val method: Method =
-            AchievementsFragment::class.java.getDeclaredMethod(
-                "hideProgressBar",
-                Achievements::class.java,
-            )
-        method.isAccessible = true
-        method.invoke(fragment, achievements)
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun testSetAchievementsUploadCount() {
-        Shadows.shadowOf(Looper.getMainLooper()).idle()
-        val method: Method =
-            AchievementsFragment::class.java.getDeclaredMethod(
-                "setAchievementsUploadCount",
-                Achievements::class.java,
-                Int::class.java,
-            )
-        method.isAccessible = true
-        method.invoke(fragment, achievements, 0)
-    }
-
-    @Test
-    @Throws(Exception::class)
     fun testCheckAccount() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
         val method: Method =
@@ -211,20 +184,7 @@ class AchievementsFragmentUnitTests {
         method.isAccessible = true
         method.invoke(fragment)
     }
-
-    @Test
-    @Throws(Exception::class)
-    fun testSetUploadCount() {
-        Shadows.shadowOf(Looper.getMainLooper()).idle()
-        val method: Method =
-            AchievementsFragment::class.java.getDeclaredMethod(
-                "setUploadCount",
-                Achievements::class.java,
-            )
-        method.isAccessible = true
-        method.invoke(fragment, achievements)
-    }
-
+    
     @Test
     @Throws(Exception::class)
     fun testOnError() {
@@ -261,18 +221,6 @@ class AchievementsFragmentUnitTests {
             )
         method.isAccessible = true
         method.invoke(fragment, false)
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun testSetWikidataEditCount() {
-        Shadows.shadowOf(Looper.getMainLooper()).idle()
-        val method: Method =
-            AchievementsFragment::class.java.getDeclaredMethod(
-                "setWikidataEditCount",
-            )
-        method.isAccessible = true
-        method.invoke(fragment)
     }
 
     @Test
