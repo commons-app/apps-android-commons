@@ -62,7 +62,10 @@ public class ContributionsPresenter implements UserActionListener {
      */
     public void checkDuplicateImageAndRestartContribution(Contribution contribution) {
         compositeDisposable.add(uploadRepository
-            .checkDuplicateImage(contribution.getLocalUriPath().getPath())
+            .checkDuplicateImage(
+                contribution.getContentUri(),
+                contribution.getLocalUri()
+            )
             .subscribeOn(ioThreadScheduler)
             .subscribe(imageCheckResult -> {
                 if (imageCheckResult == IMAGE_OK) {

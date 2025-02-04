@@ -1,5 +1,7 @@
 package fr.free.nrw.commons.upload
 
+import android.content.Context
+import android.net.Uri
 import fr.free.nrw.commons.location.LatLng
 import fr.free.nrw.commons.media.MediaClient
 import fr.free.nrw.commons.nearby.Place
@@ -13,7 +15,7 @@ import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
 import org.apache.commons.lang3.StringUtils
 import timber.log.Timber
-import java.io.FileInputStream
+import java.io.InputStream
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -26,7 +28,8 @@ class ImageProcessingService @Inject constructor(
     private val imageUtilsWrapper: ImageUtilsWrapper,
     private val readFBMD: ReadFBMD,
     private val exifReader: EXIFReader,
-    private val mediaClient: MediaClient
+    private val mediaClient: MediaClient,
+    private val appContext: Context
 ) {
     /**
      * Check image quality before upload - checks duplicate image - checks dark image - checks
@@ -47,7 +50,10 @@ class ImageProcessingService @Inject constructor(
         val filePath = uploadItem.mediaUri?.path
 
         return Single.zip(
-            checkDuplicateImage(filePath),
+            checkIfFileAlreadyExists(
+                originalFilePath = uploadItem.contentUri!!,
+                modifiedFilePath = uploadItem.mediaUri!!
+            ),
             checkImageGeoLocation(uploadItem.place, filePath, inAppPictureLocation),
             checkDarkImage(filePath!!),
             checkFBMD(filePath),
@@ -115,17 +121,30 @@ class ImageProcessingService @Inject constructor(
     }
 
     /**
+     * Checks if file already exists using original & modified file's SHA
+     *
+     * @param originalFilePath original file to be checked
+     * @param modifiedFilePath modified (after exif modifications) file to be checked
+     * @return IMAGE_DUPLICATE or IMAGE_OK
+     */
+    fun checkIfFileAlreadyExists(originalFilePath: Uri, modifiedFilePath: Uri): Single<Int> {
+        return Single.zip(
+            checkDuplicateImage(inputStream = appContext.contentResolver.openInputStream(originalFilePath)!!),
+            checkDuplicateImage(inputStream = fileUtilsWrapper.getFileInputStream(modifiedFilePath.path))
+        ) { resultForOriginal, resultForDuplicate ->
+            return@zip if (resultForOriginal == IMAGE_DUPLICATE || resultForDuplicate == IMAGE_DUPLICATE)
+                IMAGE_DUPLICATE else IMAGE_OK
+        }
+    }
+
+    /**
      * Checks for duplicate image
      *
      * @param filePath file to be checked
      * @return IMAGE_DUPLICATE or IMAGE_OK
      */
-    fun checkDuplicateImage(filePath: String?): Single<Int> {
-        Timber.d("Checking for duplicate image %s", filePath)
-        return Single.fromCallable { fileUtilsWrapper.getFileInputStream(filePath) }
-            .map { stream: FileInputStream? ->
-                fileUtilsWrapper.getSHA1(stream)
-            }
+    private fun checkDuplicateImage(inputStream: InputStream): Single<Int> {
+        return Single.fromCallable { fileUtilsWrapper.getSHA1(inputStream) }
             .flatMap { fileSha: String? ->
                 mediaClient.checkFileExistsUsingSha(fileSha)
             }
