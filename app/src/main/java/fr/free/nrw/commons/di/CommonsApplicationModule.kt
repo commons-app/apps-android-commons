@@ -16,6 +16,7 @@ import fr.free.nrw.commons.BuildConfig
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.bookmarks.category.BookmarkCategoriesDao
+import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao
 import fr.free.nrw.commons.contributions.ContributionDao
 import fr.free.nrw.commons.customselector.database.NotForUploadStatusDao
 import fr.free.nrw.commons.customselector.database.UploadedStatusDao
@@ -111,11 +112,6 @@ open class CommonsApplicationModule(private val applicationContext: Context) {
         context.contentResolver.acquireContentProviderClient(BuildConfig.BOOKMARK_AUTHORITY)
 
     @Provides
-    @Named("bookmarksLocation")
-    fun provideBookmarkLocationContentProviderClient(context: Context): ContentProviderClient? =
-        context.contentResolver.acquireContentProviderClient(BuildConfig.BOOKMARK_LOCATIONS_AUTHORITY)
-
-    @Provides
     @Named("bookmarksItem")
     fun provideBookmarkItemContentProviderClient(context: Context): ContentProviderClient? =
         context.contentResolver.acquireContentProviderClient(BuildConfig.BOOKMARK_ITEMS_AUTHORITY)
@@ -196,7 +192,10 @@ open class CommonsApplicationModule(private val applicationContext: Context) {
         applicationContext,
         AppDatabase::class.java,
         "commons_room.db"
-    ).addMigrations(MIGRATION_1_2).fallbackToDestructiveMigration().build()
+    ).addMigrations(
+        MIGRATION_1_2,
+        MIGRATION_19_TO_20
+    ).fallbackToDestructiveMigration().build()
 
     @Provides
     fun providesContributionsDao(appDatabase: AppDatabase): ContributionDao =
@@ -205,6 +204,10 @@ open class CommonsApplicationModule(private val applicationContext: Context) {
     @Provides
     fun providesPlaceDao(appDatabase: AppDatabase): PlaceDao =
         appDatabase.PlaceDao()
+
+    @Provides
+    fun providesBookmarkLocationsDao(appDatabase: AppDatabase): BookmarkLocationsDao =
+        appDatabase.bookmarkLocationsDao()
 
     @Provides
     fun providesDepictDao(appDatabase: AppDatabase): DepictsDao =
@@ -244,6 +247,47 @@ open class CommonsApplicationModule(private val applicationContext: Context) {
                 db.execSQL(
                     "ALTER TABLE contribution " + " ADD COLUMN hasInvalidLocation INTEGER NOT NULL DEFAULT 0"
                 )
+            }
+        }
+
+        private val MIGRATION_19_TO_20 = object : Migration(19, 20) {
+            override fun migrate(db: SupportSQLiteDatabase) {
+                db.execSQL(
+                    """
+                        CREATE TABLE IF NOT EXISTS bookmarks_locations (
+                            location_name TEXT NOT NULL PRIMARY KEY,
+                            location_language TEXT NOT NULL,
+                            location_description TEXT NOT NULL,
+                            location_lat REAL NOT NULL,
+                            location_long REAL NOT NULL,
+                            location_category TEXT NOT NULL,
+                            location_label_text TEXT NOT NULL,
+                            location_label_icon INTEGER,
+                            location_image_url TEXT NOT NULL,
+                            location_wikipedia_link TEXT NOT NULL,
+                            location_wikidata_link TEXT NOT NULL,
+                            location_commons_link TEXT NOT NULL,
+                            location_pic TEXT NOT NULL,
+                            location_exists INTEGER NOT NULL CHECK(location_exists IN (0, 1))
+                        )
+                    """
+                )
+                db.execSQL("""
+                INSERT INTO bookmarks_locations (
+                    location_name, location_language, location_description, location_category,
+                    location_label_text, location_label_icon, location_lat, location_long,
+                    location_image_url, location_wikipedia_link, location_wikidata_link,
+                    location_commons_link, location_pic, location_exists
+                )
+                SELECT
+                    location_name, location_language, location_description, location_category,
+                    location_label_text, location_label_icon, location_lat, location_long,
+                    location_image_url, location_wikipedia_link, location_wikidata_link,
+                    location_commons_link, location_pic, location_exists
+                FROM bookmarksLocations
+            """)
+
+                db.execSQL("DROP TABLE IF EXISTS bookmarkLocations")
             }
         }
     }

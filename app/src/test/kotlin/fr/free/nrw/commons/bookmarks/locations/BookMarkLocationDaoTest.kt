@@ -7,6 +7,8 @@ import android.database.MatrixCursor
 import android.database.sqlite.SQLiteDatabase
 import android.net.Uri
 import android.os.RemoteException
+import androidx.room.Room
+import androidx.test.core.app.ApplicationProvider
 import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.anyOrNull
 import com.nhaarman.mockitokotlin2.argumentCaptor
@@ -18,36 +20,20 @@ import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.TestCommonsApplication
-import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsContentProvider.BASE_URI
-import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao.Table.COLUMN_CATEGORY
-import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao.Table.COLUMN_COMMONS_LINK
-import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao.Table.COLUMN_DESCRIPTION
-import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao.Table.COLUMN_EXISTS
-import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao.Table.COLUMN_IMAGE_URL
-import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao.Table.COLUMN_LABEL_ICON
-import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao.Table.COLUMN_LABEL_TEXT
-import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao.Table.COLUMN_LANGUAGE
-import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao.Table.COLUMN_LAT
-import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao.Table.COLUMN_LONG
-import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao.Table.COLUMN_NAME
-import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao.Table.COLUMN_PIC
-import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao.Table.COLUMN_WIKIDATA_LINK
-import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao.Table.COLUMN_WIKIPEDIA_LINK
-import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao.Table.CREATE_TABLE_STATEMENT
-import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao.Table.DROP_TABLE_STATEMENT
-import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao.Table.onCreate
-import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao.Table.onDelete
-import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao.Table.onUpdate
+import fr.free.nrw.commons.db.AppDatabase
 import fr.free.nrw.commons.location.LatLng
 import fr.free.nrw.commons.nearby.Label
 import fr.free.nrw.commons.nearby.Place
 import fr.free.nrw.commons.nearby.Sitelinks
+import kotlinx.coroutines.runBlocking
+import org.junit.After
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.mockito.Mock
 import org.mockito.Mockito.verifyNoInteractions
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
@@ -55,28 +41,11 @@ import org.robolectric.annotation.Config
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
 class BookMarkLocationDaoTest {
-    private val columns =
-        arrayOf(
-            COLUMN_NAME,
-            COLUMN_LANGUAGE,
-            COLUMN_DESCRIPTION,
-            COLUMN_CATEGORY,
-            COLUMN_LABEL_TEXT,
-            COLUMN_LABEL_ICON,
-            COLUMN_IMAGE_URL,
-            COLUMN_WIKIPEDIA_LINK,
-            COLUMN_WIKIDATA_LINK,
-            COLUMN_COMMONS_LINK,
-            COLUMN_LAT,
-            COLUMN_LONG,
-            COLUMN_PIC,
-            COLUMN_EXISTS,
-        )
-    private val client: ContentProviderClient = mock()
-    private val database: SQLiteDatabase = mock()
-    private val captor = argumentCaptor<ContentValues>()
 
-    private lateinit var testObject: BookmarkLocationsDao
+    private lateinit var bookmarkLocationsDao: BookmarkLocationsDao
+
+    private lateinit var database: AppDatabase
+
     private lateinit var examplePlaceBookmark: Place
     private lateinit var exampleLabel: Label
     private lateinit var exampleUri: Uri
@@ -89,10 +58,18 @@ class BookMarkLocationDaoTest {
         exampleUri = Uri.parse("wikimedia/uri")
         exampleLocation = LatLng(40.0, 51.4, 1f)
 
-        builder = Sitelinks.Builder()
-        builder.setWikipediaLink("wikipediaLink")
-        builder.setWikidataLink("wikidataLink")
-        builder.setCommonsLink("commonsLink")
+        database = Room.inMemoryDatabaseBuilder(
+            ApplicationProvider.getApplicationContext(),
+            AppDatabase::class.java
+        ).allowMainThreadQueries().build()
+
+        bookmarkLocationsDao = database.bookmarkLocationsDao()
+
+        builder = Sitelinks.Builder().apply {
+            setWikipediaLink("wikipediaLink")
+            setWikidataLink("wikidataLink")
+            setCommonsLink("commonsLink")
+        }
 
         examplePlaceBookmark =
             Place(
@@ -106,236 +83,75 @@ class BookMarkLocationDaoTest {
                 "picName",
                 false,
             )
-        testObject = BookmarkLocationsDao { client }
+    }
+
+    @After
+    fun tearDown() {
+        database.close()
     }
 
     @Test
-    fun createTable() {
-        onCreate(database)
-        verify(database).execSQL(CREATE_TABLE_STATEMENT)
+    fun testForAddAndGetAllBookmarkLocations() = runBlocking {
+        bookmarkLocationsDao.addBookmarkLocation(examplePlaceBookmark.toBookmarksLocations())
+
+        val bookmarks = bookmarkLocationsDao.getAllBookmarksLocations()
+
+        assertEquals(1, bookmarks.size)
+        val retrievedBookmark = bookmarks.first()
+        assertEquals(examplePlaceBookmark.name, retrievedBookmark.locationName)
+        assertEquals(examplePlaceBookmark.language, retrievedBookmark.locationLanguage)
     }
 
     @Test
-    fun deleteTable() {
-        onDelete(database)
-        inOrder(database) {
-            verify(database).execSQL(DROP_TABLE_STATEMENT)
-            verify(database).execSQL(CREATE_TABLE_STATEMENT)
-        }
+    fun testFindBookmarkByNameForTrue() = runBlocking {
+        bookmarkLocationsDao.addBookmarkLocation(examplePlaceBookmark.toBookmarksLocations())
+
+        val exists = bookmarkLocationsDao.findBookmarkLocation(examplePlaceBookmark.name)
+        assertTrue(exists)
     }
 
     @Test
-    fun createFromCursor() {
-        createCursor(1).let { cursor ->
-            cursor.moveToFirst()
-            testObject.fromCursor(cursor).let {
-                assertEquals("en", it.language)
-                assertEquals("placeName", it.name)
-                assertEquals(Label.FOREST, it.label)
-                assertEquals("placeDescription", it.longDescription)
-                assertEquals(40.0, it.location.latitude, 0.001)
-                assertEquals(51.4, it.location.longitude, 0.001)
-                assertEquals("placeCategory", it.category)
-                assertEquals(builder.build().wikipediaLink, it.siteLinks.wikipediaLink)
-                assertEquals(builder.build().wikidataLink, it.siteLinks.wikidataLink)
-                assertEquals(builder.build().commonsLink, it.siteLinks.commonsLink)
-                assertEquals("picName", it.pic)
-                assertEquals(false, it.exists)
-            }
-        }
+    fun testFindBookmarkByNameForFalse() = runBlocking {
+        bookmarkLocationsDao.addBookmarkLocation(examplePlaceBookmark.toBookmarksLocations())
+
+        val exists = bookmarkLocationsDao.findBookmarkLocation("xyz")
+        assertFalse(exists)
     }
 
     @Test
-    fun getAllLocationBookmarks() {
-        whenever(client.query(any(), any(), anyOrNull(), any(), anyOrNull())).thenReturn(createCursor(14))
+    fun testDeleteBookmark() = runBlocking {
+        val bookmarkLocation = examplePlaceBookmark.toBookmarksLocations()
+        bookmarkLocationsDao.addBookmarkLocation(bookmarkLocation)
 
-        var result = testObject.allBookmarksLocations
+        bookmarkLocationsDao.deleteBookmarkLocation(bookmarkLocation)
 
-        assertEquals(14, result.size)
-    }
-
-    @Test(expected = RuntimeException::class)
-    fun getAllLocationBookmarksTranslatesExceptions() {
-        whenever(client.query(any(), any(), anyOrNull(), any(), anyOrNull())).thenThrow(RemoteException(""))
-        testObject.allBookmarksLocations
+        val bookmarks = bookmarkLocationsDao.getAllBookmarksLocations()
+        assertTrue(bookmarks.isEmpty())
     }
 
     @Test
-    fun getAllLocationBookmarksReturnsEmptyList_emptyCursor() {
-        whenever(client.query(any(), any(), anyOrNull(), any(), anyOrNull())).thenReturn(createCursor(0))
-        assertTrue(testObject.allBookmarksLocations.isEmpty())
+    fun testUpdateBookmarkForTrue() = runBlocking {
+        val exists = bookmarkLocationsDao.updateBookmarkLocation(examplePlaceBookmark)
+
+        assertTrue(exists)
     }
 
     @Test
-    fun getAllLocationBookmarksReturnsEmptyList_nullCursor() {
-        whenever(client.query(any(), any(), anyOrNull(), any(), anyOrNull())).thenReturn(null)
-        assertTrue(testObject.allBookmarksLocations.isEmpty())
+    fun testUpdateBookmarkForFalse() = runBlocking {
+        val newBookmark = examplePlaceBookmark.toBookmarksLocations()
+        bookmarkLocationsDao.addBookmarkLocation(newBookmark)
+
+        val exists = bookmarkLocationsDao.updateBookmarkLocation(examplePlaceBookmark)
+        assertFalse(exists)
     }
 
     @Test
-    fun cursorsAreClosedAfterGetAllLocationBookmarksQuery() {
-        val mockCursor: Cursor = mock()
-        whenever(client.query(any(), any(), anyOrNull(), any(), anyOrNull())).thenReturn(mockCursor)
-        whenever(mockCursor.moveToFirst()).thenReturn(false)
+    fun testGetAllBookmarksLocationsPlace() = runBlocking {
+        val bookmarkLocation = examplePlaceBookmark.toBookmarksLocations()
+        bookmarkLocationsDao.addBookmarkLocation(bookmarkLocation)
 
-        testObject.allBookmarksLocations
-
-        verify(mockCursor).close()
+        val bookmarks = bookmarkLocationsDao.getAllBookmarksLocationsPlace()
+        assertEquals(1, bookmarks.size)
+        assertEquals(examplePlaceBookmark.name, bookmarks.first().name)
     }
-
-    @Test
-    fun updateNewLocationBookmark() {
-        whenever(client.insert(any(), any())).thenReturn(Uri.EMPTY)
-        whenever(client.query(any(), any(), any(), any(), anyOrNull())).thenReturn(null)
-
-        assertTrue(testObject.updateBookmarkLocation(examplePlaceBookmark))
-        verify(client).insert(eq(BASE_URI), captor.capture())
-        captor.firstValue.let { cv ->
-            assertEquals(13, cv.size())
-            assertEquals(examplePlaceBookmark.name, cv.getAsString(COLUMN_NAME))
-            assertEquals(examplePlaceBookmark.language, cv.getAsString(COLUMN_LANGUAGE))
-            assertEquals(examplePlaceBookmark.longDescription, cv.getAsString(COLUMN_DESCRIPTION))
-            assertEquals(examplePlaceBookmark.label.text, cv.getAsString(COLUMN_LABEL_TEXT))
-            assertEquals(examplePlaceBookmark.category, cv.getAsString(COLUMN_CATEGORY))
-            assertEquals(examplePlaceBookmark.location.latitude, cv.getAsDouble(COLUMN_LAT), 0.001)
-            assertEquals(examplePlaceBookmark.location.longitude, cv.getAsDouble(COLUMN_LONG), 0.001)
-            assertEquals(examplePlaceBookmark.siteLinks.wikipediaLink.toString(), cv.getAsString(COLUMN_WIKIPEDIA_LINK))
-            assertEquals(examplePlaceBookmark.siteLinks.wikidataLink.toString(), cv.getAsString(COLUMN_WIKIDATA_LINK))
-            assertEquals(examplePlaceBookmark.siteLinks.commonsLink.toString(), cv.getAsString(COLUMN_COMMONS_LINK))
-            assertEquals(examplePlaceBookmark.pic, cv.getAsString(COLUMN_PIC))
-            assertEquals(examplePlaceBookmark.exists.toString(), cv.getAsString(COLUMN_EXISTS))
-        }
-    }
-
-    @Test
-    fun updateExistingLocationBookmark() {
-        whenever(client.delete(isA(), isNull(), isNull())).thenReturn(1)
-        whenever(client.query(any(), any(), any(), any(), anyOrNull())).thenReturn(createCursor(1))
-
-        assertFalse(testObject.updateBookmarkLocation(examplePlaceBookmark))
-        verify(client).delete(eq(BookmarkLocationsContentProvider.uriForName(examplePlaceBookmark.name)), isNull(), isNull())
-    }
-
-    @Test
-    fun findExistingLocationBookmark() {
-        whenever(client.query(any(), any(), any(), any(), anyOrNull())).thenReturn(createCursor(1))
-        assertTrue(testObject.findBookmarkLocation(examplePlaceBookmark))
-    }
-
-    @Test(expected = RuntimeException::class)
-    fun findLocationBookmarkTranslatesExceptions() {
-        whenever(client.query(any(), any(), anyOrNull(), any(), anyOrNull())).thenThrow(RemoteException(""))
-        testObject.findBookmarkLocation(examplePlaceBookmark)
-    }
-
-    @Test
-    fun findNotExistingLocationBookmarkReturnsNull_emptyCursor() {
-        whenever(client.query(any(), any(), any(), any(), anyOrNull())).thenReturn(createCursor(0))
-        assertFalse(testObject.findBookmarkLocation(examplePlaceBookmark))
-    }
-
-    @Test
-    fun findNotExistingLocationBookmarkReturnsNull_nullCursor() {
-        whenever(client.query(any(), any(), any(), any(), anyOrNull())).thenReturn(null)
-        assertFalse(testObject.findBookmarkLocation(examplePlaceBookmark))
-    }
-
-    @Test
-    fun cursorsAreClosedAfterFindLocationBookmarkQuery() {
-        val mockCursor: Cursor = mock()
-        whenever(client.query(any(), any(), anyOrNull(), any(), anyOrNull())).thenReturn(mockCursor)
-        whenever(mockCursor.moveToFirst()).thenReturn(false)
-
-        testObject.findBookmarkLocation(examplePlaceBookmark)
-
-        verify(mockCursor).close()
-    }
-
-    @Test
-    fun migrateTableVersionFrom_v1_to_v2() {
-        onUpdate(database, 1, 2)
-        // Table didn't exist before v5
-        verifyNoInteractions(database)
-    }
-
-    @Test
-    fun migrateTableVersionFrom_v2_to_v3() {
-        onUpdate(database, 2, 3)
-        // Table didn't exist before v5
-        verifyNoInteractions(database)
-    }
-
-    @Test
-    fun migrateTableVersionFrom_v3_to_v4() {
-        onUpdate(database, 3, 4)
-        // Table didnt exist before v5
-        verifyNoInteractions(database)
-    }
-
-    @Test
-    fun migrateTableVersionFrom_v4_to_v5() {
-        onUpdate(database, 4, 5)
-        // Table didnt change in version 5
-        verifyNoInteractions(database)
-    }
-
-    @Test
-    fun migrateTableVersionFrom_v5_to_v6() {
-        onUpdate(database, 5, 6)
-        // Table didnt change in version 6
-        verifyNoInteractions(database)
-    }
-
-    @Test
-    fun migrateTableVersionFrom_v6_to_v7() {
-        onUpdate(database, 6, 7)
-        // Table didnt change in version 7
-        verifyNoInteractions(database)
-    }
-
-    @Test
-    fun migrateTableVersionFrom_v7_to_v8() {
-        onUpdate(database, 7, 8)
-        verify(database).execSQL(CREATE_TABLE_STATEMENT)
-    }
-
-    @Test
-    fun migrateTableVersionFrom_v12_to_v13() {
-        onUpdate(database, 12, 13)
-        verify(database).execSQL("ALTER TABLE bookmarksLocations ADD COLUMN location_destroyed STRING;")
-    }
-
-    @Test
-    fun migrateTableVersionFrom_v13_to_v14() {
-        onUpdate(database, 13, 14)
-        verify(database).execSQL("ALTER TABLE bookmarksLocations ADD COLUMN location_language STRING;")
-    }
-
-    @Test
-    fun migrateTableVersionFrom_v14_to_v15() {
-        onUpdate(database, 14, 15)
-        verify(database).execSQL("ALTER TABLE bookmarksLocations ADD COLUMN location_exists STRING;")
-    }
-
-    private fun createCursor(rows: Int): Cursor =
-        MatrixCursor(columns, rows).apply {
-            repeat(rows) {
-                newRow().apply {
-                    add("placeName")
-                    add("en")
-                    add("placeDescription")
-                    add("placeCategory")
-                    add(Label.FOREST.text)
-                    add(Label.FOREST.icon)
-                    add("placeImage")
-                    add("wikipediaLink")
-                    add("wikidataLink")
-                    add("commonsLink")
-                    add(40.0)
-                    add(51.4)
-                    add("picName")
-                    add(false)
-                }
-            }
-        }
 }

@@ -253,7 +253,6 @@ class CommonsApplication : MultiDexApplication() {
             Timber.e(e)
         }
         BookmarkPicturesDao.Table.onDelete(db)
-        BookmarkLocationsDao.Table.onDelete(db)
         BookmarkItemsDao.Table.onDelete(db)
     }
 
