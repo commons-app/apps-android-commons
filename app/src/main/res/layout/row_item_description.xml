@@ -59,10 +59,12 @@
       <fr.free.nrw.commons.ui.PasteSensitiveTextInputEditText
         android:id="@+id/caption_item_edit_text"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:minLines="1"
+        android:maxLines="10"
         android:hint="@string/share_caption_hint"
         android:imeOptions="actionNext|flagNoExtractUi"
-        android:inputType="text"
+        android:inputType="textMultiLine"
         app:allowFormatting="false" />
     </com.google.android.material.textfield.TextInputLayout>
 
