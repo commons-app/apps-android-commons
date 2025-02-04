@@ -152,7 +152,10 @@ import javax.inject.Named
             }
             compositeDisposable.add(
                 uploadRepository
-                    .checkDuplicateImage(contribution.localUriPath!!.path)
+                    .checkDuplicateImage(
+                        originalFilePath = contribution.contentUri!!,
+                        modifiedFilePath = contribution.localUri!!
+                    )
                     .subscribeOn(ioThreadScheduler)
                     .subscribe({ imageCheckResult: Int ->
                         if (imageCheckResult == IMAGE_OK) {
@@ -221,7 +224,10 @@ import javax.inject.Named
             }
             compositeDisposable.add(
                 uploadRepository
-                    .checkDuplicateImage(contribution.localUriPath!!.path)
+                    .checkDuplicateImage(
+                        originalFilePath = contribution.contentUri!!,
+                        modifiedFilePath = contribution.localUri!!
+                    )
                     .subscribeOn(ioThreadScheduler)
                     .subscribe { imageCheckResult: Int ->
                         if (imageCheckResult == IMAGE_OK) {
