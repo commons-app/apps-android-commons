@@ -4,19 +4,23 @@ import static fr.free.nrw.commons.di.CommonsApplicationModule.IO_THREAD;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 import androidx.paging.DataSource;
 import androidx.paging.DataSource.Factory;
 import androidx.paging.LivePagedListBuilder;
 import androidx.paging.PagedList;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.contributions.ContributionsListContract.UserActionListener;
 import io.reactivex.Scheduler;
 import io.reactivex.disposables.CompositeDisposable;
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Named;
 import kotlin.Unit;
-import kotlin.jvm.functions.Function0;
+import timber.log.Timber;
 
 /**
  * The presenter class for Contributions
@@ -28,9 +32,17 @@ public class ContributionsListPresenter implements UserActionListener {
     private final Scheduler ioThreadScheduler;
 
     private final CompositeDisposable compositeDisposable;
-    private final ContributionsRemoteDataSource contributionsRemoteDataSource;
+    @Inject
+    ContributionsRemoteDataSource contributionsRemoteDataSource;
+
+    @Inject
+    SessionManager sessionManager;
 
     LiveData<PagedList<Contribution>> contributionList;
+
+    private MutableLiveData<List<Contribution>> liveData = new MutableLiveData<>();
+
+    private List<Contribution> existingContributions = new ArrayList<>();
 
     @Inject
     ContributionsListPresenter(
@@ -87,6 +99,13 @@ public class ContributionsListPresenter implements UserActionListener {
         }
 
         contributionList = livePagedListBuilder.build();
+        contributionList.observeForever(pagedList -> {
+            if (pagedList != null) {
+                existingContributions.clear();
+                existingContributions.addAll(pagedList);
+                liveData.setValue(existingContributions); // Update liveData with the latest list
+            }
+    });
     }
 
     @Override
@@ -109,4 +128,5 @@ public class ContributionsListPresenter implements UserActionListener {
             return Unit.INSTANCE;
         });
     }
+
 }

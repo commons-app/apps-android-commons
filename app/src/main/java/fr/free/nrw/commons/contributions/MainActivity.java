@@ -6,14 +6,23 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
+import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentManager.OnBackStackChangedListener;
 import androidx.work.ExistingWorkPolicy;
+import com.google.android.material.bottomnavigation.BottomNavigationView.OnNavigationItemSelectedListener;
+import fr.free.nrw.commons.databinding.FragmentContributionsListBinding;
 import fr.free.nrw.commons.databinding.MainBinding;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.WelcomeActivity;
@@ -22,6 +31,7 @@ import fr.free.nrw.commons.bookmarks.BookmarkFragment;
 import fr.free.nrw.commons.explore.ExploreFragment;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LocationServiceManager;
+import fr.free.nrw.commons.media.MediaClient;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
 import fr.free.nrw.commons.navtab.MoreBottomSheetFragment;
 import fr.free.nrw.commons.navtab.MoreBottomSheetLoggedOutFragment;
@@ -33,6 +43,7 @@ import fr.free.nrw.commons.nearby.fragments.NearbyParentFragment;
 import fr.free.nrw.commons.nearby.fragments.NearbyParentFragment.NearbyParentFragmentInstanceReadyCallback;
 import fr.free.nrw.commons.notification.NotificationActivity;
 import fr.free.nrw.commons.notification.NotificationController;
+import fr.free.nrw.commons.profile.ProfileActivity;
 import fr.free.nrw.commons.quiz.QuizChecker;
 import fr.free.nrw.commons.settings.SettingsFragment;
 import fr.free.nrw.commons.theme.BaseActivity;
@@ -41,16 +52,22 @@ import fr.free.nrw.commons.upload.worker.WorkRequestHelper;
 import fr.free.nrw.commons.utils.PermissionUtils;
 import fr.free.nrw.commons.utils.ViewUtilWrapper;
 import io.reactivex.Completable;
+import io.reactivex.Scheduler;
+import io.reactivex.Single;
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import javax.inject.Inject;
 import javax.inject.Named;
+import kotlin.Unit;
+import org.apache.commons.lang3.StringUtils;
 import timber.log.Timber;
 
 public class MainActivity extends BaseActivity
-    implements FragmentManager.OnBackStackChangedListener {
+    implements OnBackStackChangedListener {
 
     @Inject
     SessionManager sessionManager;
@@ -59,13 +76,18 @@ public class MainActivity extends BaseActivity
     @Inject
     ContributionDao contributionDao;
 
+    @Inject
+    ContributionsListPresenter contributionsListPresenter;
+    @Inject
+    ContributionsRemoteDataSource dataSource;
+
     private ContributionsFragment contributionsFragment;
     private NearbyParentFragment nearbyParentFragment;
     private ExploreFragment exploreFragment;
     private BookmarkFragment bookmarkFragment;
     public ActiveFragment activeFragment;
     private MediaDetailPagerFragment mediaDetailPagerFragment;
-    private NavTabLayout.OnNavigationItemSelectedListener navListener;
+    private OnNavigationItemSelectedListener navListener;
 
     @Inject
     public LocationServiceManager locationManager;
@@ -75,8 +97,7 @@ public class MainActivity extends BaseActivity
     QuizChecker quizChecker;
     @Inject
     @Named("default_preferences")
-    public
-    JsonKvStore applicationKvStore;
+    public JsonKvStore applicationKvStore;
     @Inject
     ViewUtilWrapper viewUtilWrapper;
 
@@ -86,6 +107,9 @@ public class MainActivity extends BaseActivity
 
     NavTabLayout tabLayout;
 
+    private FragmentContributionsListBinding refresh;
+
+    private String userName;
 
     /**
      * Consumers should be simply using this method to use this activity.
@@ -153,6 +177,14 @@ public class MainActivity extends BaseActivity
                     loadFragment(ContributionsFragment.newInstance(), false);
                 }
             }
+            refresh = FragmentContributionsListBinding.inflate(getLayoutInflater());
+            if (getIntent().getExtras() != null) {
+                userName = getIntent().getExtras().getString(ProfileActivity.KEY_USERNAME);
+            }
+
+            if (StringUtils.isEmpty(userName)) {
+                userName = sessionManager.getUserName();
+            }
             setUpPager();
             /**
              * Ask the user for media location access just after login
@@ -219,33 +251,30 @@ public class MainActivity extends BaseActivity
             contributionsFragment = (ContributionsFragment) fragment;
             activeFragment = ActiveFragment.CONTRIBUTIONS;
         } else if (fragment instanceof NearbyParentFragment) {
-            if (activeFragment == ActiveFragment.NEARBY) { // Do nothing if same tab
+            if (activeFragment == ActiveFragment.NEARBY) {// Do nothing if same tab
                 return true;
             }
             nearbyParentFragment = (NearbyParentFragment) fragment;
             activeFragment = ActiveFragment.NEARBY;
         } else if (fragment instanceof ExploreFragment) {
-            if (activeFragment == ActiveFragment.EXPLORE) { // Do nothing if same tab
+            if (activeFragment == ActiveFragment.EXPLORE) {// Do nothing if same tab
                 return true;
             }
             exploreFragment = (ExploreFragment) fragment;
             activeFragment = ActiveFragment.EXPLORE;
         } else if (fragment instanceof BookmarkFragment) {
-            if (activeFragment == ActiveFragment.BOOKMARK) { // Do nothing if same tab
+            if (activeFragment == ActiveFragment.BOOKMARK) {// Do nothing if same tab
                 return true;
             }
             bookmarkFragment = (BookmarkFragment) fragment;
             activeFragment = ActiveFragment.BOOKMARK;
         } else if (fragment == null && showBottom) {
-            if (applicationKvStore.getBoolean("login_skipped")
-                == true) { // If logged out, more sheet is different
+            if (applicationKvStore.getBoolean("login_skipped") == true) {// If logged out, more sheet is different
                 MoreBottomSheetLoggedOutFragment bottomSheet = new MoreBottomSheetLoggedOutFragment();
-                bottomSheet.show(getSupportFragmentManager(),
-                    "MoreBottomSheetLoggedOut");
+                bottomSheet.show(getSupportFragmentManager(), "MoreBottomSheetLoggedOut");
             } else {
                 MoreBottomSheetFragment bottomSheet = new MoreBottomSheetFragment();
-                bottomSheet.show(getSupportFragmentManager(),
-                    "MoreBottomSheet");
+                bottomSheet.show(getSupportFragmentManager(), "MoreBottomSheet");
             }
         }
 
@@ -291,7 +320,6 @@ public class MainActivity extends BaseActivity
     public void showTabs() {
         binding.fragmentMainNavTabLayout.setVisibility(View.VISIBLE);
     }
-
     /**
      * Adds number of uploads next to tab text "Contributions" then it will look like "Contributions
      * (NUMBER)"
@@ -308,7 +336,6 @@ public class MainActivity extends BaseActivity
                     : getString(R.string.contributions_subtitle_zero)));
         }
     }
-
     /**
      * Resume the uploads that got stuck because of the app being killed or the device being
      * rebooted.
@@ -414,7 +441,6 @@ public class MainActivity extends BaseActivity
     public void onBackStackChanged() {
         //initBackButton();
     }
-
     /**
      * Retry all failed uploads as soon as the user returns to the app
      */
@@ -429,7 +455,6 @@ public class MainActivity extends BaseActivity
                 }
             });
     }
-
     /**
      * Handles item selection in the options menu. This method is called when a user interacts with
      * the options menu in the Top Bar.
@@ -444,9 +469,51 @@ public class MainActivity extends BaseActivity
                 // Starts notification activity on click to notification icon
                 NotificationActivity.Companion.startYourself(this, "unread");
                 return true;
+            case R.id.menu_refresh:
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.contribution_activity_notification_menu, menu);
+
+        MenuItem refreshItem = menu.findItem(R.id.menu_refresh);
+        if (refreshItem != null) {
+            View actionView = refreshItem.getActionView();
+            if (actionView != null) {
+                ImageView refreshIcon = actionView.findViewById(R.id.refresh_icon);
+                if (refreshIcon != null) {
+                    refreshIcon.setOnClickListener(v -> {
+                        v.clearAnimation();
+                        Animation rotateAnimation = AnimationUtils.loadAnimation(this, R.anim.rotate);
+                        v.startAnimation(rotateAnimation);
+
+                        // Initialize userName if it's null
+                        if (userName == null) {
+                            userName = sessionManager.getUserName();
+                        }
+
+                        if (Objects.equals(sessionManager.getUserName(), userName)) {
+                            if (refresh != null && refresh.swipeRefreshLayout != null) {
+                                refresh.swipeRefreshLayout.setRefreshing(true);
+                                refresh.swipeRefreshLayout.setEnabled(true);
+                                contributionsListPresenter.refreshList(refresh.swipeRefreshLayout);
+                            }
+                        } else {
+                            if (refresh != null && refresh.swipeRefreshLayout != null) {
+                                refresh.swipeRefreshLayout.setEnabled(false);
+                            }
+                        }
+                    });
+                }
+            }
+        }
+
+        return true;
     }
 
     public void centerMapToPlace(Place place) {
@@ -499,14 +566,30 @@ public class MainActivity extends BaseActivity
     @Override
     protected void onResume() {
         super.onResume();
-
-        if ((applicationKvStore.getBoolean("firstrun", true)) &&
-            (!applicationKvStore.getBoolean("login_skipped"))) {
+        if (applicationKvStore.getBoolean("firstrun", true) &&
+            !applicationKvStore.getBoolean("login_skipped")) {
             defaultKvStore.putBoolean("inAppCameraFirstRun", true);
             WelcomeActivity.startYourself(this);
         }
 
         retryAllFailedUploads();
+        //check for new contributions
+        // Initialize userName if it's null
+        if (userName == null) {
+            userName = sessionManager.getUserName();
+        }
+
+        if (Objects.equals(sessionManager.getUserName(), userName)) {
+            if (refresh != null && refresh.swipeRefreshLayout != null) {
+                refresh.swipeRefreshLayout.setRefreshing(true);
+                refresh.swipeRefreshLayout.setEnabled(true);
+                contributionsListPresenter.refreshList(refresh.swipeRefreshLayout);
+            }
+        } else {
+            if (refresh != null && refresh.swipeRefreshLayout != null) {
+                refresh.swipeRefreshLayout.setEnabled(false);
+            }
+        }
     }
 
     @Override
@@ -517,14 +600,12 @@ public class MainActivity extends BaseActivity
         locationManager = null;
         super.onDestroy();
     }
-
     /**
      * Public method to show nearby from the reference of this.
      */
     public void showNearby() {
         binding.fragmentMainNavTabLayout.setSelectedItemId(NavTab.NEARBY.code());
     }
-
     public enum ActiveFragment {
         CONTRIBUTIONS,
         NEARBY,
@@ -532,10 +613,10 @@ public class MainActivity extends BaseActivity
         BOOKMARK,
         MORE
     }
-
     /**
      * Load default language in onCreate from SharedPreferences
      */
+
     private void loadLocale() {
         final SharedPreferences preferences = getSharedPreferences("Settings",
             Activity.MODE_PRIVATE);
@@ -544,7 +625,7 @@ public class MainActivity extends BaseActivity
         settingsFragment.setLocale(this, language);
     }
 
-    public NavTabLayout.OnNavigationItemSelectedListener getNavListener() {
+    public OnNavigationItemSelectedListener getNavListener() {
         return navListener;
     }
 }
