@@ -273,7 +273,14 @@ class UploadClient
                         if (uploadResult.upload == null) {
                             val exception = gson.fromJson(uploadResponse, MwException::class.java)
                             Timber.e(exception, "Error in uploading file from stash")
-                            throw Exception(exception.errorCode)
+
+                            // Handle abuse filter warning explicitly
+                            if (exception.errorCode?.contains("abusefilter-warning") == true) {
+                                Timber.w("Abuse filter triggered: ${exception.errorCode}")
+                                throw Exception("Abuse filter warning: ${exception.errorCode}. Please verify file content or metadata.")
+                            } else {
+                                throw Exception(exception.errorCode)
+                            }
                         }
                         uploadResult.upload
                     }
