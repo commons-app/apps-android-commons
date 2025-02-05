@@ -49,7 +49,9 @@ class ContributionsPresenter @Inject internal constructor(
     fun checkDuplicateImageAndRestartContribution(contribution: Contribution) {
         compositeDisposable!!.add(
             uploadRepository
-                .checkDuplicateImage(contribution.localUriPath!!.path)
+                .checkDuplicateImage(
+                    contribution.contentUri,
+                    contribution.localUri)
                 .subscribeOn(ioThreadScheduler)
                 .subscribe { imageCheckResult: Int ->
                     if (imageCheckResult == ImageUtils.IMAGE_OK) {
