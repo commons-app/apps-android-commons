@@ -15,6 +15,7 @@ import android.widget.CompoundButton
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.result.ActivityResult
+import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
@@ -60,8 +61,7 @@ import javax.inject.Named
 class UploadMediaDetailFragment : UploadBaseFragment(), UploadMediaDetailsContract.View,
     UploadMediaDetailAdapter.EventListener {
 
-    private val startForResult = registerForActivityResult<Intent, ActivityResult>(
-        ActivityResultContracts.StartActivityForResult(), ::onCameraPosition)
+    private lateinit var startForResult: ActivityResultLauncher<Intent>
 
     private val startForEditActivityResult = registerForActivityResult<Intent, ActivityResult>(
         ActivityResultContracts.StartActivityForResult(), ::onEditActivityResult)
@@ -134,6 +134,10 @@ class UploadMediaDetailFragment : UploadBaseFragment(), UploadMediaDetailsContra
 
         if (savedInstanceState != null && uploadableFile == null) {
             uploadableFile = savedInstanceState.getParcelable(UPLOADABLE_FILE)
+        }
+        // Register the ActivityResultLauncher for LocationPickerActivity
+        startForResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            onCameraPosition(result)
         }
     }
 
