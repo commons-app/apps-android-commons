@@ -149,7 +149,7 @@ class UploadWorker(
                 currentNotification.build(),
             )
             contribution!!.transferred = transferred
-            contributionDao.update(contribution).blockingAwait()
+            contributionDao.update(contribution!!).blockingAwait()
         }
 
         open fun onChunkUploaded(

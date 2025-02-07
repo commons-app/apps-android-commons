@@ -742,7 +742,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     public void onPause() {
         super.onPause();
         binding.map.onPause();
-        compositeDisposable.clear();
+        getCompositeDisposable().clear();
         presenter.detachView();
         registerUnregisterLocationListener(true);
         try {
@@ -857,7 +857,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             0.75);
         binding.nearbyFilterList.searchListView.setAdapter(nearbyFilterSearchRecyclerViewAdapter);
         LayoutUtils.setLayoutHeightAlignedToWidth(1.25, binding.nearbyFilterList.getRoot());
-        compositeDisposable.add(
+        getCompositeDisposable().add(
             RxSearchView.queryTextChanges(binding.nearbyFilter.searchViewLayout.searchView)
                 .takeUntil(RxView.detaches(binding.nearbyFilter.searchViewLayout.searchView))
                 .debounce(500, TimeUnit.MILLISECONDS)
@@ -1234,7 +1234,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
      */
     private void emptyCache() {
         // reload the map once the cache is cleared
-        compositeDisposable.add(
+        getCompositeDisposable().add(
             placesRepository.clearCache()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -1269,7 +1269,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         final Observable<String> savePlacesObservable = Observable
             .fromCallable(() -> nearbyController
                 .getPlacesAsKML(getMapFocus()));
-        compositeDisposable.add(savePlacesObservable
+        getCompositeDisposable().add(savePlacesObservable
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(kmlString -> {
@@ -1303,7 +1303,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         final Observable<String> savePlacesObservable = Observable
             .fromCallable(() -> nearbyController
                 .getPlacesAsGPX(getMapFocus()));
-        compositeDisposable.add(savePlacesObservable
+        getCompositeDisposable().add(savePlacesObservable
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(gpxString -> {
@@ -1405,7 +1405,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         final Observable<List<Place>> getPlaceObservable = Observable
             .fromCallable(() -> nearbyController
                 .getPlaces(List.of(place)));
-        compositeDisposable.add(getPlaceObservable
+        getCompositeDisposable().add(getPlaceObservable
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(placeList -> {
@@ -1449,7 +1449,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                     searchLatLng,
                     false, true, Utils.isMonumentsEnabled(new Date()), customQuery));
 
-        compositeDisposable.add(nearbyPlacesInfoObservable
+        getCompositeDisposable().add(nearbyPlacesInfoObservable
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(nearbyPlacesInfo -> {
@@ -1486,7 +1486,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                     searchLatLng,
                     false, true, Utils.isMonumentsEnabled(new Date()), customQuery));
 
-        compositeDisposable.add(nearbyPlacesInfoObservable
+        getCompositeDisposable().add(nearbyPlacesInfoObservable
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(nearbyPlacesInfo -> {
@@ -1518,7 +1518,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     }
 
     public void savePlaceToDatabase(Place place) {
-        compositeDisposable.add(placesRepository
+        getCompositeDisposable().add(placesRepository
             .save(place)
             .subscribeOn(Schedulers.io())
             .subscribe());
@@ -1531,7 +1531,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     @Override
     public void stopQuery() {
         stopQuery = true;
-        compositeDisposable.clear();
+        getCompositeDisposable().clear();
     }
 
     /**

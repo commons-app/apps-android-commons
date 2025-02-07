@@ -15,8 +15,8 @@ abstract class CommonsDaggerSupportFragment : Fragment(), HasSupportFragmentInje
     @Inject @JvmField
     var childFragmentInjector: DispatchingAndroidInjector<Fragment>? = null
 
-    @JvmField
-    protected var compositeDisposable: CompositeDisposable = CompositeDisposable()
+    // Removed @JvmField to allow overriding
+    protected open var compositeDisposable: CompositeDisposable = CompositeDisposable()
 
     override fun onAttach(context: Context) {
         inject()
@@ -62,5 +62,10 @@ abstract class CommonsDaggerSupportFragment : Fragment(), HasSupportFragmentInje
         }
 
         return getInstance(activity.applicationContext)
+    }
+
+    // Ensure getContext() returns a non-null Context
+    override fun getContext(): Context {
+        return super.getContext() ?: throw IllegalStateException("Context is null")
     }
 }
