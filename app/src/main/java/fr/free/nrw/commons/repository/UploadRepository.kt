@@ -204,7 +204,7 @@ class UploadRepository @Inject constructor(
      * @param filePath file to be checked
      * @return IMAGE_DUPLICATE or IMAGE_OK
      */
-    fun checkDuplicateImage(originalFilePath: Uri, modifiedFilePath: Uri): Single<Int> {
+    fun checkDuplicateImage(originalFilePath: Uri?, modifiedFilePath: Uri?): Single<Int> {
         return uploadModel.checkDuplicateImage(originalFilePath, modifiedFilePath)
     }
 

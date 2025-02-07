@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.upload.categories
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.ProgressDialog
 import android.content.Context
@@ -89,6 +90,7 @@ class UploadCategoriesFragment : UploadBaseFragment(), CategoriesContract.View {
         }
     }
 
+    @SuppressLint("StringFormatMatches")
     private fun init() {
         if (binding == null) {
             return
@@ -372,8 +374,9 @@ class UploadCategoriesFragment : UploadBaseFragment(), CategoriesContract.View {
 
             (requireActivity() as AppCompatActivity).supportActionBar?.hide()
 
+
             if (parentFragment?.parentFragment?.parentFragment is ContributionsFragment) {
-                ((parentFragment?.parentFragment?.parentFragment) as ContributionsFragment).binding.cardViewNearby.visibility = View.GONE
+                ((parentFragment?.parentFragment?.parentFragment) as ContributionsFragment).binding?.cardViewNearby?.visibility = View.GONE
             }
         }
     }
