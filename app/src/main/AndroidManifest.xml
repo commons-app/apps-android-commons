@@ -233,12 +233,6 @@
       android:label="@string/provider_bookmarks"
       android:syncable="false" />
     <provider
-      android:name=".bookmarks.locations.BookmarkLocationsContentProvider"
-      android:authorities="${applicationId}.bookmarks.locations.contentprovider"
-      android:exported="false"
-      android:label="@string/provider_bookmarks_location"
-      android:syncable="false" />
-    <provider
       android:name=".bookmarks.items.BookmarkItemsContentProvider"
       android:authorities="${applicationId}.bookmarks.items.contentprovider"
       android:exported="false"
