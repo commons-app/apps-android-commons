@@ -50,6 +50,7 @@ import com.jakewharton.rxbinding2.view.RxView
 import com.jakewharton.rxbinding3.appcompat.queryTextChanges
 import fr.free.nrw.commons.CommonsApplication
 import fr.free.nrw.commons.MapController.NearbyPlacesInfo
+import fr.free.nrw.commons.R
 import fr.free.nrw.commons.Utils
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao
 import fr.free.nrw.commons.contributions.ContributionController
@@ -683,40 +684,38 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(), NearbyParentFragmen
 
     private fun locationPermissionGranted() {
         isPermissionDenied = false
-        applicationKvStore!!.putBoolean("doNotAskForLocationPermission", false)
-        lastKnownLocation = locationManager!!.getLastLocation()
+        applicationKvStore.putBoolean("doNotAskForLocationPermission", false)
+        lastKnownLocation = locationManager.getLastLocation()
         val target = lastKnownLocation
-        if (lastKnownLocation != null) {
-            val targetP = GeoPoint(target!!.latitude, target.longitude)
+
+        if (target != null) {
+            val targetP = GeoPoint(target.latitude, target.longitude)
             mapCenter = targetP
-            binding!!.map.controller.setCenter(targetP)
+            binding?.map?.controller?.setCenter(targetP)
             recenterMarkerToPosition(targetP)
             if (!isCameFromExploreMap()) {
-                moveCameraToPosition(targetP);
+                moveCameraToPosition(targetP)
             }
-        } else if (locationManager!!.isGPSProviderEnabled()
-            || locationManager!!.isNetworkProviderEnabled()
-        ) {
-            locationManager!!.requestLocationUpdatesFromProvider(LocationManager.NETWORK_PROVIDER)
-            locationManager!!.requestLocationUpdatesFromProvider(LocationManager.GPS_PROVIDER)
+        } else if (locationManager.isGPSProviderEnabled() || locationManager.isNetworkProviderEnabled()) {
+            locationManager.requestLocationUpdatesFromProvider(LocationManager.NETWORK_PROVIDER)
+            locationManager.requestLocationUpdatesFromProvider(LocationManager.GPS_PROVIDER)
             setProgressBarVisibility(true)
         } else {
-            locationPermissionsHelper!!.showLocationOffDialog(
-                requireActivity(),
-                fr.free.nrw.commons.R.string.ask_to_turn_location_on_text
-            )
+            activity?.let { locationPermissionsHelper?.showLocationOffDialog(it, R.string.ask_to_turn_location_on_text) }
         }
-        presenter!!.onMapReady()
+
+        presenter?.onMapReady()
         registerUnregisterLocationListener(false)
     }
 
     override fun onResume() {
         super.onResume()
-        binding!!.map.onResume()
-        presenter!!.attachView(this)
+        binding?.map?.onResume()
+        presenter?.attachView(this)
         registerNetworkReceiver()
-        if (isResumed && (activity as MainActivity).activeFragment == ActiveFragment.NEARBY) {
-            if (locationPermissionsHelper!!.checkLocationPermission(requireActivity())) {
+
+        if (isResumed && (activity as? MainActivity)?.activeFragment == ActiveFragment.NEARBY) {
+            if (activity?.let { locationPermissionsHelper?.checkLocationPermission(it) } == true) {
                 locationPermissionGranted()
             } else {
                 startMapWithoutPermission()
@@ -2456,49 +2455,44 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(), NearbyParentFragmen
      * @param geoPoint The GeoPoint representing the new center position of the map.
      */
     private fun recenterMarkerToPosition(geoPoint: GeoPoint?) {
-        if (geoPoint != null) {
-            binding!!.map.controller.setCenter(geoPoint)
-            val overlays = binding!!.map.overlays
-            for (i in overlays.indices) {
-                if (overlays[i] is Marker) {
-                    binding!!.map.overlays.removeAt(i)
-                } else if (overlays[i] is ScaleDiskOverlay) {
-                    binding!!.map.overlays.removeAt(i)
+        geoPoint?.let {
+            binding?.map?.controller?.setCenter(it)
+            val overlays = binding?.map?.overlays ?: return@let
+
+            // Remove markers and disks using index-based removal
+            var i = 0
+            while (i < overlays.size) {
+                when (overlays[i]) {
+                    is Marker, is ScaleDiskOverlay -> overlays.removeAt(i)
+                    else -> i++
                 }
             }
-            val diskOverlay =
-                ScaleDiskOverlay(
-                    this.context,
-                    geoPoint, 2000, UnitOfMeasure.foot
-                )
-            val circlePaint = Paint()
-            circlePaint.color = Color.rgb(128, 128, 128)
-            circlePaint.style = Paint.Style.STROKE
-            circlePaint.strokeWidth = 2f
-            diskOverlay.setCirclePaint2(circlePaint)
-            val diskPaint = Paint()
-            diskPaint.color = Color.argb(40, 128, 128, 128)
-            diskPaint.style = Paint.Style.FILL_AND_STROKE
-            diskOverlay.setCirclePaint1(diskPaint)
-            diskOverlay.setDisplaySizeMin(900)
-            diskOverlay.setDisplaySizeMax(1700)
-            binding!!.map.overlays.add(diskOverlay)
-            val startMarker = Marker(
-                binding!!.map
-            )
-            startMarker.position = geoPoint
-            startMarker.setAnchor(
-                Marker.ANCHOR_CENTER,
-                Marker.ANCHOR_BOTTOM
-            )
-            startMarker.icon =
-                ContextCompat.getDrawable(
-                    this.requireContext(),
-                    fr.free.nrw.commons.R.drawable.current_location_marker
-                )
-            startMarker.title = "Your Location"
-            startMarker.textLabelFontSize = 24
-            binding!!.map.overlays.add(startMarker)
+
+            // Add disk overlay
+            ScaleDiskOverlay(context, it, 2000, UnitOfMeasure.foot).apply {
+                setCirclePaint2(Paint().apply {
+                    color = Color.rgb(128, 128, 128)
+                    style = Paint.Style.STROKE
+                    strokeWidth = 2f
+                })
+                setCirclePaint1(Paint().apply {
+                    color = Color.argb(40, 128, 128, 128)
+                    style = Paint.Style.FILL_AND_STROKE
+                })
+                setDisplaySizeMin(900)
+                setDisplaySizeMax(1700)
+                overlays.add(this)
+            }
+
+            // Add marker
+            Marker(binding?.map).apply {
+                position = it
+                setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
+                icon = ContextCompat.getDrawable(context, R.drawable.current_location_marker)
+                title = "Your Location"
+                textLabelFontSize = 24
+                overlays.add(this)
+            }
         }
     }
 
