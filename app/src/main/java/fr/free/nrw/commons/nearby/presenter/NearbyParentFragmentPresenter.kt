@@ -75,8 +75,8 @@ class NearbyParentFragmentPresenter
      * - **connnectionCount**: number of parallel requests
      */
     private object LoadPlacesAsyncOptions {
-        const val BATCH_SIZE = 3
-        const val CONNECTION_COUNT = 3
+        const val BATCH_SIZE = 10
+        const val CONNECTION_COUNT = 20
     }
 
     private var schedulePlacesUpdateJob: Job? = null
@@ -91,7 +91,7 @@ class NearbyParentFragmentPresenter
     private object SchedulePlacesUpdateOptions {
         var skippedCount = 0
         const val SKIP_LIMIT = 3
-        const val SKIP_DELAY_MS = 500L
+        const val SKIP_DELAY_MS = 100L
     }
 
     // used to tell the asynchronous place detail loading job that the places' bookmarked status
