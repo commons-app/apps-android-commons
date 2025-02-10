@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* August.C
 * DinoWP
 * Diskdance
 * GuoPC
@@ -831,4 +832,14 @@
   <string name="usages_on_commons_heading">維基共享資源</string>
   <string name="usages_on_other_wikis_heading">其它 wiki</string>
   <string name="file_usages_container_heading">檔案用途</string>
+  <string name="title_activity_single_web_view">單一WebViewActivity</string>
+  <string name="account">帳號</string>
+  <string name="vanish_account">引退帳號</string>
+  <string name="account_vanish_request_confirm_title">隱退帳號警告</string>
+  <string name="account_vanish_request_confirm">隱退是最後手段，並且應該僅在您希望永遠不再編輯時使用，以及盡可能隱藏您過去關聯蹤跡下使用。帳號刪除是透過更改您的帳號名稱來完成的，這樣其他人就無法在稱之為帳號隱退的過程中辨識出您的貢獻。另外，隱退並不能保證能完全匿名或移除對專案的貢獻。\n\n要繼續隱退流程，請完成以下的帳號隱退表單。</string>
+  <string name="caption">說明</string>
+  <string name="caption_copied_to_clipboard">文字已複製至剪貼簿</string>
+  <string name="congratulations_all_pictures_in_this_album_have_been_either_uploaded_or_marked_as_not_for_upload">恭喜，該相簿中的所有圖片已上傳或標記為不可上傳。</string>
+  <string name="show_in_explore">在探索中顯示</string>
+  <string name="show_in_nearby">顯示在附近</string>
 </resources>
