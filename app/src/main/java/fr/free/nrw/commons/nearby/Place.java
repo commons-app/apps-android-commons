@@ -232,13 +232,23 @@ public class Place implements Parcelable {
      */
     @Nullable
     public String getWikiDataEntityId() {
+        if (this.entityID != null && !this.entityID.equals("")) {
+            return this.entityID;
+        }
+
         if (!hasWikidataLink()) {
             Timber.d("Wikidata entity ID is null for place with sitelink %s", siteLinks.toString());
             return null;
         }
 
+        //Determine entityID from link
         String wikiDataLink = siteLinks.getWikidataLink().toString();
-        return wikiDataLink.replace("http://www.wikidata.org/entity/", "");
+
+        if (wikiDataLink.contains("http://www.wikidata.org/entity/")) {
+            this.entityID = wikiDataLink.substring("http://www.wikidata.org/entity/".length());
+            return this.entityID;
+        }
+        return null;
     }
 
     /**
