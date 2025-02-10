@@ -31,6 +31,7 @@ import android.preference.PreferenceManager;
 import android.provider.Settings;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -118,6 +119,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -232,6 +234,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     private boolean isAdvancedQueryFragmentVisible = false;
     private Place nearestPlace;
     private volatile boolean stopQuery;
+    private Map<Pair<Context, Integer>, Drawable> drawableCache;
 
     // Explore map data (for if we came from Explore)
     private double prevZoom;
@@ -708,6 +711,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                 startMapWithoutPermission();
             }
         }
+        drawableCache = new HashMap<>();
     }
 
     /**
@@ -1912,8 +1916,29 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         );
     }
 
+    /**
+     * Gets the specified Drawable object. This is a wrapper method for ContextCompat.getDrawable().
+     * This method caches results from previous calls for faster retrieval.
+     *
+     * @param context The context to use to get the Drawable
+     * @param id The integer that describes the Drawable resource
+     * @return The Drawable object
+     */
+    private Drawable getDrawable(Context context, Integer id) {
+        if (drawableCache == null || context == null || id == null) {
+            return null;
+        }
+
+        Pair<Context, Integer> key = new Pair<>(context, id);
+        if (!drawableCache.containsKey(key)) {
+            drawableCache.put(key, ContextCompat.getDrawable(context, id));
+        }
+
+        return drawableCache.get(key);
+    }
+
     public Marker convertToMarker(Place place, boolean isBookMarked) {
-        Drawable icon = ContextCompat.getDrawable(getContext(), getIconFor(place, isBookMarked));
+        Drawable icon = getDrawable(getContext(), getIconFor(place, isBookMarked));
         GeoPoint point = new GeoPoint(place.location.getLatitude(), place.location.getLongitude());
         Marker marker = new Marker(binding.map);
         marker.setPosition(point);
