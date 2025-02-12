@@ -28,6 +28,7 @@ import fr.free.nrw.commons.navtab.NavTabLayout
 import fr.free.nrw.commons.navtab.NavTabLoggedOut
 import fr.free.nrw.commons.nearby.Place
 import fr.free.nrw.commons.nearby.fragments.NearbyParentFragment
+import fr.free.nrw.commons.nearby.fragments.NearbyParentFragment.NearbyParentFragmentInstanceReadyCallback
 import fr.free.nrw.commons.notification.NotificationActivity.Companion.startYourself
 import fr.free.nrw.commons.notification.NotificationController
 import fr.free.nrw.commons.quiz.QuizChecker
@@ -460,11 +461,12 @@ after opening the app.
 
     fun centerMapToPlace(place: Place?) {
         setSelectedItemId(NavTab.NEARBY.code())
-        nearbyParentFragment!!.setNearbyParentFragmentInstanceReadyCallback {
-            nearbyParentFragment!!.centerMapToPlace(
-                place
-            )
-        }
+        nearbyParentFragment!!.setNearbyParentFragmentInstanceReadyCallback(
+            object : NearbyParentFragmentInstanceReadyCallback {
+                override fun onReady() {
+                    nearbyParentFragment!!.centerMapToPlace(place)
+                }
+            })
     }
 
     /**
