@@ -28,10 +28,10 @@ interface UploadInterface {
     @POST(WikidataConstants.MW_API_PREFIX + "action=upload&ignorewarnings=1")
     @FormUrlEncoded
     fun uploadFileFromStash(
-        @Field("token") token: String,
-        @Field("text") text: String,
-        @Field("comment") comment: String,
-        @Field("filename") filename: String,
-        @Field("filekey") filekey: String,
+        @Field("token") token: String?,
+        @Field("text") text: String?,
+        @Field("comment") comment: String?,
+        @Field("filename") filename: String?,
+        @Field("filekey") filekey: String?,
     ): Observable<JsonObject>
 }
