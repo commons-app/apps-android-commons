@@ -28,8 +28,7 @@ import javax.inject.Named
 
 /**
  * The presenter class for PendingUploadsFragment and FailedUploadsFragment
- */
-class PendingUploadsPresenter @Inject internal constructor(
+ */ class PendingUploadsPresenter @Inject internal constructor(
     private val contributionBoundaryCallback: ContributionBoundaryCallback,
     private val contributionsRemoteDataSource: ContributionsRemoteDataSource,
     private val contributionsRepository: ContributionsRepository,
@@ -89,12 +88,16 @@ class PendingUploadsPresenter @Inject internal constructor(
      * @param context      The context in which the operation is being performed.
      */
     override fun deleteUpload(contribution: Contribution?, context: Context?) {
-        compositeDisposable.add(
+        contribution?.let {
             contributionsRepository
-                .deleteContributionFromDB(contribution)
+                .deleteContributionFromDB(it)
                 .subscribeOn(ioThreadScheduler)
                 .subscribe()
-        )
+        }?.let {
+            compositeDisposable.add(
+                it
+            )
+        }
     }
 
     /**
@@ -149,7 +152,10 @@ class PendingUploadsPresenter @Inject internal constructor(
             }
             compositeDisposable.add(
                 uploadRepository
-                    .checkDuplicateImage(contribution.localUriPath!!.path)
+                    .checkDuplicateImage(
+                        originalFilePath = contribution.contentUri!!,
+                        modifiedFilePath = contribution.localUri!!
+                    )
                     .subscribeOn(ioThreadScheduler)
                     .subscribe({ imageCheckResult: Int ->
                         if (imageCheckResult == IMAGE_OK) {
@@ -218,7 +224,10 @@ class PendingUploadsPresenter @Inject internal constructor(
             }
             compositeDisposable.add(
                 uploadRepository
-                    .checkDuplicateImage(contribution.localUriPath!!.path)
+                    .checkDuplicateImage(
+                        originalFilePath = contribution.contentUri!!,
+                        modifiedFilePath = contribution.localUri!!
+                    )
                     .subscribeOn(ioThreadScheduler)
                     .subscribe { imageCheckResult: Int ->
                         if (imageCheckResult == IMAGE_OK) {
