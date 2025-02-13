@@ -43,6 +43,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetBehavior.BottomSheetCallback
 import com.google.android.material.snackbar.Snackbar
@@ -2269,7 +2270,26 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(), NearbyParentFragmen
         bottomSheetAdapter!!.setClickListener(this)
         binding!!.bottomSheetDetails.bottomSheetRecyclerView.adapter = bottomSheetAdapter
         updateBookmarkButtonImage(selectedPlace!!)
-        binding!!.bottomSheetDetails.icon.setImageResource(selectedPlace!!.label.icon)
+
+        Timber.d(selectedPlace.toString())
+        val imageView = binding!!.bottomSheetDetails.icon
+
+        // Extract the correct Wikimedia image URL
+        val imageUrl = selectedPlace?.pic
+        val correctedUrl = imageUrl?.replace("http://commons.wikimedia.org/wiki/Special:FilePath/", "https://upload.wikimedia.org/wikipedia/commons/")
+
+        if (!correctedUrl.isNullOrEmpty()) {
+            // Load image using Glide with lower resolution
+            Glide.with(imageView.context)
+                .load(correctedUrl)
+                .placeholder(selectedPlace!!.label.icon) // Show icon while loading
+                .error(selectedPlace!!.label.icon) // Show icon if loading fails
+                .into(imageView)
+        } else {
+            // Show default icon
+            imageView.setImageResource(selectedPlace!!.label.icon)
+        }
+
         binding!!.bottomSheetDetails.title.text = selectedPlace!!.name
         binding!!.bottomSheetDetails.category.text = selectedPlace!!.distance
         // Remove label since it is double information
