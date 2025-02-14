@@ -2271,24 +2271,13 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(), NearbyParentFragmen
         binding!!.bottomSheetDetails.bottomSheetRecyclerView.adapter = bottomSheetAdapter
         updateBookmarkButtonImage(selectedPlace!!)
 
-        Timber.d(selectedPlace.toString())
-        val imageView = binding!!.bottomSheetDetails.icon
-
-        // Extract the correct Wikimedia image URL
-        val imageUrl = selectedPlace?.pic
-        val correctedUrl = imageUrl?.replace("http://commons.wikimedia.org/wiki/Special:FilePath/", "https://upload.wikimedia.org/wikipedia/commons/")
-
-        if (!correctedUrl.isNullOrEmpty()) {
-            // Load image using Glide with lower resolution
-            Glide.with(imageView.context)
-                .load(correctedUrl)
-                .placeholder(selectedPlace!!.label.icon) // Show icon while loading
-                .error(selectedPlace!!.label.icon) // Show icon if loading fails
-                .into(imageView)
-        } else {
-            // Show default icon
-            imageView.setImageResource(selectedPlace!!.label.icon)
-        }
+        selectedPlace?.pic?.substringAfterLast("/")?.let { imageName ->
+            Glide.with(binding!!.bottomSheetDetails.icon.context)
+                .load("https://commons.wikimedia.org/wiki/Special:Redirect/file/$imageName?width=20")
+                .placeholder(fr.free.nrw.commons.R.drawable.ic_refresh_24dp_nearby)
+                .error(selectedPlace!!.label.icon)
+                .into(binding!!.bottomSheetDetails.icon)
+        } ?: binding!!.bottomSheetDetails.icon.setImageResource(selectedPlace!!.label.icon)
 
         binding!!.bottomSheetDetails.title.text = selectedPlace!!.name
         binding!!.bottomSheetDetails.category.text = selectedPlace!!.distance
