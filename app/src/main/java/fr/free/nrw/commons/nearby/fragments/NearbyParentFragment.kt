@@ -67,6 +67,8 @@ import fr.free.nrw.commons.location.LocationPermissionsHelper.LocationPermission
 import fr.free.nrw.commons.location.LocationServiceManager
 import fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType
 import fr.free.nrw.commons.location.LocationUpdateListener
+import fr.free.nrw.commons.media.MediaClient
+import fr.free.nrw.commons.media.MediaDetailPagerFragment
 import fr.free.nrw.commons.nearby.BottomSheetAdapter
 import fr.free.nrw.commons.nearby.BottomSheetAdapter.ItemClickListener
 import fr.free.nrw.commons.nearby.CheckBoxTriStates
@@ -2277,6 +2279,9 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(), NearbyParentFragmen
                 .placeholder(fr.free.nrw.commons.R.drawable.ic_refresh_24dp_nearby)
                 .error(selectedPlace!!.label.icon)
                 .into(binding!!.bottomSheetDetails.icon)
+            binding!!.bottomSheetDetails.icon.setOnClickListener {
+                handleMediaClick(imageName)
+            }
         } ?: binding!!.bottomSheetDetails.icon.setImageResource(selectedPlace!!.label.icon)
 
         binding!!.bottomSheetDetails.title.text = selectedPlace!!.name
@@ -2331,6 +2336,12 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(), NearbyParentFragmen
                 }
             }
         }
+    }
+
+    private fun handleMediaClick(imageName: String) {
+        val intent = Intent(Intent.ACTION_VIEW)
+        intent.data = Uri.parse("https://commons.wikimedia.org/wiki/File:$imageName")
+        startActivity(intent)
     }
 
     private fun storeSharedPrefs(selectedPlace: Place) {
