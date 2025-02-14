@@ -15,7 +15,10 @@ class ResultTuple {
     }
 
     constructor() {
-        language = ""
+        // Setting the default language to "en" to ensure users
+        // are aware that they can select a language while uploading.
+        // This prevents cases where no language is selected.
+        language = "en"
         type = ""
         value = ""
     }
