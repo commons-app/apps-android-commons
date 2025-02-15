@@ -373,7 +373,7 @@ class UploadWorker(
                                     return@onErrorReturn null
                                 }.blockingSingle()
 
-                        if (null != uploadResult && uploadResult.isSuccessful()) {
+                        if (uploadResult != null && uploadResult.isSuccessful()) {
                             Timber.d(
                                 "Stash Upload success..proceeding to make wikidata edit",
                             )
@@ -469,7 +469,7 @@ class UploadWorker(
         contribution: Contribution,
     ) {
         val wikiDataPlace = contribution.wikidataPlace
-        if (wikiDataPlace != null && wikiDataPlace.imageValue == null) {
+        if (wikiDataPlace != null) {
             if (!contribution.hasInvalidLocation()) {
                 var revisionID: Long? = null
                 try {
@@ -479,7 +479,7 @@ class UploadWorker(
                             uploadResult.filename,
                             contribution.media.captions,
                         )
-                    if (null != revisionID) {
+                    if (revisionID != null) {
                         withContext(Dispatchers.IO) {
                             val place = placesRepository.fetchPlace(wikiDataPlace.id)
                             place.name = wikiDataPlace.name

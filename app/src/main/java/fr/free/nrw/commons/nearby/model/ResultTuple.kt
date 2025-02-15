@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.nearby.model
 
 import com.google.gson.annotations.SerializedName
+import java.util.Locale
 
 class ResultTuple {
     @SerializedName("xml:lang")
@@ -15,7 +16,7 @@ class ResultTuple {
     }
 
     constructor() {
-        language = ""
+        language = Locale.getDefault().language
         type = ""
         value = ""
     }
