@@ -2273,16 +2273,19 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(), NearbyParentFragmen
         binding!!.bottomSheetDetails.bottomSheetRecyclerView.adapter = bottomSheetAdapter
         updateBookmarkButtonImage(selectedPlace!!)
 
-        selectedPlace?.pic?.substringAfterLast("/")?.let { imageName ->
+        selectedPlace?.pic?.substringAfterLast("/")?.takeIf { it.isNotEmpty() }?.let { imageName ->
             Glide.with(binding!!.bottomSheetDetails.icon.context)
                 .load("https://commons.wikimedia.org/wiki/Special:Redirect/file/$imageName?width=20")
                 .placeholder(fr.free.nrw.commons.R.drawable.ic_refresh_24dp_nearby)
                 .error(selectedPlace!!.label.icon)
                 .into(binding!!.bottomSheetDetails.icon)
+
             binding!!.bottomSheetDetails.icon.setOnClickListener {
                 handleMediaClick(imageName)
             }
-        } ?: binding!!.bottomSheetDetails.icon.setImageResource(selectedPlace!!.label.icon)
+        } ?: run {
+            binding!!.bottomSheetDetails.icon.setImageResource(selectedPlace!!.label.icon)
+        }
 
         binding!!.bottomSheetDetails.title.text = selectedPlace!!.name
         binding!!.bottomSheetDetails.category.text = selectedPlace!!.distance
