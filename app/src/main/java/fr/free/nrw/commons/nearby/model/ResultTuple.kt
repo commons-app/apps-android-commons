@@ -1,7 +1,6 @@
 package fr.free.nrw.commons.nearby.model
 
 import com.google.gson.annotations.SerializedName
-import java.util.Locale
 
 class ResultTuple {
     @SerializedName("xml:lang")
@@ -16,7 +15,7 @@ class ResultTuple {
     }
 
     constructor() {
-        language = Locale.getDefault().language
+        language = "bug" // Basa Ugi language -  TODO Respect the `Default description language`setting.
         type = ""
         value = ""
     }
