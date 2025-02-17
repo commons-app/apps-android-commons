@@ -16,6 +16,7 @@ import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewTreeObserver
 import android.view.ViewTreeObserver.OnGlobalLayoutListener
 import android.widget.ArrayAdapter
 import android.widget.Button
@@ -405,9 +406,14 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
          * Gets the height of the frame layout as soon as the view is ready and updates aspect ratio
          * of the picture.
          */
-        view.post {
-            frameLayoutHeight = binding.mediaDetailFrameLayout.measuredHeight
-            updateAspectRatio(binding.mediaDetailScrollView.width)
+        view.post{
+            val width = binding.mediaDetailScrollView.width
+            if (width > 0) {
+                frameLayoutHeight = binding.mediaDetailFrameLayout.measuredHeight
+                updateAspectRatio(width)
+            } else {
+                view.postDelayed({ updateAspectRatio(binding.root.width) }, 1)
+            }
         }
 
         return view
