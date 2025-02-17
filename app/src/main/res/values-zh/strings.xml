@@ -18,6 +18,7 @@
 * Huajing
 * Hydra
 * Ken418
+* Kichin
 * Kuailong
 * Lantianjialiang
 * LittlePaw365
@@ -870,4 +871,6 @@
   <string name="caption">说明</string>
   <string name="caption_copied_to_clipboard">已复制到剪贴板</string>
   <string name="congratulations_all_pictures_in_this_album_have_been_either_uploaded_or_marked_as_not_for_upload">恭喜，专辑中的所有图片都已上传或标记为不上传。</string>
+  <string name="show_in_explore">在探索中显示</string>
+  <string name="show_in_nearby">显示在附近</string>
 </resources>
