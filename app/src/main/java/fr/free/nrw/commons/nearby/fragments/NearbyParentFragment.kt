@@ -38,6 +38,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleCoroutineScope
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -51,6 +52,7 @@ import com.jakewharton.rxbinding2.view.RxView
 import com.jakewharton.rxbinding3.appcompat.queryTextChanges
 import fr.free.nrw.commons.CommonsApplication
 import fr.free.nrw.commons.MapController.NearbyPlacesInfo
+import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.Utils
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao
@@ -69,6 +71,8 @@ import fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType
 import fr.free.nrw.commons.location.LocationUpdateListener
 import fr.free.nrw.commons.media.MediaClient
 import fr.free.nrw.commons.media.MediaDetailPagerFragment
+import fr.free.nrw.commons.media.MediaDetailPagerFragment.MediaDetailProvider
+import fr.free.nrw.commons.navtab.NavTab
 import fr.free.nrw.commons.nearby.BottomSheetAdapter
 import fr.free.nrw.commons.nearby.BottomSheetAdapter.ItemClickListener
 import fr.free.nrw.commons.nearby.CheckBoxTriStates
@@ -120,17 +124,25 @@ import timber.log.Timber
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
+import java.net.URLDecoder
+import java.nio.charset.StandardCharsets
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
+import java.util.UUID
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 import javax.inject.Named
 import kotlin.concurrent.Volatile
 
 
-class NearbyParentFragment : CommonsDaggerSupportFragment(), NearbyParentFragmentContract.View,
-    WikidataP18EditListener, LocationUpdateListener, LocationPermissionCallback, ItemClickListener {
+class NearbyParentFragment : CommonsDaggerSupportFragment(),
+    NearbyParentFragmentContract.View,
+    WikidataP18EditListener,
+    LocationUpdateListener,
+    LocationPermissionCallback,
+    ItemClickListener,
+    MediaDetailPagerFragment.MediaDetailProvider {
     var binding: FragmentNearbyParentBinding? = null
 
     val mapEventsOverlay: MapEventsOverlay = MapEventsOverlay(object : MapEventsReceiver {
@@ -164,6 +176,13 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(), NearbyParentFragmen
     @Inject
     @Named("default_preferences")
     lateinit var applicationKvStore: JsonKvStore
+
+    @Inject
+    lateinit var mediaClient: MediaClient
+
+    lateinit var mediaDetails: MediaDetailPagerFragment
+
+    lateinit var media: Media
 
     @Inject
     lateinit var bookmarkLocationDao: BookmarkLocationsDao
@@ -716,6 +735,10 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(), NearbyParentFragmen
         binding?.map?.onResume()
         presenter?.attachView(this)
         registerNetworkReceiver()
+
+        binding?.coordinatorLayout?.visibility = View.VISIBLE
+        binding?.map?.setMultiTouchControls(true)
+        binding?.map?.isClickable = true
 
         if (isResumed && (activity as? MainActivity)?.activeFragment == ActiveFragment.NEARBY) {
             if (activity?.let { locationPermissionsHelper?.checkLocationPermission(it) } == true) {
@@ -1853,7 +1876,31 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(), NearbyParentFragmen
     }
 
     fun backButtonClicked(): Boolean {
-        return presenter!!.backButtonClicked()
+        if (::mediaDetails.isInitialized && mediaDetails.isVisible) {
+            removeFragment(mediaDetails)
+
+            binding?.coordinatorLayout?.visibility = View.VISIBLE
+            binding?.map?.setMultiTouchControls(true)
+            binding?.map?.isClickable = true
+
+            val transaction = childFragmentManager.beginTransaction()
+            val fragmentContainer = childFragmentManager.findFragmentById(R.id.coordinator_layout)
+
+            if (fragmentContainer != null) {
+                transaction.show(fragmentContainer)
+            }
+
+            transaction.commit()
+            childFragmentManager.executePendingTransactions()
+
+            (activity as? MainActivity)?.showTabs()
+            (activity as? MainActivity)?.supportActionBar?.setDisplayHomeAsUpEnabled(false)
+            return true
+        } else {
+            (activity as? MainActivity)?.setSelectedItemId(NavTab.NEARBY.code())
+        }
+
+        return presenter?.backButtonClicked() ?: false
     }
 
     override fun onLocationPermissionDenied(toastMessage: String) {
@@ -2342,9 +2389,98 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(), NearbyParentFragmen
     }
 
     private fun handleMediaClick(imageName: String) {
-        val intent = Intent(Intent.ACTION_VIEW)
-        intent.data = Uri.parse("https://commons.wikimedia.org/wiki/File:$imageName")
-        startActivity(intent)
+        val decodedImageName = URLDecoder.decode(imageName, StandardCharsets.UTF_8.toString())
+
+        mediaClient.getMedia("File:$decodedImageName")
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({ mediaResponse ->
+                if (mediaResponse != null) {
+                    // Create a Media object from the response
+                    media = Media(
+                        pageId = mediaResponse.pageId ?: UUID.randomUUID().toString(),
+                        thumbUrl = mediaResponse.thumbUrl,
+                        imageUrl = mediaResponse.imageUrl,
+                        filename = mediaResponse.filename,
+                        fallbackDescription = mediaResponse.fallbackDescription,
+                        dateUploaded = mediaResponse.dateUploaded,
+                        license = mediaResponse.license,
+                        licenseUrl = mediaResponse.licenseUrl,
+                        author = mediaResponse.author,
+                        user = mediaResponse.user,
+                        categories = mediaResponse.categories,
+                        coordinates = mediaResponse.coordinates,
+                        captions = mediaResponse.captions ?: emptyMap(),
+                        descriptions = mediaResponse.descriptions ?: emptyMap(),
+                        depictionIds = mediaResponse.depictionIds ?: emptyList(),
+                        categoriesHiddenStatus = mediaResponse.categoriesHiddenStatus ?: emptyMap()
+                    )
+                    // Remove existing fragment before showing new details
+                    if (::mediaDetails.isInitialized && mediaDetails.isAdded) {
+                        removeFragment(mediaDetails)
+                    }
+                    showMediaDetails()
+                } else {
+                    Timber.e("Fetched media is null for image: $decodedImageName")
+                }
+            }, { throwable ->
+                Timber.e(throwable, "Error fetching media for image: $decodedImageName")
+            })
+    }
+
+    private fun showMediaDetails() {
+        binding?.map?.setMultiTouchControls(false)
+        binding?.map?.isClickable = false
+
+        mediaDetails = MediaDetailPagerFragment.newInstance(false, true)
+
+
+        val transaction = childFragmentManager.beginTransaction()
+
+        val fragmentContainer = childFragmentManager.findFragmentById(R.id.coordinator_layout)
+        if (fragmentContainer != null) {
+            transaction.hide(fragmentContainer)
+        }
+
+        // Replace instead of add to ensure new fragment is used
+        transaction.replace(R.id.coordinator_layout, mediaDetails, "MediaDetailFragmentTag")
+        transaction.addToBackStack("Nearby_Parent_Fragment_Tag").commit()
+        childFragmentManager.executePendingTransactions()
+
+        (activity as? MainActivity)?.supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+        if (mediaDetails.isAdded) {
+            mediaDetails.showImage(0)
+        } else {
+            Timber.e("Error: MediaDetailPagerFragment is NOT added")
+        }
+    }
+
+    override fun getMediaAtPosition(i: Int): Media? {
+        return media
+    }
+
+    override fun getTotalMediaCount(): Int {
+        return 2
+    }
+
+    override fun getContributionStateAt(position: Int): Int? {
+        return null
+    }
+
+    override fun refreshNominatedMedia(index: Int) {
+        if (this::mediaDetails.isInitialized && !binding?.map?.isClickable!! == true) {
+            removeFragment(mediaDetails)
+            showMediaDetails()
+        }
+    }
+
+    private fun removeFragment(fragment: Fragment) {
+        childFragmentManager
+            .beginTransaction()
+            .remove(fragment)
+            .commit()
+        childFragmentManager.executePendingTransactions()
     }
 
     private fun storeSharedPrefs(selectedPlace: Place) {
