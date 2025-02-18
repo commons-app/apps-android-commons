@@ -140,7 +140,7 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
     private var index: Int = 0
     private var isDeleted: Boolean = false
     private var isWikipediaButtonDisplayed: Boolean = false
-    private val callback: Callback? = null
+    private var callback: Callback? = null
 
     @Inject
     lateinit var mediaDetailViewModelFactory: MediaDetailViewModel.MediaDetailViewModelProviderFactory
@@ -2072,7 +2072,8 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
             index: Int,
             editable: Boolean,
             isCategoryImage: Boolean,
-            isWikipediaButtonDisplayed: Boolean
+            isWikipediaButtonDisplayed: Boolean,
+            callback: Callback
         ): MediaDetailFragment {
             val mf = MediaDetailFragment()
             val state = Bundle()
@@ -2083,6 +2084,7 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
             state.putInt("listTop", 0)
             state.putBoolean("isWikipediaButtonDisplayed", isWikipediaButtonDisplayed)
             mf.arguments = state
+            mf.callback = callback
 
             return mf
         }
