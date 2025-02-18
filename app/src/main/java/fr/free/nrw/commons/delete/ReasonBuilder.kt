@@ -14,6 +14,7 @@ import fr.free.nrw.commons.R
 import fr.free.nrw.commons.profile.achievements.FeedbackResponse
 import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient
+import fr.free.nrw.commons.utils.ConfigUtils
 import fr.free.nrw.commons.utils.ViewUtilWrapper
 import io.reactivex.Single
 import timber.log.Timber
@@ -55,6 +56,10 @@ class ReasonBuilder @Inject constructor(
     }
 
     private fun fetchArticleNumber(media: Media, reason: String): Single<String> {
+        if (ConfigUtils.isBetaFlavour) {
+            return Single.just(appendArticlesUsed(null, media, reason))
+        }
+
         return if (checkAccount()) {
             okHttpJsonApiClient
                 .getAchievements(sessionManager.userName)
@@ -72,9 +77,9 @@ class ReasonBuilder @Inject constructor(
      * @param reason
      */
     @SuppressLint("StringFormatInvalid")
-    private fun appendArticlesUsed(feedBack: FeedbackResponse, media: Media, reason: String): String {
+    private fun appendArticlesUsed(feedBack: FeedbackResponse?, media: Media, reason: String): String {
         val reason1Template = context.getString(R.string.uploaded_by_myself)
-        return reason + String.format(Locale.getDefault(), reason1Template, prettyUploadedDate(media), feedBack.articlesUsingImages)
+        return reason + String.format(Locale.getDefault(), reason1Template, prettyUploadedDate(media), feedBack?.articlesUsingImages ?: 0)
             .also { Timber.i("New Reason %s", it) }
     }
 
