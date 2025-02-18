@@ -9,6 +9,7 @@ import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient
 import fr.free.nrw.commons.profile.achievements.FeedbackResponse
 import fr.free.nrw.commons.profile.leaderboard.LeaderboardResponse
 import fr.free.nrw.commons.profile.leaderboard.UpdateAvatarResponse
+import fr.free.nrw.commons.utils.ConfigUtils
 import fr.free.nrw.commons.utils.ViewUtilWrapper
 import io.reactivex.Observable
 import io.reactivex.Single
@@ -55,28 +56,38 @@ class ReasonBuilderTest {
 
     @Test
     fun forceLoginWhenAccountIsNull() {
-        PowerMockito.`when`(context?.getString(R.string.user_not_logged_in))
-            .thenReturn("Log-in expired. Please log in again.")
-
-        reasonBuilder!!.getReason(mock(Media::class.java), "test")
-        verify(sessionManager, times(1))!!.forceLogin(any(Context::class.java))
+        if (!ConfigUtils.isBetaFlavour) {
+            PowerMockito.`when`(context?.getString(R.string.user_not_logged_in))
+                .thenReturn("Log-in expired. Please log in again.")
+            reasonBuilder!!.getReason(mock(Media::class.java), "test")
+            verify(sessionManager, times(1))!!.forceLogin(any(Context::class.java))
+        }
     }
 
     @Test
     fun getReason() {
-        `when`(sessionManager?.userName).thenReturn("Testuser")
-        `when`(sessionManager?.doesAccountExist()).thenReturn(true)
-        `when`(okHttpJsonApiClient!!.getAchievements(anyString()))
-            .thenReturn(Single.just(mock(FeedbackResponse::class.java)))
-        `when`(okHttpJsonApiClient!!.getLeaderboard(anyString(), anyString(), anyString(), anyString(), anyString()))
-            .thenReturn(Observable.just(mock(LeaderboardResponse::class.java)))
-        `when`(okHttpJsonApiClient!!.setAvatar(anyString(), anyString()))
-            .thenReturn(Single.just(mock(UpdateAvatarResponse::class.java)))
+        if (!ConfigUtils.isBetaFlavour) {
+            `when`(sessionManager?.userName).thenReturn("Testuser")
+            `when`(sessionManager?.doesAccountExist()).thenReturn(true)
+            `when`(okHttpJsonApiClient!!.getAchievements(anyString()))
+                .thenReturn(Single.just(mock(FeedbackResponse::class.java)))
+            `when`(
+                okHttpJsonApiClient!!.getLeaderboard(
+                    anyString(),
+                    anyString(),
+                    anyString(),
+                    anyString(),
+                    anyString()
+                )
+            )
+                .thenReturn(Observable.just(mock(LeaderboardResponse::class.java)))
+            `when`(okHttpJsonApiClient!!.setAvatar(anyString(), anyString()))
+                .thenReturn(Single.just(mock(UpdateAvatarResponse::class.java)))
 
-        val media = media(filename = "test_file", dateUploaded = Date())
-
-        reasonBuilder!!.getReason(media, "test")
-        verify(sessionManager, times(0))!!.forceLogin(any(Context::class.java))
-        verify(okHttpJsonApiClient, times(1))!!.getAchievements(anyString())
+            val media = media(filename = "test_file", dateUploaded = Date())
+            reasonBuilder!!.getReason(media, "test")
+            verify(sessionManager, times(0))!!.forceLogin(any(Context::class.java))
+            verify(okHttpJsonApiClient, times(1))!!.getAchievements(anyString())
+        }
     }
 }
