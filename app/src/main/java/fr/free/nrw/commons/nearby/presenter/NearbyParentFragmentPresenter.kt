@@ -25,9 +25,12 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.ensureActive
+import kotlinx.coroutines.job
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import okhttp3.internal.wait
 import timber.log.Timber
+import java.io.IOException
 import java.lang.reflect.InvocationHandler
 import java.lang.reflect.Method
 import java.lang.reflect.Proxy
@@ -379,13 +382,32 @@ class NearbyParentFragmentPresenter
                             )
                         } catch (e: Exception) {
                             Timber.tag("NearbyPinDetails").e(e)
-                            collectResults.send(indices.map { Pair(it, updatedGroups[it]) })
+                            //HTTP request failed. Try individual places
+                            for (i in indices) {
+                                launch {
+                                    val onePlaceBatch = mutableListOf<Pair<Int, MarkerPlaceGroup>>()
+                                    try {
+                                        val fetchedPlace = nearbyController.getPlaces(
+                                            mutableListOf(updatedGroups[i].place)
+                                        )
+
+                                        onePlaceBatch.add(Pair(i, MarkerPlaceGroup(
+                                            bookmarkLocationDao.findBookmarkLocation(
+                                                fetchedPlace[0]),fetchedPlace[0])))
+                                    } catch (e: Exception) {
+                                        Timber.tag("NearbyPinDetails").e(e)
+                                        onePlaceBatch.add(Pair(i, updatedGroups[i]))
+                                    }
+                                    collectResults.send(onePlaceBatch)
+                                }
+                            }
                         }
                     }
                 }
             }
             var collectCount = 0
-            for (resultList in collectResults) {
+            while (collectCount < indicesToUpdate.size) {
+                val resultList = collectResults.receive()
                 for ((index, fetchedPlaceGroup) in resultList) {
                     val existingPlace = updatedGroups[index].place
                     val finalPlaceGroup = MarkerPlaceGroup(
@@ -442,9 +464,7 @@ class NearbyParentFragmentPresenter
                     }
                 }
                 schedulePlacesUpdate(updatedGroups)
-                if (++collectCount == totalBatches) {
-                    break
-                }
+                collectCount += resultList.size
             }
             collectResults.close()
         }
