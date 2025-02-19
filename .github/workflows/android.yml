@@ -5,6 +5,7 @@ on: [push, pull_request, workflow_dispatch]
 permissions:
   pull-requests: write
   contents: read
+  actions: read
 
 concurrency:
   group: build-${{ github.event.pull_request.number || github.ref }}
@@ -114,9 +115,11 @@ jobs:
           github-token: ${{secrets.GITHUB_TOKEN}}
           script: |
             try {
-              if (!process.env.GITHUB_TOKEN) {
-                throw new Error('GITHUB_TOKEN is not set. Please configure repository secrets.');
-              }
+              const token = process.env.GITHUB_TOKEN;
+               if (!token) {
+                throw new Error('GITHUB_TOKEN is not set. Please check workflow permissions.');
+               }
+
 
               const { data: { artifacts } } = await github.rest.actions.listWorkflowRunArtifacts({
                 owner: context.repo.owner,
