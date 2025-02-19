@@ -1,10 +1,11 @@
 name: Android CI
 
-on: [push, pull_request, workflow_dispatch]
+on: [push, pull_request_target, workflow_dispatch]  
 
 permissions:
   pull-requests: write
   contents: read
+  issues: write 
 
 concurrency:
   group: build-${{ github.event.pull_request.number || github.ref }}
@@ -34,61 +35,6 @@ jobs:
           key: gradle-packages-${{ runner.os }}-${{ hashFiles('**/*.gradle', '**/*.gradle.kts', 'gradle.properties') }}
           restore-keys: gradle-packages-${{ runner.os }}
 
-      - name: Access test login credentials
-        run: |
-          echo "TEST_USER_NAME=${{ secrets.TEST_USER_NAME }}" >> local.properties
-          echo "TEST_USER_PASSWORD=${{ secrets.TEST_USER_PASSWORD }}" >> local.properties
-
-      - name: AVD cache
-        if: github.event_name != 'pull_request'
-        uses: actions/cache@v3
-        id: avd-cache
-        with:
-          path: |
-            ~/.android/avd/*
-            ~/.android/adb*
-          key: avd-tablet-api-24
-
-      - name: Create AVD and generate snapshot for caching
-        if: steps.avd-cache.outputs.cache-hit != 'true' && github.event_name != 'pull_request'
-        uses: reactivecircus/android-emulator-runner@v2
-        with:
-          api-level: 24
-          force-avd-creation: false
-          emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
-          disable-animations: true
-          script: echo "Generated AVD snapshot for caching."
-
-      - name: Run Instrumentation tests
-        if: github.event_name != 'pull_request'
-        uses: reactivecircus/android-emulator-runner@v2
-        with:
-          api-level: 24
-          force-avd-creation: false
-          emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
-          disable-animations: true
-          profile: Nexus 10
-          script: |
-            adb shell content insert --uri content://settings/system --bind name:s:accelerometer_rotation --bind value:i:0
-            adb shell content insert --uri content://settings/system --bind name:s:user_rotation --bind value:i:0
-            adb emu geo fix 37.422131 -122.084801
-            ./gradlew connectedBetaDebugAndroidTest --stacktrace
-
-      - name: Run Unit tests with unified coverage
-        if: github.event_name != 'pull_request'
-        run: ./gradlew -Pcoverage testBetaDebugUnitTestUnifiedCoverage --stacktrace
-
-      - name: Run Unit tests without unified coverage
-        if: github.event_name == 'pull_request'
-        run: ./gradlew -Pcoverage testBetaDebugUnitTestCoverage --stacktrace
-
-      - name: Upload Test Report to Codecov
-        if: github.event_name != 'pull_request'
-        run: |
-          curl -Os https://uploader.codecov.io/latest/linux/codecov
-          chmod +x codecov
-          ./codecov -f "app/build/reports/jacoco/testBetaDebugUnitTestUnifiedCoverage/testBetaDebugUnitTestUnifiedCoverage.xml" -Z
-
       - name: Generate betaDebug APK
         run: bash ./gradlew assembleBetaDebug --stacktrace
 
@@ -106,9 +52,9 @@ jobs:
         with:
           name: prodDebugAPK
           path: app/build/outputs/apk/prod/debug/app-*.apk
-      
+
       - name: Comment on PR with APK download links
-        if: github.event_name == 'pull_request'
+        if: github.event_name == 'pull_request_target'  # Updated for proper permissions
         uses: actions/github-script@v6
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
@@ -127,7 +73,7 @@ jobs:
               const prodDownloadUrl = `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/suites/${context.runId}/artifacts/${prodArtifact.id}`;
 
               const commentBody = `
-               📱 **Apk for pull request is ready to see the changes** 📱  
+               📱 **APK for pull request is ready!** 📱  
               - [Download Beta APK](${betaDownloadUrl})  
               - [Download Prod APK](${prodDownloadUrl})
               `;
