@@ -1,6 +1,6 @@
 name: Android CI
 
-on: [push, pull_request_target, workflow_dispatch]
+on: [push, pull_request, workflow_dispatch]
   
 permissions: 
   contents: write
@@ -9,6 +9,10 @@ permissions:
   actions: write
   checks: write
   discussions: write
+  packages: write
+  repository-projects: write
+  security-events: write
+  statuses: write
 
 concurrency:
   group: build-${{ github.event.pull_request.number || github.ref }}
@@ -112,7 +116,7 @@ jobs:
           path: app/build/outputs/apk/prod/debug/app-*.apk
       
       - name: Comment on PR with APK download links
-        if: github.event_name == 'pull_request_target'
+        if: github.event_name == 'pull_request'
         uses: actions/github-script@v6
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
