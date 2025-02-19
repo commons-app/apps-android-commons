@@ -119,51 +119,59 @@ jobs:
         if: github.event_name == 'pull_request'
         uses: actions/github-script@v6
         with:
-         github-token: ${{ secrets.GITHUB_TOKEN }}
-         script: |
-          try {
-            if (!process.env.GITHUB_TOKEN) {
-              console.log('❌ GITHUB_TOKEN is not available. Please check repository secrets.');
-              core.setFailed('GITHUB_TOKEN is missing.');
-              return;
-            } else {
-              console.log(`✅ GITHUB_TOKEN is present: ****${process.env.GITHUB_TOKEN.slice(-4)}`);
-            }
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            try {
+              const token = process.env.GITHUB_TOKEN;
+               if (!token) {
+                throw new Error('GITHUB_TOKEN is not set. Please check workflow permissions.');
+               }
 
-            const { data: { artifacts } } = await github.rest.actions.listWorkflowRunArtifacts({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              run_id: context.runId
-            });
 
-            if (!artifacts || artifacts.length === 0) {
-              throw new Error('No artifacts found for this workflow run.');
-            }
+              const { data: { artifacts } } = await github.rest.actions.listWorkflowRunArtifacts({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                run_id: context.runId
+              });
 
-            const betaArtifact = artifacts.find(artifact => artifact.name === "betaDebugAPK");
-            const prodArtifact = artifacts.find(artifact => artifact.name === "prodDebugAPK");
+              if (!artifacts || artifacts.length === 0) {
+                console.log('No artifacts found for this workflow run.');
+                return;
+              }
 
-            if (!betaArtifact || !prodArtifact) {
-              throw new Error('Could not find both Beta and Prod APK artifacts.');
-            }
+              const betaArtifact = artifacts.find(artifact => artifact.name === "betaDebugAPK");
+              const prodArtifact = artifacts.find(artifact => artifact.name === "prodDebugAPK");
 
-            const betaDownloadUrl = `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}/artifacts/${betaArtifact.id}`;
-            const prodDownloadUrl = `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}/artifacts/${prodArtifact.id}`;
+              if (!betaArtifact || !prodArtifact) {
+                console.log('Could not find both Beta and Prod APK artifacts.');
+                console.log('Available artifacts:', artifacts.map(a => a.name).join(', '));
+                return;
+              }
 
-            await github.rest.issues.createComment({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              issue_number: context.issue.number,
-              body: `
+              const betaDownloadUrl = `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/suites/${context.runId}/artifacts/${betaArtifact.id}`;
+              const prodDownloadUrl = `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/suites/${context.runId}/artifacts/${prodArtifact.id}`;
+
+              const commentBody = `
                📱 **APK for pull request is ready to see the changes** 📱  
-                - [Download Beta APK](${betaDownloadUrl})  
-                - [Download Prod APK](${prodDownloadUrl})
+              - [Download Beta APK](${betaDownloadUrl})  
+              - [Download Prod APK](${prodDownloadUrl})
+              `;
 
-                *Note: You need to be logged in to GitHub to download the APKs.*
-              `
-            });
-            console.log('✅ Successfully created comment with APK links');
-          } catch (error) {
-            console.error('❌ Error details:', error);
-            core.setFailed(`Action failed: ${error.message}`);
-          }
+              await github.rest.issues.createComment({
+                issue_number: context.issue.number,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                body: commentBody
+              });
+        
+              console.log('Successfully posted comment with APK download links');
+            } catch (error) {
+              console.error('Error in PR comment creation:', error);
+              if (error.message.includes('GITHUB_TOKEN')) {
+                core.setFailed('Missing or invalid GITHUB_TOKEN. Please check repository secrets configuration.');
+              } else if (error.status === 403) {
+                core.setFailed('Permission denied. Please check workflow permissions in repository settings.');
+              } else {
+                core.setFailed(`Workflow failed: ${error.message}`);
+              }
+            }
