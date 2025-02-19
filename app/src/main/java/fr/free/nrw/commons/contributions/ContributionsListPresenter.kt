@@ -1,15 +1,19 @@
 package fr.free.nrw.commons.contributions
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
 import androidx.paging.DataSource
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.di.CommonsApplicationModule
 import io.reactivex.Scheduler
 import io.reactivex.disposables.CompositeDisposable
 import javax.inject.Inject
 import javax.inject.Named
+
 
 /**
  * The presenter class for Contributions
@@ -22,7 +26,14 @@ class ContributionsListPresenter @Inject internal constructor(
 ) : ContributionsListContract.UserActionListener {
     private val compositeDisposable = CompositeDisposable()
 
+    @Inject
+    lateinit var sessionManager: SessionManager
+
     var contributionList: LiveData<PagedList<Contribution>>? = null
+
+    private val liveData = MutableLiveData<List<Contribution>>()
+
+    private val existingContributions: MutableList<Contribution> = ArrayList()
 
     override fun onAttachView(view: ContributionsListContract.View) {
     }
@@ -66,6 +77,13 @@ class ContributionsListPresenter @Inject internal constructor(
         }
 
         contributionList = livePagedListBuilder.build()
+        contributionList!!.observeForever { pagedList ->
+            pagedList?.let {
+                existingContributions.clear()
+                existingContributions.addAll(it)
+                liveData.value = existingContributions // Update liveData with the latest list
+            }
+        }
     }
 
     override fun onDetachView() {
