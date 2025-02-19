@@ -3,11 +3,16 @@ name: Android CI
 on: [push, pull_request, workflow_dispatch]  
 
 permissions: 
-  contents: read
+  contents: write
   pull-requests: write
   issues: write
-  actions: read
+  actions: write
   checks: write
+  discussions: write
+  packages: write
+  repository-projects: write
+  security-events: write
+  statuses: write
 
 concurrency:
   group: build-${{ github.event.pull_request.number || github.ref }}
@@ -114,7 +119,7 @@ jobs:
         if: github.event_name == 'pull_request'
         uses: actions/github-script@v6
         with:
-         github-token: ${{ github.token }}
+         github-token: ${{ secrets.GITHUB_TOKEN }}
          script: |
           try {
             const { data: { artifacts } } = await github.rest.actions.listWorkflowRunArtifacts({
@@ -134,8 +139,8 @@ jobs:
                 throw new Error('Could not find both Beta and Prod APK artifacts.');
               }
 
-              const betaDownloadUrl = `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/suites/${context.runId}/artifacts/${betaArtifact.id}`;
-              const prodDownloadUrl = `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/suites/${context.runId}/artifacts/${prodArtifact.id}`;
+              const betaDownloadUrl = `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/artifacts/${betaArtifact.id}`;
+              const prodDownloadUrl = `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/artifacts/${prodArtifact.id}`;
   
               await github.rest.issues.createComment({
                 owner: context.repo.owner,
@@ -149,6 +154,8 @@ jobs:
                   *Note: You need to be logged in to GitHub to download the APKs.*
                 `
               });
+              console.log('Successfully created comment with APK links');
             } catch (error) {
+              console.error('Error details:', error);
               core.setFailed(`Action failed: ${error.message}`);
             }
