@@ -1,6 +1,6 @@
 name: Android CI
 
-on: [push, pull_request_target, workflow_dispatch]  
+on: [push, pull_request_target, pull_request, workflow_dispatch]  
 
 permissions: 
   contents: write
