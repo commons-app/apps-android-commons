@@ -11,6 +11,7 @@ import android.content.IntentFilter
 import android.content.res.Configuration
 import android.graphics.Color
 import android.graphics.Paint
+import android.graphics.drawable.Drawable
 import android.location.Location
 import android.location.LocationManager
 import android.net.Uri
@@ -241,6 +242,7 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
 
     @Volatile
     private var stopQuery = false
+    private var drawableCache: MutableMap<Pair<Context, Int>, Drawable>? = null
 
     // Explore map data (for if we came from Explore)
     private var prevZoom = 0.0
@@ -747,6 +749,7 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
                 startMapWithoutPermission()
             }
         }
+        drawableCache = HashMap()
     }
 
     /**
@@ -1527,7 +1530,7 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
                         marker.showInfoWindow()
                         presenter!!.handlePinClicked(updatedPlace)
                         savePlaceToDatabase(place)
-                        val icon = ContextCompat.getDrawable(
+                        val icon = getDrawable(
                             requireContext(),
                             getIconFor(updatedPlace, isBookMarked)
                         )
@@ -2077,8 +2080,35 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
             )
     }
 
+    /**
+     * Gets the specified Drawable object. This is a wrapper method for ContextCompat.getDrawable().
+     * This method caches results from previous calls for faster retrieval.
+     *
+     * @param context The context to use to get the Drawable
+     * @param id The integer that describes the Drawable resource
+     * @return The Drawable object
+     */
+    private fun getDrawable(context: Context?, id: Int?): Drawable? {
+        if (drawableCache == null || context == null || id == null) {
+            return null
+        }
+
+        val key = Pair(context, id)
+        if (!drawableCache!!.containsKey(key)) {
+            val drawable = ContextCompat.getDrawable(context, id)
+
+            if (drawable != null) {
+                drawableCache!![key] = drawable
+            } else {
+                return null
+            }
+        }
+
+        return drawableCache!![key]
+    }
+
     fun convertToMarker(place: Place, isBookMarked: Boolean): Marker {
-        val icon = ContextCompat.getDrawable(requireContext(), getIconFor(place, isBookMarked))
+        val icon = getDrawable(requireContext(), getIconFor(place, isBookMarked))
         val point = GeoPoint(place.location.latitude, place.location.longitude)
         val marker = Marker(binding!!.map)
         marker.position = point
@@ -2589,7 +2619,7 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
                 Marker.ANCHOR_BOTTOM
             )
             startMarker.icon =
-                ContextCompat.getDrawable(
+                getDrawable(
                     this.requireContext(),
                     fr.free.nrw.commons.R.drawable.current_location_marker
                 )
@@ -2647,7 +2677,7 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
             Marker(binding?.map).apply {
                 position = it
                 setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
-                icon = ContextCompat.getDrawable(context, R.drawable.current_location_marker)
+                icon = getDrawable(context, R.drawable.current_location_marker)
                 title = "Your Location"
                 textLabelFontSize = 24
                 overlays.add(this)
