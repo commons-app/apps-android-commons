@@ -115,123 +115,6 @@ jobs:
           name: prodDebugAPK
           path: app/build/outputs/apk/prod/debug/app-*.apk
       
-      name: Android CI
-
-on: [push, pull_request, workflow_dispatch]  
-
-permissions: 
-  contents: write
-  pull-requests: write
-  issues: write
-  actions: write
-  checks: write
-  discussions: write
-  packages: write
-  repository-projects: write
-  security-events: write
-  statuses: write
-
-concurrency:
-  group: build-${{ github.event.pull_request.number || github.ref }}
-  cancel-in-progress: true
-
-jobs:
-  build:
-    name: Run tests and generate APK
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Set up JDK
-        uses: actions/setup-java@v3
-        with:
-          distribution: 'temurin'
-          java-version: '17'
-
-      - name: Cache packages
-        id: cache-packages
-        uses: actions/cache@v3
-        with:
-          path: |
-            ~/.gradle/caches
-            ~/.gradle/wrapper
-          key: gradle-packages-${{ runner.os }}-${{ hashFiles('**/*.gradle', '**/*.gradle.kts', 'gradle.properties') }}
-          restore-keys: gradle-packages-${{ runner.os }}
-
-      - name: Access test login credentials
-        run: |
-          echo "TEST_USER_NAME=${{ secrets.TEST_USER_NAME }}" >> local.properties
-          echo "TEST_USER_PASSWORD=${{ secrets.TEST_USER_PASSWORD }}" >> local.properties
-
-      - name: AVD cache
-        if: github.event_name != 'pull_request'
-        uses: actions/cache@v3
-        id: avd-cache
-        with:
-          path: |
-            ~/.android/avd/*
-            ~/.android/adb*
-          key: avd-tablet-api-24
-
-      - name: Create AVD and generate snapshot for caching
-        if: steps.avd-cache.outputs.cache-hit != 'true' && github.event_name != 'pull_request'
-        uses: reactivecircus/android-emulator-runner@v2
-        with:
-          api-level: 24
-          force-avd-creation: false
-          emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
-          disable-animations: true
-          script: echo "Generated AVD snapshot for caching."
-
-      - name: Run Instrumentation tests
-        if: github.event_name != 'pull_request'
-        uses: reactivecircus/android-emulator-runner@v2
-        with:
-          api-level: 24
-          force-avd-creation: false
-          emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
-          disable-animations: true
-          profile: Nexus 10
-          script: |
-            adb shell content insert --uri content://settings/system --bind name:s:accelerometer_rotation --bind value:i:0
-            adb shell content insert --uri content://settings/system --bind name:s:user_rotation --bind value:i:0
-            adb emu geo fix 37.422131 -122.084801
-            ./gradlew connectedBetaDebugAndroidTest --stacktrace
-
-      - name: Run Unit tests with unified coverage
-        if: github.event_name != 'pull_request'
-        run: ./gradlew -Pcoverage testBetaDebugUnitTestUnifiedCoverage --stacktrace
-
-      - name: Run Unit tests without unified coverage
-        if: github.event_name == 'pull_request'
-        run: ./gradlew -Pcoverage testBetaDebugUnitTestCoverage --stacktrace
-
-      - name: Upload Test Report to Codecov
-        if: github.event_name != 'pull_request'
-        run: |
-          curl -Os https://uploader.codecov.io/latest/linux/codecov
-          chmod +x codecov
-          ./codecov -f "app/build/reports/jacoco/testBetaDebugUnitTestUnifiedCoverage/testBetaDebugUnitTestUnifiedCoverage.xml" -Z
-
-      - name: Generate betaDebug APK
-        run: bash ./gradlew assembleBetaDebug --stacktrace
-
-      - name: Upload betaDebug APK
-        uses: actions/upload-artifact@v4
-        with:
-          name: betaDebugAPK
-          path: app/build/outputs/apk/beta/debug/app-*.apk
-
-      - name: Generate prodDebug APK
-        run: bash ./gradlew assembleProdDebug --stacktrace
-
-      - name: Upload prodDebug APK
-        uses: actions/upload-artifact@v4
-        with:
-          name: prodDebugAPK
-          path: app/build/outputs/apk/prod/debug/app-*.apk
-      
       - name: Comment on PR with APK download links
         if: github.event_name == 'pull_request'
         uses: actions/github-script@v6
@@ -239,40 +122,48 @@ jobs:
          github-token: ${{ secrets.GITHUB_TOKEN }}
          script: |
           try {
+            if (!process.env.GITHUB_TOKEN) {
+              console.log('❌ GITHUB_TOKEN is not available. Please check repository secrets.');
+              core.setFailed('GITHUB_TOKEN is missing.');
+              return;
+            } else {
+              console.log(`✅ GITHUB_TOKEN is present: ****${process.env.GITHUB_TOKEN.slice(-4)}`);
+            }
+
             const { data: { artifacts } } = await github.rest.actions.listWorkflowRunArtifacts({
               owner: context.repo.owner,
               repo: context.repo.repo,
               run_id: context.runId
             });
 
-              if (!artifacts || artifacts.length === 0) {
-                throw new Error('No artifacts found for this workflow run.');
-              }
-
-              const betaArtifact = artifacts.find(artifact => artifact.name === "betaDebugAPK");
-              const prodArtifact = artifacts.find(artifact => artifact.name === "prodDebugAPK");
-
-              if (!betaArtifact || !prodArtifact) {
-                throw new Error('Could not find both Beta and Prod APK artifacts.');
-              }
-
-              const betaDownloadUrl = `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/${context.runId}/artifacts/${betaArtifact.id}`;
-              const prodDownloadUrl = `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/${context.runId}/artifacts/${prodArtifact.id}`;
-  
-              await github.rest.issues.createComment({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                issue_number: context.issue.number,
-                body: `
-                 📱 **APK for pull request is ready to see the changes** 📱  
-                  - [Download Beta APK](${betaDownloadUrl})  
-                  - [Download Prod APK](${prodDownloadUrl})
-          
-                  *Note: You need to be logged in to GitHub to download the APKs.*
-                `
-              });
-              console.log('Successfully created comment with APK links');
-            } catch (error) {
-              console.error('Error details:', error);
-              core.setFailed(`Action failed: ${error.message}`);
+            if (!artifacts || artifacts.length === 0) {
+              throw new Error('No artifacts found for this workflow run.');
             }
+
+            const betaArtifact = artifacts.find(artifact => artifact.name === "betaDebugAPK");
+            const prodArtifact = artifacts.find(artifact => artifact.name === "prodDebugAPK");
+
+            if (!betaArtifact || !prodArtifact) {
+              throw new Error('Could not find both Beta and Prod APK artifacts.');
+            }
+
+            const betaDownloadUrl = `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}/artifacts/${betaArtifact.id}`;
+            const prodDownloadUrl = `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}/artifacts/${prodArtifact.id}`;
+
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: `
+               📱 **APK for pull request is ready to see the changes** 📱  
+                - [Download Beta APK](${betaDownloadUrl})  
+                - [Download Prod APK](${prodDownloadUrl})
+
+                *Note: You need to be logged in to GitHub to download the APKs.*
+              `
+            });
+            console.log('✅ Successfully created comment with APK links');
+          } catch (error) {
+            console.error('❌ Error details:', error);
+            core.setFailed(`Action failed: ${error.message}`);
+          }
