@@ -469,7 +469,7 @@ class UploadWorker(
         contribution: Contribution,
     ) {
         val wikiDataPlace = contribution.wikidataPlace
-        if (wikiDataPlace != null && wikiDataPlace.imageValue == null) {
+        if (wikiDataPlace != null) {
             if (!contribution.hasInvalidLocation()) {
                 var revisionID: Long? = null
                 try {
