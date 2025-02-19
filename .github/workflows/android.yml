@@ -113,19 +113,15 @@ jobs:
       - name: Comment on PR with APK download links
         if: github.event_name == 'pull_request'
         uses: actions/github-script@v6
-        env:
-          GH_TOKEN: ${{ github.token }}
         with:
-          github-token: ${{ github.token }}
-          script: |
-            try {
-              const octokit = github.getOctokit(process.env.GH_TOKEN);
-        
-              const { data: { artifacts } } = await octokit.rest.actions.listWorkflowRunArtifacts({
+         github-token: ${{ github.token }}
+         script: |
+          try {
+            const { data: { artifacts } } = await github.rest.actions.listWorkflowRunArtifacts({
               owner: context.repo.owner,
               repo: context.repo.repo,
               run_id: context.runId
-              });
+            });
 
               if (!artifacts || artifacts.length === 0) {
                 throw new Error('No artifacts found for this workflow run.');
@@ -141,13 +137,16 @@ jobs:
               const betaDownloadUrl = `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/suites/${context.runId}/artifacts/${betaArtifact.id}`;
               const prodDownloadUrl = `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/suites/${context.runId}/artifacts/${prodArtifact.id}`;
   
-              await octokit.rest.issues.createComment({
-                ...context.repo,
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
                 issue_number: context.issue.number,
                 body: `
                  📱 **APK for pull request is ready to see the changes** 📱  
-                - [Download Beta APK](${betaDownloadUrl})  
-                - [Download Prod APK](${prodDownloadUrl})
+                  - [Download Beta APK](${betaDownloadUrl})  
+                  - [Download Prod APK](${prodDownloadUrl})
+          
+                  *Note: You need to be logged in to GitHub to download the APKs.*
                 `
               });
             } catch (error) {
