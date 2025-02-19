@@ -9,10 +9,6 @@ permissions:
   actions: write
   checks: write
   discussions: write
-  packages: write
-  repository-projects: write
-  security-events: write
-  statuses: write
 
 concurrency:
   group: build-${{ github.event.pull_request.number || github.ref }}
