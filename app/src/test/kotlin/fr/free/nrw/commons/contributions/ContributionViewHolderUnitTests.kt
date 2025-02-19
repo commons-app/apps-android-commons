@@ -115,11 +115,10 @@ class ContributionViewHolderUnitTests {
     @Throws(Exception::class)
     fun testDisplayWikipediaButton() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
-        val method: Method =
-            ContributionViewHolder::class.java.getDeclaredMethod(
-                "displayWikipediaButton",
-                Boolean::class.javaObjectType,
-            )
+        val method: Method = ContributionViewHolder::class.java.getDeclaredMethod(
+            "displayWikipediaButton",
+            Boolean::class.javaPrimitiveType
+        )
         method.isAccessible = true
         method.invoke(contributionViewHolder, false)
     }

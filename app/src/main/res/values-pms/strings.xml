@@ -814,4 +814,6 @@
   <string name="caption">Legenda</string>
   <string name="caption_copied_to_clipboard">Legenda copià an sla taulëtta</string>
   <string name="congratulations_all_pictures_in_this_album_have_been_either_uploaded_or_marked_as_not_for_upload">Congratulassion, tute le fòto ëd s\'àlbom a son ëstàita carià opura marcà coma da nen carié.</string>
+  <string name="show_in_explore">Smon-e andrinta a Explore</string>
+  <string name="show_in_nearby">Smon-e andrinta a Nearby</string>
 </resources>

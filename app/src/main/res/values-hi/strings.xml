@@ -6,6 +6,7 @@
 * Anandra
 * AnupamM
 * Bhatakati aatma
+* Bunnypranav
 * Gopalindians
 * Nilesh shukla
 * Nitin1485
@@ -28,32 +29,46 @@
   <string name="commons_github">कॉमन्स गिटहब सोर्स कोड</string>
   <string name="commons_logo">कॉमन्स का प्रतीक चिन्ह</string>
   <string name="commons_website">कॉमन्स का जालस्थान</string>
+  <string name="exit_location_picker">निकास स्थान चयनकर्ता</string>
   <string name="submit">जमा करें</string>
+  <string name="add_another_description">एक और विवरण जोड़ें</string>
+  <string name="add_new_contribution">नया योगदान</string>
+  <string name="add_contribution_from_camera">कैमरे से योगदान जोड़ें</string>
+  <string name="add_contribution_from_photos">फ़ोटो से योगदान जोड़ें</string>
+  <string name="add_contribution_from_contributions_gallery">पिछले योगदान गैलरी से योगदान जोड़ें</string>
+  <string name="show_captions">कैप्शन</string>
+  <string name="row_item_language_description">भाषा विवरण</string>
   <string name="row_item_caption">कैप्शन</string>
   <string name="show_captions_description">विवरण</string>
   <string name="nearby_row_image">चित्र</string>
   <string name="nearby_all">सभी</string>
+  <string name="nearby_filter_toggle">ऊपर टॉगल करें</string>
+  <string name="nearby_filter_state">स्थान राज्य</string>
   <string name="appwidget_img">आज का चित्र</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">%1$d फ़ाइल अपलोड हो रही</item>
     <item quantity="other">%1$d फ़ाइलें अपलोड हो रहीं</item>
   </plurals>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">\@string/contributions_subtitle_zero</item>
+  <plurals name="contributions_subtitle">
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
-  <plurals name="starting_multiple_uploads" fuzzy="true">
-    <item quantity="one">%1$d अपलोड शुरू</item>
-    <item quantity="other">%1$d अपलोड शुरू</item>
+  <string name="starting_uploads">अपलोड शुरू</string>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">%d अपलोड संसाधित</item>
+    <item quantity="other">%d अपलोड संसाधित</item>
   </plurals>
-  <plurals name="multiple_uploads_title" fuzzy="true">
-    <item quantity="one">%1$d अपलोड</item>
-    <item quantity="other">%1$d अपलोड</item>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">%d अपलोड</item>
+    <item quantity="other">%d अपलोड</item>
   </plurals>
   <plurals name="share_license_summary">
     <item quantity="one">इस चित्र का प्रयोग %1$s लाइसेंस के अन्तर्गत होगा</item>
     <item quantity="other">इन चित्रों का प्रयोग %1$s लाइसेंस के अन्तर्गत होगा</item>
+  </plurals>
+  <plurals name="upload_count_title">
+    <item quantity="one">%1$d अपलोड</item>
+    <item quantity="other">%1$d अपलोड</item>
   </plurals>
   <string name="navigation_item_explore">खोजें</string>
   <string name="preference_category_appearance">स्वरूप</string>

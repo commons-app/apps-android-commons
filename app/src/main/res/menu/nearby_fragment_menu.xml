@@ -12,6 +12,12 @@
     android:icon="@drawable/ic_list_white_24dp"
     />
 
+  <item android:id="@+id/list_item_show_in_explore"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:title="@string/show_in_explore"
+    />
+
   <item android:id="@+id/list_item_gpx"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"

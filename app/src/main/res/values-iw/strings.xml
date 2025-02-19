@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* A100Star
 * Ademo
 * Alefar
 * Amire80
@@ -27,7 +28,7 @@
   <string name="commons_website">אתר ויקישיתוף</string>
   <string name="exit_location_picker">יציאה מבורר המיקום</string>
   <string name="submit">שליחה</string>
-  <string name="add_another_description">הוספת יאור אחר</string>
+  <string name="add_another_description">הוספת תיאור אחר</string>
   <string name="add_new_contribution">הוספת תרומה חדשה</string>
   <string name="add_contribution_from_camera">הוספת תרומה ממצלמה</string>
   <string name="add_contribution_from_photos">הוספת תרומה מ־Photos</string>
@@ -38,7 +39,7 @@
   <string name="show_captions_description">תיאור</string>
   <string name="nearby_row_image">תמונה</string>
   <string name="nearby_all">הכול</string>
-  <string name="nearby_filter_toggle">להפעיל למעלה</string>
+  <string name="nearby_filter_toggle">הפעלה</string>
   <string name="nearby_filter_search">תצוגת חיפוש</string>
   <string name="nearby_filter_state">מצב המקום</string>
   <string name="appwidget_img">תמונת היום</string>
@@ -85,7 +86,7 @@
     <item quantity="many">מתקבל תוכן שיתופי. עיבוד התמונות עשוי לארוך זמן מה כתלות בגודל התמונות והמכשיר שלך</item>
     <item quantity="other">מתקבל תוכן שיתופי. עיבוד התמונות עשוי לארוך זמן מה כתלות בגודל התמונות והמכשיר שלך</item>
   </plurals>
-  <string name="navigation_item_explore">לחקור</string>
+  <string name="navigation_item_explore">סיור</string>
   <string name="preference_category_appearance">מראה</string>
   <string name="preference_category_general">כללי</string>
   <string name="preference_category_feedback">משוב</string>
@@ -149,7 +150,7 @@
   <string name="provider_modifications">שינויים</string>
   <string name="menu_upload_single">העלאה</string>
   <string name="categories_search_text_hint">חיפוש קטגוריות</string>
-  <string name="depicts_search_text_hint">חפשו פריטים שהמדיה שלך מציגה (הר, טאג\' מהאל, וכו\')</string>
+  <string name="depicts_search_text_hint">חפשו פריטים שהמדיה שלכם מציגה (הר, טאג\' מהאל, וכו\')</string>
   <string name="menu_save_categories">שמירה</string>
   <string name="menu_overflow_desc">תפריט גלישה</string>
   <string name="refresh_button">רענון</string>
@@ -311,7 +312,7 @@
   <string name="nearby_showing_pins_offline">האינטרנט אינו זמין. מוצגים רק מקומות שמורים.</string>
   <string name="upload_location_access_denied">הגישה למיקום נדחתה. נא להגדיר את המקום שלך ידנית כדי להשתמש ביכולת הזאת.</string>
   <string name="location_permission_rationale_nearby">נדרשת הרשאה כדי להציג רשימה של מקומות בסביבה</string>
-  <string name="location_permission_rationale_explore">נדרשת הרשאה להצגת רשימת התמונות בסביבתך</string>
+  <string name="location_permission_rationale_explore">נדרשת הרשאה כדי להציג רשימה של תמונות בסביבה</string>
   <string name="nearby_directions">כיוונים</string>
   <string name="nearby_wikidata">ויקינתונים</string>
   <string name="nearby_wikipedia">ויקיפדיה</string>
@@ -605,12 +606,12 @@
   <string name="place_state_exists">קיים</string>
   <string name="place_state_needs_photo">זקוק לתצלום</string>
   <string name="place_type">סוג המקום:</string>
-  <string name="nearby_search_hint">גשר, מוזאון, מלון, וכו\'.</string>
+  <string name="nearby_search_hint">גשר, מוזאון, מלון וכו\'.</string>
   <string name="you_must_reset_your_passsword">משהו השתבש בכניסה למערכת, עליך לאפס את הסיסמה שלך!</string>
   <string name="title_for_media">מדיה</string>
   <string name="title_for_child_classes">מחלקות יורשות</string>
   <string name="title_for_parent_classes">מחלקות מורישות</string>
-  <string name="upload_nearby_place_found_title">נמצא בקרבת מקום</string>
+  <string name="upload_nearby_place_found_title">נמצא מקום בסביבה</string>
   <string name="upload_nearby_place_found_description_plural">האם אלו תמונות של %1$s?</string>
   <string name="upload_nearby_place_found_description_singular">האם זאת תמונה של %1$s?</string>
   <string name="title_app_shortcut_bookmark">סימניות</string>
@@ -628,7 +629,7 @@
   <string name="ask_to_turn_location_on">להפעיל מיקום?</string>
   <string name="ask_to_turn_location_on_text">נא להפעיל את שירותי המיקום כדי שהיישום יוכל להציג את מיקומך הנוכחי</string>
   <string name="nearby_needs_location">פעולת \"בסביבה\" זקוקה לשירותי מיקומי פועלים כדי לעבוד כמו שצריך</string>
-  <string name="explore_map_needs_location">חקירת המפה דורשת הרשאות מיקום כדי להציג תמונות בסביבתך</string>
+  <string name="explore_map_needs_location">מפת \"סיור\" דורשת הרשאות מיקום כדי להציג תמונות בסביבתך</string>
   <string name="upload_map_location_access">יש להעניק הרשאת מיקום כדי להגדיר את המיקום אוטומטית.</string>
   <string name="use_location_from_similar_image">האם צילמת את שתי התמונות באותו המקום? האם ברצונך להשתמש בקו הרוחב וקו האורך של התמונה משמאל?</string>
   <string name="load_more">לטעון עוד</string>
@@ -846,9 +847,14 @@
   <string name="usages_on_other_wikis_heading">אתרי ויקי אחרים</string>
   <string name="bullet_point">•</string>
   <string name="file_usages_container_heading">שימושים בקובץ</string>
+  <string name="title_activity_single_web_view">SingleWebViewActivity</string>
   <string name="account">חשבון</string>
   <string name="vanish_account">העלמת חשבון</string>
   <string name="account_vanish_request_confirm_title">אזהרת העלמת חשבון</string>
+  <string name="account_vanish_request_confirm">היעלמות היא &lt;b&gt;מוצא אחרון&lt;/b&gt; וצריך &lt;b&gt;להשתמש בו רק כאשר אתם רוצים להפסיק לערוך לנצח&lt;/b&gt; וגם כדי להסתיר כמה שיותר מהאסוציאציות שלכם בעבר.&lt;br/&gt;&lt;br/&gt;מחיקת חשבון בויקישיתוף נעשית על ידי שינוי שם החשבון שלכם כך שאחרים לא יוכלו לזהות את התרומות שלכם בתהליך שנקרא חשבון היעלמות. &lt;b&gt;היעלמות אינה מבטיחה אנונימיות מוחלטת או הסרה של תרומות לפרויקטים&lt;/b&gt;.</string>
   <string name="caption">כותרת</string>
   <string name="caption_copied_to_clipboard">הכותרת הועתקה ללוח</string>
+  <string name="congratulations_all_pictures_in_this_album_have_been_either_uploaded_or_marked_as_not_for_upload">ברכותינו, כל התמונות באלבום הזה הועלו או שסומנו לא להעלאה.</string>
+  <string name="show_in_explore">בתצוגת סיור</string>
+  <string name="show_in_nearby">בתצוגת בסביבה</string>
 </resources>

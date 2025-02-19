@@ -821,4 +821,6 @@
   <string name="caption">Billedtekst</string>
   <string name="caption_copied_to_clipboard">Billedtekst kopieret til udklipsholder</string>
   <string name="congratulations_all_pictures_in_this_album_have_been_either_uploaded_or_marked_as_not_for_upload">Tillykke, alle billeder i dette album er enten blevet uploadet eller markeret som ikke til upload.</string>
+  <string name="show_in_explore">Vis i Udforsk</string>
+  <string name="show_in_nearby">Vis i I nærheden</string>
 </resources>
