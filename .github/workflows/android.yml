@@ -119,15 +119,15 @@ jobs:
         if: github.event_name == 'pull_request'
         uses: actions/github-script@v6
         with:
-         github-token: ${{ secrets.GITHUB_TOKEN }}
+         github-token: ${{ secrets.MY_GITHUB_TOKEN }}
          script: |
           try {
-            if (!process.env.GITHUB_TOKEN) {
+            if (!process.env.MY_GITHUB_TOKEN) {
               console.log('❌ GITHUB_TOKEN is not available. Please check repository secrets.');
               core.setFailed('GITHUB_TOKEN is missing.');
               return;
             } else {
-              console.log(`✅ GITHUB_TOKEN is present: ****${process.env.GITHUB_TOKEN.slice(-4)}`);
+              console.log(`✅ GITHUB_TOKEN is present: ****${process.env.MY_GITHUB_TOKEN.slice(-4)}`);
             }
 
             const { data: { artifacts } } = await github.rest.actions.listWorkflowRunArtifacts({
