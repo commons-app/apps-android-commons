@@ -106,7 +106,7 @@ jobs:
         with:
           name: prodDebugAPK
           path: app/build/outputs/apk/prod/debug/app-*.apk
-
+          
       - name: Store Workflow Run ID
         if: github.event_name == 'pull_request'
         run: echo "${{ github.run_id }}" > run_id.txt
