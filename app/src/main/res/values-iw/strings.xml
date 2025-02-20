@@ -150,7 +150,7 @@
   <string name="provider_modifications">שינויים</string>
   <string name="menu_upload_single">העלאה</string>
   <string name="categories_search_text_hint">חיפוש קטגוריות</string>
-  <string name="depicts_search_text_hint">חפשו פריטים שהמדיה שלכם מציגה (הר, טאג\' מהאל, וכו\')</string>
+  <string name="depicts_search_text_hint">נא לחפש פריטים שהמדיה שלך מציגה (הר, טאג\' מהאל וכו\')</string>
   <string name="menu_save_categories">שמירה</string>
   <string name="menu_overflow_desc">תפריט גלישה</string>
   <string name="refresh_button">רענון</string>
@@ -851,7 +851,7 @@
   <string name="account">חשבון</string>
   <string name="vanish_account">העלמת חשבון</string>
   <string name="account_vanish_request_confirm_title">אזהרת העלמת חשבון</string>
-  <string name="account_vanish_request_confirm">היעלמות היא &lt;b&gt;מוצא אחרון&lt;/b&gt; וצריך &lt;b&gt;להשתמש בו רק כאשר אתם רוצים להפסיק לערוך לנצח&lt;/b&gt; וגם כדי להסתיר כמה שיותר מהאסוציאציות שלכם בעבר.&lt;br/&gt;&lt;br/&gt;מחיקת חשבון בויקישיתוף נעשית על ידי שינוי שם החשבון שלכם כך שאחרים לא יוכלו לזהות את התרומות שלכם בתהליך שנקרא חשבון היעלמות. &lt;b&gt;היעלמות אינה מבטיחה אנונימיות מוחלטת או הסרה של תרומות לפרויקטים&lt;/b&gt;.</string>
+  <string name="account_vanish_request_confirm">היעלמות היא &lt;b&gt;מוצא אחרון&lt;/b&gt; וצריך להשתמש בה &lt;b&gt;רק כשברצונך להפסיק לערוך לתמיד&lt;/b&gt; וגם להסתיר את הקשרים הקודמים שלך במידת האפשר.&lt;br/&gt;&lt;br/&gt;מחיקת חשבון בוויקישיתוף נעשית על־ידי שינוי שם החשבון שלך כדי להסוות אותו מפני אחרים כדי שלא יוכלו לזהות את התרומות שלך בתהליך שנקרא העלמת חשבון. &lt;b&gt;העלמה לא מבטיחה אלמוניות מלאה או הסרת התרומות למיזמים&lt;/b&gt;.</string>
   <string name="caption">כותרת</string>
   <string name="caption_copied_to_clipboard">הכותרת הועתקה ללוח</string>
   <string name="congratulations_all_pictures_in_this_album_have_been_either_uploaded_or_marked_as_not_for_upload">ברכותינו, כל התמונות באלבום הזה הועלו או שסומנו לא להעלאה.</string>
