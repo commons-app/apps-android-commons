@@ -1,10 +1,10 @@
-name: Android CI Build
+name: Android CI
 
-on: [push, pull_request, workflow_dispatch]
+on: [push, pull_request, workflow_dispatch]  
 
-permissions: 
-  contents: write
-  actions: write  
+permissions:
+  contents: read
+  actions: read
 
 concurrency:
   group: build-${{ github.event.pull_request.number || github.ref }}
@@ -35,7 +35,6 @@ jobs:
           restore-keys: gradle-packages-${{ runner.os }}
 
       - name: Access test login credentials
-        if: github.event_name != 'pull_request' || github.repository == github.event.pull_request.head.repo.full_name
         run: |
           echo "TEST_USER_NAME=${{ secrets.TEST_USER_NAME }}" >> local.properties
           echo "TEST_USER_PASSWORD=${{ secrets.TEST_USER_PASSWORD }}" >> local.properties
