@@ -1,18 +1,10 @@
-name: Android CI
+name: Android CI Build
 
-on: [push, pull_request, pull_request_target, workflow_dispatch]
+on: [push, pull_request, workflow_dispatch]
 
 permissions: 
   contents: write
-  pull-requests: write
-  issues: write
-  actions: write
-  checks: write
-  discussions: write
-  packages: write
-  repository-projects: write
-  security-events: write
-  statuses: write
+  actions: write  
 
 concurrency:
   group: build-${{ github.event.pull_request.number || github.ref }}
@@ -25,9 +17,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-        with:
-          # Use base_ref for pull_request_target to avoid untrusted fork code
-          ref: ${{ github.event_name == 'pull_request_target' && github.base_ref || github.ref }}
 
       - name: Set up JDK
         uses: actions/setup-java@v3
@@ -46,14 +35,13 @@ jobs:
           restore-keys: gradle-packages-${{ runner.os }}
 
       - name: Access test login credentials
-        # Skip secrets for pull_request_target to avoid exposing them to fork code
-        if: github.event_name != 'pull_request_target'
+        if: github.event_name != 'pull_request' || github.repository == github.event.pull_request.head.repo.full_name
         run: |
           echo "TEST_USER_NAME=${{ secrets.TEST_USER_NAME }}" >> local.properties
           echo "TEST_USER_PASSWORD=${{ secrets.TEST_USER_PASSWORD }}" >> local.properties
 
       - name: AVD cache
-        if: github.event_name != 'pull_request' && github.event_name != 'pull_request_target'
+        if: github.event_name != 'pull_request'
         uses: actions/cache@v3
         id: avd-cache
         with:
@@ -63,7 +51,7 @@ jobs:
           key: avd-tablet-api-24
 
       - name: Create AVD and generate snapshot for caching
-        if: steps.avd-cache.outputs.cache-hit != 'true' && github.event_name != 'pull_request' && github.event_name != 'pull_request_target'
+        if: steps.avd-cache.outputs.cache-hit != 'true' && github.event_name != 'pull_request'
         uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: 24
@@ -73,7 +61,7 @@ jobs:
           script: echo "Generated AVD snapshot for caching."
 
       - name: Run Instrumentation tests
-        if: github.event_name != 'pull_request' && github.event_name != 'pull_request_target'
+        if: github.event_name != 'pull_request'
         uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: 24
@@ -88,15 +76,15 @@ jobs:
             ./gradlew connectedBetaDebugAndroidTest --stacktrace
 
       - name: Run Unit tests with unified coverage
-        if: github.event_name != 'pull_request' && github.event_name != 'pull_request_target'
+        if: github.event_name != 'pull_request'
         run: ./gradlew -Pcoverage testBetaDebugUnitTestUnifiedCoverage --stacktrace
 
       - name: Run Unit tests without unified coverage
-        if: github.event_name == 'pull_request' || github.event_name == 'pull_request_target'
+        if: github.event_name == 'pull_request'
         run: ./gradlew -Pcoverage testBetaDebugUnitTestCoverage --stacktrace
 
       - name: Upload Test Report to Codecov
-        if: github.event_name != 'pull_request' && github.event_name != 'pull_request_target'
+        if: github.event_name != 'pull_request'
         run: |
           curl -Os https://uploader.codecov.io/latest/linux/codecov
           chmod +x codecov
@@ -120,57 +108,13 @@ jobs:
           name: prodDebugAPK
           path: app/build/outputs/apk/prod/debug/app-*.apk
 
-      - name: Comment on PR with APK download links
-        if: github.event_name == 'pull_request_target'  # Only run for pull_request_target to ensure write permissions
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # GITHUB_TOKEN has write permissions in pull_request_target
-        uses: actions/github-script@v6
+      - name: Store Workflow Run ID
+        if: github.event_name == 'pull_request'
+        run: echo "${{ github.run_id }}" > run_id.txt
+
+      - name: Upload Run ID as Artifact
+        if: github.event_name == 'pull_request'
+        uses: actions/upload-artifact@v4
         with:
-          script: |
-            try {
-              const token = process.env.GH_TOKEN;
-              if (!token) {
-                throw new Error('GITHUB_TOKEN is not set.');
-              }
-
-              const { data: { artifacts } } = await github.rest.actions.listWorkflowRunArtifacts({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                run_id: context.runId
-              });
-
-              if (!artifacts || artifacts.length === 0) {
-                console.log('No artifacts found for this workflow run.');
-                return;
-              }
-
-              const betaArtifact = artifacts.find(artifact => artifact.name === "betaDebugAPK");
-              const prodArtifact = artifacts.find(artifact => artifact.name === "prodDebugAPK");
-
-              if (!betaArtifact || !prodArtifact) {
-                console.log('Could not find both Beta and Prod APK artifacts.');
-                console.log('Available artifacts:', artifacts.map(a => a.name).join(', '));
-                return;
-              }
-
-              const betaDownloadUrl = `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/suites/${context.runId}/artifacts/${betaArtifact.id}`;
-              const prodDownloadUrl = `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/suites/${context.runId}/artifacts/${prodArtifact.id}`;
-
-              const commentBody = `
-                📱 **APK for pull request is ready to see the changes** 📱  
-               - [Download Beta APK](${betaDownloadUrl})  
-               - [Download Prod APK](${prodDownloadUrl})
-              `;
-
-              await github.rest.issues.createComment({
-                issue_number: context.issue.number,
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                body: commentBody
-              });
-
-              console.log('Successfully posted comment with APK download links');
-            } catch (error) {
-              console.error('Error in PR comment creation:', error);
-              core.setFailed(`Workflow failed: ${error.message}`);
-            }
+          name: run-id
+          path: run_id.txt
