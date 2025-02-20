@@ -2352,7 +2352,9 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
 
         selectedPlace?.pic?.substringAfterLast("/")?.takeIf { it.isNotEmpty() }?.let { imageName ->
             Glide.with(binding!!.bottomSheetDetails.icon.context)
-                .load("https://commons.wikimedia.org/wiki/Special:Redirect/file/$imageName?width=30")
+                .clear(binding!!.bottomSheetDetails.icon)
+            Glide.with(binding!!.bottomSheetDetails.icon.context)
+                .load("https://commons.wikimedia.org/wiki/Special:Redirect/file/$imageName?width=25")
                 .placeholder(fr.free.nrw.commons.R.drawable.ic_refresh_24dp_nearby)
                 .error(selectedPlace!!.label.icon)
                 .into(binding!!.bottomSheetDetails.icon)
