@@ -4,6 +4,7 @@
 * Alexandr Efremov
 * Av6
 * Butko
+* Cabadeck
 * DDPAT
 * Deltaspace
 * Dirruw'o
@@ -177,6 +178,7 @@
   <string name="categories_search_text_hint">Выбор категорий</string>
   <string name="depicts_search_text_hint">Искать элементы, которые изображены на вашем изображении (гора, Тадж-Махал и т. д.)</string>
   <string name="menu_save_categories">Сохранить</string>
+  <string name="menu_overflow_desc">Дополнительное меню</string>
   <string name="refresh_button">Обновить</string>
   <string name="display_list_button">Список</string>
   <string name="contributions_subtitle_zero">(Загрузок пока нет)</string>
@@ -872,7 +874,11 @@
   <string name="file_usages_container_heading">Использование файла</string>
   <string name="title_activity_single_web_view">SingleWebViewActivity</string>
   <string name="account">Учётная запись</string>
+  <string name="vanish_account">Удалить учётную запись</string>
+  <string name="account_vanish_request_confirm_title">Предупреждение об удалении учётной записи</string>
   <string name="caption">Подпись</string>
   <string name="caption_copied_to_clipboard">Подпись скопирована в буфер обмена</string>
   <string name="congratulations_all_pictures_in_this_album_have_been_either_uploaded_or_marked_as_not_for_upload">Поздравляем, все фотографии в этом альбоме либо загружены, либо помечены как не предназначенные для загрузки.</string>
+  <string name="show_in_explore">Показать в Explore</string>
+  <string name="show_in_nearby">Показать в Nearby</string>
 </resources>
