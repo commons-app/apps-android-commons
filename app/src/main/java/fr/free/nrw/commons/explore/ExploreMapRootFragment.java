@@ -144,8 +144,8 @@ public class ExploreMapRootFragment extends CommonsDaggerSupportFragment impleme
      */
     @Override
     public Media getMediaAtPosition(int i) {
-        if (mapFragment != null && mapFragment.mediaList != null) {
-            return mapFragment.mediaList.get(i);
+        if (mapFragment != null && mapFragment.getMediaList() != null) {
+            return mapFragment.getMediaList().get(i);
         } else {
             return null;
         }
@@ -159,8 +159,8 @@ public class ExploreMapRootFragment extends CommonsDaggerSupportFragment impleme
      */
     @Override
     public int getTotalMediaCount() {
-        if (mapFragment != null && mapFragment.mediaList != null) {
-            return mapFragment.mediaList.size();
+        if (mapFragment != null && mapFragment.getMediaList() != null) {
+            return mapFragment.getMediaList().size();
         } else {
             return 0;
         }

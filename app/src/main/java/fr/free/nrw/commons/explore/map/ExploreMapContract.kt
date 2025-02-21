@@ -1,45 +1,43 @@
-package fr.free.nrw.commons.explore.map;
+package fr.free.nrw.commons.explore.map
 
-import android.content.Context;
-import fr.free.nrw.commons.BaseMarker;
-import fr.free.nrw.commons.kvstore.JsonKvStore;
-import fr.free.nrw.commons.location.LatLng;
-import fr.free.nrw.commons.location.LocationServiceManager;
-import java.util.List;
+import android.content.Context
+import fr.free.nrw.commons.BaseMarker
+import fr.free.nrw.commons.kvstore.JsonKvStore
+import fr.free.nrw.commons.location.LatLng
+import fr.free.nrw.commons.location.LocationServiceManager
 
-public class ExploreMapContract {
+interface ExploreMapContract {
 
     interface View {
-        boolean isNetworkConnectionEstablished();
-        void populatePlaces(LatLng curlatLng);
-        void askForLocationPermission();
-        void recenterMap(LatLng curLatLng);
-        void hideBottomDetailsSheet();
-        LatLng getMapCenter();
-        LatLng getMapFocus();
-        LatLng getLastMapFocus();
-        void addMarkersToMap(final List<BaseMarker> nearbyBaseMarkers);
-        void clearAllMarkers();
-        void addSearchThisAreaButtonAction();
-        void setSearchThisAreaButtonVisibility(boolean isVisible);
-        void setProgressBarVisibility(boolean isVisible);
-        boolean isDetailsBottomSheetVisible();
-        boolean isSearchThisAreaButtonVisible();
-        Context getContext();
-        LatLng getLastLocation();
-        void disableFABRecenter();
-        void enableFABRecenter();
-        void setFABRecenterAction(android.view.View.OnClickListener onClickListener);
-        boolean backButtonClicked();
+        fun isNetworkConnectionEstablished(): Boolean
+        fun populatePlaces(curLatLng: LatLng?)
+        fun askForLocationPermission()
+        fun recenterMap(curLatLng: LatLng?)
+        fun hideBottomDetailsSheet()
+        fun getMapCenter(): LatLng
+        fun getMapFocus(): LatLng
+        fun getLastMapFocus(): LatLng
+        fun addMarkersToMap(nearbyBaseMarkers: List<BaseMarker>)
+        fun clearAllMarkers()
+        fun addSearchThisAreaButtonAction()
+        fun setSearchThisAreaButtonVisibility(isVisible: Boolean)
+        fun setProgressBarVisibility(isVisible: Boolean)
+        fun isDetailsBottomSheetVisible(): Boolean
+        fun isSearchThisAreaButtonVisible(): Boolean
+        fun getContext(): Context
+        fun getLastLocation(): LatLng
+        fun disableFABRecenter()
+        fun enableFABRecenter()
+        fun setFABRecenterAction(onClickListener: android.view.View.OnClickListener)
+        fun backButtonClicked(): Boolean
     }
 
     interface UserActions {
-        void updateMap(LocationServiceManager.LocationChangeType locationChangeType);
-        void lockUnlockNearby(boolean isNearbyLocked);
-        void attachView(View view);
-        void detachView();
-        void setActionListeners(JsonKvStore applicationKvStore);
-        boolean backButtonClicked();
+        fun updateMap(locationChangeType: LocationServiceManager.LocationChangeType)
+        fun lockUnlockNearby(isNearbyLocked: Boolean)
+        fun attachView(view: View)
+        fun detachView()
+        fun setActionListeners(applicationKvStore: JsonKvStore)
+        fun backButtonClicked(): Boolean
     }
-
 }

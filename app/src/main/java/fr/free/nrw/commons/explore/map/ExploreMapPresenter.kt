@@ -1,152 +1,139 @@
-package fr.free.nrw.commons.explore.map;
+package fr.free.nrw.commons.explore.map
 
-import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED;
-import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.SEARCH_CUSTOM_AREA;
+import android.location.Location
+import android.view.View
+import fr.free.nrw.commons.BaseMarker
+import fr.free.nrw.commons.MapController
+import fr.free.nrw.commons.MapController.ExplorePlacesInfo
+import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao
+import fr.free.nrw.commons.explore.map.ExploreMapController.NearbyBaseMarkerThumbCallback
+import fr.free.nrw.commons.kvstore.JsonKvStore
+import fr.free.nrw.commons.location.LatLng
+import fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType
+import io.reactivex.Observable
+import java.lang.reflect.Proxy
+import timber.log.Timber
 
+class ExploreMapPresenter(
+    private val bookmarkLocationDao: BookmarkLocationsDao
+) : ExploreMapContract.UserActions, ExploreMapController.NearbyBaseMarkerThumbCallback {
 
-import android.location.Location;
-import android.view.View;
-import fr.free.nrw.commons.BaseMarker;
-import fr.free.nrw.commons.MapController;
-import fr.free.nrw.commons.MapController.ExplorePlacesInfo;
-import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao;
-import fr.free.nrw.commons.explore.map.ExploreMapController.NearbyBaseMarkerThumbCallback;
-import fr.free.nrw.commons.kvstore.JsonKvStore;
-import fr.free.nrw.commons.location.LatLng;
-import fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType;
-import io.reactivex.Observable;
-import java.lang.reflect.Proxy;
-import java.util.List;
-import timber.log.Timber;
+    private var isNearbyLocked: Boolean = false
+    private var currentLatLng: LatLng? = null
+    private var exploreMapController: ExploreMapController? = null
 
-public class ExploreMapPresenter
-    implements ExploreMapContract.UserActions,
-    NearbyBaseMarkerThumbCallback {
-
-    BookmarkLocationsDao bookmarkLocationDao;
-    private boolean isNearbyLocked;
-    private LatLng currentLatLng;
-    private ExploreMapController exploreMapController;
-
-    private static final ExploreMapContract.View DUMMY = (ExploreMapContract.View) Proxy
-        .newProxyInstance(
-            ExploreMapContract.View.class.getClassLoader(),
-            new Class[]{ExploreMapContract.View.class}, (proxy, method, args) -> {
-                if (method.getName().equals("onMyEvent")) {
-                    return null;
-                } else if (String.class == method.getReturnType()) {
-                    return "";
-                } else if (Integer.class == method.getReturnType()) {
-                    return Integer.valueOf(0);
-                } else if (int.class == method.getReturnType()) {
-                    return 0;
-                } else if (Boolean.class == method.getReturnType()) {
-                    return Boolean.FALSE;
-                } else if (boolean.class == method.getReturnType()) {
-                    return false;
-                } else {
-                    return null;
-                }
+    companion object {
+        private val DUMMY: ExploreMapContract.View = Proxy.newProxyInstance(
+            ExploreMapContract.View::class.java.classLoader,
+            arrayOf(ExploreMapContract.View::class.java)
+        ) { _, method, _ ->
+            when (method.returnType) {
+                String::class.java -> ""
+                Integer::class.java -> 0
+                Int::class.java -> 0
+                Boolean::class.java -> false
+                Boolean::class.javaPrimitiveType -> false
+                else -> null
             }
-        );
-    private ExploreMapContract.View exploreMapFragmentView = DUMMY;
-
-    public ExploreMapPresenter(BookmarkLocationsDao bookmarkLocationDao) {
-        this.bookmarkLocationDao = bookmarkLocationDao;
+        } as ExploreMapContract.View
     }
 
-    @Override
-    public void updateMap(LocationChangeType locationChangeType) {
-        Timber.d("Presenter updates map and list" + locationChangeType.toString());
+    private var exploreMapFragmentView: ExploreMapContract.View = DUMMY
+
+    override fun updateMap(locationChangeType: LocationChangeType) {
+        Timber.d("Presenter updates map and list $locationChangeType")
         if (isNearbyLocked) {
-            Timber.d("Nearby is locked, so updateMapAndList returns");
-            return;
+            Timber.d("Nearby is locked, so updateMapAndList returns")
+            return
         }
 
         if (!exploreMapFragmentView.isNetworkConnectionEstablished()) {
-            Timber.d("Network connection is not established");
-            return;
+            Timber.d("Network connection is not established")
+            return
         }
 
         /**
          * Significant changed - Markers and current location will be updated together
          * Slightly changed - Only current position marker will be updated
          */
-        if (locationChangeType.equals(LOCATION_SIGNIFICANTLY_CHANGED)) {
-            Timber.d("LOCATION_SIGNIFICANTLY_CHANGED");
-            lockUnlockNearby(true);
-            exploreMapFragmentView.setProgressBarVisibility(true);
-            exploreMapFragmentView.populatePlaces(exploreMapFragmentView.getMapCenter());
-        } else if (locationChangeType.equals(SEARCH_CUSTOM_AREA)) {
-            Timber.d("SEARCH_CUSTOM_AREA");
-            lockUnlockNearby(true);
-            exploreMapFragmentView.setProgressBarVisibility(true);
-            exploreMapFragmentView.populatePlaces(exploreMapFragmentView.getMapFocus());
-        } else { // Means location changed slightly, ie user is walking or driving.
-            Timber.d("Means location changed slightly");
+        when (locationChangeType) {
+            LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED -> {
+                Timber.d("LOCATION_SIGNIFICANTLY_CHANGED")
+                lockUnlockNearby(true)
+                exploreMapFragmentView.setProgressBarVisibility(true)
+                exploreMapFragmentView.populatePlaces(exploreMapFragmentView.getMapCenter())
+            }
+
+            LocationChangeType.SEARCH_CUSTOM_AREA -> {
+                Timber.d("SEARCH_CUSTOM_AREA")
+                lockUnlockNearby(true)
+                exploreMapFragmentView.setProgressBarVisibility(true)
+                exploreMapFragmentView.populatePlaces(exploreMapFragmentView.getMapFocus())
+            }
+
+            else -> {
+                Timber.d("Means location changed slightly")
+            }
         }
     }
 
     /**
-     * Nearby updates takes time, since they are network operations. During update time, we don't
-     * want to get any other calls from user. So locking nearby.
+     * Nearby updates take time since they are network operations. During update time, we don't
+     * want to get any other calls from the user. So locking nearby.
      *
      * @param isNearbyLocked true means lock, false means unlock
      */
-    @Override
-    public void lockUnlockNearby(boolean isNearbyLocked) {
-        this.isNearbyLocked = isNearbyLocked;
+    override fun lockUnlockNearby(isNearbyLocked: Boolean) {
+        this.isNearbyLocked = isNearbyLocked
         if (isNearbyLocked) {
-            exploreMapFragmentView.disableFABRecenter();
+            exploreMapFragmentView.disableFABRecenter()
         } else {
-            exploreMapFragmentView.enableFABRecenter();
+            exploreMapFragmentView.enableFABRecenter()
         }
     }
 
-    @Override
-    public void attachView(ExploreMapContract.View view) {
-        exploreMapFragmentView = view;
+    override fun attachView(view: ExploreMapContract.View) {
+        exploreMapFragmentView = view
     }
 
-    @Override
-    public void detachView() {
-        exploreMapFragmentView = DUMMY;
+    override fun detachView() {
+        exploreMapFragmentView = DUMMY
     }
 
     /**
      * Sets click listener of FAB
      */
-    @Override
-    public void setActionListeners(JsonKvStore applicationKvStore) {
-        exploreMapFragmentView.setFABRecenterAction(v -> {
-            exploreMapFragmentView.recenterMap(currentLatLng);
-        });
-
-    }
-
-    @Override
-    public boolean backButtonClicked() {
-        return exploreMapFragmentView.backButtonClicked();
-    }
-
-    public void onMapReady(ExploreMapController exploreMapController) {
-        this.exploreMapController = exploreMapController;
-        if (null != exploreMapFragmentView) {
-            exploreMapFragmentView.addSearchThisAreaButtonAction();
-            initializeMapOperations();
+    override fun setActionListeners(applicationKvStore: JsonKvStore) {
+        exploreMapFragmentView.setFABRecenterAction {
+            currentLatLng?.let { it1 -> exploreMapFragmentView.recenterMap(it1) }
         }
     }
 
-    public void initializeMapOperations() {
-        lockUnlockNearby(false);
-        updateMap(LOCATION_SIGNIFICANTLY_CHANGED);
+    override fun backButtonClicked(): Boolean {
+        return exploreMapFragmentView.backButtonClicked()
     }
 
-    public Observable<ExplorePlacesInfo> loadAttractionsFromLocation(LatLng currentLatLng,
-        LatLng searchLatLng, boolean checkingAroundCurrent) {
-        return Observable
-            .fromCallable(() -> exploreMapController
-                .loadAttractionsFromLocation(currentLatLng, searchLatLng, checkingAroundCurrent));
+    fun onMapReady(exploreMapController: ExploreMapController) {
+        this.exploreMapController = exploreMapController
+        exploreMapFragmentView.addSearchThisAreaButtonAction()
+        initializeMapOperations()
+    }
+
+    fun initializeMapOperations() {
+        lockUnlockNearby(false)
+        updateMap(LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED)
+    }
+
+    fun loadAttractionsFromLocation(
+        currentLatLng: LatLng,
+        searchLatLng: LatLng?,
+        checkingAroundCurrent: Boolean
+    ): Observable<ExplorePlacesInfo> {
+        return Observable.fromCallable {
+            exploreMapController?.loadAttractionsFromLocation(
+                currentLatLng, searchLatLng, checkingAroundCurrent
+            )
+        }
     }
 
     /**
@@ -155,47 +142,45 @@ public class ExploreMapPresenter
      *
      * @param explorePlacesInfo This variable has placeToCenter list information and distances.
      */
-    public void updateMapMarkers(
-        MapController.ExplorePlacesInfo explorePlacesInfo) {
+    fun updateMapMarkers(explorePlacesInfo: MapController.ExplorePlacesInfo) {
         if (explorePlacesInfo.mediaList != null) {
-            prepareNearbyBaseMarkers(explorePlacesInfo);
+            prepareNearbyBaseMarkers(explorePlacesInfo)
         } else {
-            lockUnlockNearby(false); // So that new location updates wont come
-            exploreMapFragmentView.setProgressBarVisibility(false);
+            lockUnlockNearby(false) // So that new location updates won't come
+            exploreMapFragmentView.setProgressBarVisibility(false)
         }
     }
 
-    void prepareNearbyBaseMarkers(MapController.ExplorePlacesInfo explorePlacesInfo) {
-        exploreMapController
-            .loadAttractionsFromLocationToBaseMarkerOptions(explorePlacesInfo.currentLatLng,
-                // Curlatlang will be used to calculate distances
-                explorePlacesInfo.explorePlaceList,
-                exploreMapFragmentView.getContext(),
-                this,
-                explorePlacesInfo);
+    private fun prepareNearbyBaseMarkers(explorePlacesInfo: MapController.ExplorePlacesInfo) {
+        ExploreMapController.loadAttractionsFromLocationToBaseMarkerOptions(
+            explorePlacesInfo.currentLatLng,
+            explorePlacesInfo.explorePlaceList,
+            exploreMapFragmentView.getContext(),
+            this,
+            explorePlacesInfo
+        )
     }
 
-    @Override
-    public void onNearbyBaseMarkerThumbsReady(List<BaseMarker> baseMarkers,
-        ExplorePlacesInfo explorePlacesInfo) {
-        if (null != exploreMapFragmentView) {
-            exploreMapFragmentView.addMarkersToMap(baseMarkers);
-            lockUnlockNearby(false); // So that new location updates wont come
-            exploreMapFragmentView.setProgressBarVisibility(false);
-        }
+    override fun onNearbyBaseMarkerThumbsReady(
+        baseMarkers: List<BaseMarker>,
+        explorePlacesInfo: ExplorePlacesInfo
+    ) {
+        exploreMapFragmentView.addMarkersToMap(baseMarkers)
+        lockUnlockNearby(false) // So that new location updates won't come
+        exploreMapFragmentView.setProgressBarVisibility(false)
     }
 
-    public View.OnClickListener onSearchThisAreaClicked() {
-        return v -> {
+    fun onSearchThisAreaClicked(): View.OnClickListener {
+        return View.OnClickListener {
             // Lock map operations during search this area operation
-            exploreMapFragmentView.setSearchThisAreaButtonVisibility(false);
+            exploreMapFragmentView.setSearchThisAreaButtonVisibility(false)
 
             if (searchCloseToCurrentLocation()) {
-                updateMap(LOCATION_SIGNIFICANTLY_CHANGED);
+                updateMap(LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED)
             } else {
-                updateMap(SEARCH_CUSTOM_AREA);
+                updateMap(LocationChangeType.SEARCH_CUSTOM_AREA)
             }
-        };
+        }
     }
 
     /**
@@ -204,24 +189,19 @@ public class ExploreMapPresenter
      *
      * @return Returns true if search this area button is used around our current location
      */
-    public boolean searchCloseToCurrentLocation() {
-        if (null == exploreMapFragmentView.getLastMapFocus()) {
-            return true;
+    fun searchCloseToCurrentLocation(): Boolean {
+        val lastMapFocus = exploreMapFragmentView.getLastMapFocus() ?: return true
+
+        val myLocation = Location("").apply {
+            latitude = lastMapFocus.latitude
+            longitude = lastMapFocus.longitude
         }
 
-        Location mylocation = new Location("");
-        Location dest_location = new Location("");
-        dest_location.setLatitude(exploreMapFragmentView.getMapFocus().getLatitude());
-        dest_location.setLongitude(exploreMapFragmentView.getMapFocus().getLongitude());
-        mylocation.setLatitude(exploreMapFragmentView.getLastMapFocus().getLatitude());
-        mylocation.setLongitude(exploreMapFragmentView.getLastMapFocus().getLongitude());
-        Float distance = mylocation.distanceTo(dest_location);
-
-        if (distance > 2000.0 * 3 / 4) {
-            return false;
-        } else {
-            return true;
+        val destLocation = Location("").apply {
+            latitude = exploreMapFragmentView.getMapFocus().latitude
+            longitude = exploreMapFragmentView.getMapFocus().longitude
         }
+
+        return myLocation.distanceTo(destLocation) <= 2000.0 * 3 / 4
     }
-
 }

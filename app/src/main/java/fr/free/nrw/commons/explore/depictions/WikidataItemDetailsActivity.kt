@@ -1,161 +1,159 @@
-package fr.free.nrw.commons.explore.depictions;
+package fr.free.nrw.commons.explore.depictions
 
-import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
-import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.FrameLayout;
-import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.viewpager.widget.ViewPager;
-import com.google.android.material.snackbar.Snackbar;
-import com.google.android.material.tabs.TabLayout;
-import fr.free.nrw.commons.Media;
-import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.Utils;
-import fr.free.nrw.commons.ViewPagerAdapter;
-import fr.free.nrw.commons.bookmarks.items.BookmarkItemsDao;
-import fr.free.nrw.commons.category.CategoryImagesCallback;
-import fr.free.nrw.commons.databinding.ActivityWikidataItemDetailsBinding;
-import fr.free.nrw.commons.explore.depictions.child.ChildDepictionsFragment;
-import fr.free.nrw.commons.explore.depictions.media.DepictedImagesFragment;
-import fr.free.nrw.commons.explore.depictions.parent.ParentDepictionsFragment;
-import fr.free.nrw.commons.media.MediaDetailPagerFragment;
-import fr.free.nrw.commons.theme.BaseActivity;
-import fr.free.nrw.commons.upload.structure.depictions.DepictModel;
-import fr.free.nrw.commons.upload.structure.depictions.DepictedItem;
-import fr.free.nrw.commons.wikidata.WikidataConstants;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.schedulers.Schedulers;
-import java.util.ArrayList;
-import java.util.List;
-import javax.inject.Inject;
+import android.content.Context
+import android.content.Intent
+import android.net.Uri
+import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
+import android.view.View
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import com.google.android.material.snackbar.Snackbar
+import fr.free.nrw.commons.Media
+import fr.free.nrw.commons.R
+import fr.free.nrw.commons.Utils
+import fr.free.nrw.commons.ViewPagerAdapter
+import fr.free.nrw.commons.bookmarks.items.BookmarkItemsDao
+import fr.free.nrw.commons.category.CategoryImagesCallback
+import fr.free.nrw.commons.databinding.ActivityWikidataItemDetailsBinding
+import fr.free.nrw.commons.explore.depictions.child.ChildDepictionsFragment
+import fr.free.nrw.commons.explore.depictions.media.DepictedImagesFragment
+import fr.free.nrw.commons.explore.depictions.parent.ParentDepictionsFragment
+import fr.free.nrw.commons.media.MediaDetailPagerFragment
+import fr.free.nrw.commons.theme.BaseActivity
+import fr.free.nrw.commons.upload.structure.depictions.DepictModel
+import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
+import fr.free.nrw.commons.wikidata.WikidataConstants
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
+import javax.inject.Inject
 
 /**
  * Activity to show depiction media, parent classes and child classes of depicted items in Explore
  */
-public class WikidataItemDetailsActivity extends BaseActivity implements MediaDetailPagerFragment.MediaDetailProvider,
-    CategoryImagesCallback {
-    private FragmentManager supportFragmentManager;
-    private DepictedImagesFragment depictionImagesListFragment;
-    private MediaDetailPagerFragment mediaDetailPagerFragment;
+class WikidataItemDetailsActivity : BaseActivity(),
+    MediaDetailPagerFragment.MediaDetailProvider, CategoryImagesCallback {
+
+    private lateinit var supportFragmentManager: FragmentManager
+    private lateinit var depictionImagesListFragment: DepictedImagesFragment
+    private var mediaDetailPagerFragment: MediaDetailPagerFragment? = null
 
     /**
      * Name of the depicted item
      * Ex: Rabbit
      */
-
-    @Inject BookmarkItemsDao bookmarkItemsDao;
-    private CompositeDisposable compositeDisposable;
     @Inject
-    DepictModel depictModel;
-    private String wikidataItemName;
-    private ActivityWikidataItemDetailsBinding binding;
+    lateinit var bookmarkItemsDao: BookmarkItemsDao
 
-    ViewPagerAdapter viewPagerAdapter;
-    private DepictedItem wikidataItem;
+    @Inject
+    lateinit var depictModel: DepictModel
+    private var wikidataItemName: String? = null
+    private lateinit var binding: ActivityWikidataItemDetailsBinding
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    private lateinit var viewPagerAdapter: ViewPagerAdapter
+    private var wikidataItem: DepictedItem? = null
 
-        binding = ActivityWikidataItemDetailsBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
-        compositeDisposable = new CompositeDisposable();
-        supportFragmentManager = getSupportFragmentManager();
-        viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
-        binding.viewPager.setAdapter(viewPagerAdapter);
-        binding.viewPager.setOffscreenPageLimit(2);
-        binding.tabLayout.setupWithViewPager(binding.viewPager);
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
 
-        final DepictedItem depictedItem = getIntent().getParcelableExtra(
-            WikidataConstants.BOOKMARKS_ITEMS);
-        wikidataItem = depictedItem;
-        setSupportActionBar(binding.toolbarBinding.toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        setTabs();
-        setPageTitle();
+        binding = ActivityWikidataItemDetailsBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        supportFragmentManager = getSupportFragmentManager()
+        viewPagerAdapter = ViewPagerAdapter(supportFragmentManager)
+        binding.viewPager.adapter = viewPagerAdapter
+        binding.viewPager.offscreenPageLimit = 2
+        binding.tabLayout.setupWithViewPager(binding.viewPager)
+
+        wikidataItem = intent.getParcelableExtra(WikidataConstants.BOOKMARKS_ITEMS)
+        setSupportActionBar(binding.toolbarBinding.toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+        setTabs()
+        setPageTitle()
     }
 
     /**
-     * Gets the passed wikidataItemName from the intents and displays it as the page title
+     * Gets the passed wikidataItemName from the intent and displays it as the page title
      */
-    private void setPageTitle() {
-        if (getIntent() != null && getIntent().getStringExtra("wikidataItemName") != null) {
-            setTitle(getIntent().getStringExtra("wikidataItemName"));
+    private fun setPageTitle() {
+        intent.getStringExtra("wikidataItemName")?.let {
+            title = it
         }
     }
 
     /**
-     * This method is called on success of API call for featured Images.
-     * The viewpager will notified that number of items have changed.
+     * This method is called on success of API call for featured images.
+     * The ViewPager will be notified that the number of items has changed.
      */
-    @Override
-    public void viewPagerNotifyDataSetChanged() {
-        if (mediaDetailPagerFragment !=null){
-            mediaDetailPagerFragment.notifyDataSetChanged();
-        }
+    override fun viewPagerNotifyDataSetChanged() {
+        mediaDetailPagerFragment?.notifyDataSetChanged()
     }
 
     /**
-     * This activity contains 3 tabs and a viewpager. This method is used to set the titles of tab,
-     * Set the fragments according to the tab selected in the viewPager.
+     * This activity contains 3 tabs and a ViewPager.
+     * This method is used to set the titles of tabs and the fragments according to the selected tab
      */
-    private void setTabs() {
-        List<Fragment> fragmentList = new ArrayList<>();
-        List<String> titleList = new ArrayList<>();
-        depictionImagesListFragment = new DepictedImagesFragment();
-        ChildDepictionsFragment childDepictionsFragment = new ChildDepictionsFragment();
-        ParentDepictionsFragment parentDepictionsFragment = new ParentDepictionsFragment();
-        wikidataItemName = getIntent().getStringExtra("wikidataItemName");
-        String entityId = getIntent().getStringExtra("entityId");
-        if (getIntent() != null && wikidataItemName != null) {
-            Bundle arguments = new Bundle();
-            arguments.putString("wikidataItemName", wikidataItemName);
-            arguments.putString("entityId", entityId);
-            depictionImagesListFragment.setArguments(arguments);
-            parentDepictionsFragment.setArguments(arguments);
-            childDepictionsFragment.setArguments(arguments);
+    private fun setTabs() {
+        val fragmentList = mutableListOf<Fragment>()
+        val titleList = mutableListOf<String>()
+
+        depictionImagesListFragment = DepictedImagesFragment()
+        val childDepictionsFragment = ChildDepictionsFragment()
+        val parentDepictionsFragment = ParentDepictionsFragment()
+
+        wikidataItemName = intent.getStringExtra("wikidataItemName")
+        val entityId = intent.getStringExtra("entityId")
+
+        if (!wikidataItemName.isNullOrEmpty()) {
+            val arguments = Bundle().apply {
+                putString("wikidataItemName", wikidataItemName)
+                putString("entityId", entityId)
+            }
+            depictionImagesListFragment.arguments = arguments
+            parentDepictionsFragment.arguments = arguments
+            childDepictionsFragment.arguments = arguments
         }
-        fragmentList.add(depictionImagesListFragment);
-        titleList.add(getResources().getString(R.string.title_for_media));
-        fragmentList.add(childDepictionsFragment);
-        titleList.add(getResources().getString(R.string.title_for_child_classes));
-        fragmentList.add(parentDepictionsFragment);
-        titleList.add(getResources().getString(R.string.title_for_parent_classes));
-        viewPagerAdapter.setTabData(fragmentList, titleList);
-        binding.viewPager.setOffscreenPageLimit(2);
-        viewPagerAdapter.notifyDataSetChanged();
 
+        fragmentList.apply {
+            add(depictionImagesListFragment)
+            add(childDepictionsFragment)
+            add(parentDepictionsFragment)
+        }
+
+        titleList.apply {
+            add(getString(R.string.title_for_media))
+            add(getString(R.string.title_for_child_classes))
+            add(getString(R.string.title_for_parent_classes))
+        }
+
+        viewPagerAdapter.setTabData(fragmentList, titleList)
+        binding.viewPager.offscreenPageLimit = 2
+        viewPagerAdapter.notifyDataSetChanged()
     }
-
 
     /**
      * Shows media detail fragment when user clicks on any image in the list
      */
-    @Override
-    public void onMediaClicked(int position) {
-        binding.tabLayout.setVisibility(View.GONE);
-        binding.viewPager.setVisibility(View.GONE);
-        binding.mediaContainer.setVisibility(View.VISIBLE);
-        if (mediaDetailPagerFragment == null || !mediaDetailPagerFragment.isVisible()) {
-            // set isFeaturedImage true for featured images, to include author field on media detail
-            mediaDetailPagerFragment = MediaDetailPagerFragment.newInstance(false, true);
-            FragmentManager supportFragmentManager = getSupportFragmentManager();
-            supportFragmentManager
-                    .beginTransaction()
-                    .replace(R.id.mediaContainer, mediaDetailPagerFragment)
-                    .addToBackStack(null)
-                    .commit();
-            supportFragmentManager.executePendingTransactions();
+    override fun onMediaClicked(position: Int) {
+        binding.apply {
+            tabLayout.visibility = View.GONE
+            viewPager.visibility = View.GONE
+            mediaContainer.visibility = View.VISIBLE
         }
-        mediaDetailPagerFragment.showImage(position);
+
+        if (mediaDetailPagerFragment == null || mediaDetailPagerFragment?.isVisible == false) {
+            mediaDetailPagerFragment = MediaDetailPagerFragment.newInstance(false, true)
+            supportFragmentManager = getSupportFragmentManager()
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.mediaContainer, mediaDetailPagerFragment!!)
+                .addToBackStack(null)
+                .commit()
+            supportFragmentManager.executePendingTransactions()
+        }
+
+        mediaDetailPagerFragment?.showImage(position)
     }
 
     /**
@@ -164,23 +162,23 @@ public class WikidataItemDetailsActivity extends BaseActivity implements MediaDe
      *          current index of viewPager.
      * @return Media Object
      */
-    @Override
-    public Media getMediaAtPosition(int i) {
-        return depictionImagesListFragment.getMediaAtPosition(i);
+    override fun getMediaAtPosition(i: Int): Media? {
+        return depictionImagesListFragment.getMediaAtPosition(i)
     }
 
     /**
      * This method is called on backPressed of anyFragment in the activity.
      * If condition is called when mediaDetailFragment is opened.
      */
-    @Override
-    public void onBackPressed() {
-        if (supportFragmentManager.getBackStackEntryCount() == 1){
-            binding.tabLayout.setVisibility(View.VISIBLE);
-            binding.viewPager.setVisibility(View.VISIBLE);
-            binding.mediaContainer.setVisibility(View.GONE);
+    override fun onBackPressed() {
+        if (supportFragmentManager.backStackEntryCount == 1) {
+            binding.apply {
+                tabLayout.visibility = View.VISIBLE
+                viewPager.visibility = View.VISIBLE
+                mediaContainer.visibility = View.GONE
+            }
         }
-        super.onBackPressed();
+        super.onBackPressed()
     }
 
     /**
@@ -188,14 +186,12 @@ public class WikidataItemDetailsActivity extends BaseActivity implements MediaDe
      * The viewpager will contain same number of media items as that of media elements in adapter.
      * @return Total Media count in the adapter
      */
-    @Override
-    public int getTotalMediaCount() {
-        return depictionImagesListFragment.getTotalMediaCount();
+    override fun getTotalMediaCount(): Int {
+        return depictionImagesListFragment.getTotalMediaCount()
     }
 
-    @Override
-    public Integer getContributionStateAt(int position) {
-        return null;
+    override fun getContributionStateAt(position: Int): Int? {
+        return null
     }
 
     /**
@@ -203,107 +199,105 @@ public class WikidataItemDetailsActivity extends BaseActivity implements MediaDe
      *
      * @param index item position that has been nominated
      */
-    @Override
-    public void refreshNominatedMedia(int index) {
-        if (getSupportFragmentManager().getBackStackEntryCount() == 1) {
-            onBackPressed();
-            onMediaClicked(index);
+    override fun refreshNominatedMedia(index: Int) {
+        if (supportFragmentManager.backStackEntryCount == 1) {
+            onBackPressed()
+            onMediaClicked(index)
+        }
+    }
+
+    companion object {
+        /**
+         * Consumers should be simply using this method to use this activity.
+         *
+         * @param context a Context of the application package implementing this class.
+         * @param depictedItem Name of the depicts for displaying its details
+         */
+        fun startYourself(context: Context, depictedItem: DepictedItem) {
+            val intent = Intent(context, WikidataItemDetailsActivity::class.java).apply {
+                putExtra("wikidataItemName", depictedItem.name)
+                putExtra("entityId", depictedItem.id)
+                putExtra(WikidataConstants.BOOKMARKS_ITEMS, depictedItem)
+            }
+            context.startActivity(intent)
         }
     }
 
     /**
-     * Consumers should be simply using this method to use this activity.
-     *
-     * @param context      A Context of the application package implementing this class.
-     * @param depictedItem Name of the depicts for displaying its details
+     * Inflates the menu
      */
-    public static void startYourself(Context context, DepictedItem depictedItem) {
-        Intent intent = new Intent(context, WikidataItemDetailsActivity.class);
-        intent.putExtra("wikidataItemName", depictedItem.getName());
-        intent.putExtra("entityId", depictedItem.getId());
-        intent.putExtra(WikidataConstants.BOOKMARKS_ITEMS, depictedItem);
-        context.startActivity(intent);
-    }
-
-    /**
-     * This function inflates the menu
-     */
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater menuInflater=getMenuInflater();
-        menuInflater.inflate(R.menu.menu_wikidata_item,menu);
-
-        updateBookmarkState(menu.findItem(R.id.menu_bookmark_current_item));
-
-        return super.onCreateOptionsMenu(menu);
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.menu_wikidata_item, menu)
+        updateBookmarkState(menu.findItem(R.id.menu_bookmark_current_item))
+        return super.onCreateOptionsMenu(menu)
     }
 
     /**
      * This method handles the logic on item select in toolbar menu
      * Currently only 1 choice is available to open Wikidata item details page in browser
      */
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.browser_actions_menu_items -> {
+                val entityId = intent.getStringExtra("entityId")
+                val uri = Uri.parse("https://www.wikidata.org/wiki/$entityId")
+                Utils.handleWebUrl(this, uri)
+                return true
+            }
+            R.id.menu_bookmark_current_item -> {
+                val entityId = intent.getStringExtra("entityId")
 
-        switch (item.getItemId()){
-            case R.id.browser_actions_menu_items:
-                String entityId=getIntent().getStringExtra("entityId");
-                Uri uri = Uri.parse("https://www.wikidata.org/wiki/" + entityId);
-                Utils.handleWebUrl(this, uri);
-                return true;
-            case R.id.menu_bookmark_current_item:
-
-                if(getIntent().getStringExtra("fragment") != null) {
-                    compositeDisposable.add(depictModel.getDepictions(
-                        getIntent().getStringExtra("entityId")
-                    ).subscribeOn(Schedulers.io())
-                     .observeOn(AndroidSchedulers.mainThread())
-                     .subscribe(depictedItems -> {
-                         final boolean bookmarkExists = bookmarkItemsDao.updateBookmarkItem(
-                             depictedItems.get(0));
-                         final Snackbar snackbar
-                             = bookmarkExists ? Snackbar.make(findViewById(R.id.toolbar_layout),
-                             R.string.add_bookmark, Snackbar.LENGTH_LONG)
-                             : Snackbar.make(findViewById(R.id.toolbar_layout),
-                                 R.string.remove_bookmark,
-                                 Snackbar.LENGTH_LONG);
-
-                         snackbar.show();
-                         updateBookmarkState(item);
-                     }));
-
+                if (intent.getStringExtra("fragment") != null) {
+                    compositeDisposable.add(
+                        depictModel.getDepictions(entityId!!)
+                            .subscribeOn(Schedulers.io())
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribe { depictedItems ->
+                                val bookmarkExists = bookmarkItemsDao
+                                    .updateBookmarkItem(depictedItems[0])
+                                val snackbarText = if (bookmarkExists)
+                                    R.string.add_bookmark
+                                else
+                                    R.string.remove_bookmark
+                                Snackbar.make(
+                                    findViewById(R.id.toolbar_layout),
+                                    snackbarText,
+                                    Snackbar.LENGTH_LONG
+                                ).show()
+                                updateBookmarkState(item)
+                            }
+                    )
                 } else {
-                    final boolean bookmarkExists
-                        = bookmarkItemsDao.updateBookmarkItem(wikidataItem);
-                    final Snackbar snackbar
-                        = bookmarkExists ? Snackbar.make(findViewById(R.id.toolbar_layout),
-                        R.string.add_bookmark, Snackbar.LENGTH_LONG)
-                        : Snackbar.make(findViewById(R.id.toolbar_layout), R.string.remove_bookmark,
-                            Snackbar.LENGTH_LONG);
-
-                    snackbar.show();
-                    updateBookmarkState(item);
+                    val bookmarkExists = bookmarkItemsDao.updateBookmarkItem(wikidataItem!!)
+                    val snackbarText = if (bookmarkExists)
+                        R.string.add_bookmark
+                    else
+                        R.string.remove_bookmark
+                    Snackbar.make(
+                        findViewById(R.id.toolbar_layout),
+                        snackbarText,
+                        Snackbar.LENGTH_LONG
+                    ).show()
+                    updateBookmarkState(item)
                 }
-                return true;
-            case  android.R.id.home:
-                onBackPressed();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
+                return true
+            }
+            android.R.id.home -> {
+                onBackPressed()
+                return true
+            }
+            else -> return super.onOptionsItemSelected(item)
         }
     }
 
-    private void updateBookmarkState(final MenuItem item) {
-        final boolean isBookmarked;
-        if(getIntent().getStringExtra("fragment") != null) {
-            isBookmarked
-                = bookmarkItemsDao.findBookmarkItem(getIntent().getStringExtra("entityId"));
-        } else {
-            isBookmarked = bookmarkItemsDao.findBookmarkItem(wikidataItem.getId());
-        }
-        final int icon
-            = isBookmarked ? R.drawable.menu_ic_round_star_filled_24px
-            : R.drawable.menu_ic_round_star_border_24px;
-        item.setIcon(icon);
+    private fun updateBookmarkState(item: MenuItem) {
+        val isBookmarked = bookmarkItemsDao.findBookmarkItem(
+            intent.getStringExtra("entityId") ?: wikidataItem?.id
+        )
+        val icon = if (isBookmarked)
+            R.drawable.menu_ic_round_star_filled_24px
+        else
+            R.drawable.menu_ic_round_star_border_24px
+        item.setIcon(icon)
     }
 }
