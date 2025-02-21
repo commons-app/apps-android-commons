@@ -697,12 +697,12 @@ class ContributionsFragment
         }
     }
 
-    override fun onLocationChangedSignificantly(latLng: LatLng) {
+    override fun onLocationChangedSignificantly(latLng: LatLng?) {
         // Will be called if location changed more than 1000 meter
         updateClosestNearbyCardViewInfo()
     }
 
-    override fun onLocationChangedSlightly(latLng: LatLng) {
+    override fun onLocationChangedSlightly(latLng: LatLng?) {
         /* Update closest nearby notification card onLocationChangedSlightly
          */
         try {
@@ -712,7 +712,7 @@ class ContributionsFragment
         }
     }
 
-    override fun onLocationChangedMedium(latLng: LatLng) {
+    override fun onLocationChangedMedium(latLng: LatLng?) {
         // Update closest nearby card view if location changed more than 500 meters
         updateClosestNearbyCardViewInfo()
     }
