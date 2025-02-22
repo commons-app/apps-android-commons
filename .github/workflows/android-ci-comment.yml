@@ -1,0 +1,84 @@
+name: Android CI Comment
+
+on: [pull_request_target]
+
+permissions:
+  issues: write
+
+jobs:
+  comment:
+    name: Comment on PR with APK links
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout base branch
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.base_ref }} 
+
+      - name: Download Run ID Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: run-id
+
+      - name: Read Run ID
+        id: read-run-id
+        run: echo "RUN_ID=$(cat run_id.txt)" >> $GITHUB_ENV
+
+      - name: Comment on PR with APK download links
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
+        uses: actions/github-script@v6
+        with:
+          script: |
+            try {
+              const token = process.env.GH_TOKEN;
+              if (!token) {
+                throw new Error('GITHUB_TOKEN is not set.');
+              }
+
+              const runId = "${{ env.RUN_ID }}";
+              if (!runId) {
+                throw new Error('Run ID not found.');
+              }
+
+              const { data: { artifacts } } = await github.rest.actions.listWorkflowRunArtifacts({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                run_id: runId
+              });
+
+              if (!artifacts || artifacts.length === 0) {
+                console.log('No artifacts found for this workflow run.');
+                return;
+              }
+
+              const betaArtifact = artifacts.find(artifact => artifact.name === "betaDebugAPK");
+              const prodArtifact = artifacts.find(artifact => artifact.name === "prodDebugAPK");
+
+              if (!betaArtifact || !prodArtifact) {
+                console.log('Could not find both Beta and Prod APK artifacts.');
+                console.log('Available artifacts:', artifacts.map(a => a.name).join(', '));
+                return;
+              }
+
+              const betaDownloadUrl = `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/suites/${runId}/artifacts/${betaArtifact.id}`;
+              const prodDownloadUrl = `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/suites/${runId}/artifacts/${prodArtifact.id}`;
+
+              const commentBody = `
+                📱 **APK for pull request is ready to see the changes** 📱  
+               - [Download Beta APK](${betaDownloadUrl})  
+               - [Download Prod APK](${prodDownloadUrl})
+              `;
+
+              await github.rest.issues.createComment({
+                issue_number: context.issue.number,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                body: commentBody
+              });
+
+              console.log('Successfully posted comment with APK download links');
+            } catch (error) {
+              console.error('Error in PR comment creation:', error);
+              core.setFailed(`Workflow failed: ${error.message}`);
+            }
