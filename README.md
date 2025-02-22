@@ -7,6 +7,8 @@
 [![Bug Issues](https://img.shields.io/github/issues-search?label=%22bug%22&query=repo%3Acommons-app%2Fapps-android-commons%20is%3Aissue%20is%3Aopen%20label%3A%22bug%22)](https://github.com/commons-app/apps-android-commons/issues?q=is%3Aissue+is%3Aopen+label%3A%22bug%22)
 [![Enhancement Issues](https://img.shields.io/github/issues-search?label=%22enhancement%22&query=repo%3Acommons-app%2Fapps-android-commons%20is%3Aissue%20is%3Aopen%20label%3A%22enhancement%22)](https://github.com/commons-app/apps-android-commons/issues?q=is%3Aissue+is%3Aopen+label%3A%22enhancement%22)
 [![Open Issues](https://img.shields.io/github/issues/commons-app/apps-android-commons)](https://github.com/commons-app/apps-android-commons/issues)
+[![Assigned Issues](https://img.shields.io/github/issues-search?label=%22Assigned%20Issues%22&query=repo%3Acommons-app%2Fapps-android-commons%20is%3Aissue%20is%3Aopen%20assignee%3A%2A)](https://github.com/commons-app/apps-android-commons/issues?q=is%3Aissue+is%3Aopen+assignee%3A%2A)
+[![Unassigned Issues](https://img.shields.io/github/issues-search?label=%22Unassigned%20Issues%22&query=repo%3Acommons-app%2Fapps-android-commons%20is%3Aissue%20is%3Aopen%20no%3Aassignee)](https://github.com/commons-app/apps-android-commons/issues?q=is%3Aissue+is%3Aopen+no%3Aassignee)
 
 The Wikimedia Commons Android app allows users to upload pictures from their Android phone/tablet to Wikimedia Commons. Download the app [here][1], or view our [website][2].
 
