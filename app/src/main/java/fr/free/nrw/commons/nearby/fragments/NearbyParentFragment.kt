@@ -1831,21 +1831,21 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(), NearbyParentFragmen
         presenter!!.updateMapAndList(locationChangeType)
     }
 
-    override fun onLocationChangedSignificantly(latLng: LatLng) {
+    override fun onLocationChangedSignificantly(latLng: LatLng?) {
         Timber.d("Location significantly changed")
         if (latLng != null) {
             handleLocationUpdate(latLng, LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED)
         }
     }
 
-    override fun onLocationChangedSlightly(latLng: LatLng) {
+    override fun onLocationChangedSlightly(latLng: LatLng?) {
         Timber.d("Location slightly changed")
         if (latLng != null) { //If the map has never ever shown the current location, lets do it know
             handleLocationUpdate(latLng, LocationChangeType.LOCATION_SLIGHTLY_CHANGED)
         }
     }
 
-    override fun onLocationChangedMedium(latLng: LatLng) {
+    override fun onLocationChangedMedium(latLng: LatLng?) {
         Timber.d("Location changed medium")
         if (latLng != null) { //If the map has never ever shown the current location, lets do it know
             handleLocationUpdate(latLng, LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED)
