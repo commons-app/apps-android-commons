@@ -7,6 +7,8 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.view.animation.AnimationUtils
+import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.work.ExistingWorkPolicy
@@ -16,6 +18,7 @@ import fr.free.nrw.commons.WelcomeActivity
 import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.bookmarks.BookmarkFragment
 import fr.free.nrw.commons.contributions.ContributionsFragment.Companion.newInstance
+import fr.free.nrw.commons.databinding.FragmentContributionsListBinding
 import fr.free.nrw.commons.databinding.MainBinding
 import fr.free.nrw.commons.explore.ExploreFragment
 import fr.free.nrw.commons.kvstore.JsonKvStore
@@ -31,6 +34,7 @@ import fr.free.nrw.commons.nearby.fragments.NearbyParentFragment
 import fr.free.nrw.commons.nearby.fragments.NearbyParentFragment.NearbyParentFragmentInstanceReadyCallback
 import fr.free.nrw.commons.notification.NotificationActivity.Companion.startYourself
 import fr.free.nrw.commons.notification.NotificationController
+import fr.free.nrw.commons.profile.ProfileActivity
 import fr.free.nrw.commons.quiz.QuizChecker
 import fr.free.nrw.commons.settings.SettingsFragment
 import fr.free.nrw.commons.theme.BaseActivity
@@ -39,8 +43,10 @@ import fr.free.nrw.commons.upload.worker.WorkRequestHelper.Companion.makeOneTime
 import fr.free.nrw.commons.utils.ViewUtilWrapper
 import io.reactivex.Completable
 import io.reactivex.schedulers.Schedulers
+import org.apache.commons.codec.binary.StringUtils
 import timber.log.Timber
 import java.util.Calendar
+import java.util.Objects
 import javax.inject.Inject
 import javax.inject.Named
 
@@ -57,6 +63,12 @@ class MainActivity : BaseActivity(), FragmentManager.OnBackStackChangedListener 
     @JvmField
     @Inject
     var contributionDao: ContributionDao? = null
+
+    @Inject
+    lateinit var contributionsListPresenter: ContributionsListPresenter
+
+    @Inject
+    lateinit var dataSource: ContributionsRemoteDataSource
 
     private var contributionsFragment: ContributionsFragment? = null
     private var nearbyParentFragment: NearbyParentFragment? = null
@@ -96,6 +108,9 @@ class MainActivity : BaseActivity(), FragmentManager.OnBackStackChangedListener 
 
     var tabLayout: NavTabLayout? = null
 
+    private var refresh: FragmentContributionsListBinding? = null
+
+    private var userName: String? = null
 
     override fun onSupportNavigateUp(): Boolean {
         if (activeFragment == ActiveFragment.CONTRIBUTIONS) {
@@ -149,6 +164,14 @@ after opening the app.
                     title = getString(R.string.contributions_fragment)
                     loadFragment(newInstance(), false)
                 }
+            }
+            refresh = FragmentContributionsListBinding.inflate(getLayoutInflater());
+            if (getIntent().getExtras() != null) {
+                userName = getIntent().getExtras()?.getString(ProfileActivity.KEY_USERNAME);
+            }
+
+            if (userName.isNullOrEmpty()) {
+                userName = sessionManager?.userName
             }
             setUpPager()
             /**
@@ -455,9 +478,43 @@ after opening the app.
                 return true
             }
 
+            R.id.menu_refresh-> {
+                return true
+            }
             else -> return super.onOptionsItemSelected(item)
         }
     }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        val inflater = menuInflater
+        inflater.inflate(R.menu.contribution_activity_notification_menu, menu)
+
+        val refreshItem = menu.findItem(R.id.menu_refresh)
+        refreshItem?.actionView?.let { actionView ->
+            val refreshIcon = actionView.findViewById<ImageView>(R.id.refresh_icon)
+            refreshIcon?.setOnClickListener { v ->
+                v.clearAnimation()
+                val rotateAnimation = AnimationUtils.loadAnimation(this, R.anim.rotate)
+                v.startAnimation(rotateAnimation)
+
+                // Initialize userName if it's null
+                val localUserName = userName ?: sessionManager?.userName
+
+                if (sessionManager?.userName == localUserName) {
+                    refresh?.swipeRefreshLayout?.let { swipeRefresh ->
+                        swipeRefresh.isRefreshing = true
+                        swipeRefresh.isEnabled = true
+                        contributionsListPresenter?.refreshList(swipeRefresh)
+                    }
+                } else {
+                    refresh?.swipeRefreshLayout?.isEnabled = false
+                }
+            }
+        }
+
+        return true
+    }
+
 
     fun centerMapToPlace(place: Place?) {
         setSelectedItemId(NavTab.NEARBY.code())
@@ -516,6 +573,23 @@ after opening the app.
         }
 
         retryAllFailedUploads()
+        //check for new contributions
+        // Initialize userName if it's null
+        if (userName == null) {
+            userName = sessionManager?.userName;
+        }
+
+        if (Objects.equals(sessionManager?.userName, userName)) {
+            if (refresh != null && refresh!!.swipeRefreshLayout != null) {
+                refresh!!.swipeRefreshLayout.setRefreshing(true);
+                refresh!!.swipeRefreshLayout.setEnabled(true);
+                contributionsListPresenter?.refreshList(refresh!!.swipeRefreshLayout);
+            }
+        } else {
+            if (refresh != null && refresh!!.swipeRefreshLayout != null) {
+                refresh!!.swipeRefreshLayout.setEnabled(false);
+            }
+        }
     }
 
     override fun onDestroy() {
