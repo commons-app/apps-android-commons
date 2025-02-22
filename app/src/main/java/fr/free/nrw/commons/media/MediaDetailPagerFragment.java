@@ -623,9 +623,9 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
                 binding.mediaDetailsPager.postDelayed(() -> getActivity().invalidateOptionsMenu(), 5);
             }
             if (isFromFeaturedRootFragment) {
-                return MediaDetailFragment.forMedia(position+i, editable, isFeaturedImage, isWikipediaButtonDisplayed);
+                return MediaDetailFragment.forMedia(position+i, editable, isFeaturedImage, isWikipediaButtonDisplayed, MediaDetailPagerFragment.this);
             } else {
-                return MediaDetailFragment.forMedia(i, editable, isFeaturedImage, isWikipediaButtonDisplayed);
+                return MediaDetailFragment.forMedia(i, editable, isFeaturedImage, isWikipediaButtonDisplayed, MediaDetailPagerFragment.this);
             }
         }
 
