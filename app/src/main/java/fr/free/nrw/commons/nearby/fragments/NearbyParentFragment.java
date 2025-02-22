@@ -1699,7 +1699,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     }
 
     @Override
-    public void onLocationChangedSignificantly(final LatLng latLng) {
+    public void onLocationChangedSignificantly(@Nullable final LatLng latLng) {
         Timber.d("Location significantly changed");
         if (latLng != null) {
             handleLocationUpdate(latLng, LOCATION_SIGNIFICANTLY_CHANGED);
@@ -1707,7 +1707,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     }
 
     @Override
-    public void onLocationChangedSlightly(final LatLng latLng) {
+    public void onLocationChangedSlightly(@Nullable final LatLng latLng) {
         Timber.d("Location slightly changed");
         if (latLng != null) {//If the map has never ever shown the current location, lets do it know
             handleLocationUpdate(latLng, LOCATION_SLIGHTLY_CHANGED);
@@ -1715,7 +1715,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     }
 
     @Override
-    public void onLocationChangedMedium(final LatLng latLng) {
+    public void onLocationChangedMedium(@Nullable final LatLng latLng) {
         Timber.d("Location changed medium");
         if (latLng != null) {//If the map has never ever shown the current location, lets do it know
             handleLocationUpdate(latLng, LOCATION_SIGNIFICANTLY_CHANGED);
