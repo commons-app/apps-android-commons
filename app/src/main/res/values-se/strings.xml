@@ -90,7 +90,7 @@
   <string name="depicts_search_text_hint">Oza merkošiid maid du media govahallá (várri, Taj Mahal, jná.)</string>
   <string name="menu_save_categories">Vurke</string>
   <string name="refresh_button">Ođasmahte</string>
-  <string name="display_list_button">Liste</string>
+  <string name="display_list_button">Listu</string>
   <string name="contributions_subtitle_zero">Eai vuos bajásluđemat)</string>
   <string name="categories_not_found">Ii oktage kategoriija heiven oktii %1$s:ain</string>
   <string name="depictions_not_found">Ii oktage Wikidata mearkkuš heiven oktii %1$s:ain</string>
@@ -211,7 +211,7 @@
   <string name="delete_search_dialog">Áiggutgo don duođaid dán ohcama sihkkut?</string>
   <string name="delete">Sihko</string>
   <string name="statistics">Statistihkka</string>
-  <string name="level" fuzzy="true">Dássi</string>
+  <string name="level">Dássi %d</string>
   <string name="notifications">Almmuhusat</string>
   <string name="list_sheet">Listu</string>
   <string name="next">Čuovvovaš</string>
@@ -250,7 +250,7 @@
   <string name="media_detail_in_all_languages">Buot gielaide</string>
   <string name="description">Govvádus</string>
   <string name="learn_more">LASSEDIEĐUT</string>
-  <string name="menu_view_user_page" fuzzy="true">Čájet geavaheaddjisiiddu</string>
+  <string name="menu_view_user_page">Čájet geavaheaddjidieđuid</string>
   <string name="edit_categories">Rievdat kategoriijaid</string>
   <string name="advanced_options">Lasseásahusat</string>
   <string name="apply">Geavat</string>

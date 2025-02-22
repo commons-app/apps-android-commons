@@ -90,6 +90,41 @@ class Media constructor(
         captions = captions,
     )
 
+    constructor(
+        captions: Map<String, String>,
+        categories: List<String>?,
+        filename: String?,
+        fallbackDescription: String?,
+        author: String?,
+        user: String?,
+        dateUploaded: Date? = Date(),
+        license: String? = null,
+        licenseUrl: String? = null,
+        imageUrl: String? = null,
+        thumbUrl: String? = null,
+        coordinates: LatLng? = null,
+        descriptions: Map<String, String> = emptyMap(),
+        depictionIds: List<String> = emptyList(),
+        categoriesHiddenStatus: Map<String, Boolean> = emptyMap()
+    ) : this(
+        pageId = UUID.randomUUID().toString(),
+        filename = filename,
+        fallbackDescription = fallbackDescription,
+        dateUploaded = dateUploaded,
+        author = author,
+        user = user,
+        categories = categories,
+        captions = captions,
+        license = license,
+        licenseUrl = licenseUrl,
+        imageUrl = imageUrl,
+        thumbUrl = thumbUrl,
+        coordinates = coordinates,
+        descriptions = descriptions,
+        depictionIds = depictionIds,
+        categoriesHiddenStatus = categoriesHiddenStatus
+    )
+
     /**
      * Gets media display title
      * @return Media title
