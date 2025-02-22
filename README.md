@@ -1,6 +1,6 @@
 # Wikimedia Commons Android app
 
-[![Build status](https://github.com/commons-app/apps-android-commons/actions/workflows/android.yml/badge.svg?branch=main)](https://github.com/commons-app/apps-android-commons/actions?query=branch%3Amain)z
+[![Build status](https://github.com/commons-app/apps-android-commons/actions/workflows/android.yml/badge.svg?branch=main)](https://github.com/commons-app/apps-android-commons/actions?query=branch%3Amain)
 [![Preview the app](https://img.shields.io/badge/Preview-Appetize.io-orange.svg)](https://appetize.io/app/8ywtpe9f8tb8h6bey11c92vkcw)
 [![codecov](https://codecov.io/gh/commons-app/apps-android-commons/branch/master/graph/badge.svg)](https://codecov.io/gh/commons-app/apps-android-commons)
 [![Good First Issues](https://img.shields.io/github/issues-search?label=%22good%20first%20issue%22&query=repo%3Acommons-app%2Fapps-android-commons%20is%3Aissue%20is%3Aopen%20label%3A%22good%20first%20issue%22)](https://github.com/commons-app/apps-android-commons/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22)
