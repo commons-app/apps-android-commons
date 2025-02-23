@@ -55,7 +55,7 @@ class SearchImagesViewHolder(
         if (media.author?.isNotEmpty() == true) {
             binding.categoryImageAuthor.visibility = View.VISIBLE
             binding.categoryImageAuthor.text =
-                containerView.context.getString(R.string.image_uploaded_by, media.user)
+                containerView.context.getString(R.string.image_uploaded_by, media.author)
         } else {
             binding.categoryImageAuthor.visibility = View.GONE
         }
