@@ -18,7 +18,7 @@ class DBOpenHelper(
 
     companion object {
         private const val DATABASE_NAME = "commons.db"
-        private const val DATABASE_VERSION = 21
+        private const val DATABASE_VERSION = 22
         const val CONTRIBUTIONS_TABLE = "contributions"
         const val BOOKMARKS_LOCATIONS = "bookmarksLocations"
         private const val DROP_TABLE_STATEMENT = "DROP TABLE IF EXISTS %s"
