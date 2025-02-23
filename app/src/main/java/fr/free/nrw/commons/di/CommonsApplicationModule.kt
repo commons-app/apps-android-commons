@@ -254,7 +254,6 @@ open class CommonsApplicationModule(private val applicationContext: Context) {
 
         private val MIGRATION_19_TO_20 = object : Migration(19, 20) {
             override fun migrate(db: SupportSQLiteDatabase) {
-                // Step 1: Create the new table with NOT NULL constraints
                 db.execSQL(
                     """
                 CREATE TABLE IF NOT EXISTS bookmarks_locations (
