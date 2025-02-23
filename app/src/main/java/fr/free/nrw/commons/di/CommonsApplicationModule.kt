@@ -276,11 +276,9 @@ open class CommonsApplicationModule(private val applicationContext: Context) {
             """
                 )
 
-                // Open old database manually
                 val oldDbPath = "/data/user/0/fr.free.nrw.commons.beta/databases/commons.db"
                 val oldDb = SQLiteDatabase.openDatabase(oldDbPath, null, SQLiteDatabase.OPEN_READONLY)
 
-                // Fetch data from old table
                 val cursor = oldDb.rawQuery("SELECT * FROM bookmarksLocations", null)
 
                 while (cursor.moveToNext()) {
@@ -301,10 +299,9 @@ open class CommonsApplicationModule(private val applicationContext: Context) {
                     val locationPic = cursor.getString(cursor.getColumnIndexOrThrow("location_pic")) ?: ""
                     val locationExists = cursor.getInt(cursor.getColumnIndexOrThrow("location_exists"))
 
-                    // Insert data into new table
                     db.execSQL(
                         """
-                    INSERT INTO bookmarks_locations (
+                    INSERT OR REPLACE INTO bookmarks_locations (
                         location_name, location_language, location_description, location_category,
                         location_label_text, location_label_icon, location_lat, location_long,
                         location_image_url, location_wikipedia_link, location_wikidata_link,
@@ -322,9 +319,6 @@ open class CommonsApplicationModule(private val applicationContext: Context) {
 
                 cursor.close()
                 oldDb.close()
-
-                // Drop the old table
-                db.execSQL("DROP TABLE IF EXISTS bookmarksLocations")
             }
         }
     }
