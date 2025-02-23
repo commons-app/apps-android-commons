@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.ContentProviderClient
 import android.content.ContentResolver
 import android.content.Context
+import android.database.sqlite.SQLiteDatabase
 import android.view.inputmethod.InputMethodManager
 import androidx.collection.LruCache
 import androidx.room.Room.databaseBuilder
@@ -253,45 +254,77 @@ open class CommonsApplicationModule(private val applicationContext: Context) {
 
         private val MIGRATION_19_TO_20 = object : Migration(19, 20) {
             override fun migrate(db: SupportSQLiteDatabase) {
+                // Step 1: Create the new table with NOT NULL constraints
                 db.execSQL(
                     """
-                        CREATE TABLE IF NOT EXISTS bookmarks_locations (
-                            location_name TEXT NOT NULL PRIMARY KEY,
-                            location_language TEXT NOT NULL,
-                            location_description TEXT NOT NULL,
-                            location_lat REAL NOT NULL,
-                            location_long REAL NOT NULL,
-                            location_category TEXT NOT NULL,
-                            location_label_text TEXT NOT NULL,
-                            location_label_icon INTEGER,
-                            location_image_url TEXT NOT NULL,
-                            location_wikipedia_link TEXT NOT NULL,
-                            location_wikidata_link TEXT NOT NULL,
-                            location_commons_link TEXT NOT NULL,
-                            location_pic TEXT NOT NULL,
-                            location_exists INTEGER NOT NULL CHECK(location_exists IN (0, 1))
+                CREATE TABLE IF NOT EXISTS bookmarks_locations (
+                    location_name TEXT NOT NULL PRIMARY KEY,
+                    location_language TEXT NOT NULL,
+                    location_description TEXT NOT NULL,
+                    location_lat REAL NOT NULL,
+                    location_long REAL NOT NULL,
+                    location_category TEXT NOT NULL,
+                    location_label_text TEXT NOT NULL,
+                    location_label_icon INTEGER,
+                    location_image_url TEXT NOT NULL DEFAULT '',
+                    location_wikipedia_link TEXT NOT NULL,
+                    location_wikidata_link TEXT NOT NULL,
+                    location_commons_link TEXT NOT NULL,
+                    location_pic TEXT NOT NULL,
+                    location_exists INTEGER NOT NULL CHECK(location_exists IN (0, 1))
+                )
+            """
+                )
+
+                // Open old database manually
+                val oldDbPath = "/data/user/0/fr.free.nrw.commons.beta/databases/commons.db"
+                val oldDb = SQLiteDatabase.openDatabase(oldDbPath, null, SQLiteDatabase.OPEN_READONLY)
+
+                // Fetch data from old table
+                val cursor = oldDb.rawQuery("SELECT * FROM bookmarksLocations", null)
+
+                while (cursor.moveToNext()) {
+                    val locationName = cursor.getString(cursor.getColumnIndexOrThrow("location_name"))
+                    val locationLanguage = cursor.getString(cursor.getColumnIndexOrThrow("location_language"))
+                    val locationDescription = cursor.getString(cursor.getColumnIndexOrThrow("location_description"))
+                    val locationCategory = cursor.getString(cursor.getColumnIndexOrThrow("location_category"))
+                    val locationLabelText = cursor.getString(cursor.getColumnIndexOrThrow("location_label_text"))
+                    val locationLabelIcon = cursor.getInt(cursor.getColumnIndexOrThrow("location_label_icon"))
+                    val locationLat = cursor.getDouble(cursor.getColumnIndexOrThrow("location_lat"))
+                    val locationLong = cursor.getDouble(cursor.getColumnIndexOrThrow("location_long"))
+
+                    // Handle NULL values safely
+                    val locationImageUrl = cursor.getString(cursor.getColumnIndexOrThrow("location_image_url")) ?: ""
+                    val locationWikipediaLink = cursor.getString(cursor.getColumnIndexOrThrow("location_wikipedia_link")) ?: ""
+                    val locationWikidataLink = cursor.getString(cursor.getColumnIndexOrThrow("location_wikidata_link")) ?: ""
+                    val locationCommonsLink = cursor.getString(cursor.getColumnIndexOrThrow("location_commons_link")) ?: ""
+                    val locationPic = cursor.getString(cursor.getColumnIndexOrThrow("location_pic")) ?: ""
+                    val locationExists = cursor.getInt(cursor.getColumnIndexOrThrow("location_exists"))
+
+                    // Insert data into new table
+                    db.execSQL(
+                        """
+                    INSERT INTO bookmarks_locations (
+                        location_name, location_language, location_description, location_category,
+                        location_label_text, location_label_icon, location_lat, location_long,
+                        location_image_url, location_wikipedia_link, location_wikidata_link,
+                        location_commons_link, location_pic, location_exists
+                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                """,
+                        arrayOf(
+                            locationName, locationLanguage, locationDescription, locationCategory,
+                            locationLabelText, locationLabelIcon, locationLat, locationLong,
+                            locationImageUrl, locationWikipediaLink, locationWikidataLink,
+                            locationCommonsLink, locationPic, locationExists
                         )
-                    """
-                )
+                    )
+                }
 
-                db.execSQL("ATTACH DATABASE '/data/user/0/fr.free.nrw.commons.beta/databases/commons.db' AS oldDb")
-                db.execSQL("""
-                INSERT INTO bookmarks_locations (
-                    location_name, location_language, location_description, location_category,
-                    location_label_text, location_label_icon, location_lat, location_long,
-                    location_image_url, location_wikipedia_link, location_wikidata_link,
-                    location_commons_link, location_pic, location_exists
-                )
-                SELECT
-                    location_name, location_language, location_description, location_category,
-                    location_label_text, location_label_icon, location_lat, location_long,
-                    location_image_url, location_wikipedia_link, location_wikidata_link,
-                    location_commons_link, location_pic, location_exists
-                FROM oldDb.bookmarksLocations
-            """)
+                cursor.close()
+                oldDb.close()
 
-                db.execSQL("DROP TABLE IF EXISTS bookmarkLocations")
-                db.execSQL("DETACH DATABASE oldDb")
+                // Drop the old table
+                db.execSQL("DROP TABLE IF EXISTS bookmarksLocations")
             }
         }
     }
