@@ -400,7 +400,10 @@ class NearbyParentFragmentPresenter
 
                                         onePlaceBatch.add(Pair(i, MarkerPlaceGroup(
                                             bookmarkLocationDao.findBookmarkLocation(
-                                                fetchedPlace[0]),fetchedPlace[0])))
+                                                fetchedPlace[0].name
+                                            ),
+                                            fetchedPlace[0]
+                                        )))
                                     } catch (e: Exception) {
                                         Timber.tag("NearbyPinDetails").e(e)
                                         onePlaceBatch.add(Pair(i, updatedGroups[i]))

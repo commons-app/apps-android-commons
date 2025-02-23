@@ -37,6 +37,7 @@ import fr.free.nrw.commons.wikidata.WikidataEditListenerImpl
 import io.reactivex.Scheduler
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import timber.log.Timber
 import java.util.Objects
 import javax.inject.Named
 import javax.inject.Singleton
@@ -272,6 +273,8 @@ open class CommonsApplicationModule(private val applicationContext: Context) {
                         )
                     """
                 )
+
+                db.execSQL("ATTACH DATABASE '/data/user/0/fr.free.nrw.commons.beta/databases/commons.db' AS oldDb")
                 db.execSQL("""
                 INSERT INTO bookmarks_locations (
                     location_name, location_language, location_description, location_category,
@@ -284,10 +287,11 @@ open class CommonsApplicationModule(private val applicationContext: Context) {
                     location_label_text, location_label_icon, location_lat, location_long,
                     location_image_url, location_wikipedia_link, location_wikidata_link,
                     location_commons_link, location_pic, location_exists
-                FROM bookmarksLocations
+                FROM oldDb.bookmarksLocations
             """)
 
                 db.execSQL("DROP TABLE IF EXISTS bookmarkLocations")
+                db.execSQL("DETACH DATABASE oldDb")
             }
         }
     }

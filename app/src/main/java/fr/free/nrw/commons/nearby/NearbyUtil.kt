@@ -5,6 +5,7 @@ import androidx.lifecycle.LifecycleCoroutineScope
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao
 import kotlinx.coroutines.launch
+import timber.log.Timber
 
 object NearbyUtil {
 
@@ -16,7 +17,7 @@ object NearbyUtil {
     ) {
         scope?.launch {
             val isBookmarked = bookmarksLocationsDao.findBookmarkLocation(name)
-            Log.d("isBookmarked", isBookmarked.toString())
+            Timber.i("isBookmarked: $isBookmarked")
             if (isBookmarked) {
                 bottomSheetAdapter.updateBookmarkIcon(R.drawable.ic_round_star_filled_24px)
             } else {

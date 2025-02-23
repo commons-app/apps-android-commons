@@ -95,17 +95,17 @@ class BookmarkLocationsFragment : DaggerFragment() {
                 val areAllGranted = result.values.all { it }
 
                 if (areAllGranted) {
-                    contributionController.locationPermissionCallback.onLocationPermissionGranted()
+                    contributionController.locationPermissionCallback?.onLocationPermissionGranted()
                 } else {
                     if (shouldShowRequestPermissionRationale(permission.ACCESS_FINE_LOCATION)) {
                         contributionController.handleShowRationaleFlowCameraLocation(
-                            activity,
+                            requireActivity(),
                             inAppCameraLocationPermissionLauncher,
                             cameraPickLauncherForResult
                         )
                     } else {
                         contributionController.locationPermissionCallback
-                            .onLocationPermissionDenied(
+                            ?.onLocationPermissionDenied(
                                 getString(R.string.in_app_camera_location_permission_denied)
                             )
                     }
