@@ -1,77 +1,85 @@
-package fr.free.nrw.commons.media.zoomControllers.zoomable;
+package fr.free.nrw.commons.media.zoomControllers.zoomable
 
-import android.graphics.PointF;
-import android.view.GestureDetector;
-import android.view.MotionEvent;
+import android.graphics.PointF
+import android.view.GestureDetector
+import android.view.MotionEvent
+import kotlin.math.abs
+import kotlin.math.hypot
 
 /**
- * Tap gesture listener for double tap to zoom / unzoom and double-tap-and-drag to zoom.
+ * Tap gesture listener for double tap to zoom/unzoom and double-tap-and-drag to zoom.
  *
- * @see ZoomableDraweeView#setTapListener(GestureDetector.SimpleOnGestureListener)
+ * @see ZoomableDraweeView.setTapListener
  */
-public class DoubleTapGestureListener extends GestureDetector.SimpleOnGestureListener {
-    private static final int DURATION_MS = 300;
-    private static final int DOUBLE_TAP_SCROLL_THRESHOLD = 20;
+class DoubleTapGestureListener(private val draweeView: ZoomableDraweeView) :
+    GestureDetector.SimpleOnGestureListener() {
 
-    private final ZoomableDraweeView mDraweeView;
-    private final PointF mDoubleTapViewPoint = new PointF();
-    private final PointF mDoubleTapImagePoint = new PointF();
-    private float mDoubleTapScale = 1;
-    private boolean mDoubleTapScroll = false;
-
-    public DoubleTapGestureListener(ZoomableDraweeView zoomableDraweeView) {
-        mDraweeView = zoomableDraweeView;
+    companion object {
+        private const val DURATION_MS = 300L
+        private const val DOUBLE_TAP_SCROLL_THRESHOLD = 20
     }
 
-    @Override
-    public boolean onDoubleTapEvent(MotionEvent e) {
-        AbstractAnimatedZoomableController zc =
-                (AbstractAnimatedZoomableController) mDraweeView.getZoomableController();
-        PointF vp = new PointF(e.getX(), e.getY());
-        PointF ip = zc.mapViewToImage(vp);
-        switch (e.getActionMasked()) {
-            case MotionEvent.ACTION_DOWN:
-                mDoubleTapViewPoint.set(vp);
-                mDoubleTapImagePoint.set(ip);
-                mDoubleTapScale = zc.getScaleFactor();
-                break;
-            case MotionEvent.ACTION_MOVE:
-                mDoubleTapScroll = mDoubleTapScroll || shouldStartDoubleTapScroll(vp);
-                if (mDoubleTapScroll) {
-                    float scale = calcScale(vp);
-                    zc.zoomToPoint(scale, mDoubleTapImagePoint, mDoubleTapViewPoint);
+    private val doubleTapViewPoint = PointF()
+    private val doubleTapImagePoint = PointF()
+    private var doubleTapScale = 1f
+    private var doubleTapScroll = false
+
+    override fun onDoubleTapEvent(e: MotionEvent): Boolean {
+        val zc = draweeView.getZoomableController() as AbstractAnimatedZoomableController
+        val vp = PointF(e.x, e.y)
+        val ip = zc.mapViewToImage(vp)
+
+        when (e.actionMasked) {
+            MotionEvent.ACTION_DOWN -> {
+                doubleTapViewPoint.set(vp)
+                doubleTapImagePoint.set(ip)
+                doubleTapScale = zc.getScaleFactor()
+            }
+
+            MotionEvent.ACTION_MOVE -> {
+                doubleTapScroll = doubleTapScroll || shouldStartDoubleTapScroll(vp)
+                if (doubleTapScroll) {
+                    val scale = calcScale(vp)
+                    zc.zoomToPoint(scale, doubleTapImagePoint, doubleTapViewPoint)
                 }
-                break;
-            case MotionEvent.ACTION_UP:
-                if (mDoubleTapScroll) {
-                    float scale = calcScale(vp);
-                    zc.zoomToPoint(scale, mDoubleTapImagePoint, mDoubleTapViewPoint);
+            }
+
+            MotionEvent.ACTION_UP -> {
+                if (doubleTapScroll) {
+                    val scale = calcScale(vp)
+                    zc.zoomToPoint(scale, doubleTapImagePoint, doubleTapViewPoint)
                 } else {
-                    final float maxScale = zc.getMaxScaleFactor();
-                    final float minScale = zc.getMinScaleFactor();
-                    if (zc.getScaleFactor() < (maxScale + minScale) / 2) {
-                        zc.zoomToPoint(
-                                maxScale, ip, vp, DefaultZoomableController.LIMIT_ALL, DURATION_MS, null);
-                    } else {
-                        zc.zoomToPoint(
-                                minScale, ip, vp, DefaultZoomableController.LIMIT_ALL, DURATION_MS, null);
-                    }
+                    val maxScale = zc.getMaxScaleFactor()
+                    val minScale = zc.getMinScaleFactor()
+                    val targetScale =
+                        if (zc.getScaleFactor() < (maxScale + minScale) / 2) maxScale else minScale
+
+                    zc.zoomToPoint(
+                        targetScale,
+                        ip,
+                        vp,
+                        DefaultZoomableController.LIMIT_ALL,
+                        DURATION_MS,
+                        null
+                    )
                 }
-                mDoubleTapScroll = false;
-                break;
+                doubleTapScroll = false
+            }
         }
-        return true;
+        return true
     }
 
-    private boolean shouldStartDoubleTapScroll(PointF viewPoint) {
-        double dist =
-                Math.hypot(viewPoint.x - mDoubleTapViewPoint.x, viewPoint.y - mDoubleTapViewPoint.y);
-        return dist > DOUBLE_TAP_SCROLL_THRESHOLD;
+    private fun shouldStartDoubleTapScroll(viewPoint: PointF): Boolean {
+        val dist = hypot(
+            (viewPoint.x - doubleTapViewPoint.x).toDouble(),
+            (viewPoint.y - doubleTapViewPoint.y).toDouble()
+        )
+        return dist > DOUBLE_TAP_SCROLL_THRESHOLD
     }
 
-    private float calcScale(PointF currentViewPoint) {
-        float dy = (currentViewPoint.y - mDoubleTapViewPoint.y);
-        float t = 1 + Math.abs(dy) * 0.001f;
-        return (dy < 0) ? mDoubleTapScale / t : mDoubleTapScale * t;
+    private fun calcScale(currentViewPoint: PointF): Float {
+        val dy = currentViewPoint.y - doubleTapViewPoint.y
+        val t = 1 + abs(dy) * 0.001f
+        return if (dy < 0) doubleTapScale / t else doubleTapScale * t
     }
 }

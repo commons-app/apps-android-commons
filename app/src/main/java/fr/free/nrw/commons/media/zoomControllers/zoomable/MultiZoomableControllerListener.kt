@@ -1,40 +1,46 @@
-package fr.free.nrw.commons.media.zoomControllers.zoomable;
+package fr.free.nrw.commons.media.zoomControllers.zoomable
 
-import android.graphics.Matrix;
-import java.util.ArrayList;
-import java.util.List;
+import android.graphics.Matrix
+import java.util.ArrayList
 
+/**
+ * MultiZoomableControllerListener that allows multiple listeners to be added and notified about
+ * transform events.
+ *
+ * NOTE: The order of the listeners is important. Listeners can consume transform events.
+ */
+class MultiZoomableControllerListener : ZoomableController.Listener {
 
-public class MultiZoomableControllerListener implements ZoomableController.Listener {
+    private val listeners: MutableList<ZoomableController.Listener> = mutableListOf()
 
-    private final List<ZoomableController.Listener> mListeners = new ArrayList<>();
-
-    @Override
-    public synchronized void onTransformBegin(Matrix transform) {
-        for (ZoomableController.Listener listener : mListeners) {
-            listener.onTransformBegin(transform);
+    @Synchronized
+    override fun onTransformBegin(transform: Matrix) {
+        for (listener in listeners) {
+            listener.onTransformBegin(transform)
         }
     }
 
-    @Override
-    public synchronized void onTransformChanged(Matrix transform) {
-        for (ZoomableController.Listener listener : mListeners) {
-            listener.onTransformChanged(transform);
+    @Synchronized
+    override fun onTransformChanged(transform: Matrix) {
+        for (listener in listeners) {
+            listener.onTransformChanged(transform)
         }
     }
 
-    @Override
-    public synchronized void onTransformEnd(Matrix transform) {
-        for (ZoomableController.Listener listener : mListeners) {
-            listener.onTransformEnd(transform);
+    @Synchronized
+    override fun onTransformEnd(transform: Matrix) {
+        for (listener in listeners) {
+            listener.onTransformEnd(transform)
         }
     }
 
-    public synchronized void addListener(ZoomableController.Listener listener) {
-        mListeners.add(listener);
+    @Synchronized
+    fun addListener(listener: ZoomableController.Listener) {
+        listeners.add(listener)
     }
 
-    public synchronized void removeListener(ZoomableController.Listener listener) {
-        mListeners.remove(listener);
+    @Synchronized
+    fun removeListener(listener: ZoomableController.Listener) {
+        listeners.remove(listener)
     }
 }

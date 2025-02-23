@@ -1,96 +1,75 @@
-package fr.free.nrw.commons.media.zoomControllers.zoomable;
+package fr.free.nrw.commons.media.zoomControllers.zoomable
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
-import android.animation.ValueAnimator;
-import android.annotation.SuppressLint;
-import android.graphics.Matrix;
-import android.view.animation.DecelerateInterpolator;
-import com.facebook.common.internal.Preconditions;
-import com.facebook.common.logging.FLog;
-import androidx.annotation.Nullable;
-import fr.free.nrw.commons.media.zoomControllers.gestures.TransformGestureDetector;
+import android.animation.Animator
+import android.animation.AnimatorListenerAdapter
+import android.animation.ValueAnimator
+import android.annotation.SuppressLint
+import android.graphics.Matrix
+import android.view.animation.DecelerateInterpolator
+import com.facebook.common.logging.FLog
+import fr.free.nrw.commons.media.zoomControllers.gestures.TransformGestureDetector
 
 /**
  * ZoomableController that adds animation capabilities to DefaultZoomableController using standard
  * Android animation classes
  */
-public class AnimatedZoomableController extends AbstractAnimatedZoomableController {
+class AnimatedZoomableController private constructor() :
+    AbstractAnimatedZoomableController(TransformGestureDetector.newInstance()) {
 
-    private static final Class<?> TAG = AnimatedZoomableController.class;
-
-    private final ValueAnimator mValueAnimator;
-
-    public static AnimatedZoomableController newInstance() {
-        return new AnimatedZoomableController(TransformGestureDetector.newInstance());
+    private val valueAnimator: ValueAnimator = ValueAnimator.ofFloat(0f, 1f).apply {
+        interpolator = DecelerateInterpolator()
     }
 
-    @SuppressLint("NewApi")
-    public AnimatedZoomableController(TransformGestureDetector transformGestureDetector) {
-        super(transformGestureDetector);
-        mValueAnimator = ValueAnimator.ofFloat(0, 1);
-        mValueAnimator.setInterpolator(new DecelerateInterpolator());
-    }
-
-    @SuppressLint("NewApi")
-    @Override
-    public void setTransformAnimated(
-            final Matrix newTransform, long durationMs, @Nullable final Runnable onAnimationComplete) {
-        FLog.v(getLogTag(), "setTransformAnimated: duration %d ms", durationMs);
-        stopAnimation();
-        Preconditions.checkArgument(durationMs > 0);
-        Preconditions.checkState(!isAnimating());
-        setAnimating(true);
-        mValueAnimator.setDuration(durationMs);
-        getTransform().getValues(getStartValues());
-        newTransform.getValues(getStopValues());
-        mValueAnimator.addUpdateListener(
-                new ValueAnimator.AnimatorUpdateListener() {
-                    @Override
-                    public void onAnimationUpdate(ValueAnimator valueAnimator) {
-                        calculateInterpolation(getWorkingTransform(), (float) valueAnimator.getAnimatedValue());
-                        AnimatedZoomableController.super.setTransform(getWorkingTransform());
-                    }
-                });
-        mValueAnimator.addListener(
-                new AnimatorListenerAdapter() {
-                    @Override
-                    public void onAnimationCancel(Animator animation) {
-                        FLog.v(getLogTag(), "setTransformAnimated: animation cancelled");
-                        onAnimationStopped();
-                    }
-
-                    @Override
-                    public void onAnimationEnd(Animator animation) {
-                        FLog.v(getLogTag(), "setTransformAnimated: animation finished");
-                        onAnimationStopped();
-                    }
-
-                    private void onAnimationStopped() {
-                        if (onAnimationComplete != null) {
-                            onAnimationComplete.run();
-                        }
-                        setAnimating(false);
-                        getDetector().restartGesture();
-                    }
-                });
-        mValueAnimator.start();
-    }
-
-    @SuppressLint("NewApi")
-    @Override
-    public void stopAnimation() {
-        if (!isAnimating()) {
-            return;
+    companion object {
+        fun newInstance(): AnimatedZoomableController {
+            return AnimatedZoomableController()
         }
-        FLog.v(getLogTag(), "stopAnimation");
-        mValueAnimator.cancel();
-        mValueAnimator.removeAllUpdateListeners();
-        mValueAnimator.removeAllListeners();
     }
 
-    @Override
-    protected Class<?> getLogTag() {
-        return TAG;
+    @SuppressLint("NewApi")
+    override fun setTransformAnimated(
+        newTransform: Matrix, durationMs: Long, onAnimationComplete: Runnable?
+    ) {
+        FLog.v(logTag, "setTransformAnimated: duration $durationMs ms")
+        stopAnimation()
+        require(durationMs > 0) { "Duration must be greater than zero" }
+        check(!getIsAnimating()) { "Animation is already in progress" }
+        setAnimating(true)
+        valueAnimator.duration = durationMs
+        getTransform().getValues(getStartValues())
+        newTransform.getValues(getStopValues())
+        valueAnimator.addUpdateListener { animator ->
+            calculateInterpolation(getWorkingTransform(), animator.animatedValue as Float)
+            super.setTransform(getWorkingTransform())
+        }
+        valueAnimator.addListener(object : AnimatorListenerAdapter() {
+            override fun onAnimationCancel(animation: Animator) {
+                FLog.v(logTag, "setTransformAnimated: animation cancelled")
+                onAnimationStopped()
+            }
+
+            override fun onAnimationEnd(animation: Animator) {
+                FLog.v(logTag, "setTransformAnimated: animation finished")
+                onAnimationStopped()
+            }
+
+            private fun onAnimationStopped() {
+                onAnimationComplete?.run()
+                setAnimating(false)
+                getDetector().restartGesture()
+            }
+        })
+        valueAnimator.start()
     }
+
+    @SuppressLint("NewApi")
+    override fun stopAnimation() {
+        if (!getIsAnimating()) return
+        FLog.v(logTag, "stopAnimation")
+        valueAnimator.cancel()
+        valueAnimator.removeAllUpdateListeners()
+        valueAnimator.removeAllListeners()
+    }
+
+    override val logTag: Class<*> = AnimatedZoomableController::class.java
 }

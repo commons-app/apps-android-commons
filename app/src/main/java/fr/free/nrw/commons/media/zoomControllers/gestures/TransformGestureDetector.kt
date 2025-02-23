@@ -1,6 +1,8 @@
-package fr.free.nrw.commons.media.zoomControllers.gestures;
+package fr.free.nrw.commons.media.zoomControllers.gestures
 
-import android.view.MotionEvent;
+import android.view.MotionEvent
+import kotlin.math.atan2
+import kotlin.math.hypot
 
 /**
  * Component that detects translation, scale and rotation based on touch events.
@@ -9,32 +11,32 @@ import android.view.MotionEvent;
  * this detector is passed to the listeners, so it can be queried for pivot, translation, scale or
  * rotation.
  */
-public class TransformGestureDetector implements MultiPointerGestureDetector.Listener {
+class TransformGestureDetector(private val mDetector: MultiPointerGestureDetector) :
+    MultiPointerGestureDetector.Listener {
 
     /** The listener for receiving notifications when gestures occur. */
-    public interface Listener {
+    interface Listener {
         /** A callback called right before the gesture is about to start. */
-        public void onGestureBegin(TransformGestureDetector detector);
+        fun onGestureBegin(detector: TransformGestureDetector)
 
         /** A callback called each time the gesture gets updated. */
-        public void onGestureUpdate(TransformGestureDetector detector);
+        fun onGestureUpdate(detector: TransformGestureDetector)
 
         /** A callback called right after the gesture has finished. */
-        public void onGestureEnd(TransformGestureDetector detector);
+        fun onGestureEnd(detector: TransformGestureDetector)
     }
 
-    private final MultiPointerGestureDetector mDetector;
+    private var mListener: Listener? = null
 
-    private Listener mListener = null;
-
-    public TransformGestureDetector(MultiPointerGestureDetector multiPointerGestureDetector) {
-        mDetector = multiPointerGestureDetector;
-        mDetector.setListener(this);
+    init {
+        mDetector.setListener(this)
     }
 
     /** Factory method that creates a new instance of TransformGestureDetector */
-    public static TransformGestureDetector newInstance() {
-        return new TransformGestureDetector(MultiPointerGestureDetector.newInstance());
+    companion object {
+        fun newInstance(): TransformGestureDetector {
+            return TransformGestureDetector(MultiPointerGestureDetector.newInstance())
+        }
     }
 
     /**
@@ -42,13 +44,13 @@ public class TransformGestureDetector implements MultiPointerGestureDetector.Lis
      *
      * @param listener listener to set
      */
-    public void setListener(Listener listener) {
-        mListener = listener;
+    fun setListener(listener: Listener?) {
+        mListener = listener
     }
 
     /** Resets the component to the initial state. */
-    public void reset() {
-        mDetector.reset();
+    fun reset() {
+        mDetector.reset()
     }
 
     /**
@@ -57,108 +59,96 @@ public class TransformGestureDetector implements MultiPointerGestureDetector.Lis
      * @param event event to handle
      * @return whether or not the event was handled
      */
-    public boolean onTouchEvent(final MotionEvent event) {
-        return mDetector.onTouchEvent(event);
+    fun onTouchEvent(event: MotionEvent): Boolean {
+        return mDetector.onTouchEvent(event)
     }
 
-    @Override
-    public void onGestureBegin(MultiPointerGestureDetector detector) {
-        if (mListener != null) {
-            mListener.onGestureBegin(this);
-        }
+    override fun onGestureBegin(detector: MultiPointerGestureDetector) {
+        mListener?.onGestureBegin(this)
     }
 
-    @Override
-    public void onGestureUpdate(MultiPointerGestureDetector detector) {
-        if (mListener != null) {
-            mListener.onGestureUpdate(this);
-        }
+    override fun onGestureUpdate(detector: MultiPointerGestureDetector) {
+        mListener?.onGestureUpdate(this)
     }
 
-    @Override
-    public void onGestureEnd(MultiPointerGestureDetector detector) {
-        if (mListener != null) {
-            mListener.onGestureEnd(this);
-        }
+    override fun onGestureEnd(detector: MultiPointerGestureDetector) {
+        mListener?.onGestureEnd(this)
     }
 
-    private float calcAverage(float[] arr, int len) {
-        float sum = 0;
-        for (int i = 0; i < len; i++) {
-            sum += arr[i];
-        }
-        return (len > 0) ? sum / len : 0;
+    private fun calcAverage(arr: FloatArray, len: Int): Float {
+        val sum = arr.take(len).sum()
+        return if (len > 0) sum / len else 0f
     }
 
     /** Restarts the current gesture (if any). */
-    public void restartGesture() {
-        mDetector.restartGesture();
+    fun restartGesture() {
+        mDetector.restartGesture()
     }
 
     /** Gets whether there is a gesture in progress */
-    public boolean isGestureInProgress() {
-        return mDetector.isGestureInProgress();
+    fun isGestureInProgress(): Boolean {
+        return mDetector.isGestureInProgress()
     }
 
     /** Gets the number of pointers after the current gesture */
-    public int getNewPointerCount() {
-        return mDetector.getNewPointerCount();
+    fun getNewPointerCount(): Int {
+        return mDetector.getNewPointerCount()
     }
 
     /** Gets the number of pointers in the current gesture */
-    public int getPointerCount() {
-        return mDetector.getPointerCount();
+    fun getPointerCount(): Int {
+        return mDetector.getPointerCount()
     }
 
     /** Gets the X coordinate of the pivot point */
-    public float getPivotX() {
-        return calcAverage(mDetector.getStartX(), mDetector.getPointerCount());
+    fun getPivotX(): Float {
+        return calcAverage(mDetector.getStartX(), mDetector.getPointerCount())
     }
 
     /** Gets the Y coordinate of the pivot point */
-    public float getPivotY() {
-        return calcAverage(mDetector.getStartY(), mDetector.getPointerCount());
+    fun getPivotY(): Float {
+        return calcAverage(mDetector.getStartY(), mDetector.getPointerCount())
     }
 
     /** Gets the X component of the translation */
-    public float getTranslationX() {
-        return calcAverage(mDetector.getCurrentX(), mDetector.getPointerCount())
-                - calcAverage(mDetector.getStartX(), mDetector.getPointerCount());
+    fun getTranslationX(): Float {
+        return calcAverage(mDetector.getCurrentX(), mDetector.getPointerCount()) -
+                calcAverage(mDetector.getStartX(), mDetector.getPointerCount())
     }
 
     /** Gets the Y component of the translation */
-    public float getTranslationY() {
-        return calcAverage(mDetector.getCurrentY(), mDetector.getPointerCount())
-                - calcAverage(mDetector.getStartY(), mDetector.getPointerCount());
+    fun getTranslationY(): Float {
+        return calcAverage(mDetector.getCurrentY(), mDetector.getPointerCount()) -
+                calcAverage(mDetector.getStartY(), mDetector.getPointerCount())
     }
 
     /** Gets the scale */
-    public float getScale() {
-        if (mDetector.getPointerCount() < 2) {
-            return 1;
+    fun getScale(): Float {
+        return if (mDetector.getPointerCount() < 2) {
+            1f
         } else {
-            float startDeltaX = mDetector.getStartX()[1] - mDetector.getStartX()[0];
-            float startDeltaY = mDetector.getStartY()[1] - mDetector.getStartY()[0];
-            float currentDeltaX = mDetector.getCurrentX()[1] - mDetector.getCurrentX()[0];
-            float currentDeltaY = mDetector.getCurrentY()[1] - mDetector.getCurrentY()[0];
-            float startDist = (float) Math.hypot(startDeltaX, startDeltaY);
-            float currentDist = (float) Math.hypot(currentDeltaX, currentDeltaY);
-            return currentDist / startDist;
+            val startDeltaX = mDetector.getStartX()[1] - mDetector.getStartX()[0]
+            val startDeltaY = mDetector.getStartY()[1] - mDetector.getStartY()[0]
+            val currentDeltaX = mDetector.getCurrentX()[1] - mDetector.getCurrentX()[0]
+            val currentDeltaY = mDetector.getCurrentY()[1] - mDetector.getCurrentY()[0]
+            val startDist = hypot(startDeltaX, startDeltaY)
+            val currentDist = hypot(currentDeltaX, currentDeltaY)
+            currentDist / startDist
         }
     }
 
     /** Gets the rotation in radians */
-    public float getRotation() {
-        if (mDetector.getPointerCount() < 2) {
-            return 0;
+    fun getRotation(): Float {
+        return if (mDetector.getPointerCount() < 2) {
+            0f
         } else {
-            float startDeltaX = mDetector.getStartX()[1] - mDetector.getStartX()[0];
-            float startDeltaY = mDetector.getStartY()[1] - mDetector.getStartY()[0];
-            float currentDeltaX = mDetector.getCurrentX()[1] - mDetector.getCurrentX()[0];
-            float currentDeltaY = mDetector.getCurrentY()[1] - mDetector.getCurrentY()[0];
-            float startAngle = (float) Math.atan2(startDeltaY, startDeltaX);
-            float currentAngle = (float) Math.atan2(currentDeltaY, currentDeltaX);
-            return currentAngle - startAngle;
+            val startDeltaX = mDetector.getStartX()[1] - mDetector.getStartX()[0]
+            val startDeltaY = mDetector.getStartY()[1] - mDetector.getStartY()[0]
+            val currentDeltaX = mDetector.getCurrentX()[1] - mDetector.getCurrentX()[0]
+            val currentDeltaY = mDetector.getCurrentY()[1] - mDetector.getCurrentY()[0]
+            val startAngle = atan2(startDeltaY, startDeltaX)
+            val currentAngle = atan2(currentDeltaY, currentDeltaX)
+            currentAngle - startAngle
         }
     }
 }

@@ -1,64 +1,58 @@
-package fr.free.nrw.commons.media.zoomControllers.zoomable;
+package fr.free.nrw.commons.media.zoomControllers.zoomable
 
-import android.graphics.Matrix;
-import android.graphics.PointF;
-import com.facebook.common.logging.FLog;
-import androidx.annotation.Nullable;
-import fr.free.nrw.commons.media.zoomControllers.gestures.TransformGestureDetector;
+import android.graphics.Matrix
+import android.graphics.PointF
+import com.facebook.common.logging.FLog
+import fr.free.nrw.commons.media.zoomControllers.gestures.TransformGestureDetector
 
 /**
  * Abstract class for ZoomableController that adds animation capabilities to
  * DefaultZoomableController.
  */
-public abstract class AbstractAnimatedZoomableController extends DefaultZoomableController {
+abstract class AbstractAnimatedZoomableController(
+    transformGestureDetector: TransformGestureDetector
+) : DefaultZoomableController(transformGestureDetector) {
 
-    private boolean mIsAnimating;
-    private final float[] mStartValues = new float[9];
-    private final float[] mStopValues = new float[9];
-    private final float[] mCurrentValues = new float[9];
-    private final Matrix mNewTransform = new Matrix();
-    private final Matrix mWorkingTransform = new Matrix();
+    private var isAnimating: Boolean = false
+    private val startValues = FloatArray(9)
+    private val stopValues = FloatArray(9)
+    private val currentValues = FloatArray(9)
+    private val newTransform = Matrix()
+    private val workingTransform = Matrix()
 
-    public AbstractAnimatedZoomableController(TransformGestureDetector transformGestureDetector) {
-        super(transformGestureDetector);
-    }
-
-    @Override
-    public void reset() {
-        FLog.v(getLogTag(), "reset");
-        stopAnimation();
-        mWorkingTransform.reset();
-        mNewTransform.reset();
-        super.reset();
+    override fun reset() {
+        FLog.v(logTag, "reset")
+        stopAnimation()
+        workingTransform.reset()
+        newTransform.reset()
+        super.reset()
     }
 
     /** Returns true if the zoomable transform is identity matrix, and the controller is idle. */
-    @Override
-    public boolean isIdentity() {
-        return !isAnimating() && super.isIdentity();
+    override fun isIdentity(): Boolean {
+        return !isAnimating && super.isIdentity()
     }
 
     /**
-     * Zooms to the desired scale and positions the image so that the given image point corresponds to
-     * the given view point.
+     * Zooms to the desired scale and positions the image so that the given image point corresponds
+     * to the given view point.
      *
-     * <p>If this method is called while an animation or gesture is already in progress, the current
+     * If this method is called while an animation or gesture is already in progress, the current
      * animation or gesture will be stopped first.
      *
      * @param scale desired scale, will be limited to {min, max} scale factor
      * @param imagePoint 2D point in image's relative coordinate system (i.e. 0 <= x, y <= 1)
      * @param viewPoint 2D point in view's absolute coordinate system
      */
-    @Override
-    public void zoomToPoint(float scale, PointF imagePoint, PointF viewPoint) {
-        zoomToPoint(scale, imagePoint, viewPoint, LIMIT_ALL, 0, null);
+    override fun zoomToPoint(scale: Float, imagePoint: PointF, viewPoint: PointF) {
+        zoomToPoint(scale, imagePoint, viewPoint, LIMIT_ALL, 0, null)
     }
 
     /**
-     * Zooms to the desired scale and positions the image so that the given image point corresponds to
-     * the given view point.
+     * Zooms to the desired scale and positions the image so that the given image point corresponds
+     * to the given view point.
      *
-     * <p>If this method is called while an animation or gesture is already in progress, the current
+     * If this method is called while an animation or gesture is already in progress, the current
      * animation or gesture will be stopped first.
      *
      * @param scale desired scale, will be limited to {min, max} scale factor
@@ -68,93 +62,86 @@ public abstract class AbstractAnimatedZoomableController extends DefaultZoomable
      * @param durationMs length of animation of the zoom, or 0 if no animation desired
      * @param onAnimationComplete code to run when the animation completes. Ignored if durationMs=0
      */
-    public void zoomToPoint(
-            float scale,
-            PointF imagePoint,
-            PointF viewPoint,
-            @LimitFlag int limitFlags,
-            long durationMs,
-            @Nullable Runnable onAnimationComplete) {
-        FLog.v(getLogTag(), "zoomToPoint: duration %d ms", durationMs);
-        calculateZoomToPointTransform(mNewTransform, scale, imagePoint, viewPoint, limitFlags);
-        setTransform(mNewTransform, durationMs, onAnimationComplete);
+    fun zoomToPoint(
+        scale: Float,
+        imagePoint: PointF,
+        viewPoint: PointF,
+        @LimitFlag limitFlags: Int,
+        durationMs: Long,
+        onAnimationComplete: Runnable?
+    ) {
+        FLog.v(logTag, "zoomToPoint: duration $durationMs ms")
+        calculateZoomToPointTransform(newTransform, scale, imagePoint, viewPoint, limitFlags)
+        setTransform(newTransform, durationMs, onAnimationComplete)
     }
 
     /**
      * Sets a new zoomable transformation and animates to it if desired.
      *
-     * <p>If this method is called while an animation or gesture is already in progress, the current
+     * If this method is called while an animation or gesture is already in progress, the current
      * animation or gesture will be stopped first.
      *
      * @param newTransform new transform to make active
      * @param durationMs duration of the animation, or 0 to not animate
      * @param onAnimationComplete code to run when the animation completes. Ignored if durationMs=0
      */
-    public void setTransform(
-            Matrix newTransform, long durationMs, @Nullable Runnable onAnimationComplete) {
-        FLog.v(getLogTag(), "setTransform: duration %d ms", durationMs);
+    private fun setTransform(
+        newTransform: Matrix,
+        durationMs: Long,
+        onAnimationComplete: Runnable?
+    ) {
+        FLog.v(logTag, "setTransform: duration $durationMs ms")
         if (durationMs <= 0) {
-            setTransformImmediate(newTransform);
+            setTransformImmediate(newTransform)
         } else {
-            setTransformAnimated(newTransform, durationMs, onAnimationComplete);
+            setTransformAnimated(newTransform, durationMs, onAnimationComplete)
         }
     }
 
-    private void setTransformImmediate(final Matrix newTransform) {
-        FLog.v(getLogTag(), "setTransformImmediate");
-        stopAnimation();
-        mWorkingTransform.set(newTransform);
-        super.setTransform(newTransform);
-        getDetector().restartGesture();
+    private fun setTransformImmediate(newTransform: Matrix) {
+        FLog.v(logTag, "setTransformImmediate")
+        stopAnimation()
+        workingTransform.set(newTransform)
+        super.setTransform(newTransform)
+        getDetector().restartGesture()
     }
 
-    protected boolean isAnimating() {
-        return mIsAnimating;
+    protected fun getIsAnimating(): Boolean = isAnimating
+
+    protected fun setAnimating(isAnimating: Boolean) {
+        this.isAnimating = isAnimating
     }
 
-    protected void setAnimating(boolean isAnimating) {
-        mIsAnimating = isAnimating;
+    protected fun getStartValues(): FloatArray = startValues
+
+    protected fun getStopValues(): FloatArray = stopValues
+
+    protected fun getWorkingTransform(): Matrix = workingTransform
+
+    override fun onGestureBegin(detector: TransformGestureDetector) {
+        FLog.v(logTag, "onGestureBegin")
+        stopAnimation()
+        super.onGestureBegin(detector)
     }
 
-    protected float[] getStartValues() {
-        return mStartValues;
+    override fun onGestureUpdate(detector: TransformGestureDetector) {
+        FLog.v(logTag, "onGestureUpdate ${if (isAnimating) "(ignored)" else ""}")
+        if (isAnimating) return
+        super.onGestureUpdate(detector)
     }
 
-    protected float[] getStopValues() {
-        return mStopValues;
-    }
-
-    protected Matrix getWorkingTransform() {
-        return mWorkingTransform;
-    }
-
-    @Override
-    public void onGestureBegin(TransformGestureDetector detector) {
-        FLog.v(getLogTag(), "onGestureBegin");
-        stopAnimation();
-        super.onGestureBegin(detector);
-    }
-
-    @Override
-    public void onGestureUpdate(TransformGestureDetector detector) {
-        FLog.v(getLogTag(), "onGestureUpdate %s", isAnimating() ? "(ignored)" : "");
-        if (isAnimating()) {
-            return;
+    protected fun calculateInterpolation(outMatrix: Matrix, fraction: Float) {
+        for (i in 0..8) {
+            currentValues[i] = (1 - fraction) * startValues[i] + fraction * stopValues[i]
         }
-        super.onGestureUpdate(detector);
+        outMatrix.setValues(currentValues)
     }
 
-    protected void calculateInterpolation(Matrix outMatrix, float fraction) {
-        for (int i = 0; i < 9; i++) {
-            mCurrentValues[i] = (1 - fraction) * mStartValues[i] + fraction * mStopValues[i];
-        }
-        outMatrix.setValues(mCurrentValues);
-    }
+    abstract fun setTransformAnimated(
+        newTransform: Matrix, durationMs: Long, onAnimationComplete: Runnable?
+    )
 
-    public abstract void setTransformAnimated(
-            final Matrix newTransform, long durationMs, @Nullable final Runnable onAnimationComplete);
+    protected abstract fun stopAnimation()
 
-    protected abstract void stopAnimation();
-
-    protected abstract Class<?> getLogTag();
+    protected abstract val logTag: Class<*>
 }
