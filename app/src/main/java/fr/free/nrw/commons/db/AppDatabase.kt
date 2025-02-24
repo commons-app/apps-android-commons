@@ -1,10 +1,16 @@
 package fr.free.nrw.commons.db
 
+import android.content.Context
 import androidx.room.Database
+import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
+import androidx.room.migration.Migration
+import androidx.sqlite.db.SupportSQLiteDatabase
 import fr.free.nrw.commons.bookmarks.category.BookmarkCategoriesDao
 import fr.free.nrw.commons.bookmarks.category.BookmarksCategoryModal
+import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao
+import fr.free.nrw.commons.bookmarks.locations.BookmarksLocations
 import fr.free.nrw.commons.contributions.Contribution
 import fr.free.nrw.commons.contributions.ContributionDao
 import fr.free.nrw.commons.customselector.database.NotForUploadStatus
@@ -23,8 +29,8 @@ import fr.free.nrw.commons.upload.depicts.DepictsDao
  *
  */
 @Database(
-    entities = [Contribution::class, Depicts::class, UploadedStatus::class, NotForUploadStatus::class, ReviewEntity::class, Place::class, BookmarksCategoryModal::class],
-    version = 19,
+    entities = [Contribution::class, Depicts::class, UploadedStatus::class, NotForUploadStatus::class, ReviewEntity::class, Place::class, BookmarksCategoryModal::class, BookmarksLocations::class],
+    version = 20,
     exportSchema = false,
 )
 @TypeConverters(Converters::class)
@@ -42,4 +48,6 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun ReviewDao(): ReviewDao
 
     abstract fun bookmarkCategoriesDao(): BookmarkCategoriesDao
+
+    abstract fun bookmarkLocationsDao(): BookmarkLocationsDao
 }

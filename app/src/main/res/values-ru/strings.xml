@@ -876,6 +876,7 @@
   <string name="account">Учётная запись</string>
   <string name="vanish_account">Удалить учётную запись</string>
   <string name="account_vanish_request_confirm_title">Предупреждение об удалении учётной записи</string>
+  <string name="account_vanish_request_confirm">Удаление — это &lt;b&gt;крайняя мера&lt;/b&gt;, и её следует &lt;b&gt;использовать только в том случае, если вы хотите навсегда прекратить редактирование&lt;/b&gt;, а также скрыть как можно больше связанных с вами действий.&lt;br/&gt;&lt;br/&gt; Удаление вашей учётной записи на Викискладе осуществляется путём изменения её имени, чтобы другие не могли определить ваши действия. &lt;b&gt;Удаление не гарантирует полной анонимности или удаления вклада в проектах&lt;/b&gt;.</string>
   <string name="caption">Подпись</string>
   <string name="caption_copied_to_clipboard">Подпись скопирована в буфер обмена</string>
   <string name="congratulations_all_pictures_in_this_album_have_been_either_uploaded_or_marked_as_not_for_upload">Поздравляем, все фотографии в этом альбоме либо загружены, либо помечены как не предназначенные для загрузки.</string>

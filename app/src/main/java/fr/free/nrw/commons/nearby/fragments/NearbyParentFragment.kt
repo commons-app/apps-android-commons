@@ -85,6 +85,7 @@ import fr.free.nrw.commons.nearby.MarkerPlaceGroup
 import fr.free.nrw.commons.nearby.NearbyController
 import fr.free.nrw.commons.nearby.NearbyFilterSearchRecyclerViewAdapter
 import fr.free.nrw.commons.nearby.NearbyFilterState
+import fr.free.nrw.commons.nearby.NearbyUtil
 import fr.free.nrw.commons.nearby.Place
 import fr.free.nrw.commons.nearby.PlacesRepository
 import fr.free.nrw.commons.nearby.WikidataFeedback
@@ -664,21 +665,23 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
     private fun initRvNearbyList() {
         binding!!.bottomSheetNearby.rvNearbyList.layoutManager = LinearLayoutManager(context)
         adapter = PlaceAdapter(
-            bookmarkLocationDao!!,
-            { place: Place ->
+            bookmarkLocationsDao = bookmarkLocationDao,
+            scope = scope,
+            onPlaceClicked = { place: Place ->
                 moveCameraToPosition(
-                    GeoPoint(place.location.latitude, place.location.longitude)
+                    GeoPoint(
+                        place.location.latitude,
+                        place.location.longitude
+                    )
                 )
-                Unit
             },
-            { place: Place?, isBookmarked: Boolean? ->
-                presenter!!.toggleBookmarkedStatus(place)
-                Unit
+            onBookmarkClicked = { place: Place?, _: Boolean? ->
+                presenter!!.toggleBookmarkedStatus(place, scope)
             },
-            commonPlaceClickActions!!,
-            inAppCameraLocationPermissionLauncher,
-            galleryPickLauncherForResult,
-            cameraPickLauncherForResult
+            commonPlaceClickActions = commonPlaceClickActions,
+            inAppCameraLocationPermissionLauncher = inAppCameraLocationPermissionLauncher,
+            galleryPickLauncherForResult = galleryPickLauncherForResult,
+            cameraPickLauncherForResult = cameraPickLauncherForResult
         )
         binding!!.bottomSheetNearby.rvNearbyList.adapter = adapter
     }
@@ -2303,34 +2306,34 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
         // TODO: Decide button text for fitting in the screen
         (dataList as ArrayList<BottomSheetItem>).add(
             BottomSheetItem(
-                fr.free.nrw.commons.R.drawable.ic_round_star_border_24px,
+                R.drawable.ic_round_star_border_24px,
                 ""
             )
         )
         (dataList as ArrayList<BottomSheetItem>).add(
             BottomSheetItem(
-                fr.free.nrw.commons.R.drawable.ic_directions_black_24dp,
+                R.drawable.ic_directions_black_24dp,
                 resources.getString(fr.free.nrw.commons.R.string.nearby_directions)
             )
         )
         if (place.hasWikidataLink()) {
             (dataList as ArrayList<BottomSheetItem>).add(
                 BottomSheetItem(
-                    fr.free.nrw.commons.R.drawable.ic_wikidata_logo_24dp,
+                    R.drawable.ic_wikidata_logo_24dp,
                     resources.getString(fr.free.nrw.commons.R.string.nearby_wikidata)
                 )
             )
         }
         (dataList as ArrayList<BottomSheetItem>).add(
             BottomSheetItem(
-                fr.free.nrw.commons.R.drawable.ic_feedback_black_24dp,
+                R.drawable.ic_feedback_black_24dp,
                 resources.getString(fr.free.nrw.commons.R.string.nearby_wikitalk)
             )
         )
         if (place.hasWikipediaLink()) {
             (dataList as ArrayList<BottomSheetItem>).add(
                 BottomSheetItem(
-                    fr.free.nrw.commons.R.drawable.ic_wikipedia_logo_24dp,
+                    R.drawable.ic_wikipedia_logo_24dp,
                     resources.getString(fr.free.nrw.commons.R.string.nearby_wikipedia)
                 )
             )
@@ -2338,7 +2341,7 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
         if (selectedPlace!!.hasCommonsLink()) {
             (dataList as ArrayList<BottomSheetItem>).add(
                 BottomSheetItem(
-                    fr.free.nrw.commons.R.drawable.ic_commons_icon_vector,
+                    R.drawable.ic_commons_icon_vector,
                     resources.getString(fr.free.nrw.commons.R.string.nearby_commons)
                 )
             )
@@ -2566,12 +2569,16 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
     }
 
     private fun updateBookmarkButtonImage(place: Place) {
-        val bookmarkIcon = if (bookmarkLocationDao!!.findBookmarkLocation(place)) {
-            fr.free.nrw.commons.R.drawable.ic_round_star_filled_24px
-        } else {
-            fr.free.nrw.commons.R.drawable.ic_round_star_border_24px
-        }
-        bottomSheetAdapter!!.updateBookmarkIcon(bookmarkIcon)
+        NearbyUtil.getBookmarkLocationExists(
+            bookmarkLocationDao,
+            place.getName(),
+            scope,
+            bottomSheetAdapter!!
+        )
+    }
+
+    private fun toggleBookmarkButtonImage() {
+        bottomSheetAdapter?.toggleBookmarkIcon()
     }
 
     override fun onAttach(context: Context) {
@@ -2749,26 +2756,31 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
     override fun onBottomSheetItemClick(view: View?, position: Int) {
         val item = dataList?.get(position) ?: return // Null check for dataList
         when (item.imageResourceId) {
-            fr.free.nrw.commons.R.drawable.ic_round_star_border_24px,
-            fr.free.nrw.commons.R.drawable.ic_round_star_filled_24px -> {
-                presenter?.toggleBookmarkedStatus(selectedPlace)
+            R.drawable.ic_round_star_border_24px -> {
+                presenter?.toggleBookmarkedStatus(selectedPlace, scope)
+                toggleBookmarkButtonImage()
+            }
+
+            R.drawable.ic_round_star_filled_24px -> {
+                presenter?.toggleBookmarkedStatus(selectedPlace, scope)
+                toggleBookmarkButtonImage()
                 selectedPlace?.let { updateBookmarkButtonImage(it) }
             }
 
-            fr.free.nrw.commons.R.drawable.ic_directions_black_24dp -> {
+            R.drawable.ic_directions_black_24dp -> {
                 selectedPlace?.let {
                     Utils.handleGeoCoordinates(this.context, it.getLocation())
                     binding?.map?.zoomLevelDouble ?: 0.0
                 }
             }
 
-            fr.free.nrw.commons.R.drawable.ic_wikidata_logo_24dp -> {
+            R.drawable.ic_wikidata_logo_24dp -> {
                 selectedPlace?.siteLinks?.wikidataLink?.let {
                     Utils.handleWebUrl(this.context, it)
                 }
             }
 
-            fr.free.nrw.commons.R.drawable.ic_feedback_black_24dp -> {
+            R.drawable.ic_feedback_black_24dp -> {
                 selectedPlace?.let {
                     val intent = Intent(this.context, WikidataFeedback::class.java).apply {
                         putExtra("lat", it.location.latitude)
@@ -2780,13 +2792,13 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
                 }
             }
 
-            fr.free.nrw.commons.R.drawable.ic_wikipedia_logo_24dp -> {
+            R.drawable.ic_wikipedia_logo_24dp -> {
                 selectedPlace?.siteLinks?.wikipediaLink?.let {
                     Utils.handleWebUrl(this.context, it)
                 }
             }
 
-            fr.free.nrw.commons.R.drawable.ic_commons_icon_vector -> {
+            R.drawable.ic_commons_icon_vector -> {
                 selectedPlace?.siteLinks?.commonsLink?.let {
                     Utils.handleWebUrl(this.context, it)
                 }
@@ -2800,13 +2812,13 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
     override fun onBottomSheetItemLongClick(view: View?, position: Int) {
         val item = dataList!![position]
         val message = when (item.imageResourceId) {
-            fr.free.nrw.commons.R.drawable.ic_round_star_border_24px -> getString(fr.free.nrw.commons.R.string.menu_bookmark)
-            fr.free.nrw.commons.R.drawable.ic_round_star_filled_24px -> getString(fr.free.nrw.commons.R.string.menu_bookmark)
-            fr.free.nrw.commons.R.drawable.ic_directions_black_24dp -> getString(fr.free.nrw.commons.R.string.nearby_directions)
-            fr.free.nrw.commons.R.drawable.ic_wikidata_logo_24dp -> getString(fr.free.nrw.commons.R.string.nearby_wikidata)
-            fr.free.nrw.commons.R.drawable.ic_feedback_black_24dp -> getString(fr.free.nrw.commons.R.string.nearby_wikitalk)
-            fr.free.nrw.commons.R.drawable.ic_wikipedia_logo_24dp -> getString(fr.free.nrw.commons.R.string.nearby_wikipedia)
-            fr.free.nrw.commons.R.drawable.ic_commons_icon_vector -> getString(fr.free.nrw.commons.R.string.nearby_commons)
+            R.drawable.ic_round_star_border_24px -> getString(fr.free.nrw.commons.R.string.menu_bookmark)
+            R.drawable.ic_round_star_filled_24px -> getString(fr.free.nrw.commons.R.string.menu_bookmark)
+            R.drawable.ic_directions_black_24dp -> getString(fr.free.nrw.commons.R.string.nearby_directions)
+            R.drawable.ic_wikidata_logo_24dp -> getString(fr.free.nrw.commons.R.string.nearby_wikidata)
+            R.drawable.ic_feedback_black_24dp -> getString(fr.free.nrw.commons.R.string.nearby_wikitalk)
+            R.drawable.ic_wikipedia_logo_24dp -> getString(fr.free.nrw.commons.R.string.nearby_wikipedia)
+            R.drawable.ic_commons_icon_vector -> getString(fr.free.nrw.commons.R.string.nearby_commons)
             else -> "Long click"
         }
         Toast.makeText(this.context, message, Toast.LENGTH_SHORT).show()
