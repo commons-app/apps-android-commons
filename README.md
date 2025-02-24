@@ -45,7 +45,7 @@ This software is open source, licensed under the [Apache License 2.0][10].
 
 [1]: https://play.google.com/store/apps/details?id=fr.free.nrw.commons
 [2]: https://commons-app.github.io/
-[3]: https://github.com/commons-app/apps-android-commons/issues
+[3]: https://github.com/commons-app/apps-android-commons/issues?q=is%3Aopen+is%3Aissue+no%3Aassignee+-label%3Adebated+label%3Abug+-label%3A%22low+priority%22+-label%3Aupstream
 
 [4]: https://github.com/commons-app/commons-app-documentation/blob/master/android/README.md#-android-documentation
 [5]: https://github.com/commons-app/commons-app-documentation/blob/master/android/README.md#-user-documentation

@@ -175,8 +175,8 @@ dependencies {
     testImplementation "androidx.work:work-testing:$work_version"
 
     //Glide
-    implementation 'com.github.bumptech.glide:glide:4.12.0'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
+    implementation 'com.github.bumptech.glide:glide:4.16.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.16.0'
     kaptTest "androidx.databinding:databinding-compiler:8.0.2"
     kaptAndroidTest "androidx.databinding:databinding-compiler:8.0.2"
 
