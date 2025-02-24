@@ -52,12 +52,7 @@ class SearchImagesViewHolder(
         binding.categoryImageView.setOnClickListener { onImageClicked(item.second) }
         binding.categoryImageTitle.text = media.mostRelevantCaption
         binding.categoryImageView.setImageURI(media.thumbUrl)
-        if (media.author?.isNotEmpty() == true) {
-            binding.categoryImageAuthor.visibility = View.VISIBLE
-            binding.categoryImageAuthor.text =
-                containerView.context.getString(R.string.image_uploaded_by, media.author)
-        } else {
-            binding.categoryImageAuthor.visibility = View.GONE
-        }
+        binding.categoryImageAuthor.text =
+            containerView.context.getString(R.string.image_uploaded_by, media.getAuthorOrUser())
     }
 }
