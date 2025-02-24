@@ -284,27 +284,54 @@ open class CommonsApplicationModule(private val applicationContext: Context) {
                 )
 
                 val oldDbPath = appContext.getDatabasePath("commons.db").path
-                val oldDb = SQLiteDatabase.openDatabase(oldDbPath, null, SQLiteDatabase.OPEN_READONLY)
+                val oldDb = SQLiteDatabase
+                    .openDatabase(oldDbPath, null, SQLiteDatabase.OPEN_READONLY)
 
                 val cursor = oldDb.rawQuery("SELECT * FROM bookmarksLocations", null)
 
                 while (cursor.moveToNext()) {
-                    val locationName = cursor.getString(cursor.getColumnIndexOrThrow("location_name"))
-                    val locationLanguage = cursor.getString(cursor.getColumnIndexOrThrow("location_language"))
-                    val locationDescription = cursor.getString(cursor.getColumnIndexOrThrow("location_description"))
-                    val locationCategory = cursor.getString(cursor.getColumnIndexOrThrow("location_category"))
-                    val locationLabelText = cursor.getString(cursor.getColumnIndexOrThrow("location_label_text"))
-                    val locationLabelIcon = cursor.getInt(cursor.getColumnIndexOrThrow("location_label_icon"))
-                    val locationLat = cursor.getDouble(cursor.getColumnIndexOrThrow("location_lat"))
-                    val locationLong = cursor.getDouble(cursor.getColumnIndexOrThrow("location_long"))
+                    val locationName =
+                        cursor.getString(cursor.getColumnIndexOrThrow("location_name"))
+                    val locationLanguage =
+                        cursor.getString(cursor.getColumnIndexOrThrow("location_language"))
+                    val locationDescription =
+                        cursor.getString(cursor.getColumnIndexOrThrow("location_description"))
+                    val locationCategory =
+                        cursor.getString(cursor.getColumnIndexOrThrow("location_category"))
+                    val locationLabelText =
+                        cursor.getString(cursor.getColumnIndexOrThrow("location_label_text"))
+                    val locationLabelIcon =
+                        cursor.getInt(cursor.getColumnIndexOrThrow("location_label_icon"))
+                    val locationLat =
+                        cursor.getDouble(cursor.getColumnIndexOrThrow("location_lat"))
+                    val locationLong =
+                        cursor.getDouble(cursor.getColumnIndexOrThrow("location_long"))
 
                     // Handle NULL values safely
-                    val locationImageUrl = cursor.getString(cursor.getColumnIndexOrThrow("location_image_url")) ?: ""
-                    val locationWikipediaLink = cursor.getString(cursor.getColumnIndexOrThrow("location_wikipedia_link")) ?: ""
-                    val locationWikidataLink = cursor.getString(cursor.getColumnIndexOrThrow("location_wikidata_link")) ?: ""
-                    val locationCommonsLink = cursor.getString(cursor.getColumnIndexOrThrow("location_commons_link")) ?: ""
-                    val locationPic = cursor.getString(cursor.getColumnIndexOrThrow("location_pic")) ?: ""
-                    val locationExists = cursor.getInt(cursor.getColumnIndexOrThrow("location_exists"))
+                    val locationImageUrl =
+                        cursor.getString(
+                            cursor.getColumnIndexOrThrow("location_image_url")
+                        ) ?: ""
+                    val locationWikipediaLink =
+                        cursor.getString(
+                            cursor.getColumnIndexOrThrow("location_wikipedia_link")
+                        ) ?: ""
+                    val locationWikidataLink =
+                        cursor.getString(
+                            cursor.getColumnIndexOrThrow("location_wikidata_link")
+                        ) ?: ""
+                    val locationCommonsLink =
+                        cursor.getString(
+                            cursor.getColumnIndexOrThrow("location_commons_link")
+                        ) ?: ""
+                    val locationPic =
+                        cursor.getString(
+                            cursor.getColumnIndexOrThrow("location_pic")
+                        ) ?: ""
+                    val locationExists =
+                        cursor.getInt(
+                            cursor.getColumnIndexOrThrow("location_exists")
+                        )
 
                     db.execSQL(
                         """
