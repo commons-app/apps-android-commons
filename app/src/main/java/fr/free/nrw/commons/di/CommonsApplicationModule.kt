@@ -52,6 +52,11 @@ import javax.inject.Singleton
 @Module
 @Suppress("unused")
 open class CommonsApplicationModule(private val applicationContext: Context) {
+
+    init {
+        appContext = applicationContext
+    }
+
     @Provides
     fun providesImageFileLoader(context: Context): ImageFileLoader =
         ImageFileLoader(context)
@@ -244,6 +249,9 @@ open class CommonsApplicationModule(private val applicationContext: Context) {
         const val IO_THREAD: String = "io_thread"
         const val MAIN_THREAD: String = "main_thread"
 
+        lateinit var appContext: Context
+            private set
+
         val MIGRATION_1_2: Migration = object : Migration(1, 2) {
             override fun migrate(db: SupportSQLiteDatabase) {
                 db.execSQL(
@@ -275,7 +283,7 @@ open class CommonsApplicationModule(private val applicationContext: Context) {
             """
                 )
 
-                val oldDbPath = "/data/user/0/fr.free.nrw.commons.beta/databases/commons.db"
+                val oldDbPath = appContext.getDatabasePath("commons.db").path
                 val oldDb = SQLiteDatabase.openDatabase(oldDbPath, null, SQLiteDatabase.OPEN_READONLY)
 
                 val cursor = oldDb.rawQuery("SELECT * FROM bookmarksLocations", null)
