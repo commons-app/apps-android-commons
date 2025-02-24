@@ -1,5 +1,4 @@
 package fr.free.nrw.commons.contributions
-
 import android.net.Uri
 import android.os.Parcelable
 import androidx.room.Embedded
