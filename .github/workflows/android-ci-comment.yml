@@ -1,6 +1,10 @@
 name: Android CI Comment
 
-on: [pull_request_target]
+on:
+  workflow_run:
+    workflows: ["Android CI"]  
+    types: [completed]        
+    branches: [main]          
 
 permissions:
   issues: write
@@ -9,16 +13,17 @@ jobs:
   comment:
     name: Comment on PR with APK links
     runs-on: ubuntu-latest
+    if: github.event.workflow_run.conclusion == 'success'  
     steps:
       - name: Checkout base branch
         uses: actions/checkout@v3
         with:
-          ref: ${{ github.base_ref }} 
-
+          ref: ${{ github.event.workflow_run.head_branch }}  
       - name: Download Run ID Artifact
         uses: actions/download-artifact@v4
         with:
           name: run-id
+          run-id: ${{ github.event.workflow_run.id }}  
 
       - name: Read Run ID
         id: read-run-id
@@ -26,7 +31,7 @@ jobs:
 
       - name: Comment on PR with APK download links
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         uses: actions/github-script@v6
         with:
           script: |
@@ -39,6 +44,13 @@ jobs:
               const runId = "${{ env.RUN_ID }}";
               if (!runId) {
                 throw new Error('Run ID not found.');
+              }
+
+              // Get the PR number from the workflow_run event
+              const prNumber = ${{ github.event.workflow_run.pull_requests[0].number }};
+              if (!prNumber) {
+                console.log('No PR number found in workflow_run event.');
+                return;
               }
 
               const { data: { artifacts } } = await github.rest.actions.listWorkflowRunArtifacts({
@@ -71,7 +83,7 @@ jobs:
               `;
 
               await github.rest.issues.createComment({
-                issue_number: context.issue.number,
+                issue_number: prNumber,
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 body: commentBody
