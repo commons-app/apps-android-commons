@@ -1,7 +1,6 @@
 package fr.free.nrw.commons.explore.map
 
 import android.Manifest
-import android.Manifest.permission
 import android.annotation.SuppressLint
 import android.content.BroadcastReceiver
 import android.content.Context
@@ -51,10 +50,6 @@ import fr.free.nrw.commons.utils.ViewUtil
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import java.util.ArrayList
-
-import javax.inject.Inject
-import javax.inject.Named
 import org.osmdroid.events.MapEventsReceiver
 import org.osmdroid.events.MapListener
 import org.osmdroid.events.ScrollEvent
@@ -72,6 +67,8 @@ import org.osmdroid.views.overlay.ScaleBarOverlay
 import org.osmdroid.views.overlay.ScaleDiskOverlay
 import org.osmdroid.views.overlay.TilesOverlay
 import timber.log.Timber
+import javax.inject.Inject
+import javax.inject.Named
 
 class ExploreMapFragment : CommonsDaggerSupportFragment(),
     ExploreMapContract.View, LocationUpdateListener, LocationPermissionCallback {
@@ -82,8 +79,8 @@ class ExploreMapFragment : CommonsDaggerSupportFragment(),
     private var snackbar: Snackbar? = null
     private var isDarkTheme = false
     private var isPermissionDenied = false
-    private var lastKnownLocation: fr.free.nrw.commons.location.LatLng? = null // last location of user
-    private var lastFocusLocation: fr.free.nrw.commons.location.LatLng? = null // last focused location of the map
+    private var lastKnownLocation: LatLng? = null // last location of user
+    private var lastFocusLocation: LatLng? = null // last focused location of the map
     var mediaList: List<Media>? = null
     private var recenterToUserLocation = false // true if recentering is needed
     private var clickedMarker: BaseMarker? = null
@@ -425,7 +422,7 @@ class ExploreMapFragment : CommonsDaggerSupportFragment(),
     }
 
     private fun handleLocationUpdate(
-        latLng: fr.free.nrw.commons.location.LatLng,
+        latLng: LatLng,
         locationChangeType: LocationServiceManager.LocationChangeType
     ) {
         lastKnownLocation = latLng
@@ -617,7 +614,7 @@ class ExploreMapFragment : CommonsDaggerSupportFragment(),
     }
 
     override fun addSearchThisAreaButtonAction() {
-        binding.searchThisAreaButton.setOnClickListener { presenter?.onSearchThisAreaClicked() }
+        binding.searchThisAreaButton.setOnClickListener(presenter?.onSearchThisAreaClicked())
     }
 
     override fun setSearchThisAreaButtonVisibility(isVisible: Boolean) {

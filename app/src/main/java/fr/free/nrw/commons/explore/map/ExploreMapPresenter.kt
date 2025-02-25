@@ -6,13 +6,12 @@ import fr.free.nrw.commons.BaseMarker
 import fr.free.nrw.commons.MapController
 import fr.free.nrw.commons.MapController.ExplorePlacesInfo
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao
-import fr.free.nrw.commons.explore.map.ExploreMapController.NearbyBaseMarkerThumbCallback
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.location.LatLng
 import fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType
 import io.reactivex.Observable
-import java.lang.reflect.Proxy
 import timber.log.Timber
+import java.lang.reflect.Proxy
 
 class ExploreMapPresenter(
     private val bookmarkLocationDao: BookmarkLocationsDao
