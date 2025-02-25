@@ -5,6 +5,7 @@ object Prefs {
     const val MANAGED_EXIF_TAGS = "managed_exif_tags"
     const val VANISHED_ACCOUNT = "vanishAccount"
     const val DESCRIPTION_LANGUAGE = "languageDescription"
+    const val SECONDARY_LANGUAGES = "secondaryLanguages"
     const val APP_UI_LANGUAGE = "appUiLanguage"
     const val KEY_THEME_VALUE = "appThemePref"
 
