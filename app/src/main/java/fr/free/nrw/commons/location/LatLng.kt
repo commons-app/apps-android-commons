@@ -123,10 +123,13 @@ data class LatLng(
 
     /**
      * Gets a URI for a Google Maps intent at the location.
+     *
+     * @paraam zoom The zoom level
+     * @return URI for the intent
      */
-    fun getGmmIntentUri(): Uri {
-        return Uri.parse("geo:$latitude,$longitude?z=16")
-    }
+    fun getGmmIntentUri(zoom: Double): Uri = Uri.parse(
+        "geo:$latitude,$longitude?q=$latitude,$longitude&z=${zoom}"
+    )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeDouble(latitude)

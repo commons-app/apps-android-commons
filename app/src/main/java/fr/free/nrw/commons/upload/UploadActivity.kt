@@ -701,7 +701,7 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
     }
 
     private fun receiveExternalSharedItems() {
-        uploadableFiles = contributionController!!.handleExternalImagesPicked(this, intent)
+        uploadableFiles = contributionController!!.handleExternalImagesPicked(this, intent).toMutableList()
     }
 
     private fun receiveInternalSharedItems() {

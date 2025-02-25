@@ -25,9 +25,13 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.ensureActive
+import kotlinx.coroutines.job
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
+import okhttp3.internal.wait
 import timber.log.Timber
+import java.io.IOException
 import java.lang.reflect.InvocationHandler
 import java.lang.reflect.Method
 import java.lang.reflect.Proxy
@@ -75,8 +79,8 @@ class NearbyParentFragmentPresenter
      * - **connnectionCount**: number of parallel requests
      */
     private object LoadPlacesAsyncOptions {
-        const val BATCH_SIZE = 3
-        const val CONNECTION_COUNT = 3
+        const val BATCH_SIZE = 10
+        const val CONNECTION_COUNT = 20
     }
 
     private var schedulePlacesUpdateJob: Job? = null
@@ -91,7 +95,7 @@ class NearbyParentFragmentPresenter
     private object SchedulePlacesUpdateOptions {
         var skippedCount = 0
         const val SKIP_LIMIT = 3
-        const val SKIP_DELAY_MS = 500L
+        const val SKIP_DELAY_MS = 100L
     }
 
     // used to tell the asynchronous place detail loading job that the places' bookmarked status
@@ -133,25 +137,31 @@ class NearbyParentFragmentPresenter
      * @param place The place whose bookmarked status is to be toggled. If the place is `null`,
      *              the operation is skipped.
      */
-    override fun toggleBookmarkedStatus(place: Place?) {
+    override fun toggleBookmarkedStatus(
+        place: Place?,
+        scope: LifecycleCoroutineScope?
+    ) {
         if (place == null) return
-        val nowBookmarked = bookmarkLocationDao.updateBookmarkLocation(place)
-        bookmarkChangedPlaces.add(place)
-        val placeIndex =
-            NearbyController.markerLabelList.indexOfFirst { it.place.location == place.location }
-        NearbyController.markerLabelList[placeIndex] = MarkerPlaceGroup(
-            nowBookmarked,
-            NearbyController.markerLabelList[placeIndex].place
-        )
-        nearbyParentFragmentView.setFilterState()
+        var nowBookmarked: Boolean
+        scope?.launch {
+            nowBookmarked = bookmarkLocationDao.updateBookmarkLocation(place)
+            bookmarkChangedPlaces.add(place)
+            val placeIndex =
+                NearbyController.markerLabelList.indexOfFirst { it.place.location == place.location }
+            NearbyController.markerLabelList[placeIndex] = MarkerPlaceGroup(
+                nowBookmarked,
+                NearbyController.markerLabelList[placeIndex].place
+            )
+            nearbyParentFragmentView.setFilterState()
+        }
     }
 
     override fun attachView(view: NearbyParentFragmentContract.View) {
-        this.nearbyParentFragmentView = view
+        nearbyParentFragmentView = view
     }
 
     override fun detachView() {
-        this.nearbyParentFragmentView = DUMMY
+        nearbyParentFragmentView = DUMMY
     }
 
     override fun removeNearbyPreferences(applicationKvStore: JsonKvStore) {
@@ -334,7 +344,7 @@ class NearbyParentFragmentPresenter
             for (i in 0..updatedGroups.lastIndex) {
                 val repoPlace = placesRepository.fetchPlace(updatedGroups[i].place.entityID)
                 if (repoPlace != null && repoPlace.name != null && repoPlace.name != ""){
-                    updatedGroups[i].isBookmarked = bookmarkLocationDao.findBookmarkLocation(repoPlace)
+                    updatedGroups[i].isBookmarked = bookmarkLocationDao.findBookmarkLocation(repoPlace.name)
                     updatedGroups[i].place.apply {
                         name = repoPlace.name
                         isMonument = repoPlace.isMonument
@@ -372,20 +382,42 @@ class NearbyParentFragmentPresenter
                             collectResults.send(
                                 fetchedPlaces.mapIndexed { index, place ->
                                     Pair(indices[index], MarkerPlaceGroup(
-                                        bookmarkLocationDao.findBookmarkLocation(place),
+                                        bookmarkLocationDao.findBookmarkLocation(place.name),
                                         place
                                     ))
                                 }
                             )
                         } catch (e: Exception) {
                             Timber.tag("NearbyPinDetails").e(e)
-                            collectResults.send(indices.map { Pair(it, updatedGroups[it]) })
+                            //HTTP request failed. Try individual places
+                            for (i in indices) {
+                                launch {
+                                    val onePlaceBatch = mutableListOf<Pair<Int, MarkerPlaceGroup>>()
+                                    try {
+                                        val fetchedPlace = nearbyController.getPlaces(
+                                            mutableListOf(updatedGroups[i].place)
+                                        )
+
+                                        onePlaceBatch.add(Pair(i, MarkerPlaceGroup(
+                                            bookmarkLocationDao.findBookmarkLocation(
+                                                fetchedPlace[0].name
+                                            ),
+                                            fetchedPlace[0]
+                                        )))
+                                    } catch (e: Exception) {
+                                        Timber.tag("NearbyPinDetails").e(e)
+                                        onePlaceBatch.add(Pair(i, updatedGroups[i]))
+                                    }
+                                    collectResults.send(onePlaceBatch)
+                                }
+                            }
                         }
                     }
                 }
             }
             var collectCount = 0
-            for (resultList in collectResults) {
+            while (collectCount < indicesToUpdate.size) {
+                val resultList = collectResults.receive()
                 for ((index, fetchedPlaceGroup) in resultList) {
                     val existingPlace = updatedGroups[index].place
                     val finalPlaceGroup = MarkerPlaceGroup(
@@ -435,16 +467,14 @@ class NearbyParentFragmentPresenter
                         if (bookmarkChangedPlacesBacklog.containsKey(group.place.location)) {
                             updatedGroups[index] = MarkerPlaceGroup(
                                 bookmarkLocationDao
-                                    .findBookmarkLocation(updatedGroups[index].place),
+                                    .findBookmarkLocation(updatedGroups[index].place.name),
                                 updatedGroups[index].place
                             )
                         }
                     }
                 }
                 schedulePlacesUpdate(updatedGroups)
-                if (++collectCount == totalBatches) {
-                    break
-                }
+                collectCount += resultList.size
             }
             collectResults.close()
         }
@@ -545,7 +575,7 @@ class NearbyParentFragmentPresenter
                 ).sortedBy { it.getDistanceInDouble(mapFocus) }.take(NearbyController.MAX_RESULTS)
                     .map {
                         MarkerPlaceGroup(
-                            bookmarkLocationDao.findBookmarkLocation(it), it
+                            bookmarkLocationDao.findBookmarkLocation(it.name), it
                         )
                     }
                 ensureActive()

@@ -43,7 +43,7 @@ class WikipediaInstructionsDialogFragment : DialogFragment() {
     /**
      * Callback for handling confirm button clicked
      */
-    interface Callback {
+    fun interface Callback {
         fun onConfirmClicked(
             contribution: Contribution?,
             copyWikicode: Boolean,

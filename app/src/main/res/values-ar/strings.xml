@@ -5,6 +5,7 @@
 * Asma
 * Azouz.anis
 * ButterflyOfFire
+* Cigaryno
 * Claw eg
 * Dr-Taher
 * Dr. Mohammed
@@ -20,6 +21,7 @@
 * NancyMilad
 * OsamaK
 * Tala Ali
+* XIDME
 * أيوب
 * أَحمد
 * ترجمان05
@@ -408,7 +410,7 @@
   <string name="error_fetching_nearby_monuments">خطأ في جلب المعالم القريبة.</string>
   <string name="no_recent_searches">لا توجد عمليات بحث حديثة</string>
   <string name="delete_recent_searches_dialog">هل أنت متأكد من أنك تريد مسح سجل بحثك؟</string>
-  <string name="cancel_upload_dialog">هل انت متأكد انك تريد الغاء هذا التحميل</string>
+  <string name="cancel_upload_dialog">هل أنت متأكد أنك تريد إلغاء هذا التحميل؟</string>
   <string name="delete_search_dialog">هل تريد حذف هذا البحث؟</string>
   <string name="search_history_deleted">تم حذف سجل البحث</string>
   <string name="nominate_delete">ترشيح للحذف</string>
@@ -882,4 +884,7 @@
   <string name="account_vanish_request_confirm">الاختفاء هو &lt;b&gt;الملاذ الأخير&lt;/b&gt; ويجب &lt;b&gt;استخدامه فقط عندما ترغب في التوقف عن التحرير إلى الأبد&lt;/b&gt; وأيضًا لإخفاء أكبر عدد ممكن من ارتباطاتك السابقة.&lt;br/&gt;&lt;br/&gt; يتم حذف الحساب على ويكيميديا كومنز عن طريق تغيير اسم حسابك بحيث لا يتمكن الآخرون من التعرف على مساهماتك في عملية تسمى اختفاء الحساب. &lt;b&gt;لا يضمن الاختفاء عدم الكشف عن الهوية تمامًا أو إزالة المساهمات في المشاريع&lt;/b&gt; .</string>
   <string name="caption">الشرح</string>
   <string name="caption_copied_to_clipboard">تم نسخ التسمية التوضيحية إلى الحافظة</string>
+  <string name="congratulations_all_pictures_in_this_album_have_been_either_uploaded_or_marked_as_not_for_upload">مبروك، جميع الصور الموجودة في هذا الألبوم تم تحميلها أو تم وضع علامة عليها بأنها غير قابلة للتحميل.</string>
+  <string name="show_in_explore">عرض في استكشاف</string>
+  <string name="show_in_nearby">عرض في المناطق القريبة</string>
 </resources>

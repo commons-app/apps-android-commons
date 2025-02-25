@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.ContentProviderClient
 import android.content.ContentResolver
 import android.content.Context
+import android.database.sqlite.SQLiteDatabase
 import android.view.inputmethod.InputMethodManager
 import androidx.collection.LruCache
 import androidx.room.Room.databaseBuilder
@@ -16,6 +17,7 @@ import fr.free.nrw.commons.BuildConfig
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.bookmarks.category.BookmarkCategoriesDao
+import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao
 import fr.free.nrw.commons.contributions.ContributionDao
 import fr.free.nrw.commons.customselector.database.NotForUploadStatusDao
 import fr.free.nrw.commons.customselector.database.UploadedStatusDao
@@ -36,6 +38,7 @@ import fr.free.nrw.commons.wikidata.WikidataEditListenerImpl
 import io.reactivex.Scheduler
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import timber.log.Timber
 import java.util.Objects
 import javax.inject.Named
 import javax.inject.Singleton
@@ -49,6 +52,11 @@ import javax.inject.Singleton
 @Module
 @Suppress("unused")
 open class CommonsApplicationModule(private val applicationContext: Context) {
+
+    init {
+        appContext = applicationContext
+    }
+
     @Provides
     fun providesImageFileLoader(context: Context): ImageFileLoader =
         ImageFileLoader(context)
@@ -109,11 +117,6 @@ open class CommonsApplicationModule(private val applicationContext: Context) {
     @Named("bookmarks")
     fun provideBookmarkContentProviderClient(context: Context): ContentProviderClient? =
         context.contentResolver.acquireContentProviderClient(BuildConfig.BOOKMARK_AUTHORITY)
-
-    @Provides
-    @Named("bookmarksLocation")
-    fun provideBookmarkLocationContentProviderClient(context: Context): ContentProviderClient? =
-        context.contentResolver.acquireContentProviderClient(BuildConfig.BOOKMARK_LOCATIONS_AUTHORITY)
 
     @Provides
     @Named("bookmarksItem")
@@ -196,7 +199,10 @@ open class CommonsApplicationModule(private val applicationContext: Context) {
         applicationContext,
         AppDatabase::class.java,
         "commons_room.db"
-    ).addMigrations(MIGRATION_1_2).fallbackToDestructiveMigration().build()
+    ).addMigrations(
+        MIGRATION_1_2,
+        MIGRATION_19_TO_20
+    ).fallbackToDestructiveMigration().build()
 
     @Provides
     fun providesContributionsDao(appDatabase: AppDatabase): ContributionDao =
@@ -205,6 +211,10 @@ open class CommonsApplicationModule(private val applicationContext: Context) {
     @Provides
     fun providesPlaceDao(appDatabase: AppDatabase): PlaceDao =
         appDatabase.PlaceDao()
+
+    @Provides
+    fun providesBookmarkLocationsDao(appDatabase: AppDatabase): BookmarkLocationsDao =
+        appDatabase.bookmarkLocationsDao()
 
     @Provides
     fun providesDepictDao(appDatabase: AppDatabase): DepictsDao =
@@ -239,11 +249,110 @@ open class CommonsApplicationModule(private val applicationContext: Context) {
         const val IO_THREAD: String = "io_thread"
         const val MAIN_THREAD: String = "main_thread"
 
+        lateinit var appContext: Context
+            private set
+
         val MIGRATION_1_2: Migration = object : Migration(1, 2) {
             override fun migrate(db: SupportSQLiteDatabase) {
                 db.execSQL(
                     "ALTER TABLE contribution " + " ADD COLUMN hasInvalidLocation INTEGER NOT NULL DEFAULT 0"
                 )
+            }
+        }
+
+        private val MIGRATION_19_TO_20 = object : Migration(19, 20) {
+            override fun migrate(db: SupportSQLiteDatabase) {
+                db.execSQL(
+                    """
+                CREATE TABLE IF NOT EXISTS bookmarks_locations (
+                    location_name TEXT NOT NULL PRIMARY KEY,
+                    location_language TEXT NOT NULL,
+                    location_description TEXT NOT NULL,
+                    location_lat REAL NOT NULL,
+                    location_long REAL NOT NULL,
+                    location_category TEXT NOT NULL,
+                    location_label_text TEXT NOT NULL,
+                    location_label_icon INTEGER,
+                    location_image_url TEXT NOT NULL DEFAULT '',
+                    location_wikipedia_link TEXT NOT NULL,
+                    location_wikidata_link TEXT NOT NULL,
+                    location_commons_link TEXT NOT NULL,
+                    location_pic TEXT NOT NULL,
+                    location_exists INTEGER NOT NULL CHECK(location_exists IN (0, 1))
+                )
+            """
+                )
+
+                val oldDbPath = appContext.getDatabasePath("commons.db").path
+                val oldDb = SQLiteDatabase
+                    .openDatabase(oldDbPath, null, SQLiteDatabase.OPEN_READONLY)
+
+                val cursor = oldDb.rawQuery("SELECT * FROM bookmarksLocations", null)
+
+                while (cursor.moveToNext()) {
+                    val locationName =
+                        cursor.getString(cursor.getColumnIndexOrThrow("location_name"))
+                    val locationLanguage =
+                        cursor.getString(cursor.getColumnIndexOrThrow("location_language"))
+                    val locationDescription =
+                        cursor.getString(cursor.getColumnIndexOrThrow("location_description"))
+                    val locationCategory =
+                        cursor.getString(cursor.getColumnIndexOrThrow("location_category"))
+                    val locationLabelText =
+                        cursor.getString(cursor.getColumnIndexOrThrow("location_label_text"))
+                    val locationLabelIcon =
+                        cursor.getInt(cursor.getColumnIndexOrThrow("location_label_icon"))
+                    val locationLat =
+                        cursor.getDouble(cursor.getColumnIndexOrThrow("location_lat"))
+                    val locationLong =
+                        cursor.getDouble(cursor.getColumnIndexOrThrow("location_long"))
+
+                    // Handle NULL values safely
+                    val locationImageUrl =
+                        cursor.getString(
+                            cursor.getColumnIndexOrThrow("location_image_url")
+                        ) ?: ""
+                    val locationWikipediaLink =
+                        cursor.getString(
+                            cursor.getColumnIndexOrThrow("location_wikipedia_link")
+                        ) ?: ""
+                    val locationWikidataLink =
+                        cursor.getString(
+                            cursor.getColumnIndexOrThrow("location_wikidata_link")
+                        ) ?: ""
+                    val locationCommonsLink =
+                        cursor.getString(
+                            cursor.getColumnIndexOrThrow("location_commons_link")
+                        ) ?: ""
+                    val locationPic =
+                        cursor.getString(
+                            cursor.getColumnIndexOrThrow("location_pic")
+                        ) ?: ""
+                    val locationExists =
+                        cursor.getInt(
+                            cursor.getColumnIndexOrThrow("location_exists")
+                        )
+
+                    db.execSQL(
+                        """
+                    INSERT OR REPLACE INTO bookmarks_locations (
+                        location_name, location_language, location_description, location_category,
+                        location_label_text, location_label_icon, location_lat, location_long,
+                        location_image_url, location_wikipedia_link, location_wikidata_link,
+                        location_commons_link, location_pic, location_exists
+                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                """,
+                        arrayOf(
+                            locationName, locationLanguage, locationDescription, locationCategory,
+                            locationLabelText, locationLabelIcon, locationLat, locationLong,
+                            locationImageUrl, locationWikipediaLink, locationWikidataLink,
+                            locationCommonsLink, locationPic, locationExists
+                        )
+                    )
+                }
+
+                cursor.close()
+                oldDb.close()
             }
         }
     }

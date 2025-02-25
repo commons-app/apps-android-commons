@@ -7,6 +7,7 @@ import android.view.View.INVISIBLE
 import android.view.View.VISIBLE
 import android.widget.RelativeLayout
 import androidx.activity.result.ActivityResultLauncher
+import androidx.lifecycle.LifecycleCoroutineScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.transition.TransitionManager
@@ -16,9 +17,11 @@ import com.hannesdorfmann.adapterdelegates4.dsl.adapterDelegateViewBinding
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao
 import fr.free.nrw.commons.databinding.ItemPlaceBinding
+import kotlinx.coroutines.launch
 
 fun placeAdapterDelegate(
     bookmarkLocationDao: BookmarkLocationsDao,
+    scope: LifecycleCoroutineScope?,
     onItemClick: ((Place) -> Unit)? = null,
     onCameraClicked: (Place, ActivityResultLauncher<Array<String>>, ActivityResultLauncher<Intent>) -> Unit,
     onCameraLongPressed: () -> Boolean,
@@ -61,7 +64,10 @@ fun placeAdapterDelegate(
         nearbyButtonLayout.galleryButton.setOnClickListener { onGalleryClicked(item, galleryPickLauncherForResult) }
         nearbyButtonLayout.galleryButton.setOnLongClickListener { onGalleryLongPressed() }
         bookmarkButtonImage.setOnClickListener {
-            val isBookmarked = bookmarkLocationDao.updateBookmarkLocation(item)
+            var isBookmarked = false
+            scope?.launch {
+                isBookmarked = bookmarkLocationDao.updateBookmarkLocation(item)
+            }
             bookmarkButtonImage.setImageResource(
                 if (isBookmarked) R.drawable.ic_round_star_filled_24px else R.drawable.ic_round_star_border_24px,
             )
@@ -93,13 +99,15 @@ fun placeAdapterDelegate(
                     GONE
                 }
 
-            bookmarkButtonImage.setImageResource(
-                if (bookmarkLocationDao.findBookmarkLocation(item)) {
-                    R.drawable.ic_round_star_filled_24px
-                } else {
-                    R.drawable.ic_round_star_border_24px
-                },
-            )
+            scope?.launch {
+                bookmarkButtonImage.setImageResource(
+                    if (bookmarkLocationDao.findBookmarkLocation(item.name)) {
+                        R.drawable.ic_round_star_filled_24px
+                    } else {
+                        R.drawable.ic_round_star_border_24px
+                    },
+                )
+            }
         }
         nearbyButtonLayout.directionsButton.setOnLongClickListener { onDirectionsLongPressed() }
     }

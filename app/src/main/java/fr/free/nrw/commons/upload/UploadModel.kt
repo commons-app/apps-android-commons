@@ -103,8 +103,11 @@ class UploadModel @Inject internal constructor(
      * @param filePath file to be checked
      * @return IMAGE_DUPLICATE or IMAGE_OK
      */
-    fun checkDuplicateImage(filePath: String?): Single<Int> =
-        imageProcessingService.checkDuplicateImage(filePath)
+    fun checkDuplicateImage(originalFilePath: Uri?, modifiedFilePath: Uri?): Single<Int> =
+        imageProcessingService.checkIfFileAlreadyExists(
+            originalFilePath = originalFilePath!!,
+            modifiedFilePath = modifiedFilePath!!
+        )
 
     /**
      * Calls validateCaption() of ImageProcessingService to check caption of image

@@ -820,4 +820,5 @@
   <string name="account_vanish_request_confirm">Att få kontot att försvinna är en &lt;b&gt;sista utväg&lt;/b&gt; och bör &lt;b&gt;endast användas när du vill sluta redigera för alltid&lt;/b&gt; och även dölja så många av dina tidigare associationer som möjligt.&lt;br/&gt;&lt;br/&gt;Konton raderas på Wikimedia Commons genom att ändra kontonamnet för att göra så att andra inte kan känna igen bidragen i en process som kallas kontoförsvinnande. &lt;b&gt;Försvinnande garanterar inte fullständig anonymitet eller att bidrag tas bort från projekten&lt;/b&gt;.</string>
   <string name="caption">Bildtext</string>
   <string name="caption_copied_to_clipboard">Bildtext kopierades till urklipp</string>
+  <string name="congratulations_all_pictures_in_this_album_have_been_either_uploaded_or_marked_as_not_for_upload">Grattis! Alla bilder i detta album har antingen laddats upp eller markerats för att inte laddas upp.</string>
 </resources>

@@ -185,10 +185,12 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
      * or a fragment
      */
     private void initProvider() {
-        if (getParentFragment() != null) {
+        if (getParentFragment() instanceof MediaDetailProvider) {
             provider = (MediaDetailProvider) getParentFragment();
-        } else {
+        } else if (getActivity() instanceof MediaDetailProvider) {
             provider = (MediaDetailProvider) getActivity();
+        } else {
+            throw new ClassCastException("Parent must implement MediaDetailProvider");
         }
     }
 

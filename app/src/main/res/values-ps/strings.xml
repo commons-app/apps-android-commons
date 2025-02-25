@@ -6,24 +6,72 @@
 * Baloch Khan
 * Ibrahim khashrowdi
 * Saraiki
+* شاه زمان پټان
 -->
 <resources>
-  <plurals name="multiple_uploads_title" fuzzy="true">
-    <item quantity="one">1 پورته کول</item>
-    <item quantity="other">%1$d پورته کول</item>
+  <string name="commons_github">خونديځ ګيټهوب سرچينه کوډ</string>
+  <string name="commons_logo">خونديځ نښان</string>
+  <string name="commons_website">خونديځ وېبپاڼه</string>
+  <string name="exit_location_picker">له ځای ټاکونکي وتل</string>
+  <string name="submit">سپارل</string>
+  <string name="add_another_description">بل سپيناوی ورزياتول</string>
+  <string name="add_new_contribution">نوې ونډې ورزياتول</string>
+  <string name="add_contribution_from_camera">د کامرې له لارې ونډه ورزياتول</string>
+  <string name="add_contribution_from_photos">انځورونو له لارې ونډه ورزياتول</string>
+  <string name="add_contribution_from_contributions_gallery">د پخوانيو ونډو له انځورتونه د ونډې ورزياتول</string>
+  <string name="show_captions">نيونګې</string>
+  <string name="row_item_language_description">ژبې سپيناوی</string>
+  <string name="row_item_caption">نيونګ</string>
+  <string name="show_captions_description">سپيناوی</string>
+  <string name="nearby_row_image">انځور</string>
+  <string name="nearby_all">ټول</string>
+  <string name="nearby_filter_toggle">پورته کول</string>
+  <string name="nearby_filter_search">لټون ليد</string>
+  <string name="nearby_filter_state">ځای حالت</string>
+  <string name="appwidget_img">ورځې انځور</string>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="one">%1$d دوتنه پورته کول</item>
+    <item quantity="other"> %1$d دوتنې پورته کول</item>
+  </plurals>
+  <plurals name="contributions_subtitle">
+    <item quantity="one">(%1$d)</item>
+    <item quantity="other">(%1$d)</item>
+  </plurals>
+  <string name="starting_uploads">پورته کولو پيل</string>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">جريان %d پورته کول</item>
+    <item quantity="other">پورته کولو %d جريان</item>
+  </plurals>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">%d upload</item>
+    <item quantity="other">%d پورته کول</item>
   </plurals>
   <string name="share_license_summary" fuzzy="true">دا انځور به د %1$s په منښتليک سمبال وي.</string>
+  <string name="navigation_item_explore">سپړنه</string>
+  <string name="preference_category_appearance">ښکارېدنه</string>
+  <string name="preference_category_general">ټولګړی</string>
+  <string name="preference_category_feedback">غبرګون</string>
+  <string name="preference_category_privacy">پټنتيا</string>
   <string name="app_name">ويکي خونديځ</string>
   <string name="menu_settings">امستنې</string>
-  <string name="username">کارن-نوم</string>
+  <string name="intent_share_upload_label">خونديځ ته راپورته کول</string>
+  <string name="upload_in_progress">راپورته کول جريان لري</string>
+  <string name="username">کارن‌نوم</string>
   <string name="password">پټنوم</string>
+  <string name="login_credential">خپل خونديځ بېټا ګڼون ته ورننوځئ</string>
   <string name="login">ننوتل</string>
+  <string name="forgot_password">پټنوم مو هېر شوی؟</string>
   <string name="signup">نومليکنه</string>
   <string name="logging_in_title">په ننوتلو کې دی</string>
   <string name="logging_in_message">لطفاً تم شۍ …</string>
-  <string name="login_success" fuzzy="true">غونډال کې بريالی ورننوتلۍ!</string>
-  <string name="login_failed" fuzzy="true">غونډال کې ننوتنه نابريالې شوه!</string>
+  <string name="updating_caption_title">نيونګې او سپيناوي تازه کول</string>
+  <string name="updating_caption_message">په تمه اوسئ</string>
+  <string name="login_success">بريالی ننوتون</string>
+  <string name="login_failed">ناسم ننوتون</string>
   <string name="upload_failed">دوتنه و نه موندل شوه. لطفاً د يوې بلې دوتنې د موندلو هڅه وکړئ.</string>
+  <string name="retry_limit_reached">د بياځلي هڅې وروستۍ اندازه پوره شوه! مهرباني وکړئ، لغوه يې کړئ او بيا د راپورته کولو هڅه وکړئ</string>
+  <string name="unrestricted_battery_mode">بيټري سمون بندول؟</string>
+  <string name="suggest_unrestricted_mode">کله چې د بیټرۍ اصلاح بنده وي، له ۳ څخه زیاتو عکسونو اپلوډ کول ډیر باوري کار کوي. مهرباني وکړئ د اسانه اپلوډ تجربې لپاره د کامنز ایپ لپاره د ترتیباتو څخه د بیټرۍ اصلاح بند کړئ. \n\n د بیټرۍ اصلاح بندولو لپاره ممکنه ګامونه:\n\n لومړی ګام: لاندې \'ترتیبات\' تڼۍ باندې کلیک وکړئ.\n\n دوهم ګام: له \'نه غوره شوی\' څخه \'ټول ایپس\' ته واړوئ.\n\n دریم ګام: د \"کامن\" یا \"fr.free.nrw.commons\" لټون وکړئ.\n\n څلورم ګام: دا کلیک کړئ او \'غوره نه کړئ\' غوره کړئ.\n\n پنځم ګام: \'بشپړ شوی\' فشار ورکړئ.</string>
   <string name="uploading_started">پورته کېدنه پيل شوه!</string>
   <string name="upload_completed_notification_title">%1$s پورته شوی!</string>
   <string name="upload_progress_notification_title_in_progress">د %1$s پورته کول</string>
@@ -88,4 +136,5 @@
   <string name="navigation_item_settings">امستنې</string>
   <string name="navigation_item_feedback">غبرگون</string>
   <string name="navigation_item_logout">وتل</string>
+  <string name="account">گڼون</string>
 </resources>

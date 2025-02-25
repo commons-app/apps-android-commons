@@ -4,6 +4,7 @@
 * Alexandr Efremov
 * Av6
 * Butko
+* Cabadeck
 * DDPAT
 * Deltaspace
 * Dirruw'o
@@ -177,6 +178,7 @@
   <string name="categories_search_text_hint">Выбор категорий</string>
   <string name="depicts_search_text_hint">Искать элементы, которые изображены на вашем изображении (гора, Тадж-Махал и т. д.)</string>
   <string name="menu_save_categories">Сохранить</string>
+  <string name="menu_overflow_desc">Дополнительное меню</string>
   <string name="refresh_button">Обновить</string>
   <string name="display_list_button">Список</string>
   <string name="contributions_subtitle_zero">(Загрузок пока нет)</string>
@@ -333,6 +335,7 @@
   <string name="copy_wikicode">Копирование викикода в буфер обмена</string>
   <string name="wikicode_copied">Викикод скопирован в буфер обмена</string>
   <string name="nearby_location_not_available">Функция «Поблизости» может работать некорректно, определение местоположения недоступно.</string>
+  <string name="nearby_showing_pins_offline">Интернет недоступен. Показаны только кэшированные места.</string>
   <string name="upload_location_access_denied">Доступ к местоположению запрещён. Чтобы использовать эту функцию, укажите своё местоположение вручную.</string>
   <string name="location_permission_rationale_nearby">Необходимо разрешение для отображения списка мест поблизости</string>
   <string name="location_permission_rationale_explore">Необходимо разрешение для отображения списка мест поблизости</string>
@@ -869,7 +872,14 @@
   <string name="usages_on_commons_heading">Викисклад</string>
   <string name="usages_on_other_wikis_heading">Другие вики</string>
   <string name="file_usages_container_heading">Использование файла</string>
+  <string name="title_activity_single_web_view">SingleWebViewActivity</string>
   <string name="account">Учётная запись</string>
+  <string name="vanish_account">Удалить учётную запись</string>
+  <string name="account_vanish_request_confirm_title">Предупреждение об удалении учётной записи</string>
+  <string name="account_vanish_request_confirm">Удаление — это &lt;b&gt;крайняя мера&lt;/b&gt;, и её следует &lt;b&gt;использовать только в том случае, если вы хотите навсегда прекратить редактирование&lt;/b&gt;, а также скрыть как можно больше связанных с вами действий.&lt;br/&gt;&lt;br/&gt; Удаление вашей учётной записи на Викискладе осуществляется путём изменения её имени, чтобы другие не могли определить ваши действия. &lt;b&gt;Удаление не гарантирует полной анонимности или удаления вклада в проектах&lt;/b&gt;.</string>
   <string name="caption">Подпись</string>
   <string name="caption_copied_to_clipboard">Подпись скопирована в буфер обмена</string>
+  <string name="congratulations_all_pictures_in_this_album_have_been_either_uploaded_or_marked_as_not_for_upload">Поздравляем, все фотографии в этом альбоме либо загружены, либо помечены как не предназначенные для загрузки.</string>
+  <string name="show_in_explore">Показать в Explore</string>
+  <string name="show_in_nearby">Показать в Nearby</string>
 </resources>

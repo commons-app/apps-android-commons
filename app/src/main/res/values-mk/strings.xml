@@ -817,4 +817,7 @@
   <string name="account_vanish_request_confirm">Исчезнувањето е &lt;b&gt;крајна мерка&lt;/b&gt; и треба да се користи само ако сакате да престанете да уредувате засекогаш/b&gt; и да скриете што повеќе од вашите досегашни врски.&lt;br/&gt;&lt;br/&gt;Бришењето сметки на Википедија се врши со менување на името на вашата сметка, така што другите не би можеле да ги препознаат вашите придонеси во постапка наречена „исчезнување“ на сметка.&lt;b&gt;Исчезнувањето не гарантира целосна анонимност и не ги отстранува придонесите на проектите&lt;/b&gt;.</string>
   <string name="caption">Толкување</string>
   <string name="caption_copied_to_clipboard">Толкувањето е ставено во меѓускладот</string>
+  <string name="congratulations_all_pictures_in_this_album_have_been_either_uploaded_or_marked_as_not_for_upload">Честитаме. Сите слики од овој албум се подигнати или обележани за неподигање.</string>
+  <string name="show_in_explore">Прикажи во „Истражи“</string>
+  <string name="show_in_nearby">Прикажи во „Во близина“</string>
 </resources>

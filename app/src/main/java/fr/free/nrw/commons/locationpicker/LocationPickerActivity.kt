@@ -430,7 +430,11 @@ class LocationPickerActivity : BaseActivity(), LocationPermissionCallback {
             else -> null
         }
 
-        position?.let { Utils.handleGeoCoordinates(this, it) }
+        position?.let {
+            mapView?.zoomLevelDouble?.let { zoomLevel ->
+                Utils.handleGeoCoordinates(this, it, zoomLevel)
+            } ?: Utils.handleGeoCoordinates(this, it)
+        }
     }
 
     /**

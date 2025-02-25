@@ -16,6 +16,7 @@ import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewTreeObserver
 import android.view.ViewTreeObserver.OnGlobalLayoutListener
 import android.widget.ArrayAdapter
 import android.widget.Button
@@ -405,9 +406,14 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
          * Gets the height of the frame layout as soon as the view is ready and updates aspect ratio
          * of the picture.
          */
-        view.post {
-            frameLayoutHeight = binding.mediaDetailFrameLayout.measuredHeight
-            updateAspectRatio(binding.mediaDetailScrollView.width)
+        view.post{
+            val width = binding.mediaDetailScrollView.width
+            if (width > 0) {
+                frameLayoutHeight = binding.mediaDetailFrameLayout.measuredHeight
+                updateAspectRatio(width)
+            } else {
+                view.postDelayed({ updateAspectRatio(binding.root.width) }, 1)
+            }
         }
 
         return view
@@ -493,7 +499,7 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
 
         val contributionsFragment: ContributionsFragment? = this.getContributionsFragmentParent()
         if (contributionsFragment?.binding != null) {
-            contributionsFragment.binding.cardViewNearby.visibility = View.GONE
+            contributionsFragment.binding!!.cardViewNearby.visibility = View.GONE
         }
 
         // detail provider is null when fragment is shown in review activity
@@ -650,10 +656,8 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
     }
 
     private fun onDepictionsLoaded(idAndCaptions: List<IdAndCaptions>) {
-        binding.depictsLayout.visibility =
-            if (idAndCaptions.isEmpty()) View.GONE else View.VISIBLE
-        binding.depictionsEditButton.visibility =
-            if (idAndCaptions.isEmpty()) View.GONE else View.VISIBLE
+        binding.depictsLayout.visibility = View.VISIBLE
+        binding.depictionsEditButton.visibility = View.VISIBLE
         buildDepictionList(idAndCaptions)
     }
 
@@ -863,8 +867,22 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
      */
     private fun buildDepictionList(idAndCaptions: List<IdAndCaptions>) {
         binding.mediaDetailDepictionContainer.removeAllViews()
+
+        // Create a mutable list from the original list
+        val mutableIdAndCaptions = idAndCaptions.toMutableList()
+
+        if (mutableIdAndCaptions.isEmpty()) {
+            // Create a placeholder IdAndCaptions object and add it to the list
+            mutableIdAndCaptions.add(
+                IdAndCaptions(
+                    id = media?.pageId ?: "", // Use an empty string if media?.pageId is null
+                    captions = mapOf(Locale.getDefault().language to getString(R.string.detail_panel_cats_none)) // Create a Map with the language as the key and the message as the value
+                )
+            )
+        }
+
         val locale: String = Locale.getDefault().language
-        for (idAndCaption: IdAndCaptions in idAndCaptions) {
+        for (idAndCaption: IdAndCaptions in mutableIdAndCaptions) {
             binding.mediaDetailDepictionContainer.addView(
                 buildDepictLabel(
                     getDepictionCaption(idAndCaption, locale),
@@ -874,6 +892,7 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
             )
         }
     }
+
 
     private fun getDepictionCaption(idAndCaption: IdAndCaptions, locale: String): String? {
         // Check if the Depiction Caption is available in user's locale

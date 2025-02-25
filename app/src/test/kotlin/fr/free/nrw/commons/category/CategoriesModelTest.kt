@@ -11,6 +11,7 @@ import fr.free.nrw.commons.upload.GpsCategoryModel
 import io.reactivex.Single
 import io.reactivex.subjects.BehaviorSubject
 import media
+import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import org.mockito.ArgumentMatchers
@@ -331,4 +332,42 @@ class CategoriesModelTest {
             media(),
         )
     }
+
+    @Test
+    fun `test valid input with XXXX in it between the expected range 20XX`() {
+        val input = categoriesModel.isSpammyCategory("Amavenita (ship, 2014)")
+        Assert.assertFalse(input)
+    }
+
+    @Test
+    fun `test valid input with XXXXs in it between the expected range 20XXs`() {
+        val input = categoriesModel.isSpammyCategory("Amavenita (ship, 2014s)")
+        Assert.assertFalse(input)
+    }
+
+    @Test
+    fun `test invalid category when have needing in the input`() {
+        val input = categoriesModel.isSpammyCategory("Media needing categories as of 30 March 2017")
+        Assert.assertTrue(input)
+    }
+
+    @Test
+    fun `test invalid category when have taken on in the input`() {
+        val input = categoriesModel.isSpammyCategory("Photographs taken on 2015-12-08")
+        Assert.assertTrue(input)
+    }
+
+    @Test
+    fun `test invalid category when have yy mm or yy mm dd in the input`() {
+        // filtering based on [., /, -]  separators between the dates.
+        val input = categoriesModel.isSpammyCategory("Image class 09.14")
+        Assert.assertTrue(input)
+    }
+
+    @Test
+    fun `test invalid category when have years not in 20XX range`() {
+        val input = categoriesModel.isSpammyCategory("Japan in the 1400s")
+        Assert.assertTrue(input)
+    }
+
 }
