@@ -16,7 +16,7 @@ jobs:
     if: github.event.workflow_run.conclusion == 'success'  
     steps:
       - name: Checkout base branch
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           ref: ${{ github.event.workflow_run.head_branch }}  
       - name: Download Run ID Artifact
