@@ -29,11 +29,11 @@ enum class NavTab(
             return NearbyParentFragment.newInstance()
         }
     },
-//    EXPLORE(R.string.navigation_item_explore, R.drawable.ic_globe) {
-//        override fun newInstance(): Fragment {
-//            return ExploreFragment.newInstance()
-//        }
-//    },
+    EXPLORE(R.string.navigation_item_explore, R.drawable.ic_globe) {
+        override fun newInstance(): Fragment {
+            return ExploreFragment.newInstance()
+        }
+    },
     BOOKMARKS(R.string.bookmarks, R.drawable.ic_round_star_border_24px) {
         override fun newInstance(): Fragment {
             return BookmarkFragment.newInstance()

@@ -86,7 +86,7 @@ class LoginActivity : AccountAuthenticatorActivity() {
             loginPassword.addTextChangedListener(textWatcher)
             loginTwoFactor.addTextChangedListener(textWatcher)
 
-//            skipLogin.setOnClickListener { skipLogin() }
+            skipLogin.setOnClickListener { skipLogin() }
             forgotPassword.setOnClickListener { forgotPassword() }
             aboutPrivacyPolicy.setOnClickListener { onPrivacyPolicyClicked() }
             signUpButton.setOnClickListener { signUp() }
