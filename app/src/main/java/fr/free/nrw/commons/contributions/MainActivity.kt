@@ -478,13 +478,13 @@ after opening the app.
      * @param longitude current longitude of Nearby map
      */
     fun loadExploreMapFromNearby(zoom: Double, latitude: Double, longitude: Double) {
-        val bundle = Bundle()
-        bundle.putDouble("prev_zoom", zoom)
-        bundle.putDouble("prev_latitude", latitude)
-        bundle.putDouble("prev_longitude", longitude)
-
-        loadFragment(ExploreFragment.newInstance(), false, bundle)
-        setSelectedItemId(NavTab.EXPLORE.code())
+//        val bundle = Bundle()
+//        bundle.putDouble("prev_zoom", zoom)
+//        bundle.putDouble("prev_latitude", latitude)
+//        bundle.putDouble("prev_longitude", longitude)
+//
+//        loadFragment(ExploreFragment.newInstance(), false, bundle)
+//        setSelectedItemId(NavTab.EXPLORE.code())
     }
 
     /**
