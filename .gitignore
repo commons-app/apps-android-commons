@@ -47,3 +47,4 @@ captures/*
 # Test and other output
 app/jacoco.exec
 app/CommonsContributions
+app/.attach_pid*
