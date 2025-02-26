@@ -67,9 +67,9 @@ class MoreBottomSheetFragment : BottomSheetDialogFragment() {
     ): View? {
         binding = FragmentMoreBottomSheetBinding.inflate(inflater, container, false)
 
-        if (store.getBoolean(CommonsApplication.IS_LIMITED_CONNECTION_MODE_ENABLED)) {
+//        if (store.getBoolean(CommonsApplication.IS_LIMITED_CONNECTION_MODE_ENABLED)) {
             binding?.morePeerReview?.visibility = View.GONE
-        }
+//        }
 
         binding?.apply {
             moreLogout.setOnClickListener { onLogoutClicked() }
