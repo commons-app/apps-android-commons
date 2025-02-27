@@ -1,10 +1,6 @@
 name: Android CI
 
-on: [push, pull_request, workflow_dispatch]  
-
-permissions:
-  contents: read
-  actions: read
+on: [push, pull_request, workflow_dispatch]
 
 concurrency:
   group: build-${{ github.event.pull_request.number || github.ref }}
@@ -106,14 +102,3 @@ jobs:
         with:
           name: prodDebugAPK
           path: app/build/outputs/apk/prod/debug/app-*.apk
-          
-      - name: Store Workflow Run ID
-        if: github.event_name == 'pull_request'
-        run: echo "${{ github.run_id }}" > run_id.txt
-
-      - name: Upload Run ID as Artifact
-        if: github.event_name == 'pull_request'
-        uses: actions/upload-artifact@v4
-        with:
-          name: run-id
-          path: run_id.txt
