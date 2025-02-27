@@ -4,6 +4,7 @@
 * Akmaie Ajam
 * Arifin.wijaya
 * Birusian
+* Boesenbergia
 * DARMAS BUDI SANTOSO
 * Daud I.F. Argana
 * Fafau06
@@ -295,7 +296,7 @@
   <string name="error_notifications">Galat penyampaian pemberitahuan</string>
   <string name="error_review">Galat mengambil gambar untuk ditinjau. Tekan segarkan untuk coba lagi.</string>
   <string name="no_notifications">Pemberitahuan tidak ditemukan</string>
-  <string name="about_translate">Terjemahkan</string>
+  <string name="about_translate">Pertalaghi</string>
   <string name="about_translate_title">Bahasa</string>
   <string name="about_translate_message">Pilih bahasa untuk terjemahan yang ingin Anda kirimkan</string>
   <string name="about_translate_proceed">Lanjutkan</string>
