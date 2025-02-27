@@ -495,17 +495,17 @@ class NearbyParentFragmentPresenter
         updateMapAndList(LocationChangeType.MAP_UPDATED)
     }
 
-    override fun onLocationChangedSignificantly(latLng: LatLng) {
+    override fun onLocationChangedSignificantly(latLng: LatLng?) {
         Timber.d("Location significantly changed")
         updateMapAndList(LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED)
     }
 
-    override fun onLocationChangedSlightly(latLng: LatLng) {
+    override fun onLocationChangedSlightly(latLng: LatLng?) {
         Timber.d("Location significantly changed")
         updateMapAndList(LocationChangeType.LOCATION_SLIGHTLY_CHANGED)
     }
 
-    override fun onLocationChangedMedium(latLng: LatLng) {
+    override fun onLocationChangedMedium(latLng: LatLng?) {
         Timber.d("Location changed medium")
     }
 
