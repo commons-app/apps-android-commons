@@ -111,7 +111,7 @@ class DeleteHelper @Inject constructor(
 
         val userPageString = "\n{{subst:idw|${media.filename}}} ~~~~"
 
-        val creator = media.author
+        val creator = media.getAuthorOrUser()
             ?: throw RuntimeException("Failed to nominate for deletion")
 
         return pageEditClient.prependEdit(
