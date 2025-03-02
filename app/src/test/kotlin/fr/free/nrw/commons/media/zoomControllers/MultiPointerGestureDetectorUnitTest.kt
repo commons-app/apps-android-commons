@@ -107,43 +107,43 @@ class MultiPointerGestureDetectorUnitTest {
     @Test
     @Throws(Exception::class)
     fun testIsGestureInProgress() {
-        Assert.assertEquals(detector.isGestureInProgress, false)
+        Assert.assertEquals(detector.isGestureInProgress(), false)
     }
 
     @Test
     @Throws(Exception::class)
     fun testGetNewPointerCount() {
-        Assert.assertEquals(detector.newPointerCount, 0)
+        Assert.assertEquals(detector.getNewPointerCount(), 0)
     }
 
     @Test
     @Throws(Exception::class)
     fun testGetPointerCount() {
-        Assert.assertEquals(detector.pointerCount, 0)
+        Assert.assertEquals(detector.getPointerCount(), 0)
     }
 
     @Test
     @Throws(Exception::class)
     fun testGetStartX() {
-        Assert.assertEquals(detector.startX[0], 0.0f)
+        Assert.assertEquals(detector.getStartX()[0], 0.0f)
     }
 
     @Test
     @Throws(Exception::class)
     fun testGetStartY() {
-        Assert.assertEquals(detector.startY[0], 0.0f)
+        Assert.assertEquals(detector.getStartY()[0], 0.0f)
     }
 
     @Test
     @Throws(Exception::class)
     fun testGetCurrentX() {
-        Assert.assertEquals(detector.currentX[0], 0.0f)
+        Assert.assertEquals(detector.getCurrentX()[0], 0.0f)
     }
 
     @Test
     @Throws(Exception::class)
     fun testGetCurrentY() {
-        Assert.assertEquals(detector.currentY[0], 0.0f)
+        Assert.assertEquals(detector.getCurrentY()[0], 0.0f)
     }
 
     @Test
