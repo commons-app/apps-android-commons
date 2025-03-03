@@ -223,7 +223,7 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
     private var view: View? = null
     private var scope: LifecycleCoroutineScope? = null
     private var presenter: NearbyParentFragmentPresenter? = null
-    private var isDarkTheme = false
+    private var _isDarkTheme = false
     private var isFABsExpanded = false
     private var selectedPlace: Place? = null
     private var clickedMarker: Marker? = null
@@ -461,7 +461,7 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
                     }
                 }
             }
-        isDarkTheme = systemThemeUtils?.isDeviceInNightMode() == true
+        _isDarkTheme = systemThemeUtils?.isDeviceInNightMode() == true
         if (Utils.isMonumentsEnabled(Date())) {
             binding?.rlContainerWlmMonthMessage?.visibility = View.VISIBLE
         } else {
@@ -631,7 +631,7 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
      * another refactor
      */
     private fun initThemePreferences() {
-        if (isDarkTheme) {
+        if (_isDarkTheme) {
             binding!!.bottomSheetNearby.rvNearbyList.setBackgroundColor(
                 requireContext().resources.getColor(fr.free.nrw.commons.R.color.contributionListDarkBackground)
             )
@@ -915,7 +915,7 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
                 }
 
                 override fun isDarkTheme(): Boolean {
-                    return isDarkTheme
+                    return _isDarkTheme
                 }
             })
         binding!!.nearbyFilterList.root
