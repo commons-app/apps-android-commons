@@ -16,6 +16,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.AdapterView.OnItemClickListener
+import android.widget.Button
 import android.widget.EditText
 import android.widget.FrameLayout
 import android.widget.ImageView
@@ -329,6 +330,9 @@ class UploadMediaDetailAdapter : RecyclerView.Adapter<UploadMediaDetailAdapter.V
                 setUpRecentLanguagesSection(recentLanguages)
 
                 listView.adapter = languagesAdapter
+
+                dialog.findViewById<Button>(R.id.cancel_button)
+                    .setOnClickListener { v: View? -> dialog.dismiss() }
 
                 editText.addTextChangedListener(object : TextWatcher {
                     override fun beforeTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) =
