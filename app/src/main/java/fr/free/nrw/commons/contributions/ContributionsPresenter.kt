@@ -80,9 +80,11 @@ class ContributionsPresenter @Inject internal constructor(
             .save(contribution)
             .subscribeOn(ioThreadScheduler)
             .subscribe {
-                makeOneTimeWorkRequest(
-                    view!!.getContext().applicationContext, ExistingWorkPolicy.KEEP
-                )
+                view!!.getContext()?.applicationContext?.let {
+                    makeOneTimeWorkRequest(
+                        it, ExistingWorkPolicy.KEEP
+                    )
+                }
             })
     }
 }
