@@ -500,7 +500,7 @@ class ContributionsFragment
 
     private fun setUploadCount() {
         okHttpJsonApiClient
-            ?.getUploadCount((activity as MainActivity).sessionManager?.currentAccount!!.name)
+            ?.getUploadCount(sessionManager?.currentAccount!!.name)
             ?.subscribeOn(Schedulers.io())
             ?.observeOn(AndroidSchedulers.mainThread())?.let {
                 compositeDisposable.add(
