@@ -10,8 +10,14 @@
 -->
 <resources>
   <string name="commons_logo">ਕਾਮਨਜ਼ ਮਾਰਕਾ</string>
+  <string name="submit">ਹਵਾਲੇ ਕਰੋ</string>
   <string name="add_another_description">ਇੱਕ ਹੋਰ ਵੇਰਵਾ ਸ਼ਾਮਲ ਕਰੋ</string>
   <string name="add_new_contribution">ਨਵਾਂ ਯੋਗਦਾਨ ਸ਼ਾਮਲ ਕਰੋ</string>
+  <string name="add_contribution_from_camera">ਕੈਮਰੇ ਰਾਹੀਂ ਯੋਗਦਾਨ ਸ਼ਾਮਲ ਕਰੋ</string>
+  <string name="add_contribution_from_photos">ਤਸਵੀਰਾਂ ਰਾਹੀਂ ਯੋਗਦਾਨ ਸ਼ਾਮਲ ਕਰੋ</string>
+  <string name="show_captions">ਸੁਰਖੀ</string>
+  <string name="row_item_language_description">ਭਾਸ਼ਾ ਦਾ ਵੇਰਵਾ</string>
+  <string name="row_item_caption">ਸੁਰਖੀ</string>
   <string name="show_captions_description">ਵੇਰਵਾ</string>
   <string name="nearby_row_image">ਤਸਵੀਰ</string>
   <string name="nearby_all">ਸਾਰੇ</string>
@@ -37,14 +43,19 @@
   <string name="navigation_item_explore">ਪੜਚੋਲ ਕਰੋ</string>
   <string name="preference_category_appearance">ਦਿੱਖ</string>
   <string name="preference_category_general">ਆਮ</string>
+  <string name="preference_category_feedback">ਸੁਝਾਅ</string>
+  <string name="preference_category_privacy">ਪਰਦੇਦਾਰੀ</string>
   <string name="app_name" fuzzy="true">ਵਿਕੀਮੀਡੀਆ ਕਾਮਨਜ਼</string>
   <string name="menu_settings">ਪਸੰਦਾਂ</string>
+  <string name="upload_in_progress">ਚੜ੍ਹਾਉਣਾ ਜਾਰੀ ਐ</string>
   <string name="username">ਵਰਤੋਂਕਾਰ ਨਾਂ</string>
   <string name="password">ਲੰਘ-ਸ਼ਬਦ</string>
   <string name="login">ਦਾਖ਼ਲ ਹੋਵੋ</string>
   <string name="forgot_password">ਪਾਰਸ਼ਬਦ ਭੁੱਲ ਗਏ?</string>
+  <string name="signup">ਖਾਤਾ ਬਣਾਓ</string>
   <string name="logging_in_title">ਦਾਖ਼ਲਾ ਹੋ ਰਿਹਾ ਹੈ</string>
   <string name="logging_in_message">ਉਡੀਕੋ ਜੀ…</string>
+  <string name="updating_caption_title">ਸੁਰਖੀਆਂ ਅਤੇ ਵੇਰਵੇ ਨਵਿਆਏ ਜਾ ਰਹੇ ਹਨ</string>
   <string name="updating_caption_message">ਕਿਰਪਾ ਕਰਕੇ ਉਡੀਕੋ...</string>
   <string name="login_success">ਦਾਖ਼ਲ ਹੋਣਾ ਸਫ਼ਲ!</string>
   <string name="login_failed">ਦਾਖ਼ਲ ਹੋਣਾ ਅਸਫ਼ਲ!</string>
@@ -53,11 +64,13 @@
   <string name="uploading_started">ਅੱਪਲੋਡ ਸ਼ੁਰੂ ਹੋਇਆ!</string>
   <string name="upload_completed_notification_title">%1$s ਅੱਪਲੋਡ ਹੋ ਗਏ!</string>
   <string name="upload_completed_notification_text">ਆਪਣਾ ਅੱਪਲੋਡ ਵੇਖਣ ਲਈ ਥਪੇੜੋ</string>
-  <string name="upload_progress_notification_title_start" fuzzy="true">%1$s ਅੱਪਲੋਡ ਸ਼ੁਰੂ ਕੀਤੇ ਜਾ ਰਹੇ ਹਨ</string>
+  <string name="upload_progress_notification_title_start">ਫਾਈਲ ਚੜ੍ਹਾਈ ਜਾ ਰਹੀ ਐ: %s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s ਅੱਪਲੋਡ ਕੀਤੇ ਜਾ ਰਹੇ ਹਨ</string>
   <string name="upload_progress_notification_title_finishing">%1$s ਦਾ ਅੱਪਲੋਡ ਖ਼ਤਮ ਹੋ ਰਿਹਾ ਹੈ</string>
-  <string name="upload_failed_notification_title" fuzzy="true">%1$s ਦਾ ਅੱਪਲੋਡ ਫੇਲ੍ਹ ਹੋਇਆ</string>
+  <string name="upload_failed_notification_title">%1$s ਨੂੰ ਚੜ੍ਹਾਉਣ ਵਿੱਚ ਨਾਕਾਮ</string>
+  <string name="upload_paused_notification_title">%1$s ਚੜ੍ਹਾਉਣਾ ਰੋਕਿਆ ਗਿਆ</string>
   <string name="upload_failed_notification_subtitle">ਵੇਖਣ ਲਈ ਥਪੇੜੋ</string>
+  <string name="upload_paused_notification_subtitle">ਵੇਖਣ ਲਈ ਥਪੇੜੋ</string>
   <string name="title_activity_contributions" fuzzy="true">ਮੇਰੇ ਅੱਪਲੋਡ</string>
   <string name="contribution_state_queued">ਕਤਾਰ ਵਿਚ</string>
   <string name="contribution_state_failed">ਫੇਲ੍ਹ ਹੋਇਆ</string>
@@ -68,12 +81,17 @@
   <string name="menu_nearby">ਨੇੜੇ-ਤੇੜੇ</string>
   <string name="provider_contributions">ਮੇਰੇ ਅੱਪਲੋਡ</string>
   <string name="menu_copy_link">ਕੜੀ ਦੀ ਨਕਲ ਕਰੋ</string>
+  <string name="menu_link_copied">ਕੜੀ ਨੂੰ ਚੂੰਢੀ-ਤਖਤੀ ਉੱਤੇ ਨਕਲ ਕੀਤਾ ਗਿਆ ਐ</string>
   <string name="menu_share">ਸਾਂਝਾ ਕਰੋ</string>
+  <string name="menu_view_file_page">ਫਾਇਲ ਸਫ਼ਾ ਵੇਖੋ</string>
   <string name="share_title_hint">ਸੁਰਖੀ (ਲੋੜੀਂਦੀ)</string>
+  <string name="add_caption_toast">ਕਿਰਪਾ ਕਰਕੇ ਇਸ ਫਾਈਲ ਲਈ ਇੱਕ ਸੁਰਖੀ ਦਿਓ</string>
   <string name="share_description_hint">ਵੇਰਵਾ</string>
+  <string name="share_caption_hint">ਸੁਰਖੀ</string>
   <string name="login_failed_network">ਦਾਖ਼ਲ ਹੋਣ ਵਿੱਚ ਅਸਮਰੱਥ - ਨੈੱਟਵਰਕ ਫੇਲ੍ਹ ਹੋਇਆ ਹੈ</string>
   <string name="login_failed_throttled">ਬਹੁਤ ਸਾਰੀਆਂ ਅਸਫ਼ਲ ਕੋਸ਼ਿਸ਼ਾਂ। ਥੋੜ੍ਹੀ ਦੇਰ ਬਾਅਦ ਕੋਸ਼ਿਸ਼ ਕਰੋ ਜੀ।</string>
   <string name="login_failed_blocked">ਅਫ਼ਸੋਸ, ਇਹ ਵਰਤੋਂਕਾਰ ਨੂੰ ਕਾਮਨਜ਼ ਤੇ ਰੋਕ ਲਾਈ ਗਈ ਹੈ।</string>
+  <string name="login_failed_2fa_needed">ਤੁਹਾਨੂੰ ਆਪਣਾ ਦੋ-ਕਾਰਕ ਪ੍ਰਮਾਣੀਕਰਨ ਕੋਡ ਦੇਣਾ ਪਵੇਗਾ।</string>
   <string name="login_failed_generic">ਦਾਖ਼ਲ ਹੋਣਾ ਅਸਫ਼ਲ!</string>
   <string name="share_upload_button">ਚੜ੍ਹਾਉ</string>
   <string name="multiple_share_base_title">ਇਸ ਸੈੱਟ ਨੂੰ ਨਾਂ ਦਿਓ</string>
@@ -85,10 +103,12 @@
   <string name="display_list_button">ਸੂਚੀ</string>
   <string name="contributions_subtitle_zero" fuzzy="true">ਫ਼ਿਲਹਾਲ ਕੋਈ ਅੱਪਲੋਡ ਨਹੀਂ</string>
   <string name="categories_not_found">%1$s ਨਾਲ਼ ਮੇਲ ਖਾਂਦੀ ਕੋਈ ਸ਼੍ਰੇਣੀ ਨਹੀਂ ਲੱਭੀ</string>
+  <string name="depictions_not_found">%1$s ਨਾਲ ਮੇਲ ਖਾਂਦੀਆਂ ਕੋਈ ਵਿਕੀਡਾਟਾ ਚੀਜ਼ਾਂ ਨਹੀਂ ਲੱਭਿਆਂ।</string>
   <string name="categories_skip_explanation" fuzzy="true">ਆਪਣੀਆਂ ਤਸਵੀਰਾਂ ਨੂੰ ਵਿਕੀਮੀਡੀਆ ਕਾਮਨਜ਼ ਵਿਚ ਜ਼ਿਆਦਾ ਲੱਭਣਯੋਗ ਬਣਾਉਣ ਲਈ ਸ਼੍ਰੇਣੀਆਂ ਜੋੜੋ।\n\nਸ਼੍ਰੇਣੀਆਂ ਜੋੜਨ ਲਈ ਟਾਈਪ ਕਰਨ ਅਰੰਭ ਕਰੋ।\nਇਸ ਕਾਰਜ ਨੂੰ ਅਣਡਿੱਠਾ ਕਰਨ ਲਈ ਇਹ ਸੁਨੇਹਾ ਥਪੇੜੋ (ਜਾਂ ਵਾਪਸੀ ਬਟਨ ਦਬਾਓ)।</string>
   <string name="categories_activity_title">ਸ਼੍ਰੇਣੀਆਂ</string>
   <string name="title_activity_settings">ਪਸੰਦਾਂ</string>
   <string name="title_activity_signup">ਖਾਤਾ ਬਣਾਓ</string>
+  <string name="title_activity_featured_images">ਵਿਸ਼ੇਸ਼ ਤਸਵੀਰ</string>
   <string name="title_activity_category_details">ਸ਼੍ਰੇਣੀ</string>
   <string name="menu_about">ਇਸ ਬਾਰੇ</string>
   <string name="about_license" fuzzy="true">ਅਜ਼ਾਦ ਸਰੋਤ ਸਾਫ਼ਟਵੇਅਰ ਨੂੰ &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt; ਅਧੀਨ ਜਾਰੀ ਕੀਤਾ ਗਿਆ ਹੈ</string>
@@ -105,9 +125,9 @@
   <string name="menu_cancel_upload">ਰੱਦ ਕਰੋ</string>
   <string name="media_upload_policy">ਇਹ ਤਸਵੀਰ ਅੱਪਲੋਡ ਕਰਨ ਨਾਲ ਹੀ ਮੈਂ ਦਾਅਵਾ ਕਰਦਾ ਹਾਂ/ਕਰਦੀ ਹਾਂ ਕਿ ਇਹ ਮੇਰਾ ਆਪਣਾ ਕਾਰਜ ਹੈ, ਕਿ ਇਸ ਤਹਿਤ ਕੋਈ ਕਾਪੀਰਾਈਟ ਉਲੰਘਣਾ ਨਹੀਂ ਕੀਤੀ ਗਈ ਅਤੇ &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;ਵਿਕੀਮੀਡੀਆ ਕਾਮਨਜ਼ ਨੀਤੀਆਂ&lt;/a&gt; ਮੁਤਾਬਿਕ ਇਹ ਠੀਕ ਹੈ।</string>
   <string name="menu_download">ਡਾਊਨਲੋਡ</string>
-  <string name="preference_license" fuzzy="true">ਲਸੰਸ</string>
-  <string name="use_previous" fuzzy="true">ਪਹਿਲਾਂ ਵਾਲਾ ਸਿਰਲੇਖ/ਜਾਣਕਾਰੀ ਵਰਤੋ</string>
-  <string name="preference_theme" fuzzy="true">ਰਾਤ ਦਾ ਅੰਦਾਜ਼</string>
+  <string name="preference_license">ਮੂਲ ਲਸੰਸ</string>
+  <string name="use_previous">ਪਿਛਲੇ ਸਿਰਲੇਖ ਅਤੇ ਵੇਰਵੇ ਦੀ ਵਰਤੋਂ ਕਰੋ</string>
+  <string name="preference_theme">ਵਿਸ਼ਾ-ਵਸਤੂ</string>
   <string name="license_name_cc_by_sa_four"> Attribution-ShareAlike 4.0</string>
   <string name="license_name_cc_by_four"> Attribution 4.0</string>
   <string name="license_name_cc_by_sa">CC Attribution-ShareAlike 3.0</string>
@@ -120,8 +140,14 @@
   <string name="tutorial_1_text">ਵਿਕੀਮੀਡੀਆ ਕਾਮਨਜ਼ ਜ਼ਿਆਦਾਤਰ ਉਹ ਤਸਵੀਰਾਂ ਦਾ ਭੰਡਾਰ ਹੈ ਜੋ ਵਿਕੀਪੀਡੀਆ \'ਤੇ ਵਰਤੀਆਂ ਜਾਂਦੀਆਂ ਹਨ।</string>
   <string name="tutorial_1_subtext">ਤੁਹਾਡੀਆਂ ਤਸਵੀਰਾਂ ਵਿਸ਼ਵ ਦੇ ਬਾਕੀ ਲੋਕਾਂ ਨੂੰ ਸਿੱਖਿਅਤ ਕਰਨ ਲਈ ਸਹਾਈ ਹਨ!</string>
   <string name="tutorial_2_text">ਕਿਰਪਾ ਕਰਕੇ ਉਹ ਤਸਵੀਰਾਂ  ਨੂੰ ਚੜ੍ਹਾਉ ਜੋ ਤੁਹਾਡੇ ਵੱਲੋਂ ਲਈਆਂ ਗਈਆਂ ਹਨ ਜਾਂ ਬਣਾਈਆਂ ਗਈਆਂ ਹਨ:</string>
+  <string name="tutorial_2_subtext_1">ਕੁਦਰਤੀ ਵਸਤੂਆਂ (ਫੁੱਲ, ਜਾਨਵਰ, ਪਹਾੜ)</string>
+  <string name="tutorial_2_subtext_2">ਲਾਹੇਵੰਦ ਵਸਤੂਆਂ (ਸੈਕਲ, ਰੇਲ ਅੱਡਾ)</string>
+  <string name="tutorial_2_subtext_3">ਮਸ਼ਹੂਰ ਲੋਕ (ਤੁਹਾਡੇ mayor, ਓਲੰਪਿਕ ਖਿਡਾਰੀ ਜਿਨ੍ਹਾਂ ਨੂੰ ਤੁਸੀਂ ਮਿਲੇ ਸੀ)</string>
   <string name="tutorial_3_text">ਕਿਰਪਾ ਕਰਕੇ ਅਪਲੋਡ ਨਾ ਕਰੋ:</string>
+  <string name="tutorial_3_subtext_1">ਤੁਹਾਡੇ ਦੋਸਤਾਂ ਦੀਆਂ ਸੈਲਫ਼ੀਆਂ ਜਾਂ ਤਸਵੀਰਾਂ</string>
   <string name="tutorial_4_text">ਉਦਾਹਰਣ ਵਜੋਂ ਇਹ ਅਪਲੋਡ:</string>
+  <string name="tutorial_4_subtext_1">ਸਿਰਲੇਖ: ਸਿਡਨੀ ਓਪੇਰਾ ਹਾਊਸ</string>
+  <string name="tutorial_4_subtext_2">ਵੇਰਵਾ: ਸਿਡਨੀ ਓਪੇਰਾ ਹਾਊਸ ਜਿਵੇਂ ਖਾੜੀ ਦੇ ਪਾਰ ਤੋਂ ਦਿਖਦਾ ਐ</string>
   <string name="welcome_wikipedia_text">ਆਪਣੀਆਂ ਤਸਵੀਰਾਂ ਦਾ ਯੋਗਦਾਨ ਪਾਓ। ਵਿਕੀਪੀਡੀਆ ਲੇਖਾਂ ਨੂੰ ਸੁਰਜੀਤ ਕਰ ਦਿਓ!</string>
   <string name="welcome_wikipedia_subtext">ਵਿਕੀਪੀਡੀਆ ਉਤਲੀਆਂ ਤਸਵੀਰਾਂ ਵਿਕੀਮੀਡੀਆ ਕਾਮਨਜ਼ ਤੋਂ ਆਉਂਦੀਆਂ ਹਨ</string>
   <string name="welcome_copyright_text">ਤੁਹਾਡੀਆਂ ਤਸਵੀਰਾਂ ਦੁਨੀਆਂ ਭਰ ਦੇ ਲੋਕਾਂ ਨੂੰ ਪੜ੍ਹਨ ਵਿਚ ਮਦਦ ਕਰਦੀਆਂ ਹਨ।</string>
@@ -132,6 +158,7 @@
   <string name="detail_panel_cats_label">ਸ਼੍ਰੇਣੀਆਂ</string>
   <string name="detail_panel_cats_loading">ਲੱਦ ਰਿਹਾ ਹੈ...</string>
   <string name="detail_panel_cats_none">ਕੋਈ ਵੀ ਨਹੀਂ ਚੁਣਿਆ</string>
+  <string name="detail_caption_empty">ਕੋਈ ਸੁਰਖੀ ਨਹੀਂ</string>
   <string name="detail_description_empty">ਕੋਈ ਵੇਰਵਾ ਨਹੀਂ</string>
   <string name="detail_discussion_empty">ਕੋਈ ਗੱਲਬਾਤ ਨਹੀਂ</string>
   <string name="detail_license_empty">ਅਣਜਾਣ ਲਸੰਸ</string>
@@ -139,8 +166,10 @@
   <string name="read_storage_permission_rationale" fuzzy="true">ਆਗਿਆ ਚਾਹੀਦੀ ਹੈ: ਬਾਹਰੀ ਸਟੋਰੇਜ ਬਾਰੇ। ਇਸ ਤੋਂ ਬਿਨਾਂ ਐਪ ਕਾਰਜ ਨਹੀਂ ਕਰ ਸਕੇਗੀ।</string>
   <string name="ok">ਠੀਕ ਹੈ</string>
   <string name="warning">ਖ਼ਬਰਦਾਰ</string>
+  <string name="upload">ਚੜ੍ਹਾਉ</string>
   <string name="yes">ਹਾਂ</string>
   <string name="no">ਨਹੀਂ</string>
+  <string name="media_detail_caption">ਸੁਰਖੀ</string>
   <string name="media_detail_title">ਸਿਰਲੇਖ</string>
   <string name="media_detail_description">ਵੇਰਵਾ</string>
   <string name="media_detail_discussion">ਗੱਲਬਾਤ</string>

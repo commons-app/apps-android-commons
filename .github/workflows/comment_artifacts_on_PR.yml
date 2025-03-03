@@ -1,0 +1,96 @@
+name: Comment Artifacts on PR
+
+on:
+  workflow_run:
+    workflows: [ "Android CI" ]
+    types: [ completed ]
+
+permissions:
+  pull-requests: write
+  contents: read
+
+concurrency:
+  group: comment-${{ github.event.workflow_run.id }}
+  cancel-in-progress: true
+
+jobs:
+  comment:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.event == 'pull_request' }}
+    steps:
+      - name: Download and process artifacts
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const fs = require('fs');
+            const runId = context.payload.workflow_run.id;
+
+            const allArtifacts = await github.rest.actions.listWorkflowRunArtifacts({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              run_id: runId,
+            });
+
+            const prNumberArtifact = allArtifacts.data.artifacts.find(artifact => artifact.name === "pr_number");
+            if (!prNumberArtifact) {
+              console.log("pr_number artifact not found.");
+              return;
+            }
+
+            const download = await github.rest.actions.downloadArtifact({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              artifact_id: prNumberArtifact.id,
+              archive_format: 'zip',
+            });
+
+            fs.writeFileSync(`${process.env.GITHUB_WORKSPACE}/pr_number.zip`, Buffer.from(download.data));
+            const { execSync } = require('child_process');
+            execSync('unzip -q pr_number.zip -d ./pr_number/');
+            fs.unlinkSync('pr_number.zip');
+
+            const prData = JSON.parse(fs.readFileSync('./pr_number/pr_number.json', 'utf8'));
+            const prNumber = prData.pr_number;
+
+            if (!prNumber || prNumber === 'null') {
+              console.log("No valid PR number found in pr_number.json. Skipping.");
+              return;
+            }
+
+            const artifactsToLink = allArtifacts.data.artifacts.filter(artifact => artifact.name !== "pr_number");
+            if (artifactsToLink.length === 0) {
+              console.log("No artifacts to link found.");
+              return;
+            }
+
+            const comments = await github.rest.issues.listComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: Number(prNumber),
+            });
+            
+            const oldComments = comments.data.filter(comment => 
+              comment.body.startsWith("✅ Generated APK variants!")
+            );
+            for (const comment of oldComments) {
+              await github.rest.issues.deleteComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                comment_id: comment.id,
+              });
+              console.log(`Deleted old comment ID: ${comment.id}`);
+            };
+            
+            const commentBody = `✅ Generated APK variants!\n` + 
+            artifactsToLink.map(artifact => {
+                const artifactUrl = `https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${runId}/artifacts/${artifact.id}`;
+                return `- 🤖 [Download ${artifact.name}](${artifactUrl})`;
+            }).join('\n');
+
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: Number(prNumber),
+              body: commentBody
+            });
