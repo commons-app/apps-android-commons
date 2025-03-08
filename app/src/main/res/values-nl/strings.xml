@@ -406,10 +406,10 @@
   <string name="preference_author_name_toggle_summary">Gebruik een aangepaste auteursnaam in plaats van uw gebruikersnaam tijdens het uploaden van foto\'s</string>
   <string name="preference_author_name">Aangepaste auteursnaam</string>
   <string name="contributions_fragment">Bijdragen</string>
-  <string name="nearby_fragment">Dichtbij</string>
+  <string name="nearby_fragment">In de buurt</string>
   <string name="notifications">Meldingen</string>
   <string name="read_notifications">Meldingen (gelezen)</string>
-  <string name="display_nearby_notification">Meldingen dichtbij weergeven</string>
+  <string name="display_nearby_notification">Melding in de buurt weergeven</string>
   <string name="display_nearby_notification_summary">Toon in-app-melding voor de dichtstbijzijnde plaats die foto\'s nodig heeft</string>
   <string name="list_sheet">Lijst</string>
   <string name="storage_permission">Toestemming om op te slaan</string>
@@ -615,7 +615,7 @@
   <string name="recommend_high_accuracy_mode">Kies voor de beste resultaten de modus van hoge nauwkeurigheid.</string>
   <string name="ask_to_turn_location_on">Locatie inschakelen?</string>
   <string name="ask_to_turn_location_on_text">Schakel locatiediensten in zodat de app uw huidige locatie toont</string>
-  <string name="nearby_needs_location">In de Buurt heeft locatie nodig om correct te werken</string>
+  <string name="nearby_needs_location">‘In de buurt’ heeft locatietoegang nodig om correct te werken</string>
   <string name="explore_map_needs_location">Voor de verkenningskaart is locatietoestemming nodig om afbeeldingen in de buurt weer te geven</string>
   <string name="upload_map_location_access">U moet locatietoestemming geven om de locatie automatisch in te stellen.</string>
   <string name="use_location_from_similar_image">Heeft u deze twee foto\'s op dezelfde plek gemaakt? Wilt u de breedtegraad/lengtegraad van de afbeelding rechts gebruiken?</string>
@@ -657,7 +657,7 @@
   <string name="leaderboard_weekly">Wekelijks</string>
   <string name="leaderboard_all_time">Alle tijden</string>
   <string name="leaderboard_upload">Uploaden</string>
-  <string name="leaderboard_nearby">In de Buurt</string>
+  <string name="leaderboard_nearby">In de buurt</string>
   <string name="leaderboard_used">Gebruikt</string>
   <string name="leaderboard_my_rank_button_text">Mijn ranking</string>
   <string name="limited_connection_enabled">Beperkte verbindingsmodus ingeschakeld!</string>
@@ -724,7 +724,7 @@
   <string name="edit_depictions">Wijzig items</string>
   <string name="edit_categories">Categorieën bewerken</string>
   <string name="advanced_options">Geavanceerde opties</string>
-  <string name="advanced_query_info_text">U kunt de zoekopdracht Dichtbij aanpassen. Als u fouten krijgt, kunt u opnieuw instellen en toepassen.</string>
+  <string name="advanced_query_info_text">U kunt de zoekopdracht ‘In de buurt’ aanpassen. Als u fouten krijgt, kunt u opnieuw instellen en toepassen.</string>
   <string name="apply">Toepassen</string>
   <string name="reset">Opnieuw instellen</string>
   <string name="location_message">Locatiegegevens helpen wiki-bewerkers om uw foto te vinden, waardoor deze veel nuttiger wordt.\nUw recente uploads hebben geen locatie.\nWe raden u aan om de locatie in de instellingen van uw camera-app in te schakelen.\nBedankt voor het uploaden!</string>
@@ -835,4 +835,10 @@
   <string name="account">Account</string>
   <string name="vanish_account">Account laten verdwijnen</string>
   <string name="account_vanish_request_confirm_title">Waarschuwing verwijdering account</string>
+  <string name="account_vanish_request_confirm">Verdwijnen is een &lt;b&gt;laatste redmiddel&lt;/b&gt; en moet &lt;b&gt;alleen worden gebruikt als u voor altijd wilt stoppen met bewerken&lt;/b&gt; en om zoveel mogelijk van uw voorgaande relaties te verbergen.&lt;br/&gt;&lt;br/&gt;Accountverwijdering op Wikipedia gebeurt door uw accountnaam te wijzigen opdat anderen uw bijdragen niet meer kunnen herkennen. De procedure wordt accountverdwijning genoemd. &lt;b&gt;Door verdwijnen wordt geen volledige anonimiteit gegarandeerd en worden geen bijdragen aan de projecten verwijderd.&lt;/b&gt;</string>
+  <string name="caption">Bijschrift</string>
+  <string name="caption_copied_to_clipboard">Bijschrift gekopieerd naar klembord</string>
+  <string name="congratulations_all_pictures_in_this_album_have_been_either_uploaded_or_marked_as_not_for_upload">Gefeliciteerd, alle foto’s in dit album zijn ofwel geüpload ofwel gemarkeerd als ‘niet om te uploaden’.</string>
+  <string name="show_in_explore">Weergeven in Verkennen</string>
+  <string name="show_in_nearby">Weergeven in ‘In de buurt’</string>
 </resources>

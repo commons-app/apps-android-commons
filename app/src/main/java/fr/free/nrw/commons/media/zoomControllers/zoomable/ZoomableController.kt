@@ -1,14 +1,14 @@
-package fr.free.nrw.commons.media.zoomControllers.zoomable;
+package fr.free.nrw.commons.media.zoomControllers.zoomable
 
-import android.graphics.Matrix;
-import android.graphics.RectF;
-import android.view.MotionEvent;
+import android.graphics.Matrix
+import android.graphics.RectF
+import android.view.MotionEvent
 
 /**
- * Interface for implementing a controller that works with {@link ZoomableDraweeView} to control the
+ * Interface for implementing a controller that works with [ZoomableDraweeView] to control the
  * zoom.
  */
-public interface ZoomableController {
+interface ZoomableController {
 
     /** Listener interface. */
     interface Listener {
@@ -18,21 +18,21 @@ public interface ZoomableController {
          *
          * @param transform the current transform matrix
          */
-        void onTransformBegin(Matrix transform);
+        fun onTransformBegin(transform: Matrix)
 
         /**
          * Notifies the view that the transform changed.
          *
          * @param transform the new matrix
          */
-        void onTransformChanged(Matrix transform);
+        fun onTransformChanged(transform: Matrix)
 
         /**
          * Notifies the view that the transform ended.
          *
          * @param transform the current transform matrix
          */
-        void onTransformEnd(Matrix transform);
+        fun onTransformEnd(transform: Matrix)
     }
 
     /**
@@ -40,22 +40,21 @@ public interface ZoomableController {
      *
      * @param enabled whether to enable the controller
      */
-    void setEnabled(boolean enabled);
+    fun setEnabled(enabled: Boolean)
 
     /**
-     * Gets whether the controller is enabled. This should return the last value passed to {@link
-     * #setEnabled}.
-     *
+     * Gets whether the controller is enabled. This should return the last value passed
+     * to [setEnabled].
      * @return whether the controller is enabled.
      */
-    boolean isEnabled();
+    fun isEnabled(): Boolean
 
     /**
      * Sets the listener for the controller to call back when the matrix changes.
      *
      * @param listener the listener
      */
-    void setListener(Listener listener);
+    fun setListener(listener: Listener?)
 
     /**
      * Gets the current scale factor. A convenience method for calculating the scale from the
@@ -63,10 +62,10 @@ public interface ZoomableController {
      *
      * @return the current scale factor
      */
-    float getScaleFactor();
+    fun getScaleFactor(): Float
 
     /** Returns true if the zoomable transform is identity matrix, and the controller is idle. */
-    boolean isIdentity();
+    fun isIdentity(): Boolean
 
     /**
      * Returns true if the transform was corrected during the last update.
@@ -74,27 +73,27 @@ public interface ZoomableController {
      * <p>This mainly happens when a gesture would cause the image to get out of limits and the
      * transform gets corrected in order to prevent that.
      */
-    boolean wasTransformCorrected();
+    fun wasTransformCorrected(): Boolean
 
-    /** See {@link androidx.core.view.ScrollingView}. */
-    int computeHorizontalScrollRange();
+    /** See [androidx.core.view.ScrollingView]. */
+    fun computeHorizontalScrollRange(): Int
 
-    int computeHorizontalScrollOffset();
+    fun computeHorizontalScrollOffset(): Int
 
-    int computeHorizontalScrollExtent();
+    fun computeHorizontalScrollExtent(): Int
 
-    int computeVerticalScrollRange();
+    fun computeVerticalScrollRange(): Int
 
-    int computeVerticalScrollOffset();
+    fun computeVerticalScrollOffset(): Int
 
-    int computeVerticalScrollExtent();
+    fun computeVerticalScrollExtent(): Int
 
     /**
      * Gets the current transform.
      *
      * @return the transform
      */
-    Matrix getTransform();
+    fun getTransform(): Matrix
 
     /**
      * Sets the bounds of the image post transform prior to application of the zoomable
@@ -102,14 +101,14 @@ public interface ZoomableController {
      *
      * @param imageBounds the bounds of the image
      */
-    void setImageBounds(RectF imageBounds);
+    fun setImageBounds(imageBounds: RectF)
 
     /**
      * Sets the bounds of the view.
      *
      * @param viewBounds the bounds of the view
      */
-    void setViewBounds(RectF viewBounds);
+    fun setViewBounds(viewBounds: RectF)
 
     /**
      * Allows the controller to handle a touch event.
@@ -117,5 +116,5 @@ public interface ZoomableController {
      * @param event the touch event
      * @return whether the controller handled the event
      */
-    boolean onTouchEvent(MotionEvent event);
+    fun onTouchEvent(event: MotionEvent): Boolean
 }

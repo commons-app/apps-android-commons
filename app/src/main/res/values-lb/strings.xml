@@ -181,6 +181,7 @@
   <string name="no">Neen</string>
   <string name="media_detail_caption">Beschrëftung</string>
   <string name="media_detail_title">Titel</string>
+  <string name="media_detail_depiction">Motiven</string>
   <string name="media_detail_description">Beschreiwung</string>
   <string name="media_detail_discussion">Diskussioun</string>
   <string name="media_detail_author">Auteur</string>

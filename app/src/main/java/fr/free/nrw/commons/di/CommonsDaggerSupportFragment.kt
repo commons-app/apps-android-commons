@@ -63,9 +63,4 @@ abstract class CommonsDaggerSupportFragment : Fragment(), HasSupportFragmentInje
 
         return getInstance(activity.applicationContext)
     }
-
-    // Ensure getContext() returns a non-null Context
-    override fun getContext(): Context {
-        return super.getContext() ?: throw IllegalStateException("Context is null")
-    }
 }
