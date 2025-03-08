@@ -185,10 +185,12 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
      * or a fragment
      */
     private void initProvider() {
-        if (getParentFragment() != null) {
+        if (getParentFragment() instanceof MediaDetailProvider) {
             provider = (MediaDetailProvider) getParentFragment();
-        } else {
+        } else if (getActivity() instanceof MediaDetailProvider) {
             provider = (MediaDetailProvider) getActivity();
+        } else {
+            throw new ClassCastException("Parent must implement MediaDetailProvider");
         }
     }
 
@@ -326,7 +328,7 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
             .append("\n\n");
 
         builder.append("User that you want to report: ")
-            .append(media.getAuthor())
+            .append(media.getUser())
             .append("\n\n");
 
         if (sessionManager.getUserName() != null) {
@@ -421,7 +423,7 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
                     // Initialize bookmark object
                     bookmark = new Bookmark(
                             m.getFilename(),
-                            m.getAuthor(),
+                            m.getAuthorOrUser(),
                             BookmarkPicturesContentProvider.uriForName(m.getFilename())
                     );
                     updateBookmarkState(menu.findItem(R.id.menu_bookmark_current_image));

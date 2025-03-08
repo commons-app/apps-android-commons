@@ -74,12 +74,9 @@ import java.util.Date
 import javax.inject.Inject
 import javax.inject.Named
 
-class ContributionsFragment
-
-    : CommonsDaggerSupportFragment(), FragmentManager.OnBackStackChangedListener,
+class ContributionsFragment : CommonsDaggerSupportFragment(), FragmentManager.OnBackStackChangedListener,
     LocationUpdateListener, MediaDetailProvider, SensorEventListener, ICampaignsView,
-    ContributionsContract.View,
-    ContributionsListFragment.Callback {
+    ContributionsContract.View, ContributionsListFragment.Callback {
     @JvmField
     @Inject
     @Named("default_preferences")
@@ -307,9 +304,11 @@ class ContributionsFragment
             }
         }
         notification.setOnClickListener { view: View? ->
-            startYourself(
-                context, "unread"
-            )
+            context?.let {
+                startYourself(
+                    it, "unread"
+                )
+            }
         }
     }
 
@@ -500,7 +499,7 @@ class ContributionsFragment
 
     private fun setUploadCount() {
         okHttpJsonApiClient
-            ?.getUploadCount((activity as MainActivity).sessionManager?.currentAccount!!.name)
+            ?.getUploadCount(sessionManager?.currentAccount!!.name)
             ?.subscribeOn(Schedulers.io())
             ?.observeOn(AndroidSchedulers.mainThread())?.let {
                 compositeDisposable.add(
@@ -889,14 +888,16 @@ class ContributionsFragment
      * this function updates the number of contributions
      */
     fun upDateUploadCount() {
-        WorkManager.getInstance(context)
-            .getWorkInfosForUniqueWorkLiveData(UploadWorker::class.java.simpleName).observe(
-                viewLifecycleOwner
-            ) { workInfos: List<WorkInfo?> ->
-                if (workInfos.size > 0) {
-                    setUploadCount()
+        context?.let {
+            WorkManager.getInstance(it)
+                .getWorkInfosForUniqueWorkLiveData(UploadWorker::class.java.simpleName).observe(
+                    viewLifecycleOwner
+                ) { workInfos: List<WorkInfo?> ->
+                    if (workInfos.size > 0) {
+                        setUploadCount()
+                    }
                 }
-            }
+        }
     }
 
 
@@ -953,7 +954,7 @@ class ContributionsFragment
                 Timber.d("Skipping re-upload for non-failed %s", contribution.toString())
             }
         } else {
-            showLongToast(context, R.string.this_function_needs_network_connection)
+            context?.let { showLongToast(it, R.string.this_function_needs_network_connection) }
         }
     }
 

@@ -1,11 +1,6 @@
 name: Android CI
 
-on: [push, pull_request, workflow_dispatch]  
-
-permissions:
-  pull-requests: write
-  contents: read
-  actions: read
+on: [push, pull_request, workflow_dispatch]
 
 concurrency:
   group: build-${{ github.event.pull_request.number || github.ref }}
@@ -17,17 +12,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Set up JDK
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
           java-version: '17'
 
       - name: Cache packages
         id: cache-packages
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: |
             ~/.gradle/caches
@@ -42,7 +37,7 @@ jobs:
 
       - name: AVD cache
         if: github.event_name != 'pull_request'
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         id: avd-cache
         with:
           path: |
@@ -107,64 +102,13 @@ jobs:
         with:
           name: prodDebugAPK
           path: app/build/outputs/apk/prod/debug/app-*.apk
-      
-      - name: Comment on PR with APK download links
-        if: github.event_name == 'pull_request'
-        uses: actions/github-script@v6
+
+      - name: Create and PR number artifact
+        run: |
+          echo "{\"pr_number\": ${{ github.event.pull_request.number || 'null' }}}" > pr_number.json
+          
+      - name: Upload PR number artifact
+        uses: actions/upload-artifact@v4
         with:
-          github-token: ${{secrets.GITHUB_TOKEN}}
-          script: |
-            try {
-              const token = process.env.GITHUB_TOKEN;
-               if (!token) {
-                throw new Error('GITHUB_TOKEN is not set. Please check workflow permissions.');
-               }
-
-
-              const { data: { artifacts } } = await github.rest.actions.listWorkflowRunArtifacts({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                run_id: context.runId
-              });
-
-              if (!artifacts || artifacts.length === 0) {
-                console.log('No artifacts found for this workflow run.');
-                return;
-              }
-
-              const betaArtifact = artifacts.find(artifact => artifact.name === "betaDebugAPK");
-              const prodArtifact = artifacts.find(artifact => artifact.name === "prodDebugAPK");
-
-              if (!betaArtifact || !prodArtifact) {
-                console.log('Could not find both Beta and Prod APK artifacts.');
-                console.log('Available artifacts:', artifacts.map(a => a.name).join(', '));
-                return;
-              }
-
-              const betaDownloadUrl = `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/suites/${context.runId}/artifacts/${betaArtifact.id}`;
-              const prodDownloadUrl = `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/suites/${context.runId}/artifacts/${prodArtifact.id}`;
-
-              const commentBody = `
-               📱 **APK for pull request is ready to see the changes** 📱  
-              - [Download Beta APK](${betaDownloadUrl})  
-              - [Download Prod APK](${prodDownloadUrl})
-              `;
-
-              await github.rest.issues.createComment({
-                issue_number: context.issue.number,
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                body: commentBody
-              });
-        
-              console.log('Successfully posted comment with APK download links');
-            } catch (error) {
-              console.error('Error in PR comment creation:', error);
-              if (error.message.includes('GITHUB_TOKEN')) {
-                core.setFailed('Missing or invalid GITHUB_TOKEN. Please check repository secrets configuration.');
-              } else if (error.status === 403) {
-                core.setFailed('Permission denied. Please check workflow permissions in repository settings.');
-              } else {
-                core.setFailed(`Workflow failed: ${error.message}`);
-              }
-            }
+          name: pr_number
+          path: ./pr_number.json

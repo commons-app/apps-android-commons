@@ -54,7 +54,7 @@ an upload might take a dozen seconds. */
         this.contribution = contribution
         this.position = position
         binding.contributionTitle.text = contribution.media.mostRelevantCaption
-        binding.authorView.text = contribution.media.author
+        binding.authorView.text = contribution.media.getAuthorOrUser()
 
         //Removes flicker of loading image.
         binding.contributionImage.hierarchy.fadeDuration = 0

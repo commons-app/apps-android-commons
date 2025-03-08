@@ -247,13 +247,17 @@ class CommonsApplication : MultiDexApplication() {
             DBOpenHelper.CONTRIBUTIONS_TABLE
         ) //Delete the contributions table in the existing db on older versions
 
+        dbOpenHelper.deleteTable(
+            db,
+            DBOpenHelper.BOOKMARKS_LOCATIONS
+        )
+
         try {
             contributionDao.deleteAll()
         } catch (e: SQLiteException) {
             Timber.e(e)
         }
         BookmarkPicturesDao.Table.onDelete(db)
-        BookmarkLocationsDao.Table.onDelete(db)
         BookmarkItemsDao.Table.onDelete(db)
     }
 

@@ -821,4 +821,6 @@
   <string name="caption">Bildtext</string>
   <string name="caption_copied_to_clipboard">Bildtext kopierades till urklipp</string>
   <string name="congratulations_all_pictures_in_this_album_have_been_either_uploaded_or_marked_as_not_for_upload">Grattis! Alla bilder i detta album har antingen laddats upp eller markerats för att inte laddas upp.</string>
+  <string name="show_in_explore">Visa i \"Utforska\"</string>
+  <string name="show_in_nearby">Visa i \"I närheten\"</string>
 </resources>
