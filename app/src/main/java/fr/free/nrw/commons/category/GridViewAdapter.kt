@@ -98,14 +98,9 @@ class GridViewAdapter(
      */
     @SuppressLint("StringFormatInvalid")
     private fun setUploaderView(item: Media, uploader: TextView) {
-        if (!item.author.isNullOrEmpty()) {
-            uploader.visibility = View.VISIBLE
-            uploader.text = context.getString(
-                R.string.image_uploaded_by,
-                item.user
-            )
-        } else {
-            uploader.visibility = View.GONE
-        }
+        uploader.text = context.getString(
+            R.string.image_uploaded_by,
+            item.getAuthorOrUser()
+        )
     }
 }

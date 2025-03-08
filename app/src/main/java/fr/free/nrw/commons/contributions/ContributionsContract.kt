@@ -10,7 +10,7 @@ interface ContributionsContract {
 
     interface View {
         fun showMessage(localizedMessage: String)
-        fun getContext(): Context
+        fun getContext(): Context?
     }
 
     interface UserActionListener : BasePresenter<View> {

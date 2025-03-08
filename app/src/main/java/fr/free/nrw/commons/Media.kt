@@ -126,6 +126,19 @@ class Media constructor(
     )
 
     /**
+     * Returns Author if it's not null or empty, otherwise
+     * returns user
+     * @return Author or User
+     */
+    fun getAuthorOrUser(): String? {
+        return if (!author.isNullOrEmpty()) {
+            author
+        } else{
+            user
+        }
+    }
+
+    /**
      * Gets media display title
      * @return Media title
      */
