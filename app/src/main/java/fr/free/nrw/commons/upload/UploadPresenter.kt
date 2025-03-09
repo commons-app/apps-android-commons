@@ -146,34 +146,31 @@ class UploadPresenter @Inject internal constructor(
 
     override fun deletePictureAtIndex(index: Int) {
         val uploadableFiles = view.getUploadableFiles()
-        if (index == uploadableFiles!!.size - 1) {
-            // If the next fragment to be shown is not one of the MediaDetailsFragment
-            // lets hide the top card so that it doesn't appear on the other fragments
-            view.showHideTopCard(false)
-        }
-        view.setImageCancelled(true)
-        repository.deletePicture(uploadableFiles[index].getFilePath())
-        if (uploadableFiles.size == 1) {
-            view.showMessage(R.string.upload_cancelled)
-            view.finish()
-            return
-        }
-
-        presenter.updateImageQualitiesJSON(uploadableFiles.size, index)
-        view.onUploadMediaDeleted(index)
-        if (index != uploadableFiles.size && index != 0) {
-            // if the deleted image was not the last item to be uploaded, check quality of next
-            repository.getUploadItem(index)?.let {
-                presenter.checkImageQuality(it, index)
+        uploadableFiles?.let {
+            view.setImageCancelled(true)
+            repository.deletePicture(uploadableFiles[index].getFilePath())
+            if (uploadableFiles.size == 1) {
+                view.showMessage(R.string.upload_cancelled)
+                view.finish()
+                return
             }
-        }
 
-        if (uploadableFiles.size < 2) {
-            view.showHideTopCard(false)
-        }
+            presenter.updateImageQualitiesJSON(uploadableFiles.size, index)
+            view.onUploadMediaDeleted(index)
+            if (index != uploadableFiles.size && index != 0) {
+                // if the deleted image was not the last item to be uploaded, check quality of next
+                repository.getUploadItem(index)?.let {
+                    presenter.checkImageQuality(it, index)
+                }
+            }
 
-        //In case lets update the number of uploadable media
-        view.updateTopCardTitle()
+            if (uploadableFiles.size < 2) {
+                view.showHideTopCard(false)
+            }
+
+            //In case lets update the number of uploadable media
+            view.updateTopCardTitle()
+        }
     }
 
     override fun onAttachView(view: UploadContract.View) {
