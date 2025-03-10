@@ -162,6 +162,9 @@ class MediaDetailFragmentUnitTests {
 
     private lateinit var _binding: FragmentMediaDetailBinding
 
+    @Mock
+    private lateinit var callback: MediaDetailFragment.Callback
+
     @Before
     fun setUp() {
         MockitoAnnotations.openMocks(this)
@@ -789,7 +792,7 @@ class MediaDetailFragmentUnitTests {
     @Test
     @Throws(Exception::class)
     fun testForMedia() {
-        MediaDetailFragment.forMedia(0, true, true, true)
+        MediaDetailFragment.forMedia(0, true, true, true, callback)
     }
 
     @Test
