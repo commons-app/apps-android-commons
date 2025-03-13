@@ -97,9 +97,9 @@ class UploadCategoriesFragment : UploadBaseFragment(), CategoriesContract.View {
         }
         if (media == null) {
             if (callback != null) {
-                binding!!.tvTitle.text = getString(R.string.step_count,
-                    callback!!.getIndexInViewFlipper(this) + 1,
-                    callback!!.totalNumberOfSteps,
+                binding?.tvTitle?.text = getString(R.string.step_count,
+                    callback?.getIndexInViewFlipper(this)?.plus(1) ?: 1,
+                    callback?.totalNumberOfSteps ?: 1,
                     getString(R.string.categories_activity_title))
             }
         } else {
@@ -110,7 +110,7 @@ class UploadCategoriesFragment : UploadBaseFragment(), CategoriesContract.View {
         }
 
         setTvSubTitle()
-        binding!!.tooltip.setOnClickListener {
+        binding?.let { it.tooltip.setOnClickListener {
             showAlertDialog(
                 requireActivity(),
                 getString(R.string.categories_activity_title),
@@ -119,10 +119,11 @@ class UploadCategoriesFragment : UploadBaseFragment(), CategoriesContract.View {
                 null
             )
         }
+        }
         if (media == null) {
-            presenter!!.onAttachView(this)
+            presenter?.onAttachView(this)
         } else {
-            presenter!!.onAttachViewWithMedia(this, media!!)
+            presenter?.onAttachViewWithMedia(this, media!!)
         }
         binding!!.btnNext.setOnClickListener { v: View? -> onNextButtonClicked() }
         binding!!.btnPrevious.setOnClickListener { v: View? -> onPreviousButtonClicked() }
@@ -137,7 +138,7 @@ class UploadCategoriesFragment : UploadBaseFragment(), CategoriesContract.View {
         }
         subscribe = RxTextView.textChanges(binding!!.etSearch)
             .doOnEach { v: Notification<CharSequence?>? ->
-                binding!!.tilContainerSearch.error =
+                binding?.tilContainerSearch?.error =
                     null
             }
             .takeUntil(RxView.detaches(binding!!.etSearch))
@@ -163,25 +164,25 @@ class UploadCategoriesFragment : UploadBaseFragment(), CategoriesContract.View {
     }
 
     private fun searchForCategory(query: String) {
-        presenter!!.searchForCategories(query)
+        presenter?.searchForCategories(query)
     }
 
     private fun initRecyclerView() {
-        adapter = UploadCategoryAdapter({ categoryItem: CategoryItem? ->
-            presenter!!.onCategoryItemClicked(categoryItem!!)
+    if (adapter == null) { adapter = UploadCategoryAdapter({ categoryItem: CategoryItem? ->
+            presenter?.onCategoryItemClicked(categoryItem!!)
             Unit
         }, nearbyPlaceCategory)
-
-        if (binding != null) {
-            binding!!.rvCategories.layoutManager = LinearLayoutManager(context)
-            binding!!.rvCategories.adapter = adapter
+        }
+        binding?.rvCategories?.apply {
+            layoutManager = LinearLayoutManager(context)
+            adapter = this@UploadCategoriesFragment.adapter
         }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        presenter!!.onDetachView()
-        subscribe!!.dispose()
+        presenter?.onDetachView()
+        subscribe?.dispose()
     }
 
     override fun showProgress(shouldShow: Boolean) {
@@ -197,6 +198,11 @@ class UploadCategoriesFragment : UploadBaseFragment(), CategoriesContract.View {
     }
 
     override fun setCategories(categories: List<CategoryItem>?) {
+        if (adapter == null) {
+            Timber.e("Adapter is null in setCategories")
+            return
+        }
+
         if (categories == null) {
             adapter!!.clear()
         } else {
@@ -204,19 +210,16 @@ class UploadCategoriesFragment : UploadBaseFragment(), CategoriesContract.View {
         }
         adapter!!.notifyDataSetChanged()
 
-        if (binding == null) {
-            return
-        }
-        // Nested waiting for search result data to load into the category
-        // list and smoothly scroll to the top of the search result list.
-        binding!!.rvCategories.post {
-            binding!!.rvCategories.smoothScrollToPosition(0)
-            binding!!.rvCategories.post {
-                binding!!.rvCategories.smoothScrollToPosition(
+        binding?.let {
+            it.rvCategories.post {
+                it.rvCategories.smoothScrollToPosition(0)
+                it.rvCategories.post {
+                    it.rvCategories.smoothScrollToPosition(
                     0
                 )
+                }
             }
-        }
+        } ?: Timber.e("Binding is null in setCategories")
     }
 
     override fun goToNextScreen() {
@@ -308,7 +311,7 @@ class UploadCategoriesFragment : UploadBaseFragment(), CategoriesContract.View {
 
     fun onNextButtonClicked() {
         if (media != null) {
-            presenter!!.updateCategories(media!!, wikiText!!)
+            presenter?.updateCategories(media!!, wikiText!!)
         } else {
             presenter!!.verifyCategories()
         }
@@ -318,7 +321,7 @@ class UploadCategoriesFragment : UploadBaseFragment(), CategoriesContract.View {
         if (media != null) {
             presenter!!.clearPreviousSelection()
             adapter!!.items = null
-            val mediaDetailFragment = checkNotNull(parentFragment as MediaDetailFragment?)
+            val mediaDetailFragment = parentFragment as? MediaDetailFragment?: return
             mediaDetailFragment.onResume()
             goBackToPreviousScreen()
         } else {
@@ -345,7 +348,7 @@ class UploadCategoriesFragment : UploadBaseFragment(), CategoriesContract.View {
         super.onResume()
 
         if (media != null) {
-            binding!!.etSearch.setOnKeyListener { v: View?, keyCode: Int, event: KeyEvent? ->
+            binding?.etSearch?.setOnKeyListener { v: View?, keyCode: Int, event: KeyEvent? ->
                 if (keyCode == KeyEvent.KEYCODE_BACK) {
                     binding!!.etSearch.clearFocus()
                     presenter!!.clearPreviousSelection()
