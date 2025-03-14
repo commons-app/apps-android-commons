@@ -9,6 +9,7 @@
 * شاه زمان پټان
 -->
 <resources>
+  <string name="commons_facebook">د خونديځ فيسبوک پاڼه</string>
   <string name="commons_github">خونديځ ګيټهوب سرچينه کوډ</string>
   <string name="commons_logo">خونديځ نښان</string>
   <string name="commons_website">خونديځ وېبپاڼه</string>
