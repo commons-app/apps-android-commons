@@ -1,7 +1,7 @@
 package fr.free.nrw.commons
 
 import androidx.core.text.HtmlCompat
-import fr.free.nrw.commons.media.IdAndCaptions
+import fr.free.nrw.commons.media.IdAndLabels
 import fr.free.nrw.commons.media.MediaClient
 import fr.free.nrw.commons.media.PAGE_ID_PREFIX
 import io.reactivex.Single
@@ -23,13 +23,23 @@ class MediaDataExtractor
         private val mediaClient: MediaClient,
     ) {
         fun fetchDepictionIdsAndLabels(media: Media) =
-            mediaClient
+                mediaClient
                 .getEntities(media.depictionIds)
                 .map {
                     it
                         .entities()
                         .mapValues { entry -> entry.value.labels().mapValues { it.value.value() } }
-                }.map { it.map { (key, value) -> IdAndCaptions(key, value) } }
+                }.map { it.map { (key, value) -> IdAndLabels(key, value) } }
+                .onErrorReturn { emptyList() }
+
+        fun fetchCreatorIdsAndLabels(media: Media) =
+            mediaClient
+                .getEntities(media.creatorIds)
+                .map {
+                    it
+                        .entities()
+                        .mapValues { entry -> entry.value.labels().mapValues { it.value.value() } }
+                }.map { it.map { (key, value) -> IdAndLabels(key, value) } }
                 .onErrorReturn { emptyList() }
 
         fun checkDeletionRequestExists(media: Media) = mediaClient.checkPageExistsUsingTitle("Commons:Deletion_requests/" + media.filename)

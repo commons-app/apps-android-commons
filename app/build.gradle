@@ -333,6 +333,7 @@ android {
             buildConfigField "String", "TEST_USERNAME", "\"" + getTestUserName() + "\""
             buildConfigField "String", "TEST_PASSWORD", "\"" + getTestPassword() + "\""
             buildConfigField "String", "DEPICTS_PROPERTY", "\"P180\""
+            buildConfigField "String", "CREATOR_PROPERTY", "\"P170\""
             dimension 'tier'
         }
 
@@ -370,6 +371,7 @@ android {
             buildConfigField "String", "TEST_USERNAME", "\"" + getTestUserName() + "\""
             buildConfigField "String", "TEST_PASSWORD", "\"" + getTestPassword() + "\""
             buildConfigField "String", "DEPICTS_PROPERTY", "\"P245962\""
+            buildConfigField "String", "CREATOR_PROPERTY", "\"P253075\""
             dimension 'tier'
         }
     }
