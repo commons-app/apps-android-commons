@@ -387,35 +387,40 @@ after opening the app.
     }
 
     override fun onBackPressed() {
-        if (contributionsFragment != null && activeFragment == ActiveFragment.CONTRIBUTIONS) {
+        when (activeFragment) {
+            ActiveFragment.CONTRIBUTIONS -> {
             // Means that contribution fragment is visible
-            if (!contributionsFragment!!.backButtonClicked()) { //If this one does not wan't to handle
+            if (contributionsFragment?.backButtonClicked() != true) { //If this one does not want to handle
                 // the back press, let the activity do so
                 super.onBackPressed()
+                }
             }
-        } else if (nearbyParentFragment != null && activeFragment == ActiveFragment.NEARBY) {
+        ActiveFragment.NEARBY -> {
             // Means that nearby fragment is visible
-            /* If function nearbyParentFragment.backButtonClick() returns false, it means that the bottomsheet is
-              not expanded. So if the back button is pressed, then go back to the Contributions tab */
-            if (!nearbyParentFragment!!.backButtonClicked()) {
-                supportFragmentManager.beginTransaction().remove(nearbyParentFragment!!)
-                    .commit()
+            if (nearbyParentFragment?.backButtonClicked() != true) {
+            nearbyParentFragment?.let {
+                supportFragmentManager.beginTransaction().remove(it).commit()
+                    }
                 setSelectedItemId(NavTab.CONTRIBUTIONS.code())
+                }
             }
-        } else if (exploreFragment != null && activeFragment == ActiveFragment.EXPLORE) {
-            // Means that explore fragment is visible
-            if (!exploreFragment!!.onBackPressed()) {
-                if (applicationKvStore!!.getBoolean("login_skipped")) {
+         ActiveFragment.EXPLORE -> {
+            // Explore Fragment is visible
+            if (exploreFragment?.onBackPressed() != true) {
+                if (applicationKvStore?.getBoolean("login_skipped") == true) {
                     super.onBackPressed()
                 } else {
                     setSelectedItemId(NavTab.CONTRIBUTIONS.code())
+                    }
                 }
             }
-        } else if (bookmarkFragment != null && activeFragment == ActiveFragment.BOOKMARK) {
+         ActiveFragment.BOOKMARK -> {
             // Means that bookmark fragment is visible
-            bookmarkFragment!!.onBackPressed()
-        } else {
+            bookmarkFragment?.onBackPressed()
+            }
+         else -> {
             super.onBackPressed()
+            }
         }
     }
 
