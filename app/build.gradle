@@ -215,6 +215,7 @@ android {
         versionCode 1048
         versionName '5.2.0'
         setProperty("archivesBaseName", "app-commons-v$versionName-" + getBranchName())
+
         minSdkVersion 21
         targetSdkVersion 34
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
