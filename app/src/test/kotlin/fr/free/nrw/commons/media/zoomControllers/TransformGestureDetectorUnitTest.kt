@@ -84,51 +84,51 @@ class TransformGestureDetectorUnitTest {
     @Test
     @Throws(Exception::class)
     fun testIsGestureInProgress() {
-        Assert.assertEquals(detector.isGestureInProgress, false)
+        Assert.assertEquals(detector.isGestureInProgress(), false)
     }
 
     @Test
     @Throws(Exception::class)
     fun testGetNewPointerCount() {
-        Assert.assertEquals(detector.newPointerCount, 0)
+        Assert.assertEquals(detector.getNewPointerCount(), 0)
     }
 
     @Test
     @Throws(Exception::class)
     fun testGetPointerCount() {
-        Assert.assertEquals(detector.pointerCount, 0)
+        Assert.assertEquals(detector.getPointerCount(), 0)
     }
 
     @Test
     @Throws(Exception::class)
     fun testGetPivotX() {
-        Assert.assertEquals(detector.pivotX, 0.0f)
+        Assert.assertEquals(detector.getPivotX(), 0.0f)
     }
 
     @Test
     @Throws(Exception::class)
     fun testGetPivotY() {
-        Assert.assertEquals(detector.pivotY, 0.0f)
+        Assert.assertEquals(detector.getPivotY(), 0.0f)
     }
 
     @Test
     @Throws(Exception::class)
     fun testGetTranslationX() {
-        Assert.assertEquals(detector.translationX, 0.0f)
+        Assert.assertEquals(detector.getTranslationX(), 0.0f)
     }
 
     @Test
     @Throws(Exception::class)
     fun testGetTranslationY() {
-        Assert.assertEquals(detector.translationY, 0.0f)
+        Assert.assertEquals(detector.getTranslationY(), 0.0f)
     }
 
     @Test
     @Throws(Exception::class)
     fun testGetScaleCaseLessThan2() {
         Whitebox.setInternalState(detector, "mDetector", mDetector)
-        whenever(mDetector.pointerCount).thenReturn(1)
-        Assert.assertEquals(detector.scale, 1f)
+        whenever(mDetector.getPointerCount()).thenReturn(1)
+        Assert.assertEquals(detector.getScale(), 1f)
     }
 
     @Test
@@ -138,20 +138,20 @@ class TransformGestureDetectorUnitTest {
         array[0] = 0.0f
         array[1] = 1.0f
         Whitebox.setInternalState(detector, "mDetector", mDetector)
-        whenever(mDetector.pointerCount).thenReturn(2)
-        whenever(mDetector.startX).thenReturn(array)
-        whenever(mDetector.startY).thenReturn(array)
-        whenever(mDetector.currentX).thenReturn(array)
-        whenever(mDetector.currentY).thenReturn(array)
-        Assert.assertEquals(detector.scale, 1f)
+        whenever(mDetector.getPointerCount()).thenReturn(2)
+        whenever(mDetector.getStartX()).thenReturn(array)
+        whenever(mDetector.getStartY()).thenReturn(array)
+        whenever(mDetector.getCurrentX()).thenReturn(array)
+        whenever(mDetector.getCurrentY()).thenReturn(array)
+        Assert.assertEquals(detector.getScale(), 1f)
     }
 
     @Test
     @Throws(Exception::class)
     fun testGetRotationCaseLessThan2() {
         Whitebox.setInternalState(detector, "mDetector", mDetector)
-        whenever(mDetector.pointerCount).thenReturn(1)
-        Assert.assertEquals(detector.rotation, 0f)
+        whenever(mDetector.getPointerCount()).thenReturn(1)
+        Assert.assertEquals(detector.getRotation(), 0f)
     }
 
     @Test
@@ -161,12 +161,12 @@ class TransformGestureDetectorUnitTest {
         array[0] = 0.0f
         array[1] = 1.0f
         Whitebox.setInternalState(detector, "mDetector", mDetector)
-        whenever(mDetector.pointerCount).thenReturn(2)
-        whenever(mDetector.startX).thenReturn(array)
-        whenever(mDetector.startY).thenReturn(array)
-        whenever(mDetector.currentX).thenReturn(array)
-        whenever(mDetector.currentY).thenReturn(array)
-        Assert.assertEquals(detector.rotation, 0f)
+        whenever(mDetector.getPointerCount()).thenReturn(2)
+        whenever(mDetector.getStartX()).thenReturn(array)
+        whenever(mDetector.getStartY()).thenReturn(array)
+        whenever(mDetector.getCurrentX()).thenReturn(array)
+        whenever(mDetector.getCurrentY()).thenReturn(array)
+        Assert.assertEquals(detector.getRotation(), 0f)
     }
 
     @Test

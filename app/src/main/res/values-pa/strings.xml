@@ -60,7 +60,7 @@
   <string name="login_success">ਦਾਖ਼ਲ ਹੋਣਾ ਸਫ਼ਲ!</string>
   <string name="login_failed">ਦਾਖ਼ਲ ਹੋਣਾ ਅਸਫ਼ਲ!</string>
   <string name="upload_failed">ਫ਼ਾਇਲ ਦੀ ਖੋਜ ਨਹੀਂ ਹੋ ਸਕੀ। ਕਿਰਪਾ ਕਰਕੇ ਹੋਰ ਫ਼ਾਇਲ ਖੋਜੋ।</string>
-  <string name="authentication_failed">ਪ੍ਰਮਾਣੀਕਰਨ ਅਸਫਲ ਰਿਹਾ। ਕਿਰਪਾ ਕਰਕੇ ਦੁਬਾਰਾ ਦਾਖਲ ਹੋਵੋ।</string>
+  <string name="authentication_failed">ਤਸਦੀਕ ਨਾਕਾਮ ਰਹੀ। ਕਿਰਪਾ ਕਰਕੇ ਮੁੜ ਦਾਖਲ ਹੋਵੋ।</string>
   <string name="uploading_started">ਅੱਪਲੋਡ ਸ਼ੁਰੂ ਹੋਇਆ!</string>
   <string name="upload_completed_notification_title">%1$s ਅੱਪਲੋਡ ਹੋ ਗਏ!</string>
   <string name="upload_completed_notification_text">ਆਪਣਾ ਅੱਪਲੋਡ ਵੇਖਣ ਲਈ ਥਪੇੜੋ</string>
@@ -91,10 +91,10 @@
   <string name="login_failed_network">ਦਾਖ਼ਲ ਹੋਣ ਵਿੱਚ ਅਸਮਰੱਥ - ਨੈੱਟਵਰਕ ਫੇਲ੍ਹ ਹੋਇਆ ਹੈ</string>
   <string name="login_failed_throttled">ਬਹੁਤ ਸਾਰੀਆਂ ਅਸਫ਼ਲ ਕੋਸ਼ਿਸ਼ਾਂ। ਥੋੜ੍ਹੀ ਦੇਰ ਬਾਅਦ ਕੋਸ਼ਿਸ਼ ਕਰੋ ਜੀ।</string>
   <string name="login_failed_blocked">ਅਫ਼ਸੋਸ, ਇਹ ਵਰਤੋਂਕਾਰ ਨੂੰ ਕਾਮਨਜ਼ ਤੇ ਰੋਕ ਲਾਈ ਗਈ ਹੈ।</string>
-  <string name="login_failed_2fa_needed">ਤੁਹਾਨੂੰ ਆਪਣਾ ਦੋ-ਕਾਰਕ ਪ੍ਰਮਾਣੀਕਰਨ ਕੋਡ ਦੇਣਾ ਪਵੇਗਾ।</string>
+  <string name="login_failed_2fa_needed">ਤੁਹਾਨੂੰ ਆਪਣਾ ਦੋ-ਪੱਖੀ ਤਸਦੀਕ ਕੋਡ ਦੇਣਾ ਪਵੇਗਾ।</string>
   <string name="login_failed_generic">ਦਾਖ਼ਲ ਹੋਣਾ ਅਸਫ਼ਲ!</string>
   <string name="share_upload_button">ਚੜ੍ਹਾਉ</string>
-  <string name="multiple_share_base_title">ਇਸ ਸੈੱਟ ਨੂੰ ਨਾਂ ਦਿਓ</string>
+  <string name="multiple_share_base_title">ਇਸ ਟੋਲੀ ਨੂੰ ਨਾਂ ਦਿਓ</string>
   <string name="provider_modifications">ਸੋਧਾਂ</string>
   <string name="menu_upload_single">ਚੜ੍ਹਾਉ</string>
   <string name="categories_search_text_hint">ਸ਼੍ਰੇਣੀਆਂ ਖੋਜੋ</string>
