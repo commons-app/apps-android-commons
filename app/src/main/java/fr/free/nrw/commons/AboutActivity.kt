@@ -142,7 +142,7 @@ class AboutActivity : BaseActivity() {
     }
 
     fun launchPrivacyPolicy(view: View?) {
-        Utils.handleWebUrl(this, Uri.parse("https://commons-app.github.io/#privacy-policy"))
+        Utils.handleWebUrl(this, Uri.parse(BuildConfig.PRIVACY_POLICY_URL))
     }
 
     fun launchFrequentlyAskedQuesions(view: View?) {
