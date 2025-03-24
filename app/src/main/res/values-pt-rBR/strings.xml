@@ -419,7 +419,7 @@
   <string name="provider_bookmarks">Favoritos</string>
   <string name="bookmark_empty">Não adicionou nenhum favorito</string>
   <string name="provider_bookmarks_location">Favoritos</string>
-  <string name="log_collection_started">A recolha de registos foi iniciada. REINICIE a aplicação, execute a operação que pretende registar e prima outra vez \"Enviar ficheiro de registos\"</string>
+  <string name="log_collection_started">A coleta de registros foi iniciada. REINICIE o aplicativo, execute a operação que pretende registrar e toque em ‘Enviar arquivo de registros’ novamente</string>
   <string name="deletion_reason_uploaded_by_mistake">Eu fiz o carregamento por engano</string>
   <string name="deletion_reason_publicly_visible">Eu não sabia que seria publicamente visível</string>
   <string name="deletion_reason_bad_for_my_privacy">Eu percebi que é ruim para minha privacidade</string>
