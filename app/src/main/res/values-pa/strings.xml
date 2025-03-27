@@ -265,6 +265,7 @@
   <string name="achievements_share_message">ਆਪਣੀਆਂ ਪ੍ਰਾਪਤੀਆਂ ਨੂੰ ਆਪਣੇ ਦੋਸਤਾਂ ਨਾਲ ਸਾਂਝਾ ਕਰੋ!</string>
   <string name="achievements_revert_limit_message">ਘੱਟੋ-ਘੱਟ ਲੋੜੀਂਦਾ:</string>
   <string name="error_occurred">ਗਲਤੀ ਆਈ!</string>
+  <string name="contributions_fragment">ਯੋਗਦਾਨ</string>
   <string name="nearby_fragment">ਨੇੜੇ-ਤੇੜੇ</string>
   <string name="notifications">ਸੂਚਨਾਵਾਂ</string>
   <string name="read_notifications">ਸੂਚਨਾਵਾਂ (ਪੜ੍ਹਿਆਂ)</string>

@@ -70,7 +70,7 @@
   <string name="authentication_failed">D\'Authentifizéierung huet net funktionéiert. Loggt Iech wgl. nach eng Kéier an.</string>
   <string name="uploading_started">D\'Eroplueden huet ugefaang!</string>
   <string name="upload_completed_notification_title">%1$s eropgelueden!</string>
-  <string name="upload_completed_notification_text">Dréckt fir de Fichier ze gesinn deen Dir eropgelueden hutt</string>
+  <string name="upload_completed_notification_text">Tippt fir de Fichier ze gesinn, deen Dir eropgelueden hutt</string>
   <string name="upload_progress_notification_title_start">Fichier eroplueden: %s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s gëtt eropgelueden</string>
   <string name="upload_progress_notification_title_finishing">Eropluede vu(n) %1$s ofschléissen</string>
@@ -274,6 +274,7 @@
   <string name="menu_search_button">Sichen</string>
   <string name="search_commons">Op Commons sichen</string>
   <string name="title_activity_search">Sichen</string>
+  <string name="search_recent_header">Rezent gesicht:</string>
   <string name="search_tab_title_media">Medien</string>
   <string name="search_tab_title_categories">Kategorien</string>
   <string name="search_tab_title_depictions">Elementer</string>
