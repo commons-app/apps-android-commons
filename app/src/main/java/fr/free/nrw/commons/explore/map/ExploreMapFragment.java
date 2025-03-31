@@ -708,8 +708,17 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
             GeoPoint point = new GeoPoint(
                 nearbyBaseMarker.getPlace().location.getLatitude(),
                 nearbyBaseMarker.getPlace().location.getLongitude());
-            OverlayItem item = new OverlayItem(nearbyBaseMarker.getPlace().name, null,
-                point);
+
+            Media markerMedia = this.getMediaFromImageURL(nearbyBaseMarker.getPlace().pic);
+            String authorUser = null;
+            if (markerMedia != null) {
+                authorUser = markerMedia.getAuthorOrUser();
+                // HTML text is sometimes part of the author string and needs to be removed
+                authorUser = Html.fromHtml(authorUser, Html.FROM_HTML_MODE_LEGACY).toString();
+            }
+
+            OverlayItem item = new OverlayItem(nearbyBaseMarker.getPlace().name,
+                authorUser, point);
             item.setMarker(d);
             items.add(item);
             ItemizedOverlayWithFocus overlay = new ItemizedOverlayWithFocus(items,
@@ -738,6 +747,26 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
             overlay.setFocusItemsOnTap(true);
             binding.mapView.getOverlays().add(overlay); // Add the overlay to the map
         }
+    }
+
+    /**
+     * Retrieves the specific Media object from the mediaList field.
+     * @param url The specific Media's image URL.
+     * @return The Media object that matches the URL or null if it could not be found.
+     */
+    private Media getMediaFromImageURL(String url) {
+        if (mediaList == null || url == null) {
+            return null;
+        }
+
+        for (int i = 0; i < mediaList.size(); i++) {
+            if (mediaList.get(i) != null && mediaList.get(i).getImageUrl() != null
+                && mediaList.get(i).getImageUrl().equals(url)) {
+                return mediaList.get(i);
+            }
+        }
+
+        return null;
     }
 
     /**
