@@ -853,8 +853,14 @@
   <string name="usages_on_other_wikis_heading">Autres wikis</string>
   <string name="bullet_point">•</string>
   <string name="file_usages_container_heading">Utilisations du fichier</string>
+  <string name="title_activity_single_web_view">SingleWebViewActivity</string>
+  <string name="account">Compte</string>
+  <string name="vanish_account">Faire disparaître le compte</string>
+  <string name="account_vanish_request_confirm_title">Avertissement de disparition du compte</string>
+  <string name="account_vanish_request_confirm">La disparition est un &lt;b&gt;dernier recours&lt;/b&gt; et ne devrait être &lt;b&gt;utilisée que quand vous voulez arrêter d’éditer pour toujours&lt;/b&gt; et aussi pour cacher autant que possible vos associations passées.&lt;br/&gt;&lt;br/&gt;La suppression de compte sur Wikimedia Commons se fait en changeant le nom de votre compte de sorte que les autres ne peuvent pas identifier vos contributions, lors d’un processus appelé disparition du compte. &lt;b&gt;La disparition ne garantit pas l’anonymat complet ni ne supprime les contributions de vos projets&lt;/b&gt;.</string>
   <string name="caption">Légende</string>
   <string name="caption_copied_to_clipboard">Légende copiée dans le presse-papier</string>
+  <string name="congratulations_all_pictures_in_this_album_have_been_either_uploaded_or_marked_as_not_for_upload">Félicitations, toutes les images dans cet album ont été soit téléchargées soit marquées comme non téléchargeables.</string>
   <string name="show_in_explore">Afficher dans Explorer</string>
   <string name="show_in_nearby">Afficher à proximité</string>
 </resources>
