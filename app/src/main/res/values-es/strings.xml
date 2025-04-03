@@ -22,6 +22,7 @@
 * Fitoschido
 * Gastonsaenz
 * Hasley
+* HylianAngel
 * Ihojose
 * JO777
 * Jack30
@@ -150,6 +151,7 @@
   <string name="menu_from_camera">Tomar una foto</string>
   <string name="menu_nearby">Cercanos</string>
   <string name="provider_contributions">Mis subidas</string>
+  <string name="menu_copy_link">Copiar enlace</string>
   <string name="menu_share">Compartir</string>
   <string name="menu_view_file_page">Ver página del archivo</string>
   <string name="share_title_hint">Leyenda (requerido)</string>
@@ -413,7 +415,7 @@
   <string name="statistics_thanks">Agradecimientos recibidos</string>
   <string name="statistics_featured">Imágenes destacadas</string>
   <string name="statistics_wikidata_edits">Imágenes vía \"Sitios Cercanos\"</string>
-  <string name="level" fuzzy="true">Nivel</string>
+  <string name="level">Nivel %d</string>
   <string name="images_uploaded">Imágenes subidas</string>
   <string name="image_reverts">Imágenes no revertidas</string>
   <string name="images_used_by_wiki">Imágenes utilizadas</string>
