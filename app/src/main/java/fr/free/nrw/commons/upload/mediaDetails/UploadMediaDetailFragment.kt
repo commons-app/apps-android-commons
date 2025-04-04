@@ -21,8 +21,6 @@ import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.exifinterface.media.ExifInterface
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.viewpager.widget.ViewPager
-import androidx.viewpager2.widget.ViewPager2
 import fr.free.nrw.commons.CameraPosition
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.contributions.MainActivity
