@@ -205,15 +205,42 @@ class UploadMediaPresenter @Inject constructor(
 
 
     /**
-     * Copies the caption and description of the current item to the subsequent media
+     * Copies the caption. location and description of the current item to the subsequent media
      */
     override fun copyTitleAndDescriptionToSubsequentMedia(indexInViewFlipper: Int) {
+        val sourceItem = repository.getUploads()[indexInViewFlipper]
+
         for (i in indexInViewFlipper + 1 until repository.getCount()) {
             val subsequentUploadItem = repository.getUploads()[i]
+
             subsequentUploadItem.uploadMediaDetails = deepCopy(
-                repository.getUploads()[indexInViewFlipper].uploadMediaDetails
+                sourceItem.uploadMediaDetails
             ).toMutableList()
+
+            sourceItem.gpsCoords?.let { sourceCoords ->
+                if (sourceCoords.decimalCoords != null) {
+                    if (subsequentUploadItem.gpsCoords == null) {
+                        val latLng = sourceCoords.latLng
+                        if (latLng != null) {
+                            subsequentUploadItem.gpsCoords = ImageCoordinates(null, latLng)
+                        }
+                    } else {
+                        subsequentUploadItem.gpsCoords!!.decLatitude = sourceCoords.decLatitude
+                        subsequentUploadItem.gpsCoords!!.decLongitude = sourceCoords.decLongitude
+                        subsequentUploadItem.gpsCoords!!.decimalCoords = sourceCoords.decimalCoords
+                        subsequentUploadItem.gpsCoords!!.imageCoordsExists = true
+                        subsequentUploadItem.gpsCoords!!.zoomLevel = sourceCoords.zoomLevel
+                    }
+                }
+            }
         }
+
+        view?.showMessage("Title, description and location copied to subsequent media",
+            android.R.color.holo_green_light)
+    }
+
+    override fun getUploadItem(index: Int): UploadItem? {
+        return repository.getUploads().getOrNull(index)
     }
 
     /**
@@ -255,7 +282,6 @@ class UploadMediaPresenter @Inject constructor(
         view.updateMediaDetails(uploadMediaDetails)
         setUploadIsOfAPlace(true)
     }
-
 
     /**
      * Calculates the image quality
