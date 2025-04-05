@@ -124,5 +124,7 @@ interface UploadMediaDetailsContract {
         fun onEditButtonClicked(indexInViewFlipper: Int)
 
         fun onUserConfirmedUploadIsOfPlace(place: Place?, uploadItemIndex: Int)
+
+        fun getUploadItem(index: Int): UploadItem?
     }
 }
