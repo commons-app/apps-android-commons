@@ -10,6 +10,7 @@ SELECT
   (SAMPLE(?wikipediaArticle) AS ?wikipediaArticle)
   (SAMPLE(?commonsArticle) AS ?commonsArticle)
   (SAMPLE(?commonsCategory) AS ?commonsCategory)
+  (SAMPLE(?dateOfClosure) AS ?dateOfClosure)
 WHERE {
   SERVICE <https://query.wikidata.org/sparql> {
     values ?item {
@@ -60,5 +61,8 @@ WHERE {
     ?commonsArticle schema:about ?item.
     ?commonsArticle schema:isPartOf <https://commons.wikimedia.org/>.
   }
+
+    # Get date of official closure (P3999)
+    OPTIONAL {?item wdt:P3999 ?dateOfClosure}
 }
 GROUP BY ?item

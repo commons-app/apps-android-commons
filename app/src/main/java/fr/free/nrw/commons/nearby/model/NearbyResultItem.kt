@@ -18,6 +18,7 @@ class NearbyResultItem(
     @field:SerializedName("description") private val description: ResultTuple?,
     @field:SerializedName("endTime") private val endTime: ResultTuple?,
     @field:SerializedName("monument") private val monument: ResultTuple?,
+    @field:SerializedName("dateOfClosure") private val dateOfClosure: ResultTuple? = null
 ) {
     fun getItem(): ResultTuple = item ?: ResultTuple()
 
@@ -48,4 +49,6 @@ class NearbyResultItem(
     fun getAddress(): String = address?.value ?: ""
 
     fun getMonument(): ResultTuple? = monument
+
+    fun getDateOfClosure(): ResultTuple = dateOfClosure ?: ResultTuple()
 }

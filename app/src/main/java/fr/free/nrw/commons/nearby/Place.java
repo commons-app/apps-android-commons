@@ -12,6 +12,7 @@ import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.nearby.model.NearbyResultItem;
 import fr.free.nrw.commons.utils.LocationUtils;
 import fr.free.nrw.commons.utils.PlaceUtils;
+import java.util.Objects;
 import org.apache.commons.lang3.StringUtils;
 import timber.log.Timber;
 
@@ -39,6 +40,7 @@ public class Place implements Parcelable {
     public Sitelinks siteLinks;
     private boolean isMonument;
     private String thumb;
+    private String dateOfClosure;
 
     public Place() {
         language = null;
@@ -51,6 +53,12 @@ public class Place implements Parcelable {
         exists = null;
         siteLinks = null;
         entityID = null;
+        dateOfClosure = null;
+    }
+    public Place(String language, String name, Label label, String longDescription, LatLng location,
+        String category, Sitelinks siteLinks, String pic, Boolean exists, String entityID, String dateOfClosure) {
+        this(language, name, label, longDescription, location, category, siteLinks, pic, exists, entityID);
+        this.dateOfClosure = dateOfClosure;
     }
 
     public Place(String language, String name, Label label, String longDescription, LatLng location,
@@ -109,6 +117,7 @@ public class Place implements Parcelable {
         this.exists = Boolean.parseBoolean(existString);
         this.isMonument = in.readInt() == 1;
         this.entityID = in.readString();
+        this.dateOfClosure = in.readString();  // Added for P3999
     }
 
     public static Place from(NearbyResultItem item) {
@@ -139,6 +148,7 @@ public class Place implements Parcelable {
             + ((description != null && !description.isEmpty())
             ? " (" + description + ")" : "")
             : description);
+        item.getDateOfClosure();
         return new Place(
             item.getLabel().getLanguage(),
             item.getLabel().getValue(),
@@ -153,9 +163,27 @@ public class Place implements Parcelable {
                 .build(),
             item.getPic().getValue(),
             // Checking if the place exists or not
-            (item.getDestroyed().getValue() == "") && (item.getEndTime().getValue() == ""), entityId);
+            (item.getDestroyed().getValue() == "" && item.getEndTime().getValue() == ""),
+             entityId,
+            (item.getDateOfClosure() != null && !item.getDateOfClosure().getValue().isEmpty())
+                ? item.getDateOfClosure().getValue()
+                : null);
+    }
+    // Added new method to check if place is closed
+    public boolean isClosed() {
+        return (dateOfClosure != null && !dateOfClosure.isEmpty()) || !exists;
     }
 
+    public String getDisplayName() {
+        return (isClosed() ? "❌ " : "") + name;
+    }
+
+    public String getDateOfClosure() {
+        return dateOfClosure;
+    }
+    public void setDateOfClosure(String dateOfClosure) {
+        this.dateOfClosure = dateOfClosure;
+    }
     /**
      * Gets the language of the caption ie name.
      *
@@ -306,15 +334,17 @@ public class Place implements Parcelable {
     public boolean equals(Object o) {
         if (o instanceof Place) {
             Place that = (Place) o;
-            return this.name.equals(that.name) && this.location.equals(that.location);
-        } else {
-            return false;
+            return this.name.equals(that.name) && this.location.equals(that.location) &&
+                (Objects.equals(this.dateOfClosure, that.dateOfClosure));
         }
+        return false;
     }
 
     @Override
     public int hashCode() {
-        return this.name.hashCode() * 31 + this.location.hashCode();
+        int result = this.name.hashCode() * 31 + this.location.hashCode();
+        result = 31 * result + (dateOfClosure != null ? dateOfClosure.hashCode() : 0); // Add this line
+        return result;
     }
 
     @Override
@@ -331,6 +361,7 @@ public class Place implements Parcelable {
             ", pic='" + pic + '\'' +
             ", exists='" + exists.toString() + '\'' +
             ", entityID='" + entityID + '\'' +
+            ", dateOfClosure='" + dateOfClosure + '\'' +
             '}';
     }
 
@@ -352,6 +383,7 @@ public class Place implements Parcelable {
         dest.writeString(entityID);
         dest.writeString(exists.toString());
         dest.writeInt(isMonument ? 1 : 0);
+        dest.writeString(dateOfClosure);
     }
 
     public static final Creator<Place> CREATOR = new Creator<Place>() {
