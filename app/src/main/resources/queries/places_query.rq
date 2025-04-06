@@ -13,7 +13,6 @@ WHERE {
   MINUS {?item wdt:P582 ?endtime.}
   MINUS {?item wdt:P582 ?dissolvedOrAbolished.}
   MINUS {?item p:P31 ?instanceStatement. ?instanceStatement pq:P582 ?endtimeQualifier.}
-  MINUS { ?item wdt:P3999 ?closureDate. }
   OPTIONAL {?item rdfs:label ?en_label . FILTER(LANG(?en_label) = "en")}
   OPTIONAL {?item rdfs:label ?fr_label . FILTER(LANG(?fr_label) = "fr")}
   OPTIONAL {?item rdfs:label ?vn_label . FILTER(LANG(?id_label) = "id")}
