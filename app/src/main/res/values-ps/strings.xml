@@ -47,7 +47,14 @@
     <item quantity="one">%d upload</item>
     <item quantity="other">%d پورته کول</item>
   </plurals>
-  <string name="share_license_summary" fuzzy="true">دا انځور به د %1$s په منښتليک سمبال وي.</string>
+  <plurals name="share_license_summary">
+    <item quantity="one">دا انځور به د منښتليک  %1$s لاندې وي</item>
+    <item quantity="other">دا انځورونه به د  %1$s منښتليک لاندې وي</item>
+  </plurals>
+  <plurals name="upload_count_title">
+    <item quantity="one">%1$d راپورته کول</item>
+    <item quantity="other">%1$d راپورته کېدنې</item>
+  </plurals>
   <string name="navigation_item_explore">سپړنه</string>
   <string name="preference_category_appearance">ښکارېدنه</string>
   <string name="preference_category_general">ټولګړی</string>
