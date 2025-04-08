@@ -2,6 +2,7 @@ package fr.free.nrw.commons.auth.login
 
 import com.google.gson.annotations.SerializedName
 import fr.free.nrw.commons.auth.login.LoginResult.OAuthResult
+import fr.free.nrw.commons.auth.login.LoginResult.EmailAuthResult
 import fr.free.nrw.commons.auth.login.LoginResult.ResetPasswordResult
 import fr.free.nrw.commons.auth.login.LoginResult.Result
 import fr.free.nrw.commons.wikidata.mwapi.MwServiceError
@@ -27,11 +28,13 @@ internal class ClientLogin {
     fun toLoginResult(password: String): LoginResult {
         var userMessage = message
         if ("UI" == status) {
-            if (requests != null) {
-                for (req in requests) {
-                    if ("MediaWiki\\Extension\\OATHAuth\\Auth\\TOTPAuthenticationRequest" == req.id()) {
+            requests?.forEach { request ->
+                request.id()?.let {
+                    if (it.endsWith("TOTPAuthenticationRequest")) {
                         return OAuthResult(status, userName, password, message)
-                    } else if ("MediaWiki\\Auth\\PasswordAuthenticationRequest" == req.id()) {
+                    } else if (it.endsWith("EmailAuthAuthenticationRequest")) {
+                        return EmailAuthResult(status, userName, password, message)
+                    } else if (it.endsWith("PasswordAuthenticationRequest")) {
                         return ResetPasswordResult(status, userName, password, message)
                     }
                 }
@@ -49,7 +52,7 @@ internal class Request {
     private val required: String? = null
     private val provider: String? = null
     private val account: String? = null
-    private val fields: Map<String, RequestField>? = null
+    internal val fields: Map<String, RequestField>? = null
 
     fun id(): String? = id
 }
@@ -57,5 +60,5 @@ internal class Request {
 internal class RequestField {
     private val type: String? = null
     private val label: String? = null
-    private val help: String? = null
+    internal val help: String? = null
 }

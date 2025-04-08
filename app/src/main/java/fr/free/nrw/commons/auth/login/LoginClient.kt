@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.auth.login
 
 import android.text.TextUtils
+import fr.free.nrw.commons.auth.login.LoginResult.EmailAuthResult
 import fr.free.nrw.commons.auth.login.LoginResult.OAuthResult
 import fr.free.nrw.commons.auth.login.LoginResult.ResetPasswordResult
 import fr.free.nrw.commons.wikidata.WikidataConstants.WIKIPEDIA_URL
@@ -51,6 +52,7 @@ class LoginClient(
                         password,
                         null,
                         null,
+                        null,
                         response.body()!!.query()!!.loginToken(),
                         userLanguage,
                         cb,
@@ -75,6 +77,7 @@ class LoginClient(
         password: String,
         retypedPassword: String?,
         twoFactorCode: String?,
+        emailAuthCode: String?,
         loginToken: String?,
         userLanguage: String,
         cb: LoginCallback,
@@ -82,7 +85,7 @@ class LoginClient(
         this.userLanguage = userLanguage
 
         loginCall =
-            if (twoFactorCode.isNullOrEmpty() && retypedPassword.isNullOrEmpty()) {
+            if (twoFactorCode.isNullOrEmpty() && emailAuthCode.isNullOrEmpty() && retypedPassword.isNullOrEmpty()) {
                 loginInterface.postLogIn(userName, password, loginToken, userLanguage, WIKIPEDIA_URL)
             } else {
                 loginInterface.postLogIn(
@@ -90,6 +93,7 @@ class LoginClient(
                     password,
                     retypedPassword,
                     twoFactorCode,
+                    emailAuthCode,
                     loginToken,
                     userLanguage,
                     true,
@@ -112,8 +116,16 @@ class LoginClient(
                             when (loginResult) {
                                 is OAuthResult ->
                                     cb.twoFactorPrompt(
+                                        loginResult,
                                         LoginFailedException(loginResult.message),
                                         loginToken,
+                                    )
+
+                                is EmailAuthResult ->
+                                    cb.emailAuthPrompt(
+                                        loginResult,
+                                        LoginFailedException(loginResult.message),
+                                        loginToken
                                     )
 
                                 is ResetPasswordResult -> cb.passwordResetPrompt(loginToken)
@@ -147,6 +159,7 @@ class LoginClient(
     fun doLogin(
         username: String,
         password: String,
+        lastLoginResult: LoginResult?,
         twoFactorCode: String,
         userLanguage: String,
         loginCallback: LoginCallback,
@@ -159,7 +172,10 @@ class LoginClient(
                 ) = if (response.isSuccessful) {
                     val loginToken = response.body()?.query()?.loginToken()
                     loginToken?.let {
-                        login(username, password, null, twoFactorCode, it, userLanguage, loginCallback)
+                        login(username, password, null,
+                            if (lastLoginResult is OAuthResult) twoFactorCode else null,
+                            if (lastLoginResult is EmailAuthResult) twoFactorCode else null,
+                            it, userLanguage, loginCallback)
                     } ?: run {
                         loginCallback.error(IOException("Failed to retrieve login token"))
                     }
@@ -181,7 +197,8 @@ class LoginClient(
     fun loginBlocking(
         userName: String,
         password: String,
-        twoFactorCode: String?,
+        twoFactorCode: String? = null,
+        emailAuthCode: String? = null
     ) {
         val tokenResponse = getLoginToken().execute()
         if (tokenResponse
@@ -195,7 +212,7 @@ class LoginClient(
 
         val loginToken = tokenResponse.body()?.query()?.loginToken()
         val tempLoginCall =
-            if (twoFactorCode.isNullOrEmpty()) {
+            if (twoFactorCode.isNullOrEmpty() && emailAuthCode.isNullOrEmpty()) {
                 loginInterface.postLogIn(userName, password, loginToken, userLanguage, WIKIPEDIA_URL)
             } else {
                 loginInterface.postLogIn(
@@ -203,6 +220,7 @@ class LoginClient(
                     password,
                     null,
                     twoFactorCode,
+                    emailAuthCode,
                     loginToken,
                     userLanguage,
                     true,
@@ -214,7 +232,7 @@ class LoginClient(
         val loginResult = loginResponse.toLoginResult(password) ?: throw IOException("Unexpected response when logging in.")
 
         if ("UI" == loginResult.status) {
-            if (loginResult is OAuthResult) {
+            if (loginResult is OAuthResult || loginResult is EmailAuthResult) {
                 // TODO: Find a better way to boil up the warning about 2FA
                 throw LoginFailedException(loginResult.message)
             }

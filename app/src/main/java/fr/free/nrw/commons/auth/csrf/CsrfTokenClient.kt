@@ -32,7 +32,7 @@ class CsrfTokenClient(
             try {
                 if (retry > 0) {
                     // Log in explicitly
-                    loginClient.loginBlocking(userName, password, "")
+                    loginClient.loginBlocking(userName, password)
                 }
 
                 // Get CSRFToken response off the main thread.
@@ -92,6 +92,8 @@ class CsrfTokenClient(
                 override fun failure(caught: Throwable?) = retryWithLogin(cb) { caught }
 
                 override fun twoFactorPrompt() = cb.twoFactorPrompt()
+
+                override fun emailAuthPrompt() = cb.emailAuthPrompt()
             },
         )
 
@@ -165,9 +167,16 @@ class CsrfTokenClient(
             }
 
             override fun twoFactorPrompt(
+                loginResult: LoginResult,
                 caught: Throwable,
                 token: String?,
             ) = callback.twoFactorPrompt()
+
+            override fun emailAuthPrompt(
+                loginResult: LoginResult,
+                caught: Throwable,
+                token: String?,
+            ) = callback.emailAuthPrompt()
 
             // Should not happen here, but call the callback just in case.
             override fun passwordResetPrompt(token: String?) = callback.failure(LoginFailedException("Logged in with temporary password."))
@@ -190,6 +199,8 @@ class CsrfTokenClient(
         fun failure(caught: Throwable?)
 
         fun twoFactorPrompt()
+
+        fun emailAuthPrompt()
     }
 
     companion object {
