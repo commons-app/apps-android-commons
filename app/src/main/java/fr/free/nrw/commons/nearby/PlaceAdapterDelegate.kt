@@ -78,7 +78,7 @@ fun placeAdapterDelegate(
         nearbyButtonLayout.iconOverflow.setOnLongClickListener { onOverFlowLongPressed() }
         nearbyButtonLayout.directionsButton.setOnClickListener { onDirectionsClicked(item) }
         bind {
-            tvName.text = item.getDisplayName()
+            tvName.text = item.name
             val descriptionText: String = item.longDescription
             if (descriptionText == "?") {
                 tvDesc.setText(R.string.no_description_found)
