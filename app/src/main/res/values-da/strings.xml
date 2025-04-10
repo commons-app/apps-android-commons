@@ -119,6 +119,7 @@
   <string name="login_failed_throttled">For mange mislykkede forsøg. Prøv igen om et par minutter.</string>
   <string name="login_failed_blocked">Beklager, denne bruger er blevet blokeret på Commons</string>
   <string name="login_failed_2fa_needed">Du skal angive din tofaktorgodkendelseskode.</string>
+  <string name="login_failed_email_auth_needed">En login-bekræftelseskode er blevet sendt til din e-mailadresse. Angiv koden for at logge ind.</string>
   <string name="login_failed_generic">Login mislykkedes</string>
   <string name="share_upload_button">Upload</string>
   <string name="multiple_share_base_title">Navngiv dette sæt</string>
@@ -224,6 +225,7 @@
   <string name="become_a_tester_title">Bliv betatester</string>
   <string name="become_a_tester_description">Registrer dig på vores betakanal på Google Play og få tidlig adgang til nye funktioner og fejlrettelser</string>
   <string name="_2fa_code">2FA-kode</string>
+  <string name="email_auth_code">E-mail-bekræftelseskode</string>
   <string name="logout_verification">Ønsker du at logge ud?</string>
   <string name="mediaimage_failed">Mediebillede mislykkedes</string>
   <string name="no_subcategory_found">Ingen underkategorier fundet</string>

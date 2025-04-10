@@ -113,6 +113,7 @@
   <string name="login_failed_throttled">Направени се премногу неуспешни обиди. Обидете се пак за некоја минута.</string>
   <string name="login_failed_blocked">За жал, корисникот е блокиран на Ризницата</string>
   <string name="login_failed_2fa_needed">Мора да го укажете вашиот код за двочинителска заверка.</string>
+  <string name="login_failed_email_auth_needed">На вашата е-поштенска адреса ви испративме потврден код за најава. Внесете го кодот за да се најавите.</string>
   <string name="login_failed_generic">Најавата не успеа</string>
   <string name="share_upload_button">Подигни</string>
   <string name="multiple_share_base_title">Дајте му име на овој комплет</string>
@@ -218,6 +219,7 @@
   <string name="become_a_tester_title">Станете бета-испробувач</string>
   <string name="become_a_tester_description">Пријавете се на нашиот бета-канал на Google Play и добивајте ран пристап до нови можности и исправки на грешки</string>
   <string name="_2fa_code">2ЧЗ-код</string>
+  <string name="email_auth_code">Испрати го потврдниот код на е-пошта</string>
   <string name="logout_verification">Дали навистина сакате да се одјавите?</string>
   <string name="mediaimage_failed">Сликата не успеа</string>
   <string name="no_subcategory_found">Не пронајдов поткатегории</string>
