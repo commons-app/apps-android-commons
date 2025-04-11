@@ -99,6 +99,7 @@
   <string name="login_failed_throttled">Ze dacks ouni Succès probéiert. Probéiert wgl. an e puer Minutten nach eng Kéier.</string>
   <string name="login_failed_blocked">Pardon, dëse Benotzer ass op Commons gespaart</string>
   <string name="login_failed_2fa_needed">Dir musst de Code vun Ärer Zwee-Facteur-Authentifizéierung uginn.</string>
+  <string name="login_failed_email_auth_needed">Dir hutt ee Login-Verifikatiounscode per E-Mail geschéckt kritt. Gitt wgl. de Code an, fir Iech anzeloggen.</string>
   <string name="login_failed_generic">Aloggen huet net funktionéiert</string>
   <string name="share_upload_button">Eroplueden</string>
   <string name="multiple_share_base_title">Gitt dëser Biller een Numm</string>
@@ -192,6 +193,7 @@
   <string name="become_a_tester_title">Beta-Tester ginn</string>
   <string name="become_a_tester_description">Schreift Iech op GooglePlay a fir eise Beta-Kanal a kritt fréi Zougang zu neie Funktiounen a Verbesserunge vu Feeler</string>
   <string name="_2fa_code">2FA-Code</string>
+  <string name="email_auth_code">E-Mail-Verifikatiounscode</string>
   <string name="logout_verification">Wëllt dir Iech wierklech ausloggen?</string>
   <string name="no_subcategory_found">Keng Ënnerkategorie fonnt</string>
   <string name="welcome_image_mount_zao">Bierg Zao</string>

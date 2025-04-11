@@ -775,7 +775,11 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
      * @param nearbyBaseMarker The NearbyBaseMarker object representing the marker to be removed.
      */
     private void removeMarker(BaseMarker nearbyBaseMarker) {
-        Place place = nearbyBaseMarker.getPlace();
+        if (nearbyBaseMarker == null || nearbyBaseMarker.getPlace().getName() == null) {
+            return;
+        }
+
+        String target = nearbyBaseMarker.getPlace().getName();
         List<Overlay> overlays = binding.mapView.getOverlays();
         ItemizedOverlayWithFocus item;
 
@@ -784,8 +788,7 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
                 item = (ItemizedOverlayWithFocus) overlays.get(i);
                 OverlayItem overlayItem = item.getItem(0);
 
-                if (place.location.getLatitude() == overlayItem.getPoint().getLatitude()
-                    && place.location.getLongitude() == overlayItem.getPoint().getLongitude()) {
+                if (overlayItem.getTitle().equals(target)) {
                     binding.mapView.getOverlays().remove(i);
                     binding.mapView.invalidate();
                     break;

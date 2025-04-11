@@ -119,7 +119,7 @@
   <string name="login_failed_network">ログインできません - ネットワークのエラーです</string>
   <string name="login_failed_throttled">失敗した回数が多すぎます。数分後にもう一度お試しください。</string>
   <string name="login_failed_blocked">申し訳ありませんが、この利用者はコモンズでブロックされています。</string>
-  <string name="login_failed_2fa_needed">2段階認証コードを入力してください。</string>
+  <string name="login_failed_2fa_needed">二要素認証コードを入力してください。</string>
   <string name="login_failed_generic">ログイン失敗</string>
   <string name="share_upload_button">アップロード</string>
   <string name="multiple_share_base_title">このセットに名前をつけてください</string>
@@ -221,7 +221,7 @@
   <string name="media_detail_coordinates_empty">情報なし</string>
   <string name="become_a_tester_title">ベータ版テスターになる</string>
   <string name="become_a_tester_description">Google Playのベータ版チャンネルにオプトインして、新機能やバグ修正プログラムに早期にアクセス</string>
-  <string name="_2fa_code">2段階認証コード</string>
+  <string name="_2fa_code">2FAコード</string>
   <string name="logout_verification">ログアウトしてもよろしいですか？</string>
   <string name="mediaimage_failed">メディアイメージが失敗しました</string>
   <string name="no_subcategory_found">下位カテゴリは見つかりませんでした</string>

@@ -168,6 +168,7 @@
   <string name="login_failed_throttled">الكثير من المحاولات غير الناجحة. الرجاء المحاولة مرة أخرى في بضع دقائق.</string>
   <string name="login_failed_blocked">عذراً، لقد تم منع هذا المستخدم على كومنز</string>
   <string name="login_failed_2fa_needed">يجب توفير رمز التحقق المزدوج.</string>
+  <string name="login_failed_email_auth_needed">تم إرسال رمز التحقق إلى بريدك الإلكتروني. يُرجى إدخال الرمز لتسجيل الدخول.</string>
   <string name="login_failed_generic">فشل تسجيل الدخول</string>
   <string name="share_upload_button">ارفع</string>
   <string name="multiple_share_base_title">اسم هذه المجموعة</string>
@@ -273,6 +274,7 @@
   <string name="become_a_tester_title">انضم لمختبري اصدارات Beta (بيتا)</string>
   <string name="become_a_tester_description">يمكنك الاشتراك في القناة التجريبية على جوجل بلاي والحصول على إمكانية الوصول المبكر إلى الميزات الجديدة وإصلاحات الأخطاء</string>
   <string name="_2fa_code">رمز التحقق المزدوج 2FA</string>
+  <string name="email_auth_code">رمز التحقق من البريد الإلكتروني</string>
   <string name="logout_verification">أترغب فعلا في الخروج؟</string>
   <string name="mediaimage_failed">صورة الوسائط فشلت</string>
   <string name="no_subcategory_found">لم يتم العثور على تصنيفات فرعية.</string>

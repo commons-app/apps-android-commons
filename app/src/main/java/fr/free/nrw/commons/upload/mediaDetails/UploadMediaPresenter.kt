@@ -310,7 +310,7 @@ class UploadMediaPresenter @Inject constructor(
     private fun storeImageQuality(
         imageResult: Int, uploadItemIndex: Int, activity: Activity, uploadItem: UploadItem
     ) {
-        val store = BasicKvStore(activity, UploadActivity.storeNameForCurrentUploadImagesSize)
+        val store = BasicKvStore(activity, UploadActivity.STORE_NAME_FOR_CURRENT_UPLOAD_IMAGE_SIZE)
         val value = store.getString(UPLOAD_QUALITIES_KEY, null)
         try {
             val jsonObject = value.asJsonObject().apply {
@@ -339,8 +339,10 @@ class UploadMediaPresenter @Inject constructor(
      */
     override fun checkImageQuality(uploadItem: UploadItem, index: Int) {
         if ((uploadItem.imageQuality != IMAGE_OK) && (uploadItem.imageQuality != IMAGE_KEEP)) {
-            val value = basicKvStoreFactory?.let { it(UploadActivity.storeNameForCurrentUploadImagesSize) }
+          
+            val value = basicKvStoreFactory?.let { it(UploadActivity.STORE_NAME_FOR_CURRENT_UPLOAD_IMAGE_SIZE) }
                 ?.getString(UPLOAD_QUALITIES_KEY, null)
+                
             try {
                 val imageQuality = value.asJsonObject()["UploadItem$index"] as Int
                 view.showProgress(false)
@@ -363,8 +365,9 @@ class UploadMediaPresenter @Inject constructor(
      * @param index Index of the UploadItem which was deleted
      */
     override fun updateImageQualitiesJSON(size: Int, index: Int) {
-        val value = basicKvStoreFactory?.let { it(UploadActivity.storeNameForCurrentUploadImagesSize) }
+        val value = basicKvStoreFactory?.let { it(UploadActivity.STORE_NAME_FOR_CURRENT_UPLOAD_IMAGE_SIZE) }
             ?.getString(UPLOAD_QUALITIES_KEY, null)
+
         try {
             val jsonObject = value.asJsonObject().apply {
                 for (i in index until (size - 1)) {
@@ -372,7 +375,8 @@ class UploadMediaPresenter @Inject constructor(
                 }
                 remove("UploadItem" + (size - 1))
             }
-            basicKvStoreFactory?.let { it(UploadActivity.storeNameForCurrentUploadImagesSize) }
+
+            basicKvStoreFactory?.let { it(UploadActivity.STORE_NAME_FOR_CURRENT_UPLOAD_IMAGE_SIZE) }
                 ?.putString(UPLOAD_QUALITIES_KEY, jsonObject.toString())
         } catch (e: Exception) {
             Timber.e(e)
