@@ -10,6 +10,7 @@ SELECT
   (SAMPLE(?wikipediaArticle) AS ?wikipediaArticle)
   (SAMPLE(?commonsArticle) AS ?commonsArticle)
   (SAMPLE(?commonsCategory) AS ?commonsCategory)
+  (SAMPLE(?dateOfOfficialClosure) AS ?dateOfOfficialClosure)
 WHERE {
   SERVICE <https://query.wikidata.org/sparql> {
     values ?item {
@@ -45,6 +46,7 @@ WHERE {
   # Get existence
   OPTIONAL {?item wdt:P576 ?destroyed}
   OPTIONAL {?item wdt:P582 ?endTime}
+  OPTIONAL {?item wdt:P3999 ?dateOfOfficialClosure}
 
   # Get Commons category
   OPTIONAL {?item wdt:P373 ?commonsCategory}
