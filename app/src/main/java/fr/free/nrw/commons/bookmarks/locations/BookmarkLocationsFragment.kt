@@ -1,7 +1,6 @@
 package fr.free.nrw.commons.bookmarks.locations
 
 import android.Manifest.permission
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,15 +8,12 @@ import android.view.ViewGroup
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts.RequestMultiplePermissions
 import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult
-import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.android.support.DaggerFragment
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.contributions.ContributionController
 import fr.free.nrw.commons.databinding.FragmentBookmarksLocationsBinding
-import fr.free.nrw.commons.filepicker.FilePicker
 import fr.free.nrw.commons.nearby.Place
 import fr.free.nrw.commons.nearby.fragments.CommonPlaceClickActions
 import fr.free.nrw.commons.nearby.fragments.PlaceAdapter
@@ -41,33 +37,27 @@ class BookmarkLocationsFragment : DaggerFragment() {
     private val cameraPickLauncherForResult =
         registerForActivityResult(StartActivityForResult()) { result ->
             contributionController.handleActivityResultWithCallback(
-                requireActivity(),
-                object: FilePicker.HandleActivityResult {
-                    override fun onHandleActivityResult(callbacks: FilePicker.Callbacks) {
-                        contributionController.onPictureReturnedFromCamera(
-                            result,
-                            requireActivity(),
-                            callbacks
-                        )
-                    }
-                }
-            )
+                requireActivity()
+            ) { callbacks ->
+                contributionController.onPictureReturnedFromCamera(
+                    result,
+                    requireActivity(),
+                    callbacks
+                )
+            }
         }
 
     private val galleryPickLauncherForResult =
         registerForActivityResult(StartActivityForResult()) { result ->
             contributionController.handleActivityResultWithCallback(
-                requireActivity(),
-                object: FilePicker.HandleActivityResult {
-                    override fun onHandleActivityResult(callbacks: FilePicker.Callbacks) {
-                        contributionController.onPictureReturnedFromGallery(
-                            result,
-                            requireActivity(),
-                            callbacks
-                        )
-                    }
-                }
-            )
+                requireActivity()
+            ) { callbacks ->
+                contributionController.onPictureReturnedFromGallery(
+                    result,
+                    requireActivity(),
+                    callbacks
+                )
+            }
         }
 
     companion object {
