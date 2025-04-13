@@ -154,7 +154,8 @@ public class Place implements Parcelable {
             item.getPic().getValue(),
             // Checking if the place exists or not
             (item.getDestroyed().getValue() == "") && (item.getEndTime().getValue() == "")
-                && (item.getDateOfOfficialClosure().getValue() == ""),
+                && (item.getDateOfOfficialClosure().getValue() == "")
+                && (item.getPointInTime().getValue()==""),
             entityId);
     }
 
