@@ -11,6 +11,7 @@ SELECT
   (SAMPLE(?commonsArticle) AS ?commonsArticle)
   (SAMPLE(?commonsCategory) AS ?commonsCategory)
   (SAMPLE(?dateOfOfficialClosure) AS ?dateOfOfficialClosure)
+  (SAMPLE(?pointInTime) AS ?pointInTime)
 WHERE {
   SERVICE <https://query.wikidata.org/sparql> {
     values ?item {
@@ -47,6 +48,7 @@ WHERE {
   OPTIONAL {?item wdt:P576 ?destroyed}
   OPTIONAL {?item wdt:P582 ?endTime}
   OPTIONAL {?item wdt:P3999 ?dateOfOfficialClosure}
+  OPTIONAL {?item wdt:P585 ?pointInTime}
 
   # Get Commons category
   OPTIONAL {?item wdt:P373 ?commonsCategory}
