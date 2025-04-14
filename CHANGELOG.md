@@ -1,5 +1,15 @@
 # Wikimedia Commons for Android
 
+## v5.3.0
+
+### What's changed
+* Enable EmailAuth support
+* Explore map images no longer show "Unknown"
+* Fix crash when removing last two images of multiupload
+* Mark ❌ for closed locations (P3999) in Nearby
+* Fix two pin labels staying visible at the same time in Explore map
+* Refactoring and minor UI improvements
+
 ## v5.2.0
 
 v5.2.0 boasts several new functionalities like:
