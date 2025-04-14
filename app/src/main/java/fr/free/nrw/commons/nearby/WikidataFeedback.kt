@@ -72,11 +72,7 @@ class WikidataFeedback : BaseActivity() {
                         getString(R.string.please_enter_some_comments),
                         Toast.LENGTH_SHORT,
                     ).show()
-            }  else {
-                if (binding.radioGroup.checkedRadioButtonId == R.id.radioButton2) {
-                    val excludedText = getString(R.string.is_at_a_different_place_please_specify_the_correct_place_below_if_possible_tell_us_the_correct_latitude_longitude, place)
-                    desc = desc.toString().replace(excludedText, "").trim()
-                }
+            } else {
                 binding.radioGroup.clearCheck()
                 binding.detailsEditText.setText("")
                 Single
