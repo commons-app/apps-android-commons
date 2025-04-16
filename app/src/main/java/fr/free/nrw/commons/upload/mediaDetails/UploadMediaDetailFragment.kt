@@ -215,21 +215,7 @@ class UploadMediaDetailFragment : UploadBaseFragment(), UploadMediaDetailsContra
                 btnPrevious.alpha = 1.0f
             }
 
-            // If the image EXIF data contains the location, show the map icon with a green tick
-            if (inAppPictureLocation != null || (uploadableFile != null && uploadableFile!!.hasLocation())) {
-                val mapTick =
-                    ContextCompat.getDrawable(requireContext(), R.drawable.ic_map_available_20dp)
-                locationImageView.setImageDrawable(mapTick)
-                locationTextView.setText(R.string.edit_location)
-            } else {
-                // Otherwise, show the map icon with a red question mark
-                val mapQuestionMark = ContextCompat.getDrawable(
-                    requireContext(),
-                    R.drawable.ic_map_not_available_20dp
-                )
-                locationImageView.setImageDrawable(mapQuestionMark)
-                locationTextView.setText(R.string.add_location)
-            }
+            updateMapTickIcon(0)
 
             //If this is the last media, we have nothing to copy, lets not show the button
             btnCopySubsequentMedia.visibility =
@@ -323,6 +309,7 @@ class UploadMediaDetailFragment : UploadBaseFragment(), UploadMediaDetailsContra
                     )
                     binding.locationImageView.setImageDrawable(mapTick)
                     binding.locationTextView.setText(R.string.edit_location)
+                    updateMapTickIcon(0)
                 }
 
                 override fun onNegativeResponse() {
@@ -437,6 +424,7 @@ class UploadMediaDetailFragment : UploadBaseFragment(), UploadMediaDetailsContra
         if (fragmentCallback == null) {
             return
         }
+        updateMapTickIcon(this.indexOfFragment)
         presenter.fetchTitleAndDescription(indexOfFragment)
         if (showNearbyFound) {
             if (UploadActivity.nearbyPopupAnswers!!.containsKey(nearbyPlace!!)) {
@@ -718,6 +706,8 @@ class UploadMediaDetailFragment : UploadBaseFragment(), UploadMediaDetailsContra
                 binding.locationTextView.setText(R.string.add_location)
             }
 
+            updateMapTickIcon(this.indexOfFragment)  // Refresh UI immediately
+
             editableUploadItem!!.gpsCoords!!.decLatitude = 0.0
             editableUploadItem!!.gpsCoords!!.decLongitude = 0.0
             editableUploadItem!!.gpsCoords!!.imageCoordsExists = false
@@ -869,6 +859,32 @@ class UploadMediaDetailFragment : UploadBaseFragment(), UploadMediaDetailsContra
     fun onButtonCopyTitleDescToSubsequentMedia() {
         presenter.copyTitleAndDescriptionToSubsequentMedia(indexOfFragment)
         Toast.makeText(context, R.string.copied_successfully, Toast.LENGTH_SHORT).show()
+    }
+
+    private fun updateMapTickIcon(index: Int) {
+        if (_binding == null) return
+
+        editableUploadItem = presenter.getUploadItem(index)
+
+        val hasLocation = (!hasUserRemovedLocation) && (
+                inAppPictureLocation != null ||
+                        (uploadableFile != null && uploadableFile!!.hasLocation()) ||
+                        (editableUploadItem?.gpsCoords?.imageCoordsExists == true &&
+                                editableUploadItem?.gpsCoords?.decimalCoords != null)
+                )
+
+        binding.locationImageView.setImageDrawable(
+            ContextCompat.getDrawable(
+                requireContext(),
+                if (hasLocation) R.drawable.ic_map_available_20dp
+                else R.drawable.ic_map_not_available_20dp
+            )
+        )
+
+        binding.locationTextView.setText(
+            if (hasLocation) R.string.edit_location
+            else R.string.add_location
+        )
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
