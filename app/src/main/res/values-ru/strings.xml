@@ -170,6 +170,7 @@
   <string name="login_failed_throttled">Слишком много неудачных попыток. Пожалуйста, попробуйте ещё раз через несколько минут.</string>
   <string name="login_failed_blocked">Извините, но участник с таким именем был заблокирован на Викискладе</string>
   <string name="login_failed_2fa_needed">Вы должны ввести код двухфакторной аутентификации.</string>
+  <string name="login_failed_email_auth_needed">Код подтверждения был отправлен на адрес вашей электронной почты. Пожалуйста, введите его для входа.</string>
   <string name="login_failed_generic">Ошибка входа в систему</string>
   <string name="share_upload_button">Загрузка</string>
   <string name="multiple_share_base_title">Введите название для этой группы файлов</string>
@@ -275,6 +276,7 @@
   <string name="become_a_tester_title">Стать бета-тестером</string>
   <string name="become_a_tester_description">Подпишитесь на наш канал бета-версии на Google Play и получите ранний доступ к новым функциям и исправлениям ошибок</string>
   <string name="_2fa_code">Код 2ФА</string>
+  <string name="email_auth_code">Код подтверждения электронной почты</string>
   <string name="logout_verification">Вы действительно хотите выйти?</string>
   <string name="mediaimage_failed">Ошибка медиафайла</string>
   <string name="no_subcategory_found">Подкатегории не найдены.</string>
