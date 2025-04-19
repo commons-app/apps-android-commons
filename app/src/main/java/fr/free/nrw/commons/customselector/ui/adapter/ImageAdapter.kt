@@ -230,7 +230,13 @@ class ImageAdapter(
             }
 
             holder.itemView.setOnClickListener {
-                onThumbnailClicked(position, holder)
+                     // pick the exact Image you displayed
+                     val clicked = if (showAlreadyActionedImages) {
+                             images[position]
+                        } else {
+                             ArrayList(actionableImagesMap.values)[position]
+                        }
+                     onThumbnailClicked(clicked, position, holder)
             }
 
             // launch media preview on long click.
@@ -294,6 +300,7 @@ class ImageAdapter(
      * Handles click on thumbnail
      */
     private fun onThumbnailClicked(
+        image: Image,
         position: Int,
         holder: ImageViewHolder,
     ) {
@@ -306,10 +313,10 @@ class ImageAdapter(
         // added inside map
         if (!switchState) {
             if (actionableImagesMap.size > position) {
-                selectOrRemoveImage(holder, position)
+                selectOrRemoveImage(image,holder, position)
             }
         } else {
-            selectOrRemoveImage(holder, position)
+            selectOrRemoveImage(image,holder, position)
         }
     }
 
@@ -317,6 +324,7 @@ class ImageAdapter(
      * Handle click event on an image, update counter on images.
      */
     private fun selectOrRemoveImage(
+        image:Image,
         holder: ImageViewHolder,
         position: Int,
     ) {
@@ -327,15 +335,15 @@ class ImageAdapter(
 
         // Getting clicked index from all images index when show_already_actioned_images
         // switch is on
-        val clickedIndex: Int =
-            if (showAlreadyActionedImages) {
-                ImageHelper.getIndex(selectedImages, images[position])
-
-                // Getting clicked index from actionable images when show_already_actioned_images
-                // switch is off
-            } else {
-                ImageHelper.getIndex(selectedImages, ArrayList(actionableImagesMap.values)[position])
-            }
+        val clickedIndex: Int =ImageHelper.getIndex(selectedImages, image)
+//            if (showAlreadyActionedImages) {
+//                ImageHelper.getIndex(selectedImages, images[position])
+//
+//                // Getting clicked index from actionable images when show_already_actioned_images
+//                // switch is off
+//            } else {
+//                ImageHelper.getIndex(selectedImages, ArrayList(actionableImagesMap.values)[position])
+//            }
 
         if (clickedIndex != -1) {
             selectedImages.removeAt(clickedIndex)
@@ -344,7 +352,7 @@ class ImageAdapter(
             }
             notifyItemChanged(position, ImageUnselected())
         } else {
-            val image = images[position]
+//            val image = images[position]
             scope.launch(ioDispatcher) {
                 val imageSHA1 = imageLoader.getSHA1(image, defaultDispatcher)
                 withContext(Dispatchers.Main) {
