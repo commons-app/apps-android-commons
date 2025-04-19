@@ -696,7 +696,7 @@
   <string name="pan_and_zoom_to_adjust">Schwenken und Zoomen zum Anpassen</string>
   <string name="select_location_location_picker">Ort auswählen</string>
   <string name="show_in_map_app">In Karten-App anzeigen</string>
-  <string name="modify_location">Standort beabeiten</string>
+  <string name="modify_location">Standort bearbeiten</string>
   <string name="location_picker_image_view">Die Bildansicht der Standortauswahl</string>
   <string name="location_picker_image_view_shadow">Der Schatten der Bildansicht der Ortsauswahl</string>
   <string name="image_location">Bildstandort</string>
@@ -783,7 +783,7 @@
   <string name="learn_how_to_write_a_useful_caption">Erfahre, wie man eine nützliche Überschrift schreibt</string>
   <string name="see_your_achievements">Deine Erfolge ansehen</string>
   <string name="edit_image">Bild bearbeiten</string>
-  <string name="edit_location">Standort beabeiten</string>
+  <string name="edit_location">Standort bearbeiten</string>
   <string name="location_updated">Standort aktualisiert!</string>
   <string name="remove_location">Standort entfernen</string>
   <string name="remove_location_warning_title">Standortwarnung entfernen</string>
