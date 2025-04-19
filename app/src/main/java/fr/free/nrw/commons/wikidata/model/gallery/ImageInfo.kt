@@ -72,7 +72,6 @@ open class ImageInfo : Serializable {
     }
 
     fun getThumbUrl(): String {
-        updateThumbUrl()
         return thumbUrl ?: ""
     }
 
