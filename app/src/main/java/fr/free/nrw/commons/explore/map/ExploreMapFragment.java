@@ -717,8 +717,17 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
                 authorUser = Html.fromHtml(authorUser, Html.FROM_HTML_MODE_LEGACY).toString();
             }
 
-            OverlayItem item = new OverlayItem(nearbyBaseMarker.getPlace().name,
-                authorUser, point);
+            String title = nearbyBaseMarker.getPlace().name;
+            if (title.startsWith("File:")) {
+                title = title.substring(5);
+            }
+            title = title.replaceAll("(?i)\\.(jpg|jpeg|png|svg)$", "");
+            title = title.replace("_", " ");
+            if (title.length() >43) {
+                title = title.substring(0, 40) + "...";
+            }
+
+            OverlayItem item = new OverlayItem(title, authorUser, point);
             item.setMarker(d);
             items.add(item);
             ItemizedOverlayWithFocus overlay = new ItemizedOverlayWithFocus(items,
