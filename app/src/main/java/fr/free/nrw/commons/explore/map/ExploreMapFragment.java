@@ -726,8 +726,8 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
             title = title.replaceAll("(?i)\\.(jpg|jpeg|png|svg)$", "");
             title = title.replace("_", " ");
             //Truncate if too long because it doesn't fit the screen
-            if (title.length() >43) {
-                title = title.substring(0, 40) + "...";
+            if (title.length() > 43) {
+                title = title.substring(0, 40) + "…";
             }
 
             OverlayItem item = new OverlayItem(title, authorUser, point);
