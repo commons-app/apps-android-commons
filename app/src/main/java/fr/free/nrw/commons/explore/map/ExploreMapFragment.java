@@ -718,11 +718,14 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
             }
 
             String title = nearbyBaseMarker.getPlace().name;
+            // Remove "File:" if present at start
             if (title.startsWith("File:")) {
                 title = title.substring(5);
             }
+            // Remove extensions like .jpg, .jpeg, .png, .svg (case insensitive)
             title = title.replaceAll("(?i)\\.(jpg|jpeg|png|svg)$", "");
             title = title.replace("_", " ");
+            //Truncate if too long because it doesn't fit the screen
             if (title.length() >43) {
                 title = title.substring(0, 40) + "...";
             }
