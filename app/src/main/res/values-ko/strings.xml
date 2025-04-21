@@ -16,6 +16,7 @@
 * Revi
 * Suleiman the Magnificent Television
 * Theshinster123
+* YeBoy371
 * Ykhwong
 * YuzaTea
 * 그냥기여자
@@ -229,7 +230,7 @@
   <string name="logout_verification">정말 로그아웃하시겠습니까?</string>
   <string name="mediaimage_failed">미디어 그림 실패</string>
   <string name="no_subcategory_found">하위 분류가 없습니다</string>
-  <string name="no_parentcategory_found">부모 분류가 없습니다</string>
+  <string name="no_parentcategory_found">상위 분류가 없습니다</string>
   <string name="welcome_image_mount_zao">자오 연봉</string>
   <string name="welcome_image_llamas">라마</string>
   <string name="welcome_image_rainbow_bridge">레인보우 브리지</string>
@@ -530,7 +531,7 @@
   <string name="you_must_reset_your_passsword">로그인에 문제가 생겼습니다, 비밀번호를 재설정해야 합니다!</string>
   <string name="title_for_media">미디어</string>
   <string name="title_for_child_classes">자식 클래스</string>
-  <string name="title_for_parent_classes">부모 클래스</string>
+  <string name="title_for_parent_classes">상위 클래스</string>
   <string name="upload_nearby_place_found_title">주변 장소 발견</string>
   <string name="upload_nearby_place_found_description_plural">%1$s의 사진이 맞습니까?</string>
   <string name="upload_nearby_place_found_description_singular">%1$s의 사진이 맞습니까?</string>

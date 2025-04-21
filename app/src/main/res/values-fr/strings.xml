@@ -5,6 +5,7 @@
 * Alno
 * Assorted-Interests
 * BaRaN6161 TURK
+* Bananax47
 * BlueCamille
 * Cigaryno
 * Cyclicus
@@ -156,6 +157,7 @@
   <string name="login_failed_throttled">Trop de tentatives infructueuses. Veuillez réessayer dans quelques minutes.</string>
   <string name="login_failed_blocked">Désolé, cet utilisateur a été bloqué sur Commons</string>
   <string name="login_failed_2fa_needed">Vous devez fournir votre code d’authentification à deux facteurs.</string>
+  <string name="login_failed_email_auth_needed">Un code de vérification de connexion a été envoyé à votre adresse e-mail. Veuillez saisir ce code pour vous connecter.</string>
   <string name="login_failed_generic">Échec de connexion</string>
   <string name="share_upload_button">Téléverser</string>
   <string name="multiple_share_base_title">Nommer cet ensemble</string>
@@ -261,6 +263,7 @@
   <string name="become_a_tester_title">Devenir un bêta-testeur</string>
   <string name="become_a_tester_description">S’inscrire à notre canal bêta sur Google Play et obtenir un accès anticipé aux nouvelles fonctionnalités et corrections d’anomalies</string>
   <string name="_2fa_code">Code 2FA</string>
+  <string name="email_auth_code">Code de vérification par email</string>
   <string name="logout_verification">Voulez-vous vraiment vous déconnecter ?</string>
   <string name="mediaimage_failed">Échec sur l’image du média</string>
   <string name="no_subcategory_found">Aucune sous-catégorie trouvée</string>
