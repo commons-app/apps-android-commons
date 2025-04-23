@@ -1,7 +1,6 @@
 package fr.free.nrw.commons.wikidata.model.gallery
 
 import com.google.gson.annotations.SerializedName
-import org.apache.commons.lang3.StringUtils
 
 class ExtMetadata {
     @SerializedName("DateTime") private val dateTime: Values? = null

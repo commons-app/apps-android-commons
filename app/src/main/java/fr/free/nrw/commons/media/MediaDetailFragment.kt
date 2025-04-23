@@ -16,7 +16,6 @@ import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.ViewTreeObserver
 import android.view.ViewTreeObserver.OnGlobalLayoutListener
 import android.widget.ArrayAdapter
 import android.widget.Button
@@ -622,10 +621,9 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
-                    { idAndCaptions: List<IdAndCaptions> -> onDepictionsLoaded(idAndCaptions) },
+                    { IdAndLabels: List<IdAndLabels> -> onDepictionsLoaded(IdAndLabels) },
                     { t: Throwable? -> Timber.e(t) })
         )
-        // compositeDisposable.add(disposable);
     }
 
     private fun onDiscussionLoaded(discussion: String) {
@@ -655,10 +653,10 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
         }
     }
 
-    private fun onDepictionsLoaded(idAndCaptions: List<IdAndCaptions>) {
+    private fun onDepictionsLoaded(IdAndLabels: List<IdAndLabels>) {
         binding.depictsLayout.visibility = View.VISIBLE
         binding.depictionsEditButton.visibility = View.VISIBLE
-        buildDepictionList(idAndCaptions)
+        buildDepictionList(IdAndLabels)
     }
 
     /**
@@ -863,26 +861,26 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
 
     /**
      * Populates media details fragment with depiction list
-     * @param idAndCaptions
+     * @param IdAndLabels
      */
-    private fun buildDepictionList(idAndCaptions: List<IdAndCaptions>) {
+    private fun buildDepictionList(IdAndLabels: List<IdAndLabels>) {
         binding.mediaDetailDepictionContainer.removeAllViews()
 
         // Create a mutable list from the original list
-        val mutableIdAndCaptions = idAndCaptions.toMutableList()
+        val mutableIdAndLabels = IdAndLabels.toMutableList()
 
-        if (mutableIdAndCaptions.isEmpty()) {
-            // Create a placeholder IdAndCaptions object and add it to the list
-            mutableIdAndCaptions.add(
-                IdAndCaptions(
+        if (mutableIdAndLabels.isEmpty()) {
+            // Create a placeholder IdAndLabels object and add it to the list
+            mutableIdAndLabels.add(
+                IdAndLabels(
                     id = media?.pageId ?: "", // Use an empty string if media?.pageId is null
-                    captions = mapOf(Locale.getDefault().language to getString(R.string.detail_panel_cats_none)) // Create a Map with the language as the key and the message as the value
+                    labels = mapOf(Locale.getDefault().language to getString(R.string.detail_panel_cats_none)) // Create a Map with the language as the key and the message as the value
                 )
             )
         }
 
         val locale: String = Locale.getDefault().language
-        for (idAndCaption: IdAndCaptions in mutableIdAndCaptions) {
+        for (idAndCaption: IdAndLabels in mutableIdAndLabels) {
             binding.mediaDetailDepictionContainer.addView(
                 buildDepictLabel(
                     getDepictionCaption(idAndCaption, locale),
@@ -894,16 +892,16 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
     }
 
 
-    private fun getDepictionCaption(idAndCaption: IdAndCaptions, locale: String): String? {
+    private fun getDepictionCaption(idAndCaption: IdAndLabels, locale: String): String? {
         // Check if the Depiction Caption is available in user's locale
         // if not then check for english, else show any available.
-        if (idAndCaption.captions[locale] != null) {
-            return idAndCaption.captions[locale]
+        if (idAndCaption.labels[locale] != null) {
+            return idAndCaption.labels[locale]
         }
-        if (idAndCaption.captions["en"] != null) {
-            return idAndCaption.captions["en"]
+        if (idAndCaption.labels["en"] != null) {
+            return idAndCaption.labels["en"]
         }
-        return idAndCaption.captions.values.iterator().next()
+        return idAndCaption.labels.values.iterator().next()
     }
 
     private fun onMediaDetailLicenceClicked() {
