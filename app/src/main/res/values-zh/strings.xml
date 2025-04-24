@@ -876,4 +876,6 @@
   <string name="congratulations_all_pictures_in_this_album_have_been_either_uploaded_or_marked_as_not_for_upload">恭喜，专辑中的所有图片都已上传或标记为不上传。</string>
   <string name="show_in_explore">在探索中显示</string>
   <string name="show_in_nearby">显示在附近</string>
+  <string name="image_tag_line_created_and_uploaded_by">创建并上传者： %1$s</string>
+  <string name="image_tag_line_created_by_and_uploaded_by">由%1$s创建并由%2$s上传</string>
 </resources>

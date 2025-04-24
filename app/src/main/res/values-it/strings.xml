@@ -775,4 +775,6 @@
   <string name="file_usages_container_heading">Utilizzi del file</string>
   <string name="caption">Didascalia</string>
   <string name="caption_copied_to_clipboard">Didascalia copiata negli appunti</string>
+  <string name="image_tag_line_created_and_uploaded_by">Creato e caricato da: %1$s</string>
+  <string name="image_tag_line_created_by_and_uploaded_by">Creato da %1$s e caricato da %2$s</string>
 </resources>

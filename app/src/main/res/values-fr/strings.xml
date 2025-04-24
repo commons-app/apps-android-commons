@@ -866,4 +866,6 @@
   <string name="congratulations_all_pictures_in_this_album_have_been_either_uploaded_or_marked_as_not_for_upload">Félicitations, toutes les images dans cet album ont été soit téléchargées soit marquées comme non téléchargeables.</string>
   <string name="show_in_explore">Afficher dans Explorer</string>
   <string name="show_in_nearby">Afficher à proximité</string>
+  <string name="image_tag_line_created_and_uploaded_by">Crée et publiée par: %1$s</string>
+  <string name="image_tag_line_created_by_and_uploaded_by">Créé par %1$s et publiée par %2$s</string>
 </resources>
