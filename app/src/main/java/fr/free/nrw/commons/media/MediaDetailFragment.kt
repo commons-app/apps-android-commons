@@ -621,7 +621,7 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
-                    { IdAndLabels: List<IdAndLabels> -> onDepictionsLoaded(IdAndLabels) },
+                    { idAndCaptions: List<IdAndLabels> -> onDepictionsLoaded(idAndCaptions) },
                     { t: Throwable? -> Timber.e(t) })
         )
     }
@@ -653,10 +653,10 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
         }
     }
 
-    private fun onDepictionsLoaded(IdAndLabels: List<IdAndLabels>) {
+    private fun onDepictionsLoaded(idAndCaptions: List<IdAndLabels>) {
         binding.depictsLayout.visibility = View.VISIBLE
         binding.depictionsEditButton.visibility = View.VISIBLE
-        buildDepictionList(IdAndLabels)
+        buildDepictionList(idAndCaptions)
     }
 
     /**
@@ -861,17 +861,17 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
 
     /**
      * Populates media details fragment with depiction list
-     * @param IdAndLabels
+     * @param idAndCaptions
      */
-    private fun buildDepictionList(IdAndLabels: List<IdAndLabels>) {
+    private fun buildDepictionList(idAndCaptions: List<IdAndLabels>) {
         binding.mediaDetailDepictionContainer.removeAllViews()
 
         // Create a mutable list from the original list
-        val mutableIdAndLabels = IdAndLabels.toMutableList()
+        val mutableIdAndCaptions = idAndCaptions.toMutableList()
 
-        if (mutableIdAndLabels.isEmpty()) {
+        if (mutableIdAndCaptions.isEmpty()) {
             // Create a placeholder IdAndLabels object and add it to the list
-            mutableIdAndLabels.add(
+            mutableIdAndCaptions.add(
                 IdAndLabels(
                     id = media?.pageId ?: "", // Use an empty string if media?.pageId is null
                     labels = mapOf(Locale.getDefault().language to getString(R.string.detail_panel_cats_none)) // Create a Map with the language as the key and the message as the value
@@ -880,7 +880,7 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
         }
 
         val locale: String = Locale.getDefault().language
-        for (idAndCaption: IdAndLabels in mutableIdAndLabels) {
+        for (idAndCaption in mutableIdAndCaptions) {
             binding.mediaDetailDepictionContainer.addView(
                 buildDepictLabel(
                     getDepictionCaption(idAndCaption, locale),
