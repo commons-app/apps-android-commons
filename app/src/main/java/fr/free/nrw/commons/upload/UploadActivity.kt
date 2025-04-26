@@ -345,6 +345,48 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
         super.onStop()
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        
+        // Cleanup presenter to prevent memory leaks
+        presenter?.onDetachView()
+        
+        // Cleanup progress dialog
+        if (progressDialog != null && progressDialog!!.isShowing) {
+            progressDialog!!.dismiss()
+        }
+        progressDialog = null
+        
+        // Remove callback to prevent memory leaks
+        if (::onBackPressedCallback.isInitialized) {
+            onBackPressedCallback.remove()
+        }
+        
+        // Resetting all values in store by clearing them
+        store?.clearAll()
+        
+        // Clean up composite disposable
+        compositeDisposable.clear()
+        
+        // Clear fragment references
+        fragments = null
+        uploadImagesAdapter = null
+        
+        // Remove callbacks from fragments
+        if (mediaLicenseFragment != null) {
+            mediaLicenseFragment!!.callback = null
+        }
+        if (uploadCategoriesFragment != null) {
+            uploadCategoriesFragment!!.callback = null
+        }
+        
+        // Clean up view binding to prevent memory leaks
+        _binding = null
+        
+        // Clean up location manager if needed
+        locationManager?.removeLocationListeners()
+    }
+
     override fun returnToMainActivity() = finish()
 
     /**
@@ -862,23 +904,6 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
             if (isTitleExpanded) View.GONE else View.VISIBLE
         isTitleExpanded = !isTitleExpanded
         binding.ibToggleTopCard.rotation += 180
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        // Resetting all values in store by clearing them
-        store!!.clearAll()
-        presenter!!.onDetachView()
-        compositeDisposable.clear()
-        fragments = null
-        uploadImagesAdapter = null
-        if (mediaLicenseFragment != null) {
-            mediaLicenseFragment!!.callback = null
-        }
-        if (uploadCategoriesFragment != null) {
-            uploadCategoriesFragment!!.callback = null
-        }
-        onBackPressedCallback.remove()
     }
 
     /**

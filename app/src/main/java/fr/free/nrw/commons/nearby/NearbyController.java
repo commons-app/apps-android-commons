@@ -312,13 +312,22 @@ public class NearbyController extends MapController {
      */
     @MainThread
     public static void updateMarkerLabelListBookmark(Place place, boolean isBookmarked) {
-        for (ListIterator<MarkerPlaceGroup> iter = markerLabelList.listIterator();
-            iter.hasNext(); ) {
-            MarkerPlaceGroup markerPlaceGroup = iter.next();
-            if (markerPlaceGroup.getPlace().getWikiDataEntityId()
-                .equals(place.getWikiDataEntityId())) {
-                iter.set(new MarkerPlaceGroup(isBookmarked, place));
+        for (MarkerPlaceGroup markerPlaceGroup : markerLabelList) {
+            if (markerPlaceGroup.getPlace() == place) {
+                markerPlaceGroup.getPlace().setBookmark(isBookmarked);
             }
+        }
+    }
+
+    /**
+     * Clears all static references to prevent memory leaks.
+     * Should be called in onDestroy of any activity that uses this controller.
+     */
+    public static void clearAllStaticReferences() {
+        currentLocation = null;
+        latestSearchLocation = null;
+        if (markerLabelList != null) {
+            markerLabelList.clear();
         }
     }
 }
