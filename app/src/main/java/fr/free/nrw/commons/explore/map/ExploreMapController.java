@@ -154,8 +154,12 @@ public class ExploreMapController extends MapController {
                 String distance = formatDistanceBetween(currentLatLng, explorePlace.location);
                 explorePlace.setDistance(distance);
 
-                baseMarker.setTitle(
-                    explorePlace.name.substring(5, explorePlace.name.lastIndexOf(".")));
+                if (explorePlace.caption != null && !explorePlace.caption.isEmpty()) {
+    baseMarker.setTitle(explorePlace.caption);
+} else {
+    baseMarker.setTitle(
+        explorePlace.name.substring(5, explorePlace.name.lastIndexOf(".")));
+}
                 baseMarker.setPosition(
                     new fr.free.nrw.commons.location.LatLng(
                         explorePlace.location.getLatitude(),

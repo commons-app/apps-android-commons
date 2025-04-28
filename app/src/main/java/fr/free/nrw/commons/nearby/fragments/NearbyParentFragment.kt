@@ -1319,43 +1319,46 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
      * Clears the Nearby local cache and then calls for pin details to be fetched afresh.
      *
      */
-    private fun emptyCache() {
-        // reload the map once the cache is cleared
-        compositeDisposable.add(
-            placesRepository!!.clearCache()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .andThen(Completable.fromAction {
-                    // reload only the pin details, by making all loaded pins gray:
-                    val newPlaceGroups = ArrayList<MarkerPlaceGroup>(
-                        NearbyController.markerLabelList.size
-                    )
-                    for (placeGroup in NearbyController.markerLabelList) {
-                        val place = Place(
-                            "", "", placeGroup.place.label, "",
-                            placeGroup.place.getLocation(), "",
-                            placeGroup.place.siteLinks, "", placeGroup.place.exists,
-                            placeGroup.place.entityID
-                        )
-                        place.setDistance(placeGroup.place.distance)
-                        place.isMonument = placeGroup.place.isMonument
-                        newPlaceGroups.add(
-                            MarkerPlaceGroup(placeGroup.isBookmarked, place)
-                        )
-                    }
-                    presenter!!.loadPlacesDataAsync(newPlaceGroups, scope)
-                })
-                .subscribe(
-                    {
-                        Timber.d("Nearby Cache cleared successfully.")
-                    },
-                    { throwable: Throwable? ->
-                        Timber.e(throwable, "Failed to clear the Nearby Cache")
-                    }
+  private fun emptyCache() {
+    compositeDisposable.add(
+        placesRepository!!.clearCache()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .andThen(Completable.fromAction {
+                val newPlaceGroups = ArrayList<MarkerPlaceGroup>(
+                    NearbyController.markerLabelList.size
                 )
-        )
-    }
-
+                for (placeGroup in NearbyController.markerLabelList) {
+                    val old = placeGroup.place
+                    // 11-arg constructor: (language, name, caption, label, longDesc,
+                    //                      location, category, siteLinks, pic, exists, entityID)
+                    val place = Place(
+                        "",               // language unused here
+                        old.name,         // name
+                        "",               // caption
+                        old.label,        // Label
+                        old.longDescription, // longDescription
+                        old.location,     // location
+                        old.category,     // category
+                        old.siteLinks,    // siteLinks
+                        old.pic,          // pic
+                        old.exists,       // exists
+                        old.entityID      // entityID
+                    )
+                    place.setDistance(old.distance)
+                    place.isMonument = old.isMonument
+                    newPlaceGroups.add(
+                        MarkerPlaceGroup(placeGroup.isBookmarked, place)
+                    )
+                }
+                presenter!!.loadPlacesDataAsync(newPlaceGroups, scope)
+            })
+            .subscribe(
+                { Timber.d("Nearby Cache cleared successfully.") },
+                { e -> Timber.e(e, "Failed to clear the Nearby Cache") }
+            )
+    )
+}
     private fun savePlacesAsKML() {
         val savePlacesObservable = Observable
             .fromCallable {
@@ -1586,6 +1589,7 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                     { nearbyPlacesInfo: NearbyPlacesInfo ->
+                    Timber.d("populatePlacesForCurrentLocation: placeList size = ${nearbyPlacesInfo.placeList?.size}")
                         if (nearbyPlacesInfo.placeList == null || nearbyPlacesInfo.placeList.isEmpty()) {
                             showErrorMessage(getString(fr.free.nrw.commons.R.string.no_nearby_places_around))
                             setProgressBarVisibility(false)
@@ -1701,6 +1705,7 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
         nearbyPlaces: List<Place>, curLatLng: LatLng,
         shouldUpdateSelectedMarker: Boolean
     ) {
+       Timber.d("Nearby Places fetched: size = ${nearbyPlaces.size}")
         presenter!!.updateMapMarkers(nearbyPlaces, curLatLng, scope)
     }
 
@@ -2114,53 +2119,53 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
         return drawableCache!![key]
     }
 
-    fun convertToMarker(place: Place, isBookMarked: Boolean): Marker {
-        val icon = getDrawable(requireContext(), getIconFor(place, isBookMarked))
-        val point = GeoPoint(place.location.latitude, place.location.longitude)
-        val marker = Marker(binding!!.map)
-        marker.position = point
-        marker.icon = icon
-        if (place.name != "") {
-            marker.title = place.name
-            marker.snippet = if (containsParentheses(place.longDescription))
-                getTextBetweenParentheses(
-                    place.longDescription
-                )
-            else
-                place.longDescription
-        }
-        marker.textLabelFontSize = 40
-        // anchorV is 21.707/28.0 as icon height is 28dp while the pin base is at 21.707dp from top
-        marker.setAnchor(Marker.ANCHOR_CENTER, 0.77525f)
-        marker.setOnMarkerClickListener { marker1: Marker, mapView: MapView? ->
-            if (clickedMarker != null) {
-                clickedMarker!!.closeInfoWindow()
-            }
-            clickedMarker = marker1
-            if (!isNetworkErrorOccurred) {
-                binding!!.bottomSheetDetails.dataCircularProgress.visibility =
-                    View.VISIBLE
-                binding!!.bottomSheetDetails.icon.visibility = View.GONE
-                binding!!.bottomSheetDetails.wikiDataLl.visibility = View.GONE
-                if (place.name == "") {
-                    getPlaceData(place.wikiDataEntityId, place, marker1, isBookMarked)
-                } else {
-                    marker.showInfoWindow()
-                    binding!!.bottomSheetDetails.dataCircularProgress.visibility =
-                        View.GONE
-                    binding!!.bottomSheetDetails.icon.visibility = View.VISIBLE
-                    binding!!.bottomSheetDetails.wikiDataLl.visibility = View.VISIBLE
-                    passInfoToSheet(place)
-                    hideBottomSheet()
-                }
-                bottomSheetDetailsBehavior!!.setState(BottomSheetBehavior.STATE_COLLAPSED)
-            } else {
-                marker.showInfoWindow()
-            }
-            true
-        }
-        return marker
+   fun convertToMarker(place: Place, isBookMarked: Boolean): Marker {
+    val icon = getDrawable(requireContext(), getIconFor(place, isBookMarked))
+    val point = GeoPoint(place.location.latitude, place.location.longitude)
+    val marker = Marker(binding!!.map)
+    marker.position = point
+    marker.icon = icon
+    if (place.name != "") {
+        marker.title = place.name
+        marker.snippet = if (containsParentheses(place.longDescription))
+            getTextBetweenParentheses(place.longDescription)
+        else
+            place.longDescription
     }
+    marker.textLabelFontSize = 40
+    marker.setAnchor(Marker.ANCHOR_CENTER, 0.77525f)
+
+    marker.setOnMarkerClickListener { marker1, mapView ->
+        if (clickedMarker != null) {
+            clickedMarker!!.closeInfoWindow()
+        }
+        clickedMarker = marker1
+
+        if (!isNetworkErrorOccurred) {
+            binding!!.bottomSheetDetails.dataCircularProgress.visibility = View.VISIBLE
+            binding!!.bottomSheetDetails.icon.visibility = View.GONE
+            binding!!.bottomSheetDetails.wikiDataLl.visibility = View.GONE
+
+            if (place.wikiDataEntityId.isNullOrEmpty()) {
+                marker.showInfoWindow()
+                binding!!.bottomSheetDetails.dataCircularProgress.visibility = View.GONE
+                binding!!.bottomSheetDetails.icon.visibility = View.VISIBLE
+                binding!!.bottomSheetDetails.wikiDataLl.visibility = View.VISIBLE
+                passInfoToSheet(place)
+                hideBottomSheet()
+            } else {
+                getPlaceData(place.wikiDataEntityId, place, marker1, isBookMarked)
+            }
+
+            bottomSheetDetailsBehavior!!.setState(BottomSheetBehavior.STATE_COLLAPSED)
+        } else {
+            marker.showInfoWindow()
+        }
+        true
+    }
+
+    return marker
+}
 
     /**
      * Adds multiple markers representing places to the map and handles item gestures.
