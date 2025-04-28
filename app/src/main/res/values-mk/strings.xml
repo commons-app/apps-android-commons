@@ -822,4 +822,6 @@
   <string name="congratulations_all_pictures_in_this_album_have_been_either_uploaded_or_marked_as_not_for_upload">Честитаме. Сите слики од овој албум се подигнати или обележани за неподигање.</string>
   <string name="show_in_explore">Прикажи во „Истражи“</string>
   <string name="show_in_nearby">Прикажи во „Во близина“</string>
+  <string name="image_tag_line_created_and_uploaded_by">Создал: %1$s</string>
+  <string name="image_tag_line_created_by_and_uploaded_by">Создал %1$s, а подигнал %2$s</string>
 </resources>
