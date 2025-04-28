@@ -155,7 +155,11 @@
   <string name="menu_download">ښکته کول</string>
   <string name="preference_license">تلواليز منښتليک</string>
   <string name="use_previous">مخکنی سرليک او سپيناو وکاروئ</string>
-  <string name="preference_theme" fuzzy="true">د شپې بڼه</string>
+  <string name="preference_theme">شاليد</string>
+  <string name="license_name_cc_by_sa_four">ځانگړي کونگ-ورته وېشنه ۴.۰</string>
+  <string name="license_name_cc_by_four">ځانگړي کونگ ۴.۰</string>
+  <string name="license_name_cc_by_sa">ځانگړي کونگ-ورته وېشنه ۳.۰</string>
+  <string name="license_name_cc_by">ځانگړي کونگ ۳.۰</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
   <string name="welcome_final_button_text">هو</string>
   <string name="detail_panel_cats_label">وېشنيزې</string>
