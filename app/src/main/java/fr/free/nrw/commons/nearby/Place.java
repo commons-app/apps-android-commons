@@ -30,7 +30,12 @@ public class Place implements Parcelable {
     public String entityID;
     private String category;
     public String pic;
+
+    /**
+     * Indicates whether the place exists in reality (true) or has been destroyed/closed (false).
+     */
     public Boolean exists;
+
     public String distance;
     public Sitelinks siteLinks;
     private boolean isMonument;
@@ -51,7 +56,9 @@ public class Place implements Parcelable {
         thumb = null;
     }
 
-    // New full constructor with caption
+    /**
+     * Full constructor with caption.
+     */
     public Place(String language, String name, String caption, Label label, String longDescription, LatLng location,
                  String category, Sitelinks siteLinks, String pic, Boolean exists, String entityID) {
         this.language = language;
@@ -67,7 +74,9 @@ public class Place implements Parcelable {
         this.entityID = entityID;
     }
 
-    // Old constructor still kept (used elsewhere) — sets caption to null
+    /**
+     * Old constructor still kept (used elsewhere) — sets caption to null.
+     */
     public Place(String language, String name, Label label, String longDescription, LatLng location,
                  String category, Sitelinks siteLinks, String pic, Boolean exists) {
         this.language = language;
@@ -91,12 +100,12 @@ public class Place implements Parcelable {
         this.category = category;
         this.siteLinks = siteLinks;
         this.pic = (pic == null) ? "" : pic;
-        this.thumb = thumb;
         this.language = null;
         this.caption = null;
         this.label = null;
         this.exists = true;
         this.entityID = entityID;
+        this.thumb = thumb;
     }
 
     public Place(Parcel in) {
@@ -131,8 +140,12 @@ public class Place implements Parcelable {
             (item.getDescription().getValue() != null && !item.getDescription().getValue().isEmpty())
                 ? item.getDescription().getValue() : "";
 
-        description = (description.equals("?") && (item.getLabel().getValue() != null
-            && !item.getLabel().getValue().isEmpty())) ? "" : description;
+        /**
+         * Replace “?” descriptions with empty when a non-empty label is available.
+         */
+        description = (description.equals("?") && item.getLabel().getValue() != null
+            && !item.getLabel().getValue().isEmpty())
+            ? "" : description;
 
         description = ((item.getLabel().getValue() != null && !item.getLabel().getValue().isEmpty())
             ? item.getLabel().getValue() + ((description != null && !description.isEmpty())
