@@ -333,7 +333,7 @@
   <string name="about_translate_proceed">המשך</string>
   <string name="about_translate_cancel">ביטול</string>
   <string name="retry">לנסות שוב</string>
-  <string name="showcase_view_whole_nearby_activity">אלה המקומות בסביבתך שזקוקים לתמונות כדי להמחיש את הערכים שלהם בוויקיפדיה.\n\nלחיצה על \'חיפוש באזור הזה\' נועלת את המפה ומתחילה חיפוש סביב המיקום הזה.</string>
+  <string name="showcase_view_whole_nearby_activity">אלה המקומות בסביבתך שזקוקים לתמונות כדי להמחיש את הערכים שלהם בוויקיפדיה.\n\nלחיצה על \"חיפוש באזור הזה\" נועלת את המפה ומתחילה חיפוש סביב המיקום הזה.</string>
   <string name="showcase_view_needs_photo">המקום הזה צריך תמונה.</string>
   <string name="showcase_view_has_photo">למקום הזה יש כבר תמונה.</string>
   <string name="showcase_view_no_longer_exists">המקום הזה כבר לא קיים.</string>
@@ -859,6 +859,6 @@
   <string name="congratulations_all_pictures_in_this_album_have_been_either_uploaded_or_marked_as_not_for_upload">ברכותינו, כל התמונות באלבום הזה הועלו או שסומנו לא להעלאה.</string>
   <string name="show_in_explore">בתצוגת סיור</string>
   <string name="show_in_nearby">בתצוגת בסביבה</string>
-  <string name="image_tag_line_created_and_uploaded_by">נוצר והועלה על ידי: %1$s</string>
-  <string name="image_tag_line_created_by_and_uploaded_by">נוצר על ידי %1$s והועלה על ידי %2$s</string>
+  <string name="image_tag_line_created_and_uploaded_by">נוצר והועלה על־ידי: %1$s</string>
+  <string name="image_tag_line_created_by_and_uploaded_by">נוצר על־ידי %1$s והועלה על־ידי %2$s</string>
 </resources>

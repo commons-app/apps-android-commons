@@ -15,6 +15,7 @@
 * Freshman404
 * Jeeputer
 * Ladsgroup
+* Lakzon
 * Mardetanha
 * Mehdi
 * Mjbmr
@@ -41,6 +42,14 @@
   <string name="submit">ارسال</string>
   <string name="add_another_description">توضیح دیگری را بیفزایید</string>
   <string name="add_new_contribution">افزودن مشارکت جدید</string>
+  <string name="add_contribution_from_camera">افزودن مشارکت از دوربین</string>
+  <string name="add_contribution_from_photos">افزودن مشارکت از تصاویر</string>
+  <string name="add_contribution_from_contributions_gallery">افزودن مشارکت از گالری مشارکت‌های پیشین</string>
+  <string name="show_captions">برنگاشت</string>
+  <string name="row_item_language_description">شرح زبان</string>
+  <string name="row_item_caption">برنگاشت</string>
+  <string name="nearby_row_image">تصویر</string>
+  <string name="nearby_all">همه</string>
   <string name="appwidget_img">تصویر روز</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">%1$d پرونده در حال بارگذاری</item>
@@ -84,6 +93,7 @@
   <string name="signup">ثبت نام</string>
   <string name="logging_in_title">واردشدن</string>
   <string name="logging_in_message">شکیبا باشید...</string>
+  <string name="updating_caption_message">لطفاً صبر کنید...</string>
   <string name="login_success" fuzzy="true">ورود موفق!</string>
   <string name="login_failed" fuzzy="true">ورود ناموفق!</string>
   <string name="upload_failed">پرونده یافت نشد لطفاً پرونده دیگری را امتحان کنید.</string>
