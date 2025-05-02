@@ -221,7 +221,6 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
             binding.mapView.getController().setZoom(ZOOM_LEVEL);
         }
 
-        performMapReadyActions();
 
         binding.mapView.getOverlays().add(new MapEventsOverlay(new MapEventsReceiver() {
             @Override
