@@ -19,6 +19,17 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
     }
 
     /**
+     * Constructs a ViewPagerAdapter with a specified Fragment Manager and Fragment resume behavior.
+     *
+     * @param manager The FragmentManager
+     * @param behavior An integer which represents the behavior of non visible fragments. See
+     *                 FragmentPagerAdapter.java for options.
+     */
+    public ViewPagerAdapter(FragmentManager manager, int behavior) {
+        super(manager, behavior);
+    }
+
+    /**
      * This method returns the fragment of the viewpager at a particular position
      * @param position
      */
