@@ -340,7 +340,12 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
             !locationPermissionsHelper.checkLocationPermission(getActivity())) {
             isPermissionDenied = true;
         }
-        lastKnownLocation = MapUtils.getDefaultLatLng();
+
+        lastKnownLocation = getLastLocation();
+
+        if (lastKnownLocation == null) {
+            lastKnownLocation = MapUtils.getDefaultLatLng();
+        }
 
         // if we came from 'Show in Explore' in Nearby, load Nearby map center and zoom
         if (isCameFromNearbyMap()) {
