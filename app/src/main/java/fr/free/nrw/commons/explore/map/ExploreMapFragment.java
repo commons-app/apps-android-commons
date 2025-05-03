@@ -961,9 +961,6 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
                     -0.07483536015053005, 1f);
             }
         }
-        if (!isCameFromNearbyMap()) {
-            moveCameraToPosition(new GeoPoint(latLnge.getLatitude(), latLnge.getLongitude()));
-        }
         return latLnge;
     }
 
