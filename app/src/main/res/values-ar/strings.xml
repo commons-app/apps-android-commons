@@ -889,4 +889,6 @@
   <string name="congratulations_all_pictures_in_this_album_have_been_either_uploaded_or_marked_as_not_for_upload">مبروك، جميع الصور الموجودة في هذا الألبوم تم تحميلها أو تم وضع علامة عليها بأنها غير قابلة للتحميل.</string>
   <string name="show_in_explore">عرض في استكشاف</string>
   <string name="show_in_nearby">عرض في المناطق القريبة</string>
+  <string name="image_tag_line_created_and_uploaded_by">تم الإنشاء والتحميل بواسطة: %1$s</string>
+  <string name="image_tag_line_created_by_and_uploaded_by">تم إنشاؤه بواسطة %1$s وتم تحميله بواسطة %2$s</string>
 </resources>

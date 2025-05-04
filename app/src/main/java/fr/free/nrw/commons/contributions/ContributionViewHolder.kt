@@ -8,23 +8,29 @@ import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
 import com.facebook.imagepipeline.request.ImageRequest
 import com.facebook.imagepipeline.request.ImageRequestBuilder
+import fr.free.nrw.commons.Media
+import fr.free.nrw.commons.utils.MediaAttributionUtil
+import fr.free.nrw.commons.MediaDataExtractor
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.databinding.LayoutContributionBinding
 import fr.free.nrw.commons.media.MediaClient
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
+import timber.log.Timber
 import java.io.File
 
 class ContributionViewHolder internal constructor(
-    private val parent: View, private val callback: ContributionsListAdapter.Callback,
-    private val mediaClient: MediaClient
+    parent: View,
+    private val callback: ContributionsListAdapter.Callback,
+    private val compositeDisposable: CompositeDisposable,
+    private val mediaClient: MediaClient,
+    private val mediaDataExtractor: MediaDataExtractor
 ) : RecyclerView.ViewHolder(parent) {
     var binding: LayoutContributionBinding = LayoutContributionBinding.bind(parent)
 
     private var position = 0
     private var contribution: Contribution? = null
-    private val compositeDisposable = CompositeDisposable()
     private var isWikipediaButtonDisplayed = false
     private val pausingPopUp: AlertDialog
     var imageRequest: ImageRequest? = null
@@ -54,7 +60,7 @@ an upload might take a dozen seconds. */
         this.contribution = contribution
         this.position = position
         binding.contributionTitle.text = contribution.media.mostRelevantCaption
-        binding.authorView.text = contribution.media.getAuthorOrUser()
+        setAuthorText(contribution.media)
 
         //Removes flicker of loading image.
         binding.contributionImage.hierarchy.fadeDuration = 0
@@ -91,6 +97,30 @@ an upload might take a dozen seconds. */
         binding.imageOptions.visibility = View.GONE
         binding.contributionState.text = ""
         checkIfMediaExistsOnWikipediaPage(contribution)
+    }
+
+    fun updateAttribution() {
+        if (contribution != null) {
+            val media = contribution!!.media
+            if (!media.getAttributedAuthor().isNullOrEmpty()) {
+                return
+            }
+            compositeDisposable.addAll(
+                mediaDataExtractor.fetchCreatorIdsAndLabels(media)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(
+                        { idAndLabels ->
+                            media.creatorName = MediaAttributionUtil.getCreatorName(idAndLabels)
+                            setAuthorText(media)
+                        },
+                        { t: Throwable? -> Timber.e(t) })
+            )
+        }
+    }
+
+    private fun setAuthorText(media: Media) {
+        binding.authorView.text = MediaAttributionUtil.getTagLine(media, itemView.context)
     }
 
     /**
