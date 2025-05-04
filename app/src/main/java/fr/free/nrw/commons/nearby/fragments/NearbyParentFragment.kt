@@ -1064,7 +1064,7 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
 
     override fun updateListFragment(placeList: List<Place>) {
         adapter!!.clear()
-        adapter!!.items = placeList
+        adapter!!.items = placeList.filter{ it.name.isNotEmpty() }
         binding!!.bottomSheetNearby.noResultsMessage.visibility =
             if (placeList.isEmpty()) View.VISIBLE else View.GONE
     }
