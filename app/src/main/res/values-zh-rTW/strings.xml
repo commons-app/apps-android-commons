@@ -844,4 +844,6 @@
   <string name="congratulations_all_pictures_in_this_album_have_been_either_uploaded_or_marked_as_not_for_upload">恭喜，該相簿中的所有圖片已上傳或標記為不可上傳。</string>
   <string name="show_in_explore">在探索中顯示</string>
   <string name="show_in_nearby">顯示在附近</string>
+  <string name="image_tag_line_created_and_uploaded_by">由%1$s建立與上傳</string>
+  <string name="image_tag_line_created_by_and_uploaded_by">由%1$s建立，%2$s上傳</string>
 </resources>
