@@ -190,7 +190,7 @@ interface MediaInterface {
          * Retrieved thumbnail height will be about this tall, but must be at least this height.
          * A larger number means higher thumbnail resolution but more network usage.
          */
-        const val THUMB_HEIGHT_PX = 220
+        const val THUMB_HEIGHT_PX = 450
 
         const val MEDIA_PARAMS =
             "&prop=imageinfo|coordinates&iiprop=url|extmetadata|user&&iiurlheight=" +
