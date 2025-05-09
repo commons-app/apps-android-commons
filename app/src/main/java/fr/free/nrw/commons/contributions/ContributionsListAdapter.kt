@@ -4,21 +4,26 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
+import fr.free.nrw.commons.MediaDataExtractor
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.media.MediaClient
+import io.reactivex.disposables.CompositeDisposable
 
 /**
  * Represents The View Adapter for the List of Contributions
  */
 class ContributionsListAdapter internal constructor(
     private val callback: Callback,
-    private val mediaClient: MediaClient
+    private val mediaClient: MediaClient,
+    private val mediaDataExtractor: MediaDataExtractor,
+    private val compositeDisposable: CompositeDisposable
 ) : PagedListAdapter<Contribution, ContributionViewHolder>(DIFF_CALLBACK) {
     /**
      * Initializes the view holder with contribution data
      */
     override fun onBindViewHolder(holder: ContributionViewHolder, position: Int) {
         holder.init(position, getItem(position))
+        holder.updateAttribution()
     }
 
     fun getContributionForPosition(position: Int): Contribution? {
@@ -36,7 +41,7 @@ class ContributionsListAdapter internal constructor(
         val viewHolder = ContributionViewHolder(
             LayoutInflater.from(parent.context)
                 .inflate(R.layout.layout_contribution, parent, false),
-            callback, mediaClient
+            callback, compositeDisposable, mediaClient, mediaDataExtractor
         )
         return viewHolder
     }

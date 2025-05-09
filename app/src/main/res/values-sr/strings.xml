@@ -748,4 +748,6 @@
   <string name="account_vanish_request_confirm">Нестајање је &lt;b&gt;последња опција&lt;/b&gt; и треба је користити &lt;b&gt;само када желите да заувек престанете са уређивањем&lt;/b&gt;, као и да сакријете што више својих прошлих асоцијација.&lt;br/&gt;&lt;br/&gt;Брисање налога на Викимедијној остави се врши променом назива налога тако да други не могу да препознају Ваше доприносе у процесу који се зове учтиви нестанак. &lt;b&gt;Нестајање не гарантује потпуну анонимност и не уклања доприносе на пројектима&lt;/b&gt;.</string>
   <string name="caption">Поднапис</string>
   <string name="caption_copied_to_clipboard">Поднапис копиран</string>
+  <string name="image_tag_line_created_and_uploaded_by">Направио и отпремио: %1$s</string>
+  <string name="image_tag_line_created_by_and_uploaded_by">Направио %1$s а отпремио %2$s</string>
 </resources>

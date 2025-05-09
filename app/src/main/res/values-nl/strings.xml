@@ -135,6 +135,7 @@
   <string name="login_failed_throttled">Te veel mislukte pogingen. Probeer het over een paar minuten opnieuw.</string>
   <string name="login_failed_blocked">Deze gebruiker is helaas geblokkeerd op Wikimedia Commons</string>
   <string name="login_failed_2fa_needed">U moet uw code voor tweetrapsauthenticatie opgeven.</string>
+  <string name="login_failed_email_auth_needed">Er is een verificatiecode naar uw e-mailadres verzonden. Voer de code in om aan te melden.</string>
   <string name="login_failed_generic">Aanmelden mislukt</string>
   <string name="share_upload_button">Uploaden</string>
   <string name="multiple_share_base_title">Geef deze verzameling een naam</string>
@@ -240,6 +241,7 @@
   <string name="become_a_tester_title">Word bètatester</string>
   <string name="become_a_tester_description">Meld u aan voor ons bètakanaal op Google Play en krijg vroegtijdig toegang tot nieuwe functies en bugfixes</string>
   <string name="_2fa_code">2FA-code</string>
+  <string name="email_auth_code">E-mailverificatiecode</string>
   <string name="logout_verification">Wilt u zich echt afmelden?</string>
   <string name="mediaimage_failed">Media-afbeelding is mislukt</string>
   <string name="no_subcategory_found">Geen subcategorieën gevonden</string>
@@ -841,4 +843,6 @@
   <string name="congratulations_all_pictures_in_this_album_have_been_either_uploaded_or_marked_as_not_for_upload">Gefeliciteerd, alle foto’s in dit album zijn ofwel geüpload ofwel gemarkeerd als ‘niet om te uploaden’.</string>
   <string name="show_in_explore">Weergeven in Verkennen</string>
   <string name="show_in_nearby">Weergeven in ‘In de buurt’</string>
+  <string name="image_tag_line_created_and_uploaded_by">Gemaakt en geüpload door: %1$s</string>
+  <string name="image_tag_line_created_by_and_uploaded_by">Gemaakt door %1$s en geüpload %2$s</string>
 </resources>

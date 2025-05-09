@@ -1,9 +1,8 @@
 package fr.free.nrw.commons.utils
 
-import android.os.Build
-import android.text.Html
 import android.text.Spanned
 import android.text.SpannedString
+import androidx.core.text.HtmlCompat
 
 object StringUtil {
 
@@ -26,12 +25,6 @@ object StringUtil {
             .replace("&#8207;", "\u200F")
             .replace("&amp;", "&")
 
-        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            Html.fromHtml(processedSource, Html.FROM_HTML_MODE_LEGACY)
-        } else {
-            //noinspection deprecation
-            @Suppress("DEPRECATION")
-            Html.fromHtml(processedSource)
-        }
+        return HtmlCompat.fromHtml(processedSource, HtmlCompat.FROM_HTML_MODE_LEGACY)
     }
 }

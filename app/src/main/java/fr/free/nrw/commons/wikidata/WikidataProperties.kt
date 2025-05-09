@@ -7,6 +7,7 @@ enum class WikidataProperties(
 ) {
     IMAGE("P18"),
     DEPICTS(BuildConfig.DEPICTS_PROPERTY),
+    CREATOR(BuildConfig.CREATOR_PROPERTY),
     COMMONS_CATEGORY("P373"),
     INSTANCE_OF("P31"),
     MEDIA_LEGENDS("P2096"),

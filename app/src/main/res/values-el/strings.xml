@@ -123,6 +123,8 @@
   <string name="menu_from_camera">Τραβήξτε φωτογραφία</string>
   <string name="menu_nearby">Κοντά</string>
   <string name="provider_contributions">Οι μεταφορτώσεις μου</string>
+  <string name="menu_copy_link">Αντιγραφή συνδέσμου</string>
+  <string name="menu_link_copied">Ο σύνδεσμος αντιγράφηκε στο πρόχειρο</string>
   <string name="menu_share">Κοινοποίηση</string>
   <string name="menu_view_file_page">Προβολή σελίδας αρχείου</string>
   <string name="share_title_hint">Λεζάντα (Απαιτείται)</string>
@@ -237,6 +239,7 @@
   <string name="become_a_tester_title">Γίνετε Δοκιμαστής Beta</string>
   <string name="become_a_tester_description">Συμμετέχετε στο κανάλι beta στο Google Play και αποκτήστε πρώιμη πρόσβαση σε νέες λειτουργίες και διορθώσεις σφαλμάτων</string>
   <string name="_2fa_code">Κωδικός 2FA</string>
+  <string name="email_auth_code">Κωδικός επαλήθευσης ηλεκτρονικού ταχυδρομείου</string>
   <string name="logout_verification">Θέλετε σίγουρα να αποσυνδεθείτε;</string>
   <string name="mediaimage_failed">Η εικόνα πολυμέσων απέτυχε</string>
   <string name="no_subcategory_found">Δε βρέθηκαν υποκατηγορίες</string>
@@ -381,11 +384,13 @@
   <string name="delete">Διαγραφή</string>
   <string name="Achievements">Επιτεύγματα</string>
   <string name="Profile">Προφίλ</string>
+  <string name="badges">Σήματα</string>
   <string name="statistics">Στατιστικά</string>
   <string name="statistics_thanks">Ευχαριστίες που έχετε λάβει</string>
   <string name="statistics_featured">Προβεβλημμένες εικόνες</string>
   <string name="statistics_wikidata_edits">Εικόνες μέσω «Κοντινά μέρη»</string>
-  <string name="level" fuzzy="true">Επίπεδο</string>
+  <string name="level">Επίπεδο %d</string>
+  <string name="profileLevel">%s (Επίπεδο %s)</string>
   <string name="images_uploaded">Εικόνες που μεταφορτώθηκαν</string>
   <string name="image_reverts">Εικόνες που δεν ανεστράφησαν</string>
   <string name="images_used_by_wiki">Εικόνες που χρησιμοποιήθηκαν</string>
@@ -417,6 +422,7 @@
   <string name="map_application_missing">Δε βρέθηκε καμία συμβατή εφαρμογή χάρτη στη συσκευή σας. Εγκαταστήστε μια εφαρμογή χάρτη για να χρησιμοποιήσετε αυτήν τη δυνατότητα.</string>
   <string name="title_page_bookmarks_pictures">Φωτογραφίες</string>
   <string name="title_page_bookmarks_locations">Τοποθεσίες</string>
+  <string name="title_page_bookmarks_categories">Κατηγορίες</string>
   <string name="menu_bookmark">Προσθήκη/Κατάργηση σε σελιδοδείκτες</string>
   <string name="provider_bookmarks">Σελιδοδείκτες</string>
   <string name="bookmark_empty">Δεν έχετε προσθέσει σελιδοδείκτες</string>
@@ -498,6 +504,7 @@
   <string name="no_notification">Δεν έχετε αδιάβαστες ενημερώσεις</string>
   <string name="no_read_notification">Δεν έχετε αδιάβαστες ενημερώσεις</string>
   <string name="share_logs_using">Κοινή χρήση αρχείων καταγραφής χρησιμοποιώντας</string>
+  <string name="check_your_email_inbox">Ελέγξτε τα εισερχόμενα του email σας</string>
   <string name="menu_option_read">Προβολή αναγνωσμένων</string>
   <string name="menu_option_unread">Προβολή μη αναγνωσμένων</string>
   <string name="error_occurred_in_picking_images">Παρουσιάστηκε σφάλμα κατά την επιλογή εικόνων</string>
@@ -805,4 +812,20 @@
   <string name="pending">Σε εκκρεμότητα</string>
   <string name="failed">Απέτυχε</string>
   <string name="could_not_load_place_data">Δεν ήταν δυνατή η φόρτωση δεδομένων της θέσης</string>
+  <string name="custom_selector_delete_folder">Διαγραφή φακέλου</string>
+  <string name="custom_selector_confirm_deletion_title">Επιβεβαίωση διαγραφής</string>
+  <string name="custom_selector_confirm_deletion_message">Είστε βέβαιοι ότι θέλετε να διαγράψετε τον φάκελο %1$s που περιέχει %2$d στοιχεία;</string>
+  <string name="custom_selector_delete">Διαγραφή</string>
+  <string name="custom_selector_cancel">Ακύρωση</string>
+  <string name="custom_selector_folder_deleted_success">Ο φάκελος %1$s διαγράφηκε με επιτυχία</string>
+  <string name="custom_selector_folder_deleted_failure">Αποτυχία διαγραφής του φακέλου %1$s</string>
+  <string name="red_pin">Αυτό το μέρος δεν έχει ακόμα φωτογραφία, πήγαινε να βγάλεις μία!</string>
+  <string name="green_pin">Αυτό το μέρος έχει ήδη μια φωτογραφία.</string>
+  <string name="grey_pin">Τώρα ελέγχεται αν αυτό το μέρος έχει φωτογραφία.</string>
+  <string name="error_while_loading">Σφάλμα κατά τη φόρτωση</string>
+  <string name="no_usages_found">Δεν βρέθηκαν χρήσεις</string>
+  <string name="file_usages_container_heading">Χρήσεις αρχείου</string>
+  <string name="account">Λογαριασμός</string>
+  <string name="caption">Λεζάντα</string>
+  <string name="caption_copied_to_clipboard">Η λεζάντα αντιγράφηκε στο πρόχειρο</string>
 </resources>

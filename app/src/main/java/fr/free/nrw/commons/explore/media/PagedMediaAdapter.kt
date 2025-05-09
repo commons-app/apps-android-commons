@@ -5,13 +5,22 @@ import android.view.ViewGroup
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import fr.free.nrw.commons.Media
+import fr.free.nrw.commons.MediaDataExtractor
+import fr.free.nrw.commons.utils.MediaAttributionUtil
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.databinding.LayoutCategoryImagesBinding
 import fr.free.nrw.commons.explore.paging.BaseViewHolder
 import fr.free.nrw.commons.explore.paging.inflate
+import fr.free.nrw.commons.media.IdAndLabels
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.schedulers.Schedulers
+import timber.log.Timber
 
 class PagedMediaAdapter(
     private val onImageClicked: (Int) -> Unit,
+    private val mediaDataExtractor: MediaDataExtractor,
+    private val compositeDisposable: CompositeDisposable = CompositeDisposable()
 ) : PagedListAdapter<Media, SearchImagesViewHolder>(
         object : DiffUtil.ItemCallback<Media>() {
             override fun areItemsTheSame(
@@ -25,6 +34,7 @@ class PagedMediaAdapter(
             ) = oldItem.pageId == newItem.pageId
         },
     ) {
+
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int,
@@ -37,7 +47,24 @@ class PagedMediaAdapter(
         holder: SearchImagesViewHolder,
         position: Int,
     ) {
-        holder.bind(getItem(position)!! to position)
+        val media = getItem(position) ?: return
+        holder.bind(media to position)
+
+        if (!media.getAttributedAuthor().isNullOrEmpty()) {
+            return
+        }
+
+        compositeDisposable.addAll(
+            mediaDataExtractor.fetchCreatorIdsAndLabels(media)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                    {  idAndLabels ->
+                        media.creatorName = MediaAttributionUtil.getCreatorName(idAndLabels);
+                        holder.setAuthorText(media)
+                    },
+                    { t: Throwable? -> Timber.e(t) })
+        )
     }
 }
 
@@ -52,7 +79,10 @@ class SearchImagesViewHolder(
         binding.categoryImageView.setOnClickListener { onImageClicked(item.second) }
         binding.categoryImageTitle.text = media.mostRelevantCaption
         binding.categoryImageView.setImageURI(media.thumbUrl)
-        binding.categoryImageAuthor.text =
-            containerView.context.getString(R.string.image_uploaded_by, media.getAuthorOrUser())
+        setAuthorText(media)
+    }
+
+    fun setAuthorText(media: Media) {
+        binding.categoryImageAuthor.text = MediaAttributionUtil.getTagLine(media, containerView.context)
     }
 }

@@ -884,4 +884,6 @@
   <string name="congratulations_all_pictures_in_this_album_have_been_either_uploaded_or_marked_as_not_for_upload">Поздравляем, все фотографии в этом альбоме либо загружены, либо помечены как не предназначенные для загрузки.</string>
   <string name="show_in_explore">Показать в Explore</string>
   <string name="show_in_nearby">Показать в Nearby</string>
+  <string name="image_tag_line_created_and_uploaded_by">Создано и загружено: %1$s</string>
+  <string name="image_tag_line_created_by_and_uploaded_by">Создано %1$s и загружено %2$s</string>
 </resources>

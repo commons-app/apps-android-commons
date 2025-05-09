@@ -825,4 +825,6 @@
   <string name="congratulations_all_pictures_in_this_album_have_been_either_uploaded_or_marked_as_not_for_upload">Tillykke, alle billeder i dette album er enten blevet uploadet eller markeret som ikke til upload.</string>
   <string name="show_in_explore">Vis i Udforsk</string>
   <string name="show_in_nearby">Vis i I nærheden</string>
+  <string name="image_tag_line_created_and_uploaded_by">Oprettet og uploadet af: %1$s</string>
+  <string name="image_tag_line_created_by_and_uploaded_by">Oprettet af %1$s og uploadet af %2$s</string>
 </resources>

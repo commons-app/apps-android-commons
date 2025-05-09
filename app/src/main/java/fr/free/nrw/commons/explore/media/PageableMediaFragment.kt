@@ -4,16 +4,18 @@ import android.content.Context
 import android.os.Bundle
 import android.view.View
 import fr.free.nrw.commons.Media
+import fr.free.nrw.commons.MediaDataExtractor
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.category.CategoryImagesCallback
 import fr.free.nrw.commons.explore.paging.BasePagingFragment
 import fr.free.nrw.commons.media.MediaDetailPagerFragment.MediaDetailProvider
+import javax.inject.Inject
 
 abstract class PageableMediaFragment :
     BasePagingFragment<Media>(),
     MediaDetailProvider {
     override val pagedListAdapter by lazy {
-        PagedMediaAdapter(categoryImagesCallback::onMediaClicked)
+        PagedMediaAdapter(categoryImagesCallback::onMediaClicked, mediaDataExtractor)
     }
 
     override val errorTextId: Int = R.string.error_loading_images
@@ -21,6 +23,9 @@ abstract class PageableMediaFragment :
     override fun getEmptyText(query: String) = getString(R.string.no_images_found)
 
     lateinit var categoryImagesCallback: CategoryImagesCallback
+
+    @Inject
+    lateinit var mediaDataExtractor: MediaDataExtractor
 
     override fun onAttach(context: Context) {
         super.onAttach(context)

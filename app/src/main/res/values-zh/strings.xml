@@ -25,6 +25,7 @@
 * Liuxinyu970226
 * Looong
 * McDutchie
+* Mishidexfc
 * NACHOgao3
 * Qiyue2001
 * Shizhao
@@ -168,6 +169,7 @@
   <string name="login_failed_throttled">失败次数过多。请在几分钟后重试。</string>
   <string name="login_failed_blocked">对不起，该用户已经被共享资源封禁</string>
   <string name="login_failed_2fa_needed">您必须提供您的双因素验证代码。</string>
+  <string name="login_failed_email_auth_needed">登录验证码已发送至您的邮箱，请提供该验证码进行登录。</string>
   <string name="login_failed_generic">登录失败</string>
   <string name="share_upload_button">上传</string>
   <string name="multiple_share_base_title">命名这组图像</string>
@@ -273,6 +275,7 @@
   <string name="become_a_tester_title">成为测试版的测试者</string>
   <string name="become_a_tester_description">加入我们在Google Play上的测试计划，更早获取新功能以及错误修复</string>
   <string name="_2fa_code">2FA代码</string>
+  <string name="email_auth_code">电子邮件验证码</string>
   <string name="logout_verification">您真的想要退出么？</string>
   <string name="mediaimage_failed">媒体图片失败</string>
   <string name="no_subcategory_found">找不到子分类</string>
@@ -873,4 +876,6 @@
   <string name="congratulations_all_pictures_in_this_album_have_been_either_uploaded_or_marked_as_not_for_upload">恭喜，专辑中的所有图片都已上传或标记为不上传。</string>
   <string name="show_in_explore">在探索中显示</string>
   <string name="show_in_nearby">显示在附近</string>
+  <string name="image_tag_line_created_and_uploaded_by">创建并上传者： %1$s</string>
+  <string name="image_tag_line_created_by_and_uploaded_by">由%1$s创建并由%2$s上传</string>
 </resources>
