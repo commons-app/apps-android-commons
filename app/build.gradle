@@ -119,7 +119,8 @@ dependencies {
     testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:5.10.0"
     testImplementation 'com.facebook.soloader:soloader:0.10.5'
     testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3"
-    debugImplementation("androidx.fragment:fragment-testing:1.6.2")
+    debugImplementation("androidx.fragment:fragment-testing-manifest:1.6.2")
+    androidTestImplementation("androidx.fragment:fragment-testing:1.6.2")
     testImplementation "commons-io:commons-io:2.6"
 
     // Android testing
