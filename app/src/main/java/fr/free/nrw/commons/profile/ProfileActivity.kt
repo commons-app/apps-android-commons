@@ -120,8 +120,23 @@ class ProfileActivity : BaseActivity() {
     }
 
     public override fun onDestroy() {
-        super.onDestroy()
+        // Clear all disposables to prevent memory leaks
         compositeDisposable.clear()
+        
+        // Set fragment references to null to avoid memory leaks
+        if (isFinishing) {
+            // Only clear these references if the activity is actually finishing
+            achievementsFragment.onDetach()
+            leaderboardFragment.onDetach()
+            contributionsFragment = null
+        }
+        
+        // Clean up binding to prevent memory leaks
+        if (isFinishing && ::binding.isInitialized) {
+            binding.viewPager.adapter = null
+        }
+        
+        super.onDestroy()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

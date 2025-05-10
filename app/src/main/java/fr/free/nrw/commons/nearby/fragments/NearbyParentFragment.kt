@@ -813,16 +813,54 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
 
     override fun onDestroyView() {
         super.onDestroyView()
-        searchRunnable?.let {
-            searchHandler.removeCallbacks(it)
-        } ?: run {
-            Timber.w("NearbyParentFragment: searchRunnable is null")
+        
+        // Clear map references and listeners to prevent memory leaks
+        if (::mapView.isInitialized) {
+            mapView.onDetach()
+            mapView.overlays.clear()
+            mapView.removeAllViews()
+        }
+        
+        // Unregister location updates to prevent memory leaks
+        locationManager.removeLocationListener(this)
+        
+        // Remove any broadcast receivers
+        try {
+            context?.unregisterReceiver(refreshBroadcastReceiver)
+        } catch (e: IllegalArgumentException) {
+            // Receiver not registered, ignore
+        }
+        
+        // Clear bottom sheet adapter
+        if (bottomSheetAdapter != null) {
+            bottomSheetAdapter = null
         }
 
-        if (presenter == null) Timber.w("NearbyParentFragment: presenter is null")
-        if (applicationKvStore == null) Timber.w("NearbyParentFragment: applicationKvStore is null")
+        // Cleanup any animations
+        searchThisAreaAnimationRunnable = null
+        locationSwitcherAnimationRunnable = null
+        
+        // Clear view binding to prevent memory leaks
+        binding = null
+    }
 
-        presenter?.removeNearbyPreferences(applicationKvStore ?: return)
+    override fun onDestroy() {
+        // Clean up the presenter to prevent memory leaks
+        presenter.onDetachView()
+        
+        // Clear static references to prevent memory leaks
+        nearbyController.clearAllStaticReferences()
+        
+        // Clear any callbacks
+        nearbyParentFragmentInstanceReadyCallback = null
+        
+        // Clear any dialog references
+        if (progressDialog != null && progressDialog!!.isShowing) {
+            progressDialog!!.dismiss()
+        }
+        progressDialog = null
+        
+        super.onDestroy()
     }
 
     private fun initViews() {
