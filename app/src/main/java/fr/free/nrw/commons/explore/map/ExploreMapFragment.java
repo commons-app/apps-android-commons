@@ -221,7 +221,6 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
             binding.mapView.getController().setZoom(ZOOM_LEVEL);
         }
 
-        performMapReadyActions();
 
         binding.mapView.getOverlays().add(new MapEventsOverlay(new MapEventsReceiver() {
             @Override
@@ -341,7 +340,12 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
             !locationPermissionsHelper.checkLocationPermission(getActivity())) {
             isPermissionDenied = true;
         }
-        lastKnownLocation = MapUtils.getDefaultLatLng();
+
+        lastKnownLocation = getLastLocation();
+
+        if (lastKnownLocation == null) {
+            lastKnownLocation = MapUtils.getDefaultLatLng();
+        }
 
         // if we came from 'Show in Explore' in Nearby, load Nearby map center and zoom
         if (isCameFromNearbyMap()) {
@@ -973,9 +977,6 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
                 latLnge = new fr.free.nrw.commons.location.LatLng(51.506255446947776,
                     -0.07483536015053005, 1f);
             }
-        }
-        if (!isCameFromNearbyMap()) {
-            moveCameraToPosition(new GeoPoint(latLnge.getLatitude(), latLnge.getLongitude()));
         }
         return latLnge;
     }
