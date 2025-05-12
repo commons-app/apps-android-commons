@@ -147,6 +147,47 @@
                 </LinearLayout>
 
                 <LinearLayout
+                  style="@style/MediaDetailContainer"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:orientation="horizontal">
+
+                    <TextView
+                      style="@style/MediaDetailTextLabelGeneric"
+                      android:layout_width="@dimen/widget_margin"
+                      android:layout_height="match_parent"
+                      android:text="Source" />
+
+                    <TextView
+                      style="@style/MediaDetailTextBody"
+                      android:id="@+id/mediaDetailSource"
+                      android:layout_width="@dimen/widget_margin"
+                      android:layout_height="match_parent"
+                      tools:text="Source of media" />
+                </LinearLayout>
+
+                <LinearLayout
+                  style="@style/MediaDetailContainer"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:orientation="horizontal">
+
+                    <TextView
+                      style="@style/MediaDetailTextLabelGeneric"
+                      android:layout_width="@dimen/widget_margin"
+                      android:layout_height="match_parent"
+                      android:text="Uploader" />
+
+                    <TextView
+                      style="@style/MediaDetailTextBody"
+                      android:id="@+id/mediaDetailUploader"
+                      android:layout_width="@dimen/widget_margin"
+                      android:layout_height="match_parent"
+                      tools:text="Uploader of media" />
+                </LinearLayout>
+
+
+                <LinearLayout
                   android:id="@+id/caption_layout"
                   style="@style/MediaDetailContainer"
                   android:layout_width="match_parent"
