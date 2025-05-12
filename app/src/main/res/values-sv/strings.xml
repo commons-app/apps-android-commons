@@ -119,6 +119,7 @@
   <string name="login_failed_throttled">För många misslyckade försök. Var god försök igen om några minuter.</string>
   <string name="login_failed_blocked">Tyvärr, denna användare har blockerats på Commons</string>
   <string name="login_failed_2fa_needed">Du måste ange din tvåstegsverifieringskod.</string>
+  <string name="login_failed_email_auth_needed">En verifieringskod för att logga in har skickats till din e-postadress. Ange koden för att logga in.</string>
   <string name="login_failed_generic">Inloggningen misslyckades</string>
   <string name="share_upload_button">Ladda upp</string>
   <string name="multiple_share_base_title">Namnge denna uppsättning</string>
@@ -224,6 +225,7 @@
   <string name="become_a_tester_title">Bli en betatestare</string>
   <string name="become_a_tester_description">Registrera dig på våra betakanal på Google Play och få tidig åtkomst till nya funktioner och buggfixar</string>
   <string name="_2fa_code">2-stegsverif.kod</string>
+  <string name="email_auth_code">E-postverifieringskod</string>
   <string name="logout_verification">Vill du verkligen logga ut?</string>
   <string name="mediaimage_failed">Mediabild misslyckades</string>
   <string name="no_subcategory_found">Inga underkategorier hittades</string>
@@ -823,4 +825,6 @@
   <string name="congratulations_all_pictures_in_this_album_have_been_either_uploaded_or_marked_as_not_for_upload">Grattis! Alla bilder i detta album har antingen laddats upp eller markerats för att inte laddas upp.</string>
   <string name="show_in_explore">Visa i \"Utforska\"</string>
   <string name="show_in_nearby">Visa i \"I närheten\"</string>
+  <string name="image_tag_line_created_and_uploaded_by">Skapades och laddades upp av: %1$s</string>
+  <string name="image_tag_line_created_by_and_uploaded_by">Skapad av %1$s och laddades upp av %2$s</string>
 </resources>

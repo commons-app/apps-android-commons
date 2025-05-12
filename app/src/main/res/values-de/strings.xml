@@ -162,6 +162,7 @@
   <string name="categories_search_text_hint">Kategorien durchsuchen</string>
   <string name="depicts_search_text_hint">Suche nach Objekten, die dein Medium abbildet (Berg, Taj Mahal etc.)</string>
   <string name="menu_save_categories">Speichern</string>
+  <string name="menu_overflow_desc">Überlaufmenü</string>
   <string name="refresh_button">Aktualisieren</string>
   <string name="display_list_button">Liste</string>
   <string name="contributions_subtitle_zero">(Noch keine hochgeladenen Dateien)</string>
@@ -836,7 +837,23 @@
   <string name="custom_selector_folder_deleted_success">Ordner %1$s erfolgreich gelöscht</string>
   <string name="custom_selector_folder_deleted_failure">Ordner %1$s konnte nicht gelöscht werden</string>
   <string name="custom_selector_error_trashing_folder_contents">Fehler beim Löschen des Ordnerinhalts: %1$s</string>
+  <string name="custom_selector_folder_not_found_error">Der Ordnerpfad für die Bucket-ID %1$d konnte nicht abgerufen werden</string>
   <string name="red_pin">Von diesem Ort gibt es noch kein Bild. Mach eins!</string>
   <string name="green_pin">Dieser Ort hat bereits ein Bild.</string>
   <string name="grey_pin">Jetzt wird geprüft, ob dieser Ort bereits ein Bild hat.</string>
+  <string name="error_while_loading">Fehler beim Laden</string>
+  <string name="no_usages_found">Keine Verwendungen gefunden</string>
+  <string name="usages_on_commons_heading">Commons</string>
+  <string name="usages_on_other_wikis_heading">Andere Wikis</string>
+  <string name="file_usages_container_heading">Dateiverwendungen</string>
+  <string name="account">Konto</string>
+  <string name="vanish_account">Konto auflösen</string>
+  <string name="account_vanish_request_confirm_title">Kontoauflösungs-Warnung</string>
+  <string name="caption">Bildunterschrift</string>
+  <string name="caption_copied_to_clipboard">Bildunterschrift in Zwischenablage kopiert</string>
+  <string name="congratulations_all_pictures_in_this_album_have_been_either_uploaded_or_marked_as_not_for_upload">Herzlichen Glückwunsch, alle Bilder in diesem Album wurden entweder hochgeladen oder als nicht zum Hochladen markiert.</string>
+  <string name="show_in_explore">In „Erkunden“ anzeigen</string>
+  <string name="show_in_nearby">In „In der Nähe“ anzeigen</string>
+  <string name="image_tag_line_created_and_uploaded_by">Erstellt und hochgeladen von: %1$s</string>
+  <string name="image_tag_line_created_by_and_uploaded_by">Erstellt von %1$s und hochgeladen von %2$s</string>
 </resources>

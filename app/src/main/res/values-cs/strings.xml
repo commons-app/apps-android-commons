@@ -20,6 +20,7 @@
 * Patrik L.
 * Robins7
 * Spotter
+* The astrea
 * Vlad5250
 * Vojtěch Dostál
 * Walter Klosse
@@ -859,4 +860,6 @@
   <string name="congratulations_all_pictures_in_this_album_have_been_either_uploaded_or_marked_as_not_for_upload">Gratulujeme, všechny obrázky v tomto albu byly buď nahrány, nebo označeny jako neurčené k nahrání.</string>
   <string name="show_in_explore">Zobrazit v kartě Objevit</string>
   <string name="show_in_nearby">Zobrazit v kartě Poblíž</string>
+  <string name="image_tag_line_created_and_uploaded_by">Vytvořil/a a nahrál/a: %1$s</string>
+  <string name="image_tag_line_created_by_and_uploaded_by">Vytvořeno uživatelem %1$s a nahráno uživatelem %2$s</string>
 </resources>
