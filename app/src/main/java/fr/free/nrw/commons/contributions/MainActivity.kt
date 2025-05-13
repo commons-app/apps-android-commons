@@ -524,10 +524,30 @@ after opening the app.
     }
 
     override fun onDestroy() {
-        quizChecker!!.cleanup()
-        locationManager!!.unregisterLocationManager()
-        // Remove ourself from hashmap to prevent memory leaks
+        // Clean up quiz checker
+        quizChecker?.cleanup()
+        quizChecker = null
+        
+        // Clean up location manager
+        locationManager?.unregisterLocationManager()
+        locationManager?.removeLocationListeners()
         locationManager = null
+        
+        // Clean up binding
+        if (binding != null) {
+            binding?.viewPager?.adapter = null
+            binding = null
+        }
+        
+        // Clear any static references
+        if (isFinishing) {
+            // Only clean up static references if activity is actually finishing
+            NearbyController.clearAllStaticReferences()
+        }
+        
+        // Make sure to clear disposables
+        compositeDisposable.clear()
+        
         super.onDestroy()
     }
 

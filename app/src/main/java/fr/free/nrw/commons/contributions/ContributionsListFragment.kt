@@ -219,8 +219,38 @@ class ContributionsListFragment : CommonsDaggerSupportFragment(), ContributionsL
     }
 
     override fun onDestroyView() {
-        binding = null
         super.onDestroyView()
+        
+        // Clear animations to prevent leaks
+        fab_close = null
+        fab_open = null
+        rotate_forward = null
+        rotate_backward = null
+        
+        // Clear adapter references
+        if (rvContributionsList != null) {
+            rvContributionsList?.clearOnScrollListeners()
+            if (rvContributionsList?.itemAnimator is SimpleItemAnimator) {
+                (rvContributionsList?.itemAnimator as SimpleItemAnimator).supportsChangeAnimations = false
+            }
+            rvContributionsList?.adapter = null
+        }
+        
+        // Clean up view binding to prevent memory leaks
+        binding = null
+    }
+
+    override fun onDestroy() {
+        // Clean up presenter to prevent memory leaks
+        contributionsListPresenter?.onDetachView()
+        
+        // Clear callback references
+        callback = null
+        
+        // Cleanup adapter
+        adapter = null
+        
+        super.onDestroy()
     }
 
     override fun onAttach(context: Context) {

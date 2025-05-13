@@ -682,18 +682,32 @@ class ContributionsFragment : CommonsDaggerSupportFragment(), FragmentManager.On
         }
     }
 
-    override fun onDestroy() {
-        try {
-            compositeDisposable.clear()
-            childFragmentManager.removeOnBackStackChangedListener(this)
-            locationManager!!.unregisterLocationManager()
-            locationManager!!.removeLocationListener(this)
-            super.onDestroy()
-        } catch (exception: IllegalArgumentException) {
-            Timber.e(exception)
-        } catch (exception: IllegalStateException) {
-            Timber.e(exception)
+    override fun onDestroyView() {
+        super.onDestroyView()
+        // Clean up sensor manager listener to prevent memory leaks
+        if (mSensorManager != null) {
+            mSensorManager!!.unregisterListener(this)
         }
+        
+        // Clean up location manager
+        if (locationManager != null) {
+            locationManager!!.removeLocationListener(this)
+            // Don't unregister completely as it might be used elsewhere
+        }
+        
+        // Clean up disposables to prevent memory leaks
+        compositeDisposable.clear()
+        
+        // Clean up view binding to prevent memory leaks
+        binding = null
+    }
+
+    override fun onDestroy() {
+        // Make sure to cleanup resources that should be freed when fragment is destroyed
+        presenter?.onDetachView()
+        contributionsPresenter?.onDetachView()
+        
+        super.onDestroy()
     }
 
     override fun onLocationChangedSignificantly(latLng: LatLng) {

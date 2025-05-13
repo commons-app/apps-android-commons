@@ -104,6 +104,17 @@ class SingleWebViewActivity : ComponentActivity() {
         }
     }
 
+    /**
+     * Clean up WebView to prevent memory leaks
+     */
+    override fun onDestroy() {
+        super.onDestroy()
+        
+        // WebView can cause memory leaks if not properly destroyed
+        setContent {
+            // Empty content to release the previous WebView
+        }
+    }
 
     /**
      * @param url The initial URL which we are loading in the WebView.
