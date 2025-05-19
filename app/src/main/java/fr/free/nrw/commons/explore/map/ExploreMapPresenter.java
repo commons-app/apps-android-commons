@@ -74,9 +74,22 @@ public class ExploreMapPresenter
          */
         if (locationChangeType.equals(LOCATION_SIGNIFICANTLY_CHANGED)) {
             Timber.d("LOCATION_SIGNIFICANTLY_CHANGED");
+            LatLng populateLatLng = exploreMapFragmentView.getMapCenter();
+
+            //If "Show in Explore" was selected in Nearby, use the previous LatLng
+            if (exploreMapFragmentView instanceof ExploreMapFragment) {
+                ExploreMapFragment exploreMapFragment = (ExploreMapFragment)exploreMapFragmentView;
+                if (exploreMapFragment.recentlyCameFromNearbyMap()) {
+                    //Ensure this LatLng will not be used again if user searches their GPS location
+                    exploreMapFragment.setRecentlyCameFromNearbyMap(false);
+
+                    populateLatLng = exploreMapFragment.getPreviousLatLng();
+                }
+            }
+
             lockUnlockNearby(true);
             exploreMapFragmentView.setProgressBarVisibility(true);
-            exploreMapFragmentView.populatePlaces(exploreMapFragmentView.getMapCenter());
+            exploreMapFragmentView.populatePlaces(populateLatLng);
         } else if (locationChangeType.equals(SEARCH_CUSTOM_AREA)) {
             Timber.d("SEARCH_CUSTOM_AREA");
             lockUnlockNearby(true);
