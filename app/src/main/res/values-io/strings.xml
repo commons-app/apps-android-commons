@@ -436,8 +436,11 @@
   <string name="option_allow">Permisar</string>
   <string name="option_dismiss">Eskartar</string>
   <string name="in_app_camera_needs_location">Voluntez kapabligar registrago di lokizo en \'\'Settings\'\', e probez itere.\n\nNoto: l\'arkivo sendanta povas ne havar informo pri lokizo, se l\'\'\'app\'\' ne povas rekuperar l\'informo pri lokizo en kurta intervalo.</string>
+  <string name="in_app_camera_location_permission_denied">La programo \'\'app\'\' ne enrejistros informo pri lokizo en la fotografuri pro manko di permisi</string>
   <string name="in_app_camera_location_unavailable">Sen kapabligar GPS, l\'enrejistro di la lokizo en la fotografuri ne facesas.</string>
   <string name="open_document_photo_picker_title">Uzez selektilo di fotografuri segun dokumenti</string>
+  <string name="open_document_photo_picker_explanation">La nova funciono \'\'Android photo picker\'\' povas perdar informo pri lokizo. Kapabligez ol, se vu semblas uzar ol.</string>
+  <string name="location_loss_warning">Deskapabliganta ol povos deskuplar la nova funciono \'\'Android photo picker\'\'. Posible perdos informo pri lokizo.</string>
   <string name="getting_edit_token">Kaptanta \'\'token\'\' por redaktar.</string>
   <string name="check_category_adding_template">Adjuntanta shablono por verifikar kategorio</string>
   <string name="check_category_notification_title">Demandanta verifiko di kategorio por %1$s</string>
@@ -497,8 +500,10 @@
   <string name="exif_tag_name_serialNumbers">Serio-nombro</string>
   <string name="exif_tag_name_software">Software</string>
   <string name="media_location_permission_denied">Aceso ad enmagazinigo-moyeno ne permisita</string>
+  <string name="share_via">Partigar utensilo \'\'app\'\' per...</string>
   <string name="image_info">Informo pri imajo</string>
   <string name="no_categories_found">Nula kategorio trovesis</string>
+  <string name="no_depiction_found">Nula reprezenturi trovita</string>
   <string name="upload_cancelled">Kargajo di arkivo cesis</string>
   <string name="dialog_box_text_nomination">Pro quo %1$s devas efacesar?</string>
   <string name="review_is_uploaded_by">%1$s sendesis da: %2$s</string>
@@ -578,6 +583,9 @@
   <string name="recommend_high_accuracy_mode">Por plu bona rezulti, selektez modo \"granda exakteso\" (\'\'High Accuracy\'\').</string>
   <string name="ask_to_turn_location_on">Kad montrar lokizo?</string>
   <string name="load_more">Charjez pluse</string>
+  <string name="todo_improve">Plubonigi propozata:</string>
+  <string name="missing_category">- Adjuntez kategorii a ca imajo, por faciligar lua uzado.</string>
+  <string name="missing_article">- Adjuntez ca imajo ad artiklo asociita de Wikipedio, qua havas nula imajo.</string>
   <string name="add_picture_to_wikipedia_article_title">Adjuntar imajo a Wikipedio</string>
   <string name="add_picture_to_wikipedia_article_desc">Ka vu deziras adjuntar ca imajo al artiklo de Wikipedio en idiomo %1$s?</string>
   <string name="confirm">Konfirmez</string>
@@ -612,6 +620,7 @@
   <string name="leaderboard_used">Uzita</string>
   <string name="leaderboard_my_rank_button_text">Mea rango</string>
   <string name="limited_connection_enabled">Kapabligesis por uzar kun limitizita konekti!</string>
+  <string name="limited_connection_mode">Modo por limitizita retoligilo</string>
   <string name="statistics_quality">Imaji di qualeso</string>
   <string name="resuming_upload">Duriganta sendajo...</string>
   <string name="pausing_upload">Pauzanta sendajo...</string>
