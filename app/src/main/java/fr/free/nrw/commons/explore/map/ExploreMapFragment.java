@@ -120,6 +120,7 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
     private double prevZoom;
     private double prevLatitude;
     private double prevLongitude;
+    private boolean recentlyCameFromNearbyMap;
 
     private ExploreMapPresenter presenter;
 
@@ -371,6 +372,16 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
             prevLatitude = getArguments().getDouble("prev_latitude");
             prevLongitude = getArguments().getDouble("prev_longitude");
         }
+
+        setRecentlyCameFromNearbyMap(isCameFromNearbyMap());
+    }
+
+    /**
+     * @return The LatLng from the previous Fragment's map center or (0,0,0) coordinates
+     * if that information is not available/applicable.
+     */
+    public LatLng getPreviousLatLng() {
+        return new LatLng(prevLatitude, prevLongitude, (float)prevZoom);
     }
 
     /**
@@ -381,6 +392,23 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
      **/
     public boolean isCameFromNearbyMap() {
         return prevZoom != 0.0 || prevLatitude != 0.0 || prevLongitude != 0.0;
+    }
+
+    /**
+     * Gets the value that indicates if the user navigated from "Show in Explore" in Nearby and
+     * that the LatLng from Nearby has yet to be searched for map markers.
+     */
+    public boolean recentlyCameFromNearbyMap() {
+        return recentlyCameFromNearbyMap;
+    }
+
+    /**
+     * Sets the value that indicates if the user navigated from "Show in Explore" in Nearby and
+     * that the LatLng from Nearby has yet to be searched for map markers.
+     * @param newValue The value to set.
+     */
+    public void setRecentlyCameFromNearbyMap(boolean newValue) {
+        recentlyCameFromNearbyMap = newValue;
     }
 
     public void loadNearbyMapFromExplore() {
