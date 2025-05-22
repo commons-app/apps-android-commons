@@ -256,7 +256,7 @@
   <string name="upload_problem_exist">この画像には問題があるかもしれません。</string>
   <string name="upload_problem_image_dark">画像が暗すぎます。</string>
   <string name="upload_problem_image_blurry">画像のピントが合っていません。</string>
-  <string name="upload_problem_image_duplicate">コモンズにすでに登録されている画像です。</string>
+  <string name="upload_problem_image_duplicate">コモンズに既に登録されている画像です。</string>
   <string name="upload_problem_different_geolocation">この画像の撮影地点は別の場所です。</string>
   <string name="upload_problem_fbmd">あなた自身の撮影したがぞうに限定してアップロードしてください。他人のFacebookアカウントの画像をアップロードすることはやめてください。</string>
   <string name="upload_problem_do_you_continue">それでもこの画像をアップロードしますか？</string>
