@@ -2014,17 +2014,17 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
                 if (place.exists && place.pic.trim { it <= ' ' }.isEmpty()) {
                     shouldUpdateMarker = true
                 }
-            } else if (displayExists && !displayNeedsPhoto) {
+            } else if (displayExists) {
                 // Exists and all included needs and doesn't needs photo
                 if (place.exists) {
                     shouldUpdateMarker = true
                 }
-            } else if (!displayExists && displayNeedsPhoto) {
+            } else if (displayNeedsPhoto) {
                 // All and only needs photo
                 if (place.pic.trim { it <= ' ' }.isEmpty()) {
                     shouldUpdateMarker = true
                 }
-            } else if (!displayExists && !displayNeedsPhoto) {
+            } else {
                 // all
                 shouldUpdateMarker = true
             }
