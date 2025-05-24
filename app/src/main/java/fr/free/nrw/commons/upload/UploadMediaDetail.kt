@@ -11,17 +11,17 @@ import kotlinx.parcelize.Parcelize
 data class UploadMediaDetail(
     /**
      * The language code ie. "en" or "fr".
-     * @param languageCode The language code ie. "en" or "fr".
+     * @property  languageCode The language code ie. "en" or "fr".
      */
     var languageCode: String? = null,
     /**
      * The description text for the item being uploaded.
-     * @param descriptionText The description text.
+     * @property  descriptionText The description text.
      */
     var descriptionText: String? = "",
     /**
      * The caption text for the item being uploaded.
-     * @param captionText The caption text.
+     * @property  captionText The caption text.
      */
     var captionText: String = "",
 ) : Parcelable {
