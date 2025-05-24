@@ -531,40 +531,38 @@ ${"wd:" + place.wikiDataEntityId}"""
         )
         if (placeBindings != null) {
             for ((item1, label, location, clas) in placeBindings) {
-                if (item1 != null && label != null && clas != null) {
-                    val input = location.value
-                    val pattern = Pattern.compile(
-                        "Point\\(([-+]?[0-9]*\\.?[0-9]+) ([-+]?[0-9]*\\.?[0-9]+)\\)"
-                    )
-                    val matcher = pattern.matcher(input)
+                val input = location.value
+                val pattern = Pattern.compile(
+                    "Point\\(([-+]?[0-9]*\\.?[0-9]+) ([-+]?[0-9]*\\.?[0-9]+)\\)"
+                )
+                val matcher = pattern.matcher(input)
 
-                    if (matcher.find()) {
-                        val longStr = matcher.group(1)
-                        val latStr = matcher.group(2)
-                        val itemUrl = item1.value
-                        val itemName = label.value.replace("&", "&amp;")
-                        val itemLatitude = latStr
-                        val itemLongitude = longStr
-                        val itemClass = clas.value
+                if (matcher.find()) {
+                    val longStr = matcher.group(1)
+                    val latStr = matcher.group(2)
+                    val itemUrl = item1.value
+                    val itemName = label.value.replace("&", "&amp;")
+                    val itemLatitude = latStr
+                    val itemLongitude = longStr
+                    val itemClass = clas.value
 
-                        val formattedItemName =
-                            if (!itemClass.isEmpty())
-                                "$itemName ($itemClass)"
-                            else
-                                itemName
+                    val formattedItemName =
+                        if (!itemClass.isEmpty())
+                            "$itemName ($itemClass)"
+                        else
+                            itemName
 
-                        val kmlEntry = ("""
-        <Placemark>
-            <name>$formattedItemName</name>
-            <description>$itemUrl</description>
-            <Point>
-                <coordinates>$itemLongitude,$itemLatitude</coordinates>
-            </Point>
-        </Placemark>""")
-                        kmlString = kmlString + kmlEntry
-                    } else {
-                        Timber.e("No match found")
-                    }
+                    val kmlEntry = ("""
+    <Placemark>
+        <name>$formattedItemName</name>
+        <description>$itemUrl</description>
+        <Point>
+            <coordinates>$itemLongitude,$itemLatitude</coordinates>
+        </Point>
+    </Placemark>""")
+                    kmlString = kmlString + kmlEntry
+                } else {
+                    Timber.e("No match found")
                 }
             }
         }
