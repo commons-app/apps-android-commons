@@ -129,9 +129,10 @@ interface PageEditInterface {
     ): Observable<Entities>
 
     /**
-     * Get wiki text for provided file names
-     * @param titles : Name of the file
-     * @return Single<MwQueryResult>
+     * Gets the wiki text for the provided file name.
+     *
+     * @param title The title (name) of the file to fetch wiki text for.
+     * @return A Single emitting the wiki query response.
      */
     @GET(MW_API_PREFIX + "action=query&prop=revisions&rvprop=content|timestamp&rvlimit=1&converttitles=")
     fun getWikiText(

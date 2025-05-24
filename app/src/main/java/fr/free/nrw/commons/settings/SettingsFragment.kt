@@ -276,9 +276,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
     }
 
     /**
-     * Asks users to provide location access
-     *
-     * @param activity
+     * Asks users to provide location access.
      */
     private fun createDialogsAndHandleLocationPermissions() {
         inAppCameraLocationPermissionLauncher.launch(arrayOf(permission.ACCESS_FINE_LOCATION))

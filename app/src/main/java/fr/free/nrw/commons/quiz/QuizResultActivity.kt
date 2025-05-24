@@ -93,10 +93,11 @@ class QuizResultActivity : AppCompatActivity() {
     }
 
     /**
-     * Function to call intent to an activity
-     * @param context
-     * @param cls
-     * @param flags
+     * Starts an activity using the provided context, target class, and intent flags.
+     *
+     * @param context The context used to start the activity.
+     * @param cls The target activity class.
+     * @param flags A variable number of intent flags to apply to the Intent.
      */
     companion object {
         fun <T> startActivityWithFlags(context: Context, cls: Class<T>, vararg flags: Int) {

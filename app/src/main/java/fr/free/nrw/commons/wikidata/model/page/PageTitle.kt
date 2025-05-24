@@ -32,8 +32,8 @@ class PageTitle : Parcelable {
      * looking at.
      *
      * Examples:
-     * * [[Manchester]] on enwiki will have a namespace of null
-     * * [[Deutschland]] on dewiki will have a namespace of null
+     * * \[\[Manchester\]\] on enwiki will have a namespace of null
+     * * \[\[Deutschland\]\] on dewiki will have a namespace of null
      * * [[User:Deskana]] on enwiki will have a namespace of "User"
      * * [[Utilisateur:Deskana]] on frwiki will have a namespace of "Utilisateur", even if you got
      * to the page by going to [[User:Deskana]] and having MediaWiki automatically redirect you.

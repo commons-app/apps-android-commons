@@ -30,9 +30,10 @@ class UploadMediaDetailInputFilter : InputFilter {
         patterns.any { it.matcher(source).find() }
 
     /**
-     * Removes any blocklisted characters from the source text.
-     * @param source input text
-     * @return a cleaned character sequence
+     * Removes any blocklisted characters from the input text.
+     *
+     * @param input The input text to be cleaned.
+     * @return A cleaned character sequence with blocklisted patterns removed.
      */
     private fun removeBlocklisted(input: CharSequence): CharSequence {
         var source = input

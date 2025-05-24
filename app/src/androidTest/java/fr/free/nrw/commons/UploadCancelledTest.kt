@@ -49,7 +49,7 @@ class UploadCancelledTest {
     fun setup() {
         try {
             Intents.init()
-        } catch (ex: IllegalStateException) {
+        } catch (_: IllegalStateException) {
         }
         device.unfreezeRotation()
         device.setOrientationNatural()
@@ -65,7 +65,7 @@ class UploadCancelledTest {
     fun teardown() {
         try {
             Intents.release()
-        } catch (ex: IllegalStateException) {
+        } catch (_: IllegalStateException) {
         }
     }
 

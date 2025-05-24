@@ -238,10 +238,10 @@ class NetworkingModule {
         factory.create(BuildConfig.COMMONS_URL)
 
     /**
-     * Add provider for WikidataMediaInterface
-     * It creates a retrofit service for the commons wiki site
-     * @param commonsWikiSite commonsWikiSite
-     * @return WikidataMediaInterface
+     * Provides a Retrofit service for accessing the commons wiki site via [WikidataMediaInterface].
+     *
+     * @param factory The CommonsServiceFactory used to create the Retrofit service.
+     * @return An instance of [WikidataMediaInterface].
      */
     @Provides
     @Singleton

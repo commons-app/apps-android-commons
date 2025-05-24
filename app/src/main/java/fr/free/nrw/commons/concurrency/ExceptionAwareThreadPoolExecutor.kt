@@ -22,9 +22,9 @@ class ExceptionAwareThreadPoolExecutor(
                 if (r.isDone) {
                     r.get()
                 }
-            } catch (e: CancellationException) {
+            } catch (_: CancellationException) {
                 // ignore
-            } catch (e: InterruptedException) {
+            } catch (_: InterruptedException) {
                 // ignore
             } catch (e: ExecutionException) {
                 throwable = e.cause ?: e
