@@ -63,6 +63,7 @@ import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao
 import fr.free.nrw.commons.contributions.ContributionController
 import fr.free.nrw.commons.contributions.MainActivity
 import fr.free.nrw.commons.contributions.MainActivity.ActiveFragment
+import fr.free.nrw.commons.customselector.ui.selector.ImageLoader
 import fr.free.nrw.commons.databinding.FragmentNearbyParentBinding
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment
 import fr.free.nrw.commons.filepicker.FilePicker
@@ -1756,9 +1757,9 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
     override fun animateFABs() {
         if (binding!!.fabPlus.isShown) {
             if (isFABsExpanded) {
-                collapseFABs(isFABsExpanded)
+                collapseFABs(true)
             } else {
-                expandFABs(isFABsExpanded)
+                expandFABs(false)
             }
         }
     }
