@@ -16,7 +16,6 @@ constraintlayout = "1.1.3"
 coordinates2country = "1.8"
 dexcount = "4.0.0"
 githubTripletPlay = "2.7.2"
-httpFluent = "1.3"
 osmdroidAndroid = "6.1.17"
 testCore = "1.4.0"
 coreKtx = "1.9.0"
@@ -40,28 +39,22 @@ leakcanary = "2.10"
 livedataTesting = "1.2.0"
 swipelayout = "1.2.0"
 viewpagerIndicator = "2.4.1.1"
-lifecycleExtensions = "2.2.0"
 lifecycleRuntimeKtx = "2.8.4"
 loggingInterceptor = "4.10.0"
 logbackAndroidClassic = "1.1.1-6"
-materialshowcaseview = "1.2.0"
 material = "1.12.0"
 mockitoCore = "5.6.0"
-mockitoInline = "5.2.0"
 mockitoKotlin = "2.2.0"
 mockk = "1.13.5"
 mockwebserver = "4.10.0"
 multidex = "2.0.1"
 okHttp = "4.10.0"
-okio = "2.2.2"
-orchestrator = "1.4.1"
 paging = "2.1.2"
 photoviewVersion = "2.0.0"
 powermock = "2.0.9"
 preference = "1.2.1"
 recyclerview = "1.2.0-alpha02"
 recyclerviewFastscroll = "2.0.1"
-renderersVersion = "3.3.3"
 retrofit = "2.8.1"
 robolectric = "4.11.1"
 room = "2.6.1"
@@ -90,7 +83,6 @@ androidx-databinding-compiler = { module = "androidx.databinding:databinding-com
 androidx-exifinterface = { module = "androidx.exifinterface:exifinterface", version.ref = "exifinterface" }
 androidx-foundation = { module = "androidx.compose.foundation:foundation" }
 androidx-foundation-layout = { module = "androidx.compose.foundation:foundation-layout" }
-androidx-lifecycle-extensions = { module = "androidx.lifecycle:lifecycle-extensions", version.ref = "lifecycleExtensions" }
 androidx-lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycleRuntimeKtx" }
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
 androidx-runner = { module = "androidx.test:runner", version.ref = "runner" }
@@ -142,9 +134,6 @@ rxandroid = { module = "io.reactivex.rxjava2:rxandroid", version.ref = "rxandroi
 rxjava = { module = "io.reactivex.rxjava2:rxjava", version.ref = "rxjava" }
 rxbinding = { module = "com.jakewharton.rxbinding2:rxbinding", version.ref = "rxbinding" }
 rxbinding-appcompat = { module = "com.jakewharton.rxbinding3:rxbinding-appcompat", version.ref = "rxbindingAppcompat" }
-rxbinding-support-v4 = { module = "com.jakewharton.rxbinding2:rxbinding-support-v4", version.ref = "rxbinding" }
-rxbinding-appcompat-v7 = { module = "com.jakewharton.rxbinding2:rxbinding-appcompat-v7", version.ref = "rxbinding" }
-rxbinding-design = { module = "com.jakewharton.rxbinding2:rxbinding-design", version.ref = "rxbinding" }
 
 # Testing
 androidx-core-testing = { module = "androidx.arch.core:core-testing", version.ref = "coreTesting" }
@@ -152,7 +141,6 @@ androidx-espresso-contrib = { module = "androidx.test.espresso:espresso-contrib"
 androidx-espresso-intents = { module = "androidx.test.espresso:espresso-intents", version.ref = "espresso" }
 androidx-espresso-core = { module = "androidx.test.espresso:espresso-core", version.ref = "espresso" }
 androidx-fragment-testing = { module = "androidx.fragment:fragment-testing", version.ref = "fragmentTesting" }
-androidx-orchestrator = { module = "androidx.test:orchestrator", version.ref = "orchestrator" }
 androidx-uiautomator = { module = "androidx.test.uiautomator:uiautomator", version.ref = "uiautomator" }
 commons-io = { module = "commons-io:commons-io", version.ref = "commonsIo" }
 junit = { module = "junit:junit", version.ref = "junit" }
@@ -167,7 +155,6 @@ soloader = { module = "com.facebook.soloader:soloader", version.ref = "soloader"
 mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
 mockwebserver = { module = "com.squareup.okhttp3:mockwebserver", version.ref = "mockwebserver" }
 mockito-core = { module = "org.mockito:mockito-core", version.ref = "mockitoCore" }
-mockito-inline = { module = "org.mockito:mockito-inline", version.ref = "mockitoInline" }
 mockito-kotlin = { module = "com.nhaarman.mockitokotlin2:mockito-kotlin", version.ref = "mockitoKotlin" }
 powermock-api-mockito = { module = "org.powermock:powermock-api-mockito2", version.ref = "powermock" }
 powermock-module-junit = { module = "org.powermock:powermock-module-junit4", version.ref = "powermock" }
@@ -178,8 +165,6 @@ android-material = { group = "com.google.android.material", name = "material", v
 adapterdelegates4-kotlin-dsl-viewbinding = { module = "com.hannesdorfmann:adapterdelegates4-kotlin-dsl-viewbinding", version.ref = "adapterdelegates" }
 adapterdelegates4-pagination = { module = "com.hannesdorfmann:adapterdelegates4-pagination", version.ref = "adapterdelegates" }
 dexter = { module = "com.karumi:dexter", version.ref = "dexterVersion" }
-materialshowcaseview = { module = "com.github.deano2390:MaterialShowcaseView", version.ref = "materialshowcaseview" }
-renderers = { module = "com.github.pedrovgs:renderers", version.ref = "renderersVersion" }
 recyclerview-fastscroll = { module = "com.simplecityapps:recyclerview-fastscroll", version.ref = "recyclerviewFastscroll" }
 swipelayout-library = { module = "com.daimajia.swipelayout:library", version.ref = "swipelayout" }
 viewpagerindicator-library = { module = "fr.avianey.com.viewpagerindicator:library", version.ref = "viewpagerIndicator" }
@@ -187,7 +172,6 @@ viewpagerindicator-library = { module = "fr.avianey.com.viewpagerindicator:libra
 # Networking libraries
 logging-interceptor = { module = "com.squareup.okhttp3:logging-interceptor", version.ref = "loggingInterceptor" }
 okhttp = { module = "com.squareup.okhttp3:okhttp", version.ref = "okHttp" }
-okhttp-ws = { module = "com.squareup.okhttp3:okhttp-ws", version.ref = "okHttp" }
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
 retrofit-adapter-rxjava = { module = "com.squareup.retrofit2:adapter-rxjava2", version.ref = "retrofit" }
 retrofit-converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "retrofit" }
@@ -196,8 +180,6 @@ retrofit-converter-gson = { module = "com.squareup.retrofit2:converter-gson", ve
 androidx-browser = { module = "androidx.browser:browser", version.ref = "browser" }
 apache-commons-lang3 = { module = "org.apache.commons:commons-lang3", version.ref = "commonsLang3Version" }
 gson = { group = "com.google.code.gson", name = "gson", version.ref = "gson" }
-http-fluent = { module = "in.yuvi:http.fluent", version.ref = "httpFluent" }
-okio = { module = "com.squareup.okio:okio", version.ref = "okio" }
 juanitobananas-androidDmediaUtil = { module = "com.github.juanitobananas:AndroidMediaUtil", version.ref = "androidmediautil" }
 androidx-multidex = { module = "androidx.multidex:multidex", version.ref = "multidex" }
 kotlin-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect", version.ref = "kotlin" }

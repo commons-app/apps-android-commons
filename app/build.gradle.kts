@@ -216,35 +216,27 @@ android {
 
 dependencies {
     // Utils
-    implementation(libs.http.fluent) // TODO("Remove it as not used")
     implementation(libs.gson)
     implementation(libs.okhttp)
     implementation(libs.retrofit)
     implementation(libs.retrofit.converter.gson)
     implementation(libs.retrofit.adapter.rxjava)
-    implementation(libs.okio)
     implementation(libs.rxandroid)
     implementation(libs.rxjava)
     implementation(libs.rxbinding)
     implementation(libs.rxbinding.appcompat)
-    implementation(libs.rxbinding.support.v4) // TODO("Remove it as not used")
-    implementation(libs.rxbinding.appcompat.v7) // TODO("Remove it as not used")
-    implementation(libs.rxbinding.design) // TODO("Remove it as not used")
     implementation(libs.facebook.fresco)
     implementation(libs.apache.commons.lang3)
 
     // UI
     implementation("${libs.viewpagerindicator.library.get()}@aar")
     implementation(libs.photoview)
-    implementation(libs.renderers) // TODO("Remove it as not used")
     implementation(libs.android.sdk)
     implementation(libs.android.plugin.scalebar)
 
     implementation(libs.timber)
-    implementation(libs.materialshowcaseview) // TODO("Remove it as not used")
     implementation(libs.android.material)
     implementation(libs.dexter)
-    implementation(libs.androidx.lifecycle.extensions) // TODO("Remove it as not used")
 
     // Jetpack Compose
     implementation(libs.androidx.core.ktx)
@@ -270,7 +262,6 @@ dependencies {
     testImplementation(libs.androidx.paging.common.ktx)
     implementation(libs.androidx.paging.rxjava2.ktx)
     implementation(libs.androidx.recyclerview)
-    implementation(libs.okhttp.ws)
 
     // Logging
     implementation(libs.acra.dialog)
@@ -292,7 +283,6 @@ dependencies {
 
     //Mocking
     testImplementation(libs.mockito.kotlin)
-    testImplementation(libs.mockito.inline)
     testImplementation(libs.mockito.core)
     testImplementation(libs.powermock.module.junit)
     testImplementation(libs.powermock.api.mockito)
@@ -310,7 +300,7 @@ dependencies {
     testImplementation(libs.androidx.core.testing)
     testImplementation(libs.junit.jupiter.api)
     testRuntimeOnly(libs.junit.jupiter.engine)
-    testImplementation(libs.soloader) // TODO("Remove it as not used")
+    testImplementation(libs.soloader)
     testImplementation(libs.kotlinx.coroutines.test)
     debugImplementation(libs.androidx.fragment.testing)
     testImplementation(libs.commons.io)
@@ -326,7 +316,6 @@ dependencies {
     androidTestImplementation(libs.androidx.annotation)
     androidTestImplementation(libs.mockwebserver)
     androidTestImplementation(libs.androidx.uiautomator)
-    androidTestUtil(libs.androidx.orchestrator)
 
     // Debugging
     debugImplementation(libs.leakcanary.android)
@@ -339,7 +328,7 @@ dependencies {
     implementation(libs.recyclerview.fastscroll)
 
     //swipe_layout
-    implementation(libs.swipelayout.library) // TODO("Remove it as not used")
+    implementation(libs.swipelayout.library)
 
     //Room
     implementation(libs.androidx.room.runtime)
