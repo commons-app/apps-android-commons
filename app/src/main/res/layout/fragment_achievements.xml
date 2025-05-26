@@ -43,7 +43,7 @@
       android:id="@+id/achievement_badge_image"
       android:layout_width="150dp"
       android:layout_height="150dp"
-      android:layout_marginTop="16dp"
+      android:layout_marginTop="100dp"
       android:background="@drawable/badge"
       app:layout_constraintLeft_toLeftOf="parent"
       app:layout_constraintRight_toRightOf="parent"
@@ -263,7 +263,7 @@
       app:layout_constraintTop_toBottomOf="@+id/images_used_tv">
 
       <ProgressBar
-        android:id="@+id/images_used_by_wiki_progress_bar"
+        android:id="@+id/images_used_progressbar"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -362,7 +362,7 @@
       app:layout_constraintTop_toTopOf="parent"
       app:layout_constraintVertical_bias="0.5"
       app:layout_constraintHorizontal_bias="0.5"
-      android:visibility="gone"/>
+      />
 
   </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

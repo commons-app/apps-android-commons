@@ -53,11 +53,26 @@ dependencies {
     implementation 'androidx.compose.ui:ui-tooling-preview'
     androidTestImplementation 'androidx.compose.ui:ui-test-junit4'
 
+    def lifecycle_version = "2.8.7"
+    // ViewModel
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
+    // ViewModel utilities for Compose
+    implementation "androidx.lifecycle:lifecycle-viewmodel-compose:$lifecycle_version"
+
+    // Lifecycles only (without ViewModel or LiveData)
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version"
+    // Lifecycle utilities for Compose
+    implementation "androidx.lifecycle:lifecycle-runtime-compose:$lifecycle_version"
+
+    // Saved state module for ViewModel
+    implementation "androidx.lifecycle:lifecycle-viewmodel-savedstate:$lifecycle_version"
+
+    // Annotation processor
+    kapt "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
     // Jetpack Compose
     def composeBom = platform('androidx.compose:compose-bom:2024.11.00')
 
     implementation "androidx.activity:activity-compose:1.9.3"
-    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.8.4"
     implementation (composeBom)
     implementation "androidx.compose.runtime:runtime"
     implementation "androidx.compose.ui:ui"

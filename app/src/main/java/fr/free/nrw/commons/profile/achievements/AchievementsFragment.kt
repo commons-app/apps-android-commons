@@ -1,15 +1,16 @@
 package fr.free.nrw.commons.profile.achievements
 
+import android.annotation.SuppressLint
 import android.net.Uri
 import android.os.Bundle
-import android.util.DisplayMetrics
+import android.view.ContextThemeWrapper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewTreeObserver
 import android.widget.Toast
-import androidx.appcompat.view.ContextThemeWrapper
-import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat
 import com.google.android.material.badge.BadgeDrawable
 import com.google.android.material.badge.BadgeUtils
@@ -22,21 +23,20 @@ import fr.free.nrw.commons.di.CommonsDaggerSupportFragment
 import fr.free.nrw.commons.kvstore.BasicKvStore
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient
 import fr.free.nrw.commons.profile.ProfileActivity
-import fr.free.nrw.commons.profile.achievements.LevelController.LevelInfo.Companion.from
 import fr.free.nrw.commons.utils.ConfigUtils.isBetaFlavour
 import fr.free.nrw.commons.utils.DialogUtil.showAlertDialog
 import fr.free.nrw.commons.utils.ViewUtil.showDismissibleSnackBar
 import fr.free.nrw.commons.utils.ViewUtil.showLongToast
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
-import org.apache.commons.lang3.StringUtils
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 import timber.log.Timber
-import java.util.Objects
 import javax.inject.Inject
 
 class AchievementsFragment : CommonsDaggerSupportFragment(){
-    private lateinit var levelInfo: LevelController.LevelInfo
 
+    @Inject
+    lateinit var viewModelFactory: AchievementViewModelFactory
+    lateinit var viewModel: AchievementViewModel
     @Inject
     lateinit var sessionManager: SessionManager
 
@@ -45,11 +45,8 @@ class AchievementsFragment : CommonsDaggerSupportFragment(){
 
     private var _binding: FragmentAchievementsBinding? = null
     private val binding get() = _binding!!
-    // To keep track of the number of wiki edits made by a user
-    private var numberOfEdits: Int = 0
 
     private var userName: String? = null
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -64,6 +61,8 @@ class AchievementsFragment : CommonsDaggerSupportFragment(){
     ): View {
         _binding = FragmentAchievementsBinding.inflate(inflater, container, false)
 
+        viewModel = ViewModelProvider(
+            this@AchievementsFragment, viewModelFactory)[AchievementViewModel::class.java]
         binding.achievementInfo.setOnClickListener { showInfoDialog() }
         binding.imagesUploadInfoIcon.setOnClickListener { showUploadInfo() }
         binding.imagesRevertedInfoIcon.setOnClickListener { showRevertedInfo() }
@@ -73,19 +72,15 @@ class AchievementsFragment : CommonsDaggerSupportFragment(){
         binding.thanksImageIcon.setOnClickListener { showThanksReceivedInfo() }
         binding.qualityImageIcon.setOnClickListener { showQualityImagesInfo() }
 
-        // DisplayMetrics used to fetch the size of the screen
-        val displayMetrics = DisplayMetrics()
-        requireActivity().windowManager.defaultDisplay.getMetrics(displayMetrics)
-        val height = displayMetrics.heightPixels
-        val width = displayMetrics.widthPixels
-
-        // Used for the setting the size of imageView at runtime
-        // TODO REMOVE
-        val params = binding.achievementBadgeImage.layoutParams as ConstraintLayout.LayoutParams
-        params.height = (height * BADGE_IMAGE_HEIGHT_RATIO).toInt()
-        params.width = (width * BADGE_IMAGE_WIDTH_RATIO).toInt()
-        binding.achievementBadgeImage.requestLayout()
-        binding.progressBar.visibility = View.VISIBLE
+        lifecycleScope.launch {
+            viewModel.loading.collectLatest {
+                if (it){
+                    binding.progressBar.visibility = View.VISIBLE
+                } else {
+                    binding.progressBar.visibility = View.GONE
+                }
+            }
+        }
 
         setHasOptionsMenu(true)
         if (sessionManager.userName == null || sessionManager.userName == userName) {
@@ -100,8 +95,6 @@ class AchievementsFragment : CommonsDaggerSupportFragment(){
             return binding.root
         }
 
-
-        setWikidataEditCount()
         setAchievements()
         return binding.root
 
@@ -145,72 +138,56 @@ class AchievementsFragment : CommonsDaggerSupportFragment(){
      * which then calls parseJson when results are fetched
      */
 
+    @SuppressLint("SetTextI18n")
     private fun setAchievements() {
-        binding.progressBar.visibility = View.VISIBLE
         if (checkAccount()) {
-            try {
-                compositeDisposable.add(
-                    okHttpJsonApiClient
-                        .getAchievements(userName ?: return)
-                        .subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(
-                            { response ->
-                                if (response != null) {
-                                    setUploadCount(Achievements.from(response))
-                                } else {
-                                    Timber.d("Success")
-                                    // TODO Create a Method to Hide all the Statistics
-//                                    binding.layoutImageReverts.visibility = View.INVISIBLE
-//                                    binding.achievementBadgeImage.visibility = View.INVISIBLE
-                                    // If the number of edits made by the user are more than 150,000
-                                    // in some cases such high number of wiki edit counts cause the
-                                    // achievements calculator to fail in some cases, for more details
-                                    // refer Issue: #3295
-                                    if (numberOfEdits <= 150_000) {
-                                        showSnackBarWithRetry(false)
-                                    } else {
-                                        showSnackBarWithRetry(true)
-                                    }
-                                }
-                            },
-                            { throwable ->
-                                Timber.e(throwable, "Fetching achievements statistics failed")
-                                if (numberOfEdits <= 150_000) {
-                                    showSnackBarWithRetry(false)
-                                } else {
-                                    showSnackBarWithRetry(true)
-                                }
-                            }
+            viewModel.getUserAchievements(username = userName.toString())
+
+            lifecycleScope.launch {
+                viewModel.achievements.collect{
+
+                    binding.achievementLevel.text = getString(R.string.level,it.level.levelNumber)
+                    val store = BasicKvStore(requireContext(), userName)
+                    store.putString("userAchievementsLevel", it.level.levelNumber.toString())
+
+                    binding.achievementBadgeImage.setImageDrawable(
+                        VectorDrawableCompat.create(
+                            resources, R.drawable.badge,
+                            ContextThemeWrapper(activity, it.level.levelStyle).theme
                         )
-                )
-            } catch (e: Exception) {
-                Timber.d("Exception: ${e.message}")
+                    )
+                    binding.achievementBadgeText.text = it.level.levelNumber.toString()
+
+                    // TODO(use String Format)
+                    binding.imageUploadedTVCount.text =
+                        it.imagesUploadedCount.toString() + "/" + it.level.maxUploadCount
+                    binding.imagesUploadedProgressbar.progress =
+                        100 * it.imagesUploadedCount / it.level.maxUploadCount
+
+                    // Revert
+                    binding.imageRevertTVCount.text = it.revertedCount.toString() + "%"
+                    binding.imageRevertsProgressbar.progress = it.revertedCount
+                    binding.imagesRevertLimitText.text =
+                        resources.getString(R.string.achievements_revert_limit_message) + it.level.minNonRevertPercentage + "%"
+
+                    // Images Used
+                    binding.imagesUsedProgressbar.progress = (100 * it.uniqueImagesCount) / it.level.maxUniqueImages
+                    binding.imagesUsedCount.text = (it.uniqueImagesCount.toString() + "/"
+                            + it.level.maxUniqueImages)
+
+                    // Thanks Received Badge
+                    showBadgesWithCount(view = binding.thanksImageIcon, count =  it.thanksReceivedCount)
+
+                    // Featured Images Badge
+                    showBadgesWithCount(view = binding.featuredImageIcon, count =  it.featuredImagesCount)
+
+                    // Quality Images Badge
+                    showBadgesWithCount(view = binding.qualityImageIcon, count =  it.qualityImagesCount)
+
+                    showBadgesWithCount(view = binding.wikidataEditsIcon, count = it.imagesEditedBySomeoneElseCount)
+                }
             }
         }
-    }
-
-    /**
-     * To call the API to fetch the count of wiki data edits
-     * in the form of JavaRx Single object<JSONobject>
-    </JSONobject> */
-
-    private fun setWikidataEditCount() {
-        if (StringUtils.isBlank(userName)) {
-            return
-        }
-        compositeDisposable.add(
-            okHttpJsonApiClient
-                .getWikidataEdits(userName)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ edits: Int ->
-                    numberOfEdits = edits
-                    showBadgesWithCount(view = binding.wikidataEditsIcon, count = edits)
-                }, { e: Throwable ->
-                    Timber.e("Error:$e")
-                })
-        )
     }
 
     /**
@@ -253,49 +230,6 @@ class AchievementsFragment : CommonsDaggerSupportFragment(){
         binding.progressBar.visibility = View.GONE
     }
 
-    /**
-     * used to the count of images uploaded by user
-     */
-
-    private fun setUploadCount(achievements: Achievements) {
-        if (checkAccount()) {
-            compositeDisposable.add(okHttpJsonApiClient
-                .getUploadCount(Objects.requireNonNull<String>(userName))
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(
-                    { uploadCount: Int? ->
-                        setAchievementsUploadCount(
-                            achievements,
-                            uploadCount ?:0
-                        )
-                    },
-                    { t: Throwable? ->
-                        Timber.e(t, "Fetching upload count failed")
-                        onError()
-                    }
-                ))
-        }
-    }
-
-    /**
-     * used to set achievements upload count and call hideProgressbar
-     * @param uploadCount
-     */
-    private fun setAchievementsUploadCount(achievements: Achievements, uploadCount: Int) {
-        // Create a new instance of Achievements with updated imagesUploaded
-        val updatedAchievements = Achievements(
-            achievements.uniqueUsedImages,
-            achievements.articlesUsingImages,
-            achievements.thanksReceived,
-            achievements.featuredImages,
-            achievements.qualityImages,
-            uploadCount,  // Update imagesUploaded with new value
-            achievements.revertCount
-        )
-
-        hideProgressBar(updatedAchievements)
-    }
 
     /**
      * used to the uploaded images progressbar
@@ -306,9 +240,6 @@ class AchievementsFragment : CommonsDaggerSupportFragment(){
             setZeroAchievements()
         } else {
             binding.imagesUploadedProgressbar.visibility = View.VISIBLE
-            binding.imagesUploadedProgressbar.progress =
-                100 * uploadCount / levelInfo.maxUploadCount
-            binding.imageUploadedTVCount.text = uploadCount.toString() + "/" + levelInfo.maxUploadCount
         }
     }
 
@@ -325,7 +256,7 @@ class AchievementsFragment : CommonsDaggerSupportFragment(){
             getString(R.string.ok),
             {}
         )
-
+        binding.layout.visibility = View.INVISIBLE
 //        binding.imagesUploadedProgressbar.setVisibility(View.INVISIBLE);
 //        binding.imageRevertsProgressbar.setVisibility(View.INVISIBLE);
 //        binding.imagesUsedByWikiProgressBar.setVisibility(View.INVISIBLE);
@@ -333,52 +264,6 @@ class AchievementsFragment : CommonsDaggerSupportFragment(){
         binding.imagesUsedCount.setText(R.string.no_image)
         binding.imagesRevertedText.setText(R.string.no_image_reverted)
         binding.imagesUploadTextParam.setText(R.string.no_image_uploaded)
-    }
-
-    /**
-     * used to set the non revert image percentage
-     * @param notRevertPercentage
-     */
-    private fun setImageRevertPercentage(notRevertPercentage: Int) {
-        binding.imageRevertsProgressbar.visibility = View.VISIBLE
-        binding.imageRevertsProgressbar.progress = notRevertPercentage
-        val revertPercentage = notRevertPercentage.toString()
-        binding.imageRevertTVCount.text = "$revertPercentage%"
-        binding.imagesRevertLimitText.text =
-            resources.getString(R.string.achievements_revert_limit_message) + levelInfo.minNonRevertPercentage + "%"
-    }
-
-    /**
-     * Used the inflate the fetched statistics of the images uploaded by user
-     * and assign badge and level. Also stores the achievements level of the user in BasicKvStore to display in menu
-     * @param achievements
-     */
-    private fun inflateAchievements(achievements: Achievements) {
-
-        // Thanks Received Badge
-        showBadgesWithCount(view = binding.thanksImageIcon, count =  achievements.thanksReceived)
-
-        // Featured Images Badge
-        showBadgesWithCount(view = binding.featuredImageIcon, count =  achievements.featuredImages)
-
-        // Quality Images Badge
-        showBadgesWithCount(view = binding.qualityImageIcon, count =  achievements.qualityImages)
-
-        binding.imagesUsedByWikiProgressBar.progress =
-            100 * achievements.uniqueUsedImages / levelInfo.maxUniqueImages
-        binding.imagesUsedCount.text = (achievements.uniqueUsedImages.toString() + "/"
-                + levelInfo.maxUniqueImages)
-
-        binding.achievementLevel.text = getString(R.string.level,levelInfo.levelNumber)
-        binding.achievementBadgeImage.setImageDrawable(
-            VectorDrawableCompat.create(
-                resources, R.drawable.badge,
-                ContextThemeWrapper(activity, levelInfo.levelStyle).theme
-            )
-        )
-        binding.achievementBadgeText.text = levelInfo.levelNumber.toString()
-        val store = BasicKvStore(requireContext(), userName)
-        store.putString("userAchievementsLevel", levelInfo.levelNumber.toString())
     }
 
     /**
@@ -425,22 +310,6 @@ class AchievementsFragment : CommonsDaggerSupportFragment(){
         })
     }
 
-    /**
-     * to hide progressbar
-     */
-    private fun hideProgressBar(achievements: Achievements) {
-        if (binding.progressBar != null) {
-            levelInfo = from(
-                achievements.imagesUploaded,
-                achievements.uniqueUsedImages,
-                achievements.notRevertPercentage
-            )
-            inflateAchievements(achievements)
-            setUploadProgress(achievements.imagesUploaded)
-            setImageRevertPercentage(achievements.notRevertPercentage)
-            binding.progressBar.visibility = View.GONE
-        }
-    }
 
     fun showUploadInfo() {
         launchAlertWithHelpLink(
@@ -546,9 +415,6 @@ class AchievementsFragment : CommonsDaggerSupportFragment(){
 
 
     companion object{
-        private const val BADGE_IMAGE_WIDTH_RATIO = 0.4
-        private const val BADGE_IMAGE_HEIGHT_RATIO = 0.3
-
         /**
          * Help link URLs
          */
