@@ -13,6 +13,7 @@
 * Hhaboh162002
 * Kassem7899
 * LaMagiaaa
+* Lolekek
 * Meno25
 * Mido
 * Monrokhoury
@@ -853,6 +854,7 @@
   <string name="talk">نقاش</string>
   <string name="write_something_about_the_item">اكتب شيئًا عن العنصر \'%1$s\'. سيكون مرئيًا للعامة.</string>
   <string name="does_not_exist_anymore_no_picture_can_ever_be_taken_of_it">\'%1$s\' لم يعد موجودًا، ولا يمكن التقاط صورة له أبدًا.</string>
+  <string name="is_at_a_different_place_wikidata">\'%1$s\' في مكان آخر.</string>
   <string name="is_at_a_different_place_please_specify_the_correct_place_below_if_possible_tell_us_the_correct_latitude_longitude">\'%1$s\' موجود في مكان مختلف. يرجى تحديد المكان الصحيح أدناه، وإذا أمكن، اكتب خط العرض وخط الطول الصحيحين.</string>
   <string name="other_problem_or_information_please_explain_below">مشكلة أو معلومات أخرى (يرجى التوضيح أدناه).</string>
   <string name="feedback_destination_note">سيتم نشر تعليقاتك على صفحة الويكي التالية:  &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Mobile_app/Feedback\"&gt;Commons:Mobile app/Feedback&lt;/a&gt;</string>
