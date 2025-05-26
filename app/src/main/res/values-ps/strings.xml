@@ -143,7 +143,9 @@
   <string name="title_activity_category_details">وېشنيزه</string>
   <string name="title_activity_review">ملگرو بياکتنه</string>
   <string name="menu_about">په اړه</string>
-  <string name="about_privacy_policy" fuzzy="true">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;د پټنتيا تگلاره&lt;/a&gt;</string>
+  <string name="about_license">د ويکي‌رسنۍ خونديځ کاريال يو پرانيستې سرچينې کاريال دی چې د ويکي‌رسنۍ ټولنې د بسپنه ورکوونکو او خپل‌خوښو کارنانو له خوا جوړ شوی او ساتل کېږي. د ويکي‌رسنۍ بنسټ د دې کاريال په جوړولو، پراختيا او ساتنه کې ښکېل نه دی.</string>
+  <string name="about_improve">د بگ راپور او وړانديزونو لپاره يوه &lt;a href=\"%1$s\"&gt;گيټ هاب ستونزه&lt;/a&gt; جوړه کړئ.</string>
+  <string name="about_privacy_policy">د پټنتيا تگلار</string>
   <string name="title_activity_about">په اړه</string>
   <string name="menu_feedback">غبرگون لېږنه (برېښليک له لارې)</string>
   <string name="no_email_client">هيڅ برېښليک سرچينه نه ده ځای پرځای شوې</string>
@@ -161,13 +163,36 @@
   <string name="license_name_cc_by_sa">ځانگړي کونگ-ورته وېشنه ۳.۰</string>
   <string name="license_name_cc_by">ځانگړي کونگ ۳.۰</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
+  <string name="tutorial_1_subtext">ستاسو انځورونه د نړۍ په گوټ گوټ کې خلکو ته زده کړه ورکوي!</string>
+  <string name="tutorial_2_text">مهرباني وکړئ هغه انځورونه راپورته کړئ چې په بشپړ ډول تاسو اخيستي يا جوړ کړې وي:</string>
+  <string name="tutorial_2_subtext_1">طبيعي څيزونه (گلان، څاروي، غرونه)</string>
+  <string name="tutorial_2_subtext_2">گټور څيزونه (بايسيکلونه، اورگډو تمځايونه)</string>
+  <string name="tutorial_2_subtext_3">نوميالي وگړي (ستاسو ښاروال، اولمپيک لوبغاړی چې تاسو ورسره وليدل)</string>
+  <string name="tutorial_3_text">مهرباني وکړئ مه يې راپورته کوئ:</string>
+  <string name="tutorial_3_subtext_1">د خپلو ملگرو ځان‌انځورنه او انځورونه</string>
+  <string name="tutorial_3_subtext_2">هغه انځورنه چې تاسو له اينټرنېټ څخه راکښته کړې وي</string>
+  <string name="tutorial_3_subtext_3">د ملکيتي کاريالونو سکرين‌شاټونه</string>
+  <string name="tutorial_4_text">د پورته کولو بېلگه:</string>
+  <string name="tutorial_4_subtext_1">سرليک: سيډني اوپېرا هاوس</string>
+  <string name="tutorial_4_subtext_2">څرگنداوی: د خليج له خوا د سيډني اوپېرا هاوس ليدنه</string>
+  <string name="tutorial_4_subtext_3">وېشنيزې: له لوېديځ څخه د سېډني اوپېرا هاوس ، د سېډني اوپېرا هاوس لرليد</string>
+  <string name="welcome_wikipedia_text">خپل انځورونه شريک کړئ. د ويکيپېډيا ليکنو ته ژوند ورکولو کې مرسته وکړئ!</string>
+  <string name="welcome_wikipedia_subtext">په ويکيپېډيا کې دا انځورونه له ويکيمېډيا خونديځ نه اخيستل شوي دي.</string>
+  <string name="welcome_copyright_text">ستاسو انځورونه د نړۍ په گوټ گوټ کې خلکو ته زده کړه ورکوي!</string>
+  <string name="welcome_copyright_subtext">له اينټرنېته د لمېس رېښتو لرونکو موادو او د پوسټرونو، کتاب پوښونو او نورو انځورنو د خپرلو څخه ډډه وکړئ.</string>
+  <string name="welcome_final_text">ستا په اند ته پوه شوې؟</string>
   <string name="welcome_final_button_text">هو</string>
+  <string name="welcome_help_button_text">نور مالومات</string>
   <string name="detail_panel_cats_label">وېشنيزې</string>
   <string name="detail_panel_cats_loading">رابرسېرېږي...</string>
   <string name="detail_panel_cats_none">هېڅ هم نه دی ټاکل شوی</string>
+  <string name="detail_caption_empty">هيڅ نيونگ نشته</string>
   <string name="detail_description_empty">څرگندونه نشته</string>
+  <string name="detail_discussion_empty">هيڅ شننه نشته</string>
   <string name="detail_license_empty">نامعلوم جواز</string>
   <string name="menu_refresh">تازه کول</string>
+  <string name="storage_permission_title">د زېرمه کولو د پرېښولي غوښتنه کول</string>
+  <string name="read_storage_permission_rationale">اړينه پرېښولی: بهرنۍ زېرمه ولولئ. کاريال ستاسو انځورتونه ته پرته له دې لاسرسی نشي موندلی.</string>
   <string name="ok">ښه</string>
   <string name="warning">گواښنه</string>
   <string name="yes">هو</string>
