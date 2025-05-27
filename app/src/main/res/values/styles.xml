@@ -1,6 +1,6 @@
 <resources>
 
-    <style name="DarkAppTheme" parent="Theme.AppCompat.NoActionBar">
+    <style name="DarkAppTheme" parent="Theme.MaterialComponents.NoActionBar.Bridge">
         <item name="contributionsListBackground">@color/contributionListDarkBackground</item>
         <item name="tabBackground">@color/contributionListDarkBackground</item>
         <item name="tabIndicatorColor">@color/white</item>
@@ -20,6 +20,7 @@
         <item name="reviewHeading">@color/white</item>
         <item name="aboutIconsColor">@color/white</item>
         <item name="caption_description_text_color">@color/white</item>
+        <item name="android:statusBarColor">@color/main_background_dark</item>
 
         <item name="semitransparentText">@color/commons_app_blue_dark</item>
         <item name="subBackground">@color/sub_background_dark</item>
@@ -62,7 +63,7 @@
         <item name="android:splitMotionEvents">false</item>
     </style>
 
-    <style name="LightAppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="LightAppTheme" parent="Theme.MaterialComponents.Light.NoActionBar.Bridge">
         <item name="contributionsListBackground">@color/white</item>
         <item name="tabBackground">@color/card_light_grey</item>
         <item name="tabIndicatorColor">@color/primaryDarkColor</item>
@@ -73,6 +74,7 @@
         <item name="drawerHeaderBackground">@color/drawerHeader_background_light</item>
         <item name="tutorialBackground">@color/tutorial_background_light</item>
         <item name="icon">@color/secondaryTextColor</item>
+        <item name="colorPrimary">@color/primaryDarkColor</item>
         <item name="colorPrimaryDark">@color/primaryDarkColor</item>
         <item name="colorAccent">@color/primaryColor</item>
         <item name="colorButtonNormal">@color/primaryColor</item>

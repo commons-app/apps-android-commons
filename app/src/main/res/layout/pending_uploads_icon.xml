@@ -14,10 +14,10 @@
       android:id="@+id/pending_uploads_image_view"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:visibility="gone"
       android:layout_marginEnd="@dimen/activity_margin_horizontal"
       android:layout_marginRight="@dimen/activity_margin_horizontal"
       android:gravity="center"
+      android:visibility="visible"
       app:srcCompat="?attr/upload_icon_drawable" />
 
     <TextView

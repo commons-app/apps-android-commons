@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.test.core.app.ApplicationProvider
-import com.nhaarman.mockitokotlin2.times
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.OkHttpConnectionFactory
 import fr.free.nrw.commons.R
@@ -63,6 +62,7 @@ class UploadCategoriesFragmentUnitTests {
         OkHttpConnectionFactory.CLIENT = createTestClient()
         val activity = Robolectric.buildActivity(UploadActivity::class.java).create().get()
         fragment = UploadCategoriesFragment()
+        fragment.callback = callback
         fragmentManager = activity.supportFragmentManager
         val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
         fragmentTransaction.add(fragment, null)
@@ -184,14 +184,14 @@ class UploadCategoriesFragmentUnitTests {
     @Throws(Exception::class)
     fun testGetExistingCategories() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
-        fragment.existingCategories
+        fragment.getExistingCategories()
     }
 
     @Test
     @Throws(Exception::class)
     fun testGetFragmentContext() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
-        fragment.fragmentContext
+        fragment.getFragmentContext()
     }
 
     @Test

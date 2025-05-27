@@ -8,6 +8,7 @@ import androidx.test.core.app.ApplicationProvider
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.facebook.soloader.SoLoader
 import fr.free.nrw.commons.Media
+import fr.free.nrw.commons.MediaDataExtractor
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.TestUtility.setFinalStatic
@@ -47,6 +48,9 @@ class ContributionViewHolderUnitTests {
     private lateinit var mediaClient: MediaClient
 
     @Mock
+    private lateinit var mediaDataExtractor: MediaDataExtractor
+
+    @Mock
     private lateinit var uri: Uri
 
     @Mock
@@ -66,8 +70,9 @@ class ContributionViewHolderUnitTests {
         SoLoader.setInTestMode()
         Fresco.initialize(ApplicationProvider.getApplicationContext())
         activity = Robolectric.buildActivity(ProfileActivity::class.java).create().get()
+        compositeDisposable = CompositeDisposable()
         parent = LayoutInflater.from(activity).inflate(R.layout.layout_contribution, null)
-        contributionViewHolder = ContributionViewHolder(parent, callback, mediaClient)
+        contributionViewHolder = ContributionViewHolder(parent, callback, compositeDisposable, mediaClient, mediaDataExtractor)
 
         bindind = LayoutContributionBinding.bind(parent)
 
@@ -115,11 +120,10 @@ class ContributionViewHolderUnitTests {
     @Throws(Exception::class)
     fun testDisplayWikipediaButton() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
-        val method: Method =
-            ContributionViewHolder::class.java.getDeclaredMethod(
-                "displayWikipediaButton",
-                Boolean::class.javaObjectType,
-            )
+        val method: Method = ContributionViewHolder::class.java.getDeclaredMethod(
+            "displayWikipediaButton",
+            Boolean::class.javaPrimitiveType
+        )
         method.isAccessible = true
         method.invoke(contributionViewHolder, false)
     }

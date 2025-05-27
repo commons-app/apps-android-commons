@@ -8,7 +8,8 @@ import fr.free.nrw.commons.R
 import fr.free.nrw.commons.auth.csrf.InvalidLoginTokenException
 import fr.free.nrw.commons.category.CategoryEditHelper
 import fr.free.nrw.commons.category.CategoryItem
-import fr.free.nrw.commons.di.CommonsApplicationModule
+import fr.free.nrw.commons.di.CommonsApplicationModule.Companion.IO_THREAD
+import fr.free.nrw.commons.di.CommonsApplicationModule.Companion.MAIN_THREAD
 import fr.free.nrw.commons.repository.UploadRepository
 import fr.free.nrw.commons.upload.depicts.proxy
 import io.reactivex.Observable
@@ -30,8 +31,8 @@ class CategoriesPresenter
     @Inject
     constructor(
         private val repository: UploadRepository,
-        @param:Named(CommonsApplicationModule.IO_THREAD) private val ioScheduler: Scheduler,
-        @param:Named(CommonsApplicationModule.MAIN_THREAD) private val mainThreadScheduler: Scheduler,
+        @param:Named(IO_THREAD) private val ioScheduler: Scheduler,
+        @param:Named(MAIN_THREAD) private val mainThreadScheduler: Scheduler,
     ) : CategoriesContract.UserActionListener {
         companion object {
             private val DUMMY: CategoriesContract.View = proxy()
@@ -173,7 +174,7 @@ class CategoriesPresenter
         ) {
             this.view = view
             this.media = media
-            repository.setSelectedExistingCategories(view.existingCategories)
+            repository.setSelectedExistingCategories(view.getExistingCategories() ?: emptyList())
             compositeDisposable.add(
                 searchTerms
                     .observeOn(mainThreadScheduler)
@@ -222,11 +223,11 @@ class CategoriesPresenter
                 repository.getSelectedCategories().isNotEmpty()
                         ||
                 (
-                view.existingCategories != null
+                view.getExistingCategories() != null
                         &&
                 repository.getSelectedExistingCategories().size
                         !=
-                view.existingCategories.size
+                view.getExistingCategories()?.size
                 )
             ) {
                 val selectedCategories: MutableList<String> =
@@ -242,7 +243,7 @@ class CategoriesPresenter
                         compositeDisposable.add(
                             categoryEditHelper
                                 .makeCategoryEdit(
-                                    view.fragmentContext,
+                                    view.getFragmentContext(),
                                     media,
                                     selectedCategories,
                                     wikiText,

@@ -66,6 +66,7 @@ class QuizActivity : AppCompatActivity() {
         AlertDialog.Builder(this)
             .setTitle(getString(R.string.warning))
             .setMessage(getString(R.string.quiz_back_button))
+            .setCancelable(false)
             .setPositiveButton(R.string.continue_message) { dialog, _ ->
                 val intent = Intent(this, QuizResultActivity::class.java)
                 dialog.dismiss()
@@ -137,6 +138,8 @@ class QuizActivity : AppCompatActivity() {
         AlertDialog.Builder(this)
             .setTitle(title)
             .setMessage(message)
+            .setCancelable(false)
+            .setNegativeButton(R.string.cancel){_,_ -> }
             .setPositiveButton(R.string.continue_message) { dialog, _ ->
                 questionIndex++
                 if (questionIndex == quiz.size) {

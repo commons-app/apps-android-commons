@@ -138,7 +138,7 @@
   <string name="statistics_thanks">Mercejaments recebuts</string>
   <string name="title_app_shortcut_setting">Paramètres</string>
   <string name="theme_default_name" fuzzy="true">Per defaut</string>
-  <string name="theme_dark_name">Fosc</string>
+  <string name="theme_dark_name">Escur</string>
   <string name="theme_light_name">Clar</string>
   <string name="send_thanks_to_author">Mercejar l\'utilizator</string>
 </resources>

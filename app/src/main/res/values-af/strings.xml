@@ -299,7 +299,7 @@
   <string name="statistics_thanks">Dankie ontvang</string>
   <string name="statistics_featured">Voorgestelde beelde</string>
   <string name="statistics_wikidata_edits">Beelde via \"Plekke in die buurt\"</string>
-  <string name="level">Vlak</string>
+  <string name="level" fuzzy="true">Vlak</string>
   <string name="images_uploaded">Beelde opgelaai</string>
   <string name="image_reverts">Beelde nie teruggestel nie</string>
   <string name="images_used_by_wiki">Beelde gebruik</string>

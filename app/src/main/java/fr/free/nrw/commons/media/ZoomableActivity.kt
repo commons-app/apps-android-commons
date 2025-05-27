@@ -196,6 +196,7 @@ class ZoomableActivity : BaseActivity() {
         val dialog = Dialog(this)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setContentView(R.layout.full_screen_mode_info_dialog)
+        dialog.setCancelable(false)
         (dialog.findViewById(R.id.btn_ok) as Button).setOnClickListener { dialog.dismiss() }
         dialog.show()
     }
@@ -271,7 +272,7 @@ class ZoomableActivity : BaseActivity() {
      * Handles down swipe action
      */
     private fun onDownSwiped() {
-        if (binding.zoomable.zoomableController?.isIdentity == false) {
+        if (!binding.zoomable.getZoomableController().isIdentity()) {
             return
         }
 
@@ -341,7 +342,7 @@ class ZoomableActivity : BaseActivity() {
      * Handles up swipe action
      */
     private fun onUpSwiped() {
-        if (binding.zoomable.zoomableController?.isIdentity == false) {
+        if (!binding.zoomable.getZoomableController().isIdentity()) {
             return
         }
 
@@ -414,7 +415,7 @@ class ZoomableActivity : BaseActivity() {
      * Handles right swipe action
      */
     private fun onRightSwiped(showAlreadyActionedImages: Boolean) {
-        if (binding.zoomable.zoomableController?.isIdentity == false) {
+        if (!binding.zoomable.getZoomableController().isIdentity()) {
             return
         }
 
@@ -451,7 +452,7 @@ class ZoomableActivity : BaseActivity() {
      * Handles left swipe action
      */
     private fun onLeftSwiped(showAlreadyActionedImages: Boolean) {
-        if (binding.zoomable.zoomableController?.isIdentity == false) {
+        if (!binding.zoomable.getZoomableController().isIdentity()) {
             return
         }
 

@@ -51,7 +51,7 @@
   <string name="upload_failed_notification_title" fuzzy="true"> %1$s उर्ध्वभरण असफल भयो</string>
   <string name="upload_failed_notification_subtitle">हेर्नको लागि ट्याप गर्नुहोस्</string>
   <string name="upload_paused_notification_subtitle">हेर्नको लागि ट्याप गर्नुहोस्</string>
-  <string name="title_activity_contributions">मेरा हालैका उर्ध्वभरणहरू</string>
+  <string name="title_activity_contributions">मेरा वर्तमानका उर्ध्वभरणहरू</string>
   <string name="contribution_state_queued">लाममा राखियो</string>
   <string name="contribution_state_failed">असफल भयो</string>
   <string name="contribution_state_in_progress">%1$d%% पूरा भयो</string>
@@ -217,7 +217,7 @@
   <string name="statistics">तथ्याङ्कहरू</string>
   <string name="statistics_thanks">धन्यवाद प्राप्त भयाे</string>
   <string name="statistics_featured">विशेष तस्वीरहरू</string>
-  <string name="level">स्तर</string>
+  <string name="level" fuzzy="true">स्तर</string>
   <string name="images_used_by_wiki">प्रयाेग भएका तस्वीरहरू</string>
   <string name="notifications_channel_name_all">कमन्स सूचना</string>
   <string name="contributions_fragment">योगदानहरू</string>

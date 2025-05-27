@@ -66,7 +66,7 @@
   <string name="upload_progress_notification_title_start">%s ಅಪ್ಲೋಡ್ ಸುರು ಆವೊಂದುಂಡು</string>
   <string name="upload_progress_notification_title_in_progress">%1$s ಅಪ್ಲೋಡ್ ಆವೊಂದುಂಡು</string>
   <string name="upload_progress_notification_title_finishing">%1$s ಅಪ್ಲೋಡ್ ಕೈದ್ ಆವೊಂದುಂಡು.</string>
-  <string name="upload_failed_notification_title" fuzzy="true">%1$s ಅಪ್ಲೋಡ್ ಸರಿ ಆತಿಜಿ</string>
+  <string name="upload_failed_notification_title">%1$s ಅಪ್ಲೋಡ್ ಆತಿಜಿ</string>
   <string name="upload_failed_notification_subtitle">ತುಯಾರ ಮೆಲ್ಲ ಒತ್ತುಲೆ</string>
   <string name="title_activity_contributions">ಎನ್ನ ದಿಂಜಯೀನಾ ವಿಚಾರೊಳು</string>
   <string name="contribution_state_queued">ದಿಂಜೊಂತುಂಡು</string>
@@ -158,7 +158,7 @@
   <string name="storage_permission_title">ಶೇಖರಣ ಅನುಮತಿ ಕೇಣುನು</string>
   <string name="read_storage_permission_rationale">ಅಗತ್ಯ ಇಪ್ಪುನ ಅನುಮತಿ: ಬಾಹ್ಯ ಸಂಗ್ರಹಣೆನ್ ಓದಿ. ಇದೆಂಡ್ತ್ ಇರ್ ಗ್ಯಾಲರಿಗ್ ಅಪ್ಲಿಕೇಶನ್ ಪ್ರವೇಶಗ್ ಸಾಧ್ಯ ಇಜ್ಜಿ.</string>
   <string name="write_storage_permission_rationale" fuzzy="true">ಅಗತ್ಯ ಇಪ್ಪುನ ಅನುಮತಿ: ಬಾಹ್ಯ ಸಂಗ್ರಹಣೆನ್ ಬರೆಲೆ. ಇದೆಂಡ್ತ್ ಅಪ್ಲಿಕೇಶನ್ ಇರೆನ ಕ್ಯಾಮರೊನ್ ಪ್ರವೇಶ ಮಾಲ್ಪಯರ ಸಾಧ್ಯಿಜ್ಜಿ.</string>
-  <string name="ok">ಅವು</string>
+  <string name="ok">ಆವು</string>
   <string name="warning">ಎಚ್ಚರಿಕೆ</string>
   <string name="yes">ಅಂದ್</string>
   <string name="no">ಅತ್ತ್</string>

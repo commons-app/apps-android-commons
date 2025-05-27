@@ -121,6 +121,7 @@ class UploadWorker(
         private var notificationFinishingTitle: String?,
         var contribution: Contribution?,
     ) {
+        @SuppressLint("MissingPermission")
         fun onProgress(
             transferred: Long,
             total: Long,
@@ -148,7 +149,7 @@ class UploadWorker(
                 currentNotification.build(),
             )
             contribution!!.transferred = transferred
-            contributionDao.update(contribution).blockingAwait()
+            contributionDao.update(contribution!!).blockingAwait()
         }
 
         open fun onChunkUploaded(
@@ -175,6 +176,7 @@ class UploadWorker(
             .setProgress(100, 0, true)
             .setOngoing(true)
 
+    @SuppressLint("MissingPermission")
     override suspend fun doWork(): Result {
         try {
             var totalUploadsStarted = 0
@@ -298,7 +300,7 @@ class UploadWorker(
      * Upload the contribution
      * @param contribution
      */
-    @SuppressLint("StringFormatInvalid", "CheckResult")
+    @SuppressLint("StringFormatInvalid", "CheckResult", "MissingPermission")
     private suspend fun uploadContribution(contribution: Contribution) {
         if (contribution.localUri == null || contribution.localUri.path == null) {
             Timber.e("""upload: ${contribution.media.filename} failed, file path is null""")
@@ -439,7 +441,7 @@ class UploadWorker(
                                 username,
                             )
                         CommonsApplication
-                            .instance!!
+                            .instance
                             .clearApplicationData(appContext, logoutListener)
                     }
                 }
@@ -467,7 +469,7 @@ class UploadWorker(
         contribution: Contribution,
     ) {
         val wikiDataPlace = contribution.wikidataPlace
-        if (wikiDataPlace != null && wikiDataPlace.imageValue == null) {
+        if (wikiDataPlace != null) {
             if (!contribution.hasInvalidLocation()) {
                 var revisionID: Long? = null
                 try {
@@ -479,8 +481,8 @@ class UploadWorker(
                         )
                     if (null != revisionID) {
                         withContext(Dispatchers.IO) {
-                            val place = placesRepository.fetchPlace(wikiDataPlace.id);
-                            place.name = wikiDataPlace.name;
+                            val place = placesRepository.fetchPlace(wikiDataPlace.id)
+                            place.name = wikiDataPlace.name
                             place.pic = HOME_URL + uploadResult.createCanonicalFileName()
                             placesRepository
                                 .save(place)
@@ -496,14 +498,14 @@ class UploadWorker(
 
                 withContext(Dispatchers.Main) {
                     wikidataEditService.handleImageClaimResult(
-                        contribution.wikidataPlace,
+                        contribution.wikidataPlace!!,
                         revisionID,
                     )
                 }
             } else {
                 withContext(Dispatchers.Main) {
                     wikidataEditService.handleImageClaimResult(
-                        contribution.wikidataPlace,
+                        contribution.wikidataPlace!!,
                         null,
                     )
                 }
@@ -566,12 +568,18 @@ class UploadWorker(
 
             sequenceFileName =
                 if (fileName.indexOf('.') == -1) {
-                    "$fileName #$randomHash"
+                    // Append the random hash in parentheses if no file extension is present
+                    "$fileName ($randomHash)"
                 } else {
                     val regex =
                         Pattern.compile("^(.*)(\\..+?)$")
                     val regexMatcher = regex.matcher(fileName)
-                    regexMatcher.replaceAll("$1 #$randomHash")
+                    // Append the random hash in parentheses before the file extension
+                    if (regexMatcher.find()) {
+                        "${regexMatcher.group(1)} ($randomHash)${regexMatcher.group(2)}"
+                    } else {
+                        "$fileName ($randomHash)"
+                    }
                 }
         }
         return sequenceFileName!!
@@ -581,7 +589,7 @@ class UploadWorker(
      * Notify that the current upload has succeeded
      * @param contribution
      */
-    @SuppressLint("StringFormatInvalid")
+    @SuppressLint("StringFormatInvalid", "MissingPermission")
     private fun showSuccessNotification(contribution: Contribution) {
         val displayTitle = contribution.media.displayTitle
         contribution.state = Contribution.STATE_COMPLETED
@@ -606,7 +614,7 @@ class UploadWorker(
      * Notify that the current upload has failed
      * @param contribution
      */
-    @SuppressLint("StringFormatInvalid")
+    @SuppressLint("StringFormatInvalid", "MissingPermission")
     private fun showFailedNotification(contribution: Contribution) {
         val displayTitle = contribution.media.displayTitle
         currentNotification.setContentIntent(getPendingIntent(UploadProgressActivity::class.java))
@@ -626,7 +634,7 @@ class UploadWorker(
         )
     }
 
-    @SuppressLint("StringFormatInvalid")
+    @SuppressLint("StringFormatInvalid", "MissingPermission")
     private fun showInvalidLoginNotification(contribution: Contribution) {
         val displayTitle = contribution.media.displayTitle
         currentNotification
@@ -648,7 +656,7 @@ class UploadWorker(
     /**
      * Shows a notification for a failed contribution upload.
      */
-    @SuppressLint("StringFormatInvalid")
+    @SuppressLint("StringFormatInvalid", "MissingPermission")
     private fun showErrorNotification(contribution: Contribution) {
         val displayTitle = contribution.media.displayTitle
         currentNotification
@@ -671,6 +679,7 @@ class UploadWorker(
      * Notify that the current upload is paused
      * @param contribution
      */
+    @SuppressLint("MissingPermission")
     private fun showPausedNotification(contribution: Contribution) {
         val displayTitle = contribution.media.displayTitle
 
@@ -695,6 +704,7 @@ class UploadWorker(
      * Notify that the current upload is cancelled
      * @param contribution
      */
+    @SuppressLint("MissingPermission")
     private fun showCancelledNotification(contribution: Contribution) {
         val displayTitle = contribution.media.displayTitle
         currentNotification.setContentIntent(getPendingIntent(UploadProgressActivity::class.java))

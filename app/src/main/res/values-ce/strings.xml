@@ -68,10 +68,10 @@
   <string name="username">Декъашхочун цӀе</string>
   <string name="password">Пароль</string>
   <string name="login_credential">Commons Beta тӀехь хьай цӀарца чугӀо</string>
-  <string name="login">ЧугӀо</string>
+  <string name="login">Чувала</string>
   <string name="forgot_password">Йицйелла пароль?</string>
   <string name="signup">ДӀайаздалар</string>
-  <string name="logging_in_title">Системин чудахар</string>
+  <string name="logging_in_title">Системи чу валар</string>
   <string name="logging_in_message">Дехар до, собарде…</string>
   <string name="updating_caption_title">титраш ​​а, йийцарш а карладохуш ду..</string>
   <string name="updating_caption_message">Дехар до, собарде…</string>
@@ -240,7 +240,7 @@
   <string name="statistics">Статистика</string>
   <string name="statistics_thanks">Баркаллаш кхаьчна</string>
   <string name="statistics_featured">Хаьржина суьрташ</string>
-  <string name="level">Локхалла</string>
+  <string name="level" fuzzy="true">Локхалла</string>
   <string name="images_uploaded">Суьрташ чудаьхна</string>
   <string name="image_reverts">Йуха ца дерзийна суьрташ</string>
   <string name="images_used_by_wiki">Суьрташ лелийна</string>

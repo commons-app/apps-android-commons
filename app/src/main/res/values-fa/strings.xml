@@ -15,6 +15,7 @@
 * Freshman404
 * Jeeputer
 * Ladsgroup
+* Lakzon
 * Mardetanha
 * Mehdi
 * Mjbmr
@@ -41,6 +42,14 @@
   <string name="submit">ارسال</string>
   <string name="add_another_description">توضیح دیگری را بیفزایید</string>
   <string name="add_new_contribution">افزودن مشارکت جدید</string>
+  <string name="add_contribution_from_camera">افزودن مشارکت از دوربین</string>
+  <string name="add_contribution_from_photos">افزودن مشارکت از تصاویر</string>
+  <string name="add_contribution_from_contributions_gallery">افزودن مشارکت از گالری مشارکت‌های پیشین</string>
+  <string name="show_captions">برنگاشت</string>
+  <string name="row_item_language_description">شرح زبان</string>
+  <string name="row_item_caption">برنگاشت</string>
+  <string name="nearby_row_image">تصویر</string>
+  <string name="nearby_all">همه</string>
   <string name="appwidget_img">تصویر روز</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">%1$d پرونده در حال بارگذاری</item>
@@ -84,6 +93,7 @@
   <string name="signup">ثبت نام</string>
   <string name="logging_in_title">واردشدن</string>
   <string name="logging_in_message">شکیبا باشید...</string>
+  <string name="updating_caption_message">لطفاً صبر کنید...</string>
   <string name="login_success" fuzzy="true">ورود موفق!</string>
   <string name="login_failed" fuzzy="true">ورود ناموفق!</string>
   <string name="upload_failed">پرونده یافت نشد لطفاً پرونده دیگری را امتحان کنید.</string>
@@ -106,6 +116,8 @@
   <string name="menu_from_camera">گرفتن عکس</string>
   <string name="menu_nearby">در نزدیکی</string>
   <string name="provider_contributions">بارگذاری‌های من</string>
+  <string name="menu_copy_link">رونویسی پیوند</string>
+  <string name="menu_link_copied">پیوند به بریده‌دان منتقل شد</string>
   <string name="menu_share">به اشتراک‌گذاشتن</string>
   <string name="menu_view_file_page">مشاهدهٔ صفحهٔ پرونده</string>
   <string name="share_title_hint">برنگاشت (الزامی)</string>
@@ -341,7 +353,7 @@
   <string name="statistics_thanks">تشکر دریافت‌شد</string>
   <string name="statistics_featured">تصاویر برگزیده</string>
   <string name="statistics_wikidata_edits">تصاویر بر اساس «مکان‌های اطراف»</string>
-  <string name="level">سطح</string>
+  <string name="level" fuzzy="true">سطح</string>
   <string name="images_uploaded">تصاویر بارگذاری شده</string>
   <string name="image_reverts">تصاویر واگردانی نشده</string>
   <string name="images_used_by_wiki">تصویر استفاده شده</string>
@@ -364,6 +376,7 @@
   <string name="upload_title_duplicate" fuzzy="true">پرونده‌ای با نام %1$s وجود دارد. آیا اطمینان دارید که می‌خواهید ادامه دهید؟</string>
   <string name="title_page_bookmarks_pictures">تصویرها</string>
   <string name="title_page_bookmarks_locations">مکان‌ها</string>
+  <string name="title_page_bookmarks_categories">رده‌ها</string>
   <string name="menu_bookmark">افزودن/حذف نشانک‌ها</string>
   <string name="provider_bookmarks">نشانک‌ها</string>
   <string name="bookmark_empty">شما هیچ bookmarkی اضافه نکرده‌اید</string>

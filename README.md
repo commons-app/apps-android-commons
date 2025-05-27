@@ -1,6 +1,6 @@
 # Wikimedia Commons Android app
 ![GitHub issue custom search](https://img.shields.io/github/issues-search?label=%22good%20first%20issue%22%20issues&query=repo%3Acommons-app%2Fapps-android-commons%20is%3Aissue%20is%3Aopen%20label%3A%22good%20first%20issue%22)
-[![Build status](https://github.com/commons-app/apps-android-commons/actions/workflows/android.yml/badge.svg?branch=master)](https://github.com/commons-app/apps-android-commons/actions?query=branch%3Amaster)
+[![Build status](https://github.com/commons-app/apps-android-commons/actions/workflows/android.yml/badge.svg?branch=main)](https://github.com/commons-app/apps-android-commons/actions?query=branch%3Amain)
 [![Preview the app](https://img.shields.io/badge/Preview-Appetize.io-orange.svg)](https://appetize.io/app/8ywtpe9f8tb8h6bey11c92vkcw)
 [![codecov](https://codecov.io/gh/commons-app/apps-android-commons/branch/master/graph/badge.svg)](https://codecov.io/gh/commons-app/apps-android-commons)
 
@@ -45,7 +45,7 @@ This software is open source, licensed under the [Apache License 2.0][10].
 
 [1]: https://play.google.com/store/apps/details?id=fr.free.nrw.commons
 [2]: https://commons-app.github.io/
-[3]: https://github.com/commons-app/apps-android-commons/issues
+[3]: https://github.com/commons-app/apps-android-commons/issues?q=is%3Aopen+is%3Aissue+no%3Aassignee+-label%3Adebated+label%3Abug+-label%3A%22low+priority%22+-label%3Aupstream
 
 [4]: https://github.com/commons-app/commons-app-documentation/blob/master/android/README.md#-android-documentation
 [5]: https://github.com/commons-app/commons-app-documentation/blob/master/android/README.md#-user-documentation

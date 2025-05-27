@@ -269,7 +269,7 @@ class CustomSelectorActivity :
             val selectedImages: ArrayList<Image> =
                 result.data!!
                     .getParcelableArrayListExtra(CustomSelectorConstants.NEW_SELECTED_IMAGES)!!
-            viewModel?.selectedImages?.value = selectedImages
+            viewModel.selectedImages?.value = selectedImages
         }
     }
 
@@ -287,9 +287,10 @@ class CustomSelectorActivity :
      */
     private fun showWelcomeDialog() {
         val dialog = Dialog(this)
+        dialog.setCancelable(false)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setContentView(R.layout.custom_selector_info_dialog)
-        (dialog.findViewById(R.id.btn_ok) as Button).setOnClickListener { dialog.dismiss() }
+        (dialog.findViewById<Button>(R.id.btn_ok))?.setOnClickListener { dialog.dismiss() }
         dialog.show()
     }
 
@@ -656,17 +657,20 @@ class CustomSelectorActivity :
             finishPickImages(arrayListOf())
             return
         }
-        var i = 0
-        while (i < selectedImages.size) {
-            val path = selectedImages[i].path
-            val file = File(path)
-            if (!file.exists()) {
-                selectedImages.removeAt(i)
-                i--
+        scope.launch(ioDispatcher) {
+            val uniqueImages = selectedImages.distinctBy { image ->
+                CustomSelectorUtils.getImageSHA1(
+                    image.uri,
+                    ioDispatcher,
+                    fileUtilsWrapper,
+                    contentResolver
+                )
             }
-            i++
+
+            withContext(Dispatchers.Main) {
+                finishPickImages(ArrayList(uniqueImages))
+            }
         }
-        finishPickImages(selectedImages)
     }
 
     /**
@@ -685,10 +689,11 @@ class CustomSelectorActivity :
      */
     private fun displayUploadLimitWarning() {
         val dialog = Dialog(this)
+        dialog.setCancelable(false)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setContentView(R.layout.custom_selector_limit_dialog)
-        (dialog.findViewById(R.id.btn_dismiss_limit_warning) as Button).setOnClickListener { dialog.dismiss() }
-        (dialog.findViewById(R.id.upload_limit_warning) as TextView).text =
+        (dialog.findViewById<Button>(R.id.btn_dismiss_limit_warning))?.setOnClickListener { dialog.dismiss() }
+        (dialog.findViewById<TextView>(R.id.upload_limit_warning))?.text =
             resources.getString(
                 R.string.custom_selector_over_limit_warning,
                 uploadLimit,

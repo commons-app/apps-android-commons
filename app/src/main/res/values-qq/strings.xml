@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* A100Star
 * Ajeje Brazorf
 * Amire80
+* Annick green
 * Cabal
 * Googology
 * LeGuyanaisPure
@@ -26,6 +28,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="all">
   <string name="submit">{{Identical|Submit}}</string>
   <string name="nearby_all">{{identical|All}}</string>
+  <string name="nearby_filter_search">Reba ishakiro</string>
   <string name="uploads_pending_notification_indicator">Status text about number of uploads left.\n* %1$d represents number of uploads left, including current one</string>
   <string name="contributions_subtitle">See the current issue [https://phabricator.wikimedia.org/T267142 T267142]  tracked in Phabricator about the &lt;code&gt;&lt;nowiki&gt;|zero=&lt;/nowiki&gt;&lt;/code&gt; option currently not supported on Translatewiki.net with the custom &lt;code&gt;&lt;nowiki&gt;{{PLURAL}}&lt;/nowiki&gt;&lt;/code&gt; rules used by this project for Android, using a non-MediaWiki syntax.</string>
   <string name="multiple_uploads_title">{{Identical|Upload}}</string>
@@ -189,6 +192,7 @@
   <string name="depictions_edit_helper_edit_message_else">{{Doc-commons-app-depicts}}</string>
   <string name="title_app_shortcut_bookmark">{{identical|Bookmark}}</string>
   <string name="theme_default_name">Option to make the app\'s theme follow the global system setting.</string>
+  <string name="nearby_needs_location">‘Nearby’ should be translated as in {{msg-wm|Commons-android-strings-navigation item nearby}}</string>
   <string name="more">{{Identical|More}}</string>
   <string name="map_attribution">{{Optional}}\n&lt;code&gt;&amp;amp;#169;&lt;/code&gt; is the copyright symbol (©).</string>
   <string name="categories_tooltip">{{Doc-commons-app-depicts}}</string>
@@ -201,7 +205,12 @@
   <string name="done">{{identical|Done}}</string>
   <string name="edit_depictions">{{Doc-commons-app-depicts}}</string>
   <string name="advanced_options">{{Identical|Advanced options}}</string>
+  <string name="advanced_query_info_text">‘Nearby’ should be translated as in {{msg-wm|Commons-android-strings-navigation item nearby}}</string>
   <string name="explore_map_details">{{Identical|Detail}}</string>
   <string name="set_up_avatar_toast_string">\"Set as avatar\" should be translated the same as {{msg-wm|Commons-android-strings-menu set avatar}}.</string>
   <string name="multiple_files_depiction">{{Doc-commons-app-depicts}}</string>
+  <string name="custom_selector_delete">An answer to the question in {{msg-wm|Commons-android-strings-custom selector confirm deletion message}}.</string>
+  <string name="bullet_point">{{optional}}</string>
+  <string name="show_in_explore">“Explore” should be translated as in {{msg-wm|Commons-android-strings-navigation item explore}}</string>
+  <string name="show_in_nearby">‘Nearby’ should be translated as in {{msg-wm|Commons-android-strings-navigation item nearby}}</string>
 </resources>

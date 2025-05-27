@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* August.C
 * DinoWP
 * Diskdance
 * GuoPC
@@ -16,6 +17,7 @@
 * Simon Shek
 * StephDC
 * Tranve
+* Wehwei
 * Winston Sung
 * Wwycheuk
 * ZhaoGang
@@ -122,6 +124,8 @@
   <string name="menu_from_camera">拍照</string>
   <string name="menu_nearby">附近</string>
   <string name="provider_contributions">我的上傳</string>
+  <string name="menu_copy_link">複製連結</string>
+  <string name="menu_link_copied">連結已複製到剪貼簿。</string>
   <string name="menu_share">分享</string>
   <string name="menu_view_file_page">檢視檔案頁面</string>
   <string name="share_title_hint">說明（必填）</string>
@@ -132,6 +136,7 @@
   <string name="login_failed_throttled">失敗次數過多。請於幾分鐘後重試。</string>
   <string name="login_failed_blocked">很抱歉，該使用者已被維基共享資源封禁</string>
   <string name="login_failed_2fa_needed">必須提供您的雙重驗證代碼。</string>
+  <string name="login_failed_email_auth_needed">登入驗證碼已發送到您的電子郵件地址。請提供驗證碼以登入。</string>
   <string name="login_failed_generic">登入失敗</string>
   <string name="share_upload_button">上傳</string>
   <string name="multiple_share_base_title">給這個集合命名</string>
@@ -140,6 +145,7 @@
   <string name="categories_search_text_hint">搜尋分類</string>
   <string name="depicts_search_text_hint">搜尋您的媒體描繪項目（山、泰姬瑪哈陵等）</string>
   <string name="menu_save_categories">儲存</string>
+  <string name="menu_overflow_desc">溢出選單</string>
   <string name="refresh_button">重新整理</string>
   <string name="display_list_button">清單</string>
   <string name="contributions_subtitle_zero">（尚未上傳）</string>
@@ -236,6 +242,7 @@
   <string name="become_a_tester_title">成為 Beta 測試員</string>
   <string name="become_a_tester_description">選擇加入我們在 Google Play 上的測試版頻道並儘早訪問新功能和錯誤修復</string>
   <string name="_2fa_code">2FA 代碼</string>
+  <string name="email_auth_code">電子郵件驗證碼</string>
   <string name="logout_verification">您確定要登出嗎？</string>
   <string name="mediaimage_failed">媒體圖片失敗</string>
   <string name="no_subcategory_found">找不到子分類</string>
@@ -258,7 +265,7 @@
   <string name="navigation_item_feedback">意見回饋</string>
   <string name="navigation_item_feedback_github">透過 GitHub 回饋</string>
   <string name="navigation_item_logout">登出</string>
-  <string name="navigation_item_info">教程</string>
+  <string name="navigation_item_info">教學</string>
   <string name="navigation_item_notification">通知</string>
   <string name="navigation_item_review">檢閱</string>
   <string name="no_description_found">找不到描述</string>
@@ -296,6 +303,7 @@
   <string name="copy_wikicode">複製 wikitext 到剪貼簿</string>
   <string name="wikicode_copied">Wikitext 已複製到剪貼簿</string>
   <string name="nearby_location_not_available">位置無效，應用程式在此地附近可能無法正常運作。</string>
+  <string name="nearby_showing_pins_offline">網路無法使用。僅顯示快取位置。</string>
   <string name="upload_location_access_denied">位置存取遭拒。請手動設定您的位置才能使用此功能。</string>
   <string name="location_permission_rationale_nearby">需權限來顯示附近地點清單</string>
   <string name="location_permission_rationale_explore">需要權限來顯示附近圖片清單</string>
@@ -306,7 +314,7 @@
   <string name="about_rate_us">為我們評分</string>
   <string name="about_faq">常見問題</string>
   <string name="user_guide">使用者指南</string>
-  <string name="welcome_skip_button">跳過敎程</string>
+  <string name="welcome_skip_button">跳過教學</string>
   <string name="no_internet">網路不可用</string>
   <string name="error_notifications">檢索通知時出錯</string>
   <string name="error_review">獲取圖像以供審核時出錯。按刷新重試。</string>
@@ -350,7 +358,7 @@
   <string name="question">問題</string>
   <string name="result">結果</string>
   <string name="quiz_back_button">如果您持續上傳需要刪除的圖片，您的帳號可能會被封禁。你確定要結束測驗嗎？</string>
-  <string name="quiz_alert_message">您上傳的圖片已有%1$s遭到刪除。如果您持續上傳需要刪除的圖片，您的帳號可能會遭到封禁。\n\n您要不要重新閱覽教程，然後再做一次測驗，以幫助您分辨哪些類型的圖片可以上傳、哪些不可以？</string>
+  <string name="quiz_alert_message">您上傳的圖片已有%1$s遭到刪除。如果您持續上傳需要刪除的圖片，您的帳號可能會遭到封鎖。\n\n您要不要重新閱覽教學，然後再做一次測驗，以幫助您分辨哪些類型的圖片可以上傳、哪些不可以？</string>
   <string name="selfie_answer">自拍照沒有百科價值。除非維基百科上已經有介紹您的條目，否則請不要上傳您自己的照片。</string>
   <string name="taj_mahal_answer">在大多數的國家，上傳古蹟或室外景的照片是沒有問題的。請留意，臨時性的戶外裝置藝術常常是有著作權保護的，不可上傳。</string>
   <string name="screenshot_answer">網站的螢幕截圖被視為衍生作品，受到該網站本身所有著作權保護。這些截圖可以在獲得原作者許可之後使用。若未經許可，您根據他們的作品而創作的任何藝術品，在法律上均會被視為未經原作者許可的複製品。</string>
@@ -379,11 +387,13 @@
   <string name="delete">刪除</string>
   <string name="Achievements">成果</string>
   <string name="Profile">個人檔案</string>
+  <string name="badges">徽章：</string>
   <string name="statistics">統計內容</string>
   <string name="statistics_thanks">已收到的感謝</string>
   <string name="statistics_featured">特色圖片</string>
   <string name="statistics_wikidata_edits">圖片來自“附近的地方”</string>
-  <string name="level">等級</string>
+  <string name="level">等級 %d</string>
+  <string name="profileLevel">%s（%s級）</string>
   <string name="images_uploaded">已上傳的圖片</string>
   <string name="image_reverts">沒有被還原回復的圖片</string>
   <string name="images_used_by_wiki">有被使用到的圖片</string>
@@ -415,6 +425,7 @@
   <string name="map_application_missing">在您的裝置上找不到相容的地圖應用程式，請安裝地圖應用程式來使用此功能。</string>
   <string name="title_page_bookmarks_pictures">圖片</string>
   <string name="title_page_bookmarks_locations">位置</string>
+  <string name="title_page_bookmarks_categories">分類</string>
   <string name="menu_bookmark">添加/移除至書籤</string>
   <string name="provider_bookmarks">書籤</string>
   <string name="bookmark_empty">您尚未添加任何書籤</string>
@@ -806,7 +817,33 @@
   <string name="pending">待處理</string>
   <string name="failed">失敗</string>
   <string name="could_not_load_place_data">無法載入地點資料</string>
+  <string name="custom_selector_delete_folder">刪除資料夾</string>
+  <string name="custom_selector_confirm_deletion_title">確認刪除</string>
+  <string name="custom_selector_confirm_deletion_message">您確定要刪除包含%2$d項目的資料夾%1$s嗎？</string>
+  <string name="custom_selector_delete">刪除</string>
+  <string name="custom_selector_cancel">取消</string>
+  <string name="custom_selector_folder_deleted_success">%1$s資料夾刪除成功</string>
+  <string name="custom_selector_folder_deleted_failure">無法刪除資料夾%1$s</string>
+  <string name="custom_selector_error_trashing_folder_contents">刪除資料夾內容時發生錯誤： %1$s</string>
+  <string name="custom_selector_folder_not_found_error">無法取得儲存桶 ID 的資料夾路徑： %1$d</string>
   <string name="red_pin">這個地點還沒有照片，來拍一張吧！</string>
   <string name="green_pin">這個地點已有照片。</string>
   <string name="grey_pin">現在檢查這個地點是否有照片。</string>
+  <string name="error_while_loading">載入時出錯</string>
+  <string name="no_usages_found">找不到頁面。</string>
+  <string name="usages_on_commons_heading">維基共享資源</string>
+  <string name="usages_on_other_wikis_heading">其它 wiki</string>
+  <string name="file_usages_container_heading">檔案用途</string>
+  <string name="title_activity_single_web_view">單一WebViewActivity</string>
+  <string name="account">帳號</string>
+  <string name="vanish_account">引退帳號</string>
+  <string name="account_vanish_request_confirm_title">隱退帳號警告</string>
+  <string name="account_vanish_request_confirm">隱退是最後手段，並且應該僅在您希望永遠不再編輯時使用，以及盡可能隱藏您過去關聯蹤跡下使用。帳號刪除是透過更改您的帳號名稱來完成的，這樣其他人就無法在稱之為帳號隱退的過程中辨識出您的貢獻。另外，隱退並不能保證能完全匿名或移除對專案的貢獻。\n\n要繼續隱退流程，請完成以下的帳號隱退表單。</string>
+  <string name="caption">說明</string>
+  <string name="caption_copied_to_clipboard">文字已複製至剪貼簿</string>
+  <string name="congratulations_all_pictures_in_this_album_have_been_either_uploaded_or_marked_as_not_for_upload">恭喜，該相簿中的所有圖片已上傳或標記為不可上傳。</string>
+  <string name="show_in_explore">在探索中顯示</string>
+  <string name="show_in_nearby">顯示在附近</string>
+  <string name="image_tag_line_created_and_uploaded_by">由%1$s建立與上傳</string>
+  <string name="image_tag_line_created_by_and_uploaded_by">由%1$s建立，%2$s上傳</string>
 </resources>

@@ -120,26 +120,16 @@ class NotificationClientTest {
     ) = Notification().apply {
         setId(notificationId)
 
-        setTimestamp(
-            Notification.Timestamp().apply {
-                setUtciso8601(timestamp)
-            },
-        )
+        setTimestamp(Notification.Timestamp().apply { setUtciso8601(timestamp) })
 
-        contents =
-            Notification.Contents().apply {
-                setCompactHeader(compactHeader)
+        contents = Notification.Contents().apply {
+            this.compactHeader = compactHeader
 
-                links =
-                    Notification.Links().apply {
-                        setPrimary(
-                            GsonUtil.getDefaultGson().toJsonTree(
-                                Notification.Link().apply {
-                                    setUrl(primaryUrl)
-                                },
-                            ),
-                        )
-                    }
+            links = Notification.Links().apply {
+                setPrimary(GsonUtil.defaultGson.toJsonTree(
+                    Notification.Link().apply { url = primaryUrl }
+                ))
             }
+        }
     }
 }

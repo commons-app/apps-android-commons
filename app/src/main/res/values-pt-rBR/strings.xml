@@ -3,6 +3,7 @@
 * Anaclaudiaml
 * Caio1478
 * Duke of Wikipädia
+* EGobi
 * Eduardo Addad de Oliveira
 * Eduardoaddad
 * Felipe L. Ewald
@@ -383,7 +384,7 @@
   <string name="statistics_thanks">Agradecimentos recebidos</string>
   <string name="statistics_featured">Imagens destacadas</string>
   <string name="statistics_wikidata_edits">Imagens via \"Locais próximos\"</string>
-  <string name="level">Nível</string>
+  <string name="level" fuzzy="true">Nível</string>
   <string name="images_uploaded">Imagens carregadas</string>
   <string name="image_reverts">Imagens não revertidas</string>
   <string name="images_used_by_wiki">Imagens usadas</string>
@@ -419,7 +420,7 @@
   <string name="provider_bookmarks">Favoritos</string>
   <string name="bookmark_empty">Não adicionou nenhum favorito</string>
   <string name="provider_bookmarks_location">Favoritos</string>
-  <string name="log_collection_started">A recolha de registos foi iniciada. REINICIE a aplicação, execute a operação que pretende registar e prima outra vez \"Enviar ficheiro de registos\"</string>
+  <string name="log_collection_started">A coleta de registros foi iniciada. REINICIE o aplicativo, execute a operação que pretende registrar e toque em ‘Enviar arquivo de registros’ novamente</string>
   <string name="deletion_reason_uploaded_by_mistake">Eu fiz o carregamento por engano</string>
   <string name="deletion_reason_publicly_visible">Eu não sabia que seria publicamente visível</string>
   <string name="deletion_reason_bad_for_my_privacy">Eu percebi que é ruim para minha privacidade</string>
@@ -696,7 +697,7 @@
   <string name="place_state_wlm">WLM</string>
   <string name="wlm_upload_info">Essa imagem será enviada ao concurso Wiki Loves Monuments</string>
   <string name="display_monuments">Monumentos de exibição</string>
-  <string name="wlm_month_message">Estamos no mês no Wiki Loves Monuments!</string>
+  <string name="wlm_month_message">Chegou o mês do Wiki Loves Monuments!</string>
   <string name="learn_more">SABER MAIS</string>
   <string name="wlm_campaign_title">Wiki Loves Monuments</string>
   <string name="wlm_campaign_description">O Wiki Loves Monuments é um concurso internacional organizado pela Wikimedia sobre fotografias de monumentos</string>

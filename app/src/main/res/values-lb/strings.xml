@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* GilPe
 * Les Meloures
 * Robby
 * Soued031
@@ -69,7 +70,7 @@
   <string name="authentication_failed">D\'Authentifizéierung huet net funktionéiert. Loggt Iech wgl. nach eng Kéier an.</string>
   <string name="uploading_started">D\'Eroplueden huet ugefaang!</string>
   <string name="upload_completed_notification_title">%1$s eropgelueden!</string>
-  <string name="upload_completed_notification_text">Dréckt fir de Fichier ze gesinn deen Dir eropgelueden hutt</string>
+  <string name="upload_completed_notification_text">Tippt fir de Fichier ze gesinn, deen Dir eropgelueden hutt</string>
   <string name="upload_progress_notification_title_start">Fichier eroplueden: %s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s gëtt eropgelueden</string>
   <string name="upload_progress_notification_title_finishing">Eropluede vu(n) %1$s ofschléissen</string>
@@ -86,6 +87,8 @@
   <string name="menu_from_camera">Foto maachen</string>
   <string name="menu_nearby">Nobäi</string>
   <string name="provider_contributions">Meng eropgeluede Fichieren</string>
+  <string name="menu_copy_link">Link kopéieren</string>
+  <string name="menu_link_copied">De Link gouf an den Tëschespäicher kopéiert</string>
   <string name="menu_share">Deelen</string>
   <string name="menu_view_file_page">Fichierssäit weisen</string>
   <string name="share_title_hint">Beschrëftung (obligatoresch)</string>
@@ -96,6 +99,7 @@
   <string name="login_failed_throttled">Ze dacks ouni Succès probéiert. Probéiert wgl. an e puer Minutten nach eng Kéier.</string>
   <string name="login_failed_blocked">Pardon, dëse Benotzer ass op Commons gespaart</string>
   <string name="login_failed_2fa_needed">Dir musst de Code vun Ärer Zwee-Facteur-Authentifizéierung uginn.</string>
+  <string name="login_failed_email_auth_needed">Dir hutt ee Login-Verifikatiounscode per E-Mail geschéckt kritt. Gitt wgl. de Code an, fir Iech anzeloggen.</string>
   <string name="login_failed_generic">Aloggen huet net funktionéiert</string>
   <string name="share_upload_button">Eroplueden</string>
   <string name="multiple_share_base_title">Gitt dëser Biller een Numm</string>
@@ -178,6 +182,7 @@
   <string name="no">Neen</string>
   <string name="media_detail_caption">Beschrëftung</string>
   <string name="media_detail_title">Titel</string>
+  <string name="media_detail_depiction">Motiven</string>
   <string name="media_detail_description">Beschreiwung</string>
   <string name="media_detail_discussion">Diskussioun</string>
   <string name="media_detail_author">Auteur</string>
@@ -188,6 +193,7 @@
   <string name="become_a_tester_title">Beta-Tester ginn</string>
   <string name="become_a_tester_description">Schreift Iech op GooglePlay a fir eise Beta-Kanal a kritt fréi Zougang zu neie Funktiounen a Verbesserunge vu Feeler</string>
   <string name="_2fa_code">2FA-Code</string>
+  <string name="email_auth_code">E-Mail-Verifikatiounscode</string>
   <string name="logout_verification">Wëllt dir Iech wierklech ausloggen?</string>
   <string name="no_subcategory_found">Keng Ënnerkategorie fonnt</string>
   <string name="welcome_image_mount_zao">Bierg Zao</string>
@@ -270,6 +276,7 @@
   <string name="menu_search_button">Sichen</string>
   <string name="search_commons">Op Commons sichen</string>
   <string name="title_activity_search">Sichen</string>
+  <string name="search_recent_header">Rezent gesicht:</string>
   <string name="search_tab_title_media">Medien</string>
   <string name="search_tab_title_categories">Kategorien</string>
   <string name="search_tab_title_depictions">Elementer</string>
@@ -298,7 +305,8 @@
   <string name="statistics">Statistiken</string>
   <string name="statistics_thanks">Mercie kritt</string>
   <string name="statistics_featured">Bemierkenswäert Biller</string>
-  <string name="level">Niveau</string>
+  <string name="level">Niveau %d</string>
+  <string name="profileLevel">%s (Niveau %s)</string>
   <string name="images_uploaded">Eropgeluede Biller</string>
   <string name="image_reverts">Biller net zréckgesat</string>
   <string name="images_used_by_wiki">Benotzte Biller</string>
@@ -315,6 +323,7 @@
   <string name="previous">Vireg</string>
   <string name="title_page_bookmarks_pictures">Biller</string>
   <string name="title_page_bookmarks_locations">Plazen</string>
+  <string name="title_page_bookmarks_categories">Kategorien</string>
   <string name="provider_bookmarks">Lieszeechen</string>
   <string name="bookmark_empty">Dir hutt keng Lieszeechen derbäigesat</string>
   <string name="provider_bookmarks_location">Lieszeechen</string>
@@ -525,4 +534,11 @@
   <string name="custom_selector_confirm_deletion_title">Läsche confirméieren</string>
   <string name="custom_selector_delete">Läschen</string>
   <string name="custom_selector_cancel">Ofbriechen</string>
+  <string name="error_while_loading">Feeler beim Lueden</string>
+  <string name="usages_on_commons_heading">Commons</string>
+  <string name="usages_on_other_wikis_heading">Aner Wikien</string>
+  <string name="account">Kont</string>
+  <string name="vanish_account">Kont opléisen</string>
+  <string name="caption">Beschrëftung</string>
+  <string name="caption_copied_to_clipboard">Text an den Tëschespäicher kopéiert</string>
 </resources>

@@ -16,6 +16,7 @@
 * Revi
 * Suleiman the Magnificent Television
 * Theshinster123
+* YeBoy371
 * Ykhwong
 * YuzaTea
 * 그냥기여자
@@ -111,6 +112,8 @@
   <string name="menu_from_camera">사진 찍기</string>
   <string name="menu_nearby">근처</string>
   <string name="provider_contributions">내 올린 파일</string>
+  <string name="menu_copy_link">링크 복사</string>
+  <string name="menu_link_copied">이 링크는 클립보드로 복사되었습니다</string>
   <string name="menu_share">공유</string>
   <string name="menu_view_file_page">파일 문서 보기</string>
   <string name="share_title_hint">캡션 (필수)</string>
@@ -224,10 +227,11 @@
   <string name="become_a_tester_title">베타 테스터가 되세요</string>
   <string name="become_a_tester_description">구글 플레이 베타 채널에서 메일 발송을 허가해서 새로운 기능이나 버그 수정에 대한 정보를 빨리 얻어보세요</string>
   <string name="_2fa_code">2FA 코드</string>
+  <string name="email_auth_code">이메일 인증 코드</string>
   <string name="logout_verification">정말 로그아웃하시겠습니까?</string>
   <string name="mediaimage_failed">미디어 그림 실패</string>
   <string name="no_subcategory_found">하위 분류가 없습니다</string>
-  <string name="no_parentcategory_found">부모 분류가 없습니다</string>
+  <string name="no_parentcategory_found">상위 분류가 없습니다</string>
   <string name="welcome_image_mount_zao">자오 연봉</string>
   <string name="welcome_image_llamas">라마</string>
   <string name="welcome_image_rainbow_bridge">레인보우 브리지</string>
@@ -284,6 +288,7 @@
   <string name="copy_wikicode">위키텍스트를 클립보드에 복사</string>
   <string name="wikicode_copied">위키텍스트를 클립보드에 복사했습니다</string>
   <string name="nearby_location_not_available">주변이 제대로 작동되지 않을 수 있습니다. 위치를 사용할 수 없습니다.</string>
+  <string name="nearby_showing_pins_offline">인터넷을 사용할 수 없습니다. 캐시된 장소만 표시합니다.</string>
   <string name="location_permission_rationale_nearby">주변 장소의 목록을 표시하기 위한 권한이 필요합니다.</string>
   <string name="location_permission_rationale_explore">주변 장소의 이미지 목록을 표시하기 위한 권한이 필요합니다</string>
   <string name="nearby_directions">방향</string>
@@ -366,11 +371,13 @@
   <string name="delete">삭제</string>
   <string name="Achievements">성과</string>
   <string name="Profile">프로파일</string>
+  <string name="badges">배지</string>
   <string name="statistics">통계</string>
   <string name="statistics_thanks">받은 감사</string>
   <string name="statistics_featured">알찬 그림</string>
   <string name="statistics_wikidata_edits">\"주변 장소\" 경유 이미지</string>
-  <string name="level">레벨</string>
+  <string name="level">레벨 %d</string>
+  <string name="profileLevel">%s (레벨 %s)</string>
   <string name="images_uploaded">사진 업로드됨</string>
   <string name="images_used_by_wiki">사용된 이미지</string>
   <string name="achievements_share_message">친구와 성과를 공유하세요!</string>
@@ -400,6 +407,7 @@
   <string name="map_application_missing">장치에서 호환되는 지도 애플리케이션을 찾지 못했습니다. 이 기능을 사용하려면 지도 애플리케이션을 설치해 주십시오.</string>
   <string name="title_page_bookmarks_pictures">사진</string>
   <string name="title_page_bookmarks_locations">위치</string>
+  <string name="title_page_bookmarks_categories">분류</string>
   <string name="menu_bookmark">북마크에 추가/제거</string>
   <string name="provider_bookmarks">북마크</string>
   <string name="bookmark_empty">북마크를 추가하지 않았습니다</string>
@@ -422,7 +430,7 @@
   <string name="unable_to_display_nearest_place">위치 권한 없이 사진이 필요한 주변 장소를 표시할 수 없습니다</string>
   <string name="never_ask_again">다시는 묻지 않음</string>
   <string name="display_location_permission_title">위치 권한 요청</string>
-  <string name="achievements_fetch_failed" fuzzy="true">무언가가 잘못되어, 저희는 당신의 업적을 가져올 수 없었습니다</string>
+  <string name="achievements_fetch_failed">오류가 발생하여, 업적을 가져올 수 없습니다.</string>
   <string name="display_campaigns">캠페인 표시</string>
   <string name="display_campaigns_explanation">진행되고 있는 캠페인 보기</string>
   <string name="option_allow">허용</string>
@@ -443,6 +451,7 @@
   <string name="send_thank_failure_title">감사 표현 보내기: 실패</string>
   <string name="review_copyright">이것이 저작권 규정을 준수하고 있습니까?</string>
   <string name="review_category">알맞게 분류됐습니까?</string>
+  <string name="review_spam">이것이 범위에 포함되나요?</string>
   <string name="review_thanks">기여자에게 감사를 표하시겠습니까?</string>
   <string name="review_no_category">앗, 분류가 달리지 않은 것 같습니다!</string>
   <string name="review_category_explanation">이 이미지는 %1$s 분류에 속해 있습니다.</string>
@@ -480,6 +489,7 @@
   <string name="no_categories_found">분류가 없습니다</string>
   <string name="no_depiction_found">서술이 발견되지 않았습니다</string>
   <string name="upload_cancelled">업로드 취소됨</string>
+  <string name="dialog_box_text_nomination">%1$s을(를) 삭제해야 하는 이유는 무엇인가요?</string>
   <string name="default_description_language">기본 설명 언어</string>
   <string name="delete_helper_show_deletion_title">삭제 신청</string>
   <string name="delete_helper_show_deletion_title_success">성공</string>
@@ -524,7 +534,7 @@
   <string name="you_must_reset_your_passsword">로그인에 문제가 생겼습니다, 비밀번호를 재설정해야 합니다!</string>
   <string name="title_for_media">미디어</string>
   <string name="title_for_child_classes">자식 클래스</string>
-  <string name="title_for_parent_classes">부모 클래스</string>
+  <string name="title_for_parent_classes">상위 클래스</string>
   <string name="upload_nearby_place_found_title">주변 장소 발견</string>
   <string name="upload_nearby_place_found_description_plural">%1$s의 사진이 맞습니까?</string>
   <string name="upload_nearby_place_found_description_singular">%1$s의 사진이 맞습니까?</string>
@@ -682,6 +692,7 @@
   <string name="please_enter_some_comments">의견을 입력해 주십시오</string>
   <string name="talk">토론</string>
   <string name="other_problem_or_information_please_explain_below">기타 문제 또는 정보 (아래에 설명해 주십시오)</string>
+  <string name="are_you_sure_that_you_want_cancel_all_the_uploads">모든 업로드를 취소하시겠습니까?</string>
   <string name="cancelling_all_the_uploads">모든 업로드를 취소하는 중...</string>
   <string name="uploads">업로드</string>
   <string name="pending">보류 중</string>
@@ -698,4 +709,12 @@
   <string name="red_pin">이 장소에 아직 사진이 없습니다. 사진을 찍어보세요!</string>
   <string name="green_pin">이 장소에 이미 사진이 있습니다.</string>
   <string name="grey_pin">지금 이 장소에 사진이 있는지 확인 중입니다.</string>
+  <string name="usages_on_commons_heading">공용</string>
+  <string name="usages_on_other_wikis_heading">다른 위키</string>
+  <string name="file_usages_container_heading">이 파일을 사용하는 문서</string>
+  <string name="account">계정</string>
+  <string name="vanish_account">계정 버리기</string>
+  <string name="account_vanish_request_confirm">버리기는 &lt;b&gt;최후의 수단&lt;/b&gt;이며 &lt;b&gt;영원히 편집을 중단하고 싶을 때&lt;/b&gt;와 가능한 한 많은 과거 연관성을 숨기고 싶을 때만 사용해야 합니다.&lt;br/&gt;&lt;br/&gt;위키미디어 공용에서 계정을 삭제하려면 계정 이름을 변경하여 다른 사람이 기여한 내용을 알아볼 수 없도록 하는 계정 버리기라는 프로세스를 거쳐야 합니다. &lt;b&gt;버리기는 완전한 익명성을 보장하지 않으며 프로젝트에 수행한 기여를 제거하지 않습니다&lt;/b&gt;.</string>
+  <string name="caption">캡션</string>
+  <string name="caption_copied_to_clipboard">캡션이 클립보드에 복사되었습니다</string>
 </resources>

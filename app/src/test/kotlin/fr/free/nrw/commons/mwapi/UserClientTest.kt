@@ -30,8 +30,7 @@ class UserClientTest {
 
     @Test
     fun isUserBlockedFromCommonsForInfinitelyBlockedUser() {
-        val userInfo = Mockito.mock(UserInfo::class.java)
-        Mockito.`when`(userInfo.blockexpiry()).thenReturn("infinite")
+        val userInfo = UserInfo(blockexpiry = "infinite")
         val mwQueryResult = Mockito.mock(MwQueryResult::class.java)
         Mockito.`when`(mwQueryResult.userInfo()).thenReturn(userInfo)
         val mockResponse = Mockito.mock(MwQueryResponse::class.java)
@@ -49,8 +48,7 @@ class UserClientTest {
         val currentDate = Date()
         val expiredDate = Date(currentDate.time + 10000)
 
-        val userInfo = Mockito.mock(UserInfo::class.java)
-        Mockito.`when`(userInfo.blockexpiry()).thenReturn(DateUtil.iso8601DateFormat(expiredDate))
+        val userInfo = UserInfo(blockexpiry = DateUtil.iso8601DateFormat(expiredDate))
         val mwQueryResult = Mockito.mock(MwQueryResult::class.java)
         Mockito.`when`(mwQueryResult.userInfo()).thenReturn(userInfo)
         val mockResponse = Mockito.mock(MwQueryResponse::class.java)
@@ -65,8 +63,7 @@ class UserClientTest {
 
     @Test
     fun isUserBlockedFromCommonsForNeverBlockedUser() {
-        val userInfo = Mockito.mock(UserInfo::class.java)
-        Mockito.`when`(userInfo.blockexpiry()).thenReturn("")
+        val userInfo = UserInfo(blockexpiry = "")
         val mwQueryResult = Mockito.mock(MwQueryResult::class.java)
         Mockito.`when`(mwQueryResult.userInfo()).thenReturn(userInfo)
         val mockResponse = Mockito.mock(MwQueryResponse::class.java)

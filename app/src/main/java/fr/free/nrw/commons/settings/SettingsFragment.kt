@@ -12,12 +12,14 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import android.widget.AdapterView
+import android.widget.Button
 import android.widget.EditText
 import android.widget.ListView
 import android.widget.TextView
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts.RequestMultiplePermissions
 import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult
+import androidx.appcompat.app.AlertDialog
 import androidx.preference.ListPreference
 import androidx.preference.MultiSelectListPreference
 import androidx.preference.Preference
@@ -31,12 +33,15 @@ import com.karumi.dexter.MultiplePermissionsReport
 import com.karumi.dexter.PermissionToken
 import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener
+import fr.free.nrw.commons.BuildConfig.MOBILE_META_URL
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.Utils
+import fr.free.nrw.commons.activity.SingleWebViewActivity
 import fr.free.nrw.commons.campaigns.CampaignView
 import fr.free.nrw.commons.contributions.ContributionController
 import fr.free.nrw.commons.contributions.MainActivity
 import fr.free.nrw.commons.di.ApplicationlessInjection
+import fr.free.nrw.commons.filepicker.FilePicker
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.location.LocationServiceManager
 import fr.free.nrw.commons.logging.CommonsLogSender
@@ -46,6 +51,7 @@ import fr.free.nrw.commons.recentlanguages.RecentLanguagesDao
 import fr.free.nrw.commons.upload.LanguagesAdapter
 import fr.free.nrw.commons.utils.DialogUtil
 import fr.free.nrw.commons.utils.PermissionUtils
+import fr.free.nrw.commons.utils.StringUtil
 import fr.free.nrw.commons.utils.ViewUtil
 import java.util.Locale
 import javax.inject.Inject
@@ -69,6 +75,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
     @Inject
     lateinit var locationManager: LocationServiceManager
 
+    private var vanishAccountPreference: Preference? = null
     private var themeListPreference: ListPreference? = null
     private var descriptionLanguageListPreference: Preference? = null
     private var appUiLanguageListPreference: Preference? = null
@@ -77,14 +84,22 @@ class SettingsFragment : PreferenceFragmentCompat() {
     private var recentLanguagesTextView: TextView? = null
     private var separator: View? = null
     private var languageHistoryListView: ListView? = null
+
     private lateinit var inAppCameraLocationPermissionLauncher: ActivityResultLauncher<Array<String>>
-    private val GET_CONTENT_PICKER_HELP_URL = "https://commons-app.github.io/docs.html#get-content"
 
     private val cameraPickLauncherForResult: ActivityResultLauncher<Intent> =
         registerForActivityResult(StartActivityForResult()) { result ->
-        contributionController.handleActivityResultWithCallback(requireActivity()) { callbacks ->
-            contributionController.onPictureReturnedFromCamera(result, requireActivity(), callbacks)
-        }
+        contributionController.handleActivityResultWithCallback(
+            requireActivity(),
+            object: FilePicker.HandleActivityResult {
+                override fun onHandleActivityResult(callbacks: FilePicker.Callbacks) {
+                    contributionController.onPictureReturnedFromCamera(
+                        result,
+                        requireActivity(),
+                        callbacks
+                    )
+                }
+        })
     }
 
     /**
@@ -104,6 +119,26 @@ class SettingsFragment : PreferenceFragmentCompat() {
         themeListPreference = findPreference(Prefs.KEY_THEME_VALUE)
         prepareTheme()
 
+        vanishAccountPreference = findPreference(Prefs.VANISHED_ACCOUNT)
+        vanishAccountPreference?.setOnPreferenceClickListener {
+            AlertDialog.Builder(requireContext())
+                .setTitle(R.string.account_vanish_request_confirm_title)
+                .setMessage(StringUtil.fromHtml(getString(R.string.account_vanish_request_confirm)))
+                .setNegativeButton(R.string.cancel){ dialog,_ ->
+                    dialog.dismiss()
+                }
+                .setPositiveButton(R.string.vanish_account) { dialog, _ ->
+                    SingleWebViewActivity.showWebView(
+                        context = requireActivity(),
+                        url = VANISH_ACCOUNT_URL,
+                        successUrl = VANISH_ACCOUNT_SUCCESS_URL
+                    )
+                    dialog.dismiss()
+                }
+                .show()
+            true
+        }
+
         val multiSelectListPref: MultiSelectListPreference? = findPreference(
             Prefs.MANAGED_EXIF_TAGS
         )
@@ -119,7 +154,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
         inAppCameraLocationPref?.setOnPreferenceChangeListener { _, newValue ->
             val isInAppCameraLocationTurnedOn = newValue as Boolean
             if (isInAppCameraLocationTurnedOn) {
-                createDialogsAndHandleLocationPermissions(requireActivity())
+                createDialogsAndHandleLocationPermissions()
             }
             true
         }
@@ -236,6 +271,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
             findPreference<Preference>("managed_exif_tags")?.isEnabled = false
             findPreference<Preference>("openDocumentPhotoPickerPref")?.isEnabled = false
             findPreference<Preference>("inAppCameraLocationPref")?.isEnabled = false
+            findPreference<Preference>("vanishAccount")?.isEnabled = false
         }
     }
 
@@ -244,7 +280,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
      *
      * @param activity
      */
-    private fun createDialogsAndHandleLocationPermissions(activity: Activity) {
+    private fun createDialogsAndHandleLocationPermissions() {
         inAppCameraLocationPermissionLauncher.launch(arrayOf(permission.ACCESS_FINE_LOCATION))
     }
 
@@ -263,8 +299,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
             getString(R.string.read_help_link),
             { },
             { Utils.handleWebUrl(requireContext(), Uri.parse(GET_CONTENT_PICKER_HELP_URL)) },
-            null,
-            true
+            null
         )
     }
 
@@ -273,7 +308,6 @@ class SettingsFragment : PreferenceFragmentCompat() {
         return object : PreferenceGroupAdapter(preferenceScreen) {
             override fun onBindViewHolder(holder: PreferenceViewHolder, position: Int) {
                 super.onBindViewHolder(holder, position)
-                val preference = getItem(position)
                 val iconFrame: View? = holder.itemView.findViewById(R.id.icon_frame)
                 iconFrame?.visibility = View.GONE
             }
@@ -323,7 +357,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
         val dialog = Dialog(requireActivity())
         dialog.setContentView(R.layout.dialog_select_language)
-        dialog.setCanceledOnTouchOutside(true)
+        dialog.setCancelable(false)
         dialog.window?.setLayout(
             (resources.displayMetrics.widthPixels * 0.90).toInt(),
             (resources.displayMetrics.heightPixels * 0.90).toInt()
@@ -332,6 +366,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
         val editText: EditText = dialog.findViewById(R.id.search_language)
         val listView: ListView = dialog.findViewById(R.id.language_list)
+        val cancelButton = dialog.findViewById<Button>(R.id.cancel_button)
         languageHistoryListView = dialog.findViewById(R.id.language_history_list)
         recentLanguagesTextView = dialog.findViewById(R.id.recent_searches)
         separator = dialog.findViewById(R.id.separator)
@@ -339,6 +374,8 @@ class SettingsFragment : PreferenceFragmentCompat() {
         setUpRecentLanguagesSection(recentLanguages, selectedLanguages)
 
         listView.adapter = languagesAdapter
+
+        cancelButton.setOnClickListener { dialog.dismiss() }
 
         editText.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(charSequence: CharSequence, start: Int, count: Int, after: Int) {
@@ -369,10 +406,12 @@ class SettingsFragment : PreferenceFragmentCompat() {
             if (keyListPreference == "appUiDefaultLanguagePref") {
                 appUiLanguageListPreference?.summary = defLocale.getDisplayLanguage(defLocale)
                 setLocale(requireActivity(), lCode)
-                requireActivity().recreate()
                 val intent = Intent(requireActivity(), MainActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
+                requireActivity().finish()
                 startActivity(intent)
-            } else {
+            }
+                else {
                 descriptionLanguageListPreference?.summary = defLocale.getDisplayLanguage(defLocale)
             }
             dialog.dismiss()
@@ -471,7 +510,11 @@ class SettingsFragment : PreferenceFragmentCompat() {
         editor.apply()
     }
 
+    @Suppress("LongLine")
     companion object {
+        const val GET_CONTENT_PICKER_HELP_URL = "https://commons-app.github.io/docs.html#get-content"
+        private const val VANISH_ACCOUNT_URL = "https://meta.m.wikimedia.org/wiki/Special:Contact/accountvanishapps"
+        private const val VANISH_ACCOUNT_SUCCESS_URL = "https://meta.m.wikimedia.org/wiki/Special:GlobalVanishRequest/vanished"
         /**
          * Create Locale based on different types of language codes
          * @param languageCode
@@ -527,7 +570,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
                 PermissionUtils.PERMISSIONS_STORAGE
             )
         ) {
-            commonsLogSender.send(requireActivity(), null)
+            commonsLogSender.sendWithNullable(requireActivity(), null)
         } else {
             requestExternalStoragePermissions()
         }

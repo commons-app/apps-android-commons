@@ -58,7 +58,7 @@ class ImageUseCase @Inject constructor(
         fileProcessor.redactExifTags(exifInterface, fileProcessor.getExifTagsToRedact())
 
         val sha1 = fileUtilsWrapper.getSHA1(
-                fileUtilsWrapper.getFileInputStream(uploadableFile.filePath))
+                fileUtilsWrapper.getFileInputStream(uploadableFile.getFilePath()))
         uploadableFile.file.delete()
         sha1
     }

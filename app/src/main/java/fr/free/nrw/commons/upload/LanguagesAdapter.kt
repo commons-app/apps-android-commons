@@ -23,7 +23,7 @@ import java.util.Locale
  */
 class LanguagesAdapter constructor(
     context: Context,
-    private val selectedLanguages: HashMap<*, String>,
+    private val selectedLanguages: MutableMap<Int, String>,
 ) : ArrayAdapter<String?>(context, R.layout.row_item_languages_spinner) {
     companion object {
         /**
@@ -42,8 +42,8 @@ class LanguagesAdapter constructor(
         AppLanguageLookUpTable(context)
 
     init {
-        languageNamesList = language.localizedNames
-        languageCodesList = language.codes
+        languageNamesList = language.getLocalizedNames()
+        languageCodesList = language.getCodes()
     }
 
     private val filter = LanguageFilter()
@@ -117,7 +117,7 @@ class LanguagesAdapter constructor(
      */
     fun getIndexOfUserDefaultLocale(context: Context): Int {
         val userLanguageCode = context.locale?.language ?: return DEFAULT_INDEX
-        return language.codes.indexOf(userLanguageCode).takeIf { it >= 0 } ?: DEFAULT_INDEX
+        return language.getCodes().indexOf(userLanguageCode).takeIf { it >= 0 } ?: DEFAULT_INDEX
     }
 
     fun getIndexOfLanguageCode(languageCode: String): Int = languageCodesList.indexOf(languageCode)
@@ -128,17 +128,17 @@ class LanguagesAdapter constructor(
         override fun performFiltering(constraint: CharSequence?): FilterResults {
             val filterResults = FilterResults()
             val temp: LinkedHashMap<String, String> = LinkedHashMap()
-            if (constraint != null && language.localizedNames != null) {
-                val length: Int = language.localizedNames.size
+            if (constraint != null) {
+                val length: Int = language.getLocalizedNames().size
                 var i = 0
                 while (i < length) {
-                    val key: String = language.codes[i]
-                    val value: String = language.localizedNames[i]
+                    val key: String = language.getCodes()[i]
+                    val value: String = language.getLocalizedNames()[i]
                     val defaultlanguagecode = getIndexOfUserDefaultLocale(context)
                     if (value.contains(constraint, true) ||
                         Locale(key)
                             .getDisplayName(
-                                Locale(language.codes[defaultlanguagecode]),
+                                Locale(language.getCodes()[defaultlanguagecode]),
                             ).contains(constraint, true)
                     ) {
                         temp[key] = value

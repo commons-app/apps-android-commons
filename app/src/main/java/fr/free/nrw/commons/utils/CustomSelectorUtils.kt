@@ -55,7 +55,7 @@ class CustomSelectorUtils {
                 val uploadableFile = PickedFiles.pickedExistingPicture(context, image.uri)
                 val exifInterface: ExifInterface? =
                     try {
-                        ExifInterface(uploadableFile.file!!)
+                        ExifInterface(uploadableFile.file)
                     } catch (e: IOException) {
                         Timber.e(e)
                         null
@@ -63,7 +63,7 @@ class CustomSelectorUtils {
                 fileProcessor.redactExifTags(exifInterface, fileProcessor.getExifTagsToRedact())
                 val sha1 =
                     fileUtilsWrapper.getSHA1(
-                        fileUtilsWrapper.getFileInputStream(uploadableFile.filePath),
+                        fileUtilsWrapper.getFileInputStream(uploadableFile.getFilePath()),
                     )
                 uploadableFile.file.delete()
                 sha1

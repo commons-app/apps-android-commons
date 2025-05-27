@@ -99,6 +99,8 @@
   <string name="menu_from_camera">Fé na fòto</string>
   <string name="menu_nearby">Davzin</string>
   <string name="provider_contributions">Ij mè cariament</string>
+  <string name="menu_copy_link">Copié la liura</string>
+  <string name="menu_link_copied">La liura a l\'é stàita copià ant ël quàder dij feuj.</string>
   <string name="menu_share">Partagé</string>
   <string name="menu_view_file_page">Vëdde la pàgina dl\'archivi</string>
   <string name="share_title_hint">Legenda (obligatòria)</string>
@@ -109,6 +111,7 @@
   <string name="login_failed_throttled">Tròpi tentativ falì. Për piasì, ch\'a preuva torna da-sì chèiche minute.</string>
   <string name="login_failed_blocked">An dëspias, s\'utent-sì a l\'é stàit blocà ansima a Commons</string>
   <string name="login_failed_2fa_needed">A dev fornì sò còdes d\'autentificassion a doi fator.</string>
+  <string name="login_failed_email_auth_needed">Un còdes ëd verìfica ëd conession a l\'é stàit mandà a soa adrëssa ëd pòsta eletrònica. Për piasì, ch\'a anserissa col còdes për intré ant ël sistema.</string>
   <string name="login_failed_generic">Falì a rintré ant ël sistema</string>
   <string name="share_upload_button">Carié</string>
   <string name="multiple_share_base_title">Deje un nòm a s\'ansem</string>
@@ -214,6 +217,7 @@
   <string name="become_a_tester_title">Dventé në sperimentador Beta</string>
   <string name="become_a_tester_description">Anscriv-se a nòstr canal beta su Google Play a oten-e n\'acess antissipà a le neuve fonsionalità e coression ëd givo</string>
   <string name="_2fa_code">Còdes 2FA</string>
+  <string name="email_auth_code">Mandé un còdes ëd verifica</string>
   <string name="logout_verification">Veul-lo për da bon seurte dal sistema?</string>
   <string name="mediaimage_failed">Faliment ëd la plancia dël mojen</string>
   <string name="no_subcategory_found">Gnun-e sot-categorìe trovà</string>
@@ -274,6 +278,7 @@
   <string name="copy_wikicode">Copié ël test wiki ant ël pògia-feuj</string>
   <string name="wikicode_copied">Ël test wiki a l\'é stàit copià ant ël pògia-feuj</string>
   <string name="nearby_location_not_available">«A prossimità» a podrìa marcé nen bin, soa posission a l\'é nen disponìbil.</string>
+  <string name="nearby_showing_pins_offline">Aragnà nen disponìbil. As mostro mach ij pòst an memòria local.</string>
   <string name="upload_location_access_denied">Acess a la localisassion arfudà. Për piasì, ch\'a definissa soa localisassion a man për dovré costa fonsionalità.</string>
   <string name="location_permission_rationale_nearby">A-i é da manca dël përmess pr\'ësmon-e na lista dij pòst davzin</string>
   <string name="location_permission_rationale_explore">A-i é da manca dël përmess pr\'ësmon-e na lista dle plance pijà lì-davzin</string>
@@ -357,11 +362,13 @@
   <string name="delete">Dëscancelé</string>
   <string name="Achievements">Realisassion</string>
   <string name="Profile">Profil</string>
+  <string name="badges">Distintiv</string>
   <string name="statistics">Statìstiche</string>
   <string name="statistics_thanks">Aringrassiament arseivù</string>
   <string name="statistics_featured">Plance an evidensa</string>
   <string name="statistics_wikidata_edits">Plance për \"Pòst davzin\"</string>
-  <string name="level">Livel</string>
+  <string name="level">Livel %d</string>
+  <string name="profileLevel">%s (Livel %s)</string>
   <string name="images_uploaded">Plance carià</string>
   <string name="image_reverts">Plance nen anulà</string>
   <string name="images_used_by_wiki">Plance dovrà</string>
@@ -393,6 +400,7 @@
   <string name="map_application_missing">Gnun-a aplicassion cartogràfica compatìbil a l\'é trovasse an sò angign. Për piasì, ch\'a na anstala un-a për dovré costa fonsionalità.</string>
   <string name="title_page_bookmarks_pictures">Plance</string>
   <string name="title_page_bookmarks_locations">Locassion</string>
+  <string name="title_page_bookmarks_categories">Categorìe</string>
   <string name="menu_bookmark">Gionté/Gavé dij marcapàgine</string>
   <string name="provider_bookmarks">Marcapàgine</string>
   <string name="bookmark_empty">A l\'ha giontà gnun marcapàgina</string>
@@ -794,4 +802,22 @@
   <string name="red_pin">Ës pòst a l\'ha ancor gnun-e fòto, ch\'a na pija un-a!</string>
   <string name="green_pin">Ës pòst a l\'ha già dle fòto.</string>
   <string name="grey_pin">An camin ch\'as verìfica si cost pòst -sì a l\'ha dle fòto.</string>
+  <string name="error_while_loading">Eror durant ël cariament</string>
+  <string name="no_usages_found">Gnun usagi trovà</string>
+  <string name="usages_on_commons_heading">Commons</string>
+  <string name="usages_on_other_wikis_heading">Àutre wiki</string>
+  <string name="bullet_point">•</string>
+  <string name="file_usages_container_heading">Usagi dl\'archivi</string>
+  <string name="title_activity_single_web_view">SingleWebViewActivity</string>
+  <string name="account">Cont</string>
+  <string name="vanish_account">Flambé ël cont</string>
+  <string name="account_vanish_request_confirm_title">Avis d\'eliminassion dël cont</string>
+  <string name="account_vanish_request_confirm">L\'eliminassion a l\'é &lt;b&gt;l\'ùltima arsorsa&lt;/b&gt; e a dovrìa &lt;b&gt;esse dovrà mach si chiel a veul chité ëd modifiché për sempe&lt;/b&gt; e ëdcò s\'a veul ëstërmé pi che possìbil soe assossiassion passà.&lt;br/&gt;&lt;br/&gt;La dëscancelassion ëd cont su Wikimedia a l\'é fàita an modificand sò stranòm an manera che j\'àutri a peulo pa arconòsse soe contribussion ant un process ciamà dëscancelassion ëd cont. &lt;b&gt;La sparission a garantiss pa l\'anonimà complet ni a gava le contribussion dai proget&lt;/b&gt;.</string>
+  <string name="caption">Legenda</string>
+  <string name="caption_copied_to_clipboard">Legenda copià an sla taulëtta</string>
+  <string name="congratulations_all_pictures_in_this_album_have_been_either_uploaded_or_marked_as_not_for_upload">Congratulassion, tute le fòto ëd s\'àlbom a son ëstàita carià opura marcà coma da nen carié.</string>
+  <string name="show_in_explore">Smon-e andrinta a Explore</string>
+  <string name="show_in_nearby">Smon-e andrinta a Nearby</string>
+  <string name="image_tag_line_created_and_uploaded_by">Creà e carià da: %1$s</string>
+  <string name="image_tag_line_created_by_and_uploaded_by">Creà da %1$s e carià da %2$s</string>
 </resources>

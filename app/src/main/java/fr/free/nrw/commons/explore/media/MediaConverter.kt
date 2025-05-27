@@ -11,7 +11,6 @@ import fr.free.nrw.commons.wikidata.model.Entities
 import fr.free.nrw.commons.wikidata.model.gallery.ExtMetadata
 import fr.free.nrw.commons.wikidata.model.gallery.ImageInfo
 import fr.free.nrw.commons.wikidata.mwapi.MwQueryPage
-import org.apache.commons.lang3.StringUtils
 import java.text.ParseException
 import java.util.Date
 import javax.inject.Inject
@@ -19,12 +18,18 @@ import javax.inject.Inject
 class MediaConverter
     @Inject
     constructor() {
+        /**
+         * Creating Media object from MWQueryPage.
+         *
+         * @param page response from the API
+         * @return Media object
+         */
         fun convert(
             page: MwQueryPage,
             entity: Entities.Entity,
             imageInfo: ImageInfo,
         ): Media {
-            val metadata = imageInfo.metadata
+            val metadata = imageInfo.getMetadata()
             requireNotNull(metadata) { "No metadata" }
             // Stores mapping of title attribute to hidden attribute of each category
             val myMap = mutableMapOf<String, Boolean>()
@@ -32,32 +37,25 @@ class MediaConverter
 
             return Media(
                 page.pageId().toString(),
-                imageInfo.thumbUrl.takeIf { it.isNotBlank() } ?: imageInfo.originalUrl,
-                imageInfo.originalUrl,
+                imageInfo.getThumbUrl().takeIf { it.isNotBlank() } ?: imageInfo.getOriginalUrl(),
+                imageInfo.getOriginalUrl(),
                 page.title(),
                 metadata.imageDescription(),
                 safeParseDate(metadata.dateTime()),
                 metadata.licenseShortName(),
                 metadata.prefixedLicenseUrl,
                 getAuthor(metadata),
-                getAuthor(metadata),
-                MediaDataExtractorUtil.extractCategoriesFromList(metadata.categories),
+                imageInfo.getUser(),
+                null,
+                MediaDataExtractorUtil.extractCategoriesFromList(metadata.categories()),
                 metadata.latLng,
                 entity.labels().mapValues { it.value.value() },
                 entity.descriptions().mapValues { it.value.value() },
                 entity.depictionIds(),
+                entity.creatorIds(),
                 myMap,
             )
         }
-
-        /**
-         * Creating Media object from MWQueryPage.
-         * Earlier only basic details were set for the media object but going forward,
-         * a full media object(with categories, descriptions, coordinates etc) can be constructed using this method
-         *
-         * @param page response from the API
-         * @return Media object
-         */
 
         private fun safeParseDate(dateStr: String): Date? =
             try {
@@ -67,30 +65,42 @@ class MediaConverter
             }
 
         /**
-         * This method extracts the Commons Username from the artist HTML information
+         * This method extracts the Commons Username from the artist HTML information.
+         * When the HTML is in customized formatting, it may fail to parse and return null.
          * @param metadata
          * @return
          */
         private fun getAuthor(metadata: ExtMetadata): String? {
-            return try {
-                val authorHtml = metadata.artist()
-                val anchorStartTagTerminalChars = "\">"
-                val anchorCloseTag = "</a>"
+            val authorHtml = metadata.artist()
+            val anchorStartTagTerminalString = "\">"
+            val anchorCloseTag = "</a>"
 
-                return authorHtml.substring(
-                    authorHtml.indexOf(anchorStartTagTerminalChars) +
-                        anchorStartTagTerminalChars
-                            .length,
+            return if (!authorHtml.contains("<") && !authorHtml.contains(">") ) {
+                authorHtml.trim()
+            } else if (!authorHtml.contains(anchorStartTagTerminalString) || !authorHtml.endsWith(anchorCloseTag)) {
+                null
+            } else {
+
+                val authorText = authorHtml.substring(
+                    authorHtml.indexOf(anchorStartTagTerminalString) +
+                            anchorStartTagTerminalString.length,
                     authorHtml.indexOf(anchorCloseTag),
                 )
-            } catch (ex: java.lang.Exception) {
-                ""
+                if (authorText.contains("<") || authorText.contains(">")) {
+                    null
+                } else {
+                    authorText
+                }
             }
         }
     }
 
 private fun Entities.Entity.depictionIds() =
     this[WikidataProperties.DEPICTS]?.mapNotNull { (it.mainSnak.dataValue as? DataValue.EntityId)?.value?.id }
+        ?: emptyList()
+
+private fun Entities.Entity.creatorIds() =
+    this[WikidataProperties.CREATOR]?.mapNotNull { (it.mainSnak.dataValue as? DataValue.EntityId)?.value?.id }
         ?: emptyList()
 
 private val ExtMetadata.prefixedLicenseUrl: String
@@ -104,9 +114,5 @@ private val ExtMetadata.prefixedLicenseUrl: String
         }
 
 private val ExtMetadata.latLng: LatLng?
-    get() =
-        if (!StringUtils.isBlank(gpsLatitude) && !StringUtils.isBlank(gpsLongitude)) {
-            LatLng(gpsLatitude.toDouble(), gpsLongitude.toDouble(), 0.0f)
-        } else {
-            null
-        }
+    get() = LatLng.latLongOrNull(gpsLatitude(), gpsLongitude())
+

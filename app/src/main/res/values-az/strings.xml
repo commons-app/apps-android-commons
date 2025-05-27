@@ -10,6 +10,7 @@
 * Toghrul Rahimli
 * Wertuose
 * Şeyx Şamil
+* Əkrəm
 * Əkrəm Cəfər
 -->
 <resources>
@@ -53,9 +54,11 @@
   <string name="signup">Qeydiyyatdan keç</string>
   <string name="logging_in_title">Giriş edilir</string>
   <string name="logging_in_message">Zəhmət olmasa, gözləyin…</string>
-  <string name="login_success" fuzzy="true">Daxil oldunuz!</string>
+  <string name="login_success">Uğurlu giriş!</string>
   <string name="login_failed">Giriş baş tutmadı!</string>
   <string name="upload_failed">Fayl tapılmadı. Xahiş edirik başqa bir fayl üzərində cəhd edin.</string>
+  <string name="retry_limit_reached">Maksimum təkrar cəhd limitinə çatdınız! Zəhmət olmasa, yükləməni ləğv edin və yenidən cəhd edin</string>
+  <string name="unrestricted_battery_mode">Batareya optimallaşdırılması söndürülsün?</string>
   <string name="authentication_failed" fuzzy="true">Doğrulama alınmadı, xahiş edirəm yenidən daxil olun</string>
   <string name="uploading_started">Yükləmə başladı!</string>
   <string name="upload_completed_notification_title">%1$s yükləndi!</string>

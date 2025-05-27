@@ -56,6 +56,10 @@
     tools:ignore="GoogleAppIndexingWarning"
     tools:replace="android:appComponentFactory">
     <activity
+      android:name=".activity.SingleWebViewActivity"
+      android:exported="false"
+      android:label="@string/title_activity_single_web_view" />
+    <activity
       android:name=".nearby.WikidataFeedback"
       android:exported="false" />
     <activity
@@ -172,7 +176,7 @@
       android:name=".review.ReviewActivity"
       android:label="@string/title_activity_review" />
     <activity
-      android:name=".LocationPicker.LocationPickerActivity"
+      android:name=".locationpicker.LocationPickerActivity"
       android:label="Location Picker" />
 
     <service
@@ -228,12 +232,6 @@
       android:authorities="${applicationId}.bookmarks.contentprovider"
       android:exported="false"
       android:label="@string/provider_bookmarks"
-      android:syncable="false" />
-    <provider
-      android:name=".bookmarks.locations.BookmarkLocationsContentProvider"
-      android:authorities="${applicationId}.bookmarks.locations.contentprovider"
-      android:exported="false"
-      android:label="@string/provider_bookmarks_location"
       android:syncable="false" />
     <provider
       android:name=".bookmarks.items.BookmarkItemsContentProvider"

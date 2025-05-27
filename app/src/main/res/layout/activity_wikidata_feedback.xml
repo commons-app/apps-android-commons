@@ -102,6 +102,7 @@
       android:layout_marginEnd="8dp"
       android:text="SEND"
       android:visibility="visible"
+      android:textColor="@color/white"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="@+id/textHeader"
       app:layout_constraintHorizontal_bias="1.0"

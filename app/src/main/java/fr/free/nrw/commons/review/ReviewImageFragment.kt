@@ -3,18 +3,15 @@ package fr.free.nrw.commons.review
 import android.graphics.Color
 import android.os.Bundle
 import android.text.Html
-import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import fr.free.nrw.commons.CommonsApplication
-import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.auth.csrf.InvalidLoginTokenException
 import fr.free.nrw.commons.databinding.FragmentReviewImageBinding
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment
-import java.util.ArrayList
 import javax.inject.Inject
 
 
@@ -34,7 +31,7 @@ class ReviewImageFragment : CommonsDaggerSupportFragment() {
     lateinit var sessionManager: SessionManager
 
     // Constant variable used to store user's key name for onSaveInstanceState method
-    private val SAVED_USER = "saved_user"
+    private val savedUser = "saved_user"
 
     // Variable that stores the value of user
     private var user: String? = null
@@ -64,7 +61,12 @@ class ReviewImageFragment : CommonsDaggerSupportFragment() {
                     R.string.review_category_explanation,
                     formattedCatString
                 )
-                return Html.fromHtml(stringToConvertHtml).toString()
+                val formattedString = if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+                    Html.fromHtml(stringToConvertHtml, Html.FROM_HTML_MODE_LEGACY).toString()
+                } else {
+                    Html.fromHtml(stringToConvertHtml).toString()
+                }
+                return formattedString
             }
         }
         return getString(R.string.review_no_category)
@@ -126,8 +128,8 @@ class ReviewImageFragment : CommonsDaggerSupportFragment() {
                 enableButtons()
                 question = getString(R.string.review_thanks)
 
-                user = reviewActivity.reviewController.firstRevision?.user
-                    ?: savedInstanceState?.getString(SAVED_USER)
+                user = reviewActivity.reviewController.firstRevision?.user()
+                    ?: savedInstanceState?.getString(savedUser)
 
                 //if the user is null because of whatsoever reason, review will not be sent anyways
                 if (!user.isNullOrEmpty()) {
@@ -170,7 +172,7 @@ class ReviewImageFragment : CommonsDaggerSupportFragment() {
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         //Save user name when configuration changes happen
-        outState.putString(SAVED_USER, user)
+        outState.putString(savedUser, user)
     }
 
     private val reviewCallback: ReviewController.ReviewCallback

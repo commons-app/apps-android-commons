@@ -3,6 +3,7 @@
 * 1917 Ekim Devrimi
 * Envlh
 * Gambollar
+* GolyatGeri
 * Gorizon
 * Gırd
 * Marmase
@@ -199,7 +200,7 @@
   <string name="navigation_item_review">Çım berze cı</string>
   <string name="no_description_found">İzahat nêvineya</string>
   <string name="nearby_info_menu_commons_article">Pela dosyay commonsi</string>
-  <string name="nearby_info_menu_wikidata_article">Pbcey Wikidata</string>
+  <string name="nearby_info_menu_wikidata_article">Pbcey Wikidayıt</string>
   <string name="nearby_info_menu_wikipedia_article">Meqaley Wikipedia</string>
   <string name="upload_problem_exist">Muhtemel problemê nê resımi</string>
   <string name="upload_problem_image_dark">Resım zehf tariyo.</string>
@@ -216,7 +217,7 @@
   <string name="skip_login">Ravêre</string>
   <string name="navigation_item_login">Cı kewe</string>
   <string name="nearby_directions">Telimati</string>
-  <string name="nearby_wikidata">Wikidata</string>
+  <string name="nearby_wikidata">Wikidayıt</string>
   <string name="nearby_wikipedia">Wikipediya</string>
   <string name="nearby_commons">Commons</string>
   <string name="about_rate_us">Rey bıdê</string>
@@ -246,7 +247,7 @@
   <string name="explore_tab_title_featured">Weçinaye</string>
   <string name="explore_tab_title_mobile">Raya mobiliya biyo bar</string>
   <string name="explore_tab_title_map">Xerita</string>
-  <string name="successful_wikidata_edit">Resım , Wikidata dê biyo obcey %1$s miyan!</string>
+  <string name="successful_wikidata_edit">Resım , Wikidayıt dê biyo obcey %1$s miyan!</string>
   <string name="menu_set_wallpaper">Wallpaper eyar kerê</string>
   <string name="wallpaper_set_successfully">Wallpaper eyar biyo!</string>
   <string name="quiz">Quiz</string>
@@ -264,7 +265,7 @@
   <string name="statistics_thanks">Teşekurê gêriyayi</string>
   <string name="statistics_featured">Resımê weçinıteyi</string>
   <string name="statistics_wikidata_edits">\"Cayê nezdı\" ra resımi</string>
-  <string name="level">Sewiya</string>
+  <string name="level" fuzzy="true">Sewiya</string>
   <string name="images_uploaded">Resımi biyê bar</string>
   <string name="image_reverts">Resımi peyser nêgeriyaye</string>
   <string name="images_used_by_wiki">Gureyniyaye resımi</string>
@@ -314,7 +315,7 @@
   <string name="share_image_via">Resımi vıla kerê pê</string>
   <string name="no_achievements_yet" fuzzy="true">Hewna to iştirak nêkerdo</string>
   <string name="account_created">Hesab vıraziya!</string>
-  <string name="text_copy">Metın kopyayê panoyi biyo</string>
+  <string name="text_copy">Metın be panoyi ra kopya bi</string>
   <string name="notification_mark_read">Pêhesnayışi wanaye nışan bıkerê</string>
   <string name="some_error">Yew xeta biye!</string>
   <string name="place_state">Weziyetê cayi:</string>
@@ -349,4 +350,6 @@
   <string name="read_help_link">Tayêna bıwane</string>
   <string name="description">Şınasnayış</string>
   <string name="reset">Raçarne</string>
+  <string name="account">Hesab</string>
+  <string name="caption">Bınnuşte</string>
 </resources>

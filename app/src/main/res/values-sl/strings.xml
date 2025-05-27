@@ -90,13 +90,13 @@
   <string name="logging_in_message">Prosimo, počakajte ...</string>
   <string name="updating_caption_title">Posodabljam napise in opise</string>
   <string name="updating_caption_message">Prosimo, počakajte ...</string>
-  <string name="login_success" fuzzy="true">Uspešno ste se prijavili!</string>
-  <string name="login_failed" fuzzy="true">Prijava ni uspela!</string>
+  <string name="login_success">Uspešna prijava!</string>
+  <string name="login_failed">Prijava ni uspela!</string>
   <string name="upload_failed">Datoteka ni bila najdena. Prosimo, poskusite z drugo datoteko.</string>
   <string name="retry_limit_reached">Dosežena je največja omejitev ponovnih poskusov! Prekličite nalaganje in poskusite znova.</string>
   <string name="unrestricted_battery_mode">Ali želite izklopiti optimizacijo baterije?</string>
   <string name="suggest_unrestricted_mode">Nalaganje več kot 3 slik deluje bolj zanesljivo, ko je optimizacija baterije izklopljena. Za nemoteno nalaganje v nastavitvah izklopite optimizacijo baterije za aplikacijo Commons. \n\nMožni koraki za izklop optimizacije baterije:\n\n1. korak: Dotaknite se spodnjega gumba »Nastavitve«.\n\n 2. korak: Preklopite z »Ni optimizirano« na »Vse aplikacije«.\n\n3. korak: Poiščite »Commons« ali »fr.free.nrw.commons«.\n\n 4. korak: tapnite ga in izberite »Ne optimiziraj«.\n\n\n5. korak: Pritisnite »Končano«.</string>
-  <string name="authentication_failed" fuzzy="true">Avtentikacija ni uspela; prosimo, prijavite se znova</string>
+  <string name="authentication_failed">Avtentikacija ni uspela. Prosimo, prijavite se znova.</string>
   <string name="uploading_started">Nalaganje se je začelo!</string>
   <string name="uploading_queued">Nalaganje na čakanju (vklopljen je način omejene povezanosti)</string>
   <string name="upload_completed_notification_title">Datoteka »%1$s« je naložena!</string>
@@ -117,17 +117,20 @@
   <string name="menu_from_camera">Posnemi fotografijo</string>
   <string name="menu_nearby">Bližnje</string>
   <string name="provider_contributions">Moje naložitve</string>
+  <string name="menu_copy_link">Kopiraj povezavo</string>
+  <string name="menu_link_copied">Povezava je kopirana v odložišče</string>
   <string name="menu_share">Deli</string>
   <string name="menu_view_file_page">Ogled opisne strani</string>
   <string name="share_title_hint">Napis (obvezen)</string>
   <string name="add_caption_toast">Prosimo, dodajte sliki napis</string>
   <string name="share_description_hint">Opis</string>
   <string name="share_caption_hint">Napis</string>
-  <string name="login_failed_network" fuzzy="true">Prijava ni uspela – omrežna napaka</string>
+  <string name="login_failed_network">Prijava ni mogoča – omrežna napaka</string>
   <string name="login_failed_throttled">Preveč neuspešnih nalaganj. Prosimo, poskusite znova čez nekaj minut.</string>
   <string name="login_failed_blocked">Ta uporabnik je v Zbirki žal blokiran</string>
   <string name="login_failed_2fa_needed">Navesti morate svojo dvofaktorsko avtentikacijsko kodo.</string>
-  <string name="login_failed_generic" fuzzy="true">Prijava ni uspela</string>
+  <string name="login_failed_email_auth_needed">Na vaš e-poštni naslov je bila poslana potrditvena koda za prijavo. Prosimo, vnesite kodo za prijavo.</string>
+  <string name="login_failed_generic">Prijava ni uspela</string>
   <string name="share_upload_button">Naloži</string>
   <string name="multiple_share_base_title">Poimenuj skupino</string>
   <string name="provider_modifications">Spremembe</string>
@@ -135,6 +138,7 @@
   <string name="categories_search_text_hint">Poišči kategorije</string>
   <string name="depicts_search_text_hint">Poiščite predmete, ki jih vaša predstavnostna datoteka prikazuje (gora, Tadž Mahal, ...)</string>
   <string name="menu_save_categories">Shrani</string>
+  <string name="menu_overflow_desc">Prelivni meni</string>
   <string name="refresh_button">Osveži</string>
   <string name="display_list_button">Seznam</string>
   <string name="contributions_subtitle_zero">(Ni še naložitev)</string>
@@ -231,6 +235,7 @@
   <string name="become_a_tester_title">Postanite beta preizkuševalec</string>
   <string name="become_a_tester_description">Prijavite se na naš beta kanal v trgovini Google Play in pridobite zgodnji dostop do novih možnosti in popravkov hroščev</string>
   <string name="_2fa_code">Koda 2FA</string>
+  <string name="email_auth_code">Koda za preverjanje e-pošte</string>
   <string name="logout_verification">Ali se res želite odjaviti?</string>
   <string name="mediaimage_failed">Nalaganje datoteke ni uspelo</string>
   <string name="no_subcategory_found">Najdena ni bila nobena podkategorija</string>
@@ -251,6 +256,7 @@
   <string name="navigation_item_about">O orodju</string>
   <string name="navigation_item_settings">Nastavitve</string>
   <string name="navigation_item_feedback">Odziv</string>
+  <string name="navigation_item_feedback_github">Povratne informacije prek GitHuba</string>
   <string name="navigation_item_logout">Odjava</string>
   <string name="navigation_item_info">Vadnica</string>
   <string name="navigation_item_notification">Obvestila</string>
@@ -284,14 +290,16 @@
   <string name="nominated_see_more">Za podrobnosti glejte spletno stran</string>
   <string name="skip_login">Preskoči</string>
   <string name="navigation_item_login">Prijava</string>
-  <string name="skip_login_title" fuzzy="true">Ali res želite preskočiti prijavo?</string>
-  <string name="skip_login_message" fuzzy="true">V prihodnosti se boste morali za nalaganje slik prijaviti.</string>
+  <string name="skip_login_title">Ali res želite preskočiti prijavo?</string>
+  <string name="skip_login_message">V prihodnosti se boste morali za nalaganje slik prijaviti.</string>
   <string name="login_alert_message">Za uporabo te možnosti se prijavite</string>
   <string name="copy_wikicode">Kopiraj vikibesedilo v odložišče</string>
   <string name="wikicode_copied">Vikibesedilo je skopirano v odložišče</string>
   <string name="nearby_location_not_available">Bližnje mogoče ne bo pravilno delovalo. Kraj ni na voljo.</string>
+  <string name="nearby_showing_pins_offline">Internet ni na voljo. Prikazani so samo predpomnjeni kraji.</string>
   <string name="upload_location_access_denied">Dostop do lokacije je bil zavrnjen. Za uporabo te možnosti ročno nastavite svojo lokacijo.</string>
   <string name="location_permission_rationale_nearby">Za prikaz seznama bložnjih krajev je potrebno dovoljenje</string>
+  <string name="location_permission_rationale_explore">Za prikaz seznama bložnjih slik je potrebno dovoljenje</string>
   <string name="nearby_directions">Smeri</string>
   <string name="nearby_wikidata">Wikipodatki</string>
   <string name="nearby_wikipedia">Wikipedija</string>
@@ -351,7 +359,7 @@
   <string name="construction_event_answer">V Wikimedijini zbirki so zelo dobrodošle slike, ki prikazujejo tehniko ali kulturo.</string>
   <string name="congratulatory_message_quiz">Pravilno ste odgovorili na %1$s vprašanj. Čestitamo!</string>
   <string name="warning_for_no_answer">Za odgovor na vprašanje izberite eno od dveh možnosti.</string>
-  <string name="user_not_logged_in" fuzzy="true">Seja prijave je potekla. Poskusite se prijaviti znova.</string>
+  <string name="user_not_logged_in">Prijava je potekla. Prijavite se znova.</string>
   <string name="quiz_result_share_message">Delite kviz s prijatelji!</string>
   <string name="continue_message">Nadaljuj</string>
   <string name="correct">Pravilen odgovor</string>
@@ -359,7 +367,8 @@
   <string name="quiz_screenshot_question">Ali je ta zaslonski posnetek primeren za naložitev?</string>
   <string name="share_app_title">Delite aplikacijo</string>
   <string name="rotate">Zasukaj</string>
-  <string name="error_fetching_nearby_places" fuzzy="true">Napaka pri pridobivanju bližnjih krajev.</string>
+  <string name="error_fetching_nearby_places">Ni bilo mogoče naložiti bližnjih krajev.</string>
+  <string name="no_pictures_in_this_area">Na tem območju ni slik</string>
   <string name="no_nearby_places_around">Tu okoli ni bližnjih krajev</string>
   <string name="error_fetching_nearby_monuments">Napaka pri pridobivanju bližnjih spomenikov.</string>
   <string name="no_recent_searches">Ni nedavnih iskanj</string>
@@ -371,11 +380,13 @@
   <string name="delete">Izbriši</string>
   <string name="Achievements">Dosežki</string>
   <string name="Profile">Profil</string>
+  <string name="badges">Značke</string>
   <string name="statistics">Statistika</string>
   <string name="statistics_thanks">Prejete zahvale</string>
   <string name="statistics_featured">Izbrane slike</string>
   <string name="statistics_wikidata_edits">Slike iz »Bližnji kraji«</string>
-  <string name="level">Raven</string>
+  <string name="level">Raven %d</string>
+  <string name="profileLevel">%s (raven %s)</string>
   <string name="images_uploaded">Naložene slike</string>
   <string name="image_reverts">Nevrnjene slike</string>
   <string name="images_used_by_wiki">Uporabljene slike</string>
@@ -407,6 +418,7 @@
   <string name="map_application_missing">V vaši napravi ni mogoče najti nobene združljive aplikacije z zemljevidom. Za uporabo te možnosti namestite ustrezno aplikacijo z zemljevidom.</string>
   <string name="title_page_bookmarks_pictures">Slike</string>
   <string name="title_page_bookmarks_locations">Kraji</string>
+  <string name="title_page_bookmarks_categories">Kategorije</string>
   <string name="menu_bookmark">Dodaj/odstrani zaznamek</string>
   <string name="provider_bookmarks">Zaznamki</string>
   <string name="bookmark_empty">Dodali niste nobenega zaznamka</string>
@@ -434,7 +446,7 @@
   <string name="never_ask_again">Nikoli več ne vprašaj</string>
   <string name="display_location_permission_title">Vprašaj za dovoljenje za lokacijo</string>
   <string name="display_location_permission_explanation">Vprašaj za dovoljenje za uporabo lokacije, ko je to potrebno za ogled obvestila o bližnjih krajih.</string>
-  <string name="achievements_fetch_failed" fuzzy="true">Nekaj je šlo narobe. Vaših dosežkov nismo mogli pridobiti.</string>
+  <string name="achievements_fetch_failed">Nekaj je šlo narobe. Dosežkov ni bilo mogoče pridobiti.</string>
   <string name="achievements_fetch_failed_ultimate_achievement">Opravili ste toliko prispevkov, da jih naš sistem izračunavanja ne more razčleniti. To je vrhunski dosežek.</string>
   <string name="ends_on">Konec:</string>
   <string name="display_campaigns">Prikaži akcije</string>
@@ -450,7 +462,7 @@
   <string name="open_document_photo_picker_explanation">Novi izbirnik fotografij Android lahko izgubi podatke o lokaciji. Omogočite ga, če ga želite uporabljati.</string>
   <string name="location_loss_warning">Izklop te možnosti lahko aktivira novi izbirnik fotografij za Android. S tem tvegate izgubo podatkov o informacijah.\n\nZa več informacij kliknite »Preberi več«.</string>
   <string name="nearby_campaign_dismiss_message">Kampanj ne boste več videli. Če želite, lahko tovrstno obveščanje znova vklopite v nastavitvah.</string>
-  <string name="this_function_needs_network_connection" fuzzy="true">Ta možnost zahteva omrežno povezavo. Prosimo, preverite vaše nastavitve povezave.</string>
+  <string name="this_function_needs_network_connection">Ta funkcija zahteva omrežno povezavo. Prosimo, preverite vaše povezavne nastavitve.</string>
   <string name="error_processing_image">Pri obdelavi slike je prišlo do napake. Prosimo, poskusite znova!</string>
   <string name="getting_edit_token">Pridobivam žeton za urejanje</string>
   <string name="check_category_adding_template">Dodajam predlogo za preverjanje kategorije</string>
@@ -488,6 +500,7 @@
   <string name="no_notification">Nimate neprebranih obvestil</string>
   <string name="no_read_notification">Ninate prebranih obvestil</string>
   <string name="share_logs_using">Delite dnevniške zapise z</string>
+  <string name="check_your_email_inbox">Preverite svoj e-poštni nabiralnik</string>
   <string name="menu_option_read">Ogled prebranih</string>
   <string name="menu_option_unread">Ogled neprebranih</string>
   <string name="error_occurred_in_picking_images">Pri izbiri slik je prišlo do napake</string>
@@ -566,7 +579,7 @@
   <string name="coordinates_edit_helper_edit_message_else">Ni bilo mogoče dodati koordinat.</string>
   <string name="description_edit_helper_edit_message_else">Ni bilo mogoče dodati opisov.</string>
   <string name="caption_edit_helper_edit_message_else">Napisa ni bilo mogoče dodati.</string>
-  <string name="coordinates_picking_unsuccessful" fuzzy="true">Koordinat ni bilo mogoče pridobiti.</string>
+  <string name="coordinates_picking_unsuccessful">Koordinat slike ni bilo mogoče posodobiti.</string>
   <string name="descriptions_picking_unsuccessful">Ni bilo mogoče pridobiti opisov.</string>
   <string name="description_activity_title">Uredi opise in napise</string>
   <string name="share_image_via">Deli slike prek ...</string>
@@ -581,12 +594,13 @@
   <string name="place_state_needs_photo">Potrebuje fotografijo</string>
   <string name="place_type">Vrsta kraja:</string>
   <string name="nearby_search_hint">Most, muzej, hotel idr.</string>
-  <string name="you_must_reset_your_passsword" fuzzy="true">Pri prijavi je šlo nekaj narobe; ponastaviti morate geslo!!</string>
+  <string name="you_must_reset_your_passsword">Pri prijavi je šlo nekaj narobe. Ponastaviti morate geslo!!</string>
   <string name="title_for_media">MEDIJ</string>
   <string name="title_for_child_classes">PODREJENI RAZREDI</string>
   <string name="title_for_parent_classes">NADREJENI RAZREDI</string>
   <string name="upload_nearby_place_found_title">Najden bližnji kraj</string>
-  <string name="upload_nearby_place_found_description_singular" fuzzy="true">Ali je to fotografija kraja %1$s?</string>
+  <string name="upload_nearby_place_found_description_plural">So to slike %1$s?</string>
+  <string name="upload_nearby_place_found_description_singular">Ali je to slika %1$s?</string>
   <string name="title_app_shortcut_bookmark">Zaznamki</string>
   <string name="title_app_shortcut_setting">Nastavitve</string>
   <string name="remove_bookmark">Odstranjeno iz zaznamkov</string>
@@ -600,8 +614,10 @@
   <string name="cannot_open_location_settings">Nastavitev kraja ni bilo mogoče odpreti. Kraj vklopite ročno.</string>
   <string name="recommend_high_accuracy_mode">Za najboljše zadetke izberite način Visoka natančnost.</string>
   <string name="ask_to_turn_location_on">Vklopim kraj?</string>
+  <string name="ask_to_turn_location_on_text">Vljudno vklopite lokacijske storitve, da bo aplikacija prikazovala vašo trenutno lokacijo.</string>
   <string name="nearby_needs_location">Za Bližnje je trebs vklopiti kraj</string>
-  <string name="upload_map_location_access" fuzzy="true">Za samodejno nastavitev lokacije morate omogočiti dostop do vaše trenutne lokacije.</string>
+  <string name="explore_map_needs_location">Raziskovanje zemljevida potrebuje dovoljenje za lokacijo za prikaz bližnjih slik</string>
+  <string name="upload_map_location_access">Za samodejno nastavitev lokacije morate dodeliti dovoljenje za lokacijo.</string>
   <string name="use_location_from_similar_image">Ali ste sliki posneli na istem kraju? Ali želite uporabiti geografsko širino/dolžino desne slike?</string>
   <string name="load_more">Naloži več</string>
   <string name="nearby_no_results">Najden ni noben kraj. Poskusite spremeniti iskalne parametre.</string>
@@ -704,7 +720,7 @@
   <string name="read_phone_state_permission_message">Bližnji zemljevidi morajo za pravilno delovanje prebrati STANJE TELEFONA</string>
   <string name="contributions_of_user">Prispevki uporabnika: %s</string>
   <string name="achievements_of_user">Dosežki uporabnika: %s</string>
-  <string name="menu_view_user_page" fuzzy="true">Ogled uporabniške strani</string>
+  <string name="menu_view_user_page">Ogled uporabniškega profila</string>
   <string name="edit_depictions">Uredi slike</string>
   <string name="edit_categories">Uredi kategorije</string>
   <string name="advanced_options">Napredne možnosti</string>
@@ -717,8 +733,8 @@
   <string name="add_location">Dodaj lokacijo</string>
   <string name="feedback_sharing_data_alert">Iz te e-pošte odstranite vse podatke, ki jih ne želite javno deliti. Upoštevajte, da bodo vaš e-poštni naslov ter povezano ime in profilna slika javno vidni.</string>
   <string name="explore_map_details">Podrobnosti</string>
-  <string name="achievements_unavailable_beta" fuzzy="true">Dosežki so na voljo samo v stabilni različici (preverite dokumentacijo razvijalcev).</string>
-  <string name="leaderboard_unavailable_beta" fuzzy="true">Lestvica uvrstitev je na voljo samo v stabilni različici (glejte dokumentacijo razvijalcev).</string>
+  <string name="achievements_unavailable_beta">Dosežki so na voljo samo v produkcijski različici. Preverite dokumentacijo razvijalcev.</string>
+  <string name="leaderboard_unavailable_beta">Lestvica uvrstitev je na voljo samo v produkcijski različici. Glejte dokumentacijo razvijalcev.</string>
   <string name="copyright_popup">Prosimo, nalagajte samo slike, ki ste jih ustvarili sami. Naložnike avtorsko varovanega gradiva bomo blokirali. To velja tudi za betarazličico. Hvala za preizkušanje aplikacije!</string>
   <string name="select_feedback_data_choice">Prosimo, odizberite vse podatke, ki jih ne želite deliti javno.</string>
   <string name="api_level">Raven API</string>
@@ -762,13 +778,72 @@
   <string name="see_your_achievements">Oglejte si svoje dosežke</string>
   <string name="edit_image">Uredi sliko</string>
   <string name="edit_location">Uredi lokacijo</string>
+  <string name="location_updated">Lokacija posodobljena!</string>
+  <string name="remove_location">Odstrani lokacijo</string>
+  <string name="remove_location_warning_title">Opozorilo o odstranitvi lokacije</string>
+  <string name="remove_location_warning_desc">Lokacija naredi slike bolj uporabne in jih je lažje najti. Ali res želite odstraniti lokacijo te slike?</string>
+  <string name="location_removed">Lokacija odstranjena!</string>
   <string name="send_thanks_to_author">Zahvala avtorju</string>
   <string name="error_sending_thanks">Napaka pri pošiljanju zahvale avtorju.</string>
+  <string name="invalid_login_message">Vaša prijava je potekla. Prosimo, prijavite se znova.</string>
+  <string name="no_application_available_to_open_gpx_files">Na voljo ni nobena aplikacija za odpiranje datotek GPX</string>
+  <string name="file_saved_successfully">Datoteka je uspešno shranjena</string>
+  <string name="do_you_want_to_open_gpx_file">Ali želite odpreti datoteko GPX?</string>
+  <string name="do_you_want_to_open_kml_file">Ali želite odpreti datoteko KML?</string>
+  <string name="failed_to_save_kml_file">Shranjevanje datoteke KML ni uspelo.</string>
+  <string name="failed_to_save_gpx_file">Shranjevanje datoteke GPX ni uspelo.</string>
+  <string name="saving_kml_file">Shranjevanje datoteke KML</string>
+  <string name="saving_gpx_file">Shranjevanje datoteke GPX</string>
   <plurals name="custom_picker_images_selected_title_appendix">
     <item quantity="one">%d izbrana slika</item>
     <item quantity="two">%d izbrani sliki</item>
     <item quantity="few">%d izbranih slik</item>
     <item quantity="other">%d izbranih slik</item>
   </plurals>
+  <string name="multiple_files_depiction">Upoštevajte, da imajo vse slike v večkratnem nalaganju enake kategorije in upodobitve. Če slike nimajo skupnih upodobitev in kategorij, izvedite več ločenih nalaganj.</string>
+  <string name="multiple_files_depiction_header">Opomba o večkratnih nalaganjih</string>
+  <string name="nearby_wikitalk">Sporočite problem s tem predmetom v Wikipodatke</string>
+  <string name="please_enter_some_comments">Prosimo, vnesite nekaj komentarjev</string>
+  <string name="talk">Pogovor</string>
+  <string name="write_something_about_the_item">Napišite nekaj o predmetu »%1$s«. To bo javno vidno.</string>
+  <string name="does_not_exist_anymore_no_picture_can_ever_be_taken_of_it">»%1$s« ne obstaja več. Slike tega ni več mogoče posneti.</string>
   <string name="is_at_a_different_place_please_specify_the_correct_place_below_if_possible_tell_us_the_correct_latitude_longitude">»%1$s« je na drugem kraju. Spodaj navedite pravi kraj in, če je mogoče, napišite pravilno zemljepisno širino in dolžino.</string>
+  <string name="other_problem_or_information_please_explain_below">Drug problem ali informacija (razložite spodaj).</string>
+  <string name="feedback_destination_note">Vaše povratne informacije bodo objavljene na naslednji strani vikija: &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Mobile_app/Feedback\"&gt;Commons:Mobilna aplikacija/Povratne informacije&lt;/a&gt;</string>
+  <string name="are_you_sure_that_you_want_cancel_all_the_uploads">Ste prepričani, da želite preklicati vse nalaganja?</string>
+  <string name="cancelling_all_the_uploads">Preklic vseh nalaganj ...</string>
+  <string name="uploads">Naložitve</string>
+  <string name="pending">Čakajoče</string>
+  <string name="failed">Neuspešno</string>
+  <string name="could_not_load_place_data">Podatkov o kraju ni bilo mogoče naložiti</string>
+  <string name="custom_selector_delete_folder">Izbriši mapo</string>
+  <string name="custom_selector_confirm_deletion_title">Potrdi izbris</string>
+  <string name="custom_selector_confirm_deletion_message">Ali ste prepričani, da želite izbrisati mapo %1$s, ki vsebuje %2$d predmetov?</string>
+  <string name="custom_selector_delete">Izbriši</string>
+  <string name="custom_selector_cancel">Prekliči</string>
+  <string name="custom_selector_folder_deleted_success">Mapa %1$s je uspešno izbrisana</string>
+  <string name="custom_selector_folder_deleted_failure">Izbris mape %1$s ni uspel</string>
+  <string name="custom_selector_error_trashing_folder_contents">Napaka pri brisanju vsebine mape: %1$s</string>
+  <string name="custom_selector_folder_not_found_error">Pridobitev poti mape za bucket ID ni uspela: %1$d</string>
+  <string name="red_pin">Ta kraj še nima slike; posnamite jo!</string>
+  <string name="green_pin">Ta kraj že ima sliko.</string>
+  <string name="grey_pin">Preverjam, ali ta kraj že ima sliko.</string>
+  <string name="error_while_loading">Napaka pri nalaganju</string>
+  <string name="no_usages_found">Ni najdenih uporab</string>
+  <string name="usages_on_commons_heading">Zbirka</string>
+  <string name="usages_on_other_wikis_heading">Drugi vikiji</string>
+  <string name="bullet_point">•</string>
+  <string name="file_usages_container_heading">Uporabe datotek</string>
+  <string name="title_activity_single_web_view">SingleWebViewActivity</string>
+  <string name="account">Račun</string>
+  <string name="vanish_account">Izgini račun</string>
+  <string name="account_vanish_request_confirm_title">Opozorilo o izginjenju računa</string>
+  <string name="account_vanish_request_confirm">Izginotje je &lt;b&gt;skrajni ukrep&lt;/b&gt; in ga &lt;b&gt;uporabite samo, če želite za vedno prenehati z urejanjem&lt;/b&gt;, in tudi, da skrijete čim več svojih preteklih povezav.\n\nIzbris računa v Wikimedijini zbirki se opravi tako, da spremenite ime svojega računa, da drugi ne morejo prepoznati vaših prispevkov. &lt;b&gt;Izbris ne zagotavlja popolne anonimnosti ali odstranitve prispevkov k projektom&lt;/b&gt;.</string>
+  <string name="caption">Napis</string>
+  <string name="caption_copied_to_clipboard">Napis je kopiran v odložišče</string>
+  <string name="congratulations_all_pictures_in_this_album_have_been_either_uploaded_or_marked_as_not_for_upload">Čestitamo, vse slike v tem albumu so naložene ali označene kot neprimerne za nalaganje.</string>
+  <string name="show_in_explore">Prikaži v Raziskuj</string>
+  <string name="show_in_nearby">Prikaži v Bližnje</string>
+  <string name="image_tag_line_created_and_uploaded_by">Ustvaril_a in naložil_a: %1$s</string>
+  <string name="image_tag_line_created_by_and_uploaded_by">Ustvaril_a %1$s in naložil_a %2$s</string>
 </resources>

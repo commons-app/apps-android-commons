@@ -303,7 +303,7 @@
   <string name="statistics_thanks">Agraïments rebuts</string>
   <string name="statistics_featured">Imatges destacades</string>
   <string name="statistics_wikidata_edits">Imatges per proximitat</string>
-  <string name="level">Nivell</string>
+  <string name="level" fuzzy="true">Nivell</string>
   <string name="images_uploaded">Imatges carregades</string>
   <string name="image_reverts">Imatges no revertides</string>
   <string name="images_used_by_wiki">Imatges utilitzades</string>

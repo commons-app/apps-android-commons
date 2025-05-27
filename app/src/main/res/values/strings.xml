@@ -99,6 +99,8 @@
   <string name="menu_from_camera">Take photo</string>
   <string name="menu_nearby">Nearby</string>
   <string name="provider_contributions">My uploads</string>
+  <string name="menu_copy_link">Copy link</string>
+  <string name="menu_link_copied">The link has been copied to the clipboard</string>
   <string name="menu_share">Share</string>
   <string name="menu_view_file_page">View file page</string>
   <string name="share_title_hint">Caption (Required)</string>
@@ -109,6 +111,7 @@
   <string name="login_failed_throttled">Too many unsuccessful attempts. Please try again in a few minutes.</string>
   <string name="login_failed_blocked">Sorry, this user has been blocked on Commons</string>
   <string name="login_failed_2fa_needed">You must provide your two factor authentication code.</string>
+  <string name="login_failed_email_auth_needed">A login verification code has been sent to your email address. Please provide the code to log in.</string>
   <string name="login_failed_generic">Log-in failed</string>
   <string name="share_upload_button">Upload</string>
   <string name="multiple_share_base_title">Name this set</string>
@@ -216,6 +219,7 @@
   <string name="become_a_tester_description">Opt-in to our beta channel on Google Play and get early access to new features and bug fixes</string>
   <string name="beta_opt_in_link">https://play.google.com/apps/testing/fr.free.nrw.commons</string>
   <string name="_2fa_code">2FA Code</string>
+  <string name="email_auth_code">Email verification code</string>
   <string name="logout_verification">Do you really want to logout?</string>
   <string name="mediaimage_failed">Media Image Failed</string>
   <string name="no_subcategory_found">No subcategories found</string>
@@ -280,6 +284,7 @@
   <string name="copy_wikicode">Copy the wikitext to the clipboard</string>
   <string name="wikicode_copied">The wikitext was copied to the clipboard</string>
   <string name="nearby_location_not_available">Nearby might not work properly, Location not available.</string>
+  <string name="nearby_showing_pins_offline">Internet unavailable. Showing only cached places.</string>
   <string name="upload_location_access_denied">Location access denied. Please set your location manually to use this feature.</string>
   <string name="location_permission_rationale_nearby">Permission required to display a list of nearby places</string>
   <string name="location_permission_rationale_explore">Permission required to display a list of nearby images</string>
@@ -371,11 +376,13 @@
   <string name="delete">Delete</string>
   <string name="Achievements">Achievements</string>
   <string name="Profile">Profile</string>
+  <string name="badges">Badges</string>
   <string name="statistics">Statistics</string>
   <string name="statistics_thanks">Thanks Received</string>
   <string name="statistics_featured">Featured Images</string>
   <string name="statistics_wikidata_edits">Images via \"Nearby Places\"</string>
-  <string name="level">Level</string>
+  <string name="level">Level %d</string>
+  <string name="profileLevel">%s (Level %s)</string>
   <string name="images_uploaded">Images Uploaded</string>
   <string name="image_reverts">Images Not Reverted</string>
   <string name="images_used_by_wiki">Images Used</string>
@@ -411,6 +418,7 @@
   <string name="map_application_missing">No compatible map application could be found on your device. Please install a map application to use this feature.</string>
   <string name="title_page_bookmarks_pictures">Pictures</string>
   <string name="title_page_bookmarks_locations">Locations</string>
+  <string name="title_page_bookmarks_categories">Categories</string>
   <string name="menu_bookmark">Add/Remove to bookmarks</string>
   <string name="provider_bookmarks">Bookmarks</string>
   <string name="bookmark_empty">You haven\'t added any bookmarks</string>
@@ -824,6 +832,7 @@ Upload your first media by tapping on the add button.</string>
   <string name="talk">Talk</string>
   <string name="write_something_about_the_item">Write something about the \'%1$s\' item. It will be publicly visible.</string>
   <string name="does_not_exist_anymore_no_picture_can_ever_be_taken_of_it">\'%1$s\' does not exist anymore, no picture can ever be taken of it.</string>
+  <string name="is_at_a_different_place_wikidata">\'%1$s\' is at a different place.</string>
   <string name="is_at_a_different_place_please_specify_the_correct_place_below_if_possible_tell_us_the_correct_latitude_longitude">\'%1$s\' is at a different place. Please specify the correct place below, and if possible, write the correct latitude and longitude.</string>
   <string name="other_problem_or_information_please_explain_below">Other problem or information (please explain below).</string>
   <string name="feedback_destination_note">Your feedback gets posted to the following wiki page: <![CDATA[ <a href="https://commons.wikimedia.org/wiki/Commons:Mobile_app/Feedback">Commons:Mobile app/Feedback</a> ]]></string>
@@ -847,4 +856,24 @@ Upload your first media by tapping on the add button.</string>
   <string name="red_pin">This place has no picture yet, go take one!</string>
   <string name="green_pin">This place has a picture already.</string>
   <string name="grey_pin">Now checking whether this place has a picture.</string>
+
+  <string name="error_while_loading">Error while loading</string>
+  <string name="no_usages_found">No usages found</string>
+  <string name="usages_on_commons_heading">Commons</string>
+  <string name="usages_on_other_wikis_heading">Other wikis</string>
+  <string name="bullet_point">•</string>
+  <string name="file_usages_container_heading">File usages</string>
+  <string name="title_activity_single_web_view">SingleWebViewActivity</string>
+  <string name="account">Account</string>
+  <string name="vanish_account">Vanish Account</string>
+  <string name="account_vanish_request_confirm_title">Vanish account warning</string>
+  <string name="account_vanish_request_confirm"><![CDATA[Vanishing is a <b>last resort</b> and should <b>only be used when you wish to stop editing forever</b> and also to hide as many of your past associations as possible.<br/><br/>Account deletion on Wikimedia Commons is done by changing your account name to make it so others cannot recognize your contributions in a process called account vanishing. <b>Vanishing does not guarantee complete anonymity or remove contributions to the projects</b>.]]></string>
+  <string name="caption">Caption</string>
+  <string name="caption_copied_to_clipboard">Caption copied to clipboard</string>
+  <string name="congratulations_all_pictures_in_this_album_have_been_either_uploaded_or_marked_as_not_for_upload">Congratulations, all pictures in this album have been either uploaded or marked as not for upload.</string>
+
+  <string name="show_in_explore">Show in Explore</string>
+  <string name="show_in_nearby">Show in Nearby</string>
+  <string name="image_tag_line_created_and_uploaded_by">Created and uploaded by: %1$s</string>
+  <string name="image_tag_line_created_by_and_uploaded_by">Created by %1$s and uploaded by %2$s</string>
 </resources>

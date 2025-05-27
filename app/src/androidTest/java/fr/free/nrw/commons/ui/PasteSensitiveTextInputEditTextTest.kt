@@ -17,7 +17,7 @@ class PasteSensitiveTextInputEditTextTest {
     @Before
     fun setup() {
         context = ApplicationProvider.getApplicationContext()
-        textView = PasteSensitiveTextInputEditText(context)
+        textView = PasteSensitiveTextInputEditText(context!!)
     }
 
     // this test has no real value, just % for test code coverage

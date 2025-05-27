@@ -1,7 +1,6 @@
 package fr.free.nrw.commons.description
 
 import android.app.ProgressDialog
-import android.content.Intent
 import android.os.Bundle
 import android.os.Parcelable
 import android.speech.RecognizerIntent
@@ -72,7 +71,7 @@ class DescriptionEditActivity :
 
     private lateinit var binding: ActivityDescriptionEditBinding
 
-    private var descriptionAndCaptions: ArrayList<UploadMediaDetail>? = null
+    private var descriptionAndCaptions: MutableList<UploadMediaDetail>? = null
 
     private val voiceInputResultLauncher = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
@@ -114,22 +113,18 @@ class DescriptionEditActivity :
      * Initializes the RecyclerView
      * @param descriptionAndCaptions list of description and caption
      */
-    private fun initRecyclerView(descriptionAndCaptions: ArrayList<UploadMediaDetail>?) {
+    private fun initRecyclerView(descriptionAndCaptions: MutableList<UploadMediaDetail>?) {
         uploadMediaDetailAdapter =
             UploadMediaDetailAdapter(
                 this,
                 savedLanguageValue,
-                descriptionAndCaptions,
+                descriptionAndCaptions ?: mutableListOf(),
                 recentLanguagesDao,
                 voiceInputResultLauncher
             )
-        uploadMediaDetailAdapter.setCallback { titleStringID: Int, messageStringId: Int ->
-            showInfoAlert(
-                titleStringID,
-                messageStringId,
-            )
-        }
-        uploadMediaDetailAdapter.setEventListener(this)
+
+        uploadMediaDetailAdapter.callback = UploadMediaDetailAdapter.Callback(::showInfoAlert)
+        uploadMediaDetailAdapter.eventListener = this
         rvDescriptions = binding.rvDescriptionsCaptions
         rvDescriptions!!.layoutManager = LinearLayoutManager(this)
         rvDescriptions!!.adapter = uploadMediaDetailAdapter
@@ -149,8 +144,7 @@ class DescriptionEditActivity :
             getString(titleStringID),
             getString(messageStringId),
             getString(android.R.string.ok),
-            null,
-            true,
+            null
         )
     }
 
@@ -241,7 +235,7 @@ class DescriptionEditActivity :
                     applicationContext,
                     media,
                     updatedWikiText,
-                )?.subscribeOn(Schedulers.io())
+                ).subscribeOn(Schedulers.io())
                 ?.observeOn(AndroidSchedulers.mainThread())
                 ?.subscribe(Consumer<Boolean> { s: Boolean? -> Timber.d("Descriptions are added.") })
                 ?.let {
@@ -272,7 +266,7 @@ class DescriptionEditActivity :
                         .addCaption(
                             applicationContext,
                             media,
-                            mediaDetail.languageCode,
+                            mediaDetail.languageCode!!,
                             mediaDetail.captionText,
                         ).subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
@@ -304,7 +298,7 @@ class DescriptionEditActivity :
         progressDialog!!.isIndeterminate = true
         progressDialog!!.setTitle(getString(R.string.updating_caption_title))
         progressDialog!!.setMessage(getString(R.string.updating_caption_message))
-        progressDialog!!.setCanceledOnTouchOutside(false)
+        progressDialog!!.setCancelable(false)
         progressDialog!!.show()
     }
 

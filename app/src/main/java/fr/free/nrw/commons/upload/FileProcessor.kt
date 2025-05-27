@@ -52,7 +52,7 @@ class FileProcessor
          * Processes filePath coordinates, either from EXIF data or user location
          */
         fun processFileCoordinates(
-            similarImageInterface: SimilarImageInterface,
+            similarImageInterface: SimilarImageInterface?,
             filePath: String?,
             inAppPictureLocation: LatLng?,
         ): ImageCoordinates {
@@ -86,7 +86,7 @@ class FileProcessor
          */
         fun getExifTagsToRedact(): Set<String> {
             val prefManageEXIFTags =
-                defaultKvStore.getStringSet(Prefs.MANAGED_EXIF_TAGS) ?: emptySet()
+                defaultKvStore.getStringSet(Prefs.MANAGED_EXIF_TAGS)
             val redactTags: Set<String> =
                 context.resources.getStringArray(R.array.pref_exifTag_values).toSet()
             return redactTags - prefManageEXIFTags
@@ -146,7 +146,7 @@ class FileProcessor
          */
         private fun findOtherImages(
             fileBeingProcessed: File,
-            similarImageInterface: SimilarImageInterface,
+            similarImageInterface: SimilarImageInterface?,
         ) {
             val oneHundredAndTwentySeconds = 120 * 1000L
             // Time when the original image was created
@@ -161,7 +161,7 @@ class FileProcessor
                 .map { Pair(it, readImageCoordinates(it)) }
                 .firstOrNull { it.second?.decimalCoords != null }
                 ?.let { fileCoordinatesPair ->
-                    similarImageInterface.showSimilarImageFragment(
+                    similarImageInterface?.showSimilarImageFragment(
                         fileBeingProcessed.path,
                         fileCoordinatesPair.first.absolutePath,
                         fileCoordinatesPair.second,
@@ -194,7 +194,7 @@ class FileProcessor
             requireNotNull(imageCoordinates.decimalCoords)
             compositeDisposable.add(
                 apiCall
-                    .request(imageCoordinates.decimalCoords)
+                    .request(imageCoordinates.decimalCoords!!)
                     .subscribeOn(Schedulers.io())
                     .observeOn(Schedulers.io())
                     .subscribe(
@@ -220,7 +220,7 @@ class FileProcessor
                 .concatMap {
                     Observable.fromCallable {
                         okHttpJsonApiClient.getNearbyPlaces(
-                            imageCoordinates.latLng,
+                            imageCoordinates.latLng!!,
                             Locale.getDefault().language,
                             it,
                         )

@@ -5,7 +5,6 @@ import android.content.Intent
 import androidx.test.core.app.ApplicationProvider
 import androidx.work.Configuration
 import androidx.work.testing.WorkManagerTestInitHelper
-import fr.free.nrw.commons.CommonsApplication
 import fr.free.nrw.commons.OkHttpConnectionFactory
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestCommonsApplication
@@ -75,7 +74,7 @@ class UploadActivityUnitTests {
     @Test
     @Throws(Exception::class)
     fun testIsLoggedIn() {
-        activity.isLoggedIn
+        activity.isLoggedIn()
     }
 
     @Test
@@ -139,7 +138,7 @@ class UploadActivityUnitTests {
     @Test
     @Throws(Exception::class)
     fun testGetUploadableFiles() {
-        activity.uploadableFiles
+        activity.getUploadableFiles()
     }
 
     @Test
@@ -259,17 +258,6 @@ class UploadActivityUnitTests {
         val method: Method =
             UploadActivity::class.java.getDeclaredMethod(
                 "onDestroy",
-            )
-        method.isAccessible = true
-        method.invoke(activity)
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun testOnBackPressed() {
-        val method: Method =
-            UploadActivity::class.java.getDeclaredMethod(
-                "onBackPressed",
             )
         method.isAccessible = true
         method.invoke(activity)

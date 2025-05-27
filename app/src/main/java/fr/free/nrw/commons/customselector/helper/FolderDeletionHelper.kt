@@ -30,22 +30,30 @@ object FolderDeletionHelper {
         folder: File,
         trashFolderLauncher: ActivityResultLauncher<IntentSenderRequest>,
         onDeletionComplete: (Boolean) -> Unit) {
-        val itemCount = countItemsInFolder(context, folder)
-        val folderPath = folder.absolutePath
 
         //don't show this dialog on API 30+, it's handled automatically using MediaStore
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            val success = deleteFolderMain(context, folder, trashFolderLauncher)
+            val success = trashImagesInFolder(context, folder, trashFolderLauncher)
             onDeletionComplete(success)
-
         } else {
+            val imagePaths = listImagesInFolder(context, folder)
+            val imageCount = imagePaths.size
+            val folderPath = folder.absolutePath
+
             AlertDialog.Builder(context)
                 .setTitle(context.getString(R.string.custom_selector_confirm_deletion_title))
-                .setMessage(context.getString(R.string.custom_selector_confirm_deletion_message, folderPath, itemCount))
+                .setCancelable(false)
+                .setMessage(
+                    context.getString(
+                        R.string.custom_selector_confirm_deletion_message,
+                        folderPath,
+                        imageCount
+                    )
+                )
                 .setPositiveButton(context.getString(R.string.custom_selector_delete)) { _, _ ->
 
                     //proceed with deletion if user confirms
-                    val success = deleteFolderMain(context, folder, trashFolderLauncher)
+                    val success = deleteImagesLegacy(imagePaths)
                     onDeletionComplete(success)
                 }
                 .setNegativeButton(context.getString(R.string.custom_selector_cancel)) { dialog, _ ->
@@ -57,38 +65,16 @@ object FolderDeletionHelper {
     }
 
     /**
-     * Deletes the specified folder, handling different Android storage models based on the API
-     *
-     * @param context The context used to manage storage operations.
-     * @param folder The folder to delete.
-     * @param trashFolderLauncher An ActivityResultLauncher for handling the result of the trash request.
-     * @return `true` if the folder deletion was successful, `false` otherwise.
-     */
-    private fun deleteFolderMain(
-        context: Context,
-        folder: File,
-        trashFolderLauncher: ActivityResultLauncher<IntentSenderRequest>): Boolean
-    {
-        return when {
-            //for API 30 and above, use MediaStore
-            Build.VERSION.SDK_INT >= Build.VERSION_CODES.R -> trashFolderContents(context, folder, trashFolderLauncher)
-
-            //for API 29 ('requestLegacyExternalStorage' is set to true in Manifest)
-            // and below use file system
-            else -> deleteFolderLegacy(folder)
-        }
-    }
-
-    /**
-     * Moves all contents of a specified folder to the trash on devices running
-     * Android 11 (API level 30) and above.
+     * Moves all images in a specified folder (but not within its subfolders) to the trash on
+     * devices running Android 11 (API level 30) and above.
      *
      * @param context The context used to access the content resolver.
-     * @param folder The folder whose contents are to be moved to the trash.
-     * @param trashFolderLauncher An ActivityResultLauncher for handling the result of the trash request.
+     * @param folder The folder whose top-level images are to be moved to the trash.
+     * @param trashFolderLauncher An ActivityResultLauncher for handling the result of the trash
+     * request.
      * @return `true` if the trash request was initiated successfully, `false` otherwise.
      */
-    private fun trashFolderContents(
+    private fun trashImagesInFolder(
         context: Context,
         folder: File,
         trashFolderLauncher: ActivityResultLauncher<IntentSenderRequest>): Boolean
@@ -99,38 +85,41 @@ object FolderDeletionHelper {
         val folderPath = folder.absolutePath
         val urisToTrash = mutableListOf<Uri>()
 
-        // Use URIs specific to media items
-        val mediaUris = listOf(
-            MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-            MediaStore.Video.Media.EXTERNAL_CONTENT_URI,
-            MediaStore.Audio.Media.EXTERNAL_CONTENT_URI
-        )
+        val mediaUri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI
 
-        for (mediaUri in mediaUris) {
-            val selection = "${MediaStore.MediaColumns.DATA} LIKE ?"
-            val selectionArgs = arrayOf("$folderPath/%")
+        // select images contained in the folder but not within subfolders
+        val selection =
+            "${MediaStore.MediaColumns.DATA} LIKE ? AND ${MediaStore.MediaColumns.DATA} NOT LIKE ?"
+        val selectionArgs = arrayOf("$folderPath/%", "$folderPath/%/%")
 
-            contentResolver.query(mediaUri, arrayOf(MediaStore.MediaColumns._ID), selection,
-                selectionArgs, null)
-                ?.use{ cursor ->
-                val idColumn = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns._ID)
-                while (cursor.moveToNext()) {
-                    val id = cursor.getLong(idColumn)
-                    val fileUri = ContentUris.withAppendedId(mediaUri, id)
-                    urisToTrash.add(fileUri)
-                }
+        contentResolver.query(
+            mediaUri, arrayOf(MediaStore.MediaColumns._ID), selection,
+            selectionArgs, null
+        )?.use { cursor ->
+            val idColumn = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns._ID)
+            while (cursor.moveToNext()) {
+                val id = cursor.getLong(idColumn)
+                val fileUri = ContentUris.withAppendedId(mediaUri, id)
+                urisToTrash.add(fileUri)
             }
         }
+
 
         //proceed with trashing if we have valid URIs
         if (urisToTrash.isNotEmpty()) {
             try {
                 val trashRequest = MediaStore.createTrashRequest(contentResolver, urisToTrash, true)
-                val intentSenderRequest = IntentSenderRequest.Builder(trashRequest.intentSender).build()
+                val intentSenderRequest =
+                    IntentSenderRequest.Builder(trashRequest.intentSender).build()
                 trashFolderLauncher.launch(intentSenderRequest)
                 return true
             } catch (e: SecurityException) {
-                Timber.tag("DeleteFolder").e(context.getString(R.string.custom_selector_error_trashing_folder_contents, e.message))
+                Timber.tag("DeleteFolder").e(
+                    context.getString(
+                        R.string.custom_selector_error_trashing_folder_contents,
+                        e.message
+                    )
+                )
             }
         }
         return false
@@ -138,27 +127,32 @@ object FolderDeletionHelper {
 
 
     /**
-     * Counts the number of items in a specified folder, including items in subfolders.
+     * Lists all image file paths in the specified folder, excluding any subfolders.
      *
      * @param context The context used to access the content resolver.
-     * @param folder The folder in which to count items.
-     * @return The total number of items in the folder.
+     * @param folder The folder whose top-level images are to be listed.
+     * @return A list of file paths (as Strings) pointing to the images in the specified folder.
      */
-    private fun countItemsInFolder(context: Context, folder: File): Int {
+    private fun listImagesInFolder(context: Context, folder: File): List<String> {
         val contentResolver = context.contentResolver
         val folderPath = folder.absolutePath
-        val uri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI
-        val selection = "${MediaStore.Images.Media.DATA} LIKE ?"
-        val selectionArgs = arrayOf("$folderPath/%")
+        val mediaUri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI
+        val selection =
+            "${MediaStore.MediaColumns.DATA} LIKE ? AND ${MediaStore.MediaColumns.DATA} NOT LIKE ?"
+        val selectionArgs = arrayOf("$folderPath/%", "$folderPath/%/%")
+        val imagePaths = mutableListOf<String>()
 
-        return contentResolver.query(
-            uri,
-            arrayOf(MediaStore.Images.Media._ID),
-            selection,
-            selectionArgs,
-            null)?.use { cursor ->
-            cursor.count
-        } ?: 0
+        contentResolver.query(
+            mediaUri, arrayOf(MediaStore.MediaColumns.DATA), selection,
+            selectionArgs, null
+        )?.use { cursor ->
+            val dataColumn = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DATA)
+            while (cursor.moveToNext()) {
+                val imagePath = cursor.getString(dataColumn)
+                imagePaths.add(imagePath)
+            }
+        }
+        return imagePaths
     }
 
 
@@ -180,14 +174,20 @@ object FolderDeletionHelper {
 
 
     /**
-     * Deletes a specified folder and all of its contents on devices running
+     * Deletes a list of image files specified by their paths, on
      * Android 10 (API level 29) and below.
      *
-     * @param folder The `File` object representing the folder to be deleted.
-     * @return `true` if the folder and all contents were deleted successfully; `false` otherwise.
+     * @param imagePaths A list of absolute file paths to image files that need to be deleted.
+     * @return `true` if all the images are successfully deleted, `false` otherwise.
      */
-    private fun deleteFolderLegacy(folder: File): Boolean {
-        return folder.deleteRecursively()
+    private fun deleteImagesLegacy(imagePaths: List<String>): Boolean {
+        var result = true
+        imagePaths.forEach {
+            val imageFile = File(it)
+            val deleted = imageFile.exists() && imageFile.delete()
+            result = result && deleted
+        }
+        return result
     }
 
 

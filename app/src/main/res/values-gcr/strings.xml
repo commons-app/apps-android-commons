@@ -183,7 +183,7 @@
   <string name="statistics">Èstatistik</string>
   <string name="statistics_thanks">Grémésiman rousouvrè</string>
   <string name="statistics_featured">Zimaj ki byenfèt</string>
-  <string name="level">Nivèl</string>
+  <string name="level" fuzzy="true">Nivèl</string>
   <string name="images_used_by_wiki">Zimaj ki itilizé</string>
   <string name="contributions_fragment">Kontribisyon</string>
   <string name="nearby_fragment">Òbò</string>

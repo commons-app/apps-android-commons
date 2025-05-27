@@ -1,6 +1,5 @@
 package fr.free.nrw.commons.media
 
-import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
@@ -19,7 +18,6 @@ import android.widget.ProgressBar
 import android.widget.ScrollView
 import android.widget.Spinner
 import android.widget.TextView
-import androidx.activity.result.ActivityResult
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.test.core.app.ApplicationProvider
@@ -29,7 +27,7 @@ import com.facebook.drawee.view.SimpleDraweeView
 import com.facebook.soloader.SoLoader
 import com.nhaarman.mockitokotlin2.doReturn
 import com.nhaarman.mockitokotlin2.whenever
-import fr.free.nrw.commons.LocationPicker.LocationPickerActivity
+import fr.free.nrw.commons.locationpicker.LocationPickerActivity
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.OkHttpConnectionFactory
 import fr.free.nrw.commons.TestCommonsApplication
@@ -162,7 +160,7 @@ class MediaDetailFragmentUnitTests {
     @Mock
     private lateinit var mockSharedPreferencesEditor: SharedPreferences.Editor
 
-    private lateinit var binding: FragmentMediaDetailBinding
+    private lateinit var _binding: FragmentMediaDetailBinding
 
     @Before
     fun setUp() {
@@ -185,12 +183,12 @@ class MediaDetailFragmentUnitTests {
 
         layoutInflater = LayoutInflater.from(activity)
 
-        binding = FragmentMediaDetailBinding.inflate(layoutInflater)
+        _binding = FragmentMediaDetailBinding.inflate(layoutInflater)
 
-        scrollView = binding.mediaDetailScrollView
+        scrollView = _binding.mediaDetailScrollView
 
-        progressBarDeletion = binding.progressBarDeletion
-        delete = binding.nominateDeletion
+        progressBarDeletion = _binding.progressBarDeletion
+        delete = _binding.nominateDeletion
 
         Whitebox.setInternalState(fragment, "media", media)
         Whitebox.setInternalState(fragment, "isDeleted", isDeleted)
@@ -198,13 +196,13 @@ class MediaDetailFragmentUnitTests {
         Whitebox.setInternalState(fragment, "reasonListEnglishMappings", reasonListEnglishMappings)
         Whitebox.setInternalState(fragment, "reasonBuilder", reasonBuilder)
         Whitebox.setInternalState(fragment, "deleteHelper", deleteHelper)
-        Whitebox.setInternalState(fragment, "binding", binding)
+        Whitebox.setInternalState(fragment, "_binding", _binding)
         Whitebox.setInternalState(fragment, "detailProvider", detailProvider)
-        Whitebox.setInternalState(binding, "mediaDetailImageView", simpleDraweeView)
-        Whitebox.setInternalState(binding, "mediaDetailTitle", textView)
-        Whitebox.setInternalState(binding, "mediaDetailDepictionContainer", linearLayout)
-        Whitebox.setInternalState(binding, "dummyCaptionDescriptionContainer", linearLayout)
-        Whitebox.setInternalState(binding, "depictionsEditButton", button)
+        Whitebox.setInternalState(_binding, "mediaDetailImageView", simpleDraweeView)
+        Whitebox.setInternalState(_binding, "mediaDetailTitle", textView)
+        Whitebox.setInternalState(_binding, "mediaDetailDepictionContainer", linearLayout)
+        Whitebox.setInternalState(_binding, "dummyCaptionDescriptionContainer", linearLayout)
+        Whitebox.setInternalState(_binding, "depictionsEditButton", button)
         Whitebox.setInternalState(fragment, "locationManager", locationManager)
 
         `when`(simpleDraweeView.hierarchy).thenReturn(genericDraweeHierarchy)
@@ -241,18 +239,18 @@ class MediaDetailFragmentUnitTests {
     @Throws(Exception::class)
     fun testLaunchZoomActivity() {
         `when`(media.imageUrl).thenReturn("")
-        fragment.launchZoomActivity(binding.root)
+        fragment.launchZoomActivity(_binding.root)
     }
 
     @Test
     @Throws(Exception::class)
     fun testOnUpdateCoordinatesClickedCurrentLocationNull() {
         `when`(media.coordinates).thenReturn(null)
-        `when`(locationManager.lastLocation).thenReturn(null)
+        `when`(locationManager.getLastLocation()).thenReturn(null)
         `when`(applicationKvStore.getString(lastLocation)).thenReturn("37.773972,-122.431297")
         fragment.onUpdateCoordinatesClicked()
         Mockito.verify(media, Mockito.times(1)).coordinates
-        Mockito.verify(locationManager, Mockito.times(1)).lastLocation
+        Mockito.verify(locationManager, Mockito.times(1)).getLastLocation()
         val shadowActivity: ShadowActivity = shadowOf(activity)
         val startedIntent = shadowActivity.nextStartedActivity
         val shadowIntent: ShadowIntent = shadowOf(startedIntent)
@@ -276,11 +274,11 @@ class MediaDetailFragmentUnitTests {
     @Throws(Exception::class)
     fun testOnUpdateCoordinatesClickedCurrentLocationNotNull() {
         `when`(media.coordinates).thenReturn(null)
-        `when`(locationManager.lastLocation).thenReturn(LatLng(-0.000001, -0.999999, 0f))
+        `when`(locationManager.getLastLocation()).thenReturn(LatLng(-0.000001, -0.999999, 0f))
         `when`(applicationKvStore.getString(lastLocation)).thenReturn("37.773972,-122.431297")
 
         fragment.onUpdateCoordinatesClicked()
-        Mockito.verify(locationManager, Mockito.times(3)).lastLocation
+        Mockito.verify(locationManager, Mockito.times(3)).getLastLocation()
         val shadowActivity: ShadowActivity = shadowOf(activity)
         val startedIntent = shadowActivity.nextStartedActivity
         val shadowIntent: ShadowIntent = shadowOf(startedIntent)
@@ -768,9 +766,16 @@ class MediaDetailFragmentUnitTests {
         ).thenReturn(true)
         doReturn(
             Single.just(true),
-        ).`when`(deleteHelper).makeDeletion(ArgumentMatchers.any(), ArgumentMatchers.any(), ArgumentMatchers.any())
+        ).`when`(deleteHelper).makeDeletion(
+            ArgumentMatchers.any(),
+            ArgumentMatchers.any(),
+            ArgumentMatchers.any()
+        )
 
-        doReturn(Single.just("")).`when`(reasonBuilder).getReason(ArgumentMatchers.any(), ArgumentMatchers.any())
+        doReturn(Single.just("")).`when`(reasonBuilder).getReason(
+            ArgumentMatchers.any(),
+            ArgumentMatchers.any()
+        )
 
         val method: Method =
             MediaDetailFragment::class.java.getDeclaredMethod(

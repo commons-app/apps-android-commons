@@ -30,7 +30,7 @@ class LanguagesAdapterTest {
     private lateinit var context: Context
 
     @Mock
-    private lateinit var selectedLanguages: HashMap<Integer, String>
+    private lateinit var selectedLanguages: MutableMap<Int, String>
 
     @Mock
     private lateinit var parent: ViewGroup
@@ -41,7 +41,7 @@ class LanguagesAdapterTest {
 
     private lateinit var languagesAdapter: LanguagesAdapter
     private lateinit var convertView: View
-    private var selectLanguages: HashMap<Integer, String> = HashMap()
+    private var selectLanguages: MutableMap<Int, String> = mutableMapOf()
 
     @Before
     @Throws(Exception::class)
@@ -54,8 +54,8 @@ class LanguagesAdapterTest {
                 .from(context)
                 .inflate(R.layout.row_item_languages_spinner, null) as View
 
-        languageNamesList = language.localizedNames
-        languageCodesList = language.codes
+        languageNamesList = language.getLocalizedNames()
+        languageCodesList = language.getCodes()
 
         languagesAdapter = LanguagesAdapter(context, selectedLanguages)
     }
@@ -94,8 +94,8 @@ class LanguagesAdapterTest {
 
     @Test
     fun testSelectLanguageNotEmpty() {
-        selectLanguages[Integer(0)] = "es"
-        selectLanguages[Integer(1)] = "de"
+        selectLanguages[0] = "es"
+        selectLanguages[1] = "de"
         languagesAdapter = LanguagesAdapter(context, selectLanguages)
 
         Assertions.assertEquals(false, languagesAdapter.isEnabled(languagesAdapter.getIndexOfLanguageCode("es")))
@@ -124,12 +124,12 @@ class LanguagesAdapterTest {
         var i = 0
         var s = 0
         while (i < length) {
-            val key: String = language.codes[i]
-            val value: String = language.localizedNames[i]
+            val key: String = language.getCodes()[i]
+            val value: String = language.getLocalizedNames()[i]
             if (value.contains(constraint, true) ||
                 Locale(key)
                     .getDisplayName(
-                        Locale(language.codes[defaultlanguagecode!!]),
+                        Locale(language.getCodes()[defaultlanguagecode!!]),
                     ).contains(constraint, true)
             ) {
                 s++

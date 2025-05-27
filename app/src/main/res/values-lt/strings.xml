@@ -96,6 +96,8 @@
   <string name="menu_from_camera">Nufotografuoti</string>
   <string name="menu_nearby">Netoliese</string>
   <string name="provider_contributions">Mano įkėlimai</string>
+  <string name="menu_copy_link">Kopijuoti nuorodą</string>
+  <string name="menu_link_copied">Nuoroda nukopijuota į mainų sritį.</string>
   <string name="menu_share">Dalintis</string>
   <string name="menu_view_file_page">Žiūrėti failo puslapį</string>
   <string name="share_title_hint">Antraštė (būtina)</string>
@@ -345,11 +347,13 @@
   <string name="delete">Ištrinti</string>
   <string name="Achievements">Pasiekimai</string>
   <string name="Profile">Profilis</string>
+  <string name="badges">Ženkliukai</string>
   <string name="statistics">Statistika</string>
   <string name="statistics_thanks">Gauta padėka</string>
   <string name="statistics_featured">Rinktiniai paveikslėliai</string>
   <string name="statistics_wikidata_edits">Vaizdai per „Netoliese esančios vietos“</string>
-  <string name="level">Lygis</string>
+  <string name="level">Lygis %d</string>
+  <string name="profileLevel">%s (%s lygis)</string>
   <string name="images_uploaded">Vaizdai įkelti</string>
   <string name="image_reverts">Paveikslėliai negrąžinti</string>
   <string name="images_used_by_wiki">Naudoti vaizdai</string>
@@ -381,6 +385,7 @@
   <string name="map_application_missing">Jūsų įrenginyje nepavyko rasti suderinamos žemėlapio programos. Norėdami naudotis šia funkcija, įdiekite žemėlapio programą.</string>
   <string name="title_page_bookmarks_pictures">Nuotraukos</string>
   <string name="title_page_bookmarks_locations">Vietos</string>
+  <string name="title_page_bookmarks_categories">Kategorijos</string>
   <string name="menu_bookmark">Pridėti prie / pašalinti iš žymių</string>
   <string name="provider_bookmarks">Žymės</string>
   <string name="bookmark_empty">Jūs nepridėjote jokių žymių</string>
@@ -751,4 +756,18 @@
   <string name="pending">Laukiama</string>
   <string name="failed">Nepavyko</string>
   <string name="could_not_load_place_data">Nepavyko įkelti vietos duomenų</string>
+  <string name="custom_selector_delete_folder">Trinti aplanką</string>
+  <string name="custom_selector_confirm_deletion_title">Patvirtinti ištrynimą</string>
+  <string name="custom_selector_confirm_deletion_message">Ar tikrai norite ištrinti aplanką %1$s, kuriame yra %2$d elementų?</string>
+  <string name="custom_selector_delete">Ištrinti</string>
+  <string name="custom_selector_cancel">Atšaukti</string>
+  <string name="custom_selector_folder_deleted_success">Aplankas %1$s sėkmingai ištrintas</string>
+  <string name="custom_selector_folder_deleted_failure">Nepavyko ištrinti aplanko %1$s</string>
+  <string name="custom_selector_error_trashing_folder_contents">Klaida išsiunčiant į šiukšliadėžę aplanko turinį: %1$s</string>
+  <string name="error_while_loading">Įkeliant įvyko klaida</string>
+  <string name="no_usages_found">Naudojimo būdų nerasta</string>
+  <string name="usages_on_commons_heading">Vikiteka</string>
+  <string name="usages_on_other_wikis_heading">Kiti viki</string>
+  <string name="file_usages_container_heading">Failo naudojimas</string>
+  <string name="account">Paskyra</string>
 </resources>

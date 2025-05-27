@@ -12,17 +12,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Set up JDK
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
           java-version: '17'
 
       - name: Cache packages
         id: cache-packages
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: |
             ~/.gradle/caches
@@ -37,7 +37,7 @@ jobs:
 
       - name: AVD cache
         if: github.event_name != 'pull_request'
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         id: avd-cache
         with:
           path: |
@@ -89,7 +89,7 @@ jobs:
         run: bash ./gradlew assembleBetaDebug --stacktrace
 
       - name: Upload betaDebug APK
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: betaDebugAPK
           path: app/build/outputs/apk/beta/debug/app-*.apk
@@ -98,7 +98,17 @@ jobs:
         run: bash ./gradlew assembleProdDebug --stacktrace
 
       - name: Upload prodDebug APK
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: prodDebugAPK
           path: app/build/outputs/apk/prod/debug/app-*.apk
+
+      - name: Create and PR number artifact
+        run: |
+          echo "{\"pr_number\": ${{ github.event.pull_request.number || 'null' }}}" > pr_number.json
+          
+      - name: Upload PR number artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: pr_number
+          path: ./pr_number.json

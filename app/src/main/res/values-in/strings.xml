@@ -4,6 +4,7 @@
 * Akmaie Ajam
 * Arifin.wijaya
 * Birusian
+* Boesenbergia
 * DARMAS BUDI SANTOSO
 * Daud I.F. Argana
 * Fafau06
@@ -295,7 +296,7 @@
   <string name="error_notifications">Galat penyampaian pemberitahuan</string>
   <string name="error_review">Galat mengambil gambar untuk ditinjau. Tekan segarkan untuk coba lagi.</string>
   <string name="no_notifications">Pemberitahuan tidak ditemukan</string>
-  <string name="about_translate">Terjemahkan</string>
+  <string name="about_translate">Pertalaghi</string>
   <string name="about_translate_title">Bahasa</string>
   <string name="about_translate_message">Pilih bahasa untuk terjemahan yang ingin Anda kirimkan</string>
   <string name="about_translate_proceed">Lanjutkan</string>
@@ -367,7 +368,7 @@
   <string name="statistics_thanks">Ucapan terima kasih diterima</string>
   <string name="statistics_featured">Gambar Pilihan</string>
   <string name="statistics_wikidata_edits">Gambar via \"Tempat di Sekitar\"</string>
-  <string name="level">Tingkat</string>
+  <string name="level" fuzzy="true">Tingkat</string>
   <string name="images_uploaded">Gambar Diunggah</string>
   <string name="image_reverts">Gambar Tidak Dikembalikan</string>
   <string name="images_used_by_wiki">Gambar Digunakan</string>

@@ -61,8 +61,8 @@ class UploadPresenterTest {
         uploadPresenter.onAttachView(view)
         `when`(repository.buildContributions()).thenReturn(Observable.just(contribution))
         uploadableFiles.add(uploadableFile)
-        `when`(view.uploadableFiles).thenReturn(uploadableFiles)
-        `when`(uploadableFile.filePath).thenReturn("data://test")
+        `when`(view.getUploadableFiles()).thenReturn(uploadableFiles)
+        `when`(uploadableFile.getFilePath()).thenReturn("data://test")
     }
 
     /**
@@ -71,9 +71,9 @@ class UploadPresenterTest {
     @Ignore
     @Test
     fun handleSubmitTestUserLoggedIn() {
-        `when`(view.isLoggedIn).thenReturn(true)
+        `when`(view.isLoggedIn()).thenReturn(true)
         uploadPresenter.handleSubmit()
-        verify(view).isLoggedIn
+        verify(view).isLoggedIn()
         verify(view).showProgress(true)
         verify(repository).buildContributions()
         verify(repository).buildContributions()
@@ -83,7 +83,7 @@ class UploadPresenterTest {
     @Test
     fun handleSubmitImagesNoLocationWithConsecutiveNoLocationUploads() {
         `when`(imageCoords.imageCoordsExists).thenReturn(false)
-        `when`(uploadItem.getGpsCoords()).thenReturn(imageCoords)
+        `when`(uploadItem.gpsCoords).thenReturn(imageCoords)
         `when`(repository.getUploads()).thenReturn(uploadableItems)
         uploadableItems.add(uploadItem)
 
@@ -111,7 +111,7 @@ class UploadPresenterTest {
             defaultKvStore.getInt(UploadPresenter.COUNTER_OF_CONSECUTIVE_UPLOADS_WITHOUT_COORDINATES, 0),
         ).thenReturn(UploadPresenter.CONSECUTIVE_UPLOADS_WITHOUT_COORDINATES_REMINDER_THRESHOLD)
         `when`(imageCoords.imageCoordsExists).thenReturn(true)
-        `when`(uploadItem.getGpsCoords()).thenReturn(imageCoords)
+        `when`(uploadItem.gpsCoords).thenReturn(imageCoords)
         `when`(repository.getUploads()).thenReturn(uploadableItems)
         uploadableItems.add(uploadItem)
         uploadPresenter.handleSubmit()
@@ -130,9 +130,9 @@ class UploadPresenterTest {
                     false,
                 ),
         ).thenReturn(true)
-        `when`(view.isLoggedIn).thenReturn(true)
+        `when`(view.isLoggedIn()).thenReturn(true)
         uploadPresenter.handleSubmit()
-        verify(view).isLoggedIn
+        verify(view).isLoggedIn()
         verify(view).showProgress(true)
         verify(repository).buildContributions()
         verify(repository).buildContributions()
@@ -144,9 +144,9 @@ class UploadPresenterTest {
     @Ignore
     @Test
     fun handleSubmitTestUserNotLoggedIn() {
-        `when`(view.isLoggedIn).thenReturn(false)
+        `when`(view.isLoggedIn()).thenReturn(false)
         uploadPresenter.handleSubmit()
-        verify(view).isLoggedIn
+        verify(view).isLoggedIn()
         verify(view).askUserToLogIn()
     }
 

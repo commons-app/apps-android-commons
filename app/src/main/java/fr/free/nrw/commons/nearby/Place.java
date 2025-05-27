@@ -5,6 +5,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.room.Embedded;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 import fr.free.nrw.commons.location.LatLng;
@@ -24,6 +25,7 @@ public class Place implements Parcelable {
     public String name;
     private Label label;
     private String longDescription;
+    @Embedded
     public LatLng location;
     @PrimaryKey @NonNull
     public String entityID;
@@ -151,7 +153,10 @@ public class Place implements Parcelable {
                 .build(),
             item.getPic().getValue(),
             // Checking if the place exists or not
-            (item.getDestroyed().getValue() == "") && (item.getEndTime().getValue() == ""), entityId);
+            (item.getDestroyed().getValue() == "") && (item.getEndTime().getValue() == "")
+                && (item.getDateOfOfficialClosure().getValue() == "")
+                && (item.getPointInTime().getValue()==""),
+            entityId);
     }
 
     /**
@@ -230,13 +235,23 @@ public class Place implements Parcelable {
      */
     @Nullable
     public String getWikiDataEntityId() {
+        if (this.entityID != null && !this.entityID.equals("")) {
+            return this.entityID;
+        }
+
         if (!hasWikidataLink()) {
             Timber.d("Wikidata entity ID is null for place with sitelink %s", siteLinks.toString());
             return null;
         }
 
+        //Determine entityID from link
         String wikiDataLink = siteLinks.getWikidataLink().toString();
-        return wikiDataLink.replace("http://www.wikidata.org/entity/", "");
+
+        if (wikiDataLink.contains("http://www.wikidata.org/entity/")) {
+            this.entityID = wikiDataLink.substring("http://www.wikidata.org/entity/".length());
+            return this.entityID;
+        }
+        return null;
     }
 
     /**

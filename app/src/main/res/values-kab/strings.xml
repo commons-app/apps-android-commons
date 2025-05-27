@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
 * Belkacem77
+* ButterflyOfFire
 * Hociben
 -->
 <resources>
@@ -8,6 +9,8 @@
   <string name="commons_github">Tangalt aɣbalu Github n Commons</string>
   <string name="commons_logo">Alugu Commons</string>
   <string name="commons_website">Asmel wen n Commons</string>
+  <string name="show_captions_description">Aglam</string>
+  <string name="nearby_all">Akk</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">%1$d n ufaylu yezga yettali</item>
     <item quantity="other">%1$d n ifuyla zgan ttalin</item>
@@ -49,6 +52,7 @@
   <string name="signup">Jerred</string>
   <string name="logging_in_title">Tuqqna...</string>
   <string name="logging_in_message">Rǧu...</string>
+  <string name="updating_caption_message">Txil, rǧu…</string>
   <string name="login_success" fuzzy="true">Tuqqna tedda!</string>
   <string name="login_failed" fuzzy="true">Tqqna ur teddi ara!</string>
   <string name="upload_failed">Ulac afaylu. Ɛreḍ wayeḍ ma ulac aɣilif.</string>
@@ -85,12 +89,14 @@
   <string name="categories_search_text_hint">Nadi taggayin</string>
   <string name="menu_save_categories">Sekles</string>
   <string name="refresh_button">Smiren</string>
+  <string name="display_list_button">Tabdart</string>
   <string name="contributions_subtitle_zero" fuzzy="true">Usla ayen yulin</string>
   <string name="categories_not_found">Ulac taggayin imenṭaḍen akked %1$s i yettwafen</string>
   <string name="categories_skip_explanation">Rnu taggayin akken ad terreḍ tugniwin-ik sehlent i tifin di Wikimedia Commons.\n\nBdu timerna n taggayin.</string>
   <string name="categories_activity_title">Taggayin</string>
   <string name="title_activity_settings">Iɣewwaṛen</string>
   <string name="title_activity_signup">Jerred</string>
+  <string name="title_activity_category_details">Taggayt</string>
   <string name="menu_about">Ɣef</string>
   <string name="about_license">Asnas Wikipedia Commons d asnas n uɣbalu yeldin i d-yennulfan udiɣ yettwarfed sɣur iwiziwen d wid i t-iḍemnen n tmezdagnut Wikimedia. Tasbeddit Wikimedia ur tetteka ara deg usnulfu-is, tanfelit-is, neɣ aseggem n usnas.</string>
   <string name="about_improve">Rnu &lt;a href=\"%1$s\"&gt;tummla tamaynut GitHub&lt;/a&gt; akken ad temmleḍ ibugen neɣ ad d-mudded isumar.</string>
@@ -129,6 +135,7 @@
   <string name="welcome_copyright_subtext">Zgel axedddim yettwaḥerzen ara tafeḍ di Internet akked tugniwin n inazalen, tiduliwin n yidlisen, atg.</string>
   <string name="welcome_final_text">Tɣileḍ igarrez?</string>
   <string name="welcome_final_button_text">Ih!</string>
+  <string name="welcome_help_button_text">Ugar n telɣut</string>
   <string name="detail_panel_cats_label">Taggayin</string>
   <string name="detail_panel_cats_loading">Asali...</string>
   <string name="detail_panel_cats_none">Ula d yiwet ur tettwafren</string>
@@ -139,10 +146,12 @@
   <string name="write_storage_permission_rationale" fuzzy="true">Ysera tasiregt: Aru deg usekles azɣaray. Asnas ur yezmir ara ad yeddu s war aya.</string>
   <string name="ok">IH</string>
   <string name="warning">Ɣur-k</string>
+  <string name="upload">Sali</string>
   <string name="yes">Ih</string>
   <string name="no">Uhu</string>
   <string name="media_detail_title">Azwel</string>
   <string name="media_detail_description">Aglam</string>
+  <string name="media_detail_author">Ameskar</string>
   <string name="media_detail_uploaded_date">Azemz n usali</string>
   <string name="media_detail_license">Turagt</string>
   <string name="media_detail_coordinates">imsidag</string>
@@ -180,6 +189,16 @@
   <string name="login_to_your_account">Qqen ar umiḍan-ik</string>
   <string name="send_log_file">Azen afaylu n uɣmis</string>
   <string name="send_log_file_description" fuzzy="true">Azen afaylu n uɣmis i yinermisen s yimayl</string>
+  <string name="navigation_item_login">Qqen</string>
   <string name="nearby_location_not_available" fuzzy="true">Ulac adeg</string>
   <string name="location_permission_rationale_nearby">Ilaq usireg i uskan tabdart n wadigen iqerben</string>
+  <string name="nearby_wikidata">Wikidata</string>
+  <string name="nearby_wikipedia">Wikipedia</string>
+  <string name="about_faq">Isteqsiyen FAQ</string>
+  <string name="about_translate">Suqel</string>
+  <string name="about_translate_title">Tutlayin</string>
+  <string name="about_translate_cancel">Semmet</string>
+  <string name="menu_search_button">Nadi</string>
+  <string name="title_activity_search">Nadi</string>
+  <string name="search_tab_title_categories">Taggayin</string>
 </resources>

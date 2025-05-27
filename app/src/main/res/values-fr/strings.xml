@@ -5,6 +5,7 @@
 * Alno
 * Assorted-Interests
 * BaRaN6161 TURK
+* Bananax47
 * BlueCamille
 * Cigaryno
 * Cyclicus
@@ -32,6 +33,7 @@
 * Orikrin1998
 * Paraboule
 * Patrick Star
+* Pols12
 * Robins7
 * Sherbrooke
 * SleaY
@@ -143,6 +145,8 @@
   <string name="menu_from_camera">Prendre une photo</string>
   <string name="menu_nearby">À proximité</string>
   <string name="provider_contributions">Mes téléversements</string>
+  <string name="menu_copy_link">Copier le lien</string>
+  <string name="menu_link_copied">Le lien a été copié dans le presse-papiers</string>
   <string name="menu_share">Partager</string>
   <string name="menu_view_file_page">Voir la page du fichier</string>
   <string name="share_title_hint">Légende (obligatoire)</string>
@@ -153,6 +157,7 @@
   <string name="login_failed_throttled">Trop de tentatives infructueuses. Veuillez réessayer dans quelques minutes.</string>
   <string name="login_failed_blocked">Désolé, cet utilisateur a été bloqué sur Commons</string>
   <string name="login_failed_2fa_needed">Vous devez fournir votre code d’authentification à deux facteurs.</string>
+  <string name="login_failed_email_auth_needed">Un code de vérification de connexion a été envoyé à votre adresse e-mail. Veuillez saisir ce code pour vous connecter.</string>
   <string name="login_failed_generic">Échec de connexion</string>
   <string name="share_upload_button">Téléverser</string>
   <string name="multiple_share_base_title">Nommer cet ensemble</string>
@@ -258,6 +263,7 @@
   <string name="become_a_tester_title">Devenir un bêta-testeur</string>
   <string name="become_a_tester_description">S’inscrire à notre canal bêta sur Google Play et obtenir un accès anticipé aux nouvelles fonctionnalités et corrections d’anomalies</string>
   <string name="_2fa_code">Code 2FA</string>
+  <string name="email_auth_code">Code de vérification par email</string>
   <string name="logout_verification">Voulez-vous vraiment vous déconnecter ?</string>
   <string name="mediaimage_failed">Échec sur l’image du média</string>
   <string name="no_subcategory_found">Aucune sous-catégorie trouvée</string>
@@ -318,6 +324,7 @@
   <string name="copy_wikicode">Copier le texte wiki dans le presse-papiers</string>
   <string name="wikicode_copied">Texte wiki copié dans le presse-papiers</string>
   <string name="nearby_location_not_available">« À proximité » pourrait ne pas fonctionner correctement, votre emplacement étant indisponible.</string>
+  <string name="nearby_showing_pins_offline">Internet indisponible. Affichage uniquement des éléments mis en cache.</string>
   <string name="upload_location_access_denied">Refus d’accès à la localisation. Veuillez définir manuellement votre localisation pour utiliser cette fonctionnalité.</string>
   <string name="location_permission_rationale_nearby">Une permission est requise pour afficher une liste de lieux à proximité</string>
   <string name="location_permission_rationale_explore">Permission nécessaire pour afficher une liste d’images à proximité</string>
@@ -401,11 +408,13 @@
   <string name="delete">Supprimer</string>
   <string name="Achievements">Accomplissements</string>
   <string name="Profile">Profil</string>
+  <string name="badges">Badges</string>
   <string name="statistics">Statistiques</string>
   <string name="statistics_thanks">Remerciements reçus</string>
   <string name="statistics_featured">Images remarquables</string>
   <string name="statistics_wikidata_edits">Images par « Lieux à proximité »</string>
-  <string name="level">Niveau</string>
+  <string name="level">Niveau %d</string>
+  <string name="profileLevel">%s (niveau %s)</string>
   <string name="images_uploaded">Images téléversées</string>
   <string name="image_reverts">Images non annulées</string>
   <string name="images_used_by_wiki">Images utilisées</string>
@@ -437,6 +446,7 @@
   <string name="map_application_missing">Aucune application cartographique compatible n’a été trouvée sur votre appareil. Veuillez en installer une pour utiliser cette fonctionnalité.</string>
   <string name="title_page_bookmarks_pictures">Images</string>
   <string name="title_page_bookmarks_locations">Lieux</string>
+  <string name="title_page_bookmarks_categories">Catégories</string>
   <string name="menu_bookmark">Ajouter ou supprimer des signets</string>
   <string name="provider_bookmarks">Signets</string>
   <string name="bookmark_empty">Vous n’avez ajouté aucun signet</string>
@@ -819,6 +829,7 @@
   <string name="talk">Discussion</string>
   <string name="write_something_about_the_item">Écrivez quelque chose à propos de l’élément « %1$s ». Il sera visible publiquement.</string>
   <string name="does_not_exist_anymore_no_picture_can_ever_be_taken_of_it">\'%1$s\' n\'existe plus, aucune photo ne pourra jamais en être prise.</string>
+  <string name="is_at_a_different_place_wikidata">\'%1$s\' est à un endroit différent.</string>
   <string name="is_at_a_different_place_please_specify_the_correct_place_below_if_possible_tell_us_the_correct_latitude_longitude">\'%1$s\' se trouve à un endroit différent. Veuillez indiquer l\'endroit correct ci-dessous et, si possible, indiquez la latitude et la longitude correctes.</string>
   <string name="other_problem_or_information_please_explain_below">Autre problème ou information (merci d\'expliquer ci-dessous).</string>
   <string name="feedback_destination_note">Vos commentaires sont publiés sur la page wiki suivante : &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Mobile_app/Feedback\"&gt;Commons:Mobile app/Feedback&lt;/a&gt;</string>
@@ -840,4 +851,22 @@
   <string name="red_pin">Cet endroit n\'a pas encore de photo, allez en prendre une !</string>
   <string name="green_pin">Cet endroit a déjà une photo.</string>
   <string name="grey_pin">Je vérifie maintenant si cet endroit a une photo.</string>
+  <string name="error_while_loading">Erreur lors du chargement</string>
+  <string name="no_usages_found">Aucune utilisation trouvée</string>
+  <string name="usages_on_commons_heading">Commons</string>
+  <string name="usages_on_other_wikis_heading">Autres wikis</string>
+  <string name="bullet_point">•</string>
+  <string name="file_usages_container_heading">Utilisations du fichier</string>
+  <string name="title_activity_single_web_view">SingleWebViewActivity</string>
+  <string name="account">Compte</string>
+  <string name="vanish_account">Faire disparaître le compte</string>
+  <string name="account_vanish_request_confirm_title">Avertissement de disparition du compte</string>
+  <string name="account_vanish_request_confirm">La disparition est un &lt;b&gt;dernier recours&lt;/b&gt; et ne devrait être &lt;b&gt;utilisée que quand vous voulez arrêter d’éditer pour toujours&lt;/b&gt; et aussi pour cacher autant que possible vos associations passées.&lt;br/&gt;&lt;br/&gt;La suppression de compte sur Wikimedia Commons se fait en changeant le nom de votre compte de sorte que les autres ne peuvent pas identifier vos contributions, lors d’un processus appelé disparition du compte. &lt;b&gt;La disparition ne garantit pas l’anonymat complet ni ne supprime les contributions de vos projets&lt;/b&gt;.</string>
+  <string name="caption">Légende</string>
+  <string name="caption_copied_to_clipboard">Légende copiée dans le presse-papier</string>
+  <string name="congratulations_all_pictures_in_this_album_have_been_either_uploaded_or_marked_as_not_for_upload">Félicitations, toutes les images dans cet album ont été soit téléchargées soit marquées comme non téléchargeables.</string>
+  <string name="show_in_explore">Afficher dans Explorer</string>
+  <string name="show_in_nearby">Afficher à proximité</string>
+  <string name="image_tag_line_created_and_uploaded_by">Crée et publiée par: %1$s</string>
+  <string name="image_tag_line_created_by_and_uploaded_by">Créé par %1$s et publiée par %2$s</string>
 </resources>

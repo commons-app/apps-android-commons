@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
 * Askar Nazyrov
+* Baydastann
 * Bosogo
 * Kotormochu
 * Maksat
@@ -10,12 +11,21 @@
   <string name="commons_facebook">Викиказынанын Facebook баракчасы</string>
   <string name="commons_logo">Викиказынанын логотиби</string>
   <string name="commons_website">Викиказынанын сайты</string>
+  <string name="submit">Жөнөтүү</string>
   <string name="add_another_description">Башка сүрөттөмө кошуу</string>
   <string name="add_new_contribution">Жаңы салым кошуу</string>
+  <string name="add_contribution_from_camera">Камерадан салым кошуу</string>
+  <string name="add_contribution_from_photos">Фотографиялардан салым кошуу</string>
+  <string name="add_contribution_from_contributions_gallery">Мурунку салымдар галереясынан салым кошуу</string>
+  <string name="show_captions">Коштомо жазуу</string>
   <string name="row_item_language_description">Тилдин мүнөздөмөлөрү</string>
+  <string name="row_item_caption">Коштомо жазуу</string>
   <string name="show_captions_description">Сыпаттама</string>
   <string name="nearby_row_image">Сүрөт</string>
   <string name="nearby_all">Баары</string>
+  <string name="nearby_filter_search">Кызыктуу жерди издөө</string>
+  <string name="nearby_filter_state">Жердин абалы</string>
+  <string name="appwidget_img">Күндүн сүрөтү</string>
   <plurals name="uploads_pending_notification_indicator" fuzzy="true">
     <item quantity="one">1 файл жүктөлүүдө</item>
     <item quantity="other">%1$d файл жүктөлүүдө</item>
@@ -25,6 +35,7 @@
     <item quantity="one">1 жүктөө</item>
     <item quantity="other">%1$d жүктөө</item>
   </plurals>
+  <string name="starting_uploads">Жүктөө башталууда</string>
   <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">1 жүктөө башталды</item>
     <item quantity="other">%1$d жүктөө башталды</item>
@@ -34,29 +45,40 @@
     <item quantity="other">%d жүктөө</item>
   </plurals>
   <string name="share_license_summary" fuzzy="true">Бул сүрөт %1$s лицензияланат</string>
+  <string name="navigation_item_explore">Изилдөө</string>
+  <string name="preference_category_appearance">Көрүнүш</string>
+  <string name="preference_category_general">Жалпы</string>
+  <string name="preference_category_feedback">Кайтарым байланыш</string>
   <string name="preference_category_privacy">Купуялык</string>
   <string name="app_name">Викиказына</string>
   <string name="menu_settings">Параметрлер</string>
   <string name="intent_share_upload_label">Викиказынага жүктөө</string>
+  <string name="upload_in_progress">Жүктөлүүдө</string>
   <string name="username">Колдонуучунун аты</string>
   <string name="password">Сырсөз</string>
+  <string name="login_credential">Commons Beta аккаунтуңузга кириңиз</string>
   <string name="login">Кирүү</string>
+  <string name="forgot_password">Сырсөздү унуттуңузбу?</string>
   <string name="signup">Катталуу</string>
   <string name="logging_in_title">Кирүү</string>
   <string name="logging_in_message">Сураныч, күтө туруңуз…</string>
+  <string name="updating_caption_title">Коштомо жазуулар жана сыпаттамалар жаңыртылууда</string>
   <string name="updating_caption_message">Күтө туруңуз…</string>
-  <string name="login_success" fuzzy="true">Сиз ийгиликтүү кирдиңиз</string>
-  <string name="login_failed" fuzzy="true">Системага кирүүдө катачылык бар!</string>
-  <string name="authentication_failed" fuzzy="true">Таану катачылыгы!</string>
+  <string name="login_success">Ийгиликтүү кирдиңиз!</string>
+  <string name="login_failed">Системага кирүүдө катачылык бар!</string>
+  <string name="upload_failed">Файл табылган жок. Башка файлды издеп көрүңүз.</string>
+  <string name="authentication_failed">Аутентификация ишке ашкан жок. Кайра кириңиз.</string>
   <string name="uploading_started">Жүктөө башталды!</string>
   <string name="upload_completed_notification_title">%1$s жүктөлдү !</string>
   <string name="upload_completed_notification_text">Жүктөлгөн файлды көрүү үчүн басыңыз</string>
-  <string name="upload_progress_notification_title_start" fuzzy="true">Жүктөө %1$s башталды</string>
+  <string name="upload_progress_notification_title_start">Файл жүктөлүүдө: %s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s жүктөлүүдө</string>
   <string name="upload_progress_notification_title_finishing">Жүктөө соңуна жетти %1$s</string>
-  <string name="upload_failed_notification_title" fuzzy="true">Жүктөө %1$s иш жүзүнө ашкан жок</string>
+  <string name="upload_failed_notification_title">Жүктөө %1$s иш жүзүнө ашкан жок</string>
+  <string name="upload_paused_notification_title">%1$s жүктөө токтотулду</string>
   <string name="upload_failed_notification_subtitle">Көрүү үчүн басыңыз</string>
-  <string name="title_activity_contributions" fuzzy="true">Менин жүктөөлөрүм</string>
+  <string name="upload_paused_notification_subtitle">Көрүү үчүн басыңыз</string>
+  <string name="title_activity_contributions">Соңку жүктөөлөрүм</string>
   <string name="contribution_state_queued">Кезек</string>
   <string name="contribution_state_failed">Жүктөө каталары</string>
   <string name="contribution_state_in_progress">%1$d%%  соңуна чыкты</string>
@@ -65,18 +87,24 @@
   <string name="menu_from_camera">Сүрөткө тартуу</string>
   <string name="menu_nearby">Жакынкы</string>
   <string name="provider_contributions">Жүктөөлөрүм</string>
+  <string name="menu_copy_link">Шилтемени көчүрүү</string>
   <string name="menu_share">Бөлүшүү</string>
-  <string name="share_title_hint" fuzzy="true">Аталышы</string>
+  <string name="share_title_hint">Коштомо жазуу (талап кылынат)</string>
+  <string name="add_caption_toast">Бул файлга коштомо жазуу бериңиз</string>
   <string name="share_description_hint">Сыпаттама</string>
-  <string name="login_failed_network" fuzzy="true">Кирүүгө болбой жатат - тармакта үзгүлтүк бар</string>
-  <string name="login_failed_throttled" fuzzy="true">Өтө көп натыйжасыз иш аракет. Суранабыз, бир нече мүнөттөн кийин кайталаңыз</string>
+  <string name="share_caption_hint">Коштомо жазуу</string>
+  <string name="login_failed_network">Кирүүгө болбой жатат - тармакта үзгүлтүк бар</string>
+  <string name="login_failed_throttled">Өтө көп натыйжасыз аракет. Бир нече мүнөттөн кийин кайта кирип көрүңүз.</string>
   <string name="login_failed_blocked">Кечириңиз, бул кодонуучу Уикиказынада блокко алынган.</string>
-  <string name="login_failed_generic" fuzzy="true">Системага кирүүдө катачылык бар!</string>
+  <string name="login_failed_2fa_needed">Эки фактордук аутентификация кодун теришиңиз керек.</string>
+  <string name="login_failed_email_auth_needed">Ырастоочу код электрондук почтаңызга жөнөтүлдү. Аккаунтка кирүү үчүн аны териңиз.</string>
+  <string name="login_failed_generic">Системага кирүүдө катачылык бар!</string>
   <string name="share_upload_button">Жүктөө</string>
   <string name="multiple_share_base_title">Файлардын бул тайпасынын аталышын жазыңыз</string>
   <string name="provider_modifications">Өзгөрүүлөр</string>
   <string name="menu_upload_single">Жүктөө</string>
   <string name="categories_search_text_hint">Түрмөктөрдү издөө</string>
+  <string name="depicts_search_text_hint">Файлдагы элементтерди издөө (тоо, Таж-Махал ж.б.)</string>
   <string name="menu_save_categories">Сактоо</string>
   <string name="refresh_button">Жаңылоо</string>
   <string name="display_list_button">Тизме</string>
@@ -86,11 +114,12 @@
   <string name="categories_activity_title">Категориялар</string>
   <string name="title_activity_settings">Параметрлер</string>
   <string name="title_activity_signup">Катталуу</string>
-  <string name="menu_about">Тиркеме жөнүндө</string>
+  <string name="title_activity_category_details">Категория</string>
+  <string name="menu_about">Колдонмо тууралуу</string>
   <string name="about_license" fuzzy="true">баштапкы коду ачык тиркемелер, &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt; лицензиясынын негизинде чыгарылган</string>
   <string name="about_improve" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;GitHub&lt;/a&gt; шилтемесине баштапкы код. &lt;a href=\" https://github.com/commons-app/apps-android-commons/issues\"&gt;Github&lt;/a&gt; шилтемесиндеги катачылык.</string>
   <string name="about_privacy_policy">Купуялык саясаты</string>
-  <string name="title_activity_about">Тиркеме жөнүндө</string>
+  <string name="title_activity_about">Колдонмо тууралуу</string>
   <string name="menu_feedback">Шарттуу жооп жөнөтүү (Email)</string>
   <string name="provider_categories">Жакында колдонулган түрмөктөр</string>
   <string name="waiting_first_sync">Алгачкы мезгилдештирүүнү күтүү…</string>
@@ -99,6 +128,7 @@
   <string name="menu_cancel_upload">Жокко чыгаруу</string>
   <string name="menu_download">Жүктөп алуу</string>
   <string name="preference_license" fuzzy="true">Лицензия</string>
+  <string name="preference_theme">Тема</string>
   <string name="license_name_cc_by_sa" fuzzy="true">CC Attribution-ShareAlike 3.0</string>
   <string name="license_name_cc_by" fuzzy="true">CC Attribution 3.0</string>
   <string name="license_name_cc0">CC0</string>
@@ -109,30 +139,61 @@
   <string name="welcome_copyright_text">Сиздин сүрөттөр дүйнө жүзүндөгү адамдардын билим алышына өбөлгө түзүүдө.</string>
   <string name="welcome_copyright_subtext">Интернетте жарыяланган автордук укукка ээ сүрөттөрдөн, ошондой эле плакаттардан жана китептердин мукабасынан ж.б. четтеңиз.</string>
   <string name="welcome_final_text">Сизге бул түшүнүктүүбү?</string>
-  <string name="welcome_final_button_text">Ооба !</string>
+  <string name="welcome_final_button_text">Ооба!</string>
   <string name="detail_panel_cats_label">Категориялар</string>
   <string name="detail_panel_cats_loading">Жүктөлүүдө…</string>
   <string name="detail_panel_cats_none">Тандалган жок</string>
   <string name="detail_description_empty">Сыпаттама жок</string>
   <string name="menu_refresh">Жаңылоо</string>
   <string name="ok">Макул</string>
+  <string name="upload">Жүктөө</string>
   <string name="yes">Ооба</string>
   <string name="no">Жок</string>
+  <string name="media_detail_caption">Коштомо жазуу</string>
   <string name="media_detail_title">Аталыш</string>
   <string name="media_detail_description">Сыпаттама</string>
+  <string name="media_detail_discussion">Талкуу</string>
   <string name="media_detail_author">Автор</string>
+  <string name="media_detail_uploaded_date">Жүктөлгөн датасы</string>
   <string name="media_detail_license">Лицензия</string>
+  <string name="media_detail_coordinates">Координаттар</string>
+  <string name="welcome_image_welcome_wikipedia">Википедияга кош келиңиз</string>
   <string name="cancel">Жокко чыгаруу</string>
+  <string name="navigation_drawer_open">Ачуу</string>
   <string name="navigation_drawer_close">Жабуу</string>
+  <string name="navigation_item_home">Башкы бет</string>
   <string name="navigation_item_upload">Жүктөө</string>
+  <string name="navigation_item_nearby">Жакынкы</string>
   <string name="navigation_item_about">Тууралуу</string>
+  <string name="navigation_item_settings">Параметрлер</string>
+  <string name="navigation_item_feedback">Кайтарым байланыш</string>
+  <string name="navigation_item_feedback_github">GitHub аркылуу кайтарым байланыш</string>
+  <string name="navigation_item_logout">Чыгуу</string>
+  <string name="navigation_item_info">Нускама</string>
   <string name="navigation_item_notification">Кабарламалар</string>
+  <string name="navigation_item_review">Ырастоо</string>
+  <string name="no_description_found">сыпаттама табылган жок</string>
+  <string name="nearby_info_menu_commons_article">Файлдын Викиказынадагы барагы</string>
+  <string name="nearby_info_menu_wikidata_article">Викимаалыматтын элементи</string>
+  <string name="nearby_info_menu_wikipedia_article">Википедия макаласы</string>
+  <string name="null_url">Ката! URL табылган жок</string>
+  <string name="nominate_deletion">Өчүрүүгө сунуштоо</string>
+  <string name="nominated_for_deletion">Бул файлды өчүрүү сунушталган.</string>
+  <string name="nominated_see_more">Толук маалымат алуу үчүн бул баракты караңыз</string>
+  <string name="skip_login">Аттоо</string>
+  <string name="navigation_item_login">Кирүү</string>
+  <string name="skip_login_title">Аккаунтка кирүүнү чындап эле өткөрүп жибергиңиз келеби?</string>
+  <string name="skip_login_message">Кийин файлдарды жүктөө үчүн аккаунтка кирген болгонуңуз керек болот.</string>
+  <string name="login_alert_message">Бул функцияны колдонуу үчүн аккаунтка кириңиз</string>
   <string name="nearby_wikidata">Викимаалымат</string>
   <string name="nearby_wikipedia">Википедия</string>
   <string name="about_faq">КБС</string>
   <string name="about_translate">Которуу</string>
   <string name="about_translate_title">Тилдер</string>
   <string name="about_translate_cancel">Жокко чыгаруу</string>
+  <string name="search_tab_title_media">Медиа</string>
+  <string name="search_tab_title_categories">Категориялар</string>
+  <string name="explore_tab_title_mobile">Уюлдук телефон аркылуу жүктөлгөн</string>
   <string name="explore_tab_title_map">Карта</string>
   <string name="back_button_warning">Жүктөөнү жокко чыгаруу</string>
   <string name="back_button_warning_desc">Артка баскычын колдонуу менен бул жүктөө жокко чыгарылат жана сиз ийгиликти жоготосуз</string>
@@ -141,4 +202,5 @@
   <string name="label">Аталыш</string>
   <string name="description">Сыпаттама</string>
   <string name="title_page_bookmarks_items">Элементтер</string>
+  <string name="account">Аккаунт</string>
 </resources>

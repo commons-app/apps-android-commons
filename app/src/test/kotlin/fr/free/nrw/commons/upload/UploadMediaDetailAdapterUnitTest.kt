@@ -246,7 +246,7 @@ class UploadMediaDetailAdapterUnitTest {
                 RecentLanguagesAdapter(
                     context,
                     listOf(Language("English", "en")),
-                    hashMapOf<String, String>(),
+                    mutableMapOf(),
                 ),
             )
         val method: Method =
@@ -270,49 +270,9 @@ class UploadMediaDetailAdapterUnitTest {
     }
 
     @Test
-    fun testRemoveLeadingAndTrailingWhitespace() {
-        // empty space
-        val test1 = "  test  "
-        val expected1 = "test"
-        Assert.assertEquals(expected1, viewHolder.removeLeadingAndTrailingWhitespace(test1))
-
-        val test2 = "  test test "
-        val expected2 = "test test"
-        Assert.assertEquals(expected2, viewHolder.removeLeadingAndTrailingWhitespace(test2))
-
-        // No whitespace
-        val test3 = "No trailing space"
-        val expected3 = "No trailing space"
-        Assert.assertEquals(expected3, viewHolder.removeLeadingAndTrailingWhitespace(test3))
-
-        // blank string
-        val test4 = " \r \t  "
-        val expected4 = ""
-        Assert.assertEquals(expected4, viewHolder.removeLeadingAndTrailingWhitespace(test4))
-    }
-
-    @Test
-    fun testRemoveLeadingAndTrailingInstanceTab() {
-        val test = "\ttest\t"
-        val expected = "test"
-        Assert.assertEquals(expected, viewHolder.removeLeadingAndTrailingWhitespace(test))
-    }
-
-    @Test
-    fun testRemoveLeadingAndTrailingCarriageReturn() {
-        val test = "\rtest\r"
-        val expected = "test"
-        Assert.assertEquals(expected, viewHolder.removeLeadingAndTrailingWhitespace(test))
-    }
-
-    @Test
     fun testCaptionJapaneseCharacters() {
         val test1 = "テスト　テスト"
         val expected1 = "テスト テスト"
         Assert.assertEquals(expected1, viewHolder.convertIdeographicSpaceToLatinSpace(test1))
-
-        val test2 = "　\r　\t　テスト　\r　\t　"
-        val expected2 = "テスト"
-        Assert.assertEquals(expected2, viewHolder.removeLeadingAndTrailingWhitespace(test2))
     }
 }

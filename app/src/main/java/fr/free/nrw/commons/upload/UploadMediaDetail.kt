@@ -8,7 +8,7 @@ import kotlinx.parcelize.Parcelize
  * Holds a description of an item being uploaded by [UploadActivity]
  */
 @Parcelize
-data class UploadMediaDetail constructor(
+data class UploadMediaDetail(
     /**
      * The language code ie. "en" or "fr".
      * @param languageCode The language code ie. "en" or "fr".
@@ -18,7 +18,7 @@ data class UploadMediaDetail constructor(
      * The description text for the item being uploaded.
      * @param descriptionText The description text.
      */
-    var descriptionText: String = "",
+    var descriptionText: String? = "",
     /**
      * The caption text for the item being uploaded.
      * @param captionText The caption text.
@@ -27,10 +27,10 @@ data class UploadMediaDetail constructor(
 ) : Parcelable {
     fun javaCopy() = copy()
 
-    constructor(place: Place) : this(
-        place.language,
-        place.longDescription,
-        place.name,
+    constructor(place: Place?) : this(
+        place?.language,
+        place?.longDescription,
+        place?.name ?: "",
     )
 
     /**

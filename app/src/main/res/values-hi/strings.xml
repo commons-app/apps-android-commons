@@ -6,6 +6,7 @@
 * Anandra
 * AnupamM
 * Bhatakati aatma
+* Bunnypranav
 * Gopalindians
 * Nilesh shukla
 * Nitin1485
@@ -28,32 +29,46 @@
   <string name="commons_github">कॉमन्स गिटहब सोर्स कोड</string>
   <string name="commons_logo">कॉमन्स का प्रतीक चिन्ह</string>
   <string name="commons_website">कॉमन्स का जालस्थान</string>
+  <string name="exit_location_picker">निकास स्थान चयनकर्ता</string>
   <string name="submit">जमा करें</string>
+  <string name="add_another_description">एक और विवरण जोड़ें</string>
+  <string name="add_new_contribution">नया योगदान जोड़ें</string>
+  <string name="add_contribution_from_camera">कैमरे से योगदान जोड़ें</string>
+  <string name="add_contribution_from_photos">फ़ोटो से योगदान जोड़ें</string>
+  <string name="add_contribution_from_contributions_gallery">पिछले योगदान गैलरी से योगदान जोड़ें</string>
+  <string name="show_captions">कैप्शन</string>
+  <string name="row_item_language_description">भाषा विवरण</string>
   <string name="row_item_caption">कैप्शन</string>
   <string name="show_captions_description">विवरण</string>
   <string name="nearby_row_image">चित्र</string>
   <string name="nearby_all">सभी</string>
+  <string name="nearby_filter_toggle">ऊपर टॉगल करें</string>
+  <string name="nearby_filter_state">स्थान राज्य</string>
   <string name="appwidget_img">आज का चित्र</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">%1$d फ़ाइल अपलोड हो रही</item>
     <item quantity="other">%1$d फ़ाइलें अपलोड हो रहीं</item>
   </plurals>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">\@string/contributions_subtitle_zero</item>
+  <plurals name="contributions_subtitle">
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
-  <plurals name="starting_multiple_uploads" fuzzy="true">
-    <item quantity="one">%1$d अपलोड शुरू</item>
-    <item quantity="other">%1$d अपलोड शुरू</item>
+  <string name="starting_uploads">अपलोड शुरू</string>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">%d अपलोड संसाधित</item>
+    <item quantity="other">%d अपलोड संसाधित</item>
   </plurals>
-  <plurals name="multiple_uploads_title" fuzzy="true">
-    <item quantity="one">%1$d अपलोड</item>
-    <item quantity="other">%1$d अपलोड</item>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">%d अपलोड</item>
+    <item quantity="other">%d अपलोड</item>
   </plurals>
   <plurals name="share_license_summary">
     <item quantity="one">इस चित्र का प्रयोग %1$s लाइसेंस के अन्तर्गत होगा</item>
     <item quantity="other">इन चित्रों का प्रयोग %1$s लाइसेंस के अन्तर्गत होगा</item>
+  </plurals>
+  <plurals name="upload_count_title">
+    <item quantity="one">%1$d अपलोड</item>
+    <item quantity="other">%1$d अपलोड</item>
   </plurals>
   <string name="navigation_item_explore">खोजें</string>
   <string name="preference_category_appearance">स्वरूप</string>
@@ -121,8 +136,8 @@
   <string name="menu_about">परिचय</string>
   <string name="about_license">विकिमीडिया कॉमन्स एप्प एक मुक्त स्रोत एप्प है जो कि विकिमीडिया समुदाय के अनुदानप्राप्तकर्ताओं व स्वयंसेवकों द्वारा निर्मित एवं प्रबंधित है। विकिमीडिया फॉऊण्डेशन इस एप्प के निर्माण, विकास व प्रबंधन में किसी प्रकार से भी संलग्न नहीं है।</string>
   <string name="about_improve">त्रुटि की सूचना और सुझावों के लिए &lt;a href=\"%1$s\"&gt; GitHub समस्या &lt;/a&gt; बनाएं</string>
-  <string name="about_privacy_policy" fuzzy="true">&lt;u&gt;गोपनीयता नीति&lt;/u&gt;</string>
-  <string name="about_credits" fuzzy="true">&lt;u&gt;श्रेय&lt;/u&gt;</string>
+  <string name="about_privacy_policy">गोपनीयता नीति</string>
+  <string name="about_credits">श्रेय</string>
   <string name="title_activity_about">परिचय</string>
   <string name="menu_feedback">प्रतिक्रिया दें (ईमेल द्वारा)</string>
   <string name="no_email_client">कोई ईमेल साधन स्थापित नहीं</string>
@@ -135,7 +150,7 @@
   <string name="menu_download">डाउनलोड</string>
   <string name="preference_license">डिफॉल्ट लाइसेन्स</string>
   <string name="use_previous" fuzzy="true">पिछले शीर्षक/विवरण का उपयोग करें</string>
-  <string name="preference_theme" fuzzy="true">रात्रि मोड</string>
+  <string name="preference_theme">थीम</string>
   <string name="license_name_cc_by_sa_four">एट्रीब्यूशन-शेयरअलाइक 4.0</string>
   <string name="license_name_cc_by_four">एट्रिब्यूशन 4.0</string>
   <string name="license_name_cc_by_sa">एट्रीब्यूशन-शेयरअलाइक 3.0</string>
@@ -248,12 +263,12 @@
   <string name="nearby_wikipedia" fuzzy="true">विकीपीडिया</string>
   <string name="nearby_commons">कॉमन्स</string>
   <string name="about_rate_us" fuzzy="true">&lt;u&gt;हमें रेट करें&lt;/u&gt;</string>
-  <string name="about_faq" fuzzy="true">&lt;u&gt;अक्सर पूछे जाने वाले प्रश्न&lt;/u&gt;</string>
+  <string name="about_faq">अक्सर पूछे जाने वाले प्रश्न</string>
   <string name="welcome_skip_button">प्रशिक्षण छोड़ें</string>
   <string name="no_internet">इंटरनेट उपलब्ध नहीं</string>
   <string name="error_notifications">सूचनाएं लाने में त्रुटि</string>
   <string name="no_notifications">कोई सूचनाएँ नहीं मिलीं</string>
-  <string name="about_translate" fuzzy="true">&lt;u&gt;अनुवाद&lt;/u&gt;</string>
+  <string name="about_translate">अनुवाद</string>
   <string name="about_translate_title">भाषाएँ</string>
   <string name="about_translate_proceed">आगे बढ़ें</string>
   <string name="about_translate_cancel">रद्द करें</string>
@@ -269,7 +284,7 @@
   <string name="search_recent_header">हाल की खोजें</string>
   <string name="provider_searches">हाल में खोजे गये प्रश्न</string>
   <string name="error_loading_categories">श्रेणी लोड करते समय त्रुटि उत्पन्न हुई।</string>
-  <string name="search_tab_title_media" fuzzy="true">मीडिया</string>
+  <string name="search_tab_title_media">मीडिया</string>
   <string name="search_tab_title_categories">श्रेणियाँ</string>
   <string name="explore_tab_title_featured">निर्वाचित</string>
   <string name="explore_tab_title_map">नक्शा</string>
@@ -300,7 +315,7 @@
   <string name="statistics">सांख्यिकी</string>
   <string name="statistics_thanks">धन्यवाद प्राप्त किया</string>
   <string name="statistics_featured">निर्वाचित चित्र</string>
-  <string name="level" fuzzy="true">स्तर</string>
+  <string name="level">स्तर %d</string>
   <string name="images_uploaded">चित्र अपलोड हुआ</string>
   <string name="image_reverts">चित्रों को वापस नहीं किया गया</string>
   <string name="images_used_by_wiki">उपयोग हुए चित्र</string>
@@ -317,6 +332,7 @@
   <string name="previous">पिछला</string>
   <string name="title_page_bookmarks_pictures">चित्र</string>
   <string name="title_page_bookmarks_locations">स्थान</string>
+  <string name="title_page_bookmarks_categories">श्रेणियाँ</string>
   <string name="menu_bookmark">बुकमार्क से जोड़ें/हटायें</string>
   <string name="provider_bookmarks">बुकमार्क</string>
   <string name="bookmark_empty">आपने कोई बुकमार्क नहीं जोड़ा है</string>
@@ -357,4 +373,5 @@
   <string name="custom_selector_delete_folder">फ़ोल्डर हटाएँ</string>
   <string name="custom_selector_delete">हटाएँ</string>
   <string name="custom_selector_cancel">रद्द करें</string>
+  <string name="caption">कैप्शन</string>
 </resources>

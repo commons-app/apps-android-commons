@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* AguzulH
 * Brahim-essaidi
 * Hakim1bal
 -->
@@ -79,7 +80,7 @@
   <string name="Profile">ⵉⴼⵔⵙ</string>
   <string name="statistics">ⵉⵙⵉⴹⵏⵏ</string>
   <string name="title_app_shortcut_setting">ⵜⵉⵙⵖⴰⵍ</string>
-  <string name="leaderboard_column_user">ⴰⵏⵙⵙⵎⵔⵙ</string>
+  <string name="leaderboard_column_user">ⴰⵏⵙⵎⵔⴰⵙ</string>
   <string name="leaderboard_column_count">ⵙⵙⵉⴹⵏ</string>
   <string name="leaderboard_yearly">ⴰⵙⴳⵯⵙⴰⵏ</string>
   <string name="leaderboard_weekly">ⴰⵏⵎⵍⴰⵙⵙ</string>

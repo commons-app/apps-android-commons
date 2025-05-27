@@ -63,7 +63,10 @@ class WikidataFeedback : BaseActivity() {
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
         binding.appCompatButton.setOnClickListener {
-            var desc = findViewById<RadioButton>(binding.radioGroup.checkedRadioButtonId).text
+            var desc = when (binding.radioGroup.checkedRadioButtonId) {
+                R.id.radioButton2 -> getString(R.string.is_at_a_different_place_wikidata, place)
+                else -> findViewById<RadioButton>(binding.radioGroup.checkedRadioButtonId).text
+            }
             var det = binding.detailsEditText.text.toString()
             if (binding.radioGroup.checkedRadioButtonId == R.id.radioButton3 && binding.detailsEditText.text.isNullOrEmpty()) {
                 Toast
@@ -94,6 +97,7 @@ class WikidataFeedback : BaseActivity() {
                     }, { throwable: Throwable? ->
                         Timber.e(throwable!!)
                     })
+                finish()
             }
         }
     }

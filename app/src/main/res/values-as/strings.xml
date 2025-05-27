@@ -120,7 +120,7 @@
   <string name="search_commons">ক\'ম\'ঞ্চত সন্ধান কৰক</string>
   <string name="delete">বিলোপ কৰক</string>
   <string name="statistics">পৰিসংখ্যা</string>
-  <string name="level">স্তৰ</string>
+  <string name="level" fuzzy="true">স্তৰ</string>
   <string name="error_occurred">ত্ৰুটি সংঘটিত হ\'ল!</string>
   <string name="notifications">জাননী</string>
   <string name="dialog_box_text_nomination">%1$s কিয় বিলোপ কৰা হ\'ব লাগে?</string>

@@ -64,8 +64,8 @@ class NotificationClient
                 return Notification(
                     notificationType = notificationType,
                     notificationText = notificationText,
-                    date = DateUtil.getMonthOnlyDateString(timestamp),
-                    link = contents?.links?.primary?.url ?: "",
+                    date = DateUtil.getMonthOnlyDateString(getTimestamp()),
+                    link = contents?.links?.getPrimary()?.url ?: "",
                     iconUrl = "",
                     notificationId = id().toString(),
                 )

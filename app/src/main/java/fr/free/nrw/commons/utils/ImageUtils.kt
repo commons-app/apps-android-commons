@@ -283,7 +283,8 @@ object ImageUtils {
             context,
             context.getString(R.string.setting_wallpaper_dialog_title),
             context.getString(R.string.setting_wallpaper_dialog_message),
-            true
+            true,
+            false
         )
     }
 
@@ -293,7 +294,8 @@ object ImageUtils {
             context,
             context.getString(R.string.setting_avatar_dialog_title),
             context.getString(R.string.setting_avatar_dialog_message),
-            true
+            true,
+            false
         )
     }
 

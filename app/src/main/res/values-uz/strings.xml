@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
 * Jamshid Nurkulov
+* Mainculprit
 * Malikxan
 * Mirishkorlik
 * Zafar Shamsiddinov
@@ -212,6 +213,7 @@
   <string name="become_a_tester_title">Beta versiya sinovchisi boʻling</string>
   <string name="become_a_tester_description">Google Playʼdagi beta-kanalimizga obuna boʻling hamda yangi funksiyalar va xatolarni tuzatishga koʻpchilikdan oldinroq xabardor boʻlib boring</string>
   <string name="_2fa_code">2FA kod</string>
+  <string name="email_auth_code">Elektron pochta tasdiqlash kodi</string>
   <string name="logout_verification">Haqiqatan ham tizimdan chiqmoqchimisiz?</string>
   <string name="mediaimage_failed">Media tasviri bajarilmadi</string>
   <string name="no_subcategory_found">Hech qanday ost toifa topilmadi</string>
@@ -359,7 +361,7 @@
   <string name="statistics_thanks">Bildirilgan minnatdorchiliklar</string>
   <string name="statistics_featured">Tanlangan tasvirlar</string>
   <string name="statistics_wikidata_edits">\"Yaqin atrofdan\" olingan tasvirlar</string>
-  <string name="level">Bosqich</string>
+  <string name="level" fuzzy="true">Bosqich</string>
   <string name="images_uploaded">Yuklangan rasmlar</string>
   <string name="image_reverts">Tasvirlar qayta tiklanmadi</string>
   <string name="images_used_by_wiki">Foydalanilgan tasvirlar</string>

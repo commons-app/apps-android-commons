@@ -11,8 +11,12 @@ import android.widget.ProgressBar
 import android.widget.Switch
 import androidx.appcompat.app.AlertDialog
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.view.isVisible
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import fr.free.nrw.commons.contributions.Contribution
@@ -36,6 +40,10 @@ import fr.free.nrw.commons.media.MediaClient
 import fr.free.nrw.commons.upload.FileProcessor
 import fr.free.nrw.commons.upload.FileUtilsWrapper
 import io.reactivex.schedulers.Schedulers
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.launch
 import java.util.TreeMap
 import javax.inject.Inject
 import kotlin.collections.ArrayList
@@ -77,6 +85,12 @@ class ImageFragment :
      * Stores all images
      */
     var allImages: ArrayList<Image> = ArrayList()
+
+    /**
+     * Keeps track of switch state
+     */
+    private val _switchState = MutableStateFlow(false)
+    val switchState = _switchState.asStateFlow()
 
     /**
      * View model Factory.
@@ -212,7 +226,11 @@ class ImageFragment :
 
         switch = binding?.switchWidget
         switch?.visibility = View.VISIBLE
-        switch?.setOnCheckedChangeListener { _, isChecked -> onChangeSwitchState(isChecked) }
+        _switchState.value = switch?.isChecked ?: false
+        switch?.setOnCheckedChangeListener { _, isChecked ->
+            onChangeSwitchState(isChecked)
+            _switchState.value = isChecked
+        }
         selectorRV = binding?.selectorRv
         loader = binding?.loader
         progressLayout = binding?.progressLayout
@@ -230,6 +248,28 @@ class ImageFragment :
         progressDialog = builder.create()
 
         return binding?.root
+    }
+
+    /**
+     * onViewCreated
+     * Updates empty text view visibility based on image count, switch state, and loading status.
+     */
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        viewLifecycleOwner.lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                combine(
+                    imageAdapter.currentImagesCount,
+                    switchState,
+                    imageAdapter.isLoadingImages
+                ) { imageCount, isChecked, isLoadingImages ->
+                    Triple(imageCount, isChecked, isLoadingImages)
+                }.collect { (imageCount, isChecked, isLoadingImages) ->
+                    binding?.allImagesUploadedOrMarked?.isVisible =
+                        !isLoadingImages && !isChecked && imageCount == 0 && (switch?.isVisible == true)
+                }
+            }
+        }
     }
 
     private fun onChangeSwitchState(checked: Boolean) {

@@ -5,12 +5,15 @@
 * Asma
 * Azouz.anis
 * ButterflyOfFire
+* Cigaryno
 * Claw eg
 * Dr-Taher
 * Dr. Mohammed
 * FiberAhmed
+* Hhaboh162002
 * Kassem7899
 * LaMagiaaa
+* Lolekek
 * Meno25
 * Mido
 * Monrokhoury
@@ -19,6 +22,7 @@
 * NancyMilad
 * OsamaK
 * Tala Ali
+* XIDME
 * أيوب
 * أَحمد
 * ترجمان05
@@ -153,6 +157,8 @@
   <string name="menu_from_camera">التقط صورة</string>
   <string name="menu_nearby">بالقرب من هنا</string>
   <string name="provider_contributions">مرفوعاتي</string>
+  <string name="menu_copy_link">نسخ الوصلة</string>
+  <string name="menu_link_copied">تَمَّ نَّسخ الوصلة إلى الحافظة</string>
   <string name="menu_share">انشرها</string>
   <string name="menu_view_file_page">عرض صفحة الملف</string>
   <string name="share_title_hint">العنوان (مطلوب)</string>
@@ -163,6 +169,7 @@
   <string name="login_failed_throttled">الكثير من المحاولات غير الناجحة. الرجاء المحاولة مرة أخرى في بضع دقائق.</string>
   <string name="login_failed_blocked">عذراً، لقد تم منع هذا المستخدم على كومنز</string>
   <string name="login_failed_2fa_needed">يجب توفير رمز التحقق المزدوج.</string>
+  <string name="login_failed_email_auth_needed">تم إرسال رمز التحقق إلى بريدك الإلكتروني. يُرجى إدخال الرمز لتسجيل الدخول.</string>
   <string name="login_failed_generic">فشل تسجيل الدخول</string>
   <string name="share_upload_button">ارفع</string>
   <string name="multiple_share_base_title">اسم هذه المجموعة</string>
@@ -268,6 +275,7 @@
   <string name="become_a_tester_title">انضم لمختبري اصدارات Beta (بيتا)</string>
   <string name="become_a_tester_description">يمكنك الاشتراك في القناة التجريبية على جوجل بلاي والحصول على إمكانية الوصول المبكر إلى الميزات الجديدة وإصلاحات الأخطاء</string>
   <string name="_2fa_code">رمز التحقق المزدوج 2FA</string>
+  <string name="email_auth_code">رمز التحقق من البريد الإلكتروني</string>
   <string name="logout_verification">أترغب فعلا في الخروج؟</string>
   <string name="mediaimage_failed">صورة الوسائط فشلت</string>
   <string name="no_subcategory_found">لم يتم العثور على تصنيفات فرعية.</string>
@@ -328,6 +336,7 @@
   <string name="copy_wikicode">انسخ نص الويكي إلى الكليب بورد</string>
   <string name="wikicode_copied">نص الويكي تم نسخه إلى الكليب بورد</string>
   <string name="nearby_location_not_available">قد لا تعمل الأجهزة المجاورة بشكل صحيح، الموقع غير متوفر.</string>
+  <string name="nearby_showing_pins_offline">الإنترنت غير متاح. يتم عرض الأماكن المخزنة مؤقتًا فقط.</string>
   <string name="upload_location_access_denied">رُفض الوصول إلى الموقع. يرجى ضبط موقعك يدويًا لاستخدام هذه الميزة.</string>
   <string name="location_permission_rationale_nearby">صلاحية مطلوبة لعرض قائمة بالأماكن القريبة</string>
   <string name="location_permission_rationale_explore">الإذن مطلوب لعرض قائمة الصور القريبة</string>
@@ -404,18 +413,20 @@
   <string name="error_fetching_nearby_monuments">خطأ في جلب المعالم القريبة.</string>
   <string name="no_recent_searches">لا توجد عمليات بحث حديثة</string>
   <string name="delete_recent_searches_dialog">هل أنت متأكد من أنك تريد مسح سجل بحثك؟</string>
-  <string name="cancel_upload_dialog">هل انت متأكد انك تريد الغاء هذا التحميل</string>
+  <string name="cancel_upload_dialog">هل أنت متأكد أنك تريد إلغاء هذا التحميل؟</string>
   <string name="delete_search_dialog">هل تريد حذف هذا البحث؟</string>
   <string name="search_history_deleted">تم حذف سجل البحث</string>
   <string name="nominate_delete">ترشيح للحذف</string>
   <string name="delete">حذف</string>
   <string name="Achievements">الإنجازات</string>
   <string name="Profile">الملف الشخصي</string>
+  <string name="badges">أوسمة</string>
   <string name="statistics">إحصاءات</string>
   <string name="statistics_thanks">تم تلقي الشكر</string>
   <string name="statistics_featured">الصور المختارة</string>
   <string name="statistics_wikidata_edits">صور عبر \"الأماكن المجاورة\"</string>
-  <string name="level">المستوى</string>
+  <string name="level">المستوى %d</string>
+  <string name="profileLevel">%s (المستوى %s)</string>
   <string name="images_uploaded">الصور المرفوعة</string>
   <string name="image_reverts">لم يتم إرجاع الصور</string>
   <string name="images_used_by_wiki">الصور المستخدمة</string>
@@ -447,6 +458,7 @@
   <string name="map_application_missing">لا يمكن العثور على تطبيق خرائط متوافق على جهازك; الرجاء تثبيت تطبيق خرائط لاستخدام هذه الميزة.</string>
   <string name="title_page_bookmarks_pictures">الصور</string>
   <string name="title_page_bookmarks_locations">المواقع</string>
+  <string name="title_page_bookmarks_categories">التصنيفات</string>
   <string name="menu_bookmark">إضافة إلى/إزالة من العلامات</string>
   <string name="provider_bookmarks">العلامات</string>
   <string name="bookmark_empty">أنت لم تضف أي علامات</string>
@@ -842,6 +854,7 @@
   <string name="talk">نقاش</string>
   <string name="write_something_about_the_item">اكتب شيئًا عن العنصر \'%1$s\'. سيكون مرئيًا للعامة.</string>
   <string name="does_not_exist_anymore_no_picture_can_ever_be_taken_of_it">\'%1$s\' لم يعد موجودًا، ولا يمكن التقاط صورة له أبدًا.</string>
+  <string name="is_at_a_different_place_wikidata">\'%1$s\' في مكان آخر.</string>
   <string name="is_at_a_different_place_please_specify_the_correct_place_below_if_possible_tell_us_the_correct_latitude_longitude">\'%1$s\' موجود في مكان مختلف. يرجى تحديد المكان الصحيح أدناه، وإذا أمكن، اكتب خط العرض وخط الطول الصحيحين.</string>
   <string name="other_problem_or_information_please_explain_below">مشكلة أو معلومات أخرى (يرجى التوضيح أدناه).</string>
   <string name="feedback_destination_note">سيتم نشر تعليقاتك على صفحة الويكي التالية:  &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Mobile_app/Feedback\"&gt;Commons:Mobile app/Feedback&lt;/a&gt;</string>
@@ -863,4 +876,21 @@
   <string name="red_pin">هذا المكان ليس له صورة بعد، اذهب والتقط واحدة!</string>
   <string name="green_pin">هذا المكان لديه صورة بالفعل.</string>
   <string name="grey_pin">الآن التحقق ما إذا كان هذا المكان لديه صورة.</string>
+  <string name="error_while_loading">خطأ أثناء التحميل</string>
+  <string name="no_usages_found">لم يتم العثور على حالات استخدام</string>
+  <string name="usages_on_commons_heading">كومنز</string>
+  <string name="usages_on_other_wikis_heading">مواقع ويكي أخرى</string>
+  <string name="file_usages_container_heading">حالات استخدام الملف</string>
+  <string name="title_activity_single_web_view">نشاط عرض ويب واحد</string>
+  <string name="account">حساب</string>
+  <string name="vanish_account">حذف الحساب</string>
+  <string name="account_vanish_request_confirm_title">تحذير من اختفاء الحساب</string>
+  <string name="account_vanish_request_confirm">الاختفاء هو &lt;b&gt;الملاذ الأخير&lt;/b&gt; ويجب &lt;b&gt;استخدامه فقط عندما ترغب في التوقف عن التحرير إلى الأبد&lt;/b&gt; وأيضًا لإخفاء أكبر عدد ممكن من ارتباطاتك السابقة.&lt;br/&gt;&lt;br/&gt; يتم حذف الحساب على ويكيميديا كومنز عن طريق تغيير اسم حسابك بحيث لا يتمكن الآخرون من التعرف على مساهماتك في عملية تسمى اختفاء الحساب. &lt;b&gt;لا يضمن الاختفاء عدم الكشف عن الهوية تمامًا أو إزالة المساهمات في المشاريع&lt;/b&gt; .</string>
+  <string name="caption">الشرح</string>
+  <string name="caption_copied_to_clipboard">تم نسخ التسمية التوضيحية إلى الحافظة</string>
+  <string name="congratulations_all_pictures_in_this_album_have_been_either_uploaded_or_marked_as_not_for_upload">مبروك، جميع الصور الموجودة في هذا الألبوم تم تحميلها أو تم وضع علامة عليها بأنها غير قابلة للتحميل.</string>
+  <string name="show_in_explore">عرض في استكشاف</string>
+  <string name="show_in_nearby">عرض في المناطق القريبة</string>
+  <string name="image_tag_line_created_and_uploaded_by">تم الإنشاء والتحميل بواسطة: %1$s</string>
+  <string name="image_tag_line_created_by_and_uploaded_by">تم إنشاؤه بواسطة %1$s وتم تحميله بواسطة %2$s</string>
 </resources>

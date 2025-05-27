@@ -20,24 +20,23 @@ import kotlin.collections.ArrayList
 
 class CampaignsPresenterTest {
     @Mock
-    lateinit var okHttpJsonApiClient: OkHttpJsonApiClient
-
-    lateinit var campaignsPresenter: CampaignsPresenter
+    private lateinit var okHttpJsonApiClient: OkHttpJsonApiClient
 
     @Mock
-    internal lateinit var view: ICampaignsView
+    private lateinit var view: ICampaignsView
 
     @Mock
-    internal lateinit var campaignResponseDTO: CampaignResponseDTO
-    lateinit var campaignsSingle: Single<CampaignResponseDTO>
+    private lateinit var campaignResponseDTO: CampaignResponseDTO
 
     @Mock
-    lateinit var campaign: Campaign
-
-    lateinit var testScheduler: TestScheduler
+    private lateinit var campaign: Campaign
 
     @Mock
     private lateinit var disposable: Disposable
+
+    private lateinit var campaignsPresenter: CampaignsPresenter
+    private lateinit var campaignsSingle: Single<CampaignResponseDTO>
+    private lateinit var testScheduler: TestScheduler
 
     /**
      * initial setup, test environment
@@ -50,13 +49,13 @@ class CampaignsPresenterTest {
         campaignsSingle = Single.just(campaignResponseDTO)
         campaignsPresenter = CampaignsPresenter(okHttpJsonApiClient, testScheduler, testScheduler)
         campaignsPresenter.onAttachView(view)
-        Mockito.`when`(okHttpJsonApiClient.campaigns).thenReturn(campaignsSingle)
+        Mockito.`when`(okHttpJsonApiClient.getCampaigns()).thenReturn(campaignsSingle)
     }
 
     @Test
     fun getCampaignsTestNoCampaigns() {
         campaignsPresenter.getCampaigns()
-        verify(okHttpJsonApiClient).campaigns
+        verify(okHttpJsonApiClient).getCampaigns()
         testScheduler.triggerActions()
         verify(view).showCampaigns(null)
     }
@@ -78,7 +77,7 @@ class CampaignsPresenterTest {
         Mockito.`when`(campaign.endDate).thenReturn(endDateString)
         Mockito.`when`(campaign.startDate).thenReturn(startDateString)
         Mockito.`when`(campaignResponseDTO.campaigns).thenReturn(campaigns)
-        verify(okHttpJsonApiClient).campaigns
+        verify(okHttpJsonApiClient).getCampaigns()
         testScheduler.triggerActions()
         verify(view).showCampaigns(campaign)
     }
