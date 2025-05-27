@@ -170,6 +170,9 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        // Ensure basicKvStoreFactory is always initialized before use
+        presenter?.setupBasicKvStoreFactory { BasicKvStore(this@UploadActivity, it) }
+
         _binding = ActivityUploadBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -884,7 +887,6 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
                     // Save the user's choice to not show the dialog again
                     defaultKvStore.putBoolean("hasAlreadyLaunchedCategoriesDialog", true)
                 }
-                presenter!!.setupBasicKvStoreFactory { BasicKvStore(this@UploadActivity, it) }
                 presenter!!.checkImageQuality(0)
                 UploadMediaPresenter.isCategoriesDialogShowing = false
             }
