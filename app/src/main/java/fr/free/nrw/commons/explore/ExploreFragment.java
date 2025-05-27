@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager.OnPageChangeListener;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.ViewPagerAdapter;
@@ -69,7 +70,9 @@ public class ExploreFragment extends CommonsDaggerSupportFragment {
         loadNearbyMapData();
         binding = FragmentExploreBinding.inflate(inflater, container, false);
 
-        viewPagerAdapter = new ViewPagerAdapter(getChildFragmentManager());
+        viewPagerAdapter = new ViewPagerAdapter(getChildFragmentManager(),
+            FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
+
         binding.viewPager.setAdapter(viewPagerAdapter);
         binding.viewPager.setId(R.id.viewPager);
         binding.tabLayout.setupWithViewPager(binding.viewPager);

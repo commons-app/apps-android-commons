@@ -27,6 +27,7 @@ import androidx.recyclerview.widget.RecyclerView.AdapterDataObserver
 import androidx.recyclerview.widget.RecyclerView.OnItemTouchListener
 import androidx.recyclerview.widget.SimpleItemAnimator
 import fr.free.nrw.commons.Media
+import fr.free.nrw.commons.MediaDataExtractor
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.Utils
 import fr.free.nrw.commons.auth.SessionManager
@@ -62,6 +63,10 @@ class ContributionsListFragment : CommonsDaggerSupportFragment(), ContributionsL
     @JvmField
     @Inject
     var mediaClient: MediaClient? = null
+
+    @JvmField
+    @Inject
+    var mediaDataExtractor: MediaDataExtractor? = null
 
     @JvmField
     @Named(NetworkingModule.NAMED_LANGUAGE_WIKI_PEDIA_WIKI_SITE)
@@ -231,7 +236,7 @@ class ContributionsListFragment : CommonsDaggerSupportFragment(), ContributionsL
     }
 
     private fun initAdapter() {
-        adapter = ContributionsListAdapter(this, mediaClient!!)
+        adapter = ContributionsListAdapter(this, mediaClient!!, mediaDataExtractor!!, compositeDisposable)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

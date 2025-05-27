@@ -35,7 +35,8 @@ interface LoginInterface {
         @Field("password") pass: String?,
         @Field("retype") retypedPass: String?,
         @Field("OATHToken") twoFactorCode: String?,
-        @Field("logintoken") token: String?,
+        @Field("token") emailAuthToken: String?,
+        @Field("logintoken") loginToken: String?,
         @Field("uselang") userLanguage: String?,
         @Field("logincontinue") loginContinue: Boolean,
     ): Call<LoginResponse?>

@@ -2,6 +2,7 @@
 <!-- Authors:
 * Aftabuzzaman
 * Bellayet
+* Bodhisattwa
 * Borhan
 * Elias Ahmmad
 * Leemon2010
@@ -418,7 +419,11 @@
   <string name="category_edit_helper_edit_message_else">বিষয়শ্রেণী হালনাগাদ করা সম্ভব হয়নি।</string>
   <string name="category_edit_button_text">বিষয়শ্রেণীগুলি হালনাগাদ করুন</string>
   <string name="depictions_edit_helper_show_edit_title">চিত্রণ সম্পাদনা</string>
+  <string name="coordinates_edit_helper_show_edit_title">স্থানাঙ্ক হালনাগাদ</string>
+  <string name="description_edit_helper_show_edit_title">বিবরণ হালনাগাদ</string>
   <string name="coordinates_edit_helper_show_edit_title_success">সফল</string>
+  <string name="coordinates_edit_helper_show_edit_message">স্থানাঙ্ক %1$s যোগ করা হয়েছে।</string>
+  <string name="description_edit_helper_show_edit_message">বর্ণনা যোগ করা হয়েছে।</string>
   <string name="you_have_no_achievements_yet">আপনি এখনও কোনও অবদান রাখেন নি</string>
   <string name="account_created">অ্যাকাউন্ট তৈরি করা হয়েছে!</string>
   <string name="some_error">একটি ত্রুটি হয়েছে!</string>
@@ -470,6 +475,9 @@
   <string name="limited_connection_enabled">সীমিত সংযোগ মোড সক্রিয় করা হয়েছে!</string>
   <string name="limited_connection_mode">সীমিত সংযোগ মোড</string>
   <string name="statistics_quality">মানসম্মত ছবি</string>
+  <string name="resuming_upload">আপলোড আবার শুরু হচ্ছে...</string>
+  <string name="pausing_upload">আপলোড থামানো হচ্ছে...</string>
+  <string name="cancelling_upload">আপলোড বাতিল করা হচ্ছে…</string>
   <string name="cancel_upload">আপলোড বাতিল করুন</string>
   <string name="limited_connection_explanation">আপনি সীমিত সংযোগ মোড সক্রিয় করেছেন। সমস্ত আপলোডকে এখন বিরাম দেওয়া হয়েছে ও আপনি এই মোডটি নিষ্ক্রিয় করলে আপলোড পুনরায় শুরু করা হবে।</string>
   <string name="license_step_title">মিডিয়ার লাইসেন্স</string>

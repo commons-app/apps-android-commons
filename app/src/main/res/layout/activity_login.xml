@@ -146,6 +146,7 @@
             android:layout_marginEnd="@dimen/standard_gap"
             android:layout_marginRight="@dimen/standard_gap"
             android:layout_marginBottom="@dimen/standard_gap"
+            android:hint="@string/_2fa_code"
             android:visibility="gone"
             app:passwordToggleEnabled="false"
             tools:visibility="visible">
@@ -154,9 +155,7 @@
               android:id="@+id/login_two_factor"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
-              android:hint="@string/_2fa_code"
               android:imeOptions="flagNoExtractUi"
-              android:inputType="number"
               android:visibility="gone"
               tools:visibility="visible" />
 

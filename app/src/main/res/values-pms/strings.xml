@@ -111,6 +111,7 @@
   <string name="login_failed_throttled">Tròpi tentativ falì. Për piasì, ch\'a preuva torna da-sì chèiche minute.</string>
   <string name="login_failed_blocked">An dëspias, s\'utent-sì a l\'é stàit blocà ansima a Commons</string>
   <string name="login_failed_2fa_needed">A dev fornì sò còdes d\'autentificassion a doi fator.</string>
+  <string name="login_failed_email_auth_needed">Un còdes ëd verìfica ëd conession a l\'é stàit mandà a soa adrëssa ëd pòsta eletrònica. Për piasì, ch\'a anserissa col còdes për intré ant ël sistema.</string>
   <string name="login_failed_generic">Falì a rintré ant ël sistema</string>
   <string name="share_upload_button">Carié</string>
   <string name="multiple_share_base_title">Deje un nòm a s\'ansem</string>
@@ -216,6 +217,7 @@
   <string name="become_a_tester_title">Dventé në sperimentador Beta</string>
   <string name="become_a_tester_description">Anscriv-se a nòstr canal beta su Google Play a oten-e n\'acess antissipà a le neuve fonsionalità e coression ëd givo</string>
   <string name="_2fa_code">Còdes 2FA</string>
+  <string name="email_auth_code">Mandé un còdes ëd verifica</string>
   <string name="logout_verification">Veul-lo për da bon seurte dal sistema?</string>
   <string name="mediaimage_failed">Faliment ëd la plancia dël mojen</string>
   <string name="no_subcategory_found">Gnun-e sot-categorìe trovà</string>
@@ -816,4 +818,6 @@
   <string name="congratulations_all_pictures_in_this_album_have_been_either_uploaded_or_marked_as_not_for_upload">Congratulassion, tute le fòto ëd s\'àlbom a son ëstàita carià opura marcà coma da nen carié.</string>
   <string name="show_in_explore">Smon-e andrinta a Explore</string>
   <string name="show_in_nearby">Smon-e andrinta a Nearby</string>
+  <string name="image_tag_line_created_and_uploaded_by">Creà e carià da: %1$s</string>
+  <string name="image_tag_line_created_by_and_uploaded_by">Creà da %1$s e carià da %2$s</string>
 </resources>

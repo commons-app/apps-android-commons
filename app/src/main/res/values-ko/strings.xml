@@ -16,6 +16,7 @@
 * Revi
 * Suleiman the Magnificent Television
 * Theshinster123
+* YeBoy371
 * Ykhwong
 * YuzaTea
 * 그냥기여자
@@ -226,10 +227,11 @@
   <string name="become_a_tester_title">베타 테스터가 되세요</string>
   <string name="become_a_tester_description">구글 플레이 베타 채널에서 메일 발송을 허가해서 새로운 기능이나 버그 수정에 대한 정보를 빨리 얻어보세요</string>
   <string name="_2fa_code">2FA 코드</string>
+  <string name="email_auth_code">이메일 인증 코드</string>
   <string name="logout_verification">정말 로그아웃하시겠습니까?</string>
   <string name="mediaimage_failed">미디어 그림 실패</string>
   <string name="no_subcategory_found">하위 분류가 없습니다</string>
-  <string name="no_parentcategory_found">부모 분류가 없습니다</string>
+  <string name="no_parentcategory_found">상위 분류가 없습니다</string>
   <string name="welcome_image_mount_zao">자오 연봉</string>
   <string name="welcome_image_llamas">라마</string>
   <string name="welcome_image_rainbow_bridge">레인보우 브리지</string>
@@ -428,7 +430,7 @@
   <string name="unable_to_display_nearest_place">위치 권한 없이 사진이 필요한 주변 장소를 표시할 수 없습니다</string>
   <string name="never_ask_again">다시는 묻지 않음</string>
   <string name="display_location_permission_title">위치 권한 요청</string>
-  <string name="achievements_fetch_failed" fuzzy="true">무언가가 잘못되어, 저희는 당신의 업적을 가져올 수 없었습니다</string>
+  <string name="achievements_fetch_failed">오류가 발생하여, 업적을 가져올 수 없습니다.</string>
   <string name="display_campaigns">캠페인 표시</string>
   <string name="display_campaigns_explanation">진행되고 있는 캠페인 보기</string>
   <string name="option_allow">허용</string>
@@ -449,6 +451,7 @@
   <string name="send_thank_failure_title">감사 표현 보내기: 실패</string>
   <string name="review_copyright">이것이 저작권 규정을 준수하고 있습니까?</string>
   <string name="review_category">알맞게 분류됐습니까?</string>
+  <string name="review_spam">이것이 범위에 포함되나요?</string>
   <string name="review_thanks">기여자에게 감사를 표하시겠습니까?</string>
   <string name="review_no_category">앗, 분류가 달리지 않은 것 같습니다!</string>
   <string name="review_category_explanation">이 이미지는 %1$s 분류에 속해 있습니다.</string>
@@ -486,6 +489,7 @@
   <string name="no_categories_found">분류가 없습니다</string>
   <string name="no_depiction_found">서술이 발견되지 않았습니다</string>
   <string name="upload_cancelled">업로드 취소됨</string>
+  <string name="dialog_box_text_nomination">%1$s을(를) 삭제해야 하는 이유는 무엇인가요?</string>
   <string name="default_description_language">기본 설명 언어</string>
   <string name="delete_helper_show_deletion_title">삭제 신청</string>
   <string name="delete_helper_show_deletion_title_success">성공</string>
@@ -530,7 +534,7 @@
   <string name="you_must_reset_your_passsword">로그인에 문제가 생겼습니다, 비밀번호를 재설정해야 합니다!</string>
   <string name="title_for_media">미디어</string>
   <string name="title_for_child_classes">자식 클래스</string>
-  <string name="title_for_parent_classes">부모 클래스</string>
+  <string name="title_for_parent_classes">상위 클래스</string>
   <string name="upload_nearby_place_found_title">주변 장소 발견</string>
   <string name="upload_nearby_place_found_description_plural">%1$s의 사진이 맞습니까?</string>
   <string name="upload_nearby_place_found_description_singular">%1$s의 사진이 맞습니까?</string>
@@ -688,6 +692,7 @@
   <string name="please_enter_some_comments">의견을 입력해 주십시오</string>
   <string name="talk">토론</string>
   <string name="other_problem_or_information_please_explain_below">기타 문제 또는 정보 (아래에 설명해 주십시오)</string>
+  <string name="are_you_sure_that_you_want_cancel_all_the_uploads">모든 업로드를 취소하시겠습니까?</string>
   <string name="cancelling_all_the_uploads">모든 업로드를 취소하는 중...</string>
   <string name="uploads">업로드</string>
   <string name="pending">보류 중</string>

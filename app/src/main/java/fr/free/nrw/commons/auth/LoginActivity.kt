@@ -65,6 +65,7 @@ class LoginActivity : AccountAuthenticatorActivity() {
     private val delegate: AppCompatDelegate by lazy {
         AppCompatDelegate.create(this, null)
     }
+    private var lastLoginResult: LoginResult? = null
 
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -271,6 +272,7 @@ class LoginActivity : AccountAuthenticatorActivity() {
         showLoggingProgressBar()
         loginClient.doLogin(username,
             password,
+            lastLoginResult,
             twoFactorCode,
             Locale.getDefault().language,
             object : LoginCallback {
@@ -280,9 +282,17 @@ class LoginActivity : AccountAuthenticatorActivity() {
                     onLoginSuccess(loginResult)
                 }
 
-                override fun twoFactorPrompt(caught: Throwable, token: String?) = runOnUiThread {
+                override fun twoFactorPrompt(loginResult: LoginResult, caught: Throwable, token: String?) = runOnUiThread {
                     Timber.d("Requesting 2FA prompt")
                     progressDialog!!.dismiss()
+                    lastLoginResult = loginResult
+                    askUserForTwoFactorAuth()
+                }
+
+                override fun emailAuthPrompt(loginResult: LoginResult, caught: Throwable, token: String?) {
+                    Timber.d("Requesting email auth prompt")
+                    progressDialog!!.dismiss()
+                    lastLoginResult = loginResult
                     askUserForTwoFactorAuth()
                 }
 
@@ -341,12 +351,13 @@ class LoginActivity : AccountAuthenticatorActivity() {
         progressDialog!!.dismiss()
         with(binding!!) {
             twoFactorContainer.visibility = View.VISIBLE
+            twoFactorContainer.hint = getString(if (lastLoginResult is LoginResult.EmailAuthResult) R.string.email_auth_code else R.string._2fa_code)
             loginTwoFactor.visibility = View.VISIBLE
             loginTwoFactor.requestFocus()
         }
         val imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
         imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY)
-        showMessageAndCancelDialog(R.string.login_failed_2fa_needed)
+        showMessageAndCancelDialog(getString(if (lastLoginResult is LoginResult.EmailAuthResult) R.string.login_failed_email_auth_needed else R.string.login_failed_2fa_needed))
     }
 
     @VisibleForTesting

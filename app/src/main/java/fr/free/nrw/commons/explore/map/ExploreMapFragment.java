@@ -120,6 +120,7 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
     private double prevZoom;
     private double prevLatitude;
     private double prevLongitude;
+    private boolean recentlyCameFromNearbyMap;
 
     private ExploreMapPresenter presenter;
 
@@ -221,7 +222,6 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
             binding.mapView.getController().setZoom(ZOOM_LEVEL);
         }
 
-        performMapReadyActions();
 
         binding.mapView.getOverlays().add(new MapEventsOverlay(new MapEventsReceiver() {
             @Override
@@ -341,7 +341,12 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
             !locationPermissionsHelper.checkLocationPermission(getActivity())) {
             isPermissionDenied = true;
         }
-        lastKnownLocation = MapUtils.getDefaultLatLng();
+
+        lastKnownLocation = getLastLocation();
+
+        if (lastKnownLocation == null) {
+            lastKnownLocation = MapUtils.getDefaultLatLng();
+        }
 
         // if we came from 'Show in Explore' in Nearby, load Nearby map center and zoom
         if (isCameFromNearbyMap()) {
@@ -367,6 +372,16 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
             prevLatitude = getArguments().getDouble("prev_latitude");
             prevLongitude = getArguments().getDouble("prev_longitude");
         }
+
+        setRecentlyCameFromNearbyMap(isCameFromNearbyMap());
+    }
+
+    /**
+     * @return The LatLng from the previous Fragment's map center or (0,0,0) coordinates
+     * if that information is not available/applicable.
+     */
+    public LatLng getPreviousLatLng() {
+        return new LatLng(prevLatitude, prevLongitude, (float)prevZoom);
     }
 
     /**
@@ -377,6 +392,23 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
      **/
     public boolean isCameFromNearbyMap() {
         return prevZoom != 0.0 || prevLatitude != 0.0 || prevLongitude != 0.0;
+    }
+
+    /**
+     * Gets the value that indicates if the user navigated from "Show in Explore" in Nearby and
+     * that the LatLng from Nearby has yet to be searched for map markers.
+     */
+    public boolean recentlyCameFromNearbyMap() {
+        return recentlyCameFromNearbyMap;
+    }
+
+    /**
+     * Sets the value that indicates if the user navigated from "Show in Explore" in Nearby and
+     * that the LatLng from Nearby has yet to be searched for map markers.
+     * @param newValue The value to set.
+     */
+    public void setRecentlyCameFromNearbyMap(boolean newValue) {
+        recentlyCameFromNearbyMap = newValue;
     }
 
     public void loadNearbyMapFromExplore() {
@@ -708,8 +740,29 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
             GeoPoint point = new GeoPoint(
                 nearbyBaseMarker.getPlace().location.getLatitude(),
                 nearbyBaseMarker.getPlace().location.getLongitude());
-            OverlayItem item = new OverlayItem(nearbyBaseMarker.getPlace().name, null,
-                point);
+
+            Media markerMedia = this.getMediaFromImageURL(nearbyBaseMarker.getPlace().pic);
+            String authorUser = null;
+            if (markerMedia != null) {
+                authorUser = markerMedia.getAuthorOrUser();
+                // HTML text is sometimes part of the author string and needs to be removed
+                authorUser = Html.fromHtml(authorUser, Html.FROM_HTML_MODE_LEGACY).toString();
+            }
+
+            String title = nearbyBaseMarker.getPlace().name;
+            // Remove "File:" if present at start
+            if (title.startsWith("File:")) {
+                title = title.substring(5);
+            }
+            // Remove extensions like .jpg, .jpeg, .png, .svg (case insensitive)
+            title = title.replaceAll("(?i)\\.(jpg|jpeg|png|svg)$", "");
+            title = title.replace("_", " ");
+            //Truncate if too long because it doesn't fit the screen
+            if (title.length() > 43) {
+                title = title.substring(0, 40) + "…";
+            }
+
+            OverlayItem item = new OverlayItem(title, authorUser, point);
             item.setMarker(d);
             items.add(item);
             ItemizedOverlayWithFocus overlay = new ItemizedOverlayWithFocus(items,
@@ -741,12 +794,36 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
     }
 
     /**
+     * Retrieves the specific Media object from the mediaList field.
+     * @param url The specific Media's image URL.
+     * @return The Media object that matches the URL or null if it could not be found.
+     */
+    private Media getMediaFromImageURL(String url) {
+        if (mediaList == null || url == null) {
+            return null;
+        }
+
+        for (int i = 0; i < mediaList.size(); i++) {
+            if (mediaList.get(i) != null && mediaList.get(i).getImageUrl() != null
+                && mediaList.get(i).getImageUrl().equals(url)) {
+                return mediaList.get(i);
+            }
+        }
+
+        return null;
+    }
+
+    /**
      * Removes a marker from the map based on the specified NearbyBaseMarker.
      *
      * @param nearbyBaseMarker The NearbyBaseMarker object representing the marker to be removed.
      */
     private void removeMarker(BaseMarker nearbyBaseMarker) {
-        Place place = nearbyBaseMarker.getPlace();
+        if (nearbyBaseMarker == null || nearbyBaseMarker.getPlace().getName() == null) {
+            return;
+        }
+
+        String target = nearbyBaseMarker.getPlace().getName();
         List<Overlay> overlays = binding.mapView.getOverlays();
         ItemizedOverlayWithFocus item;
 
@@ -755,8 +832,7 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
                 item = (ItemizedOverlayWithFocus) overlays.get(i);
                 OverlayItem overlayItem = item.getItem(0);
 
-                if (place.location.getLatitude() == overlayItem.getPoint().getLatitude()
-                    && place.location.getLongitude() == overlayItem.getPoint().getLongitude()) {
+                if (overlayItem.getTitle().equals(target)) {
                     binding.mapView.getOverlays().remove(i);
                     binding.mapView.invalidate();
                     break;
@@ -929,9 +1005,6 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
                 latLnge = new fr.free.nrw.commons.location.LatLng(51.506255446947776,
                     -0.07483536015053005, 1f);
             }
-        }
-        if (!isCameFromNearbyMap()) {
-            moveCameraToPosition(new GeoPoint(latLnge.getLatitude(), latLnge.getLongitude()));
         }
         return latLnge;
     }

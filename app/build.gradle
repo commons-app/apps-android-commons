@@ -119,7 +119,8 @@ dependencies {
     testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:5.10.0"
     testImplementation 'com.facebook.soloader:soloader:0.10.5'
     testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3"
-    debugImplementation("androidx.fragment:fragment-testing:1.6.2")
+    debugImplementation("androidx.fragment:fragment-testing-manifest:1.6.2")
+    androidTestImplementation("androidx.fragment:fragment-testing:1.6.2")
     testImplementation "commons-io:commons-io:2.6"
 
     // Android testing
@@ -212,8 +213,8 @@ android {
     defaultConfig {
         //applicationId 'fr.free.nrw.commons'
 
-        versionCode 1046
-        versionName '5.1.3'
+        versionCode 1051
+        versionName '5.4.0'
         setProperty("archivesBaseName", "app-commons-v$versionName-" + getBranchName())
 
         minSdkVersion 21
@@ -318,7 +319,7 @@ android {
             buildConfigField "String", "SIGNUP_LANDING_URL", "\"https://commons.m.wikimedia.org/w/index.php?title=Special:CreateAccount&returnto=Main+Page&returntoquery=welcome%3Dyes\""
             buildConfigField "String", "SIGNUP_SUCCESS_REDIRECTION_URL", "\"https://commons.m.wikimedia.org/w/index.php?title=Main_Page&welcome=yes\""
             buildConfigField "String", "FORGOT_PASSWORD_URL", "\"https://commons.wikimedia.org/wiki/Special:PasswordReset\""
-            buildConfigField "String", "PRIVACY_POLICY_URL", "\"https://github.com/commons-app/commons-app-documentation/blob/master/android/Privacy-policy.md\""
+            buildConfigField "String", "PRIVACY_POLICY_URL", "\"https://commons-app.github.io/privacy-policy\""
             buildConfigField "String", "FILE_USAGES_BASE_URL", "\"https://commons.wikimedia.org/w/api.php?action=query&format=json&formatversion=2\""
             buildConfigField "String", "ACCOUNT_TYPE", "\"fr.free.nrw.commons\""
             buildConfigField "String", "CONTRIBUTION_AUTHORITY", "\"fr.free.nrw.commons.contributions.contentprovider\""
@@ -333,6 +334,7 @@ android {
             buildConfigField "String", "TEST_USERNAME", "\"" + getTestUserName() + "\""
             buildConfigField "String", "TEST_PASSWORD", "\"" + getTestPassword() + "\""
             buildConfigField "String", "DEPICTS_PROPERTY", "\"P180\""
+            buildConfigField "String", "CREATOR_PROPERTY", "\"P170\""
             dimension 'tier'
         }
 
@@ -355,7 +357,7 @@ android {
             buildConfigField "String", "SIGNUP_LANDING_URL", "\"https://commons.m.wikimedia.beta.wmflabs.org/w/index.php?title=Special:CreateAccount&returnto=Main+Page&returntoquery=welcome%3Dyes\""
             buildConfigField "String", "SIGNUP_SUCCESS_REDIRECTION_URL", "\"https://commons.m.wikimedia.beta.wmflabs.org/w/index.php?title=Main_Page&welcome=yes\""
             buildConfigField "String", "FORGOT_PASSWORD_URL", "\"https://commons.wikimedia.beta.wmflabs.org/wiki/Special:PasswordReset\""
-            buildConfigField "String", "PRIVACY_POLICY_URL", "\"https://github.com/commons-app/commons-app-documentation/blob/master/android/Privacy-policy.md\""
+            buildConfigField "String", "PRIVACY_POLICY_URL", "\"https://commons-app.github.io/privacy-policy\""
             buildConfigField "String", "FILE_USAGES_BASE_URL", "\"https://commons.wikimedia.org/w/api.php?action=query&format=json&formatversion=2\""
             buildConfigField "String", "ACCOUNT_TYPE", "\"fr.free.nrw.commons.beta\""
             buildConfigField "String", "CONTRIBUTION_AUTHORITY", "\"fr.free.nrw.commons.beta.contributions.contentprovider\""
@@ -370,6 +372,7 @@ android {
             buildConfigField "String", "TEST_USERNAME", "\"" + getTestUserName() + "\""
             buildConfigField "String", "TEST_PASSWORD", "\"" + getTestPassword() + "\""
             buildConfigField "String", "DEPICTS_PROPERTY", "\"P245962\""
+            buildConfigField "String", "CREATOR_PROPERTY", "\"P253075\""
             dimension 'tier'
         }
     }

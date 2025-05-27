@@ -26,6 +26,7 @@ import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.util.TreeMap
 import kotlin.collections.ArrayList
 
@@ -342,45 +343,36 @@ class ImageAdapter(
                 numberOfSelectedImagesMarkedAsNotForUpload--
             }
             notifyItemChanged(position, ImageUnselected())
-
-            // Getting index from all images index when switch is on
-            val indexes =
-                if (showAlreadyActionedImages) {
-                    ImageHelper.getIndexList(selectedImages, images)
-
-                    // Getting index from actionable images when switch is off
-                } else {
-                    ImageHelper.getIndexList(selectedImages, ArrayList(actionableImagesMap.values))
-                }
-            for (index in indexes) {
-                notifyItemChanged(index, ImageSelectedOrUpdated())
-            }
         } else {
-            if (holder.isItemUploaded()) {
-                Toast.makeText(context, R.string.custom_selector_already_uploaded_image_text, Toast.LENGTH_SHORT).show()
-            } else {
-                if (holder.isItemNotForUpload()) {
-                    numberOfSelectedImagesMarkedAsNotForUpload++
-                }
-
-                // Getting index from all images index when switch is on
-                val indexes: ArrayList<Int> =
-                    if (showAlreadyActionedImages) {
-                        selectedImages.add(images[position])
-                        ImageHelper.getIndexList(selectedImages, images)
-
-                        // Getting index from actionable images when switch is off
-                    } else {
-                        selectedImages.add(ArrayList(actionableImagesMap.values)[position])
-                        ImageHelper.getIndexList(selectedImages, ArrayList(actionableImagesMap.values))
+            val image = images[position]
+            scope.launch(ioDispatcher) {
+                val imageSHA1 = imageLoader.getSHA1(image, defaultDispatcher)
+                withContext(Dispatchers.Main) {
+                    if (holder.isItemUploaded()) {
+                        Toast.makeText(context, R.string.custom_selector_already_uploaded_image_text, Toast.LENGTH_SHORT).show()
+                        return@withContext
                     }
 
-                for (index in indexes) {
-                    notifyItemChanged(index, ImageSelectedOrUpdated())
+                    if (imageSHA1.isNotEmpty() && imageLoader.getFromUploaded(imageSHA1) != null) {
+                        holder.itemUploaded()
+                        Toast.makeText(context, R.string.custom_selector_already_uploaded_image_text, Toast.LENGTH_SHORT).show()
+                        return@withContext
+                    }
+
+                    if (!holder.isItemUploaded() && imageSHA1.isNotEmpty() && imageLoader.getFromUploaded(imageSHA1) != null) {
+                        Toast.makeText(context, R.string.custom_selector_already_uploaded_image_text, Toast.LENGTH_SHORT).show()
+                    }
+
+                    if (holder.isItemNotForUpload()) {
+                        numberOfSelectedImagesMarkedAsNotForUpload++
+                    }
+                    selectedImages.add(image)
+                    notifyItemChanged(position, ImageSelectedOrUpdated())
+
+                    imageSelectListener.onSelectedImagesChanged(selectedImages, numberOfSelectedImagesMarkedAsNotForUpload)
                 }
             }
         }
-        imageSelectListener.onSelectedImagesChanged(selectedImages, numberOfSelectedImagesMarkedAsNotForUpload)
     }
 
     /**

@@ -13,6 +13,7 @@
 * Hhaboh162002
 * Kassem7899
 * LaMagiaaa
+* Lolekek
 * Meno25
 * Mido
 * Monrokhoury
@@ -168,6 +169,7 @@
   <string name="login_failed_throttled">الكثير من المحاولات غير الناجحة. الرجاء المحاولة مرة أخرى في بضع دقائق.</string>
   <string name="login_failed_blocked">عذراً، لقد تم منع هذا المستخدم على كومنز</string>
   <string name="login_failed_2fa_needed">يجب توفير رمز التحقق المزدوج.</string>
+  <string name="login_failed_email_auth_needed">تم إرسال رمز التحقق إلى بريدك الإلكتروني. يُرجى إدخال الرمز لتسجيل الدخول.</string>
   <string name="login_failed_generic">فشل تسجيل الدخول</string>
   <string name="share_upload_button">ارفع</string>
   <string name="multiple_share_base_title">اسم هذه المجموعة</string>
@@ -273,6 +275,7 @@
   <string name="become_a_tester_title">انضم لمختبري اصدارات Beta (بيتا)</string>
   <string name="become_a_tester_description">يمكنك الاشتراك في القناة التجريبية على جوجل بلاي والحصول على إمكانية الوصول المبكر إلى الميزات الجديدة وإصلاحات الأخطاء</string>
   <string name="_2fa_code">رمز التحقق المزدوج 2FA</string>
+  <string name="email_auth_code">رمز التحقق من البريد الإلكتروني</string>
   <string name="logout_verification">أترغب فعلا في الخروج؟</string>
   <string name="mediaimage_failed">صورة الوسائط فشلت</string>
   <string name="no_subcategory_found">لم يتم العثور على تصنيفات فرعية.</string>
@@ -851,6 +854,7 @@
   <string name="talk">نقاش</string>
   <string name="write_something_about_the_item">اكتب شيئًا عن العنصر \'%1$s\'. سيكون مرئيًا للعامة.</string>
   <string name="does_not_exist_anymore_no_picture_can_ever_be_taken_of_it">\'%1$s\' لم يعد موجودًا، ولا يمكن التقاط صورة له أبدًا.</string>
+  <string name="is_at_a_different_place_wikidata">\'%1$s\' في مكان آخر.</string>
   <string name="is_at_a_different_place_please_specify_the_correct_place_below_if_possible_tell_us_the_correct_latitude_longitude">\'%1$s\' موجود في مكان مختلف. يرجى تحديد المكان الصحيح أدناه، وإذا أمكن، اكتب خط العرض وخط الطول الصحيحين.</string>
   <string name="other_problem_or_information_please_explain_below">مشكلة أو معلومات أخرى (يرجى التوضيح أدناه).</string>
   <string name="feedback_destination_note">سيتم نشر تعليقاتك على صفحة الويكي التالية:  &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Mobile_app/Feedback\"&gt;Commons:Mobile app/Feedback&lt;/a&gt;</string>
@@ -887,4 +891,6 @@
   <string name="congratulations_all_pictures_in_this_album_have_been_either_uploaded_or_marked_as_not_for_upload">مبروك، جميع الصور الموجودة في هذا الألبوم تم تحميلها أو تم وضع علامة عليها بأنها غير قابلة للتحميل.</string>
   <string name="show_in_explore">عرض في استكشاف</string>
   <string name="show_in_nearby">عرض في المناطق القريبة</string>
+  <string name="image_tag_line_created_and_uploaded_by">تم الإنشاء والتحميل بواسطة: %1$s</string>
+  <string name="image_tag_line_created_by_and_uploaded_by">تم إنشاؤه بواسطة %1$s وتم تحميله بواسطة %2$s</string>
 </resources>

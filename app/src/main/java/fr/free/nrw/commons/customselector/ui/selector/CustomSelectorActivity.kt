@@ -638,17 +638,20 @@ class CustomSelectorActivity :
             finishPickImages(arrayListOf())
             return
         }
-        var i = 0
-        while (i < selectedImages.size) {
-            val path = selectedImages[i].path
-            val file = File(path)
-            if (!file.exists()) {
-                selectedImages.removeAt(i)
-                i--
+        scope.launch(ioDispatcher) {
+            val uniqueImages = selectedImages.distinctBy { image ->
+                CustomSelectorUtils.getImageSHA1(
+                    image.uri,
+                    ioDispatcher,
+                    fileUtilsWrapper,
+                    contentResolver
+                )
             }
-            i++
+
+            withContext(Dispatchers.Main) {
+                finishPickImages(ArrayList(uniqueImages))
+            }
         }
-        finishPickImages(selectedImages)
     }
 
     /**

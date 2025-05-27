@@ -53,6 +53,7 @@ class Media constructor(
      */
     var author: String? = null,
     var user: String? = null,
+    var creatorName: String? = null,
     /**
      * Gets the categories the file falls under.
      * @return file categories as an ArrayList of Strings
@@ -66,6 +67,7 @@ class Media constructor(
     var captions: Map<String, String> = emptyMap(),
     var descriptions: Map<String, String> = emptyMap(),
     var depictionIds: List<String> = emptyList(),
+    var creatorIds: List<String> = emptyList(),
     /**
      * This field was added to find non-hidden categories
      * Stores the mapping of category title to hidden attribute
@@ -130,11 +132,25 @@ class Media constructor(
      * returns user
      * @return Author or User
      */
+    @Deprecated("Use user for uploader username. Use attributedAuthor() for attribution. Note that the uploader may not be the creator/author.")
     fun getAuthorOrUser(): String? {
         return if (!author.isNullOrEmpty()) {
             author
         } else{
             user
+        }
+    }
+
+    /**
+     * Returns author if it's not null or empty, otherwise
+     * returns creator name
+     * @return name of author or creator
+     */
+    fun getAttributedAuthor(): String? {
+        return if (!author.isNullOrEmpty()) {
+            author
+        } else{
+            creatorName
         }
     }
 

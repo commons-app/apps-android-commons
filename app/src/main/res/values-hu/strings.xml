@@ -65,12 +65,12 @@
   <string name="password">Jelszó</string>
   <string name="login_credential">Jelentkezz be a Commons Béta fiókoddal</string>
   <string name="login">Bejelentkezés</string>
-  <string name="forgot_password">Elfelejtett jelszó:</string>
+  <string name="forgot_password">Elfelejtett jelszó</string>
   <string name="signup">Regisztráció</string>
   <string name="logging_in_title">Belépés…</string>
   <string name="logging_in_message">Kérlek várj…</string>
-  <string name="login_success" fuzzy="true">Sikeres bejelentkezés</string>
-  <string name="login_failed" fuzzy="true">A bejelentkezés nem sikerült.</string>
+  <string name="login_success">Sikeres bejelentkezés</string>
+  <string name="login_failed">A bejelentkezés nem sikerült.</string>
   <string name="upload_failed">A fájl nem található. Próbálkozz másik fájllal.</string>
   <string name="retry_limit_reached">Elérted az újrapróbálkozások maximális számát. Szakítsd meg a feltöltést, és próbáld újra!</string>
   <string name="unrestricted_battery_mode">Kikapcsolod az akkumulátoroptimalizálást?</string>
@@ -82,7 +82,7 @@
   <string name="upload_progress_notification_title_start">Fájl feltöltése: %s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s feltöltése</string>
   <string name="upload_progress_notification_title_finishing">%1$s feltöltése befejezve</string>
-  <string name="upload_failed_notification_title" fuzzy="true">%1$s feltöltése sikertelen</string>
+  <string name="upload_failed_notification_title">%1$s feltöltése sikertelen</string>
   <string name="upload_paused_notification_title">%1$s feltöltés megállítva</string>
   <string name="upload_failed_notification_subtitle">Érintsd meg a megtekintéshez</string>
   <string name="upload_paused_notification_subtitle">Megnézéshez koppints</string>
@@ -98,11 +98,11 @@
   <string name="menu_share">Megosztás</string>
   <string name="share_title_hint">Képaláírás (kötelező)</string>
   <string name="share_description_hint">Leírás</string>
-  <string name="login_failed_network" fuzzy="true">Nem lehet bejelentkezni - hálózati hiba</string>
+  <string name="login_failed_network">Nem sikerült bejelentkezni – hálózati hiba</string>
   <string name="login_failed_throttled">Túl sok sikertelen próbálkozás. Próbálkozz újra pár perc múlva.</string>
   <string name="login_failed_blocked">Sajnáljuk, ezt a felhasználót blokkolták a Commonson</string>
   <string name="login_failed_2fa_needed">Meg kell adnod a kétlépcsős hitelesítő kódodat.</string>
-  <string name="login_failed_generic" fuzzy="true">Bejelentkezési hiba</string>
+  <string name="login_failed_generic">Bejelentkezési hiba</string>
   <string name="share_upload_button">Feltöltés</string>
   <string name="multiple_share_base_title">Nevezd el a gyűjteményt</string>
   <string name="provider_modifications">Változtatások</string>
@@ -246,7 +246,7 @@
   <string name="nominated_see_more">Weboldal megtekintése további részletekért</string>
   <string name="skip_login">Kihagyás</string>
   <string name="navigation_item_login">Bejelentkezés</string>
-  <string name="skip_login_title" fuzzy="true">Biztos ki akarod hagyni a bejelentkezést?</string>
+  <string name="skip_login_title">Biztos ki akarod hagyni a bejelentkezést?</string>
   <string name="skip_login_message" fuzzy="true">Fényképek feltöltéséhez a jövőben be kell jelentkezned.</string>
   <string name="login_alert_message">A funkció használatához kérlek jelentkezz be.</string>
   <string name="copy_wikicode">Wikiszöveg vágólapra másolása</string>
@@ -325,7 +325,7 @@
   <string name="statistics_thanks">Kapott köszönetek</string>
   <string name="statistics_featured">Kiemelt képek</string>
   <string name="statistics_wikidata_edits">Képek a \"közeli helyek\" segítségével</string>
-  <string name="level" fuzzy="true">Szint</string>
+  <string name="level">%d. szint</string>
   <string name="images_uploaded">Feltöltött képek</string>
   <string name="images_used_by_wiki">Felhasznált képek</string>
   <string name="achievements_share_message">Oszd meg eredményeidet a barátaiddal!</string>

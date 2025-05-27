@@ -1,5 +1,46 @@
 # Wikimedia Commons for Android
 
+## v5.3.0
+
+### What's changed
+* Enable EmailAuth support
+* Explore map images no longer show "Unknown"
+* Fix crash when removing last two images of multiupload
+* Mark ❌ for closed locations (P3999) in Nearby
+* Fix two pin labels staying visible at the same time in Explore map
+* Refactoring and minor UI improvements
+
+## v5.2.0
+
+v5.2.0 boasts several new functionalities like:
+
+* A new refresh button lets you quickly reload the Nearby map
+* Bookmarks now support categories
+* Improved feedback and consistency in the user interface
+* Bug fixes and performance improvements
+
+### What's changed
+* Implement "Refresh" button to clear the cache and reload the Nearby map.
+* `CommonsApplication` migrate to kotlin & some lint fixes.
+* Revert back to MainScope for database and UI updates and make database operations thread safe.
+* Hide edit options for logged-out users in Explore screen.
+* Introduced a button to delete the current folder in custom selector.
+* Improve Unique File Name Search.
+* Migration of several modules from Java to Kotlin.
+* Fix modification on bottom sheet's data when coming from Nearby Banner and clicked on other pins.
+* Bug fixes and enhancement of Achievements screen.
+* Show where file is being used on Commons and other wikis.
+* Migrate android.media.ExifInterface to androidx.exifinterface.media.ExifInterface as android.media.ExifInterface had security flaws on older devices.
+* Make dialogs modal and always show the upload icon.
+* Fix unintentional deletion of subfolders and non-images by custom selector.
+* Bookmark categories.
+* Add pull down to refresh in the Contributions screen.
+* Fix race condition and lag when loading pin details, faster overlay management.
+* Show cached pins in Nearby even when internet is unavailable
+
+ Full changelog with the list of contributors: [`v5.1.2...v5.2.0`](https://github.com/commons-app/apps-android-commons/compare/v5.1.2...v5.2.0).
+
+
 ## v5.1.2
 
 ### What's changed

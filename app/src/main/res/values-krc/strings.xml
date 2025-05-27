@@ -101,6 +101,8 @@
   <string name="menu_from_camera">Суратха ал</string>
   <string name="menu_nearby">Джуўукъда</string>
   <string name="provider_contributions">Джюклегенлерим</string>
+  <string name="menu_copy_link">Джибериуню копия эт</string>
+  <string name="menu_link_copied">Джибериу алмашдырыу буферге копия этилгенди</string>
   <string name="menu_share">Юлюшле</string>
   <string name="menu_view_file_page">Файлны бетине къара</string>
   <string name="share_title_hint">Тюб джазыу (Амалсыз)</string>
@@ -274,6 +276,7 @@
   <string name="copy_wikicode">Викитекстни алмашдырыу буферге копия эт</string>
   <string name="wikicode_copied">Викитекст алмашдырыу буферге копия этилди</string>
   <string name="nearby_location_not_available">Джууукъдагыла тюз ишлеялмайды, Локация хайырландырылалмайды.</string>
+  <string name="nearby_showing_pins_offline">Интернет джетишмейди. Къуру кэш этилген джерле кёргюзюледиле.</string>
   <string name="upload_location_access_denied">Локациягъа джетишиу уналмады. Бу функцияны хайырланыр ючюн, тилейбиз, локациягъызны къолугъуз бла белгилегиз.</string>
   <string name="location_permission_rationale_nearby">Джууукъдагъы джерле тизмени кёргюзюр ючююн, эркинлик берирге керекди</string>
   <string name="location_permission_rationale_explore">Джууукъдагъы суратла тизмени кёргюзюр ючююн, эркинлик берирге керекди</string>
@@ -357,11 +360,13 @@
   <string name="delete">Кетер</string>
   <string name="Achievements">Джетишимле</string>
   <string name="Profile">Профиль</string>
+  <string name="badges">Белгичикле</string>
   <string name="statistics">Статистика</string>
   <string name="statistics_thanks">Бюсюреуле Алындыла</string>
   <string name="statistics_featured">Сайланнган Суратла</string>
   <string name="statistics_wikidata_edits">\"Джууукъдагъы Джерле\" юсю бла суратла</string>
-  <string name="level" fuzzy="true">Дараджа</string>
+  <string name="level">Дараджа %d</string>
+  <string name="profileLevel">%s (Дараджа %s)</string>
   <string name="images_uploaded">Суратла Джюклендиле</string>
   <string name="image_reverts">Суратла Кери Алынмадыла</string>
   <string name="images_used_by_wiki">Суратла Хайырландыла</string>
@@ -393,6 +398,7 @@
   <string name="map_application_missing">Девайсыгъызда келишген картография къошакъ табылмады. Тилейбиз, бу энчиликни хайырландырыр ючюн картография къошакъ джюклегиз.</string>
   <string name="title_page_bookmarks_pictures">Суратла</string>
   <string name="title_page_bookmarks_locations">Локацияла</string>
+  <string name="title_page_bookmarks_categories">Категорияла</string>
   <string name="menu_bookmark">Китаб белгилени къош/къорат</string>
   <string name="provider_bookmarks">Китаб белгиле</string>
   <string name="bookmark_empty">Алкъын чырт китаб белги къошмадыгъыз</string>
@@ -794,4 +800,19 @@
   <string name="red_pin">Бу джерни сураты джокъду, хайда бирин эт!</string>
   <string name="green_pin">Бу джерни алайсыз да сураты барды.</string>
   <string name="grey_pin">Бу джерни сураты болуб-болмагъанын тинте турама.</string>
+  <string name="error_while_loading">Джюкленнген заманда халат</string>
+  <string name="no_usages_found">Бир хайырланыучу да табылмады</string>
+  <string name="usages_on_commons_heading">Гёзен</string>
+  <string name="usages_on_other_wikis_heading">Башха викиле</string>
+  <string name="file_usages_container_heading">Файлны хайырланыулары</string>
+  <string name="title_activity_single_web_view">SingleWebViewActivity</string>
+  <string name="account">Хыйсаб</string>
+  <string name="vanish_account">Хыйсабны сюрт</string>
+  <string name="account_vanish_request_confirm_title">Хыйсаб сюртюуню эсгертиую</string>
+  <string name="account_vanish_request_confirm">Джокъ этиу — &lt;b&gt;ахыр амалды&lt;/b&gt;, эмда аны  &lt;b&gt;тюзетиуню тамамы бла тохтатыргъа излегесиз хайырланыргъа керекди&lt;/b&gt;, неда эскиде ассоциацияланы бир мадар болуб аслам джашырыргъа излесегиз.&lt;br/&gt;&lt;br /&gt;Викигёзенде хыйсабны кетериу, башхала хыйсабны джокъ этиу атны джюрютген процессде сизни кошумугъузну танымазча, хыйсабыгъызны атын тюрлендириу бла этиледи.&lt;b&gt;Джокъ этиу толу анонимликни гарантия этмейди эмда проектде къошумларыгъызны къоратмайды&lt;/b&gt;.</string>
+  <string name="caption">Тюб джазыу</string>
+  <string name="caption_copied_to_clipboard">Тюб джазыу алмашдырыу буферге копия этилгенди</string>
+  <string name="congratulations_all_pictures_in_this_album_have_been_either_uploaded_or_marked_as_not_for_upload">Алгъышлайбыз, бу альбомна бютеу сратла не джюкленнгендиле, неда джюкленирге джораланмагъанлача белгиленнгендиле.</string>
+  <string name="show_in_explore">Explore-де кёргюз</string>
+  <string name="show_in_nearby">Nearby-да кёргюз</string>
 </resources>

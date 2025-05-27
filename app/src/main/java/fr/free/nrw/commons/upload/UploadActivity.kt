@@ -14,6 +14,7 @@ import android.os.Bundle
 import android.provider.Settings
 import android.view.View
 import android.widget.CheckBox
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -122,7 +123,7 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
     /**
      * Set the value of the showPermissionDialog variable.
      *
-     * @param showPermissionsDialog `true` to indicate to show
+     * @property isShowPermissionsDialog `true` to indicate to show
      * Permissions Dialog if permissions are missing, `false` otherwise.
      */
     /**
@@ -166,6 +167,8 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
     private var _binding: ActivityUploadBinding? = null
     private val binding: ActivityUploadBinding get() = _binding!!
 
+    private lateinit var onBackPressedCallback: OnBackPressedCallback
+
     @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -175,6 +178,23 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
 
         _binding = ActivityUploadBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        // Overrides the back button to make sure the user is prepared to lose their progress
+        onBackPressedCallback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                showAlertDialog(
+                    this@UploadActivity,
+                    getString(R.string.back_button_warning),
+                    getString(R.string.back_button_warning_desc),
+                    getString(R.string.back_button_continue),
+                    getString(R.string.back_button_warning),
+                    null
+                ) {
+                    finish()
+                }
+            }
+        }
+        onBackPressedDispatcher.addCallback(this, onBackPressedCallback)
 
         /*
          If Configuration of device is changed then get the new fragments
@@ -190,7 +210,7 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
         }
 
         init()
-        binding.rlContainerTitle.setOnClickListener { v: View? -> onRlContainerTitleClicked() }
+        binding.rlContainerTitle.setOnClickListener { _: View? -> onRlContainerTitleClicked() }
         nearbyPopupAnswers = mutableMapOf()
         //getting the current dpi of the device and if it is less than 320dp i.e. overlapping
         //threshold, thumbnails automatically minimizes
@@ -204,7 +224,7 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
         }
         locationManager!!.requestLocationUpdatesFromProvider(LocationManager.GPS_PROVIDER)
         locationManager!!.requestLocationUpdatesFromProvider(LocationManager.NETWORK_PROVIDER)
-        store = BasicKvStore(this, storeNameForCurrentUploadImagesSize).apply {
+        store = BasicKvStore(this, STORE_NAME_FOR_CURRENT_UPLOAD_IMAGE_SIZE).apply {
             clearAll()
         }
         checkStoragePermissions()
@@ -244,7 +264,7 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
 
             override fun onPageSelected(position: Int) {
                 currentSelectedPosition = position
-                if (position >= uploadableFiles!!.size) {
+                if (position >= uploadableFiles.size) {
                     binding.cvContainerTopCard.visibility = View.GONE
                 } else {
                     thumbnailsAdapter!!.notifyDataSetChanged()
@@ -277,7 +297,7 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .filter { result: Boolean? -> result!! }
-                .subscribe { result: Boolean? ->
+                .subscribe { _: Boolean? ->
                     showAlertDialog(
                         this,
                         getString(R.string.block_notification_title),
@@ -287,7 +307,7 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
                 })
     }
 
-    fun checkStoragePermissions() {
+    private fun checkStoragePermissions() {
         // Check if all required permissions are granted
         val hasAllPermissions = hasPermission(this, PERMISSIONS_STORAGE)
         val hasPartialAccess = hasPartialAccess(this)
@@ -358,7 +378,7 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
         showLongToast(this, messageResourceId)
     }
 
-    override fun getUploadableFiles(): List<UploadableFile>? {
+    override fun getUploadableFiles(): List<UploadableFile> {
         return uploadableFiles
     }
 
@@ -370,6 +390,14 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
     override fun onUploadMediaDeleted(index: Int) {
         fragments!!.removeAt(index) //Remove the corresponding fragment
         uploadableFiles.removeAt(index) //Remove the files from the list
+
+        val isMediaDetailFragment = fragments!!.getOrNull(currentSelectedPosition)?.let {
+            it is UploadMediaDetailFragment
+        } ?: false
+        if(!isMediaDetailFragment) {
+            // Should hide the top card current fragment is not the media detail fragment
+            showHideTopCard(false)
+        }
         thumbnailsAdapter!!.notifyItemRemoved(index) //Notify the thumbnails adapter
         uploadImagesAdapter!!.notifyDataSetChanged() //Notify the ViewPager
     }
@@ -378,8 +406,8 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
         binding.tvTopCardTitle.text = resources
             .getQuantityString(
                 R.plurals.upload_count_title,
-                uploadableFiles!!.size,
-                uploadableFiles!!.size
+                uploadableFiles.size,
+                uploadableFiles.size
             )
     }
 
@@ -447,15 +475,16 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
             receiveInternalSharedItems()
         }
 
-        if (uploadableFiles == null || uploadableFiles!!.isEmpty()) {
+        if (uploadableFiles.isEmpty()) {
             handleNullMedia()
         } else {
             //Show thumbnails
-            if (uploadableFiles!!.size > 1) {
-                if (!defaultKvStore.getBoolean("hasAlreadyLaunchedCategoriesDialog")) { //If there is only file, no need to show the image thumbnails
+            if (uploadableFiles.size > 1) {
+                if (!defaultKvStore.getBoolean("hasAlreadyLaunchedCategoriesDialog")) {
+                    // If there is only file, no need to show the image thumbnails
                     showAlertDialogForCategories()
                 }
-                if (uploadableFiles!!.size > 3 &&
+                if (uploadableFiles.size > 3 &&
                     !defaultKvStore.getBoolean("hasAlreadyLaunchedBigMultiupload")
                 ) {
                     showAlertForBattery()
@@ -467,8 +496,8 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
             binding.tvTopCardTitle.text = resources
                 .getQuantityString(
                     R.plurals.upload_count_title,
-                    uploadableFiles!!.size,
-                    uploadableFiles!!.size
+                    uploadableFiles.size,
+                    uploadableFiles.size
                 )
 
 
@@ -477,7 +506,7 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
             }
 
 
-            for (uploadableFile in uploadableFiles!!) {
+            for (uploadableFile in uploadableFiles) {
                 val uploadMediaDetailFragment = UploadMediaDetailFragment()
 
                 if (!uploadIsOfAPlace) {
@@ -500,8 +529,8 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
                     object : UploadMediaDetailFragmentCallback {
                         override fun deletePictureAtIndex(index: Int) {
                             store!!.putInt(
-                                keyForCurrentUploadImagesSize,
-                                (store!!.getInt(keyForCurrentUploadImagesSize) - 1)
+                                KEY_FOR_CURRENT_UPLOAD_IMAGE_SIZE,
+                                (store!!.getInt(KEY_FOR_CURRENT_UPLOAD_IMAGE_SIZE) - 1)
                             )
                             presenter!!.deletePictureAtIndex(index)
                         }
@@ -579,11 +608,11 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
                 fragments!!.add(mediaLicenseFragment!!)
             } else {
                 for (i in 1 until fragments!!.size) {
-                    fragments!![i]!!.callback = object : UploadBaseFragment.Callback {
+                    fragments!![i].callback = object : UploadBaseFragment.Callback {
                         override fun onNextButtonClicked(index: Int) {
                             if (index < fragments!!.size - 1) {
                                 binding.vpUpload.setCurrentItem(index + 1, false)
-                                fragments!![index + 1]!!.onBecameVisible()
+                                fragments!![index + 1].onBecameVisible()
                                 (binding.rvThumbnails.layoutManager as LinearLayoutManager)
                                     .scrollToPositionWithOffset(
                                         if ((index > 0)) index - 1 else 0,
@@ -597,7 +626,7 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
                         override fun onPreviousButtonClicked(index: Int) {
                             if (index != 0) {
                                 binding.vpUpload.setCurrentItem(index - 1, true)
-                                fragments!![index - 1]!!.onBecameVisible()
+                                fragments!![index - 1].onBecameVisible()
                                 (binding.rvThumbnails.layoutManager as LinearLayoutManager)
                                     .scrollToPositionWithOffset(
                                         if ((index > 3)) index - 2 else 0,
@@ -635,11 +664,12 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
             binding.vpUpload.offscreenPageLimit = fragments!!.size
         }
         // Saving size of uploadableFiles
-        store!!.putInt(keyForCurrentUploadImagesSize, uploadableFiles!!.size)
+        store!!.putInt(KEY_FOR_CURRENT_UPLOAD_IMAGE_SIZE, uploadableFiles.size)
     }
 
     /**
-     * Changes current image when one image upload is cancelled, to highlight next image in the top thumbnail.
+     * Changes current image when one image upload is cancelled, to highlight next image in the top
+     * thumbnail.
      * Fixes: [Issue](https://github.com/commons-app/apps-android-commons/issues/5511)
      *
      * @param index Index of image to be removed
@@ -774,7 +804,7 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
     override fun onNextButtonClicked(index: Int) {
         if (index < fragments!!.size - 1) {
             binding.vpUpload.setCurrentItem(index + 1, false)
-            fragments!![index + 1]!!.onBecameVisible()
+            fragments!![index + 1].onBecameVisible()
             (binding.rvThumbnails.layoutManager as LinearLayoutManager)
                 .scrollToPositionWithOffset(if ((index > 0)) index - 1 else 0, 0)
             if (index < fragments!!.size - 4) {
@@ -789,10 +819,10 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
     override fun onPreviousButtonClicked(index: Int) {
         if (index != 0) {
             binding.vpUpload.setCurrentItem(index - 1, true)
-            fragments!![index - 1]!!.onBecameVisible()
+            fragments!![index - 1].onBecameVisible()
             (binding.rvThumbnails.layoutManager as LinearLayoutManager)
                 .scrollToPositionWithOffset(if ((index > 3)) index - 2 else 0, 0)
-            if ((index != 1) && ((index - 1) < uploadableFiles!!.size)) {
+            if ((index != 1) && ((index - 1) < uploadableFiles.size)) {
                 // Shows the top card if it was hidden because of the last image being deleted and
                 // now the user has hit previous button to go back to the media details
                 showHideTopCard(true)
@@ -800,7 +830,10 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
         }
     }
 
-    override fun onThumbnailDeleted(position: Int) = presenter!!.deletePictureAtIndex(position)
+    override fun onThumbnailDeleted(position: Int) {
+        presenter!!.deletePictureAtIndex(position)
+        thumbnailsAdapter?.notifyDataSetChanged()
+    }
 
     /**
      * The adapter used to show image upload intermediate fragments
@@ -827,11 +860,11 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
     }
 
 
-    fun onRlContainerTitleClicked() {
+    private fun onRlContainerTitleClicked() {
         binding.rvThumbnails.visibility =
             if (isTitleExpanded) View.GONE else View.VISIBLE
         isTitleExpanded = !isTitleExpanded
-        binding.ibToggleTopCard.rotation = binding.ibToggleTopCard.rotation + 180
+        binding.ibToggleTopCard.rotation += 180
     }
 
     override fun onDestroy() {
@@ -848,21 +881,7 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
         if (uploadCategoriesFragment != null) {
             uploadCategoriesFragment!!.callback = null
         }
-    }
-
-    /**
-     * Overrides the back button to make sure the user is prepared to lose their progress
-     */
-    @SuppressLint("MissingSuperCall")
-    override fun onBackPressed() {
-        showAlertDialog(
-            this,
-            getString(R.string.back_button_warning),
-            getString(R.string.back_button_warning_desc),
-            getString(R.string.back_button_continue),
-            getString(R.string.back_button_warning),
-            null
-        ) { finish() }
+        onBackPressedCallback.remove()
     }
 
     /**
@@ -882,7 +901,7 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
             .setView(view)
             .setTitle(getString(R.string.multiple_files_depiction_header))
             .setMessage(getString(R.string.multiple_files_depiction))
-            .setPositiveButton("OK") { dialog: DialogInterface?, which: Int ->
+            .setPositiveButton("OK") { _: DialogInterface?, _: Int ->
                 if (checkBox.isChecked) {
                     // Save the user's choice to not show the dialog again
                     defaultKvStore.putBoolean("hasAlreadyLaunchedCategoriesDialog", true)
@@ -915,14 +934,14 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
                 getString(R.string.cancel),
                 {
                     /* Since opening the right settings page might be device dependent, using
-                                              https://github.com/WaseemSabir/BatteryPermissionHelper
-                                              directly appeared like a promising idea.
-                                              However, this simply closed the popup and did not make
-                                              the settings page appear on a Pixel as well as a Xiaomi device.
-                                              Used the standard intent instead of using this library as
-                                              it shows a list of all the apps on the device and allows users to
-                                              turn battery optimisation off.
-                                            */
+                      https://github.com/WaseemSabir/BatteryPermissionHelper
+                      directly appeared like a promising idea.
+                      However, this simply closed the popup and did not make
+                      the settings page appear on a Pixel as well as a Xiaomi device.
+                      Used the standard intent instead of using this library as
+                      it shows a list of all the apps on the device and allows users to
+                      turn battery optimisation off.
+                    */
                     val batteryOptimisationSettingsIntent = Intent(
                         Settings.ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS
                     )
@@ -960,7 +979,8 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
                        Also, location information is discarded if the difference between
                        current location and location recorded just before capturing the image
                        is greater than 100 meters */
-            if (isLocationTagUnchecked || locationDifference > 100 || !defaultKvStore.getBoolean("inAppCameraLocationPref")
+            if (isLocationTagUnchecked || locationDifference > 100
+                || !defaultKvStore.getBoolean("inAppCameraLocationPref")
                 || !isInAppCameraUpload
             ) {
                 currLocation = null
@@ -981,8 +1001,8 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
         @JvmField
         var nearbyPopupAnswers: MutableMap<Place, Boolean>? = null
 
-        const val keyForCurrentUploadImagesSize: String = "CurrentUploadImagesSize"
-        const val storeNameForCurrentUploadImagesSize: String = "CurrentUploadImageQualities"
+        const val KEY_FOR_CURRENT_UPLOAD_IMAGE_SIZE: String = "CurrentUploadImagesSize"
+        const val STORE_NAME_FOR_CURRENT_UPLOAD_IMAGE_SIZE: String = "CurrentUploadImageQualities"
 
         /**
          * Sets the flag indicating whether the upload is of a specific place.

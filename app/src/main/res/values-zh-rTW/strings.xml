@@ -136,6 +136,7 @@
   <string name="login_failed_throttled">失敗次數過多。請於幾分鐘後重試。</string>
   <string name="login_failed_blocked">很抱歉，該使用者已被維基共享資源封禁</string>
   <string name="login_failed_2fa_needed">必須提供您的雙重驗證代碼。</string>
+  <string name="login_failed_email_auth_needed">登入驗證碼已發送到您的電子郵件地址。請提供驗證碼以登入。</string>
   <string name="login_failed_generic">登入失敗</string>
   <string name="share_upload_button">上傳</string>
   <string name="multiple_share_base_title">給這個集合命名</string>
@@ -241,6 +242,7 @@
   <string name="become_a_tester_title">成為 Beta 測試員</string>
   <string name="become_a_tester_description">選擇加入我們在 Google Play 上的測試版頻道並儘早訪問新功能和錯誤修復</string>
   <string name="_2fa_code">2FA 代碼</string>
+  <string name="email_auth_code">電子郵件驗證碼</string>
   <string name="logout_verification">您確定要登出嗎？</string>
   <string name="mediaimage_failed">媒體圖片失敗</string>
   <string name="no_subcategory_found">找不到子分類</string>
@@ -842,4 +844,6 @@
   <string name="congratulations_all_pictures_in_this_album_have_been_either_uploaded_or_marked_as_not_for_upload">恭喜，該相簿中的所有圖片已上傳或標記為不可上傳。</string>
   <string name="show_in_explore">在探索中顯示</string>
   <string name="show_in_nearby">顯示在附近</string>
+  <string name="image_tag_line_created_and_uploaded_by">由%1$s建立與上傳</string>
+  <string name="image_tag_line_created_by_and_uploaded_by">由%1$s建立，%2$s上傳</string>
 </resources>
