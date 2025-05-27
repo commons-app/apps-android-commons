@@ -54,7 +54,9 @@ class DeleteHelper @Inject constructor(
         reason: String?
     ): Single<Boolean>? {
 
+        Timber.d("Making deletion for title: ${media?.displayTitle} with reason: $reason")
         if(context == null && media == null) {
+            Timber.e("context or media is null")
             return null
         }
 
@@ -66,10 +68,13 @@ class DeleteHelper @Inject constructor(
         return reason?.let {
             delete(media!!, it)
                 .flatMapSingle { result ->
+                    Timber.d("Show deletiong notification")
                     Single.just(showDeletionNotification(context, media, result))
                 }
                 .firstOrError()
                 .onErrorResumeNext { throwable ->
+                    Timber.e("Error while making deletion")
+                    throwable.printStackTrace()
                     if (throwable is InvalidLoginTokenException) {
                         Single.error(throwable)
                     } else {

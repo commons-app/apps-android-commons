@@ -1695,6 +1695,7 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
         val finalReason: String = reason
         val resultSingle: Single<Boolean> = reasonBuilder.getReason(media, reason)
             .flatMap {
+                Timber.d("Reason builder returned: $it")
                 deleteHelper.makeDeletion(
                     context, media, finalReason
                 )

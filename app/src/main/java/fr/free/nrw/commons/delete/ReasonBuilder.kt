@@ -2,6 +2,7 @@ package fr.free.nrw.commons.delete
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.util.Log
 
 import fr.free.nrw.commons.utils.DateUtil
 import java.util.Locale
@@ -39,6 +40,7 @@ class ReasonBuilder @Inject constructor(
         if (media == null || reason == null) {
             return Single.just("Not known")
         }
+        Timber.d("Fetching article number")
         return fetchArticleNumber(media, reason)
     }
 
@@ -56,9 +58,13 @@ class ReasonBuilder @Inject constructor(
 
     private fun fetchArticleNumber(media: Media, reason: String): Single<String> {
         return if (checkAccount()) {
+            Timber.d("Fetching achievements for ${sessionManager.userName}")
             okHttpJsonApiClient
                 .getAchievements(sessionManager.userName)
-                .map { feedbackResponse -> appendArticlesUsed(feedbackResponse, media, reason) }
+                .map { feedbackResponse ->
+                    Timber.d("Feedback Response: $feedbackResponse")
+                    appendArticlesUsed(feedbackResponse, media, reason)
+                }
         } else {
             Single.just("")
         }
