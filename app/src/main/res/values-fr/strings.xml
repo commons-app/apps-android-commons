@@ -829,6 +829,7 @@
   <string name="talk">Discussion</string>
   <string name="write_something_about_the_item">Écrivez quelque chose à propos de l’élément « %1$s ». Il sera visible publiquement.</string>
   <string name="does_not_exist_anymore_no_picture_can_ever_be_taken_of_it">\'%1$s\' n\'existe plus, aucune photo ne pourra jamais en être prise.</string>
+  <string name="is_at_a_different_place_wikidata">\'%1$s\' est à un endroit différent.</string>
   <string name="is_at_a_different_place_please_specify_the_correct_place_below_if_possible_tell_us_the_correct_latitude_longitude">\'%1$s\' se trouve à un endroit différent. Veuillez indiquer l\'endroit correct ci-dessous et, si possible, indiquez la latitude et la longitude correctes.</string>
   <string name="other_problem_or_information_please_explain_below">Autre problème ou information (merci d\'expliquer ci-dessous).</string>
   <string name="feedback_destination_note">Vos commentaires sont publiés sur la page wiki suivante : &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Mobile_app/Feedback\"&gt;Commons:Mobile app/Feedback&lt;/a&gt;</string>
