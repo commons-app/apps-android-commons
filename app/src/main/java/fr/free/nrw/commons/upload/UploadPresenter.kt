@@ -136,7 +136,6 @@ class UploadPresenter @Inject internal constructor(
      *
      * @throws IllegalStateException if basicKvStoreFactory has not been initialized.
      */
-
     private fun getBasicKvStoreFactory(): (String) -> BasicKvStore {
         return basicKvStoreFactory ?: throw IllegalStateException("basicKvStoreFactory has not been initialized")
     }
@@ -146,7 +145,6 @@ class UploadPresenter @Inject internal constructor(
      *
      * @throws IllegalStateException if the factory is null.
      */
-
     private fun requireFactoryInitialized() {
         val field = this::class.java.getDeclaredField("basicKvStoreFactory")
         field.isAccessible = true
