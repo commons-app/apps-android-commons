@@ -34,8 +34,7 @@ class UploadPresenter @Inject internal constructor(
 
     private val compositeDisposable = CompositeDisposable()
 
-    lateinit var basicKvStoreFactory: (String) -> BasicKvStore
-
+    private var basicKvStoreFactory: ((String) -> BasicKvStore)? = null
     /**
      * Called by the submit button in [UploadActivity]
      */
@@ -133,13 +132,37 @@ class UploadPresenter @Inject internal constructor(
     }
 
     /**
+     * Returns the current BasicKvStore factory or throws if not initialized.
+     *
+     * @throws IllegalStateException if basicKvStoreFactory has not been initialized.
+     */
+    private fun getBasicKvStoreFactory(): (String) -> BasicKvStore {
+        return basicKvStoreFactory ?: throw IllegalStateException("basicKvStoreFactory has not been initialized")
+    }
+
+    /**
+     * Ensures that the BasicKvStore factory has been initialized before use.
+     *
+     * @throws IllegalStateException if the factory is null.
+     */
+    private fun requireFactoryInitialized() {
+        val field = this::class.java.getDeclaredField("basicKvStoreFactory")
+        field.isAccessible = true
+        val value = field.get(this)
+        if (value == null) {
+            throw IllegalStateException("basicKvStoreFactory must be initialized before use. Please call setupBasicKvStoreFactory() before using presenter methods that require it.")
+        }
+    }
+    
+    /**
      * Calls checkImageQuality of UploadMediaPresenter to check image quality of next image
      *
      * @param uploadItemIndex Index of next image, whose quality is to be checked
      */
     override fun checkImageQuality(uploadItemIndex: Int) {
+        requireFactoryInitialized()
         repository.getUploadItem(uploadItemIndex)?.let {
-            presenter.setupBasicKvStoreFactory(basicKvStoreFactory)
+            presenter.setupBasicKvStoreFactory(getBasicKvStoreFactory())
             presenter.checkImageQuality(it, uploadItemIndex)
         }
     }
