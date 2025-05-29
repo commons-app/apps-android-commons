@@ -10,18 +10,15 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class UploadMediaDetail(
     /**
-     * The language code ie. "en" or "fr".
-     * @param languageCode The language code ie. "en" or "fr".
+     * The language code, e.g., "en" or "fr".
      */
     var languageCode: String? = null,
     /**
      * The description text for the item being uploaded.
-     * @param descriptionText The description text.
      */
     var descriptionText: String? = "",
     /**
      * The caption text for the item being uploaded.
-     * @param captionText The caption text.
      */
     var captionText: String = "",
 ) : Parcelable {
@@ -35,15 +32,11 @@ data class UploadMediaDetail(
 
     /**
      * The index of the language selected in a spinner with [SpinnerLanguagesAdapter].
-     * @return The index of the selected language.
-     * @param selectedLanguageIndex The index of the language selected.
      */
     var selectedLanguageIndex: Int = -1
 
     /**
-     * Returns if the description was added manually (by the user, or programmatically).
-     * @return True if the description was manually added.
-     * @param manuallyAdded Sets to true if the description was manually added.
+     * Indicates whether the description was added manually (by the user or programmatically).
      */
     var isManuallyAdded: Boolean = false
 }

@@ -138,10 +138,10 @@ class ImageProcessingService @Inject constructor(
     }
 
     /**
-     * Checks for duplicate image
+     * Checks for duplicate image by calculating its SHA1 hash and querying the media client.
      *
-     * @param filePath file to be checked
-     * @return IMAGE_DUPLICATE or IMAGE_OK
+     * @param inputStream The input stream of the file to check.
+     * @return IMAGE_DUPLICATE if the file exists, or IMAGE_OK otherwise.
      */
     private fun checkDuplicateImage(inputStream: InputStream): Single<Int> {
         return Single.fromCallable { fileUtilsWrapper.getSHA1(inputStream) }
