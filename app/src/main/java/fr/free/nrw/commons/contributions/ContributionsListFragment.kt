@@ -50,7 +50,7 @@ import javax.inject.Named
 /**
  * Created by root on 01.06.2018.
  */
-class ContributionsListFragment : CommonsDaggerSupportFragment(), ContributionsListContract.View,
+open class ContributionsListFragment : CommonsDaggerSupportFragment(), ContributionsListContract.View,
     ContributionsListAdapter.Callback, WikipediaInstructionsDialogFragment.Callback {
     @JvmField
     @Inject
@@ -179,7 +179,7 @@ class ContributionsListFragment : CommonsDaggerSupportFragment(), ContributionsL
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentContributionsListBinding.inflate(
             inflater, container, false
         )
@@ -187,8 +187,8 @@ class ContributionsListFragment : CommonsDaggerSupportFragment(), ContributionsL
 
         contributionsListPresenter!!.onAttachView(this)
         binding!!.fabCustomGallery.setOnClickListener { v: View? -> launchCustomSelector() }
-        binding!!.fabCustomGallery.setOnLongClickListener { view: View? ->
-            showShortToast(context, fr.free.nrw.commons.R.string.custom_selector_title)
+        binding!!.fabCustomGallery.setOnLongClickListener {
+            showShortToast(context, R.string.custom_selector_title)
             true
         }
 
@@ -198,7 +198,7 @@ class ContributionsListFragment : CommonsDaggerSupportFragment(), ContributionsL
         } else {
             binding!!.tvContributionsOfUser.visibility = View.VISIBLE
             binding!!.tvContributionsOfUser.text =
-                getString(fr.free.nrw.commons.R.string.contributions_of_user, userName)
+                getString(R.string.contributions_of_user, userName)
             binding!!.fabLayout.visibility = View.GONE
         }
 
@@ -358,15 +358,15 @@ class ContributionsListFragment : CommonsDaggerSupportFragment(), ContributionsL
     }
 
     private fun initializeAnimations() {
-        fab_open = AnimationUtils.loadAnimation(activity, fr.free.nrw.commons.R.anim.fab_open)
-        fab_close = AnimationUtils.loadAnimation(activity, fr.free.nrw.commons.R.anim.fab_close)
-        rotate_forward = AnimationUtils.loadAnimation(activity, fr.free.nrw.commons.R.anim.rotate_forward)
-        rotate_backward = AnimationUtils.loadAnimation(activity, fr.free.nrw.commons.R.anim.rotate_backward)
+        fab_open = AnimationUtils.loadAnimation(activity, R.anim.fab_open)
+        fab_close = AnimationUtils.loadAnimation(activity, R.anim.fab_close)
+        rotate_forward = AnimationUtils.loadAnimation(activity,R.anim.rotate_forward)
+        rotate_backward = AnimationUtils.loadAnimation(activity,R.anim.rotate_backward)
     }
 
     private fun setListeners() {
-        binding!!.fabPlus.setOnClickListener { view: View? -> animateFAB(isFabOpen) }
-        binding!!.fabCamera.setOnClickListener { view: View? ->
+        binding!!.fabPlus.setOnClickListener { animateFAB(isFabOpen) }
+        binding!!.fabCamera.setOnClickListener {
             controller!!.initiateCameraPick(
                 requireActivity(),
                 inAppCameraLocationPermissionLauncher,
@@ -374,19 +374,19 @@ class ContributionsListFragment : CommonsDaggerSupportFragment(), ContributionsL
             )
             animateFAB(isFabOpen)
         }
-        binding!!.fabCamera.setOnLongClickListener { view: View? ->
+        binding!!.fabCamera.setOnLongClickListener {
             showShortToast(
                 context,
-                fr.free.nrw.commons.R.string.add_contribution_from_camera
+                R.string.add_contribution_from_camera
             )
             true
         }
-        binding!!.fabGallery.setOnClickListener { view: View? ->
+        binding!!.fabGallery.setOnClickListener {
             controller!!.initiateGalleryPick(requireActivity(), galleryPickLauncherForResult, true)
             animateFAB(isFabOpen)
         }
-        binding!!.fabGallery.setOnLongClickListener { view: View? ->
-            showShortToast(context, fr.free.nrw.commons.R.string.menu_from_gallery)
+        binding!!.fabGallery.setOnLongClickListener {
+            showShortToast(context, R.string.menu_from_gallery)
             true
         }
     }
@@ -394,7 +394,7 @@ class ContributionsListFragment : CommonsDaggerSupportFragment(), ContributionsL
     /**
      * Launch Custom Selector.
      */
-    protected fun launchCustomSelector() {
+    private fun launchCustomSelector() {
         controller!!.initiateCustomGalleryPickWithPermission(
             requireActivity(),
             customSelectorLauncherForResult
@@ -433,9 +433,9 @@ class ContributionsListFragment : CommonsDaggerSupportFragment(), ContributionsL
     /**
      * Shows welcome message if user has no contributions yet i.e. new user.
      */
-    override fun showWelcomeTip(shouldShow: Boolean) {
+    override fun showWelcomeTip(numberOfUploads: Boolean) {
         binding!!.noContributionsYet.visibility =
-            if (shouldShow) View.VISIBLE else View.GONE
+            if (numberOfUploads) View.VISIBLE else View.GONE
     }
 
     /**
@@ -468,9 +468,9 @@ class ContributionsListFragment : CommonsDaggerSupportFragment(), ContributionsL
         }
     }
 
-    override fun openMediaDetail(position: Int, isWikipediaButtonDisplayed: Boolean) {
+    override fun openMediaDetail(contribution: Int, isWikipediaPageExists: Boolean) {
         if (null != callback) { //Just being safe, ideally they won't be called when detached
-            callback!!.showDetail(position, isWikipediaButtonDisplayed)
+            callback!!.showDetail(contribution, isWikipediaPageExists)
         }
     }
 
@@ -482,8 +482,8 @@ class ContributionsListFragment : CommonsDaggerSupportFragment(), ContributionsL
     override fun addImageToWikipedia(contribution: Contribution?) {
         showAlertDialog(
             requireActivity(),
-            getString(fr.free.nrw.commons.R.string.add_picture_to_wikipedia_article_title),
-            getString(fr.free.nrw.commons.R.string.add_picture_to_wikipedia_article_desc),
+            getString(R.string.add_picture_to_wikipedia_article_title),
+            getString(R.string.add_picture_to_wikipedia_article_desc),
             {
                 if (contribution != null) {
                     showAddImageToWikipediaInstructions(contribution)
@@ -501,7 +501,7 @@ class ContributionsListFragment : CommonsDaggerSupportFragment(), ContributionsL
         val fragment = newInstance(contribution)
         fragment.callback =
             WikipediaInstructionsDialogFragment.Callback { contribution: Contribution?, copyWikicode: Boolean ->
-                this.onConfirmClicked(
+                onConfirmClicked(
                     contribution,
                     copyWikicode
                 )

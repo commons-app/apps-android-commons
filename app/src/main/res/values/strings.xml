@@ -10,6 +10,7 @@
   <string name="add_another_description">Add another description</string>
   <string name="add_new_contribution">Add new contribution</string>
   <string name="add_contribution_from_camera">Add contribution from camera</string>
+  <string name="add_upload">Add Upload</string>
   <string name="add_contribution_from_photos">Add contribution from Photos</string>
   <string name="add_contribution_from_contributions_gallery">Add contribution from previous contributions gallery</string>
   <string name="show_captions">Captions</string>
@@ -22,6 +23,8 @@
   <string name="nearby_filter_search">Search View</string>
   <string name="nearby_filter_state">Place State</string>
   <string name="appwidget_img">Pic of the Day</string>
+  <string name="progress">Progress</string>
+  <string name="no_pending_uploads">You do not have any pending Uploads!</string>
 
   <!--Other strings-->
   <plurals name="uploads_pending_notification_indicator">
