@@ -2,6 +2,7 @@
 <!-- Authors:
 * Abbedabb
 * Ainali
+* Gkyziridis
 * Jopparn
 * Kakan spelar
 * Liuxinyu970226
@@ -789,6 +790,7 @@
   <string name="talk">Diskussion</string>
   <string name="write_something_about_the_item">Skriv någonting om objektet \"%1$s\". Det kommer att visas offentligt.</string>
   <string name="does_not_exist_anymore_no_picture_can_ever_be_taken_of_it">\"%1$s\" finns inte längre och inga bilder kan någonsin tas på det.</string>
+  <string name="is_at_a_different_place_wikidata">\' %1$s \' är på en annan plats.</string>
   <string name="is_at_a_different_place_please_specify_the_correct_place_below_if_possible_tell_us_the_correct_latitude_longitude">\"%1$s\" är på en annan plats. Ange den korrekta platsen nedan samt ange latitud och longitud om det är möjligt.</string>
   <string name="other_problem_or_information_please_explain_below">Andra problem eller information (ange nedan).</string>
   <string name="feedback_destination_note">Din återkoppling kommer att skickas till följande wikisida:  &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Mobile_app/Feedback\"&gt;Commons:Mobilapp/Återkoppling&lt;/a&gt;</string>
