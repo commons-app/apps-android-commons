@@ -18,6 +18,9 @@ import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.explore.map.ExploreMapFragment;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
 import fr.free.nrw.commons.navtab.NavTab;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import android.content.pm.PackageManager;
 
 public class ExploreMapRootFragment extends CommonsDaggerSupportFragment implements
     MediaDetailPagerFragment.MediaDetailProvider, CategoryImagesCallback {
@@ -48,6 +51,9 @@ public class ExploreMapRootFragment extends CommonsDaggerSupportFragment impleme
         mapFragment = new ExploreMapFragment();
         Bundle featuredArguments = new Bundle();
         featuredArguments.putString("categoryName", title);
+
+        // a flag to prevent automatic permission requests during initialization
+        featuredArguments.putBoolean("request_permission_on_start", false);
 
         // if we came from 'Show in Explore' in Nearby, pass on zoom and center
         if (zoom != 0.0 || latitude != 0.0 || longitude != 0.0) {
@@ -229,6 +235,13 @@ public class ExploreMapRootFragment extends CommonsDaggerSupportFragment impleme
     public void loadNearbyMapFromExplore() {
         mapFragment.loadNearbyMapFromExplore();
     }
+
+    public void requestLocationPermission() {
+    if (mapFragment != null) {
+        // Delegate the permission request to ExploreMapFragment
+        mapFragment.requestLocationPermission();
+    }
+}
 
     @Override
     public void onDestroy() {
