@@ -60,7 +60,9 @@ import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.inject.Inject;
 import javax.inject.Named;
 import org.osmdroid.events.MapEventsReceiver;
@@ -98,6 +100,7 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
     private GeoPoint mapCenter;
     private GeoPoint lastMapFocus;
     IntentFilter intentFilter = new IntentFilter(MapUtils.NETWORK_INTENT_ACTION);
+    private Map<BaseMarker, Overlay> baseMarkerOverlayMap;
 
     @Inject
     LiveDataConverter liveDataConverter;
@@ -788,6 +791,11 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
                     }
                 }, getContext());
 
+            if (this.baseMarkerOverlayMap == null) {
+                this.baseMarkerOverlayMap = new HashMap<>();
+            }
+            this.baseMarkerOverlayMap.put(nearbyBaseMarker, overlay);
+
             overlay.setFocusItemsOnTap(true);
             binding.mapView.getOverlays().add(overlay); // Add the overlay to the map
         }
@@ -819,24 +827,22 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
      * @param nearbyBaseMarker The NearbyBaseMarker object representing the marker to be removed.
      */
     private void removeMarker(BaseMarker nearbyBaseMarker) {
-        if (nearbyBaseMarker == null || nearbyBaseMarker.getPlace().getName() == null) {
+        if (nearbyBaseMarker == null || nearbyBaseMarker.getPlace().getName() == null ||
+            baseMarkerOverlayMap == null || !baseMarkerOverlayMap.containsKey(nearbyBaseMarker)) {
             return;
         }
 
-        String target = nearbyBaseMarker.getPlace().getName();
+        Overlay target = baseMarkerOverlayMap.get(nearbyBaseMarker);
         List<Overlay> overlays = binding.mapView.getOverlays();
-        ItemizedOverlayWithFocus item;
 
         for (int i = 0; i < overlays.size(); i++) {
-            if (overlays.get(i) instanceof ItemizedOverlayWithFocus) {
-                item = (ItemizedOverlayWithFocus) overlays.get(i);
-                OverlayItem overlayItem = item.getItem(0);
+            Overlay overlay = overlays.get(i);
 
-                if (overlayItem.getTitle().equals(target)) {
-                    binding.mapView.getOverlays().remove(i);
-                    binding.mapView.invalidate();
-                    break;
-                }
+            if (overlay.equals(target)) {
+                binding.mapView.getOverlays().remove(i);
+                binding.mapView.invalidate();
+                baseMarkerOverlayMap.remove(nearbyBaseMarker);
+                break;
             }
         }
     }
