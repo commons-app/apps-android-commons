@@ -41,7 +41,9 @@
   <string name="show_captions_description">설명</string>
   <string name="nearby_row_image">이미지</string>
   <string name="nearby_all">모두</string>
+  <string name="nearby_filter_toggle">위로 전환</string>
   <string name="nearby_filter_search">검색 뷰</string>
+  <string name="nearby_filter_state">장소 상태</string>
   <string name="appwidget_img">오늘의 이미지</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">%1$d개의 파일을 올리는 중</item>
@@ -435,7 +437,7 @@
   <string name="display_campaigns_explanation">진행되고 있는 캠페인 보기</string>
   <string name="option_allow">허용</string>
   <string name="option_dismiss">숨기기</string>
-  <string name="this_function_needs_network_connection" fuzzy="true">이 기능에는 네트워크 연결이 필요합니다. 연결 설정을 확인해 주십시오.</string>
+  <string name="this_function_needs_network_connection">이 기능을 사용하려면 네트워크 연결이 필요합니다. 연결 설정을 확인해 주십시오.</string>
   <string name="error_processing_image">이미지를 처리하는 동안 오류가 발생했습니다. 다시 시도해 주십시오!</string>
   <string name="getting_edit_token">편집을 위한 토큰을 가져옵니다</string>
   <string name="check_category_adding_template">분류 검사를 위한 틀을 추가합니다</string>
@@ -460,7 +462,7 @@
   <string name="review_thanks_yes_button_text">다음 이미지</string>
   <string name="review_thanks_no_button_text">예</string>
   <string name="skip_image_explanation">이 버튼을 클릭하면 위키미디어 공용으로부터 최근 업로드된 다른 이미지를 제공합니다</string>
-  <string name="review_image_explanation" fuzzy="true">이미지를 검토하고 위키미디어 공용의 품질을 개선할 수 있습니다.\n 4가지 검토 변수가 있습니다:\n - 이 이미지가 범위 내에 있는가? \n - 이 이미지가 저작권 규정을 준수하고 있는가? \n - 이 이미지가 올바르게 분류되어 있는가? \n - 모든 것이 문제 없다면 기여자에게 감사를 표할 수도 있습니다.</string>
+  <string name="review_image_explanation">이미지를 검토하고 위키미디어 공용의 품질을 개선할 수 있습니다.\n검토의 3가지 매개변수는 다음과 같습니다:\n\n- 이 이미지가 범위 내에 있는가?\n아니요(범위 밖)를 선택하면 이 이미지에 삭제 요청 틀이 추가됩니다.\n\n- 이 이미지가 저작권 규정을 준수하고 있는가?\n아니요(저작권 규칙을 따르지 않음)를 선택하면 이 이미지에 삭제 요청 틀이 추가됩니다.\n\n- 이 이미지가 올바르게 분류되어 있는가?\n아니요(올바르게 분류되지 않음)를 선택하면 이 이미지에 삭제 요청 틀이 추가됩니다.\n\n모든 것이 문제 없다면 이미지에 틀이 추가되지 않고, 기여자에게 감사를 표할 수도 있습니다.</string>
   <string name="no_image">이미지가 사용되지 않음</string>
   <string name="no_image_uploaded">이미지가 올려지지 않음</string>
   <string name="no_notification">읽지 않은 알림이 없습니다</string>
@@ -496,7 +498,7 @@
   <string name="delete_helper_show_deletion_message_if">%1$s을(를) 삭제 신청함</string>
   <string name="delete_helper_show_deletion_title_failed">실패</string>
   <string name="delete_helper_show_deletion_message_else">삭제를 요청하지 못했습니다.</string>
-  <string name="delete_helper_ask_spam_selfie" fuzzy="true">셀카</string>
+  <string name="delete_helper_ask_spam_selfie">어떤 문서에도 사용되지 않는 셀카</string>
   <string name="delete_helper_ask_spam_blurry">완전히 흐림</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">보도 사진</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">인터넷상의 무작위 이미지</string>
@@ -507,6 +509,7 @@
   <string name="category_edit_helper_show_edit_title_success">성공</string>
   <string name="category_edit_helper_edit_message_else">분류를 추가하지 못했습니다.</string>
   <string name="category_edit_button_text">분류 업데이트</string>
+  <string name="depictions_edit_helper_show_edit_title">묘사된 항목 편집하기</string>
   <string name="coordinates_edit_helper_show_edit_title">좌표 업데이트</string>
   <string name="description_edit_helper_show_edit_title">설명 업데이트</string>
   <string name="caption_edit_helper_show_edit_title">캡션 업데이트</string>
@@ -566,10 +569,13 @@
   <string name="paused">일시 중단됨</string>
   <string name="more">더 보기</string>
   <string name="bookmarks">책갈피</string>
+  <string name="achievements_tab_title">성과</string>
   <string name="leaderboard_tab_title">리더보드</string>
   <string name="rank_prefix">순위:</string>
+  <string name="count_prefix">개수:</string>
   <string name="leaderboard_column_rank">순위</string>
   <string name="leaderboard_column_user">사용자</string>
+  <string name="leaderboard_column_count">개수</string>
   <string name="setting_avatar_dialog_title">리더보드 아바타로 설정</string>
   <string name="setting_avatar_dialog_message">아바타로 설정 중이니 기다려 주십시오</string>
   <string name="avatar_set_unsuccessfully">새 아바타를 설정하는 중 오류가 발생했습니다. 다시 시도해 주십시오</string>

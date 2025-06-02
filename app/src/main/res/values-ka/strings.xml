@@ -393,6 +393,7 @@
   <string name="account_created">ანგარიში შეიქმნა!</string>
   <string name="theme_dark_name">მუქი</string>
   <string name="theme_light_name">ღია</string>
+  <string name="title_page_bookmarks_items">ელემენტი</string>
   <string name="done">გაკეთდა</string>
   <string name="back">უკან</string>
   <string name="welcome_custom_selector_ok">შესანიშნავია</string>
