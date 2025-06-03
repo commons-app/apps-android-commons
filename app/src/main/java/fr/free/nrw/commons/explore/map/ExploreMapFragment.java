@@ -782,6 +782,9 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
                         }
                         clickedMarker = nearbyBaseMarker;
                         passInfoToSheet(place);
+
+                        //Move the overlay to the top so it can be fully seen.
+                        moveOverlayToTop(getOverlay(item));
                         return true;
                     }
 
@@ -799,6 +802,52 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
             overlay.setFocusItemsOnTap(true);
             binding.mapView.getOverlays().add(overlay); // Add the overlay to the map
         }
+    }
+
+    /**
+     * Moves the specified Overlay above all other Overlays. This prevents other Overlays from
+     * obstructing it. Upon failure, this method returns early.
+     * @param overlay The Overlay to move.
+     */
+    private void moveOverlayToTop (Overlay overlay) {
+        if (overlay == null || binding == null || binding.mapView.getOverlays() == null) {
+            return;
+        }
+
+        boolean successfulRemoval = binding.mapView.getOverlays().remove(overlay);
+        if (!successfulRemoval) {
+            return;
+        }
+
+        binding.mapView.getOverlays().add(overlay);
+    }
+
+    /**
+     * Performs a linear search for the first Overlay which contains the specified OverlayItem.
+     *
+     * @param item The OverlayItem contained within the first target Overlay.
+     * @return The first Overlay which contains the specified OverlayItem or null if the Overlay
+     * could not be found.
+     */
+    private Overlay getOverlay (OverlayItem item) {
+        if (item == null || binding == null || binding.mapView.getOverlays() == null) {
+            return null;
+        }
+
+        for (int i = 0; i < binding.mapView.getOverlays().size(); i++) {
+            if (binding.mapView.getOverlays().get(i) instanceof ItemizedOverlayWithFocus) {
+                ItemizedOverlayWithFocus overlay =
+                    (ItemizedOverlayWithFocus)binding.mapView.getOverlays().get(i);
+
+                for (int j = 0; j < overlay.size(); j++) {
+                    if (overlay.getItem(j) == item) {
+                        return overlay;
+                    }
+                }
+            }
+        }
+
+        return null;
     }
 
     /**
