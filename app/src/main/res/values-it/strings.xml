@@ -22,6 +22,7 @@
 * Senpremì
 * Una giornata uggiosa '94
 * Valerio Bozzolan
+* Wheelygay
 * Wim b
 -->
 <resources>
@@ -459,6 +460,7 @@
   <string name="option_dismiss">Nascondi</string>
   <string name="in_app_camera_needs_location">Attiva l\'accesso alla posizione dalle Impostazioni e riprova. \n\nNota: il caricamento potrebbe non contenere la posizione se l\'app non è in grado di recuperarla dal dispositivo entro un breve intervallo.</string>
   <string name="in_app_camera_location_permission_rationale">La fotocamera in-app necessita dell\'autorizzazione alla posizione per allegarla alle tue immagini nel caso in cui la posizione non sia disponibile in EXIF. Consenti all\'app di accedere alla tua posizione e riprova.\n\nNota: il caricamento potrebbe non avere la posizione se l\'app non è in grado di recuperare la posizione dal dispositivo entro un breve intervallo.</string>
+  <string name="in_app_camera_location_permission_denied">L\'app non registra la posizione insieme alle riprese a causa della mancanza di autorizzazione alla posizione</string>
   <string name="in_app_camera_location_unavailable">L\'app non registra la posizione insieme alle foto in quanto il GPS è disattivato</string>
   <string name="open_document_photo_picker_title">Utilizza il selettore di foto basato sui documenti</string>
   <string name="open_document_photo_picker_explanation">Il nuovo selettore di foto di Android rischia di perdere le informazioni sulla posizione. Abilita se pensi di usarlo.</string>
@@ -668,6 +670,7 @@
   <string name="media_details_tooltip">Per favore scrivi una breve descrizione su cosa è ritratto nella tua immagine. Nella descrizione, indica che cosa rende l\'immagine interessante, tipica o rara, e spiega il contesto, visibile o non. Impiega il più possibile una terminologia esatta.</string>
   <string name="depicts_tooltip">Trova e seleziona tutti i concetti rappresentati da questa immagine. Sii il più specifico possibile. Se l\'immagine ritrae più elementi, sceglili tutti entro limiti ragionevoli. Non scegliere etichette generali se sono disponibili etichette più specifiche.</string>
   <string name="categories_tooltip">Si prega di selezionare le categorie appropriate. A differenza delle raffigurazioni, le categorie sono solo in inglese.</string>
+  <string name="license_tooltip">Commons rende le tue immagini riutilizzabili e adattabili da chiunque. Vuoi rinunciare a tutti i diritti? Vuoi che ti venga attribuita la paternità? Vuoi che gli adattamenti utilizzino la stessa licenza?</string>
   <string name="depicts_step_title">Raffigura</string>
   <string name="license_step_title">Licenza per il file</string>
   <string name="media_detail_step_title">Dettagli sul file</string>
@@ -794,7 +797,12 @@
   <string name="nearby_wikitalk">Segnala un problema su questo elemento su Wikidata</string>
   <string name="please_enter_some_comments">Inserisci dei commenti</string>
   <string name="talk">Discussione</string>
+  <string name="write_something_about_the_item">Scrivi qualcosa su \' %1$s \'. Sarà visibile pubblicamente.</string>
+  <string name="does_not_exist_anymore_no_picture_can_ever_be_taken_of_it">\'%1$s\' non esiste più, non potrà mai più essere fotografato.</string>
   <string name="is_at_a_different_place_wikidata">\' %1$s \' si trova in un luogo diverso.</string>
+  <string name="is_at_a_different_place_please_specify_the_correct_place_below_if_possible_tell_us_the_correct_latitude_longitude">\' %1$s \' si trova in un luogo diverso. Specifica il luogo corretto qui sotto e, se possibile, scrivi latitudine e longitudine corrette.</string>
+  <string name="other_problem_or_information_please_explain_below">Altro problema o informazione (si prega di spiegare di seguito).</string>
+  <string name="feedback_destination_note">Il tuo feedback verrà pubblicato sulla seguente pagina wiki: &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Mobile_app/Feedback\"&gt;Commons:App mobile/Feedback&lt;/a&gt;</string>
   <string name="are_you_sure_that_you_want_cancel_all_the_uploads">Sei sicuro di voler cancellare tutti i caricamenti?</string>
   <string name="cancelling_all_the_uploads">Cancellando tutti i caricamenti...</string>
   <string name="uploads">Caricamenti</string>
@@ -808,6 +816,7 @@
   <string name="custom_selector_cancel">Annulla</string>
   <string name="custom_selector_folder_deleted_success">Cartella %1$s cancellata correttamente</string>
   <string name="custom_selector_folder_deleted_failure">Impossibile eliminare la cartella %1$s</string>
+  <string name="custom_selector_error_trashing_folder_contents">Impossibile eliminare i contenuti nella cartella: %1$s</string>
   <string name="red_pin">Questo posto non ha ancora una foto, scattane una!</string>
   <string name="green_pin">Questo posto ha già una foto.</string>
   <string name="grey_pin">Ora controlliamo se questo posto ha una foto.</string>
@@ -819,8 +828,10 @@
   <string name="account">Utenza</string>
   <string name="vanish_account">Elimina l\'utenza</string>
   <string name="account_vanish_request_confirm_title">Avviso di eliminazione dell\'utenza</string>
+  <string name="account_vanish_request_confirm">Il diritto all\'oblio è una &lt;b&gt;soluzione estrema&lt;/b&gt; e dovrebbe essere utilizzata solo quando si desidera smettere di contribuire per sempre e anche per nascondere il più possibile le proprie associazioni passate. \n\nLa cancellazione di un utenza su Wikimedia commons avviene cambiando il nome dell\'utenza in modo che gli altri non possano riconoscere i contributi, attraverso un processo chiamato scomparsa dell\'utenza. &lt;b&gt;L\'oblio non garantisce un anonimato completo né la rimozione dei contributi ai progetti.&lt;/b&gt;</string>
   <string name="caption">Didascalia</string>
   <string name="caption_copied_to_clipboard">Didascalia copiata negli appunti</string>
+  <string name="congratulations_all_pictures_in_this_album_have_been_either_uploaded_or_marked_as_not_for_upload">Congratulazioni, tutte le foto di questo album sono state caricate o contrassegnate come non adatte al caricamento.</string>
   <string name="show_in_explore">Mostra in Esplora</string>
   <string name="show_in_nearby">Mostra nelle vicinanze</string>
   <string name="image_tag_line_created_and_uploaded_by">Creato e caricato da: %1$s</string>
