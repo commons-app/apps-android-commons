@@ -256,7 +256,7 @@
   <string name="upload_problem_exist">この画像には問題があるかもしれません。</string>
   <string name="upload_problem_image_dark">画像が暗すぎます。</string>
   <string name="upload_problem_image_blurry">画像のピントが合っていません。</string>
-  <string name="upload_problem_image_duplicate">コモンズにすでに登録されている画像です。</string>
+  <string name="upload_problem_image_duplicate">コモンズに既に登録されている画像です。</string>
   <string name="upload_problem_different_geolocation">この画像の撮影地点は別の場所です。</string>
   <string name="upload_problem_fbmd">あなた自身の撮影したがぞうに限定してアップロードしてください。他人のFacebookアカウントの画像をアップロードすることはやめてください。</string>
   <string name="upload_problem_do_you_continue">それでもこの画像をアップロードしますか？</string>
@@ -303,7 +303,7 @@
   <string name="retry">やり直す</string>
   <string name="showcase_view_whole_nearby_activity">以下のとおり、近くにウィキペディアの記事に使う写真が足りない場所があります。\n\n\'この近くを検索\' ボタンを押すと、地図をロックしてその地点周辺の検索結果を表示します。</string>
   <string name="showcase_view_needs_photo">この場所の写真を募集中です。</string>
-  <string name="showcase_view_has_photo">この場所の写真はすでにあります。</string>
+  <string name="showcase_view_has_photo">この場所の写真は既にあります。</string>
   <string name="showcase_view_no_longer_exists">この場所はもうありません</string>
   <string name="no_images_found">画像がありません</string>
   <string name="error_loading_images">画像の読み込み中にエラーが発生しました</string>
@@ -393,7 +393,7 @@
   <string name="step_count">全部で%2$d件のうち%1$d件目の手順：%3$s</string>
   <string name="next">次へ</string>
   <string name="previous">前へ</string>
-  <string name="upload_title_duplicate">%1$s という題名のファイルはすでに保存されています。処理をほんとうに続けますか？\n\n注記：ファイル名には適切な接頭辞が自動的に付与されます。</string>
+  <string name="upload_title_duplicate">%1$s という名前のファイルは既に存在します。本当に処理を続行してよろしいですか?\n\n注: ファイル名には適切な接尾辞が自動的に付加されます。</string>
   <string name="map_application_missing">お使いの機器に適したアプリが見つかりませんでした。この機能を使用できる地図アプリをインストールしてください。</string>
   <string name="title_page_bookmarks_pictures">画像</string>
   <string name="title_page_bookmarks_locations">位置</string>
@@ -668,7 +668,7 @@
   <string name="your_feedback">あなたのフィードバック</string>
   <string name="mark_as_not_for_upload">アップロード不可としてマーク</string>
   <string name="no_more_images_found">これ以上画像が見つかりません</string>
-  <string name="this_image_is_already_uploaded">この画像はすでにアップロードされています</string>
+  <string name="this_image_is_already_uploaded">この画像は既にアップロードされています</string>
   <string name="can_not_select_this_image_for_upload">この画像をアップロード用に選択できません</string>
   <string name="image_selected">画像が選択されました</string>
   <string name="menu_view_report">報告</string>
