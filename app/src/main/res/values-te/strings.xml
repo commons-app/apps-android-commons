@@ -2,6 +2,7 @@
 <!-- Authors:
 * Chaduvari
 * Nskjnv
+* Rajadvamshi
 * Ravichandra
 * Veeven
 -->
@@ -45,29 +46,29 @@
     <item quantity="other">పంచుకున్న కంటెంటును అందుకుంటున్నాం. బొమ్మల పరిమాణాన్ని బట్టి, మీ పరికరాన్ని బట్టీ ప్రాసెసింగు చేసేందుకు కొంత సమయం పట్టవచ్చు</item>
   </plurals>
   <string name="navigation_item_explore">శోధించండి</string>
-  <string name="preference_category_appearance">రూపురేఖలు</string>
-  <string name="preference_category_general">సాధారణం</string>
-  <string name="preference_category_feedback">ప్రతిస్పందన</string>
-  <string name="preference_category_privacy">అంతరంగికత</string>
-  <string name="app_name">కామన్స్</string>
+  <string name="preference_category_appearance">స్వరూపం</string>
+  <string name="preference_category_general">సాధారణ</string>
+  <string name="preference_category_feedback">ప్రతిపుష్టి</string>
+  <string name="preference_category_privacy">గోప్యత</string>
+  <string name="app_name">సామూహిక</string>
   <string name="menu_settings">అమరికలు</string>
-  <string name="intent_share_upload_label">కామన్స్ లోకి ఎక్కించండి</string>
+  <string name="intent_share_upload_label">సామూహిక కు ఎగుమోత</string>
   <string name="username">వాడుకరిపేరు</string>
   <string name="password">సంకేతపదం</string>
-  <string name="login_credential">మీ కామన్స్ బీటా ఖాతా లోనికి ప్రవేశించండి</string>
-  <string name="login">లాగినవండి</string>
+  <string name="login_credential">మీ సామూహికా బీటా ఖాతా లోనికి ప్రవేశించండి</string>
+  <string name="login">ప్రవేశం</string>
   <string name="forgot_password">సంకేతపదం మర్చిపోయారా?</string>
-  <string name="signup">నమోదవ్వండి</string>
-  <string name="logging_in_title">లాగినవుతున్నారు</string>
-  <string name="logging_in_message">వేచివుండండి…</string>
-  <string name="updating_caption_title">ఉల్లేఖనలను, వివరణలనూ తాజాకరిస్తున్నాం</string>
-  <string name="updating_caption_message">వేచి ఉండండి…</string>
+  <string name="signup">నమోదు</string>
+  <string name="logging_in_title">ప్రవేశిస్తున్నారు...</string>
+  <string name="logging_in_message">దయచేసి వేచివుండండి …</string>
+  <string name="updating_caption_title">ఉల్లేఖనలను, వివరణలను నవీకరిస్తోంది</string>
+  <string name="updating_caption_message">దయచేసి వేచివుండండి …</string>
   <string name="login_success" fuzzy="true">లాగిన్ విజయవంతమైంది!</string>
   <string name="login_failed" fuzzy="true">లాగిన్ విఫలమైంది!</string>
-  <string name="upload_failed">ఫైలు కనబడలేదు. మరో ఫైలు కోసం ప్రయత్నించండి.</string>
+  <string name="upload_failed">దస్త్రం కనబడలేదు. దయచేసి మరో దస్త్రం కోసం ప్రయత్నించండి.</string>
   <string name="authentication_failed" fuzzy="true">అథీకరణ విఫలమైంది, మళ్ళీ ప్రయత్నించండి</string>
-  <string name="uploading_started">ఎక్కింపు మొదలైంది!</string>
-  <string name="uploading_queued">ఎక్కింపు వరుసలో ఉంది (పరిమిత కనెక్షన్ల మోడ్ చేతనంగా ఉంది)</string>
+  <string name="uploading_started">ఎగుమోత మొదలైంది!</string>
+  <string name="uploading_queued">ఎగుమోత వరుసలో ఉంది (పరిమిత సంబంధ పద్దతి చేతనం)</string>
   <string name="upload_completed_notification_title">%1$s ను ఎక్కించాం!</string>
   <string name="upload_completed_notification_text">మీ ఎక్కింపును చూసేందుకు నొక్కండి</string>
   <string name="upload_progress_notification_title_start">దస్త్రాన్ని ఎక్కిస్తున్నాం: $s</string>
