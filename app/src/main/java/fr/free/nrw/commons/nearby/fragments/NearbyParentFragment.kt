@@ -974,7 +974,7 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
             } else if (bottomSheetDetailsBehavior!!.state
                 == BottomSheetBehavior.STATE_EXPANDED
             ) {
-                bottomSheetDetailsBehavior!!.state = BottomSheetBehavior.STATE_COLLAPSED
+                bottomSheetDetailsBehavior!!.setState(BottomSheetBehavior.STATE_COLLAPSED)
             }
         }
 
@@ -2457,9 +2457,11 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
                 Timber.d("Gallery button tapped. Place: %s", selectedPlace.toString())
                 storeSharedPrefs(selectedPlace!!)
                 activity?.let {
+                    // Pass singleSelection = true for Nearby flow
                     controller!!.initiateCustomGalleryPickWithPermission(
                         it,
-                        customSelectorLauncherForResult
+                        customSelectorLauncherForResult,
+                        singleSelection = true
                     )
                 }
             }
