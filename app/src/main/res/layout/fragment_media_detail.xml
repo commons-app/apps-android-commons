@@ -45,6 +45,7 @@
       android:id="@+id/mediaDetailScrollView"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
+      android:layout_marginBottom="?attr/actionBarSize"
       android:background="@android:color/transparent"
       android:cacheColorHint="@android:color/transparent"
       android:fillViewport="true">
@@ -511,5 +512,16 @@
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
+
+    <fr.free.nrw.commons.navtab.NavTabLayout
+      android:id="@+id/fragment_main_nav_tab_layout"
+      android:layout_width="match_parent"
+      android:layout_height="?attr/actionBarSize"
+      android:layout_alignParentBottom="true"
+      android:layout_gravity="bottom"
+      android:background="?attr/nav_bar_background"
+      android:elevation="6dp"
+      app:itemIconTint="?attr/nav_tab_item_color_state"
+      app:itemTextColor="?attr/navbar_item_text_color" />
 
 </FrameLayout>
