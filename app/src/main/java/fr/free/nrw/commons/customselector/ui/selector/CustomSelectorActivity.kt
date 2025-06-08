@@ -92,7 +92,7 @@ class CustomSelectorActivity :
     /**
      * Maximum number of images that can be selected.
      */
-    private val uploadLimit: Int = 20
+    private var uploadLimit: Int = 20
 
     /**
      * Flag that is marked true when the amount
@@ -629,8 +629,11 @@ class CustomSelectorActivity :
     }
 
     /**
-     * onLongPress
-     * @param imageUri : uri of image
+     * Triggered when the user performs a long press on an image.
+     *
+     * @param position The index of the selected image.
+     * @param images The list of all available images.
+     * @param selectedImages The list of images currently selected.
      */
     override fun onLongPress(
         position: Int,
@@ -727,5 +730,6 @@ class CustomSelectorActivity :
         const val FOLDER_ID: String = "FolderId"
         const val FOLDER_NAME: String = "FolderName"
         const val ITEM_ID: String = "ItemId"
+        const val EXTRA_SINGLE_SELECTION: String = "EXTRA_SINGLE_SELECTION"
     }
 }

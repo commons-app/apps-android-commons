@@ -25,6 +25,9 @@ object FilePicker : Constants {
     private const val KEY_LAST_CAMERA_VIDEO = "last_video"
     private const val KEY_TYPE = "type"
 
+    // Add extra for single selection
+    private const val EXTRA_SINGLE_SELECTION = "EXTRA_SINGLE_SELECTION"
+
     /**
      * Returns the uri of the clicked image so that it can be put in MediaStore
      */
@@ -73,12 +76,17 @@ object FilePicker : Constants {
      * CreateCustomSectorIntent, creates intent for custom selector activity.
      * @param context
      * @param type
+     * @param singleSelection If true, restricts to single image selection
      * @return Custom selector intent
      */
     @JvmStatic
-    private fun createCustomSelectorIntent(context: Context, type: Int): Intent {
+    private fun createCustomSelectorIntent(context: Context, type: Int, singleSelection: Boolean = false): Intent {
         storeType(context, type)
-        return Intent(context, CustomSelectorActivity::class.java)
+        val intent = Intent(context, CustomSelectorActivity::class.java)
+        if (singleSelection) {
+            intent.putExtra(EXTRA_SINGLE_SELECTION, true)
+        }
+        return intent
     }
 
     @JvmStatic
@@ -153,9 +161,10 @@ object FilePicker : Constants {
     fun openCustomSelector(
         activity: Activity,
         resultLauncher: ActivityResultLauncher<Intent>,
-        type: Int
+        type: Int,
+        singleSelection: Boolean = false
     ) {
-        val intent = createCustomSelectorIntent(activity, type)
+        val intent = createCustomSelectorIntent(activity, type, singleSelection)
         resultLauncher.launch(intent)
     }
 

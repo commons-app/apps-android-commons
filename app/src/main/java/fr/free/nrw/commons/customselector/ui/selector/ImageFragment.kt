@@ -210,6 +210,9 @@ class ImageFragment :
         _binding = FragmentCustomSelectorBinding.inflate(inflater, container, false)
         imageAdapter =
             ImageAdapter(requireActivity(), activity as ImageSelectListener, imageLoader!!)
+        // Set single selection mode if needed
+        val singleSelection = (activity as? CustomSelectorActivity)?.intent?.getBooleanExtra(CustomSelectorActivity.EXTRA_SINGLE_SELECTION, false) == true
+        imageAdapter.setSingleSelection(singleSelection)
         gridLayoutManager = GridLayoutManager(context, getSpanCount())
         with(binding?.selectorRv) {
             this?.layoutManager = gridLayoutManager

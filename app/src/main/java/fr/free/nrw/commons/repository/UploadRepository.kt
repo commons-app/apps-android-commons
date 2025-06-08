@@ -199,10 +199,11 @@ class UploadRepository @Inject constructor(
     }
 
     /**
-     * Query the RemoteDataSource for image duplicity check
+     * Queries the RemoteDataSource to check if the image is a duplicate.
      *
-     * @param filePath file to be checked
-     * @return IMAGE_DUPLICATE or IMAGE_OK
+     * @param originalFilePath The original file to be checked.
+     * @param modifiedFilePath The modified version of the file (if any).
+     * @return IMAGE_DUPLICATE if the image already exists, otherwise IMAGE_OK.
      */
     fun checkDuplicateImage(originalFilePath: Uri?, modifiedFilePath: Uri?): Single<Int> {
         return uploadModel.checkDuplicateImage(originalFilePath, modifiedFilePath)

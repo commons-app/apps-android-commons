@@ -1,5 +1,13 @@
 # Wikimedia Commons for Android
 
+## v5.4.1
+
+### What's changed
+* Custom picker now detects images that are already available on Commons
+* Improve credit line in image list
+* Show place cards with loaded names only in the Nearby list
+* Fix the error that occurs while loading images in Explore
+
 ## v5.3.0
 
 ### What's changed

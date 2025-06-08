@@ -8,7 +8,7 @@ class Bookmark(
     /**
      * Gets or Sets the content URI - marking this bookmark as already saved in the database
      * @return content URI
-     * @param contentUri the content URI
+     * contentUri the content URI
      */
     var contentUri: Uri?,
 ) {
