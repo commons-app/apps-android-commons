@@ -95,9 +95,7 @@ public final class OkHttpConnectionFactory {
             if (rsp.isSuccessful()) {
                 try (final ResponseBody responseBody = rsp.peekBody(ERRORS_PREFIX.length())) {
                     if (ERRORS_PREFIX.equals(responseBody.string())) {
-                        try (final ResponseBody body = rsp.body()) {
-                            throw new IOException(body.string());
-                        }
+                        throw new IOException(responseBody.string());
                     }
                 } catch (final IOException e) {
                     // Log the error as debug (and therefore, "expected") or at error level
