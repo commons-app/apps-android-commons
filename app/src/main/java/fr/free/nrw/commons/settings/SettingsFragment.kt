@@ -16,6 +16,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ListView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts.RequestMultiplePermissions
 import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult
@@ -78,6 +79,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
     private var vanishAccountPreference: Preference? = null
     private var themeListPreference: ListPreference? = null
     private var descriptionLanguageListPreference: Preference? = null
+    private var descriptionSecondaryLanguagesListPreference: Preference? = null
     private var appUiLanguageListPreference: Preference? = null
     private var showDeletionButtonPreference: Preference? = null
     private var keyLanguageListPreference: String? = null
@@ -229,6 +231,12 @@ class SettingsFragment : PreferenceFragmentCompat() {
             }
         }
 
+        descriptionSecondaryLanguagesListPreference = findPreference("descriptionSecondaryLanguagesPref")
+        descriptionSecondaryLanguagesListPreference?.setOnPreferenceClickListener {
+            prepareSecondaryLanguagesDialog()
+            true
+        }
+
         showDeletionButtonPreference = findPreference("displayDeletionButton")
         showDeletionButtonPreference?.setOnPreferenceChangeListener { _, newValue ->
             val isEnabled = newValue as Boolean
@@ -319,6 +327,91 @@ class SettingsFragment : PreferenceFragmentCompat() {
         themeListPreference?.setOnPreferenceChangeListener { _, _ ->
             requireActivity().recreate()
             true
+        }
+    }
+
+    private fun prepareSecondaryLanguagesDialog() {
+        val languageCode = getCurrentLanguageCode("descriptionSecondaryLanguagesPref")
+        val defaultCode = getCurrentLanguageCode("descriptionDefaultLanguagePref")
+        val selectedLanguages = hashMapOf<Int, String>()
+
+        var deflocale = Locale.getDefault()
+
+
+        if (defaultCode != null){
+            deflocale = createLocale(defaultCode)
+        }
+
+        languageCode?.let {
+            selectedLanguages[0] = deflocale.language
+        }
+
+        val savedLanguages = arrayListOf<Language>()
+        languageCode?.split(",\\s*".toRegex())?.forEach { code ->
+            if (code != deflocale.language) {
+                val locale = Locale(code)
+                savedLanguages.add(Language(locale.displayLanguage, code))
+            }
+        }
+
+        val dialog = Dialog(requireActivity())
+        dialog.setContentView(R.layout.dialog_select_secondary_languages)
+        dialog.setCanceledOnTouchOutside(true)
+        dialog.window?.setLayout(
+            (resources.displayMetrics.widthPixels * 0.90).toInt(),
+            (resources.displayMetrics.heightPixels * 0.90).toInt()
+        )
+        dialog.show()
+
+        val editText: EditText = dialog.findViewById(R.id.search_language)
+        val listView: ListView = dialog.findViewById(R.id.language_list)
+        val savedLanguageListView: ListView = dialog.findViewById(R.id.language_history_list)
+        val separator: View = dialog.findViewById(R.id.separator)
+
+        updateSavedLanguages(savedLanguageListView, savedLanguages, selectedLanguages)
+
+        val languagesAdapter = LanguagesAdapter(requireActivity(), selectedLanguages)
+        listView.adapter = languagesAdapter
+
+        editText.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(charSequence: CharSequence, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(charSequence: CharSequence, start: Int, before: Int, count: Int) {
+                languagesAdapter.filter.filter(charSequence)
+            }
+            override fun afterTextChanged(editable: Editable?) {}
+        })
+
+        savedLanguageListView.setOnItemClickListener { _, _, position, _ ->
+            savedLanguages.removeAt(position)
+            updateSavedLanguages(savedLanguageListView, savedLanguages, selectedLanguages)
+            saveLanguageValue(
+                savedLanguages.joinToString(", ") { it.languageCode },
+                "descriptionSecondaryLanguagesPref"
+            )
+        }
+
+        listView.setOnItemClickListener { _, _, position, _ ->
+            val selectedLanguageCode = languagesAdapter.getLanguageCode(position)
+            val selectedLanguageName = languagesAdapter.getLanguageName(position)
+
+            if (savedLanguages.any { it.languageCode == selectedLanguageCode }) {
+                Toast.makeText(requireActivity(), "Language already selected", Toast.LENGTH_SHORT).show()
+                return@setOnItemClickListener
+            }
+
+            savedLanguages.add(Language(selectedLanguageName, selectedLanguageCode))
+            updateSavedLanguages(savedLanguageListView, savedLanguages, selectedLanguages)
+            saveLanguageValue(
+                savedLanguages.joinToString(", ") { it.languageCode },
+                "descriptionSecondaryLanguagesPref"
+            )
+        }
+
+        dialog.setOnDismissListener {
+            saveLanguageValue(
+                savedLanguages.joinToString(", ") { it.languageCode },
+                "descriptionSecondaryLanguagesPref"
+            )
         }
     }
 
@@ -529,6 +622,16 @@ class SettingsFragment : PreferenceFragmentCompat() {
         }
     }
 
+    // Helper function to update saved languages
+    private fun updateSavedLanguages(
+        savedLanguageListView: ListView,
+        savedLanguages: List<Language>,
+        selectedLanguages: HashMap<Int, String>
+    ) {
+        val savedLanguagesAdapter = RecentLanguagesAdapter(requireActivity(), savedLanguages, selectedLanguages)
+        savedLanguageListView.adapter = savedLanguagesAdapter
+    }
+
     /**
      * Save userSelected language in List Preference
      * @param userSelectedValue
@@ -538,6 +641,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
         when (preferenceKey) {
             "appUiDefaultLanguagePref" -> defaultKvStore.putString(Prefs.APP_UI_LANGUAGE, userSelectedValue)
             "descriptionDefaultLanguagePref" -> defaultKvStore.putString(Prefs.DESCRIPTION_LANGUAGE, userSelectedValue)
+            "descriptionSecondaryLanguagesPref" -> defaultKvStore.putString(Prefs.SECONDARY_LANGUAGES, userSelectedValue)
         }
     }
 
@@ -553,6 +657,9 @@ class SettingsFragment : PreferenceFragmentCompat() {
             )
             "descriptionDefaultLanguagePref" -> defaultKvStore.getString(
                 Prefs.DESCRIPTION_LANGUAGE, ""
+            )
+            "descriptionSecondaryLanguagesPref" -> defaultKvStore.getString(
+                Prefs.SECONDARY_LANGUAGES, ""
             )
             else -> null
         }
