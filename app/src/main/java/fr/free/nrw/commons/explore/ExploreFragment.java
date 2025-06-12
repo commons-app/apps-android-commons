@@ -27,6 +27,9 @@ import java.util.List;
 import java.util.Locale;
 import javax.inject.Inject;
 import javax.inject.Named;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import android.content.pm.PackageManager;
 
 public class ExploreFragment extends CommonsDaggerSupportFragment {
 
@@ -41,6 +44,7 @@ public class ExploreFragment extends CommonsDaggerSupportFragment {
     private ExploreListRootFragment featuredRootFragment;
     private ExploreListRootFragment mobileRootFragment;
     private ExploreMapRootFragment mapRootFragment;
+    private MenuItem othersMenuItem;
     @Inject
     @Named("default_preferences")
     public JsonKvStore applicationKvStore;
@@ -84,18 +88,31 @@ public class ExploreFragment extends CommonsDaggerSupportFragment {
             }
 
             @Override
-            public void onPageSelected(int position) {
-                if (position == 2) {
-                    binding.viewPager.setCanScroll(false);
-                } else {
-                    binding.viewPager.setCanScroll(true);
+        public void onPageSelected(int position) {
+            // Control scrolling behavior
+            if (position == 2) {
+                binding.viewPager.setCanScroll(false);
+                // Request location permission only for the Map tab
+                if (mapRootFragment != null) {
+                    mapRootFragment.requestLocationPermission();
                 }
+            } else {
+                binding.viewPager.setCanScroll(true);
             }
+            // Update menu item visibility
+            if (othersMenuItem != null) {
+                othersMenuItem.setVisible(position == 2);
+            }
+        }
 
             @Override
             public void onPageScrollStateChanged(int state) {
-
+            if (state == SCROLL_STATE_IDLE && binding.viewPager.getCurrentItem() == 2) {
+                if (othersMenuItem != null) {
+                    othersMenuItem.setVisible(true);
+                }
             }
+        }
         });
         setTabs();
         setHasOptionsMenu(true);
@@ -199,35 +216,18 @@ public class ExploreFragment extends CommonsDaggerSupportFragment {
      */
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        // if logged in 'Show in Nearby' menu item is visible
+        // If logged in, 'Show in Nearby' menu item is visible
         if (applicationKvStore.getBoolean("login_skipped") == false) {
             inflater.inflate(R.menu.explore_fragment_menu, menu);
 
-            MenuItem others = menu.findItem(R.id.list_item_show_in_nearby);
+            othersMenuItem = menu.findItem(R.id.list_item_show_in_nearby);
 
+            // Set initial visibility based on the current tab
             if (binding.viewPager.getCurrentItem() == 2) {
-                others.setVisible(true);
+                othersMenuItem.setVisible(true);
+            } else {
+                othersMenuItem.setVisible(false);
             }
-
-            // if on Map tab, show all menu options, else only show search
-            binding.viewPager.addOnPageChangeListener(new OnPageChangeListener() {
-                @Override
-                public void onPageScrolled(int position, float positionOffset,
-                    int positionOffsetPixels) {
-                }
-
-                @Override
-                public void onPageSelected(int position) {
-                    others.setVisible((position == 2));
-                }
-
-                @Override
-                public void onPageScrollStateChanged(int state) {
-                    if (state == SCROLL_STATE_IDLE && binding.viewPager.getCurrentItem() == 2) {
-                        onPageSelected(2);
-                    }
-                }
-            });
         } else {
             inflater.inflate(R.menu.menu_search, menu);
         }
