@@ -104,7 +104,7 @@ class CustomSelectorActivity :
     /**
      * Maximum number of images that can be selected.
      */
-    private val uploadLimit: Int = 20
+    private var uploadLimit: Int = 20
 
     /**
      * Flag that is marked true when the amount
@@ -206,6 +206,9 @@ class CustomSelectorActivity :
             ViewModelProvider(this, customSelectorViewModelFactory).get(
                 CustomSelectorViewModel::class.java,
             )
+
+        // Check for single selection extra
+        uploadLimit = if (intent.getBooleanExtra(EXTRA_SINGLE_SELECTION, false)) 1 else 20
 
         setupViews()
 
@@ -728,6 +731,7 @@ class CustomSelectorActivity :
         const val FOLDER_ID: String = "FolderId"
         const val FOLDER_NAME: String = "FolderName"
         const val ITEM_ID: String = "ItemId"
+        const val EXTRA_SINGLE_SELECTION: String = "EXTRA_SINGLE_SELECTION"
     }
 }
 

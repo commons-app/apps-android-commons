@@ -108,6 +108,7 @@
   <string name="menu_from_camera">फ़ोटो लें</string>
   <string name="menu_nearby">आसपास</string>
   <string name="provider_contributions">मेरे अपलोड</string>
+  <string name="menu_copy_link">लिंक कॉपी करें</string>
   <string name="menu_share">साझा करें</string>
   <string name="share_title_hint" fuzzy="true">शीर्षक (आवश्यक)</string>
   <string name="share_description_hint">विवरण</string>
@@ -125,7 +126,7 @@
   <string name="menu_save_categories">सहेजें</string>
   <string name="refresh_button">ताजा करें</string>
   <string name="display_list_button">सूची</string>
-  <string name="contributions_subtitle_zero" fuzzy="true">अभी तक कोई अपलोड नहीं</string>
+  <string name="contributions_subtitle_zero">(अभी तक कोई अपलोड नहीं)</string>
   <string name="categories_not_found">%1$s से कोई श्रेणी मेल नहीं खाती</string>
   <string name="categories_skip_explanation">विकिमीडिया कॉमन्स पर अपनी छवियों को अधिक खोजने योग्य बनाने के लिए श्रेणियां जोड़ें|\nश्रेणियां जोड़ने के लिए टाइप करना प्रारंभ करें|</string>
   <string name="categories_activity_title">श्रेणियाँ</string>
@@ -179,7 +180,7 @@
   <string name="welcome_copyright_subtext">इंटरनेट से मिली कोई कॉपीराइट सामग्री के साथ साथ पोस्टर, पुस्तक के खड्डे आदि को भी अपलोड करने से बचें।</string>
   <string name="welcome_final_text">क्या आपको लगता है कि आप समझ गए?</string>
   <string name="welcome_final_button_text">हाँ!</string>
-  <string name="welcome_help_button_text" fuzzy="true">&lt;u&gt;अधिक जानकारी&lt;/u&gt;</string>
+  <string name="welcome_help_button_text">अधिक जानकारी</string>
   <string name="detail_panel_cats_label">श्रेणियाँ</string>
   <string name="detail_panel_cats_loading">लोड हो रहा है…</string>
   <string name="detail_panel_cats_none">कुछ चयनित नहीं</string>
@@ -193,7 +194,9 @@
   <string name="upload">अपलोड करें</string>
   <string name="yes">हाँ</string>
   <string name="no">नहीं</string>
+  <string name="media_detail_caption">कैप्शन</string>
   <string name="media_detail_title">शीर्षक</string>
+  <string name="media_detail_depiction">चित्रण</string>
   <string name="media_detail_description">विवरण</string>
   <string name="media_detail_discussion">चर्चा</string>
   <string name="media_detail_author">लेखक</string>
@@ -258,11 +261,11 @@
   <string name="wikicode_copied">विकिटेक्सट क्लिपबोर्ड पर कॉपी किया जा चुका है</string>
   <string name="nearby_location_not_available">स्थान उपलब्ध नहीं है।</string>
   <string name="location_permission_rationale_nearby">आसपास के स्थान दिखाने के लिए अनुमति चाहिए</string>
-  <string name="nearby_directions" fuzzy="true">दिशा-निर्देश</string>
-  <string name="nearby_wikidata" fuzzy="true">विकीडाटा</string>
-  <string name="nearby_wikipedia" fuzzy="true">विकीपीडिया</string>
+  <string name="nearby_directions">दिशा-निर्देश</string>
+  <string name="nearby_wikidata">विकीडाटा</string>
+  <string name="nearby_wikipedia">विकीपीडिया</string>
   <string name="nearby_commons">कॉमन्स</string>
-  <string name="about_rate_us" fuzzy="true">&lt;u&gt;हमें रेट करें&lt;/u&gt;</string>
+  <string name="about_rate_us">हमें रेट करें</string>
   <string name="about_faq">अक्सर पूछे जाने वाले प्रश्न</string>
   <string name="welcome_skip_button">प्रशिक्षण छोड़ें</string>
   <string name="no_internet">इंटरनेट उपलब्ध नहीं</string>
@@ -276,6 +279,7 @@
   <string name="no_images_found">कोई चित्र नहीं मिला!</string>
   <string name="error_loading_images">चित्र अपलोड करते समय त्रुटि उत्पन्न हुई।</string>
   <string name="image_uploaded_by">अपलोड: %1$s</string>
+  <string name="block_notification_title">अवरोधित</string>
   <string name="block_notification">कॉमन्स पर सम्पादन से आप अवरोधित हो चुके हैं</string>
   <string name="app_widget_heading">आज का चित्र</string>
   <string name="menu_search_button">खोजें</string>
@@ -286,6 +290,7 @@
   <string name="error_loading_categories">श्रेणी लोड करते समय त्रुटि उत्पन्न हुई।</string>
   <string name="search_tab_title_media">मीडिया</string>
   <string name="search_tab_title_categories">श्रेणियाँ</string>
+  <string name="search_tab_title_depictions">आयटम</string>
   <string name="explore_tab_title_featured">निर्वाचित</string>
   <string name="explore_tab_title_map">नक्शा</string>
   <string name="successful_wikidata_edit" fuzzy="true">चित्र सफ़लतापूर्वक विकिडाटा के %1$s पर सफलतापूर्वक जोड़ दिया गया है।</string>
@@ -312,10 +317,12 @@
   <string name="nominate_delete">हटाने के लिये नामांकन करें</string>
   <string name="delete">हटाएँ</string>
   <string name="Achievements">उपलब्धियाँ</string>
+  <string name="Profile">प्रोफ़ाइल</string>
   <string name="statistics">सांख्यिकी</string>
   <string name="statistics_thanks">धन्यवाद प्राप्त किया</string>
   <string name="statistics_featured">निर्वाचित चित्र</string>
   <string name="level">स्तर %d</string>
+  <string name="profileLevel">%s (स्तर %s )</string>
   <string name="images_uploaded">चित्र अपलोड हुआ</string>
   <string name="image_reverts">चित्रों को वापस नहीं किया गया</string>
   <string name="images_used_by_wiki">उपयोग हुए चित्र</string>
@@ -353,7 +360,10 @@
   <string name="ends_on">खत्म होगा:</string>
   <string name="display_campaigns">दृश्य अभियान</string>
   <string name="display_campaigns_explanation" fuzzy="true">वर्तमान में चल रहे अभियानों को जानने के लिये यहाँ दबायें</string>
+  <string name="option_allow">अनुमति दें</string>
+  <string name="option_dismiss">रद्द करें</string>
   <string name="error_processing_image">छवि संसाधित करते समय त्रुटि आई। कृपया पुन: प्रयास करें!</string>
+  <string name="nominate_for_deletion_done">पूर्ण हुआ</string>
   <string name="no_image">कोई चित्र उपयोग नहीं हुआ</string>
   <string name="no_image_reverted">कोई चित्र वापस नहीं लाया</string>
   <string name="no_image_uploaded">कोई चित्र अपलोड नहीं किया</string>

@@ -16,6 +16,7 @@
 * Mansil alfalb
 * McDutchie
 * Mirzali
+* O andras
 * Sarilho1
 * Unamane
 * Vitorvicentevalente
@@ -90,7 +91,7 @@
   <string name="logging_in_message">Aguarde, por favor…</string>
   <string name="updating_caption_title">A atualizar legendas e descrições</string>
   <string name="updating_caption_message">Aguarde, por favor…</string>
-  <string name="login_success" fuzzy="true">Sessão iniciada!</string>
+  <string name="login_success">Sessão iniciada!</string>
   <string name="login_failed">O início de sessão falhou!</string>
   <string name="upload_failed">O ficheiro não foi encontrado. Tente outro, por favor.</string>
   <string name="retry_limit_reached">Limite máximo de novas tentativas atingido! Cancele o carregamento e tente novamente, por favor</string>
@@ -117,13 +118,15 @@
   <string name="menu_from_camera">Tirar foto</string>
   <string name="menu_nearby">Nas redondezas</string>
   <string name="provider_contributions">Carregamentos</string>
+  <string name="menu_copy_link">Copiar ligação</string>
+  <string name="menu_link_copied">A ligação foi copiada para a área de transferência</string>
   <string name="menu_share">Partilhar</string>
   <string name="menu_view_file_page">Ver página do ficheiro</string>
   <string name="share_title_hint">Legenda (obrigatória)</string>
   <string name="add_caption_toast">Forneça uma legenda para este ficheiro, por favor</string>
   <string name="share_description_hint">Descrição</string>
   <string name="share_caption_hint">Legenda</string>
-  <string name="login_failed_network" fuzzy="true">Não é possível iniciar uma sessão - falha de rede</string>
+  <string name="login_failed_network">Não foi possível iniciar sessão - falha de rede</string>
   <string name="login_failed_throttled">Demasiadas tentativas mal sucedidas. Por favor, tente novamente dentro de minutos.</string>
   <string name="login_failed_blocked">Desculpe, este utilizador foi bloqueado na wiki Commons</string>
   <string name="login_failed_2fa_needed">Tem de fornecer o seu código de autenticação de dois fatores.</string>
@@ -285,7 +288,7 @@
   <string name="skip_login">Saltar</string>
   <string name="navigation_item_login">Entrar</string>
   <string name="skip_login_title">Pretende mesmo ignorar o início de sessão?</string>
-  <string name="skip_login_message" fuzzy="true">Terá de iniciar sessão para carregar fotografias mais tarde.</string>
+  <string name="skip_login_message">Terá de iniciar sessão para carregar fotografias no futuro.</string>
   <string name="login_alert_message">Inicie uma sessão para usar esta funcionalidade</string>
   <string name="copy_wikicode">Copiar o texto wiki para a área de transferência</string>
   <string name="wikicode_copied">O texto wiki foi copiado para a área de transferência</string>
@@ -359,7 +362,7 @@
   <string name="quiz_screenshot_question">Esta captura de ecrã pode ser carregada?</string>
   <string name="share_app_title">Partilhar aplicação</string>
   <string name="rotate">Rodar</string>
-  <string name="error_fetching_nearby_places" fuzzy="true">Erro ao procurar locais próximos.</string>
+  <string name="error_fetching_nearby_places">Não foi possível carregar locais próximos</string>
   <string name="no_nearby_places_around">Não existem locais próximos</string>
   <string name="error_fetching_nearby_monuments">Erro ao procurar monumentos próximos.</string>
   <string name="no_recent_searches">Não há pesquisas recentes</string>
@@ -371,11 +374,13 @@
   <string name="delete">Eliminar</string>
   <string name="Achievements">Realizações</string>
   <string name="Profile">Perfil</string>
+  <string name="badges">Medalhas</string>
   <string name="statistics">Estatísticas</string>
   <string name="statistics_thanks">Agradecimentos recebidos</string>
   <string name="statistics_featured">Imagens destacadas</string>
   <string name="statistics_wikidata_edits">Imagens via \"Locais próximos\"</string>
-  <string name="level" fuzzy="true">Nível</string>
+  <string name="level">Nível %d</string>
+  <string name="profileLevel">%s (Nível %s)</string>
   <string name="images_uploaded">Imagens carregadas</string>
   <string name="image_reverts">Imagens não revertidas</string>
   <string name="images_used_by_wiki">Imagens usadas</string>
@@ -407,6 +412,7 @@
   <string name="map_application_missing">Não foi encontrada no seu dispositivo nenhuma aplicação de mapas compatível. Para usar esta funcionalidade instale uma aplicação de mapas, por favor.</string>
   <string name="title_page_bookmarks_pictures">Fotografias</string>
   <string name="title_page_bookmarks_locations">Locais</string>
+  <string name="title_page_bookmarks_categories">Categorias</string>
   <string name="menu_bookmark">Adicionar ou remover dos marcadores</string>
   <string name="provider_bookmarks">Marcadores</string>
   <string name="bookmark_empty">Não adicionou nenhum marcador</string>
@@ -450,7 +456,7 @@
   <string name="open_document_photo_picker_explanation">O novo seletor de fotografias do Android corre o risco de perder informações de localização. Ativar se pensa vir a usá-lo.</string>
   <string name="location_loss_warning">Desativar pode acionar o novo seletor de fotografias do Android. Este corre o risco de perder informações de localização.\n\nToque em \'Ler mais\' para mais informações.</string>
   <string name="nearby_campaign_dismiss_message">Deixará de ver as campanhas. No entanto, pode reativar esta notificação nas configurações, se desejar.</string>
-  <string name="this_function_needs_network_connection" fuzzy="true">Esta função requer uma ligação de rede. Verifique as suas configurações de ligação, por favor.</string>
+  <string name="this_function_needs_network_connection">Esta função necessita de ligação à rede. Por favor, verifique as suas configurações de ligação.</string>
   <string name="error_processing_image">Ocorreu um erro ao processar a imagem. Tente novamente, por favor!</string>
   <string name="getting_edit_token">A obter chave para edição</string>
   <string name="check_category_adding_template">A adicionar predefinição para verificação da categoria</string>
@@ -488,6 +494,7 @@
   <string name="no_notification">Não tem nenhuma notificação por ler</string>
   <string name="no_read_notification">Não tem nenhuma notificação lida</string>
   <string name="share_logs_using">Partilhar os registos usando</string>
+  <string name="check_your_email_inbox">Verifique sua caixa de entrada de e-mail</string>
   <string name="menu_option_read">Ver lidas</string>
   <string name="menu_option_unread">Ver não lidas</string>
   <string name="error_occurred_in_picking_images">Ocorreu um erro ao escolher imagens</string>
@@ -562,7 +569,7 @@
   <string name="coordinates_edit_helper_edit_message_else">Não foi possível adicionar coordenadas.</string>
   <string name="description_edit_helper_edit_message_else">Não foi possível adicionar as descrições.</string>
   <string name="caption_edit_helper_edit_message_else">Não foi possível adicionar a legenda.</string>
-  <string name="coordinates_picking_unsuccessful" fuzzy="true">Não foi possível obter coordenadas.</string>
+  <string name="coordinates_picking_unsuccessful">Coordenadas da imagem não actualizadas</string>
   <string name="descriptions_picking_unsuccessful">Não foi possível obter as descrições.</string>
   <string name="description_activity_title">Editar descrições e legendas</string>
   <string name="share_image_via">Partilhar imagem via</string>
@@ -577,12 +584,13 @@
   <string name="place_state_needs_photo">Necessita fotografia</string>
   <string name="place_type">Tipo de local:</string>
   <string name="nearby_search_hint">Ponte, museu, hotel, etc.</string>
-  <string name="you_must_reset_your_passsword" fuzzy="true">Ocorreu algo de errado com a sessão, tem de redefinir a sua palavra-passe!</string>
+  <string name="you_must_reset_your_passsword">Ocorreu um erro ao iniciar sessão. Tem de redefinir a sua palavra-passe!</string>
   <string name="title_for_media">MULTIMÉDIA</string>
   <string name="title_for_child_classes">CLASSES DESCENDENTES</string>
   <string name="title_for_parent_classes">CLASSES PROGENITORAS</string>
   <string name="upload_nearby_place_found_title">Foi encontrado um local próximo</string>
-  <string name="upload_nearby_place_found_description_singular" fuzzy="true">Isto é uma fotografia de %1$s?</string>
+  <string name="upload_nearby_place_found_description_plural">Estas imagens são de %1$s?</string>
+  <string name="upload_nearby_place_found_description_singular">Isto é uma imagem de %1$s?</string>
   <string name="title_app_shortcut_bookmark">Marcadores</string>
   <string name="title_app_shortcut_setting">Definições</string>
   <string name="remove_bookmark">Removido dos marcadores</string>
@@ -597,7 +605,7 @@
   <string name="recommend_high_accuracy_mode">Para obter os melhores resultados, escolha o modo Alta Precisão.</string>
   <string name="ask_to_turn_location_on">Ativar a localização?</string>
   <string name="nearby_needs_location">A funcionalidade de proximidade precisa que a localização esteja ativada para funcionar corretamente</string>
-  <string name="upload_map_location_access" fuzzy="true">Precisa de dar acesso à sua localização atual para gravar automaticamente a localização.</string>
+  <string name="upload_map_location_access">Precisa de dar permissão da sua localização geográfica para a gravar automaticamente.</string>
   <string name="use_location_from_similar_image">Tirou estas duas fotos no mesmo lugar? Quer usar a latitude/longitude da fotografia da direita?</string>
   <string name="load_more">Carregar mais</string>
   <string name="nearby_no_results">Não foi encontrado nenhum local; tente alterar os seus critérios de pesquisa.</string>
@@ -698,7 +706,7 @@
   <string name="read_phone_state_permission_message">Os mapas de locais próximos precisam de ler ESTADO DO TELEFONE para funcionar devidamente</string>
   <string name="contributions_of_user">Contribuições do utilizador: %s</string>
   <string name="achievements_of_user">Realizações do utilizador: %s</string>
-  <string name="menu_view_user_page" fuzzy="true">Ver página de utilizador</string>
+  <string name="menu_view_user_page">Ver perfil de utilizador</string>
   <string name="edit_depictions">Editar elementos retratados</string>
   <string name="edit_categories">Editar categorias</string>
   <string name="advanced_options">Opções avançadas</string>
@@ -711,7 +719,7 @@
   <string name="add_location">Adicionar localização</string>
   <string name="feedback_sharing_data_alert">Remova desta mensagem de correio todas as informações que não se sinta à vontade em partilhar publicamente, por favor. Adicionalmente, esteja consciente de que o seu endereço de correio eletrónico, com o qual está a fazer esta publicação, e o nome e imagem de perfil a ele associados, serão visíveis pelo público geral.</string>
   <string name="explore_map_details">Detalhes</string>
-  <string name="achievements_unavailable_beta" fuzzy="true">As realizações só estão disponíveis na versão de produção; consulte a documentação para programadores, por favor.</string>
+  <string name="achievements_unavailable_beta">As conquistas só estão disponíveis na versão de produção. Consulte a documentação para programadores.</string>
   <string name="leaderboard_unavailable_beta">A tabela de classificação só está disponível na versão prod. Consulte a documentação do desenvolvedor.</string>
   <string name="copyright_popup">Carregue somente fotografias tiradas por si. Os utilizadores que carregarem imagens cujos direitos de autor estão protegidos serão bloqueados. Isto também se aplica à versão beta. Obrigado por testar a aplicação!</string>
   <string name="select_feedback_data_choice">Desmarque todas as informações que não se sente à vontade em tornar públicas.</string>
@@ -756,6 +764,8 @@
   <string name="see_your_achievements">Ver as suas realizações</string>
   <string name="edit_image">Editar imagem</string>
   <string name="edit_location">Editar localização</string>
+  <string name="location_updated">Localização actualizada!</string>
+  <string name="remove_location">Remover Localização</string>
   <string name="send_thanks_to_author">Agradecer ao autor</string>
   <string name="error_sending_thanks">Erro no envio de agradecimento ao autor.</string>
   <plurals name="custom_picker_images_selected_title_appendix">

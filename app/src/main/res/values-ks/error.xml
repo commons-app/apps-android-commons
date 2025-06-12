@@ -1,7 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Authors:
-* Vlad5250
--->
 <resources>
   <string name="crash_dialog_title">کامَنٕز گوو رُکِتھ</string>
   <string name="crash_dialog_text">Oops. کیہہ تام گوو غلط!</string>
