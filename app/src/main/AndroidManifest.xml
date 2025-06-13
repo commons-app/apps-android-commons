@@ -148,6 +148,7 @@
       android:label="@string/result" />
     <activity
       android:name=".customselector.ui.selector.CustomSelectorActivity"
+      android:windowSoftInputMode="adjustResize"
       android:configChanges="screenSize|keyboard|orientation"
       android:label="@string/title_activity_custom_selector"
       android:parentActivityName=".contributions.MainActivity" />
