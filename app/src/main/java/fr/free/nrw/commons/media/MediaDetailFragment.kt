@@ -791,7 +791,7 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
         }
 
         compositeDisposable.clear()
-
+        _binding = null
         super.onDestroyView()
     }
 
