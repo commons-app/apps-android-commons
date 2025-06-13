@@ -259,6 +259,12 @@ public class BookmarkListRootFragment extends CommonsDaggerSupportFragment imple
     }
 
     @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
+    }
+
+    @Override
     public void onDestroy() {
         super.onDestroy();
         binding = null;
