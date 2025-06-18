@@ -248,7 +248,9 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
 
     private val scrollPosition: Unit
         get() {
-            initialListTop = binding.mediaDetailScrollView.scrollY
+            bindingOrNull?.let {
+                initialListTop = it.mediaDetailScrollView.scrollY
+            }
         }
 
     override fun onCreateView(
@@ -736,7 +738,7 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
         object : BaseControllerListener<ImageInfo?>() {
             override fun onIntermediateImageSet(id: String, imageInfo: ImageInfo?) {
                 imageInfoCache = imageInfo
-                updateAspectRatio(binding.mediaDetailScrollView.width)
+                bindingOrNull?.let { updateAspectRatio(it.mediaDetailScrollView.width) }
             }
 
             override fun onFinalImageSet(
@@ -745,7 +747,7 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
                 animatable: Animatable?
             ) {
                 imageInfoCache = imageInfo
-                updateAspectRatio(binding.mediaDetailScrollView.width)
+                bindingOrNull?.let { updateAspectRatio(it.mediaDetailScrollView.width) }
             }
         }
 
