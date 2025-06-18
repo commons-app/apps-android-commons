@@ -561,7 +561,7 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
                 }
             }
         )
-        binding.progressBarEdit.visibility = View.GONE
+        bindingOrNull?.progressBarEdit?.visibility = View.GONE
     }
 
     override fun onConfigurationChanged(newConfig: Configuration) {
@@ -636,7 +636,7 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
     }
 
     private fun onMediaRefreshed(media: Media) {
-        media.categories = this.media!!.categories
+        media.categories = this.media?.categories
         this.media = media
         setTextFields(media)
         compositeDisposable.addAll(
@@ -650,29 +650,30 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
     }
 
     private fun onDiscussionLoaded(discussion: String) {
-        binding.mediaDetailDisc.text = prettyDiscussion(discussion.trim { it <= ' ' })
+        bindingOrNull?.mediaDetailDisc?.text = prettyDiscussion(discussion.trim { it <= ' ' })
     }
 
     private fun onDeletionPageExists(deletionPageExists: Boolean) {
-        if (getUserName(requireContext()) == null && getUserName(requireContext()) != media!!.author) {
-            binding.nominateDeletion.visibility = View.GONE
-            binding.nominatedDeletionBanner.visibility = View.GONE
+        val safeBinding = bindingOrNull ?: return
+
+        if (getUserName(requireContext()) == null && getUserName(requireContext()) != media?.author) {
+            safeBinding.nominateDeletion.visibility = View.GONE
+            safeBinding.nominatedDeletionBanner.visibility = View.GONE
         } else if (deletionPageExists) {
             if (applicationKvStore.getBoolean(
-                    String.format(NOMINATING_FOR_DELETION_MEDIA, media!!.imageUrl), false
+                    String.format(NOMINATING_FOR_DELETION_MEDIA, media?.imageUrl), false
                 )
             ) {
                 applicationKvStore.remove(
-                    String.format(NOMINATING_FOR_DELETION_MEDIA, media!!.imageUrl)
+                    String.format(NOMINATING_FOR_DELETION_MEDIA, media?.imageUrl)
                 )
-                binding.progressBarDeletion.visibility = View.GONE
+                safeBinding.progressBarDeletion.visibility = View.GONE
             }
-            binding.nominateDeletion.visibility = View.GONE
-
-            binding.nominatedDeletionBanner.visibility = View.VISIBLE
+            safeBinding.nominateDeletion.visibility = View.GONE
+            safeBinding.nominatedDeletionBanner.visibility = View.VISIBLE
         } else if (!isCategoryImage) {
-            binding.nominateDeletion.visibility = View.VISIBLE
-            binding.nominatedDeletionBanner.visibility = View.GONE
+            safeBinding.nominateDeletion.visibility = View.VISIBLE
+            safeBinding.nominatedDeletionBanner.visibility = View.GONE
         }
     }
 
