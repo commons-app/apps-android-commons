@@ -139,7 +139,7 @@ class ContributionsFragment : CommonsDaggerSupportFragment(), FragmentManager.On
 
     private var wlmCampaign: Campaign? = null
 
-    var userName: String? = null
+    private var userName: String? = null
     private var isUserProfile = false
 
     private var mSensorManager: SensorManager? = null
