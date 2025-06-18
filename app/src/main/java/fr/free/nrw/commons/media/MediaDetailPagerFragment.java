@@ -161,6 +161,12 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
     }
 
     @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
+    }
+
+    @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putInt("current-page", binding.mediaDetailsPager.getCurrentItem());
