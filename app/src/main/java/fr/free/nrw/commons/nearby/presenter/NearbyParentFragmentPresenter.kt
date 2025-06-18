@@ -351,6 +351,7 @@ class NearbyParentFragmentPresenter
                         pic = repoPlace.pic ?: ""
                         exists = repoPlace.exists ?: true
                         longDescription = repoPlace.longDescription ?: ""
+                        language = repoPlace.language
                     }
                 } else {
                     indicesToUpdate.add(i)
