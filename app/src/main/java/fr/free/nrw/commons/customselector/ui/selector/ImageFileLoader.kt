@@ -5,7 +5,7 @@ import android.content.Context
 import android.provider.MediaStore
 import android.text.format.DateFormat
 import fr.free.nrw.commons.customselector.listeners.ImageLoaderListener
-import fr.free.nrw.commons.customselector.model.Image
+import fr.free.nrw.commons.customselector.domain.model.Image
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
