@@ -12,6 +12,7 @@
 * JackUKElliott
 * Jelican9
 * Joseph
+* Leo
 * McAang
 * McDutchie
 * Mirzali
@@ -129,6 +130,8 @@
   <string name="menu_from_camera">Fotoğraf çek</string>
   <string name="menu_nearby">Yakınımdakiler</string>
   <string name="provider_contributions">Yüklemelerim</string>
+  <string name="menu_copy_link">Bağlantıyı kopyala</string>
+  <string name="menu_link_copied">Bağlantı panoya kopyalandı</string>
   <string name="menu_share">Paylaş</string>
   <string name="menu_view_file_page">Dosya sayfasını görüntüle</string>
   <string name="share_title_hint">Başlık (Zorunlu)</string>
@@ -139,6 +142,7 @@
   <string name="login_failed_throttled">Çok sayıda başarısız girişimde bulundunuz. Birkaç dakika sonra tekrar deneyin.</string>
   <string name="login_failed_blocked">Üzgünüz, bu kullanıcı Commons\'ta engellendi</string>
   <string name="login_failed_2fa_needed">İki faktörlü kimlik doğrulama kodunu sağlamalısınız.</string>
+  <string name="login_failed_email_auth_needed">E-posta adresinize bir giriş doğrulama kodu gönderildi. Lütfen giriş yapmak için kodu sağlayın.</string>
   <string name="login_failed_generic">Oturum açma başarısız</string>
   <string name="share_upload_button">Yükle</string>
   <string name="multiple_share_base_title">Bu ayarı adlandırın</string>
@@ -244,6 +248,7 @@
   <string name="become_a_tester_title">Beta Test Kullanıcısı Olun</string>
   <string name="become_a_tester_description">Google Play\'de beta kanalımıza katılın ve yeni özelliklere ve hata düzeltmelerine erken erişin</string>
   <string name="_2fa_code">2 Faktörlü Kimlik Doğrulama (2FA) Kodu</string>
+  <string name="email_auth_code">E-posta doğrulama kodu</string>
   <string name="logout_verification">Gerçekten çıkış yapmak istiyor musunuz?</string>
   <string name="mediaimage_failed">Medya Görüntüsü Başarısız Oldu</string>
   <string name="no_subcategory_found">Alt kategori bulunamadı</string>
@@ -304,6 +309,7 @@
   <string name="copy_wikicode">Vikimetnini panoya kopyala</string>
   <string name="wikicode_copied">Vikimetin panoya kopyalandı</string>
   <string name="nearby_location_not_available">Yakınımdakiler düzgün çalışmayabilir, Konum kullanılamıyor.</string>
+  <string name="nearby_showing_pins_offline">İnternet kullanılamıyor. Yalnızca önbelleğe alınmış yerler gösteriliyor.</string>
   <string name="upload_location_access_denied">Konum erişimi reddedildi. Bu özelliği kullanmak için lütfen konumunuzu manuel olarak ayarlayın.</string>
   <string name="location_permission_rationale_nearby">Yakındaki yerler listesini görüntülemek için izin vermeniz gerekiyor</string>
   <string name="location_permission_rationale_explore">Yakındaki resimlerin listesini görüntülemek için izin gerekli</string>
@@ -387,11 +393,13 @@
   <string name="delete">Sil</string>
   <string name="Achievements">Başarılar</string>
   <string name="Profile">Profil</string>
+  <string name="badges">Rozetler</string>
   <string name="statistics">İstatistikler</string>
   <string name="statistics_thanks">Teşekkür Alındı</string>
   <string name="statistics_featured">Seçkin Resimler</string>
   <string name="statistics_wikidata_edits">\"Yakındaki Yerler\"den Resimler</string>
-  <string name="level" fuzzy="true">Seviye</string>
+  <string name="level">Seviye %d</string>
+  <string name="profileLevel">%s (Seviye %s)</string>
   <string name="images_uploaded">Resimler Yüklendi</string>
   <string name="image_reverts">Resimler Geri Alınmadı</string>
   <string name="images_used_by_wiki">Resimler Kullanıldı</string>
@@ -423,6 +431,7 @@
   <string name="map_application_missing">Cihazınızda uyumlu bir harita uygulaması bulunamadı. Lütfen bu özelliği kullanmak için bir harita uygulaması yükleyin.</string>
   <string name="title_page_bookmarks_pictures">Resimler</string>
   <string name="title_page_bookmarks_locations">Konumlar</string>
+  <string name="title_page_bookmarks_categories">Kategoriler</string>
   <string name="menu_bookmark">Yer imlerini ekle/kaldır</string>
   <string name="provider_bookmarks">Yer imleri</string>
   <string name="bookmark_empty">Henüz yer imlerine bir şey eklemediniz</string>
@@ -803,6 +812,8 @@
   <string name="talk">Tartışma</string>
   <string name="write_something_about_the_item">\' %1$s \' öğesi hakkında bir şeyler yazın. Herkes tarafından görülebilir olacaktır.</string>
   <string name="does_not_exist_anymore_no_picture_can_ever_be_taken_of_it">\'%1$s\' artık yok, dolayısı ile resmi çekilemez.</string>
+  <string name="is_at_a_different_place_wikidata">\'%1$s\' farklı bir yerde.</string>
+  <string name="is_at_a_different_place_please_specify_the_correct_place_below_if_possible_tell_us_the_correct_latitude_longitude">\'%1$s\' farklı bir yerde. Lütfen aşağıdaki doğru yeri belirtin ve mümkünse doğru enlem ve boylamı yazın.</string>
   <string name="other_problem_or_information_please_explain_below">Diğer sorun veya bilgi (lütfen aşağıda açıklayınız).</string>
   <string name="feedback_destination_note">Geri bildiriminiz aşağıdaki wiki sayfasına gönderilir:  &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Mobile_app/Feedback\"&gt;Commons:Mobile app/Feedback&lt;/a&gt;</string>
   <string name="are_you_sure_that_you_want_cancel_all_the_uploads">Tüm yüklemeleri iptal etmek istediğinizden emin misiniz?</string>
@@ -810,10 +821,34 @@
   <string name="uploads">Yüklemeler</string>
   <string name="pending">Beklemede</string>
   <string name="failed">Başarısız</string>
+  <string name="could_not_load_place_data">Yer verileri yüklenemedi</string>
+  <string name="custom_selector_delete_folder">Klasörü Sil</string>
+  <string name="custom_selector_confirm_deletion_title">Silmeyi Onayla</string>
+  <string name="custom_selector_confirm_deletion_message">%2$d öğe içeren %1$s klasörünü silmek istediğinizden emin misiniz?</string>
   <string name="custom_selector_delete">Sil</string>
   <string name="custom_selector_cancel">İptal</string>
   <string name="custom_selector_folder_deleted_success">%1$s klasörü başarıyla silindi</string>
   <string name="custom_selector_folder_deleted_failure">%1$s klasörü silinemedi</string>
+  <string name="custom_selector_error_trashing_folder_contents">Klasör içerikleri çöpe atılırken hata oluştu: %1$s</string>
+  <string name="custom_selector_folder_not_found_error">Kova kimliği için klasör yolu alınamadı: %1$d</string>
+  <string name="red_pin">Bu yerin henüz fotoğrafı yok, gidin ve çekin!</string>
   <string name="green_pin">Bu yerin zaten bir resmi var.</string>
   <string name="grey_pin">Şimdi bu yerin bir resime sahip olup olmadığı denetleniyor.</string>
+  <string name="error_while_loading">Yükleme sırasında hata oluştu</string>
+  <string name="no_usages_found">Hiçbir kullanım bulunamadı</string>
+  <string name="usages_on_commons_heading">Commons</string>
+  <string name="usages_on_other_wikis_heading">Diğer vikiler</string>
+  <string name="file_usages_container_heading">Dosya kullanımları</string>
+  <string name="title_activity_single_web_view">SingleWebViewActivity</string>
+  <string name="account">Hesap</string>
+  <string name="vanish_account">Kaybolma</string>
+  <string name="account_vanish_request_confirm_title">Hesap kaybolma uyarısı</string>
+  <string name="account_vanish_request_confirm">Kaybolma &lt;b&gt;son çaredir&lt;/b&gt; ve &lt;b&gt;sadece düzenlemeyi sonsuza dek durdurmak istediğinizde&lt;/b&gt; ve ayrıca mümkün olduğunca çok sayıda geçmiş ilişkinizi gizlemek için kullanılmalıdır.&lt;br/&gt;&lt;br/&gt;Wikimedia Commons\'ta hesap silme, hesap adınızı değiştirerek başkalarının katkılarınızı tanımasını önleyerek hesap kaybolması adı verilen bir işlemle yapılır. &lt;b&gt;Kaybolma, projelere yapılan katkıları tamamen anonimleştirmeyi veya kaldırmayı garanti etmez&lt;/b&gt;.</string>
+  <string name="caption">Altyazı</string>
+  <string name="caption_copied_to_clipboard">Başlık panoya kopyalandı</string>
+  <string name="congratulations_all_pictures_in_this_album_have_been_either_uploaded_or_marked_as_not_for_upload">Tebrikler, bu albümdeki tüm resimler yüklendi veya yüklenemez olarak işaretlendi.</string>
+  <string name="show_in_explore">Keşfet\'te göster</string>
+  <string name="show_in_nearby">Yakınlarda Göster</string>
+  <string name="image_tag_line_created_and_uploaded_by">Oluşturan ve yükleyen: %1$s</string>
+  <string name="image_tag_line_created_by_and_uploaded_by">%1$s tarafından oluşturuldu ve %2$s tarafından yüklendi</string>
 </resources>
