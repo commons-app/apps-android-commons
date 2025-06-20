@@ -176,7 +176,6 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
         outState.putBoolean("isFeaturedImage", isFeaturedImage);
     }
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
