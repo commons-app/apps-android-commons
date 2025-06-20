@@ -164,6 +164,7 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+        imageProgressBar = null;
     }
 
     @Override
