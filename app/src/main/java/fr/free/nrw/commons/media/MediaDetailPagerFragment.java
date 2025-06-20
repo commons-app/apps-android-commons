@@ -169,10 +169,13 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putInt("current-page", binding.mediaDetailsPager.getCurrentItem());
+        if (binding != null && binding.mediaDetailsPager != null) {
+            outState.putInt("current-page", binding.mediaDetailsPager.getCurrentItem());
+        }
         outState.putBoolean("editable", editable);
         outState.putBoolean("isFeaturedImage", isFeaturedImage);
     }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
