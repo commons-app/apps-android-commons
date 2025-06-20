@@ -473,6 +473,8 @@ class UploadWorker(
             if (!contribution.hasInvalidLocation()) {
                 var revisionID: Long? = null
                 try {
+                    // Only set P18 if the place does not already have a picture
+                    if (wikiDataPlace.imageValue.isNullOrBlank()) {
                     revisionID =
                         wikidataEditService.createClaim(
                             wikiDataPlace,
@@ -489,7 +491,11 @@ class UploadWorker(
                                 .subscribeOn(Schedulers.io())
                                 .blockingAwait()
                             Timber.d("Updated WikiItem place ${place.name} with image ${place.pic}")
+                            }
+                            showSuccessNotification(contribution)
                         }
+                    } else {
+                        // Place already has a picture, so skip setting P18 but still show success notification
                         showSuccessNotification(contribution)
                     }
                 } catch (exception: Exception) {
