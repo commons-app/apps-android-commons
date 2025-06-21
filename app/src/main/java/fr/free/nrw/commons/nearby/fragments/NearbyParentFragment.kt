@@ -724,7 +724,7 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
             val targetP = GeoPoint(target.latitude, target.longitude)
             mapCenter = targetP
             binding?.map?.controller?.setCenter(targetP)
-            recenterMarkerToPosition(targetP)
+            updateUserLocationOverlays(targetP, true)
             if (!isCameFromExploreMap()) {
                 moveCameraToPosition(targetP)
             }
@@ -1863,6 +1863,8 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
         lastKnownLocation = latLng
         NearbyController.currentLocation = lastKnownLocation
         presenter!!.updateMapAndList(locationChangeType)
+
+        updateUserLocationOverlays(GeoPoint(latLng.latitude, latLng.longitude), true)
     }
 
     override fun onLocationChangedSignificantly(latLng: LatLng) {
@@ -2644,43 +2646,14 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
      */
     override fun clearAllMarkers() {
         binding!!.map.overlayManager.clear()
-        binding!!.map.invalidate()
-        val geoPoint = mapCenter
-        if (geoPoint != null) {
-            val diskOverlay =
-                ScaleDiskOverlay(
-                    this.context,
-                    geoPoint, 2000, UnitOfMeasure.foot
-                )
-            val circlePaint = Paint()
-            circlePaint.color = Color.rgb(128, 128, 128)
-            circlePaint.style = Paint.Style.STROKE
-            circlePaint.strokeWidth = 2f
-            diskOverlay.setCirclePaint2(circlePaint)
-            val diskPaint = Paint()
-            diskPaint.color = Color.argb(40, 128, 128, 128)
-            diskPaint.style = Paint.Style.FILL_AND_STROKE
-            diskOverlay.setCirclePaint1(diskPaint)
-            diskOverlay.setDisplaySizeMin(900)
-            diskOverlay.setDisplaySizeMax(1700)
-            binding!!.map.overlays.add(diskOverlay)
-            val startMarker = Marker(
-                binding!!.map
-            )
-            startMarker.position = geoPoint
-            startMarker.setAnchor(
-                Marker.ANCHOR_CENTER,
-                Marker.ANCHOR_BOTTOM
-            )
-            startMarker.icon =
-                getDrawable(
-                    this.requireContext(),
-                    fr.free.nrw.commons.R.drawable.current_location_marker
-                )
-            startMarker.title = "Your Location"
-            startMarker.textLabelFontSize = 24
-            binding!!.map.overlays.add(startMarker)
+
+        var geoPoint = mapCenter
+        val lastLatLng = locationManager.getLastLocation()
+        if (lastLatLng != null) {
+            geoPoint = GeoPoint(lastLatLng.latitude, lastLatLng.longitude)
         }
+        updateUserLocationOverlays(geoPoint, false)
+
         val scaleBarOverlay = ScaleBarOverlay(binding!!.map)
         scaleBarOverlay.setScaleBarOffset(15, 25)
         val barPaint = Paint()
@@ -2690,6 +2663,7 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
         binding!!.map.overlays.add(scaleBarOverlay)
         binding!!.map.overlays.add(mapEventsOverlay)
         binding!!.map.setMultiTouchControls(true)
+        binding!!.map.invalidate()
     }
 
     /**
@@ -2700,6 +2674,8 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
     private fun recenterMarkerToPosition(geoPoint: GeoPoint?) {
         geoPoint?.let {
             binding?.map?.controller?.setCenter(it)
+
+            updateUserLocationOverlays(it, true);
         }
     }
 
