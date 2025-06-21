@@ -2700,16 +2700,65 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
     private fun recenterMarkerToPosition(geoPoint: GeoPoint?) {
         geoPoint?.let {
             binding?.map?.controller?.setCenter(it)
+        }
+    }
+
+    /**
+     * Updates the user current location overlays (both the location and error overlays) by
+     * replacing any existing location overlays with new overlays at the given GeoPoint. If there
+     * are no existing location and error overlays, then new overlays are added.
+     *
+     * @param geoPoint The GeoPoint representing the user's current location.
+     * @param invalidate If true, the map overlays will be invalidated after the user
+     * location overlays are updated/added. If false, the overlays will not be invalidated.
+     */
+    private fun updateUserLocationOverlays(geoPoint: GeoPoint?, invalidate: Boolean) {
+        geoPoint?.let{
             val overlays = binding?.map?.overlays ?: return@let
 
-            // Remove markers and disks using index-based removal
-            var i = 0
-            while (i < overlays.size) {
-                when (overlays[i]) {
-                    is Marker, is ScaleDiskOverlay -> overlays.removeAt(i)
-                    else -> i++
+            // Multiply accuracy by 2 to get 95% confidence interval
+            val accuracy = getCurrentLocationAccuracy() * 2
+
+            // Create disk overlay
+            val errorOverlay = createCurrentLocationErrorOverlay(this.context, geoPoint,
+                (accuracy).toInt(), UnitOfMeasure.meter)
+
+            // Create current location overlay
+            val locationOverlay = createCurrentLocationOverlay(geoPoint)
+
+            var locationOverlayFound = false
+            var errorOverlayFound = false
+
+            // Find and replace overlays
+            for (i in overlays.indices) {
+                val overlay = overlays[i]
+                if (overlay is ScaleDiskOverlay) {
+                    overlays[i] = errorOverlay
+                    errorOverlayFound = true
+                }
+
+                if (overlay is Marker && overlay.icon.equals(locationOverlay.icon)) {
+                    overlays[i] = locationOverlay
+                    locationOverlayFound = true
+                }
+
+                if (errorOverlayFound && locationOverlayFound) {
+                    break
                 }
             }
+
+            // If the user location overlays were not found, add them
+            if (!errorOverlayFound) {
+                overlays.add(errorOverlay)
+            }
+
+            if (!locationOverlayFound) {
+                overlays.add(locationOverlay)
+            }
+        }
+
+        if (invalidate) {
+            binding!!.map.invalidate()
         }
     }
 
