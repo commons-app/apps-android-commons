@@ -196,13 +196,16 @@ class WikidataEditService @Inject constructor(
         return wikidataClient.setClaim(claim, COMMONS_APP_TAG).blockingSingle()
     }
 
-    fun handleImageClaimResult(wikidataItem: WikidataItem, revisionId: Long?) {
+    fun handleImageClaimResult(wikidataItem: WikidataItem, revisionId: Long?, p18WasSkipped: Boolean = false) {
         if (revisionId != null) {
             wikidataEditListener?.onSuccessfulWikidataEdit()
             showSuccessToast(wikidataItem.name)
-        } else {
+        } else if (!p18WasSkipped) {
             Timber.d("Unable to make wiki data edit for entity %s", wikidataItem)
             showLongToast(context, context.getString(R.string.wikidata_edit_failure))
+        } else {
+            Timber.d("Wikidata edit skipped for entity %s because P18 already exists", wikidataItem)
+            // No error shown to user, as this is not a failure
         }
     }
 
