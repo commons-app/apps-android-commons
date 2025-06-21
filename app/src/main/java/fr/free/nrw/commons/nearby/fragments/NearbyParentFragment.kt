@@ -2710,33 +2710,74 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
                     else -> i++
                 }
             }
-
-            // Add disk overlay
-            ScaleDiskOverlay(context, it, 2000, UnitOfMeasure.foot).apply {
-                setCirclePaint2(Paint().apply {
-                    color = Color.rgb(128, 128, 128)
-                    style = Paint.Style.STROKE
-                    strokeWidth = 2f
-                })
-                setCirclePaint1(Paint().apply {
-                    color = Color.argb(40, 128, 128, 128)
-                    style = Paint.Style.FILL_AND_STROKE
-                })
-                setDisplaySizeMin(900)
-                setDisplaySizeMax(1700)
-                overlays.add(this)
-            }
-
-            // Add marker
-            Marker(binding?.map).apply {
-                position = it
-                setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
-                icon = getDrawable(context, R.drawable.current_location_marker)
-                title = "Your Location"
-                textLabelFontSize = 24
-                overlays.add(this)
-            }
         }
+    }
+
+    /**
+     * @return The accuracy of the current location with a confidence at the 68th percentile.
+     * Units are in meters. Returning 0 may indicate failure.
+     */
+    private fun getCurrentLocationAccuracy(): Float {
+        var accuracy = 0f
+        val lastLocation = locationManager.getLastLocation()
+        if (lastLocation != null) {
+            accuracy = lastLocation.accuracy
+        }
+
+        return accuracy
+    }
+
+    /**
+     * Creates the current location overlay
+     *
+     * @param geoPoint The GeoPoint where the current location overlay will be placed.
+     *
+     * @return The current location overlay as a Marker
+     */
+    private fun createCurrentLocationOverlay(geoPoint: GeoPoint): Marker {
+        val currentLocationOverlay = Marker(
+            binding!!.map
+        )
+        currentLocationOverlay.position = geoPoint
+        currentLocationOverlay.icon =
+            getDrawable(
+                this.requireContext(),
+                fr.free.nrw.commons.R.drawable.current_location_marker
+            )
+        currentLocationOverlay.title = "Your Location"
+        currentLocationOverlay.textLabelFontSize = 24
+        currentLocationOverlay.setAnchor(0.5f, 0.5f)
+
+        return currentLocationOverlay
+    }
+
+    /**
+     * Creates the location error overlay to show the user how accurate the current location
+     * overlay is. The edge of the disk is the 95% confidence interval.
+     *
+     * @param context The Android context
+     * @param point The user's location as a GeoPoint
+     * @param value The radius of the disk
+     * @param unitOfMeasure The unit of measurement of the value/disk radius.
+     *
+     * @return The location error overlay as a ScaleDiskOverlay.
+     */
+    private fun createCurrentLocationErrorOverlay(context: Context?, point: GeoPoint, value: Int,
+                                           unitOfMeasure: UnitOfMeasure): ScaleDiskOverlay {
+        val scaleDisk = ScaleDiskOverlay(context, point, value, unitOfMeasure)
+
+        scaleDisk.setCirclePaint2(Paint().apply {
+            color = Color.rgb(128, 128, 128)
+            style = Paint.Style.STROKE
+            strokeWidth = 2f
+        })
+
+        scaleDisk.setCirclePaint1(Paint().apply {
+            color = Color.argb(40, 128, 128, 128)
+            style = Paint.Style.FILL_AND_STROKE
+        })
+
+        return scaleDisk
     }
 
     private fun moveCameraToPosition(geoPoint: GeoPoint) {
