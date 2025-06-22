@@ -52,6 +52,7 @@
 * ZhaoGang
 * 七八年再来一次
 * 予弦
+* 人间百态
 * 佛壁灯
 * 列维劳德
 * 坑触可
@@ -840,6 +841,7 @@
   <string name="talk">讨论</string>
   <string name="write_something_about_the_item">请写一些关于项目“%1$s”的信息。所写的内容是公开可见的。</string>
   <string name="does_not_exist_anymore_no_picture_can_ever_be_taken_of_it">“%1$s”已不再存在，无法拍摄它的照片。</string>
+  <string name="is_at_a_different_place_wikidata">“%1$s”位于他处。</string>
   <string name="is_at_a_different_place_please_specify_the_correct_place_below_if_possible_tell_us_the_correct_latitude_longitude">“%1$s”位于一个不同的位置。请在下方给出正确的位置，可以的话请填写正确的经纬度。</string>
   <string name="other_problem_or_information_please_explain_below">其他问题或信息（请在下方解释）。</string>
   <string name="feedback_destination_note">您的反馈已经发布在以下wiki页面：&lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Mobile_app/Feedback\"&gt;Commons:Mobile app/Feedback&lt;/a&gt;</string>

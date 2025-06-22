@@ -16,12 +16,12 @@ object LocationUtils {
         val indexOfPrefix = customQuery.indexOf("Point(")
         if (indexOfPrefix == -1) {
             Timber.e("Invalid prefix index - Seems like user has entered an invalid query")
-            return latLng
+            return null
         }
         val indexOfSuffix = customQuery.indexOf(")\"", indexOfPrefix)
         if (indexOfSuffix == -1) {
             Timber.e("Invalid suffix index - Seems like user has entered an invalid query")
-            return latLng
+            return null
         }
         val latLngString = customQuery.substring(indexOfPrefix + "Point(".length, indexOfSuffix)
         if (latLngString.isEmpty()) {

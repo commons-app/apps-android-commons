@@ -158,7 +158,9 @@ class SingleWebViewActivity : ComponentActivity() {
 
                     webChromeClient = object : WebChromeClient() {
                         override fun onConsoleMessage(message: ConsoleMessage): Boolean {
-                            Timber.d("Console: ${message.message()} -- From line ${message.lineNumber()} of ${message.sourceId()}")
+                            Timber.d("%s%s",
+                                "Console: ${message.message()} -- From line ",
+                                "${message.lineNumber()} of ${message.sourceId()}")
                             return true
                         }
                     }

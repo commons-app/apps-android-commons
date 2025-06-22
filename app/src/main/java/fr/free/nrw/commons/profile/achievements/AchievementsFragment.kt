@@ -389,7 +389,7 @@ class AchievementsFragment : CommonsDaggerSupportFragment(){
      * @param badgeTextColor The badge text color. Default is R.attr.colorPrimary
      * @param badgeGravity The position of the badge [TOP_END,TOP_START,BOTTOM_END,BOTTOM_START]. Default is TOP_END
      * @return if the number is 0, then it will not create badge for it and hide the view
-     * @see https://developer.android.com/reference/com/google/android/material/badge/BadgeDrawable
+     * @see <a href="https://developer.android.com/reference/com/google/android/material/badge/BadgeDrawable">BadgeDrawable (Android Developer)</a>
      */
 
     private fun showBadgesWithCount(

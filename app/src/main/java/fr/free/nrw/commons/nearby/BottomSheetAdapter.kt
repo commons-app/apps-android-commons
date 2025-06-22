@@ -16,7 +16,7 @@ import fr.free.nrw.commons.nearby.model.BottomSheetItem
 /**
  * RecyclerView Adapter for displaying items in a bottom sheet.
  *
- * @property context The context used for inflating layout resources.
+ * @param context The context used for inflating layout resources.
  * @property itemList The list of BottomSheetItem objects to display.
  * @constructor Creates an instance of BottomSheetAdapter.
  */

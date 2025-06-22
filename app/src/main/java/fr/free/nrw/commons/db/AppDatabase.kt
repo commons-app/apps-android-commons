@@ -30,7 +30,7 @@ import fr.free.nrw.commons.upload.depicts.DepictsDao
  */
 @Database(
     entities = [Contribution::class, Depicts::class, UploadedStatus::class, NotForUploadStatus::class, ReviewEntity::class, Place::class, BookmarksCategoryModal::class, BookmarksLocations::class],
-    version = 20,
+    version = 21,
     exportSchema = false,
 )
 @TypeConverters(Converters::class)

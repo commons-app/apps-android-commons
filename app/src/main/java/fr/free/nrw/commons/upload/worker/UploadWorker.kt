@@ -472,7 +472,10 @@ class UploadWorker(
         if (wikiDataPlace != null) {
             if (!contribution.hasInvalidLocation()) {
                 var revisionID: Long? = null
+                val p18WasSkipped = !wikiDataPlace.imageValue.isNullOrBlank()
                 try {
+                    if (!p18WasSkipped) {
+                    // Only set P18 if the place does not already have a picture
                     revisionID =
                         wikidataEditService.createClaim(
                             wikiDataPlace,
@@ -489,9 +492,11 @@ class UploadWorker(
                                 .subscribeOn(Schedulers.io())
                                 .blockingAwait()
                             Timber.d("Updated WikiItem place ${place.name} with image ${place.pic}")
+                            }
                         }
-                        showSuccessNotification(contribution)
                     }
+                    // Always show success notification, whether P18 was set or skipped
+                    showSuccessNotification(contribution)
                 } catch (exception: Exception) {
                     Timber.e(exception)
                 }
@@ -500,6 +505,7 @@ class UploadWorker(
                     wikidataEditService.handleImageClaimResult(
                         contribution.wikidataPlace!!,
                         revisionID,
+                        p18WasSkipped = p18WasSkipped
                     )
                 }
             } else {

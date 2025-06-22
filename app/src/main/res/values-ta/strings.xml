@@ -4,6 +4,7 @@
 * Fahimrazick
 * Gurulenin
 * Kaartic
+* Matrix
 * Sank
 * Sriveenkat
 * Yuvipanda
@@ -13,6 +14,10 @@
   <string name="commons_github">பொதுவக கிட்டுகபு மூலக் குறி</string>
   <string name="commons_logo">பொதுவக இலச்சினை</string>
   <string name="commons_website">பொதுவக வலைத்தளம்</string>
+  <string name="exit_location_picker">இருப்பிடத் தேர்வியிலிருந்து வெளியேற்</string>
+  <string name="submit">சமர்ப்பி</string>
+  <string name="add_another_description">மற்றொரு விளக்கத்தைச் சேர்க்க</string>
+  <string name="add_new_contribution">புதிய பங்களிப்பைச் சேர்க்க</string>
   <string name="nearby_row_image">படம்</string>
   <string name="nearby_all">யாவும்</string>
   <plurals name="uploads_pending_notification_indicator">

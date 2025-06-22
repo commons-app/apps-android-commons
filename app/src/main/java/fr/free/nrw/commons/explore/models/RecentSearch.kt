@@ -9,9 +9,9 @@ import java.util.Date
  */
 class RecentSearch(
     /**
-     * Modifies the content URI - marking this query as already saved in the database
+     * The content URI that marks this query as already saved in the database.
      *
-     * @param contentUri the content URI
+     * @property contentUri the content URI
      */
     var contentUri: Uri?,
     /**

@@ -139,7 +139,7 @@ class ContributionsFragment : CommonsDaggerSupportFragment(), FragmentManager.On
 
     private var wlmCampaign: Campaign? = null
 
-    var userName: String? = null
+    private var userName: String? = null
     private var isUserProfile = false
 
     private var mSensorManager: SensorManager? = null
@@ -808,10 +808,11 @@ class ContributionsFragment : CommonsDaggerSupportFragment(), FragmentManager.On
         }
     }
 
-    /**
-     * Temporarily disabled, see issue [https://github.com/commons-app/apps-android-commons/issues/5847]
-     * @param count The number of pending uploads.
-     */
+    // /**
+    //  * Temporarily disabled. See issue [#5847](https://github.com/commons-app/apps-android-commons/issues/5847)
+    //  * @param count The number of pending uploads.
+    //  */
+    // public void updateUploadIcon(int count) {
     //    public void updateUploadIcon(int count) {
     //        if (pendingUploadsImageView != null) {
     //            if (count != 0) {
