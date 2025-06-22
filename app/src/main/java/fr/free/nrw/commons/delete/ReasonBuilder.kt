@@ -2,22 +2,19 @@ package fr.free.nrw.commons.delete
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.util.Log
-
-import fr.free.nrw.commons.utils.DateUtil
-import java.util.Locale
-
-import javax.inject.Inject
-import javax.inject.Singleton
-
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.R
-import fr.free.nrw.commons.profile.achievements.FeedbackResponse
 import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient
+import fr.free.nrw.commons.utils.DateUtil
 import fr.free.nrw.commons.utils.ViewUtilWrapper
 import io.reactivex.Single
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.rx2.rxSingle
 import timber.log.Timber
+import java.util.Locale
+import javax.inject.Inject
+import javax.inject.Singleton
 
 /**
  * This class handles the reason for deleting a Media object
@@ -30,6 +27,8 @@ class ReasonBuilder @Inject constructor(
     private val viewUtilWrapper: ViewUtilWrapper
 ) {
 
+    private val defaultFileUsagePageSize = 10
+
     /**
      * To process the reason and append the media's upload date and uploaded_by_me string
      * @param media
@@ -41,7 +40,7 @@ class ReasonBuilder @Inject constructor(
             return Single.just("Not known")
         }
         Timber.d("Fetching article number")
-        return fetchArticleNumber(media, reason)
+        return getAndAppendFileUsage(media, reason)
     }
 
     /**
@@ -56,31 +55,36 @@ class ReasonBuilder @Inject constructor(
         }
     }
 
-    private fun fetchArticleNumber(media: Media, reason: String): Single<String> {
-        return if (checkAccount()) {
-            Timber.d("Fetching achievements for ${sessionManager.userName}")
-            okHttpJsonApiClient
-                .getAchievements(sessionManager.userName)
-                .map { feedbackResponse ->
-                    Timber.d("Feedback Response: $feedbackResponse")
-                    appendArticlesUsed(feedbackResponse, media, reason)
-                }
-        } else {
-            Single.just("")
+    private fun getAndAppendFileUsage(media: Media, reason: String): Single<String> {
+        return rxSingle(context = Dispatchers.IO) {
+            if (!checkAccount()) return@rxSingle ""
+
+            try {
+                val globalFileUsage = okHttpJsonApiClient.getGlobalFileUsages(
+                    fileName = media.filename,
+                    pageSize = defaultFileUsagePageSize
+                )
+                val globalUsages = globalFileUsage?.query?.pages?.sumOf { it.fileUsage.size } ?: 0
+
+                appendArticlesUsed(globalUsages, media, reason)
+            } catch (e: Exception) {
+                Timber.e(e, "Error fetching file usage")
+                throw e
+            }
         }
     }
 
     /**
-     * Takes the uploaded_by_me string, the upload date, name of articles using images
+     * Takes the uploaded_by_me string, the upload date, no. of articles using images
      * and appends it to the received reason
-     * @param feedBack object
+     * @param fileUsages No. of files/articles using this image
      * @param media whose upload data is to be fetched
-     * @param reason
+     * @param reason string to be appended
      */
     @SuppressLint("StringFormatInvalid")
-    private fun appendArticlesUsed(feedBack: FeedbackResponse, media: Media, reason: String): String {
+    private fun appendArticlesUsed(fileUsages: Int, media: Media, reason: String): String {
         val reason1Template = context.getString(R.string.uploaded_by_myself)
-        return reason + String.format(Locale.getDefault(), reason1Template, prettyUploadedDate(media), feedBack.articlesUsingImages)
+        return reason + String.format(Locale.getDefault(), reason1Template, prettyUploadedDate(media), fileUsages)
             .also { Timber.i("New Reason %s", it) }
     }
 
