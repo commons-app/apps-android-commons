@@ -1695,7 +1695,6 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
         val finalReason: String = reason
         val resultSingle: Single<Boolean> = reasonBuilder.getReason(media, reason)
             .flatMap {
-                Timber.d("Reason builder returned: $it")
                 deleteHelper.makeDeletion(
                     context, media, finalReason
                 )
@@ -1729,7 +1728,6 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
     }
 
     private fun handleDeletionError(throwable: Throwable) {
-        Timber.e("Error while nominating for deletion: ${throwable.message}")
         throwable.printStackTrace()
         disableProgressBar()
         checkAndClearDeletionFlag()

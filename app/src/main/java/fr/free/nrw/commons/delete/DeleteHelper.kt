@@ -53,10 +53,7 @@ class DeleteHelper @Inject constructor(
         media: Media?,
         reason: String?
     ): Single<Boolean>? {
-
-        Timber.d("Making deletion for title: ${media?.displayTitle} with reason: $reason")
         if(context == null && media == null) {
-            Timber.e("context or media is null")
             return null
         }
 
@@ -68,13 +65,10 @@ class DeleteHelper @Inject constructor(
         return reason?.let {
             delete(media!!, it)
                 .flatMapSingle { result ->
-                    Timber.d("Show deletiong notification")
                     Single.just(showDeletionNotification(context, media, result))
                 }
                 .firstOrError()
                 .onErrorResumeNext { throwable ->
-                    Timber.e("Error while making deletion")
-                    throwable.printStackTrace()
                     if (throwable is InvalidLoginTokenException) {
                         Single.error(throwable)
                     } else {
@@ -91,7 +85,6 @@ class DeleteHelper @Inject constructor(
      * @return
      */
     private fun delete(media: Media, reason: String): Observable<Boolean> {
-        Timber.d("thread is delete %s", Thread.currentThread().name)
         val summary = "Nominating ${media.filename} for deletion."
         val calendar = Calendar.getInstance()
         val fileDeleteString = """

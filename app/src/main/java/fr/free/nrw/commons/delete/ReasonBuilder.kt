@@ -39,7 +39,6 @@ class ReasonBuilder @Inject constructor(
         if (media == null || reason == null) {
             return Single.just("Not known")
         }
-        Timber.d("Fetching article number")
         return getAndAppendFileUsage(media, reason)
     }
 

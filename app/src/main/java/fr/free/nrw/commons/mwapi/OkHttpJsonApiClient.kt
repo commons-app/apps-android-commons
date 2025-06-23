@@ -258,21 +258,18 @@ class OkHttpJsonApiClient @Inject constructor(
     fun getAchievements(userName: String?): Single<FeedbackResponse?> {
         val suffix = if (isBetaFlavour) "/feedback.py?labs=commonswiki" else "/feedback.py"
         val fetchAchievementUrlTemplate = wikiMediaToolforgeUrl.toString() + suffix
-        Timber.d("Url : $fetchAchievementUrlTemplate and User Name : $userName")
         return Single.fromCallable<FeedbackResponse?>({
             val url = String.format(
                 Locale.ENGLISH,
                 fetchAchievementUrlTemplate,
                 userName
             )
-            Timber.d("Formatted URL: $url")
             val urlBuilder: HttpUrl.Builder = url.toHttpUrlOrNull()!!.newBuilder()
                 .addQueryParameter("user", userName)
             val request: Request = Request.Builder()
                 .url(urlBuilder.toString())
                 .build()
             val response: Response = okHttpClient.newCall(request).execute()
-            Timber.d("Response received: $response | Body: ${response.body} | IsSuccessful: ${response.isSuccessful}")
             if (response.body != null && response.isSuccessful) {
                 var json: String = response.body!!.string()
                 // Extract JSON from response
