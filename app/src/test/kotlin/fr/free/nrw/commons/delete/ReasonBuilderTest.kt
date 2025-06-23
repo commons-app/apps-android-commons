@@ -59,7 +59,7 @@ class ReasonBuilderTest {
         PowerMockito.`when`(context?.getString(R.string.user_not_logged_in))
             .thenReturn("Log-in expired. Please log in again.")
 
-        reasonBuilder!!.getReason(mock(Media::class.java), "test").test()
+        reasonBuilder!!.getReason(mock(Media::class.java), "test").test().await()
         verify(sessionManager, times(1))!!.forceLogin(any(Context::class.java))
     }
 
@@ -76,7 +76,7 @@ class ReasonBuilderTest {
 
         val media = media(filename = "test_file", dateUploaded = Date())
 
-        reasonBuilder!!.getReason(media, "test").test()
+        reasonBuilder!!.getReason(media, "test").test().await()
         verify(sessionManager, times(0))!!.forceLogin(any(Context::class.java))
         verify(okHttpJsonApiClient, times(1))!!.getGlobalFileUsages(anyString(), anyInt())
     }
