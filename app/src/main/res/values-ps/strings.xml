@@ -136,7 +136,7 @@
   <string name="no_parent_classes">%1$s مور ټولگې نه لري</string>
   <string name="categories_skip_explanation">ويکي‌اوتوک خونديځ کې د خپلو انځورونو موندلو لپاره وېشنيزې ورگډې کړئ.\nوېشنيزو ورگډولو لپاره ټاپل پيل کړئ.</string>
   <string name="categories_activity_title">وېشنيزې</string>
-  <string name="title_activity_settings">امستنې</string>
+  <string name="title_activity_settings">اوڼنې</string>
   <string name="title_activity_signup">نومليکنه</string>
   <string name="title_activity_featured_images">ټاکلی انځور</string>
   <string name="title_activity_custom_selector">دوديز ټاکونکی</string>
@@ -216,7 +216,7 @@
   <string name="navigation_item_upload">پورته کول</string>
   <string name="navigation_item_nearby">نژدې</string>
   <string name="navigation_item_about">په اړه</string>
-  <string name="navigation_item_settings">امستنې</string>
+  <string name="navigation_item_settings">اوڼنې</string>
   <string name="navigation_item_feedback">غبرگون</string>
   <string name="navigation_item_logout">وتل</string>
   <string name="navigation_item_review">بياکتنه</string>
