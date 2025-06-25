@@ -74,7 +74,6 @@ import fr.free.nrw.commons.BuildConfig
 import fr.free.nrw.commons.CameraPosition
 import fr.free.nrw.commons.CommonsApplication
 import fr.free.nrw.commons.CommonsApplication.Companion.instance
-import fr.free.nrw.commons.locationpicker.LocationPicker
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.MediaDataExtractor
 import fr.free.nrw.commons.R
@@ -102,6 +101,7 @@ import fr.free.nrw.commons.explore.depictions.WikidataItemDetailsActivity
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.language.AppLanguageLookUpTable
 import fr.free.nrw.commons.location.LocationServiceManager
+import fr.free.nrw.commons.locationpicker.LocationPicker
 import fr.free.nrw.commons.media.MediaDetailPagerFragment.MediaDetailProvider
 import fr.free.nrw.commons.profile.ProfileActivity
 import fr.free.nrw.commons.review.ReviewHelper
@@ -116,6 +116,7 @@ import fr.free.nrw.commons.utils.LangCodeUtils.getLocalizedResources
 import fr.free.nrw.commons.utils.PermissionUtils.PERMISSIONS_STORAGE
 import fr.free.nrw.commons.utils.PermissionUtils.checkPermissionsAndPerformAction
 import fr.free.nrw.commons.utils.PermissionUtils.hasPermission
+import fr.free.nrw.commons.utils.ViewUtil
 import fr.free.nrw.commons.utils.ViewUtil.showShortToast
 import fr.free.nrw.commons.utils.ViewUtilWrapper
 import fr.free.nrw.commons.wikidata.mwapi.MwQueryPage.Revision
@@ -125,6 +126,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import org.apache.commons.lang3.StringUtils
 import timber.log.Timber
+import java.lang.String.format
 import java.util.Date
 import java.util.Locale
 import java.util.Objects
@@ -1646,7 +1648,7 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
                 getString(R.string.cancel),
                 {
                     val reason: String = input.text.toString()
-                    onDeleteClickeddialogtext(reason)
+                    onDeleteClickedDialogText(reason)
                 },
                 {},
                 input
@@ -1700,26 +1702,48 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
         resultSingle
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe { _ ->
-                if (applicationKvStore.getBoolean(
-                        String.format(
-                            NOMINATING_FOR_DELETION_MEDIA, media!!.imageUrl
-                        ), false
-                    )
-                ) {
-                    applicationKvStore.remove(
-                        String.format(
-                            NOMINATING_FOR_DELETION_MEDIA,
-                            media!!.imageUrl
-                        )
-                    )
-                    callback!!.nominatingForDeletion(index)
-                }
-            }
+            .subscribe(this::handleDeletionResult, this::handleDeletionError);
+    }
+
+    /**
+     * Disables Progress Bar and Update delete button text.
+     */
+    private fun disableProgressBar() {
+        activity?.run {
+            runOnUiThread(Runnable {
+                binding.progressBarDeletion.visibility = View.GONE
+            })
+        } ?: return // Prevent NullPointerException when fragment is not attached to activity
+    }
+
+    private fun handleDeletionResult(success: Boolean) {
+        if (success) {
+            binding.nominateDeletion.text = getString(R.string.nominated_for_deletion_btn)
+            ViewUtil.showLongSnackbar(requireView(), getString(R.string.nominated_for_deletion))
+            disableProgressBar()
+            checkAndClearDeletionFlag()
+        } else {
+            disableProgressBar()
+        }
+    }
+
+    private fun handleDeletionError(throwable: Throwable) {
+        throwable.printStackTrace()
+        disableProgressBar()
+        checkAndClearDeletionFlag()
+    }
+
+    private fun checkAndClearDeletionFlag() {
+        if (applicationKvStore
+            .getBoolean(format(NOMINATING_FOR_DELETION_MEDIA, media!!.imageUrl), false)
+        ) {
+            applicationKvStore.remove(format(NOMINATING_FOR_DELETION_MEDIA, media!!.imageUrl))
+            callback!!.nominatingForDeletion(index)
+        }
     }
 
     @SuppressLint("CheckResult")
-    private fun onDeleteClickeddialogtext(reason: String) {
+    private fun onDeleteClickedDialogText(reason: String) {
         applicationKvStore.putBoolean(
             String.format(
                 NOMINATING_FOR_DELETION_MEDIA,
@@ -1736,22 +1760,7 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
         resultSingletext
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe { _ ->
-                if (applicationKvStore.getBoolean(
-                        String.format(
-                            NOMINATING_FOR_DELETION_MEDIA, media!!.imageUrl
-                        ), false
-                    )
-                ) {
-                    applicationKvStore.remove(
-                        String.format(
-                            NOMINATING_FOR_DELETION_MEDIA,
-                            media!!.imageUrl
-                        )
-                    )
-                    callback!!.nominatingForDeletion(index)
-                }
-            }
+            .subscribe(this::handleDeletionResult, this::handleDeletionError);
     }
 
     private fun onSeeMoreClicked() {

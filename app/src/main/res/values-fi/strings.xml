@@ -180,7 +180,7 @@
   <string name="tutorial_4_subtext_2">Kuvaus: Sydneyn oopperatalo lahden toiselta puolelta katsottuna</string>
   <string name="tutorial_4_subtext_3">Luokat: Sydneyn oopperatalo lännestä katsottuna, Sydneyn oopperatalo kaukaa katsottuna</string>
   <string name="welcome_wikipedia_text">Herätä Wikipedia-artikkelit eloon kuvillasi! Tuo kuvasi Wikipediaan.</string>
-  <string name="welcome_wikipedia_subtext">Wikipedian kuvat tulevat Wikimedia Commonsista.</string>
+  <string name="welcome_wikipedia_subtext">Wikipedian kuvat ovat peräisin Wikimedia Commonsista.</string>
   <string name="welcome_copyright_text">Kuvasi auttavat useita ihmisiä ympäri maailmaa artikkeleiden ymmärtämisessä.</string>
   <string name="welcome_copyright_subtext">Vältä tekijänoikeuksien alaista materiaalia, kuten julisteita, kirjan kansia ja useimpia Internetistä löydettyjä kuvia.</string>
   <string name="welcome_final_text">Luuletko ymmärtäneesi tämän?</string>
