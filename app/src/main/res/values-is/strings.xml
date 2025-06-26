@@ -392,7 +392,7 @@
   <string name="deletion_reason_bad_for_my_privacy">Ég áttaði mig á að þetta væri slæmt fyrir gagnaleynd mína</string>
   <string name="deletion_reason_no_longer_want_public">Ég skipti um skoðun, ég vil ekki að hún sé lengur öllum sýnileg</string>
   <string name="deletion_reason_not_interesting">Afsakið, þessi mynd hefur ekkert gildi fyrir alfræðirit</string>
-  <string name="uploaded_by_myself">Sent inn af mér sjálfum %1$s, notað í %2$d grein(um).</string>
+  <string name="uploaded_by_myself" fuzzy="true">Sent inn af mér sjálfum %1$s, notað í %2$d grein(um).</string>
   <string name="no_uploads">Velkomin í Commons!\n\nSendu inn fyrstu margmiðlunargögnin þín með því að ýta á viðbætingarhnappinn.</string>
   <string name="no_categories_selected">Engir flokkar valdir</string>
   <string name="no_categories_selected_warning_desc">Myndir án flokka eru sjaldnast nýtilegar. Ertu viss um að þú viljir halda áfram án þess að velja flokka?</string>

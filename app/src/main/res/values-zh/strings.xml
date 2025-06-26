@@ -470,7 +470,7 @@
   <string name="deletion_reason_bad_for_my_privacy">我意识到这对我的隐私不利</string>
   <string name="deletion_reason_no_longer_want_public">我改变了主意，我不想再让公众看到它了</string>
   <string name="deletion_reason_not_interesting">对不起，这幅图对百科全书没什么意思</string>
-  <string name="uploaded_by_myself">由我自己上传在%1$s，使用于%2$d个条目。</string>
+  <string name="uploaded_by_myself" fuzzy="true">由我自己上传在%1$s，使用于%2$d个条目。</string>
   <string name="no_uploads">欢迎使用共享资源！\n\n通过点击添加按钮以上传您的首个媒体。</string>
   <string name="no_categories_selected">未提交分类</string>
   <string name="no_categories_selected_warning_desc">不带分类的图片很难有机会被利用到，您确定您要不选择分类来继续吗？</string>

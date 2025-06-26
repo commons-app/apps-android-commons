@@ -423,7 +423,7 @@
   <string name="deletion_reason_bad_for_my_privacy">Apercebi-me de que prejudica a minha privacidade</string>
   <string name="deletion_reason_no_longer_want_public">Mudei de ideias, já não quero possa ser vista pelo público</string>
   <string name="deletion_reason_not_interesting">Desculpe, esta fotografia não tem interesse para uma enciclopédia</string>
-  <string name="uploaded_by_myself">Carregada por mim em %1$s, usada em %2$d artigo(s).</string>
+  <string name="uploaded_by_myself" fuzzy="true">Carregada por mim em %1$s, usada em %2$d artigo(s).</string>
   <string name="no_uploads">Bem-vindo(a) à wiki Commons!\n\nCarregue o seu primeiro ficheiro multimédia tocando no botão Adicionar.</string>
   <string name="no_categories_selected">Não foi selecionada nenhuma categoria</string>
   <string name="no_categories_selected_warning_desc">As imagens sem categorias só raramente são utilizáveis. Tem a certeza de que deseja continuar sem selecionar categorias?</string>

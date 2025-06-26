@@ -469,7 +469,7 @@
   <string name="deletion_reason_bad_for_my_privacy">أدركت أنه سيئ لخصوصيتي</string>
   <string name="deletion_reason_no_longer_want_public">لقد غيرت رأيي، ولا أريد أن يكون مرئيا للجميع بعد الآن</string>
   <string name="deletion_reason_not_interesting">آسف هذه الصورة ليست مثيرة للاهتمام لموسوعة</string>
-  <string name="uploaded_by_myself">رفعته بنفسي في %1$s، مستخدم في %2$d مقالة(ات).</string>
+  <string name="uploaded_by_myself" fuzzy="true">رفعته بنفسي في %1$s، مستخدم في %2$d مقالة(ات).</string>
   <string name="no_uploads">مرحبا بك في كومنز! \n\nارفع الوسائط الأولى عن طريق النقر على زر الإضافة.</string>
   <string name="no_categories_selected">لا توجد تصنيفات مختارة</string>
   <string name="no_categories_selected_warning_desc">نادرًا ما تكون الصور الخالية من التصنيفات قابلة للاستخدام، هل أنت متأكد أنك تريد الإرسال دون تحديد التصنيفات؟</string>

@@ -413,7 +413,7 @@
   <string name="deletion_reason_bad_for_my_privacy">Сфатив дека ќе ми ја наруши приватноста</string>
   <string name="deletion_reason_no_longer_want_public">Се премислив. Не сакам повеќе да биде видлива</string>
   <string name="deletion_reason_not_interesting">За жал, сликава не е соодветна за енциклопедија</string>
-  <string name="uploaded_by_myself">Подигнато од мене %1$s, кое се користи во %2$d статии.</string>
+  <string name="uploaded_by_myself" fuzzy="true">Подигнато од мене %1$s, кое се користи во %2$d статии.</string>
   <string name="no_uploads">Добре дојдовте на Ризницата!\n\nПодигнете ја вашата прва слика или снимка допирајќи го копчето за додавање.</string>
   <string name="no_categories_selected">Нема избрано категории</string>
   <string name="no_categories_selected_warning_desc">Некатегоризираните слики се слабо употребливи. Дали сигурно сакате да продолжите без да ставите категории?</string>

@@ -375,7 +375,7 @@
   <string name="deletion_reason_bad_for_my_privacy">მიბრჩქინე, ნამჷდა თენა ჩქიმი კონფიდენციალურალაშო გლახა იჸუაფუდჷნ</string>
   <string name="deletion_reason_no_longer_want_public">არზი დიბთირე დო შუროთ ვამოკო თინა ოჯარალეთ იძირებედასჷნ</string>
   <string name="deletion_reason_not_interesting">მორდება, ათე სურათი ენციკლოპედიაშო ვა რე საინტერესო</string>
-  <string name="uploaded_by_myself">ჩქიმი ენახარგა რე %1$s-შა, გჷმორინაფილი რე %2$d სტატიას.</string>
+  <string name="uploaded_by_myself" fuzzy="true">ჩქიმი ენახარგა რე %1$s-შა, გჷმორინაფილი რე %2$d სტატიას.</string>
   <string name="no_uploads">მოზოჯით ვიკიოწკარუეშა!\n\nგეხარგეთ თქვანი პირველი ფაილი, ქეგუნჭირით კონჭის გეძინა.</string>
   <string name="no_categories_selected">კატეგორია ვა რე გიშაგორილი</string>
   <string name="no_categories_selected_warning_desc">სურათეფი კატეგორიზაციაშ უმუშო შხირას მერკეთ გჷმორინაფონი რე. დასურო გონებჷნანო კატეგორიეფიშ მეწურაფაშ უმუშო გაგჷნძარაფა?</string>

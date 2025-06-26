@@ -345,7 +345,7 @@
   <string name="deletion_reason_bad_for_my_privacy">M tɛn\'ɛs ye di na an bɛ\'ɛd tisi m mɛŋ gu\'udim yɛla</string>
   <string name="deletion_reason_no_longer_want_public">M tiaki m pʋtɛ\'ɛr, m pʋ lɛm bɔɔd ye di bɛ zin\'ikanɛ ka sɔ\' wʋsa na nyɛ ya\'asa</string>
   <string name="deletion_reason_not_interesting">Gafara footo kaŋa pʋ nar ye di bɛ encyclopedia</string>
-  <string name="uploaded_by_myself">M kpɛ\'ɛsidinɛ %1$s m mɛŋ, ka nɔki tʋm %2$d atikil (nam) ni.</string>
+  <string name="uploaded_by_myself" fuzzy="true">M kpɛ\'ɛsidinɛ %1$s m mɛŋ, ka nɔki tʋm %2$d atikil (nam) ni.</string>
   <string name="no_uploads">Commons pʋ\'ʋsidif ken-ken!\n\nKpɛn\'ɛmi fʋ yiiga media dɔlisid fʋn na din paasim la.</string>
   <string name="no_categories_selected">Fʋ pʋ gaŋ buudsi\'a</string>
   <string name="no_depictions_selected">Fʋ pʋ gaŋ banɛ nwan taaba</string>

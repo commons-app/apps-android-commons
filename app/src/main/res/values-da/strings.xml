@@ -419,7 +419,7 @@
   <string name="deletion_reason_bad_for_my_privacy">Jeg indså, det var skidt for mit privatliv</string>
   <string name="deletion_reason_no_longer_want_public">Jeg ombestemte mig, jeg ønsker ikke at det skal være offentligt synligt længere</string>
   <string name="deletion_reason_not_interesting">Beklager dette billede er ikke interessant for en encyklopædi</string>
-  <string name="uploaded_by_myself">Uploadet af mig selv på %1$s , brugt i %2$d artikel(er).</string>
+  <string name="uploaded_by_myself">Uploadet af mig selv på %1$s , brugt i mindst %2$d artikel(er).</string>
   <string name="no_uploads">Velkommen til Commons!\n\nUpload dit første medie ved at trykke på Tilføj-knappen.</string>
   <string name="no_categories_selected">Ingen kategorier valgt</string>
   <string name="no_categories_selected_warning_desc">Billeder uden kategorier er sjældent brugbare. Er du sikker på, at du vil fortsætte uden at vælge kategorier?</string>
@@ -828,4 +828,5 @@
   <string name="show_in_nearby">Vis i I nærheden</string>
   <string name="image_tag_line_created_and_uploaded_by">Oprettet og uploadet af: %1$s</string>
   <string name="image_tag_line_created_by_and_uploaded_by">Oprettet af %1$s og uploadet af %2$s</string>
+  <string name="nominated_for_deletion_btn">Nomineret til sletning</string>
 </resources>

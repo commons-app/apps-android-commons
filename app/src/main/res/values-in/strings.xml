@@ -410,7 +410,7 @@
   <string name="deletion_reason_bad_for_my_privacy">Saya menyadari itu buruk untuk privasi saya</string>
   <string name="deletion_reason_no_longer_want_public">Saya berubah pikiran, saya tidak ingin itu terlihat publik lagi</string>
   <string name="deletion_reason_not_interesting">Maaf gambar ini tidak menarik untuk ensiklopedia</string>
-  <string name="uploaded_by_myself">Diunggah saya sendiri pada %1$s, digunakan dalam %2$d artikel.</string>
+  <string name="uploaded_by_myself" fuzzy="true">Diunggah saya sendiri pada %1$s, digunakan dalam %2$d artikel.</string>
   <string name="no_uploads">Unggah media pertama Anda dengan mengetuk tombol.</string>
   <string name="no_categories_selected">Tidak ada Kategori yang Dipilih</string>
   <string name="no_categories_selected_warning_desc">Gambar tanpa kategori jarang dapat digunakan. Apakah Anda yakin ingin mengirim tanpa memilih kategori?</string>

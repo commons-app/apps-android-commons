@@ -427,7 +427,7 @@
   <string name="deletion_reason_bad_for_my_privacy">Eu percebi que é ruim para minha privacidade</string>
   <string name="deletion_reason_no_longer_want_public">Eu mudei de ideia, eu não quero mais que seja publicamente visível</string>
   <string name="deletion_reason_not_interesting">Desculpe, esta foto não é interessante para uma enciclopédia</string>
-  <string name="uploaded_by_myself">Carregada por mim em %1$s, usada em %2$d artigo(s).</string>
+  <string name="uploaded_by_myself" fuzzy="true">Carregada por mim em %1$s, usada em %2$d artigo(s).</string>
   <string name="no_uploads">Bem-vindo ao Commons!\n\nCarregue sua primeira mídia tocando no botão Adicionar.</string>
   <string name="no_categories_selected">Nenhuma categoria selecionada</string>
   <string name="no_categories_selected_warning_desc">Imagens sem categorias raramente são utilizáveis. Tem certeza de que deseja continuar sem selecionar categorias?</string>

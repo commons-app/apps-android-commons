@@ -435,7 +435,7 @@
   <string name="deletion_reason_bad_for_my_privacy">Ik realiseerde me dat het slecht is voor mijn privacy</string>
   <string name="deletion_reason_no_longer_want_public">Ik ben van gedachten veranderd, ik wil niet dat het nog publiekelijk zichtbaar is</string>
   <string name="deletion_reason_not_interesting">Sorry, deze foto is niet interessant voor een encyclopedie</string>
-  <string name="uploaded_by_myself">Geüpload door mijzelf op %1$s, gebruikt in %2$d artikel(en).</string>
+  <string name="uploaded_by_myself" fuzzy="true">Geüpload door mijzelf op %1$s, gebruikt in %2$d artikel(en).</string>
   <string name="no_uploads">Welkom bij Commons!\n\nUpload je eerste media door op de knop Toevoegen te klikken.</string>
   <string name="no_categories_selected">Geen categorieën geselecteerd</string>
   <string name="no_categories_selected_warning_desc">Afbeeldingen zonder categorieën zijn zelden bruikbaar. Weet je zeker dat je verder wilt gaan zonder categorieën te selecteren?</string>
@@ -807,6 +807,7 @@
   <string name="talk">Overleg</string>
   <string name="write_something_about_the_item">Schrijf iets over het item \'%1$s\'. Dit is openbaar zichtbaar.</string>
   <string name="does_not_exist_anymore_no_picture_can_ever_be_taken_of_it">‘%1$s’ bestaat niet meer, er kan nooit een foto van gemaakt worden.</string>
+  <string name="is_at_a_different_place_wikidata">‘%1$s’ bevindt zich ergens anders.</string>
   <string name="is_at_a_different_place_please_specify_the_correct_place_below_if_possible_tell_us_the_correct_latitude_longitude">‘%1$s’ bevindt zich ergens anders. Geef hieronder de juiste plaats aan en noteer, indien mogelijk, de juiste breedte- en lengtegraad.</string>
   <string name="other_problem_or_information_please_explain_below">Ander probleem of andere informatie (verklaar hieronder).</string>
   <string name="feedback_destination_note">Uw feedback wordt op de volgende wikipagina geplaatst: &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Mobile_app/Feedback\"&gt;Commons:Mobile app/Feedback&lt;/a&gt;</string>

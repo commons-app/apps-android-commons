@@ -409,7 +409,7 @@
   <string name="deletion_reason_bad_for_my_privacy">Ташалыгъыма аман болгъанын ангыладым</string>
   <string name="deletion_reason_no_longer_want_public">Сагъышымы тюрлендирдим, энди хар кимге кёрюннюгюмю излемейме</string>
   <string name="deletion_reason_not_interesting">Кечериксиз, бу сурат энциклопедия ючюн эс бёлюрча тюлдю</string>
-  <string name="uploaded_by_myself">Кесим джюклеген %1$s сайтха джюкленди эмда %2$d статьяда хайырландырылды.</string>
+  <string name="uploaded_by_myself" fuzzy="true">Кесим джюклеген %1$s сайтха джюкленди эмда %2$d статьяда хайырландырылды.</string>
   <string name="no_uploads">Гёзеннге Хош Келигиз!\n\nКъош тиекге басыб биринчи медиагъызны джюклегиз.</string>
   <string name="no_categories_selected">Категорияла Сайланмадыла</string>
   <string name="no_categories_selected_warning_desc">Категориясыз суратла аз хайырланадыла. Категория сайламай бардырыргъа излегенигизге ишексизмисиз?</string>

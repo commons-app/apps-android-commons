@@ -344,7 +344,7 @@
   <string name="deletion_reason_bad_for_my_privacy">Me so rendesto conto che ła xé on małe par ła me privacy</string>
   <string name="deletion_reason_no_longer_want_public">Go canbià idea, no vujo pì che ła sia vardabiłe da tuti</string>
   <string name="deletion_reason_not_interesting">Ne despiaxe, sta imajine no ła xé intaresante par na ençiclopedia.</string>
-  <string name="uploaded_by_myself">Cargà da mi el %1$s, doparà in %2$d voxe.</string>
+  <string name="uploaded_by_myself" fuzzy="true">Cargà da mi el %1$s, doparà in %2$d voxe.</string>
   <string name="no_uploads">Benvegnuo so Commons!\n\nCarga el to primo file multimediałe strucando el boton \"xonta\".</string>
   <string name="no_categories_selected">Nisuna categoria sełesionà</string>
   <string name="no_categories_selected_warning_desc" fuzzy="true">Le imajini sensa categorie łe xé poche olte doparabiłi. Sito seguro de vołer enviar sensa sełesionar categorie?</string>

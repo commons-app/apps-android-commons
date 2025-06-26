@@ -435,7 +435,7 @@
   <string name="deletion_reason_bad_for_my_privacy">Мені стало зрозуміло, що це шкодить моїй приватності</string>
   <string name="deletion_reason_no_longer_want_public">Моя думка змінилась, я не хочу, щоб це було доступно публічно</string>
   <string name="deletion_reason_not_interesting">Перепрошую, це зображення нецікаве для енциклопедії</string>
-  <string name="uploaded_by_myself">Завантажено мною на сайт «%1$s» та використано у {{PLURAL:%2$d|one=одній статті|%2$d статтях}}.</string>
+  <string name="uploaded_by_myself" fuzzy="true">Завантажено мною на сайт «%1$s» та використано у {{PLURAL:%2$d|one=одній статті|%2$d статтях}}.</string>
   <string name="no_uploads">Ласкаво просимо до Вікісховища!\n\nЗавантажте Ваш перший медіафайл, натиснувши кнопку додавання.</string>
   <string name="no_categories_selected">Жодної категорії не вибрано</string>
   <string name="no_categories_selected_warning_desc">Зображення без категорій рідко використовуються. Ви впевнені, що хочете продовжити без вказаних категорій?</string>

@@ -394,7 +394,7 @@
   <string name="deletion_reason_bad_for_my_privacy">Decateime de que prexudica a miña privacidade</string>
   <string name="deletion_reason_no_longer_want_public">Cambiei de idea, non quero que siga sendo visible de forma pública</string>
   <string name="deletion_reason_not_interesting">Desculpas, esta imaxe non é interesante para unha enciclopedia</string>
-  <string name="uploaded_by_myself">Cargada por min o %1$s, usada en %2$d artigo(s).</string>
+  <string name="uploaded_by_myself" fuzzy="true">Cargada por min o %1$s, usada en %2$d artigo(s).</string>
   <string name="no_uploads">Dámoslle a benvida ó Commonsǃ\n\nCargue o seu primeiro ficheiro premendo no botón Engadir.</string>
   <string name="no_categories_selected">Non hai categorías seleccionadas</string>
   <string name="no_categories_selected_warning_desc">As imaxes sen categorías só son utilizables en contadas ocasións. Está seguro de que quere continuar sen seleccionar categorías?</string>

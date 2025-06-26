@@ -436,7 +436,7 @@
   <string name="deletion_reason_bad_for_my_privacy">我認為這會干擾到我的隱私</string>
   <string name="deletion_reason_no_longer_want_public">我改變我的主意，我不想要公開可見</string>
   <string name="deletion_reason_not_interesting">真抱歉，此圖片對於百科全書沒有意義</string>
-  <string name="uploaded_by_myself">我自己在%1$s上上傳，在%2$d篇條目中使用。</string>
+  <string name="uploaded_by_myself" fuzzy="true">我自己在%1$s上上傳，在%2$d篇條目中使用。</string>
   <string name="no_uploads">歡迎來到維基共享資源！\n\n透過觸碰添加按鈕來上傳您的首個多媒體內容。</string>
   <string name="no_categories_selected">未選擇分類</string>
   <string name="no_categories_selected_warning_desc">不帶分類的圖片很難有機會被利用到，您確定您要不選擇分類來繼續嗎？</string>

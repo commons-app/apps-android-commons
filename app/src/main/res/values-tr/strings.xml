@@ -442,7 +442,7 @@
   <string name="deletion_reason_bad_for_my_privacy">Gizliliğimin kötü olduğunu fark ettim</string>
   <string name="deletion_reason_no_longer_want_public">Fikrimi değiştirdim, artık herkese görünür olmasını istemiyorum</string>
   <string name="deletion_reason_not_interesting">Üzgünüz, bu resim bir ansiklopedi için ilginç değil</string>
-  <string name="uploaded_by_myself">Kendi başıma %1$s üzerine yüklendi, %2$d makalede kullanıldı.</string>
+  <string name="uploaded_by_myself" fuzzy="true">Kendi başıma %1$s üzerine yüklendi, %2$d makalede kullanıldı.</string>
   <string name="no_uploads">Commons\'a Hoş Geldiniz!\n\nEkle düğmesine dokunarak ilk medyanızı yükleyin.</string>
   <string name="no_categories_selected">Kategori Seçilmedi</string>
   <string name="no_categories_selected_warning_desc">Kategorisiz görüntüler nadiren kullanılabilir. Kategori seçmeden devam etmek istediğinizden emin misiniz?</string>
