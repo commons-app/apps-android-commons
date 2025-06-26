@@ -68,6 +68,12 @@ public class BookmarkPicturesFragment extends DaggerFragment {
     }
 
     @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
+    }
+
+    @Override
     public void onDestroy() {
         super.onDestroy();
         compositeDisposable.clear();

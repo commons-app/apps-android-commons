@@ -143,6 +143,11 @@ class BookmarkLocationsFragment : DaggerFragment() {
         }
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding = null
+    }
+
     override fun onDestroy() {
         super.onDestroy()
         // Make sure to null out the binding to avoid memory leaks
