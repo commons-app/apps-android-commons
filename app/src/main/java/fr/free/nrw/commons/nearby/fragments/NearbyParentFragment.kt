@@ -123,6 +123,7 @@ import org.osmdroid.views.CustomZoomButtonsController
 import org.osmdroid.views.MapView
 import org.osmdroid.views.overlay.MapEventsOverlay
 import org.osmdroid.views.overlay.Marker
+import org.osmdroid.views.overlay.Overlay
 import org.osmdroid.views.overlay.ScaleBarOverlay
 import org.osmdroid.views.overlay.ScaleDiskOverlay
 import org.osmdroid.views.overlay.TilesOverlay
@@ -266,6 +267,9 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
     private var gridLayoutManager: GridLayoutManager? = null
     private var dataList: MutableList<BottomSheetItem>? = null
     private var bottomSheetAdapter: BottomSheetAdapter? = null
+
+    private var userLocationOverlay: Overlay? = null
+    private var userLocationErrorOverlay: Overlay? = null
 
     private val galleryPickLauncherForResult =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
@@ -2690,52 +2694,64 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
      */
     private fun updateUserLocationOverlays(geoPoint: GeoPoint?, invalidate: Boolean) {
         geoPoint?.let{
-            val overlays = binding?.map?.overlays ?: return@let
-
-            // Multiply accuracy by 2 to get 95% confidence interval
-            val accuracy = getCurrentLocationAccuracy() * 2
-
-            // Create disk overlay
-            val errorOverlay = createCurrentLocationErrorOverlay(this.context, geoPoint,
-                (accuracy).toInt(), UnitOfMeasure.meter)
-
-            // Create current location overlay
-            val locationOverlay = createCurrentLocationOverlay(geoPoint)
-
-            var locationOverlayFound = false
-            var errorOverlayFound = false
-
-            // Find and replace overlays
-            for (i in overlays.indices) {
-                val overlay = overlays[i]
-                if (overlay is ScaleDiskOverlay) {
-                    overlays[i] = errorOverlay
-                    errorOverlayFound = true
-                }
-
-                if (overlay is Marker && overlay.icon.equals(locationOverlay.icon)) {
-                    overlays[i] = locationOverlay
-                    locationOverlayFound = true
-                }
-
-                if (errorOverlayFound && locationOverlayFound) {
-                    break
-                }
-            }
-
-            // If the user location overlays were not found, add them
-            if (!errorOverlayFound) {
-                overlays.add(errorOverlay)
-            }
-
-            if (!locationOverlayFound) {
-                overlays.add(locationOverlay)
-            }
+            updateUserLocationOverlay(geoPoint)
+            updateUserLocationErrorOverlay(geoPoint)
         }
 
         if (invalidate) {
             binding!!.map.invalidate()
         }
+    }
+
+    /**
+     * Updates the user location error overlay by either replacing it with or adding a new one.
+     *
+     * If the user location error overlay is null, the new overlay is added. If the
+     * overlay is not null, it is replaced by the new overlay.
+     *
+     * @param geoPoint The GeoPoint representing the user's location
+     */
+    private fun updateUserLocationErrorOverlay(geoPoint: GeoPoint) {
+            val overlays = binding?.map?.overlays ?: return
+
+            // Multiply accuracy by 2 to get 95% confidence interval
+            val accuracy = getCurrentLocationAccuracy() * 2
+            val overlay = createCurrentLocationErrorOverlay(this.context, geoPoint,
+                (accuracy).toInt(), UnitOfMeasure.meter)
+
+            val index = overlays.indexOf(userLocationErrorOverlay)
+
+            if (userLocationErrorOverlay == null || index == -1) {
+                overlays.add(overlay)
+            } else {
+                overlays[index] = overlay
+            }
+
+            userLocationErrorOverlay = overlay
+    }
+
+    /**
+     * Updates the user location overlay by either replacing it with or adding a new one.
+     *
+     * If the user location overlay is null, the new overlay is added. If the
+     * overlay is not null, it is replaced by the new overlay.
+     *
+     * @param geoPoint The GeoPoint representing the user's location
+     */
+    private fun updateUserLocationOverlay(geoPoint: GeoPoint) {
+            val overlays = binding?.map?.overlays ?: return
+
+            val overlay = createCurrentLocationOverlay(geoPoint)
+
+            val index = overlays.indexOf(userLocationOverlay)
+
+            if (userLocationOverlay == null || index == -1) {
+                overlays.add(overlay)
+            } else {
+                overlays[index] = overlay
+            }
+
+            userLocationOverlay = overlay
     }
 
     /**
