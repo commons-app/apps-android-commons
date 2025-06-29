@@ -107,7 +107,10 @@ class UploadMediaPresenter @Inject constructor(
                     view.showProgress(false)
                     val gpsCoords = uploadItem.gpsCoords
                     val hasImageCoordinates = gpsCoords != null && gpsCoords.imageCoordsExists
-                    if (hasImageCoordinates && place == null) {
+                    
+                    // Only check for nearby places if image has coordinates AND no place was pre-selected
+                    // This prevents the popup from appearing when uploading from Nearby feature
+                    if (hasImageCoordinates && place == null && uploadItem.place == null) {
                         checkNearbyPlaces(uploadItem)
                     }
                 }, { throwable: Throwable? ->
