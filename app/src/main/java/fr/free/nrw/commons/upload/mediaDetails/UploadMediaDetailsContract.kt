@@ -54,7 +54,7 @@ interface UploadMediaDetailsContract {
         fun showBadImagePopup(errorCode: Int, index: Int, uploadItem: UploadItem)
     }
 
-    interface UserActionListener : BasePresenter<View?> {
+    interface UserActionListener : BasePresenter<View> {
         fun setupBasicKvStoreFactory(factory: (String) -> BasicKvStore)
 
         fun receiveImage(
