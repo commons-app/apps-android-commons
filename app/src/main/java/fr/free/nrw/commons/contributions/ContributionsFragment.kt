@@ -743,10 +743,6 @@ class ContributionsFragment : CommonsDaggerSupportFragment(), FragmentManager.On
         }
     }
 
-    override fun showMessage(message: String) {
-        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
-    }
-
     override fun showCampaigns(campaign: Campaign?) {
         if (campaign != null && !isUserProfile) {
             if (binding != null) {
