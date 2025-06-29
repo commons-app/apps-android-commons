@@ -333,7 +333,7 @@
   <string name="deletion_reason_bad_for_my_privacy">Ech hu gemierkt, datt et schlecht fir meng Privatsphär ass</string>
   <string name="deletion_reason_no_longer_want_public">Ech hu meng Meenung geännert, ech wëll net méi, datt et ëffentlech siichtbar ass</string>
   <string name="deletion_reason_not_interesting">Pardon, dëst Bild ass net interessant fir eng Enzyklopedie</string>
-  <string name="uploaded_by_myself" fuzzy="true">Vu mir selwer de(n) %1$s eropgelueden, benotzt a(n) %2$d Artikel(en).</string>
+  <string name="uploaded_by_myself">Vu mir selwer de(n) %1$s eropgelueden, benotzt a mindestens %2$d Artikel(en).</string>
   <string name="no_categories_selected">Keng Kategorien erausgesicht</string>
   <string name="no_categories_selected_warning_desc">Biller ouni Kategorië si meeschtens net benotzbar. Sidd Dir sécher, datt Dir weider maache wëllt ouni eng Kategorie auszewielen?</string>
   <string name="back_button_warning">Eroplueden ofbriechen</string>
@@ -542,4 +542,5 @@
   <string name="vanish_account">Kont opléisen</string>
   <string name="caption">Beschrëftung</string>
   <string name="caption_copied_to_clipboard">Text an den Tëschespäicher kopéiert</string>
+  <string name="nominated_for_deletion_btn">Virgeschloe fir ze läschen</string>
 </resources>

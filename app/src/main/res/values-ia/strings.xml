@@ -407,7 +407,7 @@
   <string name="deletion_reason_bad_for_my_privacy">Io ha comprendite que es mal pro mi vita private</string>
   <string name="deletion_reason_no_longer_want_public">Io ha cambiate de idea, io non vole plus que illo sia publicamente visibile</string>
   <string name="deletion_reason_not_interesting">Iste imagine non es interessante pro un encyclopedia</string>
-  <string name="uploaded_by_myself" fuzzy="true">Incargate per me mesme le %1$s, usate in %2$d articulo(s).</string>
+  <string name="uploaded_by_myself">Incargate per me mesme le %1$s, usate al minus in %2$d articulo(s).</string>
   <string name="no_uploads">Benvenite a Commons!\n\nPro incargar tu prime file multimedial, tocca le button Adder.</string>
   <string name="no_categories_selected">Necun categoria seligite</string>
   <string name="no_categories_selected_warning_desc">Imagines sin categorias es rarmente usabile. Es tu secur de voler continuar sin seliger categorias?</string>

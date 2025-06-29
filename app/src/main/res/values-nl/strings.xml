@@ -435,7 +435,7 @@
   <string name="deletion_reason_bad_for_my_privacy">Ik realiseerde me dat het slecht is voor mijn privacy</string>
   <string name="deletion_reason_no_longer_want_public">Ik ben van gedachten veranderd, ik wil niet dat het nog publiekelijk zichtbaar is</string>
   <string name="deletion_reason_not_interesting">Sorry, deze foto is niet interessant voor een encyclopedie</string>
-  <string name="uploaded_by_myself" fuzzy="true">Geüpload door mijzelf op %1$s, gebruikt in %2$d artikel(en).</string>
+  <string name="uploaded_by_myself">Geüpload door mijzelf op %1$s, gebruikt in ten minste %2$d artikel(en).</string>
   <string name="no_uploads">Welkom bij Commons!\n\nUpload je eerste media door op de knop Toevoegen te klikken.</string>
   <string name="no_categories_selected">Geen categorieën geselecteerd</string>
   <string name="no_categories_selected_warning_desc">Afbeeldingen zonder categorieën zijn zelden bruikbaar. Weet je zeker dat je verder wilt gaan zonder categorieën te selecteren?</string>
@@ -846,4 +846,5 @@
   <string name="show_in_nearby">Weergeven in ‘In de buurt’</string>
   <string name="image_tag_line_created_and_uploaded_by">Gemaakt en geüpload door: %1$s</string>
   <string name="image_tag_line_created_by_and_uploaded_by">Gemaakt door %1$s en geüpload %2$s</string>
+  <string name="nominated_for_deletion_btn">Genomineerd voor verwijdering</string>
 </resources>
