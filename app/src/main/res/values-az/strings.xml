@@ -44,30 +44,63 @@
     <item quantity="other">(%1$d)</item>
   </plurals>
   <string name="starting_uploads">Yükləmələrə Başlanılır</string>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">%d yükləmə emal edilir</item>
+    <item quantity="other">%d yükləmə emal edilir</item>
+  </plurals>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">%d yükləmə</item>
+    <item quantity="other">%d yükləmə</item>
+  </plurals>
+  <plurals name="share_license_summary">
+    <item quantity="one">Bu şəkil %1$s lisenziyası altında yayımlanacaq</item>
+    <item quantity="other">Bu şəkillər %1$s lisenziyası altında yayımlanacaq</item>
+  </plurals>
+  <plurals name="upload_count_title">
+    <item quantity="one">%1$d yükləmə</item>
+    <item quantity="other">%1$d yükləmə</item>
+  </plurals>
+  <plurals name="receiving_shared_content">
+    <item quantity="one">Paylaşılan məzmun qəbul edilir. Şəklin emalı şəklin ölçüsündən və cihazınızdan asılı olaraq bir az vaxt apara bilər</item>
+    <item quantity="other">Paylaşılan məzmun qəbul edilir. Şəkillərin emalı şəklin ölçüsündən və cihazınızdan asılı olaraq bir az vaxt apara bilər</item>
+  </plurals>
+  <string name="navigation_item_explore">Kəşf et</string>
+  <string name="preference_category_appearance">Görünüş</string>
   <string name="preference_category_general">Ümumi</string>
+  <string name="preference_category_feedback">Rəy</string>
   <string name="preference_category_privacy">Məxfilik</string>
   <string name="app_name">Vikianbar</string>
   <string name="menu_settings">Tənzimləmələr</string>
+  <string name="intent_share_upload_label">Vikianbara yüklə</string>
+  <string name="upload_in_progress">Yükləmə davam edir</string>
   <string name="username">İstifadəçi adı</string>
   <string name="password">Parol</string>
+  <string name="login_credential">Commons Beta hesabınıza daxil olun</string>
   <string name="login">Daxil ol</string>
+  <string name="forgot_password">Şifrəni unutmusunuz?</string>
   <string name="signup">Qeydiyyatdan keç</string>
   <string name="logging_in_title">Giriş edilir</string>
   <string name="logging_in_message">Zəhmət olmasa, gözləyin…</string>
+  <string name="updating_caption_title">Başlıqların və təsvirlərin yenilənməsi</string>
+  <string name="updating_caption_message">Zəhmət olmasa, gözləyin…</string>
   <string name="login_success">Uğurlu giriş!</string>
   <string name="login_failed">Giriş baş tutmadı!</string>
   <string name="upload_failed">Fayl tapılmadı. Xahiş edirik başqa bir fayl üzərində cəhd edin.</string>
   <string name="retry_limit_reached">Maksimum təkrar cəhd limitinə çatdınız! Zəhmət olmasa, yükləməni ləğv edin və yenidən cəhd edin</string>
   <string name="unrestricted_battery_mode">Batareya optimallaşdırılması söndürülsün?</string>
-  <string name="authentication_failed" fuzzy="true">Doğrulama alınmadı, xahiş edirəm yenidən daxil olun</string>
+  <string name="suggest_unrestricted_mode">3-dən çox şəklin yüklənməsi batareyanın optimallaşdırılması söndürüldükdə daha yaxşı işləyir. Rahat yükləmə təcrübəsi üçün Vikianbar tətbiqi üçün batareyanın optimallaşdırılmasını parametrlərdən söndürün. \n\nBatareyanın optimallaşdırılmasını söndürmək üçün mümkün addımlar:\n\nAddım 1: Aşağıdakı \"Parametrlər\" düyməsinə toxunun.\n\nAddım 2: \"Optimallaşdırılmayıb\"dan \"Bütün proqramlar\"a keçin.\n\nAddım 3: \"Commons\" və ya \"fr.free.nrw.commons\" axtarın.\n\nAddım 4: \"Optimallaşdırma\"nı seçin.\n\nAddım 5: \'Bitti\' düyməsini basın.</string>
+  <string name="authentication_failed">Doğrulama alınmadı. Zəhmət olmasa, yenidən daxil olun</string>
   <string name="uploading_started">Yükləmə başladı!</string>
+  <string name="uploading_queued">Yükləmə növbədə (məhdud əlaqə rejimi aktivdir)</string>
   <string name="upload_completed_notification_title">%1$s yükləndi!</string>
   <string name="upload_completed_notification_text">Yükləmənizə baxmaq üçün toxunun</string>
-  <string name="upload_progress_notification_title_start" fuzzy="true">%1$s yüklənməsi başlanır</string>
+  <string name="upload_progress_notification_title_start">Fayl yüklənir: %s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s yüklənir</string>
   <string name="upload_progress_notification_title_finishing">%1$s yüklənməsi başa çatdı</string>
-  <string name="upload_failed_notification_title" fuzzy="true">%1$s faylının yüklənməsi alınmadı</string>
+  <string name="upload_failed_notification_title">%1$s yükləmək alınmadı</string>
+  <string name="upload_paused_notification_title">%1$s yüklənməsi dayandırıldı</string>
   <string name="upload_failed_notification_subtitle">Baxmaq üçün toxun</string>
+  <string name="upload_paused_notification_subtitle">Baxmaq üçün toxun</string>
   <string name="title_activity_contributions">Son Yükləmələrim</string>
   <string name="contribution_state_queued">Növbəyə alındı</string>
   <string name="contribution_state_failed">Uğursuz</string>
@@ -77,19 +110,26 @@
   <string name="menu_from_camera">Foto çək</string>
   <string name="menu_nearby">Yaxınlıqdakılar</string>
   <string name="provider_contributions">Yükləmələrim</string>
+  <string name="menu_copy_link">Keçidi kopiyala</string>
+  <string name="menu_link_copied">Link kopyalandı.</string>
   <string name="menu_share">Paylaş</string>
+  <string name="menu_view_file_page">Faylın səhifəsinə bax</string>
   <string name="share_title_hint">Başlıq (Zəruri)</string>
+  <string name="add_caption_toast">Zəhmət olmasa, bu fayl üçün başlıq təqdim et</string>
   <string name="share_description_hint">Açıqlama</string>
-  <string name="login_failed_network" fuzzy="true">Daxil olmaq olmur — şəbəkə xətası</string>
+  <string name="share_caption_hint">Başlıq</string>
+  <string name="login_failed_network">Daxil olmaq mümkün deyil - şəbəkə xətası</string>
   <string name="login_failed_throttled">Çox sayda uğursuz daxil olma. Xahiş edirik bir neçə dəqiqə sonra yenidən cəhd edin.</string>
   <string name="login_failed_blocked">Bağışlayın, bu istifadəçi Vikianbardan bloklanıb</string>
   <string name="login_failed_2fa_needed">Siz iki faktorlu autentifikasiya kodunuzu təqdim etməlisiniz.</string>
-  <string name="login_failed_generic" fuzzy="true">Daxil olma uğursuz oldu</string>
+  <string name="login_failed_email_auth_needed">E-poçt ünvanınıza giriş doğrulama kodu göndərildi. Daxil olmaq üçün kodu daxil edin.</string>
+  <string name="login_failed_generic">Daxil olma uğursuz oldu</string>
   <string name="share_upload_button">Yüklə</string>
   <string name="multiple_share_base_title">Bu dəsti adlandırın</string>
   <string name="provider_modifications">Dəyişikliklər</string>
   <string name="menu_upload_single">Yüklə</string>
   <string name="categories_search_text_hint">Kateqoriyalarda axtar</string>
+  <string name="depicts_search_text_hint">Medianızın təsvir etdiyi elementləri axtarın (dağ, Tac Mahal və s.)</string>
   <string name="menu_save_categories">Yadda saxla</string>
   <string name="refresh_button">Yenilə</string>
   <string name="display_list_button">Siyahı</string>
