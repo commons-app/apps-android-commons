@@ -22,6 +22,7 @@ import fr.free.nrw.commons.utils.UnderlineUtils
 import fr.free.nrw.commons.utils.UrlUtils.handleWebUrl
 import java.util.Collections
 import androidx.core.net.toUri
+import fr.free.nrw.commons.utils.setUnderlinedText
 
 /**
  * Represents about screen of this app
@@ -65,30 +66,12 @@ class AboutActivity : BaseActivity() {
         binding!!.aboutImprove.setHtmlText(improveText)
         binding!!.aboutVersion.text = applicationContext.getVersionNameWithSha()
 
-        UnderlineUtils.setUnderlinedText(
-            binding!!.aboutFaq, R.string.about_faq,
-            applicationContext
-        )
-        UnderlineUtils.setUnderlinedText(
-            binding!!.aboutRateUs, R.string.about_rate_us,
-            applicationContext
-        )
-        UnderlineUtils.setUnderlinedText(
-            binding!!.aboutUserGuide, R.string.user_guide,
-            applicationContext
-        )
-        UnderlineUtils.setUnderlinedText(
-            binding!!.aboutPrivacyPolicy, R.string.about_privacy_policy,
-            applicationContext
-        )
-        UnderlineUtils.setUnderlinedText(
-            binding!!.aboutTranslate, R.string.about_translate,
-            applicationContext
-        )
-        UnderlineUtils.setUnderlinedText(
-            binding!!.aboutCredits, R.string.about_credits,
-            applicationContext
-        )
+        binding!!.aboutFaq.setUnderlinedText(R.string.about_faq)
+        binding!!.aboutRateUs.setUnderlinedText(R.string.about_rate_us)
+        binding!!.aboutUserGuide.setUnderlinedText(R.string.user_guide)
+        binding!!.aboutPrivacyPolicy.setUnderlinedText(R.string.about_privacy_policy)
+        binding!!.aboutTranslate.setUnderlinedText(R.string.about_translate)
+        binding!!.aboutCredits.setUnderlinedText(R.string.about_credits)
 
         /*
           To set listeners, we can create a separate method and use lambda syntax.

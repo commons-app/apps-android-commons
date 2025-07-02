@@ -48,7 +48,7 @@ public class WelcomePagerAdapter extends PagerAdapter {
         if (position == PAGE_LAYOUTS.length - 1) {
             // Add link to more information
             TextView moreInfo = layout.findViewById(R.id.welcomeInfo);
-            UnderlineUtils.setUnderlinedText(moreInfo, R.string.welcome_help_button_text, container.getContext());
+            UnderlineUtils.setUnderlinedText(moreInfo, R.string.welcome_help_button_text);
             moreInfo.setOnClickListener(view -> UrlUtils.handleWebUrl(
                     container.getContext(),
                     Uri.parse("https://commons.wikimedia.org/wiki/Help:Contents")

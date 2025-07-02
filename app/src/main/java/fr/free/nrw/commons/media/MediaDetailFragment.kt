@@ -122,6 +122,7 @@ import fr.free.nrw.commons.utils.UrlUtils
 import fr.free.nrw.commons.utils.ViewUtil
 import fr.free.nrw.commons.utils.ViewUtil.showShortToast
 import fr.free.nrw.commons.utils.ViewUtilWrapper
+import fr.free.nrw.commons.utils.setUnderlinedText
 import fr.free.nrw.commons.wikidata.mwapi.MwQueryPage.Revision
 import io.reactivex.Observable
 import io.reactivex.Single
@@ -319,8 +320,7 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
         _binding = FragmentMediaDetailBinding.inflate(inflater, container, false)
         val view: View = binding.root
 
-
-        UnderlineUtils.setUnderlinedText(binding.seeMore, R.string.nominated_see_more, requireContext())
+        binding.seeMore.setUnderlinedText(R.string.nominated_see_more)
 
         if (isCategoryImage) {
             binding.authorLinearLayout.visibility = View.VISIBLE
