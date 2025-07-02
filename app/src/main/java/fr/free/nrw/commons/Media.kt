@@ -1,8 +1,9 @@
 package fr.free.nrw.commons
 
 import android.os.Parcelable
+import fr.free.nrw.commons.BuildConfig.COMMONS_URL
 import fr.free.nrw.commons.location.LatLng
-import fr.free.nrw.commons.utils.Utils
+import fr.free.nrw.commons.wikidata.model.WikiSite
 import fr.free.nrw.commons.wikidata.model.page.PageTitle
 import kotlinx.parcelize.IgnoredOnParcel
 import kotlinx.parcelize.Parcelize
@@ -174,7 +175,8 @@ class Media constructor(
      * Gets file page title
      * @return New media page title
      */
-    val pageTitle: PageTitle get() = Utils.getPageTitle(filename!!)
+    val pageTitle: PageTitle
+        get() = PageTitle(filename!!, WikiSite(COMMONS_URL))
 
     /**
      * Returns wikicode to use the media file on a MediaWiki site

@@ -16,13 +16,10 @@ import androidx.browser.customtabs.CustomTabColorSchemeParams;
 import androidx.browser.customtabs.CustomTabsIntent;
 import androidx.core.content.ContextCompat;
 
-import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Urls;
 import java.util.Calendar;
 import java.util.Date;
-import fr.free.nrw.commons.wikidata.model.WikiSite;
-import fr.free.nrw.commons.wikidata.model.page.PageTitle;
 
 import java.util.Locale;
 import java.util.regex.Pattern;
@@ -32,10 +29,6 @@ import fr.free.nrw.commons.settings.Prefs;
 import timber.log.Timber;
 
 public class Utils {
-
-    public static PageTitle getPageTitle(@NonNull String title) {
-        return new PageTitle(title, new WikiSite(BuildConfig.COMMONS_URL));
-    }
 
     /**
      * Generates licence name with given ID
@@ -63,8 +56,6 @@ public class Utils {
      * @param license License ID
      * @return Url of license
      */
-
-
     @NonNull
     public static String licenseUrlFor(String license) {
         switch (license) {
