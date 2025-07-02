@@ -16,7 +16,6 @@ import androidx.browser.customtabs.CustomTabsIntent;
 import androidx.core.content.ContextCompat;
 
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.Urls;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -55,20 +54,6 @@ public class Utils {
         }
 
         return title;
-    }
-
-    /**
-     * Launches intent to rate app
-     * @param context
-     */
-    public static void rateApp(Context context) {
-        final String appPackageName = context.getPackageName();
-        try {
-            context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(Urls.PLAY_STORE_PREFIX + appPackageName)));
-        }
-        catch (android.content.ActivityNotFoundException anfe) {
-            handleWebUrl(context, Uri.parse(Urls.PLAY_STORE_URL_PREFIX + appPackageName));
-        }
     }
 
     /**

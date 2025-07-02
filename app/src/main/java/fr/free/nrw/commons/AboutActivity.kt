@@ -1,8 +1,11 @@
 package fr.free.nrw.commons
 
 import android.annotation.SuppressLint
+import android.content.ActivityNotFoundException
 import android.content.Intent
+import android.content.Intent.ACTION_VIEW
 import android.net.Uri
+import android.net.Uri.parse
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -16,7 +19,9 @@ import fr.free.nrw.commons.theme.BaseActivity
 import fr.free.nrw.commons.utils.ConfigUtils.getVersionNameWithSha
 import fr.free.nrw.commons.utils.DialogUtil.showAlertDialog
 import fr.free.nrw.commons.utils.Utils
+import fr.free.nrw.commons.utils.Utils.handleWebUrl
 import java.util.Collections
+import androidx.core.net.toUri
 
 /**
  * Represents about screen of this app
@@ -131,7 +136,16 @@ class AboutActivity : BaseActivity() {
     }
 
     fun launchRatings(view: View?) {
-        Utils.rateApp(this)
+        try {
+            startActivity(
+                Intent(
+                    ACTION_VIEW,
+                    (Urls.PLAY_STORE_PREFIX + packageName).toUri()
+                )
+            )
+        } catch (_: ActivityNotFoundException) {
+            handleWebUrl(this, (Urls.PLAY_STORE_URL_PREFIX + packageName).toUri())
+        }
     }
 
     fun launchCredits(view: View?) {
