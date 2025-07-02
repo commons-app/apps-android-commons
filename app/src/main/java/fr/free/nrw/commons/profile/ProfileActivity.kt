@@ -11,7 +11,6 @@ import android.widget.TextView
 import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
 import fr.free.nrw.commons.R
-import fr.free.nrw.commons.utils.Utils
 import fr.free.nrw.commons.ViewPagerAdapter
 import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.contributions.ContributionsFragment
@@ -20,6 +19,7 @@ import fr.free.nrw.commons.profile.achievements.AchievementsFragment
 import fr.free.nrw.commons.profile.leaderboard.LeaderboardFragment
 import fr.free.nrw.commons.theme.BaseActivity
 import fr.free.nrw.commons.utils.DialogUtil
+import fr.free.nrw.commons.utils.ScreenCaptureUtils
 import java.io.File
 import java.io.FileOutputStream
 import java.util.*
@@ -132,7 +132,7 @@ class ProfileActivity : BaseActivity() {
         return when (item.itemId) {
             R.id.share_app_icon -> {
                 val rootView = window.decorView.findViewById<View>(android.R.id.content)
-                val screenShot = Utils.getScreenShot(rootView)
+                val screenShot = ScreenCaptureUtils.getScreenShot(rootView)
                 if (screenShot == null) {
                     Log.e("ERROR", "ScreenShot is null")
                     return false

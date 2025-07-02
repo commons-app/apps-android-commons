@@ -4,11 +4,9 @@ import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
-import android.view.View;
 import android.widget.TextView;
 
 import androidx.browser.customtabs.CustomTabColorSchemeParams;
@@ -74,24 +72,6 @@ public class Utils {
         // Clear previous browser tasks, so that back/exit buttons work as intended.
         customTabsIntent.intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         customTabsIntent.launchUrl(context, url);
-    }
-
-    /**
-     * To take screenshot of the screen and return it in Bitmap format
-     *
-     * @param view
-     * @return
-     */
-    public static Bitmap getScreenShot(View view) {
-        View screenView = view.getRootView();
-        screenView.setDrawingCacheEnabled(true);
-        Bitmap drawingCache = screenView.getDrawingCache();
-        if (drawingCache != null) {
-            Bitmap bitmap = Bitmap.createBitmap(drawingCache);
-            screenView.setDrawingCacheEnabled(false);
-            return bitmap;
-        }
-        return null;
     }
 
     /*
