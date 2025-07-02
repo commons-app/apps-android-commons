@@ -1,6 +1,6 @@
 package fr.free.nrw.commons.upload.license
 
-import fr.free.nrw.commons.Utils
+import fr.free.nrw.commons.utils.Utils
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.repository.UploadRepository
 import fr.free.nrw.commons.settings.Prefs

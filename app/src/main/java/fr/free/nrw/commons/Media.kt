@@ -2,6 +2,7 @@ package fr.free.nrw.commons
 
 import android.os.Parcelable
 import fr.free.nrw.commons.location.LatLng
+import fr.free.nrw.commons.utils.Utils
 import fr.free.nrw.commons.wikidata.model.page.PageTitle
 import kotlinx.parcelize.IgnoredOnParcel
 import kotlinx.parcelize.Parcelize

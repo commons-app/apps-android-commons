@@ -29,7 +29,7 @@ import androidx.recyclerview.widget.SimpleItemAnimator
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.MediaDataExtractor
 import fr.free.nrw.commons.R
-import fr.free.nrw.commons.Utils
+import fr.free.nrw.commons.utils.Utils
 import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.contributions.WikipediaInstructionsDialogFragment.Companion.newInstance
 import fr.free.nrw.commons.databinding.FragmentContributionsListBinding

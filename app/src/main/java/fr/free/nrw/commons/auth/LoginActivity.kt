@@ -25,7 +25,7 @@ import androidx.core.content.ContextCompat
 import fr.free.nrw.commons.BuildConfig
 import fr.free.nrw.commons.CommonsApplication
 import fr.free.nrw.commons.R
-import fr.free.nrw.commons.Utils
+import fr.free.nrw.commons.utils.Utils
 import fr.free.nrw.commons.auth.login.LoginCallback
 import fr.free.nrw.commons.auth.login.LoginClient
 import fr.free.nrw.commons.auth.login.LoginResult

@@ -7,7 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import androidx.core.content.ContextCompat
 import fr.free.nrw.commons.R
-import fr.free.nrw.commons.Utils
+import fr.free.nrw.commons.utils.Utils
 import fr.free.nrw.commons.campaigns.models.Campaign
 import fr.free.nrw.commons.contributions.MainActivity
 import fr.free.nrw.commons.databinding.LayoutCampaginBinding

@@ -33,9 +33,8 @@ import com.karumi.dexter.MultiplePermissionsReport
 import com.karumi.dexter.PermissionToken
 import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener
-import fr.free.nrw.commons.BuildConfig.MOBILE_META_URL
 import fr.free.nrw.commons.R
-import fr.free.nrw.commons.Utils
+import fr.free.nrw.commons.utils.Utils
 import fr.free.nrw.commons.activity.SingleWebViewActivity
 import fr.free.nrw.commons.campaigns.CampaignView
 import fr.free.nrw.commons.contributions.ContributionController

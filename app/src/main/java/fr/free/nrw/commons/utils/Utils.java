@@ -1,4 +1,4 @@
-package fr.free.nrw.commons;
+package fr.free.nrw.commons.utils;
 
 import android.content.ClipData;
 import android.content.ClipboardManager;
@@ -16,6 +16,9 @@ import androidx.browser.customtabs.CustomTabColorSchemeParams;
 import androidx.browser.customtabs.CustomTabsIntent;
 import androidx.core.content.ContextCompat;
 
+import fr.free.nrw.commons.BuildConfig;
+import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.Urls;
 import java.util.Calendar;
 import java.util.Date;
 import fr.free.nrw.commons.wikidata.model.WikiSite;
@@ -26,7 +29,6 @@ import java.util.regex.Pattern;
 
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.settings.Prefs;
-import fr.free.nrw.commons.utils.ViewUtil;
 import timber.log.Timber;
 
 public class Utils {

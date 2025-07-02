@@ -1,5 +1,6 @@
 package fr.free.nrw.commons
 
+import fr.free.nrw.commons.utils.Utils
 import org.junit.Test
 import org.junit.jupiter.api.Assertions
 import java.util.Calendar

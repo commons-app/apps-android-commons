@@ -1,7 +1,7 @@
 package fr.free.nrw.commons.upload
 
 import android.net.Uri
-import fr.free.nrw.commons.Utils
+import fr.free.nrw.commons.utils.Utils
 import fr.free.nrw.commons.filepicker.MimeTypeMapWrapper.Companion.getExtensionFromMimeType
 import fr.free.nrw.commons.nearby.Place
 import fr.free.nrw.commons.utils.ImageUtils

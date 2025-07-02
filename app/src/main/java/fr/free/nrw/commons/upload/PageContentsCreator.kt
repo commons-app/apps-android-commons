@@ -1,7 +1,7 @@
 package fr.free.nrw.commons.upload
 
 import android.content.Context
-import fr.free.nrw.commons.Utils
+import fr.free.nrw.commons.utils.Utils
 import fr.free.nrw.commons.contributions.Contribution
 import fr.free.nrw.commons.filepicker.UploadableFile.DateTimeWithSource
 import fr.free.nrw.commons.settings.Prefs.Licenses

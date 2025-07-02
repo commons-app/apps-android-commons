@@ -15,6 +15,7 @@ import fr.free.nrw.commons.databinding.ActivityAboutBinding
 import fr.free.nrw.commons.theme.BaseActivity
 import fr.free.nrw.commons.utils.ConfigUtils.getVersionNameWithSha
 import fr.free.nrw.commons.utils.DialogUtil.showAlertDialog
+import fr.free.nrw.commons.utils.Utils
 import java.util.Collections
 
 /**

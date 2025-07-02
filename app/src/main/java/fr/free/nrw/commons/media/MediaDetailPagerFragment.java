@@ -1,6 +1,6 @@
 package fr.free.nrw.commons.media;
 
-import static fr.free.nrw.commons.Utils.handleWebUrl;
+import static fr.free.nrw.commons.utils.Utils.handleWebUrl;
 
 import android.os.Handler;
 import android.os.Looper;
@@ -31,7 +31,7 @@ import com.google.android.material.snackbar.Snackbar;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.Utils;
+import fr.free.nrw.commons.utils.Utils;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.bookmarks.models.Bookmark;
 import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesContentProvider;

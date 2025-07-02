@@ -58,12 +58,11 @@ import fr.free.nrw.commons.CommonsApplication
 import fr.free.nrw.commons.MapController.NearbyPlacesInfo
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.R
-import fr.free.nrw.commons.Utils
+import fr.free.nrw.commons.utils.Utils
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao
 import fr.free.nrw.commons.contributions.ContributionController
 import fr.free.nrw.commons.contributions.MainActivity
 import fr.free.nrw.commons.contributions.MainActivity.ActiveFragment
-import fr.free.nrw.commons.customselector.ui.selector.ImageLoader
 import fr.free.nrw.commons.databinding.FragmentNearbyParentBinding
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment
 import fr.free.nrw.commons.filepicker.FilePicker
@@ -76,7 +75,6 @@ import fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType
 import fr.free.nrw.commons.location.LocationUpdateListener
 import fr.free.nrw.commons.media.MediaClient
 import fr.free.nrw.commons.media.MediaDetailPagerFragment
-import fr.free.nrw.commons.media.MediaDetailPagerFragment.MediaDetailProvider
 import fr.free.nrw.commons.navtab.NavTab
 import fr.free.nrw.commons.nearby.BottomSheetAdapter
 import fr.free.nrw.commons.nearby.BottomSheetAdapter.ItemClickListener
@@ -140,7 +138,6 @@ import java.util.UUID
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 import javax.inject.Named
-import javax.sql.DataSource
 import kotlin.concurrent.Volatile
 
 
