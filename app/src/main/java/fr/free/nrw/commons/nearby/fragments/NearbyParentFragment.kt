@@ -106,6 +106,7 @@ import fr.free.nrw.commons.utils.NetworkUtils.isInternetConnectionEstablished
 import fr.free.nrw.commons.utils.SystemThemeUtils
 import fr.free.nrw.commons.utils.UrlUtils
 import fr.free.nrw.commons.utils.ViewUtil.showLongToast
+import fr.free.nrw.commons.utils.copyToClipboard
 import fr.free.nrw.commons.wikidata.WikidataConstants
 import fr.free.nrw.commons.wikidata.WikidataEditListener
 import fr.free.nrw.commons.wikidata.WikidataEditListener.WikidataP18EditListener
@@ -1017,11 +1018,10 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
      */
     private fun addActionToTitle() {
         binding!!.bottomSheetDetails.title.setOnLongClickListener { view ->
-            ClipboardUtils.copy(
-                "place", binding!!.bottomSheetDetails.title.text.toString(),
-                context
+            requireContext().copyToClipboard(
+                "place", binding!!.bottomSheetDetails.title.text.toString()
             )
-            Toast.makeText(context, fr.free.nrw.commons.R.string.text_copy, Toast.LENGTH_SHORT)
+            Toast.makeText(requireContext(), fr.free.nrw.commons.R.string.text_copy, Toast.LENGTH_SHORT)
                 .show()
             true
         }

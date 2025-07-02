@@ -37,11 +37,11 @@ import fr.free.nrw.commons.di.NetworkingModule
 import fr.free.nrw.commons.filepicker.FilePicker
 import fr.free.nrw.commons.media.MediaClient
 import fr.free.nrw.commons.profile.ProfileActivity
-import fr.free.nrw.commons.utils.ClipboardUtils
 import fr.free.nrw.commons.utils.DialogUtil.showAlertDialog
 import fr.free.nrw.commons.utils.SystemThemeUtils
 import fr.free.nrw.commons.utils.UrlUtils
 import fr.free.nrw.commons.utils.ViewUtil.showShortToast
+import fr.free.nrw.commons.utils.copyToClipboard
 import fr.free.nrw.commons.wikidata.model.WikiSite
 import org.apache.commons.lang3.StringUtils
 import javax.inject.Inject
@@ -528,14 +528,13 @@ class ContributionsListFragment : CommonsDaggerSupportFragment(), ContributionsL
      */
     override fun onConfirmClicked(contribution: Contribution?, copyWikicode: Boolean) {
         if (copyWikicode) {
-            val wikicode = contribution!!.media.wikiCode
-            ClipboardUtils.copy("wikicode", wikicode, context)
+            requireContext().copyToClipboard("wikicode", contribution!!.media.wikiCode)
         }
 
         val url =
             languageWikipediaSite!!.mobileUrl() + "/wiki/" + (contribution!!.wikidataPlace
                 ?.getWikipediaPageTitle())
-        UrlUtils.handleWebUrl(context, Uri.parse(url))
+        UrlUtils.handleWebUrl(requireContext(), Uri.parse(url))
     }
 
     fun getContributionStateAt(position: Int): Int {

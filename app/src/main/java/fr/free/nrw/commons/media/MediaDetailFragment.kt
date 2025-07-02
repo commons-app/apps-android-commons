@@ -122,6 +122,7 @@ import fr.free.nrw.commons.utils.UrlUtils
 import fr.free.nrw.commons.utils.ViewUtil
 import fr.free.nrw.commons.utils.ViewUtil.showShortToast
 import fr.free.nrw.commons.utils.ViewUtilWrapper
+import fr.free.nrw.commons.utils.copyToClipboard
 import fr.free.nrw.commons.utils.setUnderlinedText
 import fr.free.nrw.commons.wikidata.mwapi.MwQueryPage.Revision
 import io.reactivex.Observable
@@ -927,10 +928,10 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
     private fun onCopyWikicodeClicked() {
         val data: String =
             "[[" + media!!.filename + "|thumb|" + media!!.fallbackDescription + "]]"
-        ClipboardUtils.copy("wikiCode", data, context)
+        requireContext().copyToClipboard("wikiCode", data)
         Timber.d("Generated wikidata copy code: %s", data)
 
-        Toast.makeText(context, getString(R.string.wikicode_copied), Toast.LENGTH_SHORT)
+        Toast.makeText(requireContext(), getString(R.string.wikicode_copied), Toast.LENGTH_SHORT)
             .show()
     }
 
