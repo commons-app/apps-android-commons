@@ -77,7 +77,7 @@ import fr.free.nrw.commons.CommonsApplication.Companion.instance
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.MediaDataExtractor
 import fr.free.nrw.commons.R
-import fr.free.nrw.commons.utils.Utils
+import fr.free.nrw.commons.utils.UnderlineUtils
 import fr.free.nrw.commons.actions.ThanksClient
 import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.auth.csrf.InvalidLoginTokenException
@@ -320,7 +320,7 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
         val view: View = binding.root
 
 
-        Utils.setUnderlinedText(binding.seeMore, R.string.nominated_see_more, requireContext())
+        UnderlineUtils.setUnderlinedText(binding.seeMore, R.string.nominated_see_more, requireContext())
 
         if (isCategoryImage) {
             binding.authorLinearLayout.visibility = View.VISIBLE

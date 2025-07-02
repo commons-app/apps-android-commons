@@ -18,7 +18,7 @@ import fr.free.nrw.commons.databinding.ActivityAboutBinding
 import fr.free.nrw.commons.theme.BaseActivity
 import fr.free.nrw.commons.utils.ConfigUtils.getVersionNameWithSha
 import fr.free.nrw.commons.utils.DialogUtil.showAlertDialog
-import fr.free.nrw.commons.utils.Utils
+import fr.free.nrw.commons.utils.UnderlineUtils
 import fr.free.nrw.commons.utils.UrlUtils.handleWebUrl
 import java.util.Collections
 import androidx.core.net.toUri
@@ -65,27 +65,27 @@ class AboutActivity : BaseActivity() {
         binding!!.aboutImprove.setHtmlText(improveText)
         binding!!.aboutVersion.text = applicationContext.getVersionNameWithSha()
 
-        Utils.setUnderlinedText(
+        UnderlineUtils.setUnderlinedText(
             binding!!.aboutFaq, R.string.about_faq,
             applicationContext
         )
-        Utils.setUnderlinedText(
+        UnderlineUtils.setUnderlinedText(
             binding!!.aboutRateUs, R.string.about_rate_us,
             applicationContext
         )
-        Utils.setUnderlinedText(
+        UnderlineUtils.setUnderlinedText(
             binding!!.aboutUserGuide, R.string.user_guide,
             applicationContext
         )
-        Utils.setUnderlinedText(
+        UnderlineUtils.setUnderlinedText(
             binding!!.aboutPrivacyPolicy, R.string.about_privacy_policy,
             applicationContext
         )
-        Utils.setUnderlinedText(
+        UnderlineUtils.setUnderlinedText(
             binding!!.aboutTranslate, R.string.about_translate,
             applicationContext
         )
-        Utils.setUnderlinedText(
+        UnderlineUtils.setUnderlinedText(
             binding!!.aboutCredits, R.string.about_credits,
             applicationContext
         )
