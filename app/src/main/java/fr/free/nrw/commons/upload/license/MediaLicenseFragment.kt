@@ -16,12 +16,12 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.TextView
 import fr.free.nrw.commons.R
-import fr.free.nrw.commons.utils.Utils
 import fr.free.nrw.commons.databinding.FragmentMediaLicenseBinding
 import fr.free.nrw.commons.upload.UploadActivity
 import fr.free.nrw.commons.upload.UploadBaseFragment
 import fr.free.nrw.commons.utils.DialogUtil.showAlertDialog
 import fr.free.nrw.commons.utils.Licenses
+import fr.free.nrw.commons.utils.UrlUtils
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -185,7 +185,7 @@ class MediaLicenseFragment : UploadBaseFragment(), MediaLicenseContract.View {
     }
 
     private fun launchBrowser(hyperLink: String) =
-        Utils.handleWebUrl(context, Uri.parse(hyperLink))
+        UrlUtils.handleWebUrl(context, Uri.parse(hyperLink))
 
     override fun onDestroyView() {
         presenter.onDetachView()

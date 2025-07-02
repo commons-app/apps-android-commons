@@ -34,7 +34,6 @@ import com.karumi.dexter.PermissionToken
 import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import fr.free.nrw.commons.R
-import fr.free.nrw.commons.utils.Utils
 import fr.free.nrw.commons.activity.SingleWebViewActivity
 import fr.free.nrw.commons.campaigns.CampaignView
 import fr.free.nrw.commons.contributions.ContributionController
@@ -51,6 +50,7 @@ import fr.free.nrw.commons.upload.LanguagesAdapter
 import fr.free.nrw.commons.utils.DialogUtil
 import fr.free.nrw.commons.utils.PermissionUtils
 import fr.free.nrw.commons.utils.StringUtil
+import fr.free.nrw.commons.utils.UrlUtils
 import fr.free.nrw.commons.utils.ViewUtil
 import java.util.Locale
 import javax.inject.Inject
@@ -238,7 +238,10 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
         val betaTesterPreference: Preference? = findPreference("becomeBetaTester")
         betaTesterPreference?.setOnPreferenceClickListener {
-            Utils.handleWebUrl(requireActivity(), Uri.parse(getString(R.string.beta_opt_in_link)))
+            UrlUtils.handleWebUrl(
+                requireActivity(),
+                Uri.parse(getString(R.string.beta_opt_in_link))
+            )
             true
         }
 
@@ -295,7 +298,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
             getString(R.string.ok),
             getString(R.string.read_help_link),
             { },
-            { Utils.handleWebUrl(requireContext(), Uri.parse(GET_CONTENT_PICKER_HELP_URL)) },
+            { UrlUtils.handleWebUrl(requireContext(), Uri.parse(GET_CONTENT_PICKER_HELP_URL)) },
             null
         )
     }

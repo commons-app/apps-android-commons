@@ -13,7 +13,7 @@ import androidx.fragment.app.FragmentManager;
 import com.google.android.material.snackbar.Snackbar;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.utils.Utils;
+import fr.free.nrw.commons.utils.UrlUtils;
 import fr.free.nrw.commons.ViewPagerAdapter;
 import fr.free.nrw.commons.bookmarks.items.BookmarkItemsDao;
 import fr.free.nrw.commons.category.CategoryImagesCallback;
@@ -245,7 +245,7 @@ public class WikidataItemDetailsActivity extends BaseActivity implements MediaDe
             case R.id.browser_actions_menu_items:
                 String entityId=getIntent().getStringExtra("entityId");
                 Uri uri = Uri.parse("https://www.wikidata.org/wiki/" + entityId);
-                Utils.handleWebUrl(this, uri);
+                UrlUtils.handleWebUrl(this, uri);
                 return true;
             case R.id.menu_bookmark_current_item:
 

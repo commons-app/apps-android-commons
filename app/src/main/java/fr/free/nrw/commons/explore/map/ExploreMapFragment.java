@@ -37,7 +37,7 @@ import fr.free.nrw.commons.MapController;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.utils.GeoCoordinates;
-import fr.free.nrw.commons.utils.Utils;
+import fr.free.nrw.commons.utils.UrlUtils;
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao;
 import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.databinding.FragmentExploreMapBinding;
@@ -646,7 +646,7 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
         binding.bottomSheetDetailsBinding.commonsButton.setVisibility(
             place.hasCommonsLink() ? View.VISIBLE : View.GONE);
         binding.bottomSheetDetailsBinding.commonsButton.setOnClickListener(
-            view -> Utils.handleWebUrl(getContext(), place.siteLinks.getCommonsLink()));
+            view -> UrlUtils.handleWebUrl(getContext(), place.siteLinks.getCommonsLink()));
 
         int index = 0;
         for (Media media : mediaList) {

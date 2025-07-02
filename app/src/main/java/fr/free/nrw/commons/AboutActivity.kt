@@ -19,7 +19,7 @@ import fr.free.nrw.commons.theme.BaseActivity
 import fr.free.nrw.commons.utils.ConfigUtils.getVersionNameWithSha
 import fr.free.nrw.commons.utils.DialogUtil.showAlertDialog
 import fr.free.nrw.commons.utils.Utils
-import fr.free.nrw.commons.utils.Utils.handleWebUrl
+import fr.free.nrw.commons.utils.UrlUtils.handleWebUrl
 import java.util.Collections
 import androidx.core.net.toUri
 
@@ -116,7 +116,7 @@ class AboutActivity : BaseActivity() {
             intent.setPackage(Urls.FACEBOOK_PACKAGE_NAME)
             startActivity(intent)
         } catch (e: Exception) {
-            Utils.handleWebUrl(this, Uri.parse(Urls.FACEBOOK_WEB_URL))
+            handleWebUrl(this, parse(Urls.FACEBOOK_WEB_URL))
         }
     }
 
@@ -127,12 +127,12 @@ class AboutActivity : BaseActivity() {
             intent.setPackage(Urls.GITHUB_PACKAGE_NAME)
             startActivity(intent)
         } catch (e: Exception) {
-            Utils.handleWebUrl(this, Uri.parse(Urls.GITHUB_REPO_URL))
+            handleWebUrl(this, parse(Urls.GITHUB_REPO_URL))
         }
     }
 
     fun launchWebsite(view: View?) {
-        Utils.handleWebUrl(this, Uri.parse(Urls.WEBSITE_URL))
+        handleWebUrl(this, parse(Urls.WEBSITE_URL))
     }
 
     fun launchRatings(view: View?) {
@@ -149,19 +149,19 @@ class AboutActivity : BaseActivity() {
     }
 
     fun launchCredits(view: View?) {
-        Utils.handleWebUrl(this, Uri.parse(Urls.CREDITS_URL))
+        handleWebUrl(this, parse(Urls.CREDITS_URL))
     }
 
     fun launchUserGuide(view: View?) {
-        Utils.handleWebUrl(this, Uri.parse(Urls.USER_GUIDE_URL))
+        handleWebUrl(this, parse(Urls.USER_GUIDE_URL))
     }
 
     fun launchPrivacyPolicy(view: View?) {
-        Utils.handleWebUrl(this, Uri.parse(BuildConfig.PRIVACY_POLICY_URL))
+        handleWebUrl(this, parse(BuildConfig.PRIVACY_POLICY_URL))
     }
 
     fun launchFrequentlyAskedQuesions(view: View?) {
-        Utils.handleWebUrl(this, Uri.parse(Urls.FAQ_URL))
+        handleWebUrl(this, parse(Urls.FAQ_URL))
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -208,7 +208,7 @@ class AboutActivity : BaseActivity() {
 
         val positiveButtonRunnable = Runnable {
             val langCode = instance.languageLookUpTable!!.getCodes()[spinner.selectedItemPosition]
-            Utils.handleWebUrl(this@AboutActivity, Uri.parse(Urls.TRANSLATE_WIKI_URL + langCode))
+            handleWebUrl(this@AboutActivity, parse(Urls.TRANSLATE_WIKI_URL + langCode))
         }
         showAlertDialog(
             this,

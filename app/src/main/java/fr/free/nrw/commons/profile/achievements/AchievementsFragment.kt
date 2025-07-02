@@ -15,7 +15,6 @@ import com.google.android.material.badge.BadgeDrawable
 import com.google.android.material.badge.BadgeUtils
 import com.google.android.material.badge.ExperimentalBadgeUtils
 import fr.free.nrw.commons.R
-import fr.free.nrw.commons.utils.Utils
 import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.databinding.FragmentAchievementsBinding
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment
@@ -25,6 +24,7 @@ import fr.free.nrw.commons.profile.ProfileActivity
 import fr.free.nrw.commons.profile.achievements.LevelController.LevelInfo.Companion.from
 import fr.free.nrw.commons.utils.ConfigUtils.isBetaFlavour
 import fr.free.nrw.commons.utils.DialogUtil.showAlertDialog
+import fr.free.nrw.commons.utils.UrlUtils
 import fr.free.nrw.commons.utils.ViewUtil.showDismissibleSnackBar
 import fr.free.nrw.commons.utils.ViewUtil.showLongToast
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -524,7 +524,7 @@ class AchievementsFragment : CommonsDaggerSupportFragment(){
             getString(R.string.ok),
             getString(R.string.read_help_link),
             {},
-            { Utils.handleWebUrl(requireContext(), Uri.parse(helpLinkUrl)) },
+            { UrlUtils.handleWebUrl(requireContext(), Uri.parse(helpLinkUrl)) },
             null
         )
     }

@@ -10,13 +10,13 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.PopupMenu
 import fr.free.nrw.commons.R
-import fr.free.nrw.commons.utils.Utils
 import fr.free.nrw.commons.auth.LoginActivity
 import fr.free.nrw.commons.contributions.ContributionController
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.nearby.Place
 import fr.free.nrw.commons.utils.ActivityUtils
 import fr.free.nrw.commons.utils.GeoCoordinates
+import fr.free.nrw.commons.utils.UrlUtils
 import fr.free.nrw.commons.wikidata.WikidataConstants
 import timber.log.Timber
 import javax.inject.Inject
@@ -114,7 +114,7 @@ class CommonPlaceClickActions
         }
 
         private fun openWebView(link: Uri): Boolean {
-            Utils.handleWebUrl(activity, link)
+            UrlUtils.handleWebUrl(activity, link)
             return true
         }
 
