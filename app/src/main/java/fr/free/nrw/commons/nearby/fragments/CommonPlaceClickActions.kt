@@ -16,6 +16,7 @@ import fr.free.nrw.commons.contributions.ContributionController
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.nearby.Place
 import fr.free.nrw.commons.utils.ActivityUtils
+import fr.free.nrw.commons.utils.GeoCoordinates
 import fr.free.nrw.commons.wikidata.WikidataConstants
 import timber.log.Timber
 import javax.inject.Inject
@@ -104,7 +105,7 @@ class CommonPlaceClickActions
 
         fun onDirectionsClicked(): (Place) -> Unit =
             {
-                Utils.handleGeoCoordinates(activity, it.getLocation())
+                GeoCoordinates.handleGeoCoordinates(activity, it.getLocation())
             }
 
         private fun storeSharedPrefs(selectedPlace: Place) {

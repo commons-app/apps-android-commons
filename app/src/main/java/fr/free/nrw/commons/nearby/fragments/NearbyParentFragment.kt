@@ -94,6 +94,7 @@ import fr.free.nrw.commons.nearby.presenter.NearbyParentFragmentPresenter
 import fr.free.nrw.commons.upload.FileUtils
 import fr.free.nrw.commons.utils.DialogUtil.showAlertDialog
 import fr.free.nrw.commons.utils.ExecutorUtils.get
+import fr.free.nrw.commons.utils.GeoCoordinates
 import fr.free.nrw.commons.utils.LayoutUtils.getScreenWidth
 import fr.free.nrw.commons.utils.LayoutUtils.setLayoutHeightAlignedToWidth
 import fr.free.nrw.commons.utils.MapUtils.defaultLatLng
@@ -2851,7 +2852,7 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
 
             R.drawable.ic_directions_black_24dp -> {
                 selectedPlace?.let {
-                    Utils.handleGeoCoordinates(this.context, it.getLocation())
+                    GeoCoordinates.handleGeoCoordinates(this.context, it.getLocation())
                     binding?.map?.zoomLevelDouble ?: 0.0
                 }
             }

@@ -112,6 +112,7 @@ import fr.free.nrw.commons.upload.depicts.DepictsFragment
 import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment
 import fr.free.nrw.commons.utils.DateUtil.getDateStringWithSkeletonPattern
 import fr.free.nrw.commons.utils.DialogUtil.showAlertDialog
+import fr.free.nrw.commons.utils.GeoCoordinates
 import fr.free.nrw.commons.utils.LangCodeUtils.getLocalizedResources
 import fr.free.nrw.commons.utils.PermissionUtils.PERMISSIONS_STORAGE
 import fr.free.nrw.commons.utils.PermissionUtils.checkPermissionsAndPerformAction
@@ -917,7 +918,7 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
 
     private fun onMediaDetailCoordinatesClicked() {
         if (media!!.coordinates != null && activity != null) {
-            Utils.handleGeoCoordinates(activity, media!!.coordinates)
+            GeoCoordinates.handleGeoCoordinates(activity, media!!.coordinates)
         }
     }
 

@@ -36,6 +36,7 @@ import fr.free.nrw.commons.BaseMarker;
 import fr.free.nrw.commons.MapController;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.utils.GeoCoordinates;
 import fr.free.nrw.commons.utils.Utils;
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao;
 import fr.free.nrw.commons.contributions.MainActivity;
@@ -639,7 +640,7 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
      */
     private void passInfoToSheet(final Place place) {
         binding.bottomSheetDetailsBinding.directionsButton.setOnClickListener(
-            view -> Utils.handleGeoCoordinates(getActivity(),
+            view -> GeoCoordinates.handleGeoCoordinates(getActivity(),
                 place.getLocation(), binding.mapView.getZoomLevelDouble()));
 
         binding.bottomSheetDetailsBinding.commonsButton.setVisibility(
