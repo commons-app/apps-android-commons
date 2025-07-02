@@ -98,6 +98,7 @@ import fr.free.nrw.commons.utils.GeoCoordinates
 import fr.free.nrw.commons.utils.LayoutUtils.getScreenWidth
 import fr.free.nrw.commons.utils.LayoutUtils.setLayoutHeightAlignedToWidth
 import fr.free.nrw.commons.utils.MapUtils.defaultLatLng
+import fr.free.nrw.commons.utils.Monuments
 import fr.free.nrw.commons.utils.NearbyFABUtils.addAnchorToBigFABs
 import fr.free.nrw.commons.utils.NearbyFABUtils.addAnchorToSmallFABs
 import fr.free.nrw.commons.utils.NearbyFABUtils.removeAnchorFromFAB
@@ -465,7 +466,7 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
                 }
             }
         _isDarkTheme = systemThemeUtils?.isDeviceInNightMode() == true
-        if (Utils.isMonumentsEnabled(Date())) {
+        if (Monuments.isMonumentsEnabled(Date())) {
             binding?.rlContainerWlmMonthMessage?.visibility = View.VISIBLE
         } else {
             binding?.rlContainerWlmMonthMessage?.visibility = View.GONE
@@ -834,7 +835,7 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
         loadAnimations()
         setBottomSheetCallbacks()
         addActionToTitle()
-        if (!Utils.isMonumentsEnabled(Date())) {
+        if (!Monuments.isMonumentsEnabled(Date())) {
             NearbyFilterState.setWlmSelected(false)
         }
     }
@@ -1578,7 +1579,7 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
                     searchLatLng,
                     false,
                     true,
-                    Utils.isMonumentsEnabled(Date()),
+                    Monuments.isMonumentsEnabled(Date()),
                     customQuery
                 )
             }
@@ -1631,7 +1632,7 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
                     searchLatLng,
                     false,
                     true,
-                    Utils.isMonumentsEnabled(Date()),
+                    Monuments.isMonumentsEnabled(Date()),
                     customQuery
                 )
             }

@@ -30,7 +30,6 @@ import androidx.work.WorkManager
 import fr.free.nrw.commons.MapController.NearbyPlacesInfo
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.R
-import fr.free.nrw.commons.utils.Utils
 import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.campaigns.CampaignView
 import fr.free.nrw.commons.campaigns.CampaignsPresenter
@@ -61,6 +60,7 @@ import fr.free.nrw.commons.utils.ConfigUtils.isBetaFlavour
 import fr.free.nrw.commons.utils.DialogUtil.showAlertDialog
 import fr.free.nrw.commons.utils.LengthUtils.computeBearing
 import fr.free.nrw.commons.utils.LengthUtils.formatDistanceBetween
+import fr.free.nrw.commons.utils.Monuments
 import fr.free.nrw.commons.utils.NetworkUtils.isInternetConnectionEstablished
 import fr.free.nrw.commons.utils.PermissionUtils.hasPermission
 import fr.free.nrw.commons.utils.ViewUtil.showLongToast
@@ -242,8 +242,8 @@ class ContributionsFragment : CommonsDaggerSupportFragment(), FragmentManager.On
     private fun initWLMCampaign() {
         wlmCampaign = Campaign(
             getString(R.string.wlm_campaign_title),
-            getString(R.string.wlm_campaign_description), Utils.getWLMStartDate().toString(),
-            Utils.getWLMEndDate().toString(), NearbyParentFragment.WLM_URL, true
+            getString(R.string.wlm_campaign_description), Monuments.getWLMStartDate().toString(),
+            Monuments.getWLMEndDate().toString(), NearbyParentFragment.WLM_URL, true
         )
     }
 
@@ -729,7 +729,7 @@ class ContributionsFragment : CommonsDaggerSupportFragment(), FragmentManager.On
      * of campaigns on the campaigns card
      */
     private fun fetchCampaigns() {
-        if (Utils.isMonumentsEnabled(Date())) {
+        if (Monuments.isMonumentsEnabled(Date())) {
             if (binding != null) {
                 binding!!.campaignsView.setCampaign(wlmCampaign)
                 binding!!.campaignsView.visibility = View.VISIBLE
