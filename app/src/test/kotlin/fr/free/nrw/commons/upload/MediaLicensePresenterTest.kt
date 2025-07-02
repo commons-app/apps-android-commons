@@ -6,7 +6,7 @@ import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.repository.UploadRepository
 import fr.free.nrw.commons.upload.license.MediaLicenseContract
 import fr.free.nrw.commons.upload.license.MediaLicensePresenter
-import fr.free.nrw.commons.utils.Licenses
+import fr.free.nrw.commons.utils.toLicenseName
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
@@ -51,7 +51,6 @@ class MediaLicensePresenterTest {
         MockitoAnnotations.openMocks(this)
         mediaLicensePresenter.onAttachView(view)
         mockedUtil = Mockito.mockStatic(UnderlineUtils::class.java)
-        `when`(Licenses.licenseNameFor(ArgumentMatchers.anyString())).thenReturn(1)
     }
 
     @After
