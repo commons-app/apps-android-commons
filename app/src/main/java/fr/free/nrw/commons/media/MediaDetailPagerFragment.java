@@ -31,7 +31,7 @@ import com.google.android.material.snackbar.Snackbar;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.utils.Utils;
+import fr.free.nrw.commons.utils.ClipboardUtils;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.bookmarks.models.Bookmark;
 import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesContentProvider;
@@ -216,7 +216,7 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
                 return true;
             case R.id.menu_copy_link:
                 String uri = m.getPageTitle().getCanonicalUri();
-                Utils.copy("shareLink", uri, requireContext());
+                ClipboardUtils.copy("shareLink", uri, requireContext());
                 Timber.d("Copied share link to clipboard: %s", uri);
                 Toast.makeText(requireContext(), getString(R.string.menu_link_copied),
                     Toast.LENGTH_SHORT).show();

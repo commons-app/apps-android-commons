@@ -29,7 +29,6 @@ import androidx.recyclerview.widget.SimpleItemAnimator
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.MediaDataExtractor
 import fr.free.nrw.commons.R
-import fr.free.nrw.commons.utils.Utils
 import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.contributions.WikipediaInstructionsDialogFragment.Companion.newInstance
 import fr.free.nrw.commons.databinding.FragmentContributionsListBinding
@@ -38,6 +37,7 @@ import fr.free.nrw.commons.di.NetworkingModule
 import fr.free.nrw.commons.filepicker.FilePicker
 import fr.free.nrw.commons.media.MediaClient
 import fr.free.nrw.commons.profile.ProfileActivity
+import fr.free.nrw.commons.utils.ClipboardUtils
 import fr.free.nrw.commons.utils.DialogUtil.showAlertDialog
 import fr.free.nrw.commons.utils.SystemThemeUtils
 import fr.free.nrw.commons.utils.UrlUtils
@@ -529,7 +529,7 @@ class ContributionsListFragment : CommonsDaggerSupportFragment(), ContributionsL
     override fun onConfirmClicked(contribution: Contribution?, copyWikicode: Boolean) {
         if (copyWikicode) {
             val wikicode = contribution!!.media.wikiCode
-            Utils.copy("wikicode", wikicode, context)
+            ClipboardUtils.copy("wikicode", wikicode, context)
         }
 
         val url =

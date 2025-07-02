@@ -58,7 +58,6 @@ import fr.free.nrw.commons.CommonsApplication
 import fr.free.nrw.commons.MapController.NearbyPlacesInfo
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.R
-import fr.free.nrw.commons.utils.Utils
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao
 import fr.free.nrw.commons.contributions.ContributionController
 import fr.free.nrw.commons.contributions.MainActivity
@@ -92,6 +91,7 @@ import fr.free.nrw.commons.nearby.contract.NearbyParentFragmentContract
 import fr.free.nrw.commons.nearby.model.BottomSheetItem
 import fr.free.nrw.commons.nearby.presenter.NearbyParentFragmentPresenter
 import fr.free.nrw.commons.upload.FileUtils
+import fr.free.nrw.commons.utils.ClipboardUtils
 import fr.free.nrw.commons.utils.DialogUtil.showAlertDialog
 import fr.free.nrw.commons.utils.ExecutorUtils.get
 import fr.free.nrw.commons.utils.GeoCoordinates
@@ -1017,7 +1017,7 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
      */
     private fun addActionToTitle() {
         binding!!.bottomSheetDetails.title.setOnLongClickListener { view ->
-            Utils.copy(
+            ClipboardUtils.copy(
                 "place", binding!!.bottomSheetDetails.title.text.toString(),
                 context
             )
