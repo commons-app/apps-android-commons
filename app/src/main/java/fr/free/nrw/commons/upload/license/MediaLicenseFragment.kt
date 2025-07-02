@@ -21,6 +21,7 @@ import fr.free.nrw.commons.databinding.FragmentMediaLicenseBinding
 import fr.free.nrw.commons.upload.UploadActivity
 import fr.free.nrw.commons.upload.UploadBaseFragment
 import fr.free.nrw.commons.utils.DialogUtil.showAlertDialog
+import fr.free.nrw.commons.utils.Licenses
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -126,20 +127,20 @@ class MediaLicenseFragment : UploadBaseFragment(), MediaLicenseContract.View {
     }
 
     override fun setSelectedLicense(license: String?) {
-        var position = licenses!!.indexOf(getString(Utils.licenseNameFor(license)))
+        var position = licenses!!.indexOf(getString(Licenses.licenseNameFor(license)))
         // Check if position is valid
         if (position < 0) {
             Timber.d("Invalid position: %d. Using default licenses", position)
             position = licenses!!.size - 1
         } else {
-            Timber.d("Position: %d %s", position, getString(Utils.licenseNameFor(license)))
+            Timber.d("Position: %d %s", position, getString(Licenses.licenseNameFor(license)))
         }
         binding.spinnerLicenseList.setSelection(position)
     }
 
     override fun updateLicenseSummary(selectedLicense: String?, numberOfItems: Int) {
-        val licenseHyperLink = "<a href='" + Utils.licenseUrlFor(selectedLicense) + "'>" +
-                getString(Utils.licenseNameFor(selectedLicense)) + "</a><br>"
+        val licenseHyperLink = "<a href='" + Licenses.licenseUrlFor(selectedLicense) + "'>" +
+                getString(Licenses.licenseNameFor(selectedLicense)) + "</a><br>"
 
         setTextViewHTML(
             binding.tvShareLicenseSummary, resources
