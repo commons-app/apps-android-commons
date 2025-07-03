@@ -94,7 +94,6 @@ import fr.free.nrw.commons.upload.FileUtils
 import fr.free.nrw.commons.utils.ClipboardUtils
 import fr.free.nrw.commons.utils.DialogUtil.showAlertDialog
 import fr.free.nrw.commons.utils.ExecutorUtils.get
-import fr.free.nrw.commons.utils.GeoCoordinates
 import fr.free.nrw.commons.utils.LayoutUtils.getScreenWidth
 import fr.free.nrw.commons.utils.LayoutUtils.setLayoutHeightAlignedToWidth
 import fr.free.nrw.commons.utils.MapUtils.defaultLatLng
@@ -107,6 +106,7 @@ import fr.free.nrw.commons.utils.SystemThemeUtils
 import fr.free.nrw.commons.utils.UrlUtils
 import fr.free.nrw.commons.utils.ViewUtil.showLongToast
 import fr.free.nrw.commons.utils.copyToClipboard
+import fr.free.nrw.commons.utils.handleGeoCoordinates
 import fr.free.nrw.commons.wikidata.WikidataConstants
 import fr.free.nrw.commons.wikidata.WikidataEditListener
 import fr.free.nrw.commons.wikidata.WikidataEditListener.WikidataP18EditListener
@@ -2854,7 +2854,7 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
 
             R.drawable.ic_directions_black_24dp -> {
                 selectedPlace?.let {
-                    GeoCoordinates.handleGeoCoordinates(this.context, it.getLocation())
+                    handleGeoCoordinates(requireContext(), it.getLocation())
                     binding?.map?.zoomLevelDouble ?: 0.0
                 }
             }

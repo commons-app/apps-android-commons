@@ -2,6 +2,7 @@ package fr.free.nrw.commons.explore.map;
 
 import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED;
 import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.LOCATION_SLIGHTLY_CHANGED;
+import static fr.free.nrw.commons.utils.GeoCoordinatesKt.handleGeoCoordinates;
 import static fr.free.nrw.commons.utils.MapUtils.ZOOM_LEVEL;
 
 import android.Manifest.permission;
@@ -36,7 +37,6 @@ import fr.free.nrw.commons.BaseMarker;
 import fr.free.nrw.commons.MapController;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.utils.GeoCoordinates;
 import fr.free.nrw.commons.utils.UrlUtils;
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao;
 import fr.free.nrw.commons.contributions.MainActivity;
@@ -640,7 +640,7 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
      */
     private void passInfoToSheet(final Place place) {
         binding.bottomSheetDetailsBinding.directionsButton.setOnClickListener(
-            view -> GeoCoordinates.handleGeoCoordinates(getActivity(),
+            view -> handleGeoCoordinates(requireActivity(),
                 place.getLocation(), binding.mapView.getZoomLevelDouble()));
 
         binding.bottomSheetDetailsBinding.commonsButton.setVisibility(
