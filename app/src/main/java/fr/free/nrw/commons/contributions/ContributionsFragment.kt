@@ -60,10 +60,12 @@ import fr.free.nrw.commons.utils.ConfigUtils.isBetaFlavour
 import fr.free.nrw.commons.utils.DialogUtil.showAlertDialog
 import fr.free.nrw.commons.utils.LengthUtils.computeBearing
 import fr.free.nrw.commons.utils.LengthUtils.formatDistanceBetween
-import fr.free.nrw.commons.utils.Monuments
 import fr.free.nrw.commons.utils.NetworkUtils.isInternetConnectionEstablished
 import fr.free.nrw.commons.utils.PermissionUtils.hasPermission
 import fr.free.nrw.commons.utils.ViewUtil.showLongToast
+import fr.free.nrw.commons.utils.isMonumentsEnabled
+import fr.free.nrw.commons.utils.wLMEndDate
+import fr.free.nrw.commons.utils.wLMStartDate
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -242,8 +244,8 @@ class ContributionsFragment : CommonsDaggerSupportFragment(), FragmentManager.On
     private fun initWLMCampaign() {
         wlmCampaign = Campaign(
             getString(R.string.wlm_campaign_title),
-            getString(R.string.wlm_campaign_description), Monuments.getWLMStartDate().toString(),
-            Monuments.getWLMEndDate().toString(), NearbyParentFragment.WLM_URL, true
+            getString(R.string.wlm_campaign_description), wLMStartDate,
+            wLMEndDate, NearbyParentFragment.WLM_URL, true
         )
     }
 
@@ -729,7 +731,7 @@ class ContributionsFragment : CommonsDaggerSupportFragment(), FragmentManager.On
      * of campaigns on the campaigns card
      */
     private fun fetchCampaigns() {
-        if (Monuments.isMonumentsEnabled(Date())) {
+        if (isMonumentsEnabled) {
             if (binding != null) {
                 binding!!.campaignsView.setCampaign(wlmCampaign)
                 binding!!.campaignsView.visibility = View.VISIBLE

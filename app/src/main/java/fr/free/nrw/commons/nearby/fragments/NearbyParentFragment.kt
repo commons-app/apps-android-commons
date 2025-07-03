@@ -91,13 +91,11 @@ import fr.free.nrw.commons.nearby.contract.NearbyParentFragmentContract
 import fr.free.nrw.commons.nearby.model.BottomSheetItem
 import fr.free.nrw.commons.nearby.presenter.NearbyParentFragmentPresenter
 import fr.free.nrw.commons.upload.FileUtils
-import fr.free.nrw.commons.utils.ClipboardUtils
 import fr.free.nrw.commons.utils.DialogUtil.showAlertDialog
 import fr.free.nrw.commons.utils.ExecutorUtils.get
 import fr.free.nrw.commons.utils.LayoutUtils.getScreenWidth
 import fr.free.nrw.commons.utils.LayoutUtils.setLayoutHeightAlignedToWidth
 import fr.free.nrw.commons.utils.MapUtils.defaultLatLng
-import fr.free.nrw.commons.utils.Monuments
 import fr.free.nrw.commons.utils.NearbyFABUtils.addAnchorToBigFABs
 import fr.free.nrw.commons.utils.NearbyFABUtils.addAnchorToSmallFABs
 import fr.free.nrw.commons.utils.NearbyFABUtils.removeAnchorFromFAB
@@ -107,6 +105,7 @@ import fr.free.nrw.commons.utils.UrlUtils
 import fr.free.nrw.commons.utils.ViewUtil.showLongToast
 import fr.free.nrw.commons.utils.copyToClipboard
 import fr.free.nrw.commons.utils.handleGeoCoordinates
+import fr.free.nrw.commons.utils.isMonumentsEnabled
 import fr.free.nrw.commons.wikidata.WikidataConstants
 import fr.free.nrw.commons.wikidata.WikidataEditListener
 import fr.free.nrw.commons.wikidata.WikidataEditListener.WikidataP18EditListener
@@ -468,7 +467,7 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
                 }
             }
         _isDarkTheme = systemThemeUtils?.isDeviceInNightMode() == true
-        if (Monuments.isMonumentsEnabled(Date())) {
+        if (isMonumentsEnabled) {
             binding?.rlContainerWlmMonthMessage?.visibility = View.VISIBLE
         } else {
             binding?.rlContainerWlmMonthMessage?.visibility = View.GONE
@@ -837,7 +836,7 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
         loadAnimations()
         setBottomSheetCallbacks()
         addActionToTitle()
-        if (!Monuments.isMonumentsEnabled(Date())) {
+        if (!isMonumentsEnabled) {
             NearbyFilterState.setWlmSelected(false)
         }
     }
@@ -1580,7 +1579,7 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
                     searchLatLng,
                     false,
                     true,
-                    Monuments.isMonumentsEnabled(Date()),
+                    isMonumentsEnabled,
                     customQuery
                 )
             }
@@ -1633,7 +1632,7 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
                     searchLatLng,
                     false,
                     true,
-                    Monuments.isMonumentsEnabled(Date()),
+                    isMonumentsEnabled,
                     customQuery
                 )
             }
