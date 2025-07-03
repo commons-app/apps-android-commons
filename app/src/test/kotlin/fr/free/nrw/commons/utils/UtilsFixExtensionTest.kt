@@ -1,6 +1,5 @@
 package fr.free.nrw.commons.utils
 
-import fr.free.nrw.commons.utils.FilenameUtils.fixExtension
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
