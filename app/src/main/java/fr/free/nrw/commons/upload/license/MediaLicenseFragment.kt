@@ -20,7 +20,7 @@ import fr.free.nrw.commons.databinding.FragmentMediaLicenseBinding
 import fr.free.nrw.commons.upload.UploadActivity
 import fr.free.nrw.commons.upload.UploadBaseFragment
 import fr.free.nrw.commons.utils.DialogUtil.showAlertDialog
-import fr.free.nrw.commons.utils.UrlUtils
+import fr.free.nrw.commons.utils.handleWebUrl
 import fr.free.nrw.commons.utils.toLicenseName
 import fr.free.nrw.commons.utils.toLicenseUrl
 import timber.log.Timber
@@ -186,7 +186,7 @@ class MediaLicenseFragment : UploadBaseFragment(), MediaLicenseContract.View {
     }
 
     private fun launchBrowser(hyperLink: String) =
-        UrlUtils.handleWebUrl(context, Uri.parse(hyperLink))
+        handleWebUrl(requireContext(), Uri.parse(hyperLink))
 
     override fun onDestroyView() {
         presenter.onDetachView()

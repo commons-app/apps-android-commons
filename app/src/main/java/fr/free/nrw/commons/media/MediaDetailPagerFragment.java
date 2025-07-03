@@ -1,6 +1,6 @@
 package fr.free.nrw.commons.media;
 
-import static fr.free.nrw.commons.utils.UrlUtils.handleWebUrl;
+import static fr.free.nrw.commons.utils.UrlUtilsKt.handleWebUrl;
 
 import android.os.Handler;
 import android.os.Looper;

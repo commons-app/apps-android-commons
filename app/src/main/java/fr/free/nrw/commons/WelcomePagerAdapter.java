@@ -1,5 +1,7 @@
 package fr.free.nrw.commons;
 
+import static fr.free.nrw.commons.utils.UrlUtilsKt.handleWebUrl;
+
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.viewpager.widget.PagerAdapter;
-import fr.free.nrw.commons.utils.UrlUtils;
 import fr.free.nrw.commons.utils.UnderlineUtils;
 
 public class WelcomePagerAdapter extends PagerAdapter {
@@ -49,7 +50,7 @@ public class WelcomePagerAdapter extends PagerAdapter {
             // Add link to more information
             TextView moreInfo = layout.findViewById(R.id.welcomeInfo);
             UnderlineUtils.setUnderlinedText(moreInfo, R.string.welcome_help_button_text);
-            moreInfo.setOnClickListener(view -> UrlUtils.handleWebUrl(
+            moreInfo.setOnClickListener(view -> handleWebUrl(
                     container.getContext(),
                     Uri.parse("https://commons.wikimedia.org/wiki/Help:Contents")
             ));

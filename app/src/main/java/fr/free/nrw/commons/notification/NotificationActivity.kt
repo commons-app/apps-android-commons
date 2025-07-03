@@ -20,8 +20,8 @@ import fr.free.nrw.commons.notification.models.Notification
 import fr.free.nrw.commons.notification.models.NotificationType
 import fr.free.nrw.commons.theme.BaseActivity
 import fr.free.nrw.commons.utils.NetworkUtils
-import fr.free.nrw.commons.utils.UrlUtils
 import fr.free.nrw.commons.utils.ViewUtil
+import fr.free.nrw.commons.utils.handleWebUrl
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -197,7 +197,7 @@ class NotificationActivity : BaseActivity() {
 
     private fun handleUrl(url: String?) {
         if (url.isNullOrEmpty()) return
-        UrlUtils.handleWebUrl(this, Uri.parse(url))
+        handleWebUrl(this, Uri.parse(url))
     }
 
     private fun setItems(notificationList: List<Notification>?) {

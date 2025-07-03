@@ -39,9 +39,9 @@ import fr.free.nrw.commons.media.MediaClient
 import fr.free.nrw.commons.profile.ProfileActivity
 import fr.free.nrw.commons.utils.DialogUtil.showAlertDialog
 import fr.free.nrw.commons.utils.SystemThemeUtils
-import fr.free.nrw.commons.utils.UrlUtils
 import fr.free.nrw.commons.utils.ViewUtil.showShortToast
 import fr.free.nrw.commons.utils.copyToClipboard
+import fr.free.nrw.commons.utils.handleWebUrl
 import fr.free.nrw.commons.wikidata.model.WikiSite
 import org.apache.commons.lang3.StringUtils
 import javax.inject.Inject
@@ -534,7 +534,7 @@ class ContributionsListFragment : CommonsDaggerSupportFragment(), ContributionsL
         val url =
             languageWikipediaSite!!.mobileUrl() + "/wiki/" + (contribution!!.wikidataPlace
                 ?.getWikipediaPageTitle())
-        UrlUtils.handleWebUrl(requireContext(), Uri.parse(url))
+        handleWebUrl(requireContext(), Uri.parse(url))
     }
 
     fun getContributionStateAt(position: Int): Int {

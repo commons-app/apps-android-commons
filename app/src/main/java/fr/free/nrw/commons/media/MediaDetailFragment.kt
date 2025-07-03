@@ -116,12 +116,12 @@ import fr.free.nrw.commons.utils.LangCodeUtils.getLocalizedResources
 import fr.free.nrw.commons.utils.PermissionUtils.PERMISSIONS_STORAGE
 import fr.free.nrw.commons.utils.PermissionUtils.checkPermissionsAndPerformAction
 import fr.free.nrw.commons.utils.PermissionUtils.hasPermission
-import fr.free.nrw.commons.utils.UrlUtils
 import fr.free.nrw.commons.utils.ViewUtil
 import fr.free.nrw.commons.utils.ViewUtil.showShortToast
 import fr.free.nrw.commons.utils.ViewUtilWrapper
 import fr.free.nrw.commons.utils.copyToClipboard
 import fr.free.nrw.commons.utils.handleGeoCoordinates
+import fr.free.nrw.commons.utils.handleWebUrl
 import fr.free.nrw.commons.utils.setUnderlinedText
 import fr.free.nrw.commons.wikidata.mwapi.MwQueryPage.Revision
 import io.reactivex.Observable
@@ -912,7 +912,7 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
     private fun onMediaDetailLicenceClicked() {
         val url: String? = media!!.licenseUrl
         if (!StringUtils.isBlank(url) && activity != null) {
-            UrlUtils.handleWebUrl(activity, Uri.parse(url))
+            handleWebUrl(requireContext(), Uri.parse(url))
         } else {
             viewUtil.showShortToast(requireActivity(), getString(R.string.null_url))
         }
@@ -1768,7 +1768,7 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
 
     private fun onSeeMoreClicked() {
         if (binding.nominatedDeletionBanner.visibility == View.VISIBLE && activity != null) {
-            UrlUtils.handleWebUrl(activity, Uri.parse(media!!.pageTitle.mobileUri))
+            handleWebUrl(requireContext(), Uri.parse(media!!.pageTitle.mobileUri))
         }
     }
 

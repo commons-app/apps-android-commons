@@ -5,7 +5,6 @@ import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.content.Intent.ACTION_VIEW
 import android.net.Uri
-import android.net.Uri.parse
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -18,10 +17,9 @@ import fr.free.nrw.commons.databinding.ActivityAboutBinding
 import fr.free.nrw.commons.theme.BaseActivity
 import fr.free.nrw.commons.utils.ConfigUtils.getVersionNameWithSha
 import fr.free.nrw.commons.utils.DialogUtil.showAlertDialog
-import fr.free.nrw.commons.utils.UnderlineUtils
-import fr.free.nrw.commons.utils.UrlUtils.handleWebUrl
 import java.util.Collections
 import androidx.core.net.toUri
+import fr.free.nrw.commons.utils.handleWebUrl
 import fr.free.nrw.commons.utils.setUnderlinedText
 
 /**
@@ -95,27 +93,27 @@ class AboutActivity : BaseActivity() {
     fun launchFacebook(view: View?) {
         val intent: Intent
         try {
-            intent = Intent(Intent.ACTION_VIEW, Uri.parse(Urls.FACEBOOK_APP_URL))
+            intent = Intent(ACTION_VIEW, Urls.FACEBOOK_APP_URL.toUri())
             intent.setPackage(Urls.FACEBOOK_PACKAGE_NAME)
             startActivity(intent)
         } catch (e: Exception) {
-            handleWebUrl(this, parse(Urls.FACEBOOK_WEB_URL))
+            handleWebUrl(this, Urls.FACEBOOK_WEB_URL.toUri())
         }
     }
 
     fun launchGithub(view: View?) {
         val intent: Intent
         try {
-            intent = Intent(Intent.ACTION_VIEW, Uri.parse(Urls.GITHUB_REPO_URL))
+            intent = Intent(ACTION_VIEW, Urls.GITHUB_REPO_URL.toUri())
             intent.setPackage(Urls.GITHUB_PACKAGE_NAME)
             startActivity(intent)
         } catch (e: Exception) {
-            handleWebUrl(this, parse(Urls.GITHUB_REPO_URL))
+            handleWebUrl(this, Urls.GITHUB_REPO_URL.toUri())
         }
     }
 
     fun launchWebsite(view: View?) {
-        handleWebUrl(this, parse(Urls.WEBSITE_URL))
+        handleWebUrl(this, Urls.WEBSITE_URL.toUri())
     }
 
     fun launchRatings(view: View?) {
@@ -132,19 +130,19 @@ class AboutActivity : BaseActivity() {
     }
 
     fun launchCredits(view: View?) {
-        handleWebUrl(this, parse(Urls.CREDITS_URL))
+        handleWebUrl(this, Urls.CREDITS_URL.toUri())
     }
 
     fun launchUserGuide(view: View?) {
-        handleWebUrl(this, parse(Urls.USER_GUIDE_URL))
+        handleWebUrl(this, Urls.USER_GUIDE_URL.toUri())
     }
 
     fun launchPrivacyPolicy(view: View?) {
-        handleWebUrl(this, parse(BuildConfig.PRIVACY_POLICY_URL))
+        handleWebUrl(this, BuildConfig.PRIVACY_POLICY_URL.toUri())
     }
 
     fun launchFrequentlyAskedQuesions(view: View?) {
-        handleWebUrl(this, parse(Urls.FAQ_URL))
+        handleWebUrl(this, Urls.FAQ_URL.toUri())
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -191,7 +189,7 @@ class AboutActivity : BaseActivity() {
 
         val positiveButtonRunnable = Runnable {
             val langCode = instance.languageLookUpTable!!.getCodes()[spinner.selectedItemPosition]
-            handleWebUrl(this@AboutActivity, parse(Urls.TRANSLATE_WIKI_URL + langCode))
+            handleWebUrl(this@AboutActivity, (Urls.TRANSLATE_WIKI_URL + langCode).toUri())
         }
         showAlertDialog(
             this,

@@ -14,8 +14,8 @@ import fr.free.nrw.commons.theme.BaseActivity
 import fr.free.nrw.commons.utils.CommonsDateUtil.getIso8601DateFormatShort
 import fr.free.nrw.commons.utils.DateUtil.getExtraShortDateString
 import fr.free.nrw.commons.utils.SwipableCardView
-import fr.free.nrw.commons.utils.UrlUtils
 import fr.free.nrw.commons.utils.ViewUtil.showLongToast
+import fr.free.nrw.commons.utils.handleWebUrl
 import timber.log.Timber
 import java.text.ParseException
 
@@ -74,7 +74,7 @@ class CampaignView : SwipableCardView {
                 if (it.isWLMCampaign) {
                     ((context) as MainActivity).showNearby()
                 } else {
-                    UrlUtils.handleWebUrl(context, Uri.parse(it.link))
+                    handleWebUrl(context, Uri.parse(it.link))
                 }
             }
         }

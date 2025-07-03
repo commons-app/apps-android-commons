@@ -50,8 +50,8 @@ import fr.free.nrw.commons.upload.LanguagesAdapter
 import fr.free.nrw.commons.utils.DialogUtil
 import fr.free.nrw.commons.utils.PermissionUtils
 import fr.free.nrw.commons.utils.StringUtil
-import fr.free.nrw.commons.utils.UrlUtils
 import fr.free.nrw.commons.utils.ViewUtil
+import fr.free.nrw.commons.utils.handleWebUrl
 import java.util.Locale
 import javax.inject.Inject
 import javax.inject.Named
@@ -238,7 +238,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
         val betaTesterPreference: Preference? = findPreference("becomeBetaTester")
         betaTesterPreference?.setOnPreferenceClickListener {
-            UrlUtils.handleWebUrl(
+            handleWebUrl(
                 requireActivity(),
                 Uri.parse(getString(R.string.beta_opt_in_link))
             )
@@ -298,7 +298,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
             getString(R.string.ok),
             getString(R.string.read_help_link),
             { },
-            { UrlUtils.handleWebUrl(requireContext(), Uri.parse(GET_CONTENT_PICKER_HELP_URL)) },
+            { handleWebUrl(requireContext(), Uri.parse(GET_CONTENT_PICKER_HELP_URL)) },
             null
         )
     }

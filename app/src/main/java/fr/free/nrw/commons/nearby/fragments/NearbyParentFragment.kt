@@ -101,10 +101,10 @@ import fr.free.nrw.commons.utils.NearbyFABUtils.addAnchorToSmallFABs
 import fr.free.nrw.commons.utils.NearbyFABUtils.removeAnchorFromFAB
 import fr.free.nrw.commons.utils.NetworkUtils.isInternetConnectionEstablished
 import fr.free.nrw.commons.utils.SystemThemeUtils
-import fr.free.nrw.commons.utils.UrlUtils
 import fr.free.nrw.commons.utils.ViewUtil.showLongToast
 import fr.free.nrw.commons.utils.copyToClipboard
 import fr.free.nrw.commons.utils.handleGeoCoordinates
+import fr.free.nrw.commons.utils.handleWebUrl
 import fr.free.nrw.commons.utils.isMonumentsEnabled
 import fr.free.nrw.commons.wikidata.WikidataConstants
 import fr.free.nrw.commons.wikidata.WikidataEditListener
@@ -2860,7 +2860,7 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
 
             R.drawable.ic_wikidata_logo_24dp -> {
                 selectedPlace?.siteLinks?.wikidataLink?.let {
-                    UrlUtils.handleWebUrl(this.context, it)
+                    handleWebUrl(requireContext(), it)
                 }
             }
 
@@ -2878,13 +2878,13 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
 
             R.drawable.ic_wikipedia_logo_24dp -> {
                 selectedPlace?.siteLinks?.wikipediaLink?.let {
-                    UrlUtils.handleWebUrl(this.context, it)
+                    handleWebUrl(requireContext(), it)
                 }
             }
 
             R.drawable.ic_commons_icon_vector -> {
                 selectedPlace?.siteLinks?.commonsLink?.let {
-                    UrlUtils.handleWebUrl(this.context, it)
+                    handleWebUrl(requireContext(), it)
                 }
             }
 

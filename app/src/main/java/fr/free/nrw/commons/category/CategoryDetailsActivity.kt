@@ -23,7 +23,7 @@ import fr.free.nrw.commons.explore.categories.parent.ParentCategoriesFragment
 import fr.free.nrw.commons.explore.categories.sub.SubCategoriesFragment
 import fr.free.nrw.commons.media.MediaDetailPagerFragment
 import fr.free.nrw.commons.theme.BaseActivity
-import fr.free.nrw.commons.utils.UrlUtils
+import fr.free.nrw.commons.utils.handleWebUrl
 import fr.free.nrw.commons.wikidata.model.WikiSite
 import fr.free.nrw.commons.wikidata.model.page.PageTitle
 import kotlinx.coroutines.launch
@@ -204,7 +204,7 @@ class CategoryDetailsActivity : BaseActivity(),
             R.id.menu_browser_current_category -> {
                 val title = PageTitle(CATEGORY_PREFIX + categoryName, WikiSite(COMMONS_URL))
 
-                UrlUtils.handleWebUrl(this, Uri.parse(title.canonicalUri))
+                handleWebUrl(this, Uri.parse(title.canonicalUri))
                 true
             }
 

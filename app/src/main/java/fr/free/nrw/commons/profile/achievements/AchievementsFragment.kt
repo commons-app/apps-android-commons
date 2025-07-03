@@ -24,9 +24,9 @@ import fr.free.nrw.commons.profile.ProfileActivity
 import fr.free.nrw.commons.profile.achievements.LevelController.LevelInfo.Companion.from
 import fr.free.nrw.commons.utils.ConfigUtils.isBetaFlavour
 import fr.free.nrw.commons.utils.DialogUtil.showAlertDialog
-import fr.free.nrw.commons.utils.UrlUtils
 import fr.free.nrw.commons.utils.ViewUtil.showDismissibleSnackBar
 import fr.free.nrw.commons.utils.ViewUtil.showLongToast
+import fr.free.nrw.commons.utils.handleWebUrl
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import org.apache.commons.lang3.StringUtils
@@ -524,7 +524,7 @@ class AchievementsFragment : CommonsDaggerSupportFragment(){
             getString(R.string.ok),
             getString(R.string.read_help_link),
             {},
-            { UrlUtils.handleWebUrl(requireContext(), Uri.parse(helpLinkUrl)) },
+            { handleWebUrl(requireContext(), Uri.parse(helpLinkUrl)) },
             null
         )
     }

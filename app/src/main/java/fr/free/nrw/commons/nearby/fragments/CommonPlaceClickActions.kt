@@ -15,8 +15,8 @@ import fr.free.nrw.commons.contributions.ContributionController
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.nearby.Place
 import fr.free.nrw.commons.utils.ActivityUtils
-import fr.free.nrw.commons.utils.UrlUtils
 import fr.free.nrw.commons.utils.handleGeoCoordinates
+import fr.free.nrw.commons.utils.handleWebUrl
 import fr.free.nrw.commons.wikidata.WikidataConstants
 import timber.log.Timber
 import javax.inject.Inject
@@ -114,7 +114,7 @@ class CommonPlaceClickActions
         }
 
         private fun openWebView(link: Uri): Boolean {
-            UrlUtils.handleWebUrl(activity, link)
+            handleWebUrl(activity, link)
             return true
         }
 
