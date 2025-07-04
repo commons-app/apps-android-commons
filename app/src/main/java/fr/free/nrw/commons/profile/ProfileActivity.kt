@@ -11,6 +11,7 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.FileProvider
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.ViewPagerAdapter
@@ -71,7 +72,7 @@ class ProfileActivity : BaseActivity() {
         title = userName
         shouldShowContributions = intent.getBooleanExtra(KEY_SHOULD_SHOW_CONTRIBUTIONS, false)
 
-        viewPagerAdapter = ViewPagerAdapter(supportFragmentManager)
+        viewPagerAdapter = ViewPagerAdapter(this, supportFragmentManager)
         binding.viewPager.adapter = viewPagerAdapter
         binding.tabLayout.setupWithViewPager(binding.viewPager)
         setTabs()
@@ -83,39 +84,23 @@ class ProfileActivity : BaseActivity() {
     }
 
     private fun setTabs() {
-        val fragmentList = mutableListOf<Fragment>()
-        val titleList = mutableListOf<String>()
-
-        // Add Achievements tab
         achievementsFragment = AchievementsFragment().apply {
-            arguments = Bundle().apply {
-                putString(KEY_USERNAME, userName)
-            }
+            arguments = bundleOf(KEY_USERNAME to userName)
         }
-        fragmentList.add(achievementsFragment)
-        titleList.add(resources.getString(R.string.achievements_tab_title).uppercase())
 
-        // Add Leaderboard tab
         leaderboardFragment = LeaderboardFragment().apply {
-            arguments = Bundle().apply {
-                putString(KEY_USERNAME, userName)
-            }
+            arguments = bundleOf(KEY_USERNAME to userName)
         }
-        fragmentList.add(leaderboardFragment)
-        titleList.add(resources.getString(R.string.leaderboard_tab_title).uppercase(Locale.ROOT))
 
-        // Add Contributions tab
         contributionsFragment = ContributionsFragment().apply {
-            arguments = Bundle().apply {
-                putString(KEY_USERNAME, userName)
-            }
-        }
-        contributionsFragment?.let {
-            fragmentList.add(it)
-            titleList.add(getString(R.string.contributions_fragment).uppercase(Locale.ROOT))
+            arguments = bundleOf(KEY_USERNAME to userName)
         }
 
-        viewPagerAdapter.setTabData(fragmentList, titleList)
+        viewPagerAdapter.setTabs(
+            R.string.achievements_tab_title to achievementsFragment,
+            R.string.leaderboard_tab_title to leaderboardFragment,
+            R.string.contributions_fragment to contributionsFragment!!
+        )
         viewPagerAdapter.notifyDataSetChanged()
     }
 

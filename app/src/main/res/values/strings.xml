@@ -617,6 +617,8 @@ Upload your first media by tapping on the add button.</string>
   <string name="title_for_media">MEDIA</string>
   <string name="title_for_child_classes">CHILD CLASSES</string>
   <string name="title_for_parent_classes">PARENT CLASSES</string>
+  <string name="title_for_subcategories">SUBCATEGORIES</string>
+  <string name="title_for_parent_categories">PARENT CATEGORIES</string>
 
   <string name="upload_nearby_place_found_title">Nearby Place Found</string>
   <string name="upload_nearby_place_found_description_plural">Are these pictures of %1$s?</string>

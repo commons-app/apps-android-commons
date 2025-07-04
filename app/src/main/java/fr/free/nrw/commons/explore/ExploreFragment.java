@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.explore;
 
 import static androidx.viewpager.widget.ViewPager.SCROLL_STATE_IDLE;
+import static fr.free.nrw.commons.ViewPagerAdapter.pairOf;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -23,10 +24,12 @@ import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.theme.BaseActivity;
 import fr.free.nrw.commons.utils.ActivityUtils;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 import javax.inject.Inject;
 import javax.inject.Named;
+import kotlin.Pair;
 
 public class ExploreFragment extends CommonsDaggerSupportFragment {
 
@@ -70,7 +73,7 @@ public class ExploreFragment extends CommonsDaggerSupportFragment {
         loadNearbyMapData();
         binding = FragmentExploreBinding.inflate(inflater, container, false);
 
-        viewPagerAdapter = new ViewPagerAdapter(getChildFragmentManager(),
+        viewPagerAdapter = new ViewPagerAdapter(requireContext(), getChildFragmentManager(),
             FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
 
         binding.viewPager.setAdapter(viewPagerAdapter);
@@ -111,9 +114,6 @@ public class ExploreFragment extends CommonsDaggerSupportFragment {
      * Sets the titles in the tabLayout and fragments in the viewPager
      */
     public void setTabs() {
-        List<Fragment> fragmentList = new ArrayList<>();
-        List<String> titleList = new ArrayList<>();
-
         Bundle featuredArguments = new Bundle();
         featuredArguments.putString("categoryName", FEATURED_IMAGES_CATEGORY);
 
@@ -133,19 +133,15 @@ public class ExploreFragment extends CommonsDaggerSupportFragment {
         featuredRootFragment = new ExploreListRootFragment(featuredArguments);
         mobileRootFragment = new ExploreListRootFragment(mobileArguments);
         mapRootFragment = new ExploreMapRootFragment(mapArguments);
-        fragmentList.add(featuredRootFragment);
-        titleList.add(getString(R.string.explore_tab_title_featured).toUpperCase(Locale.ROOT));
-
-        fragmentList.add(mobileRootFragment);
-        titleList.add(getString(R.string.explore_tab_title_mobile).toUpperCase(Locale.ROOT));
-
-        fragmentList.add(mapRootFragment);
-        titleList.add(getString(R.string.explore_tab_title_map).toUpperCase(Locale.ROOT));
 
         ((MainActivity) getActivity()).showTabs();
         ((BaseActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 
-        viewPagerAdapter.setTabData(fragmentList, titleList);
+        viewPagerAdapter.setTabs(
+            pairOf(R.string.explore_tab_title_featured, featuredRootFragment),
+            pairOf(R.string.explore_tab_title_mobile, mobileRootFragment),
+            pairOf(R.string.explore_tab_title_map, mapRootFragment)
+        );
         viewPagerAdapter.notifyDataSetChanged();
     }
 

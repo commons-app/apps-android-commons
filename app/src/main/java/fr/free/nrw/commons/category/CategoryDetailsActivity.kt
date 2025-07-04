@@ -59,7 +59,7 @@ class CategoryDetailsActivity : BaseActivity(),
         val view = binding.root
         setContentView(view)
         supportFragmentManager = getSupportFragmentManager()
-        viewPagerAdapter = ViewPagerAdapter(supportFragmentManager)
+        viewPagerAdapter = ViewPagerAdapter(this, supportFragmentManager)
         binding.viewPager.adapter = viewPagerAdapter
         binding.viewPager.offscreenPageLimit = 2
         binding.tabLayout.setupWithViewPager(binding.viewPager)
@@ -83,8 +83,6 @@ class CategoryDetailsActivity : BaseActivity(),
      * Set the fragments according to the tab selected in the viewPager.
      */
     private fun setTabs() {
-        val fragmentList = mutableListOf<Fragment>()
-        val titleList = mutableListOf<String>()
         categoriesMediaFragment = CategoriesMediaFragment()
         val subCategoryListFragment = SubCategoriesFragment()
         val parentCategoriesFragment = ParentCategoriesFragment()
@@ -99,13 +97,12 @@ class CategoryDetailsActivity : BaseActivity(),
 
             viewModel.onCheckIfBookmarked(categoryName!!)
         }
-        fragmentList.add(categoriesMediaFragment)
-        titleList.add("MEDIA")
-        fragmentList.add(subCategoryListFragment)
-        titleList.add("SUBCATEGORIES")
-        fragmentList.add(parentCategoriesFragment)
-        titleList.add("PARENT CATEGORIES")
-        viewPagerAdapter.setTabData(fragmentList, titleList)
+
+        viewPagerAdapter.setTabs(
+            R.string.title_for_media to categoriesMediaFragment,
+            R.string.title_for_subcategories to subCategoryListFragment,
+            R.string.title_for_parent_categories to parentCategoriesFragment
+        )
         viewPagerAdapter.notifyDataSetChanged()
     }
 
