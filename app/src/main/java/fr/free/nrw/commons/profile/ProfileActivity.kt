@@ -3,16 +3,16 @@ package fr.free.nrw.commons.profile
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
-import android.net.Uri
 import android.os.Bundle
 import android.util.Log
-import android.view.*
+import android.view.Menu
+import android.view.MenuItem
+import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
 import fr.free.nrw.commons.R
-import fr.free.nrw.commons.Utils
 import fr.free.nrw.commons.ViewPagerAdapter
 import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.contributions.ContributionsFragment
@@ -23,7 +23,7 @@ import fr.free.nrw.commons.theme.BaseActivity
 import fr.free.nrw.commons.utils.DialogUtil
 import java.io.File
 import java.io.FileOutputStream
-import java.util.*
+import java.util.Locale
 import javax.inject.Inject
 
 /**
@@ -133,7 +133,7 @@ class ProfileActivity : BaseActivity() {
         return when (item.itemId) {
             R.id.share_app_icon -> {
                 val rootView = window.decorView.findViewById<View>(android.R.id.content)
-                val screenShot = Utils.getScreenShot(rootView)
+                val screenShot = getScreenShot(rootView)
                 if (screenShot == null) {
                     Log.e("ERROR", "ScreenShot is null")
                     return false
@@ -210,6 +210,24 @@ class ProfileActivity : BaseActivity() {
 
     fun setTabLayoutVisibility(isVisible: Boolean) {
         binding.tabLayout.visibility = if (isVisible) View.VISIBLE else View.GONE
+    }
+
+    /**
+     * To take screenshot of the screen and return it in Bitmap format
+     *
+     * @param view
+     * @return
+     */
+    fun getScreenShot(view: View): Bitmap? {
+        val screenView = view.rootView
+        screenView.isDrawingCacheEnabled = true
+        val drawingCache = screenView.drawingCache
+        if (drawingCache != null) {
+            val bitmap = Bitmap.createBitmap(drawingCache)
+            screenView.isDrawingCacheEnabled = false
+            return bitmap
+        }
+        return null
     }
 
     companion object {

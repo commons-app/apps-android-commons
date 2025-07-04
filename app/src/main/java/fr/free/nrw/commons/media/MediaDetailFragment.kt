@@ -77,7 +77,7 @@ import fr.free.nrw.commons.CommonsApplication.Companion.instance
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.MediaDataExtractor
 import fr.free.nrw.commons.R
-import fr.free.nrw.commons.Utils
+import fr.free.nrw.commons.utils.UnderlineUtils
 import fr.free.nrw.commons.actions.ThanksClient
 import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.auth.csrf.InvalidLoginTokenException
@@ -119,6 +119,10 @@ import fr.free.nrw.commons.utils.PermissionUtils.hasPermission
 import fr.free.nrw.commons.utils.ViewUtil
 import fr.free.nrw.commons.utils.ViewUtil.showShortToast
 import fr.free.nrw.commons.utils.ViewUtilWrapper
+import fr.free.nrw.commons.utils.copyToClipboard
+import fr.free.nrw.commons.utils.handleGeoCoordinates
+import fr.free.nrw.commons.utils.handleWebUrl
+import fr.free.nrw.commons.utils.setUnderlinedText
 import fr.free.nrw.commons.wikidata.mwapi.MwQueryPage.Revision
 import io.reactivex.Observable
 import io.reactivex.Single
@@ -316,8 +320,7 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
         _binding = FragmentMediaDetailBinding.inflate(inflater, container, false)
         val view: View = binding.root
 
-
-        Utils.setUnderlinedText(binding.seeMore, R.string.nominated_see_more, requireContext())
+        binding.seeMore.setUnderlinedText(R.string.nominated_see_more)
 
         if (isCategoryImage) {
             binding.authorLinearLayout.visibility = View.VISIBLE
@@ -909,7 +912,7 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
     private fun onMediaDetailLicenceClicked() {
         val url: String? = media!!.licenseUrl
         if (!StringUtils.isBlank(url) && activity != null) {
-            Utils.handleWebUrl(activity, Uri.parse(url))
+            handleWebUrl(requireContext(), Uri.parse(url))
         } else {
             viewUtil.showShortToast(requireActivity(), getString(R.string.null_url))
         }
@@ -917,17 +920,17 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
 
     private fun onMediaDetailCoordinatesClicked() {
         if (media!!.coordinates != null && activity != null) {
-            Utils.handleGeoCoordinates(activity, media!!.coordinates)
+            handleGeoCoordinates(requireContext(), media!!.coordinates!!)
         }
     }
 
     private fun onCopyWikicodeClicked() {
         val data: String =
             "[[" + media!!.filename + "|thumb|" + media!!.fallbackDescription + "]]"
-        Utils.copy("wikiCode", data, context)
+        requireContext().copyToClipboard("wikiCode", data)
         Timber.d("Generated wikidata copy code: %s", data)
 
-        Toast.makeText(context, getString(R.string.wikicode_copied), Toast.LENGTH_SHORT)
+        Toast.makeText(requireContext(), getString(R.string.wikicode_copied), Toast.LENGTH_SHORT)
             .show()
     }
 
@@ -1765,7 +1768,7 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
 
     private fun onSeeMoreClicked() {
         if (binding.nominatedDeletionBanner.visibility == View.VISIBLE && activity != null) {
-            Utils.handleWebUrl(activity, Uri.parse(media!!.pageTitle.mobileUri))
+            handleWebUrl(requireContext(), Uri.parse(media!!.pageTitle.mobileUri))
         }
     }
 
