@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* Aca
 * Vlad5250
 -->
 <resources>
@@ -93,12 +94,12 @@
   <string name="categories_search_text_hint">Pretraži kategorije</string>
   <string name="menu_save_categories">Snimi</string>
   <string name="refresh_button">Preučitaj</string>
-  <string name="display_list_button">Popis</string>
+  <string name="display_list_button">Lista</string>
   <string name="contributions_subtitle_zero">(Još uvijek nema postavljenih datoteka)</string>
   <string name="categories_not_found">Nema kategorija što odgovoraju %1$s</string>
   <string name="categories_skip_explanation">Stavite kategorije slikama kako biste olakšali korisnicima njihovo pronalaženje na Ostavi.\n\nDa biste stavili kategoriju, počnite sa pisanjem njenog imena.</string>
   <string name="categories_activity_title">Kategorije</string>
-  <string name="title_activity_settings">Podešavanja</string>
+  <string name="title_activity_settings">Postavke</string>
   <string name="title_activity_signup">Registracija</string>
   <string name="title_activity_featured_images">Izabrane slike</string>
   <string name="title_activity_category_details">Kategorija</string>
@@ -125,7 +126,7 @@
   <string name="license_name_cc_by_four"> Autorstvo 4.0</string>
   <string name="license_name_cc_by_sa"> Autorstvo-Dijeliti pod istim uslovima 3.0</string>
   <string name="license_name_cc_by"> Autorstvo 3.0</string>
-  <string name="tutorial_1_text">Ostava je udomljač najvećine slika što se koriste na Wikipediji.</string>
+  <string name="tutorial_1_text">Wikimedijina ostava skladišti većinu slika koje se upotrebljavaju na Wikipediji.</string>
   <string name="tutorial_1_subtext">Vaše slike pomažu u obrazovanju ljudi širom svijeta!</string>
   <string name="tutorial_2_text">Postavljajte slike koje su u potpunosti Vaše djelo:</string>
   <string name="tutorial_2_subtext_1">Objekti iz prirode (cvijeće, životinje, planine)</string>
@@ -188,7 +189,7 @@
   <string name="navigation_item_upload">Postavi</string>
   <string name="navigation_item_nearby">U blizini</string>
   <string name="navigation_item_about">O privitku</string>
-  <string name="navigation_item_settings">Podešavanja</string>
+  <string name="navigation_item_settings">Postavke</string>
   <string name="navigation_item_feedback">Povratna informacija</string>
   <string name="navigation_item_logout">Odjava</string>
   <string name="navigation_item_info">Uputstva</string>
@@ -214,7 +215,7 @@
   <string name="skip_login_message" fuzzy="true">U budućnosti ćete se morati prijaviti kako biste postavili slike.</string>
   <string name="login_alert_message">Prijavite se da biste koristili ovu funkciju</string>
   <string name="nearby_location_not_available">„U blizini“ možda ne radi kako treba. Lokacija nije dostupna.</string>
-  <string name="location_permission_rationale_nearby">Potrebna je dozvola za popis liste lokacija u blizini</string>
+  <string name="location_permission_rationale_nearby">Potrebna je dozvola za prikaz liste lokacija u blizini</string>
   <string name="nearby_directions">Upute</string>
   <string name="nearby_wikidata">Wikidata</string>
   <string name="nearby_wikipedia">Wikipedia</string>
@@ -226,7 +227,7 @@
   <string name="no_notifications">Nema obavijesti</string>
   <string name="about_translate">Prevedi</string>
   <string name="about_translate_title">Jezici</string>
-  <string name="about_translate_message">Odaberite za koji jezik bi želeli da pravite prijevode</string>
+  <string name="about_translate_message">Izaberite jezik na koji biste željeli prevoditi</string>
   <string name="about_translate_proceed">Nastavi</string>
   <string name="about_translate_cancel">Otkaži</string>
   <string name="retry">Pokušaj ponovo</string>
@@ -261,6 +262,6 @@
   <string name="reset">Poništi</string>
   <string name="location_message">Podaci o lokaciji pomažu Wikiurednicima da pronađu vašu sliku, čineći je mnogo korisnijom.\nVaše nedavne postavljene slike nemaju lokaciju.\nPredlažemo da uključite lokaciju u postavkama priloga kamere.\nHvala vam na učitavanju!</string>
   <string name="explore_map_details">Detalji</string>
-  <string name="api_level">Razina priložnika</string>
+  <string name="api_level">Nivo API-ja</string>
   <string name="android_version">Android verzija</string>
 </resources>

@@ -1,10 +1,10 @@
 package fr.free.nrw.commons.upload
 
 import android.net.Uri
-import fr.free.nrw.commons.Utils
 import fr.free.nrw.commons.filepicker.MimeTypeMapWrapper.Companion.getExtensionFromMimeType
 import fr.free.nrw.commons.nearby.Place
 import fr.free.nrw.commons.utils.ImageUtils
+import fr.free.nrw.commons.utils.fixExtension
 
 class UploadItem(
     var mediaUri: Uri?,
@@ -32,7 +32,7 @@ class UploadItem(
      * languages have been entered, the first language is used.
      */
     val filename: String
-        get() = Utils.fixExtension(
+        get() = fixExtension(
             uploadMediaDetails[0].captionText,
             getExtensionFromMimeType(mimeType)
         )

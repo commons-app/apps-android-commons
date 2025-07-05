@@ -29,7 +29,6 @@ import androidx.recyclerview.widget.SimpleItemAnimator
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.MediaDataExtractor
 import fr.free.nrw.commons.R
-import fr.free.nrw.commons.Utils
 import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.contributions.WikipediaInstructionsDialogFragment.Companion.newInstance
 import fr.free.nrw.commons.databinding.FragmentContributionsListBinding
@@ -41,6 +40,8 @@ import fr.free.nrw.commons.profile.ProfileActivity
 import fr.free.nrw.commons.utils.DialogUtil.showAlertDialog
 import fr.free.nrw.commons.utils.SystemThemeUtils
 import fr.free.nrw.commons.utils.ViewUtil.showShortToast
+import fr.free.nrw.commons.utils.copyToClipboard
+import fr.free.nrw.commons.utils.handleWebUrl
 import fr.free.nrw.commons.wikidata.model.WikiSite
 import org.apache.commons.lang3.StringUtils
 import javax.inject.Inject
@@ -527,14 +528,13 @@ class ContributionsListFragment : CommonsDaggerSupportFragment(), ContributionsL
      */
     override fun onConfirmClicked(contribution: Contribution?, copyWikicode: Boolean) {
         if (copyWikicode) {
-            val wikicode = contribution!!.media.wikiCode
-            Utils.copy("wikicode", wikicode, context)
+            requireContext().copyToClipboard("wikicode", contribution!!.media.wikiCode)
         }
 
         val url =
             languageWikipediaSite!!.mobileUrl() + "/wiki/" + (contribution!!.wikidataPlace
                 ?.getWikipediaPageTitle())
-        Utils.handleWebUrl(context, Uri.parse(url))
+        handleWebUrl(requireContext(), Uri.parse(url))
     }
 
     fun getContributionStateAt(position: Int): Int {

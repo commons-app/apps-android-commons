@@ -58,12 +58,10 @@ import fr.free.nrw.commons.CommonsApplication
 import fr.free.nrw.commons.MapController.NearbyPlacesInfo
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.R
-import fr.free.nrw.commons.Utils
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao
 import fr.free.nrw.commons.contributions.ContributionController
 import fr.free.nrw.commons.contributions.MainActivity
 import fr.free.nrw.commons.contributions.MainActivity.ActiveFragment
-import fr.free.nrw.commons.customselector.ui.selector.ImageLoader
 import fr.free.nrw.commons.databinding.FragmentNearbyParentBinding
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment
 import fr.free.nrw.commons.filepicker.FilePicker
@@ -76,7 +74,6 @@ import fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType
 import fr.free.nrw.commons.location.LocationUpdateListener
 import fr.free.nrw.commons.media.MediaClient
 import fr.free.nrw.commons.media.MediaDetailPagerFragment
-import fr.free.nrw.commons.media.MediaDetailPagerFragment.MediaDetailProvider
 import fr.free.nrw.commons.navtab.NavTab
 import fr.free.nrw.commons.nearby.BottomSheetAdapter
 import fr.free.nrw.commons.nearby.BottomSheetAdapter.ItemClickListener
@@ -105,6 +102,10 @@ import fr.free.nrw.commons.utils.NearbyFABUtils.removeAnchorFromFAB
 import fr.free.nrw.commons.utils.NetworkUtils.isInternetConnectionEstablished
 import fr.free.nrw.commons.utils.SystemThemeUtils
 import fr.free.nrw.commons.utils.ViewUtil.showLongToast
+import fr.free.nrw.commons.utils.copyToClipboard
+import fr.free.nrw.commons.utils.handleGeoCoordinates
+import fr.free.nrw.commons.utils.handleWebUrl
+import fr.free.nrw.commons.utils.isMonumentsEnabled
 import fr.free.nrw.commons.wikidata.WikidataConstants
 import fr.free.nrw.commons.wikidata.WikidataEditListener
 import fr.free.nrw.commons.wikidata.WikidataEditListener.WikidataP18EditListener
@@ -140,7 +141,6 @@ import java.util.UUID
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 import javax.inject.Named
-import javax.sql.DataSource
 import kotlin.concurrent.Volatile
 
 
@@ -467,7 +467,7 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
                 }
             }
         _isDarkTheme = systemThemeUtils?.isDeviceInNightMode() == true
-        if (Utils.isMonumentsEnabled(Date())) {
+        if (isMonumentsEnabled) {
             binding?.rlContainerWlmMonthMessage?.visibility = View.VISIBLE
         } else {
             binding?.rlContainerWlmMonthMessage?.visibility = View.GONE
@@ -836,7 +836,7 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
         loadAnimations()
         setBottomSheetCallbacks()
         addActionToTitle()
-        if (!Utils.isMonumentsEnabled(Date())) {
+        if (!isMonumentsEnabled) {
             NearbyFilterState.setWlmSelected(false)
         }
     }
@@ -1017,11 +1017,10 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
      */
     private fun addActionToTitle() {
         binding!!.bottomSheetDetails.title.setOnLongClickListener { view ->
-            Utils.copy(
-                "place", binding!!.bottomSheetDetails.title.text.toString(),
-                context
+            requireContext().copyToClipboard(
+                "place", binding!!.bottomSheetDetails.title.text.toString()
             )
-            Toast.makeText(context, fr.free.nrw.commons.R.string.text_copy, Toast.LENGTH_SHORT)
+            Toast.makeText(requireContext(), fr.free.nrw.commons.R.string.text_copy, Toast.LENGTH_SHORT)
                 .show()
             true
         }
@@ -1580,7 +1579,7 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
                     searchLatLng,
                     false,
                     true,
-                    Utils.isMonumentsEnabled(Date()),
+                    isMonumentsEnabled,
                     customQuery
                 )
             }
@@ -1633,7 +1632,7 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
                     searchLatLng,
                     false,
                     true,
-                    Utils.isMonumentsEnabled(Date()),
+                    isMonumentsEnabled,
                     customQuery
                 )
             }
@@ -2854,14 +2853,14 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
 
             R.drawable.ic_directions_black_24dp -> {
                 selectedPlace?.let {
-                    Utils.handleGeoCoordinates(this.context, it.getLocation())
+                    handleGeoCoordinates(requireContext(), it.getLocation())
                     binding?.map?.zoomLevelDouble ?: 0.0
                 }
             }
 
             R.drawable.ic_wikidata_logo_24dp -> {
                 selectedPlace?.siteLinks?.wikidataLink?.let {
-                    Utils.handleWebUrl(this.context, it)
+                    handleWebUrl(requireContext(), it)
                 }
             }
 
@@ -2879,13 +2878,13 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
 
             R.drawable.ic_wikipedia_logo_24dp -> {
                 selectedPlace?.siteLinks?.wikipediaLink?.let {
-                    Utils.handleWebUrl(this.context, it)
+                    handleWebUrl(requireContext(), it)
                 }
             }
 
             R.drawable.ic_commons_icon_vector -> {
                 selectedPlace?.siteLinks?.commonsLink?.let {
-                    Utils.handleWebUrl(this.context, it)
+                    handleWebUrl(requireContext(), it)
                 }
             }
 
