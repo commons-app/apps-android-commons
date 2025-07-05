@@ -1,8 +1,7 @@
 name: "\U0001F41E Bug report"
 description: Create a report to help us improve.
 title: "[Bug]: "
-type: Bug  # Changed from "bug" to "Bug" to match organization-level type
-labels: ["bug"]  # Reverted from ["Type: bug"] to original ["bug"] as requested
+type: Bug  # Retained to categorize the issue as per organization-level type
 body:
   - type: markdown
     attributes:
