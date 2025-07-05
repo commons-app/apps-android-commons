@@ -1,11 +1,12 @@
 package fr.free.nrw.commons.upload
 
 import com.nhaarman.mockitokotlin2.verify
-import fr.free.nrw.commons.Utils
+import fr.free.nrw.commons.utils.UnderlineUtils
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.repository.UploadRepository
 import fr.free.nrw.commons.upload.license.MediaLicenseContract
 import fr.free.nrw.commons.upload.license.MediaLicensePresenter
+import fr.free.nrw.commons.utils.toLicenseName
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
@@ -25,7 +26,7 @@ import org.robolectric.RobolectricTestRunner
  */
 
 @RunWith(RobolectricTestRunner::class)
-@PrepareForTest(Utils::class)
+@PrepareForTest(UnderlineUtils::class)
 class MediaLicensePresenterTest {
     @Mock
     internal lateinit var repository: UploadRepository
@@ -39,7 +40,7 @@ class MediaLicensePresenterTest {
     @InjectMocks
     lateinit var mediaLicensePresenter: MediaLicensePresenter
 
-    private lateinit var mockedUtil: MockedStatic<Utils>
+    private lateinit var mockedUtil: MockedStatic<UnderlineUtils>
 
     /**
      * initial setup test environemnt
@@ -49,8 +50,7 @@ class MediaLicensePresenterTest {
     fun setUp() {
         MockitoAnnotations.openMocks(this)
         mediaLicensePresenter.onAttachView(view)
-        mockedUtil = Mockito.mockStatic(Utils::class.java)
-        `when`(Utils.licenseNameFor(ArgumentMatchers.anyString())).thenReturn(1)
+        mockedUtil = Mockito.mockStatic(UnderlineUtils::class.java)
     }
 
     @After

@@ -1,5 +1,7 @@
 package fr.free.nrw.commons.explore.depictions;
 
+import static fr.free.nrw.commons.utils.UrlUtilsKt.handleWebUrl;
+
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -8,16 +10,11 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.FrameLayout;
-import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.viewpager.widget.ViewPager;
 import com.google.android.material.snackbar.Snackbar;
-import com.google.android.material.tabs.TabLayout;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.ViewPagerAdapter;
 import fr.free.nrw.commons.bookmarks.items.BookmarkItemsDao;
 import fr.free.nrw.commons.category.CategoryImagesCallback;
@@ -249,7 +246,7 @@ public class WikidataItemDetailsActivity extends BaseActivity implements MediaDe
             case R.id.browser_actions_menu_items:
                 String entityId=getIntent().getStringExtra("entityId");
                 Uri uri = Uri.parse("https://www.wikidata.org/wiki/" + entityId);
-                Utils.handleWebUrl(this, uri);
+                handleWebUrl(this, uri);
                 return true;
             case R.id.menu_bookmark_current_item:
 

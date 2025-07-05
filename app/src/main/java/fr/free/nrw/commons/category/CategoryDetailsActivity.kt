@@ -13,9 +13,9 @@ import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import fr.free.nrw.commons.BuildConfig.COMMONS_URL
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.R
-import fr.free.nrw.commons.Utils
 import fr.free.nrw.commons.ViewPagerAdapter
 import fr.free.nrw.commons.databinding.ActivityCategoryDetailsBinding
 import fr.free.nrw.commons.explore.categories.media.CategoriesMediaFragment
@@ -23,6 +23,9 @@ import fr.free.nrw.commons.explore.categories.parent.ParentCategoriesFragment
 import fr.free.nrw.commons.explore.categories.sub.SubCategoriesFragment
 import fr.free.nrw.commons.media.MediaDetailPagerFragment
 import fr.free.nrw.commons.theme.BaseActivity
+import fr.free.nrw.commons.utils.handleWebUrl
+import fr.free.nrw.commons.wikidata.model.WikiSite
+import fr.free.nrw.commons.wikidata.model.page.PageTitle
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -199,8 +202,9 @@ class CategoryDetailsActivity : BaseActivity(),
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.menu_browser_current_category -> {
-                val title = Utils.getPageTitle(CATEGORY_PREFIX + categoryName)
-                Utils.handleWebUrl(this, Uri.parse(title.canonicalUri))
+                val title = PageTitle(CATEGORY_PREFIX + categoryName, WikiSite(COMMONS_URL))
+
+                handleWebUrl(this, Uri.parse(title.canonicalUri))
                 true
             }
 

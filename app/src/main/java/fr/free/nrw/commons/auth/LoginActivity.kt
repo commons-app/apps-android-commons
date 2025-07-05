@@ -25,7 +25,6 @@ import androidx.core.content.ContextCompat
 import fr.free.nrw.commons.BuildConfig
 import fr.free.nrw.commons.CommonsApplication
 import fr.free.nrw.commons.R
-import fr.free.nrw.commons.Utils
 import fr.free.nrw.commons.auth.login.LoginCallback
 import fr.free.nrw.commons.auth.login.LoginClient
 import fr.free.nrw.commons.auth.login.LoginResult
@@ -38,6 +37,7 @@ import fr.free.nrw.commons.utils.ActivityUtils.startActivityWithFlags
 import fr.free.nrw.commons.utils.ConfigUtils.isBetaFlavour
 import fr.free.nrw.commons.utils.SystemThemeUtils
 import fr.free.nrw.commons.utils.ViewUtil.hideKeyboard
+import fr.free.nrw.commons.utils.handleWebUrl
 import io.reactivex.disposables.CompositeDisposable
 import timber.log.Timber
 import java.util.Locale
@@ -263,10 +263,10 @@ class LoginActivity : AccountAuthenticatorActivity() {
     }
 
     private fun forgotPassword() =
-        Utils.handleWebUrl(this, Uri.parse(BuildConfig.FORGOT_PASSWORD_URL))
+        handleWebUrl(this, Uri.parse(BuildConfig.FORGOT_PASSWORD_URL))
 
     private fun onPrivacyPolicyClicked() =
-        Utils.handleWebUrl(this, Uri.parse(BuildConfig.PRIVACY_POLICY_URL))
+        handleWebUrl(this, Uri.parse(BuildConfig.PRIVACY_POLICY_URL))
 
     private fun signUp() =
         startActivity(Intent(this, SignupActivity::class.java))
