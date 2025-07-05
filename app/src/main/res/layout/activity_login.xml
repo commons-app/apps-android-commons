@@ -155,7 +155,10 @@
               android:id="@+id/login_two_factor"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
-              android:imeOptions="flagNoExtractUi"
+              android:imeOptions="actionGo"
+              android:inputType="number"
+              android:singleLine="true"
+              android:maxLines="1"
               android:visibility="gone"
               tools:visibility="visible" />
 
