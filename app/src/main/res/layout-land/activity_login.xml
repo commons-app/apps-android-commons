@@ -148,9 +148,10 @@
                         android:id="@+id/login_two_factor"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="@string/_2fa_code"
-                        android:imeOptions="flagNoExtractUi"
+                        android:imeOptions="actionDone"
                         android:inputType="number"
+                        android:singleLine="true"
+                        android:maxLines="1"
                         android:visibility="gone"
                         tools:visibility="visible" />
 
