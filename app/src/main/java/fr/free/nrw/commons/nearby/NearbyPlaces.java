@@ -1,10 +1,14 @@
 package fr.free.nrw.commons.nearby;
 
+import static java.util.Collections.emptyList;
+
 import android.location.Location;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import fr.free.nrw.commons.nearby.model.NearbyQueryParams;
+import fr.free.nrw.commons.nearby.model.NearbyQueryParams.Radial;
+import fr.free.nrw.commons.nearby.model.NearbyQueryParams.Rectangular;
 import java.io.IOException;
-import java.util.Collections;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -46,13 +50,14 @@ public class NearbyPlaces {
      * @param customQuery
      * @return list of places obtained
      */
+    @NonNull
     List<Place> radiusExpander(final LatLng currentLatLng, final String lang,
         final boolean returnClosestResult, @Nullable final String customQuery) throws Exception {
 
         final int minResults;
         final double maxRadius;
 
-        List<Place> places = Collections.emptyList();
+        List<Place> places = emptyList();
 
         // If returnClosestResult is true, then this means that we are trying to get closest point
         // to use in cardView in Contributions fragment
@@ -113,6 +118,7 @@ public class NearbyPlaces {
      * @return A list of places obtained from the Wikidata query.
      * @throws Exception If an error occurs during the retrieval process.
      */
+    @NonNull
     public List<Place> getFromWikidataQuery(
         final fr.free.nrw.commons.location.LatLng centerPoint,
         final fr.free.nrw.commons.location.LatLng screenTopRight,
@@ -120,11 +126,11 @@ public class NearbyPlaces {
         final boolean shouldQueryForMonuments,
         @Nullable final String customQuery) throws Exception {
         if (customQuery != null) {
-            return okHttpJsonApiClient
-                .getNearbyPlaces(
-                    new NearbyQueryParams.Rectangular(screenTopRight, screenBottomLeft), lang,
+            final List<Place> nearbyPlaces = okHttpJsonApiClient.getNearbyPlaces(
+                    new Rectangular(screenTopRight, screenBottomLeft), lang,
                     shouldQueryForMonuments,
                     customQuery);
+            return nearbyPlaces != null ? nearbyPlaces : emptyList();
         }
 
         final int lowerLimit = 1000, upperLimit = 1500;
@@ -141,9 +147,10 @@ public class NearbyPlaces {
             final int itemCount = okHttpJsonApiClient.getNearbyItemCount(
                 new NearbyQueryParams.Rectangular(screenTopRight, screenBottomLeft));
             if (itemCount < upperLimit) {
-                return okHttpJsonApiClient.getNearbyPlaces(
-                    new NearbyQueryParams.Rectangular(screenTopRight, screenBottomLeft), lang,
+                final List<Place> nearbyPlaces = okHttpJsonApiClient.getNearbyPlaces(
+                    new Rectangular(screenTopRight, screenBottomLeft), lang,
                     shouldQueryForMonuments, null);
+                return nearbyPlaces != null ? nearbyPlaces : emptyList();
             }
         }
 
@@ -175,9 +182,10 @@ public class NearbyPlaces {
                 maxRadius = targetRadius - 1;
             }
         }
-        return okHttpJsonApiClient.getNearbyPlaces(
-            new NearbyQueryParams.Radial(centerPoint, targetRadius / 100f), lang, shouldQueryForMonuments,
+        final List<Place> nearbyPlaces = okHttpJsonApiClient.getNearbyPlaces(
+            new Radial(centerPoint, targetRadius / 100f), lang, shouldQueryForMonuments,
             null);
+        return nearbyPlaces != null ? nearbyPlaces : emptyList();
     }
 
     /**
