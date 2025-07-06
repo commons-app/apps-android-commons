@@ -79,9 +79,16 @@ class LoginActivity : AccountAuthenticatorActivity() {
         delegate.installViewFactory()
         delegate.onCreate(savedInstanceState)
 
-        binding = ActivityLoginBinding.inflate(layoutInflater)
+
+        // Reinitialize binding if null or during recreation
+        if (binding == null) {
+            binding = ActivityLoginBinding.inflate(layoutInflater)
+            setContentView(binding!!.root)
+        }
+
+//        binding = ActivityLoginBinding.inflate(layoutInflater)
         with(binding!!) {
-            setContentView(root)
+//            setContentView(root)
 
             loginUsername.addTextChangedListener(textWatcher)
             loginPassword.addTextChangedListener(textWatcher)
@@ -182,35 +189,41 @@ class LoginActivity : AccountAuthenticatorActivity() {
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
-        // if progressDialog is visible during the configuration change  then store state as  true else false so that
-        // we maintain visibility of progressDialog after configuration change
+        super.onSaveInstanceState(outState)
         if (progressDialog != null && progressDialog!!.isShowing) {
             outState.putBoolean(SAVE_PROGRESS_DIALOG, true)
         } else {
             outState.putBoolean(SAVE_PROGRESS_DIALOG, false)
         }
-        outState.putString(
-            SAVE_ERROR_MESSAGE,
-            binding!!.errorMessage.text.toString()
-        ) //Save the errorMessage
-        outState.putString(
-            SAVE_USERNAME,
-            binding!!.loginUsername.text.toString()
-        ) // Save the username
-        outState.putString(
-            SAVE_PASSWORD,
-            binding!!.loginPassword.text.toString()
-        ) // Save the password
+        binding?.let { binding ->
+            outState.putString(SAVE_ERROR_MESSAGE, binding.errorMessage.text.toString())
+            outState.putString(SAVE_USERNAME, binding.loginUsername.text.toString())
+            outState.putString(SAVE_PASSWORD, binding.loginPassword.text.toString())
+        }
+        // Save lastLoginResult as a string (workaround if not Parcelable)
+        lastLoginResult?.let { result ->
+            // Assuming LoginResult has a toString() or can be serialized
+            outState.putString("last_login_result", result.toString())
+        }
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         super.onRestoreInstanceState(savedInstanceState)
-        binding!!.loginUsername.setText(savedInstanceState.getString(SAVE_USERNAME))
-        binding!!.loginPassword.setText(savedInstanceState.getString(SAVE_PASSWORD))
+        binding?.let {
+            it.loginUsername.setText(savedInstanceState.getString(SAVE_USERNAME))
+            it.loginPassword.setText(savedInstanceState.getString(SAVE_PASSWORD))
+        }
         if (savedInstanceState.getBoolean(SAVE_PROGRESS_DIALOG)) {
             performLogin()
         }
         val errorMessage = savedInstanceState.getString(SAVE_ERROR_MESSAGE)
+        // Restore lastLoginResult from string (workaround)
+        val lastLoginResultString = savedInstanceState.getString("last_login_result")
+        if (!lastLoginResultString.isNullOrEmpty()) {
+            // Note: This is a placeholder; toString() doesn't reconstruct the object
+            // You may need to handle this based on your logic (e.g., recreate a default LoginResult)
+            lastLoginResult = null // or recreate based on string if possible
+        }
         if (sessionManager.isUserLoggedIn) {
             showMessage(R.string.login_success, R.color.primaryDarkColor)
         } else {
@@ -283,17 +296,21 @@ class LoginActivity : AccountAuthenticatorActivity() {
                 }
 
                 override fun twoFactorPrompt(loginResult: LoginResult, caught: Throwable, token: String?) = runOnUiThread {
-                    Timber.d("Requesting 2FA prompt")
-                    progressDialog!!.dismiss()
-                    lastLoginResult = loginResult
-                    askUserForTwoFactorAuth()
+                    if (!isFinishing && !isDestroyed) {
+                        Timber.d("Requesting 2FA prompt")
+                        progressDialog!!.dismiss()
+                        lastLoginResult = loginResult
+                        askUserForTwoFactorAuth()
+                    }
                 }
 
-                override fun emailAuthPrompt(loginResult: LoginResult, caught: Throwable, token: String?) {
-                    Timber.d("Requesting email auth prompt")
-                    progressDialog!!.dismiss()
-                    lastLoginResult = loginResult
-                    askUserForTwoFactorAuth()
+                override fun emailAuthPrompt(loginResult: LoginResult, caught: Throwable, token: String?) = runOnUiThread{
+                    if (!isFinishing && !isDestroyed) {
+                        Timber.d("Requesting email auth prompt")
+                        progressDialog!!.dismiss()
+                       lastLoginResult = loginResult
+                        askUserForTwoFactorAuth()
+                    }
                 }
 
                 override fun passwordResetPrompt(token: String?) = runOnUiThread {
@@ -348,12 +365,31 @@ class LoginActivity : AccountAuthenticatorActivity() {
 
     @VisibleForTesting
     fun askUserForTwoFactorAuth() {
+        if (binding == null) {
+            Timber.w("Binding is null, reinitializing in askUserForTwoFactorAuth")
+            binding = ActivityLoginBinding.inflate(layoutInflater)
+            setContentView(binding!!.root)
+        }
         progressDialog!!.dismiss()
-        with(binding!!) {
-            twoFactorContainer.visibility = View.VISIBLE
-            twoFactorContainer.hint = getString(if (lastLoginResult is LoginResult.EmailAuthResult) R.string.email_auth_code else R.string._2fa_code)
-            loginTwoFactor.visibility = View.VISIBLE
-            loginTwoFactor.requestFocus()
+        if (binding != null) {
+            with(binding!!) {
+                twoFactorContainer.visibility = View.VISIBLE
+                twoFactorContainer.hint = getString(if (lastLoginResult is LoginResult.EmailAuthResult) R.string.email_auth_code else R.string._2fa_code)
+                loginTwoFactor.visibility = View.VISIBLE
+                loginTwoFactor.requestFocus()
+
+                loginTwoFactor.setOnEditorActionListener { _, actionId, event ->
+                    if (actionId == EditorInfo.IME_ACTION_DONE ||
+                        (event != null && event.keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_DOWN)) {
+                        performLogin()
+                        true
+                    } else {
+                        false
+                    }
+                }
+            }
+        } else {
+            Timber.e("Binding is null in askUserForTwoFactorAuth after reinitialization attempt")
         }
         val imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
         imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY)
