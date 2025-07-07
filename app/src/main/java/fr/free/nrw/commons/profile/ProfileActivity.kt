@@ -107,6 +107,10 @@ class ProfileActivity : BaseActivity() {
     public override fun onDestroy() {
         super.onDestroy()
         compositeDisposable.clear()
+        // Nullify fragment references to avoid memory leaks
+        if (::achievementsFragment.isInitialized) achievementsFragment.setHasOptionsMenu(false)
+        if (::leaderboardFragment.isInitialized) leaderboardFragment.setHasOptionsMenu(false)
+        contributionsFragment = null
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

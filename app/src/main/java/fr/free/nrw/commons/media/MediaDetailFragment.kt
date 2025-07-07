@@ -196,8 +196,13 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
 
     private var initialListTop: Int = 0
 
+    /**
+     * Holds the view binding reference for this fragment.
+     * Use bindingOrNull for safe access after view destruction.
+     */
     private var _binding: FragmentMediaDetailBinding? = null
     private val binding get() = _binding!!
+    private val bindingOrNull get() = _binding
 
     private var descriptionHtmlCode: String? = null
 
@@ -249,7 +254,9 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
 
     private val scrollPosition: Unit
         get() {
-            initialListTop = binding.mediaDetailScrollView.scrollY
+            bindingOrNull?.let {
+                initialListTop = it.mediaDetailScrollView.scrollY
+            }
         }
 
     override fun onCreateView(
@@ -345,25 +352,27 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
 
         handleBackEvent(view)
 
-        //set onCLick listeners
-        binding.mediaDetailLicense.setOnClickListener { onMediaDetailLicenceClicked() }
-        binding.mediaDetailCoordinates.setOnClickListener { onMediaDetailCoordinatesClicked() }
-        binding.sendThanks.setOnClickListener { sendThanksToAuthor() }
-        binding.dummyCaptionDescriptionContainer.setOnClickListener { showCaptionAndDescription() }
-        binding.mediaDetailImageView.setOnClickListener {
-            launchZoomActivity(
-                binding.mediaDetailImageView
-            )
+        /**
+         * Safely sets click listeners on media detail UI elements using bindingOrNull.
+         * Prevents potential crashes caused by view being destroyed during delayed callbacks.
+         */
+        bindingOrNull?.let { binding ->
+            binding.mediaDetailLicense.setOnClickListener { onMediaDetailLicenceClicked() }
+            binding.mediaDetailCoordinates.setOnClickListener { onMediaDetailCoordinatesClicked() }
+            binding.sendThanks.setOnClickListener { sendThanksToAuthor() }
+            binding.dummyCaptionDescriptionContainer.setOnClickListener { showCaptionAndDescription() }
+            binding.mediaDetailImageView.setOnClickListener {
+                launchZoomActivity(binding.mediaDetailImageView)
+            }
+            binding.categoryEditButton.setOnClickListener { onCategoryEditButtonClicked() }
+            binding.depictionsEditButton.setOnClickListener { onDepictionsEditButtonClicked() }
+            binding.seeMore.setOnClickListener { onSeeMoreClicked() }
+            binding.mediaDetailAuthor.setOnClickListener { onAuthorViewClicked() }
+            binding.nominateDeletion.setOnClickListener { onDeleteButtonClicked() }
+            binding.descriptionEdit.setOnClickListener { onDescriptionEditClicked() }
+            binding.coordinateEdit.setOnClickListener { onUpdateCoordinatesClicked() }
+            binding.copyWikicode.setOnClickListener { onCopyWikicodeClicked() }
         }
-        binding.categoryEditButton.setOnClickListener { onCategoryEditButtonClicked() }
-        binding.depictionsEditButton.setOnClickListener { onDepictionsEditButtonClicked() }
-        binding.seeMore.setOnClickListener { onSeeMoreClicked() }
-        binding.mediaDetailAuthor.setOnClickListener { onAuthorViewClicked() }
-        binding.nominateDeletion.setOnClickListener { onDeleteButtonClicked() }
-        binding.descriptionEdit.setOnClickListener { onDescriptionEditClicked() }
-        binding.coordinateEdit.setOnClickListener { onUpdateCoordinatesClicked() }
-        binding.copyWikicode.setOnClickListener { onCopyWikicodeClicked() }
-
         binding.fileUsagesComposeView.apply {
             setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
             setContent {
@@ -409,14 +418,19 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
         /**
          * Gets the height of the frame layout as soon as the view is ready and updates aspect ratio
          * of the picture.
+         * Updated to use bindingOrNull inside delayed callbacks to prevent crashes
+         * when view is destroyed before post/postDelayed is executed.
          */
-        view.post{
-            val width = binding.mediaDetailScrollView.width
+        view.post {
+            val safeBinding = bindingOrNull ?: return@post
+            val width = safeBinding.mediaDetailScrollView.width
             if (width > 0) {
-                frameLayoutHeight = binding.mediaDetailFrameLayout.measuredHeight
+                frameLayoutHeight = safeBinding.mediaDetailFrameLayout.measuredHeight
                 updateAspectRatio(width)
             } else {
-                view.postDelayed({ updateAspectRatio(binding.root.width) }, 1)
+                view.postDelayed({
+                    bindingOrNull?.let { updateAspectRatio(it.root.width) }
+                }, 1)
             }
         }
 
@@ -531,45 +545,56 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
             binding.sendThanks.visibility = View.VISIBLE
         }
 
-        binding.mediaDetailScrollView.viewTreeObserver.addOnGlobalLayoutListener(
+        /**
+         * Sets a one-time global layout listener to safely access view dimensions.
+         * Uses bindingOrNull to avoid crash if the fragment view is destroyed
+         * before the callback is executed.
+         */
+        bindingOrNull?.mediaDetailScrollView?.viewTreeObserver?.addOnGlobalLayoutListener(
             object : OnGlobalLayoutListener {
                 override fun onGlobalLayout() {
+                    val safeBinding = bindingOrNull ?: return
                     if (context == null) {
                         return
                     }
-                    binding.mediaDetailScrollView.viewTreeObserver.removeOnGlobalLayoutListener(
+                    safeBinding.mediaDetailScrollView.viewTreeObserver.removeOnGlobalLayoutListener(
                         this
                     )
-                    oldWidthOfImageView = binding.mediaDetailScrollView.width
-                    if (media != null) {
+                    oldWidthOfImageView = safeBinding.mediaDetailScrollView.width
+                    media?.filename?.let {
                         displayMediaDetails()
-                        fetchFileUsages(media?.filename!!)
+                        fetchFileUsages(it)
                     }
                 }
             }
         )
-        binding.progressBarEdit.visibility = View.GONE
+        bindingOrNull?.progressBarEdit?.visibility = View.GONE
     }
 
     override fun onConfigurationChanged(newConfig: Configuration) {
         super.onConfigurationChanged(newConfig)
-        binding.mediaDetailScrollView.viewTreeObserver.addOnGlobalLayoutListener(
+        /**
+         * Sets a global layout listener to update the aspect ratio when device configuration changes.
+         * Uses bindingOrNull to avoid crashes in case the view is destroyed before callback.
+         */
+        bindingOrNull?.mediaDetailScrollView?.viewTreeObserver?.addOnGlobalLayoutListener(
             object : OnGlobalLayoutListener {
                 override fun onGlobalLayout() {
+                    val safeBinding = bindingOrNull ?: return
                     /**
                      * We update the height of the frame layout as the configuration changes.
                      */
-                    binding.mediaDetailFrameLayout.post {
-                        frameLayoutHeight = binding.mediaDetailFrameLayout.measuredHeight
-                        updateAspectRatio(binding.mediaDetailScrollView.width)
+                    safeBinding.mediaDetailFrameLayout.post {
+                        frameLayoutHeight = safeBinding.mediaDetailFrameLayout.measuredHeight
+                        updateAspectRatio(safeBinding.mediaDetailScrollView.width)
                     }
-                    if (binding.mediaDetailScrollView.width != oldWidthOfImageView) {
+                    if (safeBinding.mediaDetailScrollView.width != oldWidthOfImageView) {
                         if (newWidthOfImageView == 0) {
-                            newWidthOfImageView = binding.mediaDetailScrollView.width
+                            newWidthOfImageView = safeBinding.mediaDetailScrollView.width
                             updateAspectRatio(newWidthOfImageView)
                         }
-                        binding.mediaDetailScrollView.viewTreeObserver.removeOnGlobalLayoutListener(
-                            this
+                        safeBinding.mediaDetailScrollView.viewTreeObserver.removeOnGlobalLayoutListener(
+                        this
                         )
                     }
                 }
@@ -618,7 +643,7 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
     }
 
     private fun onMediaRefreshed(media: Media) {
-        media.categories = this.media!!.categories
+        media.categories = this.media?.categories
         this.media = media
         setTextFields(media)
         compositeDisposable.addAll(
@@ -632,29 +657,30 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
     }
 
     private fun onDiscussionLoaded(discussion: String) {
-        binding.mediaDetailDisc.text = prettyDiscussion(discussion.trim { it <= ' ' })
+        bindingOrNull?.mediaDetailDisc?.text = prettyDiscussion(discussion.trim { it <= ' ' })
     }
 
     private fun onDeletionPageExists(deletionPageExists: Boolean) {
-        if (getUserName(requireContext()) == null && getUserName(requireContext()) != media!!.author) {
-            binding.nominateDeletion.visibility = View.GONE
-            binding.nominatedDeletionBanner.visibility = View.GONE
+        val safeBinding = bindingOrNull ?: return
+
+        if (getUserName(requireContext()) == null && getUserName(requireContext()) != media?.author) {
+            safeBinding.nominateDeletion.visibility = View.GONE
+            safeBinding.nominatedDeletionBanner.visibility = View.GONE
         } else if (deletionPageExists) {
             if (applicationKvStore.getBoolean(
-                    String.format(NOMINATING_FOR_DELETION_MEDIA, media!!.imageUrl), false
+                    String.format(NOMINATING_FOR_DELETION_MEDIA, media?.imageUrl), false
                 )
             ) {
                 applicationKvStore.remove(
-                    String.format(NOMINATING_FOR_DELETION_MEDIA, media!!.imageUrl)
+                    String.format(NOMINATING_FOR_DELETION_MEDIA, media?.imageUrl)
                 )
-                binding.progressBarDeletion.visibility = View.GONE
+                safeBinding.progressBarDeletion.visibility = View.GONE
             }
-            binding.nominateDeletion.visibility = View.GONE
-
-            binding.nominatedDeletionBanner.visibility = View.VISIBLE
+            safeBinding.nominateDeletion.visibility = View.GONE
+            safeBinding.nominatedDeletionBanner.visibility = View.VISIBLE
         } else if (!isCategoryImage) {
-            binding.nominateDeletion.visibility = View.VISIBLE
-            binding.nominatedDeletionBanner.visibility = View.GONE
+            safeBinding.nominateDeletion.visibility = View.VISIBLE
+            safeBinding.nominatedDeletionBanner.visibility = View.GONE
         }
     }
 
@@ -717,7 +743,7 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
         object : BaseControllerListener<ImageInfo?>() {
             override fun onIntermediateImageSet(id: String, imageInfo: ImageInfo?) {
                 imageInfoCache = imageInfo
-                updateAspectRatio(binding.mediaDetailScrollView.width)
+                bindingOrNull?.let { updateAspectRatio(it.mediaDetailScrollView.width) }
             }
 
             override fun onFinalImageSet(
@@ -726,7 +752,7 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
                 animatable: Animatable?
             ) {
                 imageInfoCache = imageInfo
-                updateAspectRatio(binding.mediaDetailScrollView.width)
+                bindingOrNull?.let { updateAspectRatio(it.mediaDetailScrollView.width) }
             }
         }
 
@@ -789,14 +815,18 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
         }
     }
 
+    /**
+     * Clears binding and removes layout listener to prevent memory leaks
+     * or crashes from delayed UI callbacks after the view is destroyed.
+     */
     override fun onDestroyView() {
-        if (layoutListener != null && view != null) {
-            requireView().viewTreeObserver.removeGlobalOnLayoutListener(layoutListener) // old Android was on crack. CRACK IS WHACK
+        layoutListener?.let {
+            view?.viewTreeObserver?.removeOnGlobalLayoutListener(it)
             layoutListener = null
         }
 
         compositeDisposable.clear()
-
+        _binding = null
         super.onDestroyView()
     }
 
