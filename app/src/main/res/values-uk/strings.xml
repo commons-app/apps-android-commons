@@ -613,6 +613,8 @@
   <string name="title_for_media">МЕДІА</string>
   <string name="title_for_child_classes">ДОЧІРНІ КЛАСИ</string>
   <string name="title_for_parent_classes">БАТЬКІВСЬКІ КЛАСИ</string>
+  <string name="title_for_subcategories">ПІДКАТЕГОРІЇ</string>
+  <string name="title_for_parent_categories">БАТЬКІВСЬКІ КАТЕГОРІЇ</string>
   <string name="upload_nearby_place_found_title">Знайдено місце поблизу</string>
   <string name="upload_nearby_place_found_description_plural">Тут зображено %1$s?</string>
   <string name="upload_nearby_place_found_description_singular">На цьому зображенні %1$s?</string>

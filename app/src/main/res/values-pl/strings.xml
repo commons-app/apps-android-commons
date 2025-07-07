@@ -864,4 +864,5 @@
   <string name="show_in_nearby">Pokaż w Pobliżu</string>
   <string name="image_tag_line_created_and_uploaded_by">Utworzone i przesłane przez: %1$s</string>
   <string name="image_tag_line_created_by_and_uploaded_by">Utworzone przez %1$s i przesłane przez %2$s</string>
+  <string name="nominated_for_deletion_btn">Zgłoszone do usunięcia</string>
 </resources>

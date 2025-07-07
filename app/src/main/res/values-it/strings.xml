@@ -595,6 +595,7 @@
   <string name="title_for_media">MEDIA</string>
   <string name="title_for_child_classes">CLASSI FIGLIE</string>
   <string name="title_for_parent_classes">CLASSI SUPERIORI</string>
+  <string name="title_for_subcategories">Sottocategorie</string>
   <string name="upload_nearby_place_found_title">Rinvenuto luogo nei pressi</string>
   <string name="upload_nearby_place_found_description_plural">Queste sono immagini di %1$s?</string>
   <string name="upload_nearby_place_found_description_singular">Questa è un\'immagine di %1$s?</string>

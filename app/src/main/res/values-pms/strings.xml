@@ -576,6 +576,8 @@
   <string name="title_for_media">MOJEN</string>
   <string name="title_for_child_classes">CLASSE MASNÀ</string>
   <string name="title_for_parent_classes">CLASSE CE</string>
+  <string name="title_for_subcategories">SOT-CATEGORÌE</string>
+  <string name="title_for_parent_categories">CATEGORÌE CE</string>
   <string name="upload_nearby_place_found_title">Trovà un pòst davzin</string>
   <string name="upload_nearby_place_found_description_plural">Son-lo le fòto ëd %1$s?</string>
   <string name="upload_nearby_place_found_description_singular">É-lo na fòto ëd %1$s?</string>
