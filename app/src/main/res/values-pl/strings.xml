@@ -450,7 +450,7 @@
   <string name="deletion_reason_bad_for_my_privacy">Zdałem sobie sprawę, że jest to szkodliwe dla mojej prywatności</string>
   <string name="deletion_reason_no_longer_want_public">Zmieniłem zdanie, nie chcę, aby było to już publicznie widoczne</string>
   <string name="deletion_reason_not_interesting">Przepraszamy, to zdjęcie nie jest interesujące dla encyklopedii</string>
-  <string name="uploaded_by_myself">Przesłane przeze mnie na %1$s, używane w artykułach %2$d.</string>
+  <string name="uploaded_by_myself" fuzzy="true">Przesłane przeze mnie na %1$s, używane w artykułach %2$d.</string>
   <string name="no_uploads">Prześlij swoje pierwsze multimedia, dotykając przycisku Dodaj.</string>
   <string name="no_categories_selected">Nie wybrano kategorii</string>
   <string name="no_categories_selected_warning_desc">Obrazy bez kategorii rzadko nadają się do użycia. Czy na pewno chcesz kontynuować bez wybierania kategorii?</string>
@@ -864,4 +864,5 @@
   <string name="show_in_nearby">Pokaż w Pobliżu</string>
   <string name="image_tag_line_created_and_uploaded_by">Utworzone i przesłane przez: %1$s</string>
   <string name="image_tag_line_created_by_and_uploaded_by">Utworzone przez %1$s i przesłane przez %2$s</string>
+  <string name="nominated_for_deletion_btn">Zgłoszone do usunięcia</string>
 </resources>

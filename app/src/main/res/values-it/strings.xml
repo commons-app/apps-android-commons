@@ -143,6 +143,7 @@
   <string name="categories_search_text_hint">Cerca categorie</string>
   <string name="depicts_search_text_hint">Cerca elementi che il tuo file rappresenta (montagna, Taj Mahal, ecc.)</string>
   <string name="menu_save_categories">Salva</string>
+  <string name="menu_overflow_desc">Menu overflow</string>
   <string name="refresh_button">Aggiorna</string>
   <string name="display_list_button">Elenco</string>
   <string name="contributions_subtitle_zero">(Non è stato ancora caricato niente)</string>
@@ -289,7 +290,7 @@
   <string name="send_log_file_description">Invia il file di registro agli sviluppatori tramite email per aiutarli a risolvere i problemi con l\'applicazione. Nota: i log potrebbero contenere informazioni di identificazione</string>
   <string name="no_web_browser">Nessun browser web trovato per aprire l\'URL</string>
   <string name="null_url">Errore! URL non trovato</string>
-  <string name="nominate_deletion">Proponi per la Cancellazione</string>
+  <string name="nominate_deletion">Proponi per la cancellazione</string>
   <string name="nominated_for_deletion">Questa immagine è stata proposta per la cancellazione.</string>
   <string name="nominated_see_more">Vedi la pagina web per i dettagli</string>
   <string name="skip_login">Salta</string>
@@ -433,7 +434,7 @@
   <string name="deletion_reason_bad_for_my_privacy">Mi sono reso conto che viola la mia privacy</string>
   <string name="deletion_reason_no_longer_want_public">Ho cambiato idea, non voglio più che sia pubblicamente visibile</string>
   <string name="deletion_reason_not_interesting">Spiacente, questa immagine non è interessante per un\'enciclopedia</string>
-  <string name="uploaded_by_myself">Caricato da me stesso il %1$s, utilizzato in %2$d voce/i.</string>
+  <string name="uploaded_by_myself">Caricato da me stesso il %1$s, utilizzato almeno in %2$d voce/i.</string>
   <string name="no_uploads">Benvenuto su Commons!\n\nCarica il tuo primo file multimediale toccando il pulsante aggiungi.</string>
   <string name="no_categories_selected">Nessuna categoria selezionata</string>
   <string name="no_categories_selected_warning_desc">Le immagini senza categorie sono raramente utilizzabili. Sei sicuro di voler continuare senza selezionare le categorie?</string>
@@ -594,6 +595,7 @@
   <string name="title_for_media">MEDIA</string>
   <string name="title_for_child_classes">CLASSI FIGLIE</string>
   <string name="title_for_parent_classes">CLASSI SUPERIORI</string>
+  <string name="title_for_subcategories">Sottocategorie</string>
   <string name="upload_nearby_place_found_title">Rinvenuto luogo nei pressi</string>
   <string name="upload_nearby_place_found_description_plural">Queste sono immagini di %1$s?</string>
   <string name="upload_nearby_place_found_description_singular">Questa è un\'immagine di %1$s?</string>
@@ -771,7 +773,7 @@
   <string name="learn_how_to_write_a_useful_caption">Impara come scrivere una didascalia utile</string>
   <string name="see_your_achievements">Vedi i tuoi risultati</string>
   <string name="edit_image">Modifica Immagine</string>
-  <string name="edit_location">Modifica Posizione</string>
+  <string name="edit_location">Modifica posizione</string>
   <string name="location_updated">Posizione aggiornata!</string>
   <string name="remove_location">Rimuovi posizione</string>
   <string name="remove_location_warning_title">Rimuovi avviso di posizione</string>
@@ -836,4 +838,5 @@
   <string name="show_in_nearby">Mostra nelle vicinanze</string>
   <string name="image_tag_line_created_and_uploaded_by">Creato e caricato da: %1$s</string>
   <string name="image_tag_line_created_by_and_uploaded_by">Creato da %1$s e caricato da %2$s</string>
+  <string name="nominated_for_deletion_btn">Proposto per la cancellazione</string>
 </resources>

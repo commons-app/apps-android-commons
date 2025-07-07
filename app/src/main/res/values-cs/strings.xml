@@ -448,7 +448,7 @@
   <string name="deletion_reason_bad_for_my_privacy">Uvědomil/a jsem si, že je to špatné pro mé soukromí</string>
   <string name="deletion_reason_no_longer_want_public">Změnil/a jsem názor, nechci, aby to bylo veřejně viditelné</string>
   <string name="deletion_reason_not_interesting">Omlouváme se, že tento obrázek není zajímavý pro encyklopedii</string>
-  <string name="uploaded_by_myself">Náhráno mnou %1$s, použito v(e) %2$d článku/článcích.</string>
+  <string name="uploaded_by_myself" fuzzy="true">Náhráno mnou %1$s, použito v(e) %2$d článku/článcích.</string>
   <string name="no_uploads">Vítejte na Commons!\n\nNahrajte svá první média klepnutím na tlačítko přidat.</string>
   <string name="no_categories_selected">Nebyly vybrány žádné kategorie</string>
   <string name="no_categories_selected_warning_desc">Obrázky bez kategorií jsou používány jen zřídka. Opravdu chcete nahrát obrázek bez výběru kategorií?</string>

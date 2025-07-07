@@ -457,7 +457,7 @@
   <string name="deletion_reason_bad_for_my_privacy">J’ai pensé que ce n’était pas bon pour ma vie privée</string>
   <string name="deletion_reason_no_longer_want_public">J’ai changé d\'avis, je ne désire plus que cel soit visible publiquement</string>
   <string name="deletion_reason_not_interesting">Désolé mais cette image n’est pas intéressante pour une encyclopédie</string>
-  <string name="uploaded_by_myself">Téléversé par moi-même le %1$s, utilisé dans %2$d article(s).</string>
+  <string name="uploaded_by_myself">Téléversé par moi-même le %1$s, utilisé dans au moins %2$d article(s).</string>
   <string name="no_uploads">Bienvenue sur Commons !\n\nTéléversez votre premier média en tapant sur le bouton Ajouter.</string>
   <string name="no_categories_selected">Aucune catégorie sélectionnée</string>
   <string name="no_categories_selected_warning_desc">Les images sans catégories sont rarement utilisables. Voulez-vous vraiment continuer sans sélectionner des catégories  appropriées ?</string>
@@ -869,4 +869,5 @@
   <string name="show_in_nearby">Afficher à proximité</string>
   <string name="image_tag_line_created_and_uploaded_by">Crée et publiée par: %1$s</string>
   <string name="image_tag_line_created_by_and_uploaded_by">Créé par %1$s et publiée par %2$s</string>
+  <string name="nominated_for_deletion_btn">Nommé pour suppression</string>
 </resources>

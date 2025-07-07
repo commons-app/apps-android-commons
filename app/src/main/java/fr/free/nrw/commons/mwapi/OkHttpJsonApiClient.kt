@@ -281,6 +281,7 @@ class OkHttpJsonApiClient @Inject constructor(
                         FeedbackResponse::class.java
                     )
                 } catch (e: Exception) {
+                    e.printStackTrace()
                     return@fromCallable FeedbackResponse(0, 0, 0, FeaturedImages(0, 0), 0, "")
                 }
             }

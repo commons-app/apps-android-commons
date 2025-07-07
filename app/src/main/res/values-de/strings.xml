@@ -453,7 +453,7 @@
   <string name="deletion_reason_bad_for_my_privacy">Ich habe erkannt, dass es schlecht für meine Privatsphäre ist.</string>
   <string name="deletion_reason_no_longer_want_public">Ich habe meine Meinung geändert. Ich möchte nicht mehr, dass es öffentlich sichtbar ist.</string>
   <string name="deletion_reason_not_interesting">Entschuldigung, aber dieses Bild ist für eine Enzyklopädie nicht relevant.</string>
-  <string name="uploaded_by_myself">Von mir selbst hochgeladen am %1$s, verwendet in %2$d Artikel(n).</string>
+  <string name="uploaded_by_myself" fuzzy="true">Von mir selbst hochgeladen am %1$s, verwendet in %2$d Artikel(n).</string>
   <string name="no_uploads">Willkommen bei Commons!\n\nLade deine erste Datei hoch, indem du auf die Hinzufügen-Schaltfläche tippst.</string>
   <string name="no_categories_selected">Keine Kategorien ausgewählt</string>
   <string name="no_categories_selected_warning_desc">Bilder ohne Kategorien sind selten nutzbar. Bist du sicher, dass du ohne die Auswahl von Kategorien hochladen möchtest?</string>

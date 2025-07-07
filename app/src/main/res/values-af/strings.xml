@@ -341,7 +341,7 @@
   <string name="deletion_reason_bad_for_my_privacy">Ek het besef dat dit sleg is vir my privaatheid</string>
   <string name="deletion_reason_no_longer_want_public">Ek het van plan verander, ek wil nie hê dit moet meer in die openbaar sigbaar wees nie</string>
   <string name="deletion_reason_not_interesting">Jammer, hierdie foto is nie interessant vir \'n ensiklopedie nie</string>
-  <string name="uploaded_by_myself">Opgelaai deur myself op %1$s, gebruik in %2$d artikel(s).</string>
+  <string name="uploaded_by_myself" fuzzy="true">Opgelaai deur myself op %1$s, gebruik in %2$d artikel(s).</string>
   <string name="no_uploads">Welkom by Commons!\n\nLaai u eerste media op deur op die byvoegknoppie te tik.</string>
   <string name="no_categories_selected">Geen kategorieë gekies nie</string>
   <string name="no_categories_selected_warning_desc" fuzzy="true">Beelde sonder kategorieë is selde bruikbaar. Is u seker dat u wil indien sonder om kategorieë te kies?</string>

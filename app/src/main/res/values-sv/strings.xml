@@ -420,7 +420,7 @@
   <string name="deletion_reason_bad_for_my_privacy">Jag insåg att den är dålig för mitt privatliv</string>
   <string name="deletion_reason_no_longer_want_public">Jag ändrade mig, jag vill inte längre att den ska vara synlig offentligt</string>
   <string name="deletion_reason_not_interesting">Tyvärr, denna bild är inte intressant för en encyklopedi</string>
-  <string name="uploaded_by_myself">Laddades upp av mig den %1$s och används i %2$d artiklar.</string>
+  <string name="uploaded_by_myself" fuzzy="true">Laddades upp av mig den %1$s och används i %2$d artiklar.</string>
   <string name="no_uploads">Välkommen till Commons!\n\nLadda upp din första mediafil genom att trycka på knappen för att lägga till.</string>
   <string name="no_categories_selected">Inga kategorier har valts</string>
   <string name="no_categories_selected_warning_desc">Bilder utan kategorier används sällan. Är du säker på att du vill fortsätta utan att välja kategorier?</string>

@@ -394,7 +394,7 @@
   <string name="deletion_reason_bad_for_my_privacy">Shvatio/la sam da je loša za moju privatnost</string>
   <string name="deletion_reason_no_longer_want_public">Promenio/la sam mišljenje, ne želim da više javno budu vidljive</string>
   <string name="deletion_reason_not_interesting">Ova slika nije zanimljiva za enciklopediju</string>
-  <string name="uploaded_by_myself">Otpremio/la sam na %1$s, koristi se u članku/cima — %2$d.</string>
+  <string name="uploaded_by_myself" fuzzy="true">Otpremio/la sam na %1$s, koristi se u članku/cima — %2$d.</string>
   <string name="no_uploads">Dobro došli na Ostavu!\n\nOtpremite prve medije dodirom dugmeta za dodavanje.</string>
   <string name="no_categories_selected">Kategorije nisu izabrane</string>
   <string name="no_categories_selected_warning_desc">Slike bez kategorija retko su upotrebljive. Zaista želite da nastavite bez izbora kategorija?</string>

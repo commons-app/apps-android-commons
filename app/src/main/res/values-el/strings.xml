@@ -433,7 +433,7 @@
   <string name="deletion_reason_bad_for_my_privacy">Συνειδητοποίησα ότι είναι κακό για την ιδιωτικότητά μου</string>
   <string name="deletion_reason_no_longer_want_public">Άλλαξα γνώμη, δε θέλω να προβάλλεται πλέον δημόσια</string>
   <string name="deletion_reason_not_interesting">Συγγνώμη, αυτή η φωτογραφία δεν είναι ενδιαφέρουσα για μια εγκυκλοπαίδεια</string>
-  <string name="uploaded_by_myself">Ανέβηκε από εμένα στο %1$s, χρησιμοποιήθηκε σε %2$d άρθρο/α</string>
+  <string name="uploaded_by_myself" fuzzy="true">Ανέβηκε από εμένα στο %1$s, χρησιμοποιήθηκε σε %2$d άρθρο/α</string>
   <string name="no_uploads">Καλώς ήρθατε στα Commons!\n\nΑνεβάστε τα πρώτα σας πολυμέσα πατώντας το κουμπί της προσθήκης.</string>
   <string name="no_categories_selected">Δεν επιλέχθηκαν κατηγορίες</string>
   <string name="no_categories_selected_warning_desc">Οι εικόνες χωρίς κατηγορίες χρησιμοποιούνται σπάνια. Θέλετε πράγματι να συνεχίσετε δίχως να επιλέξετε κατηγορίες;</string>

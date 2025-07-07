@@ -423,7 +423,7 @@
   <string name="deletion_reason_bad_for_my_privacy">Uvedomil/a som si, že je to zlé pre moje súkromie</string>
   <string name="deletion_reason_no_longer_want_public">Zmenil/a som názor, nechcem byť viac verejne viditeľný/á</string>
   <string name="deletion_reason_not_interesting">Prepáčte, tento obrázok pre encyklopédiu nie je zaujímavý</string>
-  <string name="uploaded_by_myself">Nahrané mnou %1$s, použité v %2$d článku/článkoch.</string>
+  <string name="uploaded_by_myself" fuzzy="true">Nahrané mnou %1$s, použité v %2$d článku/článkoch.</string>
   <string name="no_uploads">Vitajte na Commons!\n\nNahrajte svoje prvé súbory ťuknutím na tlačidlo pridať.</string>
   <string name="no_categories_selected">Neboli vybrané žiadne kategórie</string>
   <string name="no_categories_selected_warning_desc">Obrázky bez kategórií sú zriedka použiteľné. Naozaj chcete nahrať obrázok bez výberu kategórií?</string>

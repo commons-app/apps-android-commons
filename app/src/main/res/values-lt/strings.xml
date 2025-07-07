@@ -396,7 +396,7 @@
   <string name="deletion_reason_bad_for_my_privacy">Supratau, kad tai kenkia mano privatumui</string>
   <string name="deletion_reason_no_longer_want_public">Persigalvojau, nebenoriu, kad tai būtų viešai matoma</string>
   <string name="deletion_reason_not_interesting">Atsiprašome, ši nuotrauka neįdomi enciklopedijai</string>
-  <string name="uploaded_by_myself">Įkelta mano %1$s, naudojama %2$d straipsnyje(-iuose).</string>
+  <string name="uploaded_by_myself" fuzzy="true">Įkelta mano %1$s, naudojama %2$d straipsnyje(-iuose).</string>
   <string name="no_uploads">Sveiki atvykę į Vikiteką!\n\nĮkelkite pirmąjį failą bakstelėdami pridėjimo mygtuką.</string>
   <string name="no_categories_selected">Nepasirinkta jokių kategorijų</string>
   <string name="no_categories_selected_warning_desc">Vaizdai be kategorijų retai naudojami. Ar tikrai norite tęsti nepasirinkę kategorijų?</string>

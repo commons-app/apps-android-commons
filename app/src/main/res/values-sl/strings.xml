@@ -429,7 +429,7 @@
   <string name="deletion_reason_bad_for_my_privacy">Spoznal sem, da je to slabo za mojo zasebnost</string>
   <string name="deletion_reason_no_longer_want_public">Premislil_a sem si, ne želim več biti javno viden_na</string>
   <string name="deletion_reason_not_interesting">Ta slika žal ni zanimiva za enciklopedijo.</string>
-  <string name="uploaded_by_myself">Sliko sem naložil/a sam/a dne %1$s. Uporablja se v %2$d članku(ih).</string>
+  <string name="uploaded_by_myself" fuzzy="true">Sliko sem naložil/a sam/a dne %1$s. Uporablja se v %2$d članku(ih).</string>
   <string name="no_uploads">Pozdravljeni v Wikimedijini zbirki!\n\nTapnite gumb dodaj in naložite svojo prvo predstavnostno datoteko.</string>
   <string name="no_categories_selected">Izbrana ni nobena kategorija</string>
   <string name="no_categories_selected_warning_desc">Slike brez kategorij so le redko uporabne. Ali res želite nadaljevati brez izbire kategorij?</string>

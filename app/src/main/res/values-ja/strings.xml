@@ -408,7 +408,7 @@
   <string name="deletion_reason_bad_for_my_privacy">自分のプライバシーを傷つけると気がつきました</string>
   <string name="deletion_reason_no_longer_want_public">以前とは考えが変わりました。今後は公衆の場で自分の画像を公開したくありません</string>
   <string name="deletion_reason_not_interesting">残念ですがこの画像は百科事典の目的に合いません</string>
-  <string name="uploaded_by_myself">私本人が%1$sにアップロードし、%2$d件の記事で使用されました。</string>
+  <string name="uploaded_by_myself" fuzzy="true">私本人が%1$sにアップロードし、%2$d件の記事で使用されました。</string>
   <string name="no_uploads">コモンズへようこそ！\n\n追加ボタンを押して、ぜひご自分のメディアの初投稿をしましょう。</string>
   <string name="no_categories_selected">カテゴリが選択されていません</string>
   <string name="no_categories_selected_warning_desc">カテゴリを指定しない画像は使用されることがほとんどありません。ほんとうにカテゴリを選択しないまま作業を続けますか？</string>

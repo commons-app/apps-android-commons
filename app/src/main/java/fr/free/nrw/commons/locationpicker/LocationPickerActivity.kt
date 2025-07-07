@@ -30,7 +30,6 @@ import fr.free.nrw.commons.CameraPosition
 import fr.free.nrw.commons.CommonsApplication
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.R
-import fr.free.nrw.commons.Utils
 import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.auth.csrf.CsrfTokenClient
 import fr.free.nrw.commons.coordinates.CoordinateEditHelper
@@ -45,6 +44,7 @@ import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment.Compani
 import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment.Companion.LAST_ZOOM
 import fr.free.nrw.commons.utils.DialogUtil
 import fr.free.nrw.commons.utils.MapUtils.ZOOM_LEVEL
+import fr.free.nrw.commons.utils.handleGeoCoordinates
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory
@@ -432,8 +432,8 @@ class LocationPickerActivity : BaseActivity(), LocationPermissionCallback {
 
         position?.let {
             mapView?.zoomLevelDouble?.let { zoomLevel ->
-                Utils.handleGeoCoordinates(this, it, zoomLevel)
-            } ?: Utils.handleGeoCoordinates(this, it)
+                handleGeoCoordinates(this, it, zoomLevel)
+            } ?: handleGeoCoordinates(this, it)
         }
     }
 

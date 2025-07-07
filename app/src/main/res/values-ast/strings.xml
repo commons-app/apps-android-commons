@@ -395,7 +395,7 @@
   <string name="deletion_reason_bad_for_my_privacy">Decatéme que ye malo pa la mio privacidá</string>
   <string name="deletion_reason_no_longer_want_public">Cambié d\'opinión, nun quiero que siga siendo visible públicamente</string>
   <string name="deletion_reason_not_interesting">Sentímoslo, esta imaxe nun ye interesante pa una enciclopedia</string>
-  <string name="uploaded_by_myself">Xubíla yo mesmu\'l %1$s, usada en %2$d artículu(os).</string>
+  <string name="uploaded_by_myself" fuzzy="true">Xubíla yo mesmu\'l %1$s, usada en %2$d artículu(os).</string>
   <string name="no_uploads">¡Afáyate\'n Commons.\n\nCarga\'l to primer ficheru tocando nel botón amestar.</string>
   <string name="no_categories_selected">Nun hai categoríes seleicionaes</string>
   <string name="no_categories_selected_warning_desc">Les imáxenes ensin categoríes raramente puen usase. ¿Seguro que quies siguir ensin escoyer categoría dala?</string>

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* Farorud
 * Ibrahim
 * ToJack
 * Vashgird
@@ -102,7 +103,7 @@
   <string name="navigation_item_logout">Баромад</string>
   <string name="navigation_item_notification">Огоҳиҳо</string>
   <string name="navigation_item_review">Тафтиш</string>
-  <string name="nearby_info_menu_wikidata_article">Унсури Викидода</string>
+  <string name="nearby_info_menu_wikidata_article">Элементи Викидода</string>
   <string name="navigation_item_login">Вуруд</string>
   <string name="nearby_directions">Ҷиҳат</string>
   <string name="nearby_wikidata">Викидода</string>

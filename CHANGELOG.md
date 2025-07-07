@@ -1,5 +1,15 @@
 # Wikimedia Commons for Android
 
+## v5.5.0
+
+### What's changed
+* Explore images will now be shown based on the map location and not at your current location
+* Enhanced Wikidata feedback message
+* Green labels in Explore map will no longer be hidden by other pins thumbnails
+* Upload wizard's language drop-down now reflects the language used in the pin label
+* Users can now pick only one image at a time while using the custom selector
+* Bug fixes and stability improvements 
+
 ## v5.4.1
 
 ### What's changed

@@ -14,6 +14,7 @@ import fr.free.nrw.commons.explore.map.ExploreMapController.NearbyBaseMarkerThum
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType;
+import fr.free.nrw.commons.nearby.Place;
 import io.reactivex.Observable;
 import java.lang.reflect.Proxy;
 import java.util.List;
@@ -182,7 +183,7 @@ public class ExploreMapPresenter
         exploreMapController
             .loadAttractionsFromLocationToBaseMarkerOptions(explorePlacesInfo.currentLatLng,
                 // Curlatlang will be used to calculate distances
-                explorePlacesInfo.explorePlaceList,
+                (List<Place>) explorePlacesInfo.explorePlaceList,
                 exploreMapFragmentView.getContext(),
                 this,
                 explorePlacesInfo);
@@ -230,11 +231,7 @@ public class ExploreMapPresenter
         mylocation.setLongitude(exploreMapFragmentView.getLastMapFocus().getLongitude());
         Float distance = mylocation.distanceTo(dest_location);
 
-        if (distance > 2000.0 * 3 / 4) {
-            return false;
-        } else {
-            return true;
-        }
+        return !(distance > 2000.0 * 3 / 4);
     }
 
 }

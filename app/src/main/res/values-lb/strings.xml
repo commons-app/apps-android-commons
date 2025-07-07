@@ -134,7 +134,7 @@
   <string name="menu_download">Eroflueden</string>
   <string name="preference_license">Standardlizenz</string>
   <string name="use_previous">Viregen Titel a Beschreiwung benotzen</string>
-  <string name="preference_theme">Faarfschema</string>
+  <string name="preference_theme">Faarfscheema</string>
   <string name="license_name_cc_by_sa_four">Attribution-ShareAlike 4.0</string>
   <string name="license_name_cc_by_four">Attribution 4.0</string>
   <string name="license_name_cc_by_sa">CC Attribution-ShareAlike 3.0</string>
@@ -295,6 +295,7 @@
   <string name="continue_message">Virufueren</string>
   <string name="correct">Richteg Äntwert</string>
   <string name="wrong">Falsch Äntwert</string>
+  <string name="quiz_screenshot_question">Ass et an der Rei fir dëse Screenshot eropzelueden?</string>
   <string name="share_app_title">App deelen</string>
   <string name="rotate">Dréinen</string>
   <string name="no_pictures_in_this_area">Keng Biller an dëser Géigend</string>
@@ -332,7 +333,7 @@
   <string name="deletion_reason_bad_for_my_privacy">Ech hu gemierkt, datt et schlecht fir meng Privatsphär ass</string>
   <string name="deletion_reason_no_longer_want_public">Ech hu meng Meenung geännert, ech wëll net méi, datt et ëffentlech siichtbar ass</string>
   <string name="deletion_reason_not_interesting">Pardon, dëst Bild ass net interessant fir eng Enzyklopedie</string>
-  <string name="uploaded_by_myself">Vu mir selwer de(n) %1$s eropgelueden, benotzt a(n) %2$d Artikel(en).</string>
+  <string name="uploaded_by_myself">Vu mir selwer de(n) %1$s eropgelueden, benotzt a mindestens %2$d Artikel(en).</string>
   <string name="no_categories_selected">Keng Kategorien erausgesicht</string>
   <string name="no_categories_selected_warning_desc">Biller ouni Kategorië si meeschtens net benotzbar. Sidd Dir sécher, datt Dir weider maache wëllt ouni eng Kategorie auszewielen?</string>
   <string name="back_button_warning">Eroplueden ofbriechen</string>
@@ -541,4 +542,5 @@
   <string name="vanish_account">Kont opléisen</string>
   <string name="caption">Beschrëftung</string>
   <string name="caption_copied_to_clipboard">Text an den Tëschespäicher kopéiert</string>
+  <string name="nominated_for_deletion_btn">Virgeschloe fir ze läschen</string>
 </resources>

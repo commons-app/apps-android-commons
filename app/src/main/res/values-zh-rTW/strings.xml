@@ -152,7 +152,7 @@
   <string name="categories_not_found">沒有發現與 %1$s 相符的分類</string>
   <string name="depictions_not_found">找不到符合%1$s的維基數據項目</string>
   <string name="no_child_classes">%1$s沒有子類別</string>
-  <string name="no_parent_classes">%1$s沒有父類別</string>
+  <string name="no_parent_classes">%1$s沒有父級類別</string>
   <string name="categories_skip_explanation">為您的圖片添加分類，使別人在維基共享資源更容易找到。\n\n開始輸入以添加分類。</string>
   <string name="categories_activity_title">分類</string>
   <string name="title_activity_settings">設定</string>
@@ -246,7 +246,7 @@
   <string name="logout_verification">您確定要登出嗎？</string>
   <string name="mediaimage_failed">媒體圖片失敗</string>
   <string name="no_subcategory_found">找不到子分類</string>
-  <string name="no_parentcategory_found">找不到母分類</string>
+  <string name="no_parentcategory_found">找不到父級分類</string>
   <string name="welcome_image_mount_zao">藏王山</string>
   <string name="welcome_image_llamas">美洲駝</string>
   <string name="welcome_image_rainbow_bridge">彩虹橋</string>
@@ -436,7 +436,7 @@
   <string name="deletion_reason_bad_for_my_privacy">我認為這會干擾到我的隱私</string>
   <string name="deletion_reason_no_longer_want_public">我改變我的主意，我不想要公開可見</string>
   <string name="deletion_reason_not_interesting">真抱歉，此圖片對於百科全書沒有意義</string>
-  <string name="uploaded_by_myself">我自己在%1$s上上傳，在%2$d篇條目中使用。</string>
+  <string name="uploaded_by_myself">我自己在%1$s上傳，至少用在 %2$d 篇條目。</string>
   <string name="no_uploads">歡迎來到維基共享資源！\n\n透過觸碰添加按鈕來上傳您的首個多媒體內容。</string>
   <string name="no_categories_selected">未選擇分類</string>
   <string name="no_categories_selected_warning_desc">不帶分類的圖片很難有機會被利用到，您確定您要不選擇分類來繼續嗎？</string>
@@ -590,7 +590,7 @@
   <string name="no_achievements_yet">%s還沒有做出任何貢獻</string>
   <string name="account_created">已建立帳號！</string>
   <string name="text_copy">文字已複製至剪貼簿</string>
-  <string name="notification_mark_read">通知標記為已讀</string>
+  <string name="notification_mark_read">將通知標記為已讀</string>
   <string name="some_error">發生一些錯誤！</string>
   <string name="place_state">地點狀態：</string>
   <string name="place_state_exists">存在</string>
@@ -600,7 +600,9 @@
   <string name="you_must_reset_your_passsword">登入時發生一些問題，您必須重新設定您的密碼！！</string>
   <string name="title_for_media">媒體</string>
   <string name="title_for_child_classes">子類別</string>
-  <string name="title_for_parent_classes">父類別</string>
+  <string name="title_for_parent_classes">父級類別</string>
+  <string name="title_for_subcategories">子分類</string>
+  <string name="title_for_parent_categories">父級分類</string>
   <string name="upload_nearby_place_found_title">找到附近地點</string>
   <string name="upload_nearby_place_found_description_plural">這些是%1$s的圖片嗎？</string>
   <string name="upload_nearby_place_found_description_singular">這是%1$s的圖片嗎？</string>
@@ -808,6 +810,7 @@
   <string name="talk">討論</string>
   <string name="write_something_about_the_item">填寫一些關於「%1$s」項目的事物。內容將公開可見。</string>
   <string name="does_not_exist_anymore_no_picture_can_ever_be_taken_of_it">「%1$s」已不存在，無法拍攝它的照片。</string>
+  <string name="is_at_a_different_place_wikidata">「%1$s」位於不同的地方。</string>
   <string name="is_at_a_different_place_please_specify_the_correct_place_below_if_possible_tell_us_the_correct_latitude_longitude">「%1$s」位於不同的位置。請在下面指定正確的位置，可以的話請填寫正確的經緯度。</string>
   <string name="other_problem_or_information_please_explain_below">其他問題或資訊（請在下方解釋）。</string>
   <string name="feedback_destination_note">您的回饋已發布到以下 wiki 頁面：&lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Mobile_app/Feedback\"&gt;Commons:Mobile app/Feedback&lt;/a&gt;</string>
@@ -846,4 +849,5 @@
   <string name="show_in_nearby">顯示在附近</string>
   <string name="image_tag_line_created_and_uploaded_by">由%1$s建立與上傳</string>
   <string name="image_tag_line_created_by_and_uploaded_by">由%1$s建立，%2$s上傳</string>
+  <string name="nominated_for_deletion_btn">提名刪除</string>
 </resources>

@@ -18,7 +18,6 @@ import fr.free.nrw.commons.BuildConfig
 import fr.free.nrw.commons.CommonsApplication
 import fr.free.nrw.commons.CommonsApplication.ActivityLogoutListener
 import fr.free.nrw.commons.R
-import fr.free.nrw.commons.WelcomeActivity
 import fr.free.nrw.commons.actions.PageEditClient
 import fr.free.nrw.commons.databinding.FragmentMoreBottomSheetBinding
 import fr.free.nrw.commons.di.ApplicationlessInjection
@@ -32,6 +31,7 @@ import fr.free.nrw.commons.logging.CommonsLogSender
 import fr.free.nrw.commons.profile.ProfileActivity
 import fr.free.nrw.commons.review.ReviewActivity
 import fr.free.nrw.commons.settings.SettingsActivity
+import fr.free.nrw.commons.startWelcome
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -241,7 +241,7 @@ class MoreBottomSheetFragment : BottomSheetDialogFragment() {
     }
 
     fun onTutorialClicked() {
-        WelcomeActivity.startYourself(requireActivity())
+        requireContext().startWelcome()
     }
 
     fun onSettingsClicked() {
