@@ -737,7 +737,7 @@
   <string name="no_location_found_message">是否要加入這張圖片拍攝的地點？\n位置資料有助於 Wiki 編輯者找到您的圖片，使其更有用。\n謝謝！</string>
   <string name="add_location">新增位置</string>
   <string name="feedback_sharing_data_alert">請移除來自此電子郵件中您無意公開分享的任何資訊。另外請注意，您用來發布訊息的電子郵件地址、關聯名稱、與個人資料圖片會公開顯示。</string>
-  <string name="explore_map_details">詳細資料</string>
+  <string name="explore_map_details">詳細資訊</string>
   <string name="achievements_unavailable_beta">成果僅在生產版本可用，請查閱開發者文件。</string>
   <string name="leaderboard_unavailable_beta">排行榜僅在生產版本可用，請查閱開發者文件。</string>
   <string name="copyright_popup">請僅上傳您自己拍攝的照片。受版權保護的圖像的上傳者將被阻止。這也適用於 beta 版本。感謝您測試該應用程序！</string>

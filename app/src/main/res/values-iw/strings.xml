@@ -613,6 +613,8 @@
   <string name="title_for_media">מדיה</string>
   <string name="title_for_child_classes">מחלקות יורשות</string>
   <string name="title_for_parent_classes">מחלקות מורישות</string>
+  <string name="title_for_subcategories">תת־קטגוריות</string>
+  <string name="title_for_parent_categories">קטגוריות הורה</string>
   <string name="upload_nearby_place_found_title">נמצא מקום בסביבה</string>
   <string name="upload_nearby_place_found_description_plural">האם אלו תמונות של %1$s?</string>
   <string name="upload_nearby_place_found_description_singular">האם זאת תמונה של %1$s?</string>

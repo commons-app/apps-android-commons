@@ -415,7 +415,7 @@
   <string name="deletion_reason_not_interesting">За жал, сликава не е соодветна за енциклопедија</string>
   <string name="uploaded_by_myself">Подигнато од мене на %1$s, и се користи во барем {{PLURAL:%2$d|one=една статија|%2$d статии}}.</string>
   <string name="no_uploads">Добре дојдовте на Ризницата!\n\nПодигнете ја вашата прва слика или снимка допирајќи го копчето за додавање.</string>
-  <string name="no_categories_selected">Нема избрано категории</string>
+  <string name="no_categories_selected">Не се избрани категории</string>
   <string name="no_categories_selected_warning_desc">Некатегоризираните слики се слабо употребливи. Дали сигурно сакате да продолжите без да ставите категории?</string>
   <string name="no_depictions_selected">Немате избрано прикажувања</string>
   <string name="no_depictions_selected_warning_desc">Сликите со прикажувања се полезни за наоѓање, со што е поголема веројатноста дека ќе бидат искористени. Дали сигурно сакате да продолжите без да изберете прикажувања?</string>
@@ -578,6 +578,8 @@
   <string name="title_for_media">СЛИКИ/СНИМКИ</string>
   <string name="title_for_child_classes">ЗАВИСНИ КЛАСИ</string>
   <string name="title_for_parent_classes">МАТИЧНИ КЛАСИ</string>
+  <string name="title_for_subcategories">ПОТКАТЕГОРИИ</string>
+  <string name="title_for_parent_categories">МАТИЧНИ КАТЕГОРИИ</string>
   <string name="upload_nearby_place_found_title">Пронајдено околно место</string>
   <string name="upload_nearby_place_found_description_plural">Дали ова се слики на %1$s?</string>
   <string name="upload_nearby_place_found_description_singular">Дали ова е слика на %1$s?</string>

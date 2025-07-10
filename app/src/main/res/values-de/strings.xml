@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* *surak*
 * BPX-web
 * Bjarncraft
 * Brettchenweber
@@ -453,7 +454,7 @@
   <string name="deletion_reason_bad_for_my_privacy">Ich habe erkannt, dass es schlecht für meine Privatsphäre ist.</string>
   <string name="deletion_reason_no_longer_want_public">Ich habe meine Meinung geändert. Ich möchte nicht mehr, dass es öffentlich sichtbar ist.</string>
   <string name="deletion_reason_not_interesting">Entschuldigung, aber dieses Bild ist für eine Enzyklopädie nicht relevant.</string>
-  <string name="uploaded_by_myself" fuzzy="true">Von mir selbst hochgeladen am %1$s, verwendet in %2$d Artikel(n).</string>
+  <string name="uploaded_by_myself">Von mir selbst hochgeladen am %1$s, verwendet in mindestens %2$d Artikel(n).</string>
   <string name="no_uploads">Willkommen bei Commons!\n\nLade deine erste Datei hoch, indem du auf die Hinzufügen-Schaltfläche tippst.</string>
   <string name="no_categories_selected">Keine Kategorien ausgewählt</string>
   <string name="no_categories_selected_warning_desc">Bilder ohne Kategorien sind selten nutzbar. Bist du sicher, dass du ohne die Auswahl von Kategorien hochladen möchtest?</string>
@@ -615,6 +616,8 @@
   <string name="title_for_media">MEDIA</string>
   <string name="title_for_child_classes">CHILD CLASSES</string>
   <string name="title_for_parent_classes">PARENT CLASSES</string>
+  <string name="title_for_subcategories">UNTERKATEGORIEN</string>
+  <string name="title_for_parent_categories">ÜBERGEORDNETE KATEGORIEN</string>
   <string name="upload_nearby_place_found_title">Ort in der Nähe gefunden</string>
   <string name="upload_nearby_place_found_description_plural">Sind das Bilder von %1$s ?</string>
   <string name="upload_nearby_place_found_description_singular">Ist das ein Foto von %1$s?</string>

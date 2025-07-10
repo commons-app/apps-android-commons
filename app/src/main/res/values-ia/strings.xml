@@ -572,6 +572,8 @@
   <string name="title_for_media">MULTIMEDIA</string>
   <string name="title_for_child_classes">CLASSES FILIO</string>
   <string name="title_for_parent_classes">CLASSES GENITOR</string>
+  <string name="title_for_subcategories">SUBCATEGORIAS</string>
+  <string name="title_for_parent_categories">CATEGORIAS GENITOR</string>
   <string name="upload_nearby_place_found_title">Loco a proximitate trovate</string>
   <string name="upload_nearby_place_found_description_plural">Es istes imagines de %1$s?</string>
   <string name="upload_nearby_place_found_description_singular">Es isto un imagine de %1$s?</string>

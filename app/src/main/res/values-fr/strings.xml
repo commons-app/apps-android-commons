@@ -622,6 +622,8 @@
   <string name="title_for_media">MÉDIA</string>
   <string name="title_for_child_classes">CLASSES ENFANTS</string>
   <string name="title_for_parent_classes">CLASSES PARENTES</string>
+  <string name="title_for_subcategories">SOUS-CATÉGORIES</string>
+  <string name="title_for_parent_categories">CATÉGORIES PARENTES</string>
   <string name="upload_nearby_place_found_title">Lieu à proximité trouvé</string>
   <string name="upload_nearby_place_found_description_plural">Ces images sont-elles de %1$s ?</string>
   <string name="upload_nearby_place_found_description_singular">Est-ce une image de %1$s ?</string>

@@ -639,6 +639,8 @@
   <string name="title_for_media">МЕДИА</string>
   <string name="title_for_child_classes">ДЕТСКИЕ КЛАССЫ</string>
   <string name="title_for_parent_classes">РОДИТЕЛЬСКИЕ КЛАССЫ</string>
+  <string name="title_for_subcategories">ПОДКАТЕГОРИИ</string>
+  <string name="title_for_parent_categories">РОДИТЕЛЬСКИЕ КАТЕГОРИИ</string>
   <string name="upload_nearby_place_found_title">Место поблизости найдено</string>
   <string name="upload_nearby_place_found_description_plural">На этих изображениях %1$s?</string>
   <string name="upload_nearby_place_found_description_singular">На этом изображении %1$s?</string>

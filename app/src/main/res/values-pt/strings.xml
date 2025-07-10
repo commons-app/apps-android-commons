@@ -130,6 +130,7 @@
   <string name="login_failed_throttled">Demasiadas tentativas mal sucedidas. Por favor, tente novamente dentro de minutos.</string>
   <string name="login_failed_blocked">Desculpe, este utilizador foi bloqueado na wiki Commons</string>
   <string name="login_failed_2fa_needed">Tem de fornecer o seu código de autenticação de dois fatores.</string>
+  <string name="login_failed_email_auth_needed">Foi enviado um código de verificação de autenticação para o seu endereço de correio eletrónico. Por favor, forneça o código para iniciar a sessão.</string>
   <string name="login_failed_generic">O início de sessão falhou</string>
   <string name="share_upload_button">Carregar</string>
   <string name="multiple_share_base_title">Dê um nome a este conjunto</string>
@@ -423,7 +424,7 @@
   <string name="deletion_reason_bad_for_my_privacy">Apercebi-me de que prejudica a minha privacidade</string>
   <string name="deletion_reason_no_longer_want_public">Mudei de ideias, já não quero possa ser vista pelo público</string>
   <string name="deletion_reason_not_interesting">Desculpe, esta fotografia não tem interesse para uma enciclopédia</string>
-  <string name="uploaded_by_myself" fuzzy="true">Carregada por mim em %1$s, usada em %2$d artigo(s).</string>
+  <string name="uploaded_by_myself">Enviada por mim em %1$s, usada pelo menos em %2$d artigo(s).</string>
   <string name="no_uploads">Bem-vindo(a) à wiki Commons!\n\nCarregue o seu primeiro ficheiro multimédia tocando no botão Adicionar.</string>
   <string name="no_categories_selected">Não foi selecionada nenhuma categoria</string>
   <string name="no_categories_selected_warning_desc">As imagens sem categorias só raramente são utilizáveis. Tem a certeza de que deseja continuar sem selecionar categorias?</string>
@@ -588,6 +589,8 @@
   <string name="title_for_media">MULTIMÉDIA</string>
   <string name="title_for_child_classes">CLASSES DESCENDENTES</string>
   <string name="title_for_parent_classes">CLASSES PROGENITORAS</string>
+  <string name="title_for_subcategories">SUBCATEGORIAS</string>
+  <string name="title_for_parent_categories">CATEGORIAS FONTE</string>
   <string name="upload_nearby_place_found_title">Foi encontrado um local próximo</string>
   <string name="upload_nearby_place_found_description_plural">Estas imagens são de %1$s?</string>
   <string name="upload_nearby_place_found_description_singular">Isto é uma imagem de %1$s?</string>
@@ -766,10 +769,24 @@
   <string name="edit_location">Editar localização</string>
   <string name="location_updated">Localização actualizada!</string>
   <string name="remove_location">Remover Localização</string>
+  <string name="location_removed">Localização removida!</string>
   <string name="send_thanks_to_author">Agradecer ao autor</string>
   <string name="error_sending_thanks">Erro no envio de agradecimento ao autor.</string>
+  <string name="invalid_login_message">A sua autenticação expirou. Por favor, inicie a sessão novamente.</string>
+  <string name="no_application_available_to_open_gpx_files">Nenhuma aplicação disponível para abrir os ficheiros GPX</string>
+  <string name="file_saved_successfully">Ficheiro guardado com sucesso</string>
+  <string name="do_you_want_to_open_gpx_file">Deseja abrir o ficheiro GPX?</string>
+  <string name="do_you_want_to_open_kml_file">Deseja abrir o ficheiro KML?</string>
+  <string name="saving_kml_file">Guardar Ficheiro KML</string>
+  <string name="saving_gpx_file">Guardar Ficheiro GPX</string>
   <plurals name="custom_picker_images_selected_title_appendix">
     <item quantity="one">%d imagem selecionada</item>
     <item quantity="other">%d imagens selecionadas</item>
   </plurals>
+  <string name="nearby_wikitalk">Reporte um problema sobre este item na Wikidados</string>
+  <string name="please_enter_some_comments">Por favor, insira alguns comentários</string>
+  <string name="talk">Discussão</string>
+  <string name="other_problem_or_information_please_explain_below">Outro problema ou informação (por favor, explique em baixo).</string>
+  <string name="feedback_destination_note">O seu comentário é publicado na seguinte página da wiki: &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Mobile_app/Feedback\"&gt;Commons:Mobile app/Feedback&lt;/a&gt;</string>
+  <string name="nominated_for_deletion_btn">Nomeada para Eliminação</string>
 </resources>
