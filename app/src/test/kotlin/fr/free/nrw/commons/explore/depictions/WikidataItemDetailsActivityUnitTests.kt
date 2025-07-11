@@ -108,7 +108,7 @@ class WikidataItemDetailsActivityUnitTests {
     @Test
     @Throws(Exception::class)
     fun testGetTotalMediaCount() {
-        activity.totalMediaCount
+        activity.getTotalMediaCount()
     }
 
     @Test
