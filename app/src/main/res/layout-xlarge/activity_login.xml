@@ -153,7 +153,6 @@
                             android:layout_height="wrap_content"
                             android:imeOptions="actionDone"
                             android:inputType="number"
-                            android:singleLine="true"
                             android:maxLines="1"
                             android:visibility="gone"
                             tools:visibility="visible" />
