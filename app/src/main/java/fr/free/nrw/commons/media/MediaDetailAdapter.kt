@@ -8,7 +8,7 @@ import fr.free.nrw.commons.media.MediaDetailFragment.Companion.forMedia
 import timber.log.Timber
 
 // FragmentStatePagerAdapter allows user to swipe across collection of images (no. of images undetermined)
-internal class MediaDetailAdapter(
+class MediaDetailAdapter(
     val mediaDetailPagerFragment: MediaDetailPagerFragment,
     fm: FragmentManager
 ) : FragmentStatePagerAdapter(fm) {
@@ -24,7 +24,7 @@ internal class MediaDetailAdapter(
                 Timber.d("Skipping getItem. Returning as activity is destroyed!")
                 return Fragment()
             }
-            mediaDetailPagerFragment.binding.mediaDetailsPager.postDelayed(
+            mediaDetailPagerFragment.binding!!.mediaDetailsPager.postDelayed(
                 { mediaDetailPagerFragment.requireActivity().invalidateOptionsMenu() }, 5
             )
         }
@@ -48,7 +48,7 @@ internal class MediaDetailAdapter(
             Timber.d("Skipping getCount. Returning as activity is destroyed!")
             return 0
         }
-        return mediaDetailPagerFragment.provider.getTotalMediaCount()
+        return mediaDetailPagerFragment.mediaDetailProvider!!.getTotalMediaCount()
     }
 
     /**
