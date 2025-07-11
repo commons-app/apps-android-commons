@@ -1,6 +1,6 @@
 package fr.free.nrw.commons.media
 
-import fr.free.nrw.commons.OkHttpConnectionFactory.UnsuccessfulResponseInterceptor.SUPPRESS_ERROR_LOG_HEADER
+import fr.free.nrw.commons.SUPPRESS_ERROR_LOG_HEADER
 import fr.free.nrw.commons.wikidata.mwapi.MwQueryResponse
 import io.reactivex.Single
 import retrofit2.http.GET

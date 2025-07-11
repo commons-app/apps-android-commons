@@ -1,5 +1,8 @@
 package fr.free.nrw.commons.explore.depictions;
 
+import static fr.free.nrw.commons.ViewPagerAdapter.pairOf;
+import static fr.free.nrw.commons.utils.UrlUtilsKt.handleWebUrl;
+
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -8,16 +11,11 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.FrameLayout;
-import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.viewpager.widget.ViewPager;
 import com.google.android.material.snackbar.Snackbar;
-import com.google.android.material.tabs.TabLayout;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.ViewPagerAdapter;
 import fr.free.nrw.commons.bookmarks.items.BookmarkItemsDao;
 import fr.free.nrw.commons.category.CategoryImagesCallback;
@@ -34,8 +32,10 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import javax.inject.Inject;
+import kotlin.Pair;
 
 /**
  * Activity to show depiction media, parent classes and child classes of depicted items in Explore
@@ -69,7 +69,7 @@ public class WikidataItemDetailsActivity extends BaseActivity implements MediaDe
         setContentView(binding.getRoot());
         compositeDisposable = new CompositeDisposable();
         supportFragmentManager = getSupportFragmentManager();
-        viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
+        viewPagerAdapter = new ViewPagerAdapter(this, getSupportFragmentManager());
         binding.viewPager.setAdapter(viewPagerAdapter);
         binding.viewPager.setOffscreenPageLimit(2);
         binding.tabLayout.setupWithViewPager(binding.viewPager);
@@ -108,8 +108,6 @@ public class WikidataItemDetailsActivity extends BaseActivity implements MediaDe
      * Set the fragments according to the tab selected in the viewPager.
      */
     private void setTabs() {
-        List<Fragment> fragmentList = new ArrayList<>();
-        List<String> titleList = new ArrayList<>();
         depictionImagesListFragment = new DepictedImagesFragment();
         ChildDepictionsFragment childDepictionsFragment = new ChildDepictionsFragment();
         ParentDepictionsFragment parentDepictionsFragment = new ParentDepictionsFragment();
@@ -123,13 +121,12 @@ public class WikidataItemDetailsActivity extends BaseActivity implements MediaDe
             parentDepictionsFragment.setArguments(arguments);
             childDepictionsFragment.setArguments(arguments);
         }
-        fragmentList.add(depictionImagesListFragment);
-        titleList.add(getResources().getString(R.string.title_for_media));
-        fragmentList.add(childDepictionsFragment);
-        titleList.add(getResources().getString(R.string.title_for_child_classes));
-        fragmentList.add(parentDepictionsFragment);
-        titleList.add(getResources().getString(R.string.title_for_parent_classes));
-        viewPagerAdapter.setTabData(fragmentList, titleList);
+
+        viewPagerAdapter.setTabs(
+            pairOf(R.string.title_for_media, depictionImagesListFragment),
+            pairOf(R.string.title_for_subcategories, childDepictionsFragment),
+            pairOf(R.string.title_for_parent_categories, parentDepictionsFragment)
+        );
         binding.viewPager.setOffscreenPageLimit(2);
         viewPagerAdapter.notifyDataSetChanged();
 
@@ -249,7 +246,7 @@ public class WikidataItemDetailsActivity extends BaseActivity implements MediaDe
             case R.id.browser_actions_menu_items:
                 String entityId=getIntent().getStringExtra("entityId");
                 Uri uri = Uri.parse("https://www.wikidata.org/wiki/" + entityId);
-                Utils.handleWebUrl(this, uri);
+                handleWebUrl(this, uri);
                 return true;
             case R.id.menu_bookmark_current_item:
 

@@ -180,7 +180,7 @@
   <string name="tutorial_4_subtext_2">Kuvaus: Sydneyn oopperatalo lahden toiselta puolelta katsottuna</string>
   <string name="tutorial_4_subtext_3">Luokat: Sydneyn oopperatalo lännestä katsottuna, Sydneyn oopperatalo kaukaa katsottuna</string>
   <string name="welcome_wikipedia_text">Herätä Wikipedia-artikkelit eloon kuvillasi! Tuo kuvasi Wikipediaan.</string>
-  <string name="welcome_wikipedia_subtext">Wikipedian kuvat tulevat Wikimedia Commonsista.</string>
+  <string name="welcome_wikipedia_subtext">Wikipedian kuvat ovat peräisin Wikimedia Commonsista.</string>
   <string name="welcome_copyright_text">Kuvasi auttavat useita ihmisiä ympäri maailmaa artikkeleiden ymmärtämisessä.</string>
   <string name="welcome_copyright_subtext">Vältä tekijänoikeuksien alaista materiaalia, kuten julisteita, kirjan kansia ja useimpia Internetistä löydettyjä kuvia.</string>
   <string name="welcome_final_text">Luuletko ymmärtäneesi tämän?</string>
@@ -404,7 +404,7 @@
   <string name="deletion_reason_bad_for_my_privacy">Huomasin, että se on haitallinen yksityisyydelleni.</string>
   <string name="deletion_reason_no_longer_want_public">Muutin mieleni, en halua että se on enää julkisesti näkyvissä.</string>
   <string name="deletion_reason_not_interesting">Valitettavasti tämä kuva ei ole kiinnostava tietosanakirjaan</string>
-  <string name="uploaded_by_myself">Minä olen ladannut kohteen %1$s käytetty %2$d artikkelissa.</string>
+  <string name="uploaded_by_myself" fuzzy="true">Minä olen ladannut kohteen %1$s käytetty %2$d artikkelissa.</string>
   <string name="no_uploads">Tervetuloa Commonsiin!\n\nTallenna ensimmäinen mediasi koskettamalla lisäyspainiketta.</string>
   <string name="no_categories_selected">Luokkia ei valittu</string>
   <string name="no_categories_selected_warning_desc">Kuvat, jotka eivät ole luokissa, ovat harvoin käyttökelpoisia. Haluatko varmasti jatkaa valitsematta luokkia?</string>

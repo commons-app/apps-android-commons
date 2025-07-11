@@ -470,7 +470,7 @@
   <string name="deletion_reason_bad_for_my_privacy">Я осознал, что это разглашает мою приватность</string>
   <string name="deletion_reason_no_longer_want_public">Я передумал. Больше не хочу чтобы было доступным публично</string>
   <string name="deletion_reason_not_interesting">Извините, это изображение не для энциклопедии</string>
-  <string name="uploaded_by_myself">Загружено мною на сайт «%1$s» и использовано в {{PLURAL:%2$d|one=одной статье|%2$d статьях}}.</string>
+  <string name="uploaded_by_myself">Загружено мною на сайт «%1$s» и использовано по крайней мере в {{PLURAL:%2$d|one=одной статье|%2$d статьях}}.</string>
   <string name="no_uploads">Добро пожаловать на Викисклад!\n\nЗагрузите ваш первый файл, нажав на кнопку добавления.</string>
   <string name="no_categories_selected">Не выбраны категории</string>
   <string name="no_categories_selected_warning_desc">Изображения без категорий используются редко. Вы уверены, что хотите продолжить, не выбрав категории?</string>
@@ -639,6 +639,8 @@
   <string name="title_for_media">МЕДИА</string>
   <string name="title_for_child_classes">ДЕТСКИЕ КЛАССЫ</string>
   <string name="title_for_parent_classes">РОДИТЕЛЬСКИЕ КЛАССЫ</string>
+  <string name="title_for_subcategories">ПОДКАТЕГОРИИ</string>
+  <string name="title_for_parent_categories">РОДИТЕЛЬСКИЕ КАТЕГОРИИ</string>
   <string name="upload_nearby_place_found_title">Место поблизости найдено</string>
   <string name="upload_nearby_place_found_description_plural">На этих изображениях %1$s?</string>
   <string name="upload_nearby_place_found_description_singular">На этом изображении %1$s?</string>
@@ -887,4 +889,5 @@
   <string name="show_in_nearby">Показать в Nearby</string>
   <string name="image_tag_line_created_and_uploaded_by">Создано и загружено: %1$s</string>
   <string name="image_tag_line_created_by_and_uploaded_by">Создано %1$s и загружено %2$s</string>
+  <string name="nominated_for_deletion_btn">Номинировано на удаление</string>
 </resources>

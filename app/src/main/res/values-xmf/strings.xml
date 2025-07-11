@@ -99,6 +99,8 @@
   <string name="menu_from_camera">ფოტოშ გინოღალა</string>
   <string name="menu_nearby">გოხოლუას</string>
   <string name="provider_contributions">ჩქიმი ეხარგუეფი</string>
+  <string name="menu_copy_link">რსხილიშ კოპირება</string>
+  <string name="menu_link_copied">რსხილი კოპირებული რე ბუფერულ შვენას</string>
   <string name="menu_share">გობჟინაფა</string>
   <string name="menu_view_file_page">ფაილიშ ხასჷლაშ ძირაფა</string>
   <string name="share_title_hint">მუკნაჭარა (უციო)</string>
@@ -109,6 +111,7 @@
   <string name="login_failed_throttled">ძალამ მიარე უმწუძინუ ცადება. ქორთხინ, მუხირენ წუთშა ხოლო ქოცადით.</string>
   <string name="login_failed_blocked">მორდება, თე მახვარებუ ბლოკირი რე ვიკიოწკარუეს</string>
   <string name="login_failed_2fa_needed">თქვა გემშიონათ ოკო ჟირფაქტორიანი ავტორიზაციაშ კოდი.</string>
+  <string name="login_failed_email_auth_needed">დოდასურაფაშ კოდი ჯღონელი რე თქვანი ელექტრონული ფოშტაშა. ქორთხიინთ, მოჯღონელი კოდი გენშეჸონათ მიშაულარო.</string>
   <string name="login_failed_generic">მიშულაქ ვემიხუჯინუ</string>
   <string name="share_upload_button">ეხარგუა</string>
   <string name="multiple_share_base_title">სერიაშ ჯოხო</string>
@@ -117,6 +120,7 @@
   <string name="categories_search_text_hint">კატეგორიაშ გიშაგორუა</string>
   <string name="depicts_search_text_hint">დოგორით ელემენტეფი, ნამუეფით მოჩამილი რე თქვანი სურათის (გვალა, ტაჯ-მაჰალი დო თ.უ.)</string>
   <string name="menu_save_categories">ჩუალა</string>
+  <string name="menu_overflow_desc">გეძინელი მენიუ</string>
   <string name="refresh_button">გოახალაფა</string>
   <string name="display_list_button">ერკებული</string>
   <string name="contributions_subtitle_zero">(ეხარგუეფი ვა რე)</string>
@@ -213,6 +217,7 @@
   <string name="become_a_tester_title">ბეტა ტესტირებას კათაფი</string>
   <string name="become_a_tester_description">ჩართით Beta-შა ჭირინაფა Google Play-ს დო მიღით ორდოიანი ჭირინაფა ახალ ფუნქციეფშა დო ჩილათეფიშ ეშახინტკალო</string>
   <string name="_2fa_code">2ფა კოდი</string>
+  <string name="email_auth_code">ელექტრონული ფოშტაშ დოდასურაფაშ კოდი</string>
   <string name="logout_verification">გოკონანო გიშულა?</string>
   <string name="mediaimage_failed">მედიაფაილიშ ჩილათა</string>
   <string name="no_subcategory_found">გიმენკატეგორიეფქ ვეგორინუ</string>
@@ -360,6 +365,7 @@
   <string name="previous">კინოხიანი</string>
   <string name="title_page_bookmarks_pictures">სურათეფი</string>
   <string name="title_page_bookmarks_locations">ორენეფი</string>
+  <string name="title_page_bookmarks_categories">კატეგორიეფი</string>
   <string name="menu_bookmark">მიკოწონებულეფშა გეძინა/ლასუა</string>
   <string name="provider_bookmarks">მიკოწონებულეფი</string>
   <string name="bookmark_empty">თქვა ვეგეიძინჷნა აკა მიკოწონებული</string>
@@ -369,12 +375,14 @@
   <string name="deletion_reason_bad_for_my_privacy">მიბრჩქინე, ნამჷდა თენა ჩქიმი კონფიდენციალურალაშო გლახა იჸუაფუდჷნ</string>
   <string name="deletion_reason_no_longer_want_public">არზი დიბთირე დო შუროთ ვამოკო თინა ოჯარალეთ იძირებედასჷნ</string>
   <string name="deletion_reason_not_interesting">მორდება, ათე სურათი ენციკლოპედიაშო ვა რე საინტერესო</string>
-  <string name="uploaded_by_myself">ჩქიმი ენახარგა რე %1$s-შა, გჷმორინაფილი რე %2$d სტატიას.</string>
+  <string name="uploaded_by_myself" fuzzy="true">ჩქიმი ენახარგა რე %1$s-შა, გჷმორინაფილი რე %2$d სტატიას.</string>
   <string name="no_uploads">მოზოჯით ვიკიოწკარუეშა!\n\nგეხარგეთ თქვანი პირველი ფაილი, ქეგუნჭირით კონჭის გეძინა.</string>
   <string name="no_categories_selected">კატეგორია ვა რე გიშაგორილი</string>
   <string name="no_categories_selected_warning_desc">სურათეფი კატეგორიზაციაშ უმუშო შხირას მერკეთ გჷმორინაფონი რე. დასურო გონებჷნანო კატეგორიეფიშ მეწურაფაშ უმუშო გაგჷნძარაფა?</string>
+  <string name="no_depictions_selected">ეჭარუა ვა რე გიშაგორილი</string>
   <string name="back_button_warning">ეხარგუაშ გოუქვაფა</string>
   <string name="back_button_continue">ეხარგუაშ გოგჷნძორაფა</string>
+  <string name="upload_flow_all_images_in_set">(ნაკორობაშ არძა სურათიშო)</string>
   <string name="search_this_area">ათე არანს გორუა</string>
   <string name="nearby_card_permission_title">ალობაშ მოთხირი</string>
   <string name="never_ask_again">თენა კჷნ დღას ვაბკითხა</string>
@@ -383,9 +391,20 @@
   <string name="option_allow">ალობაშ მეჩამა</string>
   <string name="option_dismiss">გოუქვაფა</string>
   <string name="nominate_for_deletion_done">ღოლამირჷ რე</string>
+  <string name="review_category">თინას რენო კათეგორიეფი მეწურაფილი?</string>
+  <string name="review_thanks_yes_button_text">გეჸვენჯი სურათი</string>
+  <string name="review_thanks_no_button_text">ქო, მუშენ ვარი</string>
   <string name="no_image">ვა რე გუმორინაფილი სურათეფი</string>
+  <string name="no_image_uploaded">ვა რე ეხარგილი სურათეფი</string>
+  <string name="no_notification">თქვა ვაიღჷნა უკითხირუ გინაფეფი</string>
+  <string name="no_read_notification">ვა ვაიღჷნა კითხირებული გინაფეფი</string>
+  <string name="check_your_email_inbox">ქოძირით თქვანი ელექტრონული ფოსტა</string>
+  <string name="menu_option_read">კითხირებულიშ ძირაფა</string>
+  <string name="menu_option_unread">უკითხირებუშ ძირაფა</string>
   <string name="error_occurred_in_picking_images">სურათიშ ეხარგუაშ ბორჯის ჩილათაქ მოხვადჷ</string>
   <string name="please_wait">ქორთხინთ ქჷმიცადით …</string>
+  <string name="copied_successfully">კოპირაფილი რე</string>
+  <string name="skip_image">თე სურათიშ გიშატება</string>
   <string name="exif_tag_name_author">ავტორი</string>
   <string name="exif_tag_name_location">ორენი</string>
   <string name="exif_tag_name_cameraModel">კამერაშ მოდელი</string>
@@ -393,9 +412,32 @@
   <string name="exif_tag_name_serialNumbers">სერიული ნომერი</string>
   <string name="exif_tag_name_software">პროგრამული უნარღელჸუა</string>
   <string name="image_info">სურათიშ ინფორმაცია</string>
-  <string name="delete_helper_ask_spam_selfie" fuzzy="true">სელფი</string>
-  <string name="delete_helper_ask_spam_blurry" fuzzy="true">ჸურილი</string>
+  <string name="no_categories_found">კატეგორიეფქ ვეგორინუ</string>
+  <string name="no_depiction_found">ეჭარუეფქ ვეორინუ</string>
+  <string name="upload_cancelled">ეხარგუაქ გეუქვუ</string>
+  <string name="dialog_box_text_nomination">მუშენ დილასას ოკო %1$s-ქ?</string>
+  <string name="review_is_uploaded_by">%1$s ეხარგილი რე: %2$s</string>
+  <string name="delete_helper_show_deletion_title_success">წუმოძინელო</string>
+  <string name="delete_helper_show_deletion_message_if">%1$s ნომინირებული რე ოლასარო.</string>
+  <string name="delete_helper_show_deletion_title_failed">ვემიხუჯინუ</string>
+  <string name="delete_helper_show_deletion_message_else">ვეშილებე ლასუაშ მოთხირი.</string>
+  <string name="delete_helper_ask_spam_selfie">სელფი, ნამუთ ვეგჷმირინუაფუ ნამთინ სტატიას</string>
+  <string name="delete_helper_ask_spam_blurry">ედომუშამო გინობარდილი რე</string>
+  <string name="delete_helper_ask_spam_nonsense">უაზრობა, აბსოლუტურო უმუხუჯუ რე ირნერი სტატიას</string>
+  <string name="delete_helper_ask_reason_copyright_press_photo">ახალი ამბეეფიშ სურათი</string>
+  <string name="delete_helper_ask_reason_copyright_internet_photo">ნამდგა სურათი ინტერნეტიშე</string>
+  <string name="delete_helper_ask_reason_copyright_logo">ლოგო</string>
+  <string name="delete_helper_ask_reason_copyright_no_freedom_of_panorama">პანორამაშ დუდიშულაშ აკორცუაფა</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">თიშენ ნამჷ-და თინა რე</string>
+  <string name="category_edit_helper_make_edit_toast">კატეგორიეფიშ მოახალებაშ ცადება.</string>
+  <string name="category_edit_helper_show_edit_title">კატეგორიაშ მოახალება</string>
+  <string name="category_edit_helper_show_edit_title_success">წუმოძინელო</string>
+  <plurals name="category_edit_helper_show_edit_message_if">
+    <item quantity="one">კატეგორია %1$s გეძინელი რე.</item>
+    <item quantity="other">კატეგორიეფი %1$sგეძინელი რე.</item>
+  </plurals>
+  <string name="category_edit_helper_edit_message_else">ვემიხუჯინუ კატეგორიეფიშ გეძინაქ.</string>
+  <string name="category_edit_button_text">კატეგორიეფიშ მოახალება</string>
   <string name="title_app_shortcut_bookmark">მიკოწონებეფი</string>
   <string name="title_app_shortcut_setting">პარამეტრეფი</string>
   <string name="theme_dark_name">რუმე</string>

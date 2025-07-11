@@ -1,5 +1,7 @@
 package fr.free.nrw.commons.explore;
 
+import static fr.free.nrw.commons.ViewPagerAdapter.pairOf;
+
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -26,11 +28,13 @@ import fr.free.nrw.commons.utils.FragmentUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 import javax.inject.Inject;
+import kotlin.Pair;
 import timber.log.Timber;
 
 /**
@@ -65,7 +69,7 @@ public class SearchActivity extends BaseActivity
         binding.toolbarSearch.setNavigationOnClickListener(v->onBackPressed());
         supportFragmentManager = getSupportFragmentManager();
         setSearchHistoryFragment();
-        viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
+        viewPagerAdapter = new ViewPagerAdapter(this, getSupportFragmentManager());
         binding.viewPager.setAdapter(viewPagerAdapter);
         binding.viewPager.setOffscreenPageLimit(2); // Because we want all the fragments to be alive
         binding.tabLayout.setupWithViewPager(binding.viewPager);
@@ -90,19 +94,15 @@ public class SearchActivity extends BaseActivity
      * Sets the titles in the tabLayout and fragments in the viewPager
      */
     public void setTabs() {
-        List<Fragment> fragmentList = new ArrayList<>();
-        List<String> titleList = new ArrayList<>();
         searchMediaFragment = new SearchMediaFragment();
         searchDepictionsFragment = new SearchDepictionsFragment();
         searchCategoryFragment= new SearchCategoryFragment();
-        fragmentList.add(searchMediaFragment);
-        titleList.add(getResources().getString(R.string.search_tab_title_media).toUpperCase(Locale.ROOT));
-        fragmentList.add(searchCategoryFragment);
-        titleList.add(getResources().getString(R.string.search_tab_title_categories).toUpperCase(Locale.ROOT));
-        fragmentList.add(searchDepictionsFragment);
-        titleList.add(getResources().getString(R.string.search_tab_title_depictions).toUpperCase(Locale.ROOT));
 
-        viewPagerAdapter.setTabData(fragmentList, titleList);
+        viewPagerAdapter.setTabs(
+            pairOf(R.string.search_tab_title_media, searchMediaFragment),
+            pairOf(R.string.search_tab_title_categories, searchCategoryFragment),
+            pairOf(R.string.search_tab_title_depictions, searchDepictionsFragment)
+        );
         viewPagerAdapter.notifyDataSetChanged();
         getCompositeDisposable().add(RxSearchView.queryTextChanges(binding.searchBox)
                 .takeUntil(RxView.detaches(binding.searchBox))

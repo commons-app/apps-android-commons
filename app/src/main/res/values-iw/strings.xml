@@ -444,7 +444,7 @@
   <string name="deletion_reason_bad_for_my_privacy">הבנתי שזה לא טוב לפרטיות שלי</string>
   <string name="deletion_reason_no_longer_want_public">התחרטתי, אינני רוצה עוד שהיא תוצג לציבור</string>
   <string name="deletion_reason_not_interesting">סליחה, התמונה אינה מעניינת עבור אנציקלופדיה</string>
-  <string name="uploaded_by_myself">הועלה על ידי ב-%1$s, בשימוש ב-%2$d מאמר(ים)</string>
+  <string name="uploaded_by_myself">הועלה על ידי ב־%1$s, בשימוש ב־%2$d ערכים לפחות.</string>
   <string name="no_uploads">ברוך בואך לוויקישיתוף!\n\nכדי להעלות את המדיה הראשונה שלך, נא להקיש על כפתור ההוספה.</string>
   <string name="no_categories_selected">לא נבחרו קטגוריות</string>
   <string name="no_categories_selected_warning_desc">תמונות ללא קטגוריות בדרך כלל אינן שימושיות. להמשיך ללא בחירת קטגוריות?</string>
@@ -613,6 +613,8 @@
   <string name="title_for_media">מדיה</string>
   <string name="title_for_child_classes">מחלקות יורשות</string>
   <string name="title_for_parent_classes">מחלקות מורישות</string>
+  <string name="title_for_subcategories">תת־קטגוריות</string>
+  <string name="title_for_parent_categories">קטגוריות הורה</string>
   <string name="upload_nearby_place_found_title">נמצא מקום בסביבה</string>
   <string name="upload_nearby_place_found_description_plural">האם אלו תמונות של %1$s?</string>
   <string name="upload_nearby_place_found_description_singular">האם זאת תמונה של %1$s?</string>
@@ -862,4 +864,5 @@
   <string name="show_in_nearby">בתצוגת בסביבה</string>
   <string name="image_tag_line_created_and_uploaded_by">נוצר והועלה על־ידי: %1$s</string>
   <string name="image_tag_line_created_by_and_uploaded_by">נוצר על־ידי %1$s והועלה על־ידי %2$s</string>
+  <string name="nominated_for_deletion_btn">הועמדה למחיקה</string>
 </resources>

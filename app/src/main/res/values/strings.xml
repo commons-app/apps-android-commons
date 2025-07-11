@@ -434,7 +434,7 @@
   <string name="deletion_reason_no_longer_want_public">I changed my mind, I don\'t want it to be publicly visible anymore</string>
   <string name="deletion_reason_not_interesting">Sorry this picture is not interesting for an encyclopedia</string>
 
-  <string name="uploaded_by_myself">Uploaded by myself on %1$s, used in %2$d article(s).</string>
+  <string name="uploaded_by_myself">Uploaded by myself on %1$s, used in %2$d article(s) at least.</string>
 
   <string name="no_uploads">Welcome to Commons!\n
 Upload your first media by tapping on the add button.</string>
@@ -620,6 +620,8 @@ Upload your first media by tapping on the add button.</string>
   <string name="title_for_media">MEDIA</string>
   <string name="title_for_child_classes">CHILD CLASSES</string>
   <string name="title_for_parent_classes">PARENT CLASSES</string>
+  <string name="title_for_subcategories">SUBCATEGORIES</string>
+  <string name="title_for_parent_categories">PARENT CATEGORIES</string>
 
   <string name="upload_nearby_place_found_title">Nearby Place Found</string>
   <string name="upload_nearby_place_found_description_plural">Are these pictures of %1$s?</string>
@@ -879,4 +881,5 @@ Upload your first media by tapping on the add button.</string>
   <string name="show_in_nearby">Show in Nearby</string>
   <string name="image_tag_line_created_and_uploaded_by">Created and uploaded by: %1$s</string>
   <string name="image_tag_line_created_by_and_uploaded_by">Created by %1$s and uploaded by %2$s</string>
+  <string name="nominated_for_deletion_btn">Nominated for Deletion</string>
 </resources>

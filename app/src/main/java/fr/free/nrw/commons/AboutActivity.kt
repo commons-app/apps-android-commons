@@ -1,7 +1,9 @@
 package fr.free.nrw.commons
 
 import android.annotation.SuppressLint
+import android.content.ActivityNotFoundException
 import android.content.Intent
+import android.content.Intent.ACTION_VIEW
 import android.net.Uri
 import android.os.Bundle
 import android.view.Menu
@@ -16,6 +18,9 @@ import fr.free.nrw.commons.theme.BaseActivity
 import fr.free.nrw.commons.utils.ConfigUtils.getVersionNameWithSha
 import fr.free.nrw.commons.utils.DialogUtil.showAlertDialog
 import java.util.Collections
+import androidx.core.net.toUri
+import fr.free.nrw.commons.utils.handleWebUrl
+import fr.free.nrw.commons.utils.setUnderlinedText
 
 /**
  * Represents about screen of this app
@@ -59,30 +64,12 @@ class AboutActivity : BaseActivity() {
         binding!!.aboutImprove.setHtmlText(improveText)
         binding!!.aboutVersion.text = applicationContext.getVersionNameWithSha()
 
-        Utils.setUnderlinedText(
-            binding!!.aboutFaq, R.string.about_faq,
-            applicationContext
-        )
-        Utils.setUnderlinedText(
-            binding!!.aboutRateUs, R.string.about_rate_us,
-            applicationContext
-        )
-        Utils.setUnderlinedText(
-            binding!!.aboutUserGuide, R.string.user_guide,
-            applicationContext
-        )
-        Utils.setUnderlinedText(
-            binding!!.aboutPrivacyPolicy, R.string.about_privacy_policy,
-            applicationContext
-        )
-        Utils.setUnderlinedText(
-            binding!!.aboutTranslate, R.string.about_translate,
-            applicationContext
-        )
-        Utils.setUnderlinedText(
-            binding!!.aboutCredits, R.string.about_credits,
-            applicationContext
-        )
+        binding!!.aboutFaq.setUnderlinedText(R.string.about_faq)
+        binding!!.aboutRateUs.setUnderlinedText(R.string.about_rate_us)
+        binding!!.aboutUserGuide.setUnderlinedText(R.string.user_guide)
+        binding!!.aboutPrivacyPolicy.setUnderlinedText(R.string.about_privacy_policy)
+        binding!!.aboutTranslate.setUnderlinedText(R.string.about_translate)
+        binding!!.aboutCredits.setUnderlinedText(R.string.about_credits)
 
         /*
           To set listeners, we can create a separate method and use lambda syntax.
@@ -106,47 +93,56 @@ class AboutActivity : BaseActivity() {
     fun launchFacebook(view: View?) {
         val intent: Intent
         try {
-            intent = Intent(Intent.ACTION_VIEW, Uri.parse(Urls.FACEBOOK_APP_URL))
+            intent = Intent(ACTION_VIEW, Urls.FACEBOOK_APP_URL.toUri())
             intent.setPackage(Urls.FACEBOOK_PACKAGE_NAME)
             startActivity(intent)
         } catch (e: Exception) {
-            Utils.handleWebUrl(this, Uri.parse(Urls.FACEBOOK_WEB_URL))
+            handleWebUrl(this, Urls.FACEBOOK_WEB_URL.toUri())
         }
     }
 
     fun launchGithub(view: View?) {
         val intent: Intent
         try {
-            intent = Intent(Intent.ACTION_VIEW, Uri.parse(Urls.GITHUB_REPO_URL))
+            intent = Intent(ACTION_VIEW, Urls.GITHUB_REPO_URL.toUri())
             intent.setPackage(Urls.GITHUB_PACKAGE_NAME)
             startActivity(intent)
         } catch (e: Exception) {
-            Utils.handleWebUrl(this, Uri.parse(Urls.GITHUB_REPO_URL))
+            handleWebUrl(this, Urls.GITHUB_REPO_URL.toUri())
         }
     }
 
     fun launchWebsite(view: View?) {
-        Utils.handleWebUrl(this, Uri.parse(Urls.WEBSITE_URL))
+        handleWebUrl(this, Urls.WEBSITE_URL.toUri())
     }
 
     fun launchRatings(view: View?) {
-        Utils.rateApp(this)
+        try {
+            startActivity(
+                Intent(
+                    ACTION_VIEW,
+                    (Urls.PLAY_STORE_PREFIX + packageName).toUri()
+                )
+            )
+        } catch (_: ActivityNotFoundException) {
+            handleWebUrl(this, (Urls.PLAY_STORE_URL_PREFIX + packageName).toUri())
+        }
     }
 
     fun launchCredits(view: View?) {
-        Utils.handleWebUrl(this, Uri.parse(Urls.CREDITS_URL))
+        handleWebUrl(this, Urls.CREDITS_URL.toUri())
     }
 
     fun launchUserGuide(view: View?) {
-        Utils.handleWebUrl(this, Uri.parse(Urls.USER_GUIDE_URL))
+        handleWebUrl(this, Urls.USER_GUIDE_URL.toUri())
     }
 
     fun launchPrivacyPolicy(view: View?) {
-        Utils.handleWebUrl(this, Uri.parse(BuildConfig.PRIVACY_POLICY_URL))
+        handleWebUrl(this, BuildConfig.PRIVACY_POLICY_URL.toUri())
     }
 
     fun launchFrequentlyAskedQuesions(view: View?) {
-        Utils.handleWebUrl(this, Uri.parse(Urls.FAQ_URL))
+        handleWebUrl(this, Urls.FAQ_URL.toUri())
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -193,7 +189,7 @@ class AboutActivity : BaseActivity() {
 
         val positiveButtonRunnable = Runnable {
             val langCode = instance.languageLookUpTable!!.getCodes()[spinner.selectedItemPosition]
-            Utils.handleWebUrl(this@AboutActivity, Uri.parse(Urls.TRANSLATE_WIKI_URL + langCode))
+            handleWebUrl(this@AboutActivity, (Urls.TRANSLATE_WIKI_URL + langCode).toUri())
         }
         showAlertDialog(
             this,

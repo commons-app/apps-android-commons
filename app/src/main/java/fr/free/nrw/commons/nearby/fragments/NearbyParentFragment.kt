@@ -58,12 +58,10 @@ import fr.free.nrw.commons.CommonsApplication
 import fr.free.nrw.commons.MapController.NearbyPlacesInfo
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.R
-import fr.free.nrw.commons.Utils
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao
 import fr.free.nrw.commons.contributions.ContributionController
 import fr.free.nrw.commons.contributions.MainActivity
 import fr.free.nrw.commons.contributions.MainActivity.ActiveFragment
-import fr.free.nrw.commons.customselector.ui.selector.ImageLoader
 import fr.free.nrw.commons.databinding.FragmentNearbyParentBinding
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment
 import fr.free.nrw.commons.filepicker.FilePicker
@@ -76,7 +74,6 @@ import fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType
 import fr.free.nrw.commons.location.LocationUpdateListener
 import fr.free.nrw.commons.media.MediaClient
 import fr.free.nrw.commons.media.MediaDetailPagerFragment
-import fr.free.nrw.commons.media.MediaDetailPagerFragment.MediaDetailProvider
 import fr.free.nrw.commons.navtab.NavTab
 import fr.free.nrw.commons.nearby.BottomSheetAdapter
 import fr.free.nrw.commons.nearby.BottomSheetAdapter.ItemClickListener
@@ -105,6 +102,10 @@ import fr.free.nrw.commons.utils.NearbyFABUtils.removeAnchorFromFAB
 import fr.free.nrw.commons.utils.NetworkUtils.isInternetConnectionEstablished
 import fr.free.nrw.commons.utils.SystemThemeUtils
 import fr.free.nrw.commons.utils.ViewUtil.showLongToast
+import fr.free.nrw.commons.utils.copyToClipboard
+import fr.free.nrw.commons.utils.handleGeoCoordinates
+import fr.free.nrw.commons.utils.handleWebUrl
+import fr.free.nrw.commons.utils.isMonumentsEnabled
 import fr.free.nrw.commons.wikidata.WikidataConstants
 import fr.free.nrw.commons.wikidata.WikidataEditListener
 import fr.free.nrw.commons.wikidata.WikidataEditListener.WikidataP18EditListener
@@ -123,6 +124,7 @@ import org.osmdroid.views.CustomZoomButtonsController
 import org.osmdroid.views.MapView
 import org.osmdroid.views.overlay.MapEventsOverlay
 import org.osmdroid.views.overlay.Marker
+import org.osmdroid.views.overlay.Overlay
 import org.osmdroid.views.overlay.ScaleBarOverlay
 import org.osmdroid.views.overlay.ScaleDiskOverlay
 import org.osmdroid.views.overlay.TilesOverlay
@@ -139,7 +141,6 @@ import java.util.UUID
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 import javax.inject.Named
-import javax.sql.DataSource
 import kotlin.concurrent.Volatile
 
 
@@ -266,6 +267,9 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
     private var gridLayoutManager: GridLayoutManager? = null
     private var dataList: MutableList<BottomSheetItem>? = null
     private var bottomSheetAdapter: BottomSheetAdapter? = null
+
+    private var userLocationOverlay: Overlay? = null
+    private var userLocationErrorOverlay: Overlay? = null
 
     private val galleryPickLauncherForResult =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
@@ -463,7 +467,7 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
                 }
             }
         _isDarkTheme = systemThemeUtils?.isDeviceInNightMode() == true
-        if (Utils.isMonumentsEnabled(Date())) {
+        if (isMonumentsEnabled) {
             binding?.rlContainerWlmMonthMessage?.visibility = View.VISIBLE
         } else {
             binding?.rlContainerWlmMonthMessage?.visibility = View.GONE
@@ -724,7 +728,7 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
             val targetP = GeoPoint(target.latitude, target.longitude)
             mapCenter = targetP
             binding?.map?.controller?.setCenter(targetP)
-            recenterMarkerToPosition(targetP)
+            updateUserLocationOverlays(targetP, true)
             if (!isCameFromExploreMap()) {
                 moveCameraToPosition(targetP)
             }
@@ -832,7 +836,7 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
         loadAnimations()
         setBottomSheetCallbacks()
         addActionToTitle()
-        if (!Utils.isMonumentsEnabled(Date())) {
+        if (!isMonumentsEnabled) {
             NearbyFilterState.setWlmSelected(false)
         }
     }
@@ -1013,11 +1017,10 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
      */
     private fun addActionToTitle() {
         binding!!.bottomSheetDetails.title.setOnLongClickListener { view ->
-            Utils.copy(
-                "place", binding!!.bottomSheetDetails.title.text.toString(),
-                context
+            requireContext().copyToClipboard(
+                "place", binding!!.bottomSheetDetails.title.text.toString()
             )
-            Toast.makeText(context, fr.free.nrw.commons.R.string.text_copy, Toast.LENGTH_SHORT)
+            Toast.makeText(requireContext(), fr.free.nrw.commons.R.string.text_copy, Toast.LENGTH_SHORT)
                 .show()
             true
         }
@@ -1576,7 +1579,7 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
                     searchLatLng,
                     false,
                     true,
-                    Utils.isMonumentsEnabled(Date()),
+                    isMonumentsEnabled,
                     customQuery
                 )
             }
@@ -1629,7 +1632,7 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
                     searchLatLng,
                     false,
                     true,
-                    Utils.isMonumentsEnabled(Date()),
+                    isMonumentsEnabled,
                     customQuery
                 )
             }
@@ -1863,6 +1866,8 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
         lastKnownLocation = latLng
         NearbyController.currentLocation = lastKnownLocation
         presenter!!.updateMapAndList(locationChangeType)
+
+        updateUserLocationOverlays(GeoPoint(latLng.latitude, latLng.longitude), true)
     }
 
     override fun onLocationChangedSignificantly(latLng: LatLng) {
@@ -2644,43 +2649,14 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
      */
     override fun clearAllMarkers() {
         binding!!.map.overlayManager.clear()
-        binding!!.map.invalidate()
-        val geoPoint = mapCenter
-        if (geoPoint != null) {
-            val diskOverlay =
-                ScaleDiskOverlay(
-                    this.context,
-                    geoPoint, 2000, UnitOfMeasure.foot
-                )
-            val circlePaint = Paint()
-            circlePaint.color = Color.rgb(128, 128, 128)
-            circlePaint.style = Paint.Style.STROKE
-            circlePaint.strokeWidth = 2f
-            diskOverlay.setCirclePaint2(circlePaint)
-            val diskPaint = Paint()
-            diskPaint.color = Color.argb(40, 128, 128, 128)
-            diskPaint.style = Paint.Style.FILL_AND_STROKE
-            diskOverlay.setCirclePaint1(diskPaint)
-            diskOverlay.setDisplaySizeMin(900)
-            diskOverlay.setDisplaySizeMax(1700)
-            binding!!.map.overlays.add(diskOverlay)
-            val startMarker = Marker(
-                binding!!.map
-            )
-            startMarker.position = geoPoint
-            startMarker.setAnchor(
-                Marker.ANCHOR_CENTER,
-                Marker.ANCHOR_BOTTOM
-            )
-            startMarker.icon =
-                getDrawable(
-                    this.requireContext(),
-                    fr.free.nrw.commons.R.drawable.current_location_marker
-                )
-            startMarker.title = "Your Location"
-            startMarker.textLabelFontSize = 24
-            binding!!.map.overlays.add(startMarker)
+
+        var geoPoint = mapCenter
+        val lastLatLng = locationManager.getLastLocation()
+        if (lastLatLng != null) {
+            geoPoint = GeoPoint(lastLatLng.latitude, lastLatLng.longitude)
         }
+        updateUserLocationOverlays(geoPoint, false)
+
         val scaleBarOverlay = ScaleBarOverlay(binding!!.map)
         scaleBarOverlay.setScaleBarOffset(15, 25)
         val barPaint = Paint()
@@ -2690,6 +2666,7 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
         binding!!.map.overlays.add(scaleBarOverlay)
         binding!!.map.overlays.add(mapEventsOverlay)
         binding!!.map.setMultiTouchControls(true)
+        binding!!.map.invalidate()
     }
 
     /**
@@ -2700,43 +2677,147 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
     private fun recenterMarkerToPosition(geoPoint: GeoPoint?) {
         geoPoint?.let {
             binding?.map?.controller?.setCenter(it)
-            val overlays = binding?.map?.overlays ?: return@let
 
-            // Remove markers and disks using index-based removal
-            var i = 0
-            while (i < overlays.size) {
-                when (overlays[i]) {
-                    is Marker, is ScaleDiskOverlay -> overlays.removeAt(i)
-                    else -> i++
-                }
-            }
-
-            // Add disk overlay
-            ScaleDiskOverlay(context, it, 2000, UnitOfMeasure.foot).apply {
-                setCirclePaint2(Paint().apply {
-                    color = Color.rgb(128, 128, 128)
-                    style = Paint.Style.STROKE
-                    strokeWidth = 2f
-                })
-                setCirclePaint1(Paint().apply {
-                    color = Color.argb(40, 128, 128, 128)
-                    style = Paint.Style.FILL_AND_STROKE
-                })
-                setDisplaySizeMin(900)
-                setDisplaySizeMax(1700)
-                overlays.add(this)
-            }
-
-            // Add marker
-            Marker(binding?.map).apply {
-                position = it
-                setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
-                icon = getDrawable(context, R.drawable.current_location_marker)
-                title = "Your Location"
-                textLabelFontSize = 24
-                overlays.add(this)
-            }
+            updateUserLocationOverlays(it, true);
         }
+    }
+
+    /**
+     * Updates the user current location overlays (both the location and error overlays) by
+     * replacing any existing location overlays with new overlays at the given GeoPoint. If there
+     * are no existing location and error overlays, then new overlays are added.
+     *
+     * @param geoPoint The GeoPoint representing the user's current location.
+     * @param invalidate If true, the map overlays will be invalidated after the user
+     * location overlays are updated/added. If false, the overlays will not be invalidated.
+     */
+    private fun updateUserLocationOverlays(geoPoint: GeoPoint?, invalidate: Boolean) {
+        geoPoint?.let{
+            updateUserLocationOverlay(geoPoint)
+            updateUserLocationErrorOverlay(geoPoint)
+        }
+
+        if (invalidate) {
+            binding!!.map.invalidate()
+        }
+    }
+
+    /**
+     * Updates the user location error overlay by either replacing it with or adding a new one.
+     *
+     * If the user location error overlay is null, the new overlay is added. If the
+     * overlay is not null, it is replaced by the new overlay.
+     *
+     * @param geoPoint The GeoPoint representing the user's location
+     */
+    private fun updateUserLocationErrorOverlay(geoPoint: GeoPoint) {
+            val overlays = binding?.map?.overlays ?: return
+
+            // Multiply accuracy by 2 to get 95% confidence interval
+            val accuracy = getCurrentLocationAccuracy() * 2
+            val overlay = createCurrentLocationErrorOverlay(this.context, geoPoint,
+                (accuracy).toInt(), UnitOfMeasure.meter)
+
+            val index = overlays.indexOf(userLocationErrorOverlay)
+
+            if (userLocationErrorOverlay == null || index == -1) {
+                overlays.add(overlay)
+            } else {
+                overlays[index] = overlay
+            }
+
+            userLocationErrorOverlay = overlay
+    }
+
+    /**
+     * Updates the user location overlay by either replacing it with or adding a new one.
+     *
+     * If the user location overlay is null, the new overlay is added. If the
+     * overlay is not null, it is replaced by the new overlay.
+     *
+     * @param geoPoint The GeoPoint representing the user's location
+     */
+    private fun updateUserLocationOverlay(geoPoint: GeoPoint) {
+            val overlays = binding?.map?.overlays ?: return
+
+            val overlay = createCurrentLocationOverlay(geoPoint)
+
+            val index = overlays.indexOf(userLocationOverlay)
+
+            if (userLocationOverlay == null || index == -1) {
+                overlays.add(overlay)
+            } else {
+                overlays[index] = overlay
+            }
+
+            userLocationOverlay = overlay
+    }
+
+    /**
+     * @return The accuracy of the current location with a confidence at the 68th percentile.
+     * Units are in meters. Returning 0 may indicate failure.
+     */
+    private fun getCurrentLocationAccuracy(): Float {
+        var accuracy = 0f
+        val lastLocation = locationManager.getLastLocation()
+        if (lastLocation != null) {
+            accuracy = lastLocation.accuracy
+        }
+
+        return accuracy
+    }
+
+    /**
+     * Creates the current location overlay
+     *
+     * @param geoPoint The GeoPoint where the current location overlay will be placed.
+     *
+     * @return The current location overlay as a Marker
+     */
+    private fun createCurrentLocationOverlay(geoPoint: GeoPoint): Marker {
+        val currentLocationOverlay = Marker(
+            binding!!.map
+        )
+        currentLocationOverlay.position = geoPoint
+        currentLocationOverlay.icon =
+            getDrawable(
+                this.requireContext(),
+                fr.free.nrw.commons.R.drawable.current_location_marker
+            )
+        currentLocationOverlay.title = "Your Location"
+        currentLocationOverlay.textLabelFontSize = 24
+        currentLocationOverlay.setAnchor(0.5f, 0.5f)
+
+        return currentLocationOverlay
+    }
+
+    /**
+     * Creates the location error overlay to show the user how accurate the current location
+     * overlay is. The edge of the disk is the 95% confidence interval.
+     *
+     * @param context The Android context
+     * @param point The user's location as a GeoPoint
+     * @param value The radius of the disk
+     * @param unitOfMeasure The unit of measurement of the value/disk radius.
+     *
+     * @return The location error overlay as a ScaleDiskOverlay.
+     */
+    private fun createCurrentLocationErrorOverlay(context: Context?, point: GeoPoint, value: Int,
+                                           unitOfMeasure: UnitOfMeasure): ScaleDiskOverlay {
+        val scaleDisk = ScaleDiskOverlay(context, point, value, unitOfMeasure)
+
+        scaleDisk.setCirclePaint2(Paint().apply {
+            color = Color.rgb(128, 128, 128)
+            style = Paint.Style.STROKE
+            strokeWidth = 2f
+        })
+
+        scaleDisk.setCirclePaint1(Paint().apply {
+            color = Color.argb(40, 128, 128, 128)
+            style = Paint.Style.FILL_AND_STROKE
+        })
+
+        return scaleDisk
     }
 
     private fun moveCameraToPosition(geoPoint: GeoPoint) {
@@ -2772,14 +2853,14 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
 
             R.drawable.ic_directions_black_24dp -> {
                 selectedPlace?.let {
-                    Utils.handleGeoCoordinates(this.context, it.getLocation())
+                    handleGeoCoordinates(requireContext(), it.getLocation())
                     binding?.map?.zoomLevelDouble ?: 0.0
                 }
             }
 
             R.drawable.ic_wikidata_logo_24dp -> {
                 selectedPlace?.siteLinks?.wikidataLink?.let {
-                    Utils.handleWebUrl(this.context, it)
+                    handleWebUrl(requireContext(), it)
                 }
             }
 
@@ -2797,13 +2878,13 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
 
             R.drawable.ic_wikipedia_logo_24dp -> {
                 selectedPlace?.siteLinks?.wikipediaLink?.let {
-                    Utils.handleWebUrl(this.context, it)
+                    handleWebUrl(requireContext(), it)
                 }
             }
 
             R.drawable.ic_commons_icon_vector -> {
                 selectedPlace?.siteLinks?.commonsLink?.let {
-                    Utils.handleWebUrl(this.context, it)
+                    handleWebUrl(requireContext(), it)
                 }
             }
 

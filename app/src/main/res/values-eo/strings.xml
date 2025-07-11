@@ -408,7 +408,7 @@
   <string name="deletion_reason_bad_for_my_privacy">Mi eksciis ke ĝi esta malbona por mia privateco</string>
   <string name="deletion_reason_no_longer_want_public">Mi ŝanĝis mian preferon; mi ne plu volas ke ĝi estu publike videbla</string>
   <string name="deletion_reason_not_interesting">Domaĝe, ĉi tiu bildo ne estas interesa por enciklopedio</string>
-  <string name="uploaded_by_myself">Alŝutita de mi je %1$s, uzata en %2$d artikolo(j).</string>
+  <string name="uploaded_by_myself" fuzzy="true">Alŝutita de mi je %1$s, uzata en %2$d artikolo(j).</string>
   <string name="no_uploads">Bonvenon al Komunejo!\n\nAlŝutu vian unuan aŭdvidaĵon per frapeto de la butono \'Aldoni\'.</string>
   <string name="no_categories_selected">Neniu Elektita Kategorio</string>
   <string name="no_categories_selected_warning_desc">Bildoj sen kategorioj estas malofte uzebla. Ĉu vi certas, ke vi volas daŭrigi sen elekti kategoriojn?</string>

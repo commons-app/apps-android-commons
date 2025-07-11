@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import fr.free.nrw.commons.CommonsApplication
 import fr.free.nrw.commons.R
-import fr.free.nrw.commons.Utils
 import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.auth.csrf.InvalidLoginTokenException
 import fr.free.nrw.commons.databinding.ActivityNotificationBinding
@@ -22,6 +21,7 @@ import fr.free.nrw.commons.notification.models.NotificationType
 import fr.free.nrw.commons.theme.BaseActivity
 import fr.free.nrw.commons.utils.NetworkUtils
 import fr.free.nrw.commons.utils.ViewUtil
+import fr.free.nrw.commons.utils.handleWebUrl
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -197,7 +197,7 @@ class NotificationActivity : BaseActivity() {
 
     private fun handleUrl(url: String?) {
         if (url.isNullOrEmpty()) return
-        Utils.handleWebUrl(this, Uri.parse(url))
+        handleWebUrl(this, Uri.parse(url))
     }
 
     private fun setItems(notificationList: List<Notification>?) {

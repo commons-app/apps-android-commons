@@ -126,6 +126,7 @@
   <string name="menu_from_camera">Tirar foto</string>
   <string name="menu_nearby">Próximo</string>
   <string name="provider_contributions">Meus envios</string>
+  <string name="menu_copy_link">Copiar link</string>
   <string name="menu_share">Compartilhar</string>
   <string name="menu_view_file_page">Ver página do arquivo</string>
   <string name="share_title_hint">Legenda (Obrigatório)</string>
@@ -426,7 +427,7 @@
   <string name="deletion_reason_bad_for_my_privacy">Eu percebi que é ruim para minha privacidade</string>
   <string name="deletion_reason_no_longer_want_public">Eu mudei de ideia, eu não quero mais que seja publicamente visível</string>
   <string name="deletion_reason_not_interesting">Desculpe, esta foto não é interessante para uma enciclopédia</string>
-  <string name="uploaded_by_myself">Carregada por mim em %1$s, usada em %2$d artigo(s).</string>
+  <string name="uploaded_by_myself" fuzzy="true">Carregada por mim em %1$s, usada em %2$d artigo(s).</string>
   <string name="no_uploads">Bem-vindo ao Commons!\n\nCarregue sua primeira mídia tocando no botão Adicionar.</string>
   <string name="no_categories_selected">Nenhuma categoria selecionada</string>
   <string name="no_categories_selected_warning_desc">Imagens sem categorias raramente são utilizáveis. Tem certeza de que deseja continuar sem selecionar categorias?</string>
@@ -694,6 +695,8 @@
   <string name="custom_selector_info_text2">Diferente da imagem à esquerda, a da direita possui o logotipo do Commons, o que indica que o envio dela já está concluído.\n Toque e segure para pré-visualizar a imagem.</string>
   <string name="welcome_custom_selector_ok">Ótimo</string>
   <string name="custom_selector_already_uploaded_image_text">Esta imagem já foi enviada para Commons.</string>
+  <string name="custom_selector_dismiss_limit_warning_button_text">Ignorar</string>
+  <string name="custom_selector_button_limit_text">Máx.: %1$d</string>
   <string name="place_state_wlm">WLM</string>
   <string name="wlm_upload_info">Essa imagem será enviada ao concurso Wiki Loves Monuments</string>
   <string name="display_monuments">Monumentos de exibição</string>
@@ -755,6 +758,8 @@
   <string name="similar_coordinate_description_auto_set">As coordenadas não são exatas, mas a pessoa que carregou essa imagem crê que sejam próximas o suficiente.</string>
   <string name="storage_permissions_denied">Permissão de armazenamento negada</string>
   <string name="unable_to_share_upload_item">Incapaz de compartilhar esse item</string>
+  <string name="edit_image">Editar imagem</string>
+  <string name="edit_location">Editar localização</string>
   <string name="location_updated">Localização atualizada!</string>
   <string name="remove_location">Remover localização</string>
   <string name="location_removed">Localização removida!</string>
@@ -771,4 +776,13 @@
     <item quantity="other">%d imagens selecionadas</item>
   </plurals>
   <string name="write_something_about_the_item">Escreva algo sobre o item %1$s. Isso será visivel publicamente.</string>
+  <string name="uploads">Envios</string>
+  <string name="pending">Pendente</string>
+  <string name="failed">Falhou</string>
+  <string name="custom_selector_delete_folder">Excluir pasta</string>
+  <string name="custom_selector_confirm_deletion_title">Confirmar exclusão</string>
+  <string name="custom_selector_delete">Excluir</string>
+  <string name="custom_selector_cancel">Cancelar</string>
+  <string name="account">Conta</string>
+  <string name="caption">Legenda</string>
 </resources>

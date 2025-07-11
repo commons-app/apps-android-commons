@@ -112,6 +112,7 @@
   <string name="login_failed_throttled">Troppo de tentativas fallite. Per favor reproba in alcun minutas.</string>
   <string name="login_failed_blocked">Iste usator ha essite blocate sur Commons</string>
   <string name="login_failed_2fa_needed">Tu debe fornir tu codice de authentication bifactorial.</string>
+  <string name="login_failed_email_auth_needed">Un codice de verification de session ha essite inviate a tu adresse de e-mail. Per favor insere iste codice pro aperir session.</string>
   <string name="login_failed_generic">Apertura de session fallite</string>
   <string name="share_upload_button">Incargar</string>
   <string name="multiple_share_base_title">Nomine de iste insimul</string>
@@ -212,6 +213,7 @@
   <string name="become_a_tester_title">Devenir testator beta</string>
   <string name="become_a_tester_description">Abona te a nostre canal beta sur Google Play e sia le prime a ganiar accesso a nove functiones e correctiones de anomalias</string>
   <string name="_2fa_code">Codice 2FA</string>
+  <string name="email_auth_code">Codice de verification in e-mail</string>
   <string name="logout_verification">Vole tu vermente clauder session?</string>
   <string name="mediaimage_failed">Imagine multimedial fallite</string>
   <string name="no_subcategory_found">Necun subcategoria trovate</string>
@@ -405,7 +407,7 @@
   <string name="deletion_reason_bad_for_my_privacy">Io ha comprendite que es mal pro mi vita private</string>
   <string name="deletion_reason_no_longer_want_public">Io ha cambiate de idea, io non vole plus que illo sia publicamente visibile</string>
   <string name="deletion_reason_not_interesting">Iste imagine non es interessante pro un encyclopedia</string>
-  <string name="uploaded_by_myself">Incargate per me mesme le %1$s, usate in %2$d articulo(s).</string>
+  <string name="uploaded_by_myself">Incargate per me mesme le %1$s, usate al minus in %2$d articulo(s).</string>
   <string name="no_uploads">Benvenite a Commons!\n\nPro incargar tu prime file multimedial, tocca le button Adder.</string>
   <string name="no_categories_selected">Necun categoria seligite</string>
   <string name="no_categories_selected_warning_desc">Imagines sin categorias es rarmente usabile. Es tu secur de voler continuar sin seliger categorias?</string>
@@ -570,6 +572,8 @@
   <string name="title_for_media">MULTIMEDIA</string>
   <string name="title_for_child_classes">CLASSES FILIO</string>
   <string name="title_for_parent_classes">CLASSES GENITOR</string>
+  <string name="title_for_subcategories">SUBCATEGORIAS</string>
+  <string name="title_for_parent_categories">CATEGORIAS GENITOR</string>
   <string name="upload_nearby_place_found_title">Loco a proximitate trovate</string>
   <string name="upload_nearby_place_found_description_plural">Es istes imagines de %1$s?</string>
   <string name="upload_nearby_place_found_description_singular">Es isto un imagine de %1$s?</string>
@@ -775,6 +779,7 @@
   <string name="talk">Discussion</string>
   <string name="write_something_about_the_item">Scribe qualcosa sur le elemento ‘%1$s’. Isto essera visibile publicamente.</string>
   <string name="does_not_exist_anymore_no_picture_can_ever_be_taken_of_it">‘%1$s’ non existe plus, necun imagine pote jammais esser prendite de illo.</string>
+  <string name="is_at_a_different_place_wikidata">‘%1$s’ se trova in un altere loco.</string>
   <string name="is_at_a_different_place_please_specify_the_correct_place_below_if_possible_tell_us_the_correct_latitude_longitude">‘%1$s’ es in un altere loco. Per favor specifica le loco correcte hic infra, e si possibile, indica le latitude e longitude correcte.</string>
   <string name="other_problem_or_information_please_explain_below">Altere problema o information (per favor explica hic infra).</string>
   <string name="feedback_destination_note">Tu retroaction apparera sur le sequente pagina wiki: &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Mobile_app/Feedback\"&gt;Commons:Mobile app/Feedback&lt;/a&gt;</string>
@@ -801,4 +806,17 @@
   <string name="usages_on_commons_heading">Commons</string>
   <string name="usages_on_other_wikis_heading">Altere wikis</string>
   <string name="file_usages_container_heading">Usos del file</string>
+  <string name="title_activity_single_web_view">Activitate de singule visita web</string>
+  <string name="account">Conto</string>
+  <string name="vanish_account">Facer disparer le conto</string>
+  <string name="account_vanish_request_confirm_title">Advertimento concernente le disparition del conto</string>
+  <string name="account_vanish_request_confirm">Le disparition es un &lt;b&gt;ultime recurso&lt;/b&gt; e debe &lt;b&gt;solmente esser usate quando tu vole cessar de modificar pro sempre&lt;/b&gt; e celar le maximo possibile de tu associationes anterior.&lt;br/&gt;&lt;br/&gt;Le deletion del conto sur Wikipedia se effectua cambiante tu nomine de conto de maniera que alteres non pote recognoscer tu contributiones. Iste processo se appella le disparition del conto. &lt;b&gt;Le disparition non garanti le anonymitate complete ni remove contributiones al projectos.&lt;/b&gt;</string>
+  <string name="caption">Legenda</string>
+  <string name="caption_copied_to_clipboard">Legenda copiate al area de transferentia</string>
+  <string name="congratulations_all_pictures_in_this_album_have_been_either_uploaded_or_marked_as_not_for_upload">Felicitationes, tote le imagines in iste album ha essite incargate o marcate como non incargabile.</string>
+  <string name="show_in_explore">Monstrar in Explorar</string>
+  <string name="show_in_nearby">Monstrar in A proximitate</string>
+  <string name="image_tag_line_created_and_uploaded_by">Create e incargate per: %1$s</string>
+  <string name="image_tag_line_created_by_and_uploaded_by">Create per %1$s e incargate per %2$s</string>
+  <string name="nominated_for_deletion_btn">Nominate pro deletion</string>
 </resources>

@@ -2,7 +2,9 @@ package fr.free.nrw.commons.explore.map;
 
 import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED;
 import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.LOCATION_SLIGHTLY_CHANGED;
+import static fr.free.nrw.commons.utils.GeoCoordinatesKt.handleGeoCoordinates;
 import static fr.free.nrw.commons.utils.MapUtils.ZOOM_LEVEL;
+import static fr.free.nrw.commons.utils.UrlUtilsKt.handleWebUrl;
 
 import android.Manifest.permission;
 import android.annotation.SuppressLint;
@@ -36,7 +38,6 @@ import fr.free.nrw.commons.BaseMarker;
 import fr.free.nrw.commons.MapController;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao;
 import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.databinding.FragmentExploreMapBinding;
@@ -639,13 +640,13 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
      */
     private void passInfoToSheet(final Place place) {
         binding.bottomSheetDetailsBinding.directionsButton.setOnClickListener(
-            view -> Utils.handleGeoCoordinates(getActivity(),
+            view -> handleGeoCoordinates(requireActivity(),
                 place.getLocation(), binding.mapView.getZoomLevelDouble()));
 
         binding.bottomSheetDetailsBinding.commonsButton.setVisibility(
             place.hasCommonsLink() ? View.VISIBLE : View.GONE);
         binding.bottomSheetDetailsBinding.commonsButton.setOnClickListener(
-            view -> Utils.handleWebUrl(getContext(), place.siteLinks.getCommonsLink()));
+            view -> handleWebUrl(getContext(), place.siteLinks.getCommonsLink()));
 
         int index = 0;
         for (Media media : mediaList) {

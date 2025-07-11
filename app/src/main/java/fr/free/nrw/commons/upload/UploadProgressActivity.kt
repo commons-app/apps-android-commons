@@ -28,8 +28,6 @@ class UploadProgressActivity : BaseActivity() {
     @Inject
     lateinit var contributionDao: ContributionDao
 
-    val fragmentList: MutableList<Fragment> = ArrayList()
-    val titleList: MutableList<String> = ArrayList()
     var isPaused = true
     var isPendingIconsVisible = true
     var isErrorIconsVisisble = false
@@ -38,7 +36,7 @@ class UploadProgressActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityUploadProgressBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        viewPagerAdapter = ViewPagerAdapter(supportFragmentManager)
+        viewPagerAdapter = ViewPagerAdapter(this, supportFragmentManager)
         binding.uploadProgressViewPager.setAdapter(viewPagerAdapter)
         binding.uploadProgressViewPager.setId(R.id.upload_progress_view_pager)
         binding.uploadProgressTabLayout.setupWithViewPager(binding.uploadProgressViewPager)
@@ -81,11 +79,10 @@ class UploadProgressActivity : BaseActivity() {
         pendingUploadsFragment = PendingUploadsFragment()
         failedUploadsFragment = FailedUploadsFragment()
 
-        fragmentList.add(pendingUploadsFragment!!)
-        titleList.add(getString(R.string.pending))
-        fragmentList.add(failedUploadsFragment!!)
-        titleList.add(getString(R.string.failed))
-        viewPagerAdapter!!.setTabData(fragmentList, titleList)
+        viewPagerAdapter!!.setTabs(
+            R.string.pending to pendingUploadsFragment!!,
+            R.string.failed to failedUploadsFragment!!
+        )
         viewPagerAdapter!!.notifyDataSetChanged()
     }
 

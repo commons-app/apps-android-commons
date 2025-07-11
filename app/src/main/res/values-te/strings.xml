@@ -377,7 +377,7 @@
   <string name="deletion_reason_bad_for_my_privacy">నా అంతరంగికతకు ఇది చేటు అని గుర్తించాను</string>
   <string name="deletion_reason_no_longer_want_public">నేణు మనసు మార్చుకున్నాను, బహిరంగంగా అందరికీ కనబడేలా ఉండను</string>
   <string name="deletion_reason_not_interesting">సారీ, ఈ బొమ్మ విజ్ఞాన సర్వస్వానికి ఆసక్తి కలిగేలా లేదు</string>
-  <string name="uploaded_by_myself">%1$s న నేనే ఎక్కించాను, %2$d వ్యాసాల్లో వాడారు.</string>
+  <string name="uploaded_by_myself" fuzzy="true">%1$s న నేనే ఎక్కించాను, %2$d వ్యాసాల్లో వాడారు.</string>
   <string name="no_uploads">కామన్స్‌కు స్వాగతం!\n\nచేర్చు బొత్తాన్ని నొక్కి మీ మొదటి మీడియాను ఎక్కించండి.</string>
   <string name="no_categories_selected">వర్గాలేమీ ఎంచుకోలేదు</string>
   <string name="no_categories_selected_warning_desc">వర్గాల్లేని బొమ్మలను అరుదుగా వాడగలం. వర్గాలేమీ ఎంచుకోకుండానే కొనసాగాలని అనుకుంటున్నారా?</string>

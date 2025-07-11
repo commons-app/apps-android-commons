@@ -410,7 +410,7 @@
   <string name="deletion_reason_bad_for_my_privacy">Me konstatis ke ol esas mala por mea privateso</string>
   <string name="deletion_reason_no_longer_want_public">Me chanjis mea ideo: me ne pluse deziras ke ol esos publike videbla</string>
   <string name="deletion_reason_not_interesting">Pardonez! Ca imajo ne esas interesanta por ula enciklopedio</string>
-  <string name="uploaded_by_myself">Adjuntita da me, che %1$s, uzita en %2$d artiklo/artikli.</string>
+  <string name="uploaded_by_myself" fuzzy="true">Adjuntita da me, che %1$s, uzita en %2$d artiklo/artikli.</string>
   <string name="no_uploads">Bonveno a Commons!\n\nSendez vua unesma arkivo kliktanta sur butono \"adjuntez\" (\'\'add\'\').</string>
   <string name="no_categories_selected">Nula kategorio selektita</string>
   <string name="no_categories_selected_warning_desc">Imaji sen kategorii rare esas uzebla. Ka vu fakte deziras sendar ol sen selektar irga kategorio?</string>

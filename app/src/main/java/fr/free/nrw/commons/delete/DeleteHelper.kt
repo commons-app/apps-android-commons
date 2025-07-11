@@ -53,7 +53,6 @@ class DeleteHelper @Inject constructor(
         media: Media?,
         reason: String?
     ): Single<Boolean>? {
-
         if(context == null && media == null) {
             return null
         }
@@ -86,7 +85,6 @@ class DeleteHelper @Inject constructor(
      * @return
      */
     private fun delete(media: Media, reason: String): Observable<Boolean> {
-        Timber.d("thread is delete %s", Thread.currentThread().name)
         val summary = "Nominating ${media.filename} for deletion."
         val calendar = Calendar.getInstance()
         val fileDeleteString = """

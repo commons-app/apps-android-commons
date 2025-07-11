@@ -256,7 +256,7 @@
   <string name="navigation_drawer_close">Κλείσιμο</string>
   <string name="navigation_item_home">Αρχική σελίδα</string>
   <string name="navigation_item_upload">Μεταφόρτωση αρχείου</string>
-  <string name="navigation_item_nearby">Κοντά σας</string>
+  <string name="navigation_item_nearby">Κοντινά</string>
   <string name="navigation_item_about">Σχετικά</string>
   <string name="navigation_item_settings">Ρυθμίσεις</string>
   <string name="navigation_item_feedback">Ανατροφοδότηση</string>
@@ -433,7 +433,7 @@
   <string name="deletion_reason_bad_for_my_privacy">Συνειδητοποίησα ότι είναι κακό για την ιδιωτικότητά μου</string>
   <string name="deletion_reason_no_longer_want_public">Άλλαξα γνώμη, δε θέλω να προβάλλεται πλέον δημόσια</string>
   <string name="deletion_reason_not_interesting">Συγγνώμη, αυτή η φωτογραφία δεν είναι ενδιαφέρουσα για μια εγκυκλοπαίδεια</string>
-  <string name="uploaded_by_myself">Ανέβηκε από εμένα στο %1$s, χρησιμοποιήθηκε σε %2$d άρθρο/α</string>
+  <string name="uploaded_by_myself" fuzzy="true">Ανέβηκε από εμένα στο %1$s, χρησιμοποιήθηκε σε %2$d άρθρο/α</string>
   <string name="no_uploads">Καλώς ήρθατε στα Commons!\n\nΑνεβάστε τα πρώτα σας πολυμέσα πατώντας το κουμπί της προσθήκης.</string>
   <string name="no_categories_selected">Δεν επιλέχθηκαν κατηγορίες</string>
   <string name="no_categories_selected_warning_desc">Οι εικόνες χωρίς κατηγορίες χρησιμοποιούνται σπάνια. Θέλετε πράγματι να συνεχίσετε δίχως να επιλέξετε κατηγορίες;</string>
@@ -803,6 +803,7 @@
   <string name="talk">Συζήτηση</string>
   <string name="write_something_about_the_item">Γράψτε κάτι για το αντικείμενο \'%1$s\'. Θα είναι δημόσια ορατό.</string>
   <string name="does_not_exist_anymore_no_picture_can_ever_be_taken_of_it">Το \'%1$s\' δεν υφίσταται πλέον, καμία φωτογραφία δεν μπορεί να εξαχθεί.</string>
+  <string name="is_at_a_different_place_wikidata">Το \'%1$s\' βρίσκεται σε διαφορετικό μέρος.</string>
   <string name="is_at_a_different_place_please_specify_the_correct_place_below_if_possible_tell_us_the_correct_latitude_longitude">Το \'%1$s\' βρίσκεται σε διαφορετική θέση. Παρακαλούμε προσδιορίστε τη σωστή θέση παρακαλώ, και αν είναι εφικτό, γράψτε το σωστό γεωγραφικό πλάτος και μήκος.</string>
   <string name="other_problem_or_information_please_explain_below">Άλλο πρόβλημα ή πληροφορίες (παρακαλούμε εξηγήστε παρακάτω).</string>
   <string name="feedback_destination_note">Τα σχόλιά σας δημοσιεύονται στην ακόλουθη σελίδα wiki: &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Mobile_app/Feedback\"&gt;Commons:Εφαρμογή για κινητά/Σχόλια&lt;/a&gt;</string>
@@ -828,4 +829,9 @@
   <string name="account">Λογαριασμός</string>
   <string name="caption">Λεζάντα</string>
   <string name="caption_copied_to_clipboard">Η λεζάντα αντιγράφηκε στο πρόχειρο</string>
+  <string name="congratulations_all_pictures_in_this_album_have_been_either_uploaded_or_marked_as_not_for_upload">Συγχαρητήρια, όλες οι φωτογραφίες σε αυτό το άλμπουμ έχουν είτε μεταφορτωθεί είτε επισημανθεί για μη μεταφόρτωση.</string>
+  <string name="show_in_explore">Εμφάνιση στην Εξερεύνηση</string>
+  <string name="show_in_nearby">Εμφάνιση στα Κοντινά</string>
+  <string name="image_tag_line_created_and_uploaded_by">Δημιουργήθηκε και μεταφορτώθηκε από: %1$s</string>
+  <string name="image_tag_line_created_by_and_uploaded_by">Δημιουργήθηκε από %1$s και μεταφορτώθηκε από %2$s</string>
 </resources>

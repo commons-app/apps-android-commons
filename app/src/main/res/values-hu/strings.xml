@@ -362,7 +362,7 @@
   <string name="deletion_reason_bad_for_my_privacy">Észleltem, hogy ez rossz a magánszférámnak</string>
   <string name="deletion_reason_no_longer_want_public">Meggondoltam magam, nem szeretném, hogy nyilvánosan látható legyen</string>
   <string name="deletion_reason_not_interesting">Sajnos ez a fénykép nem érdekes egy enciklopédia számára</string>
-  <string name="uploaded_by_myself">Feltöltve ekkorː %1$s, %2$d cikkben használva.</string>
+  <string name="uploaded_by_myself" fuzzy="true">Feltöltve ekkorː %1$s, %2$d cikkben használva.</string>
   <string name="no_uploads">Üdvözlünk a Commons-ban. \n\nA hozzáadás gombra koppintva feltöltheted első képedet.</string>
   <string name="no_categories_selected">Nincs kiválasztott kategória</string>
   <string name="no_categories_selected_warning_desc">A kategória nélküli képek ritkán használhatóak. Biztos, hogy kategória kiválasztása nélkül akarsz továbblépni?</string>

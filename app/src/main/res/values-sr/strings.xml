@@ -409,7 +409,7 @@
   <string name="deletion_reason_bad_for_my_privacy">Схватио/ла сам да је лоша за моју приватност</string>
   <string name="deletion_reason_no_longer_want_public">Променио/ла сам мишљење, не желим да више јавно буду видљиве</string>
   <string name="deletion_reason_not_interesting">Ова слика није занимљива за енциклопедију</string>
-  <string name="uploaded_by_myself">Отпремио/ла сам на %1$s, користи се у чланку/цима — %2$d.</string>
+  <string name="uploaded_by_myself">Отпремио/ла сам на %1$s, користи се у чланку/цима — %2$d (бар).</string>
   <string name="no_uploads">Добро дошли на Оставу!\n\nОтпремите прве медије додиром дугмета за додавање.</string>
   <string name="no_categories_selected">Категорије нису изабране</string>
   <string name="no_categories_selected_warning_desc">Слике без категорија ретко су употребљиве. Заиста желите да наставите без избора категорија?</string>
@@ -751,4 +751,5 @@
   <string name="caption_copied_to_clipboard">Поднапис копиран</string>
   <string name="image_tag_line_created_and_uploaded_by">Направио и отпремио: %1$s</string>
   <string name="image_tag_line_created_by_and_uploaded_by">Направио %1$s а отпремио %2$s</string>
+  <string name="nominated_for_deletion_btn">Номинуј за брисање</string>
 </resources>
