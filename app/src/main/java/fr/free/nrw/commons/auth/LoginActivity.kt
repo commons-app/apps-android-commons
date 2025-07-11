@@ -348,12 +348,31 @@ class LoginActivity : AccountAuthenticatorActivity() {
 
     @VisibleForTesting
     fun askUserForTwoFactorAuth() {
+        if (binding == null) {
+            Timber.w("Binding is null, reinitializing in askUserForTwoFactorAuth")
+            binding = ActivityLoginBinding.inflate(layoutInflater)
+            setContentView(binding!!.root)
+        }
         progressDialog!!.dismiss()
-        with(binding!!) {
-            twoFactorContainer.visibility = View.VISIBLE
-            twoFactorContainer.hint = getString(if (lastLoginResult is LoginResult.EmailAuthResult) R.string.email_auth_code else R.string._2fa_code)
-            loginTwoFactor.visibility = View.VISIBLE
-            loginTwoFactor.requestFocus()
+        if (binding != null) {
+            with(binding!!) {
+                twoFactorContainer.visibility = View.VISIBLE
+                twoFactorContainer.hint = getString(if (lastLoginResult is LoginResult.EmailAuthResult) R.string.email_auth_code else R.string._2fa_code)
+                loginTwoFactor.visibility = View.VISIBLE
+                loginTwoFactor.requestFocus()
+
+                loginTwoFactor.setOnEditorActionListener { _, actionId, event ->
+                    if (actionId == EditorInfo.IME_ACTION_DONE ||
+                        (event != null && event.keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_DOWN)) {
+                        performLogin()
+                        true
+                    } else {
+                        false
+                    }
+                }
+            }
+        } else {
+            Timber.e("Binding is null in askUserForTwoFactorAuth after reinitialization attempt")
         }
         val imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
         imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY)
