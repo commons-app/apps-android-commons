@@ -362,9 +362,12 @@ class ContributionController @Inject constructor(@param:Named("default_preferenc
 
             override fun onImagesPicked(
                 imagesFiles: List<UploadableFile>,
-                source: FilePicker.ImageSource, type: Int
+                source: FilePicker.ImageSource,
+                type: Int
             ) {
-                val intent = handleImagesPicked(activity, imagesFiles)
+                val intent = handleImagesPicked(activity, imagesFiles).apply {
+                    addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
+                }
                 activity.startActivity(intent)
             }
         })
@@ -385,27 +388,31 @@ class ContributionController @Inject constructor(@param:Named("default_preferenc
         context: Context,
         imagesFiles: List<UploadableFile>
     ): Intent {
-        val shareIntent = Intent(context, UploadActivity::class.java)
-        shareIntent.setAction(ACTION_INTERNAL_UPLOADS)
-        shareIntent
-            .putParcelableArrayListExtra(UploadActivity.EXTRA_FILES, ArrayList(imagesFiles))
-        val place = defaultKvStore.getJson<Place>(PLACE_OBJECT, Place::class.java)
+        val shareIntent = Intent(context, UploadActivity::class.java).apply {
+            action = ACTION_INTERNAL_UPLOADS
+            putParcelableArrayListExtra(UploadActivity.EXTRA_FILES, ArrayList(imagesFiles))
 
-        if (place != null) {
-            shareIntent.putExtra(PLACE_OBJECT, place)
-        }
+            val place = defaultKvStore.getJson<Place>(PLACE_OBJECT, Place::class.java)
+            if (place != null) {
+                putExtra(PLACE_OBJECT, place)
+            }
 
-        if (locationBeforeImageCapture != null) {
-            shareIntent.putExtra(
-                UploadActivity.LOCATION_BEFORE_IMAGE_CAPTURE,
-                locationBeforeImageCapture
+            if (locationBeforeImageCapture != null) {
+                putExtra(
+                    UploadActivity.LOCATION_BEFORE_IMAGE_CAPTURE,
+                    locationBeforeImageCapture
+                )
+            }
+
+            putExtra(
+                UploadActivity.IN_APP_CAMERA_UPLOAD,
+                isInAppCameraUpload
             )
+
+            // ✅ Prevent multiple UploadActivity instances on backstack
+            addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
         }
 
-        shareIntent.putExtra(
-            UploadActivity.IN_APP_CAMERA_UPLOAD,
-            isInAppCameraUpload
-        )
         isInAppCameraUpload = false // reset the flag for next use
         return shareIntent
     }
