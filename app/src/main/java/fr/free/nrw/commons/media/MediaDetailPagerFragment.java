@@ -21,11 +21,8 @@ import android.widget.Toast;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 import com.google.android.material.snackbar.Snackbar;
 import fr.free.nrw.commons.CommonsApplication;
@@ -69,23 +66,23 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
 
     private static CompositeDisposable compositeDisposable = new CompositeDisposable();
 
-    private FragmentMediaDetailPagerBinding binding;
+    FragmentMediaDetailPagerBinding binding;
 
-    private boolean editable;
-    private boolean isFeaturedImage;
-    private boolean isWikipediaButtonDisplayed;
+    boolean editable;
+    boolean isFeaturedImage;
+    boolean isWikipediaButtonDisplayed;
     MediaDetailAdapter adapter;
-    private Bookmark bookmark;
-    private MediaDetailProvider provider;
-    private boolean isFromFeaturedRootFragment;
-    private int position;
+    Bookmark bookmark;
+    MediaDetailProvider provider;
+    boolean isFromFeaturedRootFragment;
+    int position;
 
     /**
      * ProgressBar used to indicate the loading status of media items.
      */
-    private ProgressBar imageProgressBar;
+    ProgressBar imageProgressBar;
 
-    private ArrayList<Integer> removedItems=new ArrayList<Integer>();
+    ArrayList<Integer> removedItems=new ArrayList<Integer>();
 
     public void clearRemoved(){
         removedItems.clear();
@@ -127,7 +124,7 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
         binding.mediaDetailsPager.addOnPageChangeListener(this);
         // Initialize the ProgressBar by finding it in the layout
         imageProgressBar = binding.getRoot().findViewById(R.id.itemProgressBar);
-        adapter = new MediaDetailAdapter(getChildFragmentManager());
+        adapter = new MediaDetailAdapter(this, getChildFragmentManager());
 
         // ActionBar is now supported in both activities - if this crashes something is quite wrong
         final ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
@@ -589,90 +586,4 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
       provider.refreshNominatedMedia(index);
     }
 
-    public interface MediaDetailProvider {
-        Media getMediaAtPosition(int i);
-
-        int getTotalMediaCount();
-
-        Integer getContributionStateAt(int position);
-
-        // Reload media detail fragment once media is nominated
-        void refreshNominatedMedia(int index);
-    }
-
-    //FragmentStatePagerAdapter allows user to swipe across collection of images (no. of images undetermined)
-    private class MediaDetailAdapter extends FragmentStatePagerAdapter {
-
-        /**
-         * Keeps track of the current displayed fragment.
-         */
-        private Fragment mCurrentFragment;
-
-        public MediaDetailAdapter(FragmentManager fm) {
-            super(fm);
-        }
-
-        @Override
-        public Fragment getItem(int i) {
-            if (i == 0) {
-                // See bug https://code.google.com/p/android/issues/detail?id=27526
-                if(getActivity() == null) {
-                    Timber.d("Skipping getItem. Returning as activity is destroyed!");
-                    return null;
-                }
-                binding.mediaDetailsPager.postDelayed(() -> getActivity().invalidateOptionsMenu(), 5);
-            }
-            if (isFromFeaturedRootFragment) {
-                return MediaDetailFragment.forMedia(position+i, editable, isFeaturedImage, isWikipediaButtonDisplayed);
-            } else {
-                return MediaDetailFragment.forMedia(i, editable, isFeaturedImage, isWikipediaButtonDisplayed);
-            }
-        }
-
-        @Override
-        public int getCount() {
-            if (getActivity() == null) {
-                Timber.d("Skipping getCount. Returning as activity is destroyed!");
-                return 0;
-            }
-            return provider.getTotalMediaCount();
-        }
-
-        /**
-         * Get the currently displayed fragment.
-         * @return
-         */
-        public Fragment getCurrentFragment() {
-            return mCurrentFragment;
-        }
-
-        /**
-         * If current fragment is of type MediaDetailFragment, return it, otherwise return null.
-         * @return MediaDetailFragment
-         */
-        public MediaDetailFragment getCurrentMediaDetailFragment() {
-            if (mCurrentFragment instanceof MediaDetailFragment) {
-                return (MediaDetailFragment) mCurrentFragment;
-            }
-
-            return null;
-        }
-
-        /**
-         * Called to inform the adapter of which item is currently considered to be the "primary",
-         * that is the one show to the user as the current page.
-         * @param container
-         * @param position
-         * @param object
-         */
-        @Override
-        public void setPrimaryItem(@NonNull final ViewGroup container, final int position,
-            @NonNull final Object object) {
-            // Update the current fragment if changed
-            if(getCurrentFragment() != object) {
-                mCurrentFragment = ((Fragment)object);
-            }
-            super.setPrimaryItem(container, position, object);
-        }
-    }
 }

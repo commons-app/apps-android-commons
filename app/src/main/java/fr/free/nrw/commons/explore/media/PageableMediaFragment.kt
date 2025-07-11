@@ -8,7 +8,7 @@ import fr.free.nrw.commons.MediaDataExtractor
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.category.CategoryImagesCallback
 import fr.free.nrw.commons.explore.paging.BasePagingFragment
-import fr.free.nrw.commons.media.MediaDetailPagerFragment.MediaDetailProvider
+import fr.free.nrw.commons.media.MediaDetailProvider
 import javax.inject.Inject
 
 abstract class PageableMediaFragment :

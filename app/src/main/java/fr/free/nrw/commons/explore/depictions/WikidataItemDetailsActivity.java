@@ -11,7 +11,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import com.google.android.material.snackbar.Snackbar;
 import fr.free.nrw.commons.Media;
@@ -24,6 +23,7 @@ import fr.free.nrw.commons.explore.depictions.child.ChildDepictionsFragment;
 import fr.free.nrw.commons.explore.depictions.media.DepictedImagesFragment;
 import fr.free.nrw.commons.explore.depictions.parent.ParentDepictionsFragment;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
+import fr.free.nrw.commons.media.MediaDetailProvider;
 import fr.free.nrw.commons.theme.BaseActivity;
 import fr.free.nrw.commons.upload.structure.depictions.DepictModel;
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem;
@@ -31,16 +31,12 @@ import fr.free.nrw.commons.wikidata.WikidataConstants;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import javax.inject.Inject;
-import kotlin.Pair;
 
 /**
  * Activity to show depiction media, parent classes and child classes of depicted items in Explore
  */
-public class WikidataItemDetailsActivity extends BaseActivity implements MediaDetailPagerFragment.MediaDetailProvider,
+public class WikidataItemDetailsActivity extends BaseActivity implements MediaDetailProvider,
     CategoryImagesCallback {
     private FragmentManager supportFragmentManager;
     private DepictedImagesFragment depictionImagesListFragment;
