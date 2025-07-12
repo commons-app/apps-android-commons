@@ -15,8 +15,7 @@ import com.facebook.drawee.backends.pipeline.Fresco
 import com.facebook.imagepipeline.core.ImagePipelineConfig
 import fr.free.nrw.commons.auth.LoginActivity
 import fr.free.nrw.commons.auth.SessionManager
-import fr.free.nrw.commons.bookmarks.items.BookmarkItemsDao
-import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao
+import fr.free.nrw.commons.bookmarks.items.BookmarkItemsTable
 import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesDao
 import fr.free.nrw.commons.category.CategoryDao
 import fr.free.nrw.commons.concurrency.BackgroundPoolExceptionHandler
@@ -258,7 +257,7 @@ class CommonsApplication : MultiDexApplication() {
             Timber.e(e)
         }
         BookmarkPicturesDao.Table.onDelete(db)
-        BookmarkItemsDao.Table.onDelete(db)
+        BookmarkItemsTable.onDelete(db)
     }
 
 

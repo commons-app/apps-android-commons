@@ -18,6 +18,6 @@ class BookmarkItemsController @Inject constructor() {
      * @return a list of DepictedItem objects.
      */
     fun loadFavoritesItems(): List<DepictedItem> {
-        return bookmarkItemsDao?.allBookmarksItems ?: emptyList()
+        return bookmarkItemsDao?.getAllBookmarksItems() ?: emptyList()
     }
 }

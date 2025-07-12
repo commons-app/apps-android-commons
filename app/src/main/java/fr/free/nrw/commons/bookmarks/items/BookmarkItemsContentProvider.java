@@ -1,7 +1,7 @@
 package fr.free.nrw.commons.bookmarks.items;
 
-import static fr.free.nrw.commons.bookmarks.items.BookmarkItemsDao.Table.COLUMN_ID;
-import static fr.free.nrw.commons.bookmarks.items.BookmarkItemsDao.Table.TABLE_NAME;
+import static fr.free.nrw.commons.bookmarks.items.BookmarkItemsTable.COLUMN_ID;
+import static fr.free.nrw.commons.bookmarks.items.BookmarkItemsTable.TABLE_NAME;
 
 import android.content.ContentValues;
 import android.database.Cursor;
