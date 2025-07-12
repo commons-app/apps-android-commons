@@ -4,12 +4,11 @@ import android.content.ContentValues
 import android.database.Cursor
 import android.database.sqlite.SQLiteQueryBuilder
 import android.net.Uri
-import android.text.TextUtils
 import fr.free.nrw.commons.BuildConfig
 import fr.free.nrw.commons.di.CommonsDaggerContentProvider
 import androidx.core.net.toUri
-import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesDao.Table.COLUMN_MEDIA_NAME
-import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesDao.Table.TABLE_NAME
+import fr.free.nrw.commons.bookmarks.pictures.BookmarksTable.COLUMN_MEDIA_NAME
+import fr.free.nrw.commons.bookmarks.pictures.BookmarksTable.TABLE_NAME
 
 /**
  * Handles private storage for Bookmark pictures

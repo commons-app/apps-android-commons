@@ -19,6 +19,9 @@ import fr.free.nrw.commons.bookmarks.items.BookmarkItemsTable.COLUMN_IS_SELECTED
 import fr.free.nrw.commons.bookmarks.items.BookmarkItemsTable.COLUMN_NAME
 import fr.free.nrw.commons.category.CategoryItem
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
+import fr.free.nrw.commons.utils.arrayToString
+import fr.free.nrw.commons.utils.getString
+import fr.free.nrw.commons.utils.getStringArray
 import javax.inject.Inject
 import javax.inject.Named
 import javax.inject.Provider
@@ -156,13 +159,6 @@ class BookmarkItemsDao @Inject constructor(
         )
     }
 
-    private fun Cursor.getStringArray(name: String): List<String> =
-        stringToArray(getString(name))
-
-    @SuppressLint("Range")
-    private fun Cursor.getString(name: String): String =
-        getString(getColumnIndex(name))
-
     private fun convertToCategoryItems(
         categoryNameList: List<String>,
         categoryDescriptionList: List<String>,
@@ -180,26 +176,6 @@ class BookmarkItemsDao @Inject constructor(
                 )
             }
         }
-    }
-
-    /**
-     * Converts string to List
-     * @param listString comma separated single string from of list items
-     * @return List of string
-     */
-    private fun stringToArray(listString: String?): List<String> {
-        if (listString.isNullOrEmpty()) return emptyList();
-        val elements = listString.split(",".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
-        return listOf(*elements)
-    }
-
-    /**
-     * Converts string to List
-     * @param list list of items
-     * @return string comma separated single string of items
-     */
-    private fun arrayToString(list: List<String?>?): String? {
-        return list?.joinToString(",")
     }
 
     /**

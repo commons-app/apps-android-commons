@@ -20,13 +20,13 @@ import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.bookmarks.models.Bookmark
 import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesContentProvider.Companion.BASE_URI
-import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesDao.Table.COLUMN_CREATOR
-import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesDao.Table.COLUMN_MEDIA_NAME
-import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesDao.Table.CREATE_TABLE_STATEMENT
-import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesDao.Table.DROP_TABLE_STATEMENT
-import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesDao.Table.onCreate
-import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesDao.Table.onDelete
-import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesDao.Table.onUpdate
+import fr.free.nrw.commons.bookmarks.pictures.BookmarksTable.COLUMN_CREATOR
+import fr.free.nrw.commons.bookmarks.pictures.BookmarksTable.COLUMN_MEDIA_NAME
+import fr.free.nrw.commons.bookmarks.pictures.BookmarksTable.CREATE_TABLE_STATEMENT
+import fr.free.nrw.commons.bookmarks.pictures.BookmarksTable.DROP_TABLE_STATEMENT
+import fr.free.nrw.commons.bookmarks.pictures.BookmarksTable.onCreate
+import fr.free.nrw.commons.bookmarks.pictures.BookmarksTable.onDelete
+import fr.free.nrw.commons.bookmarks.pictures.BookmarksTable.onUpdate
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
@@ -84,7 +84,7 @@ class BookmarkPictureDaoTest {
     fun getAllBookmarks() {
         whenever(client.query(any(), any(), anyOrNull(), any(), anyOrNull())).thenReturn(createCursor(14))
 
-        var result = testObject.allBookmarks
+        var result = testObject.getAllBookmarks()
 
         assertEquals(14, (result.size))
     }
@@ -92,19 +92,19 @@ class BookmarkPictureDaoTest {
     @Test(expected = RuntimeException::class)
     fun getAllBookmarksTranslatesExceptions() {
         whenever(client.query(any(), any(), anyOrNull(), any(), anyOrNull())).thenThrow(RemoteException(""))
-        testObject.allBookmarks
+        testObject.getAllBookmarks()
     }
 
     @Test
     fun getAllBookmarksReturnsEmptyList_emptyCursor() {
         whenever(client.query(any(), any(), anyOrNull(), any(), anyOrNull())).thenReturn(createCursor(0))
-        assertTrue(testObject.allBookmarks.isEmpty())
+        assertTrue(testObject.getAllBookmarks().isEmpty())
     }
 
     @Test
     fun getAllBookmarksReturnsEmptyList_nullCursor() {
         whenever(client.query(any(), any(), anyOrNull(), any(), anyOrNull())).thenReturn(null)
-        assertTrue(testObject.allBookmarks.isEmpty())
+        assertTrue(testObject.getAllBookmarks().isEmpty())
     }
 
     @Test
@@ -113,7 +113,7 @@ class BookmarkPictureDaoTest {
         whenever(client.query(any(), any(), anyOrNull(), any(), anyOrNull())).thenReturn(mockCursor)
         whenever(mockCursor.moveToFirst()).thenReturn(false)
 
-        testObject.allBookmarks
+        testObject.getAllBookmarks()
 
         verify(mockCursor).close()
     }
