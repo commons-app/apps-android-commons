@@ -56,11 +56,7 @@ class UploadProgressActivity : BaseActivity() {
 
                 override fun onPageSelected(position: Int) {
                     updateMenuItems(position)
-                    if (position == 2) {
-                        binding.uploadProgressViewPager.setCanScroll(false)
-                    } else {
-                        binding.uploadProgressViewPager.setCanScroll(true)
-                    }
+                    binding.uploadProgressViewPager.canScroll = (position != 2)
                 }
 
                 override fun onPageScrollStateChanged(state: Int) {
