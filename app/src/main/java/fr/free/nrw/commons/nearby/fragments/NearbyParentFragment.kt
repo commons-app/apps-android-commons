@@ -74,6 +74,7 @@ import fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType
 import fr.free.nrw.commons.location.LocationUpdateListener
 import fr.free.nrw.commons.media.MediaClient
 import fr.free.nrw.commons.media.MediaDetailPagerFragment
+import fr.free.nrw.commons.media.MediaDetailProvider
 import fr.free.nrw.commons.navtab.NavTab
 import fr.free.nrw.commons.nearby.BottomSheetAdapter
 import fr.free.nrw.commons.nearby.BottomSheetAdapter.ItemClickListener
@@ -150,7 +151,7 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
     LocationUpdateListener,
     LocationPermissionCallback,
     ItemClickListener,
-    MediaDetailPagerFragment.MediaDetailProvider {
+    MediaDetailProvider {
     var binding: FragmentNearbyParentBinding? = null
 
     val mapEventsOverlay: MapEventsOverlay = MapEventsOverlay(object : MapEventsReceiver {

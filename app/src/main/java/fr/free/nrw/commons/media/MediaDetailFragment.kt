@@ -77,7 +77,6 @@ import fr.free.nrw.commons.CommonsApplication.Companion.instance
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.MediaDataExtractor
 import fr.free.nrw.commons.R
-import fr.free.nrw.commons.utils.UnderlineUtils
 import fr.free.nrw.commons.actions.ThanksClient
 import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.auth.csrf.InvalidLoginTokenException
@@ -102,7 +101,6 @@ import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.language.AppLanguageLookUpTable
 import fr.free.nrw.commons.location.LocationServiceManager
 import fr.free.nrw.commons.locationpicker.LocationPicker
-import fr.free.nrw.commons.media.MediaDetailPagerFragment.MediaDetailProvider
 import fr.free.nrw.commons.profile.ProfileActivity
 import fr.free.nrw.commons.review.ReviewHelper
 import fr.free.nrw.commons.settings.Prefs

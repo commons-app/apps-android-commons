@@ -189,8 +189,8 @@ class ExploreListRootFragmentUnitTest {
     @Test
     @Throws(Exception::class)
     fun testGetTotalMediaCount() {
-        `when`(listFragment.totalMediaCount).thenReturn(1)
-        Assert.assertEquals(fragment.totalMediaCount, 1)
+        `when`(listFragment.getTotalMediaCount()).thenReturn(1)
+        Assert.assertEquals(fragment.getTotalMediaCount(), 1)
     }
 
     @Test
@@ -199,7 +199,7 @@ class ExploreListRootFragmentUnitTest {
         val field: Field = ExploreListRootFragment::class.java.getDeclaredField("listFragment")
         field.isAccessible = true
         field.set(fragment, null)
-        Assert.assertEquals(fragment.totalMediaCount, 0)
+        Assert.assertEquals(fragment.getTotalMediaCount(), 0)
     }
 
     @Test

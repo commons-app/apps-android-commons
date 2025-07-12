@@ -334,7 +334,7 @@ class ContributionsFragmentUnitTests {
     @Throws(Exception::class)
     fun testGetTotalMediaCount() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
-        fragment.totalMediaCount
+        fragment.getTotalMediaCount()
     }
 
     @Test

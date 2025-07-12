@@ -22,6 +22,7 @@ import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.databinding.FragmentFeaturedRootBinding;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
+import fr.free.nrw.commons.media.MediaDetailProvider;
 import fr.free.nrw.commons.navtab.NavTab;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -29,7 +30,7 @@ import timber.log.Timber;
 
 public class BookmarkListRootFragment extends CommonsDaggerSupportFragment implements
     FragmentManager.OnBackStackChangedListener,
-    MediaDetailPagerFragment.MediaDetailProvider,
+    MediaDetailProvider,
     AdapterView.OnItemClickListener, CategoryImagesCallback {
 
     private MediaDetailPagerFragment mediaDetails;
