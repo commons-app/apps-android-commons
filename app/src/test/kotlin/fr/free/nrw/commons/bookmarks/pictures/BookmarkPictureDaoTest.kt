@@ -19,7 +19,7 @@ import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.bookmarks.models.Bookmark
-import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesContentProvider.BASE_URI
+import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesContentProvider.Companion.BASE_URI
 import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesDao.Table.COLUMN_CREATOR
 import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesDao.Table.COLUMN_MEDIA_NAME
 import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesDao.Table.CREATE_TABLE_STATEMENT

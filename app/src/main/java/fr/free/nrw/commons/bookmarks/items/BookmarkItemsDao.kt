@@ -6,8 +6,8 @@ import android.content.ContentValues
 import android.database.Cursor
 import android.os.RemoteException
 import androidx.core.content.contentValuesOf
-import fr.free.nrw.commons.bookmarks.items.BookmarkItemsContentProvider.BASE_URI
-import fr.free.nrw.commons.bookmarks.items.BookmarkItemsContentProvider.uriForName
+import fr.free.nrw.commons.bookmarks.items.BookmarkItemsContentProvider.Companion.BASE_URI
+import fr.free.nrw.commons.bookmarks.items.BookmarkItemsContentProvider.Companion.uriForName
 import fr.free.nrw.commons.bookmarks.items.BookmarkItemsTable.COLUMN_CATEGORIES_DESCRIPTION_LIST
 import fr.free.nrw.commons.bookmarks.items.BookmarkItemsTable.COLUMN_CATEGORIES_NAME_LIST
 import fr.free.nrw.commons.bookmarks.items.BookmarkItemsTable.COLUMN_CATEGORIES_THUMBNAIL_LIST

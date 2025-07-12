@@ -18,8 +18,8 @@ import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.explore.models.RecentSearch
-import fr.free.nrw.commons.explore.recentsearches.RecentSearchesContentProvider.BASE_URI
-import fr.free.nrw.commons.explore.recentsearches.RecentSearchesContentProvider.uriForId
+import fr.free.nrw.commons.explore.recentsearches.RecentSearchesContentProvider.Companion.BASE_URI
+import fr.free.nrw.commons.explore.recentsearches.RecentSearchesContentProvider.Companion.uriForId
 import fr.free.nrw.commons.explore.recentsearches.RecentSearchesDao.Table.ALL_FIELDS
 import fr.free.nrw.commons.explore.recentsearches.RecentSearchesDao.Table.COLUMN_ID
 import fr.free.nrw.commons.explore.recentsearches.RecentSearchesDao.Table.COLUMN_LAST_USED
