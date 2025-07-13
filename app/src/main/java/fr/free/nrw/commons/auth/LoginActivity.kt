@@ -92,7 +92,19 @@ class LoginActivity : AccountAuthenticatorActivity() {
             aboutPrivacyPolicy.setOnClickListener { onPrivacyPolicyClicked() }
             signUpButton.setOnClickListener { signUp() }
             loginButton.setOnClickListener { performLogin() }
-            loginPassword.setOnEditorActionListener(::onEditorAction)
+            loginPassword.setOnEditorActionListener { textView, actionId, keyEvent ->
+                if (binding!!.loginButton.isEnabled && isTriggerAction(actionId, keyEvent)) {
+                    if (actionId == EditorInfo.IME_ACTION_NEXT && lastLoginResult != null) {
+                        askUserForTwoFactorAuthWithKeyboard()
+                        true
+                    } else {
+                        performLogin()
+                        true
+                    }
+                } else {
+                    false
+                }
+            }
 
             loginPassword.onFocusChangeListener =
                 View.OnFocusChangeListener(::onPasswordFocusChanged)
@@ -113,6 +125,39 @@ class LoginActivity : AccountAuthenticatorActivity() {
         }
     }
 
+    @VisibleForTesting
+    fun askUserForTwoFactorAuthWithKeyboard() {
+        if (binding == null) {
+            Timber.w("Binding is null, reinitializing in askUserForTwoFactorAuthWithKeyboard")
+            binding = ActivityLoginBinding.inflate(layoutInflater)
+            setContentView(binding!!.root)
+        }
+        progressDialog!!.dismiss()
+        if (binding != null) {
+            with(binding!!) {
+                twoFactorContainer.visibility = View.VISIBLE
+                twoFactorContainer.hint = getString(if (lastLoginResult is LoginResult.EmailAuthResult) R.string.email_auth_code else R.string._2fa_code)
+                loginTwoFactor.visibility = View.VISIBLE
+                loginTwoFactor.requestFocus()
+
+                val imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+                imm.showSoftInput(loginTwoFactor, InputMethodManager.SHOW_IMPLICIT)
+
+                loginTwoFactor.setOnEditorActionListener { _, actionId, event ->
+                    if (actionId == EditorInfo.IME_ACTION_DONE ||
+                        (event != null && event.keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_DOWN)) {
+                        performLogin()
+                        true
+                    } else {
+                        false
+                    }
+                }
+            }
+        } else {
+            Timber.e("Binding is null in askUserForTwoFactorAuthWithKeyboard after reinitialization attempt")
+        }
+        showMessageAndCancelDialog(getString(if (lastLoginResult is LoginResult.EmailAuthResult) R.string.login_failed_email_auth_needed else R.string.login_failed_2fa_needed))
+    }
     override fun onPostCreate(savedInstanceState: Bundle?) {
         super.onPostCreate(savedInstanceState)
         delegate.onPostCreate(savedInstanceState)
@@ -236,7 +281,7 @@ class LoginActivity : AccountAuthenticatorActivity() {
         } else false
 
     private fun isTriggerAction(actionId: Int, keyEvent: KeyEvent?) =
-        actionId == EditorInfo.IME_ACTION_DONE || keyEvent?.keyCode == KeyEvent.KEYCODE_ENTER
+        actionId == EditorInfo.IME_ACTION_NEXT || actionId == EditorInfo.IME_ACTION_DONE || keyEvent?.keyCode == KeyEvent.KEYCODE_ENTER
 
     private fun skipLogin() {
         AlertDialog.Builder(this)
@@ -286,14 +331,14 @@ class LoginActivity : AccountAuthenticatorActivity() {
                     Timber.d("Requesting 2FA prompt")
                     progressDialog!!.dismiss()
                     lastLoginResult = loginResult
-                    askUserForTwoFactorAuth()
+                    askUserForTwoFactorAuthWithKeyboard()
                 }
 
-                override fun emailAuthPrompt(loginResult: LoginResult, caught: Throwable, token: String?) {
+                override fun emailAuthPrompt(loginResult: LoginResult, caught: Throwable, token: String?) = runOnUiThread {
                     Timber.d("Requesting email auth prompt")
                     progressDialog!!.dismiss()
                     lastLoginResult = loginResult
-                    askUserForTwoFactorAuth()
+                    askUserForTwoFactorAuthWithKeyboard()
                 }
 
                 override fun passwordResetPrompt(token: String?) = runOnUiThread {
