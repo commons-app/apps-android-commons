@@ -98,7 +98,7 @@ class ExploreListRootFragment : CommonsDaggerSupportFragment, MediaDetailProvide
             binding!!.exploreContainer.visibility = View.VISIBLE
         }
         if ((parentFragment as ExploreFragment).binding != null) {
-            (parentFragment as ExploreFragment).binding.tabLayout.visibility =
+            (parentFragment as ExploreFragment).binding!!.tabLayout.visibility =
                 View.GONE
         }
         mediaDetails = MediaDetailPagerFragment.newInstance(false, true)
@@ -155,7 +155,7 @@ class ExploreListRootFragment : CommonsDaggerSupportFragment, MediaDetailProvide
     fun backPressed(): Boolean {
         if (null != mediaDetails && mediaDetails!!.isVisible) {
             if ((parentFragment as ExploreFragment).binding != null) {
-                (parentFragment as ExploreFragment).binding.tabLayout.visibility =
+                (parentFragment as ExploreFragment).binding!!.tabLayout.visibility =
                     View.VISIBLE
             }
             removeFragment(mediaDetails!!)

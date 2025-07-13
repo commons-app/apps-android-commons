@@ -109,7 +109,7 @@ class ExploreMapRootFragment : CommonsDaggerSupportFragment, MediaDetailProvider
 
     override fun onMediaClicked(position: Int) {
         binding!!.exploreContainer.visibility = View.VISIBLE
-        (parentFragment as ExploreFragment).binding.tabLayout.visibility = View.GONE
+        (parentFragment as ExploreFragment).binding!!.tabLayout.visibility = View.GONE
         mediaDetails = MediaDetailPagerFragment.newInstance(false, true)
         (parentFragment as ExploreFragment).setScroll(false)
         setFragment(mediaDetails!!, mapFragment)
@@ -173,7 +173,7 @@ class ExploreMapRootFragment : CommonsDaggerSupportFragment, MediaDetailProvider
      */
     fun backPressed(): Boolean {
         if (null != mediaDetails && mediaDetails!!.isVisible) {
-            (parentFragment as ExploreFragment).binding.tabLayout.visibility = View.VISIBLE
+            (parentFragment as ExploreFragment).binding!!.tabLayout.visibility = View.VISIBLE
             removeFragment(mediaDetails!!)
             (parentFragment as ExploreFragment).setScroll(true)
             setFragment(mapFragment!!, mediaDetails)
