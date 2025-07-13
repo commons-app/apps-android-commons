@@ -131,7 +131,7 @@
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:hint="@string/password"
-              android:imeOptions="flagNoExtractUi"
+              android:imeOptions="actionNext"
               android:inputType="textPassword" />
 
           </com.google.android.material.textfield.TextInputLayout>
