@@ -180,8 +180,7 @@ public class ExploreMapPresenter
     }
 
     void prepareNearbyBaseMarkers(MapController.ExplorePlacesInfo explorePlacesInfo) {
-        exploreMapController
-            .loadAttractionsFromLocationToBaseMarkerOptions(explorePlacesInfo.currentLatLng,
+        ExploreMapController.Companion.loadAttractionsFromLocationToBaseMarkerOptions(explorePlacesInfo.currentLatLng,
                 // Curlatlang will be used to calculate distances
                 (List<Place>) explorePlacesInfo.explorePlaceList,
                 exploreMapFragmentView.getContext(),
