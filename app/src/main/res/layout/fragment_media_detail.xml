@@ -126,28 +126,6 @@
                 </LinearLayout>
 
                 <LinearLayout
-                  style="@style/MediaDetailContainer"
-                  android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:id="@+id/authorLinearLayout"
-                  android:orientation="horizontal">
-
-                    <TextView
-                      android:id="@+id/mediaDetailAuthorLabel"
-                      style="@style/MediaDetailTextLabelGeneric"
-                      android:layout_width="@dimen/widget_margin"
-                      android:layout_height="match_parent"
-                      android:text="@string/media_detail_author" />
-
-                    <TextView
-                      style="@style/MediaDetailTextBody"
-                      android:id="@+id/mediaDetailAuthor"
-                      android:layout_width="@dimen/widget_margin"
-                      android:layout_height="match_parent"
-                      tools:text="Media author user name goes here." />
-                </LinearLayout>
-
-                <LinearLayout
                   android:id="@+id/caption_layout"
                   style="@style/MediaDetailContainer"
                   android:layout_width="match_parent"
@@ -262,6 +240,28 @@
                       android:drawablePadding="@dimen/tiny_gap"
                       android:drawableStart="?attr/iconInfo24"
                       tools:text="License link" />
+                </LinearLayout>
+
+                <LinearLayout
+                  style="@style/MediaDetailContainer"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:id="@+id/authorLinearLayout"
+                  android:orientation="horizontal">
+
+                    <TextView
+                      android:id="@+id/mediaDetailAuthorLabel"
+                      style="@style/MediaDetailTextLabelGeneric"
+                      android:layout_width="@dimen/widget_margin"
+                      android:layout_height="match_parent"
+                      android:text="@string/media_detail_author" />
+
+                    <TextView
+                      style="@style/MediaDetailTextBody"
+                      android:id="@+id/mediaDetailAuthor"
+                      android:layout_width="@dimen/widget_margin"
+                      android:layout_height="match_parent"
+                      tools:text="Media author user name goes here." />
                 </LinearLayout>
 
                 <LinearLayout
