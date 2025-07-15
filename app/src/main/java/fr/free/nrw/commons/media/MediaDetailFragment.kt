@@ -320,9 +320,6 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
 
         binding.seeMore.setUnderlinedText(R.string.nominated_see_more)
 
-        // Author/uploader visibility will be determined in setTextFields based on available data
-        // This initial setting for category images is overridden in setTextFields()
-
         if (!sessionManager.isUserLoggedIn) {
             binding.categoryEditButton.visibility = View.GONE
             binding.descriptionEdit.visibility = View.GONE
