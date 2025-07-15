@@ -1,45 +1,26 @@
 SELECT
   ?item
-  (SAMPLE(?label) AS ?label)
-  (SAMPLE(?class) AS ?class)
-  (SAMPLE(?description) AS ?description)
-  (SAMPLE(?classLabel) AS ?classLabel)
-  (SAMPLE(?pic) AS ?pic)
-  (SAMPLE(?destroyed) AS ?destroyed)
-  (SAMPLE(?endTime) AS ?endTime)
-  (SAMPLE(?wikipediaArticle) AS ?wikipediaArticle)
-  (SAMPLE(?commonsArticle) AS ?commonsArticle)
-  (SAMPLE(?commonsCategory) AS ?commonsCategory)
-  (SAMPLE(?dateOfOfficialClosure) AS ?dateOfOfficialClosure)
-  (SAMPLE(?pointInTime) AS ?pointInTime)
+  ?itemLabel
+  ?itemDescription
+  ?class
+  ?classLabel
+  ?pic
+  ?destroyed
+  ?endTime
+  ?wikipediaArticle
+  ?commonsArticle
+  ?commonsCategory
+  ?dateOfOfficialClosure
+  ?pointInTime
 WHERE {
   SERVICE <https://query.wikidata.org/sparql> {
-    values ?item {
-      ${ENTITY}
-    }
+    VALUES ?item { ${ENTITY} }
   }
 
-  # Get the label in the preferred language of the user, or any other language if no label is available in that language.
-  OPTIONAL {?item rdfs:label ?itemLabelPreferredLanguage. FILTER (lang(?itemLabelPreferredLanguage) = "${LANG}")}
-  OPTIONAL {?item rdfs:label ?itemLabelAnyLanguage}
-  BIND(COALESCE(?itemLabelPreferredLanguage, ?itemLabelAnyLanguage, "?") as ?label)
+  # Get item label/class label/description in the preferred language of the user
+   SERVICE wikibase:label { bd:serviceParam wikibase:language "${LANG},en". }
 
-  # Get the description in the preferred language of the user, or any other language if no description is available in that language.
-  OPTIONAL {?item schema:description ?itemDescriptionPreferredLanguage. FILTER (lang(?itemDescriptionPreferredLanguage) = "${LANG}")}
-  OPTIONAL {?item schema:description ?itemDescriptionAnyLanguage}
-  BIND(COALESCE(?itemDescriptionPreferredLanguage, ?itemDescriptionAnyLanguage, "?") as ?description)
-
-  # Get the class label in the preferred language of the user, or any other language if no label is available in that language.
-  OPTIONAL {
-  ?item p:P31/ps:P31 ?class.
-    OPTIONAL {?class rdfs:label ?classLabelPreferredLanguage. FILTER (lang(?classLabelPreferredLanguage) = "${LANG}")}
-    OPTIONAL {?class rdfs:label ?classLabelAnyLanguage}
-    BIND(COALESCE(?classLabelPreferredLanguage, ?classLabelAnyLanguage, "?") as ?classLabel)
-  }
-
-  OPTIONAL {
-  ?item p:P31/ps:P31 ?class.
-  }
+  OPTIONAL { ?item p:P31/ps:P31 ?class. }
 
   # Get picture
   OPTIONAL {?item wdt:P18 ?pic}
@@ -54,15 +35,9 @@ WHERE {
   OPTIONAL {?item wdt:P373 ?commonsCategory}
 
   # Get Wikipedia article
-  OPTIONAL {
-    ?wikipediaArticle schema:about ?item.
-    ?wikipediaArticle schema:isPartOf <https://en.wikipedia.org/>. # TODO internationalization
-  }
+  OPTIONAL { ?wikipediaArticle schema:about ?item;schema:isPartOf <https://en.wikipedia.org/>. }
 
   # Get Commons article
-  OPTIONAL {
-    ?commonsArticle schema:about ?item.
-    ?commonsArticle schema:isPartOf <https://commons.wikimedia.org/>.
-  }
+  OPTIONAL { ?commonsArticle schema:about ?item; schema:isPartOf <https://commons.wikimedia.org/>. }
+
 }
-GROUP BY ?item
