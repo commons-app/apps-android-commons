@@ -320,12 +320,6 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
 
         binding.seeMore.setUnderlinedText(R.string.nominated_see_more)
 
-        if (isCategoryImage) {
-            binding.authorLinearLayout.visibility = View.VISIBLE
-        } else {
-            binding.authorLinearLayout.visibility = View.GONE
-        }
-
         if (!sessionManager.isUserLoggedIn) {
             binding.categoryEditButton.visibility = View.GONE
             binding.descriptionEdit.visibility = View.GONE
@@ -814,10 +808,27 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
         categoryNames.clear()
         categoryNames.addAll(media.categories!!)
 
-        if (media.author == null || media.author == "") {
-            binding.authorLinearLayout.visibility = View.GONE
-        } else {
-            binding.mediaDetailAuthor.text = media.author
+        // Show author or uploader information for licensing compliance
+        val authorName = media.getAttributedAuthor()
+        val uploaderName = media.user
+        
+        when {
+            !authorName.isNullOrEmpty() -> {
+                // Show author if available
+                binding.mediaDetailAuthorLabel.text = getString(R.string.media_detail_author)
+                binding.mediaDetailAuthor.text = authorName
+                binding.authorLinearLayout.visibility = View.VISIBLE
+            }
+            !uploaderName.isNullOrEmpty() -> {
+                // Show uploader as fallback
+                binding.mediaDetailAuthorLabel.text = getString(R.string.media_detail_uploader)
+                binding.mediaDetailAuthor.text = uploaderName
+                binding.authorLinearLayout.visibility = View.VISIBLE
+            }
+            else -> {
+                // Hide if neither author nor uploader is available
+                binding.authorLinearLayout.visibility = View.GONE
+            }
         }
     }
 
