@@ -812,7 +812,7 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
         categoryNames.addAll(media.categories!!)
 
         // Show author or uploader information for licensing compliance
-        val authorName = media.author
+        val authorName = media.getAttributedAuthor()
         val uploaderName = media.user
         
         when {
