@@ -143,7 +143,7 @@
   <string name="title_activity_category_details">وېشنيزه</string>
   <string name="title_activity_review">ملگرو بياکتنه</string>
   <string name="menu_about">په اړه</string>
-  <string name="about_license">د ويکي‌رسنۍ خونديځ کاريال يو پرانيستې سرچينې کاريال دی چې د ويکي‌رسنۍ ټولنې د بسپنه ورکوونکو او خپل‌خوښو کارنانو له خوا جوړ شوی او ساتل کېږي. د ويکي‌رسنۍ بنسټ د دې کاريال په جوړولو، پراختيا او ساتنه کې ښکېل نه دی.</string>
+  <string name="about_license">د ويکي‌رسنۍ خونديځ کاريال يو پرانېستې سرچينې کاريال دی چې د ويکي‌رسنۍ ټولنې د بسپنه ورکوونکو او خپل‌خوښو کارنانو له خوا جوړ شوی او ساتل کېږي. د ويکي‌رسنۍ بنسټ د دې کاريال په جوړولو، پراختيا او ساتنه کې ښکېل نه دی.</string>
   <string name="about_improve">د بگ راپور او وړانديزونو لپاره يوه &lt;a href=\"%1$s\"&gt;گيټ هاب ستونزه&lt;/a&gt; جوړه کړئ.</string>
   <string name="about_privacy_policy">د پټنتيا تگلار</string>
   <string name="title_activity_about">په اړه</string>
@@ -210,7 +210,7 @@
   <string name="become_a_tester_title">ازمېښتي ازمايښتگر شئ</string>
   <string name="welcome_image_welcome_wikipedia">ويکيپېډياښه راغلئ</string>
   <string name="cancel">ناگارل</string>
-  <string name="navigation_drawer_open">پرانيستل</string>
+  <string name="navigation_drawer_open">پرانېستل</string>
   <string name="navigation_drawer_close">تړل</string>
   <string name="navigation_item_home">کور</string>
   <string name="navigation_item_upload">پورته کول</string>

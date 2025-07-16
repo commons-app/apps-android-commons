@@ -214,6 +214,7 @@
   <string name="media_detail_description">Description</string>
   <string name="media_detail_discussion">Discussion</string>
   <string name="media_detail_author">Author</string>
+  <string name="media_detail_uploader">Uploader</string>
   <string name="media_detail_uploaded_date">Uploaded date</string>
   <string name="media_detail_license">License</string>
   <string name="media_detail_coordinates">Coordinates</string>

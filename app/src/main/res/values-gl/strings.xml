@@ -232,8 +232,9 @@
   <string name="navigation_item_about">Acerca de</string>
   <string name="navigation_item_settings">Configuración</string>
   <string name="navigation_item_feedback">Comentarios</string>
+  <string name="navigation_item_feedback_github">Comentarios a través de GitHub</string>
   <string name="navigation_item_logout">Saír</string>
-  <string name="navigation_item_info">Titorial</string>
+  <string name="navigation_item_info">Guía</string>
   <string name="navigation_item_notification">Notificacións</string>
   <string name="navigation_item_review">Revisar</string>
   <string name="no_description_found">non se atopou descrición</string>
@@ -277,7 +278,7 @@
   <string name="about_rate_us">Avalíenos</string>
   <string name="about_faq">FAQ</string>
   <string name="user_guide">Guía de uso</string>
-  <string name="welcome_skip_button">Saltar titorial</string>
+  <string name="welcome_skip_button">Saltar a guía</string>
   <string name="no_internet">Internet non dispoñible</string>
   <string name="error_notifications">Erro ó recuperar as notificacións</string>
   <string name="error_review">Houbo un erro ó recuperar a imaxe a revisar. Prema en refrescar para tentalo de novo.</string>
@@ -319,7 +320,7 @@
   <string name="question">Pregunta</string>
   <string name="result">Resultado</string>
   <string name="quiz_back_button">Se continúa cargando imaxes que requiran ser eliminadas, a súa conta probablemente sexa bloqueada. Está seguro de que quere rematar o cuestionario?</string>
-  <string name="quiz_alert_message">Máis do %1$s das imaxes que cargou foron eliminadas. Se continúa cargando imaxes que requiran ser borradas, probablemente a súa conta sexa bloqueada.\n\nGustaríalle ver de novo o titorial e facer un pequeno cuestionario que axuda a entender que tipo de imaxes se deben ou non se deben cargar?</string>
+  <string name="quiz_alert_message">Máis do %1$s das imaxes que cargou foron eliminadas. Se continúa cargando imaxes que requiran ser borradas, probablemente a súa conta sexa bloqueada.\n\nGustaríalle ver de novo a guía e facer un pequeno cuestionario que axuda a entender que tipo de imaxes se deben ou non se deben cargar?</string>
   <string name="selfie_answer">Os autorretratos non teñen valor enciclopédico abondo. Por favor no cargue imaxes de vostede mesmo salvo que haxa un artigo de Wikipedia sobre vostede.</string>
   <string name="taj_mahal_answer">As fotografías de monumentos e paisaxes de exterior poden ser cargadas na maioría dos países. Teña en conta, por favor, que as instalacións de arte temporais en exteriores normalmente teñen dereitos de autor protexidos e non poden ser cargadas.</string>
   <string name="screenshot_answer">As capturas de pantalla de sitios web son consideradas traballos derivados e están suxeitas a dereitos de autor. Poden ser usadas despois de obter a autorización do autor. Sen ese permiso, calquera obra que cree baseada no seu traballo está considerada legalmente como unha copia sen licenza, cuxa propiedade é mantida polo autor orixinal.</string>
@@ -394,7 +395,7 @@
   <string name="deletion_reason_bad_for_my_privacy">Decateime de que prexudica a miña privacidade</string>
   <string name="deletion_reason_no_longer_want_public">Cambiei de idea, non quero que siga sendo visible de forma pública</string>
   <string name="deletion_reason_not_interesting">Desculpas, esta imaxe non é interesante para unha enciclopedia</string>
-  <string name="uploaded_by_myself" fuzzy="true">Cargada por min o %1$s, usada en %2$d artigo(s).</string>
+  <string name="uploaded_by_myself">Cargada por min o %1$s, usada polo menos en %2$d artigo(s).</string>
   <string name="no_uploads">Dámoslle a benvida ó Commonsǃ\n\nCargue o seu primeiro ficheiro premendo no botón Engadir.</string>
   <string name="no_categories_selected">Non hai categorías seleccionadas</string>
   <string name="no_categories_selected_warning_desc">As imaxes sen categorías só son utilizables en contadas ocasións. Está seguro de que quere continuar sen seleccionar categorías?</string>

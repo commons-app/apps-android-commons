@@ -6,6 +6,7 @@
 * Assorted-Interests
 * BaRaN6161 TURK
 * Bananax47
+* Billibilbi
 * BlueCamille
 * Cigaryno
 * Cyclicus
@@ -50,7 +51,7 @@
 -->
 <resources>
   <string name="commons_facebook">Page Facebook de Commons</string>
-  <string name="commons_github">Code source Github de Commons</string>
+  <string name="commons_github">Code source de Commons sur Github</string>
   <string name="commons_logo">Logo de Commons</string>
   <string name="commons_website">Site web de Commons</string>
   <string name="exit_location_picker">Sélecteur d\'emplacement de sortie</string>

@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import com.jakewharton.rxbinding2.view.RxView;
@@ -23,18 +22,14 @@ import fr.free.nrw.commons.explore.models.RecentSearch;
 import fr.free.nrw.commons.explore.recentsearches.RecentSearchesDao;
 import fr.free.nrw.commons.explore.recentsearches.RecentSearchesFragment;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
+import fr.free.nrw.commons.media.MediaDetailProvider;
 import fr.free.nrw.commons.theme.BaseActivity;
 import fr.free.nrw.commons.utils.FragmentUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
-import java.util.List;
-import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 import javax.inject.Inject;
-import kotlin.Pair;
 import timber.log.Timber;
 
 /**
@@ -42,7 +37,7 @@ import timber.log.Timber;
  */
 
 public class SearchActivity extends BaseActivity
-        implements MediaDetailPagerFragment.MediaDetailProvider, CategoryImagesCallback {
+        implements MediaDetailProvider, CategoryImagesCallback {
 
     @Inject
     RecentSearchesDao recentSearchesDao;

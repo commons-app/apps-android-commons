@@ -77,7 +77,6 @@ import fr.free.nrw.commons.CommonsApplication.Companion.instance
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.MediaDataExtractor
 import fr.free.nrw.commons.R
-import fr.free.nrw.commons.utils.UnderlineUtils
 import fr.free.nrw.commons.actions.ThanksClient
 import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.auth.csrf.InvalidLoginTokenException
@@ -102,7 +101,6 @@ import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.language.AppLanguageLookUpTable
 import fr.free.nrw.commons.location.LocationServiceManager
 import fr.free.nrw.commons.locationpicker.LocationPicker
-import fr.free.nrw.commons.media.MediaDetailPagerFragment.MediaDetailProvider
 import fr.free.nrw.commons.profile.ProfileActivity
 import fr.free.nrw.commons.review.ReviewHelper
 import fr.free.nrw.commons.settings.Prefs
@@ -321,12 +319,6 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
         val view: View = binding.root
 
         binding.seeMore.setUnderlinedText(R.string.nominated_see_more)
-
-        if (isCategoryImage) {
-            binding.authorLinearLayout.visibility = View.VISIBLE
-        } else {
-            binding.authorLinearLayout.visibility = View.GONE
-        }
 
         if (!sessionManager.isUserLoggedIn) {
             binding.categoryEditButton.visibility = View.GONE
@@ -816,10 +808,27 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
         categoryNames.clear()
         categoryNames.addAll(media.categories!!)
 
-        if (media.author == null || media.author == "") {
-            binding.authorLinearLayout.visibility = View.GONE
-        } else {
-            binding.mediaDetailAuthor.text = media.author
+        // Show author or uploader information for licensing compliance
+        val authorName = media.getAttributedAuthor()
+        val uploaderName = media.user
+        
+        when {
+            !authorName.isNullOrEmpty() -> {
+                // Show author if available
+                binding.mediaDetailAuthorLabel.text = getString(R.string.media_detail_author)
+                binding.mediaDetailAuthor.text = authorName
+                binding.authorLinearLayout.visibility = View.VISIBLE
+            }
+            !uploaderName.isNullOrEmpty() -> {
+                // Show uploader as fallback
+                binding.mediaDetailAuthorLabel.text = getString(R.string.media_detail_uploader)
+                binding.mediaDetailAuthor.text = uploaderName
+                binding.authorLinearLayout.visibility = View.VISIBLE
+            }
+            else -> {
+                // Hide if neither author nor uploader is available
+                binding.authorLinearLayout.visibility = View.GONE
+            }
         }
     }
 

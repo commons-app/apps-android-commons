@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -17,10 +16,11 @@ import fr.free.nrw.commons.databinding.FragmentFeaturedRootBinding;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.explore.categories.media.CategoriesMediaFragment;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
+import fr.free.nrw.commons.media.MediaDetailProvider;
 import fr.free.nrw.commons.navtab.NavTab;
 
 public class ExploreListRootFragment extends CommonsDaggerSupportFragment implements
-    MediaDetailPagerFragment.MediaDetailProvider, CategoryImagesCallback {
+    MediaDetailProvider, CategoryImagesCallback {
 
     private MediaDetailPagerFragment mediaDetails;
     private CategoriesMediaFragment listFragment;

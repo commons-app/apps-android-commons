@@ -160,8 +160,8 @@ class SearchActivityUnitTests {
     fun testGetTotalMediaCount() {
         val num = 1
         Whitebox.setInternalState(activity, "searchMediaFragment", searchMediaFragment)
-        `when`(searchMediaFragment.totalMediaCount).thenReturn(num)
-        assertEquals(activity.totalMediaCount, num)
+        `when`(searchMediaFragment.getTotalMediaCount()).thenReturn(num)
+        assertEquals(activity.getTotalMediaCount(), num)
     }
 
     @Test
