@@ -34,10 +34,16 @@ WHERE {
   # Get Commons category
   OPTIONAL {?item wdt:P373 ?commonsCategory}
 
-  # Get Wikipedia article
-  OPTIONAL { ?wikipediaArticle schema:about ?item;schema:isPartOf <https://en.wikipedia.org/>. }
+ # Get Wikipedia article
+  OPTIONAL {
+    ?wikipediaArticle schema:about ?item.
+    ?wikipediaArticle schema:isPartOf <https://en.wikipedia.org/>. # TODO internationalization
+  }
 
   # Get Commons article
-  OPTIONAL { ?commonsArticle schema:about ?item; schema:isPartOf <https://commons.wikimedia.org/>. }
-
+  OPTIONAL {
+    ?commonsArticle schema:about ?item.
+    ?commonsArticle schema:isPartOf <https://commons.wikimedia.org/>.
+  }
+  
 }
