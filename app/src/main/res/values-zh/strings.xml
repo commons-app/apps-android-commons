@@ -427,7 +427,8 @@
   <string name="statistics_featured">特色图片</string>
   <string name="statistics_wikidata_edits">来自“附近地点”的图片</string>
   <string name="level">等级%d</string>
-  <string name="profileLevel">%s（%s級）</string>
+  <string name="profile_withLevel">%s（%s級）</string>
+  <string name="profile_withoutLevel">%s（%s）</string>
   <string name="images_uploaded">已上传图片</string>
   <string name="image_reverts">未还原图片</string>
   <string name="images_used_by_wiki">使用过的图片</string>

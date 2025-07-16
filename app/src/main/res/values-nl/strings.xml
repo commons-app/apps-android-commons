@@ -392,7 +392,8 @@
   <string name="statistics_featured">Uitgelichte afbeeldingen</string>
   <string name="statistics_wikidata_edits">Afbeeldingen via \"Plaatsen in de buurt\"</string>
   <string name="level">Niveau %d</string>
-  <string name="profileLevel">%s (Niveau %s)</string>
+  <string name="profile_withLevel">%s (Niveau %s)</string>
+  <string name="profile_withoutLevel">%s (%s)</string>
   <string name="images_uploaded">Geüploade afbeeldingen</string>
   <string name="image_reverts">Afbeeldingen niet teruggedraaid</string>
   <string name="images_used_by_wiki">Gebruikte afbeeldingen</string>

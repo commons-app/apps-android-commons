@@ -401,7 +401,8 @@
   <string name="statistics_featured">תמונות מומלצות</string>
   <string name="statistics_wikidata_edits">תמונות דרך \"מקומות בסביבה\"</string>
   <string name="level">רמה %d</string>
-  <string name="profileLevel">%s (רמה %s)</string>
+  <string name="profile_withLevel">%s (רמה %s)</string>
+  <string name="profile_withoutLevel">%s (%s)</string>
   <string name="images_uploaded">תמונות שהועלו</string>
   <string name="image_reverts">תמונות שלא שוחזרו</string>
   <string name="images_used_by_wiki">תמונות בשימוש</string>

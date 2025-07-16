@@ -426,7 +426,8 @@
   <string name="statistics_featured">الصور المختارة</string>
   <string name="statistics_wikidata_edits">صور عبر \"الأماكن المجاورة\"</string>
   <string name="level">المستوى %d</string>
-  <string name="profileLevel">%s (المستوى %s)</string>
+  <string name="profile_withLevel">%s (المستوى %s)</string>
+  <string name="profile_withoutLevel">%s (%s)</string>
   <string name="images_uploaded">الصور المرفوعة</string>
   <string name="image_reverts">لم يتم إرجاع الصور</string>
   <string name="images_used_by_wiki">الصور المستخدمة</string>
