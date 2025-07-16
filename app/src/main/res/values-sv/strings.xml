@@ -377,7 +377,8 @@
   <string name="statistics_featured">Utvalda bilder</string>
   <string name="statistics_wikidata_edits">Bilder via \"Platser i närheten\"</string>
   <string name="level">Nivå %d</string>
-  <string name="profileLevel">%s (Nivå %s)</string>
+  <string name="profile_withLevel">%s (Nivå %s)</string>
+  <string name="profile_withoutLevel">%s (%s)</string>
   <string name="images_uploaded">Uppladdade bilder</string>
   <string name="image_reverts">Bilder som inte har återställts</string>
   <string name="images_used_by_wiki">Bilder som används</string>

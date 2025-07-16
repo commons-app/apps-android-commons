@@ -386,7 +386,8 @@
   <string name="statistics_featured">Izbrane slike</string>
   <string name="statistics_wikidata_edits">Slike iz »Bližnji kraji«</string>
   <string name="level">Raven %d</string>
-  <string name="profileLevel">%s (raven %s)</string>
+  <string name="profile_withLevel">%s (raven %s)</string>
+  <string name="profile_withoutLevel">%s (%s)</string>
   <string name="images_uploaded">Naložene slike</string>
   <string name="image_reverts">Nevrnjene slike</string>
   <string name="images_used_by_wiki">Uporabljene slike</string>

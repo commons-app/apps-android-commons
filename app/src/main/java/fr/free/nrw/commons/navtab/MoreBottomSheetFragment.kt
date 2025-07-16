@@ -114,13 +114,13 @@ class MoreBottomSheetFragment : BottomSheetDialogFragment() {
         val level = store.getString("userAchievementsLevel", "0")
         if (level == "0"){
             binding?.moreProfile?.text = getString(
-                R.string.profileLevel,
+                R.string.profile_withoutLevel,
                 getUserName(),
                 getString(R.string.see_your_achievements) // Second argument
             )
         } else {
             binding?.moreProfile?.text = getString(
-                R.string.profileLevel,
+                R.string.profile_withLevel,
                 getUserName(),
                 level
             )

@@ -390,7 +390,8 @@
   <string name="statistics_featured">Προβεβλημμένες εικόνες</string>
   <string name="statistics_wikidata_edits">Εικόνες μέσω «Κοντινά μέρη»</string>
   <string name="level">Επίπεδο %d</string>
-  <string name="profileLevel">%s (Επίπεδο %s)</string>
+  <string name="profile_withLevel">%s (Επίπεδο %s)</string>
+  <string name="profile_withoutLevel">%s (%s)</string>
   <string name="images_uploaded">Εικόνες που μεταφορτώθηκαν</string>
   <string name="image_reverts">Εικόνες που δεν ανεστράφησαν</string>
   <string name="images_used_by_wiki">Εικόνες που χρησιμοποιήθηκαν</string>
