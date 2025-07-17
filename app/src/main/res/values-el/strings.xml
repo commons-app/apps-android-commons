@@ -774,7 +774,7 @@
   <string name="permissions_are_required_for_functionality">Απαιτούνται δικαιώματα για τη λειτουργικότητα</string>
   <string name="learn_how_to_write_a_useful_description">Μάθετε πώς να γράψετε μια χρήσιμη περιγραφή</string>
   <string name="learn_how_to_write_a_useful_caption">Μάθετε πώς να γράψετε μια χρήσιμη λεζάντα</string>
-  <string name="see_your_achievements">Δείτε τα επιτεύγματά σας</string>
+  <string name="see_your_achievements" fuzzy="true">Δείτε τα επιτεύγματά σας</string>
   <string name="edit_image">Επεξεργασία εικόνας</string>
   <string name="edit_location">Επεξεργασία τοποθεσίας</string>
   <string name="location_updated">Η τοποθεσία ενημερώθηκε!</string>

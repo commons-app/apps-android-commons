@@ -672,7 +672,7 @@
   <string name="permissions_are_required_for_functionality">기능에 대한 권한이 필요합니다</string>
   <string name="learn_how_to_write_a_useful_description">유용한 설명을 추가하는 법 알아보기</string>
   <string name="learn_how_to_write_a_useful_caption">유용한 캡션을 추가하는 법 알아보기</string>
-  <string name="see_your_achievements">업적 보기</string>
+  <string name="see_your_achievements" fuzzy="true">업적 보기</string>
   <string name="edit_image">그림 편집</string>
   <string name="edit_location">위치 편집</string>
   <string name="location_updated">위치가 갱신되었습니다!</string>

@@ -210,6 +210,7 @@
   <string name="media_detail_description">Descrission</string>
   <string name="media_detail_discussion">Discussion</string>
   <string name="media_detail_author">Autor</string>
+  <string name="media_detail_uploader">Carior</string>
   <string name="media_detail_uploaded_date">Dàita ëd cariament</string>
   <string name="media_detail_license">Licensa</string>
   <string name="media_detail_coordinates">Coordinà</string>

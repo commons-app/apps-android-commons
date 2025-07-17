@@ -16,6 +16,7 @@
 * Fitoschido
 * Friday83260
 * Gomoko
+* Goombiis
 * GrandEscogriffe
 * Happy13241
 * Hecatonchire
@@ -257,6 +258,7 @@
   <string name="media_detail_description">Description</string>
   <string name="media_detail_discussion">Discussion</string>
   <string name="media_detail_author">Auteur</string>
+  <string name="media_detail_uploader">Téléverseur</string>
   <string name="media_detail_uploaded_date">Date de téléversement</string>
   <string name="media_detail_license">Licence</string>
   <string name="media_detail_coordinates">Coordonnées</string>
@@ -803,7 +805,7 @@
   <string name="permissions_are_required_for_functionality">Des autorisations sont nécessaires pour la fonctionnalité</string>
   <string name="learn_how_to_write_a_useful_description">Apprendre à écrire une description utile</string>
   <string name="learn_how_to_write_a_useful_caption">Apprendre à écrire une légende utile</string>
-  <string name="see_your_achievements">Voir vos réalisations</string>
+  <string name="see_your_achievements">Consultez vos réalisations</string>
   <string name="edit_image">Modifier l’image</string>
   <string name="edit_location">Modifier l’emplacement</string>
   <string name="location_updated">Emplacement mis à jour !</string>

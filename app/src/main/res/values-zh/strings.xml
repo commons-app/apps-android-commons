@@ -812,7 +812,7 @@
   <string name="permissions_are_required_for_functionality">功能需要权限</string>
   <string name="learn_how_to_write_a_useful_description">了解如何写出有用的描述</string>
   <string name="learn_how_to_write_a_useful_caption">了解如何写出有用的注释</string>
-  <string name="see_your_achievements">查看您的成果</string>
+  <string name="see_your_achievements" fuzzy="true">查看您的成果</string>
   <string name="edit_image">编辑图片</string>
   <string name="edit_location">编辑位置</string>
   <string name="location_updated">位置已更新！</string>

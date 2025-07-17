@@ -722,7 +722,7 @@
   <string name="permissions_are_required_for_functionality">Funkcionalumui reikalingi leidimai</string>
   <string name="learn_how_to_write_a_useful_description">Sužinokite, kaip parašyti naudingą aprašymą</string>
   <string name="learn_how_to_write_a_useful_caption">Sužinokite, kaip parašyti naudingą antraštę</string>
-  <string name="see_your_achievements">Pamatykite savo pasiekimus</string>
+  <string name="see_your_achievements" fuzzy="true">Pamatykite savo pasiekimus</string>
   <string name="edit_image">Redaguoti paveikslėlį</string>
   <string name="edit_location">Redaguoti vietą</string>
   <string name="location_updated">Vieta atnaujinta!</string>

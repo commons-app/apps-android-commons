@@ -235,6 +235,7 @@
   <string name="media_detail_description">描述</string>
   <string name="media_detail_discussion">討論</string>
   <string name="media_detail_author">作者</string>
+  <string name="media_detail_uploader">上傳者</string>
   <string name="media_detail_uploaded_date">上傳日期</string>
   <string name="media_detail_license">授權協議</string>
   <string name="media_detail_coordinates">座標</string>

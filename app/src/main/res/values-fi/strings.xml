@@ -667,7 +667,7 @@
   <string name="welcome_to_full_screen_mode_text">Tervetuloa koko näytön valintatilaan</string>
   <string name="full_screen_mode_zoom_info">Käytä kahta sormea lähentääksesi ja loitontaaksesi.</string>
   <string name="full_screen_mode_features_info">Pyyhkäise nopeasti ja pitkään suorittaaksesi nämä toiminnot: \n- Vasen/Oikea: Siirry edelliseen/seuraavaan \n- Ylös: Valitse\n- Alas: Merkitse ei-tallennettavaksi.</string>
-  <string name="see_your_achievements">Näytä omat saavutukset</string>
+  <string name="see_your_achievements" fuzzy="true">Näytä omat saavutukset</string>
   <string name="edit_image">Muokkaa kuvaa</string>
   <string name="edit_location">Muokkaa sijaintia</string>
   <string name="remove_location">Poista sijainti</string>

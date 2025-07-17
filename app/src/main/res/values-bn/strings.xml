@@ -372,7 +372,7 @@
   <string name="statistics_featured">নির্বাচিত ছবি</string>
   <string name="statistics_wikidata_edits">\"কাছাকাছি স্থান\" এর মাধ্যমে ছবি</string>
   <string name="level">স্তর %d</string>
-  <string name="profileLevel">%s (স্তর %s )</string>
+  <string name="profile_withLevel">%s (স্তর %s )</string>
   <string name="images_uploaded">আপলোডকৃত চিত্র</string>
   <string name="image_reverts">ছবিগুলো প্রত্যাবর্তন করা হয়নি</string>
   <string name="images_used_by_wiki">ব্যবহৃত ছবি</string>

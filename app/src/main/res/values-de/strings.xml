@@ -794,7 +794,7 @@
   <string name="permissions_are_required_for_functionality">Für die Funktionalität sind Berechtigungen erforderlich</string>
   <string name="learn_how_to_write_a_useful_description">Erfahre, wie man eine nützliche Beschreibung schreibt</string>
   <string name="learn_how_to_write_a_useful_caption">Erfahre, wie man eine nützliche Überschrift schreibt</string>
-  <string name="see_your_achievements">Deine Erfolge ansehen</string>
+  <string name="see_your_achievements" fuzzy="true">Deine Erfolge ansehen</string>
   <string name="edit_image">Bild bearbeiten</string>
   <string name="edit_location">Standort bearbeiten</string>
   <string name="location_updated">Standort aktualisiert!</string>

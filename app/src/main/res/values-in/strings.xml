@@ -732,7 +732,7 @@
   <string name="permissions_are_required_for_functionality">Izin diperlukan untuk fungsionalitas ini</string>
   <string name="learn_how_to_write_a_useful_description">Pelajari cara menulis deskripsi yang berguna</string>
   <string name="learn_how_to_write_a_useful_caption">Pelajari cara menulis takarir yang berguna</string>
-  <string name="see_your_achievements">Lihat pencapaian Anda</string>
+  <string name="see_your_achievements" fuzzy="true">Lihat pencapaian Anda</string>
   <string name="edit_image">Edit Gambar</string>
   <string name="edit_location">Edit Lokasi</string>
   <string name="location_updated">Lokasi diperbarui!</string>

@@ -154,8 +154,8 @@
   <string name="detail_discussion_empty">Nema razgovora</string>
   <string name="detail_license_empty">Nepoznata licenca</string>
   <string name="menu_refresh">Preučitaj</string>
-  <string name="read_storage_permission_rationale">Potrebna dozvola: Treba da se pročita iz spoljašnje memorije. Privitak bez ovoga nema pristupa Vašoj galeriji.</string>
-  <string name="write_storage_permission_rationale">Potrebna dozvola: Treba da se zapiše na spoljašnju memoriju. Privitak bez ovoga nema pristupa Vašoj kameri/galeriji.</string>
+  <string name="read_storage_permission_rationale">Potrebno ovlaštenje: Čitanje vanjske memorije. Aplikacija ne može pristupiti galeriji bez toga.</string>
+  <string name="write_storage_permission_rationale">Potrebno ovlaštenje: Pisanje u vanjskoj memoriji. Aplikacija ne može pristupiti kameri/galeriji bez toga.</string>
   <string name="ok">U redu</string>
   <string name="warning">Upozorenje</string>
   <string name="upload">Postavi</string>
@@ -215,7 +215,7 @@
   <string name="skip_login_message" fuzzy="true">U budućnosti ćete se morati prijaviti kako biste postavili slike.</string>
   <string name="login_alert_message">Prijavite se da biste koristili ovu funkciju</string>
   <string name="nearby_location_not_available">„U blizini“ možda ne radi kako treba. Lokacija nije dostupna.</string>
-  <string name="location_permission_rationale_nearby">Potrebna je dozvola za prikaz liste lokacija u blizini</string>
+  <string name="location_permission_rationale_nearby">Potrebno je ovlaštenje za prikaz liste lokacija u blizini</string>
   <string name="nearby_directions">Upute</string>
   <string name="nearby_wikidata">Wikidata</string>
   <string name="nearby_wikipedia">Wikipedia</string>

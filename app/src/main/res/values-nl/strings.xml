@@ -778,7 +778,7 @@
   <string name="permissions_are_required_for_functionality">Voor deze functionaliteit zijn toestemmingen vereist</string>
   <string name="learn_how_to_write_a_useful_description">Leer hoe u een nuttige beschrijving schrijft</string>
   <string name="learn_how_to_write_a_useful_caption">Leer hoe u een nuttig bijschrift schrijft</string>
-  <string name="see_your_achievements">Bekijk uw prestaties</string>
+  <string name="see_your_achievements" fuzzy="true">Bekijk uw prestaties</string>
   <string name="edit_image">Afbeelding Bewerken</string>
   <string name="edit_location">Locatie bewerken</string>
   <string name="location_updated">Locatie bijgewerkt!</string>

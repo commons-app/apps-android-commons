@@ -724,7 +724,7 @@
   <string name="unable_to_share_upload_item">Ne povis partigar ca arkivo</string>
   <string name="learn_how_to_write_a_useful_description">Savez quale skribar utila deskripto</string>
   <string name="learn_how_to_write_a_useful_caption">Savez quale skribar utila etiketo</string>
-  <string name="see_your_achievements">Videz vua sucesi</string>
+  <string name="see_your_achievements" fuzzy="true">Videz vua sucesi</string>
   <string name="edit_image">Modifikar imajo</string>
   <string name="edit_location">Aktualigar lokizo</string>
   <string name="location_updated">Lokizo aktualigita!</string>

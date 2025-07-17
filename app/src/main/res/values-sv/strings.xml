@@ -761,7 +761,7 @@
   <string name="permissions_are_required_for_functionality">Behörigheter krävs för funktionalitet</string>
   <string name="learn_how_to_write_a_useful_description">Lär dig hur du skriver en användbar beskrivning</string>
   <string name="learn_how_to_write_a_useful_caption">Lär dig hur du skriver en användbar bildtext</string>
-  <string name="see_your_achievements">Se dina prestationer</string>
+  <string name="see_your_achievements" fuzzy="true">Se dina prestationer</string>
   <string name="edit_image">Redigera bild</string>
   <string name="edit_location">Redigera plats</string>
   <string name="location_updated">Plats uppdaterades!</string>

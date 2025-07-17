@@ -401,7 +401,7 @@
   <string name="statistics_featured">Вибрані зображення</string>
   <string name="statistics_wikidata_edits">Зображення місць поблизу</string>
   <string name="level">Рівень %d</string>
-  <string name="profileLevel">%s (Рівень %s)</string>
+  <string name="profile_withLevel">%s (Рівень %s)</string>
   <string name="images_uploaded">Завантажені зображення</string>
   <string name="image_reverts">Не відхилені зображення</string>
   <string name="images_used_by_wiki">Використані зображення</string>
@@ -792,7 +792,7 @@
   <string name="permissions_are_required_for_functionality">Для роботи потрібні дозволи</string>
   <string name="learn_how_to_write_a_useful_description">Дізнайтеся, як написати корисний опис</string>
   <string name="learn_how_to_write_a_useful_caption">Дізнайтеся, як написати корисний підпис</string>
-  <string name="see_your_achievements">Перегляньте свої досягнення</string>
+  <string name="see_your_achievements" fuzzy="true">Перегляньте свої досягнення</string>
   <string name="edit_image">Редагувати зображення</string>
   <string name="edit_location">Редагувати розташування</string>
   <string name="location_updated">Розташування оновлено</string>

@@ -22,26 +22,26 @@
 * Vitorvicentevalente
 -->
 <resources>
-  <string name="commons_facebook">Página da wiki Commons no Facebook</string>
-  <string name="commons_github">Código-fonte da wiki Commons no Github</string>
-  <string name="commons_logo">Logótipo da wiki Commons</string>
-  <string name="commons_website">Sítio da wiki Commons</string>
+  <string name="commons_facebook">Página do Facebook da Commons</string>
+  <string name="commons_github">Código Fonte do Github da Commons</string>
+  <string name="commons_logo">Logótipo da Commons</string>
+  <string name="commons_website">Site da Web da Commons</string>
   <string name="exit_location_picker">Sair do selecionador de localização</string>
-  <string name="submit">Enviar</string>
+  <string name="submit">Submeter</string>
   <string name="add_another_description">Adicionar outra descrição</string>
   <string name="add_new_contribution">Adicionar nova contribuição</string>
   <string name="add_contribution_from_camera">Adicionar contribuição da câmara</string>
   <string name="add_contribution_from_photos">Adicionar contribuição de fotos</string>
   <string name="add_contribution_from_contributions_gallery">Adicionar contribuição da galeria de contribuições anteriores</string>
   <string name="show_captions">Legendas</string>
-  <string name="row_item_language_description">Descrição da língua</string>
+  <string name="row_item_language_description">Descrição do Idioma</string>
   <string name="row_item_caption">Legenda</string>
   <string name="show_captions_description">Descrição</string>
   <string name="nearby_row_image">Imagem</string>
   <string name="nearby_all">Todas</string>
   <string name="nearby_filter_toggle">Alternar para cima</string>
-  <string name="nearby_filter_search">Vista de pesquisa</string>
-  <string name="nearby_filter_state">Estado do local</string>
+  <string name="nearby_filter_search">Visualização da Pesquisa</string>
+  <string name="nearby_filter_state">Estado do Local</string>
   <string name="appwidget_img">Imagem do Dia</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">a carregar %1$d ficheiro</item>
@@ -78,9 +78,9 @@
   <string name="preference_category_feedback">Comentários</string>
   <string name="preference_category_privacy">Privacidade</string>
   <string name="app_name">Commons</string>
-  <string name="menu_settings">Configurações</string>
-  <string name="intent_share_upload_label">Carregar na wiki Commons</string>
-  <string name="upload_in_progress">Carregamento em progresso</string>
+  <string name="menu_settings">Definições</string>
+  <string name="intent_share_upload_label">Enviar para a Commons</string>
+  <string name="upload_in_progress">Envio em progresso</string>
   <string name="username">Nome de utilizador</string>
   <string name="password">Palavra-passe</string>
   <string name="login_credential">Entrar na sua conta da wiki Commons Beta</string>
@@ -88,9 +88,9 @@
   <string name="forgot_password">Esqueceu-se da palavra-passe?</string>
   <string name="signup">Registar-se</string>
   <string name="logging_in_title">A iniciar sessão</string>
-  <string name="logging_in_message">Aguarde, por favor…</string>
-  <string name="updating_caption_title">A atualizar legendas e descrições</string>
-  <string name="updating_caption_message">Aguarde, por favor…</string>
+  <string name="logging_in_message">Por favor, aguarde…</string>
+  <string name="updating_caption_title">A atualizar as legendas e descrições</string>
+  <string name="updating_caption_message">Por favor, aguarde…</string>
   <string name="login_success">Sessão iniciada!</string>
   <string name="login_failed">O início de sessão falhou!</string>
   <string name="upload_failed">O ficheiro não foi encontrado. Tente outro, por favor.</string>
@@ -381,7 +381,7 @@
   <string name="statistics_featured">Imagens destacadas</string>
   <string name="statistics_wikidata_edits">Imagens via \"Locais próximos\"</string>
   <string name="level">Nível %d</string>
-  <string name="profileLevel">%s (Nível %s)</string>
+  <string name="profile_withLevel">%s (Nível %s)</string>
   <string name="images_uploaded">Imagens carregadas</string>
   <string name="image_reverts">Imagens não revertidas</string>
   <string name="images_used_by_wiki">Imagens usadas</string>
@@ -764,7 +764,7 @@
   <string name="permissions_are_required_for_functionality">São necessárias permissões para a funcionalidade</string>
   <string name="learn_how_to_write_a_useful_description">Aprenda a escrever uma descrição útil</string>
   <string name="learn_how_to_write_a_useful_caption">Aprenda a escrever uma legenda útil</string>
-  <string name="see_your_achievements">Ver as suas realizações</string>
+  <string name="see_your_achievements" fuzzy="true">Ver as suas realizações</string>
   <string name="edit_image">Editar imagem</string>
   <string name="edit_location">Editar localização</string>
   <string name="location_updated">Localização actualizada!</string>

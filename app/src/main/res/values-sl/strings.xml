@@ -776,7 +776,7 @@
   <string name="permissions_are_required_for_functionality">Za delovanje so potrebna dovoljenja</string>
   <string name="learn_how_to_write_a_useful_description">Naučite se napisati koristen opis</string>
   <string name="learn_how_to_write_a_useful_caption">Naučite se napisati koristen napis</string>
-  <string name="see_your_achievements">Oglejte si svoje dosežke</string>
+  <string name="see_your_achievements" fuzzy="true">Oglejte si svoje dosežke</string>
   <string name="edit_image">Uredi sliko</string>
   <string name="edit_location">Uredi lokacijo</string>
   <string name="location_updated">Lokacija posodobljena!</string>

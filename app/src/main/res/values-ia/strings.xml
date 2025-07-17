@@ -206,6 +206,7 @@
   <string name="media_detail_description">Description</string>
   <string name="media_detail_discussion">Discussion</string>
   <string name="media_detail_author">Autor</string>
+  <string name="media_detail_uploader">Incargator</string>
   <string name="media_detail_uploaded_date">Data de incargamento</string>
   <string name="media_detail_license">Licentia</string>
   <string name="media_detail_coordinates">Coordinatas</string>
@@ -750,7 +751,7 @@
   <string name="permissions_are_required_for_functionality">Permissiones es necessari pro functionalitate</string>
   <string name="learn_how_to_write_a_useful_description">Apprende como scriber un description utile</string>
   <string name="learn_how_to_write_a_useful_caption">Appende como scriber un legenda utile</string>
-  <string name="see_your_achievements">Vider tu realisationes</string>
+  <string name="see_your_achievements">Examinar tu realisationes</string>
   <string name="edit_image">Modificar imagine</string>
   <string name="edit_location">Modificar position</string>
   <string name="location_updated">Position actualisate!</string>

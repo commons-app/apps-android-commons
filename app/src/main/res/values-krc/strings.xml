@@ -210,6 +210,7 @@
   <string name="media_detail_description">Ачыкълау</string>
   <string name="media_detail_discussion">Сюзюу</string>
   <string name="media_detail_author">Автор</string>
+  <string name="media_detail_uploader">Джюклеген</string>
   <string name="media_detail_uploaded_date">Джюклениу дата</string>
   <string name="media_detail_license">Лицензия</string>
   <string name="media_detail_coordinates">Координатла</string>
@@ -577,6 +578,8 @@
   <string name="title_for_media">МЕДИА</string>
   <string name="title_for_child_classes">БАЛА КЛАССЛА</string>
   <string name="title_for_parent_classes">АНА КЛАССЛА</string>
+  <string name="title_for_subcategories">ТЮБ КАТЕГОРИЯЛА</string>
+  <string name="title_for_parent_categories">ТАМЫР КАТЕГОРИЯЛА</string>
   <string name="upload_nearby_place_found_title">Джууукъдагъы Джер Табылды</string>
   <string name="upload_nearby_place_found_description_plural">Была %1$s суратламыдыла?</string>
   <string name="upload_nearby_place_found_description_singular">Бу %1$s суратымыды?</string>
@@ -752,7 +755,7 @@
   <string name="permissions_are_required_for_functionality">Ишлерча болууу ючюн эркинликле керекдиле</string>
   <string name="learn_how_to_write_a_useful_description">Хайырланырча ачыкълау къалай джазаргъа керек болгъанын юренигиз</string>
   <string name="learn_how_to_write_a_useful_caption">Хайырланырча тюб джазыуну къалай джазаргъа керек болгъанын юренигиз</string>
-  <string name="see_your_achievements">Джетишимлеригизге къарагъыз</string>
+  <string name="see_your_achievements">Джетишимлеригизни кёргюзюгюз</string>
   <string name="edit_image">Суратны Тюзет</string>
   <string name="edit_location">Локацияны Тюзет</string>
   <string name="location_updated">Локация джангыртылды!</string>

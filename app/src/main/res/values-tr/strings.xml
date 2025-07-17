@@ -399,7 +399,7 @@
   <string name="statistics_featured">Seçkin Resimler</string>
   <string name="statistics_wikidata_edits">\"Yakındaki Yerler\"den Resimler</string>
   <string name="level">Seviye %d</string>
-  <string name="profileLevel">%s (Seviye %s)</string>
+  <string name="profile_withLevel">%s (Seviye %s)</string>
   <string name="images_uploaded">Resimler Yüklendi</string>
   <string name="image_reverts">Resimler Geri Alınmadı</string>
   <string name="images_used_by_wiki">Resimler Kullanıldı</string>
@@ -782,7 +782,7 @@
   <string name="permissions_are_required_for_functionality">İşlevsellik için izinler gereklidir</string>
   <string name="learn_how_to_write_a_useful_description">Yararlı bir açıklamanın nasıl yazılacağını öğrenin</string>
   <string name="learn_how_to_write_a_useful_caption">Nasıl faydalı bir alt yazı yazılacağını öğrenin</string>
-  <string name="see_your_achievements">Başarılarınızı görün</string>
+  <string name="see_your_achievements" fuzzy="true">Başarılarınızı görün</string>
   <string name="edit_image">Görseli düzenle</string>
   <string name="edit_location">Konumu Düzenle</string>
   <string name="location_updated">Konum güncellendi!</string>
