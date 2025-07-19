@@ -13,10 +13,12 @@ import fr.free.nrw.commons.contributions.Contribution
 import fr.free.nrw.commons.contributions.Contribution.Companion.STATE_IN_PROGRESS
 import fr.free.nrw.commons.contributions.Contribution.Companion.STATE_PAUSED
 import fr.free.nrw.commons.contributions.Contribution.Companion.STATE_QUEUED
+import fr.free.nrw.commons.contributions.ContributionController
 import fr.free.nrw.commons.databinding.FragmentPendingUploadsBinding
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment
+import fr.free.nrw.commons.ui.CustomFabController
 import fr.free.nrw.commons.utils.DialogUtil.showAlertDialog
-import fr.free.nrw.commons.utils.ViewUtil
+import fr.free.nrw.commons.utils.ViewUtil.showShortToast
 import java.util.Locale
 import javax.inject.Inject
 
@@ -30,16 +32,16 @@ class PendingUploadsFragment :
     PendingUploadsAdapter.Callback {
     @Inject
     lateinit var pendingUploadsPresenter: PendingUploadsPresenter
-
     private lateinit var binding: FragmentPendingUploadsBinding
-
     private lateinit var uploadProgressActivity: UploadProgressActivity
-
     private lateinit var adapter: PendingUploadsAdapter
-
     private var contributionsSize = 0
-
     private var contributionsList = mutableListOf<Contribution>()
+
+    @JvmField
+    @Inject
+    var controller: ContributionController? = null
+    private lateinit var fabController: CustomFabController
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -60,15 +62,23 @@ class PendingUploadsFragment :
         return binding.root
     }
 
-    fun initAdapter() {
+    private fun initAdapter() {
         adapter = PendingUploadsAdapter(this)
     }
 
-    override fun onViewCreated(
-        view: View,
-        savedInstanceState: Bundle?,
-    ) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        fabController = CustomFabController(
+            this,
+            requireContext(),
+            binding.fabPlus,
+            binding.fabCamera,
+            binding.fabGallery,
+            binding.fabCustomGallery,
+            controller!!
+        )
+        fabController.initializeLaunchers()
+        fabController.setListeners(controller!!, requireActivity())
         initRecyclerView()
     }
 
@@ -98,14 +108,14 @@ class PendingUploadsFragment :
                 }
             }
             if (contributionsSize == 0) {
-                binding.nopendingTextView.visibility = View.VISIBLE
-                binding.pendingUplaodsLl.visibility = View.GONE
+                binding.noPendingTextView.visibility = View.VISIBLE
+                binding.pendingUploadsLl.visibility = View.GONE
                 uploadProgressActivity.hidePendingIcons()
             } else {
-                binding.nopendingTextView.visibility = View.GONE
-                binding.pendingUplaodsLl.visibility = View.VISIBLE
+                binding.noPendingTextView.visibility = View.GONE
+                binding.pendingUploadsLl.visibility = View.VISIBLE
                 adapter.submitList(list)
-                binding.progressTextView.setText("$contributionsSize uploads left")
+                binding.progressTextView.text = "$contributionsSize uploads left"
                 if ((pausedOrQueuedUploads == contributionsSize) || CommonsApplication.isPaused) {
                     uploadProgressActivity.setPausedIcon(true)
                 } else {
@@ -128,7 +138,7 @@ class PendingUploadsFragment :
             String.format(locale, activity.getString(R.string.yes)),
             String.format(locale, activity.getString(R.string.no)),
             {
-                ViewUtil.showShortToast(context, R.string.cancelling_upload)
+                showShortToast(context, R.string.cancelling_upload)
                 pendingUploadsPresenter.deleteUpload(
                     contribution, requireContext().applicationContext,
                 )
@@ -162,7 +172,7 @@ class PendingUploadsFragment :
             String.format(locale, activity.getString(R.string.yes)),
             String.format(locale, activity.getString(R.string.no)),
             {
-                ViewUtil.showShortToast(context, R.string.cancelling_upload)
+                showShortToast(context, R.string.cancelling_upload)
                 uploadProgressActivity.hidePendingIcons()
                 pendingUploadsPresenter.deleteUploads(
                     listOf(
