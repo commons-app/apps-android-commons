@@ -234,6 +234,7 @@
   <string name="media_detail_description">Beschrijving</string>
   <string name="media_detail_discussion">Overleg</string>
   <string name="media_detail_author">Auteur</string>
+  <string name="media_detail_uploader">Uploader</string>
   <string name="media_detail_uploaded_date">Uploaddatum</string>
   <string name="media_detail_license">Licentie</string>
   <string name="media_detail_coordinates">Coördinaten</string>
@@ -601,6 +602,8 @@
   <string name="title_for_media">MEDIA</string>
   <string name="title_for_child_classes">SUBKLASSEN</string>
   <string name="title_for_parent_classes">HOOFDKLASSEN</string>
+  <string name="title_for_subcategories">SUBCATEGORIEËN</string>
+  <string name="title_for_parent_categories">BOVENLIGGENDE CATEGORIEËN</string>
   <string name="upload_nearby_place_found_title">Plaats in de buurt gevonden</string>
   <string name="upload_nearby_place_found_description_plural">Zijn dit afbeeldingen van %1$s?</string>
   <string name="upload_nearby_place_found_description_singular">Is dit een afbeelding van %1$s?</string>
@@ -778,7 +781,7 @@
   <string name="permissions_are_required_for_functionality">Voor deze functionaliteit zijn toestemmingen vereist</string>
   <string name="learn_how_to_write_a_useful_description">Leer hoe u een nuttige beschrijving schrijft</string>
   <string name="learn_how_to_write_a_useful_caption">Leer hoe u een nuttig bijschrift schrijft</string>
-  <string name="see_your_achievements" fuzzy="true">Bekijk uw prestaties</string>
+  <string name="see_your_achievements">Bekijk uw prestaties</string>
   <string name="edit_image">Afbeelding Bewerken</string>
   <string name="edit_location">Locatie bewerken</string>
   <string name="location_updated">Locatie bijgewerkt!</string>

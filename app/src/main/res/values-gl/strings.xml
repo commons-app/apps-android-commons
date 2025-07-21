@@ -273,7 +273,7 @@
   <string name="location_permission_rationale_nearby">Precísase permiso para amosar unha lista de lugares preto de aquí</string>
   <string name="nearby_directions">COMO CHEGAR</string>
   <string name="nearby_wikidata">WIKIDATA</string>
-  <string name="nearby_wikipedia">WIKIPEDIA</string>
+  <string name="nearby_wikipedia">Wikipedia</string>
   <string name="nearby_commons">COMMONS</string>
   <string name="about_rate_us">Avalíenos</string>
   <string name="about_faq">FAQ</string>

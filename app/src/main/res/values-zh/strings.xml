@@ -269,6 +269,7 @@
   <string name="media_detail_description">描述</string>
   <string name="media_detail_discussion">讨论</string>
   <string name="media_detail_author">作者</string>
+  <string name="media_detail_uploader">上传者</string>
   <string name="media_detail_uploaded_date">上传日期</string>
   <string name="media_detail_license">许可协议</string>
   <string name="media_detail_coordinates">坐标</string>
@@ -636,6 +637,8 @@
   <string name="title_for_media">媒体</string>
   <string name="title_for_child_classes">子类别</string>
   <string name="title_for_parent_classes">父类别</string>
+  <string name="title_for_subcategories">子分类</string>
+  <string name="title_for_parent_categories">父级分类</string>
   <string name="upload_nearby_place_found_title">找到附近地点</string>
   <string name="upload_nearby_place_found_description_plural">这些是%1$s的图片吗？</string>
   <string name="upload_nearby_place_found_description_singular">这是%1$s的图片吗？</string>
@@ -812,7 +815,7 @@
   <string name="permissions_are_required_for_functionality">功能需要权限</string>
   <string name="learn_how_to_write_a_useful_description">了解如何写出有用的描述</string>
   <string name="learn_how_to_write_a_useful_caption">了解如何写出有用的注释</string>
-  <string name="see_your_achievements" fuzzy="true">查看您的成果</string>
+  <string name="see_your_achievements">查看您的成就</string>
   <string name="edit_image">编辑图片</string>
   <string name="edit_location">编辑位置</string>
   <string name="location_updated">位置已更新！</string>

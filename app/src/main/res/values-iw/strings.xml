@@ -794,7 +794,7 @@
   <string name="permissions_are_required_for_functionality">צריך הרשאות כדי להשתמש בזה</string>
   <string name="learn_how_to_write_a_useful_description">הסבר על כתיבת תיאור מועיל</string>
   <string name="learn_how_to_write_a_useful_caption">הסבר על כתיבת כיתוב מועיל</string>
-  <string name="see_your_achievements" fuzzy="true">הצגת ההישגים שלך</string>
+  <string name="see_your_achievements">הצגת ההישגים שלך</string>
   <string name="edit_image">עריכת תמונה</string>
   <string name="edit_location">עריכת מיקום</string>
   <string name="location_updated">המיקום עודכן!</string>
