@@ -351,7 +351,7 @@
   <string name="request_user_block">यस प्रयोगकर्तालाई रोक लगाउन अनुरोध गर्नुहोस्</string>
   <string name="edit_image">तस्विर सम्पादन गर्नुहोस्</string>
   <string name="edit_location">स्थान सम्पादन गर्नुहोस्</string>
-  <string name="location_updated">स्थान अपडेट गरियो!</string>
+  <string name="location_updated">स्थान अद्यावधिक गरियो!</string>
   <string name="remove_location">यो स्थान हटाउनुहोस्</string>
   <string name="remove_location_warning_title">स्थान चेतावनी हटाउनुहोस्</string>
   <string name="location_removed">स्थान हटाइयो!</string>

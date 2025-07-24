@@ -111,7 +111,7 @@
   <string name="menu_view_file_page">د دوتنې مخ کتل</string>
   <string name="share_title_hint">نيونگ (اړين دی)</string>
   <string name="add_caption_toast">مهرباني وکړئ، د دې دوتنې لپاره نيونگ ورکړئ</string>
-  <string name="share_description_hint">څرگندونه</string>
+  <string name="share_description_hint">څرگنداوی</string>
   <string name="share_caption_hint">نيونگ</string>
   <string name="login_failed_network">غونډال ته ننوتنه ناشونې ده - د جال پاتې راتلنه</string>
   <string name="login_failed_throttled">ډیری ناکامه هڅې. لطفا څو دقیقې وروسته بیا هڅه وکړئ.</string>
@@ -202,7 +202,7 @@
   <string name="media_detail_caption">نيونگ</string>
   <string name="media_detail_title">سرليک</string>
   <string name="media_detail_depiction">ويي‌انځوريز استازيتوب</string>
-  <string name="media_detail_description">څرگندونه</string>
+  <string name="media_detail_description">څرگنداوی</string>
   <string name="media_detail_discussion">شننه</string>
   <string name="media_detail_author">ليکوال</string>
   <string name="media_detail_uploader">راپورته‌کوونکی</string>

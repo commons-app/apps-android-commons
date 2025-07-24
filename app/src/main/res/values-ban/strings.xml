@@ -23,7 +23,7 @@
   <string name="nearby_all">Makejang</string>
   <string name="nearby_filter_toggle">Alih Duur</string>
   <string name="nearby_filter_search">Cingakan Panyelehan</string>
-  <string name="nearby_filter_state">Genah Negara</string>
+  <string name="nearby_filter_state">Genah Pernyataan</string>
   <string name="appwidget_img">Gambar rahina mangkin</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">%1$d berkas kaunggah</item>
@@ -270,7 +270,7 @@
   <string name="statistics">Statistik</string>
   <string name="statistics_thanks">Haturan Suksma Katampi</string>
   <string name="statistics_featured">Gambar Pilihan</string>
-  <string name="level" fuzzy="true">Tingkat</string>
+  <string name="level">Tingkat %d</string>
   <string name="images_uploaded">Gambar Kaupload</string>
   <string name="images_used_by_wiki">Gambar Kaanggén</string>
   <string name="contributions_fragment">Pituut</string>
