@@ -7,7 +7,7 @@ class NearbyResultItem(
     private val wikipediaArticle: ResultTuple?,
     private val commonsArticle: ResultTuple?,
     private val location: ResultTuple?,
-    @field:SerializedName("itemLabel")
+    @field:SerializedName("Label")
     private val label: ResultTuple?,
     @field:SerializedName("streetAddress") private val address: ResultTuple?,
     private val icon: ResultTuple?,
