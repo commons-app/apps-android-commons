@@ -7,7 +7,6 @@ class NearbyResultItem(
     private val wikipediaArticle: ResultTuple?,
     private val commonsArticle: ResultTuple?,
     private val location: ResultTuple?,
-    @field:SerializedName("label")
     private val label: ResultTuple?,
     @field:SerializedName("streetAddress") private val address: ResultTuple?,
     private val icon: ResultTuple?,
@@ -16,7 +15,7 @@ class NearbyResultItem(
     @field:SerializedName("commonsCategory") private val commonsCategory: ResultTuple?,
     @field:SerializedName("pic") private val pic: ResultTuple?,
     @field:SerializedName("destroyed") private val destroyed: ResultTuple?,
-    @field:SerializedName("itemDescription") private val description: ResultTuple?,
+    @field:SerializedName("description") private val description: ResultTuple?,
     @field:SerializedName("endTime") private val endTime: ResultTuple?,
     @field:SerializedName("monument") private val monument: ResultTuple?,
     @field:SerializedName("dateOfOfficialClosure") private val dateOfOfficialClosure: ResultTuple?,
