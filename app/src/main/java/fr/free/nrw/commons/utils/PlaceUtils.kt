@@ -19,31 +19,30 @@ object PlaceUtils {
         }
     }
 
-    /**
-     * Turns a Media list to a Place list by creating a new list in Place type
-     * @param mediaList
-     * @return
-     */
     @JvmStatic
     fun mediaToExplorePlace(mediaList: List<Media>): List<Place> {
         val explorePlaceList = mutableListOf<Place>()
         for (media in mediaList) {
-            explorePlaceList.add(
-                Place(
-                    media.filename,
-                    media.fallbackDescription,
-                    media.coordinates,
-                    media.categories.toString(),
-                    Sitelinks.Builder()
-                        .setCommonsLink(media.pageTitle.canonicalUri)
-                        .setWikipediaLink("") // we don't necessarily have them, can be fetched later
-                        .setWikidataLink("") // we don't necessarily have them, can be fetched later
-                        .build(),
-                    media.imageUrl,
-                    media.thumbUrl,
-                    ""
-                )
+            val place = Place(
+                media.filename ?: "",
+                media.fallbackDescription ?: "",
+                media.coordinates,
+                media.categories.toString(),
+                Sitelinks.Builder()
+                    .setCommonsLink(media.pageTitle?.canonicalUri ?: "")
+                    .setWikipediaLink("")
+                    .setWikidataLink("")
+                    .build(),
+                media.imageUrl ?: "",
+                media.thumbUrl ?: "",
+                ""
             )
+            // Set caption, with fallback
+            place.caption = media.captions?.values?.firstOrNull()
+                ?: media.filename?.removePrefix("File:")?.replace('_', ' ')
+                ?: "Unknown"
+
+            explorePlaceList.add(place)
         }
         return explorePlaceList
     }
