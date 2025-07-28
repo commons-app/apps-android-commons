@@ -173,6 +173,7 @@
   <string name="delete">{{Identical|Delete}}</string>
   <string name="statistics">Èstatistik</string>
   <string name="statistics_featured">To see the correct translation for your language, please go to https://commons.wikimedia.org/wiki/Commons:Featured_pictures and select your language in \"This project page in other languages\".</string>
+  <string name="profile_withoutLevel">{{optional}}</string>
   <string name="nearby_fragment">{{Identical|Nearby}}</string>
   <string name="next">Refers to the next \'\'\'step\'\'\' in the uploading process.</string>
   <string name="previous">Refers to the previous \'\'\'step\'\'\' in the uploading process.</string>

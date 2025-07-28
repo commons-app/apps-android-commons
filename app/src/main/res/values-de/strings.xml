@@ -412,7 +412,6 @@
   <string name="statistics_wikidata_edits">Bilder über „Orte in der Nähe“</string>
   <string name="level">Level %d</string>
   <string name="profile_withLevel">%s (Level %s)</string>
-  <string name="profile_withoutLevel">%s (%s)</string>
   <string name="images_uploaded">Hochgeladene Bilder</string>
   <string name="image_reverts">Bilder nicht zurückgesetzt</string>
   <string name="images_used_by_wiki">Verwendete Bilder</string>

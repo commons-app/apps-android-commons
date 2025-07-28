@@ -369,7 +369,6 @@
   <string name="statistics_wikidata_edits">Imaji tra \"Loki Vicina\"</string>
   <string name="level">Nivelo %d</string>
   <string name="profile_withLevel">%s (Nivelo %s)</string>
-  <string name="profile_withoutLevel">%s (%s)</string>
   <string name="images_uploaded">Imaji sendita</string>
   <string name="image_reverts">Imaji ne reversionita</string>
   <string name="images_used_by_wiki">Imaji uzita</string>

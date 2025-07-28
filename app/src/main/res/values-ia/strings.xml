@@ -235,7 +235,7 @@
   <string name="navigation_item_about">A proposito</string>
   <string name="navigation_item_settings">Parametros</string>
   <string name="navigation_item_feedback">Commentario</string>
-  <string name="navigation_item_feedback_github">Retroaction per GitHub</string>
+  <string name="navigation_item_feedback_github">Commentarios per GitHub</string>
   <string name="navigation_item_logout">Clauder session</string>
   <string name="navigation_item_info">Tutorial</string>
   <string name="navigation_item_notification">Notificationes</string>
@@ -366,7 +366,6 @@
   <string name="statistics_wikidata_edits">Imagines via “Locos a proximitate”</string>
   <string name="level">Nivello %d</string>
   <string name="profile_withLevel">%s (Nivello %s)</string>
-  <string name="profile_withoutLevel">%s (%s)</string>
   <string name="images_uploaded">Imagines incargate</string>
   <string name="image_reverts">Imagines non revertite</string>
   <string name="images_used_by_wiki">Imagines usate</string>
@@ -719,8 +718,8 @@
   <string name="device_model">Modello del apparato</string>
   <string name="device_name">Nomine del apparato</string>
   <string name="network_type">Typo de rete</string>
-  <string name="thanks_feedback">Gratias pro dar retroaction</string>
-  <string name="error_feedback">Error durante le invio del retroaction</string>
+  <string name="thanks_feedback">Gratias pro dar commentario</string>
+  <string name="error_feedback">Error durante le invio del commentario</string>
   <string name="enter_description">Que es tu commentario?</string>
   <string name="your_feedback">Tu commentario</string>
   <string name="mark_as_not_for_upload">Marcar como non a incargar</string>
@@ -784,7 +783,7 @@
   <string name="is_at_a_different_place_wikidata">‘%1$s’ se trova in un altere loco.</string>
   <string name="is_at_a_different_place_please_specify_the_correct_place_below_if_possible_tell_us_the_correct_latitude_longitude">‘%1$s’ es in un altere loco. Per favor specifica le loco correcte hic infra, e si possibile, indica le latitude e longitude correcte.</string>
   <string name="other_problem_or_information_please_explain_below">Altere problema o information (per favor explica hic infra).</string>
-  <string name="feedback_destination_note">Tu retroaction apparera sur le sequente pagina wiki: &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Mobile_app/Feedback\"&gt;Commons:Mobile app/Feedback&lt;/a&gt;</string>
+  <string name="feedback_destination_note">Tu commentario apparera sur le sequente pagina wiki: &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Mobile_app/Feedback\"&gt;Commons:Mobile app/Feedback&lt;/a&gt;</string>
   <string name="are_you_sure_that_you_want_cancel_all_the_uploads">Es tu secur de voler cancellar tote le incargamentos?</string>
   <string name="cancelling_all_the_uploads">Cancella tote le incargamentos…</string>
   <string name="uploads">Incargamentos</string>

@@ -378,7 +378,6 @@
   <string name="statistics_wikidata_edits">Billeder via \"Steder i nærheden\"</string>
   <string name="level">Niveau %d</string>
   <string name="profile_withLevel">%s (Niveau %s)</string>
-  <string name="profile_withoutLevel">%s (%s)</string>
   <string name="images_uploaded">Uploadede billeder</string>
   <string name="image_reverts">Billeder, som ikke er blevet trukket tilbage</string>
   <string name="images_used_by_wiki">Billeder brugt</string>

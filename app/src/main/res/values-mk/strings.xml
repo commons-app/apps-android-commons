@@ -372,7 +372,6 @@
   <string name="statistics_wikidata_edits">Слики преку „Околни места“</string>
   <string name="level">Степен %d</string>
   <string name="profile_withLevel">%s (Степен %s)</string>
-  <string name="profile_withoutLevel">%s (%s)</string>
   <string name="images_uploaded">Подигнати слики</string>
   <string name="image_reverts">Неоткажани слики</string>
   <string name="images_used_by_wiki">Употребени слики</string>

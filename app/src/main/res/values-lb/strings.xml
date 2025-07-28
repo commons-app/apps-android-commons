@@ -308,7 +308,6 @@
   <string name="statistics_featured">Bemierkenswäert Biller</string>
   <string name="level">Niveau %d</string>
   <string name="profile_withLevel">%s (Niveau %s)</string>
-  <string name="profile_withoutLevel">%s (%s)</string>
   <string name="images_uploaded">Eropgeluede Biller</string>
   <string name="image_reverts">Biller net zréckgesat</string>
   <string name="images_used_by_wiki">Benotzte Biller</string>
