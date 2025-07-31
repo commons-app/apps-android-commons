@@ -271,6 +271,7 @@
   <string name="preference_author_name_toggle_summary">При качването използвайте персонализирано авторско име вместо потребителското си име</string>
   <string name="preference_author_name">Персонализирано авторско име</string>
   <string name="nearby_fragment">Наблизо</string>
+  <string name="notifications">Известия</string>
   <string name="read_notifications">Известия (прочетени)</string>
   <string name="list_sheet">Списък</string>
   <string name="next">Следваща</string>
