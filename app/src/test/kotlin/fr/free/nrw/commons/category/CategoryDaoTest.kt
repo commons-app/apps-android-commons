@@ -29,7 +29,7 @@ import fr.free.nrw.commons.category.CategoryDao.Table.DROP_TABLE_STATEMENT
 import fr.free.nrw.commons.category.CategoryDao.Table.onCreate
 import fr.free.nrw.commons.category.CategoryDao.Table.onDelete
 import fr.free.nrw.commons.category.CategoryDao.Table.onUpdate
-import fr.free.nrw.commons.explore.recentsearches.RecentSearchesContentProvider.uriForId
+import fr.free.nrw.commons.explore.recentsearches.RecentSearchesContentProvider.Companion.uriForId
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
 import org.junit.Assert.assertNull

@@ -21,7 +21,7 @@ class BookmarkItemsControllerTest {
     @Before
     fun setup() {
         MockitoAnnotations.openMocks(this)
-        whenever(bookmarkDao!!.allBookmarksItems)
+        whenever(bookmarkDao!!.getAllBookmarksItems())
             .thenReturn(mockBookmarkList)
     }
 
