@@ -33,7 +33,7 @@ class ExploreMapContract {
     }
 
     interface UserActions {
-        fun updateMap(locationChangeType: LocationChangeType?)
+        fun updateMap(locationChangeType: LocationChangeType)
         fun lockUnlockNearby(isNearbyLocked: Boolean)
         fun attachView(view: View?)
         fun detachView()
