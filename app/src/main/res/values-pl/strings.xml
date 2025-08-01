@@ -410,7 +410,6 @@
   <string name="statistics_wikidata_edits">Obrazy za pośrednictwem \"Pobliskie miejsca\"</string>
   <string name="level">Poziom %d</string>
   <string name="profile_withLevel">%s (Poziom %s)</string>
-  <string name="profile_withoutLevel">%s (%s)</string>
   <string name="images_uploaded">Przesłane obrazy</string>
   <string name="image_reverts">Nie wycofane obrazy</string>
   <string name="images_used_by_wiki">Wykorzystane obrazy</string>

@@ -423,7 +423,6 @@
   <string name="statistics_wikidata_edits">Imágenes vía \"Sitios Cercanos\"</string>
   <string name="level">Nivel %d</string>
   <string name="profile_withLevel">%s (Nivel %s)</string>
-  <string name="profile_withoutLevel">%s (%s)</string>
   <string name="images_uploaded">Imágenes subidas</string>
   <string name="image_reverts">Imágenes no revertidas</string>
   <string name="images_used_by_wiki">Imágenes utilizadas</string>

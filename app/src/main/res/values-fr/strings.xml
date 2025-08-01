@@ -418,7 +418,6 @@
   <string name="statistics_wikidata_edits">Images par « Lieux à proximité »</string>
   <string name="level">Niveau %d</string>
   <string name="profile_withLevel">%s (niveau %s)</string>
-  <string name="profile_withoutLevel">%s (%s)</string>
   <string name="images_uploaded">Images téléversées</string>
   <string name="image_reverts">Images non annulées</string>
   <string name="images_used_by_wiki">Images utilisées</string>

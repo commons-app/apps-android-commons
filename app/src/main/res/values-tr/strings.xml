@@ -401,7 +401,6 @@
   <string name="statistics_wikidata_edits">\"Yakındaki Yerler\"den Resimler</string>
   <string name="level">Seviye %d</string>
   <string name="profile_withLevel">%s (Seviye %s)</string>
-  <string name="profile_withoutLevel">%s (%s)</string>
   <string name="images_uploaded">Resimler Yüklendi</string>
   <string name="image_reverts">Resimler Geri Alınmadı</string>
   <string name="images_used_by_wiki">Resimler Kullanıldı</string>

@@ -10,42 +10,42 @@
 -->
 <resources>
   <string name="commons_facebook">د خونديځ فيسبوک پاڼه</string>
-  <string name="commons_github">خونديځ ګيټهوب سرچينه کوډ</string>
+  <string name="commons_github">خونديځ گيټ‌هاب سرچينه کوډ</string>
   <string name="commons_logo">خونديځ نښان</string>
   <string name="commons_website">خونديځ وېبپاڼه</string>
   <string name="exit_location_picker">له ځای ټاکونکي وتل</string>
   <string name="submit">سپارل</string>
-  <string name="add_another_description">بل سپيناوی ورزياتول</string>
-  <string name="add_new_contribution">نوې ونډې ورزياتول</string>
-  <string name="add_contribution_from_camera">د کامرې له لارې ونډه ورزياتول</string>
-  <string name="add_contribution_from_photos">انځورونو له لارې ونډه ورزياتول</string>
-  <string name="add_contribution_from_contributions_gallery">د پخوانيو ونډو له انځورتونه د ونډې ورزياتول</string>
+  <string name="add_another_description">بل څرگنداوی ورگډول</string>
+  <string name="add_new_contribution">نوې ونډې ورگډول</string>
+  <string name="add_contribution_from_camera">د کامرې له لارې ونډه ورگډول</string>
+  <string name="add_contribution_from_photos">انځورونو له لارې ونډه ورگډول</string>
+  <string name="add_contribution_from_contributions_gallery">د پخوانيو ونډو له انځورتونه د ونډې ورگډول</string>
   <string name="show_captions">نيونگې</string>
-  <string name="row_item_language_description">ژبې سپيناوی</string>
+  <string name="row_item_language_description">ژبې څرگنداوی</string>
   <string name="row_item_caption">نيونگ</string>
-  <string name="show_captions_description">سپيناوی</string>
+  <string name="show_captions_description">څرگنداوی</string>
   <string name="nearby_row_image">انځور</string>
   <string name="nearby_all">ټول</string>
-  <string name="nearby_filter_toggle">پورته کول</string>
-  <string name="nearby_filter_search">لټون ليد</string>
+  <string name="nearby_filter_toggle">پورته بدلول</string>
+  <string name="nearby_filter_search">لټون کتنه</string>
   <string name="nearby_filter_state">ځای حالت</string>
   <string name="appwidget_img">ورځې انځور</string>
   <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">%1$d دوتنه پورته کول</item>
-    <item quantity="other"> %1$d دوتنې پورته کول</item>
+    <item quantity="one">%1$d دوتنه راپورته‌کول</item>
+    <item quantity="other"> %1$d دوتنې راپورته‌کول</item>
   </plurals>
   <plurals name="contributions_subtitle">
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
-  <string name="starting_uploads">پورته کولو پيل</string>
+  <string name="starting_uploads">راپورته‌کول پيلول</string>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">جريان %d پورته کول</item>
-    <item quantity="other">پورته کولو %d جريان</item>
+    <item quantity="one">راپورته‌کولو %d بهير</item>
+    <item quantity="other">راپورته‌کولو %d بهير</item>
   </plurals>
   <plurals name="multiple_uploads_title">
     <item quantity="one">%d upload</item>
-    <item quantity="other">%d پورته کول</item>
+    <item quantity="other">%d راپورته‌کول</item>
   </plurals>
   <plurals name="share_license_summary">
     <item quantity="one">دا انځور به د منښتليک  %1$s لاندې وي</item>
@@ -100,7 +100,7 @@
   <string name="contribution_state_queued">لږ</string>
   <string name="contribution_state_failed">نابريال شو</string>
   <string name="contribution_state_in_progress">%1$d%% بشپړ</string>
-  <string name="contribution_state_starting">د برسېرېدلو په حال کې…</string>
+  <string name="contribution_state_starting">راپورته‌کېږي</string>
   <string name="menu_from_gallery">له انځورتون څخه</string>
   <string name="menu_from_camera">انځور اخيستل</string>
   <string name="menu_nearby">نژدې</string>
@@ -114,8 +114,8 @@
   <string name="share_description_hint">څرگنداوی</string>
   <string name="share_caption_hint">نيونگ</string>
   <string name="login_failed_network">غونډال ته ننوتنه ناشونې ده - د جال پاتې راتلنه</string>
-  <string name="login_failed_throttled">ډیری ناکامه هڅې. لطفا څو دقیقې وروسته بیا هڅه وکړئ.</string>
-  <string name="login_failed_blocked">بخښنه غواړو، په دي کارن د کامنز لخوا بنديز ولګول شو</string>
+  <string name="login_failed_throttled">ډېرې ناکامه هڅې. لطفا څو دقیقې وروسته بیا هڅه وکړئ.</string>
+  <string name="login_failed_blocked">بخښنه غواړو، په دې کارن د کامنز لخوا بنديز ولگول شو</string>
   <string name="login_failed_2fa_needed">تاسو بايد خپل دوه لامليز تاييد کوډ ورکړئ.</string>
   <string name="login_failed_email_auth_needed">ستاسو برېښليک پتې ته د ننوتلو تاييد کوډ لېږل شوی دی. مهرباني وکړئ د ننوتلو لپاره کوډ ورکړئ.</string>
   <string name="login_failed_generic">غونډال کې ننوتنه نابريالۍ شوه</string>
@@ -187,9 +187,9 @@
   <string name="detail_panel_cats_loading">رابرسېرېږي...</string>
   <string name="detail_panel_cats_none">هېڅ هم نه دی ټاکل شوی</string>
   <string name="detail_caption_empty">هيڅ نيونگ نشته</string>
-  <string name="detail_description_empty">څرگندونه نشته</string>
+  <string name="detail_description_empty">څرگنداوی نشته</string>
   <string name="detail_discussion_empty">هيڅ شننه نشته</string>
-  <string name="detail_license_empty">نامعلوم جواز</string>
+  <string name="detail_license_empty">ناجوت منښتليک</string>
   <string name="menu_refresh">تازه کول</string>
   <string name="storage_permission_title">د زېرمه کولو د پرېښولي غوښتنه کول</string>
   <string name="read_storage_permission_rationale">اړينه پرېښولی: بهرنۍ زېرمه ولولئ. کاريال ستاسو انځورتونه ته پرته له دې لاسرسی نشي موندلی.</string>
@@ -211,7 +211,7 @@
   <string name="media_detail_coordinates">کورډيناټونه</string>
   <string name="media_detail_coordinates_empty">هېڅ نه دي چمتو شوي</string>
   <string name="become_a_tester_title">ازمېښتي ازمايښتگر شئ</string>
-  <string name="welcome_image_welcome_wikipedia">ويکيپېډياښه راغلئ</string>
+  <string name="welcome_image_welcome_wikipedia">ويکيپېډيا ته ښه راغلئ</string>
   <string name="welcome_image_welcome_copyright">لمېسل‌رښتې هرکلی</string>
   <string name="cancel">ناگارل</string>
   <string name="navigation_drawer_open">پرانېستل</string>
@@ -237,6 +237,7 @@
   <string name="nearby_wikidata">ويکي‌اومتوک</string>
   <string name="nearby_wikipedia">ويکيپېډيا</string>
   <string name="nearby_commons">خونديځ</string>
+  <string name="about_rate_us">و مو ارزوئ</string>
   <string name="about_faq">ډ‌ځ‌پ</string>
   <string name="user_guide">کارن لارښود</string>
   <string name="welcome_skip_button">ښوونې پرېښودل</string>
@@ -250,6 +251,7 @@
   <string name="about_translate_proceed">پرمخ‌ځه</string>
   <string name="about_translate_cancel">ناگارل</string>
   <string name="retry">بيا هڅه‌کول</string>
+  <string name="showcase_view_whole_nearby_activity">دا تاسو ته نږدې ځايونه دي چې د ويکيپېډيا ليکنې يې د ښودلو لپاره انځورونو ته اړتيا لري.\n\n\'د دې ځای پلټل\' باندې کليک کولو سره نخچه تاله کوي او د هغه ځای شاوخوا نږدې سيمې لټون پيلول.</string>
   <string name="showcase_view_needs_photo">داځای انځور ته اړتيا لري.</string>
   <string name="showcase_view_has_photo">دا ځای لادمخه انځور لري.</string>
   <string name="showcase_view_no_longer_exists">دا ځای نور شتون نه لري.</string>
@@ -265,5 +267,39 @@
   <string name="search_recent_header">وروستۍ پلټنې:</string>
   <string name="provider_searches">وروستۍ پلټل شوې پوښتنې</string>
   <string name="provider_recent_languages">وروستۍ ژبې پوښتنې</string>
+  <string name="search_tab_title_media">رسنۍ</string>
+  <string name="search_tab_title_categories">وېشنيزې</string>
+  <string name="search_tab_title_depictions">توکي</string>
+  <string name="explore_tab_title_featured">ټاکلې</string>
+  <string name="explore_tab_title_mobile">موبايل له لارې راپورته‌شوی</string>
+  <string name="explore_tab_title_map">نخشه</string>
+  <string name="successful_wikidata_edit">انځور په ویکي‌اومتوک کې %1$s ته ورگډ شو!</string>
+  <string name="ends_on">پای ته رسېږي په:</string>
+  <string name="display_campaigns">ټاکنيزې‌سيالۍ ښکاره‌کول</string>
+  <string name="display_campaigns_explanation">روانې ټاکنيزې‌سيالۍ وگورئ</string>
+  <string name="option_allow">پرېښول</string>
+  <string name="option_dismiss">تړل</string>
+  <string name="open_document_photo_picker_title">د لاسوند پربنسټ انځور راخيستونکی کارول</string>
+  <string name="error_processing_image">د انځور پروسس‌کولو پرمهال تېروتنه رامنځته شوه. مهرباني وکړئ بيا هڅه وکړئ!</string>
+  <string name="getting_edit_token">د سمون لپاره نښه ترلاسه کول</string>
+  <string name="check_category_adding_template">د وېشنيزې سم‌کتنې لپاره کينډۍ ورگډول</string>
+  <string name="check_category_notification_title">د %1$s وېشنيزې سم‌کتنې لپاره غوښتنه‌کول</string>
+  <string name="check_category_edit_summary">وېشنيزې سم‌کتنې غوښتنه‌کول</string>
+  <string name="check_category_success_title">وېشنيزې سم‌کتنې غوښتنه وشوه</string>
+  <string name="check_category_failure_title">د وېشنيزې سم‌کتنې غوښتنه کار نه کوي</string>
+  <string name="check_category_success_message">د %1$s وېشنيزې سم‌کتنې لپاره غوښتنه وشوه</string>
+  <string name="check_category_failure_message">د %1$s سم‌کتنې لپاره غوښتنه نشي کېدای</string>
+  <string name="check_category_toast">د %1$s وېشنيزې سم‌کتنې لپاره غوښتنه‌کول</string>
+  <string name="nominate_for_deletion_done">وشو</string>
+  <string name="send_thank_success_title">مننې لېږل: برياليتوب</string>
+  <string name="send_thank_success_message">%1$s ته په برياليتوب سره مننه ولېږل شوه</string>
+  <string name="send_thank_failure_message">%1$s ته د مننې لېږلو کې پاتې راغی</string>
+  <string name="send_thank_failure_title">مننې لېږل: ناکامي</string>
+  <string name="send_thank_toast">%1$s لپاره د مننې لېږل</string>
+  <string name="review_copyright">ايا دا ډ لمېسل‌رښتو سره سم دی؟</string>
+  <string name="review_category">ايا دا په سمه توگه ډلبندي شوي دي؟</string>
+  <string name="review_spam">ايا دا د منلو وړ دي؟</string>
+  <string name="review_thanks">ايا تاسو غواړئ له ونډه‌وال نه مننه وکړئ؟</string>
+  <string name="review_spam_explanation">که دا انځور ټولگټی نه وي؛ نو ړنگېدو ته د نوماندولو لپاره يې په نه کليک وکړئ.</string>
   <string name="account">گڼون</string>
 </resources>

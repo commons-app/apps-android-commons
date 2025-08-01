@@ -363,7 +363,6 @@
   <string name="statistics_wikidata_edits">Kuvia läheltä</string>
   <string name="level">Taso %d</string>
   <string name="profile_withLevel">%s (taso %s)</string>
-  <string name="profile_withoutLevel">%s (%s)</string>
   <string name="images_uploaded">Kuvia tallennettu</string>
   <string name="image_reverts">Kuvia ei palautettu</string>
   <string name="images_used_by_wiki">Kuvia käytetty</string>

@@ -392,7 +392,6 @@
   <string name="statistics_wikidata_edits">Immagini tramite \"Luoghi nelle vicinanze\"</string>
   <string name="level">Livello %d</string>
   <string name="profile_withLevel">%s (Livello %s)</string>
-  <string name="profile_withoutLevel">%s (%s)</string>
   <string name="images_uploaded">Immagini caricate</string>
   <string name="image_reverts">Immagini non ripristinate</string>
   <string name="images_used_by_wiki">Immagini utilizzate</string>
