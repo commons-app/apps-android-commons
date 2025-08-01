@@ -30,7 +30,15 @@ class NearbyResultItem(
 
     fun getLocation(): ResultTuple = location ?: ResultTuple()
 
+    /**
+     * Returns label for display (pins, popup), using fallback to itemLabel if needed.
+     */
     fun getLabel(): ResultTuple = label ?: itemLabel ?: ResultTuple()
+
+    /**
+     * Returns only the original label field, for Wikidata edits.
+     */
+    fun getOriginalLabel(): ResultTuple = label ?: ResultTuple()
 
     fun getIcon(): ResultTuple = icon ?: ResultTuple()
 
