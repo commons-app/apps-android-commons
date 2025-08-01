@@ -123,12 +123,7 @@ class ExploreMapRootFragment : CommonsDaggerSupportFragment, MediaDetailProvider
      * index of viewPager.
      * @return Media Object
      */
-    override fun getMediaAtPosition(i: Int): Media? =
-        if (mapFragment != null && mapFragment!!.mediaList != null) {
-            mapFragment!!.mediaList[i]
-        } else {
-            null
-        }
+    override fun getMediaAtPosition(i: Int): Media? = mapFragment?.mediaList?.get(i)
 
     /**
      * This method is called on from getCount of MediaDetailPagerFragment The viewpager will contain
@@ -136,12 +131,7 @@ class ExploreMapRootFragment : CommonsDaggerSupportFragment, MediaDetailProvider
      *
      * @return Total Media count in the adapter
      */
-    override fun getTotalMediaCount(): Int =
-        if (mapFragment != null && mapFragment!!.mediaList != null) {
-            mapFragment!!.mediaList.size
-        } else {
-            0
-        }
+    override fun getTotalMediaCount(): Int = mapFragment?.mediaList?.size ?: 0
 
     override fun getContributionStateAt(position: Int): Int? = null
 
