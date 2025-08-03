@@ -12,7 +12,7 @@ object ConfigUtils {
     val isBetaFlavour: Boolean = BuildConfig.FLAVOR == "beta"
 
     @JvmStatic
-    private fun Context.getVersionName(): String =
+    private fun Context.getVersionName(): String? =
         try {
             packageManager.getPackageInfo(packageName, 0).versionName
         } catch (e: PackageManager.NameNotFoundException) {
