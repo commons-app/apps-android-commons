@@ -18,7 +18,7 @@ import fr.free.nrw.commons.explore.models.RecentSearch
 import fr.free.nrw.commons.explore.recentsearches.RecentSearchesDao
 import fr.free.nrw.commons.explore.recentsearches.RecentSearchesFragment
 import fr.free.nrw.commons.media.MediaDetailPagerFragment
-import fr.free.nrw.commons.media.MediaDetailPagerFragment.MediaDetailProvider
+import fr.free.nrw.commons.media.MediaDetailProvider
 import fr.free.nrw.commons.theme.BaseActivity
 import fr.free.nrw.commons.utils.FragmentUtils.isFragmentUIActive
 import fr.free.nrw.commons.utils.ViewUtil.hideKeyboard
@@ -140,7 +140,7 @@ class SearchActivity : BaseActivity(), MediaDetailProvider, CategoryImagesCallba
 
     override fun getMediaAtPosition(i: Int): Media? = searchMediaFragment!!.getMediaAtPosition(i)
 
-    override fun getTotalMediaCount(): Int = searchMediaFragment!!.totalMediaCount
+    override fun getTotalMediaCount(): Int = searchMediaFragment!!.getTotalMediaCount()
 
     override fun getContributionStateAt(position: Int): Int? = null
 

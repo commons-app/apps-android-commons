@@ -14,7 +14,7 @@ import fr.free.nrw.commons.databinding.FragmentFeaturedRootBinding
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment
 import fr.free.nrw.commons.explore.categories.media.CategoriesMediaFragment
 import fr.free.nrw.commons.media.MediaDetailPagerFragment
-import fr.free.nrw.commons.media.MediaDetailPagerFragment.MediaDetailProvider
+import fr.free.nrw.commons.media.MediaDetailProvider
 import fr.free.nrw.commons.navtab.NavTab
 
 class ExploreListRootFragment : CommonsDaggerSupportFragment, MediaDetailProvider,
@@ -122,7 +122,7 @@ class ExploreListRootFragment : CommonsDaggerSupportFragment, MediaDetailProvide
      *
      * @return Total Media count in the adapter
      */
-    override fun getTotalMediaCount(): Int = listFragment?.totalMediaCount ?: 0
+    override fun getTotalMediaCount(): Int = listFragment?.getTotalMediaCount() ?: 0
 
     override fun getContributionStateAt(position: Int): Int? = null
 
