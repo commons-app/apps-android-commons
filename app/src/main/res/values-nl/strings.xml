@@ -241,7 +241,7 @@
   <string name="media_detail_coordinates_empty">Niet opgegeven</string>
   <string name="become_a_tester_title">Word bètatester</string>
   <string name="become_a_tester_description">Meld u aan voor ons bètakanaal op Google Play en krijg vroegtijdig toegang tot nieuwe functies en bugfixes</string>
-  <string name="_2fa_code">2FA-code</string>
+  <string name="_2fa_code">Tweetrapsauthenticatie-code</string>
   <string name="email_auth_code">E-mailverificatiecode</string>
   <string name="logout_verification">Wilt u zich echt afmelden?</string>
   <string name="mediaimage_failed">Media-afbeelding is mislukt</string>

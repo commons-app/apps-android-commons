@@ -8,9 +8,9 @@ import android.net.Uri
 import androidx.core.net.toUri
 import fr.free.nrw.commons.BuildConfig
 import fr.free.nrw.commons.di.CommonsDaggerContentProvider
-import fr.free.nrw.commons.explore.recentsearches.RecentSearchesDao.Table.ALL_FIELDS
-import fr.free.nrw.commons.explore.recentsearches.RecentSearchesDao.Table.COLUMN_ID
-import fr.free.nrw.commons.explore.recentsearches.RecentSearchesDao.Table.TABLE_NAME
+import fr.free.nrw.commons.explore.recentsearches.RecentSearchesTable.ALL_FIELDS
+import fr.free.nrw.commons.explore.recentsearches.RecentSearchesTable.COLUMN_ID
+import fr.free.nrw.commons.explore.recentsearches.RecentSearchesTable.TABLE_NAME
 
 /**
  * This class contains functions for executing queries for

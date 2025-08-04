@@ -1,5 +1,16 @@
 # Wikimedia Commons for Android
 
+## v5.6.1
+
+### What's changed
+* The app no longer uploads images to Wikidata if one exists already for a given item
+* File usage displays correctly now
+* No more infinite circular progress bar on nominating an image for deletion
+* Enhanced location updates while using GPS
+* Author/uploader names are now available in Media Details for Commons licensing compliance
+* Improved usage of popups in Nearby
+* Bug fixes and stability improvements 
+
 ## v5.5.0
 
 ### What's changed

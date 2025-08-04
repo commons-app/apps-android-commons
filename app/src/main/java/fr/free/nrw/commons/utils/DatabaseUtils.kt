@@ -10,6 +10,14 @@ fun Cursor.getStringArray(name: String): List<String> =
 fun Cursor.getString(name: String): String =
     getString(getColumnIndex(name))
 
+@SuppressLint("Range")
+fun Cursor.getInt(name: String): Int =
+    getInt(getColumnIndex(name))
+
+@SuppressLint("Range")
+fun Cursor.getLong(name: String): Long =
+    getLong(getColumnIndex(name))
+
 /**
  * Converts string to List
  * @param listString comma separated single string from of list items
