@@ -274,6 +274,15 @@
   <string name="explore_tab_title_mobile">موبايل له لارې راپورته‌شوی</string>
   <string name="explore_tab_title_map">نخشه</string>
   <string name="successful_wikidata_edit">انځور په ویکي‌اومتوک کې %1$s ته ورگډ شو!</string>
+  <string name="Profile">پېژنيال</string>
+  <string name="badges">مټ‌تړوني</string>
+  <string name="statistics">شمارنې</string>
+  <string name="statistics_thanks">مننه ترلاسه‌شو</string>
+  <string name="statistics_featured">ټاکلی انځور</string>
+  <string name="statistics_wikidata_edits">انځورنه د \"څېرمه ځايونو\" له لارې</string>
+  <string name="images_uploaded">انځورونه راپورته‌شول</string>
+  <string name="image_reverts">انځورونه په څټ‌گرځول‌شوي نه دي</string>
+  <string name="images_used_by_wiki">کارول‌شوي انځورونه</string>
   <string name="ends_on">پای ته رسېږي په:</string>
   <string name="display_campaigns">ټاکنيزې‌سيالۍ ښکاره‌کول</string>
   <string name="display_campaigns_explanation">روانې ټاکنيزې‌سيالۍ وگورئ</string>
@@ -301,5 +310,6 @@
   <string name="review_spam">ايا دا د منلو وړ دي؟</string>
   <string name="review_thanks">ايا تاسو غواړئ له ونډه‌وال نه مننه وکړئ؟</string>
   <string name="review_spam_explanation">که دا انځور ټولگټی نه وي؛ نو ړنگېدو ته د نوماندولو لپاره يې په نه کليک وکړئ.</string>
+  <string name="location_message">ځای اومتوکي له ويکي کارنانو سره مرسته کوي چې ستاسو انځور موندلو او لا ډېر گټور کولو کې مرسته کوي.\nستاسو وروستۍ راپورته‌کېدنې ځای نه لري.\nموږ تاسو ته سپارښته کوو چې خپل د ځای ښودنه د کامرې په کاريال په اوڼنو کې بل کړئ.\nله راپورته کولو مو مننه!</string>
   <string name="account">گڼون</string>
 </resources>
