@@ -311,7 +311,7 @@ class LeaderboardFragment : CommonsDaggerSupportFragment() {
     }
 
     private class SelectionListener(private val handler: () -> Unit): AdapterView.OnItemSelectedListener {
-        override fun onItemSelected(adapterView: AdapterView<*>?, view: View, i: Int, l: Long) =
+        override fun onItemSelected(adapterView: AdapterView<*>?, view: View?, i: Int, l: Long) =
             handler()
 
         override fun onNothingSelected(p0: AdapterView<*>?) = Unit
