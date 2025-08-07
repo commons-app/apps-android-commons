@@ -2,7 +2,6 @@ package fr.free.nrw.commons.explore.depictions;
 
 import static fr.free.nrw.commons.ViewPagerAdapter.pairOf;
 import static fr.free.nrw.commons.utils.UrlUtilsKt.handleWebUrl;
-
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -27,6 +26,7 @@ import fr.free.nrw.commons.media.MediaDetailProvider;
 import fr.free.nrw.commons.theme.BaseActivity;
 import fr.free.nrw.commons.upload.structure.depictions.DepictModel;
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem;
+import fr.free.nrw.commons.utils.EdgeToEdgeUtilsKt;
 import fr.free.nrw.commons.wikidata.WikidataConstants;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
@@ -62,7 +62,9 @@ public class WikidataItemDetailsActivity extends BaseActivity implements MediaDe
         super.onCreate(savedInstanceState);
 
         binding = ActivityWikidataItemDetailsBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+        final View view = binding.getRoot();
+        EdgeToEdgeUtilsKt.applyEdgeToEdgeAllInsets(view);
+        setContentView(view);
         compositeDisposable = new CompositeDisposable();
         supportFragmentManager = getSupportFragmentManager();
         viewPagerAdapter = new ViewPagerAdapter(this, getSupportFragmentManager());
