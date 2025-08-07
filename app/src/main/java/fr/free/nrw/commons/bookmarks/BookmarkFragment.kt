@@ -33,7 +33,7 @@ class BookmarkFragment : CommonsDaggerSupportFragment() {
 
     fun setScroll(canScroll: Boolean) {
         binding?.let {
-            it.viewPagerBookmarks.isCanScroll = canScroll
+            it.viewPagerBookmarks.canScroll = canScroll
         }
     }
 

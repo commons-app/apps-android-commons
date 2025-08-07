@@ -228,6 +228,7 @@
   <string name="media_detail_description">Descrição</string>
   <string name="media_detail_discussion">Discussão</string>
   <string name="media_detail_author">Autor</string>
+  <string name="media_detail_uploader">Carregador</string>
   <string name="media_detail_uploaded_date">Data de carregamento</string>
   <string name="media_detail_license">Licença</string>
   <string name="media_detail_coordinates">Coordenadas</string>
@@ -235,6 +236,7 @@
   <string name="become_a_tester_title">Torne-se um Testador Beta</string>
   <string name="become_a_tester_description">Opte pelo nosso canal beta no Google Play e obtenha acesso antecipado às novas funcionalidades e às correções de erros</string>
   <string name="_2fa_code">Código de autenticação de dois fatores</string>
+  <string name="email_auth_code">Código de verificação do e-mail</string>
   <string name="logout_verification">Deseja realmente sair?</string>
   <string name="mediaimage_failed">Falha na imagem multimédia</string>
   <string name="no_subcategory_found">Não foi encontrada nenhuma subcategoria.</string>
@@ -255,6 +257,7 @@
   <string name="navigation_item_about">Sobre</string>
   <string name="navigation_item_settings">Configurações</string>
   <string name="navigation_item_feedback">Comentários</string>
+  <string name="navigation_item_feedback_github">Comentários via GitHub</string>
   <string name="navigation_item_logout">Sair</string>
   <string name="navigation_item_info">Explicação</string>
   <string name="navigation_item_notification">Notificações</string>
@@ -294,8 +297,10 @@
   <string name="copy_wikicode">Copiar o texto wiki para a área de transferência</string>
   <string name="wikicode_copied">O texto wiki foi copiado para a área de transferência</string>
   <string name="nearby_location_not_available">A identificação de locais próximos pode não funcionar devidamente; o serviço de localização não está disponível.</string>
+  <string name="nearby_showing_pins_offline">Internet indisponível. A mostrar apenas os locais em cache.</string>
   <string name="upload_location_access_denied">Acesso à localização negado. Para usar esta funcionalidade defina a sua localização manualmente, por favor.</string>
   <string name="location_permission_rationale_nearby">É necessária permissão para mostrar uma lista dos locais próximos</string>
+  <string name="location_permission_rationale_explore">É necessária a permissão para exibir uma lista de imagens próximas</string>
   <string name="nearby_directions">Indicações</string>
   <string name="nearby_wikidata">Wikidata</string>
   <string name="nearby_wikipedia">Wikipédia</string>
@@ -364,6 +369,7 @@
   <string name="share_app_title">Partilhar aplicação</string>
   <string name="rotate">Rodar</string>
   <string name="error_fetching_nearby_places">Não foi possível carregar locais próximos</string>
+  <string name="no_pictures_in_this_area">Não há fotografias nesta área</string>
   <string name="no_nearby_places_around">Não existem locais próximos</string>
   <string name="error_fetching_nearby_monuments">Erro ao procurar monumentos próximos.</string>
   <string name="no_recent_searches">Não há pesquisas recentes</string>
@@ -764,11 +770,12 @@
   <string name="permissions_are_required_for_functionality">São necessárias permissões para a funcionalidade</string>
   <string name="learn_how_to_write_a_useful_description">Aprenda a escrever uma descrição útil</string>
   <string name="learn_how_to_write_a_useful_caption">Aprenda a escrever uma legenda útil</string>
-  <string name="see_your_achievements" fuzzy="true">Ver as suas realizações</string>
+  <string name="see_your_achievements">Ver as suas realizações</string>
   <string name="edit_image">Editar imagem</string>
   <string name="edit_location">Editar localização</string>
   <string name="location_updated">Localização actualizada!</string>
   <string name="remove_location">Remover Localização</string>
+  <string name="remove_location_warning_title">Remover Aviso de Localização</string>
   <string name="location_removed">Localização removida!</string>
   <string name="send_thanks_to_author">Agradecer ao autor</string>
   <string name="error_sending_thanks">Erro no envio de agradecimento ao autor.</string>
@@ -788,5 +795,24 @@
   <string name="talk">Discussão</string>
   <string name="other_problem_or_information_please_explain_below">Outro problema ou informação (por favor, explique em baixo).</string>
   <string name="feedback_destination_note">O seu comentário é publicado na seguinte página da wiki: &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Mobile_app/Feedback\"&gt;Commons:Mobile app/Feedback&lt;/a&gt;</string>
+  <string name="uploads">Envios</string>
+  <string name="pending">Pendente</string>
+  <string name="failed">Falhou</string>
+  <string name="could_not_load_place_data">Não foi possível carregar os dados do local</string>
+  <string name="custom_selector_delete_folder">Eliminar Pasta</string>
+  <string name="custom_selector_confirm_deletion_title">Confirmar Eliminação</string>
+  <string name="custom_selector_delete">Eliminar</string>
+  <string name="custom_selector_cancel">Cancelar</string>
+  <string name="usages_on_commons_heading">Commons</string>
+  <string name="usages_on_other_wikis_heading">Outras wikis</string>
+  <string name="file_usages_container_heading">Utilização de ficheiro</string>
+  <string name="account">Conta</string>
+  <string name="caption">Legenda</string>
+  <string name="caption_copied_to_clipboard">Legenda copiada para a área de transferência</string>
+  <string name="congratulations_all_pictures_in_this_album_have_been_either_uploaded_or_marked_as_not_for_upload">Parabéns, todas as fotografias neste álbum foram envidas ou marcadas como \'não para enviar\'.</string>
+  <string name="show_in_explore">Mostrar no Explorador</string>
+  <string name="show_in_nearby">Mostrar nas Proximidades</string>
+  <string name="image_tag_line_created_and_uploaded_by">Criada e enviada por: %1$s</string>
+  <string name="image_tag_line_created_by_and_uploaded_by">Criada por %1$s e enviada por %2$s</string>
   <string name="nominated_for_deletion_btn">Nomeada para Eliminação</string>
 </resources>

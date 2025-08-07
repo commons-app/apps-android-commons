@@ -88,14 +88,14 @@ class ExploreFragmentUnitTest {
     @Throws(Exception::class)
     fun testSetScrollCaseTrue() {
         fragment.setScroll(true)
-        Assert.assertEquals(viewPager.isCanScroll, true)
+        Assert.assertEquals(viewPager.canScroll, true)
     }
 
     @Test
     @Throws(Exception::class)
     fun testSetScrollCaseFalse() {
         fragment.setScroll(false)
-        Assert.assertEquals(viewPager.isCanScroll, false)
+        Assert.assertEquals(viewPager.canScroll, false)
     }
 
     @Test

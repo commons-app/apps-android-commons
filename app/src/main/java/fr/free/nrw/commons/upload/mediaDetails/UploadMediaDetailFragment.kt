@@ -821,6 +821,7 @@ class UploadMediaDetailFragment : UploadBaseFragment(), UploadMediaDetailsContra
                 {
                     showProgress(false)
                     uploadItem.imageQuality = IMAGE_OK
+                    uploadItem.hasInvalidLocation = false // Reset invalid location flag when user confirms upload
                 },
                 {
                     presenterCallback!!.deletePictureAtIndex(index)
