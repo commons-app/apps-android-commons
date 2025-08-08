@@ -4,6 +4,7 @@ import android.content.res.Configuration
 import android.os.Bundle
 import android.util.DisplayMetrics
 import android.view.WindowManager
+import androidx.activity.enableEdgeToEdge
 import javax.inject.Inject
 import javax.inject.Named
 import fr.free.nrw.commons.R
@@ -36,6 +37,7 @@ abstract class BaseActivity : CommonsDaggerAppCompatActivity() {
             1f
         )
         adjustFontScale(resources.configuration, fontScale)
+        enableEdgeToEdge()
     }
 
     override fun onResume() {

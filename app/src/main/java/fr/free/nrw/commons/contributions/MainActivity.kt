@@ -34,6 +34,7 @@ import fr.free.nrw.commons.quiz.QuizChecker
 import fr.free.nrw.commons.settings.SettingsFragment
 import fr.free.nrw.commons.startWelcome
 import fr.free.nrw.commons.theme.BaseActivity
+import fr.free.nrw.commons.utils.applyEdgeToEdgeAllInsets
 import fr.free.nrw.commons.upload.UploadProgressActivity
 import fr.free.nrw.commons.upload.worker.WorkRequestHelper.Companion.makeOneTimeWorkRequest
 import fr.free.nrw.commons.utils.ViewUtilWrapper
@@ -112,6 +113,7 @@ class MainActivity : BaseActivity(), FragmentManager.OnBackStackChangedListener 
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = MainBinding.inflate(layoutInflater)
+        applyEdgeToEdgeAllInsets(binding!!.root)
         setContentView(binding!!.root)
         setSupportActionBar(binding!!.toolbarBinding.toolbar)
         tabLayout = binding!!.fragmentMainNavTabLayout

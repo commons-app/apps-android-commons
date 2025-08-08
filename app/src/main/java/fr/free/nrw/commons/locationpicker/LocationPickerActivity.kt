@@ -25,6 +25,10 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.IntentCompat
 import androidx.core.os.BundleCompat
 import androidx.core.text.HtmlCompat
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.updatePadding
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import fr.free.nrw.commons.CameraPosition
 import fr.free.nrw.commons.CommonsApplication
@@ -330,6 +334,16 @@ class LocationPickerActivity : BaseActivity(), LocationPermissionCallback {
      */
     private fun getToolbarUI() {
         val toolbar: ConstraintLayout = findViewById(R.id.location_picker_toolbar)
+        WindowCompat.getInsetsController(window, window.decorView)
+            .isAppearanceLightStatusBars = false
+        ViewCompat.setOnApplyWindowInsetsListener(toolbar) { v, windowInsets ->
+            val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars())
+
+            v.updatePadding(
+                top = insets.top
+            )
+            WindowInsetsCompat.CONSUMED
+        }
         largeToolbarText = findViewById(R.id.location_picker_toolbar_primary_text_view)
         smallToolbarText = findViewById(R.id.location_picker_toolbar_secondary_text_view)
         toolbar.setBackgroundColor(ContextCompat.getColor(this, R.color.primaryColor))

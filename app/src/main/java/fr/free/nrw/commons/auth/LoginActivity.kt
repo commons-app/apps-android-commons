@@ -32,6 +32,7 @@ import fr.free.nrw.commons.contributions.MainActivity
 import fr.free.nrw.commons.databinding.ActivityLoginBinding
 import fr.free.nrw.commons.di.ApplicationlessInjection
 import fr.free.nrw.commons.kvstore.JsonKvStore
+import fr.free.nrw.commons.utils.applyEdgeToEdgeAllInsets
 import fr.free.nrw.commons.utils.AbstractTextWatcher
 import fr.free.nrw.commons.utils.ActivityUtils.startActivityWithFlags
 import fr.free.nrw.commons.utils.ConfigUtils.isBetaFlavour
@@ -80,6 +81,7 @@ class LoginActivity : AccountAuthenticatorActivity() {
         delegate.onCreate(savedInstanceState)
 
         binding = ActivityLoginBinding.inflate(layoutInflater)
+        applyEdgeToEdgeAllInsets(binding!!.root)
         with(binding!!) {
             setContentView(root)
 

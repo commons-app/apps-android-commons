@@ -19,6 +19,7 @@ import fr.free.nrw.commons.databinding.ActivityNotificationBinding
 import fr.free.nrw.commons.notification.models.Notification
 import fr.free.nrw.commons.notification.models.NotificationType
 import fr.free.nrw.commons.theme.BaseActivity
+import fr.free.nrw.commons.utils.applyEdgeToEdgeTopInsets
 import fr.free.nrw.commons.utils.NetworkUtils
 import fr.free.nrw.commons.utils.ViewUtil
 import fr.free.nrw.commons.utils.handleWebUrl
@@ -56,6 +57,7 @@ class NotificationActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         isRead = intent.getStringExtra("title") == "read"
         binding = ActivityNotificationBinding.inflate(layoutInflater)
+        applyEdgeToEdgeTopInsets(binding.root)
         setContentView(binding.root)
         mNotificationWorkerFragment = supportFragmentManager.findFragmentByTag(
             tagNotificationWorkerFragment
