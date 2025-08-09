@@ -48,6 +48,7 @@ import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment.Compani
 import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment.Companion.LAST_ZOOM
 import fr.free.nrw.commons.utils.DialogUtil
 import fr.free.nrw.commons.utils.MapUtils.ZOOM_LEVEL
+import fr.free.nrw.commons.utils.applyEdgeToEdgeBottomInsets
 import fr.free.nrw.commons.utils.handleGeoCoordinates
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -474,6 +475,7 @@ class LocationPickerActivity : BaseActivity(), LocationPermissionCallback {
      */
     private fun addPlaceSelectedButton() {
         placeSelectedButton = findViewById(R.id.location_chosen_button)
+        applyEdgeToEdgeBottomInsets(placeSelectedButton)
         placeSelectedButton.setOnClickListener { placeSelected() }
     }
 
