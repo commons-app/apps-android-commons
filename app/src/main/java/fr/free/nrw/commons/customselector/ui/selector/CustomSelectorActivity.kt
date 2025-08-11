@@ -54,9 +54,10 @@ import fr.free.nrw.commons.databinding.CustomSelectorBottomLayoutBinding
 import fr.free.nrw.commons.databinding.CustomSelectorToolbarBinding
 import fr.free.nrw.commons.media.ZoomableActivity
 import fr.free.nrw.commons.theme.BaseActivity
-import fr.free.nrw.commons.utils.applyEdgeToEdgeAllInsets
 import fr.free.nrw.commons.upload.FileUtilsWrapper
 import fr.free.nrw.commons.utils.CustomSelectorUtils
+import fr.free.nrw.commons.utils.applyEdgeToEdgeBottomPaddingInsets
+import fr.free.nrw.commons.utils.applyEdgeToEdgeTopInsets
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -199,7 +200,8 @@ class CustomSelectorActivity :
                         .fillMaxWidth(),
             )
         }
-        applyEdgeToEdgeAllInsets(binding.root)
+        applyEdgeToEdgeTopInsets(toolbarBinding.toolbarLayout)
+        bottomSheetBinding.bottomLayout.applyEdgeToEdgeBottomPaddingInsets()
         val view = binding.root
         setContentView(view)
 

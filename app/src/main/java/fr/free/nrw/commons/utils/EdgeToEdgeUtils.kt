@@ -9,6 +9,7 @@ import androidx.core.view.marginLeft
 import androidx.core.view.marginRight
 import androidx.core.view.marginTop
 import androidx.core.view.updateLayoutParams
+import androidx.core.view.updatePadding
 import fr.free.nrw.commons.R
 
 fun View.applyEdgeToEdgeInsets(
@@ -60,6 +61,38 @@ fun View.applyEdgeToEdgeInsets(
         view.updateLayoutParams<MarginLayoutParams> {
             apply { block(accumulator) }
         }
+
+        WindowInsetsCompat.CONSUMED
+    }
+}
+
+fun View.applyEdgeToEdgeTopPaddingInsets(
+    typeMask: Int = WindowInsetsCompat.Type.systemBars(),
+) {
+    ViewCompat.setOnApplyWindowInsetsListener(this) { view, windowInsets ->
+        val insets = windowInsets.getInsets(typeMask)
+
+        view.updatePadding(
+            left = insets.left,
+            right = insets.right,
+            top = insets.top
+        )
+
+        WindowInsetsCompat.CONSUMED
+    }
+}
+
+fun View.applyEdgeToEdgeBottomPaddingInsets(
+    typeMask: Int = WindowInsetsCompat.Type.systemBars(),
+) {
+    ViewCompat.setOnApplyWindowInsetsListener(this) { view, windowInsets ->
+        val insets = windowInsets.getInsets(typeMask)
+
+        view.updatePadding(
+            left = insets.left,
+            right = insets.right,
+            bottom = insets.bottom
+        )
 
         WindowInsetsCompat.CONSUMED
     }
