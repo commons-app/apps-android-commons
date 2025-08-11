@@ -22,6 +22,7 @@ import fr.free.nrw.commons.theme.BaseActivity
 import fr.free.nrw.commons.utils.applyEdgeToEdgeTopInsets
 import fr.free.nrw.commons.utils.NetworkUtils
 import fr.free.nrw.commons.utils.ViewUtil
+import fr.free.nrw.commons.utils.applyEdgeToEdgeBottomPaddingInsets
 import fr.free.nrw.commons.utils.handleWebUrl
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -57,7 +58,8 @@ class NotificationActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         isRead = intent.getStringExtra("title") == "read"
         binding = ActivityNotificationBinding.inflate(layoutInflater)
-        applyEdgeToEdgeTopInsets(binding.root)
+        applyEdgeToEdgeTopInsets(binding.toolbar.toolbar)
+        binding.listView.applyEdgeToEdgeBottomPaddingInsets()
         setContentView(binding.root)
         mNotificationWorkerFragment = supportFragmentManager.findFragmentByTag(
             tagNotificationWorkerFragment

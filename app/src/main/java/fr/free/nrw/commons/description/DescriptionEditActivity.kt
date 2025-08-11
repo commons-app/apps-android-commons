@@ -7,10 +7,7 @@ import android.speech.RecognizerIntent
 import android.view.View
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.view.ViewCompat
 import androidx.core.view.WindowCompat
-import androidx.core.view.WindowInsetsCompat
-import androidx.core.view.updatePadding
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import fr.free.nrw.commons.CommonsApplication
@@ -28,6 +25,7 @@ import fr.free.nrw.commons.utils.applyEdgeToEdgeBottomInsets
 import fr.free.nrw.commons.upload.UploadMediaDetail
 import fr.free.nrw.commons.upload.UploadMediaDetailAdapter
 import fr.free.nrw.commons.utils.DialogUtil.showAlertDialog
+import fr.free.nrw.commons.utils.applyEdgeToEdgeTopPaddingInsets
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.functions.Consumer
 import io.reactivex.schedulers.Schedulers
@@ -95,14 +93,7 @@ class DescriptionEditActivity :
         applyEdgeToEdgeBottomInsets(binding.btnEditSubmit)
         WindowCompat.getInsetsController(window, window.decorView)
             .isAppearanceLightStatusBars = false
-        ViewCompat.setOnApplyWindowInsetsListener(binding.toolbar) { v, windowInsets ->
-            val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars())
-
-            v.updatePadding(
-                top = insets.top
-            )
-            WindowInsetsCompat.CONSUMED
-        }
+        binding.toolbar.applyEdgeToEdgeTopPaddingInsets()
         setContentView(binding.root)
 
         val bundle = intent.extras
