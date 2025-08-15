@@ -40,6 +40,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
+import androidx.core.view.ViewGroupCompat
 import androidx.lifecycle.ViewModelProvider
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.customselector.database.NotForUploadStatus
@@ -200,6 +201,7 @@ class CustomSelectorActivity :
                         .fillMaxWidth(),
             )
         }
+        ViewGroupCompat.installCompatInsetsDispatch(binding.root)
         applyEdgeToEdgeTopInsets(toolbarBinding.toolbarLayout)
         bottomSheetBinding.bottomLayout.applyEdgeToEdgeBottomPaddingInsets()
         val view = binding.root

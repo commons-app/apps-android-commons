@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import androidx.core.view.ViewGroupCompat
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
@@ -58,6 +59,7 @@ class NotificationActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         isRead = intent.getStringExtra("title") == "read"
         binding = ActivityNotificationBinding.inflate(layoutInflater)
+        ViewGroupCompat.installCompatInsetsDispatch(binding.root)
         applyEdgeToEdgeTopInsets(binding.toolbar.toolbar)
         binding.listView.applyEdgeToEdgeBottomPaddingInsets()
         setContentView(binding.root)
