@@ -1,9 +1,7 @@
 package fr.free.nrw.commons.contributions
 
-import android.Manifest.permission
 import android.annotation.SuppressLint
 import android.content.Context
-import android.content.Intent
 import android.content.res.Configuration
 import android.net.Uri
 import android.os.Bundle
@@ -12,13 +10,7 @@ import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.Animation
-import android.view.animation.AnimationUtils
 import android.widget.LinearLayout
-import androidx.activity.result.ActivityResult
-import androidx.activity.result.ActivityResultLauncher
-import androidx.activity.result.contract.ActivityResultContracts.RequestMultiplePermissions
-import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult
 import androidx.annotation.VisibleForTesting
 import androidx.paging.PagedList
 import androidx.recyclerview.widget.GridLayoutManager
@@ -34,9 +26,9 @@ import fr.free.nrw.commons.contributions.WikipediaInstructionsDialogFragment.Com
 import fr.free.nrw.commons.databinding.FragmentContributionsListBinding
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment
 import fr.free.nrw.commons.di.NetworkingModule
-import fr.free.nrw.commons.filepicker.FilePicker
 import fr.free.nrw.commons.media.MediaClient
 import fr.free.nrw.commons.profile.ProfileActivity
+import fr.free.nrw.commons.ui.CustomFabController
 import fr.free.nrw.commons.utils.DialogUtil.showAlertDialog
 import fr.free.nrw.commons.utils.SystemThemeUtils
 import fr.free.nrw.commons.utils.ViewUtil.showShortToast
@@ -51,7 +43,7 @@ import javax.inject.Named
 /**
  * Created by root on 01.06.2018.
  */
-class ContributionsListFragment : CommonsDaggerSupportFragment(), ContributionsListContract.View,
+open class ContributionsListFragment : CommonsDaggerSupportFragment(), ContributionsListContract.View,
     ContributionsListAdapter.Callback, WikipediaInstructionsDialogFragment.Callback {
     @JvmField
     @Inject
@@ -83,13 +75,7 @@ class ContributionsListFragment : CommonsDaggerSupportFragment(), ContributionsL
     var sessionManager: SessionManager? = null
 
     private var binding: FragmentContributionsListBinding? = null
-    private var fab_close: Animation? = null
-    private var fab_open: Animation? = null
-    private var rotate_forward: Animation? = null
-    private var rotate_backward: Animation? = null
-    private var isFabOpen = false
-
-    private lateinit var inAppCameraLocationPermissionLauncher: ActivityResultLauncher<Array<String>>
+    private lateinit var fabController: CustomFabController
 
     @VisibleForTesting
     var rvContributionsList: RecyclerView? = null
@@ -106,46 +92,12 @@ class ContributionsListFragment : CommonsDaggerSupportFragment(), ContributionsL
     private var contributionsSize = 0
     private var userName: String? = null
 
-    private val galleryPickLauncherForResult = registerForActivityResult<Intent, ActivityResult>(
-        StartActivityForResult()
-    ) { result: ActivityResult? ->
-        controller!!.handleActivityResultWithCallback(requireActivity()
-        ) { callbacks: FilePicker.Callbacks? ->
-            controller!!.onPictureReturnedFromGallery(
-                result!!, requireActivity(), callbacks!!
-            )
-        }
-    }
-
-    private val customSelectorLauncherForResult = registerForActivityResult<Intent, ActivityResult>(
-        StartActivityForResult()
-    ) { result: ActivityResult? ->
-        controller!!.handleActivityResultWithCallback(requireActivity()
-        ) { callbacks: FilePicker.Callbacks? ->
-            controller!!.onPictureReturnedFromCustomSelector(
-                result!!, requireActivity(), callbacks!!
-            )
-        }
-    }
-
-    private val cameraPickLauncherForResult = registerForActivityResult<Intent, ActivityResult>(
-        StartActivityForResult()
-    ) { result: ActivityResult? ->
-        controller!!.handleActivityResultWithCallback(requireActivity()
-        ) { callbacks: FilePicker.Callbacks? ->
-            controller!!.onPictureReturnedFromCamera(
-                result!!, requireActivity(), callbacks!!
-            )
-        }
-    }
-
     @SuppressLint("NewApi")
     override fun onCreate(
         savedInstanceState: Bundle?
     ) {
         super.onCreate(savedInstanceState)
-        //Now that we are allowing this fragment to be started for
-        // any userName- we expect it to be passed as an argument
+
         if (arguments != null) {
             userName = requireArguments().getString(ProfileActivity.KEY_USERNAME)
         }
@@ -153,45 +105,18 @@ class ContributionsListFragment : CommonsDaggerSupportFragment(), ContributionsL
         if (StringUtils.isEmpty(userName)) {
             userName = sessionManager!!.userName
         }
-        inAppCameraLocationPermissionLauncher =
-        registerForActivityResult(RequestMultiplePermissions()) { result ->
-            val areAllGranted = result.values.all { it }
-
-            if (areAllGranted) {
-                controller?.locationPermissionCallback?.onLocationPermissionGranted()
-            } else {
-                activity?.let { currentActivity ->
-                    if (currentActivity.shouldShowRequestPermissionRationale(permission.ACCESS_FINE_LOCATION)) {
-                        controller?.handleShowRationaleFlowCameraLocation(
-                            currentActivity,
-                            inAppCameraLocationPermissionLauncher, // Pass launcher
-                            cameraPickLauncherForResult
-                        )
-                    } else {
-                        controller?.locationPermissionCallback?.onLocationPermissionDenied(
-                            currentActivity.getString(R.string.in_app_camera_location_permission_denied)
-                        )
-                    }
-                }
-            }
-        }
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentContributionsListBinding.inflate(
             inflater, container, false
         )
         rvContributionsList = binding!!.contributionsList
 
         contributionsListPresenter!!.onAttachView(this)
-        binding!!.fabCustomGallery.setOnClickListener { v: View? -> launchCustomSelector() }
-        binding!!.fabCustomGallery.setOnLongClickListener { view: View? ->
-            showShortToast(context, fr.free.nrw.commons.R.string.custom_selector_title)
-            true
-        }
 
         if (sessionManager!!.userName == userName) {
             binding!!.tvContributionsOfUser.visibility = View.GONE
@@ -199,7 +124,7 @@ class ContributionsListFragment : CommonsDaggerSupportFragment(), ContributionsL
         } else {
             binding!!.tvContributionsOfUser.visibility = View.VISIBLE
             binding!!.tvContributionsOfUser.text =
-                getString(fr.free.nrw.commons.R.string.contributions_of_user, userName)
+                getString(R.string.contributions_of_user, userName)
             binding!!.fabLayout.visibility = View.GONE
         }
 
@@ -242,9 +167,18 @@ class ContributionsListFragment : CommonsDaggerSupportFragment(), ContributionsL
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        fabController = CustomFabController(
+            this,
+            requireContext(),
+            binding!!.fabPlus,
+            binding!!.fabCamera,
+            binding!!.fabGallery,
+            binding!!.fabCustomGallery,
+            controller!!
+        )
+        fabController.initializeLaunchers()
         initRecyclerView()
-        initializeAnimations()
-        setListeners()
+        fabController.setListeners(controller!!, requireActivity())
     }
 
     private fun initRecyclerView() {
@@ -311,9 +245,7 @@ class ContributionsListFragment : CommonsDaggerSupportFragment(), ContributionsL
              */
             override fun onInterceptTouchEvent(rv: RecyclerView, e: MotionEvent): Boolean {
                 if (e.action == MotionEvent.ACTION_DOWN) {
-                    if (isFabOpen) {
-                        animateFAB(isFabOpen)
-                    }
+                    fabController.closeFabMenuIfOpen()
                 }
                 return false
             }
@@ -358,85 +290,20 @@ class ContributionsListFragment : CommonsDaggerSupportFragment(), ContributionsL
             )
     }
 
-    private fun initializeAnimations() {
-        fab_open = AnimationUtils.loadAnimation(activity, fr.free.nrw.commons.R.anim.fab_open)
-        fab_close = AnimationUtils.loadAnimation(activity, fr.free.nrw.commons.R.anim.fab_close)
-        rotate_forward = AnimationUtils.loadAnimation(activity, fr.free.nrw.commons.R.anim.rotate_forward)
-        rotate_backward = AnimationUtils.loadAnimation(activity, fr.free.nrw.commons.R.anim.rotate_backward)
-    }
-
-    private fun setListeners() {
-        binding!!.fabPlus.setOnClickListener { view: View? -> animateFAB(isFabOpen) }
-        binding!!.fabCamera.setOnClickListener { view: View? ->
-            controller!!.initiateCameraPick(
-                requireActivity(),
-                inAppCameraLocationPermissionLauncher,
-                cameraPickLauncherForResult
-            )
-            animateFAB(isFabOpen)
-        }
-        binding!!.fabCamera.setOnLongClickListener { view: View? ->
-            showShortToast(
-                context,
-                fr.free.nrw.commons.R.string.add_contribution_from_camera
-            )
-            true
-        }
-        binding!!.fabGallery.setOnClickListener { view: View? ->
-            controller!!.initiateGalleryPick(requireActivity(), galleryPickLauncherForResult, true)
-            animateFAB(isFabOpen)
-        }
-        binding!!.fabGallery.setOnLongClickListener { view: View? ->
-            showShortToast(context, fr.free.nrw.commons.R.string.menu_from_gallery)
-            true
-        }
-    }
-
     /**
      * Launch Custom Selector.
      */
-    protected fun launchCustomSelector() {
-        controller!!.initiateCustomGalleryPickWithPermission(
-            requireActivity(),
-            customSelectorLauncherForResult
-        )
-        animateFAB(isFabOpen)
-    }
 
     fun scrollToTop() {
         rvContributionsList!!.smoothScrollToPosition(0)
     }
 
-    private fun animateFAB(isFabOpen: Boolean) {
-        this.isFabOpen = !isFabOpen
-        if (binding!!.fabPlus.isShown) {
-            if (isFabOpen) {
-                binding!!.fabPlus.startAnimation(rotate_backward)
-                binding!!.fabCamera.startAnimation(fab_close)
-                binding!!.fabGallery.startAnimation(fab_close)
-                binding!!.fabCustomGallery.startAnimation(fab_close)
-                binding!!.fabCamera.hide()
-                binding!!.fabGallery.hide()
-                binding!!.fabCustomGallery.hide()
-            } else {
-                binding!!.fabPlus.startAnimation(rotate_forward)
-                binding!!.fabCamera.startAnimation(fab_open)
-                binding!!.fabGallery.startAnimation(fab_open)
-                binding!!.fabCustomGallery.startAnimation(fab_open)
-                binding!!.fabCamera.show()
-                binding!!.fabGallery.show()
-                binding!!.fabCustomGallery.show()
-            }
-            this.isFabOpen = !isFabOpen
-        }
-    }
-
     /**
      * Shows welcome message if user has no contributions yet i.e. new user.
      */
-    override fun showWelcomeTip(shouldShow: Boolean) {
+    override fun showWelcomeTip(numberOfUploads: Boolean) {
         binding!!.noContributionsYet.visibility =
-            if (shouldShow) View.VISIBLE else View.GONE
+            if (numberOfUploads) View.VISIBLE else View.GONE
     }
 
     /**
@@ -469,9 +336,9 @@ class ContributionsListFragment : CommonsDaggerSupportFragment(), ContributionsL
         }
     }
 
-    override fun openMediaDetail(position: Int, isWikipediaButtonDisplayed: Boolean) {
+    override fun openMediaDetail(contribution: Int, isWikipediaPageExists: Boolean) {
         if (null != callback) { //Just being safe, ideally they won't be called when detached
-            callback!!.showDetail(position, isWikipediaButtonDisplayed)
+            callback!!.showDetail(contribution, isWikipediaPageExists)
         }
     }
 
@@ -483,8 +350,8 @@ class ContributionsListFragment : CommonsDaggerSupportFragment(), ContributionsL
     override fun addImageToWikipedia(contribution: Contribution?) {
         showAlertDialog(
             requireActivity(),
-            getString(fr.free.nrw.commons.R.string.add_picture_to_wikipedia_article_title),
-            getString(fr.free.nrw.commons.R.string.add_picture_to_wikipedia_article_desc),
+            getString(R.string.add_picture_to_wikipedia_article_title),
+            getString(R.string.add_picture_to_wikipedia_article_desc),
             {
                 if (contribution != null) {
                     showAddImageToWikipediaInstructions(contribution)
@@ -502,7 +369,7 @@ class ContributionsListFragment : CommonsDaggerSupportFragment(), ContributionsL
         val fragment = newInstance(contribution)
         fragment.callback =
             WikipediaInstructionsDialogFragment.Callback { contribution: Contribution?, copyWikicode: Boolean ->
-                this.onConfirmClicked(
+                onConfirmClicked(
                     contribution,
                     copyWikicode
                 )
