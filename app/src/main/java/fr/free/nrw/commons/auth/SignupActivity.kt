@@ -10,6 +10,7 @@ import android.widget.Toast
 import fr.free.nrw.commons.BuildConfig
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.theme.BaseActivity
+import fr.free.nrw.commons.utils.applyEdgeToEdgeAllInsets
 import timber.log.Timber
 
 class SignupActivity : BaseActivity() {
@@ -21,6 +22,7 @@ class SignupActivity : BaseActivity() {
         Timber.d("Signup Activity started")
 
         webView = WebView(this)
+        applyEdgeToEdgeAllInsets(webView!!)
         with(webView!!) {
             setContentView(this)
             webViewClient = MyWebViewClient()

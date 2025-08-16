@@ -3,9 +3,11 @@ package fr.free.nrw.commons.quiz
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import androidx.activity.enableEdgeToEdge
 
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.WindowCompat
 import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat
 
 import com.facebook.drawee.drawable.ProgressBarDrawable
@@ -15,6 +17,7 @@ import fr.free.nrw.commons.databinding.ActivityQuizBinding
 import java.util.ArrayList
 
 import fr.free.nrw.commons.R
+import fr.free.nrw.commons.utils.applyEdgeToEdgeAllInsets
 
 
 class QuizActivity : AppCompatActivity() {
@@ -37,7 +40,11 @@ class QuizActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
         binding = ActivityQuizBinding.inflate(layoutInflater)
+        applyEdgeToEdgeAllInsets(binding.root)
+        WindowCompat.getInsetsController(window, window.decorView)
+            .isAppearanceLightStatusBars = true
         setContentView(binding.root)
 
         quizController.initialize(this)

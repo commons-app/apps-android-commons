@@ -24,6 +24,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
+import androidx.core.graphics.createBitmap
 
 /**
  * Created by blueSir9 on 3/10/17.
@@ -307,16 +308,19 @@ object ImageUtils {
      * * @return
      */
     @JvmStatic
-    fun addRedBorder(bitmap: Bitmap, borderSize: Int, context: Context): Bitmap {
-        val bmpWithBorder = Bitmap.createBitmap(
-            bitmap.width + borderSize * 2,
-            bitmap.height + borderSize * 2,
-            bitmap.config
-        )
-        val canvas = Canvas(bmpWithBorder)
-        canvas.drawColor(ContextCompat.getColor(context, R.color.deleteRed))
-        canvas.drawBitmap(bitmap, borderSize.toFloat(), borderSize.toFloat(), null)
-        return bmpWithBorder
+    fun addRedBorder(bitmap: Bitmap, borderSize: Int, context: Context): Bitmap? {
+        return bitmap.config?.let { config ->
+            val bmpWithBorder =
+                createBitmap(
+                    width = bitmap.width + borderSize * 2,
+                    height = bitmap.height + borderSize * 2,
+                    config = config
+                )
+            val canvas = Canvas(bmpWithBorder)
+            canvas.drawColor(ContextCompat.getColor(context, R.color.deleteRed))
+            canvas.drawBitmap(bitmap, borderSize.toFloat(), borderSize.toFloat(), null)
+            return bmpWithBorder
+        }
     }
 
     /**

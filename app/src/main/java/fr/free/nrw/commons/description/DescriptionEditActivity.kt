@@ -7,6 +7,7 @@ import android.speech.RecognizerIntent
 import android.view.View
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.view.WindowCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import fr.free.nrw.commons.CommonsApplication
@@ -20,9 +21,11 @@ import fr.free.nrw.commons.description.EditDescriptionConstants.WIKITEXT
 import fr.free.nrw.commons.recentlanguages.RecentLanguagesDao
 import fr.free.nrw.commons.settings.Prefs
 import fr.free.nrw.commons.theme.BaseActivity
+import fr.free.nrw.commons.utils.applyEdgeToEdgeBottomInsets
 import fr.free.nrw.commons.upload.UploadMediaDetail
 import fr.free.nrw.commons.upload.UploadMediaDetailAdapter
 import fr.free.nrw.commons.utils.DialogUtil.showAlertDialog
+import fr.free.nrw.commons.utils.applyEdgeToEdgeTopPaddingInsets
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.functions.Consumer
 import io.reactivex.schedulers.Schedulers
@@ -87,6 +90,10 @@ class DescriptionEditActivity :
         super.onCreate(savedInstanceState)
 
         binding = ActivityDescriptionEditBinding.inflate(layoutInflater)
+        applyEdgeToEdgeBottomInsets(binding.btnEditSubmit)
+        WindowCompat.getInsetsController(window, window.decorView)
+            .isAppearanceLightStatusBars = false
+        binding.toolbar.applyEdgeToEdgeTopPaddingInsets()
         setContentView(binding.root)
 
         val bundle = intent.extras

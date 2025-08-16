@@ -41,6 +41,7 @@ import fr.free.nrw.commons.media.MediaClient
 import fr.free.nrw.commons.theme.BaseActivity
 import fr.free.nrw.commons.upload.FileProcessor
 import fr.free.nrw.commons.upload.FileUtilsWrapper
+import fr.free.nrw.commons.utils.applyEdgeToEdgeBottomPaddingInsets
 import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -217,6 +218,7 @@ class ImageFragment :
         imageAdapter.setSingleSelection(singleSelection)
         gridLayoutManager = GridLayoutManager(context, getSpanCount())
         with(binding?.selectorRv) {
+            this?.applyEdgeToEdgeBottomPaddingInsets()
             this?.layoutManager = gridLayoutManager
             this?.setHasFixedSize(true)
             this?.adapter = imageAdapter

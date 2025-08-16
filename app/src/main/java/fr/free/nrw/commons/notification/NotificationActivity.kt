@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import androidx.core.view.ViewGroupCompat
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
@@ -19,8 +20,10 @@ import fr.free.nrw.commons.databinding.ActivityNotificationBinding
 import fr.free.nrw.commons.notification.models.Notification
 import fr.free.nrw.commons.notification.models.NotificationType
 import fr.free.nrw.commons.theme.BaseActivity
+import fr.free.nrw.commons.utils.applyEdgeToEdgeTopInsets
 import fr.free.nrw.commons.utils.NetworkUtils
 import fr.free.nrw.commons.utils.ViewUtil
+import fr.free.nrw.commons.utils.applyEdgeToEdgeBottomPaddingInsets
 import fr.free.nrw.commons.utils.handleWebUrl
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -56,6 +59,9 @@ class NotificationActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         isRead = intent.getStringExtra("title") == "read"
         binding = ActivityNotificationBinding.inflate(layoutInflater)
+        ViewGroupCompat.installCompatInsetsDispatch(binding.root)
+        applyEdgeToEdgeTopInsets(binding.toolbar.toolbar)
+        binding.listView.applyEdgeToEdgeBottomPaddingInsets()
         setContentView(binding.root)
         mNotificationWorkerFragment = supportFragmentManager.findFragmentByTag(
             tagNotificationWorkerFragment
