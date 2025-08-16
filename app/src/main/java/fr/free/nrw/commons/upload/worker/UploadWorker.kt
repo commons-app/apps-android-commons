@@ -9,6 +9,9 @@ import android.content.Intent
 import android.content.pm.ServiceInfo
 import android.graphics.BitmapFactory
 import android.os.Build
+import android.os.Handler
+import android.os.Looper
+import android.widget.Toast
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.multidex.BuildConfig
@@ -340,6 +343,38 @@ class UploadWorker(
             )
 
         try {
+            // Check if this is a retry for a nearby upload that already succeeded on Commons
+            // but failed on Wikidata - identified by having retries > 0, wikidataPlace != null,
+            // and non-empty filename (meaning it was previously uploaded)
+            if (contribution.retries > 0 && contribution.wikidataPlace != null && 
+                !contribution.media.filename.isNullOrEmpty()) {
+                
+                Timber.d("Nearby upload retry detected - filename already exists: ${contribution.media.filename}")
+                
+                // Create a minimal UploadResult directly from the saved filename
+                val uploadResult = UploadResult(
+                    result = "Success",
+                    filekey = "",
+                    offset = 0,
+                    filename = contribution.media.filename!!
+                )
+                
+                // Skip the Commons upload and proceed directly to Wikidata operation
+                Timber.d("Skipping Commons upload, proceeding directly to Wikidata P18 linking")
+                try {
+                    Timber.d("Retry: Directly attempting Wikidata P18 linking with existing filename")
+                    makeWikiDataEdit(uploadResult, contribution)
+                    Timber.d("Retry: Wikidata P18 linking succeeded!")
+                    showSuccessNotification(contribution)
+                    return
+                } catch (exception: Exception) {
+                    Timber.e(exception, "Retry: Wikidata P18 linking failed")
+                    contribution.state = Contribution.STATE_FAILED
+                    contributionDao.saveSynchronous(contribution)
+                    showFailedNotification(contribution)
+                    throw exception // Let WorkManager handle retry
+                }
+            }
             // Upload the file to stash
             val stashUploadResult =
                 uploadClient
@@ -390,6 +425,12 @@ class UploadWorker(
                                 Timber.d(
                                     "WikiDataEdit required, making wikidata edit",
                                 )
+                                
+                                // Save the filename for retry in case Wikidata operation fails
+                                Timber.d("Saving Commons filename to media: ${uploadResult.filename}")
+                                contribution.media.filename = uploadResult.filename
+                                contributionDao.saveSynchronous(contribution)
+                                
                                 makeWikiDataEdit(uploadResult, contribution)
                             }
                             showSuccessNotification(contribution)
@@ -461,6 +502,9 @@ class UploadWorker(
         contributionDao.saveSynchronous(contribution)
     }
 
+    // For testing - set to true to enable 10-second delay before Wikidata operations
+    private val ENABLE_TESTING_DELAY = false
+
     /**
      * Make the WikiData Edit, if applicable
      */
@@ -473,6 +517,20 @@ class UploadWorker(
             if (!contribution.hasInvalidLocation()) {
                 var revisionID: Long? = null
                 val p18WasSkipped = !wikiDataPlace.imageValue.isNullOrBlank()
+                
+                // Testing mechanism: Add 10-second delay before Wikidata operations to simulate network issues
+                if (ENABLE_TESTING_DELAY) {
+                    Timber.d("TESTING: Adding 10-second delay before Wikidata operation")
+                    Handler(Looper.getMainLooper()).post {
+                        Toast.makeText(applicationContext, "Starting Wikidata operation - testing delay", Toast.LENGTH_LONG).show()
+                    }
+                    Thread.sleep(10000) // 10 seconds delay for testing
+                    
+                    Handler(Looper.getMainLooper()).post {
+                        Toast.makeText(applicationContext, "Proceeding with Wikidata after delay", Toast.LENGTH_LONG).show()
+                    }
+                }
+                
                 try {
                     if (!p18WasSkipped) {
                     // Only set P18 if the place does not already have a picture
@@ -498,7 +556,19 @@ class UploadWorker(
                     // Always show success notification, whether P18 was set or skipped
                     showSuccessNotification(contribution)
                 } catch (exception: Exception) {
-                    Timber.e(exception)
+                    Timber.e(exception, "Wikidata P18 linking failed")
+                    
+                    // Mark contribution as failed so it can be retried
+                    contribution.state = Contribution.STATE_FAILED
+                    contributionDao.saveSynchronous(contribution)
+                    
+                    // Show failed notification
+                    showFailedNotification(contribution)
+                    
+                    // Re-throw to allow WorkManager to retry
+                    // If it's a network error, WorkManager will automatically retry
+                    // Network errors: UnknownHostException, SocketException, SocketTimeoutException, etc.
+                    throw exception
                 }
 
                 withContext(Dispatchers.Main) {
