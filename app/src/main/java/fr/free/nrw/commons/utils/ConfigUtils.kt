@@ -14,7 +14,9 @@ object ConfigUtils {
     @JvmStatic
     private fun Context.getVersionName(): String? =
         try {
-            packageManager.getPackageInfo(packageName, 0).versionName
+    private fun Context.getVersionName(): String =
+        try {
+            packageManager.getPackageInfo(packageName, 0).versionName ?: BuildConfig.VERSION_NAME
         } catch (e: PackageManager.NameNotFoundException) {
             BuildConfig.VERSION_NAME
         }
