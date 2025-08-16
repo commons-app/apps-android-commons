@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
 * Ahmed-Najib-Biabani-Ibrahimkhel
+* شاه زمان پټان
 -->
 <resources>
+  <string name="crash_dialog_title">ويکي‌خونديځ خراب‌شوی</string>
+  <string name="crash_dialog_text">اوو. يو څه ناسم پېښ شول!</string>
+  <string name="crash_dialog_comment_prompt">موږ ته ووایاست چې تاسو څه کول غواړئ، بيايې له موږ سره د برېښليک له لارې شريک کړئ. دا به موږ سره د هغې سمولو کې مرسته وکړي!</string>
   <string name="crash_dialog_ok_toast">مننه!</string>
 </resources>

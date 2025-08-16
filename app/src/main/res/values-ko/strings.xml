@@ -222,6 +222,7 @@
   <string name="media_detail_description">설명</string>
   <string name="media_detail_discussion">토론</string>
   <string name="media_detail_author">저자</string>
+  <string name="media_detail_uploader">올린 사람</string>
   <string name="media_detail_uploaded_date">올린 날짜</string>
   <string name="media_detail_license">라이선스</string>
   <string name="media_detail_coordinates">좌표</string>
@@ -379,7 +380,7 @@
   <string name="statistics_featured">알찬 그림</string>
   <string name="statistics_wikidata_edits">\"주변 장소\" 경유 이미지</string>
   <string name="level">레벨 %d</string>
-  <string name="profileLevel">%s (레벨 %s)</string>
+  <string name="profile_withLevel">%s (레벨 %s)</string>
   <string name="images_uploaded">사진 업로드됨</string>
   <string name="images_used_by_wiki">사용된 이미지</string>
   <string name="achievements_share_message">친구와 성과를 공유하세요!</string>
@@ -538,6 +539,8 @@
   <string name="title_for_media">미디어</string>
   <string name="title_for_child_classes">자식 클래스</string>
   <string name="title_for_parent_classes">상위 클래스</string>
+  <string name="title_for_subcategories">하위 분류</string>
+  <string name="title_for_parent_categories">상위 분류</string>
   <string name="upload_nearby_place_found_title">주변 장소 발견</string>
   <string name="upload_nearby_place_found_description_plural">%1$s의 사진이 맞습니까?</string>
   <string name="upload_nearby_place_found_description_singular">%1$s의 사진이 맞습니까?</string>
@@ -582,8 +585,10 @@
   <string name="menu_set_avatar">아바타로 설정</string>
   <string name="leaderboard_yearly">매년</string>
   <string name="leaderboard_weekly">매주</string>
+  <string name="leaderboard_all_time">항상</string>
   <string name="leaderboard_upload">업로드</string>
   <string name="leaderboard_nearby">근처</string>
+  <string name="leaderboard_used">사용됨</string>
   <string name="leaderboard_my_rank_button_text">내 순위</string>
   <string name="limited_connection_mode">제한된 연결 모드</string>
   <string name="statistics_quality">고품질 사진</string>
@@ -671,7 +676,7 @@
   <string name="permissions_are_required_for_functionality">기능에 대한 권한이 필요합니다</string>
   <string name="learn_how_to_write_a_useful_description">유용한 설명을 추가하는 법 알아보기</string>
   <string name="learn_how_to_write_a_useful_caption">유용한 캡션을 추가하는 법 알아보기</string>
-  <string name="see_your_achievements">업적 보기</string>
+  <string name="see_your_achievements" fuzzy="true">업적 보기</string>
   <string name="edit_image">그림 편집</string>
   <string name="edit_location">위치 편집</string>
   <string name="location_updated">위치가 갱신되었습니다!</string>

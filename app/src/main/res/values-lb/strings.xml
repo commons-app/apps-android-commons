@@ -179,7 +179,7 @@
   <string name="warning">Warnung</string>
   <string name="upload">Eroplueden</string>
   <string name="yes">Jo</string>
-  <string name="no">Neen</string>
+  <string name="no">Nee</string>
   <string name="media_detail_caption">Beschrëftung</string>
   <string name="media_detail_title">Titel</string>
   <string name="media_detail_depiction">Motiven</string>
@@ -307,7 +307,7 @@
   <string name="statistics_thanks">Mercie kritt</string>
   <string name="statistics_featured">Bemierkenswäert Biller</string>
   <string name="level">Niveau %d</string>
-  <string name="profileLevel">%s (Niveau %s)</string>
+  <string name="profile_withLevel">%s (Niveau %s)</string>
   <string name="images_uploaded">Eropgeluede Biller</string>
   <string name="image_reverts">Biller net zréckgesat</string>
   <string name="images_used_by_wiki">Benotzte Biller</string>
@@ -348,8 +348,8 @@
   <string name="send_thank_toast">Merci fir %1$s schécken</string>
   <string name="review_copyright">Entsprécht dat de Copyright-Reegelen?</string>
   <string name="review_category">Ass dëst richteg kategoriséiert?</string>
-  <string name="review_spam_explanation">Klickt op NEEN fir dëst Bild fir d\'Läsche virzeschloen, falls et guer net nëtzlech ass.</string>
-  <string name="review_copyright_explanation">Logoen, Screenshotten oder Filmplakate sinn oft Urheberrechtsverletzungen. Klickt op NEEN fir virzeschloen, datt dëst Bild geläscht gëtt</string>
+  <string name="review_spam_explanation">Klickt op NEE fir virzeschloen, datt dëst Bild geläscht gi soll, falls et guer net nëtzlech ass.</string>
+  <string name="review_copyright_explanation">Logoen, Screenshotten oder Filmplakate sinn oft Urheberrechtsverletzungen.\nKlickt op NEE fir virzeschloen, datt dëst Bild geläscht gi soll</string>
   <string name="review_no_category">Oh, dat ass mol net kategoriséiert!</string>
   <string name="review_c_violation_report_question">Et ass eng Urheberrechtsverletzung, well et</string>
   <string name="review_thanks_yes_button_text">Nächst Bild</string>

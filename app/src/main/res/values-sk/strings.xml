@@ -757,7 +757,7 @@
   <string name="permissions_are_required_for_functionality">Povolenia sú potrebné pre zabezpečenie funkčnosti</string>
   <string name="learn_how_to_write_a_useful_description">Zistite, ako napísať užitočný popis</string>
   <string name="learn_how_to_write_a_useful_caption">Zistite, ako napísať užitočný titulok</string>
-  <string name="see_your_achievements">Pozrite si svoje úspechy</string>
+  <string name="see_your_achievements" fuzzy="true">Pozrite si svoje úspechy</string>
   <string name="edit_image">Upraviť obrázok</string>
   <string name="edit_location">Upraviť polohu</string>
   <string name="location_updated">Poloha aktualizovaná!</string>

@@ -3,17 +3,13 @@ package fr.free.nrw.commons.recentlanguages
 
 import android.content.ContentValues
 import android.database.Cursor
-import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteQueryBuilder
 import android.net.Uri
-import android.text.TextUtils
 import fr.free.nrw.commons.BuildConfig
-import fr.free.nrw.commons.data.DBOpenHelper
 import fr.free.nrw.commons.di.CommonsDaggerContentProvider
 import fr.free.nrw.commons.recentlanguages.RecentLanguagesDao.Table.COLUMN_NAME
 import fr.free.nrw.commons.recentlanguages.RecentLanguagesDao.Table.TABLE_NAME
-import javax.inject.Inject
-import timber.log.Timber
+import androidx.core.net.toUri
 
 
 /**
@@ -23,27 +19,17 @@ class RecentLanguagesContentProvider : CommonsDaggerContentProvider() {
 
     companion object {
         private const val BASE_PATH = "recent_languages"
-        val BASE_URI: Uri =
-            Uri.parse(
-                "content://${BuildConfig.RECENT_LANGUAGE_AUTHORITY}/$BASE_PATH"
-            )
+        val BASE_URI: Uri = "content://${BuildConfig.RECENT_LANGUAGE_AUTHORITY}/$BASE_PATH".toUri()
 
         /**
          * Append language code to the base URI
          * @param languageCode Code of a language
          */
         @JvmStatic
-        fun uriForCode(languageCode: String): Uri {
-            return Uri.parse("$BASE_URI/$languageCode")
-        }
+        fun uriForCode(languageCode: String): Uri = "$BASE_URI/$languageCode".toUri()
     }
 
-    @Inject
-    lateinit var dbOpenHelper: DBOpenHelper
-
-    override fun getType(uri: Uri): String? {
-        return null
-    }
+    override fun getType(uri: Uri): String? = null
 
     /**
      * Queries the SQLite database for the recently used languages
@@ -60,11 +46,12 @@ class RecentLanguagesContentProvider : CommonsDaggerContentProvider() {
         selectionArgs: Array<String>?,
         sortOrder: String?
     ): Cursor? {
-        val queryBuilder = SQLiteQueryBuilder()
-        queryBuilder.tables = TABLE_NAME
-        val db = dbOpenHelper.readableDatabase
+        val queryBuilder = SQLiteQueryBuilder().apply {
+            tables = TABLE_NAME
+        }
+
         val cursor = queryBuilder.query(
-            db,
+            requireDb(),
             projection,
             selection,
             selectionArgs,
@@ -72,7 +59,7 @@ class RecentLanguagesContentProvider : CommonsDaggerContentProvider() {
             null,
             sortOrder
         )
-        cursor.setNotificationUri(context?.contentResolver, uri)
+        cursor.setNotificationUri(requireContext().contentResolver, uri)
         return cursor
     }
 
@@ -89,12 +76,11 @@ class RecentLanguagesContentProvider : CommonsDaggerContentProvider() {
         selection: String?,
         selectionArgs: Array<String>?
     ): Int {
-        val sqlDB = dbOpenHelper.writableDatabase
         val rowsUpdated: Int
         if (selection.isNullOrEmpty()) {
             val id = uri.lastPathSegment?.toInt()
                 ?: throw IllegalArgumentException("Invalid URI: $uri")
-            rowsUpdated = sqlDB.update(
+            rowsUpdated = requireDb().update(
                 TABLE_NAME,
                 contentValues,
                 "$COLUMN_NAME = ?",
@@ -104,7 +90,7 @@ class RecentLanguagesContentProvider : CommonsDaggerContentProvider() {
             throw IllegalArgumentException("Parameter `selection` should be empty when updating an ID")
         }
 
-        context?.contentResolver?.notifyChange(uri, null)
+        requireContext().contentResolver?.notifyChange(uri, null)
         return rowsUpdated
     }
 
@@ -114,14 +100,13 @@ class RecentLanguagesContentProvider : CommonsDaggerContentProvider() {
      * @param contentValues : new values to be entered to the database
      */
     override fun insert(uri: Uri, contentValues: ContentValues?): Uri? {
-        val sqlDB = dbOpenHelper.writableDatabase
-        val id = sqlDB.insert(
+        val id = requireDb().insert(
             TABLE_NAME,
             null,
             contentValues
         )
-        context?.contentResolver?.notifyChange(uri, null)
-        return Uri.parse("$BASE_URI/$id")
+        requireContext().contentResolver?.notifyChange(uri, null)
+        return "$BASE_URI/$id".toUri()
     }
 
     /**
@@ -129,14 +114,12 @@ class RecentLanguagesContentProvider : CommonsDaggerContentProvider() {
      * @param uri : contains the URI for recently used languages
      */
     override fun delete(uri: Uri, s: String?, strings: Array<String>?): Int {
-        val db = dbOpenHelper.readableDatabase
-        Timber.d("Deleting recently used language %s", uri.lastPathSegment)
-        val rows = db.delete(
+        val rows = requireDb().delete(
             TABLE_NAME,
             "language_code = ?",
             arrayOf(uri.lastPathSegment)
         )
-        context?.contentResolver?.notifyChange(uri, null)
+        requireContext().contentResolver?.notifyChange(uri, null)
         return rows
     }
 }

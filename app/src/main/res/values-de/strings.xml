@@ -411,7 +411,7 @@
   <string name="statistics_featured">Vorgestellte Bilder</string>
   <string name="statistics_wikidata_edits">Bilder über „Orte in der Nähe“</string>
   <string name="level">Level %d</string>
-  <string name="profileLevel">%s (Level %s)</string>
+  <string name="profile_withLevel">%s (Level %s)</string>
   <string name="images_uploaded">Hochgeladene Bilder</string>
   <string name="image_reverts">Bilder nicht zurückgesetzt</string>
   <string name="images_used_by_wiki">Verwendete Bilder</string>
@@ -793,7 +793,7 @@
   <string name="permissions_are_required_for_functionality">Für die Funktionalität sind Berechtigungen erforderlich</string>
   <string name="learn_how_to_write_a_useful_description">Erfahre, wie man eine nützliche Beschreibung schreibt</string>
   <string name="learn_how_to_write_a_useful_caption">Erfahre, wie man eine nützliche Überschrift schreibt</string>
-  <string name="see_your_achievements">Deine Erfolge ansehen</string>
+  <string name="see_your_achievements" fuzzy="true">Deine Erfolge ansehen</string>
   <string name="edit_image">Bild bearbeiten</string>
   <string name="edit_location">Standort bearbeiten</string>
   <string name="location_updated">Standort aktualisiert!</string>

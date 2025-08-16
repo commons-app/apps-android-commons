@@ -210,6 +210,7 @@
   <string name="media_detail_description">Descrission</string>
   <string name="media_detail_discussion">Discussion</string>
   <string name="media_detail_author">Autor</string>
+  <string name="media_detail_uploader">Carior</string>
   <string name="media_detail_uploaded_date">Dàita ëd cariament</string>
   <string name="media_detail_license">Licensa</string>
   <string name="media_detail_coordinates">Coordinà</string>
@@ -368,7 +369,7 @@
   <string name="statistics_featured">Plance an evidensa</string>
   <string name="statistics_wikidata_edits">Plance për \"Pòst davzin\"</string>
   <string name="level">Livel %d</string>
-  <string name="profileLevel">%s (Livel %s)</string>
+  <string name="profile_withLevel">%s (Livel %s)</string>
   <string name="images_uploaded">Plance carià</string>
   <string name="image_reverts">Plance nen anulà</string>
   <string name="images_used_by_wiki">Plance dovrà</string>

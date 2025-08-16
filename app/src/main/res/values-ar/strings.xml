@@ -268,6 +268,7 @@
   <string name="media_detail_description">الوصف</string>
   <string name="media_detail_discussion">نقاش</string>
   <string name="media_detail_author">المؤلف</string>
+  <string name="media_detail_uploader">الرافع</string>
   <string name="media_detail_uploaded_date">تاريخ الرفع</string>
   <string name="media_detail_license">الترخيص</string>
   <string name="media_detail_coordinates">الإحداثيات</string>
@@ -426,7 +427,7 @@
   <string name="statistics_featured">الصور المختارة</string>
   <string name="statistics_wikidata_edits">صور عبر \"الأماكن المجاورة\"</string>
   <string name="level">المستوى %d</string>
-  <string name="profileLevel">%s (المستوى %s)</string>
+  <string name="profile_withLevel">%s (المستوى %s)</string>
   <string name="images_uploaded">الصور المرفوعة</string>
   <string name="image_reverts">لم يتم إرجاع الصور</string>
   <string name="images_used_by_wiki">الصور المستخدمة</string>
@@ -822,7 +823,7 @@
   <string name="permissions_are_required_for_functionality">الإذن مطلوب لهذه الوظيفة</string>
   <string name="learn_how_to_write_a_useful_description">تعلم كيفية كتابة وصف مفيد</string>
   <string name="learn_how_to_write_a_useful_caption">تعلم كيفية كتابة تعليق مفيد</string>
-  <string name="see_your_achievements">شاهد إنجازاتك</string>
+  <string name="see_your_achievements">عرض إنجازاتك</string>
   <string name="edit_image">تعديل الصورة</string>
   <string name="edit_location">تعديل الموقع</string>
   <string name="location_updated">تم تحديث الموقع!</string>

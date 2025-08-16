@@ -22,26 +22,26 @@
 * Vitorvicentevalente
 -->
 <resources>
-  <string name="commons_facebook">Página da wiki Commons no Facebook</string>
-  <string name="commons_github">Código-fonte da wiki Commons no Github</string>
-  <string name="commons_logo">Logótipo da wiki Commons</string>
-  <string name="commons_website">Sítio da wiki Commons</string>
+  <string name="commons_facebook">Página do Facebook da Commons</string>
+  <string name="commons_github">Código Fonte do Github da Commons</string>
+  <string name="commons_logo">Logótipo da Commons</string>
+  <string name="commons_website">Site da Web da Commons</string>
   <string name="exit_location_picker">Sair do selecionador de localização</string>
-  <string name="submit">Enviar</string>
+  <string name="submit">Submeter</string>
   <string name="add_another_description">Adicionar outra descrição</string>
   <string name="add_new_contribution">Adicionar nova contribuição</string>
   <string name="add_contribution_from_camera">Adicionar contribuição da câmara</string>
   <string name="add_contribution_from_photos">Adicionar contribuição de fotos</string>
   <string name="add_contribution_from_contributions_gallery">Adicionar contribuição da galeria de contribuições anteriores</string>
   <string name="show_captions">Legendas</string>
-  <string name="row_item_language_description">Descrição da língua</string>
+  <string name="row_item_language_description">Descrição do Idioma</string>
   <string name="row_item_caption">Legenda</string>
   <string name="show_captions_description">Descrição</string>
   <string name="nearby_row_image">Imagem</string>
   <string name="nearby_all">Todas</string>
   <string name="nearby_filter_toggle">Alternar para cima</string>
-  <string name="nearby_filter_search">Vista de pesquisa</string>
-  <string name="nearby_filter_state">Estado do local</string>
+  <string name="nearby_filter_search">Visualização da Pesquisa</string>
+  <string name="nearby_filter_state">Estado do Local</string>
   <string name="appwidget_img">Imagem do Dia</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">a carregar %1$d ficheiro</item>
@@ -78,9 +78,9 @@
   <string name="preference_category_feedback">Comentários</string>
   <string name="preference_category_privacy">Privacidade</string>
   <string name="app_name">Commons</string>
-  <string name="menu_settings">Configurações</string>
-  <string name="intent_share_upload_label">Carregar na wiki Commons</string>
-  <string name="upload_in_progress">Carregamento em progresso</string>
+  <string name="menu_settings">Definições</string>
+  <string name="intent_share_upload_label">Enviar para a Commons</string>
+  <string name="upload_in_progress">Envio em progresso</string>
   <string name="username">Nome de utilizador</string>
   <string name="password">Palavra-passe</string>
   <string name="login_credential">Entrar na sua conta da wiki Commons Beta</string>
@@ -88,9 +88,9 @@
   <string name="forgot_password">Esqueceu-se da palavra-passe?</string>
   <string name="signup">Registar-se</string>
   <string name="logging_in_title">A iniciar sessão</string>
-  <string name="logging_in_message">Aguarde, por favor…</string>
-  <string name="updating_caption_title">A atualizar legendas e descrições</string>
-  <string name="updating_caption_message">Aguarde, por favor…</string>
+  <string name="logging_in_message">Por favor, aguarde…</string>
+  <string name="updating_caption_title">A atualizar as legendas e descrições</string>
+  <string name="updating_caption_message">Por favor, aguarde…</string>
   <string name="login_success">Sessão iniciada!</string>
   <string name="login_failed">O início de sessão falhou!</string>
   <string name="upload_failed">O ficheiro não foi encontrado. Tente outro, por favor.</string>
@@ -228,6 +228,7 @@
   <string name="media_detail_description">Descrição</string>
   <string name="media_detail_discussion">Discussão</string>
   <string name="media_detail_author">Autor</string>
+  <string name="media_detail_uploader">Carregador</string>
   <string name="media_detail_uploaded_date">Data de carregamento</string>
   <string name="media_detail_license">Licença</string>
   <string name="media_detail_coordinates">Coordenadas</string>
@@ -235,6 +236,7 @@
   <string name="become_a_tester_title">Torne-se um Testador Beta</string>
   <string name="become_a_tester_description">Opte pelo nosso canal beta no Google Play e obtenha acesso antecipado às novas funcionalidades e às correções de erros</string>
   <string name="_2fa_code">Código de autenticação de dois fatores</string>
+  <string name="email_auth_code">Código de verificação do e-mail</string>
   <string name="logout_verification">Deseja realmente sair?</string>
   <string name="mediaimage_failed">Falha na imagem multimédia</string>
   <string name="no_subcategory_found">Não foi encontrada nenhuma subcategoria.</string>
@@ -255,6 +257,7 @@
   <string name="navigation_item_about">Sobre</string>
   <string name="navigation_item_settings">Configurações</string>
   <string name="navigation_item_feedback">Comentários</string>
+  <string name="navigation_item_feedback_github">Comentários via GitHub</string>
   <string name="navigation_item_logout">Sair</string>
   <string name="navigation_item_info">Explicação</string>
   <string name="navigation_item_notification">Notificações</string>
@@ -294,8 +297,10 @@
   <string name="copy_wikicode">Copiar o texto wiki para a área de transferência</string>
   <string name="wikicode_copied">O texto wiki foi copiado para a área de transferência</string>
   <string name="nearby_location_not_available">A identificação de locais próximos pode não funcionar devidamente; o serviço de localização não está disponível.</string>
+  <string name="nearby_showing_pins_offline">Internet indisponível. A mostrar apenas os locais em cache.</string>
   <string name="upload_location_access_denied">Acesso à localização negado. Para usar esta funcionalidade defina a sua localização manualmente, por favor.</string>
   <string name="location_permission_rationale_nearby">É necessária permissão para mostrar uma lista dos locais próximos</string>
+  <string name="location_permission_rationale_explore">É necessária a permissão para exibir uma lista de imagens próximas</string>
   <string name="nearby_directions">Indicações</string>
   <string name="nearby_wikidata">Wikidata</string>
   <string name="nearby_wikipedia">Wikipédia</string>
@@ -364,6 +369,7 @@
   <string name="share_app_title">Partilhar aplicação</string>
   <string name="rotate">Rodar</string>
   <string name="error_fetching_nearby_places">Não foi possível carregar locais próximos</string>
+  <string name="no_pictures_in_this_area">Não há fotografias nesta área</string>
   <string name="no_nearby_places_around">Não existem locais próximos</string>
   <string name="error_fetching_nearby_monuments">Erro ao procurar monumentos próximos.</string>
   <string name="no_recent_searches">Não há pesquisas recentes</string>
@@ -381,7 +387,7 @@
   <string name="statistics_featured">Imagens destacadas</string>
   <string name="statistics_wikidata_edits">Imagens via \"Locais próximos\"</string>
   <string name="level">Nível %d</string>
-  <string name="profileLevel">%s (Nível %s)</string>
+  <string name="profile_withLevel">%s (Nível %s)</string>
   <string name="images_uploaded">Imagens carregadas</string>
   <string name="image_reverts">Imagens não revertidas</string>
   <string name="images_used_by_wiki">Imagens usadas</string>
@@ -769,6 +775,7 @@
   <string name="edit_location">Editar localização</string>
   <string name="location_updated">Localização actualizada!</string>
   <string name="remove_location">Remover Localização</string>
+  <string name="remove_location_warning_title">Remover Aviso de Localização</string>
   <string name="location_removed">Localização removida!</string>
   <string name="send_thanks_to_author">Agradecer ao autor</string>
   <string name="error_sending_thanks">Erro no envio de agradecimento ao autor.</string>
@@ -788,5 +795,24 @@
   <string name="talk">Discussão</string>
   <string name="other_problem_or_information_please_explain_below">Outro problema ou informação (por favor, explique em baixo).</string>
   <string name="feedback_destination_note">O seu comentário é publicado na seguinte página da wiki: &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Mobile_app/Feedback\"&gt;Commons:Mobile app/Feedback&lt;/a&gt;</string>
+  <string name="uploads">Envios</string>
+  <string name="pending">Pendente</string>
+  <string name="failed">Falhou</string>
+  <string name="could_not_load_place_data">Não foi possível carregar os dados do local</string>
+  <string name="custom_selector_delete_folder">Eliminar Pasta</string>
+  <string name="custom_selector_confirm_deletion_title">Confirmar Eliminação</string>
+  <string name="custom_selector_delete">Eliminar</string>
+  <string name="custom_selector_cancel">Cancelar</string>
+  <string name="usages_on_commons_heading">Commons</string>
+  <string name="usages_on_other_wikis_heading">Outras wikis</string>
+  <string name="file_usages_container_heading">Utilização de ficheiro</string>
+  <string name="account">Conta</string>
+  <string name="caption">Legenda</string>
+  <string name="caption_copied_to_clipboard">Legenda copiada para a área de transferência</string>
+  <string name="congratulations_all_pictures_in_this_album_have_been_either_uploaded_or_marked_as_not_for_upload">Parabéns, todas as fotografias neste álbum foram envidas ou marcadas como \'não para enviar\'.</string>
+  <string name="show_in_explore">Mostrar no Explorador</string>
+  <string name="show_in_nearby">Mostrar nas Proximidades</string>
+  <string name="image_tag_line_created_and_uploaded_by">Criada e enviada por: %1$s</string>
+  <string name="image_tag_line_created_by_and_uploaded_by">Criada por %1$s e enviada por %2$s</string>
   <string name="nominated_for_deletion_btn">Nomeada para Eliminação</string>
 </resources>

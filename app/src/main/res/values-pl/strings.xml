@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
 * Alan ffm
+* Atvalerie
 * Chrumps
 * CiaPan
 * Dawidg81
@@ -408,7 +409,7 @@
   <string name="statistics_featured">Wyróżnione ilustracje</string>
   <string name="statistics_wikidata_edits">Obrazy za pośrednictwem \"Pobliskie miejsca\"</string>
   <string name="level">Poziom %d</string>
-  <string name="profileLevel">%s (Poziom %s)</string>
+  <string name="profile_withLevel">%s (Poziom %s)</string>
   <string name="images_uploaded">Przesłane obrazy</string>
   <string name="image_reverts">Nie wycofane obrazy</string>
   <string name="images_used_by_wiki">Wykorzystane obrazy</string>
@@ -451,7 +452,7 @@
   <string name="deletion_reason_bad_for_my_privacy">Zdałem sobie sprawę, że jest to szkodliwe dla mojej prywatności</string>
   <string name="deletion_reason_no_longer_want_public">Zmieniłem zdanie, nie chcę, aby było to już publicznie widoczne</string>
   <string name="deletion_reason_not_interesting">Przepraszamy, to zdjęcie nie jest interesujące dla encyklopedii</string>
-  <string name="uploaded_by_myself">Przesłane przeze mnie na %1$s , wykorzystane w co najmniej %2$d artykułach.</string>
+  <string name="uploaded_by_myself" fuzzy="true">Przesłane przeze mnie na %1$s, używane w artykułach %2$d.</string>
   <string name="no_uploads">Prześlij swoje pierwsze multimedia, dotykając przycisku Dodaj.</string>
   <string name="no_categories_selected">Nie wybrano kategorii</string>
   <string name="no_categories_selected_warning_desc">Obrazy bez kategorii rzadko nadają się do użycia. Czy na pewno chcesz kontynuować bez wybierania kategorii?</string>
@@ -620,8 +621,6 @@
   <string name="title_for_media">MEDIA</string>
   <string name="title_for_child_classes">KLASY POTOMNE</string>
   <string name="title_for_parent_classes">KLASY NADRZĘDNE</string>
-  <string name="title_for_subcategories">KATEGORIE PODRZĘDNE</string>
-  <string name="title_for_parent_categories">KATEGORIE NADRZĘDNE</string>
   <string name="upload_nearby_place_found_title">Znaleziono miejsce w pobliżu</string>
   <string name="upload_nearby_place_found_description_plural">Czy to są zdjęcia %1$s?</string>
   <string name="upload_nearby_place_found_description_singular">Czy to jest zdjęcie %1$s?</string>
@@ -856,7 +855,6 @@
   <string name="usages_on_commons_heading">Commons</string>
   <string name="usages_on_other_wikis_heading">Inne wiki</string>
   <string name="file_usages_container_heading">Wykorzystanie pliku</string>
-  <string name="title_activity_single_web_view">SingleWebViewActivity</string>
   <string name="account">Konto</string>
   <string name="vanish_account">Wymaż konto</string>
   <string name="account_vanish_request_confirm_title">Ostrzeżenie o wymazaniu konta</string>

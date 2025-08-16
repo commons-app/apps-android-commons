@@ -15,12 +15,47 @@
   <string name="commons_github">कमन्सकाे Github स्रोत कोड</string>
   <string name="commons_logo">कमन्सकाे लाेगाे</string>
   <string name="commons_website">कमन्सकाे वेबसाइट</string>
+  <string name="exit_location_picker">स्थान चयनकर्ताबाट बाहिर निस्कनुहोस्</string>
   <string name="submit">बुझाउनुहोस्</string>
+  <string name="add_another_description">अर्को विवरण थप्नुहोस्</string>
+  <string name="add_new_contribution">नयाँ योगदान थप्नुहोस्</string>
+  <string name="add_contribution_from_camera">क्यामराबाट योगदान थप्नुहोस्</string>
+  <string name="add_contribution_from_photos">फोटोहरूबाट योगदान थप्नुहोस्</string>
+  <string name="add_contribution_from_contributions_gallery">अघिल्लो योगदान ग्यालरीबाट योगदान थप्नुहोस्</string>
+  <string name="show_captions">शीर्षकहरू</string>
+  <string name="row_item_language_description">भाषा विवरण</string>
+  <string name="row_item_caption">शीर्षक</string>
   <string name="show_captions_description">विवरण</string>
   <string name="nearby_row_image">चित्र</string>
   <string name="nearby_all">सबै</string>
+  <string name="nearby_filter_search">दृश्य खोज्नुहोस्</string>
+  <string name="nearby_filter_state">स्थानको अवस्था</string>
   <string name="appwidget_img">दिनकाे उत्कृष्ट तस्वीर</string>
-  <string name="share_license_summary" fuzzy="true">यी तस्वीरहरू  %1$s अनुमतिपत्र अनुसार प्राप्त हुनेछ</string>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="one">%1$d फाइल अपलोड हुँदैछ</item>
+    <item quantity="other">%1$d फाइलहरू अपलोड हुँदैछ</item>
+  </plurals>
+  <plurals name="contributions_subtitle">
+    <item quantity="one">(%1$d)</item>
+    <item quantity="other">(%1$d)</item>
+  </plurals>
+  <string name="starting_uploads">अपलोडहरू सुरु गर्दै</string>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">%d अपलोड प्रशोधन गर्दै</item>
+    <item quantity="other"> %d अपलोडहरू प्रशोधन गर्दै</item>
+  </plurals>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">%d अपलोड</item>
+    <item quantity="other">%d अपलोडहरू</item>
+  </plurals>
+  <plurals name="share_license_summary">
+    <item quantity="one">यो तस्वीर %1$s अन्तर्गत इजाजतपत्र प्राप्त हुनेछ</item>
+    <item quantity="other">यी तस्वीरहरू %1$s अन्तर्गत इजाजतपत्र प्राप्त हुनेछन्।</item>
+  </plurals>
+  <plurals name="upload_count_title">
+    <item quantity="one">%1$d अपलोड</item>
+    <item quantity="other">%1$d अपलोडहरू</item>
+  </plurals>
   <string name="navigation_item_explore">अन्वेषण</string>
   <string name="preference_category_appearance">स्वरूप</string>
   <string name="preference_category_general">सामान्य</string>
@@ -29,6 +64,7 @@
   <string name="app_name">कमन्स</string>
   <string name="menu_settings">मेरो अभिरुचिहरू</string>
   <string name="intent_share_upload_label">कमन्समा उर्ध्वभरण गर्नुहाेस्</string>
+  <string name="upload_in_progress">अर्ध्वभरण कार्य हुँदैछ</string>
   <string name="username">प्रयोगकर्ता नाम</string>
   <string name="password">पासवर्ड</string>
   <string name="login_credential">तपाईको कमन्स बिटा खातामा प्रवेश गर्नुहोस्</string>
@@ -37,18 +73,21 @@
   <string name="signup">खाता खाेल्नुहाेस्</string>
   <string name="logging_in_title">प्रवेश गर्दै</string>
   <string name="logging_in_message">कृपया प्रतीक्षा गर्नुहोस् …</string>
+  <string name="updating_caption_title">शीर्षक र विवरणहरू अद्यावधिक गर्दै</string>
   <string name="updating_caption_message">कृपया प्रतीक्षा गर्नुहोस् …</string>
-  <string name="login_success" fuzzy="true">प्रवेश सफल!</string>
-  <string name="login_failed" fuzzy="true">प्रवेश सफल हुन सकेन!</string>
+  <string name="login_success">प्रवेश सफल!</string>
+  <string name="login_failed">प्रवेश सफल हुन सकेन!</string>
   <string name="upload_failed">चित्र भेटिएन। कृपया अर्को चित्र प्रयास गर्नुहोस्।</string>
-  <string name="authentication_failed" fuzzy="true">प्रमाणिकरण असफल भयो, कृपया पुनः प्रवेश गर्नुहोस्!</string>
+  <string name="retry_limit_reached">पुन: प्रयास गर्ने अधिकतम सीमा पुग्यो! कृपया अपलोड रद्द गर्नुहोस् र फेरि प्रयास गर्नुहोस्।</string>
+  <string name="unrestricted_battery_mode">ब्याट्री अप्टिमाइजेसन बन्द गर्ने?</string>
+  <string name="authentication_failed">प्रमाणिकरण असफल भयो। कृपया पुनः प्रवेश गर्नुहोस्!</string>
   <string name="uploading_started">उर्ध्वभरण सुरू भयो!</string>
   <string name="upload_completed_notification_title">%1$s उर्ध्वभरण गरियो !</string>
   <string name="upload_completed_notification_text">तपाईको उर्ध्वभरण हेर्नको लागि ट्याप गर्नुहोस्</string>
-  <string name="upload_progress_notification_title_start" fuzzy="true"> %1$s उर्ध्वभरण सुरू गर्दैै</string>
+  <string name="upload_progress_notification_title_start">%s: उर्ध्वभरण सुरू गर्दैै</string>
   <string name="upload_progress_notification_title_in_progress">%1$s उर्ध्वभरण गरिँदै</string>
   <string name="upload_progress_notification_title_finishing">%1$s उर्ध्वभरण सकाउँदै</string>
-  <string name="upload_failed_notification_title" fuzzy="true"> %1$s उर्ध्वभरण असफल भयो</string>
+  <string name="upload_failed_notification_title"> %1$s उर्ध्वभरण असफल भयो</string>
   <string name="upload_failed_notification_subtitle">हेर्नको लागि ट्याप गर्नुहोस्</string>
   <string name="upload_paused_notification_subtitle">हेर्नको लागि ट्याप गर्नुहोस्</string>
   <string name="title_activity_contributions">मेरा वर्तमानका उर्ध्वभरणहरू</string>
@@ -62,13 +101,13 @@
   <string name="provider_contributions">मेरा उर्ध्वभरणहरू</string>
   <string name="menu_share">बाड्ने</string>
   <string name="menu_view_file_page">चित्र पृष्ठ हेर्नुहोस्</string>
-  <string name="share_title_hint" fuzzy="true">शीर्षक (आवश्यक)</string>
+  <string name="share_title_hint">शीर्षक (आवश्यक)</string>
   <string name="share_description_hint">वर्णन</string>
-  <string name="login_failed_network" fuzzy="true">प्रवेश गर्न असमर्थ - जडान खराबी</string>
+  <string name="login_failed_network">प्रवेश गर्न असमर्थ - जडान खराबी</string>
   <string name="login_failed_throttled">धेरै असफल प्रयासहरू भए। कृपया केही मिनेट पछि पुन: प्रयास गर्नुहोस</string>
   <string name="login_failed_blocked">माफ गर्नुहोस, यो प्रयोगकर्तालाई कमन्समा प्रतिबन्ध गरिएको छ</string>
   <string name="login_failed_2fa_needed">तपाईंले आफ्नो दुई कारक प्रमाणीकरण अङ्क प्रदान गर्नुपर्नेछ।</string>
-  <string name="login_failed_generic" fuzzy="true">प्रवेश सफल हुन सकेन</string>
+  <string name="login_failed_generic">प्रवेश सफल हुन सकेन</string>
   <string name="share_upload_button">उर्ध्वभरण गर्ने</string>
   <string name="multiple_share_base_title">यो सेटलाई नाम दिनुहोस्</string>
   <string name="provider_modifications">परिवर्तनहरू</string>
@@ -87,7 +126,7 @@
   <string name="title_activity_category_details">श्रेणी</string>
   <string name="menu_about">बारेमा</string>
   <string name="about_license">विकिमिडिया कमन्स अनुप्रयाेग एक स्वतन्त्र स्रोत अनुप्रयाेग हो। यो अनुप्रयाेग विकिमिडिया समुदायका अनुदानप्राप्तकर्ताहरू र स्वयंसेवकहरूद्वारा निर्मित एवम् प्रबन्धित छ। विकिमिडिया फाउण्डेसन यस अनुप्रयाेगकाे निर्माण, विकास र प्रबन्धनमा कुनै पनि प्रकारले संलग्न छैन।</string>
-  <string name="about_improve" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;गिटहब&lt;/a&gt; मा स्रोत। &lt;a href=\" https://github.com/commons-app/apps-android-commons/issues\"&gt;बगजिल्ला&lt;/a&gt; मा बग छ।</string>
+  <string name="about_improve">बग प्रतिवेदन र सुझावहरूको लागि नयाँ &lt;a href=\"&lt;span class=\"notranslate\" translate=\"no\"&gt;%1$s \"&gt;गिटहब समस्या&lt;/a&gt; सिर्जना गर्नुहोस्।</string>
   <string name="about_privacy_policy">गोपनीयता नीति</string>
   <string name="about_credits">श्रेयहरू</string>
   <string name="title_activity_about">बारेमा</string>
@@ -181,7 +220,10 @@
   <string name="nearby_commons">कमन्स</string>
   <string name="about_rate_us">मूल्याङ्कन गर्नुहाेस्</string>
   <string name="about_faq">प्राय सोधिएका प्रश्नहरू</string>
+  <string name="user_guide">प्रयोगकर्ता निर्देशिका</string>
   <string name="no_internet">इन्टरनेट उपलब्ध छैन</string>
+  <string name="error_notifications">सूचनाहरू प्राप्त गर्दा त्रुटि भयो</string>
+  <string name="error_review">समीक्षाको लागि छवि प्राप्त गर्दा त्रुटि भयो। फेरि प्रयास गर्न रिफ्रेस थिच्नुहोस्।</string>
   <string name="no_notifications">कुनै सूचनाहरू फेला परेन</string>
   <string name="about_translate">अनुवाद</string>
   <string name="about_translate_title">भाषाहरू</string>
@@ -189,6 +231,9 @@
   <string name="about_translate_proceed">अगाडि बढ्नुहोस्</string>
   <string name="about_translate_cancel">रद्द गर्नुहोस्</string>
   <string name="retry">पुनः प्रयास गर्नुहोस्</string>
+  <string name="showcase_view_needs_photo">यो ठाउँको फोटो चाहिन्छ।</string>
+  <string name="showcase_view_has_photo">यो ठाउँको फोटो पहिले नै छ।</string>
+  <string name="showcase_view_no_longer_exists">यो ठाउँ अब अवस्थित छैन।</string>
   <string name="no_images_found">कुनैपनि तस्वीर फेला परेन</string>
   <string name="block_notification_title">निषेधित</string>
   <string name="block_notification">तपाईलाई कमन्स सम्पादन गर्नबाट प्रतिबन्ध गरिएको छ</string>
@@ -217,13 +262,13 @@
   <string name="statistics">तथ्याङ्कहरू</string>
   <string name="statistics_thanks">धन्यवाद प्राप्त भयाे</string>
   <string name="statistics_featured">विशेष तस्वीरहरू</string>
-  <string name="level" fuzzy="true">स्तर</string>
+  <string name="level">स्तर %d</string>
   <string name="images_used_by_wiki">प्रयाेग भएका तस्वीरहरू</string>
   <string name="notifications_channel_name_all">कमन्स सूचना</string>
   <string name="contributions_fragment">योगदानहरू</string>
   <string name="nearby_fragment">नजिकैको</string>
   <string name="notifications">सूचनाहरू</string>
-  <string name="read_notifications" fuzzy="true">सूचनाहरू (अभिलेख)</string>
+  <string name="read_notifications">सूचनाहरू (अभिलेखित)</string>
   <string name="list_sheet">सूची</string>
   <string name="storage_permission">भण्डारण अनुमति</string>
   <string name="next">अर्को</string>
@@ -254,7 +299,7 @@
   <string name="delete_helper_ask_reason_copyright_logo">लोगो</string>
   <string name="category_edit_helper_show_edit_title_success">सफल</string>
   <string name="coordinates_edit_helper_show_edit_title_success">सफल</string>
-  <string name="no_achievements_yet" fuzzy="true">तपाईले हालसम्म कुनैपनि सम्पादन गर्नु भएकाे छैन</string>
+  <string name="no_achievements_yet">तपाईले हालसम्म कुनैपनि सम्पादन गर्नु भएकाे छैन %s</string>
   <string name="account_created">खाता सृजना गरियो!</string>
   <string name="upload_nearby_place_found_title">नजिकैको स्थान भेटियो</string>
   <string name="title_app_shortcut_bookmark">पुस्तक चिनोहरू</string>
@@ -262,7 +307,7 @@
   <string name="add_bookmark">पुस्तक चिनाेमा थपियाे</string>
   <string name="setting_wallpaper_dialog_title">भित्तेपत्रकाे रूपमा चयन गर्नुहोस्</string>
   <string name="setting_wallpaper_dialog_message">वालपेपर सेट गर्दै। कृपया प्रतीक्षा गर्नुहोस् …</string>
-  <string name="theme_default_name" fuzzy="true">पुनर्निर्धारित</string>
+  <string name="theme_default_name">प्रणाली पछ्याउनुहोस्</string>
   <string name="theme_dark_name">गाढा</string>
   <string name="theme_light_name">हल्का</string>
   <string name="bookmarks">पुस्तक चिनोहरू</string>
@@ -279,7 +324,7 @@
   <string name="learn_more">थप जान्नुहोस्</string>
   <string name="wlm_campaign_title">विकी लभ्स मोनुमेन्टस्</string>
   <string name="need_permission">अनुमति आवश्यक</string>
-  <string name="menu_view_user_page" fuzzy="true">प्रयोगकर्ता पृष्ठ हेर्नुहोस्</string>
+  <string name="menu_view_user_page">प्रयोगकर्ता पृष्ठ हेर्नुहोस्</string>
   <string name="edit_categories">सम्पादन श्रेणीहरू</string>
   <string name="advanced_options">उन्नत विकल्प</string>
   <string name="advanced_query_info_text">तपाईँले निकटता क्वेरी अनुकूलन गर्न सक्नुहुन्छ। त्रुटी भएमा पूर्ववत् गर्नुभएर लागू गर्नुहोस्।</string>
@@ -306,7 +351,7 @@
   <string name="request_user_block">यस प्रयोगकर्तालाई रोक लगाउन अनुरोध गर्नुहोस्</string>
   <string name="edit_image">तस्विर सम्पादन गर्नुहोस्</string>
   <string name="edit_location">स्थान सम्पादन गर्नुहोस्</string>
-  <string name="location_updated">स्थान अपडेट गरियो!</string>
+  <string name="location_updated">स्थान अद्यावधिक गरियो!</string>
   <string name="remove_location">यो स्थान हटाउनुहोस्</string>
   <string name="remove_location_warning_title">स्थान चेतावनी हटाउनुहोस्</string>
   <string name="location_removed">स्थान हटाइयो!</string>

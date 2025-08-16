@@ -218,6 +218,7 @@
   <string name="media_detail_description">Beskrivelse</string>
   <string name="media_detail_discussion">Diskussion</string>
   <string name="media_detail_author">Forfatter</string>
+  <string name="media_detail_uploader">Uploader</string>
   <string name="media_detail_uploaded_date">Upload-dato</string>
   <string name="media_detail_license">Licens</string>
   <string name="media_detail_coordinates">Koordinater</string>
@@ -376,7 +377,7 @@
   <string name="statistics_featured">Udvalgte billeder</string>
   <string name="statistics_wikidata_edits">Billeder via \"Steder i nærheden\"</string>
   <string name="level">Niveau %d</string>
-  <string name="profileLevel">%s (Niveau %s)</string>
+  <string name="profile_withLevel">%s (Niveau %s)</string>
   <string name="images_uploaded">Uploadede billeder</string>
   <string name="image_reverts">Billeder, som ikke er blevet trukket tilbage</string>
   <string name="images_used_by_wiki">Billeder brugt</string>

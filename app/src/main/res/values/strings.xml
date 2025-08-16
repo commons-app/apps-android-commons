@@ -211,6 +211,7 @@
   <string name="media_detail_description">Description</string>
   <string name="media_detail_discussion">Discussion</string>
   <string name="media_detail_author">Author</string>
+  <string name="media_detail_uploader">Uploader</string>
   <string name="media_detail_uploaded_date">Uploaded date</string>
   <string name="media_detail_license">License</string>
   <string name="media_detail_coordinates">Coordinates</string>
@@ -382,7 +383,8 @@
   <string name="statistics_featured">Featured Images</string>
   <string name="statistics_wikidata_edits">Images via \"Nearby Places\"</string>
   <string name="level">Level %d</string>
-  <string name="profileLevel">%s (Level %s)</string>
+  <string name="profile_withLevel">%s (Level %s)</string>
+  <string name="profile_withoutLevel">%s (%s)</string>
   <string name="images_uploaded">Images Uploaded</string>
   <string name="image_reverts">Images Not Reverted</string>
   <string name="images_used_by_wiki">Images Used</string>
@@ -804,7 +806,7 @@ Upload your first media by tapping on the add button.</string>
   <string name="permissions_are_required_for_functionality">Permissions are required for functionality</string>
   <string name="learn_how_to_write_a_useful_description">Learn how to write a useful description</string>
   <string name="learn_how_to_write_a_useful_caption">Learn how to write a useful caption</string>
-  <string name="see_your_achievements">See your achievements</string>
+  <string name="see_your_achievements">View your achievements</string>
   <string name="edit_image">Edit Image</string>
   <string name="edit_location">Edit Location</string>
   <string name="location_updated">Location updated!</string>

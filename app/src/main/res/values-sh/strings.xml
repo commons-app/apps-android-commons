@@ -2,6 +2,7 @@
 <!-- Authors:
 * Aca
 * Vlad5250
+* Winston Sung
 -->
 <resources>
   <string name="commons_facebook">Ostava na Facebooku</string>
@@ -93,7 +94,7 @@
   <string name="menu_upload_single">Otpremi</string>
   <string name="categories_search_text_hint">Pretraži kategorije</string>
   <string name="menu_save_categories">Snimi</string>
-  <string name="refresh_button">Preučitaj</string>
+  <string name="refresh_button">Osvježi</string>
   <string name="display_list_button">Lista</string>
   <string name="contributions_subtitle_zero">(Još uvijek nema postavljenih datoteka)</string>
   <string name="categories_not_found">Nema kategorija što odgovoraju %1$s</string>
@@ -153,9 +154,9 @@
   <string name="detail_description_empty">Nema opisa</string>
   <string name="detail_discussion_empty">Nema razgovora</string>
   <string name="detail_license_empty">Nepoznata licenca</string>
-  <string name="menu_refresh">Preučitaj</string>
-  <string name="read_storage_permission_rationale">Potrebna dozvola: Treba da se pročita iz spoljašnje memorije. Privitak bez ovoga nema pristupa Vašoj galeriji.</string>
-  <string name="write_storage_permission_rationale">Potrebna dozvola: Treba da se zapiše na spoljašnju memoriju. Privitak bez ovoga nema pristupa Vašoj kameri/galeriji.</string>
+  <string name="menu_refresh">Osvježi</string>
+  <string name="read_storage_permission_rationale">Potrebno ovlaštenje: Čitanje vanjske memorije. Aplikacija ne može pristupiti galeriji bez toga.</string>
+  <string name="write_storage_permission_rationale">Potrebno ovlaštenje: Pisanje u vanjskoj memoriji. Aplikacija ne može pristupiti kameri/galeriji bez toga.</string>
   <string name="ok">U redu</string>
   <string name="warning">Upozorenje</string>
   <string name="upload">Postavi</string>
@@ -215,7 +216,7 @@
   <string name="skip_login_message" fuzzy="true">U budućnosti ćete se morati prijaviti kako biste postavili slike.</string>
   <string name="login_alert_message">Prijavite se da biste koristili ovu funkciju</string>
   <string name="nearby_location_not_available">„U blizini“ možda ne radi kako treba. Lokacija nije dostupna.</string>
-  <string name="location_permission_rationale_nearby">Potrebna je dozvola za prikaz liste lokacija u blizini</string>
+  <string name="location_permission_rationale_nearby">Potrebno je ovlaštenje za prikaz liste lokacija u blizini</string>
   <string name="nearby_directions">Upute</string>
   <string name="nearby_wikidata">Wikidata</string>
   <string name="nearby_wikipedia">Wikipedia</string>

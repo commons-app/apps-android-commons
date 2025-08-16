@@ -243,6 +243,7 @@
   <string name="media_detail_description">Опис</string>
   <string name="media_detail_discussion">Обговорення</string>
   <string name="media_detail_author">Автор</string>
+  <string name="media_detail_uploader">Завантажувач</string>
   <string name="media_detail_uploaded_date">Дата завантаження</string>
   <string name="media_detail_license">Ліцензія</string>
   <string name="media_detail_coordinates">Координати</string>
@@ -401,7 +402,7 @@
   <string name="statistics_featured">Вибрані зображення</string>
   <string name="statistics_wikidata_edits">Зображення місць поблизу</string>
   <string name="level">Рівень %d</string>
-  <string name="profileLevel">%s (Рівень %s)</string>
+  <string name="profile_withLevel">%s (Рівень %s)</string>
   <string name="images_uploaded">Завантажені зображення</string>
   <string name="image_reverts">Не відхилені зображення</string>
   <string name="images_used_by_wiki">Використані зображення</string>

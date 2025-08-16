@@ -46,7 +46,7 @@ class ProfileActivity : BaseActivity() {
     private var contributionsFragment: ContributionsFragment? = null
 
     fun setScroll(canScroll: Boolean) {
-        binding.viewPager.setCanScroll(canScroll)
+        binding.viewPager.canScroll = canScroll
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {

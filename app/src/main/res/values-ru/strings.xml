@@ -9,6 +9,7 @@
 * Deltaspace
 * Dirruw'o
 * Eleferen
+* Elzav
 * Envlh
 * Facenapalm
 * Fenixs-ru
@@ -269,6 +270,7 @@
   <string name="media_detail_description">Описание</string>
   <string name="media_detail_discussion">Обсуждение</string>
   <string name="media_detail_author">Автор</string>
+  <string name="media_detail_uploader">Загружающий</string>
   <string name="media_detail_uploaded_date">Дата загрузки</string>
   <string name="media_detail_license">Лицензия</string>
   <string name="media_detail_coordinates">Координаты</string>
@@ -427,7 +429,7 @@
   <string name="statistics_featured">Избранные изображения</string>
   <string name="statistics_wikidata_edits">Изображения мест поблизости</string>
   <string name="level">Уровень %d</string>
-  <string name="profileLevel">%s (Уровень %s)</string>
+  <string name="profile_withLevel">%s (Уровень %s)</string>
   <string name="images_uploaded">Загружено изображений</string>
   <string name="image_reverts">Изображения, которые не откатывались</string>
   <string name="images_used_by_wiki">Использовано изображений</string>

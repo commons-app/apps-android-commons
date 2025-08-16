@@ -370,7 +370,7 @@
   <string name="statistics_featured">Seçilmiş şəkillər</string>
   <string name="statistics_wikidata_edits">\"Yaxınlıqdakı yerlər\" vasitəsilə şəkillər</string>
   <string name="level">Səviyyə %d</string>
-  <string name="profileLevel">%s (Səviyyə %s)</string>
+  <string name="profile_withLevel">%s (Səviyyə %s)</string>
   <string name="images_uploaded">Yüklənən şəkillər</string>
   <string name="image_reverts">Geri qaytarılan şəkillər</string>
   <string name="images_used_by_wiki">İstifadə olunan şəkillər</string>

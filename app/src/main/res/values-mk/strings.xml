@@ -212,6 +212,7 @@
   <string name="media_detail_description">Опис</string>
   <string name="media_detail_discussion">Разговор</string>
   <string name="media_detail_author">Автор</string>
+  <string name="media_detail_uploader">Подигач</string>
   <string name="media_detail_uploaded_date">Датум на подигање</string>
   <string name="media_detail_license">Лиценца</string>
   <string name="media_detail_coordinates">Координати</string>
@@ -370,7 +371,7 @@
   <string name="statistics_featured">Избрани слики</string>
   <string name="statistics_wikidata_edits">Слики преку „Околни места“</string>
   <string name="level">Степен %d</string>
-  <string name="profileLevel">%s (Степен %s)</string>
+  <string name="profile_withLevel">%s (Степен %s)</string>
   <string name="images_uploaded">Подигнати слики</string>
   <string name="image_reverts">Неоткажани слики</string>
   <string name="images_used_by_wiki">Употребени слики</string>
@@ -757,7 +758,7 @@
   <string name="permissions_are_required_for_functionality">Се бараат дозволи за функцијата</string>
   <string name="learn_how_to_write_a_useful_description">Дознајте како да напишете корисен опис</string>
   <string name="learn_how_to_write_a_useful_caption">Дознајте како да напишете корисно толкување</string>
-  <string name="see_your_achievements">Видете ги вашите достигнувања</string>
+  <string name="see_your_achievements">Погледајте ги вашите достигнувања</string>
   <string name="edit_image">Уреди слика</string>
   <string name="edit_location">Уреди местоположба</string>
   <string name="location_updated">Местоположбата е подновена!</string>

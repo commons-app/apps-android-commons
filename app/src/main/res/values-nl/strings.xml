@@ -234,13 +234,14 @@
   <string name="media_detail_description">Beschrijving</string>
   <string name="media_detail_discussion">Overleg</string>
   <string name="media_detail_author">Auteur</string>
+  <string name="media_detail_uploader">Uploader</string>
   <string name="media_detail_uploaded_date">Uploaddatum</string>
   <string name="media_detail_license">Licentie</string>
   <string name="media_detail_coordinates">Coördinaten</string>
   <string name="media_detail_coordinates_empty">Niet opgegeven</string>
   <string name="become_a_tester_title">Word bètatester</string>
   <string name="become_a_tester_description">Meld u aan voor ons bètakanaal op Google Play en krijg vroegtijdig toegang tot nieuwe functies en bugfixes</string>
-  <string name="_2fa_code">2FA-code</string>
+  <string name="_2fa_code">Tweetrapsauthenticatie-code</string>
   <string name="email_auth_code">E-mailverificatiecode</string>
   <string name="logout_verification">Wilt u zich echt afmelden?</string>
   <string name="mediaimage_failed">Media-afbeelding is mislukt</string>
@@ -392,7 +393,7 @@
   <string name="statistics_featured">Uitgelichte afbeeldingen</string>
   <string name="statistics_wikidata_edits">Afbeeldingen via \"Plaatsen in de buurt\"</string>
   <string name="level">Niveau %d</string>
-  <string name="profileLevel">%s (Niveau %s)</string>
+  <string name="profile_withLevel">%s (Niveau %s)</string>
   <string name="images_uploaded">Geüploade afbeeldingen</string>
   <string name="image_reverts">Afbeeldingen niet teruggedraaid</string>
   <string name="images_used_by_wiki">Gebruikte afbeeldingen</string>
@@ -600,6 +601,8 @@
   <string name="title_for_media">MEDIA</string>
   <string name="title_for_child_classes">SUBKLASSEN</string>
   <string name="title_for_parent_classes">HOOFDKLASSEN</string>
+  <string name="title_for_subcategories">SUBCATEGORIEËN</string>
+  <string name="title_for_parent_categories">BOVENLIGGENDE CATEGORIEËN</string>
   <string name="upload_nearby_place_found_title">Plaats in de buurt gevonden</string>
   <string name="upload_nearby_place_found_description_plural">Zijn dit afbeeldingen van %1$s?</string>
   <string name="upload_nearby_place_found_description_singular">Is dit een afbeelding van %1$s?</string>

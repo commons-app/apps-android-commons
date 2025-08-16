@@ -322,7 +322,7 @@
   <string name="statistics_thanks">धन्यवाद प्राप्त किया</string>
   <string name="statistics_featured">निर्वाचित चित्र</string>
   <string name="level">स्तर %d</string>
-  <string name="profileLevel">%s (स्तर %s )</string>
+  <string name="profile_withLevel">%s (स्तर %s )</string>
   <string name="images_uploaded">चित्र अपलोड हुआ</string>
   <string name="image_reverts">चित्रों को वापस नहीं किया गया</string>
   <string name="images_used_by_wiki">उपयोग हुए चित्र</string>

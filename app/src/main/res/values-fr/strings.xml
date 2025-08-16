@@ -6,6 +6,7 @@
 * Assorted-Interests
 * BaRaN6161 TURK
 * Bananax47
+* Billibilbi
 * BlueCamille
 * Cigaryno
 * Cyclicus
@@ -15,6 +16,7 @@
 * Fitoschido
 * Friday83260
 * Gomoko
+* Goombiis
 * GrandEscogriffe
 * Happy13241
 * Hecatonchire
@@ -50,7 +52,7 @@
 -->
 <resources>
   <string name="commons_facebook">Page Facebook de Commons</string>
-  <string name="commons_github">Code source Github de Commons</string>
+  <string name="commons_github">Code source de Commons sur Github</string>
   <string name="commons_logo">Logo de Commons</string>
   <string name="commons_website">Site web de Commons</string>
   <string name="exit_location_picker">Sélecteur d\'emplacement de sortie</string>
@@ -256,6 +258,7 @@
   <string name="media_detail_description">Description</string>
   <string name="media_detail_discussion">Discussion</string>
   <string name="media_detail_author">Auteur</string>
+  <string name="media_detail_uploader">Téléverseur</string>
   <string name="media_detail_uploaded_date">Date de téléversement</string>
   <string name="media_detail_license">Licence</string>
   <string name="media_detail_coordinates">Coordonnées</string>
@@ -414,7 +417,7 @@
   <string name="statistics_featured">Images remarquables</string>
   <string name="statistics_wikidata_edits">Images par « Lieux à proximité »</string>
   <string name="level">Niveau %d</string>
-  <string name="profileLevel">%s (niveau %s)</string>
+  <string name="profile_withLevel">%s (niveau %s)</string>
   <string name="images_uploaded">Images téléversées</string>
   <string name="image_reverts">Images non annulées</string>
   <string name="images_used_by_wiki">Images utilisées</string>
@@ -801,7 +804,7 @@
   <string name="permissions_are_required_for_functionality">Des autorisations sont nécessaires pour la fonctionnalité</string>
   <string name="learn_how_to_write_a_useful_description">Apprendre à écrire une description utile</string>
   <string name="learn_how_to_write_a_useful_caption">Apprendre à écrire une légende utile</string>
-  <string name="see_your_achievements">Voir vos réalisations</string>
+  <string name="see_your_achievements">Consultez vos réalisations</string>
   <string name="edit_image">Modifier l’image</string>
   <string name="edit_location">Modifier l’emplacement</string>
   <string name="location_updated">Emplacement mis à jour !</string>
