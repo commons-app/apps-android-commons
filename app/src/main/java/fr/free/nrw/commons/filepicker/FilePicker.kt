@@ -12,7 +12,6 @@ import androidx.preference.PreferenceManager
 import fr.free.nrw.commons.customselector.model.Image
 import fr.free.nrw.commons.customselector.ui.selector.CustomSelectorActivity
 import fr.free.nrw.commons.filepicker.PickedFiles.singleFileList
-import timber.log.Timber
 import java.io.File
 import java.io.IOException
 import java.net.URISyntaxException
