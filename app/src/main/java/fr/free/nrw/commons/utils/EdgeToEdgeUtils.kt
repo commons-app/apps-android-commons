@@ -12,6 +12,15 @@ import androidx.core.view.updateLayoutParams
 import androidx.core.view.updatePadding
 import fr.free.nrw.commons.R
 
+/**
+ * Applies edge-to-edge system bar insets to a [View]’s margins using a custom adjustment block.
+ *
+ * Stores the initial margins to ensure inset calculations are additive, and applies the provided
+ * [block] with an [InsetsAccumulator] containing initial and system bar inset values.
+ *
+ * @param typeMask The type of window insets to apply. Defaults to [WindowInsetsCompat.Type.systemBars].
+ * @param block Lambda applied to update [MarginLayoutParams] using the accumulated insets.
+ */
 fun View.applyEdgeToEdgeInsets(
     typeMask: Int = WindowInsetsCompat.Type.systemBars(),
     block: MarginLayoutParams.(InsetsAccumulator) -> Unit
@@ -66,6 +75,11 @@ fun View.applyEdgeToEdgeInsets(
     }
 }
 
+/**
+ * Applies edge-to-edge system bar insets to the top padding of the view.
+ *
+ * @param typeMask The type of window insets to apply. Defaults to [WindowInsetsCompat.Type.systemBars].
+ */
 fun View.applyEdgeToEdgeTopPaddingInsets(
     typeMask: Int = WindowInsetsCompat.Type.systemBars(),
 ) {
@@ -82,6 +96,11 @@ fun View.applyEdgeToEdgeTopPaddingInsets(
     }
 }
 
+/**
+ * Applies edge-to-edge system bar insets to the bottom padding of the view.
+ *
+ * @param typeMask The type of window insets to apply. Defaults to [WindowInsetsCompat.Type.systemBars].
+ */
 fun View.applyEdgeToEdgeBottomPaddingInsets(
     typeMask: Int = WindowInsetsCompat.Type.systemBars(),
 ) {
@@ -98,6 +117,11 @@ fun View.applyEdgeToEdgeBottomPaddingInsets(
     }
 }
 
+/**
+ * Applies system bar insets to all margins (top, bottom, left, right) of the view.
+ *
+ * @param view The target view.
+ */
 fun applyEdgeToEdgeAllInsets(view: View) = view.applyEdgeToEdgeInsets { insets ->
     leftMargin = insets.left
     rightMargin = insets.right
@@ -105,18 +129,32 @@ fun applyEdgeToEdgeAllInsets(view: View) = view.applyEdgeToEdgeInsets { insets -
     bottomMargin = insets.bottom
 }
 
+/**
+ * Applies system bar insets to the top and horizontal margins of the view.
+ *
+ * @param view The target view.
+ */
 fun applyEdgeToEdgeTopInsets(view: View) = view.applyEdgeToEdgeInsets { insets ->
     leftMargin = insets.left
     rightMargin = insets.right
     topMargin = insets.top
 }
 
+/**
+ * Applies system bar insets to the bottom and horizontal margins of the view.
+ *
+ * @param view The target view.
+ */
 fun applyEdgeToEdgeBottomInsets(view: View) = view.applyEdgeToEdgeInsets { insets ->
     leftMargin = insets.left
     rightMargin = insets.right
     bottomMargin = insets.bottom
 }
 
+/**
+ * Holds both initial margin values and system bar insets, providing summed values
+ * for each side (top, bottom, left, right) to apply in layout updates.
+ */
 data class InsetsAccumulator(
     private val initialTop: Int,
     private val insetTop: Int,
