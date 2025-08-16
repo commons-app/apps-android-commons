@@ -129,11 +129,38 @@ class ImageProcessingService @Inject constructor(
      */
     fun checkIfFileAlreadyExists(originalFilePath: Uri, modifiedFilePath: Uri): Single<Int> {
         return Single.zip(
-            checkDuplicateImage(inputStream = appContext.contentResolver.openInputStream(originalFilePath)!!),
-            checkDuplicateImage(inputStream = fileUtilsWrapper.getFileInputStream(modifiedFilePath.path))
+            // Handle SecurityException for picker URIs that have lost permission
+            Single.defer {
+                try {
+                    val inputStream = appContext.contentResolver.openInputStream(originalFilePath)
+                    if (inputStream != null) {
+                        checkDuplicateImage(inputStream = inputStream)
+                    } else {
+                        Single.just(IMAGE_OK)
+                    }
+                } catch (e: SecurityException) {
+                    Timber.w(e, "Security exception accessing picker URI - permission lost after app restart")
+                    Single.just(IMAGE_OK)
+                } catch (e: Exception) {
+                    Timber.e(e, "Error accessing original file URI")
+                    Single.just(IMAGE_OK)
+                }
+            },
+            // Handle exceptions for modified file path
+            Single.defer {
+                try {
+                    checkDuplicateImage(inputStream = fileUtilsWrapper.getFileInputStream(modifiedFilePath.path))
+                } catch (e: Exception) {
+                    Timber.e(e, "Error accessing modified file")
+                    Single.just(IMAGE_OK)
+                }
+            }
         ) { resultForOriginal, resultForDuplicate ->
             return@zip if (resultForOriginal == IMAGE_DUPLICATE || resultForDuplicate == IMAGE_DUPLICATE)
                 IMAGE_DUPLICATE else IMAGE_OK
+        }.onErrorReturn { error ->
+            Timber.e(error, "Error during duplicate file check")
+            IMAGE_OK
         }
     }
 
