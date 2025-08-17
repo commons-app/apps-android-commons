@@ -22,6 +22,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.app.NavUtils
 import androidx.core.content.ContextCompat
+import androidx.core.view.WindowCompat
 import fr.free.nrw.commons.BuildConfig
 import fr.free.nrw.commons.CommonsApplication
 import fr.free.nrw.commons.R
@@ -38,6 +39,7 @@ import fr.free.nrw.commons.utils.ActivityUtils.startActivityWithFlags
 import fr.free.nrw.commons.utils.ConfigUtils.isBetaFlavour
 import fr.free.nrw.commons.utils.SystemThemeUtils
 import fr.free.nrw.commons.utils.ViewUtil.hideKeyboard
+import fr.free.nrw.commons.utils.handleKeyboardInsets
 import fr.free.nrw.commons.utils.handleWebUrl
 import io.reactivex.disposables.CompositeDisposable
 import timber.log.Timber
@@ -80,8 +82,14 @@ class LoginActivity : AccountAuthenticatorActivity() {
         delegate.installViewFactory()
         delegate.onCreate(savedInstanceState)
 
+        WindowCompat.getInsetsController(window, window.decorView)
+            .isAppearanceLightStatusBars = !isDarkTheme
+
+        WindowCompat.setDecorFitsSystemWindows(window, false)
+
         binding = ActivityLoginBinding.inflate(layoutInflater)
         applyEdgeToEdgeAllInsets(binding!!.root)
+        binding?.aboutPrivacyPolicy?.handleKeyboardInsets()
         with(binding!!) {
             setContentView(root)
 
