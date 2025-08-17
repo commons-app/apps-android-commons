@@ -323,7 +323,6 @@ object FilePicker : Constants {
         callbacks: Callbacks
     ) {
         if (result.resultCode == Activity.RESULT_OK) {
-            takePersistableUriPermissions(activity, result)
             try {
                 val files = getFilesFromCustomSelector(result.data, activity)
                 callbacks.onImagesPicked(files, ImageSource.CUSTOM_SELECTOR, restoreType(activity))
