@@ -297,8 +297,7 @@ object FilePicker : Constants {
      */
     private fun takePersistableUriPermissions(context: Context, result: ActivityResult) {
         result.data?.let { intentData ->
-            val takeFlags: Int = (Intent.FLAG_GRANT_READ_URI_PERMISSION
-                    or Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
+            val takeFlags: Int = (Intent.FLAG_GRANT_READ_URI_PERMISSION)
             // Persist the URI permission for all URIs in the clip data
             // if multiple images are selected,
             // or for the single URI if only one image is selected
@@ -324,6 +323,7 @@ object FilePicker : Constants {
         callbacks: Callbacks
     ) {
         if (result.resultCode == Activity.RESULT_OK) {
+            takePersistableUriPermissions(activity, result)
             try {
                 val files = getFilesFromCustomSelector(result.data, activity)
                 callbacks.onImagesPicked(files, ImageSource.CUSTOM_SELECTOR, restoreType(activity))
@@ -368,6 +368,7 @@ object FilePicker : Constants {
         callbacks: Callbacks
     ) {
         if (result.resultCode == Activity.RESULT_OK && !isPhoto(result.data)) {
+            takePersistableUriPermissions(activity, result)
             try {
                 val files = getFilesFromGalleryPictures(result.data, activity)
                 callbacks.onImagesPicked(files, ImageSource.GALLERY, restoreType(activity))
@@ -414,6 +415,7 @@ object FilePicker : Constants {
         callbacks: Callbacks
     ) {
         if (activityResult.resultCode == Activity.RESULT_OK) {
+            takePersistableUriPermissions(activity, activityResult)
             try {
                 val lastImageUri = PreferenceManager.getDefaultSharedPreferences(activity)
                     .getString(KEY_PHOTO_URI, null)
