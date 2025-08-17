@@ -414,7 +414,6 @@ object FilePicker : Constants {
         callbacks: Callbacks
     ) {
         if (activityResult.resultCode == Activity.RESULT_OK) {
-            takePersistableUriPermissions(activity, activityResult)
             try {
                 val lastImageUri = PreferenceManager.getDefaultSharedPreferences(activity)
                     .getString(KEY_PHOTO_URI, null)
