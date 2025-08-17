@@ -128,33 +128,10 @@ class ImageProcessingService @Inject constructor(
      * @return IMAGE_DUPLICATE or IMAGE_OK
      */
     fun checkIfFileAlreadyExists(originalFilePath: Uri, modifiedFilePath: Uri): Single<Int> {
-        // Safely open the original (picker) URI. If permission is gone after app restart,
-        // skip this leg and proceed with the modified file check to avoid crashing.
-        val originalCheck: Single<Int> =
-            Single.fromCallable { appContext.contentResolver.openInputStream(originalFilePath) }
-                .flatMap { inputStream ->
-                    if (inputStream != null) checkDuplicateImage(inputStream) else Single.just(IMAGE_OK)
-                }
-                .onErrorReturn { t ->
-                    Timber.w(t, "Skipping original URI duplicate check (no permission or not found)")
-                    IMAGE_OK
-                }
-                .subscribeOn(Schedulers.io())
-
-        // Safely open the modified file stream as well; be defensive in case the temp/cached file
-        // was cleaned up while the app was backgrounded.
-        val modifiedCheck: Single<Int> =
-            Single.fromCallable { fileUtilsWrapper.getFileInputStream(modifiedFilePath.path) }
-                .flatMap { inputStream ->
-                    if (inputStream != null) checkDuplicateImage(inputStream) else Single.just(IMAGE_OK)
-                }
-                .onErrorReturn { t ->
-                    Timber.w(t, "Skipping modified file duplicate check (file missing)")
-                    IMAGE_OK
-                }
-                .subscribeOn(Schedulers.io())
-
-        return Single.zip(originalCheck, modifiedCheck) { resultForOriginal, resultForDuplicate ->
+        return Single.zip(
+            checkDuplicateImage(inputStream = appContext.contentResolver.openInputStream(originalFilePath)!!),
+            checkDuplicateImage(inputStream = fileUtilsWrapper.getFileInputStream(modifiedFilePath.path))
+        ) { resultForOriginal, resultForDuplicate ->
             return@zip if (resultForOriginal == IMAGE_DUPLICATE || resultForDuplicate == IMAGE_DUPLICATE)
                 IMAGE_DUPLICATE else IMAGE_OK
         }

@@ -434,6 +434,12 @@ class UploadWorker(
                                 makeWikiDataEdit(uploadResult, contribution)
                             }
                             showSuccessNotification(contribution)
+                            if (appContext.contentResolver.persistedUriPermissions.any {
+                                    it.uri == contribution.contentUri }) {
+                                appContext.contentResolver.releasePersistableUriPermission(
+                                    contribution.contentUri!!, Intent.FLAG_GRANT_READ_URI_PERMISSION
+                                )
+                            }
                         } else {
                             Timber.e("Stash Upload failed")
                             showFailedNotification(contribution)
