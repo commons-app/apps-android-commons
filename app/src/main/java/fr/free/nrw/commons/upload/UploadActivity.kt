@@ -178,7 +178,7 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
         presenter?.setupBasicKvStoreFactory { BasicKvStore(this@UploadActivity, it) }
 
         _binding = ActivityUploadBinding.inflate(layoutInflater)
-        applyEdgeToEdgeAllInsets(_binding!!.root)
+        applyEdgeToEdgeAllInsets(_binding!!.root, false)
         setContentView(binding.root)
 
         // Overrides the back button to make sure the user is prepared to lose their progress

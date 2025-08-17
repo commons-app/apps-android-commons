@@ -50,6 +50,7 @@ import fr.free.nrw.commons.utils.ImageUtils.IMAGE_OK
 import fr.free.nrw.commons.utils.ImageUtils.getErrorMessageForResult
 import fr.free.nrw.commons.utils.NetworkUtils.isInternetConnectionEstablished
 import fr.free.nrw.commons.utils.ViewUtil.showLongToast
+import fr.free.nrw.commons.utils.handleKeyboardInsets
 import timber.log.Timber
 import java.io.File
 import java.util.ArrayList
@@ -153,6 +154,7 @@ class UploadMediaDetailFragment : UploadBaseFragment(), UploadMediaDetailsContra
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         _binding = FragmentUploadMediaDetailFragmentBinding.inflate(inflater, container, false)
+        _binding!!.mediaDetailCardView.handleKeyboardInsets()
         return binding.root
     }
 
