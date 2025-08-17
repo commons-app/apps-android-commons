@@ -3,6 +3,7 @@ package fr.free.nrw.commons.utils
 import android.view.View
 import android.view.ViewGroup.MarginLayoutParams
 import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsAnimationCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.marginBottom
 import androidx.core.view.marginLeft
@@ -19,10 +20,12 @@ import fr.free.nrw.commons.R
  * [block] with an [InsetsAccumulator] containing initial and system bar inset values.
  *
  * @param typeMask The type of window insets to apply. Defaults to [WindowInsetsCompat.Type.systemBars].
+ * @param shouldConsumeInsets If `true`, the insets are consumed and not propagated to child views.
  * @param block Lambda applied to update [MarginLayoutParams] using the accumulated insets.
  */
 fun View.applyEdgeToEdgeInsets(
     typeMask: Int = WindowInsetsCompat.Type.systemBars(),
+    shouldConsumeInsets: Boolean = true,
     block: MarginLayoutParams.(InsetsAccumulator) -> Unit
 ) {
     ViewCompat.setOnApplyWindowInsetsListener(this) { view, windowInsets ->
@@ -71,7 +74,7 @@ fun View.applyEdgeToEdgeInsets(
             apply { block(accumulator) }
         }
 
-        WindowInsetsCompat.CONSUMED
+        if(shouldConsumeInsets) WindowInsetsCompat.CONSUMED else windowInsets
     }
 }
 
@@ -121,8 +124,12 @@ fun View.applyEdgeToEdgeBottomPaddingInsets(
  * Applies system bar insets to all margins (top, bottom, left, right) of the view.
  *
  * @param view The target view.
+ * @param shouldConsumeInsets If `true`, the insets are consumed and not propagated to child views.
  */
-fun applyEdgeToEdgeAllInsets(view: View) = view.applyEdgeToEdgeInsets { insets ->
+fun applyEdgeToEdgeAllInsets(
+    view: View,
+    shouldConsumeInsets: Boolean = true
+) = view.applyEdgeToEdgeInsets(shouldConsumeInsets = shouldConsumeInsets) { insets ->
     leftMargin = insets.left
     rightMargin = insets.right
     topMargin = insets.top
@@ -149,6 +156,56 @@ fun applyEdgeToEdgeBottomInsets(view: View) = view.applyEdgeToEdgeInsets { inset
     leftMargin = insets.left
     rightMargin = insets.right
     bottomMargin = insets.bottom
+}
+
+/**
+ * Adjusts a [View]'s bottom margin dynamically to account for the on-screen keyboard (IME),
+ * ensuring the view remains visible above the keyboard during transitions.
+ *
+ * Preserves the initial margin, adjusts during IME visibility changes,
+ * and accounts for navigation bar insets to avoid double offsets.
+ */
+fun View.handleKeyboardInsets() {
+    var existingBottomMargin = 0
+
+    ViewCompat.setOnApplyWindowInsetsListener(this) { view, windowInsets ->
+        existingBottomMargin = if (view.getTag(R.id.initial_margin_bottom) != null) {
+            view.getTag(R.id.initial_margin_bottom) as Int
+        } else {
+            view.setTag(R.id.initial_margin_bottom, view.marginBottom)
+            view.marginBottom
+        }
+
+        WindowInsetsCompat.CONSUMED
+    }
+
+    // Animate during IME transition
+    ViewCompat.setWindowInsetsAnimationCallback(
+        this,
+        object : WindowInsetsAnimationCompat.Callback(
+            DISPATCH_MODE_CONTINUE_ON_SUBTREE
+        ) {
+            override fun onProgress(
+                insets: WindowInsetsCompat,
+                runningAnimations: MutableList<WindowInsetsAnimationCompat>
+            ): WindowInsetsCompat {
+                val lp = layoutParams as MarginLayoutParams
+                val navBarInsets = insets.getInsets(WindowInsetsCompat.Type.navigationBars())
+                val imeInsets = insets.getInsets(WindowInsetsCompat.Type.ime())
+                val imeVisible = insets.isVisible(WindowInsetsCompat.Type.ime())
+
+                // Avoid extra space due to system nav bar when the keyboard is shown
+                val imeBottomMargin = imeInsets.bottom - navBarInsets.bottom
+
+                lp.bottomMargin = if(imeVisible && imeBottomMargin >= existingBottomMargin)
+                    imeBottomMargin + existingBottomMargin
+                else existingBottomMargin
+
+                layoutParams = lp
+                return WindowInsetsCompat.CONSUMED
+            }
+        }
+    )
 }
 
 /**
