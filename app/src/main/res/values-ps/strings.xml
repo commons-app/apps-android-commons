@@ -348,6 +348,7 @@
   <string name="image_info">انځور مالومات</string>
   <string name="no_categories_found">هېڅ وېشنيزې ونه موندل شوې</string>
   <string name="delete_helper_ask_reason_copyright_logo">نښان</string>
+  <string name="coordinates_edit_helper_show_edit_title_success">بریالیتوب</string>
   <string name="share_image_via">انځور وېشل په وسيله د</string>
   <string name="theme_dark_name">تياره</string>
   <string name="theme_light_name">روښانه</string>
@@ -392,6 +393,7 @@
   <string name="welcome_custom_picture_selector_text">دوديزه انځور پاکوونکي ته ښه راغلاست</string>
   <string name="welcome_custom_selector_ok">په‌زړه‌پورې</string>
   <string name="custom_selector_dismiss_limit_warning_button_text">تړل</string>
+  <string name="need_permission">اجازې ته اړتيا لري</string>
   <string name="menu_view_user_page">کارن پېژنيال کتل</string>
   <string name="edit_categories">وېشنيزې سمول</string>
   <string name="apply">پلي‌کول</string>
@@ -400,6 +402,7 @@
   <string name="no_location_found_title">هېڅ ځای ونه موندل شو</string>
   <string name="add_location">ځای ورگډول</string>
   <string name="explore_map_details">سپيناوی</string>
+  <string name="android_version">اندرويد بلبڼه</string>
   <string name="device_name">وسيلې نوم</string>
   <string name="thanks_feedback">له غبرگون ورکولو مو مننه</string>
   <string name="edit_image">انځور سمول</string>
