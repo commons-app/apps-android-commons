@@ -310,7 +310,7 @@ object FilePicker : Constants {
             } ?: intentData.data?.let { uri ->
                 context.contentResolver.takePersistableUriPermission(uri, takeFlags)
             }
-        } ?: return // No data to process
+        }
     }
 
     /**
