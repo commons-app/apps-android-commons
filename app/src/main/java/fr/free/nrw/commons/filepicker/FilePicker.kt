@@ -296,23 +296,21 @@ object FilePicker : Constants {
      * https://github.com/commons-app/apps-android-commons/issues/6357
      */
     private fun takePersistableUriPermissions(context: Context, result: ActivityResult) {
-        val intent = result.data
-        val takeFlags: Int = (Intent.FLAG_GRANT_READ_URI_PERMISSION
-                or Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
-        intent?.let {
-            val urisToPersist = mutableListOf<Uri>()
-            it.clipData?.let { clipData ->
+        result.data?.let { intentData ->
+            val takeFlags: Int = (Intent.FLAG_GRANT_READ_URI_PERMISSION
+                    or Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
+            // Persist the URI permission for all URIs in the clip data
+            // if multiple images are selected,
+            // or for the single URI if only one image is selected
+            intentData.clipData?.let { clipData ->
                 for (i in 0 until clipData.itemCount) {
-                    urisToPersist.add(clipData.getItemAt(i).uri)
+                    context.contentResolver.takePersistableUriPermission(
+                        clipData.getItemAt(i).uri, takeFlags)
                 }
-            } ?: it.data?.let { uri ->
-                urisToPersist.add(uri)
-            }
-
-            urisToPersist.forEach { uri ->
+            } ?: intentData.data?.let { uri ->
                 context.contentResolver.takePersistableUriPermission(uri, takeFlags)
             }
-        }
+        } ?: return // No data to process
     }
 
     /**
