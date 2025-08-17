@@ -128,39 +128,35 @@ class ImageProcessingService @Inject constructor(
      * @return IMAGE_DUPLICATE or IMAGE_OK
      */
     fun checkIfFileAlreadyExists(originalFilePath: Uri, modifiedFilePath: Uri): Single<Int> {
-        return Single.zip(
-            // Handle SecurityException for picker URIs that have lost permission
-            Single.defer {
-                try {
-                    val inputStream = appContext.contentResolver.openInputStream(originalFilePath)
-                    if (inputStream != null) {
-                        checkDuplicateImage(inputStream = inputStream)
-                    } else {
-                        Single.just(IMAGE_OK)
-                    }
-                } catch (e: SecurityException) {
-                    Timber.w(e, "Security exception accessing picker URI - permission lost after app restart")
-                    Single.just(IMAGE_OK)
-                } catch (e: Exception) {
-                    Timber.e(e, "Error accessing original file URI")
-                    Single.just(IMAGE_OK)
+        // Safely open the original (picker) URI. If permission is gone after app restart,
+        // skip this leg and proceed with the modified file check to avoid crashing.
+        val originalCheck: Single<Int> =
+            Single.fromCallable { appContext.contentResolver.openInputStream(originalFilePath) }
+                .flatMap { inputStream ->
+                    if (inputStream != null) checkDuplicateImage(inputStream) else Single.just(IMAGE_OK)
                 }
-            },
-            // Handle exceptions for modified file path
-            Single.defer {
-                try {
-                    checkDuplicateImage(inputStream = fileUtilsWrapper.getFileInputStream(modifiedFilePath.path))
-                } catch (e: Exception) {
-                    Timber.e(e, "Error accessing modified file")
-                    Single.just(IMAGE_OK)
+                .onErrorReturn { t ->
+                    Timber.w(t, "Skipping original URI duplicate check (no permission or not found)")
+                    IMAGE_OK
                 }
-            }
-        ) { resultForOriginal, resultForDuplicate ->
+                .subscribeOn(Schedulers.io())
+
+        // Safely open the modified file stream as well; be defensive in case the temp/cached file
+        // was cleaned up while the app was backgrounded.
+        val modifiedCheck: Single<Int> =
+            Single.fromCallable { fileUtilsWrapper.getFileInputStream(modifiedFilePath.path) }
+                .flatMap { inputStream ->
+                    if (inputStream != null) checkDuplicateImage(inputStream) else Single.just(IMAGE_OK)
+                }
+                .onErrorReturn { t ->
+                    Timber.w(t, "Skipping modified file duplicate check (file missing)")
+                    IMAGE_OK
+                }
+                .subscribeOn(Schedulers.io())
+
+        return Single.zip(originalCheck, modifiedCheck) { resultForOriginal, resultForDuplicate ->
             return@zip if (resultForOriginal == IMAGE_DUPLICATE || resultForDuplicate == IMAGE_DUPLICATE)
                 IMAGE_DUPLICATE else IMAGE_OK
-        }.onErrorReturn { error ->
-            Timber.e(error, "Error during duplicate file check")
-            IMAGE_OK
         }
     }
 
