@@ -618,17 +618,7 @@ class UploadWorker(
     private fun saveIntoUploadedStatus(contribution: Contribution) {
         contribution.contentUri?.let {
             val imageSha1 = contribution.imageSHA1.toString()
-
-            // The local modified file might be gone after app restart.
-            // Be defensive: if the file is missing or cannot be opened, fall back to imageSha1.
-            val modifiedSha1: String = try {
-                val modifiedStream = fileUtilsWrapper.getFileInputStream(contribution.localUri?.path)
-                if (modifiedStream != null) fileUtilsWrapper.getSHA1(modifiedStream) else imageSha1
-            } catch (e: Exception) {
-                Timber.w(e, "Skipping modified SHA1 calculation (file missing/unavailable)")
-                imageSha1
-            }
-
+            val modifiedSha1 = fileUtilsWrapper.getSHA1(fileUtilsWrapper.getFileInputStream(contribution.localUri?.path))
             CoroutineScope(Dispatchers.IO).launch {
                 uploadedStatusDao.insertUploaded(
                     UploadedStatus(
