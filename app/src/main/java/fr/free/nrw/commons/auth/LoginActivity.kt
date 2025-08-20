@@ -14,7 +14,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
-import android.widget.TextView
 import androidx.annotation.ColorRes
 import androidx.annotation.StringRes
 import androidx.annotation.VisibleForTesting
@@ -274,11 +273,11 @@ class LoginActivity : AccountAuthenticatorActivity() {
         }
     }
 
-    private fun onEditorAction(textView: TextView, actionId: Int, keyEvent: KeyEvent?) =
-        if (binding!!.loginButton.isEnabled && isTriggerAction(actionId, keyEvent)) {
-            performLogin()
-            true
-        } else false
+//    private fun onEditorAction(textView: TextView, actionId: Int, keyEvent: KeyEvent?) =
+//        if (binding!!.loginButton.isEnabled && isTriggerAction(actionId, keyEvent)) {
+//            performLogin()
+//            true
+//        } else false
 
     private fun isTriggerAction(actionId: Int, keyEvent: KeyEvent?) =
         actionId == EditorInfo.IME_ACTION_NEXT || actionId == EditorInfo.IME_ACTION_DONE || keyEvent?.keyCode == KeyEvent.KEYCODE_ENTER
