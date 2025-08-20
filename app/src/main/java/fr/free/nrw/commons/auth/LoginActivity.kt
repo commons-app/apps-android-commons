@@ -461,8 +461,8 @@ class LoginActivity : AccountAuthenticatorActivity() {
 
     private fun onTextChanged(text: String) {
         val enabled =
-            binding!!.loginUsername.text!!.length != 0 && binding!!.loginPassword.text!!.length != 0 &&
-                    (BuildConfig.DEBUG || binding!!.loginTwoFactor.text!!.length != 0 || binding!!.loginTwoFactor.visibility != View.VISIBLE)
+            binding!!.loginUsername.text!!.isNotEmpty() && binding!!.loginPassword.text!!.isNotEmpty() &&
+                    (BuildConfig.DEBUG || binding!!.loginTwoFactor.text!!.isNotEmpty() || binding!!.loginTwoFactor.visibility != View.VISIBLE)
         binding!!.loginButton.isEnabled = enabled
     }
 
