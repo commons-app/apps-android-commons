@@ -44,29 +44,29 @@
   <string name="nearby_filter_state">Estado do Local</string>
   <string name="appwidget_img">Imagem do Dia</string>
   <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">a carregar %1$d ficheiro</item>
-    <item quantity="other">a carregar %1$d ficheiros</item>
+    <item quantity="one">a enviar %1$d ficheiro</item>
+    <item quantity="other">a enviar %1$d ficheiros</item>
   </plurals>
   <plurals name="contributions_subtitle">
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
-  <string name="starting_uploads">A iniciar carregamentos</string>
+  <string name="starting_uploads">A iniciar envios</string>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">A processar %d carregamento</item>
-    <item quantity="other">A processar %d carregamentos</item>
+    <item quantity="one">A processar %d envio</item>
+    <item quantity="other">A processar %d envios</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">%d carregamento</item>
-    <item quantity="other">%d carregamentos</item>
+    <item quantity="one">%d envio</item>
+    <item quantity="other">%d envios</item>
   </plurals>
   <plurals name="share_license_summary">
     <item quantity="one">Esta imagem será licenciada com a %1$s</item>
     <item quantity="other">Estas imagens serão licenciadas com a %1$s</item>
   </plurals>
   <plurals name="upload_count_title">
-    <item quantity="one">%1$d carregamento</item>
-    <item quantity="other">%1$d carregamentos</item>
+    <item quantity="one">%1$d envio</item>
+    <item quantity="other">%1$d envios</item>
   </plurals>
   <plurals name="receiving_shared_content">
     <item quantity="one">A receber conteúdo partilhado. O processamento da imagem pode demorar algum tempo, dependendo do tamanho da mesma e do seu dispositivo</item>
@@ -83,8 +83,8 @@
   <string name="upload_in_progress">Envio em progresso</string>
   <string name="username">Nome de utilizador</string>
   <string name="password">Palavra-passe</string>
-  <string name="login_credential">Entrar na sua conta da wiki Commons Beta</string>
-  <string name="login">Entrar</string>
+  <string name="login_credential">Inicie a sessão na sua conta de Commons Beta</string>
+  <string name="login">Iniciar sessão</string>
   <string name="forgot_password">Esqueceu-se da palavra-passe?</string>
   <string name="signup">Registar-se</string>
   <string name="logging_in_title">A iniciar sessão</string>
@@ -99,27 +99,27 @@
   <string name="suggest_unrestricted_mode">O carregamento de mais de três imagens funciona de maneira mais fiável quando a otimização da bateria está desligada. Desligue a otimização da bateria para a aplicação Commons nas configurações, de forma a ter uma experiência de carregamento mais fluida. \n\nPossíveis passos para desativar a otimização da bateria:\n\nEtapa 1: premir o botão \'Configurações\' abaixo.\n\nEtapa 2: mudar de \'Não otimizado\' para \'Todas as aplicações\'.\n\nEtapa 3: pesquisar \"Commons\" ou \"fr.free.nrw.commons\".\n\nEtapa 4: premir esta e selecionar \'Não otimizar\'.\n\nEtapa 5: pressionar \'Concluído\'.</string>
   <string name="authentication_failed">Falha na autenticação. Por favor faça login novamente.</string>
   <string name="uploading_started">Carregamento iniciado!</string>
-  <string name="uploading_queued">Fila de carregamento (modo de ligação limitada ativado)</string>
-  <string name="upload_completed_notification_title">%1$s carregado!</string>
-  <string name="upload_completed_notification_text">Toque para ver o seu carregamento</string>
-  <string name="upload_progress_notification_title_start">A carregar o ficheiro %s</string>
-  <string name="upload_progress_notification_title_in_progress">A carregar %1$s</string>
-  <string name="upload_progress_notification_title_finishing">A terminar o carregamento de %1$s</string>
-  <string name="upload_failed_notification_title">O carregamento de %1$s falhou</string>
-  <string name="upload_paused_notification_title">Carregamento de %1$s em pausa</string>
+  <string name="uploading_queued">Envio em fila (modo de ligação limitada ativado)</string>
+  <string name="upload_completed_notification_title">%1$s enviado!</string>
+  <string name="upload_completed_notification_text">Toque para ver o seu envio</string>
+  <string name="upload_progress_notification_title_start">A enviar o ficheiro %s</string>
+  <string name="upload_progress_notification_title_in_progress">A enviar %1$s</string>
+  <string name="upload_progress_notification_title_finishing">A terminar o envio de %1$s</string>
+  <string name="upload_failed_notification_title">O envio de %1$s falhou</string>
+  <string name="upload_paused_notification_title">Envio de %1$s pausado</string>
   <string name="upload_failed_notification_subtitle">Tocar para ver</string>
   <string name="upload_paused_notification_subtitle">Tocar para ver</string>
-  <string name="title_activity_contributions">Carregamentos recentes</string>
-  <string name="contribution_state_queued">Em espera</string>
-  <string name="contribution_state_failed">Falhado</string>
-  <string name="contribution_state_in_progress">%1$d%% transferido</string>
-  <string name="contribution_state_starting">A carregar</string>
+  <string name="title_activity_contributions">Meus Envios Recentes</string>
+  <string name="contribution_state_queued">Em fila</string>
+  <string name="contribution_state_failed">Falhou</string>
+  <string name="contribution_state_in_progress">%1$d%% concluído</string>
+  <string name="contribution_state_starting">A enviar</string>
   <string name="menu_from_gallery">Da galeria</string>
-  <string name="menu_from_camera">Tirar foto</string>
+  <string name="menu_from_camera">Tirar fotografia</string>
   <string name="menu_nearby">Nas redondezas</string>
-  <string name="provider_contributions">Carregamentos</string>
-  <string name="menu_copy_link">Copiar ligação</string>
-  <string name="menu_link_copied">A ligação foi copiada para a área de transferência</string>
+  <string name="provider_contributions">Meus envios</string>
+  <string name="menu_copy_link">Copiar hiperligação</string>
+  <string name="menu_link_copied">A hiperligação foi copiada para a área de transferência</string>
   <string name="menu_share">Partilhar</string>
   <string name="menu_view_file_page">Ver página do ficheiro</string>
   <string name="share_title_hint">Legenda (obrigatória)</string>
@@ -132,13 +132,14 @@
   <string name="login_failed_2fa_needed">Tem de fornecer o seu código de autenticação de dois fatores.</string>
   <string name="login_failed_email_auth_needed">Foi enviado um código de verificação de autenticação para o seu endereço de correio eletrónico. Por favor, forneça o código para iniciar a sessão.</string>
   <string name="login_failed_generic">O início de sessão falhou</string>
-  <string name="share_upload_button">Carregar</string>
+  <string name="share_upload_button">Enviar</string>
   <string name="multiple_share_base_title">Dê um nome a este conjunto</string>
   <string name="provider_modifications">Modificações</string>
   <string name="menu_upload_single">Carregar</string>
   <string name="categories_search_text_hint">Pesquisar categorias</string>
   <string name="depicts_search_text_hint">Procurar elementos que o seu conteúdo multimédia retrata (montanha, o Taj Mahal, etc.)</string>
   <string name="menu_save_categories">Gravar</string>
+  <string name="menu_overflow_desc">Menu de fluxo</string>
   <string name="refresh_button">Atualizar</string>
   <string name="display_list_button">Lista</string>
   <string name="contributions_subtitle_zero">(Ainda não foi carregado nenhum ficheiro)</string>
@@ -148,7 +149,7 @@
   <string name="no_parent_classes">%1$s não tem nenhuma classe progenitora</string>
   <string name="categories_skip_explanation">Adicione categorias para tornar as suas imagens mais fáceis de encontrar na wiki Wikimedia Commons.\nComece a escrever para adicionar categorias.</string>
   <string name="categories_activity_title">Categorias</string>
-  <string name="title_activity_settings">Configurações</string>
+  <string name="title_activity_settings">Definições</string>
   <string name="title_activity_signup">Registar-se</string>
   <string name="title_activity_featured_images">Imagens destacadas</string>
   <string name="title_activity_custom_selector">Seletor personalizado</string>
@@ -784,17 +785,21 @@
   <string name="file_saved_successfully">Ficheiro guardado com sucesso</string>
   <string name="do_you_want_to_open_gpx_file">Deseja abrir o ficheiro GPX?</string>
   <string name="do_you_want_to_open_kml_file">Deseja abrir o ficheiro KML?</string>
+  <string name="failed_to_save_kml_file">Não foi possível guardar o ficheiro KML.</string>
+  <string name="failed_to_save_gpx_file">Não foi possível guardar o ficheiro GPX.</string>
   <string name="saving_kml_file">Guardar Ficheiro KML</string>
   <string name="saving_gpx_file">Guardar Ficheiro GPX</string>
   <plurals name="custom_picker_images_selected_title_appendix">
     <item quantity="one">%d imagem selecionada</item>
     <item quantity="other">%d imagens selecionadas</item>
   </plurals>
+  <string name="multiple_files_depiction_header">Nota sobre múltiplos envios</string>
   <string name="nearby_wikitalk">Reporte um problema sobre este item na Wikidados</string>
   <string name="please_enter_some_comments">Por favor, insira alguns comentários</string>
   <string name="talk">Discussão</string>
   <string name="other_problem_or_information_please_explain_below">Outro problema ou informação (por favor, explique em baixo).</string>
   <string name="feedback_destination_note">O seu comentário é publicado na seguinte página da wiki: &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Mobile_app/Feedback\"&gt;Commons:Mobile app/Feedback&lt;/a&gt;</string>
+  <string name="cancelling_all_the_uploads">A cancelar todos os envios...</string>
   <string name="uploads">Envios</string>
   <string name="pending">Pendente</string>
   <string name="failed">Falhou</string>
@@ -803,6 +808,8 @@
   <string name="custom_selector_confirm_deletion_title">Confirmar Eliminação</string>
   <string name="custom_selector_delete">Eliminar</string>
   <string name="custom_selector_cancel">Cancelar</string>
+  <string name="error_while_loading">Erro ao carregar</string>
+  <string name="no_usages_found">Não foram encontradas utilizações</string>
   <string name="usages_on_commons_heading">Commons</string>
   <string name="usages_on_other_wikis_heading">Outras wikis</string>
   <string name="file_usages_container_heading">Utilização de ficheiro</string>

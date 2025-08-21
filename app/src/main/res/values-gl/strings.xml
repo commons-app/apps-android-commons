@@ -354,6 +354,7 @@
   <string name="statistics_featured">Imaxes destacadas</string>
   <string name="statistics_wikidata_edits">Imaxes vía \"Lugares próximos\"</string>
   <string name="level">Nivel %d</string>
+  <string name="profile_withLevel">%s (nivel %s)</string>
   <string name="images_uploaded">Imaxes cargadas</string>
   <string name="image_reverts">Imaxes non revertidas</string>
   <string name="images_used_by_wiki">Imaxes usadas</string>
