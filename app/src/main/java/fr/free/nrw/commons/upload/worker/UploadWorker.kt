@@ -618,8 +618,16 @@ class UploadWorker(
     private fun saveIntoUploadedStatus(contribution: Contribution) {
         contribution.contentUri?.let {
             val imageSha1 = contribution.imageSHA1.toString()
-            val modifiedSha1 = fileUtilsWrapper.getSHA1(fileUtilsWrapper.getFileInputStream(contribution.localUri?.path))
+            val modifiedSha1 = try {
+                fileUtilsWrapper.getSHA1(
+                    fileUtilsWrapper.getFileInputStream(contribution.localUri?.path),
+                )
+            } catch (e: Exception) {
+                Timber.w(e, "UploadedStatus: modified file missing/unreadable; falling back to original SHA1")
+                imageSha1
+            }
             CoroutineScope(Dispatchers.IO).launch {
+                try {
                 uploadedStatusDao.insertUploaded(
                     UploadedStatus(
                         imageSha1,
@@ -628,6 +636,9 @@ class UploadWorker(
                         true,
                     ),
                 )
+                } catch (e: Exception) {
+                    Timber.w(e, "UploadedStatus: insert failed; continuing")
+                }
             }
         }
     }
