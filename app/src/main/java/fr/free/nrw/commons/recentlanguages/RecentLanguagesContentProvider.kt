@@ -59,7 +59,7 @@ class RecentLanguagesContentProvider : CommonsDaggerContentProvider() {
             null,
             sortOrder
         )
-        cursor.setNotificationUri(requireContext().contentResolver, uri)
+        cursor.setNotificationUri(context?.contentResolver, uri)
         return cursor
     }
 
@@ -90,7 +90,7 @@ class RecentLanguagesContentProvider : CommonsDaggerContentProvider() {
             throw IllegalArgumentException("Parameter `selection` should be empty when updating an ID")
         }
 
-        requireContext().contentResolver?.notifyChange(uri, null)
+        context?.contentResolver?.notifyChange(uri, null)
         return rowsUpdated
     }
 
@@ -105,7 +105,7 @@ class RecentLanguagesContentProvider : CommonsDaggerContentProvider() {
             null,
             contentValues
         )
-        requireContext().contentResolver?.notifyChange(uri, null)
+        context?.contentResolver?.notifyChange(uri, null)
         return "$BASE_URI/$id".toUri()
     }
 
@@ -119,7 +119,7 @@ class RecentLanguagesContentProvider : CommonsDaggerContentProvider() {
             "language_code = ?",
             arrayOf(uri.lastPathSegment)
         )
-        requireContext().contentResolver?.notifyChange(uri, null)
+        context?.contentResolver?.notifyChange(uri, null)
         return rows
     }
 }

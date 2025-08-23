@@ -36,7 +36,7 @@ class BookmarkItemsContentProvider : CommonsDaggerContentProvider() {
             requireDb(), projection, selection,
             selectionArgs, null, null, sortOrder
         ).apply {
-            setNotificationUri(requireContext().contentResolver, uri)
+            setNotificationUri(context?.contentResolver, uri)
         }
     }
 
@@ -66,7 +66,7 @@ class BookmarkItemsContentProvider : CommonsDaggerContentProvider() {
             )
         }
 
-        requireContext().contentResolver.notifyChange(uri, null)
+        context?.contentResolver?.notifyChange(uri, null)
         return rowsUpdated
     }
 
@@ -75,7 +75,7 @@ class BookmarkItemsContentProvider : CommonsDaggerContentProvider() {
      */
     override fun insert(uri: Uri, contentValues: ContentValues?): Uri? {
         val id = requireDb().insert(TABLE_NAME, null, contentValues)
-        requireContext().contentResolver.notifyChange(uri, null)
+        context?.contentResolver?.notifyChange(uri, null)
         return "$BASE_URI/$id".toUri()
     }
 
@@ -89,7 +89,7 @@ class BookmarkItemsContentProvider : CommonsDaggerContentProvider() {
             "$COLUMN_ID = ?",
             arrayOf(uri.lastPathSegment)
         )
-        requireContext().contentResolver.notifyChange(uri, null)
+       context?.contentResolver?.notifyChange(uri, null)
         return rows
     }
 
