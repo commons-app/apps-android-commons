@@ -322,6 +322,7 @@
   <string name="statistics_featured">ߖߌ߬ߦߊ߬ߓߍ߫ ߟߊߓߊ߯ߙߕߊ ߟߎ߬</string>
   <string name="statistics_wikidata_edits">ߖߌ߬ߦߊ߬ߓߍ ߞߊߕߙߍ߬ \"ߛߌ߰ߢߐ߲߰ ߦߙߐ\" ߡߊ߬</string>
   <string name="level" fuzzy="true">ߞߊߓߋ</string>
+  <string name="profile_withLevel">%s (ߞߊߓߋ %s)</string>
   <string name="images_uploaded">ߖߌ߬ߦߊ߬ߓߍ ߓߘߊ߫ ߟߊߦߟߍ߬</string>
   <string name="image_reverts">ߖߌ߬ߦߊ߬ߓߍ ߡߊ߫ ߖߏ߰ߛߌ߬</string>
   <string name="images_used_by_wiki">ߖߌ߬ߦߊ߬ߓߍ߬ ߟߊߓߊ߯ߙߊߣߍ߲ ߠߎ߬</string>

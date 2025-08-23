@@ -22,6 +22,7 @@ import fr.free.nrw.commons.media.MediaDetailProvider
 import fr.free.nrw.commons.theme.BaseActivity
 import fr.free.nrw.commons.utils.FragmentUtils.isFragmentUIActive
 import fr.free.nrw.commons.utils.ViewUtil.hideKeyboard
+import fr.free.nrw.commons.utils.applyEdgeToEdgeAllInsets
 import io.reactivex.android.schedulers.AndroidSchedulers
 import timber.log.Timber
 import java.util.Date
@@ -48,6 +49,7 @@ class SearchActivity : BaseActivity(), MediaDetailProvider, CategoryImagesCallba
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySearchBinding.inflate(layoutInflater)
+        applyEdgeToEdgeAllInsets(binding!!.root)
         setContentView(binding!!.root)
 
         title = getString(R.string.title_activity_search)

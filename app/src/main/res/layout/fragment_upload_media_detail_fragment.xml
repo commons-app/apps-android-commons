@@ -14,6 +14,7 @@
       app:actualImageScaleType="fitXY" />
 
     <androidx.cardview.widget.CardView
+      android:id="@+id/media_detail_card_view"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_alignParentBottom="true"

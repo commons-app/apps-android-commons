@@ -10,6 +10,7 @@ import fr.free.nrw.commons.ViewPagerAdapter
 import fr.free.nrw.commons.contributions.ContributionDao
 import fr.free.nrw.commons.databinding.ActivityUploadProgressBinding
 import fr.free.nrw.commons.theme.BaseActivity
+import fr.free.nrw.commons.utils.applyEdgeToEdgeAllInsets
 import javax.inject.Inject
 
 /**
@@ -35,6 +36,7 @@ class UploadProgressActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityUploadProgressBinding.inflate(layoutInflater)
+        applyEdgeToEdgeAllInsets(binding.root)
         setContentView(binding.root)
         viewPagerAdapter = ViewPagerAdapter(this, supportFragmentManager)
         binding.uploadProgressViewPager.setAdapter(viewPagerAdapter)
