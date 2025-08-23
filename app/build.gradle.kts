@@ -24,8 +24,8 @@ android {
         applicationId = "fr.free.nrw.commons"
         minSdk = 21
         targetSdk = 35
-        versionCode = 1055
-        versionName = "5.6.1"
+        versionCode = 1056
+        versionName = "6.0.0"
 
         setProperty("archivesBaseName", "app-commons-v$versionName-" + getBranchName())
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
