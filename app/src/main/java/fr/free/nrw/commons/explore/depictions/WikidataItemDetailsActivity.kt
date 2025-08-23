@@ -24,6 +24,7 @@ import fr.free.nrw.commons.media.MediaDetailProvider
 import fr.free.nrw.commons.theme.BaseActivity
 import fr.free.nrw.commons.upload.structure.depictions.DepictModel
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
+import fr.free.nrw.commons.utils.applyEdgeToEdgeAllInsets
 import fr.free.nrw.commons.utils.handleWebUrl
 import fr.free.nrw.commons.wikidata.WikidataConstants
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -55,6 +56,7 @@ class WikidataItemDetailsActivity : BaseActivity(), MediaDetailProvider, Categor
         super.onCreate(savedInstanceState)
 
         binding = ActivityWikidataItemDetailsBinding.inflate(layoutInflater)
+        applyEdgeToEdgeAllInsets(binding!!.root)
         setContentView(binding!!.root)
         supportFragmentManager = getSupportFragmentManager()
         viewPagerAdapter = ViewPagerAdapter(this, getSupportFragmentManager())
