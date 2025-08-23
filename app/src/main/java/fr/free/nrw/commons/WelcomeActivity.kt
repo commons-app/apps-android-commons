@@ -9,6 +9,7 @@ import fr.free.nrw.commons.databinding.ActivityWelcomeBinding
 import fr.free.nrw.commons.databinding.PopupForCopyrightBinding
 import fr.free.nrw.commons.quiz.QuizActivity
 import fr.free.nrw.commons.theme.BaseActivity
+import fr.free.nrw.commons.utils.applyEdgeToEdgeAllInsets
 import fr.free.nrw.commons.utils.ConfigUtils.isBetaFlavour
 
 class WelcomeActivity : BaseActivity() {
@@ -23,6 +24,7 @@ class WelcomeActivity : BaseActivity() {
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityWelcomeBinding.inflate(layoutInflater)
+        applyEdgeToEdgeAllInsets(binding!!.welcomePager.rootView)
         setContentView(binding!!.root)
 
         isQuiz = intent?.extras?.getBoolean("isQuiz", false) ?: false
