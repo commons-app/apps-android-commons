@@ -117,6 +117,7 @@ class PendingUploadsFragment :
 
     /**
      * Cancels a specific upload after getting a confirmation from the user using Dialog.
+     * And if the deleted upload is the last one, will set app off paused, allowing a fresh new start for future uploads.
      */
     override fun deleteUpload(contribution: Contribution?) {
         val activity = requireActivity()
@@ -128,6 +129,8 @@ class PendingUploadsFragment :
             String.format(locale, activity.getString(R.string.yes)),
             String.format(locale, activity.getString(R.string.no)),
             {
+                if(contributionsList.size== 1)
+                {CommonsApplication.isPaused = false}
                 ViewUtil.showShortToast(context, R.string.cancelling_upload)
                 pendingUploadsPresenter.deleteUpload(
                     contribution, requireContext().applicationContext,
