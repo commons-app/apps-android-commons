@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* Albertoleoncio
 * Athena in Wonderland
 * B3rnas
 * Caiofernandes
@@ -794,7 +795,7 @@
     <item quantity="other">%d imagens selecionadas</item>
   </plurals>
   <string name="multiple_files_depiction_header">Nota sobre múltiplos envios</string>
-  <string name="nearby_wikitalk">Reporte um problema sobre este item na Wikidados</string>
+  <string name="nearby_wikitalk">Reporte um problema sobre este item no Wikidata</string>
   <string name="please_enter_some_comments">Por favor, insira alguns comentários</string>
   <string name="talk">Discussão</string>
   <string name="other_problem_or_information_please_explain_below">Outro problema ou informação (por favor, explique em baixo).</string>
