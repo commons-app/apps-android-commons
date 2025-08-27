@@ -166,7 +166,7 @@ class MediaDetailPagerFragment : CommonsDaggerSupportFragment(), OnPageChangeLis
         val mediaDetailFragment = adapter!!.currentMediaDetailFragment
         when (item.itemId) {
             R.id.menu_bookmark_current_image -> {
-                val bookmarkExists = bookmarkDao!!.updateBookmark(bookmark)
+                val bookmarkExists = bookmarkDao!!.updateBookmark(bookmark!!)
                 val snackbar = if (bookmarkExists) Snackbar.make(
                     requireView(),
                     R.string.add_bookmark,
@@ -436,7 +436,7 @@ ${m.pageTitle.canonicalUri}"""
                     bookmark = Bookmark(
                         m.filename,
                         m.getAuthorOrUser(),
-                        BookmarkPicturesContentProvider.uriForName(m.filename)
+                        BookmarkPicturesContentProvider.uriForName(m.filename!!)
                     )
                     updateBookmarkState(menu.findItem(R.id.menu_bookmark_current_image))
                     val contributionState = provider.getContributionStateAt(position)

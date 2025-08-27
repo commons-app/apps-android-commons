@@ -88,7 +88,7 @@ class BookmarkPicturesFragmentUnitTests {
         context = ApplicationProvider.getApplicationContext()
         OkHttpConnectionFactory.CLIENT = createTestClient()
         val activity = Robolectric.buildActivity(ProfileActivity::class.java).create().get()
-        fragment = BookmarkPicturesFragment.newInstance()
+        fragment = BookmarkPicturesFragment()
         val fragmentManager: FragmentManager = activity.supportFragmentManager
         val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
         fragmentTransaction.add(fragment, null)
@@ -156,13 +156,13 @@ class BookmarkPicturesFragmentUnitTests {
         val method: Method =
             BookmarkPicturesFragment::class.java.getDeclaredMethod("setAdapter", List::class.java)
         method.isAccessible = true
-        method.invoke(fragment, mediaList)
+        method.invoke(fragment, emptyList<Media>())
     }
 
     @Test
     @Throws(Exception::class)
     fun testGetAdapter() {
-        fragment.adapter
+        fragment.getAdapter()
     }
 
     @Test

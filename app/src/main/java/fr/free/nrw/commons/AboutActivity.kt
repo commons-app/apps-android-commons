@@ -19,6 +19,7 @@ import fr.free.nrw.commons.utils.ConfigUtils.getVersionNameWithSha
 import fr.free.nrw.commons.utils.DialogUtil.showAlertDialog
 import java.util.Collections
 import androidx.core.net.toUri
+import fr.free.nrw.commons.utils.applyEdgeToEdgeTopInsets
 import fr.free.nrw.commons.utils.handleWebUrl
 import fr.free.nrw.commons.utils.setUnderlinedText
 
@@ -47,6 +48,7 @@ class AboutActivity : BaseActivity() {
          */
         binding = ActivityAboutBinding.inflate(layoutInflater)
         val view: View = binding!!.root
+        applyEdgeToEdgeTopInsets(binding!!.toolbarLayout)
         setContentView(view)
 
         setSupportActionBar(binding!!.toolbarBinding.toolbar)

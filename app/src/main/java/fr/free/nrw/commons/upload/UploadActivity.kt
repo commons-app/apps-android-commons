@@ -38,6 +38,7 @@ import fr.free.nrw.commons.mwapi.UserClient
 import fr.free.nrw.commons.nearby.Place
 import fr.free.nrw.commons.settings.Prefs
 import fr.free.nrw.commons.theme.BaseActivity
+import fr.free.nrw.commons.utils.applyEdgeToEdgeAllInsets
 import fr.free.nrw.commons.upload.ThumbnailsAdapter.OnThumbnailDeletedListener
 import fr.free.nrw.commons.upload.categories.UploadCategoriesFragment
 import fr.free.nrw.commons.upload.depicts.DepictsFragment
@@ -177,6 +178,7 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
         presenter?.setupBasicKvStoreFactory { BasicKvStore(this@UploadActivity, it) }
 
         _binding = ActivityUploadBinding.inflate(layoutInflater)
+        applyEdgeToEdgeAllInsets(_binding!!.root, false)
         setContentView(binding.root)
 
         // Overrides the back button to make sure the user is prepared to lose their progress

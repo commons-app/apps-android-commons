@@ -2,6 +2,7 @@
 <!-- Authors:
 * Anoop rao
 * Anzx
+* Gopala Krishna A
 * Mahadevaiah Siddaiah
 * Omshivaprakash
 * VASANTH S.N.
@@ -10,8 +11,23 @@
 -->
 <resources>
   <string name="commons_facebook">ಕಾಮನ್ಸ್ ಫೇಸ್ಬುಕ್ ಪುಟ</string>
+  <string name="commons_github">ಕಾಮನ್ಸ್‌ನ ಗಿಟ್‍ಹಬ್ ಮೂಲ ಕೋಡ್</string>
+  <string name="commons_logo">ಕಾಮನ್ಸ್‌ ಲಾಂಛನ</string>
   <string name="commons_website">ಕಾಮನ್ಸ್ ಜಾಲತಾಣ</string>
+  <string name="exit_location_picker">ಸ್ಥಳ ಆಯ್ಕೆಯಿಂದ ನಿರ್ಗಮಿಸಿ</string>
   <string name="submit">ಸಲ್ಲಿಸಿ</string>
+  <string name="add_another_description">ಇನ್ನೊಂದು ವಿವರಣೆಯನ್ನು ಸೇರಿಸಿ</string>
+  <string name="add_new_contribution">ಹೊಸ ಕೊಡುಗೆಗಳನ್ನು ಸೇರಿಸಿ</string>
+  <string name="add_contribution_from_camera">ಕ್ಯಾಮೆರಾದಿಂದ ಕೊಡುಗೆಯನ್ನು ಸೇರಿಸಿ</string>
+  <string name="add_contribution_from_photos">ಫೋಟೋಗಳಿಂದ ಕೊಡುಗೆಯನ್ನು ಸೇರಿಸಿ</string>
+  <string name="add_contribution_from_contributions_gallery">ಹಿಂದಿನ ಕೊಡುಗೆಗಳ ಗ್ಯಾಲರಿಯಿಂದ ಕೊಡುಗೆಯನ್ನು ಸೇರಿಸಿ</string>
+  <string name="show_captions">ತಲೆಬರಹ</string>
+  <string name="row_item_language_description">ಭಾಷಾ ವಿವರಣೆ</string>
+  <string name="row_item_caption">ತಲೆಬರಹ</string>
+  <string name="show_captions_description">ವಿವರಣೆ</string>
+  <string name="nearby_row_image">ಚಿತ್ರ</string>
+  <string name="nearby_all">ಎಲ್ಲಾ</string>
+  <string name="nearby_filter_toggle">ಮೇಲಕ್ಕೆ ಟಾಗಲ್ ಮಾಡಿ</string>
   <string name="appwidget_img">ದಿನದ ಚಿತ್ರ</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">%1$d ಕಡತ ಅಪ್ಲೋಡ್ ಅಗುತ್ತಿದೆ</item>
