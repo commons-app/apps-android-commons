@@ -1,6 +1,7 @@
 package fr.free.nrw.commons
 
 import androidx.annotation.VisibleForTesting
+import fr.free.nrw.commons.BuildConfig
 import fr.free.nrw.commons.wikidata.cookies.CommonsCookieJar
 import okhttp3.Cache
 import okhttp3.Interceptor
@@ -40,9 +41,13 @@ object OkHttpConnectionFactory {
             .writeTimeout(120, TimeUnit.SECONDS)
             .readTimeout(120, TimeUnit.SECONDS)
             .addInterceptor(HttpLoggingInterceptor().apply {
-                setLevel(HttpLoggingInterceptor.Level.BASIC)
-                redactHeader("Authorization")
-                redactHeader("Cookie")
+                if (BuildConfig.DEBUG) {
+                    setLevel(HttpLoggingInterceptor.Level.BODY)
+                } else {
+                    setLevel(HttpLoggingInterceptor.Level.BASIC)
+                    redactHeader("Authorization")
+                    redactHeader("Cookie")
+                }
             })
             .addInterceptor(UnsuccessfulResponseInterceptor())
             .addInterceptor(CommonHeaderRequestInterceptor())
