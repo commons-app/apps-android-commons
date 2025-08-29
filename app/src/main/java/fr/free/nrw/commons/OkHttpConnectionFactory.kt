@@ -42,7 +42,7 @@ object OkHttpConnectionFactory {
             .readTimeout(120, TimeUnit.SECONDS)
             .addInterceptor(HttpLoggingInterceptor().apply {
                 if (BuildConfig.DEBUG) {
-                    setLevel(HttpLoggingInterceptor.Level.BODY)
+                    setLevel(HttpLoggingInterceptor.Level.HEADERS)
                 } else {
                     setLevel(HttpLoggingInterceptor.Level.BASIC)
                     redactHeader("Authorization")
