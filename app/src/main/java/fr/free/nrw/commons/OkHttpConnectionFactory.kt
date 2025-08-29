@@ -50,7 +50,7 @@ object OkHttpConnectionFactory {
     }
 }
 
-private class CommonHeaderRequestInterceptor : Interceptor {
+class CommonHeaderRequestInterceptor : Interceptor {
     @Throws(IOException::class)
     override fun intercept(chain: Interceptor.Chain): Response {
         val request = chain.request().newBuilder()
