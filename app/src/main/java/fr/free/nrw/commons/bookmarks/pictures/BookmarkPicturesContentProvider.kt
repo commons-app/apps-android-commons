@@ -36,7 +36,7 @@ class BookmarkPicturesContentProvider : CommonsDaggerContentProvider() {
             requireDb(), projection, selection,
             selectionArgs, null, null, sortOrder
         )
-        cursor.setNotificationUri(requireContext().contentResolver, uri)
+        cursor.setNotificationUri(context?.contentResolver, uri)
 
         return cursor
     }
@@ -66,7 +66,7 @@ class BookmarkPicturesContentProvider : CommonsDaggerContentProvider() {
                 "Parameter `selection` should be empty when updating an ID"
             )
         }
-        requireContext().contentResolver.notifyChange(uri, null)
+        context?.contentResolver?.notifyChange(uri, null)
         return rowsUpdated
     }
 
@@ -75,7 +75,7 @@ class BookmarkPicturesContentProvider : CommonsDaggerContentProvider() {
      */
     override fun insert(uri: Uri, contentValues: ContentValues?): Uri {
         val id = requireDb().insert(TABLE_NAME, null, contentValues)
-        requireContext().contentResolver.notifyChange(uri, null)
+        context?.contentResolver?.notifyChange(uri, null)
         return "$BASE_URI/$id".toUri()
     }
 
@@ -85,7 +85,7 @@ class BookmarkPicturesContentProvider : CommonsDaggerContentProvider() {
             "media_name = ?",
             arrayOf(uri.lastPathSegment)
         )
-        requireContext().contentResolver.notifyChange(uri, null)
+        context?.contentResolver?.notifyChange(uri, null)
         return rows
     }
 

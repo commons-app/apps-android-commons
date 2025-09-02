@@ -649,13 +649,18 @@
   <string name="pausing_upload">Pauzanta sendajo...</string>
   <string name="cancelling_upload">Nuliganta sendajo...</string>
   <string name="cancel_upload">Cesar kargajo</string>
+  <string name="limited_connection_explanation">Vu kapabligesis l\'uzo di limitizita konekto. Omna senduri pauzesis e durigos nur kande vu deskapabligos ta uzo.</string>
   <string name="limited_connection_is_on">Kapabligesis por uzar limitizita konekti.</string>
   <string name="media_details_tooltip">Voluntez skribar kurta titulo deskriptanta quon vua imajo montras. En la deskripto, explikez pro quo la fotografuro esas interesanta, tipala o rara, ed explikez la kuntexto, videbla o ne. Skriptez tan exakta kam posibla.</string>
+  <string name="depicts_tooltip">Voluntez trovar e selektar omna konceptaji quan ca imajo reprezentas. Esez plu preciza kam vu povas. Se ta imajo montras diversa kozi, selektez precize omna ek li. Ne uzez nepreciza deskripturi, se specifika deskripturi existas.</string>
+  <string name="categories_tooltip">Voluntez selektar la kategorii konvenanta. Diferante de deskripturi, kategorii nur existas en Angla linguo.</string>
+  <string name="license_tooltip">En Commons, vua imaji povos riuzesar ed adaptesar da omni. Ka vu deziras renuncar omna autoroyuri? Ka vu deziras ke l\'imajo atribuesos a vu? Ka vu deziras adapti por uzar la sama licenco?</string>
   <string name="depicts_step_title">Montras</string>
   <string name="license_step_title">Licencizo di \'\'media\'\'</string>
   <string name="media_detail_step_title">Detali pri \'\'media\'\'</string>
   <string name="menu_view_category_page">Vidar kategorio-pagino</string>
   <string name="menu_view_item_page">Vidar pagino dil arkivo</string>
+  <string name="app_ui_language">Idiomo di vua interfacio</string>
   <string name="remove">Removar titulo e deskripto</string>
   <string name="read_help_link">Lektez pluse</string>
   <string name="media_detail_in_all_languages">En omna idiomi</string>
@@ -676,6 +681,7 @@
   <string name="done">Facita</string>
   <string name="back">Retroirar</string>
   <string name="welcome_custom_picture_selector_text">Bonveno a personalizita selektilo di imaji</string>
+  <string name="custom_selector_info_text1">Ica selektilo montras quala imaji vu ja sendis a Commons.</string>
   <string name="welcome_custom_selector_ok">Ecelanta</string>
   <string name="custom_selector_already_uploaded_image_text">Ca imajo ja sendesis a Commons.</string>
   <string name="custom_selector_over_limit_warning">Por teknikala motivi, l\'utensilo \'\'app\'\' ne povas fidinde sendar plua kam %1$d pikturi samatempe. La limito %1$d superesis per %2$d.</string>
@@ -767,9 +773,13 @@
     <item quantity="one">%d imajo selektita</item>
     <item quantity="other">%d imaji selektita</item>
   </plurals>
+  <string name="please_enter_some_comments">Voluntez facar kelka komenti</string>
   <string name="talk">Diskuto</string>
   <string name="write_something_about_the_item">Dicez irgu pri l\'arkivo \'%1$s\'. Ol esos videbla publike.</string>
+  <string name="does_not_exist_anymore_no_picture_can_ever_be_taken_of_it">\'%1$s\' ne pluse existas, nula imajo povos rekuperesar de ol.</string>
   <string name="is_at_a_different_place_wikidata">\'%1$s\' esas en diferanta loko.</string>
+  <string name="is_at_a_different_place_please_specify_the_correct_place_below_if_possible_tell_us_the_correct_latitude_longitude">\'%1$s\' esas en diferanta loko. Voluntez mencionar la korekta loko adinfre e, se posibla, skribez la korekta latitudo e longitudo.</string>
+  <string name="other_problem_or_information_please_explain_below">Altra problemo od informo (voluntez explikar adinfre).</string>
   <string name="cancelling_all_the_uploads">Extinganta la tota sendaji...</string>
   <string name="uploads">Arkivi sendita</string>
   <string name="pending">Vartanta</string>
@@ -799,6 +809,8 @@
   <string name="caption">Deskripto-texto</string>
   <string name="caption_copied_to_clipboard">Deskripto-texto kopiita a \'\'clipboard\'\'</string>
   <string name="congratulations_all_pictures_in_this_album_have_been_either_uploaded_or_marked_as_not_for_upload">Gratuli! Omna imaji en ca albumo sive sendesis, sive indikesis por ne sendar.</string>
+  <string name="show_in_nearby">Montrez en Proxima (\'\'Nearby\'\')</string>
   <string name="image_tag_line_created_and_uploaded_by">Kreesis e sendesis da: %1$s</string>
   <string name="image_tag_line_created_by_and_uploaded_by">Kreita da %1$s e sendita da %2$s</string>
+  <string name="nominated_for_deletion_btn">Indikita por Efaco</string>
 </resources>

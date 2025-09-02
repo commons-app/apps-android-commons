@@ -21,6 +21,7 @@ import fr.free.nrw.commons.databinding.ActivityProfileBinding
 import fr.free.nrw.commons.profile.achievements.AchievementsFragment
 import fr.free.nrw.commons.profile.leaderboard.LeaderboardFragment
 import fr.free.nrw.commons.theme.BaseActivity
+import fr.free.nrw.commons.utils.applyEdgeToEdgeAllInsets
 import fr.free.nrw.commons.utils.DialogUtil
 import java.io.File
 import java.io.FileOutputStream
@@ -61,6 +62,7 @@ class ProfileActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
 
         binding = ActivityProfileBinding.inflate(layoutInflater)
+        applyEdgeToEdgeAllInsets(binding.root)
         setContentView(binding.root)
         setSupportActionBar(binding.toolbarBinding.toolbar)
 

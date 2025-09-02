@@ -50,7 +50,7 @@ class RecentSearchesContentProvider : CommonsDaggerContentProvider() {
             else -> throw IllegalArgumentException("Unknown URI$uri")
         }
 
-        cursor.setNotificationUri(requireContext().contentResolver, uri)
+        cursor.setNotificationUri(context?.contentResolver, uri)
 
         return cursor
     }
@@ -67,7 +67,7 @@ class RecentSearchesContentProvider : CommonsDaggerContentProvider() {
 
             else -> throw IllegalArgumentException("Unknown URI: $uri")
         }
-        requireContext().contentResolver.notifyChange(uri, null)
+        context?.contentResolver?.notifyChange(uri, null)
         return "$BASE_URI/$id".toUri()
     }
 
@@ -88,7 +88,7 @@ class RecentSearchesContentProvider : CommonsDaggerContentProvider() {
 
             else -> throw IllegalArgumentException("Unknown URI - $uri")
         }
-        requireContext().contentResolver.notifyChange(uri, null)
+        context?.contentResolver?.notifyChange(uri, null)
         return rows
     }
 
@@ -108,7 +108,7 @@ class RecentSearchesContentProvider : CommonsDaggerContentProvider() {
         }
         sqlDB.setTransactionSuccessful()
         sqlDB.endTransaction()
-        requireContext().contentResolver.notifyChange(uri, null)
+        context?.contentResolver?.notifyChange(uri, null)
         return values.size
     }
 
@@ -147,7 +147,7 @@ class RecentSearchesContentProvider : CommonsDaggerContentProvider() {
 
             else -> throw IllegalArgumentException("Unknown URI: $uri with type $uriType")
         }
-        requireContext().contentResolver.notifyChange(uri, null)
+        context?.contentResolver?.notifyChange(uri, null)
         return rowsUpdated
     }
 
