@@ -12,6 +12,7 @@
 * Dream Indigo
 * Emabarto01
 * Gianfranco
+* Giorgx12
 * Lorelai87
 * Lorem Ipsum
 * Luca.favorido
@@ -143,7 +144,7 @@
   <string name="categories_search_text_hint">Cerca categorie</string>
   <string name="depicts_search_text_hint">Cerca elementi che il tuo file rappresenta (montagna, Taj Mahal, ecc.)</string>
   <string name="menu_save_categories">Salva</string>
-  <string name="menu_overflow_desc">Menu overflow</string>
+  <string name="menu_overflow_desc">Menu di overflow</string>
   <string name="refresh_button">Aggiorna</string>
   <string name="display_list_button">Elenco</string>
   <string name="contributions_subtitle_zero">(Non è stato ancora caricato niente)</string>
@@ -233,6 +234,7 @@
   <string name="media_detail_description">Descrizione</string>
   <string name="media_detail_discussion">Discussione</string>
   <string name="media_detail_author">Autore</string>
+  <string name="media_detail_uploader">Caricato da</string>
   <string name="media_detail_uploaded_date">Data di caricamento</string>
   <string name="media_detail_license">Licenza</string>
   <string name="media_detail_coordinates">Coordinate</string>
@@ -564,6 +566,10 @@
   <string name="category_edit_button_text">Aggiorna le categorie</string>
   <string name="depictions_edit_helper_make_edit_toast">Tentativo di aggiornare le rappresentazioni.</string>
   <string name="depictions_edit_helper_show_edit_title">Modifica le raffigurazioni</string>
+  <plurals name="depictions_edit_helper_show_edit_message_if">
+    <item quantity="one">Viene aggiunta la raffigurazione %1$s.</item>
+    <item quantity="other">Vengono aggiunte le raffigurazioni %1$s.</item>
+  </plurals>
   <string name="depictions_edit_helper_edit_message_else">Non è stato possibile aggiungere descrizioni.</string>
   <string name="coordinates_edit_helper_make_edit_toast">Tentativo di aggiornare le coordinate.</string>
   <string name="coordinates_edit_helper_show_edit_title">Coordinate aggiornate</string>
@@ -596,6 +602,7 @@
   <string name="title_for_child_classes">CLASSI FIGLIE</string>
   <string name="title_for_parent_classes">CLASSI SUPERIORI</string>
   <string name="title_for_subcategories">Sottocategorie</string>
+  <string name="title_for_parent_categories">CATEGORIE SUPERIORI</string>
   <string name="upload_nearby_place_found_title">Rinvenuto luogo nei pressi</string>
   <string name="upload_nearby_place_found_description_plural">Queste sono immagini di %1$s?</string>
   <string name="upload_nearby_place_found_description_singular">Questa è un\'immagine di %1$s?</string>
@@ -819,10 +826,12 @@
   <string name="custom_selector_folder_deleted_success">Cartella %1$s cancellata correttamente</string>
   <string name="custom_selector_folder_deleted_failure">Impossibile eliminare la cartella %1$s</string>
   <string name="custom_selector_error_trashing_folder_contents">Impossibile eliminare i contenuti nella cartella: %1$s</string>
+  <string name="custom_selector_folder_not_found_error">Impossibile recuperare il percorso della cartella per l\'ID bucket: %1$d</string>
   <string name="red_pin">Questo posto non ha ancora una foto, scattane una!</string>
   <string name="green_pin">Questo posto ha già una foto.</string>
   <string name="grey_pin">Ora controlliamo se questo posto ha una foto.</string>
   <string name="error_while_loading">Errore durante il caricamento</string>
+  <string name="no_usages_found">Nessun uso trovato</string>
   <string name="usages_on_commons_heading">Commons</string>
   <string name="usages_on_other_wikis_heading">Altri wiki</string>
   <string name="file_usages_container_heading">Utilizzi del file</string>
