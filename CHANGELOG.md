@@ -1,5 +1,12 @@
 # Wikimedia Commons for Android
 
+## v6.0.1
+
+### What's changed
+* The app now supports Android 15 with an improved user interface
+* Enhanced Nearby with robust and more reliable labels
+* Bug fixes and stability improvements
+
 ## v5.6.1
 
 ### What's changed
