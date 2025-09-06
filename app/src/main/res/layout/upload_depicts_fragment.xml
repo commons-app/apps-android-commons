@@ -124,38 +124,35 @@
     </LinearLayout>
 
     <View
-        android:id="@+id/button_divider"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_above="@+id/depicts_next"
-        android:background="@color/divider_grey" />
+      android:id="@+id/button_divider"
+      android:layout_width="match_parent"
+      android:layout_height="1dp"
+      android:layout_above="@+id/navigation_buttons_container"
+      android:background="@color/divider_grey" />
 
-    <Button
-      android:id="@+id/depicts_next"
-      android:layout_width="wrap_content"
+    <LinearLayout
+      android:id="@+id/navigation_buttons_container"
+      android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:layout_alignParentEnd="true"
-      android:layout_alignParentRight="true"
+      android:paddingHorizontal="@dimen/medium_padding"
+      android:paddingVertical="@dimen/small_padding"
       android:layout_alignParentBottom="true"
-      android:layout_marginEnd="24dp"
-      android:layout_marginRight="24dp"
-      android:layout_marginBottom="24dp"
-      android:contentDescription="@string/next"
-      android:text="@string/next"
-      android:textColor="@android:color/white" />
+      android:gravity="end">
+        <Button
+          android:id="@+id/depicts_previous"
+          style="@style/Widget.AppCompat.Button.Borderless"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginEnd="@dimen/standard_gap"
+          android:contentDescription="@string/previous"
+          android:text="@string/previous" />
 
-    <Button
-      android:id="@+id/depicts_previous"
-      style="@style/Widget.AppCompat.Button.Borderless"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_alignParentBottom="true"
-      android:layout_marginEnd="@dimen/standard_gap"
-      android:layout_marginRight="@dimen/standard_gap"
-      android:layout_marginBottom="24dp"
-      android:layout_toStartOf="@id/depicts_next"
-      android:layout_toLeftOf="@id/depicts_next"
-      android:contentDescription="@string/previous"
-      android:text="@string/previous" />
-
+        <Button
+          android:id="@+id/depicts_next"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:contentDescription="@string/next"
+          android:text="@string/next"
+          android:textColor="@android:color/white" />
+    </LinearLayout>
 </RelativeLayout>
