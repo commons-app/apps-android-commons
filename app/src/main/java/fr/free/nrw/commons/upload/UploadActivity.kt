@@ -13,6 +13,7 @@ import android.os.Build.VERSION_CODES
 import android.os.Bundle
 import android.provider.Settings
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.CheckBox
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AlertDialog
@@ -805,6 +806,19 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
 
     override fun onNextButtonClicked(index: Int) {
         if (index < fragments!!.size - 1) {
+            // Hide the keyboard before navigating to Media License screen
+            val isUploadCategoriesFragment = fragments!!.getOrNull(index)?.let {
+                it is UploadCategoriesFragment
+            } ?: false
+            if (isUploadCategoriesFragment) {
+                val inputMethodManager = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+                currentFocus?.let { focusedView ->
+                    inputMethodManager.hideSoftInputFromWindow(
+                        focusedView.windowToken,
+                        InputMethodManager.HIDE_NOT_ALWAYS
+                    )
+                }
+            }
             binding.vpUpload.setCurrentItem(index + 1, false)
             fragments!![index + 1].onBecameVisible()
             (binding.rvThumbnails.layoutManager as LinearLayoutManager)
