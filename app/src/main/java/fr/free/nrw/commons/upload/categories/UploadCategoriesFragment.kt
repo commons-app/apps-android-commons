@@ -26,6 +26,7 @@ import fr.free.nrw.commons.media.MediaDetailFragment
 import fr.free.nrw.commons.upload.UploadActivity
 import fr.free.nrw.commons.upload.UploadBaseFragment
 import fr.free.nrw.commons.utils.DialogUtil.showAlertDialog
+import fr.free.nrw.commons.utils.handleKeyboardInsets
 import fr.free.nrw.commons.wikidata.WikidataConstants.SELECTED_NEARBY_PLACE_CATEGORY
 import io.reactivex.Notification
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -69,6 +70,7 @@ class UploadCategoriesFragment : UploadBaseFragment(), CategoriesContract.View {
         savedInstanceState: Bundle?
     ): View? {
         binding = UploadCategoriesFragmentBinding.inflate(inflater, container, false)
+        binding!!.llContainerButtons.handleKeyboardInsets()
         return binding!!.root
     }
 
