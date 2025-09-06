@@ -101,7 +101,6 @@
       android:name=".upload.UploadActivity"
       android:configChanges="orientation|screenSize|keyboard"
       android:exported="true"
-      android:hardwareAccelerated="false"
       android:icon="@mipmap/ic_launcher"
       android:windowSoftInputMode="adjustResize">
       <intent-filter android:label="@string/intent_share_upload_label">
