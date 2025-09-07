@@ -299,36 +299,11 @@ class ImageAdapter(
     ) {
         val sharedPreferences: SharedPreferences =
             context.getSharedPreferences(CUSTOM_SELECTOR_PREFERENCE_KEY, 0)
-        val switchState =
-            sharedPreferences.getBoolean(SHOW_ALREADY_ACTIONED_IMAGES_PREFERENCE_KEY, true)
-
-        // While switch is turned off, lets user click on image only if the position is
-        // added inside map
-        if (!switchState) {
-            if (actionableImagesMap.size > position) {
-                selectOrRemoveImage(holder, position)
-            }
-        } else {
-            selectOrRemoveImage(holder, position)
-        }
-    }
-
-    /**
-     * Handle click event on an image, update counter on images.
-     */
-    private fun selectOrRemoveImage(
-        holder: ImageViewHolder,
-        position: Int,
-    ) {
-        val sharedPreferences: SharedPreferences =
-            context.getSharedPreferences(CUSTOM_SELECTOR_PREFERENCE_KEY, 0)
         val showAlreadyActionedImages =
             sharedPreferences.getBoolean(SHOW_ALREADY_ACTIONED_IMAGES_PREFERENCE_KEY, true)
 
-        // Getting clicked index from all images index when show_already_actioned_images
-        // switch is on
+        // Single Selection mode
         if (singleSelection) {
-            // If single selection mode, clear previous selection and select only the new one
             if (selectedImages.isNotEmpty() && (selectedImages[0] != images[position])) {
                 val prevIndex = images.indexOf(selectedImages[0])
                 selectedImages.clear()
@@ -348,6 +323,7 @@ class ImageAdapter(
                 numberOfSelectedImagesMarkedAsNotForUpload--
             }
             notifyItemChanged(position, ImageUnselected())
+            imageSelectListener.onSelectedImagesChanged(selectedImages, numberOfSelectedImagesMarkedAsNotForUpload)  // Added this line to notify the activity
         } else {
             val image = images[position]
             scope.launch(ioDispatcher) {
