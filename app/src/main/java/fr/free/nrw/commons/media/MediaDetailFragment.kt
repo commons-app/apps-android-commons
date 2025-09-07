@@ -541,6 +541,7 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
             }
         )
         binding.progressBarEdit.visibility = View.GONE
+        binding.descriptionEdit.visibility = View.VISIBLE
     }
 
     override fun onConfigurationChanged(newConfig: Configuration) {
