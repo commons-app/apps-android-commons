@@ -10,6 +10,7 @@ import androidx.constraintlayout.widget.Group
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.simplecityapps.recyclerview_fastscroll.views.FastScrollRecyclerView
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.contributions.Contribution
@@ -165,13 +166,9 @@ class ImageAdapter(
             val selectedIndex: Int =
                 if (showAlreadyActionedImages) {
                     ImageHelper.getIndex(selectedImages, image)
-
-                    // Getting selected index when switch is off
                 } else if (actionableImagesMap.size > position) {
                     ImageHelper
                         .getIndex(selectedImages, ArrayList(actionableImagesMap.values)[position])
-
-                    // For any other case return -1
                 } else {
                     -1
                 }
@@ -204,8 +201,6 @@ class ImageAdapter(
                             uploadingContributionList
                         )
                         _isLoadingImages.value = false
-                        // If the position is already visited, that means the image is already present
-                        // inside map, so it will fetch the image from the map and load in the holder
                     } else {
                         val actionableImages: List<Image> = ArrayList(actionableImagesMap.values)
                         if (actionableImages.size > position) {
@@ -214,17 +209,16 @@ class ImageAdapter(
                                 .with(holder.image)
                                 .load(image.uri)
                                 .thumbnail(0.3f)
+                                .apply(RequestOptions().override(300, 300)) // Downscale to 300x300
                                 .into(holder.image)
                         }
                     }
-
-                    // If switch is turned off, it just fetches the image from all images without any
-                    // further operations
                 } else {
                     Glide
                         .with(holder.image)
                         .load(image.uri)
                         .thumbnail(0.3f)
+                        .apply(RequestOptions().override(300, 300)) // Downscale to 300x300
                         .into(holder.image)
                 }
             }
@@ -276,13 +270,11 @@ class ImageAdapter(
                     .with(holder.image)
                     .load(allImages[next].uri)
                     .thumbnail(0.3f)
+                    .apply(RequestOptions().override(300, 300)) // Downscale to 300x300
                     .into(holder.image)
                 notifyItemInserted(position)
                 notifyItemRangeChanged(position, itemCount + 1)
             }
-
-            // If next actionable image is not found, that means searching is
-            // complete till end, and it will stop searching.
         } else {
             reachedEndOfFolder = true
             notifyItemRemoved(position)
@@ -299,36 +291,11 @@ class ImageAdapter(
     ) {
         val sharedPreferences: SharedPreferences =
             context.getSharedPreferences(CUSTOM_SELECTOR_PREFERENCE_KEY, 0)
-        val switchState =
-            sharedPreferences.getBoolean(SHOW_ALREADY_ACTIONED_IMAGES_PREFERENCE_KEY, true)
-
-        // While switch is turned off, lets user click on image only if the position is
-        // added inside map
-        if (!switchState) {
-            if (actionableImagesMap.size > position) {
-                selectOrRemoveImage(holder, position)
-            }
-        } else {
-            selectOrRemoveImage(holder, position)
-        }
-    }
-
-    /**
-     * Handle click event on an image, update counter on images.
-     */
-    private fun selectOrRemoveImage(
-        holder: ImageViewHolder,
-        position: Int,
-    ) {
-        val sharedPreferences: SharedPreferences =
-            context.getSharedPreferences(CUSTOM_SELECTOR_PREFERENCE_KEY, 0)
         val showAlreadyActionedImages =
             sharedPreferences.getBoolean(SHOW_ALREADY_ACTIONED_IMAGES_PREFERENCE_KEY, true)
 
-        // Getting clicked index from all images index when show_already_actioned_images
-        // switch is on
+        // Single Selection mode
         if (singleSelection) {
-            // If single selection mode, clear previous selection and select only the new one
             if (selectedImages.isNotEmpty() && (selectedImages[0] != images[position])) {
                 val prevIndex = images.indexOf(selectedImages[0])
                 selectedImages.clear()
@@ -348,6 +315,7 @@ class ImageAdapter(
                 numberOfSelectedImagesMarkedAsNotForUpload--
             }
             notifyItemChanged(position, ImageUnselected())
+            imageSelectListener.onSelectedImagesChanged(selectedImages, numberOfSelectedImagesMarkedAsNotForUpload)  // Added this line to notify the activity
         } else {
             val image = images[position]
             scope.launch(ioDispatcher) {
@@ -474,8 +442,6 @@ class ImageAdapter(
 
     /**
      * Returns the total number of items in the data set held by the adapter.
-     *
-     * @return The total number of items in this adapter.
      */
     override fun getItemCount(): Int {
         val sharedPreferences: SharedPreferences =
@@ -483,17 +449,10 @@ class ImageAdapter(
         val showAlreadyActionedImages =
             sharedPreferences.getBoolean(SHOW_ALREADY_ACTIONED_IMAGES_PREFERENCE_KEY, true)
 
-        // While switch is on initializes the holder with all images size
         return if (showAlreadyActionedImages) {
             allImages.size
-
-            // While switch is off and searching for next actionable has ended, initializes the holder
-            // with size of all actionable images
         } else if (actionableImagesMap.size == allImages.size || reachedEndOfFolder) {
             actionableImagesMap.size
-
-            // While switch is off, initializes the holder with and extra view holder so that finding
-            // and addition of the next actionable image in the adapter can be continued
         } else {
             actionableImagesMap.size + 1
         }
@@ -611,7 +570,6 @@ class ImageAdapter(
 
         /**
          * Called by the DiffUtil when it wants to check whether two items have the same data.
-         * DiffUtil uses this information to detect if the contents of an item has changed.
          */
         override fun areContentsTheSame(
             oldItemPosition: Int,
