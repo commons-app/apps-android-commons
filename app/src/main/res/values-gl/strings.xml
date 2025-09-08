@@ -272,7 +272,7 @@
   <string name="nearby_location_not_available">A localización non está dispoñible. A identificación de sitios próximos pode non funcionar correctamente.</string>
   <string name="location_permission_rationale_nearby">Precísase permiso para amosar unha lista de lugares preto de aquí</string>
   <string name="nearby_directions">Indicacións</string>
-  <string name="nearby_wikidata">WIKIDATA</string>
+  <string name="nearby_wikidata">Wikidata</string>
   <string name="nearby_wikipedia">Wikipedia</string>
   <string name="nearby_commons">COMMONS</string>
   <string name="about_rate_us">Avalíenos</string>
