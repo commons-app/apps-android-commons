@@ -64,6 +64,9 @@ class ExploreFragment : CommonsDaggerSupportFragment() {
             override fun onPageScrollStateChanged(state: Int) = Unit
             override fun onPageSelected(position: Int) {
                 binding!!.viewPager.canScroll = position != 2
+                if (position == 2) {
+                    mapRootFragment?.requestLocationIfNeeded()
+                }
             }
         })
         setTabs()
@@ -171,14 +174,11 @@ class ExploreFragment : CommonsDaggerSupportFragment() {
             // if on Map tab, show all menu options, else only show search
             binding!!.viewPager.addOnPageChangeListener(object : OnPageChangeListener {
                 override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) = Unit
-
+                override fun onPageScrollStateChanged(state: Int) = Unit
                 override fun onPageSelected(position: Int) {
-                    others.setVisible((position == 2))
-                }
-
-                override fun onPageScrollStateChanged(state: Int) {
-                    if (state == ViewPager.SCROLL_STATE_IDLE && binding!!.viewPager.currentItem == 2) {
-                        onPageSelected(2)
+                    binding!!.viewPager.canScroll = position != 2
+                    if (position == 2) {
+                        mapRootFragment?.requestLocationIfNeeded()
                     }
                 }
             })
