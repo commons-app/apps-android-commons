@@ -3,6 +3,7 @@
 * Gothicspeaker
 -->
 <resources>
+  <string name="crash_dialog_title">𐌲𐌰𐌼𐌰𐌹𐌽𐌰 𐌱𐍂𐌰𐌺</string>
   <string name="crash_dialog_text">𐍉. 𐌰𐌹𐍂𐌶𐌴𐌹 𐍅𐌰𐍂𐌸!</string>
   <string name="crash_dialog_comment_prompt">𐌲𐌰𐍄𐌰𐌹𐌷 𐌿𐌽𐍃 𐍈𐌰 𐌸𐌰𐍄𐌴𐌹 𐍄𐌰𐍅𐌹𐌳𐌴𐍃, 𐌸𐌰𐌽𐌿𐌷 𐌸𐌰𐌽 𐌳𐌰𐌹𐌻𐌴𐌹 𐌸𐌰𐌹𐍂𐌷 𐌴-𐌱𐍉𐌺𐍉𐍃. 𐌷𐌹𐌻𐍀𐌹𐌸 𐌿𐌽𐍃𐌰𐍂𐌰 𐌲𐌰𐌱𐍉𐍄𐌾𐌰𐌽!</string>
   <string name="crash_dialog_ok_toast">𐌰𐍅𐌹𐌻𐌹𐌿𐌳𐍉𐌼 𐌸𐌿𐍃!</string>
