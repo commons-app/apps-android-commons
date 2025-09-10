@@ -1,5 +1,13 @@
 # Wikimedia Commons for Android
 
+## v6.0.2
+
+### What's changed
+* Addressed a bug that prevented the keyboard from appearing in various text fields, such as on the upload wizard
+* Links in the "File usages" list are now clickable and will take you to the correct page.
+* Titles for file usages are now clearer and easier to understand
+* Bug fixes and stability improvements
+
 ## v6.0.1
 
 ### What's changed
