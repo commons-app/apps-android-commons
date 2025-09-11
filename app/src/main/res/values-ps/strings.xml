@@ -458,6 +458,7 @@
   <string name="account">گڼون</string>
   <string name="vanish_account">گڼون له منځه وړل</string>
   <string name="account_vanish_request_confirm_title">د گڼون له منځه وړلو گواښنه</string>
+  <string name="account_vanish_request_confirm">ورکېدل يوه &lt;b&gt;وروستۍ چاره ده&lt;/b&gt; او بايد &lt;b&gt;يوازې هغه وخت وکارول شي کله چې تاسو غواړئ د تل لپاره سمون پرېږدئ&lt;/b&gt; او همدارنگه تر شوني بريده د ځان اړوند پخوانۍ اړيکې پټې کړئ.&lt;br/&gt;&lt;br/&gt;په ويکي‌رسنۍ خونديځ کې گڼون ړنگول ستاسو د گڼون نوم بدلولو له لارې ترسره کېږي؛ ترڅو نور ستاسو ونډې ونه پېژني، دې چارې ته ورکېدل يا گڼون له منځه وړل وايي. &lt;b&gt;ورکېدل په پروژو کې په بشپړ ډول ستاسو د هويت او ونډو لرې کولو ډاډ نه درکوي&lt;/b&gt;.</string>
   <string name="caption">نيونگ</string>
   <string name="caption_copied_to_clipboard">نيونگ ټينگدړې ته ولمېسل شو</string>
   <string name="nominated_for_deletion_btn">ړنگولو ته نومول‌شوې</string>

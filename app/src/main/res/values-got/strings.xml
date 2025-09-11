@@ -73,6 +73,7 @@
   <string name="menu_retry_upload">𐌰𐍆𐍄𐍂𐌰 𐍃𐍉𐌺𐌾𐌰𐌽</string>
   <string name="menu_cancel_upload">𐍃𐍅𐌴𐌹𐌱𐌰𐌽</string>
   <string name="menu_download">𐌰𐍄𐌳𐍂𐌰𐌲𐌰𐌽</string>
+  <string name="preference_theme">𐌸𐌰𐌹𐌼𐌰</string>
   <string name="tutorial_1_subtext">𐍆𐍂𐌹𐍃𐌰𐌷𐍄𐌴𐌹𐍃 𐌸𐌴𐌹𐌽𐍉𐍃 𐌷𐌹𐌻𐍀𐌰𐌽𐌳 𐌻𐌰𐌹𐍃𐌴𐌹𐌽𐌰𐌹𐍃 𐌼𐌰𐌽𐌽𐌴 𐌹𐌽 𐍆𐌰𐌹𐍂𐍈𐌰𐌿!</string>
   <string name="tutorial_2_subtext_1">𐍅𐌹𐍃𐍄𐌴𐌹𐌲𐍉𐍃 𐍅𐌰𐌹𐌷𐍄𐍃 (𐌱𐌻𐍉𐌼𐌰𐌽𐍃, 𐌳𐌹𐌿𐌶𐌰, 𐍆𐌰𐌹𐍂𐌲𐌿𐌽𐌾𐌰)</string>
   <string name="tutorial_3_text">𐌱𐌹𐌳𐌾𐌰𐌼 𐌸𐌿𐌺 𐌽𐌹 𐌹𐌽𐌽𐌰𐍄𐌱𐌰𐌹𐍂𐌰𐌽:</string>
