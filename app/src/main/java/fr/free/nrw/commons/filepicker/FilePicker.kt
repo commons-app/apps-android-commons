@@ -208,6 +208,7 @@ object FilePicker : Constants {
     @JvmStatic
     fun handleExternalImagesPicked(data: Intent?, activity: Activity): List<UploadableFile> {
         return try {
+            takePersistableUriPermissions(activity, data)
             getFilesFromGalleryPictures(data, activity)
         } catch (e: IOException) {
             e.printStackTrace()
@@ -273,7 +274,7 @@ object FilePicker : Constants {
         callbacks: Callbacks
     ) {
         if (result.resultCode == Activity.RESULT_OK && !isPhoto(result.data)) {
-            takePersistableUriPermissions(activity, result)
+            takePersistableUriPermissions(activity, result.data)
             try {
                 val files = getFilesFromGalleryPictures(result.data, activity)
                 callbacks.onImagesPicked(files, ImageSource.DOCUMENTS, restoreType(activity))
@@ -295,8 +296,8 @@ object FilePicker : Constants {
      * This helps fix the SecurityException reported in this issue:
      * https://github.com/commons-app/apps-android-commons/issues/6357
      */
-    private fun takePersistableUriPermissions(context: Context, result: ActivityResult) {
-        result.data?.let { intentData ->
+    private fun takePersistableUriPermissions(context: Context, data: Intent?) {
+        data?.let { intentData ->
             val takeFlags: Int = (Intent.FLAG_GRANT_READ_URI_PERMISSION)
             // Persist the URI permission for all URIs in the clip data
             // if multiple images are selected,
@@ -367,7 +368,7 @@ object FilePicker : Constants {
         callbacks: Callbacks
     ) {
         if (result.resultCode == Activity.RESULT_OK && !isPhoto(result.data)) {
-            takePersistableUriPermissions(activity, result)
+            takePersistableUriPermissions(activity, result.data)
             try {
                 val files = getFilesFromGalleryPictures(result.data, activity)
                 callbacks.onImagesPicked(files, ImageSource.GALLERY, restoreType(activity))
