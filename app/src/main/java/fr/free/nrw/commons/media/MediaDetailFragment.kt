@@ -541,6 +541,7 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
             }
         )
         binding.progressBarEdit.visibility = View.GONE
+        binding.descriptionEdit.visibility = View.VISIBLE
     }
 
     override fun onConfigurationChanged(newConfig: Configuration) {
@@ -2128,22 +2129,17 @@ fun FileUsagesContainer(
     val uriHandle = LocalUriHandler.current
 
     Column(modifier = modifier) {
-
         Row(
             modifier = Modifier.fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
-
             Text(
                 text = stringResource(R.string.usages_on_commons_heading),
                 textAlign = TextAlign.Center,
                 style = MaterialTheme.typography.titleSmall
             )
-
-            IconButton(onClick = {
-                isCommonsListExpanded = !isCommonsListExpanded
-            }) {
+            IconButton(onClick = { isCommonsListExpanded = !isCommonsListExpanded }) {
                 Icon(
                     imageVector = if (isCommonsListExpanded) Icons.Default.KeyboardArrowUp
                     else Icons.Default.KeyboardArrowDown,
@@ -2157,11 +2153,8 @@ fun FileUsagesContainer(
                 MediaDetailViewModel.FileUsagesContainerState.Loading -> {
                     LinearProgressIndicator()
                 }
-
                 is MediaDetailViewModel.FileUsagesContainerState.Success -> {
-
                     val data = commonsContainerState.data
-
                     if (data.isNullOrEmpty()) {
                         ListItem(headlineContent = {
                             Text(
@@ -2181,7 +2174,7 @@ fun FileUsagesContainer(
                                 headlineContent = {
                                     Text(
                                         modifier = Modifier.clickable {
-                                            uriHandle.openUri(usage.link!!)
+                                            usage.link?.let { uriHandle.openUri(it) }
                                         },
                                         text = usage.title,
                                         style = MaterialTheme.typography.titleSmall.copy(
@@ -2189,11 +2182,11 @@ fun FileUsagesContainer(
                                             textDecoration = TextDecoration.Underline
                                         )
                                     )
-                                })
+                                }
+                            )
                         }
                     }
                 }
-
                 is MediaDetailViewModel.FileUsagesContainerState.Error -> {
                     ListItem(headlineContent = {
                         Text(
@@ -2203,11 +2196,9 @@ fun FileUsagesContainer(
                         )
                     })
                 }
-
                 MediaDetailViewModel.FileUsagesContainerState.Initial -> {}
             }
         }
-
 
         Row(
             modifier = Modifier.fillMaxWidth(),
@@ -2219,10 +2210,7 @@ fun FileUsagesContainer(
                 textAlign = TextAlign.Center,
                 style = MaterialTheme.typography.titleSmall
             )
-
-            IconButton(onClick = {
-                isOtherWikisListExpanded = !isOtherWikisListExpanded
-            }) {
+            IconButton(onClick = { isOtherWikisListExpanded = !isOtherWikisListExpanded }) {
                 Icon(
                     imageVector = if (isOtherWikisListExpanded) Icons.Default.KeyboardArrowUp
                     else Icons.Default.KeyboardArrowDown,
@@ -2236,11 +2224,8 @@ fun FileUsagesContainer(
                 MediaDetailViewModel.FileUsagesContainerState.Loading -> {
                     LinearProgressIndicator()
                 }
-
                 is MediaDetailViewModel.FileUsagesContainerState.Success -> {
-
                     val data = globalContainerState.data
-
                     if (data.isNullOrEmpty()) {
                         ListItem(headlineContent = {
                             Text(
@@ -2259,16 +2244,20 @@ fun FileUsagesContainer(
                                 },
                                 headlineContent = {
                                     Text(
+                                        modifier = Modifier.clickable {
+                                            usage.link?.let { uriHandle.openUri(it) }
+                                        },
                                         text = usage.title,
                                         style = MaterialTheme.typography.titleSmall.copy(
+                                            color = Color(0xFF5A6AEC),
                                             textDecoration = TextDecoration.Underline
                                         )
                                     )
-                                })
+                                }
+                            )
                         }
                     }
                 }
-
                 is MediaDetailViewModel.FileUsagesContainerState.Error -> {
                     ListItem(headlineContent = {
                         Text(
@@ -2278,10 +2267,8 @@ fun FileUsagesContainer(
                         )
                     })
                 }
-
                 MediaDetailViewModel.FileUsagesContainerState.Initial -> {}
             }
         }
-
     }
 }

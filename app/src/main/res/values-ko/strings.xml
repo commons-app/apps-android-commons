@@ -24,7 +24,7 @@
 * 아라
 -->
 <resources>
-  <string name="commons_facebook">공용 페이스북 페이지</string>
+  <string name="commons_facebook">공용 페이스북 문서</string>
   <string name="commons_github">공용 GitHub 소스 코드</string>
   <string name="commons_logo">공용 로고</string>
   <string name="commons_website">공용 웹사이트</string>
@@ -35,11 +35,11 @@
   <string name="add_contribution_from_camera">카메라에서 기여 참가</string>
   <string name="add_contribution_from_photos">사진에서 기여 참가</string>
   <string name="add_contribution_from_contributions_gallery">이전 기여 갤러리에서 기여 참가</string>
-  <string name="show_captions">캡션</string>
+  <string name="show_captions">설명</string>
   <string name="row_item_language_description">언어 설명</string>
   <string name="row_item_caption">캡션</string>
   <string name="show_captions_description">설명</string>
-  <string name="nearby_row_image">이미지</string>
+  <string name="nearby_row_image">그림</string>
   <string name="nearby_all">모두</string>
   <string name="nearby_filter_toggle">위로 전환</string>
   <string name="nearby_filter_search">검색 뷰</string>
@@ -141,7 +141,7 @@
   <string name="categories_not_found">%1$s와(과) 일치하는 분류를 찾을 수 없습니다</string>
   <string name="depictions_not_found">%1$s에 대한 위키데이터 검색 결과가 없습니다</string>
   <string name="no_child_classes">%1$s에 자식 클래스가 없습니다</string>
-  <string name="no_parent_classes">%1$s에 부모 클래스가 없습니다</string>
+  <string name="no_parent_classes">%1$s에 상위 클래스가 없습니다</string>
   <string name="categories_skip_explanation">위키미디어 공용에서 그림을 더 찾기 쉽게 만들기 위해 분류를 추가합니다.\n분류를 추가하려면 입력을 시작하세요.</string>
   <string name="categories_activity_title">분류</string>
   <string name="title_activity_settings">설정</string>

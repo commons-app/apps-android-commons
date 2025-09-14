@@ -35,6 +35,7 @@
                 android:scrollbars="vertical"
                 android:fadeScrollbars="false"
                 android:scrollbarThumbVertical="@color/primaryColor"
+                android:clipToPadding="false"
                 android:scrollbarSize="@dimen/dimen_6"/>
 
         </RelativeLayout>

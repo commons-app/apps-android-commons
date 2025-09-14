@@ -16,6 +16,7 @@
 * Lolekek
 * Meno25
 * Mido
+* Mohammed Qays
 * Monrokhoury
 * Mr. Ibrahem
 * NEHAOUA
@@ -423,7 +424,7 @@
   <string name="Profile">الملف الشخصي</string>
   <string name="badges">أوسمة</string>
   <string name="statistics">إحصاءات</string>
-  <string name="statistics_thanks">تم تلقي الشكر</string>
+  <string name="statistics_thanks">شكراً جزيلاً</string>
   <string name="statistics_featured">الصور المختارة</string>
   <string name="statistics_wikidata_edits">صور عبر \"الأماكن المجاورة\"</string>
   <string name="level">المستوى %d</string>

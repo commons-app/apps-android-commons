@@ -23,6 +23,7 @@ import fr.free.nrw.commons.explore.categories.sub.SubCategoriesFragment
 import fr.free.nrw.commons.media.MediaDetailPagerFragment
 import fr.free.nrw.commons.media.MediaDetailProvider
 import fr.free.nrw.commons.theme.BaseActivity
+import fr.free.nrw.commons.utils.applyEdgeToEdgeAllInsets
 import fr.free.nrw.commons.utils.handleWebUrl
 import fr.free.nrw.commons.wikidata.model.WikiSite
 import fr.free.nrw.commons.wikidata.model.page.PageTitle
@@ -57,6 +58,7 @@ class CategoryDetailsActivity : BaseActivity(),
 
         binding = ActivityCategoryDetailsBinding.inflate(layoutInflater)
         val view = binding.root
+        applyEdgeToEdgeAllInsets(view)
         setContentView(view)
         supportFragmentManager = getSupportFragmentManager()
         viewPagerAdapter = ViewPagerAdapter(this, supportFragmentManager)

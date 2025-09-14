@@ -5,13 +5,13 @@
   android:id="@+id/rl_container_categories"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  android:padding="@dimen/standard_gap"
   android:background="?attr/mainBackground"
   >
   <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_above="@+id/button_divider"
+    android:padding="@dimen/medium_padding"
     android:orientation="vertical">
     <LinearLayout
       android:layout_width="wrap_content"
@@ -110,7 +110,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_alignParentBottom="true"
-    android:padding="@dimen/standard_gap"
+    android:paddingVertical="@dimen/small_padding"
+    android:paddingHorizontal="@dimen/large_padding"
     android:orientation="horizontal"
     >
 
