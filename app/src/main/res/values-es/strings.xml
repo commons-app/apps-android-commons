@@ -30,6 +30,7 @@
 * Jduranboger
 * Jelou
 * Johnny243
+* JorgeElias2302
 * Josuert
 * Juanman
 * Keneth Urrutia
@@ -152,6 +153,7 @@
   <string name="menu_nearby">Cercanos</string>
   <string name="provider_contributions">Mis subidas</string>
   <string name="menu_copy_link">Copiar enlace</string>
+  <string name="menu_link_copied">El enlace ha sido copiado al portapapeles.</string>
   <string name="menu_share">Compartir</string>
   <string name="menu_view_file_page">Ver página del archivo</string>
   <string name="share_title_hint">Leyenda (requerido)</string>
@@ -162,6 +164,7 @@
   <string name="login_failed_throttled">Demasiados intentos fallidos. Inténtalo de nuevo en unos minutos.</string>
   <string name="login_failed_blocked">Lo sentimos, este usuario ha sido bloqueado en Commons</string>
   <string name="login_failed_2fa_needed">Debe proporcionar su código de autenticación de dos factores.</string>
+  <string name="login_failed_email_auth_needed">Se ha enviado un código de verificación de inicio de sesión a tu correo electrónico. Indícalo para iniciar sesión.</string>
   <string name="login_failed_generic">Falló el inicio de sesión</string>
   <string name="share_upload_button">Subir</string>
   <string name="multiple_share_base_title">Nombrar este conjunto</string>
@@ -260,6 +263,7 @@
   <string name="media_detail_description">Descripción</string>
   <string name="media_detail_discussion">Discusión</string>
   <string name="media_detail_author">Autor</string>
+  <string name="media_detail_uploader">Subidor</string>
   <string name="media_detail_uploaded_date">Fecha de subida</string>
   <string name="media_detail_license">Licencia</string>
   <string name="media_detail_coordinates">Coordenadas</string>
@@ -267,6 +271,7 @@
   <string name="become_a_tester_title">Prueba la versión beta</string>
   <string name="become_a_tester_description">Apúntate a nuestro canal beta en Google Play y obtén acceso a funcionalidades nuevas y correcciones de errores</string>
   <string name="_2fa_code">Código de autenticación de 2 pasos</string>
+  <string name="email_auth_code">Código de verificación de correo electrónico</string>
   <string name="logout_verification">¿Confirmas que quieres salir?</string>
   <string name="mediaimage_failed">Falló la imagen de multimedia</string>
   <string name="no_subcategory_found">No se encontró ninguna subcategoría</string>
@@ -327,6 +332,7 @@
   <string name="copy_wikicode">Copia el wikitexto al portapapeles</string>
   <string name="wikicode_copied">El wikitexto fue copiado al portapapeles</string>
   <string name="nearby_location_not_available">Cercanos no puede funcionar correctamente. La ubicación no está disponible.</string>
+  <string name="nearby_showing_pins_offline">Internet no disponible. Solo se muestran ubicaciones en caché.</string>
   <string name="upload_location_access_denied">Acceso a la ubicación denegado. Configura tu ubicación manualmente para utilizar esta función.</string>
   <string name="location_permission_rationale_nearby">Se necesita permiso para mostrar una lista de lugares cercanos</string>
   <string name="location_permission_rationale_explore">Se necesita permiso para mostrar una lista de lugares cercanos</string>
@@ -416,6 +422,7 @@
   <string name="statistics_featured">Imágenes destacadas</string>
   <string name="statistics_wikidata_edits">Imágenes vía \"Sitios Cercanos\"</string>
   <string name="level">Nivel %d</string>
+  <string name="profile_withLevel">%s (Nivel %s)</string>
   <string name="images_uploaded">Imágenes subidas</string>
   <string name="image_reverts">Imágenes no revertidas</string>
   <string name="images_used_by_wiki">Imágenes utilizadas</string>
@@ -447,6 +454,7 @@
   <string name="map_application_missing">No se encontró una aplicación de mapas compatible en tu dispositivo. Instala una para usar esta característica.</string>
   <string name="title_page_bookmarks_pictures">Imágenes</string>
   <string name="title_page_bookmarks_locations">Ubicaciones</string>
+  <string name="title_page_bookmarks_categories">Categorías</string>
   <string name="menu_bookmark">Añadir o quitar de marcadores</string>
   <string name="provider_bookmarks">Marcadores</string>
   <string name="bookmark_empty">No has añadido ningún marcador</string>
@@ -457,7 +465,7 @@
   <string name="deletion_reason_bad_for_my_privacy">Me di cuenta que es malo para mi privacidad</string>
   <string name="deletion_reason_no_longer_want_public">Cambié de opinión, no quiero que siga siendo visible públicamente</string>
   <string name="deletion_reason_not_interesting">Lo sentimos, esta imagen no es interesante para una enciclopedia</string>
-  <string name="uploaded_by_myself">Subida por mí mismo el %1$s, usado en %2$d artículo(s).</string>
+  <string name="uploaded_by_myself">Subido por mí en %1$s, usado en %2$d artículo(s) al menos.</string>
   <string name="no_uploads">Te damos la bienvenida a Commons.\n\nCarga tu primer archivo mediante el botón Añadir.</string>
   <string name="no_categories_selected">No hay categorías seleccionadas</string>
   <string name="no_categories_selected_warning_desc">Las imágenes sin categorías raramente se pueden usar. ¿Seguro que quieres continuar sin seleccionar ninguna categoría?</string>
@@ -622,6 +630,8 @@
   <string name="title_for_media">MULTIMEDIA</string>
   <string name="title_for_child_classes">CLASES HIJAS</string>
   <string name="title_for_parent_classes">CLASES PADRES</string>
+  <string name="title_for_subcategories">SUBCATEGORÍAS</string>
+  <string name="title_for_parent_categories">CATEGORÍAS DE PADRES</string>
   <string name="upload_nearby_place_found_title">Lugar cercano encontrado</string>
   <string name="upload_nearby_place_found_description_plural">¿Son estas imágenes de %1$s?</string>
   <string name="upload_nearby_place_found_description_singular">¿Es esta una imagen de %1$s?</string>
@@ -797,7 +807,7 @@
   <string name="permissions_are_required_for_functionality">Se requieren permisos para la funcionalidad</string>
   <string name="learn_how_to_write_a_useful_description">Aprenda a escribir una descripción útil</string>
   <string name="learn_how_to_write_a_useful_caption">Aprenda a escribir una leyenda útil</string>
-  <string name="see_your_achievements">Ver sus logros</string>
+  <string name="see_your_achievements">Ver tus logros</string>
   <string name="edit_image">Editar Imagen</string>
   <string name="edit_location">Editar Ubicación</string>
   <string name="location_updated">¡Ubicación actualizada!</string>
@@ -827,6 +837,7 @@
   <string name="talk">Discusión</string>
   <string name="write_something_about_the_item">Escriba algo sobre el elemento \'%1$s\'. Será visible públicamente.</string>
   <string name="does_not_exist_anymore_no_picture_can_ever_be_taken_of_it">\' %1$s \' ya no existe, nunca se podrá tomar ninguna fotografía de él.</string>
+  <string name="is_at_a_different_place_wikidata">\'%1$s\' está en un lugar diferente.</string>
   <string name="is_at_a_different_place_please_specify_the_correct_place_below_if_possible_tell_us_the_correct_latitude_longitude">\' %1$s \' está en un lugar diferente. Especifique el lugar correcto a continuación y, si es posible, escriba la latitud y longitud correctas.</string>
   <string name="other_problem_or_information_please_explain_below">Otro problema o información (por favor explique a continuación).</string>
   <string name="feedback_destination_note">Sus comentarios se publicarán en la siguiente página wiki: &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Mobile_app/Feedback\"&gt;Commons:Mobile_app/Feedback&lt;/a&gt;</string>
@@ -848,4 +859,22 @@
   <string name="red_pin">Este lugar aún no tiene foto, ¡ve y toma una!</string>
   <string name="green_pin">Este lugar ya tiene una foto.</string>
   <string name="grey_pin">Ahora comprobando si este lugar tiene una foto.</string>
+  <string name="error_while_loading">Error al cargar</string>
+  <string name="no_usages_found">No se encontraron usos</string>
+  <string name="usages_on_commons_heading">Commons</string>
+  <string name="usages_on_other_wikis_heading">Otras wikis</string>
+  <string name="file_usages_container_heading">Usos de archivos</string>
+  <string name="title_activity_single_web_view">Actividad de vista web única</string>
+  <string name="account">Cuenta</string>
+  <string name="vanish_account">Desaparecer cuenta</string>
+  <string name="account_vanish_request_confirm_title">Advertencia sobre la desaparición de la cuenta</string>
+  <string name="account_vanish_request_confirm">La desaparición de una cuenta en Wikimedia Commons es un &lt;b&gt;último recurso&lt;/b&gt; y &lt;b&gt;solo debe usarse cuando desee dejar de editar para siempre y también para ocultar la mayor cantidad posible de sus asociaciones pasadas.&lt;br/&gt;&lt;br/&gt;La desaparición de una cuenta en Wikimedia Commons se realiza cambiando el nombre de la cuenta para que otros no puedan reconocer sus contribuciones en un proceso llamado desaparición de la cuenta. &lt;b&gt;La desaparición de la cuenta no garantiza el anonimato completo ni elimina las contribuciones a los proyectos&lt;/b&gt;.</string>
+  <string name="caption">Leyenda</string>
+  <string name="caption_copied_to_clipboard">Leyenda copiado al portapapeles</string>
+  <string name="congratulations_all_pictures_in_this_album_have_been_either_uploaded_or_marked_as_not_for_upload">Felicitaciones, todas las imágenes de este álbum han sido cargadas o marcadas como no para cargar.</string>
+  <string name="show_in_explore">Mostrar en Explorar</string>
+  <string name="show_in_nearby">Mostrar en las cercanías</string>
+  <string name="image_tag_line_created_and_uploaded_by">Creado y cargado por: %1$s</string>
+  <string name="image_tag_line_created_by_and_uploaded_by">Creado por %1$s y cargado por %2$s</string>
+  <string name="nominated_for_deletion_btn">Nominar para borrado</string>
 </resources>

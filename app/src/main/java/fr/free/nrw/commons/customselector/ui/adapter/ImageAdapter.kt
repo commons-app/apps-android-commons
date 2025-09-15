@@ -327,12 +327,17 @@ class ImageAdapter(
 
         // Getting clicked index from all images index when show_already_actioned_images
         // switch is on
+        if (singleSelection) {
+            // If single selection mode, clear previous selection and select only the new one
+            if (selectedImages.isNotEmpty() && (selectedImages[0] != images[position])) {
+                val prevIndex = images.indexOf(selectedImages[0])
+                selectedImages.clear()
+                notifyItemChanged(prevIndex, ImageUnselected())
+            }
+        }
         val clickedIndex: Int =
             if (showAlreadyActionedImages) {
                 ImageHelper.getIndex(selectedImages, images[position])
-
-                // Getting clicked index from actionable images when show_already_actioned_images
-                // switch is off
             } else {
                 ImageHelper.getIndex(selectedImages, ArrayList(actionableImagesMap.values)[position])
             }
@@ -618,4 +623,13 @@ class ImageAdapter(
      * Returns the text for showing inside the bubble during bubble scroll.
      */
     override fun getSectionName(position: Int): String = images[position].date
+
+    private var singleSelection: Boolean = false
+
+    /**
+     * Set single selection mode
+     */
+    fun setSingleSelection(single: Boolean) {
+        singleSelection = single
+    }
 }

@@ -16,6 +16,7 @@ import fr.free.nrw.commons.databinding.ActivityReviewBinding
 import fr.free.nrw.commons.delete.DeleteHelper
 import fr.free.nrw.commons.media.MediaDetailFragment
 import fr.free.nrw.commons.theme.BaseActivity
+import fr.free.nrw.commons.utils.applyEdgeToEdgeAllInsets
 import fr.free.nrw.commons.utils.DialogUtil
 import fr.free.nrw.commons.utils.ViewUtil
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -73,6 +74,7 @@ class ReviewActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityReviewBinding.inflate(layoutInflater)
+        applyEdgeToEdgeAllInsets(binding.root)
         setContentView(binding.root)
 
         setSupportActionBar(binding.toolbarBinding?.toolbar)
@@ -107,10 +109,8 @@ class ReviewActivity : BaseActivity() {
             setUpMediaDetailFragment()
         }
 
-        binding.skipImage.setOnTouchListener { _, event ->
-            if (event.action == MotionEvent.ACTION_UP &&
-                event.rawX >= (binding.skipImage.right - binding.skipImage.compoundDrawables[2].bounds.width())
-            ) {
+        binding.skipImageInfo?.setOnTouchListener { _, event ->
+            if (event.action == MotionEvent.ACTION_UP) {
                 showSkipImageInfo()
                 true
             } else {

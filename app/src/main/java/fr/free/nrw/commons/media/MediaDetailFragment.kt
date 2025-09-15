@@ -74,11 +74,9 @@ import fr.free.nrw.commons.BuildConfig
 import fr.free.nrw.commons.CameraPosition
 import fr.free.nrw.commons.CommonsApplication
 import fr.free.nrw.commons.CommonsApplication.Companion.instance
-import fr.free.nrw.commons.locationpicker.LocationPicker
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.MediaDataExtractor
 import fr.free.nrw.commons.R
-import fr.free.nrw.commons.Utils
 import fr.free.nrw.commons.actions.ThanksClient
 import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.auth.csrf.InvalidLoginTokenException
@@ -102,7 +100,7 @@ import fr.free.nrw.commons.explore.depictions.WikidataItemDetailsActivity
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.language.AppLanguageLookUpTable
 import fr.free.nrw.commons.location.LocationServiceManager
-import fr.free.nrw.commons.media.MediaDetailPagerFragment.MediaDetailProvider
+import fr.free.nrw.commons.locationpicker.LocationPicker
 import fr.free.nrw.commons.profile.ProfileActivity
 import fr.free.nrw.commons.review.ReviewHelper
 import fr.free.nrw.commons.settings.Prefs
@@ -116,8 +114,13 @@ import fr.free.nrw.commons.utils.LangCodeUtils.getLocalizedResources
 import fr.free.nrw.commons.utils.PermissionUtils.PERMISSIONS_STORAGE
 import fr.free.nrw.commons.utils.PermissionUtils.checkPermissionsAndPerformAction
 import fr.free.nrw.commons.utils.PermissionUtils.hasPermission
+import fr.free.nrw.commons.utils.ViewUtil
 import fr.free.nrw.commons.utils.ViewUtil.showShortToast
 import fr.free.nrw.commons.utils.ViewUtilWrapper
+import fr.free.nrw.commons.utils.copyToClipboard
+import fr.free.nrw.commons.utils.handleGeoCoordinates
+import fr.free.nrw.commons.utils.handleWebUrl
+import fr.free.nrw.commons.utils.setUnderlinedText
 import fr.free.nrw.commons.wikidata.mwapi.MwQueryPage.Revision
 import io.reactivex.Observable
 import io.reactivex.Single
@@ -125,6 +128,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import org.apache.commons.lang3.StringUtils
 import timber.log.Timber
+import java.lang.String.format
 import java.util.Date
 import java.util.Locale
 import java.util.Objects
@@ -314,14 +318,7 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
         _binding = FragmentMediaDetailBinding.inflate(inflater, container, false)
         val view: View = binding.root
 
-
-        Utils.setUnderlinedText(binding.seeMore, R.string.nominated_see_more, requireContext())
-
-        if (isCategoryImage) {
-            binding.authorLinearLayout.visibility = View.VISIBLE
-        } else {
-            binding.authorLinearLayout.visibility = View.GONE
-        }
+        binding.seeMore.setUnderlinedText(R.string.nominated_see_more)
 
         if (!sessionManager.isUserLoggedIn) {
             binding.categoryEditButton.visibility = View.GONE
@@ -544,6 +541,7 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
             }
         )
         binding.progressBarEdit.visibility = View.GONE
+        binding.descriptionEdit.visibility = View.VISIBLE
     }
 
     override fun onConfigurationChanged(newConfig: Configuration) {
@@ -811,10 +809,27 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
         categoryNames.clear()
         categoryNames.addAll(media.categories!!)
 
-        if (media.author == null || media.author == "") {
-            binding.authorLinearLayout.visibility = View.GONE
-        } else {
-            binding.mediaDetailAuthor.text = media.author
+        // Show author or uploader information for licensing compliance
+        val authorName = media.getAttributedAuthor()
+        val uploaderName = media.user
+        
+        when {
+            !authorName.isNullOrEmpty() -> {
+                // Show author if available
+                binding.mediaDetailAuthorLabel.text = getString(R.string.media_detail_author)
+                binding.mediaDetailAuthor.text = authorName
+                binding.authorLinearLayout.visibility = View.VISIBLE
+            }
+            !uploaderName.isNullOrEmpty() -> {
+                // Show uploader as fallback
+                binding.mediaDetailAuthorLabel.text = getString(R.string.media_detail_uploader)
+                binding.mediaDetailAuthor.text = uploaderName
+                binding.authorLinearLayout.visibility = View.VISIBLE
+            }
+            else -> {
+                // Hide if neither author nor uploader is available
+                binding.authorLinearLayout.visibility = View.GONE
+            }
         }
     }
 
@@ -907,7 +922,7 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
     private fun onMediaDetailLicenceClicked() {
         val url: String? = media!!.licenseUrl
         if (!StringUtils.isBlank(url) && activity != null) {
-            Utils.handleWebUrl(activity, Uri.parse(url))
+            handleWebUrl(requireContext(), Uri.parse(url))
         } else {
             viewUtil.showShortToast(requireActivity(), getString(R.string.null_url))
         }
@@ -915,17 +930,17 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
 
     private fun onMediaDetailCoordinatesClicked() {
         if (media!!.coordinates != null && activity != null) {
-            Utils.handleGeoCoordinates(activity, media!!.coordinates)
+            handleGeoCoordinates(requireContext(), media!!.coordinates!!)
         }
     }
 
     private fun onCopyWikicodeClicked() {
         val data: String =
             "[[" + media!!.filename + "|thumb|" + media!!.fallbackDescription + "]]"
-        Utils.copy("wikiCode", data, context)
+        requireContext().copyToClipboard("wikiCode", data)
         Timber.d("Generated wikidata copy code: %s", data)
 
-        Toast.makeText(context, getString(R.string.wikicode_copied), Toast.LENGTH_SHORT)
+        Toast.makeText(requireContext(), getString(R.string.wikicode_copied), Toast.LENGTH_SHORT)
             .show()
     }
 
@@ -1646,7 +1661,7 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
                 getString(R.string.cancel),
                 {
                     val reason: String = input.text.toString()
-                    onDeleteClickeddialogtext(reason)
+                    onDeleteClickedDialogText(reason)
                 },
                 {},
                 input
@@ -1700,26 +1715,48 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
         resultSingle
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe { _ ->
-                if (applicationKvStore.getBoolean(
-                        String.format(
-                            NOMINATING_FOR_DELETION_MEDIA, media!!.imageUrl
-                        ), false
-                    )
-                ) {
-                    applicationKvStore.remove(
-                        String.format(
-                            NOMINATING_FOR_DELETION_MEDIA,
-                            media!!.imageUrl
-                        )
-                    )
-                    callback!!.nominatingForDeletion(index)
-                }
-            }
+            .subscribe(this::handleDeletionResult, this::handleDeletionError);
+    }
+
+    /**
+     * Disables Progress Bar and Update delete button text.
+     */
+    private fun disableProgressBar() {
+        activity?.run {
+            runOnUiThread(Runnable {
+                binding.progressBarDeletion.visibility = View.GONE
+            })
+        } ?: return // Prevent NullPointerException when fragment is not attached to activity
+    }
+
+    private fun handleDeletionResult(success: Boolean) {
+        if (success) {
+            binding.nominateDeletion.text = getString(R.string.nominated_for_deletion_btn)
+            ViewUtil.showLongSnackbar(requireView(), getString(R.string.nominated_for_deletion))
+            disableProgressBar()
+            checkAndClearDeletionFlag()
+        } else {
+            disableProgressBar()
+        }
+    }
+
+    private fun handleDeletionError(throwable: Throwable) {
+        throwable.printStackTrace()
+        disableProgressBar()
+        checkAndClearDeletionFlag()
+    }
+
+    private fun checkAndClearDeletionFlag() {
+        if (applicationKvStore
+            .getBoolean(format(NOMINATING_FOR_DELETION_MEDIA, media!!.imageUrl), false)
+        ) {
+            applicationKvStore.remove(format(NOMINATING_FOR_DELETION_MEDIA, media!!.imageUrl))
+            callback!!.nominatingForDeletion(index)
+        }
     }
 
     @SuppressLint("CheckResult")
-    private fun onDeleteClickeddialogtext(reason: String) {
+    private fun onDeleteClickedDialogText(reason: String) {
         applicationKvStore.putBoolean(
             String.format(
                 NOMINATING_FOR_DELETION_MEDIA,
@@ -1736,27 +1773,12 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
         resultSingletext
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe { _ ->
-                if (applicationKvStore.getBoolean(
-                        String.format(
-                            NOMINATING_FOR_DELETION_MEDIA, media!!.imageUrl
-                        ), false
-                    )
-                ) {
-                    applicationKvStore.remove(
-                        String.format(
-                            NOMINATING_FOR_DELETION_MEDIA,
-                            media!!.imageUrl
-                        )
-                    )
-                    callback!!.nominatingForDeletion(index)
-                }
-            }
+            .subscribe(this::handleDeletionResult, this::handleDeletionError);
     }
 
     private fun onSeeMoreClicked() {
         if (binding.nominatedDeletionBanner.visibility == View.VISIBLE && activity != null) {
-            Utils.handleWebUrl(activity, Uri.parse(media!!.pageTitle.mobileUri))
+            handleWebUrl(requireContext(), Uri.parse(media!!.pageTitle.mobileUri))
         }
     }
 
@@ -2107,22 +2129,17 @@ fun FileUsagesContainer(
     val uriHandle = LocalUriHandler.current
 
     Column(modifier = modifier) {
-
         Row(
             modifier = Modifier.fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
-
             Text(
                 text = stringResource(R.string.usages_on_commons_heading),
                 textAlign = TextAlign.Center,
                 style = MaterialTheme.typography.titleSmall
             )
-
-            IconButton(onClick = {
-                isCommonsListExpanded = !isCommonsListExpanded
-            }) {
+            IconButton(onClick = { isCommonsListExpanded = !isCommonsListExpanded }) {
                 Icon(
                     imageVector = if (isCommonsListExpanded) Icons.Default.KeyboardArrowUp
                     else Icons.Default.KeyboardArrowDown,
@@ -2136,11 +2153,8 @@ fun FileUsagesContainer(
                 MediaDetailViewModel.FileUsagesContainerState.Loading -> {
                     LinearProgressIndicator()
                 }
-
                 is MediaDetailViewModel.FileUsagesContainerState.Success -> {
-
                     val data = commonsContainerState.data
-
                     if (data.isNullOrEmpty()) {
                         ListItem(headlineContent = {
                             Text(
@@ -2160,7 +2174,7 @@ fun FileUsagesContainer(
                                 headlineContent = {
                                     Text(
                                         modifier = Modifier.clickable {
-                                            uriHandle.openUri(usage.link!!)
+                                            usage.link?.let { uriHandle.openUri(it) }
                                         },
                                         text = usage.title,
                                         style = MaterialTheme.typography.titleSmall.copy(
@@ -2168,11 +2182,11 @@ fun FileUsagesContainer(
                                             textDecoration = TextDecoration.Underline
                                         )
                                     )
-                                })
+                                }
+                            )
                         }
                     }
                 }
-
                 is MediaDetailViewModel.FileUsagesContainerState.Error -> {
                     ListItem(headlineContent = {
                         Text(
@@ -2182,11 +2196,9 @@ fun FileUsagesContainer(
                         )
                     })
                 }
-
                 MediaDetailViewModel.FileUsagesContainerState.Initial -> {}
             }
         }
-
 
         Row(
             modifier = Modifier.fillMaxWidth(),
@@ -2198,10 +2210,7 @@ fun FileUsagesContainer(
                 textAlign = TextAlign.Center,
                 style = MaterialTheme.typography.titleSmall
             )
-
-            IconButton(onClick = {
-                isOtherWikisListExpanded = !isOtherWikisListExpanded
-            }) {
+            IconButton(onClick = { isOtherWikisListExpanded = !isOtherWikisListExpanded }) {
                 Icon(
                     imageVector = if (isOtherWikisListExpanded) Icons.Default.KeyboardArrowUp
                     else Icons.Default.KeyboardArrowDown,
@@ -2215,11 +2224,8 @@ fun FileUsagesContainer(
                 MediaDetailViewModel.FileUsagesContainerState.Loading -> {
                     LinearProgressIndicator()
                 }
-
                 is MediaDetailViewModel.FileUsagesContainerState.Success -> {
-
                     val data = globalContainerState.data
-
                     if (data.isNullOrEmpty()) {
                         ListItem(headlineContent = {
                             Text(
@@ -2238,16 +2244,20 @@ fun FileUsagesContainer(
                                 },
                                 headlineContent = {
                                     Text(
+                                        modifier = Modifier.clickable {
+                                            usage.link?.let { uriHandle.openUri(it) }
+                                        },
                                         text = usage.title,
                                         style = MaterialTheme.typography.titleSmall.copy(
+                                            color = Color(0xFF5A6AEC),
                                             textDecoration = TextDecoration.Underline
                                         )
                                     )
-                                })
+                                }
+                            )
                         }
                     }
                 }
-
                 is MediaDetailViewModel.FileUsagesContainerState.Error -> {
                     ListItem(headlineContent = {
                         Text(
@@ -2257,10 +2267,8 @@ fun FileUsagesContainer(
                         )
                     })
                 }
-
                 MediaDetailViewModel.FileUsagesContainerState.Initial -> {}
             }
         }
-
     }
 }

@@ -9,7 +9,6 @@ import fr.free.nrw.commons.BasePresenter
 interface ContributionsContract {
 
     interface View {
-        fun showMessage(localizedMessage: String)
         fun getContext(): Context?
     }
 

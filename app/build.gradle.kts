@@ -18,14 +18,14 @@ if (isRunningOnTravisAndIsNotPRBuild) {
 
 android {
     namespace = "fr.free.nrw.commons"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "fr.free.nrw.commons"
         minSdk = 21
-        targetSdk = 34
-        versionCode = 1043
-        versionName = "5.1.2"
+        targetSdk = 35
+        versionCode = 1058
+        versionName = "6.0.2"
 
         setProperty("archivesBaseName", "app-commons-v$versionName-" + getBranchName())
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -347,6 +347,7 @@ dependencies {
     // Kotlin + coroutines
     implementation(libs.androidx.work.runtime.ktx)
     implementation(libs.androidx.work.runtime)
+    implementation(libs.kotlinx.coroutines.rx2)
     testImplementation(libs.androidx.work.testing)
 
     //Glide

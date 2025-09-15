@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.MenuItem
 import fr.free.nrw.commons.databinding.ActivitySettingsBinding
 import fr.free.nrw.commons.theme.BaseActivity
+import fr.free.nrw.commons.utils.applyEdgeToEdgeAllInsets
 
 
 /**
@@ -21,6 +22,7 @@ class SettingsActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivitySettingsBinding.inflate(layoutInflater)
         val view = binding.root
+        applyEdgeToEdgeAllInsets(view)
         setContentView(view)
 
         setSupportActionBar(binding.toolbarBinding.toolbar)

@@ -446,7 +446,7 @@
   <string name="android_version">Stumm Android</string>
   <string name="network_type">Seurt rouedad</string>
   <string name="report_user">Disklêriañ an implijer/ez-mañ</string>
-  <string name="see_your_achievements">Gwelet ho taolioù-kaer</string>
+  <string name="see_your_achievements" fuzzy="true">Gwelet ho taolioù-kaer</string>
   <string name="edit_image">Kemmañ ar skeudenn</string>
   <string name="edit_location">Kemmañ al lec\'hiadur</string>
   <string name="location_updated">Lec\'hiadur hizivaet!</string>

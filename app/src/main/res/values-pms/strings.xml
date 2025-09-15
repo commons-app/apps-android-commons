@@ -210,6 +210,7 @@
   <string name="media_detail_description">Descrission</string>
   <string name="media_detail_discussion">Discussion</string>
   <string name="media_detail_author">Autor</string>
+  <string name="media_detail_uploader">Carior</string>
   <string name="media_detail_uploaded_date">Dàita ëd cariament</string>
   <string name="media_detail_license">Licensa</string>
   <string name="media_detail_coordinates">Coordinà</string>
@@ -368,7 +369,7 @@
   <string name="statistics_featured">Plance an evidensa</string>
   <string name="statistics_wikidata_edits">Plance për \"Pòst davzin\"</string>
   <string name="level">Livel %d</string>
-  <string name="profileLevel">%s (Livel %s)</string>
+  <string name="profile_withLevel">%s (Livel %s)</string>
   <string name="images_uploaded">Plance carià</string>
   <string name="image_reverts">Plance nen anulà</string>
   <string name="images_used_by_wiki">Plance dovrà</string>
@@ -411,7 +412,7 @@
   <string name="deletion_reason_bad_for_my_privacy">I l\'hai pensa ch\'a l\'era nen bon për mia arservatëssa</string>
   <string name="deletion_reason_no_longer_want_public">I l\'hai cangià d\'idèja, i veui pi nen ch\'a sia visìbil ëd fasson pùblica</string>
   <string name="deletion_reason_not_interesting">Am dëspias, ma costa plancia a l\'é nen anteressanta për n\'enciclopedìa</string>
-  <string name="uploaded_by_myself">Carià da mi-midem ai %1$s, dovrà an %2$d artìcoj.</string>
+  <string name="uploaded_by_myself">Carià da mi-midem ai %1$s, dovrà an almanch %2$d artìcoj.</string>
   <string name="no_uploads">Bin-ëvnù su Commons!\n\nCh\'a caria sò prim archivi multimedial an sgnacand an sël boton për gionté.</string>
   <string name="no_categories_selected">Gnun-a categorìa selessionà</string>
   <string name="no_categories_selected_warning_desc">Le plance sensa categorìa, a so da ràir dovràbij. É-lo sigur ëd vorèj continué sensa serne dle categorìe?</string>
@@ -576,6 +577,8 @@
   <string name="title_for_media">MOJEN</string>
   <string name="title_for_child_classes">CLASSE MASNÀ</string>
   <string name="title_for_parent_classes">CLASSE CE</string>
+  <string name="title_for_subcategories">SOT-CATEGORÌE</string>
+  <string name="title_for_parent_categories">CATEGORÌE CE</string>
   <string name="upload_nearby_place_found_title">Trovà un pòst davzin</string>
   <string name="upload_nearby_place_found_description_plural">Son-lo le fòto ëd %1$s?</string>
   <string name="upload_nearby_place_found_description_singular">É-lo na fòto ëd %1$s?</string>
@@ -821,4 +824,5 @@
   <string name="show_in_nearby">Smon-e andrinta a Nearby</string>
   <string name="image_tag_line_created_and_uploaded_by">Creà e carià da: %1$s</string>
   <string name="image_tag_line_created_by_and_uploaded_by">Creà da %1$s e carià da %2$s</string>
+  <string name="nominated_for_deletion_btn">Nominà për esse dëscancelà</string>
 </resources>

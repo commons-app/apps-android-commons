@@ -212,6 +212,7 @@
   <string name="media_detail_description">Опис</string>
   <string name="media_detail_discussion">Разговор</string>
   <string name="media_detail_author">Автор</string>
+  <string name="media_detail_uploader">Подигач</string>
   <string name="media_detail_uploaded_date">Датум на подигање</string>
   <string name="media_detail_license">Лиценца</string>
   <string name="media_detail_coordinates">Координати</string>
@@ -370,7 +371,7 @@
   <string name="statistics_featured">Избрани слики</string>
   <string name="statistics_wikidata_edits">Слики преку „Околни места“</string>
   <string name="level">Степен %d</string>
-  <string name="profileLevel">%s (Степен %s)</string>
+  <string name="profile_withLevel">%s (Степен %s)</string>
   <string name="images_uploaded">Подигнати слики</string>
   <string name="image_reverts">Неоткажани слики</string>
   <string name="images_used_by_wiki">Употребени слики</string>
@@ -413,9 +414,9 @@
   <string name="deletion_reason_bad_for_my_privacy">Сфатив дека ќе ми ја наруши приватноста</string>
   <string name="deletion_reason_no_longer_want_public">Се премислив. Не сакам повеќе да биде видлива</string>
   <string name="deletion_reason_not_interesting">За жал, сликава не е соодветна за енциклопедија</string>
-  <string name="uploaded_by_myself">Подигнато од мене %1$s, кое се користи во %2$d статии.</string>
+  <string name="uploaded_by_myself">Подигнато од мене на %1$s, и се користи во барем {{PLURAL:%2$d|one=една статија|%2$d статии}}.</string>
   <string name="no_uploads">Добре дојдовте на Ризницата!\n\nПодигнете ја вашата прва слика или снимка допирајќи го копчето за додавање.</string>
-  <string name="no_categories_selected">Нема избрано категории</string>
+  <string name="no_categories_selected">Не се избрани категории</string>
   <string name="no_categories_selected_warning_desc">Некатегоризираните слики се слабо употребливи. Дали сигурно сакате да продолжите без да ставите категории?</string>
   <string name="no_depictions_selected">Немате избрано прикажувања</string>
   <string name="no_depictions_selected_warning_desc">Сликите со прикажувања се полезни за наоѓање, со што е поголема веројатноста дека ќе бидат искористени. Дали сигурно сакате да продолжите без да изберете прикажувања?</string>
@@ -578,6 +579,8 @@
   <string name="title_for_media">СЛИКИ/СНИМКИ</string>
   <string name="title_for_child_classes">ЗАВИСНИ КЛАСИ</string>
   <string name="title_for_parent_classes">МАТИЧНИ КЛАСИ</string>
+  <string name="title_for_subcategories">ПОТКАТЕГОРИИ</string>
+  <string name="title_for_parent_categories">МАТИЧНИ КАТЕГОРИИ</string>
   <string name="upload_nearby_place_found_title">Пронајдено околно место</string>
   <string name="upload_nearby_place_found_description_plural">Дали ова се слики на %1$s?</string>
   <string name="upload_nearby_place_found_description_singular">Дали ова е слика на %1$s?</string>
@@ -755,7 +758,7 @@
   <string name="permissions_are_required_for_functionality">Се бараат дозволи за функцијата</string>
   <string name="learn_how_to_write_a_useful_description">Дознајте како да напишете корисен опис</string>
   <string name="learn_how_to_write_a_useful_caption">Дознајте како да напишете корисно толкување</string>
-  <string name="see_your_achievements">Видете ги вашите достигнувања</string>
+  <string name="see_your_achievements">Погледајте ги вашите достигнувања</string>
   <string name="edit_image">Уреди слика</string>
   <string name="edit_location">Уреди местоположба</string>
   <string name="location_updated">Местоположбата е подновена!</string>
@@ -825,4 +828,5 @@
   <string name="show_in_nearby">Прикажи во „Во близина“</string>
   <string name="image_tag_line_created_and_uploaded_by">Создал: %1$s</string>
   <string name="image_tag_line_created_by_and_uploaded_by">Создал %1$s, а подигнал %2$s</string>
+  <string name="nominated_for_deletion_btn">Предложено за бришење</string>
 </resources>

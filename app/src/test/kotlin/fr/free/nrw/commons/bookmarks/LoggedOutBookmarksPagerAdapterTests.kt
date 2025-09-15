@@ -2,15 +2,23 @@ package fr.free.nrw.commons.bookmarks
 
 import android.content.Context
 import androidx.fragment.app.FragmentManager
+import fr.free.nrw.commons.TestCommonsApplication
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
+import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.MockitoAnnotations
+import org.robolectric.RobolectricTestRunner
+import org.robolectric.annotation.Config
+import org.robolectric.annotation.LooperMode
 
 /**
  * BookmarksPagerAdapter when user is not loggedIn.
  */
+@RunWith(RobolectricTestRunner::class)
+@Config(sdk = [21], application = TestCommonsApplication::class)
+@LooperMode(LooperMode.Mode.PAUSED)
 class LoggedOutBookmarksPagerAdapterTests {
     @Mock
     private lateinit var bookmarksPagerAdapter: BookmarksPagerAdapter

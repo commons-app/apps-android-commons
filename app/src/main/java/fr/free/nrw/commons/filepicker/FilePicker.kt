@@ -25,6 +25,9 @@ object FilePicker : Constants {
     private const val KEY_LAST_CAMERA_VIDEO = "last_video"
     private const val KEY_TYPE = "type"
 
+    // Add extra for single selection
+    private const val EXTRA_SINGLE_SELECTION = "EXTRA_SINGLE_SELECTION"
+
     /**
      * Returns the uri of the clicked image so that it can be put in MediaStore
      */
@@ -73,12 +76,17 @@ object FilePicker : Constants {
      * CreateCustomSectorIntent, creates intent for custom selector activity.
      * @param context
      * @param type
+     * @param singleSelection If true, restricts to single image selection
      * @return Custom selector intent
      */
     @JvmStatic
-    private fun createCustomSelectorIntent(context: Context, type: Int): Intent {
+    private fun createCustomSelectorIntent(context: Context, type: Int, singleSelection: Boolean = false): Intent {
         storeType(context, type)
-        return Intent(context, CustomSelectorActivity::class.java)
+        val intent = Intent(context, CustomSelectorActivity::class.java)
+        if (singleSelection) {
+            intent.putExtra(EXTRA_SINGLE_SELECTION, true)
+        }
+        return intent
     }
 
     @JvmStatic
@@ -153,9 +161,10 @@ object FilePicker : Constants {
     fun openCustomSelector(
         activity: Activity,
         resultLauncher: ActivityResultLauncher<Intent>,
-        type: Int
+        type: Int,
+        singleSelection: Boolean = false
     ) {
-        val intent = createCustomSelectorIntent(activity, type)
+        val intent = createCustomSelectorIntent(activity, type, singleSelection)
         resultLauncher.launch(intent)
     }
 
@@ -247,7 +256,9 @@ object FilePicker : Constants {
          *
          */
         val intent = if (openDocumentIntentPreferred) {
-            Intent(Intent.ACTION_OPEN_DOCUMENT)
+            Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
+                addCategory(Intent.CATEGORY_OPENABLE)
+            }
         } else {
             Intent(Intent.ACTION_GET_CONTENT)
         }
@@ -262,6 +273,7 @@ object FilePicker : Constants {
         callbacks: Callbacks
     ) {
         if (result.resultCode == Activity.RESULT_OK && !isPhoto(result.data)) {
+            takePersistableUriPermissions(activity, result)
             try {
                 val files = getFilesFromGalleryPictures(result.data, activity)
                 callbacks.onImagesPicked(files, ImageSource.DOCUMENTS, restoreType(activity))
@@ -271,6 +283,32 @@ object FilePicker : Constants {
             }
         } else {
             callbacks.onCanceled(ImageSource.DOCUMENTS, restoreType(activity))
+        }
+    }
+
+    /**
+     * takePersistableUriPermission is necessary to persist the URI permission as
+     * the permission granted by the system for read or write access on ACTION_OPEN_DOCUMENT
+     * lasts only until the user's device restarts.
+     * Ref: https://developer.android.com/training/data-storage/shared/documents-files#persist-permissions
+     *
+     * This helps fix the SecurityException reported in this issue:
+     * https://github.com/commons-app/apps-android-commons/issues/6357
+     */
+    private fun takePersistableUriPermissions(context: Context, result: ActivityResult) {
+        result.data?.let { intentData ->
+            val takeFlags: Int = (Intent.FLAG_GRANT_READ_URI_PERMISSION)
+            // Persist the URI permission for all URIs in the clip data
+            // if multiple images are selected,
+            // or for the single URI if only one image is selected
+            intentData.clipData?.let { clipData ->
+                for (i in 0 until clipData.itemCount) {
+                    context.contentResolver.takePersistableUriPermission(
+                        clipData.getItemAt(i).uri, takeFlags)
+                }
+            } ?: intentData.data?.let { uri ->
+                context.contentResolver.takePersistableUriPermission(uri, takeFlags)
+            }
         }
     }
 
@@ -329,6 +367,7 @@ object FilePicker : Constants {
         callbacks: Callbacks
     ) {
         if (result.resultCode == Activity.RESULT_OK && !isPhoto(result.data)) {
+            takePersistableUriPermissions(activity, result)
             try {
                 val files = getFilesFromGalleryPictures(result.data, activity)
                 callbacks.onImagesPicked(files, ImageSource.GALLERY, restoreType(activity))

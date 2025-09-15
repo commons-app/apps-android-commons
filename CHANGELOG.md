@@ -1,5 +1,49 @@
 # Wikimedia Commons for Android
 
+## v6.0.2
+
+### What's changed
+* Addressed a bug that prevented the keyboard from appearing in various text fields, such as on the upload wizard
+* Links in the "File usages" list are now clickable and will take you to the correct page.
+* Titles for file usages are now clearer and easier to understand
+* Bug fixes and stability improvements
+
+## v6.0.1
+
+### What's changed
+* The app now supports Android 15 with an improved user interface
+* Enhanced Nearby with robust and more reliable labels
+* Bug fixes and stability improvements
+
+## v5.6.1
+
+### What's changed
+* The app no longer uploads images to Wikidata if one exists already for a given item
+* File usage displays correctly now
+* No more infinite circular progress bar on nominating an image for deletion
+* Enhanced location updates while using GPS
+* Author/uploader names are now available in Media Details for Commons licensing compliance
+* Improved usage of popups in Nearby
+* Bug fixes and stability improvements 
+
+## v5.5.0
+
+### What's changed
+* Explore images will now be shown based on the map location and not at your current location
+* Enhanced Wikidata feedback message
+* Green labels in Explore map will no longer be hidden by other pins thumbnails
+* Upload wizard's language drop-down now reflects the language used in the pin label
+* Users can now pick only one image at a time while using the custom selector
+* Bug fixes and stability improvements 
+
+## v5.4.1
+
+### What's changed
+* Custom picker now detects images that are already available on Commons
+* Improve credit line in image list
+* Show place cards with loaded names only in the Nearby list
+* Fix the error that occurs while loading images in Explore
+
 ## v5.3.0
 
 ### What's changed

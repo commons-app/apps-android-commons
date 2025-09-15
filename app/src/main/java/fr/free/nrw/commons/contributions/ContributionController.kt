@@ -253,13 +253,14 @@ class ContributionController @Inject constructor(@param:Named("default_preferenc
      */
     fun initiateCustomGalleryPickWithPermission(
         activity: Activity,
-        resultLauncher: ActivityResultLauncher<Intent>
+        resultLauncher: ActivityResultLauncher<Intent>,
+        singleSelection: Boolean = false
     ) {
         setPickerConfiguration(activity, true)
 
         checkPermissionsAndPerformAction(
             activity,
-            { openCustomSelector(activity, resultLauncher, 0) },
+            { FilePicker.openCustomSelector(activity, resultLauncher, 0, singleSelection) },
             R.string.storage_permission_title,
             R.string.write_storage_permission_rationale,
             *PERMISSIONS_STORAGE

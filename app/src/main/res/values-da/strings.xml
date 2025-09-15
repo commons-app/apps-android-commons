@@ -135,7 +135,7 @@
   <string name="categories_not_found">Ingen kategorier matchende %1$s er fundet</string>
   <string name="depictions_not_found">Der blev ikke fundet nogen Wikidata-elementer, der matcher %1$s</string>
   <string name="no_child_classes">%1$s har ingen underklasser</string>
-  <string name="no_parent_classes">%1$s har ingen forældreklasser</string>
+  <string name="no_parent_classes">%1$s har ingen overordnede klasser</string>
   <string name="categories_skip_explanation">Tilføj kategorier for at gøre dine billeder mere synlig på Wikimedia Commons. Begynd at taste for at tilføje kategorier.</string>
   <string name="categories_activity_title">Kategorier</string>
   <string name="title_activity_settings">Indstillinger</string>
@@ -218,6 +218,7 @@
   <string name="media_detail_description">Beskrivelse</string>
   <string name="media_detail_discussion">Diskussion</string>
   <string name="media_detail_author">Forfatter</string>
+  <string name="media_detail_uploader">Uploader</string>
   <string name="media_detail_uploaded_date">Upload-dato</string>
   <string name="media_detail_license">Licens</string>
   <string name="media_detail_coordinates">Koordinater</string>
@@ -376,7 +377,7 @@
   <string name="statistics_featured">Udvalgte billeder</string>
   <string name="statistics_wikidata_edits">Billeder via \"Steder i nærheden\"</string>
   <string name="level">Niveau %d</string>
-  <string name="profileLevel">%s (Niveau %s)</string>
+  <string name="profile_withLevel">%s (Niveau %s)</string>
   <string name="images_uploaded">Uploadede billeder</string>
   <string name="image_reverts">Billeder, som ikke er blevet trukket tilbage</string>
   <string name="images_used_by_wiki">Billeder brugt</string>
@@ -419,7 +420,7 @@
   <string name="deletion_reason_bad_for_my_privacy">Jeg indså, det var skidt for mit privatliv</string>
   <string name="deletion_reason_no_longer_want_public">Jeg ombestemte mig, jeg ønsker ikke at det skal være offentligt synligt længere</string>
   <string name="deletion_reason_not_interesting">Beklager dette billede er ikke interessant for en encyklopædi</string>
-  <string name="uploaded_by_myself">Uploadet af mig selv på %1$s , brugt i %2$d artikel(er).</string>
+  <string name="uploaded_by_myself">Uploadet af mig selv på %1$s , brugt i mindst %2$d artikel(er).</string>
   <string name="no_uploads">Velkommen til Commons!\n\nUpload dit første medie ved at trykke på Tilføj-knappen.</string>
   <string name="no_categories_selected">Ingen kategorier valgt</string>
   <string name="no_categories_selected_warning_desc">Billeder uden kategorier er sjældent brugbare. Er du sikker på, at du vil fortsætte uden at vælge kategorier?</string>
@@ -584,6 +585,8 @@
   <string name="title_for_media">MEDIER</string>
   <string name="title_for_child_classes">UNDERKLASSER</string>
   <string name="title_for_parent_classes">OVERORDNEDE KLASSER</string>
+  <string name="title_for_subcategories">UNDERKATEGORIER</string>
+  <string name="title_for_parent_categories">OVERORDNEDE KATEGORIER</string>
   <string name="upload_nearby_place_found_title">Sted fundet i nærheden</string>
   <string name="upload_nearby_place_found_description_plural">Er disse billeder af %1$s ?</string>
   <string name="upload_nearby_place_found_description_singular">Er dette et billede af %1$s?</string>
@@ -828,4 +831,5 @@
   <string name="show_in_nearby">Vis i I nærheden</string>
   <string name="image_tag_line_created_and_uploaded_by">Oprettet og uploadet af: %1$s</string>
   <string name="image_tag_line_created_by_and_uploaded_by">Oprettet af %1$s og uploadet af %2$s</string>
+  <string name="nominated_for_deletion_btn">Nomineret til sletning</string>
 </resources>

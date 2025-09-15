@@ -322,6 +322,7 @@
   <string name="statistics_featured">ߖߌ߬ߦߊ߬ߓߍ߫ ߟߊߓߊ߯ߙߕߊ ߟߎ߬</string>
   <string name="statistics_wikidata_edits">ߖߌ߬ߦߊ߬ߓߍ ߞߊߕߙߍ߬ \"ߛߌ߰ߢߐ߲߰ ߦߙߐ\" ߡߊ߬</string>
   <string name="level" fuzzy="true">ߞߊߓߋ</string>
+  <string name="profile_withLevel">%s (ߞߊߓߋ %s)</string>
   <string name="images_uploaded">ߖߌ߬ߦߊ߬ߓߍ ߓߘߊ߫ ߟߊߦߟߍ߬</string>
   <string name="image_reverts">ߖߌ߬ߦߊ߬ߓߍ ߡߊ߫ ߖߏ߰ߛߌ߬</string>
   <string name="images_used_by_wiki">ߖߌ߬ߦߊ߬ߓߍ߬ ߟߊߓߊ߯ߙߊߣߍ߲ ߠߎ߬</string>
@@ -360,7 +361,7 @@
   <string name="deletion_reason_bad_for_my_privacy">ߒ ߧߴߊ߬ ߖߊ߬ߕߋ߬ ߟߊ߫ ߒߞߏ߫ ߊ߬ ߡߊ߲ߘߌ߫ ߒ ߖߘߍ߬ߞߊ߬ߣߌ߲߬ ߞߏ ߟߎ߫ ߟߊ߫.</string>
   <string name="deletion_reason_no_longer_want_public">ߒ ߓߘߊ߫ ߒ ߡߙߌߦߊ ߡߊߝߊ߬ߟߋ߲߬߸ ߒ ߕߴߊ߬ ߝߵߊ߬ ߦߋ߫ ߜߍߘߐ߫ ߦߋߕߊ߫ ߘߴߏ߬ ߞߐ߫ ߡߎ߰ߡߍ߫</string>
   <string name="deletion_reason_not_interesting">ߤߊߞߍ߬ߕߏ߬ ߔߘߋߞߎ ߘߐ߱ߘߏ߲߬ߣߍ߲߫ ߕߍ߫ ߖߌ߬ߦߊ߬ߓߍ ߣߌ߲߬ ߠߊ߫</string>
-  <string name="uploaded_by_myself">ߡߍ߲ ߠߎ߬ ߟߊߦߟߍ߬ߣߍ߲߬ ߦߋ߫ ߒ ߖߘߍ߬ߞߊߣߌ߲ ߓߟߏ߫ %1$s ߟߊ߫߸ ߣߴߊ߬ ߟߊߓߊ߯ߙߊߣߍ߲߫ ߦߋ߫ %2$d ߞߎߡߘߊ (ߟߎ߬) ߘߐ߫.</string>
+  <string name="uploaded_by_myself" fuzzy="true">ߡߍ߲ ߠߎ߬ ߟߊߦߟߍ߬ߣߍ߲߬ ߦߋ߫ ߒ ߖߘߍ߬ߞߊߣߌ߲ ߓߟߏ߫ %1$s ߟߊ߫߸ ߣߴߊ߬ ߟߊߓߊ߯ߙߊߣߍ߲߫ ߦߋ߫ %2$d ߞߎߡߘߊ (ߟߎ߬) ߘߐ߫.</string>
   <string name="no_uploads">ߌ ߣߌ߫ ߛߣߍ߫ ߞߐߡߐ߲ߛ ߞߊ߲߬߹ \nߌ ߟߊ߫ ߡߋߘߌߦߊ߫ ߝߟߐ ߟߊߦߟߍ߬ ߝߙߊ߬ߟߌ ߞߎ߬ߘߎ ߛߐ߲߬ߞߌ߲ ߠߊ߫.</string>
   <string name="no_categories_selected">ߦߌߟߡߊ߫ ߡߊ߫ ߓߊߕߐ߬ߡߐ߲߬</string>
   <string name="no_categories_selected_warning_desc">ߦߌߟߡߊ߫ ߕߍ߫ ߖߌ߬ߦߊ߬ߓߍ ߡߍ߲ ߠߊ߫߸ ߏ߬ ߟߊߓߊ߯ߙߊ ߜߟߍ߬ߡߊ߲߫. ߌ ߦߴߊ߬ ߝߍ߬ ߞߵߊ߬ ߞߘߊߡߊ߫ ߓߊ߬ ߞߵߊ߬ ߕߘߍ߬ ߌ ߡߊ߫ ߦߌߟߡߊ ߘߏ߫ ߓߊߕߐ߬ߡߐ߲߬؟</string>

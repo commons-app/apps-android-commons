@@ -113,6 +113,7 @@
   <string name="login_failed_throttled">Кёб джетишимсиз сынау болду. Тилейбиз, талай минст сора энтда кёрюгюз.</string>
   <string name="login_failed_blocked">Кечериксиз, бу хайырланыучу Гёзенде блок этилгенди</string>
   <string name="login_failed_2fa_needed">Эки факторлу аутентификация кодну берирге керексиз.</string>
+  <string name="login_failed_email_auth_needed">Бегитиу код электрон почта адресигизге джиберилгенди. Кирир ючюн аны салыгъыз.</string>
   <string name="login_failed_generic">Системагъа кириуде халат</string>
   <string name="share_upload_button">Джюкле</string>
   <string name="multiple_share_base_title">Бу къауумха ат бер</string>
@@ -209,6 +210,7 @@
   <string name="media_detail_description">Ачыкълау</string>
   <string name="media_detail_discussion">Сюзюу</string>
   <string name="media_detail_author">Автор</string>
+  <string name="media_detail_uploader">Джюклеген</string>
   <string name="media_detail_uploaded_date">Джюклениу дата</string>
   <string name="media_detail_license">Лицензия</string>
   <string name="media_detail_coordinates">Координатла</string>
@@ -216,6 +218,7 @@
   <string name="become_a_tester_title">Бета-Тестер болугъуз</string>
   <string name="become_a_tester_description">Google Play-де бета каналыбызгъа къошулугъуз эмда джангы функциялагъа эмда халат тюзетиулеге эртде джетишигиз</string>
   <string name="_2fa_code">2FA Код</string>
+  <string name="email_auth_code">Электрон почтаны верификация этигиз</string>
   <string name="logout_verification">Кертиден чыгъаргъа излеймисиз?</string>
   <string name="mediaimage_failed">Медиа Сурат Джетишимсизди</string>
   <string name="no_subcategory_found">Тюб категория табылмады</string>
@@ -366,7 +369,7 @@
   <string name="statistics_featured">Сайланнган Суратла</string>
   <string name="statistics_wikidata_edits">\"Джууукъдагъы Джерле\" юсю бла суратла</string>
   <string name="level">Дараджа %d</string>
-  <string name="profileLevel">%s (Дараджа %s)</string>
+  <string name="profile_withLevel">%s (Дараджа %s)</string>
   <string name="images_uploaded">Суратла Джюклендиле</string>
   <string name="image_reverts">Суратла Кери Алынмадыла</string>
   <string name="images_used_by_wiki">Суратла Хайырландыла</string>
@@ -409,7 +412,7 @@
   <string name="deletion_reason_bad_for_my_privacy">Ташалыгъыма аман болгъанын ангыладым</string>
   <string name="deletion_reason_no_longer_want_public">Сагъышымы тюрлендирдим, энди хар кимге кёрюннюгюмю излемейме</string>
   <string name="deletion_reason_not_interesting">Кечериксиз, бу сурат энциклопедия ючюн эс бёлюрча тюлдю</string>
-  <string name="uploaded_by_myself">Кесим джюклеген %1$s сайтха джюкленди эмда %2$d статьяда хайырландырылды.</string>
+  <string name="uploaded_by_myself">Кесим джюклеген %1$s сайтха джюкленди эмда эм азы бла %2$d статьяда хайырландырылды.</string>
   <string name="no_uploads">Гёзеннге Хош Келигиз!\n\nКъош тиекге басыб биринчи медиагъызны джюклегиз.</string>
   <string name="no_categories_selected">Категорияла Сайланмадыла</string>
   <string name="no_categories_selected_warning_desc">Категориясыз суратла аз хайырланадыла. Категория сайламай бардырыргъа излегенигизге ишексизмисиз?</string>
@@ -574,6 +577,8 @@
   <string name="title_for_media">МЕДИА</string>
   <string name="title_for_child_classes">БАЛА КЛАССЛА</string>
   <string name="title_for_parent_classes">АНА КЛАССЛА</string>
+  <string name="title_for_subcategories">ТЮБ КАТЕГОРИЯЛА</string>
+  <string name="title_for_parent_categories">ТАМЫР КАТЕГОРИЯЛА</string>
   <string name="upload_nearby_place_found_title">Джууукъдагъы Джер Табылды</string>
   <string name="upload_nearby_place_found_description_plural">Была %1$s суратламыдыла?</string>
   <string name="upload_nearby_place_found_description_singular">Бу %1$s суратымыды?</string>
@@ -749,7 +754,7 @@
   <string name="permissions_are_required_for_functionality">Ишлерча болууу ючюн эркинликле керекдиле</string>
   <string name="learn_how_to_write_a_useful_description">Хайырланырча ачыкълау къалай джазаргъа керек болгъанын юренигиз</string>
   <string name="learn_how_to_write_a_useful_caption">Хайырланырча тюб джазыуну къалай джазаргъа керек болгъанын юренигиз</string>
-  <string name="see_your_achievements">Джетишимлеригизге къарагъыз</string>
+  <string name="see_your_achievements">Джетишимлеригизни кёргюзюгюз</string>
   <string name="edit_image">Суратны Тюзет</string>
   <string name="edit_location">Локацияны Тюзет</string>
   <string name="location_updated">Локация джангыртылды!</string>
@@ -779,6 +784,7 @@
   <string name="talk">Сюзюу</string>
   <string name="write_something_about_the_item">%1$s элементни юсюнден бир затла джазыгъыз. Буну хар ким да кёрлюкдю.</string>
   <string name="does_not_exist_anymore_no_picture_can_ever_be_taken_of_it">\'%1$s\' энди бар тюлдю, аны картха алырча тюлдю.</string>
+  <string name="is_at_a_different_place_wikidata">\'%1$s\' башха джердеди.</string>
   <string name="is_at_a_different_place_please_specify_the_correct_place_below_if_possible_tell_us_the_correct_latitude_longitude">\'%1$s\' - башха джерди. Тилейбиз, тюз джерни энишгерекде белгилегиз, эмда мадар бар эсе, тюз кенглик бла узунлукъну джазыгъыз.</string>
   <string name="other_problem_or_information_please_explain_below">Башха проблема неда информация (тилейбиз, энишгерекде ангылатыгъыз).</string>
   <string name="feedback_destination_note">Сизни кери оюмугъуз тюбюндеги вики бетге джиберилликди:  &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Mobile_app/Feedback\"&gt;Commons:Mobile app/Feedback&lt;/a&gt;</string>
@@ -815,4 +821,7 @@
   <string name="congratulations_all_pictures_in_this_album_have_been_either_uploaded_or_marked_as_not_for_upload">Алгъышлайбыз, бу альбомна бютеу сратла не джюкленнгендиле, неда джюкленирге джораланмагъанлача белгиленнгендиле.</string>
   <string name="show_in_explore">Explore-де кёргюз</string>
   <string name="show_in_nearby">Nearby-да кёргюз</string>
+  <string name="image_tag_line_created_and_uploaded_by">Болдургъан эм джюклеген: %1$s</string>
+  <string name="image_tag_line_created_by_and_uploaded_by">%1$s болдурду эмда %2$s джюкледи</string>
+  <string name="nominated_for_deletion_btn">Кетериуге теджелгенди</string>
 </resources>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Adhmi
+-->
+<resources>
+  <string name="crash_dialog_title">Commons bamasalah</string>
+  <string name="crash_dialog_text">Ups. Ado nan salah!</string>
+  <string name="crash_dialog_comment_prompt">Caritokan apo nan sanak karajoan, sudah tu bagikan lewat email ka kami. Akan kami bantu mamelokannyo!</string>
+  <string name="crash_dialog_ok_toast">Tarimo kasih!</string>
+</resources>

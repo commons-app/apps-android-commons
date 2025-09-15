@@ -3,16 +3,17 @@ package fr.free.nrw.commons.profile
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
-import android.net.Uri
 import android.os.Bundle
 import android.util.Log
-import android.view.*
+import android.view.Menu
+import android.view.MenuItem
+import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.FileProvider
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import fr.free.nrw.commons.R
-import fr.free.nrw.commons.Utils
 import fr.free.nrw.commons.ViewPagerAdapter
 import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.contributions.ContributionsFragment
@@ -20,10 +21,11 @@ import fr.free.nrw.commons.databinding.ActivityProfileBinding
 import fr.free.nrw.commons.profile.achievements.AchievementsFragment
 import fr.free.nrw.commons.profile.leaderboard.LeaderboardFragment
 import fr.free.nrw.commons.theme.BaseActivity
+import fr.free.nrw.commons.utils.applyEdgeToEdgeAllInsets
 import fr.free.nrw.commons.utils.DialogUtil
 import java.io.File
 import java.io.FileOutputStream
-import java.util.*
+import java.util.Locale
 import javax.inject.Inject
 
 /**
@@ -45,7 +47,7 @@ class ProfileActivity : BaseActivity() {
     private var contributionsFragment: ContributionsFragment? = null
 
     fun setScroll(canScroll: Boolean) {
-        binding.viewPager.setCanScroll(canScroll)
+        binding.viewPager.canScroll = canScroll
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
@@ -60,6 +62,7 @@ class ProfileActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
 
         binding = ActivityProfileBinding.inflate(layoutInflater)
+        applyEdgeToEdgeAllInsets(binding.root)
         setContentView(binding.root)
         setSupportActionBar(binding.toolbarBinding.toolbar)
 
@@ -71,7 +74,7 @@ class ProfileActivity : BaseActivity() {
         title = userName
         shouldShowContributions = intent.getBooleanExtra(KEY_SHOULD_SHOW_CONTRIBUTIONS, false)
 
-        viewPagerAdapter = ViewPagerAdapter(supportFragmentManager)
+        viewPagerAdapter = ViewPagerAdapter(this, supportFragmentManager)
         binding.viewPager.adapter = viewPagerAdapter
         binding.tabLayout.setupWithViewPager(binding.viewPager)
         setTabs()
@@ -83,39 +86,23 @@ class ProfileActivity : BaseActivity() {
     }
 
     private fun setTabs() {
-        val fragmentList = mutableListOf<Fragment>()
-        val titleList = mutableListOf<String>()
-
-        // Add Achievements tab
         achievementsFragment = AchievementsFragment().apply {
-            arguments = Bundle().apply {
-                putString(KEY_USERNAME, userName)
-            }
+            arguments = bundleOf(KEY_USERNAME to userName)
         }
-        fragmentList.add(achievementsFragment)
-        titleList.add(resources.getString(R.string.achievements_tab_title).uppercase())
 
-        // Add Leaderboard tab
         leaderboardFragment = LeaderboardFragment().apply {
-            arguments = Bundle().apply {
-                putString(KEY_USERNAME, userName)
-            }
+            arguments = bundleOf(KEY_USERNAME to userName)
         }
-        fragmentList.add(leaderboardFragment)
-        titleList.add(resources.getString(R.string.leaderboard_tab_title).uppercase(Locale.ROOT))
 
-        // Add Contributions tab
         contributionsFragment = ContributionsFragment().apply {
-            arguments = Bundle().apply {
-                putString(KEY_USERNAME, userName)
-            }
-        }
-        contributionsFragment?.let {
-            fragmentList.add(it)
-            titleList.add(getString(R.string.contributions_fragment).uppercase(Locale.ROOT))
+            arguments = bundleOf(KEY_USERNAME to userName)
         }
 
-        viewPagerAdapter.setTabData(fragmentList, titleList)
+        viewPagerAdapter.setTabs(
+            R.string.achievements_tab_title to achievementsFragment,
+            R.string.leaderboard_tab_title to leaderboardFragment,
+            R.string.contributions_fragment to contributionsFragment!!
+        )
         viewPagerAdapter.notifyDataSetChanged()
     }
 
@@ -133,7 +120,7 @@ class ProfileActivity : BaseActivity() {
         return when (item.itemId) {
             R.id.share_app_icon -> {
                 val rootView = window.decorView.findViewById<View>(android.R.id.content)
-                val screenShot = Utils.getScreenShot(rootView)
+                val screenShot = getScreenShot(rootView)
                 if (screenShot == null) {
                     Log.e("ERROR", "ScreenShot is null")
                     return false
@@ -210,6 +197,24 @@ class ProfileActivity : BaseActivity() {
 
     fun setTabLayoutVisibility(isVisible: Boolean) {
         binding.tabLayout.visibility = if (isVisible) View.VISIBLE else View.GONE
+    }
+
+    /**
+     * To take screenshot of the screen and return it in Bitmap format
+     *
+     * @param view
+     * @return
+     */
+    fun getScreenShot(view: View): Bitmap? {
+        val screenView = view.rootView
+        screenView.isDrawingCacheEnabled = true
+        val drawingCache = screenView.drawingCache
+        if (drawingCache != null) {
+            val bitmap = Bitmap.createBitmap(drawingCache)
+            screenView.isDrawingCacheEnabled = false
+            return bitmap
+        }
+        return null
     }
 
     companion object {

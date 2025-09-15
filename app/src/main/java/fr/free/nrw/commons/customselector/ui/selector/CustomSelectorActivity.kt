@@ -40,6 +40,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
+import androidx.core.view.ViewGroupCompat
 import androidx.lifecycle.ViewModelProvider
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.customselector.database.NotForUploadStatus
@@ -56,6 +57,8 @@ import fr.free.nrw.commons.media.ZoomableActivity
 import fr.free.nrw.commons.theme.BaseActivity
 import fr.free.nrw.commons.upload.FileUtilsWrapper
 import fr.free.nrw.commons.utils.CustomSelectorUtils
+import fr.free.nrw.commons.utils.applyEdgeToEdgeBottomPaddingInsets
+import fr.free.nrw.commons.utils.applyEdgeToEdgeTopInsets
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -104,7 +107,7 @@ class CustomSelectorActivity :
     /**
      * Maximum number of images that can be selected.
      */
-    private val uploadLimit: Int = 20
+    private var uploadLimit: Int = 20
 
     /**
      * Flag that is marked true when the amount
@@ -198,6 +201,9 @@ class CustomSelectorActivity :
                         .fillMaxWidth(),
             )
         }
+        ViewGroupCompat.installCompatInsetsDispatch(binding.root)
+        applyEdgeToEdgeTopInsets(toolbarBinding.toolbarLayout)
+        bottomSheetBinding.bottomLayout.applyEdgeToEdgeBottomPaddingInsets()
         val view = binding.root
         setContentView(view)
 
@@ -206,6 +212,9 @@ class CustomSelectorActivity :
             ViewModelProvider(this, customSelectorViewModelFactory).get(
                 CustomSelectorViewModel::class.java,
             )
+
+        // Check for single selection extra
+        uploadLimit = if (intent.getBooleanExtra(EXTRA_SINGLE_SELECTION, false)) 1 else 20
 
         setupViews()
 
@@ -728,6 +737,7 @@ class CustomSelectorActivity :
         const val FOLDER_ID: String = "FolderId"
         const val FOLDER_NAME: String = "FolderName"
         const val ITEM_ID: String = "ItemId"
+        const val EXTRA_SINGLE_SELECTION: String = "EXTRA_SINGLE_SELECTION"
     }
 }
 

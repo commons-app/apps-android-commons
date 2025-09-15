@@ -12,7 +12,6 @@ import androidx.fragment.app.FragmentManager
 import androidx.work.ExistingWorkPolicy
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import fr.free.nrw.commons.R
-import fr.free.nrw.commons.WelcomeActivity
 import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.bookmarks.BookmarkFragment
 import fr.free.nrw.commons.contributions.ContributionsFragment.Companion.newInstance
@@ -33,7 +32,9 @@ import fr.free.nrw.commons.notification.NotificationActivity.Companion.startYour
 import fr.free.nrw.commons.notification.NotificationController
 import fr.free.nrw.commons.quiz.QuizChecker
 import fr.free.nrw.commons.settings.SettingsFragment
+import fr.free.nrw.commons.startWelcome
 import fr.free.nrw.commons.theme.BaseActivity
+import fr.free.nrw.commons.utils.applyEdgeToEdgeAllInsets
 import fr.free.nrw.commons.upload.UploadProgressActivity
 import fr.free.nrw.commons.upload.worker.WorkRequestHelper.Companion.makeOneTimeWorkRequest
 import fr.free.nrw.commons.utils.ViewUtilWrapper
@@ -112,6 +113,7 @@ class MainActivity : BaseActivity(), FragmentManager.OnBackStackChangedListener 
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = MainBinding.inflate(layoutInflater)
+        applyEdgeToEdgeAllInsets(binding!!.root)
         setContentView(binding!!.root)
         setSupportActionBar(binding!!.toolbarBinding.toolbar)
         tabLayout = binding!!.fragmentMainNavTabLayout
@@ -517,7 +519,7 @@ after opening the app.
             (!applicationKvStore!!.getBoolean("login_skipped"))
         ) {
             defaultKvStore.putBoolean("inAppCameraFirstRun", true)
-            WelcomeActivity.startYourself(this)
+            startWelcome()
         }
 
         retryAllFailedUploads()

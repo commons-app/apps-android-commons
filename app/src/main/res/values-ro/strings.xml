@@ -394,7 +394,7 @@
   <string name="deletion_reason_bad_for_my_privacy">Mi-am dat seama că este rău pentru intimitatea mea</string>
   <string name="deletion_reason_no_longer_want_public">M-am răzgândit, nu mai vreau să fie publică</string>
   <string name="deletion_reason_not_interesting">Ne pare rău că această imagine nu este interesantă pentru o enciclopedie</string>
-  <string name="uploaded_by_myself">Încărcat de mine pe %1$s, folosit în %2$d articol(e).</string>
+  <string name="uploaded_by_myself" fuzzy="true">Încărcat de mine pe %1$s, folosit în %2$d articol(e).</string>
   <string name="no_uploads">Bine ați venit la Commons!\n\nÎncărcați primul dvs. media apăsând pe butonul de adăugare.</string>
   <string name="no_categories_selected">Nici o categorie selectată</string>
   <string name="no_categories_selected_warning_desc">Imaginile fără categorii sunt rareori utilizabile. Sigur doriți să continuați fără a selecta categorii?</string>

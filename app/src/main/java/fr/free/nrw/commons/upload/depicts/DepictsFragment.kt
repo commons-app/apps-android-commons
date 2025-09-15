@@ -27,6 +27,7 @@ import fr.free.nrw.commons.upload.UploadActivity
 import fr.free.nrw.commons.upload.UploadBaseFragment
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
 import fr.free.nrw.commons.utils.DialogUtil.showAlertDialog
+import fr.free.nrw.commons.utils.handleKeyboardInsets
 import fr.free.nrw.commons.wikidata.WikidataConstants.SELECTED_NEARBY_PLACE
 import io.reactivex.Notification
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -69,6 +70,7 @@ class DepictsFragment : UploadBaseFragment(), DepictsContract.View {
         savedInstanceState: Bundle?
     ): View {
         _binding = UploadDepictsFragmentBinding.inflate(inflater, container, false)
+        _binding!!.navigationButtonsContainer.handleKeyboardInsets()
         return binding.root
     }
 

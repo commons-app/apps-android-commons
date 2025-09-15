@@ -25,12 +25,12 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.IntentCompat
 import androidx.core.os.BundleCompat
 import androidx.core.text.HtmlCompat
+import androidx.core.view.WindowCompat
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import fr.free.nrw.commons.CameraPosition
 import fr.free.nrw.commons.CommonsApplication
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.R
-import fr.free.nrw.commons.Utils
 import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.auth.csrf.CsrfTokenClient
 import fr.free.nrw.commons.coordinates.CoordinateEditHelper
@@ -45,6 +45,9 @@ import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment.Compani
 import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment.Companion.LAST_ZOOM
 import fr.free.nrw.commons.utils.DialogUtil
 import fr.free.nrw.commons.utils.MapUtils.ZOOM_LEVEL
+import fr.free.nrw.commons.utils.applyEdgeToEdgeBottomInsets
+import fr.free.nrw.commons.utils.applyEdgeToEdgeTopPaddingInsets
+import fr.free.nrw.commons.utils.handleGeoCoordinates
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory
@@ -330,6 +333,9 @@ class LocationPickerActivity : BaseActivity(), LocationPermissionCallback {
      */
     private fun getToolbarUI() {
         val toolbar: ConstraintLayout = findViewById(R.id.location_picker_toolbar)
+        WindowCompat.getInsetsController(window, window.decorView)
+            .isAppearanceLightStatusBars = false
+        toolbar.applyEdgeToEdgeTopPaddingInsets()
         largeToolbarText = findViewById(R.id.location_picker_toolbar_primary_text_view)
         smallToolbarText = findViewById(R.id.location_picker_toolbar_secondary_text_view)
         toolbar.setBackgroundColor(ContextCompat.getColor(this, R.color.primaryColor))
@@ -432,8 +438,8 @@ class LocationPickerActivity : BaseActivity(), LocationPermissionCallback {
 
         position?.let {
             mapView?.zoomLevelDouble?.let { zoomLevel ->
-                Utils.handleGeoCoordinates(this, it, zoomLevel)
-            } ?: Utils.handleGeoCoordinates(this, it)
+                handleGeoCoordinates(this, it, zoomLevel)
+            } ?: handleGeoCoordinates(this, it)
         }
     }
 
@@ -460,6 +466,7 @@ class LocationPickerActivity : BaseActivity(), LocationPermissionCallback {
      */
     private fun addPlaceSelectedButton() {
         placeSelectedButton = findViewById(R.id.location_chosen_button)
+        applyEdgeToEdgeBottomInsets(placeSelectedButton)
         placeSelectedButton.setOnClickListener { placeSelected() }
     }
 

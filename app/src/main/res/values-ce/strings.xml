@@ -114,7 +114,7 @@
   <string name="login_failed_2fa_needed">Ахь шинафакторийн аутентификацин код йазо йеза</string>
   <string name="login_failed_generic">Системин довзийтарца гӀалат!</string>
   <string name="share_upload_button">Чуйолуш йу</string>
-  <string name="multiple_share_base_title">ДӀайазйе хӀокху файлийн тобан цӀе</string>
+  <string name="multiple_share_base_title">ДӀайазйе хӀокху файлийн тобанан цӀе</string>
   <string name="provider_modifications">Хийцамаш</string>
   <string name="menu_upload_single">Чуйолуш йу</string>
   <string name="categories_search_text_hint">Категори харжар</string>
@@ -379,7 +379,7 @@
   <string name="wikipedia_instructions_step_3">3. Хьайн суьртана догӀу йаззаман дакъа лаха</string>
   <string name="wikipedia_instructions_step_4">4. «Хийца» иконкин тӀетаӀайе (къоламах тера йу) хӀокху декъана</string>
   <string name="wikipedia_instructions_step_5">5. Вики-код йогӀучу метте дӀайазйе</string>
-  <string name="wikipedia_instructions_step_7">7. Йаззам дӀайазбе</string>
+  <string name="wikipedia_instructions_step_7">7. Йаззам дӀайазбан</string>
   <string name="copy_wikicode_to_clipboard">Вики-код буфер чу копийе</string>
   <string name="pause">пауза</string>
   <string name="resume">кхидӀа</string>

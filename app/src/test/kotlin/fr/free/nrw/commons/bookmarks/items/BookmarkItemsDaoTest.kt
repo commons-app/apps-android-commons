@@ -18,20 +18,20 @@ import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.TestCommonsApplication
-import fr.free.nrw.commons.bookmarks.items.BookmarkItemsDao.Table.COLUMN_CATEGORIES_DESCRIPTION_LIST
-import fr.free.nrw.commons.bookmarks.items.BookmarkItemsDao.Table.COLUMN_CATEGORIES_NAME_LIST
-import fr.free.nrw.commons.bookmarks.items.BookmarkItemsDao.Table.COLUMN_CATEGORIES_THUMBNAIL_LIST
-import fr.free.nrw.commons.bookmarks.items.BookmarkItemsDao.Table.COLUMN_DESCRIPTION
-import fr.free.nrw.commons.bookmarks.items.BookmarkItemsDao.Table.COLUMN_ID
-import fr.free.nrw.commons.bookmarks.items.BookmarkItemsDao.Table.COLUMN_IMAGE
-import fr.free.nrw.commons.bookmarks.items.BookmarkItemsDao.Table.COLUMN_INSTANCE_LIST
-import fr.free.nrw.commons.bookmarks.items.BookmarkItemsDao.Table.COLUMN_IS_SELECTED
-import fr.free.nrw.commons.bookmarks.items.BookmarkItemsDao.Table.COLUMN_NAME
-import fr.free.nrw.commons.bookmarks.items.BookmarkItemsDao.Table.CREATE_TABLE_STATEMENT
-import fr.free.nrw.commons.bookmarks.items.BookmarkItemsDao.Table.DROP_TABLE_STATEMENT
-import fr.free.nrw.commons.bookmarks.items.BookmarkItemsDao.Table.onCreate
-import fr.free.nrw.commons.bookmarks.items.BookmarkItemsDao.Table.onDelete
-import fr.free.nrw.commons.bookmarks.items.BookmarkItemsDao.Table.onUpdate
+import fr.free.nrw.commons.bookmarks.items.BookmarkItemsTable.COLUMN_CATEGORIES_DESCRIPTION_LIST
+import fr.free.nrw.commons.bookmarks.items.BookmarkItemsTable.COLUMN_CATEGORIES_NAME_LIST
+import fr.free.nrw.commons.bookmarks.items.BookmarkItemsTable.COLUMN_CATEGORIES_THUMBNAIL_LIST
+import fr.free.nrw.commons.bookmarks.items.BookmarkItemsTable.COLUMN_DESCRIPTION
+import fr.free.nrw.commons.bookmarks.items.BookmarkItemsTable.COLUMN_ID
+import fr.free.nrw.commons.bookmarks.items.BookmarkItemsTable.COLUMN_IMAGE
+import fr.free.nrw.commons.bookmarks.items.BookmarkItemsTable.COLUMN_INSTANCE_LIST
+import fr.free.nrw.commons.bookmarks.items.BookmarkItemsTable.COLUMN_IS_SELECTED
+import fr.free.nrw.commons.bookmarks.items.BookmarkItemsTable.COLUMN_NAME
+import fr.free.nrw.commons.bookmarks.items.BookmarkItemsTable.CREATE_TABLE_STATEMENT
+import fr.free.nrw.commons.bookmarks.items.BookmarkItemsTable.DROP_TABLE_STATEMENT
+import fr.free.nrw.commons.bookmarks.items.BookmarkItemsTable.onCreate
+import fr.free.nrw.commons.bookmarks.items.BookmarkItemsTable.onDelete
+import fr.free.nrw.commons.bookmarks.items.BookmarkItemsTable.onUpdate
 import fr.free.nrw.commons.category.CategoryItem
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
 import org.junit.Assert
@@ -135,7 +135,7 @@ class BookmarkItemsDaoTest {
         whenever(client.query(any(), any(), anyOrNull(), any(), anyOrNull()))
             .thenReturn(createCursor(14))
 
-        val result = testObject.allBookmarksItems
+        val result = testObject.getAllBookmarksItems()
 
         Assert.assertEquals(14, (result.size))
     }
@@ -145,20 +145,20 @@ class BookmarkItemsDaoTest {
         whenever(client.query(any(), any(), anyOrNull(), any(), anyOrNull())).thenThrow(
             RemoteException(""),
         )
-        testObject.allBookmarksItems
+        testObject.getAllBookmarksItems()
     }
 
     @Test
     fun getAllItemsBookmarksReturnsEmptyList_emptyCursor() {
         whenever(client.query(any(), any(), anyOrNull(), any(), anyOrNull()))
             .thenReturn(createCursor(0))
-        Assert.assertTrue(testObject.allBookmarksItems.isEmpty())
+        Assert.assertTrue(testObject.getAllBookmarksItems().isEmpty())
     }
 
     @Test
     fun getAllItemsBookmarksReturnsEmptyList_nullCursor() {
         whenever(client.query(any(), any(), anyOrNull(), any(), anyOrNull())).thenReturn(null)
-        Assert.assertTrue(testObject.allBookmarksItems.isEmpty())
+        Assert.assertTrue(testObject.getAllBookmarksItems().isEmpty())
     }
 
     @Test
@@ -167,7 +167,7 @@ class BookmarkItemsDaoTest {
         whenever(client.query(any(), any(), anyOrNull(), any(), anyOrNull())).thenReturn(mockCursor)
         whenever(mockCursor.moveToFirst()).thenReturn(false)
 
-        testObject.allBookmarksItems
+        testObject.getAllBookmarksItems()
 
         verify(mockCursor).close()
     }

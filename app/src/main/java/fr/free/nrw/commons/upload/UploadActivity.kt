@@ -13,6 +13,7 @@ import android.os.Build.VERSION_CODES
 import android.os.Bundle
 import android.provider.Settings
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.CheckBox
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AlertDialog
@@ -38,6 +39,7 @@ import fr.free.nrw.commons.mwapi.UserClient
 import fr.free.nrw.commons.nearby.Place
 import fr.free.nrw.commons.settings.Prefs
 import fr.free.nrw.commons.theme.BaseActivity
+import fr.free.nrw.commons.utils.applyEdgeToEdgeAllInsets
 import fr.free.nrw.commons.upload.ThumbnailsAdapter.OnThumbnailDeletedListener
 import fr.free.nrw.commons.upload.categories.UploadCategoriesFragment
 import fr.free.nrw.commons.upload.depicts.DepictsFragment
@@ -177,6 +179,7 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
         presenter?.setupBasicKvStoreFactory { BasicKvStore(this@UploadActivity, it) }
 
         _binding = ActivityUploadBinding.inflate(layoutInflater)
+        applyEdgeToEdgeAllInsets(_binding!!.root, false)
         setContentView(binding.root)
 
         // Overrides the back button to make sure the user is prepared to lose their progress
@@ -803,6 +806,19 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
 
     override fun onNextButtonClicked(index: Int) {
         if (index < fragments!!.size - 1) {
+            // Hide the keyboard before navigating to Media License screen
+            val isUploadCategoriesFragment = fragments!!.getOrNull(index)?.let {
+                it is UploadCategoriesFragment
+            } ?: false
+            if (isUploadCategoriesFragment) {
+                val inputMethodManager = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+                currentFocus?.let { focusedView ->
+                    inputMethodManager.hideSoftInputFromWindow(
+                        focusedView.windowToken,
+                        InputMethodManager.HIDE_NOT_ALWAYS
+                    )
+                }
+            }
             binding.vpUpload.setCurrentItem(index + 1, false)
             fragments!![index + 1].onBecameVisible()
             (binding.rvThumbnails.layoutManager as LinearLayoutManager)

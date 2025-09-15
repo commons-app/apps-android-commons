@@ -1,11 +1,11 @@
 package fr.free.nrw.commons.upload
 
 import android.content.Context
-import fr.free.nrw.commons.Utils
 import fr.free.nrw.commons.contributions.Contribution
 import fr.free.nrw.commons.filepicker.UploadableFile.DateTimeWithSource
 import fr.free.nrw.commons.settings.Prefs.Licenses
 import fr.free.nrw.commons.utils.ConfigUtils.getVersionNameWithSha
+import fr.free.nrw.commons.utils.getWikiLovesMonumentsYear
 import org.apache.commons.lang3.StringUtils
 import java.text.SimpleDateFormat
 import java.util.Calendar
@@ -49,7 +49,7 @@ class PageContentsCreator @Inject constructor(private val context: Context) {
                 String.format(
                     Locale.ENGLISH,
                     "{{Wiki Loves Monuments %d|1= %s}}\n",
-                    Utils.getWikiLovesMonumentsYear(Calendar.getInstance()),
+                    getWikiLovesMonumentsYear(Calendar.getInstance()),
                     contribution.countryCode
                 )
             )

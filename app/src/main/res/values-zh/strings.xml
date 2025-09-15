@@ -52,6 +52,7 @@
 * ZhaoGang
 * 七八年再来一次
 * 予弦
+* 人间百态
 * 佛壁灯
 * 列维劳德
 * 坑触可
@@ -268,6 +269,7 @@
   <string name="media_detail_description">描述</string>
   <string name="media_detail_discussion">讨论</string>
   <string name="media_detail_author">作者</string>
+  <string name="media_detail_uploader">上传者</string>
   <string name="media_detail_uploaded_date">上传日期</string>
   <string name="media_detail_license">许可协议</string>
   <string name="media_detail_coordinates">坐标</string>
@@ -426,7 +428,8 @@
   <string name="statistics_featured">特色图片</string>
   <string name="statistics_wikidata_edits">来自“附近地点”的图片</string>
   <string name="level">等级%d</string>
-  <string name="profileLevel">%s（%s級）</string>
+  <string name="profile_withLevel">%s（%s級）</string>
+  <string name="profile_withoutLevel">%s（%s）</string>
   <string name="images_uploaded">已上传图片</string>
   <string name="image_reverts">未还原图片</string>
   <string name="images_used_by_wiki">使用过的图片</string>
@@ -469,7 +472,7 @@
   <string name="deletion_reason_bad_for_my_privacy">我意识到这对我的隐私不利</string>
   <string name="deletion_reason_no_longer_want_public">我改变了主意，我不想再让公众看到它了</string>
   <string name="deletion_reason_not_interesting">对不起，这幅图对百科全书没什么意思</string>
-  <string name="uploaded_by_myself">由我自己上传在%1$s，使用于%2$d个条目。</string>
+  <string name="uploaded_by_myself">由我自己上传在%1$s，使用于至少%2$d个条目。</string>
   <string name="no_uploads">欢迎使用共享资源！\n\n通过点击添加按钮以上传您的首个媒体。</string>
   <string name="no_categories_selected">未提交分类</string>
   <string name="no_categories_selected_warning_desc">不带分类的图片很难有机会被利用到，您确定您要不选择分类来继续吗？</string>
@@ -634,6 +637,8 @@
   <string name="title_for_media">媒体</string>
   <string name="title_for_child_classes">子类别</string>
   <string name="title_for_parent_classes">父类别</string>
+  <string name="title_for_subcategories">子分类</string>
+  <string name="title_for_parent_categories">父级分类</string>
   <string name="upload_nearby_place_found_title">找到附近地点</string>
   <string name="upload_nearby_place_found_description_plural">这些是%1$s的图片吗？</string>
   <string name="upload_nearby_place_found_description_singular">这是%1$s的图片吗？</string>
@@ -810,7 +815,7 @@
   <string name="permissions_are_required_for_functionality">功能需要权限</string>
   <string name="learn_how_to_write_a_useful_description">了解如何写出有用的描述</string>
   <string name="learn_how_to_write_a_useful_caption">了解如何写出有用的注释</string>
-  <string name="see_your_achievements">查看您的成果</string>
+  <string name="see_your_achievements">查看您的成就</string>
   <string name="edit_image">编辑图片</string>
   <string name="edit_location">编辑位置</string>
   <string name="location_updated">位置已更新！</string>
@@ -840,6 +845,7 @@
   <string name="talk">讨论</string>
   <string name="write_something_about_the_item">请写一些关于项目“%1$s”的信息。所写的内容是公开可见的。</string>
   <string name="does_not_exist_anymore_no_picture_can_ever_be_taken_of_it">“%1$s”已不再存在，无法拍摄它的照片。</string>
+  <string name="is_at_a_different_place_wikidata">“%1$s”位于他处。</string>
   <string name="is_at_a_different_place_please_specify_the_correct_place_below_if_possible_tell_us_the_correct_latitude_longitude">“%1$s”位于一个不同的位置。请在下方给出正确的位置，可以的话请填写正确的经纬度。</string>
   <string name="other_problem_or_information_please_explain_below">其他问题或信息（请在下方解释）。</string>
   <string name="feedback_destination_note">您的反馈已经发布在以下wiki页面：&lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Mobile_app/Feedback\"&gt;Commons:Mobile app/Feedback&lt;/a&gt;</string>
@@ -878,4 +884,5 @@
   <string name="show_in_nearby">显示在附近</string>
   <string name="image_tag_line_created_and_uploaded_by">创建并上传者： %1$s</string>
   <string name="image_tag_line_created_by_and_uploaded_by">由%1$s创建并由%2$s上传</string>
+  <string name="nominated_for_deletion_btn">已提名删除</string>
 </resources>

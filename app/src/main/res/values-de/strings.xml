@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* *surak*
 * BPX-web
 * Bjarncraft
 * Brettchenweber
@@ -410,7 +411,7 @@
   <string name="statistics_featured">Vorgestellte Bilder</string>
   <string name="statistics_wikidata_edits">Bilder über „Orte in der Nähe“</string>
   <string name="level">Level %d</string>
-  <string name="profileLevel">%s (Level %s)</string>
+  <string name="profile_withLevel">%s (Level %s)</string>
   <string name="images_uploaded">Hochgeladene Bilder</string>
   <string name="image_reverts">Bilder nicht zurückgesetzt</string>
   <string name="images_used_by_wiki">Verwendete Bilder</string>
@@ -453,7 +454,7 @@
   <string name="deletion_reason_bad_for_my_privacy">Ich habe erkannt, dass es schlecht für meine Privatsphäre ist.</string>
   <string name="deletion_reason_no_longer_want_public">Ich habe meine Meinung geändert. Ich möchte nicht mehr, dass es öffentlich sichtbar ist.</string>
   <string name="deletion_reason_not_interesting">Entschuldigung, aber dieses Bild ist für eine Enzyklopädie nicht relevant.</string>
-  <string name="uploaded_by_myself">Von mir selbst hochgeladen am %1$s, verwendet in %2$d Artikel(n).</string>
+  <string name="uploaded_by_myself">Von mir selbst hochgeladen am %1$s, verwendet in mindestens %2$d Artikel(n).</string>
   <string name="no_uploads">Willkommen bei Commons!\n\nLade deine erste Datei hoch, indem du auf die Hinzufügen-Schaltfläche tippst.</string>
   <string name="no_categories_selected">Keine Kategorien ausgewählt</string>
   <string name="no_categories_selected_warning_desc">Bilder ohne Kategorien sind selten nutzbar. Bist du sicher, dass du ohne die Auswahl von Kategorien hochladen möchtest?</string>
@@ -615,6 +616,8 @@
   <string name="title_for_media">MEDIA</string>
   <string name="title_for_child_classes">CHILD CLASSES</string>
   <string name="title_for_parent_classes">PARENT CLASSES</string>
+  <string name="title_for_subcategories">UNTERKATEGORIEN</string>
+  <string name="title_for_parent_categories">ÜBERGEORDNETE KATEGORIEN</string>
   <string name="upload_nearby_place_found_title">Ort in der Nähe gefunden</string>
   <string name="upload_nearby_place_found_description_plural">Sind das Bilder von %1$s ?</string>
   <string name="upload_nearby_place_found_description_singular">Ist das ein Foto von %1$s?</string>
@@ -790,7 +793,7 @@
   <string name="permissions_are_required_for_functionality">Für die Funktionalität sind Berechtigungen erforderlich</string>
   <string name="learn_how_to_write_a_useful_description">Erfahre, wie man eine nützliche Beschreibung schreibt</string>
   <string name="learn_how_to_write_a_useful_caption">Erfahre, wie man eine nützliche Überschrift schreibt</string>
-  <string name="see_your_achievements">Deine Erfolge ansehen</string>
+  <string name="see_your_achievements" fuzzy="true">Deine Erfolge ansehen</string>
   <string name="edit_image">Bild bearbeiten</string>
   <string name="edit_location">Standort bearbeiten</string>
   <string name="location_updated">Standort aktualisiert!</string>

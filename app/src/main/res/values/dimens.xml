@@ -7,6 +7,9 @@
     <dimen name="achievements_activity_margin_vertical">8dp</dimen>
     <dimen name="medium_height">12dp</dimen>
     <dimen name="medium_width">12dp</dimen>
+    <dimen name="small_padding">8dp</dimen>
+    <dimen name="medium_padding">16dp</dimen>
+    <dimen name="large_padding">24dp</dimen>
 
     <!-- Standard margins / padding -->
     <dimen name="login_padding">30dp</dimen>

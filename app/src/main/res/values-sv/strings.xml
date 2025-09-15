@@ -219,6 +219,7 @@
   <string name="media_detail_description">Beskrivning</string>
   <string name="media_detail_discussion">Diskussion</string>
   <string name="media_detail_author">Skapare</string>
+  <string name="media_detail_uploader">Uppladdare</string>
   <string name="media_detail_uploaded_date">Uppladdningsdatum</string>
   <string name="media_detail_license">Licens</string>
   <string name="media_detail_coordinates">Koordinater</string>
@@ -377,7 +378,7 @@
   <string name="statistics_featured">Utvalda bilder</string>
   <string name="statistics_wikidata_edits">Bilder via \"Platser i närheten\"</string>
   <string name="level">Nivå %d</string>
-  <string name="profileLevel">%s (Nivå %s)</string>
+  <string name="profile_withLevel">%s (Nivå %s)</string>
   <string name="images_uploaded">Uppladdade bilder</string>
   <string name="image_reverts">Bilder som inte har återställts</string>
   <string name="images_used_by_wiki">Bilder som används</string>
@@ -420,7 +421,7 @@
   <string name="deletion_reason_bad_for_my_privacy">Jag insåg att den är dålig för mitt privatliv</string>
   <string name="deletion_reason_no_longer_want_public">Jag ändrade mig, jag vill inte längre att den ska vara synlig offentligt</string>
   <string name="deletion_reason_not_interesting">Tyvärr, denna bild är inte intressant för en encyklopedi</string>
-  <string name="uploaded_by_myself">Laddades upp av mig den %1$s och används i %2$d artiklar.</string>
+  <string name="uploaded_by_myself">Laddades upp av mig den %1$s och används i minst %2$d artiklar.</string>
   <string name="no_uploads">Välkommen till Commons!\n\nLadda upp din första mediafil genom att trycka på knappen för att lägga till.</string>
   <string name="no_categories_selected">Inga kategorier har valts</string>
   <string name="no_categories_selected_warning_desc">Bilder utan kategorier används sällan. Är du säker på att du vill fortsätta utan att välja kategorier?</string>
@@ -585,6 +586,8 @@
   <string name="title_for_media">MEDIA</string>
   <string name="title_for_child_classes">UNDERORDNADE KLASSER</string>
   <string name="title_for_parent_classes">ÖVERORDNADE KLASSER</string>
+  <string name="title_for_subcategories">UNDERKATEGORIER</string>
+  <string name="title_for_parent_categories">ÖVERORDNADE KATEGORIER</string>
   <string name="upload_nearby_place_found_title">Hittade platser i närheten</string>
   <string name="upload_nearby_place_found_description_plural">Föreställer de här bilderna %1$s?</string>
   <string name="upload_nearby_place_found_description_singular">Är detta en bild på %1$s?</string>
@@ -829,4 +832,5 @@
   <string name="show_in_nearby">Visa i \"I närheten\"</string>
   <string name="image_tag_line_created_and_uploaded_by">Skapades och laddades upp av: %1$s</string>
   <string name="image_tag_line_created_by_and_uploaded_by">Skapad av %1$s och laddades upp av %2$s</string>
+  <string name="nominated_for_deletion_btn">Nominerad för radering</string>
 </resources>

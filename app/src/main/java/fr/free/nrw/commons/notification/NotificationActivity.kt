@@ -8,20 +8,23 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import androidx.core.view.ViewGroupCompat
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import fr.free.nrw.commons.CommonsApplication
 import fr.free.nrw.commons.R
-import fr.free.nrw.commons.Utils
 import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.auth.csrf.InvalidLoginTokenException
 import fr.free.nrw.commons.databinding.ActivityNotificationBinding
 import fr.free.nrw.commons.notification.models.Notification
 import fr.free.nrw.commons.notification.models.NotificationType
 import fr.free.nrw.commons.theme.BaseActivity
+import fr.free.nrw.commons.utils.applyEdgeToEdgeTopInsets
 import fr.free.nrw.commons.utils.NetworkUtils
 import fr.free.nrw.commons.utils.ViewUtil
+import fr.free.nrw.commons.utils.applyEdgeToEdgeBottomPaddingInsets
+import fr.free.nrw.commons.utils.handleWebUrl
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -56,6 +59,9 @@ class NotificationActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         isRead = intent.getStringExtra("title") == "read"
         binding = ActivityNotificationBinding.inflate(layoutInflater)
+        ViewGroupCompat.installCompatInsetsDispatch(binding.root)
+        applyEdgeToEdgeTopInsets(binding.toolbar.toolbar)
+        binding.listView.applyEdgeToEdgeBottomPaddingInsets()
         setContentView(binding.root)
         mNotificationWorkerFragment = supportFragmentManager.findFragmentByTag(
             tagNotificationWorkerFragment
@@ -197,7 +203,7 @@ class NotificationActivity : BaseActivity() {
 
     private fun handleUrl(url: String?) {
         if (url.isNullOrEmpty()) return
-        Utils.handleWebUrl(this, Uri.parse(url))
+        handleWebUrl(this, Uri.parse(url))
     }
 
     private fun setItems(notificationList: List<Notification>?) {
