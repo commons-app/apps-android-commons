@@ -269,9 +269,7 @@ class ExploreMapFragment : CommonsDaggerSupportFragment(), ExploreMapContract.Vi
 
             override fun onZoom(event: ZoomEvent?): Boolean = false
         })
-        if (!locationPermissionsHelper!!.checkLocationPermission(requireActivity())) {
-            askForLocationPermission()
-        }
+        // Remove the permission check here to prevent it from running on fragment creation
     }
 
     override fun onResume() {
