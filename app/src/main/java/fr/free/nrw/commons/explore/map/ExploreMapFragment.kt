@@ -269,7 +269,7 @@ class ExploreMapFragment : CommonsDaggerSupportFragment(), ExploreMapContract.Vi
 
             override fun onZoom(event: ZoomEvent?): Boolean = false
         })
-        // Remove the permission check here to prevent it from running on fragment creation
+        // removed tha permission check here to prevent it from running on fragment creation
     }
 
     override fun onResume() {
@@ -290,7 +290,7 @@ class ExploreMapFragment : CommonsDaggerSupportFragment(), ExploreMapContract.Vi
     }
 
     fun requestLocationIfNeeded() {
-        if (!isVisible) return  // Skip if not visible to user
+        if (!isVisible) return  //  skips if not visible to user
         if (locationPermissionsHelper!!.checkLocationPermission(requireActivity())) {
             if (locationPermissionsHelper!!.isLocationAccessToAppsTurnedOn()) {
                 locationManager.registerLocationManager()
@@ -834,7 +834,7 @@ class ExploreMapFragment : CommonsDaggerSupportFragment(), ExploreMapContract.Vi
     }
 
     /**
-     * Retrieves the specific Mediaa object from the mediaList field.
+     * Retrieves the specific Media object from the mediaList field.
      * @param url The specific Media's image URL.
      * @return The Media object that matches the URL or null if it could not be found.
      */
