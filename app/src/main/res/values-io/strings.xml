@@ -682,6 +682,7 @@
   <string name="back">Retroirar</string>
   <string name="welcome_custom_picture_selector_text">Bonveno a personalizita selektilo di imaji</string>
   <string name="custom_selector_info_text1">Ica selektilo montras quala imaji vu ja sendis a Commons.</string>
+  <string name="custom_selector_info_text2">Diferanta dil imajo adsinistre, l\'imajo addextre havas la logotipö Commons, qua indikas ke ol ja sendesis. \n Kliktez e mantenez por previdado dil imajo.</string>
   <string name="welcome_custom_selector_ok">Ecelanta</string>
   <string name="custom_selector_already_uploaded_image_text">Ca imajo ja sendesis a Commons.</string>
   <string name="custom_selector_over_limit_warning">Por teknikala motivi, l\'utensilo \'\'app\'\' ne povas fidinde sendar plua kam %1$d pikturi samatempe. La limito %1$d superesis per %2$d.</string>
@@ -704,6 +705,7 @@
   <string name="advanced_query_info_text">Vu povas ajustar la demando \"Vicini\" (\'\'Nearby\'\'). Se erori aparos, riadjustez ed aplikez.</string>
   <string name="apply">Aplikar</string>
   <string name="reset">Restaurar</string>
+  <string name="location_message">Datumi pri lokizo helpas editeri di Wiki trovar vua imajo, do ol divenas plu uzebla.\nL\'imaji quin vu sendis recente ne mencionas lokizo.\nNi sugestas ke vu kapabligez lokizo en l\'ajusti di vua kamero.\nDanko por sendar imaji!</string>
   <string name="no_location_found_title">Nula lokizo trovita</string>
   <string name="no_location_found_message">Ka vu deziras informar la loko de ube vu obtenis ca imajo?\nInformo pri la lokizo helpos editeri trovar vua imajo, do ol divenos plu utila.\nDanko!</string>
   <string name="add_location">Adjuntez lokizo</string>
@@ -712,6 +714,7 @@
   <string name="achievements_unavailable_beta">Sucesi nur esas disponebla en la definitiva versiono. Voluntez verifikar la dokumentigo pri developo.</string>
   <string name="leaderboard_unavailable_beta">La klasifiko-tabelo nur esas disponebla en la definitiva versiono. Voluntez verifikar la dokumentigo pri developo.</string>
   <string name="copyright_popup">Voluntez sendar nur pikturi facita da vu. Senderi di imaji kun autoroyuro ne libera blokusesos. To aplikesas anke por probi \'\'beta\'\'. Danko por probar l\'utensilo \'\'app\'\'!</string>
+  <string name="select_feedback_data_choice">Voluntez deskapabligar irga informo quan vu ne deziras partigar publike.</string>
   <string name="api_level">nivelo di API</string>
   <string name="android_version">versiono di Android</string>
   <string name="device_manufacturer">Fabrikanto dil aparato</string>
@@ -773,6 +776,9 @@
     <item quantity="one">%d imajo selektita</item>
     <item quantity="other">%d imaji selektita</item>
   </plurals>
+  <string name="multiple_files_depiction">Savez ke omna imaji, kande sendesas kune, recevas la sama kategorii, e deskripturi. Se ta imaji ne havas la sama deskripti e kategorii, voluntez facar diversa sendaji separata.</string>
+  <string name="multiple_files_depiction_header">Noto pri multopla sendado di imaji</string>
+  <string name="nearby_wikitalk">Informez Wikipedio pri problemo en ca temo</string>
   <string name="please_enter_some_comments">Voluntez facar kelka komenti</string>
   <string name="talk">Diskuto</string>
   <string name="write_something_about_the_item">Dicez irgu pri l\'arkivo \'%1$s\'. Ol esos videbla publike.</string>
@@ -780,6 +786,8 @@
   <string name="is_at_a_different_place_wikidata">\'%1$s\' esas en diferanta loko.</string>
   <string name="is_at_a_different_place_please_specify_the_correct_place_below_if_possible_tell_us_the_correct_latitude_longitude">\'%1$s\' esas en diferanta loko. Voluntez mencionar la korekta loko adinfre e, se posibla, skribez la korekta latitudo e longitudo.</string>
   <string name="other_problem_or_information_please_explain_below">Altra problemo od informo (voluntez explikar adinfre).</string>
+  <string name="feedback_destination_note">Vua retrokomento publikigesis che sequanta pagino wiki:  \'\'&lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Mobile_app/Feedback\"&gt;Commons:Mobile app/Feedback&lt;/a&gt;\'\'</string>
+  <string name="are_you_sure_that_you_want_cancel_all_the_uploads">Ka vu fakte deziras interuptar omna sendi?</string>
   <string name="cancelling_all_the_uploads">Extinganta la tota sendaji...</string>
   <string name="uploads">Arkivi sendita</string>
   <string name="pending">Vartanta</string>
@@ -796,6 +804,7 @@
   <string name="custom_selector_folder_not_found_error">Faliis trovar quale rekuperar dokumentaro kun \'\'bucket ID\'\' %1$d</string>
   <string name="red_pin">Ankore ne existas fotografuro pr ta loko, facez fotografuro!</string>
   <string name="green_pin">Ja existas imajo pri ta loko.</string>
+  <string name="grey_pin">Verifikanta se ta loko ja havas imajo.</string>
   <string name="error_while_loading">Eroro dum kargado</string>
   <string name="no_usages_found">Nula uzo trovesis</string>
   <string name="usages_on_commons_heading">Commons</string>
@@ -809,6 +818,7 @@
   <string name="caption">Deskripto-texto</string>
   <string name="caption_copied_to_clipboard">Deskripto-texto kopiita a \'\'clipboard\'\'</string>
   <string name="congratulations_all_pictures_in_this_album_have_been_either_uploaded_or_marked_as_not_for_upload">Gratuli! Omna imaji en ca albumo sive sendesis, sive indikesis por ne sendar.</string>
+  <string name="show_in_explore">Montrez en \'\'Explore\'\'</string>
   <string name="show_in_nearby">Montrez en Proxima (\'\'Nearby\'\')</string>
   <string name="image_tag_line_created_and_uploaded_by">Kreesis e sendesis da: %1$s</string>
   <string name="image_tag_line_created_by_and_uploaded_by">Kreita da %1$s e sendita da %2$s</string>

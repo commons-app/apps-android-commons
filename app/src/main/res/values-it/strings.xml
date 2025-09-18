@@ -665,6 +665,7 @@
   <string name="leaderboard_nearby">Nelle vicinanze</string>
   <string name="leaderboard_used">Usa</string>
   <string name="leaderboard_my_rank_button_text">Il mio posizionamento</string>
+  <string name="map_attribution">&amp;#169; &lt;a href=\"https://www.openstreetmap.org/copyright\"&gt;OpenStreetMap&lt;/a&gt;</string>
   <string name="limited_connection_enabled">Attivata modalità di connessione limitata!</string>
   <string name="limited_connection_disabled">Disattivata modalità di connessione limitata. I caricamenti in attesa riprenderanno adesso.</string>
   <string name="limited_connection_mode">Modalità di connessione limitata</string>
@@ -714,10 +715,12 @@
   <string name="custom_selector_dismiss_limit_warning_button_text">Nascondi</string>
   <string name="custom_selector_button_limit_text">Massimo: %1$d</string>
   <string name="custom_selector_limit_error_desc">Errore: limite di caricamento superato</string>
+  <string name="place_state_wlm">WLM</string>
   <string name="wlm_upload_info">Questa immagine sarà ammessa al concorso Wiki Loves Monuments</string>
   <string name="display_monuments">Mostra monumenti</string>
   <string name="wlm_month_message">È il mese di Wiki Loves Monuments!</string>
   <string name="learn_more">ULTERIORI INFORMAZIONI</string>
+  <string name="wlm_campaign_title">Wiki Loves Monuments</string>
   <string name="wlm_campaign_description">Wiki Loves Monuments è un concorso internazionale di fotografia di monumenti organizzato da Wikimedia</string>
   <string name="need_permission">Autorizzazione/i richiesta/e</string>
   <string name="read_phone_state_permission_message">Le mappe vicine hanno bisogno di leggere lo STATO DEL TELEFONO per funzionare correttamente</string>
@@ -834,6 +837,7 @@
   <string name="no_usages_found">Nessun uso trovato</string>
   <string name="usages_on_commons_heading">Commons</string>
   <string name="usages_on_other_wikis_heading">Altri wiki</string>
+  <string name="bullet_point">•</string>
   <string name="file_usages_container_heading">Utilizzi del file</string>
   <string name="title_activity_single_web_view">SingleWebViewActivity</string>
   <string name="account">Utenza</string>

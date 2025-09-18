@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Es Krim 5 Juta Rasa
+-->
+<resources>
+  <string name="crash_dialog_title">Commons cadang ngojut</string>
+  <string name="crash_dialog_text">Ay uy. Uwat say mak bonos!</string>
+  <string name="crash_dialog_comment_prompt">Unjuk panday sikam apiya say Niku gawiko, raduna kirimko jak surel. Informasimu nulung sikam nandanina!</string>
+  <string name="crash_dialog_ok_toast">Tarima kasih!</string>
+</resources>
