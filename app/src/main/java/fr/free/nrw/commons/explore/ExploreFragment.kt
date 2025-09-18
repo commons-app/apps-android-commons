@@ -177,6 +177,7 @@ class ExploreFragment : CommonsDaggerSupportFragment() {
                 override fun onPageScrollStateChanged(state: Int) = Unit
                 override fun onPageSelected(position: Int) {
                     binding!!.viewPager.canScroll = position != 2
+                    others.setVisible(position == 2)
                     if (position == 2) {
                         mapRootFragment?.requestLocationIfNeeded()
                     }
@@ -194,7 +195,6 @@ class ExploreFragment : CommonsDaggerSupportFragment() {
      */
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         // Handle item selection
-
         when (item.itemId) {
             R.id.action_search -> {
                 startActivityWithFlags(requireActivity(), SearchActivity::class.java)
@@ -225,5 +225,3 @@ class ExploreFragment : CommonsDaggerSupportFragment() {
         }
     }
 }
-
-
