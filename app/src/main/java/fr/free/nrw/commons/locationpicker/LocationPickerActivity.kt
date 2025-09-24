@@ -46,6 +46,7 @@ import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment.Compani
 import fr.free.nrw.commons.utils.DialogUtil
 import fr.free.nrw.commons.utils.MapUtils.ZOOM_LEVEL
 import fr.free.nrw.commons.utils.applyEdgeToEdgeBottomInsets
+import fr.free.nrw.commons.utils.applyEdgeToEdgeBottomPaddingInsets
 import fr.free.nrw.commons.utils.applyEdgeToEdgeTopPaddingInsets
 import fr.free.nrw.commons.utils.handleGeoCoordinates
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -342,6 +343,10 @@ class LocationPickerActivity : BaseActivity(), LocationPermissionCallback {
     }
 
     private fun setupMapView() {
+
+        val mapBottomLayout: ConstraintLayout = findViewById(R.id.map_bottom_layout)
+        mapBottomLayout.applyEdgeToEdgeBottomPaddingInsets()
+
         requestLocationPermissions()
 
         //If location metadata is available, move map to that location.
