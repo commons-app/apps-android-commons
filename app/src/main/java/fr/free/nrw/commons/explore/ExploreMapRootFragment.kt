@@ -193,6 +193,17 @@ class ExploreMapRootFragment : CommonsDaggerSupportFragment, MediaDetailProvider
         binding = null
     }
 
+    fun requestLocationIfNeeded() {
+        mapFragment?.requestLocationIfNeeded()
+    }
+
+    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
+        super.setUserVisibleHint(isVisibleToUser)
+        if (isVisibleToUser) {
+            requestLocationIfNeeded()
+        }
+    }
+
     companion object {
         fun newInstance(): ExploreMapRootFragment = ExploreMapRootFragment().apply {
             retainInstance = true
