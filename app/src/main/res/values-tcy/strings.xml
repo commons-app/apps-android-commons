@@ -227,7 +227,7 @@
   <string name="nearby_location_not_available" fuzzy="true">ಜಾಗೆತ ಗುರುತು ಇಜ್ಜಿ.</string>
   <string name="location_permission_rationale_nearby">ಮುಟ್ಟತ ಜಾಗೆತ ಪಟ್ಟಿನ್ ತೋಜಾಯರ ಅನುಮತಿ ಅಗತ್ಯವಾತ್ ಬೋಡು.</string>
   <string name="nearby_directions">ನಿರ್ದೆಶನೊ</string>
-  <string name="nearby_wikidata">ವಿಕಿಡಾಟ</string>
+  <string name="nearby_wikidata">ವಿಕಿಡೇಟಾ</string>
   <string name="nearby_wikipedia">ವಿಕಿಪೀಡಿಯ</string>
   <string name="nearby_commons">ಕಾಮನ್ಸ್</string>
   <string name="about_rate_us" fuzzy="true">&lt;u&gt;Rate us&lt;/u&gt;</string>
