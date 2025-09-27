@@ -508,24 +508,17 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
                 fragments = mutableListOf()
             }
 
-
             for (uploadableFile in uploadableFiles) {
                 val uploadMediaDetailFragment = UploadMediaDetailFragment()
 
-                if (!uploadIsOfAPlace) {
+                // set fragment properties but defer initialization
+                uploadMediaDetailFragment.uploadableFile = uploadableFile
+                uploadMediaDetailFragment.place = place
+                uploadMediaDetailFragment.inAppPictureLocation = if (!uploadIsOfAPlace) {
                     handleLocation()
-                    uploadMediaDetailFragment.setImageToBeUploaded(
-                        uploadableFile,
-                        place,
-                        currLocation
-                    )
-                    locationManager!!.unregisterLocationManager()
+                    currLocation
                 } else {
-                    uploadMediaDetailFragment.setImageToBeUploaded(
-                        uploadableFile,
-                        place,
-                        currLocation
-                    )
+                    currLocation
                 }
 
                 val uploadMediaDetailFragmentCallback: UploadMediaDetailFragmentCallback =
@@ -580,10 +573,16 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
                 if (isFragmentsSaved) {
                     val fragment = fragments!![0] as UploadMediaDetailFragment?
                     fragment!!.fragmentCallback = uploadMediaDetailFragmentCallback
+                    fragment.initializeFragment()
                 } else {
                     uploadMediaDetailFragment.fragmentCallback = uploadMediaDetailFragmentCallback
                     fragments!!.add(uploadMediaDetailFragment)
                 }
+            }
+
+            // unregisteer location manager after loop if needed
+            if (!uploadIsOfAPlace) {
+                locationManager!!.unregisterLocationManager()
             }
 
             //If fragments are not created, create them and add them to the fragments ArrayList
