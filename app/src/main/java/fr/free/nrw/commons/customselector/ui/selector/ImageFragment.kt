@@ -47,6 +47,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import java.util.TreeMap
 import javax.inject.Inject
 import kotlin.collections.ArrayList
@@ -211,8 +212,12 @@ class ImageFragment :
         savedInstanceState: Bundle?,
     ): View? {
         _binding = FragmentCustomSelectorBinding.inflate(inflater, container, false)
-        imageAdapter =
-            ImageAdapter(requireActivity(), activity as ImageSelectListener, imageLoader!!)
+
+        // ensuress imageAdapter is initialized
+        if (!::imageAdapter.isInitialized) {
+            imageAdapter = ImageAdapter(requireActivity(), activity as ImageSelectListener, imageLoader!!)
+            Timber.d("Initialized imageAdapter in onCreateView")
+        }
         // Set single selection mode if needed
         val singleSelection = (activity as? CustomSelectorActivity)?.intent?.getBooleanExtra(CustomSelectorActivity.EXTRA_SINGLE_SELECTION, false) == true
         imageAdapter.setSingleSelection(singleSelection)
@@ -370,7 +375,12 @@ class ImageFragment :
      * notifyDataSetChanged, rebuild the holder views to account for deleted images.
      */
     override fun onResume() {
-        imageAdapter.notifyDataSetChanged()
+        if (::imageAdapter.isInitialized) {
+            imageAdapter.notifyDataSetChanged()
+            Timber.d("Notified imageAdapter in onResume")
+        } else {
+            Timber.w("imageAdapter not initialized in onResume")
+        }
         super.onResume()
     }
 
@@ -380,14 +390,19 @@ class ImageFragment :
      * Save the Image Fragment state.
      */
     override fun onDestroy() {
-        imageAdapter.cleanUp()
+        if (::imageAdapter.isInitialized) {
+            imageAdapter.cleanUp()
+            Timber.d("Cleaned up imageAdapter in onDestroy")
+        } else {
+            Timber.w("imageAdapter not initialized in onDestroy, skipping cleanup")
+        }
 
         val position =
-            (selectorRV?.layoutManager as GridLayoutManager)
-                .findFirstVisibleItemPosition()
+            (selectorRV?.layoutManager as? GridLayoutManager)
+                ?.findFirstVisibleItemPosition() ?: -1
 
-        // Check for empty RecyclerView.
-        if (position != -1 && filteredImages.size > 0) {
+        // cheeck for valid position and non-empty image list
+        if (position != -1 && filteredImages.isNotEmpty() && ::imageAdapter.isInitialized) {
             context?.let { context ->
                 context
                     .getSharedPreferences(
@@ -396,34 +411,57 @@ class ImageFragment :
                     )?.let { prefs ->
                         prefs.edit()?.let { editor ->
                             editor.putLong("ItemId", imageAdapter.getImageIdAt(position))?.apply()
+                            Timber.d("Saved last visible item ID: %d", imageAdapter.getImageIdAt(position))
                         }
                     }
             }
+        } else {
+            Timber.d("Skipped saving item ID: position=%d, filteredImages.size=%d, imageAdapter initialized=%b",
+                position, filteredImages.size, ::imageAdapter.isInitialized)
         }
         super.onDestroy()
     }
 
     override fun onDestroyView() {
         _binding = null
+        selectorRV = null
+        loader = null
+        switch = null
+        progressLayout = null
         super.onDestroyView()
     }
 
     override fun refresh() {
-        imageAdapter.refresh(filteredImages, allImages, getUploadingContributions())
+        if (::imageAdapter.isInitialized) {
+            imageAdapter.refresh(filteredImages, allImages, getUploadingContributions())
+            Timber.d("Refreshed imageAdapter")
+        } else {
+            Timber.w("imageAdapter not initialized in refresh")
+        }
     }
 
     /**
      * Removes the image from the actionable image map
      */
     fun removeImage(image: Image) {
-        imageAdapter.removeImageFromActionableImageMap(image)
+        if (::imageAdapter.isInitialized) {
+            imageAdapter.removeImageFromActionableImageMap(image)
+            Timber.d("Removed image from actionable image map")
+        } else {
+            Timber.w("imageAdapter not initialized in removeImage")
+        }
     }
 
     /**
      * Clears the selected images
      */
     fun clearSelectedImages() {
-        imageAdapter.clearSelectedImages()
+        if (::imageAdapter.isInitialized) {
+            imageAdapter.clearSelectedImages()
+            Timber.d("Cleared selected images")
+        } else {
+            Timber.w("imageAdapter not initialized in clearSelectedImages")
+        }
     }
 
     /**
@@ -434,6 +472,15 @@ class ImageFragment :
         selectedImages: ArrayList<Image>,
         shouldRefresh: Boolean,
     ) {
+        if (::imageAdapter.isInitialized) {
+            imageAdapter.setSelectedImages(selectedImages)
+            if (shouldRefresh) {
+                imageAdapter.refresh(filteredImages, allImages, getUploadingContributions())
+            }
+            Timber.d("Passed %d selected images to imageAdapter, shouldRefresh=%b", selectedImages.size, shouldRefresh)
+        } else {
+            Timber.w("imageAdapter not initialized in passSelectedImages")
+        }
     }
 
     /**
@@ -443,6 +490,7 @@ class ImageFragment :
         if (!progressDialog.isShowing) {
             progressDialogLayout.progressDialogText.text = text
             progressDialog.show()
+            Timber.d("Showing mark/unmark progress dialog: %s", text)
         }
     }
 
@@ -452,6 +500,7 @@ class ImageFragment :
     fun dismissMarkUnmarkProgressDialog() {
         if (progressDialog.isShowing) {
             progressDialog.dismiss()
+            Timber.d("Dismissed mark/unmark progress dialog")
         }
     }
 
