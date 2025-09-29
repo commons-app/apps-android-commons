@@ -38,19 +38,22 @@
     <item quantity="one">%1$d tập tin đang được tải lên</item>
     <item quantity="other">%1$d tập tin đang được tải lên</item>
   </plurals>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">%1$d tập tin đã tải lên</item>
-    <item quantity="other">%1$d tập tin đã tải lên</item>
+  <plurals name="contributions_subtitle">
+    <item quantity="other">(%1$d</item>
   </plurals>
-  <string name="starting_multiple_uploads" fuzzy="true">Đang bắt đầu tải lên %1$d tập tin</string>
-  <plurals name="multiple_uploads_title" fuzzy="true">
-    <item quantity="one">%1$d tập tin đã tải lên</item>
-    <item quantity="other">%1$d tập tin đã tải lên</item>
+  <string name="starting_uploads">Bắt đầu tải lên</string>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="other">Đang bắt đầu tải lên %d tập tin</item>
+  </plurals>
+  <plurals name="multiple_uploads_title">
+    <item quantity="other">%d tập tin đã tải lên</item>
   </plurals>
   <plurals name="share_license_summary">
     <item quantity="one">Hình này sẽ được phát hành theo giấy phép %1$s</item>
     <item quantity="other">Những hình này sẽ được phát hành theo giấy phép %1$s</item>
+  </plurals>
+  <plurals name="upload_count_title">
+    <item quantity="other">Tải lên %1$d</item>
   </plurals>
   <string name="navigation_item_explore">Khám phá</string>
   <string name="preference_category_appearance">Giao diện</string>
@@ -249,16 +252,18 @@
   <string name="upload_connection_error_alert_detail">Quá trình tải lên yêu cầu phải có kết nối internet. Vui lòng kiểm tra kết nối mạng của bạn.</string>
   <string name="upload_problem_image">Các vấn đề được phát hiện trong hình ảnh</string>
   <string name="use_external_storage">Lưu ảnh trong ứng dụng</string>
-  <string name="use_external_storage_summary" fuzzy="true">Lưu các hình ảnh được chụp bằng máy chụp hình trong ứng dụng vào thiết bị của bạn</string>
+  <string name="use_external_storage_summary">Lưu các hình ảnh được chụp bằng máy chụp hình trong ứng dụng vào bộ nhớ thiết bị của bạn</string>
   <string name="login_to_your_account">Đăng nhập vào tài khoản của bạn</string>
   <string name="send_log_file">Gửi tập tin nhật trình</string>
-  <string name="send_log_file_description" fuzzy="true">Gửi tập tin nhật trình cho nhà phát triển qua thư điện tử</string>
+  <string name="send_log_file_description">Gửi tập tin nhật trình cho nhà phát triển qua thư điện tử để hỗ trợ gỡ lỗi ứng dụng ứng dụng. Lưu ý: nhật trình có thể chứa thông tin nhận dạng.</string>
   <string name="no_web_browser">Không tìm thấy trình duyệt để mở URL</string>
   <string name="null_url">Lỗi! Không tìm thấy URL</string>
   <string name="nominate_deletion">Đề nghị xóa</string>
   <string name="nominated_for_deletion">Có đề nghị xóa hình này.</string>
+  <string name="nominated_see_more">Xem trang web để biết chi tiết</string>
   <string name="skip_login">Bỏ qua</string>
   <string name="navigation_item_login">Đăng nhập</string>
+  <string name="skip_login_title">Bạn có thực sự muốn bỏ qua bước đăng nhập không?</string>
   <string name="login_alert_message">Vui lòng đăng nhập để sử dụng được tính năng này</string>
   <string name="copy_wikicode">Sao chép wikitext vào bảng tạm</string>
   <string name="wikicode_copied">Wikitext đã được sao chép vào bảng tạm</string>
@@ -288,11 +293,16 @@
   <string name="error_loading_images">Đã xuất hiện lỗi khi tải hình ảnh.</string>
   <string name="image_uploaded_by">Tải lên bởi: %1$s</string>
   <string name="block_notification_title">Đã bị cấm</string>
+  <string name="block_notification">Bạn đã bị cấm sửa đổi Commons</string>
   <string name="app_widget_heading">Bức ảnh trong ngày</string>
   <string name="menu_search_button">Tìm kiếm</string>
   <string name="search_commons">Tìm kiếm Commons</string>
   <string name="title_activity_search">Tìm kiếm</string>
   <string name="search_recent_header">Tìm kiếm gần đây:</string>
+  <string name="provider_searches">Các truy vấn được tìm kiếm gần đây</string>
+  <string name="provider_recent_languages">Các truy vấn ngôn ngữ gần đây</string>
+  <string name="error_loading_categories">Có lỗi xảy ra khi tải thể loại.</string>
+  <string name="error_loading_depictions">Có lỗi xảy ra khi tải hình ảnh mô tả.</string>
   <string name="search_tab_title_media">Phương tiện</string>
   <string name="search_tab_title_categories">Thể loại</string>
   <string name="search_tab_title_depictions">Khoản mục</string>
@@ -300,16 +310,24 @@
   <string name="explore_tab_title_mobile">Đã tải lên qua thiết bị di động</string>
   <string name="explore_tab_title_map">Bản đồ</string>
   <string name="successful_wikidata_edit">Hình ảnh đã được thêm vào %1$s trên Wikidata!</string>
+  <string name="wikidata_edit_failure">Không cập nhật được thực thể Wikidata tương ứng!</string>
   <string name="menu_set_wallpaper">Đặt làm hình nền</string>
   <string name="wallpaper_set_successfully">Đã thiết lập hình nền thành công!</string>
   <string name="quiz">Thách đố</string>
+  <string name="quiz_question_string">Có thể tải lên hình ảnh này được không?</string>
   <string name="question">Câu hỏi</string>
   <string name="result">Kết quả</string>
   <string name="taj_mahal_answer">Hình chứa di tích và cảnh vật thiên nhiên thường được chấp nhận tải lên ở hầu hết các quốc gia. Xin lưu ý rằng các công trình nghệ thuật được trưng bày tạm thời thường có bản quyền và không được chấp nhận tải lên.</string>
+  <string name="blurry_image_answer">Một trong những mục tiêu của Commons là thu thập hình ảnh chất lượng. Do đó, không nên tải lên những hình ảnh mờ. Hãy luôn cố gắng chụp những hình ảnh đẹp với ánh sáng tốt.</string>
+  <string name="construction_event_answer">Những hình ảnh thể hiện được công nghệ hoặc văn hóa luôn được hoan nghênh trên Commons.</string>
+  <string name="congratulatory_message_quiz">Bạn trả lời đúng %1$s câu hỏi. Xin chúc mừng!</string>
+  <string name="warning_for_no_answer">Chọn một trong hai lựa chọn để trả lời câu hỏi</string>
   <string name="user_not_logged_in">Lượt đăng nhập đã hết hạn. Vui lòng đăng nhập lại</string>
+  <string name="quiz_result_share_message">Chia sẻ bài kiểm tra của bạn với bạn bè!</string>
   <string name="continue_message">Tiếp tục</string>
   <string name="correct">Câu trả lời chính xác</string>
   <string name="wrong">Câu trả lời sai</string>
+  <string name="quiz_screenshot_question">Có thể tải lên hình chụp màn hình này được không?</string>
   <string name="share_app_title">Chia sẻ Ứng dụng</string>
   <string name="error_fetching_nearby_places">Không thể tải các nơi lân cận.</string>
   <string name="no_pictures_in_this_area">Không có hình ảnh trong khu vực này</string>
@@ -351,19 +369,39 @@
   <string name="provider_bookmarks">Dấu trang</string>
   <string name="bookmark_empty">Bạn không hề thêm bất kỳ dấu trang nào</string>
   <string name="provider_bookmarks_location">Dấu trang</string>
+  <string name="deletion_reason_uploaded_by_mistake">Tôi đã tải lên nó một cách nhầm lẫn</string>
+  <string name="deletion_reason_publicly_visible">Tôi không biết nó sẽ được công khai</string>
+  <string name="deletion_reason_bad_for_my_privacy">Tôi nhận ra rằng điều đó không tốt cho sự riêng tư của tôi</string>
+  <string name="deletion_reason_no_longer_want_public">Tôi đã thay đổi ý định, tôi không muốn nó được công khai nữa</string>
+  <string name="deletion_reason_not_interesting">Xin lỗi, bức ảnh này không thú vị cho một cuốn bách khoa toàn thư</string>
+  <string name="no_uploads">Chào mừng đến với Commons!\n\nTải lên phương tiện đầu tiên của bạn bằng cách nhấp vào nút thêm.</string>
   <string name="no_categories_selected">Không có thể loại nào được chọn</string>
+  <string name="no_categories_selected_warning_desc">Hình ảnh không có thể loại hiếm khi được sử dụng. Bạn có chắc chắn muốn tiếp tục mà không chọn thể loại không?</string>
   <string name="no_depictions_selected">Không có miêu tả nào được chọn</string>
   <string name="back_button_warning">Hủy bỏ tải lên</string>
   <string name="back_button_continue">Tiếp tục tải lên</string>
   <string name="search_this_area">Tìm kiếm khu vực này</string>
   <string name="nearby_card_permission_title">Yêu cầu quyền</string>
+  <string name="achievements_fetch_failed">Có gì đó không đúng, Chúng tôi không thể tải được thành tích.</string>
+  <string name="display_campaigns">Hiển thị chiến dịch</string>
+  <string name="display_campaigns_explanation">Xem các chiến dịch đang diễn ra</string>
   <string name="option_allow">Cho phép</string>
   <string name="option_dismiss">Bỏ qua</string>
+  <string name="check_category_edit_summary">Yêu cầu kiểm tra thể loại</string>
+  <string name="check_category_success_title">Đã yêu cầu kiểm tra thể loại</string>
+  <string name="check_category_failure_title">Yêu cầu kiểm tra thể loại không hoạt động</string>
+  <string name="check_category_success_message">Đã yêu cầu kiểm tra thể loại cho %1$s</string>
+  <string name="check_category_failure_message">Không thể yêu cầu kiểm tra thể loại cho %1$s</string>
+  <string name="check_category_toast">Đang yêu cầu kiểm tra thể loại cho %1$s</string>
   <string name="nominate_for_deletion_done">Xong</string>
   <string name="send_thank_success_title">Gửi lời cảm ơn: Thành công</string>
+  <string name="send_thank_success_message">Đã gửi thành công lời cảm ơn tới %1$s</string>
+  <string name="send_thank_failure_message">Không gửi được lời cảm ơn tới %1$s</string>
   <string name="send_thank_failure_title">Gửi lời cảm ơn: Thất bại</string>
+  <string name="send_thank_toast">Đang gửi lời cảm ơn tới %1$s</string>
   <string name="review_thanks_yes_button_text">Hình ảnh sau</string>
   <string name="review_thanks_no_button_text">Vâng, tại sao không?</string>
+  <string name="check_your_email_inbox">Kiểm tra hộp thư đến của bạn</string>
   <string name="please_wait">Vui lòng chờ...</string>
   <string name="copied_successfully">Đã sao chép</string>
   <string name="skip_image">Bỏ qua hình ảnh này</string>
@@ -381,6 +419,7 @@
   <string name="category_edit_helper_show_edit_title_success">Thành công</string>
   <string name="category_edit_helper_edit_message_else">Không thể thêm danh mục.</string>
   <string name="category_edit_button_text">Cập nhật danh mục</string>
+  <string name="coordinates_edit_helper_show_edit_title_success">Thành công</string>
   <string name="description_edit_helper_edit_message_else">Không thể thêm mô tả.</string>
   <string name="title_app_shortcut_setting">Tùy chọn</string>
   <string name="load_more">Tải thêm</string>

@@ -853,7 +853,7 @@
   </plurals>
   <string name="multiple_files_depiction">يرجى تذكر أن جميع الصور في التحميل المتعدد تحصل على نفس الفئات والأوصاف. إذا لم تتشارك الصور في الأوصاف والفئات، فيرجى إجراء عدة عمليات تحميل منفصلة.</string>
   <string name="multiple_files_depiction_header">ملاحظة حول التحميلات المتعددة</string>
-  <string name="nearby_wikitalk">الإبلاغ عن مشكلة حول هذا العنصر إلى Wikidata</string>
+  <string name="nearby_wikitalk">الإبلاغ عن مشكلة حول هذا العنصر إلى ويكي بيانات</string>
   <string name="please_enter_some_comments">الرجاء إدخال بعض التعليقات</string>
   <string name="talk">نقاش</string>
   <string name="write_something_about_the_item">اكتب شيئًا عن العنصر \'%1$s\'. سيكون مرئيًا للعامة.</string>
