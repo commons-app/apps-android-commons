@@ -687,6 +687,7 @@
   <string name="wlm_campaign_description">Wiki Loves Monuments estas internacia fotokonkurso por monumentoj, organizita de Vikimedio</string>
   <string name="need_permission">Bezonas Permeson</string>
   <string name="read_phone_state_permission_message">Mapoj de Apude bezonas legi TELEFONAN STATON por funkcii bone</string>
+  <string name="location_permission_rationale">Laŭvola permeso: Akiri aktualan lokon por sugestoj pri kategorio</string>
   <string name="contributions_of_user">Kontribuoj de Uzanto: %s</string>
   <string name="achievements_of_user">Atingoj de Uzanto: %s</string>
   <string name="menu_view_user_page" fuzzy="true">Vidi la uzantopaĝon</string>

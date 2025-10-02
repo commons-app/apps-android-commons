@@ -586,4 +586,5 @@
   <string name="leaderboard_my_rank_button_text">Rank-ul meu</string>
   <string name="read_help_link">Citiți mai multe</string>
   <string name="modify_location">Modifică locația</string>
+  <string name="location_permission_rationale">Permisiune opțională: Obțineți locația curentă pentru sugestiile de categorii</string>
 </resources>

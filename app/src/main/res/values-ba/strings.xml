@@ -257,4 +257,5 @@
   <string name="about_translate_title">Телдәр</string>
   <string name="about_translate_cancel">Кире алырға</string>
   <string name="retry">Ҡабатларға</string>
+  <string name="location_permission_rationale">Мотлаҡ булмаған рөхсәт: категория тәҡдиме өсөн ошо урынды алыу</string>
 </resources>

@@ -470,6 +470,7 @@
   <string name="back">Trở lại</string>
   <string name="custom_selector_dismiss_limit_warning_button_text">Bỏ qua</string>
   <string name="custom_selector_button_limit_text">Tối đa: %1$d</string>
+  <string name="location_permission_rationale">Tùy chọn cấp phép: Định vị hiện tại để nhận gợi ý thể loại</string>
   <string name="apply">Áp dụng</string>
   <string name="reset">Mặc định lại</string>
   <string name="android_version">Phiên bản Android</string>

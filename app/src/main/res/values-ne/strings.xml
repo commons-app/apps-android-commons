@@ -324,6 +324,7 @@
   <string name="learn_more">थप जान्नुहोस्</string>
   <string name="wlm_campaign_title">विकी लभ्स मोनुमेन्टस्</string>
   <string name="need_permission">अनुमति आवश्यक</string>
+  <string name="location_permission_rationale">वैकल्पिक अनुमति: श्रेणी सुझावहरूको लागि हालको स्थान प्राप्त गर्नुहोस्</string>
   <string name="menu_view_user_page">प्रयोगकर्ता पृष्ठ हेर्नुहोस्</string>
   <string name="edit_categories">सम्पादन श्रेणीहरू</string>
   <string name="advanced_options">उन्नत विकल्प</string>

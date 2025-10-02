@@ -656,6 +656,7 @@
   <string name="wlm_campaign_description">Wiki Loves Monuments er alþjóðleg ljósmyndasamkeppni um myndir af minnismerkjum sem skipulögð er af Wikimedia</string>
   <string name="need_permission">Þarfnast heimildar</string>
   <string name="read_phone_state_permission_message">Kort í nágrenninu þurfa að geta lesið STÖÐU SÍMANS til að virka almennilega</string>
+  <string name="location_permission_rationale">Nauðsynlegar heimildir: Lesa núverandi staðsetningu til að geta stungið upp á flokkum</string>
   <string name="contributions_of_user">Framlög notanda: %s</string>
   <string name="achievements_of_user">Frammistaða notanda: %s</string>
   <string name="menu_view_user_page" fuzzy="true">Skoða notandasíðu</string>

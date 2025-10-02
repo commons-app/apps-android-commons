@@ -718,6 +718,7 @@
   <string name="wlm_campaign_description">Viki obožuje spomenike je mednarodni fotografski natečaj za spomenike, ki ga organizira Fundacija Wikimedia.</string>
   <string name="need_permission">Potrebno je dovoljenje</string>
   <string name="read_phone_state_permission_message">Bližnji zemljevidi morajo za pravilno delovanje prebrati STANJE TELEFONA</string>
+  <string name="location_permission_rationale">Neobvezno dovoljenje: pridobitev trenutne lokacije za predlaganje kategorij</string>
   <string name="contributions_of_user">Prispevki uporabnika: %s</string>
   <string name="achievements_of_user">Dosežki uporabnika: %s</string>
   <string name="menu_view_user_page">Ogled uporabniškega profila</string>

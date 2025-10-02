@@ -275,4 +275,5 @@
   <string name="done">တုဲဒှ်</string>
   <string name="back">ကလေင်</string>
   <string name="welcome_custom_selector_ok">သေသာတ်</string>
+  <string name="location_permission_rationale">အခေါင်မပိုင်ပြဳ: ကေတ် ဒတန်ဒၞာဲ မနွံဒၟံင်လၟုဟ် သွက်ဂွံစုတ် ပ္ဍဲကဏ္ဍ</string>
 </resources>

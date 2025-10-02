@@ -531,4 +531,5 @@
   <string name="leaderboard_upload">Enviar</string>
   <string name="leaderboard_my_rank_button_text">A miña clasificación</string>
   <string name="limited_connection_enabled">Activouse o modo de conexión limitadoǃ</string>
+  <string name="location_permission_rationale">Permiso opcionalː obter a localización actual para suxerir categorías</string>
 </resources>

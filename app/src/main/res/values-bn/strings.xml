@@ -534,6 +534,7 @@
   <string name="learn_more">আরও জানুন</string>
   <string name="wlm_campaign_title">উইকি লাভস মনুমেন্টস</string>
   <string name="need_permission">অনুমতি দরকার</string>
+  <string name="location_permission_rationale">ঐচ্ছিক অনুমতি: বিষয়শ্রেণী পরামর্শের জন্য বর্তমান অবস্থান নেয়</string>
   <string name="contributions_of_user">ব্যবহারকারীর অবদান: %s</string>
   <string name="achievements_of_user">ব্যবহারকারীর অর্জন: %s</string>
   <string name="menu_view_user_page" fuzzy="true">ব্যবহারকারীর পাতা দেখুন</string>

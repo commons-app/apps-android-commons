@@ -736,6 +736,7 @@
   <string name="wlm_campaign_description">Wiki Loves Monuments ist ein internationaler Fotowettbewerb für Denkmäler, der von Wikimedia organisiert wird.</string>
   <string name="need_permission">Erlaubnis erforderlich</string>
   <string name="read_phone_state_permission_message">Karten in der Nähe müssen den Telefonstatus lesen können, um richtig zu funktionieren</string>
+  <string name="location_permission_rationale">Optionale Berechtigung: Ruft den aktuellen Standort für Kategorievorschläge ab</string>
   <string name="contributions_of_user">Beiträge von Benutzer: %s</string>
   <string name="achievements_of_user">Erfolge des Benutzers: %s</string>
   <string name="menu_view_user_page">Benutzerseite ansehen</string>

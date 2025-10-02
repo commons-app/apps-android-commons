@@ -702,6 +702,7 @@
   <string name="wlm_campaign_description">Wkki miluje monumenty je medzinárodná súťaž fotografií monumentov organizovaná Wikemédiou</string>
   <string name="need_permission">Potrebné povolenie</string>
   <string name="read_phone_state_permission_message">Blízke mapy potrebujú mať prístup k polohe telefónu, aby správne fungovali</string>
+  <string name="location_permission_rationale">Voliteľné oprávnenie: Umožniť aplikácii, aby získavala aktuálnu polohu a ponúkala na jej základe navrhované kategórie</string>
   <string name="contributions_of_user">Príspevky používateľa:  %s</string>
   <string name="achievements_of_user">Úspechy používateľa: %s</string>
   <string name="menu_view_user_page">Zobraziť profil používateľa</string>

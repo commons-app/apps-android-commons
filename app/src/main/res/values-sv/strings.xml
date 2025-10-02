@@ -706,6 +706,7 @@
   <string name="wlm_campaign_description">Wiki Loves Monuments är en internationell fototävling för monument som organiseras av Wikimedia</string>
   <string name="need_permission">Behöver behörighet</string>
   <string name="read_phone_state_permission_message">Kartor i närheten behöver läsa TELEFONENS TILLSTÅND för att fungera ordentligt</string>
+  <string name="location_permission_rationale">Valfri behörighet: Hämta aktuell plats för kategoriförslag</string>
   <string name="contributions_of_user">Bidrag av användare: %s</string>
   <string name="achievements_of_user">Prestationer av användare: %s</string>
   <string name="menu_view_user_page">Visa användarprofil</string>

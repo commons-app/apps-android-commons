@@ -739,6 +739,7 @@
   <string name="wlm_campaign_description">Wiki Loves Monuments (Wiki Kocha Zabytki) to międzynarodowy konkurs fotograficzny skoncentrowany na zabytkach, organizowany przez Wikimedia</string>
   <string name="need_permission">Wymagane uprawnienie</string>
   <string name="read_phone_state_permission_message">Mapy znajdujące się w pobliżu muszą odczytywać STAN TELEFONU, aby działały poprawnie</string>
+  <string name="location_permission_rationale">Opcjonalne zezwolenie: uzyskiwanie bieżącej lokalizacji dla wygenerowania propozycji kategorii</string>
   <string name="contributions_of_user">Wkład użytkownika: %s</string>
   <string name="achievements_of_user">Osiągnięcia użytkownika: %s</string>
   <string name="menu_view_user_page">Wyświetl profil użytkownika</string>

@@ -717,6 +717,7 @@
   <string name="wlm_campaign_description">Το Wiki Loves Monuments είναι ένας διεθνής διαγωνισμός φωτογραφίας για μνημεία που διοργανώνεται από το Wikimedia</string>
   <string name="need_permission">Χρειάζεται άδεια</string>
   <string name="read_phone_state_permission_message">Οι κοντινοί χάρτες πρέπει να διαβάζουν PHONE STATE για να λειτουργούν σωστά</string>
+  <string name="location_permission_rationale">Προαιρετική άδεια: Ανάκτηση τρέχουσας θέσης σας για προτάσεις κατηγοριών</string>
   <string name="contributions_of_user">Συνεισφορές χρήστη: %s</string>
   <string name="achievements_of_user">Επιτεύγματα χρήστη: %s</string>
   <string name="menu_view_user_page">Προβολή σελίδας χρήστη</string>

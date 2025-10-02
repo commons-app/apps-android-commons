@@ -375,5 +375,6 @@
   <string name="leaderboard_column_count">Zenbaketa</string>
   <string name="leaderboard_upload">Igo</string>
   <string name="leaderboard_nearby">Hurbilekoak</string>
+  <string name="location_permission_rationale">Aukerako baimena: momentuko kokapena zehaztu kategoriak iradokitzeko</string>
   <string name="contributions_of_user">Erabiltzailearen ekarpenak: %s</string>
 </resources>

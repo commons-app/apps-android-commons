@@ -767,6 +767,7 @@
   <string name="wlm_campaign_description">Wiki Loves Monuments هي مسابقة صور دولية للآثار تنظمها ويكيميديا</string>
   <string name="need_permission">تحتاج إذن</string>
   <string name="read_phone_state_permission_message">تحتاج الخرائط المجاورة لقراءة PHONE STATE لتعمل بشكل صحيح</string>
+  <string name="location_permission_rationale">صلاحية اختيارية: احصل على الموقع الحالي لاقتراحات التصنيفات</string>
   <string name="contributions_of_user">مساهمات المستخدم: %s</string>
   <string name="achievements_of_user">إنجازات المستخدم: %s</string>
   <string name="menu_view_user_page">اعرض صفحة المستخدم</string>

@@ -656,6 +656,7 @@
   <string name="custom_selector_already_uploaded_image_text">Tämä kuva on jo ladattu Commonsiin.</string>
   <string name="learn_more">LUE LISÄÄ</string>
   <string name="need_permission">Tarvitaan käyttöoikeus</string>
+  <string name="location_permission_rationale">Valinnainen lupa: Saada tämänhetkinen sijainti loukkasuosituksia varten.</string>
   <string name="contributions_of_user">Käyttäjän muokkaukset: %s</string>
   <string name="achievements_of_user">Käyttäjän saavutukset: %s</string>
   <string name="menu_view_user_page">Näytä käyttäjäprofiili</string>

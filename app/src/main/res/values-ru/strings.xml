@@ -763,6 +763,7 @@
   <string name="wlm_campaign_description">«Вики любит памятники» — международный фотоконкурс памятников, организованный Викимедиа</string>
   <string name="need_permission">Нужно разрешение</string>
   <string name="read_phone_state_permission_message">Для правильной работы картам поблизости необходимо иметь доступ к СОСТОЯНИЮ ТЕЛЕФОНА.</string>
+  <string name="location_permission_rationale">Необязательное разрешение: получение текущего местоположения для предложения категорий</string>
   <string name="contributions_of_user">Вклад участника: %s</string>
   <string name="achievements_of_user">Достижения участника: %s</string>
   <string name="menu_view_user_page">Посмотреть профиль участника</string>

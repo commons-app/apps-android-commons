@@ -697,6 +697,7 @@
   <string name="wlm_campaign_description">Wiki a-j veul bin ai monument a l\'é un concors antërnassional ëd fotografìa ëd monument organisà da Wikimedia</string>
   <string name="need_permission">A-i é damanca dël përmess</string>
   <string name="read_phone_state_permission_message">Le carte dj\'anviron a l\'han damanca ëd lese lë STAT DËL TELÉFON për marcé për da bin</string>
+  <string name="location_permission_rationale">Autorisassion facoltativa: Oten-e la posission atual për dij sugeriment ëd categorìa</string>
   <string name="contributions_of_user">Contribussion ëd l\'utent: %s</string>
   <string name="achievements_of_user">Arzultà ëd l\'utent: %s</string>
   <string name="menu_view_user_page">Vëdde ël profil ëd l\'utent</string>
