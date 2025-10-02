@@ -269,23 +269,18 @@ class ExploreMapFragment : CommonsDaggerSupportFragment(), ExploreMapContract.Vi
 
             override fun onZoom(event: ZoomEvent?): Boolean = false
         })
-        if (!locationPermissionsHelper!!.checkLocationPermission(requireActivity())) {
-            askForLocationPermission()
-        }
+        // removed tha permission check here to prevent it from running on fragment creation
     }
 
     override fun onResume() {
         super.onResume()
         binding!!.mapView.onResume()
         presenter!!.attachView(this)
-        registerNetworkReceiver()
-        if (isResumed) {
-            if (locationPermissionsHelper!!.checkLocationPermission(requireActivity())) {
-                performMapReadyActions()
-            } else {
-                startMapWithoutPermission()
-            }
+        locationManager.addLocationListener(this)
+        if (broadcastReceiver != null) {
+            requireActivity().registerReceiver(broadcastReceiver, intentFilter)
         }
+        setSearchThisAreaButtonVisibility(false)
     }
 
     override fun onPause() {
@@ -294,6 +289,38 @@ class ExploreMapFragment : CommonsDaggerSupportFragment(), ExploreMapContract.Vi
         unregisterNetworkReceiver()
     }
 
+    fun requestLocationIfNeeded() {
+        if (!isVisible) return  //  skips if not visible to user
+        if (locationPermissionsHelper!!.checkLocationPermission(requireActivity())) {
+            if (locationPermissionsHelper!!.isLocationAccessToAppsTurnedOn()) {
+                locationManager.registerLocationManager()
+                drawMyLocationMarker()
+            } else {
+                locationPermissionsHelper!!.showLocationOffDialog(requireActivity(), R.string.location_off_dialog_text)
+            }
+        } else {
+            locationPermissionsHelper!!.requestForLocationAccess(
+                R.string.location_permission_title,
+                R.string.location_permission_rationale
+            )
+        }
+    }
+
+    private fun drawMyLocationMarker() {
+        val location = locationManager.getLastLocation()
+        if (location != null) {
+            val geoPoint = GeoPoint(location.latitude, location.longitude)
+            val startMarker = Marker(binding!!.mapView).apply {
+                setPosition(geoPoint)
+                setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
+                icon = ContextCompat.getDrawable(requireContext(), R.drawable.current_location_marker)
+                title = "Your Location"
+                textLabelFontSize = 24
+            }
+            binding!!.mapView.overlays.add(startMarker)
+            binding!!.mapView.invalidate()
+        }
+    }
 
     /**
      * Unregisters the networkReceiver
@@ -1079,7 +1106,24 @@ class ExploreMapFragment : CommonsDaggerSupportFragment(), ExploreMapContract.Vi
 
     override fun onLocationPermissionDenied(toastMessage: String) = Unit
 
-    override fun onLocationPermissionGranted() = Unit
+    override fun onLocationPermissionGranted() {
+        if (locationPermissionsHelper!!.isLocationAccessToAppsTurnedOn()) {
+            locationManager.registerLocationManager()
+            drawMyLocationMarker()
+        } else {
+            locationPermissionsHelper!!.showLocationOffDialog(requireActivity(), R.string.location_off_dialog_text)
+        }
+        onLocationChanged(LocationChangeType.PERMISSION_JUST_GRANTED, null)
+    }
+
+    fun onLocationChanged(locationChangeType: LocationChangeType, location: Location?) {
+        if (locationChangeType == LocationChangeType.PERMISSION_JUST_GRANTED) {
+            val curLatLng = locationManager.getLastLocation() ?: getMapCenter()
+            populatePlaces(curLatLng)
+        } else {
+            presenter!!.updateMap(locationChangeType)
+        }
+    }
 
     companion object {
         fun newInstance(): ExploreMapFragment {
