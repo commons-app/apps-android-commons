@@ -121,4 +121,16 @@ data class Image(
 
         override fun newArray(size: Int): Array<Image?> = arrayOfNulls(size)
     }
+
+    override fun hashCode(): Int {
+        var result = id.hashCode()
+        result = 31 * result + bucketId.hashCode()
+        result = 31 * result + name.hashCode()
+        result = 31 * result + uri.hashCode()
+        result = 31 * result + path.hashCode()
+        result = 31 * result + bucketName.hashCode()
+        result = 31 * result + sha1.hashCode()
+        result = 31 * result + date.hashCode()
+        return result
+    }
 }
