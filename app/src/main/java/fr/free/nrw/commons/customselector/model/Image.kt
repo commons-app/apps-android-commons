@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.customselector.model
 
 import android.net.Uri
+import android.os.Build
 import android.os.Parcel
 import android.os.Parcelable
 
@@ -48,7 +49,12 @@ data class Image(
         this(
             parcel.readLong(),
             parcel.readString()!!,
-            parcel.readParcelable(Uri::class.java.classLoader)!!,
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                parcel.readParcelable(Uri::class.java.classLoader, Uri::class.java)!!
+            } else {
+                @Suppress("DEPRECATION")
+                parcel.readParcelable(Uri::class.java.classLoader)!!
+            },
             parcel.readString()!!,
             parcel.readLong(),
             parcel.readString()!!,
