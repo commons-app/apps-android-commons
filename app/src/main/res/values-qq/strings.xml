@@ -97,6 +97,9 @@
   <string name="no_uploads_yet">Message shown on contribution list during non-first sync if no uploads present.</string>
   <string name="menu_retry_upload">Menu item text prompting user to retry a failed upload.\n{{Identical|Retry}}</string>
   <string name="menu_cancel_upload">Menu item text prompting user to cancel and delete a failed upload.\n{{Identical|Cancel}}</string>
+  <string name="language_search_type_language_name">Placeholder text in the top search box in the language search dialog.</string>
+  <string name="language_search_recent_searches">A title in the language search dialog.</string>
+  <string name="language_search_all_languages">A title in the language search dialog.</string>
   <string name="menu_download">Menu item text prompting user to download a selected photo or media file locally.\n{{Identical|Download}}</string>
   <string name="preference_license">{{Identical|License}}</string>
   <string name="use_previous">This is a button text. Concise wording is preferred (e.g. \"&amp;\" instead of \"and\"), where possible. It should ideally be rendered in one line, even on small devices.</string>
