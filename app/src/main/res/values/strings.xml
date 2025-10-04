@@ -464,6 +464,8 @@ Upload your first media by tapping on the add button.</string>
   <string name="ends_on">Ends on:</string>
   <string name="display_campaigns">Display campaigns</string>
   <string name="display_campaigns_explanation">See the ongoing campaigns</string>
+  <string name="show_deletion_button">Show deletion button</string>
+  <string name="show_deletion_button_explanation">Enable the \"Delete Folder\" button in the custom picker</string>
   <string name="in_app_camera_location_access_explanation">Allow the app to fetch location in case the camera does not record it. Some device cameras do not record location. In such cases, letting the app fetch and attach location to it makes your contribution more useful. You may change this any time from the Settings</string>
   <string name="option_allow">Allow</string>
   <string name="option_dismiss">Dismiss</string>
