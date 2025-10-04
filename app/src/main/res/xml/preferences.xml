@@ -61,7 +61,7 @@
     </PreferenceCategory>
 
     <PreferenceCategory
-        android:title="Uploads">
+        android:title="@string/preferences_uploads">
 
         <SwitchPreference
 
