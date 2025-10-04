@@ -630,6 +630,7 @@
   <string name="custom_selector_limit_error_desc">오류: 업로드 제한에 도달했습니다</string>
   <string name="learn_more">더 알아보기</string>
   <string name="need_permission">권한 필요</string>
+  <string name="location_permission_rationale">선택적 권한: 분류 추천을 위해 현재 위치 정보를 가져옵니다.</string>
   <string name="contributions_of_user">사용자의 기여: %s</string>
   <string name="achievements_of_user">사용자 달성도: %s</string>
   <string name="menu_view_user_page">사용자 프로필 보기</string>

@@ -725,6 +725,8 @@
   <string name="wlm_campaign_description">維基愛古蹟是由維基媒體舉行的國際古蹟攝影比賽</string>
   <string name="need_permission">需要權限</string>
   <string name="read_phone_state_permission_message">附近地圖需要讀取手機狀態來正常運作</string>
+  <string name="location_off_dialog_text">請開啟定位服務，以查看附近的地點。</string>
+  <string name="location_permission_rationale">可有可無的權限：獲取目前的地理位置，以用於分類建議</string>
   <string name="contributions_of_user">使用者貢獻：%s</string>
   <string name="achievements_of_user">使用者成果：%s</string>
   <string name="menu_view_user_page">檢視使用者個人檔案</string>

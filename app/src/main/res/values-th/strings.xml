@@ -428,6 +428,7 @@
   <string name="leaderboard_nearby">สถานที่ใกล้เคียง</string>
   <string name="cancelling_upload">กำลังยกเลิกอับโหลด…</string>
   <string name="cancel_upload">ยกเลิกอับโหลด</string>
+  <string name="location_permission_rationale">สิทธิทางเลือก: รับข้อมูลตำแหน่งที่ตั้งปัจจุบันสำหรับข้อเสนอแนะหมวดหมู่</string>
   <string name="api_level">API level</string>
   <string name="android_version">แอนดรอยด์เวอร์ชัน</string>
   <string name="device_model">รุ่นอุปกรณ์</string>

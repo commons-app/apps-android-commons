@@ -150,6 +150,9 @@
   <string name="no_uploads_yet">You have not yet uploaded any photos.</string>
   <string name="menu_retry_upload">Retry</string>
   <string name="menu_cancel_upload">Cancel</string>
+  <string name="language_search_type_language_name">Type Language Name</string>
+  <string name="language_search_recent_searches">Recent Searches</string>
+  <string name="language_search_all_languages">All Languages</string>
   <string name="media_upload_policy">By submitting this picture, I declare that this is my own work, that it does not contain copyrighted material or selfies, and otherwise adheres to &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Wikimedia Commons policies&lt;/a&gt;.</string>
   <string name="menu_download">Download</string>
   <string name="preference_license">Default License</string>
@@ -266,6 +269,7 @@
 
   <string name="upload_problem_image">Problems found in image</string>
   <string name="internet_downloaded">Please only upload pictures that you have taken by yourself. Don\'t upload pictures that you have downloaded from the Internet.</string>
+  <string name="preferences_uploads">Uploads</string>
   <string name="use_external_storage">Save In-app shots</string>
   <string name="use_external_storage_summary">Save pictures taken with the in-app camera to your device storage</string>
   <string name="login_to_your_account">Log in to your account</string>
@@ -461,6 +465,8 @@ Upload your first media by tapping on the add button.</string>
   <string name="ends_on">Ends on:</string>
   <string name="display_campaigns">Display campaigns</string>
   <string name="display_campaigns_explanation">See the ongoing campaigns</string>
+  <string name="show_deletion_button">Show deletion button</string>
+  <string name="show_deletion_button_explanation">Enable the \"Delete Folder\" button in the custom picker</string>
   <string name="in_app_camera_location_access_explanation">Allow the app to fetch location in case the camera does not record it. Some device cameras do not record location. In such cases, letting the app fetch and attach location to it makes your contribution more useful. You may change this any time from the Settings</string>
   <string name="option_allow">Allow</string>
   <string name="option_dismiss">Dismiss</string>
@@ -748,6 +754,8 @@ Upload your first media by tapping on the add button.</string>
   <string name="wlm_campaign_description">Wiki Loves Monuments is an international photo contest for monuments organised by Wikimedia</string>
   <string name="need_permission">Need Permission</string>
   <string name="read_phone_state_permission_message">Nearby maps need to read PHONE STATE to function properly</string>
+  <string name="location_off_dialog_text">Please turn on location services to view nearby places.</string>
+  <string name="location_permission_rationale">Location access is needed to show nearby places on the map.</string>
 
   <string name="contributions_of_user">Contributions of User: %s</string>
   <string name="achievements_of_user">Achievements of User: %s</string>

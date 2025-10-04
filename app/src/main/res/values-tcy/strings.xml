@@ -345,4 +345,5 @@
   <string name="read_help_link">ನನಾತ್ ಓದುಲೇ</string>
   <string name="media_detail_in_all_languages">ಮಾಂತಾ ಬಾಸೆಲೆಡ್</string>
   <string name="done">ಆಂಡ್</string>
+  <string name="location_permission_rationale">ಐಚ್ಛಿಕ ಅನುಮತಿ: ವರ್ಗೊ ಸಲಹೆಗ್ ಇತ್ತೆತ ಸ್ಥಳೊನ್ ಪಡೆಲೆ.</string>
 </resources>

@@ -435,6 +435,7 @@
   <string name="back">Distreiñ</string>
   <string name="welcome_custom_selector_ok">Fiskal</string>
   <string name="learn_more">GOUZOUT HIROC\'H</string>
+  <string name="location_permission_rationale">Aotre diret : kaout al lec\'hiadur red evit kinnig rummadoù</string>
   <string name="contributions_of_user">Degasadennoù an implijer: %s</string>
   <string name="achievements_of_user">Taolioù-kaer an implijer: %s</string>
   <string name="menu_view_user_page">Gwelet profil an implijer</string>

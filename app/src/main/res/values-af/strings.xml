@@ -369,5 +369,6 @@
   <string name="check_category_success_message">Versoek kategorie-toets vir %1$s</string>
   <string name="upload_nearby_place_found_title">Nabygeleë plek gevind</string>
   <string name="upload_nearby_place_found_description_singular" fuzzy="true">Is dit \'n foto van Plek %1$s?</string>
+  <string name="location_permission_rationale">Opsionele toestemming: kry die huidige ligging vir kategorievoorstelle</string>
   <string name="full_screen_mode_zoom_info">Brug to fingre for at zoome ind og ud.</string>
 </resources>

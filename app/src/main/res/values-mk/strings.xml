@@ -701,6 +701,8 @@
   <string name="wlm_campaign_description">„Вики ги сака спомениците“ е меѓународен фотографски натпревар за споменици приреден од Викимедија</string>
   <string name="need_permission">Се бара дозвола</string>
   <string name="read_phone_state_permission_message">Картите со блиски места треба можат да ја прочитаат СОСТОЈБАТА НА ТЕЛЕФОНОТ за да работат правилно</string>
+  <string name="location_off_dialog_text">Вклучете ја вашата местоположба за да ги гледате околните места.</string>
+  <string name="location_permission_rationale">Дозвола по желба: Утврдување на тековната местоположба за предлагање категории</string>
   <string name="contributions_of_user">Придонеси на корисникот: %s</string>
   <string name="achievements_of_user">Достигнувања на корисникот: %s</string>
   <string name="menu_view_user_page">Погл. кориснички профил</string>

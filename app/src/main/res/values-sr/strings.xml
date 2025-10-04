@@ -664,6 +664,7 @@
   <string name="wlm_campaign_title">Вики воли споменике</string>
   <string name="wlm_campaign_description">Вики воли споменике је међународно такмичење фотографија споменика, које организује Викимедија</string>
   <string name="need_permission">Потребна је дозвола</string>
+  <string name="location_permission_rationale">Необавезна дозвола: преузми тренутну локацију за предлоге категорија</string>
   <string name="contributions_of_user">Доприноси корисника/це: %s</string>
   <string name="achievements_of_user">Достигнућа корисника/це: %s</string>
   <string name="menu_view_user_page">Прикажи корисничку страницу</string>

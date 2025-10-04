@@ -185,4 +185,5 @@
   <string name="search_recent_header">Golèkan mentas waé:</string>
   <string name="question">Pitakon</string>
   <string name="continue_message">Banjuraké</string>
+  <string name="location_permission_rationale">Palilah manasuka: Njupuk pernah saiki kanggo saran ing kategori</string>
 </resources>

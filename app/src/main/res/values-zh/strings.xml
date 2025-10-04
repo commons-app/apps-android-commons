@@ -758,6 +758,7 @@
   <string name="wlm_campaign_description">维基爱古迹是由维基媒体举行的国际古迹摄影比赛</string>
   <string name="need_permission">需要权限</string>
   <string name="read_phone_state_permission_message">附近地图需要读取手机状态权限以正常运行</string>
+  <string name="location_permission_rationale">可选权限：获取当前位置以提供分类建议</string>
   <string name="contributions_of_user">用户贡献：%s</string>
   <string name="achievements_of_user">用户成就：%s</string>
   <string name="menu_view_user_page">查看用户个人资料</string>

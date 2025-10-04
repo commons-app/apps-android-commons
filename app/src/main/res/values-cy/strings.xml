@@ -301,6 +301,7 @@
   <string name="description">Disgrifiad</string>
   <string name="title_page_bookmarks_items">Eitemau</string>
   <string name="learn_more">DYSGU MWY</string>
+  <string name="location_permission_rationale">Caniatad opsiynol: Ceisio\'r lleoliad cyfoes ar gyfer categoriau</string>
   <string name="reset">Ailosod</string>
   <string name="explore_map_details">Manylion</string>
   <string name="api_level">Lefel API</string>
