@@ -39,4 +39,11 @@ data class Folder(
 
         return true
     }
+
+    override fun hashCode(): Int {
+        var result = bucketId.hashCode()
+        result = 31 * result + name.hashCode()
+        result = 31 * result + images.hashCode()
+        return result
+    }
 }
