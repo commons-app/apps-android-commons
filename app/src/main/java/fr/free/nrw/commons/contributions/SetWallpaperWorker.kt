@@ -45,10 +45,10 @@ class SetWallpaperWorker(context: Context, params: WorkerParameters) :
                 }
             }
 
-            override fun onFailureImpl(dataSource: DataSource<CloseableReference<CloseableImage>>?) {
+            override fun onFailureImpl(dataSource: DataSource<CloseableReference<CloseableImage?>?>) {
                 Timber.d("Error getting bitmap from image url %s", imageUrl.toString())
                 showNotification(context, "Setting Wallpaper Failed", "Failed to download image.")
-                dataSource?.close()
+                dataSource.close()
             }
         }, CallerThreadExecutor.getInstance())
 
