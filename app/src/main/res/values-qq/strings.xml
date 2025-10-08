@@ -173,7 +173,9 @@
   <string name="explore_tab_title_map">{{Identical|Map}}</string>
   <string name="successful_wikidata_edit">Message shown in a dialog (\"success toast\") after a contribution by the user.\n\nParameter:\n* %1$s - title of the target page on Wikidata</string>
   <string name="question">{{Identical|Question}}</string>
+  <string name="quiz_i_am_not_sure">In the quiz, a third option in addition to "Yes" and "No".</string>
   <string name="result">{{Identical|Result}}</string>
+  <string name="quiz_continue">Button in quiz.</string>
   <string name="delete">{{Identical|Delete}}</string>
   <string name="statistics">Èstatistik</string>
   <string name="statistics_featured">To see the correct translation for your language, please go to https://commons.wikimedia.org/wiki/Commons:Featured_pictures and select your language in \"This project page in other languages\".</string>
@@ -190,6 +192,7 @@
   <string name="please_wait">{{Identical|Please wait}}</string>
   <string name="exif_tag_name_author">{{Identical|Author}}</string>
   <string name="exif_tag_name_location">{{Identical|Location}}</string>
+  <string name="upload_categories_dont_show_this_message_again">A label of a checkbox.</string>
   <string name="no_depiction_found">{{Doc-commons-app-depicts}}</string>
   <string name="depictions_edit_helper_make_edit_toast">{{Doc-commons-app-depicts}}</string>
   <string name="depictions_edit_helper_show_edit_title">{{Doc-commons-app-depicts}}</string>
