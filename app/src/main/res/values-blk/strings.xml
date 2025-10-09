@@ -90,10 +90,10 @@
   <string name="preference_license">မူလလုဲင်သိဉ်</string>
   <string name="use_previous">ထူႏသုင်ꩻ ကတူႏစဲဉ်ႏတောမ်ႏ အွောန်ႏနယ်ချက် ကရီးခါ</string>
   <string name="preference_theme">Theme</string>
-  <string name="license_name_cc_by_sa_four"> Attribution-ShareAlike 4.0</string>
-  <string name="license_name_cc_by_four"> Attribution 4.0</string>
-  <string name="license_name_cc_by_sa"> Attribution-ShareAlike 3.0</string>
-  <string name="license_name_cc_by"> Attribution 3.0</string>
+  <string name="license_name_cc_by_sa_four" fuzzy="true"> Attribution-ShareAlike 4.0</string>
+  <string name="license_name_cc_by_four" fuzzy="true"> Attribution 4.0</string>
+  <string name="license_name_cc_by_sa" fuzzy="true"> Attribution-ShareAlike 3.0</string>
+  <string name="license_name_cc_by" fuzzy="true"> Attribution 3.0</string>
   <string name="welcome_final_button_text">မွေး!</string>
   <string name="welcome_help_button_text">ထဲင်းယင်း သꩻတင်ꩻအချက်လက်</string>
   <string name="detail_panel_cats_label">ကဏ္ဍဖုံႏ</string>

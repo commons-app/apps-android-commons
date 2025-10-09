@@ -116,10 +116,10 @@
   <string name="preference_license">Лиценз по подразбиране</string>
   <string name="use_previous">Използване на предишното заглавие и описание</string>
   <string name="preference_theme">Облик</string>
-  <string name="license_name_cc_by_sa_four">Признание-Споделяне на споделеното 4.0</string>
-  <string name="license_name_cc_by_four">Признание 4.0</string>
-  <string name="license_name_cc_by_sa">Признание-Споделяне на споделеното 3.0</string>
-  <string name="license_name_cc_by"> Признание 3.0</string>
+  <string name="license_name_cc_by_sa_four" fuzzy="true">Признание-Споделяне на споделеното 4.0</string>
+  <string name="license_name_cc_by_four" fuzzy="true">Признание 4.0</string>
+  <string name="license_name_cc_by_sa" fuzzy="true">Признание-Споделяне на споделеното 3.0</string>
+  <string name="license_name_cc_by" fuzzy="true"> Признание 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
