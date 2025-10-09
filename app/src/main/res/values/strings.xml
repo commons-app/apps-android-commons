@@ -494,8 +494,8 @@ Upload your first media by tapping on the add button.</string>
   <string name="check_category_toast">Requesting category check for %1$s</string>
   <string name="nominate_for_deletion_done">Done</string>
   <string name="send_thank_success_title">Sending Thanks: Success</string>
-  <string name="send_thank_success_message">Successfully sent thanks to %1$s</string>
-  <string name="send_thank_failure_message">Failed to send thanks %1$s</string>
+  <string name="send_thank_success_message">Sent thanks to %1$s</string>
+  <string name="send_thank_failure_message">Failed to send thanks to %1$s</string>
   <string name="send_thank_failure_title">Sending Thanks: Failure</string>
 
   <string name="send_thank_toast">Sending Thanks for %1$s</string>

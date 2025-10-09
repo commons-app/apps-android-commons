@@ -1027,12 +1027,12 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
         val message: String = if (result) {
             context.getString(
                 R.string.send_thank_success_message,
-                media!!.displayTitle
+                media!!.user
             )
         } else {
             context.getString(
                 R.string.send_thank_failure_message,
-                media!!.displayTitle
+                media!!.user
             )
         }
 
