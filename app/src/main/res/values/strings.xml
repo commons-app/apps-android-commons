@@ -348,6 +348,7 @@
   <string name="quiz">Quiz</string>
   <string name="quiz_question_string">Is this picture OK to upload?</string>
   <string name="question">Question</string>
+  <string name="quiz_i_am_not_sure">I am not sure</string>
   <string name="result">Result</string>
   <string name="quiz_back_button">If you carry on uploading images that require deletion, your account will likely be banned. Are you sure you want to end the quiz?</string>
   <string name="quiz_alert_message">More than %1$s of the images you uploaded have been deleted. If you carry on uploading images that require deletion, your account will likely be banned.\n\nWould you like to view the tutorial again and then take a quiz to help you learn what type of images you should or shouldn\'t upload?</string>
@@ -357,6 +358,7 @@
   <string name="blurry_image_answer">One of the goals of Commons is to gather quality images. Therefore, blurry images shouldn\'t be uploaded. Always try to take nice pictures with good lighting.</string>
   <string name="construction_event_answer">Pictures showing technology or culture are very welcome on Commons.</string>
   <string name="congratulatory_message_quiz">You got %1$s of the answers correct. Congratulations!</string>
+  <string name="quiz_continue">Continue</string>
   <string name="warning_for_no_answer">Select one of the two options to answer the question</string>
   <string name="user_not_logged_in">Log-in expired. Please log in again.</string>
   <string name="quiz_result_share_message">Share your quiz with your friends!</string>
@@ -555,6 +557,7 @@ Upload your first media by tapping on the add button.</string>
   <string name="share_text">Upload photos to Wikimedia Commons directly from your phone. Download the Commons App now: %1$s</string>
   <string name="share_via">Share app via...</string>
   <string name="image_info">Image Info</string>
+  <string name="upload_categories_dont_show_this_message_again">Don\'t show this message again</string>
   <string name="no_categories_found">No Categories found</string>
   <string name="no_depiction_found">No Depictions found</string>
   <string name="upload_cancelled">Cancelled Upload</string>
