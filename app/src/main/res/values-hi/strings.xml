@@ -152,10 +152,10 @@
   <string name="preference_license">डिफॉल्ट लाइसेन्स</string>
   <string name="use_previous" fuzzy="true">पिछले शीर्षक/विवरण का उपयोग करें</string>
   <string name="preference_theme">थीम</string>
-  <string name="license_name_cc_by_sa_four">एट्रीब्यूशन-शेयरअलाइक 4.0</string>
-  <string name="license_name_cc_by_four">एट्रिब्यूशन 4.0</string>
-  <string name="license_name_cc_by_sa">एट्रीब्यूशन-शेयरअलाइक 3.0</string>
-  <string name="license_name_cc_by">एट्रीब्यूशन 3.0</string>
+  <string name="license_name_cc_by_sa_four" fuzzy="true">एट्रीब्यूशन-शेयरअलाइक 4.0</string>
+  <string name="license_name_cc_by_four" fuzzy="true">एट्रिब्यूशन 4.0</string>
+  <string name="license_name_cc_by_sa" fuzzy="true">एट्रीब्यूशन-शेयरअलाइक 3.0</string>
+  <string name="license_name_cc_by" fuzzy="true">एट्रीब्यूशन 3.0</string>
   <string name="license_name_cc0">सीसी0</string>
   <string name="license_name_cc_by_sa_3_0">सीसी बाय-एसए 3.0</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
@@ -301,6 +301,7 @@
   <string name="question">प्रश्न</string>
   <string name="result">परिणाम</string>
   <string name="selfie_answer">सेल्फी की ज्ञानकोषीय महत्ता बहुत अधिक नहीं है। कृपया अपना चित्र तब तक अपलोड न करें जबतक आपके बारे में कोई विकिपीडिया लेख पहले से उपलब्ध नहीं है।</string>
+  <string name="quiz_continue">जारी रखें</string>
   <string name="warning_for_no_answer">उत्तर हेतु प्रश्न के दो विकल्प में से कोई एक चुने</string>
   <string name="user_not_logged_in" fuzzy="true">लॉग इन सत्र समाप्त हो गया, कृपया पुनः लॉग इन करें।</string>
   <string name="quiz_result_share_message">अपनी प्रश्नोत्तरी अपने मित्रों के साथ साझा करें!</string>

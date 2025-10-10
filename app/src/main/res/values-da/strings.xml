@@ -162,10 +162,10 @@
   <string name="preference_license">Standardlicens</string>
   <string name="use_previous">Brug forrige titel og beskrivelse</string>
   <string name="preference_theme">Tema</string>
-  <string name="license_name_cc_by_sa_four"> Attribution-ShareAlike 4.0</string>
-  <string name="license_name_cc_by_four"> Attribution 4.0</string>
-  <string name="license_name_cc_by_sa"> Attribution-ShareAlike 3.0</string>
-  <string name="license_name_cc_by"> Attribution 3.0</string>
+  <string name="license_name_cc_by_sa_four" fuzzy="true"> Attribution-ShareAlike 4.0</string>
+  <string name="license_name_cc_by_four" fuzzy="true"> Attribution 4.0</string>
+  <string name="license_name_cc_by_sa" fuzzy="true"> Attribution-ShareAlike 3.0</string>
+  <string name="license_name_cc_by" fuzzy="true"> Attribution 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
@@ -679,7 +679,7 @@
   <string name="show_in_map_app">Vis i kort-app</string>
   <string name="modify_location">Rediger placering</string>
   <string name="location_picker_image_view">Billedvisningen af placeringsvælgeren</string>
-  <string name="location_picker_image_view_shadow">Skyggen af billedvisningen af lokationsvælgeren</string>
+  <string name="location_picker_image_view_shadow" fuzzy="true">Skyggen af billedvisningen af lokationsvælgeren</string>
   <string name="image_location">Billedplacering</string>
   <string name="check_whether_location_is_correct">Tjek, om placeringen er korrekt</string>
   <string name="label">Etiket</string>

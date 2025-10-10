@@ -101,10 +101,10 @@
   <string name="preference_license" fuzzy="true">اجازت نامہ</string>
   <string name="use_previous" fuzzy="true">گزشتہ عنوان/وضاحت استعمال کریں</string>
   <string name="preference_theme" fuzzy="true">نائٹ موڈ</string>
-  <string name="license_name_cc_by_sa_four">انتباہ-شراکت 4.0</string>
-  <string name="license_name_cc_by_four">انتباہ 4.0</string>
-  <string name="license_name_cc_by_sa">انتباہ-شراکت 3.0</string>
-  <string name="license_name_cc_by">انتباہ 3.0</string>
+  <string name="license_name_cc_by_sa_four" fuzzy="true">انتباہ-شراکت 4.0</string>
+  <string name="license_name_cc_by_four" fuzzy="true">انتباہ 4.0</string>
+  <string name="license_name_cc_by_sa" fuzzy="true">انتباہ-شراکت 3.0</string>
+  <string name="license_name_cc_by" fuzzy="true">انتباہ 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="welcome_final_button_text">ہاں!</string>
   <string name="detail_panel_cats_label">زمرہ جات</string>

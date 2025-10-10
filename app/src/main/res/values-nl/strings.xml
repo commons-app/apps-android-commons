@@ -173,14 +173,17 @@
   <string name="no_uploads_yet">U hebt nog geen afbeeldingen geüpload.</string>
   <string name="menu_retry_upload">Opnieuw proberen</string>
   <string name="menu_cancel_upload">Annuleren</string>
+  <string name="language_search_type_language_name">Typ taalnaam</string>
+  <string name="language_search_recent_searches">Recente zoekopdrachten</string>
+  <string name="language_search_all_languages">Alle talen</string>
   <string name="media_upload_policy">Door deze foto te delen, verklaar ik dat dit mijn eigen werk is, dat het geen auteursrechtelijk beschermd materiaal of selfies bevat en dat het verder voldoet aan het &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Wikimedia Commons-beleid&lt;/a&gt;.</string>
   <string name="menu_download">Downloaden</string>
   <string name="preference_license">Standaardlicentie</string>
   <string name="use_previous">Vorige titel/omschrijving gebruiken</string>
   <string name="preference_theme">Thema</string>
-  <string name="license_name_cc_by_sa_four"> Naamsvermelding-GelijkDelen 4.0</string>
+  <string name="license_name_cc_by_sa_four">Naamsvermelding-GelijkDelen 4.0</string>
   <string name="license_name_cc_by_four">Naamsvermelding 4.0</string>
-  <string name="license_name_cc_by_sa"> Naamsvermelding-GelijkDelen 3.0</string>
+  <string name="license_name_cc_by_sa">Naamsvermelding-GelijkDelen 3.0</string>
   <string name="license_name_cc_by">Naamsvermelding 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
@@ -285,6 +288,7 @@
   <string name="upload_connection_error_alert_detail">Het uploadproces vereist een actieve internettoegang. Controleer uw netwerkverbinding.</string>
   <string name="upload_problem_image">Problemen gevonden in afbeelding</string>
   <string name="internet_downloaded">Upload alleen foto\'s die je zelf hebt genomen. Upload geen foto\'s die je van internet hebt gedownload.</string>
+  <string name="preferences_uploads">Uploads</string>
   <string name="use_external_storage">In-app opnamen opslaan</string>
   <string name="use_external_storage_summary">Foto\'s die met de in-app-camera zijn gemaakt, opslaan in de opslag van uw apparaat</string>
   <string name="login_to_your_account">Aanmelden bij uw account</string>
@@ -458,6 +462,8 @@
   <string name="ends_on">Eindigt op:</string>
   <string name="display_campaigns">Campagnes weergeven</string>
   <string name="display_campaigns_explanation">Bekijk de lopende campagnes</string>
+  <string name="show_deletion_button">Verwijderknop weergeven</string>
+  <string name="show_deletion_button_explanation">De knop “Map verwijderen” in de aangepaste kiezer activeren</string>
   <string name="in_app_camera_location_access_explanation">Toestaan dat de app de locatie ophaalt voor het geval de camera deze niet registreert. Sommige apparaatcamera\'s doen dat namelijk niet. In dergelijke gevallen wordt uw bijdrage nuttiger als u de app de locatie laat ophalen en aan uw foto\'s laat koppelen. U kunt dit op elk gewenst moment wijzigen via de Instellingen.</string>
   <string name="option_allow">Toestaan</string>
   <string name="option_dismiss">Afwijzen</string>

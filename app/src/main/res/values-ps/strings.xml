@@ -154,6 +154,9 @@
   <string name="no_uploads_yet">تاسې تر اوسه کوم انځور نه دی پورته کړی.</string>
   <string name="menu_retry_upload">بياآزمويل</string>
   <string name="menu_cancel_upload">ناگارل</string>
+  <string name="language_search_type_language_name">ژبې نوم وليکئ</string>
+  <string name="language_search_recent_searches">وروستنۍ پلټنې</string>
+  <string name="language_search_all_languages">ټولې ژبې</string>
   <string name="menu_download">ښکته کول</string>
   <string name="preference_license">تلواليز منښتليک</string>
   <string name="use_previous">مخکنی سرليک او سپيناو وکاروئ</string>
@@ -163,6 +166,7 @@
   <string name="license_name_cc_by_sa">ځانگړي کونگ-ورته وېشنه ۳.۰</string>
   <string name="license_name_cc_by">ځانگړي کونگ ۳.۰</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
+  <string name="tutorial_1_text">ويکي‌رسنۍ خونديځ د ډېرو هغه انځورونو کوربه‌توب کوي چې په ويکي‌پېډيا کې کارول کېږي.</string>
   <string name="tutorial_1_subtext">ستاسو انځورونه د نړۍ په گوټ گوټ کې خلکو ته زده کړه ورکوي!</string>
   <string name="tutorial_2_text">مهرباني وکړئ هغه انځورونه راپورته کړئ چې په بشپړ ډول تاسو اخيستي يا جوړ کړې وي:</string>
   <string name="tutorial_2_subtext_1">طبيعي څيزونه (گلان، څاروي، غرونه)</string>
@@ -193,6 +197,8 @@
   <string name="menu_refresh">تازه کول</string>
   <string name="storage_permission_title">د زېرمه کولو د پرېښولي غوښتنه کول</string>
   <string name="read_storage_permission_rationale">اړينه پرېښولی: بهرنۍ زېرمه ولولئ. کاريال ستاسو انځورتونه ته پرته له دې لاسرسی نشي موندلی.</string>
+  <string name="write_storage_permission_rationale">اجازې ته اړتيا ده: باندنۍ زېرمه‌کولو ليکل. له دې پرته کاريال ستاسو کامرې/انځورتون ته لاسرسی نشي موندلای.</string>
+  <string name="location_permission_title">د ځای د اجازې غوښتنه کول</string>
   <string name="ok">ښه</string>
   <string name="warning">گواښنه</string>
   <string name="duplicate_file_name">د دوتنې غبرگونی نوم وموندل شو</string>

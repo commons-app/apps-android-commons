@@ -152,10 +152,10 @@
   <string name="preference_license">Licenza por defecto</string>
   <string name="use_previous">Usar o título e descrición anteriores</string>
   <string name="preference_theme">Tema</string>
-  <string name="license_name_cc_by_sa_four"> Recoñecemento-CompartirIgual 4.0</string>
-  <string name="license_name_cc_by_four">Recoñecemento 4.0</string>
-  <string name="license_name_cc_by_sa"> Recoñecemento-CompartirIgual 3.0</string>
-  <string name="license_name_cc_by">Recoñecemento 3.0</string>
+  <string name="license_name_cc_by_sa_four" fuzzy="true"> Recoñecemento-CompartirIgual 4.0</string>
+  <string name="license_name_cc_by_four" fuzzy="true">Recoñecemento 4.0</string>
+  <string name="license_name_cc_by_sa" fuzzy="true"> Recoñecemento-CompartirIgual 3.0</string>
+  <string name="license_name_cc_by" fuzzy="true">Recoñecemento 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>

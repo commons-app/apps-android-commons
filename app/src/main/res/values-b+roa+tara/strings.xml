@@ -65,10 +65,10 @@
   <string name="menu_about">Sus a</string>
   <string name="menu_retry_upload">Pruève arrete</string>
   <string name="menu_cancel_upload">Annulle</string>
-  <string name="license_name_cc_by_sa_four"> Attribbuzione-Condivide a \'u stesse mode 4.0</string>
-  <string name="license_name_cc_by_four"> Attribbuzione 4.0</string>
-  <string name="license_name_cc_by_sa"> Attribbuzione-Condivide a \'u stesse mode 3.0</string>
-  <string name="license_name_cc_by"> Attribbuzione 3.0</string>
+  <string name="license_name_cc_by_sa_four" fuzzy="true"> Attribbuzione-Condivide a \'u stesse mode 4.0</string>
+  <string name="license_name_cc_by_four" fuzzy="true"> Attribbuzione 4.0</string>
+  <string name="license_name_cc_by_sa" fuzzy="true"> Attribbuzione-Condivide a \'u stesse mode 3.0</string>
+  <string name="license_name_cc_by" fuzzy="true"> Attribbuzione 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
