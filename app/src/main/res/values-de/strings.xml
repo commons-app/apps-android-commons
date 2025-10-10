@@ -197,10 +197,10 @@
   <string name="preference_license">Standardlizenz</string>
   <string name="use_previous">Vorherigen Titel und Beschreibung verwenden</string>
   <string name="preference_theme">Farbschema</string>
-  <string name="license_name_cc_by_sa_four">Attribution-ShareAlike 4.0</string>
-  <string name="license_name_cc_by_four">Attribution 4.0</string>
-  <string name="license_name_cc_by_sa">Attribution-ShareAlike 3.0</string>
-  <string name="license_name_cc_by">Attribution 3.0</string>
+  <string name="license_name_cc_by_sa_four" fuzzy="true">Attribution-ShareAlike 4.0</string>
+  <string name="license_name_cc_by_four" fuzzy="true">Attribution 4.0</string>
+  <string name="license_name_cc_by_sa" fuzzy="true">Attribution-ShareAlike 3.0</string>
+  <string name="license_name_cc_by" fuzzy="true">Attribution 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_3_0">CC-BY 3.0</string>
@@ -794,7 +794,7 @@
   <string name="permissions_are_required_for_functionality">Für die Funktionalität sind Berechtigungen erforderlich</string>
   <string name="learn_how_to_write_a_useful_description">Erfahre, wie man eine nützliche Beschreibung schreibt</string>
   <string name="learn_how_to_write_a_useful_caption">Erfahre, wie man eine nützliche Überschrift schreibt</string>
-  <string name="see_your_achievements" fuzzy="true">Deine Erfolge ansehen</string>
+  <string name="see_your_achievements">Deine Erfolge ansehen</string>
   <string name="edit_image">Bild bearbeiten</string>
   <string name="edit_location">Standort bearbeiten</string>
   <string name="location_updated">Standort aktualisiert!</string>

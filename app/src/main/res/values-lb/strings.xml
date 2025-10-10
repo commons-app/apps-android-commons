@@ -131,14 +131,16 @@
   <string name="no_uploads_yet">Dir hutt nach keng Fotoen eropgelueden.</string>
   <string name="menu_retry_upload">Nach eng Kéier probéieren</string>
   <string name="menu_cancel_upload">Ofbriechen</string>
+  <string name="language_search_type_language_name">Sproochnumm antippen</string>
+  <string name="language_search_all_languages">All Sproochen</string>
   <string name="menu_download">Eroflueden</string>
   <string name="preference_license">Standardlizenz</string>
   <string name="use_previous">Viregen Titel a Beschreiwung benotzen</string>
   <string name="preference_theme">Faarfscheema</string>
   <string name="license_name_cc_by_sa_four">Attribution-ShareAlike 4.0</string>
   <string name="license_name_cc_by_four">Attribution 4.0</string>
-  <string name="license_name_cc_by_sa">CC Attribution-ShareAlike 3.0</string>
-  <string name="license_name_cc_by">CC Attribution 3.0</string>
+  <string name="license_name_cc_by_sa">Attribution-ShareAlike 3.0</string>
+  <string name="license_name_cc_by">Attribution 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
@@ -340,6 +342,7 @@
   <string name="back_button_continue">Eropluede weiderféieren</string>
   <string name="never_ask_again">Dëst ni méi froen</string>
   <string name="achievements_fetch_failed_ultimate_achievement">Dir hutt esou vill Kontributioune gemaach datt eise Berechnungssystem iwwerfuerdert ass. Dëst ass déi bescht Leeschtung.</string>
+  <string name="show_deletion_button">Läschknäppche weisen</string>
   <string name="option_allow">Erlaben</string>
   <string name="option_dismiss">Verwerfen</string>
   <string name="nominate_for_deletion_done">Fäerdeg</string>

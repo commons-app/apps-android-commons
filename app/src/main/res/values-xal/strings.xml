@@ -74,10 +74,10 @@
   <string name="menu_cancel_upload">Цуцлх</string>
   <string name="menu_download">Татҗ авх</string>
   <string name="preference_license">Аңхдгчар бәәсн лиценз</string>
-  <string name="license_name_cc_by_sa_four"> Attribution-ShareAlike 4.0</string>
-  <string name="license_name_cc_by_four"> Attribution 4.0</string>
-  <string name="license_name_cc_by_sa"> Attribution-ShareAlike 3.0</string>
-  <string name="license_name_cc_by"> Attribution 3.0</string>
+  <string name="license_name_cc_by_sa_four" fuzzy="true"> Attribution-ShareAlike 4.0</string>
+  <string name="license_name_cc_by_four" fuzzy="true"> Attribution 4.0</string>
+  <string name="license_name_cc_by_sa" fuzzy="true"> Attribution-ShareAlike 3.0</string>
+  <string name="license_name_cc_by" fuzzy="true"> Attribution 3.0</string>
   <string name="tutorial_4_subtext_1">Һарцг: Сиднейн дүүрин театр</string>
   <string name="tutorial_4_subtext_2">Тодрхаллт: Сиднейн дүүрин театр, булңгин үзмҗ</string>
   <string name="welcome_final_button_text">Тиим</string>

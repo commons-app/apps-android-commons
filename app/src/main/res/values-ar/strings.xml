@@ -208,15 +208,18 @@
   <string name="no_uploads_yet">لم ترفع بعد أية صور.</string>
   <string name="menu_retry_upload">إعادة المحاولة</string>
   <string name="menu_cancel_upload">إلغاء</string>
+  <string name="language_search_type_language_name">نوع اللغة الاسم</string>
+  <string name="language_search_recent_searches">أحدث عمليات البحث</string>
+  <string name="language_search_all_languages">كل اللغات</string>
   <string name="media_upload_policy">بتقديم هذه الصورة، أعلن أن هذا عملي الخاص، وأنه لا يحتوي على مواد محفوظة الحقوق أو صور شخصية، وغير ذلك يلتزم &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;بسياسات ويكيميديا ​​كومنز&lt;/a&gt;.</string>
   <string name="menu_download">نزّل</string>
   <string name="preference_license">الرخصة الافتراضية</string>
   <string name="use_previous">استخدم العنوان والوصف السابق</string>
   <string name="preference_theme">الوضع الليلي</string>
-  <string name="license_name_cc_by_sa_four">النسبة-الترخيص بالمثل 4.0</string>
-  <string name="license_name_cc_by_four">الإحالة 4.0</string>
-  <string name="license_name_cc_by_sa">النسبة-الترخيص بالمثل 3.0</string>
-  <string name="license_name_cc_by">الإحالة 3.0</string>
+  <string name="license_name_cc_by_sa_four" fuzzy="true">النسبة-الترخيص بالمثل 4.0</string>
+  <string name="license_name_cc_by_four" fuzzy="true">الإحالة 4.0</string>
+  <string name="license_name_cc_by_sa" fuzzy="true">النسبة-الترخيص بالمثل 3.0</string>
+  <string name="license_name_cc_by" fuzzy="true">الإحالة 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">النسبة-الترخيص بالمثل 3.0</string>
   <string name="license_name_cc_by_3_0">النسبة 3.0</string>
@@ -320,6 +323,7 @@
   <string name="upload_connection_error_alert_detail">تتطلب عملية التحميل الوصول إلى الإنترنت. يرجى التحقق من اتصال الشبكة الخاص بك.</string>
   <string name="upload_problem_image">تم العثور على مشاكل في الصورة</string>
   <string name="internet_downloaded">يُرجَى فقط رفع الصور التي التقطتها بنفسك، لا ترفع الصور التي قمت بتنزيلها من الإنترنت.</string>
+  <string name="preferences_uploads">المرفوعات</string>
   <string name="use_external_storage">حفظ اللقطات داخل-التطبيق In-app</string>
   <string name="use_external_storage_summary">حفظ الصور الملتقطة بالكاميرا داخل-التطبيق In-app على جهازك</string>
   <string name="login_to_your_account">تسجيل الدخول إلى حسابك</string>
@@ -493,6 +497,7 @@
   <string name="ends_on">ينتهي في:</string>
   <string name="display_campaigns">عرض الحملات</string>
   <string name="display_campaigns_explanation">انظر الحملات الجارية</string>
+  <string name="show_deletion_button">أظهر زر الحذف</string>
   <string name="in_app_camera_location_access_explanation">اسمح للتطبيق بجلب الموقع في حالة عدم تسجيله بالكاميرا. بعض كاميرات الأجهزة لا تسجل الموقع. في مثل هذه الحالات، فإن السماح للتطبيق بجلب الموقع وإرفاقه به يجعل مساهمتك أكثر فائدة. يمكنك تغيير هذا في أي وقت من خلال الإعدادات</string>
   <string name="option_allow">السماح</string>
   <string name="option_dismiss">رفض</string>
@@ -739,7 +744,7 @@
   <string name="show_in_map_app">إظهار في تطبيق الخريطة</string>
   <string name="modify_location">أضف الموقع</string>
   <string name="location_picker_image_view">عرض صورة منتقي الموقع</string>
-  <string name="location_picker_image_view_shadow">ظل عرض الصورة لمنتقي الموقع</string>
+  <string name="location_picker_image_view_shadow" fuzzy="true">ظل عرض الصورة لمنتقي الموقع</string>
   <string name="image_location">مكان الصورة</string>
   <string name="check_whether_location_is_correct">تحقق مما إذا كان الموقع صحيحًا</string>
   <string name="label">التسمية</string>
@@ -767,6 +772,7 @@
   <string name="wlm_campaign_description">Wiki Loves Monuments هي مسابقة صور دولية للآثار تنظمها ويكيميديا</string>
   <string name="need_permission">تحتاج إذن</string>
   <string name="read_phone_state_permission_message">تحتاج الخرائط المجاورة لقراءة PHONE STATE لتعمل بشكل صحيح</string>
+  <string name="location_off_dialog_text">يرجى تشغيل خدمات الموقع لعرض الأماكن القريبة.</string>
   <string name="location_permission_rationale">صلاحية اختيارية: احصل على الموقع الحالي لاقتراحات التصنيفات</string>
   <string name="contributions_of_user">مساهمات المستخدم: %s</string>
   <string name="achievements_of_user">إنجازات المستخدم: %s</string>

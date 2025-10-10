@@ -91,8 +91,8 @@
   <string name="menu_cancel_upload">Annilé</string>
   <string name="menu_download">Téléchajé</string>
   <string name="preference_theme">Tenm</string>
-  <string name="license_name_cc_by_sa_four"> Attribution-ShareAlike 4.0</string>
-  <string name="license_name_cc_by_four"> Attribution 4.0</string>
+  <string name="license_name_cc_by_sa_four" fuzzy="true"> Attribution-ShareAlike 4.0</string>
+  <string name="license_name_cc_by_four" fuzzy="true"> Attribution 4.0</string>
   <string name="welcome_final_button_text">Enren !</string>
   <string name="welcome_help_button_text">Plis lenfòrmasyon</string>
   <string name="detail_panel_cats_label">Katégori-ya</string>

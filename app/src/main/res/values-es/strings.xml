@@ -207,10 +207,10 @@
   <string name="preference_license">Licencia predeterminada</string>
   <string name="use_previous">Usar título y descripción anteriores</string>
   <string name="preference_theme">Tema</string>
-  <string name="license_name_cc_by_sa_four"> Atribución-CompartirIgual 4.0</string>
-  <string name="license_name_cc_by_four">Atribución 4.0</string>
-  <string name="license_name_cc_by_sa"> Atribución-CompartirIgual 3.0</string>
-  <string name="license_name_cc_by">Atribución 3.0</string>
+  <string name="license_name_cc_by_sa_four" fuzzy="true"> Atribución-CompartirIgual 4.0</string>
+  <string name="license_name_cc_by_four" fuzzy="true">Atribución 4.0</string>
+  <string name="license_name_cc_by_sa" fuzzy="true"> Atribución-CompartirIgual 3.0</string>
+  <string name="license_name_cc_by" fuzzy="true">Atribución 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
@@ -724,7 +724,7 @@
   <string name="show_in_map_app">Mostrar en la aplicación de mapa</string>
   <string name="modify_location">Editar ubicación</string>
   <string name="location_picker_image_view">La vista de la imagen del selector de ubicación</string>
-  <string name="location_picker_image_view_shadow">La sombra de la vista de la imagen del selector de ubicación</string>
+  <string name="location_picker_image_view_shadow" fuzzy="true">La sombra de la vista de la imagen del selector de ubicación</string>
   <string name="image_location">Posición de imagen</string>
   <string name="check_whether_location_is_correct">Compruebe si la ubicación es correcta</string>
   <string name="label">Etiqueta</string>

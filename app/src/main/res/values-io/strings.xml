@@ -155,10 +155,10 @@
   <string name="preference_license">Licenco \'\'default\'\'</string>
   <string name="use_previous">Uzez antea titulo e deskripto</string>
   <string name="preference_theme">Temo</string>
-  <string name="license_name_cc_by_sa_four">Atributo-ShareAlike 4.0</string>
-  <string name="license_name_cc_by_four">Atributo 4.0</string>
-  <string name="license_name_cc_by_sa">Atributo-ShareAlike 3.0</string>
-  <string name="license_name_cc_by">Atributo 3.0</string>
+  <string name="license_name_cc_by_sa_four" fuzzy="true">Atributo-ShareAlike 4.0</string>
+  <string name="license_name_cc_by_four" fuzzy="true">Atributo 4.0</string>
+  <string name="license_name_cc_by_sa" fuzzy="true">Atributo-ShareAlike 3.0</string>
+  <string name="license_name_cc_by" fuzzy="true">Atributo 3.0</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
   <string name="license_name_cc_by_sa_4_0">CC BY-SA 4.0</string>
   <string name="license_name_cc_by_4_0">CC BY 4.0</string>
@@ -670,7 +670,7 @@
   <string name="show_in_map_app">Montrar en l\'utensilo \'\'app\'\' di mapo</string>
   <string name="modify_location">Aktualigar lokizo</string>
   <string name="location_picker_image_view">Vidado dil imajo de la selektilo di lokizo</string>
-  <string name="location_picker_image_view_shadow">L\'ombro di la vidado dil imajo de la selektilo di lokizo</string>
+  <string name="location_picker_image_view_shadow" fuzzy="true">L\'ombro di la vidado dil imajo de la selektilo di lokizo</string>
   <string name="image_location">Lokizo dil imajo</string>
   <string name="check_whether_location_is_correct">Verifikez se la lokizo esas korekta</string>
   <string name="label">Etiketo</string>

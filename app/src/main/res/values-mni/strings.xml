@@ -48,10 +48,10 @@
   <string name="preference_license">ꯑꯌꯥꯕꯥ ꯱ ꯍꯦꯛꯇ</string>
   <string name="use_previous">ꯁꯤꯖꯤꯟꯅꯧ ꯃꯃꯥꯡꯒꯤ ꯃꯃꯤꯡ ꯱ꯁꯨꯡ ꯑꯀꯨꯞꯄ ꯋꯥꯔꯣꯜ</string>
   <string name="preference_theme">ꯃꯑꯣꯡ</string>
-  <string name="license_name_cc_by_sa_four">ꯑꯇ꯭ꯔꯤꯕꯨꯁꯟ-ꯁꯌꯥꯔꯑꯂꯥꯏꯛ ꯴.꯰</string>
-  <string name="license_name_cc_by_four">ꯑꯇ꯭ꯔꯤꯕꯨꯁꯟ ꯴.꯰</string>
-  <string name="license_name_cc_by_sa">ꯑꯇ꯭ꯔꯤꯕꯨꯁꯟ-ꯁꯌꯥꯔꯑꯂꯥꯏꯛ ꯳.꯰</string>
-  <string name="license_name_cc_by">ꯑꯇ꯭ꯔꯤꯕꯨꯁꯟ ꯳.꯰</string>
+  <string name="license_name_cc_by_sa_four" fuzzy="true">ꯑꯇ꯭ꯔꯤꯕꯨꯁꯟ-ꯁꯌꯥꯔꯑꯂꯥꯏꯛ ꯴.꯰</string>
+  <string name="license_name_cc_by_four" fuzzy="true">ꯑꯇ꯭ꯔꯤꯕꯨꯁꯟ ꯴.꯰</string>
+  <string name="license_name_cc_by_sa" fuzzy="true">ꯑꯇ꯭ꯔꯤꯕꯨꯁꯟ-ꯁꯌꯥꯔꯑꯂꯥꯏꯛ ꯳.꯰</string>
+  <string name="license_name_cc_by" fuzzy="true">ꯑꯇ꯭ꯔꯤꯕꯨꯁꯟ ꯳.꯰</string>
   <string name="tutorial_3_text">ꯆꯥꯟꯕꯤꯗꯨꯅꯥ ꯊꯥꯒꯠꯀꯅꯨ:</string>
   <string name="tutorial_3_subtext_1">ꯏꯁꯥ ꯏꯇꯣꯝ ꯃꯥꯏꯑꯣꯟꯁꯤꯟꯗꯨꯅꯥ ꯀꯥꯞꯆꯕ ꯅꯠꯇ꯭ꯔꯒ ꯅꯃꯥꯝꯅꯕꯒꯤ ꯃꯤꯔꯦꯜꯁꯤꯡ</string>
   <string name="tutorial_4_text">ꯊꯥꯒꯠꯄꯒꯤ ꯈꯨꯗꯝ:</string>

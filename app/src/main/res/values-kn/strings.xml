@@ -99,10 +99,10 @@
   <string name="preference_license">ಪೂರ್ವನಿಯೋಜಿತ ಪರವಾನಗಿ</string>
   <string name="use_previous">ಹಿಂದಿನ ಶೀರ್ಷಿಕೆ ಹಾಗೂ ವರ್ಣನೆಯನ್ನು ಬಳಸಿ</string>
   <string name="preference_theme">ಥೀಮ್</string>
-  <string name="license_name_cc_by_sa_four">Attribution-ShareAlike 4.0</string>
-  <string name="license_name_cc_by_four">Attribution 4.0</string>
-  <string name="license_name_cc_by_sa">Attribution-ShareAlike 3.0</string>
-  <string name="license_name_cc_by">Attribution 3.0</string>
+  <string name="license_name_cc_by_sa_four" fuzzy="true">Attribution-ShareAlike 4.0</string>
+  <string name="license_name_cc_by_four" fuzzy="true">Attribution 4.0</string>
+  <string name="license_name_cc_by_sa" fuzzy="true">Attribution-ShareAlike 3.0</string>
+  <string name="license_name_cc_by" fuzzy="true">Attribution 3.0</string>
   <string name="tutorial_3_text">ದಯವಿಟ್ಟು ಅಪ್‌ಲೋಡ್ ಮಾಡಬೇಡಿ:</string>
   <string name="tutorial_3_subtext_1">ಸೆಲ್ಫಿ ಅಥವಾ ನಿಮ್ಮ ಗೆಳೆಯರ ಚಿತ್ರಗಳು</string>
   <string name="tutorial_3_subtext_2">ನೀವು ಅಂತರ್ಜಾಲದಿಂದ ಡೌನ್‌ಲೋಡ್ ಮಾಡಿದ ಚಿತ್ರಗಳು</string>

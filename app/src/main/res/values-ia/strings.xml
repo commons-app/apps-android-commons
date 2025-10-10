@@ -33,7 +33,7 @@
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
-  <string name="starting_uploads"> Initia incargamentos</string>
+  <string name="starting_uploads">Initia incargamentos</string>
   <plurals name="starting_multiple_uploads">
     <item quantity="one">Processa %d incargamento</item>
     <item quantity="other">Processa %d incargamentos</item>
@@ -150,15 +150,18 @@
   <string name="no_uploads_yet">Tu non ha ancora incargate alcun photo.</string>
   <string name="menu_retry_upload">Reprobar</string>
   <string name="menu_cancel_upload">Cancellar</string>
+  <string name="language_search_type_language_name">Insere nomine de lingua</string>
+  <string name="language_search_recent_searches">Recercas recente</string>
+  <string name="language_search_all_languages">Tote le linguas</string>
   <string name="media_upload_policy">Submittente iste imagine, io declara que iste es mi obra proprie, que illo non contine material protegite per derectos de autor ni ‘selfies’, e adhere al &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;politicas de Wikimedia Commons&lt;/a&gt;.</string>
   <string name="menu_download">Discargar</string>
   <string name="preference_license">Licentia predefinite</string>
   <string name="use_previous">Usar le titulo e description precedente</string>
   <string name="preference_theme">Thema</string>
-  <string name="license_name_cc_by_sa_four"> Attribution-CompartiSimile 4.0</string>
-  <string name="license_name_cc_by_four"> Attribution 4.0</string>
-  <string name="license_name_cc_by_sa"> Attribution-CompartiSimile 3.0</string>
-  <string name="license_name_cc_by"> Attribution 3.0</string>
+  <string name="license_name_cc_by_sa_four">Attribution-CompartiSimile 4.0</string>
+  <string name="license_name_cc_by_four">Attribution 4.0</string>
+  <string name="license_name_cc_by_sa">Attribution-CompartiSimile 3.0</string>
+  <string name="license_name_cc_by">Attribution 3.0</string>
   <string name="tutorial_1_text">Wikimedia Commons alberga le major parte del imagines usate in Wikipedia.</string>
   <string name="tutorial_1_subtext">Tu imagines adjuta a educar gente de tote le mundo!</string>
   <string name="tutorial_2_text">Per favor incarga solmente imagines que tu mesme ha prendite o create:</string>
@@ -257,6 +260,7 @@
   <string name="upload_connection_error_alert_detail">Le processo de incargamento require un accesso a internet active. Per favor verifica tu connexion al rete.</string>
   <string name="upload_problem_image">Problemas trovate in le imagine</string>
   <string name="internet_downloaded">Per favor, solmente incarga imagines que tu ha prendite tu mesme. Non incarga imagines que tu ha discargate del Internet.</string>
+  <string name="preferences_uploads">Incargamentos</string>
   <string name="use_external_storage">Salveguardar photos prendite in app</string>
   <string name="use_external_storage_summary">Salveguardar le photos prendite con le camera del application sur le immagazinage de tu apparato</string>
   <string name="login_to_your_account">Aperir session in tu conto</string>
@@ -430,6 +434,8 @@
   <string name="ends_on">Termina le:</string>
   <string name="display_campaigns">Monstrar campanias</string>
   <string name="display_campaigns_explanation">Vider le campanias in curso</string>
+  <string name="show_deletion_button">Monstrar button de deletion</string>
+  <string name="show_deletion_button_explanation">Activar le button “Deler dossier” in le selector personalisate</string>
   <string name="in_app_camera_location_access_explanation">Permitter al application obtener le localisation in caso que le camera non lo registra. Alcun cameras de apparatos non registra le localisation. In tal casos, permitter al application obtener e attachar le localisation rende tu contribution plus utile. Tu pote cambiar isto a tote momento in le Parametros.</string>
   <string name="option_allow">Permitter</string>
   <string name="option_dismiss">Clauder</string>
@@ -667,7 +673,7 @@
   <string name="show_in_map_app">Monstrar in application cartographic</string>
   <string name="modify_location">Modificar position</string>
   <string name="location_picker_image_view">Le vista in imagine del selector de loco</string>
-  <string name="location_picker_image_view_shadow">\n    Le umbra del vista in imagine del selector de loco</string>
+  <string name="location_picker_image_view_shadow">Le umbra del vista de imagine del selector de loco</string>
   <string name="image_location">Localisation del imagine</string>
   <string name="check_whether_location_is_correct">Verificar si le localisation es correcte</string>
   <string name="label">Etiquetta</string>
@@ -693,6 +699,8 @@
   <string name="wlm_campaign_description">Wiki Loves Monuments es un concurso international de photographias de monumentos organisate per Wikimedia</string>
   <string name="need_permission">Permission necessari</string>
   <string name="read_phone_state_permission_message">Le cartas a proximitate debe leger le STATO DEL TELEPHONO pro functionar correctemente</string>
+  <string name="location_off_dialog_text">Activa le servicios de localisation pro monstrar le locos a proximitate.</string>
+  <string name="location_permission_rationale">Le accesso al position es necessari pro monstrar locos a proximitate sur le carta.</string>
   <string name="contributions_of_user">Contributiones del usator: %s</string>
   <string name="achievements_of_user">Realisationes del usator: %s</string>
   <string name="menu_view_user_page">Vider le profilo del usator</string>

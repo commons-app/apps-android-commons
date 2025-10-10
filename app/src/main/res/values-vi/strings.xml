@@ -147,10 +147,10 @@
   <string name="preference_license">Giấy phép mặc định</string>
   <string name="use_previous">Sử dụng tiêu đề và miêu tả trước</string>
   <string name="preference_theme">Giao diện</string>
-  <string name="license_name_cc_by_sa_four">Ghi công–Chia sẻ tương tự 4.0</string>
-  <string name="license_name_cc_by_four">Ghi công 4.0</string>
-  <string name="license_name_cc_by_sa">Ghi công–Chia sẻ tương tự 3.0</string>
-  <string name="license_name_cc_by">Ghi công 3.0</string>
+  <string name="license_name_cc_by_sa_four" fuzzy="true">Ghi công–Chia sẻ tương tự 4.0</string>
+  <string name="license_name_cc_by_four" fuzzy="true">Ghi công 4.0</string>
+  <string name="license_name_cc_by_sa" fuzzy="true">Ghi công–Chia sẻ tương tự 3.0</string>
+  <string name="license_name_cc_by" fuzzy="true">Ghi công 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>

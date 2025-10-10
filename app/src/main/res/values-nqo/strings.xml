@@ -124,8 +124,8 @@
   <string name="preference_license">ߕߦߊ ߓߐߛߎ߲</string>
   <string name="use_previous">ߢߍߦߋߟߌ ߞߎ߲߬ߕߐ߮ ߟߊߓߊ߯ߙߊ߫ ߊ߬ ߣߌ߫ ߞߊ߲߬ߛߓߍ߬ߟߌ</string>
   <string name="preference_theme">ߞߍߗߏ߮</string>
-  <string name="license_name_cc_by_four">ߘߍ߬ߡߍ߲߬ߘߌ߬ߟߌ ߄.߀</string>
-  <string name="license_name_cc_by">ߘߍ߬ߡߍ߲߬ߘߌ߬ߟߌ ߃.߀</string>
+  <string name="license_name_cc_by_four" fuzzy="true">ߘߍ߬ߡߍ߲߬ߘߌ߬ߟߌ ߄.߀</string>
+  <string name="license_name_cc_by" fuzzy="true">ߘߍ߬ߡߍ߲߬ߘߌ߬ߟߌ ߃.߀</string>
   <string name="tutorial_1_text">ߥߞߌߡߋߘߌߦߊ ߞߐߡߐ߲ߛ ߟߋ߬ ߦߋ߫ ߖߌ߬ߦߊ߬ߓߍ ߝߊ߲߬ߓߊ ߡߊߛߐ߫ ߟߊ߫ ߡߍ߲ ߠߎ߬ ߦߋ߫ ߟߊߓߞߊߙߊ߫ ߟߊ߫ ߥߞߌߔߋߘߌߦߊ ߟߊ߫.</string>
   <string name="tutorial_1_subtext">ߌ ߟߊ߫ ߖߌ߬ߦߊ߬ߓߍ ߦߋ߫ ߡߐ߱ ߟߎ߬ ߘߍ߬ߡߍ߲߬ ߠߊ߫ ߞߊ߬ߙߊ߲ ߡߊ߬ ߘߎߢߊ߫ ߝߊ߲߭ ߓߍ߯߹</string>
   <string name="tutorial_2_text">ߖߊ߰ߣߌ߲߫ ߌ ߦߋ߫ ߖߌ߬ߦߊ߬ߓߍ߫ ߟߎ߫ ߟߋ߬ ߟߊߦߟߍ߬ ߡߍ߲ ߠߎ߬ ߕߊ߬ߣߍ߲߫ ߥߟߊ߫ ߛߌ߲ߘߌߣߍ߲߫ ߦߴߌ ߖߍ߬ߘߍ ߓߟߏ߫:</string>
