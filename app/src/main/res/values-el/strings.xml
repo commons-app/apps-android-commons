@@ -176,10 +176,10 @@
   <string name="preference_license">Προεπιλεγμένη άδεια</string>
   <string name="use_previous">Χρήση προηγούμενου τίτλου και περιγραφής</string>
   <string name="preference_theme">Θέμα</string>
-  <string name="license_name_cc_by_sa_four">Αναφορά-Παρόμοια Διανομή 4.0</string>
-  <string name="license_name_cc_by_four">Αναφορά 4.0</string>
-  <string name="license_name_cc_by_sa">Αναφορά-Παρόμοια Διανομή 4.0 3.0</string>
-  <string name="license_name_cc_by">Αναφορά 3.0</string>
+  <string name="license_name_cc_by_sa_four" fuzzy="true">Αναφορά-Παρόμοια Διανομή 4.0</string>
+  <string name="license_name_cc_by_four" fuzzy="true">Αναφορά 4.0</string>
+  <string name="license_name_cc_by_sa" fuzzy="true">Αναφορά-Παρόμοια Διανομή 4.0 3.0</string>
+  <string name="license_name_cc_by" fuzzy="true">Αναφορά 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
@@ -691,7 +691,7 @@
   <string name="show_in_map_app">Εμφάνιση στην εφαρμογή χάρτη</string>
   <string name="modify_location">Επεξεργασία τοποθεσίας</string>
   <string name="location_picker_image_view">Η προβολή εικόνας του εργαλείου επιλογής τοποθεσίας</string>
-  <string name="location_picker_image_view_shadow">Η σκιά της προβολής εικόνας του εργαλείου επιλογής τοποθεσίας</string>
+  <string name="location_picker_image_view_shadow" fuzzy="true">Η σκιά της προβολής εικόνας του εργαλείου επιλογής τοποθεσίας</string>
   <string name="image_location">Τοποθεσία εικόνας</string>
   <string name="check_whether_location_is_correct">Ελέγξτε εάν η τοποθεσία είναι σωστή</string>
   <string name="label">Ετικέτα</string>

@@ -86,10 +86,10 @@
   <string name="preference_license" fuzzy="true">Licencëjô</string>
   <string name="use_previous" fuzzy="true">Ùżëjë slédnegò titla/òpisënka</string>
   <string name="preference_theme" fuzzy="true">Nocny trib</string>
-  <string name="license_name_cc_by_sa_four">Ùznanié ùsôdztwa na równych prawach 4.0</string>
-  <string name="license_name_cc_by_four">Ùznanié ùsôdztwa 4.0</string>
-  <string name="license_name_cc_by_sa">Ùznanié ùsôdztwa na równych prawach 3.0</string>
-  <string name="license_name_cc_by">Ùznanié ùsôdztwa 3.0</string>
+  <string name="license_name_cc_by_sa_four" fuzzy="true">Ùznanié ùsôdztwa na równych prawach 4.0</string>
+  <string name="license_name_cc_by_four" fuzzy="true">Ùznanié ùsôdztwa 4.0</string>
+  <string name="license_name_cc_by_sa" fuzzy="true">Ùznanié ùsôdztwa na równych prawach 3.0</string>
+  <string name="license_name_cc_by" fuzzy="true">Ùznanié ùsôdztwa 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>

@@ -163,10 +163,10 @@
   <string name="preference_license">Standardlicens</string>
   <string name="use_previous">Använd föregående titel och beskrivning</string>
   <string name="preference_theme">Tema</string>
-  <string name="license_name_cc_by_sa_four">Erkännande-DelaLika 4.0</string>
-  <string name="license_name_cc_by_four">Erkännande 4.0</string>
-  <string name="license_name_cc_by_sa"> Erkännande-DelaLika 3.0</string>
-  <string name="license_name_cc_by">Erkännande 3.0</string>
+  <string name="license_name_cc_by_sa_four" fuzzy="true">Erkännande-DelaLika 4.0</string>
+  <string name="license_name_cc_by_four" fuzzy="true">Erkännande 4.0</string>
+  <string name="license_name_cc_by_sa" fuzzy="true"> Erkännande-DelaLika 3.0</string>
+  <string name="license_name_cc_by" fuzzy="true">Erkännande 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>

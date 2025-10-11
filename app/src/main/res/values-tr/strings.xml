@@ -185,10 +185,10 @@
   <string name="preference_license">Varsayılan Lisans</string>
   <string name="use_previous">Önceki başlığı ve açıklamayı kullan</string>
   <string name="preference_theme">Tema</string>
-  <string name="license_name_cc_by_sa_four"> Atıf-BenzerPaylaşım 4.0</string>
-  <string name="license_name_cc_by_four"> Atıf 4.0</string>
-  <string name="license_name_cc_by_sa">Atıf-BenzerPaylaşım 3.0</string>
-  <string name="license_name_cc_by"> Atıf 3.0</string>
+  <string name="license_name_cc_by_sa_four" fuzzy="true"> Atıf-BenzerPaylaşım 4.0</string>
+  <string name="license_name_cc_by_four" fuzzy="true"> Atıf 4.0</string>
+  <string name="license_name_cc_by_sa" fuzzy="true">Atıf-BenzerPaylaşım 3.0</string>
+  <string name="license_name_cc_by" fuzzy="true"> Atıf 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>

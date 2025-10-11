@@ -10,6 +10,7 @@
 * Kyykaarme
 * MITO
 * Maantietäjä
+* Minilammas
 * Moottori
 * Nike
 * Olli
@@ -158,6 +159,8 @@
   <string name="no_uploads_yet">Et ole vielä tallentanut kuvia.</string>
   <string name="menu_retry_upload">Yritä uudelleen</string>
   <string name="menu_cancel_upload">Peruuta</string>
+  <string name="language_search_recent_searches">Viimeaikaiset haut</string>
+  <string name="language_search_all_languages">Kaikki kielet</string>
   <string name="media_upload_policy">Lisäämällä kuvan, ilmoitan tämän olevan oma työ ja että se ei sisällä tekijänoikeuden alaista materiaalia tai selfietä ja muuten noudattaa &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Wikimedia Commonsin käytäntöjä&lt;/a&gt;.</string>
   <string name="menu_download">Lataa</string>
   <string name="preference_license">Oletuslisenssi</string>
@@ -268,6 +271,7 @@
   <string name="upload_connection_error_alert_detail">Tallennusprosessi vaatii aktiivisen internet-yhteyden. Tarkista verkkoyhteytesi tila.</string>
   <string name="upload_problem_image">Kuvasta löytyi ongelmia</string>
   <string name="internet_downloaded">Tallenna vain kuvia, jotka olet itse ottanut. Älä tallenna kuvia, joita olet ladannut internetistä.</string>
+  <string name="preferences_uploads">Tallennukset</string>
   <string name="use_external_storage">Tallenna sovelluksen sisäisiä otoksia</string>
   <string name="use_external_storage_summary">Tallenna sovelluksen sisäisellä kameralla otetut kuvat laitteen tallennustilaan</string>
   <string name="login_to_your_account">Kirjaudu tilillesi</string>
@@ -417,7 +421,7 @@
   <string name="deletion_reason_bad_for_my_privacy">Huomasin, että se on haitallinen yksityisyydelleni.</string>
   <string name="deletion_reason_no_longer_want_public">Muutin mieleni, en halua että se on enää julkisesti näkyvissä.</string>
   <string name="deletion_reason_not_interesting">Valitettavasti tämä kuva ei ole kiinnostava tietosanakirjaan</string>
-  <string name="uploaded_by_myself" fuzzy="true">Minä olen ladannut kohteen %1$s käytetty %2$d artikkelissa.</string>
+  <string name="uploaded_by_myself">Minä olen ladannut kohteen %1$s, käytetty ainakin %2$d artikkelissa.</string>
   <string name="no_uploads">Tervetuloa Commonsiin!\n\nTallenna ensimmäinen mediasi koskettamalla lisäyspainiketta.</string>
   <string name="no_categories_selected">Luokkia ei valittu</string>
   <string name="no_categories_selected_warning_desc">Kuvat, jotka eivät ole luokissa, ovat harvoin käyttökelpoisia. Haluatko varmasti jatkaa valitsematta luokkia?</string>
@@ -439,6 +443,7 @@
   <string name="ends_on">Päättyy:</string>
   <string name="display_campaigns">Näytä kilpailut</string>
   <string name="display_campaigns_explanation">Näe meneillään olevat kilpailut</string>
+  <string name="show_deletion_button">Näytä poistonappi</string>
   <string name="option_allow">Salli</string>
   <string name="option_dismiss">Hylkää</string>
   <string name="nearby_campaign_dismiss_message">Et enää näe kampanjoita. Voit kuitenkin halutessasi ottaa tämän ilmoituksen uudelleen käyttöön asetuksissa.</string>

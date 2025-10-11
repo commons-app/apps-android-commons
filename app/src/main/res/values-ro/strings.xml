@@ -154,10 +154,10 @@
   <string name="preference_license">Licență implicită</string>
   <string name="use_previous">Utilizați titlul și descrierea anterioară</string>
   <string name="preference_theme">Tema</string>
-  <string name="license_name_cc_by_sa_four">Atribuire și distribuire în condiții identice 4.0</string>
-  <string name="license_name_cc_by_four">Atribuire 4.0</string>
-  <string name="license_name_cc_by_sa">Atribuire și distribuire în condiții identice 3.0</string>
-  <string name="license_name_cc_by">Atribuire 3.0</string>
+  <string name="license_name_cc_by_sa_four" fuzzy="true">Atribuire și distribuire în condiții identice 4.0</string>
+  <string name="license_name_cc_by_four" fuzzy="true">Atribuire 4.0</string>
+  <string name="license_name_cc_by_sa" fuzzy="true">Atribuire și distribuire în condiții identice 3.0</string>
+  <string name="license_name_cc_by" fuzzy="true">Atribuire 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>

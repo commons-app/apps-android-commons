@@ -226,6 +226,7 @@ dependencies {
     implementation(libs.rxbinding)
     implementation(libs.rxbinding.appcompat)
     implementation(libs.facebook.fresco)
+    implementation(libs.facebook.fresco.middleware)
     implementation(libs.apache.commons.lang3)
 
     // UI
