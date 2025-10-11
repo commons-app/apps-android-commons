@@ -163,11 +163,19 @@ class RecentSearchesDao @Inject constructor(
      * @param cursor
      * @return RecentSearch object
      */
-    fun fromCursor(cursor: Cursor): RecentSearch = RecentSearch(
-        uriForId(cursor.getInt(COLUMN_ID)),
-        cursor.getString(COLUMN_NAME),
-        Date(cursor.getLong(COLUMN_LAST_USED))
-    )
+    fun fromCursor(cursor: Cursor): RecentSearch {
+        var query = cursor.getString(COLUMN_NAME)
+
+        if (query == null) {
+            query = ""
+        }
+
+        return RecentSearch(
+            uriForId(cursor.getInt(COLUMN_ID)),
+            query,
+            Date(cursor.getLong(COLUMN_LAST_USED))
+        )
+    }
 
     /**
      * This class contains the database table architechture for recent searches,

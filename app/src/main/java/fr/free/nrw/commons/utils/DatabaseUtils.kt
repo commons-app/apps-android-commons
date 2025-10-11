@@ -6,9 +6,20 @@ import android.database.Cursor
 fun Cursor.getStringArray(name: String): List<String> =
     stringToArray(getString(name))
 
+/**
+ * Gets the String at the current row and specified column.
+ *
+ * @param name The name of the column to get the String from.
+ * @return The String if the column exists. Else, null is returned.
+ */
 @SuppressLint("Range")
-fun Cursor.getString(name: String): String =
-    getString(getColumnIndex(name))
+fun Cursor.getString(name: String): String? {
+    val index = getColumnIndex(name)
+    if (index == -1) {
+        return null
+    }
+    return getString(index)
+}
 
 @SuppressLint("Range")
 fun Cursor.getInt(name: String): Int =
