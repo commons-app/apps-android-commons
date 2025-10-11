@@ -152,6 +152,7 @@
   <string name="no_uploads_yet">Још увек нисте отпремили ниједну фотографију.</string>
   <string name="menu_retry_upload">Покушај поново</string>
   <string name="menu_cancel_upload">Откажи</string>
+  <string name="language_search_all_languages">Сви језици</string>
   <string name="media_upload_policy">Слањем ове слике, ја тврдим да је у питању мој рад, да не садржи материјал или селфије заштићене ауторским правима, те да је на остале начине у складу са &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;смерницама Викимедијине оставе&lt;/a&gt;.</string>
   <string name="menu_download">Преузми</string>
   <string name="preference_license">Подразумевана лиценца</string>
@@ -261,6 +262,7 @@
   <string name="upload_connection_error_alert_detail">Процес отпремања захтева активни приступ интернету. Проверите вашу везу са интернетом.</string>
   <string name="upload_problem_image">Пронађени су проблеми у слици</string>
   <string name="internet_downloaded">Молимо Вас да отпремате слике које сте ви направили. Не отпремајте слике које сте преузели са интернета.</string>
+  <string name="preferences_uploads">Отпремања</string>
   <string name="use_external_storage">Чувај снимке у апликацији</string>
   <string name="use_external_storage_summary">Чување слика снимљених камером у меморији на вашем уређају</string>
   <string name="login_to_your_account">Пријава на налог</string>
@@ -664,6 +666,7 @@
   <string name="wlm_campaign_title">Вики воли споменике</string>
   <string name="wlm_campaign_description">Вики воли споменике је међународно такмичење фотографија споменика, које организује Викимедија</string>
   <string name="need_permission">Потребна је дозвола</string>
+  <string name="location_permission_rationale">Необавезна дозвола: преузми тренутну локацију за предлоге категорија</string>
   <string name="contributions_of_user">Доприноси корисника/це: %s</string>
   <string name="achievements_of_user">Достигнућа корисника/це: %s</string>
   <string name="menu_view_user_page">Прикажи корисничку страницу</string>

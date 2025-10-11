@@ -147,10 +147,10 @@
   <string name="preference_license">สัญญาอนุญาตปริยาย</string>
   <string name="use_previous">ใช้ชื่อเรื่องและคำอธิบายก่อนหน้านี้</string>
   <string name="preference_theme">ธีม</string>
-  <string name="license_name_cc_by_sa_four"> Attribution-ShareAlike 4.0</string>
-  <string name="license_name_cc_by_four"> Attribution 4.0</string>
-  <string name="license_name_cc_by_sa"> Attribution-ShareAlike 3.0</string>
-  <string name="license_name_cc_by"> Attribution 3.0</string>
+  <string name="license_name_cc_by_sa_four" fuzzy="true"> Attribution-ShareAlike 4.0</string>
+  <string name="license_name_cc_by_four" fuzzy="true"> Attribution 4.0</string>
+  <string name="license_name_cc_by_sa" fuzzy="true"> Attribution-ShareAlike 3.0</string>
+  <string name="license_name_cc_by" fuzzy="true"> Attribution 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
@@ -428,6 +428,7 @@
   <string name="leaderboard_nearby">สถานที่ใกล้เคียง</string>
   <string name="cancelling_upload">กำลังยกเลิกอับโหลด…</string>
   <string name="cancel_upload">ยกเลิกอับโหลด</string>
+  <string name="location_permission_rationale">สิทธิทางเลือก: รับข้อมูลตำแหน่งที่ตั้งปัจจุบันสำหรับข้อเสนอแนะหมวดหมู่</string>
   <string name="api_level">API level</string>
   <string name="android_version">แอนดรอยด์เวอร์ชัน</string>
   <string name="device_model">รุ่นอุปกรณ์</string>

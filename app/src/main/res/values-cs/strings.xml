@@ -192,10 +192,10 @@
   <string name="preference_license">Výchozí licence</string>
   <string name="use_previous">Použít předchozí název a popis</string>
   <string name="preference_theme">Vzhled</string>
-  <string name="license_name_cc_by_sa_four">Uveďte autora-Zachovejte licenci 4.0</string>
-  <string name="license_name_cc_by_four">Uveďte autora 4.0</string>
-  <string name="license_name_cc_by_sa"> Uveďte autora-Zachovejte licenci 3.0</string>
-  <string name="license_name_cc_by">CC Uveďte autora 3.0</string>
+  <string name="license_name_cc_by_sa_four" fuzzy="true">Uveďte autora-Zachovejte licenci 4.0</string>
+  <string name="license_name_cc_by_four" fuzzy="true">Uveďte autora 4.0</string>
+  <string name="license_name_cc_by_sa" fuzzy="true"> Uveďte autora-Zachovejte licenci 3.0</string>
+  <string name="license_name_cc_by" fuzzy="true">CC Uveďte autora 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
@@ -713,7 +713,7 @@
   <string name="show_in_map_app">Zobrazit v mapové aplikaci</string>
   <string name="modify_location">Upravit umístění</string>
   <string name="location_picker_image_view">Zobrazení obrázku výběru polohy</string>
-  <string name="location_picker_image_view_shadow">\n    Stín zobrazení obrázku výběru polohy</string>
+  <string name="location_picker_image_view_shadow" fuzzy="true">\n    Stín zobrazení obrázku výběru polohy</string>
   <string name="image_location">Umístění obrázku</string>
   <string name="check_whether_location_is_correct">Zkontrolujte, zda je umístění správné</string>
   <string name="label">Štítek</string>
@@ -739,6 +739,7 @@
   <string name="wlm_campaign_description">Wiki miluje památky je mezinárodní soutěž týkající se památek, organizovaná Wikimedií</string>
   <string name="need_permission">Je vyžadováno oprávnění</string>
   <string name="read_phone_state_permission_message">Mapy v okolí potřebují ke správné funkčnosti číst STAV TELEFONU</string>
+  <string name="location_permission_rationale">Volitelně: Umožněte aplikaci, aby získávala aktuální polohu a nabízela na jejím základě kategorie</string>
   <string name="contributions_of_user">Příspěvky uživatele: %s</string>
   <string name="achievements_of_user">Úspěchy uživatele: %s</string>
   <string name="menu_view_user_page">Zobrazit profil uživatele</string>

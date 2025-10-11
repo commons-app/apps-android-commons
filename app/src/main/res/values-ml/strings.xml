@@ -134,10 +134,10 @@
   <string name="menu_download">ഡൗൺലോഡ്</string>
   <string name="preference_license">സ്വതേയുള്ള ഉപയോഗാനുമതി</string>
   <string name="preference_theme">വിഷയം</string>
-  <string name="license_name_cc_by_sa_four">ആട്രിബ്യൂഷൻ-ഷെയർ‌എലൈക് 4.0</string>
-  <string name="license_name_cc_by_four">ആട്രിബ്യൂഷൻ 4.0</string>
-  <string name="license_name_cc_by_sa">ആട്രിബ്യൂഷൻ-ഷെയർ‌എലൈക് 3.0</string>
-  <string name="license_name_cc_by">ആട്രിബ്യൂഷൻ 3.0</string>
+  <string name="license_name_cc_by_sa_four" fuzzy="true">ആട്രിബ്യൂഷൻ-ഷെയർ‌എലൈക് 4.0</string>
+  <string name="license_name_cc_by_four" fuzzy="true">ആട്രിബ്യൂഷൻ 4.0</string>
+  <string name="license_name_cc_by_sa" fuzzy="true">ആട്രിബ്യൂഷൻ-ഷെയർ‌എലൈക് 3.0</string>
+  <string name="license_name_cc_by" fuzzy="true">ആട്രിബ്യൂഷൻ 3.0</string>
   <string name="license_name_cc0">സി.സി.0</string>
   <string name="license_name_cc_by_sa_3_0">സി.സി. ബൈ-എസ്.എ. 3.0</string>
   <string name="license_name_cc_by_3_0">സി.സി. ബൈ 3.0</string>

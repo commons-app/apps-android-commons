@@ -123,10 +123,10 @@
   <string name="preference_license">Liçensa predefinìa</string>
   <string name="use_previous">Dopara titoło e descrision preçedente</string>
   <string name="preference_theme">Tema</string>
-  <string name="license_name_cc_by_sa_four">Atribusion-Spartisi n\'te ła stesa manjiera 4.0</string>
-  <string name="license_name_cc_by_four">Atribusion 4.0</string>
-  <string name="license_name_cc_by_sa"> Atribusion-Spartisi n\'te ła stesa manjiera 3.0</string>
-  <string name="license_name_cc_by"> Atribusion 3.0</string>
+  <string name="license_name_cc_by_sa_four" fuzzy="true">Atribusion-Spartisi n\'te ła stesa manjiera 4.0</string>
+  <string name="license_name_cc_by_four" fuzzy="true">Atribusion 4.0</string>
+  <string name="license_name_cc_by_sa" fuzzy="true"> Atribusion-Spartisi n\'te ła stesa manjiera 3.0</string>
+  <string name="license_name_cc_by" fuzzy="true"> Atribusion 3.0</string>
   <string name="tutorial_1_text">la Wikimedia Commons ła ospita ła major parte de łe imajini che njien doparae so Wikipedia</string>
   <string name="tutorial_1_subtext">Le to imajini łe juta l\'istrusion de łe persone in tuto el mondo!</string>
   <string name="tutorial_2_text">Se ve prega de cargar łe imajini che njien tolte o creae interamente da sołi</string>
@@ -472,4 +472,5 @@
   <string name="use_location_from_similar_image">Ste do foto łe gheto fate in tel steso posto? Vuto doparar ła stesa latitudine/lonxitudine de l\'imajine a drita?</string>
   <string name="load_more">Carga \'ncora</string>
   <string name="nearby_no_results">No go catà nisun posto, pròa a canbiar la to riserca.</string>
+  <string name="location_permission_rationale">Autorixasion opsionałe: Dopara ła poxision corente par i sujerimenti de categoria</string>
 </resources>

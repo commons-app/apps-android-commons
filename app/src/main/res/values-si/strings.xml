@@ -90,9 +90,9 @@
   <string name="preference_license" fuzzy="true">බලපත්‍රය</string>
   <string name="use_previous" fuzzy="true">පෙර මාතෘකාව/විස්තරය භාවිතා කරන්න</string>
   <string name="preference_theme" fuzzy="true">රාත්‍රී ආකාරය</string>
-  <string name="license_name_cc_by_sa_four">ඇට්‍රිබ්යුශන්-ශෙයාඅලයික් 4.0</string>
-  <string name="license_name_cc_by_sa">ඇට්‍රිබ්යුශන්-ශෙයාඅලයික් 3.0</string>
-  <string name="license_name_cc_by">ඇට්‍රිබ්යුශන්</string>
+  <string name="license_name_cc_by_sa_four" fuzzy="true">ඇට්‍රිබ්යුශන්-ශෙයාඅලයික් 4.0</string>
+  <string name="license_name_cc_by_sa" fuzzy="true">ඇට්‍රිබ්යුශන්-ශෙයාඅලයික් 3.0</string>
+  <string name="license_name_cc_by" fuzzy="true">ඇට්‍රිබ්යුශන්</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>

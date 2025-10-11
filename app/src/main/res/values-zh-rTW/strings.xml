@@ -174,6 +174,9 @@
   <string name="no_uploads_yet">您尚未上傳過任何照片。</string>
   <string name="menu_retry_upload">重試</string>
   <string name="menu_cancel_upload">取消</string>
+  <string name="language_search_type_language_name">類型 語言 名稱</string>
+  <string name="language_search_recent_searches">近期搜尋</string>
+  <string name="language_search_all_languages">所有語言</string>
   <string name="media_upload_policy">透過提交此圖片，我宣佈這是我個人創作的成品，且不包含受版權保護或自拍內容，並除此之外遵守&lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;維基媒體共享資源方針&lt;/a&gt;。</string>
   <string name="menu_download">下載</string>
   <string name="preference_license">預設授權條款</string>
@@ -181,7 +184,7 @@
   <string name="preference_theme">主題</string>
   <string name="license_name_cc_by_sa_four">姓名標示-相同方式分享4.0</string>
   <string name="license_name_cc_by_four">姓名標示4.0</string>
-  <string name="license_name_cc_by_sa"> 姓名標示-相同方式分享3.0</string>
+  <string name="license_name_cc_by_sa">姓名標示-相同方式分享3.0</string>
   <string name="license_name_cc_by">姓名標示3.0</string>
   <string name="license_name_cc0">公眾領域貢獻宣告</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
@@ -286,6 +289,7 @@
   <string name="upload_connection_error_alert_detail">上傳過程需要有效的網際網路存取。請檢查您的網路連線。</string>
   <string name="upload_problem_image">在圖片中發現的問題</string>
   <string name="internet_downloaded">請僅上傳您自己拍攝的圖片。不要上傳您從網路下載來的圖片。</string>
+  <string name="preferences_uploads">上傳</string>
   <string name="use_external_storage">儲存內建拍攝截圖</string>
   <string name="use_external_storage_summary">將使用內建相機拍攝的照片保存到您的設備存儲中</string>
   <string name="login_to_your_account">登入您的帳號</string>
@@ -357,6 +361,7 @@
   <string name="quiz">測驗</string>
   <string name="quiz_question_string">這張圖片可以上傳嗎？</string>
   <string name="question">問題</string>
+  <string name="quiz_i_am_not_sure">我不確定</string>
   <string name="result">結果</string>
   <string name="quiz_back_button">如果您持續上傳需要刪除的圖片，您的帳號可能會被封禁。你確定要結束測驗嗎？</string>
   <string name="quiz_alert_message">您上傳的圖片已有%1$s遭到刪除。如果您持續上傳需要刪除的圖片，您的帳號可能會遭到封鎖。\n\n您要不要重新閱覽教學，然後再做一次測驗，以幫助您分辨哪些類型的圖片可以上傳、哪些不可以？</string>
@@ -366,6 +371,7 @@
   <string name="blurry_image_answer">收錄高畫質圖像是維基共享資源的目標之一，所以不應該上傳模糊的圖片。儘量試著只上傳光線良好的優良圖片。</string>
   <string name="construction_event_answer">在維基共享資源上，展現科技或文化的圖片很受到歡迎。</string>
   <string name="congratulatory_message_quiz">您答對了 %1$s 題，恭喜！</string>
+  <string name="quiz_continue">繼續</string>
   <string name="warning_for_no_answer">請在兩個選項中擇一，來回答這個問題。</string>
   <string name="user_not_logged_in">登入時限已過，請重新登入。</string>
   <string name="quiz_result_share_message">向朋友分享您的測驗結果！</string>
@@ -460,6 +466,8 @@
   <string name="ends_on">結束於：</string>
   <string name="display_campaigns">顯示活動</string>
   <string name="display_campaigns_explanation">檢視發生中的活動</string>
+  <string name="show_deletion_button">顯示刪除按鈕</string>
+  <string name="show_deletion_button_explanation">在自訂點選器中啟用「刪除資料夾」按鈕</string>
   <string name="in_app_camera_location_access_explanation">允許讓應用程式索取位置，以防相機未記錄到位置。某些設備的相機不會記錄位置，在這種情況下，讓應用程式索取位置，並將其附加到圖片裡，能讓您的貢獻更有用。您可以隨時從「設定」中更改</string>
   <string name="option_allow">允許</string>
   <string name="option_dismiss">關閉</string>
@@ -537,6 +545,7 @@
   <string name="share_text">從您的手機上直接上傳照片到維基共享資源，立即下載共享資源應用程式：%1$s</string>
   <string name="share_via">分享應用程式透過…</string>
   <string name="image_info">圖片資訊</string>
+  <string name="upload_categories_dont_show_this_message_again">不要再顯示此訊息</string>
   <string name="no_categories_found">找不到分類</string>
   <string name="no_depiction_found">沒有找到描述</string>
   <string name="upload_cancelled">已取消上傳</string>
@@ -725,6 +734,8 @@
   <string name="wlm_campaign_description">維基愛古蹟是由維基媒體舉行的國際古蹟攝影比賽</string>
   <string name="need_permission">需要權限</string>
   <string name="read_phone_state_permission_message">附近地圖需要讀取手機狀態來正常運作</string>
+  <string name="location_off_dialog_text">請開啟定位服務，以查看附近的地點。</string>
+  <string name="location_permission_rationale">可有可無的權限：獲取目前的地理位置，以用於分類建議</string>
   <string name="contributions_of_user">使用者貢獻：%s</string>
   <string name="achievements_of_user">使用者成果：%s</string>
   <string name="menu_view_user_page">檢視使用者個人檔案</string>

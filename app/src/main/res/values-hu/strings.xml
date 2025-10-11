@@ -137,10 +137,10 @@
   <string name="preference_license">Alapértelmezett licenc</string>
   <string name="use_previous">Előző cím és leírás használata</string>
   <string name="preference_theme">Téma</string>
-  <string name="license_name_cc_by_sa_four">Nevezd meg! – Így add tovább! 4.0</string>
-  <string name="license_name_cc_by_four">Nevezd meg! 4.0</string>
-  <string name="license_name_cc_by_sa">Nevezd meg! – Így add tovább! 3.0</string>
-  <string name="license_name_cc_by">Attribution 3.0</string>
+  <string name="license_name_cc_by_sa_four" fuzzy="true">Nevezd meg! – Így add tovább! 4.0</string>
+  <string name="license_name_cc_by_four" fuzzy="true">Nevezd meg! 4.0</string>
+  <string name="license_name_cc_by_sa" fuzzy="true">Nevezd meg! – Így add tovább! 3.0</string>
+  <string name="license_name_cc_by" fuzzy="true">Attribution 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
@@ -482,6 +482,7 @@
   <string name="limited_connection_disabled">Korlátozott kapcsolat-mód kikapcsolva. Függőben lévő feltöltések folytatása.</string>
   <string name="limited_connection_mode">Korlátozott kapcsolat mód</string>
   <string name="custom_selector_info_text1">Itt ellenőrizheted a már Commonsba feltöltött képeket.</string>
+  <string name="location_permission_rationale">Lehetséges engedély: Jelenlegi hely megszerzése, a kategóriajavaslatok lehetőségéért.</string>
   <string name="marking_as_not_for_upload">Megjelölés, mint nem feltöltendő</string>
   <string name="unmarking_as_not_for_upload">Nem feltöltendő megjelölés visszavonása</string>
   <string name="menu_view_report">Jelentés</string>

@@ -174,10 +174,10 @@
   <string name="preference_license">Licença padrão</string>
   <string name="use_previous">Usar título e descrição anteriores</string>
   <string name="preference_theme">Tema</string>
-  <string name="license_name_cc_by_sa_four">Atribuição-CompartilhaIgual 4.0</string>
-  <string name="license_name_cc_by_four">Atribuição 4.0</string>
-  <string name="license_name_cc_by_sa"> Atribuição–CompartilhaIgual 3.0</string>
-  <string name="license_name_cc_by">Atribuição 3.0</string>
+  <string name="license_name_cc_by_sa_four" fuzzy="true">Atribuição-CompartilhaIgual 4.0</string>
+  <string name="license_name_cc_by_four" fuzzy="true">Atribuição 4.0</string>
+  <string name="license_name_cc_by_sa" fuzzy="true"> Atribuição–CompartilhaIgual 3.0</string>
+  <string name="license_name_cc_by" fuzzy="true">Atribuição 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
@@ -715,6 +715,7 @@
   <string name="wlm_campaign_description">Wiki Loves Monuments é um concurso internacional de fotografias de monumentos, organizado pela Wikimedia</string>
   <string name="need_permission">Necessitar de Permissão</string>
   <string name="read_phone_state_permission_message">Os mapas de locais próximos precisam de ler ESTADO DO TELEFONE para funcionar devidamente</string>
+  <string name="location_permission_rationale">Permissão opcional: obter a localização atual para sugestões de categoria</string>
   <string name="contributions_of_user">Contribuições do utilizador: %s</string>
   <string name="achievements_of_user">Realizações do utilizador: %s</string>
   <string name="menu_view_user_page">Ver perfil de utilizador</string>

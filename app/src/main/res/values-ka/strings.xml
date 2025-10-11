@@ -155,10 +155,10 @@
   <string name="preference_license">ნაგულისხმევი ლიცენზია</string>
   <string name="use_previous">წინა სათაურისა და აღწერის გამოყენება</string>
   <string name="preference_theme">თემა</string>
-  <string name="license_name_cc_by_sa_four"> Attribution-ShareAlike 4.0</string>
-  <string name="license_name_cc_by_four"> Attribution 4.0</string>
-  <string name="license_name_cc_by_sa"> Attribution-ShareAlike 3.0</string>
-  <string name="license_name_cc_by"> Attribution 3.0</string>
+  <string name="license_name_cc_by_sa_four" fuzzy="true"> Attribution-ShareAlike 4.0</string>
+  <string name="license_name_cc_by_four" fuzzy="true"> Attribution 4.0</string>
+  <string name="license_name_cc_by_sa" fuzzy="true"> Attribution-ShareAlike 3.0</string>
+  <string name="license_name_cc_by" fuzzy="true"> Attribution 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
@@ -482,7 +482,7 @@
   <string name="app_ui_language">აპლიკაციის მომხმარებლის ინტერფეისის ენა</string>
   <string name="modify_location">ადგილმდებარეობის რედაქტირება</string>
   <string name="location_picker_image_view">ადგილმდებარეობის მაჩვენებლის სურათის ნახვა</string>
-  <string name="location_picker_image_view_shadow">ადგილმდებარეობის მაჩვენებლის სურათის სურათის ჩრდილი</string>
+  <string name="location_picker_image_view_shadow" fuzzy="true">ადგილმდებარეობის მაჩვენებლის სურათის სურათის ჩრდილი</string>
   <string name="image_location">სურათის მდებარეობა</string>
   <string name="check_whether_location_is_correct">შეამოწმეთ, არის თუ არა ადგილმდებარეობა სწორი</string>
   <string name="label">სახელი</string>
@@ -495,6 +495,7 @@
   <string name="welcome_custom_selector_ok">შესანიშნავია</string>
   <string name="custom_selector_dismiss_limit_warning_button_text">უარყოფა</string>
   <string name="learn_more">მეტის გაგება</string>
+  <string name="location_permission_rationale">დამატებითი ნებართვა: მიმდინარე ადგილმდებარეობის განსაზღვრა კატეგორიის შემოთავაზებისთვის</string>
   <string name="explore_map_details">დეტალები</string>
   <string name="api_level">API დონე</string>
   <string name="android_version">Android-ის ვერსია</string>

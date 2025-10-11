@@ -154,10 +154,10 @@
   <string name="preference_license">Licensa dë stàndard</string>
   <string name="use_previous">Dovré ël tìtol e la descrission precedent</string>
   <string name="preference_theme">Tema</string>
-  <string name="license_name_cc_by_sa_four">Atribussion-Partagi ugual 4.0</string>
-  <string name="license_name_cc_by_four">Atribussion 4.0</string>
-  <string name="license_name_cc_by_sa">Atribussion-partagi ugual 3.0</string>
-  <string name="license_name_cc_by">Atribussion 3.0</string>
+  <string name="license_name_cc_by_sa_four" fuzzy="true">Atribussion-Partagi ugual 4.0</string>
+  <string name="license_name_cc_by_four" fuzzy="true">Atribussion 4.0</string>
+  <string name="license_name_cc_by_sa" fuzzy="true">Atribussion-partagi ugual 3.0</string>
+  <string name="license_name_cc_by" fuzzy="true">Atribussion 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
@@ -697,6 +697,7 @@
   <string name="wlm_campaign_description">Wiki a-j veul bin ai monument a l\'é un concors antërnassional ëd fotografìa ëd monument organisà da Wikimedia</string>
   <string name="need_permission">A-i é damanca dël përmess</string>
   <string name="read_phone_state_permission_message">Le carte dj\'anviron a l\'han damanca ëd lese lë STAT DËL TELÉFON për marcé për da bin</string>
+  <string name="location_permission_rationale">Autorisassion facoltativa: Oten-e la posission atual për dij sugeriment ëd categorìa</string>
   <string name="contributions_of_user">Contribussion ëd l\'utent: %s</string>
   <string name="achievements_of_user">Arzultà ëd l\'utent: %s</string>
   <string name="menu_view_user_page">Vëdde ël profil ëd l\'utent</string>

@@ -123,10 +123,10 @@
   <string name="preference_license">Standardna licenca</string>
   <string name="use_previous">Koristi prethodni naziv i opis</string>
   <string name="preference_theme">Tema</string>
-  <string name="license_name_cc_by_sa_four">Autorstvo-Dijeliti pod istim uslovima 4.0</string>
-  <string name="license_name_cc_by_four"> Autorstvo 4.0</string>
-  <string name="license_name_cc_by_sa"> Autorstvo-Dijeliti pod istim uslovima 3.0</string>
-  <string name="license_name_cc_by"> Autorstvo 3.0</string>
+  <string name="license_name_cc_by_sa_four" fuzzy="true">Autorstvo-Dijeliti pod istim uslovima 4.0</string>
+  <string name="license_name_cc_by_four" fuzzy="true"> Autorstvo 4.0</string>
+  <string name="license_name_cc_by_sa" fuzzy="true"> Autorstvo-Dijeliti pod istim uslovima 3.0</string>
+  <string name="license_name_cc_by" fuzzy="true"> Autorstvo 3.0</string>
   <string name="tutorial_1_text">Wikimedijina ostava skladišti većinu slika koje se upotrebljavaju na Wikipediji.</string>
   <string name="tutorial_1_subtext">Vaše slike pomažu u obrazovanju ljudi širom svijeta!</string>
   <string name="tutorial_2_text">Postavljajte slike koje su u potpunosti Vaše djelo:</string>
@@ -254,6 +254,7 @@
   <string name="share_app_title">Dijeli privitak</string>
   <string name="delete_helper_show_deletion_title_failed">Nije uspelo</string>
   <string name="delete_helper_ask_reason_copyright_logo">Logo</string>
+  <string name="location_permission_rationale">Dozvola po potrebi: Utvrđavanje trenutne lokacije za predlaganje kategorija</string>
   <string name="contributions_of_user">Doprinosi korisnika: %s</string>
   <string name="menu_view_user_page" fuzzy="true">Pregled korisničke stranice</string>
   <string name="edit_categories">Uredi kategorije</string>

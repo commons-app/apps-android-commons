@@ -124,8 +124,8 @@
   <string name="preference_license">ߕߦߊ ߓߐߛߎ߲</string>
   <string name="use_previous">ߢߍߦߋߟߌ ߞߎ߲߬ߕߐ߮ ߟߊߓߊ߯ߙߊ߫ ߊ߬ ߣߌ߫ ߞߊ߲߬ߛߓߍ߬ߟߌ</string>
   <string name="preference_theme">ߞߍߗߏ߮</string>
-  <string name="license_name_cc_by_four">ߘߍ߬ߡߍ߲߬ߘߌ߬ߟߌ ߄.߀</string>
-  <string name="license_name_cc_by">ߘߍ߬ߡߍ߲߬ߘߌ߬ߟߌ ߃.߀</string>
+  <string name="license_name_cc_by_four" fuzzy="true">ߘߍ߬ߡߍ߲߬ߘߌ߬ߟߌ ߄.߀</string>
+  <string name="license_name_cc_by" fuzzy="true">ߘߍ߬ߡߍ߲߬ߘߌ߬ߟߌ ߃.߀</string>
   <string name="tutorial_1_text">ߥߞߌߡߋߘߌߦߊ ߞߐߡߐ߲ߛ ߟߋ߬ ߦߋ߫ ߖߌ߬ߦߊ߬ߓߍ ߝߊ߲߬ߓߊ ߡߊߛߐ߫ ߟߊ߫ ߡߍ߲ ߠߎ߬ ߦߋ߫ ߟߊߓߞߊߙߊ߫ ߟߊ߫ ߥߞߌߔߋߘߌߦߊ ߟߊ߫.</string>
   <string name="tutorial_1_subtext">ߌ ߟߊ߫ ߖߌ߬ߦߊ߬ߓߍ ߦߋ߫ ߡߐ߱ ߟߎ߬ ߘߍ߬ߡߍ߲߬ ߠߊ߫ ߞߊ߬ߙߊ߲ ߡߊ߬ ߘߎߢߊ߫ ߝߊ߲߭ ߓߍ߯߹</string>
   <string name="tutorial_2_text">ߖߊ߰ߣߌ߲߫ ߌ ߦߋ߫ ߖߌ߬ߦߊ߬ߓߍ߫ ߟߎ߫ ߟߋ߬ ߟߊߦߟߍ߬ ߡߍ߲ ߠߎ߬ ߕߊ߬ߣߍ߲߫ ߥߟߊ߫ ߛߌ߲ߘߌߣߍ߲߫ ߦߴߌ ߖߍ߬ߘߍ ߓߟߏ߫:</string>
@@ -578,6 +578,7 @@
   <string name="wlm_campaign_description">ߥߞߌ ߝߙߎߕߎ ߞߊ߬ߣߌ߲߬ߓߊ߮ ߟߎ߬ ߦߋ߫ ߡߊ߲߬ߕߏ߲߬ߕߍ߬ߦߊ ߖߌ߬ߦߊ߬ߓߍ ߛߊ߲ߞߊߢߐ߲߯ߦߊ ߟߋ߬ ߘߌ߫ ߡߍ߲ ߛߌ߲߬ߝߏ߲߬ߧߊ߬ߣߍ߲߫ ߦߋ߫ ߥߞߌߡߋߘߌߦߊ ߓߟߏ߫</string>
   <string name="need_permission">ߡߊ߬ߞߏ ߦߋ߫ ߟߊ߬ߘߌ߬ߢߍ߬ߟߌ ߟߊ߫</string>
   <string name="read_phone_state_permission_message">ߞߙߍ߬ߝߍ߬ ߔߊߔߘߊ (ߡߊߔߛ) ߡߊ߬ߞߏ ߦߋ߫ ߜߋߟߋ߲ߜߋߟߋ߲ ߞߊ߬ߝߏ ߘߐߞߊ߬ߙߊ߲ ߠߊ߫ ߞߊ߬ ߛߋ߫ ߓߊ߯ߙߊ߫ ߟߴߊ߬ ߢߊߓߘߍ ߡߊ߬</string>
+  <string name="location_permission_rationale">ߢߣߊߕߊߟߌ ߟߊ߬ߘߌ߬ߢߍ߬ߟߌ: ߕߋ߲߭ߕߋ߲߭ ߦߌߟߡߊ߫ ߦߌ߬ߘߊ߬ߣߍ߲ ߠߎ߬ ߘߌ߲߬ߞߌߙߊ ߟߊߛߐ߬ߘߐ߲߬.</string>
   <string name="contributions_of_user">ߟߊ߬ߓߊ߰ߙߊ߬ߟߊ %s: ߟߊ߫ ߓߟߏߡߊߜߍ߲</string>
   <string name="achievements_of_user">ߟߊ߬ߓߊ߰ߙߊ߬ߟߊ %s: ߟߊ߫ ߞߎ߲߬ߝߊ߰ߟߌ ߟߎ߬</string>
   <string name="menu_view_user_page" fuzzy="true">ߟߊ߬ߓߊ߰ߙߊ߬ߟߌ߫ ߞߐߜߍ ߦߋ߫</string>

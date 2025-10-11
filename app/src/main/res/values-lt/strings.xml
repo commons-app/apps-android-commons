@@ -40,7 +40,7 @@
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">1 įkėlimas</item>
   </plurals>
-  <string name="starting_uploads"> Įkėlimai pradedami</string>
+  <string name="starting_uploads">Įkėlimai pradedami</string>
   <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">Pradedamas %1$d įkėlimas</item>
     <item quantity="other">Pradedami %1$d įkėlimai</item>
@@ -146,10 +146,10 @@
   <string name="preference_license">Numatytoji Licencija</string>
   <string name="use_previous">Naudoti ankstesnį pavadinimą ir aprašymą</string>
   <string name="preference_theme">Tema</string>
-  <string name="license_name_cc_by_sa_four"> Attribution-ShareAlike 4.0</string>
-  <string name="license_name_cc_by_four"> Attribution 4.0</string>
-  <string name="license_name_cc_by_sa"> Attribution-ShareAlike 3.0</string>
-  <string name="license_name_cc_by"> Attribution 3.0</string>
+  <string name="license_name_cc_by_sa_four" fuzzy="true"> Attribution-ShareAlike 4.0</string>
+  <string name="license_name_cc_by_four" fuzzy="true"> Attribution 4.0</string>
+  <string name="license_name_cc_by_sa" fuzzy="true"> Attribution-ShareAlike 3.0</string>
+  <string name="license_name_cc_by" fuzzy="true"> Attribution 3.0</string>
   <string name="license_name_cc_by_sa_4_0">CC BY-SA 4.0</string>
   <string name="license_name_cc_by_4_0">CC BY 4.0</string>
   <string name="tutorial_1_text">Vikimedija Commons talpina daugumą paveikslėlių, kurie yra naudojami Vikipedijoje.</string>
@@ -641,7 +641,7 @@
   <string name="show_in_map_app">Rodyti žemėlapio programėlėje</string>
   <string name="modify_location">Redaguoti vietą</string>
   <string name="location_picker_image_view">Vietos rinkiklio vaizdo rodinys</string>
-  <string name="location_picker_image_view_shadow">\n    Vietos parinkiklio vaizdo rodinio šešėlis</string>
+  <string name="location_picker_image_view_shadow" fuzzy="true">\n    Vietos parinkiklio vaizdo rodinio šešėlis</string>
   <string name="image_location">Vaizdo vieta</string>
   <string name="check_whether_location_is_correct">Patikrinkite, ar vieta yra teisinga</string>
   <string name="label">Etiketė</string>
@@ -667,6 +667,7 @@
   <string name="wlm_campaign_description">Viki myli paminklus yra tarptautinis nuotraukų konkursas, skirtas paminklams, kurį organizuoja Vikiteka</string>
   <string name="need_permission">Reikia leidimo</string>
   <string name="read_phone_state_permission_message">Netoliese žemėlapiai turi perskaityti TELENFONO BŪSENĄ, kad tinkamai funkcionuotų</string>
+  <string name="location_permission_rationale">Neprivaloma teisė: Gauti dabartinę vietovę, kad būtų pasiūlomos kategorijos</string>
   <string name="contributions_of_user">Naudotojo indėlis: %s</string>
   <string name="achievements_of_user">Naudotojo pasiekimai: %s</string>
   <string name="menu_view_user_page">Žiūrėti naudotojo puslapį</string>

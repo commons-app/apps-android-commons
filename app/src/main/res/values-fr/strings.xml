@@ -47,6 +47,7 @@
 * Urhixidur
 * VIGNERON
 * Verdy p
+* WillyM
 * Wladek92
 * Y-M D
 -->
@@ -202,10 +203,10 @@
   <string name="preference_license">Licence par défaut</string>
   <string name="use_previous">Utiliser le titre ou la description précédent</string>
   <string name="preference_theme">Thème</string>
-  <string name="license_name_cc_by_sa_four"> Attribution-ShareAlike 4.0</string>
-  <string name="license_name_cc_by_four"> Attribution 4.0</string>
-  <string name="license_name_cc_by_sa">Attribution – Partage des conditions 3.0</string>
-  <string name="license_name_cc_by">Attribution 3.0</string>
+  <string name="license_name_cc_by_sa_four" fuzzy="true"> Attribution-ShareAlike 4.0</string>
+  <string name="license_name_cc_by_four" fuzzy="true"> Attribution 4.0</string>
+  <string name="license_name_cc_by_sa" fuzzy="true">Attribution – Partage des conditions 3.0</string>
+  <string name="license_name_cc_by" fuzzy="true">Attribution 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
@@ -747,6 +748,8 @@
   <string name="wlm_campaign_description">« Wiki aime les monuments » est un concours international de photographie des monuments, organisé par Wikimédia.</string>
   <string name="need_permission">Nécessite une permission</string>
   <string name="read_phone_state_permission_message">Les cartes de proximité doivent pouvoir lire l’ÉTAT DU TÉLÉPHONE pour fonctionner correctement</string>
+  <string name="location_off_dialog_text">Veuillez activer les services de localisation pour afficher les lieux à proximité.</string>
+  <string name="location_permission_rationale">Autorisation facultative : obtenir l’emplacement actuel pour des suggestions de catégorie</string>
   <string name="contributions_of_user">Contributions de l’utilisateur : %s</string>
   <string name="achievements_of_user">Réussites de l’utilisateur : %s</string>
   <string name="menu_view_user_page">Afficher le profil de l\'utilisateur</string>

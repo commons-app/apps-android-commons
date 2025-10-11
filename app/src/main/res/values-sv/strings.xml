@@ -163,10 +163,10 @@
   <string name="preference_license">Standardlicens</string>
   <string name="use_previous">Använd föregående titel och beskrivning</string>
   <string name="preference_theme">Tema</string>
-  <string name="license_name_cc_by_sa_four">Erkännande-DelaLika 4.0</string>
-  <string name="license_name_cc_by_four">Erkännande 4.0</string>
-  <string name="license_name_cc_by_sa"> Erkännande-DelaLika 3.0</string>
-  <string name="license_name_cc_by">Erkännande 3.0</string>
+  <string name="license_name_cc_by_sa_four" fuzzy="true">Erkännande-DelaLika 4.0</string>
+  <string name="license_name_cc_by_four" fuzzy="true">Erkännande 4.0</string>
+  <string name="license_name_cc_by_sa" fuzzy="true"> Erkännande-DelaLika 3.0</string>
+  <string name="license_name_cc_by" fuzzy="true">Erkännande 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
@@ -706,6 +706,7 @@
   <string name="wlm_campaign_description">Wiki Loves Monuments är en internationell fototävling för monument som organiseras av Wikimedia</string>
   <string name="need_permission">Behöver behörighet</string>
   <string name="read_phone_state_permission_message">Kartor i närheten behöver läsa TELEFONENS TILLSTÅND för att fungera ordentligt</string>
+  <string name="location_permission_rationale">Valfri behörighet: Hämta aktuell plats för kategoriförslag</string>
   <string name="contributions_of_user">Bidrag av användare: %s</string>
   <string name="achievements_of_user">Prestationer av användare: %s</string>
   <string name="menu_view_user_page">Visa användarprofil</string>

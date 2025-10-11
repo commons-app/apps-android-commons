@@ -122,10 +122,10 @@
   <string name="preference_license">Standaard lisensie</string>
   <string name="use_previous">Gebruik vorige titel en beskrywing</string>
   <string name="preference_theme" fuzzy="true">Nag-modus</string>
-  <string name="license_name_cc_by_sa_four">Erkenning-DeelAlle 4.0</string>
-  <string name="license_name_cc_by_four">Erkenning 4.0</string>
-  <string name="license_name_cc_by_sa">Erkenning-DeelAlik 3.0</string>
-  <string name="license_name_cc_by">Erkenning 3.0</string>
+  <string name="license_name_cc_by_sa_four" fuzzy="true">Erkenning-DeelAlle 4.0</string>
+  <string name="license_name_cc_by_four" fuzzy="true">Erkenning 4.0</string>
+  <string name="license_name_cc_by_sa" fuzzy="true">Erkenning-DeelAlik 3.0</string>
+  <string name="license_name_cc_by" fuzzy="true">Erkenning 3.0</string>
   <string name="tutorial_1_text">Op Wikimediuma Commons staan die meeste afbeeldings dit word in Wikipedia gebruik.</string>
   <string name="tutorial_1_subtext">Uw afbeeldings help mense dwarsoor wêreld met kennis opdoen!</string>
   <string name="tutorial_2_text">Upload asseblief alleen afbeeldings dit volledig deur uzelf gemaak wees:</string>
@@ -369,5 +369,6 @@
   <string name="check_category_success_message">Versoek kategorie-toets vir %1$s</string>
   <string name="upload_nearby_place_found_title">Nabygeleë plek gevind</string>
   <string name="upload_nearby_place_found_description_singular" fuzzy="true">Is dit \'n foto van Plek %1$s?</string>
+  <string name="location_permission_rationale">Opsionele toestemming: kry die huidige ligging vir kategorievoorstelle</string>
   <string name="full_screen_mode_zoom_info">Brug to fingre for at zoome ind og ud.</string>
 </resources>

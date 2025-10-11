@@ -34,7 +34,7 @@
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
-  <string name="starting_uploads">Почеток на подигањата</string>
+  <string name="starting_uploads">Подигањето почнува</string>
   <plurals name="starting_multiple_uploads">
     <item quantity="one">Обработувам %1$d подигање</item>
     <item quantity="other">Обработувам %1$d подигања</item>
@@ -151,14 +151,17 @@
   <string name="no_uploads_yet">Сè уште немате подигнато ниедна слика.</string>
   <string name="menu_retry_upload">Пробај пак</string>
   <string name="menu_cancel_upload">Откажи</string>
+  <string name="language_search_type_language_name">Внесете име на јазик</string>
+  <string name="language_search_recent_searches">Скорешни пребарувања</string>
+  <string name="language_search_all_languages">Сите јазици</string>
   <string name="media_upload_policy">Поднесувајќи ја сликава, изјавувам дека истата е мое сопствено дело, дека не содржи никаков материјал заштитен со авторски права, не содржи самослици, и дека на секој друг начин е во склад со &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines/mk?uselang=mk\"&gt;правилата на Ризницата&lt;/a&gt;.</string>
   <string name="menu_download">Преземи</string>
   <string name="preference_license">Стандардна лиценца</string>
   <string name="use_previous">Користи претходен наслов и опис</string>
   <string name="preference_theme">Изглед</string>
-  <string name="license_name_cc_by_sa_four"> Наведи извор-Сподели под исти услови 4.0</string>
+  <string name="license_name_cc_by_sa_four">Наведи извор-Сподели под исти услови 4.0</string>
   <string name="license_name_cc_by_four">Наведи извор 4.0</string>
-  <string name="license_name_cc_by_sa"> Наведи извор-Сподели под исти услови 3.0</string>
+  <string name="license_name_cc_by_sa">Наведи извор-Сподели под исти услови 3.0</string>
   <string name="license_name_cc_by">Наведи извор 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
@@ -263,6 +266,7 @@
   <string name="upload_connection_error_alert_detail">Постапката за подигање бара да сте поврзани\n    со семрежјето. Проверете си ја врската.</string>
   <string name="upload_problem_image">Пронајдени проблеми во сликата</string>
   <string name="internet_downloaded">Подигајте само слики кои самите сте ги направиле. Не подигајте слики што сте ги нашле некаде на семрежјето.</string>
+  <string name="preferences_uploads">Подигања</string>
   <string name="use_external_storage">Зачувај слики направени во прилогот</string>
   <string name="use_external_storage_summary">Зачувување на сликите направени со камерата во прилогот на вашиот уред</string>
   <string name="login_to_your_account">Најавете се со вашата сметка</string>
@@ -334,6 +338,7 @@
   <string name="quiz">Квиз</string>
   <string name="quiz_question_string">Дали е во ред да се подигне сликава?</string>
   <string name="question">Прашање</string>
+  <string name="quiz_i_am_not_sure">Не знам</string>
   <string name="result">Исход</string>
   <string name="quiz_back_button">Ако продолжите со подигање на слики што треба да се бришат, веројатно е дека ќе добиете забрана на сметката. Сигурно сакате да го завршите квизот?</string>
   <string name="quiz_alert_message">Преку %1$s од сликите што ги подигнавте беа избришани. Ако продолжите со подигање на слики што треба да се бришат, веројатно е дека ќе добиете забрана на сметката.\n\nДали би сакале повторно да го погледате упатството, па да си го проверите знаењето во квиз за тоа какви слики се дозволени за подигање?</string>
@@ -343,6 +348,7 @@
   <string name="blurry_image_answer">Една од целите на Ризницата е да биде собиралиште за квалитетни слики. Затоа, не треба да се подигаат матни фотографии. Секогаш настојувајте да правите уредни слики со добро осветлување.</string>
   <string name="construction_event_answer">На Ризницата се добредојдени слики на кои се прикажува технологија или култура.</string>
   <string name="congratulatory_message_quiz">Дадовте %1$s точни одговори. Честитаме!</string>
+  <string name="quiz_continue">Продолжи</string>
   <string name="warning_for_no_answer">Изберете еден одговор</string>
   <string name="user_not_logged_in">Најавната седница истече. Најавете се повторно.</string>
   <string name="quiz_result_share_message">Споделете го квизов со пријателите!</string>
@@ -436,6 +442,8 @@
   <string name="ends_on">Завршува:</string>
   <string name="display_campaigns">Прикажи походи</string>
   <string name="display_campaigns_explanation">Погледајте ги тековните походи</string>
+  <string name="show_deletion_button">Прикажувај го копчето за бришење</string>
+  <string name="show_deletion_button_explanation">Овозможете го копчето „Избриши папка“ во прилагодливиот избирач</string>
   <string name="in_app_camera_location_access_explanation">Дозволете му на прилогот да презема местоположба во случај камерата да не го заведува овој податок. Камерите на некои уреди не заведуваат местоположба. Во такви случаи, овозможете му на прилогот да најде и запише местоположба за вашиот придонес да биде покорисен. Ова можете да го смените во секое време во Нагодувањата</string>
   <string name="option_allow">Дозволи</string>
   <string name="option_dismiss">Тргни</string>
@@ -513,6 +521,7 @@
   <string name="share_text">Подигајте слики непосредно на Ризницата од телефон. Преземете го прилогот на Ризницата сега: %1$s</string>
   <string name="share_via">Сподели преку...</string>
   <string name="image_info">Инфо за сликата</string>
+  <string name="upload_categories_dont_show_this_message_again">Повеќе не ја покажувај поракава</string>
   <string name="no_categories_found">Не пронајдов ниедна категорија</string>
   <string name="no_depiction_found">Не пронајдов ниедно прикажување</string>
   <string name="upload_cancelled">Откажено подигање</string>
@@ -701,6 +710,8 @@
   <string name="wlm_campaign_description">„Вики ги сака спомениците“ е меѓународен фотографски натпревар за споменици приреден од Викимедија</string>
   <string name="need_permission">Се бара дозвола</string>
   <string name="read_phone_state_permission_message">Картите со блиски места треба можат да ја прочитаат СОСТОЈБАТА НА ТЕЛЕФОНОТ за да работат правилно</string>
+  <string name="location_off_dialog_text">Вклучете ја вашата местоположба за да ги гледате околните места.</string>
+  <string name="location_permission_rationale">Дозвола по желба: Утврдување на тековната местоположба за предлагање категории</string>
   <string name="contributions_of_user">Придонеси на корисникот: %s</string>
   <string name="achievements_of_user">Достигнувања на корисникот: %s</string>
   <string name="menu_view_user_page">Погл. кориснички профил</string>

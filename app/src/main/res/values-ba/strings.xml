@@ -140,10 +140,10 @@
   <string name="preference_license">Программа көйләгән лицензия</string>
   <string name="use_previous">Элекке атаманы һәм тасуирламаны ҡулланыу</string>
   <string name="preference_theme">Биҙәү темаһы</string>
-  <string name="license_name_cc_by_sa_four"> Attribution-ShareAlike 4.0</string>
-  <string name="license_name_cc_by_four"> Attribution 4.0</string>
-  <string name="license_name_cc_by_sa"> Attribution-ShareAlike 3.0</string>
-  <string name="license_name_cc_by"> Attribution 3.0</string>
+  <string name="license_name_cc_by_sa_four" fuzzy="true"> Attribution-ShareAlike 4.0</string>
+  <string name="license_name_cc_by_four" fuzzy="true"> Attribution 4.0</string>
+  <string name="license_name_cc_by_sa" fuzzy="true"> Attribution-ShareAlike 3.0</string>
+  <string name="license_name_cc_by" fuzzy="true"> Attribution 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
@@ -257,4 +257,5 @@
   <string name="about_translate_title">Телдәр</string>
   <string name="about_translate_cancel">Кире алырға</string>
   <string name="retry">Ҡабатларға</string>
+  <string name="location_permission_rationale">Мотлаҡ булмаған рөхсәт: категория тәҡдиме өсөн ошо урынды алыу</string>
 </resources>

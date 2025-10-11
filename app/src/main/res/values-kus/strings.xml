@@ -143,10 +143,10 @@
   <string name="preference_license">Tʋʋma gbaʋŋ kanɛ an na\'ana</string>
   <string name="use_previous">Nɔkim pian\'azug kʋdʋg nɛ pa\'alʋg</string>
   <string name="preference_theme">Pian\'azug</string>
-  <string name="license_name_cc_by_sa_four"> Attribution-ShareAlike 4.0</string>
-  <string name="license_name_cc_by_four"> Attribution 4.0</string>
-  <string name="license_name_cc_by_sa"> Attribution-ShareAlike 3.0</string>
-  <string name="license_name_cc_by"> Attribution 3.0</string>
+  <string name="license_name_cc_by_sa_four" fuzzy="true"> Attribution-ShareAlike 4.0</string>
+  <string name="license_name_cc_by_four" fuzzy="true"> Attribution 4.0</string>
+  <string name="license_name_cc_by_sa" fuzzy="true"> Attribution-ShareAlike 3.0</string>
+  <string name="license_name_cc_by" fuzzy="true"> Attribution 3.0</string>
   <string name="tutorial_1_text">Wikimedia Commonsi mɔr footonam bɛdegʋ banɛ bɛ Wikipedia tʋʋma ni la.</string>
   <string name="tutorial_1_subtext">Fʋ footo la sʋŋi pa\'an nidib dunia wʋsa ni!</string>
   <string name="tutorial_2_text">M bɛlimnɛ kpɛn\'ɛsim footo banɛ ka fʋ mɛŋ ki\'a bɛɛ ka fʋ mɛŋ maal:</string>
@@ -556,7 +556,7 @@
   <string name="show_in_map_app">Pa\'alim map app ni</string>
   <string name="modify_location">Dɛmisim zin\'ig</string>
   <string name="location_picker_image_view">Footo gɔsʋg kanɛ bɛ zin\'ig nɔkirin</string>
-  <string name="location_picker_image_view_shadow">Footo kanɛ pa\'an zin\'ig nɔkir la siig</string>
+  <string name="location_picker_image_view_shadow" fuzzy="true">Footo kanɛ pa\'an zin\'ig nɔkir la siig</string>
   <string name="image_location">Footo zin\'ig</string>
   <string name="check_whether_location_is_correct">Gɔsim ye zin\'ig la an sʋm bɛ</string>
   <string name="label">Zanbin</string>

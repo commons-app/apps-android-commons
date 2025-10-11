@@ -146,10 +146,10 @@
   <string name="preference_license">Aotre-implijout dre ziouer</string>
   <string name="use_previous">Ober gant an titl hag an deskrivadur kent</string>
   <string name="preference_theme">Tem</string>
-  <string name="license_name_cc_by_sa_four">Deroadur-RannañHeñvel 4.0</string>
-  <string name="license_name_cc_by_four">Deroadur 4.0</string>
-  <string name="license_name_cc_by_sa"> Deroadur-RannañHeñvel 3.0</string>
-  <string name="license_name_cc_by">Deroadur 3.0</string>
+  <string name="license_name_cc_by_sa_four" fuzzy="true">Deroadur-RannañHeñvel 4.0</string>
+  <string name="license_name_cc_by_four" fuzzy="true">Deroadur 4.0</string>
+  <string name="license_name_cc_by_sa" fuzzy="true"> Deroadur-RannañHeñvel 3.0</string>
+  <string name="license_name_cc_by" fuzzy="true">Deroadur 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
@@ -435,6 +435,7 @@
   <string name="back">Distreiñ</string>
   <string name="welcome_custom_selector_ok">Fiskal</string>
   <string name="learn_more">GOUZOUT HIROC\'H</string>
+  <string name="location_permission_rationale">Aotre diret : kaout al lec\'hiadur red evit kinnig rummadoù</string>
   <string name="contributions_of_user">Degasadennoù an implijer: %s</string>
   <string name="achievements_of_user">Taolioù-kaer an implijer: %s</string>
   <string name="menu_view_user_page">Gwelet profil an implijer</string>

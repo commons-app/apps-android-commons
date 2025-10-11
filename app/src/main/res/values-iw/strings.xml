@@ -182,6 +182,9 @@
   <string name="no_uploads_yet">עדיין לא העלית תמונות.</string>
   <string name="menu_retry_upload">לנסות שוב</string>
   <string name="menu_cancel_upload">ביטול</string>
+  <string name="language_search_type_language_name">נא להקליד שם שפה</string>
+  <string name="language_search_recent_searches">חיפושים אחרונים</string>
+  <string name="language_search_all_languages">כל השפות</string>
   <string name="media_upload_policy">שליחת התמונה הזאת מהווה את הצהרתי על כך שזאת יצירה שלי, שהיא לא מכילה חומר מוגבל בזכויות יוצרים או תמונות עצמיות (סלפי) ומתאימה בכל אופן ל&lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;מדיניות של אתר ויקישיתוף של ויקימדיה&lt;/a&gt;.</string>
   <string name="menu_download">הורדה</string>
   <string name="preference_license">רישיון ברירת מחדל</string>
@@ -294,6 +297,7 @@
   <string name="upload_connection_error_alert_detail">תהליך ההעלאה דורש גישה פעילה לאינטרנט. נא לבדוק את חיבור הרשת שלך.</string>
   <string name="upload_problem_image">נמצאו בעיות בתמונה</string>
   <string name="internet_downloaded">נא להעלות רק תמונות שצילמת בעצמך. לא להעלות תמונות שהורדת מהאינטרנט.</string>
+  <string name="preferences_uploads">העלאות</string>
   <string name="use_external_storage">שמירת צילומים מתוך היישומון</string>
   <string name="use_external_storage_summary">שמירת תמונות שצולמו באמצעות מצלמה בתוך היישום לאחסון של המכשיר שלך</string>
   <string name="login_to_your_account">כניסה לחשבון שלך</string>
@@ -365,6 +369,7 @@
   <string name="quiz">מבחן</string>
   <string name="quiz_question_string">האם בסדר להעלות את התמונה הזאת?</string>
   <string name="question">שאלה</string>
+  <string name="quiz_i_am_not_sure">לא ברור לי</string>
   <string name="result">תוצאה</string>
   <string name="quiz_back_button">העלאה של תמונות שדורשות מחיקה תגרום להחרמתך. האם באמת לסיים את הבוחן?</string>
   <string name="quiz_alert_message">יותר מ־%1$s מהתמונות שהעלית נמחקו. אם תמשיך להעלות תמונות שצריך למחוק, חשבונך כנראה ייחסם.\n\nאולי תרצה לראות שוב את המדריך ואז לעשות בוחן כדי לעזור לך ללמוד אילו סוגים של תמונות צריך או לא צריך להעלות?</string>
@@ -374,6 +379,7 @@
   <string name="blurry_image_answer">אחת מהמטרות של ויקישיתוף היא לאסוף תמונות איכותיות. לפיכך, אין להעלות תמונות מטושטשות. השתדלו תמיד לצלם תמונות יפות עם תאורה טובה.</string>
   <string name="construction_event_answer">תמונות שמציגות טכנולוגיה או תרבות מתקבלות בברכה בוויקישיתוף.</string>
   <string name="congratulatory_message_quiz">ענית נכון על %1$s מהשאלות. ברכות!</string>
+  <string name="quiz_continue">להמשיך</string>
   <string name="warning_for_no_answer">יש לבחור אפשרות אחת מתוך שתיים כדי לענות על השאלה</string>
   <string name="user_not_logged_in">זמן הכניסה לחשבון פקע, נא להיכנס שוב.</string>
   <string name="quiz_result_share_message">שתף את הבוחן שלך עם חברים!</string>
@@ -467,6 +473,8 @@
   <string name="ends_on">מסתיים ב־:</string>
   <string name="display_campaigns">הצגת מסעי פרסום</string>
   <string name="display_campaigns_explanation">ר\' את מסעי פרסום שמתרחשים כרגע</string>
+  <string name="show_deletion_button">הצגת כפתור מחיקה</string>
+  <string name="show_deletion_button_explanation">הפעלת כפתור „מחיקת תיקייה” בבורר המותאם אישית</string>
   <string name="in_app_camera_location_access_explanation">נא לאפשר ליישום לאחזר את המיקום אם המצלמה לא מתעדת אותו. חלק ממצלמות המכשירים לא רושמות את המיקום. במקרים כאלה, מתן אפשרות ליישום למשוך את המיקום ולשייך אותו לתמונה משפר את השימושיות של התרומה שלך. אפשר לשנות זאת בכל עת דרך ההגדרות</string>
   <string name="option_allow">לאפשר</string>
   <string name="option_dismiss">לסרב</string>
@@ -497,7 +505,7 @@
   <string name="send_thank_toast">נשלחת תודה עבור %1$s</string>
   <string name="review_copyright">האם זה עומד בתנאי זכויות היוצרים?</string>
   <string name="review_category">האם הקטגוריה נכונה?</string>
-  <string name="review_spam">האם זה בתחום?</string>
+  <string name="review_spam">האם זה שייך כאן?</string>
   <string name="review_thanks">ברצונך להודות לתורם?</string>
   <string name="review_spam_explanation">נא ללחוץ על \"לא\" כדי להציע את התמונה הזאת למחיקה אם היא בכלל לא שימושית.</string>
   <string name="review_copyright_explanation">סמלים, צילומי מסך, כרזות של סרטים, הם לעיתים קרובות הפרות זכויות יוצרים.\nנא ללחוץ \"לא\" כדי להציע את התמונה הזאת למחיקה.</string>
@@ -544,6 +552,7 @@
   <string name="share_text">כדי להעלות תמונות לוויקינתונים של ויקימדיה ישר מהטלפון שלך. אתם מוזמנים להוריד את היישום של ויקינתונים עכשיו: %1$s</string>
   <string name="share_via">שיתוף היישום דרך...</string>
   <string name="image_info">פרטי תמונה</string>
+  <string name="upload_categories_dont_show_this_message_again">לא להציג את ההודעה הזאת שוב</string>
   <string name="no_categories_found">לא נמצאו קטגוריות</string>
   <string name="no_depiction_found">לא נמצאו מוצגים</string>
   <string name="upload_cancelled">ההעלאה בוטלה</string>
@@ -736,6 +745,8 @@
   <string name="wlm_campaign_description">ויקי אוהבת אתרי מורשת היא תחרות בין־לאומית לצילום אתרי מורשת שמאורגנת על־ידי ויקימדיה</string>
   <string name="need_permission">נדרשת הרשאה</string>
   <string name="read_phone_state_permission_message">מפות בסביבה זקוקות להרשאה מצב הטלפון כדי לפעול כראוי</string>
+  <string name="location_off_dialog_text">נא להפעיל שירותי מיקום כדי לצפות במקומות קרובים.</string>
+  <string name="location_permission_rationale">הרשאה לא מחייבת: קבלת מיקום נוכחי בשביל הצעות קטגוריות</string>
   <string name="contributions_of_user">תרומות של המשתמש: %s</string>
   <string name="achievements_of_user">הישגי המשתמש: %s</string>
   <string name="menu_view_user_page">הצגת פרופיל המשתמש</string>
@@ -862,7 +873,7 @@
   <string name="caption_copied_to_clipboard">הכותרת הועתקה ללוח</string>
   <string name="congratulations_all_pictures_in_this_album_have_been_either_uploaded_or_marked_as_not_for_upload">ברכותינו, כל התמונות באלבום הזה הועלו או שסומנו לא להעלאה.</string>
   <string name="show_in_explore">בתצוגת סיור</string>
-  <string name="show_in_nearby">בתצוגת בסביבה</string>
+  <string name="show_in_nearby">לעבור לתצוגת בסביבה</string>
   <string name="image_tag_line_created_and_uploaded_by">נוצר והועלה על־ידי: %1$s</string>
   <string name="image_tag_line_created_by_and_uploaded_by">נוצר על־ידי %1$s והועלה על־ידי %2$s</string>
   <string name="nominated_for_deletion_btn">הועמדה למחיקה</string>

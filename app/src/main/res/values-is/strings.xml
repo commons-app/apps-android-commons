@@ -147,10 +147,10 @@
   <string name="preference_license">Sjálfgefið notkunarleyfi</string>
   <string name="use_previous">Nota fyrri titil og lýsingu</string>
   <string name="preference_theme">Þema</string>
-  <string name="license_name_cc_by_sa_four"> Attribution-ShareAlike 4.0</string>
-  <string name="license_name_cc_by_four"> Attribution 4.0</string>
-  <string name="license_name_cc_by_sa"> Attribution-ShareAlike 3.0</string>
-  <string name="license_name_cc_by"> Attribution 3.0</string>
+  <string name="license_name_cc_by_sa_four" fuzzy="true"> Attribution-ShareAlike 4.0</string>
+  <string name="license_name_cc_by_four" fuzzy="true"> Attribution 4.0</string>
+  <string name="license_name_cc_by_sa" fuzzy="true"> Attribution-ShareAlike 3.0</string>
+  <string name="license_name_cc_by" fuzzy="true"> Attribution 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
@@ -656,6 +656,7 @@
   <string name="wlm_campaign_description">Wiki Loves Monuments er alþjóðleg ljósmyndasamkeppni um myndir af minnismerkjum sem skipulögð er af Wikimedia</string>
   <string name="need_permission">Þarfnast heimildar</string>
   <string name="read_phone_state_permission_message">Kort í nágrenninu þurfa að geta lesið STÖÐU SÍMANS til að virka almennilega</string>
+  <string name="location_permission_rationale">Nauðsynlegar heimildir: Lesa núverandi staðsetningu til að geta stungið upp á flokkum</string>
   <string name="contributions_of_user">Framlög notanda: %s</string>
   <string name="achievements_of_user">Frammistaða notanda: %s</string>
   <string name="menu_view_user_page" fuzzy="true">Skoða notandasíðu</string>

@@ -134,10 +134,10 @@
   <string name="preference_license">Гадәттәге рөхсәтнамә килешүе</string>
   <string name="use_previous">Алдагы исемне һәм тамвирламаны куллан</string>
   <string name="preference_theme">Күренеш</string>
-  <string name="license_name_cc_by_sa_four"> Attribution-ShareAlike 4.0</string>
-  <string name="license_name_cc_by_four"> Attribution 4.0</string>
-  <string name="license_name_cc_by_sa"> Attribution-ShareAlike 3.0</string>
-  <string name="license_name_cc_by"> Attribution 3.0</string>
+  <string name="license_name_cc_by_sa_four" fuzzy="true"> Attribution-ShareAlike 4.0</string>
+  <string name="license_name_cc_by_four" fuzzy="true"> Attribution 4.0</string>
+  <string name="license_name_cc_by_sa" fuzzy="true"> Attribution-ShareAlike 3.0</string>
+  <string name="license_name_cc_by" fuzzy="true"> Attribution 3.0</string>
   <string name="tutorial_1_text">Викиҗыентыктагы сурәтләр Википедиянең күпчелек күләмендә кулланыла.</string>
   <string name="tutorial_1_subtext">Төягән сурәтләрегез бөтен дөньядагы кешеләргә белем алырга ярдәм итә ала!</string>
   <string name="tutorial_2_text">Зинһар, бары тик үзегез ясаган яки төшергән сурәтләрне генә төягез:</string>

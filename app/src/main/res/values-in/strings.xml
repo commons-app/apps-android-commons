@@ -164,10 +164,10 @@
   <string name="preference_license">Lisensi standar</string>
   <string name="use_previous">Gunakan judul dan deskripsi sebelumnya</string>
   <string name="preference_theme">Tema</string>
-  <string name="license_name_cc_by_sa_four">Atribusi-BerbagiSerupa 4.0</string>
-  <string name="license_name_cc_by_four">Atribusi 4.0</string>
-  <string name="license_name_cc_by_sa">Atribusi-BerbagiSerupa 3.0</string>
-  <string name="license_name_cc_by">Atribusi 3.0</string>
+  <string name="license_name_cc_by_sa_four" fuzzy="true">Atribusi-BerbagiSerupa 4.0</string>
+  <string name="license_name_cc_by_four" fuzzy="true">Atribusi 4.0</string>
+  <string name="license_name_cc_by_sa" fuzzy="true">Atribusi-BerbagiSerupa 3.0</string>
+  <string name="license_name_cc_by" fuzzy="true">Atribusi 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
@@ -682,6 +682,7 @@
   <string name="wlm_campaign_description">Wiki Loves Monuments adalah lomba foto internasional untuk monumen yang diselenggarakan oleh Wikimedia</string>
   <string name="need_permission">Membutuhkan Izin</string>
   <string name="read_phone_state_permission_message">Peta Sekitar harus membaca STATUS TELEPON untuk berfungsi dengan benar</string>
+  <string name="location_permission_rationale">Pilihan Izin: Lokasi saat ini untuk saran kategori</string>
   <string name="contributions_of_user">Kontribusi Pengguna: %s</string>
   <string name="achievements_of_user">Pencapaian Pengguna: %s</string>
   <string name="menu_view_user_page">Lihat profil pengguna</string>

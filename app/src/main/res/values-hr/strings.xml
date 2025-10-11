@@ -113,10 +113,10 @@
   <string name="preference_license">Podrazumijevana licencija</string>
   <string name="use_previous">Rabite prethodni naziv i opis</string>
   <string name="preference_theme">Izgled</string>
-  <string name="license_name_cc_by_sa_four"> Imenovanje-Dijeli pod istim uvjetima 4.0</string>
-  <string name="license_name_cc_by_four"> Imenovanje 4.0</string>
-  <string name="license_name_cc_by_sa"> Imenovanje-Dijeli pod istim uvjetima 3.0</string>
-  <string name="license_name_cc_by"> Imenovanje 3.0</string>
+  <string name="license_name_cc_by_sa_four" fuzzy="true"> Imenovanje-Dijeli pod istim uvjetima 4.0</string>
+  <string name="license_name_cc_by_four" fuzzy="true"> Imenovanje 4.0</string>
+  <string name="license_name_cc_by_sa" fuzzy="true"> Imenovanje-Dijeli pod istim uvjetima 3.0</string>
+  <string name="license_name_cc_by" fuzzy="true"> Imenovanje 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
@@ -305,4 +305,5 @@
   <string name="leaderboard_column_rank">Mjesto</string>
   <string name="leaderboard_column_user">Suradnica/suradnik</string>
   <string name="avatar_set_unsuccessfully">Pogrješka pri postavljanju novoga avatara, molimo Vas, pokušajte ponovno.</string>
+  <string name="location_permission_rationale">Potrebno dopuštenje za određivanje trenutačne lokacije za prijedloge kategorija (nije obvezno)</string>
 </resources>
