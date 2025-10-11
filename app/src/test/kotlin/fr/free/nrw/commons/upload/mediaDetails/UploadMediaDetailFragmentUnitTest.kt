@@ -162,9 +162,20 @@ class UploadMediaDetailFragmentUnitTest {
 
     @Test
     @Throws(Exception::class)
-    fun testSetImageToBeUploaded() {
+    fun testInitializeFragmentWithUploadItem() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
-        fragment.setImageToBeUploaded(null, null, location)
+        Whitebox.setInternalState(fragment, "presenter", presenter)
+        Whitebox.setInternalState(fragment, "uploadItem", uploadItem)
+        `when`(uploadItem.mediaUri).thenReturn(mediaUri)
+        `when`(callback.getIndexInViewFlipper(fragment)).thenReturn(0)
+        `when`(callback.totalNumberOfSteps).thenReturn(2)
+        val method: Method =
+            UploadMediaDetailFragment::class.java.getDeclaredMethod(
+                "initializeFragment",
+            )
+        method.isAccessible = true
+        method.invoke(fragment)
+        Mockito.verify(presenter).onImageProcessed(uploadItem, 0)
     }
 
     @Test
