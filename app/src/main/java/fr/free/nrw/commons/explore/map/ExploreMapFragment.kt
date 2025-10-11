@@ -287,6 +287,8 @@ class ExploreMapFragment : CommonsDaggerSupportFragment(), ExploreMapContract.Vi
         super.onPause()
         // unregistering the broadcastReceiver, as it was causing an exception and a potential crash
         unregisterNetworkReceiver()
+        locationManager.unregisterLocationManager()
+        locationManager.removeLocationListener(this)
     }
 
     fun requestLocationIfNeeded() {
