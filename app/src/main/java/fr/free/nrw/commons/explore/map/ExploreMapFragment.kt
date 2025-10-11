@@ -963,14 +963,14 @@ class ExploreMapFragment : CommonsDaggerSupportFragment(), ExploreMapContract.Vi
         if (geoPoint != null) {
             binding!!.mapView.controller.setCenter(geoPoint)
             val overlays = binding!!.mapView.overlays
-            // colllects the indices of items to remove
+            // collects the indices of items to remove
             val indicesToRemove = mutableListOf<Int>()
             for (i in overlays.indices) {
                 if (overlays[i] is Marker || overlays[i] is ScaleDiskOverlay) {
                     indicesToRemove.add(i)
                 }
             }
-            // removes tha items in reverse order to avoid index shifting
+            // removes the items in reverse order to avoid index shifting
             indicesToRemove.sortedDescending().forEach { index ->
                 binding!!.mapView.overlays.removeAt(index)
             }
