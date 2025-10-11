@@ -70,7 +70,7 @@ class MediaLicenseFragment : UploadBaseFragment(), MediaLicenseContract.View {
                 requireActivity(),
                 getString(R.string.license_step_title),
                 getString(R.string.license_tooltip),
-                getString(android.R.string.ok),
+                getString(R.string.ok),
                 null
             )
         }

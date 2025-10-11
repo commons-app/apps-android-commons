@@ -144,8 +144,18 @@ class BookmarkItemsDao @Inject constructor(
      */
     @SuppressLint("Range")
     fun fromCursor(cursor: Cursor) = with(cursor) {
+        var name = getString(COLUMN_NAME)
+        if (name == null) {
+            name = ""
+        }
+
+        var id = getString(COLUMN_ID)
+        if (id == null) {
+            id = ""
+        }
+
         DepictedItem(
-            getString(COLUMN_NAME),
+            name,
             getString(COLUMN_DESCRIPTION),
             getString(COLUMN_IMAGE),
             getStringArray(COLUMN_INSTANCE_LIST),
@@ -155,7 +165,7 @@ class BookmarkItemsDao @Inject constructor(
                 getStringArray(COLUMN_CATEGORIES_THUMBNAIL_LIST)
             ),
             getString(COLUMN_IS_SELECTED).toBoolean(),
-            getString(COLUMN_ID)
+            id
         )
     }
 

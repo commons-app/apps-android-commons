@@ -128,7 +128,10 @@ class BookmarkPicturesDao @Inject constructor(
     }
 
     fun fromCursor(cursor: Cursor): Bookmark {
-        val fileName = cursor.getString(COLUMN_MEDIA_NAME)
+        var fileName = cursor.getString(COLUMN_MEDIA_NAME)
+        if (fileName == null) {
+            fileName = ""
+        }
         return Bookmark(
             fileName, cursor.getString(COLUMN_CREATOR), uriForName(fileName)
         )
