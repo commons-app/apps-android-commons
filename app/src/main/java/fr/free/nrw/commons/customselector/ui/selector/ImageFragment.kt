@@ -213,7 +213,7 @@ class ImageFragment :
     ): View? {
         _binding = FragmentCustomSelectorBinding.inflate(inflater, container, false)
 
-        // ensuress imageAdapter is initialized
+        // ensures imageAdapter is initialized
         if (!::imageAdapter.isInitialized) {
             imageAdapter = ImageAdapter(requireActivity(), activity as ImageSelectListener, imageLoader!!)
             Timber.d("Initialized imageAdapter in onCreateView")
@@ -401,7 +401,7 @@ class ImageFragment :
             (selectorRV?.layoutManager as? GridLayoutManager)
                 ?.findFirstVisibleItemPosition() ?: -1
 
-        // cheeck for valid position and non-empty image list
+        // check for valid position and non-empty image list
         if (position != -1 && filteredImages.isNotEmpty() && ::imageAdapter.isInitialized) {
             context?.let { context ->
                 context

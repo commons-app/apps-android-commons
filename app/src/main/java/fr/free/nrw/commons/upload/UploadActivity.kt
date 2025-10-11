@@ -580,12 +580,12 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
                 }
             }
 
-            // unregisteer location manager after loop if needed
+            // unregister location manager after loop if needed
             if (!uploadIsOfAPlace) {
                 locationManager!!.unregisterLocationManager()
             }
 
-            //If fragments are not created, create them and add them to the fragments ArrayList
+            // If fragments are not created, create them and add them to the fragments ArrayList
             if (!isFragmentsSaved) {
                 uploadCategoriesFragment = UploadCategoriesFragment()
                 if (place != null) {

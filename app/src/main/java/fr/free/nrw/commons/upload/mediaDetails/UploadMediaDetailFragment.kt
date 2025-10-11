@@ -168,7 +168,7 @@ class UploadMediaDetailFragment : UploadBaseFragment(), UploadMediaDetailsContra
 
         basicKvStore = BasicKvStore(requireActivity(), "CurrentUploadImageQualities")
 
-        // restoree adapter items from savedInstanceState if available
+        // restore adapter items from savedInstanceState if available
         if (savedInstanceState != null) {
             val savedItems = savedInstanceState.getParcelableArrayList<UploadMediaDetail>(UPLOAD_MEDIA_DETAILS)
             Timber.d("Restoring state: savedItems size = %s", savedItems?.size ?: "null")
