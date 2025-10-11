@@ -374,7 +374,6 @@
   <string name="Achievements">Menu item.</string>
   <string name="Profile">Menu item.</string>
   <string name="badges">Title on Profile page.</string>
-  <string name="statistics">Seems to be unused.</string>
   <string name="statistics_thanks">Title on Profile page.</string>
   <string name="statistics_featured">To see the correct translation for your language, please go to https://commons.wikimedia.org/wiki/Commons:Featured_pictures and select your language in \"This project page in other languages\".</string>
   <string name="statistics_wikidata_edits">Item in statistics.</string>
