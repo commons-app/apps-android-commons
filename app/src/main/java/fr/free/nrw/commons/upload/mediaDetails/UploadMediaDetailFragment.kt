@@ -119,8 +119,8 @@ class UploadMediaDetailFragment : UploadBaseFragment(), UploadMediaDetailsContra
 
     private var basicKvStore: BasicKvStore? = null
     private val keyForShowingAlertDialog = "isNoNetworkAlertDialogShowing"
-    private var uploadableFile: UploadableFile? = null
-    private var place: Place? = null
+    internal var uploadableFile: UploadableFile? = null
+    internal var place: Place? = null
     private lateinit var uploadMediaDetailAdapter: UploadMediaDetailAdapter
     var indexOfFragment = 0
     var isExpanded = true
@@ -142,19 +142,24 @@ class UploadMediaDetailFragment : UploadBaseFragment(), UploadMediaDetailsContra
         }
     }
 
-    fun setImageToBeUploaded(
-        uploadableFile: UploadableFile?, place: Place?, inAppPictureLocation: LatLng?
-    ) {
-        this.uploadableFile = uploadableFile
-        this.place = place
-        this.inAppPictureLocation = inAppPictureLocation
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         _binding = FragmentUploadMediaDetailFragmentBinding.inflate(inflater, container, false)
         _binding!!.mediaDetailCardView.handleKeyboardInsets()
+        // intialise the adapter early to prevent uninitialized access
+        uploadMediaDetailAdapter = UploadMediaDetailAdapter(
+            this,
+            defaultKvStore.getString(Prefs.DESCRIPTION_LANGUAGE, "")!!,
+            recentLanguagesDao, voiceInputResultLauncher
+        )
+        uploadMediaDetailAdapter.callback =
+            UploadMediaDetailAdapter.Callback { titleStringID: Int, messageStringId: Int ->
+                showInfoAlert(titleStringID, messageStringId)
+            }
+        uploadMediaDetailAdapter.eventListener = this
+        binding.rvDescriptions.layoutManager = LinearLayoutManager(context)
+        binding.rvDescriptions.adapter = uploadMediaDetailAdapter
         return binding.root
     }
 
@@ -163,20 +168,48 @@ class UploadMediaDetailFragment : UploadBaseFragment(), UploadMediaDetailsContra
 
         basicKvStore = BasicKvStore(requireActivity(), "CurrentUploadImageQualities")
 
-        if (fragmentCallback != null) {
-            indexOfFragment = fragmentCallback!!.getIndexInViewFlipper(this)
-            initializeFragment()
-        }
-
+        // restore adapter items from savedInstanceState if available
         if (savedInstanceState != null) {
-            if (uploadMediaDetailAdapter.items.isEmpty() && fragmentCallback != null) {
-                uploadMediaDetailAdapter.items = savedInstanceState.getParcelableArrayList(UPLOAD_MEDIA_DETAILS)!!
-                presenter.setUploadMediaDetails(uploadMediaDetailAdapter.items, indexOfFragment)
+            val savedItems = savedInstanceState.getParcelableArrayList<UploadMediaDetail>(UPLOAD_MEDIA_DETAILS)
+            Timber.d("Restoring state: savedItems size = %s", savedItems?.size ?: "null")
+            if (savedItems != null && savedItems.isNotEmpty()) {
+                uploadMediaDetailAdapter.items = savedItems
+                // only call setUploadMediaDetails if indexOfFragment is valid
+                if (fragmentCallback != null) {
+                    indexOfFragment = fragmentCallback!!.getIndexInViewFlipper(this)
+                    if (indexOfFragment >= 0) {
+                        presenter.setUploadMediaDetails(uploadMediaDetailAdapter.items, indexOfFragment)
+                        Timber.d("Restored and set upload media details for index %d", indexOfFragment)
+                    } else {
+                        Timber.w("Invalid indexOfFragment %d, skipping setUploadMediaDetails", indexOfFragment)
+                    }
+                } else {
+                    Timber.w("fragmentCallback is null, skipping setUploadMediaDetails")
+                }
+            } else {
+                // initialize with a default UploadMediaDetail if saved state is empty or null
+                uploadMediaDetailAdapter.items = mutableListOf(UploadMediaDetail())
+                Timber.d("Initialized default UploadMediaDetail due to empty or null savedItems")
+            }
+        } else {
+            // intitialise with a default UploadMediaDetail for fresh fragment
+            if (uploadMediaDetailAdapter.items.isEmpty()) {
+                uploadMediaDetailAdapter.items = mutableListOf(UploadMediaDetail())
+                Timber.d("Initialized default UploadMediaDetail for new fragment")
             }
         }
 
+        if (fragmentCallback != null) {
+            indexOfFragment = fragmentCallback!!.getIndexInViewFlipper(this)
+            Timber.d("Fragment callback present, indexOfFragment = %d", indexOfFragment)
+            initializeFragment()
+        } else {
+            Timber.w("Fragment callback is null, skipping initializeFragment")
+        }
+
         try {
-            if (!presenter.getImageQuality(indexOfFragment, inAppPictureLocation, requireActivity())) {
+            if (indexOfFragment >= 0 && !presenter.getImageQuality(indexOfFragment, inAppPictureLocation, requireActivity())) {
+                Timber.d("Image quality check failed, redirecting to MainActivity")
                 startActivityWithFlags(
                     requireActivity(),
                     MainActivity::class.java,
@@ -184,11 +217,12 @@ class UploadMediaDetailFragment : UploadBaseFragment(), UploadMediaDetailsContra
                     Intent.FLAG_ACTIVITY_SINGLE_TOP
                 )
             }
-        } catch (_: Exception) {
+        } catch (e: Exception) {
+            Timber.e(e, "Error during image quality check")
         }
     }
 
-    private fun initializeFragment() {
+    internal fun initializeFragment() {
         if (_binding == null) {
             return
         }
@@ -206,7 +240,6 @@ class UploadMediaDetailFragment : UploadBaseFragment(), UploadMediaDetailsContra
         presenter.setupBasicKvStoreFactory { BasicKvStore(requireActivity(), it) }
 
         presenter.receiveImage(uploadableFile, place, inAppPictureLocation)
-        initRecyclerView()
 
         with (binding){
             if (indexOfFragment == 0) {
@@ -263,24 +296,6 @@ class UploadMediaDetailFragment : UploadBaseFragment(), UploadMediaDetailsContra
                 expandCollapseLlMediaDetail(false)
             }
         }
-    }
-
-    /**
-     * init the description recycler veiw and caption recyclerview
-     */
-    private fun initRecyclerView() {
-        uploadMediaDetailAdapter = UploadMediaDetailAdapter(
-            this,
-            defaultKvStore.getString(Prefs.DESCRIPTION_LANGUAGE, "")!!,
-            recentLanguagesDao, voiceInputResultLauncher
-        )
-        uploadMediaDetailAdapter.callback =
-            UploadMediaDetailAdapter.Callback { titleStringID: Int, messageStringId: Int ->
-                showInfoAlert(titleStringID, messageStringId)
-            }
-        uploadMediaDetailAdapter.eventListener = this
-        binding.rvDescriptions.layoutManager = LinearLayoutManager(context)
-        binding.rvDescriptions.adapter = uploadMediaDetailAdapter
     }
 
     private fun showInfoAlert(titleStringID: Int, messageStringId: Int) {
@@ -590,16 +605,14 @@ class UploadMediaDetailFragment : UploadBaseFragment(), UploadMediaDetailsContra
         var defaultLongitude = -122.431297
         var defaultZoom = 16.0
 
-        val locationPickerIntent: Intent
-
         /* Retrieve image location from EXIF if present or
            check if user has provided location while using the in-app camera.
            Use location of last UploadItem if none of them is available */
+        val locationPickerIntent: Intent
         if (uploadItem.gpsCoords != null && uploadItem.gpsCoords!!
                 .decLatitude != 0.0 && uploadItem.gpsCoords!!.decLongitude != 0.0
         ) {
-            defaultLatitude = uploadItem.gpsCoords!!
-                .decLatitude
+            defaultLatitude = uploadItem.gpsCoords!!.decLatitude
             defaultLongitude = uploadItem.gpsCoords!!.decLongitude
             defaultZoom = uploadItem.gpsCoords!!.zoomLevel
 
@@ -615,8 +628,7 @@ class UploadMediaDetailFragment : UploadBaseFragment(), UploadMediaDetailsContra
                 defaultLongitude = locationLatLng[1].toDouble()
             }
             if (defaultKvStore.getString(LAST_ZOOM) != null) {
-                defaultZoom = defaultKvStore.getString(LAST_ZOOM)!!
-                    .toDouble()
+                defaultZoom = defaultKvStore.getString(LAST_ZOOM)!!.toDouble()
             }
 
             locationPickerIntent = LocationPicker.IntentBuilder()
