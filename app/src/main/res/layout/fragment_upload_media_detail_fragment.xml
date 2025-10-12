@@ -149,13 +149,6 @@
                           android:textColor="#2D8BA4"
                           android:textSize="@dimen/normal_text"
                           android:textStyle="bold" />
-
-                        <ImageView
-                          android:layout_width="wrap_content"
-                          android:layout_height="wrap_content"
-                          android:layout_marginEnd="@dimen/tiny_margin"
-                          android:layout_weight="1"
-                          android:src="@drawable/ic_arrow_16dp" />
                     </LinearLayout>
                 </LinearLayout>
 
