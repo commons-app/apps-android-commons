@@ -881,6 +881,12 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
     fun initNearbyFilter() {
         binding!!.nearbyFilterList.root.visibility = View.GONE
         hideBottomSheet()
+        binding!!.nearbyFilter.searchViewLayout.searchView.apply {
+            setIconifiedByDefault(false)
+            isIconified = false
+            setQuery("", false)
+            clearFocus()
+        }
         binding!!.nearbyFilter.searchViewLayout.searchView.setOnQueryTextFocusChangeListener { v, hasFocus ->
             setLayoutHeightAlignedToWidth(
                 1.25,
@@ -924,6 +930,7 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
                     return _isDarkTheme
                 }
             })
+        restoreStoredFilterSelection()
         binding!!.nearbyFilterList.root
             .layoutParams.width = getScreenWidth(
             requireActivity(),
@@ -940,6 +947,22 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
                     (binding!!.nearbyFilterList.searchListView.adapter as NearbyFilterSearchRecyclerViewAdapter).filter
                         .filter(query.toString())
                 })
+    }
+
+    private fun restoreStoredFilterSelection() {
+        val adapter = nearbyFilterSearchRecyclerViewAdapter ?: return
+        val savedLabels = ArrayList(NearbyFilterState.getInstance().selectedLabels)
+        adapter.selectedLabels.clear()
+        val savedSet = savedLabels.toSet()
+        Label.valuesAsList().forEach { label ->
+            val isSelected = savedSet.contains(label)
+            label.setSelected(isSelected)
+            if (isSelected) {
+                adapter.selectedLabels.add(label)
+            }
+        }
+        NearbyFilterState.setSelectedLabels(ArrayList(adapter.selectedLabels))
+        adapter.notifyDataSetChanged()
     }
 
     override fun setCheckBoxAction() {
