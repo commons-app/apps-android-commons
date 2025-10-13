@@ -107,7 +107,7 @@ class CustomSelectorActivity :
     /**
      * Maximum number of images that can be selected.
      */
-    private var uploadLimit: Int = 20
+    private var uploadLimit: Int = 5 // Changed to 5 asper the issue #3101
 
     /**
      * Flag that is marked true when the amount
@@ -650,8 +650,12 @@ class CustomSelectorActivity :
             finishPickImages(arrayListOf())
             return
         }
+        if (selectedImages.size > uploadLimit) {
+            displayUploadLimitWarning() // shows the warning dialog if >5 images
+            return
+        }
         scope.launch(ioDispatcher) {
-            val uniqueImages = selectedImages.distinctBy { image ->
+            val uniqueImages = selectedImages.take(uploadLimit).distinctBy { image -> //enforce limit
                 CustomSelectorUtils.getImageSHA1(
                     image.uri,
                     ioDispatcher,
