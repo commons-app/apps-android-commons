@@ -117,7 +117,7 @@ class UploadCategoriesFragment : UploadBaseFragment(), CategoriesContract.View {
                 requireActivity(),
                 getString(R.string.categories_activity_title),
                 getString(R.string.categories_tooltip),
-                getString(android.R.string.ok),
+                getString(R.string.ok),
                 null
             )
         }
