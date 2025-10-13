@@ -150,7 +150,7 @@ class DescriptionEditActivity :
             this,
             getString(titleStringID),
             getString(messageStringId),
-            getString(android.R.string.ok),
+            getString(R.string.ok),
             null
         )
     }
