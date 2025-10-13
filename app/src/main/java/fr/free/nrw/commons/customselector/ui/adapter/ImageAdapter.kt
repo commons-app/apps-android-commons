@@ -188,54 +188,37 @@ class ImageAdapter(
                 defaultDispatcher,
                 uploadingContributionList,
             )
-            scope.launch {
-                val sharedPreferences: SharedPreferences =
-                    context.getSharedPreferences(CUSTOM_SELECTOR_PREFERENCE_KEY, 0)
-                val showAlreadyActionedImages =
-                    sharedPreferences.getBoolean(SHOW_ALREADY_ACTIONED_IMAGES_PREFERENCE_KEY, true)
-                if (!showAlreadyActionedImages) {
-                    // If the position is not already visited, that means the position is new then
-                    // finds the next actionable image position from all images
-                    if (!alreadyAddedPositions.contains(position)) {
-                        processThumbnailForActionedImage(
-                            holder,
-                            position,
-                            uploadingContributionList
-                        )
-                        _isLoadingImages.value = false
-                        // If the position is already visited, that means the image is already present
-                        // inside map, so it will fetch the image from the map and load in the holder
-                    } else {
-                        val actionableImages: List<Image> = ArrayList(actionableImagesMap.values)
-                        if (actionableImages.size > position) {
-                            image = actionableImages[position]
-                            Glide
-                                .with(holder.image)
-                                .load(image.uri)
-                                .thumbnail(0.3f)
-                                .into(holder.image)
-                        }
+            holder.itemView.setOnClickListener {
+                if (!holder.isItemUploaded() && !holder.isItemNotForUpload()) {
+                    if (selectedImages.size >= 5 && !isSelected) { //enforce the 5-image limit
+                        Toast.makeText(context, "Cannot select more than 5 images", Toast.LENGTH_SHORT).show()
+                        return@setOnClickListener
                     }
-
-                    // If switch is turned off, it just fetches the image from all images without any
-                    // further operations
-                } else {
-                    Glide
-                        .with(holder.image)
-                        .load(image.uri)
-                        .thumbnail(0.3f)
-                        .into(holder.image)
+                    if (isSelected) {
+                        selectedImages.removeAt(selectedIndex)
+                        holder.itemUnselected()
+                        notifyItemChanged(position, ImageUnselected())
+                        imageSelectListener.onSelectedImagesChanged(selectedImages, selectedImages.size)
+                    } else {
+                        selectedImages.add(image)
+                        holder.itemSelected()
+                        notifyItemChanged(position, ImageSelectedOrUpdated())
+                        imageSelectListener.onSelectedImagesChanged(selectedImages, selectedImages.size)
+                    }
                 }
             }
-
-            holder.itemView.setOnClickListener {
-                onThumbnailClicked(position, holder)
-            }
-
-            // launch media preview on long click.
             holder.itemView.setOnLongClickListener {
-                imageSelectListener.onLongPress(images.indexOf(image), images, selectedImages)
+                imageSelectListener.onLongPress(position, images, ArrayList(selectedImages))
                 true
+            }
+            //handle close button click for deselection
+            holder.closeButton.setOnClickListener {
+                if (isSelected) {
+                    selectedImages.removeAt(selectedIndex)
+                    holder.itemUnselected()
+                    notifyItemChanged(position, ImageUnselected())
+                    imageSelectListener.onSelectedImagesChanged(selectedImages, selectedImages.size)
+                }
             }
         }
     }
@@ -417,7 +400,7 @@ class ImageAdapter(
      * Set new selected images
      */
     fun setSelectedImages(newSelectedImages: ArrayList<Image>) {
-        selectedImages = ArrayList(newSelectedImages)
+        selectedImages = ArrayList(newSelectedImages.take(5)) // enforce 5-image limit
         imageSelectListener.onSelectedImagesChanged(selectedImages, 0)
     }
 
@@ -431,7 +414,7 @@ class ImageAdapter(
     ) {
         numberOfSelectedImagesMarkedAsNotForUpload = 0
         images.clear()
-        selectedImages = arrayListOf()
+        selectedImages = ArrayList(selectedImages.take(5)) // enforce the 5-image limit
         init(newImages, fixedImages, TreeMap(), uploadingImages)
         notifyDataSetChanged()
     }
@@ -523,12 +506,14 @@ class ImageAdapter(
         private val uploadingGroup: Group = itemView.findViewById(R.id.uploading_group)
         private val notForUploadGroup: Group = itemView.findViewById(R.id.not_for_upload_group)
         private val selectedGroup: Group = itemView.findViewById(R.id.selected_group)
+        val closeButton: ImageView = itemView.findViewById(R.id.close_button) // Added for close button
 
         /**
          * Item selected view.
          */
         fun itemSelected() {
             selectedGroup.visibility = View.VISIBLE
+            closeButton.visibility = View.VISIBLE // Show close button when selected
         }
 
         /**
@@ -536,6 +521,7 @@ class ImageAdapter(
          */
         fun itemUnselected() {
             selectedGroup.visibility = View.GONE
+            closeButton.visibility = View.GONE // Hide close button when unselected
         }
 
         /**
