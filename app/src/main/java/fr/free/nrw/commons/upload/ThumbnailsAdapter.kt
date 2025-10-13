@@ -23,7 +23,7 @@ internal class ThumbnailsAdapter(private val callback: Callback) :
     var onThumbnailDeletedListener: OnThumbnailDeletedListener? = null
     var uploadableFiles: List<UploadableFile> = emptyList()
         set(value) {
-            field = value
+            field = value.take(5) //enforce 5-image limit
             notifyDataSetChanged()
         }
 

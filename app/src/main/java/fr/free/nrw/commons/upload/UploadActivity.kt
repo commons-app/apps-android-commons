@@ -735,8 +735,8 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
                     intent.getParcelableArrayListExtra<UploadableFile>(EXTRA_FILES)
                 }
 
-                // Convert to mutable list or return empty list if null
-                files?.toMutableList() ?: run {
+                // Convert to mutable list,takes up to 5 files, or return empty list if null
+                files?.toMutableList()?.take(5)?.toMutableList() ?: run { //enforce 5-image limit
                     Timber.w("Files array was null")
                     mutableListOf()
                 }
@@ -752,6 +752,9 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
         uploadableFiles.forEachIndexed { index, file ->
             Timber.d("File $index path: ${file.getFilePath()}")
         }
+
+        //update thumbnails adapter with limited files
+        thumbnailsAdapter?.uploadableFiles = uploadableFiles
 
         // Handle other extras with null safety
         place = try {

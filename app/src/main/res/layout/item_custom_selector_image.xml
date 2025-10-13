@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
   xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -45,14 +44,24 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
+      <ImageView
+        android:id="@+id/close_button"
+        android:layout_width="@dimen/dimen_20"
+        android:layout_height="@dimen/dimen_20"
+        app:layout_constraintDimensionRatio="H,1:1"
+        android:src="@drawable/ic_cancel_white"
+        android:layout_margin="@dimen/dimen_6"
+        android:background="@drawable/circle_shape"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:visibility="gone"/>
 
       <androidx.constraintlayout.widget.Group
         android:id="@+id/selected_group"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"
-        app:constraint_referenced_ids="selected_overlay,selected_image"/>
-
+        app:constraint_referenced_ids="selected_overlay,selected_image,close_button"/>
 
       <View
         android:id="@+id/uploaded_overlay"
