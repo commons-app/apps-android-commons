@@ -17,7 +17,6 @@
       android:layout_width="wrap_content"
       android:layout_height="@dimen/half_standard_height"
       android:layout_marginEnd="@dimen/standard_gap"
-      android:layout_marginRight="@dimen/standard_gap"
       android:orientation="horizontal">
 
       <TextView
@@ -25,7 +24,6 @@
         android:layout_width="wrap_content"
         android:layout_height="@dimen/half_standard_height"
         android:layout_marginEnd="@dimen/standard_gap"
-        android:layout_marginRight="@dimen/standard_gap"
         android:gravity="center_vertical"
         android:textSize="@dimen/normal_text"
         android:textStyle="bold"
@@ -77,7 +75,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/tiny_gap"
-        android:layout_marginRight="@dimen/tiny_gap"
         android:layout_gravity="center_vertical|end"
         android:indeterminate="true"
         android:indeterminateOnly="true"

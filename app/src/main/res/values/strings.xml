@@ -710,6 +710,8 @@ Upload your first media by tapping on the add button.</string>
   <string name="categories_tooltip">Please select the appropriate categories. Unlike depictions, categories are only in English.</string>
   <string name="license_tooltip">Commons makes your pictures reusable and adapted by everyone. Do you want to waive all rights? Do you want to be attributed? Do you want adaptations to use the same license?</string>
   <string name="depicts_step_title">Depicts</string>
+  <string name="depicts_label">Label</string>
+  <string name="depicts_description">Description</string>
   <string name="license_step_title">Media License</string>
   <string name="media_detail_step_title">Media Details</string>
   <string name="menu_view_category_page">View category page</string>
