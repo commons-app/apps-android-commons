@@ -190,8 +190,8 @@ class ImageAdapter(
             )
             holder.itemView.setOnClickListener {
                 if (!holder.isItemUploaded() && !holder.isItemNotForUpload()) {
-                    if (selectedImages.size >= 5 && !isSelected) { //enforce the 5-image limit
-                        Toast.makeText(context, "Cannot select more than 5 images", Toast.LENGTH_SHORT).show()
+                    if (selectedImages.size >= 20 && !isSelected) { //enforce the 20-image limit
+                        Toast.makeText(context, "Cannot select more than 20 images", Toast.LENGTH_SHORT).show()
                         return@setOnClickListener
                     }
                     if (isSelected) {
@@ -400,7 +400,7 @@ class ImageAdapter(
      * Set new selected images
      */
     fun setSelectedImages(newSelectedImages: ArrayList<Image>) {
-        selectedImages = ArrayList(newSelectedImages.take(5)) // enforce 5-image limit
+        selectedImages = ArrayList(newSelectedImages.take(20)) // enforce 20-image limit
         imageSelectListener.onSelectedImagesChanged(selectedImages, 0)
     }
 

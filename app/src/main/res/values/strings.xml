@@ -888,5 +888,5 @@ Upload your first media by tapping on the add button.</string>
   <string name="image_tag_line_created_by_and_uploaded_by">Created by %1$s and uploaded by %2$s</string>
   <string name="nominated_for_deletion_btn">Nominated for Deletion</string>
 
-  <string name="custom_selector_limit_warning_message">You can only select up to 5 images.</string>
+  <string name="custom_selector_limit_warning_message">You can only select up to 20 images.</string>
 </resources>

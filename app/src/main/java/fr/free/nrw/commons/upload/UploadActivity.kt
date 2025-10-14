@@ -735,8 +735,8 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
                     intent.getParcelableArrayListExtra<UploadableFile>(EXTRA_FILES)
                 }
 
-                // Convert to mutable list,takes up to 5 files, or return empty list if null
-                files?.toMutableList()?.take(5)?.toMutableList() ?: run { //enforce 5-image limit
+                // Convert to mutable list,takes up to 20 files, or return empty list if null
+                files?.toMutableList()?.take(20)?.toMutableList() ?: run { //enforce 20-image limit
                     Timber.w("Files array was null")
                     mutableListOf()
                 }

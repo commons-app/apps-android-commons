@@ -107,7 +107,7 @@ class CustomSelectorActivity :
     /**
      * Maximum number of images that can be selected.
      */
-    private var uploadLimit: Int = 5 // Changed to 5 asper the issue #3101
+    private var uploadLimit: Int = 20 // changed to 20 asper the issue #3101
 
     /**
      * Flag that is marked true when the amount
@@ -651,7 +651,7 @@ class CustomSelectorActivity :
             return
         }
         if (selectedImages.size > uploadLimit) {
-            displayUploadLimitWarning() // shows the warning dialog if >5 images
+            displayUploadLimitWarning() // shows the warning dialog if >20 images
             return
         }
         scope.launch(ioDispatcher) {
