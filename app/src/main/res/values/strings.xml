@@ -619,7 +619,7 @@ Upload your first media by tapping on the add button.</string>
   <string name="place_state_exists">Exists</string>
   <string name="place_state_needs_photo">Needs Photo</string>
   <string name="place_type">Place type:</string>
-  <string name="nearby_search_hint">Bridge, museum, hotel etc.</string>
+  <string name="nearby_search_hint">Bridge, museum, hotel, etc.</string>
   <string name="you_must_reset_your_passsword">Something went wrong with log-in. You must reset your password!</string>
   <string name="title_for_media">MEDIA</string>
   <string name="title_for_child_classes">CHILD CLASSES</string>
