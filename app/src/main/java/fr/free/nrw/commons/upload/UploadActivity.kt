@@ -446,7 +446,7 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
                                 this,
                                 getString(R.string.storage_permissions_denied),
                                 getString(R.string.unable_to_share_upload_item),
-                                getString(android.R.string.ok)
+                                getString(R.string.ok)
                             ) { finish() }
                         } else {
                             showAlertDialog(
@@ -455,7 +455,7 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
                                 getString(
                                     R.string.write_storage_permission_rationale_for_image_share
                                 ),
-                                getString(android.R.string.ok)
+                                getString(R.string.ok)
                             ) { checkStoragePermissions() }
                         }
                     }
@@ -508,24 +508,17 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
                 fragments = mutableListOf()
             }
 
-
             for (uploadableFile in uploadableFiles) {
                 val uploadMediaDetailFragment = UploadMediaDetailFragment()
 
-                if (!uploadIsOfAPlace) {
+                // set fragment properties but defer initialization
+                uploadMediaDetailFragment.uploadableFile = uploadableFile
+                uploadMediaDetailFragment.place = place
+                uploadMediaDetailFragment.inAppPictureLocation = if (!uploadIsOfAPlace) {
                     handleLocation()
-                    uploadMediaDetailFragment.setImageToBeUploaded(
-                        uploadableFile,
-                        place,
-                        currLocation
-                    )
-                    locationManager!!.unregisterLocationManager()
+                    currLocation
                 } else {
-                    uploadMediaDetailFragment.setImageToBeUploaded(
-                        uploadableFile,
-                        place,
-                        currLocation
-                    )
+                    currLocation
                 }
 
                 val uploadMediaDetailFragmentCallback: UploadMediaDetailFragmentCallback =
@@ -580,13 +573,19 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
                 if (isFragmentsSaved) {
                     val fragment = fragments!![0] as UploadMediaDetailFragment?
                     fragment!!.fragmentCallback = uploadMediaDetailFragmentCallback
+                    fragment.initializeFragment()
                 } else {
                     uploadMediaDetailFragment.fragmentCallback = uploadMediaDetailFragmentCallback
                     fragments!!.add(uploadMediaDetailFragment)
                 }
             }
 
-            //If fragments are not created, create them and add them to the fragments ArrayList
+            // unregister location manager after loop if needed
+            if (!uploadIsOfAPlace) {
+                locationManager!!.unregisterLocationManager()
+            }
+
+            // If fragments are not created, create them and add them to the fragments ArrayList
             if (!isFragmentsSaved) {
                 uploadCategoriesFragment = UploadCategoriesFragment()
                 if (place != null) {

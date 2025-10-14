@@ -67,10 +67,10 @@ class RecentSearchesFragment : CommonsDaggerSupportFragment() {
     private fun showDeleteRecentAlertDialog(context: Context) {
         AlertDialog.Builder(context)
             .setMessage(getString(R.string.delete_recent_searches_dialog))
-            .setPositiveButton(android.R.string.yes) { dialog: DialogInterface, _: Int ->
+            .setPositiveButton(R.string.yes) { dialog: DialogInterface, _: Int ->
                 setDeleteRecentPositiveButton(context, dialog)
             }
-            .setNegativeButton(android.R.string.no, null)
+            .setNegativeButton(R.string.no, null)
             .setCancelable(false)
             .create()
             .show()
@@ -102,7 +102,7 @@ class RecentSearchesFragment : CommonsDaggerSupportFragment() {
                     setDeletePositiveButton(context, dialog, position)
                 }
             )
-            .setNegativeButton(android.R.string.cancel, null)
+            .setNegativeButton(R.string.cancel, null)
             .setCancelable(false)
             .create()
             .show()

@@ -140,8 +140,8 @@ class ExploreMapFragment : CommonsDaggerSupportFragment(), ExploreMapContract.Vi
                     requireActivity(),
                     requireActivity().getString(R.string.location_permission_title),
                     requireActivity().getString(R.string.location_permission_rationale_explore),
-                    requireActivity().getString(android.R.string.ok),
-                    requireActivity().getString(android.R.string.cancel),
+                    requireActivity().getString(R.string.ok),
+                    requireActivity().getString(R.string.cancel),
                     { askForLocationPermission() },
                     null,
                     null
@@ -287,6 +287,8 @@ class ExploreMapFragment : CommonsDaggerSupportFragment(), ExploreMapContract.Vi
         super.onPause()
         // unregistering the broadcastReceiver, as it was causing an exception and a potential crash
         unregisterNetworkReceiver()
+        locationManager.unregisterLocationManager()
+        locationManager.removeLocationListener(this)
     }
 
     fun requestLocationIfNeeded() {
@@ -963,12 +965,16 @@ class ExploreMapFragment : CommonsDaggerSupportFragment(), ExploreMapContract.Vi
         if (geoPoint != null) {
             binding!!.mapView.controller.setCenter(geoPoint)
             val overlays = binding!!.mapView.overlays
+            // collects the indices of items to remove
+            val indicesToRemove = mutableListOf<Int>()
             for (i in overlays.indices) {
-                if (overlays[i] is Marker) {
-                    binding!!.mapView.overlays.removeAt(i)
-                } else if (overlays[i] is ScaleDiskOverlay) {
-                    binding!!.mapView.overlays.removeAt(i)
+                if (overlays[i] is Marker || overlays[i] is ScaleDiskOverlay) {
+                    indicesToRemove.add(i)
                 }
+            }
+            // removes the items in reverse order to avoid index shifting
+            indicesToRemove.sortedDescending().forEach { index ->
+                binding!!.mapView.overlays.removeAt(index)
             }
             val diskOverlay = ScaleDiskOverlay(
                 requireContext(),
@@ -979,7 +985,6 @@ class ExploreMapFragment : CommonsDaggerSupportFragment(), ExploreMapContract.Vi
                     this.style = Paint.Style.STROKE
                     this.strokeWidth = 2f
                 })
-
                 setCirclePaint1(Paint().apply {
                     setColor(Color.argb(40, 128, 128, 128))
                     this.style = Paint.Style.FILL_AND_STROKE
@@ -988,7 +993,6 @@ class ExploreMapFragment : CommonsDaggerSupportFragment(), ExploreMapContract.Vi
                 setDisplaySizeMax(1700)
             }
             binding!!.mapView.overlays.add(diskOverlay)
-
             val startMarker = Marker(
                 binding!!.mapView
             ).apply {
