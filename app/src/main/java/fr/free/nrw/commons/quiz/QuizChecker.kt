@@ -151,7 +151,7 @@ class QuizChecker @Inject constructor(
             activity.getString(R.string.quiz),
             activity.getString(R.string.quiz_alert_message, revertPercentageForMessage),
             activity.getString(R.string.about_translate_proceed),
-            activity.getString(android.R.string.cancel),
+            activity.getString(R.string.cancel),
             { startQuizActivity(activity) },
             null
         )
