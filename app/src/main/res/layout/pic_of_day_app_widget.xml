@@ -46,6 +46,6 @@
         android:id="@+id/appwidget_image"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-		android:contentDescription="@string/appwidget_img" />
+        android:contentDescription="@string/appwidget_img" />
 
 </LinearLayout>
