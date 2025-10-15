@@ -238,7 +238,7 @@ class ReviewActivity : BaseActivity() {
             this,
             getString(R.string.skip_image).uppercase(Locale.ROOT),
             getString(R.string.skip_image_explanation),
-            getString(android.R.string.ok),
+            getString(R.string.ok),
             null,
             null,
             null
@@ -250,7 +250,7 @@ class ReviewActivity : BaseActivity() {
             this,
             getString(R.string.title_activity_review),
             getString(R.string.review_image_explanation),
-            getString(android.R.string.ok),
+            getString(R.string.ok),
             null,
             null,
             null

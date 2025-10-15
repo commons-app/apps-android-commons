@@ -35,7 +35,6 @@
         android:layout_height="wrap_content"
         android:id="@+id/appwidget_title"
         android:textAlignment="center"
-        android:layout_gravity="bottom"
         android:textColor="@color/white"
         android:layout_marginTop="@dimen/filter_padding"
         android:layout_marginStart="@dimen/tiny_padding"

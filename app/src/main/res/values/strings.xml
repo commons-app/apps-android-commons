@@ -133,6 +133,7 @@
   <string name="title_activity_settings">Settings</string>
   <string name="title_activity_signup">Sign Up</string>
   <string name="title_activity_featured_images">Featured Images</string>
+  <string name="images_featured_explanation">Featured images are contributions by highly skilled photographers and illustrators that the Wikimedia Commons community has chosen as some of the highest quality on the site.</string>
   <string name="title_activity_custom_selector">Custom Selector</string>
   <string name="title_activity_category_details">Category</string>
   <string name="title_activity_review">Peer Review</string>
@@ -529,7 +530,6 @@ Upload your first media by tapping on the add button.</string>
   <string name="error_occurred_in_picking_images">Error occurred while picking images</string>
 
   <string name="please_wait">Please wait…</string>
-  <string name="images_featured_explanation">Featured pictures are images from highly skilled photographers and illustrators that the Wikimedia Commons community has chosen as some of the highest quality on the site.</string>
   <string name="images_via_nearby_explanation">Images Uploaded via Nearby places are the images which are uploaded by discovering places on the map.</string>
   <string name="thanks_received_explanation">This feature allows editors to send a Thank you notification to users who make useful edits – by using a small thank link on the history page or diff page.</string>
   <string name="copy_image_caption_description">Copy to the next items</string>
@@ -619,7 +619,7 @@ Upload your first media by tapping on the add button.</string>
   <string name="place_state_exists">Exists</string>
   <string name="place_state_needs_photo">Needs Photo</string>
   <string name="place_type">Place type:</string>
-  <string name="nearby_search_hint">Bridge, museum, hotel etc.</string>
+  <string name="nearby_search_hint">Bridge, museum, hotel, etc.</string>
   <string name="you_must_reset_your_passsword">Something went wrong with log-in. You must reset your password!</string>
   <string name="title_for_media">MEDIA</string>
   <string name="title_for_child_classes">CHILD CLASSES</string>
@@ -710,6 +710,8 @@ Upload your first media by tapping on the add button.</string>
   <string name="categories_tooltip">Please select the appropriate categories. Unlike depictions, categories are only in English.</string>
   <string name="license_tooltip">Commons makes your pictures reusable and adapted by everyone. Do you want to waive all rights? Do you want to be attributed? Do you want adaptations to use the same license?</string>
   <string name="depicts_step_title">Depicts</string>
+  <string name="depicts_label">Label</string>
+  <string name="depicts_description">Description</string>
   <string name="license_step_title">Media License</string>
   <string name="media_detail_step_title">Media Details</string>
   <string name="menu_view_category_page">View category page</string>
@@ -736,7 +738,7 @@ Upload your first media by tapping on the add button.</string>
   <string name="back">Back</string>
   <string name="welcome_custom_picture_selector_text">Welcome to Custom Picture Selector</string>
   <string name="custom_selector_info_text1">This picker shows you which pictures you have already uploaded to Commons.</string>
-  <string name="custom_selector_info_text2">Unlike the picture on the left, the picture on the right has the Commons logo indicating it is already uploaded. \n Touch and hold for image preview.</string>
+  <string name="custom_selector_info_text2">Unlike the picture on the left, the picture on the right has the Commons logo indicating it is already uploaded.\n\nTouch and hold for image preview.</string>
   <string name="welcome_custom_selector_ok">Awesome</string>
   <string name="custom_selector_already_uploaded_image_text">This image has already been uploaded to Commons.</string>
   <string name="custom_selector_over_limit_warning">For technical reasons, the app can\'t reliably upload more than %1$d pictures at once. The upload limit of %1$d has been exceeded by %2$d.</string>
@@ -767,7 +769,7 @@ Upload your first media by tapping on the add button.</string>
   <string name="location_message">Location data helps Wiki editors find your picture, making it much more useful.\nYour recent uploads have no location.\nWe suggest you turn on location in your camera app\'s settings.\nThank you for uploading!</string>
   <string name="no_location_found_title">No location found</string>
   <string name="no_location_found_message">How about adding the place where this image was taken?\nLocation data helps Wiki editors find your picture, making it much more useful.\nThank you!</string>
-  <string name="add_location">Add location</string>
+  <string name="add_location">Add Location</string>
   <string name="feedback_sharing_data_alert">Please remove from this email any information that you are not comfortable sharing publicly. Also, please be aware that your email address with which you are posting, and the associated name and profile picture, will be visible publicly.</string>
   <string name="explore_map_details">Details</string>
   <string name="achievements_unavailable_beta">Achievements are only available in the prod flavor. Please check the developer documentation.</string>
@@ -788,8 +790,8 @@ Upload your first media by tapping on the add button.</string>
   <string name="unmark_as_not_for_upload">Unmark as not for upload</string>
   <string name="marking_as_not_for_upload">Marking as not for upload</string>
   <string name="unmarking_as_not_for_upload">Unmarking as not for upload</string>
-  <string name="show_already_actioned_pictures">Show already actioned pictures</string>
-  <string name="hiding_already_actioned_pictures">Hiding already actioned pictures</string>
+  <string name="show_already_actioned_pictures">Show already handled pictures</string>
+  <string name="hiding_already_actioned_pictures">Hiding already handled pictures</string>
   <string name="no_more_images_found">No more images found</string>
   <string name="this_image_is_already_uploaded">This image is already uploaded</string>
   <string name="can_not_select_this_image_for_upload">Can not select this image for upload</string>
@@ -825,12 +827,12 @@ Upload your first media by tapping on the add button.</string>
   <string name="invalid_login_message">Your log-in has expired. Please log in again.</string>
   <string name="no_application_available_to_open_gpx_files">No application available to open GPX files</string>
   <string name="file_saved_successfully">File Saved Successfully</string>
-  <string name="do_you_want_to_open_gpx_file">Do you want to open GPX file?</string>
-  <string name="do_you_want_to_open_kml_file">Do you want to open KML file?</string>
-  <string name="failed_to_save_kml_file">Failed to save KML file.</string>
-  <string name="failed_to_save_gpx_file">Failed to save GPX file.</string>
-  <string name="saving_kml_file">Saving KML File</string>
-  <string name="saving_gpx_file">Saving GPX File</string>
+  <string name="do_you_want_to_open_gpx_file">Do you want to open the GPX file?</string>
+  <string name="do_you_want_to_open_kml_file">Do you want to open the KML file?</string>
+  <string name="failed_to_save_kml_file">Failed to save the KML file.</string>
+  <string name="failed_to_save_gpx_file">Failed to save the GPX file.</string>
+  <string name="saving_kml_file">Saving as a KML file...</string>
+  <string name="saving_gpx_file">Saving as a GPX file...</string>
   <plurals name="custom_picker_images_selected_title_appendix">
     <item quantity="one">%d image selected</item>
     <item quantity="other">%d images selected</item>
@@ -873,7 +875,6 @@ Upload your first media by tapping on the add button.</string>
   <string name="usages_on_other_wikis_heading">Other wikis</string>
   <string name="bullet_point">•</string>
   <string name="file_usages_container_heading">File usages</string>
-  <string name="title_activity_single_web_view">SingleWebViewActivity</string>
   <string name="account">Account</string>
   <string name="vanish_account">Vanish Account</string>
   <string name="account_vanish_request_confirm_title">Vanish account warning</string>

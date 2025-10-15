@@ -116,7 +116,7 @@ class DepictsFragment : UploadBaseFragment(), DepictsContract.View {
                 requireActivity(),
                 getString(R.string.depicts_step_title),
                 getString(R.string.depicts_tooltip),
-                getString(android.R.string.ok),
+                getString(R.string.ok),
                 null
             )
         }
