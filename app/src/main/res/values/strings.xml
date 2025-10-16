@@ -34,12 +34,12 @@
   </plurals>
   <string name="starting_uploads">Starting Uploads</string>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">Processing %d upload</item>
-    <item quantity="other">Processing %d uploads</item>
+    <item quantity="one">Processing %1$d upload</item>
+    <item quantity="other">Processing %1$d uploads</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">%d upload</item>
-    <item quantity="other">%d uploads</item>
+    <item quantity="one">%1$d upload</item>
+    <item quantity="other">%1$d uploads</item>
   </plurals>
   <plurals name="share_license_summary">
     <item quantity="one">This image will be licensed under %1$s</item>
@@ -83,7 +83,7 @@
   <string name="uploading_queued">Upload queued (limited connection mode enabled)</string>
   <string name="upload_completed_notification_title">%1$s uploaded!</string>
   <string name="upload_completed_notification_text">Tap to view your upload</string>
-  <string name="upload_progress_notification_title_start">Uploading file: %s</string>
+  <string name="upload_progress_notification_title_start">Uploading file: %1$s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s uploading</string>
   <string name="upload_progress_notification_title_finishing">Finishing uploading %1$s</string>
   <string name="upload_failed_notification_title">Failed to upload %1$s</string>
@@ -233,8 +233,8 @@
   <string name="welcome_image_llamas">Llamas</string>
   <string name="welcome_image_rainbow_bridge">Rainbow Bridge</string>
   <string name="welcome_image_tulip">Tulip</string>
-  <string name="welcome_image_welcome_wikipedia">Welcome Wikipedia</string>
-  <string name="welcome_image_welcome_copyright">Welcome Copyright</string>
+  <string name="welcome_image_welcome_wikipedia">A schematic image of a generic Wikipedia article.</string>
+  <string name="welcome_image_welcome_copyright">A drawing of a stack of papers with the copyright symbol crossed out.</string>
   <string name="welcome_image_sydney_opera_house">Sydney Opera House</string>
   <string name="cancel">Cancel</string>
   <string name="navigation_drawer_open">Open</string>
@@ -388,9 +388,9 @@
   <string name="statistics_thanks">Thanks Received</string>
   <string name="statistics_featured">Featured Images</string>
   <string name="statistics_wikidata_edits">Images via \"Nearby Places\"</string>
-  <string name="level">Level %d</string>
-  <string name="profile_withLevel">%s (Level %s)</string>
-  <string name="profile_withoutLevel">%s (%s)</string>
+  <string name="level">Level %1$d</string>
+  <string name="profile_withLevel">%1$s (Level %2$s)</string>
+  <string name="profile_withoutLevel">%1$s (%2$s)</string>
   <string name="images_uploaded">Images Uploaded</string>
   <string name="image_reverts">Images Not Reverted</string>
   <string name="images_used_by_wiki">Images Used</string>
@@ -610,7 +610,7 @@ Upload your first media by tapping on the add button.</string>
 
   <string name="share_image_via">Share image via</string>
   <string name="you_have_no_achievements_yet">You haven\'t made any contributions yet</string>
-  <string name="no_achievements_yet">%s has not made any contributions yet</string>
+  <string name="no_achievements_yet">%1$s has not made any contributions yet</string>
   <string name="account_created">Account created!</string>
   <string name="text_copy">Text copied to clipboard</string>
   <string name="notification_mark_read">Notification marked as read</string>
@@ -757,8 +757,8 @@ Upload your first media by tapping on the add button.</string>
   <string name="location_off_dialog_text">Please turn on location services to view nearby places.</string>
   <string name="location_permission_rationale">Location access is needed to show nearby places on the map.</string>
 
-  <string name="contributions_of_user">Contributions of User: %s</string>
-  <string name="achievements_of_user">Achievements of User: %s</string>
+  <string name="contributions_of_user">Contributions of User: %1$s</string>
+  <string name="achievements_of_user">Achievements of User: %1$s</string>
   <string name="menu_view_user_page">View user profile</string>
   <string name="edit_depictions">Edit depictions</string>
   <string name="edit_categories">Edit categories</string>
@@ -834,8 +834,8 @@ Upload your first media by tapping on the add button.</string>
   <string name="saving_kml_file">Saving as a KML file...</string>
   <string name="saving_gpx_file">Saving as a GPX file...</string>
   <plurals name="custom_picker_images_selected_title_appendix">
-    <item quantity="one">%d image selected</item>
-    <item quantity="other">%d images selected</item>
+    <item quantity="one">%1$d image selected</item>
+    <item quantity="other">%1$d images selected</item>
   </plurals>
   <string name="multiple_files_depiction">Please remember that all images in a multi-upload get the same categories and depictions. If the images do not share depictions and categories, please perform several separate uploads.</string>
   <string name="multiple_files_depiction_header">Note about multi-uploads</string>
