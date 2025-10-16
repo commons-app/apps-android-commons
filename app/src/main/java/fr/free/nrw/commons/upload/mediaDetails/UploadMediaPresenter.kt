@@ -69,7 +69,18 @@ class UploadMediaPresenter @Inject constructor(
         uploadMediaDetails: List<UploadMediaDetail>,
         uploadItemIndex: Int
     ) {
-        repository.getUploads()[uploadItemIndex].uploadMediaDetails = uploadMediaDetails.toMutableList()
+        val uploadItems = repository.getUploads()
+        if (uploadItemIndex >= 0 && uploadItemIndex < uploadItems.size) {
+            if (uploadMediaDetails.isNotEmpty()) {
+                uploadItems[uploadItemIndex].uploadMediaDetails = uploadMediaDetails.toMutableList()
+                Timber.d("Set uploadMediaDetails for index %d, size %d", uploadItemIndex, uploadMediaDetails.size)
+            } else {
+                uploadItems[uploadItemIndex].uploadMediaDetails = mutableListOf(UploadMediaDetail())
+                Timber.w("Received empty uploadMediaDetails for index %d, initialized default", uploadItemIndex)
+            }
+        } else {
+            Timber.e("Invalid index %d for uploadItems size %d, skipping setUploadMediaDetails", uploadItemIndex, uploadItems.size)
+        }
     }
 
     override fun setupBasicKvStoreFactory(factory: (String) -> BasicKvStore) {

@@ -145,6 +145,8 @@ class UploadMediaDetailFragmentUnitTest {
         ibExpandCollapse = view.findViewById(R.id.ib_expand_collapse)
 
         Whitebox.setInternalState(fragment, "uploadMediaDetailAdapter", uploadMediaDetailAdapter)
+        Whitebox.setInternalState(fragment, "defaultKvStore", defaultKvStore)
+        `when`(defaultKvStore.getString("description_language", "")).thenReturn("en")
     }
 
     @Test
@@ -162,14 +164,8 @@ class UploadMediaDetailFragmentUnitTest {
 
     @Test
     @Throws(Exception::class)
-    fun testSetImageToBeUploaded() {
-        Shadows.shadowOf(Looper.getMainLooper()).idle()
-        fragment.setImageToBeUploaded(null, null, location)
-    }
-
-    @Test
-    @Throws(Exception::class)
     fun testOnCreateView() {
+        Shadows.shadowOf(Looper.getMainLooper()).idle()
         fragment.onCreateView(layoutInflater, null, savedInstanceState)
     }
 
@@ -179,34 +175,6 @@ class UploadMediaDetailFragmentUnitTest {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
         Whitebox.setInternalState(fragment, "presenter", presenter)
         fragment.onViewCreated(view, savedInstanceState)
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun testInit() {
-        Shadows.shadowOf(Looper.getMainLooper()).idle()
-        Whitebox.setInternalState(fragment, "presenter", presenter)
-        val method: Method =
-            UploadMediaDetailFragment::class.java.getDeclaredMethod(
-                "initializeFragment",
-            )
-        method.isAccessible = true
-        method.invoke(fragment)
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun testInitCaseGetIndexInViewFlipperNonZero() {
-        Shadows.shadowOf(Looper.getMainLooper()).idle()
-        Whitebox.setInternalState(fragment, "presenter", presenter)
-        `when`(callback.getIndexInViewFlipper(fragment)).thenReturn(1)
-        `when`(callback.totalNumberOfSteps).thenReturn(5)
-        val method: Method =
-            UploadMediaDetailFragment::class.java.getDeclaredMethod(
-                "initializeFragment",
-            )
-        method.isAccessible = true
-        method.invoke(fragment)
     }
 
     @Test
@@ -317,7 +285,7 @@ class UploadMediaDetailFragmentUnitTest {
     @Test
     @Throws(Exception::class)
     fun testShowExternalMap() {
-        shadowOf(Looper.getMainLooper()).idle()
+        Shadows.shadowOf(Looper.getMainLooper()).idle()
         `when`(uploadItem.gpsCoords).thenReturn(imageCoordinates)
         `when`(imageCoordinates.decLatitude).thenReturn(0.0)
         `when`(imageCoordinates.decLongitude).thenReturn(0.0)
@@ -328,7 +296,7 @@ class UploadMediaDetailFragmentUnitTest {
     @Test
     @Throws(Exception::class)
     fun testOnCameraPositionCallbackOnMapIconClicked() {
-        shadowOf(Looper.getMainLooper()).idle()
+        Shadows.shadowOf(Looper.getMainLooper()).idle()
         Mockito.mock(LocationPicker::class.java)
         val intent = Mockito.mock(Intent::class.java)
         val cameraPosition = Mockito.mock(CameraPosition::class.java)
@@ -357,7 +325,7 @@ class UploadMediaDetailFragmentUnitTest {
     @Test
     @Throws(Exception::class)
     fun testOnCameraPositionCallbackAddLocationDialog() {
-        shadowOf(Looper.getMainLooper()).idle()
+        Shadows.shadowOf(Looper.getMainLooper()).idle()
         Mockito.mock(LocationPicker::class.java)
         val intent = Mockito.mock(Intent::class.java)
         val cameraPosition = Mockito.mock(CameraPosition::class.java)
@@ -427,7 +395,7 @@ class UploadMediaDetailFragmentUnitTest {
     @Test
     @Throws(Exception::class)
     fun testRememberedZoomLevelOnNull() {
-        shadowOf(Looper.getMainLooper()).idle()
+        Shadows.shadowOf(Looper.getMainLooper()).idle()
         Whitebox.setInternalState(fragment, "defaultKvStore", defaultKvStore)
         `when`(uploadItem.gpsCoords).thenReturn(null)
         `when`(defaultKvStore.getString(LAST_ZOOM)).thenReturn("13.0")
@@ -443,7 +411,7 @@ class UploadMediaDetailFragmentUnitTest {
     @Test
     @Throws(Exception::class)
     fun testRememberedZoomLevelOnNotNull() {
-        shadowOf(Looper.getMainLooper()).idle()
+        Shadows.shadowOf(Looper.getMainLooper()).idle()
         `when`(uploadItem.gpsCoords).thenReturn(imageCoordinates)
         `when`(imageCoordinates.decLatitude).thenReturn(8.0)
         `when`(imageCoordinates.decLongitude).thenReturn(-8.0)

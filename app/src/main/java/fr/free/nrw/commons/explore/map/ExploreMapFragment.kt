@@ -140,8 +140,8 @@ class ExploreMapFragment : CommonsDaggerSupportFragment(), ExploreMapContract.Vi
                     requireActivity(),
                     requireActivity().getString(R.string.location_permission_title),
                     requireActivity().getString(R.string.location_permission_rationale_explore),
-                    requireActivity().getString(android.R.string.ok),
-                    requireActivity().getString(android.R.string.cancel),
+                    requireActivity().getString(R.string.ok),
+                    requireActivity().getString(R.string.cancel),
                     { askForLocationPermission() },
                     null,
                     null
@@ -287,6 +287,8 @@ class ExploreMapFragment : CommonsDaggerSupportFragment(), ExploreMapContract.Vi
         super.onPause()
         // unregistering the broadcastReceiver, as it was causing an exception and a potential crash
         unregisterNetworkReceiver()
+        locationManager.unregisterLocationManager()
+        locationManager.removeLocationListener(this)
     }
 
     fun requestLocationIfNeeded() {
