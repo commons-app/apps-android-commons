@@ -180,8 +180,8 @@ class ContributionController @Inject constructor(@param:Named("default_preferenc
         showAlertDialog(
             activity, activity.getString(R.string.location_permission_title),
             activity.getString(R.string.in_app_camera_location_permission_rationale),
-            activity.getString(android.R.string.ok),
-            activity.getString(android.R.string.cancel),
+            activity.getString(R.string.ok),
+            activity.getString(R.string.cancel),
             {
                 createDialogsAndHandleLocationPermissions(
                     activity,

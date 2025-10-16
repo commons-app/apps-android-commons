@@ -468,6 +468,8 @@
   <string name="map_attribution">{{Optional}}\n&lt;code&gt;&amp;amp;#169;&lt;/code&gt; is the copyright symbol (©).</string>
   <string name="categories_tooltip">{{Doc-commons-app-depicts}}</string>
   <string name="depicts_step_title">{{Doc-commons-app-depicts}}</string>
+  <string name="depicts_label">Label</string>
+  <string name="depicts_description">Description</string>
   <string name="pan_and_zoom_to_adjust">Panning means moving the map left/right/up/down, typically by touching the screen with one finger and moving it.\n\nZooming means making the map\'s scale bigger or smaller, typically by pinching with two fingers.\n\nExample in other app:\nhttps://igss.schneider-electric.com/features/pan-and-zoom-in-definition/</string>
   <string name="location_picker_image_view_shadow">A description of a visual element, location picker image shadow. Used for accesibility usually.</string>
   <string name="label">{{Identical|Label}}</string>

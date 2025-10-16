@@ -446,7 +446,7 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
                                 this,
                                 getString(R.string.storage_permissions_denied),
                                 getString(R.string.unable_to_share_upload_item),
-                                getString(android.R.string.ok)
+                                getString(R.string.ok)
                             ) { finish() }
                         } else {
                             showAlertDialog(
@@ -455,7 +455,7 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
                                 getString(
                                     R.string.write_storage_permission_rationale_for_image_share
                                 ),
-                                getString(android.R.string.ok)
+                                getString(R.string.ok)
                             ) { checkStoragePermissions() }
                         }
                     }

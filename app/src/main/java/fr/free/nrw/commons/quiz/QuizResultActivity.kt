@@ -193,7 +193,7 @@ class QuizResultActivity : AppCompatActivity() {
         alertadd.setPositiveButton(R.string.about_translate_proceed) { dialog, _ ->
             shareScreen(screenshot)
         }
-        alertadd.setNegativeButton(android.R.string.cancel) { dialog, _ ->
+        alertadd.setNegativeButton(R.string.cancel) { dialog, _ ->
             dialog.cancel()
         }
         alertadd.show()
