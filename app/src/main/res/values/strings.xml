@@ -233,8 +233,8 @@
   <string name="welcome_image_llamas">Llamas</string>
   <string name="welcome_image_rainbow_bridge">Rainbow Bridge</string>
   <string name="welcome_image_tulip">Tulip</string>
-  <string name="welcome_image_welcome_wikipedia">Welcome Wikipedia</string>
-  <string name="welcome_image_welcome_copyright">Welcome Copyright</string>
+  <string name="welcome_image_welcome_wikipedia">A schematic image of a generic Wikipedia article.</string>
+  <string name="welcome_image_welcome_copyright">A drawing of a stack of papers with the copyright symbol crossed out.</string>
   <string name="welcome_image_sydney_opera_house">Sydney Opera House</string>
   <string name="cancel">Cancel</string>
   <string name="navigation_drawer_open">Open</string>
