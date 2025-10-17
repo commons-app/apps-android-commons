@@ -649,7 +649,7 @@
   <string name="wikipedia_instructions_step_3">3. 尋找適合插入您的圖片的章節。</string>
   <string name="wikipedia_instructions_step_4">4. 點擊章節裡的編輯按鈕（為筆狀模樣的圖案）。</string>
   <string name="wikipedia_instructions_step_5">5. 將wikitext貼到適當的位置。</string>
-  <string name="wikipedia_instructions_step_6">6. 若有需要，可編輯wikitext來調整到適當的定位。更多相關資訊請查看&lt;a href=\"https://zh.wikipedia.org/wiki/Help:%E5%9B%BE%E5%83%8F\"&gt;此頁面&lt;/a&gt;。</string>
+  <string name="wikipedia_instructions_step_6" formatted="false">6. 若有需要，可編輯wikitext來調整到適當的定位。更多相關資訊請查看&lt;a href=\"https://zh.wikipedia.org/wiki/Help:%E5%9B%BE%E5%83%8F\"&gt;此頁面&lt;/a&gt;。</string>
   <string name="wikipedia_instructions_step_7">7. 發布條目</string>
   <string name="copy_wikicode_to_clipboard">複製維基代碼到剪貼簿</string>
   <string name="pause">暫停</string>
