@@ -27,6 +27,7 @@ import java.io.File
 import java.io.FileOutputStream
 import java.util.Locale
 import javax.inject.Inject
+import timber.log.Timber
 
 /**
  * This activity will set two tabs, achievements and
@@ -122,7 +123,7 @@ class ProfileActivity : BaseActivity() {
                 val rootView = window.decorView.findViewById<View>(android.R.id.content)
                 val screenShot = getScreenShot(rootView)
                 if (screenShot == null) {
-                    Log.e("ERROR", "ScreenShot is null")
+                    Timber.e("ScreenShot is null")
                     return false
                 }
                 showAlert(screenShot)
