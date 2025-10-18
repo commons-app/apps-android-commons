@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.settings
 
 import android.Manifest.permission
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.Dialog
 import android.content.Context.MODE_PRIVATE
@@ -303,6 +304,11 @@ class SettingsFragment : PreferenceFragmentCompat() {
         )
     }
 
+    // Remove the space for icons in the settings menu.
+    // This uses an internal API that shouldn't be used in app code,
+    // but it appears to be the most robust way to do this at the moment,
+    // disable the warning.
+    @SuppressLint("RestrictedApi")
     override fun onCreateAdapter(preferenceScreen: PreferenceScreen): Adapter<PreferenceViewHolder>
     {
         return object : PreferenceGroupAdapter(preferenceScreen) {
