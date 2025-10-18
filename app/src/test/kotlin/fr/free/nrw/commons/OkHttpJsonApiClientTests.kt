@@ -240,7 +240,7 @@ class OkHttpJsonApiClientTests {
 
     fun loadJsonFromResource(fileName: String): String {
         val resourcePath = "raw/$fileName"
-        //use the classloader to find the resource in the test environment
+        //uses the classloader to find the resource in the test environment
         val inputStream = javaClass.classLoader?.getResourceAsStream(resourcePath)
 
         if (inputStream != null) {
