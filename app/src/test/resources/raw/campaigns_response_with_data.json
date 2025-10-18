@@ -1,0 +1,24 @@
+{
+  "config": {
+    "showOnlyLiveCampaigns": false,
+    "sortBy": "startDate"
+  },
+  "campaigns": [
+    {
+      "title": "Wiki Loves Monuments",
+      "description": "A campaign to photograph monuments",
+      "startDate": "2025-09-01",
+      "endDate": "2025-09-30",
+      "link": "https://commons.wikimedia.org/wiki/Campaign:Wiki_Loves_Monuments",
+      "isWLMCampaign": true
+    },
+    {
+      "title": "Wiki Loves Nature",
+      "description": "A campaign to photograph nature",
+      "startDate": "2025-06-01",
+      "endDate": "2025-06-30",
+      "link": "https://commons.wikimedia.org/wiki/Campaign:Wiki_Loves_Nature",
+      "isWLMCampaign": false
+    }
+  ]
+}
