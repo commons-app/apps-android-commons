@@ -112,8 +112,8 @@ class WikidataItemDetailsActivity : BaseActivity(), MediaDetailProvider, Categor
 
         viewPagerAdapter!!.setTabs(
             R.string.title_for_media to depictionImagesListFragment!!,
-            R.string.title_for_subcategories to childDepictionsFragment,
-            R.string.title_for_parent_categories to parentDepictionsFragment
+            R.string.title_for_child_classes to childDepictionsFragment,
+            R.string.title_for_parent_classes to parentDepictionsFragment
         )
         binding!!.viewPager.offscreenPageLimit = 2
         viewPagerAdapter!!.notifyDataSetChanged()
