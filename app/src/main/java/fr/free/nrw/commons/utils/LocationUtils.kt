@@ -37,7 +37,7 @@ object LocationUtils {
             latLng = LatLng(latLngArray[1].trim().toDouble(),
                 latLngArray[0].trim().toDouble(), 1f)
         } catch (e: Exception) {
-            Timber.e("Error while parsing user entered lat long: %s", e)
+            Timber.e(e, "Error while parsing user entered lat long")
         }
 
         return latLng
