@@ -173,19 +173,13 @@ class BookmarkItemsDao @Inject constructor(
         categoryNameList: List<String>,
         categoryDescriptionList: List<String>,
         categoryThumbnailList: List<String>
-    ): List<CategoryItem> {
-        return buildList {
-            for (i in categoryNameList.indices) {
-                add(
-                    CategoryItem(
-                        categoryNameList[i],
-                        categoryDescriptionList[i],
-                        categoryThumbnailList[i],
-                        false
-                    )
-                )
-            }
-        }
+    ): List<CategoryItem> = categoryNameList.mapIndexed { index, name ->
+        CategoryItem(
+            name = name,
+            description = categoryDescriptionList.getOrNull(index),
+            thumbnail = categoryThumbnailList.getOrNull(index),
+            isSelected = false
+        )
     }
 
     /**
