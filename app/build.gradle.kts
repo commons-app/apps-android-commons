@@ -18,14 +18,14 @@ if (isRunningOnTravisAndIsNotPRBuild) {
 
 android {
     namespace = "fr.free.nrw.commons"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "fr.free.nrw.commons"
         minSdk = 21
-        targetSdk = 34
-        versionCode = 1053
-        versionName = "5.5.0"
+        targetSdk = 35
+        versionCode = 1058
+        versionName = "6.0.2"
 
         setProperty("archivesBaseName", "app-commons-v$versionName-" + getBranchName())
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -226,6 +226,7 @@ dependencies {
     implementation(libs.rxbinding)
     implementation(libs.rxbinding.appcompat)
     implementation(libs.facebook.fresco)
+    implementation(libs.facebook.fresco.middleware)
     implementation(libs.apache.commons.lang3)
 
     // UI

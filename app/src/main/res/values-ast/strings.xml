@@ -150,10 +150,10 @@
   <string name="preference_license">Llicencia predeterminada</string>
   <string name="use_previous">Usar un títulu y descripción anterior</string>
   <string name="preference_theme">Tema</string>
-  <string name="license_name_cc_by_sa_four"> Reconocimientu-CompartirIgual 4.0</string>
-  <string name="license_name_cc_by_four"> Reconocimientu 4.0</string>
-  <string name="license_name_cc_by_sa"> Reconocimientu-CompartirIgual 3.0</string>
-  <string name="license_name_cc_by"> Reconocimientu 3.0</string>
+  <string name="license_name_cc_by_sa_four" fuzzy="true"> Reconocimientu-CompartirIgual 4.0</string>
+  <string name="license_name_cc_by_four" fuzzy="true"> Reconocimientu 4.0</string>
+  <string name="license_name_cc_by_sa" fuzzy="true"> Reconocimientu-CompartirIgual 3.0</string>
+  <string name="license_name_cc_by" fuzzy="true"> Reconocimientu 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
@@ -442,8 +442,8 @@
   <string name="review_category">¿Ta correchamente categorizáu?</string>
   <string name="review_spam">¿Axústase a la tema?</string>
   <string name="review_thanks">¿Quies dar les gracies al collaborador?</string>
-  <string name="review_spam_explanation">Pulsia NON para nomar esta imaxe pa desaniciar si nun ye pa nada útil.</string>
-  <string name="review_copyright_explanation">Los logotipos, les imáxenes de pantalla y los cartelos de películes son davezu infracciones a los derechos d\'autor.\nPulsia NON para nomar esta imaxe pa desaniciar</string>
+  <string name="review_spam_explanation">Calca NON para nomar esta imaxe pa desaniciar si nun ye pa nada útil.</string>
+  <string name="review_copyright_explanation">Los logotipos, les imáxenes de pantalla y los cartelos de películes son davezu infracciones a los derechos d\'autor.\nCalca NON para nomar esta imaxe pa desaniciar</string>
   <string name="review_thanks_explanation">El to agradecimientu animara a %1$s</string>
   <string name="review_no_category">¡Ai, esto nun ta siquier categorizao!</string>
   <string name="review_category_explanation">Esta imaxe ta baxo %1$s categoríes.</string>
@@ -537,4 +537,5 @@
   <string name="nearby_no_results">Nun s\'alcontraron llugares, tenta cambiar los criterios de gueta.</string>
   <string name="confirm">Confirmar</string>
   <string name="instructions_title">Instrucciones</string>
+  <string name="location_permission_rationale">Permisu opcional: llograr l\'allugamientu actual pa suxerir categoríes</string>
 </resources>

@@ -176,10 +176,10 @@
   <string name="preference_license">Προεπιλεγμένη άδεια</string>
   <string name="use_previous">Χρήση προηγούμενου τίτλου και περιγραφής</string>
   <string name="preference_theme">Θέμα</string>
-  <string name="license_name_cc_by_sa_four">Αναφορά-Παρόμοια Διανομή 4.0</string>
-  <string name="license_name_cc_by_four">Αναφορά 4.0</string>
-  <string name="license_name_cc_by_sa">Αναφορά-Παρόμοια Διανομή 4.0 3.0</string>
-  <string name="license_name_cc_by">Αναφορά 3.0</string>
+  <string name="license_name_cc_by_sa_four" fuzzy="true">Αναφορά-Παρόμοια Διανομή 4.0</string>
+  <string name="license_name_cc_by_four" fuzzy="true">Αναφορά 4.0</string>
+  <string name="license_name_cc_by_sa" fuzzy="true">Αναφορά-Παρόμοια Διανομή 4.0 3.0</string>
+  <string name="license_name_cc_by" fuzzy="true">Αναφορά 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
@@ -232,6 +232,7 @@
   <string name="media_detail_description">Περιγραφή</string>
   <string name="media_detail_discussion">Συζήτηση</string>
   <string name="media_detail_author">Συγγραφέας</string>
+  <string name="media_detail_uploader">Ανεβαστής</string>
   <string name="media_detail_uploaded_date">Ημερομηνία μεταφόρτωσης</string>
   <string name="media_detail_license">Άδεια</string>
   <string name="media_detail_coordinates">Συντεταγμένες</string>
@@ -390,7 +391,7 @@
   <string name="statistics_featured">Προβεβλημμένες εικόνες</string>
   <string name="statistics_wikidata_edits">Εικόνες μέσω «Κοντινά μέρη»</string>
   <string name="level">Επίπεδο %d</string>
-  <string name="profileLevel">%s (Επίπεδο %s)</string>
+  <string name="profile_withLevel">%s (Επίπεδο %s)</string>
   <string name="images_uploaded">Εικόνες που μεταφορτώθηκαν</string>
   <string name="image_reverts">Εικόνες που δεν ανεστράφησαν</string>
   <string name="images_used_by_wiki">Εικόνες που χρησιμοποιήθηκαν</string>
@@ -433,7 +434,7 @@
   <string name="deletion_reason_bad_for_my_privacy">Συνειδητοποίησα ότι είναι κακό για την ιδιωτικότητά μου</string>
   <string name="deletion_reason_no_longer_want_public">Άλλαξα γνώμη, δε θέλω να προβάλλεται πλέον δημόσια</string>
   <string name="deletion_reason_not_interesting">Συγγνώμη, αυτή η φωτογραφία δεν είναι ενδιαφέρουσα για μια εγκυκλοπαίδεια</string>
-  <string name="uploaded_by_myself" fuzzy="true">Ανέβηκε από εμένα στο %1$s, χρησιμοποιήθηκε σε %2$d άρθρο/α</string>
+  <string name="uploaded_by_myself">Ανέβηκε από εμένα στο %1$s, χρησιμοποιήθηκε σε τουλάχιστον %2$d άρθρο/α.</string>
   <string name="no_uploads">Καλώς ήρθατε στα Commons!\n\nΑνεβάστε τα πρώτα σας πολυμέσα πατώντας το κουμπί της προσθήκης.</string>
   <string name="no_categories_selected">Δεν επιλέχθηκαν κατηγορίες</string>
   <string name="no_categories_selected_warning_desc">Οι εικόνες χωρίς κατηγορίες χρησιμοποιούνται σπάνια. Θέλετε πράγματι να συνεχίσετε δίχως να επιλέξετε κατηγορίες;</string>
@@ -690,7 +691,7 @@
   <string name="show_in_map_app">Εμφάνιση στην εφαρμογή χάρτη</string>
   <string name="modify_location">Επεξεργασία τοποθεσίας</string>
   <string name="location_picker_image_view">Η προβολή εικόνας του εργαλείου επιλογής τοποθεσίας</string>
-  <string name="location_picker_image_view_shadow">Η σκιά της προβολής εικόνας του εργαλείου επιλογής τοποθεσίας</string>
+  <string name="location_picker_image_view_shadow" fuzzy="true">Η σκιά της προβολής εικόνας του εργαλείου επιλογής τοποθεσίας</string>
   <string name="image_location">Τοποθεσία εικόνας</string>
   <string name="check_whether_location_is_correct">Ελέγξτε εάν η τοποθεσία είναι σωστή</string>
   <string name="label">Ετικέτα</string>
@@ -716,6 +717,7 @@
   <string name="wlm_campaign_description">Το Wiki Loves Monuments είναι ένας διεθνής διαγωνισμός φωτογραφίας για μνημεία που διοργανώνεται από το Wikimedia</string>
   <string name="need_permission">Χρειάζεται άδεια</string>
   <string name="read_phone_state_permission_message">Οι κοντινοί χάρτες πρέπει να διαβάζουν PHONE STATE για να λειτουργούν σωστά</string>
+  <string name="location_permission_rationale">Προαιρετική άδεια: Ανάκτηση τρέχουσας θέσης σας για προτάσεις κατηγοριών</string>
   <string name="contributions_of_user">Συνεισφορές χρήστη: %s</string>
   <string name="achievements_of_user">Επιτεύγματα χρήστη: %s</string>
   <string name="menu_view_user_page">Προβολή σελίδας χρήστη</string>
@@ -834,4 +836,5 @@
   <string name="show_in_nearby">Εμφάνιση στα Κοντινά</string>
   <string name="image_tag_line_created_and_uploaded_by">Δημιουργήθηκε και μεταφορτώθηκε από: %1$s</string>
   <string name="image_tag_line_created_by_and_uploaded_by">Δημιουργήθηκε από %1$s και μεταφορτώθηκε από %2$s</string>
+  <string name="nominated_for_deletion_btn">Προτάθηκε για Διαγραφή</string>
 </resources>

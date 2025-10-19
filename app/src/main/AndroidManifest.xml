@@ -57,8 +57,7 @@
     tools:replace="android:appComponentFactory">
     <activity
       android:name=".activity.SingleWebViewActivity"
-      android:exported="false"
-      android:label="@string/title_activity_single_web_view" />
+      android:exported="false" />
     <activity
       android:name=".nearby.WikidataFeedback"
       android:exported="false" />
@@ -101,7 +100,6 @@
       android:name=".upload.UploadActivity"
       android:configChanges="orientation|screenSize|keyboard"
       android:exported="true"
-      android:hardwareAccelerated="false"
       android:icon="@mipmap/ic_launcher"
       android:windowSoftInputMode="adjustResize">
       <intent-filter android:label="@string/intent_share_upload_label">

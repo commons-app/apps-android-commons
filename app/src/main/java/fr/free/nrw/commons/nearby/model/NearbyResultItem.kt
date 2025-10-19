@@ -7,8 +7,8 @@ class NearbyResultItem(
     private val wikipediaArticle: ResultTuple?,
     private val commonsArticle: ResultTuple?,
     private val location: ResultTuple?,
-    @field:SerializedName("itemLabel")
-    private val label: ResultTuple?,
+    @field:SerializedName("label") private val label: ResultTuple?,
+    @field:SerializedName("itemLabel") private val itemLabel: ResultTuple?,
     @field:SerializedName("streetAddress") private val address: ResultTuple?,
     private val icon: ResultTuple?,
     @field:SerializedName("class") private val className: ResultTuple?,
@@ -16,7 +16,7 @@ class NearbyResultItem(
     @field:SerializedName("commonsCategory") private val commonsCategory: ResultTuple?,
     @field:SerializedName("pic") private val pic: ResultTuple?,
     @field:SerializedName("destroyed") private val destroyed: ResultTuple?,
-    @field:SerializedName("itemDescription") private val description: ResultTuple?,
+    @field:SerializedName("description") private val description: ResultTuple?,
     @field:SerializedName("endTime") private val endTime: ResultTuple?,
     @field:SerializedName("monument") private val monument: ResultTuple?,
     @field:SerializedName("dateOfOfficialClosure") private val dateOfOfficialClosure: ResultTuple?,
@@ -30,7 +30,15 @@ class NearbyResultItem(
 
     fun getLocation(): ResultTuple = location ?: ResultTuple()
 
-    fun getLabel(): ResultTuple = label ?: ResultTuple()
+    /**
+     * Returns label for display (pins, popup), using fallback to itemLabel if needed.
+     */
+    fun getLabel(): ResultTuple = label ?: itemLabel ?: ResultTuple()
+
+    /**
+     * Returns only the original label field, for Wikidata edits.
+     */
+    fun getOriginalLabel(): ResultTuple = label ?: ResultTuple()
 
     fun getIcon(): ResultTuple = icon ?: ResultTuple()
 

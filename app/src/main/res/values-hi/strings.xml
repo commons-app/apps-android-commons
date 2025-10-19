@@ -152,10 +152,10 @@
   <string name="preference_license">डिफॉल्ट लाइसेन्स</string>
   <string name="use_previous" fuzzy="true">पिछले शीर्षक/विवरण का उपयोग करें</string>
   <string name="preference_theme">थीम</string>
-  <string name="license_name_cc_by_sa_four">एट्रीब्यूशन-शेयरअलाइक 4.0</string>
-  <string name="license_name_cc_by_four">एट्रिब्यूशन 4.0</string>
-  <string name="license_name_cc_by_sa">एट्रीब्यूशन-शेयरअलाइक 3.0</string>
-  <string name="license_name_cc_by">एट्रीब्यूशन 3.0</string>
+  <string name="license_name_cc_by_sa_four" fuzzy="true">एट्रीब्यूशन-शेयरअलाइक 4.0</string>
+  <string name="license_name_cc_by_four" fuzzy="true">एट्रिब्यूशन 4.0</string>
+  <string name="license_name_cc_by_sa" fuzzy="true">एट्रीब्यूशन-शेयरअलाइक 3.0</string>
+  <string name="license_name_cc_by" fuzzy="true">एट्रीब्यूशन 3.0</string>
   <string name="license_name_cc0">सीसी0</string>
   <string name="license_name_cc_by_sa_3_0">सीसी बाय-एसए 3.0</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
@@ -301,6 +301,7 @@
   <string name="question">प्रश्न</string>
   <string name="result">परिणाम</string>
   <string name="selfie_answer">सेल्फी की ज्ञानकोषीय महत्ता बहुत अधिक नहीं है। कृपया अपना चित्र तब तक अपलोड न करें जबतक आपके बारे में कोई विकिपीडिया लेख पहले से उपलब्ध नहीं है।</string>
+  <string name="quiz_continue">जारी रखें</string>
   <string name="warning_for_no_answer">उत्तर हेतु प्रश्न के दो विकल्प में से कोई एक चुने</string>
   <string name="user_not_logged_in" fuzzy="true">लॉग इन सत्र समाप्त हो गया, कृपया पुनः लॉग इन करें।</string>
   <string name="quiz_result_share_message">अपनी प्रश्नोत्तरी अपने मित्रों के साथ साझा करें!</string>
@@ -322,7 +323,7 @@
   <string name="statistics_thanks">धन्यवाद प्राप्त किया</string>
   <string name="statistics_featured">निर्वाचित चित्र</string>
   <string name="level">स्तर %d</string>
-  <string name="profileLevel">%s (स्तर %s )</string>
+  <string name="profile_withLevel">%s (स्तर %s )</string>
   <string name="images_uploaded">चित्र अपलोड हुआ</string>
   <string name="image_reverts">चित्रों को वापस नहीं किया गया</string>
   <string name="images_used_by_wiki">उपयोग हुए चित्र</string>
@@ -374,6 +375,7 @@
   <string name="category_edit_helper_show_edit_title_success">सफल</string>
   <string name="leaderboard_column_count">गणना</string>
   <string name="custom_selector_dismiss_limit_warning_button_text">रद्द करें</string>
+  <string name="location_permission_rationale">वैकल्पिक अनुमति: श्रेणी सुझाव हेतु वर्तमान स्थान ज्ञात करें</string>
   <string name="talk">वार्ता</string>
   <string name="are_you_sure_that_you_want_cancel_all_the_uploads">क्या आप वाकई सभी अपलोड रद्द करना चाहते हैं?</string>
   <string name="cancelling_all_the_uploads">सभी अपलोड रद्द किये जा रहे हैं...</string>

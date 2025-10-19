@@ -155,10 +155,10 @@
   <string name="preference_license">Standart litsenziya</string>
   <string name="use_previous">Oldingi sarlavha va tavsifdan foydalanish</string>
   <string name="preference_theme">Mavzu</string>
-  <string name="license_name_cc_by_sa_four"> Attribution-ShareAlike 4.0</string>
-  <string name="license_name_cc_by_four"> Attribution 4.0</string>
-  <string name="license_name_cc_by_sa"> Attribution-ShareAlike 3.0</string>
-  <string name="license_name_cc_by">Attribution 3.0</string>
+  <string name="license_name_cc_by_sa_four" fuzzy="true"> Attribution-ShareAlike 4.0</string>
+  <string name="license_name_cc_by_four" fuzzy="true"> Attribution 4.0</string>
+  <string name="license_name_cc_by_sa" fuzzy="true"> Attribution-ShareAlike 3.0</string>
+  <string name="license_name_cc_by" fuzzy="true">Attribution 3.0</string>
   <string name="tutorial_1_text">Wikimedia Commons Vikipediyada qoʻllanilib kelinadigan koʻpgina rasmlarni joylashtiradi.</string>
   <string name="tutorial_1_subtext">Rasmlarining butun dunyo boʻylab odamlarni maʼlumot olishga yordam beradi!</string>
   <string name="tutorial_2_text">Marhamat, oʻzingiz tomonidan olingan yoki tuzilgan rasmlarni joylashtiring:</string>

@@ -185,10 +185,10 @@
   <string name="preference_license">Varsayılan Lisans</string>
   <string name="use_previous">Önceki başlığı ve açıklamayı kullan</string>
   <string name="preference_theme">Tema</string>
-  <string name="license_name_cc_by_sa_four"> Atıf-BenzerPaylaşım 4.0</string>
-  <string name="license_name_cc_by_four"> Atıf 4.0</string>
-  <string name="license_name_cc_by_sa">Atıf-BenzerPaylaşım 3.0</string>
-  <string name="license_name_cc_by"> Atıf 3.0</string>
+  <string name="license_name_cc_by_sa_four" fuzzy="true"> Atıf-BenzerPaylaşım 4.0</string>
+  <string name="license_name_cc_by_four" fuzzy="true"> Atıf 4.0</string>
+  <string name="license_name_cc_by_sa" fuzzy="true">Atıf-BenzerPaylaşım 3.0</string>
+  <string name="license_name_cc_by" fuzzy="true"> Atıf 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
@@ -241,6 +241,7 @@
   <string name="media_detail_description">Açıklama</string>
   <string name="media_detail_discussion">Tartışma</string>
   <string name="media_detail_author">Yazar</string>
+  <string name="media_detail_uploader">Yükleyici</string>
   <string name="media_detail_uploaded_date">Yükleme tarihi</string>
   <string name="media_detail_license">Lisans</string>
   <string name="media_detail_coordinates">Koordinatlar</string>
@@ -399,7 +400,7 @@
   <string name="statistics_featured">Seçkin Resimler</string>
   <string name="statistics_wikidata_edits">\"Yakındaki Yerler\"den Resimler</string>
   <string name="level">Seviye %d</string>
-  <string name="profileLevel">%s (Seviye %s)</string>
+  <string name="profile_withLevel">%s (Seviye %s)</string>
   <string name="images_uploaded">Resimler Yüklendi</string>
   <string name="image_reverts">Resimler Geri Alınmadı</string>
   <string name="images_used_by_wiki">Resimler Kullanıldı</string>
@@ -442,7 +443,7 @@
   <string name="deletion_reason_bad_for_my_privacy">Gizliliğimin kötü olduğunu fark ettim</string>
   <string name="deletion_reason_no_longer_want_public">Fikrimi değiştirdim, artık herkese görünür olmasını istemiyorum</string>
   <string name="deletion_reason_not_interesting">Üzgünüz, bu resim bir ansiklopedi için ilginç değil</string>
-  <string name="uploaded_by_myself" fuzzy="true">Kendi başıma %1$s üzerine yüklendi, %2$d makalede kullanıldı.</string>
+  <string name="uploaded_by_myself">%1$s tarafımdan yüklendi, en az %2$d madde de kullanıldı.</string>
   <string name="no_uploads">Commons\'a Hoş Geldiniz!\n\nEkle düğmesine dokunarak ilk medyanızı yükleyin.</string>
   <string name="no_categories_selected">Kategori Seçilmedi</string>
   <string name="no_categories_selected_warning_desc">Kategorisiz görüntüler nadiren kullanılabilir. Kategori seçmeden devam etmek istediğinizden emin misiniz?</string>
@@ -607,6 +608,8 @@
   <string name="title_for_media">MEDYA</string>
   <string name="title_for_child_classes">ALT SINIFLAR</string>
   <string name="title_for_parent_classes">ÜST SINIFLAR</string>
+  <string name="title_for_subcategories">ALT KATEGORİLER</string>
+  <string name="title_for_parent_categories">ÜST KATEGORİLER</string>
   <string name="upload_nearby_place_found_title">Yakındaki Yer Bulundu</string>
   <string name="upload_nearby_place_found_description_plural">Bunlar %1$s resimleri mi?</string>
   <string name="upload_nearby_place_found_description_singular">Bu bir %1$s resmi mi?</string>
@@ -725,6 +728,7 @@
   <string name="wlm_campaign_description">Viki, Anıtları Seviyor; Wikimedia tarafından düzenlenen anıtlar için uluslararası bir fotoğraf yarışmasıdır.</string>
   <string name="need_permission">İzin Gerekiyor</string>
   <string name="read_phone_state_permission_message">Yakındaki haritalar düzgün çalışmak için TELEFON DURUMUNU okumaya ihtiyaç duyuyor</string>
+  <string name="location_permission_rationale">İsteğe bağlı izin: Kategori önerileri için geçerli konumu al</string>
   <string name="contributions_of_user">Kullanıcının katkıları: %s</string>
   <string name="achievements_of_user">Kullanıcının başarıları: %s</string>
   <string name="menu_view_user_page">Kullanıcı profilini görüntüle</string>
@@ -782,7 +786,7 @@
   <string name="permissions_are_required_for_functionality">İşlevsellik için izinler gereklidir</string>
   <string name="learn_how_to_write_a_useful_description">Yararlı bir açıklamanın nasıl yazılacağını öğrenin</string>
   <string name="learn_how_to_write_a_useful_caption">Nasıl faydalı bir alt yazı yazılacağını öğrenin</string>
-  <string name="see_your_achievements">Başarılarınızı görün</string>
+  <string name="see_your_achievements">Başarılarınızı görüntüleyin</string>
   <string name="edit_image">Görseli düzenle</string>
   <string name="edit_location">Konumu Düzenle</string>
   <string name="location_updated">Konum güncellendi!</string>
@@ -851,4 +855,5 @@
   <string name="show_in_nearby">Yakınlarda Göster</string>
   <string name="image_tag_line_created_and_uploaded_by">Oluşturan ve yükleyen: %1$s</string>
   <string name="image_tag_line_created_by_and_uploaded_by">%1$s tarafından oluşturuldu ve %2$s tarafından yüklendi</string>
+  <string name="nominated_for_deletion_btn">Silinmeye aday gösterildi</string>
 </resources>

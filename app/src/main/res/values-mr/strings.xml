@@ -103,10 +103,10 @@
   <string name="preference_license">डिफॉल्ट परवाना</string>
   <string name="use_previous" fuzzy="true">मागील शीर्षक/वर्णन वापरा</string>
   <string name="preference_theme" fuzzy="true">रात्रीच्या वेळेच्या व्यवस्था</string>
-  <string name="license_name_cc_by_sa_four"> Attribution-ShareAlike 3.0</string>
-  <string name="license_name_cc_by_four"> Attribution 3.0</string>
-  <string name="license_name_cc_by_sa"> Attribution-ShareAlike 3.0</string>
-  <string name="license_name_cc_by"> Attribution 3.0</string>
+  <string name="license_name_cc_by_sa_four" fuzzy="true"> Attribution-ShareAlike 3.0</string>
+  <string name="license_name_cc_by_four" fuzzy="true"> Attribution 3.0</string>
+  <string name="license_name_cc_by_sa" fuzzy="true"> Attribution-ShareAlike 3.0</string>
+  <string name="license_name_cc_by" fuzzy="true"> Attribution 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
@@ -190,4 +190,5 @@
   <string name="about_rate_us" fuzzy="true"/>
   <string name="about_faq" fuzzy="true">सतत विचारले जाणारे प्रश्न</string>
   <string name="welcome_skip_button">ट्यूटोरियल वगळा</string>
+  <string name="location_permission_rationale">ऐच्छिक परवानगी:वर्ग सुचवण्यांसाठी सध्याचे स्थान मिळवा</string>
 </resources>

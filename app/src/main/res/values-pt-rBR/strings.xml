@@ -178,10 +178,10 @@
   <string name="preference_license">Licença padrão</string>
   <string name="use_previous">Usar o título e descrição anterior</string>
   <string name="preference_theme">Tema</string>
-  <string name="license_name_cc_by_sa_four">Atribuição-CompartilhaIgual 4.0</string>
-  <string name="license_name_cc_by_four">Atribuição 4.0</string>
-  <string name="license_name_cc_by_sa"> Attribution-ShareAlike 3.0</string>
-  <string name="license_name_cc_by"> Attribution 3.0</string>
+  <string name="license_name_cc_by_sa_four" fuzzy="true">Atribuição-CompartilhaIgual 4.0</string>
+  <string name="license_name_cc_by_four" fuzzy="true">Atribuição 4.0</string>
+  <string name="license_name_cc_by_sa" fuzzy="true"> Attribution-ShareAlike 3.0</string>
+  <string name="license_name_cc_by" fuzzy="true"> Attribution 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
@@ -680,7 +680,7 @@
   <string name="show_in_map_app">Mostrar no aplicativo de mapa</string>
   <string name="modify_location">Editar localização</string>
   <string name="location_picker_image_view">A visualização da imagem do seletor de local</string>
-  <string name="location_picker_image_view_shadow">A sombra da visualização da imagem do seletor de local</string>
+  <string name="location_picker_image_view_shadow" fuzzy="true">A sombra da visualização da imagem do seletor de local</string>
   <string name="image_location">Localização da imagem</string>
   <string name="check_whether_location_is_correct">Verifique se a localização está correta</string>
   <string name="label">Etiqueta</string>
@@ -706,6 +706,7 @@
   <string name="wlm_campaign_description">O Wiki Loves Monuments é um concurso internacional organizado pela Wikimedia sobre fotografias de monumentos</string>
   <string name="need_permission">Precisa de permissão</string>
   <string name="read_phone_state_permission_message">Os mapas próximos precisam ler ESTADO DO TELEFONE para funcionar corretamente</string>
+  <string name="location_permission_rationale">Permissão opcional: Obter a localização atual de sugestões de categoria</string>
   <string name="contributions_of_user">Contribuições do usuário: %s</string>
   <string name="achievements_of_user">Conquistas do usuário: %s</string>
   <string name="menu_view_user_page" fuzzy="true">Ver página de usuário</string>

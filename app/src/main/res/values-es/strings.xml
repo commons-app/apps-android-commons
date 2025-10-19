@@ -207,10 +207,10 @@
   <string name="preference_license">Licencia predeterminada</string>
   <string name="use_previous">Usar título y descripción anteriores</string>
   <string name="preference_theme">Tema</string>
-  <string name="license_name_cc_by_sa_four"> Atribución-CompartirIgual 4.0</string>
-  <string name="license_name_cc_by_four">Atribución 4.0</string>
-  <string name="license_name_cc_by_sa"> Atribución-CompartirIgual 3.0</string>
-  <string name="license_name_cc_by">Atribución 3.0</string>
+  <string name="license_name_cc_by_sa_four" fuzzy="true"> Atribución-CompartirIgual 4.0</string>
+  <string name="license_name_cc_by_four" fuzzy="true">Atribución 4.0</string>
+  <string name="license_name_cc_by_sa" fuzzy="true"> Atribución-CompartirIgual 3.0</string>
+  <string name="license_name_cc_by" fuzzy="true">Atribución 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
@@ -263,6 +263,7 @@
   <string name="media_detail_description">Descripción</string>
   <string name="media_detail_discussion">Discusión</string>
   <string name="media_detail_author">Autor</string>
+  <string name="media_detail_uploader">Subidor</string>
   <string name="media_detail_uploaded_date">Fecha de subida</string>
   <string name="media_detail_license">Licencia</string>
   <string name="media_detail_coordinates">Coordenadas</string>
@@ -421,7 +422,7 @@
   <string name="statistics_featured">Imágenes destacadas</string>
   <string name="statistics_wikidata_edits">Imágenes vía \"Sitios Cercanos\"</string>
   <string name="level">Nivel %d</string>
-  <string name="profileLevel">%s (Nivel %s)</string>
+  <string name="profile_withLevel">%s (Nivel %s)</string>
   <string name="images_uploaded">Imágenes subidas</string>
   <string name="image_reverts">Imágenes no revertidas</string>
   <string name="images_used_by_wiki">Imágenes utilizadas</string>
@@ -464,7 +465,7 @@
   <string name="deletion_reason_bad_for_my_privacy">Me di cuenta que es malo para mi privacidad</string>
   <string name="deletion_reason_no_longer_want_public">Cambié de opinión, no quiero que siga siendo visible públicamente</string>
   <string name="deletion_reason_not_interesting">Lo sentimos, esta imagen no es interesante para una enciclopedia</string>
-  <string name="uploaded_by_myself" fuzzy="true">Subida por mí mismo el %1$s, usado en %2$d artículo(s).</string>
+  <string name="uploaded_by_myself">Subido por mí en %1$s, usado en %2$d artículo(s) al menos.</string>
   <string name="no_uploads">Te damos la bienvenida a Commons.\n\nCarga tu primer archivo mediante el botón Añadir.</string>
   <string name="no_categories_selected">No hay categorías seleccionadas</string>
   <string name="no_categories_selected_warning_desc">Las imágenes sin categorías raramente se pueden usar. ¿Seguro que quieres continuar sin seleccionar ninguna categoría?</string>
@@ -629,6 +630,8 @@
   <string name="title_for_media">MULTIMEDIA</string>
   <string name="title_for_child_classes">CLASES HIJAS</string>
   <string name="title_for_parent_classes">CLASES PADRES</string>
+  <string name="title_for_subcategories">SUBCATEGORÍAS</string>
+  <string name="title_for_parent_categories">CATEGORÍAS DE PADRES</string>
   <string name="upload_nearby_place_found_title">Lugar cercano encontrado</string>
   <string name="upload_nearby_place_found_description_plural">¿Son estas imágenes de %1$s?</string>
   <string name="upload_nearby_place_found_description_singular">¿Es esta una imagen de %1$s?</string>
@@ -721,7 +724,7 @@
   <string name="show_in_map_app">Mostrar en la aplicación de mapa</string>
   <string name="modify_location">Editar ubicación</string>
   <string name="location_picker_image_view">La vista de la imagen del selector de ubicación</string>
-  <string name="location_picker_image_view_shadow">La sombra de la vista de la imagen del selector de ubicación</string>
+  <string name="location_picker_image_view_shadow" fuzzy="true">La sombra de la vista de la imagen del selector de ubicación</string>
   <string name="image_location">Posición de imagen</string>
   <string name="check_whether_location_is_correct">Compruebe si la ubicación es correcta</string>
   <string name="label">Etiqueta</string>
@@ -747,6 +750,7 @@
   <string name="wlm_campaign_description">Wiki loves monuments es un consurso internacional de fotografías de monumentos organizado por Wikimedia</string>
   <string name="need_permission">Necesita Permiso</string>
   <string name="read_phone_state_permission_message">Los mapas cercanos necesitan leer ESTADO DEL TELÉFONO para funcionar correctamente</string>
+  <string name="location_permission_rationale">Permiso opcional: obtener la ubicación actual para sugerir categorías</string>
   <string name="contributions_of_user">Contribuciones del usuario: %s</string>
   <string name="achievements_of_user">Logros del usuario: %s</string>
   <string name="menu_view_user_page">Ver perfil de usuario</string>
@@ -804,7 +808,7 @@
   <string name="permissions_are_required_for_functionality">Se requieren permisos para la funcionalidad</string>
   <string name="learn_how_to_write_a_useful_description">Aprenda a escribir una descripción útil</string>
   <string name="learn_how_to_write_a_useful_caption">Aprenda a escribir una leyenda útil</string>
-  <string name="see_your_achievements">Ver sus logros</string>
+  <string name="see_your_achievements">Ver tus logros</string>
   <string name="edit_image">Editar Imagen</string>
   <string name="edit_location">Editar Ubicación</string>
   <string name="location_updated">¡Ubicación actualizada!</string>
@@ -873,4 +877,5 @@
   <string name="show_in_nearby">Mostrar en las cercanías</string>
   <string name="image_tag_line_created_and_uploaded_by">Creado y cargado por: %1$s</string>
   <string name="image_tag_line_created_by_and_uploaded_by">Creado por %1$s y cargado por %2$s</string>
+  <string name="nominated_for_deletion_btn">Nominar para borrado</string>
 </resources>

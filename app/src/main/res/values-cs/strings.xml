@@ -19,6 +19,7 @@
 * Patriccck
 * Patrik L.
 * Robins7
+* Segoulas
 * Spotter
 * The astrea
 * Vlad5250
@@ -191,10 +192,10 @@
   <string name="preference_license">Výchozí licence</string>
   <string name="use_previous">Použít předchozí název a popis</string>
   <string name="preference_theme">Vzhled</string>
-  <string name="license_name_cc_by_sa_four">Uveďte autora-Zachovejte licenci 4.0</string>
-  <string name="license_name_cc_by_four">Uveďte autora 4.0</string>
-  <string name="license_name_cc_by_sa"> Uveďte autora-Zachovejte licenci 3.0</string>
-  <string name="license_name_cc_by">CC Uveďte autora 3.0</string>
+  <string name="license_name_cc_by_sa_four" fuzzy="true">Uveďte autora-Zachovejte licenci 4.0</string>
+  <string name="license_name_cc_by_four" fuzzy="true">Uveďte autora 4.0</string>
+  <string name="license_name_cc_by_sa" fuzzy="true"> Uveďte autora-Zachovejte licenci 3.0</string>
+  <string name="license_name_cc_by" fuzzy="true">CC Uveďte autora 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
@@ -247,6 +248,7 @@
   <string name="media_detail_description">Popis</string>
   <string name="media_detail_discussion">Diskuse</string>
   <string name="media_detail_author">Autor</string>
+  <string name="media_detail_uploader">Nahrávač</string>
   <string name="media_detail_uploaded_date">Datum nahrání souboru</string>
   <string name="media_detail_license">Licence</string>
   <string name="media_detail_coordinates">Souřadnice</string>
@@ -405,7 +407,7 @@
   <string name="statistics_featured">Nejlepší obrázky</string>
   <string name="statistics_wikidata_edits">Obrázky přes „Místa v okolí“</string>
   <string name="level">Úroveň %d</string>
-  <string name="profileLevel">%s (úroveň %s)</string>
+  <string name="profile_withLevel">%s (úroveň %s)</string>
   <string name="images_uploaded">Nahrané obrázky</string>
   <string name="image_reverts">Nerevertované obrázky</string>
   <string name="images_used_by_wiki">Použitých obrázků</string>
@@ -448,7 +450,7 @@
   <string name="deletion_reason_bad_for_my_privacy">Uvědomil/a jsem si, že je to špatné pro mé soukromí</string>
   <string name="deletion_reason_no_longer_want_public">Změnil/a jsem názor, nechci, aby to bylo veřejně viditelné</string>
   <string name="deletion_reason_not_interesting">Omlouváme se, že tento obrázek není zajímavý pro encyklopedii</string>
-  <string name="uploaded_by_myself" fuzzy="true">Náhráno mnou %1$s, použito v(e) %2$d článku/článcích.</string>
+  <string name="uploaded_by_myself">Nahráno mnou %1$s, použito v alespoň %2$d článku/článcích.</string>
   <string name="no_uploads">Vítejte na Commons!\n\nNahrajte svá první média klepnutím na tlačítko přidat.</string>
   <string name="no_categories_selected">Nebyly vybrány žádné kategorie</string>
   <string name="no_categories_selected_warning_desc">Obrázky bez kategorií jsou používány jen zřídka. Opravdu chcete nahrát obrázek bez výběru kategorií?</string>
@@ -617,6 +619,8 @@
   <string name="title_for_media">MÉDIA</string>
   <string name="title_for_child_classes">PODŘAZENÉ TŘÍDY</string>
   <string name="title_for_parent_classes">NADŘAZENÉ TŘÍDY</string>
+  <string name="title_for_subcategories">PODKATEGORIE</string>
+  <string name="title_for_parent_categories">NADŘAZENÉ KATEGORIE</string>
   <string name="upload_nearby_place_found_title">Místo v okolí nalezeno</string>
   <string name="upload_nearby_place_found_description_plural">Je na těchto obrázcích %1$s?</string>
   <string name="upload_nearby_place_found_description_singular">Je toto obrázek místa %1$s?</string>
@@ -709,7 +713,7 @@
   <string name="show_in_map_app">Zobrazit v mapové aplikaci</string>
   <string name="modify_location">Upravit umístění</string>
   <string name="location_picker_image_view">Zobrazení obrázku výběru polohy</string>
-  <string name="location_picker_image_view_shadow">\n    Stín zobrazení obrázku výběru polohy</string>
+  <string name="location_picker_image_view_shadow" fuzzy="true">\n    Stín zobrazení obrázku výběru polohy</string>
   <string name="image_location">Umístění obrázku</string>
   <string name="check_whether_location_is_correct">Zkontrolujte, zda je umístění správné</string>
   <string name="label">Štítek</string>
@@ -735,6 +739,7 @@
   <string name="wlm_campaign_description">Wiki miluje památky je mezinárodní soutěž týkající se památek, organizovaná Wikimedií</string>
   <string name="need_permission">Je vyžadováno oprávnění</string>
   <string name="read_phone_state_permission_message">Mapy v okolí potřebují ke správné funkčnosti číst STAV TELEFONU</string>
+  <string name="location_permission_rationale">Volitelně: Umožněte aplikaci, aby získávala aktuální polohu a nabízela na jejím základě kategorie</string>
   <string name="contributions_of_user">Příspěvky uživatele: %s</string>
   <string name="achievements_of_user">Úspěchy uživatele: %s</string>
   <string name="menu_view_user_page">Zobrazit profil uživatele</string>
@@ -792,7 +797,7 @@
   <string name="permissions_are_required_for_functionality">Pro funkčnost jsou vyžadována oprávnění</string>
   <string name="learn_how_to_write_a_useful_description">Naučte se, jak psát užitečný popis</string>
   <string name="learn_how_to_write_a_useful_caption">Naučte se, jak psát užitečný popis</string>
-  <string name="see_your_achievements">Podívejte se na své úspěchy</string>
+  <string name="see_your_achievements">Zhlédněte své úspěchy</string>
   <string name="edit_image">Upravit obrázek</string>
   <string name="edit_location">Upravit polohu</string>
   <string name="location_updated">Poloha aktualizována!</string>
@@ -824,6 +829,7 @@
   <string name="talk">Diskuze</string>
   <string name="write_something_about_the_item">Napište komentář o položce „%1$s“. Bude veřejně viditelný.</string>
   <string name="does_not_exist_anymore_no_picture_can_ever_be_taken_of_it">„%1$s“ již neexistuje, nelze z něj již tedy pořídit obrázek.</string>
+  <string name="is_at_a_different_place_wikidata">\'%1$s\' je na odlišném místě.</string>
   <string name="is_at_a_different_place_please_specify_the_correct_place_below_if_possible_tell_us_the_correct_latitude_longitude">„%1$s“ je na jiném místě. Zadejte prosím správné místo, a pokud je to možné, napište správnou zeměpisnou šířku a délku.</string>
   <string name="other_problem_or_information_please_explain_below">Jiný problém nebo informace (vysvětlete prosím níže).</string>
   <string name="feedback_destination_note">Vaše zpětná vazba bude zveřejněna na následující stránce wiki: &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Mobile_app/Feedback\"&gt;Commons:Mobile app/Feedback&lt;/a&gt;</string>
@@ -862,4 +868,5 @@
   <string name="show_in_nearby">Zobrazit v kartě Poblíž</string>
   <string name="image_tag_line_created_and_uploaded_by">Vytvořil/a a nahrál/a: %1$s</string>
   <string name="image_tag_line_created_by_and_uploaded_by">Vytvořeno uživatelem %1$s a nahráno uživatelem %2$s</string>
+  <string name="nominated_for_deletion_btn">Nominováno na smazání</string>
 </resources>

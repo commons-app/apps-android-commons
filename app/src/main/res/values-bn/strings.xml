@@ -177,10 +177,10 @@
   <string name="preference_license">পূর্বনির্ধারিত লাইসেন্স</string>
   <string name="use_previous">পূর্ববর্তী শিরোনাম ও বিবরণ ব্যবহার করুন</string>
   <string name="preference_theme">থিম</string>
-  <string name="license_name_cc_by_sa_four">অ্যাট্রিবিউশন-শেয়ারঅ্যালাইক ৪.০</string>
-  <string name="license_name_cc_by_four">অ্যাট্রিবিউশন ৪.০</string>
-  <string name="license_name_cc_by_sa">অ্যাট্রিবিউশন-শেয়ারঅ্যালাইক ৩.০</string>
-  <string name="license_name_cc_by">সিসিইউ০০এ০এঅ্যাট্রিবিউসনইউ০০এ০৩.০</string>
+  <string name="license_name_cc_by_sa_four" fuzzy="true">অ্যাট্রিবিউশন-শেয়ারঅ্যালাইক ৪.০</string>
+  <string name="license_name_cc_by_four" fuzzy="true">অ্যাট্রিবিউশন ৪.০</string>
+  <string name="license_name_cc_by_sa" fuzzy="true">অ্যাট্রিবিউশন-শেয়ারঅ্যালাইক ৩.০</string>
+  <string name="license_name_cc_by" fuzzy="true">সিসিইউ০০এ০এঅ্যাট্রিবিউসনইউ০০এ০৩.০</string>
   <string name="license_name_cc0">সিসি০</string>
   <string name="license_name_cc_by_sa_3_0">সিসি বাই-এস ৩.০</string>
   <string name="license_name_cc_by_3_0">সিসি বাই ৩.০</string>
@@ -372,7 +372,7 @@
   <string name="statistics_featured">নির্বাচিত ছবি</string>
   <string name="statistics_wikidata_edits">\"কাছাকাছি স্থান\" এর মাধ্যমে ছবি</string>
   <string name="level">স্তর %d</string>
-  <string name="profileLevel">%s (স্তর %s )</string>
+  <string name="profile_withLevel">%s (স্তর %s )</string>
   <string name="images_uploaded">আপলোডকৃত চিত্র</string>
   <string name="image_reverts">ছবিগুলো প্রত্যাবর্তন করা হয়নি</string>
   <string name="images_used_by_wiki">ব্যবহৃত ছবি</string>
@@ -534,6 +534,7 @@
   <string name="learn_more">আরও জানুন</string>
   <string name="wlm_campaign_title">উইকি লাভস মনুমেন্টস</string>
   <string name="need_permission">অনুমতি দরকার</string>
+  <string name="location_permission_rationale">ঐচ্ছিক অনুমতি: বিষয়শ্রেণী পরামর্শের জন্য বর্তমান অবস্থান নেয়</string>
   <string name="contributions_of_user">ব্যবহারকারীর অবদান: %s</string>
   <string name="achievements_of_user">ব্যবহারকারীর অর্জন: %s</string>
   <string name="menu_view_user_page" fuzzy="true">ব্যবহারকারীর পাতা দেখুন</string>

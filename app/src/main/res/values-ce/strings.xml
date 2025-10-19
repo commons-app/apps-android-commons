@@ -139,9 +139,9 @@
   <string name="menu_download">Схьаэца</string>
   <string name="preference_license">Ӏадйитаран кепаца йолу лицензи</string>
   <string name="preference_theme">Кечйар</string>
-  <string name="license_name_cc_by_four"> Attribution 4.0</string>
-  <string name="license_name_cc_by_sa"> Attribution-ShareAlike 3.0</string>
-  <string name="license_name_cc_by"> Attribution 3.0</string>
+  <string name="license_name_cc_by_four" fuzzy="true"> Attribution 4.0</string>
+  <string name="license_name_cc_by_sa" fuzzy="true"> Attribution-ShareAlike 3.0</string>
+  <string name="license_name_cc_by" fuzzy="true"> Attribution 3.0</string>
   <string name="tutorial_4_text">Чуйаккхаран масала:</string>
   <string name="tutorial_4_subtext_1">ЦӀе: Сиднейн операн театр</string>
   <string name="welcome_final_button_text">ХӀаъ!</string>
@@ -379,7 +379,7 @@
   <string name="wikipedia_instructions_step_3">3. Хьайн суьртана догӀу йаззаман дакъа лаха</string>
   <string name="wikipedia_instructions_step_4">4. «Хийца» иконкин тӀетаӀайе (къоламах тера йу) хӀокху декъана</string>
   <string name="wikipedia_instructions_step_5">5. Вики-код йогӀучу метте дӀайазйе</string>
-  <string name="wikipedia_instructions_step_7">7. Йаззам дӀайазбе</string>
+  <string name="wikipedia_instructions_step_7">7. Йаззам дӀайазбан</string>
   <string name="copy_wikicode_to_clipboard">Вики-код буфер чу копийе</string>
   <string name="pause">пауза</string>
   <string name="resume">кхидӀа</string>

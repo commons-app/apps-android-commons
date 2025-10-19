@@ -21,11 +21,13 @@ import fr.free.nrw.commons.databinding.ActivityProfileBinding
 import fr.free.nrw.commons.profile.achievements.AchievementsFragment
 import fr.free.nrw.commons.profile.leaderboard.LeaderboardFragment
 import fr.free.nrw.commons.theme.BaseActivity
+import fr.free.nrw.commons.utils.applyEdgeToEdgeAllInsets
 import fr.free.nrw.commons.utils.DialogUtil
 import java.io.File
 import java.io.FileOutputStream
 import java.util.Locale
 import javax.inject.Inject
+import timber.log.Timber
 
 /**
  * This activity will set two tabs, achievements and
@@ -46,7 +48,7 @@ class ProfileActivity : BaseActivity() {
     private var contributionsFragment: ContributionsFragment? = null
 
     fun setScroll(canScroll: Boolean) {
-        binding.viewPager.setCanScroll(canScroll)
+        binding.viewPager.canScroll = canScroll
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
@@ -61,6 +63,7 @@ class ProfileActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
 
         binding = ActivityProfileBinding.inflate(layoutInflater)
+        applyEdgeToEdgeAllInsets(binding.root)
         setContentView(binding.root)
         setSupportActionBar(binding.toolbarBinding.toolbar)
 
@@ -120,7 +123,7 @@ class ProfileActivity : BaseActivity() {
                 val rootView = window.decorView.findViewById<View>(android.R.id.content)
                 val screenShot = getScreenShot(rootView)
                 if (screenShot == null) {
-                    Log.e("ERROR", "ScreenShot is null")
+                    Timber.e("ScreenShot is null")
                     return false
                 }
                 showAlert(screenShot)

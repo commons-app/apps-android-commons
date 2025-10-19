@@ -168,8 +168,7 @@ class ImageAdapter(
 
                     // Getting selected index when switch is off
                 } else if (actionableImagesMap.size > position) {
-                    ImageHelper
-                        .getIndex(selectedImages, ArrayList(actionableImagesMap.values)[position])
+                    ImageHelper.getIndex(selectedImages, ArrayList(actionableImagesMap.values)[position])
 
                     // For any other case return -1
                 } else {
@@ -348,8 +347,14 @@ class ImageAdapter(
                 numberOfSelectedImagesMarkedAsNotForUpload--
             }
             notifyItemChanged(position, ImageUnselected())
+            // Notify listener of deselection to update UI
+            imageSelectListener.onSelectedImagesChanged(selectedImages, numberOfSelectedImagesMarkedAsNotForUpload)
         } else {
-            val image = images[position]
+            // Prevent adding the same image multiple times
+            val image = if (showAlreadyActionedImages) images[position] else ArrayList(actionableImagesMap.values)[position]
+            if (selectedImages.contains(image)) {
+                return // Image already selected, ignore additional clicks
+            }
             scope.launch(ioDispatcher) {
                 val imageSHA1 = imageLoader.getSHA1(image, defaultDispatcher)
                 withContext(Dispatchers.Main) {
@@ -373,7 +378,6 @@ class ImageAdapter(
                     }
                     selectedImages.add(image)
                     notifyItemChanged(position, ImageSelectedOrUpdated())
-
                     imageSelectListener.onSelectedImagesChanged(selectedImages, numberOfSelectedImagesMarkedAsNotForUpload)
                 }
             }

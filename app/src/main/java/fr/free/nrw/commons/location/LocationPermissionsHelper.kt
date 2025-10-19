@@ -64,8 +64,8 @@ class LocationPermissionsHelper(
                     activity,
                     activity.getString(dialogTitleResource),
                     activity.getString(dialogTextResource),
-                    activity.getString(android.R.string.ok),
-                    activity.getString(android.R.string.cancel),
+                    activity.getString(R.string.ok),
+                    activity.getString(R.string.cancel),
                     {
                         ActivityCompat.requestPermissions(
                             activity,

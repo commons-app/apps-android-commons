@@ -166,10 +166,10 @@
   <string name="preference_license">مجوز پیش‌فرض</string>
   <string name="use_previous">از عنوان/توضیحات پیشین استفاده کن</string>
   <string name="preference_theme">پوسته</string>
-  <string name="license_name_cc_by_sa_four">CC Attribution-ShareAlike 4.0</string>
-  <string name="license_name_cc_by_four">Attribution 4.0</string>
-  <string name="license_name_cc_by_sa">CC Attribution-ShareAlike 3.0</string>
-  <string name="license_name_cc_by">CC Attribution 3.0</string>
+  <string name="license_name_cc_by_sa_four" fuzzy="true">CC Attribution-ShareAlike 4.0</string>
+  <string name="license_name_cc_by_four" fuzzy="true">Attribution 4.0</string>
+  <string name="license_name_cc_by_sa" fuzzy="true">CC Attribution-ShareAlike 3.0</string>
+  <string name="license_name_cc_by" fuzzy="true">CC Attribution 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
@@ -494,6 +494,7 @@
   <string name="display_monuments">نمایش یادمان‌ها</string>
   <string name="wlm_month_message">این ماه، ماه «ویکی دوست‌دار یادمان‌ها» است!</string>
   <string name="learn_more">بیشتر بدانید</string>
+  <string name="location_permission_rationale">اجازه‌های اختیاری: دریافت موقعیت برای پیشنهاد رده</string>
   <string name="menu_view_user_page" fuzzy="true">نمایش صفحهٔ کاربر</string>
   <string name="advanced_options">گزینه‌های پیشرفته</string>
   <string name="apply">اعمال</string>

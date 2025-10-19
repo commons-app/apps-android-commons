@@ -288,7 +288,7 @@ class BookmarkListRootFragmentUnitTest {
     @Test
     @Throws(Exception::class)
     fun testOnItemClick() {
-        fragment.onItemClick(null, null, 0, 0)
+        fragment.onItemClick(null, view, 0, 0)
         verify(childFragmentManager).beginTransaction()
         verify(childFragmentTransaction).commit()
         verify(childFragmentManager).executePendingTransactions()

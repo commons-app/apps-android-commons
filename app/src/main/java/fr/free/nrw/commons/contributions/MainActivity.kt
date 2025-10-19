@@ -34,6 +34,7 @@ import fr.free.nrw.commons.quiz.QuizChecker
 import fr.free.nrw.commons.settings.SettingsFragment
 import fr.free.nrw.commons.startWelcome
 import fr.free.nrw.commons.theme.BaseActivity
+import fr.free.nrw.commons.utils.applyEdgeToEdgeAllInsets
 import fr.free.nrw.commons.upload.UploadProgressActivity
 import fr.free.nrw.commons.upload.worker.WorkRequestHelper.Companion.makeOneTimeWorkRequest
 import fr.free.nrw.commons.utils.ViewUtilWrapper
@@ -112,6 +113,7 @@ class MainActivity : BaseActivity(), FragmentManager.OnBackStackChangedListener 
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = MainBinding.inflate(layoutInflater)
+        applyEdgeToEdgeAllInsets(binding!!.root)
         setContentView(binding!!.root)
         setSupportActionBar(binding!!.toolbarBinding.toolbar)
         tabLayout = binding!!.fragmentMainNavTabLayout
@@ -151,21 +153,7 @@ after opening the app.
                 }
             }
             setUpPager()
-            /**
-             * Ask the user for media location access just after login
-             * so that location in the EXIF metadata of the images shared by the user
-             * is retained on devices running Android 10 or above
-             */
-//            if (VERSION.SDK_INT >= VERSION_CODES.Q) {
-//                ActivityCompat.requestPermissions(this,
-//                    new String[]{Manifest.permission.ACCESS_MEDIA_LOCATION}, 0);
-//                PermissionUtils.checkPermissionsAndPerformAction(
-//                    this,
-//                    () -> {},
-//                    R.string.media_location_permission_denied,
-//                    R.string.add_location_manually,
-//                    permission.ACCESS_MEDIA_LOCATION);
-//            }
+
             checkAndResumeStuckUploads()
         }
     }
@@ -336,7 +324,7 @@ after opening the app.
         )
             .subscribeOn(Schedulers.io())
             .blockingGet()
-        Timber.d("Resuming " + stuckUploads.size + " uploads...")
+        Timber.d("Resuming %d uploads...", stuckUploads.size)
         if (!stuckUploads.isEmpty()) {
             for (contribution in stuckUploads) {
                 contribution.state = Contribution.STATE_QUEUED

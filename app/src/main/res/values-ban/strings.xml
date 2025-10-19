@@ -23,7 +23,7 @@
   <string name="nearby_all">Makejang</string>
   <string name="nearby_filter_toggle">Alih Duur</string>
   <string name="nearby_filter_search">Cingakan Panyelehan</string>
-  <string name="nearby_filter_state">Genah Negara</string>
+  <string name="nearby_filter_state">Genah Pernyataan</string>
   <string name="appwidget_img">Gambar rahina mangkin</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">%1$d berkas kaunggah</item>
@@ -136,10 +136,10 @@
   <string name="preference_license">Lisénsi baku</string>
   <string name="use_previous">Anggén murda miwah pidarta sadurungné</string>
   <string name="preference_theme">Téma</string>
-  <string name="license_name_cc_by_sa_four">Atribusi-MawagiSarupa 4.0</string>
-  <string name="license_name_cc_by_four">Atribusi 4.0</string>
-  <string name="license_name_cc_by_sa">Atribusi-MawagiSarupa 3.0</string>
-  <string name="license_name_cc_by">Atribusi 3.0</string>
+  <string name="license_name_cc_by_sa_four" fuzzy="true">Atribusi-MawagiSarupa 4.0</string>
+  <string name="license_name_cc_by_four" fuzzy="true">Atribusi 4.0</string>
+  <string name="license_name_cc_by_sa" fuzzy="true">Atribusi-MawagiSarupa 3.0</string>
+  <string name="license_name_cc_by" fuzzy="true">Atribusi 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
@@ -270,7 +270,7 @@
   <string name="statistics">Statistik</string>
   <string name="statistics_thanks">Haturan Suksma Katampi</string>
   <string name="statistics_featured">Gambar Pilihan</string>
-  <string name="level" fuzzy="true">Tingkat</string>
+  <string name="level">Tingkat %d</string>
   <string name="images_uploaded">Gambar Kaupload</string>
   <string name="images_used_by_wiki">Gambar Kaanggén</string>
   <string name="contributions_fragment">Pituut</string>

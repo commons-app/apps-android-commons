@@ -117,10 +117,10 @@
   <string name="preference_license">လာင်ဇြေန် နူတမ်</string>
   <string name="use_previous">စုတ် က္ဍိုပ်လိက် ကေုာံ ဗမံက်ထ္ၜး တၞဟ်ခြာညိ</string>
   <string name="preference_theme">ပရူပရာ</string>
-  <string name="license_name_cc_by_sa_four"> Attribution-ShareAlike 4.0</string>
-  <string name="license_name_cc_by_four"> Attribution 4.0</string>
-  <string name="license_name_cc_by_sa"> Attribution-ShareAlike 3.0</string>
-  <string name="license_name_cc_by"> Attribution 3.0</string>
+  <string name="license_name_cc_by_sa_four" fuzzy="true"> Attribution-ShareAlike 4.0</string>
+  <string name="license_name_cc_by_four" fuzzy="true"> Attribution 4.0</string>
+  <string name="license_name_cc_by_sa" fuzzy="true"> Attribution-ShareAlike 3.0</string>
+  <string name="license_name_cc_by" fuzzy="true"> Attribution 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
@@ -226,7 +226,7 @@
   <string name="nearby_location_not_available">ဗဒင်ဏအ် ဟွံကၠောန်ကမၠောန် ဗွဲဓမ္မတာ၊ ဒၞာဲဒတန် ဟွံသၟဟ်အစောမ်။</string>
   <string name="location_permission_rationale_nearby">အာတ်မိက်ဒၟံင် အခေါင် သွက်ဂွံထ္ၜး စရင်ဒၞာဲဒတန် ဗဒင်ဗဒင်</string>
   <string name="nearby_directions">စမၞောန်ဂမၠိုင်</string>
-  <string name="nearby_wikidata">ဝဳကဳဒါတာ</string>
+  <string name="nearby_wikidata">ဝဳကဳတင်ဂၞင်</string>
   <string name="nearby_wikipedia" fuzzy="true">ဝဳကဳပဳဒဳယာ</string>
   <string name="nearby_commons">ခမ်မောန်</string>
   <string name="about_rate_us">ကဵုင္ၚုဟ် ကုပိုယ်</string>
@@ -275,4 +275,5 @@
   <string name="done">တုဲဒှ်</string>
   <string name="back">ကလေင်</string>
   <string name="welcome_custom_selector_ok">သေသာတ်</string>
+  <string name="location_permission_rationale">အခေါင်မပိုင်ပြဳ: ကေတ် ဒတန်ဒၞာဲ မနွံဒၟံင်လၟုဟ် သွက်ဂွံစုတ် ပ္ဍဲကဏ္ဍ</string>
 </resources>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
 * Alan ffm
+* Atvalerie
 * Chrumps
 * CiaPan
 * Dawidg81
@@ -194,10 +195,10 @@
   <string name="preference_license">Domyślna licencja</string>
   <string name="use_previous">Użyj poprzedniego tytułu i opisu</string>
   <string name="preference_theme">Motyw</string>
-  <string name="license_name_cc_by_sa_four">Uznanie autorstwa-Na tych samych warunkach 4.0</string>
-  <string name="license_name_cc_by_four">Uznanie autorstwa 4.0</string>
-  <string name="license_name_cc_by_sa"> Uznanie autorstwa-Na tych samych warunkach 3.0</string>
-  <string name="license_name_cc_by"> Uznanie autorstwa 3.0</string>
+  <string name="license_name_cc_by_sa_four" fuzzy="true">Uznanie autorstwa-Na tych samych warunkach 4.0</string>
+  <string name="license_name_cc_by_four" fuzzy="true">Uznanie autorstwa 4.0</string>
+  <string name="license_name_cc_by_sa" fuzzy="true"> Uznanie autorstwa-Na tych samych warunkach 3.0</string>
+  <string name="license_name_cc_by" fuzzy="true"> Uznanie autorstwa 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
@@ -408,7 +409,7 @@
   <string name="statistics_featured">Wyróżnione ilustracje</string>
   <string name="statistics_wikidata_edits">Obrazy za pośrednictwem \"Pobliskie miejsca\"</string>
   <string name="level">Poziom %d</string>
-  <string name="profileLevel">%s (Poziom %s)</string>
+  <string name="profile_withLevel">%s (Poziom %s)</string>
   <string name="images_uploaded">Przesłane obrazy</string>
   <string name="image_reverts">Nie wycofane obrazy</string>
   <string name="images_used_by_wiki">Wykorzystane obrazy</string>
@@ -738,6 +739,7 @@
   <string name="wlm_campaign_description">Wiki Loves Monuments (Wiki Kocha Zabytki) to międzynarodowy konkurs fotograficzny skoncentrowany na zabytkach, organizowany przez Wikimedia</string>
   <string name="need_permission">Wymagane uprawnienie</string>
   <string name="read_phone_state_permission_message">Mapy znajdujące się w pobliżu muszą odczytywać STAN TELEFONU, aby działały poprawnie</string>
+  <string name="location_permission_rationale">Opcjonalne zezwolenie: uzyskiwanie bieżącej lokalizacji dla wygenerowania propozycji kategorii</string>
   <string name="contributions_of_user">Wkład użytkownika: %s</string>
   <string name="achievements_of_user">Osiągnięcia użytkownika: %s</string>
   <string name="menu_view_user_page">Wyświetl profil użytkownika</string>

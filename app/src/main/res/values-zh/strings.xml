@@ -208,6 +208,9 @@
   <string name="no_uploads_yet">您还没有上传任何照片。</string>
   <string name="menu_retry_upload">重试</string>
   <string name="menu_cancel_upload">取消</string>
+  <string name="language_search_type_language_name">类型 语言 名称</string>
+  <string name="language_search_recent_searches">近期搜索</string>
+  <string name="language_search_all_languages">所有语言</string>
   <string name="media_upload_policy">通过提交该图片，我声明这是我自己的作品，其不包含受版权保护的材料或自拍像，并遵循&lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;维基共享资源&lt;/a&gt;方针。</string>
   <string name="menu_download">下载</string>
   <string name="preference_license">默认许可协议</string>
@@ -269,6 +272,7 @@
   <string name="media_detail_description">描述</string>
   <string name="media_detail_discussion">讨论</string>
   <string name="media_detail_author">作者</string>
+  <string name="media_detail_uploader">上传者</string>
   <string name="media_detail_uploaded_date">上传日期</string>
   <string name="media_detail_license">许可协议</string>
   <string name="media_detail_coordinates">坐标</string>
@@ -319,6 +323,7 @@
   <string name="upload_connection_error_alert_detail">上传过程需要有效的互联网访问。请检查您的网络连接。</string>
   <string name="upload_problem_image">在图片中发现的问题</string>
   <string name="internet_downloaded">请仅上传由您自己拍摄的图像。请勿上传您从互联网下载的图像。</string>
+  <string name="preferences_uploads">上传</string>
   <string name="use_external_storage">保存应用程序内截图</string>
   <string name="use_external_storage_summary">将您设备内部照相机应用拍摄的照片保存至您的设备存储中</string>
   <string name="login_to_your_account">登录您的账户</string>
@@ -427,7 +432,8 @@
   <string name="statistics_featured">特色图片</string>
   <string name="statistics_wikidata_edits">来自“附近地点”的图片</string>
   <string name="level">等级%d</string>
-  <string name="profileLevel">%s（%s級）</string>
+  <string name="profile_withLevel">%s（%s級）</string>
+  <string name="profile_withoutLevel">%s（%s）</string>
   <string name="images_uploaded">已上传图片</string>
   <string name="image_reverts">未还原图片</string>
   <string name="images_used_by_wiki">使用过的图片</string>
@@ -492,6 +498,8 @@
   <string name="ends_on">结束时间：</string>
   <string name="display_campaigns">显示活动</string>
   <string name="display_campaigns_explanation">显示正在进行的活动</string>
+  <string name="show_deletion_button">显示删除按钮</string>
+  <string name="show_deletion_button_explanation">在自定义选择器中启用“删除文件夹”按钮</string>
   <string name="in_app_camera_location_access_explanation">允许应用获取位置，以防相机未记录位置。某些设备的相机不记录位置。在这种情况下，让应用获取位置并将其附加到照片可以让您的贡献更有用。您可以随时从“设置”中更改此设置</string>
   <string name="option_allow">允许</string>
   <string name="option_dismiss">拒绝</string>
@@ -635,6 +643,8 @@
   <string name="title_for_media">媒体</string>
   <string name="title_for_child_classes">子类别</string>
   <string name="title_for_parent_classes">父类别</string>
+  <string name="title_for_subcategories">子分类</string>
+  <string name="title_for_parent_categories">父级分类</string>
   <string name="upload_nearby_place_found_title">找到附近地点</string>
   <string name="upload_nearby_place_found_description_plural">这些是%1$s的图片吗？</string>
   <string name="upload_nearby_place_found_description_singular">这是%1$s的图片吗？</string>
@@ -754,6 +764,8 @@
   <string name="wlm_campaign_description">维基爱古迹是由维基媒体举行的国际古迹摄影比赛</string>
   <string name="need_permission">需要权限</string>
   <string name="read_phone_state_permission_message">附近地图需要读取手机状态权限以正常运行</string>
+  <string name="location_off_dialog_text">请打开定位服务，以查看附近的地点。</string>
+  <string name="location_permission_rationale">可选权限：获取当前位置以提供分类建议</string>
   <string name="contributions_of_user">用户贡献：%s</string>
   <string name="achievements_of_user">用户成就：%s</string>
   <string name="menu_view_user_page">查看用户个人资料</string>
@@ -811,7 +823,7 @@
   <string name="permissions_are_required_for_functionality">功能需要权限</string>
   <string name="learn_how_to_write_a_useful_description">了解如何写出有用的描述</string>
   <string name="learn_how_to_write_a_useful_caption">了解如何写出有用的注释</string>
-  <string name="see_your_achievements">查看您的成果</string>
+  <string name="see_your_achievements">查看您的成就</string>
   <string name="edit_image">编辑图片</string>
   <string name="edit_location">编辑位置</string>
   <string name="location_updated">位置已更新！</string>

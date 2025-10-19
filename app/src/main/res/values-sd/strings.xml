@@ -139,10 +139,10 @@
   <string name="preference_license">ڏنل اجازتنامو</string>
   <string name="use_previous">گذريل عنوان ۽ تشريح استعمال ڪريو</string>
   <string name="preference_theme">ڏيک</string>
-  <string name="license_name_cc_by_sa_four">انتساب-ھجھڙي ڀاڱيداري 4.0</string>
-  <string name="license_name_cc_by_four">وصف 4.0</string>
-  <string name="license_name_cc_by_sa">انتساب-ھڪجھڙي-ونڊ 3.0</string>
-  <string name="license_name_cc_by">ڪڪ انتساب 3.0</string>
+  <string name="license_name_cc_by_sa_four" fuzzy="true">انتساب-ھجھڙي ڀاڱيداري 4.0</string>
+  <string name="license_name_cc_by_four" fuzzy="true">وصف 4.0</string>
+  <string name="license_name_cc_by_sa" fuzzy="true">انتساب-ھڪجھڙي-ونڊ 3.0</string>
+  <string name="license_name_cc_by" fuzzy="true">ڪڪ انتساب 3.0</string>
   <string name="license_name_cc0">ڪڪ0</string>
   <string name="license_name_cc_by_sa_3_0">ڪڪ بو-سا 3.0</string>
   <string name="license_name_cc_by_3_0">ڪڪ BY 3.0</string>
@@ -340,4 +340,5 @@
   <string name="media_detail_in_all_languages">سڀ ٻوليون</string>
   <string name="label">ليبل</string>
   <string name="description">تشريح</string>
+  <string name="location_permission_rationale">چونڊ اجازت: زمرن جي تجويزن لاءِ ھاڻوڪي مڪانيت وٺو</string>
 </resources>

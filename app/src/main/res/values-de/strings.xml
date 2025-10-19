@@ -197,10 +197,10 @@
   <string name="preference_license">Standardlizenz</string>
   <string name="use_previous">Vorherigen Titel und Beschreibung verwenden</string>
   <string name="preference_theme">Farbschema</string>
-  <string name="license_name_cc_by_sa_four">Attribution-ShareAlike 4.0</string>
-  <string name="license_name_cc_by_four">Attribution 4.0</string>
-  <string name="license_name_cc_by_sa">Attribution-ShareAlike 3.0</string>
-  <string name="license_name_cc_by">Attribution 3.0</string>
+  <string name="license_name_cc_by_sa_four" fuzzy="true">Attribution-ShareAlike 4.0</string>
+  <string name="license_name_cc_by_four" fuzzy="true">Attribution 4.0</string>
+  <string name="license_name_cc_by_sa" fuzzy="true">Attribution-ShareAlike 3.0</string>
+  <string name="license_name_cc_by" fuzzy="true">Attribution 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_3_0">CC-BY 3.0</string>
@@ -411,7 +411,7 @@
   <string name="statistics_featured">Vorgestellte Bilder</string>
   <string name="statistics_wikidata_edits">Bilder über „Orte in der Nähe“</string>
   <string name="level">Level %d</string>
-  <string name="profileLevel">%s (Level %s)</string>
+  <string name="profile_withLevel">%s (Level %s)</string>
   <string name="images_uploaded">Hochgeladene Bilder</string>
   <string name="image_reverts">Bilder nicht zurückgesetzt</string>
   <string name="images_used_by_wiki">Verwendete Bilder</string>
@@ -736,6 +736,7 @@
   <string name="wlm_campaign_description">Wiki Loves Monuments ist ein internationaler Fotowettbewerb für Denkmäler, der von Wikimedia organisiert wird.</string>
   <string name="need_permission">Erlaubnis erforderlich</string>
   <string name="read_phone_state_permission_message">Karten in der Nähe müssen den Telefonstatus lesen können, um richtig zu funktionieren</string>
+  <string name="location_permission_rationale">Optionale Berechtigung: Ruft den aktuellen Standort für Kategorievorschläge ab</string>
   <string name="contributions_of_user">Beiträge von Benutzer: %s</string>
   <string name="achievements_of_user">Erfolge des Benutzers: %s</string>
   <string name="menu_view_user_page">Benutzerseite ansehen</string>

@@ -137,10 +137,10 @@
   <string name="preference_license">అప్రమేయ లైసెన్సు</string>
   <string name="use_previous">మునుపటి శీర్షిక, వివరణను వాడు</string>
   <string name="preference_theme">అలంకారం</string>
-  <string name="license_name_cc_by_sa_four"> Attribution-ShareAlike 4.0</string>
-  <string name="license_name_cc_by_four"> Attribution 4.0</string>
-  <string name="license_name_cc_by_sa"> Attribution-ShareAlike 3.0</string>
-  <string name="license_name_cc_by"> Attribution 3.0</string>
+  <string name="license_name_cc_by_sa_four" fuzzy="true"> Attribution-ShareAlike 4.0</string>
+  <string name="license_name_cc_by_four" fuzzy="true"> Attribution 4.0</string>
+  <string name="license_name_cc_by_sa" fuzzy="true"> Attribution-ShareAlike 3.0</string>
+  <string name="license_name_cc_by" fuzzy="true"> Attribution 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
@@ -609,6 +609,7 @@
   <string name="custom_selector_already_uploaded_image_text">ఈ బొమ్మను ఈసరికే కామన్స్ లోకి ఎక్కించారు.</string>
   <string name="learn_more">మరింత తెలుసుకోండి</string>
   <string name="need_permission">అనుమతి కావాలి</string>
+  <string name="location_permission_rationale">ఐచ్ఛిక అనుమతి: వర్గాల సూచనల కోసం ప్రస్తుత స్థలాన్ని తెచ్చుకో</string>
   <string name="contributions_of_user">వాడుకరి తోడ్పాట్లు: %s</string>
   <string name="achievements_of_user">వాడుకరి సాధించినవి: %s</string>
   <string name="menu_view_user_page" fuzzy="true">వాడుకరి పేజీ చూడండి</string>

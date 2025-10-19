@@ -22,6 +22,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.app.NavUtils
 import androidx.core.content.ContextCompat
+import androidx.core.view.WindowCompat
 import fr.free.nrw.commons.BuildConfig
 import fr.free.nrw.commons.CommonsApplication
 import fr.free.nrw.commons.R
@@ -32,11 +33,13 @@ import fr.free.nrw.commons.contributions.MainActivity
 import fr.free.nrw.commons.databinding.ActivityLoginBinding
 import fr.free.nrw.commons.di.ApplicationlessInjection
 import fr.free.nrw.commons.kvstore.JsonKvStore
+import fr.free.nrw.commons.utils.applyEdgeToEdgeAllInsets
 import fr.free.nrw.commons.utils.AbstractTextWatcher
 import fr.free.nrw.commons.utils.ActivityUtils.startActivityWithFlags
 import fr.free.nrw.commons.utils.ConfigUtils.isBetaFlavour
 import fr.free.nrw.commons.utils.SystemThemeUtils
 import fr.free.nrw.commons.utils.ViewUtil.hideKeyboard
+import fr.free.nrw.commons.utils.handleKeyboardInsets
 import fr.free.nrw.commons.utils.handleWebUrl
 import io.reactivex.disposables.CompositeDisposable
 import timber.log.Timber
@@ -79,7 +82,14 @@ class LoginActivity : AccountAuthenticatorActivity() {
         delegate.installViewFactory()
         delegate.onCreate(savedInstanceState)
 
+        WindowCompat.getInsetsController(window, window.decorView)
+            .isAppearanceLightStatusBars = !isDarkTheme
+
+        WindowCompat.setDecorFitsSystemWindows(window, false)
+
         binding = ActivityLoginBinding.inflate(layoutInflater)
+        applyEdgeToEdgeAllInsets(binding!!.root)
+        binding?.aboutPrivacyPolicy?.handleKeyboardInsets()
         with(binding!!) {
             setContentView(root)
 
@@ -92,7 +102,19 @@ class LoginActivity : AccountAuthenticatorActivity() {
             aboutPrivacyPolicy.setOnClickListener { onPrivacyPolicyClicked() }
             signUpButton.setOnClickListener { signUp() }
             loginButton.setOnClickListener { performLogin() }
-            loginPassword.setOnEditorActionListener(::onEditorAction)
+            loginPassword.setOnEditorActionListener { textView, actionId, keyEvent ->
+                if (binding!!.loginButton.isEnabled && isTriggerAction(actionId, keyEvent)) {
+                    if (actionId == EditorInfo.IME_ACTION_NEXT && lastLoginResult != null) {
+                        askUserForTwoFactorAuthWithKeyboard()
+                        true
+                    } else {
+                        performLogin()
+                        true
+                    }
+                } else {
+                    false
+                }
+            }
 
             loginPassword.onFocusChangeListener =
                 View.OnFocusChangeListener(::onPasswordFocusChanged)
@@ -113,6 +135,39 @@ class LoginActivity : AccountAuthenticatorActivity() {
         }
     }
 
+    @VisibleForTesting
+    fun askUserForTwoFactorAuthWithKeyboard() {
+        if (binding == null) {
+            Timber.w("Binding is null, reinitializing in askUserForTwoFactorAuthWithKeyboard")
+            binding = ActivityLoginBinding.inflate(layoutInflater)
+            setContentView(binding!!.root)
+        }
+        progressDialog!!.dismiss()
+        if (binding != null) {
+            with(binding!!) {
+                twoFactorContainer.visibility = View.VISIBLE
+                twoFactorContainer.hint = getString(if (lastLoginResult is LoginResult.EmailAuthResult) R.string.email_auth_code else R.string._2fa_code)
+                loginTwoFactor.visibility = View.VISIBLE
+                loginTwoFactor.requestFocus()
+
+                val imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+                imm.showSoftInput(loginTwoFactor, InputMethodManager.SHOW_IMPLICIT)
+
+                loginTwoFactor.setOnEditorActionListener { _, actionId, event ->
+                    if (actionId == EditorInfo.IME_ACTION_DONE ||
+                        (event != null && event.keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_DOWN)) {
+                        performLogin()
+                        true
+                    } else {
+                        false
+                    }
+                }
+            }
+        } else {
+            Timber.e("Binding is null in askUserForTwoFactorAuthWithKeyboard after reinitialization attempt")
+        }
+        showMessageAndCancelDialog(getString(if (lastLoginResult is LoginResult.EmailAuthResult) R.string.login_failed_email_auth_needed else R.string.login_failed_2fa_needed))
+    }
     override fun onPostCreate(savedInstanceState: Bundle?) {
         super.onPostCreate(savedInstanceState)
         delegate.onPostCreate(savedInstanceState)
@@ -236,7 +291,7 @@ class LoginActivity : AccountAuthenticatorActivity() {
         } else false
 
     private fun isTriggerAction(actionId: Int, keyEvent: KeyEvent?) =
-        actionId == EditorInfo.IME_ACTION_DONE || keyEvent?.keyCode == KeyEvent.KEYCODE_ENTER
+        actionId == EditorInfo.IME_ACTION_NEXT || actionId == EditorInfo.IME_ACTION_DONE || keyEvent?.keyCode == KeyEvent.KEYCODE_ENTER
 
     private fun skipLogin() {
         AlertDialog.Builder(this)
@@ -286,14 +341,14 @@ class LoginActivity : AccountAuthenticatorActivity() {
                     Timber.d("Requesting 2FA prompt")
                     progressDialog!!.dismiss()
                     lastLoginResult = loginResult
-                    askUserForTwoFactorAuth()
+                    askUserForTwoFactorAuthWithKeyboard()
                 }
 
-                override fun emailAuthPrompt(loginResult: LoginResult, caught: Throwable, token: String?) {
+                override fun emailAuthPrompt(loginResult: LoginResult, caught: Throwable, token: String?) = runOnUiThread {
                     Timber.d("Requesting email auth prompt")
                     progressDialog!!.dismiss()
                     lastLoginResult = loginResult
-                    askUserForTwoFactorAuth()
+                    askUserForTwoFactorAuthWithKeyboard()
                 }
 
                 override fun passwordResetPrompt(token: String?) = runOnUiThread {
@@ -348,12 +403,31 @@ class LoginActivity : AccountAuthenticatorActivity() {
 
     @VisibleForTesting
     fun askUserForTwoFactorAuth() {
+        if (binding == null) {
+            Timber.w("Binding is null, reinitializing in askUserForTwoFactorAuth")
+            binding = ActivityLoginBinding.inflate(layoutInflater)
+            setContentView(binding!!.root)
+        }
         progressDialog!!.dismiss()
-        with(binding!!) {
-            twoFactorContainer.visibility = View.VISIBLE
-            twoFactorContainer.hint = getString(if (lastLoginResult is LoginResult.EmailAuthResult) R.string.email_auth_code else R.string._2fa_code)
-            loginTwoFactor.visibility = View.VISIBLE
-            loginTwoFactor.requestFocus()
+        if (binding != null) {
+            with(binding!!) {
+                twoFactorContainer.visibility = View.VISIBLE
+                twoFactorContainer.hint = getString(if (lastLoginResult is LoginResult.EmailAuthResult) R.string.email_auth_code else R.string._2fa_code)
+                loginTwoFactor.visibility = View.VISIBLE
+                loginTwoFactor.requestFocus()
+
+                loginTwoFactor.setOnEditorActionListener { _, actionId, event ->
+                    if (actionId == EditorInfo.IME_ACTION_DONE ||
+                        (event != null && event.keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_DOWN)) {
+                        performLogin()
+                        true
+                    } else {
+                        false
+                    }
+                }
+            }
+        } else {
+            Timber.e("Binding is null in askUserForTwoFactorAuth after reinitialization attempt")
         }
         val imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
         imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY)

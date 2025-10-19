@@ -125,10 +125,10 @@
   <string name="preference_license">Trwydded Ddiofyn (\'default\')</string>
   <string name="use_previous" fuzzy="true">Defnydiwch y teitl/disgrifiad blaenorol</string>
   <string name="preference_theme">Thema</string>
-  <string name="license_name_cc_by_sa_four"> Attribution-ShareAlike 4.0</string>
-  <string name="license_name_cc_by_four"> Attribution 4.0</string>
-  <string name="license_name_cc_by_sa">CC Attribution-ShareAlike 3.0</string>
-  <string name="license_name_cc_by">CC Attribution 3.0</string>
+  <string name="license_name_cc_by_sa_four" fuzzy="true"> Attribution-ShareAlike 4.0</string>
+  <string name="license_name_cc_by_four" fuzzy="true"> Attribution 4.0</string>
+  <string name="license_name_cc_by_sa" fuzzy="true">CC Attribution-ShareAlike 3.0</string>
+  <string name="license_name_cc_by" fuzzy="true">CC Attribution 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
@@ -301,6 +301,7 @@
   <string name="description">Disgrifiad</string>
   <string name="title_page_bookmarks_items">Eitemau</string>
   <string name="learn_more">DYSGU MWY</string>
+  <string name="location_permission_rationale">Caniatad opsiynol: Ceisio\'r lleoliad cyfoes ar gyfer categoriau</string>
   <string name="reset">Ailosod</string>
   <string name="explore_map_details">Manylion</string>
   <string name="api_level">Lefel API</string>

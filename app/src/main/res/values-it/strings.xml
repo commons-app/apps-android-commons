@@ -12,6 +12,7 @@
 * Dream Indigo
 * Emabarto01
 * Gianfranco
+* Giorgx12
 * Lorelai87
 * Lorem Ipsum
 * Luca.favorido
@@ -55,7 +56,7 @@
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
-  <string name="starting_uploads">Avvio del caricamento</string>
+  <string name="starting_uploads">Avvio caricamenti</string>
   <plurals name="starting_multiple_uploads">
     <item quantity="one">Elaborando %d caricamento</item>
     <item quantity="other">Elaborando %d caricamenti</item>
@@ -143,7 +144,7 @@
   <string name="categories_search_text_hint">Cerca categorie</string>
   <string name="depicts_search_text_hint">Cerca elementi che il tuo file rappresenta (montagna, Taj Mahal, ecc.)</string>
   <string name="menu_save_categories">Salva</string>
-  <string name="menu_overflow_desc">Menu overflow</string>
+  <string name="menu_overflow_desc">Menu di overflow</string>
   <string name="refresh_button">Aggiorna</string>
   <string name="display_list_button">Elenco</string>
   <string name="contributions_subtitle_zero">(Non è stato ancora caricato niente)</string>
@@ -172,15 +173,16 @@
   <string name="no_uploads_yet">Non hai ancora caricato alcuna foto.</string>
   <string name="menu_retry_upload">Riprova</string>
   <string name="menu_cancel_upload">Annulla</string>
+  <string name="language_search_recent_searches">Ricerche recenti</string>
   <string name="media_upload_policy">Caricando questa immagine, dichiaro che questa è una mia opera, che non contiene materiale protetto da copyright o ritratti, e che comunque è conforme alle &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Policy di Wikimedia Commons&lt;/a&gt;.</string>
   <string name="menu_download">Scarica</string>
   <string name="preference_license">Licenza predefinita</string>
   <string name="use_previous">Utilizza titolo e descrizione precedenti</string>
   <string name="preference_theme">Tema</string>
-  <string name="license_name_cc_by_sa_four"> Attribuzione-Condividi allo stesso modo 4.0</string>
-  <string name="license_name_cc_by_four"> Attribuzione 4.0</string>
-  <string name="license_name_cc_by_sa"> Attribuzione-Condividi allo stesso modo 3.0</string>
-  <string name="license_name_cc_by"> Attribuzione 3.0</string>
+  <string name="license_name_cc_by_sa_four">Attribuzione-Condividi allo stesso modo 4.0</string>
+  <string name="license_name_cc_by_four">Attribuzione 4.0</string>
+  <string name="license_name_cc_by_sa">Attribuzione-Condividi allo stesso modo 3.0</string>
+  <string name="license_name_cc_by">Attribuzione 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
@@ -233,6 +235,7 @@
   <string name="media_detail_description">Descrizione</string>
   <string name="media_detail_discussion">Discussione</string>
   <string name="media_detail_author">Autore</string>
+  <string name="media_detail_uploader">Caricato da</string>
   <string name="media_detail_uploaded_date">Data di caricamento</string>
   <string name="media_detail_license">Licenza</string>
   <string name="media_detail_coordinates">Coordinate</string>
@@ -283,6 +286,7 @@
   <string name="upload_connection_error_alert_detail">Il processo di caricamento richiede un accesso a internet attivo. Per favore verifica la tua connessione alla rete.</string>
   <string name="upload_problem_image">Problemi trovati nell\'immagine</string>
   <string name="internet_downloaded">Carica solo le foto che hai scattato da solo. Non caricare immagini scaricate da Internet.</string>
+  <string name="preferences_uploads">Caricamenti</string>
   <string name="use_external_storage">Salva scatti in-app</string>
   <string name="use_external_storage_summary">Salva le foto scattate con la fotocamera in-app nella memoria del tuo dispositivo</string>
   <string name="login_to_your_account">Accedi alla tua utenza</string>
@@ -354,6 +358,7 @@
   <string name="quiz">Quiz</string>
   <string name="quiz_question_string">Questa immagine è OK per essere caricata?</string>
   <string name="question">Domanda</string>
+  <string name="quiz_i_am_not_sure">Non sono sicuro</string>
   <string name="result">Risultato</string>
   <string name="quiz_back_button">Se continui a caricare immagini che richiedono la cancellazione, la tua utenza sarà probabilmente bannata. Sei sicuro di voler terminare il quiz?</string>
   <string name="quiz_alert_message">Più di %1$s delle immagini che hai caricato sono state cancellate. Se continui a caricare immagini che richiedono la cancellazione, la tua utenza sarà probabilmente bannata.\n\nTi piacerebbe visualizzare di nuovo il tutorial e poi fare un quiz per aiutarti a capire che tipo di immagini dovresti o non dovresti caricare?</string>
@@ -363,6 +368,7 @@
   <string name="blurry_image_answer">Uno degli obiettivi di Commons è raccogliere immagini di qualità. Pertanto, le immagini sfocate non dovrebbero essere caricate. Cerca sempre di scattare belle foto con una buona illuminazione.</string>
   <string name="construction_event_answer">Le foto che mostrano tecnologia o cultura sono molto apprezzate su Commons.</string>
   <string name="congratulatory_message_quiz">Hai ottenuto %1$s delle risposte corrette. Congratulazioni!</string>
+  <string name="quiz_continue">Continua</string>
   <string name="warning_for_no_answer">Seleziona una delle due opzioni per rispondere alla domanda</string>
   <string name="user_not_logged_in">Sessione scaduta. Accedi nuovamente.</string>
   <string name="quiz_result_share_message">Condividi il tuo quiz con i tuoi amici!</string>
@@ -391,7 +397,7 @@
   <string name="statistics_featured">Immagini in evidenza</string>
   <string name="statistics_wikidata_edits">Immagini tramite \"Luoghi nelle vicinanze\"</string>
   <string name="level">Livello %d</string>
-  <string name="profileLevel">%s (Livello %s)</string>
+  <string name="profile_withLevel">%s (Livello %s)</string>
   <string name="images_uploaded">Immagini caricate</string>
   <string name="image_reverts">Immagini non ripristinate</string>
   <string name="images_used_by_wiki">Immagini utilizzate</string>
@@ -456,6 +462,7 @@
   <string name="ends_on">Termina il:</string>
   <string name="display_campaigns">Visualizza campagne</string>
   <string name="display_campaigns_explanation">Vedi le campagne in corso</string>
+  <string name="show_deletion_button">Mostra pulsante di cancellazione</string>
   <string name="in_app_camera_location_access_explanation">Consenti all\'app di recuperare la posizione nel caso in cui la fotocamera non la registri. Alcune fotocamere del dispositivo non la registrano. In questi casi, consentire all\'app di recuperare e allegare la posizione rende il tuo contributo più utile. Potrai modificarlo in qualsiasi momento dalle Impostazioni</string>
   <string name="option_allow">Consenti</string>
   <string name="option_dismiss">Nascondi</string>
@@ -533,6 +540,7 @@
   <string name="share_text">Carica foto su Wikimedia Commons direttamente dal tuo telefono. Scarica subito l\'app Commons: %1$s</string>
   <string name="share_via">Condividi applicazione tramite...</string>
   <string name="image_info">Informazioni sull\'immagine</string>
+  <string name="upload_categories_dont_show_this_message_again">Non mostrare più questo messaggio</string>
   <string name="no_categories_found">Nessuna categoria trovata</string>
   <string name="no_depiction_found">Nessuna definizione trovata</string>
   <string name="upload_cancelled">Caricamento annullato</string>
@@ -564,6 +572,10 @@
   <string name="category_edit_button_text">Aggiorna le categorie</string>
   <string name="depictions_edit_helper_make_edit_toast">Tentativo di aggiornare le rappresentazioni.</string>
   <string name="depictions_edit_helper_show_edit_title">Modifica le raffigurazioni</string>
+  <plurals name="depictions_edit_helper_show_edit_message_if">
+    <item quantity="one">Viene aggiunta la raffigurazione %1$s.</item>
+    <item quantity="other">Vengono aggiunte le raffigurazioni %1$s.</item>
+  </plurals>
   <string name="depictions_edit_helper_edit_message_else">Non è stato possibile aggiungere descrizioni.</string>
   <string name="coordinates_edit_helper_make_edit_toast">Tentativo di aggiornare le coordinate.</string>
   <string name="coordinates_edit_helper_show_edit_title">Coordinate aggiornate</string>
@@ -596,6 +608,7 @@
   <string name="title_for_child_classes">CLASSI FIGLIE</string>
   <string name="title_for_parent_classes">CLASSI SUPERIORI</string>
   <string name="title_for_subcategories">Sottocategorie</string>
+  <string name="title_for_parent_categories">CATEGORIE SUPERIORI</string>
   <string name="upload_nearby_place_found_title">Rinvenuto luogo nei pressi</string>
   <string name="upload_nearby_place_found_description_plural">Queste sono immagini di %1$s?</string>
   <string name="upload_nearby_place_found_description_singular">Questa è un\'immagine di %1$s?</string>
@@ -658,6 +671,7 @@
   <string name="leaderboard_nearby">Nelle vicinanze</string>
   <string name="leaderboard_used">Usa</string>
   <string name="leaderboard_my_rank_button_text">Il mio posizionamento</string>
+  <string name="map_attribution">&amp;#169; &lt;a href=\"https://www.openstreetmap.org/copyright\"&gt;OpenStreetMap&lt;/a&gt;</string>
   <string name="limited_connection_enabled">Attivata modalità di connessione limitata!</string>
   <string name="limited_connection_disabled">Disattivata modalità di connessione limitata. I caricamenti in attesa riprenderanno adesso.</string>
   <string name="limited_connection_mode">Modalità di connessione limitata</string>
@@ -707,13 +721,16 @@
   <string name="custom_selector_dismiss_limit_warning_button_text">Nascondi</string>
   <string name="custom_selector_button_limit_text">Massimo: %1$d</string>
   <string name="custom_selector_limit_error_desc">Errore: limite di caricamento superato</string>
+  <string name="place_state_wlm">WLM</string>
   <string name="wlm_upload_info">Questa immagine sarà ammessa al concorso Wiki Loves Monuments</string>
   <string name="display_monuments">Mostra monumenti</string>
   <string name="wlm_month_message">È il mese di Wiki Loves Monuments!</string>
   <string name="learn_more">ULTERIORI INFORMAZIONI</string>
+  <string name="wlm_campaign_title">Wiki Loves Monuments</string>
   <string name="wlm_campaign_description">Wiki Loves Monuments è un concorso internazionale di fotografia di monumenti organizzato da Wikimedia</string>
   <string name="need_permission">Autorizzazione/i richiesta/e</string>
   <string name="read_phone_state_permission_message">Le mappe vicine hanno bisogno di leggere lo STATO DEL TELEFONO per funzionare correttamente</string>
+  <string name="location_permission_rationale">Autorizzazione facoltativa: ottieni la posizione corrente per i suggerimenti di categoria</string>
   <string name="contributions_of_user">Contributi dell\'utente: %s</string>
   <string name="achievements_of_user">Traguardi dell\'utente: %s</string>
   <string name="menu_view_user_page">Vedi il profilo utente</string>
@@ -819,12 +836,15 @@
   <string name="custom_selector_folder_deleted_success">Cartella %1$s cancellata correttamente</string>
   <string name="custom_selector_folder_deleted_failure">Impossibile eliminare la cartella %1$s</string>
   <string name="custom_selector_error_trashing_folder_contents">Impossibile eliminare i contenuti nella cartella: %1$s</string>
+  <string name="custom_selector_folder_not_found_error">Impossibile recuperare il percorso della cartella per l\'ID bucket: %1$d</string>
   <string name="red_pin">Questo posto non ha ancora una foto, scattane una!</string>
   <string name="green_pin">Questo posto ha già una foto.</string>
   <string name="grey_pin">Ora controlliamo se questo posto ha una foto.</string>
   <string name="error_while_loading">Errore durante il caricamento</string>
+  <string name="no_usages_found">Nessun uso trovato</string>
   <string name="usages_on_commons_heading">Commons</string>
   <string name="usages_on_other_wikis_heading">Altri wiki</string>
+  <string name="bullet_point">•</string>
   <string name="file_usages_container_heading">Utilizzi del file</string>
   <string name="title_activity_single_web_view">SingleWebViewActivity</string>
   <string name="account">Utenza</string>
