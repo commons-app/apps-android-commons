@@ -55,12 +55,12 @@
   </plurals>
   <string name="starting_uploads">開始上傳</string>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">正在處理%1$d個上傳</item>
-    <item quantity="other">正在處理%1$d個上傳</item>
+    <item quantity="one">正在處理 %1$d 個上傳</item>
+    <item quantity="other">正在處理 %1$d 個上傳</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">%1$d個上傳</item>
-    <item quantity="other">%1$d個上傳</item>
+    <item quantity="one">%1$d 個上傳</item>
+    <item quantity="other">%1$d 個上傳</item>
   </plurals>
   <plurals name="share_license_summary">
     <item quantity="one">此圖片會按 %1$s 協議授權上傳</item>
