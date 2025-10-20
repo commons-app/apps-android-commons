@@ -16,6 +16,7 @@ import fr.free.nrw.commons.contributions.Contribution
 import fr.free.nrw.commons.customselector.helper.ImageHelper
 import fr.free.nrw.commons.customselector.helper.ImageHelper.CUSTOM_SELECTOR_PREFERENCE_KEY
 import fr.free.nrw.commons.customselector.helper.ImageHelper.SHOW_ALREADY_ACTIONED_IMAGES_PREFERENCE_KEY
+import fr.free.nrw.commons.customselector.helper.CustomSelectorConstants.MAX_IMAGE_COUNT
 import fr.free.nrw.commons.customselector.listeners.ImageSelectListener
 import fr.free.nrw.commons.customselector.model.Image
 import fr.free.nrw.commons.customselector.ui.selector.ImageLoader
@@ -190,7 +191,7 @@ class ImageAdapter(
             )
             holder.itemView.setOnClickListener {
                 if (!holder.isItemUploaded() && !holder.isItemNotForUpload()) {
-                    if (selectedImages.size >= 20 && !isSelected) { //enforce the 20-image limit
+                    if (selectedImages.size >= MAX_IMAGE_COUNT && !isSelected) { //enforce the 20-image limit
                         Toast.makeText(context, "Cannot select more than 20 images", Toast.LENGTH_SHORT).show()
                         return@setOnClickListener
                     }
@@ -400,7 +401,7 @@ class ImageAdapter(
      * Set new selected images
      */
     fun setSelectedImages(newSelectedImages: ArrayList<Image>) {
-        selectedImages = ArrayList(newSelectedImages.take(20)) // enforce 20-image limit
+        selectedImages = ArrayList(newSelectedImages.take(MAX_IMAGE_COUNT)) // enforce 20-image limit
         imageSelectListener.onSelectedImagesChanged(selectedImages, 0)
     }
 

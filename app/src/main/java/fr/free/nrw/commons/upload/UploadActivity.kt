@@ -27,6 +27,7 @@ import fr.free.nrw.commons.R
 import fr.free.nrw.commons.auth.LoginActivity
 import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.contributions.ContributionController
+import fr.free.nrw.commons.customselector.helper.CustomSelectorConstants.MAX_IMAGE_COUNT
 import fr.free.nrw.commons.databinding.ActivityUploadBinding
 import fr.free.nrw.commons.filepicker.Constants.RequestCodes
 import fr.free.nrw.commons.filepicker.UploadableFile
@@ -735,7 +736,7 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
                 }
 
                 // Convert to mutable list,takes up to 20 files, or return empty list if null
-                files?.toMutableList()?.take(20)?.toMutableList() ?: run { //enforce 20-image limit
+                files?.toMutableList()?.take(MAX_IMAGE_COUNT)?.toMutableList() ?: run { //enforce 20-image limit
                     Timber.w("Files array was null")
                     mutableListOf()
                 }
