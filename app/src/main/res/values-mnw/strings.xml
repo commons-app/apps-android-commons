@@ -9,20 +9,15 @@
   <string name="commons_facebook">Commons Facebook Page</string>
   <string name="commons_logo">သၚ်္ကေတ Commons</string>
   <string name="appwidget_img">ဗီုရုပ်တၟေင် သွက်တ္ၚဲဏအ်</string>
-  <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">ဝှာင် %1$d file uploadingဂှ် ပတိုန်ပၠုပ်ဒၟံင်</item>
-    <item quantity="other">ဝှာင် %1$d files uploadingဂှ် ပတိုန်ပၠုပ်ဒၟံင်</item>
-  </plurals>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">(%1$d)</item>
-    <item quantity="other">(%1$d)</item>
+  <plurals name="uploads_pending_notification_indicator" fuzzy="true">
+    <item quantity="one">%1$d ဝှာင် ဂှ် ပတိုန်ပၠုပ်ဒၟံင်</item>
+    <item quantity="other">%1$d ဝှာင် ဂှ် ပတိုန်ပၠုပ်ဒၟံင်</item>
   </plurals>
   <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">စဒၟံင် %1$d ပတိုန်ပၠုပ်</item>
     <item quantity="other">စဒၟံင် %1$d ပတိုန်ပၠုပ်</item>
   </plurals>
-  <plurals name="multiple_uploads_title" fuzzy="true">
+  <plurals name="multiple_uploads_title">
     <item quantity="one">%1$d ပတိုန်ပၠုပ်</item>
     <item quantity="other">%1$d ပတိုန်ပၠုပ်</item>
   </plurals>
@@ -180,7 +175,7 @@
   <string name="welcome_image_llamas">Llamas</string>
   <string name="welcome_image_rainbow_bridge">Rainbow Bridge</string>
   <string name="welcome_image_tulip">Tulip</string>
-  <string name="welcome_image_welcome_wikipedia">ဒုင်တၠုင်ဏာ နူဝဳကဳပဳဒဳယာ၊၊</string>
+  <string name="welcome_image_welcome_wikipedia" fuzzy="true">ဒုင်တၠုင်ဏာ နူဝဳကဳပဳဒဳယာ၊၊</string>
   <string name="cancel">တးပဲါ</string>
   <string name="navigation_drawer_open">ပံက်</string>
   <string name="navigation_drawer_close">ကၟာတ်</string>
@@ -268,7 +263,7 @@
   <string name="continue_message">ဆက်</string>
   <string name="correct">သွဟ်မဍာံ</string>
   <string name="wrong">သွဟ် မဗၠေတ်</string>
-  <string name="level" fuzzy="true">ကဆံၚ်</string>
+  <string name="level" fuzzy="true">ကဆံၚ် %1$d</string>
   <string name="images_uploaded">ဗီုရုပ် မတိုန်လဝ်</string>
   <string name="contributions_fragment">အရာမကၠောန်သ္ပလဝ်အထံက်အပၚ်ဂမၠိုၚ်</string>
   <string name="custom_selector_empty_text">ဗီုရုပ် ဟွံမွဲ</string>

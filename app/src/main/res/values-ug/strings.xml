@@ -107,7 +107,7 @@
   <string name="welcome_image_rainbow_bridge">ھەسەت ھۈسەن كۆۋرۈك</string>
   <string name="review_thanks_yes_button_text">كېيىنكى سۈرەت</string>
   <string name="review_thanks_no_button_text">ھەئە، نېمىشقا بولمىسۇن</string>
-  <string name="copy_image_caption_description">كېيىنكى ۋاسىتەگە كۆچۈر</string>
+  <string name="copy_image_caption_description" fuzzy="true">كېيىنكى ۋاسىتەگە كۆچۈر</string>
   <string name="copied_successfully">كۆچۈرۈلدى</string>
   <string name="nearby_no_results">ھېچقانداق يەر تېپىلمىدى ، ئىزدەش ئۆلچىمىڭىزنى ئۆزگەرتىپ بېقىڭ.</string>
 </resources>

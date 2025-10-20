@@ -92,8 +92,7 @@
   <string name="delete">هاڤوس</string>
   <string name="Achievements">ڤنچاڤاين</string>
   <string name="Profile">ڤروفيل</string>
-  <string name="statistics">ستاتيستيک</string>
-  <string name="level" fuzzy="true">تاهڤ</string>
+  <string name="level" fuzzy="true">تاهڤ %1$d</string>
   <string name="images_uploaded">ايميج دموات ناءيق</string>
   <string name="contributions_fragment">سومبڠن</string>
   <string name="nearby_fragment">بردکتن</string>

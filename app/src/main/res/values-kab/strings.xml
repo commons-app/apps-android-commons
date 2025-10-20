@@ -6,7 +6,7 @@
 -->
 <resources>
   <string name="commons_facebook">Asmel Facebook n Commons</string>
-  <string name="commons_github">Tangalt aɣbalu Github n Commons</string>
+  <string name="commons_github" fuzzy="true">Tangalt aɣbalu Github n Commons</string>
   <string name="commons_logo">Alugu Commons</string>
   <string name="commons_website">Asmel wen n Commons</string>
   <string name="show_captions_description">Aglam</string>
@@ -15,14 +15,10 @@
     <item quantity="one">%1$d n ufaylu yezga yettali</item>
     <item quantity="other">%1$d n ifuyla zgan ttalin</item>
   </plurals>
-  <plurals name="contributions_subtitle">
-    <item quantity="one">(%1$d)</item>
-    <item quantity="other">(%1$d)</item>
-  </plurals>
   <string name="starting_uploads">Beddu n walluy</string>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">%d n usali iteddu</item>
-    <item quantity="other">%d n usali iteddu</item>
+    <item quantity="one">%1$d n usali iteddu</item>
+    <item quantity="other">%1$d n usali iteddu</item>
   </plurals>
   <plurals name="multiple_uploads_title">
     <item quantity="one">%1$d n usali</item>
@@ -165,8 +161,8 @@
   <string name="welcome_image_llamas">Lamas</string>
   <string name="welcome_image_rainbow_bridge">Taqenṭart tislit n unẓaṛ</string>
   <string name="welcome_image_tulip">Taxlult</string>
-  <string name="welcome_image_welcome_wikipedia">Anṣuf ar wikipedia</string>
-  <string name="welcome_image_welcome_copyright">Izerfan n umeskar n usterḥeb</string>
+  <string name="welcome_image_welcome_wikipedia" fuzzy="true">Anṣuf ar wikipedia</string>
+  <string name="welcome_image_welcome_copyright" fuzzy="true">Izerfan n umeskar n usterḥeb</string>
   <string name="welcome_image_sydney_opera_house">Tazeqqa Opera n Sydney</string>
   <string name="cancel">Sefsex</string>
   <string name="navigation_drawer_open">Ldi</string>

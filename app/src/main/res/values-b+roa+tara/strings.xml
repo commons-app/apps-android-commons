@@ -9,18 +9,14 @@
     <item quantity="one">%1$d fail in caricamende</item>
     <item quantity="other">%1$d fail in caricamende</item>
   </plurals>
-  <plurals name="contributions_subtitle">
-    <item quantity="one">(%1$d)</item>
-    <item quantity="other">(%1$d)</item>
-  </plurals>
   <string name="starting_uploads">Stoche accumenze le carecaminde</string>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">Ste processe %d carecamende</item>
-    <item quantity="other">Ste processe %d carecaminde</item>
+    <item quantity="one">Ste processe %1$d carecamende</item>
+    <item quantity="other">Ste processe %1$d carecaminde</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">%d carecamende</item>
-    <item quantity="other">%d carecaminde</item>
+    <item quantity="one">%1$d carecamende</item>
+    <item quantity="other">%1$d carecaminde</item>
   </plurals>
   <plurals name="upload_count_title">
     <item quantity="one">%1$d Carecamende</item>
@@ -100,8 +96,7 @@
   <string name="explore_tab_title_mobile">Aggiornate da mobbile</string>
   <string name="no_recent_searches">Nisciuna recerche recende</string>
   <string name="delete">Scangìlle</string>
-  <string name="statistics">Statisteche</string>
-  <string name="level" fuzzy="true">Levèlle</string>
+  <string name="level" fuzzy="true">Levèlle %1$d</string>
   <string name="contributions_fragment">Condrebbute</string>
   <string name="nearby_fragment">Vicine a</string>
   <string name="notifications">Notifeche</string>

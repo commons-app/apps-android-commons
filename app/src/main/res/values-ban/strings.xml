@@ -5,7 +5,7 @@
 -->
 <resources>
   <string name="commons_facebook">Kaca Facebook Commons</string>
-  <string name="commons_github">Kode Wit Commons ring Github</string>
+  <string name="commons_github" fuzzy="true">Kode Wit Commons ring Github</string>
   <string name="commons_logo">Logo Commons</string>
   <string name="commons_website">Situs Commons</string>
   <string name="exit_location_picker">Medal pamilihan genah</string>
@@ -29,15 +29,12 @@
     <item quantity="one">%1$d berkas kaunggah</item>
     <item quantity="other">%1$d berkas kaunggah</item>
   </plurals>
-  <plurals name="contributions_subtitle">
-    <item quantity="other">(%1$d)</item>
-  </plurals>
   <string name="starting_uploads">Ngawitin Unggahan</string>
   <plurals name="starting_multiple_uploads">
-    <item quantity="other">Ngamargiang %d unggahan</item>
+    <item quantity="other">Ngamargiang %1$d unggahan</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="other">%d unggahan</item>
+    <item quantity="other">%1$d unggahan</item>
   </plurals>
   <plurals name="share_license_summary">
     <item quantity="other">Gambar puniki pacang kaicain lisénsi %1$s</item>
@@ -72,7 +69,7 @@
   <string name="uploading_queued">Unggahan ring antrian (mode tetemon kawates kauripang)</string>
   <string name="upload_completed_notification_title">%1$s kaunggah!</string>
   <string name="upload_completed_notification_text">Gecek antuk nyingakin unggahan Ida</string>
-  <string name="upload_progress_notification_title_start">Munggahang berkas: %s</string>
+  <string name="upload_progress_notification_title_start">Munggahang berkas: %1$s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s kaunggah</string>
   <string name="upload_progress_notification_title_finishing">Muputang pangunggahan %1$s</string>
   <string name="upload_failed_notification_title">Ngunggahang %1$s gagal</string>
@@ -188,8 +185,8 @@
   <string name="welcome_image_llamas">Llama</string>
   <string name="welcome_image_rainbow_bridge">Titi Kakuwung</string>
   <string name="welcome_image_tulip">Tulip</string>
-  <string name="welcome_image_welcome_wikipedia">Rahajeng Rauh ring Wikipédia</string>
-  <string name="welcome_image_welcome_copyright">Rahajeng Rauh Hak Ripta</string>
+  <string name="welcome_image_welcome_wikipedia" fuzzy="true">Rahajeng Rauh ring Wikipédia</string>
+  <string name="welcome_image_welcome_copyright" fuzzy="true">Rahajeng Rauh Hak Ripta</string>
   <string name="welcome_image_sydney_opera_house">Umah Opera Sydney</string>
   <string name="cancel">Wangdé</string>
   <string name="navigation_drawer_open">Buka</string>
@@ -267,10 +264,9 @@
   <string name="delete">Usap</string>
   <string name="Achievements">Panghargaan</string>
   <string name="Profile">Profil</string>
-  <string name="statistics">Statistik</string>
   <string name="statistics_thanks">Haturan Suksma Katampi</string>
   <string name="statistics_featured">Gambar Pilihan</string>
-  <string name="level">Tingkat %d</string>
+  <string name="level">Tingkat %1$d</string>
   <string name="images_uploaded">Gambar Kaupload</string>
   <string name="images_used_by_wiki">Gambar Kaanggén</string>
   <string name="contributions_fragment">Pituut</string>
@@ -288,7 +284,7 @@
   <string name="search_this_area">Selehin wawengkon puniki</string>
   <string name="nearby_card_permission_title">Pinunasan lugra</string>
   <string name="nominate_for_deletion_done">Puput</string>
-  <string name="send_thank_toast">Kirim Suksma majeng %1$s</string>
+  <string name="send_thank_toast" fuzzy="true">Kirim Suksma majeng %1$s</string>
   <string name="review_thanks_yes_button_text">Gambar salanturnyané</string>
   <string name="review_thanks_no_button_text">Nggih, ngujang ten</string>
   <string name="menu_option_read">Cingak wacén</string>
@@ -314,7 +310,7 @@
   <string name="category_edit_helper_show_edit_title_success">Suksés</string>
   <string name="coordinates_edit_helper_show_edit_title_success">Suksés</string>
   <string name="place_type">Soroh genah:</string>
-  <string name="nearby_search_hint">Kreteg, museum, hotél, msl.</string>
+  <string name="nearby_search_hint" fuzzy="true">Kreteg, museum, hotél, msl.</string>
   <string name="title_for_media">MÉDIA</string>
   <string name="title_app_shortcut_bookmark">Chinabuku</string>
   <string name="title_app_shortcut_setting">Pangaturan</string>

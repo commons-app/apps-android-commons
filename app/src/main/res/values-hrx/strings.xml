@@ -4,7 +4,10 @@
 * Paul Beppler
 -->
 <resources>
-  <string name="share_license_summary" fuzzy="true">Das Bild weard lizenziert unner %1$s</string>
+  <plurals name="share_license_summary" fuzzy="true">
+    <item quantity="one">Tas pilt wërt uner %1$s lisensiirt</item>
+    <item quantity="other">Ti pilter wëre uner %1$s lisensiirt</item>
+  </plurals>
   <string name="app_name" fuzzy="true">Wikimedia Commons (Wikimedia Allmend)</string>
   <string name="menu_settings">Instellunge</string>
   <string name="username">Benutzernoome</string>

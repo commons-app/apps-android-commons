@@ -65,7 +65,7 @@
   <string name="media_detail_uploaded_date">Юклев тархы</string>
   <string name="_2fa_code">2FA код</string>
   <string name="welcome_image_tulip">Лале</string>
-  <string name="welcome_image_welcome_wikipedia">Хош гел Википедиягъа</string>
+  <string name="welcome_image_welcome_wikipedia" fuzzy="true">Хош гел Википедиягъа</string>
   <string name="cancel">Гери алмакъ</string>
   <string name="navigation_drawer_open">Ачмакъ</string>
   <string name="navigation_drawer_close">Япмакъ</string>

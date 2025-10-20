@@ -8,20 +8,20 @@
     <item quantity="one">Wladënk %1$d lopka</item>
     <item quantity="other">Wladënk %1$d lopków</item>
   </plurals>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">Przesłano @string/contributions_subtitle_zero</item>
-    <item quantity="one">Przesłano %1$d lopk</item>
-    <item quantity="other">Przesłano %1$d lopczi</item>
-  </plurals>
   <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">Naczãto %1$d wladënk</item>
     <item quantity="other">Naczãto %1$d wladënczi</item>
   </plurals>
-  <plurals name="multiple_uploads_title" fuzzy="true">
+  <plurals name="multiple_uploads_title">
     <item quantity="one">%1$d wladënk</item>
     <item quantity="other">%1$d wladënczi</item>
   </plurals>
-  <string name="share_license_summary" fuzzy="true">Nen òbrôzk bãdze ùprzistãpniony wedle licencëji %1$s</string>
+  <plurals name="share_license_summary" fuzzy="true">
+    <item quantity="one">Nen òbrôzk bãdze ùprzistãpniony wedle licencëji %1$s</item>
+    <item quantity="few">Neni òbrôzki bãdze ùprzistãpniony wedle licencëji %1$s</item>
+    <item quantity="many">Neni òbrôzki bãdze ùprzistãpniony wedle licencëji %1$s</item>
+    <item quantity="other">Neni òbrôzki bãdze ùprzistãpniony wedle licencëji %1$s</item>
+  </plurals>
   <string name="app_name">Commons</string>
   <string name="menu_settings">Nastôwë</string>
   <string name="username">Miono brëkòwnika</string>
@@ -121,8 +121,8 @@
   <string name="welcome_image_llamas">Lamy</string>
   <string name="welcome_image_rainbow_bridge">Rainbow Bridge</string>
   <string name="welcome_image_tulip">Tulpa</string>
-  <string name="welcome_image_welcome_wikipedia">Witôj na Wikipediji</string>
-  <string name="welcome_image_welcome_copyright">Witôj w prawnych zastrzégach</string>
+  <string name="welcome_image_welcome_wikipedia" fuzzy="true">Witôj na Wikipediji</string>
+  <string name="welcome_image_welcome_copyright" fuzzy="true">Witôj w prawnych zastrzégach</string>
   <string name="welcome_image_sydney_opera_house">Sydney Opera House</string>
   <string name="cancel">Òprzestóń</string>
   <string name="navigation_drawer_open">Òtemkni</string>

@@ -10,7 +10,7 @@
 -->
 <resources>
   <string name="commons_facebook">Викиказынанын Facebook баракчасы</string>
-  <string name="commons_github">Викиказына GitHub булак коду</string>
+  <string name="commons_github" fuzzy="true">Викиказына GitHub булак коду</string>
   <string name="commons_logo">Викиказынанын логотиби</string>
   <string name="commons_website">Викиказынанын сайты</string>
   <string name="exit_location_picker">Жайгашкан жер тандоодон чыгуу</string>
@@ -34,18 +34,14 @@
     <item quantity="one">%1$d файл жүктөлүүдө</item>
     <item quantity="other">%1$d файлдар жүктөлүүдө</item>
   </plurals>
-  <plurals name="contributions_subtitle">
-    <item quantity="one">(%1$d)</item>
-    <item quantity="other">(%1$d)</item>
-  </plurals>
   <string name="starting_uploads">Жүктөө башталууда</string>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">%d файл жүктөлүүдө</item>
-    <item quantity="other">%d файлдар жүктөлүүдө</item>
+    <item quantity="one">%1$d файл жүктөлүүдө</item>
+    <item quantity="other">%1$d файлдар жүктөлүүдө</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">%d жүктөө</item>
-    <item quantity="other">%d жүктөө</item>
+    <item quantity="one">%1$d жүктөө</item>
+    <item quantity="other">%1$d жүктөө</item>
   </plurals>
   <plurals name="share_license_summary">
     <item quantity="one">Бул сүрөт %1$s лицензиясы астында берилет</item>
@@ -89,7 +85,7 @@
   <string name="uploading_queued">Жүктөө кезекке коюлду (чектелген байланыш режими иштетилди)</string>
   <string name="upload_completed_notification_title">%1$s жүктөлдү !</string>
   <string name="upload_completed_notification_text">Жүктөлгөн файлды көрүү үчүн басыңыз</string>
-  <string name="upload_progress_notification_title_start">Файл жүктөлүүдө: %s</string>
+  <string name="upload_progress_notification_title_start">Файл жүктөлүүдө: %1$s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s жүктөлүүдө</string>
   <string name="upload_progress_notification_title_finishing">Жүктөө соңуна жетти %1$s</string>
   <string name="upload_failed_notification_title">Жүктөө %1$s иш жүзүнө ашкан жок</string>
@@ -231,8 +227,8 @@
   <string name="welcome_image_llamas">Ламалар</string>
   <string name="welcome_image_rainbow_bridge">Көкүрөктүн көпүрөсү</string>
   <string name="welcome_image_tulip">Тюльпан</string>
-  <string name="welcome_image_welcome_wikipedia">Википедияга кош келиңиз</string>
-  <string name="welcome_image_welcome_copyright">Кош келиңиз! Автордук укук</string>
+  <string name="welcome_image_welcome_wikipedia" fuzzy="true">Википедияга кош келиңиз</string>
+  <string name="welcome_image_welcome_copyright" fuzzy="true">Кош келиңиз! Автордук укук</string>
   <string name="welcome_image_sydney_opera_house">Сидней опера театры</string>
   <string name="cancel">Жокко чыгаруу</string>
   <string name="navigation_drawer_open">Ачуу</string>
@@ -368,12 +364,11 @@
   <string name="Achievements">Жетишкендиктер</string>
   <string name="Profile">Профиль</string>
   <string name="badges">Бээжелер</string>
-  <string name="statistics">Статистика</string>
   <string name="statistics_thanks">Рахматтар кабыл алынды</string>
   <string name="statistics_featured">Тандалган сүрөттөр</string>
   <string name="statistics_wikidata_edits">Сүрөттөр «Жакынкы жайлар» аркылуу</string>
-  <string name="level">Деңгээл %d</string>
-  <string name="profile_withLevel">%s (Деңгээл %s)</string>
+  <string name="level">Деңгээл %1$d</string>
+  <string name="profile_withLevel">%1$s (Деңгээл %2$s)</string>
   <string name="images_uploaded">Жүктөлгөн сүрөттөр</string>
   <string name="image_reverts">Сүрөттөр кайра алынган жок</string>
   <string name="images_used_by_wiki">Колдонулган сүрөттөр</string>
