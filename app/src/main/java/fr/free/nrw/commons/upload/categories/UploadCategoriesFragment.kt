@@ -70,7 +70,6 @@ class UploadCategoriesFragment : UploadBaseFragment(), CategoriesContract.View {
         savedInstanceState: Bundle?
     ): View? {
         binding = UploadCategoriesFragmentBinding.inflate(inflater, container, false)
-        binding!!.llContainerButtons.handleKeyboardInsets()
         return binding!!.root
     }
 

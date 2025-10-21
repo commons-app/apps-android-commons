@@ -146,7 +146,6 @@ class UploadMediaDetailFragment : UploadBaseFragment(), UploadMediaDetailsContra
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         _binding = FragmentUploadMediaDetailFragmentBinding.inflate(inflater, container, false)
-        _binding!!.mediaDetailCardView.handleKeyboardInsets()
         // intialise the adapter early to prevent uninitialized access
         uploadMediaDetailAdapter = UploadMediaDetailAdapter(
             this,
