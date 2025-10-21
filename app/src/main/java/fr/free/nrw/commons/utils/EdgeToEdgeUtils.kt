@@ -1,7 +1,6 @@
 package fr.free.nrw.commons.utils
 
 import android.view.View
-import android.view.ViewGroup
 import android.view.ViewGroup.MarginLayoutParams
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsAnimationCompat
@@ -158,6 +157,7 @@ fun applyEdgeToEdgeBottomInsets(view: View) = view.applyEdgeToEdgeInsets { inset
     rightMargin = insets.right
     bottomMargin = insets.bottom
 }
+
 /**
  * Adjusts a [View]'s bottom margin dynamically to account for the on-screen keyboard (IME),
  * ensuring the view remains visible above the keyboard during transitions.
