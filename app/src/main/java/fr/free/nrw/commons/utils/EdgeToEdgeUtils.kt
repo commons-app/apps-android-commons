@@ -170,8 +170,8 @@ fun View.handleKeyboardInsets() {
         val existingBottomMargin = if (view.getTag(R.id.initial_margin_bottom) != null) {
             view.getTag(R.id.initial_margin_bottom) as Int
         } else {
-            view.setTag(R.id.initial_margin_bottom, marginBottom)
-            marginBottom
+            view.setTag(R.id.initial_margin_bottom, view.marginBottom)
+            view.marginBottom
         }
 
         val lp = layoutParams as MarginLayoutParams
