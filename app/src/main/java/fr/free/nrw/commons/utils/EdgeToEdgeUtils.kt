@@ -166,46 +166,33 @@ fun applyEdgeToEdgeBottomInsets(view: View) = view.applyEdgeToEdgeInsets { inset
  * and accounts for navigation bar insets to avoid double offsets.
  */
 fun View.handleKeyboardInsets() {
-    var existingBottomMargin = 0
-
-    ViewCompat.setOnApplyWindowInsetsListener(this) { view, windowInsets ->
-        existingBottomMargin = if (view.getTag(R.id.initial_margin_bottom) != null) {
-            view.getTag(R.id.initial_margin_bottom) as Int
-        } else {
-            view.setTag(R.id.initial_margin_bottom, view.marginBottom)
-            view.marginBottom
-        }
-
-        WindowInsetsCompat.CONSUMED
+    val existingBottomMargin = if (getTag(R.id.initial_margin_bottom) != null) {
+        getTag(R.id.initial_margin_bottom) as Int
+    } else {
+        setTag(R.id.initial_margin_bottom, marginBottom)
+        marginBottom
     }
 
-    // Animate during IME transition
-    ViewCompat.setWindowInsetsAnimationCallback(
-        this,
-        object : WindowInsetsAnimationCompat.Callback(
-            DISPATCH_MODE_CONTINUE_ON_SUBTREE
-        ) {
-            override fun onProgress(
-                insets: WindowInsetsCompat,
-                runningAnimations: MutableList<WindowInsetsAnimationCompat>
-            ): WindowInsetsCompat {
-                val lp = layoutParams as MarginLayoutParams
-                val navBarInsets = insets.getInsets(WindowInsetsCompat.Type.navigationBars())
-                val imeInsets = insets.getInsets(WindowInsetsCompat.Type.ime())
-                val imeVisible = insets.isVisible(WindowInsetsCompat.Type.ime())
+    ViewCompat.setOnApplyWindowInsetsListener(this) { _, insets ->
 
-                // Avoid extra space due to system nav bar when the keyboard is shown
-                val imeBottomMargin = imeInsets.bottom - navBarInsets.bottom
+        val lp = layoutParams as MarginLayoutParams
 
-                lp.bottomMargin = if(imeVisible && imeBottomMargin >= existingBottomMargin)
-                    imeBottomMargin + existingBottomMargin
-                else existingBottomMargin
+        val navBarInsets = insets.getInsets(WindowInsetsCompat.Type.navigationBars())
+        val imeInsets = insets.getInsets(WindowInsetsCompat.Type.ime())
+        val imeVisible = insets.isVisible(WindowInsetsCompat.Type.ime())
+        val imeBottomMargin = imeInsets.bottom - navBarInsets.bottom
 
-                layoutParams = lp
-                return WindowInsetsCompat.CONSUMED
-            }
-        }
-    )
+        lp.bottomMargin = if (imeVisible && imeBottomMargin >= existingBottomMargin)
+            imeBottomMargin + existingBottomMargin
+        else existingBottomMargin
+
+        layoutParams = lp
+
+        insets
+    }
+
+    ViewCompat.requestApplyInsets(this)
+
 }
 
 /**

@@ -70,6 +70,7 @@ class DepictsFragment : UploadBaseFragment(), DepictsContract.View {
         savedInstanceState: Bundle?
     ): View {
         _binding = UploadDepictsFragmentBinding.inflate(inflater, container, false)
+        _binding!!.navigationButtonsContainer.handleKeyboardInsets()
         return binding.root
     }
 
