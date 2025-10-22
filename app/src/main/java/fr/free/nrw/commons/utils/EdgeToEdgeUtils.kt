@@ -166,14 +166,13 @@ fun applyEdgeToEdgeBottomInsets(view: View) = view.applyEdgeToEdgeInsets { inset
  * and accounts for navigation bar insets to avoid double offsets.
  */
 fun View.handleKeyboardInsets() {
-    val existingBottomMargin = if (getTag(R.id.initial_margin_bottom) != null) {
-        getTag(R.id.initial_margin_bottom) as Int
-    } else {
-        setTag(R.id.initial_margin_bottom, marginBottom)
-        marginBottom
-    }
-
-    ViewCompat.setOnApplyWindowInsetsListener(this) { _, insets ->
+    ViewCompat.setOnApplyWindowInsetsListener(this) { view, insets ->
+        val existingBottomMargin = if (view.getTag(R.id.initial_margin_bottom) != null) {
+            view.getTag(R.id.initial_margin_bottom) as Int
+        } else {
+            view.setTag(R.id.initial_margin_bottom, marginBottom)
+            marginBottom
+        }
 
         val lp = layoutParams as MarginLayoutParams
 
@@ -188,11 +187,8 @@ fun View.handleKeyboardInsets() {
 
         layoutParams = lp
 
-        insets
+        WindowInsetsCompat.CONSUMED
     }
-
-    ViewCompat.requestApplyInsets(this)
-
 }
 
 /**
