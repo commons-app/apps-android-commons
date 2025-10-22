@@ -84,6 +84,7 @@
       android:parentActivityName=".customselector.ui.selector.CustomSelectorActivity" />
     <activity
       android:name=".auth.LoginActivity"
+      android:windowSoftInputMode="adjustPan"
       android:exported="true">
       <intent-filter>
         <category android:name="android.intent.category.LAUNCHER" />
