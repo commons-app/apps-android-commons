@@ -1,67 +1,132 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  android:gravity="center"
-  android:orientation="vertical"
   tools:context=".upload.PendingUploadsFragment">
 
-  <TextView
-    android:id="@+id/nopendingTextView"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:gravity="center"
-    android:text="You do not have any pending Uploads!"
-    android:visibility="gone" />
-
   <LinearLayout
-    android:id="@+id/pendingUplaodsLl"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:visibility="visible">
+    android:gravity="center"
+    android:orientation="vertical">
 
-    <LinearLayout
+    <TextView
+      android:id="@+id/noPendingTextView"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:layout_margin="10dp"
-      android:gravity="bottom"
-      android:orientation="horizontal">
+      android:gravity="center"
+      android:text="@string/no_pending_uploads"
+      android:visibility="gone" />
 
-      <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:text="Progress:"
-        android:textSize="22sp" />
+    <LinearLayout
+      android:id="@+id/pendingUploadsLl"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:orientation="vertical"
+      android:visibility="visible">
 
       <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:gravity="bottom"
+        android:orientation="horizontal">
 
         <TextView
-          android:id="@+id/progress_text_view"
           android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:gravity="right"
-          android:text=""
-          android:textSize="21sp" />
+          android:layout_height="match_parent"
+          android:layout_weight="1"
+          android:text="@string/progress"
+          android:textSize="22sp" />
 
+        <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:layout_weight="1"
+          android:gravity="center"
+          android:orientation="vertical">
+
+          <TextView
+            android:id="@+id/progress_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:text=""
+            android:textSize="21sp" />
+
+        </LinearLayout>
       </LinearLayout>
 
+      <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/pending_uploads_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginHorizontal="10dp" />
+
     </LinearLayout>
-
-    <androidx.recyclerview.widget.RecyclerView
-      android:id="@+id/pending_uploads_recycler_view"
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      android:layout_marginHorizontal="10dp" />
-
   </LinearLayout>
 
+  <LinearLayout
+    android:id="@+id/fab_layout"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="bottom|end"
+    android:layout_margin="16dp"
+    android:orientation="vertical"
+    android:focusableInTouchMode="true"
+    android:gravity="center_horizontal">
 
-</LinearLayout>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+      android:id="@+id/fab_camera"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:contentDescription="@string/add_contribution_from_camera"
+      android:tint="@color/button_blue"
+      android:visibility="gone"
+      app:backgroundTint="@color/main_background_light"
+      app:elevation="@dimen/tiny_margin"
+      app:fabSize="mini"
+      app:srcCompat="@drawable/ic_photo_camera_white_24dp"
+      app:useCompatPadding="true" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+      android:id="@+id/fab_gallery"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:contentDescription="@string/add_contribution_from_photos"
+      android:tint="@color/button_blue"
+      android:visibility="gone"
+      app:backgroundTint="@color/main_background_light"
+      app:elevation="@dimen/tiny_margin"
+      app:fabSize="mini"
+      app:srcCompat="@drawable/ic_photo_white_24dp"
+      app:useCompatPadding="true" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+      android:id="@+id/fab_custom_gallery"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:background="@drawable/commons"
+      android:contentDescription="@string/add_contribution_from_contributions_gallery"
+      android:tint="@color/button_blue"
+      android:visibility="gone"
+      app:backgroundTint="@color/main_background_light"
+      app:elevation="@dimen/tiny_margin"
+      app:fabSize="mini"
+      app:srcCompat="@drawable/ic_custom_image_picker"
+      app:useCompatPadding="true" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+      android:id="@+id/fab_plus"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:contentDescription="@string/add_new_contribution"
+      android:visibility="visible"
+      app:elevation="@dimen/tiny_margin"
+      app:backgroundTint="@color/status_bar_blue"
+      app:srcCompat="@drawable/ic_add_white_24dp"
+      app:useCompatPadding="true" />
+  </LinearLayout>
+</FrameLayout>
