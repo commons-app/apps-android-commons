@@ -226,7 +226,6 @@
   <string name="_2fa_code">2FA Code</string>
   <string name="email_auth_code">Email verification code</string>
   <string name="logout_verification">Do you really want to logout?</string>
-  <string name="mediaimage_failed">Media Image Failed</string>
   <string name="no_subcategory_found">No subcategories found</string>
   <string name="no_parentcategory_found">No parent categories found</string>
   <string name="welcome_image_mount_zao">Mount Zao</string>
