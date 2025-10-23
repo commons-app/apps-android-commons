@@ -244,7 +244,6 @@
   <string name="_2fa_code">Tweetrapsauthenticatie-code</string>
   <string name="email_auth_code">E-mailverificatiecode</string>
   <string name="logout_verification">Wilt u zich echt afmelden?</string>
-  <string name="mediaimage_failed">Media-afbeelding is mislukt</string>
   <string name="no_subcategory_found">Geen subcategorieën gevonden</string>
   <string name="no_parentcategory_found">Geen bovenliggende categorieën gevonden</string>
   <string name="welcome_image_mount_zao">Mount Zao</string>

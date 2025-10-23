@@ -242,7 +242,6 @@
   <string name="_2fa_code">Codice 2FA</string>
   <string name="email_auth_code">Codice di verifica indirizzo email</string>
   <string name="logout_verification">Vuoi veramente uscire?</string>
-  <string name="mediaimage_failed">Immagine multimediale non riuscita</string>
   <string name="no_subcategory_found">Nessuna sottocategoria trovata</string>
   <string name="no_parentcategory_found">Nessuna categoria superiore trovata</string>
   <string name="welcome_image_mount_zao">Monte Zao</string>

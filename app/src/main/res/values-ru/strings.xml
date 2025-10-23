@@ -279,7 +279,6 @@
   <string name="_2fa_code">Код 2ФА</string>
   <string name="email_auth_code">Код подтверждения электронной почты</string>
   <string name="logout_verification">Вы действительно хотите выйти?</string>
-  <string name="mediaimage_failed">Ошибка медиафайла</string>
   <string name="no_subcategory_found">Подкатегории не найдены.</string>
   <string name="no_parentcategory_found">Не найдено родительских категорий</string>
   <string name="welcome_image_mount_zao">Гора Зао</string>

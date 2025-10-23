@@ -209,7 +209,6 @@
   <string name="_2fa_code">Mã Hai Nhân tố</string>
   <string name="email_auth_code">Mã xác minh email</string>
   <string name="logout_verification">Bạn có chắc chắn muốn đăng xuất?</string>
-  <string name="mediaimage_failed">Hình ảnh bị Thất bại</string>
   <string name="no_subcategory_found">Không tìm thấy thể loại con</string>
   <string name="no_parentcategory_found">Không tìm thấy thể loại mẹ</string>
   <string name="welcome_image_mount_zao">Núi Zaō</string>

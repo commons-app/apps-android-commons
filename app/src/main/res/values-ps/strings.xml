@@ -215,7 +215,6 @@
   <string name="become_a_tester_title">ازمېښتي ازمايښتگر شئ</string>
   <string name="email_auth_code">برېښليک تاييد کوډ</string>
   <string name="logout_verification">ايا تاسو په رښتيا له غونډاله وتل غواړئ؟</string>
-  <string name="mediaimage_failed">رسنۍ انځور نابرياله شو</string>
   <string name="no_subcategory_found">هېڅ څېرمه‌وېشنيزې ونه موندل شوې</string>
   <string name="no_parentcategory_found">هېڅ بنسټيزې وېشنيزې ونه موندل شوې</string>
   <string name="welcome_image_welcome_wikipedia">د ويکيپېډيا يوې ټوليزې ليکنې يو منشوري انځور.</string>

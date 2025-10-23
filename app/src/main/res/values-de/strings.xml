@@ -263,7 +263,6 @@
   <string name="_2fa_code">2FA-Code</string>
   <string name="email_auth_code">E-Mail-Bestätigungscode</string>
   <string name="logout_verification">Möchtest du dich wirklich abmelden?</string>
-  <string name="mediaimage_failed">Medienbild fehlgeschlagen</string>
   <string name="no_subcategory_found">Keine Unterkategorien gefunden</string>
   <string name="no_parentcategory_found">Keine übergeordneten Kategorien gefunden</string>
   <string name="welcome_image_mount_zao">Zaō</string>

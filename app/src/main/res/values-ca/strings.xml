@@ -178,7 +178,6 @@
   <string name="become_a_tester_title">Proveu la versió beta</string>
   <string name="_2fa_code">Codi 2FA</string>
   <string name="logout_verification">Realment voleu finalitzar la sessió?</string>
-  <string name="mediaimage_failed">Ha fallat la imatge multimèdia</string>
   <string name="no_subcategory_found">No s\'han trobat subcategories</string>
   <string name="no_parentcategory_found">No s\'ha trobat cap categoria pare</string>
   <string name="welcome_image_mount_zao">Mont Zao</string>

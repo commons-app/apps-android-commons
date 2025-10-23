@@ -245,7 +245,6 @@
   <string name="_2fa_code">2FA 代碼</string>
   <string name="email_auth_code">電子郵件驗證碼</string>
   <string name="logout_verification">您確定要登出嗎？</string>
-  <string name="mediaimage_failed">媒體圖片失敗</string>
   <string name="no_subcategory_found">找不到子分類</string>
   <string name="no_parentcategory_found">找不到父級分類</string>
   <string name="welcome_image_mount_zao">藏王山</string>

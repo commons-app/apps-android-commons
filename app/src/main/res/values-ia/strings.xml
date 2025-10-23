@@ -216,7 +216,6 @@
   <string name="_2fa_code">Codice 2FA</string>
   <string name="email_auth_code">Codice de verification in e-mail</string>
   <string name="logout_verification">Vole tu vermente clauder session?</string>
-  <string name="mediaimage_failed">Imagine multimedial fallite</string>
   <string name="no_subcategory_found">Necun subcategoria trovate</string>
   <string name="no_parentcategory_found">Necun categoria genitor trovate</string>
   <string name="welcome_image_mount_zao">Monte Zao</string>

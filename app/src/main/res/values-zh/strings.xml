@@ -279,7 +279,6 @@
   <string name="_2fa_code">2FA代码</string>
   <string name="email_auth_code">电子邮件验证码</string>
   <string name="logout_verification">您真的想要退出么？</string>
-  <string name="mediaimage_failed">媒体图片失败</string>
   <string name="no_subcategory_found">找不到子分类</string>
   <string name="no_parentcategory_found">找不到父分类</string>
   <string name="welcome_image_mount_zao">藏王连峰</string>
