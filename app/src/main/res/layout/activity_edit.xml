@@ -23,8 +23,7 @@
     android:layout_gravity="bottom|center"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="2dp"
-    android:paddingBottom="24dp">
+    android:layout_margin="2dp">
 
     <androidx.appcompat.widget.AppCompatButton
       android:drawablePadding="4dp"
