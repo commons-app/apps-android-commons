@@ -84,7 +84,8 @@ class ContributionsListFragment : CommonsDaggerSupportFragment(), ContributionsL
     private var rotateBackward: Animation? = null
     private var isFabOpen = false
 
-    private lateinit var inAppCameraLocationPermissionLauncher: ActivityResultLauncher<Array<String>>
+    private lateinit var inAppCameraLocationPermissionLauncher:
+            ActivityResultLauncher<Array<String>>
 
     @VisibleForTesting
     var rvContributionsList: RecyclerView? = null
@@ -156,7 +157,8 @@ class ContributionsListFragment : CommonsDaggerSupportFragment(), ContributionsL
                 controller?.locationPermissionCallback?.onLocationPermissionGranted()
             } else {
                 activity?.let { currentActivity ->
-                    if (currentActivity.shouldShowRequestPermissionRationale(permission.ACCESS_FINE_LOCATION)) {
+                    if (currentActivity.shouldShowRequestPermissionRationale(
+                            permission.ACCESS_FINE_LOCATION)) {
                         controller?.handleShowRationaleFlowCameraLocation(
                             currentActivity,
                             inAppCameraLocationPermissionLauncher, // Pass launcher
@@ -164,7 +166,8 @@ class ContributionsListFragment : CommonsDaggerSupportFragment(), ContributionsL
                         )
                     } else {
                         controller?.locationPermissionCallback?.onLocationPermissionDenied(
-                            currentActivity.getString(R.string.in_app_camera_location_permission_denied)
+                            currentActivity.getString(
+                                R.string.in_app_camera_location_permission_denied)
                         )
                     }
                 }
@@ -232,7 +235,10 @@ class ContributionsListFragment : CommonsDaggerSupportFragment(), ContributionsL
     }
 
     private fun initAdapter() {
-        adapter = ContributionsListAdapter(this, mediaClient!!, mediaDataExtractor!!, compositeDisposable)
+        adapter = ContributionsListAdapter(this,
+            mediaClient!!,
+            mediaDataExtractor!!,
+            compositeDisposable)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -307,7 +313,7 @@ class ContributionsListFragment : CommonsDaggerSupportFragment(), ContributionsL
             override fun onInterceptTouchEvent(rv: RecyclerView, e: MotionEvent): Boolean {
                 if (e.action == MotionEvent.ACTION_DOWN) {
                     if (isFabOpen) {
-                        animateFAB(isFabOpen)
+                        animateFAB(true)
                     }
                 }
                 return false
@@ -339,14 +345,20 @@ class ContributionsListFragment : CommonsDaggerSupportFragment(), ContributionsL
     }
 
     private fun getSpanCount(orientation: Int): Int {
-        return if (orientation == Configuration.ORIENTATION_LANDSCAPE) spanCountLandscape else spanCountPortrait
+        return if (orientation == Configuration.ORIENTATION_LANDSCAPE)
+            spanCountLandscape
+        else
+            spanCountPortrait
     }
 
     override fun onConfigurationChanged(newConfig: Configuration) {
         super.onConfigurationChanged(newConfig)
         // check orientation
         binding!!.fabLayout.orientation =
-            if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) LinearLayout.HORIZONTAL else LinearLayout.VERTICAL
+            if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE)
+                LinearLayout.HORIZONTAL
+            else
+                LinearLayout.VERTICAL
         rvContributionsList
             ?.setLayoutManager(
                 GridLayoutManager(context, getSpanCount(newConfig.orientation))
@@ -429,9 +441,9 @@ class ContributionsListFragment : CommonsDaggerSupportFragment(), ContributionsL
     /**
      * Shows welcome message if user has no contributions yet i.e. new user.
      */
-    override fun showWelcomeTip(shouldShow: Boolean) {
+    override fun showWelcomeTip(numberOfUploads: Boolean) {
         binding!!.noContributionsYet.visibility =
-            if (shouldShow) View.VISIBLE else View.GONE
+            if (numberOfUploads) View.VISIBLE else View.GONE
     }
 
     /**
@@ -464,9 +476,9 @@ class ContributionsListFragment : CommonsDaggerSupportFragment(), ContributionsL
         }
     }
 
-    override fun openMediaDetail(position: Int, isWikipediaButtonDisplayed: Boolean) {
+    override fun openMediaDetail(contribution: Int, isWikipediaPageExists: Boolean) {
         if (null != callback) { //Just being safe, ideally they won't be called when detached
-            callback!!.showDetail(position, isWikipediaButtonDisplayed)
+            callback!!.showDetail(contribution, isWikipediaPageExists)
         }
     }
 
@@ -496,13 +508,15 @@ class ContributionsListFragment : CommonsDaggerSupportFragment(), ContributionsL
         val fragmentManager = this.parentFragmentManager
         val fragment = newInstance(contribution)
         fragment.callback =
-            WikipediaInstructionsDialogFragment.Callback { contribution: Contribution?, copyWikicode: Boolean ->
+            WikipediaInstructionsDialogFragment.Callback {
+                contribution: Contribution?,
+                copyWikicode: Boolean ->
                 onConfirmClicked(
                     contribution,
                     copyWikicode
                 )
             }
-        fragment.show(fragmentManager!!, "WikimediaFragment")
+        fragment.show(fragmentManager, "WikimediaFragment")
     }
 
 
