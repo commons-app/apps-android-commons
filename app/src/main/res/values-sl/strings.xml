@@ -232,7 +232,6 @@
   <string name="_2fa_code">Koda 2FA</string>
   <string name="email_auth_code">Koda za preverjanje e-pošte</string>
   <string name="logout_verification">Ali se res želite odjaviti?</string>
-  <string name="mediaimage_failed">Nalaganje datoteke ni uspelo</string>
   <string name="no_subcategory_found">Najdena ni bila nobena podkategorija</string>
   <string name="no_parentcategory_found">Najdena ni bila nobena nadrejena kategorija</string>
   <string name="welcome_image_mount_zao">Gora Zao</string>

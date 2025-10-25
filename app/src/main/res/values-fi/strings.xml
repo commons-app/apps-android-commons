@@ -227,7 +227,6 @@
   <string name="_2fa_code">Kaksivaiheisen tunnistautumisen koodi</string>
   <string name="email_auth_code">Sähköpostivahvistuskoodi</string>
   <string name="logout_verification">Haluatko varmasti kirjautua ulos?</string>
-  <string name="mediaimage_failed">Mediakuva epäonnistui</string>
   <string name="no_subcategory_found">Alaluokkia ei löytynyt</string>
   <string name="no_parentcategory_found">Vanhempia luokkia ei löytynyt</string>
   <string name="welcome_image_mount_zao">Zao-vuori</string>

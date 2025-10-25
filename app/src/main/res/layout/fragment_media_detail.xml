@@ -24,16 +24,6 @@
           layout="@layout/show_captions_descriptions" />
     </LinearLayout>
 
-    <ImageView
-      android:id="@+id/mediaDetailImageFailed"
-      android:layout_height="wrap_content"
-      android:layout_width="wrap_content"
-      android:layout_gravity="center"
-      android:src="@android:drawable/ic_menu_close_clear_cancel"
-      android:visibility="gone"
-      android:contentDescription="@string/mediaimage_failed"
-      />
-
     <com.facebook.drawee.view.SimpleDraweeView
       android:id="@+id/mediaDetailImageView"
       android:layout_width="wrap_content"

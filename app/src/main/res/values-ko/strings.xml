@@ -227,7 +227,6 @@
   <string name="_2fa_code">2FA 코드</string>
   <string name="email_auth_code">이메일 인증 코드</string>
   <string name="logout_verification">정말 로그아웃하시겠습니까?</string>
-  <string name="mediaimage_failed">미디어 그림 실패</string>
   <string name="no_subcategory_found">하위 분류가 없습니다</string>
   <string name="no_parentcategory_found">상위 분류가 없습니다</string>
   <string name="welcome_image_mount_zao">자오 연봉</string>

@@ -226,7 +226,6 @@
   <string name="_2fa_code">2-stegsverif.kod</string>
   <string name="email_auth_code">E-postverifieringskod</string>
   <string name="logout_verification">Vill du verkligen logga ut?</string>
-  <string name="mediaimage_failed">Mediabild misslyckades</string>
   <string name="no_subcategory_found">Inga underkategorier hittades</string>
   <string name="no_parentcategory_found">Inga överordnade kategorier hittades</string>
   <string name="welcome_image_mount_zao">Zao</string>

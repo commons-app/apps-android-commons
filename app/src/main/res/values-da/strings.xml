@@ -225,7 +225,6 @@
   <string name="_2fa_code">2FA-kode</string>
   <string name="email_auth_code">E-mail-bekræftelseskode</string>
   <string name="logout_verification">Ønsker du at logge ud?</string>
-  <string name="mediaimage_failed">Mediebillede mislykkedes</string>
   <string name="no_subcategory_found">Ingen underkategorier fundet</string>
   <string name="no_parentcategory_found">Ingen overordnede kategorier fundet</string>
   <string name="welcome_image_mount_zao">Monter Zao</string>
