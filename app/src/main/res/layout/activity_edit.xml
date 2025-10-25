@@ -4,6 +4,7 @@
   android:layout_width="match_parent"
   android:layout_height="match_parent"
   android:layout_gravity="bottom"
+  android:fitsSystemWindows="true"
   tools:context=".edit.EditActivity"
   android:gravity="center"
   android:layout_margin="2dp"
@@ -22,7 +23,8 @@
     android:layout_gravity="bottom|center"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="2dp">
+    android:layout_margin="2dp"
+    android:paddingBottom="24dp">
 
     <androidx.appcompat.widget.AppCompatButton
       android:drawablePadding="4dp"
