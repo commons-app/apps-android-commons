@@ -248,7 +248,6 @@
   <string name="_2fa_code">2 Faktörlü Kimlik Doğrulama (2FA) Kodu</string>
   <string name="email_auth_code">E-posta doğrulama kodu</string>
   <string name="logout_verification">Gerçekten çıkış yapmak istiyor musunuz?</string>
-  <string name="mediaimage_failed">Medya Görüntüsü Başarısız Oldu</string>
   <string name="no_subcategory_found">Alt kategori bulunamadı</string>
   <string name="no_parentcategory_found">Üst kategori bulunamadı</string>
   <string name="welcome_image_mount_zao">Zao Dağı</string>

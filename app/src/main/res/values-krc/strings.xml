@@ -217,7 +217,6 @@
   <string name="_2fa_code">2FA Код</string>
   <string name="email_auth_code">Электрон почтаны верификация этигиз</string>
   <string name="logout_verification">Кертиден чыгъаргъа излеймисиз?</string>
-  <string name="mediaimage_failed">Медиа Сурат Джетишимсизди</string>
   <string name="no_subcategory_found">Тюб категория табылмады</string>
   <string name="no_parentcategory_found">Ана категорияла табылмадыла</string>
   <string name="welcome_image_mount_zao">Зао Тау</string>

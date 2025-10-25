@@ -203,7 +203,6 @@
   <string name="become_a_tester_description">สมัครเข้าร่วมช่องทางบีตาบน Google Play และเข้าถึงคุณลักษณะใหม่ ๆ และการแก้ไขบั๊กก่อนเปิดตัว</string>
   <string name="_2fa_code">รหัส 2FA</string>
   <string name="logout_verification">คุณต้องการออกจากระบบจริง ๆ หรือไม่?</string>
-  <string name="mediaimage_failed">ภาพสื่อล้มเหลว</string>
   <string name="no_subcategory_found">ไม่พบหมวดหมู่รองที่ต้องการ</string>
   <string name="no_parentcategory_found">ไม่พบหมวดหมู่ต้นทางที่ต้องการ</string>
   <string name="welcome_image_mount_zao">ภูเขาซะโอ</string>

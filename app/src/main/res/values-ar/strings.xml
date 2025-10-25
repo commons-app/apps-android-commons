@@ -275,7 +275,6 @@
   <string name="_2fa_code">رمز التحقق المزدوج 2FA</string>
   <string name="email_auth_code">رمز التحقق من البريد الإلكتروني</string>
   <string name="logout_verification">أترغب فعلا في الخروج؟</string>
-  <string name="mediaimage_failed">صورة الوسائط فشلت</string>
   <string name="no_subcategory_found">لم يتم العثور على تصنيفات فرعية.</string>
   <string name="no_parentcategory_found">لم يتم العثور على تصنيفات رئيسية.</string>
   <string name="welcome_image_mount_zao">جبل زوا</string>

@@ -228,7 +228,6 @@
   <string name="_2fa_code">Login form label.</string>
   <string name="email_auth_code">Login screen command.</string>
   <string name="logout_verification">Confirmation string.</string>
-  <string name="mediaimage_failed">Alternative text.</string>
   <string name="no_subcategory_found">Notice when searching for subcategories.</string>
   <string name="no_parentcategory_found">Notice when searching for subcategories.</string>
   <string name="welcome_image_mount_zao">This is a mountain between Yamagata and Miyagi Prefectures in Japan, see [[d:Q167951]] for details.</string>

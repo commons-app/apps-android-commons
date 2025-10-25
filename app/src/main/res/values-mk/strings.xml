@@ -222,7 +222,6 @@
   <string name="_2fa_code">2ЧЗ-код</string>
   <string name="email_auth_code">Испрати го потврдниот код на е-пошта</string>
   <string name="logout_verification">Дали навистина сакате да се одјавите?</string>
-  <string name="mediaimage_failed">Сликата не успеа</string>
   <string name="no_subcategory_found">Не пронајдов поткатегории</string>
   <string name="no_parentcategory_found">Не пронајдов матични категории</string>
   <string name="welcome_image_mount_zao">Зао</string>

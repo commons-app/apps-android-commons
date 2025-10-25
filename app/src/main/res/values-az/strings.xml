@@ -227,7 +227,6 @@
   <string name="_2fa_code">2FA kodu</string>
   <string name="email_auth_code">E-poçt doğrulama kodu</string>
   <string name="logout_verification">Həqiqətən çıxış etmək istəyirsiniz?</string>
-  <string name="mediaimage_failed">Media şəkli uğursuz oldu</string>
   <string name="no_subcategory_found">Heç bir alt kateqoriya tapılmadı</string>
   <string name="no_parentcategory_found">Heç bir üst kateqoriya tapılmadı</string>
   <string name="welcome_image_mount_zao">Zao dağı</string>

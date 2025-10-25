@@ -219,7 +219,6 @@
   <string name="_2fa_code">2ფა კოდი</string>
   <string name="email_auth_code">ელფოსტის დამადასტურებელი კოდი</string>
   <string name="logout_verification">ნამდვილად გსურთ გასვლა?</string>
-  <string name="mediaimage_failed">მედიაგამოსახულების შეცდომა</string>
   <string name="no_subcategory_found">ქვეკატეგორიები ვერ მოიძებნა</string>
   <string name="no_parentcategory_found">ზედა დონის კატეგორიები ვერ მოიძებნა</string>
   <string name="welcome_image_mount_zao">ზაოს მთა</string>
