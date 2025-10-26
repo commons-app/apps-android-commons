@@ -369,19 +369,9 @@ class ExploreMapFragment : CommonsDaggerSupportFragment(), ExploreMapContract.Vi
 
         // if we came from 'Show in Explore' in Nearby, load Nearby map center and zoom
         if (isCameFromNearbyMap) {
-            val minZoom = 1.0
-            val maxZoom = 22.0
-            val defaultNearbyZoom = 15.0
-
-            val safeZoom = when {
-                prevZoom > maxZoom -> maxZoom
-                prevZoom < minZoom -> defaultNearbyZoom
-                else -> prevZoom
-            }
-
             moveCameraToPosition(
                 GeoPoint(prevLatitude, prevLongitude),
-                safeZoom,
+                prevZoom.coerceIn(1.0, 22.0),
                 1L
             )
         } else {

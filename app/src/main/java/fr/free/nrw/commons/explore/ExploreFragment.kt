@@ -142,8 +142,8 @@ class ExploreFragment : CommonsDaggerSupportFragment() {
      */
     private val isCameFromNearbyMap: Boolean
         get() = (arguments?.containsKey("prev_zoom") == true
-                || arguments?.containsKey("prev_latitude") == true
-                || arguments?.containsKey("prev_longitude") == true)
+                && arguments?.containsKey("prev_latitude") == true
+                && arguments?.containsKey("prev_longitude") == true)
 
     fun onBackPressed(): Boolean {
         if (binding!!.tabLayout.selectedTabPosition == 0) {
