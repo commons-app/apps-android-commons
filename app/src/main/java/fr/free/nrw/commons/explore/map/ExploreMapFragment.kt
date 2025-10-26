@@ -102,6 +102,7 @@ class ExploreMapFragment : CommonsDaggerSupportFragment(), ExploreMapContract.Vi
     private var prevLatitude = 0.0
     private var prevLongitude = 0.0
     private var recentlyCameFromNearbyMap = false
+    private var shouldPerformMapReadyActionsOnResume = false
     private var presenter: ExploreMapPresenter? = null
     private var binding: FragmentExploreMapBinding? = null
     var mediaList: MutableList<Media>? = null
@@ -281,6 +282,10 @@ class ExploreMapFragment : CommonsDaggerSupportFragment(), ExploreMapContract.Vi
             requireActivity().registerReceiver(broadcastReceiver, intentFilter)
         }
         setSearchThisAreaButtonVisibility(false)
+        if (shouldPerformMapReadyActionsOnResume) {
+            shouldPerformMapReadyActionsOnResume = false
+            performMapReadyActions()
+        }
     }
 
     override fun onPause() {
@@ -292,6 +297,11 @@ class ExploreMapFragment : CommonsDaggerSupportFragment(), ExploreMapContract.Vi
     }
 
     fun requestLocationIfNeeded() {
+        if (isResumed) {
+            performMapReadyActions()
+        } else {
+            shouldPerformMapReadyActionsOnResume = true
+        }
         if (!isVisible) return  //  skips if not visible to user
         if (locationPermissionsHelper!!.checkLocationPermission(requireActivity())) {
             if (locationPermissionsHelper!!.isLocationAccessToAppsTurnedOn()) {
@@ -359,9 +369,19 @@ class ExploreMapFragment : CommonsDaggerSupportFragment(), ExploreMapContract.Vi
 
         // if we came from 'Show in Explore' in Nearby, load Nearby map center and zoom
         if (isCameFromNearbyMap) {
+            val minZoom = 1.0
+            val maxZoom = 22.0
+            val defaultNearbyZoom = 15.0
+
+            val safeZoom = when {
+                prevZoom > maxZoom -> maxZoom
+                prevZoom < minZoom -> defaultNearbyZoom
+                else -> prevZoom
+            }
+
             moveCameraToPosition(
                 GeoPoint(prevLatitude, prevLongitude),
-                prevZoom,
+                safeZoom,
                 1L
             )
         } else {
@@ -379,12 +399,11 @@ class ExploreMapFragment : CommonsDaggerSupportFragment(), ExploreMapContract.Vi
         // get fragment arguments
         if (arguments != null) {
             with (requireArguments()) {
-                prevZoom = getDouble("prev_zoom")
-                prevLatitude = getDouble("prev_latitude")
-                prevLongitude = getDouble("prev_longitude")
+                if (containsKey("prev_zoom")) prevZoom = getDouble("prev_zoom")
+                if (containsKey("prev_latitude")) prevLatitude = getDouble("prev_latitude")
+                if (containsKey("prev_longitude")) prevLongitude = getDouble("prev_longitude")
             }
         }
-
         setRecentlyCameFromNearbyMap(isCameFromNearbyMap)
     }
 
