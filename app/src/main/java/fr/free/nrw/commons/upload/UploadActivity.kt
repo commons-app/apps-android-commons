@@ -314,6 +314,16 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
         // Check if all required permissions are granted
         val hasAllPermissions = hasPermission(this, PERMISSIONS_STORAGE)
         val hasPartialAccess = hasPartialAccess(this)
+
+        // The share intent provides files via content uris with temporary read permissions,
+        // so we do not need to obtain storage permissions
+        val intent = intent
+        val action = intent.action
+        if (Intent.ACTION_SEND == action || Intent.ACTION_SEND_MULTIPLE == action) {
+            receiveSharedItems()
+            return
+        }
+
         if (hasAllPermissions || hasPartialAccess) {
             // All required permissions are granted, so enable UI elements and perform actions
             receiveSharedItems()
