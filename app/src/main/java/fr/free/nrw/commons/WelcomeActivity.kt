@@ -5,12 +5,16 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import androidx.core.text.TextUtilsCompat
+import com.zhpan.indicator.enums.IndicatorOrientation
 import fr.free.nrw.commons.databinding.ActivityWelcomeBinding
 import fr.free.nrw.commons.databinding.PopupForCopyrightBinding
 import fr.free.nrw.commons.quiz.QuizActivity
+import fr.free.nrw.commons.settings.Prefs
 import fr.free.nrw.commons.theme.BaseActivity
 import fr.free.nrw.commons.utils.applyEdgeToEdgeAllInsets
 import fr.free.nrw.commons.utils.ConfigUtils.isBetaFlavour
+import java.util.Locale
 
 class WelcomeActivity : BaseActivity() {
     private var binding: ActivityWelcomeBinding? = null
@@ -46,7 +50,20 @@ class WelcomeActivity : BaseActivity() {
 
         val adapter = WelcomePagerAdapter()
         binding!!.welcomePager.adapter = adapter
-        binding!!.welcomePagerIndicator.setViewPager(binding!!.welcomePager)
+        binding!!.welcomePagerIndicator.setupWithViewPager(binding!!.welcomePager)
+
+        //Unfortunately, setting the page indicator direction (LTR vs RTL) must be done in Kotlin
+
+        //Assume LTR until language is checked.
+        var orientation = IndicatorOrientation.INDICATOR_HORIZONTAL
+
+        val languageCode = defaultKvStore.getString(Prefs.APP_UI_LANGUAGE)
+        if (languageCode != null && TextUtilsCompat.getLayoutDirectionFromLocale(
+                Locale(languageCode)) == View.LAYOUT_DIRECTION_RTL) {
+            orientation = IndicatorOrientation.INDICATOR_RTL
+        }
+
+        binding!!.welcomePagerIndicator.setOrientation(orientation)
         binding!!.finishTutorialButton.setOnClickListener { v: View? -> finishTutorial() }
     }
 
