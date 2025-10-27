@@ -2,9 +2,10 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
     android:background="@color/primaryColor">
 
-    <androidx.viewpager.widget.ViewPager
+    <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/welcomePager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -14,7 +15,7 @@
         android:id="@+id/finishTutorialButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="right"
+        android:layout_gravity="end"
         android:padding="@dimen/standard_gap"
         android:text="@string/welcome_skip_button"
         android:textColor="@color/white"
@@ -22,11 +23,14 @@
         android:textStyle="bold"
         android:visibility="gone" />
 
-    <com.viewpagerindicator.CirclePageIndicator
+    <com.zhpan.indicator.IndicatorView
         android:id="@+id/welcomePagerIndicator"
         android:layout_width="match_parent"
         android:layout_height="@dimen/half_standard_height"
-        android:layout_gravity="bottom"
-        android:padding="@dimen/tiny_padding" />
+        android:layout_gravity="bottom|center_horizontal"
+        android:padding="@dimen/tiny_padding"
+        android:layout_marginBottom="10dp"
+        custom:vpi_slider_checked_color="@color/white"
+        custom:vpi_slider_radius="3dp" />
 
 </FrameLayout>
