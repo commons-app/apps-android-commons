@@ -4,7 +4,7 @@
 -->
 <resources>
   <string name="commons_facebook">Pàgina su Facebook ëd Comun</string>
-  <string name="commons_github" fuzzy="true">Còdes sorgiss Github ëd Comun</string>
+  <string name="commons_github">Còdes sorgiss GitHub ëd Comun</string>
   <string name="commons_logo">Marca ëd Comun</string>
   <string name="commons_website">Sit an sl\'aragnà ëd Comun</string>
   <string name="exit_location_picker">Seurte dal selessionador ëd locassion</string>
@@ -129,7 +129,7 @@
   <string name="title_activity_settings">Paràmeter</string>
   <string name="title_activity_signup">Marchesse</string>
   <string name="title_activity_featured_images">Plance an evidensa</string>
-  <string name="images_featured_explanation" fuzzy="true">Le fòto an evidensa a son ëd plance fàite da dij fotògraf e ilustrator motobin àbij che la comunità ëd Wikipedia Commons a l\'ha sernù tra cole ëd qualità pi àuta an sël sit.</string>
+  <string name="images_featured_explanation">Le fòto an evidensa a son ëd plance contribussion ëd fotògraf e ilustrator motobin adret che la comunità ëd Wikipedia Commons a l\'ha sernù tra cole ëd qualità pi àuta an sël sit.</string>
   <string name="title_activity_custom_selector">Seletor përsonalisà</string>
   <string name="title_activity_category_details">Categorìa</string>
   <string name="title_activity_review">Revision da par</string>
