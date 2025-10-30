@@ -381,7 +381,8 @@ after opening the app.
             if (contributionsFragment?.backButtonClicked() != true) { //If this one does not want to handle
                 // the back press, let the activity do so
                 super.onBackPressed()
-                }
+                showTabs()
+            }
             }
         ActiveFragment.NEARBY -> {
             // Means that nearby fragment is visible
@@ -390,7 +391,8 @@ after opening the app.
                 supportFragmentManager.beginTransaction().remove(it).commit()
                     }
                 setSelectedItemId(NavTab.CONTRIBUTIONS.code())
-                }
+                showTabs()
+            }
             }
          ActiveFragment.EXPLORE -> {
             // Explore Fragment is visible
@@ -400,15 +402,18 @@ after opening the app.
                 } else {
                     setSelectedItemId(NavTab.CONTRIBUTIONS.code())
                     }
-                }
+                showTabs()
+            }
             }
          ActiveFragment.BOOKMARK -> {
             // Means that bookmark fragment is visible
             bookmarkFragment?.onBackPressed()
-            }
+             showTabs()
+         }
          else -> {
             super.onBackPressed()
-            }
+             showTabs()
+         }
         }
     }
 
