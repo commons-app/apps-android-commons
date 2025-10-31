@@ -907,26 +907,24 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
         linearLayoutManager.orientation = LinearLayoutManager.VERTICAL
         binding!!.nearbyFilterList.searchListView.layoutManager = linearLayoutManager
         nearbyFilterSearchRecyclerViewAdapter = NearbyFilterSearchRecyclerViewAdapter(
-            context, ArrayList(Label.entries),
-            binding!!.nearbyFilterList.searchListView
+            requireContext(), ArrayList(Label.entries)
         )
-        nearbyFilterSearchRecyclerViewAdapter!!.setCallback(
+        nearbyFilterSearchRecyclerViewAdapter!!.callback =
             object : NearbyFilterSearchRecyclerViewAdapter.Callback {
                 override fun setCheckboxUnknown() {
                     presenter!!.setCheckboxUnknown()
                 }
 
                 override fun filterByMarkerType(
-                    selectedLabels: ArrayList<Label>, i: Int,
-                    b: Boolean, b1: Boolean
+                    selectedLabels: List<Label>, i: Int, filterForPlaceState: Boolean,
+                    filterForAllNoneType: Boolean
                 ) {
-                    presenter!!.filterByMarkerType(selectedLabels, i, b, b1)
+                    presenter!!.filterByMarkerType(selectedLabels, i, filterForPlaceState, filterForAllNoneType)
                 }
 
-                override fun isDarkTheme(): Boolean {
-                    return _isDarkTheme
-                }
-            })
+                override val isDarkTheme: Boolean
+                    get() = _isDarkTheme
+            }
         restoreStoredFilterSelection()
         binding!!.nearbyFilterList.root
             .layoutParams.width = getScreenWidth(
