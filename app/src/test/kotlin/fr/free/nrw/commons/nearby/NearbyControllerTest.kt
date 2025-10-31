@@ -8,8 +8,8 @@ import com.nhaarman.mockitokotlin2.eq
 import fr.free.nrw.commons.BaseMarker
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.location.LatLng
-import fr.free.nrw.commons.nearby.NearbyController.loadAttractionsFromLocationToBaseMarkerOptions
-import fr.free.nrw.commons.nearby.NearbyController.updateMarkerLabelListBookmark
+import fr.free.nrw.commons.nearby.NearbyController.Companion.loadAttractionsFromLocationToBaseMarkerOptions
+import fr.free.nrw.commons.nearby.NearbyController.Companion.updateMarkerLabelListBookmark
 import org.junit.Before
 import org.junit.Test
 import org.junit.jupiter.api.Assertions.assertEquals
@@ -175,8 +175,8 @@ class NearbyControllerTest {
             false,
             customQuery,
         )
-        assertEquals(result.currentLatLng, currentLatLng)
-        assertEquals(result.searchLatLng, searchLatLong)
+        assertEquals(result?.currentLatLng, currentLatLng)
+        assertEquals(result?.searchLatLng, searchLatLong)
     }
 
     @Test
@@ -223,8 +223,8 @@ class NearbyControllerTest {
                 true,
                 customQuery,
             )
-        assertEquals(result.currentLatLng, currentLatLng)
-        assertEquals(result.searchLatLng, searchLatLong)
+        assertEquals(result?.currentLatLng, currentLatLng)
+        assertEquals(result?.searchLatLng, searchLatLong)
     }
 
     @Test
@@ -271,8 +271,8 @@ class NearbyControllerTest {
                 true,
                 customQuery,
             )
-        assertEquals(result.currentLatLng, currentLatLng)
-        assertEquals(result.searchLatLng, searchLatLong)
+        assertEquals(result?.currentLatLng, currentLatLng)
+        assertEquals(result?.searchLatLng, searchLatLong)
     }
 
     @Test
