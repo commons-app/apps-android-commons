@@ -906,7 +906,7 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
         linearLayoutManager.orientation = LinearLayoutManager.VERTICAL
         binding!!.nearbyFilterList.searchListView.layoutManager = linearLayoutManager
         nearbyFilterSearchRecyclerViewAdapter = NearbyFilterSearchRecyclerViewAdapter(
-            context, ArrayList(Label.valuesAsList()),
+            context, ArrayList(Label.entries),
             binding!!.nearbyFilterList.searchListView
         )
         nearbyFilterSearchRecyclerViewAdapter!!.setCallback(
@@ -950,9 +950,9 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
         val savedLabels = ArrayList(NearbyFilterState.selectedLabels)
         adapter.selectedLabels.clear()
         val savedSet = savedLabels.toSet()
-        Label.valuesAsList().forEach { label ->
+        Label.entries.forEach { label ->
             val isSelected = savedSet.contains(label)
-            label.setSelected(isSelected)
+            label.isSelected = isSelected
             if (isSelected) {
                 adapter.selectedLabels.add(label)
             }

@@ -9,9 +9,9 @@ import kotlinx.parcelize.Parcelize
  */
 @Parcelize
 class Sitelinks(
-    private val wikipediaLink: String,
+    private val wikipediaLink: String?,
     private val commonsLink: String?,
-    private val wikidataLink: String
+    private val wikidataLink: String?
 ) : Parcelable {
     /**
      * Gets the Wikipedia link for a Place
@@ -26,7 +26,7 @@ class Sitelinks(
      * @return Commons link
      */
     fun getCommonsLink(): Uri? {
-        return sanitiseString(commonsLink!!)
+        return sanitiseString(commonsLink)
     }
 
     /**
@@ -69,7 +69,7 @@ class Sitelinks(
         }
 
         fun build(): Sitelinks {
-            return Sitelinks(wikipediaLink!!, commonsLink, wikidataLink!!)
+            return Sitelinks(wikipediaLink, commonsLink, wikidataLink)
         }
     }
 
@@ -79,9 +79,11 @@ class Sitelinks(
          * @param stringUrl unsanitised link
          * @return sanitised and parsed link
          */
-        private fun sanitiseString(stringUrl: String): Uri? {
-            val sanitisedStringUrl = stringUrl.replace("[<>\n\r]".toRegex(), "").trim { it <= ' ' }
-            return Uri.parse(sanitisedStringUrl)
+        private fun sanitiseString(stringUrl: String?): Uri? {
+            return stringUrl?.let {
+                val sanitisedStringUrl = it.replace("[<>\n\r]".toRegex(), "").trim { it <= ' ' }
+                Uri.parse(sanitisedStringUrl)
+            }
         }
     }
 }
