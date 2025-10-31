@@ -315,7 +315,7 @@ public class NearbyController extends MapController {
         for (ListIterator<MarkerPlaceGroup> iter = markerLabelList.listIterator();
             iter.hasNext(); ) {
             MarkerPlaceGroup markerPlaceGroup = iter.next();
-            if (markerPlaceGroup.getPlace().getWikiDataEntityId()
+            if (markerPlaceGroup.place.getWikiDataEntityId()
                 .equals(place.getWikiDataEntityId())) {
                 iter.set(new MarkerPlaceGroup(isBookmarked, place));
             }

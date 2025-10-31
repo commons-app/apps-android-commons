@@ -437,7 +437,7 @@ class NearbyParentFragmentPresenter
                         if (clickedPlacesBacklog.containsKey(group.place.location)) {
                             updatedGroups[index] = MarkerPlaceGroup(
                                 updatedGroups[index].isBookmarked,
-                                clickedPlacesBacklog[group.place.location]
+                                clickedPlacesBacklog[group.place.location]!!
                             )
                         }
                     }
