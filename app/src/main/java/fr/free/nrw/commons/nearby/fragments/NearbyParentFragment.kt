@@ -947,7 +947,7 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
 
     private fun restoreStoredFilterSelection() {
         val adapter = nearbyFilterSearchRecyclerViewAdapter ?: return
-        val savedLabels = ArrayList(NearbyFilterState.getInstance().selectedLabels)
+        val savedLabels = ArrayList(NearbyFilterState.selectedLabels)
         adapter.selectedLabels.clear()
         val savedSet = savedLabels.toSet()
         Label.valuesAsList().forEach { label ->
