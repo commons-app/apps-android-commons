@@ -488,16 +488,18 @@ class UploadWorker(
                             uploadResult.filename,
                             contribution.media.captions,
                         )
-                    if (null != revisionID) {
-                        withContext(Dispatchers.IO) {
-                            val place = placesRepository.fetchPlace(wikiDataPlace.id)
-                            place.name = wikiDataPlace.name
-                            place.pic = HOME_URL + uploadResult.createCanonicalFileName()
-                            placesRepository
-                                .save(place)
-                                .subscribeOn(Schedulers.io())
-                                .blockingAwait()
-                            Timber.d("Updated WikiItem place ${place.name} with image ${place.pic}")
+                        if (null != revisionID) {
+                            withContext(Dispatchers.IO) {
+                                val place = placesRepository.fetchPlace(wikiDataPlace.id)
+                                place?.let {
+                                    it.name = wikiDataPlace.name
+                                    it.pic = HOME_URL + uploadResult.createCanonicalFileName()
+                                    placesRepository
+                                        .save(it)
+                                        .subscribeOn(Schedulers.io())
+                                        .blockingAwait()
+                                    Timber.d("Updated WikiItem place ${it.name} with image ${it.pic}")
+                                }
                             }
                         }
                     }

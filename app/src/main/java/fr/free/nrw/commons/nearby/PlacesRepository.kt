@@ -16,7 +16,7 @@ class PlacesRepository @Inject constructor(private val localDataSource: PlacesLo
      * @param place The Place object to be saved.
      * @return A Completable that completes once the save operation is done.
      */
-    fun save(place: Place?): Completable = localDataSource.savePlace(place)
+    fun save(place: Place): Completable = localDataSource.savePlace(place)
 
     /**
      * Fetches a Place object from the database based on the provided entity ID.
@@ -24,7 +24,7 @@ class PlacesRepository @Inject constructor(private val localDataSource: PlacesLo
      * @param entityID The entity ID of the Place to be retrieved.
      * @return The Place object with the specified entity ID.
      */
-    fun fetchPlace(entityID: String): Place = localDataSource.fetchPlace(entityID)
+    fun fetchPlace(entityID: String): Place? = localDataSource.fetchPlace(entityID)
 
     /**
      * Retrieves a list of places within the geographical area specified by map's opposite corners.

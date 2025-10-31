@@ -1697,10 +1697,10 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
     }
 
     fun savePlaceToDatabase(place: Place?) {
-        placesRepository?.save(place)?.subscribeOn(Schedulers.io())?.subscribe()?.let {
-            compositeDisposable.add(
-                it
-            )
+        place?.let {
+            placesRepository?.save(it)?.subscribeOn(Schedulers.io())?.subscribe()?.let {
+                compositeDisposable.add(it)
+            }
         }
     }
 
