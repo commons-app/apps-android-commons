@@ -1,7 +1,6 @@
 package fr.free.nrw.commons.nearby.presenter
 
 import android.location.Location
-import android.view.View
 import androidx.annotation.MainThread
 import androidx.lifecycle.LifecycleCoroutineScope
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao
@@ -25,13 +24,9 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.ensureActive
-import kotlinx.coroutines.job
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
-import okhttp3.internal.wait
 import timber.log.Timber
-import java.io.IOException
 import java.lang.reflect.InvocationHandler
 import java.lang.reflect.Method
 import java.lang.reflect.Proxy
@@ -164,9 +159,9 @@ class NearbyParentFragmentPresenter
         nearbyParentFragmentView = DUMMY
     }
 
-    override fun removeNearbyPreferences(applicationKvStore: JsonKvStore) {
+    override fun removeNearbyPreferences(applicationKvStore: JsonKvStore?) {
         Timber.d("Remove place objects")
-        applicationKvStore.remove(PLACE_OBJECT)
+        applicationKvStore?.remove(PLACE_OBJECT)
     }
 
     fun initializeMapOperations() {
@@ -179,7 +174,7 @@ class NearbyParentFragmentPresenter
      * Sets click listeners of FABs, and 2 bottom sheets
      */
     override fun setActionListeners(applicationKvStore: JsonKvStore?) {
-        nearbyParentFragmentView.setFABPlusAction(View.OnClickListener { v: View? ->
+        nearbyParentFragmentView.setFABPlusAction {
             if (applicationKvStore != null && applicationKvStore.getBoolean(
                     "login_skipped", false
                 )
@@ -189,22 +184,22 @@ class NearbyParentFragmentPresenter
             } else {
                 nearbyParentFragmentView.animateFABs()
             }
-        })
+        }
 
-        nearbyParentFragmentView.setFABRecenterAction(View.OnClickListener { v: View? ->
+        nearbyParentFragmentView.setFABRecenterAction {
             nearbyParentFragmentView.recenterMap(currentLatLng)
-        })
+        }
     }
 
     override fun backButtonClicked(): Boolean {
         if (nearbyParentFragmentView.isAdvancedQueryFragmentVisible()) {
             nearbyParentFragmentView.showHideAdvancedQueryFragment(false)
             return true
-        } else if (nearbyParentFragmentView.isListBottomSheetExpanded()) {
+        } else if (nearbyParentFragmentView.isListBottomSheetExpanded) {
             // Back should first hide the bottom sheet if it is expanded
             nearbyParentFragmentView.listOptionMenuItemClicked()
             return true
-        } else if (nearbyParentFragmentView.isDetailsBottomSheetVisible()) {
+        } else if (nearbyParentFragmentView.isDetailsBottomSheetVisible) {
             nearbyParentFragmentView.setBottomSheetDetailsSmaller()
             return true
         }
@@ -242,21 +237,13 @@ class NearbyParentFragmentPresenter
             return
         }
 
-        if (!nearbyParentFragmentView.isNetworkConnectionEstablished()) {
+        if (!nearbyParentFragmentView.isNetworkConnectionEstablished) {
             Timber.d("Network connection is not established")
             return
         }
 
         val lastLocation = nearbyParentFragmentView.getLastMapFocus()
-        currentLatLng = if (nearbyParentFragmentView.getMapCenter() != null) {
-            nearbyParentFragmentView.getMapCenter()
-        } else {
-            lastLocation
-        }
-        if (currentLatLng == null) {
-            Timber.d("Skipping update of nearby places as location is unavailable")
-            return
-        }
+        currentLatLng = nearbyParentFragmentView.getMapCenter()
 
         /**
          * Significant changed - Markers and current location will be updated together
@@ -512,8 +499,10 @@ class NearbyParentFragmentPresenter
     }
 
     override fun filterByMarkerType(
-        selectedLabels: List<Label?>?, state: Int,
-        filterForPlaceState: Boolean, filterForAllNoneType: Boolean
+        selectedLabels: List<Label>?,
+        state: Int,
+        filterForPlaceState: Boolean,
+        filterForAllNoneType: Boolean
     ) {
         if (filterForAllNoneType) { // Means we will set labels based on states
             when (state) {
@@ -570,10 +559,10 @@ class NearbyParentFragmentPresenter
             loadPlacesDataAyncJob?.cancel()
             localPlaceSearchJob = scope.launch(Dispatchers.IO) {
                 delay(LOCAL_SCROLL_DELAY)
-                val mapFocus = nearbyParentFragmentView.mapFocus
+                val mapFocus = nearbyParentFragmentView.getMapFocus()
                 val markerPlaceGroups = placesRepository.fetchPlaces(
-                    nearbyParentFragmentView.screenBottomLeft,
-                    nearbyParentFragmentView.screenTopRight
+                    nearbyParentFragmentView.getScreenBottomLeft(),
+                    nearbyParentFragmentView.getScreenTopRight()
                 ).sortedBy { it.getDistanceInDouble(mapFocus) }.take(NearbyController.MAX_RESULTS)
                     .map {
                         MarkerPlaceGroup(
@@ -609,15 +598,15 @@ class NearbyParentFragmentPresenter
         nearbyParentFragmentView.setCheckBoxState(CheckBoxTriStates.UNKNOWN)
     }
 
-    override fun setAdvancedQuery(query: String) {
-        this.customQuery = query
+    override fun setAdvancedQuery(query: String?) {
+        customQuery = query
     }
 
     override fun searchViewGainedFocus() {
-        if (nearbyParentFragmentView.isListBottomSheetExpanded()) {
+        if (nearbyParentFragmentView.isListBottomSheetExpanded) {
             // Back should first hide the bottom sheet if it is expanded
             nearbyParentFragmentView.hideBottomSheet()
-        } else if (nearbyParentFragmentView.isDetailsBottomSheetVisible()) {
+        } else if (nearbyParentFragmentView.isDetailsBottomSheetVisible) {
             nearbyParentFragmentView.hideBottomDetailsSheet()
         }
     }
@@ -642,9 +631,6 @@ class NearbyParentFragmentPresenter
      * @return Returns true if search this area button is used around our current location
      */
     fun searchCloseToCurrentLocation(): Boolean {
-        if (null == nearbyParentFragmentView.getLastMapFocus()) {
-            return true
-        }
         //TODO
         val myLocation = Location("")
         val destLocation = Location("")
@@ -667,7 +653,7 @@ class NearbyParentFragmentPresenter
         private val DUMMY = Proxy.newProxyInstance(
             NearbyParentFragmentContract.View::class.java.getClassLoader(),
             arrayOf<Class<*>>(NearbyParentFragmentContract.View::class.java),
-            InvocationHandler { proxy: Any?, method: Method?, args: Array<Any?>? ->
+            InvocationHandler { _: Any?, method: Method?, _: Array<Any?>? ->
                 if (method!!.name == "onMyEvent") {
                     return@InvocationHandler null
                 } else if (String::class.java == method.returnType) {

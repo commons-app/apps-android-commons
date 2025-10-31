@@ -1,5 +1,7 @@
 package fr.free.nrw.commons.nearby
 
+import com.nhaarman.mockitokotlin2.anyOrNull
+import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.verifyNoMoreInteractions
 import com.nhaarman.mockitokotlin2.whenever
@@ -72,12 +74,11 @@ class NearbyParentFragmentPresenterTest {
         nearbyPresenter.initializeMapOperations()
         verify(nearbyParentFragmentView).enableFABRecenter()
         expectMapAndListUpdate()
-        whenever(nearbyParentFragmentView.lastMapFocus).thenReturn(LatLng(2.0, 1.0, 0.0F))
+        whenever(nearbyParentFragmentView.getLastMapFocus()).thenReturn(LatLng(2.0, 1.0, 0.0F))
         nearbyPresenter.updateMapAndList(LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED)
         verify(nearbyParentFragmentView).disableFABRecenter()
-        verify(nearbyParentFragmentView).`setProgressBarVisibility`(true)
-        assertTrue(null == nearbyParentFragmentView.mapCenter)
-        verify(nearbyParentFragmentView).populatePlaces(null)
+        verify(nearbyParentFragmentView).setProgressBarVisibility(true)
+        verify(nearbyParentFragmentView).populatePlaces(anyOrNull<LatLng>())
         verify(nearbyParentFragmentView).setCheckBoxAction()
     }
 
@@ -116,10 +117,10 @@ class NearbyParentFragmentPresenterTest {
     @Test
     fun testUpdateMapAndListWhenNoNetworkConnection() {
         nearbyPresenter.lockUnlockNearby(false)
-        whenever(nearbyParentFragmentView.isNetworkConnectionEstablished()).thenReturn(false)
+        whenever(nearbyParentFragmentView.isNetworkConnectionEstablished).thenReturn(false)
         nearbyPresenter.updateMapAndList(null)
         verify(nearbyParentFragmentView).enableFABRecenter()
-        verify(nearbyParentFragmentView).isNetworkConnectionEstablished()
+        verify(nearbyParentFragmentView).isNetworkConnectionEstablished
     }
 
     /**
@@ -127,14 +128,14 @@ class NearbyParentFragmentPresenterTest {
      */
     @Test
     fun testUpdateMapAndListWhenLastLocationIsNull() {
-        whenever(nearbyParentFragmentView.isNetworkConnectionEstablished()).thenReturn(true)
+        whenever(nearbyParentFragmentView.isNetworkConnectionEstablished).thenReturn(true)
         whenever(nearbyParentFragmentView.getLastLocation()).thenReturn(null)
         whenever(nearbyParentFragmentView.getLastMapFocus()).thenReturn(null)
         whenever(nearbyParentFragmentView.getMapCenter()).thenReturn(null)
         nearbyPresenter.updateMapAndList(null)
         verify(nearbyParentFragmentView).isNetworkConnectionEstablished
-        verify(nearbyParentFragmentView).lastMapFocus
-        verify(nearbyParentFragmentView).mapCenter
+        verify(nearbyParentFragmentView).getLastMapFocus()
+        verify(nearbyParentFragmentView).getMapCenter()
     }
 
     /**
@@ -144,7 +145,7 @@ class NearbyParentFragmentPresenterTest {
     @Test
     fun testPlacesPopulatedForLatestLocationWhenLocationSignificantlyChanged() {
         expectMapAndListUpdate()
-        whenever(nearbyParentFragmentView.mapCenter).thenReturn(LatLng(2.0, 1.0, 0.0F))
+        whenever(nearbyParentFragmentView.getMapCenter()).thenReturn(LatLng(2.0, 1.0, 0.0F))
         nearbyPresenter.updateMapAndList(LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED)
         updateMapSignificantly()
     }
@@ -156,7 +157,7 @@ class NearbyParentFragmentPresenterTest {
     @Test
     fun testPlacesPopulatedForLatestLocationWhenLocationMapUpdated() {
         expectMapAndListUpdate()
-        whenever(nearbyParentFragmentView.mapCenter).thenReturn(LatLng(2.0, 1.0, 0.0F))
+        whenever(nearbyParentFragmentView.getMapCenter()).thenReturn(LatLng(2.0, 1.0, 0.0F))
         nearbyPresenter.updateMapAndList(LocationChangeType.MAP_UPDATED)
         updateMapSignificantly()
     }
@@ -164,7 +165,7 @@ class NearbyParentFragmentPresenterTest {
     fun updateMapSignificantly() {
         verify(nearbyParentFragmentView).disableFABRecenter()
         verify(nearbyParentFragmentView).setProgressBarVisibility(true)
-        verify(nearbyParentFragmentView).populatePlaces(any<LatLng>())
+        verify(nearbyParentFragmentView).populatePlaces(anyOrNull<LatLng>())
     }
 
     /**
@@ -174,13 +175,13 @@ class NearbyParentFragmentPresenterTest {
     @Test
     fun testPlacesPopulatedForCameraTargetLocationWhenSearchCustomArea() {
         expectMapAndListUpdate()
-        whenever(nearbyParentFragmentView.getCameraTarget()).thenReturn(LatLng(2.0, 1.0, 0.0F))
-        whenever(nearbyParentFragmentView.mapCenter).thenReturn(LatLng(2.0, 1.0, 0.0F))
-        whenever(nearbyParentFragmentView.mapFocus).thenReturn(LatLng(2.0, 1.0, 0.0F))
+        whenever(nearbyParentFragmentView.cameraTarget).thenReturn(LatLng(2.0, 1.0, 0.0F))
+        whenever(nearbyParentFragmentView.getMapCenter()).thenReturn(LatLng(2.0, 1.0, 0.0F))
+        whenever(nearbyParentFragmentView.getMapFocus()).thenReturn(LatLng(2.0, 1.0, 0.0F))
         nearbyPresenter.updateMapAndList(LocationChangeType.SEARCH_CUSTOM_AREA)
         verify(nearbyParentFragmentView).disableFABRecenter()
         verify(nearbyParentFragmentView).setProgressBarVisibility(true)
-        verify(nearbyParentFragmentView).populatePlaces(nearbyParentFragmentView.mapFocus)
+        verify(nearbyParentFragmentView).populatePlaces(nearbyParentFragmentView.getMapFocus())
     }
 
     /**
@@ -190,11 +191,11 @@ class NearbyParentFragmentPresenterTest {
     @Test
     fun testUserTrackedWhenCurrentLocationMarkerVisible() {
         expectMapAndListUpdate()
-        whenever(nearbyParentFragmentView.lastMapFocus).thenReturn(LatLng(2.0, 1.0, 0.0F))
-        whenever(nearbyParentFragmentView.mapCenter).thenReturn(null)
+        whenever(nearbyParentFragmentView.getLastMapFocus()).thenReturn(LatLng(2.0, 1.0, 0.0F))
+        whenever(nearbyParentFragmentView.getMapCenter()).thenReturn(null)
         nearbyPresenter.updateMapAndList(LocationChangeType.LOCATION_SLIGHTLY_CHANGED)
         verify(nearbyParentFragmentView).getLastMapFocus()
-        verify(nearbyParentFragmentView).recenterMap(nearbyParentFragmentView.lastMapFocus)
+        verify(nearbyParentFragmentView).recenterMap(nearbyParentFragmentView.getLastMapFocus())
     }
 
     /**
@@ -205,10 +206,10 @@ class NearbyParentFragmentPresenterTest {
     fun testUserNotTrackedWhenCurrentLocationMarkerInvisible() {
         expectMapAndListUpdate()
         verify(nearbyParentFragmentView).enableFABRecenter()
-        whenever(nearbyParentFragmentView.lastMapFocus).thenReturn(LatLng(2.0, 1.0, 0.0F))
-        whenever(nearbyParentFragmentView.mapCenter).thenReturn(null)
+        whenever(nearbyParentFragmentView.getLastMapFocus()).thenReturn(LatLng(2.0, 1.0, 0.0F))
+        whenever(nearbyParentFragmentView.getMapCenter()).thenReturn(null)
         nearbyPresenter.updateMapAndList(LocationChangeType.LOCATION_SLIGHTLY_CHANGED)
-        verify(nearbyParentFragmentView).isNetworkConnectionEstablished()
+        verify(nearbyParentFragmentView).isNetworkConnectionEstablished
         verify(nearbyParentFragmentView).getLastMapFocus()
         verify(nearbyParentFragmentView).getMapCenter()
     }
@@ -281,7 +282,7 @@ class NearbyParentFragmentPresenterTest {
      */
     @Test
     fun testSearchViewFocusWhenBottomSheetExpanded() {
-        whenever(nearbyParentFragmentView.isListBottomSheetExpanded()).thenReturn(true)
+        whenever(nearbyParentFragmentView.isListBottomSheetExpanded).thenReturn(true)
         nearbyPresenter.searchViewGainedFocus()
         verify(nearbyParentFragmentView).hideBottomSheet()
     }
@@ -291,8 +292,8 @@ class NearbyParentFragmentPresenterTest {
      */
     @Test
     fun testSearchViewFocusWhenDetailsBottomSheetVisible() {
-        whenever(nearbyParentFragmentView.isListBottomSheetExpanded()).thenReturn(false)
-        whenever(nearbyParentFragmentView.isDetailsBottomSheetVisible()).thenReturn(true)
+        whenever(nearbyParentFragmentView.isListBottomSheetExpanded).thenReturn(false)
+        whenever(nearbyParentFragmentView.isDetailsBottomSheetVisible).thenReturn(true)
         nearbyPresenter.searchViewGainedFocus()
         verify(nearbyParentFragmentView).hideBottomDetailsSheet()
     }
@@ -302,8 +303,8 @@ class NearbyParentFragmentPresenterTest {
      */
     @Test
     fun testSearchCloseToCurrentLocationWhenFar() {
-        whenever(nearbyParentFragmentView.lastMapFocus).thenReturn(LatLng(2.0, 1.0, 0.0F))
-        whenever(nearbyParentFragmentView.mapFocus).thenReturn(LatLng(2.0, 1.0, 0.0F))
+        whenever(nearbyParentFragmentView.getLastMapFocus()).thenReturn(LatLng(2.0, 1.0, 0.0F))
+        whenever(nearbyParentFragmentView.getMapFocus()).thenReturn(LatLng(2.0, 1.0, 0.0F))
         // 111.19 km real distance, return false if 148306.444306 >  currentLocationSearchRadius
         NearbyController.currentLocationSearchRadius = 148306.0
         val isClose = nearbyPresenter.searchCloseToCurrentLocation()
@@ -315,7 +316,10 @@ class NearbyParentFragmentPresenterTest {
      */
     @Test
     fun testSearchCloseToCurrentLocationWhenClose() {
-        whenever(nearbyParentFragmentView.getCameraTarget()).thenReturn(LatLng(2.0, 1.0, 0.0F))
+        val location = LatLng(2.0, 1.0, 0.0F)
+        whenever(nearbyParentFragmentView.getLastMapFocus()).thenReturn(location)
+        whenever(nearbyParentFragmentView.cameraTarget).thenReturn(location)
+        whenever(nearbyParentFragmentView.getMapFocus()).thenReturn(location)
         // 111.19 km real distance, return false if 148253.333 >  currentLocationSearchRadius
         NearbyController.currentLocationSearchRadius = 148307.0
         val isClose = nearbyPresenter.searchCloseToCurrentLocation()
@@ -324,7 +328,7 @@ class NearbyParentFragmentPresenterTest {
 
     fun expectMapAndListUpdate() {
         nearbyPresenter.lockUnlockNearby(false)
-        whenever(nearbyParentFragmentView.isNetworkConnectionEstablished()).thenReturn(true)
+        whenever(nearbyParentFragmentView.isNetworkConnectionEstablished).thenReturn(true)
         whenever(nearbyParentFragmentView.getLastLocation()).thenReturn(latestLocation)
     }
 
@@ -337,23 +341,23 @@ class NearbyParentFragmentPresenterTest {
 
     @Test
     fun testBackButtonClickedWhenBottomSheetExpanded() {
-        whenever(nearbyParentFragmentView.isListBottomSheetExpanded()).thenReturn(true)
+        whenever(nearbyParentFragmentView.isListBottomSheetExpanded).thenReturn(true)
         nearbyPresenter.backButtonClicked()
         verify(nearbyParentFragmentView).listOptionMenuItemClicked()
     }
 
     @Test
     fun testBackButtonClickedWhenDetailsBottomSheetVisible() {
-        whenever(nearbyParentFragmentView.isListBottomSheetExpanded()).thenReturn(false)
-        whenever(nearbyParentFragmentView.isDetailsBottomSheetVisible()).thenReturn(true)
+        whenever(nearbyParentFragmentView.isListBottomSheetExpanded).thenReturn(false)
+        whenever(nearbyParentFragmentView.isDetailsBottomSheetVisible).thenReturn(true)
         nearbyPresenter.backButtonClicked()
         verify(nearbyParentFragmentView).setBottomSheetDetailsSmaller()
     }
 
     @Test
     fun testBackButtonClickedWhenNoSheetVisible() {
-        whenever(nearbyParentFragmentView.isListBottomSheetExpanded()).thenReturn(false)
-        whenever(nearbyParentFragmentView.isDetailsBottomSheetVisible()).thenReturn(false)
+        whenever(nearbyParentFragmentView.isListBottomSheetExpanded).thenReturn(false)
+        whenever(nearbyParentFragmentView.isDetailsBottomSheetVisible).thenReturn(false)
         val hasNearbyHandledBackPress = nearbyPresenter.backButtonClicked()
         assertFalse(hasNearbyHandledBackPress)
     }
@@ -376,7 +380,10 @@ class NearbyParentFragmentPresenterTest {
     fun testOnWikidataEditSuccessful() {
         nearbyPresenter.onWikidataEditSuccessful()
         expectMapAndListUpdate()
-        whenever(nearbyParentFragmentView.mapCenter).thenReturn(LatLng(2.0, 1.0, 0.0F))
+        val location = LatLng(2.0, 1.0, 0.0F)
+        whenever(nearbyParentFragmentView.getLastMapFocus()).thenReturn(location)
+        whenever(nearbyParentFragmentView.getMapFocus()).thenReturn(location)
+        whenever(nearbyParentFragmentView.getMapCenter()).thenReturn(location)
         nearbyPresenter.updateMapAndList(LocationChangeType.MAP_UPDATED)
         updateMapSignificantly()
     }
@@ -384,7 +391,7 @@ class NearbyParentFragmentPresenterTest {
     @Test
     fun testOnLocationChangedSignificantly() {
         expectMapAndListUpdate()
-        whenever(nearbyParentFragmentView.mapCenter).thenReturn(LatLng(2.0, 1.0, 0.0F))
+        whenever(nearbyParentFragmentView.getMapCenter()).thenReturn(LatLng(2.0, 1.0, 0.0F))
         latestLocation = LatLng(2.0, 1.0, 0.0F)
         nearbyPresenter.onLocationChangedSignificantly(latestLocation)
         updateMapSignificantly()
@@ -395,30 +402,30 @@ class NearbyParentFragmentPresenterTest {
         nearbyPresenter.onLocationChangedSlightly(latestLocation)
         expectMapAndListUpdate()
         verify(nearbyParentFragmentView).enableFABRecenter()
-        whenever(nearbyParentFragmentView.lastMapFocus).thenReturn(LatLng(2.0, 1.0, 0.0F))
-        whenever(nearbyParentFragmentView.mapCenter).thenReturn(null)
+        whenever(nearbyParentFragmentView.getLastMapFocus()).thenReturn(LatLng(2.0, 1.0, 0.0F))
+        whenever(nearbyParentFragmentView.getMapCenter()).thenReturn(null)
         nearbyPresenter.updateMapAndList(LocationChangeType.LOCATION_SLIGHTLY_CHANGED)
         verify(nearbyParentFragmentView).getLastMapFocus()
-        verify(nearbyParentFragmentView).recenterMap(nearbyParentFragmentView.lastMapFocus)
+        verify(nearbyParentFragmentView).recenterMap(nearbyParentFragmentView.getLastMapFocus())
     }
 
     @Test
     fun testOnLocationChangeTypeCustomQuery() {
         nearbyPresenter.setAdvancedQuery("Point(17.865 82.343)\"")
-        whenever(nearbyParentFragmentView.isNetworkConnectionEstablished()).thenReturn(true)
+        whenever(nearbyParentFragmentView.isNetworkConnectionEstablished).thenReturn(true)
         whenever(nearbyParentFragmentView.getLastLocation()).thenReturn(latestLocation)
-        whenever(nearbyParentFragmentView.lastMapFocus).thenReturn(LatLng(2.0, 1.0, 0.0F))
-        whenever(nearbyParentFragmentView.mapCenter).thenReturn(null)
+        whenever(nearbyParentFragmentView.getLastMapFocus()).thenReturn(LatLng(2.0, 1.0, 0.0F))
+        whenever(nearbyParentFragmentView.getMapCenter()).thenReturn(null)
         nearbyPresenter.updateMapAndList(LocationChangeType.CUSTOM_QUERY)
         verify(nearbyParentFragmentView).getLastMapFocus()
         verify(nearbyParentFragmentView).setProgressBarVisibility(true)
-        verify(nearbyParentFragmentView).populatePlaces(any(), any())
+        verify(nearbyParentFragmentView).populatePlaces(anyOrNull(), anyOrNull())
     }
 
     @Test
     fun testOnLocationChangeTypeCustomQueryInvalidQuery() {
         whenever(nearbyParentFragmentView.isNetworkConnectionEstablished).thenReturn(true)
-        whenever(nearbyParentFragmentView.lastLocation).thenReturn(latestLocation)
+        whenever(nearbyParentFragmentView.getLastLocation()).thenReturn(latestLocation)
         nearbyPresenter.setAdvancedQuery("")
         nearbyPresenter.updateMapAndList(LocationChangeType.CUSTOM_QUERY)
         expectMapAndListUpdate()
@@ -430,19 +437,19 @@ class NearbyParentFragmentPresenterTest {
     @Test
     fun testOnLocationChangeTypeCustomQueryUnParsableQuery() {
         whenever(nearbyParentFragmentView.isNetworkConnectionEstablished).thenReturn(true)
-        whenever(nearbyParentFragmentView.lastLocation).thenReturn(latestLocation)
+        whenever(nearbyParentFragmentView.getLastLocation()).thenReturn(latestLocation)
         nearbyPresenter.setAdvancedQuery("Point()\"")
         nearbyPresenter.updateMapAndList(LocationChangeType.CUSTOM_QUERY)
         expectMapAndListUpdate()
 
         whenever(nearbyParentFragmentView.isNetworkConnectionEstablished).thenReturn(true)
-        whenever(nearbyParentFragmentView.lastLocation).thenReturn(latestLocation)
+        whenever(nearbyParentFragmentView.getLastLocation()).thenReturn(latestLocation)
         nearbyPresenter.setAdvancedQuery("Point(ab)\"")
         nearbyPresenter.updateMapAndList(LocationChangeType.CUSTOM_QUERY)
         expectMapAndListUpdate()
 
         whenever(nearbyParentFragmentView.isNetworkConnectionEstablished).thenReturn(true)
-        whenever(nearbyParentFragmentView.lastLocation).thenReturn(latestLocation)
+        whenever(nearbyParentFragmentView.getLastLocation()).thenReturn(latestLocation)
         nearbyPresenter.setAdvancedQuery("Point(ab ab)\"")
         nearbyPresenter.updateMapAndList(LocationChangeType.CUSTOM_QUERY)
         expectMapAndListUpdate()

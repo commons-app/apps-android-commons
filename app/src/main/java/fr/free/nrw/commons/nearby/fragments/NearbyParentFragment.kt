@@ -145,6 +145,9 @@ import javax.inject.Named
 import kotlin.concurrent.Volatile
 
 
+@Suppress("UNNECESSARY_SAFE_CALL", "DEPRECATION", "UNNECESSARY_NOT_NULL_ASSERTION",
+    "SENSELESS_COMPARISON", "USELESS_ELVIS"
+)
 class NearbyParentFragment : CommonsDaggerSupportFragment(),
     NearbyParentFragmentContract.View,
     WikidataP18EditListener,
@@ -693,14 +696,7 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
     }
 
     private fun addCheckBoxCallback() {
-        binding!!.nearbyFilterList.checkboxTriStates.setCallback { o, state, b, b1 ->
-            presenter!!.filterByMarkerType(
-                o,
-                state,
-                b,
-                b1
-            )
-        }
+        binding!!.nearbyFilterList.checkboxTriStates.callback = presenter!!
     }
 
     private fun performMapReadyActions() {
@@ -967,18 +963,18 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
 
     override fun setCheckBoxAction() {
         binding!!.nearbyFilterList.checkboxTriStates.addAction()
-        binding!!.nearbyFilterList.checkboxTriStates.state = CheckBoxTriStates.UNKNOWN
+        binding!!.nearbyFilterList.checkboxTriStates.setState(CheckBoxTriStates.UNKNOWN)
     }
 
     override fun setCheckBoxState(state: Int) {
-        binding!!.nearbyFilterList.checkboxTriStates.state = state
+        binding!!.nearbyFilterList.checkboxTriStates.setState(state)
     }
 
     override fun setFilterState() {
         if (NearbyController.currentLocation != null) {
             presenter!!.filterByMarkerType(
                 nearbyFilterSearchRecyclerViewAdapter!!.selectedLabels,
-                binding!!.nearbyFilterList.checkboxTriStates.state, true, false
+                binding!!.nearbyFilterList.checkboxTriStates.getState(), true, false
             )
         }
     }
@@ -1062,14 +1058,14 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
     /**
      * Centers the map in nearby fragment to a given place and updates nearestPlace
      *
-     * @param place is new center of the map
+     * @param placeToCenter is new center of the map
      */
-    override fun centerMapToPlace(place: Place?) {
+    override fun centerMapToPlace(placeToCenter: Place?) {
         Timber.d("Map is centered to place")
         val cameraShift: Double
-        if (null != place) {
-            lastPlaceToCenter = place
-            nearestPlace = place
+        if (null != placeToCenter) {
+            lastPlaceToCenter = placeToCenter
+            nearestPlace = placeToCenter
         }
 
         if (null != lastPlaceToCenter) {
@@ -1086,15 +1082,15 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
                 )
             )
         }
-        highlightNearestPlace(place!!)
+        highlightNearestPlace(placeToCenter!!)
     }
 
 
-    override fun updateListFragment(placeList: List<Place>) {
+    override fun updateListFragment(placeList: List<Place>?) {
         adapter!!.clear()
-        adapter!!.items = placeList.filter{ it.name.isNotEmpty() }
+        adapter!!.items = placeList?.filter{ it.name.isNotEmpty() } ?: emptyList()
         binding!!.bottomSheetNearby.noResultsMessage.visibility =
-            if (placeList.isEmpty()) View.VISIBLE else View.GONE
+            if (placeList.isNullOrEmpty()) View.VISIBLE else View.GONE
     }
 
     override fun getLastLocation(): LatLng {
@@ -1155,9 +1151,8 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
         isAdvancedQueryFragmentVisible = shouldShow
     }
 
-    override fun isNetworkConnectionEstablished(): Boolean {
-        return isInternetConnectionEstablished(activity)
-    }
+    override val isNetworkConnectionEstablished: Boolean
+        get() = isInternetConnectionEstablished(activity)
 
     /**
      * Adds network broadcast receiver to recognize connection established
@@ -1253,8 +1248,8 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
     override fun populatePlaces(currentLatLng: LatLng) {
         // these two variables have historically been assigned values the opposite of what their
         // names imply, and quite some existing code depends on this fact
-        var screenTopRightLatLng = screenBottomLeft
-        var screenBottomLeftLatLng = screenTopRight
+        var screenTopRightLatLng = getScreenBottomLeft()
+        var screenBottomLeftLatLng = getScreenTopRight()
 
         // When the nearby fragment is opened immediately upon app launch, the {screenTopRightLatLng}
         // and {screenBottomLeftLatLng} variables return {LatLng(0.0,0.0)} as output.
@@ -1283,12 +1278,12 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
                 )
             ) { // Means we are checking around current location
                 populatePlacesForCurrentLocation(
-                    mapFocus, screenTopRightLatLng,
+                    getMapFocus(), screenTopRightLatLng,
                     screenBottomLeftLatLng, currentLatLng, null
                 )
             } else {
                 populatePlacesForAnotherLocation(
-                    mapFocus, screenTopRightLatLng,
+                    getMapFocus(), screenTopRightLatLng,
                     screenBottomLeftLatLng, currentLatLng, null
                 )
             }
@@ -1298,12 +1293,12 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
                 )
             ) { // Means we are checking around current location
                 populatePlacesForCurrentLocation(
-                    mapFocus, screenTopRightLatLng,
+                    getMapFocus(), screenTopRightLatLng,
                     screenBottomLeftLatLng, currentLatLng, null
                 )
             } else {
                 populatePlacesForAnotherLocation(
-                    mapFocus, screenTopRightLatLng,
+                    getMapFocus(), screenTopRightLatLng,
                     screenBottomLeftLatLng, currentLatLng, null
                 )
             }
@@ -1324,8 +1319,8 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
         }
         // these two variables have historically been assigned values the opposite of what their
         // names imply, and quite some existing code depends on this fact
-        val screenTopRightLatLng = screenBottomLeft
-        val screenBottomLeftLatLng = screenTopRight
+        val screenTopRightLatLng = getScreenBottomLeft()
+        val screenBottomLeftLatLng = getScreenTopRight()
 
         if (currentLatLng.equals(lastFocusLocation) || lastFocusLocation == null || recenterToUserLocation) { // Means we are checking around current location
             populatePlacesForCurrentLocation(
@@ -1387,7 +1382,7 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
     private fun savePlacesAsKML() {
         val savePlacesObservable = Observable
             .fromCallable {
-                nearbyController?.getPlacesAsKML(mapFocus)
+                nearbyController?.getPlacesAsKML(getMapFocus())
             }
         compositeDisposable.add(
             savePlacesObservable
@@ -1431,7 +1426,7 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
     private fun savePlacesAsGPX() {
         val savePlacesObservable = Observable
             .fromCallable {
-                nearbyController?.getPlacesAsGPX(mapFocus)
+                nearbyController?.getPlacesAsGPX(getMapFocus())
             }
         compositeDisposable.add(
             savePlacesObservable
@@ -1472,7 +1467,7 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
         )
     }
 
-    fun saveFile(string: String, fileName: String?): Boolean {
+    fun saveFile(string: String, fileName: String): Boolean {
         if (!isExternalStorageWritable) {
             return false
         }
@@ -1732,14 +1727,11 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
         presenter!!.updateMapMarkers(nearbyPlaces, curLatLng, scope)
     }
 
+    override val isListBottomSheetExpanded: Boolean
+        get() = bottomSheetListBehavior!!.state == BottomSheetBehavior.STATE_EXPANDED
 
-    override fun isListBottomSheetExpanded(): Boolean {
-        return bottomSheetListBehavior!!.state == BottomSheetBehavior.STATE_EXPANDED
-    }
-
-    override fun isDetailsBottomSheetVisible(): Boolean {
-        return bottomSheetDetailsBehavior!!.state != BottomSheetBehavior.STATE_HIDDEN
-    }
+    override val isDetailsBottomSheetVisible: Boolean
+        get() = bottomSheetDetailsBehavior!!.state != BottomSheetBehavior.STATE_HIDDEN
 
     override fun setBottomSheetDetailsSmaller() {
         if (bottomSheetDetailsBehavior!!.state == BottomSheetBehavior.STATE_EXPANDED) {
@@ -1953,11 +1945,11 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
      * onLogoutComplete is called after shared preferences and data stored in local database are
      * cleared.
      */
-    override fun setFABPlusAction(onClickListener: View.OnClickListener) {
+    override fun setFABPlusAction(onClickListener: View.OnClickListener?) {
         binding!!.fabPlus.setOnClickListener(onClickListener)
     }
 
-    override fun setFABRecenterAction(onClickListener: View.OnClickListener) {
+    override fun setFABRecenterAction(onClickListener: View.OnClickListener?) {
         binding!!.fabRecenter.setOnClickListener(onClickListener)
     }
 
@@ -2067,9 +2059,8 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
         replaceMarkerOverlays(placeGroupsToShow)
     }
 
-    override fun getCameraTarget(): LatLng? {
-        return if (binding!!.map == null) null else mapFocus
-    }
+    override val cameraTarget: LatLng?
+        get() = if (binding!!.map == null) null else getMapFocus()
 
     /**
      * Highlights nearest place when user clicks on home nearby banner
@@ -2651,6 +2642,7 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
         }
     }
 
+    @Deprecated("Deprecated in Java")
     override fun setUserVisibleHint(isVisibleToUser: Boolean) {
         super.setUserVisibleHint(isVisibleToUser)
         this.isVisibleToUser = isVisibleToUser
