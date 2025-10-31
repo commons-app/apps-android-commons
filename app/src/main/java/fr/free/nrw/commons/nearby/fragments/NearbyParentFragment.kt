@@ -2875,7 +2875,7 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
             }
 
             R.drawable.ic_wikidata_logo_24dp -> {
-                selectedPlace?.siteLinks?.wikidataLink?.let {
+                selectedPlace?.siteLinks?.getWikidataLink()?.let {
                     handleWebUrl(requireContext(), it)
                 }
             }
@@ -2893,13 +2893,13 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
             }
 
             R.drawable.ic_wikipedia_logo_24dp -> {
-                selectedPlace?.siteLinks?.wikipediaLink?.let {
+                selectedPlace?.siteLinks?.getWikipediaLink()?.let {
                     handleWebUrl(requireContext(), it)
                 }
             }
 
             R.drawable.ic_commons_icon_vector -> {
-                selectedPlace?.siteLinks?.commonsLink?.let {
+                selectedPlace?.siteLinks?.getCommonsLink()?.let {
                     handleWebUrl(requireContext(), it)
                 }
             }

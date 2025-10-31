@@ -653,7 +653,7 @@ class ExploreMapFragment : CommonsDaggerSupportFragment(), ExploreMapContract.Vi
 
         binding!!.bottomSheetDetailsBinding.commonsButton.visibility = if (place.hasCommonsLink()) View.VISIBLE else View.GONE
         binding!!.bottomSheetDetailsBinding.commonsButton.setOnClickListener {
-            handleWebUrl(requireContext(), place.siteLinks.commonsLink)
+            handleWebUrl(requireContext(), place.siteLinks.getCommonsLink()!!)
         }
 
         var index = 0

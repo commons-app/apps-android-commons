@@ -63,9 +63,9 @@ fun Place.toBookmarksLocations(): BookmarksLocations {
         locationLabelText = label?.text ?: "",
         locationLabelIcon = label?.icon,
         locationImageUrl = pic,
-        locationWikipediaLink = siteLinks.wikipediaLink.toString(),
-        locationWikidataLink = siteLinks.wikidataLink.toString(),
-        locationCommonsLink = siteLinks.commonsLink.toString(),
+        locationWikipediaLink = siteLinks.getWikipediaLink().toString(),
+        locationWikidataLink = siteLinks.getWikidataLink().toString(),
+        locationCommonsLink = siteLinks.getCommonsLink().toString(),
         locationPic = pic,
         locationExists = exists
     )
