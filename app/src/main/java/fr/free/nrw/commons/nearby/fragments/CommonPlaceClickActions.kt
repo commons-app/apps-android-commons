@@ -94,9 +94,9 @@ class CommonPlaceClickActions
                         enableBy(R.id.nearby_info_menu_wikipedia_article, place.hasWikipediaLink())
                         setOnMenuItemClickListener { item: MenuItem ->
                             when (item.itemId) {
-                                R.id.nearby_info_menu_commons_article -> openWebView(place.siteLinks.commonsLink)
-                                R.id.nearby_info_menu_wikidata_article -> openWebView(place.siteLinks.wikidataLink)
-                                R.id.nearby_info_menu_wikipedia_article -> openWebView(place.siteLinks.wikipediaLink)
+                                R.id.nearby_info_menu_commons_article -> openWebView(place.siteLinks.getCommonsLink()!!)
+                                R.id.nearby_info_menu_wikidata_article -> openWebView(place.siteLinks.getWikidataLink()!!)
+                                R.id.nearby_info_menu_wikipedia_article -> openWebView(place.siteLinks.getWikipediaLink()!!)
                                 else -> false
                             }
                         }

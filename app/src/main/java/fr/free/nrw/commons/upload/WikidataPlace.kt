@@ -19,7 +19,7 @@ data class WikidataPlace(
         place.wikiDataEntityId!!,
         place.name,
         place.pic.takeIf { it.isNotBlank() },
-        place.siteLinks.wikipediaLink?.toString() ?: "",
+        place.siteLinks.getWikipediaLink().toString() ?: "",
         place.location,
         isMonumentUpload = place.isMonument,
     )
