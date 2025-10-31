@@ -75,7 +75,7 @@ public class NearbyFilterSearchRecyclerViewAdapter
     @Override
     public void onBindViewHolder(@NonNull RecyclerViewHolder holder, int position) {
         Label label = displayedLabels.get(position);
-        holder.placeTypeIcon.setImageResource(label.getIcon());
+        holder.placeTypeIcon.setImageResource(label.icon);
         holder.placeTypeLabel.setText(label.toString());
         holder.placeTypeLayout.setSelected(label.isSelected());
 
@@ -128,7 +128,7 @@ public class NearbyFilterSearchRecyclerViewAdapter
                     for (Label label : labels) {
                         String data = label.toString();
                         if (data.toLowerCase(Locale.ROOT).startsWith(constraint.toString())) {
-                            filteredArrayList.add(Label.fromText(label.getText()));
+                            filteredArrayList.add(Label.fromText(label.text));
                         }
                     }
 
