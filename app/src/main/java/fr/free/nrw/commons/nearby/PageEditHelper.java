@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
+import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AlertDialog;
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.R;
@@ -90,7 +91,8 @@ public class PageEditHelper {
      * @param lng         The longitude of the location related to the page.
      * @return An Observable emitting true if the edit was successful, false otherwise.
      */
-    private Observable<Boolean> editPage(String title, String preText, String description,
+    @VisibleForTesting
+    public Observable<Boolean> editPage(String title, String preText, String description,
         String details, Double lat, Double lng) {
         Timber.d("thread is edit %s", Thread.currentThread().getName());
         String summary = "Please fix this item";
