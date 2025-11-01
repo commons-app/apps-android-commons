@@ -17,14 +17,13 @@ class PageEditHelperTest {
     private val notificationHelper: NotificationHelper = mock()
     private val pageEditClient: PageEditClient = mock()
     private val viewUtilWrapper: ViewUtilWrapper = mock()
-    private val username = "foo"
-    val testObject = PageEditHelper(notificationHelper, pageEditClient, viewUtilWrapper, username)
+    val testObject = PageEditHelper(notificationHelper, pageEditClient, viewUtilWrapper)
     private val titleCaptor = argumentCaptor<String>()
     private val textCaptor = argumentCaptor<String>()
     private val summaryCaptor = argumentCaptor<String>()
 
     @Test
-    fun editPage() {
+    fun editPage_noMarkerPresent() {
         whenever(pageEditClient.postCreate(titleCaptor.capture(), textCaptor.capture(), summaryCaptor.capture())).thenReturn(mock())
 
         val observable = testObject.editPage("title", "pre-text", "desc", "details", 1.0, 2.0)
@@ -46,12 +45,11 @@ class PageEditHelperTest {
     }
 
     @Test
-    fun editPageToo() {
+    fun editPage_withMarkerPresent() {
         whenever(pageEditClient.postCreate(titleCaptor.capture(), textCaptor.capture(), summaryCaptor.capture())).thenReturn(mock())
 
         val preText = "pre-text\n" +
-                "Please anyone fix the item accordingly, then reply to mark this section as fixed. Thanks a lot for your cooperation!"+
-                "\n"
+                "Please anyone fix the item accordingly, then reply to mark this section as fixed. Thanks a lot for your cooperation!"
         val observable = testObject.editPage("title", preText, "desc", "details", 1.0, 2.0)
         assertNotNull(observable)
 
