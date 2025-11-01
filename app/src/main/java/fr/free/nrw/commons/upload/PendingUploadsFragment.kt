@@ -28,8 +28,11 @@ class PendingUploadsFragment :
     CommonsDaggerSupportFragment(),
     PendingUploadsContract.View,
     PendingUploadsAdapter.Callback {
+
+    //fix:public and nullable to allow the dagger injection and prevent crash on the rotation.
     @Inject
-    lateinit var pendingUploadsPresenter: PendingUploadsPresenter
+    @JvmField
+    var pendingUploadsPresenter: PendingUploadsPresenter? = null
 
     private lateinit var binding: FragmentPendingUploadsBinding
 
@@ -55,13 +58,9 @@ class PendingUploadsFragment :
     ): View {
         super.onCreate(savedInstanceState)
         binding = FragmentPendingUploadsBinding.inflate(inflater, container, false)
-        pendingUploadsPresenter.onAttachView(this)
+        pendingUploadsPresenter?.onAttachView(this)
         initAdapter()
         return binding.root
-    }
-
-    fun initAdapter() {
-        adapter = PendingUploadsAdapter(this)
     }
 
     override fun onViewCreated(
@@ -72,47 +71,51 @@ class PendingUploadsFragment :
         initRecyclerView()
     }
 
+    fun initAdapter() {
+        adapter = PendingUploadsAdapter(this)
+    }
+
     /**
      * Initializes the recycler view.
      */
     private fun initRecyclerView() {
         binding.pendingUploadsRecyclerView.setLayoutManager(LinearLayoutManager(this.context))
         binding.pendingUploadsRecyclerView.adapter = adapter
-        pendingUploadsPresenter.setup()
-        pendingUploadsPresenter.totalContributionList
-            .observe(viewLifecycleOwner) { list: PagedList<Contribution> ->
-            contributionsSize = list.size
-            contributionsList = mutableListOf()
-            var pausedOrQueuedUploads = 0
-            list.forEach {
-                if (it != null) {
-                    if (it.state == STATE_PAUSED ||
-                        it.state == STATE_QUEUED ||
-                        it.state == STATE_IN_PROGRESS
-                    ) {
-                        contributionsList.add(it)
-                    }
-                    if (it.state == STATE_PAUSED || it.state == STATE_QUEUED) {
-                        pausedOrQueuedUploads++
+        pendingUploadsPresenter?.setup()
+        pendingUploadsPresenter?.totalContributionList
+            ?.observe(viewLifecycleOwner) { list: PagedList<Contribution> ->
+                contributionsSize = list.size
+                contributionsList = mutableListOf()
+                var pausedOrQueuedUploads = 0
+                list.forEach {
+                    if (it != null) {
+                        if (it.state == STATE_PAUSED ||
+                            it.state == STATE_QUEUED ||
+                            it.state == STATE_IN_PROGRESS
+                        ) {
+                            contributionsList.add(it)
+                        }
+                        if (it.state == STATE_PAUSED || it.state == STATE_QUEUED) {
+                            pausedOrQueuedUploads++
+                        }
                     }
                 }
-            }
-            if (contributionsSize == 0) {
-                binding.nopendingTextView.visibility = View.VISIBLE
-                binding.pendingUplaodsLl.visibility = View.GONE
-                uploadProgressActivity.hidePendingIcons()
-            } else {
-                binding.nopendingTextView.visibility = View.GONE
-                binding.pendingUplaodsLl.visibility = View.VISIBLE
-                adapter.submitList(list)
-                binding.progressTextView.setText("$contributionsSize uploads left")
-                if ((pausedOrQueuedUploads == contributionsSize) || CommonsApplication.isPaused) {
-                    uploadProgressActivity.setPausedIcon(true)
+                if (contributionsSize == 0) {
+                    binding.nopendingTextView.visibility = View.VISIBLE
+                    binding.pendingUplaodsLl.visibility = View.GONE
+                    uploadProgressActivity.hidePendingIcons()
                 } else {
-                    uploadProgressActivity.setPausedIcon(false)
+                    binding.nopendingTextView.visibility = View.GONE
+                    binding.pendingUplaodsLl.visibility = View.VISIBLE
+                    adapter.submitList(list)
+                    binding.progressTextView.setText("$contributionsSize uploads left")
+                    if ((pausedOrQueuedUploads == contributionsSize) || CommonsApplication.isPaused) {
+                        uploadProgressActivity.setPausedIcon(true)
+                    } else {
+                        uploadProgressActivity.setPausedIcon(false)
+                    }
                 }
             }
-        }
     }
 
     /**
@@ -129,7 +132,8 @@ class PendingUploadsFragment :
             String.format(locale, activity.getString(R.string.no)),
             {
                 ViewUtil.showShortToast(context, R.string.cancelling_upload)
-                pendingUploadsPresenter.deleteUpload(
+                // uses the  safe call directly
+                pendingUploadsPresenter?.deleteUpload(
                     contribution, requireContext().applicationContext,
                 )
             },
@@ -140,19 +144,24 @@ class PendingUploadsFragment :
     /**
      * Restarts all the paused uploads.
      */
-    fun restartUploads() = pendingUploadsPresenter.restartUploads(
-        contributionsList, 0, requireContext().applicationContext
-    )
+    fun restartUploads() {
+        pendingUploadsPresenter?.restartUploads(
+            contributionsList, 0, requireContext().applicationContext
+        )
+    }
 
     /**
      * Pauses all the ongoing uploads.
      */
-    fun pauseUploads() = pendingUploadsPresenter.pauseUploads()
+    fun pauseUploads() { pendingUploadsPresenter?.pauseUploads()
+    }
 
     /**
      * Cancels all the uploads after getting a confirmation from the user using Dialog.
      */
     fun deleteUploads() {
+        pendingUploadsPresenter ?: return
+
         val activity = requireActivity()
         val locale = Locale.getDefault()
         showAlertDialog(
@@ -164,7 +173,7 @@ class PendingUploadsFragment :
             {
                 ViewUtil.showShortToast(context, R.string.cancelling_upload)
                 uploadProgressActivity.hidePendingIcons()
-                pendingUploadsPresenter.deleteUploads(
+                pendingUploadsPresenter?.deleteUploads(
                     listOf(
                         STATE_QUEUED,
                         STATE_IN_PROGRESS,
