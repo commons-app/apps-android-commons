@@ -1,5 +1,23 @@
 # Wikimedia Commons for Android
 
+## v6.1.0
+
+### What's changed
+* Edit Description button now shows up correctly
+* Custom selector supports deselecting images
+* Adjusted spacing on the Edit Location screen for a cleaner layout
+* The location permission request no longer prompts the users on the "Uploaded via Mobile" tab
+* Several i18n improvements
+* Improved app performance and compatibility with newer Android devices due to 16 KB page size support
+* Bookmark categories and the target icon in Explore map no longer crash
+* Enhanced app theme change handling
+* Prevented memory leaks and invalid context access in map fragments
+* Improved support for right-to-left languages like Arabic or Hebrew
+* Nearby will now remember your chosen filters (like "building" or "cottage") when you switch tabs
+* Hardware acceleration and keyboard animation have temporarily been disabled to mitigate an upload issue
+
+**Full Changelog**: https://github.com/commons-app/apps-android-commons/compare/v6.0.2...v6.1.0
+
 ## v6.0.2
 
 ### What's changed

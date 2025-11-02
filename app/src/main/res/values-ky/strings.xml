@@ -153,7 +153,7 @@
   <string name="menu_retry_upload">Кайра аракет кылуу</string>
   <string name="menu_cancel_upload">Жокко чыгаруу</string>
   <string name="language_search_type_language_name">Тилдин атын жазыңыз</string>
-  <string name="language_search_recent_searches">Акыркы издөөдөлөр</string>
+  <string name="language_search_recent_searches">Акыркы издөөлөр</string>
   <string name="language_search_all_languages">Бардык тилдер</string>
   <string name="media_upload_policy">Бул сүрөттү жөнөтүп жатканым менен, мен анын менин жеке эмгегим экенин, анда автордук укук менен корголгон материалдар же селфилер жок экенин жана башкача айтканда &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Викиказына саясатына&lt;/a&gt; ылайык экенин билдирем.</string>
   <string name="menu_download">Жүктөп алуу</string>
