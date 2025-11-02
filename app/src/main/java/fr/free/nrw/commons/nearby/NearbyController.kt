@@ -126,7 +126,7 @@ class NearbyController @Inject constructor(
      * @throws Exception If an error occurs during the retrieval process.
      */
     @Throws(Exception::class)
-    fun getPlaces(placeList: List<Place>): List<Place> {
+    fun getPlaces(placeList: List<Place>?): List<Place>? {
         return nearbyPlaces.getPlaces(placeList, Locale.getDefault().getLanguage())
     }
 
@@ -151,9 +151,10 @@ class NearbyController @Inject constructor(
      */
     @Throws(Exception::class)
     fun loadAttractionsFromLocation(
-        currentLatLng: LatLng?,
-        screenTopRight: LatLng?,
-        screenBottomLeft: LatLng?, searchLatLng: LatLng?,
+        currentLatLng: LatLng,
+        screenTopRight: LatLng,
+        screenBottomLeft: LatLng,
+        searchLatLng: LatLng,
         returnClosestResult: Boolean, checkingAroundCurrentLocation: Boolean,
         shouldQueryForMonuments: Boolean, customQuery: String?
     ): NearbyPlacesInfo? {
