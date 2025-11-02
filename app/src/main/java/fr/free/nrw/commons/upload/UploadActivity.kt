@@ -317,7 +317,6 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
 
         // The share intent provides files via content uris with temporary read permissions,
         // so we do not need to obtain storage permissions
-        val intent = intent
         val action = intent.action
         if (Intent.ACTION_SEND == action || Intent.ACTION_SEND_MULTIPLE == action) {
             receiveSharedItems()
