@@ -1322,15 +1322,19 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
         val screenBottomLeftLatLng = getScreenTopRight()
 
         if (currentLatLng.equals(lastFocusLocation) || lastFocusLocation == null || recenterToUserLocation) { // Means we are checking around current location
-            populatePlacesForCurrentLocation(
-                lastKnownLocation, screenTopRightLatLng,
-                screenBottomLeftLatLng, currentLatLng, customQuery
-            )
+            lastKnownLocation?.let {
+                populatePlacesForCurrentLocation(
+                    it, screenTopRightLatLng,
+                    screenBottomLeftLatLng, currentLatLng, customQuery
+                )
+            }
         } else {
-            populatePlacesForAnotherLocation(
-                lastKnownLocation, screenTopRightLatLng,
-                screenBottomLeftLatLng, currentLatLng, customQuery
-            )
+            lastKnownLocation?.let {
+                populatePlacesForAnotherLocation(
+                    it, screenTopRightLatLng,
+                    screenBottomLeftLatLng, currentLatLng, customQuery
+                )
+            }
         }
         if (recenterToUserLocation) {
             recenterToUserLocation = false
@@ -1581,7 +1585,7 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
     }
 
     private fun populatePlacesForCurrentLocation(
-        currentLatLng: LatLng?,
+        currentLatLng: LatLng,
         screenTopRight: LatLng,
         screenBottomLeft: LatLng,
         searchLatLng: LatLng,
@@ -1634,7 +1638,7 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
     }
 
     private fun populatePlacesForAnotherLocation(
-        currentLatLng: LatLng?,
+        currentLatLng: LatLng,
         screenTopRight: LatLng,
         screenBottomLeft: LatLng,
         searchLatLng: LatLng,

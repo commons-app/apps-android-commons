@@ -32,42 +32,29 @@ import java.lang.reflect.Method
 import java.lang.reflect.Proxy
 import java.util.concurrent.CopyOnWriteArrayList
 
-class NearbyParentFragmentPresenter
-    (
+class NearbyParentFragmentPresenter(
     val bookmarkLocationDao: BookmarkLocationsDao,
     val placesRepository: PlacesRepository,
     val nearbyController: NearbyController
-) :
-    NearbyParentFragmentContract.UserActions,
-    WikidataP18EditListener, LocationUpdateListener {
+) : NearbyParentFragmentContract.UserActions, WikidataP18EditListener, LocationUpdateListener {
 
     private var isNearbyLocked = false
     private var currentLatLng: LatLng? = null
-
     private var placesLoadedOnce = false
-
     private var customQuery: String? = null
-
     private var nearbyParentFragmentView: NearbyParentFragmentContract.View = DUMMY
-
     private var placeSearchJob: Job? = null
     private var isSearchInProgress = false
     private var localPlaceSearchJob: Job? = null
-
     private val clickedPlaces = CopyOnWriteArrayList<Place>()
-
-    /**
-     * used to tell the asynchronous place detail loading job that a pin was clicked
-     * so as to prevent it from turning grey on the next pin detail update
-     *
-     * @param place the place whose details have already been loaded because clicked pin
-     */
-    fun handlePinClicked(place: Place) {
-        clickedPlaces.add(place)
-    }
+    private var schedulePlacesUpdateJob: Job? = null
 
     // the currently running job for async loading of pin details, cancelled when new pins are come
     private var loadPlacesDataAyncJob: Job? = null
+
+    // used to tell the asynchronous place detail loading job that the places' bookmarked status
+    // changed so as to prevent inconsistencies
+    private var bookmarkChangedPlaces = CopyOnWriteArrayList<Place>()
 
     /**
      * - **batchSize**: number of places to fetch details of in a single request
@@ -77,8 +64,6 @@ class NearbyParentFragmentPresenter
         const val BATCH_SIZE = 10
         const val CONNECTION_COUNT = 20
     }
-
-    private var schedulePlacesUpdateJob: Job? = null
 
     /**
      * - **skippedCount**: stores the number of updates skipped
@@ -93,9 +78,15 @@ class NearbyParentFragmentPresenter
         const val SKIP_DELAY_MS = 100L
     }
 
-    // used to tell the asynchronous place detail loading job that the places' bookmarked status
-    // changed so as to prevent inconsistencies
-    private var bookmarkChangedPlaces = CopyOnWriteArrayList<Place>()
+    /**
+     * used to tell the asynchronous place detail loading job that a pin was clicked
+     * so as to prevent it from turning grey on the next pin detail update
+     *
+     * @param place the place whose details have already been loaded because clicked pin
+     */
+    fun handlePinClicked(place: Place) {
+        clickedPlaces.add(place)
+    }
 
     /**
      * Schedules a UI update for the provided list of `MarkerPlaceGroup` objects. Since, the update
@@ -110,20 +101,17 @@ class NearbyParentFragmentPresenter
     private suspend fun schedulePlacesUpdate(
         markerPlaceGroups: List<MarkerPlaceGroup>,
         force: Boolean = false
-    ) =
-        withContext(Dispatchers.Main) {
-            if (markerPlaceGroups.isEmpty()) return@withContext
-            schedulePlacesUpdateJob?.cancel()
-            schedulePlacesUpdateJob = launch {
-                if (!force && SchedulePlacesUpdateOptions.skippedCount++
-                    < SchedulePlacesUpdateOptions.SKIP_LIMIT
-                ) {
-                    delay(SchedulePlacesUpdateOptions.SKIP_DELAY_MS)
-                }
-                SchedulePlacesUpdateOptions.skippedCount = 0
-                updatePlaceGroupsToControllerAndRender(markerPlaceGroups)
+    ) = withContext(Dispatchers.Main) {
+        if (markerPlaceGroups.isEmpty()) return@withContext
+        schedulePlacesUpdateJob?.cancel()
+        schedulePlacesUpdateJob = launch {
+            if (!force && SchedulePlacesUpdateOptions.skippedCount++ < SchedulePlacesUpdateOptions.SKIP_LIMIT) {
+                delay(SchedulePlacesUpdateOptions.SKIP_DELAY_MS)
             }
+            SchedulePlacesUpdateOptions.skippedCount = 0
+            updatePlaceGroupsToControllerAndRender(markerPlaceGroups)
         }
+    }
 
     /**
      * Handles the user action of toggling the bookmarked status of a given place. Updates the
@@ -141,8 +129,7 @@ class NearbyParentFragmentPresenter
         scope?.launch {
             nowBookmarked = bookmarkLocationDao.updateBookmarkLocation(place)
             bookmarkChangedPlaces.add(place)
-            val placeIndex =
-                NearbyController.markerLabelList.indexOfFirst { it.place.location == place.location }
+            val placeIndex = NearbyController.markerLabelList.indexOfFirst { it.place.location == place.location }
             NearbyController.markerLabelList[placeIndex] = MarkerPlaceGroup(
                 nowBookmarked,
                 NearbyController.markerLabelList[placeIndex].place
@@ -160,7 +147,6 @@ class NearbyParentFragmentPresenter
     }
 
     override fun removeNearbyPreferences(applicationKvStore: JsonKvStore?) {
-        Timber.d("Remove place objects")
         applicationKvStore?.remove(PLACE_OBJECT)
     }
 
@@ -175,10 +161,7 @@ class NearbyParentFragmentPresenter
      */
     override fun setActionListeners(applicationKvStore: JsonKvStore?) {
         nearbyParentFragmentView.setFABPlusAction {
-            if (applicationKvStore != null && applicationKvStore.getBoolean(
-                    "login_skipped", false
-                )
-            ) {
+            if (applicationKvStore != null && applicationKvStore.getBoolean("login_skipped", false)) {
                 // prompt the user to login
                 nearbyParentFragmentView.displayLoginSkippedWarning()
             } else {
@@ -290,12 +273,8 @@ class NearbyParentFragmentPresenter
                 ?.take(NearbyController.MAX_RESULTS)
                 ?.map {
                     // currently only the place's location is known but bookmarks are stored by name
-                    MarkerPlaceGroup(
-                        false,
-                        it
-                    )
-                }
-                ?: return
+                    MarkerPlaceGroup(false, it)
+                } ?: return
 
         lockUnlockNearby(false) // So that new location updates wont come
         nearbyParentFragmentView.setProgressBarVisibility(false)
@@ -366,8 +345,9 @@ class NearbyParentFragmentPresenter
                     for (indices in fetchPlacesChannel) {
                         ensureActive()
                         try {
-                            val fetchedPlaces =
-                                nearbyController.getPlaces(indices.map { updatedGroups[it].place })
+                            val fetchedPlaces = nearbyController.getPlaces(
+                                indices.map { updatedGroups[it].place }
+                            ) ?: emptyList()
                             collectResults.send(
                                 fetchedPlaces.mapIndexed { index, place ->
                                     Pair(indices[index], MarkerPlaceGroup(
@@ -385,7 +365,7 @@ class NearbyParentFragmentPresenter
                                     try {
                                         val fetchedPlace = nearbyController.getPlaces(
                                             mutableListOf(updatedGroups[i].place)
-                                        )
+                                        ) ?: emptyList()
 
                                         onePlaceBatch.add(Pair(i, MarkerPlaceGroup(
                                             bookmarkLocationDao.findBookmarkLocation(
@@ -427,10 +407,8 @@ class NearbyParentFragmentPresenter
                 if (clickedPlacesIndex < clickedPlaces.size) {
                     val clickedPlacesBacklog = hashMapOf<LatLng, Place>()
                     while (clickedPlacesIndex < clickedPlaces.size) {
-                        clickedPlacesBacklog.put(
-                            clickedPlaces[clickedPlacesIndex].location,
+                        clickedPlacesBacklog[clickedPlaces[clickedPlacesIndex].location] =
                             clickedPlaces[clickedPlacesIndex]
-                        )
                         ++clickedPlacesIndex
                     }
                     for ((index, group) in updatedGroups.withIndex()) {
@@ -446,18 +424,14 @@ class NearbyParentFragmentPresenter
                 if (bookmarkChangedPlacesIndex < bookmarkChangedPlaces.size) {
                     val bookmarkChangedPlacesBacklog = hashMapOf<LatLng, Place>()
                     while (bookmarkChangedPlacesIndex < bookmarkChangedPlaces.size) {
-                        bookmarkChangedPlacesBacklog.put(
-                            bookmarkChangedPlaces[bookmarkChangedPlacesIndex].location,
+                        bookmarkChangedPlacesBacklog[bookmarkChangedPlaces[bookmarkChangedPlacesIndex].location] =
                             bookmarkChangedPlaces[bookmarkChangedPlacesIndex]
-                        )
                         ++bookmarkChangedPlacesIndex
                     }
                     for ((index, group) in updatedGroups.withIndex()) {
                         if (bookmarkChangedPlacesBacklog.containsKey(group.place.location)) {
                             updatedGroups[index] = MarkerPlaceGroup(
-                                bookmarkLocationDao
-                                    .findBookmarkLocation(updatedGroups[index].place.name),
-                                updatedGroups[index].place
+                                bookmarkLocationDao.findBookmarkLocation(updatedGroups[index].place.name), updatedGroups[index].place
                             )
                         }
                     }
@@ -539,7 +513,6 @@ class NearbyParentFragmentPresenter
     @Override
     override fun handleMapScrolled(scope: LifecycleCoroutineScope?, isNetworkAvailable: Boolean) {
         scope ?: return
-
         placeSearchJob?.cancel()
         localPlaceSearchJob?.cancel()
         if (isNetworkAvailable) {
