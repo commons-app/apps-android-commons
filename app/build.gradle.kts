@@ -3,9 +3,11 @@ import java.io.ByteArrayOutputStream
 
 plugins {
     alias(libs.plugins.android.application)
-    alias(libs.plugins.jetbrains.kotlin.android)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.ksp)
     alias(libs.plugins.kotlin.kapt)
     alias(libs.plugins.kotlin.parcelize)
+    alias(libs.plugins.compose)
 }
 
 apply(from = "$rootDir/jacoco.gradle")
@@ -182,9 +184,7 @@ android {
         compose = true
     }
     buildToolsVersion = buildToolsVersion
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.8"
-    }
+
     packaging {
         jniLibs {
             excludes += listOf("META-INF/androidx.*")
@@ -214,7 +214,14 @@ android {
     }
 }
 
+composeCompiler {
+    enableStrongSkippingMode = true
+}
+
 dependencies {
+    // Feature Modules
+    implementation(project(":feature-profile"))
+
     // Utils
     implementation(libs.gson)
     implementation(libs.okhttp)
@@ -335,7 +342,7 @@ dependencies {
     implementation(libs.androidx.room.runtime)
     implementation(libs.androidx.room.ktx)
     implementation(libs.androidx.room.rxjava)
-    kapt(libs.androidx.room.compiler)
+    ksp(libs.androidx.room.compiler)
 
     // Preferences
     implementation(libs.androidx.preference)
@@ -354,8 +361,8 @@ dependencies {
     //Glide
     implementation(libs.glide)
     annotationProcessor(libs.glide.compiler)
-    kaptTest(libs.androidx.databinding.compiler)
-    kaptAndroidTest(libs.androidx.databinding.compiler)
+    ksp(libs.androidx.databinding.compiler)
+    kspAndroidTest(libs.androidx.databinding.compiler)
 
     implementation(libs.coordinates2country.android) {
         exclude(group = "com.google.android", module = "android")

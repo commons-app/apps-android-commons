@@ -33,8 +33,9 @@ glide = "4.12.0"
 gson = "2.8.5"
 junit = "4.13.2"
 junitJupiter = "5.10.0"
-kotlin = "1.9.22"
-kotlinStdlib = "1.8.0"
+ksp = "2.0.0-1.0.21"
+kotlin = "2.0.0"
+kotlinStdlib = "2.0.0"
 coroutines = "1.7.3"
 leakcanary = "2.10"
 livedataTesting = "1.2.0"
@@ -70,6 +71,7 @@ soloader = "0.10.5"
 timber = "4.7.1"
 uiautomator = "2.2.0"
 workManager = "2.8.1"
+appcompat = "1.6.1"
 
 [libraries]
 # AndroidX Core Dependencies
@@ -202,11 +204,15 @@ coordinates2country-android = { module = "io.github.coordinates2country:coordina
 osmdroid-android = { module = "org.osmdroid:osmdroid-android", version.ref = "osmdroidAndroid" }
 kotlin-stdlib-jdk7 = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib-jdk7", version.ref = "kotlinStdlib" }
 kotlin-stdlib-jdk8 = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib-jdk8", version.ref = "kotlinStdlib" }
+androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
-jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 kotlin-kapt = { id = "org.jetbrains.kotlin.kapt" }
-kotlin-parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize" }
+compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kotlin-parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize", version.ref = "kotlin" }
 github-triplet-play = { id = "com.github.triplet.play", version.ref = "githubTripletPlay" }
 getkeepsafe-dexcount = { id = "com.getkeepsafe.dexcount", version.ref = "dexcount" }
+android-library = { id = "com.android.library", version.ref = "agp" }
