@@ -542,7 +542,7 @@ class ContributionsFragment : CommonsDaggerSupportFragment(), FragmentManager.On
             return
         }
 
-        binding!!.cardViewNearby.permissionRequestButton.setOnClickListener { v: View? ->
+        binding!!.cardViewNearby.permissionRequestButton?.setOnClickListener {
             showNearbyCardPermissionRationale()
         }
 
