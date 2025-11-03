@@ -44,8 +44,8 @@ data class DepictedItem constructor(
 
     constructor(entity: Entities.Entity, place: Place) : this(
         entity,
-        place.name,
-        place.longDescription,
+        place.name!!,
+        place.longDescription!!,
     )
 
     constructor(entity: Entities.Entity, name: String, description: String) : this(

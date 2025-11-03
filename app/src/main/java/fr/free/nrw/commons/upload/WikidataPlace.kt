@@ -17,9 +17,9 @@ data class WikidataPlace(
     Parcelable {
     constructor(place: Place) : this(
         place.wikiDataEntityId!!,
-        place.name,
-        place.pic.takeIf { it.isNotBlank() },
-        place.siteLinks.getWikipediaLink().toString() ?: "",
+        place.name!!,
+        place.pic.takeIf { it!!.isNotBlank() },
+        place.siteLinks!!.wikipediaUri?.toString() ?: "",
         place.location,
         isMonumentUpload = place.isMonument,
     )

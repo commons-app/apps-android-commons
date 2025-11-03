@@ -43,7 +43,7 @@ abstract class BookmarkLocationsDao {
      * @return `true` if added, `false` if removed.
      */
     suspend fun updateBookmarkLocation(bookmarkLocation: Place): Boolean {
-        val exists = findBookmarkLocation(bookmarkLocation.name)
+        val exists = findBookmarkLocation(bookmarkLocation.name!!)
 
         if (exists) {
             deleteBookmarkLocation(bookmarkLocation.toBookmarksLocations())

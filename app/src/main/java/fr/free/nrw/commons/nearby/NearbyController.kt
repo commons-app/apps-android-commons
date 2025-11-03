@@ -47,29 +47,29 @@ class NearbyController @Inject constructor(
 
         if (null != places && places.size > 0) {
             val boundaryCoordinates = arrayOf<LatLng>(
-                places.get(0).location,  // south
-                places.get(0).location,  // north
-                places.get(0).location,  // west
-                places.get(0).location
+                places.get(0).location!!,  // south
+                places.get(0).location!!,  // north
+                places.get(0).location!!,  // west
+                places.get(0).location!!
             ) // east, init with a random location
 
             if (currentLatLng != null) {
                 Timber.d("Sorting places by distance...")
                 val distances: MutableMap<Place, Double> = mutableMapOf()
                 for (place in places) {
-                    distances.put(place, computeDistanceBetween(place.location, currentLatLng))
+                    distances.put(place, computeDistanceBetween(place.location!!, currentLatLng))
                     // Find boundaries with basic find max approach
-                    if (place.location.latitude < boundaryCoordinates[0].latitude) {
-                        boundaryCoordinates[0] = place.location
+                    if (place.location!!.latitude < boundaryCoordinates[0].latitude) {
+                        boundaryCoordinates[0] = place.location!!
                     }
-                    if (place.location.latitude > boundaryCoordinates[1].latitude) {
-                        boundaryCoordinates[1] = place.location
+                    if (place.location!!.latitude > boundaryCoordinates[1].latitude) {
+                        boundaryCoordinates[1] = place.location!!
                     }
-                    if (place.location.longitude < boundaryCoordinates[2].longitude) {
-                        boundaryCoordinates[2] = place.location
+                    if (place.location!!.longitude < boundaryCoordinates[2].longitude) {
+                        boundaryCoordinates[2] = place.location!!
                     }
-                    if (place.location.longitude > boundaryCoordinates[3].longitude) {
-                        boundaryCoordinates[3] = place.location
+                    if (place.location!!.longitude > boundaryCoordinates[3].longitude) {
+                        boundaryCoordinates[3] = place.location!!
                     }
                 }
                 Collections.sort(
@@ -174,29 +174,29 @@ class NearbyController @Inject constructor(
 
         if (null != places && places.size > 0) {
             val boundaryCoordinates = arrayOf<LatLng>(
-                places.get(0).location,  // south
-                places.get(0).location,  // north
-                places.get(0).location,  // west
-                places.get(0).location
+                places.get(0).location!!,  // south
+                places.get(0).location!!,  // north
+                places.get(0).location!!,  // west
+                places.get(0).location!!
             ) // east, init with a random location
 
             if (currentLatLng != null) {
                 Timber.d("Sorting places by distance...")
                 val distances: MutableMap<Place, Double> = mutableMapOf()
                 for (place in places) {
-                    distances.put(place, computeDistanceBetween(place.location, currentLatLng))
+                    distances.put(place, computeDistanceBetween(place.location!!, currentLatLng))
                     // Find boundaries with basic find max approach
-                    if (place.location.latitude < boundaryCoordinates[0].latitude) {
-                        boundaryCoordinates[0] = place.location
+                    if (place.location!!.latitude < boundaryCoordinates[0].latitude) {
+                        boundaryCoordinates[0] = place.location!!
                     }
-                    if (place.location.latitude > boundaryCoordinates[1].latitude) {
-                        boundaryCoordinates[1] = place.location
+                    if (place.location!!.latitude > boundaryCoordinates[1].latitude) {
+                        boundaryCoordinates[1] = place.location!!
                     }
-                    if (place.location.longitude < boundaryCoordinates[2].longitude) {
-                        boundaryCoordinates[2] = place.location
+                    if (place.location!!.longitude < boundaryCoordinates[2].longitude) {
+                        boundaryCoordinates[2] = place.location!!
                     }
-                    if (place.location.longitude > boundaryCoordinates[3].longitude) {
-                        boundaryCoordinates[3] = place.location
+                    if (place.location!!.longitude > boundaryCoordinates[3].longitude) {
+                        boundaryCoordinates[3] = place.location!!
                     }
                 }
                 Collections.sort<Place?>(
@@ -301,11 +301,11 @@ class NearbyController @Inject constructor(
             for (place in placeList) {
                 val baseMarker = BaseMarker()
                 val distance = formatDistanceBetween(currentLatLng, place.location)
-                place.setDistance(distance)
-                baseMarker.title = place.name
+                place.distance = distance
+                baseMarker.title = place.name!!
                 baseMarker.position = LatLng(
-                    place.location.latitude,
-                    place.location.longitude, 0f
+                    place.location!!.latitude,
+                    place.location!!.longitude, 0f
                 )
                 baseMarker.place = place
                 baseMarkersList.add(baseMarker)
@@ -325,7 +325,7 @@ class NearbyController @Inject constructor(
             val iter: MutableListIterator<MarkerPlaceGroup> = markerLabelList.listIterator()
             while (iter.hasNext()) {
                 val markerPlaceGroup = iter.next()
-                if (markerPlaceGroup.place.getWikiDataEntityId() == place.getWikiDataEntityId()) {
+                if (markerPlaceGroup.place.wikiDataEntityId == place.wikiDataEntityId) {
                     iter.set(MarkerPlaceGroup(isBookmarked, place))
                 }
             }

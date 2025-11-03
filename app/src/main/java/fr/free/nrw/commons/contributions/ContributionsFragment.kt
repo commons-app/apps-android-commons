@@ -658,7 +658,7 @@ class ContributionsFragment : CommonsDaggerSupportFragment(), FragmentManager.On
             var closestNearbyPlace: Place? = null
             // Find the first nearby place that has no image and exists
             for (place in nearbyPlacesInfo.placeList) {
-                if (place.pic == "" && place.exists) {
+                if (place.pic == "" && place.exists == true) {
                     closestNearbyPlace = place
                     break
                 }
@@ -668,8 +668,8 @@ class ContributionsFragment : CommonsDaggerSupportFragment(), FragmentManager.On
                 binding!!.cardViewNearby.visibility = View.GONE
             } else {
                 val distance = formatDistanceBetween(currentLatLng, closestNearbyPlace.location)
-                closestNearbyPlace.setDistance(distance)
-                direction = computeBearing(currentLatLng!!, closestNearbyPlace.location).toFloat()
+                closestNearbyPlace.distance = distance
+                direction = computeBearing(currentLatLng!!, closestNearbyPlace.location!!).toFloat()
                 binding!!.cardViewNearby.updateContent(closestNearbyPlace)
             }
         } else {

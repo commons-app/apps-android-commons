@@ -102,8 +102,8 @@ class UploadMediaPresenter @Inject constructor(
             ).map { uploadItem: UploadItem ->
                 if (place != null && place.isMonument && place.location != null) {
                     val countryCode = countryNamesAndCodes[Coordinates2Country.country(
-                        place.location.latitude,
-                        place.location.longitude
+                        place.location!!.latitude,
+                        place.location!!.longitude
                     )]
                     if (countryCode != null && WLM_SUPPORTED_COUNTRIES.contains(countryCode.lowercase())) {
                         uploadItem.isWLMUpload = true

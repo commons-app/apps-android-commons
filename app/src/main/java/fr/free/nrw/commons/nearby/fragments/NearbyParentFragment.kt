@@ -680,8 +680,8 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
             onPlaceClicked = { place: Place ->
                 moveCameraToPosition(
                     GeoPoint(
-                        place.location.latitude,
-                        place.location.longitude
+                        place.location!!.latitude,
+                        place.location!!.longitude
                     )
                 )
             },
@@ -1076,8 +1076,8 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
             }
             recenterMap(
                 LatLng(
-                    lastPlaceToCenter!!.location.latitude - cameraShift,
-                    lastPlaceToCenter!!.getLocation().longitude, 0f
+                    lastPlaceToCenter!!.location!!.latitude - cameraShift,
+                    lastPlaceToCenter!!.location!!.longitude, 0f
                 )
             )
         }
@@ -1087,7 +1087,7 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
 
     override fun updateListFragment(placeList: List<Place>?) {
         adapter!!.clear()
-        adapter!!.items = placeList?.filter{ it.name.isNotEmpty() } ?: emptyList()
+        adapter!!.items = placeList?.filter{ it.name!!.isNotEmpty() } ?: emptyList()
         binding!!.bottomSheetNearby.noResultsMessage.visibility =
             if (placeList.isNullOrEmpty()) View.VISIBLE else View.GONE
     }
@@ -1359,11 +1359,11 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
                     for (placeGroup in NearbyController.markerLabelList) {
                         val place = Place(
                             "", "", placeGroup.place.label, "",
-                            placeGroup.place.getLocation(), "",
+                            placeGroup.place.location, "",
                             placeGroup.place.siteLinks, "", placeGroup.place.exists,
                             placeGroup.place.entityID
                         )
-                        place.setDistance(placeGroup.place.distance)
+                        place.distance= placeGroup.place.distance
                         place.isMonument = placeGroup.place.isMonument
                         newPlaceGroups.add(
                             MarkerPlaceGroup(placeGroup.isBookmarked, place)
@@ -1553,10 +1553,8 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
                         updatedPlace.distance = place.distance
                         updatedPlace.location = place.location
                         marker.title = updatedPlace.name
-                        marker.snippet = if (containsParentheses(updatedPlace.longDescription))
-                            getTextBetweenParentheses(
-                                updatedPlace.longDescription
-                            )
+                        marker.snippet = if (containsParentheses(updatedPlace.longDescription!!))
+                            getTextBetweenParentheses(updatedPlace.longDescription!!)
                         else
                             updatedPlace.longDescription
                         marker.showInfoWindow()
@@ -2034,17 +2032,17 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
                 shouldUpdateMarker = true
             } else if (displayExists && displayNeedsPhoto) {
                 // Exists and needs photo
-                if (place.exists && place.pic.trim { it <= ' ' }.isEmpty()) {
+                if (place.exists!! && place.pic!!.trim { it <= ' ' }.isEmpty()) {
                     shouldUpdateMarker = true
                 }
             } else if (displayExists) {
                 // Exists and all included needs and doesn't needs photo
-                if (place.exists) {
+                if (place.exists!!) {
                     shouldUpdateMarker = true
                 }
             } else if (displayNeedsPhoto) {
                 // All and only needs photo
-                if (place.pic.trim { it <= ' ' }.isEmpty()) {
+                if (place.pic!!.trim { it <= ' ' }.isEmpty()) {
                     shouldUpdateMarker = true
                 }
             } else {
@@ -2095,14 +2093,14 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
         if (place.isMonument) {
             return R.drawable.ic_custom_map_marker_monuments
         }
-        if (!place.pic.trim { it <= ' ' }.isEmpty()) {
+        if (!place.pic!!.trim { it <= ' ' }.isEmpty()) {
             return (if (isBookmarked) R.drawable.ic_custom_map_marker_green_bookmarked else R.drawable.ic_custom_map_marker_green
                 )
         }
-        if (!place.exists) { // Means that the topic of the Wikidata item does not exist in the real world anymore, for instance it is a past event, or a place that was destroyed
+        if (!place.exists!!) { // Means that the topic of the Wikidata item does not exist in the real world anymore, for instance it is a past event, or a place that was destroyed
             return (R.drawable.ic_clear_black_24dp)
         }
-        if (place.name.isEmpty()) {
+        if (!place.name.isNullOrEmpty()) {
             return (if (isBookmarked) R.drawable.ic_custom_map_marker_grey_bookmarked else R.drawable.ic_custom_map_marker_grey
                 )
         }
@@ -2139,16 +2137,14 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
 
     fun convertToMarker(place: Place, isBookMarked: Boolean): Marker {
         val icon = getDrawable(requireContext(), getIconFor(place, isBookMarked))
-        val point = GeoPoint(place.location.latitude, place.location.longitude)
+        val point = GeoPoint(place.location!!.latitude, place.location!!.longitude)
         val marker = Marker(binding!!.map)
         marker.position = point
         marker.icon = icon
         if (place.name != "") {
             marker.title = place.name
-            marker.snippet = if (containsParentheses(place.longDescription))
-                getTextBetweenParentheses(
-                    place.longDescription
-                )
+            marker.snippet = if (containsParentheses(place.longDescription!!))
+                getTextBetweenParentheses(place.longDescription!!)
             else
                 place.longDescription
         }
@@ -2396,7 +2392,7 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
             Glide.with(binding!!.bottomSheetDetails.icon.context)
                 .load("https://commons.wikimedia.org/wiki/Special:Redirect/file/$imageName?width=25")
                 .placeholder(loadingDrawable)
-                .error(selectedPlace!!.label.icon)
+                .error(selectedPlace?.label!!.icon)
                 .listener(object : RequestListener<Drawable> {
                     override fun onLoadFailed(
                         e: GlideException?,
@@ -2431,14 +2427,14 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
                 handleMediaClick(imageName)
             }
         } ?: run {
-            binding!!.bottomSheetDetails.icon.setImageResource(selectedPlace!!.label.icon)
+            binding!!.bottomSheetDetails.icon.setImageResource(selectedPlace!!.label!!.icon)
         }
 
         binding!!.bottomSheetDetails.title.text = selectedPlace!!.name
         binding!!.bottomSheetDetails.category.text = selectedPlace!!.distance
         // Remove label since it is double information
-        var descriptionText = selectedPlace!!.longDescription
-            .replace(selectedPlace!!.getName() + " (", "")
+        var descriptionText = selectedPlace!!.longDescription!!
+            .replace(selectedPlace!!.name + " (", "")
         descriptionText = (if (descriptionText == selectedPlace!!.longDescription)
             descriptionText
         else
@@ -2596,7 +2592,7 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
     private fun updateBookmarkButtonImage(place: Place) {
         NearbyUtil.getBookmarkLocationExists(
             bookmarkLocationDao,
-            place.getName(),
+            place.name!!,
             scope,
             bottomSheetAdapter!!
         )
@@ -2871,13 +2867,13 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
 
             R.drawable.ic_directions_black_24dp -> {
                 selectedPlace?.let {
-                    handleGeoCoordinates(requireContext(), it.getLocation())
+                    handleGeoCoordinates(requireContext(), it.location!!)
                     binding?.map?.zoomLevelDouble ?: 0.0
                 }
             }
 
             R.drawable.ic_wikidata_logo_24dp -> {
-                selectedPlace?.siteLinks?.getWikidataLink()?.let {
+                selectedPlace?.siteLinks?.wikidataUri?.let {
                     handleWebUrl(requireContext(), it)
                 }
             }
@@ -2885,8 +2881,8 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
             R.drawable.ic_feedback_black_24dp -> {
                 selectedPlace?.let {
                     val intent = Intent(this.context, WikidataFeedback::class.java).apply {
-                        putExtra("lat", it.location.latitude)
-                        putExtra("lng", it.location.longitude)
+                        putExtra("lat", it.location!!.latitude)
+                        putExtra("lng", it.location!!.longitude)
                         putExtra("place", it.name)
                         putExtra("qid", it.wikiDataEntityId)
                     }
@@ -2895,13 +2891,13 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
             }
 
             R.drawable.ic_wikipedia_logo_24dp -> {
-                selectedPlace?.siteLinks?.getWikipediaLink()?.let {
+                selectedPlace?.siteLinks?.wikipediaUri?.let {
                     handleWebUrl(requireContext(), it)
                 }
             }
 
             R.drawable.ic_commons_icon_vector -> {
-                selectedPlace?.siteLinks?.getCommonsLink()?.let {
+                selectedPlace?.siteLinks?.commonsUri?.let { it: Uri ->
                     handleWebUrl(requireContext(), it)
                 }
             }
