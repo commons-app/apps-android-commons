@@ -122,7 +122,7 @@
   <string name="uploading_queued">Hochladen in Warteschlange (eingeschränkter Verbindungsmodus aktiviert)</string>
   <string name="upload_completed_notification_title">„%1$s“ hochgeladen!</string>
   <string name="upload_completed_notification_text">Tippe, um deinen Upload anzusehen</string>
-  <string name="upload_progress_notification_title_start">Hochlade von Datei: %1$s</string>
+  <string name="upload_progress_notification_title_start">Hochladen von Datei: %1$s</string>
   <string name="upload_progress_notification_title_in_progress">„%1$s“ wird hochgeladen</string>
   <string name="upload_progress_notification_title_finishing">Hochladen von „%1$s“ abschließen</string>
   <string name="upload_failed_notification_title">Hochladen von %1$s fehlgeschlagen</string>
@@ -263,7 +263,6 @@
   <string name="_2fa_code">2FA-Code</string>
   <string name="email_auth_code">E-Mail-Bestätigungscode</string>
   <string name="logout_verification">Möchtest du dich wirklich abmelden?</string>
-  <string name="mediaimage_failed">Medienbild fehlgeschlagen</string>
   <string name="no_subcategory_found">Keine Unterkategorien gefunden</string>
   <string name="no_parentcategory_found">Keine übergeordneten Kategorien gefunden</string>
   <string name="welcome_image_mount_zao">Zaō</string>

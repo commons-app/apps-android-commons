@@ -253,7 +253,6 @@
   <string name="_2fa_code">Kód pro dvoufázové ověření (2FA)</string>
   <string name="email_auth_code">Ověřovací kód z e-mailu</string>
   <string name="logout_verification">Opravdu se chcete odhlásit?</string>
-  <string name="mediaimage_failed">Obrázek</string>
   <string name="no_subcategory_found">Nebyly nalezeny podkategorie</string>
   <string name="no_parentcategory_found">Nebyly nalezeny rodičovské kategorie</string>
   <string name="welcome_image_mount_zao">Hora Zao</string>

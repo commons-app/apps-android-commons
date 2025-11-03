@@ -267,7 +267,6 @@
   <string name="_2fa_code">Code 2FA</string>
   <string name="email_auth_code">Code de vérification par email</string>
   <string name="logout_verification">Voulez-vous vraiment vous déconnecter ?</string>
-  <string name="mediaimage_failed">Échec sur l’image du média</string>
   <string name="no_subcategory_found">Aucune sous-catégorie trouvée</string>
   <string name="no_parentcategory_found">Aucune catégorie parente trouvée</string>
   <string name="welcome_image_mount_zao">Mont Zao</string>

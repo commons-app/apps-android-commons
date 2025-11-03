@@ -163,7 +163,6 @@
   <string name="media_detail_coordinates">ஆயத்தொலைகள்</string>
   <string name="media_detail_coordinates_empty">வழங்கப்படவில்லை</string>
   <string name="logout_verification">தாங்கள் மெய்யாகவே மூடுவதற்கு விரும்புகிறீர்களா?</string>
-  <string name="mediaimage_failed">பட ஊடகம் தோல்வியடைந்தது</string>
   <string name="no_subcategory_found">துணைப்பிரிவுகள் இல்லை</string>
   <string name="no_parentcategory_found">முதன்மை வகைகள் இல்லை</string>
   <string name="welcome_image_welcome_wikipedia" fuzzy="true">விக்கிப்பீடியாவிற்கு வருக</string>

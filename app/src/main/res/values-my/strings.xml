@@ -155,7 +155,6 @@
   <string name="media_detail_coordinates">ကိုဩဒိနိတ်</string>
   <string name="media_detail_coordinates_empty">မဖြည့်ထားပါ</string>
   <string name="logout_verification">အမှန်တကယ် ထွက်သွားလိုပါသလား</string>
-  <string name="mediaimage_failed">မီဒီယာရုပ်ပုံ မအောင်မြင်ပါ</string>
   <string name="no_subcategory_found">ကဏ္ဍခွဲများ မတွေ့ရှိပါ</string>
   <string name="no_parentcategory_found">ပင်မကဏ္ဍများ မတွေ့ရှိပါ</string>
   <string name="welcome_image_tulip">ခတ္တာပန်း</string>

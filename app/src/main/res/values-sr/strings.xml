@@ -45,7 +45,6 @@
   </plurals>
   <plurals name="multiple_uploads_title">
     <item quantity="one">%1$d отпремање</item>
-    <item quantity="few">%1$d отпремања</item>
     <item quantity="other">%1$d отпремања</item>
   </plurals>
   <plurals name="share_license_summary">
@@ -221,7 +220,6 @@
   <string name="become_a_tester_description">Прикључите се нашем каналу бета верзија на Google Play-у и раније приступајте новим функцијама и исправкама грешака</string>
   <string name="_2fa_code">2FA код</string>
   <string name="logout_verification">Заиста желите да се одјавите?</string>
-  <string name="mediaimage_failed">Медијска слика неуспешна</string>
   <string name="no_subcategory_found">Поткатегорије нису пронађене</string>
   <string name="no_parentcategory_found">Надређене категорије нису пронађене</string>
   <string name="welcome_image_mount_zao">Планина Зао</string>
@@ -229,7 +227,7 @@
   <string name="welcome_image_rainbow_bridge">Дугин мост</string>
   <string name="welcome_image_tulip">Тулипан</string>
   <string name="welcome_image_welcome_wikipedia">Шематска слика генеричког Википедијиног чланка.</string>
-  <string name="welcome_image_welcome_copyright" fuzzy="true">Добродошлица за ауторска права</string>
+  <string name="welcome_image_welcome_copyright">Цртеж наслаганих папира са прецртаним знаком за ауторска права.</string>
   <string name="welcome_image_sydney_opera_house">Сиднејска опера</string>
   <string name="cancel">Откажи</string>
   <string name="navigation_drawer_open">Отвори</string>

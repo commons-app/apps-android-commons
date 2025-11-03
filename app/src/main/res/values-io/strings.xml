@@ -216,7 +216,6 @@
   <string name="_2fa_code">Kodexo 2FA</string>
   <string name="email_auth_code">Kodexo sendita ad e-postal adreso</string>
   <string name="logout_verification">Ka vu deziras ekirar?</string>
-  <string name="mediaimage_failed">Faliis montrar imajo</string>
   <string name="no_subcategory_found">Nula subkategorio trovesis</string>
   <string name="no_parentcategory_found">Nula kategorio precipua trovesis</string>
   <string name="welcome_image_mount_zao">Monto Zao</string>

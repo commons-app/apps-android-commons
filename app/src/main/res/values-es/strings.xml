@@ -49,6 +49,7 @@
 * Pompilos
 * Raos10
 * Rodney Araujo
+* SaldırganSincap
 * Samthony
 * Superzerocool
 * Tiberius1701
@@ -270,7 +271,6 @@
   <string name="_2fa_code">Código de autenticación de 2 pasos</string>
   <string name="email_auth_code">Código de verificación de correo electrónico</string>
   <string name="logout_verification">¿Confirmas que quieres salir?</string>
-  <string name="mediaimage_failed">Falló la imagen de multimedia</string>
   <string name="no_subcategory_found">No se encontró ninguna subcategoría</string>
   <string name="no_parentcategory_found">No se encontró ninguna categoría contenedora</string>
   <string name="welcome_image_mount_zao">Monte Zao</string>
@@ -861,7 +861,7 @@
   <string name="account">Cuenta</string>
   <string name="vanish_account">Desaparecer cuenta</string>
   <string name="account_vanish_request_confirm_title">Advertencia sobre la desaparición de la cuenta</string>
-  <string name="account_vanish_request_confirm">La desaparición de una cuenta en Wikimedia Commons es un &lt;b&gt;último recurso&lt;/b&gt; y &lt;b&gt;solo debe usarse cuando desee dejar de editar para siempre y también para ocultar la mayor cantidad posible de sus asociaciones pasadas.&lt;br/&gt;&lt;br/&gt;La desaparición de una cuenta en Wikimedia Commons se realiza cambiando el nombre de la cuenta para que otros no puedan reconocer sus contribuciones en un proceso llamado desaparición de la cuenta. &lt;b&gt;La desaparición de la cuenta no garantiza el anonimato completo ni elimina las contribuciones a los proyectos&lt;/b&gt;.</string>
+  <string name="account_vanish_request_confirm">La desaparición de una cuenta en Wikimedia Commons es un &lt;b&gt;último recurso&lt;/b&gt; y solo debe usarse cuando desee dejar de editar para siempre y también para ocultar la mayor cantidad posible de sus asociaciones pasadas.&lt;br/&gt;&lt;br/&gt;La desaparición de una cuenta en Wikimedia Commons se realiza cambiando el nombre de la cuenta para que otros no puedan reconocer sus contribuciones en un proceso llamado desaparición de la cuenta. &lt;b&gt;La desaparición de la cuenta no garantiza el anonimato completo ni elimina las contribuciones a los proyectos&lt;/b&gt;.</string>
   <string name="caption">Leyenda</string>
   <string name="caption_copied_to_clipboard">Leyenda copiado al portapapeles</string>
   <string name="congratulations_all_pictures_in_this_album_have_been_either_uploaded_or_marked_as_not_for_upload">Felicitaciones, todas las imágenes de este álbum han sido cargadas o marcadas como no para cargar.</string>

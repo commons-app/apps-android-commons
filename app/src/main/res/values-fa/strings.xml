@@ -223,7 +223,6 @@
   <string name="become_a_tester_description">به گروه آزمایشی ما در گوگل‌پلی بپیوندید و از خصوصیات جدید و خطاهای رفع‌شده زودتر از دیگران برخوردار شوید.</string>
   <string name="_2fa_code">کد 2FA</string>
   <string name="logout_verification">آیا واقعاً قصد خروج از سامانه را دارید؟</string>
-  <string name="mediaimage_failed">خطای تصویر رسانه</string>
   <string name="no_subcategory_found">هیچ زیررده‌ای یافت نشد</string>
   <string name="no_parentcategory_found">هیچ رده مادری یافت نشد</string>
   <string name="welcome_image_mount_zao">کوه زائو</string>
@@ -328,7 +327,7 @@
   <string name="result">نتیجه</string>
   <string name="congratulatory_message_quiz">شما %1$s پاسخ درست دادید. آفرین!</string>
   <string name="warning_for_no_answer">یکی از دو گزینه را انتخاب کنید تا به سوال پاسخ دهید</string>
-  <string name="user_not_logged_in">جلسه ورود به سیستم منقضی شد، لطفاً دوباره وارد سیستم شوید.</string>
+  <string name="user_not_logged_in">نشست ورود به سامانه منقضی شد، لطفاً دوباره وارد سیستم شوید.</string>
   <string name="quiz_result_share_message">کویز خود را با دوستان خود به اشتراک بگذارید.</string>
   <string name="continue_message">ادامه</string>
   <string name="correct">جواب درست</string>

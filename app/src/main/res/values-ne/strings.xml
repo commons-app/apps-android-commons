@@ -4,6 +4,7 @@
 * Drjpoudel
 * Nirajan pant
 * Parbat subedi
+* SaldırganSincap
 * पर्वत सुबेदी
 * बडा काजी
 * राम प्रसाद जोशी
@@ -16,7 +17,7 @@
   <string name="commons_logo">कमन्सकाे लाेगाे</string>
   <string name="commons_website">कमन्सकाे वेबसाइट</string>
   <string name="exit_location_picker">स्थान चयनकर्ताबाट बाहिर निस्कनुहोस्</string>
-  <string name="submit">बुझाउनुहोस्</string>
+  <string name="submit">पेस गर्नुहोस्</string>
   <string name="add_another_description">अर्को विवरण थप्नुहोस्</string>
   <string name="add_new_contribution">नयाँ योगदान थप्नुहोस्</string>
   <string name="add_contribution_from_camera">क्यामराबाट योगदान थप्नुहोस्</string>
@@ -122,7 +123,7 @@
   <string name="title_activity_category_details">श्रेणी</string>
   <string name="menu_about">बारेमा</string>
   <string name="about_license">विकिमिडिया कमन्स अनुप्रयाेग एक स्वतन्त्र स्रोत अनुप्रयाेग हो। यो अनुप्रयाेग विकिमिडिया समुदायका अनुदानप्राप्तकर्ताहरू र स्वयंसेवकहरूद्वारा निर्मित एवम् प्रबन्धित छ। विकिमिडिया फाउण्डेसन यस अनुप्रयाेगकाे निर्माण, विकास र प्रबन्धनमा कुनै पनि प्रकारले संलग्न छैन।</string>
-  <string name="about_improve">बग प्रतिवेदन र सुझावहरूको लागि नयाँ &lt;a href=\"&lt;span class=\"notranslate\" translate=\"no\"&gt;%1$s \"&gt;गिटहब समस्या&lt;/a&gt; सिर्जना गर्नुहोस्।</string>
+  <string name="about_improve">बग प्रतिवेदन र सुझावहरूको लागि नयाँ a href=\"%1$s\"&gt;गिटहब समस्या&lt;/a&gt; सिर्जना गर्नुहोस्।</string>
   <string name="about_privacy_policy">गोपनीयता नीति</string>
   <string name="about_credits">श्रेयहरू</string>
   <string name="title_activity_about">बारेमा</string>

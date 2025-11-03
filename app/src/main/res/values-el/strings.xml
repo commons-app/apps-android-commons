@@ -239,7 +239,6 @@
   <string name="_2fa_code">Κωδικός 2FA</string>
   <string name="email_auth_code">Κωδικός επαλήθευσης ηλεκτρονικού ταχυδρομείου</string>
   <string name="logout_verification">Θέλετε σίγουρα να αποσυνδεθείτε;</string>
-  <string name="mediaimage_failed">Η εικόνα πολυμέσων απέτυχε</string>
   <string name="no_subcategory_found">Δε βρέθηκαν υποκατηγορίες</string>
   <string name="no_parentcategory_found">Δε βρέθηκαν γονικές κατηγορίες</string>
   <string name="welcome_image_mount_zao">Όρος Ζάο</string>

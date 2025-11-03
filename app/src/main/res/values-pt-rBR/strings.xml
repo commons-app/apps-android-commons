@@ -31,7 +31,7 @@
 -->
 <resources>
   <string name="commons_facebook">Página do Commons no Facebook</string>
-  <string name="commons_github" fuzzy="true">Código fonte do Commons no Github</string>
+  <string name="commons_github">Código-fonte do Commons GitHub</string>
   <string name="commons_logo">Logotipo do Commons</string>
   <string name="commons_website">Site do Commons</string>
   <string name="exit_location_picker">Sair do selecionador de localização</string>
@@ -95,13 +95,13 @@
   <string name="logging_in_message">Por favor, aguarde...</string>
   <string name="updating_caption_title">Atualizando legendas e descrições</string>
   <string name="updating_caption_message">Por favor, aguarde...</string>
-  <string name="login_success" fuzzy="true">Login bem sucedido</string>
-  <string name="login_failed" fuzzy="true">Falha na identificação</string>
+  <string name="login_success">Login efetuado com sucesso!</string>
+  <string name="login_failed">Falha no login!</string>
   <string name="upload_failed">Arquivo não encontrado. Tente outro arquivo.</string>
   <string name="retry_limit_reached">O limite máximo de tentativas foi atingido! Por favor, cancele o upload e tente novamente</string>
   <string name="unrestricted_battery_mode">Desativar a otimização da bateria?</string>
   <string name="suggest_unrestricted_mode">O upload de mais de três imagens funciona de forma mais confiável quando a otimização da bateria está desativada. Desative a otimização da bateria do aplicativo Commons nas configurações para obter uma experiência de upload tranquila. \n\nPossíveis etapas para desativar a otimização da bateria:\n\nEtapa 1: Toque no botão \"Settings\" (Configurações) abaixo.\n\nEtapa 2: Alterne de \"Não otimizado\" para \"Todos os aplicativos\".\n\nEtapa 3: procure por \"Commons\" ou \"fr.free.nrw.commons\".\n\nEtapa 4: Toque nele e selecione \"Don\'t optimize\" (Não otimizar).\n\nEtapa 5: Pressione \"Concluído\".</string>
-  <string name="authentication_failed" fuzzy="true">A autenticação falhou, inicie uma nova sessão, por favor</string>
+  <string name="authentication_failed">A autenticação falhou. Por favor, faça login novamente.</string>
   <string name="uploading_started">Upload iniciado!</string>
   <string name="uploading_queued">Fila de carregamento (modo de conexão limitada ativado)</string>
   <string name="upload_completed_notification_title">%1$s enviado!</string>
@@ -123,17 +123,19 @@
   <string name="menu_nearby">Próximo</string>
   <string name="provider_contributions">Meus envios</string>
   <string name="menu_copy_link">Copiar link</string>
+  <string name="menu_link_copied">O link foi copiado para a área de transferência.</string>
   <string name="menu_share">Compartilhar</string>
   <string name="menu_view_file_page">Ver página do arquivo</string>
   <string name="share_title_hint">Legenda (Obrigatório)</string>
   <string name="add_caption_toast">Forneça uma legenda para este arquivo</string>
   <string name="share_description_hint">Descrição</string>
   <string name="share_caption_hint">Legenda</string>
-  <string name="login_failed_network" fuzzy="true">Erro ao efetuar o login - falha na rede</string>
+  <string name="login_failed_network">Não foi possível fazer login, falha na rede.</string>
   <string name="login_failed_throttled">Muitas tentativas malsucedidas. Tente de novo daqui alguns minutos.</string>
   <string name="login_failed_blocked">Desculpe, esse usuário foi banido do Commons</string>
   <string name="login_failed_2fa_needed">Você precisa fornecer o seu código de ativação de dois fatores.</string>
-  <string name="login_failed_generic" fuzzy="true">Erro ao efetuar o login</string>
+  <string name="login_failed_email_auth_needed">Um código de verificação de login foi enviado para o seu endereço de e-mail. Por favor, insira o código para fazer login.</string>
+  <string name="login_failed_generic">Falha no login!</string>
   <string name="share_upload_button">Enviar</string>
   <string name="multiple_share_base_title">Nomeie esse conjunto</string>
   <string name="provider_modifications">Modificações</string>
@@ -153,7 +155,7 @@
   <string name="title_activity_settings">Configurações</string>
   <string name="title_activity_signup">Criar conta</string>
   <string name="title_activity_featured_images">Imagens destacadas</string>
-  <string name="images_featured_explanation" fuzzy="true">As fotografias destacadas são imagens de fotógrafos e ilustradores altamente qualificados, que a comunidade da wiki Wikimedia Commons escolheu como as de melhor qualidade do \'\'site\'\'.</string>
+  <string name="images_featured_explanation">As imagens em destaque são contribuições de fotógrafos e ilustradores altamente qualificados que a comunidade do Wikimedia Commons selecionou como algumas das imagens de maior qualidade do site.</string>
   <string name="title_activity_custom_selector">Seletor personalizado</string>
   <string name="title_activity_category_details">Categoria</string>
   <string name="title_activity_review">Revisão por pares</string>
@@ -170,15 +172,18 @@
   <string name="no_uploads_yet">Você ainda não carregou nenhuma foto.</string>
   <string name="menu_retry_upload">Repetir</string>
   <string name="menu_cancel_upload">Cancelar</string>
+  <string name="language_search_type_language_name">Tipo Idioma Nome</string>
+  <string name="language_search_recent_searches">Pesquisas recentes</string>
+  <string name="language_search_all_languages">Todos os idiomas</string>
   <string name="media_upload_policy">Ao enviar esta imagem, declaro que este é o meu próprio trabalho, que não contém material protegido ou selfies, e, de outra forma, adere a &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Políticas do Wikimedia Commons&lt;/a&gt;.</string>
   <string name="menu_download">Download</string>
   <string name="preference_license">Licença padrão</string>
   <string name="use_previous">Usar o título e descrição anterior</string>
   <string name="preference_theme">Tema</string>
-  <string name="license_name_cc_by_sa_four" fuzzy="true">Atribuição-CompartilhaIgual 4.0</string>
-  <string name="license_name_cc_by_four" fuzzy="true">Atribuição 4.0</string>
-  <string name="license_name_cc_by_sa" fuzzy="true"> Attribution-ShareAlike 3.0</string>
-  <string name="license_name_cc_by" fuzzy="true"> Attribution 3.0</string>
+  <string name="license_name_cc_by_sa_four">Attribution-ShareAlike 4.0</string>
+  <string name="license_name_cc_by_four">Attribution 4.0</string>
+  <string name="license_name_cc_by_sa">Attribution-ShareAlike 3.0</string>
+  <string name="license_name_cc_by">Attribution 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
@@ -231,6 +236,7 @@
   <string name="media_detail_description">Descrição</string>
   <string name="media_detail_discussion">Discussão</string>
   <string name="media_detail_author">Autor</string>
+  <string name="media_detail_uploader">Carregar</string>
   <string name="media_detail_uploaded_date">Data de envio.</string>
   <string name="media_detail_license">Licença</string>
   <string name="media_detail_coordinates">Coordenadas</string>
@@ -238,16 +244,16 @@
   <string name="become_a_tester_title">Seja um Testador Beta</string>
   <string name="become_a_tester_description">Entre no nosso canal beta no Google Play e receba acesso prévio a novos recursos e correções de erros</string>
   <string name="_2fa_code">Código 2FA</string>
+  <string name="email_auth_code">Código de verificação de e-mail</string>
   <string name="logout_verification">Quer realmente sair ?</string>
-  <string name="mediaimage_failed">Falha na imagem de mídia</string>
   <string name="no_subcategory_found">Nenhuma subcategoria encontrada</string>
   <string name="no_parentcategory_found">Nenhuma categoria pai encontrada</string>
   <string name="welcome_image_mount_zao">Mount Zao</string>
   <string name="welcome_image_llamas">Llamas</string>
   <string name="welcome_image_rainbow_bridge">Ponte de Arco-Íris</string>
   <string name="welcome_image_tulip">Tulipa</string>
-  <string name="welcome_image_welcome_wikipedia" fuzzy="true">Bem-vindo à Wikipédia</string>
-  <string name="welcome_image_welcome_copyright" fuzzy="true">Direitos de autor são bem vindo</string>
+  <string name="welcome_image_welcome_wikipedia">Uma imagem esquemática de um artigo genérico da Wikipédia.</string>
+  <string name="welcome_image_welcome_copyright">Um desenho de uma pilha de papéis com o símbolo de direitos autorais riscado.</string>
   <string name="welcome_image_sydney_opera_house">Ópera de Sydney</string>
   <string name="cancel">Cancelar</string>
   <string name="navigation_drawer_open">Abrir</string>
@@ -258,6 +264,7 @@
   <string name="navigation_item_about">Sobre</string>
   <string name="navigation_item_settings">Configurações</string>
   <string name="navigation_item_feedback">Comentários</string>
+  <string name="navigation_item_feedback_github">Comentários via GitHub</string>
   <string name="navigation_item_logout">Sair</string>
   <string name="navigation_item_info">Tutorial</string>
   <string name="navigation_item_notification">Notificações</string>
@@ -279,6 +286,7 @@
   <string name="upload_connection_error_alert_detail">O processo de carregamento requer acesso a internet\n     ativa. Verifique sua conexão de rede.</string>
   <string name="upload_problem_image">Problemas encontrados na imagem</string>
   <string name="internet_downloaded">Por favor, só envie fotos que você tirou. Não faça upload de fotos baixadas da Internet.</string>
+  <string name="preferences_uploads">Envios</string>
   <string name="use_external_storage">Salvar fotos no aplicativo</string>
   <string name="use_external_storage_summary">Salvar as fotos tiradas com a câmera do aplicativo no armazenamento do dispositivo</string>
   <string name="login_to_your_account">Faça login na sua conta</string>
@@ -291,14 +299,16 @@
   <string name="nominated_see_more">Veja a página para detalhes</string>
   <string name="skip_login">Pular</string>
   <string name="navigation_item_login">Entrar</string>
-  <string name="skip_login_title" fuzzy="true">Você realmente quer pular a entrada?</string>
-  <string name="skip_login_message" fuzzy="true">Você teria que entrar para enviar fotos no futuro.</string>
+  <string name="skip_login_title">Você realmente deseja pular o login?</string>
+  <string name="skip_login_message">Você precisará fazer login para enviar fotos no futuro.</string>
   <string name="login_alert_message">Entre para usar esta funcionalidade</string>
   <string name="copy_wikicode">Copie o wikitexto para a área de transferência</string>
   <string name="wikicode_copied">O wikitexto foi copiado para a área de transferência</string>
   <string name="nearby_location_not_available">As proximidades podem não funcionar corretamente, o local não está disponível.</string>
+  <string name="nearby_showing_pins_offline">Internet indisponível. Exibindo apenas locais armazenados em cache.</string>
   <string name="upload_location_access_denied">Acesso à localização negado. Defina sua localização manualmente para usar esse recurso.</string>
   <string name="location_permission_rationale_nearby">Permissão necessária para exibir uma lista de locais próximos</string>
+  <string name="location_permission_rationale_explore">É necessária permissão para exibir uma lista de imagens próximas.</string>
   <string name="nearby_directions">Direções</string>
   <string name="nearby_wikidata">Wikidata</string>
   <string name="nearby_wikipedia">Wikipédia</string>
@@ -348,6 +358,7 @@
   <string name="quiz">Questionário</string>
   <string name="quiz_question_string">Esta fotografia pode ser carregada?</string>
   <string name="question">Pergunta</string>
+  <string name="quiz_i_am_not_sure">Não tenho certeza</string>
   <string name="result">Resultado</string>
   <string name="quiz_back_button">Se continuar carregadas imagens que precisam de ser eliminadas a sua conta será provavelmente banida. Tem a certeza de que pretende terminar o questionário?</string>
   <string name="quiz_alert_message">Mais de %1$s das imagens que carregou foram eliminadas. Se continuar a carregar imagens que precisam de ser eliminadas a sua conta será provavelmente banida.\n\nQuer ver o guia prático outra vez e depois preencher um questionário que ajuda a aprender que tipos de imagens deve ou não deve carregar?</string>
@@ -357,8 +368,9 @@
   <string name="blurry_image_answer">Um dos objetivos da wiki Commons é recolher imagens de qualidade. Assim, não devem ser carregadas imagens desfocadas. Tente sempre tirar boas fotografias com iluminação adequada.</string>
   <string name="construction_event_answer">As imagens que mostram tecnologia ou cultura são muito bem-vindas na wiki Commons.</string>
   <string name="congratulatory_message_quiz">Obteve %1$s de respostas corretas. Parabéns!</string>
+  <string name="quiz_continue">Continuar</string>
   <string name="warning_for_no_answer">Selecione uma das duas opções para responder à pergunta</string>
-  <string name="user_not_logged_in" fuzzy="true">A sessão expirou. Inicie uma nova sessão, por favor.</string>
+  <string name="user_not_logged_in">Sua sessão expirou. Por favor, faça login novamente.</string>
   <string name="quiz_result_share_message">Compartilhe o seu questionário com os amigos!</string>
   <string name="continue_message">Continuar</string>
   <string name="correct">Resposta correta</string>

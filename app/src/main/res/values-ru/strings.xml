@@ -51,7 +51,7 @@
 -->
 <resources>
   <string name="commons_facebook">Facebook-страница Викисклада</string>
-  <string name="commons_github" fuzzy="true">Исходный код Викисклада на гитхабе</string>
+  <string name="commons_github">Исходный код Викисклада на GitHub</string>
   <string name="commons_logo">Логотип Викисклада</string>
   <string name="commons_website">Веб-сайт Викисклада</string>
   <string name="exit_location_picker">Выйти из окна выбора местоположения</string>
@@ -279,15 +279,14 @@
   <string name="_2fa_code">Код 2ФА</string>
   <string name="email_auth_code">Код подтверждения электронной почты</string>
   <string name="logout_verification">Вы действительно хотите выйти?</string>
-  <string name="mediaimage_failed">Ошибка медиафайла</string>
   <string name="no_subcategory_found">Подкатегории не найдены.</string>
   <string name="no_parentcategory_found">Не найдено родительских категорий</string>
   <string name="welcome_image_mount_zao">Гора Зао</string>
   <string name="welcome_image_llamas">Ламы</string>
   <string name="welcome_image_rainbow_bridge">Радужный мост</string>
   <string name="welcome_image_tulip">Тюльпан</string>
-  <string name="welcome_image_welcome_wikipedia" fuzzy="true">Добро пожаловать в Википедию</string>
-  <string name="welcome_image_welcome_copyright" fuzzy="true">Добро пожаловать — авторские права</string>
+  <string name="welcome_image_welcome_wikipedia">Схематическое изображение типовой статьи в Википедии.</string>
+  <string name="welcome_image_welcome_copyright">Рисунок стопки бумаг с перечеркнутым символом авторского права.</string>
   <string name="welcome_image_sydney_opera_house">Сиднейский оперный театр</string>
   <string name="cancel">Отмена</string>
   <string name="navigation_drawer_open">Открыть</string>
@@ -520,11 +519,11 @@
   <string name="check_category_failure_message">Не удаётся сделать запрос о проверке категорий для файла %1$s</string>
   <string name="check_category_toast">Проверка категорий файла %1$s</string>
   <string name="nominate_for_deletion_done">Готово</string>
-  <string name="send_thank_success_title" fuzzy="true">Отправка благодарности: Успешно</string>
+  <string name="send_thank_success_title">Отправка благодарности: Успешно</string>
   <string name="send_thank_success_message">Благодарности отправлены %1$s</string>
   <string name="send_thank_failure_message">Не удалось отправить благодарности %1$s</string>
-  <string name="send_thank_failure_title" fuzzy="true">Отправка благодарности: Неуспешно</string>
-  <string name="send_thank_toast" fuzzy="true">Отправка благодарности %1$s</string>
+  <string name="send_thank_failure_title">Отправка благодарности: Неуспешно</string>
+  <string name="send_thank_toast">Отправка благодарности %1$s</string>
   <string name="review_copyright">Соответствует правилам об авторском праве?</string>
   <string name="review_category">Правильно ли указаны категории?</string>
   <string name="review_spam">Уместен ли файл на Викискладе?</string>

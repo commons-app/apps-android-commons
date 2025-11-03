@@ -188,7 +188,7 @@
   <string name="detail_panel_cats_none">هېڅ هم نه دی ټاکل شوی</string>
   <string name="detail_caption_empty">هيڅ نيونگ نشته</string>
   <string name="detail_description_empty">څرگنداوی نشته</string>
-  <string name="detail_discussion_empty">هيڅ شننه نشته</string>
+  <string name="detail_discussion_empty">هېڅ شننه نشته</string>
   <string name="detail_license_empty">ناجوت منښتليک</string>
   <string name="menu_refresh">تازه کول</string>
   <string name="storage_permission_title">د زېرمه کولو د پرېښولي غوښتنه کول</string>
@@ -215,7 +215,6 @@
   <string name="become_a_tester_title">ازمېښتي ازمايښتگر شئ</string>
   <string name="email_auth_code">برېښليک تاييد کوډ</string>
   <string name="logout_verification">ايا تاسو په رښتيا له غونډاله وتل غواړئ؟</string>
-  <string name="mediaimage_failed">رسنۍ انځور نابرياله شو</string>
   <string name="no_subcategory_found">هېڅ څېرمه‌وېشنيزې ونه موندل شوې</string>
   <string name="no_parentcategory_found">هېڅ بنسټيزې وېشنيزې ونه موندل شوې</string>
   <string name="welcome_image_welcome_wikipedia">د ويکيپېډيا يوې ټوليزې ليکنې يو منشوري انځور.</string>

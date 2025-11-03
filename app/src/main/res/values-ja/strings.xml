@@ -229,7 +229,6 @@
   <string name="_2fa_code">2FAコード</string>
   <string name="email_auth_code">メール認証コード</string>
   <string name="logout_verification">ログアウトしてもよろしいですか？</string>
-  <string name="mediaimage_failed">メディアイメージが失敗しました</string>
   <string name="no_subcategory_found">下位カテゴリは見つかりませんでした</string>
   <string name="no_parentcategory_found">上位カテゴリは見つかりませんでした</string>
   <string name="welcome_image_mount_zao">蔵王連峰</string>

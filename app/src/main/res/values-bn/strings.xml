@@ -236,7 +236,6 @@
   <string name="_2fa_code">2FA কোড</string>
   <string name="email_auth_code">ইমেল যাচাইকরণ কোড</string>
   <string name="logout_verification">আপনি কি সত্যিই প্রস্থান করতে চান?</string>
-  <string name="mediaimage_failed">মিডিয়া চিত্র ব্যর্থ হয়েছে</string>
   <string name="no_subcategory_found">কোন উপবিষয়শ্রেনী পাওয়া যায় নি।</string>
   <string name="no_parentcategory_found">কোনও মূল বিষয়শ্রেণী পাওয়া যায়নি</string>
   <string name="welcome_image_mount_zao">জাও পর্বত</string>
