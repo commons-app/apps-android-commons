@@ -7,7 +7,7 @@
 -->
 <resources>
   <string name="commons_facebook">Викилармера Facebook-агӀо</string>
-  <string name="commons_github">Викилармин йуьхьанцара кодаш гитхабехь</string>
+  <string name="commons_github" fuzzy="true">Викилармин йуьхьанцара кодаш гитхабехь</string>
   <string name="commons_logo">Викилармин логотип</string>
   <string name="commons_website">Викилармин веб-сайт</string>
   <string name="exit_location_picker">Лаьтта меттиг хоржучу корера ара вала(йала)</string>
@@ -31,18 +31,14 @@
     <item quantity="one">%1$d файл чуйокхуш йу</item>
     <item quantity="other">%1$d файл чуйокхуш йу</item>
   </plurals>
-  <plurals name="contributions_subtitle">
-    <item quantity="one">(%1$d)</item>
-    <item quantity="other">(%1$d)</item>
-  </plurals>
   <string name="starting_uploads">Чуйаккхар долор</string>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">Чуйаккхар %d кечдар</item>
-    <item quantity="other">Чуйаккхар %d кечдар</item>
+    <item quantity="one">Чуйаккхар %1$d кечдар</item>
+    <item quantity="other">Чуйаккхар %1$d кечдар</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">%d чуйаккхар</item>
-    <item quantity="other">%d чуйаккхар</item>
+    <item quantity="one">%1$d чуйаккхар</item>
+    <item quantity="other">%1$d чуйаккхар</item>
   </plurals>
   <plurals name="share_license_summary">
     <item quantity="one">ХIара суртан лицензи йийра йу кху бухахь %1$s</item>
@@ -86,7 +82,7 @@
   <string name="uploading_queued">Чуйакхар рогӀехь йу (зӀенан режим, доза тоьхна дӀахӀоттийна)</string>
   <string name="upload_completed_notification_title">%1$s чуйаьккхина!</string>
   <string name="upload_completed_notification_text">Чуйаьккхина файле хьажа тӀетаӀайe</string>
-  <string name="upload_progress_notification_title_start">%1$s чуйаккхар долина</string>
+  <string name="upload_progress_notification_title_start" fuzzy="true">%1$s чуйаккхар долина</string>
   <string name="upload_progress_notification_title_in_progress">%1$s чуйоккхуш йу</string>
   <string name="upload_progress_notification_title_finishing">%1$s чуйаккхар чекхдолуш ду</string>
   <string name="upload_failed_notification_title">%1$s чуяккхуш гӀалат даьлла</string>
@@ -168,8 +164,8 @@
   <string name="media_detail_license">Лицензи</string>
   <string name="media_detail_coordinates">Координаташ</string>
   <string name="welcome_image_llamas">Ламаш</string>
-  <string name="welcome_image_welcome_wikipedia">Марша догӀийла Википеди чу</string>
-  <string name="welcome_image_welcome_copyright">Марша догӀийла — авторийн бакъонаш</string>
+  <string name="welcome_image_welcome_wikipedia" fuzzy="true">Марша догӀийла Википеди чу</string>
+  <string name="welcome_image_welcome_copyright" fuzzy="true">Марша догӀийла — авторийн бакъонаш</string>
   <string name="welcome_image_sydney_opera_house">Сиднейн операн театр</string>
   <string name="cancel">Йухайаккхар</string>
   <string name="navigation_drawer_open">Схьайелла</string>
@@ -237,10 +233,9 @@
   <string name="delete">ДӀайаккхар</string>
   <string name="Achievements">Кхиамаш</string>
   <string name="Profile">Профиль</string>
-  <string name="statistics">Статистика</string>
   <string name="statistics_thanks">Баркаллаш кхаьчна</string>
   <string name="statistics_featured">Хаьржина суьрташ</string>
-  <string name="level" fuzzy="true">Локхалла</string>
+  <string name="level" fuzzy="true">Локхалла %1$d</string>
   <string name="images_uploaded">Суьрташ чудаьхна</string>
   <string name="image_reverts">Йуха ца дерзийна суьрташ</string>
   <string name="images_used_by_wiki">Суьрташ лелийна</string>
@@ -275,7 +270,7 @@
   <string name="option_dismiss">Йухадаккха</string>
   <string name="nearby_campaign_dismiss_message">ХӀуна кхий гура йац кампанеш. Делахь, хьайна лаахь, хьа йиш йу кампанех лаьцна нотификаци лато нисдаран гӀирс чохь.</string>
   <string name="nominate_for_deletion_done">Кийчча йу</string>
-  <string name="send_thank_success_title">Баркалла дӀадахьийтар: Кхиамца</string>
+  <string name="send_thank_success_title" fuzzy="true">Баркалла дӀадахьийтар: Кхиамца</string>
   <string name="review_spam">Файл нийса йуй Викилармин тӀехь?</string>
   <string name="review_thanks">Декъашхочунна баркалла ала лаьий хьуна?</string>
   <string name="review_thanks_yes_button_text" fuzzy="true">ХӀаъ</string>
@@ -285,7 +280,7 @@
   <string name="menu_option_unread">Хьажа ца дешначарга</string>
   <string name="error_occurred_in_picking_images">Суьрташ чудохуш гӀалат даьлла</string>
   <string name="please_wait">Дехар до, собарде…</string>
-  <string name="copy_image_caption_description">РогӀерчу гӀирсашка копеш йар</string>
+  <string name="copy_image_caption_description" fuzzy="true">РогӀерчу гӀирсашка копеш йар</string>
   <string name="copied_successfully">Копийина</string>
   <string name="skip_image">ХӀара сурт чекхдалийта</string>
   <string name="manage_exif_tags">EXIF тегашца болх бар</string>
@@ -296,7 +291,6 @@
   <string name="exif_tag_name_lensModel">Объективан модель</string>
   <string name="exif_tag_name_serialNumbers">Серийн лоьмар</string>
   <string name="exif_tag_name_software">Программан кхачам</string>
-  <string name="media_location_permission_denied">Файл йолу меттиган тӀекхача бакъо ца ло</string>
   <string name="share_via">Йекъа программа, гӀоьнца...</string>
   <string name="image_info">Суьртан информаци</string>
   <string name="no_categories_found">Цхьа а категори ца карийна.</string>
@@ -341,7 +335,7 @@
   <string name="description_activity_title">Хаамашна а, куьг йаздарна а хийцамаш бар</string>
   <string name="share_image_via">Сурт декъа гӀоьнца</string>
   <string name="you_have_no_achievements_yet">Цкъачунна ахьа къинхьегам ца бина.</string>
-  <string name="no_achievements_yet">%s цкъачунна къинхьегам бац</string>
+  <string name="no_achievements_yet">%1$s цкъачунна къинхьегам бац</string>
   <string name="account_created">Аккаунт кхоьллина!</string>
   <string name="text_copy">Текст буфере копийина</string>
   <string name="notification_mark_read">Хаамаш \"бешна\" аьлла билгалбаьхна</string>
@@ -350,7 +344,7 @@
   <string name="place_state_exists">Йолуш йу</string>
   <string name="place_state_needs_photo">Сурт оьшу</string>
   <string name="place_type">Меттиган тайпа:</string>
-  <string name="nearby_search_hint">ТӀай, музей, отел, и.дӀ.кх.</string>
+  <string name="nearby_search_hint" fuzzy="true">ТӀай, музей, отел, и.дӀ.кх.</string>
   <string name="you_must_reset_your_passsword">Цхьа хӀума галдаьлла логинца. Хьайн пароль меттахӀотто йеза ахьа!</string>
   <string name="title_for_media">МЕДИА</string>
   <string name="title_for_child_classes">БЕРИЙН КЛАССАШ</string>
@@ -380,7 +374,7 @@
   <string name="wikipedia_instructions_step_4">4. «Хийца» иконкин тӀетаӀайе (къоламах тера йу) хӀокху декъана</string>
   <string name="wikipedia_instructions_step_5">5. Вики-код йогӀучу метте дӀайазйе</string>
   <string name="wikipedia_instructions_step_7">7. Йаззам дӀайазбан</string>
-  <string name="copy_wikicode_to_clipboard">Вики-код буфер чу копийе</string>
+  <string name="copy_wikicode_to_clipboard" fuzzy="true">Вики-код буфер чу копийе</string>
   <string name="pause">пауза</string>
   <string name="resume">кхидӀа</string>
   <string name="paused">Сацийна</string>

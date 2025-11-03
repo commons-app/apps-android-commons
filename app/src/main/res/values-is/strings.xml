@@ -5,7 +5,7 @@
 -->
 <resources>
   <string name="commons_facebook">Commons Facebook-síðan</string>
-  <string name="commons_github">Grunnkóði Commons á Github</string>
+  <string name="commons_github" fuzzy="true">Grunnkóði Commons á Github</string>
   <string name="commons_logo">Táknmerki Commons</string>
   <string name="commons_website">Commons vefsvæðið</string>
   <string name="exit_location_picker">Hætta í staðsetningarveljara</string>
@@ -29,18 +29,14 @@
     <item quantity="one">%1$d skrá að sendast inn</item>
     <item quantity="other">%1$d skrár að sendast inn</item>
   </plurals>
-  <plurals name="contributions_subtitle">
-    <item quantity="one">(%1$d)</item>
-    <item quantity="other">(%1$d)</item>
-  </plurals>
   <string name="starting_uploads">Byrja innsendingar</string>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">Meðhöndla %d innsendingu</item>
-    <item quantity="other">Meðhöndla %d innsendingar</item>
+    <item quantity="one">Meðhöndla %1$d innsendingu</item>
+    <item quantity="other">Meðhöndla %1$d innsendingar</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">%d innsending</item>
-    <item quantity="other">%d innsendingar</item>
+    <item quantity="one">%1$d innsending</item>
+    <item quantity="other">%1$d innsendingar</item>
   </plurals>
   <plurals name="share_license_summary">
     <item quantity="one">Þessi mynd verður birt með %1$s notkunarleyfi</item>
@@ -80,7 +76,7 @@
   <string name="uploading_queued">Innsending í bið (hamur fyrir takmarkaðar tengingar er virkur)</string>
   <string name="upload_completed_notification_title">%1$s var sent inn!</string>
   <string name="upload_completed_notification_text">Bankaðu til að skoða sem þú ert að senda inn</string>
-  <string name="upload_progress_notification_title_start">Sendi inn skrá: %s</string>
+  <string name="upload_progress_notification_title_start">Sendi inn skrá: %1$s</string>
   <string name="upload_progress_notification_title_in_progress">Verið er að senda %1$s inn</string>
   <string name="upload_progress_notification_title_finishing">Lýk innsendingu á %1$s</string>
   <string name="upload_failed_notification_title">Mistókst að senda inn %1$s</string>
@@ -126,6 +122,7 @@
   <string name="title_activity_settings">Stillingar</string>
   <string name="title_activity_signup">Nýskrá</string>
   <string name="title_activity_featured_images">Áberandi myndir</string>
+  <string name="images_featured_explanation" fuzzy="true">Áberandi myndir eru myndir frá mjög hæfileikaríkum ljósmyndurum og teiknurum, myndir sem Wikimedia Commons samfélagið hefur valið með tilliti til mestu gæða sem finnast á vefsvæðinu.</string>
   <string name="title_activity_custom_selector">Sérsniðinn veljari</string>
   <string name="title_activity_category_details">Flokkur</string>
   <string name="title_activity_review">Yfirlestur jafningja</string>
@@ -209,15 +206,14 @@
   <string name="become_a_tester_description">Veldu að taka þátt í beta-forprófunarrásinni á Google Play og fáðu snemmbúinn aðgang að nýjum eiginleikum og villuleiðréttingum</string>
   <string name="_2fa_code">2FA-kóði</string>
   <string name="logout_verification">Viltu í alvörunni skrá þig út?</string>
-  <string name="mediaimage_failed">Mynd gagnamiðils brást</string>
   <string name="no_subcategory_found">Engir undirflokkar fundust</string>
   <string name="no_parentcategory_found">Engir yfirflokkar fundust</string>
   <string name="welcome_image_mount_zao">Zao-fjall</string>
   <string name="welcome_image_llamas">Lamadýr</string>
   <string name="welcome_image_rainbow_bridge">Regnbogabrú</string>
   <string name="welcome_image_tulip">Túlípani</string>
-  <string name="welcome_image_welcome_wikipedia">Velkomin á Wikipedia</string>
-  <string name="welcome_image_welcome_copyright">Höfundarréttur</string>
+  <string name="welcome_image_welcome_wikipedia" fuzzy="true">Velkomin á Wikipedia</string>
+  <string name="welcome_image_welcome_copyright" fuzzy="true">Höfundarréttur</string>
   <string name="welcome_image_sydney_opera_house">Óperuhúsið í Sydney</string>
   <string name="cancel">Hætta við</string>
   <string name="navigation_drawer_open">Opna</string>
@@ -346,11 +342,10 @@
   <string name="delete">Eyða</string>
   <string name="Achievements">Frammistaða</string>
   <string name="Profile">Notandasnið</string>
-  <string name="statistics">Tölfræði</string>
   <string name="statistics_thanks">Mótteknar þakkir</string>
   <string name="statistics_featured">Áberandi myndir</string>
   <string name="statistics_wikidata_edits">Myndir gegnum \"Nálægir staðir\"</string>
-  <string name="level" fuzzy="true">Stig</string>
+  <string name="level" fuzzy="true">Stig %1$d</string>
   <string name="images_uploaded">Myndir sendar inn</string>
   <string name="image_reverts">Myndir ekki hafnað</string>
   <string name="images_used_by_wiki">Myndir notaðar</string>
@@ -427,11 +422,11 @@
   <string name="check_category_failure_message">Gat ekki beðið um athugun á flokkum fyrir %1$s</string>
   <string name="check_category_toast">Bið um athugun á flokkum fyrir %1$s</string>
   <string name="nominate_for_deletion_done">Lokið</string>
-  <string name="send_thank_success_title">Sending þakka: Tókst</string>
-  <string name="send_thank_success_message">Tókst að senda þakkir til %1$s</string>
-  <string name="send_thank_failure_message">Mistókst að senda þakkir til %1$s</string>
-  <string name="send_thank_failure_title">Sending þakka: Mistókst</string>
-  <string name="send_thank_toast">Sendi þakkir fyrir %1$s</string>
+  <string name="send_thank_success_title" fuzzy="true">Sending þakka: Tókst</string>
+  <string name="send_thank_success_message" fuzzy="true">Tókst að senda þakkir til %1$s</string>
+  <string name="send_thank_failure_message" fuzzy="true">Mistókst að senda þakkir til %1$s</string>
+  <string name="send_thank_failure_title" fuzzy="true">Sending þakka: Mistókst</string>
+  <string name="send_thank_toast" fuzzy="true">Sendi þakkir fyrir %1$s</string>
   <string name="review_copyright">Fylgir þetta reglum varðandi höfundarrétt?</string>
   <string name="review_category">Er þetta rétt flokkað?</string>
   <string name="review_spam">Kemur þetta umfjöllunarefninu við?</string>
@@ -457,15 +452,14 @@
   <string name="menu_option_unread">Skoða ólesið</string>
   <string name="error_occurred_in_picking_images">Villa kom upp við að velja myndir</string>
   <string name="please_wait">Bíddu aðeins…</string>
-  <string name="images_featured_explanation">Áberandi myndir eru myndir frá mjög hæfileikaríkum ljósmyndurum og teiknurum, myndir sem Wikimedia Commons samfélagið hefur valið með tilliti til mestu gæða sem finnast á vefsvæðinu.</string>
   <string name="images_via_nearby_explanation">Myndir sem sendar eru í gegnum \"Nálægir staðir\" nýtast til að uppgötva staði á landakortinu.</string>
   <string name="thanks_received_explanation">Þessi eiginleiki gerir félögum í ritstjórninni kleift að senda þakkartilkynningar til notenda sem gera nytsamlegar breytingar - með hjálp lítils þakkartengils á síðunum með breytingaferlinum eða mismuninum.</string>
-  <string name="copy_image_caption_description">Afrita á myndefni sem fylgir í kjölfarið</string>
+  <string name="copy_image_caption_description" fuzzy="true">Afrita á myndefni sem fylgir í kjölfarið</string>
   <string name="copied_successfully">Afritað</string>
   <string name="welcome_do_upload_content_description">Dæmi um góðar myndir sem ætti að senda inn á Commons</string>
   <string name="welcome_dont_upload_content_description">Dæmi um myndir sem ekki á að senda inn</string>
   <string name="skip_image">Sleppa þessari mynd</string>
-  <string name="download_failed_we_cannot_download_the_file_without_storage_permission">Niðurhal mistókst!! Við getum ekki sótt skrána án heimildar til að nota geymslurými.</string>
+  <string name="download_failed_we_cannot_download_the_file_without_storage_permission" fuzzy="true">Niðurhal mistókst!! Við getum ekki sótt skrána án heimildar til að nota geymslurými.</string>
   <string name="manage_exif_tags">Sýsla með EXIF-merki</string>
   <string name="manage_exif_tags_summary">Veldu hvaða EXIF-merkjum á að halda í innsendum skrám</string>
   <string name="exif_tag_name_author">Höfundur</string>
@@ -475,7 +469,6 @@
   <string name="exif_tag_name_lensModel">Tegund linsu</string>
   <string name="exif_tag_name_serialNumbers">Raðnúmer</string>
   <string name="exif_tag_name_software">Hugbúnaður</string>
-  <string name="media_location_permission_denied">Aðgangi að staðsetningu gagnamiðla hafnað</string>
   <string name="share_text">Sendu myndir inn á Wikimedia Commons beint úr símanum þínum. Sæktu Commons-appið núna: %1$s</string>
   <string name="share_via">Deila forriti með...</string>
   <string name="image_info">Upplýsingar í mynd</string>
@@ -530,7 +523,7 @@
   <string name="description_activity_title">Breyta lýsingum og skýringatextum</string>
   <string name="share_image_via">Deila mynd með</string>
   <string name="you_have_no_achievements_yet">Engin framlög frá þér ennþá</string>
-  <string name="no_achievements_yet">%s á ennþá engin framlög</string>
+  <string name="no_achievements_yet">%1$s á ennþá engin framlög</string>
   <string name="account_created">Aðgangur búinn til!</string>
   <string name="text_copy">Texti afritaður á klippispjaldið.</string>
   <string name="notification_mark_read">Tilkynning merkt sem lesin</string>
@@ -539,7 +532,7 @@
   <string name="place_state_exists">Er þegar til</string>
   <string name="place_state_needs_photo">Þarf ljósmynd</string>
   <string name="place_type">Tegund staðar:</string>
-  <string name="nearby_search_hint">Brú, safn, hótel o.s.frv.</string>
+  <string name="nearby_search_hint" fuzzy="true">Brú, safn, hótel o.s.frv.</string>
   <string name="you_must_reset_your_passsword" fuzzy="true">Eitthvað fór úrskeiðis varðandi innskráningu, þú þarft að endurstilla lykilorðið þitt !!</string>
   <string name="title_for_media">GAGNAMIÐLAR</string>
   <string name="title_for_child_classes">AFLEIDDIR FLOKKAR</string>
@@ -577,7 +570,7 @@
   <string name="wikipedia_instructions_step_5">5. Límdu wikitextann á viðeigandi stað.</string>
   <string name="wikipedia_instructions_step_6">6. Breyttu wikitextanum til að fá viðeigandi staðsetningu, ef þarf. Til að fá nánari upplýsingar geturðu skoðað &lt;a href=\"https://en.wikipedia.org/wiki/Wikipedia:Manual_of_Style/Images#How_to_place_an_image\"&gt;þetta&lt;/a&gt;.</string>
   <string name="wikipedia_instructions_step_7">7. Birtu greinina</string>
-  <string name="copy_wikicode_to_clipboard">Afrita wiki-kóða á klippispjald</string>
+  <string name="copy_wikicode_to_clipboard" fuzzy="true">Afrita wiki-kóða á klippispjald</string>
   <string name="pause">bið</string>
   <string name="resume">halda áfram</string>
   <string name="paused">Í bið</string>
@@ -644,7 +637,7 @@
   <string name="back">Til baka</string>
   <string name="welcome_custom_picture_selector_text">Velkomin í sérsniðinn myndaveljara</string>
   <string name="custom_selector_info_text1">Þessi veljari sýnir þér hvaða myndir sé þegar er búið að senda inn í Commons.</string>
-  <string name="custom_selector_info_text2">Ólíkt myndinni til vinstri, er hægri myndin með Commons-táknmyndina til að sýna að hún hefur þegar verið send inn. \n Ýttu og haltu niðri til að sjá forskoðun á myndinni.</string>
+  <string name="custom_selector_info_text2" fuzzy="true">Ólíkt myndinni til vinstri, er hægri myndin með Commons-táknmyndina til að sýna að hún hefur þegar verið send inn. \n Ýttu og haltu niðri til að sjá forskoðun á myndinni.</string>
   <string name="welcome_custom_selector_ok">Æðislegt</string>
   <string name="custom_selector_already_uploaded_image_text">Þessa mynd er þegar búið að senda inn í Commons.</string>
   <string name="place_state_wlm">WLM</string>
@@ -657,8 +650,8 @@
   <string name="need_permission">Þarfnast heimildar</string>
   <string name="read_phone_state_permission_message">Kort í nágrenninu þurfa að geta lesið STÖÐU SÍMANS til að virka almennilega</string>
   <string name="location_permission_rationale">Nauðsynlegar heimildir: Lesa núverandi staðsetningu til að geta stungið upp á flokkum</string>
-  <string name="contributions_of_user">Framlög notanda: %s</string>
-  <string name="achievements_of_user">Frammistaða notanda: %s</string>
+  <string name="contributions_of_user">Framlög notanda: %1$s</string>
+  <string name="achievements_of_user">Frammistaða notanda: %1$s</string>
   <string name="menu_view_user_page" fuzzy="true">Skoða notandasíðu</string>
   <string name="edit_depictions">Breyta myndlýsingum</string>
   <string name="edit_categories">Breyta flokkum</string>
@@ -669,7 +662,7 @@
   <string name="location_message">Hvernig væri að bæta við staðnum þar sem myndin er tekin?\nStaðsetningargögn hjálpa riturum wiki-síðna að finna myndina þína og gera hana þannig mun nytsamlegri.\nNýlegar innsendingar frá þér hafa ekki verið með staðsetningargögn.\nVið hvetjum þig til að kveikja á staðsetningarbúnaðnum í stillingum myndavélarinnar þinnar.\nBestu þakkir fyrir innsendinguna!</string>
   <string name="no_location_found_title">Engin staðsetning fannst</string>
   <string name="no_location_found_message">Hvernig væri að bæta við staðnum þar sem myndin er tekin?\nStaðsetningargögn hjálpa riturum wiki-síðna að finna myndina þína og gera hana þannig mun nytsamlegri.\nBestu þakkir til þín!</string>
-  <string name="add_location">Bæta við staðsetningu</string>
+  <string name="add_location" fuzzy="true">Bæta við staðsetningu</string>
   <string name="feedback_sharing_data_alert">Fjarlægðu úr þessum tölvupósti allar þær upplýsingar sem þér er ekki vel við að deila opinberlega. Hafðu líka í huga að tölvupóstfangið sem þú sendir úr, ásamt tengdu nafni og auðkennismynd, verður sýnilegt opinberlega.</string>
   <string name="explore_map_details">Nánar</string>
   <string name="achievements_unavailable_beta" fuzzy="true">Frammistaða er aðeins í boði í vinnsluútgáfunni, skoðaðu nánari upplýsingar í hjálparskjölum þróunaraðila.</string>
@@ -688,8 +681,8 @@
   <string name="your_feedback">Umsögn þín</string>
   <string name="mark_as_not_for_upload">Merkja sem ekki fyrir innsendingu</string>
   <string name="unmark_as_not_for_upload">Afmerkja sem ekki fyrir innsendingu</string>
-  <string name="show_already_actioned_pictures">Sýna myndir sem þegar hafa verið afgreiddar</string>
-  <string name="hiding_already_actioned_pictures">Fel myndir sem þegar hefur verið átt við</string>
+  <string name="show_already_actioned_pictures" fuzzy="true">Sýna myndir sem þegar hafa verið afgreiddar</string>
+  <string name="hiding_already_actioned_pictures" fuzzy="true">Fel myndir sem þegar hefur verið átt við</string>
   <string name="no_more_images_found">Engar fleiri myndir fundust</string>
   <string name="this_image_is_already_uploaded">Þessa mynd er þegar búið að senda inn</string>
   <string name="can_not_select_this_image_for_upload">Get ekki valið þessa mynd til innsendingar</string>

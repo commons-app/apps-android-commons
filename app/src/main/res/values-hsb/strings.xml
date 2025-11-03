@@ -4,7 +4,12 @@
 * Michawiki
 -->
 <resources>
-  <string name="share_license_summary" fuzzy="true">Tutón wobraz so pod %1$s licencuje</string>
+  <plurals name="share_license_summary" fuzzy="true">
+    <item quantity="one">Tutón wobraz so pod %1$s licencuje</item>
+    <item quantity="two">Tute wobrazy so pod %1$s licencuje</item>
+    <item quantity="few">Tute wobrazy so pod %1$s licencuje</item>
+    <item quantity="other">Tute wobrazy so pod %1$s licencuje</item>
+  </plurals>
   <string name="app_name" fuzzy="true">Wikimedia Commons</string>
   <string name="menu_settings">Nastajenja</string>
   <string name="username">Wužiwarske mjeno</string>

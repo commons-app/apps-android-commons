@@ -5,7 +5,7 @@
 -->
 <resources>
   <string name="commons_facebook">Pajina Facebook de Commons</string>
-  <string name="commons_github">Codaxe fonte Github de Commons</string>
+  <string name="commons_github" fuzzy="true">Codaxe fonte Github de Commons</string>
   <string name="commons_logo">Logo de Commons</string>
   <string name="commons_website">Sito web de Commons</string>
   <string name="submit">Envia</string>
@@ -14,16 +14,11 @@
     <item quantity="one">%1$d file en cargamento</item>
     <item quantity="other">%1$d file en cargamento</item>
   </plurals>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">(%1$d)</item>
-    <item quantity="other">(%1$d)</item>
-  </plurals>
   <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">Scumisià %1$d cargamento</item>
     <item quantity="other">Scumisiai %1$d cargamenti</item>
   </plurals>
-  <plurals name="multiple_uploads_title" fuzzy="true">
+  <plurals name="multiple_uploads_title">
     <item quantity="one">%1$d cargamento</item>
     <item quantity="other">%1$d cargamenti</item>
   </plurals>
@@ -103,6 +98,7 @@
   <string name="title_activity_settings">Inpostasion</string>
   <string name="title_activity_signup">Notate</string>
   <string name="title_activity_featured_images">Imajini in evidensa</string>
+  <string name="images_featured_explanation" fuzzy="true">Le foto in primo pian łe xé imajini de fotografi altamente cuałifegai che ła comunità de Wikimedia Commons ła ga ełeto come fotografi de alta cuałità sol sito.</string>
   <string name="title_activity_category_details">Categoria</string>
   <string name="title_activity_review">Revixion intra pari</string>
   <string name="menu_about">Informasion</string>
@@ -176,15 +172,14 @@
   <string name="become_a_tester_description">Va drento al nostro canałe beta so Google Play par torte suito łe nove funsionałità e i erori corexùi</string>
   <string name="_2fa_code">Codaxe 2FA</string>
   <string name="logout_verification">Vuto seriamente sevitar a ndaxer fora?</string>
-  <string name="mediaimage_failed">Imajine multimediałe no riusìa</string>
   <string name="no_subcategory_found">Nisuna categoria catada</string>
   <string name="no_parentcategory_found">Nisuna categoria superiore catada</string>
   <string name="welcome_image_mount_zao">Monte Zao</string>
   <string name="welcome_image_llamas">Lama</string>
   <string name="welcome_image_rainbow_bridge">Arcobałen</string>
   <string name="welcome_image_tulip">Tulpan</string>
-  <string name="welcome_image_welcome_wikipedia">Benvegnuo Wikipedia</string>
-  <string name="welcome_image_welcome_copyright">Benvegnuo Copyright</string>
+  <string name="welcome_image_welcome_wikipedia" fuzzy="true">Benvegnuo Wikipedia</string>
+  <string name="welcome_image_welcome_copyright" fuzzy="true">Benvegnuo Copyright</string>
   <string name="welcome_image_sydney_opera_house">Teatro de l\'opara de Sydney</string>
   <string name="cancel">Descançełare</string>
   <string name="navigation_drawer_open">Verxi</string>
@@ -298,11 +293,10 @@
   <string name="nominate_delete">Nomina par ła scançełasion</string>
   <string name="delete">Scanseła</string>
   <string name="Achievements">Rixultai</string>
-  <string name="statistics">Statisteghe</string>
   <string name="statistics_thanks">Ringrasiamenti rivai</string>
   <string name="statistics_featured">Imajini in evidensa</string>
   <string name="statistics_wikidata_edits">Imajini catae co \"Posti cuà rente\"</string>
-  <string name="level" fuzzy="true">Livèło:</string>
+  <string name="level" fuzzy="true">Livèło: %1$d</string>
   <string name="images_uploaded">Imajini cargae</string>
   <string name="image_reverts">Imajini no trate fora</string>
   <string name="images_used_by_wiki">Imajini doparae</string>
@@ -374,11 +368,11 @@
   <string name="check_category_failure_message">Inposibiłe domandare el controło de ła categoria par %1$s</string>
   <string name="check_category_toast">Domanda de controło categoria par %1$s</string>
   <string name="nominate_for_deletion_done">Fato</string>
-  <string name="send_thank_success_title">Invià, grasie: Fato</string>
-  <string name="send_thank_success_message">Ringrasiamenti inviai co suçeso a %1$s</string>
-  <string name="send_thank_failure_message">Fałio el envio del grasie a %1$s</string>
-  <string name="send_thank_failure_title">Envio grasie: Fałìo</string>
-  <string name="send_thank_toast">Envio de ringrasiamenti par %1$s</string>
+  <string name="send_thank_success_title" fuzzy="true">Invià, grasie: Fato</string>
+  <string name="send_thank_success_message" fuzzy="true">Ringrasiamenti inviai co suçeso a %1$s</string>
+  <string name="send_thank_failure_message" fuzzy="true">Fałio el envio del grasie a %1$s</string>
+  <string name="send_thank_failure_title" fuzzy="true">Envio grasie: Fałìo</string>
+  <string name="send_thank_toast" fuzzy="true">Envio de ringrasiamenti par %1$s</string>
   <string name="review_copyright">Sto cuà el rispeta el regołamento del copyright?</string>
   <string name="review_category">Sto cuà xeło categorixà coretamente?</string>
   <string name="review_spam">Sto cuà xeło n\'tei fini?</string>
@@ -404,13 +398,12 @@
   <string name="menu_option_unread">Varda no lexeste</string>
   <string name="error_occurred_in_picking_images">Se ga vuo on eror co se jera drio ełexare łe imajini.</string>
   <string name="please_wait">Speta on fià...</string>
-  <string name="images_featured_explanation">Le foto in primo pian łe xé imajini de fotografi altamente cuałifegai che ła comunità de Wikimedia Commons ła ga ełeto come fotografi de alta cuałità sol sito.</string>
   <string name="images_via_nearby_explanation">Imajini cargae via \"Posti cuà rente\", imajini che łe njien cargae scoerxendo posti n\'te ła mapa</string>
   <string name="thanks_received_explanation">Sta funsion ła consente ai editori de enviar na notifega de ringrasiamento ai uxuari che i fa modifeghe che serve, doparando on lingambo picenin de ringrasiamento n\'te ła pajina del storego o n\'te ła pajina de łe difarense.\n\nQuesta funzione consente agli editor di inviare una notifica di ringraziamento agli utenti che apportano modifiche utili, utilizzando un piccolo link di ringraziamento nella pagina della cronologia o nella pagina delle differenze.</string>
   <string name="welcome_do_upload_content_description">Exenpi de bone imajini da cargar so Commons</string>
   <string name="welcome_dont_upload_content_description">Exenpi de imajini da no cargar</string>
   <string name="skip_image">Salta sta imajine</string>
-  <string name="download_failed_we_cannot_download_the_file_without_storage_permission">Descargamento fałìo. No xé posibiłe descargar el file sensa el permeso a ła memoria esterna</string>
+  <string name="download_failed_we_cannot_download_the_file_without_storage_permission" fuzzy="true">Descargamento fałìo. No xé posibiłe descargar el file sensa el permeso a ła memoria esterna</string>
   <string name="manage_exif_tags">Jestisi Tag EXIF</string>
   <string name="manage_exif_tags_summary">Ełexi i tag EXIF da salvare dopo el cargamento.</string>
   <string name="exif_tag_name_author">Autore</string>
@@ -442,7 +435,7 @@
   <string name="delete_helper_ask_reason_copyright_logo">Logo</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">Parché el xé</string>
   <string name="share_image_via">Spartisi in jiro tra imajine co</string>
-  <string name="no_achievements_yet" fuzzy="true">No te ghe njiancora contribuìo</string>
+  <string name="no_achievements_yet" fuzzy="true">%1$s no ga ancora contribuìo</string>
   <string name="account_created">Te ghè creà l\'uxuario</string>
   <string name="text_copy">Testo tolto xò in tei aponti</string>
   <string name="notification_mark_read">Nodifega segnà come lexesta</string>
@@ -451,7 +444,7 @@
   <string name="place_state_exists">Existe</string>
   <string name="place_state_needs_photo">Ghe vołe na foto</string>
   <string name="place_type">Tipo de posto</string>
-  <string name="nearby_search_hint">Ponti, muxei, alberghi etc.</string>
+  <string name="nearby_search_hint" fuzzy="true">Ponti, muxei, alberghi etc.</string>
   <string name="you_must_reset_your_passsword" fuzzy="true">Se ga verifegà on erore co te jeri drio entrare n\'te l\'utensa, xé neçesario rinpostar ła ciave.</string>
   <string name="upload_nearby_place_found_title">Posto cuà rente catà</string>
   <string name="upload_nearby_place_found_description_singular" fuzzy="true">Sta cuà ła xé na foto del posto %1$s?</string>

@@ -8,7 +8,7 @@
 -->
 <resources>
   <string name="commons_facebook">Викимилектең Facebook-бите</string>
-  <string name="commons_github">Гитхабта Викимилектең сығанаҡ кодтары</string>
+  <string name="commons_github" fuzzy="true">Гитхабта Викимилектең сығанаҡ кодтары</string>
   <string name="commons_logo">Викимилек логотибы</string>
   <string name="commons_website">Викимилектең веб-сайты</string>
   <string name="exit_location_picker">Урынлашҡан ерҙе билдәләү тәҙрәһенән сығырға</string>
@@ -31,21 +31,20 @@
     <item quantity="one">%1$d файл йөкләнә</item>
     <item quantity="other">%1$d файл йөкләнә</item>
   </plurals>
-  <plurals name="contributions_subtitle">
-    <item quantity="one">(%1$d)</item>
-    <item quantity="other">(%1$d)</item>
-  </plurals>
   <string name="starting_uploads">Йөкләүҙе башлау</string>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">%d файлды эшкәртеү</item>
-    <item quantity="other">%d файлды эшкәртеү</item>
+    <item quantity="one">%1$d файлды эшкәртеү</item>
+    <item quantity="other">%1$d файлды эшкәртеү</item>
   </plurals>
-  <plurals name="multiple_uploads_title" fuzzy="true">
+  <plurals name="multiple_uploads_title">
     <item quantity="one">%1$d тейәү</item>
     <item quantity="few">%1$d тейәүҙәр</item>
     <item quantity="other">%1$d тейәүҙәре</item>
   </plurals>
-  <string name="share_license_summary" fuzzy="true">Был рәсем %1$s аҫтында лицензия аласаҡ</string>
+  <plurals name="share_license_summary" fuzzy="true">
+    <item quantity="one">Был рәсем %1$s аҫтында лицензия аласаҡ</item>
+    <item quantity="other">Был рәсем %1$s аҫтында лицензия аласаҡ</item>
+  </plurals>
   <string name="navigation_item_explore">Тикшереү</string>
   <string name="preference_category_appearance">Тышҡы күренеш</string>
   <string name="preference_category_general">Дөйөм</string>
@@ -75,7 +74,7 @@
   <string name="uploading_queued">Йөкләү сиратҡа ҡуйылды (сикләнгән бәйләнеш режимы эшләтеп ебәрелде).</string>
   <string name="upload_completed_notification_title">%1$s йөкләнде!</string>
   <string name="upload_completed_notification_text">Ошонда баҫып йөкләнгән файлды ҡара</string>
-  <string name="upload_progress_notification_title_start">Файлды йөкләү: %s</string>
+  <string name="upload_progress_notification_title_start">Файлды йөкләү: %1$s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s йөкләнә</string>
   <string name="upload_progress_notification_title_finishing">Йөкләү %1$s тамамланды</string>
   <string name="upload_failed_notification_title">%1$s йөкләп булманы</string>
@@ -199,14 +198,13 @@
   <string name="become_a_tester_description">Google Play аша беҙҙең бета-версия каналына яҙыл һәм иң тәүгеләрҙән булып яңы көйләүҙәр, хата төҙәтеүҙәр тураһында хәбәрҙар бул</string>
   <string name="_2fa_code">2ФА Коды</string>
   <string name="logout_verification">Ысынлап та системанан сыҡҡығыҙ киләме?</string>
-  <string name="mediaimage_failed">Медиарәсем хатаһы</string>
   <string name="no_subcategory_found">Субкатегориялар табылманы</string>
   <string name="welcome_image_mount_zao">Зао тауы</string>
   <string name="welcome_image_llamas">Ламалар</string>
   <string name="welcome_image_rainbow_bridge">Йәйғорло күпер</string>
   <string name="welcome_image_tulip">Ләлә</string>
-  <string name="welcome_image_welcome_wikipedia">Википедияға рәхим итегеҙ</string>
-  <string name="welcome_image_welcome_copyright">Рәхим итегеҙ - автор хоҡуҡтары</string>
+  <string name="welcome_image_welcome_wikipedia" fuzzy="true">Википедияға рәхим итегеҙ</string>
+  <string name="welcome_image_welcome_copyright" fuzzy="true">Рәхим итегеҙ - автор хоҡуҡтары</string>
   <string name="welcome_image_sydney_opera_house">Сидней опера театры</string>
   <string name="cancel">Кире алыу</string>
   <string name="navigation_drawer_open">Асырға</string>

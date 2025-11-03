@@ -18,7 +18,7 @@
 -->
 <resources>
   <string name="commons_facebook">Commons Facebook-oldal</string>
-  <string name="commons_github">Commons Github forráskód</string>
+  <string name="commons_github" fuzzy="true">Commons Github forráskód</string>
   <string name="commons_logo">Commons Logo</string>
   <string name="commons_website">Commons weboldal</string>
   <string name="submit">Küldés</string>
@@ -27,18 +27,14 @@
     <item quantity="one">%1$d fájl feltöltése folyamatban</item>
     <item quantity="other">%1$d fájl feltöltése folyamatban</item>
   </plurals>
-  <plurals name="contributions_subtitle">
-    <item quantity="one">(%1$d)</item>
-    <item quantity="other">(%1$d)</item>
-  </plurals>
   <string name="starting_uploads">Feltöltések indítása</string>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">%d feltöltés feldolgozása</item>
-    <item quantity="other">%d feltöltés feldolgozás</item>
+    <item quantity="one">%1$d feltöltés feldolgozása</item>
+    <item quantity="other">%1$d feltöltés feldolgozás</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">%d feltöltés</item>
-    <item quantity="other">%d feltöltés</item>
+    <item quantity="one">%1$d feltöltés</item>
+    <item quantity="other">%1$d feltöltés</item>
   </plurals>
   <plurals name="share_license_summary">
     <item quantity="one">Ez a kép %1$s licenc alatt lesz feltöltve</item>
@@ -79,7 +75,7 @@
   <string name="uploading_queued">Feltöltések késleltetése (korlátozott kapcsolat-mód bekapcsolva)</string>
   <string name="upload_completed_notification_title">%1$s feltöltve.</string>
   <string name="upload_completed_notification_text">Feltöltés megtekintése</string>
-  <string name="upload_progress_notification_title_start">Fájl feltöltése: %s</string>
+  <string name="upload_progress_notification_title_start">Fájl feltöltése: %1$s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s feltöltése</string>
   <string name="upload_progress_notification_title_finishing">%1$s feltöltése befejezve</string>
   <string name="upload_failed_notification_title">%1$s feltöltése sikertelen</string>
@@ -118,6 +114,7 @@
   <string name="title_activity_settings">Beállítások</string>
   <string name="title_activity_signup">Regisztráció</string>
   <string name="title_activity_featured_images">Kiemelt képek</string>
+  <string name="images_featured_explanation" fuzzy="true">A \"kiemelt kép\"-eket tapasztalt fényképészek vagy illusztrátorok készítik. A képeket a Wikimedia Commons közössége választja ki a minőségük alapján.</string>
   <string name="title_activity_category_details">Kategória</string>
   <string name="menu_about">Névjegy</string>
   <string name="about_license">A Wikimedia Commons applikáció egy nyílt forráskódú szoftver, amit a Wikimedia-közösség önkéntesei készítettek és tartanak karban. A Wikimédia Alapítvány nem vesz részt az applikáció megalkotásában, fejlesztésében és üzemeltetésében.</string>
@@ -197,15 +194,14 @@
   <string name="become_a_tester_description">Jelentkezz a béta csatornánkra a Google Playen, hogy hamarabb megkapd a hibajavításokat és az új funkciókat</string>
   <string name="_2fa_code">2LH kód</string>
   <string name="logout_verification">Kilépsz?</string>
-  <string name="mediaimage_failed">Médiakép sikertelen</string>
   <string name="no_subcategory_found">Nem található alkategória</string>
   <string name="no_parentcategory_found">Nem található szülő kategória</string>
   <string name="welcome_image_mount_zao">Zaō-hegy</string>
   <string name="welcome_image_llamas">Lámák</string>
   <string name="welcome_image_rainbow_bridge">Rainbow Bridge</string>
   <string name="welcome_image_tulip">Tulipán</string>
-  <string name="welcome_image_welcome_wikipedia">Üdvözlünk a Wikipédián</string>
-  <string name="welcome_image_welcome_copyright">Üdvözlünk a szerzői jogok világában</string>
+  <string name="welcome_image_welcome_wikipedia" fuzzy="true">Üdvözlünk a Wikipédián</string>
+  <string name="welcome_image_welcome_copyright" fuzzy="true">Üdvözlünk a szerzői jogok világában</string>
   <string name="welcome_image_sydney_opera_house">Sydney Operaház</string>
   <string name="cancel">Mégse</string>
   <string name="navigation_drawer_open">Megnyitás</string>
@@ -321,11 +317,10 @@
   <string name="nominate_delete">Törlésre jelölés</string>
   <string name="delete">Törlés</string>
   <string name="Achievements">Eredmények</string>
-  <string name="statistics">Statisztikák</string>
   <string name="statistics_thanks">Kapott köszönetek</string>
   <string name="statistics_featured">Kiemelt képek</string>
   <string name="statistics_wikidata_edits">Képek a \"közeli helyek\" segítségével</string>
-  <string name="level">%d. szint</string>
+  <string name="level">%1$d. szint</string>
   <string name="images_uploaded">Feltöltött képek</string>
   <string name="images_used_by_wiki">Felhasznált képek</string>
   <string name="achievements_share_message">Oszd meg eredményeidet a barátaiddal!</string>
@@ -374,7 +369,7 @@
   <string name="unable_to_display_nearest_place">A helymeghatározás nélkül nem használható ez a funkció.</string>
   <string name="never_ask_again">Ne kérdezd meg többször</string>
   <string name="display_location_permission_title">Helymeghatározási engedély</string>
-  <string name="achievements_fetch_failed">Valami hiba történt, nem sikerült az eredményeid betöltése</string>
+  <string name="achievements_fetch_failed" fuzzy="true">Valami hiba történt, nem sikerült az eredményeid betöltése</string>
   <string name="display_campaigns">Kampányok megjelenítése</string>
   <string name="display_campaigns_explanation">Folyamatban lévő kampányok megjelenítése</string>
   <string name="in_app_camera_location_access_explanation">Engedélyezd az alkalmazás számára a helyszín lekérését, ha a kamera nem rögzíti azt! Egyes eszközök kamerái nem rögzítik a helyszínt. Közreműködésed hasznosabb, ha ilyen esetekben hagyod, hogy az alkalmazás lekérje és hozzárendelje a helyszínt. Ezt bármikor módosíthatod a Beállításokban</string>
@@ -396,11 +391,11 @@
   <string name="check_category_failure_message">Nem sikerült kategória ellenőrzés kérése \"%1$s\" számára</string>
   <string name="check_category_toast">Kategória ellenőrzés kérése \"%1$s\" számára</string>
   <string name="nominate_for_deletion_done">Kész</string>
-  <string name="send_thank_success_title">Köszönet küldése sikeres</string>
-  <string name="send_thank_success_message">Köszönet sikeresen elküldve %1$s részére</string>
-  <string name="send_thank_failure_message">Nem sikerült elküldeni %1$s részére a köszönetet</string>
-  <string name="send_thank_failure_title">Köszönet küldése sikertelen</string>
-  <string name="send_thank_toast">Köszönet küldése neki:%1$s</string>
+  <string name="send_thank_success_title" fuzzy="true">Köszönet küldése sikeres</string>
+  <string name="send_thank_success_message" fuzzy="true">Köszönet sikeresen elküldve %1$s részére</string>
+  <string name="send_thank_failure_message" fuzzy="true">Nem sikerült elküldeni %1$s részére a köszönetet</string>
+  <string name="send_thank_failure_title" fuzzy="true">Köszönet küldése sikertelen</string>
+  <string name="send_thank_toast" fuzzy="true">Köszönet küldése neki:%1$s</string>
   <string name="review_copyright">Megfelel a szerzői jogvédelmi szabályoknak?</string>
   <string name="review_category">Helyesen van kategorizálva?</string>
   <string name="review_spam">Megfelelő a kép?</string>
@@ -425,12 +420,11 @@
   <string name="menu_option_unread">Olvasatlanok megtekintése</string>
   <string name="error_occurred_in_picking_images">Hiba történt a képek betöltése során</string>
   <string name="please_wait">Kérlek várj…</string>
-  <string name="images_featured_explanation">A \"kiemelt kép\"-eket tapasztalt fényképészek vagy illusztrátorok készítik. A képeket a Wikimedia Commons közössége választja ki a minőségük alapján.</string>
   <string name="thanks_received_explanation">Ez a funkció lehetővé teszi, hogy \"Köszönöm\" üzenetet küldj annak a felhasználónak, aki hasznos szerkesztést végzett. A kattintható link a Laptörténet oldalon található.</string>
   <string name="welcome_do_upload_content_description">Példák a Commons-ra feltöltött jó képekre</string>
   <string name="welcome_dont_upload_content_description">Példák nem feltöltendő képekre</string>
   <string name="skip_image">Kép átugrása</string>
-  <string name="download_failed_we_cannot_download_the_file_without_storage_permission">Letöltés sikertelen. Külső tároló írási jog nélkül a letöltés nem működik.</string>
+  <string name="download_failed_we_cannot_download_the_file_without_storage_permission" fuzzy="true">Letöltés sikertelen. Külső tároló írási jog nélkül a letöltés nem működik.</string>
   <string name="manage_exif_tags">EXIF címkék kezelése</string>
   <string name="manage_exif_tags_summary">Válaszd ki, hogy melyik EXIF elem maradjon meg a feltöltés után</string>
   <string name="exif_tag_name_author">Szerző</string>
@@ -462,7 +456,7 @@
   <string name="delete_helper_ask_reason_copyright_logo">Logó</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">Azért, mert</string>
   <string name="share_image_via">Kép megosztása ezen keresztül:</string>
-  <string name="no_achievements_yet">Még nincs közreműködésed</string>
+  <string name="no_achievements_yet" fuzzy="true">%1$s még nem adott hozzájárulást</string>
   <string name="account_created">Fiók létrehozva!</string>
   <string name="text_copy">Szöveg a vágólapra másolva</string>
   <string name="notification_mark_read">Értesítés olvasottként megjelölve</string>
@@ -471,7 +465,7 @@
   <string name="place_state_exists">Létezik</string>
   <string name="place_state_needs_photo">Fénykép szükséges</string>
   <string name="place_type">Hely típusa:</string>
-  <string name="nearby_search_hint">Híd, múzeum, szálloda, stb.</string>
+  <string name="nearby_search_hint" fuzzy="true">Híd, múzeum, szálloda, stb.</string>
   <string name="you_must_reset_your_passsword">A belépés nem sikerült. Kérj új jelszót!</string>
   <string name="setting_wallpaper_dialog_title">Beállítás háttérképnek</string>
   <string name="setting_wallpaper_dialog_message">Beállítás háttérképnek. Kérem várjon...</string>
@@ -491,7 +485,7 @@
   <string name="report_content">Tartalom jelentése</string>
   <string name="request_user_block">Kérelem a felhasználó letiltásához</string>
   <plurals name="custom_picker_images_selected_title_appendix">
-    <item quantity="one">%d kép kiválasztva</item>
-    <item quantity="other"> %d kép kiválasztva</item>
+    <item quantity="one">%1$d kép kiválasztva</item>
+    <item quantity="other">%1$d kép kiválasztva</item>
   </plurals>
 </resources>

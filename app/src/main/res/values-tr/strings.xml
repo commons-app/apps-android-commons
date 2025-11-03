@@ -35,7 +35,7 @@
 -->
 <resources>
   <string name="commons_facebook">Commons Facebook Sayfası</string>
-  <string name="commons_github">Commons Github Kaynak Kodu</string>
+  <string name="commons_github">Commons GitHub Kaynak Kodu</string>
   <string name="commons_logo">Commons Logosu</string>
   <string name="commons_website">Commons Websitesi</string>
   <string name="exit_location_picker">Konum seçiciden çık</string>
@@ -59,18 +59,14 @@
     <item quantity="one">%1$d dosya yükleniyor</item>
     <item quantity="other">%1$d dosya yükleniyor</item>
   </plurals>
-  <plurals name="contributions_subtitle">
-    <item quantity="one">(%1$d)</item>
-    <item quantity="other">(%1$d)</item>
-  </plurals>
   <string name="starting_uploads">Yüklemeye Başlıyor</string>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">%d yüklenmeyi işleniyor</item>
-    <item quantity="other">%d yüklenmeyi işleniyor</item>
+    <item quantity="one">%1$d yüklenmeyi işleniyor</item>
+    <item quantity="other">%1$d yüklenmeyi işleniyor</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">%d yükleme</item>
-    <item quantity="other">%d yükleme</item>
+    <item quantity="one">%1$d yükleme</item>
+    <item quantity="other">%1$d yükleme</item>
   </plurals>
   <plurals name="share_license_summary">
     <item quantity="one">Bu görüntü, %1$s lisansı altında olacak</item>
@@ -114,7 +110,7 @@
   <string name="uploading_queued">Yükleme kuyruğunda (sınırlı bağlantı modu etkin)</string>
   <string name="upload_completed_notification_title">%1$s yüklendi!</string>
   <string name="upload_completed_notification_text">Yüklemenizi görüntülemek için hafifçe tıklayın</string>
-  <string name="upload_progress_notification_title_start">Dosya yükleniyor: %s</string>
+  <string name="upload_progress_notification_title_start">Dosya yükleniyor: %1$s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s yükleniyor</string>
   <string name="upload_progress_notification_title_finishing">%1$s yüklemesi bitiriliyor</string>
   <string name="upload_failed_notification_title">%1$s yüklemesi başarısız oldu</string>
@@ -164,6 +160,7 @@
   <string name="title_activity_settings">Ayarlar</string>
   <string name="title_activity_signup">Kaydol</string>
   <string name="title_activity_featured_images">Seçkin Resimler</string>
+  <string name="images_featured_explanation">Öne çıkan resimler, Wikimedia Commons topluluğunun sitedeki en yüksek kalite olarak seçtiği, yetenekli fotoğrafçılar ve illüstratörlerin katkılarıdır.</string>
   <string name="title_activity_custom_selector">Özel Seçici</string>
   <string name="title_activity_category_details">Kategori</string>
   <string name="title_activity_review">Hakem Denetimi</string>
@@ -185,10 +182,10 @@
   <string name="preference_license">Varsayılan Lisans</string>
   <string name="use_previous">Önceki başlığı ve açıklamayı kullan</string>
   <string name="preference_theme">Tema</string>
-  <string name="license_name_cc_by_sa_four" fuzzy="true"> Atıf-BenzerPaylaşım 4.0</string>
-  <string name="license_name_cc_by_four" fuzzy="true"> Atıf 4.0</string>
-  <string name="license_name_cc_by_sa" fuzzy="true">Atıf-BenzerPaylaşım 3.0</string>
-  <string name="license_name_cc_by" fuzzy="true"> Atıf 3.0</string>
+  <string name="license_name_cc_by_sa_four">Atıf-BenzerPaylaşım 4.0</string>
+  <string name="license_name_cc_by_four">Atıf 4.0</string>
+  <string name="license_name_cc_by_sa">Atıf-BenzerPaylaşım 3.0</string>
+  <string name="license_name_cc_by">Atıf 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
@@ -251,15 +248,14 @@
   <string name="_2fa_code">2 Faktörlü Kimlik Doğrulama (2FA) Kodu</string>
   <string name="email_auth_code">E-posta doğrulama kodu</string>
   <string name="logout_verification">Gerçekten çıkış yapmak istiyor musunuz?</string>
-  <string name="mediaimage_failed">Medya Görüntüsü Başarısız Oldu</string>
   <string name="no_subcategory_found">Alt kategori bulunamadı</string>
   <string name="no_parentcategory_found">Üst kategori bulunamadı</string>
   <string name="welcome_image_mount_zao">Zao Dağı</string>
   <string name="welcome_image_llamas">Lamalar</string>
   <string name="welcome_image_rainbow_bridge">Gökkuşağı Köprüsü</string>
   <string name="welcome_image_tulip">Lale</string>
-  <string name="welcome_image_welcome_wikipedia">Vikipedi\'ye Hoş Geldiniz</string>
-  <string name="welcome_image_welcome_copyright">Telif Haklarına Hoş Geldiniz</string>
+  <string name="welcome_image_welcome_wikipedia">Genel bir Vikipedi maddesinin şematik görüntüsü.</string>
+  <string name="welcome_image_welcome_copyright">Telif hakkı simgesinin üzeri çizilmiş bir kağıt yığınının çizimi.</string>
   <string name="welcome_image_sydney_opera_house">Sidney Opera Binası</string>
   <string name="cancel">İptal</string>
   <string name="navigation_drawer_open">Aç</string>
@@ -395,12 +391,11 @@
   <string name="Achievements">Başarılar</string>
   <string name="Profile">Profil</string>
   <string name="badges">Rozetler</string>
-  <string name="statistics">İstatistikler</string>
   <string name="statistics_thanks">Teşekkür Alındı</string>
   <string name="statistics_featured">Seçkin Resimler</string>
   <string name="statistics_wikidata_edits">\"Yakındaki Yerler\"den Resimler</string>
-  <string name="level">Seviye %d</string>
-  <string name="profile_withLevel">%s (Seviye %s)</string>
+  <string name="level">Seviye %1$d</string>
+  <string name="profile_withLevel">%1$s (Seviye %2$s)</string>
   <string name="images_uploaded">Resimler Yüklendi</string>
   <string name="image_reverts">Resimler Geri Alınmadı</string>
   <string name="images_used_by_wiki">Resimler Kullanıldı</string>
@@ -460,7 +455,7 @@
   <string name="never_ask_again">Bunu bir daha sorma</string>
   <string name="display_location_permission_title">Konum izni isteyin</string>
   <string name="display_location_permission_explanation">Yakındaki bildirim kartı görüntüleme özelliği için gerektiğinde konum izni isteyin.</string>
-  <string name="achievements_fetch_failed">Bir şeyler ters gitti, başarıları getiremedik</string>
+  <string name="achievements_fetch_failed">Bir sorun oluştu ve başarıları alamadık</string>
   <string name="achievements_fetch_failed_ultimate_achievement">Başarı hesaplama sistemimizin üstesinden gelemeyeceği pek çok katkı yaptınız. Bu nihai başarıdır.</string>
   <string name="ends_on">Bitiş:</string>
   <string name="display_campaigns">Kampanyaları göster</string>
@@ -488,11 +483,11 @@
   <string name="check_category_failure_message">%1$s için kategori kontrolü istenemedi</string>
   <string name="check_category_toast">%1$s için kategori kontrolü isteniyor</string>
   <string name="nominate_for_deletion_done">Yapıldı</string>
-  <string name="send_thank_success_title">Teşekkür Gönderme: Başarılı</string>
-  <string name="send_thank_success_message">%1$s sayesinde başarıyla gönderildi</string>
-  <string name="send_thank_failure_message">%1$s teşekkür gönderilemedi</string>
-  <string name="send_thank_failure_title">Teşekkür Gönderme: Başarısız</string>
-  <string name="send_thank_toast">%1$s için teşekkürler gönderisi</string>
+  <string name="send_thank_success_title">Teşekkür gönderme: Başarılı</string>
+  <string name="send_thank_success_message">%1$s kullanıcıya teşekkür gönderildi</string>
+  <string name="send_thank_failure_message">%1$s kullanıcıya teşekkür gönderilemedi</string>
+  <string name="send_thank_failure_title">Teşekkür gönderme: Başarısız</string>
+  <string name="send_thank_toast">%1$s için teşekkür gönderiliyor</string>
   <string name="review_copyright">Bu telif hakkı kurallarına uyuyor mu?</string>
   <string name="review_category">Bu doğru sınıflandırılmış mı?</string>
   <string name="review_spam">Bu kapsamda mı?</string>
@@ -519,15 +514,14 @@
   <string name="menu_option_unread">Okunmayanları görüntüle</string>
   <string name="error_occurred_in_picking_images">Resimler seçilirken hata oluştu</string>
   <string name="please_wait">Lütfen bekleyin...</string>
-  <string name="images_featured_explanation">Seçkin resimler, Wikimedia Commons topluluğunun sitedeki en yüksek kaliteden bazıları olarak seçtiği son derece yetenekli fotoğrafçıların ve illüstratörlerin görüntüleridir.</string>
   <string name="images_via_nearby_explanation">Yakındaki yerler üzerinden yüklenen resimler, haritadaki yerleri keşfederek yüklenen resimlerdir.</string>
   <string name="thanks_received_explanation">Bu özellik, editörlerin, geçmiş sayfasında veya fark sayfasında küçük bir teşekkür bağlantısı kullanarak faydalı düzenlemeler yapan kullanıcılara bir Teşekkür bildirimi göndermesine olanak tanır.</string>
-  <string name="copy_image_caption_description">Sonraki medyaya kopyala</string>
+  <string name="copy_image_caption_description">Sonraki ögelere kopyala</string>
   <string name="copied_successfully">Kopyalandı</string>
   <string name="welcome_do_upload_content_description">Commons\'a yüklenecek iyi resim örnekleri</string>
   <string name="welcome_dont_upload_content_description">Yüklenmeyecek resim örnekleri</string>
   <string name="skip_image">Bu resmi atla</string>
-  <string name="download_failed_we_cannot_download_the_file_without_storage_permission">Yükleme Başarısız Oldu!! Harici depolama izni olmadan dosyayı indiremiyoruz.</string>
+  <string name="download_failed_we_cannot_download_the_file_without_storage_permission">İndirme başarısız oldu. Harici depolama izni olmadan dosyayı indiremeyiz.</string>
   <string name="manage_exif_tags">EXIF Etiketlerini Yönet</string>
   <string name="manage_exif_tags_summary">Yüklemelerde hangi EXIF etiketlerinin tutulacağını seçin</string>
   <string name="exif_tag_name_author">Yazar</string>
@@ -537,8 +531,6 @@
   <string name="exif_tag_name_lensModel">Lens Modeli</string>
   <string name="exif_tag_name_serialNumbers">Seri Numaraları</string>
   <string name="exif_tag_name_software">Yazılım</string>
-  <string name="media_location_permission_denied">Medya konumu erişimi reddedildi</string>
-  <string name="add_location_manually">Yüklediğiniz resimlerden konum verilerini otomatik olarak elde edemeyebiliriz. Lütfen göndermeden önce her resim için uygun konumu ekleyin</string>
   <string name="share_text">Fotoğrafları doğrudan telefonunuzdan Wikimedia Commons\'a yükleyin. Commons Uygulamasını şimdi indirin: %1$s</string>
   <string name="share_via">Uygulamayı şununla paylaşın:</string>
   <string name="image_info">Resim Bilgisi</string>
@@ -594,7 +586,7 @@
   <string name="description_activity_title">Açıklamaları ve başlıkları düzenle</string>
   <string name="share_image_via">Resmi şununla paylaş</string>
   <string name="you_have_no_achievements_yet">Henüz bir katkı yapmadınız</string>
-  <string name="no_achievements_yet">%s henüz bir katkı yapmadı</string>
+  <string name="no_achievements_yet">%1$s henüz bir katkı yapmadı</string>
   <string name="account_created">Hesap oluşturuldu!</string>
   <string name="text_copy">Metin panoya kopyalandı</string>
   <string name="notification_mark_read">Bildirim okundu olarak işaretlendi</string>
@@ -603,7 +595,7 @@
   <string name="place_state_exists">Var</string>
   <string name="place_state_needs_photo">Fotoğrafa İhtiyaç Var</string>
   <string name="place_type">Yer türü:</string>
-  <string name="nearby_search_hint">Köprü, müze, otel vb.</string>
+  <string name="nearby_search_hint">Köprü, müze, otel, vb.</string>
   <string name="you_must_reset_your_passsword">Giriş ile ilgili bir sorun oluştu. Şifrenizi sıfırlamanız gerekiyor!</string>
   <string name="title_for_media">MEDYA</string>
   <string name="title_for_child_classes">ALT SINIFLAR</string>
@@ -647,7 +639,7 @@
   <string name="wikipedia_instructions_step_5">5. Vikimetin dosyasını uygun yere yapıştırın.</string>
   <string name="wikipedia_instructions_step_6">6. Gerekirse vikimetini uygun konumlandırma için düzenleyin. Daha fazla bilgi için &lt;a href=\"https://tr.wikipedia.org/wiki/Vikipedi:Biçem_el_kitabı/Görseller#Görsel_nasıl_yerleştirilir\"&gt;buraya&lt;/a&gt; bakın.</string>
   <string name="wikipedia_instructions_step_7">7. Maddeyi yayınlayın</string>
-  <string name="copy_wikicode_to_clipboard">Vikikodu panoya kopyala</string>
+  <string name="copy_wikicode_to_clipboard">Vikimetin panoya kopyala</string>
   <string name="pause">duraklat</string>
   <string name="resume">devam et</string>
   <string name="paused">Durduruldu</string>
@@ -714,7 +706,7 @@
   <string name="back">Geri</string>
   <string name="welcome_custom_picture_selector_text">Özel Resim Seçici\'ye Hoş Geldiniz</string>
   <string name="custom_selector_info_text1">Bu seçici, Commons\'a hangi resimleri yüklediğinizi gösterir.</string>
-  <string name="custom_selector_info_text2">Soldaki resimden farklı olarak, sağdaki resimde zaten yüklendiğini belirten Commons logosu var.\n Resim ön izlemesi için dokunup basılı tutun.</string>
+  <string name="custom_selector_info_text2">Soldaki resmin aksine, sağdaki resimde, resmin zaten yüklendiğini gösteren Commons logosu bulunmaktadır.\n\nResim önizlemesi için dokunup basılı tutun.</string>
   <string name="welcome_custom_selector_ok">Harika</string>
   <string name="custom_selector_already_uploaded_image_text">Bu resim zaten Commons\'a yüklendi.</string>
   <string name="custom_selector_over_limit_warning">Teknik nedenlerden dolayı uygulama aynı anda %1$d fotoğraftan fazlasını güvenilir bir şekilde yükleyemiyor. %1$d olan yükleme sınırı %2$d ile aşıldı.</string>
@@ -729,8 +721,8 @@
   <string name="need_permission">İzin Gerekiyor</string>
   <string name="read_phone_state_permission_message">Yakındaki haritalar düzgün çalışmak için TELEFON DURUMUNU okumaya ihtiyaç duyuyor</string>
   <string name="location_permission_rationale">İsteğe bağlı izin: Kategori önerileri için geçerli konumu al</string>
-  <string name="contributions_of_user">Kullanıcının katkıları: %s</string>
-  <string name="achievements_of_user">Kullanıcının başarıları: %s</string>
+  <string name="contributions_of_user">Kullanıcının katkıları: %1$s</string>
+  <string name="achievements_of_user">Kullanıcının başarıları: %1$s</string>
   <string name="menu_view_user_page">Kullanıcı profilini görüntüle</string>
   <string name="edit_depictions">Betimlemeleri düzenle</string>
   <string name="edit_categories">Kategorileri düzenle</string>
@@ -741,7 +733,7 @@
   <string name="location_message">Konum verisi Viki editörlerine, daha kullanışlı hale getirerek, fotoğrafınızı bulmaya yardımcı olur.\nSon yüklemelerinizde konum yok.\nKamera uygulamanızın ayarlarından konum seçeneğini etkinleştirmenizi öneririz.\nYükleme için teşekkürler!</string>
   <string name="no_location_found_title">Konum bulunamadı</string>
   <string name="no_location_found_message">Bu görüntünün çekildiği yeri eklemeye ne dersiniz?\nKonum verileri, Wiki düzenleyicilerinin resminizi bulmasına yardımcı olarak onu çok daha kullanışlı hale getirir.\nTeşekkürler!</string>
-  <string name="add_location">Konum ekle</string>
+  <string name="add_location">Konum Ekle</string>
   <string name="feedback_sharing_data_alert">Lütfen herkese açık olarak paylaşmaktan çekindiğiniz tüm bilgileri bu e-postadan kaldırın. Ayrıca gönderi paylaştığınız e-posta adresinizin ve ilgili ad ve profil resminizin herkese açık olarak görüneceğini lütfen unutmayın.</string>
   <string name="explore_map_details">Ayrıntılar</string>
   <string name="achievements_unavailable_beta">Başarılar yalnızca prod sürümünde mevcuttur. Lütfen geliştirici belgelerini denetleyin.</string>
@@ -762,8 +754,8 @@
   <string name="unmark_as_not_for_upload">Yükleme için değil işaretini kaldır</string>
   <string name="marking_as_not_for_upload">Yükleme için değil olarak işaretleniyor</string>
   <string name="unmarking_as_not_for_upload">Yükleme için değil işareti kaldırılıyor</string>
-  <string name="show_already_actioned_pictures">Halihazırda işlem görmüş resimleri göster</string>
-  <string name="hiding_already_actioned_pictures">Halihazırda işlem görmüş resimler gizleniyor</string>
+  <string name="show_already_actioned_pictures">Zaten işlenmiş resimleri göster</string>
+  <string name="hiding_already_actioned_pictures">Gizleme zaten resimleri işlenmiş</string>
   <string name="no_more_images_found">Başka resim bulunamadı</string>
   <string name="this_image_is_already_uploaded">Bu resim zaten yüklendi</string>
   <string name="can_not_select_this_image_for_upload">Bu resim yüklemek için seçilemiyor</string>
@@ -803,11 +795,11 @@
   <string name="do_you_want_to_open_kml_file">KML dosyasını açmak istiyor musunuz?</string>
   <string name="failed_to_save_kml_file">KML dosyası kaydedilemedi.</string>
   <string name="failed_to_save_gpx_file">GPX dosyası kaydedilemedi.</string>
-  <string name="saving_kml_file">KML Dosyasını Kaydetme</string>
-  <string name="saving_gpx_file">GPX Dosyasını Kaydetme</string>
+  <string name="saving_kml_file">KML dosyası olarak kaydediliyor...</string>
+  <string name="saving_gpx_file">GPX dosyası olarak kaydediliyor...</string>
   <plurals name="custom_picker_images_selected_title_appendix">
-    <item quantity="one">%d resim seçildi</item>
-    <item quantity="other">%d resim seçildi</item>
+    <item quantity="one">%1$d resim seçildi</item>
+    <item quantity="other">%1$d resim seçildi</item>
   </plurals>
   <string name="multiple_files_depiction">Lütfen çoklu yüklemedeki tüm görsellerin aynı kategorilere ve tasvirlere sahip olduğunu unutmayın. Görseller tasvirleri ve kategorileri paylaşmıyorsa, lütfen birkaç ayrı yükleme gerçekleştirin.</string>
   <string name="multiple_files_depiction_header">Çoklu yüklemelerle ilgili not</string>
@@ -843,7 +835,6 @@
   <string name="usages_on_commons_heading">Commons</string>
   <string name="usages_on_other_wikis_heading">Diğer vikiler</string>
   <string name="file_usages_container_heading">Dosya kullanımları</string>
-  <string name="title_activity_single_web_view">SingleWebViewActivity</string>
   <string name="account">Hesap</string>
   <string name="vanish_account">Kaybolma</string>
   <string name="account_vanish_request_confirm_title">Hesap kaybolma uyarısı</string>

@@ -4,7 +4,7 @@
 -->
 <resources>
   <string name="commons_facebook">कॉमन्स फेसबुक पृष्ठ</string>
-  <string name="commons_github">कॉमन्स गिटहब स्त्रोत कूटशब्द</string>
+  <string name="commons_github" fuzzy="true">कॉमन्स गिटहब स्त्रोत कूटशब्द</string>
   <string name="commons_logo">कॉमन्स क प्रतीक चिन्ह</string>
   <string name="commons_website">कॉमन्स जालस्थान</string>
   <string name="submit">जमा करौ</string>
@@ -88,13 +88,12 @@
   <string name="media_detail_license">लाइसेंस</string>
   <string name="media_detail_coordinates">निर्देशांक</string>
   <string name="_2fa_code">2 एफए कोड</string>
-  <string name="mediaimage_failed">मीडिया छवि विफल</string>
   <string name="welcome_image_mount_zao">माउंट ज़ाओ</string>
   <string name="welcome_image_llamas">ल्लामस</string>
   <string name="welcome_image_rainbow_bridge">इंद्रधनुष केरौ पूल</string>
   <string name="welcome_image_tulip">ट्यूलिप</string>
-  <string name="welcome_image_welcome_wikipedia">विकिपीडिया मँ स्वागत छौं</string>
-  <string name="welcome_image_welcome_copyright">प्रतिलिप्याधिकार मँ स्वागत छौं</string>
+  <string name="welcome_image_welcome_wikipedia" fuzzy="true">विकिपीडिया मँ स्वागत छौं</string>
+  <string name="welcome_image_welcome_copyright" fuzzy="true">प्रतिलिप्याधिकार मँ स्वागत छौं</string>
   <string name="welcome_image_sydney_opera_house">सिडनी केरौ ओपेरा हाउस</string>
   <string name="cancel">रद्द करौ</string>
   <string name="navigation_drawer_open">उघाड़ौ</string>
@@ -149,10 +148,9 @@
   <string name="delete">हटाबौ</string>
   <string name="Achievements">उपलब्धी सिनी</string>
   <string name="Profile">प्रोफ़ाइल</string>
-  <string name="statistics">सांख्यिकी</string>
   <string name="statistics_thanks">धन्यवाद प्राप्त करलखौ</string>
   <string name="statistics_featured">निर्वाचित चित्र</string>
-  <string name="level" fuzzy="true">स्तर</string>
+  <string name="level" fuzzy="true">स्तर %1$d</string>
   <string name="images_uploaded">चित्र अपलोड होलौं</string>
   <string name="contributions_fragment">योगदान</string>
   <string name="nearby_fragment">ठामे मँ</string>

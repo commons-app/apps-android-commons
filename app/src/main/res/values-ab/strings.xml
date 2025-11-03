@@ -80,7 +80,7 @@
   <string name="_2fa_code">2ФА Акод</string>
   <string name="welcome_image_mount_zao">Ашьха Зао</string>
   <string name="welcome_image_tulip">Атиульпан</string>
-  <string name="welcome_image_welcome_wikipedia">Бзиала шәаабеит Википедиа ахь</string>
+  <string name="welcome_image_welcome_wikipedia" fuzzy="true">Бзиала шәаабеит Википедиа ахь</string>
   <string name="welcome_image_sydney_opera_house">Сиднеи аопера атеатр</string>
   <string name="cancel">Аҟәыхра</string>
   <string name="navigation_drawer_open">Иаарттәуп</string>

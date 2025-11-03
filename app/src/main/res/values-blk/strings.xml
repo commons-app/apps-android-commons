@@ -7,7 +7,7 @@
 -->
 <resources>
   <string name="commons_facebook">Commons(လိုꩻအာသုင်ꩻ) Facebook လိတ်မဲ့ငါ</string>
-  <string name="commons_github">Commons(လိုꩻအာသုင်ꩻ) Github ရွီးခိုႏကိုဒ်</string>
+  <string name="commons_github" fuzzy="true">Commons(လိုꩻအာသုင်ꩻ) Github ရွီးခိုႏကိုဒ်</string>
   <string name="commons_logo">Commons(လိုꩻအာသုင်ꩻ) လိုင်ကို</string>
   <string name="commons_website">Commons(လိုꩻအာသုင်ꩻ) ဝဲက်သုဲက်</string>
   <string name="exit_location_picker">အဝ်ႏအုံထွောင်းထာꩻလွိုက်ကို ထန်ႏသွော့ꩻ</string>
@@ -17,10 +17,6 @@
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">အဝ်ႏထူႏဒင်ႏဖုဲင် %1$d ဗာႏကျာꩻ</item>
     <item quantity="other">အဝ်ႏထူႏဒင်ႏဖုဲင် %1$d ဗာႏကျာꩻ</item>
-  </plurals>
-  <plurals name="contributions_subtitle">
-    <item quantity="one">(%1$d)</item>
-    <item quantity="other">(%1$d)</item>
   </plurals>
   <string name="starting_uploads">ထူႏဒင်ႏစအပ်လိုပ်ဖိုင်ႏ</string>
   <string name="navigation_item_explore">ထိုမ်ႏလွူꩻထွား</string>
@@ -45,7 +41,7 @@
   <string name="authentication_failed" fuzzy="true">စဲစ်ထွားမုꩻအောင်ႏတဝ်းသြ၊ နွို့ထဲင်းယင်းသွော့အကောက်တလဲင်ႏဟုဲင်းသြ။</string>
   <string name="uploading_started">ဒင်ႏစလဲဉ်းအပ်လိုတ်</string>
   <string name="upload_completed_notification_title">%1$s ဒင်ႏထွူလဲဉ်း!</string>
-  <string name="upload_progress_notification_title_start">အဝ်ႏဒင်ႏဖုဲင်ကျာꩻ- %s</string>
+  <string name="upload_progress_notification_title_start">အဝ်ႏဒင်ႏဖုဲင်ကျာꩻ- %1$s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s အဝ်ႏဒင်ႏအပ်လိုတ်ကျာꩻ</string>
   <string name="upload_failed_notification_subtitle">နျꩻထွား</string>
   <string name="upload_paused_notification_subtitle">နျꩻထွား</string>
@@ -119,7 +115,7 @@
   <string name="media_detail_uploaded_date">ဒင်ႏခါꩻဒါႏမွူးနီꩻ</string>
   <string name="media_detail_license">လုဲင်သိဉ်</string>
   <string name="media_detail_coordinates">ကိုဩဒိနိတ်</string>
-  <string name="welcome_image_welcome_wikipedia">ဝီခီပီးဒီးယားယို ကျိုႏဆွုမ်ႏဒျာႏသြ။</string>
+  <string name="welcome_image_welcome_wikipedia" fuzzy="true">ဝီခီပီးဒီးယားယို ကျိုႏဆွုမ်ႏဒျာႏသြ။</string>
   <string name="cancel">မာꩻတဝ်းဒွုမ်</string>
   <string name="navigation_drawer_close">ပေ့ꩻထိုꩻ</string>
   <string name="navigation_item_home">ဗဟိုႏ</string>
@@ -155,8 +151,7 @@
   <string name="search_tab_title_categories">ကဏ္ဍဖုံႏ</string>
   <string name="no_recent_searches">ထိုမ်ႏခါꩻမုꩻဖုံႏ အဝ်ႏတဝ်း</string>
   <string name="delete">ယားကုဲင်</string>
-  <string name="statistics">စာႏရင်ꩻဖုံႏ</string>
-  <string name="level" fuzzy="true">အရန်း</string>
+  <string name="level" fuzzy="true">အရန်း %1$d</string>
   <string name="notifications_channel_name_all">ကောင်မွဥ်း ဖေႏသေချက်</string>
   <string name="contributions_fragment">ခွုမ်မာꩻချက်ဖုံႏ</string>
   <string name="notifications">ဖေႏသေချက်ဖုံႏ</string>

@@ -23,7 +23,7 @@
 -->
 <resources>
   <string name="commons_facebook">Trang Commons tại Facebook</string>
-  <string name="commons_github">Mã nguồn Commons tại GitHub</string>
+  <string name="commons_github" fuzzy="true">Mã nguồn Commons tại GitHub</string>
   <string name="commons_logo">Biểu trưng Commons</string>
   <string name="commons_website">Trang Web Commons</string>
   <string name="submit">Gửi</string>
@@ -38,15 +38,12 @@
     <item quantity="one">%1$d tập tin đang được tải lên</item>
     <item quantity="other">%1$d tập tin đang được tải lên</item>
   </plurals>
-  <plurals name="contributions_subtitle">
-    <item quantity="other">(%1$d</item>
-  </plurals>
   <string name="starting_uploads">Bắt đầu tải lên</string>
   <plurals name="starting_multiple_uploads">
-    <item quantity="other">Đang bắt đầu tải lên %d tập tin</item>
+    <item quantity="other">Đang bắt đầu tải lên %1$d tập tin</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="other">%d tập tin đã tải lên</item>
+    <item quantity="other">%1$d tập tin đã tải lên</item>
   </plurals>
   <plurals name="share_license_summary">
     <item quantity="one">Hình này sẽ được phát hành theo giấy phép %1$s</item>
@@ -82,7 +79,7 @@
   <string name="uploading_started">Đã bắt đầu tải lên!</string>
   <string name="upload_completed_notification_title">Đã tải lên %1$s!</string>
   <string name="upload_completed_notification_text">Chạm để xem những tập tin tải lên của bạn</string>
-  <string name="upload_progress_notification_title_start">Đang tải tập tin lên: %s</string>
+  <string name="upload_progress_notification_title_start">Đang tải tập tin lên: %1$s</string>
   <string name="upload_progress_notification_title_in_progress">Đang tải lên tập tin %1$s</string>
   <string name="upload_progress_notification_title_finishing">Đang hoàn thành việc tải lên tập tin %1$s</string>
   <string name="upload_failed_notification_title">Tải lên tập tin %1$s thất bại</string>
@@ -212,15 +209,14 @@
   <string name="_2fa_code">Mã Hai Nhân tố</string>
   <string name="email_auth_code">Mã xác minh email</string>
   <string name="logout_verification">Bạn có chắc chắn muốn đăng xuất?</string>
-  <string name="mediaimage_failed">Hình ảnh bị Thất bại</string>
   <string name="no_subcategory_found">Không tìm thấy thể loại con</string>
   <string name="no_parentcategory_found">Không tìm thấy thể loại mẹ</string>
   <string name="welcome_image_mount_zao">Núi Zaō</string>
   <string name="welcome_image_llamas">Lạc đà không bướu</string>
   <string name="welcome_image_rainbow_bridge">Cầu Cầu vồng</string>
   <string name="welcome_image_tulip">Tu-líp</string>
-  <string name="welcome_image_welcome_wikipedia">Hoan nghênh: Wikipedia</string>
-  <string name="welcome_image_welcome_copyright">Hoan nghênh: Bản quyền</string>
+  <string name="welcome_image_welcome_wikipedia" fuzzy="true">Hoan nghênh: Wikipedia</string>
+  <string name="welcome_image_welcome_copyright" fuzzy="true">Hoan nghênh: Bản quyền</string>
   <string name="welcome_image_sydney_opera_house">Nhà hát Opera Sydney</string>
   <string name="cancel">Hủy bỏ</string>
   <string name="navigation_drawer_open">Mở</string>
@@ -340,7 +336,6 @@
   <string name="Achievements">Thành tích</string>
   <string name="Profile">Hồ sơ</string>
   <string name="badges">Huy chương</string>
-  <string name="statistics">Thống kê</string>
   <string name="statistics_thanks">Cảm ơn đã nhận</string>
   <string name="statistics_featured">Hình ảnh chọn lọc</string>
   <string name="images_uploaded">Hình ảnh đã được tải lên</string>
@@ -382,7 +377,7 @@
   <string name="back_button_continue">Tiếp tục tải lên</string>
   <string name="search_this_area">Tìm kiếm khu vực này</string>
   <string name="nearby_card_permission_title">Yêu cầu quyền</string>
-  <string name="achievements_fetch_failed">Có gì đó không đúng, Chúng tôi không thể tải được thành tích.</string>
+  <string name="achievements_fetch_failed" fuzzy="true">Có gì đó không đúng, Chúng tôi không thể tải được thành tích.</string>
   <string name="display_campaigns">Hiển thị chiến dịch</string>
   <string name="display_campaigns_explanation">Xem các chiến dịch đang diễn ra</string>
   <string name="option_allow">Cho phép</string>
@@ -394,11 +389,11 @@
   <string name="check_category_failure_message">Không thể yêu cầu kiểm tra thể loại cho %1$s</string>
   <string name="check_category_toast">Đang yêu cầu kiểm tra thể loại cho %1$s</string>
   <string name="nominate_for_deletion_done">Xong</string>
-  <string name="send_thank_success_title">Gửi lời cảm ơn: Thành công</string>
-  <string name="send_thank_success_message">Đã gửi thành công lời cảm ơn tới %1$s</string>
-  <string name="send_thank_failure_message">Không gửi được lời cảm ơn tới %1$s</string>
-  <string name="send_thank_failure_title">Gửi lời cảm ơn: Thất bại</string>
-  <string name="send_thank_toast">Đang gửi lời cảm ơn tới %1$s</string>
+  <string name="send_thank_success_title" fuzzy="true">Gửi lời cảm ơn: Thành công</string>
+  <string name="send_thank_success_message" fuzzy="true">Đã gửi thành công lời cảm ơn tới %1$s</string>
+  <string name="send_thank_failure_message" fuzzy="true">Không gửi được lời cảm ơn tới %1$s</string>
+  <string name="send_thank_failure_title" fuzzy="true">Gửi lời cảm ơn: Thất bại</string>
+  <string name="send_thank_toast" fuzzy="true">Đang gửi lời cảm ơn tới %1$s</string>
   <string name="review_thanks_yes_button_text">Hình ảnh sau</string>
   <string name="review_thanks_no_button_text">Vâng, tại sao không?</string>
   <string name="check_your_email_inbox">Kiểm tra hộp thư đến của bạn</string>
@@ -410,7 +405,6 @@
   <string name="exif_tag_name_location">Vị trí</string>
   <string name="exif_tag_name_cameraModel">Dòng máy ảnh</string>
   <string name="exif_tag_name_software">Phần mềm</string>
-  <string name="media_location_permission_denied">Quyền truy cập vị trí phương tiện bị từ chối</string>
   <string name="delete_helper_show_deletion_title_success">Thành công</string>
   <string name="delete_helper_show_deletion_title_failed">Thất bại</string>
   <string name="delete_helper_ask_reason_copyright_logo">Logo</string>
@@ -437,7 +431,7 @@
   <string name="wikipedia_instructions_step_5">5. Dán wikitext vào đúng vị trí.</string>
   <string name="wikipedia_instructions_step_6">6. Chỉnh sửa wikitext cho phù hợp nếu cần. Để biết thêm thông tin, xem &lt;a href=\"https://en.wikipedia.org/wiki/Wikipedia:Manual_of_Style/Images#How_to_place_an_image\"&gt;tại đây&lt;/a&gt; .</string>
   <string name="wikipedia_instructions_step_7">7. Xuất bản bài viết</string>
-  <string name="copy_wikicode_to_clipboard">Sao chép wikicode vào bảng tạm</string>
+  <string name="copy_wikicode_to_clipboard" fuzzy="true">Sao chép wikicode vào bảng tạm</string>
   <string name="pause">tạm ngừng</string>
   <string name="resume">tiếp tục</string>
   <string name="paused">Đã tạm ngừng</string>

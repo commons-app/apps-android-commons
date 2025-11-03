@@ -84,6 +84,7 @@
       android:parentActivityName=".customselector.ui.selector.CustomSelectorActivity" />
     <activity
       android:name=".auth.LoginActivity"
+      android:windowSoftInputMode="adjustPan"
       android:exported="true">
       <intent-filter>
         <category android:name="android.intent.category.LAUNCHER" />
@@ -100,8 +101,9 @@
       android:name=".upload.UploadActivity"
       android:configChanges="orientation|screenSize|keyboard"
       android:exported="true"
+      android:hardwareAccelerated="false"
       android:icon="@mipmap/ic_launcher"
-      android:windowSoftInputMode="adjustResize">
+      android:windowSoftInputMode="adjustPan">
       <intent-filter android:label="@string/intent_share_upload_label">
         <action android:name="android.intent.action.SEND" />
 

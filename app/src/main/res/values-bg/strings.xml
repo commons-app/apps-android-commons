@@ -17,12 +17,12 @@
   <string name="commons_website">Сайт на Общомедия</string>
   <string name="submit">Изпращане</string>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">Обработване на %d качване</item>
-    <item quantity="other">Обработване на %d качвания</item>
+    <item quantity="one">Обработване на %1$d качване</item>
+    <item quantity="other">Обработване на %1$d качвания</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">%d качване</item>
-    <item quantity="other">%d качвания</item>
+    <item quantity="one">%1$d качване</item>
+    <item quantity="other">%1$d качвания</item>
   </plurals>
   <plurals name="share_license_summary">
     <item quantity="one">Изображението ще бъде лицензирано под условията на лиценза %1$s</item>
@@ -59,7 +59,7 @@
   <string name="uploading_started">Качването започна!</string>
   <string name="upload_completed_notification_title">Файл %1$s е качен!</string>
   <string name="upload_completed_notification_text">Докоснете, за да видите качения файл</string>
-  <string name="upload_progress_notification_title_start">Качване на файл: %s</string>
+  <string name="upload_progress_notification_title_start">Качване на файл: %1$s</string>
   <string name="upload_progress_notification_title_in_progress">„%1$s“ е в процес на качване</string>
   <string name="upload_progress_notification_title_finishing">Завършвам с качване на „%1$s“</string>
   <string name="upload_failed_notification_title">Качването на „%1$s“ е неуспешно</string>
@@ -177,7 +177,7 @@
   <string name="welcome_image_llamas">Лами</string>
   <string name="welcome_image_rainbow_bridge">Мостът Рейнбоу Бридж</string>
   <string name="welcome_image_tulip">Лале</string>
-  <string name="welcome_image_welcome_wikipedia">Добре дошли в Уикипедия</string>
+  <string name="welcome_image_welcome_wikipedia" fuzzy="true">Добре дошли в Уикипедия</string>
   <string name="welcome_image_sydney_opera_house">Операта в Сидни</string>
   <string name="cancel">Отказ</string>
   <string name="navigation_drawer_open">Отваряне</string>
@@ -261,7 +261,6 @@
   <string name="quiz_screenshot_question">Допустимо ли е качването на този екранен кадър?</string>
   <string name="no_recent_searches">Няма скорошни търсения</string>
   <string name="nominate_delete">Предлагане за изтриване</string>
-  <string name="statistics">Статистика</string>
   <string name="statistics_wikidata_edits">Изображения чрез „Близки места“</string>
   <string name="images_uploaded_explanation">Брой качени в Общомедия изображения, без значение от софтуера за качване</string>
   <string name="images_reverted_explanation">Процент от качените от Вас изображения в Общомедия, които не са били изтрити</string>

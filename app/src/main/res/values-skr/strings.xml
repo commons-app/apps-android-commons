@@ -4,7 +4,7 @@
 -->
 <resources>
   <string name="commons_facebook">کامنز فیس بک ورقہ</string>
-  <string name="commons_github">کامنز گٹ ہب ماخذ کوڈ</string>
+  <string name="commons_github" fuzzy="true">کامنز گٹ ہب ماخذ کوڈ</string>
   <string name="commons_logo">کامنز لوگو</string>
   <string name="commons_website">کامنز ویب سائٹ</string>
   <string name="submit">جمع کرواؤ</string>
@@ -119,9 +119,8 @@
   <string name="media_detail_coordinates_empty">کجھ نی ݙسیا</string>
   <string name="become_a_tester_title">بیٹا ٹیسٹر بݨو</string>
   <string name="logout_verification">بھلا تساں سچی دا لاگ آؤٹ تھیوݨ چاہندے ہو؟</string>
-  <string name="mediaimage_failed">میڈیا فوٹو ناکام</string>
   <string name="welcome_image_tulip">گل لالہ</string>
-  <string name="welcome_image_welcome_wikipedia">وکی پیڈیا وچ ست بسم اللہ</string>
+  <string name="welcome_image_welcome_wikipedia" fuzzy="true">وکی پیڈیا وچ ست بسم اللہ</string>
   <string name="cancel">منسوخ</string>
   <string name="navigation_drawer_open">کھولو</string>
   <string name="navigation_drawer_close">بند کرو</string>
@@ -169,8 +168,7 @@
   <string name="delete">مٹاؤ</string>
   <string name="Achievements">کامیابیاں</string>
   <string name="Profile">پروفائل</string>
-  <string name="statistics">شماريات</string>
-  <string name="level" fuzzy="true">درجہ</string>
+  <string name="level" fuzzy="true">درجہ %1$d</string>
   <string name="images_used_by_wiki">ورتیل تصویراں</string>
   <string name="error_occurred">خرابی تھی ڳئی ہے!</string>
   <string name="contributions_fragment">ونگاراں</string>
@@ -259,7 +257,7 @@
   <string name="advanced_options">اعلیٰ اختیارات</string>
   <string name="apply">لاڳو کرو</string>
   <string name="reset">ولدا ٹھیک کرو</string>
-  <string name="add_location">محل وقوع شامل کرو</string>
+  <string name="add_location" fuzzy="true">محل وقوع شامل کرو</string>
   <string name="explore_map_details">تفصیلاں</string>
   <string name="android_version">انڈرائیڈ ورژن</string>
   <string name="device_model">ڈیوائس ماڈل</string>

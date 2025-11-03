@@ -324,7 +324,7 @@ after opening the app.
         )
             .subscribeOn(Schedulers.io())
             .blockingGet()
-        Timber.d("Resuming " + stuckUploads.size + " uploads...")
+        Timber.d("Resuming %d uploads...", stuckUploads.size)
         if (!stuckUploads.isEmpty()) {
             for (contribution in stuckUploads) {
                 contribution.state = Contribution.STATE_QUEUED

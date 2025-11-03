@@ -16,6 +16,7 @@
 * Jeeputer
 * Ladsgroup
 * Lakzon
+* LordProfo
 * Mardetanha
 * Mehdi
 * Mjbmr
@@ -55,18 +56,14 @@
     <item quantity="one">%1$d پرونده در حال بارگذاری</item>
     <item quantity="other">%1$d پرونده در حال بارگذاری</item>
   </plurals>
-  <plurals name="contributions_subtitle">
-    <item quantity="one">(%1$d)</item>
-    <item quantity="other">(%1$d)</item>
-  </plurals>
   <string name="starting_uploads">آغاز بارگذاری</string>
   <plurals name="starting_multiple_uploads">
     <item quantity="one">پردازش %1$d بارگذاری پرونده</item>
     <item quantity="other">پردازش بارگذاری %1$d پرونده</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">%d بارگذاری</item>
-    <item quantity="other">%d بارگذاری</item>
+    <item quantity="one">%1$d بارگذاری</item>
+    <item quantity="other">%1$d بارگذاری</item>
   </plurals>
   <plurals name="share_license_summary">
     <item quantity="one">این تصویر تحت مجوز %1$s است</item>
@@ -86,7 +83,7 @@
   <string name="intent_share_upload_label">بارگذاری در انبار</string>
   <string name="upload_in_progress">بارگذاری در جریان است</string>
   <string name="username">نام کاربری</string>
-  <string name="password">رمز عبور</string>
+  <string name="password">گذرواژه</string>
   <string name="login_credential">به حساب ویکی‌انبار آزمایشی خودتان وارد شوید</string>
   <string name="login">ورود</string>
   <string name="forgot_password">رمز عبور خودتان را فراموش کرده‌اید؟</string>
@@ -101,7 +98,7 @@
   <string name="uploading_started">بارگذاری آغاز شد!</string>
   <string name="upload_completed_notification_title">%1$s بارگذاری شد!</string>
   <string name="upload_completed_notification_text">برای دیدن بارگذاریتان بر روی صفحه انگشت بزنید</string>
-  <string name="upload_progress_notification_title_start">بارگذاری پرونده: %1$s</string>
+  <string name="upload_progress_notification_title_start" fuzzy="true">بارگذاری پرونده: %1$s</string>
   <string name="upload_progress_notification_title_in_progress">بارگذاری %1$s</string>
   <string name="upload_progress_notification_title_finishing">اتمام بارگذاری %1$s</string>
   <string name="upload_failed_notification_title" fuzzy="true">%1$s بارگذاری نشد</string>
@@ -159,7 +156,7 @@
   <string name="provider_categories">رده‌هایی که اخیراً استفاده شده‌اند</string>
   <string name="waiting_first_sync">در حال انتظار برای اولین همگام‌سازی…</string>
   <string name="no_uploads_yet">شما هنوز نگاره‌ای بارگذاری نکرده‌اید.</string>
-  <string name="menu_retry_upload">تلاش مجدد</string>
+  <string name="menu_retry_upload">تلاش دوباره</string>
   <string name="menu_cancel_upload">لغو</string>
   <string name="media_upload_policy">با بارگذاری این تصویر، تأیید می‌کنم که این اثر کار خودم است و از محتوای دارای حق تکثیر یا سلفی برای ایجاد آن استفاده نکرده‌ام و شرایط ذکر شده در By submitting this picture, I declare that this is my own work, that it does not contain copyrighted material or selfies, and otherwise adheres to &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;سیاست‌های ویکی‌انبار&lt;/a&gt; را رعایت می‌کند.</string>
   <string name="menu_download">دریافت</string>
@@ -226,15 +223,14 @@
   <string name="become_a_tester_description">به گروه آزمایشی ما در گوگل‌پلی بپیوندید و از خصوصیات جدید و خطاهای رفع‌شده زودتر از دیگران برخوردار شوید.</string>
   <string name="_2fa_code">کد 2FA</string>
   <string name="logout_verification">آیا واقعاً قصد خروج از سامانه را دارید؟</string>
-  <string name="mediaimage_failed">خطای تصویر رسانه</string>
   <string name="no_subcategory_found">هیچ زیررده‌ای یافت نشد</string>
   <string name="no_parentcategory_found">هیچ رده مادری یافت نشد</string>
   <string name="welcome_image_mount_zao">کوه زائو</string>
   <string name="welcome_image_llamas">لاما</string>
   <string name="welcome_image_rainbow_bridge">رینبو بریج</string>
   <string name="welcome_image_tulip">لاله</string>
-  <string name="welcome_image_welcome_wikipedia">به ویکی‌پدیا خوش آمدید</string>
-  <string name="welcome_image_welcome_copyright">حق‌تکثیر خوش‌آمدگویی</string>
+  <string name="welcome_image_welcome_wikipedia" fuzzy="true">به ویکی‌پدیا خوش آمدید</string>
+  <string name="welcome_image_welcome_copyright" fuzzy="true">حق‌تکثیر خوش‌آمدگویی</string>
   <string name="welcome_image_sydney_opera_house">خانه اپرای سیدنی</string>
   <string name="cancel">لغو</string>
   <string name="navigation_drawer_open">باز کردن</string>
@@ -300,7 +296,7 @@
   <string name="about_translate_message">لطفا زبانی که مایلید در آنها ترجمه‌های خود را ثبت کنید انتخاب کنید.</string>
   <string name="about_translate_proceed">ادامه</string>
   <string name="about_translate_cancel">لغو</string>
-  <string name="retry">سعى دوباره</string>
+  <string name="retry">تلاش دوباره</string>
   <string name="showcase_view_needs_photo">به تصویری از این مکان نیاز است.</string>
   <string name="showcase_view_has_photo">هم‌اکنون تصویری از این مکان وجود دارد.</string>
   <string name="no_images_found">تصویری یافت نشد!</string>
@@ -331,7 +327,7 @@
   <string name="result">نتیجه</string>
   <string name="congratulatory_message_quiz">شما %1$s پاسخ درست دادید. آفرین!</string>
   <string name="warning_for_no_answer">یکی از دو گزینه را انتخاب کنید تا به سوال پاسخ دهید</string>
-  <string name="user_not_logged_in">جلسه ورود به سیستم منقضی شد، لطفاً دوباره وارد سیستم شوید.</string>
+  <string name="user_not_logged_in">نشست ورود به سامانه منقضی شد، لطفاً دوباره وارد سیستم شوید.</string>
   <string name="quiz_result_share_message">کویز خود را با دوستان خود به اشتراک بگذارید.</string>
   <string name="continue_message">ادامه</string>
   <string name="correct">جواب درست</string>
@@ -349,11 +345,10 @@
   <string name="delete">حذف</string>
   <string name="Achievements">دستاوردها</string>
   <string name="Profile">نمایه</string>
-  <string name="statistics">آمار</string>
-  <string name="statistics_thanks">تشکر دریافت‌شد</string>
+  <string name="statistics_thanks">تشکر دریافت شد</string>
   <string name="statistics_featured">تصاویر برگزیده</string>
   <string name="statistics_wikidata_edits">تصاویر بر اساس «مکان‌های اطراف»</string>
-  <string name="level" fuzzy="true">سطح</string>
+  <string name="level" fuzzy="true">سطح %1$d</string>
   <string name="images_uploaded">تصاویر بارگذاری شده</string>
   <string name="image_reverts">تصاویر واگردانی نشده</string>
   <string name="images_used_by_wiki">تصویر استفاده شده</string>
@@ -404,11 +399,11 @@
   <string name="check_category_success_title">بررسی رده درخواست شده</string>
   <string name="check_category_failure_title">درخواست بررسی رده کار نکرد</string>
   <string name="nominate_for_deletion_done">انجام شد</string>
-  <string name="send_thank_success_title">ارسال تشکر: موفق</string>
-  <string name="send_thank_success_message">تشکر با موفقیت برای %1$s فرستاده شد</string>
-  <string name="send_thank_failure_message">تلاش برای فرستادن تشکر شکست خورد %1$s</string>
-  <string name="send_thank_failure_title">ارسال تشکر: ناموفق</string>
-  <string name="send_thank_toast">در حال ارسال تشکر برای %1$s</string>
+  <string name="send_thank_success_title">فرستادن تشکر: موفق</string>
+  <string name="send_thank_success_message" fuzzy="true">تشکر با موفقیت برای %1$s فرستاده شد</string>
+  <string name="send_thank_failure_message" fuzzy="true">تلاش برای فرستادن تشکر شکست خورد %1$s</string>
+  <string name="send_thank_failure_title">فرستادن تشکر: ناموفق</string>
+  <string name="send_thank_toast" fuzzy="true">در حال ارسال تشکر برای %1$s</string>
   <string name="review_category">آیا این به درستی رده‌بندی شده است؟</string>
   <string name="review_spam">آیا این در محدوده قابل قبول است؟</string>
   <string name="review_thanks">آیا مایلید که از مشارکت‌ کننده تشکر کنید؟</string>
@@ -451,7 +446,7 @@
   <string name="delete_helper_ask_alert_set_positive_button_reason">چون</string>
   <string name="caption_edit_helper_show_edit_message">برنگاشت افزوده شد.</string>
   <string name="share_image_via">هم‌رسانی تصویر از طریق</string>
-  <string name="no_achievements_yet" fuzzy="true">هنوز مشارکتی نکرده‌اید</string>
+  <string name="no_achievements_yet" fuzzy="true">%1$s هنوز هیچ مشارکتی انجام نداده است</string>
   <string name="account_created">حساب ایجاد شد!</string>
   <string name="text_copy">متن در حافظهٔ موقت کپی شد.</string>
   <string name="notification_mark_read">علامت زدن آگاه‌سازی به عنوان خوانده‌شده</string>
@@ -460,7 +455,7 @@
   <string name="place_state_exists">موجود است</string>
   <string name="place_state_needs_photo">تصویر لازم است</string>
   <string name="place_type">نوع مکان:</string>
-  <string name="nearby_search_hint">پل، موزه، هتل، غیره.</string>
+  <string name="nearby_search_hint" fuzzy="true">پل، موزه، هتل، غیره.</string>
   <string name="title_for_media">رسانه‌ها</string>
   <string name="title_app_shortcut_bookmark">بوکمارک‌ها</string>
   <string name="title_app_shortcut_setting">تنظیمات</string>
@@ -487,7 +482,7 @@
   <string name="done">انجام شد</string>
   <string name="back">بازگشت</string>
   <string name="welcome_custom_picture_selector_text">به انتخاب‌گر سفارشی تصویر خوش آمدید</string>
-  <string name="custom_selector_info_text2">برخلاف تصویر سمت چپ، تصویر سمت راست دارای نشان‌وارهٔ ویکی‌انبار است که نشان می‌دهد از پیش بارگذاری شده است.\nبرای پیش‌نمایش تصویر، صفحه را لمس کنید و نگه دارید.</string>
+  <string name="custom_selector_info_text2" fuzzy="true">برخلاف تصویر سمت چپ، تصویر سمت راست دارای نشان‌وارهٔ ویکی‌انبار است که نشان می‌دهد از پیش بارگذاری شده است.\nبرای پیش‌نمایش تصویر، صفحه را لمس کنید و نگه دارید.</string>
   <string name="welcome_custom_selector_ok">عالی</string>
   <string name="custom_selector_already_uploaded_image_text">این تصویر از پیش در ویکی‌انبار بارگذاری شده است.</string>
   <string name="wlm_upload_info" fuzzy="true">شما در حال مشارکت در پویش ویکی دوست‌دار یادمان‌ها هستید. الگوهای مرتبط متعاقباً افزوده خواهند شد.</string>

@@ -7,7 +7,7 @@
 -->
 <resources>
   <string name="commons_facebook">Kaca Facebook Commons</string>
-  <string name="commons_github">Kode Sumber Github Commons</string>
+  <string name="commons_github" fuzzy="true">Kode Sumber Github Commons</string>
   <string name="commons_logo">Logo Commons</string>
   <string name="commons_website">Situs wéb Commons</string>
   <string name="exit_location_picker">Kaluar ti pamilih lokasi</string>
@@ -29,14 +29,10 @@
     <item quantity="one">ngunjal %1$d berkas</item>
     <item quantity="other">ngunjal %1$d berkas</item>
   </plurals>
-  <plurals name="contributions_subtitle">
-    <item quantity="one">(%1$d)</item>
-    <item quantity="other">(%1$d)</item>
-  </plurals>
   <string name="starting_uploads">Mitembeyan Ngamuat</string>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">Ngolah %d muatan</item>
-    <item quantity="other">Ngolah %d muatan</item>
+    <item quantity="one">Ngolah %1$d muatan</item>
+    <item quantity="other">Ngolah %1$d muatan</item>
   </plurals>
   <plurals name="multiple_uploads_title">
     <item quantity="one">%1$d muatan</item>
@@ -80,7 +76,7 @@
   <string name="uploading_queued">Muatan geus ngantri (sambungan diwates dijalankeun)</string>
   <string name="upload_completed_notification_title">%1$s diunjal!</string>
   <string name="upload_completed_notification_text">Toél pikeun némpo unjalan anjeun</string>
-  <string name="upload_progress_notification_title_start">Ngamuat berkas: %s</string>
+  <string name="upload_progress_notification_title_start">Ngamuat berkas: %1$s</string>
   <string name="upload_progress_notification_title_in_progress">Ngunjal %1$s</string>
   <string name="upload_progress_notification_title_finishing">Méréskeun unjalan %1$s</string>
   <string name="upload_failed_notification_title">Gagal ngunjal %1$s</string>
@@ -208,15 +204,14 @@
   <string name="become_a_tester_description">Pilihan asup kana saluran béta kami di Google Play sarta meunangkeun aksés munggaran pikeun fitur anyar jeung pameneran kutu</string>
   <string name="_2fa_code">Kode 2FA</string>
   <string name="logout_verification">Yakin anjeun rék kaluar?</string>
-  <string name="mediaimage_failed">Gambar Média Gagal</string>
   <string name="no_subcategory_found">Euweuh subkategorian</string>
   <string name="no_parentcategory_found">Euweuh kategorian</string>
   <string name="welcome_image_mount_zao">Mount Zao</string>
   <string name="welcome_image_llamas">Llamas</string>
   <string name="welcome_image_rainbow_bridge">Sasak Katumbiri</string>
   <string name="welcome_image_tulip">Tulip</string>
-  <string name="welcome_image_welcome_wikipedia">Wilujeng Sumping Wikipédia</string>
-  <string name="welcome_image_welcome_copyright">Wilujeng Sumping Hak Cipta</string>
+  <string name="welcome_image_welcome_wikipedia" fuzzy="true">Wilujeng Sumping Wikipédia</string>
+  <string name="welcome_image_welcome_copyright" fuzzy="true">Wilujeng Sumping Hak Cipta</string>
   <string name="welcome_image_sydney_opera_house">Imah Opérét Sydney</string>
   <string name="cancel">Bolay</string>
   <string name="navigation_drawer_open">Buka</string>
@@ -329,11 +324,10 @@
   <string name="nominate_delete">Nominasi Pikeun Dipupus</string>
   <string name="delete">Hapus</string>
   <string name="Achievements">Préstasi</string>
-  <string name="statistics">Statistika</string>
   <string name="statistics_thanks">Panuhun Katampa</string>
   <string name="statistics_featured">Gambar petingan</string>
   <string name="statistics_wikidata_edits">Gambar liwat \"Tempat Sabudeureun\"</string>
-  <string name="level" fuzzy="true">Tingkat</string>
+  <string name="level" fuzzy="true">Tingkat %1$d</string>
   <string name="images_uploaded">Gambar Diunjal</string>
   <string name="image_reverts">Gambar Teu Dibalikkeun</string>
   <string name="images_used_by_wiki">Gambar Dipaké</string>
@@ -375,11 +369,11 @@
   <string name="check_category_failure_message">Teu bisa mundut ngecék kategori pikeun %1$s</string>
   <string name="check_category_toast">Mundut ngecék kategori pikeun %1$s</string>
   <string name="nominate_for_deletion_done">Anggeus</string>
-  <string name="send_thank_success_title">Ngirim Panuhun: Ngahasil</string>
-  <string name="send_thank_success_message">Panuhun ngahasil dikirim ka %1$s</string>
-  <string name="send_thank_failure_message">Panuhun gagal dikirim ka %1$s</string>
-  <string name="send_thank_failure_title">Kiriman Panuhun: Gagal</string>
-  <string name="send_thank_toast">Ngirim Panuhun ka %1$s</string>
+  <string name="send_thank_success_title" fuzzy="true">Ngirim Panuhun: Ngahasil</string>
+  <string name="send_thank_success_message" fuzzy="true">Panuhun ngahasil dikirim ka %1$s</string>
+  <string name="send_thank_failure_message" fuzzy="true">Panuhun gagal dikirim ka %1$s</string>
+  <string name="send_thank_failure_title" fuzzy="true">Kiriman Panuhun: Gagal</string>
+  <string name="send_thank_toast" fuzzy="true">Ngirim Panuhun ka %1$s</string>
   <string name="review_category">Ieu kategori nu bener?</string>
   <string name="review_spam">Ieu dina wengkuan?</string>
   <string name="review_thanks">Daék teu anjeun nganuhunkeun kontributor?</string>

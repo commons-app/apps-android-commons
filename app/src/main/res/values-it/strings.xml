@@ -28,7 +28,7 @@
 -->
 <resources>
   <string name="commons_facebook">Pagina Facebook di Commons</string>
-  <string name="commons_github">Codice sorgente Github di Commons</string>
+  <string name="commons_github">Codice sorgente GitHub di Commons</string>
   <string name="commons_logo">Logo di Commons</string>
   <string name="commons_website">Sito web di Commons</string>
   <string name="exit_location_picker">Esci dal selettore della posizione</string>
@@ -52,18 +52,14 @@
     <item quantity="one">%1$d file in caricamento</item>
     <item quantity="other">%1$d file in caricamento</item>
   </plurals>
-  <plurals name="contributions_subtitle">
-    <item quantity="one">(%1$d)</item>
-    <item quantity="other">(%1$d)</item>
-  </plurals>
   <string name="starting_uploads">Avvio caricamenti</string>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">Elaborando %d caricamento</item>
-    <item quantity="other">Elaborando %d caricamenti</item>
+    <item quantity="one">Elaborando %1$d caricamento</item>
+    <item quantity="other">Elaborando %1$d caricamenti</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">%d caricamento</item>
-    <item quantity="other">%d caricamenti</item>
+    <item quantity="one">%1$d caricamento</item>
+    <item quantity="other">%1$d caricamenti</item>
   </plurals>
   <plurals name="share_license_summary">
     <item quantity="one">Questa immagine sarà rilasciata in base alla licenza %1$s</item>
@@ -107,7 +103,7 @@
   <string name="uploading_queued">Caricamento in coda (attivata modalità di connessione limitata)</string>
   <string name="upload_completed_notification_title">%1$s caricato!</string>
   <string name="upload_completed_notification_text">Tocca per visualizzare il tuo caricamento</string>
-  <string name="upload_progress_notification_title_start">Caricamento file: %s</string>
+  <string name="upload_progress_notification_title_start">Caricamento file: %1$s</string>
   <string name="upload_progress_notification_title_in_progress">Sto caricando %1$s</string>
   <string name="upload_progress_notification_title_finishing">Terminato il caricamento di %1$s</string>
   <string name="upload_failed_notification_title">Errore durante il caricamento di %1$s</string>
@@ -157,6 +153,7 @@
   <string name="title_activity_settings">Impostazioni</string>
   <string name="title_activity_signup">Registrati</string>
   <string name="title_activity_featured_images">Immagini in evidenza</string>
+  <string name="images_featured_explanation">Le immagini in vetrina sono contributi di fotografi e illustratori di talento che la comunità di Wikimedia Commons ha riconosciuto come quelle di migliore qualità del sito.</string>
   <string name="title_activity_custom_selector">Selettore personalizzato</string>
   <string name="title_activity_category_details">Categoria</string>
   <string name="title_activity_review">Revisione tra pari</string>
@@ -245,15 +242,14 @@
   <string name="_2fa_code">Codice 2FA</string>
   <string name="email_auth_code">Codice di verifica indirizzo email</string>
   <string name="logout_verification">Vuoi veramente uscire?</string>
-  <string name="mediaimage_failed">Immagine multimediale non riuscita</string>
   <string name="no_subcategory_found">Nessuna sottocategoria trovata</string>
   <string name="no_parentcategory_found">Nessuna categoria superiore trovata</string>
   <string name="welcome_image_mount_zao">Monte Zao</string>
   <string name="welcome_image_llamas">Lama</string>
   <string name="welcome_image_rainbow_bridge">Ponte dell\'Arcobaleno</string>
   <string name="welcome_image_tulip">Tulipano</string>
-  <string name="welcome_image_welcome_wikipedia">Benvenuto Wikipedia</string>
-  <string name="welcome_image_welcome_copyright">Benvenuto Copyright</string>
+  <string name="welcome_image_welcome_wikipedia">Un\'immagine schematica di una voce generica di Wikipedia.</string>
+  <string name="welcome_image_welcome_copyright">Un disegno di una pila di fogli con il simbolo del copyright barrato.</string>
   <string name="welcome_image_sydney_opera_house">Teatro dell\'opera di Sydney</string>
   <string name="cancel">Annulla</string>
   <string name="navigation_drawer_open">Apri</string>
@@ -392,12 +388,11 @@
   <string name="Achievements">Risultati</string>
   <string name="Profile">Profilo</string>
   <string name="badges">Distintivi</string>
-  <string name="statistics">Statistiche</string>
   <string name="statistics_thanks">Ringraziamenti ricevuti</string>
   <string name="statistics_featured">Immagini in evidenza</string>
   <string name="statistics_wikidata_edits">Immagini tramite \"Luoghi nelle vicinanze\"</string>
-  <string name="level">Livello %d</string>
-  <string name="profile_withLevel">%s (Livello %s)</string>
+  <string name="level">Livello %1$d</string>
+  <string name="profile_withLevel">%1$s (Livello %2$s)</string>
   <string name="images_uploaded">Immagini caricate</string>
   <string name="image_reverts">Immagini non ripristinate</string>
   <string name="images_used_by_wiki">Immagini utilizzate</string>
@@ -457,7 +452,7 @@
   <string name="never_ask_again">Non chiedermelo mai più</string>
   <string name="display_location_permission_title">Chiedi autorizzazione alla posizione</string>
   <string name="display_location_permission_explanation">Chiedi il permesso di localizzazione quando necessario per la funzione di visualizzazione della scheda di notifica nelle vicinanze.</string>
-  <string name="achievements_fetch_failed">Qualcosa è andato storto, non siamo riusciti a recuperare i risultati</string>
+  <string name="achievements_fetch_failed">Qualcosa è andato storto e non siamo riusciti a recuperare i risultati</string>
   <string name="achievements_fetch_failed_ultimate_achievement">Hai dato così tanti contributi che il nostro sistema di conteggio di risultati non può contarli. Questo è l\'ultimo risultato.</string>
   <string name="ends_on">Termina il:</string>
   <string name="display_campaigns">Visualizza campagne</string>
@@ -486,10 +481,10 @@
   <string name="check_category_failure_message">Non è stato possibile richiedere la verifica di categoria per %1$s</string>
   <string name="check_category_toast">Richiesta di verifica della categoria per %1$s</string>
   <string name="nominate_for_deletion_done">Fatto</string>
-  <string name="send_thank_success_title">Invio Ringraziamenti: Successo</string>
-  <string name="send_thank_success_message">Ringraziamenti a %1$s inviati correttamente</string>
+  <string name="send_thank_success_title">Invio ringraziamenti: Successo</string>
+  <string name="send_thank_success_message">Invia ringraziamenti a %1$s</string>
   <string name="send_thank_failure_message">Errore nell\'invio di ringraziamenti a %1$s</string>
-  <string name="send_thank_failure_title">Invio Ringraziamenti: Errore</string>
+  <string name="send_thank_failure_title">Invio ringraziamenti: Errore</string>
   <string name="send_thank_toast">Inviando ringraziamento per %1$s</string>
   <string name="review_copyright">Ciò e compatibile con la normativa sul diritto d\'autore?</string>
   <string name="review_category">Questo è categorizzato correttamente?</string>
@@ -517,15 +512,14 @@
   <string name="menu_option_unread">Vedi non lette</string>
   <string name="error_occurred_in_picking_images">Si è verificato un errore durante la selezione delle immagini</string>
   <string name="please_wait">Attendi per favore…</string>
-  <string name="images_featured_explanation">Le foto in vetrina sono immagini opere di fotografi e ilustratori di talento che la comunità di Wikimedia Commons ha riconosciuto come quelle di migliore qualità del sito.</string>
   <string name="images_via_nearby_explanation">Le immagini caricate tramite Luoghi Vicini sono le immagini che sono state caricate scoprendo luoghi nella mappa.</string>
   <string name="thanks_received_explanation">Questa funzionalità permette di inviare una notifica di ringraziamento a quegli utenti che hanno condiviso contributi utili – mediante un piccolo link nella pagina di cronologia o delle differenze.</string>
-  <string name="copy_image_caption_description">Copia in altri media</string>
+  <string name="copy_image_caption_description">Copia negli elementi successivi</string>
   <string name="copied_successfully">Copiato</string>
   <string name="welcome_do_upload_content_description">Esempi di valide immagini caricabili in Commons</string>
   <string name="welcome_dont_upload_content_description">Esempi di immagini che non vanno caricate</string>
   <string name="skip_image">Salta questa immagine</string>
-  <string name="download_failed_we_cannot_download_the_file_without_storage_permission">Download fallito!!. Non possiamo scaricare il file senza l\'autorizzazione per lo stoccaggio esterno.</string>
+  <string name="download_failed_we_cannot_download_the_file_without_storage_permission">Download non riuscito. Non è possibile scaricare il file senza l\'autorizzazione di archiviazione esterna.</string>
   <string name="manage_exif_tags">Gestisci le etichette EXIF</string>
   <string name="manage_exif_tags_summary">Seleziona quali etichette EXIF vanno mantenute nel caricamento</string>
   <string name="exif_tag_name_author">Autore</string>
@@ -535,8 +529,6 @@
   <string name="exif_tag_name_lensModel">Modello di lente</string>
   <string name="exif_tag_name_serialNumbers">Numeri seriali</string>
   <string name="exif_tag_name_software">Software</string>
-  <string name="media_location_permission_denied">Accesso alla posizione multimediale negato</string>
-  <string name="add_location_manually">Potremmo non essere in grado di ottenere automaticamente i dati sulla posizione dalle immagini caricate. Si prega di aggiungere la posizione appropriata per ciascuna immagine prima di inviarla</string>
   <string name="share_text">Carica foto su Wikimedia Commons direttamente dal tuo telefono. Scarica subito l\'app Commons: %1$s</string>
   <string name="share_via">Condividi applicazione tramite...</string>
   <string name="image_info">Informazioni sull\'immagine</string>
@@ -593,7 +585,7 @@
   <string name="description_activity_title">Modifica descrizioni e didascalie</string>
   <string name="share_image_via">Condividi immagine tramite</string>
   <string name="you_have_no_achievements_yet">Non hai ancora condiviso alcun contributo.</string>
-  <string name="no_achievements_yet">%s non ha fatto alcun contributo ancora</string>
+  <string name="no_achievements_yet">%1$s non ha fatto alcun contributo ancora</string>
   <string name="account_created">Utenza creata!</string>
   <string name="text_copy">Testo copiato negli appunti</string>
   <string name="notification_mark_read">Notifica segnata come letta</string>
@@ -646,7 +638,7 @@
   <string name="wikipedia_instructions_step_5">5. Incolla il wikitesto nel posto appropriato.</string>
   <string name="wikipedia_instructions_step_6">6. Modifica il wikitesto per il posizionamento appropriato, se necessario. Per ulteriori informazioni vedi &lt;a href=\"https://it.wikipedia.org/wiki/Aiuto:Markup_immagini\"&gt;questa pagina&lt;/a&gt;.</string>
   <string name="wikipedia_instructions_step_7">7. Pubblica la voce</string>
-  <string name="copy_wikicode_to_clipboard">Copia il wikicodice negli appunti</string>
+  <string name="copy_wikicode_to_clipboard">Copia il wikitesto negli appunti</string>
   <string name="pause">pausa</string>
   <string name="resume">riprendi</string>
   <string name="paused">In pausa</string>
@@ -688,6 +680,8 @@
   <string name="categories_tooltip">Si prega di selezionare le categorie appropriate. A differenza delle raffigurazioni, le categorie sono solo in inglese.</string>
   <string name="license_tooltip">Commons rende le tue immagini riutilizzabili e adattabili da chiunque. Vuoi rinunciare a tutti i diritti? Vuoi che ti venga attribuita la paternità? Vuoi che gli adattamenti utilizzino la stessa licenza?</string>
   <string name="depicts_step_title">Raffigura</string>
+  <string name="depicts_label">Etichetta</string>
+  <string name="depicts_description">Descrizione</string>
   <string name="license_step_title">Licenza per il file</string>
   <string name="media_detail_step_title">Dettagli sul file</string>
   <string name="menu_view_category_page">Vedi la pagina della categoria</string>
@@ -714,7 +708,7 @@
   <string name="back">Indietro</string>
   <string name="welcome_custom_picture_selector_text">Benvenuto nel selettore di immagini personalizzato</string>
   <string name="custom_selector_info_text1">Questo selettore ti mostra quali immagini hai già caricato su Commons.</string>
-  <string name="custom_selector_info_text2">A differenza dell\'immagine a sinistra, quella a destra ha il logo Commons che indica che è già caricata. \nTocca e tieni premuto per l\'anteprima dell\'immagine.</string>
+  <string name="custom_selector_info_text2">A differenza dell\'immagine a sinistra, quella a destra ha il logo Commons che indica che è già caricata.\n\nTocca e tieni premuto per l\'anteprima dell\'immagine.</string>
   <string name="welcome_custom_selector_ok">Fantastico</string>
   <string name="custom_selector_already_uploaded_image_text">Questa immagine è già stata caricata su Commons.</string>
   <string name="custom_selector_over_limit_warning">Per motivi tecnici, l\'app non può caricare in modo affidabile più di %1$d immagini contemporaneamente. Il limite di caricamento di %1$d è stato superato da %2$d .</string>
@@ -731,8 +725,8 @@
   <string name="need_permission">Autorizzazione/i richiesta/e</string>
   <string name="read_phone_state_permission_message">Le mappe vicine hanno bisogno di leggere lo STATO DEL TELEFONO per funzionare correttamente</string>
   <string name="location_permission_rationale">Autorizzazione facoltativa: ottieni la posizione corrente per i suggerimenti di categoria</string>
-  <string name="contributions_of_user">Contributi dell\'utente: %s</string>
-  <string name="achievements_of_user">Traguardi dell\'utente: %s</string>
+  <string name="contributions_of_user">Contributi dell\'utente: %1$s</string>
+  <string name="achievements_of_user">Traguardi dell\'utente: %1$s</string>
   <string name="menu_view_user_page">Vedi il profilo utente</string>
   <string name="edit_depictions">Modifica le descrizioni</string>
   <string name="edit_categories">Modifica le categorie</string>
@@ -764,8 +758,8 @@
   <string name="unmark_as_not_for_upload">Deseleziona come \"da non caricare\"</string>
   <string name="marking_as_not_for_upload">Selezionando come \"da non caricare\"</string>
   <string name="unmarking_as_not_for_upload">Deselezionando come \"da non caricare\"</string>
-  <string name="show_already_actioned_pictures">Mostra le immagini già attivate</string>
-  <string name="hiding_already_actioned_pictures">Nascondere le immagini già attivate</string>
+  <string name="show_already_actioned_pictures">Mostra le immagini già gestite</string>
+  <string name="hiding_already_actioned_pictures">Nascondere le immagini già gestite</string>
   <string name="no_more_images_found">Nessuna altra immagine trovata</string>
   <string name="this_image_is_already_uploaded">Questa immagine è già stata caricata</string>
   <string name="can_not_select_this_image_for_upload">Impossibile selezionare questa immagine per il caricamento</string>
@@ -805,11 +799,11 @@
   <string name="do_you_want_to_open_kml_file">Vuoi aprire il file KML?</string>
   <string name="failed_to_save_kml_file">Errore durante il salvataggio del file KML.</string>
   <string name="failed_to_save_gpx_file">Errore durante il salvataggio del file GPX.</string>
-  <string name="saving_kml_file">Salvataggio del file KML</string>
-  <string name="saving_gpx_file">Salvataggio del file GPX</string>
+  <string name="saving_kml_file">Salvataggio come file KML...</string>
+  <string name="saving_gpx_file">Salvataggio come file GPX...</string>
   <plurals name="custom_picker_images_selected_title_appendix">
-    <item quantity="one">%d immagine selezionata</item>
-    <item quantity="other">%d immagini selezionate</item>
+    <item quantity="one">%1$d immagine selezionata</item>
+    <item quantity="other">%1$d immagini selezionate</item>
   </plurals>
   <string name="multiple_files_depiction">Ricorda che tutte le immagini in un caricamento multiplo hanno le stesse categorie e descrizioni. Se le immagini non condividono descrizioni e categorie, esegui caricamenti separati.</string>
   <string name="multiple_files_depiction_header">Osservazione sui caricamenti multipli</string>
@@ -846,7 +840,6 @@
   <string name="usages_on_other_wikis_heading">Altri wiki</string>
   <string name="bullet_point">•</string>
   <string name="file_usages_container_heading">Utilizzi del file</string>
-  <string name="title_activity_single_web_view">SingleWebViewActivity</string>
   <string name="account">Utenza</string>
   <string name="vanish_account">Elimina l\'utenza</string>
   <string name="account_vanish_request_confirm_title">Avviso di eliminazione dell\'utenza</string>

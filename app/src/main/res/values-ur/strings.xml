@@ -13,20 +13,18 @@
     <item quantity="one">%1$d فائل اپلوڈ ہورہی ہے</item>
     <item quantity="other">%1$d فائلیں اپلوڈ ہورہی ہے</item>
   </plurals>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">%1$d اپلوڈ</item>
-    <item quantity="other">%1$d اپلوڈ</item>
-  </plurals>
   <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">شروع %1$d اپلوڈ</item>
-    <item quantity="other">شروع %d$1 اپلوڈ</item>
+    <item quantity="other">شروع %1$d اپلوڈ</item>
   </plurals>
-  <plurals name="multiple_uploads_title" fuzzy="true">
+  <plurals name="multiple_uploads_title">
     <item quantity="one">%1$d اپلوڈ</item>
     <item quantity="other">%1$d اپلوڈز</item>
   </plurals>
-  <string name="share_license_summary" fuzzy="true">%1$s تلے یہ تصویر لائسنس یافتہ ہو گی</string>
+  <plurals name="share_license_summary" fuzzy="true">
+    <item quantity="one">%1$s تلے یہ تصویر لائسنس یافتہ ہو گی</item>
+    <item quantity="other">یہ تصاویر %1$s کے تحت لائسنس یافتہ ہوں گی</item>
+  </plurals>
   <string name="navigation_item_explore">ایکسپلور</string>
   <string name="preference_category_appearance">ظاہریت</string>
   <string name="preference_category_general">عمومی</string>

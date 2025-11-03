@@ -8,7 +8,7 @@
 -->
 <resources>
   <string name="commons_facebook">Викиҗыентыкның Facebook бите</string>
-  <string name="commons_github">Викиҗыентыкның гитхабтагы башлангыч кодлары</string>
+  <string name="commons_github" fuzzy="true">Викиҗыентыкның гитхабтагы башлангыч кодлары</string>
   <string name="commons_logo">Викиҗыентык логотипы</string>
   <string name="commons_website">Викиҗыентыкның веб-сайты</string>
   <string name="exit_location_picker">Урынны сайлау тәрәзәсеннән чыгарга</string>
@@ -34,24 +34,18 @@
     <item quantity="many">%1$d файл йөкләнә</item>
     <item quantity="other">%1$d файл йөкләнә</item>
   </plurals>
-  <plurals name="contributions_subtitle">
-    <item quantity="one">(%1$d)</item>
-    <item quantity="few">(%1$d)</item>
-    <item quantity="many">(%1$d)</item>
-    <item quantity="other">(%1$d)</item>
-  </plurals>
   <string name="starting_uploads">Йөкләү башлана</string>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">%d йөкләүне эшкәртү</item>
-    <item quantity="few">%d йөкләүне эшкәртү</item>
-    <item quantity="many">%d йөкләүне эшкәртү</item>
-    <item quantity="other">%d йөкләүне эшкәртү</item>
+    <item quantity="one">%1$d йөкләүне эшкәртү</item>
+    <item quantity="few">%1$d йөкләүне эшкәртү</item>
+    <item quantity="many">%1$d йөкләүне эшкәртү</item>
+    <item quantity="other">%1$d йөкләүне эшкәртү</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">%d йөкләү</item>
-    <item quantity="few">%d йөкләү</item>
-    <item quantity="many">%d йөкләү</item>
-    <item quantity="other">%d йөкләү</item>
+    <item quantity="one">%1$d йөкләү</item>
+    <item quantity="few">%1$d йөкләү</item>
+    <item quantity="many">%1$d йөкләү</item>
+    <item quantity="other">%1$d йөкләү</item>
   </plurals>
   <string name="navigation_item_explore">Тикшерергә</string>
   <string name="preference_category_appearance">Күренеш</string>
@@ -80,7 +74,7 @@
   <string name="uploading_started">Йөкләү башланды!</string>
   <string name="upload_completed_notification_title">%1$s төялде!</string>
   <string name="upload_completed_notification_text">Төялгән файлыгызны карау өчен басыгыз</string>
-  <string name="upload_progress_notification_title_start">Файлны төяү: %s</string>
+  <string name="upload_progress_notification_title_start">Файлны төяү: %1$s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s йөкләнә</string>
   <string name="upload_progress_notification_title_finishing">%1$s йөкләве тәмамлана</string>
   <string name="upload_failed_notification_title">%1$s йөкләнә алмады</string>

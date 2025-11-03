@@ -26,7 +26,7 @@
 -->
 <resources>
   <string name="commons_facebook">कॉमन्स फेसबुक पृष्ठ</string>
-  <string name="commons_github">कॉमन्स गिटहब सोर्स कोड</string>
+  <string name="commons_github" fuzzy="true">कॉमन्स गिटहब सोर्स कोड</string>
   <string name="commons_logo">कॉमन्स का प्रतीक चिन्ह</string>
   <string name="commons_website">कॉमन्स का जालस्थान</string>
   <string name="exit_location_picker">निकास स्थान चयनकर्ता</string>
@@ -49,18 +49,14 @@
     <item quantity="one">%1$d फ़ाइल अपलोड हो रही</item>
     <item quantity="other">%1$d फ़ाइलें अपलोड हो रहीं</item>
   </plurals>
-  <plurals name="contributions_subtitle">
-    <item quantity="one">(%1$d)</item>
-    <item quantity="other">(%1$d)</item>
-  </plurals>
   <string name="starting_uploads">अपलोड शुरू</string>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">%d अपलोड संसाधित</item>
-    <item quantity="other">%d अपलोड संसाधित</item>
+    <item quantity="one">%1$d अपलोड संसाधित</item>
+    <item quantity="other">%1$d अपलोड संसाधित</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">%d अपलोड</item>
-    <item quantity="other">%d अपलोड</item>
+    <item quantity="one">%1$d अपलोड</item>
+    <item quantity="other">%1$d अपलोड</item>
   </plurals>
   <plurals name="share_license_summary">
     <item quantity="one">इस चित्र का प्रयोग %1$s लाइसेंस के अन्तर्गत होगा</item>
@@ -208,15 +204,14 @@
   <string name="become_a_tester_description">गूगल प्ले पर हमारे बीटा चैनल का चयन करें और नई सुविधाओं व त्रुटिसुधारों तक पहले पहुँचे</string>
   <string name="_2fa_code">2 एफए कोड</string>
   <string name="logout_verification">क्या आप वास्तव में निकास करना चाहते हैं?</string>
-  <string name="mediaimage_failed">मीडिया छवि विफल</string>
   <string name="no_subcategory_found">कोई उपश्रेणी नहीं मिली</string>
   <string name="no_parentcategory_found">कोई मूल श्रेणी नहीं मिली</string>
   <string name="welcome_image_mount_zao">माउंट ज़ाओ</string>
   <string name="welcome_image_llamas">ल्लामस</string>
   <string name="welcome_image_rainbow_bridge">इंद्रधनुष के पुल</string>
   <string name="welcome_image_tulip">ट्यूलिप</string>
-  <string name="welcome_image_welcome_wikipedia">विकिपीडिया में स्वागत है</string>
-  <string name="welcome_image_welcome_copyright">प्रतिलिप्याधिकार में स्वागत है</string>
+  <string name="welcome_image_welcome_wikipedia" fuzzy="true">विकिपीडिया में स्वागत है</string>
+  <string name="welcome_image_welcome_copyright" fuzzy="true">प्रतिलिप्याधिकार में स्वागत है</string>
   <string name="welcome_image_sydney_opera_house">सिडनी का ओपेरा हाउस</string>
   <string name="cancel">रद्द करें</string>
   <string name="navigation_drawer_open">खोलें</string>
@@ -319,11 +314,10 @@
   <string name="delete">हटाएँ</string>
   <string name="Achievements">उपलब्धियाँ</string>
   <string name="Profile">प्रोफ़ाइल</string>
-  <string name="statistics">सांख्यिकी</string>
   <string name="statistics_thanks">धन्यवाद प्राप्त किया</string>
   <string name="statistics_featured">निर्वाचित चित्र</string>
-  <string name="level">स्तर %d</string>
-  <string name="profile_withLevel">%s (स्तर %s )</string>
+  <string name="level">स्तर %1$d</string>
+  <string name="profile_withLevel">%1$s (स्तर %2$s )</string>
   <string name="images_uploaded">चित्र अपलोड हुआ</string>
   <string name="image_reverts">चित्रों को वापस नहीं किया गया</string>
   <string name="images_used_by_wiki">उपयोग हुए चित्र</string>

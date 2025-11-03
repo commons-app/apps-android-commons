@@ -5,7 +5,7 @@
 -->
 <resources>
   <string name="commons_facebook">Pagino di Commons che Facebook</string>
-  <string name="commons_github">Fonto-kodexo di Commons che Github</string>
+  <string name="commons_github" fuzzy="true">Fonto-kodexo di Commons che Github</string>
   <string name="commons_logo">Logotipo* di Commons</string>
   <string name="commons_website">ret-situo di Commons</string>
   <string name="exit_location_picker">Ekirar la lokizo-selektero</string>
@@ -29,18 +29,14 @@
     <item quantity="one">%1$d sendanta arkivo</item>
     <item quantity="other">%1$d sendanta arkivi</item>
   </plurals>
-  <plurals name="contributions_subtitle">
-    <item quantity="one">(%1$d)</item>
-    <item quantity="other">(%1$d)</item>
-  </plurals>
   <string name="starting_uploads">Komencar sendaji</string>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">Karganta %d arkivo</item>
-    <item quantity="other">Karganta %d arkivi</item>
+    <item quantity="one">Karganta %1$d arkivo</item>
+    <item quantity="other">Karganta %1$d arkivi</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">%d arkivo sendita</item>
-    <item quantity="other">%d arkivi sendita</item>
+    <item quantity="one">%1$d arkivo sendita</item>
+    <item quantity="other">%1$d arkivi sendita</item>
   </plurals>
   <plurals name="share_license_summary">
     <item quantity="one">La licenco di ca imajo esos %1$s</item>
@@ -84,7 +80,7 @@
   <string name="uploading_queued">Sendajo ajornata (modulo \"limitizita konekto\" aktiva)</string>
   <string name="upload_completed_notification_title">%1$s sendesis!</string>
   <string name="upload_completed_notification_text">Kliktez por vidar vua sendajo</string>
-  <string name="upload_progress_notification_title_start">Sendanta arkivo: %s</string>
+  <string name="upload_progress_notification_title_start">Sendanta arkivo: %1$s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s karganta</string>
   <string name="upload_progress_notification_title_finishing">Finis sendar %1$s</string>
   <string name="upload_failed_notification_title">Faliis sendar %1$s</string>
@@ -134,6 +130,7 @@
   <string name="title_activity_settings">Preferaji</string>
   <string name="title_activity_signup">Enirez</string>
   <string name="title_activity_featured_images">Remarkinda imaji</string>
+  <string name="images_featured_explanation" fuzzy="true">Imaji saliigita (Angle: \'\'featured\'\') esas fotografuri facita da multe habila fotografisti ed ilustristi, qui selektesis da la komunitato di Wikimedia kom apartenanta a la maxim bona imaji de la retosituo.</string>
   <string name="title_activity_custom_selector">Personalizita selektilo</string>
   <string name="title_activity_category_details">Kategorio</string>
   <string name="title_activity_review">Atencoza revizo</string>
@@ -219,15 +216,14 @@
   <string name="_2fa_code">Kodexo 2FA</string>
   <string name="email_auth_code">Kodexo sendita ad e-postal adreso</string>
   <string name="logout_verification">Ka vu deziras ekirar?</string>
-  <string name="mediaimage_failed">Faliis montrar imajo</string>
   <string name="no_subcategory_found">Nula subkategorio trovesis</string>
   <string name="no_parentcategory_found">Nula kategorio precipua trovesis</string>
   <string name="welcome_image_mount_zao">Monto Zao</string>
   <string name="welcome_image_llamas">Lamao</string>
   <string name="welcome_image_rainbow_bridge">Pluv-arko ponto</string>
   <string name="welcome_image_tulip">Tulipo</string>
-  <string name="welcome_image_welcome_wikipedia">Bonveno a Wikipedio</string>
-  <string name="welcome_image_welcome_copyright">Autoroyuro dil \'Bonveno\'-mesajo</string>
+  <string name="welcome_image_welcome_wikipedia" fuzzy="true">Bonveno a Wikipedio</string>
+  <string name="welcome_image_welcome_copyright" fuzzy="true">Autoroyuro dil \'Bonveno\'-mesajo</string>
   <string name="welcome_image_sydney_opera_house">Opero-domo di Sydney</string>
   <string name="cancel">Nuligar</string>
   <string name="navigation_drawer_open">Apertar</string>
@@ -363,12 +359,11 @@
   <string name="Achievements">Sucesi</string>
   <string name="Profile">Profilo</string>
   <string name="badges">Insigni</string>
-  <string name="statistics">Statistiko</string>
   <string name="statistics_thanks">Danki recevita</string>
   <string name="statistics_featured">Remarkinda imaji</string>
   <string name="statistics_wikidata_edits">Imaji tra \"Loki Vicina\"</string>
-  <string name="level">Nivelo %d</string>
-  <string name="profile_withLevel">%s (Nivelo %s)</string>
+  <string name="level">Nivelo %1$d</string>
+  <string name="profile_withLevel">%1$s (Nivelo %2$s)</string>
   <string name="images_uploaded">Imaji sendita</string>
   <string name="image_reverts">Imaji ne reversionita</string>
   <string name="images_used_by_wiki">Imaji uzita</string>
@@ -428,7 +423,7 @@
   <string name="never_ask_again">Ne pluse demandez to</string>
   <string name="display_location_permission_title">Demandar lokala permiso</string>
   <string name="display_location_permission_explanation">Demandez lokala permiso, kande bezonata por uzar karto montranta proximeso.</string>
-  <string name="achievements_fetch_failed">Ulu faliis, ni ne povis montrar vua sucesi</string>
+  <string name="achievements_fetch_failed" fuzzy="true">Ulu faliis, ni ne povis montrar vua sucesi</string>
   <string name="achievements_fetch_failed_ultimate_achievement">Vu facis plu multa kontributaji, e nia kalkulo-utensilo ne povis kalkular li. To esis la maxim importanta suceso.</string>
   <string name="ends_on">Finas la:</string>
   <string name="display_campaigns">Montrez kampanii</string>
@@ -456,11 +451,11 @@
   <string name="check_category_failure_message">Ne povis demandar verifiko di kategorio por %1$s</string>
   <string name="check_category_toast">Demandanta verifiko di kategorio por %1$s</string>
   <string name="nominate_for_deletion_done">Facita</string>
-  <string name="send_thank_success_title">Sendanta danko: Suceso</string>
-  <string name="send_thank_success_message">Danko sendita sucese a %1$s</string>
-  <string name="send_thank_failure_message">Faliis pri sendar danko a %1$s</string>
-  <string name="send_thank_failure_title">Sendanta danko: Falio</string>
-  <string name="send_thank_toast">Sendanta danko a %1$s</string>
+  <string name="send_thank_success_title" fuzzy="true">Sendanta danko: Suceso</string>
+  <string name="send_thank_success_message" fuzzy="true">Danko sendita sucese a %1$s</string>
+  <string name="send_thank_failure_message" fuzzy="true">Faliis pri sendar danko a %1$s</string>
+  <string name="send_thank_failure_title" fuzzy="true">Sendanta danko: Falio</string>
+  <string name="send_thank_toast" fuzzy="true">Sendanta danko a %1$s</string>
   <string name="review_copyright">Ka to obedias la reguli pri autoroyuro?</string>
   <string name="review_category">Ka lua kategorio esas korekta?</string>
   <string name="review_spam">Ka to apartenas al skopo dil projeto?</string>
@@ -487,15 +482,14 @@
   <string name="menu_option_unread">Vidar ne-lektata</string>
   <string name="error_occurred_in_picking_images">Eventis eroro dum selekto di imaji</string>
   <string name="please_wait">Vartez...</string>
-  <string name="images_featured_explanation">Imaji saliigita (Angle: \'\'featured\'\') esas fotografuri facita da multe habila fotografisti ed ilustristi, qui selektesis da la komunitato di Wikimedia kom apartenanta a la maxim bona imaji de la retosituo.</string>
   <string name="images_via_nearby_explanation">Imaji sendita uzanta resurso \'\'Nearby places\'\' esas imaji sendita pos deskovro di loki en la mapo.</string>
   <string name="thanks_received_explanation">Ca utensilo posibligas editeri sendar \'\'danko\'\' ad uzeri qui facis utila redakturi - per sendo di mikra ligilo \"danko\" che historio-pagino o pagino pri diferi.</string>
-  <string name="copy_image_caption_description">Kopiar a sequanta enmagazinigo-moyeno</string>
+  <string name="copy_image_caption_description" fuzzy="true">Kopiar a sequanta enmagazinigo-moyeno</string>
   <string name="copied_successfully">Kopiita</string>
   <string name="welcome_do_upload_content_description">Exempli pri bona imaji por sendar a Commons</string>
   <string name="welcome_dont_upload_content_description">Exempli pri imaji por NE SENDAR</string>
   <string name="skip_image">Saltez ca imajo</string>
-  <string name="download_failed_we_cannot_download_the_file_without_storage_permission">Descharjo faliis!! Ni ne povis descharjar l\'arkivo sen permiso pri extera konservo.</string>
+  <string name="download_failed_we_cannot_download_the_file_without_storage_permission" fuzzy="true">Descharjo faliis!! Ni ne povis descharjar l\'arkivo sen permiso pri extera konservo.</string>
   <string name="manage_exif_tags">Administrar etiketi EXIF</string>
   <string name="manage_exif_tags_summary">Dum sendo di arkivi, selektez quala etiketi EXIF devas mantenesar</string>
   <string name="exif_tag_name_author">Autoro</string>
@@ -505,8 +499,6 @@
   <string name="exif_tag_name_lensModel">Modelo di lenso</string>
   <string name="exif_tag_name_serialNumbers">Serio-nombro</string>
   <string name="exif_tag_name_software">Software</string>
-  <string name="media_location_permission_denied">Aceso ad enmagazinigo-moyeno ne permisita</string>
-  <string name="add_location_manually">Posible ni ne povos obtenar automatale datumi pri lokizi dil imaji quin vu sendis. Voluntez furnisar sata lokizo di irga fotografuro, ante sendar ol.</string>
   <string name="share_text">Sendez fotografuri direte de vua smartfono a Wikimedia Commons. Descharjez l\'\'\'app\'\' nun: %1$s</string>
   <string name="share_via">Partigar utensilo \'\'app\'\' per...</string>
   <string name="image_info">Informo pri imajo</string>
@@ -562,7 +554,7 @@
   <string name="description_activity_title">Redaktar deskripturi ed informo-texti</string>
   <string name="share_image_via">Partigar imajo uzanta</string>
   <string name="you_have_no_achievements_yet">Vu ankore ne facis kontributaji</string>
-  <string name="no_achievements_yet">%s ankore ne facis irga kontributado</string>
+  <string name="no_achievements_yet">%1$s ankore ne facis irga kontributado</string>
   <string name="account_created">Konto kreesis!</string>
   <string name="text_copy">Texto kopiita a \'\'clipboard\'\'</string>
   <string name="notification_mark_read">Mesajo indikita kom \'lektita\'</string>
@@ -571,7 +563,7 @@
   <string name="place_state_exists">Existas</string>
   <string name="place_state_needs_photo">Bezonas fotografuro</string>
   <string name="place_type">Tipo di lokizo:</string>
-  <string name="nearby_search_hint">Ponto, muzeo, hotelo, edc.</string>
+  <string name="nearby_search_hint" fuzzy="true">Ponto, muzeo, hotelo, edc.</string>
   <string name="you_must_reset_your_passsword">Irgu faliis dum \'\'log in\'\'. Vu mustos ridefinar vua pasovorto!!</string>
   <string name="title_for_media">\'\'MEDIA\'\'</string>
   <string name="title_for_child_classes">SUBKLASI</string>
@@ -615,7 +607,7 @@
   <string name="wikipedia_instructions_step_5">5. Kopiez la texto wiki che adequata loko.</string>
   <string name="wikipedia_instructions_step_6">6. Se bezonata, redaktez la texto wiki por adequata pozado. Por plusa informo, videz &lt;a href=\"https://en.wikipedia.org/wiki/Wikipedia:Manual_of_Style/Images#How_to_place_an_image\"&gt;hike&lt;/a&gt;.</string>
   <string name="wikipedia_instructions_step_7">Publikigar l\'artiklo</string>
-  <string name="copy_wikicode_to_clipboard">Kopiar wikikodexo a transfero-areo di la komputatoro</string>
+  <string name="copy_wikicode_to_clipboard" fuzzy="true">Kopiar wikikodexo a transfero-areo di la komputatoro</string>
   <string name="pause">pauzar</string>
   <string name="resume">durigar</string>
   <string name="paused">Pauzita</string>
@@ -682,7 +674,7 @@
   <string name="back">Retroirar</string>
   <string name="welcome_custom_picture_selector_text">Bonveno a personalizita selektilo di imaji</string>
   <string name="custom_selector_info_text1">Ica selektilo montras quala imaji vu ja sendis a Commons.</string>
-  <string name="custom_selector_info_text2">Diferanta dil imajo adsinistre, l\'imajo addextre havas la logotipö Commons, qua indikas ke ol ja sendesis. \n Kliktez e mantenez por previdado dil imajo.</string>
+  <string name="custom_selector_info_text2" fuzzy="true">Diferanta dil imajo adsinistre, l\'imajo addextre havas la logotipö Commons, qua indikas ke ol ja sendesis. \n Kliktez e mantenez por previdado dil imajo.</string>
   <string name="welcome_custom_selector_ok">Ecelanta</string>
   <string name="custom_selector_already_uploaded_image_text">Ca imajo ja sendesis a Commons.</string>
   <string name="custom_selector_over_limit_warning">Por teknikala motivi, l\'utensilo \'\'app\'\' ne povas fidinde sendar plua kam %1$d pikturi samatempe. La limito %1$d superesis per %2$d.</string>
@@ -696,8 +688,8 @@
   <string name="wlm_campaign_description">\'\'Wiki Loves Monuments\'\' esas internaciona konkurso pri fotografado di monumenti, organizita da Wikimedia</string>
   <string name="need_permission">Bezonas permiso</string>
   <string name="read_phone_state_permission_message">Mapi di vicina loki mustas lektar la STANDO DI TELEFONO, por funcionar korekte</string>
-  <string name="contributions_of_user">Kontributadi dil uzero: %s</string>
-  <string name="achievements_of_user">Sucesi dil uzero: %s</string>
+  <string name="contributions_of_user">Kontributadi dil uzero: %1$s</string>
+  <string name="achievements_of_user">Sucesi dil uzero: %1$s</string>
   <string name="menu_view_user_page">Vidar profilo dil uzero</string>
   <string name="edit_depictions">Redaktar deskripturi</string>
   <string name="edit_categories">Redaktar kategorii</string>
@@ -708,7 +700,7 @@
   <string name="location_message">Datumi pri lokizo helpas editeri di Wiki trovar vua imajo, do ol divenas plu uzebla.\nL\'imaji quin vu sendis recente ne mencionas lokizo.\nNi sugestas ke vu kapabligez lokizo en l\'ajusti di vua kamero.\nDanko por sendar imaji!</string>
   <string name="no_location_found_title">Nula lokizo trovita</string>
   <string name="no_location_found_message">Ka vu deziras informar la loko de ube vu obtenis ca imajo?\nInformo pri la lokizo helpos editeri trovar vua imajo, do ol divenos plu utila.\nDanko!</string>
-  <string name="add_location">Adjuntez lokizo</string>
+  <string name="add_location" fuzzy="true">Adjuntez lokizo</string>
   <string name="feedback_sharing_data_alert">Voluntez removar de ca e-postala mesajo irga informo quan vu ne deziras divenar publika. Anke konciez ke vua e-postal-adreso quan vu esas uzanta, vua nomo e l\'imajo asociita a vu divenos publike videbla.</string>
   <string name="explore_map_details">Detali</string>
   <string name="achievements_unavailable_beta">Sucesi nur esas disponebla en la definitiva versiono. Voluntez verifikar la dokumentigo pri developo.</string>
@@ -729,8 +721,8 @@
   <string name="unmark_as_not_for_upload">Itere indikez por sendar ol</string>
   <string name="marking_as_not_for_upload">Indikanta ke ol ne sendesos</string>
   <string name="unmarking_as_not_for_upload">Indikita kom por ne sendar</string>
-  <string name="show_already_actioned_pictures">Montrar imaji ja traktita</string>
-  <string name="hiding_already_actioned_pictures">Celanta imaji ja traktita</string>
+  <string name="show_already_actioned_pictures" fuzzy="true">Montrar imaji ja traktita</string>
+  <string name="hiding_already_actioned_pictures" fuzzy="true">Celanta imaji ja traktita</string>
   <string name="no_more_images_found">Ne trovesis plusa imaji</string>
   <string name="this_image_is_already_uploaded">Ca imajo ja sendesis</string>
   <string name="can_not_select_this_image_for_upload">Ne povis selektar ca imajo por sendar (\'\'upload\'\')</string>
@@ -766,15 +758,15 @@
   <string name="invalid_login_message">La tempo-quanto por vua \'\'log in\'\' finis. Voluntez itere enirar.</string>
   <string name="no_application_available_to_open_gpx_files">Nula utensilo \'\'app\'\' disponebla por apertar arkivi GPX</string>
   <string name="file_saved_successfully">Konservo sucesoza di arkivo</string>
-  <string name="do_you_want_to_open_gpx_file">Ka vu deziras apertar arkivo GPX?</string>
-  <string name="do_you_want_to_open_kml_file">Ka vu deziras apartar l\'arkivo KML?</string>
-  <string name="failed_to_save_kml_file">Faliis pri konservar arkivo KML.</string>
-  <string name="failed_to_save_gpx_file">Faliis pri konservar arkivo GPX.</string>
-  <string name="saving_kml_file">Konservanta arqkivo KML</string>
-  <string name="saving_gpx_file">Konservanta arkivo GPX</string>
+  <string name="do_you_want_to_open_gpx_file" fuzzy="true">Ka vu deziras apertar arkivo GPX?</string>
+  <string name="do_you_want_to_open_kml_file" fuzzy="true">Ka vu deziras apartar l\'arkivo KML?</string>
+  <string name="failed_to_save_kml_file" fuzzy="true">Faliis pri konservar arkivo KML.</string>
+  <string name="failed_to_save_gpx_file" fuzzy="true">Faliis pri konservar arkivo GPX.</string>
+  <string name="saving_kml_file" fuzzy="true">Konservanta arqkivo KML</string>
+  <string name="saving_gpx_file" fuzzy="true">Konservanta arkivo GPX</string>
   <plurals name="custom_picker_images_selected_title_appendix">
-    <item quantity="one">%d imajo selektita</item>
-    <item quantity="other">%d imaji selektita</item>
+    <item quantity="one">%1$d imajo selektita</item>
+    <item quantity="other">%1$d imaji selektita</item>
   </plurals>
   <string name="multiple_files_depiction">Savez ke omna imaji, kande sendesas kune, recevas la sama kategorii, e deskripturi. Se ta imaji ne havas la sama deskripti e kategorii, voluntez facar diversa sendaji separata.</string>
   <string name="multiple_files_depiction_header">Noto pri multopla sendado di imaji</string>
@@ -810,7 +802,6 @@
   <string name="usages_on_commons_heading">Commons</string>
   <string name="usages_on_other_wikis_heading">Altra wiki</string>
   <string name="file_usages_container_heading">Uzi dil arkivo</string>
-  <string name="title_activity_single_web_view">SingleWebViewActivity</string>
   <string name="account">Konto</string>
   <string name="vanish_account">Efacar konto</string>
   <string name="account_vanish_request_confirm_title">Avizo pri efaco di konto</string>

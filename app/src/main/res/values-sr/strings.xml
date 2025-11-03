@@ -16,7 +16,7 @@
 -->
 <resources>
   <string name="commons_facebook">Фејсбук страница Оставе</string>
-  <string name="commons_github">Изворни код на Github-у</string>
+  <string name="commons_github">Commons GitHub Source Code</string>
   <string name="commons_logo">Лого Оставе</string>
   <string name="commons_website">Веб-сајт Оставе</string>
   <string name="submit">Пошаљи</string>
@@ -37,18 +37,15 @@
     <item quantity="one">%1$d датотека се отпрема</item>
     <item quantity="other">%1$d датотеке се отпремају</item>
   </plurals>
-  <plurals name="contributions_subtitle">
-    <item quantity="one">%1$d отпремање</item>
-    <item quantity="other">%1$d отпремања</item>
-  </plurals>
   <string name="starting_uploads">Покретање отпремања</string>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">Процесуирање %d отпремање</item>
-    <item quantity="other">Процесуирање %d отпремања</item>
+    <item quantity="one">Процесуирање %1$d отпремање</item>
+    <item quantity="few">Процесуирање %1$d отпремање</item>
+    <item quantity="other">Процесуирање %1$d отпремање</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">%d отпремање</item>
-    <item quantity="other">%d отпремања</item>
+    <item quantity="one">%1$d отпремање</item>
+    <item quantity="other">%1$d отпремања</item>
   </plurals>
   <plurals name="share_license_summary">
     <item quantity="one">Слика ће се водити под лиценцом %1$s</item>
@@ -92,7 +89,7 @@
   <string name="uploading_queued">Отпремање је у реду (омогућен режим ограничене везе)</string>
   <string name="upload_completed_notification_title">Датотека „%1$s” је отпремљена.</string>
   <string name="upload_completed_notification_text">Додирните да бисте видели отпремање</string>
-  <string name="upload_progress_notification_title_start">Отпремање датотеке „%s”</string>
+  <string name="upload_progress_notification_title_start">Отпремање датотеке: %1$s</string>
   <string name="upload_progress_notification_title_in_progress">Отпремање датотеке „%1$s”</string>
   <string name="upload_progress_notification_title_finishing">Завршавање отпремања датотеке „%1$s”</string>
   <string name="upload_failed_notification_title">Отпремање датотеке „%1$s” није успело</string>
@@ -137,6 +134,7 @@
   <string name="title_activity_settings">Подешавања</string>
   <string name="title_activity_signup">Отвори налог</string>
   <string name="title_activity_featured_images">Изабране слике</string>
+  <string name="images_featured_explanation">Истакнуте слике су слике искусних фотографа и илустратора, које је заједница Викимедијине оставе одабрала као неке од највећег квалитета на сајту.</string>
   <string name="title_activity_category_details">Категорија</string>
   <string name="title_activity_review">Преглед слика</string>
   <string name="menu_about">О апликацији</string>
@@ -222,15 +220,14 @@
   <string name="become_a_tester_description">Прикључите се нашем каналу бета верзија на Google Play-у и раније приступајте новим функцијама и исправкама грешака</string>
   <string name="_2fa_code">2FA код</string>
   <string name="logout_verification">Заиста желите да се одјавите?</string>
-  <string name="mediaimage_failed">Медијска слика неуспешна</string>
   <string name="no_subcategory_found">Поткатегорије нису пронађене</string>
   <string name="no_parentcategory_found">Надређене категорије нису пронађене</string>
   <string name="welcome_image_mount_zao">Планина Зао</string>
   <string name="welcome_image_llamas">Ламе</string>
   <string name="welcome_image_rainbow_bridge">Дугин мост</string>
   <string name="welcome_image_tulip">Тулипан</string>
-  <string name="welcome_image_welcome_wikipedia">Добродошлица Википедији</string>
-  <string name="welcome_image_welcome_copyright">Добродошлица за ауторска права</string>
+  <string name="welcome_image_welcome_wikipedia">Шематска слика генеричког Википедијиног чланка.</string>
+  <string name="welcome_image_welcome_copyright">Цртеж наслаганих папира са прецртаним знаком за ауторска права.</string>
   <string name="welcome_image_sydney_opera_house">Сиднејска опера</string>
   <string name="cancel">Откажи</string>
   <string name="navigation_drawer_open">Отвори</string>
@@ -334,6 +331,7 @@
   <string name="quiz">Квиз</string>
   <string name="quiz_question_string">Желите ли да отпремите ову слику?</string>
   <string name="question">Питање</string>
+  <string name="quiz_i_am_not_sure">Нисам сигуран</string>
   <string name="result">Резултат</string>
   <string name="quiz_back_button">Ако наставите са отпремањем слика које захтевају брисање, ваш налог ће вероватно бити блокиран. Заиста желите да завршите квиз?</string>
   <string name="quiz_alert_message">Више од %1$s слика које сте отпремили је обрисано. Уколико наставите да отпремате слике које је потребно обрисано, ваш налог ће највероватније бити блокиран.\n\nДа ли сте желели да видите туторијал поново и онда урадите квиз који ће вам помоћи да научите које слике требате или не требате да отпремате?</string>
@@ -343,6 +341,7 @@
   <string name="blurry_image_answer">Један од циљева Оставе је прикупљање квалитетних слика. Због тога не би требало отпремати мутне слике. Увек покушајте да направите лепе слике са добрим осветљењем.</string>
   <string name="construction_event_answer">Слике из области технологије или културе су добродошле на Остави.</string>
   <string name="congratulatory_message_quiz">Тачних одговора: %1$s. Честитамо!</string>
+  <string name="quiz_continue">Настави</string>
   <string name="warning_for_no_answer">Изаберите једну од две опције да бисте одговорили на питање</string>
   <string name="user_not_logged_in">Сесија пријаве је истекла. Пријавите се поново.</string>
   <string name="quiz_result_share_message">Делите квиз са пријатељима.</string>
@@ -364,11 +363,10 @@
   <string name="delete">Избриши</string>
   <string name="Achievements">Достигнућа</string>
   <string name="Profile">Профил</string>
-  <string name="statistics">Статистика</string>
   <string name="statistics_thanks">Захваљивања</string>
   <string name="statistics_featured">Изабране слике</string>
   <string name="statistics_wikidata_edits">Слике преко „Места у близини”</string>
-  <string name="level">Ниво %d</string>
+  <string name="level">Ниво %1$d</string>
   <string name="images_uploaded">Отпремљене слике</string>
   <string name="image_reverts">Слике које нису уклоњене</string>
   <string name="images_used_by_wiki">Искоришћене слике</string>
@@ -455,7 +453,7 @@
   <string name="check_category_toast">Захтевање провере категорије за %1$s</string>
   <string name="nominate_for_deletion_done">Урађено</string>
   <string name="send_thank_success_title">Слање захвалнице: Успешно</string>
-  <string name="send_thank_success_message">Успешно послата захвалница на %1$s</string>
+  <string name="send_thank_success_message">Послата захвалница на %1$s</string>
   <string name="send_thank_failure_message">Није успело слање захвалнице %1$s</string>
   <string name="send_thank_failure_title">Слање захвалнице: Није успело</string>
   <string name="send_thank_toast">Слање захвалница за %1$s</string>
@@ -483,14 +481,13 @@
   <string name="menu_option_unread">Прикажи непрочитано</string>
   <string name="error_occurred_in_picking_images">Дошло је до грешке при избору слика</string>
   <string name="please_wait">Сачекајте…</string>
-  <string name="images_featured_explanation">Истакнуте слике су слике од веома искусних фотографа и илустратора, које је заједница Викимедијине оставе одабрала као неке од највећег квалитета на сајту.</string>
   <string name="images_via_nearby_explanation">Слике отпремљене преко Места у близини су слике које су отпремљене откривањем места на мапи.</string>
   <string name="thanks_received_explanation">Ова могућност омогућава уредницима да пошању обавештење захваљивања корисницима који су направили корисне измене - коришћењем мале везе за захваљивање на страници историје или разлици измена.</string>
   <string name="copied_successfully">Копирано</string>
   <string name="welcome_do_upload_content_description">Примери добрих слика за отпремање на Оставу</string>
   <string name="welcome_dont_upload_content_description">Примери слика које нису за отпремање</string>
   <string name="skip_image">Прескочи слику</string>
-  <string name="download_failed_we_cannot_download_the_file_without_storage_permission">Преузимање није успело!! Не можемо преузети датотеку без дозволе за приступ спољашњој меморији.</string>
+  <string name="download_failed_we_cannot_download_the_file_without_storage_permission">Преузимање није успело. Не можемо преузети датотеку без дозволе за приступ спољашњој меморији.</string>
   <string name="manage_exif_tags">Управљање EXIF ознакама</string>
   <string name="manage_exif_tags_summary">Одаберите које EXIF желите да сачувате у отпремањима</string>
   <string name="exif_tag_name_author">Аутор</string>
@@ -500,8 +497,6 @@
   <string name="exif_tag_name_lensModel">Модел објектива</string>
   <string name="exif_tag_name_serialNumbers">Серијски бројеви</string>
   <string name="exif_tag_name_software">Софтвер</string>
-  <string name="media_location_permission_denied">Приступ локацији медија је одбијен</string>
-  <string name="add_location_manually">Можда нећемо моћи да аутоматски прибавимо податке о локацији из слика које отпремите. Додајте одговарајућу локацију за сваку слику пре објављивања</string>
   <string name="share_text">Отпреми фотографије на Викимедијину Оставу директно са свог телефона. Преузми апликацију Оставе сада: %1$s</string>
   <string name="share_via">Подели апликацију преко...</string>
   <string name="image_info">Информације о слици</string>
@@ -549,7 +544,7 @@
   <string name="description_activity_title">Уреди описе и натписе</string>
   <string name="share_image_via">Подели слику преко</string>
   <string name="you_have_no_achievements_yet">Немате још увек доприноса</string>
-  <string name="no_achievements_yet">%s још није доприносио/ла</string>
+  <string name="no_achievements_yet">%1$s још није доприносио/ла</string>
   <string name="account_created">Налог је отворен.</string>
   <string name="text_copy">Текст је копиран у привремену меморију</string>
   <string name="notification_mark_read">Обавештење је означено прочитаним</string>
@@ -593,7 +588,7 @@
   <string name="wikipedia_instructions_step_5">5. Налепите викитекст на одговарајуће место.</string>
   <string name="wikipedia_instructions_step_6">6. Измените викитекст за одговарајуће позиционирање, уколико је потребно. Више информација можете пронаћи &lt;a href=\"https://en.wikipedia.org/wiki/Wikipedia:Manual_of_Style/Images#How_to_place_an_image\"&gt;овде&lt;/a&gt;.</string>
   <string name="wikipedia_instructions_step_7">7. Објавите чланак</string>
-  <string name="copy_wikicode_to_clipboard">Копирајте вики синтаксу у међуспремник</string>
+  <string name="copy_wikicode_to_clipboard">Копирај викитекст</string>
   <string name="pause">паузирај</string>
   <string name="resume">настави</string>
   <string name="paused">Паузирано</string>
@@ -632,6 +627,8 @@
   <string name="media_details_tooltip">Напишите кратак натпис који објашњава шта слика приказује. У опису, наведите шта ову слику чини интересантном или типичном или ретком, и објасните контекст, био он видљив или не. Користите прецизну терминологију што више можете.</string>
   <string name="license_tooltip">Остава чини ваше слике вишекратним и прилагођеним свима. Да ли желите да се одрекнете свих права? Да ли желите да вам се припишу? Да ли желите адаптације за коришћење исте лиценце?</string>
   <string name="depicts_step_title">Приказује</string>
+  <string name="depicts_label">Назив</string>
+  <string name="depicts_description">Опис</string>
   <string name="license_step_title">Лиценца медија</string>
   <string name="media_detail_step_title">Детаљи медија</string>
   <string name="menu_view_category_page">Прикажи страницу категорије</string>
@@ -655,7 +652,7 @@
   <string name="back">Назад</string>
   <string name="welcome_custom_picture_selector_text">Добродошли у Прилагођен бирач слика</string>
   <string name="custom_selector_info_text1">Овај бирач вам приказује које су слике већ отпремљене на Оставу.</string>
-  <string name="custom_selector_info_text2">За разлику од слика са леве стране, слике на десној страни имају лого Оставе, што означава да су већ отпремљене. Додирните и држите за преглед слике.</string>
+  <string name="custom_selector_info_text2">За разлику од слика са леве стране, слике на десној страни имају лого Оставе, што означава да су већ отпремљене. \n\nДодирните и држите за преглед слике.</string>
   <string name="welcome_custom_selector_ok">Одлично</string>
   <string name="custom_selector_already_uploaded_image_text">Ова слика је већ отпремљена на Оставу.</string>
   <string name="custom_selector_dismiss_limit_warning_button_text">Одбаци</string>
@@ -667,8 +664,8 @@
   <string name="wlm_campaign_description">Вики воли споменике је међународно такмичење фотографија споменика, које организује Викимедија</string>
   <string name="need_permission">Потребна је дозвола</string>
   <string name="location_permission_rationale">Необавезна дозвола: преузми тренутну локацију за предлоге категорија</string>
-  <string name="contributions_of_user">Доприноси корисника/це: %s</string>
-  <string name="achievements_of_user">Достигнућа корисника/це: %s</string>
+  <string name="contributions_of_user">Доприноси корисника/це: %1$s</string>
+  <string name="achievements_of_user">Достигнућа корисника/це: %1$s</string>
   <string name="menu_view_user_page">Прикажи корисничку страницу</string>
   <string name="edit_categories">Измени категорије</string>
   <string name="advanced_options">Напредне опције</string>
@@ -698,8 +695,8 @@
   <string name="unmark_as_not_for_upload">Уклони ознаку „није за отпремање”</string>
   <string name="marking_as_not_for_upload">Означавање као „није за отпремање”</string>
   <string name="unmarking_as_not_for_upload">Уклоњена ознака „није за отпремање”</string>
-  <string name="show_already_actioned_pictures">Прикажи већ извршене слике</string>
-  <string name="hiding_already_actioned_pictures">Сакривање већ извршених слика</string>
+  <string name="show_already_actioned_pictures">Прикажи већ обрађене слике</string>
+  <string name="hiding_already_actioned_pictures">Сакривање већ обрађених слика</string>
   <string name="no_more_images_found">Није пронађено више слика</string>
   <string name="this_image_is_already_uploaded">Ова слика је већ отпремљена</string>
   <string name="can_not_select_this_image_for_upload">Није могуће одабрати ову слику за отпремање</string>
@@ -733,11 +730,11 @@
   <string name="file_saved_successfully">Чување датотеке успешно</string>
   <string name="failed_to_save_kml_file">Чување KML датотеке није успело.</string>
   <string name="failed_to_save_gpx_file">Чување GPX датотеке није успело.</string>
-  <string name="saving_kml_file">Чување KML датотеке</string>
-  <string name="saving_gpx_file">Чување GPX датотеке</string>
+  <string name="saving_kml_file">Чување KML датотеке...</string>
+  <string name="saving_gpx_file">Чување GPX датотеке...</string>
   <plurals name="custom_picker_images_selected_title_appendix">
-    <item quantity="one">%d слика је одабрана</item>
-    <item quantity="other">%d слика је одабрано</item>
+    <item quantity="one">%1$d слика је одабрана</item>
+    <item quantity="other">%1$d слика је одабрано</item>
   </plurals>
   <string name="please_enter_some_comments">Унесите коментар</string>
   <string name="talk">Разговор</string>

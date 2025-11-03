@@ -2,7 +2,7 @@
 <resources>
   <!--accessibility UI description strings-->
   <string name="commons_facebook">Commons Facebook Page</string>
-  <string name="commons_github">Commons Github Source Code</string>
+  <string name="commons_github">Commons GitHub Source Code</string>
   <string name="commons_logo">Commons Logo</string>
   <string name="commons_website">Commons Website</string>
   <string name="exit_location_picker">Exit location picker</string>
@@ -226,7 +226,6 @@
   <string name="_2fa_code">2FA Code</string>
   <string name="email_auth_code">Email verification code</string>
   <string name="logout_verification">Do you really want to logout?</string>
-  <string name="mediaimage_failed">Media Image Failed</string>
   <string name="no_subcategory_found">No subcategories found</string>
   <string name="no_parentcategory_found">No parent categories found</string>
   <string name="welcome_image_mount_zao">Mount Zao</string>
@@ -493,12 +492,12 @@ Upload your first media by tapping on the add button.</string>
   <string name="check_category_failure_message">Could not request category check for %1$s</string>
   <string name="check_category_toast">Requesting category check for %1$s</string>
   <string name="nominate_for_deletion_done">Done</string>
-  <string name="send_thank_success_title">Sending Thanks: Success</string>
+  <string name="send_thank_success_title">Sending thanks: Success</string>
   <string name="send_thank_success_message">Sent thanks to %1$s</string>
   <string name="send_thank_failure_message">Failed to send thanks to %1$s</string>
-  <string name="send_thank_failure_title">Sending Thanks: Failure</string>
+  <string name="send_thank_failure_title">Sending thanks: Failure</string>
 
-  <string name="send_thank_toast">Sending Thanks for %1$s</string>
+  <string name="send_thank_toast">Sending thanks for %1$s</string>
   <string name="review_copyright">Does this follow the rules of copyright?</string>
   <string name="review_category">Is this correctly categorized?</string>
   <string name="review_spam">Is this in-scope?</string>

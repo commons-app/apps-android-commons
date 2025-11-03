@@ -34,18 +34,14 @@
     <item quantity="one">%1$d файл жүктөлүүдө</item>
     <item quantity="other">%1$d файлдар жүктөлүүдө</item>
   </plurals>
-  <plurals name="contributions_subtitle">
-    <item quantity="one">(%1$d)</item>
-    <item quantity="other">(%1$d)</item>
-  </plurals>
   <string name="starting_uploads">Жүктөө башталууда</string>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">%d файл жүктөлүүдө</item>
-    <item quantity="other">%d файлдар жүктөлүүдө</item>
+    <item quantity="one">%1$d файл жүктөлүүдө</item>
+    <item quantity="other">%1$d файлдар жүктөлүүдө</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">%d жүктөө</item>
-    <item quantity="other">%d жүктөө</item>
+    <item quantity="one">%1$d жүктөө</item>
+    <item quantity="other">%1$d жүктөө</item>
   </plurals>
   <plurals name="share_license_summary">
     <item quantity="one">Бул сүрөт %1$s лицензиясы астында берилет</item>
@@ -89,7 +85,7 @@
   <string name="uploading_queued">Жүктөө кезекке коюлду (чектелген байланыш режими иштетилди)</string>
   <string name="upload_completed_notification_title">%1$s жүктөлдү !</string>
   <string name="upload_completed_notification_text">Жүктөлгөн файлды көрүү үчүн басыңыз</string>
-  <string name="upload_progress_notification_title_start">Файл жүктөлүүдө: %s</string>
+  <string name="upload_progress_notification_title_start">Файл жүктөлүүдө: %1$s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s жүктөлүүдө</string>
   <string name="upload_progress_notification_title_finishing">Жүктөө соңуна жетти %1$s</string>
   <string name="upload_failed_notification_title">Жүктөө %1$s иш жүзүнө ашкан жок</string>
@@ -139,6 +135,7 @@
   <string name="title_activity_settings">Параметрлер</string>
   <string name="title_activity_signup">Катталуу</string>
   <string name="title_activity_featured_images">Тандалган сүрөттөр</string>
+  <string name="images_featured_explanation">Тандалган сүрөттөр бул Викиказына жамааты доолборундагы эң жогорку сапаттагы деп тандаган, өз ишин өтө чебер фотографтар менен иллюстраторлор жүктөгөн сүрөттөр.</string>
   <string name="title_activity_custom_selector">Ыңгайлаштырылган тандоочу»</string>
   <string name="title_activity_category_details">Категория</string>
   <string name="title_activity_review">Көрүшүүчүлөрдүн баасы</string>
@@ -155,15 +152,18 @@
   <string name="no_uploads_yet">Сиз бир дагы сүрөт жүктөй элексиз.</string>
   <string name="menu_retry_upload">Кайра аракет кылуу</string>
   <string name="menu_cancel_upload">Жокко чыгаруу</string>
+  <string name="language_search_type_language_name">Тилдин атын жазыңыз</string>
+  <string name="language_search_recent_searches">Акыркы издөөлөр</string>
+  <string name="language_search_all_languages">Бардык тилдер</string>
   <string name="media_upload_policy">Бул сүрөттү жөнөтүп жатканым менен, мен анын менин жеке эмгегим экенин, анда автордук укук менен корголгон материалдар же селфилер жок экенин жана башкача айтканда &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Викиказына саясатына&lt;/a&gt; ылайык экенин билдирем.</string>
   <string name="menu_download">Жүктөп алуу</string>
   <string name="preference_license">Стандарттык лицензия</string>
   <string name="use_previous">Мурунку аталыш жана сүрөттөмөнү колдонуу</string>
   <string name="preference_theme">Тема</string>
-  <string name="license_name_cc_by_sa_four" fuzzy="true"> Attribution-ShareAlike 4.0</string>
-  <string name="license_name_cc_by_four" fuzzy="true"> Attribution 4.0</string>
-  <string name="license_name_cc_by_sa" fuzzy="true">Attribution-ShareAlike 3.0</string>
-  <string name="license_name_cc_by" fuzzy="true">Attribution 3.0</string>
+  <string name="license_name_cc_by_sa_four"> Attribution-ShareAlike 4.0</string>
+  <string name="license_name_cc_by_four"> Attribution 4.0</string>
+  <string name="license_name_cc_by_sa">Attribution-ShareAlike 3.0</string>
+  <string name="license_name_cc_by">Attribution 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
@@ -224,15 +224,14 @@
   <string name="_2fa_code">2FA коду</string>
   <string name="email_auth_code">Электрондук почта текшерүү коду</string>
   <string name="logout_verification">Чындыгында чыгуу каалайсызбы?</string>
-  <string name="mediaimage_failed">Медиа сүрөт жүктөлгөн жок</string>
   <string name="no_subcategory_found">Төмөнкү категориялар табылган жок</string>
   <string name="no_parentcategory_found">Ата-энелик категориялар табылган жок</string>
   <string name="welcome_image_mount_zao">Зао тоосу</string>
   <string name="welcome_image_llamas">Ламалар</string>
   <string name="welcome_image_rainbow_bridge">Көкүрөктүн көпүрөсү</string>
   <string name="welcome_image_tulip">Тюльпан</string>
-  <string name="welcome_image_welcome_wikipedia">Википедияга кош келиңиз</string>
-  <string name="welcome_image_welcome_copyright">Кош келиңиз! Автордук укук</string>
+  <string name="welcome_image_welcome_wikipedia">Википедиядагы кадимки макаланын схемалык сүрөтү.</string>
+  <string name="welcome_image_welcome_copyright">Автордук укук белгиси сызып ташталган кагаздардын үймөгүнүн сүрөтү.</string>
   <string name="welcome_image_sydney_opera_house">Сидней опера театры</string>
   <string name="cancel">Жокко чыгаруу</string>
   <string name="navigation_drawer_open">Ачуу</string>
@@ -265,6 +264,7 @@
   <string name="upload_connection_error_alert_detail">Файлды жүктөө үчүн интернетке туташуу керек. Тармагыңызды текшериңиз.</string>
   <string name="upload_problem_image">Сүрөттө табылган көйгөйлөр</string>
   <string name="internet_downloaded">Сураныч, жөн гана өзүңүз тарткан сүрөттөрдү жүктөңүз. Интернеттен жүктөлгөн сүрөттөрдү жүктөбөңүз.</string>
+  <string name="preferences_uploads">Жүктөөлөр</string>
   <string name="use_external_storage">Тиркеме ичиндеги сүрөттөрдү сактоо</string>
   <string name="use_external_storage_summary">Тиркеме ичиндеги камера менен тартылган сүрөттөрдү түзмөгүңүздүн сактоосуна сактоо</string>
   <string name="login_to_your_account">Эсеп жазууга кирүү</string>
@@ -336,6 +336,7 @@
   <string name="quiz">Тест</string>
   <string name="quiz_question_string">Бул сүрөттү жүктөөгө болобу?</string>
   <string name="question">Суроо</string>
+  <string name="quiz_i_am_not_sure">Так билбейм</string>
   <string name="result">Жыйынтык</string>
   <string name="quiz_back_button">Өчүрүү керек болгон сүрөттөрдү жүктөөнү уланта берсеңиз, аккаунтуңуз бөгөттөлүшү мүмкүн. Тестти токтоткуңуз келеби?</string>
   <string name="quiz_alert_message">Сиз жүктөгөн сүрөттөрдүн %1$s%дан көбү өчүрүлгөн. Эгер өчүрүлүшү керек болгон сүрөттөрдү жүктөөнү уланта берсеңиз, аккаунтуңуз бөгөттөлүшү мүмкүн.\nОкутуу сабактарын кайра көрүп, кайсы сүрөттөрдү жүктөш керек, кайсынысы керек эмес экенин үйрөнүү үчүн тесттен өтөсүзбү?</string>
@@ -345,6 +346,7 @@
   <string name="blurry_image_answer">Виктказынанын максаттарынын бири — сапаттуу сүрөттөрдү чогултуу. Ошондуктан, тайгалак сүрөттөрдү жүктөөгө болбойт. Ар дайым жакшы жарыкта ачык жана сапаттуу сүрөттөрдү тартууга аракет кылыңыз.</string>
   <string name="construction_event_answer">Технологияны же маданиятты чагылдырган сүрөттөр Викиказынада абдан куттукталат.</string>
   <string name="congratulatory_message_quiz">Сиз %1$s суроого туура жооп бердиңиз. Куттуктайбыз!</string>
+  <string name="quiz_continue">Улантуу</string>
   <string name="warning_for_no_answer">Суроого жооп берүү үчүн эки варианттын бирин тандаңыз.</string>
   <string name="user_not_logged_in">Кирүү мөөнөтү бүттү. Кайра кириңиз, сураныч.</string>
   <string name="quiz_result_share_message">Тестиңизди досторуңуз менен бөлүшүңүз!</string>
@@ -368,12 +370,11 @@
   <string name="Achievements">Жетишкендиктер</string>
   <string name="Profile">Профиль</string>
   <string name="badges">Бээжелер</string>
-  <string name="statistics">Статистика</string>
   <string name="statistics_thanks">Рахматтар кабыл алынды</string>
   <string name="statistics_featured">Тандалган сүрөттөр</string>
   <string name="statistics_wikidata_edits">Сүрөттөр «Жакынкы жайлар» аркылуу</string>
-  <string name="level">Деңгээл %d</string>
-  <string name="profile_withLevel">%s (Деңгээл %s)</string>
+  <string name="level">Деңгээл %1$d</string>
+  <string name="profile_withLevel">%1$s (Деңгээл %2$s)</string>
   <string name="images_uploaded">Жүктөлгөн сүрөттөр</string>
   <string name="image_reverts">Сүрөттөр кайра алынган жок</string>
   <string name="images_used_by_wiki">Колдонулган сүрөттөр</string>
@@ -386,10 +387,56 @@
   <string name="error_occurred">Ката кетти!</string>
   <string name="notifications_channel_name_all">Викиказына билдирүүсү</string>
   <string name="preference_author_name_toggle">Ыңгайлаштырылган автордун атын колдонуу</string>
+  <string name="preference_author_name_toggle_summary">Сүрөттөрдү жүктөө учурунда колдонуучу атыңдын ордуна өзгөчөлөнгөн автор атыңды колдон</string>
+  <string name="preference_author_name">Өзгөчөлөнгөн автор аты</string>
+  <string name="contributions_fragment">Салым</string>
+  <string name="nearby_fragment">Жакынкы</string>
+  <string name="notifications">Билдирүүлөр</string>
+  <string name="read_notifications">Билдирүүлөр (окуу)</string>
+  <string name="display_nearby_notification">Жакын жердеги билдирүүнү көрсөтүү</string>
+  <string name="display_nearby_notification_summary">Сүрөттөр керек болгон жакын жерге колдонмодогу билдирүүнү көрсөтүү</string>
+  <string name="list_sheet">Тизме</string>
+  <string name="storage_permission">Сактагычка уруксат</string>
+  <string name="write_storage_permission_rationale_for_image_share">Сүрөттөрдү жүктөө үчүн түзмөгүңүздүн тышкы сактагычына кирүү уруксатыңыз керек.</string>
+  <string name="nearby_notification_dismiss_message">Сүрөттөр керек болгон жакын жерди эми көрө албай каласың. Бирок кааласаң, бул билдирүүнү Параметрлерден кайра күйгүзө аласың.</string>
+  <string name="step_count">%2$d кадамдын %1$d-кадамы: %3$s</string>
+  <string name="next">Кийинки</string>
+  <string name="previous">Мурунку</string>
+  <string name="upload_title_duplicate">%1$s аталышындагы файл бар. Уланткыңар келеби?\n\nЭскертүү: Файл аталышына ылайыктуу кошумча автоматтык түрдө кошулат.</string>
+  <string name="map_application_missing">Түзмөгүңүздө шайкеш картографиялык тиркеме табылган жок. Бул функцияны колдонуу үчүн карта тиркемесин орнотуңуз.</string>
+  <string name="title_page_bookmarks_pictures">Сүрөттөр</string>
+  <string name="title_page_bookmarks_locations">Жайгашкан жерлер</string>
+  <string name="title_page_bookmarks_categories">Категориялар</string>
+  <string name="menu_bookmark">Белгилерге кошуу/алып салуу</string>
+  <string name="provider_bookmarks">Белгилер</string>
+  <string name="bookmark_empty">Сиз эч кандай белгилерди кошкон жоксуз.</string>
+  <string name="provider_bookmarks_location">Белгилер</string>
+  <string name="log_collection_started">Логдорду чогултуу башталды. Тиркемени кайра баштаңыз, логдогу аракетти жасаңыз, андан кийин \'Лог файлын жөнөтүү\' баскычын кайра таптаңыз.</string>
+  <string name="deletion_reason_uploaded_by_mistake">Мен аны ката менен жүктөдүм</string>
+  <string name="deletion_reason_publicly_visible">Мен анын жалпыга көрүнүктүү болоорун билген эмесмин</string>
+  <string name="deletion_reason_bad_for_my_privacy">Бул менин купуялыгым үчүн жакшы эместигин түшүндүм</string>
+  <string name="deletion_reason_no_longer_want_public">Мен ойлогонумду өзгөрттүм, аны эми жалпыга көрүнүктүү кылууну каалабайм</string>
+  <string name="deletion_reason_not_interesting">Кечиресиз, бул сүрөт энциклопедия үчүн кызыксыз</string>
+  <string name="uploaded_by_myself">%1$s күнү мен өзүм жүктөдүм, кеминде %2$d макалада колдонулган.</string>
+  <string name="no_uploads">Виказынага кош келиңиз! \n\nБиринчи медиаңызды кошуу баскычын таптап жүктөңүз.</string>
+  <string name="no_categories_selected">Категориялар тандалган жок</string>
+  <string name="no_categories_selected_warning_desc">Категориялары жок сүрөттөр сейрек колдонулат. Категорияларды тандабастан уланткыңыз келеби?</string>
+  <string name="no_depictions_selected">Сүрөттөр тандалган жок</string>
+  <string name="no_depictions_selected_warning_desc">Сүрөттөлгөн сүрөттөрдү табуу оңой жана колдонулушу мүмкүн. Сүрөттөрдү тандабай эле улантууну каалайсызбы?</string>
   <string name="back_button_warning">Жүктөөнү жокко чыгаруу</string>
   <string name="back_button_warning_desc">Артка баскычын колдонуу менен бул жүктөө жокко чыгарылат жана сиз ийгиликти жоготосуз</string>
   <string name="back_button_continue">Жүктөөнү улантуу</string>
+  <string name="upload_flow_all_images_in_set">(Келишимдеги бардык сүрөттөр үчүн)</string>
+  <string name="search_this_area">Бул аймакты издөө</string>
+  <string name="nearby_card_permission_title">Уруксат суроо</string>
+  <string name="nearby_card_permission_explanation">Сүрөттөр керек болгон эң жакын жерди көрсөтүү үчүн учурдагы жайгашкан жериңизди колдонууну каалайсызбы?</string>
+  <string name="unable_to_display_nearest_place">Жайгашкан жерге уруксат берилбегендиктен, жакынкы жер көрсөтүлбөйт.</string>
+  <string name="never_ask_again">Муну кайра сураба</string>
+  <string name="display_location_permission_title">Жайгашкан жерге уруксат сураңыз</string>
+  <string name="display_location_permission_explanation">Жакынкы билдирүүлөрдү көрсөтүү үчүн жайгашкан жерге уруксат сураңыз.</string>
   <string name="please_wait">Күтө туруңуз...</string>
+  <string name="title_for_media">МЕДИА</string>
+  <string name="title_app_shortcut_setting">Параметрлер</string>
   <string name="label">Аталыш</string>
   <string name="description">Сыпаттама</string>
   <string name="title_page_bookmarks_items">Элементтер</string>

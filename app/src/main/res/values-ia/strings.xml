@@ -29,18 +29,14 @@
     <item quantity="one">%1$d file in incargamento</item>
     <item quantity="other">%1$d files in incargamento</item>
   </plurals>
-  <plurals name="contributions_subtitle">
-    <item quantity="one">(%1$d)</item>
-    <item quantity="other">(%1$d)</item>
-  </plurals>
   <string name="starting_uploads">Initia incargamentos</string>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">Processa %d incargamento</item>
-    <item quantity="other">Processa %d incargamentos</item>
+    <item quantity="one">Processa %1$d incargamento</item>
+    <item quantity="other">Processa %1$d incargamentos</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">%d incargamento</item>
-    <item quantity="other">%d incargamentos</item>
+    <item quantity="one">%1$d incargamento</item>
+    <item quantity="other">%1$d incargamentos</item>
   </plurals>
   <plurals name="share_license_summary">
     <item quantity="one">Iste imagine essera licentiate sub %1$s</item>
@@ -126,7 +122,7 @@
   <string name="display_list_button">Listar</string>
   <string name="contributions_subtitle_zero">(Nihil incargate ancora)</string>
   <string name="categories_not_found">Necun categoria correspondente a %1$s trovate</string>
-  <string name="depictions_not_found">Necun entrata Wikidata correspondente a %1$s trovate</string>
+  <string name="depictions_not_found">Necun elemento Wikidata correspondente a %1$s trovate</string>
   <string name="no_child_classes">%1$s non ha alcun classe filio</string>
   <string name="no_parent_classes">%1$s non ha alcun classe genitor</string>
   <string name="categories_skip_explanation">Adde categorias pro render tu imagines plus discoperibile sur Wikimedia Commons.\nComencia a scriber pro adder categorias.</string>
@@ -134,6 +130,7 @@
   <string name="title_activity_settings">Parametros</string>
   <string name="title_activity_signup">Inscriber se</string>
   <string name="title_activity_featured_images">Imagines eminente</string>
+  <string name="images_featured_explanation">Le imagines eminente es contributiones de photographos e illustratores multo habile que le communitate de Wikimedia Commons ha seligite como alcunes del melior qualitate sur le sito.</string>
   <string name="title_activity_custom_selector">Selector personalisate</string>
   <string name="title_activity_category_details">Categoria</string>
   <string name="title_activity_review">Revision per pares</string>
@@ -219,15 +216,14 @@
   <string name="_2fa_code">Codice 2FA</string>
   <string name="email_auth_code">Codice de verification in e-mail</string>
   <string name="logout_verification">Vole tu vermente clauder session?</string>
-  <string name="mediaimage_failed">Imagine multimedial fallite</string>
   <string name="no_subcategory_found">Necun subcategoria trovate</string>
   <string name="no_parentcategory_found">Necun categoria genitor trovate</string>
   <string name="welcome_image_mount_zao">Monte Zao</string>
   <string name="welcome_image_llamas">Lamas</string>
   <string name="welcome_image_rainbow_bridge">Ponte del Arco Iris</string>
   <string name="welcome_image_tulip">Tulipan</string>
-  <string name="welcome_image_welcome_wikipedia">Benvenita: Wikipedia</string>
-  <string name="welcome_image_welcome_copyright">Benvenita: derectos de autor</string>
+  <string name="welcome_image_welcome_wikipedia">Un imagine schematic de un articulo generic de Wikipedia.</string>
+  <string name="welcome_image_welcome_copyright">Un designo de un pila de papiros con le symbolo del derecto de autor barrate.</string>
   <string name="welcome_image_sydney_opera_house">Opera de Sydney</string>
   <string name="cancel">Cancellar</string>
   <string name="navigation_drawer_open">Aperir</string>
@@ -332,6 +328,7 @@
   <string name="quiz">Quiz</string>
   <string name="quiz_question_string">Es iste imagine bon pro incargar?</string>
   <string name="question">Question</string>
+  <string name="quiz_i_am_not_sure">Io non es secur</string>
   <string name="result">Resultato</string>
   <string name="quiz_back_button">Si tu continua a incargar imagines que require deletion, tu conto probabilemente essera bannite. Es tu certe que tu vole terminar le questionario?</string>
   <string name="quiz_alert_message">Plus de %1$s del imagines que tu ha incargate ha essite delite. Si tu continua a incargar imagines que require deletion, tu conto probabilemente essera bannite.\n\nVolerea tu vider le tutorial de novo e postea responder a un questionario pro apprender que typo de imagines tu debe o non debe incargar?</string>
@@ -341,6 +338,7 @@
   <string name="blurry_image_answer">Un del objectivos de Commons es colliger imagines de qualitate. Pro isto, imagines indistincte non debera esser incargate. Sempre essaya a prender belle photos con un bon illumination.</string>
   <string name="construction_event_answer">Imagines que monstra technologia o cultura es multo benvenite sur Commons.</string>
   <string name="congratulatory_message_quiz">Tu ha %1$s del responsas correcte. Felicitationes!</string>
+  <string name="quiz_continue">Continuar</string>
   <string name="warning_for_no_answer">Selige un del duo optiones pro responder al question</string>
   <string name="user_not_logged_in">Session expirate. Per favor reaperi session.</string>
   <string name="quiz_result_share_message">Condivide tu quiz con tu amicos!</string>
@@ -364,12 +362,11 @@
   <string name="Achievements">Realisationes</string>
   <string name="Profile">Profilo</string>
   <string name="badges">Insignias</string>
-  <string name="statistics">Statisticas</string>
   <string name="statistics_thanks">Regratiamentos recipite</string>
   <string name="statistics_featured">Imagines eminente</string>
   <string name="statistics_wikidata_edits">Imagines via “Locos a proximitate”</string>
-  <string name="level">Nivello %d</string>
-  <string name="profile_withLevel">%s (Nivello %s)</string>
+  <string name="level">Nivello %1$d</string>
+  <string name="profile_withLevel">%1$s (Nivello %2$s)</string>
   <string name="images_uploaded">Imagines incargate</string>
   <string name="image_reverts">Imagines non revertite</string>
   <string name="images_used_by_wiki">Imagines usate</string>
@@ -460,7 +457,7 @@
   <string name="check_category_toast">Requesta de un controlo de categoria pro %1$s</string>
   <string name="nominate_for_deletion_done">Facite</string>
   <string name="send_thank_success_title">Invio de regratiamento: Successo</string>
-  <string name="send_thank_success_message">Regratiamento correctemente inviate a %1$s</string>
+  <string name="send_thank_success_message">Regratiamento inviate a %1$s</string>
   <string name="send_thank_failure_message">Le invio de un regratiamento a %1$s ha fallite</string>
   <string name="send_thank_failure_title">Invio de regratiamento: Fallimento</string>
   <string name="send_thank_toast">Invio de regratiamento pro %1$s</string>
@@ -490,15 +487,14 @@
   <string name="menu_option_unread">Vider non legites</string>
   <string name="error_occurred_in_picking_images">Un error ha occurrite durante le selection de imagines</string>
   <string name="please_wait">Un momento…</string>
-  <string name="images_featured_explanation">Le imagines eminente es creationes de photographos e illustratores multo habile que le communitate de Wikimedia Commons ha seligite como alcunes del melior qualitate sur le sito.</string>
   <string name="images_via_nearby_explanation">Le imagines incargate per medio de ‘Locos a proximitate’ es le imagines que es incargate per le discoperta de locos sur le carta.</string>
   <string name="thanks_received_explanation">Iste function permitte a redactores inviar un notification de regratiamento a usatores que face modificationes utile, usante un micre ligamine ‘regratiar’ sur le pagina de historia o de differentias.</string>
-  <string name="copy_image_caption_description">Copiar a medios de communication subsequente</string>
+  <string name="copy_image_caption_description">Copiar al entratas successive</string>
   <string name="copied_successfully">Copiate</string>
   <string name="welcome_do_upload_content_description">Exemplos de bon imagines a incargar a Commons</string>
   <string name="welcome_dont_upload_content_description">Exemplos de imagines que non debe esser incargate</string>
   <string name="skip_image">Saltar iste imagine</string>
-  <string name="download_failed_we_cannot_download_the_file_without_storage_permission">Discargamento fallite! Non es possibile discargar le file sin permission de immagazinage externe.</string>
+  <string name="download_failed_we_cannot_download_the_file_without_storage_permission">Discargamento fallite. Non es possibile discargar le file sin permission de immagazinage externe.</string>
   <string name="manage_exif_tags">Gerer etiquettas EXIF</string>
   <string name="manage_exif_tags_summary">Selige qual etiquettas EXIF conservar in files incargate</string>
   <string name="exif_tag_name_author">Autor</string>
@@ -508,11 +504,10 @@
   <string name="exif_tag_name_lensModel">Modello de lente</string>
   <string name="exif_tag_name_serialNumbers">Numeros de serie</string>
   <string name="exif_tag_name_software">Software</string>
-  <string name="media_location_permission_denied">Accesso al localisation del file multimedial refusate</string>
-  <string name="add_location_manually">Es possibile que nos non potera obtener automaticamente le datos de localisation del imagines que tu incarga. Per favor adde le localisation appropriate pro cata imagine ante de submitter.</string>
   <string name="share_text">Incarga photos a Wikimedia Commons directemente desde tu telephono. Discarga le app de Commons ora: %1$s</string>
   <string name="share_via">Condivider app via…</string>
   <string name="image_info">Information del imagine</string>
+  <string name="upload_categories_dont_show_this_message_again">Non monstrar iste message de novo</string>
   <string name="no_categories_found">Necun categoria trovate</string>
   <string name="no_depiction_found">Necun representation trovate</string>
   <string name="upload_cancelled">Incargamento cancellate</string>
@@ -565,7 +560,7 @@
   <string name="description_activity_title">Modificar descriptiones e legendas</string>
   <string name="share_image_via">Condivider imagine via</string>
   <string name="you_have_no_achievements_yet">Tu non ha ancora facite alcun contribution</string>
-  <string name="no_achievements_yet">%s non ha ancora facite alcun contribution</string>
+  <string name="no_achievements_yet">%1$s non ha ancora facite alcun contribution</string>
   <string name="account_created">Conto create!</string>
   <string name="text_copy">Texto copiate al area de transferentia</string>
   <string name="notification_mark_read">Notification marcate como legite</string>
@@ -618,7 +613,7 @@
   <string name="wikipedia_instructions_step_5">5. Colla le wikitexto in le loco appropriate.</string>
   <string name="wikipedia_instructions_step_6">6. Modifica le wikitexto pro un positionamento appropriate, si necessari. Pro plus information, lege &lt;a href=\"https://en.wikipedia.org/wiki/Wikipedia:Manual_of_Style/Images#How_to_place_an_image\"&gt;isto&lt;/a&gt;.</string>
   <string name="wikipedia_instructions_step_7">7. Publica le articulo</string>
-  <string name="copy_wikicode_to_clipboard">Copiar le wikicodice al area de transferentia</string>
+  <string name="copy_wikicode_to_clipboard">Copiar le wikitexto al area de transferentia</string>
   <string name="pause">pausar</string>
   <string name="resume">reprender</string>
   <string name="paused">Pausate</string>
@@ -659,6 +654,8 @@
   <string name="categories_tooltip">Per favor, selige le categorias appropriate. A differentia del representationes, le categorias es solmente in anglese.</string>
   <string name="license_tooltip">Commons rende tu imagines reusabile e adaptabile per omnes. Vole tu renunciar a tote derectos? Vole tu esser attribuite? Vole tu que le adaptationes usa le mesme licentia?</string>
   <string name="depicts_step_title">Representa</string>
+  <string name="depicts_label">Etiquetta</string>
+  <string name="depicts_description">Description</string>
   <string name="license_step_title">Licentia del file multimedial</string>
   <string name="media_detail_step_title">Detalios sur le file multimedial</string>
   <string name="menu_view_category_page">Vider pagina de categoria</string>
@@ -685,7 +682,7 @@
   <string name="back">Retro</string>
   <string name="welcome_custom_picture_selector_text">Benvenite al selector de imagine personalisate</string>
   <string name="custom_selector_info_text1">Iste selector te monstra qual imagines tu ha ja incargate a Commons.</string>
-  <string name="custom_selector_info_text2">A differentia del imagine al sinistra, le imagine al dextra ha le logo de Commons que indica que illo ha ja essite incargate.\n Tocca e mantene pro un previsualisation del imagine.</string>
+  <string name="custom_selector_info_text2">A differentia del imagine al sinistra, le imagine al dextra ha le logo de Commons que indica que illo ha ja essite incargate.\n\nTocca e mantene pro un previsualisation del imagine.</string>
   <string name="welcome_custom_selector_ok">Genial</string>
   <string name="custom_selector_already_uploaded_image_text">Iste imagine ha ja essite incargate a Commons.</string>
   <string name="custom_selector_over_limit_warning">Pro rationes technic, le application non pote de maniera digne de fide incargar plus de %1$d imagines al vice. Le limite de incargamento de %1$d ha essite excedite per %2$d.</string>
@@ -701,8 +698,8 @@
   <string name="read_phone_state_permission_message">Le cartas a proximitate debe leger le STATO DEL TELEPHONO pro functionar correctemente</string>
   <string name="location_off_dialog_text">Activa le servicios de localisation pro monstrar le locos a proximitate.</string>
   <string name="location_permission_rationale">Le accesso al position es necessari pro monstrar locos a proximitate sur le carta.</string>
-  <string name="contributions_of_user">Contributiones del usator: %s</string>
-  <string name="achievements_of_user">Realisationes del usator: %s</string>
+  <string name="contributions_of_user">Contributiones del usator: %1$s</string>
+  <string name="achievements_of_user">Realisationes del usator: %1$s</string>
   <string name="menu_view_user_page">Vider le profilo del usator</string>
   <string name="edit_depictions">Modificar representationes</string>
   <string name="edit_categories">Modificar categorias</string>
@@ -713,7 +710,7 @@
   <string name="location_message">Le datos de localisation adjuta le redactores wiki a trovar tu imagine, rendente lo multo plus utile.\nTu files recentemente incargate non ha localisation.\nNos suggere que tu activa le localisation un le parametros de tu application de camera.\nGratias pro incargar!</string>
   <string name="no_location_found_title">Necun localisation trovate</string>
   <string name="no_location_found_message">Proque non adder le loco ubi iste imagine ha essite prendite?\nLe datos de localisation adjuta le redactores wiki a trovar tu imagine, rendente lo multo plus utile.\nGratias!</string>
-  <string name="add_location">Adder localisation</string>
+  <string name="add_location">Adder loco</string>
   <string name="feedback_sharing_data_alert">Per favor remove de iste e-mail omne information que tu non vole condivider publicamente. In ultra, sia conscie que le adresse de e-mail que tu usa pro publicar, e le nomine e imagine de profilo associate, essera visibile publicamente.</string>
   <string name="explore_map_details">Detalios</string>
   <string name="achievements_unavailable_beta">Le realisationes es disponibile solmente in le version de production. Per favor consulta le documentation del disveloppator.</string>
@@ -775,11 +772,11 @@
   <string name="do_you_want_to_open_kml_file">Vole tu aperir le file KML?</string>
   <string name="failed_to_save_kml_file">Non poteva salveguardar le file KML.</string>
   <string name="failed_to_save_gpx_file">Non poteva salveguardar le file GPX.</string>
-  <string name="saving_kml_file">Salveguarda file KML</string>
-  <string name="saving_gpx_file">Salveguarda file GPX</string>
+  <string name="saving_kml_file">Salveguardante como file KML…</string>
+  <string name="saving_gpx_file">Salveguardante como file GPX…</string>
   <plurals name="custom_picker_images_selected_title_appendix">
-    <item quantity="one">%d imagine seligite</item>
-    <item quantity="other">%d imagines seligite</item>
+    <item quantity="one">%1$d imagine seligite</item>
+    <item quantity="other">%1$d imagines seligite</item>
   </plurals>
   <string name="multiple_files_depiction">Nota ben que tote le imagines in un multi-incargamento habera le mesme categorias e representationes. Si le imagines non condivide representationes e categorias, per favor exeque plure incargamentos separate.</string>
   <string name="multiple_files_depiction_header">Aviso sur le multi-incargamentos</string>
@@ -815,7 +812,6 @@
   <string name="usages_on_commons_heading">Commons</string>
   <string name="usages_on_other_wikis_heading">Altere wikis</string>
   <string name="file_usages_container_heading">Usos del file</string>
-  <string name="title_activity_single_web_view">Activitate de singule visita web</string>
   <string name="account">Conto</string>
   <string name="vanish_account">Facer disparer le conto</string>
   <string name="account_vanish_request_confirm_title">Advertimento concernente le disparition del conto</string>

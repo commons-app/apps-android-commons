@@ -12,20 +12,21 @@
     <item quantity="one">postavlja se %1$d datoteka</item>
     <item quantity="other">postavlja se %1$d datoteka</item>
   </plurals>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">postavljena %1$d datoteka</item>
-    <item quantity="other">postavljenih datoteka: %1$d</item>
-  </plurals>
   <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">Započinjem postavljanje %1$d datoteke</item>
-    <item quantity="other">Započinjem postavljanje %1$d datoteka/-e</item>
+    <item quantity="few">Započinjem postavljanje %1$d datoteke</item>
+    <item quantity="other">Započinjem postavljanje %1$d datoteka</item>
   </plurals>
-  <plurals name="multiple_uploads_title" fuzzy="true">
+  <plurals name="multiple_uploads_title">
     <item quantity="one">%1$d postavljanje</item>
+    <item quantity="few">%1$d postavljanja</item>
     <item quantity="other">%1$d postavljanja</item>
   </plurals>
-  <string name="share_license_summary" fuzzy="true">Slika će se voditi pod licencom %1$s</string>
+  <plurals name="share_license_summary" fuzzy="true">
+    <item quantity="one">Ova slika će se voditi pod licencom %1$s</item>
+    <item quantity="few">Ove slike će se voditi pod licencom %1$s</item>
+    <item quantity="other">Ove slike će se voditi pod licencom %1$s</item>
+  </plurals>
   <string name="navigation_item_explore">Istraži</string>
   <string name="preference_category_appearance">Izgled</string>
   <string name="preference_category_general">Općenito</string>
@@ -48,7 +49,7 @@
   <string name="uploading_started">Postavljanje je započelo!</string>
   <string name="upload_completed_notification_title">Datoteka %1$s je postavljena!</string>
   <string name="upload_completed_notification_text">Dodirnite da biste vidjeli datoteku</string>
-  <string name="upload_progress_notification_title_start">Postavljam datoteku: %s</string>
+  <string name="upload_progress_notification_title_start">Postavljam datoteku: %1$s</string>
   <string name="upload_progress_notification_title_in_progress">Postavljanje datoteke %1$s u toku</string>
   <string name="upload_progress_notification_title_finishing">Postavljanje datoteke %1$s završeno</string>
   <string name="upload_failed_notification_title" fuzzy="true">Postavljanje datoteke %1$s nije uspjelo</string>
@@ -152,13 +153,12 @@
   <string name="become_a_tester_description">Prijavite se na naš beta-kanal na Google Playu i dobijte raniji pristup novim mogućnostima i ispravkama grešaka</string>
   <string name="_2fa_code">Kôd za provjeru u 2 koraka</string>
   <string name="logout_verification">Želite li se zaista odjaviti?</string>
-  <string name="mediaimage_failed">Slika nije uspjela</string>
   <string name="welcome_image_mount_zao">Zao</string>
   <string name="welcome_image_llamas">Ljame</string>
   <string name="welcome_image_rainbow_bridge">Dugin most</string>
   <string name="welcome_image_tulip">Tulipan</string>
-  <string name="welcome_image_welcome_wikipedia">Dobro došli (Wikipedia)</string>
-  <string name="welcome_image_welcome_copyright">Dobro došli (autorska prava)</string>
+  <string name="welcome_image_welcome_wikipedia" fuzzy="true">Dobro došli (Wikipedia)</string>
+  <string name="welcome_image_welcome_copyright" fuzzy="true">Dobro došli (autorska prava)</string>
   <string name="welcome_image_sydney_opera_house">Sidnejska opera</string>
   <string name="cancel">Otkaži</string>
   <string name="navigation_drawer_open">Otvori</string>

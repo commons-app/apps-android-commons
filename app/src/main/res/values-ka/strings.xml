@@ -8,7 +8,7 @@
 -->
 <resources>
   <string name="commons_facebook">ვიკისაწყობის Facebook-ის გვერდი</string>
-  <string name="commons_github">ვიკისაწყობის წყაროს კოდი Github-ზე</string>
+  <string name="commons_github" fuzzy="true">ვიკისაწყობის წყაროს კოდი Github-ზე</string>
   <string name="commons_logo">ვიკისაწყობის ლოგო</string>
   <string name="commons_website">ვიკისაწყობის საიტი</string>
   <string name="exit_location_picker">მდებარეობის ამრჩევიდან გასვლა</string>
@@ -32,20 +32,19 @@
     <item quantity="one">%1$d ფაილი იტვირთება</item>
     <item quantity="other">%1$d ფაილი იტვირთება</item>
   </plurals>
-  <plurals name="contributions_subtitle">
-    <item quantity="one">(%1$d)</item>
-    <item quantity="other">(%1$d)</item>
-  </plurals>
   <string name="starting_uploads">ატვირთვის დაწყება</string>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">მუშავდება %d ატვირთვა</item>
-    <item quantity="other">მუშავდება %d ატვირთვა</item>
+    <item quantity="one">მუშავდება %1$d ატვირთვა</item>
+    <item quantity="other">მუშავდება %1$d ატვირთვა</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">%d ატვირთვა</item>
-    <item quantity="other">%d ატვირთვები</item>
+    <item quantity="one">%1$d ატვირთვა</item>
+    <item quantity="other">%1$d ატვირთვები</item>
   </plurals>
-  <string name="share_license_summary">ეს სურათი გავრცელდება %1$s ლიცენზიით</string>
+  <plurals name="share_license_summary" fuzzy="true">
+    <item quantity="one">ეს სურათი გავრცელდება %1$s ლიცენზიით</item>
+    <item quantity="other">ეს სურათი გავრცელდება %1$s ლიცენზიით</item>
+  </plurals>
   <plurals name="upload_count_title">
     <item quantity="one">%1$d ატვირთვა</item>
     <item quantity="other">%1$d ატვირთვა</item>
@@ -84,7 +83,7 @@
   <string name="uploading_queued">ატვირთვა რიგშია (შეზღუდული კავშირის რეჟიმი ჩართულია)</string>
   <string name="upload_completed_notification_title">%1$ ატვირთულია!</string>
   <string name="upload_completed_notification_text">დააჭირეთ თქვენი ატვირთვის სანახავად</string>
-  <string name="upload_progress_notification_title_start">ფაილის ატვირთვა: %s</string>
+  <string name="upload_progress_notification_title_start">ფაილის ატვირთვა: %1$s</string>
   <string name="upload_progress_notification_title_in_progress">%1$ ატვირთვა</string>
   <string name="upload_progress_notification_title_finishing">ატვირთვის დასრულება %1$</string>
   <string name="upload_failed_notification_title">%1$ ატვირთვა ვერ მოხერხდა</string>
@@ -220,15 +219,14 @@
   <string name="_2fa_code">2ფა კოდი</string>
   <string name="email_auth_code">ელფოსტის დამადასტურებელი კოდი</string>
   <string name="logout_verification">ნამდვილად გსურთ გასვლა?</string>
-  <string name="mediaimage_failed">მედიაგამოსახულების შეცდომა</string>
   <string name="no_subcategory_found">ქვეკატეგორიები ვერ მოიძებნა</string>
   <string name="no_parentcategory_found">ზედა დონის კატეგორიები ვერ მოიძებნა</string>
   <string name="welcome_image_mount_zao">ზაოს მთა</string>
   <string name="welcome_image_llamas">ლამები</string>
   <string name="welcome_image_rainbow_bridge">ცისარტყელის ხიდი</string>
   <string name="welcome_image_tulip">ტიტა</string>
-  <string name="welcome_image_welcome_wikipedia">მოგესალმებით ვიკიპედიაში</string>
-  <string name="welcome_image_welcome_copyright">მოგესალმებით — საავტორო უფლებები</string>
+  <string name="welcome_image_welcome_wikipedia" fuzzy="true">მოგესალმებით ვიკიპედიაში</string>
+  <string name="welcome_image_welcome_copyright" fuzzy="true">მოგესალმებით — საავტორო უფლებები</string>
   <string name="welcome_image_sydney_opera_house">სიდნეის ოპერის თეატრი</string>
   <string name="cancel">გაუქმება</string>
   <string name="navigation_drawer_open">გახსნა</string>
@@ -364,12 +362,11 @@
   <string name="Achievements">მიღწევები</string>
   <string name="Profile">პროფილი</string>
   <string name="badges">ნიშნები</string>
-  <string name="statistics">სტატისტიკა</string>
   <string name="statistics_thanks">მადლობა მიღებულია</string>
   <string name="statistics_featured">რჩეული სურათები</string>
   <string name="statistics_wikidata_edits">სურათები „ახლომდებარე ადგილები“ -დან</string>
-  <string name="level">დონე %d</string>
-  <string name="profile_withLevel">%s (დონე %s)</string>
+  <string name="level">დონე %1$d</string>
+  <string name="profile_withLevel">%1$s (დონე %2$s)</string>
   <string name="images_uploaded">სურათები ატვირთულია</string>
   <string name="image_reverts">სურათები არ დაბრუნებულა</string>
   <string name="images_used_by_wiki">სურათები გამოიყენება</string>
@@ -429,7 +426,7 @@
   <string name="never_ask_again">აღარ მკითხო</string>
   <string name="display_location_permission_title">მდებარეობის ნებართვის მოთხოვნა</string>
   <string name="display_location_permission_explanation">ახლომდებარე შეტყობინებების ბარათის ნახვის ფუნქციისთვის, მოითხოვეთ მდებარეობის ნებართვა.</string>
-  <string name="achievements_fetch_failed">რაღაც შეცდომა მოხდა, ჩვენ ვერ მოვახერხეთ მიღწევის განხილვა</string>
+  <string name="achievements_fetch_failed" fuzzy="true">რაღაც შეცდომა მოხდა, ჩვენ ვერ მოვახერხეთ მიღწევის განხილვა</string>
   <string name="achievements_fetch_failed_ultimate_achievement">თქვენ იმდენი წვლილი შეიტანეთ, რომ ჩვენი მიღწევების გაანგარიშების სისტემას არ შეუძლია გაუმკლავდეს. ეს უდიდესი მიღწევაა.</string>
   <string name="ends_on">მთავრდება:</string>
   <string name="display_campaigns">საჩვენებელი კამპანიები</string>
@@ -508,12 +505,12 @@
   <string name="enter_description">როგორია თქვენი გამოხმაურება?</string>
   <string name="your_feedback">თქვენი გამოხმაურება</string>
   <string name="mark_as_not_for_upload">მონიშნეთ,რომ არ არის ასატვირთი</string>
-  <string name="failed_to_save_gpx_file">GPX ფაილის შენახვა ვერ მოხერხდა.</string>
-  <string name="saving_kml_file">KML ფაილის შენახვა</string>
-  <string name="saving_gpx_file">GPX ფაილის შენახვა</string>
+  <string name="failed_to_save_gpx_file" fuzzy="true">GPX ფაილის შენახვა ვერ მოხერხდა.</string>
+  <string name="saving_kml_file" fuzzy="true">KML ფაილის შენახვა</string>
+  <string name="saving_gpx_file" fuzzy="true">GPX ფაილის შენახვა</string>
   <plurals name="custom_picker_images_selected_title_appendix">
-    <item quantity="one">%d სურათი არჩეულია</item>
-    <item quantity="other"> %d სურათი არჩეულია</item>
+    <item quantity="one">%1$d სურათი არჩეულია</item>
+    <item quantity="other">%1$d სურათი არჩეულია</item>
   </plurals>
   <string name="multiple_files_depiction">გთხოვთ, გაითვალისწინოთ, რომ მრავალჯერადი ატვირთვისას ყველა სურათს ერთნაირი კატეგორიები და გამოსახულებები აქვს. თუ სურათებს საერთო გამოსახულებები და კატეგორიები არ აქვთ, გთხოვთ, ატვირთოთ ისინი ცალ-ცალკე.</string>
   <string name="multiple_files_depiction_header">შენიშვნა მრავალჯერადი ატვირთვის შესახებ</string>
@@ -549,7 +546,6 @@
   <string name="usages_on_commons_heading">ვიკისაწყობი</string>
   <string name="usages_on_other_wikis_heading">სხვა ვიკისები</string>
   <string name="file_usages_container_heading">ფაილის გამოყენება</string>
-  <string name="title_activity_single_web_view">SingleWebViewActivity</string>
   <string name="account">ანგარიში</string>
   <string name="vanish_account">ანგარიშის გაქრობა</string>
   <string name="account_vanish_request_confirm_title">ანგარიშის გაქრობის გაფრთხილება</string>

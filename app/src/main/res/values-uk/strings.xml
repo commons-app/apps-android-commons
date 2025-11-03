@@ -23,7 +23,7 @@
 -->
 <resources>
   <string name="commons_facebook">Facebook-сторінка Вікісховища</string>
-  <string name="commons_github">Програмний код Вікісховища на GitHub</string>
+  <string name="commons_github" fuzzy="true">Програмний код Вікісховища на GitHub</string>
   <string name="commons_logo">Логотип Вікісховища</string>
   <string name="commons_website">Веб-сайт Вікісховища</string>
   <string name="exit_location_picker">Вийти з вікна вибору розташування</string>
@@ -49,12 +49,6 @@
     <item quantity="many">Завантажується %1$d файлів</item>
     <item quantity="other">Завантажується %1$d файлів</item>
   </plurals>
-  <plurals name="contributions_subtitle">
-    <item quantity="one">(%1$d)</item>
-    <item quantity="few">(%1$d)</item>
-    <item quantity="many">(%1$d)</item>
-    <item quantity="other">(%1$d)</item>
-  </plurals>
   <string name="starting_uploads">Початок завантаження</string>
   <plurals name="starting_multiple_uploads">
     <item quantity="one">Обробляється %1$d завантаження</item>
@@ -63,10 +57,10 @@
     <item quantity="other">Обробляються %1$d завантажень</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">%d завантаження</item>
-    <item quantity="few">%d завантаження</item>
-    <item quantity="many">%d завантажень</item>
-    <item quantity="other">%d завантажень</item>
+    <item quantity="one">%1$d завантаження</item>
+    <item quantity="few">%1$d завантаження</item>
+    <item quantity="many">%1$d завантажень</item>
+    <item quantity="other">%1$d завантажень</item>
   </plurals>
   <plurals name="share_license_summary">
     <item quantity="one">Це зображення буде ліцензовано на умовах %1$s</item>
@@ -116,7 +110,7 @@
   <string name="uploading_queued">Завантаження додано до черги (увімкнений режим обмеженого з\'єднання)</string>
   <string name="upload_completed_notification_title">Завантажено %1$s!</string>
   <string name="upload_completed_notification_text">Торкніться, щоб переглянути Ваше завантаження</string>
-  <string name="upload_progress_notification_title_start">Завантаження файлу: %s</string>
+  <string name="upload_progress_notification_title_start">Завантаження файлу: %1$s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s завантажується</string>
   <string name="upload_progress_notification_title_finishing">Завершення завантаження %1$s</string>
   <string name="upload_failed_notification_title">Не вдалося завантажити %1$s</string>
@@ -166,6 +160,7 @@
   <string name="title_activity_settings">Налаштування</string>
   <string name="title_activity_signup">Зареєструватися</string>
   <string name="title_activity_featured_images">Вибрані зображення</string>
+  <string name="images_featured_explanation" fuzzy="true">Вибрані зображення — це зображення від вправних фотографів та ілюстраторів, які спільнота Вікісховища визначила як такі, що мають найкращу якість на сайті.</string>
   <string name="title_activity_custom_selector">Користувацький селектор</string>
   <string name="title_activity_category_details">Категорія</string>
   <string name="title_activity_review">Перевірка колегами</string>
@@ -253,15 +248,14 @@
   <string name="_2fa_code">Код 2FA</string>
   <string name="email_auth_code">Код підтвердження електронної пошти</string>
   <string name="logout_verification">Ви справді хочете вийти із системи?</string>
-  <string name="mediaimage_failed">Помилка медіазображення</string>
   <string name="no_subcategory_found">Підкатегорій не знайдено</string>
   <string name="no_parentcategory_found">Не знайдено батьківських категорій</string>
   <string name="welcome_image_mount_zao">Гора Зао</string>
   <string name="welcome_image_llamas">Лами</string>
   <string name="welcome_image_rainbow_bridge">Веселка</string>
   <string name="welcome_image_tulip">Тюльпан</string>
-  <string name="welcome_image_welcome_wikipedia">Ласкаво просимо — Вікіпедія</string>
-  <string name="welcome_image_welcome_copyright">Ласкаво просимо — авторські права</string>
+  <string name="welcome_image_welcome_wikipedia" fuzzy="true">Ласкаво просимо — Вікіпедія</string>
+  <string name="welcome_image_welcome_copyright" fuzzy="true">Ласкаво просимо — авторські права</string>
   <string name="welcome_image_sydney_opera_house">Сіднейський оперний театр</string>
   <string name="cancel">Скасувати</string>
   <string name="navigation_drawer_open">Відкрити</string>
@@ -397,12 +391,11 @@
   <string name="Achievements">Досягнення</string>
   <string name="Profile">Профіль</string>
   <string name="badges">Значки</string>
-  <string name="statistics">Статистика</string>
   <string name="statistics_thanks">Отримані подяки</string>
   <string name="statistics_featured">Вибрані зображення</string>
   <string name="statistics_wikidata_edits">Зображення місць поблизу</string>
-  <string name="level">Рівень %d</string>
-  <string name="profile_withLevel">%s (Рівень %s)</string>
+  <string name="level">Рівень %1$d</string>
+  <string name="profile_withLevel">%1$s (Рівень %2$s)</string>
   <string name="images_uploaded">Завантажені зображення</string>
   <string name="image_reverts">Не відхилені зображення</string>
   <string name="images_used_by_wiki">Використані зображення</string>
@@ -462,7 +455,7 @@
   <string name="never_ask_again">Ніколи більше про це не запитувати</string>
   <string name="display_location_permission_title">Запитувати дозвіл на геолокацію</string>
   <string name="display_location_permission_explanation">Запитувати про дозвіл на показ місця перебування, коли це потрібно для функції перегляду місць поблизу.</string>
-  <string name="achievements_fetch_failed">Щось пішло не так. Нам не вдалося отримати досягнення</string>
+  <string name="achievements_fetch_failed" fuzzy="true">Щось пішло не так. Нам не вдалося отримати досягнення</string>
   <string name="achievements_fetch_failed_ultimate_achievement">Ви зробили так багато, що наша система підрахунку досягнень не може впоратись зі своїм завданням. Це — абсолютне досягнення.</string>
   <string name="ends_on">Завершується:</string>
   <string name="display_campaigns">Показати кампанії</string>
@@ -490,11 +483,11 @@
   <string name="check_category_failure_message">Не вдалося зробити запит на перевірку категорій для %1$s</string>
   <string name="check_category_toast">Запит на перевірку категорій для %1$s</string>
   <string name="nominate_for_deletion_done">Готово</string>
-  <string name="send_thank_success_title">Надсилання подяки: Успішно</string>
-  <string name="send_thank_success_message">Успішно надіслано подяку %1$s</string>
-  <string name="send_thank_failure_message">Не вдалося надіслати подяку %1$s</string>
-  <string name="send_thank_failure_title">Надсилання подяки: Неуспішно</string>
-  <string name="send_thank_toast">Надсилання подяки %1$s</string>
+  <string name="send_thank_success_title" fuzzy="true">Надсилання подяки: Успішно</string>
+  <string name="send_thank_success_message" fuzzy="true">Успішно надіслано подяку %1$s</string>
+  <string name="send_thank_failure_message" fuzzy="true">Не вдалося надіслати подяку %1$s</string>
+  <string name="send_thank_failure_title" fuzzy="true">Надсилання подяки: Неуспішно</string>
+  <string name="send_thank_toast" fuzzy="true">Надсилання подяки %1$s</string>
   <string name="review_copyright">Чи відповідає це правилам авторського права?</string>
   <string name="review_category">Чи правильно вказані категорії?</string>
   <string name="review_spam">Чи відповідає це призначенню Вікісховища?</string>
@@ -521,15 +514,14 @@
   <string name="menu_option_unread">Перегляд непрочитаних</string>
   <string name="error_occurred_in_picking_images">Сталася помилка при завантаженні зображень</string>
   <string name="please_wait">Будь ласка, зачекайте…</string>
-  <string name="images_featured_explanation">Вибрані зображення — це зображення від вправних фотографів та ілюстраторів, які спільнота Вікісховища визначила як такі, що мають найкращу якість на сайті.</string>
   <string name="images_via_nearby_explanation">Зображення, завантажені через «Поблизу», — це зображення, завантажені через дослідження місць на мапі.</string>
   <string name="thanks_received_explanation">Ця функція дозволяє редакторам надіслати «дякую» користувачам, які роблять корисні редагування, — скориставшись невеличким посиланням на сторінці історії або порівняння версій.</string>
-  <string name="copy_image_caption_description">Копіювати до наступних медіафайлів</string>
+  <string name="copy_image_caption_description" fuzzy="true">Копіювати до наступних медіафайлів</string>
   <string name="copied_successfully">Скопійовано</string>
   <string name="welcome_do_upload_content_description">Приклади добрих зображень для завантаження у Вікісховище</string>
   <string name="welcome_dont_upload_content_description">Приклади зображень, які не слід завантажувати</string>
   <string name="skip_image">Пропустити це зображення</string>
-  <string name="download_failed_we_cannot_download_the_file_without_storage_permission">Завантаження не вдалося. Ми не змогли завантажити файл без доступу до зовнішнього носія.</string>
+  <string name="download_failed_we_cannot_download_the_file_without_storage_permission" fuzzy="true">Завантаження не вдалося. Ми не змогли завантажити файл без доступу до зовнішнього носія.</string>
   <string name="manage_exif_tags">Робота з EXIF-тегами</string>
   <string name="manage_exif_tags_summary">Вкажіть, які EXIF-теги мають бути збережені при завантаженні файлів</string>
   <string name="exif_tag_name_author">Автор</string>
@@ -539,8 +531,6 @@
   <string name="exif_tag_name_lensModel">Модель об\'єктиву</string>
   <string name="exif_tag_name_serialNumbers">Серійний номер</string>
   <string name="exif_tag_name_software">Програмне забезпечення</string>
-  <string name="media_location_permission_denied">Доступ до місцезнаходження медіа заборонено</string>
-  <string name="add_location_manually">Можливо, ми не зможемо автоматично отримати дані про місцезнаходження із зображень, які ви завантажуєте. Будь ласка, додайте відповідне місце для кожного зображення перед надсиланням</string>
   <string name="share_text">Вивантажуйте фото у Вікісховище безпосередньо зі свого телефона. Завантажте застосунок: %1$s</string>
   <string name="share_via">Поділитися програмкою через…</string>
   <string name="image_info">Інформація про зображення</string>
@@ -600,7 +590,7 @@
   <string name="description_activity_title">Редагувати описи та заголовки</string>
   <string name="share_image_via">Поширити зображення через</string>
   <string name="you_have_no_achievements_yet">Ви ще не зробили жодного внеску</string>
-  <string name="no_achievements_yet">%s ще не зробив жодного внеску</string>
+  <string name="no_achievements_yet">%1$s ще не зробив жодного внеску</string>
   <string name="account_created">Обліковий запис створено!</string>
   <string name="text_copy">Текст скопійовано до буферу обміну</string>
   <string name="notification_mark_read">Сповіщення позначено прочитаним</string>
@@ -609,7 +599,7 @@
   <string name="place_state_exists">Існує</string>
   <string name="place_state_needs_photo">Треба фото</string>
   <string name="place_type">Тип місця:</string>
-  <string name="nearby_search_hint">Міст, музей, готель тощо</string>
+  <string name="nearby_search_hint" fuzzy="true">Міст, музей, готель тощо</string>
   <string name="you_must_reset_your_passsword">Щось пішло не так із процесом входу. Вам треба скинути пароль!</string>
   <string name="title_for_media">МЕДІА</string>
   <string name="title_for_child_classes">ДОЧІРНІ КЛАСИ</string>
@@ -653,7 +643,7 @@
   <string name="wikipedia_instructions_step_5">5. Вставте вікі-текст у відповідне місце.</string>
   <string name="wikipedia_instructions_step_6">6. Відредагуйте вікі-текст за потреби, вказавши потрібне розміщення. Детальну інформацію знайдете &lt;a href=\"https://uk.wikipedia.org/wiki/Довідка:Розширений_синтаксис_зображень\"&gt;тут&lt;/a&gt;.</string>
   <string name="wikipedia_instructions_step_7">7. Опублікуйте статтю</string>
-  <string name="copy_wikicode_to_clipboard">Скопіювати вікікод у буфер обміну</string>
+  <string name="copy_wikicode_to_clipboard" fuzzy="true">Скопіювати вікікод у буфер обміну</string>
   <string name="pause">пауза</string>
   <string name="resume">продовжити</string>
   <string name="paused">Призупинено</string>
@@ -720,7 +710,7 @@
   <string name="back">Назад</string>
   <string name="welcome_custom_picture_selector_text">Ласкаво просимо до користувацького вибору зображень</string>
   <string name="custom_selector_info_text1">Цей засіб вибору показує вам, які зображення ви вже завантажили до Commons.</string>
-  <string name="custom_selector_info_text2">На відміну від зображення зліва, зображення праворуч має логотип Commons, яке вказує, що воно вже завантажене.\n  Натисніть і утримуйте для попереднього перегляду зображення.</string>
+  <string name="custom_selector_info_text2" fuzzy="true">На відміну від зображення зліва, зображення праворуч має логотип Commons, яке вказує, що воно вже завантажене.\n  Натисніть і утримуйте для попереднього перегляду зображення.</string>
   <string name="welcome_custom_selector_ok">Чудово</string>
   <string name="custom_selector_already_uploaded_image_text">Це зображення вже завантажено на Спільний ресурс.</string>
   <string name="custom_selector_over_limit_warning">З технічних причин програма не може надійно вивантажувати більше ніж %1$d зображення/ь одночасно. Обмеження завантаження %1$d перевищено на %2$d.</string>
@@ -737,8 +727,8 @@
   <string name="need_permission">Потрібен дозвіл</string>
   <string name="read_phone_state_permission_message">Для належної роботи мапи поблизу мають відображати стан PHONE STATE</string>
   <string name="location_permission_rationale">Додатковий дозвіл: отримувати поточне розташування для підказок категорій</string>
-  <string name="contributions_of_user">Внесок користувача: %s</string>
-  <string name="achievements_of_user">Досягнення користувача: %s</string>
+  <string name="contributions_of_user">Внесок користувача: %1$s</string>
+  <string name="achievements_of_user">Досягнення користувача: %1$s</string>
   <string name="menu_view_user_page">Переглянути профіль користувача</string>
   <string name="edit_depictions">Редагувати описи</string>
   <string name="edit_categories">Редагувати категорії</string>
@@ -749,7 +739,7 @@
   <string name="location_message">Дані про місцезнаходження допомагають редакторам Вікі знайти ваше зображення, що робить його набагато кориснішим.\nВаші останні завантаження не мають місцезнаходження.\nПропонуємо ввімкнути місцезнаходження в налаштуваннях програми камери.\nДякуємо за завантаження!</string>
   <string name="no_location_found_title">Розташування не знайдено</string>
   <string name="no_location_found_message">Як щодо того, щоб додати місце, де було зроблене зображення? Дані про розташування допомогають вікіредакторам знайти ваше зображення, від чого воно стає ще більш корисним.\nДякуємо!</string>
-  <string name="add_location">Додати розташування</string>
+  <string name="add_location" fuzzy="true">Додати розташування</string>
   <string name="feedback_sharing_data_alert">Будь ласка, видаліть з цього листа будь-яку інформацію, якою ви не бажаєте поділитися публічно. Також майте на увазі, що ваша адреса електронної пошти, за допомогою якої ви розміщуєте публікацію, а також пов’язане ім’я та зображення профілю будуть видимі для всіх.</string>
   <string name="explore_map_details">Деталі</string>
   <string name="achievements_unavailable_beta">Досягнення доступні лише у версії prod. Будь ласка, перегляньте документацію розробників.</string>
@@ -770,8 +760,8 @@
   <string name="unmark_as_not_for_upload">Зняти позначку «Не для завантаження».</string>
   <string name="marking_as_not_for_upload">Позначення як не для завантаження</string>
   <string name="unmarking_as_not_for_upload">Зняття позначки «Не для завантаження»</string>
-  <string name="show_already_actioned_pictures">Показати вже виконані картинки</string>
-  <string name="hiding_already_actioned_pictures">Приховування вже активованих картинок</string>
+  <string name="show_already_actioned_pictures" fuzzy="true">Показати вже виконані картинки</string>
+  <string name="hiding_already_actioned_pictures" fuzzy="true">Приховування вже активованих картинок</string>
   <string name="no_more_images_found">Більше зображень не знайдено</string>
   <string name="this_image_is_already_uploaded">Це зображення вже завантажено</string>
   <string name="can_not_select_this_image_for_upload">Неможливо вибрати це зображення для завантаження</string>
@@ -807,17 +797,17 @@
   <string name="invalid_login_message">Сесія авторизації спливла. Будь ласка, увійдіть наново.</string>
   <string name="no_application_available_to_open_gpx_files">Немає доступного застосунку для відкриття файлів GPX</string>
   <string name="file_saved_successfully">Файл успішно збережено</string>
-  <string name="do_you_want_to_open_gpx_file">Бажаєте відкрити файл GPX?</string>
-  <string name="do_you_want_to_open_kml_file">Бажаєте відкрити файл KML?</string>
-  <string name="failed_to_save_kml_file">Не вдалося зберегти файл KML.</string>
-  <string name="failed_to_save_gpx_file">Не вдалося зберегти файл GPX.</string>
-  <string name="saving_kml_file">Збереження файлу KML</string>
-  <string name="saving_gpx_file">Збереження файлу GPX</string>
+  <string name="do_you_want_to_open_gpx_file" fuzzy="true">Бажаєте відкрити файл GPX?</string>
+  <string name="do_you_want_to_open_kml_file" fuzzy="true">Бажаєте відкрити файл KML?</string>
+  <string name="failed_to_save_kml_file" fuzzy="true">Не вдалося зберегти файл KML.</string>
+  <string name="failed_to_save_gpx_file" fuzzy="true">Не вдалося зберегти файл GPX.</string>
+  <string name="saving_kml_file" fuzzy="true">Збереження файлу KML</string>
+  <string name="saving_gpx_file" fuzzy="true">Збереження файлу GPX</string>
   <plurals name="custom_picker_images_selected_title_appendix">
-    <item quantity="one">Вибрано %d зображення</item>
-    <item quantity="few">Вибрано %d зображення</item>
-    <item quantity="many">Вибрано %d зображень</item>
-    <item quantity="other">Вибрано %d зображень</item>
+    <item quantity="one">Вибрано %1$d зображення</item>
+    <item quantity="few">Вибрано %1$d зображення</item>
+    <item quantity="many">Вибрано %1$d зображень</item>
+    <item quantity="other">Вибрано %1$d зображень</item>
   </plurals>
   <string name="multiple_files_depiction">Пам\'ятайте, що усі зображення, вивантажені разом, отримають ті самі категорії і підписи. Якщо ці зображення повинні мати різні підписи і категорії, будь ласка, завантажуйте їх окремо.</string>
   <string name="multiple_files_depiction_header">Примітка про завантаження груп файлів</string>

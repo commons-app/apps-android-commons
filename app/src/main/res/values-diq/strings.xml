@@ -12,7 +12,7 @@
 -->
 <resources>
   <string name="commons_facebook">Pela Facebookiya Commonsi</string>
-  <string name="commons_github">Kodê Çımeyê GitHubê Commonsi</string>
+  <string name="commons_github" fuzzy="true">Kodê Çımeyê GitHubê Commonsi</string>
   <string name="commons_logo">Logoy Commonsi</string>
   <string name="commons_website">Websitey Commonsi</string>
   <string name="submit">Bırışe</string>
@@ -27,22 +27,18 @@
     <item quantity="one">1 dosya bar bena</item>
     <item quantity="other">%1$d dosyeyi bar benê</item>
   </plurals>
-  <plurals name="contributions_subtitle">
-    <item quantity="one">(%1$d)</item>
-    <item quantity="other">(%1$d)</item>
-  </plurals>
   <string name="starting_uploads">Barkerdış serniyeno</string>
   <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">%1$d bar beno</item>
     <item quantity="other">%1$d bar benê</item>
   </plurals>
-  <plurals name="multiple_uploads_title" fuzzy="true">
+  <plurals name="multiple_uploads_title">
     <item quantity="one">%1$d barkerdış</item>
     <item quantity="other">%1$d barkerdışi</item>
   </plurals>
   <plurals name="share_license_summary">
-    <item quantity="one">no resım , lisansê %1$s bın bo</item>
-    <item quantity="other">Nê resımi, lisansê %1$s bın bê</item>
+    <item quantity="one">No resım bınê %1$s de lisans beno</item>
+    <item quantity="other">Nê resımi bınê %1$s de lisans benê</item>
   </plurals>
   <plurals name="upload_count_title">
     <item quantity="one">%1$d biyo bar</item>
@@ -175,15 +171,14 @@
   <string name="become_a_tester_title">Bıbe karberê Beta Testi</string>
   <string name="_2fa_code">2FA-Code (Dı faktorın raşt kerdış)</string>
   <string name="logout_verification">Şıma qayılê cı ra bıvıciyê?</string>
-  <string name="mediaimage_failed">Resımê medyay nêbiyo</string>
   <string name="no_subcategory_found">Bınkategoriye nêvineya</string>
   <string name="no_parentcategory_found">Kategoriya serên nêvineyê</string>
   <string name="welcome_image_mount_zao">Koyê Zao</string>
   <string name="welcome_image_llamas">Lamay</string>
   <string name="welcome_image_rainbow_bridge">Pırdê rainbowi</string>
   <string name="welcome_image_tulip">Korbıze</string>
-  <string name="welcome_image_welcome_wikipedia">Xeyr amey Wikipedia</string>
-  <string name="welcome_image_welcome_copyright">Xeyr amey Heqa telifiye</string>
+  <string name="welcome_image_welcome_wikipedia" fuzzy="true">Xeyr amey Wikipedia</string>
+  <string name="welcome_image_welcome_copyright" fuzzy="true">Xeyr amey Heqa telifiye</string>
   <string name="welcome_image_sydney_opera_house">Sydney Opera House</string>
   <string name="cancel">Bıtexelne</string>
   <string name="navigation_drawer_open">Ake</string>
@@ -261,11 +256,10 @@
   <string name="delete">Bestere</string>
   <string name="Achievements">Destgrotey</string>
   <string name="Profile">Profile</string>
-  <string name="statistics">İstatistiki</string>
   <string name="statistics_thanks">Teşekurê gêriyayi</string>
   <string name="statistics_featured">Resımê weçinıteyi</string>
   <string name="statistics_wikidata_edits">\"Cayê nezdı\" ra resımi</string>
-  <string name="level" fuzzy="true">Sewiya</string>
+  <string name="level">Sewiyaya %1$d</string>
   <string name="images_uploaded">Resımi biyê bar</string>
   <string name="image_reverts">Resımi peyser nêgeriyaye</string>
   <string name="images_used_by_wiki">Gureyniyaye resımi</string>
@@ -313,7 +307,7 @@
   <string name="delete_helper_ask_reason_copyright_logo">Logo</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">Çıkı wıniyo</string>
   <string name="share_image_via">Resımi vıla kerê pê</string>
-  <string name="no_achievements_yet" fuzzy="true">Hewna to iştirak nêkerdo</string>
+  <string name="no_achievements_yet">%1$s hewna thewa iştırak nêkerdo</string>
   <string name="account_created">Hesab vıraziya!</string>
   <string name="text_copy">Metın be panoyi ra kopya bi</string>
   <string name="notification_mark_read">Pêhesnayışi wanaye nışan bıkerê</string>

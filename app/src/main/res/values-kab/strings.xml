@@ -6,23 +6,21 @@
 -->
 <resources>
   <string name="commons_facebook">Asmel Facebook n Commons</string>
-  <string name="commons_github">Tangalt aɣbalu Github n Commons</string>
+  <string name="commons_github" fuzzy="true">Tangalt aɣbalu Github n Commons</string>
   <string name="commons_logo">Alugu Commons</string>
   <string name="commons_website">Asmel wen n Commons</string>
+  <string name="row_item_language_description">Aglam n tutlayt</string>
   <string name="show_captions_description">Aglam</string>
+  <string name="nearby_row_image">Tugna</string>
   <string name="nearby_all">Akk</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">%1$d n ufaylu yezga yettali</item>
     <item quantity="other">%1$d n ifuyla zgan ttalin</item>
   </plurals>
-  <plurals name="contributions_subtitle">
-    <item quantity="one">(%1$d)</item>
-    <item quantity="other">(%1$d)</item>
-  </plurals>
   <string name="starting_uploads">Beddu n walluy</string>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">%d n usali iteddu</item>
-    <item quantity="other">%d n usali iteddu</item>
+    <item quantity="one">%1$d n usali iteddu</item>
+    <item quantity="other">%1$d n usali iteddu</item>
   </plurals>
   <plurals name="multiple_uploads_title">
     <item quantity="one">%1$d n usali</item>
@@ -74,6 +72,7 @@
   <string name="menu_from_camera">Ṭṭef tawlaft</string>
   <string name="menu_nearby">S lqeṛban</string>
   <string name="provider_contributions">Ifuyla i suliɣ</string>
+  <string name="menu_copy_link">Nɣel aseɣwen</string>
   <string name="menu_share">Bḍu</string>
   <string name="share_title_hint" fuzzy="true">Azwel</string>
   <string name="share_description_hint">Aglam</string>
@@ -110,6 +109,7 @@
   <string name="no_uploads_yet">Ur tsuliḍ ara yakan tiwlafin.</string>
   <string name="menu_retry_upload">Ɛref̣ tikelt-nniḍen</string>
   <string name="menu_cancel_upload">Sefsex</string>
+  <string name="language_search_all_languages">Akk tutlayin</string>
   <string name="media_upload_policy">S tuzna n tygna-agi, ad d-wekkdeɣ d akken d ayla-w, ur tegbir ara aferdis yettwaḥerzen s izerfan n umeskar, udiɣ tqudeṛ &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Tisertiyin n Wikimedia Commons&lt;/a&gt;.</string>
   <string name="menu_download">Sider</string>
   <string name="preference_license" fuzzy="true">Turagt</string>
@@ -160,13 +160,12 @@
   <string name="become_a_tester_description">Jerred ar ubadu-nneɣ Beta di Google Play sakin awi anekcum uzwir ar tmahilin timaynutin akked useɣti n ibugen.</string>
   <string name="_2fa_code">Tangalt 2FA</string>
   <string name="logout_verification">Tabɣiḍ ad teffɣeḍ?</string>
-  <string name="mediaimage_failed">Tugna n midya ur teddi ara</string>
   <string name="welcome_image_mount_zao">Taqirruct Zao</string>
   <string name="welcome_image_llamas">Lamas</string>
   <string name="welcome_image_rainbow_bridge">Taqenṭart tislit n unẓaṛ</string>
   <string name="welcome_image_tulip">Taxlult</string>
-  <string name="welcome_image_welcome_wikipedia">Anṣuf ar wikipedia</string>
-  <string name="welcome_image_welcome_copyright">Izerfan n umeskar n usterḥeb</string>
+  <string name="welcome_image_welcome_wikipedia" fuzzy="true">Anṣuf ar wikipedia</string>
+  <string name="welcome_image_welcome_copyright" fuzzy="true">Izerfan n umeskar n usterḥeb</string>
   <string name="welcome_image_sydney_opera_house">Tazeqqa Opera n Sydney</string>
   <string name="cancel">Sefsex</string>
   <string name="navigation_drawer_open">Ldi</string>
@@ -189,6 +188,7 @@
   <string name="login_to_your_account">Qqen ar umiḍan-ik</string>
   <string name="send_log_file">Azen afaylu n uɣmis</string>
   <string name="send_log_file_description" fuzzy="true">Azen afaylu n uɣmis i yinermisen s yimayl</string>
+  <string name="skip_login">Zgel</string>
   <string name="navigation_item_login">Qqen</string>
   <string name="nearby_location_not_available" fuzzy="true">Ulac adeg</string>
   <string name="location_permission_rationale_nearby">Ilaq usireg i uskan tabdart n wadigen iqerben</string>
@@ -201,5 +201,29 @@
   <string name="menu_search_button">Nadi</string>
   <string name="title_activity_search">Nadi</string>
   <string name="search_tab_title_categories">Taggayin</string>
+  <string name="quiz_continue">Kemmel</string>
+  <string name="continue_message">Kemmel</string>
+  <string name="share_app_title">Bḍu asnas</string>
+  <string name="delete">Kkes</string>
+  <string name="Profile">Amaɣnu</string>
+  <string name="list_sheet">Tabdart</string>
+  <string name="next">Uḍfir</string>
+  <string name="title_page_bookmarks_pictures">Tiwlafin</string>
+  <string name="title_page_bookmarks_categories">Taggayin</string>
+  <string name="nominate_for_deletion_done">Immed</string>
+  <string name="review_thanks_yes_button_text">Tugna tuḍfiṛt</string>
+  <string name="exif_tag_name_author">Ameskar</string>
+  <string name="exif_tag_name_software">Aseɣẓan</string>
+  <string name="title_app_shortcut_setting">Iɣewwaren</string>
+  <string name="theme_dark_name">Ubrik</string>
+  <string name="theme_light_name">Aceɛlal</string>
+  <string name="load_more">Sali-d ugar</string>
+  <string name="confirm">Sentem</string>
+  <string name="more">Ugar</string>
+  <string name="leaderboard_column_user">Aseqdac</string>
+  <string name="learn_more">ISSIN UGAR</string>
   <string name="location_permission_rationale">Tasiregt tafrayant: Awi adig amiran i yisumar n taggayt</string>
+  <string name="custom_selector_delete">Kkes</string>
+  <string name="custom_selector_cancel">Semmet</string>
+  <string name="account">Amiḍan</string>
 </resources>

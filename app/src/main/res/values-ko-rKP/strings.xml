@@ -5,7 +5,7 @@
 -->
 <resources>
   <string name="commons_facebook">공용 페이스부크 페지</string>
-  <string name="commons_github">공용 GitHub 원천코드</string>
+  <string name="commons_github" fuzzy="true">공용 GitHub 원천코드</string>
   <string name="commons_logo">공용 로고</string>
   <string name="commons_website">공용 웨브싸이트</string>
   <string name="appwidget_img">오늘의 화상</string>
@@ -13,20 +13,14 @@
     <item quantity="one">%1$d개의 서류를 올리적재하는중</item>
     <item quantity="other">%1$d개의 서류를 올리적재하는중</item>
   </plurals>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">(%1$d)</item>
-    <item quantity="other">(%1$d)</item>
-  </plurals>
   <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">%1$d장의 올리적재를 시작합니다</item>
     <item quantity="other">%1$d장의 올리적재를 시작합니다</item>
   </plurals>
-  <plurals name="multiple_uploads_title" fuzzy="true">
+  <plurals name="multiple_uploads_title">
     <item quantity="one">%1$d개 올리적재</item>
     <item quantity="other">%1$d개 올리적재</item>
   </plurals>
-  <string name="share_license_summary">이 그림은 %1$s에 따라 사용이 허가됩니다</string>
   <string name="navigation_item_explore">찾아보기</string>
   <string name="preference_category_appearance">보이기</string>
   <string name="preference_category_general">일반</string>
@@ -158,13 +152,12 @@
   <string name="become_a_tester_title">베타 시험자가 되세요</string>
   <string name="_2fa_code">2FA부호</string>
   <string name="logout_verification">정말 탈퇴하시겠습니까?</string>
-  <string name="mediaimage_failed">매체 그림 실패</string>
   <string name="no_subcategory_found">하위 분류가 없습니다</string>
   <string name="no_parentcategory_found">부모 분류가 없습니다</string>
   <string name="welcome_image_mount_zao">자오련봉</string>
   <string name="welcome_image_rainbow_bridge">레인보우브리즈</string>
   <string name="welcome_image_tulip">울금향</string>
-  <string name="welcome_image_welcome_wikipedia">위키백과에 오신것을 환영합니다</string>
+  <string name="welcome_image_welcome_wikipedia" fuzzy="true">위키백과에 오신것을 환영합니다</string>
   <string name="cancel">취소</string>
   <string name="navigation_drawer_open">열기</string>
   <string name="navigation_drawer_close">닫기</string>
@@ -257,9 +250,8 @@
   <string name="search_history_deleted">검색 리력이 지워짐</string>
   <string name="nominate_delete">지우기 신청</string>
   <string name="Achievements">성과</string>
-  <string name="statistics" fuzzy="true">통계</string>
   <string name="statistics_featured">알찬 그림</string>
-  <string name="level" fuzzy="true">수준</string>
+  <string name="level" fuzzy="true">수준 %1$d</string>
   <string name="images_uploaded">화상 올리적대됨</string>
   <string name="achievements_share_message">동무와 성과를 공유하세요!</string>
   <string name="achievements_revert_limit_message">최소 요구사항:</string>

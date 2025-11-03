@@ -8,12 +8,13 @@
 * Mirin
 * Robin van der Vliet
 * Surfo
+* Tymewalk
 * YvesNevelsteen
 * Ziko
 -->
 <resources>
   <string name="commons_facebook">Facebook-Paĝo de Komunejo</string>
-  <string name="commons_github">Fontokodo de Komunejo ĉe Github</string>
+  <string name="commons_github">Fontokodo de Komunejo ĉe GitHub</string>
   <string name="commons_logo">Emblemo de Komunejo</string>
   <string name="commons_website">Retejo de Komunejo</string>
   <string name="exit_location_picker">Eliri lok-elektilon</string>
@@ -37,18 +38,14 @@
     <item quantity="one">%1$d dosiero alŝutata</item>
     <item quantity="other">%1$d dosieroj alŝutataj</item>
   </plurals>
-  <plurals name="contributions_subtitle">
-    <item quantity="one">(%1$d)</item>
-    <item quantity="other">(%1$d)</item>
-  </plurals>
   <string name="starting_uploads">Komencanta Alŝutojn</string>
-  <plurals name="starting_multiple_uploads">
-    <item quantity="one">Komencanta %d alŝuton</item>
-    <item quantity="other">Komencanta %d alŝutojn</item>
+  <plurals name="starting_multiple_uploads" fuzzy="true">
+    <item quantity="one">Prilaboraĵo de %1$d alŝuton</item>
+    <item quantity="other">Prilaboraĵo de %1$d alŝutojn</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">%d alŝuto</item>
-    <item quantity="other">%d alŝutoj</item>
+    <item quantity="one">%1$d alŝuto</item>
+    <item quantity="other">%1$d alŝutoj</item>
   </plurals>
   <plurals name="share_license_summary">
     <item quantity="one">Ĉi tiu bildo estos sub permesilo %1$s</item>
@@ -92,7 +89,7 @@
   <string name="uploading_queued">Alŝuto atendas en vico (limigita konekta modo estas ebligita)</string>
   <string name="upload_completed_notification_title">%1$s alŝutita!</string>
   <string name="upload_completed_notification_text">Tuŝetu por vidi vian alŝutadon</string>
-  <string name="upload_progress_notification_title_start">Alŝutas dosieron: %s</string>
+  <string name="upload_progress_notification_title_start">Alŝutas dosieron: %1$s</string>
   <string name="upload_progress_notification_title_in_progress">Alŝutante %1$s</string>
   <string name="upload_progress_notification_title_finishing">Finiĝis la alŝutado de %1$s</string>
   <string name="upload_failed_notification_title">La alŝutado de %1$s malsukcesis</string>
@@ -138,6 +135,7 @@
   <string name="title_activity_settings">Agordoj</string>
   <string name="title_activity_signup">Registriĝi</string>
   <string name="title_activity_featured_images">Elstarigitaj bildoj</string>
+  <string name="images_featured_explanation" fuzzy="true">Elstaraj bildoj estas tiuj bildoj far tre spertaj fotografistoj kaj ilustristoj, kiujn la komunumo de Vikimedia Komunejo elektis kiel iujn de la plej alta kvalito en la retejo.</string>
   <string name="title_activity_custom_selector">Laŭmenda Elektilo</string>
   <string name="title_activity_category_details">Kategorio</string>
   <string name="title_activity_review">Reviziado de kolegoj</string>
@@ -154,6 +152,7 @@
   <string name="no_uploads_yet">Vi ankoraŭ ne alŝutis fotojn.</string>
   <string name="menu_retry_upload">Reprovi</string>
   <string name="menu_cancel_upload">Nuligi</string>
+  <string name="language_search_all_languages">Ĉiuj Lingvoj</string>
   <string name="media_upload_policy">Per submetado de ĉi tiu bildo, mi certigas ke ĝi estas mia propra verko, ke ĝi ne enhavas ion protektatan de aŭtorrajtoj, ke ĝi ne estas memfoto, kaj ke ĝi alimaniere observas la &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines/eo\"&gt;regularojn de Vikipedia Komunejo&lt;/a&gt;.</string>
   <string name="menu_download">Elŝuti</string>
   <string name="preference_license">Defaŭlta permesilo</string>
@@ -223,15 +222,14 @@
   <string name="become_a_tester_description">Abonu nian beta-kanalon ĉe Google Play kaj frue ekprovu novajn trajtojn kaj riparojn de cimoj</string>
   <string name="_2fa_code">2FA-Kodo</string>
   <string name="logout_verification">Ĉu vi vere volas elsaluti?</string>
-  <string name="mediaimage_failed">Aŭdvidaĵo-Bildo Malsukcesis</string>
   <string name="no_subcategory_found">Neniu subkategorio trovita</string>
   <string name="no_parentcategory_found">Neniu superkategorio trovita</string>
   <string name="welcome_image_mount_zao">Monto Zao</string>
   <string name="welcome_image_llamas">Lamoj</string>
   <string name="welcome_image_rainbow_bridge">Ĉielarka Ponto</string>
   <string name="welcome_image_tulip">Tulipo</string>
-  <string name="welcome_image_welcome_wikipedia">Bonvenon al Vikipedio</string>
-  <string name="welcome_image_welcome_copyright">Kopirajto</string>
+  <string name="welcome_image_welcome_wikipedia" fuzzy="true">Bonvenon al Vikipedio</string>
+  <string name="welcome_image_welcome_copyright" fuzzy="true">Kopirajto</string>
   <string name="welcome_image_sydney_opera_house">Sidneja Operejo</string>
   <string name="cancel">Nuligi</string>
   <string name="navigation_drawer_open">Malfermi</string>
@@ -341,6 +339,7 @@
   <string name="blurry_image_answer">Unu el la celoj de Komunejo estas kolekti bonkvalitajn bildojn. Do, malklaraj bildoj ne estas alŝutindaj. Ĉiam provu foti bonkvalite kun bona prilumado.</string>
   <string name="construction_event_answer">Ĉe Komunejo, ni bonvenigas bildojn prezentantajn teknologion aŭ kulturon.</string>
   <string name="congratulatory_message_quiz">%1$s el viaj respondoj estis ĝustaj. Gratulon!</string>
+  <string name="quiz_continue">Daŭrigi</string>
   <string name="warning_for_no_answer">Elektu unu el la du respondoj al la demando</string>
   <string name="user_not_logged_in" fuzzy="true">Ensaluta sesio eksvalidiĝis; bonvolu reensaluti.</string>
   <string name="quiz_result_share_message">Diskonigi ĉi tiun kvizon al viaj amikoj!</string>
@@ -362,11 +361,11 @@
   <string name="delete">Forigi</string>
   <string name="Achievements">Atingoj</string>
   <string name="Profile">Profilo</string>
-  <string name="statistics">Statistiko</string>
   <string name="statistics_thanks">Ricevitaj dankoj</string>
   <string name="statistics_featured">Elstaraj Bildoj</string>
   <string name="statistics_wikidata_edits">Bildoj per \"Apudaj Lokoj\"</string>
-  <string name="level" fuzzy="true">Nivelo</string>
+  <string name="level">Nivelo %1$d</string>
+  <string name="profile_withLevel">%1$s (Nivelo %2$s)</string>
   <string name="images_uploaded">Alŝutitaj Bildoj</string>
   <string name="image_reverts">Bildoj Ne Malfaritaj</string>
   <string name="images_used_by_wiki">Uzataj Bildoj</string>
@@ -398,6 +397,7 @@
   <string name="map_application_missing">Neniu kongrua aplikaĵo troveblas en via aparato. Bonvolu instali tian por uzo kun ĉi tiu funkcio.</string>
   <string name="title_page_bookmarks_pictures">Bildoj</string>
   <string name="title_page_bookmarks_locations">Lokoj</string>
+  <string name="title_page_bookmarks_categories">Kategorioj</string>
   <string name="menu_bookmark">Aldoni/Forigi legosignon</string>
   <string name="provider_bookmarks">Legosignoj</string>
   <string name="bookmark_empty">Vi aldonis neniun legosignon</string>
@@ -453,11 +453,11 @@
   <string name="check_category_failure_message">Ne povis peti kontrolon de kategorio pri %1$s</string>
   <string name="check_category_toast">Petante kontrolon de kategorio pri %1$s</string>
   <string name="nominate_for_deletion_done">Farite</string>
-  <string name="send_thank_success_title">Sendante Dankon: Sukcesis</string>
-  <string name="send_thank_success_message">Sukcese dankis uzanton %1$s</string>
-  <string name="send_thank_failure_message">Malsukcesis sendi dankon %1$s</string>
-  <string name="send_thank_failure_title">Dankado: Malsukcesis</string>
-  <string name="send_thank_toast">Sendante Dankon por %1$s</string>
+  <string name="send_thank_success_title" fuzzy="true">Sendante Dankon: Sukcesis</string>
+  <string name="send_thank_success_message" fuzzy="true">Sukcese dankis uzanton %1$s</string>
+  <string name="send_thank_failure_message" fuzzy="true">Malsukcesis sendi dankon %1$s</string>
+  <string name="send_thank_failure_title" fuzzy="true">Dankado: Malsukcesis</string>
+  <string name="send_thank_toast">Sendante dankon por %1$s</string>
   <string name="review_copyright">Ĉu tio observas la regulojn pri aŭtorrajtoj?</string>
   <string name="review_category">Ĉu ĉi tiu estis ĝuste enkategoriigita?</string>
   <string name="review_spam">Ĉu ĉi tiu estas taŭga?</string>
@@ -483,15 +483,14 @@
   <string name="menu_option_unread">Vidi nelegitojn</string>
   <string name="error_occurred_in_picking_images">Eraro okazis dum elektado de bildoj</string>
   <string name="please_wait">Bonvolu atendi...</string>
-  <string name="images_featured_explanation">Elstaraj bildoj estas tiuj bildoj far tre spertaj fotografistoj kaj ilustristoj, kiujn la komunumo de Vikimedia Komunejo elektis kiel iujn de la plej alta kvalito en la retejo.</string>
   <string name="images_via_nearby_explanation">Bildoj Alŝutitaj per Apudaj lokoj estas bildoj alŝutitaj per trovado de lokoj sur la mapo.</string>
   <string name="thanks_received_explanation">Tiu funkcio ebligas sendi Dankantan sciigon al farinto de utila redakto – per malgranda dankiga ligilo ĉe la paĝo de historio aŭ diferenco.</string>
-  <string name="copy_image_caption_description">Kopio al sekva plurmediaĵo</string>
+  <string name="copy_image_caption_description" fuzzy="true">Kopio al sekva plurmediaĵo</string>
   <string name="copied_successfully">Kopiita</string>
   <string name="welcome_do_upload_content_description">Ekzemploj de alŝutindaj bildoj por Komunejo</string>
   <string name="welcome_dont_upload_content_description">Ekzemploj de ne alŝutindaj bildoj</string>
   <string name="skip_image">Preterpasi ĉi tiun bildon</string>
-  <string name="download_failed_we_cannot_download_the_file_without_storage_permission">Elŝuto malsukcesis!! Ni ne povas elŝuti la dosieron sen permeso konservi ekstere.</string>
+  <string name="download_failed_we_cannot_download_the_file_without_storage_permission" fuzzy="true">Elŝuto malsukcesis!! Ni ne povas elŝuti la dosieron sen permeso konservi ekstere.</string>
   <string name="manage_exif_tags">Mastrumi EXIF-Etikedojn</string>
   <string name="manage_exif_tags_summary">Elekti EXIF-etikedojn tenotajn je alŝutoj</string>
   <string name="exif_tag_name_author">Aŭtoro</string>
@@ -501,8 +500,6 @@
   <string name="exif_tag_name_lensModel">Speco de Lenso</string>
   <string name="exif_tag_name_serialNumbers">Numero de Fotilo</string>
   <string name="exif_tag_name_software">Programaro</string>
-  <string name="media_location_permission_denied">Aliro al loko de plurmediaĵo malakceptita</string>
-  <string name="add_location_manually">Ni eble ne povos aŭtomate akiri pri-lokajn datumojn de bildoj, kiujn vi alŝutas. Bonvolu aldoni la taŭgan lokon por ĉiu bildo antaŭ ol sendi</string>
   <string name="share_text">Alŝutu fotojn al Vikimedia Komunejo rekte de via telefono. Elŝutu la Komunejan aplikaĵon nun: %1$s</string>
   <string name="share_via">Diskonigi aplikaĵon per...</string>
   <string name="image_info">Informo pri Bildo</string>
@@ -558,7 +555,7 @@
   <string name="description_activity_title">Redakti priskribojn kaj bildotekstojn</string>
   <string name="share_image_via">Disdonu bildon per</string>
   <string name="you_have_no_achievements_yet">Vi ankoraŭ ne faris ajnajn kontribuojn</string>
-  <string name="no_achievements_yet">%s ankoraŭ ne faris ajnajn kontribuojn</string>
+  <string name="no_achievements_yet">%1$s ankoraŭ ne faris ajnajn kontribuojn</string>
   <string name="account_created">Konto kreita!</string>
   <string name="text_copy">Teksto kopiita al pinĉtabulo</string>
   <string name="notification_mark_read">Sciigo markita kiel legita</string>
@@ -567,7 +564,7 @@
   <string name="place_state_exists">Ekzistas</string>
   <string name="place_state_needs_photo">Foto bezonata</string>
   <string name="place_type">Tipo de loko:</string>
-  <string name="nearby_search_hint">Ponto, muzeo, hotelo ktp.</string>
+  <string name="nearby_search_hint" fuzzy="true">Ponto, muzeo, hotelo ktp.</string>
   <string name="you_must_reset_your_passsword" fuzzy="true">Io misfunkciis kun ensaluto, vi devas restarigi vian pasvorton !!</string>
   <string name="title_for_media">PLURMEDIAĴO</string>
   <string name="title_for_child_classes">SUBKLASOJ</string>
@@ -606,7 +603,7 @@
   <string name="wikipedia_instructions_step_5">5. Algluu la vikitekston al la taŭga loko.</string>
   <string name="wikipedia_instructions_step_6">6. Redaktu la vikitekston por taŭga poziciigo, se necese. Por pliaj informoj, vidu &lt;a href=\"https://en.wikipedia.org/wiki/Wikipedia:Manual_of_Style/Images#How_to_place_an_image\"&gt;ĉi tie&lt;/a&gt;.</string>
   <string name="wikipedia_instructions_step_7">7. Publikigu la artikolon</string>
-  <string name="copy_wikicode_to_clipboard">Kopiu wikikodon al la pintotabulo</string>
+  <string name="copy_wikicode_to_clipboard" fuzzy="true">Kopiu wikikodon al la pintotabulo</string>
   <string name="pause">paŭzigi</string>
   <string name="resume">daŭrigi</string>
   <string name="paused">Paŭzita</string>
@@ -647,6 +644,7 @@
   <string name="categories_tooltip">Bonvolu elekti la taŭgajn kategoriojn. Malsame ol priskriboj, kategorioj ekzistas nur en la angla.</string>
   <string name="license_tooltip">Komunejo reuzebligas kaj adaptebligas viajn bildojn por ĉiuj. Ĉu vi volas rezigni pri ĉiuj rajtoj? Ĉu vi volas esti atribuata? Ĉu vi volas, ke adaptaĵoj uzu la saman permesilon?</string>
   <string name="depicts_step_title">Montras</string>
+  <string name="depicts_description">Priskribo</string>
   <string name="license_step_title">Permesilo por plurmediaĵo</string>
   <string name="media_detail_step_title">Detaloj de plurmediaĵo</string>
   <string name="menu_view_category_page">Vidi la paĝon de la kategorio</string>
@@ -673,7 +671,7 @@
   <string name="back">Reen</string>
   <string name="welcome_custom_picture_selector_text">Bonvenon al Propra Bilda Elektilo</string>
   <string name="custom_selector_info_text1">Ĉi tiu elektilo montras al vi kiujn bildojn vi jam alŝutis al Komunejo.</string>
-  <string name="custom_selector_info_text2">Malkiel la bildo maldekstre, la bildo dekstre havas la emblemo de Komunejo; tio indikas ke ĝi jam estas alŝutita.\nTuŝu kaj premadu por antaŭrigardo de bildo.</string>
+  <string name="custom_selector_info_text2" fuzzy="true">Malkiel la bildo maldekstre, la bildo dekstre havas la emblemo de Komunejo; tio indikas ke ĝi jam estas alŝutita.\nTuŝu kaj premadu por antaŭrigardo de bildo.</string>
   <string name="welcome_custom_selector_ok">Tre bone</string>
   <string name="custom_selector_already_uploaded_image_text">Ĉi tiu bildo jam estis alŝutita al Komunejo.</string>
   <string name="custom_selector_over_limit_warning">Pro teknikaj kialoj, la programo ne povas fidinde alŝuti pli ol %1$d bildojn samtempe. La alŝuta limo de %1$d estis preterpasita je %2$d.</string>
@@ -688,8 +686,8 @@
   <string name="need_permission">Bezonas Permeson</string>
   <string name="read_phone_state_permission_message">Mapoj de Apude bezonas legi TELEFONAN STATON por funkcii bone</string>
   <string name="location_permission_rationale">Laŭvola permeso: Akiri aktualan lokon por sugestoj pri kategorio</string>
-  <string name="contributions_of_user">Kontribuoj de Uzanto: %s</string>
-  <string name="achievements_of_user">Atingoj de Uzanto: %s</string>
+  <string name="contributions_of_user">Kontribuoj de Uzanto: %1$s</string>
+  <string name="achievements_of_user">Atingoj de Uzanto: %1$s</string>
   <string name="menu_view_user_page" fuzzy="true">Vidi la uzantopaĝon</string>
   <string name="edit_depictions">Redakti priskribojn</string>
   <string name="edit_categories">Redakti kategoriojn</string>
@@ -700,7 +698,7 @@
   <string name="location_message">Lokdatumoj helpas al vikiaj redaktantoj trovi vian bildon, kaj tio faras ĝin multe pli utila.\nViaj lastatempaj alŝutoj ne havas lokon.\nNi sugestas, ke vi enŝaltu Loko en la agordoj de via fotilprogramo.\nDankon pro alŝutado!</string>
   <string name="no_location_found_title">Neniu loko trovita</string>
   <string name="no_location_found_message">Ĉu vi povus aldoni la lokon, kie ĉi tiu bildo estis farita?\nLokdatumoj helpas al vikiaj redaktantoj trovi vian bildon, kaj tio faras ĝin multe pli utila.\nDankon!</string>
-  <string name="add_location">Aldoni lokon</string>
+  <string name="add_location" fuzzy="true">Aldoni lokon</string>
   <string name="feedback_sharing_data_alert">Bonvolu forigi el ĉi tiu retpoŝto ajnajn informojn, kiujn vi ne deziras disdoni publike. Ankaŭ, bonvolu scii, ke via retadreso, kun kiu vi komentas, kaj la rilataj nomo kaj profilbildo, estos videblaj publike.</string>
   <string name="explore_map_details">Detaloj</string>
   <string name="achievements_unavailable_beta" fuzzy="true">Atingoj haveblas nur en la produkto-versio, bonvolu konsulti la dokumentaron por programistoj.</string>
@@ -721,8 +719,8 @@
   <string name="unmark_as_not_for_upload">Malmarki kiel Ne por alŝuti</string>
   <string name="marking_as_not_for_upload">Markado kiel Ne por alŝuto</string>
   <string name="unmarking_as_not_for_upload">Malmarkado kiel Ne por alŝuto</string>
-  <string name="show_already_actioned_pictures">Montru jam pritraktitajn bildojn</string>
-  <string name="hiding_already_actioned_pictures">Kaŝante jam pritraktitajn bildojn</string>
+  <string name="show_already_actioned_pictures" fuzzy="true">Montru jam pritraktitajn bildojn</string>
+  <string name="hiding_already_actioned_pictures" fuzzy="true">Kaŝante jam pritraktitajn bildojn</string>
   <string name="no_more_images_found">Neniuj pliaj bildoj trovitaj</string>
   <string name="this_image_is_already_uploaded">Ĉi tiu bildo jam estas alŝutita</string>
   <string name="can_not_select_this_image_for_upload">Ne eblas elekti ĉi tiun bildon por alŝuto</string>
@@ -744,7 +742,8 @@
   <string name="unable_to_share_upload_item">Ne eblas disdoni ĉi tiun objekton</string>
   <string name="permissions_are_required_for_functionality">Permesoj estas necesaj por ke funkciu</string>
   <plurals name="custom_picker_images_selected_title_appendix">
-    <item quantity="one">%d bildo elektita</item>
-    <item quantity="other">%d bildoj elektitaj</item>
+    <item quantity="one">%1$d bildo elektita</item>
+    <item quantity="other">%1$d bildoj elektitaj</item>
   </plurals>
+  <string name="usages_on_other_wikis_heading">Aliaj vikioj</string>
 </resources>

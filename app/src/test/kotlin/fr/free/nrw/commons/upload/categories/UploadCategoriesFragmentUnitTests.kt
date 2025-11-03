@@ -155,6 +155,13 @@ class UploadCategoriesFragmentUnitTests {
 
     @Test
     @Throws(Exception::class)
+    fun testShowErrorDialog() {
+        Shadows.shadowOf(Looper.getMainLooper()).idle()
+        fragment.showErrorDialog("")
+    }
+
+    @Test
+    @Throws(Exception::class)
     fun testSetCategoriesCaseNull() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
         fragment.setCategories(null)

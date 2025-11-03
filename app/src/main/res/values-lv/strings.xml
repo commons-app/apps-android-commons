@@ -144,8 +144,7 @@
   <string name="search_history_deleted">Meklējumu vēsture izdzēsta</string>
   <string name="delete">Dzēst</string>
   <string name="Profile">Profils</string>
-  <string name="statistics">Statistika</string>
-  <string name="level" fuzzy="true">Līmenis</string>
+  <string name="level" fuzzy="true">Līmenis %1$d</string>
   <string name="nearby_fragment">Tuvumā</string>
   <string name="list_sheet">Saraksts</string>
   <string name="next">Nākamais</string>

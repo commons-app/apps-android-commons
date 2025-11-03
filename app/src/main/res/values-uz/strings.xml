@@ -9,7 +9,7 @@
 -->
 <resources>
   <string name="commons_facebook">Vikiombor Facebook sahifasi</string>
-  <string name="commons_github">Vikiomborning GitHub manba kodi</string>
+  <string name="commons_github" fuzzy="true">Vikiomborning GitHub manba kodi</string>
   <string name="commons_logo">Vikiombor logosi</string>
   <string name="commons_website">Vikiombor vebsayti</string>
   <string name="exit_location_picker">Joylashuvni tanshadan chiqish</string>
@@ -33,18 +33,14 @@
     <item quantity="one">%1$d ta fayl joylandi</item>
     <item quantity="other">%1$d ta fayl joylandi</item>
   </plurals>
-  <plurals name="contributions_subtitle">
-    <item quantity="one">(%1$d)</item>
-    <item quantity="other">(%1$d)</item>
-  </plurals>
   <string name="starting_uploads">Yuklashni boshlash</string>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">%d yuklandi</item>
-    <item quantity="other">%d yuklandi</item>
+    <item quantity="one">%1$d yuklandi</item>
+    <item quantity="other">%1$d yuklandi</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">%d yuklandi</item>
-    <item quantity="other">%d yuklandi</item>
+    <item quantity="one">%1$d yuklandi</item>
+    <item quantity="other">%1$d yuklandi</item>
   </plurals>
   <plurals name="share_license_summary">
     <item quantity="one">Ushbu rasm %1$s litsenziyasi asosidadir</item>
@@ -88,7 +84,7 @@
   <string name="uploading_queued">Yuklash navbatda (cheklangan ulanish sozlanmasi yoqilgan)</string>
   <string name="upload_completed_notification_title">%1$s yuklanmoqda!</string>
   <string name="upload_completed_notification_text">Yuklashni ko‘rish uchun bosing</string>
-  <string name="upload_progress_notification_title_start">Fayl yuklanmoqda: %s</string>
+  <string name="upload_progress_notification_title_start">Fayl yuklanmoqda: %1$s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s yuklanmoqda</string>
   <string name="upload_progress_notification_title_finishing">%1$s yuklab boʻlindi</string>
   <string name="upload_failed_notification_title">%1$s faylini joylab boʻlmadi</string>
@@ -215,15 +211,14 @@
   <string name="_2fa_code">2FA kod</string>
   <string name="email_auth_code">Elektron pochta tasdiqlash kodi</string>
   <string name="logout_verification">Haqiqatan ham tizimdan chiqmoqchimisiz?</string>
-  <string name="mediaimage_failed">Media tasviri bajarilmadi</string>
   <string name="no_subcategory_found">Hech qanday ost toifa topilmadi</string>
   <string name="no_parentcategory_found">Asosiy toifa topilmadi</string>
   <string name="welcome_image_mount_zao">Zao toʻgi</string>
   <string name="welcome_image_llamas">Llamalar</string>
   <string name="welcome_image_rainbow_bridge">Kamalak koʻprigi</string>
   <string name="welcome_image_tulip">Lola</string>
-  <string name="welcome_image_welcome_wikipedia">Vikipediyaga xush kelibsiz</string>
-  <string name="welcome_image_welcome_copyright">Mualliflik huquqlariga xush kelibsiz</string>
+  <string name="welcome_image_welcome_wikipedia" fuzzy="true">Vikipediyaga xush kelibsiz</string>
+  <string name="welcome_image_welcome_copyright" fuzzy="true">Mualliflik huquqlariga xush kelibsiz</string>
   <string name="welcome_image_sydney_opera_house">Sidney opera teatri</string>
   <string name="cancel">Bekor qilish</string>
   <string name="navigation_drawer_open">Ochish</string>
@@ -357,11 +352,10 @@
   <string name="delete">Oʻchirish</string>
   <string name="Achievements">Yutuqlar</string>
   <string name="Profile">Profil</string>
-  <string name="statistics">Statistika</string>
   <string name="statistics_thanks">Bildirilgan minnatdorchiliklar</string>
   <string name="statistics_featured">Tanlangan tasvirlar</string>
   <string name="statistics_wikidata_edits">\"Yaqin atrofdan\" olingan tasvirlar</string>
-  <string name="level" fuzzy="true">Bosqich</string>
+  <string name="level" fuzzy="true">Bosqich %1$d</string>
   <string name="images_uploaded">Yuklangan rasmlar</string>
   <string name="image_reverts">Tasvirlar qayta tiklanmadi</string>
   <string name="images_used_by_wiki">Foydalanilgan tasvirlar</string>

@@ -4,6 +4,7 @@
 * Drjpoudel
 * Nirajan pant
 * Parbat subedi
+* SaldırganSincap
 * पर्वत सुबेदी
 * बडा काजी
 * राम प्रसाद जोशी
@@ -12,11 +13,11 @@
 -->
 <resources>
   <string name="commons_facebook">कमन्सकाे फेसबुक पृष्ठ</string>
-  <string name="commons_github">कमन्सकाे Github स्रोत कोड</string>
+  <string name="commons_github" fuzzy="true">कमन्सकाे Github स्रोत कोड</string>
   <string name="commons_logo">कमन्सकाे लाेगाे</string>
   <string name="commons_website">कमन्सकाे वेबसाइट</string>
   <string name="exit_location_picker">स्थान चयनकर्ताबाट बाहिर निस्कनुहोस्</string>
-  <string name="submit">बुझाउनुहोस्</string>
+  <string name="submit">पेस गर्नुहोस्</string>
   <string name="add_another_description">अर्को विवरण थप्नुहोस्</string>
   <string name="add_new_contribution">नयाँ योगदान थप्नुहोस्</string>
   <string name="add_contribution_from_camera">क्यामराबाट योगदान थप्नुहोस्</string>
@@ -35,18 +36,14 @@
     <item quantity="one">%1$d फाइल अपलोड हुँदैछ</item>
     <item quantity="other">%1$d फाइलहरू अपलोड हुँदैछ</item>
   </plurals>
-  <plurals name="contributions_subtitle">
-    <item quantity="one">(%1$d)</item>
-    <item quantity="other">(%1$d)</item>
-  </plurals>
   <string name="starting_uploads">अपलोडहरू सुरु गर्दै</string>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">%d अपलोड प्रशोधन गर्दै</item>
-    <item quantity="other"> %d अपलोडहरू प्रशोधन गर्दै</item>
+    <item quantity="one">%1$d अपलोड प्रशोधन गर्दै</item>
+    <item quantity="other">%1$d अपलोडहरू प्रशोधन गर्दै</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">%d अपलोड</item>
-    <item quantity="other">%d अपलोडहरू</item>
+    <item quantity="one">%1$d अपलोड</item>
+    <item quantity="other">%1$d अपलोडहरू</item>
   </plurals>
   <plurals name="share_license_summary">
     <item quantity="one">यो तस्वीर %1$s अन्तर्गत इजाजतपत्र प्राप्त हुनेछ</item>
@@ -84,7 +81,7 @@
   <string name="uploading_started">उर्ध्वभरण सुरू भयो!</string>
   <string name="upload_completed_notification_title">%1$s उर्ध्वभरण गरियो !</string>
   <string name="upload_completed_notification_text">तपाईको उर्ध्वभरण हेर्नको लागि ट्याप गर्नुहोस्</string>
-  <string name="upload_progress_notification_title_start">%s: उर्ध्वभरण सुरू गर्दैै</string>
+  <string name="upload_progress_notification_title_start">%1$s: उर्ध्वभरण सुरू गर्दैै</string>
   <string name="upload_progress_notification_title_in_progress">%1$s उर्ध्वभरण गरिँदै</string>
   <string name="upload_progress_notification_title_finishing">%1$s उर्ध्वभरण सकाउँदै</string>
   <string name="upload_failed_notification_title"> %1$s उर्ध्वभरण असफल भयो</string>
@@ -126,7 +123,7 @@
   <string name="title_activity_category_details">श्रेणी</string>
   <string name="menu_about">बारेमा</string>
   <string name="about_license">विकिमिडिया कमन्स अनुप्रयाेग एक स्वतन्त्र स्रोत अनुप्रयाेग हो। यो अनुप्रयाेग विकिमिडिया समुदायका अनुदानप्राप्तकर्ताहरू र स्वयंसेवकहरूद्वारा निर्मित एवम् प्रबन्धित छ। विकिमिडिया फाउण्डेसन यस अनुप्रयाेगकाे निर्माण, विकास र प्रबन्धनमा कुनै पनि प्रकारले संलग्न छैन।</string>
-  <string name="about_improve">बग प्रतिवेदन र सुझावहरूको लागि नयाँ &lt;a href=\"&lt;span class=\"notranslate\" translate=\"no\"&gt;%1$s \"&gt;गिटहब समस्या&lt;/a&gt; सिर्जना गर्नुहोस्।</string>
+  <string name="about_improve">बग प्रतिवेदन र सुझावहरूको लागि नयाँ a href=\"%1$s\"&gt;गिटहब समस्या&lt;/a&gt; सिर्जना गर्नुहोस्।</string>
   <string name="about_privacy_policy">गोपनीयता नीति</string>
   <string name="about_credits">श्रेयहरू</string>
   <string name="title_activity_about">बारेमा</string>
@@ -193,7 +190,7 @@
   <string name="logout_verification">के तपाईं निर्गमन गर्न चाहानुहुन्छ?</string>
   <string name="no_subcategory_found">कुनैपनि उपश्रेणीहरू फेला परेनन्</string>
   <string name="no_parentcategory_found">कुनैपनि अभिभावक श्रेणीहरू फेला परेन</string>
-  <string name="welcome_image_welcome_wikipedia">विकिपिडियामा स्वागत छ</string>
+  <string name="welcome_image_welcome_wikipedia" fuzzy="true">विकिपिडियामा स्वागत छ</string>
   <string name="welcome_image_sydney_opera_house">सिड्नीकाे ओपेरा हाउस</string>
   <string name="cancel">रद्द गर्नुहोस्</string>
   <string name="navigation_drawer_open">खोल्नुहोस्</string>
@@ -259,10 +256,9 @@
   <string name="nominate_delete">मेटाउनका लागि नामाङ्कित</string>
   <string name="delete">मेटाउनुहाेस्</string>
   <string name="Achievements">उपलब्धिहरू</string>
-  <string name="statistics">तथ्याङ्कहरू</string>
   <string name="statistics_thanks">धन्यवाद प्राप्त भयाे</string>
   <string name="statistics_featured">विशेष तस्वीरहरू</string>
-  <string name="level">स्तर %d</string>
+  <string name="level">स्तर %1$d</string>
   <string name="images_used_by_wiki">प्रयाेग भएका तस्वीरहरू</string>
   <string name="notifications_channel_name_all">कमन्स सूचना</string>
   <string name="contributions_fragment">योगदानहरू</string>
@@ -299,7 +295,7 @@
   <string name="delete_helper_ask_reason_copyright_logo">लोगो</string>
   <string name="category_edit_helper_show_edit_title_success">सफल</string>
   <string name="coordinates_edit_helper_show_edit_title_success">सफल</string>
-  <string name="no_achievements_yet">तपाईले हालसम्म कुनैपनि सम्पादन गर्नु भएकाे छैन %s</string>
+  <string name="no_achievements_yet">तपाईले हालसम्म कुनैपनि सम्पादन गर्नु भएकाे छैन %1$s</string>
   <string name="account_created">खाता सृजना गरियो!</string>
   <string name="upload_nearby_place_found_title">नजिकैको स्थान भेटियो</string>
   <string name="title_app_shortcut_bookmark">पुस्तक चिनोहरू</string>
@@ -320,7 +316,7 @@
   <string name="description">विवरण</string>
   <string name="title_page_bookmarks_items">वस्तुहरू</string>
   <string name="done">सम्पन्न भयो</string>
-  <string name="custom_selector_info_text2"/>
+  <string name="custom_selector_info_text2" fuzzy="true"/>
   <string name="learn_more">थप जान्नुहोस्</string>
   <string name="wlm_campaign_title">विकी लभ्स मोनुमेन्टस्</string>
   <string name="need_permission">अनुमति आवश्यक</string>
@@ -334,7 +330,7 @@
   <string name="location_message"/>
   <string name="no_location_found_title">कुनै पनि स्थान फेला परेन ।</string>
   <string name="no_location_found_message">तस्विर खिचिएको स्थान थप्ने हो?\nस्थानको डेटाले विकी सम्पादकहरूलाई तस्विर भेटाउन मद्दत गर्छ र यसलाई धेरै उपयोगी गराउँछ।\nधन्यवाद!</string>
-  <string name="add_location">स्थान थप्नुहोस्</string>
+  <string name="add_location" fuzzy="true">स्थान थप्नुहोस्</string>
   <string name="explore_map_details">विवरणहरू</string>
   <string name="copyright_popup">कृपया आफैँले खिच्नुभएको तस्विर मात्र अपलोड गर्नुहोस्। प्रतिलिपि अधिकार हनन् गर्ने अपलोडकर्तालाई रोकगाइने छ। यो बिटाएपमा पनि लागू हुन्छ। एप परीक्षण गर्नुभएकोमा धन्यवाद!</string>
   <string name="android_version">एन्ड्रोइड संस्करण</string>
