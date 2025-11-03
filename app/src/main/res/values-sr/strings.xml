@@ -45,7 +45,6 @@
   </plurals>
   <plurals name="multiple_uploads_title">
     <item quantity="one">%1$d отпремање</item>
-    <item quantity="few">%1$d отпремања</item>
     <item quantity="other">%1$d отпремања</item>
   </plurals>
   <plurals name="share_license_summary">
