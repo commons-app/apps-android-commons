@@ -3,75 +3,25 @@ package fr.free.nrw.commons.nearby
 import android.net.Uri
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
+import androidx.core.net.toUri
 
 /**
  * Handles the links to Wikipedia, Commons, and Wikidata that are displayed for a Place
  */
 @Parcelize
-class Sitelinks(
-    private val wikipediaLink: String?,
-    private val commonsLink: String?,
-    private val wikidataLink: String?
+data class Sitelinks(
+    val wikipediaLink: String? = null,
+    val commonsLink: String? = null,
+    val wikidataLink: String? = null
 ) : Parcelable {
-    /**
-     * Gets the Wikipedia link for a Place
-     * @return Wikipedia link
-     */
-    fun getWikipediaLink(): Uri? {
-        return sanitiseString(wikipediaLink)
-    }
+    val wikipediaUri: Uri?
+        get() = sanitiseString(wikipediaLink)
 
-    /**
-     * Gets the Commons link for a Place
-     * @return Commons link
-     */
-    fun getCommonsLink(): Uri? {
-        return sanitiseString(commonsLink)
-    }
+    val commonsUri: Uri?
+        get() = sanitiseString(commonsLink)
 
-    /**
-     * Gets the Wikidata link for a Place
-     * @return Wikidata link
-     */
-    fun getWikidataLink(): Uri? {
-        return sanitiseString(wikidataLink)
-    }
-
-    override fun toString(): String {
-        return "Sitelinks{" +
-                "wikipediaLink='" + wikipediaLink + '\'' +
-                ", commonsLink='" + commonsLink + '\'' +
-                ", wikidataLink='" + wikidataLink + '\'' +
-                '}'
-    }
-
-    /**
-     * Builds a list of Sitelinks for a Place
-     */
-    class Builder {
-        private var wikidataLink: String? = null
-        private var commonsLink: String? = null
-        private var wikipediaLink: String? = null
-
-        fun setWikipediaLink(link: String): Builder {
-            wikipediaLink = link
-            return this
-        }
-
-        fun setWikidataLink(link: String): Builder {
-            wikidataLink = link
-            return this
-        }
-
-        fun setCommonsLink(link: String?): Builder {
-            commonsLink = link
-            return this
-        }
-
-        fun build(): Sitelinks {
-            return Sitelinks(wikipediaLink, commonsLink, wikidataLink)
-        }
-    }
+    val wikidataUri: Uri?
+        get() = sanitiseString(wikidataLink)
 
     companion object {
         /**
@@ -80,10 +30,9 @@ class Sitelinks(
          * @return sanitised and parsed link
          */
         private fun sanitiseString(stringUrl: String?): Uri? {
-            return stringUrl?.let {
-                val sanitisedStringUrl = it.replace("[<>\n\r]".toRegex(), "").trim { it <= ' ' }
-                Uri.parse(sanitisedStringUrl)
-            }
+            return stringUrl?.replace(
+                "[<>\n\r]".toRegex(), ""
+            )?.trim()?.toUri()
         }
     }
 }

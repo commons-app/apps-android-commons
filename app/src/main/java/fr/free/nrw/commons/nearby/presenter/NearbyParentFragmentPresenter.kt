@@ -310,7 +310,7 @@ class NearbyParentFragmentPresenter(
             for (i in 0..updatedGroups.lastIndex) {
                 val repoPlace = placesRepository.fetchPlace(updatedGroups[i].place.entityID)
                 if (repoPlace != null && repoPlace.name != null && repoPlace.name != ""){
-                    updatedGroups[i].isBookmarked = bookmarkLocationDao.findBookmarkLocation(repoPlace.name)
+                    updatedGroups[i].isBookmarked = bookmarkLocationDao.findBookmarkLocation(repoPlace.name!!)
                     updatedGroups[i].place.apply {
                         name = repoPlace.name
                         isMonument = repoPlace.isMonument
@@ -351,7 +351,7 @@ class NearbyParentFragmentPresenter(
                             collectResults.send(
                                 fetchedPlaces.mapIndexed { index, place ->
                                     Pair(indices[index], MarkerPlaceGroup(
-                                        bookmarkLocationDao.findBookmarkLocation(place.name),
+                                        bookmarkLocationDao.findBookmarkLocation(place.name!!),
                                         place
                                     ))
                                 }
@@ -369,7 +369,7 @@ class NearbyParentFragmentPresenter(
 
                                         onePlaceBatch.add(Pair(i, MarkerPlaceGroup(
                                             bookmarkLocationDao.findBookmarkLocation(
-                                                fetchedPlace[0].name
+                                                fetchedPlace[0].name!!
                                             ),
                                             fetchedPlace[0]
                                         )))
@@ -407,7 +407,7 @@ class NearbyParentFragmentPresenter(
                 if (clickedPlacesIndex < clickedPlaces.size) {
                     val clickedPlacesBacklog = hashMapOf<LatLng, Place>()
                     while (clickedPlacesIndex < clickedPlaces.size) {
-                        clickedPlacesBacklog[clickedPlaces[clickedPlacesIndex].location] =
+                        clickedPlacesBacklog[clickedPlaces[clickedPlacesIndex].location!!] =
                             clickedPlaces[clickedPlacesIndex]
                         ++clickedPlacesIndex
                     }
@@ -424,14 +424,14 @@ class NearbyParentFragmentPresenter(
                 if (bookmarkChangedPlacesIndex < bookmarkChangedPlaces.size) {
                     val bookmarkChangedPlacesBacklog = hashMapOf<LatLng, Place>()
                     while (bookmarkChangedPlacesIndex < bookmarkChangedPlaces.size) {
-                        bookmarkChangedPlacesBacklog[bookmarkChangedPlaces[bookmarkChangedPlacesIndex].location] =
+                        bookmarkChangedPlacesBacklog[bookmarkChangedPlaces[bookmarkChangedPlacesIndex].location!!] =
                             bookmarkChangedPlaces[bookmarkChangedPlacesIndex]
                         ++bookmarkChangedPlacesIndex
                     }
                     for ((index, group) in updatedGroups.withIndex()) {
                         if (bookmarkChangedPlacesBacklog.containsKey(group.place.location)) {
                             updatedGroups[index] = MarkerPlaceGroup(
-                                bookmarkLocationDao.findBookmarkLocation(updatedGroups[index].place.name), updatedGroups[index].place
+                                bookmarkLocationDao.findBookmarkLocation(updatedGroups[index].place.name!!), updatedGroups[index].place
                             )
                         }
                     }
@@ -539,7 +539,7 @@ class NearbyParentFragmentPresenter(
                 ).sortedBy { it.getDistanceInDouble(mapFocus) }.take(NearbyController.MAX_RESULTS)
                     .map {
                         MarkerPlaceGroup(
-                            bookmarkLocationDao.findBookmarkLocation(it.name), it
+                            bookmarkLocationDao.findBookmarkLocation(it.name!!), it
                         )
                     }
                 ensureActive()

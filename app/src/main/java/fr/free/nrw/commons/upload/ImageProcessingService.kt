@@ -193,7 +193,7 @@ class ImageProcessingService @Inject constructor(
                 if (geoLocation.isNullOrBlank()) {
                     return@flatMap Single.just<Int>(IMAGE_OK)
                 }
-                imageUtilsWrapper.checkImageGeolocationIsDifferent(geoLocation, place.getLocation())
+                imageUtilsWrapper.checkImageGeolocationIsDifferent(geoLocation, place.location)
             }
             .subscribeOn(Schedulers.io())
     }

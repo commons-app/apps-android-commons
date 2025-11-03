@@ -61,7 +61,7 @@ class ImageProcessingServiceTest {
         val contentResolver = mock(ContentResolver::class.java)
 
         `when`(mockPlace.wikiDataEntityId).thenReturn("Q1")
-        `when`(mockPlace.getLocation()).thenReturn(mock(LatLng::class.java))
+        `when`(mockPlace.location).thenReturn(mock(LatLng::class.java))
         `when`(mediaUri.path).thenReturn("filePath")
         /*`when`(mockTitle.isEmpty).thenReturn(false)
         `when`(mockTitle.isSet).thenReturn(true)*/
