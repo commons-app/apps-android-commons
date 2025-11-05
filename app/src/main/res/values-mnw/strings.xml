@@ -9,20 +9,15 @@
   <string name="commons_facebook">Commons Facebook Page</string>
   <string name="commons_logo">သၚ်္ကေတ Commons</string>
   <string name="appwidget_img">ဗီုရုပ်တၟေင် သွက်တ္ၚဲဏအ်</string>
-  <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">ဝှာင် %1$d file uploadingဂှ် ပတိုန်ပၠုပ်ဒၟံင်</item>
-    <item quantity="other">ဝှာင် %1$d files uploadingဂှ် ပတိုန်ပၠုပ်ဒၟံင်</item>
-  </plurals>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">(%1$d)</item>
-    <item quantity="other">(%1$d)</item>
+  <plurals name="uploads_pending_notification_indicator" fuzzy="true">
+    <item quantity="one">%1$d ဝှာင် ဂှ် ပတိုန်ပၠုပ်ဒၟံင်</item>
+    <item quantity="other">%1$d ဝှာင် ဂှ် ပတိုန်ပၠုပ်ဒၟံင်</item>
   </plurals>
   <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">စဒၟံင် %1$d ပတိုန်ပၠုပ်</item>
     <item quantity="other">စဒၟံင် %1$d ပတိုန်ပၠုပ်</item>
   </plurals>
-  <plurals name="multiple_uploads_title" fuzzy="true">
+  <plurals name="multiple_uploads_title">
     <item quantity="one">%1$d ပတိုန်ပၠုပ်</item>
     <item quantity="other">%1$d ပတိုန်ပၠုပ်</item>
   </plurals>
@@ -82,11 +77,11 @@
   <string name="multiple_share_base_title">ကဵုယၟု လိက်ဏအ်ညိ</string>
   <string name="provider_modifications">တင်မပခိုဟ်ပတိုန်ဂမၠိုင်</string>
   <string name="menu_upload_single">ပတိုန်</string>
-  <string name="categories_search_text_hint">ဂၠာဲ ကဏ္ဍဂမၠိုၚ်</string>
+  <string name="categories_search_text_hint">ဂၠာဲ ကဏ္ဍဂမၠိုင်</string>
   <string name="depicts_search_text_hint">ဂၠာဲ တင်ဂၞင် မၞိဟ်မဗၟံက်ထ္ၜး (မပတံ ဒဵု၊ ဍုင်လ္ဂုင်)</string>
   <string name="menu_save_categories">ဂိုင်သိပ်</string>
   <string name="refresh_button">ကလေင်မင္ၚုဟ်</string>
-  <string name="display_list_button">စရၚ်</string>
+  <string name="display_list_button">စရင်</string>
   <string name="contributions_subtitle_zero" fuzzy="true">ဟွံဂွံ ပတိုန်ပၠုပ်ဏီ</string>
   <string name="categories_not_found">ကဏ္ဍ မကိတ်ညဳ ကု %1$s ဟွံဆဵု</string>
   <string name="depictions_not_found">တင်ဂၞင် ဝဳကဳဒေတာ မကိတ်ညဳ ကု%1$s ဟွံဆဵု</string>
@@ -108,7 +103,7 @@
   <string name="menu_feedback">ပလံင် တင်ကဵုကသပ် (နကဵု အဳမေလ်)</string>
   <string name="no_email_client">ဟွံဂွံစုတ်လဝ် အဳမေလ်</string>
   <string name="provider_categories">ကဏ္ဍ မသုင်စောဲဒၟံင် လၟုဟ်ဂမၠိုင်</string>
-  <string name="waiting_first_sync">မၚ်မံၚ် သွက်ပံၚ်ပံၚ်စပ်အလန်ပထမ</string>
+  <string name="waiting_first_sync">မင်ဒၟံင် သွက်ပံင်ဗစပ် အလန်ပထမ</string>
   <string name="no_uploads_yet">မၞးဟွံဂွံ ပတိုန်ပၠုပ်လဝ် ဗီုရုပ် မွဲမွဲ ဏီရ။</string>
   <string name="menu_retry_upload">ကလေင်ကၠောန်</string>
   <string name="menu_cancel_upload">တးပဲါ</string>
@@ -180,7 +175,7 @@
   <string name="welcome_image_llamas">Llamas</string>
   <string name="welcome_image_rainbow_bridge">Rainbow Bridge</string>
   <string name="welcome_image_tulip">Tulip</string>
-  <string name="welcome_image_welcome_wikipedia">ဒုင်တၠုင်ဏာ နူဝဳကဳပဳဒဳယာ၊၊</string>
+  <string name="welcome_image_welcome_wikipedia" fuzzy="true">ဒုင်တၠုင်ဏာ နူဝဳကဳပဳဒဳယာ၊၊</string>
   <string name="cancel">တးပဲါ</string>
   <string name="navigation_drawer_open">ပံက်</string>
   <string name="navigation_drawer_close">ကၟာတ်</string>
@@ -251,7 +246,7 @@
   <string name="block_notification">မၞးဂှ် ဒးဒုင်စဵုဒၞာလဝ် သွက်ဂွံ ပလေဝ်ဒါန် ခမ်မောန်</string>
   <string name="app_widget_heading">ဗီုရုပ်တၟေင် သွက်တ္ၚဲဏအ်</string>
   <string name="menu_search_button">ဂၠာဲ</string>
-  <string name="search_commons">ဂၠာဲ ခမ်မောန်</string>
+  <string name="search_commons">ဂၠာဲ ကောမ္မောန်</string>
   <string name="title_activity_search">ဂၠာဲ</string>
   <string name="search_recent_header">မဂၠာဲ ပြဟ်ဟ်ဏအ်:</string>
   <string name="provider_searches">မဂၠာဲလဝ် ပ္ဍဲအခိင်ခြာဟွံလအ်</string>
@@ -268,9 +263,9 @@
   <string name="continue_message">ဆက်</string>
   <string name="correct">သွဟ်မဍာံ</string>
   <string name="wrong">သွဟ် မဗၠေတ်</string>
-  <string name="level" fuzzy="true">ကဆံၚ်</string>
+  <string name="level" fuzzy="true">ကဆံၚ် %1$d</string>
   <string name="images_uploaded">ဗီုရုပ် မတိုန်လဝ်</string>
-  <string name="contributions_fragment">အရာမကၠောန်သ္ပလဝ်အထံက်အပၚ်ဂမၠိုၚ်</string>
+  <string name="contributions_fragment">ကမၠောန်ဂမၠိုင်</string>
   <string name="custom_selector_empty_text">ဗီုရုပ် ဟွံမွဲ</string>
   <string name="done">တုဲဒှ်</string>
   <string name="back">ကလေင်</string>

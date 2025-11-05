@@ -11,20 +11,18 @@
     <item quantity="one">%1$d fichièr en cors de cargament</item>
     <item quantity="other">%1$d fichièrs en cors de cargament</item>
   </plurals>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">%1$d cargament</item>
-    <item quantity="other">%1$d cargaments</item>
-  </plurals>
   <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">%1$d cargament aviat</item>
     <item quantity="other">%1$d cargaments aviats</item>
   </plurals>
-  <plurals name="multiple_uploads_title" fuzzy="true">
+  <plurals name="multiple_uploads_title">
     <item quantity="one">%1$d cargament</item>
     <item quantity="other">%1$d cargaments</item>
   </plurals>
-  <string name="share_license_summary" fuzzy="true">Aqueste imatge serà jos licéncia %1$s</string>
+  <plurals name="share_license_summary" fuzzy="true">
+    <item quantity="one">Aqueste imatge serà jos licéncia %1$s</item>
+    <item quantity="other">Aquestes imatges seràn jos licencia %1$s</item>
+  </plurals>
   <string name="navigation_item_explore">Explorar</string>
   <string name="app_name">Commons</string>
   <string name="menu_settings">Paramètres</string>

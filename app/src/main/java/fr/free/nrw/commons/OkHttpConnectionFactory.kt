@@ -1,7 +1,11 @@
 package fr.free.nrw.commons
 
 import androidx.annotation.VisibleForTesting
+import fr.free.nrw.commons.wikidata.GsonUtil
 import fr.free.nrw.commons.wikidata.cookies.CommonsCookieJar
+import fr.free.nrw.commons.wikidata.mwapi.MwErrorResponse
+import fr.free.nrw.commons.wikidata.mwapi.MwIOException
+import fr.free.nrw.commons.wikidata.mwapi.MwLegacyServiceError
 import okhttp3.Cache
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -86,16 +90,25 @@ private class UnsuccessfulResponseInterceptor : Interceptor {
                 rsp.peekBody(ERRORS_PREFIX.length.toLong()).use { responseBody ->
                     if (ERRORS_PREFIX == responseBody.string()) {
                         rsp.body.use { body ->
-                            throw IOException(body!!.string())
+                            val bodyString = body!!.string()
+
+                            throw MwIOException(
+                                "MediaWiki API returned error: $bodyString",
+                                GsonUtil.defaultGson.fromJson(
+                                    bodyString,
+                                    MwErrorResponse::class.java
+                                ).error!!,
+                            )
                         }
                     }
                 }
-            } catch (e: IOException) {
+            } catch (e: MwIOException) {
                 // Log the error as debug (and therefore, "expected") or at error level
                 if (suppressErrors) {
                     Timber.d(e, "Suppressed (known / expected) error")
                 } else {
                     Timber.e(e)
+                    throw e
                 }
             }
             return rsp

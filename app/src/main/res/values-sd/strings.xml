@@ -8,7 +8,7 @@
 -->
 <resources>
   <string name="commons_facebook">العام فيسبڪ صفحو</string>
-  <string name="commons_github">ڪامنز جِٽ ھب ذريعو ڪوڊ</string>
+  <string name="commons_github" fuzzy="true">ڪامنز جِٽ ھب ذريعو ڪوڊ</string>
   <string name="commons_logo">العام لوگو</string>
   <string name="commons_website">العام ويبسائيٽ</string>
   <string name="submit">اماڻيو</string>
@@ -30,14 +30,10 @@
     <item quantity="one">%1$d فائيل چاڙھيندي</item>
     <item quantity="other">%1$d فائيلَ چاڙھيندي</item>
   </plurals>
-  <plurals name="contributions_subtitle">
-    <item quantity="one">(%1$d)</item>
-    <item quantity="other">(%1$d)</item>
-  </plurals>
   <string name="starting_uploads">چاڙھ شروع ڪندي</string>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">چاڙھ %d شروع ڪندي</item>
-    <item quantity="other">چاڙھَ %d شروع ڪندي</item>
+    <item quantity="one">چاڙھ %1$d شروع ڪندي</item>
+    <item quantity="other">چاڙھَ %1$d شروع ڪندي</item>
   </plurals>
   <plurals name="multiple_uploads_title">
     <item quantity="one">%1$d چاڙھ</item>
@@ -77,7 +73,7 @@
   <string name="uploading_queued">چاڙھ کي قطار ۾ لڳايو ويو آھي (محدود ڪنيڪشن موڊ فعال ٿيل)</string>
   <string name="upload_completed_notification_title">%1$s چڙھي چڪا!</string>
   <string name="upload_completed_notification_text">پنھنجو چاڙھ ڏسڻ لاءِ ٺونگو ھڻو</string>
-  <string name="upload_progress_notification_title_start">فائيل چاڙھيندي: %s</string>
+  <string name="upload_progress_notification_title_start">فائيل چاڙھيندي: %1$s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s چاڙھيندي</string>
   <string name="upload_progress_notification_title_finishing">%1$s جو چاڙھ مڪمل ٿيندي</string>
   <string name="upload_failed_notification_title">%1$s چاڙھڻ ۾ ناڪام</string>
@@ -200,8 +196,8 @@
   <string name="welcome_image_llamas">لاما</string>
   <string name="welcome_image_rainbow_bridge">انڊلٺ پل</string>
   <string name="welcome_image_tulip">گل لالا (ٽيولپ)</string>
-  <string name="welcome_image_welcome_wikipedia">وڪيپيڊيا ۾ ڀليڪار</string>
-  <string name="welcome_image_welcome_copyright">حقن ۽ واسطن جي آجيان (ويلڪم ڪاپي رائيٽ)</string>
+  <string name="welcome_image_welcome_wikipedia" fuzzy="true">وڪيپيڊيا ۾ ڀليڪار</string>
+  <string name="welcome_image_welcome_copyright" fuzzy="true">حقن ۽ واسطن جي آجيان (ويلڪم ڪاپي رائيٽ)</string>
   <string name="welcome_image_sydney_opera_house">سڊني اوپيرا هائوس</string>
   <string name="cancel">رد</string>
   <string name="navigation_drawer_open">کوليو</string>
@@ -278,11 +274,10 @@
   <string name="nominate_delete">ڊاھ لاءِ اميدوار ڪريو</string>
   <string name="delete">ڊاھيو</string>
   <string name="Achievements">ڪاميابيون</string>
-  <string name="statistics">انگ-اکر</string>
   <string name="statistics_thanks">مھربانيون مليل</string>
   <string name="statistics_featured">چونڊ عڪس</string>
   <string name="statistics_wikidata_edits">\"ويجھيون جڳھون\" ذريعي عڪس</string>
-  <string name="level" fuzzy="true">سطح</string>
+  <string name="level" fuzzy="true">سطح %1$d</string>
   <string name="images_uploaded">عڪس چڙھيا</string>
   <string name="images_used_by_wiki">استعمال ڪيل عڪس</string>
   <string name="achievements_share_message">پنھنجون ڪاميابيون پنھنجن دوست سان ونڊيو!</string>
@@ -303,11 +298,11 @@
   <string name="display_location_permission_title">مڪانيت جي اجازت وٺو</string>
   <string name="ends_on">تي ختم:</string>
   <string name="nominate_for_deletion_done">ٿي-ويو</string>
-  <string name="send_thank_success_title">مھربانيون موڪلڻ: ڪاميابي</string>
-  <string name="send_thank_success_message">%1$s ڏانھن ڪاميابيءَ سان مھربانيون موڪلجي ويون</string>
-  <string name="send_thank_failure_message">%1$s ڏانھن مھربانيون موڪلڻ ۾ ناڪام</string>
-  <string name="send_thank_failure_title">مھربانيون موڪلڻ: ناڪامي</string>
-  <string name="send_thank_toast">%1$s لاءِ مھربانيون موڪلڻ</string>
+  <string name="send_thank_success_title" fuzzy="true">مھربانيون موڪلڻ: ڪاميابي</string>
+  <string name="send_thank_success_message" fuzzy="true">%1$s ڏانھن ڪاميابيءَ سان مھربانيون موڪلجي ويون</string>
+  <string name="send_thank_failure_message" fuzzy="true">%1$s ڏانھن مھربانيون موڪلڻ ۾ ناڪام</string>
+  <string name="send_thank_failure_title" fuzzy="true">مھربانيون موڪلڻ: ناڪامي</string>
+  <string name="send_thank_toast" fuzzy="true">%1$s لاءِ مھربانيون موڪلڻ</string>
   <string name="skip_image">ھي عڪس ڇڏيو</string>
   <string name="exif_tag_name_author">مصنف</string>
   <string name="exif_tag_name_location">مڪانيت</string>

@@ -6,7 +6,7 @@
 -->
 <resources>
   <string name="commons_facebook">Ризницата на Фејсбук</string>
-  <string name="commons_github">Изворен код на Ризницата на Github</string>
+  <string name="commons_github">Изворен код на Ризницата на GitHub</string>
   <string name="commons_logo">Лого на Ризницата</string>
   <string name="commons_website">Ризница</string>
   <string name="exit_location_picker">Излези од избирачот на местоположба</string>
@@ -30,18 +30,14 @@
     <item quantity="one">Се подига %1$d податотека</item>
     <item quantity="other">Се подигаат %1$d податотеки</item>
   </plurals>
-  <plurals name="contributions_subtitle">
-    <item quantity="one">(%1$d)</item>
-    <item quantity="other">(%1$d)</item>
-  </plurals>
   <string name="starting_uploads">Подигањето почнува</string>
   <plurals name="starting_multiple_uploads">
     <item quantity="one">Обработувам %1$d подигање</item>
     <item quantity="other">Обработувам %1$d подигања</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">%d подигање</item>
-    <item quantity="other">%d подигања</item>
+    <item quantity="one">%1$d подигање</item>
+    <item quantity="other">%1$d подигања</item>
   </plurals>
   <plurals name="share_license_summary">
     <item quantity="one">Сликава ќе се води под лиценцата %1$s</item>
@@ -85,7 +81,7 @@
   <string name="uploading_queued">Подигањето е во редица (овозможен режимот на ограничена врска)</string>
   <string name="upload_completed_notification_title">Податотеката „%1$s“ е подигната!</string>
   <string name="upload_completed_notification_text">Допрете за да го погледате подигањето</string>
-  <string name="upload_progress_notification_title_start">Подигање на податотеката: %s</string>
+  <string name="upload_progress_notification_title_start">Подигање на податотеката: %1$s</string>
   <string name="upload_progress_notification_title_in_progress">Подигање на „%1$s“</string>
   <string name="upload_progress_notification_title_finishing">Завршувам со подигање на „%1$s“</string>
   <string name="upload_failed_notification_title">Подигањето на %1$s не успеа</string>
@@ -135,6 +131,7 @@
   <string name="title_activity_settings">Нагодувања</string>
   <string name="title_activity_signup">Зачленување</string>
   <string name="title_activity_featured_images">Избрани слики</string>
+  <string name="images_featured_explanation">Избраните слики се придонеси на високообучени фотографи и илустратори кои заедницата ги избрала за да бидат истакнати како едни од најдобрите слики на Ризницата.</string>
   <string name="title_activity_custom_selector">Прилагоден избирач</string>
   <string name="title_activity_category_details">Категорија</string>
   <string name="title_activity_review">Оценување</string>
@@ -225,15 +222,14 @@
   <string name="_2fa_code">2ЧЗ-код</string>
   <string name="email_auth_code">Испрати го потврдниот код на е-пошта</string>
   <string name="logout_verification">Дали навистина сакате да се одјавите?</string>
-  <string name="mediaimage_failed">Сликата не успеа</string>
   <string name="no_subcategory_found">Не пронајдов поткатегории</string>
   <string name="no_parentcategory_found">Не пронајдов матични категории</string>
   <string name="welcome_image_mount_zao">Зао</string>
   <string name="welcome_image_llamas">Лами</string>
   <string name="welcome_image_rainbow_bridge">Виножитен мост</string>
   <string name="welcome_image_tulip">Лале</string>
-  <string name="welcome_image_welcome_wikipedia">Добре дојде Википедија</string>
-  <string name="welcome_image_welcome_copyright">Добре дојде Авторски права</string>
+  <string name="welcome_image_welcome_wikipedia">Шематски приказ на генеричка статија на Википедија.</string>
+  <string name="welcome_image_welcome_copyright">Цртеж на купче хартии со прецртан симбол за авторски права.</string>
   <string name="welcome_image_sydney_opera_house">Сиднејска опера</string>
   <string name="cancel">Откажи</string>
   <string name="navigation_drawer_open">Отвори</string>
@@ -372,12 +368,11 @@
   <string name="Achievements">Достигнувања</string>
   <string name="Profile">Профил</string>
   <string name="badges">Значки</string>
-  <string name="statistics">Статистика</string>
   <string name="statistics_thanks">Примени благодарници</string>
   <string name="statistics_featured">Избрани слики</string>
   <string name="statistics_wikidata_edits">Слики преку „Околни места“</string>
-  <string name="level">Степен %d</string>
-  <string name="profile_withLevel">%s (Степен %s)</string>
+  <string name="level">Степен %1$d</string>
+  <string name="profile_withLevel">%1$s (Степен %2$s)</string>
   <string name="images_uploaded">Подигнати слики</string>
   <string name="image_reverts">Неоткажани слики</string>
   <string name="images_used_by_wiki">Употребени слики</string>
@@ -437,7 +432,7 @@
   <string name="never_ask_again">Повеќе не прашувај</string>
   <string name="display_location_permission_title">Побарај дозвола за местоположба</string>
   <string name="display_location_permission_explanation">Барај дозвола за местоположба кога ќе треба да се даде известување за околно место.</string>
-  <string name="achievements_fetch_failed">Нешто не е во ред. Не можев да ги добијам вашите достигнувања</string>
+  <string name="achievements_fetch_failed">Нешто не е во ред, па затоа не можев да ги добијам достигнувањата</string>
   <string name="achievements_fetch_failed_ultimate_achievement">Имате толку многу придонеси што нашиот пресметувач на достигнувања просто не може да постигне. Ова е врховното достигнување.</string>
   <string name="ends_on">Завршува:</string>
   <string name="display_campaigns">Прикажи походи</string>
@@ -468,7 +463,7 @@
   <string name="check_category_toast">Барање на категориска проверка за %1$s</string>
   <string name="nominate_for_deletion_done">Готово</string>
   <string name="send_thank_success_title">Испраќање на благодарница: Успешно</string>
-  <string name="send_thank_success_message">Успешно испратена благодарница на %1$s</string>
+  <string name="send_thank_success_message">Испратена благодарница на %1$s</string>
   <string name="send_thank_failure_message">Не успеав да испратам благодарница на %1$s</string>
   <string name="send_thank_failure_title">Испраќање на благодарница: Неуспешно</string>
   <string name="send_thank_toast">Испраќање на благодарница за %1$s</string>
@@ -498,15 +493,14 @@
   <string name="menu_option_unread">Погл. непрочитани</string>
   <string name="error_occurred_in_picking_images">Се јави грешка при избирањето на сликите</string>
   <string name="please_wait">Почекајте...</string>
-  <string name="images_featured_explanation">Избраните слики се дела на високообучени фотографи и илустратори кои заедницата ги избрала за да бидат истакнати како едни од најдобрите слики на Ризницата.</string>
   <string name="images_via_nearby_explanation">Сликите подигнати преку „Околни места“ се оние подигнати при откривање на места на картата.</string>
   <string name="thanks_received_explanation">Ова им дава можност на уредниците да им испраќаат благодарници на корисниците што вршат полезни уредувања. Ова се прави стискајќи на малата врска за заблагодарување во страницата за историја или разлики.</string>
-  <string name="copy_image_caption_description">Копирај во нареден носач</string>
+  <string name="copy_image_caption_description">Копирај во следните ставки</string>
   <string name="copied_successfully">Ископирано</string>
   <string name="welcome_do_upload_content_description">Примери — Добри слики за подигање</string>
   <string name="welcome_dont_upload_content_description">Примери — Слики што не се за подигање</string>
   <string name="skip_image">Прескокни ја сликава</string>
-  <string name="download_failed_we_cannot_download_the_file_without_storage_permission">Преземањето не успеа!!! Не можеме да ја преземеме податотеката без дозвола од надворешен склад.</string>
+  <string name="download_failed_we_cannot_download_the_file_without_storage_permission">Преземањето не успеа. Не можеме да ја преземеме податотеката без дозвола од надворешен склад.</string>
   <string name="manage_exif_tags">Раков. со EXIF-ознаки</string>
   <string name="manage_exif_tags_summary">Изберете кои EXIF-ознаки да се задржат во подигањата</string>
   <string name="exif_tag_name_author">Автор</string>
@@ -516,8 +510,6 @@
   <string name="exif_tag_name_lensModel">Модел на објективот</string>
   <string name="exif_tag_name_serialNumbers">Сериски броеви</string>
   <string name="exif_tag_name_software">Програми</string>
-  <string name="media_location_permission_denied">Одибиен пристапот до местоположбата на сликата</string>
-  <string name="add_location_manually">Можеби нема да можеме автоматски да ги добиеме податоците за местоположба од сликите што ги подигате. Ставете ја соодветната местоположба за секоја слика пред да подигате</string>
   <string name="share_text">Подигајте слики непосредно на Ризницата од телефон. Преземете го прилогот на Ризницата сега: %1$s</string>
   <string name="share_via">Сподели преку...</string>
   <string name="image_info">Инфо за сликата</string>
@@ -574,7 +566,7 @@
   <string name="description_activity_title">Уреди описи и толкувања</string>
   <string name="share_image_via">Сподели ја сликата преку</string>
   <string name="you_have_no_achievements_yet">Засега немате придонеси</string>
-  <string name="no_achievements_yet">%s засега нема придонеси</string>
+  <string name="no_achievements_yet">%1$s засега нема придонеси</string>
   <string name="account_created">Сметката е создадена!</string>
   <string name="text_copy">Текстот е ставен во меѓускладот</string>
   <string name="notification_mark_read">Известувањето е означено како прочитано</string>
@@ -627,7 +619,7 @@
   <string name="wikipedia_instructions_step_5">5. Прекопирајте го викитекстот во соодветното место.</string>
   <string name="wikipedia_instructions_step_6">6. По потреба, уредете го викитекстот за да ја ставите сликата во прикладна положба во одност на текстот. Повеќе информации за тоа ќе видите &lt;a href=\"https://en.wikipedia.org/wiki/Wikipedia:Manual_of_Style/Images#How_to_place_an_image\"&gt;тука&lt;/a&gt;.</string>
   <string name="wikipedia_instructions_step_7">7. Објавете ја статијата</string>
-  <string name="copy_wikicode_to_clipboard">Прекопирајте го викикодот во меѓускладот</string>
+  <string name="copy_wikicode_to_clipboard">Прекопирајте го викитекстот во меѓускладот</string>
   <string name="pause">запри</string>
   <string name="resume">продолжи</string>
   <string name="paused">Запрено</string>
@@ -668,6 +660,8 @@
   <string name="categories_tooltip">Изберете ги прикладните категории. За разлика од приказите, категориите се исклучиво на англиски.</string>
   <string name="license_tooltip">Ризницата ги става вашите дела на располагање за употреба и преработка за секого. Дали сакате да се одречете од сите права? Дали сакате делото да ви се припишува? Дали сакате преработените дела да ја имаат истата лиценца?</string>
   <string name="depicts_step_title">Прикажува</string>
+  <string name="depicts_label">Натпис</string>
+  <string name="depicts_description">Опис</string>
   <string name="license_step_title">Лиценца на творбата</string>
   <string name="media_detail_step_title">Поединости за творбата</string>
   <string name="menu_view_category_page">Погл. категориска страница</string>
@@ -694,7 +688,7 @@
   <string name="back">Назад</string>
   <string name="welcome_custom_picture_selector_text">Добре дојдовте на Прилагодениот избирач</string>
   <string name="custom_selector_info_text1">Овој избирач ви покажува кои слики веќе ги имате подигнато на Ризницата.</string>
-  <string name="custom_selector_info_text2">За разлика од сликата лево, таа десно има лого на Ризницата, што значи дека веќе е подигната. \n Допрете и држете за да ја погледате сликата.</string>
+  <string name="custom_selector_info_text2">За разлика од сликата лево, таа десно има лого на Ризницата, што значи дека веќе е подигната. \n\nДопрете и држете за да ја погледате сликата.</string>
   <string name="welcome_custom_selector_ok">Одлично</string>
   <string name="custom_selector_already_uploaded_image_text">Оваа слика е веќе подигната на Ризницата.</string>
   <string name="custom_selector_over_limit_warning">Од технички причини прилогот не може поуздано да вчита повеќе од %1$d слики наеднап. Имате %2$d повеќе од дозволените %1$d подигања.</string>
@@ -712,8 +706,8 @@
   <string name="read_phone_state_permission_message">Картите со блиски места треба можат да ја прочитаат СОСТОЈБАТА НА ТЕЛЕФОНОТ за да работат правилно</string>
   <string name="location_off_dialog_text">Вклучете ја вашата местоположба за да ги гледате околните места.</string>
   <string name="location_permission_rationale">Дозвола по желба: Утврдување на тековната местоположба за предлагање категории</string>
-  <string name="contributions_of_user">Придонеси на корисникот: %s</string>
-  <string name="achievements_of_user">Достигнувања на корисникот: %s</string>
+  <string name="contributions_of_user">Придонеси на корисникот: %1$s</string>
+  <string name="achievements_of_user">Достигнувања на корисникот: %1$s</string>
   <string name="menu_view_user_page">Погл. кориснички профил</string>
   <string name="edit_depictions">Уреди прикази</string>
   <string name="edit_categories">Уреди категории</string>
@@ -782,15 +776,15 @@
   <string name="invalid_login_message">Најавата ви е истечена. Најавете се повторно.</string>
   <string name="no_application_available_to_open_gpx_files">Нема достапен прилог за отворање на GPX-податотеки</string>
   <string name="file_saved_successfully">Податотеката е успешно зачувана</string>
-  <string name="do_you_want_to_open_gpx_file">Дали сакате да отворите GPX-податотека?</string>
-  <string name="do_you_want_to_open_kml_file">Дали сакате да отворите KML-податотека?</string>
-  <string name="failed_to_save_kml_file">Не можев да ја зачувам KML-податотеката.</string>
+  <string name="do_you_want_to_open_gpx_file">Дали сакате да ја отворите GPX-податотеката?</string>
+  <string name="do_you_want_to_open_kml_file">Дали сакате да ја отворите KML-податотеката?</string>
+  <string name="failed_to_save_kml_file">Не можев да ја зачувам KML-податотекатата.</string>
   <string name="failed_to_save_gpx_file">Не можев да ја зачувам GPX-податотеката.</string>
-  <string name="saving_kml_file">Зачувување на KML-податотека</string>
-  <string name="saving_gpx_file">Зачувување на GPX-податотека</string>
+  <string name="saving_kml_file">Зачувување како KML-податотека...</string>
+  <string name="saving_gpx_file">Зачувувам како GPX-податотека...</string>
   <plurals name="custom_picker_images_selected_title_appendix">
-    <item quantity="one">Избрана е %d слика</item>
-    <item quantity="other">Избрани се %d слики</item>
+    <item quantity="one">Избрана е %1$d слика</item>
+    <item quantity="other">Избрани се %1$d слики</item>
   </plurals>
   <string name="multiple_files_depiction">Запомнете дека сите слики што ги подигате наеднаш се очекуваат да ја прикажуваат истата работа и ги добиваат истите категории и описи. Ако сликите прикажуваат различни нешта и треба да имаат различни категории, извршете неколку одделни подигања.</string>
   <string name="multiple_files_depiction_header">Напомена за подигање повеќе слики наеднаш</string>
@@ -827,7 +821,6 @@
   <string name="usages_on_other_wikis_heading">Други викија</string>
   <string name="bullet_point">•</string>
   <string name="file_usages_container_heading">Употреби на податотеката</string>
-  <string name="title_activity_single_web_view">SingleWebViewActivity</string>
   <string name="account">Сметка</string>
   <string name="vanish_account">Исчезни сметка</string>
   <string name="account_vanish_request_confirm_title">Предупредување за исчезнување на сметка</string>

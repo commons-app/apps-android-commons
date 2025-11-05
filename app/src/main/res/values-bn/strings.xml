@@ -54,18 +54,14 @@
     <item quantity="one">%1$dটি ফাইল আপলোড হচ্ছে</item>
     <item quantity="other">%1$dটি ফাইল আপলোড হচ্ছে</item>
   </plurals>
-  <plurals name="contributions_subtitle">
-    <item quantity="one">(%1$d)</item>
-    <item quantity="other">(%1$d)</item>
-  </plurals>
   <string name="starting_uploads">আপলোড শুরু হচ্ছে</string>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">%dটি আপলোড প্রক্রিয়াকরণ হচ্ছে</item>
-    <item quantity="other">%dটি আপলোড প্রক্রিয়াকরণ হচ্ছে</item>
+    <item quantity="one">%1$dটি আপলোড প্রক্রিয়াকরণ হচ্ছে</item>
+    <item quantity="other">%1$dটি আপলোড প্রক্রিয়াকরণ হচ্ছে</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">%dটি আপলোড</item>
-    <item quantity="other">%dটি আপলোড</item>
+    <item quantity="one">%1$dটি আপলোড</item>
+    <item quantity="other">%1$dটি আপলোড</item>
   </plurals>
   <plurals name="share_license_summary">
     <item quantity="one">এই ছবিটি %1$s এর অধীনে লাইসেন্স করা হবে</item>
@@ -108,7 +104,7 @@
   <string name="uploading_queued">আপলোড সারিবদ্ধ করা হয়েছে (সীমিত সংযোগ মোড সক্রিয় করা)</string>
   <string name="upload_completed_notification_title">%1$ আপলোড হয়েছে!</string>
   <string name="upload_completed_notification_text">আপনার আপলোড দেখতে টোকা দিন</string>
-  <string name="upload_progress_notification_title_start">ফাইল আপলোড করা হচ্ছে: %s</string>
+  <string name="upload_progress_notification_title_start">ফাইল আপলোড করা হচ্ছে: %1$s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s আপলোড হচ্ছে</string>
   <string name="upload_progress_notification_title_finishing">%1$s আপলোড করা শেষ হয়েছে</string>
   <string name="upload_failed_notification_title">%1$s আপলোড করা যায়নি</string>
@@ -240,15 +236,14 @@
   <string name="_2fa_code">2FA কোড</string>
   <string name="email_auth_code">ইমেল যাচাইকরণ কোড</string>
   <string name="logout_verification">আপনি কি সত্যিই প্রস্থান করতে চান?</string>
-  <string name="mediaimage_failed">মিডিয়া চিত্র ব্যর্থ হয়েছে</string>
   <string name="no_subcategory_found">কোন উপবিষয়শ্রেনী পাওয়া যায় নি।</string>
   <string name="no_parentcategory_found">কোনও মূল বিষয়শ্রেণী পাওয়া যায়নি</string>
   <string name="welcome_image_mount_zao">জাও পর্বত</string>
   <string name="welcome_image_llamas">লামা</string>
   <string name="welcome_image_rainbow_bridge">রংধনুর সেতু</string>
   <string name="welcome_image_tulip">টিউলিপ</string>
-  <string name="welcome_image_welcome_wikipedia">উইকিপিডিয়ায় স্বাগতম</string>
-  <string name="welcome_image_welcome_copyright">স্বাগতম কপিরাইট</string>
+  <string name="welcome_image_welcome_wikipedia" fuzzy="true">উইকিপিডিয়ায় স্বাগতম</string>
+  <string name="welcome_image_welcome_copyright" fuzzy="true">স্বাগতম কপিরাইট</string>
   <string name="welcome_image_sydney_opera_house">সিডনি অপেরা হাউস</string>
   <string name="cancel">বাতিল</string>
   <string name="navigation_drawer_open">খুলুন</string>
@@ -367,12 +362,11 @@
   <string name="Achievements">কৃতিত্বগুলি</string>
   <string name="Profile">প্রোফাইল</string>
   <string name="badges">ব্যাজ</string>
-  <string name="statistics">পরিসংখ্যান</string>
   <string name="statistics_thanks">ধন্যবাদ পেয়েছেন</string>
   <string name="statistics_featured">নির্বাচিত ছবি</string>
   <string name="statistics_wikidata_edits">\"কাছাকাছি স্থান\" এর মাধ্যমে ছবি</string>
-  <string name="level">স্তর %d</string>
-  <string name="profile_withLevel">%s (স্তর %s )</string>
+  <string name="level">স্তর %1$d</string>
+  <string name="profile_withLevel">%1$s (স্তর %2$s )</string>
   <string name="images_uploaded">আপলোডকৃত চিত্র</string>
   <string name="image_reverts">ছবিগুলো প্রত্যাবর্তন করা হয়নি</string>
   <string name="images_used_by_wiki">ব্যবহৃত ছবি</string>
@@ -408,6 +402,7 @@
   <string name="never_ask_again">আবার কখনো দেখাবেন না</string>
   <string name="achievements_fetch_failed_ultimate_achievement">আপনি এত অবদান রেখেছেন যে আমাদের গণনা ব্যবস্থা তা গণনা করতে পারছে না। অভিনন্দন, এটাই চূড়ান্ত অর্জন।</string>
   <string name="nominate_for_deletion_done">সম্পন্ন</string>
+  <string name="send_thank_success_title">ধন্যবাদ পাঠানো সফল হয়েছে</string>
   <string name="review_copyright">এই চিত্রটি কি কপিরাইটের নিয়ম অনুসরণ করে?</string>
   <string name="review_category">এই চিত্রটিকে কি সঠিকভাবে বিষয়শ্রেণীকরণ করা হয়েছে?</string>
   <string name="review_spam">এই চিত্রটি কি প্রকল্পের উদ্দেশ্যের সাথে সামঞ্জস্যপূর্ণ?</string>
@@ -457,7 +452,7 @@
   <string name="place_state_exists">অস্তিত্ব আছে</string>
   <string name="place_state_needs_photo">চিত্র প্রয়োজন</string>
   <string name="place_type">স্থানের ধরন:</string>
-  <string name="nearby_search_hint">সেতু, জাদুঘর, হোটেল ইত্যাদি।</string>
+  <string name="nearby_search_hint" fuzzy="true">সেতু, জাদুঘর, হোটেল ইত্যাদি।</string>
   <string name="title_for_media">মিডিয়া</string>
   <string name="upload_nearby_place_found_title">কাছাকাছি স্থান পাওয়া গেছে</string>
   <string name="upload_nearby_place_found_description_singular" fuzzy="true">এটি কি %1$s-এর একটি চিত্র?</string>
@@ -477,7 +472,7 @@
   <string name="confirm">নিশ্চিত করুন</string>
   <string name="instructions_title">নির্দেশাবলী</string>
   <string name="wikipedia_instructions_step_7">৭. নিবন্ধটি প্রকাশ করুন</string>
-  <string name="copy_wikicode_to_clipboard">ক্লিপবোর্ডে উইকিকোড অনুলিপি করুন</string>
+  <string name="copy_wikicode_to_clipboard" fuzzy="true">ক্লিপবোর্ডে উইকিকোড অনুলিপি করুন</string>
   <string name="pause">থামান</string>
   <string name="resume">পুনরায় শুরু করুন</string>
   <string name="paused">থামানো হয়েছে</string>
@@ -535,14 +530,14 @@
   <string name="wlm_campaign_title">উইকি লাভস মনুমেন্টস</string>
   <string name="need_permission">অনুমতি দরকার</string>
   <string name="location_permission_rationale">ঐচ্ছিক অনুমতি: বিষয়শ্রেণী পরামর্শের জন্য বর্তমান অবস্থান নেয়</string>
-  <string name="contributions_of_user">ব্যবহারকারীর অবদান: %s</string>
-  <string name="achievements_of_user">ব্যবহারকারীর অর্জন: %s</string>
+  <string name="contributions_of_user">ব্যবহারকারীর অবদান: %1$s</string>
+  <string name="achievements_of_user">ব্যবহারকারীর অর্জন: %1$s</string>
   <string name="menu_view_user_page" fuzzy="true">ব্যবহারকারীর পাতা দেখুন</string>
   <string name="advanced_options">উচ্চতর বিকল্প</string>
   <string name="apply">প্রয়োগ করুন</string>
   <string name="reset">পুনঃস্থাপন</string>
   <string name="no_location_found_title">কোন অবস্থান পাওয়া যায়নি</string>
-  <string name="add_location">অবস্থান যোগ করুন</string>
+  <string name="add_location" fuzzy="true">অবস্থান যোগ করুন</string>
   <string name="explore_map_details">বিস্তারিত</string>
   <string name="api_level">এপিআই লেভেল</string>
   <string name="android_version">অ্যান্ড্রয়েড সংস্করণ</string>

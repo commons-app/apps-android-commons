@@ -90,7 +90,7 @@
   <string name="media_detail_coordinates">Координатҳо</string>
   <string name="media_detail_coordinates_empty">Пешниҳод нашудааст</string>
   <string name="no_subcategory_found">Ягон зергурӯҳе пайдо нашуд</string>
-  <string name="welcome_image_welcome_wikipedia">Ба Википедиа хуш омадед.</string>
+  <string name="welcome_image_welcome_wikipedia" fuzzy="true">Ба Википедиа хуш омадед.</string>
   <string name="cancel">Пӯшидан</string>
   <string name="navigation_drawer_open">Кушодан</string>
   <string name="navigation_drawer_close">Пӯшидан</string>
@@ -130,8 +130,7 @@
   <string name="search_history_deleted">Таърихи ҷустуҷӯҳо ҳазф шуд</string>
   <string name="nominate_delete">Номзад барои ҳазф</string>
   <string name="delete">Ҳазв</string>
-  <string name="statistics">Омор</string>
-  <string name="level" fuzzy="true">Сатҳ</string>
+  <string name="level" fuzzy="true">Сатҳ %1$d</string>
   <string name="list_sheet">Рӯйхат</string>
   <string name="next">Баъдӣ</string>
   <string name="previous">Пешина</string>

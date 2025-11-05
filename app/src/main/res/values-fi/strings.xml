@@ -25,7 +25,7 @@
 -->
 <resources>
   <string name="commons_facebook">Commons Facebook-sivu</string>
-  <string name="commons_github">Commons Github lähdekoodi</string>
+  <string name="commons_github" fuzzy="true">Commons Github lähdekoodi</string>
   <string name="commons_logo">Commons-logo</string>
   <string name="commons_website">Commons-verkkosivu</string>
   <string name="exit_location_picker">Poistu sijainnin valitsimesta</string>
@@ -45,18 +45,14 @@
     <item quantity="one">%1$d tiedosto tallentuu</item>
     <item quantity="other">%1$d tiedostoa tallentuu</item>
   </plurals>
-  <plurals name="contributions_subtitle">
-    <item quantity="one">(%1$d)</item>
-    <item quantity="other">(%1$d)</item>
-  </plurals>
   <string name="starting_uploads">Aloitetaan tallennuksia</string>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">Käsitellään %d tallennus</item>
-    <item quantity="other">Käsitellään %d tallennusta</item>
+    <item quantity="one">Käsitellään %1$d tallennus</item>
+    <item quantity="other">Käsitellään %1$d tallennusta</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">%d tallennus</item>
-    <item quantity="other">%d tallennusta</item>
+    <item quantity="one">%1$d tallennus</item>
+    <item quantity="other">%1$d tallennusta</item>
   </plurals>
   <plurals name="share_license_summary">
     <item quantity="one">Tiedosto tallennetaan lisenssin %1$s ehtojen mukaisesti</item>
@@ -94,7 +90,7 @@
   <string name="uploading_queued">Tallennus on jonossa (rajoitettu yhteystila käytössä)</string>
   <string name="upload_completed_notification_title">%1$s tallennettiin!</string>
   <string name="upload_completed_notification_text">Napauta katsoaksesi tallennusta</string>
-  <string name="upload_progress_notification_title_start">Kopioidaan palvelimelle: %s</string>
+  <string name="upload_progress_notification_title_start">Kopioidaan palvelimelle: %1$s</string>
   <string name="upload_progress_notification_title_in_progress">Tallennetaan %1$s</string>
   <string name="upload_progress_notification_title_finishing">%1$s tallennettu</string>
   <string name="upload_failed_notification_title">Tiedoston %1$s tallentaminen epäonnistui</string>
@@ -159,6 +155,7 @@
   <string name="no_uploads_yet">Et ole vielä tallentanut kuvia.</string>
   <string name="menu_retry_upload">Yritä uudelleen</string>
   <string name="menu_cancel_upload">Peruuta</string>
+  <string name="language_search_type_language_name">Kirjoita kielen nimi</string>
   <string name="language_search_recent_searches">Viimeaikaiset haut</string>
   <string name="language_search_all_languages">Kaikki kielet</string>
   <string name="media_upload_policy">Lisäämällä kuvan, ilmoitan tämän olevan oma työ ja että se ei sisällä tekijänoikeuden alaista materiaalia tai selfietä ja muuten noudattaa &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Wikimedia Commonsin käytäntöjä&lt;/a&gt;.</string>
@@ -230,15 +227,14 @@
   <string name="_2fa_code">Kaksivaiheisen tunnistautumisen koodi</string>
   <string name="email_auth_code">Sähköpostivahvistuskoodi</string>
   <string name="logout_verification">Haluatko varmasti kirjautua ulos?</string>
-  <string name="mediaimage_failed">Mediakuva epäonnistui</string>
   <string name="no_subcategory_found">Alaluokkia ei löytynyt</string>
   <string name="no_parentcategory_found">Vanhempia luokkia ei löytynyt</string>
   <string name="welcome_image_mount_zao">Zao-vuori</string>
   <string name="welcome_image_llamas">Laamat</string>
   <string name="welcome_image_rainbow_bridge">Sateenkaarisilta</string>
   <string name="welcome_image_tulip">Tulppaani</string>
-  <string name="welcome_image_welcome_wikipedia">Tervetuloa Wikipediaan</string>
-  <string name="welcome_image_welcome_copyright">Tervetuloa tekijänoikeus</string>
+  <string name="welcome_image_welcome_wikipedia" fuzzy="true">Tervetuloa Wikipediaan</string>
+  <string name="welcome_image_welcome_copyright" fuzzy="true">Tervetuloa tekijänoikeus</string>
   <string name="welcome_image_sydney_opera_house">Sydneyn oopperatalo</string>
   <string name="cancel">Peru</string>
   <string name="navigation_drawer_open">Avaa</string>
@@ -341,6 +337,7 @@
   <string name="quiz">Tietovisa</string>
   <string name="quiz_question_string">Onko tämä kuva OK tallennettavaksi?</string>
   <string name="question">Kysymys</string>
+  <string name="quiz_i_am_not_sure">En ole varma</string>
   <string name="result">Tulos</string>
   <string name="quiz_back_button">Jos jatkat poistettavien kuvien tallentamista, tunnuksesi tullaan todennäköisesti estämään. Haluatko varmasti lopettaa tietokilpailun?</string>
   <string name="quiz_alert_message">Yli %1$s tallentamistasi kuvista on poistettu. Mikäli jatkat poistamista vaativien kuvien tallentamista, tunnuksesi tullaan todennäköisesti estämään.\n\nHaluatko tutustua oppaaseen uudelleen ja tehdä sen jälkeen tietovisan oppiaksesi, minkälaisia kuvia saa ja ei saa tallentaa?</string>
@@ -350,6 +347,7 @@
   <string name="blurry_image_answer">Yksi Commonsin päämääristä on kerätä hyvänlaatuisia kuvia. Täten sumeita kuvia ei pitäisi lähettää. Ota aina hyviä kuvia hyvällä valaistuksella.</string>
   <string name="construction_event_answer">Kuvat, jotka esittävät teknologiaa tai kulttuuria ovat erittäin tervetulleita Commonsiin.</string>
   <string name="congratulatory_message_quiz">Sait %1$s vastausta oikein. Onnittelut!</string>
+  <string name="quiz_continue">Jatka</string>
   <string name="warning_for_no_answer">Valitse yksi kahdesta vaihtoehdosta vastataksesi kysymykseen</string>
   <string name="user_not_logged_in">Istuntosi on vanhentunut. Kirjaudu sisään uudelleen.</string>
   <string name="quiz_result_share_message">Jaa visailusi ystäviesi kanssa!</string>
@@ -373,12 +371,11 @@
   <string name="Achievements">Saavutukset</string>
   <string name="Profile">Profiili</string>
   <string name="badges">Merkit</string>
-  <string name="statistics">Tilastot</string>
   <string name="statistics_thanks">Kiitos vastaanotettu</string>
   <string name="statistics_featured">Suositellut kuvat</string>
   <string name="statistics_wikidata_edits">\"Lähistöllä\"-kuvat</string>
-  <string name="level">Taso %d</string>
-  <string name="profile_withLevel">%s (taso %s)</string>
+  <string name="level">Taso %1$d</string>
+  <string name="profile_withLevel">%1$s (taso %2$s)</string>
   <string name="images_uploaded">Kuvia tallennettu</string>
   <string name="image_reverts">Kuvia ei palautettu</string>
   <string name="images_used_by_wiki">Kuvia käytetty</string>
@@ -438,7 +435,7 @@
   <string name="never_ask_again">Älä kysy tätä uudelleen</string>
   <string name="display_location_permission_title">Kysy lupaa sijainnille</string>
   <string name="display_location_permission_explanation">Pyydä sijaintilupaa tarvittaessa läheisen ilmoituksen näkymää varten.</string>
-  <string name="achievements_fetch_failed">Jotain meni pieleen. Emme voineet noutaa saavutuksia</string>
+  <string name="achievements_fetch_failed" fuzzy="true">Jotain meni pieleen. Emme voineet noutaa saavutuksia</string>
   <string name="achievements_fetch_failed_ultimate_achievement">Olet tehnyt niin paljon muokkauskia, että saavutusten laskentajärjestelmä ei pysty selviytymään. Tämä on perimmäinen saavutus.</string>
   <string name="ends_on">Päättyy:</string>
   <string name="display_campaigns">Näytä kilpailut</string>
@@ -459,11 +456,11 @@
   <string name="check_category_failure_message">Luokkatarkistusta ei voitu pyytää %1$s</string>
   <string name="check_category_toast">Pyydetään luokkatarkistusta %1$s</string>
   <string name="nominate_for_deletion_done">Valmis</string>
-  <string name="send_thank_success_title">Kiitosten lähettäminen: Onnistui</string>
-  <string name="send_thank_success_message">Lähetetty onnistuneesti käyttäjälle %1$s</string>
-  <string name="send_thank_failure_message">Kiitosten lähettäminen epäonnistui %1$s</string>
-  <string name="send_thank_failure_title">Kiitosten lähettäminen: Epäonnistui</string>
-  <string name="send_thank_toast">Lähetetty kiitokset %1$s</string>
+  <string name="send_thank_success_title" fuzzy="true">Kiitosten lähettäminen: Onnistui</string>
+  <string name="send_thank_success_message">Kiitos lähetetty käyttäjälle %1$s</string>
+  <string name="send_thank_failure_message">Kiitoksen lähettäminen käyttäjälle %1$s epäonnistui</string>
+  <string name="send_thank_failure_title" fuzzy="true">Kiitosten lähettäminen: Epäonnistui</string>
+  <string name="send_thank_toast" fuzzy="true">Lähetetty kiitokset %1$s</string>
   <string name="review_copyright">Noudattaako tämä tekijänoikeussääntöjä?</string>
   <string name="review_category">Onko tämä luokiteltu oikein?</string>
   <string name="review_spam">Sopiiko tämä sivuston puitteissa?</string>
@@ -494,7 +491,7 @@
   <string name="welcome_do_upload_content_description">Esimerkkejä hyvistä Commonsiin lähetettävistä kuvista</string>
   <string name="welcome_dont_upload_content_description">Esimerkkejä kuvista, joita ei kannata lähettää</string>
   <string name="skip_image">Ohita tämä kuva</string>
-  <string name="download_failed_we_cannot_download_the_file_without_storage_permission">Lataus epäonnistui!! Emme voi ladata tiedostoa ilman ulkoisen tallennustilan käyttölupaa.</string>
+  <string name="download_failed_we_cannot_download_the_file_without_storage_permission">Lataus epäonnistui. Emme voi ladata tiedostoa ilman ulkoisen tallennustilan käyttölupaa.</string>
   <string name="manage_exif_tags">Käsittele EXIF-tageja</string>
   <string name="manage_exif_tags_summary">Valitse, mitä EXIF-tageja säilytetään lähetyksissä</string>
   <string name="exif_tag_name_author">Tekijä</string>
@@ -507,6 +504,7 @@
   <string name="share_text">Tallenna kuvia Wikimedia Commonsiin suoraan puhelimeltasi. Lataa Commons-sovellus nyt: %1$s</string>
   <string name="share_via">Jaa sovellus...</string>
   <string name="image_info">Kuvan tiedot</string>
+  <string name="upload_categories_dont_show_this_message_again">Älä näytä tätä viestiä uudelleen</string>
   <string name="no_categories_found">Luokkia ei löytynyt</string>
   <string name="no_depiction_found">Esittää-tunnisteita ei löytynyt</string>
   <string name="upload_cancelled">Peruutettu tallennus</string>
@@ -554,7 +552,7 @@
   <string name="description_activity_title">Muokkaa kuvauksia ja kuvatekstejä</string>
   <string name="share_image_via">Jaa kuva</string>
   <string name="you_have_no_achievements_yet">Et ole vielä tehnyt muokkauksia</string>
-  <string name="no_achievements_yet">%s ei ole vielä tehnyt muokkauksia</string>
+  <string name="no_achievements_yet">%1$s ei ole vielä tehnyt muokkauksia</string>
   <string name="account_created">Käyttäjätunnus luotu!</string>
   <string name="text_copy">Teksti kopioitu leikepöydälle</string>
   <string name="notification_mark_read">Ilmoitus merkitty luetuksi</string>
@@ -598,7 +596,7 @@
   <string name="wikipedia_instructions_step_4">4. Klikkaa Muokkaa-ikonia (se kynältä näyttävä) siitä osasta.</string>
   <string name="wikipedia_instructions_step_5">5. Liitä wikiteksti sopivaan paikkaan.</string>
   <string name="wikipedia_instructions_step_7">7. Julkaise artikkeli</string>
-  <string name="copy_wikicode_to_clipboard">Kopioi wikikoodi leikepöydälle</string>
+  <string name="copy_wikicode_to_clipboard">Kopioi wikiteksti leikepöydälle</string>
   <string name="pause">tauko</string>
   <string name="resume">jatka</string>
   <string name="paused">Pysäytetty</string>
@@ -637,6 +635,8 @@
   <string name="categories_tooltip">Valitse sopivat luokat. Toisin kuin esittää-tunnisteet, luokkien nimet ovat vain englanniksi.</string>
   <string name="license_tooltip">Kuka tahansa saa käyttää ja muokata Commonsiin tallentamiasi kuvia. Haluatko luovuttaa kuviesi kaikki oikeudet? Haluatko tulla nimetyksi kuvien tekijänä? Haluatko kuviesi muokattujen versioiden julkaistavan samalla lisenssillä?</string>
   <string name="depicts_step_title">Esittää</string>
+  <string name="depicts_label">Nimi</string>
+  <string name="depicts_description">Kuvaus</string>
   <string name="license_step_title">Median lisenssi</string>
   <string name="media_detail_step_title">Median tiedot</string>
   <string name="menu_view_category_page">Näytä luokkasivu</string>
@@ -659,11 +659,12 @@
   <string name="back">Takaisin</string>
   <string name="welcome_custom_selector_ok">Mahtavaa</string>
   <string name="custom_selector_already_uploaded_image_text">Tämä kuva on jo ladattu Commonsiin.</string>
+  <string name="custom_selector_limit_error_desc">Virhe: Tallennusraja ylitetty</string>
   <string name="learn_more">LUE LISÄÄ</string>
   <string name="need_permission">Tarvitaan käyttöoikeus</string>
   <string name="location_permission_rationale">Valinnainen lupa: Saada tämänhetkinen sijainti loukkasuosituksia varten.</string>
-  <string name="contributions_of_user">Käyttäjän muokkaukset: %s</string>
-  <string name="achievements_of_user">Käyttäjän saavutukset: %s</string>
+  <string name="contributions_of_user">Käyttäjän muokkaukset: %1$s</string>
+  <string name="achievements_of_user">Käyttäjän saavutukset: %1$s</string>
   <string name="menu_view_user_page">Näytä käyttäjäprofiili</string>
   <string name="edit_depictions">Muokkaa esittää-tunnisteita</string>
   <string name="edit_categories">Muokkaa luokkia</string>
@@ -672,7 +673,7 @@
   <string name="reset">Nollaa</string>
   <string name="location_message">Sijaintitiedot auttavat wikin muokkaajia löytämään kuvasi, mikä tekee siitä paljon hyödyllisemmän.\nViimeaikaisissa tallennuksissasi ei ole sijaintia.\nSuosittelemme, että otat sijainnin käyttöön kamerasovelluksesi asetuksista.\nKiitos kuvien tallentamista!</string>
   <string name="no_location_found_title">Paikkaa ei löytynyt</string>
-  <string name="add_location">Lisää paikka</string>
+  <string name="add_location">Lisää sijainti</string>
   <string name="explore_map_details">Tiedot</string>
   <string name="api_level">API-taso</string>
   <string name="android_version">Android-versio</string>
@@ -701,6 +702,7 @@
   <string name="edit_location">Muokkaa sijaintia</string>
   <string name="location_updated">Sijainti päivitetty!</string>
   <string name="remove_location">Poista sijainti</string>
+  <string name="remove_location_warning_title">Poista sijaintivaroitus</string>
   <string name="location_removed">Sijainti poistettu!</string>
   <string name="send_thanks_to_author">Kiitä tekijää</string>
   <string name="file_saved_successfully">Tiedosto tallennettu onnistuneesti</string>
@@ -708,11 +710,14 @@
   <string name="do_you_want_to_open_kml_file">Haluatko avata KML-tiedoston?</string>
   <string name="failed_to_save_kml_file">KML-tiedoston tallentaminen epäonnistui.</string>
   <string name="failed_to_save_gpx_file">GPX-tiedoston tallentaminen epäonnistui.</string>
+  <string name="saving_kml_file">Tallennetaan KML-tiedostona...</string>
+  <string name="saving_gpx_file">Tallennetaan GPX-tiedostona...</string>
   <plurals name="custom_picker_images_selected_title_appendix">
-    <item quantity="one">%d kuva valittu</item>
-    <item quantity="other">%d kuvaa valittu</item>
+    <item quantity="one">%1$d kuva valittu</item>
+    <item quantity="other">%1$d kuvaa valittu</item>
   </plurals>
   <string name="talk">Keskustelu</string>
+  <string name="feedback_destination_note">Palautteesi on julkaistu seuraavalla wikisivulla: &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Mobile_app/Feedback\"&gt;Commons:Mobile app/Feedback&lt;/a&gt;</string>
   <string name="are_you_sure_that_you_want_cancel_all_the_uploads">Oletko varma, että haluat peruuttaa kaikki tallennukset?</string>
   <string name="cancelling_all_the_uploads">Peruutetaan kaikki tallennukset...</string>
   <string name="uploads">Tallennukset</string>

@@ -64,7 +64,7 @@
 -->
 <resources>
   <string name="commons_facebook">共享资源Facebook页面</string>
-  <string name="commons_github">共享资源Github源代码</string>
+  <string name="commons_github">共享资源GitHub源代码</string>
   <string name="commons_logo">共享资源标识</string>
   <string name="commons_website">共享资源网站</string>
   <string name="exit_location_picker">退出位置选择器</string>
@@ -88,18 +88,14 @@
     <item quantity="one">%1$d个文件正在上传</item>
     <item quantity="other">%1$d个文件正在上传</item>
   </plurals>
-  <plurals name="contributions_subtitle">
-    <item quantity="one">%1$d次上传</item>
-    <item quantity="other">%1$d次上传</item>
-  </plurals>
   <string name="starting_uploads">开始上传</string>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">正在处理%d个上传</item>
-    <item quantity="other">正在处理%d个上传</item>
+    <item quantity="one">正在处理%1$d个上传</item>
+    <item quantity="other">正在处理%1$d个上传</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">%d个上传</item>
-    <item quantity="other">%d个上传</item>
+    <item quantity="one">%1$d个上传</item>
+    <item quantity="other">%1$d个上传</item>
   </plurals>
   <plurals name="share_license_summary">
     <item quantity="one">该图像的授权协议是 %1$s</item>
@@ -142,7 +138,7 @@
   <string name="uploading_queued">上传排队中（已启用连接受限模式）</string>
   <string name="upload_completed_notification_title">%1$s已上传！</string>
   <string name="upload_completed_notification_text">点击查看您的上传</string>
-  <string name="upload_progress_notification_title_start">开始%s的上传</string>
+  <string name="upload_progress_notification_title_start">开始%1$s的上传</string>
   <string name="upload_progress_notification_title_in_progress">%1$s正在上传</string>
   <string name="upload_progress_notification_title_finishing">正在完成上传%1$s</string>
   <string name="upload_failed_notification_title">上传%1$s失败</string>
@@ -192,6 +188,7 @@
   <string name="title_activity_settings">设置</string>
   <string name="title_activity_signup">注册</string>
   <string name="title_activity_featured_images">特色图片</string>
+  <string name="images_featured_explanation">特色图片是出自高水准技巧摄影师和插画家的贡献，维基共享资源社区将其挑选为网站上最高品质的图片。</string>
   <string name="title_activity_custom_selector">自定义选择器</string>
   <string name="title_activity_category_details">分类</string>
   <string name="title_activity_review">同行评审</string>
@@ -282,15 +279,14 @@
   <string name="_2fa_code">2FA代码</string>
   <string name="email_auth_code">电子邮件验证码</string>
   <string name="logout_verification">您真的想要退出么？</string>
-  <string name="mediaimage_failed">媒体图片失败</string>
   <string name="no_subcategory_found">找不到子分类</string>
   <string name="no_parentcategory_found">找不到父分类</string>
   <string name="welcome_image_mount_zao">藏王连峰</string>
   <string name="welcome_image_llamas">大羊驼</string>
   <string name="welcome_image_rainbow_bridge">彩虹桥</string>
   <string name="welcome_image_tulip">郁金香</string>
-  <string name="welcome_image_welcome_wikipedia">欢迎界面维基百科信息</string>
-  <string name="welcome_image_welcome_copyright">欢迎界面版权信息</string>
+  <string name="welcome_image_welcome_wikipedia">通用维基百科条目的示意图。</string>
+  <string name="welcome_image_welcome_copyright">一叠纸的图画，版权符号被划掉了。</string>
   <string name="welcome_image_sydney_opera_house">悉尼歌剧院</string>
   <string name="cancel">取消</string>
   <string name="navigation_drawer_open">打开</string>
@@ -395,6 +391,7 @@
   <string name="quiz">测验</string>
   <string name="quiz_question_string">这个图片可以上传吗？</string>
   <string name="question">问题</string>
+  <string name="quiz_i_am_not_sure">我不确定</string>
   <string name="result">结果</string>
   <string name="quiz_back_button">如果您继续上传需要删除的图片，您的帐户可能会被封禁。你确定要结束测验吗？</string>
   <string name="quiz_alert_message">您上传的图片超过%1$s已被删除。如果您继续上传需要删除的图片，您的帐户可能会被封禁。\n\n您是否希望再次查看该教程，然后进行测验以帮助您了解应该或不应上传的图像类型？</string>
@@ -404,6 +401,7 @@
   <string name="blurry_image_answer">维基共享资源的目标之一是收集高质量的图像。因此，不应上传模糊的图像。因此请尝试用良好的照明拍摄漂亮的照片。</string>
   <string name="construction_event_answer">维基共享资源非常欢迎展示技术或文化的图片。</string>
   <string name="congratulatory_message_quiz">您得到%1$s的答案是正确的。祝贺您！</string>
+  <string name="quiz_continue">继续</string>
   <string name="warning_for_no_answer">选择两个选项之一来回答问题</string>
   <string name="user_not_logged_in">登录已过期。请重新登录。</string>
   <string name="quiz_result_share_message">与朋友分享您的测验！</string>
@@ -427,13 +425,12 @@
   <string name="Achievements">成就</string>
   <string name="Profile">个人资料</string>
   <string name="badges">徽章</string>
-  <string name="statistics">统计</string>
   <string name="statistics_thanks">已收到感谢</string>
   <string name="statistics_featured">特色图片</string>
   <string name="statistics_wikidata_edits">来自“附近地点”的图片</string>
-  <string name="level">等级%d</string>
-  <string name="profile_withLevel">%s（%s級）</string>
-  <string name="profile_withoutLevel">%s（%s）</string>
+  <string name="level">等级%1$d</string>
+  <string name="profile_withLevel">%1$s（%2$s級）</string>
+  <string name="profile_withoutLevel">%1$s（%2$s）</string>
   <string name="images_uploaded">已上传图片</string>
   <string name="image_reverts">未还原图片</string>
   <string name="images_used_by_wiki">使用过的图片</string>
@@ -523,11 +520,11 @@
   <string name="check_category_failure_message">%1$s不能请求类别检查</string>
   <string name="check_category_toast">正在请求对%1$s进行类别检查</string>
   <string name="nominate_for_deletion_done">完成</string>
-  <string name="send_thank_success_title">发送感谢成功</string>
-  <string name="send_thank_success_message">成功的给%1$s发送感谢</string>
-  <string name="send_thank_failure_message">给%1$发送感谢失败</string>
-  <string name="send_thank_failure_title">发送感谢失败</string>
-  <string name="send_thank_toast">向%1$s发送感谢</string>
+  <string name="send_thank_success_title">发送感谢：成功</string>
+  <string name="send_thank_success_message">已向%1$s发送感谢</string>
+  <string name="send_thank_failure_message">无法向%1$s发送感谢</string>
+  <string name="send_thank_failure_title">发送感谢：失败</string>
+  <string name="send_thank_toast">正在向%1$s发送感谢</string>
   <string name="review_copyright">它是否符合版权方针？</string>
   <string name="review_category">它是否被正确分类？</string>
   <string name="review_spam">它是否在维基共享资源的收录范围内？</string>
@@ -554,15 +551,14 @@
   <string name="menu_option_unread">查看未读</string>
   <string name="error_occurred_in_picking_images">选择图片时出错</string>
   <string name="please_wait">请稍候……</string>
-  <string name="images_featured_explanation">特征图片是Wikimedia Commons社区选出的网站上的最高质量的图片中的一部分，是来自于技术高超的摄影师和绘画师。</string>
   <string name="images_via_nearby_explanation">通过附近位置上传的图片是指那些使用地图上发现位置功能上传的图片</string>
   <string name="thanks_received_explanation">这些功能允许编辑人员给那些做出了有用编辑的用户发送感谢通知-感谢通知通过使用在历史页面或差分页面上的一个小的感谢链接实现的。</string>
-  <string name="copy_image_caption_description">复制到后续媒体</string>
+  <string name="copy_image_caption_description">复制到下一个项目</string>
   <string name="copied_successfully">已复制</string>
   <string name="welcome_do_upload_content_description">上传好图片到Commons的例子</string>
   <string name="welcome_dont_upload_content_description">不能上传图片的例子</string>
   <string name="skip_image">跳过该图片</string>
-  <string name="download_failed_we_cannot_download_the_file_without_storage_permission">下载失败！！在没有外部存储权限时我们不能下载该文件。</string>
+  <string name="download_failed_we_cannot_download_the_file_without_storage_permission">下载失败。因为缺少外部存储权限，我们无法下载文件。</string>
   <string name="manage_exif_tags">管理EXIF标签</string>
   <string name="manage_exif_tags_summary">选择保存在上传中的EXIF标签</string>
   <string name="exif_tag_name_author">作者</string>
@@ -572,11 +568,10 @@
   <string name="exif_tag_name_lensModel">镜头型号</string>
   <string name="exif_tag_name_serialNumbers">序列号</string>
   <string name="exif_tag_name_software">软件</string>
-  <string name="media_location_permission_denied">被拒绝访问媒体位置</string>
-  <string name="add_location_manually">我们可能无法自动从你上传的图片中获取位置数据。提交前请为每张图片添加适当的位置</string>
   <string name="share_text">直接在您手机上的维基共享资源应用中上传照片。立即下载共享资源应用：%1$s</string>
   <string name="share_via">分享到...</string>
   <string name="image_info">图像信息</string>
+  <string name="upload_categories_dont_show_this_message_again">不再显示此消息</string>
   <string name="no_categories_found">找不到分类</string>
   <string name="no_depiction_found">找不到描写。</string>
   <string name="upload_cancelled">取消上传</string>
@@ -629,7 +624,7 @@
   <string name="description_activity_title">编辑描述和说明。</string>
   <string name="share_image_via">分享图片透过</string>
   <string name="you_have_no_achievements_yet">您还没有做出任何贡献</string>
-  <string name="no_achievements_yet">%s还没有作出任何贡献</string>
+  <string name="no_achievements_yet">%1$s还没有作出任何贡献</string>
   <string name="account_created">账户已创建！</string>
   <string name="text_copy">文本已复制至剪贴板</string>
   <string name="notification_mark_read">通知已标记为已读</string>
@@ -638,7 +633,7 @@
   <string name="place_state_exists">存在</string>
   <string name="place_state_needs_photo">需要照片</string>
   <string name="place_type">地点类型：</string>
-  <string name="nearby_search_hint">桥梁、博物馆、旅馆等</string>
+  <string name="nearby_search_hint">桥梁、博物馆、酒店等</string>
   <string name="you_must_reset_your_passsword">登录时出现一些问题。您必须重置您的密码！</string>
   <string name="title_for_media">媒体</string>
   <string name="title_for_child_classes">子类别</string>
@@ -682,7 +677,7 @@
   <string name="wikipedia_instructions_step_5">5. 将wikitext粘贴到合适的位置。</string>
   <string name="wikipedia_instructions_step_6">6. 如果必要，在合适的位置编辑wikitext。参阅&lt;a href=\"https://en.wikipedia.org/wiki/Wikipedia:Manual_of_Style/Images#How_to_place_an_image\"&gt;此处&lt;/a&gt;以获得更多信息。</string>
   <string name="wikipedia_instructions_step_7">7. 发布条目</string>
-  <string name="copy_wikicode_to_clipboard">复制维基代码到剪贴板</string>
+  <string name="copy_wikicode_to_clipboard">复制wikitext到剪贴板</string>
   <string name="pause">暂停</string>
   <string name="resume">继续</string>
   <string name="paused">已暂停</string>
@@ -723,6 +718,8 @@
   <string name="categories_tooltip">请选择合适的分类。与描述不同，分类仅使用英文。</string>
   <string name="license_tooltip">维基共享资源让您的图片能够重复使用并且供任何人修改。您想放弃所有使用权吗？您希望被标示出吗？您想依据相同的授权条款来修改内容吗？</string>
   <string name="depicts_step_title">描述</string>
+  <string name="depicts_label">标签</string>
+  <string name="depicts_description">描述</string>
   <string name="license_step_title">媒体授权条款</string>
   <string name="media_detail_step_title">媒体详情</string>
   <string name="menu_view_category_page">查看分类页面</string>
@@ -749,7 +746,7 @@
   <string name="back">返回</string>
   <string name="welcome_custom_picture_selector_text">欢迎来到自定义图片选择器</string>
   <string name="custom_selector_info_text1">此拾取器显示您已上传至维基共享资源的图片。</string>
-  <string name="custom_selector_info_text2">右边的图片与左边的不同，它具有已上传至维基共享资源的标志。\n点击并长按来预览图像。</string>
+  <string name="custom_selector_info_text2">右边的图片与左边的不同，它具有已上传至维基共享资源的标志。\n\n点击并长按来预览图像。</string>
   <string name="welcome_custom_selector_ok">棒极了</string>
   <string name="custom_selector_already_uploaded_image_text">此图像已上传至维基共享资源。</string>
   <string name="custom_selector_over_limit_warning">出于技术原因，该应用无法可靠地一次性上传超过%1$d张照片。%2$d张已经超过%1$d张的上传限制。</string>
@@ -766,8 +763,8 @@
   <string name="read_phone_state_permission_message">附近地图需要读取手机状态权限以正常运行</string>
   <string name="location_off_dialog_text">请打开定位服务，以查看附近的地点。</string>
   <string name="location_permission_rationale">可选权限：获取当前位置以提供分类建议</string>
-  <string name="contributions_of_user">用户贡献：%s</string>
-  <string name="achievements_of_user">用户成就：%s</string>
+  <string name="contributions_of_user">用户贡献：%1$s</string>
+  <string name="achievements_of_user">用户成就：%1$s</string>
   <string name="menu_view_user_page">查看用户个人资料</string>
   <string name="edit_depictions">编辑描述</string>
   <string name="edit_categories">编辑分类</string>
@@ -799,8 +796,8 @@
   <string name="unmark_as_not_for_upload">取消标记为不上传</string>
   <string name="marking_as_not_for_upload">标记为不可上传</string>
   <string name="unmarking_as_not_for_upload">取消标记为不可上传</string>
-  <string name="show_already_actioned_pictures">显示已操作过的图片</string>
-  <string name="hiding_already_actioned_pictures">隐藏已操作过的图片</string>
+  <string name="show_already_actioned_pictures">显示已处理过的图片</string>
+  <string name="hiding_already_actioned_pictures">隐藏已处理过的图片</string>
   <string name="no_more_images_found">未找到更多图像</string>
   <string name="this_image_is_already_uploaded">此图像已上传</string>
   <string name="can_not_select_this_image_for_upload">无法选择此图像进行上传</string>
@@ -838,13 +835,13 @@
   <string name="file_saved_successfully">文件保存成功</string>
   <string name="do_you_want_to_open_gpx_file">您想打开GPX文件吗？</string>
   <string name="do_you_want_to_open_kml_file">您想打开KML文件吗？</string>
-  <string name="failed_to_save_kml_file">保存KML文件失败。</string>
-  <string name="failed_to_save_gpx_file">保存GPX文件失败。</string>
-  <string name="saving_kml_file">正在保存KML文件</string>
-  <string name="saving_gpx_file">正在保存GPX文件</string>
+  <string name="failed_to_save_kml_file">无法保存KML文件。</string>
+  <string name="failed_to_save_gpx_file">无法保存GPX文件。</string>
+  <string name="saving_kml_file">保存为KML文件...</string>
+  <string name="saving_gpx_file">保存为GPX文件...</string>
   <plurals name="custom_picker_images_selected_title_appendix">
-    <item quantity="one">已选择%d个图像</item>
-    <item quantity="other">已选择%d个图像</item>
+    <item quantity="one">已选择%1$d个图像</item>
+    <item quantity="other">已选择%1$d个图像</item>
   </plurals>
   <string name="multiple_files_depiction">请记住，多重上传中的所有图片都会标注相同的分类和描述。如果这些图片并不共享同样的描述和分类，请分别多次单独进行上传。</string>
   <string name="multiple_files_depiction_header">关于多图片上传的提醒</string>
@@ -880,7 +877,6 @@
   <string name="usages_on_commons_heading">维基共享资源</string>
   <string name="usages_on_other_wikis_heading">其它wiki</string>
   <string name="file_usages_container_heading">文件用途</string>
-  <string name="title_activity_single_web_view">单一网页视图活动</string>
   <string name="account">账号</string>
   <string name="vanish_account">隐退账号</string>
   <string name="account_vanish_request_confirm_title">隐退账号警告</string>

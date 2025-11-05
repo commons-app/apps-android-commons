@@ -6,7 +6,7 @@
 -->
 <resources>
   <string name="commons_facebook">Викигёзенни Facebook Бети</string>
-  <string name="commons_github">Викигёзенни Github Къайнакъ Коду</string>
+  <string name="commons_github" fuzzy="true">Викигёзенни Github Къайнакъ Коду</string>
   <string name="commons_logo">Викигёзен Лого</string>
   <string name="commons_website">Викигёзен вебсайт</string>
   <string name="exit_location_picker">Локация сайлаучудан чыкъ</string>
@@ -30,18 +30,14 @@
     <item quantity="one">%1$d файл джюкленеди</item>
     <item quantity="other">%1$d файл джюкленеди</item>
   </plurals>
-  <plurals name="contributions_subtitle">
-    <item quantity="one">(%1$d)</item>
-    <item quantity="other">(%1$d)</item>
-  </plurals>
   <string name="starting_uploads">Джюклеуле Башланадыла</string>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">%d джюклениу этиледи</item>
-    <item quantity="other">%d джюклениу этиледи</item>
+    <item quantity="one">%1$d джюклениу этиледи</item>
+    <item quantity="other">%1$d джюклениу этиледи</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">%d джюклеу</item>
-    <item quantity="other">%d джюклеу</item>
+    <item quantity="one">%1$d джюклеу</item>
+    <item quantity="other">%1$d джюклеу</item>
   </plurals>
   <plurals name="share_license_summary">
     <item quantity="one">Бу сурат %1$s лицензнияны тамалында боллукъду</item>
@@ -85,7 +81,7 @@
   <string name="uploading_queued">Джюклеу кёзюуюн сакълайды (тимитли байланыу режим джандырылыбды)</string>
   <string name="upload_completed_notification_title">%1$s джюкленди!</string>
   <string name="upload_completed_notification_text">Джюкленнген файлгъа къарар ючюн басыгъыз</string>
-  <string name="upload_progress_notification_title_start">Файл джюклене турады: %s</string>
+  <string name="upload_progress_notification_title_start">Файл джюклене турады: %1$s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s джюклене турады</string>
   <string name="upload_progress_notification_title_finishing">%1$s джюклениб бошалды</string>
   <string name="upload_failed_notification_title">%1$s джюклеу джетишимсиз болду</string>
@@ -135,6 +131,7 @@
   <string name="title_activity_settings">Джарашдырыўла</string>
   <string name="title_activity_signup">Регистрация</string>
   <string name="title_activity_featured_images">Сайланнган Суратла</string>
+  <string name="images_featured_explanation" fuzzy="true">Сайланнган суратла, Викигёзен джамагъат, сайтдагъы эм мийик агъачы болгъанды деб сайлагъанды, эм фахмулу фотографла бла иллюстраторланы суратларыды.</string>
   <string name="title_activity_custom_selector">Хайырланыучуну Сайлаучусу</string>
   <string name="title_activity_category_details">Категория</string>
   <string name="title_activity_review">Эксперт Тинтиу</string>
@@ -220,15 +217,14 @@
   <string name="_2fa_code">2FA Код</string>
   <string name="email_auth_code">Электрон почтаны верификация этигиз</string>
   <string name="logout_verification">Кертиден чыгъаргъа излеймисиз?</string>
-  <string name="mediaimage_failed">Медиа Сурат Джетишимсизди</string>
   <string name="no_subcategory_found">Тюб категория табылмады</string>
   <string name="no_parentcategory_found">Ана категорияла табылмадыла</string>
   <string name="welcome_image_mount_zao">Зао Тау</string>
   <string name="welcome_image_llamas">Ламала</string>
   <string name="welcome_image_rainbow_bridge">Джангкъылыч Кёпюр</string>
   <string name="welcome_image_tulip">Гюлханий</string>
-  <string name="welcome_image_welcome_wikipedia">Википедиягъа Хош Келигиз</string>
-  <string name="welcome_image_welcome_copyright">Автор Хакълагъа Хош Келигиз</string>
+  <string name="welcome_image_welcome_wikipedia" fuzzy="true">Википедиягъа Хош Келигиз</string>
+  <string name="welcome_image_welcome_copyright" fuzzy="true">Автор Хакълагъа Хош Келигиз</string>
   <string name="welcome_image_sydney_opera_house">Сидней Опера Театр</string>
   <string name="cancel">Ызына ал</string>
   <string name="navigation_drawer_open">Ач</string>
@@ -364,12 +360,11 @@
   <string name="Achievements">Джетишимле</string>
   <string name="Profile">Профиль</string>
   <string name="badges">Белгичикле</string>
-  <string name="statistics">Статистика</string>
   <string name="statistics_thanks">Бюсюреуле Алындыла</string>
   <string name="statistics_featured">Сайланнган Суратла</string>
   <string name="statistics_wikidata_edits">\"Джууукъдагъы Джерле\" юсю бла суратла</string>
-  <string name="level">Дараджа %d</string>
-  <string name="profile_withLevel">%s (Дараджа %s)</string>
+  <string name="level">Дараджа %1$d</string>
+  <string name="profile_withLevel">%1$s (Дараджа %2$s)</string>
   <string name="images_uploaded">Суратла Джюклендиле</string>
   <string name="image_reverts">Суратла Кери Алынмадыла</string>
   <string name="images_used_by_wiki">Суратла Хайырландыла</string>
@@ -429,7 +424,7 @@
   <string name="never_ask_again">Буну мындан сора сорма</string>
   <string name="display_location_permission_title">Локация эркинлик излегиз</string>
   <string name="display_location_permission_explanation">Джууукъдагъы хапарландырыу картны кёргюзюу функциясы ючюн керек болса локация эркинлик излегиз.</string>
-  <string name="achievements_fetch_failed">Не эсе да терс кетди, биз джетишимлеригизни алалмадыкъ</string>
+  <string name="achievements_fetch_failed" fuzzy="true">Не эсе да терс кетди, биз джетишимлеригизни алалмадыкъ</string>
   <string name="achievements_fetch_failed_ultimate_achievement">Джетишим эсеблеучю системабыз онглаямлазча, бек кёб къошум этдигиз. Бу уллу джетишимди.</string>
   <string name="ends_on">Бошалады:</string>
   <string name="display_campaigns">Компанияланы кёргюз</string>
@@ -457,11 +452,11 @@
   <string name="check_category_failure_message">%1$s ючюн категория тинтиу излем болмады</string>
   <string name="check_category_toast">%1$s ючюн категория тинтиу излем барады</string>
   <string name="nominate_for_deletion_done">Тындырылды</string>
-  <string name="send_thank_success_title">Бюсюреуле Джибериу: Джетишимли</string>
-  <string name="send_thank_success_message">%1$s бюсюреуле джиберилдиле</string>
-  <string name="send_thank_failure_message">%1$s бюсюреуле джиберилалмадыла</string>
-  <string name="send_thank_failure_title">Бюсюреуле Джибериу: Джетишимсиз</string>
-  <string name="send_thank_toast">%1$s ючюн Бюсюреуле Джибериу</string>
+  <string name="send_thank_success_title" fuzzy="true">Бюсюреуле Джибериу: Джетишимли</string>
+  <string name="send_thank_success_message" fuzzy="true">%1$s бюсюреуле джиберилдиле</string>
+  <string name="send_thank_failure_message" fuzzy="true">%1$s бюсюреуле джиберилалмадыла</string>
+  <string name="send_thank_failure_title" fuzzy="true">Бюсюреуле Джибериу: Джетишимсиз</string>
+  <string name="send_thank_toast" fuzzy="true">%1$s ючюн Бюсюреуле Джибериу</string>
   <string name="review_copyright">Бу автор хакълагъа келишемиди?</string>
   <string name="review_category">Бу тюз категориялашханмыды?</string>
   <string name="review_spam">Бу келишемиди?</string>
@@ -488,15 +483,14 @@
   <string name="menu_option_unread">Окъулмагъанланы кёргюз</string>
   <string name="error_occurred_in_picking_images">Суратла сайланнган заманда халат болду.</string>
   <string name="please_wait">Бираз сакълагъыз…</string>
-  <string name="images_featured_explanation">Сайланнган суратла, Викигёзен джамагъат, сайтдагъы эм мийик агъачы болгъанды деб сайлагъанды, эм фахмулу фотографла бла иллюстраторланы суратларыды.</string>
   <string name="images_via_nearby_explanation">Джууукъдагъы джерле юсю бла джюкленнген суратла, картадагъы джерлени табыб джюкленнген суратладыла.</string>
   <string name="thanks_received_explanation">Бу функция, редакторланы, тарих бетде неда версия башхалыкъ бетде, гитче бюсюреу джибериуню хайырланыб, файдалы тюзетиулени этген хайырланыучулагъа Бюсюреу хапарландырыу джиберирге амал береди.</string>
-  <string name="copy_image_caption_description">Сорагъы медиагъа копия эт</string>
+  <string name="copy_image_caption_description" fuzzy="true">Сорагъы медиагъа копия эт</string>
   <string name="copied_successfully">Копия этилди</string>
   <string name="welcome_do_upload_content_description">Гёзеннге джюкленник иги суратланы юлгюлери</string>
   <string name="welcome_dont_upload_content_description">Джюкленмезлик суратланы юлгюлери</string>
   <string name="skip_image">Бу суратны атлат</string>
-  <string name="download_failed_we_cannot_download_the_file_without_storage_permission">Джюклеу Джетишимсиз Болду!! Тыш асыраучугъа эркинлик берилмей джюклеяллыкъ тюлбюз.</string>
+  <string name="download_failed_we_cannot_download_the_file_without_storage_permission" fuzzy="true">Джюклеу Джетишимсиз Болду!! Тыш асыраучугъа эркинлик берилмей джюклеяллыкъ тюлбюз.</string>
   <string name="manage_exif_tags">EXIF-тегле бла ишле</string>
   <string name="manage_exif_tags_summary">Джюклеуледе къайсы EXIF-теглени тутуллукъларын сайла</string>
   <string name="exif_tag_name_author">Автор</string>
@@ -506,8 +500,6 @@
   <string name="exif_tag_name_lensModel">Линзаны Модели</string>
   <string name="exif_tag_name_serialNumbers">Серия Номерлери</string>
   <string name="exif_tag_name_software">Программа баджарыу</string>
-  <string name="media_location_permission_denied">Медиа локациягъа джетишиу уналмады</string>
-  <string name="add_location_manually">Джюклеген суратладан локация билгилени автомат халда алмазгъа боллукъбуз. Тилейбиз, джибериуден алгъа хар сурат ючюн келишген локацияны къошугъуз</string>
   <string name="share_text">Фотосуратланы телефонугъуздан туура Викигёзеннге джюклегиз. Гёзен Къошакъны энди эндиригиз: %1$s</string>
   <string name="share_via">Къошакъны буну бла юлюшле...</string>
   <string name="image_info">Сурат Информация</string>
@@ -563,7 +555,7 @@
   <string name="description_activity_title">Ачыкълауланы эмда тюб джазыуланы тюзет</string>
   <string name="share_image_via">Суратны буну бла юлюшле</string>
   <string name="you_have_no_achievements_yet">Алкъын чырт къошум этмедегиз</string>
-  <string name="no_achievements_yet">%s алкъын чырт къошум этмеди</string>
+  <string name="no_achievements_yet">%1$s алкъын чырт къошум этмеди</string>
   <string name="account_created">Хыйсаб къуралды!</string>
   <string name="text_copy">Текст алмашдырыу буферге копия этилгенди</string>
   <string name="notification_mark_read">Хапарландырыу окъулгъанча белгиленди</string>
@@ -572,7 +564,7 @@
   <string name="place_state_exists">Барды</string>
   <string name="place_state_needs_photo">Фото Керекди</string>
   <string name="place_type">Джерни типи:</string>
-  <string name="nearby_search_hint">Кёпюр, музей, къонакъ юй эмда а. к.</string>
+  <string name="nearby_search_hint" fuzzy="true">Кёпюр, музей, къонакъ юй эмда а. к.</string>
   <string name="you_must_reset_your_passsword">Не эсе да терс кетди. Паролугъузну ташларгъа керексиз!</string>
   <string name="title_for_media">МЕДИА</string>
   <string name="title_for_child_classes">БАЛА КЛАССЛА</string>
@@ -616,7 +608,7 @@
   <string name="wikipedia_instructions_step_5">5. Викитекстни келишимли джерле салыгъыз.</string>
   <string name="wikipedia_instructions_step_6">6. Керек болса викитекстни, келишимли орунландырыр ючюн тюзетигиз. Аслам информация ючюн &lt;a href=\"https://en.wikipedia.org/wiki/Wikipedia:Manual_of_Style/Images#How_to_place_an_image\"&gt;бери къарагъыз&lt;/a&gt;.</string>
   <string name="wikipedia_instructions_step_7">7. Статьяны басмалагъыз</string>
-  <string name="copy_wikicode_to_clipboard">Викикодну алмашдырыу буферге копия эт</string>
+  <string name="copy_wikicode_to_clipboard" fuzzy="true">Викикодну алмашдырыу буферге копия эт</string>
   <string name="pause">туракълат</string>
   <string name="resume">бардыр</string>
   <string name="paused">Туракълатылды</string>
@@ -683,7 +675,7 @@
   <string name="back">Кери</string>
   <string name="welcome_custom_picture_selector_text">Энчи Сурат Сайлаучугъа Хош Келигиз</string>
   <string name="custom_selector_info_text1">Бу сайлаучу, Гёзенде къайсы суратланы джюклегенигизни кёргюзюр.</string>
-  <string name="custom_selector_info_text2">Солдагъы суратдан башха болуб, онгдагъы суратда алайсыз да джюкленнгенин белгилеген Гёзенни логосу барды. Суратны ал къарауу ючюн басыб туругъуз.</string>
+  <string name="custom_selector_info_text2" fuzzy="true">Солдагъы суратдан башха болуб, онгдагъы суратда алайсыз да джюкленнгенин белгилеген Гёзенни логосу барды. Суратны ал къарауу ючюн басыб туругъуз.</string>
   <string name="welcome_custom_selector_ok">Сейирлик</string>
   <string name="custom_selector_already_uploaded_image_text">Бу сурат Гёзеннге алайсыз да джюкленнгенди.</string>
   <string name="custom_selector_over_limit_warning">Техника чурумла бла къошакъ бир заманда %1$d фотосуратдан асламыны къоркъуусуз шекелде джюклеялмайды. %1$d болгъан джюклеу марда %2$d бла оздурулду.</string>
@@ -697,8 +689,8 @@
   <string name="wlm_campaign_description">Вики, Эсгертмелени Сюеди, Викимедиа джанындан къуралгъан эсгретмеле ючюн халкъла арасы фото эришиудю</string>
   <string name="need_permission">Эркинлик Керекди</string>
   <string name="read_phone_state_permission_message">Джууукъдагъы картала тюз ишлер ючюн ТЕЛЕФОННУ БОЛУМУн окъургъа амал болургъа кереклиди</string>
-  <string name="contributions_of_user">Хайырланыучуну къошумлары: %s</string>
-  <string name="achievements_of_user">Хайырланыучуну джетишимлери: %s</string>
+  <string name="contributions_of_user">Хайырланыучуну къошумлары: %1$s</string>
+  <string name="achievements_of_user">Хайырланыучуну джетишимлери: %1$s</string>
   <string name="menu_view_user_page">Хайырланыучу профильни кёр</string>
   <string name="edit_depictions">Танытыуланы тюзет</string>
   <string name="edit_categories">Категорияланы тюзет</string>
@@ -709,7 +701,7 @@
   <string name="location_message">Локация билги Вики редакторлагъа суратыгъызны табханын тынч этиб, андан да иги хайырланырча этеди.\nКамера къошагъыгъызны джарашдырыуларында локацияны джандырлыгъызны теджейбиз. Джюклениу ючюн  сау болугъуз!</string>
   <string name="no_location_found_title">Локация табылалмады</string>
   <string name="no_location_found_message">Бу сурат алыннган джерни къошууну юсюнден не дерсиз?\nЛокация билгиле, Вики тюзетиучюлени суратыгъызны табмасына болушлукъ болуб, аны андан да бек хайырланырча этер. \nСау болугъуз!</string>
-  <string name="add_location">Локацияны къош</string>
+  <string name="add_location" fuzzy="true">Локацияны къош</string>
   <string name="feedback_sharing_data_alert">Тилейбиз, хар кимге ачыкъ болуб юлюшерге излемеген бютеу информацияны бу электрон мектубдан къоратыгъыз. Аны юсюне, юлюшледигиз электрон адресигизни эмда байламлы ат эмда профиль суратыгъызны хар кимге ачыкъ кёрюннюгюню унутмагъыз.</string>
   <string name="explore_map_details">Толу ачыкълаула</string>
   <string name="achievements_unavailable_beta">Джетишимле къуру prod версияда джетиширчады, тилейбиз, джаратыучу документация бла танышыгъыз.</string>
@@ -730,8 +722,8 @@
   <string name="unmark_as_not_for_upload">Джюклеу ючюн тюлдю белгини къорат</string>
   <string name="marking_as_not_for_upload">Джюклеу ючюн тюлдю деб белгиленеди</string>
   <string name="unmarking_as_not_for_upload">Джюклеу ючюн тюлдю деб белги къоратылады</string>
-  <string name="show_already_actioned_pictures">Хазыр этилиб бошагъан суратланы кёргюз</string>
-  <string name="hiding_already_actioned_pictures">Хазыр этилиб бошагъан суратланы джашыр</string>
+  <string name="show_already_actioned_pictures" fuzzy="true">Хазыр этилиб бошагъан суратланы кёргюз</string>
+  <string name="hiding_already_actioned_pictures" fuzzy="true">Хазыр этилиб бошагъан суратланы джашыр</string>
   <string name="no_more_images_found">Башха сурат табылмады</string>
   <string name="this_image_is_already_uploaded">Бу сурат алайсыз да джюкленнгенди</string>
   <string name="can_not_select_this_image_for_upload">Бу сурат джюклер ючюн сайланалмайды</string>
@@ -767,15 +759,15 @@
   <string name="invalid_login_message">Сессиягъызны болджалы чыкъгъанды. Тилебиз, джангыдан киригиз.</string>
   <string name="no_application_available_to_open_gpx_files">GPX файлланы ачаллыкъ джетиширча къошакъ джокъду</string>
   <string name="file_saved_successfully">Файл Джетишимли Сакъланды</string>
-  <string name="do_you_want_to_open_gpx_file">GPX файлны ачаргъа излеймисиз?</string>
-  <string name="do_you_want_to_open_kml_file">KML файлны ачаргъа излеймисиз?</string>
-  <string name="failed_to_save_kml_file">KML файл сакъландырыу джетишимсиз болду.</string>
-  <string name="failed_to_save_gpx_file">GPX файл сакъландырыу джетишимсиз болду.</string>
-  <string name="saving_kml_file">KML файлны сакъланыуу</string>
-  <string name="saving_gpx_file">GPX файлны сакъланыуу</string>
+  <string name="do_you_want_to_open_gpx_file" fuzzy="true">GPX файлны ачаргъа излеймисиз?</string>
+  <string name="do_you_want_to_open_kml_file" fuzzy="true">KML файлны ачаргъа излеймисиз?</string>
+  <string name="failed_to_save_kml_file" fuzzy="true">KML файл сакъландырыу джетишимсиз болду.</string>
+  <string name="failed_to_save_gpx_file" fuzzy="true">GPX файл сакъландырыу джетишимсиз болду.</string>
+  <string name="saving_kml_file" fuzzy="true">KML файлны сакъланыуу</string>
+  <string name="saving_gpx_file" fuzzy="true">GPX файлны сакъланыуу</string>
   <plurals name="custom_picker_images_selected_title_appendix">
-    <item quantity="one">%d сурат сайланды</item>
-    <item quantity="other">%d сурат сайланды</item>
+    <item quantity="one">%1$d сурат сайланды</item>
+    <item quantity="other">%1$d сурат сайланды</item>
   </plurals>
   <string name="multiple_files_depiction">Мультиджюклеудеги бютеу суратлаула бир категорияла эмда танытыула алгъанларын унутмагъыз. Суратлау ангылатыула эмда категориялары юлюшлемей эселе, тилейбиз, талай айры джюклеу этигиз.</string>
   <string name="multiple_files_depiction_header">Мультиджюклеулеуни юсюнден эсгертиу</string>
@@ -811,7 +803,6 @@
   <string name="usages_on_commons_heading">Гёзен</string>
   <string name="usages_on_other_wikis_heading">Башха викиле</string>
   <string name="file_usages_container_heading">Файлны хайырланыулары</string>
-  <string name="title_activity_single_web_view">SingleWebViewActivity</string>
   <string name="account">Хыйсаб</string>
   <string name="vanish_account">Хыйсабны сюрт</string>
   <string name="account_vanish_request_confirm_title">Хыйсаб сюртюуню эсгертиую</string>

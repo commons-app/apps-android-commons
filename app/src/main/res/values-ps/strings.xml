@@ -34,18 +34,14 @@
     <item quantity="one">%1$d دوتنه راپورته‌کول</item>
     <item quantity="other"> %1$d دوتنې راپورته‌کول</item>
   </plurals>
-  <plurals name="contributions_subtitle">
-    <item quantity="one">(%1$d)</item>
-    <item quantity="other">(%1$d)</item>
-  </plurals>
   <string name="starting_uploads">راپورته‌کول پيلول</string>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">راپورته‌کولو %d بهير</item>
-    <item quantity="other">راپورته‌کولو %d بهير</item>
+    <item quantity="one">راپورته‌کولو  %1$d بهير</item>
+    <item quantity="other">راپورته‌کولو  %1$d بهير</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">%d upload</item>
-    <item quantity="other">%d راپورته‌کول</item>
+    <item quantity="one">%1$d راپورته‌کېدنه</item>
+    <item quantity="other">%1$d راپورته‌کېدنې</item>
   </plurals>
   <plurals name="share_license_summary">
     <item quantity="one">دا انځور به د منښتليک  %1$s لاندې وي</item>
@@ -89,7 +85,7 @@
   <string name="uploading_queued">راپورته کول په کتار کې دي(د ټاکلي اړيکې ونگه چارن شوې)</string>
   <string name="upload_completed_notification_title">%1$s پورته شوی!</string>
   <string name="upload_completed_notification_text">د خپلې راپورکېدنې کتلو لپاره دلته وټاپئ.</string>
-  <string name="upload_progress_notification_title_start">دوتنه راپورته کېږي: %s</string>
+  <string name="upload_progress_notification_title_start">دوتنه راپورته کېږي: %1$s</string>
   <string name="upload_progress_notification_title_in_progress">د %1$s پورته کول</string>
   <string name="upload_progress_notification_title_finishing">%1$s راپورته کېدنه بشپړېږي</string>
   <string name="upload_failed_notification_title">%1$s راپورته کېدنه نابريالۍ شوه</string>
@@ -192,7 +188,7 @@
   <string name="detail_panel_cats_none">هېڅ هم نه دی ټاکل شوی</string>
   <string name="detail_caption_empty">هيڅ نيونگ نشته</string>
   <string name="detail_description_empty">څرگنداوی نشته</string>
-  <string name="detail_discussion_empty">هيڅ شننه نشته</string>
+  <string name="detail_discussion_empty">هېڅ شننه نشته</string>
   <string name="detail_license_empty">ناجوت منښتليک</string>
   <string name="menu_refresh">تازه کول</string>
   <string name="storage_permission_title">د زېرمه کولو د پرېښولي غوښتنه کول</string>
@@ -219,11 +215,10 @@
   <string name="become_a_tester_title">ازمېښتي ازمايښتگر شئ</string>
   <string name="email_auth_code">برېښليک تاييد کوډ</string>
   <string name="logout_verification">ايا تاسو په رښتيا له غونډاله وتل غواړئ؟</string>
-  <string name="mediaimage_failed">رسنۍ انځور نابرياله شو</string>
   <string name="no_subcategory_found">هېڅ څېرمه‌وېشنيزې ونه موندل شوې</string>
   <string name="no_parentcategory_found">هېڅ بنسټيزې وېشنيزې ونه موندل شوې</string>
-  <string name="welcome_image_welcome_wikipedia">ويکيپېډيا ته ښه راغلئ</string>
-  <string name="welcome_image_welcome_copyright">لمېسل‌رښتې هرکلی</string>
+  <string name="welcome_image_welcome_wikipedia">د ويکيپېډيا يوې ټوليزې ليکنې يو منشوري انځور.</string>
+  <string name="welcome_image_welcome_copyright">د کاغزونو د يوې ډډې انځور چې لمېسل‌رښتې ورسره مل وي.</string>
   <string name="cancel">ناگارل</string>
   <string name="navigation_drawer_open">پرانېستل</string>
   <string name="navigation_drawer_close">تړل</string>
@@ -317,12 +312,11 @@
   <string name="Achievements">لاسته‌راوړنې</string>
   <string name="Profile">پېژنيال</string>
   <string name="badges">مټ‌تړوني</string>
-  <string name="statistics">شمارنې</string>
   <string name="statistics_thanks">ترلاسه‌شوې مننې</string>
   <string name="statistics_featured">ټاکلی انځور</string>
   <string name="statistics_wikidata_edits">انځورنه د \"څېرمه ځايونو\" له لارې</string>
-  <string name="level">کچه %d</string>
-  <string name="profile_withLevel">%s (کچه %s)</string>
+  <string name="level">کچه %1$d</string>
+  <string name="profile_withLevel">%1$s (کچه %2$s)</string>
   <string name="images_uploaded">انځورونه راپورته‌شول</string>
   <string name="image_reverts">انځورونه په څټ‌گرځول‌شوي نه دي</string>
   <string name="images_used_by_wiki">کارول‌شوي انځورونه</string>
@@ -372,8 +366,8 @@
   <string name="check_category_toast">د %1$s وېشنيزې سم‌کتنې لپاره غوښتنه‌کول</string>
   <string name="nominate_for_deletion_done">وشو</string>
   <string name="send_thank_success_title">مننې لېږل: برياليتوب</string>
-  <string name="send_thank_success_message">%1$s ته په برياليتوب سره مننه ولېږل شوه</string>
-  <string name="send_thank_failure_message">%1$s ته د مننې لېږلو کې پاتې راغی</string>
+  <string name="send_thank_success_message">%1$s ته مننه ولېږل شوه</string>
+  <string name="send_thank_failure_message">%1$s د مننې لېږلو کې پاتې راغی</string>
   <string name="send_thank_failure_title">مننې لېږل: ناکامي</string>
   <string name="send_thank_toast">%1$s لپاره د مننې لېږل</string>
   <string name="review_copyright">ايا دا ډ لمېسل‌رښتو سره سم دی؟</string>
@@ -401,7 +395,6 @@
   <string name="exif_tag_name_cameraModel">کامرې نمونه</string>
   <string name="exif_tag_name_serialNumbers">د لړۍ شمېرې</string>
   <string name="exif_tag_name_software">پوستغالی</string>
-  <string name="media_location_permission_denied">د رسنيو ځای ته لاسرسی رد شو</string>
   <string name="share_via">کاريال د...لارې وېشل</string>
   <string name="image_info">انځور مالومات</string>
   <string name="no_categories_found">هېڅ وېشنيزې ونه موندل شوې</string>
@@ -430,6 +423,7 @@
   <string name="confirm">تاييدول</string>
   <string name="instructions_title">لارښوونې</string>
   <string name="wikipedia_instructions_step_1">۱. لاندې ويکي‌ليک وکاروئ:</string>
+  <string name="copy_wikicode_to_clipboard">ويکي‌ليک ټينگدړې ته لمېسل</string>
   <string name="pause">درول‌</string>
   <string name="resume">بياپيلول</string>
   <string name="paused">درول‌شوی</string>
@@ -511,17 +505,22 @@
   <string name="custom_selector_confirm_deletion_title">ړنگول تایید کړئ</string>
   <string name="custom_selector_delete">ړنگول</string>
   <string name="custom_selector_cancel">ناگارل</string>
+  <string name="green_pin">دا ځای لادمخه يو انځور لري.</string>
+  <string name="grey_pin">اورس گورو چې دا ځای کوم انځور لري.</string>
   <string name="error_while_loading">د بارولو پرمهال تېروتنه</string>
   <string name="no_usages_found">هېڅ کاره‌ونه ونه موندل شوه</string>
   <string name="usages_on_commons_heading">خونديځ</string>
   <string name="usages_on_other_wikis_heading">نورې ويکي‌گانې</string>
   <string name="file_usages_container_heading">دوتنې کارېدنې</string>
-  <string name="title_activity_single_web_view">يواړخيزه‌وېب‌کتنې‌چاره</string>
   <string name="account">گڼون</string>
   <string name="vanish_account">گڼون له منځه وړل</string>
   <string name="account_vanish_request_confirm_title">د گڼون له منځه وړلو گواښنه</string>
   <string name="account_vanish_request_confirm">ورکېدل يوه &lt;b&gt;وروستۍ چاره ده&lt;/b&gt; او بايد &lt;b&gt;يوازې هغه وخت وکارول شي کله چې تاسو غواړئ د تل لپاره سمون پرېږدئ&lt;/b&gt; او همدارنگه تر شوني بريده د ځان اړوند پخوانۍ اړيکې پټې کړئ.&lt;br/&gt;&lt;br/&gt;په ويکي‌رسنۍ خونديځ کې گڼون ړنگول ستاسو د گڼون نوم بدلولو له لارې ترسره کېږي؛ ترڅو نور ستاسو ونډې ونه پېژني، دې چارې ته ورکېدل يا گڼون له منځه وړل وايي. &lt;b&gt;ورکېدل په پروژو کې په بشپړ ډول ستاسو د هويت او ونډو لرې کولو ډاډ نه درکوي&lt;/b&gt;.</string>
   <string name="caption">نيونگ</string>
   <string name="caption_copied_to_clipboard">نيونگ ټينگدړې ته ولمېسل شو</string>
+  <string name="show_in_explore">سپړلو کې ښودل</string>
+  <string name="show_in_nearby">څېرمه کې ښودل</string>
+  <string name="image_tag_line_created_and_uploaded_by">جوړوونکی او راپورته‌‌کوونکی: %1$s</string>
+  <string name="image_tag_line_created_by_and_uploaded_by">د %1$s له خوا جوړ شوی او د %2$s له خوا راپورته‌شوی</string>
   <string name="nominated_for_deletion_btn">ړنگولو ته نومول‌شوې</string>
 </resources>

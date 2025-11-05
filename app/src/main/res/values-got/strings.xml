@@ -4,7 +4,7 @@
 -->
 <resources>
   <string name="commons_facebook">𐌲𐌰𐌼𐌰𐌹𐌽𐌰 𐌻𐌰𐌿𐍆𐍃 𐍆𐌴𐍃𐌱𐌿𐌺𐍃</string>
-  <string name="commons_github">𐌲𐌰𐌼𐌰𐌹𐌽𐌰 𐌲𐌹𐍄𐌷𐌰𐌱𐍃 𐌺𐍉𐌳𐌿𐍃 𐌱𐍂𐌿𐌽𐌽𐌹𐌽𐍃</string>
+  <string name="commons_github" fuzzy="true">𐌲𐌰𐌼𐌰𐌹𐌽𐌰 𐌲𐌹𐍄𐌷𐌰𐌱𐍃 𐌺𐍉𐌳𐌿𐍃 𐌱𐍂𐌿𐌽𐌽𐌹𐌽𐍃</string>
   <string name="commons_logo">𐌲𐌰𐌼𐌰𐌹𐌽𐌰 𐌻𐍉𐌲𐍉</string>
   <string name="commons_website">𐌲𐌰𐌼𐌰𐌹𐌽𐌰 𐌽𐌰𐍄𐌾𐌰𐍃𐍄𐌰𐌸𐍃</string>
   <string name="exit_location_picker">𐍃𐍄𐌰𐌳𐌹𐍃 𐌽𐌹𐌼𐌰𐌽𐌳 𐌰𐍆𐌻𐌴𐌹𐌸𐌰𐌽</string>
@@ -16,7 +16,7 @@
   <string name="appwidget_img">𐍆𐍂𐌹𐍃𐌰𐌷𐍄𐍃 𐌳𐌰𐌲𐌹𐍃</string>
   <string name="starting_uploads">𐌹𐌽𐌽𐌰𐍄𐌱𐌰𐌿𐍂𐌰 𐌳𐌿𐌲𐌹𐌽𐌽𐌰𐌽𐌳</string>
   <plurals name="multiple_uploads_title">
-    <item quantity="other">𐌰𐌹𐌽=%d 𐌹𐌽𐌽𐌰𐍄𐌱𐌰𐌿𐍂</item>
+    <item quantity="other">𐌰𐌹𐌽=%1$d 𐌹𐌽𐌽𐌰𐍄𐌱𐌰𐌿𐍂</item>
   </plurals>
   <string name="navigation_item_explore">𐌱𐌹𐌲𐌹𐍄𐌰𐌽</string>
   <string name="preference_category_general">𐌲𐌰𐌼𐌰𐌹𐌽</string>
@@ -41,7 +41,7 @@
   <string name="uploading_queued">𐌹𐌽𐌽𐌰𐍄𐌱𐌰𐌿𐍂 𐌱𐌴𐌹𐌳𐌹𐌸 (𐌰𐌽𐌰𐌻𐌰𐌲𐌹𐌸 𐌹𐍃𐍄 𐌼𐍉𐌳𐌿𐍃 𐌲𐌰𐍅𐌹𐍃𐍃𐌰𐌹𐍃 𐌲𐌰𐌼𐌰𐍂𐌺𐍉𐌸)</string>
   <string name="upload_completed_notification_title">%1$s 𐌹𐌽𐌽𐌰𐍄𐌱𐌰𐌿𐍂𐌰𐌽!</string>
   <string name="upload_completed_notification_text">𐌸𐍂𐌿𐌺𐌾𐌰𐌽 𐌳𐌿 𐍃𐌰𐌹𐍈𐌰𐌽 𐌹𐌽𐌽𐌰𐍄𐌱𐌰𐌿𐍂 𐌸𐌴𐌹𐌽</string>
-  <string name="upload_progress_notification_title_start">𐌹𐌽𐌽𐌰𐍄𐌱𐌰𐌹𐍂𐌰𐌳𐌰 𐍆𐌰𐌾𐌻: %s</string>
+  <string name="upload_progress_notification_title_start">𐌹𐌽𐌽𐌰𐍄𐌱𐌰𐌹𐍂𐌰𐌳𐌰 𐍆𐌰𐌾𐌻: %1$s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s 𐌹𐌽𐌽𐌰𐍄𐌱𐌰𐌹𐍂𐌰𐌳𐌰</string>
   <string name="upload_failed_notification_subtitle">𐌸𐍂𐌿𐌺𐌾𐌰𐌽 𐌳𐌿 𐍃𐌰𐌹𐍈𐌰𐌽</string>
   <string name="upload_paused_notification_subtitle">𐌸𐍂𐌿𐌺𐌾𐌰𐌽 𐌳𐌿 𐍃𐌰𐌹𐍈𐌰𐌽</string>
@@ -108,13 +108,12 @@
   <string name="become_a_tester_title">𐍅𐌰𐌹𐍂𐌸 𐌱𐌰𐌹𐍄𐌰 𐍃𐍉𐌺𐌾𐌰𐌽𐌳𐍃</string>
   <string name="_2fa_code">2𐍆𐌰 𐌺𐍉𐌳𐌿𐍃</string>
   <string name="logout_verification">𐌱𐌹 𐍃𐌿𐌽𐌾𐌰𐌹 𐍅𐌹𐌻𐌴𐌹𐌶𐌿 𐌰𐍆𐌻𐌴𐌹𐌸𐌰𐌽?</string>
-  <string name="mediaimage_failed">𐍆𐍂𐌹𐍃𐌰𐌷𐍄𐍃 𐌼𐌰𐌹𐌳𐌾𐌴 𐌱𐍂𐌰𐌺</string>
   <string name="no_subcategory_found">𐌽𐌹 𐌱𐌹𐌲𐌹𐍄𐌰𐌽𐌰 𐌿𐍆𐌺𐌿𐌽𐌾𐌰</string>
   <string name="welcome_image_mount_zao">𐍆𐌰𐌹𐍂𐌲𐌿𐌽𐌹 𐌶𐌰𐍉</string>
   <string name="welcome_image_llamas">𐌻𐌻𐌰𐌼𐌰𐍃</string>
   <string name="welcome_image_rainbow_bridge">𐌱𐍂𐌿𐌳𐌳𐌹 𐍂𐌹𐌲𐌽𐌰𐌱𐌿𐌲𐌹𐌽𐍃</string>
   <string name="welcome_image_tulip">𐍄𐍅𐌻𐌹𐍀</string>
-  <string name="welcome_image_welcome_wikipedia">𐍅𐌹𐌻𐌾𐌰𐌵𐌿𐌼𐌰 𐍅𐌹𐌺𐌹𐍀𐌰𐌹𐌳𐌾𐍉𐍃</string>
+  <string name="welcome_image_welcome_wikipedia" fuzzy="true">𐍅𐌹𐌻𐌾𐌰𐌵𐌿𐌼𐌰 𐍅𐌹𐌺𐌹𐍀𐌰𐌹𐌳𐌾𐍉𐍃</string>
   <string name="cancel">𐍃𐍅𐌴𐌹𐌱𐌰𐌽</string>
   <string name="navigation_drawer_open">𐌿𐍃𐌻𐌿𐌺𐌰𐌽</string>
   <string name="navigation_drawer_close">𐌻𐌿𐌺𐌰𐌽</string>
@@ -199,12 +198,11 @@
   <string name="search_history_deleted">𐍃𐍉𐌺𐌽𐌰𐌹𐍃 𐍃𐍀𐌹𐌻𐌻𐌰𐍅𐌹𐍄𐌿𐌱𐌽𐌹 𐌿𐍃𐌵𐌹𐍃𐍄𐌹𐌸</string>
   <string name="nominate_delete">𐌲𐌰𐌳𐍉𐌼𐌾𐌰𐌽 𐍆𐍂𐌰𐌵𐌹𐍃𐍄𐌴𐌹𐌽𐌰𐌹</string>
   <string name="delete">𐌿𐍃𐌵𐌹𐍃𐍄𐌾𐌰𐌽</string>
-  <string name="statistics">𐍂𐌰𐌸𐌾𐍉𐌽𐍃</string>
   <string name="statistics_thanks">𐌰𐍅𐌹𐌻𐌹𐌿𐌸 𐌰𐌽𐌳𐌽𐌿𐌼𐌰𐌽</string>
   <string name="statistics_featured">𐍆𐍂𐌹𐍃𐌰𐌷𐍄𐌴𐌹𐍃 𐍅𐌰𐌹𐌻𐌰𐌼𐌴𐍂𐌾𐍉𐍃</string>
   <string name="statistics_wikidata_edits">𐍆𐍂𐌹𐍃𐌰𐌷𐍄𐌴𐌹𐍃 𐌸𐌰𐌹𐍂𐌷 \"𐍃𐍄𐌰𐌳𐌹𐌽𐍃 𐌽𐌴𐍈𐌰\"</string>
-  <string name="level">𐌷𐌰𐌿𐌷𐌹𐌸𐌰 %d</string>
-  <string name="profile_withLevel">%s (𐌷𐌰𐌿𐌷𐌹𐌸𐌰 %s)</string>
+  <string name="level">𐌷𐌰𐌿𐌷𐌹𐌸𐌰 %1$d</string>
+  <string name="profile_withLevel">%1$s (𐌷𐌰𐌿𐌷𐌹𐌸𐌰 %2$s)</string>
   <string name="images_uploaded">𐍆𐍂𐌹𐍃𐌰𐌷𐍄𐌴𐌹𐍃 𐌹𐌽𐌽𐌰𐍄𐌱𐌰𐌿𐍂𐌰𐌽𐍉𐍃</string>
   <string name="images_used_by_wiki">𐌱𐍂𐌿𐌷𐍄𐍉𐍃 𐍆𐍂𐌹𐍃𐌰𐌷𐍄𐌴𐌹𐍃</string>
   <string name="achievements_revert_limit_message">𐌸𐌰𐍄𐌰 𐌼𐌹𐌽𐌽𐌹𐍃𐍄𐍉 𐌽𐌰𐌿𐌳𐌹𐌸𐌰𐌿𐍂𐍆𐍄𐌰𐌹:</string>
@@ -244,11 +242,11 @@
   <string name="error_processing_image">𐌰𐌹𐍂𐌶𐌴𐌹 𐍅𐌰𐍂𐌸 𐍅𐌰𐌿𐍂𐌺𐌾𐌰𐌽 𐌸𐍉 𐍆𐍂𐌹𐍃𐌰𐌷𐍄. 𐌱𐌹𐌳𐌾𐌰𐌼 𐌸𐌿𐌺, 𐍃𐍉𐌺𐌴𐌹 𐌰𐍆𐍄𐍂𐌰!</string>
   <string name="getting_edit_token">𐌽𐌹𐌼𐌹𐌸 𐍄𐌰𐌹𐌺𐌽 𐌹𐌽𐌼𐌰𐌹𐌳𐌴𐌹𐌽𐌰𐌹</string>
   <string name="nominate_for_deletion_done">𐌲𐌰𐍄𐌰𐍅𐌹𐌸</string>
-  <string name="send_thank_success_title">𐍃𐌰𐌽𐌳𐌾𐌰𐌽𐌳𐌰 𐌰𐍅𐌹𐌻𐌹𐌿𐌳𐌰: 𐍅𐌰𐌿𐍂𐌷𐍄</string>
-  <string name="send_thank_success_message">𐍅𐌰𐌹𐌻𐌰 𐌹𐌽𐍃𐌰𐌽𐌳𐌹𐌳𐌰 𐌰𐍅𐌹𐌻𐌹𐌿𐌸 𐌳𐌿 %1$s</string>
-  <string name="send_thank_failure_message">𐌽𐌹 𐌼𐌰𐌷𐍄𐌰 𐍃𐌰𐌽𐌳𐌾𐌰𐌽 𐌰𐍅𐌹𐌻𐌹𐌿𐌳𐌰 %1$s</string>
-  <string name="send_thank_failure_title">𐍃𐌰𐌽𐌳𐌾𐌰𐌽𐌳𐌰 𐌰𐍅𐌹𐌻𐌹𐌿𐌳𐌰: 𐌽𐌹 𐍅𐌰𐌿𐍂𐌷𐍄𐌰</string>
-  <string name="send_thank_toast">𐌰𐍅𐌹𐌻𐌹𐌿𐌳 𐍃𐌰𐌽𐌳𐌾𐌰𐌳𐌰 𐍆𐌰𐌿𐍂 %1$s</string>
+  <string name="send_thank_success_title" fuzzy="true">𐍃𐌰𐌽𐌳𐌾𐌰𐌽𐌳𐌰 𐌰𐍅𐌹𐌻𐌹𐌿𐌳𐌰: 𐍅𐌰𐌿𐍂𐌷𐍄</string>
+  <string name="send_thank_success_message" fuzzy="true">𐍅𐌰𐌹𐌻𐌰 𐌹𐌽𐍃𐌰𐌽𐌳𐌹𐌳𐌰 𐌰𐍅𐌹𐌻𐌹𐌿𐌸 𐌳𐌿 %1$s</string>
+  <string name="send_thank_failure_message" fuzzy="true">𐌽𐌹 𐌼𐌰𐌷𐍄𐌰 𐍃𐌰𐌽𐌳𐌾𐌰𐌽 𐌰𐍅𐌹𐌻𐌹𐌿𐌳𐌰 %1$s</string>
+  <string name="send_thank_failure_title" fuzzy="true">𐍃𐌰𐌽𐌳𐌾𐌰𐌽𐌳𐌰 𐌰𐍅𐌹𐌻𐌹𐌿𐌳𐌰: 𐌽𐌹 𐍅𐌰𐌿𐍂𐌷𐍄𐌰</string>
+  <string name="send_thank_toast" fuzzy="true">𐌰𐍅𐌹𐌻𐌹𐌿𐌳 𐍃𐌰𐌽𐌳𐌾𐌰𐌳𐌰 𐍆𐌰𐌿𐍂 %1$s</string>
   <string name="review_category">𐌹𐍃𐍄 𐌸𐌰𐍄𐌰 𐌹𐌽 𐌺𐌿𐌽𐌾𐌰 𐍂𐌰𐌹𐌷𐍄𐌰𐌼𐌼𐌰?</string>
   <string name="review_thanks">𐍅𐌹𐌻𐌴𐌹𐌶𐌿 𐌰𐍅𐌹𐌻𐌹𐌿𐌳𐍉 𐌸𐌰𐌼𐌼𐌰 𐌱𐌹𐌰𐌿𐌺𐌰𐌽𐌳?</string>
   <string name="review_spam_explanation">𐌰𐍄𐍄𐌴𐌺 \'𐌽𐌴\' 𐌳𐌿 𐌳𐍉𐌼𐌾𐌰𐌽 𐌸𐍉 𐍆𐍂𐌹𐍃𐌰𐌷𐍄 𐍆𐍂𐌰𐌵𐌹𐍃𐍄𐌴𐌹𐌽𐌰𐌹 𐌾𐌰𐌱𐌰𐌹 𐌽𐌹𐍃𐍄 𐌰𐌻𐌻𐌹𐍃 𐌱𐍂𐌿𐌺𐌰.</string>
@@ -266,7 +264,6 @@
   <string name="exif_tag_name_author">𐌱𐍉𐌺𐌰𐍂𐌴𐌹𐍃</string>
   <string name="exif_tag_name_location">𐍃𐍄𐌰𐌸𐍃</string>
   <string name="exif_tag_name_software">𐌷𐌽𐌰𐍃𐌵𐌿𐍅𐌰𐍂𐌰</string>
-  <string name="media_location_permission_denied">𐌰𐍄𐌲𐌰𐌲𐌲 𐌳𐌿 𐍃𐍄𐌰𐌳𐌰 𐌼𐌰𐌹𐌳𐌾𐌹𐍃 𐌽𐌹 𐌷𐌰𐌱𐌰𐌹𐍃</string>
   <string name="share_via">𐌰𐍀𐍀 𐌳𐌰𐌹𐌻𐌾𐌰𐌽 𐌸𐌰𐌹𐍂𐌷...</string>
   <string name="image_info">𐌺𐌿𐌽𐌸𐌹 𐍆𐍂𐌹𐍃𐌰𐌷𐍄𐌰𐌹𐍃</string>
   <string name="no_categories_found">𐌽𐌹 𐌺𐌿𐌽𐌾𐌰 𐌱𐌹𐌲𐌹𐍄𐌰𐌽𐌰</string>
@@ -290,7 +287,7 @@
   <string name="some_error">𐍃𐌿𐌼𐌰 𐌰𐌹𐍂𐌶𐌴𐌹 𐍅𐌰𐍂𐌸!</string>
   <string name="place_state_exists">𐌹𐍃𐍄</string>
   <string name="place_state_needs_photo">𐌸𐌰𐍂𐍆 𐌻𐌹𐌿𐌷𐌰𐌳𐌰𐌼𐌴𐌻𐌾𐌹𐍃</string>
-  <string name="nearby_search_hint">𐌱𐍂𐌿𐌳𐌳𐌹, 𐌼𐌿𐍃𐌴𐌹𐍉, 𐍃𐌰𐌻𐌹𐌸𐍅𐍉𐍃 𐌾𐌰𐌷 𐍃𐍅𐌴 𐍆𐍂𐌰𐌼𐍅𐌹𐌲𐌹𐍃</string>
+  <string name="nearby_search_hint" fuzzy="true">𐌱𐍂𐌿𐌳𐌳𐌹, 𐌼𐌿𐍃𐌴𐌹𐍉, 𐍃𐌰𐌻𐌹𐌸𐍅𐍉𐍃 𐌾𐌰𐌷 𐍃𐍅𐌴 𐍆𐍂𐌰𐌼𐍅𐌹𐌲𐌹𐍃</string>
   <string name="title_for_media">𐌼𐌰𐌹𐌳𐌾𐌰</string>
   <string name="title_for_subcategories">𐌿𐍆𐌺𐌿𐌽𐌾𐌰</string>
   <string name="upload_nearby_place_found_title">𐍃𐍄𐌰𐌸𐍃 𐌽𐌴𐍈𐌰 𐌱𐌹𐌲𐌰𐍄</string>
@@ -336,7 +333,7 @@
   <string name="learn_more">𐌻𐌰𐌹𐍃𐌾𐌰𐌽 𐌸𐌿𐌺 𐌼𐌰𐌹𐍃</string>
   <string name="need_permission">𐌸𐌰𐌿𐍂𐌱𐌰𐌽𐌳 𐌰𐌽𐌳𐌻𐌴𐍄𐌰𐌹𐍃</string>
   <string name="reset">𐌰𐍆𐍄𐍂𐌰𐌻𐌰𐌲𐌾𐌰𐌽</string>
-  <string name="add_location">𐍃𐍄𐌰𐌸 𐌱𐌹𐌰𐌿𐌺𐌰𐌽</string>
+  <string name="add_location" fuzzy="true">𐍃𐍄𐌰𐌸 𐌱𐌹𐌰𐌿𐌺𐌰𐌽</string>
   <string name="android_version">𐌿𐍃𐌼𐌴𐍂𐌹 𐌰𐌽𐌳𐍂𐌰𐌿𐌴𐌹𐌳𐍃</string>
   <string name="can_not_select_this_image_for_upload">𐌼𐌰𐌷𐍄𐌴𐌹𐌲 𐌽𐌹𐍃𐍄 𐍅𐌰𐌻𐌾𐌰𐌽 𐌸𐍉 𐍆𐍂𐌹𐍃𐌰𐌷𐍄 𐌳𐌿 𐌹𐌽𐌽𐌰𐍄𐌱𐌰𐌹𐍂𐌰𐌽</string>
   <string name="image_selected">𐍆𐍂𐌹𐍃𐌰𐌷𐍄𐍃 𐌲𐌰𐍅𐌰𐌻𐌹𐌳𐌰</string>
@@ -350,10 +347,10 @@
   <string name="send_thanks_to_author">𐌱𐍉𐌺𐌰𐍂𐌾𐌰 𐌰𐍅𐌹𐌻𐌹𐌿𐌳𐍉𐌽</string>
   <string name="error_sending_thanks">𐌰𐌹𐍂𐌶𐌴𐌹 𐍅𐌰𐍂𐌸 𐌹𐌽 𐍃𐌰𐌽𐌳𐌴𐌹𐌽𐌰𐌹 𐌰𐍅𐌹𐌻𐌹𐌿𐌳𐌹𐍃 𐌳𐌿 𐌱𐍉𐌺𐌰𐍂𐌾𐌰.</string>
   <string name="invalid_login_message">𐌰𐍄𐌲𐌰𐌲𐌲 𐌿𐍃𐍄𐌰𐌿𐌷. 𐌱𐌹𐌳𐌾𐌰𐌼 𐌸𐌿𐌺 𐌰𐍆𐍄𐍂𐌰 𐌰𐍄𐌲𐌰𐌲𐌲𐌰𐌽.</string>
-  <string name="do_you_want_to_open_gpx_file">𐍅𐌹𐌻𐌴𐌹𐌶𐌿 𐌲𐍀𐍇 𐍆𐌰𐌾𐌻 𐌿𐍃𐌻𐌿𐌺𐌰𐌽?</string>
-  <string name="do_you_want_to_open_kml_file">𐍅𐌹𐌻𐌴𐌹𐌶𐌿 𐌺𐌼𐌻 𐍆𐌰𐌾𐌻 𐌿𐍃𐌻𐌿𐌺𐌰𐌽?</string>
-  <string name="failed_to_save_kml_file">𐌽𐌹 𐌼𐌰𐌷𐍄𐌰 𐌺𐌼𐌻 𐍆𐌰𐌾𐌻 𐌲𐌰𐍆𐌰𐍃𐍄𐌰𐌽.</string>
-  <string name="failed_to_save_gpx_file">𐌽𐌹 𐌼𐌰𐌷𐍄𐌰 𐌲𐍀𐍇 𐍆𐌰𐌾𐌻 𐌲𐌰𐍆𐌰𐍃𐍄𐌰𐌽.</string>
+  <string name="do_you_want_to_open_gpx_file" fuzzy="true">𐍅𐌹𐌻𐌴𐌹𐌶𐌿 𐌲𐍀𐍇 𐍆𐌰𐌾𐌻 𐌿𐍃𐌻𐌿𐌺𐌰𐌽?</string>
+  <string name="do_you_want_to_open_kml_file" fuzzy="true">𐍅𐌹𐌻𐌴𐌹𐌶𐌿 𐌺𐌼𐌻 𐍆𐌰𐌾𐌻 𐌿𐍃𐌻𐌿𐌺𐌰𐌽?</string>
+  <string name="failed_to_save_kml_file" fuzzy="true">𐌽𐌹 𐌼𐌰𐌷𐍄𐌰 𐌺𐌼𐌻 𐍆𐌰𐌾𐌻 𐌲𐌰𐍆𐌰𐍃𐍄𐌰𐌽.</string>
+  <string name="failed_to_save_gpx_file" fuzzy="true">𐌽𐌹 𐌼𐌰𐌷𐍄𐌰 𐌲𐍀𐍇 𐍆𐌰𐌾𐌻 𐌲𐌰𐍆𐌰𐍃𐍄𐌰𐌽.</string>
   <string name="please_enter_some_comments">𐌱𐌹𐌳𐌾𐌰𐌼 𐌸𐌿𐌺, 𐌼𐌴𐌻𐌴𐌹 𐍅𐌰𐌿𐍂𐌳𐌰 𐍃𐌿𐌼𐌰</string>
   <string name="talk">𐌲𐌰𐍅𐌰𐌿𐍂𐌳𐌹</string>
   <string name="does_not_exist_anymore_no_picture_can_ever_be_taken_of_it">\'%1$s\' 𐌸𐌰𐌽𐌰𐍃𐌴𐌹𐌸𐍃 𐌽𐌹𐍃𐍄, 𐌽𐌹 𐍆𐍂𐌹𐍃𐌰𐌷𐍄𐍃 𐌸𐌹𐌶𐌴𐌹 𐌼𐌰𐌷𐍄𐌴𐌹𐌲 𐌹𐍃𐍄 𐌰𐌹𐍅 𐌽𐌹𐌼𐌰𐌽.</string>

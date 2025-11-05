@@ -4,7 +4,7 @@
 -->
 <resources>
   <string name="commons_facebook">Commons Facebook Page</string>
-  <string name="commons_github">Commons Github Source Code</string>
+  <string name="commons_github" fuzzy="true">Commons Github Source Code</string>
   <string name="commons_logo">Commons zanbin</string>
   <string name="commons_website">Commons Website</string>
   <string name="exit_location_picker">Yiib zin\'ig</string>
@@ -27,18 +27,18 @@
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="other">yinne=%1$d faal la kpɛn\'ɛd</item>
   </plurals>
-  <plurals name="contributions_subtitle">
-    <item quantity="other">yinne=(%1$d)</item>
-  </plurals>
   <string name="starting_uploads">Kpɛn\'ɛb pin\'in</string>
   <plurals name="starting_multiple_uploads">
-    <item quantity="other">yinsne=maan %d kpɛn\'ɛsʋg</item>
+    <item quantity="one">maan %1$d kpɛn\'ɛsʋg</item>
+    <item quantity="other">maalʋg %1$d kpɛn\'ɛsʋg</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="other">yinne=%d kpɛn\'ɛsʋg</item>
+    <item quantity="one">%1$d kpɛn\'ɛsʋg</item>
+    <item quantity="other">%1$d kpɛn\'ɛsʋg nam</item>
   </plurals>
   <plurals name="share_license_summary">
-    <item quantity="other">yinne=siig kaŋa na paam suori yi  %1$s</item>
+    <item quantity="one">Siig kaŋa na paam suori yi %1$s</item>
+    <item quantity="other">Siis bama na paam suori yi %1$s</item>
   </plurals>
   <plurals name="upload_count_title">
     <item quantity="other">yinne=%1$d kpɛn\'ɛsʋg</item>
@@ -76,7 +76,7 @@
   <string name="uploading_queued">Dinɛ ka fʋ zaŋi kpɛn\'ɛsid la bɛnɛ lai zug (fʋ bas suor ye di tɔ\'ɔŋim tʋm bi\'ela ma\'aa)</string>
   <string name="upload_completed_notification_title">%1$s Kpɛn\'ɛya!</string>
   <string name="upload_completed_notification_text">Di\'em ka gɔs dinɛ ka fʋ Kpɛn\'ɛs</string>
-  <string name="upload_progress_notification_title_start">Kpɛn\'ɛsidnɛ faal: %s</string>
+  <string name="upload_progress_notification_title_start">Kpɛn\'ɛsidnɛ faal: %1$s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s Kpɛn\'ɛsidnɛ</string>
   <string name="upload_progress_notification_title_finishing">Kpɛn\'ɛsʋg naaednɛ %1$s</string>
   <string name="upload_failed_notification_title">%1$s Kpɛn\'ɛsʋg gʋ\'ʋnya</string>
@@ -201,15 +201,14 @@
   <string name="become_a_tester_title">Liebim onɛ kpansid Beta</string>
   <string name="_2fa_code">2FA koodi</string>
   <string name="logout_verification">Fʋ sid bɔɔdi fʋ yi yiiŋa?</string>
-  <string name="mediaimage_failed">Midia footo gʋ\'ʋŋya</string>
   <string name="no_subcategory_found">Pʋ paam buudi bibisɛ</string>
   <string name="no_parentcategory_found">Pʋ paam buudi si\'a</string>
   <string name="welcome_image_mount_zao">Zao zuor</string>
   <string name="welcome_image_llamas">Lamas</string>
   <string name="welcome_image_rainbow_bridge">Rainbow Birig</string>
   <string name="welcome_image_tulip">Tulip</string>
-  <string name="welcome_image_welcome_wikipedia"> Ken-ken Wikipiidia</string>
-  <string name="welcome_image_welcome_copyright"> Ken-ken Gbauŋ sɔbid nyadi</string>
+  <string name="welcome_image_welcome_wikipedia" fuzzy="true"> Ken-ken Wikipiidia</string>
+  <string name="welcome_image_welcome_copyright" fuzzy="true"> Ken-ken Gbauŋ sɔbid nyadi</string>
   <string name="welcome_image_sydney_opera_house">Sydney Opera House</string>
   <string name="cancel">Basim</string>
   <string name="navigation_drawer_open">Yɔ\'ɔgin</string>
@@ -309,11 +308,10 @@
   <string name="delete">Yisim</string>
   <string name="Achievements">Nyɔɔd nam</string>
   <string name="Profile">Mɛŋ yɛla</string>
-  <string name="statistics">Kaalʋg</string>
   <string name="statistics_thanks">Pʋ\'ʋsʋg di\'eya</string>
   <string name="statistics_featured">Footo banɛ nwɛn taaba</string>
   <string name="statistics_wikidata_edits">Footo banɛ dɔlis  zin\'ibanɛ bɛ yamma.</string>
-  <string name="level" fuzzy="true">Zi\'esim</string>
+  <string name="level" fuzzy="true">Zi\'esim %1$d</string>
   <string name="images_uploaded">Footonam kpɛn\'ɛya</string>
   <string name="image_reverts">Ba pʋ lɛbis Footo din aan si\'em</string>
   <string name="images_used_by_wiki">Footonam tʋmya</string>
@@ -372,11 +370,11 @@
   <string name="check_category_failure_message">Pʋ nyaŋi bu\'os %1$s buudi yɛlaa</string>
   <string name="check_category_toast">Buosidnɛ %1$s buudi yɛla</string>
   <string name="nominate_for_deletion_done">Naaya</string>
-  <string name="send_thank_success_title">Kennɛ M pʋ\'ʋsya: Nyaŋya</string>
-  <string name="send_thank_success_message">Nyaŋi tis %1$s M pʋ\'ʋsya labaar</string>
-  <string name="send_thank_failure_message">Pʋ nyaŋi tis %1$s m pʋ\'ʋsya</string>
-  <string name="send_thank_failure_title">Tisidnɛ M pʋ\'ʋsya: Gʋ\'ʋŋnɛ</string>
-  <string name="send_thank_toast">Tisidnɛ %1$s m pʋ\'ʋsya</string>
+  <string name="send_thank_success_title" fuzzy="true">Kennɛ M pʋ\'ʋsya: Nyaŋya</string>
+  <string name="send_thank_success_message" fuzzy="true">Nyaŋi tis %1$s M pʋ\'ʋsya labaar</string>
+  <string name="send_thank_failure_message" fuzzy="true">Pʋ nyaŋi tis %1$s m pʋ\'ʋsya</string>
+  <string name="send_thank_failure_title" fuzzy="true">Tisidnɛ M pʋ\'ʋsya: Gʋ\'ʋŋnɛ</string>
+  <string name="send_thank_toast" fuzzy="true">Tisidnɛ %1$s m pʋ\'ʋsya</string>
   <string name="review_copyright">Nɛ\'ɛŋa dɔli anɔk sɔ\' tʋʋma wada?</string>
   <string name="review_category">Nɛ\'ɛŋa pʋʋ ba buudinam sʋ\'ʋŋaa?</string>
   <string name="review_spam">Nɛ\' anɛ insikop pɛɛ?</string>
@@ -402,12 +400,12 @@
   <string name="error_occurred_in_picking_images">Daʋŋʋ kidig footonam la nɔkirin</string>
   <string name="please_wait">M bɛlimnɛ gu\'usim...</string>
   <string name="images_via_nearby_explanation">Footo banɛ ka fʋ kpɛn\'ɛsi dɔlis zin\'ibanɛ be yamma anɛ footo banɛ ka fʋ kpɛn\'ɛs ka di yinɛ fʋn nyɛ di map ni la.</string>
-  <string name="copy_image_caption_description">Yaam paas media banɛ bɛ tuon</string>
+  <string name="copy_image_caption_description" fuzzy="true">Yaam paas media banɛ bɛ tuon</string>
   <string name="copied_successfully">Yaaiya</string>
   <string name="welcome_do_upload_content_description">Footo banɛ nar nɛ Commons kpɛn\'ɛsʋg tituunli</string>
   <string name="welcome_dont_upload_content_description">Footo banɛ pʋ nar nɛ kpɛn\'ɛsʋg tituunli</string>
   <string name="skip_image">Iankim gaŋ footo kaŋa</string>
-  <string name="download_failed_we_cannot_download_the_file_without_storage_permission">Vɛ\'ɛgor gʋ\'ʋŋya!!. Ti kʋ nyaŋi vɛ\'ɛg faal la ka pʋ paam suori yi yiiŋ suak zin\'igin la.</string>
+  <string name="download_failed_we_cannot_download_the_file_without_storage_permission" fuzzy="true">Vɛ\'ɛgor gʋ\'ʋŋya!!. Ti kʋ nyaŋi vɛ\'ɛg faal la ka pʋ paam suori yi yiiŋ suak zin\'igin la.</string>
   <string name="manage_exif_tags">Maalim EXIF tagnam</string>
   <string name="manage_exif_tags_summary">Gaŋim EXIF tagbanɛ ka fʋ ye fʋ kpɛn\'ɛs</string>
   <string name="exif_tag_name_author">Sʋ\'ʋd</string>
@@ -417,7 +415,6 @@
   <string name="exif_tag_name_lensModel">Lens Model</string>
   <string name="exif_tag_name_serialNumbers">Serial Numbers</string>
   <string name="exif_tag_name_software">Software</string>
-  <string name="media_location_permission_denied">Pʋ bas suor ye fʋ kpɛn\' midia zin\'iginɛ</string>
   <string name="share_via">Pʋdigim app la dɔlis...</string>
   <string name="image_info">Footo labaar</string>
   <string name="no_categories_found">Pʋ paam buudinama</string>
@@ -470,7 +467,7 @@
   <string name="description_activity_title">Dɛmisim Pa\'ala nɛ pian\'azut</string>
   <string name="share_image_via">Pʋdigim footo dɔlis</string>
   <string name="you_have_no_achievements_yet">Fʋ nam pʋ tʋm tʋʋmsi\'a nannɛ</string>
-  <string name="no_achievements_yet">%s nam pʋ tʋm tʋʋmsi\'a nannɛ</string>
+  <string name="no_achievements_yet">%1$s nam pʋ tʋm tʋʋmsi\'a nannɛ</string>
   <string name="account_created">Akaʋnt yɔ\'ɔgya!</string>
   <string name="text_copy">Kopi sɔbʋg la keŋ su\'ak zin\'igin</string>
   <string name="notification_mark_read">Tienr labaar Zanbili pa\'al ye di karimya</string>
@@ -479,7 +476,7 @@
   <string name="place_state_exists">Bɛ</string>
   <string name="place_state_needs_photo">Bɔɔdi footo</string>
   <string name="place_type">Zin\'igi buudi:</string>
-  <string name="nearby_search_hint">Bridge, museum, hotel etc.</string>
+  <string name="nearby_search_hint" fuzzy="true">Bridge, museum, hotel etc.</string>
   <string name="you_must_reset_your_passsword" fuzzy="true">Daʋŋsi\'a kidig kpɛn\'ɛb suorin la, asɛɛ ka fʋ tiaki fʋ paaswɛɛd la!!</string>
   <string name="title_for_media">MEDIA</string>
   <string name="title_for_child_classes">CHILD\n CLASSES</string>
@@ -510,7 +507,7 @@
   <string name="instructions_title">Sa\'alʋg nam</string>
   <string name="wikipedia_instructions_step_1">Nɔkim Wikisɔbʋbkaŋa:</string>
   <string name="wikipedia_instructions_step_2">Fʋ ya\'a din\' ya\'as di na yɔ\'ɔg Wikipedia atikil la</string>
-  <string name="copy_wikicode_to_clipboard">Kopim wikidoodi keŋ suak zin\'igin</string>
+  <string name="copy_wikicode_to_clipboard" fuzzy="true">Kopim wikidoodi keŋ suak zin\'igin</string>
   <string name="pause">Zi\'enim</string>
   <string name="resume">Lɛm pin\'il ya\'as</string>
   <string name="paused">Zi\'enya</string>
@@ -575,8 +572,8 @@
   <string name="learn_more">ZAMISIM BɛDEGʋ</string>
   <string name="need_permission">Bɔɔdi suor ye di tʋm</string>
   <string name="read_phone_state_permission_message">Map banɛ bɛ yamma bɔɔd ye ba karim Moba zi\'esim ka nyaŋi tʋm sʋ\'ʋŋa</string>
-  <string name="contributions_of_user">Tʋmtʋm tʋʋma: %s</string>
-  <string name="achievements_of_user">Tʋmtʋm nyɔɔd: %s</string>
+  <string name="contributions_of_user">Tʋmtʋm tʋʋma: %1$s</string>
+  <string name="achievements_of_user">Tʋmtʋm nyɔɔd: %1$s</string>
   <string name="menu_view_user_page" fuzzy="true">Gɔsim tʋmtʋm lakir zin\'ig</string>
   <string name="edit_depictions">Dɛmisim nwɛnnɛmnam</string>
   <string name="edit_categories">Dɛmisim buudinam</string>
@@ -584,7 +581,7 @@
   <string name="apply">Zaŋim tʋm</string>
   <string name="reset">Maligim maal</string>
   <string name="no_location_found_title">Pʋ paam zin\'isi\'aa</string>
-  <string name="add_location">Paasim zin\'ig</string>
+  <string name="add_location" fuzzy="true">Paasim zin\'ig</string>
   <string name="explore_map_details">Wiesʋg</string>
   <string name="api_level">API zi\'esim</string>
   <string name="android_version">Android version</string>
@@ -600,8 +597,8 @@
   <string name="unmark_as_not_for_upload">Da zanbil kanɛ an ye di ka\' dinɛ kpɛn\'ɛsid la</string>
   <string name="marking_as_not_for_upload">Zanbinnɛ ye di ka\' dine kpɛn\'ɛsida</string>
   <string name="unmarking_as_not_for_upload">Yisidnɛ zanbin kanɛ an ye di ka\' dine kpɛn\'ɛsid la</string>
-  <string name="show_already_actioned_pictures">Pa\'aolim footo banɛ dɛŋim mɔr tʋʋma</string>
-  <string name="hiding_already_actioned_pictures">Su\'am footo banɛ dɛŋim mɔr tʋʋma</string>
+  <string name="show_already_actioned_pictures" fuzzy="true">Pa\'aolim footo banɛ dɛŋim mɔr tʋʋma</string>
+  <string name="hiding_already_actioned_pictures" fuzzy="true">Su\'am footo banɛ dɛŋim mɔr tʋʋma</string>
   <string name="no_more_images_found">Pʋ nyɛ footo si\'a</string>
   <string name="this_image_is_already_uploaded">Footo kaŋa pʋn kpɛn\' sa</string>
   <string name="can_not_select_this_image_for_upload">Kʋ nyaŋi gaŋ footo kaŋa kpɛn\'ɛsɛ</string>
@@ -619,7 +616,7 @@
   <string name="storage_permissions_denied">Pʋ bas suor ye fʋ kpɛn\' la\'ad suak zin\'igin la.</string>
   <string name="unable_to_share_upload_item">Pʋ nyaŋi pʋdig laʋk kaŋa</string>
   <plurals name="custom_picker_images_selected_title_appendix">
-    <item quantity="one">%d image selected</item>
-    <item quantity="other">%d images selected</item>
+    <item quantity="one">%1$d image selected</item>
+    <item quantity="other">%1$d images selected</item>
   </plurals>
 </resources>

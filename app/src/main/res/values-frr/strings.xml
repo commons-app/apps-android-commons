@@ -8,20 +8,18 @@
     <item quantity="one">%1$d datei woort huuchschüürd</item>
     <item quantity="other">%1$d datein wurd huuchschüürd</item>
   </plurals>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">Ian huuchschüürd datei</item>
-    <item quantity="other">%1$d huuchschüürd datein</item>
-  </plurals>
   <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">Began %1$d upload</item>
     <item quantity="other">Began %1$d uploads</item>
   </plurals>
-  <plurals name="multiple_uploads_title" fuzzy="true">
+  <plurals name="multiple_uploads_title">
     <item quantity="one">%1$d huuchschüürd datei</item>
     <item quantity="other">%1$d huuchschüürd datein</item>
   </plurals>
-  <string name="share_license_summary" fuzzy="true">Detdiar bil feit det lisens %1$s</string>
+  <plurals name="share_license_summary" fuzzy="true">
+    <item quantity="one">Detdiar bil feit det lisens %1$s</item>
+    <item quantity="other">Detdiar bil feit det lisens %1$s</item>
+  </plurals>
   <string name="app_name">Commons</string>
   <string name="menu_settings">Iinstelangen</string>
   <string name="username">Brükernööm</string>

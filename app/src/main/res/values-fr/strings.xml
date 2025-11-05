@@ -12,6 +12,7 @@
 * Cyclicus
 * DavidL
 * Derugon
+* EmDashUser002
 * Eneelk
 * Fitoschido
 * Friday83260
@@ -53,7 +54,7 @@
 -->
 <resources>
   <string name="commons_facebook">Page Facebook de Commons</string>
-  <string name="commons_github">Code source de Commons sur Github</string>
+  <string name="commons_github" fuzzy="true">Code source de Commons sur Github</string>
   <string name="commons_logo">Logo de Commons</string>
   <string name="commons_website">Site web de Commons</string>
   <string name="exit_location_picker">Sélecteur d\'emplacement de sortie</string>
@@ -77,22 +78,18 @@
     <item quantity="one">%1$d fichier en cours de téléversement</item>
     <item quantity="other">%1$d fichiers en cours de téléversement</item>
   </plurals>
-  <plurals name="contributions_subtitle">
-    <item quantity="one">(%1$d)</item>
-    <item quantity="other">(%1$d)</item>
-  </plurals>
   <string name="starting_uploads">Démarrage des téléversements</string>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">%d téléversement en cours</item>
-    <item quantity="other">%d téléversements en cours</item>
+    <item quantity="one">%1$d téléversement en cours</item>
+    <item quantity="other">%1$d téléversements en cours</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">%d téléversement</item>
-    <item quantity="other">%d téléversements</item>
+    <item quantity="one">%1$d téléversement</item>
+    <item quantity="other">%1$d téléversements</item>
   </plurals>
   <plurals name="share_license_summary">
-    <item quantity="one">Cette image sera sous licence %1$s.</item>
-    <item quantity="other">Ces images seront sous licence %1$s.</item>
+    <item quantity="one">Cette image sera sous licence %1$s</item>
+    <item quantity="other">Ces images seront sous licence %1$s</item>
   </plurals>
   <plurals name="upload_count_title">
     <item quantity="one">%1$d téléversement</item>
@@ -132,7 +129,7 @@
   <string name="uploading_queued">Téléversement mis en file d’attente (mode de connexion limitée activé)</string>
   <string name="upload_completed_notification_title">%1$s téléversé !</string>
   <string name="upload_completed_notification_text">Appuyer pour voir votre téléversement</string>
-  <string name="upload_progress_notification_title_start">Téléversement du fichier : %s</string>
+  <string name="upload_progress_notification_title_start">Téléversement du fichier : %1$s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s en cours de téléversement</string>
   <string name="upload_progress_notification_title_finishing">Fin du téléversement de %1$s</string>
   <string name="upload_failed_notification_title">Le téléversement de %1$s a échoué</string>
@@ -182,6 +179,7 @@
   <string name="title_activity_settings">Paramètres</string>
   <string name="title_activity_signup">S’inscrire</string>
   <string name="title_activity_featured_images">Images remarquables</string>
+  <string name="images_featured_explanation" fuzzy="true">Les images en vedette sont des images de photographes et d’illustrateurs très doués que la communauté de Wikimédia Commons a choisies comme étant de la meilleure qualité pour le site.</string>
   <string name="title_activity_custom_selector">Sélecteur personnalisé</string>
   <string name="title_activity_category_details">Catégorie</string>
   <string name="title_activity_review">Relecture par les pairs</string>
@@ -269,15 +267,14 @@
   <string name="_2fa_code">Code 2FA</string>
   <string name="email_auth_code">Code de vérification par email</string>
   <string name="logout_verification">Voulez-vous vraiment vous déconnecter ?</string>
-  <string name="mediaimage_failed">Échec sur l’image du média</string>
   <string name="no_subcategory_found">Aucune sous-catégorie trouvée</string>
   <string name="no_parentcategory_found">Aucune catégorie parente trouvée</string>
   <string name="welcome_image_mount_zao">Mont Zao</string>
   <string name="welcome_image_llamas">Lamas</string>
   <string name="welcome_image_rainbow_bridge">Pont Arc-en-ciel</string>
   <string name="welcome_image_tulip">Tulipe</string>
-  <string name="welcome_image_welcome_wikipedia">Bienvenue de Wikipédia</string>
-  <string name="welcome_image_welcome_copyright">Droit d’auteur de bienvenue</string>
+  <string name="welcome_image_welcome_wikipedia" fuzzy="true">Bienvenue de Wikipédia</string>
+  <string name="welcome_image_welcome_copyright" fuzzy="true">Droit d’auteur de bienvenue</string>
   <string name="welcome_image_sydney_opera_house">Maison de l’Opéra de Sydney</string>
   <string name="cancel">Annuler</string>
   <string name="navigation_drawer_open">Ouvrir</string>
@@ -413,12 +410,11 @@
   <string name="Achievements">Accomplissements</string>
   <string name="Profile">Profil</string>
   <string name="badges">Badges</string>
-  <string name="statistics">Statistiques</string>
   <string name="statistics_thanks">Remerciements reçus</string>
   <string name="statistics_featured">Images remarquables</string>
   <string name="statistics_wikidata_edits">Images par « Lieux à proximité »</string>
-  <string name="level">Niveau %d</string>
-  <string name="profile_withLevel">%s (niveau %s)</string>
+  <string name="level">Niveau %1$d</string>
+  <string name="profile_withLevel">%1$s (niveau %2$s)</string>
   <string name="images_uploaded">Images téléversées</string>
   <string name="image_reverts">Images non annulées</string>
   <string name="images_used_by_wiki">Images utilisées</string>
@@ -478,7 +474,7 @@
   <string name="never_ask_again">Ne plus jamais demander cela</string>
   <string name="display_location_permission_title">Demander l’autorisation de géolocalisation</string>
   <string name="display_location_permission_explanation">Demander le droit de géolocaliser quand cela est nécessaire à la fonctionnalité de notifications de proximité.</string>
-  <string name="achievements_fetch_failed">Un problème est survenu, nous n\'avons pas pu récupérer vos réussites</string>
+  <string name="achievements_fetch_failed" fuzzy="true">Un problème est survenu, nous n\'avons pas pu récupérer vos réussites</string>
   <string name="achievements_fetch_failed_ultimate_achievement">Vous avez effectué tellement de contributions que notre système de calcul des accomplissements est débordé. Il s’agit là de l’accomplissement ultime.</string>
   <string name="ends_on">Se termine le :</string>
   <string name="display_campaigns">Campagnes d’affichage</string>
@@ -506,11 +502,11 @@
   <string name="check_category_failure_message">Impossible de demander un contrôle de catégorie pour %1$s</string>
   <string name="check_category_toast">Demande en cours du contrôle de la catégorie pour %1$s</string>
   <string name="nominate_for_deletion_done">Fait</string>
-  <string name="send_thank_success_title">Envoi des remerciements : succès</string>
-  <string name="send_thank_success_message">Remerciements envoyés avec succès à %1$s</string>
-  <string name="send_thank_failure_message">Échec de l’envoi des remerciements à %1$s</string>
-  <string name="send_thank_failure_title">Envoi des remerciements : échec</string>
-  <string name="send_thank_toast">Envoi de remerciements pour %1$s</string>
+  <string name="send_thank_success_title" fuzzy="true">Envoi des remerciements : succès</string>
+  <string name="send_thank_success_message" fuzzy="true">Remerciements envoyés avec succès à %1$s</string>
+  <string name="send_thank_failure_message" fuzzy="true">Échec de l’envoi des remerciements à %1$s</string>
+  <string name="send_thank_failure_title" fuzzy="true">Envoi des remerciements : échec</string>
+  <string name="send_thank_toast" fuzzy="true">Envoi de remerciements pour %1$s</string>
   <string name="review_copyright">Ceci est-il conforme aux règles des droits d’auteur ?</string>
   <string name="review_category">Est-ce la bonne catégorie ?</string>
   <string name="review_spam">Est-ce dans le champ du projet ?</string>
@@ -537,15 +533,14 @@
   <string name="menu_option_unread">Afficher les non lus</string>
   <string name="error_occurred_in_picking_images">Une erreur est survenue lors de la sélection des images</string>
   <string name="please_wait">Veuillez patienter...</string>
-  <string name="images_featured_explanation">Les images en vedette sont des images de photographes et d’illustrateurs très doués que la communauté de Wikimédia Commons a choisies comme étant de la meilleure qualité pour le site.</string>
   <string name="images_via_nearby_explanation">Les images téléversées par « Lieux à proximité » sont les images téléversées lors de la découverte de lieux sur la carte.</string>
   <string name="thanks_received_explanation">Cette fonctionnalité permet aux contributeurs d’envoyer une notification de remerciement aux utilisateurs qui font des modifications utiles ― en utilisant un petit lien de remerciement sur la page historique ou sur celle du diff.</string>
-  <string name="copy_image_caption_description">Copier vers les médias subséquents</string>
+  <string name="copy_image_caption_description" fuzzy="true">Copier vers les médias subséquents</string>
   <string name="copied_successfully">Copié</string>
   <string name="welcome_do_upload_content_description">Exemples de bonnes images à téléverser sur Commons</string>
   <string name="welcome_dont_upload_content_description">Exemples d’images à ne pas téléverser</string>
   <string name="skip_image">Sauter cette image</string>
-  <string name="download_failed_we_cannot_download_the_file_without_storage_permission">Échec du téléchargement ! Nous ne pouvons pas télécharger le fichier sans droit d’accès au stockage externe.</string>
+  <string name="download_failed_we_cannot_download_the_file_without_storage_permission" fuzzy="true">Échec du téléchargement ! Nous ne pouvons pas télécharger le fichier sans droit d’accès au stockage externe.</string>
   <string name="manage_exif_tags">Gérer les balises EXIF</string>
   <string name="manage_exif_tags_summary">Sélectionner quelles balises EXIF à conserver dans les téléversements</string>
   <string name="exif_tag_name_author">Auteur</string>
@@ -555,8 +550,6 @@
   <string name="exif_tag_name_lensModel">Modèle de lentille</string>
   <string name="exif_tag_name_serialNumbers">Numéros de série</string>
   <string name="exif_tag_name_software">Logiciel</string>
-  <string name="media_location_permission_denied">Accès à l’emplacement du média refusé</string>
-  <string name="add_location_manually">Nous ne pourrons pas obtenir automatiquement les données de localisation des images que vous téléchargez. Veuillez ajouter l’emplacement approprié pour chaque image avant de la soumettre.</string>
   <string name="share_text">Téléversez des photos sur Wikimedia Commons directement depuis votre téléphone. Téléchargez l’application Commons maintenant : %1$s</string>
   <string name="share_via">Partager l’application via...</string>
   <string name="image_info">Informations sur l’image</string>
@@ -612,7 +605,7 @@
   <string name="description_activity_title">Modifier les descriptions et les légendes</string>
   <string name="share_image_via">Partager l’image via</string>
   <string name="you_have_no_achievements_yet">Vous n’avez encore fait aucune contribution</string>
-  <string name="no_achievements_yet">%s n’a encore fait aucune contribution</string>
+  <string name="no_achievements_yet">%1$s n’a encore fait aucune contribution</string>
   <string name="account_created">Compte créé !</string>
   <string name="text_copy">Texte copié dans le presse-papiers</string>
   <string name="notification_mark_read">Notification marquée comme lue</string>
@@ -621,7 +614,7 @@
   <string name="place_state_exists">Existe</string>
   <string name="place_state_needs_photo">Photo manquante</string>
   <string name="place_type">Type de lieu :</string>
-  <string name="nearby_search_hint">Pont, musée, hôtel, etc.</string>
+  <string name="nearby_search_hint" fuzzy="true">Pont, musée, hôtel, etc.</string>
   <string name="you_must_reset_your_passsword">Quelque chose s’est mal passé lors de la connexion. Vous devez réinitialiser votre mot de passe !</string>
   <string name="title_for_media">MÉDIA</string>
   <string name="title_for_child_classes">CLASSES ENFANTS</string>
@@ -665,7 +658,7 @@
   <string name="wikipedia_instructions_step_5">5. Coller le texte wiki à l’endroit approprié.</string>
   <string name="wikipedia_instructions_step_6">6. Modifier le wikicode pour un positionnement approprié, si nécessaire. Pour plus d’informations, voir &lt;a href=\"https://www.mediawiki.org/wiki/Help:Images/fr#Affichage_d\'une_seule_image\"&gt;l’aide ici&lt;/a&gt;.</string>
   <string name="wikipedia_instructions_step_7">7. Publier l’article</string>
-  <string name="copy_wikicode_to_clipboard">Copier le wikicode dans le presse-papiers</string>
+  <string name="copy_wikicode_to_clipboard" fuzzy="true">Copier le wikicode dans le presse-papiers</string>
   <string name="pause">pause</string>
   <string name="resume">reprendre</string>
   <string name="paused">En pause</string>
@@ -706,6 +699,8 @@
   <string name="categories_tooltip">Veuillez sélectionner les catégories appropriées. À l’inverse des éléments représentés, les catégories ne sont qu’en anglais.</string>
   <string name="license_tooltip">Communs rend vos images réutilisables et adaptées à chacun. Voulez-vous renoncer à tous les droits ? Voulez-vous être crédité pour cela ? Voulez-vous que les adaptations utilisent la même licence ?</string>
   <string name="depicts_step_title">Éléments représentés</string>
+  <string name="depicts_label">Libellé</string>
+  <string name="depicts_description">Description</string>
   <string name="license_step_title">Licence du média</string>
   <string name="media_detail_step_title">Détails du média</string>
   <string name="menu_view_category_page">Voir la page de catégorie</string>
@@ -732,7 +727,7 @@
   <string name="back">Retour</string>
   <string name="welcome_custom_picture_selector_text">Bienvenue dans le sélecteur d’image personnalisé</string>
   <string name="custom_selector_info_text1">Ce sélecteur affiche quelles images vous avez déjà téléversées dans Commons.</string>
-  <string name="custom_selector_info_text2">À l’inverse de l’image sur la gauche, l’image de droite comporte un logo Commons qui indique qu’elle a déjà été téléversée.\nToucher et maintenir pour avoir un aperçu de l’image.</string>
+  <string name="custom_selector_info_text2" fuzzy="true">À l’inverse de l’image sur la gauche, l’image de droite comporte un logo Commons qui indique qu’elle a déjà été téléversée.\nToucher et maintenir pour avoir un aperçu de l’image.</string>
   <string name="welcome_custom_selector_ok">Génial</string>
   <string name="custom_selector_already_uploaded_image_text">Cette image a déjà été téléversée sur Commons.</string>
   <string name="custom_selector_over_limit_warning">Pour des raisons techniques, l’application ne peut pas charger de façon fiable plus de %1$d images à la fois. La limite de téléchargement de %1$d a été dépassée de %2$d.</string>
@@ -750,8 +745,8 @@
   <string name="read_phone_state_permission_message">Les cartes de proximité doivent pouvoir lire l’ÉTAT DU TÉLÉPHONE pour fonctionner correctement</string>
   <string name="location_off_dialog_text">Veuillez activer les services de localisation pour afficher les lieux à proximité.</string>
   <string name="location_permission_rationale">Autorisation facultative : obtenir l’emplacement actuel pour des suggestions de catégorie</string>
-  <string name="contributions_of_user">Contributions de l’utilisateur : %s</string>
-  <string name="achievements_of_user">Réussites de l’utilisateur : %s</string>
+  <string name="contributions_of_user">Contributions de l’utilisateur : %1$s</string>
+  <string name="achievements_of_user">Réussites de l’utilisateur : %1$s</string>
   <string name="menu_view_user_page">Afficher le profil de l\'utilisateur</string>
   <string name="edit_depictions">Modifier les descriptions</string>
   <string name="edit_categories">Modifier les catégories</string>
@@ -762,7 +757,7 @@
   <string name="location_message">Les données de lieu aident les éditeurs de Wiki à trouver votre photo, ce qui la rend beaucoup plus utile.\nVos téléchargements récents n’indiquent aucun lieu.\nNous vous suggérons d’activer la géolocalisation dans les paramètres de votre application appareil photo.\nMerci pour vos téléversements !</string>
   <string name="no_location_found_title">Aucun lieu trouvé</string>
   <string name="no_location_found_message">Pourquoi ne pas ajouter le lieu où cette image a été trouvée ?\nLes données de lieu aident les contributeurs de wikis à trouver votre image, ce qui la rend beaucoup plus utile.\nMerci !</string>
-  <string name="add_location">Ajouter un lieu</string>
+  <string name="add_location" fuzzy="true">Ajouter un lieu</string>
   <string name="feedback_sharing_data_alert">Veuillez supprimer de ce courriel toute information que vous n’aimeriez pas diffuser publiquement. Également, veuillez prendre conscience du fait que votre adresse de messagerie avec laquelle vous publiez, ainsi que le nom et l’image de profil associés, seront visibles publiquement.</string>
   <string name="explore_map_details">Détails</string>
   <string name="achievements_unavailable_beta">Les réalisations ne sont disponibles que dans la version de production. Veuillez consulter la documentation du développeur.</string>
@@ -783,8 +778,8 @@
   <string name="unmark_as_not_for_upload">Démarquer comme à ne pas téléverser</string>
   <string name="marking_as_not_for_upload">Marquer comme non destiné au téléchargement</string>
   <string name="unmarking_as_not_for_upload">Ne plus marquer comme non destiné au téléchargement</string>
-  <string name="show_already_actioned_pictures">Afficher les images déjà actionnées</string>
-  <string name="hiding_already_actioned_pictures">Masquer les images déjà actionnées</string>
+  <string name="show_already_actioned_pictures" fuzzy="true">Afficher les images déjà actionnées</string>
+  <string name="hiding_already_actioned_pictures" fuzzy="true">Masquer les images déjà actionnées</string>
   <string name="no_more_images_found">Aucune autre image trouvée</string>
   <string name="this_image_is_already_uploaded">Cette image est déjà téléversée</string>
   <string name="can_not_select_this_image_for_upload">Impossible de sélectionner cette image pour le téléversement</string>
@@ -820,15 +815,15 @@
   <string name="invalid_login_message">Votre connexion a expiré. Veuillez vous reconnecter.</string>
   <string name="no_application_available_to_open_gpx_files">Aucune application disponible pour ouvrir les fichiers GPX</string>
   <string name="file_saved_successfully">Fichier bien enregistré</string>
-  <string name="do_you_want_to_open_gpx_file">Voulez-vous ouvrir le  fichier GPX ?</string>
-  <string name="do_you_want_to_open_kml_file">Voulez-vous ouvrir le fichier KML ?</string>
-  <string name="failed_to_save_kml_file">Échec d’enregistrement du fichier KML.</string>
-  <string name="failed_to_save_gpx_file">Échec d’enregistrement du fichier GPX.</string>
-  <string name="saving_kml_file">Fichier KML enregistré</string>
-  <string name="saving_gpx_file">Fichier GPX enregistré</string>
+  <string name="do_you_want_to_open_gpx_file" fuzzy="true">Voulez-vous ouvrir le  fichier GPX ?</string>
+  <string name="do_you_want_to_open_kml_file" fuzzy="true">Voulez-vous ouvrir le fichier KML ?</string>
+  <string name="failed_to_save_kml_file" fuzzy="true">Échec d’enregistrement du fichier KML.</string>
+  <string name="failed_to_save_gpx_file" fuzzy="true">Échec d’enregistrement du fichier GPX.</string>
+  <string name="saving_kml_file" fuzzy="true">Fichier KML enregistré</string>
+  <string name="saving_gpx_file" fuzzy="true">Fichier GPX enregistré</string>
   <plurals name="custom_picker_images_selected_title_appendix">
-    <item quantity="one">%d image sélectionnée</item>
-    <item quantity="other">%d images sélectionnées</item>
+    <item quantity="one">%1$d image sélectionnée</item>
+    <item quantity="other">%1$d images sélectionnées</item>
   </plurals>
   <string name="multiple_files_depiction">Souvenez-vous que toutes les images dans une importation multiple prennent les mêmes catégories et descriptions. Si les images de partagent pas les descriptions et catégories, veuillez effectuer plusieurs importations séparées.</string>
   <string name="multiple_files_depiction_header">Note au sujet des importations multiples</string>
@@ -865,7 +860,6 @@
   <string name="usages_on_other_wikis_heading">Autres wikis</string>
   <string name="bullet_point">•</string>
   <string name="file_usages_container_heading">Utilisations du fichier</string>
-  <string name="title_activity_single_web_view">SingleWebViewActivity</string>
   <string name="account">Compte</string>
   <string name="vanish_account">Faire disparaître le compte</string>
   <string name="account_vanish_request_confirm_title">Avertissement de disparition du compte</string>

@@ -8,7 +8,7 @@
 -->
 <resources>
   <string name="commons_facebook">Páxina de Facebook de Commons</string>
-  <string name="commons_github">Códigu fonte de Commons en GitHub</string>
+  <string name="commons_github" fuzzy="true">Códigu fonte de Commons en GitHub</string>
   <string name="commons_logo">Logo de Commons</string>
   <string name="commons_website">Sitiu web de Commons</string>
   <string name="exit_location_picker">Salir del selector d\'allugamientu</string>
@@ -32,18 +32,14 @@
     <item quantity="one">Xubiendo un ficheru</item>
     <item quantity="other">Xubiendo %1$d ficheros</item>
   </plurals>
-  <plurals name="contributions_subtitle">
-    <item quantity="one">(%1$d)</item>
-    <item quantity="other">(%1$d)</item>
-  </plurals>
   <string name="starting_uploads">Empiezando les xubíes</string>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">Procesando %d xubida</item>
-    <item quantity="other">Procesando %d xubíes</item>
+    <item quantity="one">Procesando %1$d xubida</item>
+    <item quantity="other">Procesando %1$d xubíes</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">%d xubida</item>
-    <item quantity="other">%d xubíes</item>
+    <item quantity="one">%1$d xubida</item>
+    <item quantity="other">%1$d xubíes</item>
   </plurals>
   <plurals name="share_license_summary">
     <item quantity="one">Esta imaxe quedará baxo la llicencia %1$s</item>
@@ -83,7 +79,7 @@
   <string name="uploading_queued">Xubida en cola (mou de conexón llindada activáu)</string>
   <string name="upload_completed_notification_title">¡%1$s xubíu!</string>
   <string name="upload_completed_notification_text">Toque pa ver la xuba</string>
-  <string name="upload_progress_notification_title_start">Xubiendo archivu: %s</string>
+  <string name="upload_progress_notification_title_start">Xubiendo archivu: %1$s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s ta xubiendo</string>
   <string name="upload_progress_notification_title_finishing">Acabando de xubir %1$s</string>
   <string name="upload_failed_notification_title">Falló la xubida de %1$s</string>
@@ -129,6 +125,7 @@
   <string name="title_activity_settings">Configuración</string>
   <string name="title_activity_signup">Date d\'alta</string>
   <string name="title_activity_featured_images">Imáxenes destacaes</string>
+  <string name="images_featured_explanation" fuzzy="true">Les imaxes destacaes son creaciones de talentosos fotógrafos y ilustradores que la comunidá de Wikimedia Commons reconoció como les de mayor calidá del sitiu.</string>
   <string name="title_activity_custom_selector">Selector personalizáu</string>
   <string name="title_activity_category_details">Categoría</string>
   <string name="title_activity_review">Revisión por pares</string>
@@ -212,15 +209,14 @@
   <string name="become_a_tester_description">Escueye\'l nuesu canal beta en Google Play y ten accesu tempranu a carauterístiques nueves ya igües de fallos</string>
   <string name="_2fa_code">Códigu I2F</string>
   <string name="logout_verification">¿Confirmes que quies salir?</string>
-  <string name="mediaimage_failed">Falló la imaxe multimedia</string>
   <string name="no_subcategory_found">Nun s\'alcontraron categoríes</string>
   <string name="no_parentcategory_found">Nun s\'atopó nenguna categoría padre</string>
   <string name="welcome_image_mount_zao">Monte Zao</string>
   <string name="welcome_image_llamas">Llames</string>
   <string name="welcome_image_rainbow_bridge">Ponte del Arcu la Vieya</string>
   <string name="welcome_image_tulip">Tulipa</string>
-  <string name="welcome_image_welcome_wikipedia">Bienvenida a Wikipedia</string>
-  <string name="welcome_image_welcome_copyright">Bienvenida a Derechos d\'autor</string>
+  <string name="welcome_image_welcome_wikipedia" fuzzy="true">Bienvenida a Wikipedia</string>
+  <string name="welcome_image_welcome_copyright" fuzzy="true">Bienvenida a Derechos d\'autor</string>
   <string name="welcome_image_sydney_opera_house">Ópera de Sidney</string>
   <string name="cancel">Zarrar</string>
   <string name="navigation_drawer_open">Abrir</string>
@@ -349,11 +345,10 @@
   <string name="delete">Desaniciar</string>
   <string name="Achievements">Llogros</string>
   <string name="Profile">Perfil</string>
-  <string name="statistics">Estadístiques</string>
   <string name="statistics_thanks">Agradecimientos recibíos</string>
   <string name="statistics_featured">Imáxenes destacaes</string>
   <string name="statistics_wikidata_edits">Imaxes vía «Sitios Cercanos»</string>
-  <string name="level" fuzzy="true">Nivel</string>
+  <string name="level" fuzzy="true">Nivel %1$d</string>
   <string name="images_uploaded">Imáxenes xubíes</string>
   <string name="image_reverts">Imáxenes ensin revertir</string>
   <string name="images_used_by_wiki">Imáxenes utilizaes</string>
@@ -433,11 +428,11 @@
   <string name="check_category_failure_message">Nun pudo pidise\'l control de categoría pa %1$s</string>
   <string name="check_category_toast">Pidiendo control de categoría pa %1$s</string>
   <string name="nominate_for_deletion_done">Fecho</string>
-  <string name="send_thank_success_title">Unviar agradecimientu: Correuto</string>
-  <string name="send_thank_success_message">Unvióse correutamente l\'agradecimientu a %1$s</string>
-  <string name="send_thank_failure_message">Falló l\'unviar agradecimientu a %1$s</string>
-  <string name="send_thank_failure_title">Unviar agradecimientu: Fallu</string>
-  <string name="send_thank_toast">Unviar agradecimientu por %1$s</string>
+  <string name="send_thank_success_title" fuzzy="true">Unviar agradecimientu: Correuto</string>
+  <string name="send_thank_success_message" fuzzy="true">Unvióse correutamente l\'agradecimientu a %1$s</string>
+  <string name="send_thank_failure_message" fuzzy="true">Falló l\'unviar agradecimientu a %1$s</string>
+  <string name="send_thank_failure_title" fuzzy="true">Unviar agradecimientu: Fallu</string>
+  <string name="send_thank_toast" fuzzy="true">Unviar agradecimientu por %1$s</string>
   <string name="review_copyright">¿Esto sigue les regles de drechos d\'autor?</string>
   <string name="review_category">¿Ta correchamente categorizáu?</string>
   <string name="review_spam">¿Axústase a la tema?</string>
@@ -463,13 +458,12 @@
   <string name="menu_option_unread">Ver los nun lleíos</string>
   <string name="error_occurred_in_picking_images">Asocedió un error al escoyer les imaxes</string>
   <string name="please_wait">Espera…</string>
-  <string name="images_featured_explanation">Les imaxes destacaes son creaciones de talentosos fotógrafos y ilustradores que la comunidá de Wikimedia Commons reconoció como les de mayor calidá del sitiu.</string>
   <string name="images_via_nearby_explanation">Les imaxes xubíes via Llugares Cercanos son les imaxes que se cargaron descubriendo llugares nel mapa.</string>
   <string name="thanks_received_explanation">Esta función permite que los editores unvien una nota Gracies a los usuarios que realicen ediciones útiles usando un pequeñu enllaz d\'agradecimientu na páxina d\'historial o na de diferencies.</string>
   <string name="welcome_do_upload_content_description">Exemplos d\'imaxes bones pa xubir a Commons</string>
   <string name="welcome_dont_upload_content_description">Exemplos d\'imaxes que nun tienen de xubise</string>
   <string name="skip_image">Saltar esta imaxe</string>
-  <string name="download_failed_we_cannot_download_the_file_without_storage_permission">Falló la descarga. Nun podemos descargar el ficheru ensin permisu d\'almacenamientu  esternu.</string>
+  <string name="download_failed_we_cannot_download_the_file_without_storage_permission" fuzzy="true">Falló la descarga. Nun podemos descargar el ficheru ensin permisu d\'almacenamientu  esternu.</string>
   <string name="manage_exif_tags">Alministrar etiquetes EXIF</string>
   <string name="manage_exif_tags_summary">Escoyer qué etiquetes EXIF tienen de caltenese nes cargues</string>
   <string name="exif_tag_name_author">Autor</string>
@@ -502,7 +496,7 @@
   <string name="delete_helper_ask_reason_copyright_logo">Logo</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">Porque ye</string>
   <string name="share_image_via">Compartir imaxe per</string>
-  <string name="no_achievements_yet">%s nun fizó entá nenguna contribución</string>
+  <string name="no_achievements_yet">%1$s nun fizó entá nenguna contribución</string>
   <string name="account_created">¡Cuenta creada!</string>
   <string name="text_copy">Testu copiáu al cartafueyu</string>
   <string name="notification_mark_read">Notificación marcada como lleida</string>
@@ -511,7 +505,7 @@
   <string name="place_state_exists">Existe</string>
   <string name="place_state_needs_photo">Precisa foto</string>
   <string name="place_type">Tipu de llugar:</string>
-  <string name="nearby_search_hint">Ponte, muséu, hotel etc.</string>
+  <string name="nearby_search_hint" fuzzy="true">Ponte, muséu, hotel etc.</string>
   <string name="you_must_reset_your_passsword" fuzzy="true">¡¡Falló daqué al aniciar sesión, tienes de reaniciar la contraseña!!</string>
   <string name="title_for_media">MEDIOS</string>
   <string name="title_for_child_classes">CLASES FÍES</string>

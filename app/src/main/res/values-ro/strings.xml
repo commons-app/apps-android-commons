@@ -13,7 +13,7 @@
 -->
 <resources>
   <string name="commons_facebook">Pagina de Facebook a Commons</string>
-  <string name="commons_github">Codul Sursă de la Commons Github</string>
+  <string name="commons_github" fuzzy="true">Codul Sursă de la Commons Github</string>
   <string name="commons_logo">Logoul Commons</string>
   <string name="commons_website">Site-ul Commons</string>
   <string name="exit_location_picker">Ieșiți din selectorul de locații</string>
@@ -27,13 +27,8 @@
     <item quantity="few">%1$d fișiere se încarcă</item>
     <item quantity="other">%1$d de fișiere se încarcă</item>
   </plurals>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">(%1$d)</item>
-    <item quantity="other">(%1$d)</item>
-  </plurals>
   <string name="starting_uploads">Pornirea încărcărilor</string>
-  <plurals name="starting_multiple_uploads">
+  <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">Se pornește 1 încărcare</item>
     <item quantity="few">Se pornesc %1$d încărcări</item>
     <item quantity="other">Se pornesc %1$d de încărcări</item>
@@ -46,7 +41,7 @@
   <plurals name="share_license_summary">
     <item quantity="one">Această imagine va fi licențiată sub %1$s</item>
     <item quantity="few">Aceste imagini vor fi licențiate sub %1$s</item>
-    <item quantity="other"/>
+    <item quantity="other">Aceste imagini vor fi licențiate sub %1$s</item>
   </plurals>
   <plurals name="upload_count_title">
     <item quantity="one">%1$d Încarcă</item>
@@ -87,7 +82,7 @@
   <string name="uploading_queued">Încărcare în coadă (modul de conexiune limitat activat)</string>
   <string name="upload_completed_notification_title">%1$s s-a încărcat!</string>
   <string name="upload_completed_notification_text">Atingeți pentru a vizualiza elementul încărcat</string>
-  <string name="upload_progress_notification_title_start">Se încarcă fișierul %1$s</string>
+  <string name="upload_progress_notification_title_start" fuzzy="true">Se încarcă fișierul %1$s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s se încarcă</string>
   <string name="upload_progress_notification_title_finishing">Se finalizează încărcarea fișierului %1$s</string>
   <string name="upload_failed_notification_title">Încărcarea fișierului %1$s nu a reușit</string>
@@ -133,6 +128,7 @@
   <string name="title_activity_settings">Setări</string>
   <string name="title_activity_signup">Înregistrare</string>
   <string name="title_activity_featured_images">Imagini recomandate</string>
+  <string name="images_featured_explanation" fuzzy="true">Imaginile de Calitate sunt imagini ale unor fotografi și ilustratori de înaltă calificare, pe care comunitatea Wikimedia Commons a ales-o ca fiind de cea mai înaltă calitate pe site.</string>
   <string name="title_activity_custom_selector">Selector personalizat</string>
   <string name="title_activity_category_details">Categorie</string>
   <string name="title_activity_review">Evaluare colegială</string>
@@ -215,15 +211,14 @@
   <string name="become_a_tester_description">Abonați-vă la canalul nostru beta pe Google Play și a obține acces rapid la noi caracteristici și corecții de erori</string>
   <string name="_2fa_code">Code 2FA</string>
   <string name="logout_verification">Chiar vrei să te deconectezi?</string>
-  <string name="mediaimage_failed">Imagine media nu a reușit</string>
   <string name="no_subcategory_found">Nu s-au găsit subcategorii</string>
   <string name="no_parentcategory_found">Nu au fost găsite categorii părinte</string>
   <string name="welcome_image_mount_zao">Muntele Zao</string>
   <string name="welcome_image_llamas">Llamas</string>
   <string name="welcome_image_rainbow_bridge">Rainbow Bridge</string>
   <string name="welcome_image_tulip">Lalea</string>
-  <string name="welcome_image_welcome_wikipedia">Bine ați venit Wikipedia</string>
-  <string name="welcome_image_welcome_copyright">Bine ați venit Drepturi de autor</string>
+  <string name="welcome_image_welcome_wikipedia" fuzzy="true">Bine ați venit Wikipedia</string>
+  <string name="welcome_image_welcome_copyright" fuzzy="true">Bine ați venit Drepturi de autor</string>
   <string name="welcome_image_sydney_opera_house">Opera din Sydney</string>
   <string name="cancel">Revocare</string>
   <string name="navigation_drawer_open">Deschide</string>
@@ -348,11 +343,10 @@
   <string name="delete">Șterge</string>
   <string name="Achievements">Realizări</string>
   <string name="Profile">Profil</string>
-  <string name="statistics">Statistici</string>
   <string name="statistics_thanks">Mulțumiri primite</string>
   <string name="statistics_featured">Imagini recomandate</string>
   <string name="statistics_wikidata_edits">Imagini prin „Locații în apropiere”</string>
-  <string name="level" fuzzy="true">Nivel</string>
+  <string name="level" fuzzy="true">Nivel %1$d</string>
   <string name="images_uploaded">Imaginile au fost încărcate</string>
   <string name="image_reverts">Imaginile nu au fost reluate</string>
   <string name="images_used_by_wiki">Imaginile folosite</string>
@@ -429,11 +423,11 @@
   <string name="check_category_failure_message">Nu s-a putut solicita verificarea categoriei pentru %1$s</string>
   <string name="check_category_toast">Solicitați verificarea categoriei pentru %1$s</string>
   <string name="nominate_for_deletion_done">Realizat</string>
-  <string name="send_thank_success_title">Se Trimit Mulțumiri: Succes</string>
-  <string name="send_thank_success_message">Trimis mulțumiri cu succes datorită %1$s</string>
-  <string name="send_thank_failure_message">Nu a reușit să trimită mulțumiri %1$s</string>
-  <string name="send_thank_failure_title">Se trimite mulțumiri: Eșec</string>
-  <string name="send_thank_toast">Se trimite Mulțumiri pentru %1$s</string>
+  <string name="send_thank_success_title" fuzzy="true">Se Trimit Mulțumiri: Succes</string>
+  <string name="send_thank_success_message" fuzzy="true">Trimis mulțumiri cu succes datorită %1$s</string>
+  <string name="send_thank_failure_message" fuzzy="true">Nu a reușit să trimită mulțumiri %1$s</string>
+  <string name="send_thank_failure_title" fuzzy="true">Se trimite mulțumiri: Eșec</string>
+  <string name="send_thank_toast" fuzzy="true">Se trimite Mulțumiri pentru %1$s</string>
   <string name="review_copyright">Respectă acest lucru regulile dreptului de autor?</string>
   <string name="review_category">Este corect catalogat acest lucru?</string>
   <string name="review_spam">Este acesta obiectiv?</string>
@@ -459,15 +453,14 @@
   <string name="menu_option_unread">Vezi necitit</string>
   <string name="error_occurred_in_picking_images">A apărut o eroare la alegerea imaginilor</string>
   <string name="please_wait">Vă rugăm să așteptați ...</string>
-  <string name="images_featured_explanation">Imaginile de Calitate sunt imagini ale unor fotografi și ilustratori de înaltă calificare, pe care comunitatea Wikimedia Commons a ales-o ca fiind de cea mai înaltă calitate pe site.</string>
   <string name="images_via_nearby_explanation">Imaginile Încărcate prin Locurile din Apropiere sunt imaginile care sunt încărcate prin descoperirea locurilor de pe hartă.</string>
   <string name="thanks_received_explanation">Această caracteristică permite editorilor să trimită o notificare de Mulțumire utilizatorilor care fac modificări utile - folosind un mic link de mulțumire pe pagina istoric sau pe pagina dif.</string>
-  <string name="copy_image_caption_description">Copiați pe suportul ulterior</string>
+  <string name="copy_image_caption_description" fuzzy="true">Copiați pe suportul ulterior</string>
   <string name="copied_successfully">Copiat cu succes</string>
   <string name="welcome_do_upload_content_description">Exemple de imagini bune de încărcat pe Commons</string>
   <string name="welcome_dont_upload_content_description">Exemple de imagini care nu trebuie încărcate</string>
   <string name="skip_image">Săriți această imagine</string>
-  <string name="download_failed_we_cannot_download_the_file_without_storage_permission">Descărcare eșuată!! Nu putem descărca fișierul fără permisiunea de stocare externă.</string>
+  <string name="download_failed_we_cannot_download_the_file_without_storage_permission" fuzzy="true">Descărcare eșuată!! Nu putem descărca fișierul fără permisiunea de stocare externă.</string>
   <string name="manage_exif_tags">Gestionați etichetele EXIF</string>
   <string name="manage_exif_tags_summary">Selectați ce etichete EXIF de păstrat în încărcări</string>
   <string name="exif_tag_name_author">Autor</string>
@@ -516,7 +509,7 @@
   <string name="coordinates_edit_helper_edit_message_else">Nu s-au putut adăuga coordonate.</string>
   <string name="coordinates_picking_unsuccessful" fuzzy="true">Nu se pot obține coordonatele.</string>
   <string name="share_image_via">Partajează imaginea prin</string>
-  <string name="no_achievements_yet" fuzzy="true">Încă nu ați făcut contribuții</string>
+  <string name="no_achievements_yet" fuzzy="true">%1$s nu a făcut încă nicio contribuție</string>
   <string name="account_created">Cont creat!</string>
   <string name="text_copy">Text copiat în clipboard</string>
   <string name="notification_mark_read">Notificare marcată ca citită</string>
@@ -525,7 +518,7 @@
   <string name="place_state_exists">Există</string>
   <string name="place_state_needs_photo">Are nevoie de foto</string>
   <string name="place_type">Tipul locului:</string>
-  <string name="nearby_search_hint">Pod, muzeu, hotel etc.</string>
+  <string name="nearby_search_hint" fuzzy="true">Pod, muzeu, hotel etc.</string>
   <string name="you_must_reset_your_passsword" fuzzy="true">Ceva nu a mers corect la autentificare, trebuie să vă resetați parola !!</string>
   <string name="title_for_media">MEDIA</string>
   <string name="title_for_child_classes">CLASE COPIl</string>
@@ -561,7 +554,7 @@
   <string name="wikipedia_instructions_step_3">3. Găsiți o secțiune adecvată în articol pentru imaginea dvs.</string>
   <string name="wikipedia_instructions_step_4">4. Faceți clic pe pictograma Editare (cea ca un creion) pentru acea secțiune.</string>
   <string name="wikipedia_instructions_step_5">5. Lipiți wikitextul în locul corespunzător.</string>
-  <string name="copy_wikicode_to_clipboard">Copiați wikicodul în clipboard</string>
+  <string name="copy_wikicode_to_clipboard" fuzzy="true">Copiați wikicodul în clipboard</string>
   <string name="pause">pauză</string>
   <string name="resume">reia</string>
   <string name="paused">întrerupt</string>

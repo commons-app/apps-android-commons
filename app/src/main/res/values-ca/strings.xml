@@ -14,7 +14,7 @@
 -->
 <resources>
   <string name="commons_facebook">Pàgina del Facebook del Commons</string>
-  <string name="commons_github">Codi font del Commons a GitHub</string>
+  <string name="commons_github" fuzzy="true">Codi font del Commons a GitHub</string>
   <string name="commons_logo">Logo de Commons</string>
   <string name="commons_website">Lloc web del Commons</string>
   <string name="submit">Envia</string>
@@ -23,18 +23,14 @@
     <item quantity="one">s\'està carregant %1$d fitxer</item>
     <item quantity="other">s\'estan carregant %1$d fitxers</item>
   </plurals>
-  <plurals name="contributions_subtitle">
-    <item quantity="one">(%1$d)</item>
-    <item quantity="other">(%1$d)</item>
-  </plurals>
   <string name="starting_uploads">S\'inicien les càrregues</string>
   <plurals name="starting_multiple_uploads">
     <item quantity="one">S\'està processant %1$d càrrega</item>
     <item quantity="other">S\'estan processant %1$d càrregues</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">%d càrrega</item>
-    <item quantity="other">%d càrregues</item>
+    <item quantity="one">%1$d càrrega</item>
+    <item quantity="other">%1$d càrregues</item>
   </plurals>
   <plurals name="share_license_summary">
     <item quantity="one">Aquesta imatge quedarà sota llicència %1$s</item>
@@ -67,7 +63,7 @@
   <string name="uploading_started">Ha començat la càrrega!</string>
   <string name="upload_completed_notification_title">S’ha pujat %1$s.</string>
   <string name="upload_completed_notification_text">Prem per veure la teva càrrega</string>
-  <string name="upload_progress_notification_title_start">Pujant el fitxer: %s</string>
+  <string name="upload_progress_notification_title_start">Pujant el fitxer: %1$s</string>
   <string name="upload_progress_notification_title_in_progress">Carregant %1$s</string>
   <string name="upload_progress_notification_title_finishing">Acabant la càrrega al servidor de %1$s</string>
   <string name="upload_failed_notification_title" fuzzy="true">Error al carregar %1$s</string>
@@ -182,15 +178,14 @@
   <string name="become_a_tester_title">Proveu la versió beta</string>
   <string name="_2fa_code">Codi 2FA</string>
   <string name="logout_verification">Realment voleu finalitzar la sessió?</string>
-  <string name="mediaimage_failed">Ha fallat la imatge multimèdia</string>
   <string name="no_subcategory_found">No s\'han trobat subcategories</string>
   <string name="no_parentcategory_found">No s\'ha trobat cap categoria pare</string>
   <string name="welcome_image_mount_zao">Mont Zao</string>
   <string name="welcome_image_llamas">Llames</string>
   <string name="welcome_image_rainbow_bridge">Pont Rainbow</string>
   <string name="welcome_image_tulip">Tulipa</string>
-  <string name="welcome_image_welcome_wikipedia">Benvinguts a la Viquipèdia</string>
-  <string name="welcome_image_welcome_copyright">Drets d\'autor de benvinguda</string>
+  <string name="welcome_image_welcome_wikipedia" fuzzy="true">Benvinguts a la Viquipèdia</string>
+  <string name="welcome_image_welcome_copyright" fuzzy="true">Drets d\'autor de benvinguda</string>
   <string name="welcome_image_sydney_opera_house">Casa d\'Òpera de Sydney</string>
   <string name="cancel">Cancel·la</string>
   <string name="navigation_drawer_open">Obre</string>
@@ -300,11 +295,10 @@
   <string name="delete">Suprimeix</string>
   <string name="Achievements">Assoliments</string>
   <string name="Profile">Perfil</string>
-  <string name="statistics">Estadístiques</string>
   <string name="statistics_thanks">Agraïments rebuts</string>
   <string name="statistics_featured">Imatges destacades</string>
   <string name="statistics_wikidata_edits">Imatges per proximitat</string>
-  <string name="level" fuzzy="true">Nivell</string>
+  <string name="level">Nivell %1$d</string>
   <string name="images_uploaded">Imatges carregades</string>
   <string name="image_reverts">Imatges no revertides</string>
   <string name="images_used_by_wiki">Imatges utilitzades</string>
@@ -356,9 +350,9 @@
   <string name="display_campaigns_explanation">Consulta les campanyes en curs</string>
   <string name="error_processing_image">S\'ha produït un error en processar la imatge. Torneu-ho a provar!</string>
   <string name="nominate_for_deletion_done">Fet</string>
-  <string name="send_thank_success_title">Enviament d\'agraïments: Èxit</string>
-  <string name="send_thank_failure_title">Enviament d\'agraïments: Fallada</string>
-  <string name="send_thank_toast">S\'estan enviant agraïments per %1$s</string>
+  <string name="send_thank_success_title" fuzzy="true">Enviament d\'agraïments: Èxit</string>
+  <string name="send_thank_failure_title" fuzzy="true">Enviament d\'agraïments: Fallada</string>
+  <string name="send_thank_toast" fuzzy="true">S\'estan enviant agraïments per %1$s</string>
   <string name="review_copyright">Això segueix les regles de drets d\'autor?</string>
   <string name="review_category">Té categorizació correcta?</string>
   <string name="review_spam">S\'adiu al tema?</string>
@@ -416,7 +410,7 @@
   <string name="delete_helper_ask_alert_set_positive_button_reason">Perquè sí</string>
   <string name="category_edit_button_text">Actualitza les categories</string>
   <string name="share_image_via">Comparteix la imatge via</string>
-  <string name="no_achievements_yet" fuzzy="true">No hi heu fet cap contribució encara</string>
+  <string name="no_achievements_yet">%1$s no hi ha fet cap contribució encara</string>
   <string name="account_created">S\'ha creat el compte</string>
   <string name="text_copy">S\'ha copiat el text al porta-retalls</string>
   <string name="notification_mark_read">La notificació s\'ha marcat com llegida</string>
@@ -425,7 +419,7 @@
   <string name="place_state_exists">Existeix</string>
   <string name="place_state_needs_photo">Cal una foto</string>
   <string name="place_type">Tipus de lloc:</string>
-  <string name="nearby_search_hint">Pont, museu, hotel, etc.</string>
+  <string name="nearby_search_hint" fuzzy="true">Pont, museu, hotel, etc.</string>
   <string name="you_must_reset_your_passsword" fuzzy="true">Quelcom ha fallat amb la vostra sessió. Reinicieu la vostra contrasenya!!</string>
   <string name="title_app_shortcut_setting">Paràmetres</string>
   <string name="theme_default_name">Seguir el sistema</string>

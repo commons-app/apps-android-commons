@@ -89,7 +89,7 @@ class LoginActivity : AccountAuthenticatorActivity() {
 
         binding = ActivityLoginBinding.inflate(layoutInflater)
         applyEdgeToEdgeAllInsets(binding!!.root)
-        binding?.aboutPrivacyPolicy?.handleKeyboardInsets()
+        binding!!.root.handleKeyboardInsets()
         with(binding!!) {
             setContentView(root)
 
