@@ -121,7 +121,7 @@ class UploadMediaDetailFragment : UploadBaseFragment(), UploadMediaDetailsContra
     private val keyForShowingAlertDialog = "isNoNetworkAlertDialogShowing"
     internal var uploadableFile: UploadableFile? = null
     internal var place: Place? = null
-    private lateinit var uploadMediaDetailAdapter: UploadMediaDetailAdapter
+    lateinit var uploadMediaDetailAdapter: UploadMediaDetailAdapter
     var indexOfFragment = 0
     var isExpanded = true
     var fragmentCallback: UploadMediaDetailFragmentCallback? = null
