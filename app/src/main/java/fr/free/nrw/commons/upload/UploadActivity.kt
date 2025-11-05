@@ -237,7 +237,9 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
             clearAll()
         }
         checkStoragePermissions()
-        model = Generation.getClient()
+        if (VERSION.SDK_INT >= VERSION_CODES.O) {
+            model = Generation.getClient()
+        }
     }
 
     private fun init() {
@@ -813,38 +815,42 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
     override fun onNextButtonClicked(index: Int) {
         val currentFragment = fragments!![index]
         if (currentFragment is UploadMediaDetailFragment) {
-            val adapter = (currentFragment as UploadMediaDetailFragment).uploadMediaDetailAdapter
-            val uploadMediaDetail = adapter.items[0]
-            val languagesAdapter =
-                fr.free.nrw.commons.upload.LanguagesAdapter(this, mutableMapOf())
-            val defaultLocaleIndex = languagesAdapter.getIndexOfUserDefaultLocale(this)
-            val defaultLanguageCode = languagesAdapter.getLanguageCode(defaultLocaleIndex)
+            if (VERSION.SDK_INT >= VERSION_CODES.O) {
+                val adapter = (currentFragment as UploadMediaDetailFragment).uploadMediaDetailAdapter
+                val uploadMediaDetail = adapter.items[0]
+                val languagesAdapter =
+                    fr.free.nrw.commons.upload.LanguagesAdapter(this, mutableMapOf())
+                val defaultLocaleIndex = languagesAdapter.getIndexOfUserDefaultLocale(this)
+                val defaultLanguageCode = languagesAdapter.getLanguageCode(defaultLocaleIndex)
 
-            if (adapter.items.size == 1
-                && uploadMediaDetail.languageCode == defaultLanguageCode
-                && uploadMediaDetail.languageCode != "fr"
-            ) {
-                showProgress(true)
-                isCaptionFrench(uploadMediaDetail.captionText) { isFrench ->
-                    showProgress(false)
-                    if (isFrench) {
-                        showAlertDialog(
-                            this,
-                            getString(R.string.french_caption_title),
-                            getString(R.string.french_caption_check),
-                            getString(R.string.yes),
-                            getString(R.string.no),
-                            {
-                                adapter.setFirstCaptionLanguageToFrench()
-                                proceedToNextStep(index)
-                            },
-                            {
-                                proceedToNextStep(index)
-                            }
-                        )
-                    } else {
-                        proceedToNextStep(index)
+                if (adapter.items.size == 1
+                    && uploadMediaDetail.languageCode == defaultLanguageCode
+                    && uploadMediaDetail.languageCode != "fr"
+                ) {
+                    showProgress(true)
+                    isCaptionFrench(uploadMediaDetail.captionText) { isFrench ->
+                        showProgress(false)
+                        if (isFrench) {
+                            showAlertDialog(
+                                this,
+                                getString(R.string.french_caption_title),
+                                getString(R.string.french_caption_check),
+                                getString(R.string.yes),
+                                getString(R.string.no),
+                                {
+                                    adapter.setFirstCaptionLanguageToFrench()
+                                    proceedToNextStep(index)
+                                },
+                                {
+                                    proceedToNextStep(index)
+                                }
+                            )
+                        } else {
+                            proceedToNextStep(index)
+                        }
                     }
+                } else {
+                    proceedToNextStep(index)
                 }
             } else {
                 proceedToNextStep(index)
@@ -965,7 +971,9 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
             uploadCategoriesFragment!!.callback = null
         }
         onBackPressedCallback.remove()
-        model?.close()
+        if (VERSION.SDK_INT >= VERSION_CODES.O) {
+            model?.close()
+        }
     }
 
     /**
