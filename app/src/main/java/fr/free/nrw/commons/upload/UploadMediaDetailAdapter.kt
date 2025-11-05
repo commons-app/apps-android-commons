@@ -24,6 +24,7 @@ import android.widget.LinearLayout
 import android.widget.ListView
 import android.widget.TextView
 import androidx.activity.result.ActivityResultLauncher
+import androidx.appcompat.app.AlertDialog
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
@@ -182,6 +183,22 @@ class UploadMediaDetailAdapter : RecyclerView.Adapter<UploadMediaDetailAdapter.V
         updateAddButtonVisibility()
     }
 
+    private fun showFrenchCaptionCheck(holder: ViewHolder, uploadMediaDetail: UploadMediaDetail) {
+        val dialogBuilder = AlertDialog.Builder(holder.itemView.context)
+        dialogBuilder.setMessage(R.string.french_caption_check)
+            .setCancelable(false)
+            .setPositiveButton(R.string.yes) { _, _ ->
+                uploadMediaDetail.languageCode = "fr"
+                notifyItemChanged(holder.adapterPosition)
+            }
+            .setNegativeButton(R.string.no) { dialog, _ ->
+                dialog.cancel()
+            }
+        val alert = dialogBuilder.create()
+        alert.setTitle(R.string.french_caption_title)
+        alert.show()
+    }
+
     inner class ViewHolder(val binding: RowItemDescriptionBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
@@ -267,6 +284,24 @@ class UploadMediaDetailAdapter : RecyclerView.Adapter<UploadMediaDetailAdapter.V
             captionListener = AbstractTextWatcher { captionText: String ->
                 uploadMediaDetail.captionText =
                     convertIdeographicSpaceToLatinSpace(captionText.trim())
+
+                if (captionText.trim().equals("bonjour", ignoreCase = true) &&
+                    uploadMediaDetails.size == 1 &&
+                    uploadMediaDetail.languageCode != "fr"
+                ) {
+                    val languagesAdapter = LanguagesAdapter(
+                        binding.descriptionLanguages.context,
+                        selectedLanguages
+                    )
+                    val defaultLocaleIndex = languagesAdapter.getIndexOfUserDefaultLocale(
+                        binding.descriptionLanguages.context
+                    )
+                    val defaultLanguageCode = languagesAdapter.getLanguageCode(defaultLocaleIndex)
+
+                    if (uploadMediaDetail.languageCode == defaultLanguageCode) {
+                        showFrenchCaptionCheck(this@ViewHolder, uploadMediaDetail)
+                    }
+                }
             }
             descriptionListener = AbstractTextWatcher { value: String? ->
                 uploadMediaDetail.descriptionText = value
