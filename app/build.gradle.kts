@@ -365,6 +365,7 @@ dependencies {
     //OSMDroid
     implementation(libs.osmdroid.android)
     implementation("com.google.mlkit:genai-prompt:1.0.0-alpha1")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.4.0")
     constraints {
         implementation(libs.kotlin.stdlib.jdk7) {
             because("kotlin-stdlib-jdk7 is now a part of kotlin-stdlib")
