@@ -24,7 +24,6 @@ import android.widget.LinearLayout
 import android.widget.ListView
 import android.widget.TextView
 import androidx.activity.result.ActivityResultLauncher
-import androidx.appcompat.app.AlertDialog
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
@@ -183,22 +182,7 @@ class UploadMediaDetailAdapter : RecyclerView.Adapter<UploadMediaDetailAdapter.V
         updateAddButtonVisibility()
     }
 
-    fun isBonjour(): Boolean {
-        if (uploadMediaDetails.size == 1) {
-            val uploadMediaDetail = uploadMediaDetails[0]
-            val context = (fragment?.context ?: activity) ?: return false
-            val languagesAdapter = LanguagesAdapter(context, selectedLanguages)
-            val defaultLocaleIndex = languagesAdapter.getIndexOfUserDefaultLocale(context)
-            val defaultLanguageCode = languagesAdapter.getLanguageCode(defaultLocaleIndex)
-
-            return uploadMediaDetail.captionText.trim().equals("bonjour", ignoreCase = true) &&
-                    uploadMediaDetail.languageCode == defaultLanguageCode &&
-                    uploadMediaDetail.languageCode != "fr"
-        }
-        return false
-    }
-
-    fun setBonjourToFrench() {
+    fun setFirstCaptionLanguageToFrench() {
         if (uploadMediaDetails.size == 1) {
             uploadMediaDetails[0].languageCode = "fr"
             notifyItemChanged(0)
