@@ -891,12 +891,15 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
     private fun isCaptionFrench(caption: String, callback: (Boolean) -> Unit) {
         lifecycleScope.launch {
             try {
+                val prompt = "Output FR if the following expression is in French: $caption"
+                Timber.tag("LanguageDetection").d("Prompt: %s", prompt)
                 val genRequest = generateContentRequest(
-                    TextPart("Output FR if the following expression is in French: $caption")
+                    TextPart(prompt)
                 ) {
                     temperature = 0f
                 }
                 val response = model!!.generateContent(genRequest)
+                Timber.tag("LanguageDetection").d("Response: %s", response.text)
                 callback(response.text.toString().trim() == "FR")
             } catch (e: Exception) {
                 Timber.e(e, "Error detecting language")
