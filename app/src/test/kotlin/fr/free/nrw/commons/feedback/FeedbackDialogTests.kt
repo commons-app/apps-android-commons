@@ -4,7 +4,7 @@ import android.content.Context
 import android.os.Looper.getMainLooper
 import android.text.Editable
 import androidx.test.core.app.ApplicationProvider
-import com.nhaarman.mockitokotlin2.doReturn
+import org.mockito.kotlin.doReturn
 import fr.free.nrw.commons.OkHttpConnectionFactory
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.TestUtility.setFinalStatic

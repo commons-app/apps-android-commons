@@ -7,9 +7,9 @@ import com.facebook.imagepipeline.producers.Consumer
 import com.facebook.imagepipeline.producers.NetworkFetcher
 import com.facebook.imagepipeline.producers.ProducerContext
 import com.facebook.imagepipeline.request.ImageRequest
-import com.nhaarman.mockitokotlin2.any
-import com.nhaarman.mockitokotlin2.verify
-import com.nhaarman.mockitokotlin2.whenever
+import org.mockito.kotlin.any
+import org.mockito.kotlin.verify
+import org.mockito.kotlin.whenever
 import fr.free.nrw.commons.CommonsApplication
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import okhttp3.CacheControl

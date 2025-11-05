@@ -2,9 +2,9 @@ package fr.free.nrw.commons.nearby
 
 import android.content.Context
 import androidx.test.core.app.ApplicationProvider
-import com.nhaarman.mockitokotlin2.any
-import com.nhaarman.mockitokotlin2.anyOrNull
-import com.nhaarman.mockitokotlin2.eq
+import org.mockito.kotlin.any
+import org.mockito.kotlin.anyOrNull
+import org.mockito.kotlin.eq
 import fr.free.nrw.commons.BaseMarker
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.location.LatLng

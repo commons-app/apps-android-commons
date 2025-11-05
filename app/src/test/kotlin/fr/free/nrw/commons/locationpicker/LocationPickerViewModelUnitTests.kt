@@ -2,10 +2,10 @@ package fr.free.nrw.commons.locationpicker
 
 import android.app.Application
 import androidx.lifecycle.MutableLiveData
-import com.nhaarman.mockitokotlin2.any
-import com.nhaarman.mockitokotlin2.times
-import com.nhaarman.mockitokotlin2.verify
-import com.nhaarman.mockitokotlin2.whenever
+import org.mockito.kotlin.any
+import org.mockito.kotlin.times
+import org.mockito.kotlin.verify
+import org.mockito.kotlin.whenever
 import fr.free.nrw.commons.CameraPosition
 import org.junit.Before
 import org.junit.Test

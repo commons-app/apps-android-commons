@@ -1,6 +1,6 @@
 package fr.free.nrw.commons.upload
 
-import com.nhaarman.mockitokotlin2.verify
+import org.mockito.kotlin.verify
 import fr.free.nrw.commons.utils.UnderlineUtils
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.repository.UploadRepository

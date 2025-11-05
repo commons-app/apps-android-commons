@@ -2,8 +2,8 @@ package fr.free.nrw.commons.upload
 
 import android.content.ContentResolver
 import android.content.Context
-import com.nhaarman.mockitokotlin2.mock
-import com.nhaarman.mockitokotlin2.whenever
+import org.mockito.kotlin.mock
+import org.mockito.kotlin.whenever
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.contributions.Contribution
 import fr.free.nrw.commons.kvstore.JsonKvStore

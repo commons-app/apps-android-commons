@@ -8,7 +8,7 @@ import android.view.View
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.test.core.app.ApplicationProvider
-import com.nhaarman.mockitokotlin2.whenever
+import org.mockito.kotlin.whenever
 import depictedItem
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.OkHttpConnectionFactory

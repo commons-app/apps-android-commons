@@ -3,7 +3,7 @@ package fr.free.nrw.commons.explore.search
 import android.content.Context
 import androidx.fragment.app.FragmentManager
 import androidx.test.core.app.ApplicationProvider
-import com.nhaarman.mockitokotlin2.verify
+import org.mockito.kotlin.verify
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.ViewPagerAdapter

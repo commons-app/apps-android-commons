@@ -2,7 +2,7 @@ package fr.free.nrw.commons.utils
 
 import android.content.Context
 import androidx.test.core.app.ApplicationProvider
-import com.nhaarman.mockitokotlin2.whenever
+import org.mockito.kotlin.whenever
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.media.IdAndLabels

@@ -4,9 +4,9 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.LiveData
 import androidx.paging.PagedList
 import com.jraska.livedata.test
-import com.nhaarman.mockitokotlin2.mock
-import com.nhaarman.mockitokotlin2.verify
-import com.nhaarman.mockitokotlin2.whenever
+import org.mockito.kotlin.mock
+import org.mockito.kotlin.verify
+import org.mockito.kotlin.whenever
 import fr.free.nrw.commons.explore.paging.BasePagingPresenter
 import fr.free.nrw.commons.explore.paging.FooterItem
 import fr.free.nrw.commons.explore.paging.LoadingState

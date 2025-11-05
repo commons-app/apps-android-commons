@@ -1,6 +1,6 @@
 package fr.free.nrw.commons.bookmarks.locations
 
-import com.nhaarman.mockitokotlin2.whenever
+import org.mockito.kotlin.whenever
 import fr.free.nrw.commons.nearby.Place
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert

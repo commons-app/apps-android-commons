@@ -1,6 +1,6 @@
 package fr.free.nrw.commons.utils
 
-import com.nhaarman.mockitokotlin2.mock
+import org.mockito.kotlin.mock
 import fr.free.nrw.commons.upload.FileUtils
 import fr.free.nrw.commons.upload.FileUtilsWrapper
 import org.junit.Assert.assertEquals

@@ -1,6 +1,6 @@
 package fr.free.nrw.commons.explore.depictions.child
 
-import com.nhaarman.mockitokotlin2.whenever
+import org.mockito.kotlin.whenever
 import depictedItem
 import fr.free.nrw.commons.explore.paging.LiveDataConverter
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient

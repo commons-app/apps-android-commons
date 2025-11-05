@@ -1,7 +1,7 @@
 package fr.free.nrw.commons.explore.depictions
 
-import com.nhaarman.mockitokotlin2.mock
-import com.nhaarman.mockitokotlin2.whenever
+import org.mockito.kotlin.mock
+import org.mockito.kotlin.whenever
 import depictSearchItem
 import entity
 import fr.free.nrw.commons.mwapi.Binding

@@ -1,6 +1,6 @@
 package fr.free.nrw.commons.review
 
-import com.nhaarman.mockitokotlin2.whenever
+import org.mockito.kotlin.whenever
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.media.MediaClient
 import fr.free.nrw.commons.wikidata.mwapi.MwQueryPage

@@ -9,7 +9,7 @@ import androidx.room.InvalidationTracker
 import androidx.room.RoomDatabase
 import androidx.room.RoomSQLiteQuery
 import androidx.room.paging.LimitOffsetDataSource
-import com.nhaarman.mockitokotlin2.whenever
+import org.mockito.kotlin.whenever
 import org.mockito.Mockito.mock
 
 fun <T> List<T>.asPagedList(config: PagedList.Config? = null): LiveData<PagedList<T>> {

@@ -1,8 +1,8 @@
 package fr.free.nrw.commons.media.zoomControllers
 
 import android.view.MotionEvent
-import com.nhaarman.mockitokotlin2.verify
-import com.nhaarman.mockitokotlin2.whenever
+import org.mockito.kotlin.verify
+import org.mockito.kotlin.whenever
 import fr.free.nrw.commons.media.zoomControllers.gestures.MultiPointerGestureDetector
 import fr.free.nrw.commons.media.zoomControllers.gestures.TransformGestureDetector
 import org.junit.Assert

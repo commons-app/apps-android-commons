@@ -1,8 +1,8 @@
 package fr.free.nrw.commons.explore.categories.sub
 
-import com.nhaarman.mockitokotlin2.never
-import com.nhaarman.mockitokotlin2.verify
-import com.nhaarman.mockitokotlin2.whenever
+import org.mockito.kotlin.never
+import org.mockito.kotlin.verify
+import org.mockito.kotlin.whenever
 import fr.free.nrw.commons.category.CategoryClient
 import fr.free.nrw.commons.explore.paging.LiveDataConverter
 import io.reactivex.Single

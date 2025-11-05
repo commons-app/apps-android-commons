@@ -1,7 +1,7 @@
 package fr.free.nrw.commons.bookmarks.pictures
 
 import android.net.Uri
-import com.nhaarman.mockitokotlin2.whenever
+import org.mockito.kotlin.whenever
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.bookmarks.models.Bookmark
 import fr.free.nrw.commons.media.MediaClient

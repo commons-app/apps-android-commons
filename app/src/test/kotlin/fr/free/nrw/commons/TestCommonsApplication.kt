@@ -5,7 +5,7 @@ import android.content.ContentProviderClient
 import android.content.Context
 import androidx.collection.LruCache
 import com.google.gson.Gson
-import com.nhaarman.mockitokotlin2.mock
+import org.mockito.kotlin.mock
 import fr.free.nrw.commons.data.DBOpenHelper
 import fr.free.nrw.commons.di.CommonsApplicationComponent
 import fr.free.nrw.commons.di.CommonsApplicationModule

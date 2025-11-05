@@ -1,10 +1,10 @@
 package fr.free.nrw.commons.upload
 
 import android.net.Uri
-import com.nhaarman.mockitokotlin2.argumentCaptor
-import com.nhaarman.mockitokotlin2.isA
-import com.nhaarman.mockitokotlin2.mock
-import com.nhaarman.mockitokotlin2.whenever
+import org.mockito.kotlin.argumentCaptor
+import org.mockito.kotlin.isA
+import org.mockito.kotlin.mock
+import org.mockito.kotlin.whenever
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.filepicker.UploadableFile
 import fr.free.nrw.commons.location.LatLng

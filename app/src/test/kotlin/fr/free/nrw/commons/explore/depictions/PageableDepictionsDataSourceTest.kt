@@ -1,7 +1,7 @@
 package fr.free.nrw.commons.explore.depictions
 
-import com.nhaarman.mockitokotlin2.mock
-import com.nhaarman.mockitokotlin2.whenever
+import org.mockito.kotlin.mock
+import org.mockito.kotlin.whenever
 import fr.free.nrw.commons.explore.depictions.search.PageableDepictionsDataSource
 import io.reactivex.Single
 import org.junit.Assert

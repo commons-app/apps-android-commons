@@ -1,7 +1,7 @@
 package fr.free.nrw.commons.actions
 
-import com.nhaarman.mockitokotlin2.eq
-import com.nhaarman.mockitokotlin2.verify
+import org.mockito.kotlin.eq
+import org.mockito.kotlin.verify
 import fr.free.nrw.commons.CommonsApplication
 import fr.free.nrw.commons.auth.csrf.CsrfTokenClient
 import io.mockk.every

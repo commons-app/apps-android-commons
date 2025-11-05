@@ -1,7 +1,7 @@
 package fr.free.nrw.commons.contributions
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.nhaarman.mockitokotlin2.times
+import org.mockito.kotlin.times
 import io.reactivex.Scheduler
 import io.reactivex.schedulers.Schedulers
 import org.junit.Before

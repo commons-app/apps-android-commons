@@ -2,9 +2,9 @@ package fr.free.nrw.commons.wikidata
 
 import android.content.Context
 import com.google.gson.Gson
-import com.nhaarman.mockitokotlin2.anyOrNull
-import com.nhaarman.mockitokotlin2.mock
-import com.nhaarman.mockitokotlin2.whenever
+import org.mockito.kotlin.anyOrNull
+import org.mockito.kotlin.mock
+import org.mockito.kotlin.whenever
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.upload.UploadResult
 import fr.free.nrw.commons.upload.WikidataPlace

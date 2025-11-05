@@ -1,7 +1,7 @@
 package fr.free.nrw.commons.wikidata
 
 import com.google.gson.Gson
-import com.nhaarman.mockitokotlin2.whenever
+import org.mockito.kotlin.whenever
 import fr.free.nrw.commons.wikidata.model.PageInfo
 import fr.free.nrw.commons.wikidata.model.StatementPartial
 import fr.free.nrw.commons.wikidata.model.WbCreateClaimResponse

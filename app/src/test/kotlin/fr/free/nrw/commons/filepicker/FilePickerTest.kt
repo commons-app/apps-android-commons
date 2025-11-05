@@ -10,9 +10,9 @@ import android.provider.MediaStore
 import androidx.activity.result.ActivityResultLauncher
 import androidx.preference.PreferenceManager
 import androidx.test.core.app.ApplicationProvider
-import com.nhaarman.mockitokotlin2.KArgumentCaptor
-import com.nhaarman.mockitokotlin2.argumentCaptor
-import com.nhaarman.mockitokotlin2.verify
+import org.mockito.kotlin.KArgumentCaptor
+import org.mockito.kotlin.argumentCaptor
+import org.mockito.kotlin.verify
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.customselector.ui.selector.CustomSelectorActivity
 import org.junit.Assert.assertEquals

@@ -6,7 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.loader.content.CursorLoader
 import androidx.loader.content.Loader
-import com.nhaarman.mockitokotlin2.verify
+import org.mockito.kotlin.verify
 import fr.free.nrw.commons.repository.UploadRepository
 import io.reactivex.schedulers.TestScheduler
 import org.junit.Before

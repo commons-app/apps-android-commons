@@ -2,9 +2,9 @@ package fr.free.nrw.commons.kvstore
 
 import android.content.Context
 import android.content.SharedPreferences
-import com.nhaarman.mockitokotlin2.atLeast
-import com.nhaarman.mockitokotlin2.verify
-import com.nhaarman.mockitokotlin2.whenever
+import org.mockito.kotlin.atLeast
+import org.mockito.kotlin.verify
+import org.mockito.kotlin.whenever
 import fr.free.nrw.commons.kvstore.BasicKvStore.Companion.KEY_VERSION
 import org.junit.Assert
 import org.junit.Before

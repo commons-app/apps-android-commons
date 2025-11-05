@@ -1,9 +1,9 @@
 package fr.free.nrw.commons
 
 import com.google.gson.Gson
-import com.nhaarman.mockitokotlin2.any
-import com.nhaarman.mockitokotlin2.verify
-import com.nhaarman.mockitokotlin2.times
+import org.mockito.kotlin.any
+import org.mockito.kotlin.verify
+import org.mockito.kotlin.times
 import fr.free.nrw.commons.campaigns.CampaignResponseDTO
 import fr.free.nrw.commons.campaigns.CampaignConfig
 import fr.free.nrw.commons.campaigns.models.Campaign

@@ -19,7 +19,7 @@ import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.RecyclerView
 import androidx.test.core.app.ApplicationProvider
 import com.github.chrisbanes.photoview.PhotoView
-import com.nhaarman.mockitokotlin2.mock
+import org.mockito.kotlin.mock
 import fr.free.nrw.commons.CameraPosition
 import fr.free.nrw.commons.locationpicker.LocationPicker
 import fr.free.nrw.commons.locationpicker.LocationPickerActivity

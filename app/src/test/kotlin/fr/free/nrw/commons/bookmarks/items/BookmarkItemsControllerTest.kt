@@ -1,6 +1,6 @@
 package fr.free.nrw.commons.bookmarks.items
 
-import com.nhaarman.mockitokotlin2.whenever
+import org.mockito.kotlin.whenever
 import fr.free.nrw.commons.category.CategoryItem
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
 import org.junit.Assert

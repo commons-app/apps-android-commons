@@ -2,7 +2,7 @@ package fr.free.nrw.commons.nearby
 
 import android.widget.CompoundButton
 import androidx.test.core.app.ApplicationProvider
-import com.nhaarman.mockitokotlin2.verify
+import org.mockito.kotlin.verify
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.location.LatLng
 import fr.free.nrw.commons.nearby.CheckBoxTriStates.CHECKED

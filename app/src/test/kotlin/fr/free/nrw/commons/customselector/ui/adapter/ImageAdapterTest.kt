@@ -7,7 +7,7 @@ import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.GridLayout
-import com.nhaarman.mockitokotlin2.whenever
+import org.mockito.kotlin.whenever
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.customselector.listeners.ImageSelectListener
