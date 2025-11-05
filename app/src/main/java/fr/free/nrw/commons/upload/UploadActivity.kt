@@ -804,6 +804,33 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
     }
 
     override fun onNextButtonClicked(index: Int) {
+        val currentFragment = fragments!![index]
+        if (currentFragment is UploadMediaDetailFragment) {
+            val adapter = (currentFragment as UploadMediaDetailFragment).uploadMediaDetailAdapter
+            if (adapter.isBonjour()) {
+                showAlertDialog(
+                    this,
+                    getString(R.string.french_caption_title),
+                    getString(R.string.french_caption_check),
+                    getString(R.string.yes),
+                    getString(R.string.no),
+                    {
+                        adapter.setBonjourToFrench()
+                        proceedToNextStep(index)
+                    },
+                    {
+                        proceedToNextStep(index)
+                    }
+                )
+            } else {
+                proceedToNextStep(index)
+            }
+        } else {
+            proceedToNextStep(index)
+        }
+    }
+
+    private fun proceedToNextStep(index: Int) {
         if (index < fragments!!.size - 1) {
             // Hide the keyboard before navigating to Media License screen
             val isUploadCategoriesFragment = fragments!!.getOrNull(index)?.let {

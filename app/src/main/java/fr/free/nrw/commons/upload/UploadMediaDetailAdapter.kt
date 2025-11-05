@@ -183,20 +183,26 @@ class UploadMediaDetailAdapter : RecyclerView.Adapter<UploadMediaDetailAdapter.V
         updateAddButtonVisibility()
     }
 
-    private fun showFrenchCaptionCheck(holder: ViewHolder, uploadMediaDetail: UploadMediaDetail) {
-        val dialogBuilder = AlertDialog.Builder(holder.itemView.context)
-        dialogBuilder.setMessage(R.string.french_caption_check)
-            .setCancelable(false)
-            .setPositiveButton(R.string.yes) { _, _ ->
-                uploadMediaDetail.languageCode = "fr"
-                notifyItemChanged(holder.adapterPosition)
-            }
-            .setNegativeButton(R.string.no) { dialog, _ ->
-                dialog.cancel()
-            }
-        val alert = dialogBuilder.create()
-        alert.setTitle(R.string.french_caption_title)
-        alert.show()
+    fun isBonjour(): Boolean {
+        if (uploadMediaDetails.size == 1) {
+            val uploadMediaDetail = uploadMediaDetails[0]
+            val context = (fragment?.context ?: activity) ?: return false
+            val languagesAdapter = LanguagesAdapter(context, selectedLanguages)
+            val defaultLocaleIndex = languagesAdapter.getIndexOfUserDefaultLocale(context)
+            val defaultLanguageCode = languagesAdapter.getLanguageCode(defaultLocaleIndex)
+
+            return uploadMediaDetail.captionText.trim().equals("bonjour", ignoreCase = true) &&
+                    uploadMediaDetail.languageCode == defaultLanguageCode &&
+                    uploadMediaDetail.languageCode != "fr"
+        }
+        return false
+    }
+
+    fun setBonjourToFrench() {
+        if (uploadMediaDetails.size == 1) {
+            uploadMediaDetails[0].languageCode = "fr"
+            notifyItemChanged(0)
+        }
     }
 
     inner class ViewHolder(val binding: RowItemDescriptionBinding) :
@@ -284,24 +290,6 @@ class UploadMediaDetailAdapter : RecyclerView.Adapter<UploadMediaDetailAdapter.V
             captionListener = AbstractTextWatcher { captionText: String ->
                 uploadMediaDetail.captionText =
                     convertIdeographicSpaceToLatinSpace(captionText.trim())
-
-                if (captionText.trim().equals("bonjour", ignoreCase = true) &&
-                    uploadMediaDetails.size == 1 &&
-                    uploadMediaDetail.languageCode != "fr"
-                ) {
-                    val languagesAdapter = LanguagesAdapter(
-                        binding.descriptionLanguages.context,
-                        selectedLanguages
-                    )
-                    val defaultLocaleIndex = languagesAdapter.getIndexOfUserDefaultLocale(
-                        binding.descriptionLanguages.context
-                    )
-                    val defaultLanguageCode = languagesAdapter.getLanguageCode(defaultLocaleIndex)
-
-                    if (uploadMediaDetail.languageCode == defaultLanguageCode) {
-                        showFrenchCaptionCheck(this@ViewHolder, uploadMediaDetail)
-                    }
-                }
             }
             descriptionListener = AbstractTextWatcher { value: String? ->
                 uploadMediaDetail.descriptionText = value
