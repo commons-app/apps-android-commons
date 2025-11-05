@@ -64,6 +64,7 @@ import fr.free.nrw.commons.wikidata.WikidataConstants.SELECTED_NEARBY_PLACE
 import fr.free.nrw.commons.wikidata.WikidataConstants.SELECTED_NEARBY_PLACE_CATEGORY
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import kotlinx.coroutines.launch
 import timber.log.Timber
 import java.io.File
 import javax.inject.Inject
@@ -899,8 +900,8 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
                     temperature = 0f
                 }
                 val response = model!!.generateContent(genRequest)
-                Timber.tag("LanguageDetection").d("Response: %s", response.text)
-                callback(response.text.toString().trim() == "FR")
+                Timber.tag("LanguageDetection").d("Response: %s", response.candidates.first().text)
+                callback(response.candidates.first().text.toString().trim() == "FR")
             } catch (e: Exception) {
                 Timber.e(e, "Error detecting language")
                 callback(false)
