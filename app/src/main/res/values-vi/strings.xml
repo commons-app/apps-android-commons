@@ -14,6 +14,7 @@
 * Nguyenphutrong2
 * Nguyễn Mạnh An
 * Nhatminh01
+* Nvdtn19
 * Phjtieudoc
 * Thanhtai2009
 * Thienhau2003
@@ -22,15 +23,15 @@
 * Yuki Wulf
 -->
 <resources>
-  <string name="commons_facebook">Trang Commons tại Facebook</string>
+  <string name="commons_facebook">Trang Facebook của Commons</string>
   <string name="commons_github" fuzzy="true">Mã nguồn Commons tại GitHub</string>
   <string name="commons_logo">Biểu trưng Commons</string>
-  <string name="commons_website">Trang Web Commons</string>
+  <string name="commons_website">Trang web Commons</string>
   <string name="submit">Gửi</string>
-  <string name="add_another_description">Thêm mô tả</string>
+  <string name="add_another_description">Thêm mô tả khác</string>
   <string name="add_new_contribution">Thêm đóng góp mới</string>
   <string name="add_contribution_from_camera">Thêm đóng góp từ máy ảnh</string>
-  <string name="add_contribution_from_photos">Thêm đóng góp từ hình ảnh</string>
+  <string name="add_contribution_from_photos">Thêm đóng góp từ Ảnh</string>
   <string name="show_captions_description">Miêu tả</string>
   <string name="nearby_row_image">Hình ảnh</string>
   <string name="nearby_all">Tất cả</string>
@@ -56,7 +57,7 @@
   <string name="preference_category_appearance">Giao diện</string>
   <string name="preference_category_general">Tổng quát</string>
   <string name="preference_category_feedback">Phản hồi</string>
-  <string name="preference_category_privacy">Sự riêng tư</string>
+  <string name="preference_category_privacy">Quyền riêng tư</string>
   <string name="app_name">Commons</string>
   <string name="menu_settings">Thiết lập</string>
   <string name="intent_share_upload_label">Đăng tải lên Commons</string>
@@ -82,33 +83,33 @@
   <string name="upload_progress_notification_title_start">Đang tải tập tin lên: %1$s</string>
   <string name="upload_progress_notification_title_in_progress">Đang tải lên tập tin %1$s</string>
   <string name="upload_progress_notification_title_finishing">Đang hoàn thành việc tải lên tập tin %1$s</string>
-  <string name="upload_failed_notification_title">Tải lên tập tin %1$s thất bại</string>
-  <string name="upload_paused_notification_title">Tải lên %1$s đã tạm dừng</string>
+  <string name="upload_failed_notification_title">Không thể tải lên tập tin %1$s</string>
+  <string name="upload_paused_notification_title">Đã tạm dừng tải lên %1$s</string>
   <string name="upload_failed_notification_subtitle">Chạm để xem</string>
   <string name="upload_paused_notification_subtitle">Chạm để xem</string>
-  <string name="title_activity_contributions">Tập tin Tôi đã Tải lên Gần đây</string>
+  <string name="title_activity_contributions">Tải lên gần đây của tôi</string>
   <string name="contribution_state_queued">Đang chờ</string>
-  <string name="contribution_state_failed">Thất bại</string>
-  <string name="contribution_state_in_progress">Hoàn tất %1$d%%</string>
+  <string name="contribution_state_failed">Không thành công</string>
+  <string name="contribution_state_in_progress">Đã hoàn tất %1$d%%</string>
   <string name="contribution_state_starting">Đang tải lên</string>
   <string name="menu_from_gallery">Từ Thư viện</string>
   <string name="menu_from_camera">Chụp ảnh</string>
   <string name="menu_nearby">Lân cận</string>
   <string name="provider_contributions">Tập tin tôi tải lên</string>
-  <string name="menu_copy_link">Sao chép địa chỉ liên kết</string>
-  <string name="menu_link_copied">Liên kết đã được sao chép vào bảng tạm</string>
+  <string name="menu_copy_link">Sao chép liên kết</string>
+  <string name="menu_link_copied">Đã sao chép liên kết vào khay nhớ tạm.</string>
   <string name="menu_share">Chia sẻ</string>
   <string name="menu_view_file_page">Xem trang tập tin</string>
-  <string name="share_title_hint">Chú thích (Yêu cầu)</string>
+  <string name="share_title_hint">Chú thích (Bắt buộc)</string>
   <string name="add_caption_toast">Xin hãy cung cấp một chú thích cho tập tin này</string>
   <string name="share_description_hint">Miêu tả</string>
   <string name="share_caption_hint">Chú thích</string>
   <string name="login_failed_network">Không thể đăng nhập – có lỗi mạng</string>
-  <string name="login_failed_throttled">Đã đăng nhập thất bại quá nhiều lần. Xin vui lòng thử lại trong vòng vài phút.</string>
-  <string name="login_failed_blocked">Rất tiếc, người dùng này đã bị cấm tại Commons</string>
-  <string name="login_failed_2fa_needed">Bạn phải cung cấp mã xác thực dùng hai nhân tố.</string>
+  <string name="login_failed_throttled">Quá nhiều lần thử không thành công. Vui lòng thử lại sau vài phút.</string>
+  <string name="login_failed_blocked">Rất tiếc, người dùng này đã bị cấm trên Commons</string>
+  <string name="login_failed_2fa_needed">Bạn phải cung cấp mã xác thực hai yếu tố.</string>
   <string name="login_failed_email_auth_needed">Một mã xác minh đăng nhập đã được gửi đến địa chỉ thư điện tử của bạn. Xin hãy cung cấp mã để đăng nhập.</string>
-  <string name="login_failed_generic">Đăng nhập thất bại</string>
+  <string name="login_failed_generic">Đăng nhập không thành công</string>
   <string name="share_upload_button">Tải lên</string>
   <string name="multiple_share_base_title">Đặt tên nhóm này</string>
   <string name="provider_modifications">Sửa đổi</string>
@@ -127,19 +128,19 @@
   <string name="title_activity_custom_selector">Bộ chọn tùy chỉnh</string>
   <string name="title_activity_category_details">Thể loại</string>
   <string name="menu_about">Giới thiệu</string>
-  <string name="about_license">Ứng dụng Wikimedia Commons là ứng dụng mã nguồn mở được sáng tạo và quản lý bởi các tình nguyện viên và những người được tin tưởng của cộng đồng Wikipedia. Wikimedia Foundation không tham gia vào sự tạo lập, phát triển cũng như quản lý của ứng dụng.</string>
+  <string name="about_license">Ứng dụng Wikimedia Commons là ứng dụng mã nguồn mở được tạo ra và duy trì bởi các tình nguyện viên và những người được cộng đồng Wikimedia tin tưởng. Wikimedia Foundation không tham gia vào sự tạo lập, phát triển cũng như quản lý ứng dụng.</string>
   <string name="about_improve">Báo cáo lỗi cũng như đưa ra các ý tưởng &lt;a href=\"%1$s\"&gt;trên GitHub&lt;/a&gt;.</string>
-  <string name="about_privacy_policy">Chính sách riêng tư</string>
+  <string name="about_privacy_policy">Quy định về quyền riêng tư</string>
   <string name="about_credits">Ghi công</string>
   <string name="title_activity_about">Giới thiệu</string>
   <string name="menu_feedback">Gửi Phản hồi (qua Thư điện tử)</string>
-  <string name="no_email_client">Không có chương trình thư điện tử nào được cài đặt</string>
+  <string name="no_email_client">Không có phần mềm thư điện tử nào được cài đặt</string>
   <string name="provider_categories">Thể loại được sử dụng gần đây</string>
   <string name="waiting_first_sync">Đang chờ đồng bộ lần đầu tiên…</string>
   <string name="no_uploads_yet">Bạn chưa tải lên hình nào.</string>
   <string name="menu_retry_upload">Thử lại</string>
   <string name="menu_cancel_upload">Hủy bỏ</string>
-  <string name="media_upload_policy">Với việc đăng hình này, tôi tuyên bố rằng nó là tác phẩm của chính mình, rằng nó không chứa nội dung có bản quyền hoặc ảnh tự chụp, và về mặt khác thì hoàn toàn tuân theo &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines?uselang=vi\"&gt;các quy định Wikimedia Commons&lt;/a&gt;.</string>
+  <string name="media_upload_policy">Với việc tải lên hình ảnh này, tôi tuyên bố rằng đây là tác phẩm của chính mình,  không chứa nội dung có bản quyền hoặc ảnh tự chụp và tuân theo &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines?uselang=vi\"&gt;các quy định của Wikimedia Commons&lt;/a&gt;.</string>
   <string name="menu_download">Tải về</string>
   <string name="preference_license">Giấy phép mặc định</string>
   <string name="use_previous">Sử dụng tiêu đề và miêu tả trước</string>
@@ -424,7 +425,7 @@
   <string name="add_picture_to_wikipedia_article_title">Thêm hình ảnh vào Wikipedia</string>
   <string name="add_picture_to_wikipedia_article_desc">Bạn có muốn thêm hình ảnh này vào bài viết Wikipedia ngôn ngữ %1$s không?</string>
   <string name="confirm">Xác nhận</string>
-  <string name="wikipedia_instructions_step_1">1. Sử dụng wikitext sau:</string>
+  <string name="wikipedia_instructions_step_1">1. Sử dụng mã wiki sau:</string>
   <string name="wikipedia_instructions_step_2">2. Nhấp vào Xác nhận sẽ mở bài viết Wikipedia</string>
   <string name="wikipedia_instructions_step_3">Tìm một đề mục thích hợp trong bài viết cho hình ảnh của bạn</string>
   <string name="wikipedia_instructions_step_4">4. Nhấp vào biểu tượng Sửa đổi (biểu tượng hình cây bút chì) cho đề mục đó.</string>
