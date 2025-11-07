@@ -28,10 +28,10 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.viewinterop.AndroidView
+import dagger.hilt.android.AndroidEntryPoint
 import fr.free.nrw.commons.CommonsApplication
 import fr.free.nrw.commons.CommonsApplication.ActivityLogoutListener
 import fr.free.nrw.commons.R
-import fr.free.nrw.commons.di.ApplicationlessInjection
 import fr.free.nrw.commons.wikidata.cookies.CommonsCookieJar
 import okhttp3.HttpUrl.Companion.toHttpUrl
 import timber.log.Timber
@@ -41,6 +41,7 @@ import javax.inject.Inject
  * SingleWebViewActivity is a reusable activity webView based on a given url(initial url) and
  * closes itself when a specified success URL is reached to success url.
  */
+@AndroidEntryPoint
 class SingleWebViewActivity : ComponentActivity() {
     @Inject
     lateinit var cookieJar: CommonsCookieJar
@@ -54,10 +55,7 @@ class SingleWebViewActivity : ComponentActivity() {
             finish()
             return
         }
-        ApplicationlessInjection
-            .getInstance(applicationContext)
-            .commonsApplicationComponent
-            .inject(this)
+        // Hilt automatically injects dependencies for @AndroidEntryPoint annotated classes
         setCookies(url)
         enableEdgeToEdge()
         setContent {

@@ -1,7 +1,5 @@
 package fr.free.nrw.commons.di
 
-import dagger.Module
-import dagger.android.ContributesAndroidInjector
 import fr.free.nrw.commons.bookmarks.BookmarkFragment
 import fr.free.nrw.commons.bookmarks.BookmarkListRootFragment
 import fr.free.nrw.commons.bookmarks.category.BookmarkCategoriesFragment
@@ -46,10 +44,17 @@ import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment
  * This Class Represents the Module for dependency injection (using dagger)
  * so, if a developer needs to add a new Fragment to the commons app
  * then that must be mentioned here to inject the dependencies
+ *
+ * NOTE: This module is DEPRECATED with Hilt. Fragments should use @AndroidEntryPoint instead.
+ * This file is kept for reference but all functionality has been migrated to Hilt.
+ * The @Module annotation has been removed to prevent Hilt build errors.
  */
-@Module
 @Suppress("unused")
 abstract class FragmentBuilderModule {
+    // All methods below are deprecated and non-functional
+    // Fragments should use @AndroidEntryPoint annotation instead
+
+    /*
     @ContributesAndroidInjector
     abstract fun bindContributionsListFragment(): ContributionsListFragment
 
@@ -166,4 +171,5 @@ abstract class FragmentBuilderModule {
 
     @ContributesAndroidInjector
     abstract fun bindFailedUploadsFragment(): FailedUploadsFragment
+    */
 }

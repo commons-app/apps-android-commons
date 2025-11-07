@@ -46,15 +46,13 @@
 
   <application
     android:name=".CommonsApplication"
-    android:appComponentFactory="commons"
     android:icon="@mipmap/ic_launcher"
     android:label="@string/app_name"
     android:largeHeap="true"
     android:requestLegacyExternalStorage="true"
     android:supportsRtl="true"
     android:theme="@style/LightAppTheme"
-    tools:ignore="GoogleAppIndexingWarning"
-    tools:replace="android:appComponentFactory">
+    tools:ignore="GoogleAppIndexingWarning">
     <activity
       android:name=".activity.SingleWebViewActivity"
       android:exported="false" />

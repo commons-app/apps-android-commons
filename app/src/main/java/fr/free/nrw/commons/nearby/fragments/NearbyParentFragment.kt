@@ -140,11 +140,12 @@ import java.util.Date
 import java.util.Locale
 import java.util.UUID
 import java.util.concurrent.TimeUnit
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 import javax.inject.Named
 import kotlin.concurrent.Volatile
 
-
+@AndroidEntryPoint
 class NearbyParentFragment : CommonsDaggerSupportFragment(),
     NearbyParentFragmentContract.View,
     WikidataP18EditListener,

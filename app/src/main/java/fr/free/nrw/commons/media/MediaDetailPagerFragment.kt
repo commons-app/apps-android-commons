@@ -51,9 +51,11 @@ import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
 import java.net.URL
 import java.util.concurrent.Callable
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 import androidx.core.net.toUri
 
+@AndroidEntryPoint
 class MediaDetailPagerFragment : CommonsDaggerSupportFragment(), OnPageChangeListener,
     MediaDetailFragment.Callback {
     @JvmField

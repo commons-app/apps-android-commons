@@ -16,7 +16,9 @@ import fr.free.nrw.commons.explore.map.ExploreMapFragment
 import fr.free.nrw.commons.media.MediaDetailPagerFragment
 import fr.free.nrw.commons.media.MediaDetailProvider
 import fr.free.nrw.commons.navtab.NavTab
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ExploreMapRootFragment : CommonsDaggerSupportFragment, MediaDetailProvider,
     CategoryImagesCallback {
     private var mediaDetails: MediaDetailPagerFragment? = null

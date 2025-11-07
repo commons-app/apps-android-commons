@@ -3,8 +3,8 @@ package fr.free.nrw.commons.campaigns
 import android.annotation.SuppressLint
 import fr.free.nrw.commons.BasePresenter
 import fr.free.nrw.commons.campaigns.models.Campaign
-import fr.free.nrw.commons.di.CommonsApplicationModule.Companion.IO_THREAD
-import fr.free.nrw.commons.di.CommonsApplicationModule.Companion.MAIN_THREAD
+import fr.free.nrw.commons.di.CommonsApplicationModule.IO_THREAD
+import fr.free.nrw.commons.di.CommonsApplicationModule.MAIN_THREAD
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient
 import fr.free.nrw.commons.utils.CommonsDateUtil.getIso8601DateFormatShort
 import io.reactivex.Scheduler

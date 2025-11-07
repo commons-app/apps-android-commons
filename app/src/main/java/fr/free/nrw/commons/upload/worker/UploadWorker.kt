@@ -17,6 +17,10 @@ import androidx.work.Data
 import androidx.work.ForegroundInfo
 import androidx.work.WorkerParameters
 import dagger.android.ContributesAndroidInjector
+import dagger.hilt.EntryPoint
+import dagger.hilt.InstallIn
+import dagger.hilt.android.EntryPointAccessors
+import dagger.hilt.components.SingletonComponent
 import fr.free.nrw.commons.BuildConfig.HOME_URL
 import fr.free.nrw.commons.CommonsApplication
 import fr.free.nrw.commons.Media
@@ -29,7 +33,6 @@ import fr.free.nrw.commons.contributions.ContributionDao
 import fr.free.nrw.commons.contributions.MainActivity
 import fr.free.nrw.commons.customselector.database.UploadedStatus
 import fr.free.nrw.commons.customselector.database.UploadedStatusDao
-import fr.free.nrw.commons.di.ApplicationlessInjection
 import fr.free.nrw.commons.media.MediaClient
 import fr.free.nrw.commons.nearby.PlacesRepository
 import fr.free.nrw.commons.theme.BaseActivity
@@ -50,6 +53,16 @@ import java.util.Date
 import java.util.Random
 import java.util.regex.Pattern
 import javax.inject.Inject
+
+/**
+ * Entry point for injecting dependencies into UploadWorker
+ * Workers cannot use @AndroidEntryPoint, so we use @EntryPoint instead
+ */
+@EntryPoint
+@InstallIn(SingletonComponent::class)
+interface UploadWorkerEntryPoint {
+    fun inject(worker: UploadWorker)
+}
 
 class UploadWorker(
     private var appContext: Context,
@@ -101,10 +114,11 @@ class UploadWorker(
         )
 
     init {
-        ApplicationlessInjection
-            .getInstance(appContext)
-            .commonsApplicationComponent
-            .inject(this)
+        val entryPoint = EntryPointAccessors.fromApplication(
+            appContext,
+            UploadWorkerEntryPoint::class.java
+        )
+        entryPoint.inject(this)
         currentNotification =
             getNotificationBuilder(CommonsApplication.NOTIFICATION_CHANNEL_ID_ALL)!!
 
@@ -112,6 +126,7 @@ class UploadWorker(
     }
 
     @dagger.Module
+    @InstallIn(SingletonComponent::class)
     interface Module {
         @ContributesAndroidInjector
         fun worker(): UploadWorker

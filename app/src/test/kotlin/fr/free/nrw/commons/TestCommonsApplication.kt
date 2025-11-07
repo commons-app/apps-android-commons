@@ -7,23 +7,16 @@ import androidx.collection.LruCache
 import com.google.gson.Gson
 import com.nhaarman.mockitokotlin2.mock
 import fr.free.nrw.commons.data.DBOpenHelper
-import fr.free.nrw.commons.di.CommonsApplicationComponent
-import fr.free.nrw.commons.di.CommonsApplicationModule
-import fr.free.nrw.commons.di.DaggerCommonsApplicationComponent
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.location.LocationServiceManager
+import dagger.hilt.android.testing.HiltAndroidTest
 
+// TODO: Update test setup to use Hilt testing components
+// See: https://developer.android.com/training/dependency-injection/hilt-testing
+@HiltAndroidTest
 class TestCommonsApplication : Application() {
-    private var mockApplicationComponent: CommonsApplicationComponent? = null
 
     override fun onCreate() {
-        if (mockApplicationComponent == null) {
-            mockApplicationComponent =
-                DaggerCommonsApplicationComponent
-                    .builder()
-                    .appModule(MockCommonsApplicationModule(this))
-                    .build()
-        }
         super.onCreate()
         setTheme(R.style.Theme_AppCompat)
         context = applicationContext
@@ -36,8 +29,10 @@ class TestCommonsApplication : Application() {
     }
 }
 
+// TODO: Replace with Hilt test modules
+// For Hilt testing, use @TestInstallIn to replace production modules
 @Suppress("MemberVisibilityCanBePrivate")
-class MockCommonsApplicationModule(appContext: Context) : CommonsApplicationModule(appContext) {
+class MockCommonsApplicationModule {
 
     val defaultSharedPreferences: JsonKvStore = mock()
     val locationServiceManager: LocationServiceManager = mock()

@@ -66,6 +66,7 @@ import fr.free.nrw.commons.utils.ViewUtil.showLongToast
 import fr.free.nrw.commons.utils.isMonumentsEnabled
 import fr.free.nrw.commons.utils.wLMEndDate
 import fr.free.nrw.commons.utils.wLMStartDate
+import dagger.hilt.android.AndroidEntryPoint
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -75,6 +76,7 @@ import java.util.Calendar
 import javax.inject.Inject
 import javax.inject.Named
 
+@AndroidEntryPoint
 class ContributionsFragment : CommonsDaggerSupportFragment(), FragmentManager.OnBackStackChangedListener,
     LocationUpdateListener, MediaDetailProvider, SensorEventListener, ICampaignsView,
     ContributionsContract.View, ContributionsListFragment.Callback {

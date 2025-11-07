@@ -79,9 +79,11 @@ import org.osmdroid.views.overlay.ScaleBarOverlay
 import org.osmdroid.views.overlay.ScaleDiskOverlay
 import org.osmdroid.views.overlay.TilesOverlay
 import timber.log.Timber
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 import javax.inject.Named
 
+@AndroidEntryPoint
 class ExploreMapFragment : CommonsDaggerSupportFragment(), ExploreMapContract.View,
     LocationUpdateListener, LocationPermissionCallback {
     private var bottomSheetDetailsBehavior: BottomSheetBehavior<*>? = null

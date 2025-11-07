@@ -13,6 +13,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import dagger.hilt.android.AndroidEntryPoint
 import fr.free.nrw.commons.AboutActivity
 import fr.free.nrw.commons.BuildConfig
 import fr.free.nrw.commons.CommonsApplication
@@ -20,7 +21,6 @@ import fr.free.nrw.commons.CommonsApplication.ActivityLogoutListener
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.actions.PageEditClient
 import fr.free.nrw.commons.databinding.FragmentMoreBottomSheetBinding
-import fr.free.nrw.commons.di.ApplicationlessInjection
 import fr.free.nrw.commons.feedback.FeedbackContentCreator
 import fr.free.nrw.commons.feedback.FeedbackDialog
 import fr.free.nrw.commons.feedback.OnFeedbackSubmitCallback
@@ -39,7 +39,7 @@ import timber.log.Timber
 import javax.inject.Inject
 import javax.inject.Named
 
-
+@AndroidEntryPoint
 class MoreBottomSheetFragment : BottomSheetDialogFragment() {
 
     @Inject
@@ -93,13 +93,8 @@ class MoreBottomSheetFragment : BottomSheetDialogFragment() {
         startActivity(intent)
     }
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        ApplicationlessInjection
-            .getInstance(requireActivity().applicationContext)
-            .commonsApplicationComponent
-            .inject(this)
-    }
+    // Hilt automatically injects dependencies for @AndroidEntryPoint annotated fragments
+    // No manual onAttach injection needed
 
     override fun onDestroyView() {
         super.onDestroyView()

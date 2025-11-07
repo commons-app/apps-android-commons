@@ -43,6 +43,7 @@ import fr.free.nrw.commons.utils.ViewUtil.showShortToast
 import fr.free.nrw.commons.utils.copyToClipboard
 import fr.free.nrw.commons.utils.handleWebUrl
 import fr.free.nrw.commons.wikidata.model.WikiSite
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 import javax.inject.Named
 
@@ -50,6 +51,7 @@ import javax.inject.Named
 /**
  * Created by root on 01.06.2018.
  */
+@AndroidEntryPoint
 class ContributionsListFragment : CommonsDaggerSupportFragment(), ContributionsListContract.View,
     ContributionsListAdapter.Callback, WikipediaInstructionsDialogFragment.Callback {
     @JvmField

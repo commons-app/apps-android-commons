@@ -27,6 +27,7 @@ import fr.free.nrw.commons.utils.DialogUtil.showAlertDialog
 import fr.free.nrw.commons.utils.ViewUtil.showDismissibleSnackBar
 import fr.free.nrw.commons.utils.ViewUtil.showLongToast
 import fr.free.nrw.commons.utils.handleWebUrl
+import dagger.hilt.android.AndroidEntryPoint
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import org.apache.commons.lang3.StringUtils
@@ -34,6 +35,7 @@ import timber.log.Timber
 import java.util.Objects
 import javax.inject.Inject
 
+@AndroidEntryPoint
 class AchievementsFragment : CommonsDaggerSupportFragment(){
     private lateinit var levelInfo: LevelController.LevelInfo
 

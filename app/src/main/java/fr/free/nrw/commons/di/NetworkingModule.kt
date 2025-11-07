@@ -4,6 +4,8 @@ import android.content.Context
 import com.google.gson.Gson
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 import fr.free.nrw.commons.BetaConstants
 import fr.free.nrw.commons.BuildConfig
 import fr.free.nrw.commons.OkHttpConnectionFactory
@@ -50,6 +52,7 @@ import javax.inject.Named
 import javax.inject.Singleton
 
 @Module
+@InstallIn(SingletonComponent::class)
 @Suppress("unused")
 class NetworkingModule {
     @Provides

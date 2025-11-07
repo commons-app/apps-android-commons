@@ -23,7 +23,6 @@ import fr.free.nrw.commons.R
 import fr.free.nrw.commons.actions.PageEditClient
 import fr.free.nrw.commons.actions.ThanksClient
 import fr.free.nrw.commons.delete.DeleteHelper
-import fr.free.nrw.commons.di.ApplicationlessInjection
 import fr.free.nrw.commons.utils.ViewUtil
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -100,10 +99,7 @@ class ReviewController @Inject constructor(
     @SuppressLint("CheckResult")
     fun reportWrongCategory(activity: Activity, reviewCallback: ReviewCallback) {
         val context = activity.applicationContext
-        ApplicationlessInjection
-            .getInstance(context)
-            .commonsApplicationComponent
-            .inject(this)
+        // Dependencies are already injected via @Inject annotations in the class
 
         ViewUtil.showShortToast(
             context,
@@ -160,10 +156,7 @@ class ReviewController @Inject constructor(
     @SuppressLint("CheckResult")
     fun sendThanks(activity: Activity) {
         val context = activity.applicationContext
-        ApplicationlessInjection
-            .getInstance(context)
-            .commonsApplicationComponent
-            .inject(this)
+        // Dependencies are already injected via @Inject annotations in the class
 
         ViewUtil.showShortToast(
             context,

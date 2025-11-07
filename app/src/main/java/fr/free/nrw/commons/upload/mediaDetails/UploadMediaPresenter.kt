@@ -2,8 +2,8 @@ package fr.free.nrw.commons.upload.mediaDetails
 
 import android.app.Activity
 import fr.free.nrw.commons.R
-import fr.free.nrw.commons.di.CommonsApplicationModule.Companion.IO_THREAD
-import fr.free.nrw.commons.di.CommonsApplicationModule.Companion.MAIN_THREAD
+import fr.free.nrw.commons.di.CommonsApplicationModule.IO_THREAD
+import fr.free.nrw.commons.di.CommonsApplicationModule.MAIN_THREAD
 import fr.free.nrw.commons.filepicker.UploadableFile
 import fr.free.nrw.commons.kvstore.BasicKvStore
 import fr.free.nrw.commons.location.LatLng

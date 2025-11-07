@@ -23,8 +23,10 @@ import fr.free.nrw.commons.media.MediaDetailPagerFragment
 import fr.free.nrw.commons.media.MediaDetailPagerFragment.Companion.newInstance
 import fr.free.nrw.commons.media.MediaDetailProvider
 import fr.free.nrw.commons.navtab.NavTab
+import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
+@AndroidEntryPoint
 class BookmarkListRootFragment : CommonsDaggerSupportFragment,
     FragmentManager.OnBackStackChangedListener, MediaDetailProvider, OnItemClickListener,
     CategoryImagesCallback {

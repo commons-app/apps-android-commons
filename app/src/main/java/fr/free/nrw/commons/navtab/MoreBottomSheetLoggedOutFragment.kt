@@ -2,7 +2,6 @@ package fr.free.nrw.commons.navtab
 
 import android.annotation.SuppressLint
 import android.content.ActivityNotFoundException
-import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -12,12 +11,12 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import dagger.hilt.android.AndroidEntryPoint
 import fr.free.nrw.commons.AboutActivity
 import fr.free.nrw.commons.CommonsApplication
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.auth.LoginActivity
 import fr.free.nrw.commons.databinding.FragmentMoreBottomSheetLoggedOutBinding
-import fr.free.nrw.commons.di.ApplicationlessInjection
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.logging.CommonsLogSender
 import fr.free.nrw.commons.settings.SettingsActivity
@@ -25,7 +24,7 @@ import javax.inject.Inject
 import javax.inject.Named
 import timber.log.Timber
 
-
+@AndroidEntryPoint
 class MoreBottomSheetLoggedOutFragment : BottomSheetDialogFragment() {
 
     private var binding: FragmentMoreBottomSheetLoggedOutBinding? = null
@@ -67,13 +66,8 @@ class MoreBottomSheetLoggedOutFragment : BottomSheetDialogFragment() {
         binding = null
     }
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        ApplicationlessInjection
-            .getInstance(requireActivity().applicationContext)
-            .commonsApplicationComponent
-            .inject(this)
-    }
+    // Hilt automatically injects dependencies for @AndroidEntryPoint annotated fragments
+    // No manual onAttach injection needed
 
     fun onLogoutClicked() {
         applicationKvStore.putBoolean("login_skipped", false)

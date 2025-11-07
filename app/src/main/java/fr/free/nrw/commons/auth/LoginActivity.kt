@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.auth
 
-import android.accounts.AccountAuthenticatorActivity
+import android.accounts.Account
+import android.accounts.AccountManager
 import android.app.ProgressDialog
 import android.content.Context
 import android.content.DialogInterface
@@ -8,10 +9,8 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.KeyEvent
-import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
-import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.TextView
@@ -19,7 +18,7 @@ import androidx.annotation.ColorRes
 import androidx.annotation.StringRes
 import androidx.annotation.VisibleForTesting
 import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatDelegate
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NavUtils
 import androidx.core.content.ContextCompat
 import androidx.core.view.WindowCompat
@@ -31,7 +30,6 @@ import fr.free.nrw.commons.auth.login.LoginClient
 import fr.free.nrw.commons.auth.login.LoginResult
 import fr.free.nrw.commons.contributions.MainActivity
 import fr.free.nrw.commons.databinding.ActivityLoginBinding
-import fr.free.nrw.commons.di.ApplicationlessInjection
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.utils.applyEdgeToEdgeAllInsets
 import fr.free.nrw.commons.utils.AbstractTextWatcher
@@ -41,13 +39,15 @@ import fr.free.nrw.commons.utils.SystemThemeUtils
 import fr.free.nrw.commons.utils.ViewUtil.hideKeyboard
 import fr.free.nrw.commons.utils.handleKeyboardInsets
 import fr.free.nrw.commons.utils.handleWebUrl
+import dagger.hilt.android.AndroidEntryPoint
 import io.reactivex.disposables.CompositeDisposable
 import timber.log.Timber
 import java.util.Locale
 import javax.inject.Inject
 import javax.inject.Named
 
-class LoginActivity : AccountAuthenticatorActivity() {
+@AndroidEntryPoint
+class LoginActivity : AppCompatActivity() {
     @Inject
     lateinit var sessionManager: SessionManager
 
@@ -65,22 +65,14 @@ class LoginActivity : AccountAuthenticatorActivity() {
     private var progressDialog: ProgressDialog? = null
     private val textWatcher = AbstractTextWatcher(::onTextChanged)
     private val compositeDisposable = CompositeDisposable()
-    private val delegate: AppCompatDelegate by lazy {
-        AppCompatDelegate.create(this, null)
-    }
     private var lastLoginResult: LoginResult? = null
 
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        ApplicationlessInjection
-            .getInstance(this.applicationContext)
-            .commonsApplicationComponent
-            .inject(this)
+        // Hilt automatically injects dependencies for @AndroidEntryPoint annotated classes
 
         val isDarkTheme = systemThemeUtils.isDeviceInNightMode()
         setTheme(if (isDarkTheme) R.style.DarkAppTheme else R.style.LightAppTheme)
-        delegate.installViewFactory()
-        delegate.onCreate(savedInstanceState)
 
         WindowCompat.getInsetsController(window, window.decorView)
             .isAppearanceLightStatusBars = !isDarkTheme
@@ -170,7 +162,6 @@ class LoginActivity : AccountAuthenticatorActivity() {
     }
     override fun onPostCreate(savedInstanceState: Bundle?) {
         super.onPostCreate(savedInstanceState)
-        delegate.onPostCreate(savedInstanceState)
     }
 
     override fun onResume() {
@@ -201,7 +192,6 @@ class LoginActivity : AccountAuthenticatorActivity() {
             loginPassword.removeTextChangedListener(textWatcher)
             loginTwoFactor.removeTextChangedListener(textWatcher)
         }
-        delegate.onDestroy()
         loginClient.cancel()
         binding = null
         super.onDestroy()
@@ -209,21 +199,14 @@ class LoginActivity : AccountAuthenticatorActivity() {
 
     override fun onStart() {
         super.onStart()
-        delegate.onStart()
     }
 
     override fun onStop() {
         super.onStop()
-        delegate.onStop()
     }
 
     override fun onPostResume() {
         super.onPostResume()
-        delegate.onPostResume()
-    }
-
-    override fun setContentView(view: View, params: ViewGroup.LayoutParams) {
-        delegate.setContentView(view, params)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -237,6 +220,7 @@ class LoginActivity : AccountAuthenticatorActivity() {
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
         // if progressDialog is visible during the configuration change  then store state as  true else false so that
         // we maintain visibility of progressDialog after configuration change
         if (progressDialog != null && progressDialog!!.isShowing) {
@@ -398,8 +382,6 @@ class LoginActivity : AccountAuthenticatorActivity() {
         startMainActivity()
     }
 
-    override fun getMenuInflater(): MenuInflater =
-        delegate.menuInflater
 
     @VisibleForTesting
     fun askUserForTwoFactorAuth() {
@@ -454,8 +436,31 @@ class LoginActivity : AccountAuthenticatorActivity() {
 
     @VisibleForTesting
     fun startMainActivity() {
+        // Handle account authentication result for AccountManager
+        // Since we're now using AppCompatActivity instead of AccountAuthenticatorActivity
+        val accountManager = AccountManager.get(this)
+        val accountName = sessionManager.userName
+
+        if (accountName != null) {
+            val account = Account(accountName, BuildConfig.ACCOUNT_TYPE)
+            val intent = Intent()
+            intent.putExtra(AccountManager.KEY_ACCOUNT_NAME, accountName)
+            intent.putExtra(AccountManager.KEY_ACCOUNT_TYPE, BuildConfig.ACCOUNT_TYPE)
+            setAccountAuthenticatorResult(intent.extras)
+            setResult(RESULT_OK, intent)
+        }
+
         startActivityWithFlags(this, MainActivity::class.java, Intent.FLAG_ACTIVITY_SINGLE_TOP)
         finish()
+    }
+
+    // Helper method to set the account authenticator result
+    private fun setAccountAuthenticatorResult(result: Bundle?) {
+        // This would be called automatically in AccountAuthenticatorActivity
+        // but we need to handle it manually now
+        result?.let {
+            intent.putExtras(it)
+        }
     }
 
     private fun showMessage(@StringRes resId: Int, @ColorRes colorResId: Int) = with(binding!!) {

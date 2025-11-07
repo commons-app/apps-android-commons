@@ -8,6 +8,7 @@ plugins {
     alias(libs.plugins.kotlin.kapt)
     alias(libs.plugins.kotlin.parcelize)
     alias(libs.plugins.compose)
+    alias(libs.plugins.hilt)
 }
 
 apply(from = "$rootDir/jacoco.gradle")
@@ -286,6 +287,10 @@ dependencies {
     kapt(libs.dagger.android.processor)
     kapt(libs.dagger.compiler)
     annotationProcessor(libs.dagger.android.processor)
+
+    // Hilt
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.compiler)
 
     implementation(libs.kotlin.reflect)
 

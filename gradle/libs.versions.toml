@@ -31,6 +31,7 @@ frescoVersion = "3.6.0"
 commonsLang3Version = "3.8.1"
 glide = "4.12.0"
 gson = "2.8.5"
+hilt = "2.57.1"
 junit = "4.13.2"
 junitJupiter = "5.10.0"
 ksp = "2.0.0-1.0.21"
@@ -98,6 +99,7 @@ androidx-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-toolin
 androidx-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
 androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 androidx-ui-viewbinding = { group = "androidx.compose.ui", name = "ui-viewbinding" }
+androidx-lifecycle-viewmodel-compose = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-compose", version.ref = "lifecycleRuntimeKtx" }
 
 # AndroidX Room
 androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
@@ -125,6 +127,8 @@ dagger-android-processor = { module = "com.google.dagger:dagger-android-processo
 dagger-android-support = { module = "com.google.dagger:dagger-android-support", version.ref = "dagger" }
 dagger-android = { module = "com.google.dagger:dagger-android", version.ref = "dagger" }
 dagger-compiler = { module = "com.google.dagger:dagger-compiler", version.ref = "dagger" }
+hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
+hilt-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hilt" }
 
 # Image loading
 facebook-fresco = { module = "com.facebook.fresco:fresco", version.ref = "frescoVersion" }
@@ -216,3 +220,4 @@ kotlin-parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize", version.ref =
 github-triplet-play = { id = "com.github.triplet.play", version.ref = "githubTripletPlay" }
 getkeepsafe-dexcount = { id = "com.getkeepsafe.dexcount", version.ref = "dexcount" }
 android-library = { id = "com.android.library", version.ref = "agp" }
+hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }

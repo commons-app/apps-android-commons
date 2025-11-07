@@ -10,9 +10,11 @@ import fr.free.nrw.commons.databinding.FragmentBookmarksBinding
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.theme.BaseActivity
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 import javax.inject.Named
 
+@AndroidEntryPoint
 class BookmarkFragment : CommonsDaggerSupportFragment() {
     private var adapter: BookmarksPagerAdapter? = null
 

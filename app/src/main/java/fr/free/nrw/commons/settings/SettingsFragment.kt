@@ -34,12 +34,12 @@ import com.karumi.dexter.MultiplePermissionsReport
 import com.karumi.dexter.PermissionToken
 import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener
+import dagger.hilt.android.AndroidEntryPoint
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.activity.SingleWebViewActivity
 import fr.free.nrw.commons.campaigns.CampaignView
 import fr.free.nrw.commons.contributions.ContributionController
 import fr.free.nrw.commons.contributions.MainActivity
-import fr.free.nrw.commons.di.ApplicationlessInjection
 import fr.free.nrw.commons.filepicker.FilePicker
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.location.LocationServiceManager
@@ -57,6 +57,7 @@ import java.util.Locale
 import javax.inject.Inject
 import javax.inject.Named
 
+@AndroidEntryPoint
 class SettingsFragment : PreferenceFragmentCompat() {
 
     @Inject
@@ -108,10 +109,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
      * @param rootKey the root key for preferences
      */
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
-        ApplicationlessInjection
-            .getInstance(requireActivity().applicationContext)
-            .commonsApplicationComponent
-            .inject(this)
+        // Hilt automatically injects dependencies for @AndroidEntryPoint annotated fragments
 
         // Set the preferences from an XML resource
         setPreferencesFromResource(R.xml.preferences, rootKey)

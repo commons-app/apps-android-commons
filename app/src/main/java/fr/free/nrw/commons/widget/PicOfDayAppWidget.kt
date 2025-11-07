@@ -11,25 +11,34 @@ import android.graphics.Paint
 import android.net.Uri
 import android.os.Build
 import android.widget.RemoteViews
-import androidx.annotation.Nullable
 import com.facebook.common.executors.CallerThreadExecutor
 import com.facebook.common.references.CloseableReference
 import com.facebook.datasource.DataSource
 import com.facebook.drawee.backends.pipeline.Fresco
-import com.facebook.imagepipeline.core.ImagePipeline
 import com.facebook.imagepipeline.datasource.BaseBitmapDataSubscriber
 import com.facebook.imagepipeline.image.CloseableImage
-import com.facebook.imagepipeline.request.ImageRequest
 import com.facebook.imagepipeline.request.ImageRequestBuilder
+import dagger.hilt.EntryPoint
+import dagger.hilt.InstallIn
+import dagger.hilt.android.EntryPointAccessors
+import dagger.hilt.components.SingletonComponent
 import fr.free.nrw.commons.media.MediaClient
-import javax.inject.Inject
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.contributions.MainActivity
-import fr.free.nrw.commons.di.ApplicationlessInjection
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
+
+/**
+ * Entry point for injecting dependencies into PicOfDayAppWidget
+ * AppWidgets cannot use @AndroidEntryPoint, so we use @EntryPoint instead
+ */
+@EntryPoint
+@InstallIn(SingletonComponent::class)
+interface PicOfDayAppWidgetEntryPoint {
+    fun mediaClient(): MediaClient
+}
 
 /**
  * Implementation of App Widget functionality.
@@ -38,13 +47,12 @@ class PicOfDayAppWidget : AppWidgetProvider() {
 
     private val compositeDisposable = CompositeDisposable()
 
-    @Inject
-    lateinit var mediaClient: MediaClient
 
     private fun updateAppWidget(
         context: Context,
         appWidgetManager: AppWidgetManager,
-        appWidgetId: Int
+        appWidgetId: Int,
+        mediaClient: MediaClient
     ) {
         val views = RemoteViews(context.packageName, R.layout.pic_of_day_app_widget)
 
@@ -59,7 +67,7 @@ class PicOfDayAppWidget : AppWidgetProvider() {
 
         appWidgetManager.updateAppWidget(appWidgetId, views)
 
-        loadPictureOfTheDay(context, views, appWidgetManager, appWidgetId)
+        loadPictureOfTheDay(context, views, appWidgetManager, appWidgetId, mediaClient)
     }
 
     /**
@@ -68,12 +76,14 @@ class PicOfDayAppWidget : AppWidgetProvider() {
      * @param views The RemoteViews object used to update the App Widget UI.
      * @param appWidgetManager The AppWidgetManager instance for managing the widget.
      * @param appWidgetId The ID of the App Widget to update.
+     * @param mediaClient The MediaClient for fetching picture of the day
      */
     private fun loadPictureOfTheDay(
         context: Context,
         views: RemoteViews,
         appWidgetManager: AppWidgetManager,
-        appWidgetId: Int
+        appWidgetId: Int,
+        mediaClient: MediaClient
     ) {
         compositeDisposable.add(
             mediaClient.getPictureOfTheDay()
@@ -153,14 +163,16 @@ class PicOfDayAppWidget : AppWidgetProvider() {
     }
 
     override fun onUpdate(context: Context, appWidgetManager: AppWidgetManager, appWidgetIds: IntArray) {
-        ApplicationlessInjection
-            .getInstance(context.applicationContext)
-            .commonsApplicationComponent
-            .inject(this)
+        // Get mediaClient from EntryPoint since AppWidgets cannot use @AndroidEntryPoint
+        val entryPoint = EntryPointAccessors.fromApplication(
+            context.applicationContext,
+            PicOfDayAppWidgetEntryPoint::class.java
+        )
+        val mediaClient = entryPoint.mediaClient()
 
         // There may be multiple widgets active, so update all of them
         for (appWidgetId in appWidgetIds) {
-            updateAppWidget(context, appWidgetManager, appWidgetId)
+            updateAppWidget(context, appWidgetManager, appWidgetId, mediaClient)
         }
     }
 

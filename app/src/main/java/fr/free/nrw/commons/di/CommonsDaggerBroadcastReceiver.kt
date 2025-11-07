@@ -1,25 +1,13 @@
 package fr.free.nrw.commons.di
 
 import android.content.BroadcastReceiver
-import android.content.Context
-import android.content.Intent
-import fr.free.nrw.commons.di.ApplicationlessInjection.Companion.getInstance
 
 /**
- * Receives broadcast then injects it's instance to the broadcastReceiverInjector method of
- * ApplicationlessInjection class
+ * Base class for broadcast receivers that previously used Dagger Android injection.
+ *
+ * NOTE: This class is DEPRECATED with Hilt. BroadcastReceivers should use constructor injection
+ * or retrieve dependencies via EntryPoint interfaces.
+ * This class is kept as a simple BroadcastReceiver extension for backward compatibility,
+ * but all injection functionality has been removed.
  */
-abstract class CommonsDaggerBroadcastReceiver : BroadcastReceiver() {
-    override fun onReceive(context: Context, intent: Intent) {
-        inject(context)
-    }
-
-    private fun inject(context: Context) {
-        val injection = getInstance(context.applicationContext)
-
-        val serviceInjector = injection.broadcastReceiverInjector()
-                ?: throw NullPointerException("ApplicationlessInjection.broadcastReceiverInjector() returned null")
-
-        serviceInjector.inject(this)
-    }
-}
+abstract class CommonsDaggerBroadcastReceiver : BroadcastReceiver()

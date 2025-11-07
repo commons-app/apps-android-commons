@@ -1,7 +1,5 @@
 package fr.free.nrw.commons.di
 
-import dagger.Module
-import dagger.android.ContributesAndroidInjector
 import fr.free.nrw.commons.AboutActivity
 import fr.free.nrw.commons.locationpicker.LocationPickerActivity
 import fr.free.nrw.commons.WelcomeActivity
@@ -26,10 +24,17 @@ import fr.free.nrw.commons.upload.UploadProgressActivity
  * This Class handles the dependency injection (using dagger)
  * so, if a developer needs to add a new activity to the commons app
  * then that must be mentioned here to inject the dependencies
+ *
+ * NOTE: This module is DEPRECATED with Hilt. Activities should use @AndroidEntryPoint instead.
+ * This file is kept for reference but all functionality has been migrated to Hilt.
+ * The @Module annotation has been removed to prevent Hilt build errors.
  */
-@Module
 @Suppress("unused")
 abstract class ActivityBuilderModule {
+    // All methods below are deprecated and non-functional
+    // Activities should use @AndroidEntryPoint annotation instead
+
+    /*
     @ContributesAndroidInjector
     abstract fun bindLoginActivity(): LoginActivity
 
@@ -86,4 +91,5 @@ abstract class ActivityBuilderModule {
 
     @ContributesAndroidInjector
     abstract fun bindWikiFeedback(): WikidataFeedback
+    */
 }

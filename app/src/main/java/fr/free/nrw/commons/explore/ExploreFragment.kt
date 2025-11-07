@@ -18,9 +18,11 @@ import fr.free.nrw.commons.di.CommonsDaggerSupportFragment
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.theme.BaseActivity
 import fr.free.nrw.commons.utils.ActivityUtils.startActivityWithFlags
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 import javax.inject.Named
 
+@AndroidEntryPoint
 class ExploreFragment : CommonsDaggerSupportFragment() {
 
     @JvmField

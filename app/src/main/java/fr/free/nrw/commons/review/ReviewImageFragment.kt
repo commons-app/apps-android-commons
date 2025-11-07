@@ -12,9 +12,10 @@ import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.auth.csrf.InvalidLoginTokenException
 import fr.free.nrw.commons.databinding.FragmentReviewImageBinding
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
-
+@AndroidEntryPoint
 class ReviewImageFragment : CommonsDaggerSupportFragment() {
 
     companion object {

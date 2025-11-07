@@ -1,12 +1,16 @@
 package fr.free.nrw.commons.di
 
-import android.app.Activity
 import dagger.Module
-import dagger.Provides
-import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsFragment
+import dagger.hilt.InstallIn
+import dagger.hilt.android.components.FragmentComponent
 
+/**
+ * NOTE: This module is deprecated. Hilt automatically provides Activity in FragmentComponent.
+ * This module is kept empty to avoid breaking the build, but can be removed entirely.
+ */
 @Module
+@InstallIn(FragmentComponent::class)
 class BookmarkLocationsFragmentModule {
-    @Provides
-    fun BookmarkLocationsFragment.providesActivity(): Activity = activity!!
+    // Hilt automatically provides Activity in FragmentComponent
+    // No custom provider needed
 }

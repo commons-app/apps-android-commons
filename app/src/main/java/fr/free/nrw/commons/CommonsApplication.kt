@@ -13,6 +13,7 @@ import android.util.Log
 import androidx.multidex.MultiDexApplication
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.facebook.imagepipeline.core.ImagePipelineConfig
+import dagger.hilt.android.HiltAndroidApp
 import fr.free.nrw.commons.auth.LoginActivity
 import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.bookmarks.items.BookmarkItemsTable
@@ -22,7 +23,6 @@ import fr.free.nrw.commons.concurrency.BackgroundPoolExceptionHandler
 import fr.free.nrw.commons.concurrency.ThreadPoolService
 import fr.free.nrw.commons.contributions.ContributionDao
 import fr.free.nrw.commons.data.DBOpenHelper
-import fr.free.nrw.commons.di.ApplicationlessInjection
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.language.AppLanguageLookUpTable
 import fr.free.nrw.commons.logging.FileLoggingTree
@@ -66,6 +66,7 @@ import javax.inject.Named
     resCommentPrompt = R.string.crash_dialog_comment_prompt
 )
 
+@HiltAndroidApp
 class CommonsApplication : MultiDexApplication() {
 
     @Inject
@@ -99,10 +100,8 @@ class CommonsApplication : MultiDexApplication() {
         instance = this
         init(this)
 
-        ApplicationlessInjection
-            .getInstance(this)
-            .commonsApplicationComponent
-            .inject(this)
+        // Hilt automatically injects dependencies for @HiltAndroidApp annotated classes
+        // No manual injection needed
 
         initTimber()
 

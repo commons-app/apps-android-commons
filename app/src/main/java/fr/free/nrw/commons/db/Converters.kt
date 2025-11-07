@@ -4,9 +4,12 @@ import android.net.Uri
 import androidx.room.TypeConverter
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import dagger.hilt.EntryPoint
+import dagger.hilt.InstallIn
+import dagger.hilt.android.EntryPointAccessors
+import dagger.hilt.components.SingletonComponent
 import fr.free.nrw.commons.CommonsApplication
 import fr.free.nrw.commons.contributions.ChunkInfo
-import fr.free.nrw.commons.di.ApplicationlessInjection
 import fr.free.nrw.commons.location.LatLng
 import fr.free.nrw.commons.nearby.Sitelinks
 import fr.free.nrw.commons.upload.WikidataPlace
@@ -14,15 +17,26 @@ import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
 import java.util.Date
 
 /**
+ * Entry point for accessing Gson from Room converters
+ */
+@EntryPoint
+@InstallIn(SingletonComponent::class)
+interface ConvertersEntryPoint {
+    fun gson(): Gson
+}
+
+/**
  * This object supplies converters to write/read types to/from the database.
  */
 object Converters {
 
     fun getGson(): Gson {
-        return ApplicationlessInjection
-            .getInstance(CommonsApplication.instance)
-            .commonsApplicationComponent
-            .gson()
+        val appContext = CommonsApplication.instance
+        val entryPoint = EntryPointAccessors.fromApplication(
+            appContext,
+            ConvertersEntryPoint::class.java
+        )
+        return entryPoint.gson()
     }
 
     /**

@@ -4,16 +4,42 @@ import android.content.ContentValues
 import android.database.Cursor
 import android.database.sqlite.SQLiteQueryBuilder
 import android.net.Uri
+import dagger.hilt.EntryPoint
+import dagger.hilt.InstallIn
+import dagger.hilt.android.EntryPointAccessors
+import dagger.hilt.components.SingletonComponent
 import fr.free.nrw.commons.BuildConfig
 import fr.free.nrw.commons.bookmarks.items.BookmarkItemsTable.TABLE_NAME
+import fr.free.nrw.commons.data.DBOpenHelper
 import fr.free.nrw.commons.di.CommonsDaggerContentProvider
 import androidx.core.net.toUri
 import fr.free.nrw.commons.bookmarks.items.BookmarkItemsTable.COLUMN_ID
 
 /**
+ * Entry point for injecting dependencies into BookmarkItemsContentProvider
+ * ContentProviders cannot use @AndroidEntryPoint, so we use @EntryPoint instead
+ */
+@EntryPoint
+@InstallIn(SingletonComponent::class)
+interface BookmarkItemsContentProviderEntryPoint {
+    fun dbOpenHelper(): DBOpenHelper
+}
+
+/**
  * Handles private storage for bookmarked items
  */
 class BookmarkItemsContentProvider : CommonsDaggerContentProvider() {
+
+    override fun onCreate(): Boolean {
+        // Initialize dbOpenHelper using EntryPoint since ContentProviders don't support @AndroidEntryPoint
+        val entryPoint = EntryPointAccessors.fromApplication(
+            context!!.applicationContext,
+            BookmarkItemsContentProviderEntryPoint::class.java
+        )
+        dbOpenHelper = entryPoint.dbOpenHelper()
+        return true
+    }
+
     override fun getType(uri: Uri): String? = null
 
     /**

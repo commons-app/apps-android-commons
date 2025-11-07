@@ -9,11 +9,36 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteQueryBuilder
 import android.net.Uri
 import android.text.TextUtils
-import fr.free.nrw.commons.BuildConfig
-import fr.free.nrw.commons.di.CommonsDaggerContentProvider
 import androidx.core.net.toUri
+import dagger.hilt.EntryPoint
+import dagger.hilt.InstallIn
+import dagger.hilt.android.EntryPointAccessors
+import dagger.hilt.components.SingletonComponent
+import fr.free.nrw.commons.BuildConfig
+import fr.free.nrw.commons.data.DBOpenHelper
+import fr.free.nrw.commons.di.CommonsDaggerContentProvider
+
+/**
+ * Entry point for injecting dependencies into CategoryContentProvider
+ * ContentProviders cannot use @AndroidEntryPoint, so we use @EntryPoint instead
+ */
+@EntryPoint
+@InstallIn(SingletonComponent::class)
+interface CategoryContentProviderEntryPoint {
+    fun dbOpenHelper(): DBOpenHelper
+}
 
 class CategoryContentProvider : CommonsDaggerContentProvider() {
+
+    override fun onCreate(): Boolean {
+        // Initialize dbOpenHelper using EntryPoint since ContentProviders don't support @AndroidEntryPoint
+        val entryPoint = EntryPointAccessors.fromApplication(
+            context!!.applicationContext,
+            CategoryContentProviderEntryPoint::class.java
+        )
+        dbOpenHelper = entryPoint.dbOpenHelper()
+        return true
+    }
 
     private val uriMatcher = UriMatcher(NO_MATCH).apply {
         addURI(BuildConfig.CATEGORY_AUTHORITY, BASE_PATH, CATEGORIES)

@@ -8,8 +8,8 @@ import fr.free.nrw.commons.R
 import fr.free.nrw.commons.auth.csrf.InvalidLoginTokenException
 import fr.free.nrw.commons.category.CategoryEditHelper
 import fr.free.nrw.commons.category.CategoryItem
-import fr.free.nrw.commons.di.CommonsApplicationModule.Companion.IO_THREAD
-import fr.free.nrw.commons.di.CommonsApplicationModule.Companion.MAIN_THREAD
+import fr.free.nrw.commons.di.CommonsApplicationModule.IO_THREAD
+import fr.free.nrw.commons.di.CommonsApplicationModule.MAIN_THREAD
 import fr.free.nrw.commons.repository.UploadRepository
 import fr.free.nrw.commons.upload.depicts.proxy
 import fr.free.nrw.commons.wikidata.mwapi.MwIOException

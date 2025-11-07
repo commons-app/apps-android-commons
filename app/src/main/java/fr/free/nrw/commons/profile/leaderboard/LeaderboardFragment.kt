@@ -23,6 +23,7 @@ import fr.free.nrw.commons.profile.leaderboard.LeaderboardConstants.PAGE_SIZE
 import fr.free.nrw.commons.profile.leaderboard.LeaderboardConstants.START_OFFSET
 import fr.free.nrw.commons.utils.ConfigUtils.isBetaFlavour
 import fr.free.nrw.commons.utils.ViewUtil.showLongToast
+import dagger.hilt.android.AndroidEntryPoint
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
@@ -32,6 +33,7 @@ import javax.inject.Inject
 /**
  * This class extends the CommonsDaggerSupportFragment and creates leaderboard fragment
  */
+@AndroidEntryPoint
 class LeaderboardFragment : CommonsDaggerSupportFragment() {
     @Inject
     lateinit var sessionManager: SessionManager

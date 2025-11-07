@@ -6,17 +6,42 @@ import android.database.Cursor
 import android.database.sqlite.SQLiteQueryBuilder
 import android.net.Uri
 import androidx.core.net.toUri
+import dagger.hilt.EntryPoint
+import dagger.hilt.InstallIn
+import dagger.hilt.android.EntryPointAccessors
+import dagger.hilt.components.SingletonComponent
 import fr.free.nrw.commons.BuildConfig
+import fr.free.nrw.commons.data.DBOpenHelper
 import fr.free.nrw.commons.di.CommonsDaggerContentProvider
 import fr.free.nrw.commons.explore.recentsearches.RecentSearchesTable.ALL_FIELDS
 import fr.free.nrw.commons.explore.recentsearches.RecentSearchesTable.COLUMN_ID
 import fr.free.nrw.commons.explore.recentsearches.RecentSearchesTable.TABLE_NAME
 
 /**
+ * Entry point for injecting dependencies into RecentSearchesContentProvider
+ * ContentProviders cannot use @AndroidEntryPoint, so we use @EntryPoint instead
+ */
+@EntryPoint
+@InstallIn(SingletonComponent::class)
+interface RecentSearchesContentProviderEntryPoint {
+    fun dbOpenHelper(): DBOpenHelper
+}
+
+/**
  * This class contains functions for executing queries for
  * inserting, searching, deleting, editing recent searches in SqLite DB
  */
 class RecentSearchesContentProvider : CommonsDaggerContentProvider() {
+
+    override fun onCreate(): Boolean {
+        // Initialize dbOpenHelper using EntryPoint since ContentProviders don't support @AndroidEntryPoint
+        val entryPoint = EntryPointAccessors.fromApplication(
+            context!!.applicationContext,
+            RecentSearchesContentProviderEntryPoint::class.java
+        )
+        dbOpenHelper = entryPoint.dbOpenHelper()
+        return true
+    }
 
     /**
      * This functions executes query for searching recent searches in SqLite DB

@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -12,22 +11,21 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.FileProvider
 import androidx.core.os.bundleOf
-import androidx.fragment.app.Fragment
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.ViewPagerAdapter
 import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.contributions.ContributionsFragment
 import fr.free.nrw.commons.databinding.ActivityProfileBinding
+import fr.free.nrw.commons.feature.profile.ProfileActivity
 import fr.free.nrw.commons.profile.achievements.AchievementsFragment
 import fr.free.nrw.commons.profile.leaderboard.LeaderboardFragment
 import fr.free.nrw.commons.theme.BaseActivity
-import fr.free.nrw.commons.utils.applyEdgeToEdgeAllInsets
 import fr.free.nrw.commons.utils.DialogUtil
+import fr.free.nrw.commons.utils.applyEdgeToEdgeAllInsets
+import timber.log.Timber
 import java.io.File
 import java.io.FileOutputStream
-import java.util.Locale
 import javax.inject.Inject
-import timber.log.Timber
 
 /**
  * This activity will set two tabs, achievements and
@@ -224,11 +222,9 @@ class ProfileActivity : BaseActivity() {
 
         @JvmStatic
         fun startYourself(context: Context, userName: String, shouldShowContributions: Boolean) {
-            val intent = Intent(context, ProfileActivity::class.java).apply {
-                addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT or Intent.FLAG_ACTIVITY_SINGLE_TOP)
-                putExtra(KEY_USERNAME, userName)
-                putExtra(KEY_SHOULD_SHOW_CONTRIBUTIONS, shouldShowContributions)
-            }
+            val intent = Intent(context, ProfileActivity::class.java)
+            intent.putExtra(KEY_USERNAME, userName)
+            intent.putExtra(KEY_SHOULD_SHOW_CONTRIBUTIONS, shouldShowContributions)
             context.startActivity(intent)
         }
     }

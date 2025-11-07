@@ -19,11 +19,13 @@ import fr.free.nrw.commons.di.CommonsDaggerSupportFragment
 import fr.free.nrw.commons.media.MediaClient
 import fr.free.nrw.commons.upload.FileProcessor
 import fr.free.nrw.commons.utils.applyEdgeToEdgeBottomPaddingInsets
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 /**
  * Custom selector folder fragment.
  */
+@AndroidEntryPoint
 class FolderFragment : CommonsDaggerSupportFragment() {
     /**
      * ViewBinding

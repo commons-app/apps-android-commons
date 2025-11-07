@@ -17,11 +17,13 @@ import fr.free.nrw.commons.R
 import fr.free.nrw.commons.databinding.FragmentSearchHistoryBinding
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment
 import fr.free.nrw.commons.explore.SearchActivity
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 /**
  * Displays the recent searches screen.
  */
+@AndroidEntryPoint
 class RecentSearchesFragment : CommonsDaggerSupportFragment() {
     @JvmField
     @Inject

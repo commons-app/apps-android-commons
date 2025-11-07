@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.DisplayMetrics
 import android.view.WindowManager
 import androidx.activity.enableEdgeToEdge
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 import javax.inject.Named
 import fr.free.nrw.commons.R
@@ -13,7 +14,7 @@ import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.utils.SystemThemeUtils
 import io.reactivex.disposables.CompositeDisposable
 
-
+@AndroidEntryPoint
 abstract class BaseActivity : CommonsDaggerAppCompatActivity() {
 
     @Inject
