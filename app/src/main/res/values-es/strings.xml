@@ -49,6 +49,7 @@
 * Pompilos
 * Raos10
 * Rodney Araujo
+* SaldırganSincap
 * Samthony
 * Superzerocool
 * Tiberius1701
@@ -57,7 +58,7 @@
 -->
 <resources>
   <string name="commons_facebook">Página de Facebook de Commons</string>
-  <string name="commons_github">Código fuente de Commons en GitHub</string>
+  <string name="commons_github" fuzzy="true">Código fuente de Commons en GitHub</string>
   <string name="commons_logo">Logo de Commons</string>
   <string name="commons_website">Sitio web de Commons</string>
   <string name="exit_location_picker">Salir del selector de ubicación</string>
@@ -81,18 +82,14 @@
     <item quantity="one">Cargando %1$d archivo</item>
     <item quantity="other">Cargando %1$d archivos</item>
   </plurals>
-  <plurals name="contributions_subtitle">
-    <item quantity="one">(%1$d)</item>
-    <item quantity="other">(%1$d)</item>
-  </plurals>
   <string name="starting_uploads">Comenzando las subidas</string>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">Procesando %d carga</item>
-    <item quantity="other">Procesando %d cargas</item>
+    <item quantity="one">Procesando %1$d carga</item>
+    <item quantity="other">Procesando %1$d cargas</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">%d carga</item>
-    <item quantity="other">%1 cargas</item>
+    <item quantity="one">%1$d carga</item>
+    <item quantity="other">%1$d cargas</item>
   </plurals>
   <plurals name="share_license_summary">
     <item quantity="one">Esta imagen se publicará bajo la licencia %1$s</item>
@@ -136,7 +133,7 @@
   <string name="uploading_queued">Carga en cola (modo de conexión limitada activado)</string>
   <string name="upload_completed_notification_title">¡Se ha subido %1$s!</string>
   <string name="upload_completed_notification_text">Pulsa para ver tu subida</string>
-  <string name="upload_progress_notification_title_start">Empezando la subida de %s</string>
+  <string name="upload_progress_notification_title_start">Empezando la subida de %1$s</string>
   <string name="upload_progress_notification_title_in_progress">Subiendo %1$s</string>
   <string name="upload_progress_notification_title_finishing">Finalizando la subida de %1$s</string>
   <string name="upload_failed_notification_title">Error al cargar %1$s</string>
@@ -186,6 +183,7 @@
   <string name="title_activity_settings">Ajustes</string>
   <string name="title_activity_signup">Regístrate</string>
   <string name="title_activity_featured_images">Imágenes destacadas</string>
+  <string name="images_featured_explanation" fuzzy="true">Las imágenes destacadas son creaciones de talentosos fotógrafos e ilustradores que la comunidad de Wikimedia Commons ha reconocido como las de mayor calidad del sitio.</string>
   <string name="title_activity_custom_selector">selector personalizado</string>
   <string name="title_activity_category_details">Categoría</string>
   <string name="title_activity_review">Revisión por pares</string>
@@ -273,15 +271,14 @@
   <string name="_2fa_code">Código de autenticación de 2 pasos</string>
   <string name="email_auth_code">Código de verificación de correo electrónico</string>
   <string name="logout_verification">¿Confirmas que quieres salir?</string>
-  <string name="mediaimage_failed">Falló la imagen de multimedia</string>
   <string name="no_subcategory_found">No se encontró ninguna subcategoría</string>
   <string name="no_parentcategory_found">No se encontró ninguna categoría contenedora</string>
   <string name="welcome_image_mount_zao">Monte Zao</string>
   <string name="welcome_image_llamas">Llamas</string>
   <string name="welcome_image_rainbow_bridge">Puente del Arco Iris</string>
   <string name="welcome_image_tulip">Tulipa</string>
-  <string name="welcome_image_welcome_wikipedia">Bienvenida de Wikipedia</string>
-  <string name="welcome_image_welcome_copyright">Derechos de autor de bienvenida</string>
+  <string name="welcome_image_welcome_wikipedia" fuzzy="true">Bienvenida de Wikipedia</string>
+  <string name="welcome_image_welcome_copyright" fuzzy="true">Derechos de autor de bienvenida</string>
   <string name="welcome_image_sydney_opera_house">Ópera de Sídney</string>
   <string name="cancel">Cancelar</string>
   <string name="navigation_drawer_open">Abrir</string>
@@ -417,12 +414,11 @@
   <string name="Achievements">Logros</string>
   <string name="Profile">Perfil</string>
   <string name="badges">Las insignias</string>
-  <string name="statistics">Estadísticas</string>
   <string name="statistics_thanks">Agradecimientos recibidos</string>
   <string name="statistics_featured">Imágenes destacadas</string>
   <string name="statistics_wikidata_edits">Imágenes vía \"Sitios Cercanos\"</string>
-  <string name="level">Nivel %d</string>
-  <string name="profile_withLevel">%s (Nivel %s)</string>
+  <string name="level">Nivel %1$d</string>
+  <string name="profile_withLevel">%1$s (Nivel %2$s)</string>
   <string name="images_uploaded">Imágenes subidas</string>
   <string name="image_reverts">Imágenes no revertidas</string>
   <string name="images_used_by_wiki">Imágenes utilizadas</string>
@@ -482,7 +478,7 @@
   <string name="never_ask_again">Nunca preguntar esto de nuevo</string>
   <string name="display_location_permission_title">Pedir permiso de ubicación</string>
   <string name="display_location_permission_explanation">Pida permiso de ubicación cuando sea necesario para ver la tarjeta de notificación cercana.</string>
-  <string name="achievements_fetch_failed">Algo salió mal, no pudimos obtener tus aptitudes</string>
+  <string name="achievements_fetch_failed" fuzzy="true">Algo salió mal, no pudimos obtener tus aptitudes</string>
   <string name="achievements_fetch_failed_ultimate_achievement">Has hecho tantas contribuciones que nuestro sistema de recuento de contribuciones no puede contarlas. Este es el último recuento.</string>
   <string name="ends_on">Finaliza el:</string>
   <string name="display_campaigns">Mostrar campañas</string>
@@ -510,11 +506,11 @@
   <string name="check_category_failure_message">No se puede pedir el control de categoría para %1$s</string>
   <string name="check_category_toast">Pidiendo control de categoría para %1$s</string>
   <string name="nominate_for_deletion_done">Hecho</string>
-  <string name="send_thank_success_title">Enviando agradecimiento: éxito</string>
-  <string name="send_thank_success_message">Los agradecimientos a %1$s se enviaron satisfactoriamente</string>
-  <string name="send_thank_failure_message">Falló el envío de agradecimiento a %1$s</string>
-  <string name="send_thank_failure_title">Enviando agradecimiento: falló</string>
-  <string name="send_thank_toast">Enviando agradecimiento a %1$s</string>
+  <string name="send_thank_success_title" fuzzy="true">Enviando agradecimiento: éxito</string>
+  <string name="send_thank_success_message" fuzzy="true">Los agradecimientos a %1$s se enviaron satisfactoriamente</string>
+  <string name="send_thank_failure_message" fuzzy="true">Falló el envío de agradecimiento a %1$s</string>
+  <string name="send_thank_failure_title" fuzzy="true">Enviando agradecimiento: falló</string>
+  <string name="send_thank_toast" fuzzy="true">Enviando agradecimiento a %1$s</string>
   <string name="review_copyright">¿Esto cumple con las reglas del copyright?</string>
   <string name="review_category">¿Está correctamente categorizado?</string>
   <string name="review_spam">¿Está dentro de los objetivos del proyecto?</string>
@@ -541,15 +537,14 @@
   <string name="menu_option_unread">Ver no leidas</string>
   <string name="error_occurred_in_picking_images">Ocurrió un error mientras se elegían imagenes</string>
   <string name="please_wait">Un momento…</string>
-  <string name="images_featured_explanation">Las imágenes destacadas son creaciones de talentosos fotógrafos e ilustradores que la comunidad de Wikimedia Commons ha reconocido como las de mayor calidad del sitio.</string>
   <string name="images_via_nearby_explanation">Las imágenes subidas vía Lugares Cercanos son las imágenes que han sido subidas al descubrir lugares en el mapa.</string>
   <string name="thanks_received_explanation">Esta funcionalidad permite a los editores enviar una notificación de agradecimiento a aquellos usuarios que realicen ediciones útiles mediante un pequeño enlace en la página de historial o de diferencias.</string>
-  <string name="copy_image_caption_description">Copia a medios de comunicación subsiguientes</string>
+  <string name="copy_image_caption_description" fuzzy="true">Copia a medios de comunicación subsiguientes</string>
   <string name="copied_successfully">Copiado</string>
   <string name="welcome_do_upload_content_description">Ejemplos de imágenes adecuadas para Commons</string>
   <string name="welcome_dont_upload_content_description">Ejemplos de imágenes que no deben cargarse</string>
   <string name="skip_image">Omitir esta imagen</string>
-  <string name="download_failed_we_cannot_download_the_file_without_storage_permission">La descarga falló!. No podemos descargar el archivo sin el permiso de almacenamiento externo.</string>
+  <string name="download_failed_we_cannot_download_the_file_without_storage_permission" fuzzy="true">La descarga falló!. No podemos descargar el archivo sin el permiso de almacenamiento externo.</string>
   <string name="manage_exif_tags">Gestionar etiquetas EXIF</string>
   <string name="manage_exif_tags_summary">Seleccionar qué etiquetas EXIF se mantendrán en la subida</string>
   <string name="exif_tag_name_author">Autor</string>
@@ -559,8 +554,6 @@
   <string name="exif_tag_name_lensModel">Modelo de lente</string>
   <string name="exif_tag_name_serialNumbers">Números de serie</string>
   <string name="exif_tag_name_software">Programa</string>
-  <string name="media_location_permission_denied">Acceso a la ubicación del archivo multimedia denegado</string>
-  <string name="add_location_manually">Es posible que no podamos obtener automáticamente los datos de ubicación de las imágenes que suba. Añada la ubicación adecuada a cada imagen antes de enviarla</string>
   <string name="share_text">Sube fotos a Wikimedia Commons directamente desde tu celular. Descarga la aplicación de Commons ahora: %1$s</string>
   <string name="share_via">Compartir la aplicación vía...</string>
   <string name="image_info">Información de la imagen</string>
@@ -616,7 +609,7 @@
   <string name="description_activity_title">Editar descripciones y leyendas</string>
   <string name="share_image_via">Compartir imagen via</string>
   <string name="you_have_no_achievements_yet">Todavía no has hecho ninguna contribución.</string>
-  <string name="no_achievements_yet">%s Aún no ha realizado ninguna contribución</string>
+  <string name="no_achievements_yet">%1$s Aún no ha realizado ninguna contribución</string>
   <string name="account_created">Cuenta creada</string>
   <string name="text_copy">Texto copiado en el portapapeles.</string>
   <string name="notification_mark_read">Notificación: marcar como leída</string>
@@ -625,7 +618,7 @@
   <string name="place_state_exists">Existe</string>
   <string name="place_state_needs_photo">Necesita fotografía</string>
   <string name="place_type">Tipo de lugar:</string>
-  <string name="nearby_search_hint">Puente, museo, hotel…</string>
+  <string name="nearby_search_hint" fuzzy="true">Puente, museo, hotel…</string>
   <string name="you_must_reset_your_passsword">¡Error en el inicio de sesión, debe restablecer su contraseña!</string>
   <string name="title_for_media">MULTIMEDIA</string>
   <string name="title_for_child_classes">CLASES HIJAS</string>
@@ -669,7 +662,7 @@
   <string name="wikipedia_instructions_step_5">5. Pega el wikitexto en el sitio apropiado.</string>
   <string name="wikipedia_instructions_step_6">6. Edita el wikitexto para un posicionamiento adecuado si es necesario. Paa mayor información, visita &lt;a href=\"https://en.wikipedia.org/wiki/Wikipedia:Manual_of_Style/Images#How_to_place_an_image\"&gt;here&lt;/a&gt;.</string>
   <string name="wikipedia_instructions_step_7">7. Publica el artículo</string>
-  <string name="copy_wikicode_to_clipboard">Copiar el wikicódigo al portapapeles</string>
+  <string name="copy_wikicode_to_clipboard" fuzzy="true">Copiar el wikicódigo al portapapeles</string>
   <string name="pause">pausar</string>
   <string name="resume">reanudar</string>
   <string name="paused">En pausa</string>
@@ -736,7 +729,7 @@
   <string name="back">Atrás</string>
   <string name="welcome_custom_picture_selector_text">Bienvenido al Selector de Imagen Personalizado</string>
   <string name="custom_selector_info_text1">Este selector muestra qué imágenes ya ha subido a Commons.</string>
-  <string name="custom_selector_info_text2">A diferencia de la imagen de la izquierda, la imagen de la derecha tiene el logo de Commons que indica que ha sido cargado. \nPara previsualizar la imagen toca y mantén</string>
+  <string name="custom_selector_info_text2" fuzzy="true">A diferencia de la imagen de la izquierda, la imagen de la derecha tiene el logo de Commons que indica que ha sido cargado. \nPara previsualizar la imagen toca y mantén</string>
   <string name="welcome_custom_selector_ok">Magnífico</string>
   <string name="custom_selector_already_uploaded_image_text">Esta imagen ya se ha subido a Commons.</string>
   <string name="custom_selector_over_limit_warning">Por razones técnicas, la aplicación no puede subir de manera confiable más de %1$d imágenes a la vez. El límite de subida de %1$d se ha excedido por %2$d.</string>
@@ -751,8 +744,8 @@
   <string name="need_permission">Necesita Permiso</string>
   <string name="read_phone_state_permission_message">Los mapas cercanos necesitan leer ESTADO DEL TELÉFONO para funcionar correctamente</string>
   <string name="location_permission_rationale">Permiso opcional: obtener la ubicación actual para sugerir categorías</string>
-  <string name="contributions_of_user">Contribuciones del usuario: %s</string>
-  <string name="achievements_of_user">Logros del usuario: %s</string>
+  <string name="contributions_of_user">Contribuciones del usuario: %1$s</string>
+  <string name="achievements_of_user">Logros del usuario: %1$s</string>
   <string name="menu_view_user_page">Ver perfil de usuario</string>
   <string name="edit_depictions">Editar las descripciones</string>
   <string name="edit_categories">Editar categorías</string>
@@ -763,7 +756,7 @@
   <string name="location_message">Los datos de ubicación ayudan a los editores a encontrar su imagen, haciéndola mucho más útil.\nSus archivos subidos recientemente no tienen ubicación.\nLe sugerimos que active la ubicación en la configuración de la aplicación de su cámara.\n¡Gracias por contribuir!</string>
   <string name="no_location_found_title">No se encontró ninguna ubicación</string>
   <string name="no_location_found_message">¿Qué tal agregar el lugar donde se tomó esta imagen?\nLos datos de ubicación ayudan a los editores a encontrar su imagen, haciéndola mucho más útil.\n¡Gracias!</string>
-  <string name="add_location">Añadir ubicación</string>
+  <string name="add_location" fuzzy="true">Añadir ubicación</string>
   <string name="feedback_sharing_data_alert">Elimine de este correo electrónico cualquier información con la que no se sienta a gusto compartiendo públicamente. Además, tenga en cuenta que su dirección de correo electrónico con la que está publicando, y el nombre asociado y la imagen de perfil, serán visibles públicamente.</string>
   <string name="explore_map_details">Detalles</string>
   <string name="achievements_unavailable_beta">Los logros sólo están disponibles en la versión de producción, por favor consulte la documentación del desarrollador.</string>
@@ -784,8 +777,8 @@
   <string name="unmark_as_not_for_upload">Desmarcar como no para subir</string>
   <string name="marking_as_not_for_upload">Marcar como no para subir</string>
   <string name="unmarking_as_not_for_upload">Desmarcar como no para subir</string>
-  <string name="show_already_actioned_pictures">Mostrar imágenes ya accionadas</string>
-  <string name="hiding_already_actioned_pictures">Ocultar imágenes ya accionadas</string>
+  <string name="show_already_actioned_pictures" fuzzy="true">Mostrar imágenes ya accionadas</string>
+  <string name="hiding_already_actioned_pictures" fuzzy="true">Ocultar imágenes ya accionadas</string>
   <string name="no_more_images_found">No se encontraron más imágenes</string>
   <string name="this_image_is_already_uploaded">Esta imagen ya está subida</string>
   <string name="can_not_select_this_image_for_upload">No se puede seleccionar esta imagen para subir</string>
@@ -821,15 +814,15 @@
   <string name="invalid_login_message">Su sesión ha caducado. Inicie sesión de nuevo.</string>
   <string name="no_application_available_to_open_gpx_files">No hay ninguna aplicación disponible para abrir archivos GPX</string>
   <string name="file_saved_successfully">Guardado correctamente</string>
-  <string name="do_you_want_to_open_gpx_file">¿Quieres abrir el archivo GPX?</string>
-  <string name="do_you_want_to_open_kml_file">¿Quieres abrir el archivo KML?</string>
-  <string name="failed_to_save_kml_file">No se pudo guardar el archivo KML.</string>
-  <string name="failed_to_save_gpx_file">No se pudo guardar el archivo GPX.</string>
-  <string name="saving_kml_file">Guardar el archivo KML</string>
-  <string name="saving_gpx_file">Guardar archivo GPX</string>
+  <string name="do_you_want_to_open_gpx_file" fuzzy="true">¿Quieres abrir el archivo GPX?</string>
+  <string name="do_you_want_to_open_kml_file" fuzzy="true">¿Quieres abrir el archivo KML?</string>
+  <string name="failed_to_save_kml_file" fuzzy="true">No se pudo guardar el archivo KML.</string>
+  <string name="failed_to_save_gpx_file" fuzzy="true">No se pudo guardar el archivo GPX.</string>
+  <string name="saving_kml_file" fuzzy="true">Guardar el archivo KML</string>
+  <string name="saving_gpx_file" fuzzy="true">Guardar archivo GPX</string>
   <plurals name="custom_picker_images_selected_title_appendix">
-    <item quantity="one">%d imagen seleccionada</item>
-    <item quantity="other">%d imagenes seleccionadas</item>
+    <item quantity="one">%1$d imagen seleccionada</item>
+    <item quantity="other">%1$d imagenes seleccionadas</item>
   </plurals>
   <string name="multiple_files_depiction">Recuerde que todas las imágenes en una carga múltiple tienen la misma categoría y representación. Si las imágenes no comparten representación y categoría, haga varias cargas por separado.</string>
   <string name="multiple_files_depiction_header">Nota sobre cargas múltiples</string>
@@ -865,11 +858,10 @@
   <string name="usages_on_commons_heading">Commons</string>
   <string name="usages_on_other_wikis_heading">Otras wikis</string>
   <string name="file_usages_container_heading">Usos de archivos</string>
-  <string name="title_activity_single_web_view">Actividad de vista web única</string>
   <string name="account">Cuenta</string>
   <string name="vanish_account">Desaparecer cuenta</string>
   <string name="account_vanish_request_confirm_title">Advertencia sobre la desaparición de la cuenta</string>
-  <string name="account_vanish_request_confirm">La desaparición de una cuenta en Wikimedia Commons es un &lt;b&gt;último recurso&lt;/b&gt; y &lt;b&gt;solo debe usarse cuando desee dejar de editar para siempre y también para ocultar la mayor cantidad posible de sus asociaciones pasadas.&lt;br/&gt;&lt;br/&gt;La desaparición de una cuenta en Wikimedia Commons se realiza cambiando el nombre de la cuenta para que otros no puedan reconocer sus contribuciones en un proceso llamado desaparición de la cuenta. &lt;b&gt;La desaparición de la cuenta no garantiza el anonimato completo ni elimina las contribuciones a los proyectos&lt;/b&gt;.</string>
+  <string name="account_vanish_request_confirm">La desaparición de una cuenta en Wikimedia Commons es un &lt;b&gt;último recurso&lt;/b&gt; y solo debe usarse cuando desee dejar de editar para siempre y también para ocultar la mayor cantidad posible de sus asociaciones pasadas.&lt;br/&gt;&lt;br/&gt;La desaparición de una cuenta en Wikimedia Commons se realiza cambiando el nombre de la cuenta para que otros no puedan reconocer sus contribuciones en un proceso llamado desaparición de la cuenta. &lt;b&gt;La desaparición de la cuenta no garantiza el anonimato completo ni elimina las contribuciones a los proyectos&lt;/b&gt;.</string>
   <string name="caption">Leyenda</string>
   <string name="caption_copied_to_clipboard">Leyenda copiado al portapapeles</string>
   <string name="congratulations_all_pictures_in_this_album_have_been_either_uploaded_or_marked_as_not_for_upload">Felicitaciones, todas las imágenes de este álbum han sido cargadas o marcadas como no para cargar.</string>

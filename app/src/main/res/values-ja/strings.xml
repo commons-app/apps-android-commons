@@ -30,7 +30,7 @@
 -->
 <resources>
   <string name="commons_facebook">コモンズのフェイスブックページ</string>
-  <string name="commons_github">コモンズのGithubソースコード</string>
+  <string name="commons_github">コモンズのGitHubソースコード</string>
   <string name="commons_logo">コモンズのロゴ</string>
   <string name="commons_website">コモンズのウェブサイト</string>
   <string name="submit">送信</string>
@@ -45,16 +45,12 @@
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="other">%1$d 件のファイルをアップロード中</item>
   </plurals>
-  <plurals name="contributions_subtitle">
-    <item quantity="one">(%1$d)</item>
-    <item quantity="other">(%1$d)</item>
-  </plurals>
   <string name="starting_uploads">アップロードを開始中です</string>
   <plurals name="starting_multiple_uploads">
-    <item quantity="other">%d 件をアップロード中</item>
+    <item quantity="other">%1$d 件をアップロード中</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="other">%d 件のアップロード</item>
+    <item quantity="other">%1$d 件のアップロード</item>
   </plurals>
   <plurals name="share_license_summary">
     <item quantity="one">この画像は%1$sライセンスのもとにアップロードされます</item>
@@ -96,7 +92,7 @@
   <string name="uploading_queued">アップロードは待機中です（限定接続モードが有効）</string>
   <string name="upload_completed_notification_title">%1$s をアップロードしました!</string>
   <string name="upload_completed_notification_text">アップロードしたものを表示するにはタップしてください</string>
-  <string name="upload_progress_notification_title_start">%s のアップロードを開始中</string>
+  <string name="upload_progress_notification_title_start">%1$s のアップロードを開始中</string>
   <string name="upload_progress_notification_title_in_progress">%1$s をアップロード中</string>
   <string name="upload_progress_notification_title_finishing">%1$s のアップロードを完了中</string>
   <string name="upload_failed_notification_title">%1$s のアップロードに失敗しました</string>
@@ -146,6 +142,7 @@
   <string name="title_activity_settings">設定</string>
   <string name="title_activity_signup">利用者登録</string>
   <string name="title_activity_featured_images">秀逸な画像</string>
+  <string name="images_featured_explanation" fuzzy="true">秀逸な画像とは、技術力の高い写真家や作画家による作品で、ウィキメディアコモンズのコミュニティから最高の品質を誇るものとして選出されています。</string>
   <string name="title_activity_category_details">カテゴリ</string>
   <string name="title_activity_review">査読</string>
   <string name="menu_about">このアプリについて</string>
@@ -232,15 +229,14 @@
   <string name="_2fa_code">2FAコード</string>
   <string name="email_auth_code">メール認証コード</string>
   <string name="logout_verification">ログアウトしてもよろしいですか？</string>
-  <string name="mediaimage_failed">メディアイメージが失敗しました</string>
   <string name="no_subcategory_found">下位カテゴリは見つかりませんでした</string>
   <string name="no_parentcategory_found">上位カテゴリは見つかりませんでした</string>
   <string name="welcome_image_mount_zao">蔵王連峰</string>
   <string name="welcome_image_llamas">リャマ</string>
   <string name="welcome_image_rainbow_bridge">レインボーブリッジ</string>
   <string name="welcome_image_tulip">チューリップ</string>
-  <string name="welcome_image_welcome_wikipedia">ウィキペディアへようこそ</string>
-  <string name="welcome_image_welcome_copyright">著作権について</string>
+  <string name="welcome_image_welcome_wikipedia" fuzzy="true">ウィキペディアへようこそ</string>
+  <string name="welcome_image_welcome_copyright" fuzzy="true">著作権について</string>
   <string name="welcome_image_sydney_opera_house">シドニーオペラハウス</string>
   <string name="cancel">キャンセル</string>
   <string name="navigation_drawer_open">開く</string>
@@ -342,6 +338,7 @@
   <string name="quiz">クイズ</string>
   <string name="quiz_question_string">本当にアップロードしますか？</string>
   <string name="question">質問</string>
+  <string name="quiz_i_am_not_sure">わからない</string>
   <string name="result">結果</string>
   <string name="quiz_back_button">削除対象の画像を投稿し続けた場合、あなたのアカウントはブロックされます。クイズの終了に同意しますか？</string>
   <string name="quiz_alert_message">あなたがアップロードした画像のうち、最低%1$s件がその後、削除されました。もし今後も削除が必要な画像のアップロードを続けるなら、あなたのアカウントは禁止される可能性があります。\n\nどんな画像をアップロードしてよいか禁止されているか覚えるため、もう一度チュートリアルを閲覧してクイズを受けますか？</string>
@@ -351,6 +348,7 @@
   <string name="blurry_image_answer">コモンズが目指すもののひとつに、質の高い画像の収集があります。そのためピンぼけ画像はアップロードしてはいけません。明るさに注意して画質の良い写真の撮影を心がけましょう。</string>
   <string name="construction_event_answer">コモンズでは技術や文化を表す画像をいつでも募集中です。</string>
   <string name="congratulatory_message_quiz">正解は %1$s でした。おめでとうございます！</string>
+  <string name="quiz_continue">続行</string>
   <string name="warning_for_no_answer">回答するには2件のどちらかを選択</string>
   <string name="user_not_logged_in">ログインが期限切れになりました。もう一度ログインしてください。</string>
   <string name="quiz_result_share_message">友だちとクイズを共有！</string>
@@ -374,16 +372,15 @@
   <string name="Achievements">貢献</string>
   <string name="Profile">プロフィール</string>
   <string name="badges">バッジ</string>
-  <string name="statistics">統計</string>
   <string name="statistics_thanks">受け取った感謝</string>
   <string name="statistics_featured">秀逸な画像</string>
   <string name="statistics_wikidata_edits">「近くの場所」機能でアップロードした画像</string>
-  <string name="level">レベル %d</string>
-  <string name="profile_withLevel">%s (レベル %s)</string>
+  <string name="level">レベル %1$d</string>
+  <string name="profile_withLevel">%1$s (レベル %2$s)</string>
   <string name="images_uploaded">アップロードした画像</string>
   <string name="image_reverts">却下されなかった画像</string>
   <string name="images_used_by_wiki">使用された画像</string>
-  <string name="achievements_share_message">成果を友だちとシェアしましょう！</string>
+  <string name="achievements_share_message">貢献を友だちと共有しましょう！</string>
   <string name="achievements_info_message">これらの条件を満たすとレベルがアップします。「統計」欄の項目はレベル計算とは無関係です。</string>
   <string name="achievements_revert_limit_message">最低条件：</string>
   <string name="images_uploaded_explanation">コモンズへの投稿画像数。アップロードに使用したアプリは問いません</string>
@@ -460,8 +457,8 @@
   <string name="check_category_failure_message">%1$sのカテゴリ確認を申請できませんでした</string>
   <string name="check_category_toast"> %1$sのカテゴリ確認を申請中です</string>
   <string name="nominate_for_deletion_done">完了</string>
-  <string name="send_thank_success_title">感謝の送信：完了</string>
-  <string name="send_thank_success_message">%1$sさんに感謝の送信が完了しました</string>
+  <string name="send_thank_success_title">感謝の送信：成功</string>
+  <string name="send_thank_success_message">%1$sさんに感謝を送信しました</string>
   <string name="send_thank_failure_message">%1$sさんへ感謝を送信できませんでした</string>
   <string name="send_thank_failure_title">感謝の送信：失敗</string>
   <string name="send_thank_toast">%1$sさんに感謝を送信中</string>
@@ -491,15 +488,14 @@
   <string name="menu_option_unread">未読を見る</string>
   <string name="error_occurred_in_picking_images">画像の選択中にエラーが発生しました</string>
   <string name="please_wait">お待ちください…</string>
-  <string name="images_featured_explanation">秀逸な画像とは、技術力の高い写真家や作画家による作品で、ウィキメディアコモンズのコミュニティから最高の品質を誇るものとして選出されています。</string>
   <string name="images_via_nearby_explanation">「近くの場所でアップロードした画像」とは、地図上で検索した結果に基づいてアップロードした画像のことです。</string>
   <string name="thanks_received_explanation">この機能は、変更履歴や差分のページに表示される小さな感謝リンクで、有用な編集を行った利用者に感謝を伝えられるようにします。</string>
-  <string name="copy_image_caption_description">次のメディアにコピー</string>
+  <string name="copy_image_caption_description">次の項目にコピー</string>
   <string name="copied_successfully">コピーしました</string>
   <string name="welcome_do_upload_content_description">コモンズへの投稿画像の良い例</string>
   <string name="welcome_dont_upload_content_description">投稿に適さない画像のサンプル</string>
   <string name="skip_image">この画像をスキップ</string>
-  <string name="download_failed_we_cannot_download_the_file_without_storage_permission">ダウンロードに失敗しました！ 外部ストレージの許可がないため、ファイルをダウンロードできませんでした</string>
+  <string name="download_failed_we_cannot_download_the_file_without_storage_permission">ダウンロードに失敗しました。外部ストレージの許可がないため、ファイルをダウンロードできませんでした</string>
   <string name="manage_exif_tags">EXIF タグの管理</string>
   <string name="manage_exif_tags_summary">アップロードに添付するEXIFタグを選択</string>
   <string name="exif_tag_name_author">作者</string>
@@ -512,6 +508,7 @@
   <string name="share_text">スマホから直接、ウィキメディア・コモンズに画像を投稿する。\nコモンズアプリを今すぐダウンロード：%1$s</string>
   <string name="share_via">アプリの共有に使うのは…</string>
   <string name="image_info">画像情報</string>
+  <string name="upload_categories_dont_show_this_message_again">今後このメッセージを表示しない</string>
   <string name="no_categories_found">カテゴリが見つかりません</string>
   <string name="no_depiction_found">描写が見つかりません</string>
   <string name="upload_cancelled">アップロードを中止しました</string>
@@ -561,7 +558,7 @@
   <string name="description_activity_title">説明とキャプションを編集する</string>
   <string name="share_image_via">画像をシェア</string>
   <string name="you_have_no_achievements_yet">あなたはまだ投稿をしたことがありません</string>
-  <string name="no_achievements_yet">%sはまだ投稿をしたことがありません</string>
+  <string name="no_achievements_yet">%1$sはまだ投稿をしたことがありません</string>
   <string name="account_created">アカウントを作成しました</string>
   <string name="text_copy">テキストをクリップボードにコピー済み</string>
   <string name="notification_mark_read">通知を既読にしました</string>
@@ -570,7 +567,7 @@
   <string name="place_state_exists">存在する</string>
   <string name="place_state_needs_photo">写真がない</string>
   <string name="place_type">場所のタイプ：</string>
-  <string name="nearby_search_hint">橋・博物館・ホテルなど</string>
+  <string name="nearby_search_hint">橋、博物館、ホテル、など。</string>
   <string name="you_must_reset_your_passsword">ログインがうまくいきませんでした。パスワードをリセットする必要があります!</string>
   <string name="title_for_media">メディア</string>
   <string name="title_for_child_classes">子分類</string>
@@ -610,7 +607,7 @@
   <string name="wikipedia_instructions_step_5">5. 先ほどのウィキ文を適切な位置にペーストします。</string>
   <string name="wikipedia_instructions_step_6">6. もしその位置に合わせる必要がある場合には、ウィキ文を編集します。詳細は&lt;a href=\"https://ja.wikipedia.org/wiki/Help:画像の表示#一番簡単な方法\"&gt;こちら&lt;/a&gt;をご参照ください。</string>
   <string name="wikipedia_instructions_step_7">7. 記事を保存して公開</string>
-  <string name="copy_wikicode_to_clipboard">ウィキコードをクリップボードにコピー</string>
+  <string name="copy_wikicode_to_clipboard">ウィキテキストをクリップボードにコピー</string>
   <string name="pause">一時停止</string>
   <string name="resume">継続</string>
   <string name="paused">一時停止</string>
@@ -651,6 +648,8 @@
   <string name="categories_tooltip">適合するカテゴリを選びます。描写と異なり、カテゴリは英語のみです。</string>
   <string name="license_tooltip">コモンズに置くと、皆さんの画像はだれでも再利用できます。著作権ほか、すべての権利は適用されませんが、同意しますか？ 作者として名前を表示してほしいですか？ 改変された場合も、同じライセンス条件を継承してほしいですか？</string>
   <string name="depicts_step_title">描写</string>
+  <string name="depicts_label">ラベル</string>
+  <string name="depicts_description">説明</string>
   <string name="license_step_title">メディアのライセンス</string>
   <string name="media_detail_step_title">メディアの詳細</string>
   <string name="menu_view_category_page">カテゴリのページを表示</string>
@@ -682,8 +681,8 @@
   <string name="need_permission">権限が必要です</string>
   <string name="location_off_dialog_text">近くの場所を表示するには、位置サービスをオンにしてください。</string>
   <string name="location_permission_rationale">マップ上に近くの場所を表示するには位置アクセス権限が必要です。</string>
-  <string name="contributions_of_user">利用者の投稿: %s</string>
-  <string name="achievements_of_user">利用者の実績: %s</string>
+  <string name="contributions_of_user">利用者の投稿: %1$s</string>
+  <string name="achievements_of_user">利用者の貢献: %1$s</string>
   <string name="menu_view_user_page">利用者プロフィールを表示</string>
   <string name="edit_depictions">題材を編集する</string>
   <string name="edit_categories">カテゴリを編集</string>
@@ -708,8 +707,8 @@
   <string name="unmark_as_not_for_upload">アップロードしないとしてマーク解除</string>
   <string name="marking_as_not_for_upload">アップロードしないとしてマーク中</string>
   <string name="unmarking_as_not_for_upload">アップロードしないとしてマーク解除中</string>
-  <string name="show_already_actioned_pictures">操作済みの画像を表示</string>
-  <string name="hiding_already_actioned_pictures">操作済みの画像を非表示</string>
+  <string name="show_already_actioned_pictures">処理済みの画像を表示</string>
+  <string name="hiding_already_actioned_pictures">処理済みの画像を非表示</string>
   <string name="no_more_images_found">これ以上画像が見つかりません</string>
   <string name="this_image_is_already_uploaded">この画像は既にアップロードされています</string>
   <string name="can_not_select_this_image_for_upload">この画像をアップロード用に選択できません</string>
@@ -729,7 +728,7 @@
   <string name="permissions_are_required_for_functionality">この機能には権限が必要です</string>
   <string name="learn_how_to_write_a_useful_description">有用な説明の書き方を学ぶ</string>
   <string name="learn_how_to_write_a_useful_caption">有用なキャプションの書き方を学ぶ</string>
-  <string name="see_your_achievements">自分の実績を表示</string>
+  <string name="see_your_achievements">自分の貢献を表示</string>
   <string name="edit_image">画像の編集</string>
   <string name="edit_location">位置を編集</string>
   <string name="location_updated">位置を更新しました！</string>
@@ -746,10 +745,10 @@
   <string name="do_you_want_to_open_kml_file">KMLファイルを開きますか？</string>
   <string name="failed_to_save_kml_file">KMLファイルの保存に失敗しました。</string>
   <string name="failed_to_save_gpx_file">GPXファイルの保存に失敗しました。</string>
-  <string name="saving_kml_file">KMLファイルを保存中</string>
-  <string name="saving_gpx_file">GPXファイルを保存中</string>
+  <string name="saving_kml_file">KMLファイルとして保存中...</string>
+  <string name="saving_gpx_file">GPXファイルとして保存中...</string>
   <plurals name="custom_picker_images_selected_title_appendix">
-    <item quantity="other">%d件の画像が選択されました</item>
+    <item quantity="other">%1$d件の画像が選択されました</item>
   </plurals>
   <string name="multiple_files_depiction">複数アップロードではすべての画像が同一のカテゴリおよび題材となります。画像が題材およびカテゴリを共有していない場合、個別のアップロードを複数実施してください。</string>
   <string name="multiple_files_depiction_header">複数アップロードに関する注記</string>

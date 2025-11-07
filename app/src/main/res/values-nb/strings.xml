@@ -31,6 +31,7 @@
   <string name="show_captions_description">Beskrivelse</string>
   <string name="nearby_row_image">Bilde</string>
   <string name="nearby_all">Alle</string>
+  <string name="nearby_filter_toggle">Veksle opp</string>
   <string name="nearby_filter_search">Søkevisning</string>
   <string name="nearby_filter_state">Stedstilstand</string>
   <string name="appwidget_img">Dagens bilde</string>
@@ -38,18 +39,14 @@
     <item quantity="one">%1$d fil lastes opp</item>
     <item quantity="other">%1$d filer lastes opp</item>
   </plurals>
-  <plurals name="contributions_subtitle">
-    <item quantity="one">(%1$d)</item>
-    <item quantity="other">(%1$d)</item>
-  </plurals>
   <string name="starting_uploads">Starter opplastinger</string>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">Behandler %d opplasting</item>
-    <item quantity="other">Behandler %d opplastinger</item>
+    <item quantity="one">Behandler %1$d opplasting</item>
+    <item quantity="other">Behandler %1$d opplastinger</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">%d opplasting</item>
-    <item quantity="other">%d opplastinger</item>
+    <item quantity="one">%1$d opplasting</item>
+    <item quantity="other">%1$d opplastinger</item>
   </plurals>
   <plurals name="share_license_summary">
     <item quantity="one">Dette bildet vil bli lisensiert under %1$s</item>
@@ -82,17 +79,18 @@
   <string name="logging_in_message">Vennligst vent…</string>
   <string name="updating_caption_title">Oppdaterer bildetekster og beskrivelser</string>
   <string name="updating_caption_message">Vent …</string>
-  <string name="login_success" fuzzy="true">Innloggingen var vellykket!</string>
-  <string name="login_failed" fuzzy="true">Innloggingen feilet!</string>
+  <string name="login_success">Innloggingen var vellykket!</string>
+  <string name="login_failed">Innloggingen feilet!</string>
   <string name="upload_failed">Filen ble ikke funnet. Forsøk med en annen fil.</string>
   <string name="retry_limit_reached">Maksimalt antall forsøk nådd! Avbryt opplastingen og prøv på nytt</string>
   <string name="unrestricted_battery_mode">Deaktiver batterioptimalisering?</string>
-  <string name="authentication_failed" fuzzy="true">Autentiseringen feilet, vennligst logg inn igjen</string>
+  <string name="suggest_unrestricted_mode">Opplasting av flere enn tre bilder er mer pålitelig når batterioptimalisering er skrudd av. Deaktiver batterioptimalisering for Common-appen fra innstillingene for en bedre opplastingsopplevelse.\n\nMulige steg for å skru av batterioptimalisering:\n\nSteg 1: Trykk på «Innstillinger»-knappen nedenfor.\n\nSteg 2: Bytt fra «Ikke optimalisert» til «Alle apper».\n\nSteg 3: Søk etter «Commons» eller «fr.free.nrw.commons».\n\nSteg 4: Trykk på treffet og velg «Ikke optimaliser».\n\nSteg 5: Trykk «Ferdig».</string>
+  <string name="authentication_failed">Autentiseringen feilet. Logg inn på nytt.</string>
   <string name="uploading_started">Opplastingen startet</string>
   <string name="uploading_queued">Køede opplastinger (begrenset tilkoblingsmodus aktivert)</string>
   <string name="upload_completed_notification_title">%1$s lastet opp!</string>
   <string name="upload_completed_notification_text">Trykk for å vise din opplasting</string>
-  <string name="upload_progress_notification_title_start">Laster opp fil: %s</string>
+  <string name="upload_progress_notification_title_start">Laster opp fil: %1$s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s lastet opp</string>
   <string name="upload_progress_notification_title_finishing">Avslutter opplasting av %1$s</string>
   <string name="upload_failed_notification_title">Kunne ikke laste opp %1$s</string>
@@ -108,17 +106,20 @@
   <string name="menu_from_camera">Knips foto</string>
   <string name="menu_nearby">I nærheten</string>
   <string name="provider_contributions">Mine opplastinger</string>
+  <string name="menu_copy_link">Kopier lenke</string>
+  <string name="menu_link_copied">Lenken er kopiert til utklippstavlen</string>
   <string name="menu_share">Del</string>
   <string name="menu_view_file_page">Vis filside</string>
   <string name="share_title_hint">Bildetekst (påkrevd)</string>
   <string name="add_caption_toast">Angi en bildetekst for denne fila</string>
   <string name="share_description_hint">Beskrivelse</string>
   <string name="share_caption_hint">Bildetekst</string>
-  <string name="login_failed_network" fuzzy="true">Innlogging feilet - nettverksproblem</string>
+  <string name="login_failed_network">Innlogging feilet – nettverksproblem</string>
   <string name="login_failed_throttled">For mange misslykkede forsøk. Vennligst prøv igjen om noen få minutter.</string>
   <string name="login_failed_blocked">Beklager, denne brukeren har blitt blokkert på Commons</string>
   <string name="login_failed_2fa_needed">Du må oppgi koden din for tofaktorautentisering.</string>
-  <string name="login_failed_generic" fuzzy="true">Innlogging feilet</string>
+  <string name="login_failed_email_auth_needed">En bekreftelseskode for innlogging er sent til e-postadressen din. Oppgi koden for å logge inn.</string>
+  <string name="login_failed_generic">Innlogging feilet</string>
   <string name="share_upload_button">Last opp</string>
   <string name="multiple_share_base_title">Navngi dette settet</string>
   <string name="provider_modifications">Endringer</string>
@@ -126,6 +127,7 @@
   <string name="categories_search_text_hint">Søk kategorier</string>
   <string name="depicts_search_text_hint">Søk etter elementer din mediefil skildrer (fjell, Nidarosdomen, etc.)</string>
   <string name="menu_save_categories">Lagre</string>
+  <string name="menu_overflow_desc">Overløpsmeny</string>
   <string name="refresh_button">Oppdater</string>
   <string name="display_list_button">Liste</string>
   <string name="contributions_subtitle_zero">(Ingen opplastinger ennå)</string>
@@ -138,6 +140,7 @@
   <string name="title_activity_settings">Innstillinger</string>
   <string name="title_activity_signup">Registrer deg</string>
   <string name="title_activity_featured_images">Utvalgte bilder</string>
+  <string name="images_featured_explanation">Fremhevede bilder er bidrag fra dyktige fotografer og illustratører som fellesskapet på Wikimedia Commons har utpekt som blant de bildene med høyest kvalitet på nettstedet.</string>
   <string name="title_activity_custom_selector">Egendefinert velger</string>
   <string name="title_activity_category_details">Kategori</string>
   <string name="title_activity_review">Gjennomgang</string>
@@ -154,15 +157,18 @@
   <string name="no_uploads_yet">Du har ikke lastet opp nøn bilder ennå.</string>
   <string name="menu_retry_upload">Prøv igjen</string>
   <string name="menu_cancel_upload">Avbryt</string>
+  <string name="language_search_type_language_name">Skriv inn språk</string>
+  <string name="language_search_recent_searches">Nylige søk</string>
+  <string name="language_search_all_languages">Alle språk</string>
   <string name="media_upload_policy">Ved å laste opp dette bildet erklærer jeg at dette er mitt eget verk, og at det ikke inneholder opphavsrettsbeskyttet materiale eller selvportretter, og ellers er i samsvar med &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Wikimedia Commons\' retningslinjer&lt;/a&gt;.</string>
   <string name="menu_download">Last ned</string>
   <string name="preference_license">Standardlisens</string>
   <string name="use_previous">Bruk forrige tittel og beskrivelse</string>
   <string name="preference_theme">Tema</string>
-  <string name="license_name_cc_by_sa_four" fuzzy="true">Navngivelse-Del på samme vilkår 4.0</string>
-  <string name="license_name_cc_by_four" fuzzy="true">Navngivelse 4.0</string>
-  <string name="license_name_cc_by_sa" fuzzy="true"> Navngivelse-Del på samme vilkår 3.0</string>
-  <string name="license_name_cc_by" fuzzy="true">Navngivelse 3.0</string>
+  <string name="license_name_cc_by_sa_four">Navngivelse-Del på samme vilkår 4.0</string>
+  <string name="license_name_cc_by_four">Navngivelse 4.0</string>
+  <string name="license_name_cc_by_sa">Navngivelse-Del på samme vilkår 3.0</string>
+  <string name="license_name_cc_by">Navngivelse 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
@@ -215,6 +221,7 @@
   <string name="media_detail_description">Beskrivelse</string>
   <string name="media_detail_discussion">Diskusjon</string>
   <string name="media_detail_author">Opphavsperson</string>
+  <string name="media_detail_uploader">Opplaster</string>
   <string name="media_detail_uploaded_date">Opplastingsdato</string>
   <string name="media_detail_license">Lisens</string>
   <string name="media_detail_coordinates">Koordinater</string>
@@ -222,16 +229,16 @@
   <string name="become_a_tester_title">Bli betatester</string>
   <string name="become_a_tester_description">Registrer deg på vår betakanal på Google Play og få tidlig tilgang til nye funksjoner og feilrettinger</string>
   <string name="_2fa_code">2FA-kode</string>
+  <string name="email_auth_code">Bekreftelseskode på e-post</string>
   <string name="logout_verification">Ønsker du virkelig å logge ut?</string>
-  <string name="mediaimage_failed">Mediebilde feilet</string>
   <string name="no_subcategory_found">Ingen underkategorier funnet</string>
   <string name="no_parentcategory_found">Ingen overordnede kategorier funnet</string>
   <string name="welcome_image_mount_zao">Zao</string>
   <string name="welcome_image_llamas">Lamaer</string>
   <string name="welcome_image_rainbow_bridge">Regnbuebrua</string>
   <string name="welcome_image_tulip">Tulipan</string>
-  <string name="welcome_image_welcome_wikipedia">Velkommen til Wikipedia</string>
-  <string name="welcome_image_welcome_copyright">Velkommen opphavsrett</string>
+  <string name="welcome_image_welcome_wikipedia">Et skjematisk bilde av en artikkel på Wikipedia.</string>
+  <string name="welcome_image_welcome_copyright">En tegning av en bunke med ark med opphavsrettssymboler krysset ut.</string>
   <string name="welcome_image_sydney_opera_house">Operahuset i Sydney</string>
   <string name="cancel">Avbryt</string>
   <string name="navigation_drawer_open">Åpne</string>
@@ -242,6 +249,7 @@
   <string name="navigation_item_about">Om</string>
   <string name="navigation_item_settings">Innstillinger</string>
   <string name="navigation_item_feedback">Tilbakemeldinger</string>
+  <string name="navigation_item_feedback_github">Tilbakemelding gjennom GitHub</string>
   <string name="navigation_item_logout">Logg ut</string>
   <string name="navigation_item_info">Veiviser</string>
   <string name="navigation_item_notification">Varsler</string>
@@ -263,6 +271,7 @@
   <string name="upload_connection_error_alert_detail">Opplastingsprosessen krever aktiv internettilgang. Sjekk nettverkstilkoblingen din.</string>
   <string name="upload_problem_image">Problemer funnet i bildet</string>
   <string name="internet_downloaded">Last kun opp bilder du har tatt selv. Ikke last opp bilder du har lastet ned fra internett.</string>
+  <string name="preferences_uploads">Opplastinger</string>
   <string name="use_external_storage">Lagre bilder tatt i appen</string>
   <string name="use_external_storage_summary">Lagre bilder som er tatt med kameraet i appen til din enhets lagringsplass</string>
   <string name="login_to_your_account">Logg inn med kontoen din</string>
@@ -275,14 +284,16 @@
   <string name="nominated_see_more">Se nettsiden for detaljer</string>
   <string name="skip_login">Hopp over</string>
   <string name="navigation_item_login">Logg inn</string>
-  <string name="skip_login_title" fuzzy="true">Vil du hoppe over logg inn?</string>
-  <string name="skip_login_message" fuzzy="true">Du må logge inn for å laste opp bilder i fremtiden.</string>
+  <string name="skip_login_title">Vil du hoppe over innloggingen?</string>
+  <string name="skip_login_message">Du må logge inn for å laste opp bilder i fremtiden.</string>
   <string name="login_alert_message">Logg vennligst inn for å bruke denne funksjonen</string>
   <string name="copy_wikicode">Kopier wikiteksten til utklippstavlen</string>
   <string name="wikicode_copied">Wikiteksten har blitt kopiert til utklippstavlen</string>
   <string name="nearby_location_not_available">Det kan hende «I nærheten» ikke fungerer riktig, sted ikke tilgjengelig.</string>
+  <string name="nearby_showing_pins_offline">Internett er ikke tilgjengelig. Viser kun mellomlagrede steder.</string>
   <string name="upload_location_access_denied">Posisjonstilgang nektet. Angi posisjonen din manuelt for å bruke denne funksjonen.</string>
   <string name="location_permission_rationale_nearby">Tillatelse kreves for å vise listen over steder i nærheten</string>
+  <string name="location_permission_rationale_explore">Tillatelse kreves for å vise listen over bilder i nærheten</string>
   <string name="nearby_directions">Veibeskrivelse</string>
   <string name="nearby_wikidata">Wikidata</string>
   <string name="nearby_wikipedia">Wikipedia</string>
@@ -332,6 +343,7 @@
   <string name="quiz">Kviss</string>
   <string name="quiz_question_string">Kan dette bildet lastes opp?</string>
   <string name="question">Spørsmål</string>
+  <string name="quiz_i_am_not_sure">Jeg er usikker</string>
   <string name="result">Resultat</string>
   <string name="quiz_back_button">Om du fortsetter å laste opp bilder som må slettes vil kontoen din trolig bli blokkert. Er du sikker på at du vil avslutte kvissen?</string>
   <string name="quiz_alert_message">Mer enn %1$s av bildene du har lastet opp har blitt slettet. Om du fortsetter å laste opp bilder som må slettes vil kntoen din sannsynligvis bli blokkert.\n\nØnsker du å sjekke veiviseren igjen og ta en kviss som kan lære deg hva slags bilder som bør eller ikke bør lastes opp?</string>
@@ -341,8 +353,9 @@
   <string name="blurry_image_answer">Et av målene til Commons er å samle kvalitetsbilder. Uskarpe bilder bør derfor ikke lastes opp. Prøv alltid å ta fine bilder med god lyssetting.</string>
   <string name="construction_event_answer">Bilder som viser teknologi eller kultur er veldig velkomne på Commons.</string>
   <string name="congratulatory_message_quiz">Du svarte rett på %1$s av spørsmålene. Gratulerer!</string>
+  <string name="quiz_continue">Fortsett</string>
   <string name="warning_for_no_answer">Velg ett av de to alternativene for å besvare spørsmålet</string>
-  <string name="user_not_logged_in" fuzzy="true">Innloggingsøkten har utløpt, logg inn på nytt.</string>
+  <string name="user_not_logged_in">Innloggingsøkten har utløpt. Logg inn på nytt.</string>
   <string name="quiz_result_share_message">Del kvissen din med vennene dine!</string>
   <string name="continue_message">Fortsett</string>
   <string name="correct">Riktig svar</string>
@@ -350,7 +363,8 @@
   <string name="quiz_screenshot_question">Kan dette skjermbildet lastes opp?</string>
   <string name="share_app_title">Del appen</string>
   <string name="rotate">Roter</string>
-  <string name="error_fetching_nearby_places" fuzzy="true">Feil under henting av steder i nærheten.</string>
+  <string name="error_fetching_nearby_places">Kunne ikke laste inn steder i nærheten.</string>
+  <string name="no_pictures_in_this_area">Ingen bilder i dette området</string>
   <string name="no_nearby_places_around">Ingen steder funnet i nærheten</string>
   <string name="error_fetching_nearby_monuments">Feil under henting av kulturminner i nærheten.</string>
   <string name="no_recent_searches">Ingen nylige søk</string>
@@ -362,11 +376,12 @@
   <string name="delete">Slett</string>
   <string name="Achievements">Prestasjoner</string>
   <string name="Profile">Profil</string>
-  <string name="statistics">Statistikk</string>
+  <string name="badges">Merker</string>
   <string name="statistics_thanks">Takk mottatt</string>
   <string name="statistics_featured">Utvalgte bilder</string>
   <string name="statistics_wikidata_edits">Bilder via «steder i nærheten»</string>
-  <string name="level" fuzzy="true">Nivå</string>
+  <string name="level">Nivå %1$d</string>
+  <string name="profile_withLevel">%1$s (Nivå %2$s)</string>
   <string name="images_uploaded">Opplastede bilder</string>
   <string name="image_reverts">Bilder som ikke har blitt tilbakestilt</string>
   <string name="images_used_by_wiki">Bilder brukt</string>
@@ -398,6 +413,7 @@
   <string name="map_application_missing">Ingen kompatibel kartapplikasjon funnet på enheten din. Installer en kartapplikasjon for å bruke denne funksjonen.</string>
   <string name="title_page_bookmarks_pictures">Bilder</string>
   <string name="title_page_bookmarks_locations">Steder</string>
+  <string name="title_page_bookmarks_categories">Kategorier</string>
   <string name="menu_bookmark">Legg til i/fjern fra bokmerker</string>
   <string name="provider_bookmarks">Bokmerker</string>
   <string name="bookmark_empty">Du har ikke lagt til noen bokmerker</string>
@@ -408,7 +424,7 @@
   <string name="deletion_reason_bad_for_my_privacy">Jeg innså at det er dårlig for mitt personvern</string>
   <string name="deletion_reason_no_longer_want_public">Jeg ombestemte meg, jeg ønsker ikke at det skal være offentlig synlig lenger</string>
   <string name="deletion_reason_not_interesting">Beklager, dette bildet har ingen ensyklopedisk interesse</string>
-  <string name="uploaded_by_myself" fuzzy="true">Lastet opp av meg selv %1$s, brukt i %2$d artikkel/artikler.</string>
+  <string name="uploaded_by_myself">Lastet opp av meg %1$s, brukt i minst %2$d artikkel/artikler.</string>
   <string name="no_uploads">Velkommen til Commons!\n\nLast opp din første mediefil ved å trykke på legg til-knappen.</string>
   <string name="no_categories_selected">Ingen kategorier valgt</string>
   <string name="no_categories_selected_warning_desc">Bilder uten kategorier er sjelden nyttige. Er du sikker på at du vil fortsette uten å velge kategorier?</string>
@@ -424,11 +440,13 @@
   <string name="never_ask_again">Ikke spør meg igjen</string>
   <string name="display_location_permission_title">Be om plasseringstillatelse</string>
   <string name="display_location_permission_explanation">Ber om plasseringstillatelse som trengs når man bruker funksjonen for steder i nærheten.</string>
-  <string name="achievements_fetch_failed" fuzzy="true">Noe gikk galt. Vi kunne ikke hente prestasjonene dine.</string>
+  <string name="achievements_fetch_failed">Noe gikk galt og vi kunne ikke hente prestasjonene dine.</string>
   <string name="achievements_fetch_failed_ultimate_achievement">Du har bidratt så mye at utregningssystemet vårt ikke takler det. Dette er den ultimate prestasjonen.</string>
   <string name="ends_on">Slutter:</string>
   <string name="display_campaigns">Vis kampanjer</string>
   <string name="display_campaigns_explanation">Se aktive kampanjer</string>
+  <string name="show_deletion_button">Vis sletteknapp</string>
+  <string name="show_deletion_button_explanation">Aktiver «Slettemappe»-knappen i den egendefinerte velgeren</string>
   <string name="in_app_camera_location_access_explanation">La appen hente posisjon i tilfelle kameraet ikke lagrer det. Noen enheters kameraer lagrer ikke posisjon. I slike tilfeller vil bidragene dine bli nyttigere om du lar appen hente posisjonen. Du kan endre denne innstillingen når som helst.</string>
   <string name="option_allow">Tillat</string>
   <string name="option_dismiss">Lukk</string>
@@ -448,11 +466,11 @@
   <string name="check_category_failure_message">Kunne ikke be om kategorisjekk for %1$s</string>
   <string name="check_category_toast">Ber om kategorisjekk for %1$s</string>
   <string name="nominate_for_deletion_done">Gjort</string>
-  <string name="send_thank_success_title">Sender takk: Ferdig</string>
-  <string name="send_thank_success_message">Sendte takk til %1$s</string>
-  <string name="send_thank_failure_message">Kunne ikke sende takk %1$s</string>
-  <string name="send_thank_failure_title">Sender takk: Mislyktes</string>
-  <string name="send_thank_toast">Sender takk for %1$s</string>
+  <string name="send_thank_success_title" fuzzy="true">Sender takk: Ferdig</string>
+  <string name="send_thank_success_message" fuzzy="true">Sendte takk til %1$s</string>
+  <string name="send_thank_failure_message" fuzzy="true">Kunne ikke sende takk %1$s</string>
+  <string name="send_thank_failure_title" fuzzy="true">Sender takk: Mislyktes</string>
+  <string name="send_thank_toast" fuzzy="true">Sender takk for %1$s</string>
   <string name="review_copyright">Følger dette opphavsrettsreglene?</string>
   <string name="review_category">Er dette riktig kategorisert?</string>
   <string name="review_spam">Er dette relevant?</string>
@@ -478,15 +496,14 @@
   <string name="menu_option_unread">Vis uleste</string>
   <string name="error_occurred_in_picking_images">Feil under utvalg av bilder</string>
   <string name="please_wait">Vennligst vent…</string>
-  <string name="images_featured_explanation">Fremhevede bilder er bilder fra dyktige fotografer og illustratører som fellesskapet på Wikimedia Commons har utpekt som blant de bildene med høyest kvalitet på nettstedet.</string>
   <string name="images_via_nearby_explanation">Bilder lastet opp via steder i nærheten er bilder som lastes opp ved å oppdage steder på kartet.</string>
   <string name="thanks_received_explanation">Denne funksjonen lar brukere sende takk til brukere som gjør nyttige endringer – ved å bruke en liten takkelenke på historikksider eller diffsider.</string>
-  <string name="copy_image_caption_description">Kopier til påfølgende media</string>
+  <string name="copy_image_caption_description" fuzzy="true">Kopier til påfølgende media</string>
   <string name="copied_successfully">Kopiert</string>
   <string name="welcome_do_upload_content_description">Eksempler på gode bilder å laste opp til Commons</string>
   <string name="welcome_dont_upload_content_description">Eksempler på bilder som ikke bør lastes opp</string>
   <string name="skip_image">Hopp over dette bildet</string>
-  <string name="download_failed_we_cannot_download_the_file_without_storage_permission">Nedlasting feilet! Vi kan ikke laste ned fila uten lagringstillatelse.</string>
+  <string name="download_failed_we_cannot_download_the_file_without_storage_permission" fuzzy="true">Nedlasting feilet! Vi kan ikke laste ned fila uten lagringstillatelse.</string>
   <string name="manage_exif_tags">Behandle EXIF-tagger</string>
   <string name="manage_exif_tags_summary">Velg hvilke EXIF-tagger som skal beholdes under opplatsing</string>
   <string name="exif_tag_name_author">Opphavsperson</string>
@@ -538,7 +555,7 @@
   <string name="description_activity_title">Rediger beskrivelser og bildetekster</string>
   <string name="share_image_via">Del bilde via</string>
   <string name="you_have_no_achievements_yet">Du har ikke gjort noen bidrag ennå</string>
-  <string name="no_achievements_yet">%s har ikke gjort noen bidrag ennå</string>
+  <string name="no_achievements_yet">%1$s har ikke gjort noen bidrag ennå</string>
   <string name="account_created">Konto opprettet!</string>
   <string name="text_copy">Tekst kopiert til utklippstavlen</string>
   <string name="notification_mark_read">Varsel merket som lest</string>
@@ -547,7 +564,7 @@
   <string name="place_state_exists">Eksisterer</string>
   <string name="place_state_needs_photo">Trenger bilde</string>
   <string name="place_type">Stedstype:</string>
-  <string name="nearby_search_hint">Bro, museum, hotell, etc.</string>
+  <string name="nearby_search_hint" fuzzy="true">Bro, museum, hotell, etc.</string>
   <string name="you_must_reset_your_passsword" fuzzy="true">Noe gikk galt under innloggingen, du må tilbakestille passordet ditt!</string>
   <string name="title_for_media">MEDIA</string>
   <string name="title_for_child_classes">UNDERKLASSER</string>
@@ -619,8 +636,8 @@
   <string name="learn_more">LÆR MER</string>
   <string name="need_permission">Trenger tillatelse</string>
   <string name="location_permission_rationale">Valgfri tillatelse: Hent nåværende posisjon for kategoriforslag</string>
-  <string name="contributions_of_user">Bidrag til bruker: %s</string>
-  <string name="achievements_of_user">Prestasjoner til bruker: %s</string>
+  <string name="contributions_of_user">Bidrag til bruker: %1$s</string>
+  <string name="achievements_of_user">Prestasjoner til bruker: %1$s</string>
   <string name="menu_view_user_page" fuzzy="true">Vis brukerside</string>
   <string name="edit_depictions">Rediger avbildninger</string>
   <string name="edit_categories">Rediger kategorier</string>
@@ -629,7 +646,7 @@
   <string name="apply">Bruk</string>
   <string name="reset">Nullstill</string>
   <string name="no_location_found_title">Ingen plassering funnet</string>
-  <string name="add_location">Legg til plassering</string>
+  <string name="add_location" fuzzy="true">Legg til plassering</string>
   <string name="explore_map_details">Detaljer</string>
   <string name="api_level">API-nivå</string>
   <string name="android_version">Android-versjon</string>

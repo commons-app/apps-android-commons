@@ -8,7 +8,7 @@
 -->
 <resources>
   <string name="commons_facebook">Commons Facebook-siidu</string>
-  <string name="commons_github">Commons váldokoda Githubis</string>
+  <string name="commons_github" fuzzy="true">Commons váldokoda Githubis</string>
   <string name="commons_logo">Commons-logo</string>
   <string name="commons_website">Commons-neahttasiidu</string>
   <string name="exit_location_picker">Guođe báikeválljejeaddji</string>
@@ -55,7 +55,7 @@
   <string name="uploading_queued">Bajásluđen ráiduduvvon (ráddjejuvvon čatnasanvuohki doaimmas)</string>
   <string name="upload_completed_notification_title">%1$s bajásluđejuvvon!</string>
   <string name="upload_completed_notification_text">Deaddel vai oidno du bajásluđen</string>
-  <string name="upload_progress_notification_title_start">Bajásluđeme fiilla: %s</string>
+  <string name="upload_progress_notification_title_start">Bajásluđeme fiilla: %1$s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s bajásluđeme</string>
   <string name="upload_progress_notification_title_finishing">Gárvvisteme bajásluđema %1$s</string>
   <string name="upload_failed_notification_title">Fiila %1$s vurken ii lihkostuvvan</string>
@@ -172,7 +172,6 @@
   <string name="media_detail_coordinates_empty">Ii addon bajás</string>
   <string name="become_a_tester_title">Šatta betageahččaleaddji</string>
   <string name="logout_verification">Áiggutgo don duođaid čálihit olggos?</string>
-  <string name="mediaimage_failed">Mediagovva ii lihkostuvvan</string>
   <string name="no_subcategory_found">Ii oktage vuollekategoriija gávdnon</string>
   <string name="no_parentcategory_found">Ii oktage badjekategoriija gávdnon</string>
   <string name="cancel">Gaskkalduhte</string>
@@ -210,8 +209,7 @@
   <string name="cancel_upload_dialog">Áiggutgo don duođaid gaskkalduhttit dán fiilla vurkema?</string>
   <string name="delete_search_dialog">Áiggutgo don duođaid dán ohcama sihkkut?</string>
   <string name="delete">Sihko</string>
-  <string name="statistics">Statistihkka</string>
-  <string name="level">Dássi %d</string>
+  <string name="level">Dássi %1$d</string>
   <string name="notifications">Almmuhusat</string>
   <string name="list_sheet">Listu</string>
   <string name="next">Čuovvovaš</string>
@@ -234,7 +232,7 @@
   <string name="coordinates_edit_helper_edit_message_else">Koordináhtaid lasiheapmi ii lihkostuvvan.</string>
   <string name="caption_edit_helper_edit_message_else">Govvateavstta lasiheapmi ii lihkostuvvan.</string>
   <string name="description_activity_title">Rievdat govvádusaid ja govvateavsttaid</string>
-  <string name="nearby_search_hint">Šaldi, musea, hotealla jna.</string>
+  <string name="nearby_search_hint" fuzzy="true">Šaldi, musea, hotealla jna.</string>
   <string name="title_app_shortcut_bookmark">Girjemearkkat</string>
   <string name="load_more">Luđe lasi</string>
   <string name="add_picture_to_wikipedia_article_title">Lasit gova Wikipediai</string>

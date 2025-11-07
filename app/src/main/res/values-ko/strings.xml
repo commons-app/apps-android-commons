@@ -25,7 +25,7 @@
 -->
 <resources>
   <string name="commons_facebook">공용 페이스북 문서</string>
-  <string name="commons_github">공용 GitHub 소스 코드</string>
+  <string name="commons_github" fuzzy="true">공용 GitHub 소스 코드</string>
   <string name="commons_logo">공용 로고</string>
   <string name="commons_website">공용 웹사이트</string>
   <string name="exit_location_picker">출구 위치 선택기</string>
@@ -49,18 +49,13 @@
     <item quantity="one">%1$d개의 파일을 올리는 중</item>
     <item quantity="other">%1$d개의 파일을 올리는 중</item>
   </plurals>
-  <plurals name="contributions_subtitle">
-    <item quantity="one">(%1$d)</item>
-    <item quantity="other">(%1$d)</item>
-  </plurals>
   <string name="starting_uploads">파일 올리기</string>
-  <plurals name="starting_multiple_uploads">
+  <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">%1$d장의 업로드를 처리하는 중입니다</item>
     <item quantity="other">%1$d장의 업로드를 처리하는 중입니다</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">%d개 업로드</item>
-    <item quantity="other">%d개 업로드</item>
+    <item quantity="other">%1$d개 업로드</item>
   </plurals>
   <plurals name="share_license_summary">
     <item quantity="one">이 그림은 %1$s에 따라 사용이 허가됩니다</item>
@@ -98,7 +93,7 @@
   <string name="uploading_queued">업로드 대기 중 (제한 연결 모드 활성화됨)</string>
   <string name="upload_completed_notification_title">%1$s 파일을 올렸습니다!</string>
   <string name="upload_completed_notification_text">올린 것을 보려면 탭하세요</string>
-  <string name="upload_progress_notification_title_start">%1$s 파일 올리는 중</string>
+  <string name="upload_progress_notification_title_start" fuzzy="true">%1$s 파일 올리는 중</string>
   <string name="upload_progress_notification_title_in_progress">%1$s 파일을 올리는 중</string>
   <string name="upload_progress_notification_title_finishing">%1$s 파일 올리기를 끝내는 중</string>
   <string name="upload_failed_notification_title">%1$s 올리기 실패</string>
@@ -232,15 +227,14 @@
   <string name="_2fa_code">2FA 코드</string>
   <string name="email_auth_code">이메일 인증 코드</string>
   <string name="logout_verification">정말 로그아웃하시겠습니까?</string>
-  <string name="mediaimage_failed">미디어 그림 실패</string>
   <string name="no_subcategory_found">하위 분류가 없습니다</string>
   <string name="no_parentcategory_found">상위 분류가 없습니다</string>
   <string name="welcome_image_mount_zao">자오 연봉</string>
   <string name="welcome_image_llamas">라마</string>
   <string name="welcome_image_rainbow_bridge">레인보우 브리지</string>
   <string name="welcome_image_tulip">튤립</string>
-  <string name="welcome_image_welcome_wikipedia">환영 위키백과</string>
-  <string name="welcome_image_welcome_copyright">환영 저작권</string>
+  <string name="welcome_image_welcome_wikipedia" fuzzy="true">환영 위키백과</string>
+  <string name="welcome_image_welcome_copyright" fuzzy="true">환영 저작권</string>
   <string name="welcome_image_sydney_opera_house">시드니 오페라 하우스</string>
   <string name="cancel">취소</string>
   <string name="navigation_drawer_open">열기</string>
@@ -375,12 +369,11 @@
   <string name="Achievements">성과</string>
   <string name="Profile">프로파일</string>
   <string name="badges">배지</string>
-  <string name="statistics">통계</string>
   <string name="statistics_thanks">받은 감사</string>
   <string name="statistics_featured">알찬 그림</string>
   <string name="statistics_wikidata_edits">\"주변 장소\" 경유 이미지</string>
-  <string name="level">레벨 %d</string>
-  <string name="profile_withLevel">%s (레벨 %s)</string>
+  <string name="level">레벨 %1$d</string>
+  <string name="profile_withLevel">%1$s (레벨 %2$s)</string>
   <string name="images_uploaded">사진 업로드됨</string>
   <string name="images_used_by_wiki">사용된 이미지</string>
   <string name="achievements_share_message">친구와 성과를 공유하세요!</string>
@@ -433,7 +426,7 @@
   <string name="unable_to_display_nearest_place">위치 권한 없이 사진이 필요한 주변 장소를 표시할 수 없습니다</string>
   <string name="never_ask_again">다시는 묻지 않음</string>
   <string name="display_location_permission_title">위치 권한 요청</string>
-  <string name="achievements_fetch_failed">오류가 발생하여, 업적을 가져올 수 없습니다.</string>
+  <string name="achievements_fetch_failed" fuzzy="true">오류가 발생하여, 업적을 가져올 수 없습니다.</string>
   <string name="display_campaigns">캠페인 표시</string>
   <string name="display_campaigns_explanation">진행되고 있는 캠페인 보기</string>
   <string name="option_allow">허용</string>
@@ -450,8 +443,8 @@
   <string name="check_category_failure_message">%1$s을(를) 위한 분류 검사를 요청하지 못했습니다</string>
   <string name="check_category_toast">%1$s을(를) 위한 분류 검사를 요청합니다</string>
   <string name="nominate_for_deletion_done">완료</string>
-  <string name="send_thank_success_title">감사 표현 보내기: 성공</string>
-  <string name="send_thank_failure_title">감사 표현 보내기: 실패</string>
+  <string name="send_thank_success_title" fuzzy="true">감사 표현 보내기: 성공</string>
+  <string name="send_thank_failure_title" fuzzy="true">감사 표현 보내기: 실패</string>
   <string name="review_copyright">이것이 저작권 규정을 준수하고 있습니까?</string>
   <string name="review_category">알맞게 분류됐습니까?</string>
   <string name="review_spam">이것이 범위에 포함되나요?</string>
@@ -473,12 +466,12 @@
   <string name="menu_option_unread">읽지 않은 항목 보기</string>
   <string name="error_occurred_in_picking_images">이미지 선택 도중 오류가 발생했습니다</string>
   <string name="please_wait">기다려 주십시오...</string>
-  <string name="copy_image_caption_description">다음 미디어로 복사</string>
+  <string name="copy_image_caption_description" fuzzy="true">다음 미디어로 복사</string>
   <string name="copied_successfully">복사했습니다</string>
   <string name="welcome_do_upload_content_description">공용에 업로드할 좋은 이미지의 예</string>
   <string name="welcome_dont_upload_content_description">올리지 말아야 할 이미지 예시</string>
   <string name="skip_image">이 이미지 건너뛰기</string>
-  <string name="download_failed_we_cannot_download_the_file_without_storage_permission">다운로드를 실패했습니다!! 외장 스토리지 권한 없이 파일을 다운로드할 수 없습니다.</string>
+  <string name="download_failed_we_cannot_download_the_file_without_storage_permission" fuzzy="true">다운로드를 실패했습니다!! 외장 스토리지 권한 없이 파일을 다운로드할 수 없습니다.</string>
   <string name="manage_exif_tags">EXIF 태그 관리</string>
   <string name="exif_tag_name_author">만든이</string>
   <string name="exif_tag_name_copyright">저작권</string>
@@ -525,7 +518,7 @@
   <string name="description_activity_title">설명 및 캡션 편집</string>
   <string name="share_image_via">다음을 통해 이미지 공유</string>
   <string name="you_have_no_achievements_yet">아직 기여가 없습니다</string>
-  <string name="no_achievements_yet">%s님은 아직 기여가 없습니다</string>
+  <string name="no_achievements_yet">%1$s님은 아직 기여가 없습니다</string>
   <string name="account_created">계정을 만들었습니다!</string>
   <string name="text_copy">텍스트가 클립보드에 복사되었습니다</string>
   <string name="notification_mark_read">알림을 읽은 것으로 표시</string>
@@ -534,7 +527,7 @@
   <string name="place_state_exists">존재함</string>
   <string name="place_state_needs_photo">사진 필요</string>
   <string name="place_type">장소 유형:</string>
-  <string name="nearby_search_hint">다리, 박물관, 호텔 등.</string>
+  <string name="nearby_search_hint" fuzzy="true">다리, 박물관, 호텔 등.</string>
   <string name="you_must_reset_your_passsword">로그인에 문제가 생겼습니다, 비밀번호를 재설정해야 합니다!</string>
   <string name="title_for_media">미디어</string>
   <string name="title_for_child_classes">자식 클래스</string>
@@ -566,7 +559,7 @@
   <string name="wikipedia_instructions_step_2">2. 확인을 클릭하면 위키백과 문서가 열립니다</string>
   <string name="wikipedia_instructions_step_5">5. 위키텍스트를 적절한 위치에 붙여 넣으세요.</string>
   <string name="wikipedia_instructions_step_7">7. 문서 게시</string>
-  <string name="copy_wikicode_to_clipboard">클립보드에 위키코드 복사</string>
+  <string name="copy_wikicode_to_clipboard" fuzzy="true">클립보드에 위키코드 복사</string>
   <string name="pause">일시 정지</string>
   <string name="resume">계속하기</string>
   <string name="paused">일시 중단됨</string>
@@ -622,7 +615,7 @@
   <string name="back">뒤로</string>
   <string name="welcome_custom_picture_selector_text">커스텀 사진 선택기에 오신 것을 환영합니다.</string>
   <string name="custom_selector_info_text1">이 선택기는 당신이 지금까지 커먼즈에 업로드한 사진을 보여줍니다.</string>
-  <string name="custom_selector_info_text2">왼쪽 사진과 달리 오른쪽 사진에는 이미 업로드되었음을 나타내는 커먼즈 로고가 있습니다. \n이미지를 미리 보시려면 길게 터치하세요.</string>
+  <string name="custom_selector_info_text2" fuzzy="true">왼쪽 사진과 달리 오른쪽 사진에는 이미 업로드되었음을 나타내는 커먼즈 로고가 있습니다. \n이미지를 미리 보시려면 길게 터치하세요.</string>
   <string name="welcome_custom_selector_ok">훌륭합니다</string>
   <string name="custom_selector_already_uploaded_image_text">이 이미지는 이미 커먼즈에 업로드되었습니다.</string>
   <string name="custom_selector_dismiss_limit_warning_button_text">숨기기</string>
@@ -631,8 +624,8 @@
   <string name="learn_more">더 알아보기</string>
   <string name="need_permission">권한 필요</string>
   <string name="location_permission_rationale">선택적 권한: 분류 추천을 위해 현재 위치 정보를 가져옵니다.</string>
-  <string name="contributions_of_user">사용자의 기여: %s</string>
-  <string name="achievements_of_user">사용자 달성도: %s</string>
+  <string name="contributions_of_user">사용자의 기여: %1$s</string>
+  <string name="achievements_of_user">사용자 달성도: %1$s</string>
   <string name="menu_view_user_page">사용자 프로필 보기</string>
   <string name="edit_depictions">묘사된 항목 편집하기</string>
   <string name="edit_categories">분류 편집</string>
@@ -641,7 +634,7 @@
   <string name="reset">재설정</string>
   <string name="no_location_found_title">위치를 찾을 수 없습니다</string>
   <string name="no_location_found_message">이 사진을 찍은 장소를 추가해 보는 것은 어떨까요?\n위치 정보는 위키 편집자가 사진을 찾는 데 도움이 되며, 훨씬 더 유용하게 사용됩니다.\n감사합니다!</string>
-  <string name="add_location">위치 추가</string>
+  <string name="add_location" fuzzy="true">위치 추가</string>
   <string name="explore_map_details">자세한 사항</string>
   <string name="copyright_popup">당신이 찍은 사진만 올려 주십시오. 저작권이 있는 이미지를 올린 사람은 차단됩니다. 양질의 이미지에도 해당합니다. 앱을 테스트해 주셔서 고맙습니다!</string>
   <string name="api_level">API 레벨</string>
@@ -690,14 +683,14 @@
   <string name="invalid_login_message">로그인 세션 만료. 다시 로그인해 주십시오.</string>
   <string name="no_application_available_to_open_gpx_files">GPX 파일을 열 수 있는 응용 프로그램이 없습니다</string>
   <string name="file_saved_successfully">파일이 성공적으로 저장되었습니다</string>
-  <string name="do_you_want_to_open_gpx_file">GPX 파일을 여시겠습니까?</string>
-  <string name="do_you_want_to_open_kml_file">KML 파일을 여시겠습니까?</string>
-  <string name="failed_to_save_kml_file">KML 파일을 저장하지 못했습니다.</string>
-  <string name="failed_to_save_gpx_file">GPX 파일을 저장하지 못했습니다.</string>
-  <string name="saving_kml_file">KML 파일을 저장 중</string>
-  <string name="saving_gpx_file">GPX 파일을 저장 중</string>
+  <string name="do_you_want_to_open_gpx_file" fuzzy="true">GPX 파일을 여시겠습니까?</string>
+  <string name="do_you_want_to_open_kml_file" fuzzy="true">KML 파일을 여시겠습니까?</string>
+  <string name="failed_to_save_kml_file" fuzzy="true">KML 파일을 저장하지 못했습니다.</string>
+  <string name="failed_to_save_gpx_file" fuzzy="true">GPX 파일을 저장하지 못했습니다.</string>
+  <string name="saving_kml_file" fuzzy="true">KML 파일을 저장 중</string>
+  <string name="saving_gpx_file" fuzzy="true">GPX 파일을 저장 중</string>
   <plurals name="custom_picker_images_selected_title_appendix">
-    <item quantity="other">%d개 이미지 선택됨</item>
+    <item quantity="other">%1$d개 이미지 선택됨</item>
   </plurals>
   <string name="multiple_files_depiction_header">다중 업로드에 대한 참고사항</string>
   <string name="nearby_wikitalk">이 항목에 관한 문제를 위키데이터에 보고하기</string>

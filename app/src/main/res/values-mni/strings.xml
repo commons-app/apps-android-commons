@@ -77,8 +77,8 @@
   <string name="media_detail_license">ꯑꯌꯥꯕꯥ</string>
   <string name="media_detail_coordinates">ꯀꯣꯑꯣꯔꯗꯤꯅꯦꯠꯁ</string>
   <string name="become_a_tester_title">ꯕꯦꯇꯥ ꯆꯥꯡꯌꯦꯡ ꯇꯧꯕ ꯱ ꯑꯣꯏꯕꯤꯌꯨ</string>
-  <string name="welcome_image_welcome_wikipedia">ꯂꯦꯡꯁꯤꯟꯕꯤꯔꯛꯁꯤ ꯋꯤꯀꯤꯄꯦꯗꯤꯌꯥ</string>
-  <string name="welcome_image_welcome_copyright">ꯂꯦꯡꯁꯤꯟꯕꯤꯔꯛꯁꯤ ꯁꯤꯟꯗꯣꯛꯄ-ꯑꯌꯥꯕ</string>
+  <string name="welcome_image_welcome_wikipedia" fuzzy="true">ꯂꯦꯡꯁꯤꯟꯕꯤꯔꯛꯁꯤ ꯋꯤꯀꯤꯄꯦꯗꯤꯌꯥ</string>
+  <string name="welcome_image_welcome_copyright" fuzzy="true">ꯂꯦꯡꯁꯤꯟꯕꯤꯔꯛꯁꯤ ꯁꯤꯟꯗꯣꯛꯄ-ꯑꯌꯥꯕ</string>
   <string name="cancel">ꯇꯣꯛꯄ</string>
   <string name="navigation_drawer_open">ꯍꯥꯡꯗꯣꯛꯄ</string>
   <string name="navigation_drawer_close">ꯈꯨꯝꯖꯤꯟꯕ</string>
@@ -129,7 +129,7 @@
   <string name="wrong">ꯑꯔꯥꯟꯕ ꯄꯥꯎꯈꯨꯝ</string>
   <string name="delete">ꯀꯛꯊꯠꯄꯥ</string>
   <string name="statistics_thanks">ꯊꯥꯒꯠꯆꯔꯤ ꯐꯪꯖꯔꯦ</string>
-  <string name="level" fuzzy="true">ꯊꯥꯛ</string>
+  <string name="level" fuzzy="true">ꯊꯥꯛ %1$d</string>
   <string name="next">ꯃꯊꯪ</string>
   <string name="previous">ꯃꯃꯥꯡꯒꯤ</string>
   <string name="title_page_bookmarks_locations">ꯃꯐꯝꯁꯤꯡ</string>

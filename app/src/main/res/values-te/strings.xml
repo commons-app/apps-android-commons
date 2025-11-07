@@ -8,7 +8,7 @@
 -->
 <resources>
   <string name="commons_facebook">కామన్స్ ఫేస్‌బుక్ పేజీ</string>
-  <string name="commons_github">Commons Github సోర్సు కోడు</string>
+  <string name="commons_github" fuzzy="true">Commons Github సోర్సు కోడు</string>
   <string name="commons_logo">కామన్స్ చిహ్నం</string>
   <string name="commons_website">కామన్స్ వెబ్‌సైటు</string>
   <string name="exit_location_picker">స్థానం ఎంపిక నుండి నిష్క్రమించు</string>
@@ -20,12 +20,8 @@
     <item quantity="one">%1$d ఫైలు అప్‌లోడవుతోంది</item>
     <item quantity="other">%1$d ఫైళ్ళు అప్‌లోడవుతున్నాయి</item>
   </plurals>
-  <plurals name="contributions_subtitle">
-    <item quantity="one">(%1$d)</item>
-    <item quantity="other">(%1$d)</item>
-  </plurals>
   <string name="starting_uploads">ఎక్కింపులను మొదలుపెడుతున్నాం</string>
-  <plurals name="starting_multiple_uploads">
+  <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">%1$d ఎక్కింపును మొదలు పెడుతున్నాం</item>
     <item quantity="other">%1$d ఎక్కింపులను మొదలు పెడుతున్నాం</item>
   </plurals>
@@ -71,7 +67,7 @@
   <string name="uploading_queued">ఎగుమోత వరుసలో ఉంది (పరిమిత సంబంధ పద్దతి చేతనం)</string>
   <string name="upload_completed_notification_title">%1$s ను ఎక్కించాం!</string>
   <string name="upload_completed_notification_text">మీ ఎక్కింపును చూసేందుకు నొక్కండి</string>
-  <string name="upload_progress_notification_title_start">దస్త్రాన్ని ఎక్కిస్తున్నాం: $s</string>
+  <string name="upload_progress_notification_title_start" fuzzy="true">దస్త్రాన్ని ఎక్కిస్తున్నాం: $s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s ను ఎక్కిస్తున్నాం</string>
   <string name="upload_progress_notification_title_finishing">%1$s ఎక్కింపు పూర్తికావస్తోంది</string>
   <string name="upload_failed_notification_title">%1$s ఎక్కింపు విఫలమైంది</string>
@@ -117,6 +113,7 @@
   <string name="title_activity_settings">అమరికలు</string>
   <string name="title_activity_signup">నమోదవ్వండి</string>
   <string name="title_activity_featured_images">విశేష చిత్రాలు</string>
+  <string name="images_featured_explanation" fuzzy="true">విశేష చిత్రాలు, అత్యుత్తమ నాణ్యత కలిగినవని వికీమీడియా కామన్స్ సముదాయం సైట్లో ఎంచిన, నిపుణులైన ఫోటోగ్రాఫర్లు చిత్రకారులూ చేసిన బొమ్మలు.</string>
   <string name="title_activity_category_details">వర్గం</string>
   <string name="title_activity_review">సాటివారి సమీక్ష</string>
   <string name="menu_about">గురించి</string>
@@ -195,15 +192,14 @@
   <string name="become_a_tester_description">గూగుల్ ప్లే లోని మా బీటా ఛానల్లో చేరితే, కొత్త విశేషాలను బగ్‌ల సవరణలనూ చూడవచ్చు</string>
   <string name="_2fa_code">2FA Code</string>
   <string name="logout_verification">నిజంగానే లాగౌటవుతారా?</string>
-  <string name="mediaimage_failed">మీడియా బొమ్మ విఫలమైంది</string>
   <string name="no_subcategory_found">ఉపవర్గాలేమీ కనబడలేదు</string>
   <string name="no_parentcategory_found">మాతృవర్గాలేమీ కనబడలేదు</string>
   <string name="welcome_image_mount_zao">మౌంట్ జావో</string>
   <string name="welcome_image_llamas">లామాలు</string>
   <string name="welcome_image_rainbow_bridge">ఇంద్రధనుస్సు వంతెన</string>
   <string name="welcome_image_tulip">తులిప్</string>
-  <string name="welcome_image_welcome_wikipedia">వికీపీడియాకు స్వాగతం</string>
-  <string name="welcome_image_welcome_copyright">కాపీహక్కులకు స్వాగతం</string>
+  <string name="welcome_image_welcome_wikipedia" fuzzy="true">వికీపీడియాకు స్వాగతం</string>
+  <string name="welcome_image_welcome_copyright" fuzzy="true">కాపీహక్కులకు స్వాగతం</string>
   <string name="welcome_image_sydney_opera_house">సిడ్నీ ఒపేరా హౌస్</string>
   <string name="cancel">రద్దుచేయి</string>
   <string name="navigation_drawer_open">తెరువు</string>
@@ -331,11 +327,10 @@
   <string name="delete">తొలగించు</string>
   <string name="Achievements">సాధించినవి</string>
   <string name="Profile">ప్రొఫైల్</string>
-  <string name="statistics">గణాంకాలు</string>
   <string name="statistics_thanks">ధన్యవాదాలు అందాయి</string>
   <string name="statistics_featured">విశేష చిత్రాలు</string>
   <string name="statistics_wikidata_edits">\"దగ్గర లోని స్థలాల\" ద్వారా బొమ్మలు</string>
-  <string name="level" fuzzy="true">స్థాయి</string>
+  <string name="level" fuzzy="true">స్థాయి %1$d</string>
   <string name="images_uploaded">బొమ్మలను ఎక్కించాం</string>
   <string name="image_reverts">బొమ్మలను తిరక్కొట్టలేదు</string>
   <string name="images_used_by_wiki">వాడిన బొమ్మలు</string>
@@ -410,11 +405,11 @@
   <string name="check_category_failure_message">%1$s కు వర్గాన్ని సరిచూడమనే అభ్యర్ధన చెయ్యలేక పోయాం</string>
   <string name="check_category_toast">%1$s కు వర్గాన్ని సరిచూడమని అభ్యర్ధిస్తున్నాం</string>
   <string name="nominate_for_deletion_done">అయిపోయింది</string>
-  <string name="send_thank_success_title">ధన్యవాదాలు పంపిస్తున్నాం: సఫలం</string>
-  <string name="send_thank_success_message">%1$s కు ధన్యవాదాలు పంపించాం</string>
-  <string name="send_thank_failure_message">%1$s కు ధన్యవాదాలు పంపించడం విఫలమైంది</string>
-  <string name="send_thank_failure_title">ధన్యవాదాలు పంపిస్తున్నాం: విఫలం</string>
-  <string name="send_thank_toast">%1$s కోసం ధన్యవాదాలు పంపిస్తున్నాం</string>
+  <string name="send_thank_success_title" fuzzy="true">ధన్యవాదాలు పంపిస్తున్నాం: సఫలం</string>
+  <string name="send_thank_success_message" fuzzy="true">%1$s కు ధన్యవాదాలు పంపించాం</string>
+  <string name="send_thank_failure_message" fuzzy="true">%1$s కు ధన్యవాదాలు పంపించడం విఫలమైంది</string>
+  <string name="send_thank_failure_title" fuzzy="true">ధన్యవాదాలు పంపిస్తున్నాం: విఫలం</string>
+  <string name="send_thank_toast" fuzzy="true">%1$s కోసం ధన్యవాదాలు పంపిస్తున్నాం</string>
   <string name="review_copyright">ఇది కాపీహక్కుల నిఅయమాలకు అనుగుణంగా ఉందా?</string>
   <string name="review_category">దీని వర్గీకరణ సరైనదేనా?</string>
   <string name="review_spam">ఇది స్కోపు లోనే ఉందా?</string>
@@ -440,14 +435,13 @@
   <string name="menu_option_unread">చదవని వాటిని చూడండి</string>
   <string name="error_occurred_in_picking_images">బొమ్మలను ఎంచుకునేటపుడు లోపం దొర్లింది</string>
   <string name="please_wait">వేచివుండండి…</string>
-  <string name="images_featured_explanation">విశేష చిత్రాలు, అత్యుత్తమ నాణ్యత కలిగినవని వికీమీడియా కామన్స్ సముదాయం సైట్లో ఎంచిన, నిపుణులైన ఫోటోగ్రాఫర్లు చిత్రకారులూ చేసిన బొమ్మలు.</string>
   <string name="images_via_nearby_explanation">సమీప స్థలాలు ద్వారా ఎక్కించిన బొమ్మలంటే, మ్యాపులో గుర్తించిన సమీప స్థలాలకు సంబంధించిన బొమ్మలే.</string>
   <string name="thanks_received_explanation">ఈ విశేషం ద్వారా, ఉపయోగపడే దిద్దుబాట్లు చేసిన వాడుకరులకు చరిత్ర పేజీలో గానీ తేడా పేజీలో గానీ ఉండే ధన్యవాదాలు లింకు ద్వారా ధన్యవాదాలు పంపించవచ్చు</string>
   <string name="copied_successfully">కాపీ అయ్యింది</string>
   <string name="welcome_do_upload_content_description">కామన్స్ లోకి ఎక్కించేందుకు మంచి బొమ్మలకు ఉదాహరణలు</string>
   <string name="welcome_dont_upload_content_description">ఎక్కించ కూడని బొమ్మలకు ఉదాహరణలు</string>
   <string name="skip_image">ఈ బొమ్మను దాటవెయ్యి</string>
-  <string name="download_failed_we_cannot_download_the_file_without_storage_permission">దింపుకోలు విఫలమైంది!!. బయటి స్టోరేజీ అనుమతి లేకుండా దించుకోలేం.</string>
+  <string name="download_failed_we_cannot_download_the_file_without_storage_permission" fuzzy="true">దింపుకోలు విఫలమైంది!!. బయటి స్టోరేజీ అనుమతి లేకుండా దించుకోలేం.</string>
   <string name="manage_exif_tags">EXIF ట్యాగులను నిర్వహించండి</string>
   <string name="manage_exif_tags_summary">ఎక్కింపుల్లో ఏ EXIF ట్యాగులను ఉంచాలో ఎంచుకోండి</string>
   <string name="exif_tag_name_author">కర్త</string>
@@ -502,7 +496,7 @@
   <string name="description_activity_title">వివరణలు, వ్యాఖ్యలను సరిదిద్దండి</string>
   <string name="share_image_via">బొమ్మను దీని ద్వారా పంచుకోండి</string>
   <string name="you_have_no_achievements_yet">మీరింకా తోడ్పాటులేమీ చెయ్యలేదు</string>
-  <string name="no_achievements_yet">%s  ఇంకా తోడ్పాటేమీ చెయ్యలేదు</string>
+  <string name="no_achievements_yet">%1$s  ఇంకా తోడ్పాటేమీ చెయ్యలేదు</string>
   <string name="account_created">ఖాతాను సృష్టించాం!</string>
   <string name="text_copy">పాఠ్యాన్ని క్లిప్‌బోర్డుకు కాపీ చేసాం</string>
   <string name="notification_mark_read">గమనింపును చదివినట్లుగా గుర్తించాం</string>
@@ -511,7 +505,7 @@
   <string name="place_state_exists">ఉనికిలో ఉంది</string>
   <string name="place_state_needs_photo">ఫోటో కావాలి</string>
   <string name="place_type">స్థలం రకం:</string>
-  <string name="nearby_search_hint">వంతెన, మ్యూజియమ్, హోటలు వగైరా.</string>
+  <string name="nearby_search_hint" fuzzy="true">వంతెన, మ్యూజియమ్, హోటలు వగైరా.</string>
   <string name="you_must_reset_your_passsword" fuzzy="true">లాగినవడంలో ఏదో లోపం జరిగింది, మీ సంకేతపదాన్ని మార్చుకోవాలి !!</string>
   <string name="title_for_media">మాధ్యమం</string>
   <string name="title_for_child_classes">చైల్డ్ క్లాస్</string>
@@ -548,7 +542,7 @@
   <string name="wikipedia_instructions_step_5">5. సరైన స్థానంలో వికీటెక్స్టును అతికించండి.</string>
   <string name="wikipedia_instructions_step_6">6. సముచితమైన స్థానంలో పెట్టేందుకు అవసరమైతే వికీటెక్స్టును మార్చండి. మరింత సమాచారం కోసం &lt;a href=\"https://en.wikipedia.org/wiki/Wikipedia:Manual_of_Style/Images#How_to_place_an_image\"&gt;ఇక్కడ చూడండి&lt;/a&gt;.</string>
   <string name="wikipedia_instructions_step_7">7. వ్యాసాన్ని ప్రచురించండి</string>
-  <string name="copy_wikicode_to_clipboard">వికీకోడ్‌ను క్లిప్‌బోర్డు లోకి కాపీ చేసుకోండి</string>
+  <string name="copy_wikicode_to_clipboard" fuzzy="true">వికీకోడ్‌ను క్లిప్‌బోర్డు లోకి కాపీ చేసుకోండి</string>
   <string name="pause">నిలుపు</string>
   <string name="resume">కొనసాగించు</string>
   <string name="paused">నిలిపాం</string>
@@ -604,14 +598,14 @@
   <string name="custom_selector_empty_text">బొమ్మల్లేవు</string>
   <string name="done">అయిపోయింది</string>
   <string name="back">వెనక్కి</string>
-  <string name="custom_selector_info_text2">ఎడమ వైపున ఉన్న బొమ్మ లాగా కాకుండా, కుడి వైపున ఉన్న దానికి కామన్స్ లోగో ఉంది. అంటే దాన్ని ఈసరికే ఎక్కించారని అర్థం.\n బొమ్మ మునుజూపు కోసం తాకి పట్టుకోండి.</string>
+  <string name="custom_selector_info_text2" fuzzy="true">ఎడమ వైపున ఉన్న బొమ్మ లాగా కాకుండా, కుడి వైపున ఉన్న దానికి కామన్స్ లోగో ఉంది. అంటే దాన్ని ఈసరికే ఎక్కించారని అర్థం.\n బొమ్మ మునుజూపు కోసం తాకి పట్టుకోండి.</string>
   <string name="welcome_custom_selector_ok">అదరహో</string>
   <string name="custom_selector_already_uploaded_image_text">ఈ బొమ్మను ఈసరికే కామన్స్ లోకి ఎక్కించారు.</string>
   <string name="learn_more">మరింత తెలుసుకోండి</string>
   <string name="need_permission">అనుమతి కావాలి</string>
   <string name="location_permission_rationale">ఐచ్ఛిక అనుమతి: వర్గాల సూచనల కోసం ప్రస్తుత స్థలాన్ని తెచ్చుకో</string>
-  <string name="contributions_of_user">వాడుకరి తోడ్పాట్లు: %s</string>
-  <string name="achievements_of_user">వాడుకరి సాధించినవి: %s</string>
+  <string name="contributions_of_user">వాడుకరి తోడ్పాట్లు: %1$s</string>
+  <string name="achievements_of_user">వాడుకరి సాధించినవి: %1$s</string>
   <string name="menu_view_user_page" fuzzy="true">వాడుకరి పేజీ చూడండి</string>
   <string name="edit_categories">వర్గాల్లో దిద్దుబాట్లు</string>
   <string name="advanced_options">ఉన్నత ఎంపికలు</string>
@@ -621,7 +615,7 @@
   <string name="location_message">స్థానం డేటా, వికీ ఎడిటర్లు మీ బొమ్మను వెతకడంలో సాయపడుతుంది. దాని వలన బొమ్మ ఉపయోగం పెరుగుతుంది.\nమీరు ఇటీవల ఎక్కించిన బొమ్మలకు స్థానం లేదు.\nమీ కెమెరా యాప్ సెట్టింగుల్లో స్థానాన్ని చేతనం చేసుకొమ్మని సూచిస్తున్నాం.\nఎక్కించినందుకు ధన్యవాదాలతో!</string>
   <string name="no_location_found_title">స్థానం ఏదీ కనబడలేదు</string>
   <string name="no_location_found_message">ఈ బొమ్మను తీసిన స్థానాన్ని దీనికి చేరిస్తే బావుంటుంది గదా.\nస్థానం డేటా ఉంటే అది, ఈ బొమ్మను కనుక్కోవడంలో వికీ ఎడిటర్లకు సాయపడుతుంది. ఆ విధంగా బొమ్మ ఉపయోగం పెరుగుతుంది.\nధన్యవాదాలు!</string>
-  <string name="add_location">స్థానాన్ని చేర్చండి</string>
+  <string name="add_location" fuzzy="true">స్థానాన్ని చేర్చండి</string>
   <string name="feedback_sharing_data_alert">బహిరంగంగా పంచుకోలేని సమాచారం ఏదైనా ఈ ఈమెయిల్లో ఉంటే దాన్ని తీసెయ్యండి. అలాగే, మీరు పోస్టు చేస్తున్న ఈమెయిలు చిరునామా, దానికి సంబంధించిన పేరు, ప్రొఫైలు బొమ్మా బహిరంగంగా అందరికీ కనిపిస్తాయని గమనంలో ఉంచుకోండి.</string>
   <string name="explore_map_details">వివరాలు</string>
   <string name="copyright_popup">మీరు స్వయంగా తీసిన ఫొటోలను మాత్రమే ఎక్కించండి. కాపీహక్కులున్న బొమ్మలను ఎక్కించినవారిని నిరోధిస్తారు. ఇది బీటా కూర్పుకు కూడా వర్తిస్తుంది. యాప్‌ను పరీక్షిస్తున్నందుకు ధన్యవాదాలు.</string>

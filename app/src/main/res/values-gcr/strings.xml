@@ -4,7 +4,7 @@
 -->
 <resources>
   <string name="commons_facebook">Paj Facebook di Commons</string>
-  <string name="commons_github">Kod sours Github pou Commons</string>
+  <string name="commons_github" fuzzy="true">Kod sours Github pou Commons</string>
   <string name="commons_logo">Logo di Commons</string>
   <string name="commons_website">Sit web di Commons</string>
   <string name="submit">Soumèt</string>
@@ -21,7 +21,10 @@
   <string name="nearby_filter_search">Wè di sasé</string>
   <string name="nearby_filter_state">Léta di bagaj</string>
   <string name="appwidget_img">Zimaj pou jodla</string>
-  <string name="uploads_pending_notification_indicator">%1$d fiché ka télévèrsé</string>
+  <plurals name="uploads_pending_notification_indicator" fuzzy="true">
+    <item quantity="one">%1$d fiché ka télévèrsé</item>
+    <item quantity="other">%1$d fiché ka télévèrsé</item>
+  </plurals>
   <string name="starting_uploads">Koumansman di télévèrsé-ya</string>
   <string name="navigation_item_explore">Èsploré</string>
   <string name="preference_category_general">Jénéral</string>
@@ -48,7 +51,7 @@
   <string name="uploading_started">Télévèrsé koumansé !</string>
   <string name="upload_completed_notification_title">%1$s télévèrsé !</string>
   <string name="upload_completed_notification_text">Pézé pou wè kisa ou télévèrsé</string>
-  <string name="upload_progress_notification_title_start">Téléversé di fiché : %s</string>
+  <string name="upload_progress_notification_title_start">Téléversé di fiché : %1$s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s ka télévèrsé</string>
   <string name="upload_progress_notification_title_finishing">Télévèrsé fini pou %1$s</string>
   <string name="upload_failed_notification_subtitle">Pézé pou afiché</string>
@@ -119,7 +122,7 @@
   <string name="media_detail_coordinates_empty">Pa fourni</string>
   <string name="logout_verification">Ès ou vréman lé dékonnègté oukò</string>
   <string name="no_subcategory_found">Pyès soukatégori ki trouvé</string>
-  <string name="welcome_image_welcome_wikipedia">Bèlvini di Wikipédja</string>
+  <string name="welcome_image_welcome_wikipedia" fuzzy="true">Bèlvini di Wikipédja</string>
   <string name="cancel">Annilé</string>
   <string name="navigation_drawer_open">Louvri</string>
   <string name="navigation_drawer_close">Fronmen</string>
@@ -180,10 +183,9 @@
   <string name="delete">Siprimen</string>
   <string name="Achievements">Akonplisman</string>
   <string name="Profile">Profil</string>
-  <string name="statistics">Èstatistik</string>
   <string name="statistics_thanks">Grémésiman rousouvrè</string>
   <string name="statistics_featured">Zimaj ki byenfèt</string>
-  <string name="level" fuzzy="true">Nivèl</string>
+  <string name="level" fuzzy="true">Nivèl %1$d</string>
   <string name="images_used_by_wiki">Zimaj ki itilizé</string>
   <string name="contributions_fragment">Kontribisyon</string>
   <string name="nearby_fragment">Òbò</string>

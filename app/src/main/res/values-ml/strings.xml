@@ -10,7 +10,7 @@
 -->
 <resources>
   <string name="commons_facebook">കോമൺസ് ഫേസ്ബുക്ക് പേജ്</string>
-  <string name="commons_github">കോമൺസ് ജിത്ഹബ് സോഴ്സ് കോഡ്</string>
+  <string name="commons_github" fuzzy="true">കോമൺസ് ജിത്ഹബ് സോഴ്സ് കോഡ്</string>
   <string name="commons_logo">കോമൺസ് ലോഗോ</string>
   <string name="commons_website">കോമൺസ് വെബ്‌സൈറ്റ്</string>
   <string name="submit">സമർപ്പിക്കുക</string>
@@ -32,21 +32,19 @@
     <item quantity="one">ഒരു പ്രമാണം അപ്‌ലോഡ് ചെയ്യുന്നു</item>
     <item quantity="other">%1$d പ്രമാണങ്ങൾ അപ്‌ലോഡ് ചെയ്യുന്നു</item>
   </plurals>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">ഒരു അപ്‌ലോഡും ചെയ്തില്ല</item>
-    <item quantity="one">ഒരു അപ്‌ലോഡ്</item>
-    <item quantity="other">%1$d അപ്‌ലോഡുകൾ</item>
-  </plurals>
   <string name="starting_uploads">അപ്‌ലോഡുകൾ ആരംഭിക്കുന്നു</string>
   <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">ഒരു അപ്‌ലോഡ് തുടങ്ങുന്നു</item>
     <item quantity="other">%1$d അപ്‌ലോഡുകൾ തുടങ്ങുന്നു</item>
   </plurals>
-  <plurals name="multiple_uploads_title" fuzzy="true">
+  <plurals name="multiple_uploads_title">
     <item quantity="one">ഒരു അപ്‌ലോഡ്</item>
     <item quantity="other">%1$d അപ്‌ലോഡുകൾ</item>
   </plurals>
-  <string name="share_license_summary" fuzzy="true">ചിത്രം %1$s പ്രകാരം അനുമതി നൽകപ്പെടുന്നതാണ്</string>
+  <plurals name="share_license_summary" fuzzy="true">
+    <item quantity="one">ഈ ചിത്രം %1$s ന് കീഴിൽ ലൈസൻസ് ചെയ്യപ്പെടും </item>
+    <item quantity="other">ഈ ചിത്രങ്ങൾ %1$s ന് കീഴിൽ ലൈസൻസ് ചെയ്യപ്പെടും</item>
+  </plurals>
   <string name="navigation_item_explore">പര്യവേഷണം</string>
   <string name="preference_category_appearance">ദൃശ്യരൂപം</string>
   <string name="preference_category_general">സാർവത്രികം</string>
@@ -205,7 +203,6 @@
   <string name="search_tab_title_categories">വർഗ്ഗങ്ങൾ</string>
   <string name="nominate_delete">മായ്ക്കാനായി നിർദ്ദേശിക്കുക</string>
   <string name="delete">മായ്ക്കുക</string>
-  <string name="statistics">സ്ഥിതിവിവരക്കണക്കുകൾ</string>
   <string name="list_sheet">പട്ടിക</string>
   <string name="next">അടുത്തത്</string>
   <string name="no_categories_selected">വർഗ്ഗങ്ങൾ ഒന്നും തന്നെ തിരഞ്ഞെടുത്തിട്ടില്ല</string>
@@ -217,7 +214,7 @@
   <string name="place_state_exists">നിലവിലുണ്ട്</string>
   <string name="place_state_needs_photo">ചിത്രം വേണം</string>
   <string name="place_type">സ്ഥലത്തിന്റെ തരം:</string>
-  <string name="nearby_search_hint">പാലം, മ്യൂസിയം, ഹോട്ടൽ തുടങ്ങിയവ</string>
+  <string name="nearby_search_hint" fuzzy="true">പാലം, മ്യൂസിയം, ഹോട്ടൽ തുടങ്ങിയവ</string>
   <string name="title_app_shortcut_setting">സജ്ജീകരണങ്ങൾ</string>
   <string name="pause">താത്കാലികമായി നിർത്തുക</string>
   <string name="resume">തുടരുക</string>

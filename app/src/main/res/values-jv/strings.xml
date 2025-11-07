@@ -9,27 +9,22 @@
 -->
 <resources>
   <string name="commons_facebook">Kaca Facebook Commons</string>
-  <string name="commons_github">Kodhe Sumber Github Commons</string>
+  <string name="commons_github" fuzzy="true">Kodhe Sumber Github Commons</string>
   <string name="commons_logo">Logo Commons</string>
   <string name="commons_website">Situswèb Commons</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">%1$d barkas lagi kaunggah</item>
     <item quantity="other">%1$d barkas lagi kaunggah</item>
   </plurals>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">(%1$d)</item>
-    <item quantity="other">(%1$d)</item>
-  </plurals>
   <plurals name="starting_multiple_uploads" fuzzy="true">
-    <item quantity="one">Miwiti %1$d unggahan</item>
-    <item quantity="other">Miwiti %1$d unggahan</item>
+    <item quantity="other">Ngolah %1$d unggahan</item>
   </plurals>
-  <plurals name="multiple_uploads_title" fuzzy="true">
-    <item quantity="one">%1$d unggahan</item>
+  <plurals name="multiple_uploads_title">
     <item quantity="other">%1$d unggahan</item>
   </plurals>
-  <string name="share_license_summary" fuzzy="true">Gambar iki bakal dilisènsèkaké nganggo %1$s</string>
+  <plurals name="share_license_summary">
+    <item quantity="other">Gambar iki bakal dilisènsèkaké nganggo %1$s</item>
+  </plurals>
   <string name="navigation_item_explore">Dlajah</string>
   <string name="preference_category_appearance">Cakrik</string>
   <string name="preference_category_general">Umum</string>
@@ -140,14 +135,13 @@
   <string name="become_a_tester_title">Dadi Pangetès Béta</string>
   <string name="_2fa_code">Kodhe 2FA</string>
   <string name="logout_verification">Panjenengan yakin arep metu log?</string>
-  <string name="mediaimage_failed">Gambar Médhia Wurung</string>
   <string name="no_subcategory_found">Anak kategori ora tinemu</string>
   <string name="no_parentcategory_found">Kategori babon ora tinemu</string>
   <string name="welcome_image_mount_zao">Gunung Zao</string>
   <string name="welcome_image_llamas">Llama</string>
   <string name="welcome_image_rainbow_bridge">Kreteg Kluwung</string>
   <string name="welcome_image_tulip">Tulip</string>
-  <string name="welcome_image_welcome_wikipedia">Sugeng Rawuh ing Wikipédia</string>
+  <string name="welcome_image_welcome_wikipedia" fuzzy="true">Sugeng Rawuh ing Wikipédia</string>
   <string name="welcome_image_sydney_opera_house">Wisma Opera Sydney</string>
   <string name="cancel">Wurung</string>
   <string name="navigation_drawer_open">Bukak</string>

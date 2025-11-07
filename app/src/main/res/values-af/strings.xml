@@ -8,7 +8,7 @@
 -->
 <resources>
   <string name="commons_facebook">Commons Facebook bladsy</string>
-  <string name="commons_github">Commons Github-bronkode</string>
+  <string name="commons_github" fuzzy="true">Commons Github-bronkode</string>
   <string name="commons_logo">Commons logo</string>
   <string name="commons_website">Commons webwerf</string>
   <string name="submit">Indien</string>
@@ -21,16 +21,7 @@
     <item quantity="one">%1$d lêer aan die uploaden</item>
     <item quantity="other">%1$d lêers aan die uploaden</item>
   </plurals>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">(%1$d)</item>
-    <item quantity="other">(%1$d)</item>
-  </plurals>
-  <plurals name="starting_multiple_uploads" fuzzy="true">
-    <item quantity="one">Starting %1$d upload</item>
-    <item quantity="other">Starting %1$d uploads</item>
-  </plurals>
-  <plurals name="multiple_uploads_title" fuzzy="true">
+  <plurals name="multiple_uploads_title">
     <item quantity="one">%1$d upload</item>
     <item quantity="other">%1$d uploads</item>
   </plurals>
@@ -174,15 +165,14 @@
   <string name="become_a_tester_description">Sluit aan by ons beta-kanaal op Google Play en kry vroeë toegang tot nuwe funksies en foutoplossings</string>
   <string name="_2fa_code">2FA-kode</string>
   <string name="logout_verification">Wil u regtig afmeld?</string>
-  <string name="mediaimage_failed">Mediabeeld misluk</string>
   <string name="no_subcategory_found">Geen subkategorieë gevind nie</string>
   <string name="no_parentcategory_found">Geen ouerkategorieë gevind nie</string>
   <string name="welcome_image_mount_zao">Mount Zao</string>
   <string name="welcome_image_llamas">llamas</string>
   <string name="welcome_image_rainbow_bridge">Reënboogbrug</string>
   <string name="welcome_image_tulip">Tulip</string>
-  <string name="welcome_image_welcome_wikipedia">Welkom Wikipedia</string>
-  <string name="welcome_image_welcome_copyright">Welkom Kopiereg</string>
+  <string name="welcome_image_welcome_wikipedia" fuzzy="true">Welkom Wikipedia</string>
+  <string name="welcome_image_welcome_copyright" fuzzy="true">Welkom Kopiereg</string>
   <string name="welcome_image_sydney_opera_house">Sydney Opera Huis</string>
   <string name="cancel">Kanselleer</string>
   <string name="navigation_drawer_open">oop</string>
@@ -295,11 +285,10 @@
   <string name="nominate_delete">Benoem vir skrapping</string>
   <string name="delete">Skrap</string>
   <string name="Achievements">Prestasies</string>
-  <string name="statistics">Statistiek</string>
   <string name="statistics_thanks">Dankie ontvang</string>
   <string name="statistics_featured">Voorgestelde beelde</string>
   <string name="statistics_wikidata_edits">Beelde via \"Plekke in die buurt\"</string>
-  <string name="level" fuzzy="true">Vlak</string>
+  <string name="level" fuzzy="true">Vlak %1$d</string>
   <string name="images_uploaded">Beelde opgelaai</string>
   <string name="image_reverts">Beelde nie teruggestel nie</string>
   <string name="images_used_by_wiki">Beelde gebruik</string>

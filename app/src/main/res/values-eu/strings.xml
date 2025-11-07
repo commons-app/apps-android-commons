@@ -16,7 +16,7 @@
 -->
 <resources>
   <string name="commons_facebook">Commons-en Facebook orria</string>
-  <string name="commons_github">Commons Github Iturburu-kodea</string>
+  <string name="commons_github" fuzzy="true">Commons Github Iturburu-kodea</string>
   <string name="commons_logo">Commonsen logoa</string>
   <string name="commons_website">Commons webgunea</string>
   <string name="exit_location_picker">Kokalekuaren biltzailetik irten</string>
@@ -34,10 +34,6 @@
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">Fitxategi %1$d kargatzen</item>
     <item quantity="other">%1$d fitxategi kargatzen</item>
-  </plurals>
-  <plurals name="contributions_subtitle">
-    <item quantity="one">(%1$d)</item>
-    <item quantity="other">(%1$d)</item>
   </plurals>
   <string name="starting_uploads">Igoerak hasi</string>
   <plurals name="starting_multiple_uploads">
@@ -80,7 +76,7 @@
   <string name="uploading_started">Igoera hasi da!</string>
   <string name="upload_completed_notification_title">%1$s igotzen!</string>
   <string name="upload_completed_notification_text">Ukitu igotakoa ikusteko</string>
-  <string name="upload_progress_notification_title_start">%1$s fitxategia igotzen</string>
+  <string name="upload_progress_notification_title_start" fuzzy="true">%1$s fitxategia igotzen</string>
   <string name="upload_progress_notification_title_in_progress">%1$s igotzen</string>
   <string name="upload_progress_notification_title_finishing">%1$s igotzen bukatzen</string>
   <string name="upload_failed_notification_title">%1$s igotzean akatsa</string>
@@ -196,15 +192,14 @@
   <string name="become_a_tester_title">Beta testatzaile bihurtu</string>
   <string name="_2fa_code">2FA Kodea</string>
   <string name="logout_verification">Benetan saioa itxi nahi duzu ?</string>
-  <string name="mediaimage_failed">Media irudiak kale egin du</string>
   <string name="no_subcategory_found">Ez da azpikategoriarik aurkitu</string>
   <string name="no_parentcategory_found">Ez da guraso kategoriarik aurkitu</string>
   <string name="welcome_image_mount_zao">Zao Mendia</string>
   <string name="welcome_image_llamas">Llamak</string>
   <string name="welcome_image_rainbow_bridge">Ortzadar zubia</string>
   <string name="welcome_image_tulip">Tulipa</string>
-  <string name="welcome_image_welcome_wikipedia">Ongi etorri Wikipediara</string>
-  <string name="welcome_image_welcome_copyright">Ongi etorri copyright-a</string>
+  <string name="welcome_image_welcome_wikipedia" fuzzy="true">Ongi etorri Wikipediara</string>
+  <string name="welcome_image_welcome_copyright" fuzzy="true">Ongi etorri copyright-a</string>
   <string name="welcome_image_sydney_opera_house">Sidney-ko Opera Etxea</string>
   <string name="cancel">Utzi</string>
   <string name="navigation_drawer_open">Ireki</string>
@@ -315,10 +310,9 @@
   <string name="delete">Ezabatu</string>
   <string name="Achievements">Lorpenak</string>
   <string name="Profile">Profila</string>
-  <string name="statistics">Estatistikak</string>
   <string name="statistics_thanks">Jasotako eskerrak</string>
   <string name="statistics_featured">Nabarmendutako irudiak</string>
-  <string name="level" fuzzy="true">Maila</string>
+  <string name="level" fuzzy="true">Maila %1$d</string>
   <string name="images_uploaded">Irudiak igo dira</string>
   <string name="images_used_by_wiki">Erabilitako irudiak</string>
   <string name="achievements_share_message">Partekatu zure lorpenak lagunekin!</string>
@@ -360,7 +354,7 @@
   <string name="delete_helper_ask_reason_copyright_logo">Logo</string>
   <string name="category_edit_helper_show_edit_title_success">Arrakasta</string>
   <string name="you_have_no_achievements_yet">Oraindik ez duzu ekarpenik egin</string>
-  <string name="no_achievements_yet">%s(r)ek oraindik ez du ekarpenik egin</string>
+  <string name="no_achievements_yet">%1$s(r)ek oraindik ez du ekarpenik egin</string>
   <string name="title_app_shortcut_setting">Hobespenak</string>
   <string name="theme_dark_name">Iluna</string>
   <string name="theme_light_name">Argia</string>
@@ -376,5 +370,5 @@
   <string name="leaderboard_upload">Igo</string>
   <string name="leaderboard_nearby">Hurbilekoak</string>
   <string name="location_permission_rationale">Aukerako baimena: momentuko kokapena zehaztu kategoriak iradokitzeko</string>
-  <string name="contributions_of_user">Erabiltzailearen ekarpenak: %s</string>
+  <string name="contributions_of_user">Erabiltzailearen ekarpenak: %1$s</string>
 </resources>

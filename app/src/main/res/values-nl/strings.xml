@@ -52,14 +52,10 @@
     <item quantity="one">%1$d bestand aan het uploaden</item>
     <item quantity="other">%1$d bestanden aan het uploaden</item>
   </plurals>
-  <plurals name="contributions_subtitle">
-    <item quantity="one">(%1$d)</item>
-    <item quantity="other">(%1$d)</item>
-  </plurals>
   <string name="starting_uploads">Uploaden starten</string>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">%d upload verwerken</item>
-    <item quantity="other"> %d uploads verwerken</item>
+    <item quantity="one">%1$d upload verwerken</item>
+    <item quantity="other">%1$d uploads verwerken</item>
   </plurals>
   <plurals name="multiple_uploads_title">
     <item quantity="one">%1$d upload</item>
@@ -107,7 +103,7 @@
   <string name="uploading_queued">Upload in wachtrij (beperkte verbindingsmodus ingeschakeld)</string>
   <string name="upload_completed_notification_title">%1$s geüpload</string>
   <string name="upload_completed_notification_text">Tik om uw upload te bekijken</string>
-  <string name="upload_progress_notification_title_start">Bestand wordt geüpload: %s</string>
+  <string name="upload_progress_notification_title_start">Bestand wordt geüpload: %1$s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s aan het uploaden</string>
   <string name="upload_progress_notification_title_finishing">Het uploaden van %1$s wordt afgerond</string>
   <string name="upload_failed_notification_title">Fout bij uploaden %1$s</string>
@@ -157,6 +153,7 @@
   <string name="title_activity_settings">Instellingen</string>
   <string name="title_activity_signup">Registreren</string>
   <string name="title_activity_featured_images">Uitgelichte afbeeldingen</string>
+  <string name="images_featured_explanation">Uitgelichte afbeeldingen zijn bijdragen van zeer bekwame fotografen en illustratoren die door de Wikimedia Commons-gemeenschap zijn gekozen als enkele van de beste op de site.</string>
   <string name="title_activity_custom_selector">Aangepaste kiezer</string>
   <string name="title_activity_category_details">Categorie</string>
   <string name="title_activity_review">Onderlinge toetsing</string>
@@ -247,15 +244,14 @@
   <string name="_2fa_code">Tweetrapsauthenticatie-code</string>
   <string name="email_auth_code">E-mailverificatiecode</string>
   <string name="logout_verification">Wilt u zich echt afmelden?</string>
-  <string name="mediaimage_failed">Media-afbeelding is mislukt</string>
   <string name="no_subcategory_found">Geen subcategorieën gevonden</string>
   <string name="no_parentcategory_found">Geen bovenliggende categorieën gevonden</string>
   <string name="welcome_image_mount_zao">Mount Zao</string>
   <string name="welcome_image_llamas">Lama\'s</string>
   <string name="welcome_image_rainbow_bridge">Rainbow Bridge</string>
   <string name="welcome_image_tulip">Tulp</string>
-  <string name="welcome_image_welcome_wikipedia">Welkom op Wikipedia</string>
-  <string name="welcome_image_welcome_copyright">Welkom Auteursrecht</string>
+  <string name="welcome_image_welcome_wikipedia">Een schematische afbeelding van een doorsnee Wikipedia-pagina.</string>
+  <string name="welcome_image_welcome_copyright">Tekening van een stapel papier met het auteursrechten-symbool doorgestreept.</string>
   <string name="welcome_image_sydney_opera_house">Sydney Opera House</string>
   <string name="cancel">Annuleren</string>
   <string name="navigation_drawer_open">Openen</string>
@@ -360,6 +356,7 @@
   <string name="quiz">Vragenspel</string>
   <string name="quiz_question_string">Is deze afbeelding geschikt om te uploaden?</string>
   <string name="question">Vraag</string>
+  <string name="quiz_i_am_not_sure">Ik weet het niet zeker</string>
   <string name="result">Uitslag</string>
   <string name="quiz_back_button">Als u doorgaat met het uploaden van afbeeldingen die moeten worden verwijderd, wordt uw account waarschijnlijk geblokkeerd. Weet u zeker dat u de quiz wilt beëindigen?</string>
   <string name="quiz_alert_message">Meer dan %1$s van de afbeeldingen die u heeft geüpload, zijn verwijderd. Als u doorgaat met het uploaden van afbeeldingen die moeten worden verwijderd, wordt uw account waarschijnlijk geblokkeerd.\n\nWilt u de tutorial opnieuw bekijken en vervolgens een quiz doen om u te helpen te leren welk type afbeeldingen u wel of niet moet uploaden?</string>
@@ -369,6 +366,7 @@
   <string name="blurry_image_answer">Een van de doelen van Commons is het verzamelen van kwaliteitsafbeeldingen. Daarom mogen onscherpe afbeeldingen niet worden geüpload. Probeer altijd mooie foto\'s te maken met goede belichting.</string>
   <string name="construction_event_answer">Foto\'s met technologie of cultuur zijn van harte welkom op Commons.</string>
   <string name="congratulatory_message_quiz">U heeft %1$s van de antwoorden goed. Gefeliciteerd!</string>
+  <string name="quiz_continue">Doorgaan</string>
   <string name="warning_for_no_answer">Selecteer een van de twee opties om de vraag te beantwoorden</string>
   <string name="user_not_logged_in">De aanmelding is verlopen. Meld u opnieuw aan.</string>
   <string name="quiz_result_share_message">Deel de quiz met uw vrienden!</string>
@@ -392,12 +390,11 @@
   <string name="Achievements">Prestaties</string>
   <string name="Profile">Profiel</string>
   <string name="badges">Badges</string>
-  <string name="statistics">Statistieken</string>
   <string name="statistics_thanks">Ontvangen bedankjes</string>
   <string name="statistics_featured">Uitgelichte afbeeldingen</string>
   <string name="statistics_wikidata_edits">Afbeeldingen via \"Plaatsen in de buurt\"</string>
-  <string name="level">Niveau %d</string>
-  <string name="profile_withLevel">%s (Niveau %s)</string>
+  <string name="level">Niveau %1$d</string>
+  <string name="profile_withLevel">%1$s (Niveau %2$s)</string>
   <string name="images_uploaded">Geüploade afbeeldingen</string>
   <string name="image_reverts">Afbeeldingen niet teruggedraaid</string>
   <string name="images_used_by_wiki">Gebruikte afbeeldingen</string>
@@ -457,7 +454,7 @@
   <string name="never_ask_again">Niet meer vragen</string>
   <string name="display_location_permission_title">Toestemming voor locatie vragen</string>
   <string name="display_location_permission_explanation">Naar toestemming voor locatie vragen als dat nodig is voor de functie meldingskaart dichtbij weergeven.</string>
-  <string name="achievements_fetch_failed">Er is iets misgegaan, we konden de prestaties niet ophalen</string>
+  <string name="achievements_fetch_failed">Er is iets misgegaan waardoor de prestaties niet konden worden opgevraagd</string>
   <string name="achievements_fetch_failed_ultimate_achievement">U heeft zoveel bijdragen geleverd dat ons prestatieberekeningssysteem het niet aankan. Dit is de ultieme prestatie.</string>
   <string name="ends_on">Eindigt op:</string>
   <string name="display_campaigns">Campagnes weergeven</string>
@@ -487,11 +484,11 @@
   <string name="check_category_failure_message">Kan categoriecontrole niet aanvragen voor %1$s</string>
   <string name="check_category_toast">Categoriecontrole aanvragen voor %1$s</string>
   <string name="nominate_for_deletion_done">Afgerond</string>
-  <string name="send_thank_success_title">Bedanken: gelukt</string>
-  <string name="send_thank_success_message">Bedankje succesvol verzonden naar %1$s</string>
+  <string name="send_thank_success_title">Bedankje sturen: gelukt</string>
+  <string name="send_thank_success_message">Bedankje verzonden naar %1$s</string>
   <string name="send_thank_failure_message">Verzending bedankje naar %1$s is mislukt</string>
-  <string name="send_thank_failure_title">Verzending bedankje is mislukt</string>
-  <string name="send_thank_toast">Verstuur een bedankje voor %1$s</string>
+  <string name="send_thank_failure_title">Bedankje sturen: mislukt</string>
+  <string name="send_thank_toast">Bedankje voor %1$s wordt verstuurd</string>
   <string name="review_copyright">Voldoet dit aan de regels van het auteursrecht?</string>
   <string name="review_category">Is dit correct gecategoriseerd?</string>
   <string name="review_spam">Past dit bij de doelstelling van het project?</string>
@@ -518,15 +515,14 @@
   <string name="menu_option_unread">Ongelezen bekijken</string>
   <string name="error_occurred_in_picking_images">Er is een fout opgetreden bij het kiezen van afbeeldingen</string>
   <string name="please_wait">Een ogenblik geduld…</string>
-  <string name="images_featured_explanation">Uitgelichte afbeeldingen zijn afbeeldingen van zeer bekwame fotografen en illustratoren op de site die door de Wikimedia Commons-gemeenschap zijn gekozen als de hoogste kwaliteit.</string>
   <string name="images_via_nearby_explanation">Afbeeldingen die zijn geüpload via Plaatsen in de Buurt zijn de afbeeldingen die worden geüpload door plaatsen op de kaart te ontdekken.</string>
   <string name="thanks_received_explanation">Met deze functie kunnen gebruikers een bedankbericht sturen naar andere gebruikers die nuttige bewerkingen uitvoeren, door een kleine bedanklink op de geschiedenispagina of diff-pagina.</string>
-  <string name="copy_image_caption_description">Kopiëren naar volgende media</string>
+  <string name="copy_image_caption_description">Kopiëren naar de volgende onderdelen</string>
   <string name="copied_successfully">Gekopieerd</string>
   <string name="welcome_do_upload_content_description">Voorbeelden van goede afbeeldingen om te uploaden naar Commons</string>
   <string name="welcome_dont_upload_content_description">Voorbeelden van afbeeldingen die niet mogen worden geüpload</string>
   <string name="skip_image">Sla deze afbeelding over</string>
-  <string name="download_failed_we_cannot_download_the_file_without_storage_permission">Download mislukt!! We kunnen het bestand niet downloaden zonder toestemming voor externe opslag.</string>
+  <string name="download_failed_we_cannot_download_the_file_without_storage_permission">Download mislukt. Zonder toestemming voor externe opslag kan het bestand niet worden gedownload.</string>
   <string name="manage_exif_tags">EXIF-tags beheren</string>
   <string name="manage_exif_tags_summary">Selecteer welke EXIF-tags in uploads moeten worden behouden</string>
   <string name="exif_tag_name_author">Auteur</string>
@@ -536,11 +532,10 @@
   <string name="exif_tag_name_lensModel">Lensmodel</string>
   <string name="exif_tag_name_serialNumbers">Serienummers</string>
   <string name="exif_tag_name_software">Software</string>
-  <string name="media_location_permission_denied">Toegang tot medialocatie geweigerd</string>
-  <string name="add_location_manually">Het is mogelijk dat we niet automatisch locatiegegevens kunnen verkrijgen van foto\'s die u uploadt. Voeg de locatie bij elke foto toe voordat u die upload</string>
   <string name="share_text">Upload foto\'s rechtstreeks vanaf uw telefoon naar Wikimedia Commons. Download de Commons-app nu: %1$s</string>
   <string name="share_via">App delen via...</string>
   <string name="image_info">Afbeeldingsinfo</string>
+  <string name="upload_categories_dont_show_this_message_again">Dit bericht niet meer weergeven</string>
   <string name="no_categories_found">Geen categorieën gevonden</string>
   <string name="no_depiction_found">Geen beschrijvingen gevonden</string>
   <string name="upload_cancelled">Uploaden geannuleerd</string>
@@ -593,7 +588,7 @@
   <string name="description_activity_title">Bewerk beschrijvingen en bijschriften.</string>
   <string name="share_image_via">Deel afbeelding via</string>
   <string name="you_have_no_achievements_yet">U heeft nog geen bijdragen geleverd</string>
-  <string name="no_achievements_yet">%s heeft nog geen bijdragen gedaan</string>
+  <string name="no_achievements_yet">%1$s heeft nog geen bijdragen gedaan</string>
   <string name="account_created">Account aangemaakt!</string>
   <string name="text_copy">De tekst is gekopieerd naar het klembord.</string>
   <string name="notification_mark_read">Melding gemarkeerd als gelezen</string>
@@ -646,7 +641,7 @@
   <string name="wikipedia_instructions_step_5">5. Plak de wikitekst op de juiste plaats.</string>
   <string name="wikipedia_instructions_step_6">6. Bewerk indien nodig de wikitekst voor de juiste positionering. Zie &lt;a href=\"https://en.wikipedia.org/wiki/Wikipedia:Manual_of_Style/Images#How_to_place_an_image\"&gt;hier&lt;/a&gt; voor meer informatie.</string>
   <string name="wikipedia_instructions_step_7">7. Publiceer het artikel</string>
-  <string name="copy_wikicode_to_clipboard">Kopieer wikicode naar klembord</string>
+  <string name="copy_wikicode_to_clipboard">Wikitekst naar klembord kopiëren</string>
   <string name="pause">pauzeren</string>
   <string name="resume">hervatten</string>
   <string name="paused">Gepauzeerd</string>
@@ -687,6 +682,8 @@
   <string name="categories_tooltip">Selecteer de juiste categorieën. In tegenstelling tot afbeeldingen zijn categorieën alleen in het Engels.</string>
   <string name="license_tooltip">Commons maakt uw foto\'s herbruikbaar en bewerkbaar voor iedereen. Wilt u afstand doen van deze rechten? Wilt u een naamsvermelding? Wilt u dat bewerkte versies dezelfde licentie gebruiken?</string>
   <string name="depicts_step_title">Beeldt af</string>
+  <string name="depicts_label">Label</string>
+  <string name="depicts_description">Beschrijving</string>
   <string name="license_step_title">Medialicentie</string>
   <string name="media_detail_step_title">Mediadetails</string>
   <string name="menu_view_category_page">Categoriepagina bekijken</string>
@@ -713,7 +710,7 @@
   <string name="back">Terug</string>
   <string name="welcome_custom_picture_selector_text">Welkom bij de Aangepaste Afbeelding Kiezer</string>
   <string name="custom_selector_info_text1">Deze kiezer laat zien welke foto\'s u al naar Commons hebt geüpload.</string>
-  <string name="custom_selector_info_text2">In tegenstelling tot de afbeelding aan de linkerkant, heeft de afbeelding aan de rechterkant het Commons-logo om aan te geven dat deze al is geüpload.\n  Aanraken en vasthouden voor afbeeldingsvoorbeeld.</string>
+  <string name="custom_selector_info_text2">In tegenstelling tot de afbeelding links staat bij de afbeelding rechts het Commons-logo, wat aangeeft dat deze al is geüpload.\n\nHoud ingedrukt voor een voorvertoning van de afbeelding.</string>
   <string name="welcome_custom_selector_ok">Geweldig</string>
   <string name="custom_selector_already_uploaded_image_text">Deze afbeelding is al geüpload op Wikimedia Commons.</string>
   <string name="custom_selector_over_limit_warning">Om technische redenen kan de app niet op betrouwbare wijze meer dan %1$d foto’s tegelijk uploaden. De uploadlimiet van %1$d is met %2$d overschreden.</string>
@@ -731,8 +728,8 @@
   <string name="read_phone_state_permission_message">Kaarten in de buurt moeten TELEFOONSTATUS lezen om goed te kunnen werken</string>
   <string name="location_off_dialog_text">Schakel locatievoorzieningen in om plaatsen in de buurt te bekijken.</string>
   <string name="location_permission_rationale">Optionele toestemming: Huidige locatie ophalen voor categoriesuggesties</string>
-  <string name="contributions_of_user">Bijdragen door Gebruiker: %s</string>
-  <string name="achievements_of_user">Prestaties van Gebruiker: %s</string>
+  <string name="contributions_of_user">Bijdragen door Gebruiker: %1$s</string>
+  <string name="achievements_of_user">Prestaties van Gebruiker: %1$s</string>
   <string name="menu_view_user_page">Gebruikersprofiel bekijken</string>
   <string name="edit_depictions">Wijzig items</string>
   <string name="edit_categories">Categorieën bewerken</string>
@@ -764,8 +761,8 @@
   <string name="unmark_as_not_for_upload">Schakel de markering als niet geschikt voor uploaden uit</string>
   <string name="marking_as_not_for_upload">Markeren als niet geschikt voor uploaden</string>
   <string name="unmarking_as_not_for_upload">Markering als niet geschikt voor uploaden uitschakelen</string>
-  <string name="show_already_actioned_pictures">Reeds behandelde afbeeldingen weergeven</string>
-  <string name="hiding_already_actioned_pictures">Reeds behandelde afbeeldingen verbergen</string>
+  <string name="show_already_actioned_pictures">Reeds afgehandelde afbeeldingen weergeven</string>
+  <string name="hiding_already_actioned_pictures">Reeds afgehandelde afbeeldingen verbergen</string>
   <string name="no_more_images_found">Geen afbeeldingen meer gevonden</string>
   <string name="this_image_is_already_uploaded">Deze afbeelding is al geüpload</string>
   <string name="can_not_select_this_image_for_upload">Kan deze afbeelding niet selecteren om te uploaden</string>
@@ -805,11 +802,11 @@
   <string name="do_you_want_to_open_kml_file">Wilt u het KML-bestand openen?</string>
   <string name="failed_to_save_kml_file">Het KML-bestand kon niet opgeslagen worden.</string>
   <string name="failed_to_save_gpx_file">Het GPX-bestand kon niet opgeslagen worden.</string>
-  <string name="saving_kml_file">Het KML-bestand wordt opgeslagen</string>
-  <string name="saving_gpx_file">Het GPX-bestand wordt opgeslagen</string>
+  <string name="saving_kml_file">Wordt als KML-bestand opgeslagen…</string>
+  <string name="saving_gpx_file">Wordt als GPX-bestand opgeslagen…</string>
   <plurals name="custom_picker_images_selected_title_appendix">
-    <item quantity="one">%d afbeelding geselecteerd</item>
-    <item quantity="other">%d afbeeldingen geselecteerd</item>
+    <item quantity="one">%1$d afbeelding geselecteerd</item>
+    <item quantity="other">%1$d afbeeldingen geselecteerd</item>
   </plurals>
   <string name="multiple_files_depiction">Houd er rekening mee dat alle afbeeldingen in een multi-upload dezelfde categorieën krijgen en geacht worden hetzelfde weer te geven. Als deze gegevens per afbeelding moeten verschillen, voer dan meerdere afzonderlijke uploads uit.</string>
   <string name="multiple_files_depiction_header">Opmerking over multi-uploads</string>
@@ -845,7 +842,6 @@
   <string name="usages_on_commons_heading">Commons</string>
   <string name="usages_on_other_wikis_heading">Andere wiki’s</string>
   <string name="file_usages_container_heading">Bestandsgebruik</string>
-  <string name="title_activity_single_web_view">Activiteit enkele webraadpleging</string>
   <string name="account">Account</string>
   <string name="vanish_account">Account laten verdwijnen</string>
   <string name="account_vanish_request_confirm_title">Waarschuwing verwijdering account</string>

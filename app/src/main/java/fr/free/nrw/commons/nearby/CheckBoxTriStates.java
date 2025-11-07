@@ -44,7 +44,7 @@ public class CheckBoxTriStates extends AppCompatCheckBox {
         public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
             switch (state) {
                 case UNKNOWN:
-                    setState(UNCHECKED);;
+                    setState(UNCHECKED);
                     break;
                 case UNCHECKED:
                     setState(CHECKED);

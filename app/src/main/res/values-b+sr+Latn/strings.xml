@@ -7,7 +7,7 @@
 -->
 <resources>
   <string name="commons_facebook">Fejsbuk stranica Ostave</string>
-  <string name="commons_github">Izvorni kod na Github-u</string>
+  <string name="commons_github" fuzzy="true">Izvorni kod na Github-u</string>
   <string name="commons_logo">Logo Ostave</string>
   <string name="commons_website">Veb-sajt Ostave</string>
   <string name="submit">Pošalji</string>
@@ -28,18 +28,15 @@
     <item quantity="one">%1$d datoteka se otprema</item>
     <item quantity="other">%1$d datoteke se otpremaju</item>
   </plurals>
-  <plurals name="contributions_subtitle">
-    <item quantity="one">%1$d otpremanje</item>
-    <item quantity="other">%1$d otpremanja</item>
-  </plurals>
   <string name="starting_uploads">Pokretanje otpremanja</string>
-  <plurals name="starting_multiple_uploads">
-    <item quantity="one">Procesuiranje %d otpremanje</item>
-    <item quantity="other">Procesuiranje %d otpremanja</item>
+  <plurals name="starting_multiple_uploads" fuzzy="true">
+    <item quantity="one">Procesuiranje %1$d otpremanje</item>
+    <item quantity="few">Procesuiranje %1$d otpremanje</item>
+    <item quantity="other">Procesuiranje %1$d otpremanja</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">%d otpremanje</item>
-    <item quantity="other">%d otpremanja</item>
+    <item quantity="one">%1$d otpremanje</item>
+    <item quantity="other">%1$d otpremanja</item>
   </plurals>
   <plurals name="share_license_summary">
     <item quantity="one">Slika će se voditi pod licencom %1$s</item>
@@ -83,7 +80,7 @@
   <string name="uploading_queued">Otpremanje je u redu (omogućen režim ograničene veze)</string>
   <string name="upload_completed_notification_title">Datoteka „%1$s” je otpremljena.</string>
   <string name="upload_completed_notification_text">Dodirnite da biste videli otpremanje</string>
-  <string name="upload_progress_notification_title_start">Otpremanje datoteke „%s”</string>
+  <string name="upload_progress_notification_title_start">Otpremanje datoteke „%1$s”</string>
   <string name="upload_progress_notification_title_in_progress">Otpremanje datoteke „%1$s”</string>
   <string name="upload_progress_notification_title_finishing">Završavanje otpremanja datoteke „%1$s”</string>
   <string name="upload_failed_notification_title">Otpremanje datoteke „%1$s” nije uspelo</string>
@@ -126,6 +123,7 @@
   <string name="title_activity_settings">Podešavanja</string>
   <string name="title_activity_signup">Otvori nalog</string>
   <string name="title_activity_featured_images">Izabrane slike</string>
+  <string name="images_featured_explanation" fuzzy="true">Istaknute slike su slike od veoma iskusnih fotografa i ilustratora, koje je zajednica Vikimedijine ostave odabrala kao neke od najvećeg kvaliteta na sajtu.</string>
   <string name="title_activity_category_details">Kategorija</string>
   <string name="title_activity_review">Pregled slika</string>
   <string name="menu_about">O aplikaciji</string>
@@ -210,15 +208,14 @@
   <string name="become_a_tester_description">Priključite se našem kanalu beta verzija na Google Play-u i ranije pristupajte novim funkcijama i ispravkama grešaka</string>
   <string name="_2fa_code">2FA kod</string>
   <string name="logout_verification">Zaista želite da se odjavite?</string>
-  <string name="mediaimage_failed">Medijska slika neuspešna</string>
   <string name="no_subcategory_found">Potkategorije nisu pronađene</string>
   <string name="no_parentcategory_found">Nadređene kategorije nisu pronađene</string>
   <string name="welcome_image_mount_zao">Planina Zao</string>
   <string name="welcome_image_llamas">Lame</string>
   <string name="welcome_image_rainbow_bridge">Dugin most</string>
   <string name="welcome_image_tulip">Tulipan</string>
-  <string name="welcome_image_welcome_wikipedia">Dobrodošlica Vikipediji</string>
-  <string name="welcome_image_welcome_copyright">Dobrodošlica za autorska prava</string>
+  <string name="welcome_image_welcome_wikipedia" fuzzy="true">Dobrodošlica Vikipediji</string>
+  <string name="welcome_image_welcome_copyright" fuzzy="true">Dobrodošlica za autorska prava</string>
   <string name="welcome_image_sydney_opera_house">Sidnejska opera</string>
   <string name="cancel">Otkaži</string>
   <string name="navigation_drawer_open">Otvori</string>
@@ -348,11 +345,10 @@
   <string name="delete">Izbriši</string>
   <string name="Achievements">Dostignuća</string>
   <string name="Profile">Profil</string>
-  <string name="statistics">Statistika</string>
   <string name="statistics_thanks">Zahvaljivanja</string>
   <string name="statistics_featured">Izabrane slike</string>
   <string name="statistics_wikidata_edits">Slike preko \"Mesta u blizini\"</string>
-  <string name="level" fuzzy="true">Nivo</string>
+  <string name="level" fuzzy="true">Nivo %1$d</string>
   <string name="images_uploaded">Otpremljene slike</string>
   <string name="image_reverts">Slike koje nisu uklonjene</string>
   <string name="images_used_by_wiki">Iskorišćene slike</string>
@@ -437,11 +433,11 @@
   <string name="check_category_failure_message">Nije moguće zatražiti proveru kategorije za %1$s</string>
   <string name="check_category_toast">Zahtevanje provere kategorije za %1$s</string>
   <string name="nominate_for_deletion_done">Urađeno</string>
-  <string name="send_thank_success_title">Slanje zahvalnice: Uspešno</string>
-  <string name="send_thank_success_message">Uspešno poslata zahvalnica na %1$s</string>
-  <string name="send_thank_failure_message">Nije uspelo slanje zahvalnice %1$s</string>
-  <string name="send_thank_failure_title">Slanje zahvalnice: Nije uspelo</string>
-  <string name="send_thank_toast">Slanje zahvalnica za %1$s</string>
+  <string name="send_thank_success_title" fuzzy="true">Slanje zahvalnice: Uspešno</string>
+  <string name="send_thank_success_message" fuzzy="true">Uspešno poslata zahvalnica na %1$s</string>
+  <string name="send_thank_failure_message" fuzzy="true">Nije uspelo slanje zahvalnice %1$s</string>
+  <string name="send_thank_failure_title" fuzzy="true">Slanje zahvalnice: Nije uspelo</string>
+  <string name="send_thank_toast" fuzzy="true">Slanje zahvalnica za %1$s</string>
   <string name="review_copyright">Da li prati pravila autorskih prava?</string>
   <string name="review_category">Da li je ovo korektno kategorizovano?</string>
   <string name="review_spam">Da li je za Ostavu?</string>
@@ -466,14 +462,13 @@
   <string name="menu_option_unread">Prikaži nepročitano</string>
   <string name="error_occurred_in_picking_images">Došlo je do greške pri izboru slika</string>
   <string name="please_wait">Sačekajte…</string>
-  <string name="images_featured_explanation">Istaknute slike su slike od veoma iskusnih fotografa i ilustratora, koje je zajednica Vikimedijine ostave odabrala kao neke od najvećeg kvaliteta na sajtu.</string>
   <string name="images_via_nearby_explanation">Slike otpremljene preko Mesta u blizini su slike koje su otpremljene otkrivanjem mesta na mapi.</string>
   <string name="thanks_received_explanation">Ova mogućnost omogućava urednicima da pošanju obaveštenje zahvaljivanja korisnicima koji su napravili korisne izmene - korišćenjem male veze za zahvaljivanje na stranici istorije ili razlici izmena.</string>
   <string name="copied_successfully">Kopirano</string>
   <string name="welcome_do_upload_content_description">Primeri dobrih slika za otpremanje na Ostavu</string>
   <string name="welcome_dont_upload_content_description">Primeri slika koje nisu za otpremanje</string>
   <string name="skip_image">Preskoči sliku</string>
-  <string name="download_failed_we_cannot_download_the_file_without_storage_permission">Preuzimanje nije uspelo!! Ne možemo preuzeti datoteku bez dozvole za pristup spoljašnjoj memoriji.</string>
+  <string name="download_failed_we_cannot_download_the_file_without_storage_permission" fuzzy="true">Preuzimanje nije uspelo!! Ne možemo preuzeti datoteku bez dozvole za pristup spoljašnjoj memoriji.</string>
   <string name="manage_exif_tags">Upravljanje EXIF oznakama</string>
   <string name="manage_exif_tags_summary">Odaberite koje EXIF želite da sačuvate u otpremanjima</string>
   <string name="exif_tag_name_author">Autor</string>
@@ -483,8 +478,6 @@
   <string name="exif_tag_name_lensModel">Model objektiva</string>
   <string name="exif_tag_name_serialNumbers">Serijski brojevi</string>
   <string name="exif_tag_name_software">Softver</string>
-  <string name="media_location_permission_denied">Pristup lokaciji medija je odbijen</string>
-  <string name="add_location_manually">Možda nećemo moći da automatski pribavimo podatke o lokaciji iz slika koje otpremite. Dodajte odgovarajuću lokaciju za svaku sliku pre objavljivanja</string>
   <string name="share_text">Otpremi fotografije na Vikimedijinu Ostavu direktno sa svog telefona. Preuzmi aplikaciju Ostave sada: %1$s</string>
   <string name="share_via">Podeli aplikaciju preko...</string>
   <string name="image_info">Informacije o slici</string>
@@ -532,7 +525,7 @@
   <string name="description_activity_title">Uredi opise i natpise</string>
   <string name="share_image_via">Podeli sliku preko</string>
   <string name="you_have_no_achievements_yet">Nemate još uvek doprinosa</string>
-  <string name="no_achievements_yet">%s još nije doprinosio/la</string>
+  <string name="no_achievements_yet">%1$s još nije doprinosio/la</string>
   <string name="account_created">Nalog je otvoren.</string>
   <string name="text_copy">Tekst je kopiran u privremenu memoriju</string>
   <string name="notification_mark_read">Obaveštenje je označeno pročitanim</string>
@@ -541,7 +534,7 @@
   <string name="place_state_exists">Postoji</string>
   <string name="place_state_needs_photo">Potrebna slika</string>
   <string name="place_type">Tip mesta:</string>
-  <string name="nearby_search_hint">Most, muzej, hotel itd.</string>
+  <string name="nearby_search_hint" fuzzy="true">Most, muzej, hotel itd.</string>
   <string name="you_must_reset_your_passsword" fuzzy="true">Došlo je do greške sa prijavljivanjem, morate da promenite vašu lozinku !!</string>
   <string name="upload_nearby_place_found_title">Obližnje mesto je pronađeno</string>
   <string name="upload_nearby_place_found_description_singular" fuzzy="true">Da li je ovo fotografija %1$s?</string>
@@ -576,7 +569,7 @@
   <string name="wikipedia_instructions_step_5">5. Nalepite vikitekst na odgovarajuće mesto.</string>
   <string name="wikipedia_instructions_step_6">6. Izmenite vikitekst za odgovarajuće pozicioniranje, ukoliko je potrebno. Više informacija možete pronaći &lt;a href=\"https://en.wikipedia.org/wiki/Wikipedia:Manual_of_Style/Images#How_to_place_an_image\"&gt;ovde&lt;/a&gt;.</string>
   <string name="wikipedia_instructions_step_7">7. Objavite članak</string>
-  <string name="copy_wikicode_to_clipboard">Kopirajte viki sintaksu u međuspremnik</string>
+  <string name="copy_wikicode_to_clipboard" fuzzy="true">Kopirajte viki sintaksu u međuspremnik</string>
   <string name="pause">pauziraj</string>
   <string name="resume">nastavi</string>
   <string name="paused">Pauzirano</string>
@@ -638,7 +631,7 @@
   <string name="back">Nazad</string>
   <string name="welcome_custom_picture_selector_text">Dobrodošli u Prilagođen birač slika</string>
   <string name="custom_selector_info_text1">Ovaj birač vam prikazuje koje su slike već otpremljene na Ostavu.</string>
-  <string name="custom_selector_info_text2">Za razliku od slika sa leve strane, slike na desnoj strani imaju logo Ostave, što označava da su već otpremljene. Dodirnite i držite za pregled slike.</string>
+  <string name="custom_selector_info_text2" fuzzy="true">Za razliku od slika sa leve strane, slike na desnoj strani imaju logo Ostave, što označava da su već otpremljene. Dodirnite i držite za pregled slike.</string>
   <string name="welcome_custom_selector_ok">Odlično</string>
   <string name="custom_selector_already_uploaded_image_text">Ova slika je već otpremljena na Ostavu.</string>
   <string name="wlm_upload_info">Ova slika će biti uvrštena u takmičenje Viki voli spomenike</string>
@@ -648,8 +641,8 @@
   <string name="wlm_campaign_description">Viki voli spomenike je međunarodno takmičenje fotografija spomenika, koje organizuje Vikimedija</string>
   <string name="need_permission">Potrebna je dozvola</string>
   <string name="location_permission_rationale">Neobavezna dozvola: preuzmi trenutnu lokaciju za predloge kategorija</string>
-  <string name="contributions_of_user">Doprinosi korisnika/ce: %s</string>
-  <string name="achievements_of_user">Dostignuća korisnika/ce: %s</string>
+  <string name="contributions_of_user">Doprinosi korisnika/ce: %1$s</string>
+  <string name="achievements_of_user">Dostignuća korisnika/ce: %1$s</string>
   <string name="menu_view_user_page" fuzzy="true">Prikaži korisničku stranicu</string>
   <string name="edit_categories">Izmeni kategorije</string>
   <string name="advanced_options">Napredne opcije</string>
@@ -658,7 +651,7 @@
   <string name="location_message">Podaci o lokaciji pomažu viki urednicima da pronađu vašu sliku, čineći je korisnijom.\nVaša skorašnja otpremanja nemaju lokaciju.\nPredlažemo vam da uključite lokaciju u podešavanjima aplikacije vaše kamere.\nHvala vam za otpremanja!</string>
   <string name="no_location_found_title">Lokacija nije pronađena</string>
   <string name="no_location_found_message">Šta mislite o dodavanju mesta gde je napravljena ova slika?\nPodaci o lokaciju pomažu viki urednicima da pronađu vašu sliku, čineći je korisnijom.\nHvala vam!</string>
-  <string name="add_location">Dodaj lokaciju</string>
+  <string name="add_location" fuzzy="true">Dodaj lokaciju</string>
   <string name="feedback_sharing_data_alert">Uklonite iz ovog mejla bilo sve informacije koje ne želite da delite javno. Takođe, imajte na umu da će vaša imejl adresa sa koje objavljujete, i povezano ime i profilna slika, biti javno vidljivi.</string>
   <string name="explore_map_details">Detalji</string>
   <string name="achievements_unavailable_beta" fuzzy="true">Dostignuća su dostupna samo u produkcionoj verziji, proverite dokumentaciju za programere.</string>
@@ -679,8 +672,8 @@
   <string name="unmark_as_not_for_upload">Ukloni oznaku \"nije za otpremanje\"</string>
   <string name="marking_as_not_for_upload">Označavanje kao \"nije za otpremanje\"</string>
   <string name="unmarking_as_not_for_upload">Uklanjanje oznake \"nije za otpremanje\"</string>
-  <string name="show_already_actioned_pictures">Prikaži već izvršene slike</string>
-  <string name="hiding_already_actioned_pictures">Sakrivanje već izvršenih slika</string>
+  <string name="show_already_actioned_pictures" fuzzy="true">Prikaži već izvršene slike</string>
+  <string name="hiding_already_actioned_pictures" fuzzy="true">Sakrivanje već izvršenih slika</string>
   <string name="no_more_images_found">Nije pronađeno više slika</string>
   <string name="this_image_is_already_uploaded">Ova slika je već otpremljena</string>
   <string name="can_not_select_this_image_for_upload">Nije moguće odabrati ovu sliku za otpremanje</string>
@@ -698,7 +691,7 @@
   <string name="storage_permissions_denied">Odbijene dozvole za skladište</string>
   <string name="unable_to_share_upload_item">Nije moguće podeliti ovu stavku</string>
   <plurals name="custom_picker_images_selected_title_appendix">
-    <item quantity="one">%d slika je odabrana</item>
-    <item quantity="other">%d slika je odabrano</item>
+    <item quantity="one">%1$d slika je odabrana</item>
+    <item quantity="other">%1$d slika je odabrano</item>
   </plurals>
 </resources>

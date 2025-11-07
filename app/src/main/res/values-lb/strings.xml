@@ -8,7 +8,7 @@
 -->
 <resources>
   <string name="commons_facebook">Commons-Facebook-Säit</string>
-  <string name="commons_github">Commons-Quellcode op Github</string>
+  <string name="commons_github">Commons-Quellcode op GitHub</string>
   <string name="commons_logo">Commons-Logo</string>
   <string name="commons_website">Internetsite vu Commons</string>
   <string name="submit">Späicheren</string>
@@ -27,18 +27,14 @@
     <item quantity="one">ee Fichier eroplueden</item>
     <item quantity="other">%1$d Fichieren eroplueden</item>
   </plurals>
-  <plurals name="contributions_subtitle">
-    <item quantity="one">(%1$d)</item>
-    <item quantity="other">(%1$d)</item>
-  </plurals>
   <string name="starting_uploads">Eropluede starten</string>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">Ugefaangen %d Fichier eropzelueden</item>
-    <item quantity="other">Ugefaangen %d Fichieren eropzelueden</item>
+    <item quantity="one">Ugefaangen %1$d Fichier eropzelueden</item>
+    <item quantity="other">Ugefaangen %1$d Fichieren eropzelueden</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">Ee Fichier eropgelueden</item>
-    <item quantity="other">%d Fichieren eropgelueden</item>
+    <item quantity="one">%1$d Fichier eropgelueden</item>
+    <item quantity="other">%1$d Fichieren eropgelueden</item>
   </plurals>
   <plurals name="share_license_summary">
     <item quantity="one">Dëst Bild gëtt ënner %1$s lizenzéiert</item>
@@ -71,7 +67,7 @@
   <string name="uploading_started">D\'Eroplueden huet ugefaang!</string>
   <string name="upload_completed_notification_title">%1$s eropgelueden!</string>
   <string name="upload_completed_notification_text">Tippt fir de Fichier ze gesinn, deen Dir eropgelueden hutt</string>
-  <string name="upload_progress_notification_title_start">Fichier eroplueden: %s</string>
+  <string name="upload_progress_notification_title_start">Fichier eroplueden: %1$s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s gëtt eropgelueden</string>
   <string name="upload_progress_notification_title_finishing">Eropluede vu(n) %1$s ofschléissen</string>
   <string name="upload_failed_notification_title">%1$s konnt net eropgeluede ginn</string>
@@ -198,12 +194,13 @@
   <string name="email_auth_code">E-Mail-Verifikatiounscode</string>
   <string name="logout_verification">Wëllt dir Iech wierklech ausloggen?</string>
   <string name="no_subcategory_found">Keng Ënnerkategorie fonnt</string>
+  <string name="no_parentcategory_found">Keng Iwwerkategorië fonnt</string>
   <string name="welcome_image_mount_zao">Bierg Zao</string>
   <string name="welcome_image_llamas">Lamaen</string>
   <string name="welcome_image_rainbow_bridge">Rainbow Bridge</string>
   <string name="welcome_image_tulip">Tulp</string>
-  <string name="welcome_image_welcome_wikipedia">Wëllkomm Wikipedia</string>
-  <string name="welcome_image_welcome_copyright">Wëllkomm Copyright</string>
+  <string name="welcome_image_welcome_wikipedia">E schematescht Bild vun engem geneeresche Wikipedia-Artikel.</string>
+  <string name="welcome_image_welcome_copyright">Eng Zeechnung vun engem Koup Pabeier mat duerchgestrachenem Copyright-Symbol.</string>
   <string name="welcome_image_sydney_opera_house">Oper vu Sydney</string>
   <string name="cancel">Ofbriechen</string>
   <string name="navigation_drawer_open">Opmaachen</string>
@@ -290,8 +287,10 @@
   <string name="wallpaper_set_successfully">Hannergrondbild festgeluecht</string>
   <string name="quiz">Quiz</string>
   <string name="question">Fro</string>
+  <string name="quiz_i_am_not_sure">Ech si mer net sécher</string>
   <string name="result">Resultat</string>
   <string name="congratulatory_message_quiz">Dir hutt %1$s richteg Äntwert. Gléckwonsch!</string>
+  <string name="quiz_continue">Virufueren</string>
   <string name="warning_for_no_answer">Wielt eng vun den zwou Méiglechkeete fir d\'Fro ze beäntwerten</string>
   <string name="quiz_result_share_message">Deelt Äre Quiz mat Äre Frënn!</string>
   <string name="continue_message">Virufueren</string>
@@ -305,11 +304,10 @@
   <string name="delete">Läschen</string>
   <string name="Achievements">Realisatiounen</string>
   <string name="Profile">Profil</string>
-  <string name="statistics">Statistiken</string>
   <string name="statistics_thanks">Mercie kritt</string>
   <string name="statistics_featured">Bemierkenswäert Biller</string>
-  <string name="level">Niveau %d</string>
-  <string name="profile_withLevel">%s (Niveau %s)</string>
+  <string name="level">Niveau %1$d</string>
+  <string name="profile_withLevel">%1$s (Niveau %2$s)</string>
   <string name="images_uploaded">Eropgeluede Biller</string>
   <string name="image_reverts">Biller net zréckgesat</string>
   <string name="images_used_by_wiki">Benotzte Biller</string>
@@ -379,6 +377,7 @@
   <string name="share_text">Luet Fotoen direkt vun Ärem Handy op Wikimedia Commons erop. Luet d\'Commons-App elo erof: %1$s</string>
   <string name="share_via">App deelen iwwer...</string>
   <string name="image_info">Bildinformatiounen</string>
+  <string name="upload_categories_dont_show_this_message_again">Dëse Message net nach eng Kéier weisen</string>
   <string name="no_categories_found">Keng Kategorie fonnt.</string>
   <string name="upload_cancelled">Eroplueden ofgebrach</string>
   <string name="dialog_box_text_nomination">Firwat soll %1$s geläscht ginn?</string>
@@ -408,7 +407,7 @@
   <string name="description_activity_title">Beschreiwungen a Beschrëftungen änneren</string>
   <string name="share_image_via">Bild deelen iwwer</string>
   <string name="you_have_no_achievements_yet">Dir hutt nach keng Kontributioune gemaach</string>
-  <string name="no_achievements_yet">%s huet nach keng Kontributioune gemaach</string>
+  <string name="no_achievements_yet">De Benotzer %1$s huet nach keng Kontributioune gemaach</string>
   <string name="account_created">Benotzerkont ugeluecht!</string>
   <string name="text_copy">Text an den Tëschespäicher kopéiert</string>
   <string name="some_error">Et gouf e Feeler!</string>
@@ -444,7 +443,7 @@
   <string name="instructions_title">Instruktiounen</string>
   <string name="wikipedia_instructions_step_1">1. Benotzt de follgende Wikitext:</string>
   <string name="wikipedia_instructions_step_7">7.Den Artikel publizéieren</string>
-  <string name="copy_wikicode_to_clipboard">De Wikicode an den Tëschespäicher kopéieren</string>
+  <string name="copy_wikicode_to_clipboard">De Wikitext an den Tëschespäicher kopéieren</string>
   <string name="pause">ënnerbriechen</string>
   <string name="resume">virufueren</string>
   <string name="paused">Ënnerbrach</string>
@@ -474,6 +473,8 @@
   <string name="quality_images_info">Qualitéitsbiller sinn Diagrammen oder Fotoen, déi gewësse Qualitéitscritèren erfëllen (déi haaptsächlech vun technescher Natur sinn) a wäertvoll fir Wikimedia-Projete sinn.</string>
   <string name="cancelling_upload">Eropluede gëtt ofgebrach....</string>
   <string name="cancel_upload">Eroplueden ofbriechen</string>
+  <string name="depicts_label">Etikett</string>
+  <string name="depicts_description">Beschreiwung</string>
   <string name="menu_view_category_page">Kategoriesäit weisen</string>
   <string name="app_ui_language">Sprooch vum Interface vum Benotzer vun der App</string>
   <string name="remove">Hëlt eng Beschrëftung a Beschreiwung ewech</string>
@@ -496,8 +497,8 @@
   <string name="wlm_campaign_description">Wiki Loves Monuments ass een internationale Fotosconcours fir Monumenter, dee vu Wikimedia organiséiert gëtt</string>
   <string name="need_permission">Autorisatioun gëtt gebraucht</string>
   <string name="location_permission_rationale">Fakultativ Autorisatioun: Déi aktuell Plaz kréie fir Propose fir Kategorien</string>
-  <string name="contributions_of_user">Kontributioune vum Benotzer: %s</string>
-  <string name="achievements_of_user">Leeschtunge vum Benotzer: %s</string>
+  <string name="contributions_of_user">Kontributioune vum Benotzer: %1$s</string>
+  <string name="achievements_of_user">Leeschtunge vum Benotzer: %1$s</string>
   <string name="menu_view_user_page">Benotzerprofil weisen</string>
   <string name="edit_categories">Kategorien änneren</string>
   <string name="advanced_options">Erweidert Optiounen</string>
@@ -527,15 +528,15 @@
   <string name="send_thanks_to_author">Dem Auteur Merci soen</string>
   <string name="error_sending_thanks">Feeler beim Schécke vun engem Merci un den Auteur.</string>
   <string name="file_saved_successfully">Fichier erfollegräich gespäichert</string>
-  <string name="do_you_want_to_open_gpx_file">Wëllt Dir de GPW-Fichier opmaachen?</string>
+  <string name="do_you_want_to_open_gpx_file">Wëllt Dir de GPX-Fichier opmaachen?</string>
   <string name="do_you_want_to_open_kml_file">Wëllt Dir de KML-Fichier opmaachen?</string>
   <string name="failed_to_save_kml_file">De KML-Fichier konnt net gespäichert ginn.</string>
   <string name="failed_to_save_gpx_file">De GPX-Fichier konnt net gespäichert ginn.</string>
-  <string name="saving_kml_file">KML-Fichier späicheren</string>
-  <string name="saving_gpx_file">GPX-Fichier späicheren</string>
+  <string name="saving_kml_file">Als KML-Fichier späicheren...</string>
+  <string name="saving_gpx_file">Als GPX-Fichier späicheren...</string>
   <plurals name="custom_picker_images_selected_title_appendix">
-    <item quantity="one">%d Bild ausgewielt</item>
-    <item quantity="other">%d Biller ausgewielt</item>
+    <item quantity="one">%1$d Bild ausgewielt</item>
+    <item quantity="other">%1$d Biller ausgewielt</item>
   </plurals>
   <string name="does_not_exist_anymore_no_picture_can_ever_be_taken_of_it">\'%1$s\' gëtt et net méi, et kann keng Foto méi dovunner gemaach ginn.</string>
   <string name="custom_selector_confirm_deletion_title">Läsche confirméieren</string>

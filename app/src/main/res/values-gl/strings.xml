@@ -14,7 +14,7 @@
 -->
 <resources>
   <string name="commons_facebook">Páxina de Commons en Facebook</string>
-  <string name="commons_github">Código fonte de Commons en Github</string>
+  <string name="commons_github" fuzzy="true">Código fonte de Commons en Github</string>
   <string name="commons_logo">Logo de Commons</string>
   <string name="commons_website">Sitio web de Commons</string>
   <string name="exit_location_picker">Saír do selector de localización</string>
@@ -36,17 +36,13 @@
     <item quantity="one">Cargando %1$d ficheiro</item>
     <item quantity="other">Cargando %1$d ficheiros</item>
   </plurals>
-  <plurals name="contributions_subtitle">
-    <item quantity="one">(%1$d)</item>
-    <item quantity="other">(%1$d)</item>
-  </plurals>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">Procesando %d carga</item>
-    <item quantity="other">Procesando %d cargas</item>
+    <item quantity="one">Procesando %1$d carga</item>
+    <item quantity="other">Procesando %1$d cargas</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">%d carga</item>
-    <item quantity="other">%d cargas</item>
+    <item quantity="one">%1$d carga</item>
+    <item quantity="other">%1$d cargas</item>
   </plurals>
   <plurals name="share_license_summary">
     <item quantity="one">Esta imaxe quedará baixo a licenza %1$s</item>
@@ -89,7 +85,7 @@
   <string name="uploading_queued">Envío en cola (modo de conexión limitado activado)</string>
   <string name="upload_completed_notification_title">Subiuse \"%1$s\"!</string>
   <string name="upload_completed_notification_text">Prema para ollar a súa carga</string>
-  <string name="upload_progress_notification_title_start">A subir o ficheiro: %s</string>
+  <string name="upload_progress_notification_title_start">A subir o ficheiro: %1$s</string>
   <string name="upload_progress_notification_title_in_progress">Cargando \"%1$s\"</string>
   <string name="upload_progress_notification_title_finishing">Rematando a carga de \"%1$s\"</string>
   <string name="upload_failed_notification_title">Produciuse un erro ao enviar %1$s</string>
@@ -213,15 +209,14 @@
   <string name="become_a_tester_description">Siga a nosa canle beta en Google Play e obteña acceso a novas funcionalidades e correccións de erros</string>
   <string name="_2fa_code">Código de autenticación de dous pasos</string>
   <string name="logout_verification">Está seguro de querer saír?</string>
-  <string name="mediaimage_failed">Fallou a imaxe de multimedia</string>
   <string name="no_subcategory_found">Non se atoparon subcategorías</string>
   <string name="no_parentcategory_found">Non se atoparon categorías nais</string>
   <string name="welcome_image_mount_zao">Monte Zao</string>
   <string name="welcome_image_llamas">Llamas</string>
   <string name="welcome_image_rainbow_bridge">Ponte do Arco da vella</string>
   <string name="welcome_image_tulip">Tulipán</string>
-  <string name="welcome_image_welcome_wikipedia">Benvida de Wikipedia</string>
-  <string name="welcome_image_welcome_copyright">Dereitos de autor de benvida</string>
+  <string name="welcome_image_welcome_wikipedia" fuzzy="true">Benvida de Wikipedia</string>
+  <string name="welcome_image_welcome_copyright" fuzzy="true">Dereitos de autor de benvida</string>
   <string name="welcome_image_sydney_opera_house">Ópera de Sydney</string>
   <string name="cancel">Cancelar</string>
   <string name="navigation_drawer_open">Abrir</string>
@@ -349,12 +344,11 @@
   <string name="delete">Borrar</string>
   <string name="Achievements">Logros</string>
   <string name="Profile">Perfil</string>
-  <string name="statistics">Estatísticas</string>
   <string name="statistics_thanks">Agradecementos recibidos</string>
   <string name="statistics_featured">Imaxes destacadas</string>
   <string name="statistics_wikidata_edits">Imaxes vía \"Lugares próximos\"</string>
-  <string name="level">Nivel %d</string>
-  <string name="profile_withLevel">%s (nivel %s)</string>
+  <string name="level">Nivel %1$d</string>
+  <string name="profile_withLevel">%1$s (nivel %2$s)</string>
   <string name="images_uploaded">Imaxes cargadas</string>
   <string name="image_reverts">Imaxes non revertidas</string>
   <string name="images_used_by_wiki">Imaxes usadas</string>
@@ -410,7 +404,7 @@
   <string name="never_ask_again">Non volver a preguntar isto nunca</string>
   <string name="display_location_permission_title">Solicitar permiso de localización</string>
   <string name="display_location_permission_explanation">Pedir permisos de localización cando sexa necesario para a funcionalidade de notificación de proximidade.</string>
-  <string name="achievements_fetch_failed">Algo foi mal e non puidemos obter os logros</string>
+  <string name="achievements_fetch_failed" fuzzy="true">Algo foi mal e non puidemos obter os logros</string>
   <string name="ends_on">Finaliza o:</string>
   <string name="display_campaigns">Amosar campañas</string>
   <string name="display_campaigns_explanation">Ver as campañas en curso</string>
@@ -429,9 +423,9 @@
   <string name="check_category_failure_message">Non foi posible solicitar un control de categoría para %1$s</string>
   <string name="check_category_toast">Solicitando control de categoría para %1$s</string>
   <string name="nominate_for_deletion_done">Feito</string>
-  <string name="send_thank_success_title">Enviando agradecementos: Éxito</string>
-  <string name="send_thank_success_message">Enviado correctamente o agradecemento a %1$s</string>
-  <string name="send_thank_toast">Enviando agradecementos por %1$s</string>
+  <string name="send_thank_success_title" fuzzy="true">Enviando agradecementos: Éxito</string>
+  <string name="send_thank_success_message" fuzzy="true">Enviado correctamente o agradecemento a %1$s</string>
+  <string name="send_thank_toast" fuzzy="true">Enviando agradecementos por %1$s</string>
   <string name="review_thanks_yes_button_text">Imaxe seguinte</string>
   <string name="review_thanks_no_button_text">Si, por que non</string>
   <string name="no_image">Ningunha imaxe usada</string>
@@ -499,7 +493,7 @@
   <string name="account_created">Conta creada!</string>
   <string name="place_state_exists">Existe</string>
   <string name="place_state_needs_photo">Precisa fotografía</string>
-  <string name="nearby_search_hint">Ponte, museo, hotel etc.</string>
+  <string name="nearby_search_hint" fuzzy="true">Ponte, museo, hotel etc.</string>
   <string name="title_app_shortcut_bookmark">Favoritos</string>
   <string name="title_app_shortcut_setting">Axustes</string>
   <string name="remove_bookmark">Eliminado de favoritos</string>

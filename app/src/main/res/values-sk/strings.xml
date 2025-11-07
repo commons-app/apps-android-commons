@@ -12,7 +12,7 @@
 -->
 <resources>
   <string name="commons_facebook">Facebooková stránka Commons</string>
-  <string name="commons_github">Zdrojový kód Commons na Githube</string>
+  <string name="commons_github" fuzzy="true">Zdrojový kód Commons na Githube</string>
   <string name="commons_logo">Logo Commons</string>
   <string name="commons_website">Webová stránka Commons</string>
   <string name="exit_location_picker">Odísť z výberu polohy</string>
@@ -38,30 +38,24 @@
     <item quantity="many">nahráva sa %1$d súborov</item>
     <item quantity="other">nahráva sa %1$d súborov</item>
   </plurals>
-  <plurals name="contributions_subtitle">
-    <item quantity="one">(%1$d)</item>
-    <item quantity="few">(%1$d)</item>
-    <item quantity="many">(%1$d)</item>
-    <item quantity="other"/>
-  </plurals>
   <string name="starting_uploads">Začatie nahrávania</string>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">Začínam nahrávať %d</item>
-    <item quantity="few">Začínam nahrávanie  %d</item>
-    <item quantity="many">Začínam nahrávanie %d</item>
-    <item quantity="other"/>
+    <item quantity="one">Začínam nahrávať %1$d</item>
+    <item quantity="few">Začínam nahrávanie %1$d</item>
+    <item quantity="many">Začínam nahrávanie %1$d</item>
+    <item quantity="other">Začínam nahrávanie %1$d</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">%d nahranie</item>
-    <item quantity="few">%d nahrania</item>
-    <item quantity="many">%d nahraní</item>
-    <item quantity="other"/>
+    <item quantity="one">%1$d nahranie</item>
+    <item quantity="few">%1$d nahrania</item>
+    <item quantity="many">%1$d nahraní</item>
+    <item quantity="other">%1$d nahraní</item>
   </plurals>
   <plurals name="share_license_summary">
     <item quantity="one">Tento obrázok bude licencovaný cez %1$s</item>
     <item quantity="few">Tieto obrázky budú licencované cez %1$s</item>
     <item quantity="many">Tieto obrázky budú licencované cez %1$s</item>
-    <item quantity="other"/>
+    <item quantity="other">Tieto obrázky budú licencované cez %1$s</item>
   </plurals>
   <plurals name="upload_count_title">
     <item quantity="one">%1$d nahranie</item>
@@ -104,7 +98,7 @@
   <string name="uploading_queued">Nahrávanie v poradí (je zapnuté limitované pripojenie)</string>
   <string name="upload_completed_notification_title">%1$s je nahraný!</string>
   <string name="upload_completed_notification_text">Kliknutím zobrazíte váš upload</string>
-  <string name="upload_progress_notification_title_start">Nahrávanie súboru): %s</string>
+  <string name="upload_progress_notification_title_start">Nahrávanie súboru): %1$s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s nahrávanie</string>
   <string name="upload_progress_notification_title_finishing">Dokončenie nahrávania %1$s</string>
   <string name="upload_failed_notification_title">Nahrávanie %1$s zlyhalo</string>
@@ -150,6 +144,7 @@
   <string name="title_activity_settings">Nastavenia</string>
   <string name="title_activity_signup">Zaregistrovať sa</string>
   <string name="title_activity_featured_images">Najlepšie obrázky</string>
+  <string name="images_featured_explanation" fuzzy="true">Najlepšie obrázky sú fotografie od vysoko skúsených fotografov a ilustrátorov, ktoré vybrala komunita Wikimedie Commons ako jedny z najkvalitnejších na stránke.</string>
   <string name="title_activity_custom_selector">Vlastný výber</string>
   <string name="title_activity_category_details">Kategória</string>
   <string name="title_activity_review">Kontrola</string>
@@ -235,15 +230,14 @@
   <string name="become_a_tester_description">Prihlásiť sa do nášho beta kanálu na Google Play a získavať včasný prístup k novinkám a opravám chýb</string>
   <string name="_2fa_code">Kód pre dvojfaktorové overenie (2FA)</string>
   <string name="logout_verification">Naozaj sa chcete odhlásiť?</string>
-  <string name="mediaimage_failed">Obrázok zlyhal</string>
   <string name="no_subcategory_found">Neboli nájdené žiadne podkategórie</string>
   <string name="no_parentcategory_found">Neboli nájdené žiadne rodičovské kategórie</string>
   <string name="welcome_image_mount_zao">Hora Zaó</string>
   <string name="welcome_image_llamas">Lamy</string>
   <string name="welcome_image_rainbow_bridge">Dúhový most</string>
   <string name="welcome_image_tulip">Tulipán</string>
-  <string name="welcome_image_welcome_wikipedia">Vitajte na Wikipédii</string>
-  <string name="welcome_image_welcome_copyright">Úvod do autorských práv</string>
+  <string name="welcome_image_welcome_wikipedia" fuzzy="true">Vitajte na Wikipédii</string>
+  <string name="welcome_image_welcome_copyright" fuzzy="true">Úvod do autorských práv</string>
   <string name="welcome_image_sydney_opera_house">Opera v Sydney</string>
   <string name="cancel">Zrušiť</string>
   <string name="navigation_drawer_open">Otvoriť</string>
@@ -377,11 +371,10 @@
   <string name="delete">Zmazať</string>
   <string name="Achievements">Úspechy</string>
   <string name="Profile">Profil</string>
-  <string name="statistics">Štatistiky</string>
   <string name="statistics_thanks">Obdržané poďakovania</string>
   <string name="statistics_featured">Najlepšie obrázky</string>
   <string name="statistics_wikidata_edits">Obrázky cez „Miesta v okolí“</string>
-  <string name="level" fuzzy="true">Úroveň</string>
+  <string name="level" fuzzy="true">Úroveň %1$d</string>
   <string name="images_uploaded">Nahrané obrázky</string>
   <string name="image_reverts">Nerevertované obrázky</string>
   <string name="images_used_by_wiki">Použité obrázky</string>
@@ -440,7 +433,7 @@
   <string name="never_ask_again">Znovu nezobrazovať</string>
   <string name="display_location_permission_title">Žiadať povolenie prístupu k polohe</string>
   <string name="display_location_permission_explanation">Požiada o oprávnenie k prístupu k polohe, pokiaľ je to potrebné pre funkciu zobrazenia miest v okolí.</string>
-  <string name="achievements_fetch_failed">Nastala chyba, úspechy sa nám nepodarilo načítať</string>
+  <string name="achievements_fetch_failed" fuzzy="true">Nastala chyba, úspechy sa nám nepodarilo načítať</string>
   <string name="achievements_fetch_failed_ultimate_achievement">Urobili ste toľko príspevkov, že to náš systém výpočtu úspechov nedokáže zvládnuť. Toto je konečný úspech.</string>
   <string name="ends_on">Končí:</string>
   <string name="display_campaigns">Zobraziť kampane</string>
@@ -462,11 +455,11 @@
   <string name="check_category_failure_message">Nepodarilo sa vyžiadať kontrolu kategórie %1$s</string>
   <string name="check_category_toast">Posielam požiadavku na kontrolu kategórie %1$s</string>
   <string name="nominate_for_deletion_done">Hotovo</string>
-  <string name="send_thank_success_title">Posielanie poďakovania bolo úspešné</string>
-  <string name="send_thank_success_message">Úspešne ste poďakovali používateľovi/používateľke %1$s</string>
-  <string name="send_thank_failure_message">Poďakovanie používateľovi/používateľke %1$s sa nepodarilo</string>
-  <string name="send_thank_failure_title">Poslanie poďakovania bolo neúspešné</string>
-  <string name="send_thank_toast">Posielanie poďakovania používateľovi/používateľke %1$s</string>
+  <string name="send_thank_success_title" fuzzy="true">Posielanie poďakovania bolo úspešné</string>
+  <string name="send_thank_success_message" fuzzy="true">Úspešne ste poďakovali používateľovi/používateľke %1$s</string>
+  <string name="send_thank_failure_message" fuzzy="true">Poďakovanie používateľovi/používateľke %1$s sa nepodarilo</string>
+  <string name="send_thank_failure_title" fuzzy="true">Poslanie poďakovania bolo neúspešné</string>
+  <string name="send_thank_toast" fuzzy="true">Posielanie poďakovania používateľovi/používateľke %1$s</string>
   <string name="review_copyright">Je to v súlade s pravidlami autorských práv?</string>
   <string name="review_category">Je to kategorizované správne?</string>
   <string name="review_spam">Je to v poriadku?</string>
@@ -492,15 +485,14 @@
   <string name="menu_option_unread">Zobraziť neprečítané</string>
   <string name="error_occurred_in_picking_images">Nastala chyba pri vyberaní obrázkov</string>
   <string name="please_wait">Čakajte, prosím...</string>
-  <string name="images_featured_explanation">Najlepšie obrázky sú fotografie od vysoko skúsených fotografov a ilustrátorov, ktoré vybrala komunita Wikimedie Commons ako jedny z najkvalitnejších na stránke.</string>
   <string name="images_via_nearby_explanation">Obrázky nahrané cez Miesta v okolí sú obrázky, ktoré sú nahrané vďaka objavovaniu miest na mape.</string>
   <string name="thanks_received_explanation">Táto funkcia umožňuje poslať poďakovanie za užitočné úpravy používateľom – použitím malého odkazu poďakovať v histórií stránky alebo na stránke rozdielu medzi revíziami.</string>
-  <string name="copy_image_caption_description">Kopírovať do nasledovného média</string>
+  <string name="copy_image_caption_description" fuzzy="true">Kopírovať do nasledovného média</string>
   <string name="copied_successfully">Skopírované</string>
   <string name="welcome_do_upload_content_description">Príklady dobrých obrázkov na nahranie na Commons</string>
   <string name="welcome_dont_upload_content_description">Príklady obrázkov, ktoré by ste nemali nahrávať</string>
   <string name="skip_image">Preskočiť obrázok</string>
-  <string name="download_failed_we_cannot_download_the_file_without_storage_permission">Sťahovanie zlyhalo! Nemôžeme stiahnuť súbor bez povolenia k prístupu k externému úložisku.</string>
+  <string name="download_failed_we_cannot_download_the_file_without_storage_permission" fuzzy="true">Sťahovanie zlyhalo! Nemôžeme stiahnuť súbor bez povolenia k prístupu k externému úložisku.</string>
   <string name="manage_exif_tags">Spravovať EXIF dáta</string>
   <string name="manage_exif_tags_summary">Vybrať, ktoré EXIF dáta sa ponechajú</string>
   <string name="exif_tag_name_author">Autor</string>
@@ -510,8 +502,6 @@
   <string name="exif_tag_name_lensModel">Model objektívu</string>
   <string name="exif_tag_name_serialNumbers">Sériové čísla</string>
   <string name="exif_tag_name_software">Softvér</string>
-  <string name="media_location_permission_denied">Prístup k polohe médií bol odmietnutý</string>
-  <string name="add_location_manually">Možno nebudeme môcť automaticky získať údaje o polohe z obrázkov, ktoré nahráte. Pred odoslaním, prosím, pridajte ku každému obrázku údaj o polohe.</string>
   <string name="share_text">Nahrávajte fotky na Wikimedia Commons priamo z vášho mobilu. Stiahnite si aplikáciu Wikimedia Commons teraz: %1$s</string>
   <string name="share_via">Zdieľať aplikáciu cez...</string>
   <string name="image_info">Informácie o obrázku</string>
@@ -570,7 +560,7 @@
   <string name="description_activity_title">Upraviť popisy a titulky</string>
   <string name="share_image_via">Zdieľať obrázok cez</string>
   <string name="you_have_no_achievements_yet">Nemáte zatiaľ žiadne príspevky</string>
-  <string name="no_achievements_yet">%s  zatiaľ nevytvoril/a žiadne príspevky</string>
+  <string name="no_achievements_yet">%1$s  zatiaľ nevytvoril/a žiadne príspevky</string>
   <string name="account_created">Účet bol vytvorený!</string>
   <string name="text_copy">Text bol skopírovaný do schránky.</string>
   <string name="notification_mark_read">Oznámenie označené ako prečítané</string>
@@ -579,7 +569,7 @@
   <string name="place_state_exists">Existuje</string>
   <string name="place_state_needs_photo">Potrebuje fotku</string>
   <string name="place_type">Typ miesta:</string>
-  <string name="nearby_search_hint">Most, múzeum, hotel atď.</string>
+  <string name="nearby_search_hint" fuzzy="true">Most, múzeum, hotel atď.</string>
   <string name="you_must_reset_your_passsword">Pri prihlásení nastala chyba. Musíte si obnoviť vaše heslo!</string>
   <string name="title_for_media">MÉDIA</string>
   <string name="title_for_child_classes">DETSKÉ TRIEDY</string>
@@ -619,9 +609,9 @@
   <string name="wikipedia_instructions_step_3">3. Nájdite vhodný odsek v článku pre Váš obrázok</string>
   <string name="wikipedia_instructions_step_4">4. Kliknite na ikonku „Upraviť“ (tú s ceruzkou) pre daný odsek.</string>
   <string name="wikipedia_instructions_step_5">5. Vložte wikitext na vhodné miesto.</string>
-  <string name="wikipedia_instructions_step_6">6. Ak načim, upravte wikitext pre vhodné umiestnenie. Pre viac informácií, pozrite &lt;a href=\"https://sk.wikipedia.org/wiki/Pomoc:Obr%C3%A1zok#Vlo%C5%BEenie_obr%C3%A1zku_do_%C4%8Dl%C3%A1nku\"&gt;sem&lt;/a&gt;.</string>
+  <string name="wikipedia_instructions_step_6">6. Ak načim, upravte wikitext pre vhodné umiestnenie. Pre viac informácií, pozrite &lt;a href=\"https://sk.wikipedia.org/wiki/Pomoc:Obrázok#Vloženie_obrázku_do_článku\"&gt;sem&lt;/a&gt;.</string>
   <string name="wikipedia_instructions_step_7">7. Uložte článok</string>
-  <string name="copy_wikicode_to_clipboard">Skopírujte wikikód</string>
+  <string name="copy_wikicode_to_clipboard" fuzzy="true">Skopírujte wikikód</string>
   <string name="pause">pozastaviť</string>
   <string name="resume">pokračovať</string>
   <string name="paused">Pozastavené</string>
@@ -688,7 +678,7 @@
   <string name="back">Späť</string>
   <string name="welcome_custom_picture_selector_text">Vitajte vo vlastnom výbere obrázkov</string>
   <string name="custom_selector_info_text1">Tento výberový nástroj vám ukazuje, ktoré obrázky ste už nahrali na Commons.</string>
-  <string name="custom_selector_info_text2">Na rozdiel od obrázka v ľavo, obrázkov v pravo má logo Commons, ktoré indikuje, že už je nahraný. Podržte kurzor nad obrázkom pre náhľad.</string>
+  <string name="custom_selector_info_text2" fuzzy="true">Na rozdiel od obrázka v ľavo, obrázkov v pravo má logo Commons, ktoré indikuje, že už je nahraný. Podržte kurzor nad obrázkom pre náhľad.</string>
   <string name="welcome_custom_selector_ok">Úžasné</string>
   <string name="custom_selector_already_uploaded_image_text">Tento obrázok už bol do Commons nahraný.</string>
   <string name="custom_selector_over_limit_warning">Z technických dôvodov aplikácia nemôže spoľahlivo nahrať viac ako %1$d obrázkov naraz. Maximálny počet %1$d bol prekročený o %2$d.</string>
@@ -703,8 +693,8 @@
   <string name="need_permission">Potrebné povolenie</string>
   <string name="read_phone_state_permission_message">Blízke mapy potrebujú mať prístup k polohe telefónu, aby správne fungovali</string>
   <string name="location_permission_rationale">Voliteľné oprávnenie: Umožniť aplikácii, aby získavala aktuálnu polohu a ponúkala na jej základe navrhované kategórie</string>
-  <string name="contributions_of_user">Príspevky používateľa:  %s</string>
-  <string name="achievements_of_user">Úspechy používateľa: %s</string>
+  <string name="contributions_of_user">Príspevky používateľa:  %1$s</string>
+  <string name="achievements_of_user">Úspechy používateľa: %1$s</string>
   <string name="menu_view_user_page">Zobraziť profil používateľa</string>
   <string name="edit_depictions">Upraviť vyobrazenia</string>
   <string name="edit_categories">Upraviť kategórie</string>
@@ -715,7 +705,7 @@
   <string name="location_message">Údaje o polohe pomáhajú editorom nájsť Váš obrázok a spraviť ho viac užitočným. \nVaše nedávne nahrávania nemajú polohu.\nOdporúčame Vám zapnúť zisťovanie polohy v nastaveniach Vašej kamery. \nĎakujeme!</string>
   <string name="no_location_found_title">Nenašli sa žiadne polohy</string>
   <string name="no_location_found_message">Čo tak pridať miesto kde bol tento obrázok urobený? Údaje o polohe pomáhajú editorom Wiki nájsť Váš obrázok a urobiť ho tak viac užitočným. Ďakujeme!</string>
-  <string name="add_location">Pridať polohu</string>
+  <string name="add_location" fuzzy="true">Pridať polohu</string>
   <string name="feedback_sharing_data_alert">Prosím, odstráňte z tohto e-mailu informácie, ktoré nechcete zverejniť. Tiež, prosím, berte na vedomie, že vaša e-mailová adresa, z ktorej posielate príspevky, bude zverejnená.</string>
   <string name="explore_map_details">Podrobnosti</string>
   <string name="achievements_unavailable_beta">Úspechy sú dostupné len v prod flavor. Prosím, skontrolujte vývojársku dokumentáciu.</string>
@@ -736,8 +726,8 @@
   <string name="unmark_as_not_for_upload">Zrušiť označenie, že obrázok nie je určený na nahratie</string>
   <string name="marking_as_not_for_upload">Obrázok sa označuje ako nevhodný na nahratie</string>
   <string name="unmarking_as_not_for_upload">Ruší sa označenie, že obrázok nie je určený na nahratie</string>
-  <string name="show_already_actioned_pictures">Zobraziť už spracované obrázky</string>
-  <string name="hiding_already_actioned_pictures">Už spracované obrázky sú skryté</string>
+  <string name="show_already_actioned_pictures" fuzzy="true">Zobraziť už spracované obrázky</string>
+  <string name="hiding_already_actioned_pictures" fuzzy="true">Už spracované obrázky sú skryté</string>
   <string name="no_more_images_found">Nenašli sa žiadne ďalšie obrázky</string>
   <string name="this_image_is_already_uploaded">Tento obrázok je už nahratý</string>
   <string name="can_not_select_this_image_for_upload">Tento obrázok nebolo možné vybrať na nahratie</string>
@@ -771,12 +761,12 @@
   <string name="invalid_login_message">Platnosť vášho prihlásenia vypršala. Prihláste sa znovu, prosím.</string>
   <string name="no_application_available_to_open_gpx_files">Nie je k dispozícii žiadna aplikácia na otvorenie GPX súborov</string>
   <string name="file_saved_successfully">Súbor úspešne uložený</string>
-  <string name="do_you_want_to_open_gpx_file">Chcete otvoriť GPX súbor?</string>
-  <string name="do_you_want_to_open_kml_file">Chcete otvoriť KML súbor?</string>
-  <string name="failed_to_save_kml_file">KML súbor sa nepodarilo uložiť.</string>
-  <string name="failed_to_save_gpx_file">GPX súbor sa nepodarilo uložiť.</string>
-  <string name="saving_kml_file">KML súbor sa ukladá</string>
-  <string name="saving_gpx_file">GPX súbor sa ukladá</string>
+  <string name="do_you_want_to_open_gpx_file" fuzzy="true">Chcete otvoriť GPX súbor?</string>
+  <string name="do_you_want_to_open_kml_file" fuzzy="true">Chcete otvoriť KML súbor?</string>
+  <string name="failed_to_save_kml_file" fuzzy="true">KML súbor sa nepodarilo uložiť.</string>
+  <string name="failed_to_save_gpx_file" fuzzy="true">GPX súbor sa nepodarilo uložiť.</string>
+  <string name="saving_kml_file" fuzzy="true">KML súbor sa ukladá</string>
+  <string name="saving_gpx_file" fuzzy="true">GPX súbor sa ukladá</string>
   <string name="multiple_files_depiction">Pamätajte, že všetkým obrázkom vo viacnásobnom nahratí budú pridelené rovnaké kategórie a popisy. Ak obrázky nezdieľajú rovnaký popis a kategórie, vykonajte niekoľko samostatných nahratí, prosím.</string>
   <string name="multiple_files_depiction_header">Poznámka k viacnásobnému nahrávaniu</string>
   <string name="nearby_wikitalk">Oznámte problém s touto položkou na Wikiúdajoch</string>

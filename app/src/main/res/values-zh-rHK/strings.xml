@@ -7,25 +7,21 @@
 -->
 <resources>
   <string name="commons_facebook">維基共享資源臉書頁</string>
-  <string name="commons_github">Github 上的共享資源原始碼</string>
+  <string name="commons_github" fuzzy="true">Github 上的共享資源原始碼</string>
   <string name="commons_logo">維基共享資源標誌</string>
   <string name="commons_website">共享資源網站</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">正在上傳%1$d份檔案</item>
     <item quantity="other">正在上傳%1$d份檔案</item>
   </plurals>
-  <plurals name="contributions_subtitle">
-    <item quantity="one">(%1$d)</item>
-    <item quantity="other">(%1$d)</item>
-  </plurals>
   <string name="starting_uploads">開始上傳</string>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">正在處理%d項上傳</item>
-    <item quantity="other">正在處理%d項上傳</item>
+    <item quantity="one">正在處理%1$d項上傳</item>
+    <item quantity="other">正在處理%1$d項上傳</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">%d次上傳</item>
-    <item quantity="other">%d次上傳</item>
+    <item quantity="one">%1$d次上傳</item>
+    <item quantity="other">%1$d次上傳</item>
   </plurals>
   <plurals name="share_license_summary">
     <item quantity="one">此圖片會按 %1$s 協議授權上傳</item>
@@ -64,7 +60,7 @@
   <string name="uploading_queued">上傳已排定（限制連線模式已啟用）</string>
   <string name="upload_completed_notification_title">已上傳%1$s！</string>
   <string name="upload_completed_notification_text">輕觸來檢視您上傳的項目</string>
-  <string name="upload_progress_notification_title_start">開始上傳檔案：%s</string>
+  <string name="upload_progress_notification_title_start">開始上傳檔案：%1$s</string>
   <string name="upload_progress_notification_title_in_progress">正在上傳%1$s</string>
   <string name="upload_progress_notification_title_finishing">即將完成上傳%1$s</string>
   <string name="upload_failed_notification_title">上傳%1$s失敗</string>
@@ -187,15 +183,14 @@
   <string name="become_a_tester_description">選擇加入我們在 Google Play 上的 beta 測試版本，以提早取用新功能及程式修正</string>
   <string name="_2fa_code">雙重驗證代碼</string>
   <string name="logout_verification">您確定要登出嗎？</string>
-  <string name="mediaimage_failed">媒體圖片失敗</string>
   <string name="no_subcategory_found">找不到子分類</string>
   <string name="no_parentcategory_found">找不到母分類</string>
   <string name="welcome_image_mount_zao">藏王連峰</string>
   <string name="welcome_image_llamas">大羊駝</string>
   <string name="welcome_image_rainbow_bridge">彩虹橋</string>
   <string name="welcome_image_tulip">鬱金香</string>
-  <string name="welcome_image_welcome_wikipedia">歡迎來到維基百科</string>
-  <string name="welcome_image_welcome_copyright">歡迎版權</string>
+  <string name="welcome_image_welcome_wikipedia" fuzzy="true">歡迎來到維基百科</string>
+  <string name="welcome_image_welcome_copyright" fuzzy="true">歡迎版權</string>
   <string name="welcome_image_sydney_opera_house">雪梨歌劇院</string>
   <string name="cancel">取消</string>
   <string name="navigation_drawer_open">打開</string>

@@ -3,7 +3,12 @@
 * Chrisportelli
 -->
 <resources>
-  <string name="share_license_summary" fuzzy="true">Din l-istampa se tiġi liċenzjata taħt %1$s</string>
+  <plurals name="share_license_summary" fuzzy="true">
+    <item quantity="one">Din l-istampa se tiġi liċenzjata taħt %1$s</item>
+    <item quantity="few">Dawn l-istampijiet se jkunu liċenzjati taħt %1$s</item>
+    <item quantity="many">Dawn l-istampijiet se jkunu liċenzjati taħt %1$s</item>
+    <item quantity="other">Dawn l-istampijiet se jkunu liċenzjati taħt %1$s</item>
+  </plurals>
   <string name="app_name" fuzzy="true">Wikimedia Commons</string>
   <string name="username">Isem l-utent</string>
   <string name="password">Password</string>

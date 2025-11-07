@@ -28,7 +28,7 @@
 -->
 <resources>
   <string name="commons_facebook">Σελίδα Commons στο Facebook</string>
-  <string name="commons_github">Πηγαίος κώδικας των Commons στο GitHub</string>
+  <string name="commons_github" fuzzy="true">Πηγαίος κώδικας των Commons στο GitHub</string>
   <string name="commons_logo">Λογότυπο Commons</string>
   <string name="commons_website">Ιστοσελίδα Commons</string>
   <string name="exit_location_picker">Έξοδος από το εργαλείο επιλογής τοποθεσίας</string>
@@ -52,18 +52,14 @@
     <item quantity="one">%1$d μεταφόρτωση αρχείου</item>
     <item quantity="other"> %1$d μεταφόρτωση αρχείων</item>
   </plurals>
-  <plurals name="contributions_subtitle">
-    <item quantity="one">(%1$d)</item>
-    <item quantity="other">(%1$d)</item>
-  </plurals>
   <string name="starting_uploads">Έναρξη μεταφορτώσεων</string>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">Επεξεργασία %d μεταφόρτωσης</item>
-    <item quantity="other">Επεξεργασία %d μεταφορτώσεων</item>
+    <item quantity="one">Επεξεργασία %1$d μεταφόρτωσης</item>
+    <item quantity="other">Επεξεργασία %1$d μεταφορτώσεων</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">%d μεταφόρτωση</item>
-    <item quantity="other"> %d μεταφορτώσεις</item>
+    <item quantity="one">%1$d μεταφόρτωση</item>
+    <item quantity="other">%1$d μεταφορτώσεις</item>
   </plurals>
   <plurals name="share_license_summary">
     <item quantity="one">Αυτή η εικόνα θα αδειοδοτηθεί υπό την %1$s</item>
@@ -107,7 +103,7 @@
   <string name="uploading_queued">Η μεταφόρτωση βρίσκεται σε ουρά (ενεργοποιημένη λειτουργία περιορισμένης σύνδεσης)</string>
   <string name="upload_completed_notification_title">%1$s μεταφορτώθηκε!</string>
   <string name="upload_completed_notification_text">Πατήστε για να δείτε τη μεταφόρτωσή σας</string>
-  <string name="upload_progress_notification_title_start">Μεταφόρτωση αρχείου: %s</string>
+  <string name="upload_progress_notification_title_start">Μεταφόρτωση αρχείου: %1$s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s μεταφορτώθηκε!</string>
   <string name="upload_progress_notification_title_finishing">Ολοκληρώνεται η μεταφόρτωση %1$s</string>
   <string name="upload_failed_notification_title">Η μεταφόρτωση του %1$s απέτυχε</string>
@@ -155,6 +151,7 @@
   <string name="title_activity_settings">Ρυθμίσεις</string>
   <string name="title_activity_signup">Εγγραφή</string>
   <string name="title_activity_featured_images">Προβεβλημμένες εικόνες</string>
+  <string name="images_featured_explanation" fuzzy="true">Οι επιλεγμένες εικόνες είναι εικόνες από άριστα καταρτισμένους φωτογράφους και εικονογράφους που η κοινότητα του Wikimedia Commons έχει επιλέξει ως μερικές από τις υψηλότερης ποιότητας στον ιστότοπο.</string>
   <string name="title_activity_custom_selector">Προσαρμοσμένος Επιλογέας</string>
   <string name="title_activity_category_details">Κατηγορία</string>
   <string name="title_activity_review">Αξιολόγηση από ομοτίμους</string>
@@ -242,15 +239,14 @@
   <string name="_2fa_code">Κωδικός 2FA</string>
   <string name="email_auth_code">Κωδικός επαλήθευσης ηλεκτρονικού ταχυδρομείου</string>
   <string name="logout_verification">Θέλετε σίγουρα να αποσυνδεθείτε;</string>
-  <string name="mediaimage_failed">Η εικόνα πολυμέσων απέτυχε</string>
   <string name="no_subcategory_found">Δε βρέθηκαν υποκατηγορίες</string>
   <string name="no_parentcategory_found">Δε βρέθηκαν γονικές κατηγορίες</string>
   <string name="welcome_image_mount_zao">Όρος Ζάο</string>
   <string name="welcome_image_llamas">Λάμα</string>
   <string name="welcome_image_rainbow_bridge">Γέφυρα Ρέινμποου</string>
   <string name="welcome_image_tulip">Τουλίπα</string>
-  <string name="welcome_image_welcome_wikipedia">Καλωσήρθατε στη Βικιπαίδεια</string>
-  <string name="welcome_image_welcome_copyright">Καλώς ορίσατε στα Πνευματικά δικαιώματα</string>
+  <string name="welcome_image_welcome_wikipedia" fuzzy="true">Καλωσήρθατε στη Βικιπαίδεια</string>
+  <string name="welcome_image_welcome_copyright" fuzzy="true">Καλώς ορίσατε στα Πνευματικά δικαιώματα</string>
   <string name="welcome_image_sydney_opera_house">Όπερα του Σίδνεϊ</string>
   <string name="cancel">Ακύρωση</string>
   <string name="navigation_drawer_open">Άνοιγμα</string>
@@ -386,12 +382,11 @@
   <string name="Achievements">Επιτεύγματα</string>
   <string name="Profile">Προφίλ</string>
   <string name="badges">Σήματα</string>
-  <string name="statistics">Στατιστικά</string>
   <string name="statistics_thanks">Ευχαριστίες που έχετε λάβει</string>
   <string name="statistics_featured">Προβεβλημμένες εικόνες</string>
   <string name="statistics_wikidata_edits">Εικόνες μέσω «Κοντινά μέρη»</string>
-  <string name="level">Επίπεδο %d</string>
-  <string name="profile_withLevel">%s (Επίπεδο %s)</string>
+  <string name="level">Επίπεδο %1$d</string>
+  <string name="profile_withLevel">%1$s (Επίπεδο %2$s)</string>
   <string name="images_uploaded">Εικόνες που μεταφορτώθηκαν</string>
   <string name="image_reverts">Εικόνες που δεν ανεστράφησαν</string>
   <string name="images_used_by_wiki">Εικόνες που χρησιμοποιήθηκαν</string>
@@ -451,7 +446,7 @@
   <string name="never_ask_again">Μη με ξαναρωτήσετε</string>
   <string name="display_location_permission_title">Ζητήστε άδεια τοποθεσίας</string>
   <string name="display_location_permission_explanation">Ζητήστε άδεια τοποθεσίας όταν χρειάζεται για τη λειτουργία προβολής κοντινής κάρτας ειδοποιήσεων.</string>
-  <string name="achievements_fetch_failed">Κάτι πήγε στραβά. Δεν μπορέσαμε να ανακτήσουμε επιτεύγματα</string>
+  <string name="achievements_fetch_failed" fuzzy="true">Κάτι πήγε στραβά. Δεν μπορέσαμε να ανακτήσουμε επιτεύγματα</string>
   <string name="achievements_fetch_failed_ultimate_achievement">Έχετε κάνει τόσες πολλές συνεισφορές που δεν μπορεί να αντεπεξέλθει το σύστημα υπολογισμού επιτευγμάτων μας. Αυτό είναι το απόλυτο επίτευγμα.</string>
   <string name="ends_on">Λήγει στις:</string>
   <string name="display_campaigns">Προβολή εκστρατειών</string>
@@ -479,11 +474,11 @@
   <string name="check_category_failure_message">Δεν ήταν δυνατή η αίτηση ελέγχου κατηγορίας για %1$s</string>
   <string name="check_category_toast">Αίτημα ελέγχου κατηγορίας για %1$s</string>
   <string name="nominate_for_deletion_done">Έγινε</string>
-  <string name="send_thank_success_title">Αποστολή Ευχαριστιών: Επιτυχία</string>
-  <string name="send_thank_success_message">Επιτυχής αποστοή ευχαριστιών προς %1$s</string>
-  <string name="send_thank_failure_message">Αποτυχία αποστολής ευχαριστιών %1$s</string>
-  <string name="send_thank_failure_title">Αποστολή Ευχαριστιών: Αποτυχία</string>
-  <string name="send_thank_toast">Αποστολή Ευχαριστιών για %1$s</string>
+  <string name="send_thank_success_title" fuzzy="true">Αποστολή Ευχαριστιών: Επιτυχία</string>
+  <string name="send_thank_success_message" fuzzy="true">Επιτυχής αποστοή ευχαριστιών προς %1$s</string>
+  <string name="send_thank_failure_message" fuzzy="true">Αποτυχία αποστολής ευχαριστιών %1$s</string>
+  <string name="send_thank_failure_title" fuzzy="true">Αποστολή Ευχαριστιών: Αποτυχία</string>
+  <string name="send_thank_toast" fuzzy="true">Αποστολή Ευχαριστιών για %1$s</string>
   <string name="review_copyright">Ακολουθεί αυτό τους κανόνες πνευματικής ιδιοκτησίας;</string>
   <string name="review_category">Είναι σωστά κατηγοριοποιημένο αυτό;</string>
   <string name="review_spam">Είναι αυτό εντός πεδίου εφαρμογής;</string>
@@ -510,15 +505,14 @@
   <string name="menu_option_unread">Προβολή μη αναγνωσμένων</string>
   <string name="error_occurred_in_picking_images">Παρουσιάστηκε σφάλμα κατά την επιλογή εικόνων</string>
   <string name="please_wait">Παρακαλούμε περιμένετε…</string>
-  <string name="images_featured_explanation">Οι επιλεγμένες εικόνες είναι εικόνες από άριστα καταρτισμένους φωτογράφους και εικονογράφους που η κοινότητα του Wikimedia Commons έχει επιλέξει ως μερικές από τις υψηλότερης ποιότητας στον ιστότοπο.</string>
   <string name="images_via_nearby_explanation">Οι εικόνες που μεταφορτώνονται μέσω κοντινών τοποθεσιών είναι οι εικόνες που μεταφορτώνονται ανακαλύπτοντας μέρη στο χάρτη.</string>
   <string name="thanks_received_explanation">Αυτή η δυνατότητα επιτρέπει στους συντάκτες να στέλνουν μια ειδοποίηση ευχαριστιών σε χρήστες που κάνουν χρήσιμες επεξεργασίες – χρησιμοποιώντας έναν μικρό σύνδεσμο ευχαριστιών στη σελίδα ιστορικού ή στη σελίδα διαφορών.</string>
-  <string name="copy_image_caption_description">Αντιγραφή σε επόμενα μέσα</string>
+  <string name="copy_image_caption_description" fuzzy="true">Αντιγραφή σε επόμενα μέσα</string>
   <string name="copied_successfully">Αντιγράφηκε με επιτυχία</string>
   <string name="welcome_do_upload_content_description">Παραδείγματα καλών εικόνων για να ανεβάσετε στο Commons</string>
   <string name="welcome_dont_upload_content_description">Παραδείγματα εικόνων που δεν πρέπει να ανεβάζονται</string>
   <string name="skip_image">Παραλείψτε αυτήν την εικόνα</string>
-  <string name="download_failed_we_cannot_download_the_file_without_storage_permission">Η λήψη απέτυχε!!. Δεν μπορούμε να κατεβάσουμε το αρχείο χωρίς άδεια εξωτερικού χώρου αποθήκευσης.</string>
+  <string name="download_failed_we_cannot_download_the_file_without_storage_permission" fuzzy="true">Η λήψη απέτυχε!!. Δεν μπορούμε να κατεβάσουμε το αρχείο χωρίς άδεια εξωτερικού χώρου αποθήκευσης.</string>
   <string name="manage_exif_tags">Διαχείριση ετικετών EXIF</string>
   <string name="manage_exif_tags_summary">Επιλέξτε ποιες ετικέτες EXIF θα διατηρηθούν στις μεταφορτώσεις</string>
   <string name="exif_tag_name_author">Δημιουργός</string>
@@ -528,8 +522,6 @@
   <string name="exif_tag_name_lensModel">Μοντέλο φακού</string>
   <string name="exif_tag_name_serialNumbers">Σειριακός αριθμός</string>
   <string name="exif_tag_name_software">Λογισμικό</string>
-  <string name="media_location_permission_denied">Δεν επιτρέπεται η πρόσβαση στην τοποθεσία πολυμέσων</string>
-  <string name="add_location_manually">Ενδέχεται να μην μπορούμε να λάβουμε αυτόματα δεδομένα τοποθεσίας από φωτογραφίες που ανεβάζετε. Προσθέστε την κατάλληλη τοποθεσία για κάθε εικόνα πριν την υποβολή</string>
   <string name="share_text">Ανεβάστε φωτογραφίες στα Wikimedia Commons απευθείας από το τηλέφωνό σας. Κάντε λήψη της εφαρμογής Commons τώρα: %1$s</string>
   <string name="share_via">Κοινή χρήση εφαρμογής μέσω...</string>
   <string name="image_info">Πληροφορίες Εικόνας</string>
@@ -585,7 +577,7 @@
   <string name="description_activity_title">Επεξεργαστείτε περιγραφές και λεζάντες</string>
   <string name="share_image_via">Κοινή χρήση εικόνας μέσω</string>
   <string name="you_have_no_achievements_yet">Δεν έχετε κάνει ακόμη συνεισφορές</string>
-  <string name="no_achievements_yet">%s δεν έχει συνεισφέρει ακόμα</string>
+  <string name="no_achievements_yet">%1$s δεν έχει συνεισφέρει ακόμα</string>
   <string name="account_created">Ο λογαριασμός δημιουργήθηκε!</string>
   <string name="text_copy">Το κείμενο αντιγράφτηκε στο πρόχειρο.</string>
   <string name="notification_mark_read">Η ειδοποίηση επισημάνθηκε ως αναγνωσμένη</string>
@@ -594,7 +586,7 @@
   <string name="place_state_exists">Υπάρχει</string>
   <string name="place_state_needs_photo">Χρειάζεται Φωτογραφία</string>
   <string name="place_type">Τύπος τοποθεσίας:</string>
-  <string name="nearby_search_hint">Γέφυρα, μουσείο, ξενοδοχείο κ.λπ.</string>
+  <string name="nearby_search_hint" fuzzy="true">Γέφυρα, μουσείο, ξενοδοχείο κ.λπ.</string>
   <string name="you_must_reset_your_passsword">Κάτι πήγε στραβά με την σύνδεση. Πρέπει να επαναφέρετε το κωδικό πρόσβασης σας!</string>
   <string name="title_for_media">ΜΕΣΑ</string>
   <string name="title_for_child_classes">ΥΠΟΚΛΑΣΕΙΣ</string>
@@ -636,7 +628,7 @@
   <string name="wikipedia_instructions_step_5">5. Επικολλήστε το wikitext στην κατάλληλη θέση.</string>
   <string name="wikipedia_instructions_step_6">6. Επεξεργαστείτε το wikitext για κατάλληλη τοποθέτηση, εάν είναι απαραίτητο. Για περισσότερες πληροφορίες, δείτε &lt;a href=\"https://en.wikipedia.org/wiki/Wikipedia:Manual_of_Style/Images#How_to_place_an_image\"&gt;εδώ&lt;/a&gt; .</string>
   <string name="wikipedia_instructions_step_7">7. Δημοσιεύστε το άρθρο</string>
-  <string name="copy_wikicode_to_clipboard">Αντιγράψτε τον wikicode στο πρόχειρο</string>
+  <string name="copy_wikicode_to_clipboard" fuzzy="true">Αντιγράψτε τον wikicode στο πρόχειρο</string>
   <string name="pause">παύση</string>
   <string name="resume">συνέχεια</string>
   <string name="paused">Σε παύση</string>
@@ -703,7 +695,7 @@
   <string name="back">Πίσω</string>
   <string name="welcome_custom_picture_selector_text">Καλώς ορίσατε στον Προσαρμοσμένο Επιλογέα Εικόνων</string>
   <string name="custom_selector_info_text1">Αυτό το εργαλείο επιλογής σάς δείχνει ποιες εικόνες έχετε ήδη ανεβάσει στα Commons.</string>
-  <string name="custom_selector_info_text2">Σε αντίθεση με την εικόνα στα αριστερά, η εικόνα στα δεξιά έχει το λογότυπο Commons που υποδεικνύει ότι έχει ήδη μεταφορτωθεί. Αγγίξτε παρατεταμένα για προεπισκόπηση εικόνας.</string>
+  <string name="custom_selector_info_text2" fuzzy="true">Σε αντίθεση με την εικόνα στα αριστερά, η εικόνα στα δεξιά έχει το λογότυπο Commons που υποδεικνύει ότι έχει ήδη μεταφορτωθεί. Αγγίξτε παρατεταμένα για προεπισκόπηση εικόνας.</string>
   <string name="welcome_custom_selector_ok">Περίφημα!</string>
   <string name="custom_selector_already_uploaded_image_text">Αυτή η εικόνα έχει ήδη μεταφορτωθεί στο Commons.</string>
   <string name="custom_selector_over_limit_warning">Για τεχνικούς λόγους, η εφαρμογή δεν μπορεί να ανεβάσει αξιόπιστα περισσότερες από %1$d φωτογραφίες ταυτόχρονα. Το όριο μεταφόρτωσης του %1$d έχει ξεπεραστεί κατά %2$d .</string>
@@ -718,8 +710,8 @@
   <string name="need_permission">Χρειάζεται άδεια</string>
   <string name="read_phone_state_permission_message">Οι κοντινοί χάρτες πρέπει να διαβάζουν PHONE STATE για να λειτουργούν σωστά</string>
   <string name="location_permission_rationale">Προαιρετική άδεια: Ανάκτηση τρέχουσας θέσης σας για προτάσεις κατηγοριών</string>
-  <string name="contributions_of_user">Συνεισφορές χρήστη: %s</string>
-  <string name="achievements_of_user">Επιτεύγματα χρήστη: %s</string>
+  <string name="contributions_of_user">Συνεισφορές χρήστη: %1$s</string>
+  <string name="achievements_of_user">Επιτεύγματα χρήστη: %1$s</string>
   <string name="menu_view_user_page">Προβολή σελίδας χρήστη</string>
   <string name="edit_depictions">Επεξεργασία απεικονίσεων</string>
   <string name="edit_categories">Επεξεργασία κατηγοριών</string>
@@ -730,7 +722,7 @@
   <string name="location_message">Τα δεδομένα τοποθεσίας βοηθούν τους συντάκτες του Wiki να βρουν την εικόνα σας, καθιστώντας την πολύ πιο χρήσιμη. Οι πρόσφατες μεταφορτώσεις σας δεν έχουν τοποθεσία. Σας προτείνουμε να ενεργοποιήσετε την τοποθεσία στις ρυθμίσεις της εφαρμογής της κάμεράς σας.\nΣας ευχαριστούμε για τη μεταφόρτωση!</string>
   <string name="no_location_found_title">Δεν βρέθηκε τοποθεσία</string>
   <string name="no_location_found_message">Τι θα λέγατε να προσθέσετε το μέρος όπου τραβήχτηκε αυτή η εικόνα; Τα δεδομένα τοποθεσίας βοηθούν τους συντάκτες του Wiki να βρουν την εικόνα σας, καθιστώντας την πολύ πιο χρήσιμη.\nΕυχαριστούμε!</string>
-  <string name="add_location">Προσθήκη τοποθεσίας</string>
+  <string name="add_location" fuzzy="true">Προσθήκη τοποθεσίας</string>
   <string name="feedback_sharing_data_alert">Αφαιρέστε από αυτό το μήνυμα ηλεκτρονικού ταχυδρομείου οποιεσδήποτε πληροφορίες δεν θα θέλατε να κοινοποιήσετε δημόσια. Επίσης, λάβετε υπόψη ότι η διεύθυνση email σας με την οποία δημοσιεύετε, καθώς και το σχετικό όνομα και η εικόνα προφίλ, θα είναι ορατά δημόσια.</string>
   <string name="explore_map_details">Λεπτομέρειες</string>
   <string name="achievements_unavailable_beta">Τα επιτεύγματα είναι διαθέσιμα μόνο στο prod flavor. Ελέγξτε την τεκμηρίωση προγραμματιστή.</string>
@@ -751,8 +743,8 @@
   <string name="unmark_as_not_for_upload">Καταργήστε την επισήμανση ως όχι για μεταφόρτωση</string>
   <string name="marking_as_not_for_upload">Επισήμανση ως όχι για μεταφόρτωση</string>
   <string name="unmarking_as_not_for_upload">Κατάργηση επισήμανσης ως όχι για μεταφόρτωση</string>
-  <string name="show_already_actioned_pictures">Εμφάνιση εικόνων που έχουν ήδη ενεργοποιηθεί</string>
-  <string name="hiding_already_actioned_pictures">Απόκρυψη εικόνων που έχουν ήδη ενεργοποιηθεί</string>
+  <string name="show_already_actioned_pictures" fuzzy="true">Εμφάνιση εικόνων που έχουν ήδη ενεργοποιηθεί</string>
+  <string name="hiding_already_actioned_pictures" fuzzy="true">Απόκρυψη εικόνων που έχουν ήδη ενεργοποιηθεί</string>
   <string name="no_more_images_found">Δεν βρέθηκαν άλλες εικόνες</string>
   <string name="this_image_is_already_uploaded">Αυτή η εικόνα έχει ήδη μεταφορτωθεί</string>
   <string name="can_not_select_this_image_for_upload">Δεν είναι δυνατή η επιλογή αυτής της εικόνας για μεταφόρτωση</string>
@@ -788,15 +780,15 @@
   <string name="invalid_login_message">Η περίοδος σύνδεσης έληξε, παρακαλούμε συνδεθείτε ξανά</string>
   <string name="no_application_available_to_open_gpx_files">Δεν υπάρχει διαθέσιμη εφαρμογή για το άνοιγμα αρχείων GPX</string>
   <string name="file_saved_successfully">Το αρχείο αποθηκεύτηκε με επιτυχία</string>
-  <string name="do_you_want_to_open_gpx_file">Θέλετε να ανοίξετε το αρχείο GPX;</string>
-  <string name="do_you_want_to_open_kml_file">Θέλετε να ανοίξετε το αρχείο KML;</string>
-  <string name="failed_to_save_kml_file">Αποτυχία αποθήκευσης του αρχείου KML.</string>
-  <string name="failed_to_save_gpx_file">Αποτυχία αποθήκευσης του αρχείου GPX.</string>
-  <string name="saving_kml_file">Αποθήκευση αρχείου KML</string>
-  <string name="saving_gpx_file">Αποθήκευση αρχείου GPX</string>
+  <string name="do_you_want_to_open_gpx_file" fuzzy="true">Θέλετε να ανοίξετε το αρχείο GPX;</string>
+  <string name="do_you_want_to_open_kml_file" fuzzy="true">Θέλετε να ανοίξετε το αρχείο KML;</string>
+  <string name="failed_to_save_kml_file" fuzzy="true">Αποτυχία αποθήκευσης του αρχείου KML.</string>
+  <string name="failed_to_save_gpx_file" fuzzy="true">Αποτυχία αποθήκευσης του αρχείου GPX.</string>
+  <string name="saving_kml_file" fuzzy="true">Αποθήκευση αρχείου KML</string>
+  <string name="saving_gpx_file" fuzzy="true">Αποθήκευση αρχείου GPX</string>
   <plurals name="custom_picker_images_selected_title_appendix">
-    <item quantity="one">%d επιλεγμένη εικόνα</item>
-    <item quantity="other"> Επιλέχθηκαν %d εικόνες</item>
+    <item quantity="one">%1$d επιλεγμένη εικόνα</item>
+    <item quantity="other">Επιλέχθηκαν %1$d εικόνες</item>
   </plurals>
   <string name="multiple_files_depiction">Να θυμάστε ότι όλες οι εικόνες σε μια πολλαπλή μεταφόρτωση έχουν τις ίδιες κατηγορίες και απεικονίσεις. Εάν οι εικόνες δεν μοιράζονται απεικονίσεις και κατηγορίες, πραγματοποιήστε πολλές ξεχωριστές μεταφορτώσεις.</string>
   <string name="multiple_files_depiction_header">Σημείωση για τις πολλαπλές μεταφορτώσεις</string>

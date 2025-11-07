@@ -10,22 +10,15 @@
     <item quantity="one">%1$d ឯកសារកំពុងផ្ទុកឡើង</item>
     <item quantity="other">%1$d ឯកសារកំពុងផ្ទុកឡើង</item>
   </plurals>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">(%1$d)</item>
-    <item quantity="other">(%1$d)</item>
-  </plurals>
   <string name="starting_uploads">ចាប់ផ្ដើមផ្ទុកឡើង</string>
   <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">ចាប់ផ្ដើមផ្ទុកឡើង %1$d </item>
     <item quantity="other">ចាប់ផ្ដើមផ្ទុកឡើង %1$d</item>
   </plurals>
-  <plurals name="multiple_uploads_title" fuzzy="true">
-    <item quantity="one">%1$d ផ្ទុកឡើង</item>
+  <plurals name="multiple_uploads_title">
     <item quantity="other">%1$d បានផ្ទុកឡើង</item>
   </plurals>
-  <plurals name="share_license_summary">
-    <item quantity="one">រូបភាពនេះនឹងត្រូវបានផ្តល់អាជ្ញាបណ្ណក្រោមសិទ្ធិ %1$s</item>
+  <plurals name="share_license_summary" fuzzy="true">
     <item quantity="other">រូបភាពទាំងនេះនឹងត្រូវបានផ្តល់អាជ្ញាបណ្ណក្រោម %1$s</item>
   </plurals>
   <plurals name="upload_count_title">

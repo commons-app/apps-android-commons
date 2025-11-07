@@ -31,7 +31,7 @@
 -->
 <resources>
   <string name="commons_facebook">Strona Commons na Facebooku</string>
-  <string name="commons_github">Kod źródłowy Commons na GitHubie</string>
+  <string name="commons_github" fuzzy="true">Kod źródłowy Commons na GitHubie</string>
   <string name="commons_logo">Logo Commons</string>
   <string name="commons_website">Strona internetowa Commons</string>
   <string name="exit_location_picker">Wyjdź z selektora lokalizacji</string>
@@ -57,24 +57,18 @@
     <item quantity="many">Przesyłanie %1$d plików</item>
     <item quantity="other">Przesyłanie %1$d plików</item>
   </plurals>
-  <plurals name="contributions_subtitle">
-    <item quantity="one">(%1$d)</item>
-    <item quantity="few">(%1$d)</item>
-    <item quantity="many">(%1$d)</item>
-    <item quantity="other">(%1$d)</item>
-  </plurals>
   <string name="starting_uploads">Rozpoczynanie przesyłania</string>
-  <plurals name="starting_multiple_uploads">
-    <item quantity="one">Rozpoczęto %d przesyłanie</item>
-    <item quantity="few">Rozpoczęto %d przesyłania</item>
-    <item quantity="many">Rozpoczęto %d przesyłań</item>
-    <item quantity="other">Rozpoczęto %d przesyłań</item>
+  <plurals name="starting_multiple_uploads" fuzzy="true">
+    <item quantity="one">Przetwarzanie %1$d przesyłania</item>
+    <item quantity="few">Przetwarzanie %1$d przesłań</item>
+    <item quantity="many">Przetwarzanie %1$d przesłań</item>
+    <item quantity="other">Przetwarzanie %1$d przesłań</item>
   </plurals>
-  <plurals name="multiple_uploads_title">
-    <item quantity="one">%d przesłanie</item>
-    <item quantity="few">%d przesłania</item>
-    <item quantity="many">%d przesłania</item>
-    <item quantity="other">%d przesłania</item>
+  <plurals name="multiple_uploads_title" fuzzy="true">
+    <item quantity="one">%1$d przesłanie</item>
+    <item quantity="few">%1$d przesłania</item>
+    <item quantity="many">%1$d przesłań</item>
+    <item quantity="other">%1$d przesłań</item>
   </plurals>
   <plurals name="share_license_summary">
     <item quantity="one">Ten obraz będzie udostępniany na licencji %1$s</item>
@@ -124,7 +118,7 @@
   <string name="uploading_queued">Prześlij w kolejce (włączony tryb ograniczonego połączenia)</string>
   <string name="upload_completed_notification_title">Przesłano %1$s!</string>
   <string name="upload_completed_notification_text">Dotknij, aby zobaczyć przesłany plik</string>
-  <string name="upload_progress_notification_title_start">Przesyłanie pliku: %s</string>
+  <string name="upload_progress_notification_title_start">Przesyłanie pliku: %1$s</string>
   <string name="upload_progress_notification_title_in_progress">Wysyłanie %1$s</string>
   <string name="upload_progress_notification_title_finishing">Zakończono wysyłanie pliku %1$s</string>
   <string name="upload_failed_notification_title">Nieudane wysyłanie %1$s</string>
@@ -174,6 +168,7 @@
   <string name="title_activity_settings">Ustawienia</string>
   <string name="title_activity_signup">Zarejestruj się</string>
   <string name="title_activity_featured_images">Wyróżniony obrazek</string>
+  <string name="images_featured_explanation" fuzzy="true">Polecane zdjęcia to zdjęcia wysoko wykwalifikowanych fotografów i ilustratorów, które społeczność Wikimedia Commons wybrała jako jedne z najwyższych jakości na stronie.</string>
   <string name="title_activity_custom_selector">Selektor niestandardowy</string>
   <string name="title_activity_category_details">Kategoria</string>
   <string name="title_activity_review">Recenzja</string>
@@ -260,15 +255,14 @@
   <string name="_2fa_code">Kod 2FA</string>
   <string name="email_auth_code">Kod weryfikacyjny z e-mail</string>
   <string name="logout_verification">Czy na pewno wylogować?</string>
-  <string name="mediaimage_failed">Błąd obrazu multimedialnego</string>
   <string name="no_subcategory_found">Nie znaleziono podkategorii</string>
   <string name="no_parentcategory_found">Nie znaleziono kategorii nadrzędnych</string>
   <string name="welcome_image_mount_zao">Zaō</string>
   <string name="welcome_image_llamas">Lamy</string>
   <string name="welcome_image_rainbow_bridge">Rainbow Bridge</string>
   <string name="welcome_image_tulip">Tulipan</string>
-  <string name="welcome_image_welcome_wikipedia">Witaj na Wikipedii</string>
-  <string name="welcome_image_welcome_copyright">Witamy Prawa Autorskie.</string>
+  <string name="welcome_image_welcome_wikipedia" fuzzy="true">Witaj na Wikipedii</string>
+  <string name="welcome_image_welcome_copyright" fuzzy="true">Witamy Prawa Autorskie.</string>
   <string name="welcome_image_sydney_opera_house">Opera Sydnej</string>
   <string name="cancel">Anuluj</string>
   <string name="navigation_drawer_open">Otwórz</string>
@@ -404,12 +398,11 @@
   <string name="Achievements">Osiągnięcia</string>
   <string name="Profile">Profil</string>
   <string name="badges">Odznaki</string>
-  <string name="statistics">Statystyki</string>
   <string name="statistics_thanks">Otrzymane Dzięki</string>
   <string name="statistics_featured">Wyróżnione ilustracje</string>
   <string name="statistics_wikidata_edits">Obrazy za pośrednictwem \"Pobliskie miejsca\"</string>
-  <string name="level">Poziom %d</string>
-  <string name="profile_withLevel">%s (Poziom %s)</string>
+  <string name="level">Poziom %1$d</string>
+  <string name="profile_withLevel">%1$s (Poziom %2$s)</string>
   <string name="images_uploaded">Przesłane obrazy</string>
   <string name="image_reverts">Nie wycofane obrazy</string>
   <string name="images_used_by_wiki">Wykorzystane obrazy</string>
@@ -469,7 +462,7 @@
   <string name="never_ask_again">Nigdy więcej nie pytaj o to</string>
   <string name="display_location_permission_title">Poproś o dostęp do lokalizacji</string>
   <string name="display_location_permission_explanation">W razie potrzeby zapytaj o pozwolenie na lokalizację w przypadku funkcji widoku pobliskiej karty powiadomień.</string>
-  <string name="achievements_fetch_failed">Coś poszło nie tak. Nie mogliśmy pobrać osiągnięć</string>
+  <string name="achievements_fetch_failed" fuzzy="true">Coś poszło nie tak. Nie mogliśmy pobrać osiągnięć</string>
   <string name="achievements_fetch_failed_ultimate_achievement">Zrobiłeś tak wiele wkładu, że nasz system obliczania osiągnięć nie może sobie poradzić. To jest najwyższym osiągnięciem.</string>
   <string name="ends_on">Kończy się na:</string>
   <string name="display_campaigns">Wyświetl kampanie</string>
@@ -497,11 +490,11 @@
   <string name="check_category_failure_message">Nie można zażądać sprawdzania kategorii dla %1$s</string>
   <string name="check_category_toast">Żądanie sprawdzania kategorii dla %1$s</string>
   <string name="nominate_for_deletion_done">Zrobione</string>
-  <string name="send_thank_success_title">Wysyłanie podziękowań: Powodzenie</string>
-  <string name="send_thank_success_message">Pomyślnie wysłano podziękowania do %1$s</string>
-  <string name="send_thank_failure_message">Nie udało się wysłać podziękowań %1$s</string>
-  <string name="send_thank_failure_title">Wysyłanie podziękowań: Błąd</string>
-  <string name="send_thank_toast">Wysyłanie podziękowań za %1$s</string>
+  <string name="send_thank_success_title" fuzzy="true">Wysyłanie podziękowań: Powodzenie</string>
+  <string name="send_thank_success_message" fuzzy="true">Pomyślnie wysłano podziękowania do %1$s</string>
+  <string name="send_thank_failure_message" fuzzy="true">Nie udało się wysłać podziękowań %1$s</string>
+  <string name="send_thank_failure_title" fuzzy="true">Wysyłanie podziękowań: Błąd</string>
+  <string name="send_thank_toast" fuzzy="true">Wysyłanie podziękowań za %1$s</string>
   <string name="review_copyright">Czy to jest zgodne z zasadami praw autorskich?</string>
   <string name="review_category">Czy jest to poprawnie skategoryzowane?</string>
   <string name="review_spam">Czy jest to w zakresie?</string>
@@ -528,15 +521,14 @@
   <string name="menu_option_unread">Wyświetl nieprzeczytane</string>
   <string name="error_occurred_in_picking_images">Wystąpił błąd podczas pobierania zdjęć</string>
   <string name="please_wait">Proszę czekać...</string>
-  <string name="images_featured_explanation">Polecane zdjęcia to zdjęcia wysoko wykwalifikowanych fotografów i ilustratorów, które społeczność Wikimedia Commons wybrała jako jedne z najwyższych jakości na stronie.</string>
   <string name="images_via_nearby_explanation">Obrazy przesłane przez Pobliskie miejsca to obrazy, które są przesyłane przez odkrywanie miejsc na mapie.</string>
   <string name="thanks_received_explanation">Ta funkcja umożliwia redaktorom wysyłanie powiadomień z podziękowaniem do użytkowników, którzy dokonują przydatnych zmian - za pomocą małego linku z podziękowaniem na stronie historii lub na stronie diff.</string>
-  <string name="copy_image_caption_description">Kopiuj na kolejne nośniki</string>
+  <string name="copy_image_caption_description" fuzzy="true">Kopiuj na kolejne nośniki</string>
   <string name="copied_successfully">Skopiowano</string>
   <string name="welcome_do_upload_content_description">Przykłady dobrych zdjęć do przesłania na Commons</string>
   <string name="welcome_dont_upload_content_description">Przykłady obrazów, których nie można przesyłać</string>
   <string name="skip_image">Pomiń ten obraz</string>
-  <string name="download_failed_we_cannot_download_the_file_without_storage_permission">Pobieranie nie powiodło się!. Nie możemy pobrać pliku bez pozwolenia na dostęp do pamięci zewnętrznej.</string>
+  <string name="download_failed_we_cannot_download_the_file_without_storage_permission" fuzzy="true">Pobieranie nie powiodło się!. Nie możemy pobrać pliku bez pozwolenia na dostęp do pamięci zewnętrznej.</string>
   <string name="manage_exif_tags">Zarządzaj tagami EXIF</string>
   <string name="manage_exif_tags_summary">Wybierz, które tagi EXIF ​​mają być przesyłane</string>
   <string name="exif_tag_name_author">Autor</string>
@@ -546,8 +538,6 @@
   <string name="exif_tag_name_lensModel">Model obiektywu</string>
   <string name="exif_tag_name_serialNumbers">Numery seryjne</string>
   <string name="exif_tag_name_software">Oprogramowanie</string>
-  <string name="media_location_permission_denied">Odmowa dostępu do lokalizacji multimediów</string>
-  <string name="add_location_manually">Możemy nie być w stanie automatycznie uzyskać danych o lokalizacji z przesyłanych zdjęć. Przed przesłaniem dodaj odpowiednią lokalizację dla każdego zdjęcia</string>
   <string name="share_text">Prześlij zdjęcia do Wikimedia Commons bezpośrednio z telefonu. Pobierz teraz aplikację Commons: %1$s</string>
   <string name="share_via">Udostępnij za pośrednictwem…</string>
   <string name="image_info">Informacje o obrazie</string>
@@ -607,7 +597,7 @@
   <string name="description_activity_title">Edycja opisów i przypisów</string>
   <string name="share_image_via">Udostępnij obraz przez</string>
   <string name="you_have_no_achievements_yet">Nie dokonałeś jeszcze żadnej edycji</string>
-  <string name="no_achievements_yet">%s nie dokonał jeszcze żadnej edycji</string>
+  <string name="no_achievements_yet">%1$s nie dokonał jeszcze żadnej edycji</string>
   <string name="account_created">Konto zostało utworzone!</string>
   <string name="text_copy">Skopiowano tekst do schowka</string>
   <string name="notification_mark_read">Oznaczono powiadomienia jako przeczytane</string>
@@ -616,7 +606,7 @@
   <string name="place_state_exists">Istnieje</string>
   <string name="place_state_needs_photo">Potrzebne Zdjęcia</string>
   <string name="place_type">Typ miejsca:</string>
-  <string name="nearby_search_hint">Most, muzeum, hotel itp.</string>
+  <string name="nearby_search_hint" fuzzy="true">Most, muzeum, hotel itp.</string>
   <string name="you_must_reset_your_passsword">Coś poszło nie tak z logowaniem. Musisz zresetować hasło!</string>
   <string name="title_for_media">MEDIA</string>
   <string name="title_for_child_classes">KLASY POTOMNE</string>
@@ -658,7 +648,7 @@
   <string name="wikipedia_instructions_step_5">5. Wklej wikitekst w odpowiednim miejscu.</string>
   <string name="wikipedia_instructions_step_6">6. Edytuj wikitekst w celu odpowiedniego pozycjonowania, jeśli to konieczne. Aby uzyskać więcej informacji, zobacz &lt;a href=\"https://en.wikipedia.org/wiki/Wikipedia:Manual_of_Style/Images#How_to_place_an_image\"&gt;here&lt;/a&gt;.</string>
   <string name="wikipedia_instructions_step_7">7. Opublikuj artykuł</string>
-  <string name="copy_wikicode_to_clipboard">Skopiuj wikicode do schowka</string>
+  <string name="copy_wikicode_to_clipboard" fuzzy="true">Skopiuj wikicode do schowka</string>
   <string name="pause">zatrzymaj</string>
   <string name="resume">wznów</string>
   <string name="paused">Zatrzymano</string>
@@ -725,7 +715,7 @@
   <string name="back">Cofnij</string>
   <string name="welcome_custom_picture_selector_text">Witamy w niestandardowym selektorze zdjęć</string>
   <string name="custom_selector_info_text1">Ten selektor pokazuje, które zdjęcia zostały już przesłane do Commons.</string>
-  <string name="custom_selector_info_text2">W przeciwieństwie do zdjęcia po lewej, zdjęcie po prawej ma logo Commons wskazujące, że zostało już przesłane.\n  Dotknij i przytrzymaj, aby wyświetlić podgląd obrazu.</string>
+  <string name="custom_selector_info_text2" fuzzy="true">W przeciwieństwie do zdjęcia po lewej, zdjęcie po prawej ma logo Commons wskazujące, że zostało już przesłane.\n  Dotknij i przytrzymaj, aby wyświetlić podgląd obrazu.</string>
   <string name="welcome_custom_selector_ok">Niesamowite</string>
   <string name="custom_selector_already_uploaded_image_text">Tez plik został już przesłany do Commons.</string>
   <string name="custom_selector_over_limit_warning">Ze względów technicznych aplikacja nie może niezawodnie przesyłać więcej niż %1$d zdjęć na raz. Limit przesyłania %1$d został przekroczony przez %2$d.</string>
@@ -740,8 +730,8 @@
   <string name="need_permission">Wymagane uprawnienie</string>
   <string name="read_phone_state_permission_message">Mapy znajdujące się w pobliżu muszą odczytywać STAN TELEFONU, aby działały poprawnie</string>
   <string name="location_permission_rationale">Opcjonalne zezwolenie: uzyskiwanie bieżącej lokalizacji dla wygenerowania propozycji kategorii</string>
-  <string name="contributions_of_user">Wkład użytkownika: %s</string>
-  <string name="achievements_of_user">Osiągnięcia użytkownika: %s</string>
+  <string name="contributions_of_user">Wkład użytkownika: %1$s</string>
+  <string name="achievements_of_user">Osiągnięcia użytkownika: %1$s</string>
   <string name="menu_view_user_page">Wyświetl profil użytkownika</string>
   <string name="edit_depictions">Edycja przedstawień</string>
   <string name="edit_categories">Edycja kategorii</string>
@@ -752,7 +742,7 @@
   <string name="location_message">Dane o lokalizacji pomagają edytorom Wiki znaleźć Twoje zdjęcie, dzięki czemu jest ono znacznie bardziej przydatne.\nTwoje ostatnio przesłane pliki nie zawierają lokalizacji.\nSugerujemy włączenie lokalizacji w ustawieniach aplikacji aparatu.\nDziękujemy za przesłanie!</string>
   <string name="no_location_found_title">Nie odnaleziono lokalizacji</string>
   <string name="no_location_found_message">Co powiesz na dodanie miejsca, w którym zrobiono to zdjęcie?\nDane o lokalizacji pomagają edytorom Wiki znaleźć Twoje zdjęcie, dzięki czemu jest ono znacznie bardziej przydatne.\nDziękujemy!</string>
-  <string name="add_location">Dodaj położenie</string>
+  <string name="add_location" fuzzy="true">Dodaj położenie</string>
   <string name="feedback_sharing_data_alert">Usuń z tego e-maila wszelkie informacje, których nie chcesz udostępniać publicznie. Pamiętaj również, że Twój adres e-mail, z którego publikujesz, oraz powiązane imię i nazwisko i zdjęcie profilowe będą widoczne publicznie.</string>
   <string name="explore_map_details">Szczegóły</string>
   <string name="achievements_unavailable_beta">Osiągnięcia są dostępne tylko w wersji prod. Sprawdź dokumentację programistyczną.</string>
@@ -773,8 +763,8 @@
   <string name="unmark_as_not_for_upload">Odznacz jako nie do przesłania</string>
   <string name="marking_as_not_for_upload">Oznacz jako nieprzeznaczone do przesłania</string>
   <string name="unmarking_as_not_for_upload">Oznacz jako nieprzeznaczone do przesłania</string>
-  <string name="show_already_actioned_pictures">Pokaż już wykonane zdjęcia</string>
-  <string name="hiding_already_actioned_pictures">Ukrywanie już wykonanych zdjęć</string>
+  <string name="show_already_actioned_pictures" fuzzy="true">Pokaż już wykonane zdjęcia</string>
+  <string name="hiding_already_actioned_pictures" fuzzy="true">Ukrywanie już wykonanych zdjęć</string>
   <string name="no_more_images_found">Nie znaleziono więcej obrazów</string>
   <string name="this_image_is_already_uploaded">To zdjęcie zostało już przesłane</string>
   <string name="can_not_select_this_image_for_upload">Nie można wybrać tego obrazu do przesłania</string>
@@ -810,17 +800,17 @@
   <string name="invalid_login_message">Twoje logowanie wygasło. Zaloguj się ponownie.</string>
   <string name="no_application_available_to_open_gpx_files">Brak dostępnej aplikacji do otwierania plików GPX</string>
   <string name="file_saved_successfully">Pomyślnie zapisano</string>
-  <string name="do_you_want_to_open_gpx_file">Chcesz otworzyć plik GPX?</string>
-  <string name="do_you_want_to_open_kml_file">Chcesz otworzyć plik KML?</string>
-  <string name="failed_to_save_kml_file">Nie udało się zapisać pliku KML.</string>
-  <string name="failed_to_save_gpx_file">Nie udało się zapisać pliku GPX.</string>
-  <string name="saving_kml_file">Zapisywanie pliku KML</string>
-  <string name="saving_gpx_file">Zapisywanie pliku GPX</string>
+  <string name="do_you_want_to_open_gpx_file" fuzzy="true">Chcesz otworzyć plik GPX?</string>
+  <string name="do_you_want_to_open_kml_file" fuzzy="true">Chcesz otworzyć plik KML?</string>
+  <string name="failed_to_save_kml_file" fuzzy="true">Nie udało się zapisać pliku KML.</string>
+  <string name="failed_to_save_gpx_file" fuzzy="true">Nie udało się zapisać pliku GPX.</string>
+  <string name="saving_kml_file" fuzzy="true">Zapisywanie pliku KML</string>
+  <string name="saving_gpx_file" fuzzy="true">Zapisywanie pliku GPX</string>
   <plurals name="custom_picker_images_selected_title_appendix">
-    <item quantity="one">%d wybrany obraz</item>
-    <item quantity="few">%d wybrane obrazy</item>
-    <item quantity="many">%d wybranych obrazów</item>
-    <item quantity="other"/>
+    <item quantity="one">%1$d wybrany obraz</item>
+    <item quantity="few">%1$d wybrane obrazy</item>
+    <item quantity="many">%1$d wybranych obrazów</item>
+    <item quantity="other">%1$d wybranych obrazów</item>
   </plurals>
   <string name="multiple_files_depiction">Pamiętaj, że wszystkie obrazy w wielokrotnym przesłaniu mają te same kategorie i przedstawienia. Jeśli obrazy nie mają wspólnych przedstawień i kategorii, wykonaj kilka oddzielnych przesłań.</string>
   <string name="multiple_files_depiction_header">Uwaga dotycząca przesyłania wielu obrazów na raz</string>

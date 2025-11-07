@@ -16,7 +16,7 @@
 -->
 <resources>
   <string name="commons_facebook">หน้าเฟซบุ๊กคอมมอนส์</string>
-  <string name="commons_github">ซอร์สโค้ดคอมมอนส์บน GitHub</string>
+  <string name="commons_github" fuzzy="true">ซอร์สโค้ดคอมมอนส์บน GitHub</string>
   <string name="commons_logo">โลโก้คอมมอนส์</string>
   <string name="commons_website">เว็บไซต์คอมมอนส์</string>
   <string name="exit_location_picker">ออกจากเครื่องมือเมื่อเลือกตำแหน่ง</string>
@@ -36,19 +36,14 @@
   <string name="nearby_filter_search">ค้นหาดู</string>
   <string name="nearby_filter_state">สถานะของสถานที่:</string>
   <string name="appwidget_img">รูปภาพประจำวัน</string>
-  <string name="uploads_pending_notification_indicator">กำลังอัปโหลดไฟล์ %1$d ไฟล์</string>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">(%1$d)</item>
-    <item quantity="other">(%1$d)</item>
+  <plurals name="uploads_pending_notification_indicator" fuzzy="true">
+    <item quantity="other">กำลังอัปโหลดไฟล์ %1$d ไฟล์</item>
   </plurals>
   <string name="starting_uploads">กำลังเริ่มอัปโหลด</string>
   <plurals name="starting_multiple_uploads" fuzzy="true">
-    <item quantity="one">กำลังเริ่มอัปโหลด %1$d รายการ</item>
     <item quantity="other">กำลังเริ่มอัปโหลด %1$d รายการ</item>
   </plurals>
-  <plurals name="multiple_uploads_title" fuzzy="true">
-    <item quantity="one">การอัปโหลด %1$d รายการ</item>
+  <plurals name="multiple_uploads_title">
     <item quantity="other">การอัปโหลด %1$d รายการ</item>
   </plurals>
   <plurals name="share_license_summary">
@@ -208,15 +203,14 @@
   <string name="become_a_tester_description">สมัครเข้าร่วมช่องทางบีตาบน Google Play และเข้าถึงคุณลักษณะใหม่ ๆ และการแก้ไขบั๊กก่อนเปิดตัว</string>
   <string name="_2fa_code">รหัส 2FA</string>
   <string name="logout_verification">คุณต้องการออกจากระบบจริง ๆ หรือไม่?</string>
-  <string name="mediaimage_failed">ภาพสื่อล้มเหลว</string>
   <string name="no_subcategory_found">ไม่พบหมวดหมู่รองที่ต้องการ</string>
   <string name="no_parentcategory_found">ไม่พบหมวดหมู่ต้นทางที่ต้องการ</string>
   <string name="welcome_image_mount_zao">ภูเขาซะโอ</string>
   <string name="welcome_image_llamas">ยามา</string>
   <string name="welcome_image_rainbow_bridge">สะพานสายรุ้ง</string>
   <string name="welcome_image_tulip">ทิวลิป</string>
-  <string name="welcome_image_welcome_wikipedia">ยินดีต้อนรับสู่วิกิพีเดีย</string>
-  <string name="welcome_image_welcome_copyright">ลิขสิทธิ์ต้อนรับ</string>
+  <string name="welcome_image_welcome_wikipedia" fuzzy="true">ยินดีต้อนรับสู่วิกิพีเดีย</string>
+  <string name="welcome_image_welcome_copyright" fuzzy="true">ลิขสิทธิ์ต้อนรับ</string>
   <string name="welcome_image_sydney_opera_house">โรงอุปรากรซิดนีย์</string>
   <string name="cancel">ยกเลิก</string>
   <string name="navigation_drawer_open">เปิด</string>
@@ -342,11 +336,10 @@
   <string name="delete">ลบ</string>
   <string name="Achievements">ความสำเร็จ</string>
   <string name="Profile">โพรไฟล์</string>
-  <string name="statistics">สถิติ</string>
   <string name="statistics_thanks">คำขอบคุณที่ได้รับแล้ว</string>
   <string name="statistics_featured">ภาพคัดสรร</string>
   <string name="statistics_wikidata_edits">ภาพผ่านทาง \"สถานที่ใกล้เคียง\"</string>
-  <string name="level" fuzzy="true">ระดับ</string>
+  <string name="level" fuzzy="true">ระดับ %1$d</string>
   <string name="images_uploaded">ภาพที่อัปโหลดแล้ว</string>
   <string name="image_reverts">รูปภาพไม่เปลี่ยนกลับ</string>
   <string name="images_used_by_wiki">ภาพที่ใช้แล้ว</string>
@@ -414,7 +407,7 @@
   <string name="place_state_exists">มีอยู่</string>
   <string name="place_state_needs_photo">ต้องการภาพถ่าย</string>
   <string name="place_type">ชนิดสถานที่:</string>
-  <string name="nearby_search_hint">สะพาน พิพิธภัณฑ์ โรงแรม ฯลฯ</string>
+  <string name="nearby_search_hint" fuzzy="true">สะพาน พิพิธภัณฑ์ โรงแรม ฯลฯ</string>
   <string name="upload_nearby_place_found_title">พบสถานที่ใกล้เคียง</string>
   <string name="title_app_shortcut_bookmark">ที่คั่นหน้า</string>
   <string name="title_app_shortcut_setting">การตั้งค่า</string>

@@ -10,23 +10,21 @@
   <string name="commons_logo">කොමන්ස් ලාන්චනය</string>
   <string name="commons_website">කොමන්ස් වෙබ් අඩවිය</string>
   <plurals name="uploads_pending_notification_indicator" fuzzy="true">
-    <item quantity="one">1 ගොනුවක් උඩුගත කෙරේ</item>
-    <item quantity="other">ගොනු %d ක් උඩුගත කෙරේ</item>
-  </plurals>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">තවමත් කිසිදු උඩුගත කිරීමක් නැත</item>
-    <item quantity="one">එක් උඩුගත කිරීමක් ඇත</item>
-    <item quantity="other">උඩුගත කිරීම් %1$d ක් ඇත</item>
+    <item quantity="one">%1$d ගොනුවක් උඩුගත කෙරේ</item>
+    <item quantity="other">ගොනු %1$d ක් උඩුගත කෙරේ</item>
   </plurals>
   <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">1 උඩුගත කිරීමක් ආරම්භ කරමින්</item>
     <item quantity="other">උඩුගත කිරීම් %1$d ක් ආරම්භ කරමින්</item>
   </plurals>
-  <plurals name="multiple_uploads_title" fuzzy="true">
+  <plurals name="multiple_uploads_title">
     <item quantity="one">1 උඩුගත කිරීමක්</item>
     <item quantity="other">උඩුගත කිරීම් %1$d ක්</item>
   </plurals>
-  <string name="share_license_summary" fuzzy="true">මෙම පින්තූරය %1$s යටතේ වලංගු වනු ඇත</string>
+  <plurals name="share_license_summary">
+    <item quantity="one">මෙම පින්තූරය %1$s යටතේ වලංගු වනු ඇත</item>
+    <item quantity="other">මෙම පින්තූරය %1$s යටතේ වලංගු වනු ඇත</item>
+  </plurals>
   <string name="app_name">කොමන්ස්</string>
   <string name="menu_settings">සැකසුම්</string>
   <string name="username">පරිශීලක නාමය</string>
@@ -128,7 +126,7 @@
   <string name="logout_verification">ඔබට ඇත්තටම නික්මීමට අවශ්‍යද?</string>
   <string name="welcome_image_llamas">ලාමා සතුන්</string>
   <string name="welcome_image_tulip">ටියුලිප්</string>
-  <string name="welcome_image_welcome_wikipedia">විකිපීඩියා වෙතට ඔබව සාදරයෙන් පිළිගනිමු.</string>
+  <string name="welcome_image_welcome_wikipedia" fuzzy="true">විකිපීඩියා වෙතට ඔබව සාදරයෙන් පිළිගනිමු.</string>
   <string name="welcome_image_sydney_opera_house">සිඩ්නි ඔපෙරා නිවස</string>
   <string name="cancel">අවලංගු කරන්න</string>
   <string name="navigation_drawer_open">විවෘත කරන්න</string>

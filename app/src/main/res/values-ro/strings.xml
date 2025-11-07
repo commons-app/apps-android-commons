@@ -8,12 +8,13 @@
 * Minisarm
 * Popetedenis
 * Rapiteanu
+* SZ475
 * Strainu
 * WebSourceContentRO
 -->
 <resources>
   <string name="commons_facebook">Pagina de Facebook a Commons</string>
-  <string name="commons_github">Codul Sursă de la Commons Github</string>
+  <string name="commons_github">Cod Sursă de la Commons Github</string>
   <string name="commons_logo">Logoul Commons</string>
   <string name="commons_website">Site-ul Commons</string>
   <string name="exit_location_picker">Ieșiți din selectorul de locații</string>
@@ -27,16 +28,11 @@
     <item quantity="few">%1$d fișiere se încarcă</item>
     <item quantity="other">%1$d de fișiere se încarcă</item>
   </plurals>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">(%1$d)</item>
-    <item quantity="other">(%1$d)</item>
-  </plurals>
   <string name="starting_uploads">Pornirea încărcărilor</string>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">Se pornește 1 încărcare</item>
-    <item quantity="few">Se pornesc %1$d încărcări</item>
-    <item quantity="other">Se pornesc %1$d de încărcări</item>
+    <item quantity="one">Procesând %1$d încărcare</item>
+    <item quantity="few">Procesând %1$d încărcări</item>
+    <item quantity="other"/>
   </plurals>
   <plurals name="multiple_uploads_title">
     <item quantity="one">1 încărcare</item>
@@ -46,7 +42,7 @@
   <plurals name="share_license_summary">
     <item quantity="one">Această imagine va fi licențiată sub %1$s</item>
     <item quantity="few">Aceste imagini vor fi licențiate sub %1$s</item>
-    <item quantity="other"/>
+    <item quantity="other">Aceste imagini vor fi licențiate sub %1$s</item>
   </plurals>
   <plurals name="upload_count_title">
     <item quantity="one">%1$d Încarcă</item>
@@ -76,18 +72,18 @@
   <string name="logging_in_title">Se conectează</string>
   <string name="logging_in_message">Vă rugăm să așteptați ...</string>
   <string name="updating_caption_message">Vă rugăm să așteptați ...</string>
-  <string name="login_success" fuzzy="true">Autentificare reușită!</string>
-  <string name="login_failed" fuzzy="true">Autentificare nereușită!</string>
+  <string name="login_success">Autentificare reușită!</string>
+  <string name="login_failed">Autentificare nereușită!</string>
   <string name="upload_failed">Fișierul nu a fost găsit. Încercați cu un alt fișier.</string>
   <string name="retry_limit_reached">Limita maximă de reîncercări a fost atinsă! Vă rugăm să renunțați la încărcare și să încercați din nou</string>
   <string name="unrestricted_battery_mode">Opriți optimizarea bateriei?</string>
   <string name="suggest_unrestricted_mode">Încărcarea mai mult de 3 imagini funcționează mai fiabil atunci când optimizarea bateriei este oprită. Vă rugăm să dezactivați optimizarea bateriei pentru aplicația Commons din setările pentru o experiență de încărcare fluidă. \n\nPași posibili pentru a dezactiva optimizarea bateriei: \n\nPasul 1: Aplicaţi butonul \'Setări\' de mai jos. \n\nPasul 2: Treci de la \'Neoptimizat\' la \'Toate aplicațiile\'. \n\nPasul 3: Căutați \"Commons\" sau \"fr.free.nrw.commons\". \n\nPasul 4: Atingeți-l și selectați \'Nu optimiza\'. \n\nPasul 5: Apăsați pe \'Gata\'.</string>
-  <string name="authentication_failed" fuzzy="true">Autentificare nereușită, vă rugăm să încercați din nou</string>
+  <string name="authentication_failed">Autentificarea a eșuat. Vă rugăm să vă conectați din nou.</string>
   <string name="uploading_started">Încărcarea a început!</string>
   <string name="uploading_queued">Încărcare în coadă (modul de conexiune limitat activat)</string>
   <string name="upload_completed_notification_title">%1$s s-a încărcat!</string>
   <string name="upload_completed_notification_text">Atingeți pentru a vizualiza elementul încărcat</string>
-  <string name="upload_progress_notification_title_start">Se încarcă fișierul %1$s</string>
+  <string name="upload_progress_notification_title_start">Se încarcă fișierul: %1$s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s se încarcă</string>
   <string name="upload_progress_notification_title_finishing">Se finalizează încărcarea fișierului %1$s</string>
   <string name="upload_failed_notification_title">Încărcarea fișierului %1$s nu a reușit</string>
@@ -103,17 +99,18 @@
   <string name="menu_from_camera">Faceți o poză</string>
   <string name="menu_nearby">În apropiere</string>
   <string name="provider_contributions">Încărcările mele</string>
+  <string name="menu_copy_link">Copiază linkul</string>
   <string name="menu_share">Partajare</string>
   <string name="menu_view_file_page">Vizualizați pagina fișierului</string>
   <string name="share_title_hint">Descriere (Necesară)</string>
   <string name="add_caption_toast">Vă rugăm să oferiți o descriere pentru acest fișier</string>
   <string name="share_description_hint">Descriere</string>
   <string name="share_caption_hint">Descriere</string>
-  <string name="login_failed_network" fuzzy="true">Autentificare nereușită – defecțiune de rețea</string>
+  <string name="login_failed_network">Autentificare nereușită – defecțiune de rețea</string>
   <string name="login_failed_throttled">Prea multe încercări nereușite. Încercați din nou peste câteva minute.</string>
   <string name="login_failed_blocked">Ne pare rău, acest utilizator a fost blocat la Commons</string>
   <string name="login_failed_2fa_needed">Trebuie să introduceți tokenul de autentificare.</string>
-  <string name="login_failed_generic" fuzzy="true">Autentificare nereușită</string>
+  <string name="login_failed_generic">Autentificarea a eșuat</string>
   <string name="share_upload_button">Încărcare</string>
   <string name="multiple_share_base_title">Dați un nume acestui set</string>
   <string name="provider_modifications">Modificări</string>
@@ -133,6 +130,7 @@
   <string name="title_activity_settings">Setări</string>
   <string name="title_activity_signup">Înregistrare</string>
   <string name="title_activity_featured_images">Imagini recomandate</string>
+  <string name="images_featured_explanation">Imaginile recomandate sunt contribuții ale unor fotografi și ilustratori cu înaltă calificare, pe care comunitatea Wikimedia Commons i-a ales ca fiind printre cele mai calitative de pe site.</string>
   <string name="title_activity_custom_selector">Selector personalizat</string>
   <string name="title_activity_category_details">Categorie</string>
   <string name="title_activity_review">Evaluare colegială</string>
@@ -154,10 +152,10 @@
   <string name="preference_license">Licență implicită</string>
   <string name="use_previous">Utilizați titlul și descrierea anterioară</string>
   <string name="preference_theme">Tema</string>
-  <string name="license_name_cc_by_sa_four" fuzzy="true">Atribuire și distribuire în condiții identice 4.0</string>
-  <string name="license_name_cc_by_four" fuzzy="true">Atribuire 4.0</string>
-  <string name="license_name_cc_by_sa" fuzzy="true">Atribuire și distribuire în condiții identice 3.0</string>
-  <string name="license_name_cc_by" fuzzy="true">Atribuire 3.0</string>
+  <string name="license_name_cc_by_sa_four">Atribuire-Partajare în Condiții Identice 4.0</string>
+  <string name="license_name_cc_by_four">Atribuire 4.0</string>
+  <string name="license_name_cc_by_sa">Atribuire-Partajare în Condiții Identice 3.0</string>
+  <string name="license_name_cc_by">Atribuirr 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
@@ -207,6 +205,7 @@
   <string name="media_detail_description">Descriere</string>
   <string name="media_detail_discussion">Discuție</string>
   <string name="media_detail_author">Autor</string>
+  <string name="media_detail_uploader">Încărcător</string>
   <string name="media_detail_uploaded_date">Data încărcării</string>
   <string name="media_detail_license">Licență</string>
   <string name="media_detail_coordinates">Coordonate</string>
@@ -214,16 +213,16 @@
   <string name="become_a_tester_title">Deveniți beta-tester</string>
   <string name="become_a_tester_description">Abonați-vă la canalul nostru beta pe Google Play și a obține acces rapid la noi caracteristici și corecții de erori</string>
   <string name="_2fa_code">Code 2FA</string>
+  <string name="email_auth_code">Codul de verificare prin Email</string>
   <string name="logout_verification">Chiar vrei să te deconectezi?</string>
-  <string name="mediaimage_failed">Imagine media nu a reușit</string>
   <string name="no_subcategory_found">Nu s-au găsit subcategorii</string>
   <string name="no_parentcategory_found">Nu au fost găsite categorii părinte</string>
   <string name="welcome_image_mount_zao">Muntele Zao</string>
   <string name="welcome_image_llamas">Llamas</string>
   <string name="welcome_image_rainbow_bridge">Rainbow Bridge</string>
   <string name="welcome_image_tulip">Lalea</string>
-  <string name="welcome_image_welcome_wikipedia">Bine ați venit Wikipedia</string>
-  <string name="welcome_image_welcome_copyright">Bine ați venit Drepturi de autor</string>
+  <string name="welcome_image_welcome_wikipedia">O imagine schematică a unui articol generic de pe Wikipedia.</string>
+  <string name="welcome_image_welcome_copyright">Un desen al unui teanc de hârtii cu simbolul drepturilor de autor tăiat.</string>
   <string name="welcome_image_sydney_opera_house">Opera din Sydney</string>
   <string name="cancel">Revocare</string>
   <string name="navigation_drawer_open">Deschide</string>
@@ -234,6 +233,7 @@
   <string name="navigation_item_about">Despre</string>
   <string name="navigation_item_settings">Setări</string>
   <string name="navigation_item_feedback">Feedback</string>
+  <string name="navigation_item_feedback_github">Feedback prin GitHub</string>
   <string name="navigation_item_logout">Închide sesiunea</string>
   <string name="navigation_item_info">Tutorial</string>
   <string name="navigation_item_notification">Notificări</string>
@@ -255,6 +255,7 @@
   <string name="upload_connection_error_alert_detail">Procesul de încărcare necesită acces activ la internet. Vă rugăm să verificați conexiunea la rețea.</string>
   <string name="upload_problem_image">Probleme găsite în imagine</string>
   <string name="internet_downloaded">Vă rugăm să încărcați doar fotografiile realizate de dvs. Nu încărcați imaginile pe care le-ați descărcat de pe Internet.</string>
+  <string name="preferences_uploads">încărcări</string>
   <string name="use_external_storage">Salvați fotografii în aplicație</string>
   <string name="use_external_storage_summary">Salvați fotografiile făcute cu camera din aplicație în spațiul de stocare al dispozitivului</string>
   <string name="login_to_your_account">Conectați-vă la contul dvs.</string>
@@ -267,8 +268,8 @@
   <string name="nominated_see_more">Consultați pagina web pentru detalii</string>
   <string name="skip_login">Omite</string>
   <string name="navigation_item_login">Autentificare</string>
-  <string name="skip_login_title" fuzzy="true">Chiar vrei să ignori datele de autentificare?</string>
-  <string name="skip_login_message" fuzzy="true">Va trebui să vă conectați pentru a încărca imagini în viitor.</string>
+  <string name="skip_login_title">Sigur vrei să sari autentificarea?</string>
+  <string name="skip_login_message">Va trebui să te conectezi pentru a încărca imagini în viitor.</string>
   <string name="login_alert_message">Conectați-vă pentru a utiliza această caracteristică</string>
   <string name="copy_wikicode">Copiați wikitext-ul în clipboard</string>
   <string name="wikicode_copied">Wikitext-ul a fost copiat în clipboard</string>
@@ -280,6 +281,7 @@
   <string name="nearby_commons">Commons</string>
   <string name="about_rate_us">Recenzie</string>
   <string name="about_faq">Întrebări frecvente</string>
+  <string name="user_guide">Ghid de utilizare</string>
   <string name="welcome_skip_button">Sari peste tutorial</string>
   <string name="no_internet">Nu aveți internet</string>
   <string name="error_notifications">Eroare la preluarea notificărilor</string>
@@ -321,6 +323,7 @@
   <string name="quiz">Quiz</string>
   <string name="quiz_question_string">Este această imagine OK pentru încărcare?</string>
   <string name="question">Întrebare</string>
+  <string name="quiz_i_am_not_sure">Nu sunt sigur</string>
   <string name="result">Rezultat</string>
   <string name="quiz_back_button">Dacă continuați să încărcați imagini care necesită ștergere, contul dvs. va fi probabil interzis. Sigur doriți să încheiați testul?</string>
   <string name="quiz_alert_message">Mai mult de %1$s din imaginile încărcate au fost șterse. Dacă continuați să încărcați imagini care necesită ștergere, contul dvs. va fi probabil blocat.\n\nDoriți să vedeți tutorialul din nou și apoi să faceți un test pentru a vă ajuta să aflați ce tip de imagini ar trebui sau nu ar trebui să încărcați?</string>
@@ -330,15 +333,17 @@
   <string name="blurry_image_answer">Unul dintre scopurile Commons este de a aduna imagini de calitate. Prin urmare, imaginile neclare nu ar trebui să fie încărcate. Întotdeauna încercați să faceți fotografii frumoase cu iluminare bună.</string>
   <string name="construction_event_answer">Imaginile care arată tehnologia sau cultura sunt foarte binevenite în Commons.</string>
   <string name="congratulatory_message_quiz">Ai raspuns corect la %1$s din răspunsuri. Felicitări!</string>
+  <string name="quiz_continue">Continuă</string>
   <string name="warning_for_no_answer">Selectați una dintre cele două opțiuni pentru a răspunde la întrebare</string>
-  <string name="user_not_logged_in" fuzzy="true">Sesiunea de conectare a expirat, vă rugăm să vă autentificați din nou.</string>
+  <string name="user_not_logged_in">Sesiunea de conectare a expirat. Vă rugăm să vă autentificați din nou.</string>
   <string name="quiz_result_share_message">Împărtășește-ți testul cu prietenii tăi!</string>
   <string name="continue_message">Continuați</string>
   <string name="correct">Răspuns corect</string>
   <string name="wrong">Răspuns greșit</string>
   <string name="quiz_screenshot_question">Este această captură de ecran OK pentru încărcare?</string>
   <string name="share_app_title">Trimiteți App</string>
-  <string name="error_fetching_nearby_places" fuzzy="true">Eroare la preluarea locurilor din apropiere.</string>
+  <string name="rotate">Rotire</string>
+  <string name="error_fetching_nearby_places">Nu s-au putut încărca locurile din apropiere</string>
   <string name="error_fetching_nearby_monuments">Eroare la preluarea monumentelor din apropiere.</string>
   <string name="no_recent_searches">Nu există căutări recente</string>
   <string name="delete_recent_searches_dialog">Sigur doriți să ștergeți istoricul căutărilor?</string>
@@ -348,11 +353,10 @@
   <string name="delete">Șterge</string>
   <string name="Achievements">Realizări</string>
   <string name="Profile">Profil</string>
-  <string name="statistics">Statistici</string>
   <string name="statistics_thanks">Mulțumiri primite</string>
   <string name="statistics_featured">Imagini recomandate</string>
   <string name="statistics_wikidata_edits">Imagini prin „Locații în apropiere”</string>
-  <string name="level" fuzzy="true">Nivel</string>
+  <string name="level">Nivel %1$d</string>
   <string name="images_uploaded">Imaginile au fost încărcate</string>
   <string name="image_reverts">Imaginile nu au fost reluate</string>
   <string name="images_used_by_wiki">Imaginile folosite</string>
@@ -384,6 +388,7 @@
   <string name="map_application_missing">Nu s-a găsit nicio aplicație de hartă compatibilă pe dispozitiv. Instalați o aplicație de hartă pentru a utiliza această caracteristică.</string>
   <string name="title_page_bookmarks_pictures">Imagini</string>
   <string name="title_page_bookmarks_locations">Locuri</string>
+  <string name="title_page_bookmarks_categories">Categorii</string>
   <string name="menu_bookmark">Adaugă/scoate din semnele de carte</string>
   <string name="provider_bookmarks">Semne de carte</string>
   <string name="bookmark_empty">Nu ați adăugat niciun semn de carte</string>
@@ -394,7 +399,7 @@
   <string name="deletion_reason_bad_for_my_privacy">Mi-am dat seama că este rău pentru intimitatea mea</string>
   <string name="deletion_reason_no_longer_want_public">M-am răzgândit, nu mai vreau să fie publică</string>
   <string name="deletion_reason_not_interesting">Ne pare rău că această imagine nu este interesantă pentru o enciclopedie</string>
-  <string name="uploaded_by_myself" fuzzy="true">Încărcat de mine pe %1$s, folosit în %2$d articol(e).</string>
+  <string name="uploaded_by_myself">Încărcat de mine pe %1$s, folosit în cel puțin %2$d articol(e).</string>
   <string name="no_uploads">Bine ați venit la Commons!\n\nÎncărcați primul dvs. media apăsând pe butonul de adăugare.</string>
   <string name="no_categories_selected">Nici o categorie selectată</string>
   <string name="no_categories_selected_warning_desc">Imaginile fără categorii sunt rareori utilizabile. Sigur doriți să continuați fără a selecta categorii?</string>
@@ -411,11 +416,15 @@
   <string name="never_ask_again">Nu mai întrebați niciodată acest lucru</string>
   <string name="display_location_permission_title">Cere permisiunea de locație</string>
   <string name="display_location_permission_explanation">Solicitați permisiunea de localizare atunci când este necesar pentru a utiliza funcția notificărilor de localizare.</string>
-  <string name="achievements_fetch_failed" fuzzy="true">Ceva a mers prost, nu am reușit să ne aducem realizările</string>
+  <string name="achievements_fetch_failed">Ceva nu a mers bine și nu am putut obține realizările.</string>
   <string name="achievements_fetch_failed_ultimate_achievement">Ai făcut atâtea contribuții sistemul nostru de calcul al realizărilor nu poate face față. Aceasta este realizarea finală.</string>
   <string name="ends_on">Se încheie la:</string>
   <string name="display_campaigns">Campaniile de afișare</string>
   <string name="display_campaigns_explanation">Vedeți campaniile în curs</string>
+  <string name="show_deletion_button">Afișează butonul de ștergere</string>
+  <string name="option_allow">Permite</string>
+  <string name="option_dismiss">Respinge</string>
+  <string name="open_document_photo_picker_explanation">Noul selector de fotografii Android riscă să piardă informații despre locație. Activează dacă se pare că îl folosești.</string>
   <string name="nearby_campaign_dismiss_message">Nu veți mai vedea campaniile. Cu toate acestea, puteți reactiva această notificare în Setări, dacă doriți.</string>
   <string name="this_function_needs_network_connection" fuzzy="true">Această funcție necesită conectare la rețea, verificați setările de conectare.</string>
   <string name="error_processing_image">A apărut o eroare la procesarea imaginii. Vă rugăm să încercați din nou!</string>
@@ -429,11 +438,11 @@
   <string name="check_category_failure_message">Nu s-a putut solicita verificarea categoriei pentru %1$s</string>
   <string name="check_category_toast">Solicitați verificarea categoriei pentru %1$s</string>
   <string name="nominate_for_deletion_done">Realizat</string>
-  <string name="send_thank_success_title">Se Trimit Mulțumiri: Succes</string>
-  <string name="send_thank_success_message">Trimis mulțumiri cu succes datorită %1$s</string>
-  <string name="send_thank_failure_message">Nu a reușit să trimită mulțumiri %1$s</string>
-  <string name="send_thank_failure_title">Se trimite mulțumiri: Eșec</string>
-  <string name="send_thank_toast">Se trimite Mulțumiri pentru %1$s</string>
+  <string name="send_thank_success_title">Se trimit mulțumiri: Succes</string>
+  <string name="send_thank_success_message">S-au trimis mulțumiri către %1$s</string>
+  <string name="send_thank_failure_message">Trimiterea de mulțumiri către %1$s a eșuat</string>
+  <string name="send_thank_failure_title">Se trimit mulțumiri: Eșec</string>
+  <string name="send_thank_toast" fuzzy="true">Se trimite Mulțumiri pentru %1$s</string>
   <string name="review_copyright">Respectă acest lucru regulile dreptului de autor?</string>
   <string name="review_category">Este corect catalogat acest lucru?</string>
   <string name="review_spam">Este acesta obiectiv?</string>
@@ -459,15 +468,14 @@
   <string name="menu_option_unread">Vezi necitit</string>
   <string name="error_occurred_in_picking_images">A apărut o eroare la alegerea imaginilor</string>
   <string name="please_wait">Vă rugăm să așteptați ...</string>
-  <string name="images_featured_explanation">Imaginile de Calitate sunt imagini ale unor fotografi și ilustratori de înaltă calificare, pe care comunitatea Wikimedia Commons a ales-o ca fiind de cea mai înaltă calitate pe site.</string>
   <string name="images_via_nearby_explanation">Imaginile Încărcate prin Locurile din Apropiere sunt imaginile care sunt încărcate prin descoperirea locurilor de pe hartă.</string>
   <string name="thanks_received_explanation">Această caracteristică permite editorilor să trimită o notificare de Mulțumire utilizatorilor care fac modificări utile - folosind un mic link de mulțumire pe pagina istoric sau pe pagina dif.</string>
-  <string name="copy_image_caption_description">Copiați pe suportul ulterior</string>
+  <string name="copy_image_caption_description" fuzzy="true">Copiați pe suportul ulterior</string>
   <string name="copied_successfully">Copiat cu succes</string>
   <string name="welcome_do_upload_content_description">Exemple de imagini bune de încărcat pe Commons</string>
   <string name="welcome_dont_upload_content_description">Exemple de imagini care nu trebuie încărcate</string>
   <string name="skip_image">Săriți această imagine</string>
-  <string name="download_failed_we_cannot_download_the_file_without_storage_permission">Descărcare eșuată!! Nu putem descărca fișierul fără permisiunea de stocare externă.</string>
+  <string name="download_failed_we_cannot_download_the_file_without_storage_permission">Descărcare eșuată. Nu putem descărca fișierul fără permisiunea de stocare externă.</string>
   <string name="manage_exif_tags">Gestionați etichetele EXIF</string>
   <string name="manage_exif_tags_summary">Selectați ce etichete EXIF de păstrat în încărcări</string>
   <string name="exif_tag_name_author">Autor</string>
@@ -492,9 +500,9 @@
   <string name="delete_helper_show_deletion_message_if">Nominalizat %1$s pentru ștergere.</string>
   <string name="delete_helper_show_deletion_title_failed">Eșuat</string>
   <string name="delete_helper_show_deletion_message_else">Nu s-a putut solicita ștergerea.</string>
-  <string name="delete_helper_ask_spam_selfie" fuzzy="true">Un selfie</string>
-  <string name="delete_helper_ask_spam_blurry" fuzzy="true">În ceață</string>
-  <string name="delete_helper_ask_spam_nonsense" fuzzy="true">Prostii</string>
+  <string name="delete_helper_ask_spam_selfie">un selfie care nu este folosit în niciun articol</string>
+  <string name="delete_helper_ask_spam_blurry">complet neclar</string>
+  <string name="delete_helper_ask_spam_nonsense">prostii, absolut inutilizabile în orice articol</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">Foto din presă</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">Fotografie aleatorie de pe internet</string>
   <string name="delete_helper_ask_reason_copyright_logo">Logo</string>
@@ -514,9 +522,9 @@
   <string name="coordinates_edit_helper_show_edit_title_success">Succes</string>
   <string name="coordinates_edit_helper_show_edit_message">Se adaugă coordonatele %1$s.</string>
   <string name="coordinates_edit_helper_edit_message_else">Nu s-au putut adăuga coordonate.</string>
-  <string name="coordinates_picking_unsuccessful" fuzzy="true">Nu se pot obține coordonatele.</string>
+  <string name="coordinates_picking_unsuccessful">Coordonatele imaginii nu au fost actualizate</string>
   <string name="share_image_via">Partajează imaginea prin</string>
-  <string name="no_achievements_yet" fuzzy="true">Încă nu ați făcut contribuții</string>
+  <string name="no_achievements_yet">%1$s nu a făcut încă nicio contribuție</string>
   <string name="account_created">Cont creat!</string>
   <string name="text_copy">Text copiat în clipboard</string>
   <string name="notification_mark_read">Notificare marcată ca citită</string>
@@ -525,13 +533,13 @@
   <string name="place_state_exists">Există</string>
   <string name="place_state_needs_photo">Are nevoie de foto</string>
   <string name="place_type">Tipul locului:</string>
-  <string name="nearby_search_hint">Pod, muzeu, hotel etc.</string>
-  <string name="you_must_reset_your_passsword" fuzzy="true">Ceva nu a mers corect la autentificare, trebuie să vă resetați parola !!</string>
+  <string name="nearby_search_hint">Pod, muzeu, hotel, etc.</string>
+  <string name="you_must_reset_your_passsword">Ceva nu a mers corect la autentificare. Trebuie să vă resetați parola!</string>
   <string name="title_for_media">MEDIA</string>
   <string name="title_for_child_classes">CLASE COPIl</string>
   <string name="title_for_parent_classes">CLASE PĂRINTE</string>
   <string name="upload_nearby_place_found_title">Locație Găsită în Apropiere</string>
-  <string name="upload_nearby_place_found_description_singular" fuzzy="true">Este o fotografie a Locului %1$s?</string>
+  <string name="upload_nearby_place_found_description_singular">Este aceasta o imagine cu %1$s?</string>
   <string name="title_app_shortcut_bookmark">Semne de carte</string>
   <string name="title_app_shortcut_setting">Setări</string>
   <string name="remove_bookmark">Eliminat din semne de carte</string>
@@ -561,7 +569,7 @@
   <string name="wikipedia_instructions_step_3">3. Găsiți o secțiune adecvată în articol pentru imaginea dvs.</string>
   <string name="wikipedia_instructions_step_4">4. Faceți clic pe pictograma Editare (cea ca un creion) pentru acea secțiune.</string>
   <string name="wikipedia_instructions_step_5">5. Lipiți wikitextul în locul corespunzător.</string>
-  <string name="copy_wikicode_to_clipboard">Copiați wikicodul în clipboard</string>
+  <string name="copy_wikicode_to_clipboard">Copiați wikitext-ul în clipboard</string>
   <string name="pause">pauză</string>
   <string name="resume">reia</string>
   <string name="paused">întrerupt</string>
@@ -586,5 +594,6 @@
   <string name="leaderboard_my_rank_button_text">Rank-ul meu</string>
   <string name="read_help_link">Citiți mai multe</string>
   <string name="modify_location">Modifică locația</string>
+  <string name="wlm_campaign_description">Wiki Loves Monuments este un concurs internațional de fotografie pentru monumente organizat de Wikimedia</string>
   <string name="location_permission_rationale">Permisiune opțională: Obțineți locația curentă pentru sugestiile de categorii</string>
 </resources>

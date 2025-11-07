@@ -9,7 +9,7 @@
 -->
 <resources>
   <string name="commons_facebook">Stranica Zajedničkog poslužitelja na Facebooku</string>
-  <string name="commons_github">Izvorni kôd Zajedničkog poslužitelja na Githubu</string>
+  <string name="commons_github" fuzzy="true">Izvorni kôd Zajedničkog poslužitelja na Githubu</string>
   <string name="commons_logo">Logotip Zajedničkog poslužitelja</string>
   <string name="commons_website">Mrežno mjesto Zajedničkog poslužitelja</string>
   <string name="appwidget_img">Slika dana</string>
@@ -17,20 +17,21 @@
     <item quantity="one">Postavlja se %1$d datoteka</item>
     <item quantity="other">Postavljaju se %1$d datoteke</item>
   </plurals>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">%1$d postavljena datoteka</item>
-    <item quantity="other">%1$d postavljene datoteke</item>
-  </plurals>
   <plurals name="starting_multiple_uploads" fuzzy="true">
-    <item quantity="one">Započeto %1$d postavljanje</item>
-    <item quantity="other">Započeta %1$d postavljanja</item>
+    <item quantity="one">Započinjem postavljanje %1$d datoteke</item>
+    <item quantity="few">Započinjem postavljanje %1$d datoteke</item>
+    <item quantity="other">Započinjem postavljanje %1$d datoteka</item>
   </plurals>
-  <plurals name="multiple_uploads_title" fuzzy="true">
+  <plurals name="multiple_uploads_title">
     <item quantity="one">%1$d postavljanje</item>
+    <item quantity="few">%1$d postavljanja</item>
     <item quantity="other">%1$d postavljanja</item>
   </plurals>
-  <string name="share_license_summary" fuzzy="true">Ova će slika biti licencirana pod %1$s</string>
+  <plurals name="share_license_summary" fuzzy="true">
+    <item quantity="one">Ova slika bit će licencirana pod %1$s</item>
+    <item quantity="few">Ove će slike biti licencirane pod %1$s</item>
+    <item quantity="other">Ove će slike biti licencirane pod %1$s</item>
+  </plurals>
   <string name="navigation_item_explore">Istraži</string>
   <string name="preference_category_appearance">Izgled</string>
   <string name="preference_category_general">Opće</string>
@@ -168,14 +169,13 @@
   <string name="become_a_tester_description">Prijavite se na naš beta-kanal na Google Playu i dobijte raniji pristup novim mogućnostima i ispravkama pogrješaka</string>
   <string name="_2fa_code">Kôd za provjeru u 2 koraka</string>
   <string name="logout_verification">Zaista se želite odjaviti?</string>
-  <string name="mediaimage_failed">Slika nije uspjela</string>
   <string name="no_subcategory_found">Potkategorije nisu pronađene</string>
   <string name="welcome_image_mount_zao">Planina Zao</string>
   <string name="welcome_image_llamas">Ljame</string>
   <string name="welcome_image_rainbow_bridge">Dugin most</string>
   <string name="welcome_image_tulip">Tulipan</string>
-  <string name="welcome_image_welcome_wikipedia">Welcome (Wikipedija)</string>
-  <string name="welcome_image_welcome_copyright">Dobro došli (autorska prava)</string>
+  <string name="welcome_image_welcome_wikipedia" fuzzy="true">Welcome (Wikipedija)</string>
+  <string name="welcome_image_welcome_copyright" fuzzy="true">Dobro došli (autorska prava)</string>
   <string name="welcome_image_sydney_opera_house">Sidnejska opera</string>
   <string name="cancel">Odustani</string>
   <string name="navigation_drawer_open">Otvori</string>
@@ -269,9 +269,8 @@
   <string name="nominate_delete">Predloži za brisanje</string>
   <string name="delete">Izbriši</string>
   <string name="Profile">Podatci o suradnici/suradniku</string>
-  <string name="statistics">Statistike</string>
   <string name="statistics_thanks">Primljeno zahvala</string>
-  <string name="level" fuzzy="true">Razina</string>
+  <string name="level" fuzzy="true">Razina %1$d</string>
   <string name="error_occurred">Došlo je do pogrješke!</string>
   <string name="notifications_channel_name_all">Obavijesti Zajedničkoga poslužitelja</string>
   <string name="title_page_bookmarks_pictures">Slike</string>

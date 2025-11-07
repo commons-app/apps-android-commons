@@ -11,7 +11,7 @@
 -->
 <resources>
   <string name="commons_facebook">Pajenn Facebook Commons</string>
-  <string name="commons_github">Kod mammenn Github Commons</string>
+  <string name="commons_github" fuzzy="true">Kod mammenn Github Commons</string>
   <string name="commons_logo">Logo Commons</string>
   <string name="commons_website">Lec\'hienn web Commons</string>
   <string name="submit">Kas</string>
@@ -31,27 +31,26 @@
     <item quantity="many">%1$d restr o vezañ karget</item>
     <item quantity="other">%1$d restr o vezañ karget</item>
   </plurals>
-  <plurals name="contributions_subtitle">
-    <item quantity="one">(%1$d).</item>
-    <item quantity="two">(%1$d).</item>
-    <item quantity="few">(%1$d).</item>
-    <item quantity="many">(%1$d).</item>
-    <item quantity="other">(%1$d).</item>
-  </plurals>
   <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">%1$d bellgargadenn loc\'het</item>
+    <item quantity="two">%1$d pellgargadennoù loc\'het</item>
+    <item quantity="few">%1$d pellgargadennoù loc\'het</item>
+    <item quantity="many">%1$d pellgargadennoù loc\'het</item>
     <item quantity="other">%1$d pellgargadennoù loc\'het</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">%d enporzhiadur</item>
-    <item quantity="two">%d enporzhiadur</item>
-    <item quantity="few">%d enporzhiadur</item>
-    <item quantity="many">%d enporzhiadur</item>
-    <item quantity="other">%d enporzhiadur</item>
+    <item quantity="one">%1$d enporzhiadur</item>
+    <item quantity="two">%1$d enporzhiadur</item>
+    <item quantity="few">%1$d enporzhiadur</item>
+    <item quantity="many">%1$d enporzhiadur</item>
+    <item quantity="other">%1$d enporzhiadur</item>
   </plurals>
   <plurals name="share_license_summary" fuzzy="true">
-    <item quantity="one">gant an aotre-implijout %1$s e vo ar skeudenn-mañ</item>
-    <item quantity="other">gant an aotreoù-implijout %1$s e vo ar skeudenn-mañ</item>
+    <item quantity="one">Gant an aotre-implijout %1$s e vo ar skeudenn-mañ</item>
+    <item quantity="two">Gant an aotreoù-implijout %1$s e vo ar skeudenn-mañ</item>
+    <item quantity="few">Gant an aotreoù-implijout %1$s e vo ar skeudenn-mañ</item>
+    <item quantity="many">Gant an aotreoù-implijout %1$s e vo ar skeudenn-mañ</item>
+    <item quantity="other">Gant an aotreoù-implijout %1$s e vo ar skeudenn-mañ</item>
   </plurals>
   <plurals name="upload_count_title">
     <item quantity="one">%1$d enporzhiadur</item>
@@ -84,7 +83,7 @@
   <string name="uploading_started">Kroget da enporzhiañ!</string>
   <string name="upload_completed_notification_title">%1$s bet pellgaset !</string>
   <string name="upload_completed_notification_text">Pouezit evit gwelet hoc\'h enporzhiadenn</string>
-  <string name="upload_progress_notification_title_start">Oc\'h enporzhiañ ar restr: %s</string>
+  <string name="upload_progress_notification_title_start">Oc\'h enporzhiañ ar restr: %1$s</string>
   <string name="upload_progress_notification_title_in_progress">O enporzhiañ %1$s !</string>
   <string name="upload_progress_notification_title_finishing">Oc\'h echuiñ enporzhiadenn %1$s</string>
   <string name="upload_failed_notification_title">C\'hwitet en deus enporzhiañ %1$s</string>
@@ -204,15 +203,14 @@
   <string name="become_a_tester_description">En em enskrivañ en hor c\'hanol beta war Google Play ha kaout ur rakmoned d\'an arc\'hwelioù nevez d\'an drein difaziet</string>
   <string name="_2fa_code">Kod 2FA</string>
   <string name="logout_verification">Sur oc\'h e fell deoc\'h digevreañ ?</string>
-  <string name="mediaimage_failed">C\'hwitadenn war skeudenn ar media</string>
   <string name="no_subcategory_found">Isrummad ebet kavet</string>
   <string name="no_parentcategory_found">Rummad tad ebet kavet</string>
   <string name="welcome_image_mount_zao">Menez Zao</string>
   <string name="welcome_image_llamas">Lamaed</string>
   <string name="welcome_image_rainbow_bridge">Pont Gwareg-ar-glav</string>
   <string name="welcome_image_tulip">Tulipez</string>
-  <string name="welcome_image_welcome_wikipedia">Donemat e Wikipedia</string>
-  <string name="welcome_image_welcome_copyright">Gwirioù oberour donemat</string>
+  <string name="welcome_image_welcome_wikipedia" fuzzy="true">Donemat e Wikipedia</string>
+  <string name="welcome_image_welcome_copyright" fuzzy="true">Gwirioù oberour donemat</string>
   <string name="welcome_image_sydney_opera_house">Ti Opera Sydney</string>
   <string name="cancel">Nullañ</string>
   <string name="navigation_drawer_open">Digeriñ</string>
@@ -308,11 +306,10 @@
   <string name="delete">Dilemel</string>
   <string name="Achievements">Trec\'hioù</string>
   <string name="Profile">Profil</string>
-  <string name="statistics">Stadegoù</string>
   <string name="statistics_thanks">Trugarekadennoù resevet</string>
   <string name="statistics_featured">Skeudennoù lakaet a-wel</string>
   <string name="statistics_wikidata_edits">Skeudennoù dre \"Lec\'hioù nepell\"</string>
-  <string name="level" fuzzy="true">Live</string>
+  <string name="level" fuzzy="true">Live %1$d</string>
   <string name="images_uploaded">Skeudennoù pellgarget</string>
   <string name="image_reverts">Skeudennoù nann nullet</string>
   <string name="images_used_by_wiki">Skeudennoù implijet</string>
@@ -346,9 +343,9 @@
   <string name="option_allow">Aotren</string>
   <string name="option_dismiss">Disteurel</string>
   <string name="nominate_for_deletion_done">Graet</string>
-  <string name="send_thank_success_message">Trugarekaet eo bet %1$s gant berzh</string>
-  <string name="send_thank_failure_message">Ur fazi zo bet en ur drugarekaat %1$s</string>
-  <string name="send_thank_toast">Trugarekaat %1$s</string>
+  <string name="send_thank_success_message" fuzzy="true">Trugarekaet eo bet %1$s gant berzh</string>
+  <string name="send_thank_failure_message" fuzzy="true">Ur fazi zo bet en ur drugarekaat %1$s</string>
+  <string name="send_thank_toast" fuzzy="true">Trugarekaat %1$s</string>
   <string name="review_thanks_yes_button_text">Skeudenn da-heul</string>
   <string name="review_thanks_no_button_text">Ya, perak pas</string>
   <string name="no_image">Skeudenn ebet implijet</string>
@@ -386,7 +383,7 @@
   <string name="place_state_exists">Bez\' ez eus anezhañ</string>
   <string name="place_state_needs_photo">Ur skeudenn zo ezhomm</string>
   <string name="place_type">Seurt lec\'h:</string>
-  <string name="nearby_search_hint">Pont, mirdi, leti h.a.</string>
+  <string name="nearby_search_hint" fuzzy="true">Pont, mirdi, leti h.a.</string>
   <string name="title_for_media">MEDIA</string>
   <string name="title_for_child_classes">KLASOÙ BUGALE</string>
   <string name="title_for_parent_classes">KLASOÙ KERENT</string>
@@ -436,13 +433,13 @@
   <string name="welcome_custom_selector_ok">Fiskal</string>
   <string name="learn_more">GOUZOUT HIROC\'H</string>
   <string name="location_permission_rationale">Aotre diret : kaout al lec\'hiadur red evit kinnig rummadoù</string>
-  <string name="contributions_of_user">Degasadennoù an implijer: %s</string>
-  <string name="achievements_of_user">Taolioù-kaer an implijer: %s</string>
+  <string name="contributions_of_user">Degasadennoù an implijer: %1$s</string>
+  <string name="achievements_of_user">Taolioù-kaer an implijer: %1$s</string>
   <string name="menu_view_user_page">Gwelet profil an implijer</string>
   <string name="edit_categories">Kemmañ ar rummadoù</string>
   <string name="advanced_options">Dibarzhioù araokaet</string>
   <string name="no_location_found_title">Lec\'hiadur ebet kavet</string>
-  <string name="add_location">Ouzhpennañ ul lec\'hiadur</string>
+  <string name="add_location" fuzzy="true">Ouzhpennañ ul lec\'hiadur</string>
   <string name="explore_map_details">Munudoù</string>
   <string name="android_version">Stumm Android</string>
   <string name="network_type">Seurt rouedad</string>
