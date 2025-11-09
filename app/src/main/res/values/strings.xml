@@ -887,4 +887,8 @@ Upload your first media by tapping on the add button.</string>
   <string name="image_tag_line_created_and_uploaded_by">Created and uploaded by: %1$s</string>
   <string name="image_tag_line_created_by_and_uploaded_by">Created by %1$s and uploaded by %2$s</string>
   <string name="nominated_for_deletion_btn">Nominated for Deletion</string>
+
+  <string name="multiple_upload_limit_title">Upload Limit Exceeded</string>
+  <string name="multiple_upload_limit_message">You have selected %1$d files. The current limit for simultaneous uploads is <b>%2$d</b> files. Please go back and select fewer files.</string>
+  <string name="multiple_upload_limit_truncated_message">You selected %1$d files. Only the first %2$d files will be processed for upload.</string>
 </resources>
