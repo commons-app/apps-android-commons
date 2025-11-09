@@ -28,12 +28,9 @@ class PendingUploadsFragment :
     CommonsDaggerSupportFragment(),
     PendingUploadsContract.View,
     PendingUploadsAdapter.Callback {
-
-    //fix:public and nullable to allow the dagger injection and prevent crash on the rotation.
     @Inject
     @JvmField
     var pendingUploadsPresenter: PendingUploadsPresenter? = null
-
     private lateinit var binding: FragmentPendingUploadsBinding
 
     private lateinit var uploadProgressActivity: UploadProgressActivity
@@ -63,16 +60,16 @@ class PendingUploadsFragment :
         return binding.root
     }
 
+    fun initAdapter() {
+        adapter = PendingUploadsAdapter(this)
+    }
+
     override fun onViewCreated(
         view: View,
         savedInstanceState: Bundle?,
     ) {
         super.onViewCreated(view, savedInstanceState)
         initRecyclerView()
-    }
-
-    fun initAdapter() {
-        adapter = PendingUploadsAdapter(this)
     }
 
     /**
@@ -132,7 +129,7 @@ class PendingUploadsFragment :
             String.format(locale, activity.getString(R.string.no)),
             {
                 ViewUtil.showShortToast(context, R.string.cancelling_upload)
-                // uses the  safe call directly
+                //uses the  safe call directly
                 pendingUploadsPresenter?.deleteUpload(
                     contribution, requireContext().applicationContext,
                 )
@@ -153,8 +150,7 @@ class PendingUploadsFragment :
     /**
      * Pauses all the ongoing uploads.
      */
-    fun pauseUploads() { pendingUploadsPresenter?.pauseUploads()
-    }
+    fun pauseUploads() { pendingUploadsPresenter?.pauseUploads() }
 
     /**
      * Cancels all the uploads after getting a confirmation from the user using Dialog.
@@ -185,3 +181,4 @@ class PendingUploadsFragment :
         )
     }
 }
+
