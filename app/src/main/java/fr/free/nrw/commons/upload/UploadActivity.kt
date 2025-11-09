@@ -28,7 +28,7 @@ import fr.free.nrw.commons.auth.LoginActivity
 import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.contributions.ContributionController
 import fr.free.nrw.commons.databinding.ActivityUploadBinding
-import fr.free.nrw.commons.filepicker.Constants.Companion.MAX_EXTERNAL_UPLOAD_COUNT//new import for centralised constant
+import fr.free.nrw.commons.filepicker.Constants.Companion.MAX_EXTERNAL_UPLOAD_COUNT
 import fr.free.nrw.commons.filepicker.Constants.RequestCodes
 import fr.free.nrw.commons.filepicker.UploadableFile
 import fr.free.nrw.commons.kvstore.BasicKvStore
@@ -729,9 +729,8 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
         if (intent.action == Intent.ACTION_SEND_MULTIPLE) {
             val fileCount = filesToProcess.size
 
-            // startsm truncation logic (Issue #3101)
             if (fileCount > MAX_EXTERNAL_UPLOAD_COUNT) {
-                //truncates the list to the maximum allowed limit (20)
+                //truncates the list to the maximum allowed limit (20) Issue #3101
                 filesToProcess = filesToProcess.subList(0, MAX_EXTERNAL_UPLOAD_COUNT)
 
                 // informs the the user that the list was truncated
