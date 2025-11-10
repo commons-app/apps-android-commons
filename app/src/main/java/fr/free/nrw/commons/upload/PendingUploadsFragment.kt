@@ -28,9 +28,9 @@ class PendingUploadsFragment :
     CommonsDaggerSupportFragment(),
     PendingUploadsContract.View,
     PendingUploadsAdapter.Callback {
-    @Inject
-    @JvmField
-    var pendingUploadsPresenter: PendingUploadsPresenter? = null
+        @Inject
+    lateinit var pendingUploadsPresenter: PendingUploadsPresenter
+
     private lateinit var binding: FragmentPendingUploadsBinding
 
     private lateinit var uploadProgressActivity: UploadProgressActivity
@@ -55,13 +55,9 @@ class PendingUploadsFragment :
     ): View {
         super.onCreate(savedInstanceState)
         binding = FragmentPendingUploadsBinding.inflate(inflater, container, false)
-        pendingUploadsPresenter?.onAttachView(this)
+        pendingUploadsPresenter.onAttachView(this)
         initAdapter()
         return binding.root
-    }
-
-    fun initAdapter() {
-        adapter = PendingUploadsAdapter(this)
     }
 
     override fun onViewCreated(
@@ -72,15 +68,19 @@ class PendingUploadsFragment :
         initRecyclerView()
     }
 
+    fun initAdapter() {
+        adapter = PendingUploadsAdapter(this)
+    }
+
     /**
      * Initializes the recycler view.
      */
     private fun initRecyclerView() {
         binding.pendingUploadsRecyclerView.setLayoutManager(LinearLayoutManager(this.context))
         binding.pendingUploadsRecyclerView.adapter = adapter
-        pendingUploadsPresenter?.setup()
-        pendingUploadsPresenter?.totalContributionList
-            ?.observe(viewLifecycleOwner) { list: PagedList<Contribution> ->
+        pendingUploadsPresenter.setup()
+        pendingUploadsPresenter.totalContributionList
+            .observe(viewLifecycleOwner) { list: PagedList<Contribution> ->
                 contributionsSize = list.size
                 contributionsList = mutableListOf()
                 var pausedOrQueuedUploads = 0
@@ -129,8 +129,7 @@ class PendingUploadsFragment :
             String.format(locale, activity.getString(R.string.no)),
             {
                 ViewUtil.showShortToast(context, R.string.cancelling_upload)
-                //uses the  safe call directly
-                pendingUploadsPresenter?.deleteUpload(
+                pendingUploadsPresenter.deleteUpload(
                     contribution, requireContext().applicationContext,
                 )
             },
@@ -142,7 +141,7 @@ class PendingUploadsFragment :
      * Restarts all the paused uploads.
      */
     fun restartUploads() {
-        pendingUploadsPresenter?.restartUploads(
+        pendingUploadsPresenter.restartUploads(
             contributionsList, 0, requireContext().applicationContext
         )
     }
@@ -150,13 +149,16 @@ class PendingUploadsFragment :
     /**
      * Pauses all the ongoing uploads.
      */
-    fun pauseUploads() { pendingUploadsPresenter?.pauseUploads() }
+    fun pauseUploads() {
+        pendingUploadsPresenter.pauseUploads()
+    }
 
     /**
      * Cancels all the uploads after getting a confirmation from the user using Dialog.
      */
     fun deleteUploads() {
-        pendingUploadsPresenter ?: return
+        // the check below is no longer needed but kept for original logic
+        if (!::pendingUploadsPresenter.isInitialized) return
 
         val activity = requireActivity()
         val locale = Locale.getDefault()
@@ -169,7 +171,7 @@ class PendingUploadsFragment :
             {
                 ViewUtil.showShortToast(context, R.string.cancelling_upload)
                 uploadProgressActivity.hidePendingIcons()
-                pendingUploadsPresenter?.deleteUploads(
+                pendingUploadsPresenter.deleteUploads(
                     listOf(
                         STATE_QUEUED,
                         STATE_IN_PROGRESS,
@@ -181,4 +183,3 @@ class PendingUploadsFragment :
         )
     }
 }
-
