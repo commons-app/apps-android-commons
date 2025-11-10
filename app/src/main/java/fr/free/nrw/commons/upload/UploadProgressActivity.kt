@@ -21,6 +21,7 @@ import javax.inject.Inject
  */
 class UploadProgressActivity : BaseActivity() {
     private lateinit var binding: ActivityUploadProgressBinding
+    // fields for the fragments are removed as retrieval is done via FragmentManager
     var viewPagerAdapter: ViewPagerAdapter? = null
     var menu: Menu? = null
 
@@ -66,13 +67,15 @@ class UploadProgressActivity : BaseActivity() {
         setTabs()
     }
 
-    // fix:helper to retrieve the current, non-stale PendingUploadsFragment instance
+    // FIX: the helelper to retrieve the current, non-stale PendingUploadsFragment instance.
     private fun getPendingUploadsFragment(): PendingUploadsFragment? {
         return supportFragmentManager.findFragmentByTag(
             "android:switcher:${R.id.upload_progress_view_pager}:${0}",
         ) as? PendingUploadsFragment
     }
 
+
+    // FIX: helper to retrieve the current, non-stale FailedUploadsFragment instance.
     private fun getFailedUploadsFragment(): FailedUploadsFragment? {
         return supportFragmentManager.findFragmentByTag(
             "android:switcher:${R.id.upload_progress_view_pager}:${1}",
@@ -87,7 +90,7 @@ class UploadProgressActivity : BaseActivity() {
     fun setTabs() {
         val pendingUploadsFragment: Fragment
         val failedUploadsFragment: Fragment
-        //check if the fragmentManager already has the fragments (afterr the rotation)
+        // using the FragmentManager lookup to get the correct, current instances after the rotation
         pendingUploadsFragment = getPendingUploadsFragment() ?: PendingUploadsFragment()
         failedUploadsFragment = getFailedUploadsFragment() ?: FailedUploadsFragment()
 
@@ -133,7 +136,7 @@ class UploadProgressActivity : BaseActivity() {
                                     getString(R.string.pause),
                                 ).setIcon(R.drawable.pause_icon)
                                 .setOnMenuItemClickListener {
-                                    //retrieves the current fragment instance just before use
+                                    // FIX: retrive and use the current fragment instance with safe call to avoid the NPE if retrieval fails
                                     getPendingUploadsFragment()?.pauseUploads()
                                     setPausedIcon(true)
                                     true
@@ -148,6 +151,7 @@ class UploadProgressActivity : BaseActivity() {
                                     getString(R.string.cancel),
                                 ).setIcon(R.drawable.ic_cancel_upload)
                                 .setOnMenuItemClickListener {
+                                    // FIX: retrive and use the current fragment instance
                                     getPendingUploadsFragment()?.deleteUploads()
                                     true
                                 }.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM)
@@ -162,6 +166,7 @@ class UploadProgressActivity : BaseActivity() {
                                     getString(R.string.resume),
                                 ).setIcon(R.drawable.play_icon)
                                 .setOnMenuItemClickListener {
+                                    // FIX: retrive and use the current fragment instance
                                     getPendingUploadsFragment()?.restartUploads()
                                     setPausedIcon(false)
                                     true
@@ -224,4 +229,3 @@ class UploadProgressActivity : BaseActivity() {
         updateMenuItems(binding.uploadProgressViewPager.currentItem)
     }
 }
-
