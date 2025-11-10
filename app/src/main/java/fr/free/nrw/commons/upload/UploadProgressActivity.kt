@@ -21,7 +21,6 @@ import javax.inject.Inject
  */
 class UploadProgressActivity : BaseActivity() {
     private lateinit var binding: ActivityUploadProgressBinding
-    // fields for the fragments are removed as retrieval is done via FragmentManager
     var viewPagerAdapter: ViewPagerAdapter? = null
     var menu: Menu? = null
 
@@ -67,20 +66,22 @@ class UploadProgressActivity : BaseActivity() {
         setTabs()
     }
 
-    // FIX: the helelper to retrieve the current, non-stale PendingUploadsFragment instance.
+    //final fix:helper to retrieve the current Fragment by CLASS TYPE (as suggested).
     private fun getPendingUploadsFragment(): PendingUploadsFragment? {
-        return supportFragmentManager.findFragmentByTag(
-            "android:switcher:${R.id.upload_progress_view_pager}:${0}",
-        ) as? PendingUploadsFragment
+        //find the Fragment by class type, not index
+        return supportFragmentManager.fragments.find {
+            it is PendingUploadsFragment && it.isAdded
+        } as? PendingUploadsFragment
     }
 
-
-    // FIX: helper to retrieve the current, non-stale FailedUploadsFragment instance.
+    //final fix:helper to retrieve the current Fragment by CLASS TYPE (as suggested).
     private fun getFailedUploadsFragment(): FailedUploadsFragment? {
-        return supportFragmentManager.findFragmentByTag(
-            "android:switcher:${R.id.upload_progress_view_pager}:${1}",
-        ) as? FailedUploadsFragment
+        //find the Fragment by class type, not index
+        return supportFragmentManager.fragments.find {
+            it is FailedUploadsFragment && it.isAdded
+        } as? FailedUploadsFragment
     }
+
 
     /**
      * Initializes and sets up the tabs data by creating instances of `PendingUploadsFragment`
@@ -90,7 +91,8 @@ class UploadProgressActivity : BaseActivity() {
     fun setTabs() {
         val pendingUploadsFragment: Fragment
         val failedUploadsFragment: Fragment
-        // using the FragmentManager lookup to get the correct, current instances after the rotation
+
+        // using the robust getPendingUploadsFragment() helper
         pendingUploadsFragment = getPendingUploadsFragment() ?: PendingUploadsFragment()
         failedUploadsFragment = getFailedUploadsFragment() ?: FailedUploadsFragment()
 
@@ -136,7 +138,7 @@ class UploadProgressActivity : BaseActivity() {
                                     getString(R.string.pause),
                                 ).setIcon(R.drawable.pause_icon)
                                 .setOnMenuItemClickListener {
-                                    // FIX: retrive and use the current fragment instance with safe call to avoid the NPE if retrieval fails
+                                    //robust helper to find the correct instance
                                     getPendingUploadsFragment()?.pauseUploads()
                                     setPausedIcon(true)
                                     true
@@ -151,7 +153,7 @@ class UploadProgressActivity : BaseActivity() {
                                     getString(R.string.cancel),
                                 ).setIcon(R.drawable.ic_cancel_upload)
                                 .setOnMenuItemClickListener {
-                                    // FIX: retrive and use the current fragment instance
+                                    //robust helper to find the correct instance
                                     getPendingUploadsFragment()?.deleteUploads()
                                     true
                                 }.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM)
@@ -166,7 +168,7 @@ class UploadProgressActivity : BaseActivity() {
                                     getString(R.string.resume),
                                 ).setIcon(R.drawable.play_icon)
                                 .setOnMenuItemClickListener {
-                                    // FIX: retrive and use the current fragment instance
+                                    //robust helper to find the correct instance
                                     getPendingUploadsFragment()?.restartUploads()
                                     setPausedIcon(false)
                                     true
