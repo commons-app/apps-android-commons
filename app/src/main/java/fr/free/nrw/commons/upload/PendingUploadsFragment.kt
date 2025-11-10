@@ -28,7 +28,8 @@ class PendingUploadsFragment :
     CommonsDaggerSupportFragment(),
     PendingUploadsContract.View,
     PendingUploadsAdapter.Callback {
-        @Inject
+    // final-state:Non-nullable lateinit var as the Presenter is always initialized.
+    @Inject
     lateinit var pendingUploadsPresenter: PendingUploadsPresenter
 
     private lateinit var binding: FragmentPendingUploadsBinding
@@ -157,9 +158,7 @@ class PendingUploadsFragment :
      * Cancels all the uploads after getting a confirmation from the user using Dialog.
      */
     fun deleteUploads() {
-        // the check below is no longer needed but kept for original logic
-        if (!::pendingUploadsPresenter.isInitialized) return
-
+        //final change:thee redundant 'if (!::pendingUploadsPresenter.isInitialized) return' is removed.
         val activity = requireActivity()
         val locale = Locale.getDefault()
         showAlertDialog(
