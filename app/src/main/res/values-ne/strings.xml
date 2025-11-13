@@ -12,8 +12,8 @@
 * हिमाल सुबेदी
 -->
 <resources>
-  <string name="commons_facebook">कमन्सकाे फेसबुक पृष्ठ</string>
-  <string name="commons_github" fuzzy="true">कमन्सकाे Github स्रोत कोड</string>
+  <string name="commons_facebook">कमन्स फेसबुक पेज</string>
+  <string name="commons_github">कमन्स Github स्रोत कोड</string>
   <string name="commons_logo">कमन्सकाे लाेगाे</string>
   <string name="commons_website">कमन्सकाे वेबसाइट</string>
   <string name="exit_location_picker">स्थान चयनकर्ताबाट बाहिर निस्कनुहोस्</string>
@@ -29,6 +29,7 @@
   <string name="show_captions_description">विवरण</string>
   <string name="nearby_row_image">चित्र</string>
   <string name="nearby_all">सबै</string>
+  <string name="nearby_filter_toggle">टगल अप</string>
   <string name="nearby_filter_search">दृश्य खोज्नुहोस्</string>
   <string name="nearby_filter_state">स्थानको अवस्था</string>
   <string name="appwidget_img">दिनकाे उत्कृष्ट तस्वीर</string>
@@ -110,7 +111,7 @@
   <string name="provider_modifications">परिवर्तनहरू</string>
   <string name="menu_upload_single">उर्ध्वभरण गर्ने</string>
   <string name="categories_search_text_hint">खोज श्रेणीहरू</string>
-  <string name="menu_save_categories">सङ्ग्रह गर्ने</string>
+  <string name="menu_save_categories">सङ्ग्रह गर्नुहोस्</string>
   <string name="refresh_button">ताजा गर्नुहोस्</string>
   <string name="display_list_button">सूची</string>
   <string name="contributions_subtitle_zero">(अहिले सम्म कुनै उर्ध्वभरण छैन)</string>
@@ -138,10 +139,10 @@
   <string name="preference_license">पूर्वनिर्धारित अनुमति पत्र</string>
   <string name="use_previous">अघिल्लो शीर्षक र वर्णनकाे प्रयोग गर्नुहोस्</string>
   <string name="preference_theme">थिम</string>
-  <string name="license_name_cc_by_sa_four" fuzzy="true">एट्रिब्युसन- सेयरअलाइक ४.०</string>
-  <string name="license_name_cc_by_four" fuzzy="true">एट्रिब्युसन ४.०</string>
-  <string name="license_name_cc_by_sa" fuzzy="true">एट्रिब्युसन- सेयरअलाइक ३.०</string>
-  <string name="license_name_cc_by" fuzzy="true">एट्रिब्युसन ३.०</string>
+  <string name="license_name_cc_by_sa_four">एट्रिब्युसन-सेयरअलाइक ४.०</string>
+  <string name="license_name_cc_by_four">एट्रिब्युसन ४.०</string>
+  <string name="license_name_cc_by_sa">एट्रिब्युसन-सेयरअलाइक ३.०</string>
+  <string name="license_name_cc_by">एट्रिब्युसन ३.०</string>
   <string name="license_name_cc0">CC०</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA ३.०</string>
   <string name="license_name_cc_by_3_0">CC BY-SA ३.०</string>
@@ -190,7 +191,7 @@
   <string name="logout_verification">के तपाईं निर्गमन गर्न चाहानुहुन्छ?</string>
   <string name="no_subcategory_found">कुनैपनि उपश्रेणीहरू फेला परेनन्</string>
   <string name="no_parentcategory_found">कुनैपनि अभिभावक श्रेणीहरू फेला परेन</string>
-  <string name="welcome_image_welcome_wikipedia" fuzzy="true">विकिपिडियामा स्वागत छ</string>
+  <string name="welcome_image_welcome_wikipedia">एउटा सामान्य विकिपिडिया लेखको रूपरेखा चित्र।</string>
   <string name="welcome_image_sydney_opera_house">सिड्नीकाे ओपेरा हाउस</string>
   <string name="cancel">रद्द गर्नुहोस्</string>
   <string name="navigation_drawer_open">खोल्नुहोस्</string>
@@ -250,11 +251,11 @@
   <string name="question">प्रश्न</string>
   <string name="result">नतिजा</string>
   <string name="user_not_logged_in">लग इनको म्याद सकियो। कृपया पुन: लग इन गर्नुहाेस्।</string>
-  <string name="continue_message">निरन्तरता दिनुहोस्</string>
+  <string name="continue_message">जारी राख्नुहोस्</string>
   <string name="wrong">गलत उत्तर</string>
   <string name="share_app_title">अनुप्रयाेग साझेदारी गर्नुहाेस्</string>
   <string name="nominate_delete">मेटाउनका लागि नामाङ्कित</string>
-  <string name="delete">मेटाउनुहाेस्</string>
+  <string name="delete">मेट्नुहोस्</string>
   <string name="Achievements">उपलब्धिहरू</string>
   <string name="statistics_thanks">धन्यवाद प्राप्त भयाे</string>
   <string name="statistics_featured">विशेष तस्वीरहरू</string>
@@ -316,7 +317,7 @@
   <string name="description">विवरण</string>
   <string name="title_page_bookmarks_items">वस्तुहरू</string>
   <string name="done">सम्पन्न भयो</string>
-  <string name="custom_selector_info_text2" fuzzy="true"/>
+  <string name="custom_selector_info_text2">बायाँपट्टिको तस्वीरको जस्तो नभई, दायाँपट्टिको तस्वीरमा पहिल्यै अपलोड भइसकेको जनाउने कमन्स लोगो छ।\n\nछवि पूर्वावलोकनको लागि छोएर रोकिराख्नुहोस्।</string>
   <string name="learn_more">थप जान्नुहोस्</string>
   <string name="wlm_campaign_title">विकी लभ्स मोनुमेन्टस्</string>
   <string name="need_permission">अनुमति आवश्यक</string>
@@ -330,7 +331,7 @@
   <string name="location_message"/>
   <string name="no_location_found_title">कुनै पनि स्थान फेला परेन ।</string>
   <string name="no_location_found_message">तस्विर खिचिएको स्थान थप्ने हो?\nस्थानको डेटाले विकी सम्पादकहरूलाई तस्विर भेटाउन मद्दत गर्छ र यसलाई धेरै उपयोगी गराउँछ।\nधन्यवाद!</string>
-  <string name="add_location" fuzzy="true">स्थान थप्नुहोस्</string>
+  <string name="add_location">स्थान थप्नुहोस्</string>
   <string name="explore_map_details">विवरणहरू</string>
   <string name="copyright_popup">कृपया आफैँले खिच्नुभएको तस्विर मात्र अपलोड गर्नुहोस्। प्रतिलिपि अधिकार हनन् गर्ने अपलोडकर्तालाई रोकगाइने छ। यो बिटाएपमा पनि लागू हुन्छ। एप परीक्षण गर्नुभएकोमा धन्यवाद!</string>
   <string name="android_version">एन्ड्रोइड संस्करण</string>
