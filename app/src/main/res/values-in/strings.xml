@@ -19,13 +19,14 @@
 * Naufal06
 * Pebaryan
 * Rachmat04
+* Rex
 * Rv77ax
 * Veracious
 * William Surya Permana
 -->
 <resources>
   <string name="commons_facebook">Halaman Facebook Commons</string>
-  <string name="commons_github" fuzzy="true">Kode Sumber Commons di Github</string>
+  <string name="commons_github">Kode Sumber Commons di Github</string>
   <string name="commons_logo">Logo Commons</string>
   <string name="commons_website">Situs Web Commons</string>
   <string name="exit_location_picker">Keluar dari pemilih lokasi</string>
