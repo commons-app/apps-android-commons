@@ -23,6 +23,7 @@ import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager.widget.ViewPager.OnPageChangeListener
 import androidx.work.ExistingWorkPolicy
+import androidx.lifecycle.lifecycleScope
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.auth.LoginActivity
 import fr.free.nrw.commons.auth.SessionManager
@@ -52,6 +53,10 @@ import fr.free.nrw.commons.utils.DialogUtil.showAlertDialog
 import fr.free.nrw.commons.utils.PermissionUtils.PERMISSIONS_STORAGE
 import fr.free.nrw.commons.utils.PermissionUtils.checkPermissionsAndPerformAction
 import fr.free.nrw.commons.utils.PermissionUtils.hasPartialAccess
+import com.google.mlkit.genai.prompt.GenerativeModel
+import com.google.mlkit.genai.prompt.Generation
+import com.google.mlkit.genai.prompt.TextPart
+import com.google.mlkit.genai.prompt.generateContentRequest
 import fr.free.nrw.commons.utils.PermissionUtils.hasPermission
 import fr.free.nrw.commons.utils.ViewUtil.showLongToast
 import fr.free.nrw.commons.wikidata.WikidataConstants.PLACE_OBJECT
@@ -59,6 +64,7 @@ import fr.free.nrw.commons.wikidata.WikidataConstants.SELECTED_NEARBY_PLACE
 import fr.free.nrw.commons.wikidata.WikidataConstants.SELECTED_NEARBY_PLACE_CATEGORY
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import kotlinx.coroutines.launch
 import timber.log.Timber
 import java.io.File
 import javax.inject.Inject
@@ -91,6 +97,7 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
     @Inject
     var locationManager: LocationServiceManager? = null
 
+    private var model: GenerativeModel? = null
     private var isTitleExpanded = true
 
     private var progressDialog: ProgressDialog? = null
@@ -231,6 +238,9 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
             clearAll()
         }
         checkStoragePermissions()
+        if (VERSION.SDK_INT >= VERSION_CODES.O) {
+            model = Generation.getClient()
+        }
     }
 
     private fun init() {
@@ -813,6 +823,54 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
     }
 
     override fun onNextButtonClicked(index: Int) {
+        val currentFragment = fragments!![index]
+        if (currentFragment is UploadMediaDetailFragment) {
+            if (VERSION.SDK_INT >= VERSION_CODES.O) {
+                val adapter = (currentFragment as UploadMediaDetailFragment).uploadMediaDetailAdapter
+                val uploadMediaDetail = adapter.items[0]
+                val languagesAdapter =
+                    fr.free.nrw.commons.upload.LanguagesAdapter(this, mutableMapOf())
+                val defaultLocaleIndex = languagesAdapter.getIndexOfUserDefaultLocale(this)
+                val defaultLanguageCode = languagesAdapter.getLanguageCode(defaultLocaleIndex)
+
+                if (adapter.items.size == 1
+                    && uploadMediaDetail.languageCode == defaultLanguageCode
+                    && uploadMediaDetail.languageCode != "fr"
+                ) {
+                    showProgress(true)
+                    isCaptionFrench(uploadMediaDetail.captionText) { isFrench ->
+                        showProgress(false)
+                        if (isFrench) {
+                            showAlertDialog(
+                                this,
+                                getString(R.string.french_caption_title),
+                                getString(R.string.french_caption_check),
+                                getString(R.string.yes),
+                                getString(R.string.no),
+                                {
+                                    adapter.setFirstCaptionLanguageToFrench()
+                                    proceedToNextStep(index)
+                                },
+                                {
+                                    proceedToNextStep(index)
+                                }
+                            )
+                        } else {
+                            proceedToNextStep(index)
+                        }
+                    }
+                } else {
+                    proceedToNextStep(index)
+                }
+            } else {
+                proceedToNextStep(index)
+            }
+        } else {
+            proceedToNextStep(index)
+        }
+    }
+
+    private fun proceedToNextStep(index: Int) {
         if (index < fragments!!.size - 1) {
             // Hide the keyboard before navigating to Media License screen
             val isUploadCategoriesFragment = fragments!!.getOrNull(index)?.let {
@@ -837,6 +895,26 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
             }
         } else {
             presenter!!.handleSubmit()
+        }
+    }
+
+    private fun isCaptionFrench(caption: String, callback: (Boolean) -> Unit) {
+        lifecycleScope.launch {
+            try {
+                val prompt = "Output FR if the following expression is in French: $caption"
+                Timber.tag("LanguageDetection").d("Prompt: %s", prompt)
+                val genRequest = generateContentRequest(
+                    TextPart(prompt)
+                ) {
+                    temperature = 0f
+                }
+                val response = model!!.generateContent(genRequest)
+                Timber.tag("LanguageDetection").d("Response: %s", response.candidates.first().text)
+                callback(response.candidates.first().text.toString().trim() == "FR")
+            } catch (e: Exception) {
+                Timber.e(e, "Error detecting language")
+                callback(false)
+            }
         }
     }
 
@@ -906,6 +984,9 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
             uploadCategoriesFragment!!.callback = null
         }
         onBackPressedCallback.remove()
+        if (VERSION.SDK_INT >= VERSION_CODES.O) {
+            model?.close()
+        }
     }
 
     /**

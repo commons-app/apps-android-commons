@@ -182,6 +182,13 @@ class UploadMediaDetailAdapter : RecyclerView.Adapter<UploadMediaDetailAdapter.V
         updateAddButtonVisibility()
     }
 
+    fun setFirstCaptionLanguageToFrench() {
+        if (uploadMediaDetails.size == 1) {
+            uploadMediaDetails[0].languageCode = "fr"
+            notifyItemChanged(0)
+        }
+    }
+
     inner class ViewHolder(val binding: RowItemDescriptionBinding) :
         RecyclerView.ViewHolder(binding.root) {
 

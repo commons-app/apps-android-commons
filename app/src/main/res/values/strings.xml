@@ -887,4 +887,6 @@ Upload your first media by tapping on the add button.</string>
   <string name="image_tag_line_created_and_uploaded_by">Created and uploaded by: %1$s</string>
   <string name="image_tag_line_created_by_and_uploaded_by">Created by %1$s and uploaded by %2$s</string>
   <string name="nominated_for_deletion_btn">Nominated for Deletion</string>
+  <string name="french_caption_check">Is this caption in language \"fr\"?</string>
+  <string name="french_caption_title">French caption</string>
 </resources>
