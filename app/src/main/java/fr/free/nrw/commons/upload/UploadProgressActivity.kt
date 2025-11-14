@@ -66,7 +66,7 @@ class UploadProgressActivity : BaseActivity() {
         setTabs()
     }
 
-    //final fix:helper to retrieve the current Fragment by CLASS TYPE (as suggested).
+    //helper to retrieve the current Fragment by CLASS TYPE (as suggested).
     private fun getPendingUploadsFragment(): PendingUploadsFragment? {
         //find the Fragment by class type, not index
         return supportFragmentManager.fragments.find {
@@ -74,7 +74,6 @@ class UploadProgressActivity : BaseActivity() {
         } as? PendingUploadsFragment
     }
 
-    //final fix:helper to retrieve the current Fragment by CLASS TYPE (as suggested).
     private fun getFailedUploadsFragment(): FailedUploadsFragment? {
         //find the Fragment by class type, not index
         return supportFragmentManager.fragments.find {
