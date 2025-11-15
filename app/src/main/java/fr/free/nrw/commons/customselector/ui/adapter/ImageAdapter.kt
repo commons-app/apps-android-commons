@@ -2,6 +2,7 @@ package fr.free.nrw.commons.customselector.ui.adapter
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -13,6 +14,7 @@ import com.bumptech.glide.Glide
 import com.simplecityapps.recyclerview_fastscroll.views.FastScrollRecyclerView
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.contributions.Contribution
+import fr.free.nrw.commons.customselector.helper.CustomSelectorConstants.MAX_IMAGE_COUNT
 import fr.free.nrw.commons.customselector.helper.ImageHelper
 import fr.free.nrw.commons.customselector.helper.ImageHelper.CUSTOM_SELECTOR_PREFERENCE_KEY
 import fr.free.nrw.commons.customselector.helper.ImageHelper.SHOW_ALREADY_ACTIONED_IMAGES_PREFERENCE_KEY
@@ -38,7 +40,7 @@ class ImageAdapter(
     /**
      * Application Context.
      */
-    context: Context,
+    private val context: Context,
     /**
      * Image select listener for click events on image.
      */
@@ -47,8 +49,11 @@ class ImageAdapter(
      * ImageLoader queries images.
      */
     private var imageLoader: ImageLoader,
-) : RecyclerViewAdapter<ImageAdapter.ImageViewHolder>(context),
+) : RecyclerView.Adapter<ImageAdapter.ImageViewHolder>(),
     FastScrollRecyclerView.SectionedAdapter {
+
+    private val inflater: LayoutInflater = LayoutInflater.from(context)
+
     /**
      * ImageSelectedOrUpdated payload class.
      */
@@ -124,6 +129,15 @@ class ImageAdapter(
     private var defaultDispatcher: CoroutineDispatcher = Dispatchers.Default
     private var ioDispatcher: CoroutineDispatcher = Dispatchers.IO
     private val scope: CoroutineScope = MainScope()
+
+    //maximum number of images that can be selected.
+    private var maxUploadLimit: Int = MAX_IMAGE_COUNT
+
+
+    //set maximum number of images allowed for upload.
+    fun setMaxUploadLimit(limit: Int) {
+        maxUploadLimit = limit
+    }
 
     /**
      * Create View holder.
@@ -334,6 +348,20 @@ class ImageAdapter(
             // Notify listener of deselection to update UI
             imageSelectListener.onSelectedImagesChanged(selectedImages, numberOfSelectedImagesMarkedAsNotForUpload)
         } else {
+            //check the maximum limit before allowing the selection
+            if (!singleSelection && selectedImages.size >= maxUploadLimit) {
+                // limit reached, show a toast and prevent selection
+                Toast.makeText(
+                    context,
+                    context.getString(
+                        R.string.custom_selector_max_image_limit_reached,
+                        maxUploadLimit
+                    ),
+                    Toast.LENGTH_SHORT
+                ).show()
+                return //exit the function, preventing selection
+            }
+
             // Prevent adding the same image multiple times
             val image = if (showAlreadyActionedImages) images[position] else ArrayList(actionableImagesMap.values)[position]
             if (selectedImages.contains(image)) {

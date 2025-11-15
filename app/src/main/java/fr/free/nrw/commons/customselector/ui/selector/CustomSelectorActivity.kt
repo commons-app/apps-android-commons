@@ -46,6 +46,7 @@ import fr.free.nrw.commons.R
 import fr.free.nrw.commons.customselector.database.NotForUploadStatus
 import fr.free.nrw.commons.customselector.database.NotForUploadStatusDao
 import fr.free.nrw.commons.customselector.helper.CustomSelectorConstants
+import fr.free.nrw.commons.customselector.helper.CustomSelectorConstants.MAX_IMAGE_COUNT
 import fr.free.nrw.commons.customselector.helper.FolderDeletionHelper
 import fr.free.nrw.commons.customselector.helper.CustomSelectorConstants.MAX_IMAGE_COUNT
 import fr.free.nrw.commons.customselector.listeners.FolderClickListener
@@ -163,7 +164,7 @@ class CustomSelectorActivity :
      * Waits for confirmation of delete folder
      */
     private val startForFolderDeletionResult = registerForActivityResult(ActivityResultContracts.StartIntentSenderForResult()){
-        result -> onDeleteFolderResultReceived(result)
+            result -> onDeleteFolderResultReceived(result)
     }
 
     private val startForResult = registerForActivityResult(StartActivityForResult()){ result ->
