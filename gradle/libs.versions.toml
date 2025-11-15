@@ -1,5 +1,5 @@
 [versions]
-agp = "8.13.0"
+agp = "8.7.2"
 acra = "5.8.4"
 activityCompose = "1.9.3"
 adapterdelegates = "4.3.0"
@@ -33,7 +33,7 @@ glide = "4.12.0"
 gson = "2.8.5"
 junit = "4.13.2"
 junitJupiter = "5.10.0"
-kotlin = "1.9.22"
+kotlin = "2.1.0"
 kotlinStdlib = "1.8.0"
 coroutines = "1.7.3"
 leakcanary = "2.10"
@@ -208,5 +208,6 @@ android-application = { id = "com.android.application", version.ref = "agp" }
 jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-kapt = { id = "org.jetbrains.kotlin.kapt" }
 kotlin-parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize" }
+compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 github-triplet-play = { id = "com.github.triplet.play", version.ref = "githubTripletPlay" }
 getkeepsafe-dexcount = { id = "com.getkeepsafe.dexcount", version.ref = "dexcount" }
