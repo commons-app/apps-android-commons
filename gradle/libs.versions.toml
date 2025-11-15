@@ -1,5 +1,5 @@
 [versions]
-agp = "8.7.2"
+agp = "8.13.0"
 acra = "5.8.4"
 activityCompose = "1.9.3"
 adapterdelegates = "4.3.0"
