@@ -27,6 +27,7 @@ import fr.free.nrw.commons.R
 import fr.free.nrw.commons.auth.LoginActivity
 import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.contributions.ContributionController
+import fr.free.nrw.commons.customselector.helper.CustomSelectorConstants.MAX_IMAGE_COUNT
 import fr.free.nrw.commons.databinding.ActivityUploadBinding
 import fr.free.nrw.commons.filepicker.Constants.RequestCodes
 import fr.free.nrw.commons.filepicker.UploadableFile
@@ -743,8 +744,8 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
                     intent.getParcelableArrayListExtra<UploadableFile>(EXTRA_FILES)
                 }
 
-                // Convert to mutable list or return empty list if null
-                files?.toMutableList() ?: run {
+                // Convert to mutable list,takes up to 20 files, or return empty list if null
+                files?.toMutableList()?.take(MAX_IMAGE_COUNT)?.toMutableList() ?: run { //enforce 20-image limit
                     Timber.w("Files array was null")
                     mutableListOf()
                 }
@@ -760,6 +761,9 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
         uploadableFiles.forEachIndexed { index, file ->
             Timber.d("File $index path: ${file.getFilePath()}")
         }
+
+        //update thumbnails adapter with limited files
+        thumbnailsAdapter?.uploadableFiles = uploadableFiles
 
         // Handle other extras with null safety
         place = try {
