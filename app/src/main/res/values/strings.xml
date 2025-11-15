@@ -889,4 +889,6 @@ Upload your first media by tapping on the add button.</string>
   <string name="nominated_for_deletion_btn">Nominated for Deletion</string>
 
   <string name="multiple_upload_limit_truncated_message">You selected %1$d files. Only the first %2$d files will be processed for upload.</string>
+  <string name="custom_selector_max_image_limit_reached">You can only select a maximum of %d images.</string>
+
 </resources>
