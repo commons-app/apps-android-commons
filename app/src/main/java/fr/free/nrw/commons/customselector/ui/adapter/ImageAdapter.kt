@@ -18,7 +18,6 @@ import fr.free.nrw.commons.customselector.helper.CustomSelectorConstants.MAX_IMA
 import fr.free.nrw.commons.customselector.helper.ImageHelper
 import fr.free.nrw.commons.customselector.helper.ImageHelper.CUSTOM_SELECTOR_PREFERENCE_KEY
 import fr.free.nrw.commons.customselector.helper.ImageHelper.SHOW_ALREADY_ACTIONED_IMAGES_PREFERENCE_KEY
-import fr.free.nrw.commons.customselector.helper.CustomSelectorConstants.MAX_IMAGE_COUNT
 import fr.free.nrw.commons.customselector.listeners.ImageSelectListener
 import fr.free.nrw.commons.customselector.model.Image
 import fr.free.nrw.commons.customselector.ui.selector.ImageLoader
