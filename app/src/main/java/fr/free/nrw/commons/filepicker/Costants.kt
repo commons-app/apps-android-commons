@@ -3,6 +3,8 @@ package fr.free.nrw.commons.filepicker
 interface Constants {
     companion object {
         const val DEFAULT_FOLDER_NAME = "CommonsContributions"
+        // this is used for truncation logic to cap the selection at 20 files.
+        const val MAX_EXTERNAL_UPLOAD_COUNT: Int = 20
     }
 
     /**
