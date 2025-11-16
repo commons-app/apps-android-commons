@@ -40,6 +40,7 @@ class UploadCancelledTest {
     var mGrantPermissionRule: GrantPermissionRule =
         GrantPermissionRule.grant(
             "android.permission.WRITE_EXTERNAL_STORAGE",
+            "android.permission.ACCESS_FINE_LOCATION",
         )
 
     private val device: UiDevice =
@@ -138,8 +139,23 @@ class UploadCancelledTest {
             )
         linearLayout3.perform(click())
 
-        // Wait for the upload screen to load
-        UITestHelper.sleep(3000)
+        // Wait for the upload screen to load and handle any permission dialogs
+        UITestHelper.sleep(2000)
+        
+        // Try to handle permission dialog if it appears (for location or camera)
+        try {
+            val allowButton = device.findObject(
+                androidx.test.uiautomator.UiSelector()
+                    .textMatches("(?i)(allow|permit|ok)")
+                    .className("android.widget.Button")
+            )
+            if (allowButton.exists()) {
+                allowButton.click()
+                UITestHelper.sleep(1000)
+            }
+        } catch (e: Exception) {
+            // No permission dialog, continue
+        }
 
         val pasteSensitiveTextInputEditText =
             onView(
