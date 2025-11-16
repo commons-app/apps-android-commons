@@ -104,6 +104,9 @@ class UploadCancelledTest {
             )
         actionMenuItemView.perform(click())
 
+        // Wait for the nearby list to load
+        UITestHelper.sleep(2000)
+
         val recyclerView =
             onView(
                 allOf(
@@ -116,6 +119,9 @@ class UploadCancelledTest {
                 click(),
             ),
         )
+
+        // Wait for the button layout to expand
+        UITestHelper.sleep(1000)
 
         val linearLayout3 =
             onView(
@@ -131,6 +137,9 @@ class UploadCancelledTest {
                 ),
             )
         linearLayout3.perform(click())
+
+        // Wait for the upload screen to load
+        UITestHelper.sleep(3000)
 
         val pasteSensitiveTextInputEditText =
             onView(
