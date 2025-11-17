@@ -829,4 +829,5 @@
   <string name="image_tag_line_created_and_uploaded_by">Creà e carià da: %1$s</string>
   <string name="image_tag_line_created_by_and_uploaded_by">Creà da %1$s e carià da %2$s</string>
   <string name="nominated_for_deletion_btn">Nominà për esse dëscancelà</string>
+  <string name="custom_selector_max_image_limit_reached">A peul selessioné al màssim %d plance.</string>
 </resources>
