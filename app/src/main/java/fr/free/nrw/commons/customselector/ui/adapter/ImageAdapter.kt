@@ -11,6 +11,7 @@ import androidx.constraintlayout.widget.Group
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.simplecityapps.recyclerview_fastscroll.views.FastScrollRecyclerView
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.contributions.Contribution
@@ -203,22 +204,9 @@ class ImageAdapter(
                 uploadingContributionList,
             )
             holder.itemView.setOnClickListener {
-                if (!holder.isItemUploaded() && !holder.isItemNotForUpload()) {
-                    if (selectedImages.size >= MAX_IMAGE_COUNT && !isSelected) { //enforce the 20-image limit
-                        Toast.makeText(context, "Cannot select more than 20 images", Toast.LENGTH_SHORT).show()
-                        return@setOnClickListener
-                    }
-                    if (isSelected) {
-                        selectedImages.removeAt(selectedIndex)
-                        holder.itemUnselected()
-                        notifyItemChanged(position, ImageUnselected())
-                        imageSelectListener.onSelectedImagesChanged(selectedImages, selectedImages.size)
-                    } else {
-                        selectedImages.add(image)
-                        holder.itemSelected()
-                        notifyItemChanged(position, ImageSelectedOrUpdated())
-                        imageSelectListener.onSelectedImagesChanged(selectedImages, selectedImages.size)
-                    }
+                //we just prevent auto-selection, but the user can still tap to select/unmark
+                if (!holder.isItemUploaded()) {
+                    onThumbnailClicked(position, holder)
                 }
             }
             holder.itemView.setOnLongClickListener {
@@ -234,56 +222,25 @@ class ImageAdapter(
                     imageSelectListener.onSelectedImagesChanged(selectedImages, selectedImages.size)
                 }
             }
-        }
-    }
 
-    /**
-     * Process thumbnail for actioned image
-     */
-    suspend fun processThumbnailForActionedImage(
-        holder: ImageViewHolder,
-        position: Int,
-        uploadingContributionList: List<Contribution>,
-    ) {
-        _isLoadingImages.value = true
-        val next =
-            imageLoader.nextActionableImage(
-                allImages,
-                ioDispatcher,
-                defaultDispatcher,
-                nextImagePosition,
-                uploadingContributionList,
-            )
-
-        // If next actionable image is found, saves it, as the the search for
-        // finding next actionable image will start from this position
-        if (next > -1) {
-            nextImagePosition = next + 1
-
-            // If map doesn't contains the next actionable image, that means it's a
-            // new actionable image, it will put it to the map as actionable images
-            // and it will load the new image in the view holder
-            if (!actionableImagesMap.containsKey(next)) {
-                actionableImagesMap[next] = allImages[next]
-                alreadyAddedPositions.add(imagePositionAsPerIncreasingOrder)
-                imagePositionAsPerIncreasingOrder++
-                _currentImagesCount.value = imagePositionAsPerIncreasingOrder
-                Glide
-                    .with(holder.image)
-                    .load(allImages[next].uri)
-                    .thumbnail(0.3f)
-                    .into(holder.image)
-                notifyItemInserted(position)
-                notifyItemRangeChanged(position, itemCount + 1)
+            //lazy loading for the actionable images
+            if (!showAlreadyActionedImages && position == actionableImagesMap.size && !reachedEndOfFolder) {
+                scope.launch {
+                    processThumbnailForActionedImage(
+                        holder,
+                        position,
+                        uploadingContributionList
+                    )
+                }
             }
 
-            // If next actionable image is not found, that means searching is
-            // complete till end, and it will stop searching.
-        } else {
-            reachedEndOfFolder = true
-            notifyItemRemoved(position)
+            //fallback glide load if query fails
+            Glide.with(context)
+                .load(image.uri)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .thumbnail(0.3f)
+                .into(holder.image)
         }
-        _isLoadingImages.value = false
     }
 
     /**
@@ -321,78 +278,107 @@ class ImageAdapter(
         val showAlreadyActionedImages =
             sharedPreferences.getBoolean(SHOW_ALREADY_ACTIONED_IMAGES_PREFERENCE_KEY, true)
 
-        // Getting clicked index from all images index when show_already_actioned_images
-        // switch is on
-        if (singleSelection) {
-            // If single selection mode, clear previous selection and select only the new one
-            if (selectedImages.isNotEmpty() && (selectedImages[0] != images[position])) {
-                val prevIndex = images.indexOf(selectedImages[0])
-                selectedImages.clear()
-                notifyItemChanged(prevIndex, ImageUnselected())
-            }
-        }
-        val clickedIndex: Int =
-            if (showAlreadyActionedImages) {
-                ImageHelper.getIndex(selectedImages, images[position])
-            } else {
-                ImageHelper.getIndex(selectedImages, ArrayList(actionableImagesMap.values)[position])
-            }
-
-        if (clickedIndex != -1) {
-            selectedImages.removeAt(clickedIndex)
-            if (holder.isItemNotForUpload()) {
-                numberOfSelectedImagesMarkedAsNotForUpload--
-            }
-            notifyItemChanged(position, ImageUnselected())
-            // Notify listener of deselection to update UI
-            imageSelectListener.onSelectedImagesChanged(selectedImages, numberOfSelectedImagesMarkedAsNotForUpload)
+        //determines which image was clicked
+        val clickedImage = if (showAlreadyActionedImages) {
+            images[position]
+        } else if (actionableImagesMap.size > position) {
+            ArrayList(actionableImagesMap.values)[position]
         } else {
-            //check the maximum limit before allowing the selection
-            if (!singleSelection && selectedImages.size >= maxUploadLimit) {
-                // limit reached, show a toast and prevent selection
-                Toast.makeText(
-                    context,
-                    context.getString(
-                        R.string.custom_selector_max_image_limit_reached,
-                        maxUploadLimit
-                    ),
-                    Toast.LENGTH_SHORT
-                ).show()
-                return //exit the function, preventing selection
-            }
+            return //saftey
+        }
 
-            // Prevent adding the same image multiple times
-            val image = if (showAlreadyActionedImages) images[position] else ArrayList(actionableImagesMap.values)[position]
-            if (selectedImages.contains(image)) {
-                return // Image already selected, ignore additional clicks
-            }
-            scope.launch(ioDispatcher) {
-                val imageSHA1 = imageLoader.getSHA1(image, defaultDispatcher)
-                withContext(Dispatchers.Main) {
-                    if (holder.isItemUploaded()) {
-                        Toast.makeText(context, R.string.custom_selector_already_uploaded_image_text, Toast.LENGTH_SHORT).show()
-                        return@withContext
-                    }
+        if (singleSelection && selectedImages.isNotEmpty() && selectedImages[0] != clickedImage) {
+            val prevIndex = images.indexOf(selectedImages[0])
+            selectedImages.clear()
+            numberOfSelectedImagesMarkedAsNotForUpload = 0
+            if (prevIndex != -1) notifyItemChanged(prevIndex, ImageUnselected())
+        }
 
-                    if (imageSHA1.isNotEmpty() && imageLoader.getFromUploaded(imageSHA1) != null) {
-                        holder.itemUploaded()
-                        Toast.makeText(context, R.string.custom_selector_already_uploaded_image_text, Toast.LENGTH_SHORT).show()
-                        return@withContext
-                    }
+        //checks if already selected -> deselect
+        val alreadySelectedIndex = selectedImages.indexOf(clickedImage)
+        if (alreadySelectedIndex != -1) {
+            selectedImages.removeAt(alreadySelectedIndex)
+            if (holder.isItemNotForUpload()) numberOfSelectedImagesMarkedAsNotForUpload--
+            holder.itemUnselected()
+            notifyItemChanged(position, ImageUnselected())
+            imageSelectListener.onSelectedImagesChanged(selectedImages, numberOfSelectedImagesMarkedAsNotForUpload)
+            return
+        }
 
-                    if (!holder.isItemUploaded() && imageSHA1.isNotEmpty() && imageLoader.getFromUploaded(imageSHA1) != null) {
-                        Toast.makeText(context, R.string.custom_selector_already_uploaded_image_text, Toast.LENGTH_SHORT).show()
-                    }
+        //block selection if limit reached (and shows the toast)
+        if (!singleSelection && selectedImages.size >= maxUploadLimit) {
+            Toast.makeText(
+                context,
+                context.getString(R.string.custom_selector_max_image_limit_reached, maxUploadLimit),
+                Toast.LENGTH_LONG
+            ).show()
+            return
+        }
 
-                    if (holder.isItemNotForUpload()) {
-                        numberOfSelectedImagesMarkedAsNotForUpload++
-                    }
-                    selectedImages.add(image)
-                    notifyItemChanged(position, ImageSelectedOrUpdated())
-                    imageSelectListener.onSelectedImagesChanged(selectedImages, numberOfSelectedImagesMarkedAsNotForUpload)
+        //proceeds with the selection
+        scope.launch(ioDispatcher) {
+            val imageSHA1 = imageLoader.getSHA1(clickedImage, defaultDispatcher)
+
+            withContext(Dispatchers.Main) {
+                //checks if already uploaded
+                if (imageSHA1.isNotEmpty() && imageLoader.getFromUploaded(imageSHA1) != null) {
+                    holder.itemUploaded()
+                    Toast.makeText(context, R.string.custom_selector_already_uploaded_image_text, Toast.LENGTH_LONG).show()
+                    return@withContext
                 }
+
+                //finalises the selection
+                if (holder.isItemNotForUpload()) {
+                    numberOfSelectedImagesMarkedAsNotForUpload++
+                }
+                selectedImages.add(clickedImage)
+                holder.itemSelected()
+                notifyItemChanged(position, ImageSelectedOrUpdated())
+                imageSelectListener.onSelectedImagesChanged(selectedImages, numberOfSelectedImagesMarkedAsNotForUpload)
             }
         }
+    }
+
+    /**
+     * Process thumbnail for actioned image
+     */
+    suspend fun processThumbnailForActionedImage(
+        holder: ImageViewHolder,
+        position: Int,
+        uploadingContributionList: List<Contribution>,
+    ) {
+        _isLoadingImages.value = true
+        val next =
+            imageLoader.nextActionableImage(
+                allImages,
+                ioDispatcher,
+                defaultDispatcher,
+                nextImagePosition,
+                uploadingContributionList,
+            )
+
+        //if next actionable image is found, saves it, as the the search for
+        //finding next actionable image will start from this position
+        if (next > -1) {
+            nextImagePosition = next + 1
+            if (!actionableImagesMap.containsKey(next)) {
+                actionableImagesMap[next] = allImages[next]
+                alreadyAddedPositions.add(imagePositionAsPerIncreasingOrder)
+                imagePositionAsPerIncreasingOrder++
+                _currentImagesCount.value = imagePositionAsPerIncreasingOrder
+                Glide
+                    .with(holder.image)
+                    .load(allImages[next].uri)
+                    .thumbnail(0.3f)
+                    .into(holder.image)
+                notifyItemInserted(position)
+                notifyItemRangeChanged(position, itemCount + 1)
+            }
+        } else {
+            reachedEndOfFolder = true
+            notifyItemRemoved(position)
+        }
+        _isLoadingImages.value = false
     }
 
     /**
@@ -428,7 +414,7 @@ class ImageAdapter(
      * Set new selected images
      */
     fun setSelectedImages(newSelectedImages: ArrayList<Image>) {
-        selectedImages = ArrayList(newSelectedImages.take(MAX_IMAGE_COUNT)) // enforce 20-image limit
+        selectedImages = ArrayList(newSelectedImages)
         imageSelectListener.onSelectedImagesChanged(selectedImages, 0)
     }
 
@@ -442,7 +428,7 @@ class ImageAdapter(
     ) {
         numberOfSelectedImagesMarkedAsNotForUpload = 0
         images.clear()
-        selectedImages = ArrayList(selectedImages.take(5)) // enforce the 5-image limit
+        selectedImages = ArrayList(selectedImages)
         init(newImages, fixedImages, TreeMap(), uploadingImages)
         notifyDataSetChanged()
     }
@@ -534,14 +520,14 @@ class ImageAdapter(
         private val uploadingGroup: Group = itemView.findViewById(R.id.uploading_group)
         private val notForUploadGroup: Group = itemView.findViewById(R.id.not_for_upload_group)
         private val selectedGroup: Group = itemView.findViewById(R.id.selected_group)
-        val closeButton: ImageView = itemView.findViewById(R.id.close_button) // Added for close button
+        val closeButton: ImageView = itemView.findViewById(R.id.close_button) //added for close button
 
         /**
          * Item selected view.
          */
         fun itemSelected() {
             selectedGroup.visibility = View.VISIBLE
-            closeButton.visibility = View.VISIBLE // Show close button when selected
+            closeButton.visibility = View.GONE
         }
 
         /**
@@ -549,7 +535,7 @@ class ImageAdapter(
          */
         fun itemUnselected() {
             selectedGroup.visibility = View.GONE
-            closeButton.visibility = View.GONE // Hide close button when unselected
+            closeButton.visibility = View.GONE
         }
 
         /**
