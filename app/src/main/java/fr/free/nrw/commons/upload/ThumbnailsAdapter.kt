@@ -10,7 +10,6 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.facebook.drawee.view.SimpleDraweeView
 import fr.free.nrw.commons.R
-import fr.free.nrw.commons.customselector.helper.CustomSelectorConstants.MAX_IMAGE_COUNT
 import fr.free.nrw.commons.databinding.ItemUploadThumbnailBinding
 import fr.free.nrw.commons.filepicker.UploadableFile
 import java.io.File
@@ -24,7 +23,7 @@ internal class ThumbnailsAdapter(private val callback: Callback) :
     var onThumbnailDeletedListener: OnThumbnailDeletedListener? = null
     var uploadableFiles: List<UploadableFile> = emptyList()
         set(value) {
-            field = value.take(MAX_IMAGE_COUNT) //enforce 20-image limit
+            field = value
             notifyDataSetChanged()
         }
 
