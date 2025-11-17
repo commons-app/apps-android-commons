@@ -744,11 +744,23 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
                     intent.getParcelableArrayListExtra<UploadableFile>(EXTRA_FILES)
                 }
 
-                // Convert to mutable list,takes up to 20 files, or return empty list if null
-                files?.toMutableList()?.take(MAX_IMAGE_COUNT)?.toMutableList() ?: run { //enforce 20-image limit
-                    Timber.w("Files array was null")
-                    mutableListOf()
+                val originalCount = files?.size ?: 0
+                val limitedFiles = files?.toMutableList()?.take(MAX_IMAGE_COUNT) ?: mutableListOf()
+
+                // shows toast if user selected more than 20
+                if (originalCount > MAX_IMAGE_COUNT) {
+                    runOnUiThread {
+                        showLongToast(
+                            this,
+                            getString(
+                                R.string.you_selected_more_than_n_only_first_n_will_upload,
+                                originalCount,
+                                MAX_IMAGE_COUNT
+                            )
+                        )
+                    }
                 }
+                limitedFiles.toMutableList()
             }
         } catch (e: Exception) {
             Timber.e(e, "Error reading files from intent")
@@ -758,13 +770,8 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
         // Log the result for debugging
         isMultipleFilesSelected = uploadableFiles.size > 1
         Timber.i("Received files count: ${uploadableFiles.size}")
-        uploadableFiles.forEachIndexed { index, file ->
-            Timber.d("File $index path: ${file.getFilePath()}")
-        }
 
-        //update thumbnails adapter with limited files
         thumbnailsAdapter?.uploadableFiles = uploadableFiles
-
         // Handle other extras with null safety
         place = try {
             if (VERSION.SDK_INT >= VERSION_CODES.TIRAMISU) {
@@ -997,6 +1004,8 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
         )
         if (locationPermissionsHelper.isLocationAccessToAppsTurnedOn()) {
             currLocation = locationManager!!.getLastLocation()
+//            currLocation = locationManager!!.getLastLocation()
+//            currentSelectionPosition = !!.getLastLocaation()
         }
 
         if (currLocation != null) {
