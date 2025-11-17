@@ -108,7 +108,7 @@ class CustomSelectorActivity :
     /**
      * Maximum number of images that can be selected.
      */
-    private var uploadLimit: Int = MAX_IMAGE_COUNT // changed to 20 asper the issue #3101
+    private var uploadLimit: Int = MAX_IMAGE_COUNT
 
     /**
      * Flag that is marked true when the amount
@@ -522,7 +522,7 @@ class CustomSelectorActivity :
         val folder = File(folderPath)
 
         supportFragmentManager.popBackStack(null,
-                                androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE)
+            androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE)
 
         //refresh MediaStore for the deleted folder path to ensure metadata updates
         FolderDeletionHelper.refreshMediaStore(this, folder)
@@ -595,7 +595,7 @@ class CustomSelectorActivity :
             bottomSheetBinding.upload.text = resources.getString(R.string.upload)
         }
 
-        if (uploadLimitExceeded || selectedNotForUploadImages > 0) {
+        if (selectedNotForUploadImages > 0) {
             bottomSheetBinding.upload.isEnabled = false
             bottomSheetBinding.upload.alpha = 0.5f
         } else {
@@ -651,12 +651,8 @@ class CustomSelectorActivity :
             finishPickImages(arrayListOf())
             return
         }
-        if (selectedImages.size > uploadLimit) {
-            displayUploadLimitWarning() // shows the warning dialog if >20 images
-            return
-        }
         scope.launch(ioDispatcher) {
-            val uniqueImages = selectedImages.take(uploadLimit).distinctBy { image -> //enforce limit
+            val uniqueImages = selectedImages.take(uploadLimit).distinctBy { image ->
                 CustomSelectorUtils.getImageSHA1(
                     image.uri,
                     ioDispatcher,
