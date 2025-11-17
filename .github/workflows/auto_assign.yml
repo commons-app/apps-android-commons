@@ -1,0 +1,70 @@
+on:
+  issue_comment:
+    types: [created]
+
+permissions:
+  issues: write
+  models: read
+
+jobs:
+  auto-assign:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check if requesting assignment
+        uses: actions/ai-inference@v1
+        id: check-request
+        with:
+          prompt: |
+            Does this comment ask to be assigned to the issue?
+            Respond with only "yes" or "no".
+            
+            Comment: ${{ github.event.comment.body }}
+          model: openai/gpt-4o-mini
+          temperature: 0.1
+
+      - name: Handle assignment
+        if: steps.check-request.outputs.response == 'yes'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            // Get all open issues assigned to the commenter
+            const assignedIssues = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              assignee: context.actor,  
+              state: 'open'
+            });
+             // Get all open PRs created by the commenter
+            const pullRequests = await github.rest.pulls.list({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              creator: context.actor, 
+              state: 'open'
+            });
+            // No assigned issues - assign
+            if (assignedIssues.data.length === 0) {
+              await github.rest.issues.addAssignees({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                assignees: [context.actor]
+              });
+            } 
+              // Has assigned issues but no PRs: ask them to finish first
+            else if (assignedIssues.data.length > 0 && pullRequests.data.length === 0) {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body: "Please finish your previous assignment before you request to work on another"
+              });
+            } 
+             // Has assigned issues with PRs: assign them
+            else {
+              await github.rest.issues.addAssignees({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                assignees: [context.actor]
+              });
+            }

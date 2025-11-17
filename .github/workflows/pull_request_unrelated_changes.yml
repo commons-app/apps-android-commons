@@ -1,0 +1,41 @@
+name: Check PR Scope
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+
+permissions:
+  pull-requests: write
+  models: read
+
+jobs:
+  check-scope:
+    runs-on: ubuntu-latest
+    steps:
+      - # Use AI to detect if PR mixes unrelated changes
+      - name: Analyze PR changes
+        uses: actions/ai-inference@v1
+        id: analyze
+        with:
+          prompt: |
+            Analyze this pull request to determine if it contains unrelated changes.
+            A PR should contain logically separate commits for logically separate changes.
+            
+            PR Title: ${{ github.event.pull_request.title }}
+            PR Description: ${{ github.event.pull_request.body }}
+            
+            Does this PR appear to mix unrelated changes? Respond with only "yes" or "no".
+          model: openai/gpt-4o-mini
+          temperature: 0.1
+      # If unrelated changes detected, remind contributor of guidelines
+      - name: Comment if unrelated changes detected
+        if: steps.analyze.outputs.response == 'yes'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: "This PR appears to contain unrelated changes. The guidelines state: 'Make separate commits for logically separate changes.' Please review [CONTRIBUTING.md](https://github.com/commons-app/apps-android-commons/blob/master/CONTRIBUTING.md) and consider splitting this into separate PRs."
+            });
