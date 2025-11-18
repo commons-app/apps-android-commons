@@ -25,7 +25,7 @@
 -->
 <resources>
   <string name="commons_facebook">Commons Facebook-sivu</string>
-  <string name="commons_github" fuzzy="true">Commons Github lähdekoodi</string>
+  <string name="commons_github">Commons GitHub lähdekoodi</string>
   <string name="commons_logo">Commons-logo</string>
   <string name="commons_website">Commons-verkkosivu</string>
   <string name="exit_location_picker">Poistu sijainnin valitsimesta</string>
