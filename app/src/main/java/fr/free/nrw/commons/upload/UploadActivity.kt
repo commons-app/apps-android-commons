@@ -1004,8 +1004,6 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
         )
         if (locationPermissionsHelper.isLocationAccessToAppsTurnedOn()) {
             currLocation = locationManager!!.getLastLocation()
-//            currLocation = locationManager!!.getLastLocation()
-//            currentSelectionPosition = !!.getLastLocaation()
         }
 
         if (currLocation != null) {
