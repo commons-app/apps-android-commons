@@ -1,4 +1,4 @@
-name: Check PR Scope
+name: Check Pull Request Scope
 
 on:
   pull_request:
@@ -12,21 +12,26 @@ jobs:
   check-scope:
     runs-on: ubuntu-latest
     steps:
-      - # Use AI to detect if PR mixes unrelated changes
-      - name: Analyze PR changes
+      # Use AI to detect if pull request mixes unrelated changes
+      - name: Analyse pull request changes
         uses: actions/ai-inference@v1
         id: analyze
         with:
           prompt: |
-            Analyze this pull request to determine if it contains unrelated changes.
-            A PR should contain logically separate commits for logically separate changes.
+            Analyse this pull request to determine if it contains unrelated changes.
+            A pull request should modify only the code that really needs to be modified to solve the issue at hand. Changes unrelated to the issue at hand can be made in other pull requests.
             
-            PR Title: ${{ github.event.pull_request.title }}
-            PR Description: ${{ github.event.pull_request.body }}
+            Examples of changes that are not acceptable:
+            * Fixing indentation or formatting in unrelated files or in unrelated parts of a file.
+            * Adding or removing unrelated comments.
             
-            Does this PR appear to mix unrelated changes? Respond with only "yes" or "no".
+            Pull Request Title: ${{ github.event.pull_request.title }}
+            Pull Request Description: ${{ github.event.pull_request.body }}
+            
+            Does this pull request appear to mix unrelated changes? Respond with only "yes" or "no".
           model: openai/gpt-4o-mini
           temperature: 0.1
+
       # If unrelated changes detected, remind contributor of guidelines
       - name: Comment if unrelated changes detected
         if: steps.analyze.outputs.response == 'yes'
@@ -37,5 +42,5 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               issue_number: context.issue.number,
-              body: "This PR appears to contain unrelated changes. The guidelines state: 'Make separate commits for logically separate changes.' Please review [CONTRIBUTING.md](https://github.com/commons-app/apps-android-commons/blob/master/CONTRIBUTING.md) and consider splitting this into separate PRs."
+             body: "This pull request appears to contain unrelated changes. A pull request should modify only the code that really needs to be modified to solve the issue at hand. Please review [CONTRIBUTING.md](https://github.com/commons-app/apps-android-commons/blob/master/CONTRIBUTING.md) and consider splitting this into separate pull requests."
             });
