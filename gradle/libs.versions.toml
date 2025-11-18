@@ -69,6 +69,7 @@ slf4jApi = "1.7.25"
 soloader = "0.10.5"
 timber = "4.7.1"
 uiautomator = "2.2.0"
+viewpager2indicatorVersion = "1.2.3"
 workManager = "2.8.1"
 
 [libraries]
@@ -170,6 +171,7 @@ adapterdelegates4-pagination = { module = "com.hannesdorfmann:adapterdelegates4-
 dexter = { module = "com.karumi:dexter", version.ref = "dexterVersion" }
 recyclerview-fastscroll = { module = "com.simplecityapps:recyclerview-fastscroll", version.ref = "recyclerviewFastscroll" }
 swipelayout-library = { module = "com.daimajia.swipelayout:library", version.ref = "swipelayout" }
+viewpager2indicator = { module = "com.github.zhpanvip:viewpagerindicator", version.ref = "viewpager2indicatorVersion" }
 viewpagerindicator-library = { module = "fr.avianey.com.viewpagerindicator:library", version.ref = "viewpagerIndicator" }
 
 # Networking libraries
