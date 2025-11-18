@@ -836,4 +836,5 @@
   <string name="image_tag_line_created_and_uploaded_by">Yaradan və yükləyən: %1$s</string>
   <string name="image_tag_line_created_by_and_uploaded_by">%1$s tərəfindən yaradılmış və %2$s tərəfindən yüklənmişdir</string>
   <string name="nominated_for_deletion_btn">Silinməyə namizəd göstərilib</string>
+  <string name="custom_selector_max_image_limit_reached">Siz maksimum %d şəkil seçə bilərsiniz.</string>
 </resources>
