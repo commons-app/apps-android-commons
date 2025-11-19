@@ -21,7 +21,7 @@ jobs:
             Write a friendly welcome message for a first-time contributor. Include:
             1. Thank them for their first PR
             2. Mention checking CONTRIBUTING.md
-            3. Explain that after fixing 5 bugs, they can work on enhancements
+            3. Explain that after fixing 5 bugs, they can work on adding features
             4. Link to the welcome document: https://github.com/commons-app/commons-app-documentation/blob/master/android/Volunteers-welcome!.md
             5. Offer to help if they have questions
             

@@ -27,21 +27,40 @@ jobs:
         uses: actions/github-script@v7
         with:
           script: |
-            // Get all open issues assigned to the commenter
+            // Check if the issue is already assigned
+            const issue = await github.rest.issues.get({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number
+            });
+
+            if (issue.data.assignees.length > 0) {
+              // Issue is already assigned to someone else
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body: "This issue has already been assigned. Please find another issue to work on: https://github.com/commons-app/apps-android-commons/issues?q=is%3Aissue%20state%3Aopen%20type%3ABug%20no%3Aassignee%20-label%3A%22low%20priority%22%20-label%3Adebated%20-label%3Aupstream"
+              });
+              return;
+            }
+
+            // Check commenter's existing assignments
             const assignedIssues = await github.rest.issues.listForRepo({
               owner: context.repo.owner,
               repo: context.repo.repo,
               assignee: context.actor,  
               state: 'open'
             });
-             // Get all open PRs created by the commenter
+
             const pullRequests = await github.rest.pulls.list({
               owner: context.repo.owner,
               repo: context.repo.repo,
               creator: context.actor, 
               state: 'open'
             });
-            // No assigned issues - assign
+
+            // No assigned issues - safe to assign
             if (assignedIssues.data.length === 0) {
               await github.rest.issues.addAssignees({
                 owner: context.repo.owner,
@@ -50,7 +69,7 @@ jobs:
                 assignees: [context.actor]
               });
             } 
-              // Has assigned issues but no PRs: ask them to finish first
+            // Has assigned issues but no PRs - ask them to finish first
             else if (assignedIssues.data.length > 0 && pullRequests.data.length === 0) {
               await github.rest.issues.createComment({
                 owner: context.repo.owner,
@@ -59,7 +78,7 @@ jobs:
                 body: "Please finish your previous assignment before you request to work on another"
               });
             } 
-             // Has assigned issues with PRs: assign them
+            // Has assigned issues WITH PRs - they're making progress, assign them
             else {
               await github.rest.issues.addAssignees({
                 owner: context.repo.owner,
