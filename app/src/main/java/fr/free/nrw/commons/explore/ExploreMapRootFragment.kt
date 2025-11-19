@@ -28,9 +28,10 @@ class ExploreMapRootFragment : CommonsDaggerSupportFragment, MediaDetailProvider
     constructor(bundle: Bundle) {
         // get fragment arguments
         val title = bundle.getString("categoryName")
-        val zoom = bundle.getDouble("prev_zoom")
-        val latitude = bundle.getDouble("prev_latitude")
-        val longitude = bundle.getDouble("prev_longitude")
+
+        val zoom = if (bundle.containsKey("prev_zoom")) bundle.getDouble("prev_zoom") else 0.0
+        val latitude = if (bundle.containsKey("prev_latitude")) bundle.getDouble("prev_latitude") else 0.0
+        val longitude = if (bundle.containsKey("prev_longitude")) bundle.getDouble("prev_longitude") else 0.0
 
         mapFragment = ExploreMapFragment()
         val featuredArguments = bundleOf(
@@ -38,7 +39,7 @@ class ExploreMapRootFragment : CommonsDaggerSupportFragment, MediaDetailProvider
         )
 
         // if we came from 'Show in Explore' in Nearby, pass on zoom and center
-        if (zoom != 0.0 || latitude != 0.0 || longitude != 0.0) {
+        if (bundle.containsKey("prev_zoom") || bundle.containsKey("prev_latitude") || bundle.containsKey("prev_longitude")) {
             featuredArguments.putDouble("prev_zoom", zoom)
             featuredArguments.putDouble("prev_latitude", latitude)
             featuredArguments.putDouble("prev_longitude", longitude)

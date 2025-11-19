@@ -121,9 +121,15 @@ class ExploreFragment : CommonsDaggerSupportFragment() {
         // get fragment arguments
         if (arguments != null) {
             with (requireArguments()) {
-                prevZoom = getDouble("prev_zoom")
-                prevLatitude = getDouble("prev_latitude")
-                prevLongitude = getDouble("prev_longitude")
+                if (containsKey("prev_zoom")) {
+                    prevZoom = getDouble("prev_zoom")
+                }
+                if (containsKey("prev_latitude")) {
+                    prevLatitude = getDouble("prev_latitude")
+                }
+                if (containsKey("prev_longitude")) {
+                    prevLongitude = getDouble("prev_longitude")
+                }
             }
         }
     }
@@ -135,7 +141,9 @@ class ExploreFragment : CommonsDaggerSupportFragment() {
      * @return true if user navigated from Nearby map
      */
     private val isCameFromNearbyMap: Boolean
-        get() = prevZoom != 0.0 || prevLatitude != 0.0 || prevLongitude != 0.0
+        get() = (arguments?.containsKey("prev_zoom") == true
+                && arguments?.containsKey("prev_latitude") == true
+                && arguments?.containsKey("prev_longitude") == true)
 
     fun onBackPressed(): Boolean {
         if (binding!!.tabLayout.selectedTabPosition == 0) {

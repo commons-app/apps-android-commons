@@ -27,6 +27,7 @@
 * McDutchie
 * Mishidexfc
 * NACHOgao3
+* Peterxy12
 * Qiyue2001
 * Shizhao
 * Shuiwater
@@ -889,4 +890,5 @@
   <string name="image_tag_line_created_and_uploaded_by">创建并上传者： %1$s</string>
   <string name="image_tag_line_created_by_and_uploaded_by">由%1$s创建并由%2$s上传</string>
   <string name="nominated_for_deletion_btn">已提名删除</string>
+  <string name="custom_selector_max_image_limit_reached">您最多只能选择%d张图片。</string>
 </resources>

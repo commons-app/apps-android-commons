@@ -311,9 +311,20 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
     }
 
     private fun checkStoragePermissions() {
+        // The share intent provides files via content uris with temporary read permissions,
+        // so we do not need to obtain storage permissions
+        val action = intent.action
+        if (Intent.ACTION_SEND == action || Intent.ACTION_SEND_MULTIPLE == action) {
+            // Get the external items first
+            receiveExternalSharedItems()
+            receiveSharedItems()
+            return
+        }
+
         // Check if all required permissions are granted
         val hasAllPermissions = hasPermission(this, PERMISSIONS_STORAGE)
         val hasPartialAccess = hasPartialAccess(this)
+
         if (hasAllPermissions || hasPartialAccess) {
             // All required permissions are granted, so enable UI elements and perform actions
             receiveSharedItems()
@@ -472,9 +483,7 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
     private fun receiveSharedItems() {
         val intent = intent
         val action = intent.action
-        if (Intent.ACTION_SEND == action || Intent.ACTION_SEND_MULTIPLE == action) {
-            receiveExternalSharedItems()
-        } else if (ContributionController.ACTION_INTERNAL_UPLOADS == action) {
+        if (ContributionController.ACTION_INTERNAL_UPLOADS == action) {
             receiveInternalSharedItems()
         }
 

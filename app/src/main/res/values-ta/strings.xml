@@ -228,4 +228,13 @@
   <string name="retry">மீண்டும் முயல்க</string>
   <string name="title_activity_search">தேடு</string>
   <string name="search_recent_header">அண்மைய தேடல்கள்:</string>
+  <string name="quiz">புதிர்</string>
+  <string name="rotate">சுழற்று</string>
+  <string name="never_ask_again">இதை மீண்டும் கேட்க வேண்டாம்</string>
+  <string name="leaderboard_yearly">வருடாந்திர</string>
+  <string name="read_help_link">மேலும் படிக்க</string>
+  <string name="learn_more">மேலும் அறிந்து கொள்</string>
+  <string name="explore_map_details">விவரங்கள்</string>
+  <string name="usages_on_commons_heading">பொதுவகம்</string>
+  <string name="nominated_for_deletion_btn">நீக்குதலுக்கு பரிந்துரைக்கப்பட்டது</string>
 </resources>
