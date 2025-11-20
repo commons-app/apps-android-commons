@@ -837,4 +837,5 @@
   <string name="image_tag_line_created_and_uploaded_by">Skapades och laddades upp av: %1$s</string>
   <string name="image_tag_line_created_by_and_uploaded_by">Skapad av %1$s och laddades upp av %2$s</string>
   <string name="nominated_for_deletion_btn">Nominerad för radering</string>
+  <string name="custom_selector_max_image_limit_reached">Du kan välja högst %d bilder.</string>
 </resources>
