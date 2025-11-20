@@ -895,4 +895,5 @@
   <string name="image_tag_line_created_and_uploaded_by">Создано и загружено: %1$s</string>
   <string name="image_tag_line_created_by_and_uploaded_by">Создано %1$s и загружено %2$s</string>
   <string name="nominated_for_deletion_btn">Номинировано на удаление</string>
+  <string name="custom_selector_max_image_limit_reached">Вы можете выбрать не более %d изображений.</string>
 </resources>
