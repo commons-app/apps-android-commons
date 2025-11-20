@@ -852,4 +852,5 @@
   <string name="image_tag_line_created_and_uploaded_by">Creato e caricato da: %1$s</string>
   <string name="image_tag_line_created_by_and_uploaded_by">Creato da %1$s e caricato da %2$s</string>
   <string name="nominated_for_deletion_btn">Proposto per la cancellazione</string>
+  <string name="custom_selector_max_image_limit_reached">Puoi selezionare solo un massimo di %d immagini.</string>
 </resources>

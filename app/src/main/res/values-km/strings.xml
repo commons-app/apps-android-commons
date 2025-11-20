@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* MeahNunh
 * Pokno Royal
 * Y.snsqr
 * គីមស៊្រុន
@@ -97,7 +98,7 @@
   <string name="provider_categories">ចំណាត់ថ្នាក់ក្រុមដែលត្រូវបានប្រើថ្មីៗ</string>
   <string name="waiting_first_sync">កំពុងរង់ចាំ ធ្វើការ sync ជាលើកដំបូង…</string>
   <string name="no_uploads_yet">អ្នកមិនទាន់បានផ្ទុករូបថតណាមួយឡើងនៅឡើយទេ។</string>
-  <string name="menu_retry_upload">ព្យាយាមម្ដងទៀត</string>
+  <string name="menu_retry_upload">សាកម្ដងទៀត</string>
   <string name="menu_cancel_upload">បោះបង់</string>
   <string name="menu_download">ទាញយក</string>
   <string name="preference_license">អាជ្ញាបណ្ណលំនាំដើម</string>
