@@ -316,6 +316,44 @@ class NearbyParentFragmentPresenter
     }
 
     /**
+     * Iterates through MarkerPlaceGroups and attempts to load the places from the local
+     * Place cache/repository. If a Place is in the cache, data from the Place is set into the
+     * associated MarkerPlaceGroup. Else, the index is added to the indicesToUpdate list.
+     *
+     * @param updatedGroups The MarkerPlaceGroups that contain Place entity IDs used to search the
+     * local cache for more information about the Place.
+     *
+     * @param indicesToUpdate The list of indices in updatedGroups where the associated Place
+     * was not stored in the local cache and will need to be retrieved in some other way.
+     */
+    suspend fun loadCachedPlaces(
+        updatedGroups: MutableList<MarkerPlaceGroup>,
+        indicesToUpdate: MutableList<Int>
+    ) {
+
+        for (i in 0..updatedGroups.lastIndex) {
+            val repoPlace = placesRepository.fetchPlace(updatedGroups[i].place.entityID)
+            if (repoPlace != null && repoPlace.name != null && repoPlace.name != ""){
+                updatedGroups[i].isBookmarked =
+                    bookmarkLocationDao.findBookmarkLocation(repoPlace.name)
+
+                updatedGroups[i].place.apply {
+                    name = repoPlace.name
+                    isMonument = repoPlace.isMonument
+                    pic = repoPlace.pic ?: ""
+                    exists = repoPlace.exists ?: true
+                    longDescription = repoPlace.longDescription ?: ""
+                    language = repoPlace.language
+                    siteLinks = repoPlace.siteLinks
+                }
+            } else {
+                indicesToUpdate.add(i)
+            }
+        }
+
+    }
+
+    /**
      * Load the places' details from cache and Wikidata query, and update these details on the map
      * as and when they arrive.
      *
@@ -341,23 +379,9 @@ class NearbyParentFragmentPresenter
             val updatedGroups = nearbyPlaceGroups.toMutableList()
             // first load cached places:
             val indicesToUpdate = mutableListOf<Int>()
-            for (i in 0..updatedGroups.lastIndex) {
-                val repoPlace = placesRepository.fetchPlace(updatedGroups[i].place.entityID)
-                if (repoPlace != null && repoPlace.name != null && repoPlace.name != ""){
-                    updatedGroups[i].isBookmarked = bookmarkLocationDao.findBookmarkLocation(repoPlace.name)
-                    updatedGroups[i].place.apply {
-                        name = repoPlace.name
-                        isMonument = repoPlace.isMonument
-                        pic = repoPlace.pic ?: ""
-                        exists = repoPlace.exists ?: true
-                        longDescription = repoPlace.longDescription ?: ""
-                        language = repoPlace.language
-                        siteLinks = repoPlace.siteLinks
-                    }
-                } else {
-                    indicesToUpdate.add(i)
-                }
-            }
+
+            loadCachedPlaces(updatedGroups, indicesToUpdate)
+
             schedulePlacesUpdate(updatedGroups, force = true)
             // channel for lists of indices of places, each list to be fetched in a single request
             val fetchPlacesChannel = Channel<List<Int>>(Channel.UNLIMITED)
