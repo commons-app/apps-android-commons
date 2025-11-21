@@ -352,6 +352,7 @@ class NearbyParentFragmentPresenter
                         exists = repoPlace.exists ?: true
                         longDescription = repoPlace.longDescription ?: ""
                         language = repoPlace.language
+                        siteLinks = repoPlace.siteLinks
                     }
                 } else {
                     indicesToUpdate.add(i)
