@@ -814,6 +814,10 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
     }
 
     override fun onNextButtonClicked(index: Int) {
+        // Validate index bounds
+        if (fragments == null || index < 0 || index >= fragments!!.size) {
+            return
+        }
         val currentFragment = fragments!![index]
         if (currentFragment is UploadMediaDetailFragment) {
             if (VERSION.SDK_INT >= VERSION_CODES.O) {
