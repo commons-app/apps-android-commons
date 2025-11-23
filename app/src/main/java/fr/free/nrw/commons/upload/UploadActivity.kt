@@ -919,9 +919,10 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
     }
 
     override fun onPreviousButtonClicked(index: Int) {
-        if (index != 0) {
+        val fragmentsList = fragments ?: return
+        if (index > 0 && index < fragmentsList.size) {
             binding.vpUpload.setCurrentItem(index - 1, true)
-            fragments!![index - 1].onBecameVisible()
+            fragmentsList[index - 1].onBecameVisible()
             (binding.rvThumbnails.layoutManager as LinearLayoutManager)
                 .scrollToPositionWithOffset(if ((index > 3)) index - 2 else 0, 0)
             if ((index != 1) && ((index - 1) < uploadableFiles.size)) {
