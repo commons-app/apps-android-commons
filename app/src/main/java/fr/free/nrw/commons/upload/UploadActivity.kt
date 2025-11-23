@@ -867,9 +867,13 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
     }
 
     private fun proceedToNextStep(index: Int) {
-        if (index < fragments!!.size - 1) {
+        val fragmentsList = fragments ?: return
+        if (index < 0 || index >= fragmentsList.size) {
+            return
+        }
+        if (index < fragmentsList.size - 1) {
             // Hide the keyboard before navigating to Media License screen
-            val isUploadCategoriesFragment = fragments!!.getOrNull(index)?.let {
+            val isUploadCategoriesFragment = fragmentsList.getOrNull(index)?.let {
                 it is UploadCategoriesFragment
             } ?: false
             if (isUploadCategoriesFragment) {
@@ -882,10 +886,10 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
                 }
             }
             binding.vpUpload.setCurrentItem(index + 1, false)
-            fragments!![index + 1].onBecameVisible()
+            fragmentsList[index + 1].onBecameVisible()
             (binding.rvThumbnails.layoutManager as LinearLayoutManager)
                 .scrollToPositionWithOffset(if ((index > 0)) index - 1 else 0, 0)
-            if (index < fragments!!.size - 4) {
+            if (index < fragmentsList.size - 4) {
                 // check image quality if next image exists
                 presenter!!.checkImageQuality(index + 1)
             }
