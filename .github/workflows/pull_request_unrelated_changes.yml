@@ -30,7 +30,6 @@ jobs:
             
             Does this pull request appear to mix unrelated changes? Respond with only "yes" or "no".
           model: openai/gpt-4o-mini
-          temperature: 0.1
 
       # If unrelated changes detected, remind contributor of guidelines
       - name: Comment if unrelated changes detected
