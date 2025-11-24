@@ -856,4 +856,5 @@
   <string name="image_tag_line_created_and_uploaded_by">由%1$s建立與上傳</string>
   <string name="image_tag_line_created_by_and_uploaded_by">由%1$s建立，%2$s上傳</string>
   <string name="nominated_for_deletion_btn">提名刪除</string>
+  <string name="custom_selector_max_image_limit_reached">您最多只能選擇 %d 張圖片。</string>
 </resources>

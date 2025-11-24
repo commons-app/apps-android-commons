@@ -868,4 +868,5 @@
   <string name="image_tag_line_created_and_uploaded_by">נוצר והועלה על־ידי: %1$s</string>
   <string name="image_tag_line_created_by_and_uploaded_by">נוצר על־ידי %1$s והועלה על־ידי %2$s</string>
   <string name="nominated_for_deletion_btn">הועמדה למחיקה</string>
+  <string name="custom_selector_max_image_limit_reached">אפשר לבחור עד %d תמונות.</string>
 </resources>
