@@ -300,7 +300,7 @@
   <string name="upload_problem_fbmd">Lade bitte nur Bilder hoch, die du selber erstellt hast. Lade keine Bilder hoch, die du auf Facebook-Konten anderer Personen gefunden hast.</string>
   <string name="upload_problem_do_you_continue">Möchtest du dieses Bild trotzdem hochladen?</string>
   <string name="upload_connection_error_alert_title">Verbindungsfehler</string>
-  <string name="upload_connection_error_alert_detail">Der Hochlade-Vorgang erfordert eine aktiven Internetverbindung. Bitte prüfe deine Netzwerkverbindung.</string>
+  <string name="upload_connection_error_alert_detail">Der Hochlade-Vorgang erfordert eine aktive Internetverbindung. Bitte prüfe deine Netzwerkverbindung.</string>
   <string name="upload_problem_image">Im Bild gefundene Probleme</string>
   <string name="internet_downloaded">Lade bitte nur Bilder hoch, die du selber aufgenommen hast. Lade keine Bilder hoch, die du aus dem Internet heruntergeladen hast.</string>
   <string name="preferences_uploads">Hochgeladene Dateien</string>
