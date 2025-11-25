@@ -225,7 +225,7 @@ class UploadActivityUnitTests {
     @Test
     @Throws(Exception::class)
     fun testOnNextButtonClicked() {
-        activity.onNextButtonClicked(-1)
+        activity.onNextButtonClicked(0)
     }
 
     @Test

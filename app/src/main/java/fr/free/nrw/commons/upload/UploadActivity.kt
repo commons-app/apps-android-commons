@@ -814,12 +814,7 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
     }
 
     override fun onNextButtonClicked(index: Int) {
-        // Validate index bounds
-        val fragmentsList = fragments ?: return
-        if (index < 0 || index >= fragmentsList.size) {
-            return
-        }
-        val currentFragment = fragmentsList[index]
+        val currentFragment = fragments!![index]
         if (currentFragment is UploadMediaDetailFragment) {
             if (VERSION.SDK_INT >= VERSION_CODES.O) {
                 val adapter = (currentFragment as UploadMediaDetailFragment).uploadMediaDetailAdapter
@@ -867,13 +862,9 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
     }
 
     private fun proceedToNextStep(index: Int) {
-        val fragmentsList = fragments ?: return
-        if (index < 0 || index >= fragmentsList.size) {
-            return
-        }
-        if (index < fragmentsList.size - 1) {
+        if (index < fragments!!.size - 1) {
             // Hide the keyboard before navigating to Media License screen
-            val isUploadCategoriesFragment = fragmentsList.getOrNull(index)?.let {
+            val isUploadCategoriesFragment = fragments!!.getOrNull(index)?.let {
                 it is UploadCategoriesFragment
             } ?: false
             if (isUploadCategoriesFragment) {
@@ -886,10 +877,10 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
                 }
             }
             binding.vpUpload.setCurrentItem(index + 1, false)
-            fragmentsList[index + 1].onBecameVisible()
+            fragments!![index + 1].onBecameVisible()
             (binding.rvThumbnails.layoutManager as LinearLayoutManager)
                 .scrollToPositionWithOffset(if ((index > 0)) index - 1 else 0, 0)
-            if (index < fragmentsList.size - 4) {
+            if (index < fragments!!.size - 4) {
                 // check image quality if next image exists
                 presenter!!.checkImageQuality(index + 1)
             }
@@ -919,10 +910,9 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
     }
 
     override fun onPreviousButtonClicked(index: Int) {
-        val fragmentsList = fragments ?: return
-        if (index > 0 && index < fragmentsList.size) {
+        if (index != 0) {
             binding.vpUpload.setCurrentItem(index - 1, true)
-            fragmentsList[index - 1].onBecameVisible()
+            fragments!![index - 1].onBecameVisible()
             (binding.rvThumbnails.layoutManager as LinearLayoutManager)
                 .scrollToPositionWithOffset(if ((index > 3)) index - 2 else 0, 0)
             if ((index != 1) && ((index - 1) < uploadableFiles.size)) {
