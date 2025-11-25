@@ -63,6 +63,7 @@
       android:exported="false" />
     <activity
       android:name=".upload.UploadProgressActivity"
+      android:configChanges="orientation|screenSize|keyboard|smallestScreenSize|screenLayout"
       android:exported="false" />
     <activity
       android:name=".description.DescriptionEditActivity"
