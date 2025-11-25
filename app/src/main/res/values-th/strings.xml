@@ -143,6 +143,8 @@
   <string name="no_uploads_yet">คุณยังไม่ได้อัปโหลดรูปภาพใดๆ</string>
   <string name="menu_retry_upload">ลองใหม่</string>
   <string name="menu_cancel_upload">ยกเลิก</string>
+  <string name="language_search_type_language_name">พิมพ์ชื่อภาษา</string>
+  <string name="language_search_recent_searches">การค้นหาล่าสุด</string>
   <string name="language_search_all_languages">ภาษาทั้งหมด</string>
   <string name="media_upload_policy">โดยการส่งรูปภาพนี้ ข้าพเจ้าขอยืนยันว่านี่เป็นงานของข้าพเจ้าเอง ซึ่งจะไม่มีเนื้อหาที่ละเมิดลิขสิทธิ์, ภาพเซลฟีหรืออื่น ๆ ตามที่ระบุไว้ใน&lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;นโยบายของวิกิมีเดียคอมมอนส์&lt;/a&gt;</string>
   <string name="menu_download">ดาวน์โหลด</string>
@@ -317,6 +319,7 @@
   <string name="quiz">คำถาม</string>
   <string name="quiz_question_string">รูปภาพนี้สามารถอัปโหลดได้หรือไม่?</string>
   <string name="question">คำถาม</string>
+  <string name="quiz_i_am_not_sure">ไม่แน่ใจ</string>
   <string name="result">ผลลัพธ์</string>
   <string name="quiz_back_button">หากคุณยังคงอัปโหลดภาพที่ต้องการให้ลบต่อไป บัญชีของคุณอาจถูกห้ามได้ คุณแน่ใจหรือไม่ว่าต้องการจบคำถาม?</string>
   <string name="quiz_alert_message">ภาพมากกว่า %1$s ภาพที่คุณอัปโหลดได้ถูกลบแล้ว หากคุณยังคงอัปโหลดภาพที่จำเป็นต้องลบอีก บัญชีของคุณอาจถูกห้ามได้\n\nคุณต้องการดูบทช่วยสอนอีกครั้งแล้วตอบคำถามเพื่อช่วยคุณเรียนรู้ว่าภาพประเภทใดบ้างที่คุณควรหรือไม่ควรอัปโหลด?</string>
@@ -379,6 +382,7 @@
   <string name="display_location_permission_title" fuzzy="true">แสดงสิทธิอนุญาตที่ตั้ง</string>
   <string name="ends_on">สิ้นสุดเมื่อ:</string>
   <string name="display_campaigns">แสดงแคมเปญ</string>
+  <string name="option_allow">อนุญาต</string>
   <string name="nominate_for_deletion_done">เสร็จสิ้น</string>
   <string name="review_thanks_yes_button_text">ภาพถัดไป</string>
   <string name="review_thanks_no_button_text" fuzzy="true">ภาพถัดไป</string>
@@ -408,6 +412,7 @@
   <string name="delete_helper_ask_reason_copyright_logo">โลโก้</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">เนื่องจากเป็น</string>
   <string name="category_edit_helper_show_edit_title_success">สำเร็จ</string>
+  <string name="coordinates_edit_helper_show_edit_title_success">สำเร็จ</string>
   <string name="account_created">สร้างบัญชีแล้ว!</string>
   <string name="notification_mark_read">การแจ้งเตือนที่ทำเครื่องหมายว่าอ่านแล้ว</string>
   <string name="place_state">สถานะของสถานที่:</string>
@@ -428,7 +433,9 @@
   <string name="leaderboard_nearby">สถานที่ใกล้เคียง</string>
   <string name="cancelling_upload">กำลังยกเลิกอับโหลด…</string>
   <string name="cancel_upload">ยกเลิกอับโหลด</string>
+  <string name="description">คำอธิบาย</string>
   <string name="location_permission_rationale">สิทธิทางเลือก: รับข้อมูลตำแหน่งที่ตั้งปัจจุบันสำหรับข้อเสนอแนะหมวดหมู่</string>
+  <string name="explore_map_details">รายละเอียด</string>
   <string name="api_level">API level</string>
   <string name="android_version">แอนดรอยด์เวอร์ชัน</string>
   <string name="device_model">รุ่นอุปกรณ์</string>

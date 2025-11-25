@@ -99,7 +99,7 @@
     <activity android:name=".WelcomeActivity" />
     <activity
       android:name=".upload.UploadActivity"
-      android:configChanges="orientation|screenSize|keyboard"
+      android:configChanges="orientation|screenSize|keyboard|smallestScreenSize|screenLayout"
       android:exported="true"
       android:hardwareAccelerated="false"
       android:icon="@mipmap/ic_launcher"

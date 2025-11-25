@@ -14,7 +14,7 @@
 -->
 <resources>
   <string name="commons_facebook">Páxina de Commons en Facebook</string>
-  <string name="commons_github" fuzzy="true">Código fonte de Commons en Github</string>
+  <string name="commons_github">Código fonte de Commons en GitHub</string>
   <string name="commons_logo">Logo de Commons</string>
   <string name="commons_website">Sitio web de Commons</string>
   <string name="exit_location_picker">Saír do selector de localización</string>
@@ -148,10 +148,10 @@
   <string name="preference_license">Licenza por defecto</string>
   <string name="use_previous">Usar o título e descrición anteriores</string>
   <string name="preference_theme">Tema</string>
-  <string name="license_name_cc_by_sa_four" fuzzy="true"> Recoñecemento-CompartirIgual 4.0</string>
-  <string name="license_name_cc_by_four" fuzzy="true">Recoñecemento 4.0</string>
-  <string name="license_name_cc_by_sa" fuzzy="true"> Recoñecemento-CompartirIgual 3.0</string>
-  <string name="license_name_cc_by" fuzzy="true">Recoñecemento 3.0</string>
+  <string name="license_name_cc_by_sa_four">Recoñecemento-CompartirIgual 4.0</string>
+  <string name="license_name_cc_by_four">Recoñecemento 4.0</string>
+  <string name="license_name_cc_by_sa">Recoñecemento-CompartirIgual 3.0</string>
+  <string name="license_name_cc_by">Recoñecemento 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
@@ -215,8 +215,8 @@
   <string name="welcome_image_llamas">Llamas</string>
   <string name="welcome_image_rainbow_bridge">Ponte do Arco da vella</string>
   <string name="welcome_image_tulip">Tulipán</string>
-  <string name="welcome_image_welcome_wikipedia" fuzzy="true">Benvida de Wikipedia</string>
-  <string name="welcome_image_welcome_copyright" fuzzy="true">Dereitos de autor de benvida</string>
+  <string name="welcome_image_welcome_wikipedia">Unha imaxe esquemática dun artigo xenérico da Wikipedia.</string>
+  <string name="welcome_image_welcome_copyright">Un debuxo dun feixe de papeis co símbolo de dereitos de autoría riscado.</string>
   <string name="welcome_image_sydney_opera_house">Ópera de Sydney</string>
   <string name="cancel">Cancelar</string>
   <string name="navigation_drawer_open">Abrir</string>
@@ -404,7 +404,7 @@
   <string name="never_ask_again">Non volver a preguntar isto nunca</string>
   <string name="display_location_permission_title">Solicitar permiso de localización</string>
   <string name="display_location_permission_explanation">Pedir permisos de localización cando sexa necesario para a funcionalidade de notificación de proximidade.</string>
-  <string name="achievements_fetch_failed" fuzzy="true">Algo foi mal e non puidemos obter os logros</string>
+  <string name="achievements_fetch_failed">Algo foi mal e non puidemos obter os logros</string>
   <string name="ends_on">Finaliza o:</string>
   <string name="display_campaigns">Amosar campañas</string>
   <string name="display_campaigns_explanation">Ver as campañas en curso</string>
@@ -423,14 +423,14 @@
   <string name="check_category_failure_message">Non foi posible solicitar un control de categoría para %1$s</string>
   <string name="check_category_toast">Solicitando control de categoría para %1$s</string>
   <string name="nominate_for_deletion_done">Feito</string>
-  <string name="send_thank_success_title" fuzzy="true">Enviando agradecementos: Éxito</string>
-  <string name="send_thank_success_message" fuzzy="true">Enviado correctamente o agradecemento a %1$s</string>
-  <string name="send_thank_toast" fuzzy="true">Enviando agradecementos por %1$s</string>
+  <string name="send_thank_success_title">Enviando agradecementos: Correcto</string>
+  <string name="send_thank_success_message">Enviado o agradecemento a %1$s</string>
+  <string name="send_thank_toast">Enviando o agradecemento por %1$s</string>
   <string name="review_thanks_yes_button_text">Imaxe seguinte</string>
   <string name="review_thanks_no_button_text">Si, por que non</string>
   <string name="no_image">Ningunha imaxe usada</string>
   <string name="no_image_reverted">Ningunha imaxe revertida</string>
-  <string name="no_image_uploaded">Ningunha imaxe subida</string>
+  <string name="no_image_uploaded">Non se subiron imaxes</string>
   <string name="no_notification">Non ten ningunha notificación sen ler</string>
   <string name="no_read_notification">Non ten notificacións lidas</string>
   <string name="share_logs_using">Compartir os rexistros usando</string>
@@ -493,7 +493,7 @@
   <string name="account_created">Conta creada!</string>
   <string name="place_state_exists">Existe</string>
   <string name="place_state_needs_photo">Precisa fotografía</string>
-  <string name="nearby_search_hint" fuzzy="true">Ponte, museo, hotel etc.</string>
+  <string name="nearby_search_hint">Ponte, museo, hotel etc.</string>
   <string name="title_app_shortcut_bookmark">Favoritos</string>
   <string name="title_app_shortcut_setting">Axustes</string>
   <string name="remove_bookmark">Eliminado de favoritos</string>
