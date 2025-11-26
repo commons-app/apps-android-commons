@@ -39,6 +39,7 @@ import fr.free.nrw.commons.theme.BaseActivity
 import fr.free.nrw.commons.upload.FileProcessor
 import fr.free.nrw.commons.upload.FileUtilsWrapper
 import fr.free.nrw.commons.utils.CustomSelectorUtils
+import fr.free.nrw.commons.utils.applyEdgeToEdgeTopPaddingInsets
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -137,6 +138,10 @@ class ZoomableActivity : BaseActivity() {
         binding = ActivityZoomableBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        binding.topBar.applyEdgeToEdgeTopPaddingInsets(WindowInsetsCompat.Type.statusBars())
+        binding.btnBack.setOnClickListener {
+            onBackPressed()
+        }
         prefs =
             applicationContext.getSharedPreferences(
                 ImageHelper.CUSTOM_SELECTOR_PREFERENCE_KEY,
