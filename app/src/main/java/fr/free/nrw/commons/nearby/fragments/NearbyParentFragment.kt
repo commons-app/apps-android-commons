@@ -2085,27 +2085,33 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
     private fun getIconFor(place: Place, isBookmarked: Boolean): Int {
         if (nearestPlace != null && place.name == nearestPlace!!.name) {
             // Highlight nearest place only when user clicks on the home nearby banner
-//            highlightNearestPlace(place);
-            return (if (isBookmarked) R.drawable.ic_custom_map_marker_purple_bookmarked else R.drawable.ic_custom_map_marker_purple
-                )
+            //   highlightNearestPlace(place);
+            return if (isBookmarked) R.drawable.ic_custom_map_marker_purple_bookmarked else R.drawable.ic_custom_map_marker_purple
         }
 
         if (place.isMonument) {
             return R.drawable.ic_custom_map_marker_monuments
         }
-        if (!place.pic!!.trim { it <= ' ' }.isEmpty()) {
-            return (if (isBookmarked) R.drawable.ic_custom_map_marker_green_bookmarked else R.drawable.ic_custom_map_marker_green
-                )
+
+        place.pic?.let {
+            if (!it.trim { it <= ' ' }.isEmpty()) {
+                return if (isBookmarked) R.drawable.ic_custom_map_marker_green_bookmarked else R.drawable.ic_custom_map_marker_green
+            }
         }
-        if (!place.exists!!) { // Means that the topic of the Wikidata item does not exist in the real world anymore, for instance it is a past event, or a place that was destroyed
+
+        // Means that the topic of the Wikidata item does not exist in the real world anymore,
+        // for instance it is a past event, or a place that was destroyed
+        if (place.exists == false) {
             return (R.drawable.ic_clear_black_24dp)
         }
-        if (!place.name.isNullOrEmpty()) {
-            return (if (isBookmarked) R.drawable.ic_custom_map_marker_grey_bookmarked else R.drawable.ic_custom_map_marker_grey
-                )
+
+        place.name?.let {
+            if (it.isEmpty()) {
+                return if (isBookmarked) R.drawable.ic_custom_map_marker_grey_bookmarked else R.drawable.ic_custom_map_marker_grey
+            }
         }
-        return (if (isBookmarked) R.drawable.ic_custom_map_marker_red_bookmarked else R.drawable.ic_custom_map_marker_red
-            )
+
+        return if (isBookmarked) R.drawable.ic_custom_map_marker_red_bookmarked else R.drawable.ic_custom_map_marker_red
     }
 
     /**
