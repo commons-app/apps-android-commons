@@ -163,13 +163,13 @@ class ExploreMapController @Inject constructor(
                 for (explorePlace in placeList) {
                     val baseMarker = BaseMarker()
                     val distance = formatDistanceBetween(currentLatLng, explorePlace.location)
-                    explorePlace.setDistance(distance)
+                    explorePlace.distance = distance
 
                     baseMarker.title =
-                        explorePlace.name.substring(5, explorePlace.name.lastIndexOf("."))
+                        explorePlace.name!!.substring(5, explorePlace.name!!.lastIndexOf("."))
                     baseMarker.position = LatLng(
-                        explorePlace.location.latitude,
-                        explorePlace.location.longitude, 0f
+                        explorePlace.location!!.latitude,
+                        explorePlace.location!!.longitude, 0f
                     )
                     baseMarker.place = explorePlace
 

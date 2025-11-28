@@ -1,7 +1,7 @@
 package fr.free.nrw.commons
 
 import fr.free.nrw.commons.location.LatLng
-import fr.free.nrw.commons.nearby.NearbyController.loadAttractionsFromLocationToBaseMarkerOptions
+import fr.free.nrw.commons.nearby.NearbyController.Companion.loadAttractionsFromLocationToBaseMarkerOptions
 import org.junit.Assert.assertEquals
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -15,11 +15,7 @@ class NearbyControllerTest {
     fun testNullAttractions() {
         val location = LatLng(0.0, 0.0, 0f)
 
-        val options =
-            loadAttractionsFromLocationToBaseMarkerOptions(
-                location,
-                null,
-            )
+        val options = loadAttractionsFromLocationToBaseMarkerOptions(location, null)
 
         assertEquals(0, options.size.toLong())
     }

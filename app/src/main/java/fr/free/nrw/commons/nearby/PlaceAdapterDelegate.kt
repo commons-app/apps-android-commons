@@ -79,7 +79,7 @@ fun placeAdapterDelegate(
         nearbyButtonLayout.directionsButton.setOnClickListener { onDirectionsClicked(item) }
         bind {
             tvName.text = item.name
-            val descriptionText: String = item.longDescription
+            val descriptionText: String = item.longDescription!!
             if (descriptionText == "?") {
                 tvDesc.setText(R.string.no_description_found)
                 tvDesc.visibility = INVISIBLE
@@ -91,7 +91,7 @@ fun placeAdapterDelegate(
                         .substringBeforeLast(")")
             }
             distance.text = item.distance
-            icon.setImageResource(item.label.icon)
+            icon.setImageResource(item.label!!.icon)
             nearbyButtonLayout.iconOverflow.visibility =
                 if (item.hasCommonsLink() || item.hasWikidataLink()) {
                     VISIBLE
@@ -101,7 +101,7 @@ fun placeAdapterDelegate(
 
             scope?.launch {
                 bookmarkButtonImage.setImageResource(
-                    if (bookmarkLocationDao.findBookmarkLocation(item.name)) {
+                    if (bookmarkLocationDao.findBookmarkLocation(item.name!!)) {
                         R.drawable.ic_round_star_filled_24px
                     } else {
                         R.drawable.ic_round_star_border_24px
