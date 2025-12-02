@@ -5,8 +5,8 @@ import androidx.test.core.app.ApplicationProvider
 import com.nhaarman.mockitokotlin2.verify
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.location.LatLng
-import fr.free.nrw.commons.nearby.CheckBoxTriStates.CHECKED
-import fr.free.nrw.commons.nearby.CheckBoxTriStates.UNCHECKED
+import fr.free.nrw.commons.nearby.CheckBoxTriStates.Companion.CHECKED
+import fr.free.nrw.commons.nearby.CheckBoxTriStates.Companion.UNCHECKED
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -34,7 +34,7 @@ class CheckBoxTriStatesTest {
     fun setUp() {
         MockitoAnnotations.openMocks(this)
         checkBoxTriStates = CheckBoxTriStates(ApplicationProvider.getApplicationContext())
-        checkBoxTriStates.setCallback(callback)
+        checkBoxTriStates.callback = callback
         checkBoxTriStates.setOnCheckedChangeListener(onCheckChangeListener)
     }
 
@@ -43,7 +43,7 @@ class CheckBoxTriStatesTest {
      */
     @Test
     fun testSetStateWhenSameState() {
-        checkBoxTriStates.state = CHECKED
+        checkBoxTriStates.setState(CHECKED)
         checkBoxTriStates.setState(CHECKED)
         verifyNoInteractions(callback)
     }
@@ -54,7 +54,7 @@ class CheckBoxTriStatesTest {
     @Test
     fun testSetStateWhenDiffState() {
         NearbyController.currentLocation = LatLng(0.0, 0.0, 0.0f)
-        checkBoxTriStates.state = CHECKED
+        checkBoxTriStates.setState(CHECKED)
         checkBoxTriStates.setState(UNCHECKED)
         verify(callback).filterByMarkerType(null, UNCHECKED, false, true)
     }
@@ -65,7 +65,7 @@ class CheckBoxTriStatesTest {
     @Test
     fun testSetStateWhenCurrLatLngNull() {
         NearbyController.currentLocation = null
-        checkBoxTriStates.state = CHECKED
+        checkBoxTriStates.setState(CHECKED)
         checkBoxTriStates.setState(UNCHECKED)
         verifyNoInteractions(callback)
     }

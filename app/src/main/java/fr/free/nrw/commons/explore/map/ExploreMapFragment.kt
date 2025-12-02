@@ -648,12 +648,12 @@ class ExploreMapFragment : CommonsDaggerSupportFragment(), ExploreMapContract.Vi
      */
     private fun passInfoToSheet(place: Place) {
         binding!!.bottomSheetDetailsBinding.directionsButton.setOnClickListener {
-            handleGeoCoordinates(requireActivity(), place.getLocation(), binding!!.mapView.zoomLevelDouble)
+            handleGeoCoordinates(requireActivity(), place.location!!, binding!!.mapView.zoomLevelDouble)
         }
 
         binding!!.bottomSheetDetailsBinding.commonsButton.visibility = if (place.hasCommonsLink()) View.VISIBLE else View.GONE
         binding!!.bottomSheetDetailsBinding.commonsButton.setOnClickListener {
-            handleWebUrl(requireContext(), place.siteLinks.commonsLink)
+            handleWebUrl(requireContext(), place.siteLinks!!.commonsUri!!)
         }
 
         var index = 0
@@ -666,15 +666,14 @@ class ExploreMapFragment : CommonsDaggerSupportFragment(), ExploreMapContract.Vi
             }
             index++
         }
-        binding!!.bottomSheetDetailsBinding.title.text = place.name.substring(5, place.name.lastIndexOf("."))
+        binding!!.bottomSheetDetailsBinding.title.text = place.name!!.substring(5, place.name!!.lastIndexOf("."))
         binding!!.bottomSheetDetailsBinding.category.text = place.distance
         // Remove label since it is double information
-        var descriptionText = place.longDescription
-            .replace(place.getName() + " (", "")
+        var descriptionText = place.longDescription?.replace(place.name + " (", "")
         descriptionText = (if (descriptionText == place.longDescription)
             descriptionText
         else
-            descriptionText.replaceFirst(".$".toRegex(), ""))
+            descriptionText?.replaceFirst(".$".toRegex(), ""))
         // Set the short description after we remove place name from long description
         binding!!.bottomSheetDetailsBinding.description.text = descriptionText
     }
@@ -735,8 +734,8 @@ class ExploreMapFragment : CommonsDaggerSupportFragment(), ExploreMapContract.Vi
             val items = mutableListOf<OverlayItem?>()
             val d: Drawable = nearbyBaseMarker.icon!!.toDrawable(resources)
             val point = GeoPoint(
-                nearbyBaseMarker.place.location.latitude,
-                nearbyBaseMarker.place.location.longitude
+                nearbyBaseMarker.place.location!!.latitude,
+                nearbyBaseMarker.place.location!!.longitude
             )
 
             val markerMedia = getMediaFromImageURL(nearbyBaseMarker.place.pic)
@@ -752,7 +751,7 @@ class ExploreMapFragment : CommonsDaggerSupportFragment(), ExploreMapContract.Vi
 
             var title = nearbyBaseMarker.place.name
             // Remove "File:" if present at start
-            if (title.startsWith("File:")) {
+            if (title!!.startsWith("File:")) {
                 title = title.substring(5)
             }
             // Remove extensions like .jpg, .jpeg, .png, .svg (case insensitive)
@@ -870,7 +869,7 @@ class ExploreMapFragment : CommonsDaggerSupportFragment(), ExploreMapContract.Vi
      */
     private fun removeMarker(nearbyBaseMarker: BaseMarker?) {
         if (nearbyBaseMarker == null ||
-            nearbyBaseMarker.place.getName() == null ||
+            nearbyBaseMarker.place.name == null ||
             baseMarkerOverlayMap == null ||
             !baseMarkerOverlayMap!!.containsKey(nearbyBaseMarker)) {
             return

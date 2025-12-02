@@ -1,11 +1,11 @@
-package fr.free.nrw.commons.nearby;
+package fr.free.nrw.commons.nearby
 
-import androidx.room.Dao;
-import androidx.room.Insert;
-import androidx.room.OnConflictStrategy;
-import androidx.room.Query;
-import io.reactivex.Completable;
-import java.util.List;
+import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
+import io.reactivex.Completable
+import io.reactivex.functions.Action
 
 /**
  * Data Access Object (DAO) for accessing the Place entity in the database.
@@ -13,8 +13,7 @@ import java.util.List;
  * utilized for the caching of places in the Nearby Map feature.
  */
 @Dao
-public abstract class PlaceDao {
-
+abstract class PlaceDao {
     /**
      * Inserts a Place object into the database.
      * If a conflict occurs, the existing entry will be replaced.
@@ -22,7 +21,7 @@ public abstract class PlaceDao {
      * @param place The Place object to be inserted.
      */
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    public abstract void saveSynchronous(Place place);
+    abstract fun saveSynchronous(place: Place)
 
     /**
      * Retrieves a Place object from the database based on the provided entity ID.
@@ -31,7 +30,7 @@ public abstract class PlaceDao {
      * @return The Place object with the specified entity ID.
      */
     @Query("SELECT * from place WHERE entityID=:entity")
-    public abstract Place getPlace(String entity);
+    abstract fun getPlace(entity: String?): Place?
 
     /**
      * Retrieves a list of places within the specified rectangular area.
@@ -42,31 +41,24 @@ public abstract class PlaceDao {
      * @param lngEnd Longitudinal upper bound, should be greater than `lngBegin`
      * @return The list of places within the specified rectangular geographical area.
      */
-    @Query("SELECT * from place WHERE name!='' AND latitude>=:latBegin AND longitude>=:lngBegin "
-        + "AND latitude<:latEnd AND longitude<:lngEnd")
-    public abstract List<Place> fetchPlaces(double latBegin, double lngBegin,
-        double latEnd, double lngEnd);
+    @Query("SELECT * from place WHERE name!='' AND latitude>=:latBegin AND longitude>=:lngBegin AND latitude<:latEnd AND longitude<:lngEnd")
+    abstract fun fetchPlaces(latBegin: Double, lngBegin: Double, latEnd: Double, lngEnd: Double): List<Place>?
 
     /**
      * Saves a Place object asynchronously into the database.
      */
-    public Completable save(final Place place) {
-        return Completable
-            .fromAction(() -> saveSynchronous(place));
-    }
+    fun save(place: Place): Completable = Completable.fromAction(Action { saveSynchronous(place) })
 
     /**
      * Deletes all Place objects from the database.
      */
     @Query("DELETE FROM place")
-    public abstract void deleteAllSynchronous();
+    abstract fun deleteAllSynchronous()
 
     /**
      * Deletes all Place objects from the database.
      *
      * @return A Completable that completes once the deletion operation is done.
      */
-    public Completable deleteAll() {
-        return Completable.fromAction(this::deleteAllSynchronous);
-    }
+    fun deleteAll(): Completable = Completable.fromAction(Action { deleteAllSynchronous() })
 }
