@@ -24,6 +24,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.channels.Channel.Factory
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.ensureActive
 import kotlinx.coroutines.job
@@ -382,6 +383,65 @@ class NearbyParentFragmentPresenter
     }
 
     /**
+     * Method used by an individual thread/coroutine to request batch Place data from WikiData.
+     * This is intended to be used by many threads in parallel to speed up data retrieval.
+     *
+     * If a WikiData server error occurs, this method will launch individual threads for each Place
+     * because a single server error for one Place can cause WikiData to respond with an error
+     * for the entire batch.
+     *
+     * @param batchedIndicesToFetch Contains the batches of indices. These indices correspond to
+     * Places in updatedGroups that need more information fetched from WikiData.
+     * @param updatedGroups List containing incomplete Place data
+     * @param collectResults Holds the Place data fetched from Wikidata.
+     */
+    private suspend fun fetchPlacesThreadMethod(
+        batchedIndicesToFetch: Channel<List<Int>>,
+        updatedGroups: MutableList<MarkerPlaceGroup>,
+        collectResults: Channel<List<Pair<Int, MarkerPlaceGroup>>>
+    ) = coroutineScope {
+        for (indices in batchedIndicesToFetch) {
+            ensureActive()
+            try {
+                val fetchedPlaces =
+                    nearbyController.getPlaces(indices.map { updatedGroups[it].place })
+                collectResults.send(
+                    fetchedPlaces.mapIndexed { index, place ->
+                        Pair(indices[index], MarkerPlaceGroup(
+                            bookmarkLocationDao.findBookmarkLocation(place.name),
+                            place
+                        ))
+                    }
+                )
+            } catch (e: Exception) {
+                Timber.tag("NearbyPinDetails").e(e)
+                //HTTP request failed. Try individual places
+                for (i in indices) {
+                    launch {
+                        val onePlaceBatch = mutableListOf<Pair<Int, MarkerPlaceGroup>>()
+                        try {
+                            val fetchedPlace = nearbyController.getPlaces(
+                                mutableListOf(updatedGroups[i].place)
+                            )
+
+                            onePlaceBatch.add(Pair(i, MarkerPlaceGroup(
+                                bookmarkLocationDao.findBookmarkLocation(
+                                    fetchedPlace[0].name
+                                ),
+                                fetchedPlace[0]
+                            )))
+                        } catch (e: Exception) {
+                            Timber.tag("NearbyPinDetails").e(e)
+                            onePlaceBatch.add(Pair(i, updatedGroups[i]))
+                        }
+                        collectResults.send(onePlaceBatch)
+                    }
+                }
+            }
+        }
+    }
+
+    /**
      * Load the places' details from cache and Wikidata query, and update these details on the map
      * as and when they arrive.
      *
@@ -418,45 +478,7 @@ class NearbyParentFragmentPresenter
             val collectResults = Channel<List<Pair<Int, MarkerPlaceGroup>>>(Factory.UNLIMITED)
             repeat(LoadPlacesAsyncOptions.CONNECTION_COUNT) {
                 launch(Dispatchers.IO) {
-                    for (indices in batchedIndicesToFetch) {
-                        ensureActive()
-                        try {
-                            val fetchedPlaces =
-                                nearbyController.getPlaces(indices.map { updatedGroups[it].place })
-                            collectResults.send(
-                                fetchedPlaces.mapIndexed { index, place ->
-                                    Pair(indices[index], MarkerPlaceGroup(
-                                        bookmarkLocationDao.findBookmarkLocation(place.name),
-                                        place
-                                    ))
-                                }
-                            )
-                        } catch (e: Exception) {
-                            Timber.tag("NearbyPinDetails").e(e)
-                            //HTTP request failed. Try individual places
-                            for (i in indices) {
-                                launch {
-                                    val onePlaceBatch = mutableListOf<Pair<Int, MarkerPlaceGroup>>()
-                                    try {
-                                        val fetchedPlace = nearbyController.getPlaces(
-                                            mutableListOf(updatedGroups[i].place)
-                                        )
-
-                                        onePlaceBatch.add(Pair(i, MarkerPlaceGroup(
-                                            bookmarkLocationDao.findBookmarkLocation(
-                                                fetchedPlace[0].name
-                                            ),
-                                            fetchedPlace[0]
-                                        )))
-                                    } catch (e: Exception) {
-                                        Timber.tag("NearbyPinDetails").e(e)
-                                        onePlaceBatch.add(Pair(i, updatedGroups[i]))
-                                    }
-                                    collectResults.send(onePlaceBatch)
-                                }
-                            }
-                        }
-                    }
+                    fetchPlacesThreadMethod(batchedIndicesToFetch, updatedGroups, collectResults)
                 }
             }
             var collectCount = 0
