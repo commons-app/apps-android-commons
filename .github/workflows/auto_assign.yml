@@ -1,6 +1,7 @@
-on:
-  issue_comment:
-    types: [created]
+# Workflow disabled - comment out the trigger to prevent execution
+# on:
+#   issue_comment:
+#     types: [created]
 
 permissions:
   issues: write
