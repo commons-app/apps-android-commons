@@ -495,6 +495,44 @@ class NearbyParentFragmentPresenter
     }
 
     /**
+     * Ensures any clicked Places are updated using existing Place data
+     * and not by data from regular/batched WikiData server responses.
+     *
+     * @param updatedGroups The MarkerPlaceGroups which will be displayed on the map to the user.
+     * @param clickedPlacesIndex Only Places at indices greater than or equal to this number
+     * in clickedPlaces will be handled. This can be useful for avoiding redundant computation when
+     * calling this method multiple times.
+     *
+     * @return The updated clickedPlacesIndex used in future calls to this method.
+     */
+    private fun handlePlacesClicked(
+        updatedGroups: MutableList<MarkerPlaceGroup>,
+        clickedPlacesIndex: Int
+    ): Int {
+        var i = clickedPlacesIndex
+        if (i < clickedPlaces.size) {
+            val clickedPlacesBacklog = hashMapOf<LatLng, Place>()
+            while (i < clickedPlaces.size) {
+                clickedPlacesBacklog.put(
+                    clickedPlaces[i].location,
+                    clickedPlaces[i]
+                )
+                ++i
+            }
+            for ((index, group) in updatedGroups.withIndex()) {
+                if (clickedPlacesBacklog.containsKey(group.place.location)) {
+                    updatedGroups[index] = MarkerPlaceGroup(
+                        updatedGroups[index].isBookmarked,
+                        clickedPlacesBacklog[group.place.location]
+                    )
+                }
+            }
+        }
+
+        return i
+    }
+
+    /**
      * Load the places' details from cache and Wikidata query, and update these details on the map
      * as and when they arrive.
      *
@@ -514,7 +552,6 @@ class NearbyParentFragmentPresenter
             // clear past clicks and bookmarkChanged queues
             clickedPlaces.clear()
             bookmarkChangedPlaces.clear()
-            var clickedPlacesIndex = 0
             var bookmarkChangedPlacesIndex = 0
 
             val updatedGroups = nearbyPlaceGroups.toMutableList()
@@ -534,30 +571,14 @@ class NearbyParentFragmentPresenter
                 updatedGroups, collectResults)
 
             var collectCount = 0
+            var clickedPlacesIndex = 0
             while (collectCount < indicesToUpdate.size) {
                 val resultList = collectResults.receive()
 
                 processResults(resultList, updatedGroups)
+                
+                clickedPlacesIndex = handlePlacesClicked(updatedGroups, clickedPlacesIndex)
 
-                // handle any places clicked
-                if (clickedPlacesIndex < clickedPlaces.size) {
-                    val clickedPlacesBacklog = hashMapOf<LatLng, Place>()
-                    while (clickedPlacesIndex < clickedPlaces.size) {
-                        clickedPlacesBacklog.put(
-                            clickedPlaces[clickedPlacesIndex].location,
-                            clickedPlaces[clickedPlacesIndex]
-                        )
-                        ++clickedPlacesIndex
-                    }
-                    for ((index, group) in updatedGroups.withIndex()) {
-                        if (clickedPlacesBacklog.containsKey(group.place.location)) {
-                            updatedGroups[index] = MarkerPlaceGroup(
-                                updatedGroups[index].isBookmarked,
-                                clickedPlacesBacklog[group.place.location]
-                            )
-                        }
-                    }
-                }
                 // handle any bookmarks toggled
                 if (bookmarkChangedPlacesIndex < bookmarkChangedPlaces.size) {
                     val bookmarkChangedPlacesBacklog = hashMapOf<LatLng, Place>()
