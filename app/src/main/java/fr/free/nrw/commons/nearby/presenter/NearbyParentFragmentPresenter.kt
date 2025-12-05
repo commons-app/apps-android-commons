@@ -465,6 +465,36 @@ class NearbyParentFragmentPresenter
     }
 
     /**
+     * Places the fetched WikiData Place data into associated MarkerPlaceGroups
+     *
+     * @param resultList The Place data fetched from WikiData
+     * @param updatedGroups The MarkerPlaceGroups which will be updated with the data fetched
+     * from WikiData
+     */
+    private fun processResults(
+        resultList: List<Pair<Int, MarkerPlaceGroup>>,
+        updatedGroups: MutableList<MarkerPlaceGroup>
+    ) {
+
+        for ((index, fetchedPlaceGroup) in resultList) {
+            val existingPlace = updatedGroups[index].place
+            val finalPlaceGroup = MarkerPlaceGroup(
+                fetchedPlaceGroup.isBookmarked,
+                fetchedPlaceGroup.place.apply {
+                    location = existingPlace.location
+                    distance = existingPlace.distance
+                    isMonument = existingPlace.isMonument
+                }
+            )
+            updatedGroups[index] = finalPlaceGroup
+            placesRepository
+                .save(finalPlaceGroup.place)
+                .subscribeOn(Schedulers.io())
+                .subscribe()
+        }
+    }
+
+    /**
      * Load the places' details from cache and Wikidata query, and update these details on the map
      * as and when they arrive.
      *
@@ -506,22 +536,9 @@ class NearbyParentFragmentPresenter
             var collectCount = 0
             while (collectCount < indicesToUpdate.size) {
                 val resultList = collectResults.receive()
-                for ((index, fetchedPlaceGroup) in resultList) {
-                    val existingPlace = updatedGroups[index].place
-                    val finalPlaceGroup = MarkerPlaceGroup(
-                        fetchedPlaceGroup.isBookmarked,
-                        fetchedPlaceGroup.place.apply {
-                            location = existingPlace.location
-                            distance = existingPlace.distance
-                            isMonument = existingPlace.isMonument
-                        }
-                    )
-                    updatedGroups[index] = finalPlaceGroup
-                    placesRepository
-                        .save(finalPlaceGroup.place)
-                        .subscribeOn(Schedulers.io())
-                        .subscribe()
-                }
+
+                processResults(resultList, updatedGroups)
+
                 // handle any places clicked
                 if (clickedPlacesIndex < clickedPlaces.size) {
                     val clickedPlacesBacklog = hashMapOf<LatLng, Place>()
