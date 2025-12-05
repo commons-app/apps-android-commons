@@ -1,5 +1,7 @@
-# Workflow disabled - comment out the trigger to prevent execution
-# on:
+# Automated runs commented out
+# Added workflow_dispatch temporarily for having a syntactically correct workflow file
+on:
+  workflow_dispatch:
 #   issue_comment:
 #     types: [created]
 
