@@ -494,6 +494,46 @@ class NearbyParentFragmentPresenter
         }
     }
 
+
+    /**
+     * Ensures the correct bookmark boolean value for Places whose bookmarks have changed.
+     * This bookmark information is retrieved from the bookmarkLocationDao.
+     *
+     * @param updatedGroups The MarkerPlaceGroups which will be displayed on the map to the user.
+     * @param bookmarkChangedPlacesIndex Only Places at indices greater than or equal to this number
+     * in bookmarkChangedPlaces will be handled. This can be useful for avoiding redundant
+     * computation when calling this method multiple times.
+     *
+     * @return The updated bookmarkChangedPlacesIndex used in future calls to this method.
+     */
+    private suspend fun handleBookmarksToggled(
+        updatedGroups: MutableList<MarkerPlaceGroup>,
+        bookmarkChangedPlacesIndex: Int
+    ): Int {
+        var i = bookmarkChangedPlacesIndex
+        if (i < bookmarkChangedPlaces.size) {
+            val bookmarkChangedPlacesBacklog = hashMapOf<LatLng, Place>()
+            while (i < bookmarkChangedPlaces.size) {
+                bookmarkChangedPlacesBacklog.put(
+                    bookmarkChangedPlaces[i].location,
+                    bookmarkChangedPlaces[i]
+                )
+                ++i
+            }
+            for ((index, group) in updatedGroups.withIndex()) {
+                if (bookmarkChangedPlacesBacklog.containsKey(group.place.location)) {
+                    updatedGroups[index] = MarkerPlaceGroup(
+                        bookmarkLocationDao
+                            .findBookmarkLocation(updatedGroups[index].place.name),
+                        updatedGroups[index].place
+                    )
+                }
+            }
+        }
+
+        return i
+    }
+
     /**
      * Ensures any clicked Places are updated using existing Place data
      * and not by data from regular/batched WikiData server responses.
@@ -552,7 +592,6 @@ class NearbyParentFragmentPresenter
             // clear past clicks and bookmarkChanged queues
             clickedPlaces.clear()
             bookmarkChangedPlaces.clear()
-            var bookmarkChangedPlacesIndex = 0
 
             val updatedGroups = nearbyPlaceGroups.toMutableList()
             // first load cached places:
@@ -572,6 +611,7 @@ class NearbyParentFragmentPresenter
 
             var collectCount = 0
             var clickedPlacesIndex = 0
+            var bookmarkChangedPlacesIndex = 0
             while (collectCount < indicesToUpdate.size) {
                 val resultList = collectResults.receive()
 
@@ -579,26 +619,8 @@ class NearbyParentFragmentPresenter
                 
                 clickedPlacesIndex = handlePlacesClicked(updatedGroups, clickedPlacesIndex)
 
-                // handle any bookmarks toggled
-                if (bookmarkChangedPlacesIndex < bookmarkChangedPlaces.size) {
-                    val bookmarkChangedPlacesBacklog = hashMapOf<LatLng, Place>()
-                    while (bookmarkChangedPlacesIndex < bookmarkChangedPlaces.size) {
-                        bookmarkChangedPlacesBacklog.put(
-                            bookmarkChangedPlaces[bookmarkChangedPlacesIndex].location,
-                            bookmarkChangedPlaces[bookmarkChangedPlacesIndex]
-                        )
-                        ++bookmarkChangedPlacesIndex
-                    }
-                    for ((index, group) in updatedGroups.withIndex()) {
-                        if (bookmarkChangedPlacesBacklog.containsKey(group.place.location)) {
-                            updatedGroups[index] = MarkerPlaceGroup(
-                                bookmarkLocationDao
-                                    .findBookmarkLocation(updatedGroups[index].place.name),
-                                updatedGroups[index].place
-                            )
-                        }
-                    }
-                }
+                bookmarkChangedPlacesIndex = handleBookmarksToggled(updatedGroups,
+                                                                    bookmarkChangedPlacesIndex)
                 schedulePlacesUpdate(updatedGroups)
                 collectCount += resultList.size
             }
