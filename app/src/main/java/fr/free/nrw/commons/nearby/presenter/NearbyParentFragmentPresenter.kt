@@ -442,6 +442,29 @@ class NearbyParentFragmentPresenter
     }
 
     /**
+     * Launches a specific number of threads to retrieve Place data in parallel from the
+     * WikiData servers.
+     *
+     * @param numThreads The number of threads to launch in parallel
+     * @param batchedIndicesToFetch Contains the batches of indices. These indices correspond to
+     * Places in updatedGroups that need more information fetched from WikiData.
+     * @param updatedGroups List containing Place data
+     * @param collectResults Holds the Place data fetched from Wikidata.
+     */
+    private suspend fun launchFetchPlacesThreads(
+        numThreads: Int,
+        batchedIndicesToFetch: Channel<List<Int>>,
+        updatedGroups: MutableList<MarkerPlaceGroup>,
+        collectResults: Channel<List<Pair<Int, MarkerPlaceGroup>>>
+    ) = coroutineScope {
+        repeat(numThreads) {
+            launch(Dispatchers.IO) {
+                fetchPlacesThreadMethod(batchedIndicesToFetch, updatedGroups, collectResults)
+            }
+        }
+    }
+
+    /**
      * Load the places' details from cache and Wikidata query, and update these details on the map
      * as and when they arrive.
      *
@@ -476,11 +499,10 @@ class NearbyParentFragmentPresenter
                 createBatches(indicesToUpdate, LoadPlacesAsyncOptions.BATCH_SIZE)
 
             val collectResults = Channel<List<Pair<Int, MarkerPlaceGroup>>>(Factory.UNLIMITED)
-            repeat(LoadPlacesAsyncOptions.CONNECTION_COUNT) {
-                launch(Dispatchers.IO) {
-                    fetchPlacesThreadMethod(batchedIndicesToFetch, updatedGroups, collectResults)
-                }
-            }
+
+            launchFetchPlacesThreads(LoadPlacesAsyncOptions.CONNECTION_COUNT, batchedIndicesToFetch,
+                updatedGroups, collectResults)
+
             var collectCount = 0
             while (collectCount < indicesToUpdate.size) {
                 val resultList = collectResults.receive()
