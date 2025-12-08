@@ -629,7 +629,7 @@
   <string name="you_have_no_achievements_yet">أنت لم تقم بأي مساهمة حتى الآن</string>
   <string name="no_achievements_yet">لم يقم %1$s بأي مساهمات حتى الآن</string>
   <string name="account_created">تم إنشاء الحساب!</string>
-  <string name="text_copy">تم نسخ النص  إلى الحافظة.</string>
+  <string name="text_copy">نُسخ النص إلى الحافظة.</string>
   <string name="notification_mark_read">تم تعليم الإخطار كمقروء</string>
   <string name="some_error">ثمة خطأ ما!</string>
   <string name="place_state">حالة المكان:</string>
@@ -898,4 +898,5 @@
   <string name="image_tag_line_created_and_uploaded_by">تم الإنشاء والتحميل بواسطة: %1$s</string>
   <string name="image_tag_line_created_by_and_uploaded_by">تم إنشاؤه بواسطة %1$s وتم تحميله بواسطة %2$s</string>
   <string name="nominated_for_deletion_btn">مرشح للحذف</string>
+  <string name="custom_selector_max_image_limit_reached">يمكنك فقط تحديد الحد الأقصى من الصور %d.</string>
 </resources>

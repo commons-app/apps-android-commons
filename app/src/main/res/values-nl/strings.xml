@@ -854,4 +854,5 @@
   <string name="image_tag_line_created_and_uploaded_by">Gemaakt en geüpload door: %1$s</string>
   <string name="image_tag_line_created_by_and_uploaded_by">Gemaakt door %1$s en geüpload %2$s</string>
   <string name="nominated_for_deletion_btn">Genomineerd voor verwijdering</string>
+  <string name="custom_selector_max_image_limit_reached">U kunt maximaal %d afbeeldingen selecteren.</string>
 </resources>
