@@ -570,10 +570,21 @@ class NearbyParentFragmentPresenter
             loadPlacesDataAyncJob?.cancel()
             localPlaceSearchJob = scope.launch(Dispatchers.IO) {
                 delay(LOCAL_SCROLL_DELAY)
+
+                // fix:: retrieve and check map boundaries for nullability.
+                val mapBottomLeft = nearbyParentFragmentView.screenBottomLeft
+                val mapTopRight = nearbyParentFragmentView.screenTopRight
+
+                if (mapBottomLeft == null || mapTopRight == null) {
+                    //gracefull exit:log the error and stop the process.
+                    Timber.d("Map boundaries (screenBottomLeft or screenTopRight) are null, skipping local place search as map state is not ready.")
+                    return@launch // exits the coroutine gracefully, preventing the crash.
+                }
+
                 val mapFocus = nearbyParentFragmentView.mapFocus
                 val markerPlaceGroups = placesRepository.fetchPlaces(
-                    nearbyParentFragmentView.screenBottomLeft,
-                    nearbyParentFragmentView.screenTopRight
+                    mapBottomLeft, // pass the now-guaranteed non-null variable
+                    mapTopRight
                 ).sortedBy { it.getDistanceInDouble(mapFocus) }.take(NearbyController.MAX_RESULTS)
                     .map {
                         MarkerPlaceGroup(
