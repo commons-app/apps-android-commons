@@ -1,22 +1,33 @@
 package fr.free.nrw.commons.upload
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import androidx.paging.PagedList
+import android.Manifest.permission
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts.RequestMultiplePermissions
 import fr.free.nrw.commons.CommonsApplication
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.contributions.Contribution
+import fr.free.nrw.commons.contributions.ContributionController
 import fr.free.nrw.commons.contributions.Contribution.Companion.STATE_IN_PROGRESS
 import fr.free.nrw.commons.contributions.Contribution.Companion.STATE_PAUSED
 import fr.free.nrw.commons.contributions.Contribution.Companion.STATE_QUEUED
 import fr.free.nrw.commons.databinding.FragmentPendingUploadsBinding
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment
+import fr.free.nrw.commons.filepicker.FilePicker
 import fr.free.nrw.commons.utils.DialogUtil.showAlertDialog
 import fr.free.nrw.commons.utils.ViewUtil
+import fr.free.nrw.commons.utils.ViewUtil.showShortToast
 import java.util.Locale
 import javax.inject.Inject
 
@@ -28,6 +39,9 @@ class PendingUploadsFragment :
     CommonsDaggerSupportFragment(),
     PendingUploadsContract.View,
     PendingUploadsAdapter.Callback {
+    @Inject
+    lateinit var contributionController: ContributionController
+
     @Inject
     lateinit var pendingUploadsPresenter: PendingUploadsPresenter
 
@@ -41,11 +55,76 @@ class PendingUploadsFragment :
 
     private var contributionsList = mutableListOf<Contribution>()
 
+    private var fabClose: Animation? = null
+    private var fabOpen: Animation? = null
+    private var rotateForward: Animation? = null
+    private var rotateBackward: Animation? = null
+    private var isFabOpen = false
+    private val customSelectorLauncherForResult = registerForActivityResult<Intent, ActivityResult>(
+        StartActivityForResult()
+    ) { result: ActivityResult? ->
+        contributionController.handleActivityResultWithCallback(requireActivity()
+        ) { callbacks: FilePicker.Callbacks? ->
+            contributionController.onPictureReturnedFromCustomSelector(
+                result!!, requireActivity(), callbacks!!
+            )
+        }
+    }
+
+    private val galleryPickLauncherForResult = registerForActivityResult<Intent, ActivityResult>(
+        StartActivityForResult()
+    ) { result: ActivityResult? ->
+        contributionController.handleActivityResultWithCallback(requireActivity()
+        ) { callbacks: FilePicker.Callbacks? ->
+            contributionController.onPictureReturnedFromGallery(
+                result!!, requireActivity(), callbacks!!
+            )
+        }
+    }
+
+    private val cameraPickLauncherForResult = registerForActivityResult<Intent, ActivityResult>(
+        StartActivityForResult()
+    ) { result: ActivityResult? ->
+        contributionController.handleActivityResultWithCallback(requireActivity()
+        ) { callbacks: FilePicker.Callbacks? ->
+            contributionController.onPictureReturnedFromCamera(
+                result!!, requireActivity(), callbacks!!
+            )
+        }
+    }
+
+    private lateinit var inAppCameraLocationPermissionLauncher:
+            ActivityResultLauncher<Array<String>>
+
     override fun onAttach(context: Context) {
         super.onAttach(context)
         if (context is UploadProgressActivity) {
             uploadProgressActivity = context
         }
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        //initialise the location permission launcher
+        inAppCameraLocationPermissionLauncher =
+            registerForActivityResult(RequestMultiplePermissions()) { result ->
+                val areAllGranted = result.values.all { it }
+
+                if (areAllGranted) {
+                    contributionController.locationPermissionCallback?.onLocationPermissionGranted()
+                } else {
+                    activity?.let { currentActivity ->
+                        if (currentActivity.shouldShowRequestPermissionRationale(
+                                permission.ACCESS_FINE_LOCATION)) {
+                        }
+                        contributionController.locationPermissionCallback?.onLocationPermissionDenied(
+                            currentActivity.getString(
+                                R.string.in_app_camera_location_permission_denied)
+                        )
+                    }
+                }
+            }
     }
 
     override fun onCreateView(
@@ -70,6 +149,87 @@ class PendingUploadsFragment :
     ) {
         super.onViewCreated(view, savedInstanceState)
         initRecyclerView()
+        initializeAnimations()
+        setListeners()
+    }
+
+    private fun initializeAnimations() {
+        fabOpen = AnimationUtils.loadAnimation(activity, R.anim.fab_open)
+        fabClose = AnimationUtils.loadAnimation(activity, R.anim.fab_close)
+        rotateForward = AnimationUtils.loadAnimation(activity, R.anim.rotate_forward)
+        rotateBackward = AnimationUtils.loadAnimation(activity, R.anim.rotate_backward)
+    }
+
+    private fun setListeners() {
+        binding.fabPlus.setOnClickListener { view: View? -> animateFAB(isFabOpen) }
+
+        binding.fabCamera.setOnClickListener { view: View? ->
+            contributionController.initiateCameraPick(
+                requireActivity(),
+                inAppCameraLocationPermissionLauncher,
+                cameraPickLauncherForResult
+            )
+            animateFAB(isFabOpen)
+        }
+        binding.fabCamera.setOnLongClickListener { view: View? ->
+            showShortToast(
+                context,
+                R.string.add_contribution_from_camera
+            )
+            true
+        }
+
+        binding.fabGallery.setOnClickListener { view: View? ->
+            contributionController.initiateGalleryPick(requireActivity(), galleryPickLauncherForResult, true)
+            animateFAB(isFabOpen)
+        }
+        binding.fabGallery.setOnLongClickListener { view: View? ->
+            showShortToast(context, R.string.menu_from_gallery)
+            true
+        }
+
+        binding.fabCustomGallery.setOnClickListener { v: View? ->
+            launchCustomSelector()
+            animateFAB(isFabOpen)
+        }
+        binding.fabCustomGallery.setOnLongClickListener { view: View? ->
+            showShortToast(context, R.string.custom_selector_title)
+            true
+        }
+    }
+
+    /**
+     * launch Custom Selector.
+     */
+    private fun launchCustomSelector() {
+        contributionController.initiateCustomGalleryPickWithPermission(
+            requireActivity(),
+            customSelectorLauncherForResult
+        )
+    }
+
+    private fun animateFAB(isFabOpen: Boolean) {
+        this.isFabOpen = !isFabOpen
+        if (binding.fabPlus.isShown) {
+            if (isFabOpen) {
+                binding.fabPlus.startAnimation(rotateBackward)
+                binding.fabCamera.startAnimation(fabClose)
+                binding.fabGallery.startAnimation(fabClose)
+                binding.fabCustomGallery.startAnimation(fabClose)
+                binding.fabCamera.hide()
+                binding.fabGallery.hide()
+                binding.fabCustomGallery.hide()
+            } else {
+                binding.fabPlus.startAnimation(rotateForward)
+                binding.fabCamera.startAnimation(fabOpen)
+                binding.fabGallery.startAnimation(fabOpen)
+                binding.fabCustomGallery.startAnimation(fabOpen)
+                binding.fabCamera.show()
+                binding.fabGallery.show()
+                binding.fabCustomGallery.show()
+            }
+            this.isFabOpen = !isFabOpen
+        }
     }
 
     /**
@@ -101,6 +261,7 @@ class PendingUploadsFragment :
                 binding.nopendingTextView.visibility = View.VISIBLE
                 binding.pendingUplaodsLl.visibility = View.GONE
                 uploadProgressActivity.hidePendingIcons()
+                binding.fabLayout.visibility = View.VISIBLE
             } else {
                 binding.nopendingTextView.visibility = View.GONE
                 binding.pendingUplaodsLl.visibility = View.VISIBLE
@@ -111,6 +272,7 @@ class PendingUploadsFragment :
                 } else {
                     uploadProgressActivity.setPausedIcon(false)
                 }
+                binding.fabLayout.visibility = View.VISIBLE
             }
         }
     }
