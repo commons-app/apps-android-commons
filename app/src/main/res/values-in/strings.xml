@@ -18,6 +18,7 @@
 * NFarras
 * Naufal06
 * Pebaryan
+* Penyuwangi
 * Rachmat04
 * Rex
 * Rv77ax
@@ -261,7 +262,7 @@
   <string name="upload_problem_different_geolocation">Gambar diambil di lokasi berbeda.</string>
   <string name="upload_problem_fbmd">Tolong hanya unggah gambar-gambar yang Anda ambil sendiri. Jangan unggah gambar yang Anda temukan di akun Facebook orang lain.</string>
   <string name="upload_problem_do_you_continue">Apakah Anda masih ingin mengunggah gambar ini?</string>
-  <string name="upload_connection_error_alert_title">Kesalahan koneksi</string>
+  <string name="upload_connection_error_alert_title">Galat Sambungan</string>
   <string name="upload_connection_error_alert_detail">Proses pengunggahan memerlukan akses internet aktif. Mohon periksa sambungan jaringan Anda.</string>
   <string name="upload_problem_image">Masalah dalam gambar ditemukan</string>
   <string name="internet_downloaded">Unggah hanya gambar yang sudah Anda potret sendiri. Jangan unggah gambar yang Anda ambil dari Internet.</string>
@@ -620,14 +621,14 @@
   <string name="leaderboard_my_rank_button_text">Peringkat Saya</string>
   <string name="limited_connection_enabled">Mode sambungan terbatas diaktifkan!</string>
   <string name="limited_connection_disabled">Mode sambungan terbatas dimatikan. Unggahan dijeda akan dilanjutkan.</string>
-  <string name="limited_connection_mode">Mode Koneksi Terbatas</string>
+  <string name="limited_connection_mode">Mode Sambungan Terbatas</string>
   <string name="statistics_quality">Gambar Berkualitas</string>
   <string name="quality_images_info">Gambar berkualitas adalah diagram atau foto yang memenuhi standar kualitas tertentu (yang sifatnya teknis) dan berharga bagi proyek Wikimedia</string>
   <string name="resuming_upload">Melanjutkan unggahan...</string>
   <string name="pausing_upload">Menunda unggahan...</string>
   <string name="cancelling_upload">Membatalkan pengunggahan...</string>
   <string name="cancel_upload">Batalkan pengunggahan</string>
-  <string name="limited_connection_explanation">Anda menyalakan mode koneksi terbatas. Semua pengunggahan ditunda dan akan dilanjutkan begitu Anda mematikan mode ini.</string>
+  <string name="limited_connection_explanation">Anda menyalakan mode sambungan terbatas. Semua pengunggahan ditunda dan akan dilanjutkan begitu Anda mematikan mode ini.</string>
   <string name="limited_connection_is_on">Mode sambungan terbatas sedang menyala.</string>
   <string name="media_details_tooltip">Silakan tulis keterangan singkat yang menjelaskan apa yang gambar Anda tampilkan. Dalam deskripsi, katakan apa yang membuat gambar ini menarik atau biasa atau langka, dan jelaskan konteksnya, baik yang tampak maupun tidak. Gunakan istilah yang setepat mungkin.</string>
   <string name="depicts_tooltip">Silakan cari dan pilih semua konsep yang gambar ini tampilkan. Usahakan sespesifik mungkin. Jika gambarnya menampilkan beberapa hal, pilih semuanya selama masuk akal. Jangan pilih tag yang umum apabila ada tag yang lebih spesifik.</string>
