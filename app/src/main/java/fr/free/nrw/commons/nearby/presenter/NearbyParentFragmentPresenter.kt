@@ -23,6 +23,7 @@ import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.channels.Channel.Factory
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.ensureActive
 import kotlinx.coroutines.job
@@ -354,6 +355,33 @@ class NearbyParentFragmentPresenter
     }
 
     /**
+     * Creates a Channel object that contains numbers divided into separate batches/lists.
+     * Each batch/list will have a maximum size.
+     *
+     * @param numbers The list of numbers that will be divided into multiple batches/lists.
+     * @param batchSize The maximum size of each batch/list which the numbers will be placed into.
+     *
+     * @return The Channel object which contains batches/lists of numbers.
+     */
+    suspend fun createBatches(numbers: MutableList<Int>, batchSize: Int): Channel<List<Int>> {
+
+        val batches = Channel<List<Int>>(Channel.UNLIMITED)
+
+        for (i in numbers.indices step batchSize) {
+            batches.send(
+                numbers.slice(
+                    i until (i + batchSize).coerceAtMost(
+                        numbers.size
+                    )
+                )
+            )
+        }
+
+        batches.close()
+        return batches
+    }
+
+    /**
      * Load the places' details from cache and Wikidata query, and update these details on the map
      * as and when they arrive.
      *
@@ -384,23 +412,13 @@ class NearbyParentFragmentPresenter
 
             schedulePlacesUpdate(updatedGroups, force = true)
             // channel for lists of indices of places, each list to be fetched in a single request
-            val fetchPlacesChannel = Channel<List<Int>>(Channel.UNLIMITED)
-            var totalBatches = 0
-            for (i in indicesToUpdate.indices step LoadPlacesAsyncOptions.BATCH_SIZE) {
-                ++totalBatches
-                fetchPlacesChannel.send(
-                    indicesToUpdate.slice(
-                        i until (i + LoadPlacesAsyncOptions.BATCH_SIZE).coerceAtMost(
-                            indicesToUpdate.size
-                        )
-                    )
-                )
-            }
-            fetchPlacesChannel.close()
-            val collectResults = Channel<List<Pair<Int, MarkerPlaceGroup>>>(totalBatches)
+            val batchedIndicesToFetch =
+                createBatches(indicesToUpdate, LoadPlacesAsyncOptions.BATCH_SIZE)
+
+            val collectResults = Channel<List<Pair<Int, MarkerPlaceGroup>>>(Factory.UNLIMITED)
             repeat(LoadPlacesAsyncOptions.CONNECTION_COUNT) {
                 launch(Dispatchers.IO) {
-                    for (indices in fetchPlacesChannel) {
+                    for (indices in batchedIndicesToFetch) {
                         ensureActive()
                         try {
                             val fetchedPlaces =
