@@ -26,12 +26,13 @@
 * Ty221
 * Vesihiisi
 * WaldiSt
+* Wawrzec
 * Wojtas
 * Woytecr
 -->
 <resources>
   <string name="commons_facebook">Strona Commons na Facebooku</string>
-  <string name="commons_github" fuzzy="true">Kod źródłowy Commons na GitHubie</string>
+  <string name="commons_github">Kod źródłowy Commons na GitHubie</string>
   <string name="commons_logo">Logo Commons</string>
   <string name="commons_website">Strona internetowa Commons</string>
   <string name="exit_location_picker">Wyjdź z selektora lokalizacji</string>

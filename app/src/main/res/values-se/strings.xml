@@ -8,7 +8,7 @@
 -->
 <resources>
   <string name="commons_facebook">Commons Facebook-siidu</string>
-  <string name="commons_github" fuzzy="true">Commons váldokoda Githubis</string>
+  <string name="commons_github">Commons váldokoda GitHubis</string>
   <string name="commons_logo">Commons-logo</string>
   <string name="commons_website">Commons-neahttasiidu</string>
   <string name="exit_location_picker">Guođe báikeválljejeaddji</string>
@@ -120,7 +120,7 @@
   <string name="menu_download">Viečča</string>
   <string name="preference_license">Dábálaš liseansa</string>
   <string name="use_previous">Ane ovddit nama ja govvádusa</string>
-  <string name="preference_theme">Temá</string>
+  <string name="preference_theme">Fárda</string>
   <string name="license_name_cc0">CC0</string>
   <string name="tutorial_1_subtext">Du govat veahkehit skuvlet olbmuid miehtá máilmmi!</string>
   <string name="tutorial_2_text">Luđe bajás govaid maid dievaslaččat leat ieš govven dahje ráhkadan:</string>
@@ -232,8 +232,9 @@
   <string name="coordinates_edit_helper_edit_message_else">Koordináhtaid lasiheapmi ii lihkostuvvan.</string>
   <string name="caption_edit_helper_edit_message_else">Govvateavstta lasiheapmi ii lihkostuvvan.</string>
   <string name="description_activity_title">Rievdat govvádusaid ja govvateavsttaid</string>
-  <string name="nearby_search_hint" fuzzy="true">Šaldi, musea, hotealla jna.</string>
+  <string name="nearby_search_hint">Šaldi, musea, hotealla jna.</string>
   <string name="title_app_shortcut_bookmark">Girjemearkkat</string>
+  <string name="theme_light_name">Čuvges fárda</string>
   <string name="load_more">Luđe lasi</string>
   <string name="add_picture_to_wikipedia_article_title">Lasit gova Wikipediai</string>
   <string name="resume">joatkke</string>
@@ -254,7 +255,7 @@
   <string name="apply">Geavat</string>
   <string name="explore_map_details">Lassedieđut</string>
   <string name="android_version">Android-veršuvdna</string>
-  <string name="see_your_achievements" fuzzy="true">Geahča iežat olahusaid</string>
+  <string name="see_your_achievements">Geahča iežat olahusaid</string>
   <string name="edit_image">Rievdat gova</string>
   <string name="send_thanks_to_author">Giite almmuheaddji</string>
 </resources>
