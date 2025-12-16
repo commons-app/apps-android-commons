@@ -583,8 +583,8 @@ class NearbyParentFragmentPresenter
 
                 val mapFocus = nearbyParentFragmentView.mapFocus
                 val markerPlaceGroups = placesRepository.fetchPlaces(
-                    mapBottomLeft, // pass the now-guaranteed non-null variable
-                    mapTopRight
+                    nearbyParentFragmentView.screenBottomLeft,
+                    nearbyParentFragmentView.screenTopRight
                 ).sortedBy { it.getDistanceInDouble(mapFocus) }.take(NearbyController.MAX_RESULTS)
                     .map {
                         MarkerPlaceGroup(
