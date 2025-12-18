@@ -21,8 +21,6 @@ import javax.inject.Inject
  */
 class UploadProgressActivity : BaseActivity() {
     private lateinit var binding: ActivityUploadProgressBinding
-    private var pendingUploadsFragment: PendingUploadsFragment? = null
-    private var failedUploadsFragment: FailedUploadsFragment? = null
     var viewPagerAdapter: ViewPagerAdapter? = null
     var menu: Menu? = null
 
@@ -68,18 +66,38 @@ class UploadProgressActivity : BaseActivity() {
         setTabs()
     }
 
+    //helper to retrieve the current Fragment by CLASS TYPE (as suggested).
+    private fun getPendingUploadsFragment(): PendingUploadsFragment? {
+        //find the Fragment by class type, not index
+        return supportFragmentManager.fragments.find {
+            it is PendingUploadsFragment && it.isAdded
+        } as? PendingUploadsFragment
+    }
+
+    private fun getFailedUploadsFragment(): FailedUploadsFragment? {
+        //find the Fragment by class type, not index
+        return supportFragmentManager.fragments.find {
+            it is FailedUploadsFragment && it.isAdded
+        } as? FailedUploadsFragment
+    }
+
+
     /**
      * Initializes and sets up the tabs data by creating instances of `PendingUploadsFragment`
      * and `FailedUploadsFragment`, adds them to the `fragmentList`, and assigns corresponding
      * titles from resources to the `titleList`.
      */
     fun setTabs() {
-        pendingUploadsFragment = PendingUploadsFragment()
-        failedUploadsFragment = FailedUploadsFragment()
+        val pendingUploadsFragment: Fragment
+        val failedUploadsFragment: Fragment
+
+        // using the robust getPendingUploadsFragment() helper
+        pendingUploadsFragment = getPendingUploadsFragment() ?: PendingUploadsFragment()
+        failedUploadsFragment = getFailedUploadsFragment() ?: FailedUploadsFragment()
 
         viewPagerAdapter!!.setTabs(
-            R.string.pending to pendingUploadsFragment!!,
-            R.string.failed to failedUploadsFragment!!
+            R.string.pending to pendingUploadsFragment,
+            R.string.failed to failedUploadsFragment
         )
         viewPagerAdapter!!.notifyDataSetChanged()
     }
@@ -119,7 +137,8 @@ class UploadProgressActivity : BaseActivity() {
                                     getString(R.string.pause),
                                 ).setIcon(R.drawable.pause_icon)
                                 .setOnMenuItemClickListener {
-                                    pendingUploadsFragment!!.pauseUploads()
+                                    //robust helper to find the correct instance
+                                    getPendingUploadsFragment()?.pauseUploads()
                                     setPausedIcon(true)
                                     true
                                 }.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM)
@@ -133,7 +152,8 @@ class UploadProgressActivity : BaseActivity() {
                                     getString(R.string.cancel),
                                 ).setIcon(R.drawable.ic_cancel_upload)
                                 .setOnMenuItemClickListener {
-                                    pendingUploadsFragment!!.deleteUploads()
+                                    //robust helper to find the correct instance
+                                    getPendingUploadsFragment()?.deleteUploads()
                                     true
                                 }.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM)
                         }
@@ -147,7 +167,8 @@ class UploadProgressActivity : BaseActivity() {
                                     getString(R.string.resume),
                                 ).setIcon(R.drawable.play_icon)
                                 .setOnMenuItemClickListener {
-                                    pendingUploadsFragment!!.restartUploads()
+                                    //robust helper to find the correct instance
+                                    getPendingUploadsFragment()?.restartUploads()
                                     setPausedIcon(false)
                                     true
                                 }.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM)
@@ -161,7 +182,7 @@ class UploadProgressActivity : BaseActivity() {
                             .add(Menu.NONE, R.id.retry_icon, Menu.NONE, getString(R.string.retry))
                             .setIcon(R.drawable.ic_refresh_24dp)
                             .setOnMenuItemClickListener {
-                                failedUploadsFragment!!.restartUploads()
+                                getFailedUploadsFragment()?.restartUploads()
                                 true
                             }.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM)
                     }
@@ -174,7 +195,7 @@ class UploadProgressActivity : BaseActivity() {
                                 getString(R.string.cancel),
                             ).setIcon(R.drawable.ic_cancel_upload)
                             .setOnMenuItemClickListener {
-                                failedUploadsFragment!!.deleteUploads()
+                                getFailedUploadsFragment()?.deleteUploads()
                                 true
                             }.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM)
                     }
