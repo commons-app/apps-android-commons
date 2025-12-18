@@ -636,7 +636,7 @@
   <string name="license_tooltip">Commons membuat gambar Anda dapat digunakan kembali dan diadaptasi oleh siapa saja. Apakah Anda ingin melepaskan semua hak? Apakah Anda ingin diatribusikan? Apakah Anda ingin adaptasi gambar ini menggunakan lisensi yang sama?</string>
   <string name="depicts_step_title">Menggambarkan</string>
   <string name="license_step_title">Lisensi Media</string>
-  <string name="media_detail_step_title">Detail Media</string>
+  <string name="media_detail_step_title">Rincian Media</string>
   <string name="menu_view_category_page">Lihat halaman kategori</string>
   <string name="menu_view_item_page">Lihat halaman butir</string>
   <string name="app_ui_language">Bahasa antarmuka pengguna aplikasi</string>
@@ -732,8 +732,8 @@
   <string name="learn_how_to_write_a_useful_description">Pelajari cara menulis deskripsi yang berguna</string>
   <string name="learn_how_to_write_a_useful_caption">Pelajari cara menulis takarir yang berguna</string>
   <string name="see_your_achievements">Lihat pencapaian Anda</string>
-  <string name="edit_image">Edit Gambar</string>
-  <string name="edit_location">Edit Lokasi</string>
+  <string name="edit_image">Sunting Gambar</string>
+  <string name="edit_location">Sunting Lokasi</string>
   <string name="location_updated">Lokasi diperbarui!</string>
   <string name="remove_location">Hapus Lokasi</string>
   <string name="remove_location_warning_title">Hapus Peringatan Lokasi</string>

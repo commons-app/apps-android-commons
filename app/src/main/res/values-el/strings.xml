@@ -131,6 +131,7 @@
   <string name="login_failed_throttled">Πάρα πολλές ανεπιτυχείς προσπάθειες. Παρακαλούμε, δοκιμάστε ξανά σε λίγα λεπτά.</string>
   <string name="login_failed_blocked">Λυπούμαστε, αυτός ο χρήστης έχει αποκλειστεί στα Commons</string>
   <string name="login_failed_2fa_needed">Πρέπει να παράσχετε τον κωδικό ελέγχου ταυτότητας δύο παραγόντων.</string>
+  <string name="login_failed_email_auth_needed">Ένας κωδικός επαλήθευσης σύνδεσης έχει σταλεί στη διεύθυνση ηλεκτρονικού ταχυδρομείου σας. Παρακαλούμε εισάγετε τον κωδικό για να συνδεθείτε.</string>
   <string name="login_failed_generic">Η είσοδος απέτυχε!</string>
   <string name="share_upload_button">Μεταφόρτωση</string>
   <string name="multiple_share_base_title">Ονομάστε το σύνολο</string>
@@ -139,6 +140,7 @@
   <string name="categories_search_text_hint">Αναζήτηση κατηγοριών</string>
   <string name="depicts_search_text_hint">Αναζητήστε αντικείμενα που απεικονίζονται στα πολυμέσα σας (βουνό, Ταζ Μαχάλ κ.λπ.)</string>
   <string name="menu_save_categories">Αποθήκευση</string>
+  <string name="menu_overflow_desc">Μενού υπερχείλισης</string>
   <string name="refresh_button">Ανανέωση</string>
   <string name="display_list_button">Κατάλογος</string>
   <string name="contributions_subtitle_zero">(Καμία μεταφόρτωση ακόμα)</string>
@@ -151,7 +153,7 @@
   <string name="title_activity_settings">Ρυθμίσεις</string>
   <string name="title_activity_signup">Εγγραφή</string>
   <string name="title_activity_featured_images">Προβεβλημμένες εικόνες</string>
-  <string name="images_featured_explanation" fuzzy="true">Οι επιλεγμένες εικόνες είναι εικόνες από άριστα καταρτισμένους φωτογράφους και εικονογράφους που η κοινότητα του Wikimedia Commons έχει επιλέξει ως μερικές από τις υψηλότερης ποιότητας στον ιστότοπο.</string>
+  <string name="images_featured_explanation">Οι επιλεγμένες εικόνες είναι συνεισφορές από άριστα καταρτισμένους φωτογράφους και εικονογράφους που η κοινότητα του Wikimedia Commons έχει επιλέξει ως μερικές από τις υψηλότερης ποιότητας στον ιστότοπο.</string>
   <string name="title_activity_custom_selector">Προσαρμοσμένος Επιλογέας</string>
   <string name="title_activity_category_details">Κατηγορία</string>
   <string name="title_activity_review">Αξιολόγηση από ομοτίμους</string>
@@ -282,6 +284,7 @@
   <string name="upload_connection_error_alert_detail">Η διαδικασία μεταφόρτωσης απαιτεί ενεργή πρόσβαση στο Διαδίκτυο. Ελέγξτε τη σύνδεσή σας στο δίκτυο.</string>
   <string name="upload_problem_image">Βρέθηκαν προβλήματα στην εικόνα</string>
   <string name="internet_downloaded">Παρακαλούμε ανεβάστε μόνο φωτογραφίες που έχετε τραβήξει μόνοι σας. Μην ανεβάζετε φωτογραφίες που έχετε κατεβάσει από το Διαδίκτυο.</string>
+  <string name="preferences_uploads">Μεταφορτώσεις</string>
   <string name="use_external_storage">Αποθηκεύστε φωτογραφίες εντός εφαρμογής</string>
   <string name="use_external_storage_summary">Αποθηκεύστε φωτογραφίες που τραβήξατε με την κάμερα εντός εφαρμογής στο χώρο αποθήκευσης της συσκευής σας</string>
   <string name="login_to_your_account">Συνδεθείτε στον λογαριασμό σας.</string>
@@ -353,6 +356,7 @@
   <string name="quiz">Κουίζ</string>
   <string name="quiz_question_string">Είναι εντάξει αυτή η εικόνα για μεταφόρτωση;</string>
   <string name="question">Ερώτηση</string>
+  <string name="quiz_i_am_not_sure">Δεν είμαι σίγουρος/η.</string>
   <string name="result">Αποτέλεσμα</string>
   <string name="quiz_back_button">Εάν συνεχίσετε να ανεβάζετε εικόνες που απαιτούν διαγραφή, ο λογαριασμός σας πιθανότατα θα αποκλειστεί. Είστε βέβαιοι ότι θέλετε να τερματίσετε το κουίζ;</string>
   <string name="quiz_alert_message">Περισσότερες από %1$s από τις εικόνες που ανεβάσατε έχουν διαγραφεί. Εάν συνεχίσετε να ανεβάζετε εικόνες που απαιτούν διαγραφή, ο λογαριασμός σας πιθανότατα θα αποκλειστεί.\n\nΘα θέλατε να δείτε ξανά το σεμινάριο και μετά να κάνετε ένα κουίζ για να σας βοηθήσει να μάθετε τι είδους εικόνες πρέπει ή όχι να ανεβάσετε;</string>
@@ -450,12 +454,13 @@
   <string name="never_ask_again">Μη με ξαναρωτήσετε</string>
   <string name="display_location_permission_title">Ζητήστε άδεια τοποθεσίας</string>
   <string name="display_location_permission_explanation">Ζητήστε άδεια τοποθεσίας όταν χρειάζεται για τη λειτουργία προβολής κοντινής κάρτας ειδοποιήσεων.</string>
-  <string name="achievements_fetch_failed" fuzzy="true">Κάτι πήγε στραβά. Δεν μπορέσαμε να ανακτήσουμε επιτεύγματα</string>
+  <string name="achievements_fetch_failed">Κάτι πήγε στραβά και δεν μπορέσαμε να ανακτήσουμε τα επιτεύγματα.</string>
   <string name="achievements_fetch_failed_ultimate_achievement">Έχετε κάνει τόσες πολλές συνεισφορές που δεν μπορεί να αντεπεξέλθει το σύστημα υπολογισμού επιτευγμάτων μας. Αυτό είναι το απόλυτο επίτευγμα.</string>
   <string name="ends_on">Λήγει στις:</string>
   <string name="display_campaigns">Προβολή εκστρατειών</string>
   <string name="display_campaigns_explanation">Δείτε τις τρέχουσες εκστρατείες</string>
   <string name="show_deletion_button">Εμφάνιση κουμπιού διαγραφής</string>
+  <string name="show_deletion_button_explanation">Ενεργοποιήστε το κουμπί «Διαγραφή φακέλου» στο εργαλείο προσαρμοσμένης επιλογής</string>
   <string name="in_app_camera_location_access_explanation">Επιτρέψτε στην εφαρμογή να ανακτήσει τοποθεσία σε περίπτωση που η κάμερα δεν την καταγράψει. Ορισμένες κάμερες συσκευών δεν καταγράφουν τοποθεσία. Σε τέτοιες περιπτώσεις, το να αφήσετε την εφαρμογή να ανακτήσει και να επισυνάψει τοποθεσία καθιστά τη συνεισφορά σας πιο χρήσιμη. Μπορείτε να το αλλάξετε ανά πάσα στιγμή από τις Ρυθμίσεις</string>
   <string name="option_allow">Αποδοχή</string>
   <string name="option_dismiss">Απόρριψη</string>
@@ -693,7 +698,7 @@
   <string name="show_in_map_app">Εμφάνιση στην εφαρμογή χάρτη</string>
   <string name="modify_location">Επεξεργασία τοποθεσίας</string>
   <string name="location_picker_image_view">Η προβολή εικόνας του εργαλείου επιλογής τοποθεσίας</string>
-  <string name="location_picker_image_view_shadow" fuzzy="true">Η σκιά της προβολής εικόνας του εργαλείου επιλογής τοποθεσίας</string>
+  <string name="location_picker_image_view_shadow">Η σκιά της προβολής εικόνας του εργαλείου επιλογής τοποθεσίας</string>
   <string name="image_location">Τοποθεσία εικόνας</string>
   <string name="check_whether_location_is_correct">Ελέγξτε εάν η τοποθεσία είναι σωστή</string>
   <string name="label">Ετικέτα</string>
@@ -705,7 +710,7 @@
   <string name="back">Πίσω</string>
   <string name="welcome_custom_picture_selector_text">Καλώς ορίσατε στον Προσαρμοσμένο Επιλογέα Εικόνων</string>
   <string name="custom_selector_info_text1">Αυτό το εργαλείο επιλογής σάς δείχνει ποιες εικόνες έχετε ήδη ανεβάσει στα Commons.</string>
-  <string name="custom_selector_info_text2" fuzzy="true">Σε αντίθεση με την εικόνα στα αριστερά, η εικόνα στα δεξιά έχει το λογότυπο Commons που υποδεικνύει ότι έχει ήδη μεταφορτωθεί. Αγγίξτε παρατεταμένα για προεπισκόπηση εικόνας.</string>
+  <string name="custom_selector_info_text2">Σε αντίθεση με την εικόνα στα αριστερά, η εικόνα στα δεξιά έχει το λογότυπο Commons που υποδεικνύει ότι έχει ήδη μεταφορτωθεί. Αγγίξτε παρατεταμένα για προεπισκόπηση εικόνας.</string>
   <string name="welcome_custom_selector_ok">Περίφημα!</string>
   <string name="custom_selector_already_uploaded_image_text">Αυτή η εικόνα έχει ήδη μεταφορτωθεί στο Commons.</string>
   <string name="custom_selector_over_limit_warning">Για τεχνικούς λόγους, η εφαρμογή δεν μπορεί να ανεβάσει αξιόπιστα περισσότερες από %1$d φωτογραφίες ταυτόχρονα. Το όριο μεταφόρτωσης του %1$d έχει ξεπεραστεί κατά %2$d .</string>
@@ -719,6 +724,7 @@
   <string name="wlm_campaign_description">Το Wiki Loves Monuments είναι ένας διεθνής διαγωνισμός φωτογραφίας για μνημεία που διοργανώνεται από το Wikimedia</string>
   <string name="need_permission">Χρειάζεται άδεια</string>
   <string name="read_phone_state_permission_message">Οι κοντινοί χάρτες πρέπει να διαβάζουν PHONE STATE για να λειτουργούν σωστά</string>
+  <string name="location_off_dialog_text">Παρακαλούμε ενεργοποιήστε τις υπηρεσίες τοποθεσίας για να δείτε κοντινά μέρη.</string>
   <string name="location_permission_rationale">Προαιρετική άδεια: Ανάκτηση τρέχουσας θέσης σας για προτάσεις κατηγοριών</string>
   <string name="contributions_of_user">Συνεισφορές χρήστη: %1$s</string>
   <string name="achievements_of_user">Επιτεύγματα χρήστη: %1$s</string>
@@ -753,8 +759,8 @@
   <string name="unmark_as_not_for_upload">Καταργήστε την επισήμανση ως όχι για μεταφόρτωση</string>
   <string name="marking_as_not_for_upload">Επισήμανση ως όχι για μεταφόρτωση</string>
   <string name="unmarking_as_not_for_upload">Κατάργηση επισήμανσης ως όχι για μεταφόρτωση</string>
-  <string name="show_already_actioned_pictures" fuzzy="true">Εμφάνιση εικόνων που έχουν ήδη ενεργοποιηθεί</string>
-  <string name="hiding_already_actioned_pictures" fuzzy="true">Απόκρυψη εικόνων που έχουν ήδη ενεργοποιηθεί</string>
+  <string name="show_already_actioned_pictures">Εμφάνιση εικόνων που έχουν ήδη χειριστεί</string>
+  <string name="hiding_already_actioned_pictures">Απόκρυψη εικόνων που έχουν ήδη χειριστεί</string>
   <string name="no_more_images_found">Δεν βρέθηκαν άλλες εικόνες</string>
   <string name="this_image_is_already_uploaded">Αυτή η εικόνα έχει ήδη μεταφορτωθεί</string>
   <string name="can_not_select_this_image_for_upload">Δεν είναι δυνατή η επιλογή αυτής της εικόνας για μεταφόρτωση</string>
@@ -790,12 +796,12 @@
   <string name="invalid_login_message">Η περίοδος σύνδεσης έληξε, παρακαλούμε συνδεθείτε ξανά</string>
   <string name="no_application_available_to_open_gpx_files">Δεν υπάρχει διαθέσιμη εφαρμογή για το άνοιγμα αρχείων GPX</string>
   <string name="file_saved_successfully">Το αρχείο αποθηκεύτηκε με επιτυχία</string>
-  <string name="do_you_want_to_open_gpx_file" fuzzy="true">Θέλετε να ανοίξετε το αρχείο GPX;</string>
-  <string name="do_you_want_to_open_kml_file" fuzzy="true">Θέλετε να ανοίξετε το αρχείο KML;</string>
-  <string name="failed_to_save_kml_file" fuzzy="true">Αποτυχία αποθήκευσης του αρχείου KML.</string>
-  <string name="failed_to_save_gpx_file" fuzzy="true">Αποτυχία αποθήκευσης του αρχείου GPX.</string>
-  <string name="saving_kml_file" fuzzy="true">Αποθήκευση αρχείου KML</string>
-  <string name="saving_gpx_file" fuzzy="true">Αποθήκευση αρχείου GPX</string>
+  <string name="do_you_want_to_open_gpx_file">Θέλετε να ανοίξετε το αρχείο GPX;</string>
+  <string name="do_you_want_to_open_kml_file">Θέλετε να ανοίξετε το αρχείο KML;</string>
+  <string name="failed_to_save_kml_file">Αποτυχία αποθήκευσης του αρχείου KML.</string>
+  <string name="failed_to_save_gpx_file">Αποτυχία αποθήκευσης του αρχείου GPX.</string>
+  <string name="saving_kml_file">Αποθήκευση ως αρχείο KML...</string>
+  <string name="saving_gpx_file">Αποθήκευση ως αρχείο GPX...</string>
   <plurals name="custom_picker_images_selected_title_appendix">
     <item quantity="one">%1$d επιλεγμένη εικόνα</item>
     <item quantity="other">Επιλέχθηκαν %1$d εικόνες</item>
@@ -824,6 +830,7 @@
   <string name="custom_selector_cancel">Ακύρωση</string>
   <string name="custom_selector_folder_deleted_success">Ο φάκελος %1$s διαγράφηκε με επιτυχία</string>
   <string name="custom_selector_folder_deleted_failure">Αποτυχία διαγραφής του φακέλου %1$s</string>
+  <string name="custom_selector_error_trashing_folder_contents">Σφάλμα κατά την αποστολή των περιεχομένων του φακέλου στον κάδο απορριμμάτων: %1$s</string>
   <string name="red_pin">Αυτό το μέρος δεν έχει ακόμα φωτογραφία, πήγαινε να βγάλεις μία!</string>
   <string name="green_pin">Αυτό το μέρος έχει ήδη μια φωτογραφία.</string>
   <string name="grey_pin">Τώρα ελέγχεται αν αυτό το μέρος έχει φωτογραφία.</string>
@@ -839,4 +846,5 @@
   <string name="image_tag_line_created_and_uploaded_by">Δημιουργήθηκε και μεταφορτώθηκε από: %1$s</string>
   <string name="image_tag_line_created_by_and_uploaded_by">Δημιουργήθηκε από %1$s και μεταφορτώθηκε από %2$s</string>
   <string name="nominated_for_deletion_btn">Προτάθηκε για Διαγραφή</string>
+  <string name="custom_selector_max_image_limit_reached">Μπορείτε να επιλέξετε μόνο έως %d εικόνες.</string>
 </resources>
