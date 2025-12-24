@@ -1229,7 +1229,11 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
      *
      * @return a `LatLng` object denoting the location of the top right corner of the map.
      */
-    override fun getScreenTopRight(): LatLng {
+        override fun getScreenTopRight(): LatLng? {
+        if (binding?.map?.projection == null || binding!!.map.width == 0) {
+            Timber.e("Map projection or dimensions are invalid. Cannot calculate screenTopRight.")
+            return null
+        }
         val screenTopRight = binding!!.map.projection
             .fromPixels(binding!!.map.width, 0)
         return LatLng(
@@ -1242,7 +1246,11 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
      *
      * @return a `LatLng` object denoting the location of the bottom left corner of the map.
      */
-    override fun getScreenBottomLeft(): LatLng {
+    override fun getScreenBottomLeft(): LatLng? {
+        if (binding?.map?.projection == null || binding!!.map.height == 0) {
+            Timber.e("Map projection or dimensions are invalid. Cannot calculate screenBottomLeft.")
+            return null
+        }
         val screenBottomLeft = binding!!.map.projection
             .fromPixels(0, binding!!.map.height)
         return LatLng(
@@ -1264,7 +1272,7 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
         // Note: This only happens when the nearby fragment is opened immediately upon app launch,
         // otherwise {screenTopRightLatLng} and {screenBottomLeftLatLng} are used to determine
         // the east and west corner LatLng.
-        if (screenTopRightLatLng.latitude == 0.0 && screenTopRightLatLng.longitude == 0.0 && screenBottomLeftLatLng.latitude == 0.0 && screenBottomLeftLatLng.longitude == 0.0) {
+        if (screenTopRightLatLng?.latitude == 0.0 && screenTopRightLatLng?.longitude == 0.0 && screenBottomLeftLatLng?.latitude == 0.0 && screenBottomLeftLatLng.longitude == 0.0) {
             val delta = 0.009
             val westCornerLat = currentLatLng.latitude - delta
             val westCornerLong = currentLatLng.longitude - delta
@@ -1589,8 +1597,8 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
 
     private fun populatePlacesForCurrentLocation(
         currentLatLng: LatLng?,
-        screenTopRight: LatLng,
-        screenBottomLeft: LatLng,
+        screenTopRight: LatLng?,
+        screenBottomLeft: LatLng?,
         searchLatLng: LatLng,
         customQuery: String?
     ) {
@@ -1642,8 +1650,8 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
 
     private fun populatePlacesForAnotherLocation(
         currentLatLng: LatLng?,
-        screenTopRight: LatLng,
-        screenBottomLeft: LatLng,
+        screenTopRight: LatLng?,
+        screenBottomLeft: LatLng?,
         searchLatLng: LatLng,
         customQuery: String?
     ) {
