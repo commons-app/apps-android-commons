@@ -21,6 +21,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.exifinterface.media.ExifInterface
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.github.chrisbanes.photoview.PhotoView
 import fr.free.nrw.commons.CameraPosition
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.contributions.MainActivity
@@ -240,6 +241,11 @@ class UploadMediaDetailFragment : UploadBaseFragment(), UploadMediaDetailsContra
         presenter.setupBasicKvStoreFactory { BasicKvStore(requireActivity(), it) }
 
         presenter.receiveImage(uploadableFile, place, inAppPictureLocation)
+
+        if (binding.backgroundImage is PhotoView) {
+            (binding.backgroundImage as PhotoView).setMaximumScale(10.0f)
+            Timber.d("PhotoView max scale set to 10.0f for deeper zoom.")
+        }
 
         with (binding){
             if (indexOfFragment == 0) {
