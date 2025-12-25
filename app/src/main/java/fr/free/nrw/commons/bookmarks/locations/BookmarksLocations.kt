@@ -33,12 +33,6 @@ fun BookmarksLocations.toPlace(): Place {
         1F
     )
 
-    val builder = Sitelinks.Builder().apply {
-        setWikipediaLink(locationWikipediaLink)
-        setWikidataLink(locationWikidataLink)
-        setCommonsLink(locationCommonsLink)
-    }
-
     return Place(
         locationLanguage,
         locationName,
@@ -46,7 +40,7 @@ fun BookmarksLocations.toPlace(): Place {
         locationDescription,
         location,
         locationCategory,
-        builder.build(),
+        Sitelinks(locationWikipediaLink, locationCommonsLink, locationWikidataLink),
         locationPic,
         locationExists
     )
@@ -54,19 +48,19 @@ fun BookmarksLocations.toPlace(): Place {
 
 fun Place.toBookmarksLocations(): BookmarksLocations {
     return BookmarksLocations(
-        locationName = name,
-        locationLanguage = language,
-        locationDescription = longDescription,
-        locationCategory = category,
-        locationLat = location.latitude,
-        locationLong = location.longitude,
+        locationName = name!!,
+        locationLanguage = language!!,
+        locationDescription = longDescription!!,
+        locationCategory = category!!,
+        locationLat = location!!.latitude,
+        locationLong = location!!.longitude,
         locationLabelText = label?.text ?: "",
         locationLabelIcon = label?.icon,
-        locationImageUrl = pic,
-        locationWikipediaLink = siteLinks.wikipediaLink.toString(),
-        locationWikidataLink = siteLinks.wikidataLink.toString(),
-        locationCommonsLink = siteLinks.commonsLink.toString(),
-        locationPic = pic,
-        locationExists = exists
+        locationImageUrl = pic!!,
+        locationWikipediaLink = siteLinks?.wikipediaLink ?: "",
+        locationWikidataLink = siteLinks?.wikidataLink ?: "",
+        locationCommonsLink = siteLinks?.commonsLink ?: "",
+        locationPic = pic!!,
+        locationExists = exists!!
     )
 }

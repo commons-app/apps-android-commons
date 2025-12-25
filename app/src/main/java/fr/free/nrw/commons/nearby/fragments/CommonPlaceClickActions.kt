@@ -34,7 +34,7 @@ class CommonPlaceClickActions
                 if (applicationKvStore.getBoolean("login_skipped", false)) {
                     showLoginDialog()
                 } else {
-                    Timber.d("Camera button tapped. Image title: ${place.getName()}Image desc: ${place.longDescription}")
+                    Timber.d("Camera button tapped. Image title: ${place.name}Image desc: ${place.longDescription}")
                     storeSharedPrefs(place)
                     contributionController.initiateCameraPick(activity, launcher, resultLauncher)
                 }
@@ -78,7 +78,7 @@ class CommonPlaceClickActions
                 if (applicationKvStore.getBoolean("login_skipped", false)) {
                     showLoginDialog()
                 } else {
-                    Timber.d("Gallery button tapped. Image title: ${place.getName()}Image desc: ${place.getLongDescription()}")
+                    Timber.d("Gallery button tapped. Image title: ${place.name}Image desc: ${place.longDescription}")
                     storeSharedPrefs(place)
                     contributionController.initiateGalleryPick(activity, galleryPickLauncherForResult, false)
                 }
@@ -94,9 +94,9 @@ class CommonPlaceClickActions
                         enableBy(R.id.nearby_info_menu_wikipedia_article, place.hasWikipediaLink())
                         setOnMenuItemClickListener { item: MenuItem ->
                             when (item.itemId) {
-                                R.id.nearby_info_menu_commons_article -> openWebView(place.siteLinks.commonsLink)
-                                R.id.nearby_info_menu_wikidata_article -> openWebView(place.siteLinks.wikidataLink)
-                                R.id.nearby_info_menu_wikipedia_article -> openWebView(place.siteLinks.wikipediaLink)
+                                R.id.nearby_info_menu_commons_article -> openWebView(place.siteLinks!!.commonsUri!!)
+                                R.id.nearby_info_menu_wikidata_article -> openWebView(place.siteLinks!!.wikidataUri!!)
+                                R.id.nearby_info_menu_wikipedia_article -> openWebView(place.siteLinks!!.wikipediaUri!!)
                                 else -> false
                             }
                         }
@@ -105,7 +105,7 @@ class CommonPlaceClickActions
 
         fun onDirectionsClicked(): (Place) -> Unit =
             {
-                handleGeoCoordinates(activity, it.getLocation())
+                handleGeoCoordinates(activity, it.location!!)
             }
 
         private fun storeSharedPrefs(selectedPlace: Place) {

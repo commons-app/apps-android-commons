@@ -50,7 +50,6 @@ class BookMarkLocationDaoTest {
     private lateinit var exampleLabel: Label
     private lateinit var exampleUri: Uri
     private lateinit var exampleLocation: LatLng
-    private lateinit var builder: Sitelinks.Builder
 
     @Before
     fun setUp() {
@@ -65,12 +64,6 @@ class BookMarkLocationDaoTest {
 
         bookmarkLocationsDao = database.bookmarkLocationsDao()
 
-        builder = Sitelinks.Builder().apply {
-            setWikipediaLink("wikipediaLink")
-            setWikidataLink("wikidataLink")
-            setCommonsLink("commonsLink")
-        }
-
         examplePlaceBookmark =
             Place(
                 "en",
@@ -79,7 +72,11 @@ class BookMarkLocationDaoTest {
                 "placeDescription",
                 exampleLocation,
                 "placeCategory",
-                builder.build(),
+                Sitelinks(
+                    wikipediaLink = "wikipediaLink",
+                    wikidataLink = "wikidataLink",
+                    commonsLink = "commonsLink"
+                ),
                 "picName",
                 false,
             )
@@ -106,7 +103,7 @@ class BookMarkLocationDaoTest {
     fun testFindBookmarkByNameForTrue() = runBlocking {
         bookmarkLocationsDao.addBookmarkLocation(examplePlaceBookmark.toBookmarksLocations())
 
-        val exists = bookmarkLocationsDao.findBookmarkLocation(examplePlaceBookmark.name)
+        val exists = bookmarkLocationsDao.findBookmarkLocation(examplePlaceBookmark.name!!)
         assertTrue(exists)
     }
 

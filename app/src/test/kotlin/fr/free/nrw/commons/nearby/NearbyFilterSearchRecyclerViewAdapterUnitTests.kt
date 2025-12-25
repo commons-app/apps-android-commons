@@ -46,7 +46,7 @@ class NearbyFilterSearchRecyclerViewAdapterUnitTests {
     fun setUp() {
         MockitoAnnotations.openMocks(this)
         context = ApplicationProvider.getApplicationContext()
-        adapter = NearbyFilterSearchRecyclerViewAdapter(context, ArrayList<Label>(Label.valuesAsList()), recyclerView)
+        adapter = NearbyFilterSearchRecyclerViewAdapter(context, ArrayList<Label>(Label.entries))
         viewHolder.placeTypeIcon = imageView
         viewHolder.placeTypeLabel = textView
         viewHolder.placeTypeLayout = linearLayout
@@ -61,7 +61,7 @@ class NearbyFilterSearchRecyclerViewAdapterUnitTests {
     @Test
     @Throws(Exception::class)
     fun testSetCallback() {
-        adapter.setCallback(callback)
+        adapter.callback = callback
     }
 
     @Test

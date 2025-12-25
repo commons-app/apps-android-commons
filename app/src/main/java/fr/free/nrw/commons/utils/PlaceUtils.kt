@@ -34,11 +34,11 @@ object PlaceUtils {
                     media.fallbackDescription,
                     media.coordinates,
                     media.categories.toString(),
-                    Sitelinks.Builder()
-                        .setCommonsLink(media.pageTitle.canonicalUri)
-                        .setWikipediaLink("") // we don't necessarily have them, can be fetched later
-                        .setWikidataLink("") // we don't necessarily have them, can be fetched later
-                        .build(),
+                    Sitelinks(
+                        commonsLink = media.pageTitle.canonicalUri,
+                        wikipediaLink = "", // we don't necessarily have them, can be fetched later
+                        wikidataLink = "" // we don't necessarily have them, can be fetched later
+                    ),
                     media.imageUrl,
                     media.thumbUrl,
                     ""

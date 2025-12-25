@@ -408,14 +408,14 @@ class UploadMediaDetailFragment : UploadBaseFragment(), UploadMediaDetailsContra
                 String.format(
                     Locale.getDefault(),
                     getString(R.string.upload_nearby_place_found_description_plural),
-                    place.getName()
+                    place.name
                 )
             } else {
                 // Use singular message if only one file is selected
                 String.format(
                     Locale.getDefault(),
                     getString(R.string.upload_nearby_place_found_description_singular),
-                    place.getName()
+                    place.name
                 )
             }
 

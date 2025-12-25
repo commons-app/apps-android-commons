@@ -1,7 +1,6 @@
 package fr.free.nrw.commons.nearby.presenter
 
 import android.location.Location
-import android.view.View
 import androidx.annotation.MainThread
 import androidx.lifecycle.LifecycleCoroutineScope
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao
@@ -25,54 +24,37 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.ensureActive
-import kotlinx.coroutines.job
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
-import okhttp3.internal.wait
 import timber.log.Timber
-import java.io.IOException
 import java.lang.reflect.InvocationHandler
 import java.lang.reflect.Method
 import java.lang.reflect.Proxy
 import java.util.concurrent.CopyOnWriteArrayList
 
-class NearbyParentFragmentPresenter
-    (
+class NearbyParentFragmentPresenter(
     val bookmarkLocationDao: BookmarkLocationsDao,
     val placesRepository: PlacesRepository,
     val nearbyController: NearbyController
-) :
-    NearbyParentFragmentContract.UserActions,
-    WikidataP18EditListener, LocationUpdateListener {
+) : NearbyParentFragmentContract.UserActions, WikidataP18EditListener, LocationUpdateListener {
 
     private var isNearbyLocked = false
     private var currentLatLng: LatLng? = null
-
     private var placesLoadedOnce = false
-
     private var customQuery: String? = null
-
     private var nearbyParentFragmentView: NearbyParentFragmentContract.View = DUMMY
-
     private var placeSearchJob: Job? = null
     private var isSearchInProgress = false
     private var localPlaceSearchJob: Job? = null
-
     private val clickedPlaces = CopyOnWriteArrayList<Place>()
-
-    /**
-     * used to tell the asynchronous place detail loading job that a pin was clicked
-     * so as to prevent it from turning grey on the next pin detail update
-     *
-     * @param place the place whose details have already been loaded because clicked pin
-     */
-    fun handlePinClicked(place: Place) {
-        clickedPlaces.add(place)
-    }
+    private var schedulePlacesUpdateJob: Job? = null
 
     // the currently running job for async loading of pin details, cancelled when new pins are come
     private var loadPlacesDataAyncJob: Job? = null
+
+    // used to tell the asynchronous place detail loading job that the places' bookmarked status
+    // changed so as to prevent inconsistencies
+    private var bookmarkChangedPlaces = CopyOnWriteArrayList<Place>()
 
     /**
      * - **batchSize**: number of places to fetch details of in a single request
@@ -82,8 +64,6 @@ class NearbyParentFragmentPresenter
         const val BATCH_SIZE = 10
         const val CONNECTION_COUNT = 20
     }
-
-    private var schedulePlacesUpdateJob: Job? = null
 
     /**
      * - **skippedCount**: stores the number of updates skipped
@@ -98,9 +78,15 @@ class NearbyParentFragmentPresenter
         const val SKIP_DELAY_MS = 100L
     }
 
-    // used to tell the asynchronous place detail loading job that the places' bookmarked status
-    // changed so as to prevent inconsistencies
-    private var bookmarkChangedPlaces = CopyOnWriteArrayList<Place>()
+    /**
+     * used to tell the asynchronous place detail loading job that a pin was clicked
+     * so as to prevent it from turning grey on the next pin detail update
+     *
+     * @param place the place whose details have already been loaded because clicked pin
+     */
+    fun handlePinClicked(place: Place) {
+        clickedPlaces.add(place)
+    }
 
     /**
      * Schedules a UI update for the provided list of `MarkerPlaceGroup` objects. Since, the update
@@ -115,20 +101,17 @@ class NearbyParentFragmentPresenter
     private suspend fun schedulePlacesUpdate(
         markerPlaceGroups: List<MarkerPlaceGroup>,
         force: Boolean = false
-    ) =
-        withContext(Dispatchers.Main) {
-            if (markerPlaceGroups.isEmpty()) return@withContext
-            schedulePlacesUpdateJob?.cancel()
-            schedulePlacesUpdateJob = launch {
-                if (!force && SchedulePlacesUpdateOptions.skippedCount++
-                    < SchedulePlacesUpdateOptions.SKIP_LIMIT
-                ) {
-                    delay(SchedulePlacesUpdateOptions.SKIP_DELAY_MS)
-                }
-                SchedulePlacesUpdateOptions.skippedCount = 0
-                updatePlaceGroupsToControllerAndRender(markerPlaceGroups)
+    ) = withContext(Dispatchers.Main) {
+        if (markerPlaceGroups.isEmpty()) return@withContext
+        schedulePlacesUpdateJob?.cancel()
+        schedulePlacesUpdateJob = launch {
+            if (!force && SchedulePlacesUpdateOptions.skippedCount++ < SchedulePlacesUpdateOptions.SKIP_LIMIT) {
+                delay(SchedulePlacesUpdateOptions.SKIP_DELAY_MS)
             }
+            SchedulePlacesUpdateOptions.skippedCount = 0
+            updatePlaceGroupsToControllerAndRender(markerPlaceGroups)
         }
+    }
 
     /**
      * Handles the user action of toggling the bookmarked status of a given place. Updates the
@@ -146,8 +129,7 @@ class NearbyParentFragmentPresenter
         scope?.launch {
             nowBookmarked = bookmarkLocationDao.updateBookmarkLocation(place)
             bookmarkChangedPlaces.add(place)
-            val placeIndex =
-                NearbyController.markerLabelList.indexOfFirst { it.place.location == place.location }
+            val placeIndex = NearbyController.markerLabelList.indexOfFirst { it.place.location == place.location }
             NearbyController.markerLabelList[placeIndex] = MarkerPlaceGroup(
                 nowBookmarked,
                 NearbyController.markerLabelList[placeIndex].place
@@ -164,9 +146,8 @@ class NearbyParentFragmentPresenter
         nearbyParentFragmentView = DUMMY
     }
 
-    override fun removeNearbyPreferences(applicationKvStore: JsonKvStore) {
-        Timber.d("Remove place objects")
-        applicationKvStore.remove(PLACE_OBJECT)
+    override fun removeNearbyPreferences(applicationKvStore: JsonKvStore?) {
+        applicationKvStore?.remove(PLACE_OBJECT)
     }
 
     fun initializeMapOperations() {
@@ -179,32 +160,29 @@ class NearbyParentFragmentPresenter
      * Sets click listeners of FABs, and 2 bottom sheets
      */
     override fun setActionListeners(applicationKvStore: JsonKvStore?) {
-        nearbyParentFragmentView.setFABPlusAction(View.OnClickListener { v: View? ->
-            if (applicationKvStore != null && applicationKvStore.getBoolean(
-                    "login_skipped", false
-                )
-            ) {
+        nearbyParentFragmentView.setFABPlusAction {
+            if (applicationKvStore != null && applicationKvStore.getBoolean("login_skipped", false)) {
                 // prompt the user to login
                 nearbyParentFragmentView.displayLoginSkippedWarning()
             } else {
                 nearbyParentFragmentView.animateFABs()
             }
-        })
+        }
 
-        nearbyParentFragmentView.setFABRecenterAction(View.OnClickListener { v: View? ->
+        nearbyParentFragmentView.setFABRecenterAction {
             nearbyParentFragmentView.recenterMap(currentLatLng)
-        })
+        }
     }
 
     override fun backButtonClicked(): Boolean {
         if (nearbyParentFragmentView.isAdvancedQueryFragmentVisible()) {
             nearbyParentFragmentView.showHideAdvancedQueryFragment(false)
             return true
-        } else if (nearbyParentFragmentView.isListBottomSheetExpanded()) {
+        } else if (nearbyParentFragmentView.isListBottomSheetExpanded) {
             // Back should first hide the bottom sheet if it is expanded
             nearbyParentFragmentView.listOptionMenuItemClicked()
             return true
-        } else if (nearbyParentFragmentView.isDetailsBottomSheetVisible()) {
+        } else if (nearbyParentFragmentView.isDetailsBottomSheetVisible) {
             nearbyParentFragmentView.setBottomSheetDetailsSmaller()
             return true
         }
@@ -242,21 +220,13 @@ class NearbyParentFragmentPresenter
             return
         }
 
-        if (!nearbyParentFragmentView.isNetworkConnectionEstablished()) {
+        if (!nearbyParentFragmentView.isNetworkConnectionEstablished) {
             Timber.d("Network connection is not established")
             return
         }
 
         val lastLocation = nearbyParentFragmentView.getLastMapFocus()
-        currentLatLng = if (nearbyParentFragmentView.getMapCenter() != null) {
-            nearbyParentFragmentView.getMapCenter()
-        } else {
-            lastLocation
-        }
-        if (currentLatLng == null) {
-            Timber.d("Skipping update of nearby places as location is unavailable")
-            return
-        }
+        currentLatLng = nearbyParentFragmentView.getMapCenter()
 
         /**
          * Significant changed - Markers and current location will be updated together
@@ -303,12 +273,8 @@ class NearbyParentFragmentPresenter
                 ?.take(NearbyController.MAX_RESULTS)
                 ?.map {
                     // currently only the place's location is known but bookmarks are stored by name
-                    MarkerPlaceGroup(
-                        false,
-                        it
-                    )
-                }
-                ?: return
+                    MarkerPlaceGroup(false, it)
+                } ?: return
 
         lockUnlockNearby(false) // So that new location updates wont come
         nearbyParentFragmentView.setProgressBarVisibility(false)
@@ -344,7 +310,7 @@ class NearbyParentFragmentPresenter
             for (i in 0..updatedGroups.lastIndex) {
                 val repoPlace = placesRepository.fetchPlace(updatedGroups[i].place.entityID)
                 if (repoPlace != null && repoPlace.name != null && repoPlace.name != ""){
-                    updatedGroups[i].isBookmarked = bookmarkLocationDao.findBookmarkLocation(repoPlace.name)
+                    updatedGroups[i].isBookmarked = bookmarkLocationDao.findBookmarkLocation(repoPlace.name!!)
                     updatedGroups[i].place.apply {
                         name = repoPlace.name
                         isMonument = repoPlace.isMonument
@@ -379,12 +345,13 @@ class NearbyParentFragmentPresenter
                     for (indices in fetchPlacesChannel) {
                         ensureActive()
                         try {
-                            val fetchedPlaces =
-                                nearbyController.getPlaces(indices.map { updatedGroups[it].place })
+                            val fetchedPlaces = nearbyController.getPlaces(
+                                indices.map { updatedGroups[it].place }
+                            ) ?: emptyList()
                             collectResults.send(
                                 fetchedPlaces.mapIndexed { index, place ->
                                     Pair(indices[index], MarkerPlaceGroup(
-                                        bookmarkLocationDao.findBookmarkLocation(place.name),
+                                        bookmarkLocationDao.findBookmarkLocation(place.name!!),
                                         place
                                     ))
                                 }
@@ -398,11 +365,11 @@ class NearbyParentFragmentPresenter
                                     try {
                                         val fetchedPlace = nearbyController.getPlaces(
                                             mutableListOf(updatedGroups[i].place)
-                                        )
+                                        ) ?: emptyList()
 
                                         onePlaceBatch.add(Pair(i, MarkerPlaceGroup(
                                             bookmarkLocationDao.findBookmarkLocation(
-                                                fetchedPlace[0].name
+                                                fetchedPlace[0].name!!
                                             ),
                                             fetchedPlace[0]
                                         )))
@@ -440,17 +407,15 @@ class NearbyParentFragmentPresenter
                 if (clickedPlacesIndex < clickedPlaces.size) {
                     val clickedPlacesBacklog = hashMapOf<LatLng, Place>()
                     while (clickedPlacesIndex < clickedPlaces.size) {
-                        clickedPlacesBacklog.put(
-                            clickedPlaces[clickedPlacesIndex].location,
+                        clickedPlacesBacklog[clickedPlaces[clickedPlacesIndex].location!!] =
                             clickedPlaces[clickedPlacesIndex]
-                        )
                         ++clickedPlacesIndex
                     }
                     for ((index, group) in updatedGroups.withIndex()) {
                         if (clickedPlacesBacklog.containsKey(group.place.location)) {
                             updatedGroups[index] = MarkerPlaceGroup(
                                 updatedGroups[index].isBookmarked,
-                                clickedPlacesBacklog[group.place.location]
+                                clickedPlacesBacklog[group.place.location]!!
                             )
                         }
                     }
@@ -459,18 +424,14 @@ class NearbyParentFragmentPresenter
                 if (bookmarkChangedPlacesIndex < bookmarkChangedPlaces.size) {
                     val bookmarkChangedPlacesBacklog = hashMapOf<LatLng, Place>()
                     while (bookmarkChangedPlacesIndex < bookmarkChangedPlaces.size) {
-                        bookmarkChangedPlacesBacklog.put(
-                            bookmarkChangedPlaces[bookmarkChangedPlacesIndex].location,
+                        bookmarkChangedPlacesBacklog[bookmarkChangedPlaces[bookmarkChangedPlacesIndex].location!!] =
                             bookmarkChangedPlaces[bookmarkChangedPlacesIndex]
-                        )
                         ++bookmarkChangedPlacesIndex
                     }
                     for ((index, group) in updatedGroups.withIndex()) {
                         if (bookmarkChangedPlacesBacklog.containsKey(group.place.location)) {
                             updatedGroups[index] = MarkerPlaceGroup(
-                                bookmarkLocationDao
-                                    .findBookmarkLocation(updatedGroups[index].place.name),
-                                updatedGroups[index].place
+                                bookmarkLocationDao.findBookmarkLocation(updatedGroups[index].place.name!!), updatedGroups[index].place
                             )
                         }
                     }
@@ -512,8 +473,10 @@ class NearbyParentFragmentPresenter
     }
 
     override fun filterByMarkerType(
-        selectedLabels: List<Label?>?, state: Int,
-        filterForPlaceState: Boolean, filterForAllNoneType: Boolean
+        selectedLabels: List<Label>?,
+        state: Int,
+        filterForPlaceState: Boolean,
+        filterForAllNoneType: Boolean
     ) {
         if (filterForAllNoneType) { // Means we will set labels based on states
             when (state) {
@@ -550,7 +513,6 @@ class NearbyParentFragmentPresenter
     @Override
     override fun handleMapScrolled(scope: LifecycleCoroutineScope?, isNetworkAvailable: Boolean) {
         scope ?: return
-
         placeSearchJob?.cancel()
         localPlaceSearchJob?.cancel()
         if (isNetworkAvailable) {
@@ -570,14 +532,14 @@ class NearbyParentFragmentPresenter
             loadPlacesDataAyncJob?.cancel()
             localPlaceSearchJob = scope.launch(Dispatchers.IO) {
                 delay(LOCAL_SCROLL_DELAY)
-                val mapFocus = nearbyParentFragmentView.mapFocus
+                val mapFocus = nearbyParentFragmentView.getMapFocus()
                 val markerPlaceGroups = placesRepository.fetchPlaces(
-                    nearbyParentFragmentView.screenBottomLeft,
-                    nearbyParentFragmentView.screenTopRight
+                    nearbyParentFragmentView.getScreenBottomLeft(),
+                    nearbyParentFragmentView.getScreenTopRight()
                 ).sortedBy { it.getDistanceInDouble(mapFocus) }.take(NearbyController.MAX_RESULTS)
                     .map {
                         MarkerPlaceGroup(
-                            bookmarkLocationDao.findBookmarkLocation(it.name), it
+                            bookmarkLocationDao.findBookmarkLocation(it.name!!), it
                         )
                     }
                 ensureActive()
@@ -609,15 +571,15 @@ class NearbyParentFragmentPresenter
         nearbyParentFragmentView.setCheckBoxState(CheckBoxTriStates.UNKNOWN)
     }
 
-    override fun setAdvancedQuery(query: String) {
-        this.customQuery = query
+    override fun setAdvancedQuery(query: String?) {
+        customQuery = query
     }
 
     override fun searchViewGainedFocus() {
-        if (nearbyParentFragmentView.isListBottomSheetExpanded()) {
+        if (nearbyParentFragmentView.isListBottomSheetExpanded) {
             // Back should first hide the bottom sheet if it is expanded
             nearbyParentFragmentView.hideBottomSheet()
-        } else if (nearbyParentFragmentView.isDetailsBottomSheetVisible()) {
+        } else if (nearbyParentFragmentView.isDetailsBottomSheetVisible) {
             nearbyParentFragmentView.hideBottomDetailsSheet()
         }
     }
@@ -642,9 +604,6 @@ class NearbyParentFragmentPresenter
      * @return Returns true if search this area button is used around our current location
      */
     fun searchCloseToCurrentLocation(): Boolean {
-        if (null == nearbyParentFragmentView.getLastMapFocus()) {
-            return true
-        }
         //TODO
         val myLocation = Location("")
         val destLocation = Location("")
@@ -667,7 +626,7 @@ class NearbyParentFragmentPresenter
         private val DUMMY = Proxy.newProxyInstance(
             NearbyParentFragmentContract.View::class.java.getClassLoader(),
             arrayOf<Class<*>>(NearbyParentFragmentContract.View::class.java),
-            InvocationHandler { proxy: Any?, method: Method?, args: Array<Any?>? ->
+            InvocationHandler { _: Any?, method: Method?, _: Array<Any?>? ->
                 if (method!!.name == "onMyEvent") {
                     return@InvocationHandler null
                 } else if (String::class.java == method.returnType) {
