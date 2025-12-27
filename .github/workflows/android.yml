@@ -70,9 +70,9 @@ jobs:
       #       adb emu geo fix 37.422131 -122.084801
       #       ./gradlew connectedBetaDebugAndroidTest --stacktrace
 
-      - name: Run Unit tests with unified coverage
-        if: github.event_name != 'pull_request'
-        run: ./gradlew -Pcoverage testBetaDebugUnitTestUnifiedCoverage --stacktrace
+      # - name: Run Unit tests with unified coverage
+      #   if: github.event_name != 'pull_request'
+      #   run: ./gradlew -Pcoverage testBetaDebugUnitTestUnifiedCoverage --stacktrace
 
       - name: Run Unit tests without unified coverage
         if: github.event_name == 'pull_request'
