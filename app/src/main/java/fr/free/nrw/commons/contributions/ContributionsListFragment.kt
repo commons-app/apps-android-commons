@@ -397,6 +397,10 @@ class ContributionsListFragment : CommonsDaggerSupportFragment(), ContributionsL
             showShortToast(context, R.string.menu_from_gallery)
             true
         }
+        binding!!.fabCustomGallery.setOnClickListener { v: View? ->
+            launchCustomSelector()
+            animateFAB(isFabOpen)
+        }
     }
 
     /**
@@ -407,7 +411,6 @@ class ContributionsListFragment : CommonsDaggerSupportFragment(), ContributionsL
             requireActivity(),
             customSelectorLauncherForResult
         )
-        animateFAB(isFabOpen)
     }
 
     fun scrollToTop() {
