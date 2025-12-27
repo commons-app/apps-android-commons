@@ -23,6 +23,8 @@ import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.channels.Channel.Factory
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.ensureActive
 import kotlinx.coroutines.job
@@ -316,6 +318,183 @@ class NearbyParentFragmentPresenter
     }
 
     /**
+     * Iterates through MarkerPlaceGroups and attempts to load the places from the local
+     * Place cache/repository. If a Place is in the cache, data from the Place is set into the
+     * associated MarkerPlaceGroup. Else, the index is added to the indicesToUpdate list.
+     *
+     * @param updatedGroups The MarkerPlaceGroups that contain Place entity IDs used to search the
+     * local cache for more information about the Place.
+     *
+     * @param indicesToUpdate The list of indices in updatedGroups where the associated Place
+     * was not stored in the local cache and will need to be retrieved in some other way.
+     */
+    suspend fun loadCachedPlaces(
+        updatedGroups: MutableList<MarkerPlaceGroup>,
+        indicesToUpdate: MutableList<Int>
+    ) {
+
+        for (i in 0..updatedGroups.lastIndex) {
+            val repoPlace = placesRepository.fetchPlace(updatedGroups[i].place.entityID)
+            if (repoPlace != null && repoPlace.name != null && repoPlace.name != ""){
+                updatedGroups[i].isBookmarked =
+                    bookmarkLocationDao.findBookmarkLocation(repoPlace.name)
+
+                updatedGroups[i].place.apply {
+                    name = repoPlace.name
+                    isMonument = repoPlace.isMonument
+                    pic = repoPlace.pic ?: ""
+                    exists = repoPlace.exists ?: true
+                    longDescription = repoPlace.longDescription ?: ""
+                    language = repoPlace.language
+                    siteLinks = repoPlace.siteLinks
+                }
+            } else {
+                indicesToUpdate.add(i)
+            }
+        }
+
+    }
+
+    /**
+     * Creates a Channel object that contains numbers divided into separate batches/lists.
+     * Each batch/list will have a maximum size.
+     *
+     * @param numbers The list of numbers that will be divided into multiple batches/lists.
+     * @param batchSize The maximum size of each batch/list which the numbers will be placed into.
+     *
+     * @return The Channel object which contains batches/lists of numbers.
+     */
+    suspend fun createBatches(numbers: MutableList<Int>, batchSize: Int): Channel<List<Int>> {
+
+        val batches = Channel<List<Int>>(Channel.UNLIMITED)
+
+        for (i in numbers.indices step batchSize) {
+            batches.send(
+                numbers.slice(
+                    i until (i + batchSize).coerceAtMost(
+                        numbers.size
+                    )
+                )
+            )
+        }
+
+        batches.close()
+        return batches
+    }
+
+    /**
+     * Method used by an individual thread/coroutine to request batch Place data from WikiData.
+     * This is intended to be used by many threads in parallel to speed up data retrieval.
+     *
+     * If a WikiData server error occurs, this method will launch individual threads for each Place
+     * because a single server error for one Place can cause WikiData to respond with an error
+     * for the entire batch.
+     *
+     * @param batchedIndicesToFetch Contains the batches of indices. These indices correspond to
+     * Places in updatedGroups that need more information fetched from WikiData.
+     * @param updatedGroups List containing incomplete Place data
+     * @param collectResults Holds the Place data fetched from Wikidata.
+     */
+    private suspend fun fetchPlacesThreadMethod(
+        batchedIndicesToFetch: Channel<List<Int>>,
+        updatedGroups: MutableList<MarkerPlaceGroup>,
+        collectResults: Channel<List<Pair<Int, MarkerPlaceGroup>>>
+    ) = coroutineScope {
+        for (indices in batchedIndicesToFetch) {
+            ensureActive()
+            try {
+                val fetchedPlaces =
+                    nearbyController.getPlaces(indices.map { updatedGroups[it].place })
+                collectResults.send(
+                    fetchedPlaces.mapIndexed { index, place ->
+                        Pair(indices[index], MarkerPlaceGroup(
+                            bookmarkLocationDao.findBookmarkLocation(place.name),
+                            place
+                        ))
+                    }
+                )
+            } catch (e: Exception) {
+                Timber.tag("NearbyPinDetails").e(e)
+                //HTTP request failed. Try individual places
+                for (i in indices) {
+                    launch {
+                        val onePlaceBatch = mutableListOf<Pair<Int, MarkerPlaceGroup>>()
+                        try {
+                            val fetchedPlace = nearbyController.getPlaces(
+                                mutableListOf(updatedGroups[i].place)
+                            )
+
+                            onePlaceBatch.add(Pair(i, MarkerPlaceGroup(
+                                bookmarkLocationDao.findBookmarkLocation(
+                                    fetchedPlace[0].name
+                                ),
+                                fetchedPlace[0]
+                            )))
+                        } catch (e: Exception) {
+                            Timber.tag("NearbyPinDetails").e(e)
+                            onePlaceBatch.add(Pair(i, updatedGroups[i]))
+                        }
+                        collectResults.send(onePlaceBatch)
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * Launches a specific number of threads to retrieve Place data in parallel from the
+     * WikiData servers.
+     *
+     * @param numThreads The number of threads to launch in parallel
+     * @param batchedIndicesToFetch Contains the batches of indices. These indices correspond to
+     * Places in updatedGroups that need more information fetched from WikiData.
+     * @param updatedGroups List containing Place data
+     * @param collectResults Holds the Place data fetched from Wikidata.
+     */
+    private suspend fun launchFetchPlacesThreads(
+        numThreads: Int,
+        batchedIndicesToFetch: Channel<List<Int>>,
+        updatedGroups: MutableList<MarkerPlaceGroup>,
+        collectResults: Channel<List<Pair<Int, MarkerPlaceGroup>>>
+    ) = coroutineScope {
+        repeat(numThreads) {
+            launch(Dispatchers.IO) {
+                fetchPlacesThreadMethod(batchedIndicesToFetch, updatedGroups, collectResults)
+            }
+        }
+    }
+
+    /**
+     * Places the fetched WikiData Place data into associated MarkerPlaceGroups
+     *
+     * @param resultList The Place data fetched from WikiData
+     * @param updatedGroups The MarkerPlaceGroups which will be updated with the data fetched
+     * from WikiData
+     */
+    private fun processResults(
+        resultList: List<Pair<Int, MarkerPlaceGroup>>,
+        updatedGroups: MutableList<MarkerPlaceGroup>
+    ) {
+
+        for ((index, fetchedPlaceGroup) in resultList) {
+            val existingPlace = updatedGroups[index].place
+            val finalPlaceGroup = MarkerPlaceGroup(
+                fetchedPlaceGroup.isBookmarked,
+                fetchedPlaceGroup.place.apply {
+                    location = existingPlace.location
+                    distance = existingPlace.distance
+                    isMonument = existingPlace.isMonument
+                }
+            )
+            updatedGroups[index] = finalPlaceGroup
+            placesRepository
+                .save(finalPlaceGroup.place)
+                .subscribeOn(Schedulers.io())
+                .subscribe()
+        }
+    }
+
+    /**
      * Load the places' details from cache and Wikidata query, and update these details on the map
      * as and when they arrive.
      *
@@ -341,101 +520,25 @@ class NearbyParentFragmentPresenter
             val updatedGroups = nearbyPlaceGroups.toMutableList()
             // first load cached places:
             val indicesToUpdate = mutableListOf<Int>()
-            for (i in 0..updatedGroups.lastIndex) {
-                val repoPlace = placesRepository.fetchPlace(updatedGroups[i].place.entityID)
-                if (repoPlace != null && repoPlace.name != null && repoPlace.name != ""){
-                    updatedGroups[i].isBookmarked = bookmarkLocationDao.findBookmarkLocation(repoPlace.name)
-                    updatedGroups[i].place.apply {
-                        name = repoPlace.name
-                        isMonument = repoPlace.isMonument
-                        pic = repoPlace.pic ?: ""
-                        exists = repoPlace.exists ?: true
-                        longDescription = repoPlace.longDescription ?: ""
-                        language = repoPlace.language
-                        siteLinks = repoPlace.siteLinks
-                    }
-                } else {
-                    indicesToUpdate.add(i)
-                }
-            }
+
+            loadCachedPlaces(updatedGroups, indicesToUpdate)
+
             schedulePlacesUpdate(updatedGroups, force = true)
             // channel for lists of indices of places, each list to be fetched in a single request
-            val fetchPlacesChannel = Channel<List<Int>>(Channel.UNLIMITED)
-            var totalBatches = 0
-            for (i in indicesToUpdate.indices step LoadPlacesAsyncOptions.BATCH_SIZE) {
-                ++totalBatches
-                fetchPlacesChannel.send(
-                    indicesToUpdate.slice(
-                        i until (i + LoadPlacesAsyncOptions.BATCH_SIZE).coerceAtMost(
-                            indicesToUpdate.size
-                        )
-                    )
-                )
-            }
-            fetchPlacesChannel.close()
-            val collectResults = Channel<List<Pair<Int, MarkerPlaceGroup>>>(totalBatches)
-            repeat(LoadPlacesAsyncOptions.CONNECTION_COUNT) {
-                launch(Dispatchers.IO) {
-                    for (indices in fetchPlacesChannel) {
-                        ensureActive()
-                        try {
-                            val fetchedPlaces =
-                                nearbyController.getPlaces(indices.map { updatedGroups[it].place })
-                            collectResults.send(
-                                fetchedPlaces.mapIndexed { index, place ->
-                                    Pair(indices[index], MarkerPlaceGroup(
-                                        bookmarkLocationDao.findBookmarkLocation(place.name),
-                                        place
-                                    ))
-                                }
-                            )
-                        } catch (e: Exception) {
-                            Timber.tag("NearbyPinDetails").e(e)
-                            //HTTP request failed. Try individual places
-                            for (i in indices) {
-                                launch {
-                                    val onePlaceBatch = mutableListOf<Pair<Int, MarkerPlaceGroup>>()
-                                    try {
-                                        val fetchedPlace = nearbyController.getPlaces(
-                                            mutableListOf(updatedGroups[i].place)
-                                        )
+            val batchedIndicesToFetch =
+                createBatches(indicesToUpdate, LoadPlacesAsyncOptions.BATCH_SIZE)
 
-                                        onePlaceBatch.add(Pair(i, MarkerPlaceGroup(
-                                            bookmarkLocationDao.findBookmarkLocation(
-                                                fetchedPlace[0].name
-                                            ),
-                                            fetchedPlace[0]
-                                        )))
-                                    } catch (e: Exception) {
-                                        Timber.tag("NearbyPinDetails").e(e)
-                                        onePlaceBatch.add(Pair(i, updatedGroups[i]))
-                                    }
-                                    collectResults.send(onePlaceBatch)
-                                }
-                            }
-                        }
-                    }
-                }
-            }
+            val collectResults = Channel<List<Pair<Int, MarkerPlaceGroup>>>(Factory.UNLIMITED)
+
+            launchFetchPlacesThreads(LoadPlacesAsyncOptions.CONNECTION_COUNT, batchedIndicesToFetch,
+                updatedGroups, collectResults)
+
             var collectCount = 0
             while (collectCount < indicesToUpdate.size) {
                 val resultList = collectResults.receive()
-                for ((index, fetchedPlaceGroup) in resultList) {
-                    val existingPlace = updatedGroups[index].place
-                    val finalPlaceGroup = MarkerPlaceGroup(
-                        fetchedPlaceGroup.isBookmarked,
-                        fetchedPlaceGroup.place.apply {
-                            location = existingPlace.location
-                            distance = existingPlace.distance
-                            isMonument = existingPlace.isMonument
-                        }
-                    )
-                    updatedGroups[index] = finalPlaceGroup
-                    placesRepository
-                        .save(finalPlaceGroup.place)
-                        .subscribeOn(Schedulers.io())
-                        .subscribe()
-                }
+
+                processResults(resultList, updatedGroups)
+
                 // handle any places clicked
                 if (clickedPlacesIndex < clickedPlaces.size) {
                     val clickedPlacesBacklog = hashMapOf<LatLng, Place>()
