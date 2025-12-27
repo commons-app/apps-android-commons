@@ -145,7 +145,7 @@ class MediaDetailPagerFragment : CommonsDaggerSupportFragment(), OnPageChangeLis
         if (activity is MainActivity) {
             (activity as MainActivity).showTabs()
         }
-        binding = null
+        // binding = null
     }
 
     /**
