@@ -15,7 +15,7 @@ class ResultTuple {
     }
 
     constructor() {
-        language = "bug" // Basa Ugi language -  TODO Respect the `Default description language`　setting.
+        language = ""
         type = ""
         value = ""
     }
