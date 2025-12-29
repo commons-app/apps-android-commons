@@ -486,8 +486,8 @@
   <string name="welcome_dont_upload_content_description">Contoh gambar yang sebaiknya tidak diunggah</string>
   <string name="skip_image">Lewati gambar ini</string>
   <string name="download_failed_we_cannot_download_the_file_without_storage_permission" fuzzy="true">Pengunduhan Gagal!!. Kami tidak dapat mengunduh berkas ini tanpa perizinan penyimpanan eksternal.</string>
-  <string name="manage_exif_tags">Mengelola Tag EXIF</string>
-  <string name="manage_exif_tags_summary">Pilih tag EXIF yang dipertahankan ketika mengunggah</string>
+  <string name="manage_exif_tags">Kelola Tanda EXIF</string>
+  <string name="manage_exif_tags_summary">Pilih tanda EXIF mana yang ingin dipertahankan dalam unggahan.</string>
   <string name="exif_tag_name_author">Pembuat</string>
   <string name="exif_tag_name_copyright">Hak cipta</string>
   <string name="exif_tag_name_location">Lokasi</string>
@@ -631,7 +631,7 @@
   <string name="limited_connection_explanation">Anda menyalakan mode sambungan terbatas. Semua pengunggahan ditunda dan akan dilanjutkan begitu Anda mematikan mode ini.</string>
   <string name="limited_connection_is_on">Mode sambungan terbatas sedang menyala.</string>
   <string name="media_details_tooltip">Silakan tulis keterangan singkat yang menjelaskan apa yang gambar Anda tampilkan. Dalam deskripsi, katakan apa yang membuat gambar ini menarik atau biasa atau langka, dan jelaskan konteksnya, baik yang tampak maupun tidak. Gunakan istilah yang setepat mungkin.</string>
-  <string name="depicts_tooltip">Silakan cari dan pilih semua konsep yang gambar ini tampilkan. Usahakan sespesifik mungkin. Jika gambarnya menampilkan beberapa hal, pilih semuanya selama masuk akal. Jangan pilih tag yang umum apabila ada tag yang lebih spesifik.</string>
+  <string name="depicts_tooltip">Silakan cari dan pilih semua konsep yang gambar ini tampilkan. Usahakan sespesifik mungkin. Jika gambarnya menampilkan beberapa hal, pilih semuanya selama masuk akal. Jangan pilih tanda yang umum apabila ada tanda yang lebih spesifik.</string>
   <string name="categories_tooltip">Silakan pilih kategori yang sesuai. Tidak seperti penggambaran, kategori hanya berbahasa Inggris.</string>
   <string name="license_tooltip">Commons membuat gambar Anda dapat digunakan kembali dan diadaptasi oleh siapa saja. Apakah Anda ingin melepaskan semua hak? Apakah Anda ingin diatribusikan? Apakah Anda ingin adaptasi gambar ini menggunakan lisensi yang sama?</string>
   <string name="depicts_step_title">Menggambarkan</string>
