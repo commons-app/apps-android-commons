@@ -81,6 +81,9 @@ import org.osmdroid.views.overlay.TilesOverlay
 import timber.log.Timber
 import javax.inject.Inject
 import javax.inject.Named
+import androidx.core.text.HtmlCompat
+
+
 
 class ExploreMapFragment : CommonsDaggerSupportFragment(), ExploreMapContract.View,
     LocationUpdateListener, LocationPermissionCallback {
@@ -271,6 +274,7 @@ class ExploreMapFragment : CommonsDaggerSupportFragment(), ExploreMapContract.Vi
             override fun onZoom(event: ZoomEvent?): Boolean = false
         })
         // removed tha permission check here to prevent it from running on fragment creation
+
     }
 
     override fun onResume() {
@@ -675,8 +679,8 @@ class ExploreMapFragment : CommonsDaggerSupportFragment(), ExploreMapContract.Vi
             descriptionText
         else
             descriptionText.replaceFirst(".$".toRegex(), ""))
-        // Set the short description after we remove place name from long description
-        binding!!.bottomSheetDetailsBinding.description.text = descriptionText
+        // Set the short description after we remove place name from long description and we render the HTML tags
+        binding!!.bottomSheetDetailsBinding.description.text = HtmlCompat.fromHtml(descriptionText, HtmlCompat.FROM_HTML_MODE_LEGACY)
     }
 
     override fun addSearchThisAreaButtonAction() {
