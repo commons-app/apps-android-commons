@@ -5,6 +5,8 @@ on:
     types: [opened, synchronize]
 
 permissions:
+  contents: read
+  issues: write
   pull-requests: write
   models: read
 
@@ -17,17 +19,19 @@ jobs:
         uses: actions/ai-inference@v1
         id: analyze
         with:
+          temperature: 0
+          max-tokens: 10
           prompt: |
             Analyse this pull request to determine if it contains unrelated changes.
             A pull request should modify only the code that really needs to be modified to solve the issue at hand. Changes unrelated to the issue at hand can be made in other pull requests.
-            
+
             Examples of changes that are not acceptable:
             * Fixing indentation or formatting in unrelated files or in unrelated parts of a file.
             * Adding or removing unrelated comments.
-            
+
             Pull Request Title: ${{ github.event.pull_request.title }}
             Pull Request Description: ${{ github.event.pull_request.body }}
-            
+
             Does this pull request appear to mix unrelated changes? Respond with only "yes" or "no".
           model: openai/gpt-4o-mini
 
