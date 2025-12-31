@@ -1,5 +1,11 @@
 # Wikimedia Commons for Android
 
+## v6.2.1
+
+### What's changed
+* The app no longer crashes on navigating from the MainActivity to other activities
+* Support for larger zoom levels on the image upload preview screen
+
 ## v6.2.0
 
 ### What's changed
