@@ -25,26 +25,17 @@
 -->
 <resources>
   <string name="commons_facebook">Trang Facebook của Commons</string>
-  <string name="commons_github">Mã nguồn Commons tại GitHub</string>
+  <string name="commons_github" fuzzy="true">Mã nguồn Commons tại GitHub</string>
   <string name="commons_logo">Biểu trưng Commons</string>
   <string name="commons_website">Trang web Commons</string>
-  <string name="exit_location_picker">Chọn vị trí thoát</string>
   <string name="submit">Gửi</string>
   <string name="add_another_description">Thêm mô tả khác</string>
   <string name="add_new_contribution">Thêm đóng góp mới</string>
   <string name="add_contribution_from_camera">Thêm đóng góp từ máy ảnh</string>
   <string name="add_contribution_from_photos">Thêm đóng góp từ Ảnh</string>
-  <string name="add_contribution_from_contributions_gallery">Thêm đóng góp từ thư viện đóng góp trước đây</string>
-  <string name="show_captions">Chú thích</string>
-  <string name="row_item_language_description">Mô tả ngôn ngữ</string>
-  <string name="row_item_caption">Chú thích</string>
   <string name="show_captions_description">Miêu tả</string>
   <string name="nearby_row_image">Hình ảnh</string>
   <string name="nearby_all">Tất cả</string>
-  <string name="nearby_filter_toggle">Bật lên</string>
-  <string name="nearby_filter_search">Chế độ xem tìm kiếm</string>
-  <string name="nearby_filter_state">Trạng thái địa điểm</string>
-  <string name="appwidget_img">Bức ảnh trong ngày</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">%1$d tập tin đang được tải lên</item>
     <item quantity="other">%1$d tập tin đang được tải lên</item>
@@ -80,17 +71,14 @@
   <string name="signup">Mở tài khoản</string>
   <string name="logging_in_title">Đang đăng nhập</string>
   <string name="logging_in_message">Vui lòng chờ…</string>
-  <string name="updating_caption_title">Cập nhật chú thích và mô tả</string>
   <string name="updating_caption_message">Vui lòng chờ…</string>
   <string name="login_success">Đã đăng nhập thành công!</string>
   <string name="login_failed">Đăng nhập thất bại!</string>
   <string name="upload_failed">Không tìm thấy tập tin. Xin vui lòng thử tập tin khác.</string>
   <string name="retry_limit_reached">Đã đạt đến giới hạn thử lại tối đa! Vui lòng hủy bỏ tải lên và thử lại</string>
   <string name="unrestricted_battery_mode">Tắt tính năng tối ưu hóa pin?</string>
-  <string name="suggest_unrestricted_mode">Tải lên hơn 3 ảnh sẽ hoạt động ổn định hơn khi tắt tính năng tối ưu hóa pin. Vui lòng tắt tính năng tối ưu hóa pin cho ứng dụng Commons trong phần cài đặt để trải nghiệm tải lên mượt mà hơn. \n\nCác bước có thể thực hiện để tắt tính năng tối ưu hóa pin:\n\nBước 1: Nhấn vào nút \'Cài đặt\' bên dưới.\n\nBước 2: Chuyển từ \'Chưa tối ưu hóa\' sang \'Tất cả ứng dụng\'.\n\nBước 3: Tìm kiếm \"Commons\" hoặc \"fr.free.nrw.commons\".\n\nBước 4: Nhấn vào đó và chọn \'Không tối ưu hóa\'.\n\nBước 5: Nhấn \'Xong\'.</string>
   <string name="authentication_failed">Xác thực thất bại, vui lòng đăng nhập lại</string>
   <string name="uploading_started">Đã bắt đầu tải lên!</string>
-  <string name="uploading_queued">Lỗi tải lên (các chế độ kết nối hạn chế được bật)</string>
   <string name="upload_completed_notification_title">Đã tải lên %1$s!</string>
   <string name="upload_completed_notification_text">Chạm để xem những tập tin tải lên của bạn</string>
   <string name="upload_progress_notification_title_start">Đang tải tập tin lên: %1$s</string>
@@ -128,25 +116,18 @@
   <string name="provider_modifications">Sửa đổi</string>
   <string name="menu_upload_single">Tải lên</string>
   <string name="categories_search_text_hint">Tìm thể loại</string>
-  <string name="depicts_search_text_hint">Tìm kiếm các mục mà phươngg tiện truyền thông của bạn mô tả  (núi, Taj mahal,v)</string>
   <string name="menu_save_categories">Lưu</string>
-  <string name="menu_overflow_desc">Menu quá tải</string>
   <string name="refresh_button">Làm mới</string>
   <string name="display_list_button">Danh sách</string>
   <string name="contributions_subtitle_zero">(Chưa có tập tin tải lên)</string>
   <string name="categories_not_found">Không tìm thấy thể loại khớp với %1$s</string>
-  <string name="depictions_not_found">Không có mục Wikidata phù hợp với %1$s được tìm thấy</string>
-  <string name="no_child_classes">%1$s không có lớp học trẻ em</string>
-  <string name="no_parent_classes">%1$s không có lớp phụ tùng</string>
   <string name="categories_skip_explanation">Xếp các hình ảnh vào thể loại để giúp chúng dễ tìm kiếm hơn trên Wikimedia Commons.\nHãy bắt đầu nhập để thêm thể loại.</string>
   <string name="categories_activity_title">Thể loại</string>
   <string name="title_activity_settings">Cài đặt</string>
   <string name="title_activity_signup">Mở tài khoản</string>
   <string name="title_activity_featured_images">Hình ảnh chọn lọc</string>
-  <string name="images_featured_explanation">Các hình ảnh nổi bật là những đóng góp của các nhiếp ảnh gia và họa sĩ minh họa có kỹ năng cao mà cộng đồng Wikimedia Commons đã chọn là một số chất lượng cao nhất trên trang web.</string>
   <string name="title_activity_custom_selector">Bộ chọn tùy chỉnh</string>
   <string name="title_activity_category_details">Thể loại</string>
-  <string name="title_activity_review">Đánh giá của đồng nghiệp</string>
   <string name="menu_about">Giới thiệu</string>
   <string name="about_license">Ứng dụng Wikimedia Commons là ứng dụng mã nguồn mở được tạo ra và duy trì bởi các tình nguyện viên và những người được cộng đồng Wikimedia tin tưởng. Wikimedia Foundation không tham gia vào sự tạo lập, phát triển cũng như quản lý ứng dụng.</string>
   <string name="about_improve">Báo cáo lỗi cũng như đưa ra các ý tưởng &lt;a href=\"%1$s\"&gt;trên GitHub&lt;/a&gt;.</string>
@@ -160,18 +141,15 @@
   <string name="no_uploads_yet">Bạn chưa tải lên hình nào.</string>
   <string name="menu_retry_upload">Thử lại</string>
   <string name="menu_cancel_upload">Hủy bỏ</string>
-  <string name="language_search_type_language_name">Tên ngôn ngữ</string>
-  <string name="language_search_recent_searches">Tìm kiếm gần đây :</string>
-  <string name="language_search_all_languages">Tất cả ngôn ngữ</string>
   <string name="media_upload_policy">Với việc tải lên hình ảnh này, tôi tuyên bố rằng đây là tác phẩm của chính mình,  không chứa nội dung có bản quyền hoặc ảnh tự chụp và tuân theo &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines?uselang=vi\"&gt;các quy định của Wikimedia Commons&lt;/a&gt;.</string>
   <string name="menu_download">Tải về</string>
   <string name="preference_license">Giấy phép mặc định</string>
   <string name="use_previous">Sử dụng tiêu đề và miêu tả trước</string>
   <string name="preference_theme">Giao diện</string>
-  <string name="license_name_cc_by_sa_four">Đánh giá–Chia sẻ tương tự 4.0</string>
-  <string name="license_name_cc_by_four">đánh giá 4.0</string>
-  <string name="license_name_cc_by_sa">Ghi công–Chia sẻ tương tự 3.0</string>
-  <string name="license_name_cc_by">Ghi công 3.0</string>
+  <string name="license_name_cc_by_sa_four" fuzzy="true">Đánh giá–Chia sẻ tương tự 4.0</string>
+  <string name="license_name_cc_by_four" fuzzy="true">đánh giá 4.0</string>
+  <string name="license_name_cc_by_sa" fuzzy="true">Ghi công–Chia sẻ tương tự 3.0</string>
+  <string name="license_name_cc_by" fuzzy="true">Ghi công 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
@@ -211,7 +189,6 @@
   <string name="write_storage_permission_rationale">Yêu cầu cấp phép: Ghi vào thiết bị lưu trữ bên ngoài. Ứng dụng cần được phép ghi vào thiết bị lưu trữ bên ngoài để truy cập máy chụp hình/thư viện ảnh của bạn.</string>
   <string name="location_permission_title">Yêu cầu quyền truy cập vị trí</string>
   <string name="in_app_camera_location_permission_title">Ghi lại vị trí để chụp ảnh trong ứng dụng</string>
-  <string name="in_app_camera_location_switch_pref_summary">Bật tính năng này để ghi lại vị trí bằng ảnh chụp trong ứng dụng trong trường hợp máy ảnh của thiết bị không ghi lại</string>
   <string name="ok">OK</string>
   <string name="warning">Cảnh báo</string>
   <string name="duplicate_file_name">Đã tìm thấy tên tập tin bị trùng lặp</string>
@@ -240,8 +217,8 @@
   <string name="welcome_image_llamas">Lạc đà không bướu</string>
   <string name="welcome_image_rainbow_bridge">Cầu Cầu vồng</string>
   <string name="welcome_image_tulip">Tu-líp</string>
-  <string name="welcome_image_welcome_wikipedia">Hình ảnh sơ đồ của một bài viết chung trên Wikipedia.</string>
-  <string name="welcome_image_welcome_copyright">Một bản vẽ của một đống giấy với biểu tượng bản quyền được cắt ngang.</string>
+  <string name="welcome_image_welcome_wikipedia" fuzzy="true">Hình ảnh sơ đồ của một bài viết chung trên Wikipedia.</string>
+  <string name="welcome_image_welcome_copyright" fuzzy="true">Một bản vẽ của một đống giấy với biểu tượng bản quyền được cắt ngang.</string>
   <string name="welcome_image_sydney_opera_house">Nhà hát Opera Sydney</string>
   <string name="cancel">Hủy bỏ</string>
   <string name="navigation_drawer_open">Mở</string>
@@ -262,7 +239,6 @@
   <string name="nearby_info_menu_wikidata_article">Khoản mục Wikidata</string>
   <string name="nearby_info_menu_wikipedia_article">Bài Wikipedia</string>
   <string name="description_info">Xin vui lòng miêu tả phương tiện càng đầy đủ càng tốt: Chụp ở đâu? Trong hình có gì? Bối cảnh làm sao? Xin vui lòng miêu tả các đối tượng và người trong hình. Cho biết những thông tin khó đoán ra, chẳng hạn giờ trong ngày nếu là phong cảnh. Nếu phương tiện có gì kỳ lạ, xin vui lòng giải thích tại sao nó kỳ lạ.</string>
-  <string name="caption_info">Vui lòng viết một mô tả ngắn gọn về hình ảnh. Bản ghi chú đầu tiên sẽ được sử dụng như tiêu đề cho hình ảnh. Giới hạn 255 ký tự.</string>
   <string name="upload_problem_exist">Có vấn đề tiềm ẩn với hình ảnh này:</string>
   <string name="upload_problem_image_dark">Hình ảnh quá tối.</string>
   <string name="upload_problem_image_blurry">Hình ảnh bị nhòe.</string>
@@ -273,8 +249,6 @@
   <string name="upload_connection_error_alert_title">Lỗi kết nối</string>
   <string name="upload_connection_error_alert_detail">Quá trình tải lên yêu cầu phải có kết nối internet. Vui lòng kiểm tra kết nối mạng của bạn.</string>
   <string name="upload_problem_image">Các vấn đề được phát hiện trong hình ảnh</string>
-  <string name="internet_downloaded">Vui lòng chỉ đăng tải hình ảnh bạn đã tự chụp. Xin đừng đăng tải hình ảnh bạn tìm thấy trên tài không Facebook của người khác.</string>
-  <string name="preferences_uploads">Tải lên</string>
   <string name="use_external_storage">Lưu ảnh trong ứng dụng</string>
   <string name="use_external_storage_summary">Lưu các hình ảnh được chụp bằng máy chụp hình trong ứng dụng vào bộ nhớ thiết bị của bạn</string>
   <string name="login_to_your_account">Đăng nhập vào tài khoản của bạn</string>
@@ -288,7 +262,6 @@
   <string name="skip_login">Bỏ qua</string>
   <string name="navigation_item_login">Đăng nhập</string>
   <string name="skip_login_title">Bạn có thực sự muốn bỏ qua bước đăng nhập không?</string>
-  <string name="skip_login_message">Bạn sẽ phải đăng nhập để tải ảnh lên trong tương lai.</string>
   <string name="login_alert_message">Vui lòng đăng nhập để sử dụng được tính năng này</string>
   <string name="copy_wikicode">Sao chép wikitext vào bảng tạm</string>
   <string name="wikicode_copied">Wikitext đã được sao chép vào bảng tạm</string>
@@ -296,7 +269,6 @@
   <string name="nearby_showing_pins_offline">Không có kết nối mạng. Chỉ hiển thị các địa điểm được lưu trong bộ nhớ đệm.</string>
   <string name="upload_location_access_denied">Quyền truy cập vị trí bị từ chối. Vui lòng thiết lập vị trí thủ công để sử dụng được tính năng này.</string>
   <string name="location_permission_rationale_nearby">Bạn cần cho phép để hiển thị danh sách nơi lân cận</string>
-  <string name="location_permission_rationale_explore">Cần có quyền để hiển thị danh sách các hình ảnh lân cận</string>
   <string name="nearby_directions">Hướng dẫn</string>
   <string name="nearby_wikidata">Wikidata</string>
   <string name="nearby_wikipedia">Wikipedia</string>
@@ -307,7 +279,6 @@
   <string name="welcome_skip_button">Bỏ qua Hướng dẫn</string>
   <string name="no_internet">Internet không có sẵn</string>
   <string name="error_notifications">Lỗi khi lấy thông báo</string>
-  <string name="error_review">Lỗi tìm nạp hình ảnh để xem xét. Nhấn làm mới để thử lại.</string>
   <string name="no_notifications">Không tìm thấy thông báo</string>
   <string name="about_translate">Biên dịch</string>
   <string name="about_translate_title">Ngôn ngữ</string>
@@ -315,10 +286,7 @@
   <string name="about_translate_proceed">Tiến hành</string>
   <string name="about_translate_cancel">Hủy bỏ</string>
   <string name="retry">Thử lại</string>
-  <string name="showcase_view_whole_nearby_activity">Đây là những nơi gần bạn cần hình ảnh để minh họa cho các bài viết trên Wikipedia của họ. Nhấp vào \'TÌM KIẾM KHU VỰC NÀY\' sẽ khóa bản đồ và khởi chạy tìm kiếm gần đó xung quanh vị trí đó.</string>
   <string name="showcase_view_needs_photo">Chỗ này cần một bức ảnh.</string>
-  <string name="showcase_view_has_photo">Địa điểm này đã có một bức ảnh.</string>
-  <string name="showcase_view_no_longer_exists">Nơi này không còn tồn tại nữa.</string>
   <string name="no_images_found">Không tìm thấy hình ảnh!</string>
   <string name="error_loading_images">Đã xuất hiện lỗi khi tải hình ảnh.</string>
   <string name="image_uploaded_by">Tải lên bởi: %1$s</string>
@@ -346,11 +314,7 @@
   <string name="quiz">Thách đố</string>
   <string name="quiz_question_string">Có thể tải lên hình ảnh này được không?</string>
   <string name="question">Câu hỏi</string>
-  <string name="quiz_i_am_not_sure">Tôi không chắc</string>
   <string name="result">Kết quả</string>
-  <string name="quiz_back_button">Nếu bạn tiếp tục tải lên hình ảnh yêu cầu xóa, tài khoản của bạn có thể sẽ bị cấm. Bạn có chắc chắn muốn kết thúc bài kiểm tra?</string>
-  <string name="quiz_alert_message">Hơn %1$s hình ảnh bạn đã tải lên đã bị xóa. Nếu bạn tiếp tục tải lên hình ảnh cần xóa, tài khoản của bạn có thể sẽ bị cấm. \n\n Bạn có muốn xem hướng dẫn một lần nữa và sau đó tham gia một bài kiểm tra để giúp bạn tìm hiểu loại hình ảnh bạn nên tải lên hay không nên?</string>
-  <string name="selfie_answer">Ảnh tự chụp không có nhiều giá trị bách khoa. Vui lòng không tải lên hình ảnh của bạn trừ khi bạn đã có một bài viết trên Wikipedia về bạn.</string>
   <string name="taj_mahal_answer">Hình chứa di tích và cảnh vật thiên nhiên thường được chấp nhận tải lên ở hầu hết các quốc gia. Xin lưu ý rằng các công trình nghệ thuật được trưng bày tạm thời thường có bản quyền và không được chấp nhận tải lên.</string>
   <string name="blurry_image_answer">Một trong những mục tiêu của Commons là thu thập hình ảnh chất lượng. Do đó, không nên tải lên những hình ảnh mờ. Hãy luôn cố gắng chụp những hình ảnh đẹp với ánh sáng tốt.</string>
   <string name="construction_event_answer">Những hình ảnh thể hiện được công nghệ hoặc văn hóa luôn được hoan nghênh trên Commons.</string>
