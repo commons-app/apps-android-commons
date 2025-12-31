@@ -522,7 +522,7 @@ class CustomSelectorActivity :
         val folder = File(folderPath)
 
         supportFragmentManager.popBackStack(null,
-                                androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE)
+            androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE)
 
         //refresh MediaStore for the deleted folder path to ensure metadata updates
         FolderDeletionHelper.refreshMediaStore(this, folder)
@@ -595,7 +595,7 @@ class CustomSelectorActivity :
             bottomSheetBinding.upload.text = resources.getString(R.string.upload)
         }
 
-        if (uploadLimitExceeded || selectedNotForUploadImages > 0) {
+        if (selectedNotForUploadImages > 0) {
             bottomSheetBinding.upload.isEnabled = false
             bottomSheetBinding.upload.alpha = 0.5f
         } else {
@@ -652,7 +652,7 @@ class CustomSelectorActivity :
             return
         }
         scope.launch(ioDispatcher) {
-            val uniqueImages = selectedImages.distinctBy { image ->
+            val uniqueImages = selectedImages.take(uploadLimit).distinctBy { image ->
                 CustomSelectorUtils.getImageSHA1(
                     image.uri,
                     ioDispatcher,
