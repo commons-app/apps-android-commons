@@ -286,6 +286,9 @@ class ExploreMapFragment : CommonsDaggerSupportFragment(), ExploreMapContract.Vi
             shouldPerformMapReadyActionsOnResume = false
             performMapReadyActions()
         }
+    if (locationPermissionsHelper?.checkLocationPermission(requireActivity()) == true) {
+        performMapReadyActions()
+    }
     }
 
     override fun onPause() {
