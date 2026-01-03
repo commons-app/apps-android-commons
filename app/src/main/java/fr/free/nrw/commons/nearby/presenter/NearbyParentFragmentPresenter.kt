@@ -494,6 +494,25 @@ class NearbyParentFragmentPresenter
         }
     }
 
+    /**
+     * Creates a HashMap mapping place locations (LatLng) to the associated places.
+     *
+     * @param places The list of Places used to create HashMap entries
+     * @param startIndex Only Places with indices between startIndex and places.lastIndex
+     * (inclusive) will be used to create the HashMap. This can be useful for avoiding redundant
+     * computation when calling this method on the same places list multiple times.
+     *
+     * @return The HashMap containing (Place's LatLng, Place) entries.
+     */
+    private fun getLocationPlaceMap(places: List<Place>, startIndex: Int): HashMap<LatLng, Place> {
+        val map = hashMapOf<LatLng, Place>()
+
+        for (i in startIndex..places.lastIndex) {
+            map[places[i].location] = places[i]
+        }
+
+        return map
+    }
 
     /**
      * Ensures the correct bookmark boolean value for Places whose bookmarks have changed.
@@ -512,14 +531,9 @@ class NearbyParentFragmentPresenter
     ): Int {
         var i = bookmarkChangedPlacesIndex
         if (i < bookmarkChangedPlaces.size) {
-            val bookmarkChangedPlacesBacklog = hashMapOf<LatLng, Place>()
-            while (i < bookmarkChangedPlaces.size) {
-                bookmarkChangedPlacesBacklog.put(
-                    bookmarkChangedPlaces[i].location,
-                    bookmarkChangedPlaces[i]
-                )
-                ++i
-            }
+            val bookmarkChangedPlacesBacklog = getLocationPlaceMap(bookmarkChangedPlaces, i)
+
+            i += bookmarkChangedPlacesBacklog.size
             for ((index, group) in updatedGroups.withIndex()) {
                 if (bookmarkChangedPlacesBacklog.containsKey(group.place.location)) {
                     updatedGroups[index] = MarkerPlaceGroup(
@@ -551,14 +565,9 @@ class NearbyParentFragmentPresenter
     ): Int {
         var i = clickedPlacesIndex
         if (i < clickedPlaces.size) {
-            val clickedPlacesBacklog = hashMapOf<LatLng, Place>()
-            while (i < clickedPlaces.size) {
-                clickedPlacesBacklog.put(
-                    clickedPlaces[i].location,
-                    clickedPlaces[i]
-                )
-                ++i
-            }
+            val clickedPlacesBacklog = getLocationPlaceMap(clickedPlaces, i)
+
+            i += clickedPlacesBacklog.size
             for ((index, group) in updatedGroups.withIndex()) {
                 if (clickedPlacesBacklog.containsKey(group.place.location)) {
                     updatedGroups[index] = MarkerPlaceGroup(
