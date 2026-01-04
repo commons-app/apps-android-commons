@@ -28,7 +28,6 @@ class PendingUploadsFragment :
     CommonsDaggerSupportFragment(),
     PendingUploadsContract.View,
     PendingUploadsAdapter.Callback {
-    // final-state:Non-nullable lateinit var as the Presenter is always initialized.
     @Inject
     lateinit var pendingUploadsPresenter: PendingUploadsPresenter
 
@@ -61,16 +60,16 @@ class PendingUploadsFragment :
         return binding.root
     }
 
+    fun initAdapter() {
+        adapter = PendingUploadsAdapter(this)
+    }
+
     override fun onViewCreated(
         view: View,
         savedInstanceState: Bundle?,
     ) {
         super.onViewCreated(view, savedInstanceState)
         initRecyclerView()
-    }
-
-    fun initAdapter() {
-        adapter = PendingUploadsAdapter(this)
     }
 
     /**
@@ -82,38 +81,38 @@ class PendingUploadsFragment :
         pendingUploadsPresenter.setup()
         pendingUploadsPresenter.totalContributionList
             .observe(viewLifecycleOwner) { list: PagedList<Contribution> ->
-                contributionsSize = list.size
-                contributionsList = mutableListOf()
-                var pausedOrQueuedUploads = 0
-                list.forEach {
-                    if (it != null) {
-                        if (it.state == STATE_PAUSED ||
-                            it.state == STATE_QUEUED ||
-                            it.state == STATE_IN_PROGRESS
-                        ) {
-                            contributionsList.add(it)
-                        }
-                        if (it.state == STATE_PAUSED || it.state == STATE_QUEUED) {
-                            pausedOrQueuedUploads++
-                        }
+            contributionsSize = list.size
+            contributionsList = mutableListOf()
+            var pausedOrQueuedUploads = 0
+            list.forEach {
+                if (it != null) {
+                    if (it.state == STATE_PAUSED ||
+                        it.state == STATE_QUEUED ||
+                        it.state == STATE_IN_PROGRESS
+                    ) {
+                        contributionsList.add(it)
                     }
-                }
-                if (contributionsSize == 0) {
-                    binding.nopendingTextView.visibility = View.VISIBLE
-                    binding.pendingUplaodsLl.visibility = View.GONE
-                    uploadProgressActivity.hidePendingIcons()
-                } else {
-                    binding.nopendingTextView.visibility = View.GONE
-                    binding.pendingUplaodsLl.visibility = View.VISIBLE
-                    adapter.submitList(list)
-                    binding.progressTextView.setText("$contributionsSize uploads left")
-                    if ((pausedOrQueuedUploads == contributionsSize) || CommonsApplication.isPaused) {
-                        uploadProgressActivity.setPausedIcon(true)
-                    } else {
-                        uploadProgressActivity.setPausedIcon(false)
+                    if (it.state == STATE_PAUSED || it.state == STATE_QUEUED) {
+                        pausedOrQueuedUploads++
                     }
                 }
             }
+            if (contributionsSize == 0) {
+                binding.nopendingTextView.visibility = View.VISIBLE
+                binding.pendingUplaodsLl.visibility = View.GONE
+                uploadProgressActivity.hidePendingIcons()
+            } else {
+                binding.nopendingTextView.visibility = View.GONE
+                binding.pendingUplaodsLl.visibility = View.VISIBLE
+                adapter.submitList(list)
+                binding.progressTextView.setText("$contributionsSize uploads left")
+                if ((pausedOrQueuedUploads == contributionsSize) || CommonsApplication.isPaused) {
+                    uploadProgressActivity.setPausedIcon(true)
+                } else {
+                    uploadProgressActivity.setPausedIcon(false)
+                }
+            }
+        }
     }
 
     /**
@@ -141,24 +140,19 @@ class PendingUploadsFragment :
     /**
      * Restarts all the paused uploads.
      */
-    fun restartUploads() {
-        pendingUploadsPresenter.restartUploads(
-            contributionsList, 0, requireContext().applicationContext
-        )
-    }
+    fun restartUploads() = pendingUploadsPresenter.restartUploads(
+        contributionsList, 0, requireContext().applicationContext
+    )
 
     /**
      * Pauses all the ongoing uploads.
      */
-    fun pauseUploads() {
-        pendingUploadsPresenter.pauseUploads()
-    }
+    fun pauseUploads() = pendingUploadsPresenter.pauseUploads()
 
     /**
      * Cancels all the uploads after getting a confirmation from the user using Dialog.
      */
     fun deleteUploads() {
-        //final change:thee redundant 'if (!::pendingUploadsPresenter.isInitialized) return' is removed.
         val activity = requireActivity()
         val locale = Locale.getDefault()
         showAlertDialog(
