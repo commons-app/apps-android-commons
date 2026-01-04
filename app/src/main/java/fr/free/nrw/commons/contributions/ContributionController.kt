@@ -113,23 +113,24 @@ class ContributionController @Inject constructor(@param:Named("default_preferenc
     ) {
         locationPermissionCallback = object : LocationPermissionCallback {
             override fun onLocationPermissionDenied(toastMessage: String) {
-                Toast.makeText(
-                    activity,
-                    toastMessage,
-                    Toast.LENGTH_LONG
-                ).show()
+                showLongToast(activity, toastMessage)
                 initiateCameraUpload(activity, resultLauncher)
             }
 
             override fun onLocationPermissionGranted() {
                 if (!locationPermissionsHelper!!.isLocationAccessToAppsTurnedOn()) {
-                    showLocationOffDialog(
-                        activity, R.string.in_app_camera_needs_location,
-                        R.string.in_app_camera_location_unavailable, resultLauncher
+                    locationPermissionsHelper!!.showLocationOffDialog(
+                        activity, R.string.in_app_camera_needs_location
                     )
                 } else {
                     initiateCameraUpload(activity, resultLauncher)
                 }
+            }
+
+            // Fix:impleement the new callback method
+            override fun onLocationServiceUnAvailable() {
+                showLongToast(activity, R.string.in_app_camera_location_unavailable)
+                initiateCameraUpload(activity, resultLauncher)
             }
         }
 
