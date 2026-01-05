@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.kotlin.kapt)
     alias(libs.plugins.kotlin.parcelize)
+    alias(libs.plugins.compose.compiler)
 }
 
 apply(from = "$rootDir/jacoco.gradle")
@@ -182,9 +183,6 @@ android {
         compose = true
     }
     buildToolsVersion = buildToolsVersion
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.8"
-    }
     packaging {
         jniLibs {
             excludes += listOf("META-INF/androidx.*")
