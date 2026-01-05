@@ -20,6 +20,7 @@ import fr.free.nrw.commons.customselector.helper.ImageHelper.CUSTOM_SELECTOR_PRE
 import fr.free.nrw.commons.customselector.helper.ImageHelper.SHOW_ALREADY_ACTIONED_IMAGES_PREFERENCE_KEY
 import fr.free.nrw.commons.customselector.listeners.ImageSelectListener
 import fr.free.nrw.commons.customselector.model.Image
+import fr.free.nrw.commons.customselector.ui.selector.ImageFileLoader
 import fr.free.nrw.commons.customselector.ui.selector.ImageLoader
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
@@ -48,6 +49,7 @@ class ImageAdapter(
      * ImageLoader queries images.
      */
     private var imageLoader: ImageLoader,
+    private var imageFileLoader: ImageFileLoader,
 ) : RecyclerView.Adapter<ImageAdapter.ImageViewHolder>(),
     FastScrollRecyclerView.SectionedAdapter {
 
@@ -537,6 +539,8 @@ class ImageAdapter(
      * CleanUp function.
      */
     fun cleanUp() {
+        //abort the device scanning process immediately
+        imageFileLoader.abortLoadImage()
         scope.cancel()
     }
 
