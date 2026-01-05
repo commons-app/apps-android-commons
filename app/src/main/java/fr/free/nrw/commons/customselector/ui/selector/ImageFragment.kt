@@ -139,6 +139,12 @@ class ImageFragment :
     lateinit var uploadedStatusDao: UploadedStatusDao
 
     /**
+     * ImageFileLoader to scan device files.
+     */
+    @Inject
+    lateinit var imageFileLoader: ImageFileLoader
+
+    /**
      * FileUtilsWrapper class to get imageSHA1 from uri
      */
     @Inject
@@ -215,7 +221,13 @@ class ImageFragment :
 
         // ensures imageAdapter is initialized
         if (!::imageAdapter.isInitialized) {
-            imageAdapter = ImageAdapter(requireActivity(), activity as ImageSelectListener, imageLoader!!)
+            //fix: Added theimageFileLoader as the 4th parameter
+            imageAdapter = ImageAdapter(
+                requireActivity(),
+                activity as ImageSelectListener,
+                imageLoader!!,
+                imageFileLoader
+            )
             Timber.d("Initialized imageAdapter in onCreateView")
         }
         // Set single selection mode if needed
