@@ -114,9 +114,10 @@ class MediaDetailPagerFragment : CommonsDaggerSupportFragment(), OnPageChangeLis
         binding!!.mediaDetailsPager.adapter = adapter
 
         if (savedInstanceState != null) {
-            val pageNumber = savedInstanceState.getInt("current-page")
-            binding!!.mediaDetailsPager.setCurrentItem(pageNumber, false)
-            requireActivity().invalidateOptionsMenu()
+            val savedPosition = savedInstanceState.getInt("current-page", -1)
+            if (savedPosition != -1) {
+                binding!!.mediaDetailsPager.currentItem = savedPosition
+            }
         }
         adapter!!.notifyDataSetChanged()
 
@@ -125,16 +126,24 @@ class MediaDetailPagerFragment : CommonsDaggerSupportFragment(), OnPageChangeLis
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        outState.putInt("current-page", binding!!.mediaDetailsPager.currentItem)
-        outState.putBoolean("editable", editable)
-        outState.putBoolean("isFeaturedImage", isFeaturedImage)
+        // save the current item position so it can be restored after rotation
+        if (binding != null) {
+            outState.putInt("current-page", binding!!.mediaDetailsPager.currentItem)
+        }
+        // save these so they aren't lost if the process is killed
+        outState.putBoolean("is_editable", editable)
+        outState.putBoolean("is_featured_image", isFeaturedImage)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        //use arguments for initial creation, savedInstanceState for restoration
         if (savedInstanceState != null) {
-            editable = savedInstanceState.getBoolean("editable", false)
-            isFeaturedImage = savedInstanceState.getBoolean("isFeaturedImage", false)
+            editable = savedInstanceState.getBoolean("is_editable", false)
+            isFeaturedImage = savedInstanceState.getBoolean("is_featured_image", false)
+        } else {
+            editable = arguments?.getBoolean("is_editable") ?: false
+            isFeaturedImage = arguments?.getBoolean("is_featured_image") ?: false
         }
         setHasOptionsMenu(true)
         initProvider()
