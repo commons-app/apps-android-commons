@@ -252,7 +252,7 @@
   <string name="media_detail_coordinates">Współrzędne</string>
   <string name="media_detail_coordinates_empty">Nie dostarczone</string>
   <string name="become_a_tester_title">Zostań beta-testerem</string>
-  <string name="become_a_tester_description">Dołącz do kanału bety w Google Play i dostań wczesny dostęp do nowych funkcji i łatek</string>
+  <string name="become_a_tester_description">Dołącz do kanału beta w Google Play i otrzymaj wczesny dostęp do nowych funkcji i łatek</string>
   <string name="_2fa_code">Kod 2FA</string>
   <string name="email_auth_code">Kod weryfikacyjny z e-mail</string>
   <string name="logout_verification">Czy na pewno wylogować?</string>
