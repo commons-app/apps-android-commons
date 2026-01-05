@@ -13,6 +13,7 @@ import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.customselector.listeners.ImageSelectListener
 import fr.free.nrw.commons.customselector.model.Image
 import fr.free.nrw.commons.customselector.ui.selector.CustomSelectorActivity
+import fr.free.nrw.commons.customselector.ui.selector.ImageFileLoader
 import fr.free.nrw.commons.customselector.ui.selector.ImageLoader
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -46,6 +47,9 @@ class ImageAdapterTest {
     private lateinit var imageLoader: ImageLoader
 
     @Mock
+    private lateinit var imageFileLoader: ImageFileLoader
+
+    @Mock
     private lateinit var imageSelectListener: ImageSelectListener
 
     @Mock
@@ -75,7 +79,7 @@ class ImageAdapterTest {
         MockitoAnnotations.initMocks(this)
         Dispatchers.setMain(testDispatcher)
         activity = Robolectric.buildActivity(CustomSelectorActivity::class.java).get()
-        imageAdapter = ImageAdapter(activity, imageSelectListener, imageLoader)
+        imageAdapter = ImageAdapter(activity, imageSelectListener, imageLoader, imageFileLoader)
         image = Image(1, "image", uri, "abc/abc", 1, "bucket1")
         images = ArrayList()
 
@@ -253,6 +257,8 @@ class ImageAdapterTest {
     @Test
     fun cleanUp() {
         imageAdapter.cleanUp()
+        //verify that abortLoadImage was called on the loader
+        Mockito.verify(imageFileLoader).abortLoadImage()
     }
 
     /**
