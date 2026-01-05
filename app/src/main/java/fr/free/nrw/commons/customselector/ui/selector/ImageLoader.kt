@@ -93,7 +93,11 @@ class ImageLoader
                     return@launch
                 }
 
-                val imageSHA1: String =
+                // optimisation: use the SHA1 pre-calculated by ImageFileLoader.
+                // this avoids the redundant file I/O operations.
+                val imageSHA1: String = if (image.sha1.isNotEmpty()) {
+                    image.sha1
+                } else {
                     when (mapImageSHA1[image.uri] != null) {
                         true -> mapImageSHA1[image.uri]!!
                         else ->
@@ -104,6 +108,7 @@ class ImageLoader
                                 context.contentResolver,
                             )
                     }
+                }
                 mapImageSHA1[image.uri] = imageSHA1
 
                 if (imageSHA1.isEmpty()) {
