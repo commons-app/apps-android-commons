@@ -20,7 +20,6 @@ jobs:
         id: analyze
         with:
           model: openai/gpt-4o-mini
-          temperature: 0
           max-tokens: 10
           prompt: |
             Analyse this pull request to determine if it contains unrelated changes.
