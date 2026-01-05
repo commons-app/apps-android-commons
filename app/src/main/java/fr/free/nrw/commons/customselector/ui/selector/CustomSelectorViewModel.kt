@@ -9,6 +9,7 @@ import fr.free.nrw.commons.customselector.model.Image
 import fr.free.nrw.commons.customselector.model.Result
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.cancel
 
 /**
@@ -21,7 +22,7 @@ class CustomSelectorViewModel(
     /**
      * Scope for coroutine task (image fetch).
      */
-    private val scope = CoroutineScope(Dispatchers.Main)
+    private val scope = CoroutineScope(Dispatchers.Main + SupervisorJob())
 
     /**
      * Stores selected images.
@@ -38,7 +39,9 @@ class CustomSelectorViewModel(
      */
     fun fetchImages() {
         result.postValue(Result(CallbackStatus.FETCHING, arrayListOf()))
-        scope.cancel()
+        // fix: instead of scope.cancel(), we call our new abort method in the loader.
+        //this stops the background processing while keeping the ViewModel scope alive.
+        imageFileLoader.abortLoadImage()
         imageFileLoader.loadDeviceImages(
             object : ImageLoaderListener {
                 override fun onImageLoaded(images: ArrayList<Image>) {
@@ -56,6 +59,8 @@ class CustomSelectorViewModel(
      * Clear the coroutine task linked with context.
      */
     override fun onCleared() {
+        //stop the loader immediately when the ViewModel is destroyed
+        imageFileLoader.abortLoadImage()
         scope.cancel()
         super.onCleared()
     }
