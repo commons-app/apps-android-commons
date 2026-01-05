@@ -6,11 +6,10 @@ import android.provider.MediaStore
 import android.text.format.DateFormat
 import fr.free.nrw.commons.customselector.listeners.ImageLoaderListener
 import fr.free.nrw.commons.customselector.model.Image
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.*
 import java.io.File
+import java.io.FileInputStream
+import java.security.MessageDigest
 import java.util.Calendar
 import java.util.Date
 import java.util.Locale
@@ -23,6 +22,12 @@ import kotlin.coroutines.CoroutineContext
 class ImageFileLoader(
     val context: Context,
 ) : CoroutineScope {
+
+    /**
+     * keep track of the current loading job to allow cancellation.
+     */
+    private var loaderJob: Job? = null
+
     /**
      * Coroutine context for fetching images.
      */
@@ -45,7 +50,8 @@ class ImageFileLoader(
      * Load Device Images under coroutine.
      */
     fun loadDeviceImages(listener: ImageLoaderListener) {
-        launch(Dispatchers.Main) {
+        loaderJob?.cancel()
+        loaderJob = launch(Dispatchers.Main) {
             withContext(Dispatchers.IO) {
                 getImages(listener)
             }
@@ -77,18 +83,19 @@ class ImageFileLoader(
         val dateColumn = cursor.getColumnIndex(MediaStore.Images.Media.DATE_ADDED)
 
         val images = arrayListOf<Image>()
-        if (cursor.moveToFirst()) {
-            do {
-                if (Thread.interrupted()) {
-                    listener.onFailed(NullPointerException())
-                    return
-                }
-                val id = cursor.getLong(idColumn)
-                val name = cursor.getString(nameColumn)
-                val path = cursor.getString(dataColumn)
-                val bucketId = cursor.getLong(bucketIdColumn)
-                val bucketName = cursor.getString(bucketNameColumn)
-                val date = cursor.getLong(dateColumn)
+        cursor.use { c -> //using .use automatically closes the cursor
+            if (c.moveToFirst()) {
+                do {
+                    //check if coroutine was cancelled or thread interrupted
+                    if (!isActive || Thread.interrupted()) {
+                        return
+                    }
+                    val id = c.getLong(idColumn)
+                    val name = c.getString(nameColumn)
+                    val path = c.getString(dataColumn)
+                    val bucketId = c.getLong(bucketIdColumn)
+                    val bucketName = c.getString(bucketNameColumn)
+                    val date = c.getLong(dateColumn)
 
                 val file =
                     if (path == null || path.isEmpty()) {
@@ -117,35 +124,52 @@ class ImageFileLoader(
                     val dateFormat = DateFormat.getMediumDateFormat(context)
                     val formattedDate = dateFormat.format(date)
 
-                    val image =
-                        Image(
+                        val sha1 = getSha1(file)
+                        val image =
+                            Image(
                             id,
                             name,
                             uri,
                             path,
                             bucketId,
                             bucketName,
-                            date = (formattedDate),
+                            date = formattedDate,
+                            sha1 = sha1
                         )
-                    images.add(image)
-                }
-            } while (cursor.moveToNext())
+                        images.add(image)
+                    }
+                } while (c.moveToNext())
+            }
         }
-        cursor.close()
-        listener.onImageLoaded(images)
+        //return results to the main thread via listener
+        launch(Dispatchers.Main) {
+            listener.onImageLoaded(images)
+        }
     }
 
     /**
      * Abort loading images.
      */
     fun abortLoadImage() {
-        // todo Abort loading images.
+        loaderJob?.cancel()
     }
 
-    /*
-     *
-     * TODO
-     * Sha1 for image (original image).
-     *
+    /**
+     * generates SHA-1 hash for the image file.
      */
+    private fun getSha1(file: File): String {
+        return try {
+            val digest = MessageDigest.getInstance("SHA-1")
+            val fileInputStream = FileInputStream(file)
+            val buffer = ByteArray(8192)
+            var bytesRead: Int
+            while (fileInputStream.read(buffer).also { bytesRead = it } != -1) {
+                digest.update(buffer, 0, bytesRead)
+            }
+            val sha1Bytes = digest.digest()
+            sha1Bytes.joinToString("") { "%02x".format(it) }
+        } catch (e: Exception) {
+            ""
+        }
+    }
 }
