@@ -1949,6 +1949,11 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
     override fun onLocationPermissionGranted() {
     }
 
+    override fun onLocationServiceUnAvailable() {
+        //for nearby, we show a toast and perhaps show the map at the last known location
+        showLongToast(requireContext(), R.string.nearby_needs_location)
+    }
+
     /**
      * onLogoutComplete is called after shared preferences and data stored in local database are
      * cleared.
