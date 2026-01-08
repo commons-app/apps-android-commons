@@ -1,4 +1,4 @@
-package fr.free.nrw.commons.media
+ package fr.free.nrw.commons.media
 
 import android.annotation.SuppressLint
 import android.app.AlertDialog
@@ -236,6 +236,7 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
      * panel always has at least this height.
      */
     private val minimumHeightOfMetadata: Int = 200
+
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
@@ -499,24 +500,18 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
         val contributionsFragment = getContributionsFragmentParent()
         contributionsFragment?.binding?.cardViewNearby?.visibility = View.GONE
 
-        // Safely retrieve media
         media = if (detailProvider != null) {
             detailProvider?.getMediaAtPosition(index)
         } else {
             requireArguments().getParcelable("media")
         }
-
-        // 🔐 Defensive validation (NO try-catch)
         if (media == null) {
             Timber.w(
-                "MediaDetailFragment resumed with null media. " +
-                        "Likely caused by permission denial. Navigating back."
+                "MediaDetailFragment resumed with null media after permission dialog. " +
+                        "Skipping further processing to avoid crash."
             )
-            parentFragmentManager.popBackStack()
             return
         }
-
-        // ⬇️ Everything below remains unchanged
         if (applicationKvStore.getBoolean(
                 String.format(NOMINATING_FOR_DELETION_MEDIA, media!!.imageUrl),
                 false
@@ -526,11 +521,8 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
         }
 
         val currentUser = getUserName(requireContext())
-        if (currentUser != null && currentUser == media!!.author) {
-            binding.sendThanks.visibility = View.GONE
-        } else {
-            binding.sendThanks.visibility = View.VISIBLE
-        }
+        binding.sendThanks.visibility =
+            if (currentUser != null && currentUser == media!!.author) View.GONE else View.VISIBLE
 
         binding.mediaDetailScrollView.viewTreeObserver.addOnGlobalLayoutListener(
             object : ViewTreeObserver.OnGlobalLayoutListener {
@@ -540,7 +532,6 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
                     oldWidthOfImageView = binding.mediaDetailScrollView.width
                     displayMediaDetails()
                     media!!.filename?.let { fetchFileUsages(it) }
-
                 }
             }
         )
