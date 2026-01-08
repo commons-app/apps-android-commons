@@ -1,4 +1,4 @@
-package fr.free.nrw.commons.media
+ package fr.free.nrw.commons.media
 
 import android.annotation.SuppressLint
 import android.app.AlertDialog
@@ -137,6 +137,8 @@ import java.util.regex.Matcher
 import java.util.regex.Pattern
 import javax.inject.Inject
 import javax.inject.Named
+import android.view.ViewTreeObserver
+
 
 class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.Callback {
     private var editable: Boolean = false
@@ -234,6 +236,7 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
      * panel always has at least this height.
      */
     private val minimumHeightOfMetadata: Int = 200
+
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
@@ -494,53 +497,45 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
     override fun onResume() {
         super.onResume()
 
-        val contributionsFragment: ContributionsFragment? = this.getContributionsFragmentParent()
-        if (contributionsFragment?.binding != null) {
-            contributionsFragment.binding!!.cardViewNearby.visibility = View.GONE
-        }
+        val contributionsFragment = getContributionsFragmentParent()
+        contributionsFragment?.binding?.cardViewNearby?.visibility = View.GONE
 
-        // detail provider is null when fragment is shown in review activity
         media = if (detailProvider != null) {
-            detailProvider!!.getMediaAtPosition(index)
+            detailProvider?.getMediaAtPosition(index)
         } else {
             requireArguments().getParcelable("media")
         }
-
-        if (media != null && applicationKvStore.getBoolean(
-                String.format(
-                    NOMINATING_FOR_DELETION_MEDIA, media!!.imageUrl
-                ), false
+        if (media == null) {
+            Timber.w(
+                "MediaDetailFragment resumed with null media after permission dialog. " +
+                        "Skipping further processing to avoid crash."
+            )
+            return
+        }
+        if (applicationKvStore.getBoolean(
+                String.format(NOMINATING_FOR_DELETION_MEDIA, media!!.imageUrl),
+                false
             )
         ) {
             enableProgressBar()
         }
 
-        if (getUserName(requireContext()) != null && media != null && getUserName(
-                requireContext()
-            ) == media!!.author
-        ) {
-            binding.sendThanks.visibility = View.GONE
-        } else {
-            binding.sendThanks.visibility = View.VISIBLE
-        }
+        val currentUser = getUserName(requireContext())
+        binding.sendThanks.visibility =
+            if (currentUser != null && currentUser == media!!.author) View.GONE else View.VISIBLE
 
         binding.mediaDetailScrollView.viewTreeObserver.addOnGlobalLayoutListener(
-            object : OnGlobalLayoutListener {
+            object : ViewTreeObserver.OnGlobalLayoutListener {
                 override fun onGlobalLayout() {
-                    if (context == null) {
-                        return
-                    }
-                    binding.mediaDetailScrollView.viewTreeObserver.removeOnGlobalLayoutListener(
-                        this
-                    )
+                    if (context == null) return
+                    binding.mediaDetailScrollView.viewTreeObserver.removeOnGlobalLayoutListener(this)
                     oldWidthOfImageView = binding.mediaDetailScrollView.width
-                    if (media != null) {
-                        displayMediaDetails()
-                        fetchFileUsages(media?.filename!!)
-                    }
+                    displayMediaDetails()
+                    media!!.filename?.let { fetchFileUsages(it) }
                 }
             }
         )
+
         binding.progressBarEdit.visibility = View.GONE
         binding.descriptionEdit.visibility = View.VISIBLE
     }
