@@ -137,8 +137,6 @@ import java.util.regex.Matcher
 import java.util.regex.Pattern
 import javax.inject.Inject
 import javax.inject.Named
-import android.view.ViewTreeObserver
-
 
 class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.Callback {
     private var editable: Boolean = false
@@ -496,55 +494,59 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
     override fun onResume() {
         super.onResume()
 
-        val contributionsFragment = getContributionsFragmentParent()
-        contributionsFragment?.binding?.cardViewNearby?.visibility = View.GONE
+        val contributionsFragment: ContributionsFragment? = this.getContributionsFragmentParent()
+        if (contributionsFragment?.binding != null) {
+            contributionsFragment.binding!!.cardViewNearby.visibility = View.GONE
+        }
 
-        // Safely retrieve media
+        // detail provider is null when fragment is shown in review activity
         media = if (detailProvider != null) {
-            detailProvider?.getMediaAtPosition(index)
+            detailProvider!!.getMediaAtPosition(index)
         } else {
             requireArguments().getParcelable("media")
         }
 
-        // 🔐 Defensive validation (NO try-catch)
         if (media == null) {
-            Timber.w(
-                "MediaDetailFragment resumed with null media. " +
-                        "Likely caused by permission denial. Navigating back."
-            )
+            Timber.w("MediaDetailFragment resumed with null media, navigating back")
             parentFragmentManager.popBackStack()
             return
         }
 
-        // ⬇️ Everything below remains unchanged
-        if (applicationKvStore.getBoolean(
-                String.format(NOMINATING_FOR_DELETION_MEDIA, media!!.imageUrl),
-                false
+        if (media != null && applicationKvStore.getBoolean(
+                String.format(
+                    NOMINATING_FOR_DELETION_MEDIA, media!!.imageUrl
+                ), false
             )
         ) {
             enableProgressBar()
         }
 
-        val currentUser = getUserName(requireContext())
-        if (currentUser != null && currentUser == media!!.author) {
+        if (getUserName(requireContext()) != null && media != null && getUserName(
+                requireContext()
+            ) == media!!.author
+        ) {
             binding.sendThanks.visibility = View.GONE
         } else {
             binding.sendThanks.visibility = View.VISIBLE
         }
 
         binding.mediaDetailScrollView.viewTreeObserver.addOnGlobalLayoutListener(
-            object : ViewTreeObserver.OnGlobalLayoutListener {
+            object : OnGlobalLayoutListener {
                 override fun onGlobalLayout() {
-                    if (context == null) return
-                    binding.mediaDetailScrollView.viewTreeObserver.removeOnGlobalLayoutListener(this)
+                    if (context == null) {
+                        return
+                    }
+                    binding.mediaDetailScrollView.viewTreeObserver.removeOnGlobalLayoutListener(
+                        this
+                    )
                     oldWidthOfImageView = binding.mediaDetailScrollView.width
-                    displayMediaDetails()
-                    media!!.filename?.let { fetchFileUsages(it) }
-
+                    if (media != null) {
+                        displayMediaDetails()
+                        fetchFileUsages(media?.filename!!)
+                    }
                 }
             }
         )
-
         binding.progressBarEdit.visibility = View.GONE
         binding.descriptionEdit.visibility = View.VISIBLE
     }
