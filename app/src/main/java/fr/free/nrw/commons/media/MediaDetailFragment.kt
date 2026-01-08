@@ -138,6 +138,7 @@ import java.util.regex.Pattern
 import javax.inject.Inject
 import javax.inject.Named
 
+
 class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.Callback {
     private var editable: Boolean = false
     private var isCategoryImage: Boolean = false
@@ -493,58 +494,63 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
 
     override fun onResume() {
         super.onResume()
-
-        val contributionsFragment: ContributionsFragment? = this.getContributionsFragmentParent()
-        if (contributionsFragment?.binding != null) {
-            contributionsFragment.binding!!.cardViewNearby.visibility = View.GONE
-        }
-
-        // detail provider is null when fragment is shown in review activity
-        media = if (detailProvider != null) {
-            detailProvider!!.getMediaAtPosition(index)
-        } else {
-            requireArguments().getParcelable("media")
-        }
-
-        if (media != null && applicationKvStore.getBoolean(
-                String.format(
-                    NOMINATING_FOR_DELETION_MEDIA, media!!.imageUrl
-                ), false
-            )
-        ) {
-            enableProgressBar()
-        }
-
-        if (getUserName(requireContext()) != null && media != null && getUserName(
-                requireContext()
-            ) == media!!.author
-        ) {
-            binding.sendThanks.visibility = View.GONE
-        } else {
-            binding.sendThanks.visibility = View.VISIBLE
-        }
-
-        binding.mediaDetailScrollView.viewTreeObserver.addOnGlobalLayoutListener(
-            object : OnGlobalLayoutListener {
-                override fun onGlobalLayout() {
-                    if (context == null) {
-                        return
-                    }
-                    binding.mediaDetailScrollView.viewTreeObserver.removeOnGlobalLayoutListener(
-                        this
-                    )
-                    oldWidthOfImageView = binding.mediaDetailScrollView.width
-                    if (media != null) {
-                        displayMediaDetails()
-                        fetchFileUsages(media?.filename!!)
-                    }
-                }
+        try {
+            val contributionsFragment: ContributionsFragment? = this.getContributionsFragmentParent()
+            if (contributionsFragment?.binding != null) {
+                contributionsFragment.binding!!.cardViewNearby.visibility = View.GONE
             }
-        )
-        binding.progressBarEdit.visibility = View.GONE
-        binding.descriptionEdit.visibility = View.VISIBLE
-    }
+            media = if (detailProvider != null) {
+                detailProvider?.getMediaAtPosition(index)  // Changed !! to ?
+            } else {
+                requireArguments().getParcelable("media")
+            }
+            if (media == null) {
+                Timber.w("MediaDetailFragment: Media is null in onResume, possibly due to permission denial. Navigating back.")
+                activity?.onBackPressedDispatcher?.onBackPressed()
+                return
+            }
+            media?.let { validMedia ->
+                if (applicationKvStore.getBoolean(
+                        String.format(NOMINATING_FOR_DELETION_MEDIA, validMedia.imageUrl),
+                        false
+                    )
+                ) {
+                    enableProgressBar()
+                }
+                val currentUser = getUserName(requireContext())
+                if (currentUser != null && currentUser == validMedia.author) {
+                    binding.sendThanks.visibility = View.GONE
+                } else {
+                    binding.sendThanks.visibility = View.VISIBLE
+                }
+                binding.mediaDetailScrollView.viewTreeObserver.addOnGlobalLayoutListener(
+                    object : OnGlobalLayoutListener {
+                        override fun onGlobalLayout() {
+                            if (context == null) {
+                                return
+                            }
+                            binding.mediaDetailScrollView.viewTreeObserver.removeOnGlobalLayoutListener(this)
+                            oldWidthOfImageView = binding.mediaDetailScrollView.width
+                            displayMediaDetails()
+                            validMedia.filename?.let { filename ->
+                                fetchFileUsages(filename)
+                            }
+                        }
+                    }
+                )
+            }
 
+            binding.progressBarEdit.visibility = View.GONE
+            binding.descriptionEdit.visibility = View.VISIBLE
+
+        } catch (e: IndexOutOfBoundsException) {
+            Timber.e(e, "MediaDetailFragment: IndexOutOfBoundsException in onResume. Navigating back safely.")
+            activity?.onBackPressedDispatcher?.onBackPressed()
+        } catch (e: Exception) {
+            Timber.e(e, "MediaDetailFragment: Unexpected error in onResume. Navigating back safely.")
+            activity?.onBackPressedDispatcher?.onBackPressed()
+        }
+    }
     override fun onConfigurationChanged(newConfig: Configuration) {
         super.onConfigurationChanged(newConfig)
         binding.mediaDetailScrollView.viewTreeObserver.addOnGlobalLayoutListener(
