@@ -6,7 +6,10 @@
 * UV
 -->
 <resources>
-  <string name="share_license_summary" fuzzy="true">Haec imago sub licentia %1$s communicabitur.</string>
+  <plurals name="share_license_summary" fuzzy="true">
+    <item quantity="one">Haec imago sub licentia %1$s communicabitur.</item>
+    <item quantity="other">Hae imagines sub licentia %1$s communicabintur.</item>
+  </plurals>
   <string name="app_name" fuzzy="true">Wikimedia Commons</string>
   <string name="menu_settings">Modi</string>
   <string name="username">Nomen usoris</string>

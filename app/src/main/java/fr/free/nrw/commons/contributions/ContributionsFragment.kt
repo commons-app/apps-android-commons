@@ -30,7 +30,6 @@ import androidx.work.WorkManager
 import fr.free.nrw.commons.MapController.NearbyPlacesInfo
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.R
-import fr.free.nrw.commons.Utils
 import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.campaigns.CampaignView
 import fr.free.nrw.commons.campaigns.CampaignsPresenter
@@ -44,7 +43,7 @@ import fr.free.nrw.commons.location.LatLng
 import fr.free.nrw.commons.location.LocationServiceManager
 import fr.free.nrw.commons.location.LocationUpdateListener
 import fr.free.nrw.commons.media.MediaDetailPagerFragment
-import fr.free.nrw.commons.media.MediaDetailPagerFragment.MediaDetailProvider
+import fr.free.nrw.commons.media.MediaDetailProvider
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient
 import fr.free.nrw.commons.nearby.NearbyController
 import fr.free.nrw.commons.nearby.NearbyNotificationCardView
@@ -64,13 +63,15 @@ import fr.free.nrw.commons.utils.LengthUtils.formatDistanceBetween
 import fr.free.nrw.commons.utils.NetworkUtils.isInternetConnectionEstablished
 import fr.free.nrw.commons.utils.PermissionUtils.hasPermission
 import fr.free.nrw.commons.utils.ViewUtil.showLongToast
+import fr.free.nrw.commons.utils.isMonumentsEnabled
+import fr.free.nrw.commons.utils.wLMEndDate
+import fr.free.nrw.commons.utils.wLMStartDate
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
 import java.util.Calendar
-import java.util.Date
 import javax.inject.Inject
 import javax.inject.Named
 
@@ -139,7 +140,7 @@ class ContributionsFragment : CommonsDaggerSupportFragment(), FragmentManager.On
 
     private var wlmCampaign: Campaign? = null
 
-    var userName: String? = null
+    private var userName: String? = null
     private var isUserProfile = false
 
     private var mSensorManager: SensorManager? = null
@@ -242,8 +243,8 @@ class ContributionsFragment : CommonsDaggerSupportFragment(), FragmentManager.On
     private fun initWLMCampaign() {
         wlmCampaign = Campaign(
             getString(R.string.wlm_campaign_title),
-            getString(R.string.wlm_campaign_description), Utils.getWLMStartDate().toString(),
-            Utils.getWLMEndDate().toString(), NearbyParentFragment.WLM_URL, true
+            getString(R.string.wlm_campaign_description), wLMStartDate,
+            wLMEndDate, NearbyParentFragment.WLM_URL, true
         )
     }
 
@@ -729,7 +730,7 @@ class ContributionsFragment : CommonsDaggerSupportFragment(), FragmentManager.On
      * of campaigns on the campaigns card
      */
     private fun fetchCampaigns() {
-        if (Utils.isMonumentsEnabled(Date())) {
+        if (isMonumentsEnabled) {
             if (binding != null) {
                 binding!!.campaignsView.setCampaign(wlmCampaign)
                 binding!!.campaignsView.visibility = View.VISIBLE
@@ -741,10 +742,6 @@ class ContributionsFragment : CommonsDaggerSupportFragment(), FragmentManager.On
                 binding!!.campaignsView.visibility = View.GONE
             }
         }
-    }
-
-    override fun showMessage(message: String) {
-        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
     }
 
     override fun showCampaigns(campaign: Campaign?) {

@@ -26,7 +26,7 @@ class CampaignsPresenter @Inject constructor(
     private val okHttpJsonApiClient: OkHttpJsonApiClient?,
     @param:Named(IO_THREAD) private val ioScheduler: Scheduler,
     @param:Named(MAIN_THREAD) private val mainThreadScheduler: Scheduler
-) : BasePresenter<ICampaignsView?> {
+) : BasePresenter<ICampaignsView> {
     private var view: ICampaignsView? = null
     private var disposable: Disposable? = null
     private var campaign: Campaign? = null

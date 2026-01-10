@@ -26,7 +26,7 @@
 -->
 <resources>
   <string name="commons_facebook">कॉमन्स फेसबुक पृष्ठ</string>
-  <string name="commons_github">कॉमन्स गिटहब सोर्स कोड</string>
+  <string name="commons_github" fuzzy="true">कॉमन्स गिटहब सोर्स कोड</string>
   <string name="commons_logo">कॉमन्स का प्रतीक चिन्ह</string>
   <string name="commons_website">कॉमन्स का जालस्थान</string>
   <string name="exit_location_picker">निकास स्थान चयनकर्ता</string>
@@ -49,18 +49,14 @@
     <item quantity="one">%1$d फ़ाइल अपलोड हो रही</item>
     <item quantity="other">%1$d फ़ाइलें अपलोड हो रहीं</item>
   </plurals>
-  <plurals name="contributions_subtitle">
-    <item quantity="one">(%1$d)</item>
-    <item quantity="other">(%1$d)</item>
-  </plurals>
   <string name="starting_uploads">अपलोड शुरू</string>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">%d अपलोड संसाधित</item>
-    <item quantity="other">%d अपलोड संसाधित</item>
+    <item quantity="one">%1$d अपलोड संसाधित</item>
+    <item quantity="other">%1$d अपलोड संसाधित</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">%d अपलोड</item>
-    <item quantity="other">%d अपलोड</item>
+    <item quantity="one">%1$d अपलोड</item>
+    <item quantity="other">%1$d अपलोड</item>
   </plurals>
   <plurals name="share_license_summary">
     <item quantity="one">इस चित्र का प्रयोग %1$s लाइसेंस के अन्तर्गत होगा</item>
@@ -108,6 +104,7 @@
   <string name="menu_from_camera">फ़ोटो लें</string>
   <string name="menu_nearby">आसपास</string>
   <string name="provider_contributions">मेरे अपलोड</string>
+  <string name="menu_copy_link">लिंक कॉपी करें</string>
   <string name="menu_share">साझा करें</string>
   <string name="share_title_hint" fuzzy="true">शीर्षक (आवश्यक)</string>
   <string name="share_description_hint">विवरण</string>
@@ -125,7 +122,7 @@
   <string name="menu_save_categories">सहेजें</string>
   <string name="refresh_button">ताजा करें</string>
   <string name="display_list_button">सूची</string>
-  <string name="contributions_subtitle_zero" fuzzy="true">अभी तक कोई अपलोड नहीं</string>
+  <string name="contributions_subtitle_zero">(अभी तक कोई अपलोड नहीं)</string>
   <string name="categories_not_found">%1$s से कोई श्रेणी मेल नहीं खाती</string>
   <string name="categories_skip_explanation">विकिमीडिया कॉमन्स पर अपनी छवियों को अधिक खोजने योग्य बनाने के लिए श्रेणियां जोड़ें|\nश्रेणियां जोड़ने के लिए टाइप करना प्रारंभ करें|</string>
   <string name="categories_activity_title">श्रेणियाँ</string>
@@ -151,10 +148,10 @@
   <string name="preference_license">डिफॉल्ट लाइसेन्स</string>
   <string name="use_previous" fuzzy="true">पिछले शीर्षक/विवरण का उपयोग करें</string>
   <string name="preference_theme">थीम</string>
-  <string name="license_name_cc_by_sa_four">एट्रीब्यूशन-शेयरअलाइक 4.0</string>
-  <string name="license_name_cc_by_four">एट्रिब्यूशन 4.0</string>
-  <string name="license_name_cc_by_sa">एट्रीब्यूशन-शेयरअलाइक 3.0</string>
-  <string name="license_name_cc_by">एट्रीब्यूशन 3.0</string>
+  <string name="license_name_cc_by_sa_four" fuzzy="true">एट्रीब्यूशन-शेयरअलाइक 4.0</string>
+  <string name="license_name_cc_by_four" fuzzy="true">एट्रिब्यूशन 4.0</string>
+  <string name="license_name_cc_by_sa" fuzzy="true">एट्रीब्यूशन-शेयरअलाइक 3.0</string>
+  <string name="license_name_cc_by" fuzzy="true">एट्रीब्यूशन 3.0</string>
   <string name="license_name_cc0">सीसी0</string>
   <string name="license_name_cc_by_sa_3_0">सीसी बाय-एसए 3.0</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
@@ -179,7 +176,7 @@
   <string name="welcome_copyright_subtext">इंटरनेट से मिली कोई कॉपीराइट सामग्री के साथ साथ पोस्टर, पुस्तक के खड्डे आदि को भी अपलोड करने से बचें।</string>
   <string name="welcome_final_text">क्या आपको लगता है कि आप समझ गए?</string>
   <string name="welcome_final_button_text">हाँ!</string>
-  <string name="welcome_help_button_text" fuzzy="true">&lt;u&gt;अधिक जानकारी&lt;/u&gt;</string>
+  <string name="welcome_help_button_text">अधिक जानकारी</string>
   <string name="detail_panel_cats_label">श्रेणियाँ</string>
   <string name="detail_panel_cats_loading">लोड हो रहा है…</string>
   <string name="detail_panel_cats_none">कुछ चयनित नहीं</string>
@@ -193,7 +190,9 @@
   <string name="upload">अपलोड करें</string>
   <string name="yes">हाँ</string>
   <string name="no">नहीं</string>
+  <string name="media_detail_caption">कैप्शन</string>
   <string name="media_detail_title">शीर्षक</string>
+  <string name="media_detail_depiction">चित्रण</string>
   <string name="media_detail_description">विवरण</string>
   <string name="media_detail_discussion">चर्चा</string>
   <string name="media_detail_author">लेखक</string>
@@ -205,15 +204,14 @@
   <string name="become_a_tester_description">गूगल प्ले पर हमारे बीटा चैनल का चयन करें और नई सुविधाओं व त्रुटिसुधारों तक पहले पहुँचे</string>
   <string name="_2fa_code">2 एफए कोड</string>
   <string name="logout_verification">क्या आप वास्तव में निकास करना चाहते हैं?</string>
-  <string name="mediaimage_failed">मीडिया छवि विफल</string>
   <string name="no_subcategory_found">कोई उपश्रेणी नहीं मिली</string>
   <string name="no_parentcategory_found">कोई मूल श्रेणी नहीं मिली</string>
   <string name="welcome_image_mount_zao">माउंट ज़ाओ</string>
   <string name="welcome_image_llamas">ल्लामस</string>
   <string name="welcome_image_rainbow_bridge">इंद्रधनुष के पुल</string>
   <string name="welcome_image_tulip">ट्यूलिप</string>
-  <string name="welcome_image_welcome_wikipedia">विकिपीडिया में स्वागत है</string>
-  <string name="welcome_image_welcome_copyright">प्रतिलिप्याधिकार में स्वागत है</string>
+  <string name="welcome_image_welcome_wikipedia" fuzzy="true">विकिपीडिया में स्वागत है</string>
+  <string name="welcome_image_welcome_copyright" fuzzy="true">प्रतिलिप्याधिकार में स्वागत है</string>
   <string name="welcome_image_sydney_opera_house">सिडनी का ओपेरा हाउस</string>
   <string name="cancel">रद्द करें</string>
   <string name="navigation_drawer_open">खोलें</string>
@@ -258,11 +256,11 @@
   <string name="wikicode_copied">विकिटेक्सट क्लिपबोर्ड पर कॉपी किया जा चुका है</string>
   <string name="nearby_location_not_available">स्थान उपलब्ध नहीं है।</string>
   <string name="location_permission_rationale_nearby">आसपास के स्थान दिखाने के लिए अनुमति चाहिए</string>
-  <string name="nearby_directions" fuzzy="true">दिशा-निर्देश</string>
-  <string name="nearby_wikidata" fuzzy="true">विकीडाटा</string>
-  <string name="nearby_wikipedia" fuzzy="true">विकीपीडिया</string>
+  <string name="nearby_directions">दिशा-निर्देश</string>
+  <string name="nearby_wikidata">विकीडाटा</string>
+  <string name="nearby_wikipedia">विकीपीडिया</string>
   <string name="nearby_commons">कॉमन्स</string>
-  <string name="about_rate_us" fuzzy="true">&lt;u&gt;हमें रेट करें&lt;/u&gt;</string>
+  <string name="about_rate_us">हमें रेट करें</string>
   <string name="about_faq">अक्सर पूछे जाने वाले प्रश्न</string>
   <string name="welcome_skip_button">प्रशिक्षण छोड़ें</string>
   <string name="no_internet">इंटरनेट उपलब्ध नहीं</string>
@@ -276,6 +274,7 @@
   <string name="no_images_found">कोई चित्र नहीं मिला!</string>
   <string name="error_loading_images">चित्र अपलोड करते समय त्रुटि उत्पन्न हुई।</string>
   <string name="image_uploaded_by">अपलोड: %1$s</string>
+  <string name="block_notification_title">अवरोधित</string>
   <string name="block_notification">कॉमन्स पर सम्पादन से आप अवरोधित हो चुके हैं</string>
   <string name="app_widget_heading">आज का चित्र</string>
   <string name="menu_search_button">खोजें</string>
@@ -286,6 +285,7 @@
   <string name="error_loading_categories">श्रेणी लोड करते समय त्रुटि उत्पन्न हुई।</string>
   <string name="search_tab_title_media">मीडिया</string>
   <string name="search_tab_title_categories">श्रेणियाँ</string>
+  <string name="search_tab_title_depictions">आयटम</string>
   <string name="explore_tab_title_featured">निर्वाचित</string>
   <string name="explore_tab_title_map">नक्शा</string>
   <string name="successful_wikidata_edit" fuzzy="true">चित्र सफ़लतापूर्वक विकिडाटा के %1$s पर सफलतापूर्वक जोड़ दिया गया है।</string>
@@ -296,6 +296,7 @@
   <string name="question">प्रश्न</string>
   <string name="result">परिणाम</string>
   <string name="selfie_answer">सेल्फी की ज्ञानकोषीय महत्ता बहुत अधिक नहीं है। कृपया अपना चित्र तब तक अपलोड न करें जबतक आपके बारे में कोई विकिपीडिया लेख पहले से उपलब्ध नहीं है।</string>
+  <string name="quiz_continue">जारी रखें</string>
   <string name="warning_for_no_answer">उत्तर हेतु प्रश्न के दो विकल्प में से कोई एक चुने</string>
   <string name="user_not_logged_in" fuzzy="true">लॉग इन सत्र समाप्त हो गया, कृपया पुनः लॉग इन करें।</string>
   <string name="quiz_result_share_message">अपनी प्रश्नोत्तरी अपने मित्रों के साथ साझा करें!</string>
@@ -312,10 +313,11 @@
   <string name="nominate_delete">हटाने के लिये नामांकन करें</string>
   <string name="delete">हटाएँ</string>
   <string name="Achievements">उपलब्धियाँ</string>
-  <string name="statistics">सांख्यिकी</string>
+  <string name="Profile">प्रोफ़ाइल</string>
   <string name="statistics_thanks">धन्यवाद प्राप्त किया</string>
   <string name="statistics_featured">निर्वाचित चित्र</string>
-  <string name="level">स्तर %d</string>
+  <string name="level">स्तर %1$d</string>
+  <string name="profile_withLevel">%1$s (स्तर %2$s )</string>
   <string name="images_uploaded">चित्र अपलोड हुआ</string>
   <string name="image_reverts">चित्रों को वापस नहीं किया गया</string>
   <string name="images_used_by_wiki">उपयोग हुए चित्र</string>
@@ -353,7 +355,10 @@
   <string name="ends_on">खत्म होगा:</string>
   <string name="display_campaigns">दृश्य अभियान</string>
   <string name="display_campaigns_explanation" fuzzy="true">वर्तमान में चल रहे अभियानों को जानने के लिये यहाँ दबायें</string>
+  <string name="option_allow">अनुमति दें</string>
+  <string name="option_dismiss">रद्द करें</string>
   <string name="error_processing_image">छवि संसाधित करते समय त्रुटि आई। कृपया पुन: प्रयास करें!</string>
+  <string name="nominate_for_deletion_done">पूर्ण हुआ</string>
   <string name="no_image">कोई चित्र उपयोग नहीं हुआ</string>
   <string name="no_image_reverted">कोई चित्र वापस नहीं लाया</string>
   <string name="no_image_uploaded">कोई चित्र अपलोड नहीं किया</string>
@@ -364,6 +369,7 @@
   <string name="category_edit_helper_show_edit_title_success">सफल</string>
   <string name="leaderboard_column_count">गणना</string>
   <string name="custom_selector_dismiss_limit_warning_button_text">रद्द करें</string>
+  <string name="location_permission_rationale">वैकल्पिक अनुमति: श्रेणी सुझाव हेतु वर्तमान स्थान ज्ञात करें</string>
   <string name="talk">वार्ता</string>
   <string name="are_you_sure_that_you_want_cancel_all_the_uploads">क्या आप वाकई सभी अपलोड रद्द करना चाहते हैं?</string>
   <string name="cancelling_all_the_uploads">सभी अपलोड रद्द किये जा रहे हैं...</string>

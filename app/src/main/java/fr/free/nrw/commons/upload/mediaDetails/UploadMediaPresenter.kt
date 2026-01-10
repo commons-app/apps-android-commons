@@ -69,7 +69,18 @@ class UploadMediaPresenter @Inject constructor(
         uploadMediaDetails: List<UploadMediaDetail>,
         uploadItemIndex: Int
     ) {
-        repository.getUploads()[uploadItemIndex].uploadMediaDetails = uploadMediaDetails.toMutableList()
+        val uploadItems = repository.getUploads()
+        if (uploadItemIndex >= 0 && uploadItemIndex < uploadItems.size) {
+            if (uploadMediaDetails.isNotEmpty()) {
+                uploadItems[uploadItemIndex].uploadMediaDetails = uploadMediaDetails.toMutableList()
+                Timber.d("Set uploadMediaDetails for index %d, size %d", uploadItemIndex, uploadMediaDetails.size)
+            } else {
+                uploadItems[uploadItemIndex].uploadMediaDetails = mutableListOf(UploadMediaDetail())
+                Timber.w("Received empty uploadMediaDetails for index %d, initialized default", uploadItemIndex)
+            }
+        } else {
+            Timber.e("Invalid index %d for uploadItems size %d, skipping setUploadMediaDetails", uploadItemIndex, uploadItems.size)
+        }
     }
 
     override fun setupBasicKvStoreFactory(factory: (String) -> BasicKvStore) {
@@ -107,7 +118,10 @@ class UploadMediaPresenter @Inject constructor(
                     view.showProgress(false)
                     val gpsCoords = uploadItem.gpsCoords
                     val hasImageCoordinates = gpsCoords != null && gpsCoords.imageCoordsExists
-                    if (hasImageCoordinates && place == null) {
+                    
+                    // Only check for nearby places if image has coordinates AND no place was pre-selected
+                    // This prevents the popup from appearing when uploading from Nearby feature
+                    if (hasImageCoordinates && place == null && uploadItem.place == null) {
                         checkNearbyPlaces(uploadItem)
                     }
                 }, { throwable: Throwable? ->

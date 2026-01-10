@@ -13,6 +13,7 @@ import android.os.Build.VERSION_CODES
 import android.os.Bundle
 import android.provider.Settings
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.CheckBox
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AlertDialog
@@ -38,6 +39,7 @@ import fr.free.nrw.commons.mwapi.UserClient
 import fr.free.nrw.commons.nearby.Place
 import fr.free.nrw.commons.settings.Prefs
 import fr.free.nrw.commons.theme.BaseActivity
+import fr.free.nrw.commons.utils.applyEdgeToEdgeAllInsets
 import fr.free.nrw.commons.upload.ThumbnailsAdapter.OnThumbnailDeletedListener
 import fr.free.nrw.commons.upload.categories.UploadCategoriesFragment
 import fr.free.nrw.commons.upload.depicts.DepictsFragment
@@ -177,6 +179,7 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
         presenter?.setupBasicKvStoreFactory { BasicKvStore(this@UploadActivity, it) }
 
         _binding = ActivityUploadBinding.inflate(layoutInflater)
+        applyEdgeToEdgeAllInsets(_binding!!.root, false)
         setContentView(binding.root)
 
         // Overrides the back button to make sure the user is prepared to lose their progress
@@ -308,9 +311,20 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
     }
 
     private fun checkStoragePermissions() {
+        // The share intent provides files via content uris with temporary read permissions,
+        // so we do not need to obtain storage permissions
+        val action = intent.action
+        if (Intent.ACTION_SEND == action || Intent.ACTION_SEND_MULTIPLE == action) {
+            // Get the external items first
+            receiveExternalSharedItems()
+            receiveSharedItems()
+            return
+        }
+
         // Check if all required permissions are granted
         val hasAllPermissions = hasPermission(this, PERMISSIONS_STORAGE)
         val hasPartialAccess = hasPartialAccess(this)
+
         if (hasAllPermissions || hasPartialAccess) {
             // All required permissions are granted, so enable UI elements and perform actions
             receiveSharedItems()
@@ -443,7 +457,7 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
                                 this,
                                 getString(R.string.storage_permissions_denied),
                                 getString(R.string.unable_to_share_upload_item),
-                                getString(android.R.string.ok)
+                                getString(R.string.ok)
                             ) { finish() }
                         } else {
                             showAlertDialog(
@@ -452,7 +466,7 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
                                 getString(
                                     R.string.write_storage_permission_rationale_for_image_share
                                 ),
-                                getString(android.R.string.ok)
+                                getString(R.string.ok)
                             ) { checkStoragePermissions() }
                         }
                     }
@@ -469,9 +483,7 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
     private fun receiveSharedItems() {
         val intent = intent
         val action = intent.action
-        if (Intent.ACTION_SEND == action || Intent.ACTION_SEND_MULTIPLE == action) {
-            receiveExternalSharedItems()
-        } else if (ContributionController.ACTION_INTERNAL_UPLOADS == action) {
+        if (ContributionController.ACTION_INTERNAL_UPLOADS == action) {
             receiveInternalSharedItems()
         }
 
@@ -505,24 +517,17 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
                 fragments = mutableListOf()
             }
 
-
             for (uploadableFile in uploadableFiles) {
                 val uploadMediaDetailFragment = UploadMediaDetailFragment()
 
-                if (!uploadIsOfAPlace) {
+                // set fragment properties but defer initialization
+                uploadMediaDetailFragment.uploadableFile = uploadableFile
+                uploadMediaDetailFragment.place = place
+                uploadMediaDetailFragment.inAppPictureLocation = if (!uploadIsOfAPlace) {
                     handleLocation()
-                    uploadMediaDetailFragment.setImageToBeUploaded(
-                        uploadableFile,
-                        place,
-                        currLocation
-                    )
-                    locationManager!!.unregisterLocationManager()
+                    currLocation
                 } else {
-                    uploadMediaDetailFragment.setImageToBeUploaded(
-                        uploadableFile,
-                        place,
-                        currLocation
-                    )
+                    currLocation
                 }
 
                 val uploadMediaDetailFragmentCallback: UploadMediaDetailFragmentCallback =
@@ -577,13 +582,19 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
                 if (isFragmentsSaved) {
                     val fragment = fragments!![0] as UploadMediaDetailFragment?
                     fragment!!.fragmentCallback = uploadMediaDetailFragmentCallback
+                    fragment.initializeFragment()
                 } else {
                     uploadMediaDetailFragment.fragmentCallback = uploadMediaDetailFragmentCallback
                     fragments!!.add(uploadMediaDetailFragment)
                 }
             }
 
-            //If fragments are not created, create them and add them to the fragments ArrayList
+            // unregister location manager after loop if needed
+            if (!uploadIsOfAPlace) {
+                locationManager!!.unregisterLocationManager()
+            }
+
+            // If fragments are not created, create them and add them to the fragments ArrayList
             if (!isFragmentsSaved) {
                 uploadCategoriesFragment = UploadCategoriesFragment()
                 if (place != null) {
@@ -803,6 +814,19 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
 
     override fun onNextButtonClicked(index: Int) {
         if (index < fragments!!.size - 1) {
+            // Hide the keyboard before navigating to Media License screen
+            val isUploadCategoriesFragment = fragments!!.getOrNull(index)?.let {
+                it is UploadCategoriesFragment
+            } ?: false
+            if (isUploadCategoriesFragment) {
+                val inputMethodManager = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+                currentFocus?.let { focusedView ->
+                    inputMethodManager.hideSoftInputFromWindow(
+                        focusedView.windowToken,
+                        InputMethodManager.HIDE_NOT_ALWAYS
+                    )
+                }
+            }
             binding.vpUpload.setCurrentItem(index + 1, false)
             fragments!![index + 1].onBecameVisible()
             (binding.rvThumbnails.layoutManager as LinearLayoutManager)

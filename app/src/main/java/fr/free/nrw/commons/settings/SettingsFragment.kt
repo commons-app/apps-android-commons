@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.settings
 
 import android.Manifest.permission
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.Dialog
 import android.content.Context.MODE_PRIVATE
@@ -33,9 +34,7 @@ import com.karumi.dexter.MultiplePermissionsReport
 import com.karumi.dexter.PermissionToken
 import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener
-import fr.free.nrw.commons.BuildConfig.MOBILE_META_URL
 import fr.free.nrw.commons.R
-import fr.free.nrw.commons.Utils
 import fr.free.nrw.commons.activity.SingleWebViewActivity
 import fr.free.nrw.commons.campaigns.CampaignView
 import fr.free.nrw.commons.contributions.ContributionController
@@ -53,6 +52,7 @@ import fr.free.nrw.commons.utils.DialogUtil
 import fr.free.nrw.commons.utils.PermissionUtils
 import fr.free.nrw.commons.utils.StringUtil
 import fr.free.nrw.commons.utils.ViewUtil
+import fr.free.nrw.commons.utils.handleWebUrl
 import java.util.Locale
 import javax.inject.Inject
 import javax.inject.Named
@@ -239,7 +239,10 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
         val betaTesterPreference: Preference? = findPreference("becomeBetaTester")
         betaTesterPreference?.setOnPreferenceClickListener {
-            Utils.handleWebUrl(requireActivity(), Uri.parse(getString(R.string.beta_opt_in_link)))
+            handleWebUrl(
+                requireActivity(),
+                Uri.parse(getString(R.string.beta_opt_in_link))
+            )
             true
         }
 
@@ -296,11 +299,16 @@ class SettingsFragment : PreferenceFragmentCompat() {
             getString(R.string.ok),
             getString(R.string.read_help_link),
             { },
-            { Utils.handleWebUrl(requireContext(), Uri.parse(GET_CONTENT_PICKER_HELP_URL)) },
+            { handleWebUrl(requireContext(), Uri.parse(GET_CONTENT_PICKER_HELP_URL)) },
             null
         )
     }
 
+    // Remove the space for icons in the settings menu.
+    // This uses an internal API that shouldn't be used in app code,
+    // but it appears to be the most robust way to do this at the moment,
+    // disable the warning.
+    @SuppressLint("RestrictedApi")
     override fun onCreateAdapter(preferenceScreen: PreferenceScreen): Adapter<PreferenceViewHolder>
     {
         return object : PreferenceGroupAdapter(preferenceScreen) {

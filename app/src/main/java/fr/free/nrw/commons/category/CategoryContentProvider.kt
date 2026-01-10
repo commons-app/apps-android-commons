@@ -9,12 +9,9 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteQueryBuilder
 import android.net.Uri
 import android.text.TextUtils
-import androidx.annotation.NonNull
 import fr.free.nrw.commons.BuildConfig
-import fr.free.nrw.commons.data.DBOpenHelper
 import fr.free.nrw.commons.di.CommonsDaggerContentProvider
-import timber.log.Timber
-import javax.inject.Inject
+import androidx.core.net.toUri
 
 class CategoryContentProvider : CommonsDaggerContentProvider() {
 
@@ -22,9 +19,6 @@ class CategoryContentProvider : CommonsDaggerContentProvider() {
         addURI(BuildConfig.CATEGORY_AUTHORITY, BASE_PATH, CATEGORIES)
         addURI(BuildConfig.CATEGORY_AUTHORITY, "${BASE_PATH}/#", CATEGORIES_ID)
     }
-
-    @Inject
-    lateinit var dbOpenHelper: DBOpenHelper
 
     @SuppressWarnings("ConstantConditions")
     override fun query(uri: Uri, projection: Array<String>?, selection: String?,
@@ -34,7 +28,7 @@ class CategoryContentProvider : CommonsDaggerContentProvider() {
         }
 
         val uriType = uriMatcher.match(uri)
-        val db = dbOpenHelper.readableDatabase
+        val db = requireDb()
 
         val cursor: Cursor? = when (uriType) {
             CATEGORIES -> queryBuilder.query(
@@ -58,45 +52,37 @@ class CategoryContentProvider : CommonsDaggerContentProvider() {
             else -> throw IllegalArgumentException("Unknown URI $uri")
         }
 
-        cursor?.setNotificationUri(context?.contentResolver, uri)
+        cursor?.setNotificationUri(requireContext().contentResolver, uri)
         return cursor
     }
 
-    override fun getType(uri: Uri): String? {
-        return null
-    }
+    override fun getType(uri: Uri): String? = null
 
     @SuppressWarnings("ConstantConditions")
-    override fun insert(uri: Uri, contentValues: ContentValues?): Uri? {
+    override fun insert(uri: Uri, contentValues: ContentValues?): Uri {
         val uriType = uriMatcher.match(uri)
-        val sqlDB = dbOpenHelper.writableDatabase
         val id: Long
         when (uriType) {
             CATEGORIES -> {
-                id = sqlDB.insert(TABLE_NAME, null, contentValues)
+                id = requireDb().insert(TABLE_NAME, null, contentValues)
             }
             else -> throw IllegalArgumentException("Unknown URI: $uri")
         }
-        context?.contentResolver?.notifyChange(uri, null)
-        return Uri.parse("${Companion.BASE_URI}/$id")
+        requireContext().contentResolver?.notifyChange(uri, null)
+        return "${BASE_URI}/$id".toUri()
     }
 
     @SuppressWarnings("ConstantConditions")
-    override fun delete(uri: Uri, selection: String?, selectionArgs: Array<String>?): Int {
-        // Not implemented
-        return 0
-    }
+    override fun delete(uri: Uri, selection: String?, selectionArgs: Array<String>?): Int = 0
 
     @SuppressWarnings("ConstantConditions")
     override fun bulkInsert(uri: Uri, values: Array<ContentValues>): Int {
-        Timber.d("Hello, bulk insert! (CategoryContentProvider)")
         val uriType = uriMatcher.match(uri)
-        val sqlDB = dbOpenHelper.writableDatabase
+        val sqlDB = requireDb()
         sqlDB.beginTransaction()
         when (uriType) {
             CATEGORIES -> {
                 for (value in values) {
-                    Timber.d("Inserting! %s", value)
                     sqlDB.insert(TABLE_NAME, null, value)
                 }
                 sqlDB.setTransactionSuccessful()
@@ -104,7 +90,7 @@ class CategoryContentProvider : CommonsDaggerContentProvider() {
             else -> throw IllegalArgumentException("Unknown URI: $uri")
         }
         sqlDB.endTransaction()
-        context?.contentResolver?.notifyChange(uri, null)
+        requireContext().contentResolver?.notifyChange(uri, null)
         return values.size
     }
 
@@ -112,17 +98,18 @@ class CategoryContentProvider : CommonsDaggerContentProvider() {
     override fun update(uri: Uri, contentValues: ContentValues?, selection: String?,
                         selectionArgs: Array<String>?): Int {
         val uriType = uriMatcher.match(uri)
-        val sqlDB = dbOpenHelper.writableDatabase
         val rowsUpdated: Int
         when (uriType) {
             CATEGORIES_ID -> {
                 if (TextUtils.isEmpty(selection)) {
                     val id = uri.lastPathSegment?.toInt()
                         ?: throw IllegalArgumentException("Invalid ID")
-                    rowsUpdated = sqlDB.update(TABLE_NAME,
+                    rowsUpdated = requireDb().update(
+                        TABLE_NAME,
                         contentValues,
                         "$COLUMN_ID = ?",
-                        arrayOf(id.toString()))
+                        arrayOf(id.toString())
+                    )
                 } else {
                     throw IllegalArgumentException(
                         "Parameter `selection` should be empty when updating an ID")
@@ -130,7 +117,7 @@ class CategoryContentProvider : CommonsDaggerContentProvider() {
             }
             else -> throw IllegalArgumentException("Unknown URI: $uri with type $uriType")
         }
-        context?.contentResolver?.notifyChange(uri, null)
+        requireContext().contentResolver?.notifyChange(uri, null)
         return rowsUpdated
     }
 
@@ -165,13 +152,9 @@ class CategoryContentProvider : CommonsDaggerContentProvider() {
                 "$COLUMN_TIMES_USED INTEGER" +
                 ");"
 
-        fun uriForId(id: Int): Uri {
-            return Uri.parse("${BASE_URI}/$id")
-        }
+        fun uriForId(id: Int): Uri = Uri.parse("${BASE_URI}/$id")
 
-        fun onCreate(db: SQLiteDatabase) {
-            db.execSQL(CREATE_TABLE_STATEMENT)
-        }
+        fun onCreate(db: SQLiteDatabase) = db.execSQL(CREATE_TABLE_STATEMENT)
 
         fun onDelete(db: SQLiteDatabase) {
             db.execSQL(DROP_TABLE_STATEMENT)
@@ -200,6 +183,6 @@ class CategoryContentProvider : CommonsDaggerContentProvider() {
         private const val CATEGORIES = 1
         private const val CATEGORIES_ID = 2
         private const val BASE_PATH = "categories"
-        val  BASE_URI: Uri = Uri.parse("content://${BuildConfig.CATEGORY_AUTHORITY}/${Companion.BASE_PATH}")
+        val  BASE_URI: Uri = "content://${BuildConfig.CATEGORY_AUTHORITY}/${BASE_PATH}".toUri()
     }
 }

@@ -25,6 +25,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
+import androidx.core.view.ViewGroupCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.compose.NavHost
@@ -35,6 +36,7 @@ import fr.free.nrw.commons.customselector.database.NotForUploadStatus
 import fr.free.nrw.commons.customselector.database.NotForUploadStatusDao
 import fr.free.nrw.commons.customselector.domain.model.Image
 import fr.free.nrw.commons.customselector.helper.CustomSelectorConstants
+import fr.free.nrw.commons.customselector.helper.CustomSelectorConstants.MAX_IMAGE_COUNT
 import fr.free.nrw.commons.customselector.helper.FolderDeletionHelper
 import fr.free.nrw.commons.customselector.listeners.FolderClickListener
 import fr.free.nrw.commons.customselector.listeners.ImageSelectListener
@@ -92,7 +94,7 @@ class CustomSelectorActivity :
     /**
      * Maximum number of images that can be selected.
      */
-    private var uploadLimit: Int = 20
+    private var uploadLimit: Int = MAX_IMAGE_COUNT
 
     /**
      * Flag that is marked true when the amount
@@ -147,7 +149,7 @@ class CustomSelectorActivity :
      * Waits for confirmation of delete folder
      */
     private val startForFolderDeletionResult = registerForActivityResult(ActivityResultContracts.StartIntentSenderForResult()){
-        result -> onDeleteFolderResultReceived(result)
+            result -> onDeleteFolderResultReceived(result)
     }
 
     private val startForResult = registerForActivityResult(StartActivityForResult()){ result ->

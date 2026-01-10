@@ -12,17 +12,17 @@
     android:layout_marginStart="8dp"
     android:layout_marginTop="8dp"
     android:layout_marginEnd="8dp"
-    android:hint="Type Language Name"
+    android:hint="@string/language_search_type_language_name"
     android:padding="12dp"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent"></EditText>
+    app:layout_constraintTop_toTopOf="parent" />
 
   <TextView
     android:id="@+id/recent_searches"
     android:layout_width="0dp"
     android:layout_height="wrap_content"
-    android:text="Recent Searches"
+    android:text="@string/language_search_recent_searches"
     app:layout_constraintTop_toBottomOf="@id/search_language"
     app:layout_constraintEnd_toEndOf="@+id/language_history_list"
     android:layout_marginEnd="8dp"
@@ -55,7 +55,7 @@
     android:id="@+id/all_languages"
     android:layout_width="0dp"
     android:layout_height="wrap_content"
-    android:text="All Languages"
+    android:text="@string/language_search_all_languages"
     app:layout_constraintTop_toBottomOf="@id/separator"
     app:layout_constraintEnd_toEndOf="@+id/language_history_list"
     android:layout_margin="8dp"

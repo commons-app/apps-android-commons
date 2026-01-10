@@ -24,22 +24,29 @@
     <item quantity="one">%1$d ffeil yn uwchlwytho</item>
     <item quantity="other">%1$d ffeil yn uwchlwytho</item>
   </plurals>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">(%1$d)</item>
-    <item quantity="other">(%1$d)</item>
-  </plurals>
   <string name="starting_uploads">Cychwyn Uwchlwytho</string>
   <plurals name="starting_multiple_uploads" fuzzy="true">
+    <item quantity="zero">Cychwyn uwchlwytho %1$d ffeil</item>
     <item quantity="one">Cychwyn %1$d uwchlwythiad</item>
+    <item quantity="two">Cychwyn uwchlwytho %1$d ffeil</item>
+    <item quantity="few">Cychwyn uwchlwytho %1$d ffeil</item>
+    <item quantity="many">Cychwyn uwchlwytho %1$d ffeil</item>
     <item quantity="other">Cychwyn uwchlwytho %1$d ffeil</item>
   </plurals>
-  <plurals name="multiple_uploads_title" fuzzy="true">
+  <plurals name="multiple_uploads_title">
+    <item quantity="zero">%1$d uwchlwythiad</item>
     <item quantity="one">%1$d uwchlwythiad</item>
+    <item quantity="two">%1$d uwchlwythiad</item>
+    <item quantity="few">%1$d uwchlwythiad</item>
+    <item quantity="many">%1$d uwchlwythiad</item>
     <item quantity="other">%1$d uwchlwythiad</item>
   </plurals>
-  <plurals name="share_license_summary" fuzzy="true">
+  <plurals name="share_license_summary">
+    <item quantity="zero">Caiff y delweddau hyn eu trwyddedu dan %1$s</item>
     <item quantity="one">Caiff y ddelwedd hon ei thrwyddedu yn ôl termau\'r drwydded %1$s</item>
+    <item quantity="two">Caiff y delweddau hyn eu trwyddedu dan %1$s</item>
+    <item quantity="few">Caiff y delweddau hyn eu trwyddedu dan %1$s</item>
+    <item quantity="many">Caiff y delweddau hyn eu trwyddedu dan %1$s</item>
     <item quantity="other">Caiff y delweddau hyn eu trwyddedu dan %1$s</item>
   </plurals>
   <string name="navigation_item_explore">Archwilio</string>
@@ -66,7 +73,7 @@
   <string name="uploading_started">Dechreuodd yr uwchlwytho!</string>
   <string name="upload_completed_notification_title">Uwchlwythwyd %1$s!</string>
   <string name="upload_completed_notification_text">Tapiwch i weld eich uwchlwythiad</string>
-  <string name="upload_progress_notification_title_start">Wrthi\'n uwchlwytho ffeil: %s</string>
+  <string name="upload_progress_notification_title_start">Wrthi\'n uwchlwytho ffeil: %1$s</string>
   <string name="upload_progress_notification_title_in_progress">Wrthi\'n uwchlwytho %1$s</string>
   <string name="upload_progress_notification_title_finishing">Yn gorffen uwchlwytho %1$s</string>
   <string name="upload_failed_notification_title">Wedi methu uwchlwytho %1$s</string>
@@ -125,10 +132,10 @@
   <string name="preference_license">Trwydded Ddiofyn (\'default\')</string>
   <string name="use_previous" fuzzy="true">Defnydiwch y teitl/disgrifiad blaenorol</string>
   <string name="preference_theme">Thema</string>
-  <string name="license_name_cc_by_sa_four"> Attribution-ShareAlike 4.0</string>
-  <string name="license_name_cc_by_four"> Attribution 4.0</string>
-  <string name="license_name_cc_by_sa">CC Attribution-ShareAlike 3.0</string>
-  <string name="license_name_cc_by">CC Attribution 3.0</string>
+  <string name="license_name_cc_by_sa_four" fuzzy="true"> Attribution-ShareAlike 4.0</string>
+  <string name="license_name_cc_by_four" fuzzy="true"> Attribution 4.0</string>
+  <string name="license_name_cc_by_sa" fuzzy="true">CC Attribution-ShareAlike 3.0</string>
+  <string name="license_name_cc_by" fuzzy="true">CC Attribution 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
@@ -185,14 +192,13 @@
   <string name="become_a_tester_title">Dewch yn Brofwr Beta</string>
   <string name="_2fa_code">Cod 2FA</string>
   <string name="logout_verification">Ti\'n sicr dy fod am allgofnodi?</string>
-  <string name="mediaimage_failed">Methodd y ddelwedd</string>
   <string name="no_subcategory_found">Ni chafwyd hyd i is-gategoriau</string>
   <string name="welcome_image_mount_zao">Mount Zao</string>
   <string name="welcome_image_llamas">Lamas</string>
   <string name="welcome_image_rainbow_bridge">Pont yr Enfys</string>
   <string name="welcome_image_tulip">Tiwlip</string>
-  <string name="welcome_image_welcome_wikipedia">Croeso Wicipedia</string>
-  <string name="welcome_image_welcome_copyright">Croeso Hawlfraint</string>
+  <string name="welcome_image_welcome_wikipedia" fuzzy="true">Croeso Wicipedia</string>
+  <string name="welcome_image_welcome_copyright" fuzzy="true">Croeso Hawlfraint</string>
   <string name="welcome_image_sydney_opera_house">Ty Opera Sydney</string>
   <string name="cancel">Diddymu</string>
   <string name="navigation_drawer_open">Agor</string>
@@ -282,7 +288,6 @@
   <string name="share_app_title">Rhannu Ap</string>
   <string name="delete">Dileu</string>
   <string name="Profile">Proffil</string>
-  <string name="statistics">Ystadegau</string>
   <string name="contributions_fragment">Cyfraniadau</string>
   <string name="notifications">Hysbysiadau</string>
   <string name="option_allow">Caniatáu</string>
@@ -301,6 +306,7 @@
   <string name="description">Disgrifiad</string>
   <string name="title_page_bookmarks_items">Eitemau</string>
   <string name="learn_more">DYSGU MWY</string>
+  <string name="location_permission_rationale">Caniatad opsiynol: Ceisio\'r lleoliad cyfoes ar gyfer categoriau</string>
   <string name="reset">Ailosod</string>
   <string name="explore_map_details">Manylion</string>
   <string name="api_level">Lefel API</string>

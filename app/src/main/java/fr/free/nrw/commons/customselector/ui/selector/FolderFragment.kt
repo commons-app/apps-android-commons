@@ -18,6 +18,7 @@ import fr.free.nrw.commons.databinding.FragmentCustomSelectorBinding
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment
 import fr.free.nrw.commons.media.MediaClient
 import fr.free.nrw.commons.upload.FileProcessor
+import fr.free.nrw.commons.utils.applyEdgeToEdgeBottomPaddingInsets
 import javax.inject.Inject
 
 /**
@@ -99,6 +100,7 @@ class FolderFragment : CommonsDaggerSupportFragment() {
         selectorRV = binding?.selectorRv
         loader = binding?.loader
         with(binding?.selectorRv) {
+            this?.applyEdgeToEdgeBottomPaddingInsets()
             this?.layoutManager = gridLayoutManager
             this?.setHasFixedSize(true)
             this?.adapter = folderAdapter

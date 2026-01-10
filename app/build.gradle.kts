@@ -19,14 +19,14 @@ if (isRunningOnTravisAndIsNotPRBuild) {
 
 android {
     namespace = "fr.free.nrw.commons"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "fr.free.nrw.commons"
         minSdk = 21
-        targetSdk = 34
-        versionCode = 1052
-        versionName = "5.4.1"
+        targetSdk = 35
+        versionCode = 1061
+        versionName = "6.2.1"
 
         setProperty("archivesBaseName", "app-commons-v$versionName-" + getBranchName())
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -227,6 +227,7 @@ dependencies {
     implementation(libs.rxbinding)
     implementation(libs.rxbinding.appcompat)
     implementation(libs.facebook.fresco)
+    implementation(libs.facebook.fresco.middleware)
     implementation(libs.apache.commons.lang3)
 
     // UI
@@ -355,6 +356,7 @@ dependencies {
     // Kotlin + coroutines
     implementation(libs.androidx.work.runtime.ktx)
     implementation(libs.androidx.work.runtime)
+    implementation(libs.kotlinx.coroutines.rx2)
     testImplementation(libs.androidx.work.testing)
 
     //Glide

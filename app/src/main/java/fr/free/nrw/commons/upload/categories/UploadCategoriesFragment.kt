@@ -10,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jakewharton.rxbinding2.view.RxView
@@ -26,12 +27,12 @@ import fr.free.nrw.commons.media.MediaDetailFragment
 import fr.free.nrw.commons.upload.UploadActivity
 import fr.free.nrw.commons.upload.UploadBaseFragment
 import fr.free.nrw.commons.utils.DialogUtil.showAlertDialog
+import fr.free.nrw.commons.utils.handleKeyboardInsets
 import fr.free.nrw.commons.wikidata.WikidataConstants.SELECTED_NEARBY_PLACE_CATEGORY
 import io.reactivex.Notification
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import timber.log.Timber
-import java.util.Objects
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
@@ -69,6 +70,7 @@ class UploadCategoriesFragment : UploadBaseFragment(), CategoriesContract.View {
         savedInstanceState: Bundle?
     ): View? {
         binding = UploadCategoriesFragmentBinding.inflate(inflater, container, false)
+        binding!!.llContainerButtons.handleKeyboardInsets()
         return binding!!.root
     }
 
@@ -115,7 +117,7 @@ class UploadCategoriesFragment : UploadBaseFragment(), CategoriesContract.View {
                 requireActivity(),
                 getString(R.string.categories_activity_title),
                 getString(R.string.categories_tooltip),
-                getString(android.R.string.ok),
+                getString(R.string.ok),
                 null
             )
         }
@@ -195,6 +197,15 @@ class UploadCategoriesFragment : UploadBaseFragment(), CategoriesContract.View {
 
     override fun showError(stringResourceId: Int) {
         binding?.tilContainerSearch?.error = getString(stringResourceId)
+    }
+
+    override fun showErrorDialog(message: String) {
+        AlertDialog
+            .Builder(requireContext())
+            .setMessage(getString(R.string.error_loading_categories) + "\n" + message)
+            .setCancelable(false)
+            .setNegativeButton(R.string.ok){_,_ -> }
+            .show()
     }
 
     override fun setCategories(categories: List<CategoryItem>?) {

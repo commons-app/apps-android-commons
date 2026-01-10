@@ -209,8 +209,8 @@ object PermissionUtils {
                         activity,
                         activity.getString(rationaleTitle),
                         activity.getString(rationaleMessage),
-                        activity.getString(android.R.string.ok),
-                        activity.getString(android.R.string.cancel),
+                        activity.getString(R.string.ok),
+                        activity.getString(R.string.cancel),
                         {
                             if (activity is UploadActivity) {
                                 activity.isShowPermissionsDialog = true

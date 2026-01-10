@@ -132,7 +132,7 @@ class MediaDetailFragmentUnitTests {
     private lateinit var button: Button
 
     @Mock
-    private lateinit var detailProvider: MediaDetailPagerFragment.MediaDetailProvider
+    private lateinit var detailProvider: MediaDetailProvider
 
     @Mock
     private lateinit var applicationKvStore: JsonKvStore

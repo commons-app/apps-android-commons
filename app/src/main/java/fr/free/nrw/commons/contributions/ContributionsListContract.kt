@@ -15,7 +15,7 @@ class ContributionsListContract {
         fun showNoContributionsUI(shouldShow: Boolean)
     }
 
-    interface UserActionListener : BasePresenter<View?> {
+    interface UserActionListener : BasePresenter<View> {
         fun refreshList(swipeRefreshLayout: SwipeRefreshLayout?)
     }
 }

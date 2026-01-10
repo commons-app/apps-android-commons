@@ -36,18 +36,14 @@
     <item quantity="one">%1$d fil uploades</item>
     <item quantity="other">%1$d filer uploades</item>
   </plurals>
-  <plurals name="contributions_subtitle">
-    <item quantity="one">(%1$d)</item>
-    <item quantity="other">(%1$d)</item>
-  </plurals>
   <string name="starting_uploads">Starter upload</string>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">Behandler %d upload</item>
-    <item quantity="other">Behandler %d uploads</item>
+    <item quantity="one">Behandler %1$d upload</item>
+    <item quantity="other">Behandler %1$d uploads</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">%d upload</item>
-    <item quantity="other">%d uploads</item>
+    <item quantity="one">%1$d upload</item>
+    <item quantity="other">%1$d uploads</item>
   </plurals>
   <plurals name="share_license_summary">
     <item quantity="one">Dette billede vil blive licenseret under %1$s</item>
@@ -91,7 +87,7 @@
   <string name="uploading_queued">Upload i kø (begrænset forbindelsestilstand aktiveret)</string>
   <string name="upload_completed_notification_title">%1$s uploadet!</string>
   <string name="upload_completed_notification_text">Tryk for at få vist dit upload</string>
-  <string name="upload_progress_notification_title_start">Uploader fil: %s</string>
+  <string name="upload_progress_notification_title_start">Uploader fil: %1$s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s uploades</string>
   <string name="upload_progress_notification_title_finishing">Afslutter upload af %1$s</string>
   <string name="upload_failed_notification_title">Upload af %1$s mislykkedes</string>
@@ -135,12 +131,13 @@
   <string name="categories_not_found">Ingen kategorier matchende %1$s er fundet</string>
   <string name="depictions_not_found">Der blev ikke fundet nogen Wikidata-elementer, der matcher %1$s</string>
   <string name="no_child_classes">%1$s har ingen underklasser</string>
-  <string name="no_parent_classes">%1$s har ingen forældreklasser</string>
+  <string name="no_parent_classes">%1$s har ingen overordnede klasser</string>
   <string name="categories_skip_explanation">Tilføj kategorier for at gøre dine billeder mere synlig på Wikimedia Commons. Begynd at taste for at tilføje kategorier.</string>
   <string name="categories_activity_title">Kategorier</string>
   <string name="title_activity_settings">Indstillinger</string>
   <string name="title_activity_signup">Opret konto</string>
   <string name="title_activity_featured_images">Fremhævede billeder</string>
+  <string name="images_featured_explanation">Fremhævede billeder er bidrag fra højt kvalificerede fotografer og illustratører, som Wikimedia Commons-fællesskabet har udvalgt som nogle af dem med højeste kvalitet på webstedet.</string>
   <string name="title_activity_custom_selector">Brugerdefineret vælger</string>
   <string name="title_activity_category_details">Kategori</string>
   <string name="title_activity_review">Gennemsyn</string>
@@ -157,6 +154,9 @@
   <string name="no_uploads_yet">Du har endnu ikke uploadet nogen billeder.</string>
   <string name="menu_retry_upload">Forsøg igen</string>
   <string name="menu_cancel_upload">Annullér</string>
+  <string name="language_search_type_language_name">Indtast sprognavn</string>
+  <string name="language_search_recent_searches">Seneste søgninger</string>
+  <string name="language_search_all_languages">Alle sprog</string>
   <string name="media_upload_policy">Ved at indsende dette billeder erklærer jeg at det er mit eget arbejde, som ikke indeholder materialer med ophavsret eller selvportrætter og generelt overholder &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Wikimedia Commons-politikkerne&lt;/a&gt;.</string>
   <string name="menu_download">Hent</string>
   <string name="preference_license">Standardlicens</string>
@@ -218,6 +218,7 @@
   <string name="media_detail_description">Beskrivelse</string>
   <string name="media_detail_discussion">Diskussion</string>
   <string name="media_detail_author">Forfatter</string>
+  <string name="media_detail_uploader">Uploader</string>
   <string name="media_detail_uploaded_date">Upload-dato</string>
   <string name="media_detail_license">Licens</string>
   <string name="media_detail_coordinates">Koordinater</string>
@@ -227,15 +228,14 @@
   <string name="_2fa_code">2FA-kode</string>
   <string name="email_auth_code">E-mail-bekræftelseskode</string>
   <string name="logout_verification">Ønsker du at logge ud?</string>
-  <string name="mediaimage_failed">Mediebillede mislykkedes</string>
   <string name="no_subcategory_found">Ingen underkategorier fundet</string>
   <string name="no_parentcategory_found">Ingen overordnede kategorier fundet</string>
   <string name="welcome_image_mount_zao">Monter Zao</string>
   <string name="welcome_image_llamas">Lamaer</string>
   <string name="welcome_image_rainbow_bridge">Regnbuebro</string>
   <string name="welcome_image_tulip">Tulipan</string>
-  <string name="welcome_image_welcome_wikipedia">Velkommen til Wikipedia</string>
-  <string name="welcome_image_welcome_copyright">Velkommen til ophavsret</string>
+  <string name="welcome_image_welcome_wikipedia">Et skematisk billede af en generisk Wikipedia-artikel.</string>
+  <string name="welcome_image_welcome_copyright">En tegning af en stak papirer med copyright-symbolet overstreget.</string>
   <string name="welcome_image_sydney_opera_house">Operahuset i Sydney</string>
   <string name="cancel">Afbryd</string>
   <string name="navigation_drawer_open">Åbn</string>
@@ -268,6 +268,7 @@
   <string name="upload_connection_error_alert_detail">Upload-processen kræver en aktiv internetadgang. Tjek din netværksforbindelse.</string>
   <string name="upload_problem_image">Problemer fundet på billedet</string>
   <string name="internet_downloaded">Upload kun billeder, som du selv har taget. Upload ikke billeder, som du har downloadet fra internettet.</string>
+  <string name="preferences_uploads">Uploads</string>
   <string name="use_external_storage">Gem billeder taget i appen</string>
   <string name="use_external_storage_summary">Gem billeder taget med kameraet i appen på din enhed</string>
   <string name="login_to_your_account">Log ind på din konto</string>
@@ -339,6 +340,7 @@
   <string name="quiz">Quiz</string>
   <string name="quiz_question_string">Er det i orden at uploade dette billede?</string>
   <string name="question">Spørgsmål</string>
+  <string name="quiz_i_am_not_sure">Jeg er ikke sikker</string>
   <string name="result">Resultat</string>
   <string name="quiz_back_button">Hvis du fortsætter med at uploade billeder, der kræver sletning, vil din konto sandsynligvis blive udelukket. Er du sikker på, at du vil afslutte quizzen?</string>
   <string name="quiz_alert_message">Mere end %1$s af de billeder, du uploadede, er blevet slettet. Hvis du fortsætter med at uploade billeder, der kræver sletning, vil din konto sandsynligvis blive blokeret.\n\nVil du se vejledningen igen og derefter tage en quiz for at hjælpe dig med at lære, hvilken type billeder du bør eller ikke bør uploade?</string>
@@ -348,6 +350,7 @@
   <string name="blurry_image_answer">Et af målene med Commons er at indsamle kvalitetsbilleder. Derfor bør slørede billeder ikke uploades. Forsøg altid at tage flotte billeder med god belysning.</string>
   <string name="construction_event_answer">Billeder, der viser teknologi eller kultur er meget velkomne på Commons.</string>
   <string name="congratulatory_message_quiz">Du fik %1$s af svarene rigtige. Tillykke!</string>
+  <string name="quiz_continue">Fortsæt</string>
   <string name="warning_for_no_answer">Vælg en af de to muligheder for at besvare spørgsmålet</string>
   <string name="user_not_logged_in">Login udløb. Log venligst ind igen.</string>
   <string name="quiz_result_share_message">Del din quiz med dine venner!</string>
@@ -371,12 +374,11 @@
   <string name="Achievements">Præstationer</string>
   <string name="Profile">Profil</string>
   <string name="badges">Emblemer</string>
-  <string name="statistics">Statistik</string>
   <string name="statistics_thanks">Tak modtaget</string>
   <string name="statistics_featured">Udvalgte billeder</string>
   <string name="statistics_wikidata_edits">Billeder via \"Steder i nærheden\"</string>
-  <string name="level">Niveau %d</string>
-  <string name="profileLevel">%s (Niveau %s)</string>
+  <string name="level">Niveau %1$d</string>
+  <string name="profile_withLevel">%1$s (Niveau %2$s)</string>
   <string name="images_uploaded">Uploadede billeder</string>
   <string name="image_reverts">Billeder, som ikke er blevet trukket tilbage</string>
   <string name="images_used_by_wiki">Billeder brugt</string>
@@ -419,7 +421,7 @@
   <string name="deletion_reason_bad_for_my_privacy">Jeg indså, det var skidt for mit privatliv</string>
   <string name="deletion_reason_no_longer_want_public">Jeg ombestemte mig, jeg ønsker ikke at det skal være offentligt synligt længere</string>
   <string name="deletion_reason_not_interesting">Beklager dette billede er ikke interessant for en encyklopædi</string>
-  <string name="uploaded_by_myself">Uploadet af mig selv på %1$s , brugt i %2$d artikel(er).</string>
+  <string name="uploaded_by_myself">Uploadet af mig selv på %1$s , brugt i mindst %2$d artikel(er).</string>
   <string name="no_uploads">Velkommen til Commons!\n\nUpload dit første medie ved at trykke på Tilføj-knappen.</string>
   <string name="no_categories_selected">Ingen kategorier valgt</string>
   <string name="no_categories_selected_warning_desc">Billeder uden kategorier er sjældent brugbare. Er du sikker på, at du vil fortsætte uden at vælge kategorier?</string>
@@ -441,6 +443,8 @@
   <string name="ends_on">Slutter den:</string>
   <string name="display_campaigns">Vis kampagner</string>
   <string name="display_campaigns_explanation">Se aktive kampagner</string>
+  <string name="show_deletion_button">Vis sletteknap</string>
+  <string name="show_deletion_button_explanation">Aktivér knappen \"Slet mappe\" i den brugerdefinerede vælger</string>
   <string name="in_app_camera_location_access_explanation">Tillad at appen henter placeringen, hvis kameraet ikke selv registrerer den. Nogle enheders kamera registrerer ikke placering. I sådanne tilfælde bliver dit bidrag mere nyttigt at lade appen hente og vedhæfte placering til det. Du kan til enhver tid ændre dette i indstillinger</string>
   <string name="option_allow">Tillad</string>
   <string name="option_dismiss">Afvis</string>
@@ -466,7 +470,7 @@
   <string name="nominate_for_deletion_done">Udført</string>
   <string name="send_thank_success_title">Sender tak: Færdig</string>
   <string name="send_thank_success_message">Sendte tak til %1$s</string>
-  <string name="send_thank_failure_message">Kunne ikke sende tak %1$s</string>
+  <string name="send_thank_failure_message">Kunne ikke sende tak til %1$s</string>
   <string name="send_thank_failure_title">Sender tak: Mislykkedes</string>
   <string name="send_thank_toast">Sender tak for %1$s</string>
   <string name="review_copyright">Følger dette reglerne for ophavsret?</string>
@@ -495,15 +499,14 @@
   <string name="menu_option_unread">Vis ulæste</string>
   <string name="error_occurred_in_picking_images">Der opstod en fejl under udvælgelse af billeder</string>
   <string name="please_wait">Vent venligst…</string>
-  <string name="images_featured_explanation">Fremhævede billeder er billeder fra højt kvalificerede fotografer og illustratører, som Wikimedia Commons-fællesskabet har udvalgt som nogle af dem med højeste kvalitet på webstedet.</string>
   <string name="images_via_nearby_explanation">Billeder uploadet via nærliggende steder er de billeder, der uploades ved at opdage steder på kortet.</string>
   <string name="thanks_received_explanation">Denne funktion giver redaktører mulighed for at sende en tak-notifikation til brugere, der foretager nyttige redigeringer - ved at bruge et lille takkelink på historiksiden eller diff-siden.</string>
-  <string name="copy_image_caption_description">Kopiér til efterfølgende medier</string>
+  <string name="copy_image_caption_description">Kopiér til de næste elementer</string>
   <string name="copied_successfully">Kopieret</string>
   <string name="welcome_do_upload_content_description">Eksempler på gode billeder til at uploade til Commons</string>
   <string name="welcome_dont_upload_content_description">Eksempler på billeder, der ikke bør uploades</string>
   <string name="skip_image">Spring dette billede over</string>
-  <string name="download_failed_we_cannot_download_the_file_without_storage_permission">Download mislykkedes!!. Vi kan ikke downloade filen uden tilladelse til ekstern lagring.</string>
+  <string name="download_failed_we_cannot_download_the_file_without_storage_permission">Download mislykkedes. Vi kan ikke downloade filen uden tilladelse til ekstern lagring.</string>
   <string name="manage_exif_tags">Administrer EXIF-tags</string>
   <string name="manage_exif_tags_summary">Vælg hvilke EXIF-tags, der skal beholdes i uploads</string>
   <string name="exif_tag_name_author">Forfatter</string>
@@ -513,11 +516,10 @@
   <string name="exif_tag_name_lensModel">Objektivmodel</string>
   <string name="exif_tag_name_serialNumbers">Serienumre</string>
   <string name="exif_tag_name_software">Software</string>
-  <string name="media_location_permission_denied">Adgang til medieplacering nægtet</string>
-  <string name="add_location_manually">Vi kan muligvis ikke automatisk indhente placeringsdata fra billeder, du uploader. Tilføj den passende placering for hvert billede, før du indsender</string>
   <string name="share_text">Upload billeder til Wikimedia Commons direkte fra din telefon. Download Commons-appen nu: %1$s</string>
   <string name="share_via">Del app via...</string>
   <string name="image_info">Billedoplysninger</string>
+  <string name="upload_categories_dont_show_this_message_again">Vis ikke denne besked igen</string>
   <string name="no_categories_found">Ingen kategorier blev fundet</string>
   <string name="no_depiction_found">Ingen afbildninger fundet</string>
   <string name="upload_cancelled">Upload annulleret</string>
@@ -570,7 +572,7 @@
   <string name="description_activity_title">Rediger beskrivelser og billedtekster</string>
   <string name="share_image_via">Del billede via</string>
   <string name="you_have_no_achievements_yet">Du har ikke lavet nogen bidrag endnu</string>
-  <string name="no_achievements_yet">%s har ikke lavet nogen bidrag endnu</string>
+  <string name="no_achievements_yet">%1$s har ikke lavet nogen bidrag endnu</string>
   <string name="account_created">Konto oprettet!</string>
   <string name="text_copy">Tekst kopieret til udklipsholder</string>
   <string name="notification_mark_read">Notifikation markeret som læst</string>
@@ -584,6 +586,8 @@
   <string name="title_for_media">MEDIER</string>
   <string name="title_for_child_classes">UNDERKLASSER</string>
   <string name="title_for_parent_classes">OVERORDNEDE KLASSER</string>
+  <string name="title_for_subcategories">UNDERKATEGORIER</string>
+  <string name="title_for_parent_categories">OVERORDNEDE KATEGORIER</string>
   <string name="upload_nearby_place_found_title">Sted fundet i nærheden</string>
   <string name="upload_nearby_place_found_description_plural">Er disse billeder af %1$s ?</string>
   <string name="upload_nearby_place_found_description_singular">Er dette et billede af %1$s?</string>
@@ -621,7 +625,7 @@
   <string name="wikipedia_instructions_step_5">5. Indsæt wikiteksten på det rette sted.</string>
   <string name="wikipedia_instructions_step_6">6. Rediger wikiteksten for passende placering, hvis det er nødvendigt. For mere information, se &lt;a href=\"https://en.wikipedia.org/wiki/Wikipedia:Manual_of_Style/Images#How_to_place_an_image\"&gt;her&lt;/a&gt;.</string>
   <string name="wikipedia_instructions_step_7">7. Udgiv artiklen</string>
-  <string name="copy_wikicode_to_clipboard">Kopier wikikode til udklipsholder</string>
+  <string name="copy_wikicode_to_clipboard">Kopier wikitekst til udklipsholder</string>
   <string name="pause">sæt på pause</string>
   <string name="resume">genoptag</string>
   <string name="paused">Sat på pause</string>
@@ -662,6 +666,8 @@
   <string name="categories_tooltip">Vælg de relevante kategorier. I modsætning til afbildninger er kategorier kun på engelsk.</string>
   <string name="license_tooltip">Commons gør dine billeder genanvendelige og kan tilpasses af alle. Vil du give afkald på alle rettigheder? Ønsker du at blive krediteret? Ønsker du at tilpasninger skal bruge den samme licens?</string>
   <string name="depicts_step_title">Afbilder</string>
+  <string name="depicts_label">Etiket</string>
+  <string name="depicts_description">Beskrivelse</string>
   <string name="license_step_title">Medielicens</string>
   <string name="media_detail_step_title">Mediedetaljer</string>
   <string name="menu_view_category_page">Vis kategoriside</string>
@@ -688,7 +694,7 @@
   <string name="back">Tilbage</string>
   <string name="welcome_custom_picture_selector_text">Velkommen til brugerdefineret billedvælger</string>
   <string name="custom_selector_info_text1">Denne vælger viser dig, hvilke billeder du allerede har uploadet til Commons.</string>
-  <string name="custom_selector_info_text2">I modsætning til billedet til venstre har billedet til højre Commons-logoet, hvilket indikerer, at det allerede er uploadet. \n Tryk og hold for at se forhåndsvisning af billede.</string>
+  <string name="custom_selector_info_text2">I modsætning til billedet til venstre har billedet til højre Commons-logoet, hvilket indikerer, at det allerede er uploadet.\n\nTryk og hold for at se forhåndsvisning af billede.</string>
   <string name="welcome_custom_selector_ok">Fantastisk</string>
   <string name="custom_selector_already_uploaded_image_text">Dette billede er allerede blevet uploadet til Commons.</string>
   <string name="custom_selector_over_limit_warning">Af tekniske årsager kan appen ikke pålideligt uploade mere end %1$d billeder på én gang. Uploadgrænsen på %1$d er blevet overskredet med %2$d.</string>
@@ -702,8 +708,10 @@
   <string name="wlm_campaign_description">Wiki Loves Monuments er en international fotokonkurrence for monumenter arrangeret af Wikimedia</string>
   <string name="need_permission">Har brug for tilladelse</string>
   <string name="read_phone_state_permission_message">\"I nærheden\"-kort har brug for at aflæse TELEFON TILSTAND for at fungere ordentlig</string>
-  <string name="contributions_of_user">Bidrag fra bruger: %s</string>
-  <string name="achievements_of_user">Præstationer af bruger: %s</string>
+  <string name="location_off_dialog_text">Slå placeringstjenester til for at se steder i nærheden.</string>
+  <string name="location_permission_rationale">Valgfri tilladelse: Hent nuværende position for kategoriforslag</string>
+  <string name="contributions_of_user">Bidrag fra bruger: %1$s</string>
+  <string name="achievements_of_user">Præstationer af bruger: %1$s</string>
   <string name="menu_view_user_page">Vis brugerprofil</string>
   <string name="edit_depictions">Rediger afbildninger</string>
   <string name="edit_categories">Rediger kategorier</string>
@@ -774,13 +782,13 @@
   <string name="file_saved_successfully">Fil gemt</string>
   <string name="do_you_want_to_open_gpx_file">Vil du åbne GPX-filen?</string>
   <string name="do_you_want_to_open_kml_file">Vil du åbne KML-filen?</string>
-  <string name="failed_to_save_kml_file">Kunne ikke gemme KML-fil.</string>
-  <string name="failed_to_save_gpx_file">Kunne ikke gemme GPX-fil.</string>
-  <string name="saving_kml_file">Gemmer KML-fil</string>
-  <string name="saving_gpx_file">Gemmer GPX-fil</string>
+  <string name="failed_to_save_kml_file">Kunne ikke gemme KML-filen.</string>
+  <string name="failed_to_save_gpx_file">Kunne ikke gemme GPX-filen.</string>
+  <string name="saving_kml_file">Gemmer som en KML-fil...</string>
+  <string name="saving_gpx_file">Gemmer som en GPX-fil...</string>
   <plurals name="custom_picker_images_selected_title_appendix">
-    <item quantity="one">%d billede valgt</item>
-    <item quantity="other"> %d billeder valgt</item>
+    <item quantity="one">%1$d billede valgt</item>
+    <item quantity="other">%1$d billeder valgt</item>
   </plurals>
   <string name="multiple_files_depiction">Husk, at alle billeder i et multi-upload får de samme kategorier og afbildninger. Hvis billederne ikke deler afbildninger og kategorier, skal du udføre flere separate uploads.</string>
   <string name="multiple_files_depiction_header">Bemærkning om at uploade flere billeder</string>
@@ -828,4 +836,6 @@
   <string name="show_in_nearby">Vis i I nærheden</string>
   <string name="image_tag_line_created_and_uploaded_by">Oprettet og uploadet af: %1$s</string>
   <string name="image_tag_line_created_by_and_uploaded_by">Oprettet af %1$s og uploadet af %2$s</string>
+  <string name="nominated_for_deletion_btn">Nomineret til sletning</string>
+  <string name="custom_selector_max_image_limit_reached">Du kan højst vælge %d billeder.</string>
 </resources>

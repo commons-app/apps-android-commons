@@ -9,6 +9,7 @@
 * ਗੁਰਪ੍ਰੀਤ ਹੁੰਦਲ
 -->
 <resources>
+  <string name="commons_github">ਕਾਮਨਜ਼ ਗਿਟਹੱਬ ਸਰੋਤ ਕੋਡ</string>
   <string name="commons_logo">ਕਾਮਨਜ਼ ਮਾਰਕਾ</string>
   <string name="submit">ਹਵਾਲੇ ਕਰੋ</string>
   <string name="add_another_description">ਇੱਕ ਹੋਰ ਵੇਰਵਾ ਸ਼ਾਮਲ ਕਰੋ</string>
@@ -26,26 +27,24 @@
     <item quantity="one">੧ ਫ਼ਾਈਲ ਚੜ੍ਹਾਈ ਜਾ ਰਹੀ ਹੈ</item>
     <item quantity="other">%1$d ਫ਼ਾਈਲਾਂ ਚੜ੍ਹਾਈਆਂ ਜਾ ਰਹੀਆਂ ਹਨ</item>
   </plurals>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">%1$d upload</item>
-    <item quantity="other">%1$d ਅੱਪਲੋਡ</item>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">%1$d ਪ੍ਰੋਸੈਸਿੰਗ ਅੱਪਲੋਡ</item>
+    <item quantity="other">%1$d ਪ੍ਰੋਸੈਸਿੰਗ ਅੱਪਲੋਡ</item>
   </plurals>
-  <plurals name="starting_multiple_uploads" fuzzy="true">
-    <item quantity="one">%1$d ਅੱਪਲੋਡ ਸ਼ੁਰੂ ਹੋ ਰਹੀ ਹੈ</item>
-    <item quantity="other">%1$d ਸ਼ੁਰੂ ਹੋ ਰਹੇ ਹਨ</item>
-  </plurals>
-  <plurals name="multiple_uploads_title" fuzzy="true">
-    <item quantity="one">&amp;d ਅੱਪਲੋਡ</item>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">&amp;1$d ਅੱਪਲੋਡ</item>
     <item quantity="other">%1$d ਅੱਪਲੋਡਾਂ</item>
   </plurals>
-  <string name="share_license_summary" fuzzy="true">ਇਹ ਤਸਵੀਰ ਦਾ %1$s ਹੇਠ ਲਸੰਸ ਜਾਰੀ ਕੀਤੀ ਜਾਵੇਗਾ</string>
+  <plurals name="share_license_summary">
+    <item quantity="one">ਇਹ ਤਸਵੀਰ ਨੂੰ %1$s ਲਸੰਸ ਹੇਠ ਜਾਰੀ ਕੀਤੀ ਜਾਵੇਗਾ</item>
+    <item quantity="other">ਇਹਨਾਂ ਤਸਵੀਰਾਂ ਨੂੰ %1$s ਲਸੰਸ ਹੇਠ ਜਾਰੀ ਕੀਤਾ ਜਾਵੇਗਾ</item>
+  </plurals>
   <string name="navigation_item_explore">ਪੜਚੋਲ ਕਰੋ</string>
   <string name="preference_category_appearance">ਦਿੱਖ</string>
   <string name="preference_category_general">ਆਮ</string>
   <string name="preference_category_feedback">ਸੁਝਾਅ</string>
   <string name="preference_category_privacy">ਪਰਦੇਦਾਰੀ</string>
-  <string name="app_name">ਵਿਕੀਮੀਡੀਆ ਸ਼ਾਮਲਾਟ</string>
+  <string name="app_name">ਕਾਮਨਜ਼</string>
   <string name="menu_settings">ਪਸੰਦਾਂ</string>
   <string name="upload_in_progress">ਚੜ੍ਹਾਉਣਾ ਜਾਰੀ ਐ</string>
   <string name="username">ਵਰਤੋਂਕਾਰ ਨਾਂ</string>
@@ -64,14 +63,14 @@
   <string name="uploading_started">ਅੱਪਲੋਡ ਸ਼ੁਰੂ ਹੋਇਆ!</string>
   <string name="upload_completed_notification_title">%1$s ਅੱਪਲੋਡ ਹੋ ਗਏ!</string>
   <string name="upload_completed_notification_text">ਆਪਣਾ ਅੱਪਲੋਡ ਵੇਖਣ ਲਈ ਥਪੇੜੋ</string>
-  <string name="upload_progress_notification_title_start">ਫਾਈਲ ਚੜ੍ਹਾਈ ਜਾ ਰਹੀ ਐ: %s</string>
+  <string name="upload_progress_notification_title_start">ਫਾਈਲ ਚੜ੍ਹਾਈ ਜਾ ਰਹੀ ਐ: %1$s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s ਅੱਪਲੋਡ ਕੀਤੇ ਜਾ ਰਹੇ ਹਨ</string>
   <string name="upload_progress_notification_title_finishing">%1$s ਦਾ ਅੱਪਲੋਡ ਖ਼ਤਮ ਹੋ ਰਿਹਾ ਹੈ</string>
   <string name="upload_failed_notification_title">%1$s ਨੂੰ ਚੜ੍ਹਾਉਣ ਵਿੱਚ ਨਾਕਾਮ</string>
   <string name="upload_paused_notification_title">%1$s ਚੜ੍ਹਾਉਣਾ ਰੋਕਿਆ ਗਿਆ</string>
   <string name="upload_failed_notification_subtitle">ਵੇਖਣ ਲਈ ਥਪੇੜੋ</string>
   <string name="upload_paused_notification_subtitle">ਵੇਖਣ ਲਈ ਥਪੇੜੋ</string>
-  <string name="title_activity_contributions" fuzzy="true">ਮੇਰੇ ਅੱਪਲੋਡ</string>
+  <string name="title_activity_contributions">ਮੇਰੇ ਹਾਲੀਆ ਅੱਪਲੋਡ</string>
   <string name="contribution_state_queued">ਕਤਾਰ ਵਿਚ</string>
   <string name="contribution_state_failed">ਫੇਲ੍ਹ ਹੋਇਆ</string>
   <string name="contribution_state_in_progress">%1$d%% ਪੂਰਾ ਹੋਇਆ</string>
@@ -101,20 +100,20 @@
   <string name="menu_save_categories">ਸਾਂਭੋ</string>
   <string name="refresh_button">ਤਾਜ਼ਾ ਕਰੋ</string>
   <string name="display_list_button">ਸੂਚੀ</string>
-  <string name="contributions_subtitle_zero" fuzzy="true">ਫ਼ਿਲਹਾਲ ਕੋਈ ਅੱਪਲੋਡ ਨਹੀਂ</string>
+  <string name="contributions_subtitle_zero">(ਫ਼ਿਲਹਾਲ ਕੋਈ ਅੱਪਲੋਡ ਨਹੀਂ)</string>
   <string name="categories_not_found">%1$s ਨਾਲ਼ ਮੇਲ ਖਾਂਦੀ ਕੋਈ ਸ਼੍ਰੇਣੀ ਨਹੀਂ ਲੱਭੀ</string>
   <string name="depictions_not_found">%1$s ਨਾਲ ਮੇਲ ਖਾਂਦੀਆਂ ਕੋਈ ਵਿਕੀਡਾਟਾ ਚੀਜ਼ਾਂ ਨਹੀਂ ਲੱਭਿਆਂ।</string>
-  <string name="categories_skip_explanation" fuzzy="true">ਆਪਣੀਆਂ ਤਸਵੀਰਾਂ ਨੂੰ ਵਿਕੀਮੀਡੀਆ ਕਾਮਨਜ਼ ਵਿਚ ਜ਼ਿਆਦਾ ਲੱਭਣਯੋਗ ਬਣਾਉਣ ਲਈ ਸ਼੍ਰੇਣੀਆਂ ਜੋੜੋ।\n\nਸ਼੍ਰੇਣੀਆਂ ਜੋੜਨ ਲਈ ਟਾਈਪ ਕਰਨ ਅਰੰਭ ਕਰੋ।\nਇਸ ਕਾਰਜ ਨੂੰ ਅਣਡਿੱਠਾ ਕਰਨ ਲਈ ਇਹ ਸੁਨੇਹਾ ਥਪੇੜੋ (ਜਾਂ ਵਾਪਸੀ ਬਟਨ ਦਬਾਓ)।</string>
+  <string name="categories_skip_explanation">ਆਪਣੀਆਂ ਤਸਵੀਰਾਂ ਨੂੰ ਵਿਕੀਮੀਡੀਆ ਕਾਮਨਜ਼ ਵਿਚ ਜ਼ਿਆਦਾ ਲੱਭਣਯੋਗ ਬਣਾਉਣ ਲਈ ਸ਼੍ਰੇਣੀਆਂ ਜੋੜੋ।\nਸ਼੍ਰੇਣੀਆਂ ਜੋੜਨ ਲਈ ਟਾਈਪ ਕਰਨ ਅਰੰਭ ਕਰੋ।</string>
   <string name="categories_activity_title">ਸ਼੍ਰੇਣੀਆਂ</string>
   <string name="title_activity_settings">ਪਸੰਦਾਂ</string>
   <string name="title_activity_signup">ਖਾਤਾ ਬਣਾਓ</string>
   <string name="title_activity_featured_images">ਵਿਸ਼ੇਸ਼ ਤਸਵੀਰ</string>
   <string name="title_activity_category_details">ਸ਼੍ਰੇਣੀ</string>
   <string name="menu_about">ਇਸ ਬਾਰੇ</string>
-  <string name="about_license" fuzzy="true">ਅਜ਼ਾਦ ਸਰੋਤ ਸਾਫ਼ਟਵੇਅਰ ਨੂੰ &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt; ਅਧੀਨ ਜਾਰੀ ਕੀਤਾ ਗਿਆ ਹੈ</string>
-  <string name="about_improve" fuzzy="true">ਸਰੋਤ &lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;GitHub&lt;/a&gt; ਉੱਤੇ। ਮੁਸ਼ਕਲਾਂ &lt;a href=\" https://github.com/commons-app/apps-android-commons/issues\"&gt;Github&lt;/a&gt; ਉੱਤੇ।</string>
-  <string name="about_privacy_policy" fuzzy="true">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Privacy policy&lt;/a&gt;</string>
-  <string name="about_credits" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;ਕਰੈਡਿਟਸ&lt;/a&gt;</string>
+  <string name="about_license">ਵਿਕੀਮੀਡੀਆ ਕਾਮਨਜ਼ ਐਪ ਇੱਕ ਓਪਨ-ਸਰੋਤ ਐਪ ਹੈ ਜੋ ਵਿਕੀਮੀਡੀਆ ਭਾਈਚਾਰੇ ਦੇ ਗ੍ਰਾਂਟ ਪ੍ਰਾਪਤ ਕਰਨ ਵਾਲਿਆਂ ਅਤੇ ਵਲੰਟੀਅਰਾਂ ਦੁਆਰਾ ਬਣਾਈ ਗਈ ਸੀ ਅਤੇ ਰੱਖ-ਰਖਾਅ ਕੀਤਾ ਜਾਂਦਾ ਹੈ। ਵਿਕੀਮੀਡੀਆ ਸੰਸਥਾ ਐਪ ਦੀ ਸਿਰਜਣਾ, ਵਿਕਾਸ ਜਾਂ ਰੱਖ-ਰਖਾਅ ਵਿੱਚ ਸ਼ਾਮਲ ਨਹੀਂ ਹੈ।</string>
+  <string name="about_improve">ਬੱਗ ਰਿਪੋਰਟਾਂ ਅਤੇ ਸੁਝਾਵਾਂ ਲਈ ਇੱਕ ਨਵਾਂ &lt;a href=\"%1$s\"&gt;ਗਿਟਹੱਬ ਮੁੱਦਾ&lt;/a&gt; ਬਣਾਓ।</string>
+  <string name="about_privacy_policy">ਪਰਦਾ ਨੀਤੀ</string>
+  <string name="about_credits">ਕਰੈਡਿਟਸ</string>
   <string name="title_activity_about">ਇਸ ਬਾਰੇ</string>
   <string name="menu_feedback">ਵਿਚਾਰ ਭੇਜੋ (ਈਮੇਲ ਰਾਹੀਂ)</string>
   <string name="no_email_client">ਕੋਈ ਈਮੇਲ ਸਾਧਨ ਇੰਸਟਾਲ ਨਹੀਂ ਕੀਤਾ ਗਿਆ</string>
@@ -128,10 +127,10 @@
   <string name="preference_license">ਮੂਲ ਲਸੰਸ</string>
   <string name="use_previous">ਪਿਛਲੇ ਸਿਰਲੇਖ ਅਤੇ ਵੇਰਵੇ ਦੀ ਵਰਤੋਂ ਕਰੋ</string>
   <string name="preference_theme">ਵਿਸ਼ਾ-ਵਸਤੂ</string>
-  <string name="license_name_cc_by_sa_four"> Attribution-ShareAlike 4.0</string>
-  <string name="license_name_cc_by_four"> Attribution 4.0</string>
-  <string name="license_name_cc_by_sa">CC Attribution-ShareAlike 3.0</string>
-  <string name="license_name_cc_by">Attribution 3.0</string>
+  <string name="license_name_cc_by_sa_four">ਐਟਰੀਬਿਊਸ਼ਨ-ਸ਼ੇਅਰਐਲਾਇਕ 4.0</string>
+  <string name="license_name_cc_by_four">ਐਟਰੀਬਿਊਸ਼ਨ 4.0</string>
+  <string name="license_name_cc_by_sa">ਐਟਰੀਬਿਊਸ਼ਨ-ਸ਼ੇਅਰਐਲਾਇਕ 3.0</string>
+  <string name="license_name_cc_by">ਐਟਰੀਬਿਊਸ਼ਨ 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
@@ -163,7 +162,7 @@
   <string name="detail_discussion_empty">ਕੋਈ ਗੱਲਬਾਤ ਨਹੀਂ</string>
   <string name="detail_license_empty">ਅਣਜਾਣ ਲਸੰਸ</string>
   <string name="menu_refresh">ਤਾਜ਼ਾ ਕਰੋ</string>
-  <string name="read_storage_permission_rationale" fuzzy="true">ਆਗਿਆ ਚਾਹੀਦੀ ਹੈ: ਬਾਹਰੀ ਸਟੋਰੇਜ ਬਾਰੇ। ਇਸ ਤੋਂ ਬਿਨਾਂ ਐਪ ਕਾਰਜ ਨਹੀਂ ਕਰ ਸਕੇਗੀ।</string>
+  <string name="read_storage_permission_rationale">ਲੋੜੀਂਦੀ ਆਗਿਆ: ਬਾਹਰੀ ਸਟੋਰੇਜ ਨੂੰ ਪੜ੍ਹਨਾ। ਇਸ ਤੋਂ ਬਿਨਾਂ ਐਪ ਗੈਲਰੀ ਤੱਕ ਪਹੁੰਚ ਨਹੀਂ ਕਰ ਸਕੇਗੀ।</string>
   <string name="ok">ਠੀਕ ਹੈ</string>
   <string name="warning">ਖ਼ਬਰਦਾਰ</string>
   <string name="upload">ਚੜ੍ਹਾਉ</string>
@@ -182,8 +181,8 @@
   <string name="logout_verification">ਕੀ ਤੁਸੀਂ ਸੱਚੀਂ ਬੰਦ ਕਰਨਾ ਚਾਹੁੰਦੇ ਹੋ?</string>
   <string name="welcome_image_llamas">ਲਾਮਾ</string>
   <string name="welcome_image_rainbow_bridge">ਸਤਰੰਗੀ ਪੁਲ</string>
-  <string name="welcome_image_welcome_wikipedia">ਵਿਕੀਪੀਡੀਆ \'ਤੇ ਜੀ ਆਇਆਂ ਨੂੰ</string>
-  <string name="welcome_image_welcome_copyright">ਜੀ ਆਇਆਂ ਨੂੰ ਕਾਪੀਰਾਈਟ</string>
+  <string name="welcome_image_welcome_wikipedia">ਇੱਕ ਆਮ ਵਿਕੀਪੀਡੀਆ ਲੇਖ ਦੀ ਇੱਕ ਯੋਜਨਾਬੱਧ ਤਸਵੀਰ।</string>
+  <string name="welcome_image_welcome_copyright">ਕਾਪੀਰਾਈਟ ਚਿੰਨ੍ਹ ਵਾਲੇ ਕਾਗਜ਼ਾਂ ਦੇ ਇੱਕ ਸਟੈਕ ਦੀ ਇੱਕ ਡਰਾਇੰਗ ਬਾਹਰ ਕੱਢੀ ਗਈ।</string>
   <string name="welcome_image_sydney_opera_house">ਸਿਡਨੀ ਓਪੇਰਾ ਹਾਊਸ</string>
   <string name="cancel">ਰੱਦ ਕਰੋ</string>
   <string name="navigation_drawer_open">ਖੋਲ੍ਹੋ</string>
@@ -194,7 +193,7 @@
   <string name="navigation_item_about">ਬਾਰੇ</string>
   <string name="navigation_item_settings">ਤਰਜੀਹਾਂ</string>
   <string name="navigation_item_feedback">ਸੁਝਾਅ</string>
-  <string name="navigation_item_feedback_github">ਗਿੱਟਹਬ (GitHub) ਰਾਹੀਂ ਸੁਝਾਅ</string>
+  <string name="navigation_item_feedback_github">ਗਿਟਹੱਬ ਰਾਹੀਂ ਸੁਝਾਅ</string>
   <string name="navigation_item_logout">ਬਾਹਰ ਆਉ</string>
   <string name="navigation_item_info">ਸਿਖਲਾਈ</string>
   <string name="navigation_item_notification">ਸੂਚਨਾਵਾਂ</string>
@@ -254,11 +253,10 @@
   <string name="delete">ਮਿਟਾਓ</string>
   <string name="Achievements">ਪ੍ਰਾਪਤੀਆਂ</string>
   <string name="Profile">ਪ੍ਰੋਫਾਈਲ</string>
-  <string name="statistics">ਅੰਕੜੇ</string>
   <string name="statistics_thanks">ਧੰਨਵਾਦ ਪ੍ਰਾਪਤ ਹੋਏ</string>
   <string name="statistics_featured">ਵਿਸ਼ੇਸ਼ ਤਸਵੀਰ</string>
   <string name="statistics_wikidata_edits">\"ਨੇੜਲੀਆਂ ਥਾਵਾਂ\" ਰਾਹੀਂ ਤਸਵੀਰਾਂ</string>
-  <string name="level">ਪੱਧਰ %d</string>
+  <string name="level">ਪੱਧਰ %1$d</string>
   <string name="images_uploaded">ਤਸਵੀਰਾਂ ਚੜ੍ਹਾਇਆਂ ਗਈਆਂ</string>
   <string name="image_reverts">ਤਸਵੀਰਾਂ ਵਾਪਸ ਨਹੀਂ ਕੀਤੀ ਗਈਆਂ</string>
   <string name="images_used_by_wiki">ਵਰਤੀ ਗਈਆਂ ਤਸਵੀਰਾਂ</string>
@@ -275,6 +273,7 @@
   <string name="title_page_bookmarks_pictures">ਤਸਵੀਰਾਂ</string>
   <string name="title_page_bookmarks_locations">ਟਿਕਾਣਾ</string>
   <string name="title_page_bookmarks_categories">ਸ਼੍ਰੇਣੀਆਂ</string>
+  <string name="deletion_reason_bad_for_my_privacy">ਮੈਨੂੰ ਅਹਿਸਾਸ ਹੋਇਆ ਕਿ ਇਹ ਮੇਰੀ ਨਿੱਜਤਾ ਲਈ ਬੁਰਾ ਹੈ।</string>
   <string name="search_this_area">ਇਸ ਖੇਤਰ ਵਿੱਚ ਖੋਜ ਕਰੋ</string>
   <string name="nearby_card_permission_title">ਇਜਾਜ਼ਤ ਦੀ ਬੇਨਤੀ</string>
   <string name="never_ask_again">ਇਹ ਮੁੜ ਕਦੇ ਨਾ ਪੁੱਛੋ</string>
@@ -289,14 +288,14 @@
   <string name="exif_tag_name_location">ਟਿਕਾਣਾ</string>
   <string name="text_copy">ਲਿਖਤ ਚੂੰਢੀ-ਤਖਤੀ \'ਤੇ ਲਾਹੀ ਗਈ ਏ।</string>
   <string name="wikipedia_instructions_step_7">ਲਿਖਤ ਛਾਪੋ</string>
-  <string name="copy_wikicode_to_clipboard">ਵਿਕੀਕੋਡ ਦਾ ਉਤਾਰਾ ਚੂੰਢੀ-ਤਖਤੀ \'ਤੇ ਲਿਖੋ</string>
+  <string name="copy_wikicode_to_clipboard">ਵਿਕੀਲਿਖਤ ਨੂੰ ਕਲਿੱਪਬੋਰਡ ਵਿੱਚ ਕਾਪੀ ਕਰੋ</string>
   <string name="leaderboard_tab_title">ਮੁਹਰੈਲ</string>
   <string name="leaderboard_column_user">ਵਰਤੋਂਕਾਰ</string>
   <string name="location_updated">ਟਿਕਾਣਾ ਨਵਿਆਈਆ ਗਿਆ</string>
   <string name="invalid_login_message">ਤੁਹਾਡੇ ਦਾਖਲੇ ਦੀ ਮਿਆਦ ਪੁੱਗ ਗਈ ਹੈ। ਕਿਰਪਾ ਕਰਕੇ ਦੁਬਾਰਾ ਦਾਖਲ ਹੋਵੋ।</string>
   <string name="error_while_loading">ਲੱਦਨ ਵਿੱਚ ਗਲਤੀ</string>
   <string name="no_usages_found">ਕੋਈ ਵਰਤੋਂ ਨਹੀਂ ਲੱਭੀ</string>
-  <string name="usages_on_commons_heading">ਸ਼ਾਮਲਾਟ</string>
+  <string name="usages_on_commons_heading">ਕਾਮਨਜ਼</string>
   <string name="usages_on_other_wikis_heading">ਹੋਰ ਵਿਕੀਆਂ</string>
   <string name="file_usages_container_heading">ਫ਼ਾਈਲ ਦੀ ਵਰਤੋਂ</string>
 </resources>

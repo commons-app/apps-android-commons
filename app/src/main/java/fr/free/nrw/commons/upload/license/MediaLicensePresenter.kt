@@ -1,9 +1,9 @@
 package fr.free.nrw.commons.upload.license
 
-import fr.free.nrw.commons.Utils
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.repository.UploadRepository
 import fr.free.nrw.commons.settings.Prefs
+import fr.free.nrw.commons.utils.toLicenseName
 import timber.log.Timber
 import java.lang.reflect.Method
 import java.lang.reflect.Proxy
@@ -34,12 +34,14 @@ class MediaLicensePresenter @Inject constructor(
         val licenses = repository.getLicenses()
         view.setLicenses(licenses)
 
-        var selectedLicense = defaultKVStore.getString(
+        //CC_BY_SA_4 is the default one used by the commons web app
+        var selectedLicense: String = defaultKVStore.getString(
             Prefs.DEFAULT_LICENSE,
             Prefs.Licenses.CC_BY_SA_4
-        ) //CC_BY_SA_4 is the default one used by the commons web app
+        ) ?: Prefs.Licenses.CC_BY_SA_4
+
         try { //I have to make sure that the stored default license was not one of the deprecated one's
-            Utils.licenseNameFor(selectedLicense)
+            selectedLicense.toLicenseName()
         } catch (exception: IllegalStateException) {
             Timber.e(exception)
             selectedLicense = Prefs.Licenses.CC_BY_SA_4

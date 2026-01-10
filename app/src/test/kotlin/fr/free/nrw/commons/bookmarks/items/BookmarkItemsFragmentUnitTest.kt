@@ -88,7 +88,7 @@ class BookmarkItemsFragmentUnitTest {
         context = ApplicationProvider.getApplicationContext()
         OkHttpConnectionFactory.CLIENT = createTestClient()
         val activity = Robolectric.buildActivity(ProfileActivity::class.java).create().get()
-        fragment = BookmarkItemsFragment.newInstance()
+        fragment = BookmarkItemsFragment()
         val fragmentManager: FragmentManager = activity.supportFragmentManager
         val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
         fragmentTransaction.add(fragment, null)

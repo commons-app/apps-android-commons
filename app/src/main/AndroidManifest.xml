@@ -57,8 +57,7 @@
     tools:replace="android:appComponentFactory">
     <activity
       android:name=".activity.SingleWebViewActivity"
-      android:exported="false"
-      android:label="@string/title_activity_single_web_view" />
+      android:exported="false" />
     <activity
       android:name=".nearby.WikidataFeedback"
       android:exported="false" />
@@ -85,6 +84,7 @@
       android:parentActivityName=".customselector.ui.selector.CustomSelectorActivity" />
     <activity
       android:name=".auth.LoginActivity"
+      android:windowSoftInputMode="adjustPan"
       android:exported="true">
       <intent-filter>
         <category android:name="android.intent.category.LAUNCHER" />
@@ -99,11 +99,11 @@
     <activity android:name=".WelcomeActivity" />
     <activity
       android:name=".upload.UploadActivity"
-      android:configChanges="orientation|screenSize|keyboard"
+      android:configChanges="orientation|screenSize|keyboard|smallestScreenSize|screenLayout"
       android:exported="true"
       android:hardwareAccelerated="false"
       android:icon="@mipmap/ic_launcher"
-      android:windowSoftInputMode="adjustResize">
+      android:windowSoftInputMode="adjustPan">
       <intent-filter android:label="@string/intent_share_upload_label">
         <action android:name="android.intent.action.SEND" />
 

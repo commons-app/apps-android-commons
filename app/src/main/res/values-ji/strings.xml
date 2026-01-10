@@ -11,16 +11,11 @@
     <item quantity="one">%1$d טעקע לאדט אן</item>
     <item quantity="other">%1$d טעקעס לאדן אן</item>
   </plurals>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">(%1$d)</item>
-    <item quantity="other">(%1$d)</item>
-  </plurals>
   <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">אנהייבן %1$d ארויפֿלאד</item>
     <item quantity="other"> אנהייבן %1$d ארויפֿלאדן</item>
   </plurals>
-  <plurals name="multiple_uploads_title" fuzzy="true">
+  <plurals name="multiple_uploads_title">
     <item quantity="one">%1$d ארויפֿלאד</item>
     <item quantity="other">%1$d ארויפֿלאדן</item>
   </plurals>
@@ -80,8 +75,8 @@
   <string name="menu_cancel_upload">אַנולירן</string>
   <string name="menu_download">אראָפלאָדן</string>
   <string name="preference_license">סטאנדארט־ליצענץ</string>
-  <string name="license_name_cc_by_sa">Attribution-ShareAlike 3.0</string>
-  <string name="license_name_cc_by">Attribution 3.0</string>
+  <string name="license_name_cc_by_sa" fuzzy="true">Attribution-ShareAlike 3.0</string>
+  <string name="license_name_cc_by" fuzzy="true">Attribution 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>

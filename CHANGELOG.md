@@ -1,5 +1,75 @@
 # Wikimedia Commons for Android
 
+## v6.2.1
+
+### What's changed
+* The app no longer crashes on navigating from the MainActivity to other activities
+* Support for larger zoom levels on the image upload preview screen
+
+## v6.2.0
+
+### What's changed
+* Explore map no longer shows incorrect coordinates while navigating from Nearby
+* The popup messages are now more user-friendly
+* Sending images from Gallery apps to Commons app no longer asks for storage permissions
+* Improved UX for the custom selector
+* Wikipedia links now appear correctly on the app
+* Double-tap or pinch to zoom support in the custom selector
+
+## v6.1.0
+
+### What's changed
+* Edit Description button now shows up correctly
+* Custom selector supports deselecting images
+* Adjusted spacing on the Edit Location screen for a cleaner layout
+* The location permission request no longer prompts the users on the "Uploaded via Mobile" tab
+* Several i18n improvements
+* Improved app performance and compatibility with newer Android devices due to 16 KB page size support
+* Bookmark categories and the target icon in Explore map no longer crash
+* Enhanced app theme change handling
+* Prevented memory leaks and invalid context access in map fragments
+* Improved support for right-to-left languages like Arabic or Hebrew
+* Nearby will now remember your chosen filters (like "building" or "cottage") when you switch tabs
+* Hardware acceleration and keyboard animation have temporarily been disabled to mitigate an upload issue
+
+**Full Changelog**: https://github.com/commons-app/apps-android-commons/compare/v6.0.2...v6.1.0
+
+## v6.0.2
+
+### What's changed
+* Addressed a bug that prevented the keyboard from appearing in various text fields, such as on the upload wizard
+* Links in the "File usages" list are now clickable and will take you to the correct page.
+* Titles for file usages are now clearer and easier to understand
+* Bug fixes and stability improvements
+
+## v6.0.1
+
+### What's changed
+* The app now supports Android 15 with an improved user interface
+* Enhanced Nearby with robust and more reliable labels
+* Bug fixes and stability improvements
+
+## v5.6.1
+
+### What's changed
+* The app no longer uploads images to Wikidata if one exists already for a given item
+* File usage displays correctly now
+* No more infinite circular progress bar on nominating an image for deletion
+* Enhanced location updates while using GPS
+* Author/uploader names are now available in Media Details for Commons licensing compliance
+* Improved usage of popups in Nearby
+* Bug fixes and stability improvements 
+
+## v5.5.0
+
+### What's changed
+* Explore images will now be shown based on the map location and not at your current location
+* Enhanced Wikidata feedback message
+* Green labels in Explore map will no longer be hidden by other pins thumbnails
+* Upload wizard's language drop-down now reflects the language used in the pin label
+* Users can now pick only one image at a time while using the custom selector
+* Bug fixes and stability improvements 
+
 ## v5.4.1
 
 ### What's changed

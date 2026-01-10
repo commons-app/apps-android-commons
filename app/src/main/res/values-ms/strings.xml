@@ -9,7 +9,7 @@
 -->
 <resources>
   <string name="commons_facebook">Laman Facebook Commons</string>
-  <string name="commons_github">Kod Sumber Github Commons</string>
+  <string name="commons_github" fuzzy="true">Kod Sumber Github Commons</string>
   <string name="commons_logo">Logo Commons</string>
   <string name="commons_website">Tapak Sesawang Commons</string>
   <string name="exit_location_picker">Keluar dari pemilih lokasi</string>
@@ -28,19 +28,19 @@
   <string name="nearby_filter_toggle">Togol Atas</string>
   <string name="nearby_filter_search">Paparan Carian</string>
   <string name="appwidget_img">Gambar untuk Hari ini</string>
-  <string name="uploads_pending_notification_indicator" fuzzy="true">%d fail sedang dimuat naik</string>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">Belum ada muatnaik</item>
-    <item quantity="one">%1$d muatnaik</item>
-    <item quantity="other">%1$d muatnaik</item>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="other">%1$d fail sedang dimuat naik</item>
   </plurals>
   <string name="starting_uploads">Memulakan Muat Naik</string>
-  <string name="starting_multiple_uploads" fuzzy="true">Memulakan %d kerja muat naik</string>
-  <plurals name="multiple_uploads_title" fuzzy="true">
-    <item quantity="one">%1$d muatnaik</item>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="other">Memulakan %1$d kerja muat naik</item>
+  </plurals>
+  <plurals name="multiple_uploads_title">
     <item quantity="other">%1$d muatnaik</item>
   </plurals>
-  <string name="share_license_summary" fuzzy="true">Gambar ini akan dilesenkan di bawah %1$s</string>
+  <plurals name="share_license_summary">
+    <item quantity="other">Gambar ini akan dilesenkan di bawah %1$s</item>
+  </plurals>
   <string name="navigation_item_explore">Jelajah</string>
   <string name="preference_category_appearance">Paparan</string>
   <string name="preference_category_general">Umum</string>
@@ -71,7 +71,7 @@
   <string name="uploading_queued">Muat naik menunggu (mod sambungan terhad diaktifkan)</string>
   <string name="upload_completed_notification_title">%1$s telah dimuat naik!</string>
   <string name="upload_completed_notification_text">Ketik untuk melihat muatan naik anda</string>
-  <string name="upload_progress_notification_title_start">Memuat naik fail: %s</string>
+  <string name="upload_progress_notification_title_start">Memuat naik fail: %1$s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s sedang dimuat naik</string>
   <string name="upload_progress_notification_title_finishing">%1$s akan siap dimuat naik</string>
   <string name="upload_failed_notification_title">Gagal untuk muat naik %1$s</string>
@@ -167,7 +167,6 @@
   <string name="become_a_tester_title">Jadilah Penguji Beta</string>
   <string name="_2fa_code">Kod 2FA</string>
   <string name="logout_verification">Adakah anda benar-benar mahu log keluar?</string>
-  <string name="mediaimage_failed">Imej Media Gagal</string>
   <string name="no_subcategory_found">Tiada subkategori dijumpai</string>
   <string name="cancel">Batalkan</string>
   <string name="navigation_drawer_open">Buka</string>
@@ -223,8 +222,7 @@
   <string name="wrong">Jawapan Salah</string>
   <string name="Achievements">Pencapaian</string>
   <string name="Profile">Profil</string>
-  <string name="statistics">Statistik</string>
-  <string name="level" fuzzy="true">Tahap</string>
+  <string name="level" fuzzy="true">Tahap %1$d</string>
   <string name="images_uploaded">Imej Dimuat Naik</string>
   <string name="images_used_by_wiki">Imej Digunakan</string>
   <string name="achievements_share_message">Kongsi pencapaian anda dengan kawan anda!</string>
@@ -245,8 +243,6 @@
   <string name="review_thanks_yes_button_text">Imej berikutnya</string>
   <string name="review_thanks_no_button_text">Ya, kenapa tidak</string>
   <string name="exif_tag_name_author">Pengarang</string>
-  <string name="media_location_permission_denied">Akses lokasi media ditolak</string>
-  <string name="add_location_manually">Kami mungkin tidak dapat memperolehi data tempat dari gambar yang anda muat naik secara automatik. Sila tambah tempat sewajarnya pada setiap gambar sebelum menyerahnya</string>
   <string name="category_edit_helper_show_edit_title">Kemas kini kategori</string>
   <string name="category_edit_button_text">Kemas kini kategori</string>
   <string name="add_picture_to_wikipedia_article_title">Tambah imej ke Wikipedia</string>

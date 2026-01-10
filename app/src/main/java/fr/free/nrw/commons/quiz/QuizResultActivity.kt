@@ -12,9 +12,11 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.activity.enableEdgeToEdge
 
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.WindowCompat
 
 import fr.free.nrw.commons.databinding.ActivityQuizResultBinding
 import java.io.File
@@ -22,6 +24,7 @@ import java.io.FileOutputStream
 
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.contributions.MainActivity
+import fr.free.nrw.commons.utils.applyEdgeToEdgeAllInsets
 
 
 /**
@@ -35,7 +38,11 @@ class QuizResultActivity : AppCompatActivity() {
 
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
         binding = ActivityQuizResultBinding.inflate(layoutInflater)
+        applyEdgeToEdgeAllInsets(binding!!.root)
+        WindowCompat.getInsetsController(window, window.decorView)
+            .isAppearanceLightStatusBars = true
         setContentView(binding?.root)
 
         setSupportActionBar(binding?.toolbar?.toolbar)
@@ -186,7 +193,7 @@ class QuizResultActivity : AppCompatActivity() {
         alertadd.setPositiveButton(R.string.about_translate_proceed) { dialog, _ ->
             shareScreen(screenshot)
         }
-        alertadd.setNegativeButton(android.R.string.cancel) { dialog, _ ->
+        alertadd.setNegativeButton(R.string.cancel) { dialog, _ ->
             dialog.cancel()
         }
         alertadd.show()

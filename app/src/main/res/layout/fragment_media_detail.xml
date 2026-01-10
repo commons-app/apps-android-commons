@@ -24,16 +24,6 @@
           layout="@layout/show_captions_descriptions" />
     </LinearLayout>
 
-    <ImageView
-      android:id="@+id/mediaDetailImageFailed"
-      android:layout_height="wrap_content"
-      android:layout_width="wrap_content"
-      android:layout_gravity="center"
-      android:src="@android:drawable/ic_menu_close_clear_cancel"
-      android:visibility="gone"
-      android:contentDescription="@string/mediaimage_failed"
-      />
-
     <com.facebook.drawee.view.SimpleDraweeView
       android:id="@+id/mediaDetailImageView"
       android:layout_width="wrap_content"
@@ -123,27 +113,6 @@
                       android:layout_marginStart="@dimen/activity_margin_vertical"
                       style="@style/MediaDetailTextBody" />
 
-                </LinearLayout>
-
-                <LinearLayout
-                  style="@style/MediaDetailContainer"
-                  android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:id="@+id/authorLinearLayout"
-                  android:orientation="horizontal">
-
-                    <TextView
-                      style="@style/MediaDetailTextLabelGeneric"
-                      android:layout_width="@dimen/widget_margin"
-                      android:layout_height="match_parent"
-                      android:text="@string/media_detail_author" />
-
-                    <TextView
-                      style="@style/MediaDetailTextBody"
-                      android:id="@+id/mediaDetailAuthor"
-                      android:layout_width="@dimen/widget_margin"
-                      android:layout_height="match_parent"
-                      tools:text="Media author user name goes here." />
                 </LinearLayout>
 
                 <LinearLayout
@@ -261,6 +230,28 @@
                       android:drawablePadding="@dimen/tiny_gap"
                       android:drawableStart="?attr/iconInfo24"
                       tools:text="License link" />
+                </LinearLayout>
+
+                <LinearLayout
+                  style="@style/MediaDetailContainer"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:id="@+id/authorLinearLayout"
+                  android:orientation="horizontal">
+
+                    <TextView
+                      android:id="@+id/mediaDetailAuthorLabel"
+                      style="@style/MediaDetailTextLabelGeneric"
+                      android:layout_width="@dimen/widget_margin"
+                      android:layout_height="match_parent"
+                      android:text="@string/media_detail_author" />
+
+                    <TextView
+                      style="@style/MediaDetailTextBody"
+                      android:id="@+id/mediaDetailAuthor"
+                      android:layout_width="@dimen/widget_margin"
+                      android:layout_height="match_parent"
+                      tools:text="Media author user name goes here." />
                 </LinearLayout>
 
                 <LinearLayout

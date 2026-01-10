@@ -250,13 +250,6 @@ class ContributionsFragmentUnitTests {
 
     @Test
     @Throws(Exception::class)
-    fun testShowMessage() {
-        Shadows.shadowOf(Looper.getMainLooper()).idle()
-        fragment.showMessage("")
-    }
-
-    @Test
-    @Throws(Exception::class)
     fun testShowCampaigns() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
         fragment.showCampaigns(Campaign("", "", "2000-01-01", "2000-01-02", ""))
@@ -341,7 +334,7 @@ class ContributionsFragmentUnitTests {
     @Throws(Exception::class)
     fun testGetTotalMediaCount() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
-        fragment.totalMediaCount
+        fragment.getTotalMediaCount()
     }
 
     @Test
