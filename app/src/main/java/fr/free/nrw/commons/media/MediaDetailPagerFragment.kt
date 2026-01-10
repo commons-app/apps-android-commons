@@ -145,7 +145,9 @@ class MediaDetailPagerFragment : CommonsDaggerSupportFragment(), OnPageChangeLis
         if (activity is MainActivity) {
             (activity as MainActivity).showTabs()
         }
-        binding = null
+
+        // Temporarily disable it. Ref:https://github.com/commons-app/apps-android-commons/issues/6581#issuecomment-3694210567 
+        // binding = null
     }
 
     /**
