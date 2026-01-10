@@ -1,5 +1,6 @@
 [versions]
 agp = "8.13.0"
+adaptive = "1.0.0"
 acra = "5.8.4"
 activityCompose = "1.9.3"
 adapterdelegates = "4.3.0"
@@ -10,6 +11,7 @@ androidxJunitVersion = "1.1.5"
 annotation = "1.3.0"
 browser = "1.3.0"
 cardview = "1.0.0"
+coilCompose = "2.6.0"
 commonsIo = "2.6"
 composeBom = "2024.11.00"
 constraintlayout = "1.1.3"
@@ -17,6 +19,7 @@ coordinates2country = "1.8"
 dexcount = "4.0.0"
 githubTripletPlay = "2.7.2"
 kotlinxCoroutinesRx2 = "1.8.0"
+navigationCompose = "2.8.3"
 osmdroidAndroid = "6.1.17"
 testCore = "1.4.0"
 coreKtx = "1.16.0"
@@ -74,11 +77,15 @@ workManager = "2.8.1"
 [libraries]
 # AndroidX Core Dependencies
 androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activityCompose" }
+androidx-adaptive-navigation-android = { module = "androidx.compose.material3.adaptive:adaptive-navigation-android", version.ref = "adaptive" }
+androidx-adaptive-layout-android = { module = "androidx.compose.material3.adaptive:adaptive-layout-android", version.ref = "adaptive" }
+androidx-adaptive = { module = "androidx.compose.material3.adaptive:adaptive", version.ref = "adaptive" }
 androidx-annotation = { module = "androidx.annotation:annotation", version.ref = "annotation" }
 androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "composeBom" }
 androidx-compose-runtime = { group = "androidx.compose.runtime", name = "runtime" }
 androidx-constraintlayout = { module = "androidx.constraintlayout:constraintlayout", version.ref = "constraintlayout" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigationCompose" }
 androidx-test-core = { module = "androidx.test:core", version.ref = "testCore" }
 androidx-databinding-compiler = { module = "androidx.databinding:databinding-compiler", version.ref = "databindingCompiler" }
 androidx-exifinterface = { module = "androidx.exifinterface:exifinterface", version.ref = "exifinterface" }
@@ -119,6 +126,7 @@ androidx-work-runtime = { module = "androidx.work:work-runtime", version.ref = "
 androidx-work-runtime-ktx = { module = "androidx.work:work-runtime-ktx", version.ref = "workManager" }
 
 # Dependency injection (DI)
+coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coilCompose" }
 dagger-android-processor = { module = "com.google.dagger:dagger-android-processor", version.ref = "dagger" }
 dagger-android-support = { module = "com.google.dagger:dagger-android-support", version.ref = "dagger" }
 dagger-android = { module = "com.google.dagger:dagger-android", version.ref = "dagger" }

@@ -19,8 +19,11 @@ import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.bookmarks.category.BookmarkCategoriesDao
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao
 import fr.free.nrw.commons.contributions.ContributionDao
+import fr.free.nrw.commons.customselector.data.ImageRepositoryImpl
+import fr.free.nrw.commons.customselector.data.MediaReader
 import fr.free.nrw.commons.customselector.database.NotForUploadStatusDao
 import fr.free.nrw.commons.customselector.database.UploadedStatusDao
+import fr.free.nrw.commons.customselector.domain.ImageRepository
 import fr.free.nrw.commons.customselector.ui.selector.ImageFileLoader
 import fr.free.nrw.commons.data.DBOpenHelper
 import fr.free.nrw.commons.db.AppDatabase
@@ -239,6 +242,14 @@ open class CommonsApplicationModule(private val applicationContext: Context) {
     @Provides
     fun providesContentResolver(context: Context): ContentResolver =
         context.contentResolver
+
+    @Provides
+    fun providesImageRepository(
+        mediaReader: MediaReader,
+        notForUploadStatusDao: NotForUploadStatusDao
+    ): ImageRepository {
+        return ImageRepositoryImpl(mediaReader, notForUploadStatusDao)
+    }
 
     @Provides
     fun provideTimeProvider(): TimeProvider {
