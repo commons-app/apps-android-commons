@@ -233,6 +233,7 @@
   <string name="navigation_item_about">เกี่ยวกับ</string>
   <string name="navigation_item_settings">การตั้งค่า</string>
   <string name="navigation_item_feedback">คำติชม</string>
+  <string name="navigation_item_feedback_github">ข้อเสนอแนะผ่านทางกิตฮับ</string>
   <string name="navigation_item_logout">ลงชื่อออก</string>
   <string name="navigation_item_info">บทช่วยสอน</string>
   <string name="navigation_item_notification">การแจ้งเตือน</string>
@@ -331,6 +332,8 @@
   <string name="taj_mahal_answer">รูปภาพของอนุสาวรีย์และทิวทัศน์ภายนอกสามารถอัปโหลดได้ในประเทศส่วนใหญ่ โปรดทราบว่าผลงานศิลปะชั่วคราวภายนอกมักมีลิขสิทธิ์และไม่สามารถอัปโหลดได้</string>
   <string name="blurry_image_answer">หนึ่งในเป้าหมายของ คอมมอนส์ คือการรวบรวมภาพที่มีคุณภาพ ดังนั้น จึงไม่ควรอัปโหลดภาพที่พร่ามัว พยายามถ่ายภาพให้มีคุณภาพเสมอ</string>
   <string name="construction_event_answer">ยินดีต้อนรับรูปภาพที่แสดงเทคโนโลยีหรือวัฒนธรรมในคอมมอนส์</string>
+  <string name="congratulatory_message_quiz">คุณได้ %1$s จากคำตอบทั้งหมด ยินดีด้วย!</string>
+  <string name="quiz_continue">ดำเนินการต่อ</string>
   <string name="warning_for_no_answer">เลือกหนึ่งในสองตัวเลือกเพื่อตอบคำถาม</string>
   <string name="user_not_logged_in" fuzzy="true">เซสชั่นการเข้าสู่ระบบหมดอายุ กรุณาเข้าสู่ระบบอีกครั้ง</string>
   <string name="quiz_result_share_message">แบ่งปันคำถามของคุณกับเพื่อนของคุณ!</string>
