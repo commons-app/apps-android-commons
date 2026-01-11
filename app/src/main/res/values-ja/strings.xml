@@ -16,6 +16,7 @@
 * Nicolas Raoul
 * Omotecho
 * Otokoume
+* RhAnish
 * Shirayuki
 * Suyama
 * Takot
@@ -572,6 +573,7 @@
   <string name="title_for_media">メディア</string>
   <string name="title_for_child_classes">子分類</string>
   <string name="title_for_parent_classes">親クラス</string>
+  <string name="title_for_subcategories">サブカテゴリ</string>
   <string name="upload_nearby_place_found_title">付近の場所が見つかりました</string>
   <string name="upload_nearby_place_found_description_plural">これらは%1$sの写真ですか?</string>
   <string name="upload_nearby_place_found_description_singular">これは%1$sの写真ですか?</string>
