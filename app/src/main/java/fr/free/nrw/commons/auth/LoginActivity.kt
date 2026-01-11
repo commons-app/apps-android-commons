@@ -22,6 +22,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.app.NavUtils
 import androidx.core.content.ContextCompat
+import androidx.activity.enableEdgeToEdge
 import androidx.core.view.WindowCompat
 import fr.free.nrw.commons.BuildConfig
 import fr.free.nrw.commons.CommonsApplication
@@ -77,6 +78,7 @@ class LoginActivity : AccountAuthenticatorActivity() {
             .commonsApplicationComponent
             .inject(this)
 
+        enableEdgeToEdge()
         val isDarkTheme = systemThemeUtils.isDeviceInNightMode()
         setTheme(if (isDarkTheme) R.style.DarkAppTheme else R.style.LightAppTheme)
         delegate.installViewFactory()
@@ -84,8 +86,6 @@ class LoginActivity : AccountAuthenticatorActivity() {
 
         WindowCompat.getInsetsController(window, window.decorView)
             .isAppearanceLightStatusBars = !isDarkTheme
-
-        WindowCompat.setDecorFitsSystemWindows(window, false)
 
         binding = ActivityLoginBinding.inflate(layoutInflater)
         applyEdgeToEdgeAllInsets(binding!!.root)
