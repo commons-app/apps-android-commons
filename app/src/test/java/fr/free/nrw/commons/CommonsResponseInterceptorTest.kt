@@ -12,7 +12,7 @@ import org.mockito.Mockito.mock
 import org.mockito.Mockito.`when`
 import java.io.IOException
 
-class UnsuccessfulResponseInterceptorTest {
+class CommonsResponseInterceptorTest {
 
     @Test
     fun testInterceptDoesNotCrashOnMalformedErrorJson() {

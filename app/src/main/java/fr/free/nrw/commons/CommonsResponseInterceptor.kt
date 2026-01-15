@@ -24,7 +24,7 @@ class CommonsResponseInterceptor : Interceptor {
 
             val rsp = chain.proceed(request)
 
-            if (isExcludedUrl(chain.request())) {
+            if (isExcludedUrl(request)) {
                 return rsp
             }
 
@@ -45,6 +45,9 @@ class CommonsResponseInterceptor : Interceptor {
                                         "MediaWiki API returned error: $bodyString",
                                         mwError
                                     )
+                                } else {
+                                    // Body consumed but error is null = malformed response
+                                    throw IOException("Malformed MediaWiki error response: error field is null")
                                 }
                             }
                         }
@@ -66,11 +69,9 @@ class CommonsResponseInterceptor : Interceptor {
                 return rsp
             }
             throw IOException("Unsuccessful response")
-
-        } catch (t: Throwable) {
+        } catch (t: RuntimeException) {
             // "Nuclear Shield": If ANYTHING above threw a RuntimeException (NPE),
             // catch it here and convert to IOException.
-            if (t is IOException) throw t
             throw IOException("Interceptor crashed with ${t.javaClass.simpleName}", t)
         }
     }
