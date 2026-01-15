@@ -15,65 +15,53 @@ const val SUPPRESS_ERROR_LOG_HEADER: String = "$SUPPRESS_ERROR_LOG: true"
 class CommonsResponseInterceptor : Interceptor {
     @Throws(IOException::class)
     override fun intercept(chain: Interceptor.Chain): Response {
-        try {
-            val rq = chain.request()
-            val suppressErrors = rq.headers.names().contains(SUPPRESS_ERROR_LOG)
-            val request = rq.newBuilder()
-                .removeHeader(SUPPRESS_ERROR_LOG)
-                .build()
+        val rq = chain.request()
+        val suppressErrors = rq.headers.names().contains(SUPPRESS_ERROR_LOG)
+        val request = rq.newBuilder()
+            .removeHeader(SUPPRESS_ERROR_LOG)
+            .build()
 
-            val rsp = chain.proceed(request)
+        val rsp = chain.proceed(request)
 
-            if (isExcludedUrl(request)) {
-                return rsp
-            }
+        if (isExcludedUrl(request)) {
+            return rsp
+        }
 
-            if (rsp.isSuccessful) {
-                // Use a dedicated try-catch for the parsing logic to catch ANY crash (NPE, etc.)
-                try {
-                    rsp.peekBody(ERRORS_PREFIX.length.toLong()).use { responseBody ->
-                        if (ERRORS_PREFIX == responseBody.string()) {
-                            rsp.body?.use { body ->
-                                val bodyString = body.string()
-                                val errorResponse = GsonUtil.defaultGson.fromJson(
-                                    bodyString,
-                                    MwErrorResponse::class.java
+        if (rsp.isSuccessful) {
+            try {
+                rsp.peekBody(ERRORS_PREFIX.length.toLong()).use { responseBody ->
+                    if (ERRORS_PREFIX == responseBody.string()) {
+                        rsp.body?.use { body ->
+                            val bodyString = body.string()
+                            val errorResponse = GsonUtil.defaultGson.fromJson(
+                                bodyString,
+                                MwErrorResponse::class.java
+                            )
+                            val mwError = errorResponse?.error
+                            if (mwError != null) {
+                                throw MwIOException(
+                                    "MediaWiki API returned error: $bodyString",
+                                    mwError
                                 )
-                                val mwError = errorResponse?.error
-                                if (mwError != null) {
-                                    throw MwIOException(
-                                        "MediaWiki API returned error: $bodyString",
-                                        mwError
-                                    )
-                                } else {
-                                    // Body consumed but error is null = malformed response
-                                    throw IOException("Malformed MediaWiki error response: error field is null")
-                                }
+                            }
+                            // If error is null, just log it - don't throw
+                            if (mwError == null) {
+                                Timber.w("Malformed MediaWiki error response: error field is null")
                             }
                         }
                     }
-                } catch (e: Exception) {
-                    // If it's already an IO/MwIOException, let it through.
-                    // If it's a RuntimeException (like NPE), wrap it in IOException so we don't crash.
-                    if (e is IOException) {
-                        if (suppressErrors && e is MwIOException) {
-                            Timber.d(e, "Suppressed (known) error")
-                        } else {
-                            throw e
-                        }
-                    } else {
-                        // This catches NullPointerException and turns it into a safe failure
-                        throw IOException("Safe failure: Error parsing response", e)
-                    }
                 }
-                return rsp
+            } catch (e: IOException) {
+                // Only catch IOException/MwIOException - NPE is prevented by null checks
+                if (suppressErrors && e is MwIOException) {
+                    Timber.d(e, "Suppressed (known) error")
+                } else {
+                    throw e
+                }
             }
-            throw IOException("Unsuccessful response")
-        } catch (t: RuntimeException) {
-            // "Nuclear Shield": If ANYTHING above threw a RuntimeException (NPE),
-            // catch it here and convert to IOException.
-            throw IOException("Interceptor crashed with ${t.javaClass.simpleName}", t)
+            return rsp
         }
+        throw IOException("Unsuccessful response")
     }
 
     private fun isExcludedUrl(request: Request): Boolean {
