@@ -11,7 +11,9 @@ import android.view.View
 import android.view.Window
 import android.widget.Button
 import android.widget.Toast
+import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.WindowInsetsControllerCompat
 import androidx.lifecycle.ViewModelProvider
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.facebook.drawee.controller.BaseControllerListener
@@ -133,6 +135,7 @@ class ZoomableActivity : BaseActivity() {
     private var defaultDispatcher: CoroutineDispatcher = Dispatchers.Default
     private var ioDispatcher: CoroutineDispatcher = Dispatchers.IO
     private val scope: CoroutineScope = MainScope()
+    private var isSystemBarsVisible = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -657,7 +660,9 @@ class ZoomableActivity : BaseActivity() {
                 setHierarchy(hierarchy)
                 setAllowTouchInterceptionWhileZoomed(true)
                 setIsLongpressEnabled(false)
-                setTapListener(DoubleTapGestureListener(this))
+                setTapListener(DoubleTapGestureListener(this) {
+                    toggleSystemBars()
+                })
             }
             val controller: DraweeController =
                 Fresco
@@ -681,6 +686,20 @@ class ZoomableActivity : BaseActivity() {
                 }
             }
         }
+    }
+
+    private fun toggleSystemBars() {
+        val windowInsetsController = WindowCompat.getInsetsController(window, window.decorView)
+        if (isSystemBarsVisible) {
+            windowInsetsController.hide(WindowInsetsCompat.Type.systemBars())
+            windowInsetsController.systemBarsBehavior =
+                WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+            binding.topBar.visibility = View.GONE
+        } else {
+            windowInsetsController.show(WindowInsetsCompat.Type.systemBars())
+            binding.topBar.visibility = View.VISIBLE
+        }
+        isSystemBarsVisible = !isSystemBarsVisible
     }
 
     /**
