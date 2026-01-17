@@ -210,7 +210,10 @@ fun applyEdgeToEdgeTopInsets(view: View) = view.applyEdgeToEdgeInsetsAsMargin { 
  *
  * @param view The target view.
  */
-fun applyEdgeToEdgeBottomInsets(view: View) = view.applyEdgeToEdgeInsetsAsMargin { insets ->
+fun applyEdgeToEdgeBottomInsets(
+    view: View,
+    shouldConsumeInsets: Boolean = true
+) = view.applyEdgeToEdgeInsetsAsMargin(shouldConsumeInsets = shouldConsumeInsets) { insets ->
     leftMargin = insets.left
     rightMargin = insets.right
     bottomMargin = insets.bottom
