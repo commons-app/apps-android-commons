@@ -103,6 +103,7 @@ class ExploreMapFragment : CommonsDaggerSupportFragment(), ExploreMapContract.Vi
     private var prevLongitude = 0.0
     private var recentlyCameFromNearbyMap = false
     private var shouldPerformMapReadyActionsOnResume = false
+    private var hadLocationPermissionOnPause = false
     private var presenter: ExploreMapPresenter? = null
     private var binding: FragmentExploreMapBinding? = null
     var mediaList: MutableList<Media>? = null
@@ -286,13 +287,19 @@ class ExploreMapFragment : CommonsDaggerSupportFragment(), ExploreMapContract.Vi
             shouldPerformMapReadyActionsOnResume = false
             performMapReadyActions()
         }
-    if (locationPermissionsHelper?.checkLocationPermission(requireActivity()) == true) {
-        performMapReadyActions()
-    }
+        
+        // Only refresh if permission state changed from false to true
+        val hasPermissionNow = locationPermissionsHelper?.checkLocationPermission(requireActivity()) == true
+        if (hasPermissionNow && !hadLocationPermissionOnPause) {
+            performMapReadyActions()
+        }
     }
 
     override fun onPause() {
         super.onPause()
+        // Track permission state before pausing
+        hadLocationPermissionOnPause = locationPermissionsHelper?.checkLocationPermission(requireActivity()) == true
+        
         // unregistering the broadcastReceiver, as it was causing an exception and a potential crash
         unregisterNetworkReceiver()
         locationManager.unregisterLocationManager()
