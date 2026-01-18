@@ -7,6 +7,21 @@
 * វ័ណថារិទ្ធ
 -->
 <resources>
+  <string name="commons_facebook">ទំព័រហ្វេសប៊ុក Commons</string>
+  <string name="commons_github">កូដដើម GitHub របស់ Commons</string>
+  <string name="commons_logo">និមិត្តសញ្ញា Commons</string>
+  <string name="commons_website">វេបសាយ Commons</string>
+  <string name="exit_location_picker">ចាកចេញពីការីជ្រើសទីតាំង</string>
+  <string name="submit">ដាក់ស្នើ</string>
+  <string name="add_another_description">បន្ថែមការពិពណ៌នាផ្សេងទៀត</string>
+  <string name="add_new_contribution">បន្ថែមការចូលរួមចំណែកថ្មី</string>
+  <string name="add_contribution_from_camera">បន្ថែមការចូលរួមពីកាម៉េរា</string>
+  <string name="add_contribution_from_photos">បន្ថែមការចូលរួមចំណែកពីរូបថត</string>
+  <string name="row_item_language_description">ការពណ៌នាអំពីភាសា</string>
+  <string name="row_item_caption">ចំណងជើងរង</string>
+  <string name="show_captions_description">ពិពណ៌នា</string>
+  <string name="nearby_row_image">រូបភាព</string>
+  <string name="nearby_all">ទាំងអស់</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">%1$d ឯកសារកំពុងផ្ទុកឡើង</item>
     <item quantity="other">%1$d ឯកសារកំពុងផ្ទុកឡើង</item>
@@ -33,6 +48,8 @@
   <string name="preference_category_privacy">ឯកជនភាព</string>
   <string name="app_name">ទូទៅ</string>
   <string name="menu_settings">ការកំណត់​</string>
+  <string name="intent_share_upload_label">អាប់ឡូដទៅកាន់ Commons</string>
+  <string name="upload_in_progress">អាប់ឡូដកំពុងដំណើរការ</string>
   <string name="username">ឈ្មោះអ្នកប្រើ</string>
   <string name="password">ពាក្យ​សម្ងាត់</string>
   <string name="login_credential">កត់ឈ្មោះចូលទៅក្នុងគណនីវិគីមេឌារួមបេតា</string>
@@ -41,18 +58,19 @@
   <string name="signup">ចុះ​ឈ្មោះ</string>
   <string name="logging_in_title">កំពុងកត់ឈ្មោះចូល</string>
   <string name="logging_in_message">សូមរង់ចាំបន្តិច…</string>
-  <string name="login_success" fuzzy="true">កត់ឈ្មោះចូលបានសម្រេច!</string>
-  <string name="login_failed" fuzzy="true">កត់ឈ្មោះចូលបានបរាជ័យ!</string>
+  <string name="updating_caption_message">សូមរង់ចាំ…</string>
+  <string name="login_success">បញ្ជាប់ចូលបានជោគជ័យ!</string>
+  <string name="login_failed">បញ្ជាប់ចូលបានបរាជ័យ!</string>
   <string name="upload_failed">រកមិនឃើញឯកសារទេ។ សូមសាកល្បងជាមួយឯកសារផ្សេងមួយទៀត។</string>
-  <string name="authentication_failed" fuzzy="true">ការបញ្ជាក់ទទួលស្គាល់បានបរាជ័យ! សូមកត់ឈ្មោះចូលម្ដងទៀត។</string>
+  <string name="authentication_failed">យថាភូតកម្មបានបរាជ័យ។ សូមបញ្ជាប់ចូលម្ដងទៀត។</string>
   <string name="uploading_started">ការផ្ទុកឡើងបានចាប់ផ្តើមហើយ!</string>
   <string name="uploading_queued">ជួរផ្ទុកឡើង (បានបើកម៉ូតដែនកំហិតតភ្ជាប់)</string>
   <string name="upload_completed_notification_title">បានផ្ទុកឡើង %1$s ហើយ!</string>
   <string name="upload_completed_notification_text">ចុចដើម្បីមើលអ្វីដែលអ្នកផ្ទុកឡើង</string>
-  <string name="upload_progress_notification_title_start" fuzzy="true">កំពុងចាប់ផ្តើមផ្ទុកឡើង %1$s</string>
+  <string name="upload_progress_notification_title_start">កំពុងអាប់ឡូដឯកសារ៖ %1$s</string>
   <string name="upload_progress_notification_title_in_progress">កំពុងផ្ទុកឡើង %1$s</string>
   <string name="upload_progress_notification_title_finishing">កំពុងបញ្ចប់ការផ្ទុកឡើង  %1$s</string>
-  <string name="upload_failed_notification_title" fuzzy="true">ការផ្ទុកឡើង %1$s មិនបានសម្រេច</string>
+  <string name="upload_failed_notification_title">អាប់ឡូដ %1$s ត្រូវបានបរាជ័យ</string>
   <string name="upload_paused_notification_title">ការផ្ទុកឡើង %1$s បានផ្អាក</string>
   <string name="upload_failed_notification_subtitle">ចុចដើម្បីមើល</string>
   <string name="upload_paused_notification_subtitle">ចុចដើម្បីមើល</string>
@@ -65,7 +83,10 @@
   <string name="menu_from_camera">ថតរូប</string>
   <string name="menu_nearby">ជិតខាង</string>
   <string name="provider_contributions">អ្វីដែលខ្ញុំផ្ទុកឡើង</string>
+  <string name="menu_copy_link">ចម្លងបញ្ជាប់</string>
+  <string name="menu_link_copied">បញ្ជាប់នេះត្រូវបានចម្លងទៅឃ្លីបប៊ត</string>
   <string name="menu_share">ចែកចាយ</string>
+  <string name="menu_view_file_page">មើលទំព័រឯកសារ</string>
   <string name="share_title_hint">ចំណងជើង (ទាមទារ)</string>
   <string name="share_description_hint">ការពិពណ៌នា</string>
   <string name="share_caption_hint" fuzzy="true">ចំណងជើង (កំហិត ២៥៥តួ)</string>
@@ -73,7 +94,8 @@
   <string name="login_failed_throttled">ការព្យាយាមមិនបានសម្រេចច្រើនដងពេក។ សូមព្យាយាមម្តងទៀតនៅប៉ុន្មាននាទីក្រោយ។</string>
   <string name="login_failed_blocked">សូមអភ័យទោស អ្នកប្រើប្រាស់រូបនេះត្រូវបានហាមឃាត់នៅវិគីមេឌារួម</string>
   <string name="login_failed_2fa_needed">អ្នកចាំបាច់ត្រូវតែផ្ដល់លេខកូដសម្រាប់បញ្ជាក់ទទួលស្គាល់ពីរតង់។</string>
-  <string name="login_failed_generic" fuzzy="true">កត់ឈ្មោះចូលមិនបានសម្រេច</string>
+  <string name="login_failed_email_auth_needed">កូដផ្ទៀងផ្ទាត់បញ្ជាប់ចូលត្រូវបានផ្ញើទៅអាសយដ្ឋានអ៊ីមែលរបស់អ្នក។ សូមផ្ដល់កូដនេះ ដើម្បីបញ្ជាប់ចូលគណនី។</string>
+  <string name="login_failed_generic">បញ្ជាប់ចូលបានបរាជ័យ</string>
   <string name="share_upload_button">ផ្ទុកឡើង</string>
   <string name="multiple_share_base_title">ដាក់ឈ្មោះឲ្យសំនុំនេះ</string>
   <string name="provider_modifications">បម្រែបម្រួល</string>
@@ -82,8 +104,9 @@
   <string name="menu_save_categories">រក្សាទុក</string>
   <string name="refresh_button">ផ្ទុកឡើងវិញ</string>
   <string name="display_list_button">បញ្ជី</string>
-  <string name="contributions_subtitle_zero" fuzzy="true">គ្មានអ្វីដែលបានផ្ទុកឡើងទេ</string>
+  <string name="contributions_subtitle_zero">(មិនទាន់អាប់ឡូដនៅឡើយ)</string>
   <string name="categories_not_found">រកមិនឃើញចំណាត់ថ្នាក់ក្រុមដែលត្រូវនឹង %1$s ទេ</string>
+  <string name="depictions_not_found">រកមិនឃើញធាតុវិធីទិន្នន័យដែលត្រូវគ្នានឹង %1$s ឡើយ</string>
   <string name="categories_skip_explanation">បន្ថែមចំណាត់ថ្នាក់ក្រុមអោយរូបភាពរបស់អ្នកដើម្បីអោយងាយស្រួលស្វែងរកក្នុងវិគីមេឌារួម។ ចាប់ផ្ដើមវាយបញ្ចូលឈ្មោះចំណាត់ថ្នាក់ក្រុម។</string>
   <string name="categories_activity_title">ចំណាត់ថ្នាក់ក្រុម</string>
   <string name="title_activity_settings">ការកំណត់</string>
@@ -93,6 +116,7 @@
   <string name="about_license">កម្មវិធីវិគីមេឌៀទូទៅ គឺជាកម្មវិធីប្រភពបើកទូលាយដែលបានបង្កើតនិងបានថែទាំ ដោយអនុប្បទានិកនិងអ្នកស្ម័គ្រចិត្តនៃសហគមន៍វិគីមេឌៀ។ មូលនិធិវិគីមេឌៀ គឺមិនបានចូលរួមក្នុងការបង្កើត អភិវឌ្ឍន៍ រឺក៏ថែទាំកម្មវិធីនេះដែរ។</string>
   <string name="about_improve">បង្កើត &lt;a href=\"%1$s\"&gt;បញ្ហាថ្មីនៃ GitHub&lt;/a&gt; សម្រាប់របាយការណ៍កំហុស និងការណែនាំនានា។</string>
   <string name="about_privacy_policy">គោលការណ៍​ភាព​ឯកជន</string>
+  <string name="about_credits">ក្រេឌីត</string>
   <string name="title_activity_about">អំពី</string>
   <string name="menu_feedback">ផ្ញើមតិយោបល់ (តាមអ៊ីមែល)</string>
   <string name="provider_categories">ចំណាត់ថ្នាក់ក្រុមដែលត្រូវបានប្រើថ្មីៗ</string>
@@ -100,6 +124,7 @@
   <string name="no_uploads_yet">អ្នកមិនទាន់បានផ្ទុករូបថតណាមួយឡើងនៅឡើយទេ។</string>
   <string name="menu_retry_upload">សាកម្ដងទៀត</string>
   <string name="menu_cancel_upload">បោះបង់</string>
+  <string name="language_search_all_languages">ភាសាទាំងអស់</string>
   <string name="menu_download">ទាញយក</string>
   <string name="preference_license">អាជ្ញាបណ្ណលំនាំដើម</string>
   <string name="license_name_cc_by_sa" fuzzy="true"> Attribution-ShareAlike 3.0</string>
@@ -121,6 +146,7 @@
   <string name="menu_refresh">ធ្វើឱ្យស្រស់</string>
   <string name="welcome_image_mount_zao">ភ្នំហ្សាអូ</string>
   <string name="welcome_image_rainbow_bridge">ស្ពានឥន្ទធនូ</string>
+  <string name="welcome_image_sydney_opera_house">មហោស្រពអូប៉េរាទីក្រុងស៊ីដនី</string>
   <string name="cancel">បោះបង់</string>
   <string name="navigation_drawer_open">បើក</string>
   <string name="navigation_drawer_close">បិទ</string>

@@ -4,6 +4,7 @@
 * Bluetpp
 * Băng Tỏa
 * Caden99
+* Duongvu
 * Harriettruong3
 * Keo010122
 * Leducthn
@@ -145,8 +146,8 @@
   <string name="preference_license">Giấy phép mặc định</string>
   <string name="use_previous">Sử dụng tiêu đề và miêu tả trước</string>
   <string name="preference_theme">Giao diện</string>
-  <string name="license_name_cc_by_sa_four" fuzzy="true">Ghi công–Chia sẻ tương tự 4.0</string>
-  <string name="license_name_cc_by_four" fuzzy="true">Ghi công 4.0</string>
+  <string name="license_name_cc_by_sa_four" fuzzy="true">Đánh giá–Chia sẻ tương tự 4.0</string>
+  <string name="license_name_cc_by_four" fuzzy="true">đánh giá 4.0</string>
   <string name="license_name_cc_by_sa" fuzzy="true">Ghi công–Chia sẻ tương tự 3.0</string>
   <string name="license_name_cc_by" fuzzy="true">Ghi công 3.0</string>
   <string name="license_name_cc0">CC0</string>
@@ -216,8 +217,8 @@
   <string name="welcome_image_llamas">Lạc đà không bướu</string>
   <string name="welcome_image_rainbow_bridge">Cầu Cầu vồng</string>
   <string name="welcome_image_tulip">Tu-líp</string>
-  <string name="welcome_image_welcome_wikipedia" fuzzy="true">Hoan nghênh: Wikipedia</string>
-  <string name="welcome_image_welcome_copyright" fuzzy="true">Hoan nghênh: Bản quyền</string>
+  <string name="welcome_image_welcome_wikipedia" fuzzy="true">Hình ảnh sơ đồ của một bài viết chung trên Wikipedia.</string>
+  <string name="welcome_image_welcome_copyright" fuzzy="true">Một bản vẽ của một đống giấy với biểu tượng bản quyền được cắt ngang.</string>
   <string name="welcome_image_sydney_opera_house">Nhà hát Opera Sydney</string>
   <string name="cancel">Hủy bỏ</string>
   <string name="navigation_drawer_open">Mở</string>

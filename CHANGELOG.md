@@ -1,5 +1,21 @@
 # Wikimedia Commons for Android
 
+## v6.2.1
+
+### What's changed
+* The app no longer crashes on navigating from the MainActivity to other activities
+* Support for larger zoom levels on the image upload preview screen
+
+## v6.2.0
+
+### What's changed
+* Explore map no longer shows incorrect coordinates while navigating from Nearby
+* The popup messages are now more user-friendly
+* Sending images from Gallery apps to Commons app no longer asks for storage permissions
+* Improved UX for the custom selector
+* Wikipedia links now appear correctly on the app
+* Double-tap or pinch to zoom support in the custom selector
+
 ## v6.1.0
 
 ### What's changed

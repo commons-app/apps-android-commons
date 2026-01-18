@@ -3,17 +3,13 @@ package fr.free.nrw.commons.utils
 import android.app.Activity
 import android.content.Context
 import android.graphics.Color
-import android.view.Display
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.TextView
 import android.widget.Toast
-
 import androidx.annotation.StringRes
-
 import androidx.core.content.ContextCompat
 import com.google.android.material.snackbar.Snackbar
-
 import fr.free.nrw.commons.R
 import timber.log.Timber
 
