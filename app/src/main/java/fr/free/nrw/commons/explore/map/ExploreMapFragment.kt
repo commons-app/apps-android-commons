@@ -274,7 +274,6 @@ class ExploreMapFragment : CommonsDaggerSupportFragment(), ExploreMapContract.Vi
             override fun onZoom(event: ZoomEvent?): Boolean = false
         })
         // removed tha permission check here to prevent it from running on fragment creation
-
     }
 
     override fun onResume() {
@@ -679,8 +678,12 @@ class ExploreMapFragment : CommonsDaggerSupportFragment(), ExploreMapContract.Vi
             descriptionText
         else
             descriptionText.replaceFirst(".$".toRegex(), ""))
+        val cleanedDescription = descriptionText
+            // Remove MediaWiki UI images/icons
+            .replace(Regex("<img[^>]*>"), "")
+
         // Set the short description after we remove place name from long description and we render the HTML tags
-        binding!!.bottomSheetDetailsBinding.description.text = HtmlCompat.fromHtml(descriptionText, HtmlCompat.FROM_HTML_MODE_LEGACY)
+        binding!!.bottomSheetDetailsBinding.description.text = HtmlCompat.fromHtml(cleanedDescription, HtmlCompat.FROM_HTML_MODE_LEGACY)
     }
 
     override fun addSearchThisAreaButtonAction() {
