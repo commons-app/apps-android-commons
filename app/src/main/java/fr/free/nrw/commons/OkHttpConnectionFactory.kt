@@ -96,7 +96,6 @@ private class UnsuccessfulResponseInterceptor : Interceptor {
                                 bodyString,
                                 MwErrorResponse::class.java
                             )
-                            // Fix: Only throw if error is not null (prevents NPE)
                             if (errorResponse?.error != null) {
                                 throw MwIOException(
                                     "MediaWiki API returned error: $bodyString",
