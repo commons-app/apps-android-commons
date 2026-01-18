@@ -104,6 +104,7 @@ class ExploreMapFragment : CommonsDaggerSupportFragment(), ExploreMapContract.Vi
     private var recentlyCameFromNearbyMap = false
     private var shouldPerformMapReadyActionsOnResume = false
     private var hadLocationPermissionOnPause = false
+    private var isWaitingForFirstLocation = false
     private var presenter: ExploreMapPresenter? = null
     private var binding: FragmentExploreMapBinding? = null
     var mediaList: MutableList<Media>? = null
@@ -494,6 +495,19 @@ class ExploreMapFragment : CommonsDaggerSupportFragment(), ExploreMapContract.Vi
     ) {
         lastKnownLocation = latLng
         exploreMapController.currentLocation = lastKnownLocation
+        
+        // If waiting for first location after permission grant, center map now
+        if (isWaitingForFirstLocation && latLng != null) {
+            isWaitingForFirstLocation = false
+            val targetP = GeoPoint(latLng.latitude, latLng.longitude)
+            mapCenter = targetP
+            binding!!.mapView.controller.setCenter(targetP)
+            recenterMarkerToPosition(targetP)
+            moveCameraToPosition(targetP)
+            setProgressBarVisibility(false)
+            presenter!!.onMapReady(exploreMapController)
+        }
+        
         presenter!!.updateMap(locationChangeType)
     }
 
@@ -576,24 +590,31 @@ class ExploreMapFragment : CommonsDaggerSupportFragment(), ExploreMapContract.Vi
         lastKnownLocation = locationManager.getLastLocation()
         val target = lastKnownLocation
         if (lastKnownLocation != null) {
+            // Location already available, center immediately
             val targetP = GeoPoint(target!!.latitude, target.longitude)
             mapCenter = targetP
             binding!!.mapView.controller.setCenter(targetP)
             recenterMarkerToPosition(targetP)
             moveCameraToPosition(targetP)
+            presenter!!.onMapReady(exploreMapController)
         } else if (locationManager.isGPSProviderEnabled()
             || locationManager.isNetworkProviderEnabled()
         ) {
+            // No cached location, request updates and wait for first location
+            isWaitingForFirstLocation = true
             locationManager.requestLocationUpdatesFromProvider(LocationManager.NETWORK_PROVIDER)
             locationManager.requestLocationUpdatesFromProvider(LocationManager.GPS_PROVIDER)
             setProgressBarVisibility(true)
+            // Don't call onMapReady yet - will be called when location arrives
         } else {
+            // Location services disabled
             locationPermissionsHelper!!.showLocationOffDialog(
                 requireActivity(),
                 R.string.ask_to_turn_location_on_text
             )
+            // Fallback to default location
+            presenter!!.onMapReady(exploreMapController)
         }
-        presenter!!.onMapReady(exploreMapController)
         registerUnregisterLocationListener(false)
     }
 
