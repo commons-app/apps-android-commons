@@ -53,4 +53,4 @@ This software is open source, licensed under the [Apache License 2.0][10].
 [9]: https://github.com/commons-app/commons-app-documentation/blob/master/android/Libraries-used.md#libraries-used
 [10]: https://www.apache.org/licenses/LICENSE-2.0
 
-echo "<!-- test: unrelated change TEST TWO-->" >> README.md
+echo "<!-- test: unrelated change -->" >> README.md
