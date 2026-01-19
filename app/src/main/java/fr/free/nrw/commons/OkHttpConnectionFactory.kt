@@ -91,14 +91,17 @@ private class UnsuccessfulResponseInterceptor : Interceptor {
                     if (ERRORS_PREFIX == responseBody.string()) {
                         rsp.body.use { body ->
                             val bodyString = body!!.string()
-
-                            throw MwIOException(
-                                "MediaWiki API returned error: $bodyString",
-                                GsonUtil.defaultGson.fromJson(
-                                    bodyString,
-                                    MwErrorResponse::class.java
-                                ).error!!,
+                            
+                            val errorResponse = GsonUtil.defaultGson.fromJson(
+                                bodyString,
+                                MwErrorResponse::class.java
                             )
+                            if (errorResponse?.error != null) {
+                                throw MwIOException(
+                                    "MediaWiki API returned error: $bodyString",
+                                    errorResponse.error
+                                )
+                            }
                         }
                     }
                 }
