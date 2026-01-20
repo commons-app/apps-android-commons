@@ -64,6 +64,9 @@ class ExploreFragment : CommonsDaggerSupportFragment() {
             override fun onPageScrollStateChanged(state: Int) = Unit
             override fun onPageSelected(position: Int) {
                 binding!!.viewPager.canScroll = position != 2
+                // based on which tab we are now recreate the options menu
+                activity?.invalidateOptionsMenu()
+
                 if (position == 2) {
                     mapRootFragment?.requestLocationIfNeeded()
                 }
@@ -178,19 +181,6 @@ class ExploreFragment : CommonsDaggerSupportFragment() {
             if (binding!!.viewPager.currentItem == 2) {
                 others.setVisible(true)
             }
-
-            // if on Map tab, show all menu options, else only show search
-            binding!!.viewPager.addOnPageChangeListener(object : OnPageChangeListener {
-                override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) = Unit
-                override fun onPageScrollStateChanged(state: Int) = Unit
-                override fun onPageSelected(position: Int) {
-                    binding!!.viewPager.canScroll = position != 2
-                    others.setVisible(position == 2)
-                    if (position == 2) {
-                        mapRootFragment?.requestLocationIfNeeded()
-                    }
-                }
-            })
         } else {
             inflater.inflate(R.menu.menu_search, menu)
         }
