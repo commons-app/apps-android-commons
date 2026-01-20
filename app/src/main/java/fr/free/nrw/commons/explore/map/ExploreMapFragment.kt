@@ -81,7 +81,7 @@ import org.osmdroid.views.overlay.TilesOverlay
 import timber.log.Timber
 import javax.inject.Inject
 import javax.inject.Named
-import androidx.core.text.HtmlCompat
+import fr.free.nrw.commons.utils.StringUtil
 
 
 
@@ -678,12 +678,10 @@ class ExploreMapFragment : CommonsDaggerSupportFragment(), ExploreMapContract.Vi
             descriptionText
         else
             descriptionText.replaceFirst(".$".toRegex(), ""))
-        val cleanedDescription = descriptionText
-            // Remove MediaWiki UI images/icons
-            .replace(Regex("<img[^>]*>"), "")
 
-        // Set the short description after we remove place name from long description and we render the HTML tags
-        binding!!.bottomSheetDetailsBinding.description.text = HtmlCompat.fromHtml(cleanedDescription, HtmlCompat.FROM_HTML_MODE_LEGACY)
+        binding!!.bottomSheetDetailsBinding.description.text =
+            StringUtil.fromHtml(descriptionText)
+
     }
 
     override fun addSearchThisAreaButtonAction() {
