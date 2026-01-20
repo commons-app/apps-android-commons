@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:tools="http://schemas.android.com/tools"
+  android:orientation="vertical"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
   xmlns:app="http://schemas.android.com/apk/res-auto"
-  android:layout_gravity="bottom"
   tools:context=".edit.EditActivity" >
 
   <androidx.constraintlayout.widget.ConstraintLayout
@@ -15,10 +15,7 @@
     android:gravity="center_vertical"
     android:orientation="horizontal"
     android:paddingHorizontal="12dp"
-    android:paddingVertical="8dp"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent">
+    android:paddingVertical="8dp" >
 
     <ImageView
       android:id="@+id/btnBack"
@@ -46,45 +43,50 @@
       app:layout_constraintTop_toTopOf="parent" />
   </androidx.constraintlayout.widget.ConstraintLayout>
 
-  <ImageView
-    android:id="@+id/iv"
+  <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_gravity="center"
-    app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/topBar" />
-  <LinearLayout
-    android:id="@+id/linearLayout"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_gravity="bottom|center"
-    android:layout_margin="2dp"
-    android:elevation="2dp"
-    android:gravity="center"
-    android:orientation="horizontal"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent">
+    android:layout_height="match_parent">
+    <ImageView
+      android:id="@+id/iv"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      android:layout_gravity="center" />
 
-    <androidx.appcompat.widget.AppCompatButton
-      android:id="@+id/rotate_btn"
-      android:layout_width="wrap_content"
+    <LinearLayout
+      android:id="@+id/linearLayout"
+      android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:drawableStart="@drawable/baseline_rotate_right"
-      android:drawablePadding="4dp"
-      android:text="@string/rotate"
-      android:textColor="@android:color/white" />
+      android:layout_margin="2dp"
+      android:elevation="2dp"
+      android:gravity="center"
+      android:orientation="horizontal"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent">
 
-    <androidx.appcompat.widget.AppCompatButton
-      android:id="@+id/btn_save"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:drawableStart="@drawable/baseline_save_24"
-      android:drawablePadding="4dp"
-      android:onClick="getRotatedImage"
-      android:text="@string/menu_save_categories"
-      android:textColor="@android:color/white" />
-  </LinearLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+      <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/rotate_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableStart="@drawable/baseline_rotate_right"
+        android:drawablePadding="4dp"
+        android:text="@string/rotate"
+        android:textColor="@android:color/white" />
+
+      <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_save"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableStart="@drawable/baseline_save_24"
+        android:drawablePadding="4dp"
+        android:onClick="getRotatedImage"
+        android:text="@string/menu_save_categories"
+        android:textColor="@android:color/white" />
+    </LinearLayout>
+
+  </androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
