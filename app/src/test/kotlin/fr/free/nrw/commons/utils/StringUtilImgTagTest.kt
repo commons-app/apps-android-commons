@@ -18,7 +18,7 @@ class StringUtilImgTagTest {
         val result = StringUtil.fromHtml(input)
 
         // Text should remain, and <img> should not produce a placeholder sqaure.
-        assertEquals("Media  Commons", result.toString())
+        assertEquals("Media Commons", result.toString())
         assertTrue(result.getSpans<ImageSpan>().isEmpty())
     }
     @Test
@@ -27,7 +27,7 @@ class StringUtilImgTagTest {
 
         val result = StringUtil.fromHtml(input)
 
-        assertEquals("Media  Commons", result.toString())
+        assertEquals("Media Commons", result.toString())
         assertTrue(result.getSpans<ImageSpan>().isEmpty())
     }
 
