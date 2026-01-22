@@ -284,14 +284,23 @@ class ExploreMapFragment : CommonsDaggerSupportFragment(), ExploreMapContract.Vi
             requireActivity().registerReceiver(broadcastReceiver, intentFilter)
         }
         setSearchThisAreaButtonVisibility(false)
+        
+        // Check if we need to wait for first location
+        val hasPermission = locationPermissionsHelper?.checkLocationPermission(requireActivity()) == true
+        val cachedLocation = locationManager.getLastLocation()
+        
+        if (hasPermission && cachedLocation == null && !isWaitingForFirstLocation) {
+            isWaitingForFirstLocation = true
+            setProgressBarVisibility(true)
+        }
+        
         if (shouldPerformMapReadyActionsOnResume) {
             shouldPerformMapReadyActionsOnResume = false
             performMapReadyActions()
         }
         
         // Only refresh if permission state changed from false to true
-        val hasPermissionNow = locationPermissionsHelper?.checkLocationPermission(requireActivity()) == true
-        if (hasPermissionNow && !hadLocationPermissionOnPause) {
+        if (hasPermission && !hadLocationPermissionOnPause) {
             performMapReadyActions()
         }
     }
@@ -372,11 +381,9 @@ class ExploreMapFragment : CommonsDaggerSupportFragment(), ExploreMapContract.Vi
             isPermissionDenied = true
         }
 
-        lastKnownLocation = getLastLocation()
-
-        if (lastKnownLocation == null) {
-            lastKnownLocation = defaultLatLng
-        }
+        // Use locationManager.getLastLocation() directly to get fresh location
+        // Don't use getLastLocation() as it may return cached defaultLatLng
+        lastKnownLocation = locationManager.getLastLocation()
 
         // if we came from 'Show in Explore' in Nearby, load Nearby map center and zoom
         if (isCameFromNearbyMap) {
@@ -385,11 +392,20 @@ class ExploreMapFragment : CommonsDaggerSupportFragment(), ExploreMapContract.Vi
                 prevZoom.coerceIn(1.0, 22.0),
                 1L
             )
-        } else {
+        } else if (lastKnownLocation != null) {
+            // We have a real location - center to it
+            moveCameraToPosition(
+                GeoPoint(lastKnownLocation!!.latitude, lastKnownLocation!!.longitude)
+            )
+        } else if (!isWaitingForFirstLocation) {
+            // No location and not waiting - use default
+            // This happens when permission not granted yet
+            lastKnownLocation = defaultLatLng
             moveCameraToPosition(
                 GeoPoint(lastKnownLocation!!.latitude, lastKnownLocation!!.longitude)
             )
         }
+        // If waiting for first location, don't center - will center when location arrives
         presenter!!.onMapReady(exploreMapController)
     }
 
@@ -483,11 +499,13 @@ class ExploreMapFragment : CommonsDaggerSupportFragment(), ExploreMapContract.Vi
             }
     }
 
-    override fun onLocationChangedSignificantly(latLng: LatLng) =
+    override fun onLocationChangedSignificantly(latLng: LatLng) {
         handleLocationUpdate(latLng, LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED)
+    }
 
-    override fun onLocationChangedSlightly(latLng: LatLng) =
+    override fun onLocationChangedSlightly(latLng: LatLng) {
         handleLocationUpdate(latLng, LocationChangeType.LOCATION_SLIGHTLY_CHANGED)
+    }
 
     private fun handleLocationUpdate(
         latLng: LatLng?,
@@ -496,16 +514,16 @@ class ExploreMapFragment : CommonsDaggerSupportFragment(), ExploreMapContract.Vi
         lastKnownLocation = latLng
         exploreMapController.currentLocation = lastKnownLocation
         
-        // If waiting for first location after permission grant, center map now
+        // If we were waiting for first location after permission grant, center map now
         if (isWaitingForFirstLocation && latLng != null) {
             isWaitingForFirstLocation = false
+            setProgressBarVisibility(false)
+            
             val targetP = GeoPoint(latLng.latitude, latLng.longitude)
             mapCenter = targetP
             binding!!.mapView.controller.setCenter(targetP)
             recenterMarkerToPosition(targetP)
             moveCameraToPosition(targetP)
-            setProgressBarVisibility(false)
-            presenter!!.onMapReady(exploreMapController)
         }
         
         presenter!!.updateMap(locationChangeType)
@@ -587,35 +605,27 @@ class ExploreMapFragment : CommonsDaggerSupportFragment(), ExploreMapContract.Vi
     private fun locationPermissionGranted() {
         isPermissionDenied = false
         applicationKvStore.putBoolean("doNotAskForLocationPermission", false)
+        
+        // Add listener and register location manager
+        locationManager.addLocationListener(this)
+        locationManager.registerLocationManager()
+        
         lastKnownLocation = locationManager.getLastLocation()
-        val target = lastKnownLocation
+        
         if (lastKnownLocation != null) {
-            // Location already available, center immediately
-            val targetP = GeoPoint(target!!.latitude, target.longitude)
+            val targetP = GeoPoint(lastKnownLocation!!.latitude, lastKnownLocation!!.longitude)
             mapCenter = targetP
             binding!!.mapView.controller.setCenter(targetP)
             recenterMarkerToPosition(targetP)
             moveCameraToPosition(targetP)
             presenter!!.onMapReady(exploreMapController)
-        } else if (locationManager.isGPSProviderEnabled()
-            || locationManager.isNetworkProviderEnabled()
-        ) {
-            // No cached location, request updates and wait for first location
-            isWaitingForFirstLocation = true
-            locationManager.requestLocationUpdatesFromProvider(LocationManager.NETWORK_PROVIDER)
-            locationManager.requestLocationUpdatesFromProvider(LocationManager.GPS_PROVIDER)
-            setProgressBarVisibility(true)
-            // Don't call onMapReady yet - will be called when location arrives
         } else {
-            // Location services disabled
-            locationPermissionsHelper!!.showLocationOffDialog(
-                requireActivity(),
-                R.string.ask_to_turn_location_on_text
-            )
-            // Fallback to default location
+            // No cached location - set flag to wait for first GPS fix
+            isWaitingForFirstLocation = true
+            setProgressBarVisibility(true)
+            // Load map but don't center yet - will center when location arrives
             presenter!!.onMapReady(exploreMapController)
         }
-        registerUnregisterLocationListener(false)
     }
 
     fun registerUnregisterLocationListener(removeLocationListener: Boolean) {
@@ -1152,12 +1162,31 @@ class ExploreMapFragment : CommonsDaggerSupportFragment(), ExploreMapContract.Vi
 
     override fun onLocationPermissionGranted() {
         if (locationPermissionsHelper!!.isLocationAccessToAppsTurnedOn()) {
+            locationManager.addLocationListener(this)
             locationManager.registerLocationManager()
             drawMyLocationMarker()
+            
+            // Check if we have a cached location
+            val cachedLocation = locationManager.getLastLocation()
+            
+            if (cachedLocation != null) {
+                // Center map immediately
+                val targetP = GeoPoint(cachedLocation.latitude, cachedLocation.longitude)
+                mapCenter = targetP
+                binding?.mapView?.controller?.setCenter(targetP)
+                recenterMarkerToPosition(targetP)
+                moveCameraToPosition(targetP)
+                populatePlaces(cachedLocation)
+            } else {
+                // No cached location - wait for first GPS fix
+                isWaitingForFirstLocation = true
+                setProgressBarVisibility(true)
+                // Still need to populate with default, but will recenter when location arrives
+                populatePlaces(getMapCenter())
+            }
         } else {
             locationPermissionsHelper!!.showLocationOffDialog(requireActivity(), R.string.location_off_dialog_text)
         }
-        onLocationChanged(LocationChangeType.PERMISSION_JUST_GRANTED, null)
     }
 
     fun onLocationChanged(locationChangeType: LocationChangeType, location: Location?) {
