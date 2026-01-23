@@ -125,7 +125,10 @@ class MediaDetailPagerFragment : CommonsDaggerSupportFragment(), OnPageChangeLis
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        outState.putInt("current-page", binding!!.mediaDetailsPager.currentItem)
+        //safe call ?. instead of the!! to prevent the NullPointerException
+        binding?.mediaDetailsPager?.let { pager ->
+            outState.putInt("current-page", pager.currentItem)
+        }
         outState.putBoolean("editable", editable)
         outState.putBoolean("isFeaturedImage", isFeaturedImage)
     }
@@ -145,9 +148,8 @@ class MediaDetailPagerFragment : CommonsDaggerSupportFragment(), OnPageChangeLis
         if (activity is MainActivity) {
             (activity as MainActivity).showTabs()
         }
-
-        // Temporarily disable it. Ref:https://github.com/commons-app/apps-android-commons/issues/6581#issuecomment-3694210567 
-        // binding = null
+        //re-enabbling this to prevent the memory leaks
+         binding = null
     }
 
     /**
