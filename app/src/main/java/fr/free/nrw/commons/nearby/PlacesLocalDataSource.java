@@ -39,6 +39,12 @@ public class PlacesLocalDataSource {
      * @return The list of saved places within the map's view.
      */
     public List<Place> fetchPlaces(final LatLng mapBottomLeft, final LatLng mapTopRight) {
+
+        if (mapBottomLeft == null || mapTopRight == null) {
+            Timber.e("Map boundaries are null, returning empty list.");
+            return new ArrayList<>(); // returnn empty list instead of crashing
+        }
+
         class Constraint {
 
             final double latBegin;
