@@ -1229,16 +1229,14 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
      *
      * @return a `LatLng` object denoting the location of the top right corner of the map.
      */
-        override fun getScreenTopRight(): LatLng? {
-        if (binding?.map?.projection == null || binding!!.map.width == 0) {
-            Timber.e("Map projection or dimensions are invalid. Cannot calculate screenTopRight.")
-            return null
-        }
-        val screenTopRight = binding!!.map.projection
-            .fromPixels(binding!!.map.width, 0)
-        return LatLng(
-            screenTopRight.latitude, screenTopRight.longitude, 0f
-        )
+    override fun getScreenTopRight(): LatLng? {
+        val map = binding?.map ?: return null
+        val projection = map.projection ?: return null
+
+        val screenTopRight = projection.fromPixels(map.width, 0)
+        return if (screenTopRight != null) {
+            LatLng(screenTopRight.latitude, screenTopRight.longitude, 0f)
+        } else null
     }
 
     /**
@@ -1247,15 +1245,13 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
      * @return a `LatLng` object denoting the location of the bottom left corner of the map.
      */
     override fun getScreenBottomLeft(): LatLng? {
-        if (binding?.map?.projection == null || binding!!.map.height == 0) {
-            Timber.e("Map projection or dimensions are invalid. Cannot calculate screenBottomLeft.")
-            return null
-        }
-        val screenBottomLeft = binding!!.map.projection
-            .fromPixels(0, binding!!.map.height)
-        return LatLng(
-            screenBottomLeft.latitude, screenBottomLeft.longitude, 0f
-        )
+        val map = binding?.map ?: return null
+        val projection = map.projection ?: return null
+
+        val screenBottomLeft = projection.fromPixels(0, map.height)
+        return if (screenBottomLeft != null) {
+            LatLng(screenBottomLeft.latitude, screenBottomLeft.longitude, 0f)
+        } else null
     }
 
     override fun populatePlaces(currentLatLng: LatLng) {
