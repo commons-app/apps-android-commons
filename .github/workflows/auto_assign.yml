@@ -42,7 +42,11 @@ jobs:
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 issue_number: context.issue.number,
-                body: "This issue has already been assigned. Please find another issue to work on: https://github.com/commons-app/apps-android-commons/issues?q=is%3Aissue%20state%3Aopen%20type%3ABug%20no%3Aassignee%20-label%3A%22low%20priority%22%20-label%3Adebated%20-label%3Aupstream"
+                body: `Hi @${context.actor}! Thank you for your interest! 
+
+            This issue has already been assigned, but you can find another issue to work on at: https://github.com/commons-app/apps-android-commons/issues?q=is%3Aissue%20state%3Aopen%20type%3ABug%20no%3Aassignee%20-label%3A%22low%20priority%22%20-label%3Adebated%20-label%3Aupstream 
+
+            By the way, welcome to the team! Please make sure to read our welcome guide: https://github.com/commons-app/commons-app-documentation/blob/master/android/Volunteers-welcome!.md`
               });
               return;
             }
@@ -77,7 +81,7 @@ jobs:
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 issue_number: context.issue.number,
-                body: "Please finish your previous assignment before you request to work on another"
+                body: `Hi @${context.actor}! Please finish your previous assignment before you request to work on another. We want to make sure everyone has a chance to contribute!`
               });
             } 
             // Has assigned issues WITH PRs - they're making progress, assign them
