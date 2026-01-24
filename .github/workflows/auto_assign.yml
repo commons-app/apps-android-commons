@@ -9,6 +9,10 @@ permissions:
   issues: write
   models: read
 
+concurrency:
+  group: auto-assign-${{ github.event.issue.number || github.run_id }}
+  cancel-in-progress: true
+
 jobs:
   auto-assign:
     runs-on: ubuntu-latest
