@@ -387,23 +387,28 @@ class ExploreMapFragment : CommonsDaggerSupportFragment(), ExploreMapContract.Vi
 
         // if we came from 'Show in Explore' in Nearby, load Nearby map center and zoom
         if (isCameFromNearbyMap) {
+            val targetP = GeoPoint(prevLatitude, prevLongitude)
+            mapCenter = targetP
             moveCameraToPosition(
-                GeoPoint(prevLatitude, prevLongitude),
+                targetP,
                 prevZoom.coerceIn(1.0, 22.0),
                 1L
             )
+            recenterMarkerToPosition(targetP)
         } else if (lastKnownLocation != null) {
-            // We have a real location - center to it
-            moveCameraToPosition(
-                GeoPoint(lastKnownLocation!!.latitude, lastKnownLocation!!.longitude)
-            )
+            // We have a real location - center to it and show blue dot
+            val targetP = GeoPoint(lastKnownLocation!!.latitude, lastKnownLocation!!.longitude)
+            mapCenter = targetP
+            moveCameraToPosition(targetP)
+            recenterMarkerToPosition(targetP)
         } else if (!isWaitingForFirstLocation) {
             // No location and not waiting - use default
             // This happens when permission not granted yet
             lastKnownLocation = defaultLatLng
-            moveCameraToPosition(
-                GeoPoint(lastKnownLocation!!.latitude, lastKnownLocation!!.longitude)
-            )
+            val targetP = GeoPoint(lastKnownLocation!!.latitude, lastKnownLocation!!.longitude)
+            mapCenter = targetP
+            moveCameraToPosition(targetP)
+            recenterMarkerToPosition(targetP)
         }
         // If waiting for first location, don't center - will center when location arrives
         presenter!!.onMapReady(exploreMapController)
