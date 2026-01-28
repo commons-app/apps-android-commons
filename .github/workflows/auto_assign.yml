@@ -21,7 +21,13 @@ jobs:
         id: check-request
         with:
           prompt: |
-            Does this comment ask to be assigned to the issue?
+            Analyze the following comment and determine if the user is EXPLICITLY asking to be assigned to work on this GitHub issue.
+            
+            Strict Rules:
+            1. If the user is just answering a question (e.g., "Yes, it is a bug"), respond with "no".
+            2. If the user is providing feedback or info, respond with "no".
+            3. ONLY respond with "yes" if the user clearly says they WANT to work on it (e.g., "I'll take this," "Can I work on this?", "I'm interested").
+            
             Respond with only "yes" or "no".
             
             Comment: ${{ github.event.comment.body }}
