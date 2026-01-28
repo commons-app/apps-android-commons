@@ -10,13 +10,17 @@ import android.os.Bundle
 import android.view.animation.AccelerateDecelerateInterpolator
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.graphics.rotationMatrix
 import androidx.core.graphics.scaleMatrix
 import androidx.core.net.toUri
+import androidx.core.view.WindowInsetsCompat
 import androidx.exifinterface.media.ExifInterface
 import androidx.lifecycle.ViewModelProvider
 import fr.free.nrw.commons.databinding.ActivityEditBinding
+import fr.free.nrw.commons.utils.applyEdgeToEdgeBottomInsets
+import fr.free.nrw.commons.utils.applyEdgeToEdgeTopPaddingInsets
 import timber.log.Timber
 import java.io.File
 import kotlin.math.ceil
@@ -36,6 +40,7 @@ class EditActivity : AppCompatActivity() {
     private lateinit var binding: ActivityEditBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        enableEdgeToEdge()
         super.onCreate(savedInstanceState)
         binding = ActivityEditBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -44,6 +49,9 @@ class EditActivity : AppCompatActivity() {
         imageUri = intent.getStringExtra("image") ?: ""
         vm = ViewModelProvider(this)[EditViewModel::class.java]
         val sourceExif = imageUri.toUri().path?.let { ExifInterface(it) }
+
+        applyEdgeToEdgeBottomInsets(binding.root, false)
+        binding.topBar.applyEdgeToEdgeTopPaddingInsets(WindowInsetsCompat.Type.statusBars())
 
         val exifTags =
             arrayOf(
@@ -125,6 +133,7 @@ class EditActivity : AppCompatActivity() {
         binding.btnSave.setOnClickListener {
             getRotatedImage()
         }
+        binding.btnBack.setOnClickListener { onBackPressedDispatcher.onBackPressed() }
     }
 
     var imageRotation = 0
