@@ -64,7 +64,7 @@
   <string name="intent_share_upload_label">कमन्समा उर्ध्वभरण गर्नुहाेस्</string>
   <string name="upload_in_progress">अर्ध्वभरण कार्य हुँदैछ</string>
   <string name="username">प्रयोगकर्ता नाम</string>
-  <string name="password">पासवर्ड</string>
+  <string name="password">प्रवेश शब्द</string>
   <string name="login_credential">तपाईको कमन्स बिटा खातामा प्रवेश गर्नुहोस्</string>
   <string name="login">प्रवेश गर्नुहोस्</string>
   <string name="forgot_password">पासवर्ड बिर्सिनुभयो?</string>
@@ -97,7 +97,7 @@
   <string name="menu_from_camera">तस्वीर खिच्नुहोस्</string>
   <string name="menu_nearby">वरिपरिका</string>
   <string name="provider_contributions">मेरा उर्ध्वभरणहरू</string>
-  <string name="menu_share">बाड्ने</string>
+  <string name="menu_share">साझा गर्नुहोस्</string>
   <string name="menu_view_file_page">चित्र पृष्ठ हेर्नुहोस्</string>
   <string name="share_title_hint">शीर्षक (आवश्यक)</string>
   <string name="share_description_hint">वर्णन</string>

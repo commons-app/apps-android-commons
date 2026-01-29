@@ -1,0 +1,104 @@
+# Automated runs commented out, see https://github.com/commons-app/apps-android-commons/issues/6576#issuecomment-3618798882
+# Added workflow_dispatch temporarily for having a syntactically correct workflow file
+on:
+  issue_comment:
+    types: [created]
+
+permissions:
+  issues: write
+  models: read
+
+concurrency:
+  group: auto-assign-${{ github.event.issue.number || github.run_id }}
+  cancel-in-progress: true
+
+jobs:
+  auto-assign:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check if requesting assignment
+        uses: actions/ai-inference@v1
+        id: check-request
+        with:
+          prompt: |
+            Analyze the following comment and determine if the user is EXPLICITLY asking to be assigned to work on this GitHub issue.
+            
+            Strict Rules:
+            1. If the user is just answering a question (e.g., "Yes, it is a bug"), respond with "no".
+            2. If the user is providing feedback or info, respond with "no".
+            3. ONLY respond with "yes" if the user clearly says they WANT to work on it (e.g., "I'll take this," "Can I work on this?", "I'm interested").
+            
+            Respond with only "yes" or "no".
+            
+            Comment: ${{ github.event.comment.body }}
+          model: openai/gpt-4o-mini
+
+      - name: Handle assignment
+        if: steps.check-request.outputs.response == 'yes'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const commenter = context.actor;
+            const authorAssociation = context.payload.comment.author_association;
+            const isFirstTime = authorAssociation === 'FIRST_TIME_CONTRIBUTOR' || authorAssociation === 'NONE';
+
+            // Check if the issue is already assigned
+            const issue = await github.rest.issues.get({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number
+            });
+
+            if (issue.data.assignees.length > 0) {
+              let body = `Hi @${commenter}! Thanks for reaching out. It looks like someone is already working on this one at the moment. `;
+              body += `\n\nNo worries, though-there are plenty of other ways to help! You can find more open issues here: https://github.com/commons-app/apps-android-commons/issues?q=is%3Aissue%20state%3Aopen%20type%3ABug%20no%3Aassignee%20-label%3A%22low%20priority%22%20-label%3Adebated%20-label%3Aupstream`;
+            
+              //only  show the welcome message to new contributors
+              if (isFirstTime) {
+                body += `\n\nSince you're new here, a huge welcome to the team! ❤️ Feel free to check out our welcome guide to get started: https://github.com/commons-app/commons-app-documentation/blob/master/android/Volunteers-welcome!.md`;
+              }
+
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body: body
+              });
+              return;
+            }
+
+            // Check commenter's existing assignments and PR's
+            const assignedIssues = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              assignee: commenter,  
+              state: 'open'
+            });
+
+            const pullRequests = await github.rest.pulls.list({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              creator: commenter, 
+              state: 'open'
+            });
+
+            // decision logic:
+            // - If no assigned issues: safe to assign
+            // - If has assigned issues andd has open PR: safe to assign (they are waiting for review)
+            // - If has assigned issues but no pr's: block (they need to finish current work first)
+            
+            if (assignedIssues.data.length === 0 || pullRequests.data.length > 0) {
+              await github.rest.issues.addAssignees({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                assignees: [commenter]
+              });
+            } else {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body: `Hi @${commenter}! It looks like you're already busy with another open task. To keep things moving and make sure everyone gets a chance to help out, we usually recommend wrapping up your current work before starting something new. \n\nOnce you've submitted a PR for your current task, we'd be happy to help you get started on this one! ✨`
+              });
+            }

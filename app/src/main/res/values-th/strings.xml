@@ -59,6 +59,7 @@
   <string name="app_name">คอมมอนส์</string>
   <string name="menu_settings">การตั้งค่า</string>
   <string name="intent_share_upload_label">อัปโหลดไปคอมมอนส์</string>
+  <string name="upload_in_progress">กำลังอัปโหลด...</string>
   <string name="username">ชื่อผู้ใช้</string>
   <string name="password">รหัสผ่าน</string>
   <string name="login_credential">ลงชื่อเข้าระบบบัญชีคอมมอนส์บีตาของคุณ</string>
@@ -143,6 +144,8 @@
   <string name="no_uploads_yet">คุณยังไม่ได้อัปโหลดรูปภาพใดๆ</string>
   <string name="menu_retry_upload">ลองใหม่</string>
   <string name="menu_cancel_upload">ยกเลิก</string>
+  <string name="language_search_type_language_name">พิมพ์ชื่อภาษา</string>
+  <string name="language_search_recent_searches">การค้นหาล่าสุด</string>
   <string name="language_search_all_languages">ภาษาทั้งหมด</string>
   <string name="media_upload_policy">โดยการส่งรูปภาพนี้ ข้าพเจ้าขอยืนยันว่านี่เป็นงานของข้าพเจ้าเอง ซึ่งจะไม่มีเนื้อหาที่ละเมิดลิขสิทธิ์, ภาพเซลฟีหรืออื่น ๆ ตามที่ระบุไว้ใน&lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;นโยบายของวิกิมีเดียคอมมอนส์&lt;/a&gt;</string>
   <string name="menu_download">ดาวน์โหลด</string>
@@ -202,6 +205,7 @@
   <string name="media_detail_description">คำอธิบาย</string>
   <string name="media_detail_discussion">พูดคุย</string>
   <string name="media_detail_author">ผู้สร้างสรรค์</string>
+  <string name="media_detail_uploader">ผู้อัปโหลด</string>
   <string name="media_detail_uploaded_date">วันที่อัปโหลด</string>
   <string name="media_detail_license">สัญญาอนุญาต</string>
   <string name="media_detail_coordinates">พิกัด</string>
@@ -209,6 +213,7 @@
   <string name="become_a_tester_title">มาเป็นผู้ร่วมทดสอบบีตา</string>
   <string name="become_a_tester_description">สมัครเข้าร่วมช่องทางบีตาบน Google Play และเข้าถึงคุณลักษณะใหม่ ๆ และการแก้ไขบั๊กก่อนเปิดตัว</string>
   <string name="_2fa_code">รหัส 2FA</string>
+  <string name="email_auth_code">รหัสยืนยันตัวตนผ่านอีเมล</string>
   <string name="logout_verification">คุณต้องการออกจากระบบจริง ๆ หรือไม่?</string>
   <string name="no_subcategory_found">ไม่พบหมวดหมู่รองที่ต้องการ</string>
   <string name="no_parentcategory_found">ไม่พบหมวดหมู่ต้นทางที่ต้องการ</string>
@@ -228,6 +233,7 @@
   <string name="navigation_item_about">เกี่ยวกับ</string>
   <string name="navigation_item_settings">การตั้งค่า</string>
   <string name="navigation_item_feedback">คำติชม</string>
+  <string name="navigation_item_feedback_github">ข้อเสนอแนะผ่านทางกิตฮับ</string>
   <string name="navigation_item_logout">ลงชื่อออก</string>
   <string name="navigation_item_info">บทช่วยสอน</string>
   <string name="navigation_item_notification">การแจ้งเตือน</string>
@@ -249,6 +255,7 @@
   <string name="upload_connection_error_alert_detail">กระบวนการอัปโหลดต้องใช้อินเทอร์เน็ต กรุณาตรวจสอบการเชื่อมต่อเครือข่ายของคุณ</string>
   <string name="upload_problem_image">พบปัญหาในภาพ</string>
   <string name="internet_downloaded">กรุณาอัพโหลดเฉพาะภาพที่คุณเป็นคนถ่ายหรือสร้างสรรค์ขึ้นมาเองเท่านั้น อย่าอัพโหลดรูปภาพที่คุณได้มาจากการดาวน์โหลดบนอินเทอร์เน็ต</string>
+  <string name="preferences_uploads">อัปโหลด</string>
   <string name="use_external_storage">ใช้ที่จัดเก็บข้อมูลภายนอก</string>
   <string name="use_external_storage_summary">บันทึกรูปภาพที่ถ่ายด้วยกล้องในแอปบนอุปกรณ์ของคุณ</string>
   <string name="login_to_your_account">ลงชื่อเข้าใช้บัญชีของคุณ</string>
@@ -317,6 +324,7 @@
   <string name="quiz">คำถาม</string>
   <string name="quiz_question_string">รูปภาพนี้สามารถอัปโหลดได้หรือไม่?</string>
   <string name="question">คำถาม</string>
+  <string name="quiz_i_am_not_sure">ไม่แน่ใจ</string>
   <string name="result">ผลลัพธ์</string>
   <string name="quiz_back_button">หากคุณยังคงอัปโหลดภาพที่ต้องการให้ลบต่อไป บัญชีของคุณอาจถูกห้ามได้ คุณแน่ใจหรือไม่ว่าต้องการจบคำถาม?</string>
   <string name="quiz_alert_message">ภาพมากกว่า %1$s ภาพที่คุณอัปโหลดได้ถูกลบแล้ว หากคุณยังคงอัปโหลดภาพที่จำเป็นต้องลบอีก บัญชีของคุณอาจถูกห้ามได้\n\nคุณต้องการดูบทช่วยสอนอีกครั้งแล้วตอบคำถามเพื่อช่วยคุณเรียนรู้ว่าภาพประเภทใดบ้างที่คุณควรหรือไม่ควรอัปโหลด?</string>
@@ -324,6 +332,8 @@
   <string name="taj_mahal_answer">รูปภาพของอนุสาวรีย์และทิวทัศน์ภายนอกสามารถอัปโหลดได้ในประเทศส่วนใหญ่ โปรดทราบว่าผลงานศิลปะชั่วคราวภายนอกมักมีลิขสิทธิ์และไม่สามารถอัปโหลดได้</string>
   <string name="blurry_image_answer">หนึ่งในเป้าหมายของ คอมมอนส์ คือการรวบรวมภาพที่มีคุณภาพ ดังนั้น จึงไม่ควรอัปโหลดภาพที่พร่ามัว พยายามถ่ายภาพให้มีคุณภาพเสมอ</string>
   <string name="construction_event_answer">ยินดีต้อนรับรูปภาพที่แสดงเทคโนโลยีหรือวัฒนธรรมในคอมมอนส์</string>
+  <string name="congratulatory_message_quiz">คุณได้ %1$s จากคำตอบทั้งหมด ยินดีด้วย!</string>
+  <string name="quiz_continue">ดำเนินการต่อ</string>
   <string name="warning_for_no_answer">เลือกหนึ่งในสองตัวเลือกเพื่อตอบคำถาม</string>
   <string name="user_not_logged_in" fuzzy="true">เซสชั่นการเข้าสู่ระบบหมดอายุ กรุณาเข้าสู่ระบบอีกครั้ง</string>
   <string name="quiz_result_share_message">แบ่งปันคำถามของคุณกับเพื่อนของคุณ!</string>
@@ -332,6 +342,7 @@
   <string name="wrong">คำตอบที่ไม่ถูกต้อง</string>
   <string name="quiz_screenshot_question">ภาพหน้าจอนี้สามารถอัปโหลดได้หรือไม่</string>
   <string name="share_app_title">แบ่งปันแอป</string>
+  <string name="rotate">หมุน</string>
   <string name="error_fetching_nearby_places" fuzzy="true">เกิดข้อผิดพลาดในการดึงข้อมูลสถานที่ใกล้เคียง</string>
   <string name="no_nearby_places_around">ไม่มีสถานที่ใกล้เคียง</string>
   <string name="no_recent_searches">ไม่มีการค้นหาล่าสุด</string>
@@ -363,6 +374,7 @@
   <string name="previous">ก่อนหน้า</string>
   <string name="title_page_bookmarks_pictures">รูปภาพ</string>
   <string name="title_page_bookmarks_locations">ที่ตั้ง</string>
+  <string name="title_page_bookmarks_categories">หมวดหมู่</string>
   <string name="menu_bookmark">เพิ่มไปยัง/เอาออกจากที่คั่นหน้า</string>
   <string name="provider_bookmarks">ที่คั่นหน้า</string>
   <string name="bookmark_empty">คุณไม่ได้เพิ่มที่คั่นหน้าใด</string>
@@ -379,6 +391,7 @@
   <string name="display_location_permission_title" fuzzy="true">แสดงสิทธิอนุญาตที่ตั้ง</string>
   <string name="ends_on">สิ้นสุดเมื่อ:</string>
   <string name="display_campaigns">แสดงแคมเปญ</string>
+  <string name="option_allow">อนุญาต</string>
   <string name="nominate_for_deletion_done">เสร็จสิ้น</string>
   <string name="review_thanks_yes_button_text">ภาพถัดไป</string>
   <string name="review_thanks_no_button_text" fuzzy="true">ภาพถัดไป</string>
@@ -408,6 +421,7 @@
   <string name="delete_helper_ask_reason_copyright_logo">โลโก้</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">เนื่องจากเป็น</string>
   <string name="category_edit_helper_show_edit_title_success">สำเร็จ</string>
+  <string name="coordinates_edit_helper_show_edit_title_success">สำเร็จ</string>
   <string name="account_created">สร้างบัญชีแล้ว!</string>
   <string name="notification_mark_read">การแจ้งเตือนที่ทำเครื่องหมายว่าอ่านแล้ว</string>
   <string name="place_state">สถานะของสถานที่:</string>
@@ -428,7 +442,9 @@
   <string name="leaderboard_nearby">สถานที่ใกล้เคียง</string>
   <string name="cancelling_upload">กำลังยกเลิกอับโหลด…</string>
   <string name="cancel_upload">ยกเลิกอับโหลด</string>
+  <string name="description">คำอธิบาย</string>
   <string name="location_permission_rationale">สิทธิทางเลือก: รับข้อมูลตำแหน่งที่ตั้งปัจจุบันสำหรับข้อเสนอแนะหมวดหมู่</string>
+  <string name="explore_map_details">รายละเอียด</string>
   <string name="api_level">API level</string>
   <string name="android_version">แอนดรอยด์เวอร์ชัน</string>
   <string name="device_model">รุ่นอุปกรณ์</string>
