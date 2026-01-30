@@ -1,7 +1,6 @@
 package fr.free.nrw.commons.customselector.ui.selector
 
 import android.app.Activity
-import android.content.Context
 import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences
 import android.os.Bundle
@@ -30,15 +29,14 @@ import fr.free.nrw.commons.customselector.helper.ImageHelper.SHOW_ALREADY_ACTION
 import fr.free.nrw.commons.customselector.listeners.ImageSelectListener
 import fr.free.nrw.commons.customselector.listeners.PassDataListener
 import fr.free.nrw.commons.customselector.listeners.RefreshUIListener
-import fr.free.nrw.commons.customselector.model.CallbackStatus
-import fr.free.nrw.commons.customselector.model.Image
-import fr.free.nrw.commons.customselector.model.Result
+import fr.free.nrw.commons.customselector.domain.model.CallbackStatus
+import fr.free.nrw.commons.customselector.domain.model.Image
+import fr.free.nrw.commons.customselector.domain.model.Result
 import fr.free.nrw.commons.customselector.ui.adapter.ImageAdapter
 import fr.free.nrw.commons.databinding.FragmentCustomSelectorBinding
 import fr.free.nrw.commons.databinding.ProgressDialogBinding
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment
 import fr.free.nrw.commons.media.MediaClient
-import fr.free.nrw.commons.theme.BaseActivity
 import fr.free.nrw.commons.upload.FileProcessor
 import fr.free.nrw.commons.upload.FileUtilsWrapper
 import fr.free.nrw.commons.utils.applyEdgeToEdgeBottomPaddingInsets
