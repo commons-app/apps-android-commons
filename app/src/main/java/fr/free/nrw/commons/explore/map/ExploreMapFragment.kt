@@ -643,7 +643,11 @@ class ExploreMapFragment : CommonsDaggerSupportFragment(), ExploreMapContract.Vi
             if (!locationPermissionsHelper!!.checkLocationPermission(requireActivity())) {
                 askForLocationPermission()
             } else {
-                locationPermissionGranted()
+                if (locationPermissionsHelper!!.isLocationAccessToAppsTurnedOn()) {
+                    locationPermissionGranted()
+                } else {
+                    locationPermissionsHelper!!.showLocationOffDialog(requireActivity(), R.string.location_off_dialog_text)
+                }
             }
         }
         if (curLatLng == null) {
