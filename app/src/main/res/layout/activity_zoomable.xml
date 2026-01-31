@@ -12,6 +12,7 @@
         android:layout_height="match_parent"
         android:layout_width="match_parent"
         app:actualImageScaleType="fitCenter"
+        android:background="@color/background"
         />
     <ProgressBar
         android:layout_width="@dimen/dimen_72"
@@ -22,22 +23,37 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         />
-
-    <TextView
-      android:id="@+id/selection_count"
-      android:layout_width="@dimen/dimen_20"
-      android:layout_height="@dimen/dimen_20"
-      app:layout_constraintDimensionRatio="H,1:1"
-      android:textSize="@dimen/subtitle_text"
-      android:textStyle="bold"
-      android:textColor="@color/black"
-      android:layout_margin="@dimen/dimen_6"
-      android:gravity="center|center_vertical"
-      style="@style/TextAppearance.AppCompat.Small"
-      android:text="12"
-      android:visibility="gone"
-      android:background="@drawable/circle_shape"
+    <LinearLayout
+      android:id="@+id/topBar"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:background="@color/scrim"
+      android:gravity="center_vertical"
+      android:orientation="horizontal"
+      android:paddingHorizontal="12dp"
+      android:paddingVertical="8dp"
+      app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="parent"/>
+      app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+          android:id="@+id/btnBack"
+          android:layout_width="24dp"
+          android:layout_height="24dp"
+          android:contentDescription="@string/back"
+          android:src="@drawable/ic_arrow_back" />
+
+        <TextView
+          android:id="@+id/selection_count"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:textSize="@dimen/normal_text"
+          android:textStyle="bold"
+          android:textColor="@color/onBackground"
+          android:layout_marginStart="12dp"
+          style="@style/TextAppearance.AppCompat.Small"
+          android:text="12"
+          android:visibility="gone" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
