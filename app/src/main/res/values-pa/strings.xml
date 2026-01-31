@@ -123,7 +123,7 @@
   <string name="menu_retry_upload">ਮੁੜ-ਕੋਸ਼ਿਸ਼ ਕਰੋ</string>
   <string name="menu_cancel_upload">ਰੱਦ ਕਰੋ</string>
   <string name="media_upload_policy">ਇਹ ਤਸਵੀਰ ਅੱਪਲੋਡ ਕਰਨ ਨਾਲ ਹੀ ਮੈਂ ਦਾਅਵਾ ਕਰਦਾ ਹਾਂ/ਕਰਦੀ ਹਾਂ ਕਿ ਇਹ ਮੇਰਾ ਆਪਣਾ ਕਾਰਜ ਹੈ, ਕਿ ਇਸ ਤਹਿਤ ਕੋਈ ਕਾਪੀਰਾਈਟ ਉਲੰਘਣਾ ਨਹੀਂ ਕੀਤੀ ਗਈ ਅਤੇ &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;ਵਿਕੀਮੀਡੀਆ ਕਾਮਨਜ਼ ਨੀਤੀਆਂ&lt;/a&gt; ਮੁਤਾਬਿਕ ਇਹ ਠੀਕ ਹੈ।</string>
-  <string name="menu_download">ਡਾਊਨਲੋਡ</string>
+  <string name="menu_download">ਲਾਹੋ</string>
   <string name="preference_license">ਮੂਲ ਲਸੰਸ</string>
   <string name="use_previous">ਪਿਛਲੇ ਸਿਰਲੇਖ ਅਤੇ ਵੇਰਵੇ ਦੀ ਵਰਤੋਂ ਕਰੋ</string>
   <string name="preference_theme">ਵਿਸ਼ਾ-ਵਸਤੂ</string>
