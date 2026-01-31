@@ -291,6 +291,31 @@ class ExploreMapFragment : CommonsDaggerSupportFragment(), ExploreMapContract.Vi
         }
         setSearchThisAreaButtonVisibility(false)
         
+        // Check if location services were enabled while app was in Settings
+        val hasPermission = locationPermissionsHelper?.checkLocationPermission(requireActivity()) == true
+        val isLocationNowEnabled = locationPermissionsHelper?.isLocationAccessToAppsTurnedOn() == true
+        
+        if (hasPermission && isLocationNowEnabled && !locationServicesEnabledOnPause) {
+            Timber.d("Location services enabled while app was paused - refreshing map")
+            locationManager.registerLocationManager()
+            drawMyLocationMarker()
+            
+            val cachedLocation = locationManager.getLastLocation()
+            if (cachedLocation != null) {
+                val targetP = GeoPoint(cachedLocation.latitude, cachedLocation.longitude)
+                mapCenter = targetP
+                binding?.mapView?.controller?.setCenter(targetP)
+                recenterMarkerToPosition(targetP)
+                moveCameraToPosition(targetP)
+                populatePlaces(cachedLocation)
+            } else {
+                isWaitingForFirstLocation = true
+                setProgressBarVisibility(true)
+            }
+        }
+        // Update tracked state for next pause/resume cycle
+        locationServicesEnabledOnPause = isLocationNowEnabled
+        
         if (shouldPerformMapReadyActionsOnResume) {
             shouldPerformMapReadyActionsOnResume = false
             performMapReadyActions()
@@ -324,10 +349,8 @@ class ExploreMapFragment : CommonsDaggerSupportFragment(), ExploreMapContract.Vi
                 locationPermissionsHelper!!.showLocationOffDialog(requireActivity(), R.string.location_off_dialog_text)
             }
         } else {
-            locationPermissionsHelper!!.requestForLocationAccess(
-                R.string.location_permission_title,
-                R.string.location_permission_rationale
-            )
+            // Use activityResultLauncher for proper callback handling
+            askForLocationPermission()
         }
     }
 
@@ -606,6 +629,7 @@ class ExploreMapFragment : CommonsDaggerSupportFragment(), ExploreMapContract.Vi
         // Add listener and register location manager
         locationManager.addLocationListener(this)
         locationManager.registerLocationManager()
+        drawMyLocationMarker()
         
         lastKnownLocation = locationManager.getLastLocation()
         
@@ -615,13 +639,13 @@ class ExploreMapFragment : CommonsDaggerSupportFragment(), ExploreMapContract.Vi
             binding!!.mapView.controller.setCenter(targetP)
             recenterMarkerToPosition(targetP)
             moveCameraToPosition(targetP)
-            presenter!!.onMapReady(exploreMapController)
+            populatePlaces(lastKnownLocation)
         } else {
             // No cached location - set flag to wait for first GPS fix
             isWaitingForFirstLocation = true
             setProgressBarVisibility(true)
-            // Load map but don't center yet - will center when location arrives
-            presenter!!.onMapReady(exploreMapController)
+            // Still need to populate with default location, will recenter when location arrives
+            populatePlaces(getMapCenter())
         }
     }
 
