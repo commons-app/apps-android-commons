@@ -656,15 +656,41 @@ class ExploreMapFragment : CommonsDaggerSupportFragment(), ExploreMapContract.Vi
             handleWebUrl(requireContext(), place.siteLinks.commonsLink)
         }
 
+        // Normalize place name for comparison (remove "File:" prefix if present)
+        val normalizedPlaceName = if (place.name.startsWith("File:")) {
+            place.name.substring(5)
+        } else {
+            place.name
+        }
+
+        // Find the matching media index for this place
+        var matchedIndex = -1
         var index = 0
         for (media in mediaList!!) {
-            if (media.filename == place.name) {
-                val finalIndex = index
-                binding!!.bottomSheetDetailsBinding.mediaDetailsButton.setOnClickListener {
-                    (parentFragment as ExploreMapRootFragment).onMediaClicked(finalIndex)
-                }
+            // Normalize media filename for comparison (remove "File:" prefix if present)
+            val normalizedFilename = if (media.filename?.startsWith("File:") == true) {
+                media.filename!!.substring(5)
+            } else {
+                media.filename
+            }
+
+            if (normalizedFilename.equals(normalizedPlaceName, ignoreCase = true)) {
+                matchedIndex = index
+                break // Found the match, no need to continue
             }
             index++
+        }
+
+        // Set click listener only if a match was found, otherwise disable the button
+        if (matchedIndex >= 0) {
+            val finalIndex = matchedIndex
+            binding!!.bottomSheetDetailsBinding.mediaDetailsButton.isEnabled = true
+            binding!!.bottomSheetDetailsBinding.mediaDetailsButton.setOnClickListener {
+                (parentFragment as ExploreMapRootFragment).onMediaClicked(finalIndex)
+            }
+        } else {
+            binding!!.bottomSheetDetailsBinding.mediaDetailsButton.isEnabled = false
+            binding!!.bottomSheetDetailsBinding.mediaDetailsButton.setOnClickListener(null)
         }
         binding!!.bottomSheetDetailsBinding.title.text = place.name.substring(5, place.name.lastIndexOf("."))
         binding!!.bottomSheetDetailsBinding.category.text = place.distance
