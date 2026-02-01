@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.upload
 
 import android.content.Context
+import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.contributions.Contribution
 import fr.free.nrw.commons.filepicker.UploadableFile.DateTimeWithSource
 import fr.free.nrw.commons.settings.Prefs.Licenses
@@ -13,7 +14,10 @@ import java.util.Date
 import java.util.Locale
 import javax.inject.Inject
 
-class PageContentsCreator @Inject constructor(private val context: Context) {
+class PageContentsCreator @Inject constructor(
+    private val context: Context,
+    private val sessionManager: SessionManager
+) {
     fun createFrom(contribution: Contribution?): String = buildString {
         val media = contribution?.media
         append("== {{int:filedesc}} ==\n")
@@ -24,7 +28,9 @@ class PageContentsCreator @Inject constructor(private val context: Context) {
             append("}}")
         }
         append("|source=").append("{{own}}\n")
-        append("|author=[[User:").append(media?.author).append("|")
+
+        //use the sessionManager.userName for the link, media.author for the label
+        append("|author=[[User:").append(sessionManager.userName).append("|")
         append(media?.author).append("]]\n")
 
         val templatizedCreatedDate = getTemplatizedCreatedDate(
