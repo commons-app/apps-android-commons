@@ -21,16 +21,22 @@ jobs:
         id: check-request
         with:
           prompt: |
-            Analyze the following comment and determine if the user is EXPLICITLY asking to be assigned to work on this GitHub issue.
-            
-            Strict Rules:
-            1. If the user is just answering a question (e.g., "Yes, it is a bug"), respond with "no".
-            2. If the user is providing feedback or info, respond with "no".
-            3. ONLY respond with "yes" if the user clearly says they WANT to work on it (e.g., "I'll take this," "Can I work on this?", "I'm interested").
-            
+            You are a project management assistant. Determine if the user is explicitly asking to be assigned to THIS specific GitHub issue.
+
+            ISSUE CONTEXT:
+            Title: ${{ github.event.issue.title }}
+            Description: ${{ github.event.issue.body }}
+
+            USER COMMENT:
+            "${{ github.event.comment.body }}"
+
+            STRICT RULES:
+            1. Respond "yes" ONLY if the user wants to work on the task described in the ISSUE CONTEXT.
+            2. Respond "no" if the user is offering general help, suggesting new features, or discussing unrelated topics.
+            3. Respond "no" if the user is just answering a question or providing feedback.
+            4. If they say "I can help" but are talking about a different topic than the issue description, respond "no".
+
             Respond with only "yes" or "no".
-            
-            Comment: ${{ github.event.comment.body }}
           model: openai/gpt-4o-mini
 
       - name: Handle assignment
