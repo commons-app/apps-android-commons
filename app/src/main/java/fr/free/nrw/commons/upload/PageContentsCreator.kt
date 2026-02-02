@@ -24,7 +24,6 @@ class PageContentsCreator @Inject constructor(private val context: Context) {
             append("}}")
         }
         append("|source=").append("{{own}}\n")
-        //fix:use themedia.user for the link, and media.autho for the label
         append("|author=[[User:").append(media?.user).append("|")
         append(media?.author).append("]]\n")
 
