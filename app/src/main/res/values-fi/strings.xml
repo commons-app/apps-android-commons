@@ -25,7 +25,7 @@
 -->
 <resources>
   <string name="commons_facebook">Commons Facebook-sivu</string>
-  <string name="commons_github" fuzzy="true">Commons Github lähdekoodi</string>
+  <string name="commons_github">Commons GitHub lähdekoodi</string>
   <string name="commons_logo">Commons-logo</string>
   <string name="commons_website">Commons-verkkosivu</string>
   <string name="exit_location_picker">Poistu sijainnin valitsimesta</string>
@@ -612,7 +612,7 @@
   <string name="setting_avatar_dialog_title">Aseta pistetaulukkoavatariksi</string>
   <string name="setting_avatar_dialog_message">Asetetaan avatariksi, ole hyvä ja odota</string>
   <string name="avatar_set_successfully">Avatar asetettu</string>
-  <string name="avatar_set_unsuccessfully">Virhe avatarin asettamisessa, ole hyvä ja kokeile uudestaan</string>
+  <string name="avatar_set_unsuccessfully">Virhe avatarin asettamisessa, ole hyvä ja kokeile uudelleen</string>
   <string name="menu_set_avatar">Aseta avatariksi</string>
   <string name="leaderboard_yearly">Vuosittain</string>
   <string name="leaderboard_weekly">Viikoittain</string>

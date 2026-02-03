@@ -109,8 +109,6 @@ class MediaDetailPagerFragment : CommonsDaggerSupportFragment(), OnPageChangeLis
         // If fragment is associated with ProfileActivity, then hide the tabLayout
         if (activity is ProfileActivity) {
             (activity as ProfileActivity).setTabLayoutVisibility(false)
-        } else if (activity is MainActivity) {
-            (activity as MainActivity).hideTabs()
         }
 
         binding!!.mediaDetailsPager.adapter = adapter
@@ -140,6 +138,16 @@ class MediaDetailPagerFragment : CommonsDaggerSupportFragment(), OnPageChangeLis
         }
         setHasOptionsMenu(true)
         initProvider()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        if (activity is MainActivity) {
+            (activity as MainActivity).showTabs()
+        }
+
+        // Temporarily disable it. Ref:https://github.com/commons-app/apps-android-commons/issues/6581#issuecomment-3694210567 
+        // binding = null
     }
 
     /**

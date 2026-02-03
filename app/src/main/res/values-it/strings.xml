@@ -13,6 +13,7 @@
 * Emabarto01
 * Gianfranco
 * Giorgx12
+* GseSro
 * Lorelai87
 * Lorem Ipsum
 * Luca.favorido
@@ -170,7 +171,9 @@
   <string name="no_uploads_yet">Non hai ancora caricato alcuna foto.</string>
   <string name="menu_retry_upload">Riprova</string>
   <string name="menu_cancel_upload">Annulla</string>
+  <string name="language_search_type_language_name">Inserisci il nome della lingua</string>
   <string name="language_search_recent_searches">Ricerche recenti</string>
+  <string name="language_search_all_languages">Tutte le lingue</string>
   <string name="media_upload_policy">Caricando questa immagine, dichiaro che questa è una mia opera, che non contiene materiale protetto da copyright o ritratti, e che comunque è conforme alle &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Policy di Wikimedia Commons&lt;/a&gt;.</string>
   <string name="menu_download">Scarica</string>
   <string name="preference_license">Licenza predefinita</string>
@@ -458,6 +461,7 @@
   <string name="display_campaigns">Visualizza campagne</string>
   <string name="display_campaigns_explanation">Vedi le campagne in corso</string>
   <string name="show_deletion_button">Mostra pulsante di cancellazione</string>
+  <string name="show_deletion_button_explanation">**Abilita il pulsante \"Elimina cartella\" nel selettore personalizzato**</string>
   <string name="in_app_camera_location_access_explanation">Consenti all\'app di recuperare la posizione nel caso in cui la fotocamera non la registri. Alcune fotocamere del dispositivo non la registrano. In questi casi, consentire all\'app di recuperare e allegare la posizione rende il tuo contributo più utile. Potrai modificarlo in qualsiasi momento dalle Impostazioni</string>
   <string name="option_allow">Consenti</string>
   <string name="option_dismiss">Nascondi</string>
@@ -724,6 +728,7 @@
   <string name="wlm_campaign_description">Wiki Loves Monuments è un concorso internazionale di fotografia di monumenti organizzato da Wikimedia</string>
   <string name="need_permission">Autorizzazione/i richiesta/e</string>
   <string name="read_phone_state_permission_message">Le mappe vicine hanno bisogno di leggere lo STATO DEL TELEFONO per funzionare correttamente</string>
+  <string name="location_off_dialog_text">Abilita il pulsante \"Elimina cartella\" nel selettore personalizzato</string>
   <string name="location_permission_rationale">Autorizzazione facoltativa: ottieni la posizione corrente per i suggerimenti di categoria</string>
   <string name="contributions_of_user">Contributi dell\'utente: %1$s</string>
   <string name="achievements_of_user">Traguardi dell\'utente: %1$s</string>
@@ -852,4 +857,5 @@
   <string name="image_tag_line_created_and_uploaded_by">Creato e caricato da: %1$s</string>
   <string name="image_tag_line_created_by_and_uploaded_by">Creato da %1$s e caricato da %2$s</string>
   <string name="nominated_for_deletion_btn">Proposto per la cancellazione</string>
+  <string name="custom_selector_max_image_limit_reached">Puoi selezionare solo un massimo di %d immagini.</string>
 </resources>

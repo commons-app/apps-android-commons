@@ -250,7 +250,7 @@
   <string name="welcome_image_llamas">Lama\'s</string>
   <string name="welcome_image_rainbow_bridge">Rainbow Bridge</string>
   <string name="welcome_image_tulip">Tulp</string>
-  <string name="welcome_image_welcome_wikipedia">Een schematische afbeelding van een doorsnee Wikipedia-artikel.</string>
+  <string name="welcome_image_welcome_wikipedia">Een schematische afbeelding van een doorsnee Wikipedia-pagina.</string>
   <string name="welcome_image_welcome_copyright">Tekening van een stapel papier met het auteursrechten-symbool doorgestreept.</string>
   <string name="welcome_image_sydney_opera_house">Sydney Opera House</string>
   <string name="cancel">Annuleren</string>
@@ -854,4 +854,5 @@
   <string name="image_tag_line_created_and_uploaded_by">Gemaakt en geüpload door: %1$s</string>
   <string name="image_tag_line_created_by_and_uploaded_by">Gemaakt door %1$s en geüpload %2$s</string>
   <string name="nominated_for_deletion_btn">Genomineerd voor verwijdering</string>
+  <string name="custom_selector_max_image_limit_reached">U kunt maximaal %d afbeeldingen selecteren.</string>
 </resources>
