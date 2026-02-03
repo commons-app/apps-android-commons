@@ -24,7 +24,7 @@ class PageContentsCreator @Inject constructor(private val context: Context) {
             append("}}")
         }
         append("|source=").append("{{own}}\n")
-        append("|author=[[User:").append(media?.author).append("|")
+        append("|author=[[User:").append(media?.user).append("|")
         append(media?.author).append("]]\n")
 
         val templatizedCreatedDate = getTemplatizedCreatedDate(
