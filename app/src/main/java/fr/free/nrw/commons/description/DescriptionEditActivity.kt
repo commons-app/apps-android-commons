@@ -100,6 +100,7 @@ class DescriptionEditActivity :
 
         if (savedInstanceState != null) {
             descriptionAndCaptions = savedInstanceState.getParcelableArrayList(LIST_OF_DESCRIPTION_AND_CAPTION)
+                ?: bundle?.getParcelableArrayList(LIST_OF_DESCRIPTION_AND_CAPTION)
             wikiText = savedInstanceState.getString(WIKITEXT)
             savedLanguageValue = savedInstanceState.getString(Prefs.DESCRIPTION_LANGUAGE)!!
             media = savedInstanceState.getParcelable("media")
@@ -312,7 +313,6 @@ class DescriptionEditActivity :
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
 
-        outState.putParcelableArrayList(LIST_OF_DESCRIPTION_AND_CAPTION, uploadMediaDetailAdapter.items as ArrayList<out Parcelable?>)
         outState.putString(WIKITEXT, wikiText)
         outState.putString(Prefs.DESCRIPTION_LANGUAGE, savedLanguageValue)
         // save Media
