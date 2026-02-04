@@ -248,7 +248,8 @@ class EditActivity : AppCompatActivity() {
         val filePath = imageUri.toUri().path
         val file = filePath?.let { File(it) }
 
-        val rotatedImage = file?.let { vm.rotateImage(imageRotation, it) }
+        // pass the applicationContext.cacheDir to save in the internal storage
+        val rotatedImage = file?.let { vm.rotateImage(imageRotation, it, applicationContext.cacheDir) }
         if (rotatedImage == null) {
             Toast.makeText(this, "Failed to rotate to image", Toast.LENGTH_LONG).show()
         }
