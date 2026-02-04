@@ -19,5 +19,5 @@ interface TransformImage {
     fun rotateImage(
         imageFile: File,
         degree: Int,
-    ): File?
+        savePath: File): File?
 }
