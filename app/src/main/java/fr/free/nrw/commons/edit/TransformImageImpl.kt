@@ -26,7 +26,7 @@ class TransformImageImpl : TransformImage {
     override fun rotateImage(
         imageFile: File,
         degree: Int,
-    ): File? {
+        savePath: File): File? {
         Timber.tag("Trying to rotate image").d("Starting")
 
         val path =
@@ -35,9 +35,7 @@ class TransformImageImpl : TransformImage {
             )
 
         val imagePath = System.currentTimeMillis()
-        val file: File = File(path, "$imagePath.jpg")
-
-        val output = file
+        val output = File(savePath, "rotated_$imagePath.jpg")
 
         val rotated =
             try {
