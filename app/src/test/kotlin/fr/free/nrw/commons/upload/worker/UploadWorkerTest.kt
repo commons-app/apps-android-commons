@@ -48,8 +48,8 @@ class UploadWorkerTest {
 
         val result = uploadWorker.findUniqueFileName(fileName)
 
-        //verify it follows the #XXX pattern
-        val regex = Regex("test_image \\(\\d{5}\\)\\.jpg")
+        //herre, updated to match the exactly 3 digits inside parentheses
+        val regex = Regex("test_image \\(\\d{3}\\)\\.jpg")
         assert(result.matches(regex))
     }
 
@@ -61,7 +61,7 @@ class UploadWorkerTest {
             .thenReturn(Single.just(false))
 
         val result = uploadWorker.findUniqueFileName(fileName)
-        val regex = Regex("no_extension \\(\\d{5}\\)")
+        val regex = Regex("no_extension \\(\\d{3}\\)")
 
         assert(result.matches(regex))
     }
