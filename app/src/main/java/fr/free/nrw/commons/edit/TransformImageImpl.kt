@@ -3,6 +3,7 @@ package fr.free.nrw.commons.edit
 import android.mediautil.image.jpeg.LLJTran
 import android.mediautil.image.jpeg.LLJTranException
 import android.os.Environment
+import androidx.exifinterface.media.ExifInterface
 import timber.log.Timber
 import java.io.BufferedOutputStream
 import java.io.File
@@ -26,7 +27,8 @@ class TransformImageImpl : TransformImage {
     override fun rotateImage(
         imageFile: File,
         degree: Int,
-        savePath: File): File? {
+        savePath: File
+    ): File? {
         Timber.tag("Trying to rotate image").d("Starting")
 
         val path =
@@ -36,6 +38,17 @@ class TransformImageImpl : TransformImage {
 
         val imagePath = System.currentTimeMillis()
         val output = File(savePath, "rotated_$imagePath.jpg")
+
+        if (degree % 360 == 0) {
+            return try {
+                imageFile.copyTo(output, overwrite = true)
+                Timber.tag("Done rotating image").d("Copied original file (0 rotation)")
+                output
+            } catch (e: Exception) {
+                Timber.tag("Error").d(e)
+                null
+            }
+        }
 
         val rotated =
             try {
@@ -57,6 +70,13 @@ class TransformImageImpl : TransformImage {
                     lljTran.save(writer, LLJTran.OPT_WRITE_ALL)
                 }
                 lljTran.freeMemory()
+                try {
+                    val exif = ExifInterface(output.absolutePath)
+                    exif.setAttribute(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL.toString())
+                    exif.saveAttributes()
+                } catch (ex: Exception) {
+                    Timber.w(ex, "Failed to force EXIF orientation to tha Normal")
+                }
                 true
             } catch (e: LLJTranException) {
                 Timber.tag("Error").d(e)
