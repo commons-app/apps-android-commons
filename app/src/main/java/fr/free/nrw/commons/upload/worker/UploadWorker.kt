@@ -569,30 +569,23 @@ class UploadWorker(
         // Loops until sequenceFileName does not match any existing file names
         while (mediaClient
                 .checkPageExistsUsingTitle(
-                    String.format(
-                        "File:%s",
-                        sequenceFileName,
-                    ),
-                ).blockingGet()) {
+                "File:$sequenceFileName")
+                .blockingGet()) {
+            val randomHash = (random.nextInt(900) + 100).toString()
 
-            // Generate a random 5-character alphanumeric string
-            val randomHash = (random.nextInt(90000) + 10000).toString()
-
-            sequenceFileName =
-                if (fileName.indexOf('.') == -1) {
-                    // Append the random hash in parentheses if no file extension is present
-                    "$fileName ($randomHash)"
+            sequenceFileName = if (fileName.indexOf('.') == -1) {
+                // Append the random hash in parentheses if no file extension is present
+                "$fileName ($randomHash)"
+            } else {
+                val regex = Pattern.compile("^(.*)(\\..+?)$")
+                val regexMatcher = regex.matcher(fileName)
+                // Append the random hash in parentheses before the file extension
+                if (regexMatcher.find()) {
+                    "${regexMatcher.group(1)} ($randomHash)${regexMatcher.group(2)}"
                 } else {
-                    val regex =
-                        Pattern.compile("^(.*)(\\..+?)$")
-                    val regexMatcher = regex.matcher(fileName)
-                    // Append the random hash in parentheses before the file extension
-                    if (regexMatcher.find()) {
-                        "${regexMatcher.group(1)} ($randomHash)${regexMatcher.group(2)}"
-                    } else {
-                        "$fileName ($randomHash)"
-                    }
+                    "$fileName ($randomHash)"
                 }
+            }
         }
         return sequenceFileName!!
     }
