@@ -100,6 +100,22 @@ jobs:
                 issue_number: context.issue.number,
                 assignees: [commenter]
               });
+
+              //post the confirmation comment
+              let body = `Hi @${commenter}! You have been assigned to this issue. ✨`;
+            
+              //adds the welcome message if they are new 
+              if (isFirstTime) {
+                body += `\n\nSince you're new here, a huge welcome to the team! ❤️ Feel free to check out our welcome guide to get started: https://github.com/commons-app/commons-app-documentation/blob/master/android/Volunteers-welcome!.md`;
+              }
+
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body: body
+              });
+
             } else {
               await github.rest.issues.createComment({
                 owner: context.repo.owner,
