@@ -115,6 +115,14 @@ class UploadMediaDetailFragment : UploadBaseFragment(), UploadMediaDetailsContra
      */
     private var editableUploadItem: UploadItem? = null
 
+    /**
+     * Tracks the URI of an edited image (after rotation/crop in EditActivity).
+     * When set, this takes priority over the original uploadItem.mediaUri so that
+     * the async onImageProcessed callback doesn't overwrite the preview with the
+     * original (pre-edit) image.
+     */
+    private var editedImageUri: Uri? = null
+
     private var _binding: FragmentUploadMediaDetailFragmentBinding? = null
     private val binding: FragmentUploadMediaDetailFragmentBinding get() = _binding!!
 
@@ -136,6 +144,9 @@ class UploadMediaDetailFragment : UploadBaseFragment(), UploadMediaDetailsContra
 
         if (savedInstanceState != null && uploadableFile == null) {
             uploadableFile = savedInstanceState.getParcelable(UPLOADABLE_FILE)
+        }
+        if (savedInstanceState != null) {
+            editedImageUri = savedInstanceState.getParcelable(EDITED_IMAGE_URI)
         }
         // Register the ActivityResultLauncher for LocationPickerActivity
         startForResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
@@ -364,7 +375,11 @@ class UploadMediaDetailFragment : UploadBaseFragment(), UploadMediaDetailsContra
         if (_binding == null) {
             return
         }
-        binding.backgroundImage.setImageURI(uploadItem.mediaUri)
+        // If the user has already edited the image, show the edited version
+        // instead of the original. This prevents the async preProcessImage
+        // callback from overwriting the edited preview.
+        val uriToShow = editedImageUri ?: uploadItem.mediaUri
+        binding.backgroundImage.setImageURI(uriToShow)
     }
 
     override fun onNearbyPlaceFound(
@@ -690,15 +705,26 @@ class UploadMediaDetailFragment : UploadBaseFragment(), UploadMediaDetailsContra
         if (result.resultCode == Activity.RESULT_OK) {
             val path = result.data!!.getStringExtra("editedImageFilePath")
 
-            if (Objects.equals(result, "Error")) {
-                Timber.e("Error in rotating image")
+            if (Objects.equals(path, "Error")) {
+                Timber.e("Error in editing image")
                 return
             }
             try {
+                val editedFile = File(path!!)
+                val editedUri = Uri.fromFile(editedFile)
+
+                // Store the edited URI so that any future onImageProcessed callback
+                // (e.g. from an async receiveImage after activity recreation) won't
+                // overwrite the preview with the original image.
+                editedImageUri = editedUri
+
                 if (_binding != null) {
-                    binding.backgroundImage.setImageURI(Uri.fromFile(File(path!!)))
+                    binding.backgroundImage.setImageURI(editedUri)
                 }
-                editableUploadItem!!.setContentAndMediaUri(Uri.fromFile(File(path!!)))
+                editableUploadItem!!.setContentAndMediaUri(editedUri)
+                // Update uploadableFile so re-opening the edit screen loads
+                // the already-edited image instead of the original
+                uploadableFile = UploadableFile(editedUri, editedFile)
                 fragmentCallback!!.changeThumbnail(
                     indexOfFragment,
                     path
@@ -898,6 +924,9 @@ class UploadMediaDetailFragment : UploadBaseFragment(), UploadMediaDetailsContra
         if (uploadableFile != null) {
             outState.putParcelable(UPLOADABLE_FILE, uploadableFile)
         }
+        if (editedImageUri != null) {
+            outState.putParcelable(EDITED_IMAGE_URI, editedImageUri)
+        }
         outState.putParcelableArrayList(
             UPLOAD_MEDIA_DETAILS,
             ArrayList(uploadMediaDetailAdapter.items)
@@ -924,5 +953,6 @@ class UploadMediaDetailFragment : UploadBaseFragment(), UploadMediaDetailsContra
         const val LAST_ZOOM: String = "last_zoom_level_while_uploading"
         const val UPLOADABLE_FILE: String = "uploadable_file"
         const val UPLOAD_MEDIA_DETAILS: String = "upload_media_detail_adapter"
+        private const val EDITED_IMAGE_URI: String = "edited_image_uri"
     }
 }

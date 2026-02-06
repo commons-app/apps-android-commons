@@ -368,6 +368,7 @@
   <string name="quiz_screenshot_question">Is this screenshot OK to upload?</string>
   <string name="share_app_title">Share App</string>
   <string name="rotate">Rotate</string>
+  <string name="crop">Crop</string>
 
   <string name="error_fetching_nearby_places">Could not load nearby places</string>
   <string name="no_pictures_in_this_area">No pictures in this area</string>

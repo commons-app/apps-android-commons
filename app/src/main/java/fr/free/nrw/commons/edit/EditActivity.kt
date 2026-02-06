@@ -6,7 +6,9 @@ import android.animation.ValueAnimator
 import android.content.Intent
 import android.graphics.BitmapFactory
 import android.graphics.Matrix
+import android.graphics.RectF
 import android.os.Bundle
+import android.view.View
 import android.view.animation.AccelerateDecelerateInterpolator
 import android.widget.ImageView
 import android.widget.Toast
@@ -20,6 +22,7 @@ import fr.free.nrw.commons.databinding.ActivityEditBinding
 import timber.log.Timber
 import java.io.File
 import kotlin.math.ceil
+import kotlin.math.roundToInt
 
 /**
  * An activity class for editing and rotating images using LLJTran with EXIF attribute preservation.
@@ -34,6 +37,13 @@ class EditActivity : AppCompatActivity() {
     private lateinit var vm: EditViewModel
     private val sourceExifAttributeList = mutableListOf<Pair<String, String?>>()
     private lateinit var binding: ActivityEditBinding
+
+    private var isCropMode = false
+    private var originalBitmapWidth = 0
+    private var originalBitmapHeight = 0
+    private var displayScale = 1f
+    private var imageOffsetX = 0f
+    private var imageOffsetY = 0f
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,12 +71,9 @@ class EditActivity : AppCompatActivity() {
                 ExifInterface.TAG_GPS_LONGITUDE_REF,
                 ExifInterface.TAG_GPS_PROCESSING_METHOD,
                 ExifInterface.TAG_GPS_TIMESTAMP,
-                ExifInterface.TAG_IMAGE_LENGTH,
-                ExifInterface.TAG_IMAGE_WIDTH,
                 ExifInterface.TAG_PHOTOGRAPHIC_SENSITIVITY,
                 ExifInterface.TAG_MAKE,
                 ExifInterface.TAG_MODEL,
-                ExifInterface.TAG_ORIENTATION,
                 ExifInterface.TAG_WHITE_BALANCE,
                 ExifInterface.WHITE_BALANCE_AUTO,
                 ExifInterface.WHITE_BALANCE_MANUAL,
@@ -84,7 +91,7 @@ class EditActivity : AppCompatActivity() {
      *
      * This function sets up the ImageView for displaying an image, adjusts its view bounds,
      * and scales the initial image to fit within the ImageView. It also sets click listeners
-     * for the "Rotate" and "Save" buttons.
+     * for the "Rotate", "Crop" and "Save" buttons.
      */
     private fun init() {
         binding.iv.adjustViewBounds = true
@@ -97,6 +104,10 @@ class EditActivity : AppCompatActivity() {
             val bitmapWidth = options.outWidth
             val bitmapHeight = options.outHeight
 
+            // Store original dimensions for crop calculation
+            originalBitmapWidth = bitmapWidth
+            originalBitmapHeight = bitmapHeight
+
             // Check if the bitmap dimensions exceed a certain threshold
             val maxBitmapSize = 2000 // Set your maximum size here
             if (bitmapWidth > maxBitmapSize || bitmapHeight > maxBitmapSize) {
@@ -107,6 +118,7 @@ class EditActivity : AppCompatActivity() {
                 binding.iv.setImageBitmap(scaledBitmap)
                 // Update the ImageView with the scaled bitmap
                 val scale = binding.iv.measuredWidth.toFloat() / scaledBitmap.width.toFloat()
+                displayScale = scale * scaleFactor
                 binding.iv.layoutParams.height = (scale * scaledBitmap.height).toInt()
                 binding.iv.imageMatrix = scaleMatrix(scale, scale)
             } else {
@@ -115,16 +127,222 @@ class EditActivity : AppCompatActivity() {
                 binding.iv.setImageBitmap(bitmap)
 
                 val scale = binding.iv.measuredWidth.toFloat() / bitmapWidth.toFloat()
+                displayScale = scale
                 binding.iv.layoutParams.height = (scale * bitmapHeight).toInt()
                 binding.iv.imageMatrix = scaleMatrix(scale, scale)
             }
+
+            // Calculate image offset within the view
+            imageOffsetX = 0f
+            imageOffsetY = 0f
         }
         binding.rotateBtn.setOnClickListener {
+            // Allow rotation while in crop mode - overlay will update after animation
             animateImageHeight()
         }
-        binding.btnSave.setOnClickListener {
-            getRotatedImage()
+        binding.cropBtn.setOnClickListener {
+            toggleCropMode()
         }
+        binding.btnSave.setOnClickListener {
+            saveEditedImage()
+        }
+    }
+
+    /**
+     * Toggles crop mode on and off.
+     */
+    private fun toggleCropMode() {
+        if (isCropMode) {
+            exitCropMode()
+        } else {
+            enterCropMode()
+        }
+    }
+
+    /**
+     * Enters crop mode, showing the crop overlay.
+     */
+    private fun enterCropMode() {
+        isCropMode = true
+        binding.cropOverlay.visibility = View.VISIBLE
+        // Allow rotation while in crop mode for flexibility
+
+        binding.iv.post {
+            updateCropOverlayBounds()
+        }
+    }
+
+    /**
+     * Updates crop overlay bounds based on current image display (works with any rotation).
+     */
+    private fun updateCropOverlayBounds() {
+        val drawable = binding.iv.drawable ?: return
+        val drawableWidth = drawable.intrinsicWidth.toFloat()
+        val drawableHeight = drawable.intrinsicHeight.toFloat()
+
+        val matrix = binding.iv.imageMatrix
+
+        // Transform the drawable rect through the matrix to get displayed bounds
+        val drawableRect = RectF(0f, 0f, drawableWidth, drawableHeight)
+        matrix.mapRect(drawableRect)
+
+        // Add ImageView's position within its parent
+        val ivLeft = binding.iv.left.toFloat()
+        val ivTop = binding.iv.top.toFloat()
+
+        val imageLeft = ivLeft + drawableRect.left
+        val imageTop = ivTop + drawableRect.top
+        val imageRight = ivLeft + drawableRect.right
+        val imageBottom = ivTop + drawableRect.bottom
+
+        binding.cropOverlay.setImageBounds(imageLeft, imageTop, imageRight, imageBottom)
+    }
+
+    /**
+     * Exits crop mode, hiding the crop overlay.
+     */
+    private fun exitCropMode() {
+        isCropMode = false
+        binding.cropOverlay.visibility = View.GONE
+    }
+
+    /**
+     * Saves the edited image (with rotation and/or crop applied).
+     */
+    private fun saveEditedImage() {
+        val filePath = imageUri.toUri().path
+        var file = filePath?.let { File(it) }
+
+        // Apply rotation first if needed
+        if (imageRotation != 0 && file != null) {
+            val rotatedImage = vm.rotateImage(imageRotation, file)
+            if (rotatedImage == null) {
+                Toast.makeText(this, "Failed to rotate image", Toast.LENGTH_LONG).show()
+                return
+            }
+            file = rotatedImage
+        }
+
+        // Apply crop if in crop mode
+        if (isCropMode && file != null) {
+            // Read ACTUAL dimensions of the (possibly rotated) file
+            val fileDimensions = getImageFileDimensions(file)
+            if (fileDimensions == null) {
+                Toast.makeText(this, "Failed to read image dimensions", Toast.LENGTH_LONG).show()
+                return
+            }
+
+            val (actualWidth, actualHeight) = fileDimensions
+            Timber.d("Actual file dimensions after rotation: ${actualWidth}x${actualHeight}")
+
+            val cropRect = binding.cropOverlay.getCropRect()
+            val cropCoords = convertViewCropToImageCrop(cropRect, actualWidth, actualHeight)
+
+            if (cropCoords != null) {
+                val croppedImage = vm.cropImage(
+                    file,
+                    cropCoords.left,
+                    cropCoords.top,
+                    cropCoords.width,
+                    cropCoords.height
+                )
+                if (croppedImage == null) {
+                    Toast.makeText(this, "Failed to crop image", Toast.LENGTH_LONG).show()
+                    return
+                }
+                file = croppedImage
+            }
+        }
+
+        // Copy EXIF data
+        if (file?.path != null) {
+            val editedImageExif = ExifInterface(file.path)
+            copyExifData(editedImageExif)
+        }
+
+        val resultIntent = Intent()
+        resultIntent.putExtra("editedImageFilePath", file?.toUri()?.path ?: "Error")
+        setResult(RESULT_OK, resultIntent)
+        finish()
+    }
+
+    /**
+     * Reads the actual dimensions of an image file.
+     * Returns Pair(width, height) or null if unable to read.
+     */
+    private fun getImageFileDimensions(file: File): Pair<Int, Int>? {
+        return try {
+            val options = BitmapFactory.Options().apply {
+                inJustDecodeBounds = true
+            }
+            BitmapFactory.decodeFile(file.path, options)
+            if (options.outWidth > 0 && options.outHeight > 0) {
+                Pair(options.outWidth, options.outHeight)
+            } else null
+        } catch (e: Exception) {
+            Timber.e(e, "Failed to read image dimensions")
+            null
+        }
+    }
+
+    /**
+     * Converts crop rectangle from view coordinates to rotated image coordinates.
+     * Uses percentage-based mapping with actual file dimensions.
+     *
+     * @param viewCropRect The crop rectangle in view coordinates
+     * @param actualFileWidth The actual width of the (possibly rotated) file
+     * @param actualFileHeight The actual height of the (possibly rotated) file
+     */
+    private fun convertViewCropToImageCrop(
+        viewCropRect: RectF,
+        actualFileWidth: Int,
+        actualFileHeight: Int
+    ): CropCoordinates? {
+        val drawable = binding.iv.drawable ?: return null
+        val drawableWidth = drawable.intrinsicWidth.toFloat()
+        val drawableHeight = drawable.intrinsicHeight.toFloat()
+
+        val matrix = binding.iv.imageMatrix
+
+        // Get the displayed bounds (after matrix transformation)
+        val displayedRect = RectF(0f, 0f, drawableWidth, drawableHeight)
+        matrix.mapRect(displayedRect)
+
+        // Add ImageView position offset
+        val ivLeft = binding.iv.left.toFloat()
+        val ivTop = binding.iv.top.toFloat()
+        displayedRect.offset(ivLeft, ivTop)
+
+        // Guard against zero-size displayed rect
+        if (displayedRect.width() <= 0 || displayedRect.height() <= 0) return null
+
+        // Calculate crop as percentage of displayed bounds
+        val leftPercent = ((viewCropRect.left - displayedRect.left) / displayedRect.width())
+            .coerceIn(0f, 1f)
+        val topPercent = ((viewCropRect.top - displayedRect.top) / displayedRect.height())
+            .coerceIn(0f, 1f)
+        val rightPercent = ((viewCropRect.right - displayedRect.left) / displayedRect.width())
+            .coerceIn(0f, 1f)
+        val bottomPercent = ((viewCropRect.bottom - displayedRect.top) / displayedRect.height())
+            .coerceIn(0f, 1f)
+
+        // Apply percentages to ACTUAL file dimensions
+        val cropLeft = (leftPercent * actualFileWidth).roundToInt().coerceIn(0, actualFileWidth - 1)
+        val cropTop = (topPercent * actualFileHeight).roundToInt().coerceIn(0, actualFileHeight - 1)
+        val cropRight = (rightPercent * actualFileWidth).roundToInt().coerceIn(1, actualFileWidth)
+        val cropBottom = (bottomPercent * actualFileHeight).roundToInt().coerceIn(1, actualFileHeight)
+
+        val width = (cropRight - cropLeft).coerceAtLeast(1)
+        val height = (cropBottom - cropTop).coerceAtLeast(1)
+
+        // Final validation: ensure crop doesn't exceed file bounds
+        val validLeft = cropLeft.coerceIn(0, actualFileWidth - width)
+        val validTop = cropTop.coerceIn(0, actualFileHeight - height)
+
+        Timber.d("Crop conversion: file=${actualFileWidth}x${actualFileHeight}, " +
+                 "crop=($validLeft, $validTop, $width, $height)")
+
+        return CropCoordinates(validLeft, validTop, width, height)
     }
 
     var imageRotation = 0
@@ -193,6 +411,11 @@ class EditActivity : AppCompatActivity() {
                 override fun onAnimationEnd(animation: Animator) {
                     imageRotation = newRotation % 360
                     binding.rotateBtn.setEnabled(true)
+
+                    // If crop mode is active, update the overlay bounds for new rotation
+                    if (isCropMode) {
+                        updateCropOverlayBounds()
+                    }
                 }
 
                 override fun onAnimationCancel(animation: Animator) {
@@ -232,35 +455,6 @@ class EditActivity : AppCompatActivity() {
         }
 
         animator.start()
-    }
-
-    /**
-     * Rotates and edits the current image, copies EXIF data, and returns the edited image path.
-     *
-     * This function retrieves the path of the current image specified by `imageUri`,
-     * rotates it based on the `imageRotation` angle using the `rotateImage` method
-     * from the `vm`, and updates the EXIF attributes of the
-     * rotated image based on the `sourceExifAttributeList`. It then copies the EXIF data
-     * using the `copyExifData` method, creates an Intent to return the edited image's file path
-     * as a result, and finishes the current activity.
-     */
-    fun getRotatedImage() {
-        val filePath = imageUri.toUri().path
-        val file = filePath?.let { File(it) }
-
-        val rotatedImage = file?.let { vm.rotateImage(imageRotation, it) }
-        if (rotatedImage == null) {
-            Toast.makeText(this, "Failed to rotate to image", Toast.LENGTH_LONG).show()
-        }
-        val editedImageExif: ExifInterface?
-        if (rotatedImage?.path != null) {
-            editedImageExif = ExifInterface(rotatedImage.path)
-            copyExifData(editedImageExif)
-        }
-        val resultIntent = Intent()
-        resultIntent.putExtra("editedImageFilePath", rotatedImage?.toUri()?.path ?: "Error")
-        setResult(RESULT_OK, resultIntent)
-        finish()
     }
 
     /**
@@ -315,3 +509,14 @@ class EditActivity : AppCompatActivity() {
         return scaleFactor
     }
 }
+
+/**
+ * Data class to hold crop coordinates.
+ */
+private data class CropCoordinates(
+    val left: Int,
+    val top: Int,
+    val width: Int,
+    val height: Int
+)
+
