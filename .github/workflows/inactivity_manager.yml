@@ -1,0 +1,137 @@
+name: Inactivity Manager
+
+on:
+  schedule:
+    - cron: '0 0 * * *' # runs thee task every day at midnight
+  workflow_dispatch: # allows for the manual testing
+
+permissions:
+  issues: write
+  pull-requests: read
+  models: read
+
+jobs:
+  manage-stale-issues:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Scout Stale Issues
+        uses: actions/github-script@v7
+        id: scout
+        with:
+          script: |
+            // defining the primary inactivity threshold
+            const daysToReminder = 30;
+
+            const issues = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open'
+            });
+
+            const staleIssues = [];
+            for (const issue of issues.data) {
+              if (issue.assignees.length === 0) continue;
+            
+              const diff = Math.ceil((new Date() - new Date(issue.updated_at)) / (1000 * 60 * 60 * 24));
+            
+              if (diff >= daysToReminder) {
+                const comments = await github.rest.issues.listComments({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: issue.number
+                });
+            
+                // gets the last comment to provide context to the AI
+                const lastComment = comments.data.length > 0 
+                  ? comments.data[comments.data.length - 1].body 
+                  : "No comments yet.";
+            
+                staleIssues.push({ 
+                  number: issue.number, 
+                  assignee: issue.assignees[0].login, 
+                  diff, 
+                  lastComment 
+                });
+              }
+            }
+            return JSON.stringify(staleIssues);
+
+      - name: AI Intent Analysis
+        if: steps.scout.outputs.result != '[]'
+        uses: actions/ai-inference@v1
+        id: ai-brain
+        with:
+          model: openai/gpt-4o-mini
+          prompt: |
+            You are a project manager. Below is a list of stale GitHub issues in JSON format.
+            For each issue, analyze the "lastComment" field.
+            
+            Determine if the assignee has provided a valid reason for a temporary delay.
+            Valid reasons: Exams, health issues, bereavement, or specific "busy until [date]" notes.
+            Invalid reasons: Silence, "I'm working on it" with no progress for 30 days, or general "I'm busy."
+
+            Output Instructions:
+            Return ONLY a valid JSON array of objects like this: [{"number": 123, "decision": "PROTECT"}] or [{"number": 123, "decision": "ENFORCE"}]
+            - Use "PROTECT" if they have a valid excuse.
+            - Use "ENFORCE" if they are inactive without a valid excuse.
+
+            Data to analyze:
+            ${{ steps.scout.outputs.result }}
+
+      - name: Execute 3-Stage Enforcement
+        if: steps.ai-brain.outputs.response != ''
+        uses: actions/github-script@v7
+        with:
+          script: |
+            // parse the decisions from ai and original data from scout
+            const aiDecisions = JSON.parse(`${{ steps.ai-brain.outputs.response }}`);
+            const scoutData = JSON.parse(`${{ steps.scout.outputs.result }}`);
+
+            const daysToReminder = 30;
+            const daysToWarning = 44;
+            const daysToUnassign = 58;
+
+            for (const issue of scoutData) {
+              const aiResult = aiDecisions.find(d => d.number === issue.number);
+            
+              // skips if ai says the user has a valid reason for the delay
+              if (aiResult?.decision === 'PROTECT') {
+                console.log(`Issue #${issue.number} is PROTECTED by AI decision.`);
+                continue;
+              }
+
+              const assignee = issue.assignee;
+              const diffDays = issue.diff;
+
+              if (diffDays >= daysToUnassign) {
+                // stagee 3: unassigning
+                await github.rest.issues.createComment({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: issue.number,
+                  body: `Hi @${assignee}! 👋 I'm unassigning this for now so that others can give it a try. If you get some time later, feel free to ask to be assigned again - you are always welcome! 🚀😊`
+                });
+                await github.rest.issues.removeAssignees({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: issue.number,
+                  assignees: [assignee]
+                });
+              } else if (diffDays >= daysToWarning) {
+                // stage 2: gentle warning
+                await github.rest.issues.createComment({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: issue.number,
+                  body: `Hi @${assignee}! Gentle ping, did you have time to look at this issue? 🔍 If you are too busy, we might unassign it in 2 weeks so that someone else gets a chance to give it a try. Thank you for your understanding! ☕✨`
+                });
+              } else if (diffDays >= daysToReminder) {
+                // stage 1: initial check-in
+                await github.rest.issues.createComment({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: issue.number,
+                  body: `Hi @${assignee}! Any progress to share? 📈 Even if you don't have a solution yet, would you mind sharing what you found or tried? I assume you still intend to work on this, but if not please let us know! 🤝💻`
+                });
+              }
+            }
