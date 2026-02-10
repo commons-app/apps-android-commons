@@ -101,7 +101,7 @@
   <string name="menu_from_camera">انځور اخيستل</string>
   <string name="menu_nearby">نژدې</string>
   <string name="provider_contributions">زما پورته کېدنې</string>
-  <string name="menu_copy_link">وېبتړ لمېسل</string>
+  <string name="menu_copy_link">تړونی لمېسل</string>
   <string name="menu_link_copied">وېبتړ ټينگدړې ته لمېسل شوی دی</string>
   <string name="menu_share">شريکول</string>
   <string name="menu_view_file_page">د دوتنې مخ کتل</string>
@@ -153,7 +153,7 @@
   <string name="language_search_type_language_name">ژبې نوم وليکئ</string>
   <string name="language_search_recent_searches">وروستنۍ پلټنې</string>
   <string name="language_search_all_languages">ټولې ژبې</string>
-  <string name="menu_download">ښکته کول</string>
+  <string name="menu_download">راکښته‌کول</string>
   <string name="preference_license">تلواليز منښتليک</string>
   <string name="use_previous">مخکنی سرليک او سپيناو وکاروئ</string>
   <string name="preference_theme">شاليد</string>

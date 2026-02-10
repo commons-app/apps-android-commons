@@ -7,6 +7,7 @@ plugins {
     alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.kotlin.kapt)
     alias(libs.plugins.kotlin.parcelize)
+    alias(libs.plugins.compose.compiler)
 }
 
 apply(from = "$rootDir/jacoco.gradle")
@@ -25,8 +26,8 @@ android {
         applicationId = "fr.free.nrw.commons"
         minSdk = 21
         targetSdk = 35
-        versionCode = 1061
-        versionName = "6.2.1"
+        versionCode = 1062
+        versionName = "6.3.0"
 
         setProperty("archivesBaseName", "app-commons-v$versionName-" + getBranchName())
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -183,9 +184,6 @@ android {
         compose = true
     }
     buildToolsVersion = buildToolsVersion
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.8"
-    }
     packaging {
         jniLibs {
             excludes += listOf("META-INF/androidx.*")
