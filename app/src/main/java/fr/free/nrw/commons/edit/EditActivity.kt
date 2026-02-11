@@ -219,7 +219,7 @@ class EditActivity : AppCompatActivity() {
             }
         }
 
-        val animator = ValueAnimator.ofFloat(0f, 1f).setDuration(1000L)
+        val animator = ValueAnimator.ofFloat(0f, 1f).setDuration(500L)
 
         animator.interpolator = AccelerateDecelerateInterpolator()
 
