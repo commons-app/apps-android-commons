@@ -192,6 +192,8 @@ class EditActivity : AppCompatActivity() {
         val viewHeight: Float = binding.iv.measuredHeight.toFloat()
         val rotation = imageRotation % 360
         val newRotation = rotation + 90
+        // fix:if the the user taps "save" before the animation finishes, it will save the new rotation.
+        imageRotation = newRotation % 360
 
         val newViewHeight: Int
         val imageScale: Float
