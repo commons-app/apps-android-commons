@@ -39,17 +39,6 @@ class TransformImageImpl : TransformImage {
         val imagePath = System.currentTimeMillis()
         val output = File(savePath, "rotated_$imagePath.jpg")
 
-        if (degree % 360 == 0) {
-            return try {
-                imageFile.copyTo(output, overwrite = true)
-                Timber.tag("Done rotating image").d("Copied original file (0 rotation)")
-                output
-            } catch (e: Exception) {
-                Timber.tag("Error").d(e)
-                null
-            }
-        }
-
         val rotated =
             try {
                 val lljTran = LLJTran(imageFile)
