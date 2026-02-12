@@ -7,6 +7,7 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Matrix
+import android.net.Uri
 import android.os.Bundle
 import android.view.animation.AccelerateDecelerateInterpolator
 import android.widget.ImageView
@@ -46,7 +47,19 @@ class EditActivity : AppCompatActivity() {
         val intent = intent
         imageUri = intent.getStringExtra("image") ?: ""
         vm = ViewModelProvider(this)[EditViewModel::class.java]
-        val sourceExif = imageUri.toUri().path?.let { ExifInterface(it) }
+
+        val sourceExif = try {
+            ExifInterface(imageUri)
+        } catch (e: Exception) {
+            try {
+                contentResolver.openInputStream(Uri.parse(imageUri))?.use {
+                    ExifInterface(it)
+                }
+            } catch (e2: Exception) {
+                Timber.e(e2, "Failed to read EXIF from URI")
+                null
+            }
+        }
 
         // exttracts the initial orientation
         val orientation = sourceExif?.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL)
