@@ -9,6 +9,7 @@ import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
+import androidx.compose.runtime.mutableStateMapOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -16,7 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.input.pointer.pointerInput
-import androidx.compose.ui.layout.onSizeChanged
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
@@ -32,12 +33,12 @@ fun ViewImageScreen(
 ) {
     var imageScale by remember { mutableFloatStateOf(1f) }
     var imageOffset by remember { mutableStateOf(Offset.Zero) }
-    var imageSize by remember { mutableStateOf(IntSize.Zero) }
     val pagerState = rememberPagerState(initialPage = currentImageIndex) { imageList.size }
-
+    val imageDimensions = remember { mutableStateMapOf<Long, IntSize>() }
+    // Swipe is enabled only when the image is not zoomed.
     val isZoomed = imageScale > 1f
 
-    BoxWithConstraints {
+    BoxWithConstraints(modifier = Modifier.fillMaxSize()) {
         val maxWidth = constraints.maxWidth.toFloat()
         val maxHeight = constraints.maxHeight.toFloat()
 
@@ -47,21 +48,33 @@ fun ViewImageScreen(
             pageSpacing = 16.dp,
             userScrollEnabled = !isZoomed,
             modifier = Modifier.fillMaxSize()
-                .pointerInput(Unit) {
-                    detectTransformGestures { _, pan, zoom, _ ->
+                .pointerInput(maxWidth, maxHeight) {
+                    detectTransformGestures { centroid, pan, zoom, _ ->
                         imageScale = (imageScale * zoom).coerceIn(1f, 7f)
 
-                        val imageWidth = imageSize.width * imageScale
-                        val imageHeight = imageSize.height * imageScale
+                        val currentImageSize = imageDimensions[imageList[pagerState.currentPage].id]
+                            ?: IntSize.Zero
+                        val baseScale = minOf(
+                            maxWidth / currentImageSize.width,
+                            maxHeight / currentImageSize.height
+                        )
+                        val imageWidth = currentImageSize.width * imageScale * baseScale
+                        val imageHeight = currentImageSize.height * imageScale * baseScale
+
+                        // Max panning distance is half of the 'extra' width/height that exceeds the screen size.
                         val extraWidth = (imageWidth - maxWidth).coerceAtLeast(0f)
-                        val extraHeight = (imageHeight- maxHeight).coerceAtLeast(0f)
+                        val extraHeight = (imageHeight - maxHeight).coerceAtLeast(0f)
 
                         val maxX = extraWidth / 2
                         val maxY = extraHeight / 2
 
+                        val center = Offset(maxWidth / 2, maxHeight / 2)
+                        // Adjust offset to keep the point under the centroid stable during zoom.
+                        val newOffset = (imageOffset * zoom) + (centroid - center) * (1f - zoom) + pan
+
                         imageOffset = Offset(
-                            x = (imageOffset.x + pan.x).coerceIn(-maxX, maxX),
-                            y = (imageOffset.y + pan.y).coerceIn(-maxY, maxY)
+                            x = newOffset.x.coerceIn(-maxX, maxX),
+                            y = newOffset.y.coerceIn(-maxY, maxY)
                         )
                     }
                 }
@@ -71,8 +84,15 @@ fun ViewImageScreen(
                     .data(imageList[pageNumber].uri)
                     .build(),
                 contentDescription = null,
+                contentScale = ContentScale.Fit,
+                onSuccess = { state ->
+                    imageDimensions[imageList[pageNumber].id] = IntSize(
+                        state.result.drawable.intrinsicWidth,
+                        state.result.drawable.intrinsicHeight,
+                    )
+                },
                 modifier = Modifier
-                    .onSizeChanged { imageSize = it }
+                    .fillMaxSize()
                     .graphicsLayer {
                         scaleX = imageScale
                         scaleY = imageScale
