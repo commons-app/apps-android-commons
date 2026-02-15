@@ -280,6 +280,12 @@ class UploadMediaDetailFragment : UploadBaseFragment(), UploadMediaDetailsContra
                     View.VISIBLE
                 }
 
+            // lljtran only supports lossless JPEG rotation, so we disable editing for other formatts
+            val filePath = uploadableFile?.getFilePath()?.toString() ?: ""
+            val isJpeg = filePath.endsWith(".jpeg", ignoreCase = true)
+                    || filePath.endsWith(".jpg", ignoreCase = true)
+            llEditImage.visibility = if (isJpeg) View.VISIBLE else View.GONE
+
             btnNext.setOnClickListener { presenter.displayLocDialog(indexOfFragment, inAppPictureLocation, hasUserRemovedLocation) }
             btnPrevious.setOnClickListener { fragmentCallback?.onPreviousButtonClicked(indexOfFragment) }
             llEditImage.setOnClickListener { presenter.onEditButtonClicked(indexOfFragment) }
