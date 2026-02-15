@@ -19,7 +19,7 @@ jobs:
             const daysToReminder = 30;
             const daysToWarning = 44; 
             const daysToUnassign = 58;
-            const keepKeyword = "keep";
+            const keepTag = "#keep";
 
             // fetches the all open issues
             const issues = await github.rest.issues.listForRepo({
@@ -49,11 +49,13 @@ jobs:
 
               // check if the very last comment is from the assignee and contains the "keep" keyword
               const lastComment = comments.data.length > 0 ? comments.data[comments.data.length - 1] : null;
-              if (lastComment && 
-                  lastComment.user.login === assignee && 
-                  lastComment.body.toLowerCase().includes(keepKeyword)) {
-                console.log(`Issue #${issue.number} protected: @${assignee} used keyword '${keepKeyword}'.`);
-                continue; 
+            
+              if (lastComment && lastComment.user.login === assignee) {
+                // we use toLowerCase() so #KEEP or #keep both will be work
+                if (lastComment.body.toLowerCase().includes(keepTag)) {
+                  console.log(`Issue #${issue.number} protected: @${assignee} used the ${keepTag} tag.`);
+                  continue; 
+                }
               }
 
               if (diffDays >= daysToUnassign) {
@@ -78,7 +80,7 @@ jobs:
                     owner: context.repo.owner,
                     repo: context.repo.repo,
                     issue_number: issue.number,
-                    body: `Hi @${assignee}! Gentle ping, did you have time to look at this issue? 🔍 If you are too busy, we might unassign it in 2 weeks so that someone else gets a chance to give it a try. (Tip: Include the word "**keep**" in your reply if you're still working on this!) Thank you for your understanding! ☕✨`
+                    body: `Hi @${assignee}! Gentle ping, did you have time to look at this issue? 🔍 If you are too busy, we might unassign it in 2 weeks so that someone else gets a chance to give it a try. (Tip: Include "**#KEEP**" in your reply to stay assigned!) Thank you for your understanding! ☕✨`
                   });
                 }
               } else if (diffDays >= daysToReminder) {
