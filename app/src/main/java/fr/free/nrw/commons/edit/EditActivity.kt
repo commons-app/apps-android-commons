@@ -22,6 +22,7 @@ import fr.free.nrw.commons.databinding.ActivityEditBinding
 import timber.log.Timber
 import java.io.File
 import kotlin.math.ceil
+import kotlin.math.min
 import kotlin.math.roundToInt
 
 /**
@@ -42,8 +43,7 @@ class EditActivity : AppCompatActivity() {
     private var originalBitmapWidth = 0
     private var originalBitmapHeight = 0
     private var displayScale = 1f
-    private var imageOffsetX = 0f
-    private var imageOffsetY = 0f
+    private var maxAvailableHeight = 0f
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -108,6 +108,8 @@ class EditActivity : AppCompatActivity() {
             originalBitmapWidth = bitmapWidth
             originalBitmapHeight = bitmapHeight
 
+            maxAvailableHeight = binding.iv.measuredHeight.toFloat()
+
             // Check if the bitmap dimensions exceed a certain threshold
             val maxBitmapSize = 2000 // Set your maximum size here
             if (bitmapWidth > maxBitmapSize || bitmapHeight > maxBitmapSize) {
@@ -117,24 +119,35 @@ class EditActivity : AppCompatActivity() {
                 val scaledBitmap = BitmapFactory.decodeFile(imageUri, options)
                 binding.iv.setImageBitmap(scaledBitmap)
                 // Update the ImageView with the scaled bitmap
-                val scale = binding.iv.measuredWidth.toFloat() / scaledBitmap.width.toFloat()
+                val scaleX = binding.iv.measuredWidth.toFloat() / scaledBitmap.width.toFloat()
+                val scaleY = maxAvailableHeight / scaledBitmap.height.toFloat()
+                val scale = min(scaleX, scaleY)
                 displayScale = scale * scaleFactor
                 binding.iv.layoutParams.height = (scale * scaledBitmap.height).toInt()
-                binding.iv.imageMatrix = scaleMatrix(scale, scale)
+                val matrix = scaleMatrix(scale, scale)
+                val scaledImageWidth = scale * scaledBitmap.width
+                if (scaledImageWidth < binding.iv.measuredWidth.toFloat()) {
+                    matrix.postTranslate((binding.iv.measuredWidth.toFloat() - scaledImageWidth) / 2f, 0f)
+                }
+                binding.iv.imageMatrix = matrix
             } else {
                 options.inJustDecodeBounds = false
                 val bitmap = BitmapFactory.decodeFile(imageUri, options)
                 binding.iv.setImageBitmap(bitmap)
 
-                val scale = binding.iv.measuredWidth.toFloat() / bitmapWidth.toFloat()
+                val scaleX = binding.iv.measuredWidth.toFloat() / bitmapWidth.toFloat()
+                val scaleY = maxAvailableHeight / bitmapHeight.toFloat()
+                val scale = min(scaleX, scaleY)
                 displayScale = scale
                 binding.iv.layoutParams.height = (scale * bitmapHeight).toInt()
-                binding.iv.imageMatrix = scaleMatrix(scale, scale)
+                val matrix = scaleMatrix(scale, scale)
+                val scaledImageWidth = scale * bitmapWidth
+                if (scaledImageWidth < binding.iv.measuredWidth.toFloat()) {
+                    matrix.postTranslate((binding.iv.measuredWidth.toFloat() - scaledImageWidth) / 2f, 0f)
+                }
+                binding.iv.imageMatrix = matrix
             }
 
-            // Calculate image offset within the view
-            imageOffsetX = 0f
-            imageOffsetY = 0f
         }
         binding.rotateBtn.setOnClickListener {
             // Allow rotation while in crop mode - overlay will update after animation
@@ -182,20 +195,24 @@ class EditActivity : AppCompatActivity() {
 
         val matrix = binding.iv.imageMatrix
 
-        // Transform the drawable rect through the matrix to get displayed bounds
         val drawableRect = RectF(0f, 0f, drawableWidth, drawableHeight)
         matrix.mapRect(drawableRect)
 
-        // Add ImageView's position within its parent
-        val ivLeft = binding.iv.left.toFloat()
-        val ivTop = binding.iv.top.toFloat()
+        // Use getLocationInWindow to correctly compute offset between views
+        val ivLoc = IntArray(2)
+        val overlayLoc = IntArray(2)
+        binding.iv.getLocationInWindow(ivLoc)
+        binding.cropOverlay.getLocationInWindow(overlayLoc)
 
-        val imageLeft = ivLeft + drawableRect.left
-        val imageTop = ivTop + drawableRect.top
-        val imageRight = ivLeft + drawableRect.right
-        val imageBottom = ivTop + drawableRect.bottom
+        val offsetX = (ivLoc[0] - overlayLoc[0]).toFloat()
+        val offsetY = (ivLoc[1] - overlayLoc[1]).toFloat()
 
-        binding.cropOverlay.setImageBounds(imageLeft, imageTop, imageRight, imageBottom)
+        binding.cropOverlay.setImageBounds(
+            offsetX + drawableRect.left,
+            offsetY + drawableRect.top,
+            offsetX + drawableRect.right,
+            offsetY + drawableRect.bottom
+        )
     }
 
     /**
@@ -308,10 +325,15 @@ class EditActivity : AppCompatActivity() {
         val displayedRect = RectF(0f, 0f, drawableWidth, drawableHeight)
         matrix.mapRect(displayedRect)
 
-        // Add ImageView position offset
-        val ivLeft = binding.iv.left.toFloat()
-        val ivTop = binding.iv.top.toFloat()
-        displayedRect.offset(ivLeft, ivTop)
+        // Use getLocationInWindow to correctly compute offset between views
+        val ivLoc = IntArray(2)
+        val overlayLoc = IntArray(2)
+        binding.iv.getLocationInWindow(ivLoc)
+        binding.cropOverlay.getLocationInWindow(overlayLoc)
+
+        val offsetX = (ivLoc[0] - overlayLoc[0]).toFloat()
+        val offsetY = (ivLoc[1] - overlayLoc[1]).toFloat()
+        displayedRect.offset(offsetX, offsetY)
 
         // Guard against zero-size displayed rect
         if (displayedRect.width() <= 0 || displayedRect.height() <= 0) return null
@@ -381,14 +403,18 @@ class EditActivity : AppCompatActivity() {
 
         when (rotation) {
             0, 180 -> {
-                imageScale = viewWidth / drawableWidth
-                newImageScale = viewWidth / drawableHeight
-                newViewHeight = (drawableWidth * newImageScale).toInt()
+                imageScale = min(viewWidth / drawableWidth, maxAvailableHeight / drawableHeight)
+                val fitW = viewWidth / drawableHeight
+                val fitH = maxAvailableHeight / drawableWidth
+                newImageScale = min(fitW, fitH)
+                newViewHeight = min((drawableWidth * newImageScale).toInt(), maxAvailableHeight.toInt())
             }
             90, 270 -> {
-                imageScale = viewWidth / drawableHeight
-                newImageScale = viewWidth / drawableWidth
-                newViewHeight = (drawableHeight * newImageScale).toInt()
+                imageScale = min(viewWidth / drawableHeight, maxAvailableHeight / drawableWidth)
+                val fitW = viewWidth / drawableWidth
+                val fitH = maxAvailableHeight / drawableHeight
+                newImageScale = min(fitW, fitH)
+                newViewHeight = min((drawableHeight * newImageScale).toInt(), maxAvailableHeight.toInt())
             }
             else -> {
                 throw
@@ -413,8 +439,9 @@ class EditActivity : AppCompatActivity() {
                     binding.rotateBtn.setEnabled(true)
 
                     // If crop mode is active, update the overlay bounds for new rotation
+                    // Use post{} to wait for the layout pass triggered by requestLayout()
                     if (isCropMode) {
-                        updateCropOverlayBounds()
+                        binding.iv.post { updateCropOverlayBounds() }
                     }
                 }
 

@@ -4,7 +4,9 @@ import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
+import android.graphics.Rect
 import android.graphics.RectF
+import android.os.Build
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
@@ -175,6 +177,9 @@ class CropOverlayView @JvmOverloads constructor(
         drawEdgeHandle(canvas, cropRect.centerX(), cropRect.bottom, Handle.BOTTOM)
         drawEdgeHandle(canvas, cropRect.left, cropRect.centerY(), Handle.LEFT)
         drawEdgeHandle(canvas, cropRect.right, cropRect.centerY(), Handle.RIGHT)
+
+        // Update gesture exclusion zones for edge handles near screen edges
+        updateGestureExclusion()
     }
 
     private fun drawCornerHandle(canvas: Canvas, x: Float, y: Float, handle: Handle) {
@@ -222,6 +227,7 @@ class CropOverlayView @JvmOverloads constructor(
             MotionEvent.ACTION_DOWN -> {
                 activeHandle = findHandle(x, y)
                 if (activeHandle != null) {
+                    parent?.requestDisallowInterceptTouchEvent(true)
                     lastTouchX = x
                     lastTouchY = y
                     invalidate() // Redraw to show active handle state
@@ -241,6 +247,7 @@ class CropOverlayView @JvmOverloads constructor(
             }
             MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
                 if (activeHandle != null) {
+                    parent?.requestDisallowInterceptTouchEvent(false)
                     activeHandle = null
                     invalidate() // Redraw to clear active handle state
                 }
@@ -354,4 +361,38 @@ class CropOverlayView @JvmOverloads constructor(
     private fun constrainMin(value: Float, min: Float, max: Float): Float = max(min, min(value, max))
 
     private fun constrainMax(value: Float, min: Float, max: Float): Float = max(min, min(value, max))
+
+    private fun updateGestureExclusion() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            val exclusionRects = mutableListOf<Rect>()
+            val handleExclusion = (48 * density).toInt() // 48dp per handle rect
+            val handleSize = cornerTouchSlop.toInt()
+
+            // Left edge: add small rects around each handle (top-left, left-mid, bottom-left)
+            if (cropRect.left < handleSize) {
+                val leftX = 0
+                val rightX = handleSize
+                for (cy in listOf(cropRect.top, cropRect.centerY(), cropRect.bottom)) {
+                    exclusionRects.add(Rect(
+                        leftX, (cy - handleExclusion / 2).toInt(),
+                        rightX, (cy + handleExclusion / 2).toInt()
+                    ))
+                }
+            }
+
+            // Right edge: add small rects around each handle (top-right, right-mid, bottom-right)
+            if (width - cropRect.right < handleSize) {
+                val leftX = width - handleSize
+                val rightX = width
+                for (cy in listOf(cropRect.top, cropRect.centerY(), cropRect.bottom)) {
+                    exclusionRects.add(Rect(
+                        leftX, (cy - handleExclusion / 2).toInt(),
+                        rightX, (cy + handleExclusion / 2).toInt()
+                    ))
+                }
+            }
+
+            systemGestureExclusionRects = exclusionRects
+        }
+    }
 }
