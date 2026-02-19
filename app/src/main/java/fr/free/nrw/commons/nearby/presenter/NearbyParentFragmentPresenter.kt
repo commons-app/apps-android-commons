@@ -725,7 +725,7 @@ class NearbyParentFragmentPresenter
             loadPlacesDataAyncJob?.cancel()
             localPlaceSearchJob = scope.launch(Dispatchers.IO) {
                 delay(LOCAL_SCROLL_DELAY)
-                val mapFocus = nearbyParentFragmentView.mapFocus
+                val mapFocus = nearbyParentFragmentView.mapFocus ?: return@launch
                 val markerPlaceGroups = placesRepository.fetchPlaces(
                     nearbyParentFragmentView.screenBottomLeft,
                     nearbyParentFragmentView.screenTopRight
