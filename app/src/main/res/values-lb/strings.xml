@@ -98,7 +98,7 @@
   <string name="login_failed_email_auth_needed">Dir hutt ee Login-Verifikatiounscode per E-Mail geschéckt kritt. Gitt wgl. de Code an, fir Iech anzeloggen.</string>
   <string name="login_failed_generic">Aloggen huet net funktionéiert</string>
   <string name="share_upload_button">Eroplueden</string>
-  <string name="multiple_share_base_title">Gitt dëser Biller een Numm</string>
+  <string name="multiple_share_base_title">Gitt dësem Set en Numm</string>
   <string name="provider_modifications">Ännerungen</string>
   <string name="menu_upload_single">Eroplueden</string>
   <string name="categories_search_text_hint">Kategorie sichen</string>
@@ -367,6 +367,7 @@
   <string name="no_depictions_selected_warning_desc">Biller mat Motiver si méi einfach ze fannen a ginn éischter benotzt. Sidd Dir sécher, datt Dir virufuere wëllt, ouni Motiver auszewielen?</string>
   <string name="back_button_warning">Eroplueden ofbriechen</string>
   <string name="back_button_continue">Eropluede weiderféieren</string>
+  <string name="upload_flow_all_images_in_set">(Fir all d\'Biller am Set)</string>
   <string name="never_ask_again">Dëst ni méi froen</string>
   <string name="achievements_fetch_failed_ultimate_achievement">Dir hutt esou vill Kontributioune gemaach datt eise Berechnungssystem iwwerfuerdert ass. Dëst ass déi bescht Leeschtung.</string>
   <string name="show_deletion_button">Läschknäppche weisen</string>
@@ -482,7 +483,7 @@
   <string name="title_app_shortcut_setting">Astellungen</string>
   <string name="remove_bookmark">Vun de Lieszeechen ewechgeholl</string>
   <string name="add_bookmark">Bei d\'Lieszeechen derbäigesat</string>
-  <string name="wallpaper_set_unsuccessfully">Et ass Eppes schif gaangen. D\'Hannergrondbild konnt net agestallt ginn</string>
+  <string name="wallpaper_set_unsuccessfully">Et ass eppes schif gaangen. D\'Hannergrondbild konnt net agestallt ginn</string>
   <string name="setting_wallpaper_dialog_title">Als Hannergrondbild festleeën</string>
   <string name="setting_wallpaper_dialog_message">Hannergrondbild gëtt agestallt. Waart wgl...</string>
   <string name="theme_default_name">System suivéieren</string>
@@ -571,6 +572,8 @@
   <string name="enter_description">Wéi ass Äre Feedback?</string>
   <string name="your_feedback">Äre Feedback</string>
   <string name="menu_view_report">Mellen</string>
+  <string name="menu_view_set_white_background">Wäissen Hannergrond astellen</string>
+  <string name="menu_view_set_black_background">Schwaarzen Hannergrond astellen</string>
   <string name="report_violation">Verstouss mellen</string>
   <string name="report_user">Dëse Benotzer mellen</string>
   <string name="report_content">Dësen Inhalt mellen</string>
