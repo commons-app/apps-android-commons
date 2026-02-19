@@ -13,6 +13,37 @@ Initially started by the Wikimedia Foundation, this app is now maintained by gra
 <a href="https://play.google.com/store/apps/details?id=fr.free.nrw.commons" target="_blank">
 <img src="https://play.google.com/intl/en_us/badges/images/generic/en-play-badge.png" alt="Get it on Google Play" height="90"/></a>
 
+## Installation
+
+Follow these steps to install the Commons Android app on your device:
+
+1. Open the Google Play Store on your Android device.
+2. Search for "Commons" and select the Commons app from the search results.
+3. Tap the "Install" button to download and install the app on your device.
+4. Once the installation is complete, tap the "Open" button to launch the app.
+
+## Getting Started
+
+Welcome to Commons! Here are some tips to help you get started with the app:
+
+- Sign in with your Commons account to access your personalized feed and saved content.
+- Explore the different sections of the app, including Discover, Search, and Favorites.
+- Upload your own photos and videos to contribute to the Commons community.
+- Customize your profile and settings to tailor your Commons experience to your preferences.
+
+## Usage Examples
+
+Here are some common tasks and usage examples to help you make the most of Commons:
+
+- Searching for Content:
+  - Use the search bar at the top of the screen to search for specific photos, videos, or topics of interest.
+
+- Uploading Content:
+  - Tap the "+" button to upload a new photo or video from your device to Commons.
+
+- Saving Favorites:
+  - Tap the heart icon next to a photo or video to save it to your Favorites collection for easy access later.
+
 ## Documentation
 
 Our [documentation repository][4] contains extensive documentation for users, contributors, and developers alike:
