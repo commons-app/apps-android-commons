@@ -58,6 +58,13 @@ class ContributionsPresenter @Inject internal constructor(
                         contribution.state = Contribution.STATE_QUEUED
                         saveContribution(contribution)
                     } else {
+                        // For nearby uploads, if image already exists but Wikidata linking failed,
+                        // we should retry just the Wikidata operation instead of deleting
+                        if (contribution.wikidataPlace != null) {
+                            Timber.d("Nearby upload: Image exists on Commons, retrying Wikidata P18 linking")
+                            contribution.state = Contribution.STATE_QUEUED
+                            saveContribution(contribution)
+                        } else {
                         Timber.e("Contribution already exists")
                         compositeDisposable!!.add(
                             contributionsRepository
@@ -65,6 +72,7 @@ class ContributionsPresenter @Inject internal constructor(
                                 .subscribeOn(ioThreadScheduler)
                                 .subscribe()
                         )
+                        }
                     }
                 })
     }
