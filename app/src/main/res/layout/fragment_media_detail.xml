@@ -31,6 +31,14 @@
       android:layout_gravity="center_horizontal"
       app:actualImageScaleType="none" />
 
+    <ImageView
+        android:id="@+id/mediaDetailImageViewSvg"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/dimen_250"
+        android:layout_gravity="center_horizontal"
+        android:scaleType="fitCenter"
+        android:visibility="gone" />
+
     <ScrollView
       android:id="@+id/mediaDetailScrollView"
       android:layout_width="match_parent"
