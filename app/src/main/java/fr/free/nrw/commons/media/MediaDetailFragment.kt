@@ -704,6 +704,8 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
             spacerParams.height = finalHeight
             binding.mediaDetailImageView.layoutParams = params
             binding.mediaDetailImageViewSpacer.layoutParams = spacerParams
+            if(finalHeight>0)
+                binding.mediaDetailScrollView.visibility = View.VISIBLE
         }
     }
 
