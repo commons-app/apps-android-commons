@@ -83,7 +83,7 @@ class ImageFragment :
     private var selectorRV: RecyclerView? = null
     private var loader: ProgressBar? = null
     private var switch: SwitchMaterial? = null
-    lateinit var filteredImages: ArrayList<Image>
+    private var filteredImages: ArrayList<Image> = arrayListOf()
 
     /**
      * Stores all images
@@ -402,7 +402,7 @@ class ImageFragment :
                 ?.findFirstVisibleItemPosition() ?: -1
 
         // check for valid position and non-empty image list
-        if (position != -1 && ::filteredImages.isInitialized && filteredImages.isNotEmpty() && ::imageAdapter.isInitialized) {
+        if (position != -1 && filteredImages.isNotEmpty() && ::imageAdapter.isInitialized) {
             context?.let { context ->
                 context
                     .getSharedPreferences(
@@ -416,8 +416,8 @@ class ImageFragment :
                     }
             }
         } else {
-            Timber.d("Skipped saving item ID: position=%d, filteredImages initialized=%b",
-                position, ::filteredImages.isInitialized)
+            Timber.d("Skipped saving item ID: position=%d, filteredImages.size=%d, imageAdapter initialized=%b",
+                position, filteredImages.size, ::imageAdapter.isInitialized)
         }
         super.onDestroy()
     }
