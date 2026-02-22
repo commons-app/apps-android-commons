@@ -64,12 +64,8 @@ class UploadMediaDetailFragment : UploadBaseFragment(), UploadMediaDetailsContra
     UploadMediaDetailAdapter.EventListener {
 
     private lateinit var startForResult: ActivityResultLauncher<Intent>
-
-    private val startForEditActivityResult = registerForActivityResult<Intent, ActivityResult>(
-        ActivityResultContracts.StartActivityForResult(), ::onEditActivityResult)
-
-    private val voiceInputResultLauncher = registerForActivityResult<Intent, ActivityResult>(
-        ActivityResultContracts.StartActivityForResult(), ::onVoiceInput)
+    private lateinit var startForEditActivityResult: ActivityResultLauncher<Intent>
+    private lateinit var voiceInputResultLauncher: ActivityResultLauncher<Intent>
 
     @Inject
     lateinit var presenter: UploadMediaDetailsContract.UserActionListener
@@ -141,6 +137,8 @@ class UploadMediaDetailFragment : UploadBaseFragment(), UploadMediaDetailsContra
         startForResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             onCameraPosition(result)
         }
+        startForEditActivityResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult(), ::onEditActivityResult)
+        voiceInputResultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult(), ::onVoiceInput)
     }
 
     override fun onCreateView(
