@@ -11,6 +11,9 @@ import android.os.Build
 import android.os.Process
 import android.util.Log
 import androidx.multidex.MultiDexApplication
+import coil.Coil
+import coil.ImageLoader
+import coil.decode.SvgDecoder
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.facebook.imagepipeline.core.ImagePipelineConfig
 import fr.free.nrw.commons.auth.LoginActivity
@@ -66,7 +69,7 @@ import javax.inject.Named
     resCommentPrompt = R.string.crash_dialog_comment_prompt
 )
 
-class CommonsApplication : MultiDexApplication() {
+class CommonsApplication : MultiDexApplication(), coil.ImageLoaderFactory {
 
     @Inject
     lateinit var sessionManager: SessionManager
@@ -137,6 +140,14 @@ class CommonsApplication : MultiDexApplication() {
 
         // Fire progress callbacks for every 3% of uploaded content
         System.setProperty("in.yuvi.http.fluent.PROGRESS_TRIGGER_THRESHOLD", "3.0")
+    }
+
+    override fun newImageLoader(): ImageLoader {
+        return ImageLoader.Builder(this)
+            .components {
+                add(SvgDecoder.Factory())
+            }
+            .build()
     }
 
     /**

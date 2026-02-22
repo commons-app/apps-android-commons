@@ -24,6 +24,7 @@ import android.widget.LinearLayout
 import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
+import coil.load
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
@@ -733,19 +734,34 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
         val imageBackgroundColor: Int = imageBackgroundColor
         if (imageBackgroundColor != DEFAULT_IMAGE_BACKGROUND_COLOR) {
             binding.mediaDetailImageView.setBackgroundColor(imageBackgroundColor)
+            binding.mediaDetailImageViewSvg.setBackgroundColor(imageBackgroundColor)
         }
 
-        binding.mediaDetailImageView.hierarchy.setPlaceholderImage(R.drawable.image_placeholder)
-        binding.mediaDetailImageView.hierarchy.setFailureImage(R.drawable.image_placeholder)
+        val mediaUrl = media?.imageUrl
+        if (mediaUrl != null && mediaUrl.substringBefore("?").endsWith(".svg", ignoreCase = true)) {
+            binding.mediaDetailImageView.visibility = View.GONE
+            binding.mediaDetailImageViewSvg.visibility = View.VISIBLE
 
-        val controller: DraweeController = Fresco.newDraweeControllerBuilder()
-            .setLowResImageRequest(ImageRequest.fromUri(if (media != null) media!!.thumbUrl else null))
-            .setRetainImageOnFailure(true)
-            .setImageRequest(ImageRequest.fromUri(if (media != null) media!!.imageUrl else null))
-            .setControllerListener(aspectRatioListener)
-            .setOldController(binding.mediaDetailImageView.controller)
-            .build()
-        binding.mediaDetailImageView.controller = controller
+            binding.mediaDetailImageViewSvg.load(mediaUrl) {
+                placeholder(R.drawable.image_placeholder)
+                error(R.drawable.image_placeholder)
+            }
+        } else {
+            binding.mediaDetailImageViewSvg.visibility = View.GONE
+            binding.mediaDetailImageView.visibility = View.VISIBLE
+
+            binding.mediaDetailImageView.hierarchy.setPlaceholderImage(R.drawable.image_placeholder)
+            binding.mediaDetailImageView.hierarchy.setFailureImage(R.drawable.image_placeholder)
+
+            val controller: DraweeController = Fresco.newDraweeControllerBuilder()
+                .setLowResImageRequest(ImageRequest.fromUri(if (media != null) media!!.thumbUrl else null))
+                .setRetainImageOnFailure(true)
+                .setImageRequest(ImageRequest.fromUri(if (media != null) media!!.imageUrl else null))
+                .setControllerListener(aspectRatioListener)
+                .setOldController(binding.mediaDetailImageView.controller)
+                .build()
+            binding.mediaDetailImageView.controller = controller
+        }
     }
 
     private fun updateToDoWarning() {
