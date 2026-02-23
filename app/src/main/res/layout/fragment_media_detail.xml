@@ -183,15 +183,15 @@
                       android:id="@+id/description_edit"
                       android:layout_width="24dp"
                       android:layout_height="24dp"
-                      android:layout_gravity="end"
+                      android:layout_gravity="center|end"
                       android:background="@drawable/ic_baseline_edit_24" />
+
                     <ProgressBar
                       android:id="@+id/progressBarEdit"
                       style="?android:progressBarStyleSmall"
                       android:layout_width="wrap_content"
                       android:layout_height="wrap_content"
                       android:layout_marginEnd="@dimen/tiny_gap"
-                      android:layout_marginRight="@dimen/tiny_gap"
                       android:layout_gravity="center_vertical|end"
                       android:indeterminate="true"
                       android:indeterminateOnly="true"
@@ -208,6 +208,7 @@
                   style="@style/MediaDetailContainer"
                   android:layout_width="match_parent"
                   android:layout_height="wrap_content"
+                  android:layout_marginBottom="@dimen/medium_height"
                   android:orientation="horizontal">
 
                     <TextView
@@ -220,11 +221,13 @@
                       android:id="@+id/mediaDetailLicense"
                       android:layout_width="@dimen/widget_margin"
                       android:layout_height="match_parent"
-                      android:layout_weight="70"
                       android:layout_gravity="start"
+                      android:layout_weight="70"
                       android:foreground="?attr/selectableItemBackground"
                       android:gravity="center_vertical"
-                      android:padding="@dimen/small_gap"
+                      android:paddingStart="@dimen/tiny_gap"
+                      android:paddingTop="@dimen/tiny_gap"
+                      android:paddingEnd="@dimen/tiny_gap"
                       android:textColor="?attr/mediaDetailsText"
                       android:textSize="@dimen/description_text_size"
                       android:drawablePadding="@dimen/tiny_gap"
@@ -237,7 +240,8 @@
                   android:layout_width="match_parent"
                   android:layout_height="wrap_content"
                   android:id="@+id/authorLinearLayout"
-                  android:orientation="horizontal">
+                  android:orientation="horizontal"
+                  android:layout_marginBottom="@dimen/tiny_gap">
 
                     <TextView
                       android:id="@+id/mediaDetailAuthorLabel"
@@ -258,7 +262,9 @@
                   style="@style/MediaDetailContainer"
                   android:layout_width="match_parent"
                   android:layout_height="wrap_content"
-                  android:orientation="horizontal">
+                  android:orientation="horizontal"
+                  android:layout_marginBottom="@dimen/medium_height"
+                  android:paddingBottom="@dimen/medium_padding">
 
                     <TextView
                       style="@style/MediaDetailTextLabelGeneric"
@@ -269,12 +275,14 @@
                     <TextView
                       android:id="@+id/mediaDetailCoordinates"
                       android:layout_width="@dimen/widget_margin"
-                      android:layout_height="match_parent"
+                      android:layout_height="wrap_content"
                       android:layout_weight="70"
                       android:layout_gravity="start"
                       android:foreground="?attr/selectableItemBackground"
                       android:gravity="center_vertical"
-                      android:padding="@dimen/small_gap"
+                      android:paddingStart="@dimen/medium_height"
+                      android:paddingTop="@dimen/tiny_gap"
+                      android:paddingEnd="@dimen/small_gap"
                       android:textColor="?attr/mediaDetailsText"
                       android:textSize="@dimen/description_text_size"
                       android:drawablePadding="@dimen/tiny_gap"
@@ -285,9 +293,7 @@
                       android:id="@+id/coordinate_edit"
                       android:layout_width="24dp"
                       android:layout_height="24dp"
-                      android:layout_marginTop="@dimen/standard_gap"
-                      android:layout_marginBottom="@dimen/standard_gap"
-                      android:layout_gravity="end"
+                      android:layout_gravity="center|end"
                       android:background="@drawable/ic_baseline_edit_24" />
 
                 </LinearLayout>
@@ -297,6 +303,7 @@
                   style="@style/MediaDetailContainer"
                   android:layout_width="match_parent"
                   android:layout_height="wrap_content"
+                  android:layout_marginBottom="@dimen/standard_gap"
                   android:orientation="horizontal"
                   android:textStyle="bold">
 
@@ -304,81 +311,83 @@
                       style="@style/MediaDetailTextLabelGeneric"
                       android:layout_width="@dimen/widget_margin"
                       android:layout_height="match_parent"
-                      android:text="@string/media_detail_depiction" />
+                      android:text="@string/media_detail_depiction"
+                      android:paddingTop="@dimen/medium_height"/>
 
                     <LinearLayout
                       android:id="@+id/media_detail_depiction_container"
                       android:layout_width="@dimen/widget_margin"
-                      android:layout_height="match_parent"
+                      android:layout_height="wrap_content"
                       android:layout_weight="70"
-                      android:orientation="vertical" />
-                </LinearLayout>
+                      android:orientation="vertical"
+                      android:paddingStart="@dimen/tiny_gap"
+                      android:paddingEnd="@dimen/tiny_gap"
+                      android:textAlignment="viewStart"/>
 
                 <Button
                   android:id="@+id/depictionsEditButton"
                   android:layout_width="24dp"
                   android:layout_height="24dp"
-                  android:layout_margin="@dimen/standard_gap"
-                  android:layout_gravity="end"
+                  android:layout_marginTop="@dimen/small_gap"
+                  android:layout_gravity="center_vertical|end"
+                  android:layout_marginBottom="@dimen/small_gap"
+                  android:background="@drawable/ic_baseline_edit_24"
                   android:visibility="gone"
-                  android:background="@drawable/ic_baseline_edit_24" />
+                  tools:visibility="visible"/>
+
+              </LinearLayout>
 
                 <LinearLayout
                   style="@style/MediaDetailContainer"
                   android:layout_width="match_parent"
                   android:layout_height="wrap_content"
                   android:orientation="horizontal"
-                  android:textStyle="bold">
+                  android:textStyle="bold"
+                  android:layout_marginBottom="@dimen/large_padding"
+                  android:paddingBottom="@dimen/standard_gap">
 
                     <TextView
                       style="@style/MediaDetailTextLabelGeneric"
                       android:layout_width="@dimen/widget_margin"
                       android:layout_height="match_parent"
-                      android:text="@string/detail_panel_cats_label" />
+                      android:paddingTop="@dimen/medium_height"
+                      android:text="@string/detail_panel_cats_label"/>
 
                     <LinearLayout
                       android:id="@+id/mediaDetailCategoryContainer"
                       android:layout_width="@dimen/widget_margin"
-                      android:layout_height="match_parent"
+                      android:layout_height="wrap_content"
                       android:layout_weight="70"
-                      android:orientation="vertical">
-                    </LinearLayout>
+                      android:orientation="vertical"
+                      android:paddingStart="@dimen/tiny_gap"
+                      android:paddingEnd="@dimen/tiny_gap"></LinearLayout>
 
-                </LinearLayout>
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                  android:layout_width="match_parent"
-                  android:layout_height="24dp"
-                  android:layout_margin="@dimen/standard_gap">
+                  <Button
+                    android:id="@+id/categoryEditButton"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_gravity="center_vertical|end"
+                    android:layout_marginTop="@dimen/small_gap"
+                    android:layout_marginBottom="@dimen/small_gap"
+                    android:background="@drawable/ic_baseline_edit_24"
+                    android:visibility="gone"
+                    tools:visibility="visible"/>
 
                     <ProgressBar
                       android:id="@+id/progressBarEditCategory"
                       style="?android:progressBarStyleSmall"
                       android:layout_width="wrap_content"
                       android:layout_height="wrap_content"
-                      android:layout_marginEnd="@dimen/tiny_gap"
-                      android:layout_marginRight="@dimen/tiny_gap"
                       android:layout_gravity="center_vertical|end"
+                      android:layout_marginTop="@dimen/small_gap"
+                      android:layout_marginEnd="@dimen/tiny_gap"
+                      android:layout_marginBottom="@dimen/small_gap"
                       android:indeterminate="true"
                       android:indeterminateOnly="true"
                       android:visibility="gone"
-                      tools:visibility="visible"
-                      app:layout_constraintEnd_toEndOf="parent"
-                      app:layout_constraintTop_toBottomOf="@id/mediaDetailCategoryContainer"
-                      app:layout_constraintBottom_toTopOf="@id/mediaDetailuploadeddate" />
+                      tools:visibility="visible"/>
 
-                    <Button
-                      android:id="@+id/categoryEditButton"
-                      android:layout_width="24dp"
-                      android:layout_height="24dp"
-                      android:layout_gravity="end"
-                      android:visibility="gone"
-                      android:background="@drawable/ic_baseline_edit_24"
-                      app:layout_constraintEnd_toEndOf="parent"
-                      app:layout_constraintTop_toBottomOf="@id/mediaDetailCategoryContainer"
-                      app:layout_constraintBottom_toTopOf="@id/mediaDetailuploadeddate"/>
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
+               </LinearLayout>
                 <LinearLayout
                   style="@style/MediaDetailContainer"
                   android:layout_width="match_parent"
