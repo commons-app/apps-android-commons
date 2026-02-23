@@ -1,7 +1,7 @@
 # Automated runs commented out, see https://github.com/commons-app/apps-android-commons/issues/6576#issuecomment-3618798882
 # Added workflow_dispatch temporarily for having a syntactically correct workflow file
 on:
-  workflow_dispatch
+  workflow_dispatch:
   # issue_comment:
     # types: [created]
 
