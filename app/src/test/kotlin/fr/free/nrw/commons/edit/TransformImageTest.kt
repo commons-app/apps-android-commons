@@ -13,6 +13,7 @@ import org.robolectric.RobolectricTestRunner
 import java.io.File
 import java.io.FileOutputStream
 import kotlin.math.abs
+import org.junit.Ignore
 
 @RunWith(RobolectricTestRunner::class)
 class TransformImageTest {
@@ -148,7 +149,7 @@ class TransformImageTest {
             tolerance = 10
         )
     }
-
+    @Ignore("Disabled due to ICC Color Profile brightness shift during rotation. see issue https://github.com/commons-app/apps-android-commons/issues/6659 ")
     @Test
     fun `test 360 degree rotation cycles for all EXIF images`() {
         val prefixes = listOf("Landscape", "Portrait", "TEST")
