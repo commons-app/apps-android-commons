@@ -25,6 +25,7 @@ public enum Label {
     COTTAGE("Q5783996", R.drawable.round_icon_house),
     FARMHOUSE("Q489357", R.drawable.round_icon_house),
     CHURCH("Q16970", R.drawable.round_icon_church), //changed from church to church building
+    GAS_STATION("Q128302279", R.drawable.round_icon_gas_station),
     RAILWAY_STATION("Q55488", R.drawable.round_icon_railway_station),
     GATEHOUSE("Q277760", R.drawable.round_icon_gatehouse),
     MILESTONE("Q10145", R.drawable.round_icon_milestone),
