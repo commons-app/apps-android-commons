@@ -10,6 +10,7 @@ import fr.free.nrw.commons.customselector.ui.states.ImageUiState
 import fr.free.nrw.commons.customselector.ui.states.toImageUiState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -29,6 +30,7 @@ class CustomSelectorViewModel @Inject constructor(
 
     private val allImages = mutableListOf<ImageUiState>()
     private val foldersMap = mutableMapOf<Long, MutableList<Image>>()
+    private var openedBucketId: Long? = null
 
     init {
         viewModelScope.launch {
@@ -54,12 +56,26 @@ class CustomSelectorViewModel @Inject constructor(
 
     fun onEvent(e: CustomSelectorEvent) {
         when(e) {
+            is CustomSelectorEvent.OnSwitchHandledPictures -> {
+                val images = if(e.isEnabled) {
+                    foldersMap[openedBucketId]?.map { it.toImageUiState() } ?: emptyList()
+                } else {
+                    _uiState.value.filteredImages.filter { !(it.isNotForUpload || it.isUploaded) }
+                }
+                _uiState.update { currentState ->
+                    currentState.copy(
+                        shouldShowHandledPictures = !currentState.shouldShowHandledPictures,
+                        filteredImages = images
+                    )
+                }
+            }
+
             is CustomSelectorEvent.OnFolderClick -> {
+                openedBucketId = e.bucketId
+                val images = foldersMap[e.bucketId]?.map { it.toImageUiState() } ?: emptyList()
                 _uiState.update {
                     it.copy(
-                        filteredImages = foldersMap[e.bucketId]?.map {
-                            img -> img.toImageUiState()
-                        } ?: emptyList()
+                        filteredImages = images
                     )
                 }
             }

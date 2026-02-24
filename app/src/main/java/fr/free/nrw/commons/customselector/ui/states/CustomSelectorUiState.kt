@@ -10,7 +10,8 @@ data class CustomSelectorUiState(
     val folders: List<Folder> = emptyList(),
     val filteredImages: List<ImageUiState> = emptyList(),
     val selectedImageIds: Set<Long> = emptySet(),
-    val imagesNotForUpload: Map<imageId, isNotForUpload> = emptyMap()
+    val imagesNotForUpload: Map<imageId, isNotForUpload> = emptyMap(),
+    val shouldShowHandledPictures: Boolean = true
 ) {
     val inSelectionMode: Boolean
         get() = selectedImageIds.isNotEmpty()

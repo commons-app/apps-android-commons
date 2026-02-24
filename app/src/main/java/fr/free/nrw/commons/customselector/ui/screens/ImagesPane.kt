@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.customselector.ui.screens
 
+import android.net.Uri
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
@@ -13,6 +14,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -31,7 +33,9 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.material3.adaptive.WindowAdaptiveInfo
+import androidx.compose.material3.adaptive.currentWindowAdaptiveInfo
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.derivedStateOf
@@ -48,6 +52,7 @@ import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.round
@@ -58,6 +63,7 @@ import fr.free.nrw.commons.R
 import fr.free.nrw.commons.customselector.ui.components.CustomSelectorBottomBar
 import fr.free.nrw.commons.customselector.ui.components.CustomSelectorTopBar
 import fr.free.nrw.commons.customselector.ui.components.PartialStorageAccessDialog
+import fr.free.nrw.commons.customselector.ui.components.ToggleSwitch
 import fr.free.nrw.commons.customselector.ui.states.CustomSelectorUiState
 import fr.free.nrw.commons.customselector.ui.states.ImageUiState
 import fr.free.nrw.commons.ui.theme.CommonsTheme
@@ -141,6 +147,25 @@ fun ImagesPane(
                 PartialStorageAccessDialog(
                     onManageAction = { /*TODO("Request permission[READ_MEDIA_IMAGES]")*/ },
                     modifier = Modifier.padding(8.dp)
+                )
+            }
+
+            Row(
+                horizontalArrangement = Arrangement.spacedBy(8.dp),
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier
+                    .align(Alignment.CenterHorizontally)
+                    .padding(bottom = 8.dp)
+            ) {
+                Text(
+                    text = stringResource(R.string.show_already_actioned_pictures),
+                    style = MaterialTheme.typography.bodyMedium,
+                )
+                ToggleSwitch(
+                    checked = uiState.shouldShowHandledPictures,
+                    onCheckedChange = {
+                        onEvent(CustomSelectorEvent.OnSwitchHandledPictures(it))
+                    }
                 )
             }
 
@@ -258,6 +283,28 @@ fun ImageItem(
                     .padding(4.dp)
             )
         }
+    }
+}
+
+@Preview
+@Composable
+private fun ImagesPanePreview() {
+    CommonsTheme {
+        ImagesPane(
+            uiState = CustomSelectorUiState(),
+            selectedFolder = Folder(
+                preview = Uri.EMPTY,
+                bucketId = 0L,
+                bucketName = "Pictures",
+                itemsCount = 10,
+                images = emptyList()
+            ),
+            selectedImages = { emptySet() },
+            onNavigateBack = { },
+            onViewImage = { },
+            onEvent = { },
+            adaptiveInfo = currentWindowAdaptiveInfo()
+        )
     }
 }
 
