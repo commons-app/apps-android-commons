@@ -43,6 +43,9 @@ import javax.inject.Singleton
 class ContributionController @Inject constructor(@param:Named("default_preferences") private val defaultKvStore: JsonKvStore) {
     private var locationBeforeImageCapture: LatLng? = null
     private var isInAppCameraUpload = false
+    // Flag to track if an internal upload is in progress.
+    var isInternalUploadInProgress = false
+
     @JvmField
     var locationPermissionCallback: LocationPermissionCallback? = null
     private var locationPermissionsHelper: LocationPermissionsHelper? = null
@@ -350,6 +353,7 @@ class ContributionController @Inject constructor(@param:Named("default_preferenc
         handleActivityResult.onHandleActivityResult(object : DefaultCallback() {
             override fun onCanceled(source: FilePicker.ImageSource, type: Int) {
                 super.onCanceled(source, type)
+                isInternalUploadInProgress = false //resett flag on cancel
                 defaultKvStore.remove(PLACE_OBJECT)
             }
 

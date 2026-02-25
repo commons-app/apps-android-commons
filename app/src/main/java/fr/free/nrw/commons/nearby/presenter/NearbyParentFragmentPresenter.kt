@@ -259,6 +259,18 @@ class NearbyParentFragmentPresenter
             Timber.d("Skipping update of nearby places as location is unavailable")
             return
         }
+        //checks if an upload is in progress
+        if (nearbyController.isInternalUploadInProgress) {
+            //resets the flag and exit early to prevent unnecessary fetchPlaces call
+            nearbyController.isInternalUploadInProgress = false
+            Timber.d("Internal upload in progress, skipping map update")
+            return
+        }
+
+        if (isNearbyLocked) {
+            Timber.d("Nearby is locked, so updateMapAndList returns")
+            return
+        }
 
         /**
          * Significant changed - Markers and current location will be updated together
@@ -725,6 +737,17 @@ class NearbyParentFragmentPresenter
             loadPlacesDataAyncJob?.cancel()
             localPlaceSearchJob = scope.launch(Dispatchers.IO) {
                 delay(LOCAL_SCROLL_DELAY)
+
+                // fix:: retrieve and check map boundaries for nullability.
+                val mapBottomLeft = nearbyParentFragmentView.screenBottomLeft
+                val mapTopRight = nearbyParentFragmentView.screenTopRight
+
+                if (mapBottomLeft == null || mapTopRight == null) {
+                    //gracefull exit:log the error and stop the process.
+                    Timber.d("Map boundaries (screenBottomLeft or screenTopRight) are null, skipping local place search as map state is not ready.")
+                    return@launch // exits the coroutine gracefully, preventing the crash.
+                }
+
                 val mapFocus = nearbyParentFragmentView.mapFocus
                 val markerPlaceGroups = placesRepository.fetchPlaces(
                     nearbyParentFragmentView.screenBottomLeft,
