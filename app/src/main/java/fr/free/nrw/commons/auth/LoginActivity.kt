@@ -257,12 +257,41 @@ class LoginActivity : AccountAuthenticatorActivity() {
             SAVE_PASSWORD,
             binding!!.loginPassword.text.toString()
         ) // Save the password
+        outState.putBoolean(
+            SAVE_TWO_FACTOR_VISIBILITY,
+            binding!!.twoFactorContainer.visibility == View.VISIBLE
+        )
+        outState.putString(
+            SAVE_TWO_FACTOR_CODE,
+            binding!!.loginTwoFactor.text.toString()
+        )
+        val loginResultType = when (lastLoginResult) {
+            is LoginResult.EmailAuthResult -> "EMAIL_AUTH"
+            is LoginResult.OAuthResult -> "2FA"
+            else -> "NONE"
+        }
+        outState.putString(SAVE_LAST_LOGIN_RESULT_TYPE, loginResultType)
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         super.onRestoreInstanceState(savedInstanceState)
         binding!!.loginUsername.setText(savedInstanceState.getString(SAVE_USERNAME))
         binding!!.loginPassword.setText(savedInstanceState.getString(SAVE_PASSWORD))
+        val isTwoFactorVisible = savedInstanceState.getBoolean(SAVE_TWO_FACTOR_VISIBILITY, false)
+        if (isTwoFactorVisible) {
+            binding!!.twoFactorContainer.visibility = View.VISIBLE
+            binding!!.loginTwoFactor.visibility = View.VISIBLE
+            binding!!.loginTwoFactor.setText(savedInstanceState.getString(SAVE_TWO_FACTOR_CODE, ""))
+            val loginResultType = savedInstanceState.getString(SAVE_LAST_LOGIN_RESULT_TYPE, "NONE")
+            lastLoginResult = when (loginResultType) {
+                "EMAIL_AUTH" -> LoginResult.EmailAuthResult("", null, null, null)
+                "2FA" -> LoginResult.OAuthResult("", null, null, null)
+                else -> null
+            }
+            binding!!.twoFactorContainer.hint = getString(
+                if (lastLoginResult is LoginResult.EmailAuthResult) R.string.email_auth_code else R.string._2fa_code
+            )
+        }
         if (savedInstanceState.getBoolean(SAVE_PROGRESS_DIALOG)) {
             performLogin()
         }
@@ -486,5 +515,8 @@ class LoginActivity : AccountAuthenticatorActivity() {
         const val SAVE_ERROR_MESSAGE: String = "errorMessage"
         const val SAVE_USERNAME: String = "username"
         const val SAVE_PASSWORD: String = "password"
+        const val SAVE_TWO_FACTOR_VISIBILITY: String = "twoFactorVisibility"
+        const val SAVE_TWO_FACTOR_CODE: String = "twoFactorCode"
+        const val SAVE_LAST_LOGIN_RESULT_TYPE: String = "lastLoginResultType"
     }
 }
