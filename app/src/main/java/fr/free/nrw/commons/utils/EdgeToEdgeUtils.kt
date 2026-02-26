@@ -3,7 +3,6 @@ package fr.free.nrw.commons.utils
 import android.view.View
 import android.view.ViewGroup.MarginLayoutParams
 import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsAnimationCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.marginBottom
 import androidx.core.view.marginLeft
@@ -14,16 +13,16 @@ import androidx.core.view.updatePadding
 import fr.free.nrw.commons.R
 
 /**
- * Applies edge-to-edge system bar insets to a [View]’s margins using a custom adjustment block.
+ * Applies edge-to-edge insets to a [View]’s margins using a custom adjustment modifier [block].
  *
  * Stores the initial margins to ensure inset calculations are additive, and applies the provided
  * [block] with an [InsetsAccumulator] containing initial and system bar inset values.
  *
- * @param typeMask The type of window insets to apply. Defaults to [WindowInsetsCompat.Type.systemBars].
+ * @param typeMask The type of window insets to apply. Default to [WindowInsetsCompat.Type.systemBars].
  * @param shouldConsumeInsets If `true`, the insets are consumed and not propagated to child views.
  * @param block Lambda applied to update [MarginLayoutParams] using the accumulated insets.
  */
-fun View.applyEdgeToEdgeInsets(
+fun View.applyEdgeToEdgeInsetsAsMargin(
     typeMask: Int = WindowInsetsCompat.Type.systemBars(),
     shouldConsumeInsets: Boolean = true,
     block: MarginLayoutParams.(InsetsAccumulator) -> Unit
@@ -79,23 +78,84 @@ fun View.applyEdgeToEdgeInsets(
 }
 
 /**
- * Applies edge-to-edge system bar insets to the top padding of the view.
+ * Applies edge-to-edge insets to a [View]’s padding using a custom adjustment modifier [block].
+ *
+ * Stores the initial paddings to ensure inset calculations are additive, and applies the provided
+ * [block] with an [InsetsAccumulator] containing initial and system bar inset values.
  *
  * @param typeMask The type of window insets to apply. Defaults to [WindowInsetsCompat.Type.systemBars].
+ * @param shouldConsumeInsets If `true`, the insets are consumed and not propagated to child views.
+ * @param block Lambda applied to update [View]'s padding using the values from [InsetsAccumulator].
  */
-fun View.applyEdgeToEdgeTopPaddingInsets(
+fun View.applyEdgeToEdgeInsetsAsPadding(
     typeMask: Int = WindowInsetsCompat.Type.systemBars(),
+    shouldConsumeInsets: Boolean = true,
+    block: View.(InsetsAccumulator) -> Unit
 ) {
     ViewCompat.setOnApplyWindowInsetsListener(this) { view, windowInsets ->
         val insets = windowInsets.getInsets(typeMask)
 
-        view.updatePadding(
-            left = insets.left,
-            right = insets.right,
-            top = insets.top
+        val initialTop = if (view.getTag(R.id.initial_padding_top) != null) {
+            view.getTag(R.id.initial_padding_top) as Int
+        } else {
+            view.setTag(R.id.initial_padding_top, view.paddingTop)
+            view.paddingTop
+        }
+
+        val initialBottom = if (view.getTag(R.id.initial_padding_bottom) != null) {
+            view.getTag(R.id.initial_padding_bottom) as Int
+        } else {
+            view.setTag(R.id.initial_padding_bottom, view.paddingBottom)
+            view.paddingBottom
+        }
+
+        val initialLeft = if (view.getTag(R.id.initial_padding_left) != null) {
+            view.getTag(R.id.initial_padding_left) as Int
+        } else {
+            view.setTag(R.id.initial_padding_left, view.paddingLeft)
+            view.paddingLeft
+        }
+
+        val initialRight = if (view.getTag(R.id.initial_padding_right) != null) {
+            view.getTag(R.id.initial_padding_right) as Int
+        } else {
+            view.setTag(R.id.initial_padding_right, view.paddingRight)
+            view.paddingRight
+        }
+
+        val accumulator = InsetsAccumulator(
+            initialTop,
+            insets.top,
+            initialBottom,
+            insets.bottom,
+            initialLeft,
+            insets.left,
+            initialRight,
+            insets.right
         )
 
-        WindowInsetsCompat.CONSUMED
+        block(accumulator)
+
+        if(shouldConsumeInsets) WindowInsetsCompat.CONSUMED else windowInsets
+    }
+}
+
+/**
+ * Applies edge-to-edge system bar insets to the top padding of the view.
+ *
+ * @param typeMask The type of window insets to apply. Defaults to [WindowInsetsCompat.Type.systemBars].
+ * @param shouldConsumeInsets If `true`, the insets are consumed and not propagated to child views.
+ */
+fun View.applyEdgeToEdgeTopPaddingInsets(
+    typeMask: Int = WindowInsetsCompat.Type.systemBars(),
+    shouldConsumeInsets: Boolean = true
+) {
+    applyEdgeToEdgeInsetsAsPadding(typeMask, shouldConsumeInsets) { insets ->
+        updatePadding(
+            left = insets.left,
+            top = insets.top,
+            right = insets.right
+        )
     }
 }
 
@@ -103,20 +163,18 @@ fun View.applyEdgeToEdgeTopPaddingInsets(
  * Applies edge-to-edge system bar insets to the bottom padding of the view.
  *
  * @param typeMask The type of window insets to apply. Defaults to [WindowInsetsCompat.Type.systemBars].
+ * @param shouldConsumeInsets If `true`, the insets are consumed and not propagated to child views.
  */
 fun View.applyEdgeToEdgeBottomPaddingInsets(
     typeMask: Int = WindowInsetsCompat.Type.systemBars(),
+    shouldConsumeInsets: Boolean = true
 ) {
-    ViewCompat.setOnApplyWindowInsetsListener(this) { view, windowInsets ->
-        val insets = windowInsets.getInsets(typeMask)
-
-        view.updatePadding(
+    applyEdgeToEdgeInsetsAsPadding(typeMask, shouldConsumeInsets) { insets ->
+        updatePadding(
             left = insets.left,
             right = insets.right,
             bottom = insets.bottom
         )
-
-        WindowInsetsCompat.CONSUMED
     }
 }
 
@@ -129,7 +187,7 @@ fun View.applyEdgeToEdgeBottomPaddingInsets(
 fun applyEdgeToEdgeAllInsets(
     view: View,
     shouldConsumeInsets: Boolean = true
-) = view.applyEdgeToEdgeInsets(shouldConsumeInsets = shouldConsumeInsets) { insets ->
+) = view.applyEdgeToEdgeInsetsAsMargin(shouldConsumeInsets = shouldConsumeInsets) { insets ->
     leftMargin = insets.left
     rightMargin = insets.right
     topMargin = insets.top
@@ -141,7 +199,7 @@ fun applyEdgeToEdgeAllInsets(
  *
  * @param view The target view.
  */
-fun applyEdgeToEdgeTopInsets(view: View) = view.applyEdgeToEdgeInsets { insets ->
+fun applyEdgeToEdgeTopInsets(view: View) = view.applyEdgeToEdgeInsetsAsMargin { insets ->
     leftMargin = insets.left
     rightMargin = insets.right
     topMargin = insets.top
@@ -152,7 +210,10 @@ fun applyEdgeToEdgeTopInsets(view: View) = view.applyEdgeToEdgeInsets { insets -
  *
  * @param view The target view.
  */
-fun applyEdgeToEdgeBottomInsets(view: View) = view.applyEdgeToEdgeInsets { insets ->
+fun applyEdgeToEdgeBottomInsets(
+    view: View,
+    shouldConsumeInsets: Boolean = true
+) = view.applyEdgeToEdgeInsetsAsMargin(shouldConsumeInsets = shouldConsumeInsets) { insets ->
     leftMargin = insets.left
     rightMargin = insets.right
     bottomMargin = insets.bottom

@@ -1,47 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:tools="http://schemas.android.com/tools"
+  android:orientation="vertical"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  android:layout_gravity="bottom"
-  android:fitsSystemWindows="true"
-  tools:context=".edit.EditActivity"
-  android:gravity="center"
-  android:layout_margin="2dp"
-  android:orientation="vertical">
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  tools:context=".edit.EditActivity" >
 
-  <ImageView
-    android:id="@+id/iv"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_gravity="center"
-     />
-  <LinearLayout
-    android:elevation="2dp"
-    android:gravity="center"
-    android:orientation="horizontal"
-    android:layout_gravity="bottom|center"
+  <androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/topBar"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="2dp">
+    android:background="@color/primaryColor"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:paddingHorizontal="12dp"
+    android:paddingVertical="8dp" >
 
-    <androidx.appcompat.widget.AppCompatButton
-      android:drawablePadding="4dp"
-      android:drawableStart="@drawable/baseline_rotate_right"
-      android:id="@+id/rotate_btn"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:textColor="@android:color/white"
-      android:text="@string/rotate"/>
+    <ImageView
+      android:id="@+id/btnBack"
+      android:layout_width="24dp"
+      android:layout_height="24dp"
+      android:contentDescription="@string/back"
+      android:src="@drawable/ic_arrow_back"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      app:tint="@color/white" />
 
-    <androidx.appcompat.widget.AppCompatButton
-      android:onClick="getRotatedImage"
-      android:drawablePadding="4dp"
-      android:drawableStart="@drawable/baseline_save_24"
-      android:id="@+id/btn_save"
-      android:layout_width="wrap_content"
+    <TextView
+      android:id="@+id/selection_count"
+      style="@style/TextAppearance.AppCompat.Small"
+      android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:text="@string/menu_save_categories"
-      android:textColor="@android:color/white" />
-  </LinearLayout>
-</FrameLayout>
+      android:text="@string/edit_image"
+      android:textAlignment="center"
+      android:textColor="@color/white"
+      android:textSize="@dimen/subheading_text_size"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent" />
+  </androidx.constraintlayout.widget.ConstraintLayout>
+
+  <androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <ImageView
+      android:id="@+id/iv"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      android:layout_gravity="center" />
+
+    <LinearLayout
+      android:id="@+id/linearLayout"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_margin="2dp"
+      android:elevation="2dp"
+      android:gravity="center"
+      android:orientation="horizontal"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent">
+
+      <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/rotate_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableStart="@drawable/baseline_rotate_right"
+        android:drawablePadding="4dp"
+        android:text="@string/rotate"
+        android:textColor="@android:color/white" />
+
+      <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_save"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableStart="@drawable/baseline_save_24"
+        android:drawablePadding="4dp"
+        android:onClick="getRotatedImage"
+        android:text="@string/menu_save_categories"
+        android:textColor="@android:color/white" />
+    </LinearLayout>
+
+  </androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

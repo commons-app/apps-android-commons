@@ -2,4 +2,7 @@
 <resources>
   <color name="primaryColor">#1e8cab</color>
   <color name="primaryDarkColor">#1e8cab</color>
+  <color name="background">#000000</color>
+  <color name="onBackground">#ffffff</color>
+  <color name="scrim">#50000000</color>
 </resources>

@@ -23,6 +23,9 @@
     <color name="secondaryLightColor">#ffbc46</color>
     <color name="primaryTextColor">#ffffff</color>
     <color name="secondaryTextColor">#000000</color>
+    <color name="background">#ffffff</color>
+    <color name="onBackground">#000000</color>
+    <color name="scrim">#f2ffffff</color>
 
     <color name="deleteRed">#D32F2F</color>
     <color name="deleteRedDark">#90960a0a</color>
