@@ -3,6 +3,7 @@ package fr.free.nrw.commons.edit
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Color
+import org.junit.Assert.assertArrayEquals
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Rule
@@ -41,59 +42,6 @@ class TransformImageTest {
         return BitmapFactory.decodeFile(file.absolutePath)
             ?: throw AssertionError("Failed to decode bitmap from ${file.name}")
     }
-    private fun getAverageColor(bmp: Bitmap, centerX: Int, centerY: Int, radius: Int = 25): Int {
-        var rSum = 0L
-        var gSum = 0L
-        var bSum = 0L
-        var count = 0
-
-        val startX = (centerX - radius).coerceAtLeast(0)
-        val endX = (centerX + radius).coerceAtMost(bmp.width - 1)
-        val startY = (centerY - radius).coerceAtLeast(0)
-        val endY = (centerY + radius).coerceAtMost(bmp.height - 1)
-
-        for (x in startX..endX) {
-            for (y in startY..endY) {
-                val color = bmp.getPixel(x, y)
-                rSum += Color.red(color)
-                gSum += Color.green(color)
-                bSum += Color.blue(color)
-                count++
-            }
-        }
-
-        return Color.rgb((rSum / count).toInt(), (gSum / count).toInt(), (bSum / count).toInt())
-    }
-    private fun assertColorsMatch(expected: Int, actual: Int, tolerance: Int = 10) {
-        val rExp = Color.red(expected)
-        val gExp = Color.green(expected)
-        val bExp = Color.blue(expected)
-
-        val rAct = Color.red(actual)
-        val gAct = Color.green(actual)
-        val bAct = Color.blue(actual)
-
-        // calculatee the uniform brightness shift across all the channels
-        val shift = ((rAct - rExp) + (gAct - gExp) + (bAct - bExp)) / 3
-
-        // normalise the actual colors by removing the the brightness shift
-        val rNorm = rAct - shift
-        val gNorm = gAct - shift
-        val bNorm = bAct - shift
-
-        val rDiff = abs(rExp - rNorm)
-        val gDiff = abs(gExp - gNorm)
-        val bDiff = abs(bExp - bNorm)
-
-        if (rDiff > tolerance || gDiff > tolerance || bDiff > tolerance) {
-            throw AssertionError(
-                "Colors do not match within strict tolerance of $tolerance.\n" +
-                        "Expected RGB($rExp, $gExp, $bExp)\n" +
-                        "Actual RGB($rAct, $gAct, $bAct)\n" +
-                        "(Note: A uniform brightness shift of $shift was detected and normalized)"
-            )
-        }
-    }
 
     private fun assertRotationWorked(originalFile: File, rotatedFile: File, rotationDegrees: Int) {
         val origBmp = decodeBitmap(originalFile)
@@ -101,19 +49,6 @@ class TransformImageTest {
 
         val w = origBmp.width
         val h = origBmp.height
-
-        val testX = w / 4
-        val testY = h / 4
-
-        val expectedColor = getAverageColor(origBmp, testX, testY)
-
-        val (expectedX, expectedY) = when (rotationDegrees % 360) {
-            90 -> Pair(h - testY - 1, testX)
-            180 -> Pair(w - testX - 1, h - testY - 1)
-            270 -> Pair(testY, w - testX - 1)
-            0 -> Pair(testX, testY)
-            else -> throw IllegalArgumentException("Unsupported rotation: $rotationDegrees")
-        }
 
         if (rotationDegrees % 180 != 0) {
             assertEquals("Width/height should be swapped", h, rotBmp.width)
@@ -123,30 +58,36 @@ class TransformImageTest {
             assertEquals("Dimensions should remain the same", h, rotBmp.height)
         }
 
-        val actualColor = getAverageColor(rotBmp, expectedX, expectedY)
-        try {
-            assertColorsMatch(expectedColor, actualColor)
-        } catch (e: AssertionError) {
-            throw AssertionError(
-                "Region failed to map from ($testX, $testY) to ($expectedX, $expectedY) for $rotationDegrees degrees.\n${e.message}"
-            )
+        // check a single pixel to ensure the rotation worked accurately
+        val testX = w / 4
+        val testY = h / 4
+
+        val expectedColor = origBmp.getPixel(testX, testY)
+
+        val (expectedX, expectedY) = when (rotationDegrees % 360) {
+            90 -> Pair(h - testY - 1, testX)
+            180 -> Pair(w - testX - 1, h - testY - 1)
+            270 -> Pair(testY, w - testX - 1)
+            0 -> Pair(testX, testY)
+            else -> throw IllegalArgumentException("Unsupported rotation: $rotationDegrees")
         }
+
+        val actualColor = rotBmp.getPixel(expectedX, expectedY)
+        assertEquals(
+            "pixel color at the ($testX, $testY) must exactly match rotated position ($expectedX, $expectedY)",
+            expectedColor,
+            actualColor
+        )
     }
 
     private fun assertImagesAreIdentical(originalFile: File, finalFile: File) {
-        val origBmp = decodeBitmap(originalFile)
-        val finalBmp = decodeBitmap(finalFile)
+        val origBytes = originalFile.readBytes()
+        val finalBytes = finalFile.readBytes()
 
-        assertEquals("Widths must match exactly", origBmp.width, finalBmp.width)
-        assertEquals("Heights must match exactly", origBmp.height, finalBmp.height)
-
-        val testX = origBmp.width / 4
-        val testY = origBmp.height / 4
-
-        assertColorsMatch(
-            getAverageColor(origBmp, testX, testY),
-            getAverageColor(finalBmp, testX, testY),
-            tolerance = 10
+        assertArrayEquals(
+            "The two files must be exactly equal byte-for-byte",
+            origBytes,
+            finalBytes
         )
     }
     @Ignore("Disabled due to ICC Color Profile brightness shift during rotation. see issue https://github.com/commons-app/apps-android-commons/issues/6659 ")
