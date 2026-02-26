@@ -341,6 +341,7 @@ class NearbyParentFragmentPresenter
 
                 updatedGroups[i].place.apply {
                     name = repoPlace.name
+                    label = repoPlace.label
                     isMonument = repoPlace.isMonument
                     pic = repoPlace.pic ?: ""
                     exists = repoPlace.exists ?: true
