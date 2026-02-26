@@ -5,6 +5,8 @@ on:
     types: [opened, synchronize]
 
 permissions:
+  contents: read
+  issues: write
   pull-requests: write
   models: read
 
@@ -17,19 +19,45 @@ jobs:
         uses: actions/ai-inference@v1
         id: analyze
         with:
+          model: openai/gpt-4o-mini
+          max-tokens: 10
           prompt: |
             Analyse this pull request to determine if it contains unrelated changes.
             A pull request should modify only the code that really needs to be modified to solve the issue at hand. Changes unrelated to the issue at hand can be made in other pull requests.
-            
-            Examples of changes that are not acceptable:
+
+            Definitions:
+            - "Related changes" are modifications that all contribute to solving a single issue, bug fix, or feature request.
+            - "Unrelated changes" are modifications that could be cleanly split into separate pull requests without affecting each other or the main fix.
+
+            Examples of unrelated changes:
             * Fixing indentation or formatting in unrelated files or in unrelated parts of a file.
             * Adding or removing unrelated comments.
-            
+            * Refactoring code in modules unrelated to the described issue/feature.
+            * Mixing UI changes with unrelated backend or configuration changes.
+            * Updating dependencies or libraries that are not directly related to the issue/feature being addressed.
+
+            Examples of related changes:
+            * Fixing multiple bugs that are part of the same feature or module.
+            * Implementing a feature that requires changes across multiple files or components.
+            * Refactoring code that is directly related to the issue being fixed.
+
+            Now, based on the title and description of the pull request below, determine if it contains unrelated changes.
+
             Pull Request Title: ${{ github.event.pull_request.title }}
             Pull Request Description: ${{ github.event.pull_request.body }}
-            
-            Does this pull request appear to mix unrelated changes? Respond with only "yes" or "no".
-          model: openai/gpt-4o-mini
+
+            Question:
+            Does this pull request appear to mix unrelated changes?
+
+            Your entire response MUST be exactly one of the following tokens:
+            - yes
+            - no
+
+            Requirements:
+            * Use lowercase only.
+            * No punctuation.
+            * No explanations.
+            * No additional text.
 
       # If unrelated changes detected, remind contributor of guidelines
       - name: Comment if unrelated changes detected
