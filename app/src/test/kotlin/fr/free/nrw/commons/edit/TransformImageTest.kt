@@ -2,7 +2,6 @@ package fr.free.nrw.commons.edit
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.graphics.Color
 import org.junit.Assert.assertArrayEquals
 import org.junit.Assert.assertEquals
 import org.junit.Before
@@ -13,7 +12,6 @@ import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
 import java.io.File
 import java.io.FileOutputStream
-import kotlin.math.abs
 import org.junit.Ignore
 
 @RunWith(RobolectricTestRunner::class)
