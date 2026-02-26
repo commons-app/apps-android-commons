@@ -36,7 +36,7 @@ class EditActivity : AppCompatActivity() {
     private lateinit var vm: EditViewModel
     private val sourceExifAttributeList = mutableListOf<Pair<String, String?>>()
     private lateinit var binding: ActivityEditBinding
-    // variablee to store the initial exif orientation
+    // variable to store the initial exif orientation
     private var startOrientation = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -61,7 +61,7 @@ class EditActivity : AppCompatActivity() {
             }
         }
 
-        // exttracts the initial orientation
+        // extracts the initial orientation
         val orientation = sourceExif?.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL)
         startOrientation = when (orientation) {
             ExifInterface.ORIENTATION_ROTATE_90 -> 90
@@ -158,7 +158,7 @@ class EditActivity : AppCompatActivity() {
                 }
 
                 binding.iv.layoutParams.height = viewHeight
-                // rotate around around center of the bitmap
+                // rotate around center of the bitmap
                 matrix.postRotate(startOrientation.toFloat(), bmpWidth / 2, bmpHeight / 2)
                 matrix.postScale(scale, scale, bmpWidth / 2, bmpHeight / 2)
                 val bmpCenterX = bmpWidth / 2
@@ -205,7 +205,7 @@ class EditActivity : AppCompatActivity() {
         val viewHeight: Float = binding.iv.measuredHeight.toFloat()
         val rotation = imageRotation % 360
         val newRotation = rotation + 90
-        // fix:if the the user taps "save" before the animation finishes, it will save the new rotation.
+        // if the the user taps "save" before the animation finishes, it will save the new rotation.
         imageRotation = newRotation % 360
 
         val newViewHeight: Int
