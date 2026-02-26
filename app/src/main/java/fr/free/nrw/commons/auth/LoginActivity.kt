@@ -237,6 +237,7 @@ class LoginActivity : AccountAuthenticatorActivity() {
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
         // if progressDialog is visible during the configuration change  then store state as  true else false so that
         // we maintain visibility of progressDialog after configuration change
         if (progressDialog != null && progressDialog!!.isShowing) {
