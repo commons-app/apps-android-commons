@@ -602,7 +602,7 @@ class UploadMediaDetailFragment : UploadBaseFragment(), UploadMediaDetailsContra
         val intent = Intent(context, EditActivity::class.java)
         //used the mediaUri from the uploadItem.
         //now, if the image is edited, uploadItem.mediaUri points to the new rotated file.
-        //if it is not edited edited, it points to the original.
+        //if it is not edited, it points to the original.
         val currentPath = uploadItem.mediaUri?.path ?: uploadableFile?.getFilePath().toString()
         intent.putExtra("image", currentPath)
         startForEditActivityResult.launch(intent)
