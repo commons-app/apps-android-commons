@@ -1,3 +1,4 @@
+import org.gradle.kotlin.dsl.implementation
 import java.util.Properties
 import java.io.ByteArrayOutputStream
 
@@ -238,6 +239,13 @@ dependencies {
     implementation(libs.dexter)
 
     // Jetpack Compose
+    implementation(libs.androidx.adaptive)
+    implementation(libs.androidx.adaptive.layout.android)
+    implementation(libs.androidx.adaptive.navigation.android)
+
+    implementation(libs.coil.compose)
+    implementation(libs.androidx.navigation.compose)
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)

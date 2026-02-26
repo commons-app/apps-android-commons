@@ -1,8 +1,8 @@
 package fr.free.nrw.commons.customselector.helper
 
 import android.net.Uri
-import fr.free.nrw.commons.customselector.model.Folder
-import fr.free.nrw.commons.customselector.model.Image
+import fr.free.nrw.commons.customselector.domain.model.Folder
+import fr.free.nrw.commons.customselector.domain.model.Image
 import org.junit.Test
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.mockito.Mockito.mock

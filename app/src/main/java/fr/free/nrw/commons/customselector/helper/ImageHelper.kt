@@ -1,7 +1,7 @@
 package fr.free.nrw.commons.customselector.helper
 
-import fr.free.nrw.commons.customselector.model.Folder
-import fr.free.nrw.commons.customselector.model.Image
+import fr.free.nrw.commons.customselector.domain.model.Folder
+import fr.free.nrw.commons.customselector.domain.model.Image
 
 /**
  * Image Helper object, includes all the static functions and variables required by custom selector.
