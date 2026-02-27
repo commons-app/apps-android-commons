@@ -27,6 +27,7 @@ import fr.free.nrw.commons.R
 import fr.free.nrw.commons.auth.LoginActivity
 import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.contributions.ContributionController
+import fr.free.nrw.commons.customselector.helper.CustomSelectorConstants.MAX_IMAGE_COUNT
 import fr.free.nrw.commons.databinding.ActivityUploadBinding
 import fr.free.nrw.commons.filepicker.Constants.RequestCodes
 import fr.free.nrw.commons.filepicker.UploadableFile
@@ -723,13 +724,20 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
     }
 
     private fun receiveExternalSharedItems() {
-        uploadableFiles = contributionController!!.handleExternalImagesPicked(this, intent).toMutableList()
+        val externalFiles = contributionController!!.handleExternalImagesPicked(this, intent)
+        // enforce the limit for the external sharing of the file
+        uploadableFiles = if (externalFiles.size > MAX_IMAGE_COUNT) {
+            showLongToast(this, getString(R.string.upload_limit_exceeded, MAX_IMAGE_COUNT))
+            externalFiles.take(MAX_IMAGE_COUNT).toMutableList()
+        } else {
+            externalFiles.toMutableList()
+        }
     }
 
     private fun receiveInternalSharedItems() {
         val intent = intent
         Timber.d("Intent has EXTRA_FILES: ${EXTRA_FILES}")
-        uploadableFiles = try {
+        val parsedFiles = try {
             // Check if intent has the extra before trying to read it
             if (!intent.hasExtra(EXTRA_FILES)) {
                 Timber.w("No EXTRA_FILES found in intent")
@@ -754,7 +762,13 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
             mutableListOf()
         }
 
-        // Log the result for debugging
+        // trim the list if it exceeds the MAX_IMAGE_COUNT
+        uploadableFiles = if (parsedFiles.size > MAX_IMAGE_COUNT) {
+            showLongToast(this, getString(R.string.upload_limit_exceeded, MAX_IMAGE_COUNT))
+            parsedFiles.take(MAX_IMAGE_COUNT).toMutableList()
+        } else {
+            parsedFiles
+        }
         isMultipleFilesSelected = uploadableFiles.size > 1
         Timber.i("Received files count: ${uploadableFiles.size}")
         uploadableFiles.forEachIndexed { index, file ->
