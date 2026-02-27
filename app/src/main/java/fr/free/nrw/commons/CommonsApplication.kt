@@ -115,16 +115,20 @@ class CommonsApplication : MultiDexApplication() {
             defaultPrefs.putStringSet(Prefs.MANAGED_EXIF_TAGS, defaultExifTagsSet)
         }
 
-        //        Set DownsampleEnabled to True to downsample the image in case it's heavy
+        // Set DownsampleEnabled to True to downsample the image in case it's heavy
         val config = ImagePipelineConfig.newBuilder(this)
             .setNetworkFetcher(customOkHttpNetworkFetcher)
             .setDownsampleEnabled(true)
             .build()
-        try {
-            Fresco.initialize(this, config)
-        } catch (e: Exception) {
-            Timber.e(e)
-            // TODO: Remove when we're able to initialize Fresco in test builds.
+
+        if ("robolectric" != android.os.Build.FINGERPRINT) {
+            try {
+                Fresco.initialize(this, config)
+            } catch (e: Exception) {
+                Timber.e(e)
+            }
+        } else {
+            Timber.d("Skipping Fresco initialization in Robolectric test builds.")
         }
 
         createNotificationChannel(this)
@@ -215,8 +219,22 @@ class CommonsApplication : MultiDexApplication() {
             .andThen(Completable.fromAction {
                 Timber.d("All accounts have been removed")
                 clearImageCache()
-                //TODO: fix preference manager
+
+                //fix:capture the preferences that should survive a logout/data clear
+                val currentTheme = defaultPrefs.getString(Prefs.KEY_THEME_VALUE)
+                val currentLanguage = defaultPrefs.getString(Prefs.APP_UI_LANGUAGE)
+
+                // Clear the preference manager
                 defaultPrefs.clearAll()
+
+                //restore non-account-specific ui settings
+                if (currentTheme != null) {
+                    defaultPrefs.putString(Prefs.KEY_THEME_VALUE, currentTheme)
+                }
+                if (currentLanguage != null) {
+                    defaultPrefs.putString(Prefs.APP_UI_LANGUAGE, currentLanguage)
+                }
+
                 defaultPrefs.putBoolean("firstrun", false)
                 updateAllDatabases()
             })
