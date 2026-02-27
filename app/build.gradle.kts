@@ -229,6 +229,7 @@ dependencies {
 
     // UI
     implementation("${libs.viewpagerindicator.library.get()}@aar")
+    implementation(libs.viewpager2indicator)
     implementation(libs.photoview)
     implementation(libs.android.sdk)
     implementation(libs.android.plugin.scalebar)
