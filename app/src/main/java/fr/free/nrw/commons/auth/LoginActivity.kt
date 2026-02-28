@@ -43,6 +43,10 @@ import fr.free.nrw.commons.utils.handleKeyboardInsets
 import fr.free.nrw.commons.utils.handleWebUrl
 import io.reactivex.disposables.CompositeDisposable
 import timber.log.Timber
+import java.net.ConnectException
+import java.net.SocketException
+import java.net.SocketTimeoutException
+import java.net.UnknownHostException
 import java.util.Locale
 import javax.inject.Inject
 import javax.inject.Named
@@ -132,6 +136,16 @@ class LoginActivity : AccountAuthenticatorActivity() {
             intent.getStringExtra(CommonsApplication.LOGIN_USERNAME_INTENT_KEY)?.let {
                 loginUsername.setText(it)
             }
+        }
+    }
+    private fun getFriendlyErrorMessage(caught: Throwable): String {
+        return if (caught is UnknownHostException ||
+                   caught is ConnectException ||
+                   caught is SocketTimeoutException ||
+                   caught is SocketException) {
+            getString(R.string.login_failed_network)
+        } else {
+            caught.localizedMessage ?: getString(R.string.login_failed_generic)
         }
     }
 
@@ -361,7 +375,8 @@ class LoginActivity : AccountAuthenticatorActivity() {
                 override fun error(caught: Throwable) = runOnUiThread {
                     Timber.e(caught)
                     progressDialog!!.dismiss()
-                    showMessageAndCancelDialog(caught.localizedMessage ?: "")
+                    val friendlyMessage = getFriendlyErrorMessage(caught)
+                    showMessageAndCancelDialog(friendlyMessage)
                 }
             }
         )

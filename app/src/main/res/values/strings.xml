@@ -21,6 +21,7 @@
   <string name="nearby_filter_toggle">Toggle Up</string>
   <string name="nearby_filter_search">Search View</string>
   <string name="nearby_filter_state">Place State</string>
+  <string name="no_internet_connection">No internet connection. Please check your network and try again.</string>
   <string name="appwidget_img">Pic of the Day</string>
 
   <!--Other strings-->
