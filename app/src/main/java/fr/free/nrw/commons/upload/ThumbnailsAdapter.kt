@@ -6,8 +6,10 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.RelativeLayout
+import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
 import com.facebook.drawee.view.SimpleDraweeView
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.databinding.ItemUploadThumbnailBinding
@@ -50,7 +52,15 @@ internal class ThumbnailsAdapter(private val callback: Callback) :
         fun bind(position: Int) {
             val uploadableFile = uploadableFiles[position]
             val uri = uploadableFile.getMediaUri()
-            background.setImageURI(Uri.fromFile(File(uri.toString())))
+            if (uri.toString().substringBefore("?").endsWith(".svg", ignoreCase = true)) {
+                 background.visibility = View.GONE
+                 binding.ivThumbnailSvg.visibility = View.VISIBLE
+                 binding.ivThumbnailSvg.load(uri)
+            } else {
+                 background.visibility = View.VISIBLE
+                 binding.ivThumbnailSvg.visibility = View.GONE
+                 background.setImageURI(Uri.fromFile(File(uri.toString())))
+            }
             if (position == callback.getCurrentSelectedFilePosition()) {
                 val border = GradientDrawable()
                 border.shape = GradientDrawable.RECTANGLE

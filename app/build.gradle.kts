@@ -355,6 +355,10 @@ dependencies {
     kaptTest(libs.androidx.databinding.compiler)
     kaptAndroidTest(libs.androidx.databinding.compiler)
 
+    // Coil
+    implementation(libs.coil)
+    implementation(libs.coil.svg)
+
     implementation(libs.coordinates2country.android) {
         exclude(group = "com.google.android", module = "android")
     }

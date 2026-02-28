@@ -16,6 +16,7 @@ import androidx.core.graphics.scaleMatrix
 import androidx.core.net.toUri
 import androidx.exifinterface.media.ExifInterface
 import androidx.lifecycle.ViewModelProvider
+import coil.load
 import fr.free.nrw.commons.databinding.ActivityEditBinding
 import timber.log.Timber
 import java.io.File
@@ -76,6 +77,11 @@ class EditActivity : AppCompatActivity() {
             sourceExifAttributeList.add(Pair(tag.toString(), attribute))
         }
 
+        if (imageUri.substringBefore("?").endsWith(".svg", ignoreCase = true)) {
+            Toast.makeText(this, "SVG files cannot be edited", Toast.LENGTH_SHORT).show()
+            finish()
+            return
+        }
         init()
     }
 
@@ -89,34 +95,45 @@ class EditActivity : AppCompatActivity() {
     private fun init() {
         binding.iv.adjustViewBounds = true
         binding.iv.scaleType = ImageView.ScaleType.MATRIX
-        binding.iv.post {
-            val options = BitmapFactory.Options()
-            options.inJustDecodeBounds = true
-            BitmapFactory.decodeFile(imageUri, options)
+        if (imageUri.substringBefore("?").endsWith(".svg", ignoreCase = true)) {
+            binding.rotateBtn.isEnabled = false
+            binding.iv.load(imageUri) {
+                listener(
+                    onSuccess = { _, result ->
+                        val drawable = result.drawable
+                        val scale = binding.iv.measuredWidth.toFloat() / drawable.intrinsicWidth.toFloat()
+                        binding.iv.layoutParams.height = (scale * drawable.intrinsicHeight).toInt()
+                        binding.iv.imageMatrix = scaleMatrix(scale, scale)
+                    }
+                )
+            }
+        } else {
+            binding.iv.post {
+                val options = BitmapFactory.Options()
+                options.inJustDecodeBounds = true
+                BitmapFactory.decodeFile(imageUri, options)
 
-            val bitmapWidth = options.outWidth
-            val bitmapHeight = options.outHeight
+                val bitmapWidth = options.outWidth
+                val bitmapHeight = options.outHeight
+                val maxBitmapSize = 2000
+                if (bitmapWidth > maxBitmapSize || bitmapHeight > maxBitmapSize) {
+                    val scaleFactor = calculateScaleFactor(bitmapWidth, bitmapHeight, maxBitmapSize)
+                    options.inSampleSize = scaleFactor
+                    options.inJustDecodeBounds = false
+                    val scaledBitmap = BitmapFactory.decodeFile(imageUri, options)
+                    binding.iv.setImageBitmap(scaledBitmap)
+                    val scale = binding.iv.measuredWidth.toFloat() / scaledBitmap.width.toFloat()
+                    binding.iv.layoutParams.height = (scale * scaledBitmap.height).toInt()
+                    binding.iv.imageMatrix = scaleMatrix(scale, scale)
+                } else {
+                    options.inJustDecodeBounds = false
+                    val bitmap = BitmapFactory.decodeFile(imageUri, options)
+                    binding.iv.setImageBitmap(bitmap)
 
-            // Check if the bitmap dimensions exceed a certain threshold
-            val maxBitmapSize = 2000 // Set your maximum size here
-            if (bitmapWidth > maxBitmapSize || bitmapHeight > maxBitmapSize) {
-                val scaleFactor = calculateScaleFactor(bitmapWidth, bitmapHeight, maxBitmapSize)
-                options.inSampleSize = scaleFactor
-                options.inJustDecodeBounds = false
-                val scaledBitmap = BitmapFactory.decodeFile(imageUri, options)
-                binding.iv.setImageBitmap(scaledBitmap)
-                // Update the ImageView with the scaled bitmap
-                val scale = binding.iv.measuredWidth.toFloat() / scaledBitmap.width.toFloat()
-                binding.iv.layoutParams.height = (scale * scaledBitmap.height).toInt()
-                binding.iv.imageMatrix = scaleMatrix(scale, scale)
-            } else {
-                options.inJustDecodeBounds = false
-                val bitmap = BitmapFactory.decodeFile(imageUri, options)
-                binding.iv.setImageBitmap(bitmap)
-
-                val scale = binding.iv.measuredWidth.toFloat() / bitmapWidth.toFloat()
-                binding.iv.layoutParams.height = (scale * bitmapHeight).toInt()
-                binding.iv.imageMatrix = scaleMatrix(scale, scale)
+                    val scale = binding.iv.measuredWidth.toFloat() / bitmapWidth.toFloat()
+                    binding.iv.layoutParams.height = (scale * bitmapHeight).toInt()
+                    binding.iv.imageMatrix = scaleMatrix(scale, scale)
+                }
             }
         }
         binding.rotateBtn.setOnClickListener {

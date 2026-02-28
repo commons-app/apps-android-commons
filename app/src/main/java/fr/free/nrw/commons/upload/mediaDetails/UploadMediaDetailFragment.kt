@@ -20,7 +20,9 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.exifinterface.media.ExifInterface
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import coil.load
 import com.github.chrisbanes.photoview.PhotoView
 import fr.free.nrw.commons.CameraPosition
 import fr.free.nrw.commons.R
@@ -52,6 +54,9 @@ import fr.free.nrw.commons.utils.ImageUtils.getErrorMessageForResult
 import fr.free.nrw.commons.utils.NetworkUtils.isInternetConnectionEstablished
 import fr.free.nrw.commons.utils.ViewUtil.showLongToast
 import fr.free.nrw.commons.utils.handleKeyboardInsets
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import timber.log.Timber
 import java.io.File
 import java.util.ArrayList
@@ -278,8 +283,11 @@ class UploadMediaDetailFragment : UploadBaseFragment(), UploadMediaDetailsContra
                     View.VISIBLE
                 }
 
-            // lljtran only supports lossless JPEG rotation, so we disable editing for other formatts
             val filePath = uploadableFile?.getFilePath()?.toString() ?: ""
+            val isSvgFile = filePath.endsWith(".svg", ignoreCase = true) ||
+                    uploadItem?.mediaUri?.toString()?.substringBefore("?")?.endsWith(".svg", ignoreCase = true) == true
+            llEditImage.visibility = if (isSvgFile) View.GONE else View.VISIBLE
+            // lljtran only supports lossless JPEG rotation, so we disable editing for other formatts
             val isJpeg = filePath.endsWith(".jpeg", ignoreCase = true)
                     || filePath.endsWith(".jpg", ignoreCase = true)
             llEditImage.visibility = if (isJpeg) View.VISIBLE else View.GONE
@@ -368,7 +376,12 @@ class UploadMediaDetailFragment : UploadBaseFragment(), UploadMediaDetailsContra
         if (_binding == null) {
             return
         }
-        binding.backgroundImage.setImageURI(uploadItem.mediaUri)
+        val mediaUri = uploadItem.mediaUri
+        if (mediaUri != null && mediaUri.toString().substringBefore("?").endsWith(".svg", ignoreCase = true)) {
+            binding.backgroundImage.load(mediaUri)
+        } else {
+            binding.backgroundImage.setImageURI(mediaUri)
+        }
     }
 
     override fun onNearbyPlaceFound(
