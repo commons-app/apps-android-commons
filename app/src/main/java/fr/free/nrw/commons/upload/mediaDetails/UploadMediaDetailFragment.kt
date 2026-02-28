@@ -902,10 +902,6 @@ class UploadMediaDetailFragment : UploadBaseFragment(), UploadMediaDetailsContra
         if (uploadableFile != null) {
             outState.putParcelable(UPLOADABLE_FILE, uploadableFile)
         }
-        outState.putParcelableArrayList(
-            UPLOAD_MEDIA_DETAILS,
-            ArrayList(uploadMediaDetailAdapter.items)
-        )
     }
 
     override fun onDestroy() {
