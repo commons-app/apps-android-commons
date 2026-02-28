@@ -247,6 +247,9 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
         null
     private var isAdvancedQueryFragmentVisible = false
     private var nearestPlace: Place? = null
+    private var isFilterListVisible = false
+    private var filterSearchQuery: String? = null
+    private var isSearchViewFocused = false
 
     @Volatile
     private var stopQuery = false
@@ -888,15 +891,18 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
             clearFocus()
         }
         binding!!.nearbyFilter.searchViewLayout.searchView.setOnQueryTextFocusChangeListener { v, hasFocus ->
+            isSearchViewFocused = hasFocus
             setLayoutHeightAlignedToWidth(
                 1.25,
                 binding!!.nearbyFilterList.root
             )
             if (hasFocus) {
                 binding!!.nearbyFilterList.root.visibility = View.VISIBLE
+                isFilterListVisible = true
                 presenter!!.searchViewGainedFocus()
             } else {
                 binding!!.nearbyFilterList.root.visibility = View.GONE
+                isFilterListVisible = false
             }
         }
         binding!!.nearbyFilterList.searchListView.setHasFixedSize(true)
@@ -938,12 +944,16 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
         ).toInt()
         binding!!.nearbyFilterList.searchListView.adapter = nearbyFilterSearchRecyclerViewAdapter
         setLayoutHeightAlignedToWidth(1.25, binding!!.nearbyFilterList.root)
+
+        restoreFilterState()
+
         compositeDisposable.add(
             binding!!.nearbyFilter.searchViewLayout.searchView.queryTextChanges()
                 .takeUntil(RxView.detaches(binding!!.nearbyFilter.searchViewLayout.searchView))
                 .debounce(500, TimeUnit.MILLISECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe { query: CharSequence ->
+                    filterSearchQuery = query.toString()
                     (binding!!.nearbyFilterList.searchListView.adapter as NearbyFilterSearchRecyclerViewAdapter).filter
                         .filter(query.toString())
                 })
@@ -2952,6 +2962,63 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
         if (gridLayoutManager != null) {
             gridLayoutManager!!.spanCount = spanCount
         }
+        saveFilterState()
+    }
+
+    /**
+     * Saves the Place type filter UI state to the provided Bundle.
+     * This is called during configuration changes to persist the state.
+     */
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        saveFilterState()
+        outState.putBoolean(KEY_FILTER_LIST_VISIBLE, isFilterListVisible)
+        outState.putString(KEY_FILTER_SEARCH_QUERY, filterSearchQuery)
+        outState.putBoolean(KEY_SEARCH_VIEW_FOCUSED, isSearchViewFocused)
+    }
+
+    /**
+     * Restores the Place type filter UI state from the provided Bundle.
+     * This is called after configuration changes to restore the state.
+     */
+    override fun onViewStateRestored(savedInstanceState: Bundle?) {
+        super.onViewStateRestored(savedInstanceState)
+        savedInstanceState?.let {
+            isFilterListVisible = it.getBoolean(KEY_FILTER_LIST_VISIBLE, false)
+            filterSearchQuery = it.getString(KEY_FILTER_SEARCH_QUERY, null)
+            isSearchViewFocused = it.getBoolean(KEY_SEARCH_VIEW_FOCUSED, false)
+        }
+    }
+
+    /**
+     * Saves the current state of the Place type filter UI.
+     */
+    private fun saveFilterState() {
+        isFilterListVisible = binding!!.nearbyFilterList.root.visibility == View.VISIBLE
+        filterSearchQuery = binding!!.nearbyFilter.searchViewLayout.searchView.query.toString()
+        isSearchViewFocused = binding!!.nearbyFilter.searchViewLayout.searchView.hasFocus()
+    }
+
+    /**
+     * Restores the Place type filter UI state after configuration change.
+     */
+    private fun restoreFilterState() {
+        if (isFilterListVisible) {
+            binding!!.nearbyFilterList.root.visibility = View.VISIBLE
+            setLayoutHeightAlignedToWidth(1.25, binding!!.nearbyFilterList.root)
+        } else {
+            binding!!.nearbyFilterList.root.visibility = View.GONE
+        }
+
+        filterSearchQuery?.let { query ->
+            if (query.isNotEmpty()) {
+                binding!!.nearbyFilter.searchViewLayout.searchView.setQuery(query, false)
+            }
+        }
+
+        if (isSearchViewFocused) {
+            binding!!.nearbyFilter.searchViewLayout.searchView.requestFocus()
+        }
     }
 
     fun onLearnMoreClicked() {
@@ -2962,6 +3029,9 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
 
     companion object {
         private const val ZOOM_LEVEL = 15f
+        private const val KEY_FILTER_LIST_VISIBLE = "filter_list_visible"
+        private const val KEY_FILTER_SEARCH_QUERY = "filter_search_query"
+        private const val KEY_SEARCH_VIEW_FOCUSED = "search_view_focused"
 
         /**
          * WLM URL
