@@ -124,7 +124,8 @@
             android:layout_marginEnd="@dimen/standard_gap"
             android:layout_marginRight="@dimen/standard_gap"
             android:layout_marginBottom="@dimen/standard_gap"
-            app:passwordToggleEnabled="true">
+            app:endIconMode="password_toggle"
+            app:endIconDrawable="@drawable/custom_password_toggle">
 
             <com.google.android.material.textfield.TextInputEditText
               android:id="@+id/login_password"
