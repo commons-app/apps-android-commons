@@ -144,25 +144,11 @@ class LoginActivity : AccountAuthenticatorActivity() {
         }
         progressDialog!!.dismiss()
         if (binding != null) {
-            with(binding!!) {
-                twoFactorContainer.visibility = View.VISIBLE
-                twoFactorContainer.hint = getString(if (lastLoginResult is LoginResult.EmailAuthResult) R.string.email_auth_code else R.string._2fa_code)
-                loginTwoFactor.visibility = View.VISIBLE
-                loginTwoFactor.requestFocus()
+                show2FAUI()
+                binding!!.loginTwoFactor.requestFocus()
 
                 val imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
-                imm.showSoftInput(loginTwoFactor, InputMethodManager.SHOW_IMPLICIT)
-
-                loginTwoFactor.setOnEditorActionListener { _, actionId, event ->
-                    if (actionId == EditorInfo.IME_ACTION_DONE ||
-                        (event != null && event.keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_DOWN)) {
-                        performLogin()
-                        true
-                    } else {
-                        false
-                    }
-                }
-            }
+                imm.showSoftInput(binding!!.loginTwoFactor, InputMethodManager.SHOW_IMPLICIT)
         } else {
             Timber.e("Binding is null in askUserForTwoFactorAuthWithKeyboard after reinitialization attempt")
         }
@@ -245,24 +231,37 @@ class LoginActivity : AccountAuthenticatorActivity() {
         } else {
             outState.putBoolean(SAVE_PROGRESS_DIALOG, false)
         }
-        outState.putString(
-            SAVE_ERROR_MESSAGE,
-            binding!!.errorMessage.text.toString()
-        ) //Save the errorMessage
-        outState.putString(
-            SAVE_USERNAME,
-            binding!!.loginUsername.text.toString()
-        ) // Save the username
-        outState.putString(
-            SAVE_PASSWORD,
-            binding!!.loginPassword.text.toString()
-        ) // Save the password
+        outState.putString(SAVE_ERROR_MESSAGE, binding!!.errorMessage.text.toString())
+        outState.putString(SAVE_USERNAME, binding!!.loginUsername.text.toString())
+        outState.putString(SAVE_PASSWORD, binding!!.loginPassword.text.toString())
+        outState.putBoolean(SAVE_TWO_FACTOR_VISIBILITY, binding!!.twoFactorContainer.visibility == View.VISIBLE)
+        val loginResultType = when (lastLoginResult) {
+            is LoginResult.EmailAuthResult -> RESULT_TYPE_EMAIL_AUTH
+            is LoginResult.OAuthResult -> RESULT_TYPE_2FA
+            else -> RESULT_TYPE_NONE
+        }
+        outState.putString(SAVE_LAST_LOGIN_RESULT_TYPE, loginResultType)
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         super.onRestoreInstanceState(savedInstanceState)
         binding!!.loginUsername.setText(savedInstanceState.getString(SAVE_USERNAME))
         binding!!.loginPassword.setText(savedInstanceState.getString(SAVE_PASSWORD))
+        val isTwoFactorVisible = savedInstanceState.getBoolean(SAVE_TWO_FACTOR_VISIBILITY, false)
+        if (isTwoFactorVisible) {
+            val loginResultType = savedInstanceState.getString(SAVE_LAST_LOGIN_RESULT_TYPE) ?: RESULT_TYPE_NONE
+            lastLoginResult = when (loginResultType) {
+                RESULT_TYPE_EMAIL_AUTH -> LoginResult.EmailAuthResult("", null, null, null)
+                RESULT_TYPE_2FA -> LoginResult.OAuthResult("", null, null, null)
+                else -> null
+            }
+            show2FAUI()
+        } else {
+            binding!!.twoFactorContainer.visibility = View.GONE
+            binding!!.loginTwoFactor.visibility = View.GONE
+            binding!!.loginTwoFactor.setText("")
+            lastLoginResult = null
+        }
         if (savedInstanceState.getBoolean(SAVE_PROGRESS_DIALOG)) {
             performLogin()
         }
@@ -273,7 +272,30 @@ class LoginActivity : AccountAuthenticatorActivity() {
             showMessage(errorMessage, R.color.secondaryDarkColor)
         }
     }
-
+    private fun show2FAUI() {
+        if (binding == null) return
+        if (lastLoginResult != null) {
+            binding!!.twoFactorContainer.visibility = View.VISIBLE
+            binding!!.twoFactorContainer.hint = getString(
+                if (lastLoginResult is LoginResult.EmailAuthResult) R.string.email_auth_code else R.string._2fa_code
+            )
+            binding!!.loginTwoFactor.visibility = View.VISIBLE
+            binding!!.loginTwoFactor.setOnEditorActionListener { _, actionId, event ->
+                if (actionId == EditorInfo.IME_ACTION_DONE ||
+                    (event != null && event.keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_DOWN)
+                ) {
+                    performLogin()
+                    true
+                } else {
+                    false
+                }
+            }
+        } else {
+            binding!!.twoFactorContainer.visibility = View.GONE
+            binding!!.loginTwoFactor.visibility = View.GONE
+            binding!!.loginTwoFactor.setText("")
+        }
+    }
     /**
      * Hides the keyboard if the user's focus is not on the password (hasFocus is false).
      * @param view The keyboard
@@ -411,22 +433,8 @@ class LoginActivity : AccountAuthenticatorActivity() {
         }
         progressDialog!!.dismiss()
         if (binding != null) {
-            with(binding!!) {
-                twoFactorContainer.visibility = View.VISIBLE
-                twoFactorContainer.hint = getString(if (lastLoginResult is LoginResult.EmailAuthResult) R.string.email_auth_code else R.string._2fa_code)
-                loginTwoFactor.visibility = View.VISIBLE
-                loginTwoFactor.requestFocus()
-
-                loginTwoFactor.setOnEditorActionListener { _, actionId, event ->
-                    if (actionId == EditorInfo.IME_ACTION_DONE ||
-                        (event != null && event.keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_DOWN)) {
-                        performLogin()
-                        true
-                    } else {
-                        false
-                    }
-                }
-            }
+            show2FAUI()
+            binding!!.loginTwoFactor.requestFocus()
         } else {
             Timber.e("Binding is null in askUserForTwoFactorAuth after reinitialization attempt")
         }
@@ -486,5 +494,10 @@ class LoginActivity : AccountAuthenticatorActivity() {
         const val SAVE_ERROR_MESSAGE: String = "errorMessage"
         const val SAVE_USERNAME: String = "username"
         const val SAVE_PASSWORD: String = "password"
+        const val SAVE_TWO_FACTOR_VISIBILITY: String = "twoFactorVisibility"
+        const val SAVE_LAST_LOGIN_RESULT_TYPE: String = "lastLoginResultType"
+        const val RESULT_TYPE_EMAIL_AUTH = "EMAIL_AUTH"
+        const val RESULT_TYPE_2FA = "2FA"
+        const val RESULT_TYPE_NONE = "NONE"
     }
 }
