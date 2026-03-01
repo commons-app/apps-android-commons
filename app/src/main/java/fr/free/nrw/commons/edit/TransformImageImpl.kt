@@ -128,8 +128,13 @@ class TransformImageImpl : TransformImage {
                 val alignedLeft = mcuAlign(left, mcuW, imgW)
                 val alignedTop = mcuAlign(top, mcuH, imgH)
 
-                val cropW = if (alignedLeft + width > imgW) imgW - alignedLeft else width
-                val cropH = if (alignedTop + height > imgH) imgH - alignedTop else height
+                val rawCropW = if (alignedLeft + width > imgW) imgW - alignedLeft else width
+                val rawCropH = if (alignedTop + height > imgH) imgH - alignedTop else height
+
+                // Round crop dimensions down to nearest MCU boundary to avoid
+                // partial-block artifacts from the lossless JPEG crop workaround
+                val cropW = ((rawCropW / mcuW) * mcuW).coerceAtLeast(mcuW)
+                val cropH = ((rawCropH / mcuH) * mcuH).coerceAtLeast(mcuH)
 
                 // Determine if flips are needed.
                 // The inflate trick requires: cropDim + 2*alignedOrigin <= imageDim.
