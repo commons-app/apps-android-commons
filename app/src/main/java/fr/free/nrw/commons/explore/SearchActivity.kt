@@ -46,6 +46,10 @@ class SearchActivity : BaseActivity(), MediaDetailProvider, CategoryImagesCallba
     private var viewPagerAdapter: ViewPagerAdapter? = null
     private var binding: ActivitySearchBinding? = null
 
+    //constant and variable to track the the current media item for state restoration
+    private val MEDIA_DETAILS_POSITION = "media_details_position"
+    private var currentMediaPosition: Int = -1
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySearchBinding.inflate(layoutInflater)
@@ -66,6 +70,17 @@ class SearchActivity : BaseActivity(), MediaDetailProvider, CategoryImagesCallba
         binding!!.searchBox.queryHint = getString(R.string.search_commons)
         binding!!.searchBox.onActionViewExpanded()
         binding!!.searchBox.clearFocus()
+
+        //restore media details if a position was saved before rotation
+        if (savedInstanceState != null) {
+            currentMediaPosition = savedInstanceState.getInt(MEDIA_DETAILS_POSITION, -1)
+            if (currentMediaPosition != -1) {
+                //us e post to ensure the UI is laid out before opening the media details
+                binding!!.root.post {
+                    onMediaClicked(currentMediaPosition)
+                }
+            }
+        }
     }
 
     /**
@@ -171,6 +186,7 @@ class SearchActivity : BaseActivity(), MediaDetailProvider, CategoryImagesCallba
      * @param position item index that should be opened
      */
     override fun onMediaClicked(position: Int) {
+        currentMediaPosition = position //track the position for state restoration
         hideKeyboard(findViewById(R.id.searchBox))
         binding!!.tabLayout.visibility = View.GONE
         binding!!.viewPager.visibility = View.GONE
@@ -183,7 +199,7 @@ class SearchActivity : BaseActivity(), MediaDetailProvider, CategoryImagesCallba
             supportFragmentManager!!
                 .beginTransaction()
                 .hide(supportFragmentManager!!.fragments[supportFragmentManager!!.backStackEntryCount])
-                .add(R.id.mediaContainer, mediaDetails!!)
+                .add(R.id.mediaContainer, mediaDetails!!, "MEDIA_DETAIL_TAG")
                 .addToBackStack(null)
                 .commit()
             // Reason for using hide, add instead of replace is to maintain scroll position after
@@ -195,15 +211,14 @@ class SearchActivity : BaseActivity(), MediaDetailProvider, CategoryImagesCallba
     }
 
     /**
-     * This method is called on Screen Rotation
+     * Save current search activity state
      */
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putInt(MEDIA_DETAILS_POSITION, currentMediaPosition)
+    }
+
     override fun onResume() {
-        if (supportFragmentManager!!.backStackEntryCount == 1) {
-            //FIXME: Temporary fix for screen rotation inside media details. If we don't call onBackPressed then fragment stack is increasing every time.
-            //FIXME: Similar issue like this https://github.com/commons-app/apps-android-commons/issues/894
-            // This is called on screen rotation when user is inside media details. Ideally it should show Media Details but since we are not saving the state now. We are throwing the user to search screen otherwise the app was crashing.
-            onBackPressed()
-        }
         super.onResume()
     }
 
@@ -224,6 +239,7 @@ class SearchActivity : BaseActivity(), MediaDetailProvider, CategoryImagesCallba
         }
         if (getSupportFragmentManager().backStackEntryCount == 1) {
             // back to search so show search toolbar and hide navigation toolbar
+            currentMediaPosition = -1 //reset tracking position when returning to search list
             binding!!.searchBox.visibility = View.VISIBLE //set the searchview
             binding!!.tabLayout.visibility = View.VISIBLE
             binding!!.viewPager.visibility = View.VISIBLE
