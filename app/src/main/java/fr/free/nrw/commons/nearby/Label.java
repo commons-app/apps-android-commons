@@ -21,6 +21,8 @@ public enum Label {
 
     BOOKMARKS("BOOKMARK", R.drawable.ic_filled_star_24dp),
     BUILDING("Q41176", R.drawable.round_icon_generic_building),
+    BANK("Q22687",R.drawable.round_icon_bank),
+    HOSPITAL("Q16917",R.drawable.round_icon_hospital),
     HOUSE("Q3947", R.drawable.round_icon_house),
     COTTAGE("Q5783996", R.drawable.round_icon_house),
     FARMHOUSE("Q489357", R.drawable.round_icon_house),

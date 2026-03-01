@@ -3,6 +3,7 @@ package fr.free.nrw.commons.edit
 import android.mediautil.image.jpeg.LLJTran
 import android.mediautil.image.jpeg.LLJTranException
 import android.os.Environment
+import androidx.exifinterface.media.ExifInterface
 import timber.log.Timber
 import java.io.BufferedOutputStream
 import java.io.File
@@ -26,6 +27,7 @@ class TransformImageImpl : TransformImage {
     override fun rotateImage(
         imageFile: File,
         degree: Int,
+        savePath: File
     ): File? {
         Timber.tag("Trying to rotate image").d("Starting")
 
@@ -35,9 +37,7 @@ class TransformImageImpl : TransformImage {
             )
 
         val imagePath = System.currentTimeMillis()
-        val file: File = File(path, "$imagePath.jpg")
-
-        val output = file
+        val output = File(savePath, "rotated_$imagePath.jpg")
 
         val rotated =
             try {
@@ -51,9 +51,7 @@ class TransformImageImpl : TransformImage {
                         90 -> LLJTran.ROT_90
                         180 -> LLJTran.ROT_180
                         270 -> LLJTran.ROT_270
-                        else -> {
-                            LLJTran.ROT_90
-                        }
+                        else -> LLJTran.OPT_DEFAULTS
                     },
                     LLJTran.OPT_DEFAULTS or LLJTran.OPT_XFORM_ORIENTATION,
                 )
@@ -61,6 +59,13 @@ class TransformImageImpl : TransformImage {
                     lljTran.save(writer, LLJTran.OPT_WRITE_ALL)
                 }
                 lljTran.freeMemory()
+                try {
+                    val exif = ExifInterface(output.absolutePath)
+                    exif.setAttribute(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL.toString())
+                    exif.saveAttributes()
+                } catch (ex: Exception) {
+                    Timber.w(ex, "Failed to force EXIF orientation to tha Normal")
+                }
                 true
             } catch (e: LLJTranException) {
                 Timber.tag("Error").d(e)
