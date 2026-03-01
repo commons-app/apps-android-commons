@@ -27,6 +27,7 @@ import fr.free.nrw.commons.R
 import fr.free.nrw.commons.auth.LoginActivity
 import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.contributions.ContributionController
+import fr.free.nrw.commons.contributions.MainActivity
 import fr.free.nrw.commons.databinding.ActivityUploadBinding
 import fr.free.nrw.commons.filepicker.Constants.RequestCodes
 import fr.free.nrw.commons.filepicker.UploadableFile
@@ -362,7 +363,15 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
         super.onStop()
     }
 
-    override fun returnToMainActivity() = finish()
+    override fun returnToMainActivity() {
+        val intent = Intent(this, MainActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
+        startActivity(intent)
+
+        finish() // close the current UploadActivity
+    }
+
+
 
     /**
      * go to the uploadProgress activity to check the status of uploading
