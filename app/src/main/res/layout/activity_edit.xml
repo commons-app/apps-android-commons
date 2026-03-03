@@ -8,42 +8,6 @@
   tools:context=".edit.EditActivity" >
 
   <androidx.constraintlayout.widget.ConstraintLayout
-    android:id="@+id/topBar"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@color/primaryColor"
-    android:gravity="center_vertical"
-    android:orientation="horizontal"
-    android:paddingHorizontal="12dp"
-    android:paddingVertical="8dp" >
-
-    <ImageView
-      android:id="@+id/btnBack"
-      android:layout_width="24dp"
-      android:layout_height="24dp"
-      android:contentDescription="@string/back"
-      android:src="@drawable/ic_arrow_back"
-      app:layout_constraintBottom_toBottomOf="parent"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="parent"
-      app:tint="@color/white" />
-
-    <TextView
-      android:id="@+id/selection_count"
-      style="@style/TextAppearance.AppCompat.Small"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:text="@string/edit_image"
-      android:textAlignment="center"
-      android:textColor="@color/white"
-      android:textSize="@dimen/subheading_text_size"
-      app:layout_constraintBottom_toBottomOf="parent"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="parent" />
-  </androidx.constraintlayout.widget.ConstraintLayout>
-
-  <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
