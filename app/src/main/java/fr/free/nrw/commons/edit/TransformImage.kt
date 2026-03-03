@@ -14,12 +14,13 @@ interface TransformImage {
      *
      * @param imageFile The File representing the image to be rotated.
      * @param degree The degree by which to rotate the image.
+     * @param savePath The directory to save the rotated image in.
      * @return The rotated image File, or null if the rotation operation fails.
      */
     fun rotateImage(
         imageFile: File,
         degree: Int,
-    ): File?
+        savePath: File): File?
 
     /**
      * Crops the specified image file using lossless JPEG cropping.

@@ -18,12 +18,13 @@ class EditViewModel : ViewModel() {
      *
      * @param degree The degree by which to rotate the image.
      * @param imageFile The File representing the image to be rotated.
+     * @param savePath The directory to save the rotated image in.
      * @return The rotated image File, or null if the rotation operation fails.
      */
     fun rotateImage(
         degree: Int,
         imageFile: File,
-    ): File? = transformImage.rotateImage(imageFile, degree)
+        savePath: File): File? { return transformImage.rotateImage(imageFile, degree, savePath) }
 
     /**
      * Crops the specified image file using lossless JPEG cropping.
