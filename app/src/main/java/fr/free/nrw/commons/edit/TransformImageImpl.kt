@@ -82,10 +82,18 @@ class TransformImageImpl : TransformImage {
     /**
      * Crops the specified image file using lossless JPEG cropping via LLJTran.
      *
-     * Works around a porting bug in the Android LLJTran library where the internal
-     * cropBounds Rect uses right/bottom to store width/height (java.awt.Rectangle
-     * convention), but Rect.width()/height() compute right-left / bottom-top, giving
-     * wrong results when the crop origin is nonzero.
+     * Works around a porting bug in the Android LLJTran library (AndroidMediaUtil).
+     * The original Java library used java.awt.Rectangle where `width` and `height`
+     * are direct fields. The Android port replaced it with android.graphics.Rect,
+     * but validateCropBounds still assigns width/height values into `right`/`bottom`:
+     *   cropBounds.right = bounds.width();   // stores width, not right edge
+     *   cropBounds.bottom = bounds.height();  // stores height, not bottom edge
+     * Later, when the library calls cropBounds.width() (which computes right - left),
+     * it gets (width - left) instead of width, producing wrong crop dimensions
+     * whenever the crop origin is nonzero.
+     *
+     * See the buggy assignment in validateCropBounds:
+     * https://github.com/bkhall/AndroidMediaUtil/blob/master/src/android/mediautil/image/jpeg/LLJTran.java
      *
      * The fix: pass "inflated" bounds where bounds.height() = cropHeight + alignedTop,
      * so that after the buggy subtraction: (cropHeight + alignedTop) - alignedTop = cropHeight.
