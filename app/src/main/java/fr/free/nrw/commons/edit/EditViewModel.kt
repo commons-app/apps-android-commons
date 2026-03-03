@@ -42,5 +42,6 @@ class EditViewModel : ViewModel() {
         top: Int,
         width: Int,
         height: Int,
-    ): File? = transformImage.cropImage(imageFile, left, top, width, height)
+        savePath: File,
+    ): File? = transformImage.cropImage(imageFile, left, top, width, height, savePath)
 }

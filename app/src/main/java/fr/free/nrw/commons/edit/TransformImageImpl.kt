@@ -3,7 +3,6 @@ package fr.free.nrw.commons.edit
 import android.graphics.Rect
 import android.mediautil.image.jpeg.LLJTran
 import android.mediautil.image.jpeg.LLJTranException
-import android.os.Environment
 import androidx.exifinterface.media.ExifInterface
 import timber.log.Timber
 import java.io.BufferedOutputStream
@@ -30,11 +29,6 @@ class TransformImageImpl : TransformImage {
         savePath: File
     ): File? {
         Timber.tag("Trying to rotate image").d("Starting")
-
-        val path =
-            Environment.getExternalStoragePublicDirectory(
-                Environment.DIRECTORY_DOWNLOADS,
-            )
 
         val imagePath = System.currentTimeMillis()
         val output = File(savePath, "rotated_$imagePath.jpg")
@@ -114,18 +108,14 @@ class TransformImageImpl : TransformImage {
         top: Int,
         width: Int,
         height: Int,
+        savePath: File,
     ): File? {
         Timber.tag("Trying to crop image").d(
             "Starting crop: left=$left, top=$top, width=$width, height=$height"
         )
 
-        val path =
-            Environment.getExternalStoragePublicDirectory(
-                Environment.DIRECTORY_DOWNLOADS,
-            )
-
         val imagePath = System.currentTimeMillis()
-        val output = File(path, "$imagePath.jpg")
+        val output = File(savePath, "cropped_$imagePath.jpg")
 
         val cropped =
             try {

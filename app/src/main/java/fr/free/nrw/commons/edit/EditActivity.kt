@@ -307,7 +307,8 @@ class EditActivity : AppCompatActivity() {
                     cropCoords.left,
                     cropCoords.top,
                     cropCoords.width,
-                    cropCoords.height
+                    cropCoords.height,
+                    applicationContext.cacheDir
                 )
                 if (croppedImage == null) {
                     Toast.makeText(this, "Failed to crop image", Toast.LENGTH_LONG).show()

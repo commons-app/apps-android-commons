@@ -38,5 +38,6 @@ interface TransformImage {
         top: Int,
         width: Int,
         height: Int,
+        savePath: File,
     ): File?
 }
