@@ -270,11 +270,15 @@ class DeleteHelper @Inject constructor(
         val checkboxContainer = customView.findViewById<LinearLayout>(R.id.checkboxContainer)
         val otherNotesEditText = customView.findViewById<TextInputEditText>(R.id.otherNotesEditText)
 
-        // Function to update OK button state (defined before use)
+        // Function to update OK button state
         fun updateOkButtonState() {
             val hasSelection = mUserReason.isNotEmpty()
             val hasText = !otherNotesEditText?.text.isNullOrBlank()
-            d?.getButton(AlertDialog.BUTTON_POSITIVE)?.isEnabled = hasSelection || hasText
+            val otherIndex = reasonList.size - 1
+            val onlyOther = mUserReason.size == 1 && mUserReason.contains(otherIndex)
+
+            d?.getButton(AlertDialog.BUTTON_POSITIVE)?.isEnabled =
+                hasSelection && (!onlyOther || hasText)
         }
 
         // Create checkboxes dynamically
