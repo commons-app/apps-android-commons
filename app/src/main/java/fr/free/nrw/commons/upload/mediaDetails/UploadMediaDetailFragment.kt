@@ -859,6 +859,9 @@ class UploadMediaDetailFragment : UploadBaseFragment(), UploadMediaDetailsContra
     }
 
     override fun onDestroyView() {
+        presenterCallback = null
+        fragmentCallback = null
+        _binding = null
         super.onDestroyView()
         presenter.onDetachView()
     }

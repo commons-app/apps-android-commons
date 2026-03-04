@@ -204,6 +204,7 @@ class UploadPresenter @Inject internal constructor(
         view = DUMMY
         compositeDisposable.clear()
         repository.cleanup()
+        basicKvStoreFactory = null
     }
 
     companion object {
