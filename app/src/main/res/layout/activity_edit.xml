@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:tools="http://schemas.android.com/tools"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
   android:orientation="vertical"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  xmlns:app="http://schemas.android.com/apk/res-auto"
   tools:context=".edit.EditActivity" >
 
   <androidx.constraintlayout.widget.ConstraintLayout
@@ -46,6 +46,7 @@
   <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <ImageView
       android:id="@+id/iv"
       android:layout_width="match_parent"
@@ -55,6 +56,16 @@
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintTop_toTopOf="parent"
       android:layout_gravity="center" />
+
+    <fr.free.nrw.commons.edit.CropOverlayView
+      android:id="@+id/crop_overlay"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      android:visibility="gone" />
 
     <LinearLayout
       android:id="@+id/linearLayout"
@@ -78,12 +89,20 @@
         android:textColor="@android:color/white" />
 
       <androidx.appcompat.widget.AppCompatButton
+        android:drawablePadding="4dp"
+        android:drawableStart="@drawable/baseline_crop_24"
+        android:id="@+id/crop_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/white"
+        android:text="@string/crop"/>
+
+      <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_save"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:drawableStart="@drawable/baseline_save_24"
         android:drawablePadding="4dp"
-        android:onClick="getRotatedImage"
         android:text="@string/menu_save_categories"
         android:textColor="@android:color/white" />
     </LinearLayout>
