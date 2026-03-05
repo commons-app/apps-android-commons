@@ -30,6 +30,7 @@ import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 import org.robolectric.fakes.RoboMenuItem
 import java.lang.reflect.Method
+import java.net.UnknownHostException
 
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
@@ -318,5 +319,49 @@ class LoginActivityUnitTests {
     @Throws(Exception::class)
     fun testSetContentView() {
         activity.setContentView(view, params)
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testGetFriendlyErrorMessageForNetworkException() {
+        val method: Method =
+            LoginActivity::class.java.getDeclaredMethod(
+                "getFriendlyErrorMessage",
+                Throwable::class.java,
+            )
+        method.isAccessible = true
+        val result = method.invoke(activity, UnknownHostException("Unable to resolve host"))
+        Assert.assertEquals(
+            activity.getString(R.string.login_failed_network),
+            result,
+        )
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testGetFriendlyErrorMessageForIOException() {
+        val method: Method =
+            LoginActivity::class.java.getDeclaredMethod(
+                "getFriendlyErrorMessage",
+                Throwable::class.java,
+            )
+        method.isAccessible = true
+        val genericMessage = "Failed to retrieve login token"
+        val result = method.invoke(activity, java.io.IOException(genericMessage))
+        Assert.assertEquals(genericMessage, result)
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testGetFriendlyErrorMessageForGenericException() {
+        val method: Method =
+            LoginActivity::class.java.getDeclaredMethod(
+                "getFriendlyErrorMessage",
+                Throwable::class.java,
+            )
+        method.isAccessible = true
+        val genericMessage = "Some generic error"
+        val result = method.invoke(activity, RuntimeException(genericMessage))
+        Assert.assertEquals(genericMessage, result)
     }
 }
