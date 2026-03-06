@@ -360,6 +360,7 @@
   <string name="quiz_screenshot_question">Er det i orden at uploade dette skærmbillede?</string>
   <string name="share_app_title">Del appen</string>
   <string name="rotate">Rotér</string>
+  <string name="crop">Beskær</string>
   <string name="error_fetching_nearby_places">Kunne ikke indlæse steder i nærheden</string>
   <string name="no_pictures_in_this_area">Ingen billeder i dette område</string>
   <string name="no_nearby_places_around">Ingen steder i nærheden</string>
