@@ -202,11 +202,25 @@ class DeleteHelperTest {
     }
 
     @Test
-    fun alertDialogPositiveButtonEnableTest() {
+    fun buttonEnabledWhenCheckboxCheckedAndTextEntered() {
         val mContext = RuntimeEnvironment.getApplication().applicationContext
-        deleteHelper.askReasonAndExecute(media, mContext, "My Question", ReviewController.DeleteReason.COPYRIGHT_VIOLATION, callback)
-        deleteHelper.getListener()?.onClick(deleteHelper.getDialog(), 1, true)
-        assertEquals(true, deleteHelper.getDialog()?.getButton(AlertDialog.BUTTON_POSITIVE)?.isEnabled)
+        deleteHelper.askReasonAndExecute(
+            media,
+            mContext,
+            "My Question",
+            ReviewController.DeleteReason.SPAM,
+            callback
+        )
+
+        val dialog = deleteHelper.getDialog()
+        val container = dialog?.findViewById<LinearLayout>(R.id.checkboxContainer)
+        val checkbox = container?.getChildAt(0) as? CheckBox
+        checkbox?.isChecked = true
+
+        val editText = dialog?.findViewById<TextInputEditText>(R.id.otherNotesEditText)
+        editText?.setText("some justification")
+
+        assertEquals(true, dialog?.getButton(AlertDialog.BUTTON_POSITIVE)?.isEnabled)
     }
 
     @Test(expected = RuntimeException::class)
