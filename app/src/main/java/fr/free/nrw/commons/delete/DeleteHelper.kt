@@ -274,11 +274,8 @@ class DeleteHelper @Inject constructor(
         fun updateOkButtonState() {
             val hasSelection = mUserReason.isNotEmpty()
             val hasText = !otherNotesEditText?.text.isNullOrBlank()
-            val otherIndex = reasonList.size - 1
-            val onlyOther = mUserReason.size == 1 && mUserReason.contains(otherIndex)
 
-            d?.getButton(AlertDialog.BUTTON_POSITIVE)?.isEnabled =
-                hasSelection && (!onlyOther || hasText)
+            d?.getButton(AlertDialog.BUTTON_POSITIVE)?.isEnabled = hasSelection && hasText
         }
 
         // Create checkboxes dynamically
