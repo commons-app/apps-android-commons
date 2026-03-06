@@ -412,6 +412,7 @@
   <string name="quiz_screenshot_question">这个屏幕截图可以上传吗？</string>
   <string name="share_app_title">分享应用</string>
   <string name="rotate">旋转</string>
+  <string name="crop">裁剪</string>
   <string name="error_fetching_nearby_places">无法加载附近地点</string>
   <string name="no_pictures_in_this_area">此区域没有图片</string>
   <string name="no_nearby_places_around">找不到附近地点</string>
