@@ -2444,8 +2444,10 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
         }
 
         binding!!.bottomSheetDetails.title.text = selectedPlace!!.name
-        binding!!.bottomSheetDetails.category.text = selectedPlace!!.distance
-        // Remove label since it is double information
+        if (selectedPlace!!.distance != null) {
+            binding!!.bottomSheetDetails.category.visibility = View.VISIBLE
+            binding!!.bottomSheetDetails.category.text = selectedPlace!!.distance
+        }// Remove label since it is double information
         var descriptionText = selectedPlace!!.longDescription
             .replace(selectedPlace!!.getName() + " (", "")
         descriptionText = (if (descriptionText == selectedPlace!!.longDescription)
