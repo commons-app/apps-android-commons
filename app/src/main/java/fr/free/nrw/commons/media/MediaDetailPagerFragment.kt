@@ -74,6 +74,7 @@ class MediaDetailPagerFragment : CommonsDaggerSupportFragment(), OnPageChangeLis
     var isWikipediaButtonDisplayed: Boolean = false
     var adapter: MediaDetailAdapter? = null
     var bookmark: Bookmark? = null
+    val compositeDisposables = CompositeDisposable()
     var mediaDetailProvider: MediaDetailProvider? = null
     var isFromFeaturedRootFragment: Boolean = false
     var position: Int = 0
@@ -81,7 +82,7 @@ class MediaDetailPagerFragment : CommonsDaggerSupportFragment(), OnPageChangeLis
     /**
      * ProgressBar used to indicate the loading status of media items.
      */
-    var imageProgressBar: ProgressBar? = null
+
 
     var removedItems: ArrayList<Int> = ArrayList()
 
@@ -94,8 +95,7 @@ class MediaDetailPagerFragment : CommonsDaggerSupportFragment(), OnPageChangeLis
     ): View? {
         binding = FragmentMediaDetailPagerBinding.inflate(inflater, container, false)
         binding!!.mediaDetailsPager.addOnPageChangeListener(this)
-        // Initialize the ProgressBar by finding it in the layout
-        imageProgressBar = binding!!.root.findViewById(R.id.itemProgressBar)
+
         adapter = MediaDetailAdapter(this, childFragmentManager)
 
         // ActionBar is now supported in both activities - if this crashes something is quite wrong
@@ -125,7 +125,7 @@ class MediaDetailPagerFragment : CommonsDaggerSupportFragment(), OnPageChangeLis
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        outState.putInt("current-page", binding!!.mediaDetailsPager.currentItem)
+        outState.putInt("current-page", binding?.mediaDetailsPager?.currentItem ?: 0)
         outState.putBoolean("editable", editable)
         outState.putBoolean("isFeaturedImage", isFeaturedImage)
     }
@@ -141,13 +141,14 @@ class MediaDetailPagerFragment : CommonsDaggerSupportFragment(), OnPageChangeLis
     }
 
     override fun onDestroyView() {
+        binding = null
+        adapter = null
         super.onDestroyView()
+        compositeDisposables.clear()
         if (activity is MainActivity) {
             (activity as MainActivity).showTabs()
         }
 
-        // Temporarily disable it. Ref:https://github.com/commons-app/apps-android-commons/issues/6581#issuecomment-3694210567 
-        // binding = null
     }
 
     /**
@@ -170,7 +171,8 @@ class MediaDetailPagerFragment : CommonsDaggerSupportFragment(), OnPageChangeLis
             return true
         }
 
-        val m = mediaDetailProvider!!.getMediaAtPosition(binding!!.mediaDetailsPager.currentItem)
+        val pager = binding?.mediaDetailsPager ?: return true
+        val m = mediaDetailProvider!!.getMediaAtPosition(pager.currentItem)
         val mediaDetailFragment = adapter!!.currentMediaDetailFragment
         when (item.itemId) {
             R.id.menu_bookmark_current_image -> {
@@ -398,7 +400,7 @@ ${m.pageTitle.canonicalUri}"""
         setAvatarFromImageUrl(
             requireActivity(), media.imageUrl!!,
             sessionManager!!.currentAccount!!.name,
-            okHttpJsonApiClient!!, Companion.compositeDisposable
+            okHttpJsonApiClient!!, compositeDisposables
         )
     }
 
@@ -406,12 +408,13 @@ ${m.pageTitle.canonicalUri}"""
         if (!editable) { // Disable menu options for editable views
             menu.clear() // see http://stackoverflow.com/a/8495697/17865
             inflater.inflate(R.menu.fragment_image_detail, menu)
-            if (binding!!.mediaDetailsPager != null) {
+            val pager = binding?.mediaDetailsPager
+            if (pager != null) {
                 val provider = mediaDetailProvider ?: return
                 val position = if (isFromFeaturedRootFragment) {
                     position
                 } else {
-                    binding!!.mediaDetailsPager.currentItem
+                    pager.currentItem
                 }
 
                 val m = provider.getMediaAtPosition(position)
@@ -497,29 +500,33 @@ ${m.pageTitle.canonicalUri}"""
      * @param menu
      */
     private fun handleBackgroundColorMenuItems(getBitmap: Callable<Bitmap>, menu: Menu) {
-        Observable.fromCallable(
-            getBitmap
-        ).subscribeOn(Schedulers.newThread())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(Consumer { image: Bitmap ->
-                if (image.hasAlpha()) {
-                    menu.findItem(R.id.menu_view_set_white_background).setVisible(true)
-                        .setEnabled(true)
-                    menu.findItem(R.id.menu_view_set_black_background).setVisible(true)
-                        .setEnabled(true)
-                }
-            })
+        compositeDisposables.add(
+            Observable.fromCallable(
+                getBitmap
+            ).subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(Consumer { image: Bitmap ->
+                    if (image.hasAlpha()) {
+                        menu.findItem(R.id.menu_view_set_white_background).setVisible(true)
+                            .setEnabled(true)
+                        menu.findItem(R.id.menu_view_set_black_background).setVisible(true)
+                            .setEnabled(true)
+                    }
+                })
+        )
     }
 
     private fun updateBookmarkState(item: MenuItem) {
         val isBookmarked = bookmarkDao!!.findBookmark(bookmark)
         if (isBookmarked) {
-            if (removedItems.contains(binding!!.mediaDetailsPager.currentItem)) {
-                removedItems.remove(binding!!.mediaDetailsPager.currentItem)
+            val currentItem = binding?.mediaDetailsPager?.currentItem ?: return
+            if (removedItems.contains(currentItem)) {
+                removedItems.remove(currentItem)
             }
         } else {
-            if (!removedItems.contains(binding!!.mediaDetailsPager.currentItem)) {
-                removedItems.add(binding!!.mediaDetailsPager.currentItem)
+            val currentItem = binding?.mediaDetailsPager?.currentItem ?: return
+            if (!removedItems.contains(currentItem)) {
+                removedItems.add(currentItem)
             }
         }
 
@@ -547,14 +554,16 @@ ${m.pageTitle.canonicalUri}"""
         val handler = Handler(Looper.getMainLooper())
         val runnable: Runnable = object : Runnable {
             override fun run() {
+                val b = binding ?: return
+                val a = adapter ?: return
                 // Show the ProgressBar while waiting for the item to load
-                imageProgressBar!!.visibility = View.VISIBLE
+                b.itemProgressBar.visibility = View.VISIBLE
                 // Check if the adapter has enough items loaded
-                if (adapter!!.count > position) {
+                if (a.count > position) {
                     // Set the current item in the ViewPager
-                    binding!!.mediaDetailsPager.setCurrentItem(position, false)
+                    b.mediaDetailsPager.setCurrentItem(position, false)
                     // Hide the ProgressBar once the item is loaded
-                    imageProgressBar!!.visibility = View.GONE
+                    b.itemProgressBar.visibility = View.GONE
                 } else {
                     // If the item is not ready yet, post the Runnable again
                     handler.post(this)
@@ -605,7 +614,6 @@ ${m.pageTitle.canonicalUri}"""
     }
 
     companion object {
-        private val compositeDisposable = CompositeDisposable()
 
         /**
          * Use this factory method to create a new instance of this fragment using the provided

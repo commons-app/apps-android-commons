@@ -9,7 +9,7 @@ import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.GONE
-import android.view.ViewTreeObserver
+
 import android.webkit.WebView
 import android.widget.Button
 import android.widget.LinearLayout
@@ -312,8 +312,6 @@ class MediaDetailFragmentUnitTests {
     @Test
     @Throws(Exception::class)
     fun testOnDestroyView() {
-        val layoutListener = mock(ViewTreeObserver.OnGlobalLayoutListener::class.java)
-        Whitebox.setInternalState(fragment, "layoutListener", layoutListener)
         fragment.onDestroyView()
     }
 

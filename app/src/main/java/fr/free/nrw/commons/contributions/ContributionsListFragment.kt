@@ -218,6 +218,8 @@ class ContributionsListFragment : CommonsDaggerSupportFragment(), ContributionsL
     }
 
     override fun onDestroyView() {
+        controller?.cleanup()
+        controller = null
         binding = null
         super.onDestroyView()
     }
