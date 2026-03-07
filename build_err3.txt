@@ -1,0 +1,272 @@
+
+> Configure project :app
+WARNING: The option setting 'android.jetifier.ignorelist=bcprov-jdk15on' is experimental.
+app: 'annotationProcessor' dependencies won't be recognized as kapt annotation processors. Please change the configuration name to 'kapt' for these artifacts: 'com.github.bumptech.glide:compiler:4.12.0'.
+
+> Task :app:preBuild UP-TO-DATE
+> Task :app:preBetaDebugBuild UP-TO-DATE
+> Task :app:mergeBetaDebugNativeDebugMetadata NO-SOURCE
+> Task :app:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :app:dataBindingMergeDependencyArtifactsBetaDebug
+> Task :app:generateBetaDebugResValues
+> Task :app:generateBetaDebugResources
+
+> Task :app:mergeBetaDebugResources
+C:\Users\pc\projectw\apps-android-commons\app\src\main\res\values-sl\strings.xml:105:2: Multiple substitutions specified in non-positional format of string resource string/contribution_state_in_progress. Did you mean to add the formatted="false" attribute?
+C:\Users\pc\projectw\apps-android-commons\app\src\main\res\values-ky\strings.xml:340:2: Multiple substitutions specified in non-positional format of string resource string/quiz_alert_message. Did you mean to add the formatted="false" attribute?
+
+> Task :app:generateBetaDebugBuildConfig
+> Task :app:checkBetaDebugAarMetadata
+> Task :app:processBetaDebugNavigationResources
+> Task :app:mapBetaDebugSourceSetPaths
+> Task :app:compileBetaDebugNavigationResources
+> Task :app:createBetaDebugCompatibleScreenManifests
+> Task :app:extractDeepLinksBetaDebug
+
+> Task :app:processBetaDebugMainManifest
+C:\Users\pc\projectw\apps-android-commons\app\src\main\AndroidManifest.xml Warning:
+	provider#org.acra.attachment.AcraContentProvider@android:authorities was tagged at AndroidManifest.xml:0 to replace other declarations but no other declaration present
+
+> Task :app:processBetaDebugManifest
+> Task :app:javaPreCompileBetaDebug
+> Task :app:dataBindingGenBaseClassesBetaDebug
+> Task :app:mergeBetaDebugShaders
+> Task :app:compileBetaDebugShaders NO-SOURCE
+> Task :app:generateBetaDebugAssets UP-TO-DATE
+> Task :app:mergeBetaDebugAssets
+> Task :app:compressBetaDebugAssets
+> Task :app:processBetaDebugManifestForPackage
+> Task :app:desugarBetaDebugFileDependencies
+> Task :app:generateBetaDebugJacocoPropertiesFile
+> Task :app:mergeBetaDebugJniLibFolders
+> Task :app:checkBetaDebugDuplicateClasses
+> Task :app:mergeBetaDebugNativeLibs
+> Task :app:mergeExtDexBetaDebug
+> Task :app:mergeLibDexBetaDebug
+> Task :app:validateSigningBetaDebug
+> Task :app:writeBetaDebugAppMetadata
+> Task :app:writeBetaDebugSigningConfigVersions
+> Task :app:preProdDebugBuild UP-TO-DATE
+> Task :app:mergeProdDebugNativeDebugMetadata NO-SOURCE
+
+> Task :app:stripBetaDebugDebugSymbols
+Unable to strip the following libraries, packaging them as they are: libandroidx.graphics.path.so, libimagepipeline.so, libmaplibre.so, libnative-filters.so, libnative-imagetranscoder.so. Run with --info option to learn more.
+
+> Task :app:dataBindingMergeDependencyArtifactsProdDebug
+> Task :app:generateProdDebugResValues FROM-CACHE
+> Task :app:generateProdDebugResources
+> Task :app:processBetaDebugResources
+
+warn: removing resource fr.free.nrw.commons.beta:string/category_edit_helper_show_edit_message_if without required default value.
+warn: removing resource fr.free.nrw.commons.beta:string/contributions_subtitle without required default value.
+warn: removing resource fr.free.nrw.commons.beta:string/custom_picker_images_selected_title_appendix without required default value.
+warn: removing resource fr.free.nrw.commons.beta:string/depictions_edit_helper_show_edit_message_if without required default value.
+warn: removing resource fr.free.nrw.commons.beta:string/license_name_cc_by_sa_3_0_at without required default value.
+warn: removing resource fr.free.nrw.commons.beta:string/license_name_cc_by_sa_3_0_de without required default value.
+warn: removing resource fr.free.nrw.commons.beta:string/license_name_cc_by_sa_3_0_ee without required default value.
+warn: removing resource fr.free.nrw.commons.beta:string/license_name_cc_by_sa_3_0_es without required default value.
+warn: removing resource fr.free.nrw.commons.beta:string/license_name_cc_by_sa_3_0_hr without required default value.
+warn: removing resource fr.free.nrw.commons.beta:string/license_name_cc_by_sa_3_0_lu without required default value.
+warn: removing resource fr.free.nrw.commons.beta:string/license_name_cc_by_sa_3_0_nl without required default value.
+warn: removing resource fr.free.nrw.commons.beta:string/license_name_cc_by_sa_3_0_no without required default value.
+warn: removing resource fr.free.nrw.commons.beta:string/license_name_cc_by_sa_3_0_pl without required default value.
+warn: removing resource fr.free.nrw.commons.beta:string/license_name_cc_by_sa_3_0_ro without required default value.
+warn: removing resource fr.free.nrw.commons.beta:string/license_name_cc_zero without required default value.
+warn: removing resource fr.free.nrw.commons.beta:string/login_failed_password without required default value.
+warn: removing resource fr.free.nrw.commons.beta:string/login_failed_username without required default value.
+warn: removing resource fr.free.nrw.commons.beta:string/menu_open_in_browser without required default value.
+warn: removing resource fr.free.nrw.commons.beta:string/multiple_uploads_title without required default value.
+warn: removing resource fr.free.nrw.commons.beta:string/preference_tracking without required default value.
+warn: removing resource fr.free.nrw.commons.beta:string/preference_tracking_summary without required default value.
+warn: removing resource fr.free.nrw.commons.beta:string/receiving_shared_content without required default value.
+warn: removing resource fr.free.nrw.commons.beta:string/share_license_summary without required default value.
+warn: removing resource fr.free.nrw.commons.beta:string/starting_multiple_uploads without required default value.
+warn: removing resource fr.free.nrw.commons.beta:string/upload_count_title without required default value.
+warn: removing resource fr.free.nrw.commons.beta:string/uploads_pending_notification_indicator without required default value.
+
+
+> Task :app:mergeProdDebugResources
+C:\Users\pc\projectw\apps-android-commons\app\src\main\res\values-sl\strings.xml:105:2: Multiple substitutions specified in non-positional format of string resource string/contribution_state_in_progress. Did you mean to add the formatted="false" attribute?
+
+> Task :app:generateProdDebugBuildConfig
+> Task :app:processProdDebugNavigationResources
+> Task :app:compileProdDebugNavigationResources FROM-CACHE
+> Task :app:mapProdDebugSourceSetPaths
+> Task :app:createProdDebugCompatibleScreenManifests
+> Task :app:extractDeepLinksProdDebug
+> Task :app:checkProdDebugAarMetadata
+
+> Task :app:processProdDebugMainManifest
+C:\Users\pc\projectw\apps-android-commons\app\src\main\AndroidManifest.xml Warning:
+	provider#org.acra.attachment.AcraContentProvider@android:authorities was tagged at AndroidManifest.xml:0 to replace other declarations but no other declaration present
+
+> Task :app:mergeProdDebugResources
+C:\Users\pc\projectw\apps-android-commons\app\src\main\res\values-ky\strings.xml:340:2: Multiple substitutions specified in non-positional format of string resource string/quiz_alert_message. Did you mean to add the formatted="false" attribute?
+
+> Task :app:processProdDebugManifest
+> Task :app:javaPreCompileProdDebug FROM-CACHE
+> Task :app:mergeProdDebugShaders
+> Task :app:compileProdDebugShaders NO-SOURCE
+> Task :app:generateProdDebugAssets UP-TO-DATE
+> Task :app:mergeProdDebugAssets
+> Task :app:compressProdDebugAssets FROM-CACHE
+> Task :app:desugarProdDebugFileDependencies
+> Task :app:generateProdDebugJacocoPropertiesFile
+> Task :app:mergeProdDebugJniLibFolders
+> Task :app:validateSigningProdDebug
+> Task :app:writeProdDebugAppMetadata
+> Task :app:writeProdDebugSigningConfigVersions
+> Task :app:processProdDebugManifestForPackage
+> Task :app:checkProdDebugDuplicateClasses
+> Task :app:mergeProdDebugNativeLibs
+> Task :app:kaptGenerateStubsBetaDebugKotlin
+> Task :app:dataBindingGenBaseClassesProdDebug FROM-CACHE
+> Task :app:mergeExtDexProdDebug FROM-CACHE
+> Task :app:mergeLibDexProdDebug FROM-CACHE
+
+> Task :app:stripProdDebugDebugSymbols
+Unable to strip the following libraries, packaging them as they are: libandroidx.graphics.path.so, libimagepipeline.so, libmaplibre.so, libnative-filters.so, libnative-imagetranscoder.so. Run with --info option to learn more.
+warn: removing resource fr.free.nrw.commons:string/category_edit_helper_show_edit_message_if without required default value.
+warn: removing resource fr.free.nrw.commons:string/contributions_subtitle without required default value.
+warn: removing resource fr.free.nrw.commons:string/custom_picker_images_selected_title_appendix without required default value.
+warn: removing resource fr.free.nrw.commons:string/depictions_edit_helper_show_edit_message_if without required default value.
+warn: removing resource fr.free.nrw.commons:string/license_name_cc_by_sa_3_0_at without required default value.
+warn: removing resource fr.free.nrw.commons:string/license_name_cc_by_sa_3_0_de without required default value.
+warn: removing resource fr.free.nrw.commons:string/license_name_cc_by_sa_3_0_ee without required default value.
+warn: removing resource fr.free.nrw.commons:string/license_name_cc_by_sa_3_0_es without required default value.
+warn: removing resource fr.free.nrw.commons:string/license_name_cc_by_sa_3_0_hr without required default value.
+warn: removing resource fr.free.nrw.commons:string/license_name_cc_by_sa_3_0_lu without required default value.
+warn: removing resource fr.free.nrw.commons:string/license_name_cc_by_sa_3_0_nl without required default value.
+warn: removing resource fr.free.nrw.commons:string/license_name_cc_by_sa_3_0_no without required default value.
+warn: removing resource fr.free.nrw.commons:string/license_name_cc_by_sa_3_0_pl without required default value.
+warn: removing resource fr.free.nrw.commons:string/license_name_cc_by_sa_3_0_ro without required default value.
+warn: removing resource fr.free.nrw.commons:string/license_name_cc_zero without required default value.
+warn: removing resource fr.free.nrw.commons:string/login_failed_password without required default value.
+warn: removing resource fr.free.nrw.commons:string/login_failed_username without required default value.
+warn: removing resource fr.free.nrw.commons:string/menu_open_in_browser without required default value.
+warn: removing resource fr.free.nrw.commons:string/multiple_uploads_title without required default value.
+warn: removing resource fr.free.nrw.commons:string/preference_tracking without required default value.
+warn: removing resource fr.free.nrw.commons:string/preference_tracking_summary without required default value.
+warn: removing resource fr.free.nrw.commons:string/receiving_shared_content without required default value.
+warn: removing resource fr.free.nrw.commons:string/share_license_summary without required default value.
+warn: removing resource fr.free.nrw.commons:string/starting_multiple_uploads without required default value.
+warn: removing resource fr.free.nrw.commons:string/upload_count_title without required default value.
+warn: removing resource fr.free.nrw.commons:string/uploads_pending_notification_indicator without required default value.
+
+
+> Task :app:processProdDebugResources
+> Task :app:kaptGenerateStubsProdDebugKotlin
+
+> Task :app:kaptGenerateStubsBetaDebugKotlin
+w: K2 kapt is in Alpha. Use with caution.
+
+> Task :app:kaptGenerateStubsProdDebugKotlin
+w: K2 kapt is in Alpha. Use with caution.
+
+> Task :app:kaptBetaDebugKotlin
+> Task :app:kaptProdDebugKotlin
+warning: unknown enum constant Mode.LOCAL
+  reason: class file for com.facebook.infer.annotation.Nullsafe$Mode not found
+warning: unknown enum constant Mode.LOCAL
+warning: unknown enum constant Mode.LOCAL
+warning: unknown enum constant Mode.LOCAL
+C:\Users\pc\projectw\apps-android-commons\app\src\main\java\fr\free\nrw\commons\nearby\Place.java:22: warning: There are multiple good constructors and Room will pick the no-arg constructor. You can use the @Ignore annotation to eliminate unwanted constructors.
+public class Place implements Parcelable {
+       ^
+C:\Users\pc\projectw\apps-android-commons\app\src\main\java\fr\free\nrw\commons\nearby\Place.java:22: warning: There are multiple good constructors and Room will pick the no-arg constructor. You can use the @Ignore annotation to eliminate unwanted constructors.
+public class Place implements Parcelable {
+       ^
+
+> Task :app:kaptBetaDebugKotlin
+warning: unknown enum constant Mode.LOCAL
+  reason: class file for com.facebook.infer.annotation.Nullsafe$Mode not found
+warning: unknown enum constant Mode.LOCAL
+warning: unknown enum constant Mode.LOCAL
+warning: unknown enum constant Mode.LOCAL
+C:\Users\pc\projectw\apps-android-commons\app\src\main\java\fr\free\nrw\commons\nearby\Place.java:22: warning: There are multiple good constructors and Room will pick the no-arg constructor. You can use the @Ignore annotation to eliminate unwanted constructors.
+public class Place implements Parcelable {
+       ^
+C:\Users\pc\projectw\apps-android-commons\app\src\main\java\fr\free\nrw\commons\nearby\Place.java:22: warning: There are multiple good constructors and Room will pick the no-arg constructor. You can use the @Ignore annotation to eliminate unwanted constructors.
+public class Place implements Parcelable {
+       ^
+warning: unknown enum constant Mode.LOCAL
+  reason: class file for com.facebook.infer.annotation.Nullsafe$Mode not found
+warning: unknown enum constant Mode.LOCAL
+warning: unknown enum constant Mode.LOCAL
+warning: unknown enum constant Mode.LOCAL
+warning: unknown enum constant Mode.LOCAL
+  reason: class file for com.facebook.infer.annotation.Nullsafe$Mode not found
+warning: unknown enum constant Mode.LOCAL
+warning: unknown enum constant Mode.LOCAL
+warning: unknown enum constant Mode.LOCAL
+
+> Task :app:kaptProdDebugKotlin
+warning: unknown enum constant Mode.LOCAL
+  reason: class file for com.facebook.infer.annotation.Nullsafe$Mode not found
+warning: unknown enum constant Mode.LOCAL
+warning: unknown enum constant Mode.LOCAL
+warning: unknown enum constant Mode.LOCAL
+warning: unknown enum constant Mode.LOCAL
+  reason: class file for com.facebook.infer.annotation.Nullsafe$Mode not found
+warning: unknown enum constant Mode.LOCAL
+warning: unknown enum constant Mode.LOCAL
+warning: unknown enum constant Mode.LOCAL
+warning: unknown enum constant Mode.LOCAL
+  reason: class file for com.facebook.infer.annotation.Nullsafe$Mode not found
+warning: unknown enum constant Mode.LOCAL
+warning: unknown enum constant Mode.LOCAL
+warning: unknown enum constant Mode.LOCAL
+warning: unknown enum constant Mode.LOCAL
+  reason: class file for com.facebook.infer.annotation.Nullsafe$Mode not found
+warning: unknown enum constant Mode.LOCAL
+warning: unknown enum constant Mode.LOCAL
+warning: unknown enum constant Mode.LOCAL
+
+> Task :app:kaptBetaDebugKotlin
+warning: unknown enum constant Mode.LOCAL
+  reason: class file for com.facebook.infer.annotation.Nullsafe$Mode not found
+warning: unknown enum constant Mode.LOCAL
+warning: unknown enum constant Mode.LOCAL
+warning: unknown enum constant Mode.LOCAL
+warning: unknown enum constant Mode.LOCAL
+  reason: class file for com.facebook.infer.annotation.Nullsafe$Mode not found
+warning: unknown enum constant Mode.LOCAL
+warning: unknown enum constant Mode.LOCAL
+warning: unknown enum constant Mode.LOCAL
+
+> Task :app:compileProdDebugKotlin
+> Task :app:compileBetaDebugKotlin
+
+Daemon is stopping immediately stop command received
+.\\gradlew : 
+At line:1 char:1
++ .\\gradlew assembleDebug 
+2>&1 | Out-File -Encoding 
+ascii build_err3.t ...
++ 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo           
+   : NotSpecified: (:String  
+  ) [], RemoteException
+    + FullyQualifiedErrorId  
+   : NativeCommandError
+ 
+FAILURE: Build failed with 
+an exception.
+
+* What went wrong:
+Gradle build daemon has been 
+stopped: stop command 
+received
+
+* Try:
+> Run with --stacktrace 
+option to get the stack 
+trace.
+> Run with --info or --debug 
+option to get more log 
+output.
+> Run with --scan to get 
+full insights.
+> Get more help at 
+https://help.gradle.org.
