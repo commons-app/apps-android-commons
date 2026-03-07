@@ -81,6 +81,9 @@ import org.osmdroid.views.overlay.TilesOverlay
 import timber.log.Timber
 import javax.inject.Inject
 import javax.inject.Named
+import fr.free.nrw.commons.utils.StringUtil
+
+
 
 class ExploreMapFragment : CommonsDaggerSupportFragment(), ExploreMapContract.View,
     LocationUpdateListener, LocationPermissionCallback {
@@ -675,8 +678,10 @@ class ExploreMapFragment : CommonsDaggerSupportFragment(), ExploreMapContract.Vi
             descriptionText
         else
             descriptionText.replaceFirst(".$".toRegex(), ""))
-        // Set the short description after we remove place name from long description
-        binding!!.bottomSheetDetailsBinding.description.text = descriptionText
+
+        binding!!.bottomSheetDetailsBinding.description.text =
+            StringUtil.fromHtml(descriptionText)
+
     }
 
     override fun addSearchThisAreaButtonAction() {
