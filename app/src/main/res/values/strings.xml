@@ -368,6 +368,7 @@
   <string name="quiz_screenshot_question">Is this screenshot OK to upload?</string>
   <string name="share_app_title">Share App</string>
   <string name="rotate">Rotate</string>
+  <string name="crop">Crop</string>
 
   <string name="error_fetching_nearby_places">Could not load nearby places</string>
   <string name="no_pictures_in_this_area">No pictures in this area</string>
@@ -889,5 +890,6 @@ Upload your first media by tapping on the add button.</string>
   <string name="nominated_for_deletion_btn">Nominated for Deletion</string>
   <string name="custom_selector_max_image_limit_reached">You can only select a maximum of %d images.</string>
   <string name="add_new_upload">Add new upload</string>
+  <string name="edit_unsupported_format_explanation"><string name="edit_unsupported_format_explanation">In-app editing is only available for JPEG files. To edit other formats, please use a third-party tool.</string></string>
 
 </resources>
