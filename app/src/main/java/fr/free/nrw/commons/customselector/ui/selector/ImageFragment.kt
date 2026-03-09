@@ -83,7 +83,7 @@ class ImageFragment :
     private var selectorRV: RecyclerView? = null
     private var loader: ProgressBar? = null
     private var switch: SwitchMaterial? = null
-    lateinit var filteredImages: ArrayList<Image>
+    private var filteredImages: ArrayList<Image> = arrayListOf()
 
     /**
      * Stores all images

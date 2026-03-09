@@ -97,7 +97,7 @@
   <string name="login_failed_blocked">Ymddiheurwn. Mae\'r defnyddiwr hwn wedi ei flocio ar Gomin Wikimedia</string>
   <string name="login_failed_2fa_needed">Mae\'n rhaid i chi roi eich cod adnabod 2 ffactor.</string>
   <string name="login_failed_generic" fuzzy="true">Methodd y mewngofnodi</string>
-  <string name="share_upload_button">Uwchlwyther</string>
+  <string name="share_upload_button">Lanlwytho</string>
   <string name="multiple_share_base_title">Enwch y set hwn</string>
   <string name="provider_modifications">Newidiadau</string>
   <string name="menu_upload_single">Uwchlwytho</string>

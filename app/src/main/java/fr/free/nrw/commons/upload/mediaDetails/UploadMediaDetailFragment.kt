@@ -64,12 +64,8 @@ class UploadMediaDetailFragment : UploadBaseFragment(), UploadMediaDetailsContra
     UploadMediaDetailAdapter.EventListener {
 
     private lateinit var startForResult: ActivityResultLauncher<Intent>
-
-    private val startForEditActivityResult = registerForActivityResult<Intent, ActivityResult>(
-        ActivityResultContracts.StartActivityForResult(), ::onEditActivityResult)
-
-    private val voiceInputResultLauncher = registerForActivityResult<Intent, ActivityResult>(
-        ActivityResultContracts.StartActivityForResult(), ::onVoiceInput)
+    private lateinit var startForEditActivityResult: ActivityResultLauncher<Intent>
+    private lateinit var voiceInputResultLauncher: ActivityResultLauncher<Intent>
 
     @Inject
     lateinit var presenter: UploadMediaDetailsContract.UserActionListener
@@ -115,6 +111,14 @@ class UploadMediaDetailFragment : UploadBaseFragment(), UploadMediaDetailsContra
      */
     private var editableUploadItem: UploadItem? = null
 
+    /**
+     * Tracks the URI of an edited image (after rotation/crop in EditActivity).
+     * When set, this takes priority over the original uploadItem.mediaUri so that
+     * the async onImageProcessed callback doesn't overwrite the preview with the
+     * original (pre-edit) image.
+     */
+    private var editedImageUri: Uri? = null
+
     private var _binding: FragmentUploadMediaDetailFragmentBinding? = null
     private val binding: FragmentUploadMediaDetailFragmentBinding get() = _binding!!
 
@@ -137,10 +141,15 @@ class UploadMediaDetailFragment : UploadBaseFragment(), UploadMediaDetailsContra
         if (savedInstanceState != null && uploadableFile == null) {
             uploadableFile = savedInstanceState.getParcelable(UPLOADABLE_FILE)
         }
+        if (savedInstanceState != null) {
+            editedImageUri = savedInstanceState.getParcelable(EDITED_IMAGE_URI)
+        }
         // Register the ActivityResultLauncher for LocationPickerActivity
         startForResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             onCameraPosition(result)
         }
+        startForEditActivityResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult(), ::onEditActivityResult)
+        voiceInputResultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult(), ::onVoiceInput)
     }
 
     override fun onCreateView(
@@ -280,9 +289,30 @@ class UploadMediaDetailFragment : UploadBaseFragment(), UploadMediaDetailsContra
                     View.VISIBLE
                 }
 
+            // lljtran only supports lossless JPEG rotation, so we disable editing for other formatts
+            val filePath = uploadableFile?.getFilePath()?.toString() ?: ""
+            val isJpeg = filePath.endsWith(".jpeg", ignoreCase = true)
+                    || filePath.endsWith(".jpg", ignoreCase = true)
+            llEditImage.visibility = View.VISIBLE
+            llEditImage.alpha = if (isJpeg) 1.0f else 0.5f
+            // update the click listener to handle the both cases
+            llEditImage.setOnClickListener {
+                if (isJpeg) {
+                    presenter.onEditButtonClicked(indexOfFragment)
+                } else {
+                    // dialog for non jpg formats
+                    showAlertDialog(
+                        requireActivity(),
+                        getString(R.string.edit_image),
+                    getString(R.string.edit_unsupported_format_explanation),
+                    getString(R.string.ok),
+                    null
+                    )
+                }
+            }
+
             btnNext.setOnClickListener { presenter.displayLocDialog(indexOfFragment, inAppPictureLocation, hasUserRemovedLocation) }
             btnPrevious.setOnClickListener { fragmentCallback?.onPreviousButtonClicked(indexOfFragment) }
-            llEditImage.setOnClickListener { presenter.onEditButtonClicked(indexOfFragment) }
             llContainerTitle.setOnClickListener { expandCollapseLlMediaDetail(!isExpanded) }
             llLocationStatus.setOnClickListener { presenter.onMapIconClicked(indexOfFragment) }
             btnCopySubsequentMedia.setOnClickListener { onButtonCopyTitleDescToSubsequentMedia() }
@@ -364,7 +394,11 @@ class UploadMediaDetailFragment : UploadBaseFragment(), UploadMediaDetailsContra
         if (_binding == null) {
             return
         }
-        binding.backgroundImage.setImageURI(uploadItem.mediaUri)
+        // If the user has already edited the image, show the edited version
+        // instead of the original. This prevents the async preProcessImage
+        // callback from overwriting the edited preview.
+        val uriToShow = editedImageUri ?: uploadItem.mediaUri
+        binding.backgroundImage.setImageURI(uriToShow)
     }
 
     override fun onNearbyPlaceFound(
@@ -596,7 +630,11 @@ class UploadMediaDetailFragment : UploadBaseFragment(), UploadMediaDetailsContra
     override fun showEditActivity(uploadItem: UploadItem) {
         editableUploadItem = uploadItem
         val intent = Intent(context, EditActivity::class.java)
-        intent.putExtra("image", uploadableFile!!.getFilePath().toString())
+        //used the mediaUri from the uploadItem.
+        //now, if the image is edited, uploadItem.mediaUri points to the new rotated file.
+        //if it is not edited, it points to the original.
+        val currentPath = uploadItem.mediaUri?.path ?: uploadableFile?.getFilePath().toString()
+        intent.putExtra("image", currentPath)
         startForEditActivityResult.launch(intent)
     }
 
@@ -690,15 +728,26 @@ class UploadMediaDetailFragment : UploadBaseFragment(), UploadMediaDetailsContra
         if (result.resultCode == Activity.RESULT_OK) {
             val path = result.data!!.getStringExtra("editedImageFilePath")
 
-            if (Objects.equals(result, "Error")) {
-                Timber.e("Error in rotating image")
+            if (Objects.equals(path, "Error")) {
+                Timber.e("Error in editing image")
                 return
             }
             try {
+                val editedFile = File(path!!)
+                val editedUri = Uri.fromFile(editedFile)
+
+                // Store the edited URI so that any future onImageProcessed callback
+                // (e.g. from an async receiveImage after activity recreation) won't
+                // overwrite the preview with the original image.
+                editedImageUri = editedUri
+
                 if (_binding != null) {
-                    binding.backgroundImage.setImageURI(Uri.fromFile(File(path!!)))
+                    binding.backgroundImage.setImageURI(editedUri)
                 }
-                editableUploadItem!!.setContentAndMediaUri(Uri.fromFile(File(path!!)))
+                editableUploadItem!!.setContentAndMediaUri(editedUri)
+                // Update uploadableFile so re-opening the edit screen loads
+                // the already-edited image instead of the original
+                uploadableFile = UploadableFile(editedUri, editedFile)
                 fragmentCallback!!.changeThumbnail(
                     indexOfFragment,
                     path
@@ -898,6 +947,9 @@ class UploadMediaDetailFragment : UploadBaseFragment(), UploadMediaDetailsContra
         if (uploadableFile != null) {
             outState.putParcelable(UPLOADABLE_FILE, uploadableFile)
         }
+        if (editedImageUri != null) {
+            outState.putParcelable(EDITED_IMAGE_URI, editedImageUri)
+        }
         outState.putParcelableArrayList(
             UPLOAD_MEDIA_DETAILS,
             ArrayList(uploadMediaDetailAdapter.items)
@@ -924,5 +976,6 @@ class UploadMediaDetailFragment : UploadBaseFragment(), UploadMediaDetailsContra
         const val LAST_ZOOM: String = "last_zoom_level_while_uploading"
         const val UPLOADABLE_FILE: String = "uploadable_file"
         const val UPLOAD_MEDIA_DETAILS: String = "upload_media_detail_adapter"
+        private const val EDITED_IMAGE_URI: String = "edited_image_uri"
     }
 }

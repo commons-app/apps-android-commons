@@ -359,6 +359,7 @@
   <string name="quiz_screenshot_question">Bu skrinşotu yükləmək olar?</string>
   <string name="share_app_title">Proqramı paylaş</string>
   <string name="rotate">Fırlat</string>
+  <string name="crop">Kəs</string>
   <string name="error_fetching_nearby_places">Yaxınlıqdakı yerləri yükləmək mümkün olmadı</string>
   <string name="no_pictures_in_this_area">Bu ərazidə şəkillər yoxdur</string>
   <string name="no_nearby_places_around">Yaxınlıqda yer tapılmadı</string>
