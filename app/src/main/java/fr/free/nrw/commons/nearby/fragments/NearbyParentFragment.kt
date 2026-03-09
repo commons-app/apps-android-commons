@@ -369,8 +369,7 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        if (Label.TEXT_TO_DESCRIPTION.isEmpty())
-            Label.init(requireContext().applicationContext)
+        Label.init(requireContext().applicationContext)
         loadExploreMapData();
 
         binding = FragmentNearbyParentBinding.inflate(inflater, container, false)
