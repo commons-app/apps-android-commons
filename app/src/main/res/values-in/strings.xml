@@ -3,6 +3,7 @@
 * Agam Riyandana
 * Akmaie Ajam
 * Arifin.wijaya
+* Bagas Chrisara
 * Birusian
 * Boesenbergia
 * DARMAS BUDI SANTOSO
@@ -11,6 +12,7 @@
 * Farras
 * Gombang
 * Hidayatsrf
+* HyperAnd
 * Ilham151096
 * Iwan Novirion
 * Joseagush
@@ -83,17 +85,17 @@
   <string name="logging_in_message">Silakan tunggu…</string>
   <string name="updating_caption_title">Memperbarui takarir dan deskripsi</string>
   <string name="updating_caption_message">Mohon tunggu...</string>
-  <string name="login_success" fuzzy="true">Berhasil masuk log!</string>
-  <string name="login_failed" fuzzy="true">Gagal masuk log!</string>
+  <string name="login_success">Berhasil masuk log!</string>
+  <string name="login_failed">Gagal masuk log!</string>
   <string name="upload_failed">Berkas tidak ditemukan. Silakan coba berkas lain.</string>
   <string name="retry_limit_reached">Batas pencobaan ulang maksimum telah tercapai! Harap batalkan pengunggahan dan coba lagi</string>
   <string name="unrestricted_battery_mode">Matikan pengoptimalan baterai?</string>
-  <string name="authentication_failed" fuzzy="true">Otentikasi gagal, silakan masuk log kembali</string>
+  <string name="authentication_failed">Autentikasi gagal. Silakan masuk kembali.</string>
   <string name="uploading_started">Mulai mengunggah!</string>
   <string name="uploading_queued">Unggahan dalam antrian (mode sambungan terbatas diaktifkan)</string>
   <string name="upload_completed_notification_title">%1$s terunggah!</string>
   <string name="upload_completed_notification_text">Tekan untuk melihat unggahan Anda</string>
-  <string name="upload_progress_notification_title_start" fuzzy="true">Mengunggah berkas: %1$s</string>
+  <string name="upload_progress_notification_title_start">Mengunggah berkas: %1$s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s terunggah!</string>
   <string name="upload_progress_notification_title_finishing">Menyelesaikan pengunggahan %1$s</string>
   <string name="upload_failed_notification_title">Pengunggaha %1$s gagal</string>
@@ -142,7 +144,7 @@
   <string name="title_activity_settings">Pengaturan</string>
   <string name="title_activity_signup">Mendaftar</string>
   <string name="title_activity_featured_images">Gambar Pilihan</string>
-  <string name="images_featured_explanation" fuzzy="true">Gambar pilihan adalah gambar dari fotografer dan ilustrator berkemampuan tinggi yang komunitas Wikimedia Commons telah pilih sebagai salah satu gambar dengan kualitas tertinggi di situs ini.</string>
+  <string name="images_featured_explanation">Gambar pilihan adalah kontribusi dari fotografer dan ilustrator berkemampuan tinggi yang komunitas Wikimedia Commons telah pilih sebagai salah satu gambar dengan kualitas tertinggi di situs ini.</string>
   <string name="title_activity_custom_selector">Pemilih Kustom</string>
   <string name="title_activity_category_details">Kategori</string>
   <string name="title_activity_review">Ulasan Peer</string>
@@ -159,15 +161,16 @@
   <string name="no_uploads_yet">Anda belum mengunggah foto apapun.</string>
   <string name="menu_retry_upload">Coba lagi</string>
   <string name="menu_cancel_upload">Batal</string>
+  <string name="language_search_type_language_name">Ketik Nama Bahasa</string>
   <string name="media_upload_policy">Dengan mengirim foto ini, saya menyatakan bahwa ini adalah karya saya sendiri yang tidak mengandung bahan atau foto narsis berhak cipta, dan tidak menyalahi &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;kebijakan Wikimedia Commons&lt;/a&gt;.</string>
   <string name="menu_download">Unduh</string>
   <string name="preference_license">Lisensi standar</string>
   <string name="use_previous">Gunakan judul dan deskripsi sebelumnya</string>
   <string name="preference_theme">Tema</string>
-  <string name="license_name_cc_by_sa_four" fuzzy="true">Atribusi-BerbagiSerupa 4.0</string>
-  <string name="license_name_cc_by_four" fuzzy="true">Atribusi 4.0</string>
-  <string name="license_name_cc_by_sa" fuzzy="true">Atribusi-BerbagiSerupa 3.0</string>
-  <string name="license_name_cc_by" fuzzy="true">Atribusi 3.0</string>
+  <string name="license_name_cc_by_sa_four">Atribusi-BerbagiSerupa 4.0</string>
+  <string name="license_name_cc_by_four">Atribusi 4.0</string>
+  <string name="license_name_cc_by_sa">Atribusi-BerbagiSerupa 3.0</string>
+  <string name="license_name_cc_by">Atribusi 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
@@ -225,6 +228,7 @@
   <string name="become_a_tester_title">Jadi Penguji Beta</string>
   <string name="become_a_tester_description">Gabung ke kanal beta kami di Google Play dan dapatkan akses lebih dulu ke fitur-fitur dan perbaikan bug</string>
   <string name="_2fa_code">Kode O2F</string>
+  <string name="email_auth_code">Kode verifikasi surel</string>
   <string name="logout_verification">Apakah Anda benar-benar ingin keluar?</string>
   <string name="no_subcategory_found">Subkategori tidak ditemukan</string>
   <string name="no_parentcategory_found">Tidak ditemukan kategori induk</string>
@@ -232,8 +236,8 @@
   <string name="welcome_image_llamas">Llama</string>
   <string name="welcome_image_rainbow_bridge">Jembatan Pelangi</string>
   <string name="welcome_image_tulip">Tulip</string>
-  <string name="welcome_image_welcome_wikipedia" fuzzy="true">Selamat datang di Wikipedia</string>
-  <string name="welcome_image_welcome_copyright" fuzzy="true">Selamat Datang Hak Cipta</string>
+  <string name="welcome_image_welcome_wikipedia">Gambar skematis dari sebuah artikel Wikipedia umum.</string>
+  <string name="welcome_image_welcome_copyright">Gambar tumpukan kertas dengan simbol hak cipta yang dicoret.</string>
   <string name="welcome_image_sydney_opera_house">Gedung opera Sydney</string>
   <string name="cancel">Batal</string>
   <string name="navigation_drawer_open">Buka</string>
@@ -266,6 +270,7 @@
   <string name="upload_connection_error_alert_detail">Proses pengunggahan memerlukan akses internet aktif. Mohon periksa sambungan jaringan Anda.</string>
   <string name="upload_problem_image">Masalah dalam gambar ditemukan</string>
   <string name="internet_downloaded">Unggah hanya gambar yang sudah Anda potret sendiri. Jangan unggah gambar yang Anda ambil dari Internet.</string>
+  <string name="preferences_uploads">Unggahan</string>
   <string name="use_external_storage">Simpan foto dalam aplikasi</string>
   <string name="use_external_storage_summary">Simpan gambar yang diambil menggunakan kamera dalam aplikasi ke dalam penyimpanan perangkat Anda</string>
   <string name="login_to_your_account">Masuk ke akun Anda</string>
@@ -278,14 +283,16 @@
   <string name="nominated_see_more">Lihat halaman web untuk rincian</string>
   <string name="skip_login">Lewati</string>
   <string name="navigation_item_login">Masuk</string>
-  <string name="skip_login_title" fuzzy="true">Apakah Anda benar-benar tidak ingin masuk?</string>
-  <string name="skip_login_message" fuzzy="true">Anda mungkin harus masuk untuk mengunggah gambar di lain waktu.</string>
+  <string name="skip_login_title">Apakah Anda benar-benar ingin melewati proses login?</string>
+  <string name="skip_login_message">Anda mungkin harus masuk log untuk mengunggah gambar di lain waktu.</string>
   <string name="login_alert_message">Silakan masuk untuk menggunakan fitur ini</string>
   <string name="copy_wikicode">Salin wikitext ke papan klip</string>
   <string name="wikicode_copied">Wikitext telah disalin ke papan klip</string>
   <string name="nearby_location_not_available">Lokasi terdekat mungkin tidak berfungsi dengan baik, Lokasi tidak tersedia.</string>
+  <string name="nearby_showing_pins_offline">Internet tidak tersedia. Hanya menampilkan tempat yang tersimpan dalam cache.</string>
   <string name="upload_location_access_denied">Akses lokasi ditolak. Silakan atur lokasi Anda secara manual untuk menggunakan fitur ini.</string>
   <string name="location_permission_rationale_nearby">Izin diperlukan untuk menampilkan daftar tempat di sekitar</string>
+  <string name="location_permission_rationale_explore">Izin diperlukan untuk menampilkan daftar tempat di sekitar</string>
   <string name="nearby_directions">Petunjuk Arah</string>
   <string name="nearby_wikidata">Wikidata</string>
   <string name="nearby_wikipedia">Wikipedia</string>
@@ -335,6 +342,7 @@
   <string name="quiz">Kuis</string>
   <string name="quiz_question_string">Apakah gambar ini OK untuk diunggah?</string>
   <string name="question">Pertanyaan</string>
+  <string name="quiz_i_am_not_sure">Saya tidak yakin</string>
   <string name="result">Hasil</string>
   <string name="quiz_back_button">Jika Anda terus-menerus mengunggah gambar yang sesuai dengan kriteria penghapusan, akun Anda dapat dipastikan akan diblokir. Apakah anda yakin mau mengakhiri kuis ini?</string>
   <string name="quiz_alert_message">Lebih dari %1$s gambar yang Anda unggah telah dihapus. Jika Anda terus-menerus mengunggah gambar yang sesuai dengan kriteria penghapusan, akun Anda dapat dipastikan akan diblokir.</string>
@@ -344,8 +352,9 @@
   <string name="blurry_image_answer">Salah satu tujuan Commons adalah untuk mengumpulkan gambar berkualitas. Karena itu, gambar buram seharusnya tidak diunggah. Cobalah selalu memotret foto yang berkwalitas bagus dengan pencahayaan yang baik.</string>
   <string name="construction_event_answer">Gambar yang menunjukkan teknologi atau budaya sangat diharapkan di Commons.</string>
   <string name="congratulatory_message_quiz">Anda mendapat %1$s jawaban yang benar. Selamat!</string>
+  <string name="quiz_continue">Lanjutkan</string>
   <string name="warning_for_no_answer">Pilih salah satu dari dua opsi untuk menjawab pertanyaan</string>
-  <string name="user_not_logged_in" fuzzy="true">Sesi masuk telah kedaluwarsa, harap masuk log lagi.</string>
+  <string name="user_not_logged_in">Sesi login telah berakhir. Silakan login kembali.</string>
   <string name="quiz_result_share_message">Bagikan hasil kuis Anda dengan teman!</string>
   <string name="continue_message">Lanjut</string>
   <string name="correct">Jawaban yang benar</string>
@@ -401,6 +410,7 @@
   <string name="map_application_missing">Tidak ada aplikasi peta yang kompatibel dapat ditemukan di perangkat Anda. Silakan instal aplikasi peta untuk menggunakan fitur ini.</string>
   <string name="title_page_bookmarks_pictures">Gambar</string>
   <string name="title_page_bookmarks_locations">Lokasi</string>
+  <string name="title_page_bookmarks_categories">Kategori</string>
   <string name="menu_bookmark">Tambah/Hapus markah</string>
   <string name="provider_bookmarks">Markah</string>
   <string name="bookmark_empty">Anda belum ada menambahkan markah</string>
@@ -428,7 +438,7 @@
   <string name="never_ask_again">Jangan pernah menanyakan ini lagi</string>
   <string name="display_location_permission_title">Tanya untuk izin lokasi</string>
   <string name="display_location_permission_explanation">Minta izin lokasi ketika diperlukan untuk fitur tampilan kartu pemberitahuan sekitar.</string>
-  <string name="achievements_fetch_failed" fuzzy="true">Terjadi kesalahan. Kami tidak dapat mengambil pencapaian Anda</string>
+  <string name="achievements_fetch_failed">Terjadi kesalahan, dan kami tidak dapat mengambil pencapaian Anda</string>
   <string name="achievements_fetch_failed_ultimate_achievement">Anda telah membuat begitu banyak kontribusi sehingga sistem perhitungan pencapaian kami tidak dapat menanggulanginya. Ini adalah pencapaian yang tertinggi.</string>
   <string name="ends_on">Berakhir pada:</string>
   <string name="display_campaigns">Sinahang penyobyahan</string>
@@ -448,11 +458,11 @@
   <string name="check_category_failure_message">Tidak bisa meminta pemeriksaan kategori untuk %1$s</string>
   <string name="check_category_toast">Meminta pemeriksaan kategori untuk %1$s</string>
   <string name="nominate_for_deletion_done">Selesai</string>
-  <string name="send_thank_success_title" fuzzy="true">Mengirimkan Terima Kasih: Berhasil</string>
-  <string name="send_thank_success_message" fuzzy="true">Berhasil mengirimkan terima kasih kepada %1$s</string>
-  <string name="send_thank_failure_message" fuzzy="true">Gagal mengirimkan terima kasih kepada %1$s</string>
-  <string name="send_thank_failure_title" fuzzy="true">Mengirimkan Terima Kasih: Gagal</string>
-  <string name="send_thank_toast" fuzzy="true">Mengirimkan Terima Kasih kepada %1$s</string>
+  <string name="send_thank_success_title">Mengirimkan terima kasih: Berhasil</string>
+  <string name="send_thank_success_message">Berhasil mengirimkan terima kasih kepada %1$s</string>
+  <string name="send_thank_failure_message">Gagal mengirimkan terima kasih kepada %1$s</string>
+  <string name="send_thank_failure_title">Mengirimkan terima kasih: Gagal</string>
+  <string name="send_thank_toast">Mengucapkan terima kasih kepada %1$s</string>
   <string name="review_copyright">Apakah ini memenuhi aturan hak cipta?</string>
   <string name="review_category">Apakah ini dikategorikan dengan tepat?</string>
   <string name="review_spam">Apakah ini sesuai dengan cakupan?</string>
@@ -474,18 +484,19 @@
   <string name="no_notification">Anda tidak memiliki notifikasi belum dibaca</string>
   <string name="no_read_notification">Anda tidak memiliki notifikasi terbaca</string>
   <string name="share_logs_using">Bagikan log menggunakan</string>
+  <string name="check_your_email_inbox">Periksa kotak masuk email Anda</string>
   <string name="menu_option_read">Lihat yang telah dibaca</string>
   <string name="menu_option_unread">Lihat yang belum terbaca</string>
   <string name="error_occurred_in_picking_images">Terjadi kesalahan ketika memilih gambar</string>
   <string name="please_wait">Silakan tunggu…</string>
   <string name="images_via_nearby_explanation">Gambar Diunggah via Tempat sekitar adalah gambar yang diunggah dengan menemukan tempat di peta.</string>
   <string name="thanks_received_explanation">Fitur ini memungkinkan penyunting mengirimkan sebuah pemberitahuan Terima kasih kepada pengguna yang membuat suntingan yang berguna – dengan menggunakan tautan terima kasih kecil di halaman riwayat atau \'\'diff\'\'.</string>
-  <string name="copy_image_caption_description" fuzzy="true">Salin ke media berikutnya</string>
+  <string name="copy_image_caption_description">Salin ke item berikutnya</string>
   <string name="copied_successfully">Berhasil disalin</string>
   <string name="welcome_do_upload_content_description">Contoh gambar yang sebaiknya diunggah ke Commons</string>
   <string name="welcome_dont_upload_content_description">Contoh gambar yang sebaiknya tidak diunggah</string>
   <string name="skip_image">Lewati gambar ini</string>
-  <string name="download_failed_we_cannot_download_the_file_without_storage_permission" fuzzy="true">Pengunduhan Gagal!!. Kami tidak dapat mengunduh berkas ini tanpa perizinan penyimpanan eksternal.</string>
+  <string name="download_failed_we_cannot_download_the_file_without_storage_permission">Pengunduhan gagal. Kami tidak dapat mengunduh berkas ini tanpa izin penyimpanan eksternal.</string>
   <string name="manage_exif_tags">Kelola Tanda EXIF</string>
   <string name="manage_exif_tags_summary">Pilih tanda EXIF mana yang ingin dipertahankan dalam unggahan.</string>
   <string name="exif_tag_name_author">Pembuat</string>
@@ -498,6 +509,7 @@
   <string name="share_text">Mengunggah foto ke Wikimedia Commons secara langsung dari telepon Anda. Unduh aplikasi Commons sekarang: %1$s</string>
   <string name="share_via">Bagikan aplikasi lewat...</string>
   <string name="image_info">Info Gambar</string>
+  <string name="upload_categories_dont_show_this_message_again">Jangan tampilkan pesan ini lagi</string>
   <string name="no_categories_found">Kategori tidak ditemukan</string>
   <string name="no_depiction_found">Penggambaran tidak ditemukan</string>
   <string name="upload_cancelled">Pengunggahan dibatalkan</string>
@@ -555,11 +567,13 @@
   <string name="place_state_exists">Ada</string>
   <string name="place_state_needs_photo">Perlu foto</string>
   <string name="place_type">Jenis tempat:</string>
-  <string name="nearby_search_hint" fuzzy="true">Jembatas, museum, hotel, dll.</string>
+  <string name="nearby_search_hint">Jembatan, museum, hotel, dll.</string>
   <string name="you_must_reset_your_passsword">Terjadi kesalahan ketika masuk log. Anda perlu mengatur ulang kata sandi Anda !!</string>
   <string name="title_for_media">MEDIA</string>
   <string name="title_for_child_classes">KELAS ANAK</string>
   <string name="title_for_parent_classes">KELAS INDUK</string>
+  <string name="title_for_subcategories">SUBKATEGORI</string>
+  <string name="title_for_parent_categories">KATEGORI INDUK</string>
   <string name="upload_nearby_place_found_title">Tempat di sekitar ditemukan</string>
   <string name="upload_nearby_place_found_description_singular">Apakah ini gambar %1$s?</string>
   <string name="title_app_shortcut_bookmark">Markah</string>
@@ -594,7 +608,7 @@
   <string name="wikipedia_instructions_step_5">5. Salin teks wiki ke tempat yang sesuai.</string>
   <string name="wikipedia_instructions_step_6">6. Sunting teks wiki untuk menyesuaikan posisinya, apabila perlu. Untuk informasi lebih lanjut, lihat &lt;a href=\"https://en.wikipedia.org/wiki/Wikipedia:Manual_of_Style/Images#How_to_place_an_image\"&gt;here&lt;/a&gt;.</string>
   <string name="wikipedia_instructions_step_7">7. Terbitkan artikel</string>
-  <string name="copy_wikicode_to_clipboard" fuzzy="true">Salin kode wiki ke papan klip</string>
+  <string name="copy_wikicode_to_clipboard">Salin wikitext ke papan klip</string>
   <string name="pause">jeda</string>
   <string name="resume">lanjut</string>
   <string name="paused">Dijeda</string>
@@ -635,6 +649,8 @@
   <string name="categories_tooltip">Silakan pilih kategori yang sesuai. Tidak seperti penggambaran, kategori hanya berbahasa Inggris.</string>
   <string name="license_tooltip">Commons membuat gambar Anda dapat digunakan kembali dan diadaptasi oleh siapa saja. Apakah Anda ingin melepaskan semua hak? Apakah Anda ingin diatribusikan? Apakah Anda ingin adaptasi gambar ini menggunakan lisensi yang sama?</string>
   <string name="depicts_step_title">Menggambarkan</string>
+  <string name="depicts_label">Label</string>
+  <string name="depicts_description">Deskripsi</string>
   <string name="license_step_title">Lisensi Media</string>
   <string name="media_detail_step_title">Rincian Media</string>
   <string name="menu_view_category_page">Lihat halaman kategori</string>
@@ -661,7 +677,7 @@
   <string name="back">Kembali</string>
   <string name="welcome_custom_picture_selector_text">Selamat datang di Pemilih Gambar Kustom</string>
   <string name="custom_selector_info_text1">Alat pemilih ini menunjukkan gambar mana yang sudah Anda unggah ke Commons.</string>
-  <string name="custom_selector_info_text2" fuzzy="true">Berbeda dengan gambar di sebelah kiri, gambar di sebelah kanan memiliki logo Commons yang menandakan gambarnya sudah diunggah.\n  Sentuh dan tahan untuk pratinjau gambar.</string>
+  <string name="custom_selector_info_text2">Berbeda dengan gambar di sebelah kiri, gambar di sebelah kanan memiliki logo Commons yang menandakan gambarnya sudah diunggah.\n\nSentuh dan tahan untuk pratinjau gambar.</string>
   <string name="welcome_custom_selector_ok">Bagus</string>
   <string name="custom_selector_already_uploaded_image_text">Gambar ini sudah diunggah di Commons.</string>
   <string name="custom_selector_over_limit_warning">Karena alasan teknis, aplikasi tidak dapat mengunggah lebih dari %1$d gambar sekaligus. Batas unggahan %1$d telah terlampaui sebesar %2$d.</string>
@@ -677,6 +693,7 @@
   <string name="wlm_campaign_description">Wiki Loves Monuments adalah lomba foto internasional untuk monumen yang diselenggarakan oleh Wikimedia</string>
   <string name="need_permission">Membutuhkan Izin</string>
   <string name="read_phone_state_permission_message">Peta Sekitar harus membaca STATUS TELEPON untuk berfungsi dengan benar</string>
+  <string name="location_off_dialog_text">Tolong aktifkan layanan lokasi untuk melihat tempat-tempat terdekat.</string>
   <string name="location_permission_rationale">Pilihan Izin: Lokasi saat ini untuk saran kategori</string>
   <string name="contributions_of_user">Kontribusi Pengguna: %1$s</string>
   <string name="achievements_of_user">Pencapaian Pengguna: %1$s</string>
@@ -690,7 +707,7 @@
   <string name="location_message">Data lokasi membantu penyunting Wiki menemukan gambar Anda, sehingga menjadi lebih berguna.\nUnggahan terbaru Anda tidak punya informasi lokasi.\nKami menyarankan Anda menyalakan lokasi di setelan aplikasi kamera Anda.\nTerima kasih karena telah mengunggah!</string>
   <string name="no_location_found_title">Lokasi tidak ditemukan</string>
   <string name="no_location_found_message">Bagaimana jika Anda menambahkan tempat di mana gambar ini diambil?\nData lokasi membantu para penyunting Wiki menemukan gambar Anda, sehingga ia menjadi lebih berguna.\nTerima kasih!</string>
-  <string name="add_location" fuzzy="true">Tambahkan lokasi</string>
+  <string name="add_location">Tambahkan Lokasi</string>
   <string name="feedback_sharing_data_alert">Silakan hapus informasi yang menurut Anda tidak layak disebarkan ke masyarakat umum dari surel ini. Selain itu, perlu diperhatikan bahwa alamat surel yang Anda unggah, beserta foto penggunanya, akan dapat dilihat oleh masyarakat umum.</string>
   <string name="explore_map_details">Rincian</string>
   <string name="copyright_popup">Silakan unggah gambar yang Anda buat sendiri. Pengunggah gambar yang melanggar hak cipta akan diblokir. Aturan ini juga berlaku untuk beta. Terima kasih telah menguji aplikasi ini!</string>
@@ -709,8 +726,8 @@
   <string name="unmark_as_not_for_upload">Hapus tanda tidak untuk diunggah</string>
   <string name="marking_as_not_for_upload">Tandai sebagai bukan untuk diunggah</string>
   <string name="unmarking_as_not_for_upload">Tandai sebagai untuk diunggah</string>
-  <string name="show_already_actioned_pictures" fuzzy="true">Tampilkan gambar yang sudah ditindaklanjuti</string>
-  <string name="hiding_already_actioned_pictures" fuzzy="true">Sembunyikan gambar yang sudah ditindaklanjuti</string>
+  <string name="show_already_actioned_pictures">Tampilkan gambar yang sudah ditindaklanjuti</string>
+  <string name="hiding_already_actioned_pictures">Sembunyikan gambar yang sudah ditindaklanjuti</string>
   <string name="no_more_images_found">Tidak ada lagi gambar ditemukan</string>
   <string name="this_image_is_already_uploaded">Gambar ini sudah diunggah</string>
   <string name="can_not_select_this_image_for_upload">Tidak dapat memilih gambar ini untuk diunggah</string>

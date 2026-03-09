@@ -456,11 +456,11 @@
   <string name="check_category_failure_message">Luokkatarkistusta ei voitu pyytää %1$s</string>
   <string name="check_category_toast">Pyydetään luokkatarkistusta %1$s</string>
   <string name="nominate_for_deletion_done">Valmis</string>
-  <string name="send_thank_success_title" fuzzy="true">Kiitosten lähettäminen: Onnistui</string>
+  <string name="send_thank_success_title">Kiitosten lähettäminen: Onnistui</string>
   <string name="send_thank_success_message">Kiitos lähetetty käyttäjälle %1$s</string>
   <string name="send_thank_failure_message">Kiitoksen lähettäminen käyttäjälle %1$s epäonnistui</string>
-  <string name="send_thank_failure_title" fuzzy="true">Kiitosten lähettäminen: Epäonnistui</string>
-  <string name="send_thank_toast" fuzzy="true">Lähetetty kiitokset %1$s</string>
+  <string name="send_thank_failure_title">Kiitosten lähettäminen: Epäonnistui</string>
+  <string name="send_thank_toast">Lähetetty kiitokset käyttäjälle %1$s</string>
   <string name="review_copyright">Noudattaako tämä tekijänoikeussääntöjä?</string>
   <string name="review_category">Onko tämä luokiteltu oikein?</string>
   <string name="review_spam">Sopiiko tämä sivuston puitteissa?</string>
