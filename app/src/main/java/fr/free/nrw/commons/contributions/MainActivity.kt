@@ -19,7 +19,6 @@ import fr.free.nrw.commons.databinding.MainBinding
 import fr.free.nrw.commons.explore.ExploreFragment
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.location.LocationServiceManager
-import fr.free.nrw.commons.media.MediaDetailPagerFragment
 import fr.free.nrw.commons.navtab.MoreBottomSheetFragment
 import fr.free.nrw.commons.navtab.MoreBottomSheetLoggedOutFragment
 import fr.free.nrw.commons.navtab.NavTab
@@ -65,7 +64,6 @@ class MainActivity : BaseActivity(), FragmentManager.OnBackStackChangedListener 
     private var bookmarkFragment: BookmarkFragment? = null
     @JvmField
     var activeFragment: ActiveFragment? = null
-    private val mediaDetailPagerFragment: MediaDetailPagerFragment? = null
     var navListener: BottomNavigationView.OnNavigationItemSelectedListener? = null
         private set
 
@@ -195,15 +193,15 @@ after opening the app.
     private fun loadFragment(fragment: Fragment?, showBottom: Boolean): Boolean {
         //showBottom so that we do not show the bottom tray again when constructing
         //from the saved instance state.
+        if (fragment is ContributionsFragment && activeFragment == ActiveFragment.CONTRIBUTIONS) {
+            // scroll to top if already on the Contributions tab
+            contributionsFragment?.scrollToTop()
+            return true
+        }
 
         freeUpFragments();
 
         if (fragment is ContributionsFragment) {
-            if (activeFragment == ActiveFragment.CONTRIBUTIONS) {
-                // scroll to top if already on the Contributions tab
-                contributionsFragment!!.scrollToTop()
-                return true
-            }
             contributionsFragment = fragment
             activeFragment = ActiveFragment.CONTRIBUTIONS
         } else if (fragment is NearbyParentFragment) {
@@ -271,8 +269,7 @@ after opening the app.
      * Called in loadFragment() before doing the actual loading.
      */
     fun freeUpFragments() {
-        // free all fragments except contributionsFragment because several tests depend on it.
-        // hence, contributionsFragment is probably still a leak
+        contributionsFragment = null
         nearbyParentFragment = null
         exploreFragment = null
         bookmarkFragment = null
