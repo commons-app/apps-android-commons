@@ -123,7 +123,7 @@
   <string name="waiting_first_sync">Беренче синхронлаштыруны көтү...</string>
   <string name="no_uploads_yet">Сез әле бер сурәтне дә төямәдегез.</string>
   <string name="menu_retry_upload">Кабатла</string>
-  <string name="menu_cancel_upload">Кире как</string>
+  <string name="menu_cancel_upload">Кире кагу</string>
   <string name="menu_download">Иңләргә</string>
   <string name="preference_license">Гадәттәге рөхсәтнамә килешүе</string>
   <string name="use_previous">Алдагы исемне һәм тамвирламаны куллан</string>

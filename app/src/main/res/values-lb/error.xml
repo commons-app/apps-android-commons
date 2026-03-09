@@ -7,6 +7,6 @@
 <resources>
   <string name="crash_dialog_title">Commons ass ofgestierzt</string>
   <string name="crash_dialog_text">Ups. Elo ass eppes schif gaang!</string>
-  <string name="crash_dialog_comment_prompt">Sot eis per E-Mail, wat Dir gemaach hutt. Dat hëlleft eis de Probleem ze léisen!</string>
+  <string name="crash_dialog_comment_prompt">Sot eis per E-Mail, wat Dir gemaach hutt. Dat hëlleft eis de Problem ze léisen!</string>
   <string name="crash_dialog_ok_toast">Merci!</string>
 </resources>
