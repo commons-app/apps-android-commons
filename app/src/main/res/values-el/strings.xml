@@ -376,6 +376,7 @@
   <string name="quiz_screenshot_question">Είναι εντάξει αυτό το στιγμιότυπο οθόνης για μεταφόρτωση;</string>
   <string name="share_app_title">Κοινοποίηση εφαρμογής</string>
   <string name="rotate">Περιστροφή</string>
+  <string name="crop">Περικοπή</string>
   <string name="error_fetching_nearby_places">Σφάλμα κατά την εύρεση κοντινών μερών.</string>
   <string name="no_pictures_in_this_area">Δεν υπάρχουν φωτογραφίες σε αυτήν την περιοχή</string>
   <string name="no_nearby_places_around">Δεν υπάρχουν μέρη κοντά σας</string>

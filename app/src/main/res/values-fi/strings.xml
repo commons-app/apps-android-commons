@@ -24,10 +24,10 @@
 * Veikk0.ma
 -->
 <resources>
-  <string name="commons_facebook">Commons Facebook-sivu</string>
-  <string name="commons_github">Commons GitHub lähdekoodi</string>
-  <string name="commons_logo">Commons-logo</string>
-  <string name="commons_website">Commons-verkkosivu</string>
+  <string name="commons_facebook">Commonsin Facebook-sivu</string>
+  <string name="commons_github">Commonsin lähdekoodi GitHubissa</string>
+  <string name="commons_logo">Commonsin logo</string>
+  <string name="commons_website">Commonsin sivusto</string>
   <string name="exit_location_picker">Poistu sijainnin valitsimesta</string>
   <string name="submit">Lähetä</string>
   <string name="add_another_description">Lisää toinen kuvaus</string>
@@ -233,8 +233,8 @@
   <string name="welcome_image_llamas">Laamat</string>
   <string name="welcome_image_rainbow_bridge">Sateenkaarisilta</string>
   <string name="welcome_image_tulip">Tulppaani</string>
-  <string name="welcome_image_welcome_wikipedia" fuzzy="true">Tervetuloa Wikipediaan</string>
-  <string name="welcome_image_welcome_copyright" fuzzy="true">Tervetuloa tekijänoikeus</string>
+  <string name="welcome_image_welcome_wikipedia">Kaaviokuva Wikipedia-artikkelista.</string>
+  <string name="welcome_image_welcome_copyright">Piirros paperipinosta, jossa on yliviivattu tekijänoikeussymboli.</string>
   <string name="welcome_image_sydney_opera_house">Sydneyn oopperatalo</string>
   <string name="cancel">Peru</string>
   <string name="navigation_drawer_open">Avaa</string>
@@ -286,6 +286,7 @@
   <string name="copy_wikicode">Kopioi wikiteksti leikepöydälle</string>
   <string name="wikicode_copied">Wikiteksti kopioitiin leikepöydälle</string>
   <string name="nearby_location_not_available">Lähistöllä-toiminto ei välttämättä toimi kunnolla, sillä sijainti ei käytettävissä.</string>
+  <string name="nearby_showing_pins_offline">Internet ei ole käytettävissä. Näytetään vain välimuistissa olevat paikat.</string>
   <string name="upload_location_access_denied">Sijainnin käyttö kielletty. Aseta sijaintisi manuaalisesti käyttääksesi tätä ominaisuutta.</string>
   <string name="location_permission_rationale_nearby">Lupa vaaditaan lähellä olevien paikkojen luettelon näyttämiseen</string>
   <string name="location_permission_rationale_explore">Lupa vaaditaan lähellä otettujen kuvien luettelon näyttämiseen</string>
@@ -322,6 +323,7 @@
   <string name="title_activity_search">Haku</string>
   <string name="search_recent_header">Äskettäiset haut:</string>
   <string name="provider_searches">Äskettäin haetut kyselyt</string>
+  <string name="provider_recent_languages">Äskettäin haetut kielet</string>
   <string name="error_loading_categories">Luokkia ladattaessa tapahtui virhe.</string>
   <string name="error_loading_depictions">Virhe ladattaessa esittää-tunnisteita.</string>
   <string name="search_tab_title_media">Media</string>
@@ -357,6 +359,7 @@
   <string name="quiz_screenshot_question">Onko tämä kuvakaappaus OK tallennettavaksi?</string>
   <string name="share_app_title">Jaa sovellus</string>
   <string name="rotate">Kierrä</string>
+  <string name="crop">Rajaa</string>
   <string name="error_fetching_nearby_places">Virhe läheisiä paikkoja ladatessa</string>
   <string name="no_pictures_in_this_area">Ei kuvia tältä alueelta</string>
   <string name="no_nearby_places_around">Ei lähistöllä olevia paikkoja</string>
@@ -435,7 +438,7 @@
   <string name="never_ask_again">Älä kysy tätä uudelleen</string>
   <string name="display_location_permission_title">Kysy lupaa sijainnille</string>
   <string name="display_location_permission_explanation">Pyydä sijaintilupaa tarvittaessa läheisen ilmoituksen näkymää varten.</string>
-  <string name="achievements_fetch_failed" fuzzy="true">Jotain meni pieleen. Emme voineet noutaa saavutuksia</string>
+  <string name="achievements_fetch_failed">Jotain meni pieleen, emme voineet noutaa saavutuksia</string>
   <string name="achievements_fetch_failed_ultimate_achievement">Olet tehnyt niin paljon muokkauskia, että saavutusten laskentajärjestelmä ei pysty selviytymään. Tämä on perimmäinen saavutus.</string>
   <string name="ends_on">Päättyy:</string>
   <string name="display_campaigns">Näytä kilpailut</string>
@@ -456,11 +459,11 @@
   <string name="check_category_failure_message">Luokkatarkistusta ei voitu pyytää %1$s</string>
   <string name="check_category_toast">Pyydetään luokkatarkistusta %1$s</string>
   <string name="nominate_for_deletion_done">Valmis</string>
-  <string name="send_thank_success_title" fuzzy="true">Kiitosten lähettäminen: Onnistui</string>
+  <string name="send_thank_success_title">Kiitosten lähettäminen: Onnistui</string>
   <string name="send_thank_success_message">Kiitos lähetetty käyttäjälle %1$s</string>
   <string name="send_thank_failure_message">Kiitoksen lähettäminen käyttäjälle %1$s epäonnistui</string>
-  <string name="send_thank_failure_title" fuzzy="true">Kiitosten lähettäminen: Epäonnistui</string>
-  <string name="send_thank_toast" fuzzy="true">Lähetetty kiitokset %1$s</string>
+  <string name="send_thank_failure_title">Kiitosten lähettäminen: Epäonnistui</string>
+  <string name="send_thank_toast">Lähetetty kiitokset käyttäjälle %1$s</string>
   <string name="review_copyright">Noudattaako tämä tekijänoikeussääntöjä?</string>
   <string name="review_category">Onko tämä luokiteltu oikein?</string>
   <string name="review_spam">Sopiiko tämä sivuston puitteissa?</string>
@@ -659,6 +662,8 @@
   <string name="back">Takaisin</string>
   <string name="welcome_custom_selector_ok">Mahtavaa</string>
   <string name="custom_selector_already_uploaded_image_text">Tämä kuva on jo ladattu Commonsiin.</string>
+  <string name="custom_selector_dismiss_limit_warning_button_text">Hylkää</string>
+  <string name="custom_selector_button_limit_text">Max: %1$d</string>
   <string name="custom_selector_limit_error_desc">Virhe: Tallennusraja ylitetty</string>
   <string name="learn_more">LUE LISÄÄ</string>
   <string name="need_permission">Tarvitaan käyttöoikeus</string>
@@ -691,13 +696,14 @@
   <string name="menu_view_report">Ilmoita</string>
   <string name="menu_view_set_white_background">Aseta valkoinen tausta</string>
   <string name="menu_view_set_black_background">Aseta musta tausta</string>
+  <string name="report_violation">Ilmianna rikkomus</string>
   <string name="report_user">Ilmianna käyttäjä</string>
   <string name="report_content">Ilmianna sisältö</string>
   <string name="request_user_block">Pyydä tämän käyttäjän estämistä</string>
   <string name="welcome_to_full_screen_mode_text">Tervetuloa koko näytön valintatilaan</string>
   <string name="full_screen_mode_zoom_info">Käytä kahta sormea lähentääksesi ja loitontaaksesi.</string>
   <string name="full_screen_mode_features_info">Pyyhkäise nopeasti ja pitkään suorittaaksesi nämä toiminnot: \n- Vasen/Oikea: Siirry edelliseen/seuraavaan \n- Ylös: Valitse\n- Alas: Merkitse ei-tallennettavaksi.</string>
-  <string name="see_your_achievements" fuzzy="true">Näytä omat saavutukset</string>
+  <string name="see_your_achievements">Katso omat saavutukset</string>
   <string name="edit_image">Muokkaa kuvaa</string>
   <string name="edit_location">Muokkaa sijaintia</string>
   <string name="location_updated">Sijainti päivitetty!</string>

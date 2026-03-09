@@ -115,10 +115,10 @@
   <string name="login_failed_2fa_needed">تاسو بايد خپل دوه لامليز تاييد کوډ ورکړئ.</string>
   <string name="login_failed_email_auth_needed">ستاسو برېښليک پتې ته د ننوتلو تاييد کوډ لېږل شوی دی. مهرباني وکړئ د ننوتلو لپاره کوډ ورکړئ.</string>
   <string name="login_failed_generic">غونډال کې ننوتنه نابريالۍ شوه</string>
-  <string name="share_upload_button">پورته کول</string>
+  <string name="share_upload_button">راپورته‌کول</string>
   <string name="multiple_share_base_title">د دې ټولگې نوم</string>
   <string name="provider_modifications">بدلونونه</string>
-  <string name="menu_upload_single">پورته کول</string>
+  <string name="menu_upload_single">راپورته‌کول</string>
   <string name="categories_search_text_hint">وېشنيزې پلټل</string>
   <string name="depicts_search_text_hint">هغه توکي وپلټئ چې ستاسو رسنۍ يې انځوروي (غر، تاج مح، او نور.)</string>
   <string name="menu_save_categories">خوندي کول</string>
@@ -223,7 +223,7 @@
   <string name="navigation_drawer_open">پرانېستل</string>
   <string name="navigation_drawer_close">تړل</string>
   <string name="navigation_item_home">کور</string>
-  <string name="navigation_item_upload">پورته کول</string>
+  <string name="navigation_item_upload">راپورته‌کول</string>
   <string name="navigation_item_nearby">نژدې</string>
   <string name="navigation_item_about">په اړه</string>
   <string name="navigation_item_settings">اوڼنې</string>
@@ -449,6 +449,10 @@
   <string name="leaderboard_my_rank_button_text">زما رتبه</string>
   <string name="limited_connection_enabled">محدودې نښلېدا ونگ‌ډول چارن‌شوی!</string>
   <string name="statistics_quality">ښه انځورونه</string>
+  <string name="resuming_upload">راپورته‌کېدنې بياپيلېږي...</string>
+  <string name="pausing_upload">راپورته‌کېدنې درول‌کېږي...</string>
+  <string name="cancelling_upload">راپورته‌کېدنې ناگارل‌کېږي...</string>
+  <string name="cancel_upload">راپورته‌کول ناگارل</string>
   <string name="image_location">انځور ځی</string>
   <string name="label">نښکه</string>
   <string name="description">څرگنداوی</string>

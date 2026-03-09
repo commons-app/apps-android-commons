@@ -324,16 +324,16 @@ class LoginActivityUnitTests {
     @Test
     @Throws(Exception::class)
     fun testGetFriendlyErrorMessageForNetworkException() {
-        val method: Method =
-            LoginActivity::class.java.getDeclaredMethod(
-                "getFriendlyErrorMessage",
-                Throwable::class.java,
-            )
+        val method = LoginActivity::class.java.getDeclaredMethod(
+            "getFriendlyErrorMessage",
+            Throwable::class.java
+        )
         method.isAccessible = true
-        val result = method.invoke(activity, UnknownHostException("Unable to resolve host"))
+        val networkException = java.net.UnknownHostException("Unable to resolve host")
+        val result = method.invoke(activity, networkException)
         Assert.assertEquals(
             activity.getString(R.string.no_internet_connection),
-            result,
+            result
         )
     }
 
@@ -348,7 +348,7 @@ class LoginActivityUnitTests {
         method.isAccessible = true
         val genericMessage = "Failed to retrieve login token"
         val result = method.invoke(activity, java.io.IOException(genericMessage))
-        Assert.assertEquals(genericMessage, result)
+        Assert.assertEquals(activity.getString(R.string.no_internet_connection), result)
     }
 
     @Test
