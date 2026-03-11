@@ -2,6 +2,7 @@ package fr.free.nrw.commons.nearby
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.widget.CompoundButton
 import android.widget.RadioButton
 import android.widget.Toast
 import fr.free.nrw.commons.R
@@ -61,8 +62,22 @@ class WikidataFeedback : BaseActivity() {
         binding.radioButton3.setText(getString(R.string.other_problem_or_information_please_explain_below))
         setSupportActionBar(binding.toolbarBinding.toolbar)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-
+        binding.detailsEditText.isEnabled = false
+        binding.detailsEditText.alpha = 0.3f
+        binding.radioButton3.setOnCheckedChangeListener { _, isChecked ->
+            binding.detailsEditText.isEnabled = isChecked
+            binding.detailsEditText.alpha = if (isChecked) 1f else 0.3f
+        }
         binding.appCompatButton.setOnClickListener {
+            if (binding.radioGroup.checkedRadioButtonId == -1) {
+                Toast
+                    .makeText(
+                        this,
+                        getString(R.string.warning_for_no_option_selected),
+                        Toast.LENGTH_SHORT,
+                    ).show()
+                return@setOnClickListener
+            }
             var desc = when (binding.radioGroup.checkedRadioButtonId) {
                 R.id.radioButton2 -> getString(R.string.is_at_a_different_place_wikidata, place)
                 else -> findViewById<RadioButton>(binding.radioGroup.checkedRadioButtonId).text
