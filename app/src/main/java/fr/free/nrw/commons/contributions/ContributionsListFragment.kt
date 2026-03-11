@@ -43,7 +43,6 @@ import fr.free.nrw.commons.utils.ViewUtil.showShortToast
 import fr.free.nrw.commons.utils.copyToClipboard
 import fr.free.nrw.commons.utils.handleWebUrl
 import fr.free.nrw.commons.wikidata.model.WikiSite
-import timber.log.Timber
 import javax.inject.Inject
 import javax.inject.Named
 
@@ -274,10 +273,8 @@ class ContributionsListFragment : CommonsDaggerSupportFragment(), ContributionsL
                 contributionsSize = list.size
             }
             adapter!!.submitList(list) {
-                Timber.d("SCROLL_DEBUG submitList callback fired, pendingScrollState=$pendingScrollState")
                 pendingScrollState?.let { state ->
                     rvContributionsList?.layoutManager?.onRestoreInstanceState(state)
-                    Timber.d("SCROLL_DEBUG scroll state restored")
                     pendingScrollState = null
                 }
             }
@@ -296,7 +293,6 @@ class ContributionsListFragment : CommonsDaggerSupportFragment(), ContributionsL
                 val countBeforeInsertion = adapter!!.itemCount - itemCount
                 if (itemCount > 0 && positionStart == 0 && countBeforeInsertion > 0) {
                     if (adapter!!.getContributionForPosition(positionStart) != null) {
-                        Timber.d("SCROLL_DEBUG scrollToPosition(0) called from onItemRangeInserted")
                         rvContributionsList!!
                             .scrollToPosition(0) //Newly upload items are always added to the top
                     }
