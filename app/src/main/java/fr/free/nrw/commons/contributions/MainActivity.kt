@@ -359,18 +359,39 @@ after opening the app.
     }
 
     private fun restoreActiveFragment(fragmentName: String) {
+        val existing = supportFragmentManager.findFragmentById(R.id.fragmentContainer)
         if (fragmentName == ActiveFragment.CONTRIBUTIONS.name) {
             title = getString(R.string.contributions_fragment)
-            loadFragment(newInstance(), false)
+            if (existing is ContributionsFragment) {
+                contributionsFragment = existing
+                activeFragment = ActiveFragment.CONTRIBUTIONS
+            } else {
+                loadFragment(newInstance(), false)
+            }
         } else if (fragmentName == ActiveFragment.NEARBY.name) {
             title = getString(R.string.nearby_fragment)
-            loadFragment(NearbyParentFragment.newInstance(), false)
+            if (existing is NearbyParentFragment) {
+                nearbyParentFragment = existing
+                activeFragment = ActiveFragment.NEARBY
+            } else {
+                loadFragment(NearbyParentFragment.newInstance(), false)
+            }
         } else if (fragmentName == ActiveFragment.EXPLORE.name) {
             title = getString(R.string.navigation_item_explore)
-            loadFragment(ExploreFragment.newInstance(), false)
+            if (existing is ExploreFragment) {
+                exploreFragment = existing
+                activeFragment = ActiveFragment.EXPLORE
+            } else {
+                loadFragment(ExploreFragment.newInstance(), false)
+            }
         } else if (fragmentName == ActiveFragment.BOOKMARK.name) {
             title = getString(R.string.bookmarks)
-            loadFragment(BookmarkFragment.newInstance(), false)
+            if (existing is BookmarkFragment) {
+                bookmarkFragment = existing
+                activeFragment = ActiveFragment.BOOKMARK
+            } else {
+                loadFragment(BookmarkFragment.newInstance(), false)
+            }
         }
     }
 
