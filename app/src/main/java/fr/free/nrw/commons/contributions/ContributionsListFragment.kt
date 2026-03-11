@@ -43,6 +43,7 @@ import fr.free.nrw.commons.utils.ViewUtil.showShortToast
 import fr.free.nrw.commons.utils.copyToClipboard
 import fr.free.nrw.commons.utils.handleWebUrl
 import fr.free.nrw.commons.wikidata.model.WikiSite
+import timber.log.Timber
 import javax.inject.Inject
 import javax.inject.Named
 
@@ -101,6 +102,7 @@ class ContributionsListFragment : CommonsDaggerSupportFragment(), ContributionsL
 
     private var contributionsSize = 0
     private var userName: String? = null
+    private var pendingScrollState: Parcelable? = null
 
     private val galleryPickLauncherForResult = registerForActivityResult<Intent, ActivityResult>(
         StartActivityForResult()
@@ -271,7 +273,14 @@ class ContributionsListFragment : CommonsDaggerSupportFragment(), ContributionsL
             if (list != null) {
                 contributionsSize = list.size
             }
-            adapter!!.submitList(list)
+            adapter!!.submitList(list) {
+                Timber.d("SCROLL_DEBUG submitList callback fired, pendingScrollState=$pendingScrollState")
+                pendingScrollState?.let { state ->
+                    rvContributionsList?.layoutManager?.onRestoreInstanceState(state)
+                    Timber.d("SCROLL_DEBUG scroll state restored")
+                    pendingScrollState = null
+                }
+            }
             if (callback != null) {
                 callback!!.notifyDataSetChanged()
             }
@@ -284,8 +293,10 @@ class ContributionsListFragment : CommonsDaggerSupportFragment(), ContributionsL
                 if (callback != null) {
                     callback!!.notifyDataSetChanged()
                 }
-                if (itemCount > 0 && positionStart == 0) {
+                val countBeforeInsertion = adapter!!.itemCount - itemCount
+                if (itemCount > 0 && positionStart == 0 && countBeforeInsertion > 0) {
                     if (adapter!!.getContributionForPosition(positionStart) != null) {
+                        Timber.d("SCROLL_DEBUG scrollToPosition(0) called from onItemRangeInserted")
                         rvContributionsList!!
                             .scrollToPosition(0) //Newly upload items are always added to the top
                     }
@@ -470,9 +481,8 @@ class ContributionsListFragment : CommonsDaggerSupportFragment(), ContributionsL
     override fun onViewStateRestored(savedInstanceState: Bundle?) {
         super.onViewStateRestored(savedInstanceState)
         if (null != savedInstanceState) {
-            val savedRecyclerLayoutState =
+            pendingScrollState =
                 BundleCompat.getParcelable(savedInstanceState, RV_STATE, Parcelable::class.java)
-            rvContributionsList!!.layoutManager!!.onRestoreInstanceState(savedRecyclerLayoutState)
         }
     }
 
