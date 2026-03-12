@@ -1,9 +1,11 @@
 package fr.free.nrw.commons.upload
 
+
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import fr.free.nrw.commons.CommonsApplication
 import fr.free.nrw.commons.auth.csrf.CsrfTokenClient
+import fr.free.nrw.commons.auth.csrf.InvalidLoginTokenException
 import fr.free.nrw.commons.contributions.ChunkInfo
 import fr.free.nrw.commons.contributions.Contribution
 import fr.free.nrw.commons.contributions.ContributionDao
@@ -22,7 +24,10 @@ import okhttp3.RequestBody.Companion.toRequestBody
 import timber.log.Timber
 import java.io.File
 import java.io.IOException
+import java.net.ConnectException
+import java.net.SocketTimeoutException
 import java.net.URLEncoder
+import java.net.UnknownHostException
 import java.util.Date
 import java.util.concurrent.atomic.AtomicBoolean
 import java.util.concurrent.atomic.AtomicInteger
@@ -30,7 +35,6 @@ import java.util.concurrent.atomic.AtomicReference
 import javax.inject.Inject
 import javax.inject.Named
 import javax.inject.Singleton
-
 @Singleton
 class UploadClient
     @Inject
@@ -134,7 +138,7 @@ class UploadClient
                 }
                 else -> {
                     Timber.d("Upload stash failed %s", contribution.pageId)
-                    Observable.just(StashUploadResult(StashUploadState.FAILED, null, null))
+                    Observable.just(StashUploadResult(StashUploadState.FAILED, null, "Network error"))
                 }
             }
         }
@@ -178,18 +182,28 @@ class UploadClient
                     filekey,
                     countingRequestBody,
                 ).subscribe(
-                    { uploadResult: UploadResult ->
+                    { uploadResult: UploadResult? ->
                         Timber.d(
                             "Chunk: Received Chunk number: %s, offset: %s",
                             index.get(),
-                            uploadResult.offset,
+                            uploadResult?.offset,
                         )
                         chunkInfo.set(ChunkInfo(uploadResult, index.get(), totalChunks))
                         notificationUpdater.onChunkUploaded(contribution, chunkInfo.get())
                     },
                     { throwable: Throwable? ->
                         Timber.e(throwable, "Received error in chunk upload")
-                        errorMessage.set(throwable?.message)
+
+                        val message = when (throwable) {
+                            is InvalidLoginTokenException ->"The session token was not found by the"+
+                                    " server."
+                            is UnknownHostException -> "Could not contact the remote host."
+                            is ConnectException -> "The connection was interrupted while uploading."
+                            is SocketTimeoutException -> "The socket operation timed out."
+                            else -> throwable?.message ?: "An unexpected error occurred."
+                        }
+
+                        errorMessage.set(message)
                         failures.set(true)
                     },
                 ),
@@ -226,28 +240,33 @@ class UploadClient
             offset: Long,
             fileKey: String?,
             countingRequestBody: CountingRequestBody,
-        ): Observable<UploadResult> {
-            val filePart: MultipartBody.Part
-            return try {
-                filePart =
-                    MultipartBody.Part.createFormData(
-                        "chunk",
-                        URLEncoder.encode(filename, "utf-8"),
-                        countingRequestBody,
-                    )
-                uploadInterface
-                    .uploadFileToStash(
-                        toRequestBody(filename),
-                        toRequestBody(fileSize.toString()),
-                        toRequestBody(offset.toString()),
-                        toRequestBody(fileKey),
-                        toRequestBody(csrfTokenClient.getTokenBlocking()),
-                        filePart,
-                    ).map(UploadResponse::upload)
-            } catch (throwable: Throwable) {
-                Timber.e(throwable, "Failed to upload chunk to stash")
-                Observable.error(throwable)
-            }
+        ): Observable<UploadResult?> {
+            val filePart = MultipartBody.Part.createFormData(
+                "chunk",
+                URLEncoder.encode(filename, "utf-8"),
+                countingRequestBody
+            )
+
+            return uploadInterface
+                .uploadFileToStash(
+                    toRequestBody(filename),
+                    toRequestBody(fileSize.toString()),
+                    toRequestBody(offset.toString()),
+                    toRequestBody(fileKey),
+                    toRequestBody(csrfTokenClient.getTokenBlocking()),
+                    filePart
+                )
+                .map(UploadResponse::upload)
+                .onErrorResumeNext { e: Throwable ->
+                    Timber.e(e, when (e) {
+                        is InvalidLoginTokenException -> "The server could not retrieve the session token."
+                        is UnknownHostException  -> "Could not contact the remote host."
+                        is SocketTimeoutException -> "The socket operation timed out while uploading."
+                        is ConnectException  -> "The connection was interrupted while uploading a chunk."
+                        else -> "Unexpected error during chunk upload."
+                    })
+                    Observable.error(e)
+                }
         }
 
         /**
@@ -260,7 +279,6 @@ class UploadClient
             uniqueFileName: String?,
             fileKey: String?,
         ): Observable<UploadResult?> =
-            try {
                 uploadInterface
                     .uploadFileFromStash(
                         csrfTokenClient.getTokenBlocking(),
@@ -276,11 +294,17 @@ class UploadClient
                             throw Exception(exception.errorCode)
                         }
                         uploadResult.upload
+                    }.
+                    onErrorResumeNext { e: Throwable ->
+                        Timber.e(e, when (e) {
+                            is InvalidLoginTokenException -> "The server could not retrieve the session token."
+                            is UnknownHostException  -> "Could not contact the remote host."
+                            is SocketTimeoutException  -> "The socket connection timed out."
+                            is ConnectException -> "The connection was interrupted while uploading."
+                            else -> "An unexpected error occurred."
+                        })
+                        Observable.error(e)
                     }
-            } catch (throwable: Throwable) {
-                Timber.e(throwable, "Exception occurred in uploading file from stash")
-                Observable.error(throwable)
-            }
 }
 
 private fun canProcess(
