@@ -85,7 +85,9 @@ class LoginClient(
         this.userLanguage = userLanguage
 
         loginCall =
-            if (twoFactorCode.isNullOrEmpty() && emailAuthCode.isNullOrEmpty() && retypedPassword.isNullOrEmpty()) {
+            if (userName.contains("@")) {
+                loginInterface.postBotLogIn(userName, password, loginToken)
+            } else if (twoFactorCode.isNullOrEmpty() && emailAuthCode.isNullOrEmpty() && retypedPassword.isNullOrEmpty()) {
                 loginInterface.postLogIn(userName, password, loginToken, userLanguage, WIKIPEDIA_URL)
             } else {
                 loginInterface.postLogIn(
@@ -212,7 +214,9 @@ class LoginClient(
 
         val loginToken = tokenResponse.body()?.query()?.loginToken()
         val tempLoginCall =
-            if (twoFactorCode.isNullOrEmpty() && emailAuthCode.isNullOrEmpty()) {
+            if (userName.contains("@")) {
+                loginInterface.postBotLogIn(userName, password, loginToken)
+            } else if (twoFactorCode.isNullOrEmpty() && emailAuthCode.isNullOrEmpty()) {
                 loginInterface.postLogIn(userName, password, loginToken, userLanguage, WIKIPEDIA_URL)
             } else {
                 loginInterface.postLogIn(
