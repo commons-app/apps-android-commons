@@ -54,6 +54,12 @@ class MwQueryPage : BaseModel() {
 
     fun imageInfo(): ImageInfo? = imageInfo?.get(0)
 
+    /**
+     * Get all imageInfo objects (all file revisions)
+     * Used for finding all uploaders when nominating for deletion
+     */
+    fun imageInfoList(): List<ImageInfo> = imageInfo ?: emptyList()
+
     fun redirectFrom(from: String?) {
         redirectFrom = from
     }

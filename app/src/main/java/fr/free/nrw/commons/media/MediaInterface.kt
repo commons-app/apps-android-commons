@@ -117,6 +117,18 @@ interface MediaInterface {
     ): Single<MwQueryResponse>
 
     /**
+     * Fetches all file revisions (for getting all uploaders)
+     * Uses iilimit=max to get all imageInfo versions
+     *
+     * @param title the file name to get all revisions for
+     * @return
+     */
+    @GET("w/api.php?action=query&format=json&formatversion=2&prop=imageinfo&iiprop=user|timestamp&iilimit=max")
+    fun getAllFileRevisions(
+        @Query("titles") title: String?,
+    ): Single<MwQueryResponse>
+
+    /**
      * Fetches Media object from the imageInfo API but suppress (known) errors
      *
      * @param title       the tiles to be searched for. Can be filename or template name
