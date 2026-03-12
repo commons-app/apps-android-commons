@@ -41,6 +41,15 @@ interface LoginInterface {
         @Field("logincontinue") loginContinue: Boolean,
     ): Call<LoginResponse?>
 
+    @Headers("Cache-Control: no-cache")
+    @FormUrlEncoded
+    @POST(MW_API_PREFIX + "action=login&format=json")
+    fun postBotLogIn(
+        @Field("lgname") user: String?,
+        @Field("lgpassword") pass: String?,
+        @Field("lgtoken") token: String?
+    ): Call<LoginResponse?>
+
     @GET(MW_API_PREFIX + "action=query&meta=userinfo&list=users&usprop=groups|cancreate")
     fun getUserInfo(
         @Query("ususers") userName: String,
