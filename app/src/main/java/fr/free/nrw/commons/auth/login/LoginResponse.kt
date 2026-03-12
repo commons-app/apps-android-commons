@@ -6,6 +6,7 @@ import fr.free.nrw.commons.auth.login.LoginResult.EmailAuthResult
 import fr.free.nrw.commons.auth.login.LoginResult.ResetPasswordResult
 import fr.free.nrw.commons.auth.login.LoginResult.Result
 import fr.free.nrw.commons.wikidata.mwapi.MwServiceError
+import com.google.gson.JsonElement
 
 class LoginResponse {
     @SerializedName("error")
@@ -14,7 +15,12 @@ class LoginResponse {
     @SerializedName("clientlogin")
     private val clientLogin: ClientLogin? = null
 
-    fun toLoginResult(password: String): LoginResult? = clientLogin?.toLoginResult(password)
+    @SerializedName("login")
+    private val botLogin: BotLogin? = null
+
+    fun toLoginResult(password: String): LoginResult? {
+        return clientLogin?.toLoginResult(password) ?: botLogin?.toLoginResult(password)
+    }
 }
 
 internal class ClientLogin {
@@ -61,4 +67,24 @@ internal class RequestField {
     private val type: String? = null
     private val label: String? = null
     internal val help: String? = null
+}
+
+internal class BotLogin {
+    @SerializedName("result")
+    private val result: String? = null
+
+    @SerializedName("lgusername")
+    private val userName: String? = null
+
+    // this safely grabs the complex error object without the crashing
+    @SerializedName("reason")
+    private val reason: JsonElement? = null
+
+    fun toLoginResult(password: String): LoginResult {
+        val status = if (result == "Success") "PASS" else "FAIL"
+
+        val reasonStr = reason?.toString() ?: result ?: "Login Failed"
+
+        return Result(status, userName, password, reasonStr)
+    }
 }
