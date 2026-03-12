@@ -1,13 +1,19 @@
 package fr.free.nrw.commons.nearby
 
+import android.content.Context
+import androidx.test.core.app.ApplicationProvider
 import fr.free.nrw.commons.R
 import org.junit.Before
 import org.junit.Test
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.CoreMatchers.equalTo
+import org.junit.runner.RunWith
+import org.robolectric.RobolectricTestRunner
 
+@RunWith(RobolectricTestRunner::class)
 class LabelTest {
     private lateinit var label: Label
+    private lateinit var context: Context
 
     /**
      * initial setup
@@ -15,7 +21,8 @@ class LabelTest {
     @Before
     @Throws(Exception::class)
     fun setUp() {
-        label = Label.fromText("Q44539")
+        context = ApplicationProvider.getApplicationContext()
+        Label.init(context)
     }
 
     /**
@@ -23,6 +30,7 @@ class LabelTest {
      */
     @Test
     fun testLabelIcon() {
+        label = Label.fromText("Q16970")
         assertThat(label.icon, equalTo(R.drawable.round_icon_church))
     }
 

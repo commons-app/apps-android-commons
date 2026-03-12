@@ -18,6 +18,7 @@
 * Otokoume
 * RhAnish
 * Shirayuki
+* Ska101~translate
 * Suyama
 * Takot
 * Tamaki Wakita
@@ -36,6 +37,8 @@
   <string name="commons_website">コモンズのウェブサイト</string>
   <string name="submit">送信</string>
   <string name="add_another_description">別の説明を追加</string>
+  <string name="add_new_contribution">新たな投稿をする</string>
+  <string name="add_contribution_from_camera">カメラで新たな投稿をする</string>
   <string name="show_captions">キャプション</string>
   <string name="row_item_language_description">言語の説明</string>
   <string name="row_item_caption">キャプション</string>
@@ -143,7 +146,7 @@
   <string name="title_activity_settings">設定</string>
   <string name="title_activity_signup">利用者登録</string>
   <string name="title_activity_featured_images">秀逸な画像</string>
-  <string name="images_featured_explanation" fuzzy="true">秀逸な画像とは、技術力の高い写真家や作画家による作品で、ウィキメディアコモンズのコミュニティから最高の品質を誇るものとして選出されています。</string>
+  <string name="images_featured_explanation">秀逸な画像とは、技術力の高い写真家や作画家により投稿された作品で、ウィキメディアコモンズのコミュニティから最高の品質を誇るものとして選出されています。</string>
   <string name="title_activity_category_details">カテゴリ</string>
   <string name="title_activity_review">査読</string>
   <string name="menu_about">このアプリについて</string>
@@ -726,6 +729,7 @@
   <string name="welcome_to_full_screen_mode_text">全画面選択モードへようこそ</string>
   <string name="full_screen_mode_zoom_info">日本の指を使ってズームイン・アウトします。</string>
   <string name="set_up_avatar_toast_string">リーダーボードのアバターを設定するには、任意の画像の 3 つのドット メニューで [アバターとして設定] をタップします。</string>
+  <string name="storage_permissions_denied">ストレージへのアクセスは拒否されました</string>
   <string name="unable_to_share_upload_item">この項目を共有できません</string>
   <string name="permissions_are_required_for_functionality">この機能には権限が必要です</string>
   <string name="learn_how_to_write_a_useful_description">有用な説明の書き方を学ぶ</string>

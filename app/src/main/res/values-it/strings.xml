@@ -377,6 +377,7 @@
   <string name="quiz_screenshot_question">Questo screenshot è OK per essere caricato?</string>
   <string name="share_app_title">Condividi applicazione</string>
   <string name="rotate">Ruota</string>
+  <string name="crop">Ritaglia</string>
   <string name="error_fetching_nearby_places">Non è possibile caricare i luoghi nelle vicinanze</string>
   <string name="no_pictures_in_this_area">Nessuna immagine in quest\'area</string>
   <string name="no_nearby_places_around">Nessun luogo trovato nelle vicinanze</string>
@@ -827,6 +828,7 @@
   <string name="pending">In attesa</string>
   <string name="failed">Non riuscito</string>
   <string name="could_not_load_place_data">Impossibile caricare i dati del luogo</string>
+  <string name="warning_for_no_option_selected">Seleziona una qualsiasi delle opzioni per rispondere alla domanda</string>
   <string name="custom_selector_delete_folder">Cancella cartella</string>
   <string name="custom_selector_confirm_deletion_title">Conferma cancellazione</string>
   <string name="custom_selector_confirm_deletion_message">Sei sicuro di voler eliminare la cartella %1$s contenente elementi %2$d?</string>
