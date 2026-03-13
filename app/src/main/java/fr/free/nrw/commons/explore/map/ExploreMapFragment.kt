@@ -95,6 +95,7 @@ class ExploreMapFragment : CommonsDaggerSupportFragment(), ExploreMapContract.Vi
     private var clickedMarker: BaseMarker? = null
     private var mapCenter: GeoPoint? = null
     private var lastMapFocus: GeoPoint? = null
+    private var isAnimatingCamera = false
     private var intentFilter: IntentFilter = IntentFilter(MapUtils.NETWORK_INTENT_ACTION)
     private var baseMarkerOverlayMap: MutableMap<BaseMarker?, Overlay?>? = null
     private var locationPermissionsHelper: LocationPermissionsHelper? = null
@@ -246,25 +247,25 @@ class ExploreMapFragment : CommonsDaggerSupportFragment(), ExploreMapContract.Vi
 
         binding!!.mapView.addMapListener(object : MapListener {
             override fun onScroll(event: ScrollEvent): Boolean {
-                if (getLastMapFocus() != null) {
-                    val mylocation = Location("")
-                    val dest_location = Location("")
-                    dest_location.latitude = binding!!.mapView.mapCenter.latitude
-                    dest_location.longitude = binding!!.mapView.mapCenter.longitude
-                    mylocation.latitude = getLastMapFocus()!!.latitude
-                    mylocation.longitude = getLastMapFocus()!!.longitude
-                    val distance = mylocation.distanceTo(dest_location) //in meters
-                    if (getLastMapFocus() != null) {
-                        if (isNetworkConnectionEstablished() && (event.getX() > 0
-                                    || event.getY() > 0)
-                        ) {
-                            setSearchThisAreaButtonVisibility(distance > 2000.0)
-                        }
-                    } else {
-                        setSearchThisAreaButtonVisibility(false)
+                val lastFocus = getLastMapFocus()
+                if (lastFocus != null) {
+                    val dest_location = Location("").apply {
+                        latitude = binding!!.mapView.mapCenter.latitude
+                        longitude = binding!!.mapView.mapCenter.longitude
                     }
+                    val mylocation = Location("").apply {
+                        latitude = lastFocus.latitude
+                        longitude = lastFocus.longitude
+                    }
+                    val distance = mylocation.distanceTo(dest_location)
+                    if (isNetworkConnectionEstablished() && (event.getX() > 0
+                                || event.getY() > 0)
+                    ) {
+                        setSearchThisAreaButtonVisibility(distance > 2000.0)
+                    }
+                } else {
+                    setSearchThisAreaButtonVisibility(false)
                 }
-
                 return true
             }
 
@@ -1021,7 +1022,10 @@ class ExploreMapFragment : CommonsDaggerSupportFragment(), ExploreMapContract.Vi
      * @param geoPoint The GeoPoint representing the new camera position for the map.
      */
     private fun moveCameraToPosition(geoPoint: GeoPoint?) {
+        if (isAnimatingCamera) return
+        isAnimatingCamera = true
         binding!!.mapView.controller.animateTo(geoPoint)
+        isAnimatingCamera = false
     }
 
     /**
@@ -1033,7 +1037,10 @@ class ExploreMapFragment : CommonsDaggerSupportFragment(), ExploreMapContract.Vi
      * @param speed    Speed of animation
      */
     private fun moveCameraToPosition(geoPoint: GeoPoint?, zoom: Double, speed: Long) {
+        if (isAnimatingCamera) return
+        isAnimatingCamera = true
         binding!!.mapView.controller.animateTo(geoPoint, zoom, speed)
+        isAnimatingCamera = false
     }
 
     override fun getLastMapFocus(): LatLng? = if (lastMapFocus == null) {
