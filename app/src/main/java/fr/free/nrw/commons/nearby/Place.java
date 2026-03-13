@@ -95,21 +95,32 @@ public class Place implements Parcelable {
         this.entityID = entityID;
     }
 
-    public Place(Parcel in) {
-        this.language = in.readString();
-        this.name = in.readString();
-        this.label = (Label) in.readSerializable();
-        this.longDescription = in.readString();
-        this.location = in.readParcelable(LatLng.class.getClassLoader());
-        this.category = in.readString();
-        this.siteLinks = in.readParcelable(Sitelinks.class.getClassLoader());
-        String picString = in.readString();
-        this.pic = (picString == null) ? "" : picString;
-        String existString = in.readString();
-        this.exists = Boolean.parseBoolean(existString);
-        this.isMonument = in.readInt() == 1;
-        this.entityID = in.readString();
-    }
+    /**
+ * Constructor used when recreating the object from a Parcel.
+ *
+ * IMPORTANT: The order of reading fields here MUST match exactly the
+ * order used in writeToParcel(). Changing the order will corrupt the
+ * deserialized object and may cause runtime errors.
+ */
+public Place(Parcel in) {
+    this.language = in.readString();
+    this.name = in.readString();
+    this.label = (Label) in.readSerializable();
+    this.longDescription = in.readString();
+    this.location = in.readParcelable(LatLng.class.getClassLoader());
+    this.category = in.readString();
+    this.siteLinks = in.readParcelable(Sitelinks.class.getClassLoader());
+
+    String picString = in.readString();
+    this.pic = (picString == null) ? "" : picString;
+
+    this.entityID = in.readString();
+
+    String existString = in.readString();
+    this.exists = Boolean.parseBoolean(existString);
+
+    this.isMonument = in.readInt() == 1;
+}
 
     public static Place from(NearbyResultItem item) {
         String itemClass = item.getClassName().getValue();
