@@ -117,11 +117,13 @@ interface MediaInterface {
     ): Single<MwQueryResponse>
 
     /**
-     * Fetches all file revisions (for getting all uploaders)
-     * Uses iilimit=max to get all imageInfo versions
+     * Fetches file revisions with uploader information.
+     * WARNING: Due to MediaWiki API pagination, this returns up to ~50 revisions per request.
+     * For files with extensive history, implement continuation support using iicontin parameter
+     * to fetch remaining revisions. For most files, this endpoint is sufficient.
      *
-     * @param title the file name to get all revisions for
-     * @return
+     * @param title the file name to get revisions for
+     * @return MwQueryResponse with imageinfo array (may be paginated)
      */
     @GET("w/api.php?action=query&format=json&formatversion=2&prop=imageinfo&iiprop=user|timestamp&iilimit=max")
     fun getAllFileRevisions(

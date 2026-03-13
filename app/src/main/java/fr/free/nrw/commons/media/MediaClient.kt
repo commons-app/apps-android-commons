@@ -131,11 +131,15 @@ class MediaClient
                 .map { it.first() }
 
         /**
-         * Gets all file revisions (all ImageInfo objects) for a given file.
-         * Used primarily for getting all uploaders when nominating for deletion.
+         * Gets file revisions (uploader information) for a given file.
+         * Used primarily for getting uploaders when nominating for deletion.
+         * 
+         * NOTE: Due to MediaWiki API pagination, this returns revisions included in the response.
+         * For files with extensive history (50+ revisions), continuation tokens would be needed
+         * to fetch all revisions. For typical files, this covers most uploaders.
          *
-         * @param titles the file name to get all revisions for
-         * @return List of ImageInfo objects, one per file revision
+         * @param titles the file name to get revisions for
+         * @return List of ImageInfo objects from the API response
          */
         fun getImageInfoList(titles: String?): Single<List<ImageInfo>> =
             mediaInterface.getAllFileRevisions(titles)

@@ -161,11 +161,23 @@ class DeleteHelper @Inject constructor(
 
                         val uploaders = imageInfos
                             .map { it.getUser() }
-                            .filter { it.isNotEmpty() }
+                            .filter { it.isNotBlank() }
                             .toSet()
 
                         if (uploaders.isEmpty()) {
-                            // No uploaders found, still return success
+                            // No uploaders found, fallback to creator
+                            val creator = media.getAuthorOrUser()
+                            if (!creator.isNullOrBlank()) {
+                                return@flatMap Observable.just(creator)
+                                    .concatMap { user ->
+                                        pageEditClient.appendEdit(
+                                            "User_Talk:$user",
+                                            "$userPageString\n",
+                                            summary
+                                        )
+                                    }
+                            }
+                            // If creator also empty, still return success
                             return@flatMap Observable.just(true)
                         }
 
@@ -181,6 +193,11 @@ class DeleteHelper @Inject constructor(
                             .map { results -> results.all { it } }
                             .toObservable()
                     }
+                    .doOnError { throwable ->
+                        // Log error but don't fail - deletion was already successful
+                        Timber.w(throwable, "Failed to fetch uploaders for notifications")
+                    }
+                    .onErrorReturnItem(true)  // If uploader fetch fails, deletion already succeeded
             }
     }
 
