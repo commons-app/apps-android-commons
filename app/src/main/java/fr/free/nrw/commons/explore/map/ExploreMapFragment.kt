@@ -1129,6 +1129,11 @@ class ExploreMapFragment : CommonsDaggerSupportFragment(), ExploreMapContract.Vi
         onLocationChanged(LocationChangeType.PERMISSION_JUST_GRANTED, null)
     }
 
+    override fun onLocationServiceUnAvailable() {
+        //showw a message to the user explaining why nearby images aren't appearing
+        showLongToast(requireContext(), R.string.explore_map_needs_location)
+    }
+
     fun onLocationChanged(locationChangeType: LocationChangeType, location: Location?) {
         if (locationChangeType == LocationChangeType.PERMISSION_JUST_GRANTED) {
             val curLatLng = locationManager.getLastLocation() ?: getMapCenter()
