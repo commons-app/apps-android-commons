@@ -376,6 +376,7 @@
   <string name="quiz_screenshot_question">Is deze screenshot OK om te uploaden?</string>
   <string name="share_app_title">Toepassing delen</string>
   <string name="rotate">Draaien</string>
+  <string name="crop">Bijsnijden</string>
   <string name="error_fetching_nearby_places">Kan plaatsen in de buurt niet laden</string>
   <string name="no_pictures_in_this_area">Geen foto\'s in dit gebied.</string>
   <string name="no_nearby_places_around">Geen plaatsen in de buurt</string>
