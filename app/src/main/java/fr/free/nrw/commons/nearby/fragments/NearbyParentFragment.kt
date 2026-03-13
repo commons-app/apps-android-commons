@@ -820,7 +820,6 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
     }
 
     override fun onDestroyView() {
-        super.onDestroyView()
         searchRunnable?.let {
             searchHandler.removeCallbacks(it)
         } ?: run {
@@ -831,6 +830,8 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
         if (applicationKvStore == null) Timber.w("NearbyParentFragment: applicationKvStore is null")
 
         presenter?.removeNearbyPreferences(applicationKvStore ?: return)
+        binding = null
+        super.onDestroyView()
     }
 
     private fun initViews() {
