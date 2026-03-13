@@ -7,6 +7,7 @@ import fr.free.nrw.commons.auth.login.LoginResult.ResetPasswordResult
 import fr.free.nrw.commons.auth.login.LoginResult.Result
 import fr.free.nrw.commons.wikidata.mwapi.MwServiceError
 import com.google.gson.JsonElement
+import com.google.gson.JsonObject
 
 class LoginResponse {
     @SerializedName("error")
@@ -33,6 +34,9 @@ internal class ClientLogin {
 
     fun toLoginResult(password: String): LoginResult {
         var userMessage = message
+        if (userMessage == "⧼userlogin-cannot-login⧽" || userMessage?.contains("cannot-login") == true) {
+            userMessage = "Two-Factor Authentication is enabled. You must use a Bot Password to log in."
+        }
         if ("UI" == status) {
             requests?.forEach { request ->
                 request.id()?.let {
@@ -76,15 +80,38 @@ internal class BotLogin {
     @SerializedName("lgusername")
     private val userName: String? = null
 
-    // this safely grabs the complex error object without the crashing
+    // here we use the JsonObject to cleanly extract the error text
     @SerializedName("reason")
-    private val reason: JsonElement? = null
+    private val reason: JsonObject? = null
 
     fun toLoginResult(password: String): LoginResult {
-        val status = if (result == "Success") "PASS" else "FAIL"
+        // handle successful login
+        if (result == "Success") {
+            return Result("PASS", userName, password, "Success")
+        }
 
-        val reasonStr = reason?.toString() ?: result ?: "Login Failed"
-
-        return Result(status, userName, password, reasonStr)
+        var errorMessage = result ?: "Login Failed"
+        if (reason != null && reason.has("text")) {
+            errorMessage = reason.get("text").asString
+        }
+        if (reason != null && reason.has("code") && reason.get("code").asString == "api-login-fail-badsessionprovider") {
+            errorMessage = "Session conflict: A previous bot is still logged in. Please go to your device Settings -> Apps -> Commons -> Storage, and tap 'Clear Data' before logging in."
+        }
+        return Result("FAIL", userName, password, errorMessage)
     }
+}
+
+class BotPermissionsResponse {
+    @SerializedName("query")
+    val query: BotQuery? = null
+}
+
+class BotQuery {
+    @SerializedName("userinfo")
+    val userInfo: BotUserInfo? = null
+}
+
+class BotUserInfo {
+    @SerializedName("rights")
+    val rights: List<String>? = null
 }
