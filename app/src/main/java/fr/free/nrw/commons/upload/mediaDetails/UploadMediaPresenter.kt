@@ -60,6 +60,7 @@ class UploadMediaPresenter @Inject constructor(
     override fun onDetachView() {
         view = DUMMY
         compositeDisposable.clear()
+        basicKvStoreFactory = null
     }
 
     /**
