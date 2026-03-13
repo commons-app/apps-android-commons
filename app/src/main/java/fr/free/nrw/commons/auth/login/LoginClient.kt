@@ -111,9 +111,13 @@ class LoginClient(
                     val loginResult = response.body()?.toLoginResult(password)
                     if (loginResult != null) {
                         if (loginResult.pass && !loginResult.userName.isNullOrEmpty()) {
-                            // The server could do some transformations on user names, e.g. on some
-                            // wikis is uppercases the first letter.
-                            getExtendedInfo(loginResult.userName, loginResult, cb)
+                            if (userName.contains("@")) {
+                                // if it iss a bot then verify it has the right permissions first
+                                verifyBotPermissionsAndContinue(loginResult.userName!!, loginResult, cb)
+                            } else {
+                                // if it's a normal account then proceed normally
+                                getExtendedInfo(loginResult.userName!!, loginResult, cb)
+                            }
                         } else if ("UI" == loginResult.status) {
                             when (loginResult) {
                                 is OAuthResult ->
@@ -276,5 +280,32 @@ class LoginClient(
             it.cancel()
             loginCall = null
         }
+    }
+
+    private fun verifyBotPermissionsAndContinue(
+        userName: String,
+        loginResult: LoginResult,
+        cb: LoginCallback
+    ) {
+        loginInterface.getBotPermissions().enqueue(object : Callback<BotPermissionsResponse> {
+            override fun onResponse(
+                call: Call<BotPermissionsResponse>,
+                response: Response<BotPermissionsResponse>
+            ) {
+                val rights = response.body()?.query?.userInfo?.rights ?: emptyList()
+
+                // the bot must have the edit, createpage, and upload rights to fully use the app
+                if (rights.contains("edit") && rights.contains("upload") && rights.contains("createpage")) {
+                    getExtendedInfo(userName, loginResult, cb)
+                } else {
+                    val msg = "Insufficient permissions! Please recreate your bot password and ensure the following are checked: 'Basic rights', 'Edit existing pages', 'Create, edit, and move pages', and 'Upload new files'."
+                    cb.error(LoginFailedException(msg))
+                }
+            }
+
+            override fun onFailure(call: Call<BotPermissionsResponse>, t: Throwable) {
+                cb.error(t)
+            }
+        })
     }
 }
