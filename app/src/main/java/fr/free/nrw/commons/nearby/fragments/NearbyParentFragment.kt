@@ -119,6 +119,7 @@ import org.osmdroid.events.MapListener
 import org.osmdroid.events.ScrollEvent
 import org.osmdroid.events.ZoomEvent
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory
+import org.osmdroid.util.BoundingBox
 import org.osmdroid.util.GeoPoint
 import org.osmdroid.util.constants.GeoConstants.UnitOfMeasure
 import org.osmdroid.views.CustomZoomButtonsController
@@ -247,6 +248,10 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
         null
     private var isAdvancedQueryFragmentVisible = false
     private var nearestPlace: Place? = null
+    private var isDepictsPickerMode: Boolean = false
+    private var allPhotoLatLngs: ArrayList<LatLng>? = null
+    private var photoPinBoundingBox: BoundingBox? = null
+    private var needsZoomOut: Boolean = false
 
     @Volatile
     private var stopQuery = false
@@ -395,6 +400,8 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
         menu: Menu,
         inflater: MenuInflater
     ) {
+        if (isDepictsPickerMode) return
+
         inflater.inflate(fr.free.nrw.commons.R.menu.nearby_fragment_menu, menu)
         val refreshButton = menu.findItem(fr.free.nrw.commons.R.id.item_refresh)
         val listMenu = menu.findItem(fr.free.nrw.commons.R.id.list_sheet)
@@ -487,6 +494,19 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
             }
         }
 
+        arguments?.let {
+            isDepictsPickerMode = it.getBoolean(ARG_PICKER_MODE, false)
+            if (isDepictsPickerMode) {
+                allPhotoLatLngs = it.getParcelableArrayList(ARG_PHOTO_LATLNGS)
+                if (!allPhotoLatLngs.isNullOrEmpty()) {
+                    val first = allPhotoLatLngs!![0]
+                    lastMapFocus = GeoPoint(first.latitude, first.longitude)
+                    mapCenter = lastMapFocus
+                    calculatePhotoPinBoundingBox()
+                }
+            }
+        }
+
         presenter?.attachView(this)
         isPermissionDenied = false
         recenterToUserLocation = false
@@ -504,10 +524,10 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
         org.osmdroid.config.Configuration.getInstance().getAdditionalHttpRequestProperties()
             .put("Referer", "http://maps.wikimedia.org/")
 
-        if (applicationKvStore?.getString("LastLocation") != null) { // Checking for last searched location
+        if (lastMapFocus == null && applicationKvStore?.getString("LastLocation") != null) { // Checking for last searched location
             val locationLatLng = applicationKvStore!!.getString("LastLocation")!!.split(",")
             lastMapFocus = GeoPoint(locationLatLng[0].toDouble(), locationLatLng[1].toDouble())
-        } else {
+        } else if (lastMapFocus == null) {
             lastMapFocus = GeoPoint(51.50550, -0.07520)
         }
 
@@ -605,6 +625,16 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
 
         binding?.tvLearnMore?.setOnClickListener {
             onLearnMoreClicked()
+        }
+
+        //hide fab components if depicts picker mode
+        if (isDepictsPickerMode) {
+            binding?.fabCamera?.visibility = View.GONE
+            binding?.fabPlus?.visibility = View.GONE
+            binding?.fabLegend?.visibility = View.GONE
+            binding?.nearbyFilter?.root?.visibility = View.GONE
+            binding?.rlContainerWlmMonthMessage?.visibility = View.GONE
+            binding?.bottomSheetNearby?.root?.visibility = View.GONE
         }
 
         if (!locationPermissionsHelper?.checkLocationPermission(requireActivity())!!) {
@@ -706,7 +736,7 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
     }
 
     private fun performMapReadyActions() {
-        if ((activity as MainActivity).activeFragment == ActiveFragment.NEARBY) {
+        if (!isDepictsPickerMode && activity is MainActivity && (activity as MainActivity).activeFragment == ActiveFragment.NEARBY) {
             if (applicationKvStore!!.getBoolean("doNotAskForLocationPermission", false) &&
                 !locationPermissionsHelper!!.checkLocationPermission(requireActivity())
             ) {
@@ -714,6 +744,51 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
             }
         }
         presenter!!.onMapReady()
+    }
+
+    private fun displayPhotoMarkers(coordList: ArrayList<LatLng>) {
+
+        if (coordList.isEmpty()) return
+
+        coordList.forEachIndexed { index, latLng ->
+            //add marker details
+            val marker = Marker(binding?.map)
+            marker.position = GeoPoint(latLng.latitude, latLng.longitude)
+            marker.title = "Photo ${index + 1}"
+            marker.icon = getDrawable(requireContext(), R.drawable.ic_mappin)
+            binding?.map?.overlays?.add(marker)
+            // disable zooming in to the pin , only show the info
+            // close details of if open place to avoid confusion
+            marker.setOnMarkerClickListener { m: Marker, mapView: MapView? ->
+                bottomSheetDetailsBehavior?.state = BottomSheetBehavior.STATE_HIDDEN
+                m.showInfoWindow()
+                true
+            }
+        }
+        //center on average of all photos coordinates and zoom out and run only once
+        // only if multiple pins are present
+        if (!needsZoomOut && photoPinBoundingBox != null && allPhotoLatLngs?.size!! > 1) {
+            binding?.map?.zoomToBoundingBox(photoPinBoundingBox, true, 100)
+            needsZoomOut = true
+        }
+        binding?.map?.invalidate()
+    }
+
+    private fun calculatePhotoPinBoundingBox() {
+        if (allPhotoLatLngs.isNullOrEmpty()) return
+
+        var minLat = Double.MAX_VALUE
+        var maxLat = -Double.MAX_VALUE
+        var minLng = Double.MAX_VALUE
+        var maxLng = -Double.MAX_VALUE
+
+        allPhotoLatLngs!!.forEach {
+            minLat = Math.min(minLat, it.latitude)
+            maxLat = Math.max(maxLat, it.latitude)
+            minLng = Math.min(minLng, it.longitude)
+            maxLng = Math.max(maxLng, it.longitude)
+        }
+        photoPinBoundingBox = BoundingBox(maxLat, maxLng, minLat, minLng)
     }
 
     override fun askForLocationPermission() {
@@ -732,7 +807,7 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
             mapCenter = targetP
             binding?.map?.controller?.setCenter(targetP)
             updateUserLocationOverlays(targetP, true)
-            if (!isCameFromExploreMap()) {
+            if (!isCameFromExploreMap() && !isDepictsPickerMode) {
                 moveCameraToPosition(targetP)
             }
         } else if (locationManager.isGPSProviderEnabled() || locationManager.isNetworkProviderEnabled()) {
@@ -750,6 +825,7 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
     override fun onResume() {
         super.onResume()
         binding?.map?.onResume()
+        bottomSheetDetailsBehavior!!.state = BottomSheetBehavior.STATE_HIDDEN
         presenter?.attachView(this)
         registerNetworkReceiver()
 
@@ -757,7 +833,7 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
         binding?.map?.setMultiTouchControls(true)
         binding?.map?.isClickable = true
 
-        if (isResumed && (activity as? MainActivity)?.activeFragment == ActiveFragment.NEARBY) {
+        if (isResumed && (isDepictsPickerMode || (activity is MainActivity && (activity as? MainActivity)?.activeFragment == ActiveFragment.NEARBY))) {
             if (activity?.let { locationPermissionsHelper?.checkLocationPermission(it) } == true) {
                 locationPermissionGranted()
             } else {
@@ -858,6 +934,8 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
         bottomSheetDetailsBehavior = BottomSheetBehavior.from(binding!!.bottomSheetDetails.root)
         bottomSheetDetailsBehavior?.setState(BottomSheetBehavior.STATE_HIDDEN)
         binding!!.bottomSheetDetails.root.visibility = View.VISIBLE
+        binding?.bottomSheetNearby?.root?.visibility =
+            if (isDepictsPickerMode) View.GONE else View.VISIBLE
         bottomSheetListBehavior?.setState(BottomSheetBehavior.STATE_HIDDEN)
     }
 
@@ -1024,6 +1102,9 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
             override fun onSlide(bottomSheet: View, slideOffset: Float) {
             }
         })
+        if (isDepictsPickerMode) {
+            bottomSheetListBehavior?.state = BottomSheetBehavior.STATE_HIDDEN
+        }
     }
 
     /**
@@ -1266,20 +1347,41 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
         // Note: This only happens when the nearby fragment is opened immediately upon app launch,
         // otherwise {screenTopRightLatLng} and {screenBottomLeftLatLng} are used to determine
         // the east and west corner LatLng.
-        if (screenTopRightLatLng.latitude == 0.0 && screenTopRightLatLng.longitude == 0.0 && screenBottomLeftLatLng.latitude == 0.0 && screenBottomLeftLatLng.longitude == 0.0) {
-            val delta = 0.009
-            val westCornerLat = currentLatLng.latitude - delta
-            val westCornerLong = currentLatLng.longitude - delta
-            val eastCornerLat = currentLatLng.latitude + delta
-            val eastCornerLong = currentLatLng.longitude + delta
-            screenTopRightLatLng = LatLng(
-                westCornerLat,
-                westCornerLong, 0f
-            )
-            screenBottomLeftLatLng = LatLng(
-                eastCornerLat,
-                eastCornerLong, 0f
-            )
+        if ((screenTopRightLatLng.latitude == 0.0 && screenTopRightLatLng.longitude == 0.0 && screenBottomLeftLatLng.latitude == 0.0 && screenBottomLeftLatLng.longitude == 0.0)
+            || (isDepictsPickerMode && !allPhotoLatLngs.isNullOrEmpty())
+        ) {
+            if (isDepictsPickerMode && photoPinBoundingBox != null) {
+                // Add a small buffer to the bounding box
+                val delta = 0.009
+                screenTopRightLatLng = LatLng(
+                    photoPinBoundingBox!!.latSouth - delta,
+                    photoPinBoundingBox!!.lonWest - delta,
+                    0f
+                )
+                screenBottomLeftLatLng = LatLng(
+                    photoPinBoundingBox!!.latNorth + delta,
+                    photoPinBoundingBox!!.lonEast + delta,
+                    0f
+                )
+            } else {
+                val delta = 0.009
+                val westCornerLat = currentLatLng.latitude - delta
+                val westCornerLong = currentLatLng.longitude - delta
+                val eastCornerLat = currentLatLng.latitude + delta
+                val eastCornerLong = currentLatLng.longitude + delta
+                screenTopRightLatLng = LatLng(
+                    westCornerLat,
+                    westCornerLong, 0f
+                )
+                screenBottomLeftLatLng = LatLng(
+                    eastCornerLat,
+                    eastCornerLong, 0f
+                )
+                populatePlacesForAnotherLocation(
+                    mapFocus, screenTopRightLatLng,
+                    screenBottomLeftLatLng, currentLatLng, null
+                )
+            }
             if (currentLatLng.equals(
                     getLastMapFocus()
                 )
@@ -2213,6 +2315,9 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
         }
         clearAllMarkers()
         binding!!.map.overlays.addAll(newMarkers)
+        if (isDepictsPickerMode) {
+            displayPhotoMarkers(allPhotoLatLngs!!)
+        }
     }
 
 
@@ -2312,7 +2417,7 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
         when (bottomSheetState) {
             (BottomSheetBehavior.STATE_COLLAPSED) -> {
                 collapseFABs(isFABsExpanded)
-                if (!binding!!.fabPlus.isShown) {
+                if (!binding!!.fabPlus.isShown && !isDepictsPickerMode) {
                     showFABs()
                 }
             }
@@ -2378,16 +2483,34 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
                 )
             )
         }
-        val spanCount = spanCount
-        gridLayoutManager = GridLayoutManager(this.context, spanCount)
-        binding!!.bottomSheetDetails.bottomSheetRecyclerView.layoutManager = gridLayoutManager
-        bottomSheetAdapter = BottomSheetAdapter(
-            this.context,
-            dataList as ArrayList<BottomSheetItem>
-        )
-        bottomSheetAdapter!!.setClickListener(this)
-        binding!!.bottomSheetDetails.bottomSheetRecyclerView.adapter = bottomSheetAdapter
-        updateBookmarkButtonImage(selectedPlace!!)
+
+
+        if (isDepictsPickerMode) {
+            // Hide the existing actions recyclerview and show the confirm button
+            binding!!.bottomSheetDetails.bottomSheetRecyclerView.visibility = View.GONE
+            binding!!.bottomSheetDetails.depictionsMapConfirm.visibility = View.VISIBLE
+            // increase the peek height to make the confirm button visible
+            bottomSheetDetailsBehavior!!.peekHeight =
+                ((resources.getDimension(R.dimen.overflow_button_dimen)) +
+                        (resources.getDimension(R.dimen.big_height))).toInt()
+            binding!!.bottomSheetDetails.depictionsMapConfirm.setOnClickListener {
+                val intent = Intent()
+                intent.putExtra(PICKER_RESULT_PLACE, selectedPlace)
+                requireActivity().setResult(android.app.Activity.RESULT_OK, intent)
+                requireActivity().finish()
+            }
+        } else {
+            val spanCount = spanCount
+            gridLayoutManager = GridLayoutManager(this.context, spanCount)
+            binding!!.bottomSheetDetails.bottomSheetRecyclerView.layoutManager = gridLayoutManager
+            bottomSheetAdapter = BottomSheetAdapter(
+                this.context,
+                dataList as ArrayList<BottomSheetItem>
+            )
+            bottomSheetAdapter!!.setClickListener(this)
+            binding!!.bottomSheetDetails.bottomSheetRecyclerView.adapter = bottomSheetAdapter
+            updateBookmarkButtonImage(selectedPlace!!)
+        }
 
         selectedPlace?.pic?.substringAfterLast("/")?.takeIf { it.isNotEmpty() }?.let { imageName ->
             Glide.with(binding!!.bottomSheetDetails.icon.context)
@@ -2964,6 +3087,10 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
 
     companion object {
         private const val ZOOM_LEVEL = 15f
+        const val ARG_PICKER_MODE = "is_picker_mode"
+        const val ARG_PHOTO_LATLNGS = "picker_photo_latlngs"
+        const val PICKER_RESULT_PLACE = "map_picked_place"
+
 
         /**
          * WLM URL
@@ -2978,6 +3105,15 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
             return fragment
         }
 
+        @JvmStatic
+        fun newPickerInstance(photoLatLngs: ArrayList<LatLng>?): NearbyParentFragment {
+            val fragment = NearbyParentFragment()
+            val args = Bundle()
+            args.putBoolean(ARG_PICKER_MODE, true)
+            args.putParcelableArrayList(ARG_PHOTO_LATLNGS, photoLatLngs)
+            fragment.arguments = args
+            return fragment
+        }
 
         private val isExternalStorageWritable: Boolean
             get() {
