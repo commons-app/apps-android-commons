@@ -35,6 +35,7 @@ import java.util.concurrent.atomic.AtomicReference
 import javax.inject.Inject
 import javax.inject.Named
 import javax.inject.Singleton
+
 @Singleton
 class UploadClient
     @Inject
@@ -193,7 +194,6 @@ class UploadClient
                     },
                     { throwable: Throwable? ->
                         Timber.e(throwable, "Received error in chunk upload")
-
                         val message = when (throwable) {
                             is InvalidLoginTokenException ->"The session token was not found by the"+
                                     " server."
@@ -202,7 +202,6 @@ class UploadClient
                             is SocketTimeoutException -> "The socket operation timed out."
                             else -> throwable?.message ?: "An unexpected error occurred."
                         }
-
                         errorMessage.set(message)
                         failures.set(true)
                     },
@@ -246,7 +245,6 @@ class UploadClient
                 URLEncoder.encode(filename, "utf-8"),
                 countingRequestBody
             )
-
             return uploadInterface
                 .uploadFileToStash(
                     toRequestBody(filename),
@@ -256,8 +254,7 @@ class UploadClient
                     toRequestBody(csrfTokenClient.getTokenBlocking()),
                     filePart
                 )
-                .map(UploadResponse::upload)
-                .onErrorResumeNext { e: Throwable ->
+                .map(UploadResponse::upload).onErrorResumeNext { e: Throwable ->
                     Timber.e(e, when (e) {
                         is InvalidLoginTokenException -> "The server could not retrieve the session token."
                         is UnknownHostException  -> "Could not contact the remote host."
@@ -278,7 +275,7 @@ class UploadClient
             contribution: Contribution?,
             uniqueFileName: String?,
             fileKey: String?,
-        ): Observable<UploadResult?> =
+        ): Observable<UploadResult> =
                 uploadInterface
                     .uploadFileFromStash(
                         csrfTokenClient.getTokenBlocking(),
@@ -294,8 +291,7 @@ class UploadClient
                             throw Exception(exception.errorCode)
                         }
                         uploadResult.upload
-                    }.
-                    onErrorResumeNext { e: Throwable ->
+                    }.onErrorResumeNext { e: Throwable ->
                         Timber.e(e, when (e) {
                             is InvalidLoginTokenException -> "The server could not retrieve the session token."
                             is UnknownHostException  -> "Could not contact the remote host."
