@@ -502,7 +502,6 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
                     val first = allPhotoLatLngs!![0]
                     lastMapFocus = GeoPoint(first.latitude, first.longitude)
                     mapCenter = lastMapFocus
-                    calculatePhotoPinBoundingBox()
                 }
             }
         }
@@ -765,17 +764,6 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
                 true
             }
         }
-        //center on average of all photos coordinates and zoom out and run only once
-        // only if multiple pins are present
-        if (!needsZoomOut && photoPinBoundingBox != null && allPhotoLatLngs?.size!! > 1) {
-            binding?.map?.zoomToBoundingBox(photoPinBoundingBox, true, 100)
-            needsZoomOut = true
-        }
-        binding?.map?.invalidate()
-    }
-
-    private fun calculatePhotoPinBoundingBox() {
-        if (allPhotoLatLngs.isNullOrEmpty()) return
 
         var minLat = Double.MAX_VALUE
         var maxLat = -Double.MAX_VALUE
@@ -783,12 +771,19 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
         var maxLng = -Double.MAX_VALUE
 
         allPhotoLatLngs!!.forEach {
-            minLat = Math.min(minLat, it.latitude)
-            maxLat = Math.max(maxLat, it.latitude)
-            minLng = Math.min(minLng, it.longitude)
-            maxLng = Math.max(maxLng, it.longitude)
+            minLat = minLat.coerceAtMost(it.latitude)
+            maxLat = maxLat.coerceAtLeast(it.latitude)
+            minLng = minLng.coerceAtMost(it.longitude)
+            maxLng = maxLng.coerceAtLeast(it.longitude)
         }
         photoPinBoundingBox = BoundingBox(maxLat, maxLng, minLat, minLng)
+        //center on average of all photos coordinates and zoom out and run only once
+        // only if multiple pins are present
+        if (!needsZoomOut && photoPinBoundingBox != null && allPhotoLatLngs?.size!! > 1) {
+            binding?.map?.zoomToBoundingBox(photoPinBoundingBox, true, 100)
+            needsZoomOut = true
+        }
+        binding?.map?.invalidate()
     }
 
     override fun askForLocationPermission() {
@@ -1347,41 +1342,20 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
         // Note: This only happens when the nearby fragment is opened immediately upon app launch,
         // otherwise {screenTopRightLatLng} and {screenBottomLeftLatLng} are used to determine
         // the east and west corner LatLng.
-        if ((screenTopRightLatLng.latitude == 0.0 && screenTopRightLatLng.longitude == 0.0 && screenBottomLeftLatLng.latitude == 0.0 && screenBottomLeftLatLng.longitude == 0.0)
-            || (isDepictsPickerMode && !allPhotoLatLngs.isNullOrEmpty())
-        ) {
-            if (isDepictsPickerMode && photoPinBoundingBox != null) {
-                // Add a small buffer to the bounding box
-                val delta = 0.009
-                screenTopRightLatLng = LatLng(
-                    photoPinBoundingBox!!.latSouth - delta,
-                    photoPinBoundingBox!!.lonWest - delta,
-                    0f
-                )
-                screenBottomLeftLatLng = LatLng(
-                    photoPinBoundingBox!!.latNorth + delta,
-                    photoPinBoundingBox!!.lonEast + delta,
-                    0f
-                )
-            } else {
-                val delta = 0.009
-                val westCornerLat = currentLatLng.latitude - delta
-                val westCornerLong = currentLatLng.longitude - delta
-                val eastCornerLat = currentLatLng.latitude + delta
-                val eastCornerLong = currentLatLng.longitude + delta
-                screenTopRightLatLng = LatLng(
-                    westCornerLat,
-                    westCornerLong, 0f
-                )
-                screenBottomLeftLatLng = LatLng(
-                    eastCornerLat,
-                    eastCornerLong, 0f
-                )
-                populatePlacesForAnotherLocation(
-                    mapFocus, screenTopRightLatLng,
-                    screenBottomLeftLatLng, currentLatLng, null
-                )
-            }
+        if (screenTopRightLatLng.latitude == 0.0 && screenTopRightLatLng.longitude == 0.0 && screenBottomLeftLatLng.latitude == 0.0 && screenBottomLeftLatLng.longitude == 0.0) {
+            val delta = 0.009
+            val westCornerLat = currentLatLng.latitude - delta
+            val westCornerLong = currentLatLng.longitude - delta
+            val eastCornerLat = currentLatLng.latitude + delta
+            val eastCornerLong = currentLatLng.longitude + delta
+            screenTopRightLatLng = LatLng(
+                westCornerLat,
+                westCornerLong, 0f
+            )
+            screenBottomLeftLatLng = LatLng(
+                eastCornerLat,
+                eastCornerLong, 0f
+            )
             if (currentLatLng.equals(
                     getLastMapFocus()
                 )
