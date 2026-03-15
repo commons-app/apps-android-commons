@@ -145,18 +145,18 @@ class UploadClient
             }
         }
 
-    private fun processChunk(
-        filename: String,
-        contribution: Contribution,
-        notificationUpdater: NotificationUpdateProgressListener,
-        chunkFile: File,
-        failures: AtomicBoolean,
-        chunkInfo: AtomicReference<ChunkInfo?>,
-        index: AtomicInteger,
-        errorMessage: AtomicReference<String>,
-        mediaType: MediaType,
-        file: File,
-        totalChunks: Int,
+        private fun processChunk(
+            filename: String,
+            contribution: Contribution,
+            notificationUpdater: NotificationUpdateProgressListener,
+            chunkFile: File,
+            failures: AtomicBoolean,
+            chunkInfo: AtomicReference<ChunkInfo?>,
+            index: AtomicInteger,
+            errorMessage: AtomicReference<String>,
+            mediaType: MediaType,
+            file: File,
+            totalChunks: Int,
         ) {
             if (shouldSkip(chunkInfo, index)) {
                 index.incrementAndGet()
@@ -226,13 +226,13 @@ class UploadClient
          * @param countingRequestBody Request body with chunk file
          * @return
          */
-        fun uploadChunkToStash(
-            filename: String,
-            fileSize: Long,
-            offset: Long,
-            fileKey: String?,
-            countingRequestBody: CountingRequestBody,
-        ): Observable<UploadResult> =
+    fun uploadChunkToStash(
+        filename: String,
+        fileSize: Long,
+        offset: Long,
+        fileKey: String?,
+        countingRequestBody: CountingRequestBody,
+    ): Observable<UploadResult> =
             Observable.defer {
                 val filePart = MultipartBody.Part.createFormData(
                     "chunk",
@@ -321,5 +321,5 @@ private fun handleNetworkErrorMessage(e: Throwable?): String = when (e) {
     is UnknownHostException -> "Unable to reach the server. Please check your internet connection."
     is SocketTimeoutException -> "The socket operation timed out while uploading."
     is ConnectException -> "The connection was interrupted while uploading."
-    else -> "An unexpected error has occurred while uploading."
+    else -> "An unexpected error occurred while uploading."
 }
