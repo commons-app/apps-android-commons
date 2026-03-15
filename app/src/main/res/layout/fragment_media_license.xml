@@ -46,20 +46,14 @@
       android:textSize="@dimen/subtitle_text"
       android:visibility="visible"
       tools:visibility="visible"/>
-    <Spinner
-      android:id="@+id/spinner_license_list"
+    <androidx.recyclerview.widget.RecyclerView
+      android:id="@+id/rv_license_list"
       android:layout_width="match_parent"
-      android:layout_height="wrap_content"
+      android:layout_height="0dp"
+      android:layout_weight="1"
       android:layout_marginTop="@dimen/standard_gap"
-      android:padding="@dimen/dimen_0"
-      tools:visibility="visible"/>
-
-    <TextView
-      android:id="@+id/tv_share_license_summary"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_marginTop="@dimen/standard_gap"
-      android:text="@plurals/share_license_summary"/>
+      android:clipToPadding="false"
+      android:paddingBottom="8dp" />
 
   </LinearLayout>
 
