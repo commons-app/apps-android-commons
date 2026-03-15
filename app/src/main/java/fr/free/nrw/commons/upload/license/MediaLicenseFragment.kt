@@ -25,6 +25,7 @@ import fr.free.nrw.commons.utils.toLicenseName
 import fr.free.nrw.commons.utils.toLicenseUrl
 import timber.log.Timber
 import javax.inject.Inject
+import androidx.recyclerview.widget.LinearLayoutManager
 
 class MediaLicenseFragment : UploadBaseFragment(), MediaLicenseContract.View {
     @Inject
@@ -33,7 +34,7 @@ class MediaLicenseFragment : UploadBaseFragment(), MediaLicenseContract.View {
     private var _binding: FragmentMediaLicenseBinding? = null
     private val binding: FragmentMediaLicenseBinding get() = _binding!!
 
-    private var adapter: ArrayAdapter<String>? = null
+    private var licenseAdapter: LicenseAdapter? = null
     private var licenses: List<String>? = null
 
     override fun onCreateView(
@@ -76,7 +77,7 @@ class MediaLicenseFragment : UploadBaseFragment(), MediaLicenseContract.View {
         }
 
         initPresenter()
-        initLicenseSpinner()
+        binding.rvLicenseList.layoutManager = LinearLayoutManager(requireContext())
         presenter.getLicenses()
     }
 
@@ -95,62 +96,24 @@ class MediaLicenseFragment : UploadBaseFragment(), MediaLicenseContract.View {
 
     private fun initPresenter() = presenter.onAttachView(this)
 
-    /**
-     * Initialise the license spinner
-     */
-    private fun initLicenseSpinner() {
-        if (activity == null) {
-            return
-        }
-        adapter = ArrayAdapter(
-            requireActivity().applicationContext,
-            android.R.layout.simple_spinner_dropdown_item
-        )
-        binding.spinnerLicenseList.adapter = adapter
-        binding.spinnerLicenseList.onItemSelectedListener =
-            object : AdapterView.OnItemSelectedListener {
-                override fun onItemSelected(adapterView: AdapterView<*>, view: View, position: Int, l: Long) {
-                    val licenseName = adapterView.getItemAtPosition(position).toString()
-                    presenter.selectLicense(licenseName)
-                }
-
-                override fun onNothingSelected(adapterView: AdapterView<*>?) {
-                    presenter.selectLicense(null)
-                }
-            }
-    }
-
     override fun setLicenses(licenses: List<String>?) {
-        adapter!!.clear()
         this.licenses = licenses
-        adapter!!.addAll(this.licenses!!)
-        adapter!!.notifyDataSetChanged()
+        if (licenses != null) {
+            licenseAdapter = LicenseAdapter(
+                licenses,
+                null,
+                { selected -> presenter.selectLicense(selected) },
+                { url -> launchBrowser(url) }
+            )
+            binding.rvLicenseList.adapter = licenseAdapter
+        }
     }
 
     override fun setSelectedLicense(license: String?) {
-        var position = license?.let { licenses!!.indexOf(getString(it.toLicenseName())) } ?: -1
-        // Check if position is valid
-        if (position < 0) {
-            Timber.d("Invalid position: %d. Using default licenses", position)
-            position = licenses!!.size - 1
-        }
-        binding.spinnerLicenseList.setSelection(position)
+        licenseAdapter?.setSelectedLicense(license)
     }
 
-    override fun updateLicenseSummary(selectedLicense: String?, numberOfItems: Int) {
-        if (selectedLicense == null) return
-
-        val licenseHyperLink = "<a href='" + selectedLicense.toLicenseUrl() + "'>" +
-                getString(selectedLicense.toLicenseName()) + "</a><br>"
-
-        setTextViewHTML(
-            binding.tvShareLicenseSummary, resources
-                .getQuantityString(
-                    R.plurals.share_license_summary, numberOfItems,
-                    licenseHyperLink
-                )
-        )
-    }
+    override fun updateLicenseSummary(selectedLicense: String?, numberOfItems: Int) {}
 
     private fun setTextViewHTML(textView: TextView, text: String) {
         val sequence: CharSequence = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
@@ -191,7 +154,7 @@ class MediaLicenseFragment : UploadBaseFragment(), MediaLicenseContract.View {
     override fun onDestroyView() {
         presenter.onDetachView()
         //Free the adapter to avoid memory leaks
-        adapter = null
+        licenseAdapter = null
         _binding = null
         super.onDestroyView()
     }
