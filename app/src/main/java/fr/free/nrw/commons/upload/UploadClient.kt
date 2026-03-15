@@ -145,19 +145,19 @@ class UploadClient
             }
         }
 
-            private fun processChunk(
-                filename: String,
-                contribution: Contribution,
-                notificationUpdater: NotificationUpdateProgressListener,
-                chunkFile: File,
-                failures: AtomicBoolean,
-                chunkInfo: AtomicReference<ChunkInfo?>,
-                index: AtomicInteger,
-                errorMessage: AtomicReference<String>,
-                mediaType: MediaType,
-                file: File,
-                totalChunks: Int,
-            ) {
+        private fun processChunk(
+            filename: String,
+            contribution: Contribution,
+            notificationUpdater: NotificationUpdateProgressListener,
+            chunkFile: File,
+            failures: AtomicBoolean,
+            chunkInfo: AtomicReference<ChunkInfo?>,
+            index: AtomicInteger,
+            errorMessage: AtomicReference<String>,
+            mediaType: MediaType,
+            file: File,
+            totalChunks: Int,
+        ) {
             if (shouldSkip(chunkInfo, index)) {
                 index.incrementAndGet()
                 Timber.d("Chunk: Increment and return: %s", index.get())
@@ -226,13 +226,13 @@ class UploadClient
          * @param countingRequestBody Request body with chunk file
          * @return
          */
-        fun uploadChunkToStash(
-            filename: String,
-            fileSize: Long,
-            offset: Long,
-            fileKey: String?,
-            countingRequestBody: CountingRequestBody,
-        ): Observable<UploadResult> =
+    fun uploadChunkToStash(
+        filename: String,
+        fileSize: Long,
+        offset: Long,
+        fileKey: String?,
+        countingRequestBody: CountingRequestBody,
+    ): Observable<UploadResult> =
             Observable.defer {
                 val filePart = MultipartBody.Part.createFormData(
                     "chunk",
