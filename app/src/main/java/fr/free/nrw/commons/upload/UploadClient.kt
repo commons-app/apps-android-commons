@@ -139,24 +139,25 @@ class UploadClient
                 }
                 else -> {
                     Timber.d("Upload stash failed %s", contribution.pageId)
-                    Observable.just(StashUploadResult(StashUploadState.FAILED, null, "Network error"))
+                    val message = errorMessage.get() ?: "Upload failed"
+                    Observable.just(StashUploadResult(StashUploadState.FAILED, null, message))
                 }
             }
         }
 
-        private fun processChunk(
-            filename: String,
-            contribution: Contribution,
-            notificationUpdater: NotificationUpdateProgressListener,
-            chunkFile: File,
-            failures: AtomicBoolean,
-            chunkInfo: AtomicReference<ChunkInfo?>,
-            index: AtomicInteger,
-            errorMessage: AtomicReference<String>,
-            mediaType: MediaType,
-            file: File,
-            totalChunks: Int,
-        ) {
+            private fun processChunk(
+                filename: String,
+                contribution: Contribution,
+                notificationUpdater: NotificationUpdateProgressListener,
+                chunkFile: File,
+                failures: AtomicBoolean,
+                chunkInfo: AtomicReference<ChunkInfo?>,
+                index: AtomicInteger,
+                errorMessage: AtomicReference<String>,
+                mediaType: MediaType,
+                file: File,
+                totalChunks: Int,
+            ) {
             if (shouldSkip(chunkInfo, index)) {
                 index.incrementAndGet()
                 Timber.d("Chunk: Increment and return: %s", index.get())
@@ -194,15 +195,7 @@ class UploadClient
                     },
                     { throwable: Throwable? ->
                         Timber.e(throwable, "Received error in chunk upload")
-                        val message = when (throwable) {
-                            is InvalidLoginTokenException ->"The session token was not found by the"+
-                                    " server."
-                            is UnknownHostException -> "Could not contact the remote host."
-                            is ConnectException -> "The connection was interrupted while uploading."
-                            is SocketTimeoutException -> "The socket operation timed out."
-                            else -> throwable?.message ?: "An unexpected error occurred."
-                        }
-                        errorMessage.set(message)
+                        errorMessage.set(handleNetworkErrorMessage(throwable))
                         failures.set(true)
                     },
                 ),
@@ -234,37 +227,40 @@ class UploadClient
          * @return
          */
         fun uploadChunkToStash(
-            filename: String?,
+            filename: String,
             fileSize: Long,
             offset: Long,
             fileKey: String?,
             countingRequestBody: CountingRequestBody,
-        ): Observable<UploadResult?> {
-            val filePart = MultipartBody.Part.createFormData(
-                "chunk",
-                URLEncoder.encode(filename, "utf-8"),
-                countingRequestBody
-            )
-            return uploadInterface
-                .uploadFileToStash(
-                    toRequestBody(filename),
-                    toRequestBody(fileSize.toString()),
-                    toRequestBody(offset.toString()),
-                    toRequestBody(fileKey),
-                    toRequestBody(csrfTokenClient.getTokenBlocking()),
-                    filePart
+        ): Observable<UploadResult> =
+            Observable.defer {
+                val filePart = MultipartBody.Part.createFormData(
+                    "chunk",
+                    URLEncoder.encode(filename, "utf-8"),
+                    countingRequestBody,
                 )
-                .map(UploadResponse::upload).onErrorResumeNext { e: Throwable ->
-                    Timber.e(e, when (e) {
-                        is InvalidLoginTokenException -> "The server could not retrieve the session token."
-                        is UnknownHostException  -> "Could not contact the remote host."
-                        is SocketTimeoutException -> "The socket operation timed out while uploading."
-                        is ConnectException  -> "The connection was interrupted while uploading a chunk."
-                        else -> "Unexpected error during chunk upload."
-                    })
-                    Observable.error(e)
-                }
-        }
+                uploadInterface
+                    .uploadFileToStash(
+                        toRequestBody(filename),
+                        toRequestBody(fileSize.toString()),
+                        toRequestBody(offset.toString()),
+                        toRequestBody(fileKey),
+                        toRequestBody(csrfTokenClient.getTokenBlocking()),
+                        filePart,
+                    ) .map { response: UploadResponse ->
+                        val upload = response.upload
+                        if (upload == null) {
+                            val exception = IOException("Chunk upload failed: server returned a null upload result.")
+                            Timber.e(exception, "Error in uploading file chunk to stash")
+                            throw exception
+                        }
+                        upload
+                    }.onErrorResumeNext { e: Throwable ->
+                        Timber.e(e, handleNetworkErrorMessage(e))
+                        Observable.error(e)
+                    }
+
+            }
 
         /**
          * Converts string value to request body
@@ -292,13 +288,7 @@ class UploadClient
                         }
                         uploadResult.upload
                     }.onErrorResumeNext { e: Throwable ->
-                        Timber.e(e, when (e) {
-                            is InvalidLoginTokenException -> "The server could not retrieve the session token."
-                            is UnknownHostException  -> "Could not contact the remote host."
-                            is SocketTimeoutException  -> "The socket connection timed out."
-                            is ConnectException -> "The connection was interrupted while uploading."
-                            else -> "An unexpected error occurred."
-                        })
+                        Timber.e(e, handleNetworkErrorMessage(e))
                         Observable.error(e)
                     }
 }
@@ -321,3 +311,15 @@ private fun shouldSkip(
     chunkInfo: AtomicReference<ChunkInfo?>,
     index: AtomicInteger,
 ): Boolean = chunkInfo.get() != null && index.get() < chunkInfo.get()!!.indexOfNextChunkToUpload
+
+/**
+ * @param e - A network error to be handled by the program should the need arise
+ * @return A string - the message that is returned based on the received network error
+ */
+private fun handleNetworkErrorMessage(e: Throwable?): String = when (e) {
+    is InvalidLoginTokenException -> "The server failed to retrieve the session token."
+    is UnknownHostException -> "Unable to reach the server. Please check your internet connection."
+    is SocketTimeoutException -> "The socket operation timed out while uploading."
+    is ConnectException -> "The connection was interrupted while uploading."
+    else -> "An unexpected error occurred while uploading."
+}
