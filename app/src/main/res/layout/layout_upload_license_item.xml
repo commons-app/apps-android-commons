@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:id="@+id/license_card"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:layout_margin="8dp"
+  app:cardCornerRadius="8dp"
+  app:cardElevation="2dp"
+  app:strokeWidth="1dp"
+  app:strokeColor="@color/divider_grey">
+
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="12dp">
+
+    <RelativeLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content">
+
+      <RadioButton
+        android:id="@+id/license_radio_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="false"
+        android:focusable="false" />
+
+      <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/license_radio_button"
+        android:orientation="vertical">
+
+        <TextView
+          android:id="@+id/license_title"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:textStyle="bold"
+          android:textSize="16sp" />
+
+        <TextView
+          android:id="@+id/license_short_description"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:textSize="14sp"
+          android:textColor="?android:attr/textColorSecondary" />
+      </LinearLayout>
+
+      <ImageView
+        android:id="@+id/expansion_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:src="@drawable/ic_baseline_arrow_drop_down_24" />
+    </RelativeLayout>
+
+    <LinearLayout
+      android:id="@+id/long_description_container"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:visibility="gone"
+      android:orientation="vertical"
+      android:layout_marginTop="8dp">
+
+      <TextView
+        android:id="@+id/license_long_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="13sp" />
+
+      <TextView
+        android:id="@+id/tv_see_more"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="@string/read_help_link"
+        android:textColor="@color/button_blue"
+        android:textStyle="bold" />
+    </LinearLayout>
+  </LinearLayout>
+</com.google.android.material.card.MaterialCardView>
