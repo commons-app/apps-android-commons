@@ -31,8 +31,8 @@ class MediaLicensePresenter @Inject constructor(
      * asks the repository for the available licenses, and informs the view on the same
      */
     override fun getLicenses() {
-        val licenses = repository.getLicenses()
-        view.setLicenses(licenses)
+        val simplifiedLicenses = listOf(Prefs.Licenses.CC0, Prefs.Licenses.CC_BY_4, Prefs.Licenses.CC_BY_SA_4)
+        view.setLicenses(simplifiedLicenses)
 
         //CC_BY_SA_4 is the default one used by the commons web app
         var selectedLicense: String = defaultKVStore.getString(
@@ -40,13 +40,8 @@ class MediaLicensePresenter @Inject constructor(
             Prefs.Licenses.CC_BY_SA_4
         ) ?: Prefs.Licenses.CC_BY_SA_4
 
-        try { //I have to make sure that the stored default license was not one of the deprecated one's
-            selectedLicense.toLicenseName()
-        } catch (exception: IllegalStateException) {
-            Timber.e(exception)
-            selectedLicense = Prefs.Licenses.CC_BY_SA_4
-            defaultKVStore.putString(Prefs.DEFAULT_LICENSE, Prefs.Licenses.CC_BY_SA_4)
-        }
+        if (selectedLicense == Prefs.Licenses.CC_BY_3) selectedLicense = Prefs.Licenses.CC_BY_4
+        if (selectedLicense == Prefs.Licenses.CC_BY_SA_3) selectedLicense = Prefs.Licenses.CC_BY_SA_4
         view.setSelectedLicense(selectedLicense)
     }
 
