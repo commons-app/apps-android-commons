@@ -177,7 +177,7 @@
   <string name="welcome_copyright_subtext">Evite os materiais protexidos por dereitos de autoría que se atopen na internet, así como imaxes de pósters, portadas de libros etc.</string>
   <string name="welcome_final_text">Entende como vai?</string>
   <string name="welcome_final_button_text">Si!</string>
-  <string name="welcome_help_button_text">Máis Información</string>
+  <string name="welcome_help_button_text">Máis información</string>
   <string name="detail_panel_cats_label">Categorías</string>
   <string name="detail_panel_cats_loading">Cargando…</string>
   <string name="detail_panel_cats_none">Ningunha seleccionada</string>
@@ -269,7 +269,7 @@
   <string name="nearby_directions">Indicacións</string>
   <string name="nearby_wikidata">Wikidata</string>
   <string name="nearby_wikipedia">Wikipedia</string>
-  <string name="nearby_commons" fuzzy="true">COMMONS</string>
+  <string name="nearby_commons">Commons</string>
   <string name="about_rate_us">Avalíenos</string>
   <string name="about_faq">FAQ</string>
   <string name="user_guide">Guía de uso</string>

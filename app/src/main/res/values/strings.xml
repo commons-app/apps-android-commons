@@ -854,6 +854,7 @@ Upload your first media by tapping on the add button.</string>
   <string name="pending">Pending</string>
   <string name="failed">Failed</string>
   <string name="could_not_load_place_data">Could not load place data</string>
+  <string name="warning_for_no_option_selected">Select any one of the option to answer the question</string>
 
   <string name="custom_selector_delete_folder">Delete Folder</string>
   <string name="custom_selector_confirm_deletion_title">Confirm Deletion</string>

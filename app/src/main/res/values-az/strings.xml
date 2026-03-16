@@ -808,6 +808,7 @@
   <string name="pending">Gözləmədə</string>
   <string name="failed">Uğursuz</string>
   <string name="could_not_load_place_data">Yer datasını yükləmək mümkün olmadı</string>
+  <string name="warning_for_no_option_selected">Suala cavab vermək üçün variantlardan birini seçin</string>
   <string name="custom_selector_delete_folder">Qovluğu Sil</string>
   <string name="custom_selector_confirm_deletion_title">Silinməni təsdiqlə</string>
   <string name="custom_selector_confirm_deletion_message">%2$d elementdən ibarət %1$s qovluğunu silmək istədiyinizə əminsiniz?</string>
