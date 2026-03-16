@@ -144,6 +144,7 @@ import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 import javax.inject.Named
 import kotlin.concurrent.Volatile
+import kotlin.math.ln
 
 
 class NearbyParentFragment : CommonsDaggerSupportFragment(),
@@ -251,7 +252,7 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
     private var isDepictsPickerMode: Boolean = false
     private var allPhotoLatLngs: ArrayList<LatLng>? = null
     private var photoPinBoundingBox: BoundingBox? = null
-    private var needsZoomOut: Boolean = false
+    private var needsZoomOut: Boolean = true
 
     @Volatile
     private var stopQuery = false
@@ -502,6 +503,7 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
                     val first = allPhotoLatLngs!![0]
                     lastMapFocus = GeoPoint(first.latitude, first.longitude)
                     mapCenter = lastMapFocus
+                    needsZoomOut = true
                 }
             }
         }
@@ -585,45 +587,46 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
                 Html.fromHtml(getString(fr.free.nrw.commons.R.string.map_attribution))
         }
         binding?.tvAttribution?.movementMethod = LinkMovementMethod.getInstance()
+        if (!isDepictsPickerMode) {
+            binding?.nearbyFilterList?.btnAdvancedOptions?.setOnClickListener {
+                binding?.nearbyFilter?.searchViewLayout?.searchView?.clearFocus()
+                showHideAdvancedQueryFragment(true)
+                val fragment = AdvanceQueryFragment()
+                val bundle = Bundle()
+                try {
+                    bundle.putString(
+                        "query",
+                        FileUtils.readFromResource("/queries/radius_query_for_upload_wizard.rq")
+                    )
+                } catch (e: IOException) {
+                    Timber.e(e)
+                }
+                fragment.arguments = bundle
+                fragment.callback = object : AdvanceQueryFragment.Callback {
+                    override fun close() {
+                        showHideAdvancedQueryFragment(false)
+                    }
 
-        binding?.nearbyFilterList?.btnAdvancedOptions?.setOnClickListener {
-            binding?.nearbyFilter?.searchViewLayout?.searchView?.clearFocus()
-            showHideAdvancedQueryFragment(true)
-            val fragment = AdvanceQueryFragment()
-            val bundle = Bundle()
-            try {
-                bundle.putString(
-                    "query",
-                    FileUtils.readFromResource("/queries/radius_query_for_upload_wizard.rq")
-                )
-            } catch (e: IOException) {
-                Timber.e(e)
+                    override fun reset() {
+                        presenter?.setAdvancedQuery(null.toString())
+                        presenter?.updateMapAndList(LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED)
+                        showHideAdvancedQueryFragment(false)
+                    }
+
+                    override fun apply(query: String) {
+                        presenter?.setAdvancedQuery(query)
+                        presenter?.updateMapAndList(LocationChangeType.CUSTOM_QUERY)
+                        showHideAdvancedQueryFragment(false)
+                    }
+                }
+                childFragmentManager.beginTransaction()
+                    .replace(fr.free.nrw.commons.R.id.fl_container_nearby_children, fragment)
+                    .commit()
             }
-            fragment.arguments = bundle
-            fragment.callback = object : AdvanceQueryFragment.Callback {
-                override fun close() {
-                    showHideAdvancedQueryFragment(false)
-                }
 
-                override fun reset() {
-                    presenter?.setAdvancedQuery(null.toString())
-                    presenter?.updateMapAndList(LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED)
-                    showHideAdvancedQueryFragment(false)
-                }
-
-                override fun apply(query: String) {
-                    presenter?.setAdvancedQuery(query)
-                    presenter?.updateMapAndList(LocationChangeType.CUSTOM_QUERY)
-                    showHideAdvancedQueryFragment(false)
-                }
+            binding?.tvLearnMore?.setOnClickListener {
+                onLearnMoreClicked()
             }
-            childFragmentManager.beginTransaction()
-                .replace(fr.free.nrw.commons.R.id.fl_container_nearby_children, fragment)
-                .commit()
-        }
-
-        binding?.tvLearnMore?.setOnClickListener {
-            onLearnMoreClicked()
         }
 
         //hide fab components if depicts picker mode
@@ -641,6 +644,10 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
         }
     }
 
+    fun addPhotoMarkerIfDepictsMode() {
+        if (isDepictsPickerMode)
+            addPhotoMarkers(allPhotoLatLngs!!)
+    }
     /**
      * Fetch Explore map camera data from fragment arguments if any.
      */
@@ -745,7 +752,11 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
         presenter!!.onMapReady()
     }
 
-    private fun displayPhotoMarkers(coordList: ArrayList<LatLng>) {
+    private fun addPhotoMarkers(coordList: ArrayList<LatLng>) {
+        var minLat = Double.MAX_VALUE
+        var maxLat = -Double.MAX_VALUE
+        var minLng = Double.MAX_VALUE
+        var maxLng = -Double.MAX_VALUE
 
         if (coordList.isEmpty()) return
 
@@ -755,7 +766,7 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
             marker.position = GeoPoint(latLng.latitude, latLng.longitude)
             marker.title = "Photo ${index + 1}"
             marker.icon = getDrawable(requireContext(), R.drawable.ic_mappin)
-            binding?.map?.overlays?.add(marker)
+            binding!!.map.overlays.add(marker)
             // disable zooming in to the pin , only show the info
             // close details of if open place to avoid confusion
             marker.setOnMarkerClickListener { m: Marker, mapView: MapView? ->
@@ -764,12 +775,6 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
                 true
             }
         }
-
-        var minLat = Double.MAX_VALUE
-        var maxLat = -Double.MAX_VALUE
-        var minLng = Double.MAX_VALUE
-        var maxLng = -Double.MAX_VALUE
-
         allPhotoLatLngs!!.forEach {
             minLat = minLat.coerceAtMost(it.latitude)
             maxLat = maxLat.coerceAtLeast(it.latitude)
@@ -777,11 +782,24 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
             maxLng = maxLng.coerceAtLeast(it.longitude)
         }
         photoPinBoundingBox = BoundingBox(maxLat, maxLng, minLat, minLng)
-        //center on average of all photos coordinates and zoom out and run only once
+        // center on average of all photos coordinates and zoom out and run only once
         // only if multiple pins are present
-        if (!needsZoomOut && photoPinBoundingBox != null && allPhotoLatLngs?.size!! > 1) {
-            binding?.map?.zoomToBoundingBox(photoPinBoundingBox, true, 100)
-            needsZoomOut = true
+        if (needsZoomOut && allPhotoLatLngs?.size!! > 1) {
+            val preferredZoom = if (prevZoom > 0.0) prevZoom else ZOOM_LEVEL.toDouble()
+            // Calculate what zoom the bounding box WOULD use
+            val boundingBoxZoom = binding!!.map.calculateBoundingBoxZoom(
+                photoPinBoundingBox!!, 100
+            )
+            // BoundingBox might zoom out too far if pins are situated far apart ,
+            // which makes the query very slow. so we restrict it
+            if (boundingBoxZoom < preferredZoom) {
+                binding?.map?.controller?.setZoom(preferredZoom)
+                binding?.map?.controller?.animateTo(lastMapFocus)
+            } else binding?.map?.zoomToBoundingBox(
+                photoPinBoundingBox,
+                true, 100
+            )
+            needsZoomOut = false
         }
         binding?.map?.invalidate()
     }
@@ -817,10 +835,27 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
         registerUnregisterLocationListener(false)
     }
 
+    /**
+     * Helper method to get the zoom level required to show the bounding box
+     */
+    fun MapView.calculateBoundingBoxZoom(boundingBox: BoundingBox, padding: Int): Double {
+        val mapWidth = (width - padding * 2).toDouble()
+        val mapHeight = (height - padding * 2).toDouble()
+        if (mapWidth <= 0 || mapHeight <= 0) return 15.0
+
+        val zoomLat = ln(mapHeight * 360.0 / (256.0 * boundingBox.latitudeSpan)) / ln(2.0)
+        val zoomLng = ln(mapWidth * 360.0 / (256.0 * boundingBox.longitudeSpan)) / ln(2.0)
+
+        return minOf(zoomLat, zoomLng)
+    }
+
     override fun onResume() {
         super.onResume()
         binding?.map?.onResume()
-        bottomSheetDetailsBehavior!!.state = BottomSheetBehavior.STATE_HIDDEN
+        clickedMarker?.infoWindow?.isOpen?.let {
+            if (!it)
+                bottomSheetDetailsBehavior!!.state = BottomSheetBehavior.STATE_HIDDEN
+        }
         presenter?.attachView(this)
         registerNetworkReceiver()
 
@@ -828,7 +863,9 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
         binding?.map?.setMultiTouchControls(true)
         binding?.map?.isClickable = true
 
-        if (isResumed && (isDepictsPickerMode || (activity is MainActivity && (activity as? MainActivity)?.activeFragment == ActiveFragment.NEARBY))) {
+        if (isResumed && (activity as? MainActivity)?.activeFragment == ActiveFragment.NEARBY
+            && !isDepictsPickerMode
+        ) {
             if (activity?.let { locationPermissionsHelper?.checkLocationPermission(it) } == true) {
                 locationPermissionGranted()
             } else {
@@ -2039,8 +2076,14 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
         binding!!.fabRecenter.setOnClickListener(onClickListener)
     }
 
+    /**
+     * The [NearbyParentFragmentPresenter.lockUnlockNearby] disables enables FAB recenter.
+     * This lets us [addPhotoMarkerIfDepictsMode] pre-populating before place markers
+     * if nearby places found are null and place markers are not rendered
+     */
     override fun disableFABRecenter() {
         binding!!.fabRecenter.isEnabled = false
+        addPhotoMarkerIfDepictsMode()
     }
 
     override fun enableFABRecenter() {
@@ -2289,9 +2332,6 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
         }
         clearAllMarkers()
         binding!!.map.overlays.addAll(newMarkers)
-        if (isDepictsPickerMode) {
-            displayPhotoMarkers(allPhotoLatLngs!!)
-        }
     }
 
 
@@ -2788,6 +2828,7 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
         scaleBarOverlay.enableScaleBar()
         binding!!.map.overlays.add(scaleBarOverlay)
         binding!!.map.overlays.add(mapEventsOverlay)
+        addPhotoMarkerIfDepictsMode()
         binding!!.map.setMultiTouchControls(true)
         binding!!.map.invalidate()
     }
