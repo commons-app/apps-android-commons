@@ -85,9 +85,23 @@ class CategoryDetailsActivity : BaseActivity(),
      * Set the fragments according to the tab selected in the viewPager.
      */
     private fun setTabs() {
-        categoriesMediaFragment = CategoriesMediaFragment()
-        val subCategoryListFragment = SubCategoriesFragment()
-        val parentCategoriesFragment = ParentCategoriesFragment()
+        // Either load the fragments (of viewPager) from the saved state, or create new ones
+        // Use depictedImagesListFragment as a field for later access.
+        // -> firstOrNull, as we expect 1 if there is state, or 0 otherwise
+        val fragments = supportFragmentManager.fragments
+        categoriesMediaFragment = fragments
+            .filterIsInstance<CategoriesMediaFragment>()
+            .firstOrNull()
+            ?: CategoriesMediaFragment()
+        val subCategoryListFragment = fragments
+            .filterIsInstance<SubCategoriesFragment>()
+            .firstOrNull()
+            ?: SubCategoriesFragment()
+        val parentCategoriesFragment = fragments
+            .filterIsInstance<ParentCategoriesFragment>()
+            .firstOrNull()
+            ?: ParentCategoriesFragment()
+
         categoryName = intent?.getStringExtra("categoryName")
         if (intent != null && categoryName != null) {
             val arguments = Bundle().apply {
