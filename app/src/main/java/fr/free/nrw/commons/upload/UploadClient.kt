@@ -41,17 +41,17 @@ import javax.inject.Singleton
 
 @Singleton
 class UploadClient
-    @Inject
-    constructor(
-        private val context: Context,
-        private val uploadInterface: UploadInterface,
-        @Named(NetworkingModule.NAMED_COMMONS_CSRF) private val csrfTokenClient: CsrfTokenClient,
-        private val pageContentsCreator: PageContentsCreator,
-        private val fileUtilsWrapper: FileUtilsWrapper,
-        private val gson: Gson,
-        private val timeProvider: TimeProvider,
-        private val contributionDao: ContributionDao,
-    ) {
+@Inject
+constructor(
+    private val context: Context,
+    private val uploadInterface: UploadInterface,
+    @Named(NetworkingModule.NAMED_COMMONS_CSRF) private val csrfTokenClient: CsrfTokenClient,
+    private val pageContentsCreator: PageContentsCreator,
+    private val fileUtilsWrapper: FileUtilsWrapper,
+    private val gson: Gson,
+    private val timeProvider: TimeProvider,
+    private val contributionDao: ContributionDao,
+) {
     private val chunkSize = 512 * 1024 // 512 KB
 
     // This is maximum duration for which a stash is persisted on MediaWiki
@@ -65,41 +65,41 @@ class UploadClient
      * uploads
      */
     @Throws(IOException::class)
-    fun uploadFileToStash(
-        filename: String,
-        contribution: Contribution,
-        notificationUpdater: NotificationUpdateProgressListener,
-    ): Observable<StashUploadResult> {
-        if (contribution.isCompleted()) {
-            return Observable.just(
+        fun uploadFileToStash(
+            filename: String,
+            contribution: Contribution,
+            notificationUpdater: NotificationUpdateProgressListener,
+        ): Observable<StashUploadResult> {
+            if (contribution.isCompleted()) {
+                return Observable.just(
                 StashUploadResult(StashUploadState.SUCCESS, contribution.fileKey, null),
-            )
-        }
+                )
+            }
 
-        val file = contribution.localUriPath
-        val fileChunks = fileUtilsWrapper.getFileChunks(file, chunkSize)
-        val mediaType = fileUtilsWrapper.getMimeType(file)?.toMediaTypeOrNull()
+            val file = contribution.localUriPath
+            val fileChunks = fileUtilsWrapper.getFileChunks(file, chunkSize)
+            val mediaType = fileUtilsWrapper.getMimeType(file)?.toMediaTypeOrNull()
 
-        val chunkInfo = AtomicReference<ChunkInfo?>()
-        if (isStashValid(contribution)) {
-            chunkInfo.set(contribution.chunkInfo)
-            Timber.d(
+            val chunkInfo = AtomicReference<ChunkInfo?>()
+            if (isStashValid(contribution)) {
+                chunkInfo.set(contribution.chunkInfo)
+                Timber.d(
                 "Chunk: Next Chunk: %s, Total Chunks: %s",
                 contribution.chunkInfo!!.indexOfNextChunkToUpload,
                 contribution.chunkInfo!!.totalChunks,
-            )
-        }
+               )
+            }
 
-        val index = AtomicInteger()
-        val failures = AtomicBoolean()
-        val errorMessage = AtomicReference<String>()
-        compositeDisposable.add(
-            Observable.fromIterable(fileChunks).forEach { chunkFile: File ->
-                if (canProcess(contributionDao, contribution, failures)) {
-                    if (contributionDao.getContribution(contribution.pageId) == null) {
+            val index = AtomicInteger()
+            val failures = AtomicBoolean()
+            val errorMessage = AtomicReference<String>()
+            compositeDisposable.add(
+                Observable.fromIterable(fileChunks).forEach { chunkFile: File ->
+                    if (canProcess(contributionDao, contribution, failures)) {
+                        if (contributionDao.getContribution(contribution.pageId) == null) {
                         compositeDisposable.clear()
                         return@forEach
-                    } else {
+                        } else {
                         processChunk(
                             filename,
                             contribution,
@@ -114,20 +114,20 @@ class UploadClient
                             fileChunks.size,
                         )
                     }
-                }
-            },
-        )
+                    }
+                },
+            )
 
-        return when {
-            contributionDao.getContribution(contribution.pageId) == null -> {
-                return Observable.just(
-                    StashUploadResult(
-                        StashUploadState.CANCELLED,
-                        null,
-                        "Upload cancelled"
+            return when {
+                contributionDao.getContribution(contribution.pageId) == null -> {
+                    return Observable.just(
+                        StashUploadResult(
+                            StashUploadState.CANCELLED,
+                            null,
+                            "Upload cancelled"
+                        )
                     )
-                )
-            }
+                }
 
             contributionDao.getContribution(contribution.pageId).state == Contribution.STATE_PAUSED ||
                     CommonsApplication.isPaused -> {
@@ -165,46 +165,46 @@ class UploadClient
         }
     }
 
-    private fun processChunk(
-        filename: String,
-        contribution: Contribution,
-        notificationUpdater: NotificationUpdateProgressListener,
-        chunkFile: File,
-        failures: AtomicBoolean,
-        chunkInfo: AtomicReference<ChunkInfo?>,
-        index: AtomicInteger,
-        errorMessage: AtomicReference<String>,
-        mediaType: MediaType,
-        file: File,
-        totalChunks: Int,
-    ) {
-        if (shouldSkip(chunkInfo, index)) {
+        private fun processChunk(
+            filename: String,
+            contribution: Contribution,
+            notificationUpdater: NotificationUpdateProgressListener,
+            chunkFile: File,
+            failures: AtomicBoolean,
+            chunkInfo: AtomicReference<ChunkInfo?>,
+            index: AtomicInteger,
+            errorMessage: AtomicReference<String>,
+            mediaType: MediaType,
+            file: File,
+            totalChunks: Int,
+        ) {
+            if (shouldSkip(chunkInfo, index)) {
             index.incrementAndGet()
             Timber.d("Chunk: Increment and return: %s", index.get())
             return
-        }
+            }
 
-        index.getAndIncrement()
+            index.getAndIncrement()
 
-        val offset = if (chunkInfo.get() != null) chunkInfo.get()!!.uploadResult!!.offset else 0
-        Timber.d("Chunk: Sending Chunk number: %s, offset: %s", index.get(), offset)
+            val offset = if (chunkInfo.get() != null) chunkInfo.get()!!.uploadResult!!.offset else 0
+            Timber.d("Chunk: Sending Chunk number: %s, offset: %s", index.get(), offset)
 
-        val filekey = chunkInfo.get()?.let { it.uploadResult!!.filekey }
-        val requestBody = chunkFile.asRequestBody(mediaType)
-        val listener = { transferred: Long, total: Long ->
-            notificationUpdater.onProgress(transferred, total)
-        }
-        val countingRequestBody =
-            CountingRequestBody(requestBody, listener, offset.toLong(), file.length())
+            val filekey = chunkInfo.get()?.let { it.uploadResult!!.filekey }
+            val requestBody = chunkFile.asRequestBody(mediaType)
+            val listener = { transferred: Long, total: Long ->
+                notificationUpdater.onProgress(transferred, total)
+            }
+            val countingRequestBody =
+                CountingRequestBody(requestBody, listener, offset.toLong(), file.length())
 
-        compositeDisposable.add(
-            uploadChunkToStash(
-                filename,
-                file.length(),
-                offset.toLong(),
-                filekey,
-                countingRequestBody,
-            ).subscribe(
+            compositeDisposable.add(
+                uploadChunkToStash(
+                    filename,
+                    file.length(),
+                    offset.toLong(),
+                    filekey,
+                    countingRequestBody,
+                ).subscribe(
                 { uploadResult: UploadResult? ->
                     Timber.d(
                         "Chunk: Received Chunk number: %s, offset: %s",
@@ -220,40 +220,40 @@ class UploadClient
                     failures.set(true)
                 },
             ),
-        )
-    }
+            )
+       }
 
-    /**
-     * Stash is valid for 6 hours. This function checks the validity of stash
-     *
-     * @param contribution
-     * @return
-     */
-    private fun isStashValid(contribution: Contribution): Boolean =
-        contribution.chunkInfo != null &&
-                contribution.dateModified!!.after(
-                    Date(
-                        timeProvider.currentTimeMillis() - maxChunkAge,
-                    ),
-                )
+        /**
+        * Stash is valid for 6 hours. This function checks the validity of stash
+        *
+        * @param contribution
+        * @return
+        */
+        private fun isStashValid(contribution: Contribution): Boolean =
+            contribution.chunkInfo != null &&
+                    contribution.dateModified!!.after(
+                        Date(
+                            timeProvider.currentTimeMillis() - maxChunkAge,
+                        ),
+                    )
 
-    /**
-     * Uploads a file chunk to stash
-     *
-     * @param filename            The name of the file being uploaded
-     * @param fileSize            The total size of the file
-     * @param offset              The offset returned by the previous chunk upload
-     * @param fileKey             The filekey returned by the previous chunk upload
-     * @param countingRequestBody Request body with chunk file
-     * @return
-     */
-    fun uploadChunkToStash(
-        filename: String,
-        fileSize: Long,
-        offset: Long,
-        fileKey: String?,
-        countingRequestBody: CountingRequestBody,
-    ): Observable<UploadResult> =
+        /**
+        * Uploads a file chunk to stash
+        *
+        * @param filename            The name of the file being uploaded
+         * @param fileSize            The total size of the file
+        * @param offset              The offset returned by the previous chunk upload
+        * @param fileKey             The filekey returned by the previous chunk upload
+        * @param countingRequestBody Request body with chunk file
+        * @return
+        */
+        fun uploadChunkToStash(
+            filename: String,
+            fileSize: Long,
+            offset: Long,
+            fileKey: String?,
+            countingRequestBody: CountingRequestBody,
+        ): Observable<UploadResult> =
         Observable.defer {
             val filePart = MultipartBody.Part.createFormData(
                 "chunk",
@@ -284,33 +284,32 @@ class UploadClient
 
         }
 
-    /**
-     * Converts string value to request body
-     */
-    private fun toRequestBody(value: String?): RequestBody? =
-        value?.toRequestBody(MultipartBody.FORM)
+        /**
+        * Converts string value to request body
+        */
+        private fun toRequestBody(value: String?): RequestBody? = value?.toRequestBody(MultipartBody.FORM)
 
-    fun uploadFileFromStash(
-        contribution: Contribution?,
-        uniqueFileName: String?,
-        fileKey: String?,
-    ): Observable<UploadResult> =
-        uploadInterface
-            .uploadFileFromStash(
-                csrfTokenClient.getTokenBlocking(),
-                pageContentsCreator.createFrom(contribution),
-                CommonsApplication.DEFAULT_EDIT_SUMMARY,
-                uniqueFileName!!,
-                fileKey!!,
-            ).map { uploadResponse: JsonObject? ->
-                val uploadResult = gson.fromJson(uploadResponse, UploadResponse::class.java)
-                if (uploadResult.upload == null) {
-                    val exception = gson.fromJson(uploadResponse, MwException::class.java)
-                    Timber.e(exception, "Error in uploading file from stash")
-                    throw Exception(exception.errorCode)
-                }
-                uploadResult.upload
-            }.onErrorResumeNext { e: Throwable ->
+        fun uploadFileFromStash(
+            contribution: Contribution?,
+            uniqueFileName: String?,
+            fileKey: String?,
+        ): Observable<UploadResult> =
+            uploadInterface
+                .uploadFileFromStash(
+                    csrfTokenClient.getTokenBlocking(),
+                    pageContentsCreator.createFrom(contribution),
+                    CommonsApplication.DEFAULT_EDIT_SUMMARY,
+                    uniqueFileName!!,
+                    fileKey!!,
+                ).map { uploadResponse: JsonObject? ->
+                    val uploadResult = gson.fromJson(uploadResponse, UploadResponse::class.java)
+                    if (uploadResult.upload == null) {
+                        val exception = gson.fromJson(uploadResponse, MwException::class.java)
+                        Timber.e(exception, "Error in uploading file from stash")
+                        throw Exception(exception.errorCode)
+                    }
+                    uploadResult.upload
+                }.onErrorResumeNext { e: Throwable ->
                 Timber.e(e, handleNetworkErrorMessage(e,context))
                 Observable.error(e)
             }
@@ -346,5 +345,3 @@ private fun handleNetworkErrorMessage(e: Throwable?, context:Context): String = 
     is ConnectException -> getString(context,R.string.error_connect_exception)
     else -> getString(context,R.string.error_unexpected)
 }
-
-
