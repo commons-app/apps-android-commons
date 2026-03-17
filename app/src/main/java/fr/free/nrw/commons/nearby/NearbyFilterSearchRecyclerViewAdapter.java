@@ -128,7 +128,7 @@ public class NearbyFilterSearchRecyclerViewAdapter
                     for (Label label : labels) {
                         String data = label.toString();
                         if (data.toLowerCase(Locale.ROOT).startsWith(constraint.toString())) {
-                            filteredArrayList.add(Label.fromText(label.getText()));
+                            filteredArrayList.add(label);
                         }
                     }
 
