@@ -80,7 +80,7 @@
   <string name="suggest_unrestricted_mode">Uploading more than 3 images works more reliably when the battery optimization is turned off. Please turn battery optimization off for the Commons app from the settings for a smooth upload experience. \n\nPossible steps to turn battery optimization off:\n\nStep 1: Tap on the \'Settings\' button below.\n\nStep 2: Switch from \'Not optimized\' to \'All apps\'.\n\nStep 3: Search for \"Commons\" or \"fr.free.nrw.commons\".\n\nStep 4: Tap it and select \'Don\'t optimize\'.\n\nStep 5: Press \'Done\'.</string>
   <string name="authentication_failed">Authentication failed. Please log in again.</string>
   <string name="uploading_started">Upload started!</string>
-  <string name="uploading_queued">Upload <queued> </queued> (limited connection mode enabled)</string>
+  <string name="uploading_queued">Upload queued (limited connection mode enabled)</string>
   <string name="upload_completed_notification_title">%1$s uploaded!</string>
   <string name="upload_completed_notification_text">Tap to view your upload</string>
   <string name="upload_progress_notification_title_start">Uploading file: %1$s</string>
