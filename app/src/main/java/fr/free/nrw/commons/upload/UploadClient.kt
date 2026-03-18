@@ -43,28 +43,28 @@ import javax.inject.Singleton
 class UploadClient
 @Inject
 constructor(
-    private val context: Context,
-    private val uploadInterface: UploadInterface,
-    @Named(NetworkingModule.NAMED_COMMONS_CSRF) private val csrfTokenClient: CsrfTokenClient,
-    private val pageContentsCreator: PageContentsCreator,
-    private val fileUtilsWrapper: FileUtilsWrapper,
-    private val gson: Gson,
-    private val timeProvider: TimeProvider,
-    private val contributionDao: ContributionDao,
+        private val context: Context,
+        private val uploadInterface: UploadInterface,
+        @Named(NetworkingModule.NAMED_COMMONS_CSRF) private val csrfTokenClient: CsrfTokenClient,
+        private val pageContentsCreator: PageContentsCreator,
+        private val fileUtilsWrapper: FileUtilsWrapper,
+        private val gson: Gson,
+        private val timeProvider: TimeProvider,
+        private val contributionDao: ContributionDao,
 ) {
-    private val chunkSize = 512 * 1024 // 512 KB
+        private val chunkSize = 512 * 1024 // 512 KB
 
-    // This is maximum duration for which a stash is persisted on MediaWiki
-    // https://www.mediawiki.org/wiki/Manual:$wgUploadStashMaxAge
-    private val maxChunkAge = 6 * 3600 * 1000 // 6 hours
-    private val compositeDisposable = CompositeDisposable()
+        // This is maximum duration for which a stash is persisted on MediaWiki
+        // https://www.mediawiki.org/wiki/Manual:$wgUploadStashMaxAge
+        private val maxChunkAge = 6 * 3600 * 1000 // 6 hours
+        private val compositeDisposable = CompositeDisposable()
 
-    /**
-     * Upload file to stash in chunks of specified size. Uploading files in chunks will make
-     * handling of large files easier. Also, it will be useful in supporting pause/resume of
-     * uploads
-     */
-    @Throws(IOException::class)
+        /**
+        * Upload file to stash in chunks of specified size. Uploading files in chunks will make
+        * handling of large files easier. Also, it will be useful in supporting pause/resume of
+        * uploads
+        */
+        @Throws(IOException::class)
         fun uploadFileToStash(
             filename: String,
             contribution: Contribution,
