@@ -194,6 +194,12 @@ class ContributionsListFragment : CommonsDaggerSupportFragment(), ContributionsL
         if (sessionManager!!.userName == userName) {
             binding!!.tvContributionsOfUser.visibility = View.GONE
             binding!!.fabLayout.visibility = View.VISIBLE
+            // Set correct FAB orientation based on current orientation
+            binding!!.fabLayout.orientation =
+                if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE)
+                    LinearLayout.HORIZONTAL
+                else
+                    LinearLayout.VERTICAL
         } else {
             binding!!.tvContributionsOfUser.visibility = View.VISIBLE
             binding!!.tvContributionsOfUser.text =
