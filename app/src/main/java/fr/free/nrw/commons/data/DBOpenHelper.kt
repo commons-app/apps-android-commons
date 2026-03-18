@@ -6,9 +6,9 @@ import android.database.sqlite.SQLiteException
 import android.database.sqlite.SQLiteOpenHelper
 import fr.free.nrw.commons.bookmarks.items.BookmarkItemsTable
 import fr.free.nrw.commons.bookmarks.pictures.BookmarksTable
-import fr.free.nrw.commons.category.CategoryDao
+import fr.free.nrw.commons.category.CategoryTable
 import fr.free.nrw.commons.explore.recentsearches.RecentSearchesTable
-import fr.free.nrw.commons.recentlanguages.RecentLanguagesDao
+import fr.free.nrw.commons.recentlanguages.RecentLanguagesTable
 
 
 class DBOpenHelper(
@@ -28,19 +28,19 @@ class DBOpenHelper(
      * dependency injection take care of managing this as a singleton.
      */
     override fun onCreate(db: SQLiteDatabase) {
-        CategoryDao.Table.onCreate(db)
+        CategoryTable.onCreate(db)
         BookmarksTable.onCreate(db)
         BookmarkItemsTable.onCreate(db)
         RecentSearchesTable.onCreate(db)
-        RecentLanguagesDao.Table.onCreate(db)
+        RecentLanguagesTable.onCreate(db)
     }
 
     override fun onUpgrade(db: SQLiteDatabase, from: Int, to: Int) {
-        CategoryDao.Table.onUpdate(db, from, to)
+        CategoryTable.onUpdate(db, from, to)
         BookmarksTable.onUpdate(db, from, to)
         BookmarkItemsTable.onUpdate(db, from, to)
         RecentSearchesTable.onUpdate(db, from, to)
-        RecentLanguagesDao.Table.onUpdate(db, from, to)
+        RecentLanguagesTable.onUpdate(db, from, to)
         deleteTable(db, CONTRIBUTIONS_TABLE)
         deleteTable(db, BOOKMARKS_LOCATIONS)
     }
