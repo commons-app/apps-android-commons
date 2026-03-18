@@ -356,7 +356,8 @@ object FilePicker : Constants {
         val images = data?.getParcelableArrayListExtra<Image>("Images")
         images?.forEach { image ->
             val uri = image.uri
-            val file = PickedFiles.pickedExistingPicture(activity, uri)
+            var file = PickedFiles.pickedExistingPicture(activity, uri)
+            file = handleHeicFile(file, activity)
             files.add(file)
         }
 
@@ -405,17 +406,10 @@ object FilePicker : Constants {
     private fun handleHeicFile(file: UploadableFile, activity: Activity): UploadableFile {
         val extension = file.file.extension.lowercase()
         return if (extension == "heic" || extension == "heif") {
-            AlertDialog.Builder(activity)
-                .setTitle("Unsupported format")
-                .setMessage("The image type previously selected " +
-                        "was not supported and has been converted to JPG.")
-                .setPositiveButton("OK") { dialog, _ ->
-                    dialog.dismiss()
-                }
-                .show()
-
             val jpgFile = convertHeicToJpg(file.file, activity)
-            UploadableFile(jpgFile)
+            val uploadableFile = UploadableFile(jpgFile)
+            uploadableFile.hasUnsupportedFormat = true
+            uploadableFile
         } else {
             file
         }
@@ -437,7 +431,8 @@ object FilePicker : Constants {
         } else {
             for (i in 0 until clipData.itemCount) {
                 val uri = clipData.getItemAt(i).uri
-                val file = PickedFiles.pickedExistingPicture(activity, uri)
+                var file = PickedFiles.pickedExistingPicture(activity, uri)
+                file = handleHeicFile(file, activity)
                 files.add(file)
             }
         }
