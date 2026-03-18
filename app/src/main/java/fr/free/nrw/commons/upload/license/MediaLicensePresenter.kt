@@ -44,6 +44,10 @@ class MediaLicensePresenter @Inject constructor(
         if (selectedLicense == Prefs.Licenses.CC_BY_SA_3) selectedLicense = Prefs.Licenses.CC_BY_SA_4
         view.setSelectedLicense(selectedLicense)
     }
+    fun onShowMoreClicked() {
+        val allLicenses = repository.getLicenses()
+        view.setLicenses(allLicenses)
+    }
 
     /**
      * ask the repository to select a license for the current upload

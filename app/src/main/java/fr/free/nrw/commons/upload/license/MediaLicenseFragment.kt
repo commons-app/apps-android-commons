@@ -75,6 +75,11 @@ class MediaLicenseFragment : UploadBaseFragment(), MediaLicenseContract.View {
                 null
             )
         }
+        binding.tvShowMoreLicenses.setOnClickListener {
+            (presenter as? MediaLicensePresenter)?.onShowMoreClicked()
+            // hidee the button once it is clicked
+            binding.tvShowMoreLicenses.visibility = View.GONE
+        }
 
         initPresenter()
         binding.rvLicenseList.layoutManager = LinearLayoutManager(requireContext())
