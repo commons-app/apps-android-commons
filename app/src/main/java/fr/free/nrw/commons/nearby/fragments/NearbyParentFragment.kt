@@ -6,6 +6,7 @@ import android.app.ProgressDialog
 import android.content.ActivityNotFoundException
 import android.content.BroadcastReceiver
 import android.content.Context
+import android.content.Context.INPUT_METHOD_SERVICE
 import android.content.Intent
 import android.content.IntentFilter
 import android.content.res.Configuration
@@ -30,12 +31,52 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.DrawableRes
 import androidx.appcompat.app.AlertDialog
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Close
+import androidx.compose.material.icons.filled.Search
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.focus.FocusManager
+import androidx.compose.ui.focus.onFocusChanged
+import androidx.compose.ui.graphics.SolidColor
+import androidx.compose.ui.input.key.Key
+import androidx.compose.ui.input.key.KeyEventType
+import androidx.compose.ui.input.key.key
+import androidx.compose.ui.input.key.onInterceptKeyBeforeSoftKeyboard
+import androidx.compose.ui.input.key.type
+import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
@@ -52,8 +93,6 @@ import com.bumptech.glide.request.target.Target
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetBehavior.BottomSheetCallback
 import com.google.android.material.snackbar.Snackbar
-import com.jakewharton.rxbinding2.view.RxView
-import com.jakewharton.rxbinding3.appcompat.queryTextChanges
 import fr.free.nrw.commons.CommonsApplication
 import fr.free.nrw.commons.MapController.NearbyPlacesInfo
 import fr.free.nrw.commons.Media
@@ -114,6 +153,7 @@ import io.reactivex.Completable
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import kotlinx.coroutines.delay
 import org.osmdroid.events.MapEventsReceiver
 import org.osmdroid.events.MapListener
 import org.osmdroid.events.ScrollEvent
@@ -167,6 +207,7 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
             } else if (isDetailsBottomSheetVisible) {
                 hideBottomDetailsSheet()
             }
+            hideListView()
             return true
         }
 
@@ -271,6 +312,7 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
 
     private var userLocationOverlay: Overlay? = null
     private var userLocationErrorOverlay: Overlay? = null
+    private var searchBarFocusManger: FocusManager? = null
 
     private val galleryPickLauncherForResult =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
@@ -568,7 +610,6 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
         binding?.tvAttribution?.movementMethod = LinkMovementMethod.getInstance()
 
         binding?.nearbyFilterList?.btnAdvancedOptions?.setOnClickListener {
-            binding?.nearbyFilter?.searchViewLayout?.searchView?.clearFocus()
             showHideAdvancedQueryFragment(true)
             val fragment = AdvanceQueryFragment()
             val bundle = Bundle()
@@ -883,24 +924,6 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
     fun initNearbyFilter() {
         binding!!.nearbyFilterList.root.visibility = View.GONE
         hideBottomSheet()
-        binding!!.nearbyFilter.searchViewLayout.searchView.apply {
-            setIconifiedByDefault(false)
-            isIconified = false
-            setQuery("", false)
-            clearFocus()
-        }
-        binding!!.nearbyFilter.searchViewLayout.searchView.setOnQueryTextFocusChangeListener { v, hasFocus ->
-            setLayoutHeightAlignedToWidth(
-                1.25,
-                binding!!.nearbyFilterList.root
-            )
-            if (hasFocus) {
-                binding!!.nearbyFilterList.root.visibility = View.VISIBLE
-                presenter!!.searchViewGainedFocus()
-            } else {
-                binding!!.nearbyFilterList.root.visibility = View.GONE
-            }
-        }
         binding!!.nearbyFilterList.searchListView.setHasFixedSize(true)
         binding!!.nearbyFilterList.searchListView.addItemDecoration(
             DividerItemDecoration(
@@ -940,15 +963,38 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
         ).toInt()
         binding!!.nearbyFilterList.searchListView.adapter = nearbyFilterSearchRecyclerViewAdapter
         setLayoutHeightAlignedToWidth(1.25, binding!!.nearbyFilterList.root)
-        compositeDisposable.add(
-            binding!!.nearbyFilter.searchViewLayout.searchView.queryTextChanges()
-                .takeUntil(RxView.detaches(binding!!.nearbyFilter.searchViewLayout.searchView))
-                .debounce(500, TimeUnit.MILLISECONDS)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe { query: CharSequence ->
-                    (binding!!.nearbyFilterList.searchListView.adapter as NearbyFilterSearchRecyclerViewAdapter).filter
-                        .filter(query.toString())
-                })
+        binding!!.nearbyFilter.searchViewLayout.searchview.setContent {
+            nearbySearchBar(
+                isDarkTheme = _isDarkTheme,
+                filterListView = binding!!.nearbyFilterList.root,
+                placeholder = getString(R.string.search_nearby),
+                onQueryChanged = { query ->
+                    (binding?.nearbyFilterList?.searchListView?.adapter as?
+                            NearbyFilterSearchRecyclerViewAdapter)?.filter?.filter(query)
+                },
+                onFocusGained = { filterListView ->
+                    setLayoutHeightAlignedToWidth(1.25, filterListView)
+                    filterListView.visibility = View.VISIBLE
+                    presenter!!.searchViewGainedFocus()
+                },
+                onBackPressed = { filterListView ->
+                    filterListView.visibility = View.GONE
+                },
+                onFocusManagerReady = { fm -> searchBarFocusManger = fm }
+            )
+        }
+    }
+
+    /**
+     * hides list view , when list view hides the searchbar focus must be gone ,
+     * keyboard must be hidden
+     * */
+    private fun hideListView() {
+        searchBarFocusManger?.clearFocus()
+        val inputMethodManager =
+            context?.getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager?
+        inputMethodManager?.hideSoftInputFromWindow(view?.windowToken, 0)
+        binding!!.nearbyFilterList.root.visibility = View.GONE
     }
 
     private fun restoreStoredFilterSelection() {
@@ -3011,5 +3057,99 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
         fun containsParentheses(input: String): Boolean {
             return input.contains("(") || input.contains(")")
         }
+    }
+
+    /**
+     * Custom search bar as it gives more flexibility for adjustments.
+     */
+    @OptIn(ExperimentalComposeUiApi::class)
+    @Composable
+    fun nearbySearchBar(
+        isDarkTheme: Boolean,
+        filterListView: View,
+        placeholder: String,
+        onQueryChanged: (String) -> Unit,
+        onFocusGained: (View) -> Unit,
+        onBackPressed: (View) -> Unit,
+        onFocusManagerReady: (FocusManager) -> Unit,
+    ) {
+        var query by rememberSaveable { mutableStateOf("") }
+        val focusManager = LocalFocusManager.current
+        onFocusManagerReady(focusManager)
+        val textColor = colorResource(
+            if (isDarkTheme) R.color.white else R.color.contributionListDarkBackground
+        )
+        val shape = RoundedCornerShape(4.dp)
+        LaunchedEffect(query) {
+            delay(500)// debounce
+            onQueryChanged(query)
+        }
+        BasicTextField(
+            value = query,
+            onValueChange = { query = it },
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 6.dp, bottom = 6.dp, start = 12.dp)
+                .height(36.dp)
+                .clip(shape)
+                //intercept the keys manually as backHandler requires two back taps
+                // to clear focus and hide keyboard
+                .onInterceptKeyBeforeSoftKeyboard { event ->
+                    if (event.type == KeyEventType.KeyDown && event.key == Key.Back) {
+                        focusManager.clearFocus()
+                        onBackPressed(filterListView)
+                    }
+                    false
+                }
+                .background(
+                    colorResource(
+                        if (isDarkTheme) R.color.contributionListDarkBackground
+                        else R.color.searchBarBackground
+                    ),
+                    shape
+                )
+                .onFocusChanged { focusState ->
+                    if (focusState.hasFocus) {
+                        onFocusGained(filterListView)
+                    }
+                }
+                .padding(horizontal = 12.dp),
+            singleLine = true,
+            textStyle = TextStyle(fontSize = 14.sp, color = textColor),
+            cursorBrush = SolidColor(textColor),
+            decorationBox = { innerTextField ->
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Icon(
+                        Icons.Default.Search, contentDescription = null,
+                        modifier = Modifier.size(20.dp),
+                        tint = textColor.copy(alpha = 0.6f)
+                    )
+                    Box(
+                        Modifier.weight(1f).padding(start = 8.dp),
+                        contentAlignment = Alignment.CenterStart
+                    ) {
+                        if (query.isEmpty()) {
+                            Text(
+                                placeholder,
+                                style = TextStyle(
+                                    fontSize = 14.sp,
+                                    color = textColor.copy(0.5f)
+                                )
+                            )
+                        }
+                        innerTextField()
+                    }
+                    if (query.isNotEmpty()) {
+                        IconButton(onClick = { query = "" }, Modifier.size(20.dp)) {
+                            Icon(
+                                Icons.Default.Close, contentDescription = "Clear",
+                                modifier = Modifier.size(16.dp),
+                                tint = textColor.copy(alpha = 0.6f)
+                            )
+                        }
+                    }
+                }
+            }
+        )
     }
 }
