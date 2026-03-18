@@ -407,7 +407,8 @@ object FilePicker : Constants {
         return if (extension == "heic" || extension == "heif") {
             AlertDialog.Builder(activity)
                 .setTitle("Unsupported format")
-                .setMessage("This image type isn't supported and will be converted to JPG.")
+                .setMessage("The image type previously selected " +
+                        "was not supported and has been converted to JPG.")
                 .setPositiveButton("OK") { dialog, _ ->
                     dialog.dismiss()
                 }
