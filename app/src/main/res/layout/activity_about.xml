@@ -1,24 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/drawer_layout"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="?attr/mainBackground"
-    android:orientation="vertical">
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:id="@+id/drawer_layout"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:background="?attr/mainBackground">
+
     <LinearLayout
-        android:id="@+id/toolbarLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="?attr/actionBarSize">
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:orientation="vertical">
+
+    <LinearLayout
+      android:id="@+id/toolbarLayout"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content">
         <include
           android:id="@+id/toolbarBinding"
           layout="@layout/toolbar"/>
     </LinearLayout>
+
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="?attr/actionBarSize"
-        android:layout_below="@id/toolbarLayout">
+      android:layout_width="match_parent"
+      android:layout_height="match_parent">
+
+        <ScrollView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content">
 
         <ScrollView
             android:layout_width="match_parent"
@@ -174,5 +182,7 @@
                 </LinearLayout>
             </RelativeLayout>
         </ScrollView>
+        </ScrollView>
+    </LinearLayout>
     </LinearLayout>
 </androidx.drawerlayout.widget.DrawerLayout>
