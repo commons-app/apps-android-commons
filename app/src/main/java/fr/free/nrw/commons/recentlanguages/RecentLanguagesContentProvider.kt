@@ -7,8 +7,8 @@ import android.database.sqlite.SQLiteQueryBuilder
 import android.net.Uri
 import fr.free.nrw.commons.BuildConfig
 import fr.free.nrw.commons.di.CommonsDaggerContentProvider
-import fr.free.nrw.commons.recentlanguages.RecentLanguagesDao.Table.COLUMN_NAME
-import fr.free.nrw.commons.recentlanguages.RecentLanguagesDao.Table.TABLE_NAME
+import fr.free.nrw.commons.recentlanguages.RecentLanguagesTable.COLUMN_NAME
+import fr.free.nrw.commons.recentlanguages.RecentLanguagesTable.TABLE_NAME
 import androidx.core.net.toUri
 
 
