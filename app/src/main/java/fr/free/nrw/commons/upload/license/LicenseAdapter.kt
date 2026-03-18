@@ -68,15 +68,19 @@ class LicenseAdapter(
     override fun getItemCount() = licenseList.size
 
     private fun getShortDesc(context: android.content.Context, key: String) = when (key) {
-        Prefs.Licenses.CC0 -> context.getString(R.string.license_cc0_description)
-        Prefs.Licenses.CC_BY_4 -> context.getString(R.string.license_cc_by_description)
-        else -> context.getString(R.string.license_cc_by_sa_description)
+        Prefs.Licenses.CC0, "CC0" -> context.getString(R.string.license_cc0_description)
+        Prefs.Licenses.CC_BY_4, "Attribution 4.0" -> context.getString(R.string.license_cc_by_description)
+        Prefs.Licenses.CC_BY_SA_4, "Attribution-ShareAlike 4.0" -> context.getString(R.string.license_cc_by_sa_description)
+        // fallback for the3.0 or the other versions
+        else -> "Standard Creative Commons license terms apply."
     }
 
     private fun getLongDesc(context: android.content.Context, key: String) = when (key) {
-        Prefs.Licenses.CC0 -> context.getString(R.string.license_cc0_long_description)
-        Prefs.Licenses.CC_BY_4 -> context.getString(R.string.license_cc_by_long_description)
-        else -> context.getString(R.string.license_cc_by_sa_long_description)
+        Prefs.Licenses.CC0, "CC0" -> context.getString(R.string.license_cc0_long_description)
+        Prefs.Licenses.CC_BY_4, "Attribution 4.0" -> context.getString(R.string.license_cc_by_long_description)
+        Prefs.Licenses.CC_BY_SA_4, "Attribution-ShareAlike 4.0" -> context.getString(R.string.license_cc_by_sa_long_description)
+        // Only show the older verison warnning to actual older versions
+        else -> "This is an older version of the license. It is recommended to use the 4.0 versions for better international legal compatibility."
     }
 
     class LicenseViewHolder(val binding: LayoutUploadLicenseItemBinding) :
