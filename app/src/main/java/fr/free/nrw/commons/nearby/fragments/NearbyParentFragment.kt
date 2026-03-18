@@ -41,6 +41,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleCoroutineScope
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
@@ -84,6 +85,7 @@ import fr.free.nrw.commons.nearby.MarkerPlaceGroup
 import fr.free.nrw.commons.nearby.NearbyController
 import fr.free.nrw.commons.nearby.NearbyFilterSearchRecyclerViewAdapter
 import fr.free.nrw.commons.nearby.NearbyFilterState
+import fr.free.nrw.commons.nearby.NearbyFilterViewModel
 import fr.free.nrw.commons.nearby.NearbyUtil
 import fr.free.nrw.commons.nearby.Place
 import fr.free.nrw.commons.nearby.PlacesRepository
@@ -264,6 +266,7 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
     private var searchable = false
 
     private val nearbyLegend: ConstraintLayout? = null
+    private lateinit var filterViewModel: NearbyFilterViewModel
 
     private var gridLayoutManager: GridLayoutManager? = null
     private var dataList: MutableList<BottomSheetItem>? = null
@@ -448,6 +451,28 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        
+        // Initialize the ViewModel for filter state using ViewModelProvider
+        filterViewModel = ViewModelProvider(this)[NearbyFilterViewModel::class.java]
+        
+        // Observe selected labels changes from ViewModel
+        filterViewModel.selectedLabels.observe(viewLifecycleOwner) { labels ->
+            nearbyFilterSearchRecyclerViewAdapter?.let { adapter ->
+                adapter.selectedLabels.clear()
+                adapter.selectedLabels.addAll(labels)
+                adapter.notifyDataSetChanged()
+                // Apply the filter when labels change
+                if (NearbyController.currentLocation != null) {
+                    presenter?.filterByMarkerType(
+                        labels,
+                        binding?.nearbyFilterList?.checkboxTriStates?.state ?: CheckBoxTriStates.UNKNOWN,
+                        true,
+                        false
+                    )
+                }
+            }
+        }
+        
         // Initialize the launcher in the appropriate lifecycle method (e.g., onViewCreated)
         inAppCameraLocationPermissionLauncher =
             registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { result ->
@@ -925,6 +950,8 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
                     selectedLabels: ArrayList<Label>, i: Int,
                     b: Boolean, b1: Boolean
                 ) {
+                    // Save to ViewModel to survive configuration changes
+                    filterViewModel.setSelectedLabels(selectedLabels)
                     presenter!!.filterByMarkerType(selectedLabels, i, b, b1)
                 }
 
@@ -953,17 +980,15 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
 
     private fun restoreStoredFilterSelection() {
         val adapter = nearbyFilterSearchRecyclerViewAdapter ?: return
-        val savedLabels = ArrayList(NearbyFilterState.getInstance().selectedLabels)
+        // Restore from ViewModel instead of singleton to survive configuration changes
+        val savedLabels = filterViewModel.getSelectedLabels()
         adapter.selectedLabels.clear()
+        adapter.selectedLabels.addAll(savedLabels)
         val savedSet = savedLabels.toSet()
         Label.valuesAsList().forEach { label ->
             val isSelected = savedSet.contains(label)
             label.setSelected(isSelected)
-            if (isSelected) {
-                adapter.selectedLabels.add(label)
-            }
         }
-        NearbyFilterState.setSelectedLabels(ArrayList(adapter.selectedLabels))
         adapter.notifyDataSetChanged()
     }
 
@@ -1756,6 +1781,8 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
             && NearbyController.currentLocation != null
         ) {
             nearbyFilterSearchRecyclerViewAdapter!!.setRecyclerViewAdapterAllSelected()
+            // Update ViewModel to survive configuration changes
+            filterViewModel.selectAllLabels(Label.valuesAsList())
         }
     }
 
@@ -1764,6 +1791,8 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
             && NearbyController.currentLocation != null
         ) {
             nearbyFilterSearchRecyclerViewAdapter!!.setRecyclerViewAdapterItemsGreyedOut()
+            // Update ViewModel to survive configuration changes
+            filterViewModel.clearSelectedLabels()
         }
     }
 
