@@ -17,9 +17,11 @@
         android:id="@+id/search_view"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:tint="@color/white"
+      android:focusable="false"
+      android:focusableInTouchMode="false"
         android:queryHint="@string/nearby_search_hint"
         android:searchIcon="@drawable/ic_search_white_24dp"
-        app:theme="@style/WhiteSearchBarTheme"/>
+      android:tint="@color/white"
+      app:queryBackground="@drawable/search_view_static_underline" />
 
 </LinearLayout>
