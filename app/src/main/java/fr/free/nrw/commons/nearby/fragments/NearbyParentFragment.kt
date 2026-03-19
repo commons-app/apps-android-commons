@@ -29,6 +29,7 @@ import android.view.MenuInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.Animation
+import android.view.inputmethod.EditorInfo
 import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.activity.result.ActivityResult
@@ -888,6 +889,8 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
             isIconified = false
             setQuery("", false)
             clearFocus()
+
+            imeOptions = imeOptions or EditorInfo.IME_FLAG_NO_EXTRACT_UI
         }
         binding!!.nearbyFilter.searchViewLayout.searchView.setOnQueryTextFocusChangeListener { v, hasFocus ->
             setLayoutHeightAlignedToWidth(
