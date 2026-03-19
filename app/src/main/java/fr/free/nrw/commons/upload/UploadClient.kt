@@ -97,23 +97,23 @@ constructor(
                 Observable.fromIterable(fileChunks).forEach { chunkFile: File ->
                     if (canProcess(contributionDao, contribution, failures)) {
                         if (contributionDao.getContribution(contribution.pageId) == null) {
-                        compositeDisposable.clear()
-                        return@forEach
+                                compositeDisposable.clear()
+                                return@forEach
                         } else {
-                        processChunk(
-                            filename,
-                            contribution,
-                            notificationUpdater,
-                            chunkFile,
-                            failures,
-                            chunkInfo,
-                            index,
-                            errorMessage,
-                            mediaType!!,
-                            file!!,
-                            fileChunks.size,
-                        )
-                    }
+                            processChunk(
+                                filename,
+                                contribution,
+                                notificationUpdater,
+                                chunkFile,
+                                failures,
+                                chunkInfo,
+                                index,
+                                errorMessage,
+                                mediaType!!,
+                                file!!,
+                                fileChunks.size,
+                            )
+                        }
                     }
                 },
             )
@@ -125,7 +125,7 @@ constructor(
                             StashUploadState.CANCELLED,
                             null,
                             "Upload cancelled"
-                        )
+                        ),
                     )
                 }
 
@@ -179,9 +179,9 @@ constructor(
             totalChunks: Int,
         ) {
             if (shouldSkip(chunkInfo, index)) {
-            index.incrementAndGet()
-            Timber.d("Chunk: Increment and return: %s", index.get())
-            return
+                index.incrementAndGet()
+                Timber.d("Chunk: Increment and return: %s", index.get())
+                return
             }
 
             index.getAndIncrement()
@@ -205,23 +205,23 @@ constructor(
                     filekey,
                     countingRequestBody,
                 ).subscribe(
-                { uploadResult: UploadResult? ->
-                    Timber.d(
-                        "Chunk: Received Chunk number: %s, offset: %s",
-                        index.get(),
-                        uploadResult?.offset,
-                    )
-                    chunkInfo.set(ChunkInfo(uploadResult, index.get(), totalChunks))
-                    notificationUpdater.onChunkUploaded(contribution, chunkInfo.get())
-                },
-                { throwable: Throwable? ->
-                    Timber.e(throwable, "Received error in chunk upload")
-                    errorMessage.set(handleNetworkErrorMessage(throwable,context))
-                    failures.set(true)
-                },
-            ),
+                    { uploadResult: UploadResult? ->
+                        Timber.d(
+                            "Chunk: Received Chunk number: %s, offset: %s",
+                            index.get(),
+                            uploadResult?.offset,
+                        )
+                        chunkInfo.set(ChunkInfo(uploadResult, index.get(), totalChunks))
+                        notificationUpdater.onChunkUploaded(contribution, chunkInfo.get())
+                    },
+                    { throwable: Throwable? ->
+                        Timber.e(throwable, "Received error in chunk upload")
+                        errorMessage.set(handleNetworkErrorMessage(throwable,context))
+                        failures.set(true)
+                    },
+                ),
             )
-       }
+        }
 
         /**
         * Stash is valid for 6 hours. This function checks the validity of stash
@@ -231,21 +231,21 @@ constructor(
         */
         private fun isStashValid(contribution: Contribution): Boolean =
             contribution.chunkInfo != null &&
-                    contribution.dateModified!!.after(
-                        Date(
-                            timeProvider.currentTimeMillis() - maxChunkAge,
-                        ),
-                    )
+                contribution.dateModified!!.after(
+                    Date(
+                        timeProvider.currentTimeMillis() - maxChunkAge,
+                    ),
+                )
 
         /**
-        * Uploads a file chunk to stash
-        *
-        * @param filename            The name of the file being uploaded
+         * Uploads a file chunk to stash
+         *
+         * @param filename            The name of the file being uploaded
          * @param fileSize            The total size of the file
-        * @param offset              The offset returned by the previous chunk upload
-        * @param fileKey             The filekey returned by the previous chunk upload
-        * @param countingRequestBody Request body with chunk file
-        * @return
+         * @param offset              The offset returned by the previous chunk upload
+         * @param fileKey             The filekey returned by the previous chunk upload
+         * @param countingRequestBody Request body with chunk file
+         * @return
         */
         fun uploadChunkToStash(
             filename: String,
@@ -285,8 +285,8 @@ constructor(
         }
 
         /**
-        * Converts string value to request body
-        */
+         * Converts string value to request body
+         */
         private fun toRequestBody(value: String?): RequestBody? = value?.toRequestBody(MultipartBody.FORM)
 
         fun uploadFileFromStash(
