@@ -5,13 +5,15 @@ import android.content.ContentValues
 import android.content.UriMatcher
 import android.content.UriMatcher.NO_MATCH
 import android.database.Cursor
-import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteQueryBuilder
 import android.net.Uri
 import android.text.TextUtils
-import fr.free.nrw.commons.BuildConfig
-import fr.free.nrw.commons.di.CommonsDaggerContentProvider
 import androidx.core.net.toUri
+import fr.free.nrw.commons.BuildConfig
+import fr.free.nrw.commons.category.CategoryTable.ALL_FIELDS
+import fr.free.nrw.commons.category.CategoryTable.COLUMN_ID
+import fr.free.nrw.commons.category.CategoryTable.TABLE_NAME
+import fr.free.nrw.commons.di.CommonsDaggerContentProvider
 
 class CategoryContentProvider : CommonsDaggerContentProvider() {
 
@@ -122,62 +124,7 @@ class CategoryContentProvider : CommonsDaggerContentProvider() {
     }
 
     companion object {
-        const val TABLE_NAME = "categories"
-
-        const val COLUMN_ID = "_id"
-        const val COLUMN_NAME = "name"
-        const val COLUMN_DESCRIPTION = "description"
-        const val COLUMN_THUMBNAIL = "thumbnail"
-        const val COLUMN_LAST_USED = "last_used"
-        const val COLUMN_TIMES_USED = "times_used"
-
-        // NOTE! KEEP IN SAME ORDER AS THEY ARE DEFINED UP THERE. HELPS HARD CODE COLUMN INDICES.
-        val ALL_FIELDS = arrayOf(
-            COLUMN_ID,
-            COLUMN_NAME,
-            COLUMN_DESCRIPTION,
-            COLUMN_THUMBNAIL,
-            COLUMN_LAST_USED,
-            COLUMN_TIMES_USED
-        )
-
-        const val DROP_TABLE_STATEMENT = "DROP TABLE IF EXISTS $TABLE_NAME"
-
-        const val CREATE_TABLE_STATEMENT = "CREATE TABLE $TABLE_NAME (" +
-                "$COLUMN_ID INTEGER PRIMARY KEY," +
-                "$COLUMN_NAME TEXT," +
-                "$COLUMN_DESCRIPTION TEXT," +
-                "$COLUMN_THUMBNAIL TEXT," +
-                "$COLUMN_LAST_USED INTEGER," +
-                "$COLUMN_TIMES_USED INTEGER" +
-                ");"
-
         fun uriForId(id: Int): Uri = Uri.parse("${BASE_URI}/$id")
-
-        fun onCreate(db: SQLiteDatabase) = db.execSQL(CREATE_TABLE_STATEMENT)
-
-        fun onDelete(db: SQLiteDatabase) {
-            db.execSQL(DROP_TABLE_STATEMENT)
-            onCreate(db)
-        }
-
-        fun onUpdate(db: SQLiteDatabase, from: Int, to: Int) {
-            if (from == to) return
-            if (from < 4) {
-                // doesn't exist yet
-                onUpdate(db, from + 1, to)
-            } else if (from == 4) {
-                // table added in version 5
-                onCreate(db)
-                onUpdate(db, from + 1, to)
-            } else if (from == 5) {
-                onUpdate(db, from + 1, to)
-            } else if (from == 17) {
-                db.execSQL("ALTER TABLE $TABLE_NAME ADD COLUMN description TEXT;")
-                db.execSQL("ALTER TABLE $TABLE_NAME ADD COLUMN thumbnail TEXT;")
-                onUpdate(db, from + 1, to)
-            }
-        }
 
         // For URI matcher
         private const val CATEGORIES = 1
