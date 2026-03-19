@@ -2,6 +2,7 @@ package fr.free.nrw.commons.customselector.ui.selector
 
 import android.Manifest
 import android.app.Activity
+import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Intent
 import android.content.SharedPreferences
@@ -652,19 +653,49 @@ class CustomSelectorActivity :
             return
         }
         scope.launch(ioDispatcher) {
-            val uniqueImages = selectedImages.distinctBy { image ->
-                CustomSelectorUtils.getImageSHA1(
-                    image.uri,
-                    ioDispatcher,
-                    fileUtilsWrapper,
-                    contentResolver
-                )
+            var hasDuplicateSelection = false
+            val seenHashes = HashSet<String>()
+
+            selectedImages.forEach { image ->
+                val imageSha1 =
+                    CustomSelectorUtils.getImageSHA1(
+                        image.uri,
+                        ioDispatcher,
+                        fileUtilsWrapper,
+                        contentResolver,
+                    )
+
+                if (!seenHashes.add(imageSha1)) {
+                    hasDuplicateSelection = true
+                }
             }
 
             withContext(Dispatchers.Main) {
-                finishPickImages(ArrayList(uniqueImages))
+                val imagesToUpload = ArrayList(selectedImages)
+                if (hasDuplicateSelection) {
+                    showDuplicateSelectionWarning(imagesToUpload)
+                } else {
+                    finishPickImages(imagesToUpload)
+                }
             }
         }
+    }
+
+    /**
+     * Warns users when duplicate-content images are selected before finishing selection.
+     */
+    private fun showDuplicateSelectionWarning(images: ArrayList<Image>) {
+        AlertDialog.Builder(this)
+            .setTitle(R.string.warning)
+            .setMessage(R.string.custom_selector_duplicate_selection_warning)
+            .setCancelable(false)
+            .setPositiveButton(R.string.ok) { _, _ ->
+                finishPickImages(images)
+            }
+            .setNegativeButton(R.string.custom_selector_review_selection_button) { dialog, _ ->
+                dialog.dismiss()
+            }
+            .show()
     }
 
     /**
