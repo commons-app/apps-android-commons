@@ -722,6 +722,7 @@
     <item quantity="one">%1$d kuva valittu</item>
     <item quantity="other">%1$d kuvaa valittu</item>
   </plurals>
+  <string name="nearby_wikitalk">Ilmoita Wikidataan tähän kohteeseen liittyvästä ongelmasta</string>
   <string name="talk">Keskustelu</string>
   <string name="feedback_destination_note">Palautteesi on julkaistu seuraavalla wikisivulla: &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Mobile_app/Feedback\"&gt;Commons:Mobile app/Feedback&lt;/a&gt;</string>
   <string name="are_you_sure_that_you_want_cancel_all_the_uploads">Oletko varma, että haluat peruuttaa kaikki tallennukset?</string>
