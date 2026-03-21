@@ -51,7 +51,7 @@ constructor(
         private val gson: Gson,
         private val timeProvider: TimeProvider,
         private val contributionDao: ContributionDao,
-) {
+    ) {
         private val chunkSize = 512 * 1024 // 512 KB
 
         // This is maximum duration for which a stash is persisted on MediaWiki
@@ -60,10 +60,10 @@ constructor(
         private val compositeDisposable = CompositeDisposable()
 
         /**
-        * Upload file to stash in chunks of specified size. Uploading files in chunks will make
-        * handling of large files easier. Also, it will be useful in supporting pause/resume of
-        * uploads
-        */
+         * Upload file to stash in chunks of specified size. Uploading files in chunks will make
+         * handling of large files easier. Also, it will be useful in supporting pause/resume of
+         * uploads
+         */
         @Throws(IOException::class)
         fun uploadFileToStash(
             filename: String,
@@ -72,7 +72,7 @@ constructor(
         ): Observable<StashUploadResult> {
             if (contribution.isCompleted()) {
                 return Observable.just(
-                StashUploadResult(StashUploadState.SUCCESS, contribution.fileKey, null),
+                    StashUploadResult(StashUploadState.SUCCESS, contribution.fileKey, null),
                 )
             }
 
@@ -84,9 +84,9 @@ constructor(
             if (isStashValid(contribution)) {
                 chunkInfo.set(contribution.chunkInfo)
                 Timber.d(
-                "Chunk: Next Chunk: %s, Total Chunks: %s",
-                contribution.chunkInfo!!.indexOfNextChunkToUpload,
-                contribution.chunkInfo!!.totalChunks,
+                    "Chunk: Next Chunk: %s, Total Chunks: %s",
+                    contribution.chunkInfo!!.indexOfNextChunkToUpload,
+                    contribution.chunkInfo!!.totalChunks,
                )
             }
 
@@ -97,8 +97,8 @@ constructor(
                 Observable.fromIterable(fileChunks).forEach { chunkFile: File ->
                     if (canProcess(contributionDao, contribution, failures)) {
                         if (contributionDao.getContribution(contribution.pageId) == null) {
-                                compositeDisposable.clear()
-                                return@forEach
+                            compositeDisposable.clear()
+                            return@forEach
                         } else {
                             processChunk(
                                 filename,
