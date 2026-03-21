@@ -11,6 +11,7 @@ import androidx.lifecycle.LiveData
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
 import fr.free.nrw.commons.R
+import fr.free.nrw.commons.customselector.helper.CustomSelectorConstants.MAX_IMAGE_COUNT
 import fr.free.nrw.commons.filepicker.DefaultCallback
 import fr.free.nrw.commons.filepicker.FilePicker
 import fr.free.nrw.commons.filepicker.FilePicker.HandleActivityResult
@@ -385,10 +386,18 @@ class ContributionController @Inject constructor(@param:Named("default_preferenc
         context: Context,
         imagesFiles: List<UploadableFile>
     ): Intent {
+        // enforce the limit here for the internal gallery picks
+        val filesToUpload = if (imagesFiles.size > MAX_IMAGE_COUNT) {
+            showLongToast(context, context.getString(R.string.upload_limit_exceeded, MAX_IMAGE_COUNT))
+            imagesFiles.take(MAX_IMAGE_COUNT)
+        } else {
+            imagesFiles
+        }
+
         val shareIntent = Intent(context, UploadActivity::class.java)
         shareIntent.setAction(ACTION_INTERNAL_UPLOADS)
         shareIntent
-            .putParcelableArrayListExtra(UploadActivity.EXTRA_FILES, ArrayList(imagesFiles))
+            .putParcelableArrayListExtra(UploadActivity.EXTRA_FILES, ArrayList(filesToUpload))
         val place = defaultKvStore.getJson<Place>(PLACE_OBJECT, Place::class.java)
 
         if (place != null) {
