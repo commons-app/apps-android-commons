@@ -653,8 +653,8 @@ class CustomSelectorActivity :
             return
         }
         scope.launch(ioDispatcher) {
-            var hasDuplicateSelection = false
             val seenHashes = HashSet<String>()
+            val uniqueImages = ArrayList<Image>()
 
             selectedImages.forEach { image ->
                 val imageSha1 =
@@ -665,17 +665,17 @@ class CustomSelectorActivity :
                         contentResolver,
                     )
 
-                if (!seenHashes.add(imageSha1)) {
-                    hasDuplicateSelection = true
+                if (seenHashes.add(imageSha1)) {
+                    uniqueImages.add(image)
                 }
             }
 
             withContext(Dispatchers.Main) {
-                val imagesToUpload = ArrayList(selectedImages)
+                val hasDuplicateSelection = uniqueImages.size != selectedImages.size
                 if (hasDuplicateSelection) {
-                    showDuplicateSelectionWarning(imagesToUpload)
+                    showDuplicateSelectionWarning(uniqueImages)
                 } else {
-                    finishPickImages(imagesToUpload)
+                    finishPickImages(uniqueImages)
                 }
             }
         }
