@@ -59,6 +59,7 @@
         <item name="search_icon">@drawable/ic_search_white_24dp</item>
         <item name="custom_selector_done">@drawable/ic_done_white</item>
         <item name="custom_selector_back">@drawable/ic_arrow_back_white</item>
+        <item name="overflow_menu_button">@drawable/ic_overflow_white</item>
         <item name="android:windowEnableSplitTouch">false</item>
         <item name="android:splitMotionEvents">false</item>
     </style>
@@ -121,6 +122,7 @@
         <item name="search_icon">@drawable/ic_search_blue_24dp</item>
         <item name="custom_selector_done">@drawable/ic_done_black</item>
         <item name="custom_selector_back">@drawable/ic_arrow_back_black</item>
+        <item name="overflow_menu_button">@drawable/ic_overflow_black</item>
         <item name="android:windowEnableSplitTouch">false</item>
         <item name="android:splitMotionEvents">false</item>
         <!--For edge to edge backward compatibility-->
