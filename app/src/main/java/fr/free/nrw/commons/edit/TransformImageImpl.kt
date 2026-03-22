@@ -1,13 +1,13 @@
 package fr.free.nrw.commons.edit
 
 import android.graphics.Rect
-import android.mediautil.image.jpeg.Exif
 import android.mediautil.image.jpeg.LLJTran
 import android.mediautil.image.jpeg.LLJTranException
 import timber.log.Timber
 import java.io.BufferedOutputStream
 import java.io.File
 import java.io.FileOutputStream
+import java.io.RandomAccessFile
 
 /**
  * Implementation of the TransformImage interface for image rotation and crop operations.
@@ -46,26 +46,16 @@ class TransformImageImpl : TransformImage {
                     },
                     LLJTran.OPT_XFORM_ADJUST_EDGES,
                 )
-                // Set EXIF orientation to NORMAL using LLJTran's Exif API
-                // and re-serialize only the APP1 segment. This avoids
-                // Android's ExifInterface.saveAttributes() which strips
-                // the ICC color profile (APP2 segment). See issue #6659.
-                try {
-                    val imageInfo = lljTran.imageInfo
-                    if (imageInfo is Exif) {
-                        val entry = imageInfo.getTagValue(Exif.ORIENTATION, true)
-                        if (entry != null) {
-                            entry.setValue(0, Integer.valueOf(Exif.ORIENTATION_TOPLEFT))
-                        }
-                        lljTran.refreshAppx()
-                    }
-                } catch (ex: Exception) {
-                    Timber.w(ex, "Failed to set EXIF orientation to Normal")
-                }
                 BufferedOutputStream(FileOutputStream(output)).use { writer ->
                     lljTran.save(writer, LLJTran.OPT_WRITE_ALL)
                 }
                 lljTran.freeMemory()
+                // Patch EXIF orientation to NORMAL directly in the saved file.
+                // We avoid both LLJTran's refreshAppx() (which drops ExifIFD
+                // sub-tags like FNumber, ExposureTime, GPS, etc.) and Android's
+                // ExifInterface.saveAttributes() (which strips the ICC color
+                // profile / APP2 segment). See issue #6659.
+                patchExifOrientation(output)
                 true
             } catch (e: LLJTranException) {
                 Timber.tag("Error").d(e)
@@ -219,6 +209,93 @@ class TransformImageImpl : TransformImage {
             Timber.tag("Add").d(output.absolutePath)
         }
         return output
+    }
+
+    /**
+     * Patches the EXIF orientation tag to NORMAL (1) directly in the file
+     * by locating the orientation entry in IFD0 and overwriting its value.
+     * Only modifies 2 bytes; all other metadata (ICC profile, EXIF sub-IFDs,
+     * GPS tags, etc.) remain completely untouched.
+     */
+    private fun patchExifOrientation(file: File) {
+        try {
+            val raf = RandomAccessFile(file, "rw")
+            raf.use {
+                // Skip SOI (0xFFD8)
+                if (raf.readUnsignedShort() != 0xFFD8) return
+
+                // Find APP1 marker (0xFFE1)
+                while (raf.filePointer < raf.length() - 4) {
+                    val marker = raf.readUnsignedShort()
+                    if (marker == 0xFFE1) break
+                    if (marker and 0xFF00 != 0xFF00) return // not a marker
+                    val len = raf.readUnsignedShort()
+                    raf.skipBytes(len - 2)
+                }
+
+                val app1Start = raf.filePointer
+                val app1Len = raf.readUnsignedShort()
+
+                // Verify "Exif\0\0" signature
+                val sig = ByteArray(6)
+                raf.readFully(sig)
+                if (!sig.contentEquals("Exif\u0000\u0000".toByteArray())) return
+
+                val tiffStart = raf.filePointer
+
+                // Read byte order
+                val byteOrder = raf.readUnsignedShort()
+                val le = byteOrder == 0x4949 // "II" = little-endian
+
+                fun readU16(): Int {
+                    val v = raf.readUnsignedShort()
+                    return if (le) ((v and 0xFF) shl 8) or ((v shr 8) and 0xFF) else v
+                }
+
+                // Verify TIFF magic (42)
+                if (readU16() != 42) return
+
+                // Read IFD0 offset
+                val b = ByteArray(4)
+                raf.readFully(b)
+                val ifd0Offset = if (le) {
+                    (b[0].toInt() and 0xFF) or ((b[1].toInt() and 0xFF) shl 8) or
+                        ((b[2].toInt() and 0xFF) shl 16) or ((b[3].toInt() and 0xFF) shl 24)
+                } else {
+                    ((b[0].toInt() and 0xFF) shl 24) or ((b[1].toInt() and 0xFF) shl 16) or
+                        ((b[2].toInt() and 0xFF) shl 8) or (b[3].toInt() and 0xFF)
+                }
+
+                raf.seek(tiffStart + ifd0Offset)
+                val numEntries = readU16()
+
+                // Scan IFD0 entries for orientation tag (0x0112)
+                for (i in 0 until numEntries) {
+                    val entryPos = raf.filePointer
+                    val tagId = readU16()
+                    if (tagId == 0x0112) {
+                        // Found orientation tag - skip type (2 bytes) + count (4 bytes)
+                        raf.skipBytes(6)
+                        // Write orientation value = 1 (NORMAL/TOPLEFT)
+                        val valuePos = raf.filePointer
+                        if (le) {
+                            raf.seek(valuePos)
+                            raf.writeByte(1)
+                            raf.writeByte(0)
+                        } else {
+                            raf.seek(valuePos)
+                            raf.writeByte(0)
+                            raf.writeByte(1)
+                        }
+                        return
+                    }
+                    // Skip to next entry (each IFD entry is 12 bytes total)
+                    raf.seek(entryPos + 12)
+                }
+            }
+        } catch (ex: Exception) {
+            Timber.w(ex, "Failed to patch EXIF orientation")
+        }
     }
 
     /**

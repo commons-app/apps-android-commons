@@ -2,6 +2,7 @@ package fr.free.nrw.commons.edit
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import androidx.exifinterface.media.ExifInterface
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Before
@@ -99,6 +100,53 @@ class TransformImageTest {
             i += 2 + length
         }
         return null
+    }
+
+    @Test
+    fun `test EXIF tags are preserved after rotation`() {
+        val originalFile = getResourceAsTempFile("TEST_1.jpg")!!
+        val originalExif = ExifInterface(originalFile.absolutePath)
+
+        val tagsToCheck = arrayOf(
+            ExifInterface.TAG_F_NUMBER,
+            ExifInterface.TAG_DATETIME,
+            ExifInterface.TAG_EXPOSURE_TIME,
+            ExifInterface.TAG_FLASH,
+            ExifInterface.TAG_FOCAL_LENGTH,
+            ExifInterface.TAG_GPS_ALTITUDE,
+            ExifInterface.TAG_GPS_ALTITUDE_REF,
+            ExifInterface.TAG_GPS_DATESTAMP,
+            ExifInterface.TAG_GPS_LATITUDE,
+            ExifInterface.TAG_GPS_LATITUDE_REF,
+            ExifInterface.TAG_GPS_LONGITUDE,
+            ExifInterface.TAG_GPS_LONGITUDE_REF,
+            ExifInterface.TAG_GPS_PROCESSING_METHOD,
+            ExifInterface.TAG_GPS_TIMESTAMP,
+            ExifInterface.TAG_PHOTOGRAPHIC_SENSITIVITY,
+            ExifInterface.TAG_MAKE,
+            ExifInterface.TAG_MODEL,
+            ExifInterface.TAG_WHITE_BALANCE,
+        )
+
+        // Collect original values, filtering to tags that actually exist
+        val originalValues = tagsToCheck.mapNotNull { tag ->
+            originalExif.getAttribute(tag)?.let { tag to it }
+        }
+        assertTrue("TEST_1.jpg must have EXIF tags", originalValues.isNotEmpty())
+
+        for (degree in listOf(90, 180, 270)) {
+            val rotated = transformImage.rotateImage(originalFile, degree, savePath)!!
+            val rotatedExif = ExifInterface(rotated.absolutePath)
+
+            for ((tag, originalValue) in originalValues) {
+                val rotatedValue = rotatedExif.getAttribute(tag)
+                assertEquals(
+                    "EXIF tag $tag must be preserved after ${degree}° rotation",
+                    originalValue,
+                    rotatedValue
+                )
+            }
+        }
     }
 
     @Test
