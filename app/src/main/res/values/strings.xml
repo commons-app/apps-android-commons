@@ -743,6 +743,8 @@ Upload your first media by tapping on the add button.</string>
   <string name="custom_selector_already_uploaded_image_text">This image has already been uploaded to Commons.</string>
   <string name="custom_selector_over_limit_warning">For technical reasons, the app can\'t reliably upload more than %1$d pictures at once. The upload limit of %1$d has been exceeded by %2$d.</string>
   <string name="custom_selector_dismiss_limit_warning_button_text">Dismiss</string>
+  <string name="custom_selector_duplicate_selection_warning">Some selected images appear to be duplicates. Duplicates will be removed before upload.</string>
+  <string name="custom_selector_review_selection_button">Review selection</string>
   <string name="custom_selector_button_limit_text">Max: %1$d</string>
   <string name="custom_selector_limit_error_desc">Error: Upload Limit Exceeded</string>
   <string name="place_state_wlm">WLM</string>
