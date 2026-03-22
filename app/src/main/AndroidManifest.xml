@@ -178,6 +178,10 @@
       android:name=".locationpicker.LocationPickerActivity"
       android:label="Location Picker" />
 
+    <activity
+      android:name=".upload.depicts.DepictsPickerActivity"
+      android:label="Depicts Map Picker" />
+
     <service
       android:name=".auth.WikiAccountAuthenticatorService"
       android:exported="true"
