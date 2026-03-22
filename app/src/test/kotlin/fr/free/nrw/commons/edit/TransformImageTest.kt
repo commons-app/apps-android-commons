@@ -11,6 +11,7 @@ import org.junit.Test
 import org.junit.rules.TemporaryFolder
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
+import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
 
@@ -149,11 +150,58 @@ class TransformImageTest {
         }
     }
 
+    /**
+     * Injects a minimal sRGB ICC profile into a JPEG file by inserting an APP2
+     * segment right after the SOI marker. Returns a new temp file.
+     */
+    private fun injectIccProfile(sourceFile: File): File {
+        val data = sourceFile.readBytes()
+        val out = ByteArrayOutputStream(data.size + 200)
+
+        // Write SOI
+        out.write(data, 0, 2)
+
+        // Build a minimal 128-byte ICC profile header (sRGB)
+        val iccProfile = ByteArray(128)
+        // Profile size (4 bytes big-endian)
+        iccProfile[0] = 0; iccProfile[1] = 0; iccProfile[2] = 0; iccProfile[3] = 128.toByte()
+        // Profile version: 2.1.0
+        iccProfile[8] = 2; iccProfile[9] = 0x10.toByte()
+        // Device class: 'mntr' (monitor)
+        "mntr".toByteArray().copyInto(iccProfile, 12)
+        // Color space: 'RGB '
+        "RGB ".toByteArray().copyInto(iccProfile, 16)
+        // PCS: 'XYZ '
+        "XYZ ".toByteArray().copyInto(iccProfile, 20)
+        // 'acsp' signature (required at offset 36)
+        "acsp".toByteArray().copyInto(iccProfile, 36)
+
+        // APP2 marker
+        out.write(0xFF)
+        out.write(0xE2)
+        // ICC_PROFILE signature (12) + chunk num (1) + chunk count (1) + profile data
+        val segPayload = 2 + 12 + 1 + 1 + iccProfile.size // length field + sig + chunks + data
+        out.write((segPayload shr 8) and 0xFF)
+        out.write(segPayload and 0xFF)
+        out.write("ICC_PROFILE\u0000".toByteArray())
+        out.write(1) // chunk number
+        out.write(1) // total chunks
+        out.write(iccProfile)
+
+        // Write rest of original file (everything after SOI)
+        out.write(data, 2, data.size - 2)
+
+        val outFile = tempFolder.newFile("icc_injected_${System.currentTimeMillis()}.jpg")
+        outFile.writeBytes(out.toByteArray())
+        return outFile
+    }
+
     @Test
     fun `test ICC color profile is preserved after rotation`() {
-        val originalFile = getResourceAsTempFile("ICC_test.jpg")!!
+        val baseFile = getResourceAsTempFile("Landscape_0.jpg")!!
+        val originalFile = injectIccProfile(baseFile)
         val originalIcc = extractIccProfile(originalFile)
-        assertTrue("Test image must have an ICC profile", originalIcc != null && originalIcc.isNotEmpty())
+        assertTrue("Injected image must have an ICC profile", originalIcc != null && originalIcc.isNotEmpty())
 
         for (degree in listOf(90, 180, 270)) {
             val rotated = transformImage.rotateImage(originalFile, degree, savePath)!!
