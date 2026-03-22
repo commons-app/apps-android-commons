@@ -4,6 +4,8 @@ import android.content.Context
 import androidx.lifecycle.LiveData
 import fr.free.nrw.commons.BasePresenter
 import fr.free.nrw.commons.Media
+import fr.free.nrw.commons.nearby.Place
+import fr.free.nrw.commons.upload.UploadItem
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
 
 /**
@@ -110,6 +112,19 @@ interface DepictsContract {
          */
         fun clearPreviousSelection()
 
+        /**
+         * Handle selected place from the map picker
+         */
+        fun onPlaceSelectedFromMap(place: Place)
+        
+        /**
+         * Gets all upload items
+         */
+        fun getUploads(): List<UploadItem>
+
+        /**
+         * Gets the Depicted Items
+         */
         fun getDepictedItems(): LiveData<List<DepictedItem>>
 
         /**
