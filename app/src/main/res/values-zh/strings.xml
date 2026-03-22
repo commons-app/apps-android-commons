@@ -29,6 +29,7 @@
 * NACHOgao3
 * Peterxy12
 * Qiyue2001
+* Rsjww
 * Shizhao
 * Shuiwater
 * ShuyanW
@@ -412,6 +413,7 @@
   <string name="quiz_screenshot_question">这个屏幕截图可以上传吗？</string>
   <string name="share_app_title">分享应用</string>
   <string name="rotate">旋转</string>
+  <string name="crop">裁剪</string>
   <string name="error_fetching_nearby_places">无法加载附近地点</string>
   <string name="no_pictures_in_this_area">此区域没有图片</string>
   <string name="no_nearby_places_around">找不到附近地点</string>
@@ -861,6 +863,7 @@
   <string name="pending">待处理</string>
   <string name="failed">失败</string>
   <string name="could_not_load_place_data">无法加载地点数据</string>
+  <string name="warning_for_no_option_selected">请选择任意一个选项来回答问题</string>
   <string name="custom_selector_delete_folder">删除文件夹</string>
   <string name="custom_selector_confirm_deletion_title">确认删除</string>
   <string name="custom_selector_confirm_deletion_message">您确定要删除包含%2$d的文件夹%1$s吗？</string>

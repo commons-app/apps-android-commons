@@ -293,11 +293,26 @@ class UploadMediaDetailFragment : UploadBaseFragment(), UploadMediaDetailsContra
             val filePath = uploadableFile?.getFilePath()?.toString() ?: ""
             val isJpeg = filePath.endsWith(".jpeg", ignoreCase = true)
                     || filePath.endsWith(".jpg", ignoreCase = true)
-            llEditImage.visibility = if (isJpeg) View.VISIBLE else View.GONE
+            llEditImage.visibility = View.VISIBLE
+            llEditImage.alpha = if (isJpeg) 1.0f else 0.5f
+            // update the click listener to handle the both cases
+            llEditImage.setOnClickListener {
+                if (isJpeg) {
+                    presenter.onEditButtonClicked(indexOfFragment)
+                } else {
+                    // dialog for non jpg formats
+                    showAlertDialog(
+                        requireActivity(),
+                        getString(R.string.edit_image),
+                    getString(R.string.edit_unsupported_format_explanation),
+                    getString(R.string.ok),
+                    null
+                    )
+                }
+            }
 
             btnNext.setOnClickListener { presenter.displayLocDialog(indexOfFragment, inAppPictureLocation, hasUserRemovedLocation) }
             btnPrevious.setOnClickListener { fragmentCallback?.onPreviousButtonClicked(indexOfFragment) }
-            llEditImage.setOnClickListener { presenter.onEditButtonClicked(indexOfFragment) }
             llContainerTitle.setOnClickListener { expandCollapseLlMediaDetail(!isExpanded) }
             llLocationStatus.setOnClickListener { presenter.onMapIconClicked(indexOfFragment) }
             btnCopySubsequentMedia.setOnClickListener { onButtonCopyTitleDescToSubsequentMedia() }
@@ -543,9 +558,8 @@ class UploadMediaDetailFragment : UploadBaseFragment(), UploadMediaDetailsContra
             getString(R.string.ok),
             getString(R.string.cancel_upload),
             {
-                if (!isInternetConnectionEstablished(requireActivity())) {
-                    showConnectionErrorPopupForCaptionCheck()
-                }
+                // Dismiss the dialog when offline instead of reopening it in a loop.
+                // User can retry once connectivity is available.
             },
             {
                 requireActivity().finish()
@@ -583,8 +597,6 @@ class UploadMediaDetailFragment : UploadBaseFragment(), UploadMediaDetailsContra
                                     requireActivity()
                                 )
                             }
-                        } else {
-                            showConnectionErrorPopup()
                         }
                     },
                     {
