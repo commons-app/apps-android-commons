@@ -653,26 +653,21 @@ class CustomSelectorActivity :
             return
         }
         scope.launch(ioDispatcher) {
-            val seenHashes = HashSet<String>()
-            val uniqueImages = ArrayList<Image>()
-
-            selectedImages.forEach { image ->
-                val imageSha1 =
-                    CustomSelectorUtils.getImageSHA1(
-                        image.uri,
-                        ioDispatcher,
-                        fileUtilsWrapper,
-                        contentResolver,
-                    )
-
-                if (seenHashes.add(imageSha1)) {
-                    uniqueImages.add(image)
+            val imageWithSha1 =
+                selectedImages.map { image ->
+                    image to
+                        CustomSelectorUtils.getImageSHA1(
+                            image.uri,
+                            ioDispatcher,
+                            fileUtilsWrapper,
+                            contentResolver,
+                        )
                 }
-            }
+
+            val uniqueImages = ArrayList(imageWithSha1.distinctBy { it.second }.map { it.first })
 
             withContext(Dispatchers.Main) {
-                val hasDuplicateSelection = uniqueImages.size != selectedImages.size
-                if (hasDuplicateSelection) {
+                if (uniqueImages.size != selectedImages.size) {
                     showDuplicateSelectionWarning(uniqueImages)
                 } else {
                     finishPickImages(uniqueImages)
