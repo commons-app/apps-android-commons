@@ -375,7 +375,7 @@ class ContributionController @Inject constructor(@param:Named("default_preferenc
                 }
                 val intent = handleImagesPicked(activity, selectedFiles)
                 if (isNormalSelectorSource && selectedFiles.size != imagesFiles.size) {
-                    intent.putExtra(EXTRA_DUPLICATES_REMOVED, true)
+                    intent.putExtra(UploadActivity.EXTRA_DUPLICATES_REMOVED, true)
                 }
                 activity.startActivity(intent)
             }
@@ -383,13 +383,14 @@ class ContributionController @Inject constructor(@param:Named("default_preferenc
     }
 
     private fun deduplicateNormalSelectorImages(imagesFiles: List<UploadableFile>): List<UploadableFile> {
-        val seenKeys = LinkedHashSet<String>()
-        return imagesFiles.filter { seenKeys.add(getNormalSelectorDeduplicationKey(it)) }
+        return imagesFiles.distinctBy(::getNormalSelectorDeduplicationKey)
     }
 
     private fun getNormalSelectorDeduplicationKey(uploadableFile: UploadableFile): String {
         return try {
-            val sha1 = FileUtils.getSHA1(FileInputStream(uploadableFile.file))
+            val sha1 = FileInputStream(uploadableFile.file).use { inputStream ->
+                FileUtils.getSHA1(inputStream)
+            }
             if (sha1.isNotEmpty()) sha1 else uploadableFile.getFilePath()
         } catch (e: Exception) {
             uploadableFile.getFilePath()
@@ -497,6 +498,5 @@ class ContributionController @Inject constructor(@param:Named("default_preferenc
 
     companion object {
         const val ACTION_INTERNAL_UPLOADS: String = "internalImageUploads"
-        const val EXTRA_DUPLICATES_REMOVED: String = "duplicates_removed_before_upload"
     }
 }
