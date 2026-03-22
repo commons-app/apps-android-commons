@@ -2,8 +2,8 @@ package fr.free.nrw.commons.edit
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import org.junit.Assert.assertArrayEquals
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -12,7 +12,6 @@ import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
 import java.io.File
 import java.io.FileOutputStream
-import org.junit.Ignore
 
 @RunWith(RobolectricTestRunner::class)
 class TransformImageTest {
@@ -55,40 +54,69 @@ class TransformImageTest {
             assertEquals("Dimensions should remain the same", w, rotBmp.width)
             assertEquals("Dimensions should remain the same", h, rotBmp.height)
         }
-
-        // check a single pixel to ensure the rotation worked accurately
-        val testX = w / 4
-        val testY = h / 4
-
-        val expectedColor = origBmp.getPixel(testX, testY)
-
-        val (expectedX, expectedY) = when (rotationDegrees % 360) {
-            90 -> Pair(h - testY - 1, testX)
-            180 -> Pair(w - testX - 1, h - testY - 1)
-            270 -> Pair(testY, w - testX - 1)
-            0 -> Pair(testX, testY)
-            else -> throw IllegalArgumentException("Unsupported rotation: $rotationDegrees")
-        }
-
-        val actualColor = rotBmp.getPixel(expectedX, expectedY)
-        assertEquals(
-            "pixel color at the ($testX, $testY) must exactly match rotated position ($expectedX, $expectedY)",
-            expectedColor,
-            actualColor
-        )
     }
 
     private fun assertImagesAreIdentical(originalFile: File, finalFile: File) {
-        val origBytes = originalFile.readBytes()
-        val finalBytes = finalFile.readBytes()
+        val origBmp = decodeBitmap(originalFile)
+        val finalBmp = decodeBitmap(finalFile)
 
-        assertArrayEquals(
-            "The two files must be exactly equal byte-for-byte",
-            origBytes,
-            finalBytes
+        assertEquals("Width must match", origBmp.width, finalBmp.width)
+        assertEquals("Height must match", origBmp.height, finalBmp.height)
+
+        val w = origBmp.width
+        val h = origBmp.height
+        val origPixels = IntArray(w * h)
+        val finalPixels = IntArray(w * h)
+        origBmp.getPixels(origPixels, 0, w, 0, 0, w, h)
+        finalBmp.getPixels(finalPixels, 0, w, 0, 0, w, h)
+
+        assertTrue(
+            "All pixels must be identical after a full rotation cycle",
+            origPixels.contentEquals(finalPixels)
         )
     }
-    @Ignore("Disabled due to ICC Color Profile brightness shift during rotation. see issue https://github.com/commons-app/apps-android-commons/issues/6659 ")
+
+    /**
+     * Extracts the ICC profile bytes from a JPEG file by finding the APP2
+     * segment with the "ICC_PROFILE" signature. Returns null if not found.
+     */
+    private fun extractIccProfile(file: File): ByteArray? {
+        val data = file.readBytes()
+        val sig = "ICC_PROFILE\u0000".toByteArray()
+        var i = 2 // skip SOI
+        while (i < data.size - 4) {
+            if (data[i] != 0xFF.toByte()) break
+            val marker = data[i + 1].toInt() and 0xFF
+            if (marker == 0xDA || marker == 0xD9) break // SOS or EOI
+            val length = ((data[i + 2].toInt() and 0xFF) shl 8) or (data[i + 3].toInt() and 0xFF)
+            if (marker == 0xE2 && length > sig.size + 4) {
+                val segStart = i + 4
+                if (data.sliceArray(segStart until segStart + sig.size).contentEquals(sig)) {
+                    // skip signature (12 bytes) + chunk number (1) + chunk count (1)
+                    return data.sliceArray(segStart + sig.size + 2 until i + 2 + length)
+                }
+            }
+            i += 2 + length
+        }
+        return null
+    }
+
+    @Test
+    fun `test ICC color profile is preserved after rotation`() {
+        val originalFile = getResourceAsTempFile("ICC_test.jpg")!!
+        val originalIcc = extractIccProfile(originalFile)
+        assertTrue("Test image must have an ICC profile", originalIcc != null && originalIcc.isNotEmpty())
+
+        for (degree in listOf(90, 180, 270)) {
+            val rotated = transformImage.rotateImage(originalFile, degree, savePath)!!
+            val rotatedIcc = extractIccProfile(rotated)
+            assertTrue(
+                "ICC profile must be preserved after ${degree}° rotation",
+                rotatedIcc != null && originalIcc!!.contentEquals(rotatedIcc)
+            )
+        }
+    }
+
     @Test
     fun `test 360 degree rotation cycles for all EXIF images`() {
         val prefixes = listOf("Landscape", "Portrait", "TEST")

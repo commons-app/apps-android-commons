@@ -1,9 +1,9 @@
 package fr.free.nrw.commons.edit
 
 import android.graphics.Rect
+import android.mediautil.image.jpeg.Exif
 import android.mediautil.image.jpeg.LLJTran
 import android.mediautil.image.jpeg.LLJTranException
-import androidx.exifinterface.media.ExifInterface
 import timber.log.Timber
 import java.io.BufferedOutputStream
 import java.io.File
@@ -36,10 +36,7 @@ class TransformImageImpl : TransformImage {
         val rotated =
             try {
                 val lljTran = LLJTran(imageFile)
-                lljTran.read(
-                    LLJTran.READ_ALL,
-                    false,
-                ) // This could throw an LLJTranException. I am not catching it for now... Let's see.
+                lljTran.read(LLJTran.READ_ALL, true)
                 lljTran.transform(
                     when (degree) {
                         90 -> LLJTran.ROT_90
@@ -47,19 +44,28 @@ class TransformImageImpl : TransformImage {
                         270 -> LLJTran.ROT_270
                         else -> LLJTran.OPT_DEFAULTS
                     },
-                    LLJTran.OPT_DEFAULTS or LLJTran.OPT_XFORM_ORIENTATION,
+                    LLJTran.OPT_XFORM_ADJUST_EDGES,
                 )
+                // Set EXIF orientation to NORMAL using LLJTran's Exif API
+                // and re-serialize only the APP1 segment. This avoids
+                // Android's ExifInterface.saveAttributes() which strips
+                // the ICC color profile (APP2 segment). See issue #6659.
+                try {
+                    val imageInfo = lljTran.imageInfo
+                    if (imageInfo is Exif) {
+                        val entry = imageInfo.getTagValue(Exif.ORIENTATION, true)
+                        if (entry != null) {
+                            entry.setValue(0, Integer.valueOf(Exif.ORIENTATION_TOPLEFT))
+                        }
+                        lljTran.refreshAppx()
+                    }
+                } catch (ex: Exception) {
+                    Timber.w(ex, "Failed to set EXIF orientation to Normal")
+                }
                 BufferedOutputStream(FileOutputStream(output)).use { writer ->
                     lljTran.save(writer, LLJTran.OPT_WRITE_ALL)
                 }
                 lljTran.freeMemory()
-                try {
-                    val exif = ExifInterface(output.absolutePath)
-                    exif.setAttribute(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL.toString())
-                    exif.saveAttributes()
-                } catch (ex: Exception) {
-                    Timber.w(ex, "Failed to force EXIF orientation to tha Normal")
-                }
                 true
             } catch (e: LLJTranException) {
                 Timber.tag("Error").d(e)
@@ -120,7 +126,7 @@ class TransformImageImpl : TransformImage {
         val cropped =
             try {
                 val lljTran = LLJTran(imageFile)
-                lljTran.read(LLJTran.READ_ALL, false)
+                lljTran.read(LLJTran.READ_ALL, true)
 
                 val mcuW = lljTran.mcuWidth
                 val mcuH = lljTran.mcuHeight

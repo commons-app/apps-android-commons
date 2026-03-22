@@ -42,7 +42,6 @@ import kotlin.math.roundToInt
 class EditActivity : AppCompatActivity() {
     private var imageUri = ""
     private lateinit var vm: EditViewModel
-    private val sourceExifAttributeList = mutableListOf<Pair<String, String?>>()
     private lateinit var binding: ActivityEditBinding
     // variable to store the initial exif orientation
     private var startOrientation = 0
@@ -87,34 +86,6 @@ class EditActivity : AppCompatActivity() {
 
         applyEdgeToEdgeBottomInsets(binding.root, false)
         binding.topBar.applyEdgeToEdgeTopPaddingInsets(WindowInsetsCompat.Type.statusBars())
-
-        val exifTags =
-            arrayOf(
-                ExifInterface.TAG_F_NUMBER,
-                ExifInterface.TAG_DATETIME,
-                ExifInterface.TAG_EXPOSURE_TIME,
-                ExifInterface.TAG_FLASH,
-                ExifInterface.TAG_FOCAL_LENGTH,
-                ExifInterface.TAG_GPS_ALTITUDE,
-                ExifInterface.TAG_GPS_ALTITUDE_REF,
-                ExifInterface.TAG_GPS_DATESTAMP,
-                ExifInterface.TAG_GPS_LATITUDE,
-                ExifInterface.TAG_GPS_LATITUDE_REF,
-                ExifInterface.TAG_GPS_LONGITUDE,
-                ExifInterface.TAG_GPS_LONGITUDE_REF,
-                ExifInterface.TAG_GPS_PROCESSING_METHOD,
-                ExifInterface.TAG_GPS_TIMESTAMP,
-                ExifInterface.TAG_PHOTOGRAPHIC_SENSITIVITY,
-                ExifInterface.TAG_MAKE,
-                ExifInterface.TAG_MODEL,
-                ExifInterface.TAG_WHITE_BALANCE,
-                ExifInterface.WHITE_BALANCE_AUTO,
-                ExifInterface.WHITE_BALANCE_MANUAL,
-            )
-        for (tag in exifTags) {
-            val attribute = sourceExif?.getAttribute(tag.toString())
-            sourceExifAttributeList.add(Pair(tag.toString(), attribute))
-        }
 
         init()
     }
@@ -316,12 +287,6 @@ class EditActivity : AppCompatActivity() {
                 }
                 file = croppedImage
             }
-        }
-
-        // Copy EXIF data
-        if (file?.path != null) {
-            val editedImageExif = ExifInterface(file.path)
-            copyExifData(editedImageExif)
         }
 
         val resultIntent = Intent()
@@ -531,24 +496,6 @@ class EditActivity : AppCompatActivity() {
         }
 
         animator.start()
-    }
-
-    /**
-     * Copies EXIF data from sourceExifAttributeList to the provided ExifInterface object.
-     *
-     * This function iterates over the `sourceExifAttributeList` and sets the EXIF attributes
-     * on the provided `editedImageExif` object.
-     *
-     * @param editedImageExif The ExifInterface object for the edited image.
-     */
-    private fun copyExifData(editedImageExif: ExifInterface?) {
-        for (attr in sourceExifAttributeList) {
-            Timber.d("Value is ${attr.second}")
-            editedImageExif!!.setAttribute(attr.first, attr.second)
-            Timber.d("Value is ${attr.second}")
-        }
-
-        editedImageExif?.saveAttributes()
     }
 
     /**
