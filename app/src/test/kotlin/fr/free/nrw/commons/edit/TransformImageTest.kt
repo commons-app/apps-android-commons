@@ -245,7 +245,7 @@ class TransformImageTest {
             // 5. rotate 270
             val file270 = transformImage.rotateImage(originalFile, 270, savePath)!!
             assertRotationWorked(originalFile, file270, 270)
-            // 6. rotate 90 -> thishould equal the original
+            // 6. rotate 90 -> this should equal the original
             val file270then90 = transformImage.rotateImage(file270, 90, savePath)!!
             assertImagesAreIdentical(originalFile, file270then90)
 

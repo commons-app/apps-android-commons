@@ -55,7 +55,9 @@ class TransformImageImpl : TransformImage {
                 // sub-tags like FNumber, ExposureTime, GPS, etc.) and Android's
                 // ExifInterface.saveAttributes() (which strips the ICC color
                 // profile / APP2 segment). See issue #6659.
-                patchExifOrientation(output)
+                if (degree in listOf(90, 180, 270)) {
+                    patchExifOrientation(output)
+                }
                 true
             } catch (e: LLJTranException) {
                 Timber.tag("Error").d(e)
@@ -233,8 +235,8 @@ class TransformImageImpl : TransformImage {
                     raf.skipBytes(len - 2)
                 }
 
-                val app1Start = raf.filePointer
-                val app1Len = raf.readUnsignedShort()
+                // Skip APP1 length field (only need to advance past it)
+                raf.skipBytes(2)
 
                 // Verify "Exif\0\0" signature
                 val sig = ByteArray(6)
