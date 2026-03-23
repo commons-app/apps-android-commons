@@ -103,6 +103,7 @@
       android:exported="true"
       android:hardwareAccelerated="false"
       android:icon="@mipmap/ic_launcher"
+      android:launchMode="singleTask"
       android:windowSoftInputMode="adjustPan">
       <intent-filter android:label="@string/intent_share_upload_label">
         <action android:name="android.intent.action.SEND" />
