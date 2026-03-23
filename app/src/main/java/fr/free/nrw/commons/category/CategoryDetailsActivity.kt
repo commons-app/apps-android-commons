@@ -107,9 +107,17 @@ class CategoryDetailsActivity : BaseActivity(),
             val arguments = Bundle().apply {
                 putString("categoryName", categoryName)
             }
-            categoriesMediaFragment.arguments = arguments
-            subCategoryListFragment.arguments = arguments
-            parentCategoriesFragment.arguments = arguments
+
+            // Only set the arguments if the fragments are freshly made -- don't set if loaded from
+            // the fragment manager. The arguments will be null only if created from a new instance.
+            // This prevents the IllegalStateException "Fragment already added and state has been
+            // saved"  (per the LLM peer review bot).
+            if (categoriesMediaFragment.arguments == null)
+                categoriesMediaFragment.arguments = arguments
+            if (subCategoryListFragment.arguments == null)
+                subCategoryListFragment.arguments = arguments
+            if (parentCategoriesFragment.arguments == null)
+                parentCategoriesFragment.arguments = arguments
 
             viewModel.onCheckIfBookmarked(categoryName!!)
         }

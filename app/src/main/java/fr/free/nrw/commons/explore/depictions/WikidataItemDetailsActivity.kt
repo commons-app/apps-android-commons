@@ -119,9 +119,17 @@ class WikidataItemDetailsActivity : BaseActivity(), MediaDetailProvider, Categor
                 "wikidataItemName" to wikidataItemName,
                 "entityId" to entityId
             )
-            depictedImagesListFragment!!.arguments = arguments
-            parentDepictionsFragment.arguments = arguments
-            childDepictionsFragment.arguments = arguments
+
+            // Only set the arguments if the fragments are freshly made -- don't set if loaded from
+            // the fragment manager. The arguments will be null only if created from a new instance.
+            // This prevents the IllegalStateException "Fragment already added and state has been
+            // saved"  (per the LLM peer review bot).
+            if (depictedImagesListFragment!!.arguments == null)
+                depictedImagesListFragment!!.arguments = arguments
+            if (parentDepictionsFragment.arguments == null)
+                parentDepictionsFragment.arguments = arguments
+            if (childDepictionsFragment.arguments == null)
+                childDepictionsFragment.arguments = arguments
         }
 
         viewPagerAdapter!!.setTabs(
