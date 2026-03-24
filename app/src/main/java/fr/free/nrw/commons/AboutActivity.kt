@@ -6,202 +6,294 @@ import android.content.Intent
 import android.content.Intent.ACTION_VIEW
 import android.net.Uri
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
-import android.view.View
-import android.widget.ArrayAdapter
-import android.widget.LinearLayout
-import android.widget.Spinner
-import fr.free.nrw.commons.CommonsApplication.Companion.instance
-import fr.free.nrw.commons.databinding.ActivityAboutBinding
+import androidx.activity.compose.setContent
+import androidx.compose.animation.core.*
+import androidx.compose.foundation.*
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
+import androidx.compose.material.icons.filled.Share
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.viewinterop.AndroidView
+import androidx.core.net.toUri
 import fr.free.nrw.commons.theme.BaseActivity
+import fr.free.nrw.commons.ui.widget.HtmlTextView
 import fr.free.nrw.commons.utils.ConfigUtils.getVersionNameWithSha
 import fr.free.nrw.commons.utils.DialogUtil.showAlertDialog
-import java.util.Collections
-import androidx.core.net.toUri
-import fr.free.nrw.commons.utils.applyEdgeToEdgeTopInsets
 import fr.free.nrw.commons.utils.handleWebUrl
-import fr.free.nrw.commons.utils.setUnderlinedText
+import java.util.*
 
-/**
- * Represents about screen of this app
- */
+// grouped the actions into a single class for the betteer scalability
+data class AboutActions(
+    val onBackClick: () -> Unit,
+    val onShareClick: () -> Unit,
+    val onLaunchFacebook: () -> Unit,
+    val onLaunchGithub: () -> Unit,
+    val onLaunchWebsite: () -> Unit,
+    val onRateUs: () -> Unit,
+    val onUserGuide: () -> Unit,
+    val onPrivacyPolicy: () -> Unit,
+    val onTranslate: () -> Unit,
+    val onCredits: () -> Unit,
+    val onFaq: () -> Unit
+)
+
 class AboutActivity : BaseActivity() {
-    /*
-         This View Binding class is auto-generated for each xml file. The format is usually the name
-         of the file with PascalCasing (The underscore characters will be ignored).
-         More information is available at https://developer.android.com/topic/libraries/view-binding
-        */
-    private var binding: ActivityAboutBinding? = null
 
-    /**
-     * This method helps in the creation About screen
-     *
-     * @param savedInstanceState Data bundle
-     */
-    @SuppressLint("StringFormatInvalid")  //TODO:
-    public override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        /*
-          Instead of just setting the view with the xml file. We need to use View Binding class.
-         */
-        binding = ActivityAboutBinding.inflate(layoutInflater)
-        val view: View = binding!!.root
-        applyEdgeToEdgeTopInsets(binding!!.toolbarLayout)
-        setContentView(view)
+        setContent {
+            CommonsTheme {
+                val actions = AboutActions(
+                    onBackClick = { finish() },
+                    onShareClick = { shareApp() },
+                    onLaunchFacebook = { launchFacebook() },
+                    onLaunchGithub = { launchGithub() },
+                    onLaunchWebsite = { launchWebsite() },
+                    onRateUs = { launchRatings() },
+                    onUserGuide = { launchUserGuide() },
+                    onPrivacyPolicy = { launchPrivacyPolicy() },
+                    onTranslate = { launchTranslate() },
+                    onCredits = { launchCredits() },
+                    onFaq = { launchFrequentlyAskedQuestions() }
+                )
 
-        setSupportActionBar(binding!!.toolbarBinding.toolbar)
-        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        val aboutText = getString(R.string.about_license)
-        /*
-          We can then access all the views by just using the id names like this.
-          camelCasing is used with underscore characters being ignored.
-         */
-        binding!!.aboutLicense.setHtmlText(aboutText)
-
-        @SuppressLint("StringFormatMatches") // TODO:
-        val improveText =
-            String.format(getString(R.string.about_improve), Urls.NEW_ISSUE_URL)
-        binding!!.aboutImprove.setHtmlText(improveText)
-        binding!!.aboutVersion.text = applicationContext.getVersionNameWithSha()
-
-        binding!!.aboutFaq.setUnderlinedText(R.string.about_faq)
-        binding!!.aboutRateUs.setUnderlinedText(R.string.about_rate_us)
-        binding!!.aboutUserGuide.setUnderlinedText(R.string.user_guide)
-        binding!!.aboutPrivacyPolicy.setUnderlinedText(R.string.about_privacy_policy)
-        binding!!.aboutTranslate.setUnderlinedText(R.string.about_translate)
-        binding!!.aboutCredits.setUnderlinedText(R.string.about_credits)
-
-        /*
-          To set listeners, we can create a separate method and use lambda syntax.
-        */
-        binding!!.facebookLaunchIcon.setOnClickListener(::launchFacebook)
-        binding!!.githubLaunchIcon.setOnClickListener(::launchGithub)
-        binding!!.websiteLaunchIcon.setOnClickListener(::launchWebsite)
-        binding!!.aboutRateUs.setOnClickListener(::launchRatings)
-        binding!!.aboutCredits.setOnClickListener(::launchCredits)
-        binding!!.aboutPrivacyPolicy.setOnClickListener(::launchPrivacyPolicy)
-        binding!!.aboutUserGuide.setOnClickListener(::launchUserGuide)
-        binding!!.aboutFaq.setOnClickListener(::launchFrequentlyAskedQuesions)
-        binding!!.aboutTranslate.setOnClickListener(::launchTranslate)
+                AboutScreen(
+                    version = applicationContext.getVersionNameWithSha(),
+                    actions = actions
+                )
+            }
+        }
     }
 
-    override fun onSupportNavigateUp(): Boolean {
-        onBackPressed()
-        return true
+    // logic methods remain within the Activity to keep theUI pure
+    @SuppressLint("StringFormatInvalid")
+    private fun shareApp() {
+        val shareText = String.format(getString(R.string.share_text), Urls.PLAY_STORE_URL_PREFIX + packageName)
+        val sendIntent = Intent(Intent.ACTION_SEND).apply {
+            putExtra(Intent.EXTRA_TEXT, shareText)
+            type = "text/plain"
+        }
+        startActivity(Intent.createChooser(sendIntent, getString(R.string.share_via)))
     }
 
-    fun launchFacebook(view: View?) {
-        val intent: Intent
+    private fun launchFacebook() {
         try {
-            intent = Intent(ACTION_VIEW, Urls.FACEBOOK_APP_URL.toUri())
-            intent.setPackage(Urls.FACEBOOK_PACKAGE_NAME)
-            startActivity(intent)
+            startActivity(Intent(ACTION_VIEW, Urls.FACEBOOK_APP_URL.toUri()).setPackage(Urls.FACEBOOK_PACKAGE_NAME))
         } catch (e: Exception) {
             handleWebUrl(this, Urls.FACEBOOK_WEB_URL.toUri())
         }
     }
 
-    fun launchGithub(view: View?) {
-        val intent: Intent
+    private fun launchGithub() {
         try {
-            intent = Intent(ACTION_VIEW, Urls.GITHUB_REPO_URL.toUri())
-            intent.setPackage(Urls.GITHUB_PACKAGE_NAME)
-            startActivity(intent)
+            startActivity(Intent(ACTION_VIEW, Urls.GITHUB_REPO_URL.toUri()).setPackage(Urls.GITHUB_PACKAGE_NAME))
         } catch (e: Exception) {
             handleWebUrl(this, Urls.GITHUB_REPO_URL.toUri())
         }
     }
 
-    fun launchWebsite(view: View?) {
-        handleWebUrl(this, Urls.WEBSITE_URL.toUri())
-    }
+    private fun launchWebsite() = handleWebUrl(this, Urls.WEBSITE_URL.toUri())
+    private fun launchCredits() = handleWebUrl(this, Urls.CREDITS_URL.toUri())
+    private fun launchUserGuide() = handleWebUrl(this, Urls.USER_GUIDE_URL.toUri())
+    private fun launchPrivacyPolicy() = handleWebUrl(this, BuildConfig.PRIVACY_POLICY_URL.toUri())
+    private fun launchFrequentlyAskedQuestions() = handleWebUrl(this, Urls.FAQ_URL.toUri())
 
-    fun launchRatings(view: View?) {
+    private fun launchRatings() {
         try {
-            startActivity(
-                Intent(
-                    ACTION_VIEW,
-                    (Urls.PLAY_STORE_PREFIX + packageName).toUri()
-                )
-            )
+            startActivity(Intent(ACTION_VIEW, (Urls.PLAY_STORE_PREFIX + packageName).toUri()))
         } catch (_: ActivityNotFoundException) {
             handleWebUrl(this, (Urls.PLAY_STORE_URL_PREFIX + packageName).toUri())
         }
     }
 
-    fun launchCredits(view: View?) {
-        handleWebUrl(this, Urls.CREDITS_URL.toUri())
+    private fun launchTranslate() {
+        val instance = CommonsApplication.instance
+        val sortedNames = instance.languageLookUpTable!!.getCanonicalNames().toMutableList()
+        Collections.sort(sortedNames)
+        val spinner = android.widget.Spinner(this).apply {
+            adapter = android.widget.ArrayAdapter(this@AboutActivity, android.R.layout.simple_spinner_dropdown_item, sortedNames)
+        }
+        showAlertDialog(this, getString(R.string.about_translate_title), getString(R.string.about_translate_message),
+            getString(R.string.about_translate_proceed), getString(R.string.about_translate_cancel),
+            {
+                val langCode = instance.languageLookUpTable!!.getCodes()[spinner.selectedItemPosition]
+                handleWebUrl(this, (Urls.TRANSLATE_WIKI_URL + langCode).toUri())
+            }, {}, spinner
+        )
+    }
+}
+//custom theme wrapper to centralize the color logic
+@Composable
+fun CommonsTheme(content: @Composable () -> Unit) {
+    val isDarkTheme = isSystemInDarkTheme()
+    val background = if (isDarkTheme) colorResource(R.color.main_background_dark) else colorResource(R.color.main_background_light)
+
+    val colorScheme = if (isDarkTheme) {
+        darkColorScheme(primary = colorResource(R.color.primaryColor), background = background, onBackground = Color.White)
+    } else {
+        lightColorScheme(primary = colorResource(R.color.primaryColor), background = background, onBackground = Color.Black)
     }
 
-    fun launchUserGuide(view: View?) {
-        handleWebUrl(this, Urls.USER_GUIDE_URL.toUri())
+    MaterialTheme(colorScheme = colorScheme) {
+        Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
+            content()
+        }
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun AboutScreen(
+    version: String,
+    actions: AboutActions
+) {
+    val logoAlpha = remember { Animatable(0f) }
+    // smoooth fade in for the app logo on opening the screen
+    LaunchedEffect(Unit) {
+        logoAlpha.animateTo(1f, animationSpec = tween(1000))
     }
 
-    fun launchPrivacyPolicy(view: View?) {
-        handleWebUrl(this, BuildConfig.PRIVACY_POLICY_URL.toUri())
-    }
-
-    fun launchFrequentlyAskedQuesions(view: View?) {
-        handleWebUrl(this, Urls.FAQ_URL.toUri())
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        val inflater = menuInflater
-        inflater.inflate(R.menu.menu_about, menu)
-        return super.onCreateOptionsMenu(menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.share_app_icon -> {
-                val shareText = String.format(
-                    getString(R.string.share_text),
-                    Urls.PLAY_STORE_URL_PREFIX + this.packageName
-                )
-                val sendIntent = Intent()
-                sendIntent.setAction(Intent.ACTION_SEND)
-                sendIntent.putExtra(Intent.EXTRA_TEXT, shareText)
-                sendIntent.setType("text/plain")
-                startActivity(Intent.createChooser(sendIntent, getString(R.string.share_via)))
-                return true
+    Scaffold(
+        topBar = {
+            CenterAlignedTopAppBar(
+                title = {
+                    Text(text = stringResource(R.string.about), fontWeight = FontWeight.Bold, maxLines = 1,
+                        softWrap = false, style = MaterialTheme.typography.titleLarge)
+                },
+                navigationIcon = {
+                    IconButton(onClick = actions.onBackClick) {
+                        Icon(Icons.AutoMirrored.Filled.ArrowBack, null, tint = Color.White)
+                    }
+                },
+                actions = {
+                    IconButton(onClick = actions.onShareClick) {
+                        Icon(Icons.Default.Share, null, tint = Color.White)
+                    }
+                },
+                colors = TopAppBarDefaults.centerAlignedTopAppBarColors(containerColor = MaterialTheme.colorScheme.primary, titleContentColor = Color.White)
+            )
+        },
+        containerColor = Color.Transparent
+    ) { padding ->
+        Column(
+            modifier = Modifier.fillMaxSize().padding(padding).verticalScroll(rememberScrollState()).padding(horizontal = 20.dp, vertical = 16.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Box(modifier = Modifier.alpha(logoAlpha.value)) {
+                Image(painter = painterResource(R.drawable.ic_launcher), contentDescription = stringResource(R.string.commons_logo),
+                    modifier = Modifier.size(110.dp).clip(CircleShape))
             }
 
-            else -> return super.onOptionsItemSelected(item)
+            Text(text = stringResource(R.string.app_name), style = MaterialTheme.typography.headlineMedium,
+                fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.onBackground)
+
+            // tucked the version info inside a small pill shaped chip to look better
+            AssistChip(
+                onClick = { },
+                label = { Text(version, style = MaterialTheme.typography.labelSmall) },
+                colors = AssistChipDefaults.assistChipColors(labelColor = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.6f)),
+                modifier = Modifier.padding(top = 4.dp, bottom = 16.dp)
+            )
+
+            HtmlText(stringResource(R.string.about_license))
+            HtmlText(String.format(stringResource(R.string.about_improve), Urls.NEW_ISSUE_URL), Modifier.padding(top = 12.dp))
+
+            // grouped the social media icons in a neat row
+            Row(modifier = Modifier.padding(vertical = 24.dp), horizontalArrangement = Arrangement.spacedBy(28.dp)) {
+                EnhancedSocialIcon(R.drawable.ic_action_website, actions.onLaunchWebsite)
+                EnhancedSocialIcon(R.drawable.ic_action_facebook, actions.onLaunchFacebook)
+                EnhancedSocialIcon(R.drawable.ic_action_github, actions.onLaunchGithub)
+            }
+
+            // grouping the all link items into a single card layout
+            Card(
+                modifier = Modifier.fillMaxWidth(),
+                shape = RoundedCornerShape(16.dp),
+                colors = CardDefaults.cardColors(containerColor = if (isSystemInDarkTheme()) Color(0xFF1E1E1E) else Color.White),
+                elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
+            ) {
+                Column {
+                    EnhancedLinkRow(stringResource(R.string.about_rate_us), actions.onRateUs)
+                    DividerRow()
+                    EnhancedLinkRow(stringResource(R.string.user_guide), actions.onUserGuide)
+                    DividerRow()
+                    EnhancedLinkRow(stringResource(R.string.about_privacy_policy), actions.onPrivacyPolicy)
+                    DividerRow()
+                    EnhancedLinkRow(stringResource(R.string.about_translate), actions.onTranslate)
+                    DividerRow()
+                    EnhancedLinkRow(stringResource(R.string.about_credits), actions.onCredits)
+                    DividerRow()
+                    EnhancedLinkRow(stringResource(R.string.about_faq), actions.onFaq)
+                }
+            }
+            Spacer(modifier = Modifier.height(32.dp))
         }
     }
+}
 
-    fun launchTranslate(view: View?) {
-        val sortedLocalizedNamesRef = instance.languageLookUpTable!!.getCanonicalNames()
-        Collections.sort(sortedLocalizedNamesRef)
-        val languageAdapter = ArrayAdapter(
-            this@AboutActivity,
-            android.R.layout.simple_spinner_dropdown_item, sortedLocalizedNamesRef
-        )
-        val spinner = Spinner(this@AboutActivity)
-        spinner.layoutParams =
-            LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.WRAP_CONTENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT
-            )
-        spinner.adapter = languageAdapter
-        spinner.gravity = 17
-        spinner.setPadding(50, 0, 0, 0)
-
-        val positiveButtonRunnable = Runnable {
-            val langCode = instance.languageLookUpTable!!.getCodes()[spinner.selectedItemPosition]
-            handleWebUrl(this@AboutActivity, (Urls.TRANSLATE_WIKI_URL + langCode).toUri())
+@Composable
+fun EnhancedSocialIcon(drawableId: Int, onClick: () -> Unit) {
+    val tint = MaterialTheme.colorScheme.primary
+    Surface(modifier = Modifier.size(52.dp).clickable { onClick() }, shape = CircleShape, color = tint.copy(alpha = 0.1f)
+    ) {
+        Box(contentAlignment = Alignment.Center) {
+            Image(painter = painterResource(drawableId), contentDescription = null, colorFilter = ColorFilter.tint(tint), modifier = Modifier.size(28.dp))
         }
-        showAlertDialog(
-            this,
-            getString(R.string.about_translate_title),
-            getString(R.string.about_translate_message),
-            getString(R.string.about_translate_proceed),
-            getString(R.string.about_translate_cancel),
-            positiveButtonRunnable,
-            {},
-            spinner
+    }
+}
+
+@Composable
+fun EnhancedLinkRow(text: String, onClick: () -> Unit) {
+    Row(modifier = Modifier.fillMaxWidth().clickable { onClick() }.padding(16.dp), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.SpaceBetween) {
+        Text(text = text, style = MaterialTheme.typography.bodyLarge, color = MaterialTheme.colorScheme.onSurface)
+        Icon(imageVector = Icons.AutoMirrored.Filled.KeyboardArrowRight, contentDescription = null, tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.3f), modifier = Modifier.size(20.dp))
+    }
+}
+
+@Composable
+fun DividerRow() {
+    HorizontalDivider(modifier = Modifier.padding(horizontal = 16.dp), thickness = 0.5.dp, color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.1f))
+}
+
+@Composable
+fun HtmlText(html: String, modifier: Modifier = Modifier) {
+    val textColor = if (isSystemInDarkTheme()) android.graphics.Color.WHITE else android.graphics.Color.BLACK
+    // bridge thhe existing xml-based HtmlTextView into the compose ui
+    AndroidView(
+        modifier = modifier,
+        factory = { context -> HtmlTextView(context).apply { gravity = android.view.Gravity.CENTER } },
+        update = { view ->
+            view.setTextColor(textColor)
+            view.setHtmlText(html)
+        }
+    )
+}
+
+@Preview(showBackground = true)
+@Composable
+fun AboutScreenPreview() {
+    CommonsTheme {
+        AboutScreen(
+            version = "v6.4.0-debug-master",
+            actions = AboutActions({}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {})
         )
     }
 }
