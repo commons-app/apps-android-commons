@@ -85,7 +85,7 @@ class AboutActivity : BaseActivity() {
 
     // logic methods remain within the Activity to keep theUI pure
     @SuppressLint("StringFormatInvalid")
-    private fun shareApp() {
+    internal fun shareApp() {
         val shareText = String.format(getString(R.string.share_text), Urls.PLAY_STORE_URL_PREFIX + packageName)
         val sendIntent = Intent(Intent.ACTION_SEND).apply {
             putExtra(Intent.EXTRA_TEXT, shareText)
@@ -94,7 +94,7 @@ class AboutActivity : BaseActivity() {
         startActivity(Intent.createChooser(sendIntent, getString(R.string.share_via)))
     }
 
-    private fun launchFacebook() {
+    internal fun launchFacebook() {
         try {
             startActivity(Intent(ACTION_VIEW, Urls.FACEBOOK_APP_URL.toUri()).setPackage(Urls.FACEBOOK_PACKAGE_NAME))
         } catch (e: Exception) {
@@ -102,7 +102,7 @@ class AboutActivity : BaseActivity() {
         }
     }
 
-    private fun launchGithub() {
+    internal fun launchGithub() {
         try {
             startActivity(Intent(ACTION_VIEW, Urls.GITHUB_REPO_URL.toUri()).setPackage(Urls.GITHUB_PACKAGE_NAME))
         } catch (e: Exception) {
@@ -110,13 +110,13 @@ class AboutActivity : BaseActivity() {
         }
     }
 
-    private fun launchWebsite() = handleWebUrl(this, Urls.WEBSITE_URL.toUri())
-    private fun launchCredits() = handleWebUrl(this, Urls.CREDITS_URL.toUri())
-    private fun launchUserGuide() = handleWebUrl(this, Urls.USER_GUIDE_URL.toUri())
-    private fun launchPrivacyPolicy() = handleWebUrl(this, BuildConfig.PRIVACY_POLICY_URL.toUri())
-    private fun launchFrequentlyAskedQuestions() = handleWebUrl(this, Urls.FAQ_URL.toUri())
+    internal fun launchWebsite() = handleWebUrl(this, Urls.WEBSITE_URL.toUri())
+    internal fun launchCredits() = handleWebUrl(this, Urls.CREDITS_URL.toUri())
+    internal fun launchUserGuide() = handleWebUrl(this, Urls.USER_GUIDE_URL.toUri())
+    internal fun launchPrivacyPolicy() = handleWebUrl(this, BuildConfig.PRIVACY_POLICY_URL.toUri())
+    internal fun launchFrequentlyAskedQuestions() = handleWebUrl(this, Urls.FAQ_URL.toUri())
 
-    private fun launchRatings() {
+    internal fun launchRatings() {
         try {
             startActivity(Intent(ACTION_VIEW, (Urls.PLAY_STORE_PREFIX + packageName).toUri()))
         } catch (_: ActivityNotFoundException) {
@@ -124,7 +124,7 @@ class AboutActivity : BaseActivity() {
         }
     }
 
-    private fun launchTranslate() {
+    internal fun launchTranslate() {
         val instance = CommonsApplication.instance
         val sortedNames = instance.languageLookUpTable!!.getCanonicalNames().toMutableList()
         Collections.sort(sortedNames)
