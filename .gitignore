@@ -1,4 +1,4 @@
-# IDEA files
+  # IDEA files
 *.iml
 *.ipr
 *.iws
@@ -48,3 +48,6 @@ captures/*
 app/jacoco.exec
 app/CommonsContributions
 app/.*
+
+.kotlin/
+*.log
