@@ -365,6 +365,7 @@
   <string name="no_categories_selected_warning_desc">Biller ouni Kategorië si meeschtens net benotzbar. Sidd Dir sécher, datt Dir weider maache wëllt ouni eng Kategorie auszewielen?</string>
   <string name="no_depictions_selected">Keng Motiver ausgewielt</string>
   <string name="no_depictions_selected_warning_desc">Biller mat Motiver si méi einfach ze fannen a ginn éischter benotzt. Sidd Dir sécher, datt Dir virufuere wëllt, ouni Motiver auszewielen?</string>
+  <string name="depictions_map_confirm">Confirméieren</string>
   <string name="back_button_warning">Eroplueden ofbriechen</string>
   <string name="back_button_continue">Eropluede weiderféieren</string>
   <string name="upload_flow_all_images_in_set">(Fir all d\'Biller am Set)</string>
