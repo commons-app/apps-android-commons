@@ -377,6 +377,7 @@
   <string name="quiz_screenshot_question">Questo screenshot è OK per essere caricato?</string>
   <string name="share_app_title">Condividi applicazione</string>
   <string name="rotate">Ruota</string>
+  <string name="crop">Ritaglia</string>
   <string name="error_fetching_nearby_places">Non è possibile caricare i luoghi nelle vicinanze</string>
   <string name="no_pictures_in_this_area">Nessuna immagine in quest\'area</string>
   <string name="no_nearby_places_around">Nessun luogo trovato nelle vicinanze</string>
@@ -444,6 +445,8 @@
   <string name="no_categories_selected_warning_desc">Le immagini senza categorie sono raramente utilizzabili. Sei sicuro di voler continuare senza selezionare le categorie?</string>
   <string name="no_depictions_selected">Non sono stati selezionati elementi</string>
   <string name="no_depictions_selected_warning_desc">Le immagini con descrizioni possono essere trovate più facilmente ed è più probabile il loro utilizzo. Davvero vuoi continuare senza selezionare elementi raffigurati?</string>
+  <string name="depictions_choose_from_map">Scegli dalla mappa</string>
+  <string name="depictions_map_confirm">Conferma</string>
   <string name="back_button_warning">Annulla caricamento</string>
   <string name="back_button_warning_desc">Usare il tasto \'indietro\' cancellerà questo caricamento e perderai i tuoi progressi</string>
   <string name="back_button_continue">Continua caricamento</string>
@@ -827,6 +830,7 @@
   <string name="pending">In attesa</string>
   <string name="failed">Non riuscito</string>
   <string name="could_not_load_place_data">Impossibile caricare i dati del luogo</string>
+  <string name="warning_for_no_option_selected">Seleziona una qualsiasi delle opzioni per rispondere alla domanda</string>
   <string name="custom_selector_delete_folder">Cancella cartella</string>
   <string name="custom_selector_confirm_deletion_title">Conferma cancellazione</string>
   <string name="custom_selector_confirm_deletion_message">Sei sicuro di voler eliminare la cartella %1$s contenente elementi %2$d?</string>
