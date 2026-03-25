@@ -1,6 +1,6 @@
 package fr.free.nrw.commons.explore.recentsearches
 
-import android.database.sqlite.SQLiteDatabase
+import androidx.sqlite.db.SupportSQLiteDatabase
 
 /**
  * This class contains the database table architechture for recent searches, It also contains
@@ -25,18 +25,18 @@ object RecentSearchesTable {
     const val CREATE_TABLE_STATEMENT: String = ("CREATE TABLE $TABLE_NAME ($COLUMN_ID INTEGER PRIMARY KEY,$COLUMN_NAME STRING,$COLUMN_LAST_USED INTEGER);")
 
     /**
-     * This method creates a RecentSearchesTable in SQLiteDatabase
+     * This method creates a RecentSearchesTable in SupportSQLiteDatabase
      *
-     * @param db SQLiteDatabase
+     * @param db SupportSQLiteDatabase
      */
-    fun onCreate(db: SQLiteDatabase) = db.execSQL(CREATE_TABLE_STATEMENT)
+    fun onCreate(db: SupportSQLiteDatabase) = db.execSQL(CREATE_TABLE_STATEMENT)
 
     /**
-     * This method deletes RecentSearchesTable from SQLiteDatabase
+     * This method deletes RecentSearchesTable from SupportSQLiteDatabase
      *
-     * @param db SQLiteDatabase
+     * @param db SupportSQLiteDatabase
      */
-    fun onDelete(db: SQLiteDatabase) {
+    fun onDelete(db: SupportSQLiteDatabase) {
         db.execSQL(DROP_TABLE_STATEMENT)
         onCreate(db)
     }
@@ -44,11 +44,11 @@ object RecentSearchesTable {
     /**
      * This method is called on migrating from a older version to a newer version
      *
-     * @param db   SQLiteDatabase
+     * @param db   SupportSQLiteDatabase
      * @param from Version from which we are migrating
      * @param to   Version to which we are migrating
      */
-    fun onUpdate(db: SQLiteDatabase, from: Int, to: Int) {
+    fun onUpdate(db: SupportSQLiteDatabase, from: Int, to: Int) {
         if (from == to) {
             return
         }
