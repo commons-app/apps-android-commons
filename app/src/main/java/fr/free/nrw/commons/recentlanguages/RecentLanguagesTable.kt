@@ -1,7 +1,7 @@
 package fr.free.nrw.commons.recentlanguages
 
 import android.annotation.SuppressLint
-import android.database.sqlite.SQLiteDatabase
+import androidx.sqlite.db.SupportSQLiteDatabase
 
 object RecentLanguagesTable {
     const val TABLE_NAME = "recent_languages"
@@ -23,33 +23,33 @@ object RecentLanguagesTable {
             ");"
 
     /**
-     * This method creates a LanguagesTable in SQLiteDatabase
-     * @param db SQLiteDatabase
+     * This method creates a LanguagesTable in SupportSQLiteDatabase
+     * @param db SupportSQLiteDatabase
      */
     @SuppressLint("SQLiteString")
     @JvmStatic
-    fun onCreate(db: SQLiteDatabase) {
+    fun onCreate(db: SupportSQLiteDatabase) {
         db.execSQL(CREATE_TABLE_STATEMENT)
     }
 
     /**
-     * This method deletes LanguagesTable from SQLiteDatabase
-     * @param db SQLiteDatabase
+     * This method deletes LanguagesTable from SupportSQLiteDatabase
+     * @param db SupportSQLiteDatabase
      */
     @JvmStatic
-    fun onDelete(db: SQLiteDatabase) {
+    fun onDelete(db: SupportSQLiteDatabase) {
         db.execSQL(DROP_TABLE_STATEMENT)
         onCreate(db)
     }
 
     /**
      * This method is called on migrating from a older version to a newer version
-     * @param db SQLiteDatabase
+     * @param db SupportSQLiteDatabase
      * @param from Version from which we are migrating
      * @param to Version to which we are migrating
      */
     @JvmStatic
-    fun onUpdate(db: SQLiteDatabase, from: Int, to: Int) {
+    fun onUpdate(db: SupportSQLiteDatabase, from: Int, to: Int) {
         if (from == to) {
             return
         }

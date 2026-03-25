@@ -27,6 +27,7 @@ import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao
 import fr.free.nrw.commons.contributions.MainActivity
 import fr.free.nrw.commons.createTestClient
 import fr.free.nrw.commons.kvstore.JsonKvStore
+import fr.free.nrw.commons.location.LatLng
 import fr.free.nrw.commons.location.LocationServiceManager
 import fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType
 import fr.free.nrw.commons.nearby.fragments.NearbyParentFragment
@@ -43,6 +44,7 @@ import org.mockito.Mockito.times
 import org.mockito.Mockito.`when`
 import org.mockito.MockitoAnnotations
 import org.osmdroid.util.GeoPoint
+import org.osmdroid.views.MapView
 import org.powermock.reflect.Whitebox
 import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
@@ -57,7 +59,7 @@ import java.lang.reflect.Method
 @LooperMode(LooperMode.Mode.PAUSED)
 class NearbyParentFragmentUnitTest {
     @Mock
-    private lateinit var mapView: org.osmdroid.views.MapView
+    private lateinit var mapView: MapView
 
     @Mock
     private lateinit var applicationKvStore: JsonKvStore
@@ -371,5 +373,32 @@ class NearbyParentFragmentUnitTest {
         fragment.openLocationSettings()
         val shadowActivity: ShadowActivity = Shadows.shadowOf(activity)
         Assert.assertEquals(shadowActivity.nextStartedActivityForResult, null)
+    }
+
+    @Test
+    @Ignore
+    @Throws(Exception::class)
+    fun testDepictsPickerInstanceSetsArguments() {
+        val allPhotoCoordinates = ArrayList<LatLng>()
+        val pickerLat = 12.34
+        val pickerLng = 56.78
+        allPhotoCoordinates.add(
+            LatLng(
+                pickerLat, pickerLng,
+                accuracy = 0f
+            )
+        )
+        val pickerFragment =
+            NearbyParentFragment.newPickerInstance(allPhotoCoordinates)
+        Assert.assertNotNull(pickerFragment.arguments)
+        Assert.assertTrue(
+            pickerFragment.arguments!!.getBoolean(NearbyParentFragment.ARG_PICKER_MODE)
+        )
+        Assert.assertEquals(
+            allPhotoCoordinates,
+            pickerFragment.arguments!!.getParcelableArrayList<LatLng>(
+                NearbyParentFragment.ARG_PHOTO_LATLNGS
+            )
+        )
     }
 }
