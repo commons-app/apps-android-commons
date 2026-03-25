@@ -383,6 +383,7 @@
   <string name="quiz_screenshot_question">האם בסדר להעלות את צילום המסך הזה?</string>
   <string name="share_app_title">שיתוף היישום</string>
   <string name="rotate">סיבוב</string>
+  <string name="crop">חיתוך</string>
   <string name="error_fetching_nearby_places">שגיאה בטעינת המקומות בסביבתך</string>
   <string name="no_pictures_in_this_area">אין תמונות באזור הזה</string>
   <string name="no_nearby_places_around">אין מקומות בסביבה</string>
@@ -838,6 +839,7 @@
   <string name="pending">ממתינות</string>
   <string name="failed">נכשלו</string>
   <string name="could_not_load_place_data">לא היה אפשר לטעון את נתוני המקום</string>
+  <string name="warning_for_no_option_selected">נא לבחור באחת מהאפשרויות כדי לענות על השאלה</string>
   <string name="custom_selector_delete_folder">מחיקת תיקייה</string>
   <string name="custom_selector_confirm_deletion_title">אישור מחיקה</string>
   <string name="custom_selector_confirm_deletion_message">למחוק את התיקייה %1$s על כל %2$d פריטיה?</string>

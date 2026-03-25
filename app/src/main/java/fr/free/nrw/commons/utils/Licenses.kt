@@ -8,11 +8,11 @@ import fr.free.nrw.commons.settings.Prefs
  * @return Name of license
  */
 fun String.toLicenseName(): Int = when (this) {
-    Prefs.Licenses.CC_BY_3 -> R.string.license_name_cc_by
-    Prefs.Licenses.CC_BY_4 -> R.string.license_name_cc_by_four
-    Prefs.Licenses.CC_BY_SA_3 -> R.string.license_name_cc_by_sa
-    Prefs.Licenses.CC_BY_SA_4 -> R.string.license_name_cc_by_sa_four
-    Prefs.Licenses.CC0 -> R.string.license_name_cc0
+    Prefs.Licenses.CC_BY_3, "Attribution 3.0" -> R.string.license_name_cc_by
+    Prefs.Licenses.CC_BY_4, "Attribution 4.0" -> R.string.license_name_cc_by_four
+    Prefs.Licenses.CC_BY_SA_3, "Attribution-ShareAlike 3.0" -> R.string.license_name_cc_by_sa
+    Prefs.Licenses.CC_BY_SA_4, "Attribution-ShareAlike 4.0" -> R.string.license_name_cc_by_sa_four
+    Prefs.Licenses.CC0, "CC0" -> R.string.license_name_cc0
     else -> throw IllegalStateException("Unrecognized license value: $this")
 }
 
@@ -21,11 +21,11 @@ fun String.toLicenseName(): Int = when (this) {
  * @return Url of license
  */
 fun String.toLicenseUrl(): String = when (this) {
-    Prefs.Licenses.CC_BY_3 -> "https://creativecommons.org/licenses/by/3.0/"
-    Prefs.Licenses.CC_BY_4 -> "https://creativecommons.org/licenses/by/4.0/"
-    Prefs.Licenses.CC_BY_SA_3 -> "https://creativecommons.org/licenses/by-sa/3.0/"
-    Prefs.Licenses.CC_BY_SA_4 -> "https://creativecommons.org/licenses/by-sa/4.0/"
-    Prefs.Licenses.CC0 -> "https://creativecommons.org/publicdomain/zero/1.0/"
+    Prefs.Licenses.CC_BY_3, "Attribution 3.0" -> "https://creativecommons.org/licenses/by/3.0/"
+    Prefs.Licenses.CC_BY_4, "Attribution 4.0" -> "https://creativecommons.org/licenses/by/4.0/"
+    Prefs.Licenses.CC_BY_SA_3, "Attribution-ShareAlike 3.0" -> "https://creativecommons.org/licenses/by-sa/3.0/"
+    Prefs.Licenses.CC_BY_SA_4, "Attribution-ShareAlike 4.0" -> "https://creativecommons.org/licenses/by-sa/4.0/"
+    Prefs.Licenses.CC0, "CC0" -> "https://creativecommons.org/publicdomain/zero/1.0/"
     else -> throw IllegalStateException("Unrecognized license value: $this")
 }
 

@@ -46,20 +46,14 @@
       android:textSize="@dimen/subtitle_text"
       android:visibility="visible"
       tools:visibility="visible"/>
-    <Spinner
-      android:id="@+id/spinner_license_list"
+    <androidx.recyclerview.widget.RecyclerView
+      android:id="@+id/rv_license_list"
       android:layout_width="match_parent"
-      android:layout_height="wrap_content"
+      android:layout_height="0dp"
+      android:layout_weight="1"
       android:layout_marginTop="@dimen/standard_gap"
-      android:padding="@dimen/dimen_0"
-      tools:visibility="visible"/>
-
-    <TextView
-      android:id="@+id/tv_share_license_summary"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_marginTop="@dimen/standard_gap"
-      android:text="@plurals/share_license_summary"/>
+      android:clipToPadding="false"
+      android:paddingBottom="8dp" />
 
   </LinearLayout>
 
@@ -90,6 +84,18 @@
         android:text="@string/wlm_upload_info"
         android:layout_height="wrap_content"/>
     </LinearLayout>
+    <TextView
+      android:id="@+id/tv_show_more_licenses"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center_horizontal"
+      android:layout_marginTop="8dp"
+      android:padding="8dp"
+      android:text="(more)"
+      android:textColor="@color/button_blue"
+      android:textSize="14sp"
+      android:linksClickable="true"
+      android:background="?attr/selectableItemBackground" />
 
     <fr.free.nrw.commons.ui.widget.HtmlTextView
       android:id="@+id/tv_media_upload_policy"

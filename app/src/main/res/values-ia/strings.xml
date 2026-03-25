@@ -348,6 +348,7 @@
   <string name="quiz_screenshot_question">Es iste captura de schermo bon pro incargar?</string>
   <string name="share_app_title">Condivider app</string>
   <string name="rotate">Rotar</string>
+  <string name="crop">Taliar</string>
   <string name="error_fetching_nearby_places">Error durante le cargamento de locos a proximitate</string>
   <string name="no_pictures_in_this_area">Necun imagine in iste area</string>
   <string name="no_nearby_places_around">Necun loco a proximitate</string>
@@ -795,6 +796,7 @@
   <string name="pending">Pendente</string>
   <string name="failed">Fallite</string>
   <string name="could_not_load_place_data">Non poteva cargar le datos del loco</string>
+  <string name="warning_for_no_option_selected">Selige un inter le optiones pro responder al question</string>
   <string name="custom_selector_delete_folder">Deler dossier</string>
   <string name="custom_selector_confirm_deletion_title">Confirmar deletion</string>
   <string name="custom_selector_confirm_deletion_message">Es tu secur de voler deler le dossier %1$s que contine %2$d objectos?</string>

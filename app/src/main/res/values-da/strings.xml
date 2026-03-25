@@ -428,6 +428,8 @@
   <string name="no_categories_selected_warning_desc">Billeder uden kategorier er sjældent brugbare. Er du sikker på, at du vil fortsætte uden at vælge kategorier?</string>
   <string name="no_depictions_selected">Ingen afbildninger valgt</string>
   <string name="no_depictions_selected_warning_desc">Billeder med afbildninger er lettere at finde og mere tilbøjelige til at blive brugt. Er du sikker på, at du vil fortsætte uden at vælge afbildninger?</string>
+  <string name="depictions_map_confirm">Bekræft</string>
+  <string name="depictions_map_no_photo_location">Fotoet har ingen placering. Viser din nuværende placering</string>
   <string name="back_button_warning">Annuller upload</string>
   <string name="back_button_warning_desc">Brug af tilbage-knappen vil annullere dette upload, og du vil miste dine fremskridt</string>
   <string name="back_button_continue">Fortsæt upload</string>
@@ -808,6 +810,7 @@
   <string name="pending">Afventer</string>
   <string name="failed">Mislykkedes</string>
   <string name="could_not_load_place_data">Kunne ikke indlæse steddata</string>
+  <string name="warning_for_no_option_selected">Vælg en af mulighederne for at besvare spørgsmålet</string>
   <string name="custom_selector_delete_folder">Slet mappe</string>
   <string name="custom_selector_confirm_deletion_title">Bekræft sletning</string>
   <string name="custom_selector_confirm_deletion_message">Er du sikker på, at du vil slette mappen %1$s, der indeholder %2$d elementer?</string>
@@ -839,4 +842,10 @@
   <string name="image_tag_line_created_by_and_uploaded_by">Oprettet af %1$s og uploadet af %2$s</string>
   <string name="nominated_for_deletion_btn">Nomineret til sletning</string>
   <string name="custom_selector_max_image_limit_reached">Du kan højst vælge %d billeder.</string>
+  <string name="license_cc0_description">Ingen ophavsret. Du frasiger dig alle rettigheder, så alle kan bruge dette værk på enhver måde.</string>
+  <string name="license_cc_by_description">Kreditering. Andre må gerne dele og tilpasse, så længe de angiver dig som kilde.</string>
+  <string name="license_cc_by_sa_description">Kreditering-DelPåSammeVilkår. Andre kan dele og tilpasse, men skal bruge den samme licens og angive dig som kilde.</string>
+  <string name="license_cc0_long_description">Denne licens giver brugere ret til at distribuere, omarbejde, tilpasse og videreudvikle materialet i ethvert medie eller format uden nogen betingelser.</string>
+  <string name="license_cc_by_long_description">Denne licens giver brugere ret til at distribuere, omarbejde, tilpasse og videreudvikle materialet i ethvert medie eller format, også til kommercielle formål, så længe ophavspersonen krediteres.</string>
+  <string name="license_cc_by_sa_long_description">Denne licens giver brugere ret til at distribuere, omarbejde, tilpasse og videreudvikle materialet i ethvert medie eller format, også til kommercielle formål, så længe ophavspersonen krediteres, og det nye værk er licenseret på identiske vilkår.</string>
 </resources>

@@ -119,6 +119,7 @@ import org.osmdroid.events.MapListener
 import org.osmdroid.events.ScrollEvent
 import org.osmdroid.events.ZoomEvent
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory
+import org.osmdroid.util.BoundingBox
 import org.osmdroid.util.GeoPoint
 import org.osmdroid.util.constants.GeoConstants.UnitOfMeasure
 import org.osmdroid.views.CustomZoomButtonsController
@@ -143,6 +144,7 @@ import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 import javax.inject.Named
 import kotlin.concurrent.Volatile
+import kotlin.math.ln
 
 
 class NearbyParentFragment : CommonsDaggerSupportFragment(),
@@ -247,6 +249,10 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
         null
     private var isAdvancedQueryFragmentVisible = false
     private var nearestPlace: Place? = null
+    private var isDepictsPickerMode: Boolean = false
+    private var allPhotoLatLngs: ArrayList<LatLng>? = null
+    private var photoPinBoundingBox: BoundingBox? = null
+    private var needsZoomOut: Boolean = true
 
     @Volatile
     private var stopQuery = false
@@ -395,6 +401,8 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
         menu: Menu,
         inflater: MenuInflater
     ) {
+        if (isDepictsPickerMode) return
+
         inflater.inflate(fr.free.nrw.commons.R.menu.nearby_fragment_menu, menu)
         val refreshButton = menu.findItem(fr.free.nrw.commons.R.id.item_refresh)
         val listMenu = menu.findItem(fr.free.nrw.commons.R.id.list_sheet)
@@ -487,6 +495,19 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
             }
         }
 
+        arguments?.let {
+            isDepictsPickerMode = it.getBoolean(ARG_PICKER_MODE, false)
+            if (isDepictsPickerMode) {
+                allPhotoLatLngs = it.getParcelableArrayList(ARG_PHOTO_LATLNGS)
+                if (!allPhotoLatLngs.isNullOrEmpty()) {
+                    val first = allPhotoLatLngs!![0]
+                    lastMapFocus = GeoPoint(first.latitude, first.longitude)
+                    mapCenter = lastMapFocus
+                    needsZoomOut = true
+                }
+            }
+        }
+
         presenter?.attachView(this)
         isPermissionDenied = false
         recenterToUserLocation = false
@@ -504,10 +525,10 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
         org.osmdroid.config.Configuration.getInstance().getAdditionalHttpRequestProperties()
             .put("Referer", "http://maps.wikimedia.org/")
 
-        if (applicationKvStore?.getString("LastLocation") != null) { // Checking for last searched location
+        if (lastMapFocus == null && applicationKvStore?.getString("LastLocation") != null) { // Checking for last searched location
             val locationLatLng = applicationKvStore!!.getString("LastLocation")!!.split(",")
             lastMapFocus = GeoPoint(locationLatLng[0].toDouble(), locationLatLng[1].toDouble())
-        } else {
+        } else if (lastMapFocus == null) {
             lastMapFocus = GeoPoint(51.50550, -0.07520)
         }
 
@@ -566,45 +587,56 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
                 Html.fromHtml(getString(fr.free.nrw.commons.R.string.map_attribution))
         }
         binding?.tvAttribution?.movementMethod = LinkMovementMethod.getInstance()
+        if (!isDepictsPickerMode) {
+            binding?.nearbyFilterList?.btnAdvancedOptions?.setOnClickListener {
+                binding?.nearbyFilter?.searchViewLayout?.searchView?.clearFocus()
+                showHideAdvancedQueryFragment(true)
+                val fragment = AdvanceQueryFragment()
+                val bundle = Bundle()
+                try {
+                    bundle.putString(
+                        "query",
+                        FileUtils.readFromResource("/queries/radius_query_for_upload_wizard.rq")
+                    )
+                } catch (e: IOException) {
+                    Timber.e(e)
+                }
+                fragment.arguments = bundle
+                fragment.callback = object : AdvanceQueryFragment.Callback {
+                    override fun close() {
+                        showHideAdvancedQueryFragment(false)
+                    }
 
-        binding?.nearbyFilterList?.btnAdvancedOptions?.setOnClickListener {
-            binding?.nearbyFilter?.searchViewLayout?.searchView?.clearFocus()
-            showHideAdvancedQueryFragment(true)
-            val fragment = AdvanceQueryFragment()
-            val bundle = Bundle()
-            try {
-                bundle.putString(
-                    "query",
-                    FileUtils.readFromResource("/queries/radius_query_for_upload_wizard.rq")
-                )
-            } catch (e: IOException) {
-                Timber.e(e)
+                    override fun reset() {
+                        presenter?.setAdvancedQuery(null.toString())
+                        presenter?.updateMapAndList(LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED)
+                        showHideAdvancedQueryFragment(false)
+                    }
+
+                    override fun apply(query: String) {
+                        presenter?.setAdvancedQuery(query)
+                        presenter?.updateMapAndList(LocationChangeType.CUSTOM_QUERY)
+                        showHideAdvancedQueryFragment(false)
+                    }
+                }
+                childFragmentManager.beginTransaction()
+                    .replace(fr.free.nrw.commons.R.id.fl_container_nearby_children, fragment)
+                    .commit()
             }
-            fragment.arguments = bundle
-            fragment.callback = object : AdvanceQueryFragment.Callback {
-                override fun close() {
-                    showHideAdvancedQueryFragment(false)
-                }
 
-                override fun reset() {
-                    presenter?.setAdvancedQuery(null.toString())
-                    presenter?.updateMapAndList(LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED)
-                    showHideAdvancedQueryFragment(false)
-                }
-
-                override fun apply(query: String) {
-                    presenter?.setAdvancedQuery(query)
-                    presenter?.updateMapAndList(LocationChangeType.CUSTOM_QUERY)
-                    showHideAdvancedQueryFragment(false)
-                }
+            binding?.tvLearnMore?.setOnClickListener {
+                onLearnMoreClicked()
             }
-            childFragmentManager.beginTransaction()
-                .replace(fr.free.nrw.commons.R.id.fl_container_nearby_children, fragment)
-                .commit()
         }
 
-        binding?.tvLearnMore?.setOnClickListener {
-            onLearnMoreClicked()
+        //hide fab components if depicts picker mode
+        if (isDepictsPickerMode) {
+            binding?.fabCamera?.visibility = View.GONE
+            binding?.fabPlus?.visibility = View.GONE
+            binding?.fabLegend?.visibility = View.GONE
+            binding?.nearbyFilter?.root?.visibility = View.GONE
+            binding?.rlContainerWlmMonthMessage?.visibility = View.GONE
+            binding?.bottomSheetNearby?.root?.visibility = View.GONE
         }
 
         if (!locationPermissionsHelper?.checkLocationPermission(requireActivity())!!) {
@@ -612,6 +644,10 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
         }
     }
 
+    fun addPhotoMarkerIfDepictsMode() {
+        if (isDepictsPickerMode)
+            addPhotoMarkers(allPhotoLatLngs!!)
+    }
     /**
      * Fetch Explore map camera data from fragment arguments if any.
      */
@@ -706,7 +742,7 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
     }
 
     private fun performMapReadyActions() {
-        if ((activity as MainActivity).activeFragment == ActiveFragment.NEARBY) {
+        if (!isDepictsPickerMode && activity is MainActivity && (activity as MainActivity).activeFragment == ActiveFragment.NEARBY) {
             if (applicationKvStore!!.getBoolean("doNotAskForLocationPermission", false) &&
                 !locationPermissionsHelper!!.checkLocationPermission(requireActivity())
             ) {
@@ -714,6 +750,58 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
             }
         }
         presenter!!.onMapReady()
+    }
+
+    private fun addPhotoMarkers(coordList: ArrayList<LatLng>) {
+        var minLat = Double.MAX_VALUE
+        var maxLat = -Double.MAX_VALUE
+        var minLng = Double.MAX_VALUE
+        var maxLng = -Double.MAX_VALUE
+
+        if (coordList.isEmpty()) return
+
+        coordList.forEachIndexed { index, latLng ->
+            //add marker details
+            val marker = Marker(binding?.map)
+            marker.position = GeoPoint(latLng.latitude, latLng.longitude)
+            marker.title = "Photo ${index + 1}"
+            marker.icon = getDrawable(requireContext(), R.drawable.ic_mappin)
+            binding!!.map.overlays.add(marker)
+            // disable zooming in to the pin , only show the info
+            // close details of if open place to avoid confusion
+            marker.setOnMarkerClickListener { m: Marker, mapView: MapView? ->
+                bottomSheetDetailsBehavior?.state = BottomSheetBehavior.STATE_HIDDEN
+                m.showInfoWindow()
+                true
+            }
+        }
+        allPhotoLatLngs!!.forEach {
+            minLat = minLat.coerceAtMost(it.latitude)
+            maxLat = maxLat.coerceAtLeast(it.latitude)
+            minLng = minLng.coerceAtMost(it.longitude)
+            maxLng = maxLng.coerceAtLeast(it.longitude)
+        }
+        photoPinBoundingBox = BoundingBox(maxLat, maxLng, minLat, minLng)
+        // center on average of all photos coordinates and zoom out and run only once
+        // only if multiple pins are present
+        if (needsZoomOut && allPhotoLatLngs?.size!! > 1) {
+            val preferredZoom = if (prevZoom > 0.0) prevZoom else ZOOM_LEVEL.toDouble()
+            // Calculate what zoom the bounding box WOULD use
+            val boundingBoxZoom = binding!!.map.calculateBoundingBoxZoom(
+                photoPinBoundingBox!!, 100
+            )
+            // BoundingBox might zoom out too far if pins are situated far apart ,
+            // which makes the query very slow. so we restrict it
+            if (boundingBoxZoom < preferredZoom) {
+                binding?.map?.controller?.setZoom(preferredZoom)
+                binding?.map?.controller?.animateTo(lastMapFocus)
+            } else binding?.map?.zoomToBoundingBox(
+                photoPinBoundingBox,
+                true, 100
+            )
+            needsZoomOut = false
+        }
+        binding?.map?.invalidate()
     }
 
     override fun askForLocationPermission() {
@@ -732,7 +820,7 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
             mapCenter = targetP
             binding?.map?.controller?.setCenter(targetP)
             updateUserLocationOverlays(targetP, true)
-            if (!isCameFromExploreMap()) {
+            if (!isCameFromExploreMap() && !isDepictsPickerMode) {
                 moveCameraToPosition(targetP)
             }
         } else if (locationManager.isGPSProviderEnabled() || locationManager.isNetworkProviderEnabled()) {
@@ -747,9 +835,27 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
         registerUnregisterLocationListener(false)
     }
 
+    /**
+     * Helper method to get the zoom level required to show the bounding box
+     */
+    fun MapView.calculateBoundingBoxZoom(boundingBox: BoundingBox, padding: Int): Double {
+        val mapWidth = (width - padding * 2).toDouble()
+        val mapHeight = (height - padding * 2).toDouble()
+        if (mapWidth <= 0 || mapHeight <= 0) return 15.0
+
+        val zoomLat = ln(mapHeight * 360.0 / (256.0 * boundingBox.latitudeSpan)) / ln(2.0)
+        val zoomLng = ln(mapWidth * 360.0 / (256.0 * boundingBox.longitudeSpan)) / ln(2.0)
+
+        return minOf(zoomLat, zoomLng)
+    }
+
     override fun onResume() {
         super.onResume()
         binding?.map?.onResume()
+        clickedMarker?.infoWindow?.isOpen?.let {
+            if (!it)
+                bottomSheetDetailsBehavior!!.state = BottomSheetBehavior.STATE_HIDDEN
+        }
         presenter?.attachView(this)
         registerNetworkReceiver()
 
@@ -757,7 +863,9 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
         binding?.map?.setMultiTouchControls(true)
         binding?.map?.isClickable = true
 
-        if (isResumed && (activity as? MainActivity)?.activeFragment == ActiveFragment.NEARBY) {
+        if (isResumed && (activity as? MainActivity)?.activeFragment == ActiveFragment.NEARBY
+            && !isDepictsPickerMode
+        ) {
             if (activity?.let { locationPermissionsHelper?.checkLocationPermission(it) } == true) {
                 locationPermissionGranted()
             } else {
@@ -858,6 +966,8 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
         bottomSheetDetailsBehavior = BottomSheetBehavior.from(binding!!.bottomSheetDetails.root)
         bottomSheetDetailsBehavior?.setState(BottomSheetBehavior.STATE_HIDDEN)
         binding!!.bottomSheetDetails.root.visibility = View.VISIBLE
+        binding?.bottomSheetNearby?.root?.visibility =
+            if (isDepictsPickerMode) View.GONE else View.VISIBLE
         bottomSheetListBehavior?.setState(BottomSheetBehavior.STATE_HIDDEN)
     }
 
@@ -1024,6 +1134,9 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
             override fun onSlide(bottomSheet: View, slideOffset: Float) {
             }
         })
+        if (isDepictsPickerMode) {
+            bottomSheetListBehavior?.state = BottomSheetBehavior.STATE_HIDDEN
+        }
     }
 
     /**
@@ -1967,8 +2080,14 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
         binding!!.fabRecenter.setOnClickListener(onClickListener)
     }
 
+    /**
+     * The [NearbyParentFragmentPresenter.lockUnlockNearby] disables enables FAB recenter.
+     * This lets us [addPhotoMarkerIfDepictsMode] pre-populating before place markers
+     * if nearby places found are null and place markers are not rendered
+     */
     override fun disableFABRecenter() {
         binding!!.fabRecenter.isEnabled = false
+        addPhotoMarkerIfDepictsMode()
     }
 
     override fun enableFABRecenter() {
@@ -2316,7 +2435,7 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
         when (bottomSheetState) {
             (BottomSheetBehavior.STATE_COLLAPSED) -> {
                 collapseFABs(isFABsExpanded)
-                if (!binding!!.fabPlus.isShown) {
+                if (!binding!!.fabPlus.isShown && !isDepictsPickerMode) {
                     showFABs()
                 }
             }
@@ -2382,16 +2501,34 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
                 )
             )
         }
-        val spanCount = spanCount
-        gridLayoutManager = GridLayoutManager(this.context, spanCount)
-        binding!!.bottomSheetDetails.bottomSheetRecyclerView.layoutManager = gridLayoutManager
-        bottomSheetAdapter = BottomSheetAdapter(
-            this.context,
-            dataList as ArrayList<BottomSheetItem>
-        )
-        bottomSheetAdapter!!.setClickListener(this)
-        binding!!.bottomSheetDetails.bottomSheetRecyclerView.adapter = bottomSheetAdapter
-        updateBookmarkButtonImage(selectedPlace!!)
+
+
+        if (isDepictsPickerMode) {
+            // Hide the existing actions recyclerview and show the confirm button
+            binding!!.bottomSheetDetails.bottomSheetRecyclerView.visibility = View.GONE
+            binding!!.bottomSheetDetails.depictionsMapConfirm.visibility = View.VISIBLE
+            // increase the peek height to make the confirm button visible
+            bottomSheetDetailsBehavior!!.peekHeight =
+                ((resources.getDimension(R.dimen.overflow_button_dimen)) +
+                        (resources.getDimension(R.dimen.big_height))).toInt()
+            binding!!.bottomSheetDetails.depictionsMapConfirm.setOnClickListener {
+                val intent = Intent()
+                intent.putExtra(PICKER_RESULT_PLACE, selectedPlace)
+                requireActivity().setResult(android.app.Activity.RESULT_OK, intent)
+                requireActivity().finish()
+            }
+        } else {
+            val spanCount = spanCount
+            gridLayoutManager = GridLayoutManager(this.context, spanCount)
+            binding!!.bottomSheetDetails.bottomSheetRecyclerView.layoutManager = gridLayoutManager
+            bottomSheetAdapter = BottomSheetAdapter(
+                this.context,
+                dataList as ArrayList<BottomSheetItem>
+            )
+            bottomSheetAdapter!!.setClickListener(this)
+            binding!!.bottomSheetDetails.bottomSheetRecyclerView.adapter = bottomSheetAdapter
+            updateBookmarkButtonImage(selectedPlace!!)
+        }
 
         selectedPlace?.pic?.substringAfterLast("/")?.takeIf { it.isNotEmpty() }?.let { imageName ->
             Glide.with(binding!!.bottomSheetDetails.icon.context)
@@ -2695,6 +2832,7 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
         scaleBarOverlay.enableScaleBar()
         binding!!.map.overlays.add(scaleBarOverlay)
         binding!!.map.overlays.add(mapEventsOverlay)
+        addPhotoMarkerIfDepictsMode()
         binding!!.map.setMultiTouchControls(true)
         binding!!.map.invalidate()
     }
@@ -2968,6 +3106,10 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
 
     companion object {
         private const val ZOOM_LEVEL = 15f
+        const val ARG_PICKER_MODE = "is_picker_mode"
+        const val ARG_PHOTO_LATLNGS = "picker_photo_latlngs"
+        const val PICKER_RESULT_PLACE = "map_picked_place"
+
 
         /**
          * WLM URL
@@ -2982,6 +3124,15 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
             return fragment
         }
 
+        @JvmStatic
+        fun newPickerInstance(photoLatLngs: ArrayList<LatLng>?): NearbyParentFragment {
+            val fragment = NearbyParentFragment()
+            val args = Bundle()
+            args.putBoolean(ARG_PICKER_MODE, true)
+            args.putParcelableArrayList(ARG_PHOTO_LATLNGS, photoLatLngs)
+            fragment.arguments = args
+            return fragment
+        }
 
         private val isExternalStorageWritable: Boolean
             get() {
