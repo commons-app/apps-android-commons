@@ -1,6 +1,6 @@
 package fr.free.nrw.commons.category
 
-import android.database.sqlite.SQLiteDatabase
+import androidx.sqlite.db.SupportSQLiteDatabase
 
 object CategoryTable {
     const val TABLE_NAME = "categories"
@@ -33,14 +33,14 @@ object CategoryTable {
             "$COLUMN_TIMES_USED INTEGER" +
             ");"
 
-    fun onCreate(db: SQLiteDatabase) = db.execSQL(CREATE_TABLE_STATEMENT)
+    fun onCreate(db: SupportSQLiteDatabase) = db.execSQL(CREATE_TABLE_STATEMENT)
 
-    fun onDelete(db: SQLiteDatabase) {
+    fun onDelete(db: SupportSQLiteDatabase) {
         db.execSQL(DROP_TABLE_STATEMENT)
         onCreate(db)
     }
 
-    fun onUpdate(db: SQLiteDatabase, from: Int, to: Int) {
+    fun onUpdate(db: SupportSQLiteDatabase, from: Int, to: Int) {
         if (from == to) return
         if (from < 4) {
             // doesn't exist yet
