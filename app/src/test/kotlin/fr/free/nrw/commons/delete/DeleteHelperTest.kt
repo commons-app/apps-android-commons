@@ -2,6 +2,9 @@ package fr.free.nrw.commons.delete
 
 import android.app.AlertDialog
 import android.content.Context
+import android.widget.CheckBox
+import android.widget.LinearLayout
+import com.google.android.material.textfield.TextInputEditText
 import com.nhaarman.mockitokotlin2.eq
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.verify
@@ -212,7 +215,7 @@ class DeleteHelperTest {
     }
 
     @Test
-    fun alertDialogPositiveButtonDisableTest() {
+    fun buttonRemainsDisabledWhenCheckboxCheckedButNoText() {
         val mContext = RuntimeEnvironment.getApplication().applicationContext
         deleteHelper.askReasonAndExecute(
             media,
@@ -221,23 +224,34 @@ class DeleteHelperTest {
             ReviewController.DeleteReason.COPYRIGHT_VIOLATION, callback
         )
 
-        deleteHelper.getListener()?.onClick(
-            deleteHelper.getDialog(),
-            1,
-            true
-        )
-        assertEquals(
-            true,
-            deleteHelper.getDialog()?.getButton(AlertDialog.BUTTON_POSITIVE)?.isEnabled
-        )
+        val dialog = deleteHelper.getDialog()
+        val container = dialog?.findViewById<LinearLayout>(R.id.checkboxContainer)
+        val checkbox = container?.getChildAt(0) as? CheckBox
+        checkbox?.isChecked = true
+
+        assertEquals(false, dialog?.getButton(AlertDialog.BUTTON_POSITIVE)?.isEnabled)
     }
 
     @Test
-    fun alertDialogPositiveButtonEnableTest() {
+    fun buttonEnabledWhenCheckboxCheckedAndTextEntered() {
         val mContext = RuntimeEnvironment.getApplication().applicationContext
-        deleteHelper.askReasonAndExecute(media, mContext, "My Question", ReviewController.DeleteReason.COPYRIGHT_VIOLATION, callback)
-        deleteHelper.getListener()?.onClick(deleteHelper.getDialog(), 1, true)
-        assertEquals(true, deleteHelper.getDialog()?.getButton(AlertDialog.BUTTON_POSITIVE)?.isEnabled)
+        deleteHelper.askReasonAndExecute(
+            media,
+            mContext,
+            "My Question",
+            ReviewController.DeleteReason.SPAM,
+            callback
+        )
+
+        val dialog = deleteHelper.getDialog()
+        val container = dialog?.findViewById<LinearLayout>(R.id.checkboxContainer)
+        val checkbox = container?.getChildAt(0) as? CheckBox
+        checkbox?.isChecked = true
+
+        val editText = dialog?.findViewById<TextInputEditText>(R.id.otherNotesEditText)
+        editText?.setText("some justification")
+
+        assertEquals(true, dialog?.getButton(AlertDialog.BUTTON_POSITIVE)?.isEnabled)
     }
 
     @Test(expected = RuntimeException::class)

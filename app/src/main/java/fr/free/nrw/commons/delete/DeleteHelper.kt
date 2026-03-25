@@ -5,7 +5,13 @@ import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.net.Uri
+import android.text.Editable
+import android.text.TextWatcher
+import android.view.LayoutInflater
+import android.widget.CheckBox
+import android.widget.LinearLayout
 import androidx.appcompat.app.AlertDialog
+import com.google.android.material.textfield.TextInputEditText
 import fr.free.nrw.commons.BuildConfig
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.R
@@ -252,7 +258,6 @@ class DeleteHelper @Inject constructor(
         alert.setCancelable(false)
         alert.setTitle(question)
 
-        val checkedItems = booleanArrayOf(false, false, false, false)
         val mUserReason = arrayListOf<Int>()
 
         val reasonList: Array<String>
@@ -263,7 +268,8 @@ class DeleteHelper @Inject constructor(
                 reasonList = arrayOf(
                     context.getString(R.string.delete_helper_ask_spam_selfie),
                     context.getString(R.string.delete_helper_ask_spam_blurry),
-                    context.getString(R.string.delete_helper_ask_spam_nonsense)
+                    context.getString(R.string.delete_helper_ask_spam_nonsense),
+                    context.getString(R.string.delete_helper_ask_spam_other)
                 )
                 reasonListEnglish = arrayOf(
                     getLocalizedResources(context, Locale.ENGLISH)
@@ -271,7 +277,9 @@ class DeleteHelper @Inject constructor(
                     getLocalizedResources(context, Locale.ENGLISH)
                         .getString(R.string.delete_helper_ask_spam_blurry),
                     getLocalizedResources(context, Locale.ENGLISH)
-                        .getString(R.string.delete_helper_ask_spam_nonsense)
+                        .getString(R.string.delete_helper_ask_spam_nonsense),
+                    getLocalizedResources(context, Locale.ENGLISH)
+                        .getString(R.string.delete_helper_ask_spam_other)
                 )
             }
             ReviewController.DeleteReason.COPYRIGHT_VIOLATION -> {
@@ -302,20 +310,48 @@ class DeleteHelper @Inject constructor(
             }
         }
 
-        alert.setMultiChoiceItems(
-            reasonList,
-            checkedItems
-        ) { dialogInterface, position, isChecked ->
-            if (isChecked) {
-                mUserReason.add(position)
-            } else {
-                mUserReason.remove(position)
+        // Inflate custom layout
+        val inflater = LayoutInflater.from(context)
+        val customView = inflater.inflate(R.layout.dialog_deletion_reason, null)
+        val checkboxContainer = customView.findViewById<LinearLayout>(R.id.checkboxContainer)
+        val otherNotesEditText = customView.findViewById<TextInputEditText>(R.id.otherNotesEditText)
+
+        // Function to update OK button state
+        fun updateOkButtonState() {
+            val hasSelection = mUserReason.isNotEmpty()
+            val hasText = !otherNotesEditText?.text.isNullOrBlank()
+
+            d?.getButton(AlertDialog.BUTTON_POSITIVE)?.isEnabled = hasSelection && hasText
+        }
+
+        // Create checkboxes dynamically
+        val checkBoxes = mutableListOf<CheckBox>()
+        reasonList.forEachIndexed { index, reason ->
+            val checkBox = CheckBox(context)
+            checkBox.text = reason
+            checkBox.setOnCheckedChangeListener { _, isChecked ->
+                if (isChecked) {
+                    mUserReason.add(index)
+                } else {
+                    mUserReason.remove(index)
+                }
+                updateOkButtonState()
+            }
+            checkBoxes.add(checkBox)
+            checkboxContainer.addView(checkBox)
+        }
+
+        // Add text watcher for other notes field
+        otherNotesEditText?.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                updateOkButtonState()
             }
 
-            // Safely enable or disable the OK button based on selection
-            val dialog = dialogInterface as? AlertDialog
-            dialog?.getButton(AlertDialog.BUTTON_POSITIVE)?.isEnabled = mUserReason.isNotEmpty()
-        }
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+        })
+
+        alert.setView(customView)
 
         alert.setPositiveButton(context.getString(R.string.ok)) { _, _ ->
             reviewCallback.disableButtons()
@@ -327,11 +363,20 @@ class DeleteHelper @Inject constructor(
                 )
                 append(" ")
 
-                mUserReason.forEachIndexed { index, position ->
+                mUserReason.sorted().forEachIndexed { index, position ->
                     append(reasonListEnglish[position])
                     if (index != mUserReason.lastIndex) {
                         append(", ")
                     }
+                }
+
+                // Add other notes if provided
+                val otherNotes = otherNotesEditText?.text?.toString()?.trim()
+                if (!otherNotes.isNullOrBlank()) {
+                    if (mUserReason.isNotEmpty()) {
+                        append(". ")
+                    }
+                    append(otherNotes)
                 }
             }
 

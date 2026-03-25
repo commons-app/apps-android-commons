@@ -150,6 +150,7 @@
   <string name="no_uploads_yet">Још увек нисте отпремили ниједну фотографију.</string>
   <string name="menu_retry_upload">Покушај поново</string>
   <string name="menu_cancel_upload">Откажи</string>
+  <string name="language_search_recent_searches">Скорашње претраге</string>
   <string name="language_search_all_languages">Сви језици</string>
   <string name="media_upload_policy">Слањем ове слике, ја тврдим да је у питању мој рад, да не садржи материјал или селфије заштићене ауторским правима, те да је на остале начине у складу са &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;смерницама Викимедијине оставе&lt;/a&gt;.</string>
   <string name="menu_download">Преузми</string>
@@ -212,6 +213,7 @@
   <string name="media_detail_description">Опис</string>
   <string name="media_detail_discussion">Дискусија</string>
   <string name="media_detail_author">Аутор</string>
+  <string name="media_detail_uploader">Пошиљалац</string>
   <string name="media_detail_uploaded_date">Датум отпремања</string>
   <string name="media_detail_license">Лиценца</string>
   <string name="media_detail_coordinates">Координате</string>
@@ -219,6 +221,7 @@
   <string name="become_a_tester_title">Постаните бета-тестер</string>
   <string name="become_a_tester_description">Прикључите се нашем каналу бета верзија на Google Play-у и раније приступајте новим функцијама и исправкама грешака</string>
   <string name="_2fa_code">2FA код</string>
+  <string name="email_auth_code">Имејл верификациони код</string>
   <string name="logout_verification">Заиста желите да се одјавите?</string>
   <string name="no_subcategory_found">Поткатегорије нису пронађене</string>
   <string name="no_parentcategory_found">Надређене категорије нису пронађене</string>
@@ -364,6 +367,7 @@
   <string name="delete">Избриши</string>
   <string name="Achievements">Достигнућа</string>
   <string name="Profile">Профил</string>
+  <string name="badges">Значке</string>
   <string name="statistics_thanks">Захваљивања</string>
   <string name="statistics_featured">Изабране слике</string>
   <string name="statistics_wikidata_edits">Слике преко „Места у близини”</string>
@@ -432,6 +436,7 @@
   <string name="ends_on">Завршава:</string>
   <string name="display_campaigns">Прикажи кампање</string>
   <string name="display_campaigns_explanation">Погледајте текуће кампање</string>
+  <string name="show_deletion_button">Прикажи дугме за брисање</string>
   <string name="in_app_camera_location_access_explanation">Дозволите апликацији да прибави локацију у случају да је камера не сними. Камере на неким уређајима је не снимају. У овим случајевима, давање апликацији да прибави и закачи локацију чини ваш допринос кориснијим. Ово можете променити било када у подешавањима.</string>
   <string name="option_allow">Дозволи</string>
   <string name="option_dismiss">Одбаци</string>
@@ -668,6 +673,7 @@
   <string name="contributions_of_user">Доприноси корисника/це: %1$s</string>
   <string name="achievements_of_user">Достигнућа корисника/це: %1$s</string>
   <string name="menu_view_user_page">Прикажи корисничку страницу</string>
+  <string name="edit_depictions">Уреди приказе</string>
   <string name="edit_categories">Измени категорије</string>
   <string name="advanced_options">Напредне опције</string>
   <string name="apply">Примени</string>
@@ -743,14 +749,29 @@
   <string name="uploads">Отпремања</string>
   <string name="pending">На чекању</string>
   <string name="failed">Није успело</string>
+  <string name="custom_selector_delete_folder">Обриши фасциклу</string>
+  <string name="custom_selector_confirm_deletion_title">Потврди брисање</string>
+  <string name="custom_selector_delete">Обриши</string>
+  <string name="custom_selector_cancel">Откажи</string>
+  <string name="custom_selector_folder_deleted_success">Фасцикла %1$s успешно обрисана</string>
   <string name="green_pin">Ово место већ има слику</string>
   <string name="grey_pin">Проверавање да ли ово место има слику.</string>
+  <string name="error_while_loading">Грешка при учитавању</string>
+  <string name="no_usages_found">Не користи се</string>
+  <string name="usages_on_commons_heading">Остава</string>
+  <string name="usages_on_other_wikis_heading">Други викији</string>
+  <string name="file_usages_container_heading">Употреба датотеке</string>
   <string name="account">Налог</string>
   <string name="vanish_account">Учтиви нестанак</string>
+  <string name="account_vanish_request_confirm_title">Упозорење у вези нестајања</string>
   <string name="account_vanish_request_confirm">Нестајање је &lt;b&gt;последња опција&lt;/b&gt; и треба је користити &lt;b&gt;само када желите да заувек престанете са уређивањем&lt;/b&gt;, као и да сакријете што више својих прошлих асоцијација.&lt;br/&gt;&lt;br/&gt;Брисање налога на Викимедијној остави се врши променом назива налога тако да други не могу да препознају Ваше доприносе у процесу који се зове учтиви нестанак. &lt;b&gt;Нестајање не гарантује потпуну анонимност и не уклања доприносе на пројектима&lt;/b&gt;.</string>
   <string name="caption">Поднапис</string>
   <string name="caption_copied_to_clipboard">Поднапис копиран</string>
   <string name="image_tag_line_created_and_uploaded_by">Направио и отпремио: %1$s</string>
   <string name="image_tag_line_created_by_and_uploaded_by">Направио %1$s а отпремио %2$s</string>
   <string name="nominated_for_deletion_btn">Номинуј за брисање</string>
+  <string name="license_cc0_description">Без ауторских права. Одричете се свих права и свако може користити овај рад како год.</string>
+  <string name="license_cc_by_description">Ауторство. Други могу делити и мењати докле год вас наводе као аутора.</string>
+  <string name="license_cc_by_sa_description">Ауторство-Делити под истим условима. Други могу делити и мењати али под истом лиценцом и наводити вас као аутора.</string>
+  <string name="license_cc0_long_description">Ова лиценца дозвољава безусловно дељење, мењање и коришћење у другим материјалима и било ком медију [CD, флеш] или формату.</string>
 </resources>
