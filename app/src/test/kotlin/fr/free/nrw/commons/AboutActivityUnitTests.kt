@@ -1,9 +1,8 @@
 package fr.free.nrw.commons
 
 import android.content.Context
+import android.content.Intent
 import android.net.Uri
-import android.view.Menu
-import android.view.MenuItem
 import androidx.test.core.app.ApplicationProvider
 import org.junit.Assert
 import org.junit.Before
@@ -14,16 +13,21 @@ import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.Shadows
 import org.robolectric.annotation.Config
-import org.robolectric.fakes.RoboMenu
-import org.robolectric.fakes.RoboMenuItem
 import org.robolectric.shadows.ShadowActivity
+import java.lang.reflect.Method
 
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
 class AboutActivityUnitTests {
     private lateinit var activity: AboutActivity
-
+    private lateinit var shadowActivity: ShadowActivity
     private lateinit var context: Context
+    private fun invokePrivateLaunchMethod(methodName: String) {
+        val method: Method =
+            AboutActivity::class.java.getDeclaredMethod(methodName, Context::class.java)
+        method.isAccessible = true
+        method.invoke(activity, activity)
+    }
 
     @Before
     fun setUp() {
@@ -32,6 +36,7 @@ class AboutActivityUnitTests {
         activity = Robolectric.buildActivity(AboutActivity::class.java).create().get()
 
         context = ApplicationProvider.getApplicationContext()
+        shadowActivity = Shadows.shadowOf(activity)
     }
 
     @Test
@@ -43,8 +48,7 @@ class AboutActivityUnitTests {
     @Test
     @Throws(Exception::class)
     fun testLaunchFacebook() {
-        activity.launchFacebook(null)
-        val shadowActivity: ShadowActivity = Shadows.shadowOf(activity)
+        invokePrivateLaunchMethod("launchFacebook")
         val startedIntent = shadowActivity.nextStartedActivity
         Assert.assertEquals(startedIntent.action, "android.intent.action.VIEW")
         Assert.assertEquals(startedIntent.`package`, "com.facebook.katana")
@@ -54,64 +58,68 @@ class AboutActivityUnitTests {
     @Test
     @Throws(Exception::class)
     fun testLaunchGithub() {
-        activity.launchGithub(null)
+        invokePrivateLaunchMethod("launchGithub")
+        Assert.assertEquals(shadowActivity.nextStartedActivity.action, "android.intent.action.VIEW")
     }
 
     @Test
     @Throws(Exception::class)
     fun testLaunchWebsite() {
-        activity.launchWebsite(null)
+        invokePrivateLaunchMethod("launchWebsite")
+        Assert.assertEquals(shadowActivity.nextStartedActivity.action, "android.intent.action.VIEW")
     }
 
     @Test
     @Throws(Exception::class)
     fun testLaunchRatings() {
-        activity.launchRatings(null)
+        invokePrivateLaunchMethod("launchRatings")
+        Assert.assertEquals(shadowActivity.nextStartedActivity.action, "android.intent.action.VIEW")
     }
 
     @Test
     @Throws(Exception::class)
     fun testLaunchCredits() {
-        activity.launchCredits(null)
+        invokePrivateLaunchMethod("launchCredits")
+        Assert.assertEquals(shadowActivity.nextStartedActivity.action, "android.intent.action.VIEW")
     }
 
     @Test
     @Throws(Exception::class)
     fun testLaunchPrivacyPolicy() {
-        activity.launchPrivacyPolicy(null)
+        invokePrivateLaunchMethod("launchPrivacyPolicy")
+        Assert.assertEquals(shadowActivity.nextStartedActivity.action, "android.intent.action.VIEW")
     }
 
     @Test
     @Throws(Exception::class)
     fun testLaunchUserGuide() {
-        activity.launchUserGuide(null)
+        invokePrivateLaunchMethod("launchUserGuide")
+        Assert.assertEquals(shadowActivity.nextStartedActivity.action, "android.intent.action.VIEW")
     }
 
     @Test
     @Throws(Exception::class)
     fun testLaunchFrequentlyAskedQuestions() {
-        activity.launchFrequentlyAskedQuesions(null)
+        invokePrivateLaunchMethod("launchFrequentlyAskedQuesions")
+        Assert.assertEquals(shadowActivity.nextStartedActivity.action, "android.intent.action.VIEW")
     }
 
     @Test
     @Throws(Exception::class)
-    fun testOnCreateOptionsMenu() {
-        val menu: Menu = RoboMenu(context)
-        activity.onCreateOptionsMenu(menu)
-    }
+    fun testShareApp() {
+        val method: Method = AboutActivity::class.java.getDeclaredMethod("shareApp")
+        method.isAccessible = true
+        method.invoke(activity)
 
-    @Test
-    @Throws(Exception::class)
-    fun testOnOptionsItemSelected() {
-        val menuItem: MenuItem = RoboMenuItem(R.menu.menu_about)
-        activity.onOptionsItemSelected(menuItem)
-        val shadowActivity = Shadows.shadowOf(activity)
-        shadowActivity.clickMenuItem(R.id.share_app_icon)
-    }
+        val startedIntent = shadowActivity.nextStartedActivity
+        val actualIntent = if (startedIntent.action == Intent.ACTION_CHOOSER) {
+            startedIntent.getParcelableExtra<Intent>(Intent.EXTRA_INTENT)
+        } else {
+            startedIntent
+        }
 
-    @Test
-    @Throws(Exception::class)
-    fun testOnSupportNavigateUp() {
-        activity.onSupportNavigateUp()
+        Assert.assertNotNull(actualIntent)
+        Assert.assertEquals(Intent.ACTION_SEND, actualIntent?.action)
+        Assert.assertEquals("text/plain", actualIntent?.type)
     }
 }
