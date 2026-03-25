@@ -33,6 +33,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.net.toUri
 import fr.free.nrw.commons.theme.BaseActivity
+import fr.free.nrw.commons.theme.CommonsTheme
 import fr.free.nrw.commons.ui.widget.HtmlTextView
 import fr.free.nrw.commons.utils.ConfigUtils.getVersionNameWithSha
 import fr.free.nrw.commons.utils.DialogUtil.showAlertDialog
@@ -140,24 +141,6 @@ class AboutActivity : BaseActivity() {
         )
     }
 }
-//custom theme wrapper to centralize the color logic
-@Composable
-fun CommonsTheme(content: @Composable () -> Unit) {
-    val isDarkTheme = isSystemInDarkTheme()
-    val background = if (isDarkTheme) colorResource(R.color.main_background_dark) else colorResource(R.color.main_background_light)
-
-    val colorScheme = if (isDarkTheme) {
-        darkColorScheme(primary = colorResource(R.color.primaryColor), background = background, onBackground = Color.White)
-    } else {
-        lightColorScheme(primary = colorResource(R.color.primaryColor), background = background, onBackground = Color.Black)
-    }
-
-    MaterialTheme(colorScheme = colorScheme) {
-        Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
-            content()
-        }
-    }
-}
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -227,7 +210,7 @@ fun AboutScreen(
             Card(
                 modifier = Modifier.fillMaxWidth(),
                 shape = RoundedCornerShape(16.dp),
-                colors = CardDefaults.cardColors(containerColor = if (isSystemInDarkTheme()) Color(0xFF1E1E1E) else Color.White),
+                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant),
                 elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
             ) {
                 Column {
