@@ -42,7 +42,7 @@ public class PlacesLocalDataSource {
 
         if (mapBottomLeft == null || mapTopRight == null) {
             Timber.e("Map boundaries are null, returning empty list.");
-            return new ArrayList<>(); // returnn empty list instead of crashing
+            return new ArrayList<>(); // return empty list instead of crashing
         }
 
         class Constraint {

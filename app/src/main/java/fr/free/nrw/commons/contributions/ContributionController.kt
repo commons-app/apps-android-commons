@@ -353,7 +353,7 @@ class ContributionController @Inject constructor(@param:Named("default_preferenc
         handleActivityResult.onHandleActivityResult(object : DefaultCallback() {
             override fun onCanceled(source: FilePicker.ImageSource, type: Int) {
                 super.onCanceled(source, type)
-                isInternalUploadInProgress = false //resett flag on cancel
+                isInternalUploadInProgress = false // reset flag on cancel
                 defaultKvStore.remove(PLACE_OBJECT)
             }
 
