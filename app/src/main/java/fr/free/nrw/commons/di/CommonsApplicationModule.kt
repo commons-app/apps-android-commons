@@ -5,6 +5,7 @@ import android.content.ContentProviderClient
 import android.content.ContentResolver
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
+import android.database.sqlite.SQLiteDatabase.openDatabase
 import android.view.inputmethod.InputMethodManager
 import androidx.collection.LruCache
 import androidx.room.Room.databaseBuilder
@@ -201,7 +202,8 @@ open class CommonsApplicationModule(private val applicationContext: Context) {
         "commons_room.db"
     ).addMigrations(
         MIGRATION_1_2,
-        MIGRATION_19_TO_20
+        MIGRATION_19_TO_20,
+        MIGRATION_21_22
     ).fallbackToDestructiveMigration().build()
 
     @Provides
@@ -357,3 +359,114 @@ open class CommonsApplicationModule(private val applicationContext: Context) {
         }
     }
 }
+
+val MIGRATION_21_22 = object : Migration(21, 22) {
+    override fun migrate(db: SupportSQLiteDatabase) {
+        db.execSQL(
+            """
+                    CREATE TABLE IF NOT EXISTS `categories` (
+                        `_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+                        `name` TEXT NOT NULL,
+                        `description` TEXT,
+                        `thumbnail` TEXT,
+                        `last_used` INTEGER,
+                        `times_used` INTEGER NOT NULL DEFAULT 0
+                    )
+                    """.trimIndent()
+        )
+
+        db.execSQL(
+            """
+                    CREATE TABLE IF NOT EXISTS `bookmarks` (
+                        `media_name` TEXT NOT NULL,
+                        `media_creator` TEXT,
+                        PRIMARY KEY(`media_name`)
+                    )
+                    """.trimIndent()
+        )
+
+        db.execSQL(
+            """
+                    CREATE TABLE IF NOT EXISTS `bookmarksItems` (
+                        `item_name` TEXT NOT NULL,
+                        `item_description` TEXT,
+                        `item_image_url` TEXT,
+                        `item_instance_of` TEXT NOT NULL,
+                        `item_name_categories` TEXT NOT NULL,
+                        `item_description_categories` TEXT NOT NULL,
+                        `item_thumbnail_categories` TEXT NOT NULL,
+                        `item_is_selected` INTEGER NOT NULL,
+                        `item_id` TEXT NOT NULL,
+                        PRIMARY KEY(`item_id`)
+                    )
+                    """.trimIndent()
+        )
+
+        db.execSQL(
+            """
+                    CREATE TABLE IF NOT EXISTS `recent_searches` (
+                        `_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+                        `name` TEXT NOT NULL,
+                        `last_used` INTEGER NOT NULL
+                    )
+                    """.trimIndent()
+        )
+
+        db.execSQL(
+            """
+                    CREATE TABLE IF NOT EXISTS `recent_languages` (
+                        `language_name` TEXT NOT NULL,
+                        `language_code` TEXT NOT NULL,
+                        PRIMARY KEY(`language_code`)
+                    )
+                    """.trimIndent()
+        )
+        // copying data from old "commons.db"  to new "commons_room.db".
+        try {
+            val legacyDbPath = db.path!!.replace("commons_room.db", "commons.db")
+            val oldDb = openDatabase(
+                legacyDbPath, null, SQLiteDatabase.OPEN_READONLY
+            )
+
+            val tablesToCopy = listOf(
+                "categories", "bookmarks", "bookmarksItems",
+                "recent_searches", "recent_languages"
+            )
+
+            for (tableName in tablesToCopy) {
+                val cursor = oldDb.rawQuery("SELECT * FROM ${tableName}", null)
+                val columns = cursor.columnNames
+                val placeholders = columns.joinToString(",") { "?" }
+                val insertSql =
+                    "INSERT OR IGNORE INTO ${tableName} (${columns.joinToString(",")}) VALUES ($placeholders)"
+
+                while (cursor.moveToNext()) {
+                    val bindArgs = Array<Any?>(columns.size) { i ->
+                        when (cursor.getType(i)) {
+                            android.database.Cursor.FIELD_TYPE_INTEGER -> cursor.getLong(
+                                i
+                            )
+
+                            android.database.Cursor.FIELD_TYPE_FLOAT -> cursor.getDouble(
+                                i
+                            )
+
+                            android.database.Cursor.FIELD_TYPE_STRING -> cursor.getString(
+                                i
+                            )
+
+                            android.database.Cursor.FIELD_TYPE_BLOB -> cursor.getBlob(i)
+                            else -> null
+                        }
+                    }
+                    db.execSQL(insertSql, bindArgs)
+                }
+                cursor.close()
+            }
+            oldDb.close()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+}
+
