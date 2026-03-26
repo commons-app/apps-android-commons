@@ -41,7 +41,7 @@ fun WelcomeDoUploadPage() {
 
         Image(
             painter = painterResource(id = R.drawable.welcome_do_upload),
-            contentDescription = stringResource(id = R.string.welcome_image_welcome_wikipedia),
+            contentDescription = stringResource(id = R.string.welcome_do_upload_content_description),
             modifier = Modifier
                 .size(if (isLandscape) 200.dp else 300.dp),
             contentScale = ContentScale.Fit

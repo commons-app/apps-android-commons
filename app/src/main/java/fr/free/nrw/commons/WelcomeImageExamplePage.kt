@@ -39,7 +39,7 @@ fun WelcomeImageExamplePage() {
 
             Image(
                 painter = painterResource(id = R.drawable.welcome_image_example),
-                contentDescription = stringResource(id = R.string.welcome_image_welcome_wikipedia),
+                contentDescription = stringResource(id = R.string.welcome_image_sydney_opera_house),
                 modifier = Modifier
                     .size(if (isLandscape) 200.dp else 300.dp),
                 contentScale = ContentScale.Fit

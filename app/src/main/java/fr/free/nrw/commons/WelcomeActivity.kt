@@ -20,7 +20,7 @@ class WelcomeActivity : BaseActivity() {
             MaterialTheme {
                 WelcomeScreen(
                     isBetaFlavour = isBetaFlavour,
-                    pageCount = 4,
+                    pageCount = 5,
                     onSkipClicked = { finishTutorial() },
                     onBackPressedAtStart = { handleBackAtStart() }
                 )

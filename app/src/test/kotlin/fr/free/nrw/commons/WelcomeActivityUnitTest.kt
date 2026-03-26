@@ -1,7 +1,6 @@
 package fr.free.nrw.commons
 
 import android.content.Intent
-import android.widget.TextView
 import fr.free.nrw.commons.quiz.QuizActivity
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
@@ -13,7 +12,6 @@ import org.robolectric.RobolectricTestRunner
 import org.robolectric.Shadows.shadowOf
 import org.robolectric.annotation.Config
 import org.robolectric.shadows.ShadowActivity
-import org.robolectric.shadows.ShadowIntent
 
 /**
  * Tests Welcome Activity Methods
@@ -21,22 +19,23 @@ import org.robolectric.shadows.ShadowIntent
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
 class WelcomeActivityUnitTest {
+
     private lateinit var activity: WelcomeActivity
-    private lateinit var finishTutorialButton: TextView
 
     /**
-     * Setup the Class and Views for Test
+     * Setup the Class and Activity for Test
      * Initialise the activity with isQuiz as true for Intent Extra
      */
     @Before
     fun setUp() {
         val intent = Intent().putExtra("isQuiz", true)
-        activity =
-            Robolectric
-                .buildActivity(WelcomeActivity::class.java, intent)
-                .get()
-        activity.onCreate(null)
-        finishTutorialButton = activity.findViewById(R.id.finishTutorialButton)
+        activity = Robolectric
+            .buildActivity(WelcomeActivity::class.java, intent)
+            .setup() // setup() automatically calls onCreate, onStart, onResume
+            .get()
+
+        // REMOVED: finishTutorialButton = activity.findViewById...
+        // (Compose UI cannot be found with XML IDs)
     }
 
     /**
@@ -57,18 +56,13 @@ class WelcomeActivityUnitTest {
         activity.onDestroy()
         val shadowActivity: ShadowActivity = shadowOf(activity)
         val startedIntent = shadowActivity.nextStartedActivity
-        val shadowIntent: ShadowIntent = shadowOf(startedIntent)
-        assertEquals(shadowIntent.intentClass, QuizActivity::class.java)
+
+        assertNotNull("Intent should not be null", startedIntent)
+        assertEquals(QuizActivity::class.java.name, startedIntent.component?.className)
     }
 
-    /**
-     * Checks if the finish Tutorial Button executes the finishTutorial method without any errors
-     */
-    @Test
-    @Throws(Exception::class)
-    fun testFinishTutorial() {
-        finishTutorialButton.performClick()
-    }
+    // REMOVED: testFinishTutorial()
+    // UI clicks are now handled exclusively by the Compose Test Rule in the androidTest folder.
 
     /**
      * Checks if the onBackPressed method executes without any errors
@@ -76,6 +70,6 @@ class WelcomeActivityUnitTest {
     @Test
     @Throws(Exception::class)
     fun testOnBackPressed() {
-        activity.onBackPressed()
+        activity.onBackPressedDispatcher.onBackPressed()
     }
 }
