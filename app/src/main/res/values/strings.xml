@@ -74,7 +74,7 @@
   <string name="updating_caption_message">Please wait…</string>
   <string name="login_success">Log-in success!</string>
   <string name="login_failed">Log-in failed!</string>
-  <string name="upload_failed">File not found. Please try another file.</string>
+  <string name="upload_failed">Upload failed. Please try another file.</string>
   <string name="retry_limit_reached">Maximum retry limit reached! Please cancel the upload and try again</string>
   <string name="unrestricted_battery_mode">Turn battery optimization off?</string>
   <string name="suggest_unrestricted_mode">Uploading more than 3 images works more reliably when the battery optimization is turned off. Please turn battery optimization off for the Commons app from the settings for a smooth upload experience. \n\nPossible steps to turn battery optimization off:\n\nStep 1: Tap on the \'Settings\' button below.\n\nStep 2: Switch from \'Not optimized\' to \'All apps\'.\n\nStep 3: Search for \"Commons\" or \"fr.free.nrw.commons\".\n\nStep 4: Tap it and select \'Don\'t optimize\'.\n\nStep 5: Press \'Done\'.</string>
@@ -249,7 +249,7 @@
   <string name="navigation_item_info">Tutorial</string>
   <string name="navigation_item_notification">Notifications</string>
   <string name="navigation_item_review">Review</string>
-  <string name="no_description_found">no description found</string>
+  <string name="no_description_found">No description found</string>
   <string name="nearby_info_menu_commons_article">Commons file page</string>
   <string name="nearby_info_menu_wikidata_article">Wikidata item</string>
   <string name="nearby_info_menu_wikipedia_article">Wikipedia article</string>
@@ -614,7 +614,7 @@ Upload your first media by tapping on the add button.</string>
   <string name="account_created">Account created!</string>
   <string name="text_copy">Text copied to clipboard</string>
   <string name="notification_mark_read">Notification marked as read</string>
-  <string name="some_error">There was some error!</string>
+  <string name="some_error">Something went wrong. Please try again</string>
   <string name="place_state">Place state:</string>
   <string name="place_state_exists">Exists</string>
   <string name="place_state_needs_photo">Needs Photo</string>
@@ -852,7 +852,7 @@ Upload your first media by tapping on the add button.</string>
   <string name="cancelling_all_the_uploads">Cancelling all the uploads...</string>
   <string name="uploads">Uploads</string>
   <string name="pending">Pending</string>
-  <string name="failed">Failed</string>
+  <string name="failed">Operation Failed</string>
   <string name="could_not_load_place_data">Could not load place data</string>
   <string name="warning_for_no_option_selected">Select any one of the option to answer the question</string>
 
