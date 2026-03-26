@@ -554,6 +554,7 @@
   <string name="delete_helper_ask_spam_selfie">未在任何條目中使用的自拍照</string>
   <string name="delete_helper_ask_spam_blurry">完全糢糊</string>
   <string name="delete_helper_ask_spam_nonsense">無意義，無法使用在任何條目</string>
+  <string name="delete_helper_ask_spam_other">其它</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">新聞照片</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">來自網路的隨機照片</string>
   <string name="delete_helper_ask_reason_copyright_logo">標誌</string>

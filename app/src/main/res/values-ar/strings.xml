@@ -582,6 +582,8 @@
   <string name="delete_helper_ask_spam_selfie">سيلفي</string>
   <string name="delete_helper_ask_spam_blurry">ضبابية</string>
   <string name="delete_helper_ask_spam_nonsense">كلام فارغ</string>
+  <string name="delete_helper_ask_spam_other">أخرى: حدد أدناه</string>
+  <string name="delete_helper_other_notes_hint">التبرير</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">اضغط على الصورة</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">صورة عشوائية من الإنترنت</string>
   <string name="delete_helper_ask_reason_copyright_logo">شعار</string>

@@ -549,6 +549,7 @@
   <string name="delete_helper_ask_spam_selfie">hiçbir maddede kullanılmayan bir selfie</string>
   <string name="delete_helper_ask_spam_blurry">tamamen bulanık</string>
   <string name="delete_helper_ask_spam_nonsense">anlamsız, herhangi bir makalede kesinlikle kullanılamaz</string>
+  <string name="delete_helper_ask_spam_other">Diğer</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">Basın fotoğrafı</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">İnternetten rastgele fotoğraf</string>
   <string name="delete_helper_ask_reason_copyright_logo">Logo</string>
