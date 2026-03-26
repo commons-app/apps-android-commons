@@ -449,6 +449,9 @@ Upload your first media by tapping on the add button.</string>
 
   <string name="no_depictions_selected">No Depictions Selected</string>
   <string name="no_depictions_selected_warning_desc">Images with depictions are more easily found and more likely to be used. Are you sure you want to continue without selecting depictions?</string>
+  <string name="depictions_choose_from_map">Choose from map</string>
+  <string name="depictions_map_confirm">Confirm</string>
+  <string name="depictions_map_no_photo_location">Photo has no location, showing your current location</string>
 
   <string name="back_button_warning">Cancel Upload</string>
   <string name="back_button_warning_desc">Using the back button will cancel this upload and you will lose your progress</string>
@@ -569,6 +572,8 @@ Upload your first media by tapping on the add button.</string>
   <string name="delete_helper_ask_spam_selfie">a selfie which is not used in any article</string>
   <string name="delete_helper_ask_spam_blurry">totally blurry</string>
   <string name="delete_helper_ask_spam_nonsense">nonsense, absolutely unusable in any article</string>
+  <string name="delete_helper_ask_spam_other">Other: specify below</string>
+  <string name="delete_helper_other_notes_hint">Justification</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">Press photo</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">Random photo from internet</string>
   <string name="delete_helper_ask_reason_copyright_logo">Logo</string>
