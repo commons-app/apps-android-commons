@@ -525,6 +525,7 @@
   <string name="delete_helper_ask_spam_selfie">swafoto yang tidak digunakan di artikel mana pun</string>
   <string name="delete_helper_ask_spam_blurry">buram sekali</string>
   <string name="delete_helper_ask_spam_nonsense">omong kosong, sama sekali tak bisa digunakan dalam artikel manapun</string>
+  <string name="delete_helper_ask_spam_other">Lainnya</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">Tekan foto</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">Foto acak dari internet</string>
   <string name="delete_helper_ask_reason_copyright_logo">Logo</string>
