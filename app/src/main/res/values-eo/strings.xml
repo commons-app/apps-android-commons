@@ -518,6 +518,7 @@
   <string name="delete_helper_ask_spam_selfie">memfoto kiu ne estas uzata en iu ajn artikolo</string>
   <string name="delete_helper_ask_spam_blurry">tute malklara</string>
   <string name="delete_helper_ask_spam_nonsense">volapukaĵo, absolute neuzebla en iu ajn artikolo</string>
+  <string name="delete_helper_ask_spam_other">Alia</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">Gazetara showImageWithItem</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">Hazarda foto el Interreto</string>
   <string name="delete_helper_ask_reason_copyright_logo">Emblemo</string>
