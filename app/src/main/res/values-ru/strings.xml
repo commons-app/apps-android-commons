@@ -586,6 +586,7 @@
   <string name="delete_helper_ask_spam_selfie">селфи, которое не используется ни в одной статье</string>
   <string name="delete_helper_ask_spam_blurry">полностью размыто</string>
   <string name="delete_helper_ask_spam_nonsense">бессмыслица, абсолютно неуместная ни в какой статье</string>
+  <string name="delete_helper_ask_spam_other">Другое</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">Новостное фото</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">Случайное фото из интернет</string>
   <string name="delete_helper_ask_reason_copyright_logo">Логотип</string>
