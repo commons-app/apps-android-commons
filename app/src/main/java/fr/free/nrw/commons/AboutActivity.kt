@@ -10,6 +10,7 @@ import androidx.activity.compose.setContent
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -32,8 +33,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.net.toUri
-import fr.free.nrw.commons.theme.BaseActivity
-import fr.free.nrw.commons.theme.CommonsTheme
+import fr.free.nrw.commons.theme.*
 import fr.free.nrw.commons.ui.widget.HtmlTextView
 import fr.free.nrw.commons.utils.ConfigUtils.getVersionNameWithSha
 import fr.free.nrw.commons.utils.DialogUtil.showAlertDialog
@@ -55,6 +55,7 @@ data class AboutActions(
     val onFaq: () -> Unit
 )
 
+data class AboutLinkItem(val textRes: Int, val onClick: () -> Unit)
 class AboutActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -127,8 +128,7 @@ class AboutActivity : BaseActivity() {
 
     internal fun launchTranslate() {
         val instance = CommonsApplication.instance
-        val sortedNames = instance.languageLookUpTable!!.getCanonicalNames().toMutableList()
-        Collections.sort(sortedNames)
+        val sortedNames = instance.languageLookUpTable!!.getCanonicalNames().toMutableList().apply { Collections.sort(this) }
         val spinner = android.widget.Spinner(this).apply {
             adapter = android.widget.ArrayAdapter(this@AboutActivity, android.R.layout.simple_spinner_dropdown_item, sortedNames)
         }
@@ -144,90 +144,87 @@ class AboutActivity : BaseActivity() {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AboutScreen(
-    version: String,
-    actions: AboutActions
-) {
-    val logoAlpha = remember { Animatable(0f) }
-    // smoooth fade in for the app logo on opening the screen
-    LaunchedEffect(Unit) {
-        logoAlpha.animateTo(1f, animationSpec = tween(1000))
+fun AboutScreen(version: String, actions: AboutActions) {
+    val logoAlpha = remember { Animatable(Spacing.none.value) }
+    LaunchedEffect(Unit) { logoAlpha.animateTo(1f, animationSpec = tween(1000)) }
+
+    val aboutLinks = remember {
+        listOf(
+            AboutLinkItem(R.string.about_rate_us, actions.onRateUs),
+            AboutLinkItem(R.string.user_guide, actions.onUserGuide),
+            AboutLinkItem(R.string.about_privacy_policy, actions.onPrivacyPolicy),
+            AboutLinkItem(R.string.about_translate, actions.onTranslate),
+            AboutLinkItem(R.string.about_credits, actions.onCredits),
+            AboutLinkItem(R.string.about_faq, actions.onFaq)
+        )
     }
 
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
                 title = {
-                    Text(text = stringResource(R.string.about), fontWeight = FontWeight.Bold, maxLines = 1,
-                        softWrap = false, style = MaterialTheme.typography.titleLarge)
+                    CommonsText(text = stringResource(R.string.about), preset = CommonsTextPreset.Title, color = TextWhite, fontWeight = FontWeight.Bold)
                 },
                 navigationIcon = {
                     IconButton(onClick = actions.onBackClick) {
-                        Icon(Icons.AutoMirrored.Filled.ArrowBack, null, tint = Color.White)
+                        Icon(Icons.AutoMirrored.Filled.ArrowBack, null, tint = TextWhite)
                     }
                 },
                 actions = {
                     IconButton(onClick = actions.onShareClick) {
-                        Icon(Icons.Default.Share, null, tint = Color.White)
+                        Icon(Icons.Default.Share, null, tint = TextWhite)
                     }
                 },
-                colors = TopAppBarDefaults.centerAlignedTopAppBarColors(containerColor = MaterialTheme.colorScheme.primary, titleContentColor = Color.White)
+                colors = TopAppBarDefaults.centerAlignedTopAppBarColors(containerColor = MaterialTheme.colorScheme.primary)
             )
         },
-        containerColor = Color.Transparent
+        containerColor = Transparent
     ) { padding ->
-        Column(
-            modifier = Modifier.fillMaxSize().padding(padding).verticalScroll(rememberScrollState()).padding(horizontal = 20.dp, vertical = 16.dp),
-            horizontalAlignment = Alignment.CenterHorizontally
+        LazyColumn(
+            modifier = Modifier.fillMaxSize().padding(padding),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            contentPadding = PaddingValues(horizontal = Spacing.large, vertical = Spacing.medium)
         ) {
-            Box(modifier = Modifier.alpha(logoAlpha.value)) {
-                Image(painter = painterResource(R.drawable.ic_launcher), contentDescription = stringResource(R.string.commons_logo),
-                    modifier = Modifier.size(110.dp).clip(CircleShape))
-            }
-
-            Text(text = stringResource(R.string.app_name), style = MaterialTheme.typography.headlineMedium,
-                fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.onBackground)
-
-            // tucked the version info inside a small pill shaped chip to look better
-            AssistChip(
-                onClick = { },
-                label = { Text(version, style = MaterialTheme.typography.labelSmall) },
-                colors = AssistChipDefaults.assistChipColors(labelColor = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.6f)),
-                modifier = Modifier.padding(top = 4.dp, bottom = 16.dp)
-            )
-
-            HtmlText(stringResource(R.string.about_license))
-            HtmlText(String.format(stringResource(R.string.about_improve), Urls.NEW_ISSUE_URL), Modifier.padding(top = 12.dp))
-
-            // grouped the social media icons in a neat row
-            Row(modifier = Modifier.padding(vertical = 24.dp), horizontalArrangement = Arrangement.spacedBy(28.dp)) {
-                EnhancedSocialIcon(R.drawable.ic_action_website, actions.onLaunchWebsite)
-                EnhancedSocialIcon(R.drawable.ic_action_facebook, actions.onLaunchFacebook)
-                EnhancedSocialIcon(R.drawable.ic_action_github, actions.onLaunchGithub)
-            }
-
-            // grouping the all link items into a single card layout
-            Card(
-                modifier = Modifier.fillMaxWidth(),
-                shape = RoundedCornerShape(16.dp),
-                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant),
-                elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
-            ) {
-                Column {
-                    EnhancedLinkRow(stringResource(R.string.about_rate_us), actions.onRateUs)
-                    DividerRow()
-                    EnhancedLinkRow(stringResource(R.string.user_guide), actions.onUserGuide)
-                    DividerRow()
-                    EnhancedLinkRow(stringResource(R.string.about_privacy_policy), actions.onPrivacyPolicy)
-                    DividerRow()
-                    EnhancedLinkRow(stringResource(R.string.about_translate), actions.onTranslate)
-                    DividerRow()
-                    EnhancedLinkRow(stringResource(R.string.about_credits), actions.onCredits)
-                    DividerRow()
-                    EnhancedLinkRow(stringResource(R.string.about_faq), actions.onFaq)
+            item {
+                Box(modifier = Modifier.alpha(logoAlpha.value)) {
+                    Image(painter = painterResource(R.drawable.ic_launcher),
+                        contentDescription = stringResource(R.string.commons_logo),
+                        modifier = Modifier.size(Dimensions.logoSize).clip(CircleShape))
+                }
+                CommonsText(text = stringResource(R.string.app_name),
+                    preset = CommonsTextPreset.Headline, fontWeight = FontWeight.Bold)
+                AssistChip(
+                    onClick = { },
+                    label = { CommonsText(text = version, preset = CommonsTextPreset.Caption,
+                        color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)) },
+                    modifier = Modifier.padding(top = Spacing.extraSmall, bottom = Spacing.medium)
+                )
+                HtmlText(stringResource(R.string.about_license))
+                HtmlText(String.format(stringResource(R.string.about_improve), Urls.NEW_ISSUE_URL),
+                    Modifier.padding(top = Spacing.medium))
+                Row(modifier = Modifier.padding(vertical = Spacing.extraLarge),
+                    horizontalArrangement = Arrangement.spacedBy(Spacing.huge)) {
+                    EnhancedSocialIcon(R.drawable.ic_action_website, actions.onLaunchWebsite)
+                    EnhancedSocialIcon(R.drawable.ic_action_facebook, actions.onLaunchFacebook)
+                    EnhancedSocialIcon(R.drawable.ic_action_github, actions.onLaunchGithub)
                 }
             }
-            Spacer(modifier = Modifier.height(32.dp))
+            item {
+                Card(
+                    modifier = Modifier.fillMaxWidth(),
+                    shape = RoundedCornerShape(Dimensions.cardCorner),
+                    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant),
+                    elevation = CardDefaults.cardElevation(defaultElevation = Dimensions.cardElevation)
+                ) {
+                    Column {
+                        aboutLinks.forEachIndexed { index, item ->
+                            EnhancedLinkRow(stringResource(item.textRes), item.onClick)
+                            if (index < aboutLinks.size - 1) DividerRow()
+                        }
+                    }
+                }
+            }
+            item { Spacer(modifier = Modifier.height(Spacing.huge)) }
         }
     }
 }
@@ -235,36 +232,39 @@ fun AboutScreen(
 @Composable
 fun EnhancedSocialIcon(drawableId: Int, onClick: () -> Unit) {
     val tint = MaterialTheme.colorScheme.primary
-    Surface(modifier = Modifier.size(52.dp).clickable { onClick() }, shape = CircleShape, color = tint.copy(alpha = 0.1f)
-    ) {
+    Surface(modifier = Modifier.size(Dimensions.socialIconBox).clickable { onClick() },
+        shape = CircleShape, color = tint.copy(alpha = 0.1f)) {
         Box(contentAlignment = Alignment.Center) {
-            Image(painter = painterResource(drawableId), contentDescription = null, colorFilter = ColorFilter.tint(tint), modifier = Modifier.size(28.dp))
+            Image(painter = painterResource(drawableId), contentDescription = null,
+                colorFilter = ColorFilter.tint(tint), modifier = Modifier.size(Dimensions.socialIcon))
         }
     }
 }
 
 @Composable
 fun EnhancedLinkRow(text: String, onClick: () -> Unit) {
-    Row(modifier = Modifier.fillMaxWidth().clickable { onClick() }.padding(16.dp), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.SpaceBetween) {
-        Text(text = text, style = MaterialTheme.typography.bodyLarge, color = MaterialTheme.colorScheme.onSurface)
-        Icon(imageVector = Icons.AutoMirrored.Filled.KeyboardArrowRight, contentDescription = null, tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.3f), modifier = Modifier.size(20.dp))
+    Row(modifier = Modifier.fillMaxWidth().clickable { onClick() }.padding(Spacing.medium),
+        verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.SpaceBetween) {
+        CommonsText(text = text, preset = CommonsTextPreset.Body)
+        Icon(imageVector = Icons.AutoMirrored.Filled.KeyboardArrowRight,
+            contentDescription = null, tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.3f), modifier = Modifier.size(Dimensions.linkIcon))
     }
 }
 
 @Composable
 fun DividerRow() {
-    HorizontalDivider(modifier = Modifier.padding(horizontal = 16.dp), thickness = 0.5.dp, color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.1f))
+    HorizontalDivider(modifier = Modifier.padding(horizontal = Spacing.medium),
+        thickness = Dimensions.dividerThickness, color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.1f))
 }
 
 @Composable
 fun HtmlText(html: String, modifier: Modifier = Modifier) {
-    val textColor = if (isSystemInDarkTheme()) android.graphics.Color.WHITE else android.graphics.Color.BLACK
-    // bridge thhe existing xml-based HtmlTextView into the compose ui
+    val textColor = MaterialTheme.colorScheme.onBackground
     AndroidView(
         modifier = modifier,
         factory = { context -> HtmlTextView(context).apply { gravity = android.view.Gravity.CENTER } },
         update = { view ->
-            view.setTextColor(textColor)
+            view.setTextColor(textColor.hashCode())
             view.setHtmlText(html)
         }
     )
