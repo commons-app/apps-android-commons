@@ -46,7 +46,7 @@ class BookmarkItemsTableTest : InMemoryDatabaseTest() {
         // Insert with legacy SQL
         db.execSQL("""
             INSERT INTO bookmarksItems (item_name, item_id, item_instance_of, item_name_categories, item_description_categories, item_thumbnail_categories, item_is_selected) 
-            VALUES ('Legacy Item', 'Q6789', 'Instance', 'Cat', 'Desc', 'Thumb', 'true');
+            VALUES ('Legacy Item', 'Q6789', 'Instance', 'Cat', 'Desc', 'Thumb', 1);
         """.trimIndent())
 
         val exists = dao.findBookmarkItem("Q6789")
@@ -54,6 +54,7 @@ class BookmarkItemsTableTest : InMemoryDatabaseTest() {
         val allItems = dao.getAll().blockingGet()
         assertEquals(1, allItems.size)
         assertEquals("Legacy Item", allItems[0].name)
+        assertTrue(allItems[0].isSelected)
         assertRowCount(BookmarkItemsTable.TABLE_NAME, 1)
     }
 
