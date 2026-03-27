@@ -376,6 +376,7 @@
   <string name="quiz_screenshot_question">Is deze screenshot OK om te uploaden?</string>
   <string name="share_app_title">Toepassing delen</string>
   <string name="rotate">Draaien</string>
+  <string name="crop">Bijsnijden</string>
   <string name="error_fetching_nearby_places">Kan plaatsen in de buurt niet laden</string>
   <string name="no_pictures_in_this_area">Geen foto\'s in dit gebied.</string>
   <string name="no_nearby_places_around">Geen plaatsen in de buurt</string>
@@ -443,6 +444,9 @@
   <string name="no_categories_selected_warning_desc">Afbeeldingen zonder categorieën zijn zelden bruikbaar. Weet je zeker dat je verder wilt gaan zonder categorieën te selecteren?</string>
   <string name="no_depictions_selected">Geen beschrijvingen geselecteerd</string>
   <string name="no_depictions_selected_warning_desc">Afbeeldingen met beschrijvingen zijn gemakkelijker te vinden en zullen eerder worden gebruikt. Weet u zeker dat u wilt doorgaan zonder beschrijvingen te selecteren?</string>
+  <string name="depictions_choose_from_map">Kies van de kaart</string>
+  <string name="depictions_map_confirm">Bevestigen</string>
+  <string name="depictions_map_no_photo_location">De foto heeft geen locatie en geef uw huidige locatie weer</string>
   <string name="back_button_warning">Uploaden Annuleren</string>
   <string name="back_button_warning_desc">Als u de terug-knop gebruikt, wordt deze upload geannuleerd en verliest u uw voortgang</string>
   <string name="back_button_continue">Doorgaan met Uploaden</string>
@@ -551,6 +555,7 @@
   <string name="delete_helper_ask_spam_selfie">een selfie die in geen enkel artikel wordt gebruikt</string>
   <string name="delete_helper_ask_spam_blurry">helemaal wazig</string>
   <string name="delete_helper_ask_spam_nonsense">onzin, absoluut onbruikbaar in elk artikel</string>
+  <string name="delete_helper_ask_spam_other">Overige</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">Persfoto</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">Willekeurige foto van internet</string>
   <string name="delete_helper_ask_reason_copyright_logo">Logo</string>
@@ -825,6 +830,7 @@
   <string name="pending">In behandeling</string>
   <string name="failed">Mislukt</string>
   <string name="could_not_load_place_data">Plaatsgegevens konden niet geladen worden</string>
+  <string name="warning_for_no_option_selected">Selecteer een van de opties om de vraag te beantwoorden</string>
   <string name="custom_selector_delete_folder">Map verwijderen</string>
   <string name="custom_selector_confirm_deletion_title">Bevestig verwijdering</string>
   <string name="custom_selector_confirm_deletion_message">Weet u zeker dat u de map %1$s met %2$d onderdelen wilt verwijderen?</string>
@@ -855,4 +861,11 @@
   <string name="image_tag_line_created_by_and_uploaded_by">Gemaakt door %1$s en geüpload %2$s</string>
   <string name="nominated_for_deletion_btn">Genomineerd voor verwijdering</string>
   <string name="custom_selector_max_image_limit_reached">U kunt maximaal %d afbeeldingen selecteren.</string>
+  <string name="edit_unsupported_format_explanation">&amp;nbsp;</string>
+  <string name="license_cc0_description">Geen auteursrecht. U doet afstand van alle rechten, zodat iedereen dit werk op elke gewenste manier kan gebruiken.</string>
+  <string name="license_cc_by_description">Naamsvermelding is vereist. Anderen mogen het materiaal delen en aanpassen, zolang ze u maar als bron vermelden.</string>
+  <string name="license_cc_by_sa_description">Naamsvermelding-delen-gelijk. Anderen mogen het delen en aanpassen, maar moeten dezelfde licentie gebruiken en u als auteur vermelden.</string>
+  <string name="license_cc0_long_description">Deze licentie geeft gebruikers het recht om het materiaal in elk medium of formaat te verspreiden, te remixen, aan te passen en erop voort te bouwen, zonder enige voorwaarden.</string>
+  <string name="license_cc_by_long_description">Deze licentie geeft gebruikers het recht om het materiaal te verspreiden, te remixen, aan te passen en erop voort te bouwen in elk medium of formaat, zelfs voor commerciële doeleinden, zolang de maker maar wordt vermeld.</string>
+  <string name="license_cc_by_sa_long_description">Deze licentie geeft gebruikers het recht om het materiaal te verspreiden, te remixen, aan te passen en erop voort te bouwen in elk medium of formaat, zelfs voor commerciële doeleinden, zolang de maker wordt vermeld en het nieuwe werk onder dezelfde voorwaarden wordt gelicenseerd.</string>
 </resources>

@@ -1,5 +1,20 @@
 # Wikimedia Commons for Android
 
+## v6.4.0
+
+### What's changed
+* Users can now crop their images during the upload process without leaving the app
+* Bug fixes and stability improvements
+
+**Full Changelog**: https://github.com/commons-app/apps-android-commons/compare/v6.3.0...v6.4.0
+
+## v6.3.0
+
+### What's changed
+* Caption and description are now accessible on all screen sizes
+* Custom author name no longer results into invalid URLs on Commons and redirect to the actual user profile
+* Bug fixes and stability improvements
+
 ## v6.2.1
 
 ### What's changed
