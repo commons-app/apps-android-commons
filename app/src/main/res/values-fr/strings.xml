@@ -568,6 +568,7 @@
   <string name="delete_helper_ask_spam_selfie">un selfie qui n’est utilisé dans aucun article</string>
   <string name="delete_helper_ask_spam_blurry">totalement flou</string>
   <string name="delete_helper_ask_spam_nonsense">non-sens, absolument inutilisable dans n’importe quel article</string>
+  <string name="delete_helper_ask_spam_other">Autre</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">Photo de presse</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">Photo aléatoire reprise d’Internet</string>
   <string name="delete_helper_ask_reason_copyright_logo">Logo</string>

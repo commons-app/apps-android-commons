@@ -530,6 +530,7 @@
   <string name="delete_helper_ask_spam_selfie">en selfie som ikke brukes i noen artikkel</string>
   <string name="delete_helper_ask_spam_blurry">helt uklart</string>
   <string name="delete_helper_ask_spam_nonsense">tull, helt ubrukelig i enhver artikkel</string>
+  <string name="delete_helper_ask_spam_other">Annet</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">Pressefoto</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">Tilfeldig bilde fra internett</string>
   <string name="delete_helper_ask_reason_copyright_logo">Logo</string>

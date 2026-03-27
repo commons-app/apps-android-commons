@@ -426,6 +426,7 @@ after opening the app.
          ActiveFragment.BOOKMARK -> {
             // Means that bookmark fragment is visible
             bookmarkFragment?.onBackPressed()
+            setSelectedItemId(NavTab.CONTRIBUTIONS.code())
             }
          else -> {
             super.onBackPressed()

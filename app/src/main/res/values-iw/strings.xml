@@ -559,6 +559,7 @@
   <string name="delete_helper_ask_spam_selfie">תמונה עצמית (סלפי) שלא משמשת בשום ערך</string>
   <string name="delete_helper_ask_spam_blurry">תמונה מטושטשת לגמרי</string>
   <string name="delete_helper_ask_spam_nonsense">שטויות בלתי־שימושיות בעליל בשום ערך</string>
+  <string name="delete_helper_ask_spam_other">אחר</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">תמונת יח״צ</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">תמונה אקראית מהאינטרנט</string>
   <string name="delete_helper_ask_reason_copyright_logo">לוגו</string>
@@ -839,6 +840,7 @@
   <string name="pending">ממתינות</string>
   <string name="failed">נכשלו</string>
   <string name="could_not_load_place_data">לא היה אפשר לטעון את נתוני המקום</string>
+  <string name="warning_for_no_option_selected">נא לבחור באחת מהאפשרויות כדי לענות על השאלה</string>
   <string name="custom_selector_delete_folder">מחיקת תיקייה</string>
   <string name="custom_selector_confirm_deletion_title">אישור מחיקה</string>
   <string name="custom_selector_confirm_deletion_message">למחוק את התיקייה %1$s על כל %2$d פריטיה?</string>
