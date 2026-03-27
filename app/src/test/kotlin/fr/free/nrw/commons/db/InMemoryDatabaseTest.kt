@@ -2,9 +2,16 @@ package fr.free.nrw.commons.db
 
 import android.database.Cursor
 import androidx.room.Room
+import androidx.room.RoomDatabase
+import androidx.sqlite.db.SupportSQLiteDatabase
 import androidx.test.core.app.ApplicationProvider
 import fr.free.nrw.commons.TestCommonsApplication
+import fr.free.nrw.commons.bookmarks.items.BookmarkItemsTable
+import fr.free.nrw.commons.bookmarks.pictures.BookmarksTable
+import fr.free.nrw.commons.category.CategoryTable
 import fr.free.nrw.commons.data.DBOpenHelper
+import fr.free.nrw.commons.explore.recentsearches.RecentSearchesTable
+import fr.free.nrw.commons.recentlanguages.RecentLanguagesTable
 import junit.framework.TestCase
 import org.junit.After
 import org.junit.Assert
@@ -20,8 +27,18 @@ abstract class InMemoryDatabaseTest {
             context = ApplicationProvider.getApplicationContext(),
             klass = AppDatabase::class.java,
         )
-            //For testing purpose
             .allowMainThreadQueries()
+            .addCallback(object : RoomDatabase.Callback() {
+                override fun onCreate(db: SupportSQLiteDatabase) {
+                    super.onCreate(db)
+                    // legacy table creation
+                    CategoryTable.onDelete(db)
+                    BookmarksTable.onDelete(db)
+                    BookmarkItemsTable.onDelete(db)
+                    RecentSearchesTable.onDelete(db)
+                    RecentLanguagesTable.onDelete(db)
+                }
+            })
             .build()
     }
 

@@ -5,7 +5,6 @@ import android.content.ContentProviderClient
 import android.content.ContentResolver
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
-import android.database.sqlite.SQLiteDatabase.openDatabase
 import android.view.inputmethod.InputMethodManager
 import androidx.collection.LruCache
 import androidx.room.Room.databaseBuilder
@@ -25,6 +24,7 @@ import fr.free.nrw.commons.customselector.database.UploadedStatusDao
 import fr.free.nrw.commons.customselector.ui.selector.ImageFileLoader
 import fr.free.nrw.commons.data.DBOpenHelper
 import fr.free.nrw.commons.db.AppDatabase
+import fr.free.nrw.commons.di.CommonsApplicationModule.Companion.appContext
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.location.LocationServiceManager
 import fr.free.nrw.commons.nearby.PlaceDao
@@ -423,49 +423,98 @@ val MIGRATION_21_22 = object : Migration(21, 22) {
         )
         // copying data from old "commons.db"  to new "commons_room.db".
         try {
-            val legacyDbPath = db.path!!.replace("commons_room.db", "commons.db")
-            val oldDb = openDatabase(
+            val legacyDbFile = appContext.getDatabasePath("commons.db")
+            if (!legacyDbFile.exists()) {
+                return
+            }
+            val legacyDbPath = legacyDbFile.path
+
+            val oldDb = SQLiteDatabase.openDatabase(
                 legacyDbPath, null, SQLiteDatabase.OPEN_READONLY
             )
 
-            val tablesToCopy = listOf(
-                "categories", "bookmarks", "bookmarksItems",
-                "recent_searches", "recent_languages"
-            )
-
-            for (tableName in tablesToCopy) {
-                val cursor = oldDb.rawQuery("SELECT * FROM ${tableName}", null)
-                val columns = cursor.columnNames
-                val placeholders = columns.joinToString(",") { "?" }
-                val insertSql =
-                    "INSERT OR IGNORE INTO ${tableName} (${columns.joinToString(",")}) VALUES ($placeholders)"
-
-                while (cursor.moveToNext()) {
-                    val bindArgs = Array<Any?>(columns.size) { i ->
-                        when (cursor.getType(i)) {
-                            android.database.Cursor.FIELD_TYPE_INTEGER -> cursor.getLong(
-                                i
-                            )
-
-                            android.database.Cursor.FIELD_TYPE_FLOAT -> cursor.getDouble(
-                                i
-                            )
-
-                            android.database.Cursor.FIELD_TYPE_STRING -> cursor.getString(
-                                i
-                            )
-
-                            android.database.Cursor.FIELD_TYPE_BLOB -> cursor.getBlob(i)
-                            else -> null
-                        }
-                    }
-                    db.execSQL(insertSql, bindArgs)
-                }
-                cursor.close()
+            // categories
+            var cursor = oldDb.rawQuery("SELECT * FROM categories", null)
+            while (cursor.moveToNext()) {
+                db.execSQL(
+                    "INSERT OR IGNORE INTO categories (_id, name, description, thumbnail, last_used, times_used) VALUES (?, ?, ?, ?, ?, ?)",
+                    arrayOf(
+                        cursor.getLong(cursor.getColumnIndexOrThrow("_id")),
+                        cursor.getString(cursor.getColumnIndexOrThrow("name")) ?: "",
+                        cursor.getString(cursor.getColumnIndexOrThrow("description")),
+                        cursor.getString(cursor.getColumnIndexOrThrow("thumbnail")),
+                        cursor.getLong(cursor.getColumnIndexOrThrow("last_used")),
+                        cursor.getInt(cursor.getColumnIndexOrThrow("times_used"))
+                    )
+                )
             }
+            cursor.close()
+
+            // bookmarks
+            cursor = oldDb.rawQuery("SELECT * FROM bookmarks", null)
+            while (cursor.moveToNext()) {
+                db.execSQL(
+                    "INSERT OR IGNORE INTO bookmarks (media_name, media_creator) VALUES (?, ?)",
+                    arrayOf(
+                        cursor.getString(cursor.getColumnIndexOrThrow("media_name")) ?: "",
+                        cursor.getString(cursor.getColumnIndexOrThrow("media_creator"))
+                    )
+                )
+            }
+            cursor.close()
+
+            // bookmarksItems
+            cursor = oldDb.rawQuery("SELECT * FROM bookmarksItems", null)
+            while (cursor.moveToNext()) {
+                db.execSQL(
+                    "INSERT OR IGNORE INTO bookmarksItems (item_name, item_description, item_image_url, item_instance_of, item_name_categories, item_description_categories, item_thumbnail_categories, item_is_selected, item_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                    arrayOf(
+                        cursor.getString(cursor.getColumnIndexOrThrow("item_name")) ?: "",
+                        cursor.getString(cursor.getColumnIndexOrThrow("item_description")),
+                        cursor.getString(cursor.getColumnIndexOrThrow("item_image_url")),
+                        cursor.getString(cursor.getColumnIndexOrThrow("item_instance_of")) ?: "",
+                        cursor.getString(cursor.getColumnIndexOrThrow("item_name_categories"))
+                            ?: "",
+                        cursor.getString(cursor.getColumnIndexOrThrow("item_description_categories"))
+                            ?: "",
+                        cursor.getString(cursor.getColumnIndexOrThrow("item_thumbnail_categories"))
+                            ?: "",
+                        cursor.getInt(cursor.getColumnIndexOrThrow("item_is_selected")),
+                        cursor.getString(cursor.getColumnIndexOrThrow("item_id")) ?: ""
+                    )
+                )
+            }
+            cursor.close()
+
+            // recent_searches
+            cursor = oldDb.rawQuery("SELECT * FROM recent_searches", null)
+            while (cursor.moveToNext()) {
+                db.execSQL(
+                    "INSERT OR IGNORE INTO recent_searches (_id, name, last_used) VALUES (?, ?, ?)",
+                    arrayOf(
+                        cursor.getLong(cursor.getColumnIndexOrThrow("_id")),
+                        cursor.getString(cursor.getColumnIndexOrThrow("name")) ?: "",
+                        cursor.getLong(cursor.getColumnIndexOrThrow("last_used"))
+                    )
+                )
+            }
+            cursor.close()
+            // recent_languages
+            cursor = oldDb.rawQuery("SELECT * FROM recent_languages", null)
+            while (cursor.moveToNext()) {
+                db.execSQL(
+                    "INSERT OR IGNORE INTO recent_languages (language_name, language_code) VALUES (?, ?)",
+                    arrayOf(
+                        cursor.getString(cursor.getColumnIndexOrThrow("language_name")) ?: "",
+                        cursor.getString(cursor.getColumnIndexOrThrow("language_code")) ?: ""
+                    )
+                )
+            }
+            cursor.close()
             oldDb.close()
         } catch (e: Exception) {
-            e.printStackTrace()
+            Timber.e(e, "Exception during legacy database migration")
+            throw e
         }
     }
 }
