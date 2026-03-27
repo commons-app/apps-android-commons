@@ -538,6 +538,8 @@
   <string name="delete_helper_ask_spam_selfie">heç bir məqalədə istifadə olunmayan selfi</string>
   <string name="delete_helper_ask_spam_blurry">tamamilə bulanıq</string>
   <string name="delete_helper_ask_spam_nonsense">mənasız, məqalədə istifadəyə tamamilə yararsızdır</string>
+  <string name="delete_helper_ask_spam_other">Digər: aşağıda qeyd edin</string>
+  <string name="delete_helper_other_notes_hint">Əsaslandırma</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">Mətbuat fotosu</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">İnternetdən təsadüfi foto</string>
   <string name="delete_helper_ask_reason_copyright_logo">Loqo</string>

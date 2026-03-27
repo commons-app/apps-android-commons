@@ -572,6 +572,8 @@ Upload your first media by tapping on the add button.</string>
   <string name="delete_helper_ask_spam_selfie">a selfie which is not used in any article</string>
   <string name="delete_helper_ask_spam_blurry">totally blurry</string>
   <string name="delete_helper_ask_spam_nonsense">nonsense, absolutely unusable in any article</string>
+  <string name="delete_helper_ask_spam_other">Other: specify below</string>
+  <string name="delete_helper_other_notes_hint">Justification</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">Press photo</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">Random photo from internet</string>
   <string name="delete_helper_ask_reason_copyright_logo">Logo</string>

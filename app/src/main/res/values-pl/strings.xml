@@ -557,6 +557,7 @@
   <string name="delete_helper_ask_spam_selfie">selfie, które nie jest używane w żadnym artykule</string>
   <string name="delete_helper_ask_spam_blurry">całkowicie niewyraźne</string>
   <string name="delete_helper_ask_spam_nonsense">nonsens, absolutnie nieprzydatny w żadnym artykule</string>
+  <string name="delete_helper_ask_spam_other">Inne</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">Zdjęcie prasowe</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">Losowe zdjęcie z internetu</string>
   <string name="delete_helper_ask_reason_copyright_logo">Logo</string>

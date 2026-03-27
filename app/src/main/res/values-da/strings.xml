@@ -428,6 +428,7 @@
   <string name="no_categories_selected_warning_desc">Billeder uden kategorier er sjældent brugbare. Er du sikker på, at du vil fortsætte uden at vælge kategorier?</string>
   <string name="no_depictions_selected">Ingen afbildninger valgt</string>
   <string name="no_depictions_selected_warning_desc">Billeder med afbildninger er lettere at finde og mere tilbøjelige til at blive brugt. Er du sikker på, at du vil fortsætte uden at vælge afbildninger?</string>
+  <string name="depictions_choose_from_map">Vælg fra kort</string>
   <string name="depictions_map_confirm">Bekræft</string>
   <string name="depictions_map_no_photo_location">Fotoet har ingen placering. Viser din nuværende placering</string>
   <string name="back_button_warning">Annuller upload</string>
@@ -538,6 +539,8 @@
   <string name="delete_helper_ask_spam_selfie">et selvportræt der ikke bruges i nogen artikel</string>
   <string name="delete_helper_ask_spam_blurry">totalt sløret</string>
   <string name="delete_helper_ask_spam_nonsense">vrøvl, fuldstændigt ubrugeligt i nogen artikel</string>
+  <string name="delete_helper_ask_spam_other">Andet</string>
+  <string name="delete_helper_other_notes_hint">Begrundelse</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">Pressefoto</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">Tilfældigt billede fra internettet</string>
   <string name="delete_helper_ask_reason_copyright_logo">Logo</string>
