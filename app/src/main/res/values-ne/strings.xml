@@ -293,6 +293,7 @@
   <string name="delete_helper_show_deletion_title_failed">असफल</string>
   <string name="delete_helper_ask_spam_selfie">एउटा सेल्फी जुन कुनै पनि लेखहरूमा प्रयोग गरिएको छैन्</string>
   <string name="delete_helper_ask_spam_blurry">पुरै धमिलो</string>
+  <string name="delete_helper_ask_spam_other">अन्य</string>
   <string name="delete_helper_ask_reason_copyright_logo">लोगो</string>
   <string name="category_edit_helper_show_edit_title_success">सफल</string>
   <string name="coordinates_edit_helper_show_edit_title_success">सफल</string>

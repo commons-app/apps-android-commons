@@ -527,6 +527,7 @@
   <string name="delete_helper_ask_spam_selfie">n\'autoscat ch\'a l\'é dovrà an gnun artìcol</string>
   <string name="delete_helper_ask_spam_blurry">tërbol d\'autut</string>
   <string name="delete_helper_ask_spam_nonsense">gnun sust, as peul pròpe nen dovresse an qualsëssìa artìcol</string>
+  <string name="delete_helper_ask_spam_other">D\'àutr</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">Fòto dë stampa</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">Fòto a l\'ancàpit da \'n sl\'aragnà</string>
   <string name="delete_helper_ask_reason_copyright_logo">Marca</string>
