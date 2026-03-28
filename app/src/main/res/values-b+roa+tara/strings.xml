@@ -121,6 +121,7 @@
   <string name="exif_tag_name_author">Autore</string>
   <string name="default_description_language">Lènghe d\'a descrizione predefinite</string>
   <string name="delete_helper_show_deletion_title_failed">Fallite</string>
+  <string name="delete_helper_ask_spam_other">Otre</string>
   <string name="share_image_via">Condivide l\'immaggine cu</string>
   <string name="account_created">Cunde ccrejate!</string>
   <string name="title_for_media">MEDIA</string>

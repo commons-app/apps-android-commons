@@ -558,9 +558,8 @@ class UploadMediaDetailFragment : UploadBaseFragment(), UploadMediaDetailsContra
             getString(R.string.ok),
             getString(R.string.cancel_upload),
             {
-                if (!isInternetConnectionEstablished(requireActivity())) {
-                    showConnectionErrorPopupForCaptionCheck()
-                }
+                // Dismiss the dialog when offline instead of reopening it in a loop.
+                // User can retry once connectivity is available.
             },
             {
                 requireActivity().finish()
@@ -598,8 +597,6 @@ class UploadMediaDetailFragment : UploadBaseFragment(), UploadMediaDetailsContra
                                     requireActivity()
                                 )
                             }
-                        } else {
-                            showConnectionErrorPopup()
                         }
                     },
                     {
