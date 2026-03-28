@@ -10,7 +10,7 @@ import android.widget.Toast
 import androidx.constraintlayout.widget.Group
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
+import coil.load
 import com.simplecityapps.recyclerview_fastscroll.views.FastScrollRecyclerView
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.contributions.Contribution
@@ -223,22 +223,20 @@ class ImageAdapter(
                         val actionableImages: List<Image> = ArrayList(actionableImagesMap.values)
                         if (actionableImages.size > position) {
                             image = actionableImages[position]
-                            Glide
-                                .with(holder.image)
-                                .load(image.uri)
-                                .thumbnail(0.3f)
-                                .into(holder.image)
+                            holder.image.load(image.uri) {
+                                crossfade(true)
+                                size(coil.size.Size.ORIGINAL)
+                            }
                         }
                     }
 
                     // If switch is turned off, it just fetches the image from all images without any
                     // further operations
                 } else {
-                    Glide
-                        .with(holder.image)
-                        .load(image.uri)
-                        .thumbnail(0.3f)
-                        .into(holder.image)
+                    holder.image.load(image.uri) {
+                        crossfade(true)
+                        size(coil.size.Size.ORIGINAL)
+                    }
                 }
             }
 
@@ -285,11 +283,10 @@ class ImageAdapter(
                 alreadyAddedPositions.add(imagePositionAsPerIncreasingOrder)
                 imagePositionAsPerIncreasingOrder++
                 _currentImagesCount.value = imagePositionAsPerIncreasingOrder
-                Glide
-                    .with(holder.image)
-                    .load(allImages[next].uri)
-                    .thumbnail(0.3f)
-                    .into(holder.image)
+                holder.image.load(allImages[next].uri) {
+                    crossfade(true)
+                    size(coil.size.Size.ORIGINAL)
+                }
                 notifyItemInserted(position)
                 notifyItemRangeChanged(position, itemCount + 1)
             }
