@@ -668,10 +668,13 @@ class CustomSelectorActivity :
 
             withContext(Dispatchers.Main) {
                 if (uniqueImages.size != selectedImages.size) {
-                    showDuplicateSelectionWarning(uniqueImages)
+                    showDuplicateSelectionWarning {
+                        finishPickImages(uniqueImages)
+                    }
                 } else {
                     finishPickImages(uniqueImages)
                 }
+
             }
         }
     }
@@ -679,17 +682,12 @@ class CustomSelectorActivity :
     /**
      * Warns users when duplicate-content images are selected before finishing selection.
      */
-    private fun showDuplicateSelectionWarning(images: ArrayList<Image>) {
+    private fun showDuplicateSelectionWarning(onConfirm: () -> Unit) {
         AlertDialog.Builder(this)
             .setTitle(R.string.warning)
-            .setMessage(R.string.custom_selector_duplicate_selection_warning)
+            .setMessage(R.string.duplicates_removed_before_upload)
             .setCancelable(false)
-            .setPositiveButton(R.string.ok) { _, _ ->
-                finishPickImages(images)
-            }
-            .setNegativeButton(R.string.custom_selector_review_selection_button) { dialog, _ ->
-                dialog.dismiss()
-            }
+            .setPositiveButton(R.string.ok) { _, _ -> onConfirm() }
             .show()
     }
 
