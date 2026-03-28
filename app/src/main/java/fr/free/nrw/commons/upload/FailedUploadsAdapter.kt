@@ -15,7 +15,7 @@ import android.widget.TextView
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.facebook.imagepipeline.request.ImageRequest
+import coil.load
 import com.google.android.material.snackbar.Snackbar
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.contributions.Contribution
@@ -76,19 +76,16 @@ class FailedUploadsAdapter(
         if (item != null) {
             holder.titleTextView.setText(item.media.displayTitle)
         }
-        var imageRequest: ImageRequest? = null
         val imageSource: String = item?.localUri.toString()
 
         if (!TextUtils.isEmpty(imageSource)) {
-            if (URLUtil.isFileUrl(imageSource)) {
-                imageRequest = ImageRequest.fromUri(Uri.parse(imageSource))!!
-            } else if (imageSource != null) {
-                val file = File(imageSource)
-                imageRequest = ImageRequest.fromFile(file)!!
+            val data: Any = when {
+                URLUtil.isFileUrl(imageSource) -> Uri.parse(imageSource)
+                else -> File(imageSource)
             }
-
-            if (imageRequest != null) {
-                holder.itemImage.setImageRequest(imageRequest)
+            holder.itemImage.load(data) {
+                placeholder(R.drawable.ic_image_black_24dp)
+                error(R.drawable.ic_image_black_24dp)
             }
         }
 
@@ -109,7 +106,6 @@ class FailedUploadsAdapter(
         holder.retryButton.setOnClickListener {
             callback.restartUpload(position)
         }
-        holder.itemImage.setImageRequest(imageRequest)
     }
 
     /**
@@ -118,7 +114,7 @@ class FailedUploadsAdapter(
     class ViewHolder(
         itemView: View,
     ) : RecyclerView.ViewHolder(itemView) {
-        var itemImage: com.facebook.drawee.view.SimpleDraweeView =
+        var itemImage: ImageView =
             itemView.findViewById(R.id.itemImage)
         var titleTextView: TextView = itemView.findViewById<TextView>(R.id.titleTextView)
         var itemProgress: ProgressBar = itemView.findViewById<ProgressBar>(R.id.itemProgress)

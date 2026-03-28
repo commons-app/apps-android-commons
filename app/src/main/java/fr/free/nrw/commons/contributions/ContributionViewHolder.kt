@@ -6,8 +6,7 @@ import android.view.View
 import android.webkit.URLUtil
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
-import com.facebook.imagepipeline.request.ImageRequest
-import com.facebook.imagepipeline.request.ImageRequestBuilder
+import coil.load
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.utils.MediaAttributionUtil
 import fr.free.nrw.commons.MediaDataExtractor
@@ -33,8 +32,6 @@ class ContributionViewHolder internal constructor(
     private var contribution: Contribution? = null
     private var isWikipediaButtonDisplayed = false
     private val pausingPopUp: AlertDialog
-    var imageRequest: ImageRequest? = null
-        private set
 
     init {
         binding.contributionImage.setOnClickListener { v: View? -> imageClicked() }
@@ -62,30 +59,20 @@ an upload might take a dozen seconds. */
         binding.contributionTitle.text = contribution.media.mostRelevantCaption
         setAuthorText(contribution.media)
 
-        //Removes flicker of loading image.
-        binding.contributionImage.hierarchy.fadeDuration = 0
-
-        binding.contributionImage.hierarchy.setPlaceholderImage(R.drawable.image_placeholder)
-        binding.contributionImage.hierarchy.setFailureImage(R.drawable.image_placeholder)
-
         val imageSource = chooseImageSource(
             contribution.media.thumbUrl,
             contribution.localUri
         )
         if (!TextUtils.isEmpty(imageSource)) {
-            if (URLUtil.isHttpsUrl(imageSource)) {
-                imageRequest = ImageRequestBuilder.newBuilderWithSource(Uri.parse(imageSource))
-                    .setProgressiveRenderingEnabled(true)
-                    .build()
-            } else if (URLUtil.isFileUrl(imageSource)) {
-                imageRequest = ImageRequest.fromUri(Uri.parse(imageSource))
-            } else if (imageSource != null) {
-                val file = File(imageSource)
-                imageRequest = ImageRequest.fromFile(file)
+            val data: Any = when {
+                URLUtil.isHttpsUrl(imageSource) -> imageSource!!
+                URLUtil.isFileUrl(imageSource) -> Uri.parse(imageSource)
+                imageSource != null -> File(imageSource)
+                else -> R.drawable.image_placeholder
             }
-
-            if (imageRequest != null) {
-                binding.contributionImage.setImageRequest(imageRequest)
+            binding.contributionImage.load(data) {
+                placeholder(R.drawable.image_placeholder)
+                error(R.drawable.image_placeholder)
             }
         }
 

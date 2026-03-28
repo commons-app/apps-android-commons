@@ -15,7 +15,7 @@ import android.widget.TextView
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.facebook.imagepipeline.request.ImageRequest
+import coil.load
 import com.google.android.material.snackbar.Snackbar
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.contributions.Contribution
@@ -94,7 +94,7 @@ class PendingUploadsAdapter(
     class ViewHolder(
         itemView: View,
     ) : RecyclerView.ViewHolder(itemView) {
-        var itemImage: com.facebook.drawee.view.SimpleDraweeView =
+        var itemImage: ImageView =
             itemView.findViewById(R.id.itemImage)
         var titleTextView: TextView = itemView.findViewById(R.id.titleTextView)
         var itemProgress: ProgressBar = itemView.findViewById(R.id.itemProgress)
@@ -121,19 +121,16 @@ class PendingUploadsAdapter(
             }
 
             val imageSource: String = contribution.localUri.toString()
-            var imageRequest: ImageRequest? = null
 
             if (!TextUtils.isEmpty(imageSource)) {
-                if (URLUtil.isFileUrl(imageSource)) {
-                    imageRequest = ImageRequest.fromUri(Uri.parse(imageSource))
-                } else {
-                    val file = File(imageSource)
-                    imageRequest = ImageRequest.fromFile(file)
+                val data: Any = when {
+                    URLUtil.isFileUrl(imageSource) -> Uri.parse(imageSource)
+                    else -> File(imageSource)
                 }
-            }
-
-            if (imageRequest != null) {
-                itemImage.setImageRequest(imageRequest)
+                itemImage.load(data) {
+                    placeholder(R.drawable.ic_image_black_24dp)
+                    error(R.drawable.ic_image_black_24dp)
+                }
             }
 
             bindState(contribution.state)

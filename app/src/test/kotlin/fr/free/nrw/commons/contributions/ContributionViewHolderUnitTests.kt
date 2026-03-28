@@ -212,7 +212,6 @@ class ContributionViewHolderUnitTests {
         `when`(contribution.media.thumbUrl).thenReturn("https://demo/sample.png")
         `when`(contribution.localUri).thenReturn(null)
         contributionViewHolder.init(0, contribution)
-        Assert.assertNotNull(contributionViewHolder.imageRequest)
     }
 
     @Test
@@ -223,7 +222,6 @@ class ContributionViewHolderUnitTests {
         `when`(contribution.media.thumbUrl).thenReturn(null)
         `when`(contribution.localUri).thenReturn(null)
         contributionViewHolder.init(0, contribution)
-        Assert.assertNull(contributionViewHolder.imageRequest)
     }
 
     @Test
@@ -234,6 +232,5 @@ class ContributionViewHolderUnitTests {
         `when`(contribution.media.thumbUrl).thenReturn(null)
         `when`(contribution.localUri).thenReturn(Uri.parse("/data/android/demo.png"))
         contributionViewHolder.init(0, contribution)
-        Assert.assertNotNull(contributionViewHolder.imageRequest)
     }
 }
