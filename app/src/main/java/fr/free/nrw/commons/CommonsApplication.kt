@@ -11,8 +11,10 @@ import android.os.Build
 import android.os.Process
 import android.util.Log
 import androidx.multidex.MultiDexApplication
-import com.facebook.drawee.backends.pipeline.Fresco
-import com.facebook.imagepipeline.core.ImagePipelineConfig
+import coil.Coil
+import coil.ImageLoader
+import coil.disk.DiskCache
+import coil.memory.MemoryCache
 import fr.free.nrw.commons.auth.LoginActivity
 import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.bookmarks.items.BookmarkItemsTable
@@ -28,7 +30,6 @@ import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.language.AppLanguageLookUpTable
 import fr.free.nrw.commons.logging.FileLoggingTree
 import fr.free.nrw.commons.logging.LogUtils
-import fr.free.nrw.commons.media.CustomOkHttpNetworkFetcher
 import fr.free.nrw.commons.settings.Prefs
 import fr.free.nrw.commons.upload.FileUtils
 import fr.free.nrw.commons.utils.ConfigUtils.getVersionNameWithSha
@@ -82,9 +83,6 @@ class CommonsApplication : MultiDexApplication() {
     @Inject
     lateinit var cookieJar: CommonsCookieJar
 
-    @Inject
-    lateinit var customOkHttpNetworkFetcher: CustomOkHttpNetworkFetcher
-
     var languageLookUpTable: AppLanguageLookUpTable? = null
         private set
 
@@ -116,17 +114,22 @@ class CommonsApplication : MultiDexApplication() {
             defaultPrefs.putStringSet(Prefs.MANAGED_EXIF_TAGS, defaultExifTagsSet)
         }
 
-        //        Set DownsampleEnabled to True to downsample the image in case it's heavy
-        val config = ImagePipelineConfig.newBuilder(this)
-            .setNetworkFetcher(customOkHttpNetworkFetcher)
-            .setDownsampleEnabled(true)
+        // Initialize Coil image loader
+        val imageLoader = ImageLoader.Builder(this)
+            .crossfade(true)
+            .memoryCache {
+                MemoryCache.Builder(this)
+                    .maxSizePercent(0.25)
+                    .build()
+            }
+            .diskCache {
+                DiskCache.Builder()
+                    .directory(cacheDir.resolve("image_cache"))
+                    .maxSizePercent(0.02)
+                    .build()
+            }
             .build()
-        try {
-            Fresco.initialize(this, config)
-        } catch (e: Exception) {
-            Timber.e(e)
-            // TODO: Remove when we're able to initialize Fresco in test builds.
-        }
+        Coil.setImageLoader(imageLoader)
 
         createNotificationChannel(this)
 
@@ -227,11 +230,12 @@ class CommonsApplication : MultiDexApplication() {
     }
 
     /**
-     * Clear all images cache held by Fresco
+     * Clear all images cache held by Coil
      */
     private fun clearImageCache() {
-        val imagePipeline = Fresco.getImagePipeline()
-        imagePipeline.clearCaches()
+        val imageLoader = Coil.imageLoader(this)
+        imageLoader.memoryCache?.clear()
+        imageLoader.diskCache?.clear()
     }
 
     /**
