@@ -427,6 +427,7 @@
   <string name="no_categories_selected_warning_desc">Kuvat, jotka eivät ole luokissa, ovat harvoin käyttökelpoisia. Haluatko varmasti jatkaa valitsematta luokkia?</string>
   <string name="no_depictions_selected">Esittää-tunnisteita ei valittu</string>
   <string name="no_depictions_selected_warning_desc">Kuvat, joissa on esittää-tunnisteita, löytyvät helpommin ja niitä käytetään todennäköisemmin. Haluatko varmasti jatkaa valitsematta esittää-tunnisteita?</string>
+  <string name="depictions_map_confirm">Vahvista</string>
   <string name="back_button_warning">Peruuta tallennus</string>
   <string name="back_button_warning_desc">Takaisin-napin painaminen peruuttaa tämän tallennuksen ja poistaa tallentamasi tiedot</string>
   <string name="back_button_continue">Jatka tallennusta</string>
@@ -522,6 +523,7 @@
   <string name="delete_helper_ask_spam_selfie">selfie, jota ei käytetä missään artikkelissa</string>
   <string name="delete_helper_ask_spam_blurry">täysin sumea</string>
   <string name="delete_helper_ask_spam_nonsense">hölynpölyä, täysin hyödytön kaikissa artikkelissa</string>
+  <string name="delete_helper_ask_spam_other">Muu</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">Lehdistökuva</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">Satunnainen kuva internetistä</string>
   <string name="delete_helper_ask_reason_copyright_logo">Logo</string>
@@ -722,6 +724,7 @@
     <item quantity="one">%1$d kuva valittu</item>
     <item quantity="other">%1$d kuvaa valittu</item>
   </plurals>
+  <string name="nearby_wikitalk">Ilmoita Wikidataan tähän kohteeseen liittyvästä ongelmasta</string>
   <string name="talk">Keskustelu</string>
   <string name="feedback_destination_note">Palautteesi on julkaistu seuraavalla wikisivulla: &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Mobile_app/Feedback\"&gt;Commons:Mobile app/Feedback&lt;/a&gt;</string>
   <string name="are_you_sure_that_you_want_cancel_all_the_uploads">Oletko varma, että haluat peruuttaa kaikki tallennukset?</string>

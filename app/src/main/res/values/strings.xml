@@ -449,6 +449,9 @@ Upload your first media by tapping on the add button.</string>
 
   <string name="no_depictions_selected">No Depictions Selected</string>
   <string name="no_depictions_selected_warning_desc">Images with depictions are more easily found and more likely to be used. Are you sure you want to continue without selecting depictions?</string>
+  <string name="depictions_choose_from_map">Choose from map</string>
+  <string name="depictions_map_confirm">Confirm</string>
+  <string name="depictions_map_no_photo_location">Photo has no location, showing your current location</string>
 
   <string name="back_button_warning">Cancel Upload</string>
   <string name="back_button_warning_desc">Using the back button will cancel this upload and you will lose your progress</string>
@@ -569,6 +572,8 @@ Upload your first media by tapping on the add button.</string>
   <string name="delete_helper_ask_spam_selfie">a selfie which is not used in any article</string>
   <string name="delete_helper_ask_spam_blurry">totally blurry</string>
   <string name="delete_helper_ask_spam_nonsense">nonsense, absolutely unusable in any article</string>
+  <string name="delete_helper_ask_spam_other">Other: specify below</string>
+  <string name="delete_helper_other_notes_hint">Justification</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">Press photo</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">Random photo from internet</string>
   <string name="delete_helper_ask_reason_copyright_logo">Logo</string>
@@ -854,6 +859,7 @@ Upload your first media by tapping on the add button.</string>
   <string name="pending">Pending</string>
   <string name="failed">Failed</string>
   <string name="could_not_load_place_data">Could not load place data</string>
+  <string name="warning_for_no_option_selected">Select any one of the option to answer the question</string>
 
   <string name="custom_selector_delete_folder">Delete Folder</string>
   <string name="custom_selector_confirm_deletion_title">Confirm Deletion</string>
@@ -891,5 +897,11 @@ Upload your first media by tapping on the add button.</string>
   <string name="custom_selector_max_image_limit_reached">You can only select a maximum of %d images.</string>
   <string name="add_new_upload">Add new upload</string>
   <string name="edit_unsupported_format_explanation"><string name="edit_unsupported_format_explanation">In-app editing is only available for JPEG files. To edit other formats, please use a third-party tool.</string></string>
+  <string name="license_cc0_description">No copyright. You release all rights so anyone can use this work in any way.</string>
+  <string name="license_cc_by_description">Attribution. Others are free to share and adapt as long as they give you credit.</string>
+  <string name="license_cc_by_sa_description">Attribution-ShareAlike. Others can share and adapt, but must use the same license and give you credit.</string>
 
+  <string name="license_cc0_long_description">This license allows reusers to distribute, remix, adapt, and build upon the material in any medium or format, with no conditions.</string>
+  <string name="license_cc_by_long_description">This license allows reusers to distribute, remix, adapt, and build upon the material in any medium or format, even for commercial purposes, as long as attribution is given to the creator.</string>
+  <string name="license_cc_by_sa_long_description">This license allows reusers to distribute, remix, adapt, and build upon the material in any medium or format, even for commercial purposes, as long as attribution is given to the creator and the new work is licensed under identical terms.</string>
 </resources>

@@ -536,6 +536,7 @@
   <string name="delete_helper_ask_spam_selfie">en selfie som inte används i någon artikel</string>
   <string name="delete_helper_ask_spam_blurry">helt suddig</string>
   <string name="delete_helper_ask_spam_nonsense">trams, fullständigt oanvändbart i alla artiklar</string>
+  <string name="delete_helper_ask_spam_other">Annat</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">Pressfoto</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">Slumpbild från Internet</string>
   <string name="delete_helper_ask_reason_copyright_logo">Logotyp</string>
