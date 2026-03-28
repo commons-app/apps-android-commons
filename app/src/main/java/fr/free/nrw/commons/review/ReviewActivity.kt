@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.review
 
 import android.annotation.SuppressLint
+import coil.load
 import android.content.Context
 import android.content.Intent
 import android.graphics.PorterDuff
@@ -188,7 +189,7 @@ class ReviewActivity : BaseActivity() {
             return
         }
 
-        binding.reviewImageView.setImageURI(media.thumbUrl)
+        binding.reviewImageView.load(media.thumbUrl)
 
         reviewController.onImageRefreshed(media)    // filename is updated
         compositeDisposable.add(

@@ -2,6 +2,7 @@ package fr.free.nrw.commons.explore.depictions
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import coil.load
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -38,9 +39,11 @@ class DepictedItemViewHolder(
         depictsLabel.text = item.name
         description.text = item.description
         if (item.imageUrl?.isNotBlank() == true) {
-            depictsImage.setImageURI(item.imageUrl)
+            depictsImage.load(item.imageUrl) {
+                placeholder(R.drawable.ic_wikidata_logo_24dp)
+            }
         } else {
-            depictsImage.setActualImageResource(R.drawable.ic_wikidata_logo_24dp)
+            depictsImage.setImageResource(R.drawable.ic_wikidata_logo_24dp)
         }
     }
 }
