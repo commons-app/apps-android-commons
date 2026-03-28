@@ -533,6 +533,7 @@
   <string name="delete_helper_ask_spam_selfie">sebek, ki ni uporabljen v članku</string>
   <string name="delete_helper_ask_spam_blurry">popolnoma zamegljeno</string>
   <string name="delete_helper_ask_spam_nonsense">nesmisel, absolutno neuporaben v katerem koli članku</string>
+  <string name="delete_helper_ask_spam_other">Drugo</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">Tiskovna fotografija</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">Naključna fotografija s spleta</string>
   <string name="delete_helper_ask_reason_copyright_logo">Logotip</string>
