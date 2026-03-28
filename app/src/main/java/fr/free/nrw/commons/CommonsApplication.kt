@@ -18,6 +18,7 @@ import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.bookmarks.items.BookmarkItemsTable
 import fr.free.nrw.commons.bookmarks.pictures.BookmarksTable
 import fr.free.nrw.commons.category.CategoryDao
+import fr.free.nrw.commons.category.CategoryTable
 import fr.free.nrw.commons.concurrency.BackgroundPoolExceptionHandler
 import fr.free.nrw.commons.concurrency.ThreadPoolService
 import fr.free.nrw.commons.contributions.ContributionDao
@@ -258,7 +259,7 @@ class CommonsApplication : MultiDexApplication() {
         dbOpenHelper.readableDatabase.close()
         val db = dbOpenHelper.writableDatabase
 
-        CategoryDao.Table.onDelete(db)
+        CategoryTable.onDelete(db)
         dbOpenHelper.deleteTable(
             db,
             DBOpenHelper.CONTRIBUTIONS_TABLE

@@ -3,11 +3,13 @@ package fr.free.nrw.commons.upload.depicts
 import android.app.Activity
 import android.app.ProgressDialog
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -21,8 +23,11 @@ import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.contributions.ContributionsFragment
 import fr.free.nrw.commons.databinding.UploadDepictsFragmentBinding
 import fr.free.nrw.commons.kvstore.JsonKvStore
+import fr.free.nrw.commons.location.LatLng
+import fr.free.nrw.commons.location.LocationServiceManager
 import fr.free.nrw.commons.media.MediaDetailFragment
 import fr.free.nrw.commons.nearby.Place
+import fr.free.nrw.commons.nearby.fragments.NearbyParentFragment
 import fr.free.nrw.commons.upload.UploadActivity
 import fr.free.nrw.commons.upload.UploadBaseFragment
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
@@ -33,6 +38,8 @@ import io.reactivex.Notification
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import timber.log.Timber
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.ContextCompat
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 import javax.inject.Named
@@ -51,6 +58,9 @@ class DepictsFragment : UploadBaseFragment(), DepictsContract.View {
     @Inject
     lateinit var sessionManager: SessionManager
 
+    @Inject
+    lateinit var locationManager: LocationServiceManager
+
     private var adapter: UploadDepictsAdapter? = null
     private var subscribe: Disposable? = null
     private var media: Media? = null
@@ -64,6 +74,15 @@ class DepictsFragment : UploadBaseFragment(), DepictsContract.View {
 
     private var _binding: UploadDepictsFragmentBinding? = null
     private val binding get() = _binding!!
+
+    private val mapPickerLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult())
+        { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                result.data?.getParcelableExtra<Place>(NearbyParentFragment.PICKER_RESULT_PLACE)
+                    ?.let { presenter.onPlaceSelectedFromMap(it) }
+            }
+        }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -128,8 +147,57 @@ class DepictsFragment : UploadBaseFragment(), DepictsContract.View {
         initRecyclerView()
         addTextChangeListenerToSearchBox()
 
+        binding.chooseFromMap.setOnClickListener { v: View? -> launchDepictsPicker() }
         binding.depictsNext.setOnClickListener { v: View? -> onNextButtonClicked() }
         binding.depictsPrevious.setOnClickListener { v: View? -> onPreviousButtonClicked() }
+    }
+
+    /**
+     * Launches Depicts picker activity to select Depicts from map
+     * bundles the latitude and longitude (if present)
+     */
+    private fun launchDepictsPicker() {
+
+        //hide keyboard if in case  its left open
+        val imm = view?.context?.let {
+            ContextCompat.getSystemService(
+                it,
+                InputMethodManager::class.java
+            )
+        }
+        imm?.hideSoftInputFromWindow(view?.windowToken, 0)
+
+        val allPhotoCoordinates = ArrayList<LatLng>()
+        val uploads = presenter.getUploads()
+        if (media == null && callback != null) {
+            //when in upload flow
+            uploads.forEach { item ->
+                item.gpsCoords?.let {
+                    if (it.imageCoordsExists) {
+                        it.latLng?.let { v -> allPhotoCoordinates.add(v) }
+                    }
+                }
+            }
+        } else {
+            //when in edit flow
+            media?.coordinates?.let { allPhotoCoordinates.add(it) }
+        }
+
+        if (allPhotoCoordinates.isEmpty()) {
+            Toast.makeText(
+                requireContext(),
+                R.string.depictions_map_no_photo_location,
+                Toast.LENGTH_LONG
+            ).show()
+        }
+
+        Intent(requireContext(), DepictsPickerActivity::class.java).apply {
+            putParcelableArrayListExtra(
+                NearbyParentFragment.ARG_PHOTO_LATLNGS,
+                allPhotoCoordinates
+            )
+            mapPickerLauncher.launch(this)
+        }
     }
 
     /**
