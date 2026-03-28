@@ -24,12 +24,11 @@
           layout="@layout/show_captions_descriptions" />
     </LinearLayout>
 
-    <com.facebook.drawee.view.SimpleDraweeView
+    <ImageView
       android:id="@+id/mediaDetailImageView"
       android:layout_width="0dp"
       android:layout_height="@dimen/dimen_250"
-      android:layout_gravity="center_horizontal"
-      app:actualImageScaleType="none" />
+      android:layout_gravity="center_horizontal" />
 
     <ScrollView
       android:id="@+id/mediaDetailScrollView"

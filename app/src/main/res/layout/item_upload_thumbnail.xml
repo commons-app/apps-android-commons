@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
-  xmlns:fresco="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="@dimen/big_height"
   android:layout_height="@dimen/big_height"
@@ -9,12 +8,12 @@
   android:background="@drawable/thumbnail_not_selected"
   android:orientation="horizontal">
 
-  <com.facebook.drawee.view.SimpleDraweeView
+  <ImageView
     android:id="@+id/iv_thumbnail"
     android:layout_width="@dimen/big_height"
     android:layout_height="@dimen/big_height"
     android:padding="8px"
-    fresco:actualImageScaleType="fitCenter"/>
+    android:scaleType="fitCenter"/>
 
   <ImageView
     android:id="@+id/iv_error"
