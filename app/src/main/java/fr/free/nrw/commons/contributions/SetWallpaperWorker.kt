@@ -5,19 +5,16 @@ import android.app.NotificationManager
 import android.app.WallpaperManager
 import android.content.Context
 import android.graphics.Bitmap
-import android.net.Uri
+import android.graphics.drawable.BitmapDrawable
 import android.os.Build
 import androidx.core.app.NotificationCompat
 import androidx.work.Worker
 import androidx.work.WorkerParameters
-import com.facebook.common.executors.CallerThreadExecutor
-import com.facebook.common.references.CloseableReference
-import com.facebook.datasource.DataSource
-import com.facebook.drawee.backends.pipeline.Fresco
-import com.facebook.imagepipeline.datasource.BaseBitmapDataSubscriber
-import com.facebook.imagepipeline.image.CloseableImage
-import com.facebook.imagepipeline.request.ImageRequestBuilder
+import coil.ImageLoader
+import coil.request.ImageRequest
+import coil.request.SuccessResult
 import fr.free.nrw.commons.R
+import kotlinx.coroutines.runBlocking
 import timber.log.Timber
 
 class SetWallpaperWorker(context: Context, params: WorkerParameters) :
@@ -29,30 +26,28 @@ class SetWallpaperWorker(context: Context, params: WorkerParameters) :
 
         val imageUrl = inputData.getString("imageUrl") ?: return Result.failure()
 
-        val imageRequest = ImageRequestBuilder
-            .newBuilderWithSource(Uri.parse(imageUrl))
-            .build()
-
-        val imagePipeline = Fresco.getImagePipeline()
-        val dataSource = imagePipeline.fetchDecodedImage(imageRequest, context)
-
-        dataSource.subscribe(object : BaseBitmapDataSubscriber() {
-            public override fun onNewResultImpl(bitmap: Bitmap?) {
-                if (dataSource.isFinished && bitmap != null) {
-                    Timber.d("Bitmap loaded from url %s", imageUrl.toString())
+        return runBlocking {
+            try {
+                val imageLoader = ImageLoader(context)
+                val request = ImageRequest.Builder(context)
+                    .data(imageUrl)
+                    .allowHardware(false)
+                    .build()
+                val result = imageLoader.execute(request)
+                if (result is SuccessResult) {
+                    val bitmap = (result.drawable as BitmapDrawable).bitmap
                     setWallpaper(context, Bitmap.createBitmap(bitmap))
-                    dataSource.close()
+                } else {
+                    Timber.d("Error getting bitmap from image url %s", imageUrl)
+                    showNotification(context, "Setting Wallpaper Failed", "Failed to download image.")
                 }
-            }
-
-            override fun onFailureImpl(dataSource: DataSource<CloseableReference<CloseableImage?>?>) {
-                Timber.d("Error getting bitmap from image url %s", imageUrl.toString())
+                Result.success()
+            } catch (e: Exception) {
+                Timber.e(e, "Error getting bitmap from image url %s", imageUrl)
                 showNotification(context, "Setting Wallpaper Failed", "Failed to download image.")
-                dataSource.close()
+                Result.failure()
             }
-        }, CallerThreadExecutor.getInstance())
-
-        return Result.success()
+        }
     }
 
     private fun setWallpaper(context: Context, bitmap: Bitmap) {
