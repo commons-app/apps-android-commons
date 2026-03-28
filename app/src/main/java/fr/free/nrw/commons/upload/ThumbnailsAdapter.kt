@@ -1,14 +1,13 @@
 package fr.free.nrw.commons.upload
 
 import android.graphics.drawable.GradientDrawable
-import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.RelativeLayout
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.facebook.drawee.view.SimpleDraweeView
+import coil.load
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.databinding.ItemUploadThumbnailBinding
 import fr.free.nrw.commons.filepicker.UploadableFile
@@ -40,7 +39,7 @@ internal class ThumbnailsAdapter(private val callback: Callback) :
     inner class ViewHolder(val binding: ItemUploadThumbnailBinding) :
         RecyclerView.ViewHolder(binding.root) {
         private val rlContainer: RelativeLayout = binding.rlContainer
-        private val background: SimpleDraweeView = binding.ivThumbnail
+        private val background: ImageView = binding.ivThumbnail
         private val ivError: ImageView = binding.ivError
         private val ivCross: ImageView = binding.icCross
 
@@ -50,7 +49,7 @@ internal class ThumbnailsAdapter(private val callback: Callback) :
         fun bind(position: Int) {
             val uploadableFile = uploadableFiles[position]
             val uri = uploadableFile.getMediaUri()
-            background.setImageURI(Uri.fromFile(File(uri.toString())))
+            background.load(File(uri.toString()))
             if (position == callback.getCurrentSelectedFilePosition()) {
                 val border = GradientDrawable()
                 border.shape = GradientDrawable.RECTANGLE

@@ -1,14 +1,15 @@
 package fr.free.nrw.commons.profile.leaderboard
 
 import android.accounts.AccountManager
-import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
-import com.facebook.drawee.view.SimpleDraweeView
+import coil.load
+import coil.transform.CircleCropTransformation
 import fr.free.nrw.commons.BuildConfig
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.profile.leaderboard.UserDetailAdapter.DataViewHolder
@@ -26,7 +27,7 @@ class UserDetailAdapter(private val leaderboardResponse: LeaderboardResponse) :
 
     class DataViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val rank: TextView = itemView.findViewById(R.id.rank)
-        val avatar: SimpleDraweeView = itemView.findViewById(R.id.avatar)
+        val avatar: ImageView = itemView.findViewById(R.id.avatar)
         val username: TextView = itemView.findViewById(R.id.username)
         val count: TextView = itemView.findViewById(R.id.count)
     }
@@ -53,7 +54,9 @@ class UserDetailAdapter(private val leaderboardResponse: LeaderboardResponse) :
     override fun onBindViewHolder(holder: DataViewHolder, position: Int) = with(holder) {
         val resources = itemView.context.resources
 
-        avatar.setImageURI(Uri.parse(leaderboardResponse.avatar))
+        avatar.load(leaderboardResponse.avatar) {
+            transformations(CircleCropTransformation())
+        }
         username.text = leaderboardResponse.username
         rank.text = String.format(
             Locale.getDefault(),
