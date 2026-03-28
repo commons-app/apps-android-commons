@@ -4,9 +4,7 @@ import android.net.Uri
 import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
-import androidx.test.core.app.ApplicationProvider
-import com.facebook.drawee.backends.pipeline.Fresco
-import com.facebook.soloader.SoLoader
+
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.MediaDataExtractor
 import fr.free.nrw.commons.R
@@ -67,8 +65,6 @@ class ContributionViewHolderUnitTests {
     @Before
     fun setUp() {
         MockitoAnnotations.initMocks(this)
-        SoLoader.setInTestMode()
-        Fresco.initialize(ApplicationProvider.getApplicationContext())
         activity = Robolectric.buildActivity(ProfileActivity::class.java).create().get()
         compositeDisposable = CompositeDisposable()
         parent = LayoutInflater.from(activity).inflate(R.layout.layout_contribution, null)
