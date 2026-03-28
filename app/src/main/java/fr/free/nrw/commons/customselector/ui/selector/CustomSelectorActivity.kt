@@ -653,28 +653,24 @@ class CustomSelectorActivity :
             return
         }
         scope.launch(ioDispatcher) {
-            val imageWithSha1 =
-                selectedImages.map { image ->
-                    image to
+            val uniqueImages =
+                    selectedImages.distinctBy { image ->
                         CustomSelectorUtils.getImageSHA1(
                             image.uri,
                             ioDispatcher,
                             fileUtilsWrapper,
                             contentResolver,
                         )
-                }
-
-            val uniqueImages = ArrayList(imageWithSha1.distinctBy { it.second }.map { it.first })
+                    }
 
             withContext(Dispatchers.Main) {
                 if (uniqueImages.size != selectedImages.size) {
                     showDuplicateSelectionWarning {
-                        finishPickImages(uniqueImages)
+                        finishPickImages(ArrayList(uniqueImages))
                     }
                 } else {
-                    finishPickImages(uniqueImages)
+                    finishPickImages(ArrayList(uniqueImages))
                 }
-
             }
         }
     }
