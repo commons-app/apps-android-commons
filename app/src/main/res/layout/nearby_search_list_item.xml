@@ -16,5 +16,9 @@
     <TextView
         android:id="@+id/place_text"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/tiny_margin"
+        android:layout_marginEnd="@dimen/tiny_margin"
+        android:layout_marginTop="@dimen/tiny_height"
+        android:paddingTop="@dimen/miniscule_margin"/>
 </LinearLayout>

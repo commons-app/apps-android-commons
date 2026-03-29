@@ -35,7 +35,7 @@
 -->
 <resources>
   <string name="commons_facebook">صفحة فيسبوك الخاصة بكومنز</string>
-  <string name="commons_github" fuzzy="true">كود مصدر كومنز في غيت هب</string>
+  <string name="commons_github">كود مصدر كومنز في غيت هب</string>
   <string name="commons_logo">شعار كومنز</string>
   <string name="commons_website">موقع كومنز</string>
   <string name="exit_location_picker">الخروج من منتقي الموقع</string>
@@ -275,15 +275,14 @@
   <string name="_2fa_code">رمز التحقق المزدوج 2FA</string>
   <string name="email_auth_code">رمز التحقق من البريد الإلكتروني</string>
   <string name="logout_verification">أترغب فعلا في الخروج؟</string>
-  <string name="mediaimage_failed">صورة الوسائط فشلت</string>
   <string name="no_subcategory_found">لم يتم العثور على تصنيفات فرعية.</string>
   <string name="no_parentcategory_found">لم يتم العثور على تصنيفات رئيسية.</string>
   <string name="welcome_image_mount_zao">جبل زوا</string>
   <string name="welcome_image_llamas">لاماس</string>
   <string name="welcome_image_rainbow_bridge">جسر قوس قزح</string>
   <string name="welcome_image_tulip">تيوليب</string>
-  <string name="welcome_image_welcome_wikipedia" fuzzy="true">مرحبا في ويكيبيديا</string>
-  <string name="welcome_image_welcome_copyright" fuzzy="true">حقوق نسخ الترحيب</string>
+  <string name="welcome_image_welcome_wikipedia">صورة مخططية لمقال عام في ويكيبيديا.</string>
+  <string name="welcome_image_welcome_copyright">رسومة من كومة من الورق مع رمز حقوق الطبع والنشر معزوفة.</string>
   <string name="welcome_image_sydney_opera_house">بيت أوبرا سيدني</string>
   <string name="cancel">إلغاء</string>
   <string name="navigation_drawer_open">فتح</string>
@@ -516,11 +515,11 @@
   <string name="check_category_failure_message">لا يمكن طلب التحقق من التصنيف %1$s</string>
   <string name="check_category_toast">جارٍ طلب التحقق من التصنيف %1$s</string>
   <string name="nominate_for_deletion_done">تم</string>
-  <string name="send_thank_success_title" fuzzy="true">إرسال الشكر: نجاح</string>
+  <string name="send_thank_success_title">إرسال الشكر: نجاح</string>
   <string name="send_thank_success_message">تم الإرسال بفضل %1$s</string>
   <string name="send_thank_failure_message">فشل إرسال الشكر إلى %1$s</string>
-  <string name="send_thank_failure_title" fuzzy="true">إرسال الشكر: فشل</string>
-  <string name="send_thank_toast" fuzzy="true">جارٍ إرسال شكرا على %1$s</string>
+  <string name="send_thank_failure_title">إرسال الشكر: فشل</string>
+  <string name="send_thank_toast">إرسال الشكر ل %1$s</string>
   <string name="review_copyright">هل يتبع هذا قواعد حقوق النشر؟</string>
   <string name="review_category">هل تم تصنيف هذا بشكل صحيح؟</string>
   <string name="review_spam">هل هذا في النطاق؟</string>
@@ -583,6 +582,8 @@
   <string name="delete_helper_ask_spam_selfie">سيلفي</string>
   <string name="delete_helper_ask_spam_blurry">ضبابية</string>
   <string name="delete_helper_ask_spam_nonsense">كلام فارغ</string>
+  <string name="delete_helper_ask_spam_other">أخرى: حدد أدناه</string>
+  <string name="delete_helper_other_notes_hint">التبرير</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">اضغط على الصورة</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">صورة عشوائية من الإنترنت</string>
   <string name="delete_helper_ask_reason_copyright_logo">شعار</string>
@@ -630,7 +631,7 @@
   <string name="you_have_no_achievements_yet">أنت لم تقم بأي مساهمة حتى الآن</string>
   <string name="no_achievements_yet">لم يقم %1$s بأي مساهمات حتى الآن</string>
   <string name="account_created">تم إنشاء الحساب!</string>
-  <string name="text_copy">تم نسخ النص  إلى الحافظة.</string>
+  <string name="text_copy">نُسخ النص إلى الحافظة.</string>
   <string name="notification_mark_read">تم تعليم الإخطار كمقروء</string>
   <string name="some_error">ثمة خطأ ما!</string>
   <string name="place_state">حالة المكان:</string>
@@ -899,4 +900,5 @@
   <string name="image_tag_line_created_and_uploaded_by">تم الإنشاء والتحميل بواسطة: %1$s</string>
   <string name="image_tag_line_created_by_and_uploaded_by">تم إنشاؤه بواسطة %1$s وتم تحميله بواسطة %2$s</string>
   <string name="nominated_for_deletion_btn">مرشح للحذف</string>
+  <string name="custom_selector_max_image_limit_reached">يمكنك فقط تحديد الحد الأقصى من الصور %d.</string>
 </resources>

@@ -13,6 +13,7 @@
 * Emabarto01
 * Gianfranco
 * Giorgx12
+* GseSro
 * Lorelai87
 * Lorem Ipsum
 * Luca.favorido
@@ -170,7 +171,9 @@
   <string name="no_uploads_yet">Non hai ancora caricato alcuna foto.</string>
   <string name="menu_retry_upload">Riprova</string>
   <string name="menu_cancel_upload">Annulla</string>
+  <string name="language_search_type_language_name">Inserisci il nome della lingua</string>
   <string name="language_search_recent_searches">Ricerche recenti</string>
+  <string name="language_search_all_languages">Tutte le lingue</string>
   <string name="media_upload_policy">Caricando questa immagine, dichiaro che questa è una mia opera, che non contiene materiale protetto da copyright o ritratti, e che comunque è conforme alle &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Policy di Wikimedia Commons&lt;/a&gt;.</string>
   <string name="menu_download">Scarica</string>
   <string name="preference_license">Licenza predefinita</string>
@@ -242,7 +245,6 @@
   <string name="_2fa_code">Codice 2FA</string>
   <string name="email_auth_code">Codice di verifica indirizzo email</string>
   <string name="logout_verification">Vuoi veramente uscire?</string>
-  <string name="mediaimage_failed">Immagine multimediale non riuscita</string>
   <string name="no_subcategory_found">Nessuna sottocategoria trovata</string>
   <string name="no_parentcategory_found">Nessuna categoria superiore trovata</string>
   <string name="welcome_image_mount_zao">Monte Zao</string>
@@ -375,6 +377,7 @@
   <string name="quiz_screenshot_question">Questo screenshot è OK per essere caricato?</string>
   <string name="share_app_title">Condividi applicazione</string>
   <string name="rotate">Ruota</string>
+  <string name="crop">Ritaglia</string>
   <string name="error_fetching_nearby_places">Non è possibile caricare i luoghi nelle vicinanze</string>
   <string name="no_pictures_in_this_area">Nessuna immagine in quest\'area</string>
   <string name="no_nearby_places_around">Nessun luogo trovato nelle vicinanze</string>
@@ -442,6 +445,8 @@
   <string name="no_categories_selected_warning_desc">Le immagini senza categorie sono raramente utilizzabili. Sei sicuro di voler continuare senza selezionare le categorie?</string>
   <string name="no_depictions_selected">Non sono stati selezionati elementi</string>
   <string name="no_depictions_selected_warning_desc">Le immagini con descrizioni possono essere trovate più facilmente ed è più probabile il loro utilizzo. Davvero vuoi continuare senza selezionare elementi raffigurati?</string>
+  <string name="depictions_choose_from_map">Scegli dalla mappa</string>
+  <string name="depictions_map_confirm">Conferma</string>
   <string name="back_button_warning">Annulla caricamento</string>
   <string name="back_button_warning_desc">Usare il tasto \'indietro\' cancellerà questo caricamento e perderai i tuoi progressi</string>
   <string name="back_button_continue">Continua caricamento</string>
@@ -459,6 +464,7 @@
   <string name="display_campaigns">Visualizza campagne</string>
   <string name="display_campaigns_explanation">Vedi le campagne in corso</string>
   <string name="show_deletion_button">Mostra pulsante di cancellazione</string>
+  <string name="show_deletion_button_explanation">**Abilita il pulsante \"Elimina cartella\" nel selettore personalizzato**</string>
   <string name="in_app_camera_location_access_explanation">Consenti all\'app di recuperare la posizione nel caso in cui la fotocamera non la registri. Alcune fotocamere del dispositivo non la registrano. In questi casi, consentire all\'app di recuperare e allegare la posizione rende il tuo contributo più utile. Potrai modificarlo in qualsiasi momento dalle Impostazioni</string>
   <string name="option_allow">Consenti</string>
   <string name="option_dismiss">Nascondi</string>
@@ -549,6 +555,7 @@
   <string name="delete_helper_ask_spam_selfie">un selfie che non viene utilizzato in nessuna voce</string>
   <string name="delete_helper_ask_spam_blurry">totalmente sfocato</string>
   <string name="delete_helper_ask_spam_nonsense">senza senso, assolutamente inutilizzabili in qualsiasi voce</string>
+  <string name="delete_helper_ask_spam_other">Altro</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">Stampa foto</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">Foto casuale presa da internet</string>
   <string name="delete_helper_ask_reason_copyright_logo">Logo</string>
@@ -725,6 +732,7 @@
   <string name="wlm_campaign_description">Wiki Loves Monuments è un concorso internazionale di fotografia di monumenti organizzato da Wikimedia</string>
   <string name="need_permission">Autorizzazione/i richiesta/e</string>
   <string name="read_phone_state_permission_message">Le mappe vicine hanno bisogno di leggere lo STATO DEL TELEFONO per funzionare correttamente</string>
+  <string name="location_off_dialog_text">Abilita il pulsante \"Elimina cartella\" nel selettore personalizzato</string>
   <string name="location_permission_rationale">Autorizzazione facoltativa: ottieni la posizione corrente per i suggerimenti di categoria</string>
   <string name="contributions_of_user">Contributi dell\'utente: %1$s</string>
   <string name="achievements_of_user">Traguardi dell\'utente: %1$s</string>
@@ -823,6 +831,7 @@
   <string name="pending">In attesa</string>
   <string name="failed">Non riuscito</string>
   <string name="could_not_load_place_data">Impossibile caricare i dati del luogo</string>
+  <string name="warning_for_no_option_selected">Seleziona una qualsiasi delle opzioni per rispondere alla domanda</string>
   <string name="custom_selector_delete_folder">Cancella cartella</string>
   <string name="custom_selector_confirm_deletion_title">Conferma cancellazione</string>
   <string name="custom_selector_confirm_deletion_message">Sei sicuro di voler eliminare la cartella %1$s contenente elementi %2$d?</string>
@@ -853,4 +862,5 @@
   <string name="image_tag_line_created_and_uploaded_by">Creato e caricato da: %1$s</string>
   <string name="image_tag_line_created_by_and_uploaded_by">Creato da %1$s e caricato da %2$s</string>
   <string name="nominated_for_deletion_btn">Proposto per la cancellazione</string>
+  <string name="custom_selector_max_image_limit_reached">Puoi selezionare solo un massimo di %d immagini.</string>
 </resources>

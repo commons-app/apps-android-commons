@@ -24,10 +24,10 @@
 * Veikk0.ma
 -->
 <resources>
-  <string name="commons_facebook">Commons Facebook-sivu</string>
-  <string name="commons_github" fuzzy="true">Commons Github lähdekoodi</string>
-  <string name="commons_logo">Commons-logo</string>
-  <string name="commons_website">Commons-verkkosivu</string>
+  <string name="commons_facebook">Commonsin Facebook-sivu</string>
+  <string name="commons_github">Commonsin lähdekoodi GitHubissa</string>
+  <string name="commons_logo">Commonsin logo</string>
+  <string name="commons_website">Commonsin sivusto</string>
   <string name="exit_location_picker">Poistu sijainnin valitsimesta</string>
   <string name="submit">Lähetä</string>
   <string name="add_another_description">Lisää toinen kuvaus</string>
@@ -227,15 +227,14 @@
   <string name="_2fa_code">Kaksivaiheisen tunnistautumisen koodi</string>
   <string name="email_auth_code">Sähköpostivahvistuskoodi</string>
   <string name="logout_verification">Haluatko varmasti kirjautua ulos?</string>
-  <string name="mediaimage_failed">Mediakuva epäonnistui</string>
   <string name="no_subcategory_found">Alaluokkia ei löytynyt</string>
   <string name="no_parentcategory_found">Vanhempia luokkia ei löytynyt</string>
   <string name="welcome_image_mount_zao">Zao-vuori</string>
   <string name="welcome_image_llamas">Laamat</string>
   <string name="welcome_image_rainbow_bridge">Sateenkaarisilta</string>
   <string name="welcome_image_tulip">Tulppaani</string>
-  <string name="welcome_image_welcome_wikipedia" fuzzy="true">Tervetuloa Wikipediaan</string>
-  <string name="welcome_image_welcome_copyright" fuzzy="true">Tervetuloa tekijänoikeus</string>
+  <string name="welcome_image_welcome_wikipedia">Kaaviokuva Wikipedia-artikkelista.</string>
+  <string name="welcome_image_welcome_copyright">Piirros paperipinosta, jossa on yliviivattu tekijänoikeussymboli.</string>
   <string name="welcome_image_sydney_opera_house">Sydneyn oopperatalo</string>
   <string name="cancel">Peru</string>
   <string name="navigation_drawer_open">Avaa</string>
@@ -287,6 +286,7 @@
   <string name="copy_wikicode">Kopioi wikiteksti leikepöydälle</string>
   <string name="wikicode_copied">Wikiteksti kopioitiin leikepöydälle</string>
   <string name="nearby_location_not_available">Lähistöllä-toiminto ei välttämättä toimi kunnolla, sillä sijainti ei käytettävissä.</string>
+  <string name="nearby_showing_pins_offline">Internet ei ole käytettävissä. Näytetään vain välimuistissa olevat paikat.</string>
   <string name="upload_location_access_denied">Sijainnin käyttö kielletty. Aseta sijaintisi manuaalisesti käyttääksesi tätä ominaisuutta.</string>
   <string name="location_permission_rationale_nearby">Lupa vaaditaan lähellä olevien paikkojen luettelon näyttämiseen</string>
   <string name="location_permission_rationale_explore">Lupa vaaditaan lähellä otettujen kuvien luettelon näyttämiseen</string>
@@ -323,6 +323,7 @@
   <string name="title_activity_search">Haku</string>
   <string name="search_recent_header">Äskettäiset haut:</string>
   <string name="provider_searches">Äskettäin haetut kyselyt</string>
+  <string name="provider_recent_languages">Äskettäin haetut kielet</string>
   <string name="error_loading_categories">Luokkia ladattaessa tapahtui virhe.</string>
   <string name="error_loading_depictions">Virhe ladattaessa esittää-tunnisteita.</string>
   <string name="search_tab_title_media">Media</string>
@@ -358,6 +359,7 @@
   <string name="quiz_screenshot_question">Onko tämä kuvakaappaus OK tallennettavaksi?</string>
   <string name="share_app_title">Jaa sovellus</string>
   <string name="rotate">Kierrä</string>
+  <string name="crop">Rajaa</string>
   <string name="error_fetching_nearby_places">Virhe läheisiä paikkoja ladatessa</string>
   <string name="no_pictures_in_this_area">Ei kuvia tältä alueelta</string>
   <string name="no_nearby_places_around">Ei lähistöllä olevia paikkoja</string>
@@ -425,6 +427,7 @@
   <string name="no_categories_selected_warning_desc">Kuvat, jotka eivät ole luokissa, ovat harvoin käyttökelpoisia. Haluatko varmasti jatkaa valitsematta luokkia?</string>
   <string name="no_depictions_selected">Esittää-tunnisteita ei valittu</string>
   <string name="no_depictions_selected_warning_desc">Kuvat, joissa on esittää-tunnisteita, löytyvät helpommin ja niitä käytetään todennäköisemmin. Haluatko varmasti jatkaa valitsematta esittää-tunnisteita?</string>
+  <string name="depictions_map_confirm">Vahvista</string>
   <string name="back_button_warning">Peruuta tallennus</string>
   <string name="back_button_warning_desc">Takaisin-napin painaminen peruuttaa tämän tallennuksen ja poistaa tallentamasi tiedot</string>
   <string name="back_button_continue">Jatka tallennusta</string>
@@ -436,7 +439,7 @@
   <string name="never_ask_again">Älä kysy tätä uudelleen</string>
   <string name="display_location_permission_title">Kysy lupaa sijainnille</string>
   <string name="display_location_permission_explanation">Pyydä sijaintilupaa tarvittaessa läheisen ilmoituksen näkymää varten.</string>
-  <string name="achievements_fetch_failed" fuzzy="true">Jotain meni pieleen. Emme voineet noutaa saavutuksia</string>
+  <string name="achievements_fetch_failed">Jotain meni pieleen, emme voineet noutaa saavutuksia</string>
   <string name="achievements_fetch_failed_ultimate_achievement">Olet tehnyt niin paljon muokkauskia, että saavutusten laskentajärjestelmä ei pysty selviytymään. Tämä on perimmäinen saavutus.</string>
   <string name="ends_on">Päättyy:</string>
   <string name="display_campaigns">Näytä kilpailut</string>
@@ -457,11 +460,11 @@
   <string name="check_category_failure_message">Luokkatarkistusta ei voitu pyytää %1$s</string>
   <string name="check_category_toast">Pyydetään luokkatarkistusta %1$s</string>
   <string name="nominate_for_deletion_done">Valmis</string>
-  <string name="send_thank_success_title" fuzzy="true">Kiitosten lähettäminen: Onnistui</string>
+  <string name="send_thank_success_title">Kiitosten lähettäminen: Onnistui</string>
   <string name="send_thank_success_message">Kiitos lähetetty käyttäjälle %1$s</string>
   <string name="send_thank_failure_message">Kiitoksen lähettäminen käyttäjälle %1$s epäonnistui</string>
-  <string name="send_thank_failure_title" fuzzy="true">Kiitosten lähettäminen: Epäonnistui</string>
-  <string name="send_thank_toast" fuzzy="true">Lähetetty kiitokset %1$s</string>
+  <string name="send_thank_failure_title">Kiitosten lähettäminen: Epäonnistui</string>
+  <string name="send_thank_toast">Lähetetty kiitokset käyttäjälle %1$s</string>
   <string name="review_copyright">Noudattaako tämä tekijänoikeussääntöjä?</string>
   <string name="review_category">Onko tämä luokiteltu oikein?</string>
   <string name="review_spam">Sopiiko tämä sivuston puitteissa?</string>
@@ -520,6 +523,7 @@
   <string name="delete_helper_ask_spam_selfie">selfie, jota ei käytetä missään artikkelissa</string>
   <string name="delete_helper_ask_spam_blurry">täysin sumea</string>
   <string name="delete_helper_ask_spam_nonsense">hölynpölyä, täysin hyödytön kaikissa artikkelissa</string>
+  <string name="delete_helper_ask_spam_other">Muu</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">Lehdistökuva</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">Satunnainen kuva internetistä</string>
   <string name="delete_helper_ask_reason_copyright_logo">Logo</string>
@@ -613,7 +617,7 @@
   <string name="setting_avatar_dialog_title">Aseta pistetaulukkoavatariksi</string>
   <string name="setting_avatar_dialog_message">Asetetaan avatariksi, ole hyvä ja odota</string>
   <string name="avatar_set_successfully">Avatar asetettu</string>
-  <string name="avatar_set_unsuccessfully">Virhe avatarin asettamisessa, ole hyvä ja kokeile uudestaan</string>
+  <string name="avatar_set_unsuccessfully">Virhe avatarin asettamisessa, ole hyvä ja kokeile uudelleen</string>
   <string name="menu_set_avatar">Aseta avatariksi</string>
   <string name="leaderboard_yearly">Vuosittain</string>
   <string name="leaderboard_weekly">Viikoittain</string>
@@ -660,6 +664,8 @@
   <string name="back">Takaisin</string>
   <string name="welcome_custom_selector_ok">Mahtavaa</string>
   <string name="custom_selector_already_uploaded_image_text">Tämä kuva on jo ladattu Commonsiin.</string>
+  <string name="custom_selector_dismiss_limit_warning_button_text">Hylkää</string>
+  <string name="custom_selector_button_limit_text">Max: %1$d</string>
   <string name="custom_selector_limit_error_desc">Virhe: Tallennusraja ylitetty</string>
   <string name="learn_more">LUE LISÄÄ</string>
   <string name="need_permission">Tarvitaan käyttöoikeus</string>
@@ -692,13 +698,14 @@
   <string name="menu_view_report">Ilmoita</string>
   <string name="menu_view_set_white_background">Aseta valkoinen tausta</string>
   <string name="menu_view_set_black_background">Aseta musta tausta</string>
+  <string name="report_violation">Ilmianna rikkomus</string>
   <string name="report_user">Ilmianna käyttäjä</string>
   <string name="report_content">Ilmianna sisältö</string>
   <string name="request_user_block">Pyydä tämän käyttäjän estämistä</string>
   <string name="welcome_to_full_screen_mode_text">Tervetuloa koko näytön valintatilaan</string>
   <string name="full_screen_mode_zoom_info">Käytä kahta sormea lähentääksesi ja loitontaaksesi.</string>
   <string name="full_screen_mode_features_info">Pyyhkäise nopeasti ja pitkään suorittaaksesi nämä toiminnot: \n- Vasen/Oikea: Siirry edelliseen/seuraavaan \n- Ylös: Valitse\n- Alas: Merkitse ei-tallennettavaksi.</string>
-  <string name="see_your_achievements" fuzzy="true">Näytä omat saavutukset</string>
+  <string name="see_your_achievements">Katso omat saavutukset</string>
   <string name="edit_image">Muokkaa kuvaa</string>
   <string name="edit_location">Muokkaa sijaintia</string>
   <string name="location_updated">Sijainti päivitetty!</string>
@@ -717,6 +724,7 @@
     <item quantity="one">%1$d kuva valittu</item>
     <item quantity="other">%1$d kuvaa valittu</item>
   </plurals>
+  <string name="nearby_wikitalk">Ilmoita Wikidataan tähän kohteeseen liittyvästä ongelmasta</string>
   <string name="talk">Keskustelu</string>
   <string name="feedback_destination_note">Palautteesi on julkaistu seuraavalla wikisivulla: &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Mobile_app/Feedback\"&gt;Commons:Mobile app/Feedback&lt;/a&gt;</string>
   <string name="are_you_sure_that_you_want_cancel_all_the_uploads">Oletko varma, että haluat peruuttaa kaikki tallennukset?</string>

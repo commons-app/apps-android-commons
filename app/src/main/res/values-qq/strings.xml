@@ -5,6 +5,7 @@
 * Amire80
 * Annick green
 * Cabal
+* EdoAug
 * Googology
 * H78c67c
 * LeGuyanaisPure
@@ -154,7 +155,7 @@
   <string name="no_uploads_yet">Message shown on contribution list during non-first sync if no uploads present.</string>
   <string name="menu_retry_upload">Menu item text prompting user to retry a failed upload.\n{{Identical|Retry}}</string>
   <string name="menu_cancel_upload">Menu item text prompting user to cancel and delete a failed upload.\n{{Identical|Cancel}}</string>
-  <string name="language_search_type_language_name">Placeholder text in the top search box in the language search dialog.</string>
+  <string name="language_search_type_language_name">Placeholder text in the top search box in the language search dialog.\n\n\"Type\" here is an imperative verb. The user is prompted to type or write in the name of their desired user interface language.</string>
   <string name="language_search_recent_searches">A title in the language search dialog.</string>
   <string name="language_search_all_languages">A title in the language search dialog.</string>
   <string name="media_upload_policy">License text.</string>
@@ -228,7 +229,6 @@
   <string name="_2fa_code">Login form label.</string>
   <string name="email_auth_code">Login screen command.</string>
   <string name="logout_verification">Confirmation string.</string>
-  <string name="mediaimage_failed">Alternative text.</string>
   <string name="no_subcategory_found">Notice when searching for subcategories.</string>
   <string name="no_parentcategory_found">Notice when searching for subcategories.</string>
   <string name="welcome_image_mount_zao">This is a mountain between Yamagata and Miyagi Prefectures in Japan, see [[d:Q167951]] for details.</string>

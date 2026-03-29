@@ -218,7 +218,6 @@
   <string name="_2fa_code">2ფა კოდი</string>
   <string name="email_auth_code">ელექტრონული ფოშტაშ დოდასურაფაშ კოდი</string>
   <string name="logout_verification">გოკონანო გიშულა?</string>
-  <string name="mediaimage_failed">მედიაფაილიშ ჩილათა</string>
   <string name="no_subcategory_found">გიმენკატეგორიეფქ ვეგორინუ</string>
   <string name="no_parentcategory_found">ომასქერე კატეგორიეფქ ვეგორინუ</string>
   <string name="welcome_image_mount_zao">ზაოშ გვალა</string>

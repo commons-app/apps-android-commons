@@ -46,6 +46,7 @@ import fr.free.nrw.commons.R
 import fr.free.nrw.commons.customselector.database.NotForUploadStatus
 import fr.free.nrw.commons.customselector.database.NotForUploadStatusDao
 import fr.free.nrw.commons.customselector.helper.CustomSelectorConstants
+import fr.free.nrw.commons.customselector.helper.CustomSelectorConstants.MAX_IMAGE_COUNT
 import fr.free.nrw.commons.customselector.helper.FolderDeletionHelper
 import fr.free.nrw.commons.customselector.listeners.FolderClickListener
 import fr.free.nrw.commons.customselector.listeners.ImageSelectListener
@@ -107,7 +108,7 @@ class CustomSelectorActivity :
     /**
      * Maximum number of images that can be selected.
      */
-    private var uploadLimit: Int = 20
+    private var uploadLimit: Int = MAX_IMAGE_COUNT
 
     /**
      * Flag that is marked true when the amount
@@ -162,7 +163,7 @@ class CustomSelectorActivity :
      * Waits for confirmation of delete folder
      */
     private val startForFolderDeletionResult = registerForActivityResult(ActivityResultContracts.StartIntentSenderForResult()){
-        result -> onDeleteFolderResultReceived(result)
+            result -> onDeleteFolderResultReceived(result)
     }
 
     private val startForResult = registerForActivityResult(StartActivityForResult()){ result ->
@@ -214,7 +215,7 @@ class CustomSelectorActivity :
             )
 
         // Check for single selection extra
-        uploadLimit = if (intent.getBooleanExtra(EXTRA_SINGLE_SELECTION, false)) 1 else 20
+        uploadLimit = if (intent.getBooleanExtra(EXTRA_SINGLE_SELECTION, false)) 1 else MAX_IMAGE_COUNT
 
         setupViews()
 

@@ -245,7 +245,6 @@
   <string name="_2fa_code">2FA 代碼</string>
   <string name="email_auth_code">電子郵件驗證碼</string>
   <string name="logout_verification">您確定要登出嗎？</string>
-  <string name="mediaimage_failed">媒體圖片失敗</string>
   <string name="no_subcategory_found">找不到子分類</string>
   <string name="no_parentcategory_found">找不到父級分類</string>
   <string name="welcome_image_mount_zao">藏王山</string>
@@ -378,6 +377,7 @@
   <string name="quiz_screenshot_question">這張截圖可以上傳嗎？</string>
   <string name="share_app_title">分享應用程式</string>
   <string name="rotate">旋轉</string>
+  <string name="crop">裁剪</string>
   <string name="error_fetching_nearby_places">無法載入附近地點</string>
   <string name="no_pictures_in_this_area">此區域沒有圖片</string>
   <string name="no_nearby_places_around">找不到附近地點</string>
@@ -397,7 +397,7 @@
   <string name="statistics_wikidata_edits">圖片來自“附近的地方”</string>
   <string name="level">等級 %1$d</string>
   <string name="profile_withLevel">%1$s（%2$s級）</string>
-  <string name="profile_withoutLevel" fuzzy="true">%s（%s）</string>
+  <string name="profile_withoutLevel">%1$s（%2$s）</string>
   <string name="images_uploaded">已上傳的圖片</string>
   <string name="image_reverts">沒有被還原回復的圖片</string>
   <string name="images_used_by_wiki">有被使用到的圖片</string>
@@ -554,6 +554,7 @@
   <string name="delete_helper_ask_spam_selfie">未在任何條目中使用的自拍照</string>
   <string name="delete_helper_ask_spam_blurry">完全糢糊</string>
   <string name="delete_helper_ask_spam_nonsense">無意義，無法使用在任何條目</string>
+  <string name="delete_helper_ask_spam_other">其它</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">新聞照片</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">來自網路的隨機照片</string>
   <string name="delete_helper_ask_reason_copyright_logo">標誌</string>
@@ -821,7 +822,7 @@
   <string name="is_at_a_different_place_wikidata">「%1$s」位於不同的地方。</string>
   <string name="is_at_a_different_place_please_specify_the_correct_place_below_if_possible_tell_us_the_correct_latitude_longitude">「%1$s」位於不同的位置。請在下面指定正確的位置，可以的話請填寫正確的經緯度。</string>
   <string name="other_problem_or_information_please_explain_below">其他問題或資訊（請在下方解釋）。</string>
-  <string name="feedback_destination_note">您的回饋已發布到以下 wiki 頁面：&lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Mobile_app/Feedback\"&gt;Commons:Mobile app/Feedback&lt;/a&gt;</string>
+  <string name="feedback_destination_note">您的回饋會發布到以下 wiki 頁面：&lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Mobile_app/Feedback\"&gt;Commons:Mobile app/Feedback&lt;/a&gt;</string>
   <string name="are_you_sure_that_you_want_cancel_all_the_uploads">您確定要取消所有上傳嗎？</string>
   <string name="cancelling_all_the_uploads">正在取消所有上傳…</string>
   <string name="uploads">上傳</string>
@@ -857,4 +858,5 @@
   <string name="image_tag_line_created_and_uploaded_by">由%1$s建立與上傳</string>
   <string name="image_tag_line_created_by_and_uploaded_by">由%1$s建立，%2$s上傳</string>
   <string name="nominated_for_deletion_btn">提名刪除</string>
+  <string name="custom_selector_max_image_limit_reached">您最多只能選擇 %d 張圖片。</string>
 </resources>

@@ -64,6 +64,9 @@ class ExploreFragment : CommonsDaggerSupportFragment() {
             override fun onPageScrollStateChanged(state: Int) = Unit
             override fun onPageSelected(position: Int) {
                 binding!!.viewPager.canScroll = position != 2
+                // based on which tab we are now recreate the options menu
+                activity?.invalidateOptionsMenu()
+
                 if (position == 2) {
                     mapRootFragment?.requestLocationIfNeeded()
                 }
@@ -121,9 +124,15 @@ class ExploreFragment : CommonsDaggerSupportFragment() {
         // get fragment arguments
         if (arguments != null) {
             with (requireArguments()) {
-                prevZoom = getDouble("prev_zoom")
-                prevLatitude = getDouble("prev_latitude")
-                prevLongitude = getDouble("prev_longitude")
+                if (containsKey("prev_zoom")) {
+                    prevZoom = getDouble("prev_zoom")
+                }
+                if (containsKey("prev_latitude")) {
+                    prevLatitude = getDouble("prev_latitude")
+                }
+                if (containsKey("prev_longitude")) {
+                    prevLongitude = getDouble("prev_longitude")
+                }
             }
         }
     }
@@ -135,7 +144,9 @@ class ExploreFragment : CommonsDaggerSupportFragment() {
      * @return true if user navigated from Nearby map
      */
     private val isCameFromNearbyMap: Boolean
-        get() = prevZoom != 0.0 || prevLatitude != 0.0 || prevLongitude != 0.0
+        get() = (arguments?.containsKey("prev_zoom") == true
+                && arguments?.containsKey("prev_latitude") == true
+                && arguments?.containsKey("prev_longitude") == true)
 
     fun onBackPressed(): Boolean {
         if (binding!!.tabLayout.selectedTabPosition == 0) {
@@ -170,19 +181,6 @@ class ExploreFragment : CommonsDaggerSupportFragment() {
             if (binding!!.viewPager.currentItem == 2) {
                 others.setVisible(true)
             }
-
-            // if on Map tab, show all menu options, else only show search
-            binding!!.viewPager.addOnPageChangeListener(object : OnPageChangeListener {
-                override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) = Unit
-                override fun onPageScrollStateChanged(state: Int) = Unit
-                override fun onPageSelected(position: Int) {
-                    binding!!.viewPager.canScroll = position != 2
-                    others.setVisible(position == 2)
-                    if (position == 2) {
-                        mapRootFragment?.requestLocationIfNeeded()
-                    }
-                }
-            })
         } else {
             inflater.inflate(R.menu.menu_search, menu)
         }

@@ -155,7 +155,6 @@
   <string name="media_detail_coordinates">ကိုဩဒိနိတ်</string>
   <string name="media_detail_coordinates_empty">မဖြည့်ထားပါ</string>
   <string name="logout_verification">အမှန်တကယ် ထွက်သွားလိုပါသလား</string>
-  <string name="mediaimage_failed">မီဒီယာရုပ်ပုံ မအောင်မြင်ပါ</string>
   <string name="no_subcategory_found">ကဏ္ဍခွဲများ မတွေ့ရှိပါ</string>
   <string name="no_parentcategory_found">ပင်မကဏ္ဍများ မတွေ့ရှိပါ</string>
   <string name="welcome_image_tulip">ခတ္တာပန်း</string>
@@ -334,6 +333,7 @@
   <string name="delete_helper_show_deletion_message_else">ပယ်ဖျက်ရန် မတောင်းဆိုနိုင်ပါ</string>
   <string name="delete_helper_ask_spam_blurry" fuzzy="true">မှုန်ဝါး</string>
   <string name="delete_helper_ask_spam_nonsense" fuzzy="true">အဓိပ္ပါယ်မရှိ</string>
+  <string name="delete_helper_ask_spam_other">အခြား</string>
   <string name="delete_helper_ask_reason_copyright_logo">လိုဂို</string>
   <string name="category_edit_helper_make_edit_toast">ကဏ္ဍများမွမ်းမံရန် ကြိုးစားနေသည်။</string>
   <string name="category_edit_helper_show_edit_title">ကဏ္ဍမွမ်းမံ</string>

@@ -253,7 +253,6 @@
   <string name="_2fa_code">Kód pro dvoufázové ověření (2FA)</string>
   <string name="email_auth_code">Ověřovací kód z e-mailu</string>
   <string name="logout_verification">Opravdu se chcete odhlásit?</string>
-  <string name="mediaimage_failed">Obrázek</string>
   <string name="no_subcategory_found">Nebyly nalezeny podkategorie</string>
   <string name="no_parentcategory_found">Nebyly nalezeny rodičovské kategorie</string>
   <string name="welcome_image_mount_zao">Hora Zao</string>
@@ -555,6 +554,7 @@
   <string name="delete_helper_ask_spam_selfie">selfie, které není použito v žádném článku</string>
   <string name="delete_helper_ask_spam_blurry">úplně rozmazané</string>
   <string name="delete_helper_ask_spam_nonsense">nesmysl, naprosto nepoužitelné v jakémkoli článku</string>
+  <string name="delete_helper_ask_spam_other">Jiné</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">Tisková fotka</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">Náhodná fotka z internetu</string>
   <string name="delete_helper_ask_reason_copyright_logo">Logo</string>

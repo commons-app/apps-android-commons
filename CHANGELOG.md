@@ -1,5 +1,54 @@
 # Wikimedia Commons for Android
 
+## v6.4.0
+
+### What's changed
+* Users can now crop their images during the upload process without leaving the app
+* Bug fixes and stability improvements
+
+**Full Changelog**: https://github.com/commons-app/apps-android-commons/compare/v6.3.0...v6.4.0
+
+## v6.3.0
+
+### What's changed
+* Caption and description are now accessible on all screen sizes
+* Custom author name no longer results into invalid URLs on Commons and redirect to the actual user profile
+* Bug fixes and stability improvements
+
+## v6.2.1
+
+### What's changed
+* The app no longer crashes on navigating from the MainActivity to other activities
+* Support for larger zoom levels on the image upload preview screen
+
+## v6.2.0
+
+### What's changed
+* Explore map no longer shows incorrect coordinates while navigating from Nearby
+* The popup messages are now more user-friendly
+* Sending images from Gallery apps to Commons app no longer asks for storage permissions
+* Improved UX for the custom selector
+* Wikipedia links now appear correctly on the app
+* Double-tap or pinch to zoom support in the custom selector
+
+## v6.1.0
+
+### What's changed
+* Edit Description button now shows up correctly
+* Custom selector supports deselecting images
+* Adjusted spacing on the Edit Location screen for a cleaner layout
+* The location permission request no longer prompts the users on the "Uploaded via Mobile" tab
+* Several i18n improvements
+* Improved app performance and compatibility with newer Android devices due to 16 KB page size support
+* Bookmark categories and the target icon in Explore map no longer crash
+* Enhanced app theme change handling
+* Prevented memory leaks and invalid context access in map fragments
+* Improved support for right-to-left languages like Arabic or Hebrew
+* Nearby will now remember your chosen filters (like "building" or "cottage") when you switch tabs
+* Hardware acceleration and keyboard animation have temporarily been disabled to mitigate an upload issue
+
+**Full Changelog**: https://github.com/commons-app/apps-android-commons/compare/v6.0.2...v6.1.0
+
 ## v6.0.2
 
 ### What's changed

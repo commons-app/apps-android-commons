@@ -10,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jakewharton.rxbinding2.view.RxView
@@ -32,7 +33,6 @@ import io.reactivex.Notification
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import timber.log.Timber
-import java.util.Objects
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
@@ -197,6 +197,15 @@ class UploadCategoriesFragment : UploadBaseFragment(), CategoriesContract.View {
 
     override fun showError(stringResourceId: Int) {
         binding?.tilContainerSearch?.error = getString(stringResourceId)
+    }
+
+    override fun showErrorDialog(message: String) {
+        AlertDialog
+            .Builder(requireContext())
+            .setMessage(getString(R.string.error_loading_categories) + "\n" + message)
+            .setCancelable(false)
+            .setNegativeButton(R.string.ok){_,_ -> }
+            .show()
     }
 
     override fun setCategories(categories: List<CategoryItem>?) {

@@ -232,7 +232,6 @@
   <string name="_2fa_code">Koda 2FA</string>
   <string name="email_auth_code">Koda za preverjanje e-pošte</string>
   <string name="logout_verification">Ali se res želite odjaviti?</string>
-  <string name="mediaimage_failed">Nalaganje datoteke ni uspelo</string>
   <string name="no_subcategory_found">Najdena ni bila nobena podkategorija</string>
   <string name="no_parentcategory_found">Najdena ni bila nobena nadrejena kategorija</string>
   <string name="welcome_image_mount_zao">Gora Zao</string>
@@ -534,6 +533,7 @@
   <string name="delete_helper_ask_spam_selfie">sebek, ki ni uporabljen v članku</string>
   <string name="delete_helper_ask_spam_blurry">popolnoma zamegljeno</string>
   <string name="delete_helper_ask_spam_nonsense">nesmisel, absolutno neuporaben v katerem koli članku</string>
+  <string name="delete_helper_ask_spam_other">Drugo</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">Tiskovna fotografija</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">Naključna fotografija s spleta</string>
   <string name="delete_helper_ask_reason_copyright_logo">Logotip</string>

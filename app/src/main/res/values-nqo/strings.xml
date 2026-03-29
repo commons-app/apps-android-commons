@@ -174,7 +174,6 @@
   <string name="become_a_tester_description">ߌ ߕߐ߮ ߛߓߍ߫ ߊ߲ ߠߊ߫ ߓߋߕߊ ߥߏ߬ߦߏ ߟߊ߫ ߜ߭ߎߜ߭ߏߟ ߔߑߟߋߦ ߞߊ߲߬ ߞߊ߬ ߗߋߘߊ߫ ߞߎߘߊ ߟߎ߬ ߟߊߛߐ߬ߘߐ߲߫ ߊ߬ ߣߌ߫ ߞߐߕߐ߯ ߕߌߢߍߣߍ߲ ߠߎ߬</string>
   <string name="_2fa_code">2FA Code</string>
   <string name="logout_verification">ߌ ߦߴߊ߬ ߝߍ߬ ߞߵߌ ߜߊ߲߬ߞߎ߲߬ߣߍ߲ ߓߐ߫ ߝߛߊߦߌ߫؟</string>
-  <string name="mediaimage_failed">ߡߋߘߌߦߊ ߖߌ߬ߦߊ߬ߓߍ ߓߘߊ߫ ߗߌߙߏ߲߫</string>
   <string name="no_subcategory_found">ߦߌߟߡߊߙߋ߲߫ ߕߴߦߋ߲߬</string>
   <string name="no_parentcategory_found">ߡߏߦߌߓߊ߯ ߦߌߟߡߊ ߟߎ߬ ߝߋ߲߫ ߡߊ߫ ߛߐ߬ߘߐ߲߫.</string>
   <string name="welcome_image_mount_zao">ߖ߭ߊߏ߫ ߞߎ߬ߙߎ</string>
@@ -438,6 +437,7 @@
   <string name="delete_helper_ask_spam_selfie">ߛߍߟߑߝߌ ߡߍ߲ ߟߊߓߊ߯ߙߊߣߍ߲߫ ߕߍ߫ ߞߎߡߘߊ߫ ߛߌ߫ ߟߊ߫</string>
   <string name="delete_helper_ask_spam_blurry">ߢߟߊߝߎ߬ߟߎ߲߬ߜߊ߬ߣߍ߲ ߓߎߘߎ߲ߛߊ߫</string>
   <string name="delete_helper_ask_spam_nonsense">ߞߎ߲߬ߕߋ߬ߟߋ߲߬ ߕߴߊ߬ ߟߊ߫߸ ߊ߬ ߕߴߛߋ߫ ߟߊߓߊ߯ߙߊ߫ ߟߊ߫ ߞߎߡߘߊ߫ ߛߌ߫ ߡߎ߰ߡߍ߫</string>
+  <string name="delete_helper_ask_spam_other">ߘߏ߫ ߜߘߍ߫</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">ߖߌ߬ߦߊ߬ߓߍ ߜߍ߬ߙߍ߲߬ߘߍ߬ߣߍ߲</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">ߓߍ߲߬ߛߋ߲߬ߡߊ߫ ߖߌߦߊߓߍ ߟߎ߬ ߞߊ߬ ߝߘߊ߫ ߓߟߐߟߐ ߟߊ߫</string>
   <string name="delete_helper_ask_reason_copyright_logo">ߛߌ߲ߞߐ߲</string>

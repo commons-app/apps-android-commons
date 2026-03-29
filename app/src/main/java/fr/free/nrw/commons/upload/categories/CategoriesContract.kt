@@ -17,6 +17,11 @@ interface CategoriesContract {
 
         fun showError(stringResourceId: Int)
 
+        /**
+         * Show a cancelable AlertDialog with a given message.
+         */
+        fun showErrorDialog(message: String)
+
         fun setCategories(categories: List<CategoryItem>?)
 
         fun goToNextScreen()

@@ -104,7 +104,6 @@
   <string name="media_detail_coordinates">স্থানাংকসমূহ</string>
   <string name="media_detail_coordinates_empty">একো প্ৰদান কৰা নাই</string>
   <string name="become_a_tester_title">এগৰাকী বিটা টেষ্টাৰ হওঁক</string>
-  <string name="mediaimage_failed">মিডিয়াৰ ছবি বিফল হ\'ল</string>
   <string name="navigation_drawer_open">খোলক</string>
   <string name="navigation_drawer_close">বন্ধ কৰক</string>
   <string name="navigation_item_nearby">নিকটৱৰ্তী</string>
@@ -128,6 +127,7 @@
   <string name="delete_helper_ask_spam_selfie" fuzzy="true">এটা ছেল্ফি</string>
   <string name="delete_helper_ask_spam_blurry" fuzzy="true">ধোঁৱা-ধোঁৱা</string>
   <string name="delete_helper_ask_spam_nonsense" fuzzy="true">অৰ্থহীন</string>
+  <string name="delete_helper_ask_spam_other">অনান্য</string>
   <string name="delete_helper_ask_reason_copyright_logo">ল\'গ\'</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">কাৰণ এয়া</string>
 </resources>

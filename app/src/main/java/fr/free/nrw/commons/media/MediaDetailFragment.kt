@@ -87,6 +87,7 @@ import fr.free.nrw.commons.category.CategoryClient
 import fr.free.nrw.commons.category.CategoryDetailsActivity
 import fr.free.nrw.commons.category.CategoryEditHelper
 import fr.free.nrw.commons.contributions.ContributionsFragment
+import fr.free.nrw.commons.contributions.MainActivity
 import fr.free.nrw.commons.coordinates.CoordinateEditHelper
 import fr.free.nrw.commons.databinding.FragmentMediaDetailBinding
 import fr.free.nrw.commons.delete.DeleteHelper
@@ -703,6 +704,8 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
             spacerParams.height = finalHeight
             binding.mediaDetailImageView.layoutParams = params
             binding.mediaDetailImageViewSpacer.layoutParams = spacerParams
+            if(finalHeight>0)
+                binding.mediaDetailScrollView.visibility = View.VISIBLE
         }
     }
 
@@ -791,6 +794,14 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
         compositeDisposable.clear()
 
         super.onDestroyView()
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        if (activity is MainActivity) {
+            //explicitly hides the tabs when the media details screen is opened.
+            (activity as MainActivity).hideTabs()
+        }
     }
 
     private fun setTextFields(media: Media) {
