@@ -451,6 +451,7 @@
   <string name="delete_helper_ask_spam_selfie">egy szelfi, amely egyetlen cikkben sem szerepel</string>
   <string name="delete_helper_ask_spam_blurry">teljesen homályos</string>
   <string name="delete_helper_ask_spam_nonsense">nonszensz, abszolút használhatatlan bármely cikkben is</string>
+  <string name="delete_helper_ask_spam_other">Egyéb</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">Sajtófotó</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">Random fénykép az Internetről</string>
   <string name="delete_helper_ask_reason_copyright_logo">Logó</string>

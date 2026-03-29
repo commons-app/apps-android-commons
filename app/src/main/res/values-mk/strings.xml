@@ -530,6 +530,7 @@
   <string name="delete_helper_ask_spam_selfie">самослик кој не се користи во ниедна статија</string>
   <string name="delete_helper_ask_spam_blurry">сосема матно</string>
   <string name="delete_helper_ask_spam_nonsense">бесмислено, апсолутно неупотребливо во ниедна статија</string>
+  <string name="delete_helper_ask_spam_other">Друго</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">Новинарска слика</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">Произволна слика од семрежјето</string>
   <string name="delete_helper_ask_reason_copyright_logo">Лого</string>

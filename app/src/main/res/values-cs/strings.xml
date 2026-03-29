@@ -554,6 +554,7 @@
   <string name="delete_helper_ask_spam_selfie">selfie, které není použito v žádném článku</string>
   <string name="delete_helper_ask_spam_blurry">úplně rozmazané</string>
   <string name="delete_helper_ask_spam_nonsense">nesmysl, naprosto nepoužitelné v jakémkoli článku</string>
+  <string name="delete_helper_ask_spam_other">Jiné</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">Tisková fotka</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">Náhodná fotka z internetu</string>
   <string name="delete_helper_ask_reason_copyright_logo">Logo</string>

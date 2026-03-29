@@ -178,6 +178,7 @@ class ExploreMapFragment : CommonsDaggerSupportFragment(), ExploreMapContract.Vi
         } else {
             Html.fromHtml(getString(R.string.map_attribution))
         }
+        binding!!.tvAttribution.movementMethod = android.text.method.LinkMovementMethod.getInstance()
         initNetworkBroadCastReceiver()
         locationPermissionsHelper = LocationPermissionsHelper(
             requireActivity(), locationManager,
