@@ -17,8 +17,13 @@ import fr.free.nrw.commons.BuildConfig
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.bookmarks.category.BookmarkCategoriesDao
+import fr.free.nrw.commons.bookmarks.items.BookmarkItemsRoomDao
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao
+import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesRoomDao
+import fr.free.nrw.commons.category.CategoryRoomDao
 import fr.free.nrw.commons.contributions.ContributionDao
+import fr.free.nrw.commons.explore.recentsearches.RecentSearchesRoomDao
+import fr.free.nrw.commons.recentlanguages.RecentLanguagesRoomDao
 import fr.free.nrw.commons.customselector.database.NotForUploadStatusDao
 import fr.free.nrw.commons.customselector.database.UploadedStatusDao
 import fr.free.nrw.commons.customselector.ui.selector.ImageFileLoader
@@ -237,6 +242,26 @@ open class CommonsApplicationModule(private val applicationContext: Context) {
     @Provides
     fun providesBookmarkCategoriesDao (appDatabase: AppDatabase): BookmarkCategoriesDao =
         appDatabase.bookmarkCategoriesDao()
+
+    @Provides
+    fun providesCategoryRoomDao(appDatabase: AppDatabase): CategoryRoomDao =
+        appDatabase.categoryRoomDao()
+
+    @Provides
+    fun providesBookmarkPicturesRoomDao(appDatabase: AppDatabase): BookmarkPicturesRoomDao =
+        appDatabase.bookmarkPicturesRoomDao()
+
+    @Provides
+    fun providesBookmarkItemsRoomDao(appDatabase: AppDatabase): BookmarkItemsRoomDao =
+        appDatabase.bookmarkItemsRoomDao()
+
+    @Provides
+    fun providesRecentLanguagesRoomDao(appDatabase: AppDatabase): RecentLanguagesRoomDao =
+        appDatabase.recentLanguagesRoomDao()
+
+    @Provides
+    fun providesRecentSearchesRoomDao(appDatabase: AppDatabase): RecentSearchesRoomDao =
+        appDatabase.recentSearchesRoomDao()
 
     @Provides
     fun providesContentResolver(context: Context): ContentResolver =

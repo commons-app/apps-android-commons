@@ -25,7 +25,7 @@ import javax.inject.Inject
 class RecentSearchesFragment : CommonsDaggerSupportFragment() {
     @JvmField
     @Inject
-    var recentSearchesDao: RecentSearchesDao? = null
+    var recentSearchesDao: RecentSearchesRoomDao? = null
 
     private var recentSearches: List<String> = emptyList()
     private lateinit var adapter: ArrayAdapter<String>

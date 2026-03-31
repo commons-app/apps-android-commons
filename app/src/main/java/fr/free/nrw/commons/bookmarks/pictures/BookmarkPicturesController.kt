@@ -11,7 +11,7 @@ import javax.inject.Singleton
 @Singleton
 class BookmarkPicturesController @Inject constructor(
     private val mediaClient: MediaClient,
-    private val bookmarkDao: BookmarkPicturesDao
+    private val bookmarkDao: BookmarkPicturesRoomDao
 ) {
     private var currentBookmarks: List<Bookmark> = listOf()
 

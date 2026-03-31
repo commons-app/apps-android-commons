@@ -17,7 +17,6 @@ import fr.free.nrw.commons.auth.LoginActivity
 import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.bookmarks.items.BookmarkItemsTable
 import fr.free.nrw.commons.bookmarks.pictures.BookmarksTable
-import fr.free.nrw.commons.category.CategoryDao
 import fr.free.nrw.commons.category.CategoryTable
 import fr.free.nrw.commons.concurrency.BackgroundPoolExceptionHandler
 import fr.free.nrw.commons.concurrency.ThreadPoolService

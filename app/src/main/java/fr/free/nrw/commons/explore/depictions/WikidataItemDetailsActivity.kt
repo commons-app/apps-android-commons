@@ -13,7 +13,7 @@ import com.google.android.material.snackbar.Snackbar
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.ViewPagerAdapter
-import fr.free.nrw.commons.bookmarks.items.BookmarkItemsDao
+import fr.free.nrw.commons.bookmarks.items.BookmarkItemsRoomDao
 import fr.free.nrw.commons.category.CategoryImagesCallback
 import fr.free.nrw.commons.databinding.ActivityWikidataItemDetailsBinding
 import fr.free.nrw.commons.explore.depictions.child.ChildDepictionsFragment
@@ -38,7 +38,7 @@ import javax.inject.Inject
 class WikidataItemDetailsActivity : BaseActivity(), MediaDetailProvider, CategoryImagesCallback {
     @JvmField
     @Inject
-    var bookmarkItemsDao: BookmarkItemsDao? = null
+    var bookmarkItemsDao: BookmarkItemsRoomDao? = null
 
     @JvmField
     @Inject
@@ -220,7 +220,7 @@ class WikidataItemDetailsActivity : BaseActivity(), MediaDetailProvider, Categor
                             .subscribe(Consumer<List<DepictedItem?>> { depictedItems: List<DepictedItem?> ->
                                 val bookmarkExists = bookmarkItemsDao!!.updateBookmarkItem(
                                     depictedItems[0]!!
-                                )
+                                ).blockingGet()
                                 val snackbar = if (bookmarkExists)
                                     Snackbar.make(
                                         findViewById(R.id.toolbar_layout),
@@ -238,7 +238,7 @@ class WikidataItemDetailsActivity : BaseActivity(), MediaDetailProvider, Categor
                             })
                     )
                 } else {
-                    val bookmarkExists = bookmarkItemsDao!!.updateBookmarkItem(wikidataItem!!)
+                    val bookmarkExists = bookmarkItemsDao!!.updateBookmarkItem(wikidataItem!!).blockingGet()
                     val snackbar = if (bookmarkExists)
                         Snackbar.make(
                             findViewById(R.id.toolbar_layout),

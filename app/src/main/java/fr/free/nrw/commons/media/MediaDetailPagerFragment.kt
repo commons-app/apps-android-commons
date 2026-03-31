@@ -28,7 +28,7 @@ import fr.free.nrw.commons.R
 import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.bookmarks.models.Bookmark
 import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesContentProvider
-import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesDao
+import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesRoomDao
 import fr.free.nrw.commons.contributions.Contribution
 import fr.free.nrw.commons.contributions.MainActivity
 import fr.free.nrw.commons.databinding.FragmentMediaDetailPagerBinding
@@ -58,7 +58,7 @@ class MediaDetailPagerFragment : CommonsDaggerSupportFragment(), OnPageChangeLis
     MediaDetailFragment.Callback {
     @JvmField
     @Inject
-    var bookmarkDao: BookmarkPicturesDao? = null
+    var bookmarkDao: BookmarkPicturesRoomDao? = null
 
     @JvmField
     @Inject
@@ -174,7 +174,7 @@ class MediaDetailPagerFragment : CommonsDaggerSupportFragment(), OnPageChangeLis
         val mediaDetailFragment = adapter!!.currentMediaDetailFragment
         when (item.itemId) {
             R.id.menu_bookmark_current_image -> {
-                val bookmarkExists = bookmarkDao!!.updateBookmark(bookmark!!)
+                val bookmarkExists = bookmarkDao!!.updateBookmark(bookmark!!).blockingGet()
                 val snackbar = if (bookmarkExists) Snackbar.make(
                     requireView(),
                     R.string.add_bookmark,

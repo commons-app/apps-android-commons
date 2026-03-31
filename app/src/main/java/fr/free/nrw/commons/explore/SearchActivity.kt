@@ -15,7 +15,7 @@ import fr.free.nrw.commons.explore.categories.search.SearchCategoryFragment
 import fr.free.nrw.commons.explore.depictions.search.SearchDepictionsFragment
 import fr.free.nrw.commons.explore.media.SearchMediaFragment
 import fr.free.nrw.commons.explore.models.RecentSearch
-import fr.free.nrw.commons.explore.recentsearches.RecentSearchesDao
+import fr.free.nrw.commons.explore.recentsearches.RecentSearchesRoomDao
 import fr.free.nrw.commons.explore.recentsearches.RecentSearchesFragment
 import fr.free.nrw.commons.media.MediaDetailPagerFragment
 import fr.free.nrw.commons.media.MediaDetailProvider
@@ -35,7 +35,7 @@ import javax.inject.Inject
 class SearchActivity : BaseActivity(), MediaDetailProvider, CategoryImagesCallback {
     @JvmField
     @Inject
-    var recentSearchesDao: RecentSearchesDao? = null
+    var recentSearchesDao: RecentSearchesRoomDao? = null
 
     private var searchMediaFragment: SearchMediaFragment? = null
     private var searchCategoryFragment: SearchCategoryFragment? = null
@@ -130,14 +130,7 @@ class SearchActivity : BaseActivity(), MediaDetailProvider, CategoryImagesCallba
     }
 
     private fun saveRecentSearch(query: String) {
-        val recentSearch = recentSearchesDao!!.find(query)
-        // Newly searched query...
-        if (recentSearch == null) {
-            recentSearchesDao!!.save(RecentSearch(null, query, Date()))
-        } else {
-            recentSearch.lastSearched = Date()
-            recentSearchesDao!!.save(recentSearch)
-        }
+        recentSearchesDao!!.save(RecentSearch(query, Date()))
     }
 
     override fun getMediaAtPosition(i: Int): Media? = searchMediaFragment!!.getMediaAtPosition(i)

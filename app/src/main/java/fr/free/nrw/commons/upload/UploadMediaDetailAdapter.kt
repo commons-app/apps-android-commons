@@ -32,7 +32,7 @@ import fr.free.nrw.commons.R
 import fr.free.nrw.commons.databinding.RowItemDescriptionBinding
 import fr.free.nrw.commons.recentlanguages.Language
 import fr.free.nrw.commons.recentlanguages.RecentLanguagesAdapter
-import fr.free.nrw.commons.recentlanguages.RecentLanguagesDao
+import fr.free.nrw.commons.recentlanguages.RecentLanguagesRoomDao
 import fr.free.nrw.commons.utils.AbstractTextWatcher
 import timber.log.Timber
 import java.util.Locale
@@ -50,7 +50,7 @@ class UploadMediaDetailAdapter : RecyclerView.Adapter<UploadMediaDetailAdapter.V
     private var activity: Activity? = null
     private val voiceInputResultLauncher: ActivityResultLauncher<Intent>
     private var selectedVoiceIcon: SelectedVoiceIcon? = null
-    var recentLanguagesDao: RecentLanguagesDao
+    var recentLanguagesDao: RecentLanguagesRoomDao
     var callback: Callback? = null
     var eventListener: EventListener? = null
     var items: List<UploadMediaDetail>
@@ -65,7 +65,7 @@ class UploadMediaDetailAdapter : RecyclerView.Adapter<UploadMediaDetailAdapter.V
     constructor(
         fragment: Fragment?,
         savedLanguageValue: String,
-        recentLanguagesDao: RecentLanguagesDao,
+        recentLanguagesDao: RecentLanguagesRoomDao,
         voiceInputResultLauncher: ActivityResultLauncher<Intent>
     ) {
         uploadMediaDetails = ArrayList()
@@ -80,7 +80,7 @@ class UploadMediaDetailAdapter : RecyclerView.Adapter<UploadMediaDetailAdapter.V
         activity: Activity?,
         savedLanguageValue: String,
         uploadMediaDetails: MutableList<UploadMediaDetail>,
-        recentLanguagesDao: RecentLanguagesDao,
+        recentLanguagesDao: RecentLanguagesRoomDao,
         voiceInputResultLauncher: ActivityResultLauncher<Intent>
     ) {
         this.uploadMediaDetails = uploadMediaDetails

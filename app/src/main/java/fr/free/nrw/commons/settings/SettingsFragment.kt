@@ -46,7 +46,7 @@ import fr.free.nrw.commons.location.LocationServiceManager
 import fr.free.nrw.commons.logging.CommonsLogSender
 import fr.free.nrw.commons.recentlanguages.Language
 import fr.free.nrw.commons.recentlanguages.RecentLanguagesAdapter
-import fr.free.nrw.commons.recentlanguages.RecentLanguagesDao
+import fr.free.nrw.commons.recentlanguages.RecentLanguagesRoomDao
 import fr.free.nrw.commons.upload.LanguagesAdapter
 import fr.free.nrw.commons.utils.DialogUtil
 import fr.free.nrw.commons.utils.PermissionUtils
@@ -67,7 +67,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
     lateinit var commonsLogSender: CommonsLogSender
 
     @Inject
-    lateinit var recentLanguagesDao: RecentLanguagesDao
+    lateinit var recentLanguagesDao: RecentLanguagesRoomDao
 
     @Inject
     lateinit var contributionController: ContributionController
