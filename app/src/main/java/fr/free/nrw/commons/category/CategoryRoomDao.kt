@@ -12,16 +12,16 @@ abstract class CategoryRoomDao {
     protected abstract fun getAllInternal(limit: Int): Single<List<CategoryRoomEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    abstract fun insert(category: CategoryRoomEntity)
+    protected abstract fun insertInternal(category: CategoryRoomEntity): Single<Long>
 
     @Update
-    abstract fun update(category: CategoryRoomEntity)
+    protected abstract fun updateInternal(category: CategoryRoomEntity): Completable
 
     @Query("SELECT * FROM categories WHERE name = :name")
-    abstract fun findEntity(name: String): CategoryRoomEntity?
+    protected abstract fun findEntity(name: String): Single<List<CategoryRoomEntity>>
 
     @Query("SELECT EXISTS (SELECT 1 FROM categories WHERE name = :name)")
-    abstract fun findCategory(name: String): Boolean
+    abstract fun findCategory(name: String): Single<Boolean>
 
     @Query("DELETE FROM categories")
     abstract fun deleteAll(): Completable
@@ -32,29 +32,30 @@ abstract class CategoryRoomDao {
         }
     }
 
-    fun save(category: Category) {
-        val existing = findEntity(category.name ?: "")
-        if (existing != null) {
-            update(
-                CategoryRoomEntity(
-                    id = existing.id,
-                    name = category.name ?: "",
-                    description = category.description,
-                    thumbnail = category.thumbnail,
-                    lastUsed = category.lastUsed ?: Date(),
-                    timesUsed = category.timesUsed
+    fun save(category: Category): Completable {
+        return findEntity(category.name ?: "").flatMapCompletable { entities ->
+            if (entities.isNotEmpty()) {
+                updateInternal(
+                    CategoryRoomEntity(
+                        id = entities[0].id,
+                        name = category.name ?: "",
+                        description = category.description,
+                        thumbnail = category.thumbnail,
+                        lastUsed = category.lastUsed ?: Date(),
+                        timesUsed = category.timesUsed
+                    )
                 )
-            )
-        } else {
-            insert(
-                CategoryRoomEntity(
-                    name = category.name ?: "",
-                    description = category.description,
-                    thumbnail = category.thumbnail,
-                    lastUsed = category.lastUsed ?: Date(),
-                    timesUsed = category.timesUsed
-                )
-            )
+            } else {
+                insertInternal(
+                    CategoryRoomEntity(
+                        name = category.name ?: "",
+                        description = category.description,
+                        thumbnail = category.thumbnail,
+                        lastUsed = category.lastUsed ?: Date(),
+                        timesUsed = category.timesUsed
+                    )
+                ).ignoreElement()
+            }
         }
     }
 }

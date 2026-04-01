@@ -512,7 +512,7 @@ ${m.pageTitle.canonicalUri}"""
     }
 
     private fun updateBookmarkState(item: MenuItem) {
-        val isBookmarked = bookmarkDao!!.findBookmark(bookmark)
+        val isBookmarked = bookmarkDao!!.findBookmark(bookmark).blockingGet()
         if (isBookmarked) {
             if (removedItems.contains(binding!!.mediaDetailsPager.currentItem)) {
                 removedItems.remove(binding!!.mediaDetailsPager.currentItem)

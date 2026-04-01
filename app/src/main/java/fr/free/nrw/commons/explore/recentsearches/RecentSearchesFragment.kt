@@ -37,7 +37,7 @@ class RecentSearchesFragment : CommonsDaggerSupportFragment() {
     ): View {
         binding = FragmentSearchHistoryBinding.inflate(inflater, container, false)
 
-        recentSearches = recentSearchesDao!!.recentSearches(10)
+        recentSearches = recentSearchesDao!!.recentSearches(10).blockingGet()
 
         if (recentSearches.isEmpty()) {
             binding!!.recentSearchesDeleteButton.visibility = View.GONE
@@ -77,7 +77,7 @@ class RecentSearchesFragment : CommonsDaggerSupportFragment() {
     }
 
     private fun setDeleteRecentPositiveButton(context: Context, dialog: DialogInterface) {
-        recentSearchesDao!!.deleteAll()
+        recentSearchesDao!!.deleteAll().blockingAwait()
         if (binding != null) {
             binding!!.recentSearchesDeleteButton.visibility = View.GONE
             binding!!.recentSearchesTextView.setText(R.string.no_recent_searches)
@@ -85,7 +85,7 @@ class RecentSearchesFragment : CommonsDaggerSupportFragment() {
                 getContext(), getString(R.string.search_history_deleted),
                 Toast.LENGTH_SHORT
             ).show()
-            recentSearches = recentSearchesDao!!.recentSearches(10)
+            recentSearches = recentSearchesDao!!.recentSearches(10).blockingGet()
             adapter = ArrayAdapter(context, R.layout.item_recent_searches, recentSearches)
             binding!!.recentSearchesList.adapter = adapter
             adapter.notifyDataSetChanged()
@@ -109,8 +109,8 @@ class RecentSearchesFragment : CommonsDaggerSupportFragment() {
     }
 
     private fun setDeletePositiveButton(context: Context, dialog: DialogInterface, position: Int) {
-        recentSearchesDao!!.delete(recentSearchesDao!!.find(recentSearches[position])!!)
-        recentSearches = recentSearchesDao!!.recentSearches(10)
+        recentSearchesDao!!.delete(recentSearchesDao!!.find(recentSearches[position]).blockingGet()!!).blockingAwait()
+        recentSearches = recentSearchesDao!!.recentSearches(10).blockingGet()
         adapter = ArrayAdapter(
             context, R.layout.item_recent_searches,
             recentSearches
@@ -135,7 +135,7 @@ class RecentSearchesFragment : CommonsDaggerSupportFragment() {
      * This method is called when search query is null to update Recent Searches
      */
     fun updateRecentSearches() {
-        recentSearches = recentSearchesDao!!.recentSearches(10)
+        recentSearches = recentSearchesDao!!.recentSearches(10).blockingGet()
         adapter.notifyDataSetChanged()
 
         if (recentSearches.isNotEmpty()) {

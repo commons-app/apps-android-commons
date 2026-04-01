@@ -267,9 +267,9 @@ class WikidataItemDetailsActivity : BaseActivity(), MediaDetailProvider, Categor
 
     private fun updateBookmarkState(item: MenuItem) {
         val isBookmarked: Boolean = if (intent.getStringExtra("fragment") != null) {
-            bookmarkItemsDao!!.findBookmarkItem(intent.getStringExtra("entityId"))
+            bookmarkItemsDao!!.findBookmarkItem(intent.getStringExtra("entityId")).blockingGet()
         } else {
-            bookmarkItemsDao!!.findBookmarkItem(wikidataItem!!.id)
+            bookmarkItemsDao!!.findBookmarkItem(wikidataItem!!.id).blockingGet()
         }
         item.setIcon(if (isBookmarked) {
             R.drawable.menu_ic_round_star_filled_24px

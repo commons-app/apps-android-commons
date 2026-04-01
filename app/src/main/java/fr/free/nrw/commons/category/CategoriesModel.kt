@@ -79,7 +79,7 @@ class CategoriesModel @Inject
                 0
             )
             category.incTimesUsed()
-            categoryDao.save(category)
+            categoryDao.save(category).blockingAwait()
         }
 
         /**

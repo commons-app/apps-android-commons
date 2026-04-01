@@ -13,53 +13,58 @@ abstract class RecentSearchesRoomDao {
     protected abstract fun getAllInternal(limit: Int): Single<List<RecentSearchRoomEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    abstract fun insert(recentSearch: RecentSearchRoomEntity)
+    protected abstract fun insertInternal(recentSearch: RecentSearchRoomEntity): Single<Long>
 
     @Update
-    abstract fun update(recentSearch: RecentSearchRoomEntity)
+    protected abstract fun updateInternal(recentSearch: RecentSearchRoomEntity): Completable
 
     @Query("SELECT * FROM recent_searches WHERE name = :query")
-    abstract fun findEntity(query: String): RecentSearchRoomEntity?
+    protected abstract fun findEntity(query: String): Single<List<RecentSearchRoomEntity>>
 
     @Query("DELETE FROM recent_searches")
     abstract fun deleteTable(): Completable
 
     @Query("DELETE FROM recent_searches WHERE name = :name")
-    abstract fun deleteByName(name: String)
+    abstract fun deleteByName(name: String): Completable
 
-    fun recentSearches(limit: Int): List<String> {
-        return getAllInternal(limit).blockingGet().map { it.query }
+    fun recentSearches(limit: Int): Single<List<String>> {
+        return getAllInternal(limit).map { entities ->
+            entities.map { it.query }
+        }
     }
 
-    fun find(query: String): RecentSearch? {
-        return findEntity(query)?.let { RecentSearch(it.query, it.lastSearched) }
+    fun find(query: String): Single<RecentSearch?> {
+        return findEntity(query).map { entities ->
+            entities.firstOrNull()?.let { RecentSearch(it.query, it.lastSearched) }
+        }
     }
 
-    fun delete(recentSearch: RecentSearch) {
-        deleteByName(recentSearch.query)
+    fun delete(recentSearch: RecentSearch): Completable {
+        return deleteByName(recentSearch.query)
     }
 
-    fun deleteAll() {
-        deleteTable().blockingAwait()
+    fun deleteAll(): Completable {
+        return deleteTable()
     }
 
-    fun save(recentSearch: RecentSearch) {
-        val existing = findEntity(recentSearch.query)
-        if (existing != null) {
-            update(
-                RecentSearchRoomEntity(
-                    id = existing.id,
-                    query = recentSearch.query,
-                    lastSearched = recentSearch.lastSearched
+    fun save(recentSearch: RecentSearch): Completable {
+        return findEntity(recentSearch.query).flatMapCompletable { entities ->
+            if (entities.isNotEmpty()) {
+                updateInternal(
+                    RecentSearchRoomEntity(
+                        id = entities[0].id,
+                        query = recentSearch.query,
+                        lastSearched = recentSearch.lastSearched
+                    )
                 )
-            )
-        } else {
-            insert(
-                RecentSearchRoomEntity(
-                    query = recentSearch.query,
-                    lastSearched = recentSearch.lastSearched
-                )
-            )
+            } else {
+                insertInternal(
+                    RecentSearchRoomEntity(
+                        query = recentSearch.query,
+                        lastSearched = recentSearch.lastSearched
+                    )
+                ).ignoreElement()
+            }
         }
     }
 }

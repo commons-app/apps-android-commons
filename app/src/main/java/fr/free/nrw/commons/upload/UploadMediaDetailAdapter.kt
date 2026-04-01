@@ -298,7 +298,7 @@ class UploadMediaDetailAdapter : RecyclerView.Adapter<UploadMediaDetailAdapter.V
 
 
         private fun initLanguage(position: Int, description: UploadMediaDetail) {
-            val recentLanguages = recentLanguagesDao.getRecentLanguages()
+            val recentLanguages = recentLanguagesDao.getRecentLanguages().blockingGet()
 
             val languagesAdapter = LanguagesAdapter(
                 binding.descriptionLanguages.context,
@@ -354,11 +354,11 @@ class UploadMediaDetailAdapter : RecyclerView.Adapter<UploadMediaDetailAdapter.V
                         val languageCode = (adapterView.adapter as LanguagesAdapter).getLanguageCode(i)
                         description.languageCode = languageCode
                         val languageName = (adapterView.adapter as LanguagesAdapter).getLanguageName(i)
-                        val isExists = recentLanguagesDao.findRecentLanguage(languageCode)
+                        val isExists = recentLanguagesDao.findRecentLanguage(languageCode).blockingGet()
                         if (isExists) {
-                            recentLanguagesDao.deleteRecentLanguage(languageCode)
+                            recentLanguagesDao.deleteRecentLanguage(languageCode).blockingAwait()
                         }
-                        recentLanguagesDao.addRecentLanguage(Language(languageName, languageCode))
+                        recentLanguagesDao.addRecentLanguage(Language(languageName, languageCode)).blockingAwait()
 
                         selectedLanguages.clear()
                         selectedLanguages[position] = languageCode
@@ -440,11 +440,11 @@ class UploadMediaDetailAdapter : RecyclerView.Adapter<UploadMediaDetailAdapter.V
             description.languageCode = languageCode
             val languageName = (adapterView.adapter as RecentLanguagesAdapter)
                 .getLanguageName(position)
-            val isExists = recentLanguagesDao.findRecentLanguage(languageCode)
+            val isExists = recentLanguagesDao.findRecentLanguage(languageCode).blockingGet()
             if (isExists) {
-                recentLanguagesDao.deleteRecentLanguage(languageCode)
+                recentLanguagesDao.deleteRecentLanguage(languageCode).blockingAwait()
             }
-            recentLanguagesDao.addRecentLanguage(Language(languageName, languageCode))
+            recentLanguagesDao.addRecentLanguage(Language(languageName, languageCode)).blockingAwait()
 
             selectedLanguages.clear()
             selectedLanguages[position] = languageCode
@@ -480,7 +480,7 @@ class UploadMediaDetailAdapter : RecyclerView.Adapter<UploadMediaDetailAdapter.V
                         recentLanguagesDao.deleteRecentLanguage(
                             recentLanguages[i]
                                 .languageCode
-                        )
+                        ).blockingAwait()
                     }
                 }
                 languageHistoryListView!!.visibility = View.VISIBLE
@@ -489,7 +489,7 @@ class UploadMediaDetailAdapter : RecyclerView.Adapter<UploadMediaDetailAdapter.V
 
                 val recentLanguagesAdapter = RecentLanguagesAdapter(
                     binding.descriptionLanguages.context,
-                    recentLanguagesDao.getRecentLanguages(),
+                    recentLanguagesDao.getRecentLanguages().blockingGet(),
                     selectedLanguages
                 )
                 languageHistoryListView!!.adapter = recentLanguagesAdapter

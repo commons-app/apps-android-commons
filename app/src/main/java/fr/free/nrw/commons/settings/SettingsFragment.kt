@@ -342,7 +342,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
     private fun prepareAppLanguages(keyListPreference: String) {
         // Gets current language code from shared preferences
         val languageCode = getCurrentLanguageCode(keyListPreference)
-        val recentLanguages = recentLanguagesDao.getRecentLanguages()
+        val recentLanguages = recentLanguagesDao.getRecentLanguages().blockingGet()
         val selectedLanguages = hashMapOf<Int, String>()
 
         if (keyListPreference == "appUiDefaultLanguagePref") {
@@ -402,11 +402,11 @@ class SettingsFragment : PreferenceFragmentCompat() {
         listView.setOnItemClickListener { adapterView, _, position, _ ->
             val lCode = (adapterView.adapter as LanguagesAdapter).getLanguageCode(position)
             val languageName = (adapterView.adapter as LanguagesAdapter).getLanguageName(position)
-            val isExists = recentLanguagesDao.findRecentLanguage(lCode)
+            val isExists = recentLanguagesDao.findRecentLanguage(lCode).blockingGet()
             if (isExists) {
-                recentLanguagesDao.deleteRecentLanguage(lCode)
+                recentLanguagesDao.deleteRecentLanguage(lCode).blockingAwait()
             }
-            recentLanguagesDao.addRecentLanguage(Language(languageName, lCode))
+            recentLanguagesDao.addRecentLanguage(Language(languageName, lCode)).blockingAwait()
             saveLanguageValue(lCode, keyListPreference)
             val defLocale = createLocale(lCode)
             if (keyListPreference == "appUiDefaultLanguagePref") {
@@ -451,7 +451,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
             separator?.visibility = View.VISIBLE
             val recentLanguagesAdapter = RecentLanguagesAdapter(
                 requireActivity(),
-                recentLanguagesDao.getRecentLanguages(),
+                recentLanguagesDao.getRecentLanguages().blockingGet(),
                 selectedLanguages
             )
             languageHistoryListView?.adapter = recentLanguagesAdapter
@@ -469,11 +469,11 @@ class SettingsFragment : PreferenceFragmentCompat() {
     ) {
         val recentLanguageCode = (adapterView.adapter as RecentLanguagesAdapter).getLanguageCode(position)
         val recentLanguageName = (adapterView.adapter as RecentLanguagesAdapter).getLanguageName(position)
-        val isExists = recentLanguagesDao.findRecentLanguage(recentLanguageCode)
+        val isExists = recentLanguagesDao.findRecentLanguage(recentLanguageCode).blockingGet()
         if (isExists) {
-            recentLanguagesDao.deleteRecentLanguage(recentLanguageCode)
+            recentLanguagesDao.deleteRecentLanguage(recentLanguageCode).blockingAwait()
         }
-        recentLanguagesDao.addRecentLanguage(Language(recentLanguageName, recentLanguageCode))
+        recentLanguagesDao.addRecentLanguage(Language(recentLanguageName, recentLanguageCode)).blockingAwait()
         saveLanguageValue(recentLanguageCode, keyListPreference)
         val defLocale = createLocale(recentLanguageCode)
         if (keyListPreference == "appUiDefaultLanguagePref") {

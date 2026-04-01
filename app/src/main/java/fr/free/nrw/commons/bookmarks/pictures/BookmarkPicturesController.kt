@@ -20,7 +20,7 @@ class BookmarkPicturesController @Inject constructor(
      * @return a list of bookmarked Media object
      */
     fun loadBookmarkedPictures(): Single<List<Media>> {
-        val bookmarks = bookmarkDao.getAllBookmarks()
+        val bookmarks = bookmarkDao.getAllBookmarks().blockingGet()
         currentBookmarks = bookmarks
         return Observable.fromIterable(bookmarks).flatMap {
             mediaClient.getMedia(it.mediaName)
@@ -30,7 +30,7 @@ class BookmarkPicturesController @Inject constructor(
     }
 
     fun needRefreshBookmarkedPictures(): Boolean {
-        val bookmarks = bookmarkDao.getAllBookmarks()
+        val bookmarks = bookmarkDao.getAllBookmarks().blockingGet()
         return bookmarks.size != currentBookmarks.size
     }
 

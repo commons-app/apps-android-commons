@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.recentlanguages
 
 import androidx.room.*
+import io.reactivex.Completable
 import io.reactivex.Single
 
 @Dao
@@ -10,19 +11,21 @@ abstract class RecentLanguagesRoomDao {
     protected abstract fun getAllInternal(): Single<List<RecentLanguageRoomEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    abstract fun insert(language: RecentLanguageRoomEntity)
+    protected abstract fun insertInternal(language: RecentLanguageRoomEntity): Completable
 
     @Query("DELETE FROM recent_languages WHERE language_code = :languageCode")
-    abstract fun deleteRecentLanguage(languageCode: String)
+    abstract fun deleteRecentLanguage(languageCode: String): Completable
 
     @Query("SELECT EXISTS (SELECT 1 FROM recent_languages WHERE language_code = :languageCode)")
-    abstract fun findRecentLanguage(languageCode: String): Boolean
+    abstract fun findRecentLanguage(languageCode: String): Single<Boolean>
 
-    fun getRecentLanguages(): List<Language> {
-        return getAllInternal().blockingGet().map { Language(it.languageName, it.languageCode) }
+    fun getRecentLanguages(): Single<List<Language>> {
+        return getAllInternal().map { entities ->
+            entities.map { Language(it.languageName, it.languageCode) }
+        }
     }
 
-    fun addRecentLanguage(language: Language) {
-        insert(RecentLanguageRoomEntity(language.languageName, language.languageCode))
+    fun addRecentLanguage(language: Language): Completable {
+        return insertInternal(RecentLanguageRoomEntity(language.languageName, language.languageCode))
     }
 }

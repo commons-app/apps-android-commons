@@ -130,7 +130,7 @@ class SearchActivity : BaseActivity(), MediaDetailProvider, CategoryImagesCallba
     }
 
     private fun saveRecentSearch(query: String) {
-        recentSearchesDao!!.save(RecentSearch(query, Date()))
+        recentSearchesDao!!.save(RecentSearch(query, Date())).blockingAwait()
     }
 
     override fun getMediaAtPosition(i: Int): Media? = searchMediaFragment!!.getMediaAtPosition(i)

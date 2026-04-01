@@ -13,37 +13,35 @@ import io.reactivex.Single
 abstract class BookmarkPicturesRoomDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    protected abstract fun insertInternal(bookmark: BookmarkPictureRoomEntity)
+    protected abstract fun insertInternal(bookmark: BookmarkPictureRoomEntity): Completable
 
     @Delete
-    protected abstract fun deleteInternal(bookmark: BookmarkPictureRoomEntity)
+    protected abstract fun deleteInternal(bookmark: BookmarkPictureRoomEntity): Completable
 
     @Query("SELECT * FROM bookmarks")
     protected abstract fun getAllInternal(): Single<List<BookmarkPictureRoomEntity>>
 
     @Query("SELECT EXISTS (SELECT 1 FROM bookmarks WHERE media_name = :mediaName)")
-    abstract fun findBookmarkByName(mediaName: String): Boolean
+    abstract fun findBookmarkByName(mediaName: String): Single<Boolean>
 
-    fun getAllBookmarks(): List<Bookmark> {
+    fun getAllBookmarks(): Single<List<Bookmark>> {
         return getAllInternal().map { entities ->
             entities.map { Bookmark(it.mediaName, it.mediaCreator) }
-        }.blockingGet()
+        }
     }
 
-    fun findBookmark(bookmark: Bookmark?): Boolean {
-        if (bookmark?.mediaName == null) return false
+    fun findBookmark(bookmark: Bookmark?): Single<Boolean> {
+        if (bookmark?.mediaName == null) return Single.just(false)
         return findBookmarkByName(bookmark.mediaName!!)
     }
 
     fun updateBookmark(bookmark: Bookmark): Single<Boolean> {
-        return Single.fromCallable {
-            val entity = BookmarkPictureRoomEntity(bookmark.mediaName!!, bookmark.mediaCreator!!)
-            if (findBookmarkByName(bookmark.mediaName!!)) {
-                deleteInternal(entity)
-                false
+        val entity = BookmarkPictureRoomEntity(bookmark.mediaName!!, bookmark.mediaCreator!!)
+        return findBookmarkByName(bookmark.mediaName!!).flatMap { exists ->
+            if (exists) {
+                deleteInternal(entity).andThen(Single.just(false))
             } else {
-                insertInternal(entity)
-                true
+                insertInternal(entity).andThen(Single.just(true))
             }
         }
     }
