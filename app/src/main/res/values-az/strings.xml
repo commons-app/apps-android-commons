@@ -427,6 +427,9 @@
   <string name="no_categories_selected_warning_desc">Kateqoriyaları olmayan şəkillər nadir hallarda istifadə olunur. Kateqoriya seçmədən davam etmək istədiyinizə əminsiniz?</string>
   <string name="no_depictions_selected">Heç bir təsvir seçilməyib</string>
   <string name="no_depictions_selected_warning_desc">Nəyi təsvir etdiyi qeyd olunan şəkillər daha asan tapılır və istifadə olunma ehtimalı daha yüksəkdir. Bunsuz davam etmək istədiyinizə əminsiniz?</string>
+  <string name="depictions_choose_from_map">Xəritədən seç</string>
+  <string name="depictions_map_confirm">Təsdiqlə</string>
+  <string name="depictions_map_no_photo_location">Fotonun əlavə olunmuş koordinatı yoxdur, cari yerinizi göstərir</string>
   <string name="back_button_warning">Yükləməni ləğv et</string>
   <string name="back_button_warning_desc">Geri düyməsini istifadə etmək bu yükləməni ləğv edəcək və siz irəliləyişinizi itirəcəksiniz</string>
   <string name="back_button_continue">Yükləməyə davam et</string>
@@ -535,6 +538,8 @@
   <string name="delete_helper_ask_spam_selfie">heç bir məqalədə istifadə olunmayan selfi</string>
   <string name="delete_helper_ask_spam_blurry">tamamilə bulanıq</string>
   <string name="delete_helper_ask_spam_nonsense">mənasız, məqalədə istifadəyə tamamilə yararsızdır</string>
+  <string name="delete_helper_ask_spam_other">Digər: aşağıda qeyd edin</string>
+  <string name="delete_helper_other_notes_hint">Əsaslandırma</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">Mətbuat fotosu</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">İnternetdən təsadüfi foto</string>
   <string name="delete_helper_ask_reason_copyright_logo">Loqo</string>
