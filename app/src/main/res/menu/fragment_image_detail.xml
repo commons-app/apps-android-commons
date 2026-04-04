@@ -6,22 +6,22 @@
         android:id="@+id/menu_bookmark_current_image"
         android:icon="@drawable/menu_ic_round_star_border_24px"
         android:title="@string/menu_bookmark"
-        app:showAsAction="always" />
+        app:showAsAction="ifRoom" />
     <item
       android:id="@+id/menu_copy_link"
       android:icon="@drawable/menu_ic_copy_link_24dp"
       android:title="@string/menu_copy_link"
-      app:showAsAction="always" />
+      app:showAsAction="ifRoom" />
     <item
         android:id="@+id/menu_share_current_image"
         android:icon="@drawable/menu_ic_share_24dp"
         android:title="@string/menu_share"
-        app:showAsAction="always" />
+        app:showAsAction="ifRoom" />
     <item
         android:id="@+id/menu_download_current_image"
         android:icon="@drawable/menu_ic_download_24dp"
         android:title="@string/menu_download"
-        app:showAsAction="always" />
+        app:showAsAction="ifRoom" />
     <item
         android:id="@+id/menu_browser_current_image"
         android:title="@string/menu_view_file_page"
