@@ -12,6 +12,7 @@ import fr.free.nrw.commons.OkHttpConnectionFactory
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.contributions.MainActivity
 import fr.free.nrw.commons.createTestClient
+import io.reactivex.Single
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
@@ -35,7 +36,7 @@ class RecentSearchesFragmentUnitTest {
     private lateinit var layoutInflater: LayoutInflater
 
     @Mock
-    private lateinit var recentSearchesDao: RecentSearchesDao
+    private lateinit var recentSearchesDao: RecentSearchesRoomDao
 
     @Mock
     private lateinit var adapter: ArrayAdapter<*>
@@ -82,7 +83,7 @@ class RecentSearchesFragmentUnitTest {
     @Test
     @Throws(Exception::class)
     fun testOnResume() {
-        whenever(recentSearchesDao.recentSearches(10)).thenReturn(mutableListOf("search1"))
+        whenever(recentSearchesDao.recentSearches(10)).thenReturn(Single.just(mutableListOf("search1")))
         fragment.onResume()
     }
 

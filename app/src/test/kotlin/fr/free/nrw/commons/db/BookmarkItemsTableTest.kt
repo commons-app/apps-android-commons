@@ -49,7 +49,7 @@ class BookmarkItemsTableTest : InMemoryDatabaseTest() {
             VALUES ('Legacy Item', 'Q6789', 'Instance', 'Cat', 'Desc', 'Thumb', 1);
         """.trimIndent())
 
-        val exists = dao.findBookmarkItem("Q6789")
+        val exists = dao.findBookmarkItem("Q6789").blockingGet()
         assertTrue(exists)
         val allItems = dao.getAll().blockingGet()
         assertEquals(1, allItems.size)

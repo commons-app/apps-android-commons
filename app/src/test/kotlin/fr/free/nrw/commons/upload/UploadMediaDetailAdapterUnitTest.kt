@@ -18,7 +18,9 @@ import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.recentlanguages.Language
 import fr.free.nrw.commons.recentlanguages.RecentLanguagesAdapter
 import fr.free.nrw.commons.recentlanguages.RecentLanguagesDao
+import fr.free.nrw.commons.recentlanguages.RecentLanguagesRoomDao
 import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment
+import io.reactivex.Single
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
@@ -52,7 +54,7 @@ class UploadMediaDetailAdapterUnitTest {
     private lateinit var eventListener: UploadMediaDetailAdapter.EventListener
 
     @Mock
-    private lateinit var recentLanguagesDao: RecentLanguagesDao
+    private lateinit var recentLanguagesDao: RecentLanguagesRoomDao
 
     @Mock
     private lateinit var textView: TextView
@@ -240,7 +242,7 @@ class UploadMediaDetailAdapterUnitTest {
     @Throws(Exception::class)
     fun testOnRecentLanguageClicked() {
         whenever(recentLanguagesDao.findRecentLanguage(any()))
-            .thenReturn(true)
+            .thenReturn(Single.just(true))
         whenever(adapterView.adapter)
             .thenReturn(
                 RecentLanguagesAdapter(

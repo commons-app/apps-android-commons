@@ -12,9 +12,10 @@ import fr.free.nrw.commons.explore.categories.search.SearchCategoryFragment
 import fr.free.nrw.commons.explore.depictions.search.SearchDepictionsFragment
 import fr.free.nrw.commons.explore.media.SearchMediaFragment
 import fr.free.nrw.commons.explore.models.RecentSearch
-import fr.free.nrw.commons.explore.recentsearches.RecentSearchesDao
 import fr.free.nrw.commons.explore.recentsearches.RecentSearchesFragment
+import fr.free.nrw.commons.explore.recentsearches.RecentSearchesRoomDao
 import fr.free.nrw.commons.media.MediaDetailPagerFragment
+import io.reactivex.Single
 import io.reactivex.disposables.CompositeDisposable
 import org.junit.Assert
 import org.junit.Before
@@ -50,7 +51,7 @@ class SearchActivityUnitTests {
     private lateinit var viewPagerAdapter: ViewPagerAdapter
 
     @Mock
-    private lateinit var recentSearchesDao: RecentSearchesDao
+    private lateinit var recentSearchesDao: RecentSearchesRoomDao
 
     @Mock
     private lateinit var searchMediaFragment: SearchMediaFragment
@@ -137,7 +138,7 @@ class SearchActivityUnitTests {
     fun testSaveRecentSearchCaseNonNull() {
         val query = "test"
         Whitebox.setInternalState(activity, "recentSearchesDao", recentSearchesDao)
-        `when`(recentSearchesDao.find(query)).thenReturn(mock(RecentSearch::class.java))
+        `when`(recentSearchesDao.find(query)).thenReturn(Single.just(mock(RecentSearch::class.java)))
         val method: Method =
             SearchActivity::class.java.getDeclaredMethod("saveRecentSearch", String::class.java)
         method.isAccessible = true

@@ -8,10 +8,10 @@ import io.reactivex.Single
 abstract class RecentLanguagesRoomDao {
 
     @Query("SELECT * FROM recent_languages ORDER BY rowid DESC")
-    protected abstract fun getAllInternal(): Single<List<RecentLanguageRoomEntity>>
+    abstract fun getAll(): Single<List<RecentLanguageRoomEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    protected abstract fun insertInternal(language: RecentLanguageRoomEntity): Completable
+    abstract fun insert(language: RecentLanguageRoomEntity): Completable
 
     @Query("DELETE FROM recent_languages WHERE language_code = :languageCode")
     abstract fun deleteRecentLanguage(languageCode: String): Completable
@@ -20,12 +20,20 @@ abstract class RecentLanguagesRoomDao {
     abstract fun findRecentLanguage(languageCode: String): Single<Boolean>
 
     fun getRecentLanguages(): Single<List<Language>> {
-        return getAllInternal().map { entities ->
-            entities.map { Language(it.languageName, it.languageCode) }
+        return getAll().map { entities ->
+            entities.map { fromEntity(it) }
         }
     }
 
     fun addRecentLanguage(language: Language): Completable {
-        return insertInternal(RecentLanguageRoomEntity(language.languageName, language.languageCode))
+        return insert(toEntity(language))
+    }
+
+    private fun toEntity(language: Language): RecentLanguageRoomEntity {
+        return RecentLanguageRoomEntity(language.languageName, language.languageCode)
+    }
+
+    private fun fromEntity(entity: RecentLanguageRoomEntity): Language {
+        return Language(entity.languageName, entity.languageCode)
     }
 }

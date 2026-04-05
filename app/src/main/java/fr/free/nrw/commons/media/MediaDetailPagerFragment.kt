@@ -27,7 +27,7 @@ import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.bookmarks.models.Bookmark
-import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesContentProvider
+//import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesContentProvider
 import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesRoomDao
 import fr.free.nrw.commons.contributions.Contribution
 import fr.free.nrw.commons.contributions.MainActivity
@@ -444,7 +444,6 @@ ${m.pageTitle.canonicalUri}"""
                     bookmark = Bookmark(
                         m.filename,
                         m.getAuthorOrUser(),
-                        BookmarkPicturesContentProvider.uriForName(m.filename!!)
                     )
                     updateBookmarkState(menu.findItem(R.id.menu_bookmark_current_image))
                     val contributionState = provider.getContributionStateAt(position)

@@ -16,19 +16,19 @@ import io.reactivex.Single
 abstract class BookmarkItemsRoomDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    protected abstract fun insertInternal(depictedItem: BookmarkItemsRoomEntity): Completable
+    abstract fun insert(depictedItem: BookmarkItemsRoomEntity): Completable
 
     @Delete
-    protected abstract fun deleteInternal(depictedItem: BookmarkItemsRoomEntity): Completable
+    abstract fun delete(depictedItem: BookmarkItemsRoomEntity): Completable
 
     @Query("SELECT * FROM bookmarksItems")
-    protected abstract fun getAllInternal(): Single<List<BookmarkItemsRoomEntity>>
+    abstract fun getAll(): Single<List<BookmarkItemsRoomEntity>>
 
     @Query("SELECT EXISTS (SELECT 1 FROM bookmarksItems WHERE item_id = :itemId)")
     abstract fun findBookmarkItem(itemId: String?): Single<Boolean>
 
     fun getAllBookmarksItems(): Single<List<DepictedItem>> {
-        return getAllInternal().map { entities ->
+        return getAll().map { entities ->
             entities.map { fromEntity(it) }
         }
     }
@@ -36,9 +36,9 @@ abstract class BookmarkItemsRoomDao {
     fun updateBookmarkItem(depictedItem: DepictedItem): Single<Boolean> {
         return findBookmarkItem(depictedItem.id).flatMap { exists ->
             if (exists) {
-                deleteInternal(toEntity(depictedItem)).andThen(Single.just(false))
+                delete(toEntity(depictedItem)).andThen(Single.just(false))
             } else {
-                insertInternal(toEntity(depictedItem)).andThen(Single.just(true))
+                insert(toEntity(depictedItem)).andThen(Single.just(true))
             }
         }
     }

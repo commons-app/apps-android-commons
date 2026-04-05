@@ -1,7 +1,6 @@
 package fr.free.nrw.commons.di
 
 import android.app.Activity
-import android.content.ContentProviderClient
 import android.content.ContentResolver
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
@@ -13,7 +12,6 @@ import androidx.sqlite.db.SupportSQLiteDatabase
 import com.google.gson.Gson
 import dagger.Module
 import dagger.Provides
-import fr.free.nrw.commons.BuildConfig
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.bookmarks.category.BookmarkCategoriesDao
@@ -95,50 +93,6 @@ open class CommonsApplicationModule(private val applicationContext: Context) {
         context.getString(R.string.license_name_cc_by_sa_four) to Prefs.Licenses.CC_BY_SA_4
     )
 
-    /**
-     * Provides an instance of CategoryContentProviderClient i.e. the categories
-     * that are there in local storage
-     */
-    @Provides
-    @Named("category")
-    open fun provideCategoryContentProviderClient(context: Context): ContentProviderClient? =
-        context.contentResolver.acquireContentProviderClient(BuildConfig.CATEGORY_AUTHORITY)
-
-    @Provides
-    @Named("recentsearch")
-    fun provideRecentSearchContentProviderClient(context: Context): ContentProviderClient? =
-        context.contentResolver.acquireContentProviderClient(BuildConfig.RECENT_SEARCH_AUTHORITY)
-
-    @Provides
-    @Named("contribution")
-    open fun provideContributionContentProviderClient(context: Context): ContentProviderClient? =
-        context.contentResolver.acquireContentProviderClient(BuildConfig.CONTRIBUTION_AUTHORITY)
-
-    @Provides
-    @Named("modification")
-    open fun provideModificationContentProviderClient(context: Context): ContentProviderClient? =
-        context.contentResolver.acquireContentProviderClient(BuildConfig.MODIFICATION_AUTHORITY)
-
-    @Provides
-    @Named("bookmarks")
-    fun provideBookmarkContentProviderClient(context: Context): ContentProviderClient? =
-        context.contentResolver.acquireContentProviderClient(BuildConfig.BOOKMARK_AUTHORITY)
-
-    @Provides
-    @Named("bookmarksItem")
-    fun provideBookmarkItemContentProviderClient(context: Context): ContentProviderClient? =
-        context.contentResolver.acquireContentProviderClient(BuildConfig.BOOKMARK_ITEMS_AUTHORITY)
-
-    /**
-     * This method is used to provide instance of RecentLanguagesContentProvider
-     * which provides content of recent used languages from database
-     * @param context Context
-     * @return returns RecentLanguagesContentProvider
-     */
-    @Provides
-    @Named("recent_languages")
-    fun provideRecentLanguagesContentProviderClient(context: Context): ContentProviderClient? =
-        context.contentResolver.acquireContentProviderClient(BuildConfig.RECENT_LANGUAGE_AUTHORITY)
 
     /**
      * Provides a Json store instance(JsonKvStore) which keeps
@@ -161,6 +115,7 @@ open class CommonsApplicationModule(private val applicationContext: Context) {
     @Singleton
     open fun provideLocationServiceManager(context: Context): LocationServiceManager =
         LocationServiceManager(context)
+
 
     @Provides
     @Singleton

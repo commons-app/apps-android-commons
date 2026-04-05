@@ -13,20 +13,20 @@ import io.reactivex.Single
 abstract class BookmarkPicturesRoomDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    protected abstract fun insertInternal(bookmark: BookmarkPictureRoomEntity): Completable
+    abstract fun insert(bookmark: BookmarkPictureRoomEntity): Completable
 
     @Delete
-    protected abstract fun deleteInternal(bookmark: BookmarkPictureRoomEntity): Completable
+    abstract fun delete(bookmark: BookmarkPictureRoomEntity): Completable
 
     @Query("SELECT * FROM bookmarks")
-    protected abstract fun getAllInternal(): Single<List<BookmarkPictureRoomEntity>>
+    abstract fun getAll(): Single<List<BookmarkPictureRoomEntity>>
 
     @Query("SELECT EXISTS (SELECT 1 FROM bookmarks WHERE media_name = :mediaName)")
     abstract fun findBookmarkByName(mediaName: String): Single<Boolean>
 
     fun getAllBookmarks(): Single<List<Bookmark>> {
-        return getAllInternal().map { entities ->
-            entities.map { Bookmark(it.mediaName, it.mediaCreator) }
+        return getAll().map { entities ->
+            entities.map { fromEntity(it) }
         }
     }
 
@@ -36,13 +36,21 @@ abstract class BookmarkPicturesRoomDao {
     }
 
     fun updateBookmark(bookmark: Bookmark): Single<Boolean> {
-        val entity = BookmarkPictureRoomEntity(bookmark.mediaName!!, bookmark.mediaCreator!!)
+        val entity = toEntity(bookmark)
         return findBookmarkByName(bookmark.mediaName!!).flatMap { exists ->
             if (exists) {
-                deleteInternal(entity).andThen(Single.just(false))
+                delete(entity).andThen(Single.just(false))
             } else {
-                insertInternal(entity).andThen(Single.just(true))
+                insert(entity).andThen(Single.just(true))
             }
         }
+    }
+
+    private fun toEntity(bookmark: Bookmark): BookmarkPictureRoomEntity {
+        return BookmarkPictureRoomEntity(bookmark.mediaName!!, bookmark.mediaCreator!!)
+    }
+
+    private fun fromEntity(entity: BookmarkPictureRoomEntity): Bookmark {
+        return Bookmark(entity.mediaName, entity.mediaCreator)
     }
 }

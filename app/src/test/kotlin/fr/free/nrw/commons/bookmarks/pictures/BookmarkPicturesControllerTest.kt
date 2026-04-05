@@ -51,8 +51,8 @@ class BookmarkPicturesControllerTest {
     private val mockBookmarkList: List<Bookmark>
         private get() {
             val list = ArrayList<Bookmark>()
-            list.add(Bookmark("File:Test1.jpg", "Maskaravivek", Uri.EMPTY))
-            list.add(Bookmark("File:Test2.jpg", "Maskaravivek", Uri.EMPTY))
+            list.add(Bookmark("File:Test1.jpg", "Maskaravivek"))
+            list.add(Bookmark("File:Test2.jpg", "Maskaravivek"))
             return list
         }
 

@@ -38,7 +38,7 @@ class BookmarkPictureTableTest : InMemoryDatabaseTest() {
         // Insert with legacy SQL
         db.execSQL("INSERT INTO bookmarks (media_name, media_creator) VALUES ('Legacy Image', 'Legacy Creator');")
 
-        val exists = dao.findBookmarkByName("Legacy Image")
+        val exists: Boolean = dao.findBookmarkByName("Legacy Image").blockingGet()
         assertTrue(exists)
         val allBookmarks = dao.getAll().blockingGet()
         assertEquals(1, allBookmarks.size)

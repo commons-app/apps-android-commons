@@ -38,7 +38,7 @@ class RecentLanguagesTableTest : InMemoryDatabaseTest() {
         // Insert with legacy SQL
         db.execSQL("INSERT INTO recent_languages (language_name, language_code) VALUES ('French', 'fr');")
 
-        val exists = dao.findRecentLanguage("fr")
+        val exists = dao.findRecentLanguage("fr").blockingGet()
         assertTrue(exists)
         val allLanguages = dao.getAll().blockingGet()
         assertEquals(1, allLanguages.size)

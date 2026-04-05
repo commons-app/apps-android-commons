@@ -25,7 +25,7 @@ class RecentSearchesTableTest : InMemoryDatabaseTest() {
         )
         dao.insert(search)
 
-        val retrieved = dao.findEntity("Test Search")
+        val retrieved = dao.findEntity("Test Search").blockingGet().firstOrNull()
         assertNotNull(retrieved)
         assertEquals("Test Search", retrieved?.query)
         // Date might lose some precision in DB, but should be close
@@ -42,7 +42,7 @@ class RecentSearchesTableTest : InMemoryDatabaseTest() {
         val now = System.currentTimeMillis()
         db.execSQL("INSERT INTO recent_searches (name, last_used) VALUES ('Legacy Search', $now);")
 
-        val entity = dao.findEntity("Legacy Search")
+        val entity = dao.findEntity("Legacy Search").blockingGet().firstOrNull()
         assertNotNull(entity)
         assertEquals("Legacy Search", entity?.query)
         assertEquals(now, entity?.lastSearched?.time)
