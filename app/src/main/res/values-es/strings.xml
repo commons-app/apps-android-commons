@@ -34,6 +34,7 @@
 * Josuert
 * Juanman
 * Keneth Urrutia
+* Kookoriko
 * Ktranz
 * Laquin
 * Luisangelrg
@@ -467,6 +468,9 @@
   <string name="no_categories_selected_warning_desc">Las imágenes sin categorías raramente se pueden usar. ¿Seguro que quieres continuar sin seleccionar ninguna categoría?</string>
   <string name="no_depictions_selected">No se han seleccionado representaciones</string>
   <string name="no_depictions_selected_warning_desc">Las imágenes con dibujos se encuentran más fácilmente y es más probable que se usen. ¿Está seguro de que quieres seguir sin seleccionar dibujos?</string>
+  <string name="depictions_choose_from_map">Seleccionar desde el mapa</string>
+  <string name="depictions_map_confirm">Confirmar</string>
+  <string name="depictions_map_no_photo_location">La foto no tiene ubicación, muestra tu ubicación actual.</string>
   <string name="back_button_warning">Cancelar la carga</string>
   <string name="back_button_warning_desc">usar el botón de retroceso cancelará esta carga y perderá el progreso</string>
   <string name="back_button_continue">Continuar la carga</string>
@@ -572,6 +576,7 @@
   <string name="delete_helper_ask_spam_selfie">un autorretrato que no tiene uso en ningún artículo</string>
   <string name="delete_helper_ask_spam_blurry">completamente borrosa</string>
   <string name="delete_helper_ask_spam_nonsense">sinsentido, totalmente inservible para cualquier artículo</string>
+  <string name="delete_helper_ask_spam_other">Otra</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">Fotografía para prensa</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">Foto cualquiera tomada de internet</string>
   <string name="delete_helper_ask_reason_copyright_logo">Logo</string>
@@ -870,4 +875,5 @@
   <string name="image_tag_line_created_and_uploaded_by">Creado y cargado por: %1$s</string>
   <string name="image_tag_line_created_by_and_uploaded_by">Creado por %1$s y cargado por %2$s</string>
   <string name="nominated_for_deletion_btn">Nominar para borrado</string>
+  <string name="license_cc0_description">Sin derechos de autor. Usted cede todos los derechos para que cualquier persona pueda usar esta obra como desee.</string>
 </resources>

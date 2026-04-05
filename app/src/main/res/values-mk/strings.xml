@@ -422,6 +422,9 @@
   <string name="no_categories_selected_warning_desc">Некатегоризираните слики се слабо употребливи. Дали сигурно сакате да продолжите без да ставите категории?</string>
   <string name="no_depictions_selected">Немате избрано прикажувања</string>
   <string name="no_depictions_selected_warning_desc">Сликите со прикажувања се полезни за наоѓање, со што е поголема веројатноста дека ќе бидат искористени. Дали сигурно сакате да продолжите без да изберете прикажувања?</string>
+  <string name="depictions_choose_from_map">Одберете од картата</string>
+  <string name="depictions_map_confirm">Потврди</string>
+  <string name="depictions_map_no_photo_location">Фотографијата нема местоположба; ја прикажувам вашата тековна</string>
   <string name="back_button_warning">Откажи подигање</string>
   <string name="back_button_warning_desc">Ако стиснете на копчето за одење назад, со тоа ќе го откажете подигањето и ќе го изгубите досегашниот напредок</string>
   <string name="back_button_continue">Продолжи со подигање</string>
@@ -530,6 +533,8 @@
   <string name="delete_helper_ask_spam_selfie">самослик кој не се користи во ниедна статија</string>
   <string name="delete_helper_ask_spam_blurry">сосема матно</string>
   <string name="delete_helper_ask_spam_nonsense">бесмислено, апсолутно неупотребливо во ниедна статија</string>
+  <string name="delete_helper_ask_spam_other">Друго</string>
+  <string name="delete_helper_other_notes_hint">Оправдување</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">Новинарска слика</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">Произволна слика од семрежјето</string>
   <string name="delete_helper_ask_reason_copyright_logo">Лого</string>
@@ -836,4 +841,10 @@
   <string name="image_tag_line_created_by_and_uploaded_by">Создал %1$s, а подигнал %2$s</string>
   <string name="nominated_for_deletion_btn">Предложено за бришење</string>
   <string name="custom_selector_max_image_limit_reached">Можете да изберете највеќе %d слики.</string>
+  <string name="license_cc0_description">Без авторски права. Ги препуштате сите права на секого што сака да го користи делово на било кој начин.</string>
+  <string name="license_cc_by_description">Наведи извор. Другите слободно можат да го споделуваат и прилагодуваат делото под услов да ве наведат.</string>
+  <string name="license_cc_by_sa_description">Наведи извор-Сподели под исти услови. Другите можат да го споделуваат и прилагодуваат делото, но мора да ја користат истата лиценца и да ве наведат.</string>
+  <string name="license_cc0_long_description">Оваа лиценца им допушта на другите да го распространуваат, преработуваат, прилагодуваат и доградуваат материјалот во секој медиум или формат, без услови.</string>
+  <string name="license_cc_by_long_description">Оваа лиценца им допушта на другите да го распространуваат, преработуваат, прилагодуваат и доградуваат материјалот во секој медиум или формат, дури и за комерцијални цели, под услов да го наведат творецот.</string>
+  <string name="license_cc_by_sa_long_description">Оваа лиценца им допушта на другите да го распространуваат, преработуваат, прилагодуваат и доградуваат материјалот во секој медиум или формат, дури и за комерцијални цели, под услов да го наведат творецот, а новото дело да го лиценцираат под истоветни услови.</string>
 </resources>

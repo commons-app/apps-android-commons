@@ -545,6 +545,7 @@
   <string name="delete_helper_ask_spam_selfie">uma selfie que não é usada em nenhum artigo</string>
   <string name="delete_helper_ask_spam_blurry">totalmente embaçado</string>
   <string name="delete_helper_ask_spam_nonsense">absurdo, absolutamente inutilizável em qualquer artigo</string>
+  <string name="delete_helper_ask_spam_other">Outro</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">Divulgação</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">Foto aleatória da internet</string>
   <string name="delete_helper_ask_reason_copyright_logo">Logótipo</string>
