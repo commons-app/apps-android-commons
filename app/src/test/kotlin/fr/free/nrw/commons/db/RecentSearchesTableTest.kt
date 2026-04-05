@@ -23,7 +23,7 @@ class RecentSearchesTableTest : InMemoryDatabaseTest() {
             query = "Test Search",
             lastSearched = date
         )
-        dao.insert(search)
+        dao.insert(search).blockingGet()
 
         val retrieved = dao.findEntity("Test Search").blockingGet().firstOrNull()
         assertNotNull(retrieved)
@@ -52,8 +52,8 @@ class RecentSearchesTableTest : InMemoryDatabaseTest() {
     @Test
     fun testDeleteTable() {
         val dao = roomDatabase.recentSearchesRoomDao()
-        dao.insert(RecentSearchRoomEntity(query = "Search 1", lastSearched = Date()))
-        dao.insert(RecentSearchRoomEntity(query = "Search 2", lastSearched = Date()))
+        dao.insert(RecentSearchRoomEntity(query = "Search 1", lastSearched = Date())).blockingGet()
+        dao.insert(RecentSearchRoomEntity(query = "Search 2", lastSearched = Date())).blockingGet()
         assertRowCount(RecentSearchesTable.TABLE_NAME, 2)
 
         dao.deleteTable().blockingAwait()
@@ -63,7 +63,7 @@ class RecentSearchesTableTest : InMemoryDatabaseTest() {
     @Test
     fun testClearAllTables() {
         val dao = roomDatabase.recentSearchesRoomDao()
-        dao.insert(RecentSearchRoomEntity(query = "Search 1", lastSearched = Date()))
+        dao.insert(RecentSearchRoomEntity(query = "Search 1", lastSearched = Date())).blockingGet()
         assertRowCount(RecentSearchesTable.TABLE_NAME, 1)
 
         clearAllTables()

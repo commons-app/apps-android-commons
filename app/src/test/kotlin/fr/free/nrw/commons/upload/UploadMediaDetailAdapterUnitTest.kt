@@ -17,7 +17,6 @@ import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.recentlanguages.Language
 import fr.free.nrw.commons.recentlanguages.RecentLanguagesAdapter
-import fr.free.nrw.commons.recentlanguages.RecentLanguagesDao
 import fr.free.nrw.commons.recentlanguages.RecentLanguagesRoomDao
 import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment
 import io.reactivex.Single
@@ -80,6 +79,17 @@ class UploadMediaDetailAdapterUnitTest {
         uploadMediaDetails = mutableListOf(uploadMediaDetail, uploadMediaDetail)
         activity = Robolectric.buildActivity(UploadActivity::class.java).get()
         fragment = mock(UploadMediaDetailFragment::class.java)
+
+        // Default mock returns for Room DAO reactive methods
+        whenever(recentLanguagesDao.getRecentLanguages())
+            .thenReturn(Single.just(emptyList()))
+        whenever(recentLanguagesDao.findRecentLanguage(com.nhaarman.mockitokotlin2.any()))
+            .thenReturn(Single.just(false))
+        whenever(recentLanguagesDao.deleteRecentLanguage(com.nhaarman.mockitokotlin2.any()))
+            .thenReturn(io.reactivex.Completable.complete())
+        whenever(recentLanguagesDao.addRecentLanguage(com.nhaarman.mockitokotlin2.any()))
+            .thenReturn(io.reactivex.Completable.complete())
+
         adapter = UploadMediaDetailAdapter(fragment, "", recentLanguagesDao, mockResultLauncher)
         context = ApplicationProvider.getApplicationContext()
         Whitebox.setInternalState(adapter, "uploadMediaDetails", uploadMediaDetails)

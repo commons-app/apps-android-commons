@@ -12,6 +12,8 @@ import fr.free.nrw.commons.OkHttpConnectionFactory
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.contributions.MainActivity
 import fr.free.nrw.commons.createTestClient
+import fr.free.nrw.commons.db.InMemoryDatabaseTest
+import fr.free.nrw.commons.explore.SearchActivity
 import io.reactivex.Single
 import org.junit.Assert
 import org.junit.Before
@@ -54,7 +56,7 @@ class RecentSearchesFragmentUnitTest {
 
         OkHttpConnectionFactory.CLIENT = createTestClient()
 
-        val activity = Robolectric.buildActivity(MainActivity::class.java).create().get()
+        val activity = Robolectric.buildActivity(SearchActivity::class.java).create().get()
         fragment = RecentSearchesFragment()
         fragmentManager = activity.supportFragmentManager
         val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
@@ -66,6 +68,11 @@ class RecentSearchesFragmentUnitTest {
         Whitebox.setInternalState(fragment, "recentSearchesDao", recentSearchesDao)
         Whitebox.setInternalState(fragment, "adapter", adapter)
         Whitebox.setInternalState(fragment, "recentSearches", listOf("string"))
+
+        // Default mock returns for Room DAO reactive methods
+        whenever(recentSearchesDao.recentSearches(10)).thenReturn(Single.just(emptyList()))
+        whenever(recentSearchesDao.deleteTable()).thenReturn(io.reactivex.Completable.complete())
+        whenever(recentSearchesDao.deleteAll()).thenReturn(io.reactivex.Completable.complete())
     }
 
     @Test

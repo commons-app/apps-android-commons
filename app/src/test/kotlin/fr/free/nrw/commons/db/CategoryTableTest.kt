@@ -24,7 +24,7 @@ class CategoryTableTest : InMemoryDatabaseTest() {
             thumbnail = "http://test.com/thumb.jpg",
             timesUsed = 5
         )
-        categoryDao.insert(category)
+        categoryDao.insert(category).blockingGet()
 
         val retrieved = categoryDao.findEntity("Test Category").blockingGet().firstOrNull()
         assertNotNull(retrieved)
@@ -55,11 +55,11 @@ class CategoryTableTest : InMemoryDatabaseTest() {
     fun testUpdateCategory() {
         val categoryDao = roomDatabase.categoryRoomDao()
         val category = CategoryRoomEntity(name = "Original Name", timesUsed = 1)
-        categoryDao.insert(category)
+        categoryDao.insert(category).blockingGet()
 
         val savedCategory = categoryDao.findEntity("Original Name").blockingGet().firstOrNull()
         val updatedCategory = savedCategory?.copy(timesUsed = 2)
-        categoryDao.insert(updatedCategory!!)
+        categoryDao.insert(updatedCategory!!).blockingGet()
 
         val retrieved = categoryDao.findEntity("Original Name").blockingGet().firstOrNull()
         assertEquals(2, retrieved?.timesUsed)
@@ -69,8 +69,8 @@ class CategoryTableTest : InMemoryDatabaseTest() {
     @Test
     fun testClearAllTables() {
         val categoryDao = roomDatabase.categoryRoomDao()
-        categoryDao.insert(CategoryRoomEntity(name = "Cat 1"))
-        categoryDao.insert(CategoryRoomEntity(name = "Cat 2"))
+        categoryDao.insert(CategoryRoomEntity(name = "Cat 1")).blockingGet()
+        categoryDao.insert(CategoryRoomEntity(name = "Cat 2")).blockingGet()
         assertRowCount(CategoryTable.TABLE_NAME, 2)
 
         clearAllTables()
@@ -80,9 +80,9 @@ class CategoryTableTest : InMemoryDatabaseTest() {
     @Test
     fun testFindCategory() {
         val categoryDao = roomDatabase.categoryRoomDao()
-        categoryDao.insert(CategoryRoomEntity(name = "Exist"))
+        categoryDao.insert(CategoryRoomEntity(name = "Exist")).blockingGet()
 
         assertTrue(categoryDao.findCategory("Exist").blockingGet())
-        assertTrue(categoryDao.findCategory("NotExist").blockingGet())
+        assertTrue(!categoryDao.findCategory("NotExist").blockingGet())
     }
 }

@@ -35,6 +35,8 @@ class CategoriesModelTest {
     @Throws(Exception::class)
     fun setUp() {
         MockitoAnnotations.openMocks(this)
+        // Default mock returns for Room DAO reactive methods
+        whenever(categoryDao.save(any())).thenReturn(io.reactivex.Completable.complete())
         categoriesModel = CategoriesModel(categoryClient, categoryDao, gpsCategoryModel)
     }
 

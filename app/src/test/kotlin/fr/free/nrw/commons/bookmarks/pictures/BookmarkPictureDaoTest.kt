@@ -46,7 +46,7 @@ class BookmarkPictureDaoTest {
     @Test
     fun getAllBookmarks() {
         for (i in 1..5) {
-            bookmarkPicturesRoomDao.updateBookmark(Bookmark("media $i", "creator"))
+            bookmarkPicturesRoomDao.updateBookmark(Bookmark("media $i", "creator")).blockingGet()
         }
 
         val result = bookmarkPicturesRoomDao.getAllBookmarks().blockingGet()
@@ -62,7 +62,7 @@ class BookmarkPictureDaoTest {
     @Test
     fun updateExistingBookmark() {
         // First insert
-        bookmarkPicturesRoomDao.updateBookmark(exampleBookmark)
+        bookmarkPicturesRoomDao.updateBookmark(exampleBookmark).blockingGet()
         assertTrue(bookmarkPicturesRoomDao.findBookmark(exampleBookmark).blockingGet())
 
         // Second update should remove it (matches legacy behavior)
@@ -72,7 +72,7 @@ class BookmarkPictureDaoTest {
 
     @Test
     fun findExistingBookmark() {
-        bookmarkPicturesRoomDao.updateBookmark(exampleBookmark)
+        bookmarkPicturesRoomDao.updateBookmark(exampleBookmark).blockingGet()
         assertTrue(bookmarkPicturesRoomDao.findBookmark(exampleBookmark).blockingGet())
     }
 

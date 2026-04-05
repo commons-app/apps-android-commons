@@ -33,9 +33,11 @@ abstract class RecentSearchesRoomDao {
         }
     }
 
-    fun find(query: String): Single<RecentSearch?> {
-        return findEntity(query).map { entities ->
-            entities.firstOrNull()?.let { fromEntity(it) }
+    fun find(query: String): io.reactivex.Maybe<RecentSearch> {
+        return findEntity(query).flatMapMaybe { entities ->
+            val entity = entities.firstOrNull()
+            if (entity != null) io.reactivex.Maybe.just(fromEntity(entity))
+            else io.reactivex.Maybe.empty()
         }
     }
 

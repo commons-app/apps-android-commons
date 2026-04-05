@@ -21,7 +21,7 @@ class BookmarkPictureTableTest : InMemoryDatabaseTest() {
             mediaName = "Test Image",
             mediaCreator = "Test Creator"
         )
-        dao.insert(bookmark)
+        dao.insert(bookmark).blockingAwait()
 
         val allBookmarks = dao.getAll().blockingGet()
         assertEquals(1, allBookmarks.size)
@@ -50,18 +50,18 @@ class BookmarkPictureTableTest : InMemoryDatabaseTest() {
     fun testDeleteBookmark() {
         val dao = roomDatabase.bookmarkPicturesRoomDao()
         val bookmark = BookmarkPictureRoomEntity("Image to delete", "Creator")
-        dao.insert(bookmark)
+        dao.insert(bookmark).blockingAwait()
         assertRowCount(BookmarksTable.TABLE_NAME, 1)
 
-        dao.delete(bookmark)
+        dao.delete(bookmark).blockingAwait()
         assertRowCount(BookmarksTable.TABLE_NAME, 0)
     }
 
     @Test
     fun testClearAllTables() {
         val dao = roomDatabase.bookmarkPicturesRoomDao()
-        dao.insert(BookmarkPictureRoomEntity("Image 1", "Creator 1"))
-        dao.insert(BookmarkPictureRoomEntity("Image 2", "Creator 2"))
+        dao.insert(BookmarkPictureRoomEntity("Image 1", "Creator 1")).blockingAwait()
+        dao.insert(BookmarkPictureRoomEntity("Image 2", "Creator 2")).blockingAwait()
         assertRowCount(BookmarksTable.TABLE_NAME, 2)
 
         clearAllTables()

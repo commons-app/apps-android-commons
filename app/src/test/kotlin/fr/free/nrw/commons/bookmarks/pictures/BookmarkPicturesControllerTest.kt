@@ -23,7 +23,7 @@ class BookmarkPicturesControllerTest {
     var mediaClient: MediaClient? = null
 
     @Mock
-    var bookmarkDao: BookmarkPicturesDao? = null
+    var bookmarkDao: BookmarkPicturesRoomDao? = null
 
     @InjectMocks
     var bookmarkPicturesController: BookmarkPicturesController? = null
@@ -36,7 +36,7 @@ class BookmarkPicturesControllerTest {
         MockitoAnnotations.initMocks(this)
         val mockMedia = mockMedia
         whenever(bookmarkDao!!.getAllBookmarks())
-            .thenReturn(mockBookmarkList)
+            .thenReturn(Single.just(mockBookmarkList))
         whenever(
             mediaClient!!.getMedia(
                 ArgumentMatchers.anyString(),

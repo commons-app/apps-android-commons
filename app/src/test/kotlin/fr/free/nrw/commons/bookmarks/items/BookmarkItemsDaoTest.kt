@@ -62,7 +62,7 @@ class BookmarkItemsDaoTest {
     fun getAllItemsBookmarks() {
         for (i in 1..5) {
             val item = exampleItemBookmark.copy(id = "item$i")
-            bookmarkItemsRoomDao.updateBookmarkItem(item)
+            bookmarkItemsRoomDao.updateBookmarkItem(item).blockingGet()
         }
 
         val result = bookmarkItemsRoomDao.getAllBookmarksItems().blockingGet()
@@ -78,7 +78,7 @@ class BookmarkItemsDaoTest {
     @Test
     fun updateExistingItemBookmark() {
         // First insert
-        bookmarkItemsRoomDao.updateBookmarkItem(exampleItemBookmark)
+        bookmarkItemsRoomDao.updateBookmarkItem(exampleItemBookmark).blockingGet()
         assertTrue(bookmarkItemsRoomDao.findBookmarkItem(exampleItemBookmark.id).blockingGet())
 
         // Second update should remove it (toggle behavior)
@@ -88,7 +88,7 @@ class BookmarkItemsDaoTest {
 
     @Test
     fun findExistingItemBookmark() {
-        bookmarkItemsRoomDao.updateBookmarkItem(exampleItemBookmark)
+        bookmarkItemsRoomDao.updateBookmarkItem(exampleItemBookmark).blockingGet()
         assertTrue(bookmarkItemsRoomDao.findBookmarkItem(exampleItemBookmark.id).blockingGet())
     }
 

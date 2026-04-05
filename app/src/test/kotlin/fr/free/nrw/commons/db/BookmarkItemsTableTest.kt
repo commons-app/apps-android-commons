@@ -28,7 +28,7 @@ class BookmarkItemsTableTest : InMemoryDatabaseTest() {
             isSelected = true,
             id = "Q12345"
         )
-        dao.insert(item)
+        dao.insert(item).blockingAwait()
 
         val allItems = dao.getAll().blockingGet()
         assertEquals(1, allItems.size)
@@ -72,18 +72,18 @@ class BookmarkItemsTableTest : InMemoryDatabaseTest() {
             isSelected = false,
             id = "QToDelete"
         )
-        dao.insert(item)
+        dao.insert(item).blockingAwait()
         assertRowCount(BookmarkItemsTable.TABLE_NAME, 1)
 
-        dao.delete(item)
+        dao.delete(item).blockingAwait()
         assertRowCount(BookmarkItemsTable.TABLE_NAME, 0)
     }
 
     @Test
     fun testClearAllTables() {
         val dao = roomDatabase.bookmarkItemsRoomDao()
-        dao.insert(BookmarkItemsRoomEntity("Item 1", null, null, "", "", "", "", false, "Q1"))
-        dao.insert(BookmarkItemsRoomEntity("Item 2", null, null, "", "", "", "", false, "Q2"))
+        dao.insert(BookmarkItemsRoomEntity("Item 1", null, null, "", "", "", "", false, "Q1")).blockingAwait()
+        dao.insert(BookmarkItemsRoomEntity("Item 2", null, null, "", "", "", "", false, "Q2")).blockingAwait()
         assertRowCount(BookmarkItemsTable.TABLE_NAME, 2)
 
         clearAllTables()

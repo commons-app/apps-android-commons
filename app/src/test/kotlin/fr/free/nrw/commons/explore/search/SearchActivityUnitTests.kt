@@ -3,6 +3,7 @@ package fr.free.nrw.commons.explore.search
 import android.content.Context
 import androidx.fragment.app.FragmentManager
 import androidx.test.core.app.ApplicationProvider
+import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.verify
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.TestCommonsApplication
@@ -11,11 +12,10 @@ import fr.free.nrw.commons.explore.SearchActivity
 import fr.free.nrw.commons.explore.categories.search.SearchCategoryFragment
 import fr.free.nrw.commons.explore.depictions.search.SearchDepictionsFragment
 import fr.free.nrw.commons.explore.media.SearchMediaFragment
-import fr.free.nrw.commons.explore.models.RecentSearch
 import fr.free.nrw.commons.explore.recentsearches.RecentSearchesFragment
 import fr.free.nrw.commons.explore.recentsearches.RecentSearchesRoomDao
 import fr.free.nrw.commons.media.MediaDetailPagerFragment
-import io.reactivex.Single
+import io.reactivex.Completable
 import io.reactivex.disposables.CompositeDisposable
 import org.junit.Assert
 import org.junit.Before
@@ -126,11 +126,12 @@ class SearchActivityUnitTests {
     fun testSaveRecentSearchCaseNull() {
         val query = "test"
         Whitebox.setInternalState(activity, "recentSearchesDao", recentSearchesDao)
+        `when`(recentSearchesDao.save(any())).thenReturn(Completable.complete())
         val method: Method =
             SearchActivity::class.java.getDeclaredMethod("saveRecentSearch", String::class.java)
         method.isAccessible = true
         method.invoke(activity, query)
-        verify(recentSearchesDao).find(query)
+        verify(recentSearchesDao).save(any())
     }
 
     @Test
@@ -138,12 +139,12 @@ class SearchActivityUnitTests {
     fun testSaveRecentSearchCaseNonNull() {
         val query = "test"
         Whitebox.setInternalState(activity, "recentSearchesDao", recentSearchesDao)
-        `when`(recentSearchesDao.find(query)).thenReturn(Single.just(mock(RecentSearch::class.java)))
+        `when`(recentSearchesDao.save(any())).thenReturn(Completable.complete())
         val method: Method =
             SearchActivity::class.java.getDeclaredMethod("saveRecentSearch", String::class.java)
         method.isAccessible = true
         method.invoke(activity, query)
-        verify(recentSearchesDao).find(query)
+        verify(recentSearchesDao).save(any())
     }
 
     @Test
@@ -205,6 +206,8 @@ class SearchActivityUnitTests {
         `when`(searchMediaFragment.isRemoving).thenReturn(false)
         `when`(searchCategoryFragment.isRemoving).thenReturn(false)
 
+        `when`(recentSearchesDao.save(any())).thenReturn(Completable.complete())
+
         val method: Method =
             SearchActivity::class.java.getDeclaredMethod(
                 "handleSearch",
@@ -212,7 +215,6 @@ class SearchActivityUnitTests {
             )
         method.isAccessible = true
         method.invoke(activity, query)
-        verify(recentSearchesDao).find(query)
         verify(searchDepictionsFragment).onQueryUpdated(query)
         verify(searchMediaFragment).onQueryUpdated(query)
         verify(searchCategoryFragment).onQueryUpdated(query)
