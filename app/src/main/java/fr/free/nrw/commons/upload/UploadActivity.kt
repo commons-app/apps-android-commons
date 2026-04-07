@@ -105,6 +105,7 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
     private var prevLocation: LatLng? = null
     private var currLocation: LatLng? = null
     private var isInAppCameraUpload = false
+    private var shouldShowDuplicatesRemovedWarning = false
     private var uploadableFiles: MutableList<UploadableFile> = mutableListOf()
     private var currentSelectedPosition = 0
 
@@ -700,6 +701,16 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
 
             uploadImagesAdapter!!.fragments = fragments!!
             binding.vpUpload.offscreenPageLimit = fragments!!.size
+
+            if (shouldShowDuplicatesRemovedWarning) {
+                showAlertDialog(
+                    this,
+                    getString(R.string.warning),
+                    getString(R.string.duplicates_removed_before_upload),
+                    getString(R.string.ok)
+                ) { }
+                shouldShowDuplicatesRemovedWarning = false
+            }
         }
         // Saving size of uploadableFiles
         store!!.putInt(KEY_FOR_CURRENT_UPLOAD_IMAGE_SIZE, uploadableFiles.size)
@@ -814,6 +825,8 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
         }
 
         isInAppCameraUpload = intent.getBooleanExtra(IN_APP_CAMERA_UPLOAD, false)
+        shouldShowDuplicatesRemovedWarning =
+            intent.getBooleanExtra(EXTRA_DUPLICATES_REMOVED, false)
         resetDirectPrefs()
     }
 
@@ -1042,6 +1055,7 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
     companion object {
         private var uploadIsOfAPlace = false
         const val EXTRA_FILES: String = "commons_image_extra"
+        const val EXTRA_DUPLICATES_REMOVED: String = "duplicates_removed_before_upload"
         const val LOCATION_BEFORE_IMAGE_CAPTURE: String = "user_location_before_image_capture"
         const val IN_APP_CAMERA_UPLOAD: String = "in_app_camera_upload"
 
