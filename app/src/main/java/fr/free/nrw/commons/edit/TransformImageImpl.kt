@@ -73,6 +73,21 @@ class TransformImageImpl : TransformImage {
         return output
     }
 
+    fun blurRegion(
+        imageFile: File,
+        left: Int,
+        top: Int,
+        width: Int,
+        height: Int,
+        savePath: File
+    ): File? {
+        Timber.d("Blur requested at ($left, $top, $width, $height)")
+
+        // TODO: Implement lossless blur using JPEG block transformation
+
+        return null
+    }
+
     /**
      * Crops the specified image file using lossless JPEG cropping via LLJTran.
      *
