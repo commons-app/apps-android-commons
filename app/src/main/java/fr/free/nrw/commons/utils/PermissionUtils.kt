@@ -191,7 +191,7 @@ object PermissionUtils {
                                         activity.isShowPermissionsDialog = true
                                     }
                                 },
-                                null, null
+                                null, true
                             )
                         }
                         else -> scope.launch { onPermissionDenied?.run() }
@@ -228,7 +228,7 @@ object PermissionUtils {
                                 activity.finish()
                             }
                         },
-                        null
+                        true
                     )
                 }
             }).onSameThread().check()
