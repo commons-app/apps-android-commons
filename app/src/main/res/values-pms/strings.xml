@@ -352,6 +352,7 @@
   <string name="quiz_screenshot_question">Costa schermà a va bin da carié?</string>
   <string name="share_app_title">Partagé j\'aplicassion</string>
   <string name="rotate">Deje na gira</string>
+  <string name="crop">Artajé</string>
   <string name="error_fetching_nearby_places">Impossìbil carié j\'anviron.</string>
   <string name="no_pictures_in_this_area">Gnun-e plance an cost\'àrea</string>
   <string name="no_nearby_places_around">Gnun pòst sì-davzin</string>
@@ -419,6 +420,9 @@
   <string name="no_categories_selected_warning_desc">Le plance sensa categorìa, a so da ràir dovràbij. É-lo sigur ëd vorèj continué sensa serne dle categorìe?</string>
   <string name="no_depictions_selected">Gnun-e descrission selessionà</string>
   <string name="no_depictions_selected_warning_desc">Le plance con dle descrission a l\'é pi bel fé troveje e a l\'é pi probàbil ch\'as deuvro. É-lo sigur ëd vorèj continué sensa selessioné dla descrission?</string>
+  <string name="depictions_choose_from_map">Serne da la carta</string>
+  <string name="depictions_map_confirm">Confirmé</string>
+  <string name="depictions_map_no_photo_location">La fòto a l\'ha gnun-a localisassion, a së smon soa localisassion atual</string>
   <string name="back_button_warning">Anulé ël cariament</string>
   <string name="back_button_warning_desc">An sgnacand an sël boton andré, ës cariament a sarà anulà e chiel a perdrà ij sò progress</string>
   <string name="back_button_continue">Andé anans a carié</string>
@@ -527,6 +531,8 @@
   <string name="delete_helper_ask_spam_selfie">n\'autoscat ch\'a l\'é dovrà an gnun artìcol</string>
   <string name="delete_helper_ask_spam_blurry">tërbol d\'autut</string>
   <string name="delete_helper_ask_spam_nonsense">gnun sust, as peul pròpe nen dovresse an qualsëssìa artìcol</string>
+  <string name="delete_helper_ask_spam_other">D\'àutr</string>
+  <string name="delete_helper_other_notes_hint">Giustificassion</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">Fòto dë stampa</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">Fòto a l\'ancàpit da \'n sl\'aragnà</string>
   <string name="delete_helper_ask_reason_copyright_logo">Marca</string>
@@ -799,6 +805,7 @@
   <string name="pending">An atèisa</string>
   <string name="failed">Falì</string>
   <string name="could_not_load_place_data">Impossìbil carié ij dàit dël pòst</string>
+  <string name="warning_for_no_option_selected">Selessioné una qualsëssìa dj\'opsion për rësponde a la chestion</string>
   <string name="custom_selector_delete_folder">Eliminé ëd dossié</string>
   <string name="custom_selector_confirm_deletion_title">Confirmé l\'eliminassion</string>
   <string name="custom_selector_confirm_deletion_message">É-lo sigur ëd vorèj eliminé ël dossié %1$s ch\'a content %2$d element?</string>
@@ -830,4 +837,10 @@
   <string name="image_tag_line_created_by_and_uploaded_by">Creà da %1$s e carià da %2$s</string>
   <string name="nominated_for_deletion_btn">Nominà për esse dëscancelà</string>
   <string name="custom_selector_max_image_limit_reached">A peul selessioné al màssim %d plance.</string>
+  <string name="license_cc0_description">Gnun drit d\'autor. Chiel a conced tuti ij drit, parèj che tuti a peulo dovré cost travaj an qualsëssìa manera.</string>
+  <string name="license_cc_by_description">Atribussion. J\'àutri a son lìber ëd partagé e adaté, për tant che a-j dan l\'arconossiment.</string>
+  <string name="license_cc_by_sa_description">Atribussion-PartagiUgual. J\'àutri a peulo partagé e adaté, ma a devo dovré la midema licensa e deje l\'arconossiment.</string>
+  <string name="license_cc0_long_description">Costa licensa a përmet a chi a deuvra torna ël material ëd distribuilo, modifichelo, adatelo e dësvlupelo an qualsëssìa mojen o formà, sensa condission.</string>
+  <string name="license_cc_by_long_description">Costa licensa a përmet a chi a deuvra torna ël material ëd distribuilo, modifichelo, adatelo e dësvlupelo an qualsëssìa mojen e formà, ëdcò con dij but comersiaj, basta mach ch\'a sia dàit l\'arconossiment al creator.</string>
+  <string name="license_cc_by_sa_long_description">Costa licensa a përmet a chi a deuvra torna ël material ëd distribuilo, modifichelo, adatelo e dësvlupelo an qualsëssìa mojen o formà, ëdcò con dij but comersiaj, basta che l\'atribussion a sia dàita al creator e che ël neuv travaj a sia licensià sota j\'istess termo.</string>
 </resources>

@@ -359,6 +359,7 @@
   <string name="quiz_screenshot_question">Bu skrinşotu yükləmək olar?</string>
   <string name="share_app_title">Proqramı paylaş</string>
   <string name="rotate">Fırlat</string>
+  <string name="crop">Kəs</string>
   <string name="error_fetching_nearby_places">Yaxınlıqdakı yerləri yükləmək mümkün olmadı</string>
   <string name="no_pictures_in_this_area">Bu ərazidə şəkillər yoxdur</string>
   <string name="no_nearby_places_around">Yaxınlıqda yer tapılmadı</string>
@@ -426,6 +427,9 @@
   <string name="no_categories_selected_warning_desc">Kateqoriyaları olmayan şəkillər nadir hallarda istifadə olunur. Kateqoriya seçmədən davam etmək istədiyinizə əminsiniz?</string>
   <string name="no_depictions_selected">Heç bir təsvir seçilməyib</string>
   <string name="no_depictions_selected_warning_desc">Nəyi təsvir etdiyi qeyd olunan şəkillər daha asan tapılır və istifadə olunma ehtimalı daha yüksəkdir. Bunsuz davam etmək istədiyinizə əminsiniz?</string>
+  <string name="depictions_choose_from_map">Xəritədən seç</string>
+  <string name="depictions_map_confirm">Təsdiqlə</string>
+  <string name="depictions_map_no_photo_location">Fotonun əlavə olunmuş koordinatı yoxdur, cari yerinizi göstərir</string>
   <string name="back_button_warning">Yükləməni ləğv et</string>
   <string name="back_button_warning_desc">Geri düyməsini istifadə etmək bu yükləməni ləğv edəcək və siz irəliləyişinizi itirəcəksiniz</string>
   <string name="back_button_continue">Yükləməyə davam et</string>
@@ -534,6 +538,8 @@
   <string name="delete_helper_ask_spam_selfie">heç bir məqalədə istifadə olunmayan selfi</string>
   <string name="delete_helper_ask_spam_blurry">tamamilə bulanıq</string>
   <string name="delete_helper_ask_spam_nonsense">mənasız, məqalədə istifadəyə tamamilə yararsızdır</string>
+  <string name="delete_helper_ask_spam_other">Digər: aşağıda qeyd edin</string>
+  <string name="delete_helper_other_notes_hint">Əsaslandırma</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">Mətbuat fotosu</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">İnternetdən təsadüfi foto</string>
   <string name="delete_helper_ask_reason_copyright_logo">Loqo</string>
@@ -807,6 +813,7 @@
   <string name="pending">Gözləmədə</string>
   <string name="failed">Uğursuz</string>
   <string name="could_not_load_place_data">Yer datasını yükləmək mümkün olmadı</string>
+  <string name="warning_for_no_option_selected">Suala cavab vermək üçün variantlardan birini seçin</string>
   <string name="custom_selector_delete_folder">Qovluğu Sil</string>
   <string name="custom_selector_confirm_deletion_title">Silinməni təsdiqlə</string>
   <string name="custom_selector_confirm_deletion_message">%2$d elementdən ibarət %1$s qovluğunu silmək istədiyinizə əminsiniz?</string>
