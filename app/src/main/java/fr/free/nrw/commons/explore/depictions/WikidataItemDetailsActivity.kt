@@ -45,7 +45,7 @@ class WikidataItemDetailsActivity : BaseActivity(), MediaDetailProvider, Categor
     var depictModel: DepictModel? = null
 
     private var supportFragmentManager: FragmentManager? = null
-    private var depictionImagesListFragment: DepictedImagesFragment? = null
+    private var depictedImagesListFragment: DepictedImagesFragment? = null
     private var mediaDetailPagerFragment: MediaDetailPagerFragment? = null
     private var binding: ActivityWikidataItemDetailsBinding? = null
 
@@ -95,9 +95,23 @@ class WikidataItemDetailsActivity : BaseActivity(), MediaDetailProvider, Categor
      * Set the fragments according to the tab selected in the viewPager.
      */
     private fun setTabs() {
-        depictionImagesListFragment = DepictedImagesFragment()
-        val childDepictionsFragment = ChildDepictionsFragment()
-        val parentDepictionsFragment = ParentDepictionsFragment()
+        // Either load the fragments (of viewPager) from the saved state, or create new ones
+        // Use depictedImagesListFragment as a field for later access.
+        // -> firstOrNull, as we expect 1 if there is state, or 0 otherwise
+        val fragments = supportFragmentManager!!.fragments
+        depictedImagesListFragment = fragments
+            .filterIsInstance<DepictedImagesFragment>()
+            .firstOrNull()
+            ?: DepictedImagesFragment()
+        val childDepictionsFragment = fragments
+            .filterIsInstance<ChildDepictionsFragment>()
+            .firstOrNull()
+            ?: ChildDepictionsFragment()
+        val parentDepictionsFragment = fragments
+            .filterIsInstance<ParentDepictionsFragment>()
+            .firstOrNull()
+            ?: ParentDepictionsFragment()
+
         val wikidataItemName = intent.getStringExtra("wikidataItemName")
         val entityId = intent.getStringExtra("entityId")
         if (intent != null && wikidataItemName != null) {
@@ -105,13 +119,21 @@ class WikidataItemDetailsActivity : BaseActivity(), MediaDetailProvider, Categor
                 "wikidataItemName" to wikidataItemName,
                 "entityId" to entityId
             )
-            depictionImagesListFragment!!.arguments = arguments
-            parentDepictionsFragment.arguments = arguments
-            childDepictionsFragment.arguments = arguments
+
+            // Only set the arguments if the fragments are freshly made -- don't set if loaded from
+            // the fragment manager. The arguments will be null only if created from a new instance.
+            // This prevents the IllegalStateException "Fragment already added and state has been
+            // saved"  (per the LLM peer review bot).
+            if (depictedImagesListFragment!!.arguments == null)
+                depictedImagesListFragment!!.arguments = arguments
+            if (parentDepictionsFragment.arguments == null)
+                parentDepictionsFragment.arguments = arguments
+            if (childDepictionsFragment.arguments == null)
+                childDepictionsFragment.arguments = arguments
         }
 
         viewPagerAdapter!!.setTabs(
-            R.string.title_for_media to depictionImagesListFragment!!,
+            R.string.title_for_media to depictedImagesListFragment!!,
             R.string.title_for_child_classes to childDepictionsFragment,
             R.string.title_for_parent_classes to parentDepictionsFragment
         )
@@ -148,7 +170,7 @@ class WikidataItemDetailsActivity : BaseActivity(), MediaDetailProvider, Categor
      * @return Media Object
      */
     override fun getMediaAtPosition(i: Int): Media? {
-        return depictionImagesListFragment!!.getMediaAtPosition(i)
+        return depictedImagesListFragment!!.getMediaAtPosition(i)
     }
 
     /**
@@ -169,7 +191,7 @@ class WikidataItemDetailsActivity : BaseActivity(), MediaDetailProvider, Categor
      * The viewpager will contain same number of media items as that of media elements in adapter.
      * @return Total Media count in the adapter
      */
-    override fun getTotalMediaCount(): Int = depictionImagesListFragment!!.getTotalMediaCount()
+    override fun getTotalMediaCount(): Int = depictedImagesListFragment!!.getTotalMediaCount()
 
     override fun getContributionStateAt(position: Int): Int? = null
 
