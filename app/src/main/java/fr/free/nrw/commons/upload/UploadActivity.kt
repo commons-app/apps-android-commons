@@ -191,10 +191,10 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
                     getString(R.string.back_button_warning_desc),
                     getString(R.string.back_button_continue),
                     getString(R.string.back_button_warning),
-                    null
-                ) {
-                    finish()
-                }
+                    null,
+                    { finish() },
+                    false
+                )
             }
         }
         onBackPressedDispatcher.addCallback(this, onBackPressedCallback)
