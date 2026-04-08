@@ -3096,6 +3096,48 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
         if (gridLayoutManager != null) {
             gridLayoutManager!!.spanCount = spanCount
         }
+        val mapIconLayout = binding!!.fabRecenter.parent as android.widget.LinearLayout
+        val iconParams = mapIconLayout.layoutParams as android.widget.RelativeLayout.LayoutParams
+
+        val emptyView1Params = binding!!.emptyView1.layoutParams
+        val emptyViewParams = binding!!.emptyView.layoutParams
+        val emptyView2Params = binding!!.emptyView2.layoutParams
+
+        val density = resources.displayMetrics.density
+        fun dpToPx(dp: Int): Int = (dp * density).toInt()
+
+        if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            iconParams.removeRule(android.widget.RelativeLayout.ALIGN_PARENT_END)
+            iconParams.addRule(android.widget.RelativeLayout.ALIGN_PARENT_START, android.widget.RelativeLayout.TRUE)
+            iconParams.marginStart = dpToPx(16)
+            iconParams.marginEnd = 0
+
+            emptyView1Params.height = 0
+            emptyViewParams.height = 0
+            emptyView2Params.height = 0
+
+            binding!!.fabCustomGallery.translationX = dpToPx(-70).toFloat()
+            binding!!.fabGallery.translationX = dpToPx(-140).toFloat()
+            binding!!.fabCamera.translationX = dpToPx(-210).toFloat()
+
+        } else {
+            iconParams.removeRule(android.widget.RelativeLayout.ALIGN_PARENT_START)
+            iconParams.addRule(android.widget.RelativeLayout.ALIGN_PARENT_END, android.widget.RelativeLayout.TRUE)
+            iconParams.marginStart = 0
+            iconParams.marginEnd = dpToPx(16)
+
+            emptyView1Params.height = dpToPx(285)
+            emptyViewParams.height = dpToPx(174)
+            emptyView2Params.height = dpToPx(46)
+
+            binding!!.fabCustomGallery.translationX = 0f
+            binding!!.fabGallery.translationX = 0f
+            binding!!.fabCamera.translationX = 0f
+        }
+        mapIconLayout.layoutParams = iconParams
+        binding!!.emptyView1.layoutParams = emptyView1Params
+        binding!!.emptyView.layoutParams = emptyViewParams
+        binding!!.emptyView2.layoutParams = emptyView2Params
     }
 
     fun onLearnMoreClicked() {
