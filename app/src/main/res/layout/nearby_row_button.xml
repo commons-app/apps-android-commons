@@ -6,8 +6,7 @@
   android:orientation="horizontal"
   android:visibility="gone"
   tools:visibility="visible"
-  android:layout_marginTop="@dimen/standard_gap"
-  android:layout_below="@+id/icon"
+  android:layout_marginStart="@dimen/half_standard_height"
   xmlns:android="http://schemas.android.com/apk/res/android">
 
     <LinearLayout
