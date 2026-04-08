@@ -17,10 +17,7 @@ import javax.inject.Inject
 import javax.inject.Named
 import javax.inject.Singleton
 
-/**
- * The presenter for the campaigns view, fetches the campaigns from the api and informs the view on
- * success and error
- */
+
 @Singleton
 class CampaignsPresenter @Inject constructor(
     private val okHttpJsonApiClient: OkHttpJsonApiClient?,
