@@ -556,6 +556,7 @@
   <string name="delete_helper_ask_spam_blurry">helemaal wazig</string>
   <string name="delete_helper_ask_spam_nonsense">onzin, absoluut onbruikbaar in elk artikel</string>
   <string name="delete_helper_ask_spam_other">Overige</string>
+  <string name="delete_helper_other_notes_hint">Rechtvaardiging</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">Persfoto</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">Willekeurige foto van internet</string>
   <string name="delete_helper_ask_reason_copyright_logo">Logo</string>
