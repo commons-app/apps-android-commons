@@ -156,7 +156,9 @@ object PickedFiles : Constants {
             val srcExif = context.contentResolver.openInputStream(photoUri)?.use { ExifInterface(it) }
             HeicApi28.transcodeToJpeg(context.contentResolver, photoUri, photoFile)
             srcExif?.let { copyExif(it, photoFile) }
-            return UploadableFile(photoUri, photoFile)
+            return UploadableFile(photoUri, photoFile).apply {
+                hasUnsupportedFormat = true
+            }
         }
 
         if (photoFile.createNewFile()) {
