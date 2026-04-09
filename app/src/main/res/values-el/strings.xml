@@ -444,6 +444,7 @@
   <string name="no_categories_selected_warning_desc">Οι εικόνες χωρίς κατηγορίες χρησιμοποιούνται σπάνια. Θέλετε πράγματι να συνεχίσετε δίχως να επιλέξετε κατηγορίες;</string>
   <string name="no_depictions_selected">Δεν έχουν επιλεγεί απεικονίσεις</string>
   <string name="no_depictions_selected_warning_desc">Οι εικόνες με απεικονίσεις είναι πιο εύκολα ανιχνεύσιμες και πιο πιθανό να χρησιμοποιηθούν. Θέλετε σίγουρα να συνεχίσετε χωρίς να επιλέξετε απεικονίσεις;</string>
+  <string name="depictions_map_confirm">Επιβεβαίωση</string>
   <string name="back_button_warning">Ακύρωση Μεταφόρτωσης</string>
   <string name="back_button_warning_desc">Χρησιμοποιώντας το κουμπί επιστροφής θα ακυρώσετε αυτή τη μεταφόρτωση και θα χάσετε την πρόοδό σας</string>
   <string name="back_button_continue">Συνέχιση Μεταφόρτωσης</string>
