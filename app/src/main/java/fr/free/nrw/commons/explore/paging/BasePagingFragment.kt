@@ -26,19 +26,20 @@ abstract class BasePagingFragment<T> :
     abstract val pagedListAdapter: PagedListAdapter<T, *>
     abstract val injectedPresenter: PagingContract.Presenter<T>
     abstract val errorTextId: Int
-    private val loadingAdapter by lazy { FooterAdapter { injectedPresenter.retryFailedRequest() } }
-    private val mergeAdapter by lazy { MergeAdapter(pagedListAdapter, loadingAdapter) }
+    private var loadingAdapter: FooterAdapter? = null
+    private var mergeAdapter: MergeAdapter? = null
     private var searchResults: LiveData<PagedList<T>>? = null
+    private var _binding: FragmentSearchPaginatedBinding? = null
 
-    protected lateinit var binding: FragmentSearchPaginatedBinding
+    val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
-        binding = FragmentSearchPaginatedBinding.inflate(inflater, container, false)
-        return binding.root
+        _binding = FragmentSearchPaginatedBinding.inflate(inflater, container, false)
+        return _binding?.root
     }
 
     override fun onViewCreated(
@@ -46,15 +47,14 @@ abstract class BasePagingFragment<T> :
         savedInstanceState: Bundle?,
     ) {
         super.onViewCreated(view, savedInstanceState)
+        loadingAdapter = FooterAdapter { injectedPresenter.retryFailedRequest() }
+        mergeAdapter = MergeAdapter(pagedListAdapter, loadingAdapter!!)
 
-        binding.paginatedSearchResultsList.apply {
-            layoutManager = GridLayoutManager(context, if (isPortrait) 1 else 2)
-            adapter = mergeAdapter
+        binding.paginatedSearchResultsList.adapter = mergeAdapter
+
+        injectedPresenter.listFooterData.observe(viewLifecycleOwner) { data ->
+            loadingAdapter?.submitList(data)
         }
-        injectedPresenter.listFooterData.observe(
-            viewLifecycleOwner,
-            Observer(loadingAdapter::submitList),
-        )
     }
 
     /**
@@ -86,6 +86,14 @@ abstract class BasePagingFragment<T> :
     override fun onDetach() {
         super.onDetach()
         injectedPresenter.onDetachView()
+    }
+
+    override fun onDestroyView() {
+        binding.paginatedSearchResultsList.adapter = null
+        loadingAdapter = null
+        mergeAdapter = null
+        _binding = null
+        super.onDestroyView()
     }
 
     override fun hideInitialLoadProgress() {
