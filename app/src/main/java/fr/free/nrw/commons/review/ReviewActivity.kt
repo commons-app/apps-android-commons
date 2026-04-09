@@ -109,13 +109,8 @@ class ReviewActivity : BaseActivity() {
             setUpMediaDetailFragment()
         }
 
-        binding.skipImageInfo?.setOnTouchListener { _, event ->
-            if (event.action == MotionEvent.ACTION_UP) {
-                showSkipImageInfo()
-                true
-            } else {
-                false
-            }
+        binding.skipImageInfo?.setOnClickListener {
+            showSkipImageInfo()
         }
     }
 
