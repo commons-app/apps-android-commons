@@ -903,4 +903,5 @@ Upload your first media by tapping on the add button.</string>
   <string name="license_cc0_long_description">This license allows reusers to distribute, remix, adapt, and build upon the material in any medium or format, with no conditions.</string>
   <string name="license_cc_by_long_description">This license allows reusers to distribute, remix, adapt, and build upon the material in any medium or format, even for commercial purposes, as long as attribution is given to the creator.</string>
   <string name="license_cc_by_sa_long_description">This license allows reusers to distribute, remix, adapt, and build upon the material in any medium or format, even for commercial purposes, as long as attribution is given to the creator and the new work is licensed under identical terms.</string>
+  <string name="unsupported_file_type">Some files were skipped: unsupported format. Please use JPEG, PNG, or SVG.</string>
 </resources>
