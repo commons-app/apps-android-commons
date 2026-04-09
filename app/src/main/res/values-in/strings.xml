@@ -4,6 +4,7 @@
 * Akmaie Ajam
 * Arifin.wijaya
 * Bagas Chrisara
+* Bayahiu
 * Birusian
 * Boesenbergia
 * DARMAS BUDI SANTOSO
@@ -45,6 +46,7 @@
   <string name="show_captions_description">Deskripsi</string>
   <string name="nearby_row_image">Gambar</string>
   <string name="nearby_all">Semua</string>
+  <string name="nearby_filter_toggle">Gulingkan</string>
   <string name="appwidget_img">Gambar hari ini</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="other">mengunggah %1$d berkas</item>
@@ -132,6 +134,7 @@
   <string name="categories_search_text_hint">Telusuri kategori</string>
   <string name="depicts_search_text_hint">Cari butir yang menggambarkan media Anda (gunung, Taj Mahal, dll.)</string>
   <string name="menu_save_categories">Simpan</string>
+  <string name="menu_overflow_desc">Menu luapan</string>
   <string name="refresh_button">Perbaharui</string>
   <string name="display_list_button">Daftar</string>
   <string name="contributions_subtitle_zero">(Belum ada unggahan)</string>
@@ -162,6 +165,8 @@
   <string name="menu_retry_upload">Coba lagi</string>
   <string name="menu_cancel_upload">Batal</string>
   <string name="language_search_type_language_name">Ketik Nama Bahasa</string>
+  <string name="language_search_recent_searches">Pencarian Terbaru</string>
+  <string name="language_search_all_languages">Semua Bahasa</string>
   <string name="media_upload_policy">Dengan mengirim foto ini, saya menyatakan bahwa ini adalah karya saya sendiri yang tidak mengandung bahan atau foto narsis berhak cipta, dan tidak menyalahi &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;kebijakan Wikimedia Commons&lt;/a&gt;.</string>
   <string name="menu_download">Unduh</string>
   <string name="preference_license">Lisensi standar</string>
@@ -209,6 +214,7 @@
   <string name="read_storage_permission_rationale">Perlu Izin: Membaca penyimpanan eksternal. Tanpa izin ini aplikasi tidak dapat mengakses galeri Anda.</string>
   <string name="write_storage_permission_rationale">Perlu Izin: Menulis penyimpanan eksternal. Tanpa hal ini aplikasi tidak dapat mengakses kamera/galeri.</string>
   <string name="location_permission_title">Meminta Izin Lokasi</string>
+  <string name="in_app_camera_location_permission_title">Rekam lokasi untuk tangkapan layar dalam aplikasi.</string>
   <string name="ok">OKE</string>
   <string name="warning">Peringatan</string>
   <string name="duplicate_file_name">Ditemukan Nama Berkas Duplikat</string>
@@ -221,6 +227,7 @@
   <string name="media_detail_description">Deskripsi</string>
   <string name="media_detail_discussion">Pembicaraan</string>
   <string name="media_detail_author">Pembuat</string>
+  <string name="media_detail_uploader">Pengunggah</string>
   <string name="media_detail_uploaded_date">Tanggal unggah</string>
   <string name="media_detail_license">Lisensi</string>
   <string name="media_detail_coordinates">Koordinat</string>
@@ -375,6 +382,7 @@
   <string name="delete">Hapus</string>
   <string name="Achievements">Pencapaian</string>
   <string name="Profile">Profil</string>
+  <string name="badges">Lencana</string>
   <string name="statistics_thanks">Ucapan terima kasih diterima</string>
   <string name="statistics_featured">Gambar Pilihan</string>
   <string name="statistics_wikidata_edits">Gambar via \"Tempat di Sekitar\"</string>
@@ -427,6 +435,9 @@
   <string name="no_categories_selected_warning_desc">Gambar tanpa kategori jarang dapat digunakan. Apakah Anda yakin ingin mengirim tanpa memilih kategori?</string>
   <string name="no_depictions_selected">Tidak Ada Penggambaran yang Dipilih</string>
   <string name="no_depictions_selected_warning_desc">Gambar yang punya penggambaran lebih mudah ditemukan dan kemungkinan lebih banyak digunakan. Apakah Anda yakin Anda ingin melanjurkan tanpa memilih penggambaran?</string>
+  <string name="depictions_choose_from_map">Pilih dari peta</string>
+  <string name="depictions_map_confirm">Konfirmasikan</string>
+  <string name="depictions_map_no_photo_location">Foto tidak ada lokasi, hanya menampilkan lokasi Anda saat ini.</string>
   <string name="back_button_warning">Batalkan Unggah</string>
   <string name="back_button_warning_desc">Menggunakan tombol kembali akan membatalkan unggahan ini dan Anda akan kehilangan kemajuan Anda.</string>
   <string name="back_button_continue">Lanjutkan Unggah</string>
@@ -443,6 +454,7 @@
   <string name="ends_on">Berakhir pada:</string>
   <string name="display_campaigns">Sinahang penyobyahan</string>
   <string name="display_campaigns_explanation">Lihat kampanye yang sedang berlangsung</string>
+  <string name="show_deletion_button">Tampilkan tombol hapus</string>
   <string name="option_allow">Izinkan</string>
   <string name="option_dismiss">Tutup</string>
   <string name="nearby_campaign_dismiss_message">Anda tidak akan melihat kampanye ini lagi. Namun, Anda bisa mengaktifkan kembali pemberitahuan ini di Pengaturan jika diinginkan.</string>

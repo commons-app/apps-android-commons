@@ -17,7 +17,7 @@
   <string name="add_contribution_from_camera">Bäitrag vun der Kamera derbäisetzen</string>
   <string name="add_contribution_from_photos">Bäitrag vun de Fotoen derbäisetzen</string>
   <string name="show_captions">Beschrëftungen</string>
-  <string name="row_item_language_description">Sprooch-Beschreiwung</string>
+  <string name="row_item_language_description">Sproochbeschreiwung</string>
   <string name="row_item_caption">Beschrëftung</string>
   <string name="show_captions_description">Beschreiwung</string>
   <string name="nearby_row_image">Bild</string>
@@ -81,7 +81,7 @@
   <string name="contribution_state_starting">Eroplueden</string>
   <string name="menu_from_gallery">Vun der Gallerie</string>
   <string name="menu_from_camera">Foto maachen</string>
-  <string name="menu_nearby">Nobäi</string>
+  <string name="menu_nearby">An der Géigend</string>
   <string name="provider_contributions">Meng eropgeluede Fichieren</string>
   <string name="menu_copy_link">Link kopéieren</string>
   <string name="menu_link_copied">De Link gouf an den Tëschespäicher kopéiert</string>
@@ -211,7 +211,7 @@
   <string name="navigation_drawer_close">Zoumaachen</string>
   <string name="navigation_item_home">Haaptsäit</string>
   <string name="navigation_item_upload">Eroplueden</string>
-  <string name="navigation_item_nearby">Nobäi</string>
+  <string name="navigation_item_nearby">An der Géigend</string>
   <string name="navigation_item_about">Iwwer</string>
   <string name="navigation_item_settings">Astellungen</string>
   <string name="navigation_item_feedback">Feedback</string>
@@ -228,6 +228,7 @@
   <string name="upload_problem_image_dark">Bild ass ze däischter.</string>
   <string name="upload_problem_image_blurry">Bild ass verschwommen.</string>
   <string name="upload_problem_image_duplicate">Bild ass schonn op Commons.</string>
+  <string name="upload_problem_image_format_unsupported">Äert Bild ass an engem Format, dat vum Commons-Server net ënnerstëtzt gëtt, an dowéinst huet d\'App et an JPG ëmgewandelt.</string>
   <string name="upload_problem_different_geolocation">Dëst Bild gouf op enger anerer Plaz gemaach.</string>
   <string name="upload_problem_do_you_continue">Wëllt Dir dëst Bild nach ëmmer eroplueden?</string>
   <string name="upload_connection_error_alert_title">Verbindungsfeeler</string>
@@ -249,7 +250,8 @@
   <string name="login_alert_message">Mellt Iech wgl. u fir dës Funktioun ze benotzen</string>
   <string name="copy_wikicode">De Wikitext an den Tëschespäicher kopéieren</string>
   <string name="wikicode_copied">De Wikitext gouf an den Tëschespäicher kopéiert</string>
-  <string name="nearby_location_not_available">\"Nobäi\" funktionéiert eventuell net richteg, Plaz ass net disponibel.</string>
+  <string name="nearby_location_not_available">„An der Géigend“ funktionéiert eventuell net richteg, de Standuert ass net disponibel.</string>
+  <string name="nearby_showing_pins_offline">Keen Internet disponibel. Et gi Plazen aus dem Cache ugewisen.</string>
   <string name="nearby_directions">Richtungen</string>
   <string name="nearby_wikidata">Wikidata</string>
   <string name="nearby_wikipedia">Wikipedia</string>
@@ -313,7 +315,10 @@
   <string name="quiz_screenshot_question">Ass et an der Rei fir dëse Screenshot eropzelueden?</string>
   <string name="share_app_title">App deelen</string>
   <string name="rotate">Dréinen</string>
+  <string name="error_fetching_nearby_places">Et konnte keng Plazen an der Géigend geluede ginn</string>
   <string name="no_pictures_in_this_area">Keng Biller an dëser Géigend</string>
+  <string name="no_nearby_places_around">Keng Plazen an der Géigend fonnt</string>
+  <string name="error_fetching_nearby_monuments">Feeler beim Ofruffe vu Monumenter aus der Géigend.</string>
   <string name="no_recent_searches">Keng rezent Sich</string>
   <string name="delete_recent_searches_dialog">Sidd Dir sécher, datt Dir Äre Sichhistorique läsche wëllt?</string>
   <string name="cancel_upload_dialog">Sidd Dir sécher, datt Dir d\'Eroplueden ofbrieche wëllt?</string>
@@ -341,9 +346,11 @@
   <string name="preference_author_name_toggle_summary">E benotzerdefinéierten Auteursnumm amplaz vun Ärem Benotzernumm beim Eropluede benotzen</string>
   <string name="preference_author_name">Benotzerdefinéierten Auteursnumm</string>
   <string name="contributions_fragment">Kontributiounen</string>
-  <string name="nearby_fragment">Nobäi</string>
+  <string name="nearby_fragment">An der Géigend</string>
   <string name="notifications">Notifikatiounen</string>
   <string name="read_notifications">Notifikatiounen (gelies)</string>
+  <string name="display_nearby_notification">Notifikatioune fir „An der Géigend“ weisen</string>
+  <string name="display_nearby_notification_summary">Notifikatiounen an der App uweise fir déi nächstgeleeë Plaz, déi Biller brauch</string>
   <string name="list_sheet">Lëscht</string>
   <string name="storage_permission">Späicherberechtegung</string>
   <string name="step_count">Schrëtt %1$d vu(n) %2$d: %3$s</string>
@@ -370,7 +377,9 @@
   <string name="back_button_continue">Eropluede weiderféieren</string>
   <string name="upload_flow_all_images_in_set">(Fir all d\'Biller am Set)</string>
   <string name="never_ask_again">Dëst ni méi froen</string>
+  <string name="display_location_permission_title">Standuertberechtegungen ufroen</string>
   <string name="achievements_fetch_failed_ultimate_achievement">Dir hutt esou vill Kontributioune gemaach datt eise Berechnungssystem iwwerfuerdert ass. Dëst ass déi bescht Leeschtung.</string>
+  <string name="display_campaigns">Campagnen uweisen</string>
   <string name="show_deletion_button">Läschknäppche weisen</string>
   <string name="option_allow">Erlaben</string>
   <string name="option_dismiss">Verwerfen</string>
@@ -420,7 +429,7 @@
   <string name="previous_image_title_description_not_found">Et gëtt keng Donnéeë fir den Titel oder d\'Beschreiwung vum virege Bild</string>
   <string name="dialog_box_text_nomination">Firwat soll %1$s geläscht ginn?</string>
   <string name="review_is_uploaded_by">%1$s gëtt eropgeluede vun: %2$s</string>
-  <string name="default_description_language">Standard-Beschreiwungssprooch</string>
+  <string name="default_description_language">Standardsprooch fir Beschreiwungen</string>
   <string name="delete_helper_show_deletion_title">Nominéiere fir geläscht ze ginn</string>
   <string name="delete_helper_show_deletion_title_success">Huet geklappt</string>
   <string name="delete_helper_show_deletion_message_if">%1$s gouf nominéiert fir geläscht ze ginn.</string>
@@ -477,7 +486,7 @@
   <string name="you_must_reset_your_passsword">Beim Aloggen ass eppes schif gaang. Dir musst Äert Passwuert zrécksetzen!</string>
   <string name="title_for_subcategories">ËNNERKATEGORIEN</string>
   <string name="title_for_parent_categories">IWWERKATEGORIEN</string>
-  <string name="upload_nearby_place_found_title">Plaz nobäi fonnt</string>
+  <string name="upload_nearby_place_found_title">Plaz an der Géigend fonnt</string>
   <string name="upload_nearby_place_found_description_plural">Sinn dëst Biller vun %1$s?</string>
   <string name="upload_nearby_place_found_description_singular">Ass dëst e Bild vun %1$s?</string>
   <string name="title_app_shortcut_bookmark">Lieszeechen</string>
@@ -490,8 +499,10 @@
   <string name="theme_default_name">System suivéieren</string>
   <string name="theme_dark_name">Däischter</string>
   <string name="theme_light_name">Hell</string>
+  <string name="ask_to_turn_location_on">Standuert aktivéieren?</string>
+  <string name="nearby_needs_location">Fir datt „An der Géigend“ richteg funktionéiert, muss de Standuert aktivéiert sinn</string>
   <string name="load_more">Méi lueden</string>
-  <string name="nearby_no_results">Keng Plaze fonnt, probéiert Är Sich-Critèren z\'änneren.</string>
+  <string name="nearby_no_results">Keng Plaze fonnt, probéiert Är Sichkrittären z\'änneren.</string>
   <string name="todo_improve">Proposéiert Verbesserungen:</string>
   <string name="missing_category">- Kategorien bei dëst Bild derbäisetze fir seng Notzbarkeet ze verbesseren.</string>
   <string name="missing_article">- Dëst Bild op den associéierte Wikipedia-Artikel derbäisetzen dee keng Biller huet.</string>
@@ -523,7 +534,7 @@
   <string name="leaderboard_weekly">Lescht Woch</string>
   <string name="leaderboard_all_time">Vun Ufank un</string>
   <string name="leaderboard_upload">Eroplueden</string>
-  <string name="leaderboard_nearby">Nobäi</string>
+  <string name="leaderboard_nearby">An der Géigend</string>
   <string name="leaderboard_used">Benotzt</string>
   <string name="leaderboard_my_rank_button_text">Mäi Klassement</string>
   <string name="limited_connection_mode">Limitéierte Verbindungsmodus</string>
@@ -535,7 +546,7 @@
   <string name="depicts_label">Etikett</string>
   <string name="depicts_description">Beschreiwung</string>
   <string name="menu_view_category_page">Kategoriesäit weisen</string>
-  <string name="app_ui_language">Sprooch vum Interface vum Benotzer vun der App</string>
+  <string name="app_ui_language">Sprooch vum Benotzerinterface vun der App</string>
   <string name="remove">Hëlt eng Beschrëftung a Beschreiwung ewech</string>
   <string name="read_help_link">Liest méi</string>
   <string name="media_detail_in_all_languages">An alle Sproochen</string>
@@ -555,14 +566,14 @@
   <string name="wlm_campaign_title">Wiki Loves Monuments</string>
   <string name="wlm_campaign_description">Wiki Loves Monuments ass een internationale Fotosconcours fir Monumenter, dee vu Wikimedia organiséiert gëtt</string>
   <string name="need_permission">Autorisatioun gëtt gebraucht</string>
-  <string name="location_permission_rationale">Fakultativ Autorisatioun: Déi aktuell Plaz kréie fir Propose fir Kategorien</string>
+  <string name="location_permission_rationale">Fir datt Plazen an der Géigend op der Kaart ugewise kënne ginn, muss de Standuertzougrëff aktivéiert sinn.</string>
   <string name="contributions_of_user">Kontributioune vum Benotzer: %1$s</string>
   <string name="achievements_of_user">Leeschtunge vum Benotzer: %1$s</string>
   <string name="menu_view_user_page">Benotzerprofil weisen</string>
   <string name="edit_depictions">Motiver änneren</string>
   <string name="edit_categories">Kategorien änneren</string>
   <string name="advanced_options">Erweidert Optiounen</string>
-  <string name="advanced_query_info_text">Dir kënnt d\'Nobäi-Ufroen upassen. Falls Dir eng Feelermeldung kritt, setzt zeréck a probéiert nach eng Kéier.</string>
+  <string name="advanced_query_info_text">Dir kënnt d\'Offroe fir „An der Géigend“ upassen. Falls Dir Feelermeldunge kritt, setzt zeréck an applizéiert.</string>
   <string name="apply">Uwenden</string>
   <string name="reset">Zrécksetzen</string>
   <string name="no_location_found_title">Keng Plaz fonnt</string>
@@ -602,9 +613,12 @@
   </plurals>
   <string name="nearby_wikitalk">E Problem fir dëst Element u Wikidata mellen</string>
   <string name="does_not_exist_anymore_no_picture_can_ever_be_taken_of_it">\'%1$s\' gëtt et net méi, et kann keng Foto méi dovunner gemaach ginn.</string>
+  <string name="pending">Am Suspens</string>
+  <string name="failed">Feelgeschloen</string>
   <string name="custom_selector_confirm_deletion_title">Läsche confirméieren</string>
   <string name="custom_selector_delete">Läschen</string>
   <string name="custom_selector_cancel">Ofbriechen</string>
+  <string name="custom_selector_folder_deleted_failure">De Fichier %1$s konnt net geläscht ginn</string>
   <string name="error_while_loading">Feeler beim Lueden</string>
   <string name="usages_on_commons_heading">Commons</string>
   <string name="usages_on_other_wikis_heading">Aner Wikien</string>
@@ -612,5 +626,6 @@
   <string name="vanish_account">Kont opléisen</string>
   <string name="caption">Beschrëftung</string>
   <string name="caption_copied_to_clipboard">Text an den Tëschespäicher kopéiert</string>
+  <string name="show_in_nearby">An „An der Géigend“ weisen</string>
   <string name="nominated_for_deletion_btn">Virgeschloe fir ze läschen</string>
 </resources>
