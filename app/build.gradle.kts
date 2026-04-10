@@ -182,6 +182,7 @@ android {
         viewBinding = true
         compose = true
     }
+    buildToolsVersion = buildToolsVersion
     packaging {
         jniLibs {
             excludes += listOf("META-INF/androidx.*")
