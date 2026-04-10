@@ -8,6 +8,12 @@ import timber.log.Timber
 import java.io.IOException
 import java.security.GeneralSecurityException
 
+/**
+ * Manages the secure, encrypted storage of sensitive preferences using Jetpack Security.
+ * This class handles the initialization of EncryptedSharedPreferences and provides
+ * a migration mechanism to securely move existing plaintext data to the encrypted store,
+ * immediately wiping the plaintext original to prevent exposure.
+ */
 class SecurePreferenceManager {
     companion object {
         private const val NEW_FILE = "preferences_v2"

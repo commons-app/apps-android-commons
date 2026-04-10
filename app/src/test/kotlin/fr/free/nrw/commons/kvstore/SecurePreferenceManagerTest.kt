@@ -8,6 +8,14 @@ import org.junit.Test
 import org.mockito.ArgumentMatchers.anyInt
 import org.mockito.ArgumentMatchers.anyString
 
+/**
+ * Unit tests for the [SecurePreferenceManager].
+ *
+ * Verifies that the data migration process correctly extracts sensitive data
+ * from the plaintext [SharedPreferences], inserts it into the encrypted store,
+ * and securely wipes the plaintext record. Tests handle cases for both successful
+ * migrations and instances where data is absent or already migrated.
+ */
 class SecurePreferenceManagerTest {
     private val context = mock<Context>()
     private val oldPrefs = mock<SharedPreferences>()

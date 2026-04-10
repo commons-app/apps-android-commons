@@ -146,6 +146,12 @@ open class CommonsApplicationModule(private val applicationContext: Context) {
     open fun providesDefaultKvStore(context: Context, gson: Gson): JsonKvStore =
         JsonKvStore(context, "${context.packageName}_preferences", gson)
 
+    /**
+     * Provides a secure, encrypted version of the JsonKvStore.
+     * This store uses Jetpack Security (EncryptedSharedPreferences) to protect sensitive data at rest.
+     * During initialization, it attempts to migrate sensitive keys (like session cookies) from the
+     * standard plaintext preferences file and then wipes them from the original location.
+     */
     @Provides
     @Named("secure_preferences")
     open fun providesSecureKvStore(context: Context, gson: Gson): JsonKvStore {
