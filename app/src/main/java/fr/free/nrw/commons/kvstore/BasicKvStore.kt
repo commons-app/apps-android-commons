@@ -18,6 +18,10 @@ open class BasicKvStore : KeyValueStore {
         _store = context.getSharedPreferences(storeName, Context.MODE_PRIVATE)
     }
 
+    constructor(sharedPreferences: SharedPreferences) {
+        _store = sharedPreferences
+    }
+
     /**
      * If you don't want onVersionUpdate to be called on a fresh creation, the first version supplied for the kvstore should be set to 0.
      */

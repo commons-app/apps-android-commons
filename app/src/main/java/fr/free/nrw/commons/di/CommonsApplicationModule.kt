@@ -26,6 +26,7 @@ import fr.free.nrw.commons.data.DBOpenHelper
 import fr.free.nrw.commons.db.AppDatabase
 import fr.free.nrw.commons.di.CommonsApplicationModule.Companion.appContext
 import fr.free.nrw.commons.kvstore.JsonKvStore
+import fr.free.nrw.commons.kvstore.SecurePreferenceManager
 import fr.free.nrw.commons.location.LocationServiceManager
 import fr.free.nrw.commons.nearby.PlaceDao
 import fr.free.nrw.commons.review.ReviewDao
@@ -144,6 +145,19 @@ open class CommonsApplicationModule(private val applicationContext: Context) {
     @Named("default_preferences")
     open fun providesDefaultKvStore(context: Context, gson: Gson): JsonKvStore =
         JsonKvStore(context, "${context.packageName}_preferences", gson)
+
+    @Provides
+    @Named("secure_preferences")
+    open fun providesSecureKvStore(context: Context, gson: Gson): JsonKvStore {
+        return try {
+            val securePrefs =
+                SecurePreferenceManager.get(context, "${context.packageName}_preferences")
+            JsonKvStore(securePrefs, gson)
+        } catch (e: Exception) {
+            Timber.e(e, "Could not initialize secure shared preferences")
+            JsonKvStore(context, "secure_preferences_fallback", gson)
+        }
+    }
 
     @Provides
     fun providesUploadController(

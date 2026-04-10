@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.kvstore
 
 import android.content.Context
+import android.content.SharedPreferences
 import com.google.gson.Gson
 import com.google.gson.JsonSyntaxException
 
@@ -8,6 +9,10 @@ class JsonKvStore : BasicKvStore {
     val gson: Gson
 
     constructor(context: Context, storeName: String?, gson: Gson) : super(context, storeName) {
+        this.gson = gson
+    }
+
+    constructor(sharedPreferences: SharedPreferences, gson: Gson) : super(sharedPreferences) {
         this.gson = gson
     }
 

@@ -95,7 +95,7 @@ class NetworkingModule {
     @Provides
     @Singleton
     fun provideCookieStorage(
-        @Named("default_preferences") preferences: JsonKvStore
+        @Named("secure_preferences") preferences: JsonKvStore
     ): CommonsCookieStorage = CommonsCookieStorage(preferences).also {
         it.load()
     }

@@ -182,7 +182,6 @@ android {
         viewBinding = true
         compose = true
     }
-    buildToolsVersion = buildToolsVersion
     packaging {
         jniLibs {
             excludes += listOf("META-INF/androidx.*")
@@ -338,6 +337,7 @@ dependencies {
     // Preferences
     implementation(libs.androidx.preference)
     implementation(libs.androidx.preference.ktx)
+    implementation(libs.androidx.security.crypto)
 
     //Android Media
     implementation(libs.juanitobananas.androidDmediaUtil)
