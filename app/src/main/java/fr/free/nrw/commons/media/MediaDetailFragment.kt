@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.media
 
+import android.R.attr.thumbnail
 import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.Context
@@ -65,6 +66,8 @@ import androidx.compose.ui.unit.sp
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import androidx.fragment.app.viewModels
+import coil3.request.placeholder
+import coil3.result
 import fr.free.nrw.commons.BuildConfig
 import fr.free.nrw.commons.CameraPosition
 import fr.free.nrw.commons.CommonsApplication
@@ -706,7 +709,6 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
     }
 
     /**
-    /**
      * Loads the media image into the detail ImageView.
      *
      * Mirrors the original Fresco behaviour: show a spinner while loading,
@@ -721,9 +723,8 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
         binding.mediaDetailImageView.setImageDrawable(null)
         binding.mediaDetailImageProgress.visibility = View.VISIBLE
 
-        val url = media!!.imageUrl ?: media!!.thumbUrl
-
-        binding.mediaDetailImageView.load(url) {
+        // TODO: load low-resolution image until the full-resolution image is loaded.
+        binding.mediaDetailImageView.load(media!!.imageUrl) {
             error(R.drawable.image_placeholder)
             listener(
                 onSuccess = { _, _ ->
