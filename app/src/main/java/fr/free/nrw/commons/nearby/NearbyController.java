@@ -22,6 +22,8 @@ public class NearbyController extends MapController {
 
     private final NearbyPlaces nearbyPlaces;
     public static final int MAX_RESULTS = 1000;
+    // Flag to track if an internal upload flow is active.
+    public boolean isInternalUploadInProgress = false;
     public static double currentLocationSearchRadius = 10.0; //in kilometers
     public static LatLng currentLocation; // Users latest fetched location
     public static LatLng latestSearchLocation; // Can be current and camera target on search this area button is used
