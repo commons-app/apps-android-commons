@@ -707,15 +707,23 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
     }
 
     /**
-     * Uses Coil to load the media image.
-     * Loads the thumbnail first as a quick preview, then replaces it with the
-     * full-resolution image once available.
+     * Uses two image sources via Coil, mirroring the original Fresco behaviour:
+     * - low resolution thumbnail is shown initially
+     * - when the high resolution image is available, it replaces the low resolution image
+     *
+     * The previous image is cleared immediately so that a stale image from the
+     * previously viewed media item is never visible (equivalent to Fresco's
+     * {@code setOldController}).
      */
     private fun setupImageView() {
         val imageBackgroundColor: Int = imageBackgroundColor
         if (imageBackgroundColor != DEFAULT_IMAGE_BACKGROUND_COLOR) {
             binding.mediaDetailImageView.setBackgroundColor(imageBackgroundColor)
         }
+
+        // Clear any stale image from the previous media item immediately,
+        // equivalent to Fresco's setOldController() behaviour.
+        binding.mediaDetailImageView.setImageDrawable(null)
 
         val imageUrl = if (media != null) media!!.imageUrl else null
         val thumbUrl = if (media != null) media!!.thumbUrl else null
@@ -728,6 +736,15 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
                 error(R.drawable.image_placeholder)
                 listener(
                     onSuccess = { _, _ ->
+                        // Update aspect ratio for the intermediate (thumbnail) image,
+                        // mirroring Fresco's onIntermediateImageSet callback.
+                        val d = binding.mediaDetailImageView.drawable
+                        if (d != null) {
+                            cachedImageWidth = d.intrinsicWidth
+                            cachedImageHeight = d.intrinsicHeight
+                        }
+                        updateAspectRatio(binding.mediaDetailScrollView.width)
+
                         // Thumbnail is now visible — load the full image over it.
                         binding.mediaDetailImageView.load(imageUrl) {
                             placeholder(binding.mediaDetailImageView.drawable)
