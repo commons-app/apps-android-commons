@@ -7,6 +7,7 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.content.res.Configuration
 import coil3.load
+import coil3.request.crossfade
 import coil3.request.placeholder
 import coil3.request.error
 import android.net.Uri
@@ -711,9 +712,14 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
      * - low resolution thumbnail is shown initially
      * - when the high resolution image is available, it replaces the low resolution image
      *
-     * The previous image is cleared immediately so that a stale image from the
-     * previously viewed media item is never visible (equivalent to Fresco's
-     * {@code setOldController}).
+     * Following Coil best practices:
+     * 1. Load the thumbnail first — this populates the memory cache.
+     * 2. Load the full-resolution image using {@code placeholderMemoryCacheKey}
+     *    so the cached thumbnail is displayed instantly as a placeholder while
+     *    the full image loads (see Coil recipes: "Using a Memory Cache Key as
+     *    a Placeholder").
+     * 3. Disable crossfade so the user never sees the stale image from a
+     *    previously viewed media item.
      */
     private fun setupImageView() {
         val imageBackgroundColor: Int = imageBackgroundColor
@@ -728,14 +734,16 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
         val imageUrl = if (media != null) media!!.imageUrl else null
         val thumbUrl = if (media != null) media!!.thumbUrl else null
 
-        // Load thumbnail first so the user sees a quick preview instead of a
-        // placeholder, then load the full-resolution image on top of it.
+        // Load thumbnail first so the user sees a quick preview, then load
+        // the full-resolution image using the thumbnail's memory cache key as
+        // a synchronous placeholder.
         if (!thumbUrl.isNullOrEmpty() && !imageUrl.isNullOrEmpty() && thumbUrl != imageUrl) {
             binding.mediaDetailImageView.load(thumbUrl) {
+                crossfade(false)
                 placeholder(R.drawable.image_placeholder)
                 error(R.drawable.image_placeholder)
                 listener(
-                    onSuccess = { _, _ ->
+                    onSuccess = { _, result ->
                         // Update aspect ratio for the intermediate (thumbnail) image,
                         // mirroring Fresco's onIntermediateImageSet callback.
                         val d = binding.mediaDetailImageView.drawable
@@ -745,9 +753,12 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
                         }
                         updateAspectRatio(binding.mediaDetailScrollView.width)
 
-                        // Thumbnail is now visible — load the full image over it.
+                        // Now load the full image, using the thumbnail's memory
+                        // cache key so it's shown instantly as a placeholder
+                        // (Coil best practice for thumbnail → full-res transitions).
                         binding.mediaDetailImageView.load(imageUrl) {
-                            placeholder(binding.mediaDetailImageView.drawable)
+                            crossfade(true)
+                            placeholderMemoryCacheKey(result.memoryCacheKey)
                             error(R.drawable.image_placeholder)
                             listener(
                                 onSuccess = { _, _ ->
@@ -765,6 +776,7 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
             }
         } else {
             binding.mediaDetailImageView.load(imageUrl ?: thumbUrl) {
+                crossfade(false)
                 placeholder(R.drawable.image_placeholder)
                 error(R.drawable.image_placeholder)
                 listener(

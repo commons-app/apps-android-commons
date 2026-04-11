@@ -9,6 +9,9 @@ import android.widget.ArrayAdapter
 import android.widget.ImageView
 import android.widget.TextView
 import coil3.load
+import coil3.request.crossfade
+import coil3.request.placeholder
+import coil3.request.error
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.R
 
@@ -79,7 +82,11 @@ class GridViewAdapter(
         item?.let {
             fileName.text = it.mostRelevantCaption
             setUploaderView(it, uploader)
-            imageView.load(it.thumbUrl)
+            imageView.load(it.thumbUrl) {
+                crossfade(false)
+                placeholder(R.drawable.image_placeholder)
+                error(R.drawable.image_placeholder)
+            }
         }
 
         return view

@@ -7,6 +7,7 @@ import android.webkit.URLUtil
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
 import coil3.load
+import coil3.request.crossfade
 import coil3.request.placeholder
 import coil3.request.error
 import fr.free.nrw.commons.Media
@@ -73,6 +74,7 @@ an upload might take a dozen seconds. */
                 else -> R.drawable.image_placeholder
             }
             binding.contributionImage.load(data) {
+                crossfade(false)
                 placeholder(R.drawable.image_placeholder)
                 error(R.drawable.image_placeholder)
             }
