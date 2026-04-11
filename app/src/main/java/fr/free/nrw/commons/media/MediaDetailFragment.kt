@@ -728,8 +728,8 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
 
         binding.mediaDetailImageProgress.visibility = View.VISIBLE
 
-        val imageUrl = media?.imageUrl
-        val thumbUrl = media?.thumbUrl
+        val imageUrl = media!!.imageUrl
+        val thumbUrl = media!!.thumbUrl
 
         if (!thumbUrl.isNullOrEmpty() && !imageUrl.isNullOrEmpty() && thumbUrl != imageUrl) {
             // Load thumbnail first for a fast preview.
@@ -756,7 +756,21 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
                         }
                     },
                     onError = { _, _ ->
-                        binding.mediaDetailImageProgress.visibility = View.GONE
+                        // Thumbnail failed — fall back to loading the full image directly.
+                        binding.mediaDetailImageView.load(imageUrl) {
+                            placeholder(R.drawable.image_placeholder)
+                            error(R.drawable.image_placeholder)
+                            listener(
+                                onSuccess = { _, _ ->
+                                    binding.mediaDetailImageProgress.visibility = View.GONE
+                                    updateImageDimensions()
+                                    updateAspectRatio(binding.mediaDetailScrollView.width)
+                                },
+                                onError = { _, _ ->
+                                    binding.mediaDetailImageProgress.visibility = View.GONE
+                                }
+                            )
+                        }
                     }
                 )
             }
