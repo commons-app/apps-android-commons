@@ -7,7 +7,6 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.content.res.Configuration
 import coil3.load
-import coil3.request.placeholder
 import coil3.request.error
 import android.net.Uri
 import android.os.Bundle
@@ -714,11 +713,8 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
      * Follows the documented Coil recipe "Using a Memory Cache Key as a Placeholder":
      * https://coil-kt.github.io/coil/recipes/#using-a-memory-cache-key-as-a-placeholder
      *
-     * No manual dispose() or setImageDrawable(null) is needed:
-     *   • Calling load() auto-cancels any previous request on the same ImageView.
-     *   • Setting a placeholder() immediately replaces the previous drawable,
-     *     so stale images from a prior page are never visible.
-     *   • Coil auto-cancels requests when the view detaches from the window.
+     * A ProgressBar spinner is shown while loading. No static placeholder image
+     * is used because it would flash as a "wrong image" before the real one loads.
      */
     private fun setupImageView() {
         val imageBackgroundColor: Int = imageBackgroundColor
@@ -734,7 +730,6 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
         if (!thumbUrl.isNullOrEmpty() && !imageUrl.isNullOrEmpty() && thumbUrl != imageUrl) {
             // Load thumbnail first for a fast preview.
             binding.mediaDetailImageView.load(thumbUrl) {
-                placeholder(R.drawable.image_placeholder)
                 error(R.drawable.image_placeholder)
                 listener(
                     onSuccess = { _, result ->
@@ -758,7 +753,6 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
                     onError = { _, _ ->
                         // Thumbnail failed — fall back to loading the full image directly.
                         binding.mediaDetailImageView.load(imageUrl) {
-                            placeholder(R.drawable.image_placeholder)
                             error(R.drawable.image_placeholder)
                             listener(
                                 onSuccess = { _, _ ->
@@ -776,7 +770,6 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
             }
         } else {
             binding.mediaDetailImageView.load(imageUrl ?: thumbUrl) {
-                placeholder(R.drawable.image_placeholder)
                 error(R.drawable.image_placeholder)
                 listener(
                     onSuccess = { _, _ ->
