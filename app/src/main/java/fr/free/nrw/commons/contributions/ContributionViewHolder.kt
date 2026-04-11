@@ -6,7 +6,9 @@ import android.view.View
 import android.webkit.URLUtil
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
-import coil.load
+import coil3.load
+import coil3.request.placeholder
+import coil3.request.error
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.utils.MediaAttributionUtil
 import fr.free.nrw.commons.MediaDataExtractor

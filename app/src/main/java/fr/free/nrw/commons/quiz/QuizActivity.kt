@@ -8,7 +8,8 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowCompat
-import coil.load
+import coil3.load
+import coil3.request.error
 
 import fr.free.nrw.commons.databinding.ActivityQuizBinding
 import java.util.ArrayList

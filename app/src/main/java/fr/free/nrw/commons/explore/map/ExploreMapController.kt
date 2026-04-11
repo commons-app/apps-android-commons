@@ -3,10 +3,15 @@ package fr.free.nrw.commons.explore.map
 import android.content.Context
 import android.content.res.Resources
 import android.graphics.Bitmap
-import android.graphics.drawable.BitmapDrawable
 import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat
-import coil.ImageLoader
-import coil.request.ImageRequest
+import coil3.ImageLoader
+import coil3.request.ImageRequest
+import coil3.request.allowHardware
+import coil3.request.target
+import coil3.size.Size
+import coil3.target.Target
+import coil3.Image
+import coil3.toBitmap
 import fr.free.nrw.commons.BaseMarker
 import fr.free.nrw.commons.MapController
 import fr.free.nrw.commons.Media
@@ -178,8 +183,8 @@ class ExploreMapController @Inject constructor(
                         .size(96, 96)
                         .allowHardware(false)
                         .target(
-                            onSuccess = { drawable ->
-                                val bitmap = (drawable as BitmapDrawable).bitmap
+                            onSuccess = { image ->
+                                val bitmap = image.toBitmap()
                                 baseMarker.icon = addRedBorder(bitmap, 6, context)
                                 baseMarkerList.add(baseMarker)
                                 if (baseMarkerList.size == placeList.size) {

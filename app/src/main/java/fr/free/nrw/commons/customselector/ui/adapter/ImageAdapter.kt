@@ -10,7 +10,8 @@ import android.widget.Toast
 import androidx.constraintlayout.widget.Group
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import coil.load
+import coil3.load
+import coil3.request.crossfade
 import com.simplecityapps.recyclerview_fastscroll.views.FastScrollRecyclerView
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.contributions.Contribution
@@ -225,7 +226,7 @@ class ImageAdapter(
                             image = actionableImages[position]
                             holder.image.load(image.uri) {
                                 crossfade(true)
-                                size(coil.size.Size.ORIGINAL)
+                                size(coil3.size.Size.ORIGINAL)
                             }
                         }
                     }
@@ -235,7 +236,7 @@ class ImageAdapter(
                 } else {
                     holder.image.load(image.uri) {
                         crossfade(true)
-                        size(coil.size.Size.ORIGINAL)
+                        size(coil3.size.Size.ORIGINAL)
                     }
                 }
             }
@@ -285,7 +286,7 @@ class ImageAdapter(
                 _currentImagesCount.value = imagePositionAsPerIncreasingOrder
                 holder.image.load(allImages[next].uri) {
                     crossfade(true)
-                    size(coil.size.Size.ORIGINAL)
+                    size(coil3.size.Size.ORIGINAL)
                 }
                 notifyItemInserted(position)
                 notifyItemRangeChanged(position, itemCount + 1)

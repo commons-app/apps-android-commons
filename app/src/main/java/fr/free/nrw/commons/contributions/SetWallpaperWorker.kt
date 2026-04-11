@@ -5,14 +5,15 @@ import android.app.NotificationManager
 import android.app.WallpaperManager
 import android.content.Context
 import android.graphics.Bitmap
-import android.graphics.drawable.BitmapDrawable
 import android.os.Build
 import androidx.core.app.NotificationCompat
 import androidx.work.Worker
 import androidx.work.WorkerParameters
-import coil.ImageLoader
-import coil.request.ImageRequest
-import coil.request.SuccessResult
+import coil3.ImageLoader
+import coil3.request.ImageRequest
+import coil3.request.SuccessResult
+import coil3.request.allowHardware
+import coil3.toBitmap
 import fr.free.nrw.commons.R
 import kotlinx.coroutines.runBlocking
 import timber.log.Timber
@@ -35,7 +36,7 @@ class SetWallpaperWorker(context: Context, params: WorkerParameters) :
                     .build()
                 val result = imageLoader.execute(request)
                 if (result is SuccessResult) {
-                    val bitmap = (result.drawable as BitmapDrawable).bitmap
+                    val bitmap = result.image.toBitmap()
                     setWallpaper(context, Bitmap.createBitmap(bitmap))
                 } else {
                     Timber.d("Error getting bitmap from image url %s", imageUrl)

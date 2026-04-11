@@ -1,7 +1,7 @@
 package fr.free.nrw.commons.review
 
 import android.annotation.SuppressLint
-import coil.load
+import coil3.load
 import android.content.Context
 import android.content.Intent
 import android.graphics.PorterDuff

@@ -6,7 +6,9 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.res.Configuration
-import coil.load
+import coil3.load
+import coil3.request.placeholder
+import coil3.request.error
 import android.net.Uri
 import android.os.Bundle
 import android.text.Editable
@@ -720,10 +722,12 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
             placeholder(R.drawable.image_placeholder)
             error(R.drawable.image_placeholder)
             listener(
-                onSuccess = { _, result ->
-                    val drawable = result.drawable
-                    cachedImageWidth = drawable.intrinsicWidth
-                    cachedImageHeight = drawable.intrinsicHeight
+                onSuccess = { _, _ ->
+                    val d = binding.mediaDetailImageView.drawable
+                    if (d != null) {
+                        cachedImageWidth = d.intrinsicWidth
+                        cachedImageHeight = d.intrinsicHeight
+                    }
                     updateAspectRatio(binding.mediaDetailScrollView.width)
                 }
             )

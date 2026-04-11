@@ -11,10 +11,12 @@ import android.os.Build
 import android.os.Process
 import android.util.Log
 import androidx.multidex.MultiDexApplication
-import coil.Coil
-import coil.ImageLoader
-import coil.disk.DiskCache
-import coil.memory.MemoryCache
+import coil3.ImageLoader
+import coil3.request.crossfade
+import coil3.SingletonImageLoader
+import coil3.disk.DiskCache
+import coil3.memory.MemoryCache
+import okio.Path.Companion.toPath
 import fr.free.nrw.commons.auth.LoginActivity
 import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.bookmarks.items.BookmarkItemsTable
@@ -118,18 +120,18 @@ class CommonsApplication : MultiDexApplication() {
         val imageLoader = ImageLoader.Builder(this)
             .crossfade(true)
             .memoryCache {
-                MemoryCache.Builder(this)
-                    .maxSizePercent(0.25)
+                MemoryCache.Builder()
+                    .maxSizePercent(this, 0.25)
                     .build()
             }
             .diskCache {
                 DiskCache.Builder()
-                    .directory(cacheDir.resolve("image_cache"))
+                    .directory(cacheDir.resolve("image_cache").absolutePath.toPath())
                     .maxSizePercent(0.02)
                     .build()
             }
             .build()
-        Coil.setImageLoader(imageLoader)
+        SingletonImageLoader.setSafe { imageLoader }
 
         createNotificationChannel(this)
 
@@ -233,7 +235,7 @@ class CommonsApplication : MultiDexApplication() {
      * Clear all images cache held by Coil
      */
     private fun clearImageCache() {
-        val imageLoader = Coil.imageLoader(this)
+        val imageLoader = SingletonImageLoader.get(this)
         imageLoader.memoryCache?.clear()
         imageLoader.diskCache?.clear()
     }

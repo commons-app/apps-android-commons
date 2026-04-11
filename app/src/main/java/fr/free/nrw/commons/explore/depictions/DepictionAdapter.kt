@@ -2,7 +2,8 @@ package fr.free.nrw.commons.explore.depictions
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import coil.load
+import coil3.load
+import coil3.request.placeholder
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView

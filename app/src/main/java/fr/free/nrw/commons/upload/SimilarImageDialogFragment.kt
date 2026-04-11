@@ -8,7 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import androidx.fragment.app.DialogFragment
-import coil.load
+import coil3.load
+import coil3.request.placeholder
+import coil3.request.error
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.databinding.FragmentSimilarImageDialogBinding
 import java.io.File

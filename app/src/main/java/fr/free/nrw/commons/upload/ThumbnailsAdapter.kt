@@ -7,7 +7,7 @@ import android.widget.ImageView
 import android.widget.RelativeLayout
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import coil.load
+import coil3.load
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.databinding.ItemUploadThumbnailBinding
 import fr.free.nrw.commons.filepicker.UploadableFile

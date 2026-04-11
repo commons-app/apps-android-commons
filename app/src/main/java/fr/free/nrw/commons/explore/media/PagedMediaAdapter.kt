@@ -2,7 +2,7 @@ package fr.free.nrw.commons.explore.media
 
 import android.view.View
 import android.view.ViewGroup
-import coil.load
+import coil3.load
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import fr.free.nrw.commons.Media

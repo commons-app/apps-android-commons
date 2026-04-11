@@ -5,13 +5,14 @@ import android.appwidget.AppWidgetManager
 import android.appwidget.AppWidgetProvider
 import android.content.Context
 import android.content.Intent
-import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import android.os.Build
 import android.widget.RemoteViews
-import coil.ImageLoader
-import coil.request.ImageRequest
-import coil.request.SuccessResult
+import coil3.ImageLoader
+import coil3.request.ImageRequest
+import coil3.request.SuccessResult
+import coil3.request.allowHardware
+import coil3.toBitmap
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -136,7 +137,7 @@ class PicOfDayAppWidget : AppWidgetProvider() {
                     .build()
                 val result = imageLoader.execute(request)
                 if (result is SuccessResult) {
-                    val bitmap = (result.drawable as BitmapDrawable).bitmap
+                    val bitmap = result.image.toBitmap()
                     views.setImageViewBitmap(R.id.appwidget_image, bitmap)
                     appWidgetManager.updateAppWidget(appWidgetId, views)
                 }

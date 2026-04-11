@@ -2,7 +2,8 @@ package fr.free.nrw.commons.upload.depicts
 
 import android.text.TextUtils
 import android.view.View
-import coil.load
+import coil3.load
+import coil3.request.placeholder
 import com.hannesdorfmann.adapterdelegates4.dsl.adapterDelegateViewBinding
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.databinding.LayoutUploadDepictsItemBinding
