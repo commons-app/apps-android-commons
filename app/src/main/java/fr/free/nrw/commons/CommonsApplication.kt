@@ -17,6 +17,9 @@ import coil3.SingletonImageLoader
 import coil3.disk.DiskCache
 import coil3.memory.MemoryCache
 import coil3.network.okhttp.OkHttpNetworkFetcherFactory
+import coil3.intercept.Interceptor as CoilInterceptor
+import coil3.request.ErrorResult
+import coil3.request.ImageResult
 import okhttp3.OkHttpClient
 import okio.Path.Companion.toPath
 import fr.free.nrw.commons.auth.LoginActivity
@@ -121,11 +124,22 @@ class CommonsApplication : MultiDexApplication() {
             defaultPrefs.putStringSet(Prefs.MANAGED_EXIF_TAGS, defaultExifTagsSet)
         }
 
-        // Initialize Coil image loader with the app's OkHttpClient for proper User-Agent header
+        // Create a dedicated OkHttpClient for image loading:
+        // - Shares connection pool with the DI client via newBuilder()
+        // - Inherits User-Agent header from CommonHeaderRequestInterceptor
+        // - Removes OkHttp's HTTP cache (Coil manages its own disk cache)
+        val imageHttpClient = okHttpClient.newBuilder()
+            .cache(null)
+            .build()
+
+        // Initialize Coil image loader
         val imageLoader = ImageLoader.Builder(this)
             .crossfade(true)
             .components {
-                add(OkHttpNetworkFetcherFactory(callFactory = { okHttpClient }))
+                add(OkHttpNetworkFetcherFactory(callFactory = { imageHttpClient }))
+                // Skip image loading when limited connection mode is enabled
+                // (replaces the original CustomOkHttpNetworkFetcher behavior)
+                add(LimitedConnectionModeInterceptor(defaultPrefs))
             }
             .memoryCache {
                 MemoryCache.Builder()
@@ -427,6 +441,33 @@ class CommonsApplication : MultiDexApplication() {
                 }
             }
         }
+    }
+}
+
+/**
+ * Coil interceptor that skips network image loading when limited connection mode is enabled.
+ * This replaces the original CustomOkHttpNetworkFetcher behavior from the Fresco setup.
+ */
+class LimitedConnectionModeInterceptor(
+    private val defaultKvStore: JsonKvStore
+) : CoilInterceptor {
+
+    override suspend fun intercept(chain: CoilInterceptor.Chain): ImageResult {
+        val isLimitedConnectionMode = defaultKvStore.getBoolean(
+            CommonsApplication.IS_LIMITED_CONNECTION_MODE_ENABLED, false
+        )
+        if (isLimitedConnectionMode && chain.request.data is String) {
+            val url = chain.request.data as String
+            if (url.startsWith("http://") || url.startsWith("https://")) {
+                Timber.d("Skipping image load in limited connection mode: %s", url)
+                return ErrorResult(
+                    image = null,
+                    request = chain.request,
+                    throwable = Exception("Limited connection mode enabled")
+                )
+            }
+        }
+        return chain.proceed()
     }
 }
 

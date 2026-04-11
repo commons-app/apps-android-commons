@@ -48,4 +48,3 @@ captures/*
 app/jacoco.exec
 app/CommonsContributions
 app/.*
-.kotlin/

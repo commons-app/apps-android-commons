@@ -26,9 +26,10 @@
 
     <ImageView
       android:id="@+id/mediaDetailImageView"
-      android:layout_width="0dp"
+      android:layout_width="match_parent"
       android:layout_height="@dimen/dimen_250"
-      android:layout_gravity="center_horizontal" />
+      android:layout_gravity="center_horizontal"
+      android:scaleType="fitCenter" />
 
     <ScrollView
       android:id="@+id/mediaDetailScrollView"
