@@ -706,16 +706,6 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
     }
 
     /**
-     * Uses two image sources via Coil, mirroring the original Fresco behaviour:
-     * - low resolution thumbnail is shown initially
-     * - when the high resolution image is available, it replaces the low resolution image
-     *
-     * Follows the documented Coil recipe "Using a Memory Cache Key as a Placeholder":
-     * https://coil-kt.github.io/coil/recipes/#using-a-memory-cache-key-as-a-placeholder
-     *
-     * A ProgressBar spinner is shown while loading. No static placeholder image
-     * is used because it would flash as a "wrong image" before the real one loads.
-     */
     /**
      * Loads the media image into the detail ImageView.
      *
