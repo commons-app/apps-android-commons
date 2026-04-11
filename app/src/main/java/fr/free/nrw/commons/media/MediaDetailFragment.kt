@@ -722,6 +722,7 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
             binding.mediaDetailImageView.setBackgroundColor(imageBackgroundColor)
         }
 
+        binding.mediaDetailImageView.setImageDrawable(null)
         binding.mediaDetailImageProgress.visibility = View.VISIBLE
 
         val imageUrl = media!!.imageUrl
