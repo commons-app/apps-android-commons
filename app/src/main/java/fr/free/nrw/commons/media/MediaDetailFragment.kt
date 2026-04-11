@@ -7,6 +7,7 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.content.res.Configuration
 import coil3.load
+import coil3.request.crossfade
 import coil3.request.error
 import android.net.Uri
 import android.os.Bundle
@@ -731,6 +732,11 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
         if (!thumbUrl.isNullOrEmpty() && !imageUrl.isNullOrEmpty() && thumbUrl != imageUrl) {
             // Load thumbnail first for a fast preview.
             binding.mediaDetailImageView.load(thumbUrl) {
+                // Disable crossfade for the initial load: the global crossfade(true)
+                // on the ImageLoader would otherwise transition from whatever stale
+                // drawable was previously on this ImageView (e.g. the first
+                // RecyclerView item), causing a brief wrong-image flash.
+                crossfade(false)
                 error(R.drawable.image_placeholder)
                 listener(
                     onSuccess = { _, result ->
@@ -754,6 +760,7 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
                     onError = { _, _ ->
                         // Thumbnail failed — fall back to loading the full image directly.
                         binding.mediaDetailImageView.load(imageUrl) {
+                            crossfade(false)
                             error(R.drawable.image_placeholder)
                             listener(
                                 onSuccess = { _, _ ->
@@ -771,6 +778,7 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
             }
         } else {
             binding.mediaDetailImageView.load(imageUrl ?: thumbUrl) {
+                crossfade(false)
                 error(R.drawable.image_placeholder)
                 listener(
                     onSuccess = { _, _ ->
