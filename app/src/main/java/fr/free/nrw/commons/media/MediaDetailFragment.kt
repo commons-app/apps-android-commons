@@ -7,7 +7,6 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.content.res.Configuration
 import coil3.load
-import coil3.request.crossfade
 import coil3.request.placeholder
 import coil3.request.error
 import android.net.Uri
@@ -708,9 +707,9 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
     }
 
     /**
-     * Uses Coil to load the media image with a placeholder.
-     * Clears any previously displayed image first to avoid showing a stale
-     * cached image before the placeholder appears.
+     * Uses Coil to load the media image.
+     * Loads the thumbnail first as a quick preview, then replaces it with the
+     * full-resolution image once available.
      */
     private fun setupImageView() {
         val imageBackgroundColor: Int = imageBackgroundColor
@@ -718,29 +717,50 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
             binding.mediaDetailImageView.setBackgroundColor(imageBackgroundColor)
         }
 
-        // Immediately show the placeholder so the previous media item's image
-        // is not briefly visible while Coil resolves the new request.
-        binding.mediaDetailImageView.setImageResource(R.drawable.image_placeholder)
-
         val imageUrl = if (media != null) media!!.imageUrl else null
         val thumbUrl = if (media != null) media!!.thumbUrl else null
 
-        binding.mediaDetailImageView.load(imageUrl ?: thumbUrl) {
-            // Disable crossfade so Coil does not animate from the old cached
-            // image to the placeholder and then to the actual image.
-            crossfade(false)
-            placeholder(R.drawable.image_placeholder)
-            error(R.drawable.image_placeholder)
-            listener(
-                onSuccess = { _, _ ->
-                    val d = binding.mediaDetailImageView.drawable
-                    if (d != null) {
-                        cachedImageWidth = d.intrinsicWidth
-                        cachedImageHeight = d.intrinsicHeight
+        // Load thumbnail first so the user sees a quick preview instead of a
+        // placeholder, then load the full-resolution image on top of it.
+        if (!thumbUrl.isNullOrEmpty() && !imageUrl.isNullOrEmpty() && thumbUrl != imageUrl) {
+            binding.mediaDetailImageView.load(thumbUrl) {
+                placeholder(R.drawable.image_placeholder)
+                error(R.drawable.image_placeholder)
+                listener(
+                    onSuccess = { _, _ ->
+                        // Thumbnail is now visible — load the full image over it.
+                        binding.mediaDetailImageView.load(imageUrl) {
+                            placeholder(binding.mediaDetailImageView.drawable)
+                            error(R.drawable.image_placeholder)
+                            listener(
+                                onSuccess = { _, _ ->
+                                    val d = binding.mediaDetailImageView.drawable
+                                    if (d != null) {
+                                        cachedImageWidth = d.intrinsicWidth
+                                        cachedImageHeight = d.intrinsicHeight
+                                    }
+                                    updateAspectRatio(binding.mediaDetailScrollView.width)
+                                }
+                            )
+                        }
                     }
-                    updateAspectRatio(binding.mediaDetailScrollView.width)
-                }
-            )
+                )
+            }
+        } else {
+            binding.mediaDetailImageView.load(imageUrl ?: thumbUrl) {
+                placeholder(R.drawable.image_placeholder)
+                error(R.drawable.image_placeholder)
+                listener(
+                    onSuccess = { _, _ ->
+                        val d = binding.mediaDetailImageView.drawable
+                        if (d != null) {
+                            cachedImageWidth = d.intrinsicWidth
+                            cachedImageHeight = d.intrinsicHeight
+                        }
+                        updateAspectRatio(binding.mediaDetailScrollView.width)
+                    }
+                )
+            }
         }
     }
 
