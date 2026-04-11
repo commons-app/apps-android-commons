@@ -25,6 +25,8 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
 import androidx.core.graphics.createBitmap
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 /**
  * Created by blueSir9 on 3/10/17.
@@ -101,18 +103,36 @@ object ImageUtils {
      * IMAGE_DARK if image is too dark
      */
     @JvmStatic
-    fun checkIfImageIsTooDark(imagePath: String): Int {
+    suspend fun checkIfImageIsTooDark(imagePath: String): Int = withContext(Dispatchers.Default) {
         val millis = System.currentTimeMillis()
-        return try {
-            var bmp = ExifInterface(imagePath).thumbnailBitmap
+        try {
+            val options = BitmapFactory.Options().apply {
+                inJustDecodeBounds = true
+            }
+            BitmapFactory.decodeFile(imagePath, options)
+            options.inSampleSize = calculateInSampleSize(options, 200, 200)
+            options.inJustDecodeBounds = false
+            val bmp = BitmapFactory.decodeFile(imagePath, options)
             if (bmp == null) {
-                bmp = BitmapFactory.decodeFile(imagePath)
+                Timber.e("Expected bitmap was null")
+                return@withContext IMAGE_DARK
             }
 
-            if (checkIfImageIsDark(bmp)) {
-                IMAGE_DARK
-            } else {
-                IMAGE_OK
+            try {
+                val bmpWidth = bmp.width
+                val bmpHeight = bmp.height
+                val pixels = IntArray(bmpWidth * bmpHeight)
+                bmp.getPixels(pixels, 0, bmpWidth, 0, 0, bmpWidth, bmpHeight)
+
+                if (checkIfImageIsDark(pixels)) {
+                    IMAGE_DARK
+                } else {
+                    IMAGE_OK
+                }
+            } finally {
+                if (!bmp.isRecycled) {
+                    bmp.recycle()
+                }
             }
         } catch (e: Exception) {
             Timber.d(e, "Error while checking image darkness.")
@@ -146,47 +166,50 @@ object ImageUtils {
     }
 
     @JvmStatic
-    private fun checkIfImageIsDark(bitmap: Bitmap?): Boolean {
-        if (bitmap == null) {
-            Timber.e("Expected bitmap was null")
-            return true
+    private fun calculateInSampleSize(options: BitmapFactory.Options, reqWidth: Int, reqHeight: Int): Int {
+        val (height: Int, width: Int) = options.outHeight to options.outWidth
+        var inSampleSize = 1
+        if (height > reqHeight || width > reqWidth) {
+            val halfHeight: Int = height / 2
+            val halfWidth: Int = width / 2
+            while (halfHeight / inSampleSize >= reqHeight && halfWidth / inSampleSize >= reqWidth) {
+                inSampleSize *= 2
+            }
         }
+        return inSampleSize
+    }
 
-        val bitmapWidth = bitmap.width
-        val bitmapHeight = bitmap.height
-
-        val allPixelsCount = bitmapWidth * bitmapHeight
+    @JvmStatic
+    private fun checkIfImageIsDark(pixels: IntArray): Boolean {
+        val allPixelsCount = pixels.size
         var numberOfBrightPixels = 0
         var numberOfMediumBrightnessPixels = 0
         val brightPixelThreshold = 0.025 * allPixelsCount
         val mediumBrightPixelThreshold = 0.3 * allPixelsCount
 
-        for (x in 0 until bitmapWidth) {
-            for (y in 0 until bitmapHeight) {
-                val pixel = bitmap.getPixel(x, y)
-                val r = Color.red(pixel)
-                val g = Color.green(pixel)
-                val b = Color.blue(pixel)
+        for (pixel in pixels) {
+            val r = Color.red(pixel)
+            val g = Color.green(pixel)
+            val b = Color.blue(pixel)
 
-                val max = maxOf(r, g, b) / 255.0
-                val min = minOf(r, g, b) / 255.0
+            val max = maxOf(r, g, b) / 255.0
+            val min = minOf(r, g, b) / 255.0
 
-                val luminance = ((max + min) / 2.0) * 100
+            val luminance = ((max + min) / 2.0) * 100
 
-                val highBrightnessLuminance = 40
-                val mediumBrightnessLuminance = 26
+            val highBrightnessLuminance = 40
+            val mediumBrightnessLuminance = 26
 
-                if (luminance < highBrightnessLuminance) {
-                    if (luminance > mediumBrightnessLuminance) {
-                        numberOfMediumBrightnessPixels++
-                    }
-                } else {
-                    numberOfBrightPixels++
+            if (luminance < highBrightnessLuminance) {
+                if (luminance > mediumBrightnessLuminance) {
+                    numberOfMediumBrightnessPixels++
                 }
+            } else {
+                numberOfBrightPixels++
+            }
 
-                if (numberOfBrightPixels >= brightPixelThreshold || numberOfMediumBrightnessPixels >= mediumBrightPixelThreshold) {
-                    return false
-                }
+            if (numberOfBrightPixels >= brightPixelThreshold || numberOfMediumBrightnessPixels >= mediumBrightPixelThreshold) {
+                return false
             }
         }
         return true
