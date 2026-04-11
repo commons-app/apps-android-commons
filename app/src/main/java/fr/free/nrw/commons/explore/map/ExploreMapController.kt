@@ -8,9 +8,6 @@ import coil3.ImageLoader
 import coil3.request.ImageRequest
 import coil3.request.allowHardware
 import coil3.request.target
-import coil3.size.Size
-import coil3.target.Target
-import coil3.Image
 import coil3.toBitmap
 import fr.free.nrw.commons.BaseMarker
 import fr.free.nrw.commons.MapController
