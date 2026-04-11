@@ -8,7 +8,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Build
 import android.widget.RemoteViews
-import coil3.ImageLoader
+import coil3.SingletonImageLoader
 import coil3.request.ImageRequest
 import coil3.request.SuccessResult
 import coil3.request.allowHardware
@@ -130,7 +130,7 @@ class PicOfDayAppWidget : AppWidgetProvider() {
 
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                val imageLoader = ImageLoader(context)
+                val imageLoader = SingletonImageLoader.get(context)
                 val request = ImageRequest.Builder(context)
                     .data(imageUrl)
                     .allowHardware(false)

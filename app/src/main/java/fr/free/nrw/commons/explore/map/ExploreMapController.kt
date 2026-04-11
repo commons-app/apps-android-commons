@@ -4,7 +4,7 @@ import android.content.Context
 import android.content.res.Resources
 import android.graphics.Bitmap
 import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat
-import coil3.ImageLoader
+import coil3.SingletonImageLoader
 import coil3.request.ImageRequest
 import coil3.request.allowHardware
 import coil3.request.target
@@ -173,8 +173,7 @@ class ExploreMapController @Inject constructor(
                     )
                     baseMarker.place = explorePlace
 
-                    val imageLoader = ImageLoader.Builder(context)
-                        .build()
+                    val imageLoader = SingletonImageLoader.get(context)
                     val request = ImageRequest.Builder(context)
                         .data(explorePlace.thumb)
                         .size(96, 96)

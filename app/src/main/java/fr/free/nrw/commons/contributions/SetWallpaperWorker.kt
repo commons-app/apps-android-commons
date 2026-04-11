@@ -9,7 +9,7 @@ import android.os.Build
 import androidx.core.app.NotificationCompat
 import androidx.work.Worker
 import androidx.work.WorkerParameters
-import coil3.ImageLoader
+import coil3.SingletonImageLoader
 import coil3.request.ImageRequest
 import coil3.request.SuccessResult
 import coil3.request.allowHardware
@@ -29,7 +29,7 @@ class SetWallpaperWorker(context: Context, params: WorkerParameters) :
 
         return runBlocking {
             try {
-                val imageLoader = ImageLoader(context)
+                val imageLoader = SingletonImageLoader.get(context)
                 val request = ImageRequest.Builder(context)
                     .data(imageUrl)
                     .allowHardware(false)

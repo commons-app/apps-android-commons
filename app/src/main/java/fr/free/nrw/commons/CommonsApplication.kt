@@ -16,6 +16,8 @@ import coil3.request.crossfade
 import coil3.SingletonImageLoader
 import coil3.disk.DiskCache
 import coil3.memory.MemoryCache
+import coil3.network.okhttp.OkHttpNetworkFetcherFactory
+import okhttp3.OkHttpClient
 import okio.Path.Companion.toPath
 import fr.free.nrw.commons.auth.LoginActivity
 import fr.free.nrw.commons.auth.SessionManager
@@ -85,6 +87,9 @@ class CommonsApplication : MultiDexApplication() {
     @Inject
     lateinit var cookieJar: CommonsCookieJar
 
+    @Inject
+    lateinit var okHttpClient: OkHttpClient
+
     var languageLookUpTable: AppLanguageLookUpTable? = null
         private set
 
@@ -116,9 +121,12 @@ class CommonsApplication : MultiDexApplication() {
             defaultPrefs.putStringSet(Prefs.MANAGED_EXIF_TAGS, defaultExifTagsSet)
         }
 
-        // Initialize Coil image loader
+        // Initialize Coil image loader with the app's OkHttpClient for proper User-Agent header
         val imageLoader = ImageLoader.Builder(this)
             .crossfade(true)
+            .components {
+                add(OkHttpNetworkFetcherFactory(callFactory = { okHttpClient }))
+            }
             .memoryCache {
                 MemoryCache.Builder()
                     .maxSizePercent(this, 0.25)
