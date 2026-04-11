@@ -3,7 +3,6 @@ package fr.free.nrw.commons.explore.media
 import android.view.View
 import android.view.ViewGroup
 import coil3.load
-import coil3.request.crossfade
 import coil3.request.placeholder
 import coil3.request.error
 import androidx.paging.PagedListAdapter
@@ -83,7 +82,6 @@ class SearchImagesViewHolder(
         binding.categoryImageView.setOnClickListener { onImageClicked(item.second) }
         binding.categoryImageTitle.text = media.mostRelevantCaption
         binding.categoryImageView.load(media.thumbUrl) {
-            crossfade(false)
             placeholder(R.drawable.image_placeholder)
             error(R.drawable.image_placeholder)
         }

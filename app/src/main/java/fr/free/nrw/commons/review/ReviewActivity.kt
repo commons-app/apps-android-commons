@@ -2,7 +2,6 @@ package fr.free.nrw.commons.review
 
 import android.annotation.SuppressLint
 import coil3.load
-import coil3.request.crossfade
 import coil3.request.placeholder
 import coil3.request.error
 import android.content.Context
@@ -193,7 +192,6 @@ class ReviewActivity : BaseActivity() {
         }
 
         binding.reviewImageView.load(media.thumbUrl) {
-            crossfade(false)
             placeholder(R.drawable.image_placeholder)
             error(R.drawable.image_placeholder)
         }
