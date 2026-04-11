@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.res.Configuration
+import coil3.dispose
 import coil3.load
 import coil3.request.crossfade
 import coil3.request.placeholder
@@ -212,6 +213,15 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
     private var newWidthOfImageView: Int = 0
     private var heightVerifyingBoolean: Boolean = true // helps in maintaining aspect ratio
     private var layoutListener: OnGlobalLayoutListener? = null // for layout stuff, only used once!
+
+    /**
+     * Monotonically increasing counter that is bumped every time [setupImageView]
+     * is called.  Callbacks captured by a previous invocation compare their
+     * captured value against the current field — if they differ, the callback
+     * is stale and must be ignored.  This prevents wrong-image flashes when the
+     * user swipes quickly between items in the ViewPager.
+     */
+    private var imageLoadGeneration: Int = 0
 
     //Had to make this class variable, to implement various onClicks, which access the media,
     // also I fell why make separate variables when one can serve the purpose
@@ -712,14 +722,14 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
      * - low resolution thumbnail is shown initially
      * - when the high resolution image is available, it replaces the low resolution image
      *
-     * Following Coil best practices:
-     * 1. Load the thumbnail first — this populates the memory cache.
-     * 2. Load the full-resolution image using {@code placeholderMemoryCacheKey}
-     *    so the cached thumbnail is displayed instantly as a placeholder while
-     *    the full image loads (see Coil recipes: "Using a Memory Cache Key as
-     *    a Placeholder").
-     * 3. Disable crossfade so the user never sees the stale image from a
-     *    previously viewed media item.
+     * Coil best-practice notes (coil-kt.github.io/coil/recipes):
+     *   • Call {@code dispose()} before every new load to cancel any in-flight
+     *     request and avoid stale callbacks from a previous media item.
+     *   • Use a per-call "generation" counter ({@link #imageLoadGeneration}) so
+     *     that delayed success callbacks whose generation doesn't match the
+     *     current one are silently dropped.
+     *   • Use {@code placeholderMemoryCacheKey} for a smooth thumbnail →
+     *     full-resolution transition without a flash of a placeholder.
      */
     private fun setupImageView() {
         val imageBackgroundColor: Int = imageBackgroundColor
@@ -727,46 +737,46 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
             binding.mediaDetailImageView.setBackgroundColor(imageBackgroundColor)
         }
 
-        // Clear any stale image from the previous media item immediately,
-        // equivalent to Fresco's setOldController() behaviour.
+        // Cancel any in-flight Coil request for this ImageView.
+        // Coil best practice: always dispose() before starting a new load on
+        // the same view, especially when the view is reused (ViewPager / RecyclerView).
+        binding.mediaDetailImageView.dispose()
+
+        // Clear the previous drawable so the user never sees a stale image.
         binding.mediaDetailImageView.setImageDrawable(null)
+
+        // Bump the generation so that any stale callback from a previous
+        // setupImageView() invocation is ignored.
+        val currentGeneration = ++imageLoadGeneration
 
         val imageUrl = if (media != null) media!!.imageUrl else null
         val thumbUrl = if (media != null) media!!.thumbUrl else null
 
-        // Load thumbnail first so the user sees a quick preview, then load
-        // the full-resolution image using the thumbnail's memory cache key as
-        // a synchronous placeholder.
         if (!thumbUrl.isNullOrEmpty() && !imageUrl.isNullOrEmpty() && thumbUrl != imageUrl) {
+            // Step 1: Load the thumbnail for a fast preview.
             binding.mediaDetailImageView.load(thumbUrl) {
                 crossfade(false)
                 placeholder(R.drawable.image_placeholder)
                 error(R.drawable.image_placeholder)
                 listener(
                     onSuccess = { _, result ->
-                        // Update aspect ratio for the intermediate (thumbnail) image,
-                        // mirroring Fresco's onIntermediateImageSet callback.
-                        val d = binding.mediaDetailImageView.drawable
-                        if (d != null) {
-                            cachedImageWidth = d.intrinsicWidth
-                            cachedImageHeight = d.intrinsicHeight
-                        }
+                        // Guard: ignore if a newer setupImageView() was called.
+                        if (currentGeneration != imageLoadGeneration) return@listener
+
+                        updateImageDimensions()
                         updateAspectRatio(binding.mediaDetailScrollView.width)
 
-                        // Now load the full image, using the thumbnail's memory
-                        // cache key so it's shown instantly as a placeholder
-                        // (Coil best practice for thumbnail → full-res transitions).
+                        // Step 2: Load the full-resolution image, using the
+                        // thumbnail's memory-cache key as an instant placeholder
+                        // (Coil recipe: "Using a Memory Cache Key as a Placeholder").
                         binding.mediaDetailImageView.load(imageUrl) {
                             crossfade(true)
                             placeholderMemoryCacheKey(result.memoryCacheKey)
                             error(R.drawable.image_placeholder)
                             listener(
                                 onSuccess = { _, _ ->
-                                    val d = binding.mediaDetailImageView.drawable
-                                    if (d != null) {
-                                        cachedImageWidth = d.intrinsicWidth
-                                        cachedImageHeight = d.intrinsicHeight
-                                    }
+                                    if (currentGeneration != imageLoadGeneration) return@listener
+                                    updateImageDimensions()
                                     updateAspectRatio(binding.mediaDetailScrollView.width)
                                 }
                             )
@@ -781,15 +791,21 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
                 error(R.drawable.image_placeholder)
                 listener(
                     onSuccess = { _, _ ->
-                        val d = binding.mediaDetailImageView.drawable
-                        if (d != null) {
-                            cachedImageWidth = d.intrinsicWidth
-                            cachedImageHeight = d.intrinsicHeight
-                        }
+                        if (currentGeneration != imageLoadGeneration) return@listener
+                        updateImageDimensions()
                         updateAspectRatio(binding.mediaDetailScrollView.width)
                     }
                 )
             }
+        }
+    }
+
+    /** Reads the current drawable dimensions into the cached size fields. */
+    private fun updateImageDimensions() {
+        val d = binding.mediaDetailImageView.drawable
+        if (d != null) {
+            cachedImageWidth = d.intrinsicWidth
+            cachedImageHeight = d.intrinsicHeight
         }
     }
 
@@ -833,6 +849,10 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
             requireView().viewTreeObserver.removeGlobalOnLayoutListener(layoutListener) // old Android was on crack. CRACK IS WHACK
             layoutListener = null
         }
+
+        // Cancel any in-flight Coil request so stale callbacks can't fire
+        // after the view is destroyed (Coil best practice).
+        binding.mediaDetailImageView.dispose()
 
         compositeDisposable.clear()
 
