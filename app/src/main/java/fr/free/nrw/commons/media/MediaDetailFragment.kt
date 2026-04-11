@@ -7,7 +7,6 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.content.res.Configuration
 import coil3.load
-import coil3.request.crossfade
 import coil3.request.error
 import android.net.Uri
 import android.os.Bundle
@@ -717,6 +716,12 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
      * A ProgressBar spinner is shown while loading. No static placeholder image
      * is used because it would flash as a "wrong image" before the real one loads.
      */
+    /**
+     * Loads the media image into the detail ImageView.
+     *
+     * Mirrors the original Fresco behaviour: show a spinner while loading,
+     * prefer the full-resolution URL, fall back to the thumbnail URL.
+     */
     private fun setupImageView() {
         val imageBackgroundColor: Int = imageBackgroundColor
         if (imageBackgroundColor != DEFAULT_IMAGE_BACKGROUND_COLOR) {
@@ -726,71 +731,20 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
         binding.mediaDetailImageView.setImageDrawable(null)
         binding.mediaDetailImageProgress.visibility = View.VISIBLE
 
-        val imageUrl = media!!.imageUrl
-        val thumbUrl = media!!.thumbUrl
+        val url = media!!.imageUrl ?: media!!.thumbUrl
 
-        if (!thumbUrl.isNullOrEmpty() && !imageUrl.isNullOrEmpty() && thumbUrl != imageUrl) {
-            // Load thumbnail first for a fast preview.
-            binding.mediaDetailImageView.load(thumbUrl) {
-                // Disable crossfade for the initial load: the global crossfade(true)
-                // on the ImageLoader would otherwise transition from whatever stale
-                // drawable was previously on this ImageView (e.g. the first
-                // RecyclerView item), causing a brief wrong-image flash.
-                crossfade(false)
-                error(R.drawable.image_placeholder)
-                listener(
-                    onSuccess = { _, result ->
-                        binding.mediaDetailImageProgress.visibility = View.GONE
-                        updateImageDimensions()
-                        updateAspectRatio(binding.mediaDetailScrollView.width)
-
-                        // Load full-resolution image, using the thumbnail's memory
-                        // cache key as a synchronous placeholder (Coil recipe).
-                        binding.mediaDetailImageView.load(imageUrl) {
-                            placeholderMemoryCacheKey(result.memoryCacheKey)
-                            error(R.drawable.image_placeholder)
-                            listener(
-                                onSuccess = { _, _ ->
-                                    updateImageDimensions()
-                                    updateAspectRatio(binding.mediaDetailScrollView.width)
-                                }
-                            )
-                        }
-                    },
-                    onError = { _, _ ->
-                        // Thumbnail failed — fall back to loading the full image directly.
-                        binding.mediaDetailImageView.load(imageUrl) {
-                            crossfade(false)
-                            error(R.drawable.image_placeholder)
-                            listener(
-                                onSuccess = { _, _ ->
-                                    binding.mediaDetailImageProgress.visibility = View.GONE
-                                    updateImageDimensions()
-                                    updateAspectRatio(binding.mediaDetailScrollView.width)
-                                },
-                                onError = { _, _ ->
-                                    binding.mediaDetailImageProgress.visibility = View.GONE
-                                }
-                            )
-                        }
-                    }
-                )
-            }
-        } else {
-            binding.mediaDetailImageView.load(imageUrl ?: thumbUrl) {
-                crossfade(false)
-                error(R.drawable.image_placeholder)
-                listener(
-                    onSuccess = { _, _ ->
-                        binding.mediaDetailImageProgress.visibility = View.GONE
-                        updateImageDimensions()
-                        updateAspectRatio(binding.mediaDetailScrollView.width)
-                    },
-                    onError = { _, _ ->
-                        binding.mediaDetailImageProgress.visibility = View.GONE
-                    }
-                )
-            }
+        binding.mediaDetailImageView.load(url) {
+            error(R.drawable.image_placeholder)
+            listener(
+                onSuccess = { _, _ ->
+                    binding.mediaDetailImageProgress.visibility = View.GONE
+                    updateImageDimensions()
+                    updateAspectRatio(binding.mediaDetailScrollView.width)
+                },
+                onError = { _, _ ->
+                    binding.mediaDetailImageProgress.visibility = View.GONE
+                }
+            )
         }
     }
 
