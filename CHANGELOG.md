@@ -1,5 +1,16 @@
 # Wikimedia Commons for Android
 
+## v6.5.0
+
+### What's changed
+* Redesigned license selection for a simpler, more intuitive experience
+* Users can now depictions directly from an interactive map view during uploads
+* Upload HEIC images directly from supported devices without conversion
+* Deletion requests now require specific reasons, reducing vague or invalid nominations
+* Bug fixes and security improvements
+
+**Full Changelog**: https://github.com/commons-app/apps-android-commons/compare/v6.4.0...v6.5.0
+
 ## v6.4.0
 
 ### What's changed

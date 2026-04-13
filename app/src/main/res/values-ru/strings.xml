@@ -904,7 +904,7 @@
   <string name="image_tag_line_created_by_and_uploaded_by">Создано %1$s и загружено %2$s</string>
   <string name="nominated_for_deletion_btn">Номинировано на удаление</string>
   <string name="custom_selector_max_image_limit_reached">Вы можете выбрать не более %d изображений.</string>
-  <string name="edit_unsupported_format_explanation">&amp;nbsp;</string>
+  <string name="edit_unsupported_format_explanation" fuzzy="true">&amp;nbsp;</string>
   <string name="license_cc0_description">Авторские права не защищены. Вы отказываетесь от всех прав, поэтому любой может использовать это произведение любым способом.</string>
   <string name="license_cc_by_description">Attribution. Другие могут свободно распространять и изменять ваши работы, но должны указать вас как автора.</string>
   <string name="license_cc_by_sa_description">Attribution-ShareAlike. Другие могут свободно распространять и изменять ваши работы, но должны использовать ту же лицензию и указать вас как автора.</string>

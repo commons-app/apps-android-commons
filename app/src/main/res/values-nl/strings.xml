@@ -277,6 +277,7 @@
   <string name="upload_problem_image_dark">Afbeelding is te donker.</string>
   <string name="upload_problem_image_blurry">Afbeelding is onscherp.</string>
   <string name="upload_problem_image_duplicate">Afbeelding staat al in Commons.</string>
+  <string name="upload_problem_image_format_unsupported">Uw afbeelding is in een formaat dat niet wordt ondersteund door de Commons-server, dus de app heeft het omgezet in JPG.</string>
   <string name="upload_problem_different_geolocation">Deze foto is op een andere locatie genomen.</string>
   <string name="upload_problem_fbmd">Upload alleen foto\'s die je zelf hebt genomen. Upload geen foto\'s die je op Facebookaccounts van anderen hebt gevonden.</string>
   <string name="upload_problem_do_you_continue">Wil je deze afbeelding nog steeds uploaden?</string>
@@ -556,6 +557,7 @@
   <string name="delete_helper_ask_spam_blurry">helemaal wazig</string>
   <string name="delete_helper_ask_spam_nonsense">onzin, absoluut onbruikbaar in elk artikel</string>
   <string name="delete_helper_ask_spam_other">Overige</string>
+  <string name="delete_helper_other_notes_hint">Rechtvaardiging</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">Persfoto</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">Willekeurige foto van internet</string>
   <string name="delete_helper_ask_reason_copyright_logo">Logo</string>
@@ -861,7 +863,7 @@
   <string name="image_tag_line_created_by_and_uploaded_by">Gemaakt door %1$s en geüpload %2$s</string>
   <string name="nominated_for_deletion_btn">Genomineerd voor verwijdering</string>
   <string name="custom_selector_max_image_limit_reached">U kunt maximaal %d afbeeldingen selecteren.</string>
-  <string name="edit_unsupported_format_explanation">&amp;nbsp;</string>
+  <string name="edit_unsupported_format_explanation">In-app bewerking is alleen beschikbaar voor JPEG-bestanden. Gebruik voor het bewerken van andere formaten een programma van derden.</string>
   <string name="license_cc0_description">Geen auteursrecht. U doet afstand van alle rechten, zodat iedereen dit werk op elke gewenste manier kan gebruiken.</string>
   <string name="license_cc_by_description">Naamsvermelding is vereist. Anderen mogen het materiaal delen en aanpassen, zolang ze u maar als bron vermelden.</string>
   <string name="license_cc_by_sa_description">Naamsvermelding-delen-gelijk. Anderen mogen het delen en aanpassen, maar moeten dezelfde licentie gebruiken en u als auteur vermelden.</string>

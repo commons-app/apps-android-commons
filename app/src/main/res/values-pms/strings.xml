@@ -840,4 +840,7 @@
   <string name="license_cc0_description">Gnun drit d\'autor. Chiel a conced tuti ij drit, parèj che tuti a peulo dovré cost travaj an qualsëssìa manera.</string>
   <string name="license_cc_by_description">Atribussion. J\'àutri a son lìber ëd partagé e adaté, për tant che a-j dan l\'arconossiment.</string>
   <string name="license_cc_by_sa_description">Atribussion-PartagiUgual. J\'àutri a peulo partagé e adaté, ma a devo dovré la midema licensa e deje l\'arconossiment.</string>
+  <string name="license_cc0_long_description">Costa licensa a përmet a chi a deuvra torna ël material ëd distribuilo, modifichelo, adatelo e dësvlupelo an qualsëssìa mojen o formà, sensa condission.</string>
+  <string name="license_cc_by_long_description">Costa licensa a përmet a chi a deuvra torna ël material ëd distribuilo, modifichelo, adatelo e dësvlupelo an qualsëssìa mojen e formà, ëdcò con dij but comersiaj, basta mach ch\'a sia dàit l\'arconossiment al creator.</string>
+  <string name="license_cc_by_sa_long_description">Costa licensa a përmet a chi a deuvra torna ël material ëd distribuilo, modifichelo, adatelo e dësvlupelo an qualsëssìa mojen o formà, ëdcò con dij but comersiaj, basta che l\'atribussion a sia dàita al creator e che ël neuv travaj a sia licensià sota j\'istess termo.</string>
 </resources>
