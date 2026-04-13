@@ -255,6 +255,7 @@
   <string name="upload_problem_image_dark">Сликата е претемна.</string>
   <string name="upload_problem_image_blurry">Сликата е матна.</string>
   <string name="upload_problem_image_duplicate">Сликата веќе ја има на Ризницата.</string>
+  <string name="upload_problem_image_format_unsupported">Вашата слика е во формат кој нее поддржан на опслужувачот на Ризницата, па затоа прилогот ја претвори во JPG.</string>
   <string name="upload_problem_different_geolocation">Оваа слика е направена на друго место.</string>
   <string name="upload_problem_fbmd">Подигајте само слики кои самите сте ги направиле. Не подигајте слики пронајдени на туѓи профили на Фејсбук.</string>
   <string name="upload_problem_do_you_continue">Дали сепак сакате да ја подигнете?</string>
@@ -841,6 +842,7 @@
   <string name="image_tag_line_created_by_and_uploaded_by">Создал %1$s, а подигнал %2$s</string>
   <string name="nominated_for_deletion_btn">Предложено за бришење</string>
   <string name="custom_selector_max_image_limit_reached">Можете да изберете највеќе %d слики.</string>
+  <string name="edit_unsupported_format_explanation">Уредувањето во прилог е достпано само за JPEG-податотеки. За да уредувате други формати послужете се со други алатки.</string>
   <string name="license_cc0_description">Без авторски права. Ги препуштате сите права на секого што сака да го користи делово на било кој начин.</string>
   <string name="license_cc_by_description">Наведи извор. Другите слободно можат да го споделуваат и прилагодуваат делото под услов да ве наведат.</string>
   <string name="license_cc_by_sa_description">Наведи извор-Сподели под исти услови. Другите можат да го споделуваат и прилагодуваат делото, но мора да ја користат истата лиценца и да ве наведат.</string>
