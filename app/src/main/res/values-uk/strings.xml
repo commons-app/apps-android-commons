@@ -284,6 +284,7 @@
   <string name="upload_problem_image_dark">Зображення надто темне.</string>
   <string name="upload_problem_image_blurry">Зображення розмите.</string>
   <string name="upload_problem_image_duplicate">Зображення вже існує на Вікісховищі.</string>
+  <string name="upload_problem_image_format_unsupported">Ваше зображення має формат, який не підтримується сервером Commons, тому програма конвертувала його у JPG.</string>
   <string name="upload_problem_different_geolocation">Зображення виконано в іншому місці.</string>
   <string name="upload_problem_fbmd">Будь ласка, завантажуйте тільки ті зображення, які були зроблені вами. Не завантажуйте зображень, які ви знайшли у Фейсбуці.</string>
   <string name="upload_problem_do_you_continue">Ви все одно хочете завантажити це зображення?</string>
@@ -563,6 +564,7 @@
   <string name="delete_helper_ask_spam_blurry">повністю розмито</string>
   <string name="delete_helper_ask_spam_nonsense">нісенітниця, абсолютно непридатна для будь-якої статті</string>
   <string name="delete_helper_ask_spam_other">Інше</string>
+  <string name="delete_helper_other_notes_hint">Обґрунтування</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">Фото з новин</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">Випадкове фото з інтернет</string>
   <string name="delete_helper_ask_reason_copyright_logo">Логотип</string>
@@ -874,6 +876,7 @@
   <string name="image_tag_line_created_by_and_uploaded_by">Створено %1$s та завантажено %2$s</string>
   <string name="nominated_for_deletion_btn">Номіновано на вилучення</string>
   <string name="custom_selector_max_image_limit_reached">Ви можете вибрати максимум %d зображень.</string>
+  <string name="edit_unsupported_format_explanation">Редагування в додатку доступне лише для файлів JPEG. Щоб редагувати інші формати, скористайтеся сторонніми інструментами.</string>
   <string name="license_cc0_description">Без авторських прав. Ви відмовляєтеся від усіх прав, щоб будь-хто міг використовувати цю роботу будь-яким способом.</string>
   <string name="license_cc_by_description">Attribution. Інші можуть вільно поширювати та адаптувати матеріали, якщо вони вкажуть ваше авторство.</string>
   <string name="license_cc_by_sa_description">Attribution-ShareAlike. Інші можуть поширювати та адаптувати, але повинні використовувати ту саму ліцензію та вказувати ваше авторство.</string>
