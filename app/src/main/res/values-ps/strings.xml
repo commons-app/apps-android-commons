@@ -239,6 +239,7 @@
   <string name="nearby_info_menu_wikipedia_article">ويکيپېډيا ليکنه</string>
   <string name="upload_problem_image_dark">انځور ډېر تياره دی.</string>
   <string name="upload_problem_image_blurry">انځور ډېر جړ دی.</string>
+  <string name="upload_problem_image_duplicate">انځور لادمخه خونديځ کې دی.</string>
   <string name="upload_connection_error_alert_title">نښلېدا تېروتنه</string>
   <string name="upload_connection_error_alert_detail">د راپورته کولو بهير ته کارنده اينټرنېټ لاسرسي ته اړتيا ده. مهرباني وکړئ خپل د شبکې د نښلېدا سم‌کتنه وکړئ.</string>
   <string name="upload_problem_image">په انځور کې موندل شوې ستونزې</string>

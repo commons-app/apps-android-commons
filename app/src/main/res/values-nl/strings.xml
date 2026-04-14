@@ -416,7 +416,7 @@
   <string name="notifications">Meldingen</string>
   <string name="read_notifications">Meldingen (gelezen)</string>
   <string name="display_nearby_notification">Melding in de buurt weergeven</string>
-  <string name="display_nearby_notification_summary">Toon in-app-melding voor de dichtstbijzijnde plaats die foto\'s nodig heeft</string>
+  <string name="display_nearby_notification_summary">In-app-melding weergeven voor de dichtstbijzijnde plaats die foto\'s nodig heeft</string>
   <string name="list_sheet">Lijst</string>
   <string name="storage_permission">Toestemming om op te slaan</string>
   <string name="write_storage_permission_rationale_for_image_share">We hebben uw toestemming nodig om toegang te krijgen tot de externe opslag van uw apparaat om afbeeldingen te uploaden.</string>
@@ -702,7 +702,7 @@
   <string name="choose_a_location">Kies een locatie</string>
   <string name="pan_and_zoom_to_adjust">Draaien en zoomen om aan te passen</string>
   <string name="select_location_location_picker">Selecteer locatie</string>
-  <string name="show_in_map_app">Toon in kaart-app</string>
+  <string name="show_in_map_app">In kaart-app weergeven</string>
   <string name="modify_location">Locatie bewerken</string>
   <string name="location_picker_image_view">De afbeeldingsweergave van de locatiekiezer</string>
   <string name="location_picker_image_view_shadow">De schaduw van de afbeeldingsweergave van de locatiekiezer</string>
