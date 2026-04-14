@@ -277,6 +277,7 @@
   <string name="upload_problem_image_dark">Afbeelding is te donker.</string>
   <string name="upload_problem_image_blurry">Afbeelding is onscherp.</string>
   <string name="upload_problem_image_duplicate">Afbeelding staat al in Commons.</string>
+  <string name="upload_problem_image_format_unsupported">Uw afbeelding is in een formaat dat niet wordt ondersteund door de Commons-server, dus de app heeft het omgezet in JPG.</string>
   <string name="upload_problem_different_geolocation">Deze foto is op een andere locatie genomen.</string>
   <string name="upload_problem_fbmd">Upload alleen foto\'s die je zelf hebt genomen. Upload geen foto\'s die je op Facebookaccounts van anderen hebt gevonden.</string>
   <string name="upload_problem_do_you_continue">Wil je deze afbeelding nog steeds uploaden?</string>
@@ -415,7 +416,7 @@
   <string name="notifications">Meldingen</string>
   <string name="read_notifications">Meldingen (gelezen)</string>
   <string name="display_nearby_notification">Melding in de buurt weergeven</string>
-  <string name="display_nearby_notification_summary">Toon in-app-melding voor de dichtstbijzijnde plaats die foto\'s nodig heeft</string>
+  <string name="display_nearby_notification_summary">In-app-melding weergeven voor de dichtstbijzijnde plaats die foto\'s nodig heeft</string>
   <string name="list_sheet">Lijst</string>
   <string name="storage_permission">Toestemming om op te slaan</string>
   <string name="write_storage_permission_rationale_for_image_share">We hebben uw toestemming nodig om toegang te krijgen tot de externe opslag van uw apparaat om afbeeldingen te uploaden.</string>
@@ -701,7 +702,7 @@
   <string name="choose_a_location">Kies een locatie</string>
   <string name="pan_and_zoom_to_adjust">Draaien en zoomen om aan te passen</string>
   <string name="select_location_location_picker">Selecteer locatie</string>
-  <string name="show_in_map_app">Toon in kaart-app</string>
+  <string name="show_in_map_app">In kaart-app weergeven</string>
   <string name="modify_location">Locatie bewerken</string>
   <string name="location_picker_image_view">De afbeeldingsweergave van de locatiekiezer</string>
   <string name="location_picker_image_view_shadow">De schaduw van de afbeeldingsweergave van de locatiekiezer</string>
@@ -862,7 +863,7 @@
   <string name="image_tag_line_created_by_and_uploaded_by">Gemaakt door %1$s en geüpload %2$s</string>
   <string name="nominated_for_deletion_btn">Genomineerd voor verwijdering</string>
   <string name="custom_selector_max_image_limit_reached">U kunt maximaal %d afbeeldingen selecteren.</string>
-  <string name="edit_unsupported_format_explanation">&amp;nbsp;</string>
+  <string name="edit_unsupported_format_explanation">In-app bewerking is alleen beschikbaar voor JPEG-bestanden. Gebruik voor het bewerken van andere formaten een programma van derden.</string>
   <string name="license_cc0_description">Geen auteursrecht. U doet afstand van alle rechten, zodat iedereen dit werk op elke gewenste manier kan gebruiken.</string>
   <string name="license_cc_by_description">Naamsvermelding is vereist. Anderen mogen het materiaal delen en aanpassen, zolang ze u maar als bron vermelden.</string>
   <string name="license_cc_by_sa_description">Naamsvermelding-delen-gelijk. Anderen mogen het delen en aanpassen, maar moeten dezelfde licentie gebruiken en u als auteur vermelden.</string>
