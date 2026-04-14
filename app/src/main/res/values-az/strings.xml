@@ -260,6 +260,7 @@
   <string name="upload_problem_image_dark">Şəkil çox qaranlıqdır.</string>
   <string name="upload_problem_image_blurry">Şəkil bulanıqdır.</string>
   <string name="upload_problem_image_duplicate">Şəkil artıq Vikianbarda var.</string>
+  <string name="upload_problem_image_format_unsupported">Şəkliniz Commons serveri tərəfindən dəstəklənməyən formatdadır, ona görə də tətbiq onu JPG-yə çevirdi.</string>
   <string name="upload_problem_different_geolocation">Bu şəkil başqa yerdə çəkilib.</string>
   <string name="upload_problem_fbmd">Zəhmət olmasa, yalnız özünüz çəkdiyiniz şəkilləri yükləyin. Başqalarının Facebook hesablarında tapdığınız şəkilləri yükləməyin.</string>
   <string name="upload_problem_do_you_continue">Hələ də bu şəkli yükləmək istəyirsiniz?</string>
@@ -844,4 +845,11 @@
   <string name="image_tag_line_created_by_and_uploaded_by">%1$s tərəfindən yaradılmış və %2$s tərəfindən yüklənmişdir</string>
   <string name="nominated_for_deletion_btn">Silinməyə namizəd göstərilib</string>
   <string name="custom_selector_max_image_limit_reached">Siz maksimum %d şəkil seçə bilərsiniz.</string>
+  <string name="edit_unsupported_format_explanation">Tətbiqdaxili redaktə yalnız JPEG faylları üçün mümkündür. Digər formatları redaktə etmək üçün üçüncü partiya alətlərdən istifadə edin.</string>
+  <string name="license_cc0_description">Müəllif hüquqları yoxdur. Siz bütün hüquqları buraxırsınız ki, hər kəs bu əsərdən istənilən şəkildə istifadə edə bilsin.</string>
+  <string name="license_cc_by_description">Atribusiya. Digərləri sizə istinad verdikləri müddətcə paylaşmaqda və uyğunlaşdırmaqda sərbəstdirlər.</string>
+  <string name="license_cc_by_sa_description">Atribut-ShareAlike. Başqaları paylaşa və uyğunlaşdıra bilər, lakin eyni lisenziyadan istifadə etməli və sizə istinad verməlidirlər.</string>
+  <string name="license_cc0_long_description">Bu lisenziya təkrar istifadəçilərə heç bir şərt qoymadan istənilən media və formatda materialı yaymaq, remiks etmək, uyğunlaşdırmaq və inkişaf etdirmək imkanı verir.</string>
+  <string name="license_cc_by_long_description">Bu lisenziya, müəllifə istinad edildiyi təqdirdə, təkrar istifadəçilərə materialı istənilən vasitə və ya formatda, hətta kommersiya məqsədləri üçün də yaymağa, remiks etməyə, uyğunlaşdırmağa və inkişaf etdirməyə imkan verir.</string>
+  <string name="license_cc_by_sa_long_description">Bu lisenziya, müəllifə istinad edildiyi və yeni əsərin eyni şərtlər altında lisenziyalaşdırıldığı şərtilə, təkrar istifadəçilərə materialı istənilən vasitə və ya formatda, hətta kommersiya məqsədləri üçün də yaymağa, remiks etməyə, uyğunlaşdırmağa və inkişaf etdirməyə imkan verir.</string>
 </resources>
