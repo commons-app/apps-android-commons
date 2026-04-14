@@ -1029,10 +1029,15 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
                        Manage EXIF Tags setting or turned "Record location for in-app shots" off.
                        Also, location information is discarded if the difference between
                        current location and location recorded just before capturing the image
-                       is greater than 100 meters */
-            if (isLocationTagUnchecked || locationDifference > 100
+                       is greater than 100 meters
+                       NOTE:- The LOCATION_BEFORE_IMAGE_CAPTURE is only available
+                       for in-app camera uploads. For gallery uploads, this location is not
+                       passed via the intent from Nearby to UploadActivity. Therefore,
+                       the location difference check should only apply to camera uploads.
+                       */
+            if (isLocationTagUnchecked
                 || !defaultKvStore.getBoolean("inAppCameraLocationPref")
-                || !isInAppCameraUpload
+                || (isInAppCameraUpload && locationDifference > 100)
             ) {
                 currLocation = null
             }
