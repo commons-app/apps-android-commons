@@ -15,14 +15,11 @@ import com.facebook.drawee.backends.pipeline.Fresco
 import com.facebook.imagepipeline.core.ImagePipelineConfig
 import fr.free.nrw.commons.auth.LoginActivity
 import fr.free.nrw.commons.auth.SessionManager
-import fr.free.nrw.commons.bookmarks.items.BookmarkItemsTable
-import fr.free.nrw.commons.bookmarks.pictures.BookmarksTable
-import fr.free.nrw.commons.category.CategoryDao
-import fr.free.nrw.commons.category.CategoryTable
 import fr.free.nrw.commons.concurrency.BackgroundPoolExceptionHandler
 import fr.free.nrw.commons.concurrency.ThreadPoolService
 import fr.free.nrw.commons.contributions.ContributionDao
 import fr.free.nrw.commons.data.DBOpenHelper
+import fr.free.nrw.commons.db.AppDatabase
 import fr.free.nrw.commons.di.ApplicationlessInjection
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.language.AppLanguageLookUpTable
@@ -72,6 +69,8 @@ class CommonsApplication : MultiDexApplication() {
     @Inject
     lateinit var sessionManager: SessionManager
 
+    @Inject
+    lateinit var appDatabase: AppDatabase
     @Inject
     lateinit var dbOpenHelper: DBOpenHelper
 
@@ -241,7 +240,6 @@ class CommonsApplication : MultiDexApplication() {
         dbOpenHelper.readableDatabase.close()
         val db = dbOpenHelper.writableDatabase
 
-        CategoryTable.onDelete(db)
         dbOpenHelper.deleteTable(
             db,
             DBOpenHelper.CONTRIBUTIONS_TABLE
@@ -254,11 +252,10 @@ class CommonsApplication : MultiDexApplication() {
 
         try {
             contributionDao.deleteAll()
-        } catch (e: SQLiteException) {
+            appDatabase.clearAllTables()
+        } catch (e: Exception) {
             Timber.e(e)
         }
-        BookmarksTable.onDelete(db)
-        BookmarkItemsTable.onDelete(db)
     }
 
 

@@ -5,9 +5,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.room.Embedded;
-import androidx.room.Entity;
-import androidx.room.PrimaryKey;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.nearby.model.NearbyResultItem;
 import fr.free.nrw.commons.utils.LocationUtils;
@@ -18,23 +15,16 @@ import timber.log.Timber;
 /**
  * A single geolocated Wikidata item
  */
-@Entity(tableName = "place")
 public class Place implements Parcelable {
-
     public String language;
     public String name;
     private Label label;
     private String longDescription;
-    @Embedded
     public LatLng location;
-    @PrimaryKey @NonNull
     public String entityID;
     private String category;
     public String pic;
-    // exists boolean will tell whether the place exists or not,
-    // For a place to be existing both destroyed and endTime property should be null but it is also not necessary for a non-existing place to have both properties either one property is enough (in such case that not given property will be considered as null).
     public Boolean exists;
-
     public String distance;
     public Sitelinks siteLinks;
     private boolean isMonument;
