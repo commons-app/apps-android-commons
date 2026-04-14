@@ -14,6 +14,12 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Validate strings.xml syntax
+        run: |
+          find . -name "strings.xml" -not -path "*/build/*" | while read f; do
+            xmllint --noout "$f" || exit 1
+          done
+
       - name: Set up JDK
         uses: actions/setup-java@v4
         with:
