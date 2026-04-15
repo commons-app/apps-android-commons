@@ -2,19 +2,25 @@ package fr.free.nrw.commons.edit
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.Color
+import android.mediautil.image.jpeg.LLJTran
+import fr.free.nrw.commons.TestCommonsApplication
 import org.junit.Assert.assertArrayEquals
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNotEquals
 import org.junit.Before
+import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.TemporaryFolder
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
+import org.robolectric.annotation.Config
 import java.io.File
 import java.io.FileOutputStream
-import org.junit.Ignore
 
 @RunWith(RobolectricTestRunner::class)
+@Config(sdk = [21], application = TestCommonsApplication::class)
 class TransformImageTest {
 
     @get:Rule
@@ -88,6 +94,49 @@ class TransformImageTest {
             finalBytes
         )
     }
+
+    private fun assertColorAlmostEquals(
+        message: String,
+        expectedColor: Int,
+        actualColor: Int,
+        tolerance: Int
+    ) {
+        assertChannelWithinTolerance(
+            message = message,
+            channelName = "red",
+            expected = Color.red(expectedColor),
+            actual = Color.red(actualColor),
+            tolerance = tolerance
+        )
+        assertChannelWithinTolerance(
+            message = message,
+            channelName = "green",
+            expected = Color.green(expectedColor),
+            actual = Color.green(actualColor),
+            tolerance = tolerance
+        )
+        assertChannelWithinTolerance(
+            message = message,
+            channelName = "blue",
+            expected = Color.blue(expectedColor),
+            actual = Color.blue(actualColor),
+            tolerance = tolerance
+        )
+    }
+
+    private fun assertChannelWithinTolerance(
+        message: String,
+        channelName: String,
+        expected: Int,
+        actual: Int,
+        tolerance: Int
+    ) {
+        val difference = kotlin.math.abs(expected - actual)
+        if (difference > tolerance) {
+            throw AssertionError("$message ($channelName channel) expected <$expected> but was <$actual>")
+        }
+    }
+
     @Ignore("Disabled due to ICC Color Profile brightness shift during rotation. see issue https://github.com/commons-app/apps-android-commons/issues/6659 ")
     @Test
     fun `test 360 degree rotation cycles for all EXIF images`() {
@@ -131,5 +180,37 @@ class TransformImageTest {
 
             println("$fileName passed all rotation cycle tests")
         }
+    }
+
+    @Test
+    fun `rotateImage keeps imperfect JPEG dimensions by re-encoding`() {
+        val originalFile = getResourceAsTempFile("TEST_1.jpg") ?: error("Missing test resource")
+        val lljTran = LLJTran(originalFile)
+        lljTran.read(LLJTran.READ_ALL, false)
+
+        assertNotEquals(
+            "TEST_1.jpg should exercise the imperfect JPEG fallback path",
+            0,
+            lljTran.checkPerfect(LLJTran.ROT_90, null)
+        )
+
+        lljTran.freeMemory()
+
+        val rotatedFile = transformImage.rotateImage(originalFile, 90, savePath)!!
+        val originalBitmap = decodeBitmap(originalFile)
+        val rotatedBitmap = decodeBitmap(rotatedFile)
+
+        assertEquals("Imperfect JPEG rotation should keep the full rotated width", originalBitmap.height, rotatedBitmap.width)
+        assertEquals("Imperfect JPEG rotation should keep the full rotated height", originalBitmap.width, rotatedBitmap.height)
+
+        val centerX = originalBitmap.width / 3
+        val centerY = originalBitmap.height / 3
+        assertColorAlmostEquals(
+            message = "Interior pixels should remain close after fallback re-encoding",
+            expectedColor = originalBitmap.getPixel(centerX, centerY),
+            actualColor = rotatedBitmap.getPixel(originalBitmap.height - centerY - 1, centerX),
+            tolerance = 20
+        )
+
     }
 }
