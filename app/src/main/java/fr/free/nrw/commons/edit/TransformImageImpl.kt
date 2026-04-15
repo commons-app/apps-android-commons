@@ -1,5 +1,8 @@
 package fr.free.nrw.commons.edit
 
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.graphics.Matrix
 import android.graphics.Rect
 import android.mediautil.image.jpeg.LLJTran
 import android.mediautil.image.jpeg.LLJTranException
@@ -16,6 +19,10 @@ import java.io.FileOutputStream
  * for rotating and cropping images using the LLJTran library for lossless JPEG transforms.
  */
 class TransformImageImpl : TransformImage {
+    companion object {
+        private const val REENCODE_JPEG_QUALITY = 95
+    }
+
     /**
      * Rotates the specified image file by the given degree.
      *
@@ -30,38 +37,42 @@ class TransformImageImpl : TransformImage {
     ): File? {
         Timber.tag("Trying to rotate image").d("Starting")
 
+        val normalizedDegree = ((degree % 360) + 360) % 360
+        val rotationOp =
+            when (normalizedDegree) {
+                0 -> null
+                90 -> LLJTran.ROT_90
+                180 -> LLJTran.ROT_180
+                270 -> LLJTran.ROT_270
+                else -> {
+                    Timber.w("Unsupported rotation degree: $degree")
+                    return null
+                }
+            }
+
         val imagePath = System.currentTimeMillis()
         val output = File(savePath, "rotated_$imagePath.jpg")
 
         val rotated =
             try {
-                val lljTran = LLJTran(imageFile)
-                lljTran.read(
-                    LLJTran.READ_ALL,
-                    false,
-                ) // This could throw an LLJTranException. I am not catching it for now... Let's see.
-                lljTran.transform(
-                    when (degree) {
-                        90 -> LLJTran.ROT_90
-                        180 -> LLJTran.ROT_180
-                        270 -> LLJTran.ROT_270
-                        else -> LLJTran.OPT_DEFAULTS
-                    },
-                    LLJTran.OPT_DEFAULTS or LLJTran.OPT_XFORM_ORIENTATION,
-                )
-                BufferedOutputStream(FileOutputStream(output)).use { writer ->
-                    lljTran.save(writer, LLJTran.OPT_WRITE_ALL)
+                if (rotationOp == null) {
+                    imageFile.copyTo(output, overwrite = true)
+                } else {
+                    rotateImageWithReencodeFallback(imageFile, output, normalizedDegree, rotationOp)
                 }
-                lljTran.freeMemory()
+
                 try {
                     val exif = ExifInterface(output.absolutePath)
                     exif.setAttribute(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL.toString())
                     exif.saveAttributes()
                 } catch (ex: Exception) {
-                    Timber.w(ex, "Failed to force EXIF orientation to tha Normal")
+                    Timber.w(ex, "Failed to force EXIF orientation to Normal")
                 }
                 true
             } catch (e: LLJTranException) {
+                Timber.tag("Error").d(e)
+                return null
+            } catch (e: Exception) {
                 Timber.tag("Error").d(e)
                 return null
             }
@@ -71,6 +82,80 @@ class TransformImageImpl : TransformImage {
             Timber.tag("Add").d(output.absolutePath)
         }
         return output
+    }
+
+    /**
+     * Uses lossless rotation for perfect JPEG transforms.
+     * Falls back to decode/rotate/re-encode for imperfect JPEGs to avoid
+     * visible edge artifacts while keeping the full rotated dimensions.
+     */
+    private fun rotateImageWithReencodeFallback(
+        imageFile: File,
+        output: File,
+        normalizedDegree: Int,
+        rotationOp: Int,
+    ) {
+        val lljTran = LLJTran(imageFile)
+        lljTran.read(
+            LLJTran.READ_ALL,
+            false,
+        ) // This could throw an LLJTranException. I am not catching it for now... Let's see.
+
+        val canRotateLosslessly = lljTran.checkPerfect(rotationOp, null) == 0
+
+        if (canRotateLosslessly) {
+            lljTran.transform(
+                rotationOp,
+                LLJTran.OPT_DEFAULTS or LLJTran.OPT_XFORM_ORIENTATION,
+            )
+            BufferedOutputStream(FileOutputStream(output)).use { writer ->
+                lljTran.save(writer, LLJTran.OPT_WRITE_ALL)
+            }
+            lljTran.freeMemory()
+            return
+        }
+
+        lljTran.freeMemory()
+        Timber.d("Using bitmap rotation fallback for imperfect JPEG")
+        reencodeRotatedBitmap(imageFile, output, normalizedDegree)
+    }
+
+    /**
+     * Re-encodes only the imperfect JPEG cases so the visible image keeps its full dimensions.
+     */
+    private fun reencodeRotatedBitmap(
+        imageFile: File,
+        output: File,
+        normalizedDegree: Int,
+    ) {
+        val sourceBitmap = BitmapFactory.decodeFile(imageFile.absolutePath)
+            ?: throw IllegalStateException("Failed to decode ${imageFile.absolutePath}")
+        val rotationMatrix = Matrix().apply {
+            postRotate(normalizedDegree.toFloat())
+        }
+        val rotatedBitmap =
+            Bitmap.createBitmap(
+                sourceBitmap,
+                0,
+                0,
+                sourceBitmap.width,
+                sourceBitmap.height,
+                rotationMatrix,
+                false,
+            )
+
+        try {
+            FileOutputStream(output).use { writer ->
+                check(rotatedBitmap.compress(Bitmap.CompressFormat.JPEG, REENCODE_JPEG_QUALITY, writer)) {
+                    "Failed to compress rotated bitmap"
+                }
+            }
+        } finally {
+            if (rotatedBitmap !== sourceBitmap) {
+                rotatedBitmap.recycle()
+            }
+            sourceBitmap.recycle()
+        }
     }
 
     /**
