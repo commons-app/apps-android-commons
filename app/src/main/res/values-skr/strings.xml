@@ -205,6 +205,7 @@
   <string name="no_categories_found">کوئی ونکیاں کائنی لبھیاں</string>
   <string name="delete_helper_show_deletion_title_success">کامیابی</string>
   <string name="delete_helper_show_deletion_title_failed">ناکام تھیا</string>
+  <string name="delete_helper_other_notes_hint">جواز</string>
   <string name="delete_helper_ask_reason_copyright_logo">لوگو</string>
   <string name="category_edit_helper_show_edit_title_success">کامیابی</string>
   <string name="category_edit_button_text">ونکیاں اپ ڈیٹ کرو</string>
