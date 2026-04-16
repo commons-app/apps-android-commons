@@ -125,10 +125,10 @@
   <string name="menu_overflow_desc">څنگزنه خوښنۍ</string>
   <string name="refresh_button">بياتازه کول</string>
   <string name="display_list_button">لړليک</string>
-  <string name="contributions_subtitle_zero">(تراوسه هيڅ راپورته کېدنه نشته)</string>
-  <string name="categories_not_found">%1$s سره ورته هيڅ وېشنيزې ونه موندل شوې</string>
-  <string name="depictions_not_found">%1$s سره هيڅ ورته ويکي‌اومتوک توکي ونه موندل شوه</string>
-  <string name="no_child_classes">%1$s هيڅ کوشنۍ ټولگې نه لري</string>
+  <string name="contributions_subtitle_zero">(تراوسه هېڅ راپورته کېدنه نشته)</string>
+  <string name="categories_not_found">%1$s سره ورته هېڅ وېشنيزې ونه موندل شوې</string>
+  <string name="depictions_not_found">%1$s سره هېڅ ورته ويکي‌اومتوک توکي ونه موندل شوه</string>
+  <string name="no_child_classes">%1$s هېڅ کوشنۍ ټولگې نه لري</string>
   <string name="no_parent_classes">%1$s مور ټولگې نه لري</string>
   <string name="categories_skip_explanation">ويکي‌اوتوک خونديځ کې د خپلو انځورونو موندلو لپاره وېشنيزې ورگډې کړئ.\nوېشنيزو ورگډولو لپاره ټاپل پيل کړئ.</string>
   <string name="categories_activity_title">وېشنيزې</string>
@@ -144,7 +144,7 @@
   <string name="about_privacy_policy">د پټنتيا تگلار</string>
   <string name="title_activity_about">په اړه</string>
   <string name="menu_feedback">غبرگون لېږنه (برېښليک له لارې)</string>
-  <string name="no_email_client">هيڅ برېښليک سرچينه نه ده ځای پرځای شوې</string>
+  <string name="no_email_client">هېڅ برېښليک سرچينه نه ده ځای پرځای شوې</string>
   <string name="provider_categories">وروستۍ کارېدلې وېشنيزې</string>
   <string name="waiting_first_sync">د لومړۍ همغږۍ په تمه...</string>
   <string name="no_uploads_yet">تاسې تر اوسه کوم انځور نه دی پورته کړی.</string>
@@ -186,7 +186,7 @@
   <string name="detail_panel_cats_label">وېشنيزې</string>
   <string name="detail_panel_cats_loading">رابرسېرېږي...</string>
   <string name="detail_panel_cats_none">هېڅ هم نه دی ټاکل شوی</string>
-  <string name="detail_caption_empty">هيڅ نيونگ نشته</string>
+  <string name="detail_caption_empty">هېڅ نيونگ نشته</string>
   <string name="detail_description_empty">څرگنداوی نشته</string>
   <string name="detail_discussion_empty">هېڅ شننه نشته</string>
   <string name="detail_license_empty">ناجوت منښتليک</string>
@@ -281,7 +281,7 @@
   <string name="showcase_view_needs_photo">داځای انځور ته اړتيا لري.</string>
   <string name="showcase_view_has_photo">دا ځای لادمخه انځور لري.</string>
   <string name="showcase_view_no_longer_exists">دا ځای نور شتون نه لري.</string>
-  <string name="no_images_found">هيڅ انځور و‌نه موندل شو!</string>
+  <string name="no_images_found">هېڅ انځور و‌نه موندل شو!</string>
   <string name="error_loading_images">د انځورونو د راپورته کولو پرمهال يوه تېروتنه رامنځته شوه.</string>
   <string name="image_uploaded_by">راپورته کوونکی: %1$s</string>
   <string name="block_notification_title">بنديز لگېدلی</string>
