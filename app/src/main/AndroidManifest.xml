@@ -126,7 +126,7 @@
       android:name=".contributions.MainActivity"
       android:configChanges="screenSize|keyboard|orientation"
       android:icon="@mipmap/ic_launcher"
-      />
+      android:windowSoftInputMode="adjustResize" />
     <activity
       android:name=".settings.SettingsActivity"
       android:label="@string/title_activity_settings" />
