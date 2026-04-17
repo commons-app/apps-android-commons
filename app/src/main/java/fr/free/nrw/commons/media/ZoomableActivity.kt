@@ -4,7 +4,6 @@ import android.app.Activity
 import android.app.Dialog
 import android.content.Intent
 import android.content.SharedPreferences
-import android.graphics.drawable.Animatable
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
@@ -15,14 +14,7 @@ import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
 import androidx.lifecycle.ViewModelProvider
-import com.facebook.drawee.backends.pipeline.Fresco
-import com.facebook.drawee.controller.BaseControllerListener
-import com.facebook.drawee.controller.ControllerListener
-import com.facebook.drawee.drawable.ProgressBarDrawable
-import com.facebook.drawee.drawable.ScalingUtils
-import com.facebook.drawee.generic.GenericDraweeHierarchyBuilder
-import com.facebook.drawee.interfaces.DraweeController
-import com.facebook.imagepipeline.image.ImageInfo
+import coil3.load
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.customselector.database.NotForUploadStatus
 import fr.free.nrw.commons.customselector.database.NotForUploadStatusDao
@@ -37,7 +29,6 @@ import fr.free.nrw.commons.customselector.model.Result
 import fr.free.nrw.commons.customselector.ui.selector.CustomSelectorViewModel
 import fr.free.nrw.commons.customselector.ui.selector.CustomSelectorViewModelFactory
 import fr.free.nrw.commons.databinding.ActivityZoomableBinding
-import fr.free.nrw.commons.media.zoomControllers.zoomable.DoubleTapGestureListener
 import fr.free.nrw.commons.theme.BaseActivity
 import fr.free.nrw.commons.upload.FileProcessor
 import fr.free.nrw.commons.upload.FileUtilsWrapper
@@ -281,7 +272,7 @@ class ZoomableActivity : BaseActivity() {
      * Handles down swipe action
      */
     private fun onDownSwiped() {
-        if (!binding.zoomable.getZoomableController().isIdentity()) {
+        if (binding.zoomable.scale > 1.0f) {
             return
         }
 
@@ -351,7 +342,7 @@ class ZoomableActivity : BaseActivity() {
      * Handles up swipe action
      */
     private fun onUpSwiped() {
-        if (!binding.zoomable.getZoomableController().isIdentity()) {
+        if (binding.zoomable.scale > 1.0f) {
             return
         }
 
@@ -424,7 +415,7 @@ class ZoomableActivity : BaseActivity() {
      * Handles right swipe action
      */
     private fun onRightSwiped(showAlreadyActionedImages: Boolean) {
-        if (!binding.zoomable.getZoomableController().isIdentity()) {
+        if (binding.zoomable.scale > 1.0f) {
             return
         }
 
@@ -461,7 +452,7 @@ class ZoomableActivity : BaseActivity() {
      * Handles left swipe action
      */
     private fun onLeftSwiped(showAlreadyActionedImages: Boolean) {
-        if (!binding.zoomable.getZoomableController().isIdentity()) {
+        if (binding.zoomable.scale > 1.0f) {
             return
         }
 
@@ -615,62 +606,25 @@ class ZoomableActivity : BaseActivity() {
         image: Image,
     ): Int = list!!.indexOf(image)
 
-    /**
-     * Two types of loading indicators have been added to the zoom activity:
-     * 1.  An Indeterminate spinner for showing the time lapsed between dispatch of the image request
-     * and starting to receiving the image.
-     * 2.  ProgressBarDrawable that reflects how much image has been downloaded
-     */
-    private val loadingListener: ControllerListener<ImageInfo?> =
-        object : BaseControllerListener<ImageInfo?>() {
-            override fun onSubmit(
-                id: String,
-                callerContext: Any,
-            ) {
-                // Sometimes the spinner doesn't appear when rapidly switching between images, this fixes that
-                binding.zoomProgressBar.visibility = View.VISIBLE
-            }
-
-            override fun onIntermediateImageSet(
-                id: String,
-                imageInfo: ImageInfo?,
-            ) {
-                binding.zoomProgressBar.visibility = View.GONE
-            }
-
-            override fun onFinalImageSet(
-                id: String,
-                imageInfo: ImageInfo?,
-                animatable: Animatable?,
-            ) {
-                binding.zoomProgressBar.visibility = View.GONE
-            }
-        }
-
     private fun init(imageUri: Uri?) {
         if (imageUri != null) {
-            val hierarchy =
-                GenericDraweeHierarchyBuilder
-                    .newInstance(resources)
-                    .setActualImageScaleType(ScalingUtils.ScaleType.FIT_CENTER)
-                    .setProgressBarImage(ProgressBarDrawable())
-                    .setProgressBarImageScaleType(ScalingUtils.ScaleType.FIT_CENTER)
-                    .build()
-            with(binding.zoomable) {
-                setHierarchy(hierarchy)
-                setAllowTouchInterceptionWhileZoomed(true)
-                setIsLongpressEnabled(false)
-                setTapListener(DoubleTapGestureListener(this) {
-                    toggleSystemBars()
-                })
+            binding.zoomProgressBar.visibility = View.VISIBLE
+
+            // PhotoView provides built-in zoom/pan
+            binding.zoomable.setOnPhotoTapListener { _, _, _ ->
+                toggleSystemBars()
             }
-            val controller: DraweeController =
-                Fresco
-                    .newDraweeControllerBuilder()
-                    .setUri(imageUri)
-                    .setControllerListener(loadingListener)
-                    .build()
-            binding.zoomable.controller = controller
+
+            binding.zoomable.load(imageUri) {
+                listener(
+                    onSuccess = { _, _ ->
+                        binding.zoomProgressBar.visibility = View.GONE
+                    },
+                    onError = { _, _ ->
+                        binding.zoomProgressBar.visibility = View.GONE
+                    },
+                )
+            }
 
             if (photoBackgroundColor != null) {
                 binding.zoomable.setBackgroundColor(photoBackgroundColor!!)

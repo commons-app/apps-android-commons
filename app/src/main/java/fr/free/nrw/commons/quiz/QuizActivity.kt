@@ -8,10 +8,8 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowCompat
-import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat
-
-import com.facebook.drawee.drawable.ProgressBarDrawable
-import com.facebook.drawee.generic.GenericDraweeHierarchyBuilder
+import coil3.load
+import coil3.request.error
 
 import fr.free.nrw.commons.databinding.ActivityQuizBinding
 import java.util.ArrayList
@@ -94,13 +92,9 @@ class QuizActivity : AppCompatActivity() {
         binding.question.questionText.text = quiz[questionIndex].question
         binding.questionTitle.text = getString(R.string.question) + quiz[questionIndex].questionNumber
 
-        binding.question.questionImage.hierarchy = GenericDraweeHierarchyBuilder
-            .newInstance(resources)
-            .setFailureImage(VectorDrawableCompat.create(resources, R.drawable.ic_error_outline_black_24dp, theme))
-            .setProgressBarImage(ProgressBarDrawable())
-            .build()
-
-        binding.question.questionImage.setImageURI(quiz[questionIndex].getUrl())
+        binding.question.questionImage.load(quiz[questionIndex].getUrl()) {
+            error(R.drawable.ic_error_outline_black_24dp)
+        }
         isPositiveAnswerChecked = false
         isNegativeAnswerChecked = false
 

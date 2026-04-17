@@ -1,14 +1,16 @@
 package fr.free.nrw.commons.profile.leaderboard
 
 import android.app.Activity
-import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.facebook.drawee.view.SimpleDraweeView
+import coil3.load
+import coil3.request.transformations
+import coil3.transform.CircleCropTransformation
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.profile.ProfileActivity
 import fr.free.nrw.commons.profile.leaderboard.LeaderboardList.Companion.DIFF_CALLBACK
@@ -21,7 +23,7 @@ import fr.free.nrw.commons.profile.leaderboard.LeaderboardListAdapter.ListViewHo
 class LeaderboardListAdapter : PagedListAdapter<LeaderboardList, ListViewHolder>(DIFF_CALLBACK) {
     inner class ListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var rank: TextView? = itemView.findViewById(R.id.user_rank)
-        var avatar: SimpleDraweeView? = itemView.findViewById(R.id.user_avatar)
+        var avatar: ImageView? = itemView.findViewById(R.id.user_avatar)
         var username: TextView? = itemView.findViewById(R.id.user_name)
         var count: TextView? = itemView.findViewById(R.id.user_count)
     }
@@ -47,7 +49,9 @@ class LeaderboardListAdapter : PagedListAdapter<LeaderboardList, ListViewHolder>
         val item = getItem(position)!!
 
         rank?.text = item.rank.toString()
-        avatar?.setImageURI(Uri.parse(item.avatar))
+        avatar?.load(item.avatar) {
+            transformations(CircleCropTransformation())
+        }
         username?.text = item.username
         count?.text = item.categoryCount.toString()
 

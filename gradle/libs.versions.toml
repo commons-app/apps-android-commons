@@ -27,9 +27,8 @@ dexterVersion = "5.0.0"
 espresso = "3.6.1"
 exifinterface = "1.3.7"
 fragmentTesting = "1.6.2"
-frescoVersion = "3.6.0"
+coil = "3.1.0"
 commonsLang3Version = "3.8.1"
-glide = "4.12.0"
 gson = "2.8.5"
 junit = "4.13.2"
 junitJupiter = "5.10.0"
@@ -66,7 +65,6 @@ rxjava = "2.2.3"
 rxbinding = "2.1.1"
 rxbindingAppcompat = "3.0.0"
 slf4jApi = "1.7.25"
-soloader = "0.10.5"
 timber = "4.7.1"
 uiautomator = "2.2.0"
 workManager = "2.8.1"
@@ -125,10 +123,8 @@ dagger-android = { module = "com.google.dagger:dagger-android", version.ref = "d
 dagger-compiler = { module = "com.google.dagger:dagger-compiler", version.ref = "dagger" }
 
 # Image loading
-facebook-fresco = { module = "com.facebook.fresco:fresco", version.ref = "frescoVersion" }
-facebook-fresco-middleware = { module = "com.facebook.fresco:middleware", version.ref = "frescoVersion" }
-glide-compiler = { module = "com.github.bumptech.glide:compiler", version.ref = "glide" }
-glide = { module = "com.github.bumptech.glide:glide", version.ref = "glide" }
+coil = { module = "io.coil-kt.coil3:coil", version.ref = "coil" }
+coil-network-okhttp = { module = "io.coil-kt.coil3:coil-network-okhttp", version.ref = "coil" }
 kotlinx-coroutines-rx2 = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-rx2", version.ref = "kotlinxCoroutinesRx2" }
 photoview = { module = "com.github.chrisbanes:PhotoView", version.ref = "photoviewVersion" }
 
@@ -152,7 +148,6 @@ junit-jupiter-api = { module = "org.junit.jupiter:junit-jupiter-api", version.re
 kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "coroutines" }
 livedata-testing-ktx = { module = "com.jraska.livedata:testing-ktx", version.ref = "livedataTesting" }
 robolectric = { module = "org.robolectric:robolectric", version.ref = "robolectric" }
-soloader = { module = "com.facebook.soloader:soloader", version.ref = "soloader" }
 
 # Mocking
 mockk = { module = "io.mockk:mockk", version.ref = "mockk" }

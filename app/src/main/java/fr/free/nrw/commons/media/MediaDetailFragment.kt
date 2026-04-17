@@ -1,12 +1,14 @@
 package fr.free.nrw.commons.media
 
+import android.R.attr.thumbnail
 import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.res.Configuration
-import android.graphics.drawable.Animatable
+import coil3.load
+import coil3.request.error
 import android.net.Uri
 import android.os.Bundle
 import android.text.Editable
@@ -64,12 +66,8 @@ import androidx.compose.ui.unit.sp
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import androidx.fragment.app.viewModels
-import com.facebook.drawee.backends.pipeline.Fresco
-import com.facebook.drawee.controller.BaseControllerListener
-import com.facebook.drawee.controller.ControllerListener
-import com.facebook.drawee.interfaces.DraweeController
-import com.facebook.imagepipeline.image.ImageInfo
-import com.facebook.imagepipeline.request.ImageRequest
+import coil3.request.placeholder
+import coil3.result
 import fr.free.nrw.commons.BuildConfig
 import fr.free.nrw.commons.CameraPosition
 import fr.free.nrw.commons.CommonsApplication
@@ -209,7 +207,8 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
      * However unlike categories depictions is multi-lingual
      * Ex: key: en value: monument
      */
-    private var imageInfoCache: ImageInfo? = null
+    private var cachedImageWidth: Int = 0
+    private var cachedImageHeight: Int = 0
     private var oldWidthOfImageView: Int = 0
     private var newWidthOfImageView: Int = 0
     private var heightVerifyingBoolean: Boolean = true // helps in maintaining aspect ratio
@@ -675,7 +674,7 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
     }
 
     /**
-     * The imageSpacer is Basically a transparent overlay for the SimpleDraweeView
+     * The imageSpacer is basically a transparent overlay for the ImageView
      * which holds the image to be displayed( moreover this image is out of
      * the scroll view )
      *
@@ -687,8 +686,8 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
      * @param scrollWidth the current width of the scrollView
      */
     private fun updateAspectRatio(scrollWidth: Int) {
-        if (imageInfoCache != null) {
-            var finalHeight: Int = (scrollWidth * imageInfoCache!!.height) / imageInfoCache!!.width
+        if (cachedImageWidth > 0 && cachedImageHeight > 0) {
+            var finalHeight: Int = (scrollWidth * cachedImageHeight) / cachedImageWidth
             val params: ViewGroup.LayoutParams = binding.mediaDetailImageView.layoutParams
             val spacerParams: ViewGroup.LayoutParams =
                 binding.mediaDetailImageViewSpacer.layoutParams
@@ -709,27 +708,11 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
         }
     }
 
-    private val aspectRatioListener: ControllerListener<ImageInfo?> =
-        object : BaseControllerListener<ImageInfo?>() {
-            override fun onIntermediateImageSet(id: String, imageInfo: ImageInfo?) {
-                imageInfoCache = imageInfo
-                updateAspectRatio(binding.mediaDetailScrollView.width)
-            }
-
-            override fun onFinalImageSet(
-                id: String,
-                imageInfo: ImageInfo?,
-                animatable: Animatable?
-            ) {
-                imageInfoCache = imageInfo
-                updateAspectRatio(binding.mediaDetailScrollView.width)
-            }
-        }
-
     /**
-     * Uses two image sources.
-     * - low resolution thumbnail is shown initially
-     * - when the high resolution image is available, it replaces the low resolution image
+     * Loads the media image into the detail ImageView.
+     *
+     * Mirrors the original Fresco behaviour: show a spinner while loading,
+     * prefer the full-resolution URL, fall back to the thumbnail URL.
      */
     private fun setupImageView() {
         val imageBackgroundColor: Int = imageBackgroundColor
@@ -737,17 +720,32 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
             binding.mediaDetailImageView.setBackgroundColor(imageBackgroundColor)
         }
 
-        binding.mediaDetailImageView.hierarchy.setPlaceholderImage(R.drawable.image_placeholder)
-        binding.mediaDetailImageView.hierarchy.setFailureImage(R.drawable.image_placeholder)
+        binding.mediaDetailImageView.setImageDrawable(null)
+        binding.mediaDetailImageProgress.visibility = View.VISIBLE
 
-        val controller: DraweeController = Fresco.newDraweeControllerBuilder()
-            .setLowResImageRequest(ImageRequest.fromUri(if (media != null) media!!.thumbUrl else null))
-            .setRetainImageOnFailure(true)
-            .setImageRequest(ImageRequest.fromUri(if (media != null) media!!.imageUrl else null))
-            .setControllerListener(aspectRatioListener)
-            .setOldController(binding.mediaDetailImageView.controller)
-            .build()
-        binding.mediaDetailImageView.controller = controller
+        // TODO: load low-resolution image until the full-resolution image is loaded.
+        binding.mediaDetailImageView.load(media!!.imageUrl) {
+            error(R.drawable.image_placeholder)
+            listener(
+                onSuccess = { _, _ ->
+                    binding.mediaDetailImageProgress.visibility = View.GONE
+                    updateImageDimensions()
+                    updateAspectRatio(binding.mediaDetailScrollView.width)
+                },
+                onError = { _, _ ->
+                    binding.mediaDetailImageProgress.visibility = View.GONE
+                }
+            )
+        }
+    }
+
+    /** Reads the current drawable dimensions into the cached size fields. */
+    private fun updateImageDimensions() {
+        val d = binding.mediaDetailImageView.drawable
+        if (d != null) {
+            cachedImageWidth = d.intrinsicWidth
+            cachedImageHeight = d.intrinsicHeight
+        }
     }
 
     private fun updateToDoWarning() {
