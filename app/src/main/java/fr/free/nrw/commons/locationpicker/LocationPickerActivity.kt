@@ -405,9 +405,9 @@ class LocationPickerActivity : BaseActivity(), LocationPermissionCallback {
             )
                 ?.subscribeOn(Schedulers.io())
                 ?.observeOn(AndroidSchedulers.mainThread())
-                ?.subscribe { _ ->
+                ?.subscribe({ _ ->
                     Timber.d("Coordinates removed from the image")
-                }?.let { it1 ->
+                }, { Timber.e(it) })?.let { it1 ->
                     compositeDisposable.add(
                         it1
                     )
@@ -524,9 +524,9 @@ class LocationPickerActivity : BaseActivity(), LocationPermissionCallback {
                     accuracy
                 )?.subscribeOn(Schedulers.io())
                     ?.observeOn(AndroidSchedulers.mainThread())
-                    ?.subscribe { _ ->
+                    ?.subscribe({ _ ->
                         Timber.d("Coordinates updated")
-                    }?.let { it1 ->
+                    }, { Timber.e(it) })?.let { it1 ->
                         compositeDisposable.add(
                             it1
                         )
