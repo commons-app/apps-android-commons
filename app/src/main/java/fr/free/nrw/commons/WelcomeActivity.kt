@@ -1,53 +1,31 @@
 package fr.free.nrw.commons
 
-import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
-import fr.free.nrw.commons.databinding.ActivityWelcomeBinding
-import fr.free.nrw.commons.databinding.PopupForCopyrightBinding
 import fr.free.nrw.commons.quiz.QuizActivity
 import fr.free.nrw.commons.theme.BaseActivity
-import fr.free.nrw.commons.utils.applyEdgeToEdgeAllInsets
+import androidx.activity.compose.setContent
+import androidx.compose.material3.MaterialTheme
 import fr.free.nrw.commons.utils.ConfigUtils.isBetaFlavour
 
 class WelcomeActivity : BaseActivity() {
-    private var binding: ActivityWelcomeBinding? = null
     private var isQuiz = false
 
-    /**
-     * Initialises exiting fields and dependencies
-     *
-     * @param savedInstanceState WelcomeActivity bundled data
-     */
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityWelcomeBinding.inflate(layoutInflater)
-        applyEdgeToEdgeAllInsets(binding!!.welcomePager.rootView)
-        setContentView(binding!!.root)
-
         isQuiz = intent?.extras?.getBoolean("isQuiz", false) ?: false
 
-        // Enable skip button if beta flavor
-        if (isBetaFlavour) {
-            binding!!.finishTutorialButton.visibility = View.VISIBLE
-
-            val copyrightBinding = PopupForCopyrightBinding.inflate(layoutInflater)
-
-            val dialog = AlertDialog.Builder(this)
-                .setView(copyrightBinding.root)
-                .setCancelable(false)
-                .create()
-            dialog.show()
-
-            copyrightBinding.buttonOk.setOnClickListener { v: View? -> dialog.dismiss() }
+        setContent {
+            MaterialTheme {
+                WelcomeScreen(
+                    isBetaFlavour = isBetaFlavour,
+                    pageCount = 5,
+                    onSkipClicked = { finishTutorial() },
+                    onBackPressedAtStart = { handleBackAtStart() }
+                )
+            }
         }
-
-        val adapter = WelcomePagerAdapter()
-        binding!!.welcomePager.adapter = adapter
-        binding!!.welcomePagerIndicator.setViewPager(binding!!.welcomePager)
-        binding!!.finishTutorialButton.setOnClickListener { v: View? -> finishTutorial() }
     }
 
     public override fun onDestroy() {
@@ -57,15 +35,11 @@ class WelcomeActivity : BaseActivity() {
         super.onDestroy()
     }
 
-    override fun onBackPressed() {
-        if (binding!!.welcomePager.currentItem != 0) {
-            binding!!.welcomePager.setCurrentItem(binding!!.welcomePager.currentItem - 1, true)
+    private fun handleBackAtStart() {
+        if (defaultKvStore.getBoolean("firstrun", true)) {
+            finishAffinity()
         } else {
-            if (defaultKvStore.getBoolean("firstrun", true)) {
-                finishAffinity()
-            } else {
-                super.onBackPressed()
-            }
+            finish()
         }
     }
 
