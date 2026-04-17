@@ -43,7 +43,7 @@ class AboutActivityUnitTests {
     @Test
     @Throws(Exception::class)
     fun testLaunchFacebook() {
-        activity.launchFacebook(null)
+        activity.launchFacebook()
         val shadowActivity: ShadowActivity = Shadows.shadowOf(activity)
         val startedIntent = shadowActivity.nextStartedActivity
         Assert.assertEquals(startedIntent.action, "android.intent.action.VIEW")
@@ -54,43 +54,43 @@ class AboutActivityUnitTests {
     @Test
     @Throws(Exception::class)
     fun testLaunchGithub() {
-        activity.launchGithub(null)
+        activity.launchGithub()
     }
 
     @Test
     @Throws(Exception::class)
     fun testLaunchWebsite() {
-        activity.launchWebsite(null)
+        activity.launchWebsite()
     }
 
     @Test
     @Throws(Exception::class)
     fun testLaunchRatings() {
-        activity.launchRatings(null)
+        activity.launchRatings()
     }
 
     @Test
     @Throws(Exception::class)
     fun testLaunchCredits() {
-        activity.launchCredits(null)
+        activity.launchCredits()
     }
 
     @Test
     @Throws(Exception::class)
     fun testLaunchPrivacyPolicy() {
-        activity.launchPrivacyPolicy(null)
+        activity.launchPrivacyPolicy()
     }
 
     @Test
     @Throws(Exception::class)
     fun testLaunchUserGuide() {
-        activity.launchUserGuide(null)
+        activity.launchUserGuide()
     }
 
     @Test
     @Throws(Exception::class)
     fun testLaunchFrequentlyAskedQuestions() {
-        activity.launchFrequentlyAskedQuesions(null)
+        activity.launchFrequentlyAskedQuestions()
     }
 
     @Test
