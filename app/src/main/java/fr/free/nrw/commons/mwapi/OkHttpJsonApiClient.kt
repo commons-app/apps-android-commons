@@ -72,20 +72,21 @@ class OkHttpJsonApiClient @Inject constructor(
             .url(urlBuilder.toString())
             .build()
         return Observable.fromCallable({
-            val response: Response = okHttpClient.newCall(request).execute()
-            if (response.body != null && response.isSuccessful) {
-                val json: String = response.body!!.string()
-                Timber.d("Response for leaderboard is %s", json)
-                try {
-                    return@fromCallable gson.fromJson<LeaderboardResponse>(
-                        json,
-                        LeaderboardResponse::class.java
-                    )
-                } catch (e: Exception) {
-                    return@fromCallable LeaderboardResponse()
+            okHttpClient.newCall(request).execute().use { response ->
+                if (response.body != null && response.isSuccessful) {
+                    val json: String = response.body!!.string()
+                    Timber.d("Response for leaderboard is %s", json)
+                    try {
+                        return@fromCallable gson.fromJson<LeaderboardResponse>(
+                            json,
+                            LeaderboardResponse::class.java
+                        )
+                    } catch (e: Exception) {
+                        return@fromCallable LeaderboardResponse()
+                    }
                 }
+                LeaderboardResponse()
             }
-            LeaderboardResponse()
         })
     }
 
@@ -110,14 +111,15 @@ class OkHttpJsonApiClient @Inject constructor(
                     .url(urlBuilder.toString())
                     .build()
 
-                val response: Response = okHttpClient.newCall(request).execute()
-                if (response.body != null && response.isSuccessful) {
-                    val json: String = response.body!!.string()
-                    gson.fromJson<FileUsagesResponse>(
-                        json,
-                        FileUsagesResponse::class.java
-                    )
-                } else null
+                okHttpClient.newCall(request).execute().use { response ->
+                    if (response.body != null && response.isSuccessful) {
+                        val json: String = response.body!!.string()
+                        gson.fromJson<FileUsagesResponse>(
+                            json,
+                            FileUsagesResponse::class.java
+                        )
+                    } else null
+                }
             } catch (e: Exception) {
                 Timber.e(e)
                 null
@@ -147,15 +149,16 @@ class OkHttpJsonApiClient @Inject constructor(
                     .url(urlBuilder.toString())
                     .build()
 
-                val response: Response = okHttpClient.newCall(request).execute()
-                if (response.body != null && response.isSuccessful) {
-                    val json: String = response.body!!.string()
+                okHttpClient.newCall(request).execute().use { response ->
+                    if (response.body != null && response.isSuccessful) {
+                        val json: String = response.body!!.string()
 
-                    gson.fromJson<GlobalFileUsagesResponse>(
-                        json,
-                        GlobalFileUsagesResponse::class.java
-                    )
-                } else null
+                        gson.fromJson<GlobalFileUsagesResponse>(
+                            json,
+                            GlobalFileUsagesResponse::class.java
+                        )
+                    } else null
+                }
             } catch (e: Exception) {
                 Timber.e(e)
                 null
@@ -175,19 +178,20 @@ class OkHttpJsonApiClient @Inject constructor(
             val request: Request = Request.Builder()
                 .url(urlBuilder.toString())
                 .build()
-            val response: Response = okHttpClient.newCall(request).execute()
-            if (response.body != null && response.isSuccessful) {
-                val json: String = response.body!!.string()
-                try {
-                    return@fromCallable gson.fromJson<UpdateAvatarResponse>(
-                        json,
-                        UpdateAvatarResponse::class.java
-                    )
-                } catch (e: Exception) {
-                    return@fromCallable UpdateAvatarResponse()
+            okHttpClient.newCall(request).execute().use { response ->
+                if (response.body != null && response.isSuccessful) {
+                    val json: String = response.body!!.string()
+                    try {
+                        return@fromCallable gson.fromJson<UpdateAvatarResponse>(
+                            json,
+                            UpdateAvatarResponse::class.java
+                        )
+                    } catch (e: Exception) {
+                        return@fromCallable UpdateAvatarResponse()
+                    }
                 }
+                null
             }
-            null
         })
     }
 
@@ -205,21 +209,22 @@ class OkHttpJsonApiClient @Inject constructor(
             .build()
 
         return Single.fromCallable<Int>({
-            val response: Response = okHttpClient.newCall(request).execute()
-            if (response != null && response.isSuccessful) {
-                val responseBody = response.body
-                if (null != responseBody) {
-                    val responseBodyString = responseBody.string().trim { it <= ' ' }
-                    if (!TextUtils.isEmpty(responseBodyString)) {
-                        try {
-                            return@fromCallable responseBodyString.toInt()
-                        } catch (e: NumberFormatException) {
-                            Timber.e(e)
+            okHttpClient.newCall(request).execute().use { response ->
+                if (response != null && response.isSuccessful) {
+                    val responseBody = response.body
+                    if (null != responseBody) {
+                        val responseBodyString = responseBody.string().trim { it <= ' ' }
+                        if (!TextUtils.isEmpty(responseBodyString)) {
+                            try {
+                                return@fromCallable responseBodyString.toInt()
+                            } catch (e: NumberFormatException) {
+                                Timber.e(e)
+                            }
                         }
                     }
                 }
+                0
             }
-            0
         })
     }
 
@@ -237,21 +242,21 @@ class OkHttpJsonApiClient @Inject constructor(
             .build()
 
         return Single.fromCallable<Int>({
-            val response: Response = okHttpClient.newCall(request).execute()
-            if (response != null && response.isSuccessful && response.body != null) {
-                var json: String = response.body!!.string()
-                // Extract JSON from response
-                json = json.substring(json.indexOf('{'))
-                val countResponse = gson
-                    .fromJson(
-                        json,
-                        GetWikidataEditCountResponse::class.java
-                    )
-                if (null != countResponse) {
-                    return@fromCallable countResponse.wikidataEditCount
+            okHttpClient.newCall(request).execute().use { response ->
+                if (response != null && response.isSuccessful && response.body != null) {
+                    var json: String = response.body!!.string()
+                    json = json.substring(json.indexOf('{'))
+                    val countResponse = gson
+                        .fromJson(
+                            json,
+                            GetWikidataEditCountResponse::class.java
+                        )
+                    if (null != countResponse) {
+                        return@fromCallable countResponse.wikidataEditCount
+                    }
                 }
+                0
             }
-            0
         })
     }
 
@@ -269,23 +274,23 @@ class OkHttpJsonApiClient @Inject constructor(
             val request: Request = Request.Builder()
                 .url(urlBuilder.toString())
                 .build()
-            val response: Response = okHttpClient.newCall(request).execute()
-            if (response.body != null && response.isSuccessful) {
-                var json: String = response.body!!.string()
-                // Extract JSON from response
-                json = json.substring(json.indexOf('{'))
-                Timber.d("Response for achievements is %s", json)
-                try {
-                    return@fromCallable gson.fromJson<FeedbackResponse>(
-                        json,
-                        FeedbackResponse::class.java
-                    )
-                } catch (e: Exception) {
-                    e.printStackTrace()
-                    return@fromCallable FeedbackResponse(0, 0, 0, FeaturedImages(0, 0), 0, "")
+            okHttpClient.newCall(request).execute().use { response ->
+                if (response.body != null && response.isSuccessful) {
+                    var json: String = response.body!!.string()
+                    json = json.substring(json.indexOf('{'))
+                    Timber.d("Response for achievements is %s", json)
+                    try {
+                        return@fromCallable gson.fromJson<FeedbackResponse>(
+                            json,
+                            FeedbackResponse::class.java
+                        )
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                        return@fromCallable FeedbackResponse(0, 0, 0, FeaturedImages(0, 0), 0, "")
+                    }
                 }
+                null
             }
-            null
         })
     }
 
@@ -317,20 +322,21 @@ class OkHttpJsonApiClient @Inject constructor(
             .url(urlBuilder.build())
             .build()
 
-        val response = okHttpClient.newCall(request).execute()
-        if (response.body != null && response.isSuccessful) {
-            val json = response.body!!.string()
-            val nearbyResponse = gson.fromJson(json, NearbyResponse::class.java)
-            val bindings = nearbyResponse.results.bindings
-            val places: MutableList<Place> = ArrayList()
-            for (item in bindings) {
-                val placeFromNearbyItem = Place.from(item)
-                placeFromNearbyItem.isMonument = false
-                places.add(placeFromNearbyItem)
+        okHttpClient.newCall(request).execute().use { response ->
+            if (response.body != null && response.isSuccessful) {
+                val json = response.body!!.string()
+                val nearbyResponse = gson.fromJson(json, NearbyResponse::class.java)
+                val bindings = nearbyResponse.results.bindings
+                val places: MutableList<Place> = ArrayList()
+                for (item in bindings) {
+                    val placeFromNearbyItem = Place.from(item)
+                    placeFromNearbyItem.isMonument = false
+                    places.add(placeFromNearbyItem)
+                }
+                return places
             }
-            return places
+            throw Exception(response.message)
         }
-        throw Exception(response.message)
     }
 
     /**
@@ -379,14 +385,15 @@ class OkHttpJsonApiClient @Inject constructor(
             .url(urlBuilder.build())
             .build()
 
-        val response = okHttpClient.newCall(request).execute()
-        if (response.body != null && response.isSuccessful) {
-            val json = response.body!!.string()
-            return JsonParser.parseString(json).getAsJsonObject().getAsJsonObject("results")
-                .getAsJsonArray("bindings").get(0).getAsJsonObject().getAsJsonObject("itemCount")
-                .get("value").asInt
+        okHttpClient.newCall(request).execute().use { response ->
+            if (response.body != null && response.isSuccessful) {
+                val json = response.body!!.string()
+                return JsonParser.parseString(json).getAsJsonObject().getAsJsonObject("results")
+                    .getAsJsonArray("bindings").get(0).getAsJsonObject().getAsJsonObject("itemCount")
+                    .get("value").asInt
+            }
+            throw Exception(response.message)
         }
-        throw Exception(response.message)
     }
 
     @Throws(Exception::class)
@@ -463,24 +470,25 @@ class OkHttpJsonApiClient @Inject constructor(
             .url(urlBuilder.build())
             .build()
 
-        val response = okHttpClient.newCall(request).execute()
-        if (response.body != null && response.isSuccessful) {
-            val json = response.body!!.string()
-            val nearbyResponse = gson.fromJson(json, NearbyResponse::class.java)
-            val bindings = nearbyResponse.results.bindings
-            val places: MutableList<Place> = ArrayList()
-            for (item in bindings) {
-                val placeFromNearbyItem = Place.from(item)
-                if (shouldQueryForMonuments && item.getMonument() != null) {
-                    placeFromNearbyItem.isMonument = true
-                } else {
-                    placeFromNearbyItem.isMonument = false
+        okHttpClient.newCall(request).execute().use { response ->
+            if (response.body != null && response.isSuccessful) {
+                val json = response.body!!.string()
+                val nearbyResponse = gson.fromJson(json, NearbyResponse::class.java)
+                val bindings = nearbyResponse.results.bindings
+                val places: MutableList<Place> = ArrayList()
+                for (item in bindings) {
+                    val placeFromNearbyItem = Place.from(item)
+                    if (shouldQueryForMonuments && item.getMonument() != null) {
+                        placeFromNearbyItem.isMonument = true
+                    } else {
+                        placeFromNearbyItem.isMonument = false
+                    }
+                    places.add(placeFromNearbyItem)
                 }
-                places.add(placeFromNearbyItem)
+                return places
             }
-            return places
+            throw Exception(response.message)
         }
-        throw Exception(response.message)
     }
 
     @Throws(IOException::class)
@@ -647,15 +655,16 @@ ${"wd:" + place.wikiDataEntityId}"""
     fun getCampaigns(): Single<CampaignResponseDTO> {
         return Single.fromCallable<CampaignResponseDTO?>({
             val request: Request = Request.Builder().url(campaignsUrl).build()
-            val response: Response = okHttpClient.newCall(request).execute()
-            if (response.body != null && response.isSuccessful) {
-                val json: String = response.body!!.string()
-                return@fromCallable gson.fromJson<CampaignResponseDTO>(
-                    json,
-                    CampaignResponseDTO::class.java
-                )
+            okHttpClient.newCall(request).execute().use { response ->
+                if (response.body != null && response.isSuccessful) {
+                    val json: String = response.body!!.string()
+                    return@fromCallable gson.fromJson<CampaignResponseDTO>(
+                        json,
+                        CampaignResponseDTO::class.java
+                    )
+                }
+                null
             }
-            null
         })
     }
 
@@ -705,13 +714,14 @@ ${"wd:" + place.wikiDataEntityId}"""
 
         val request: Request = Request.Builder().url(urlBuilder.build()).build()
 
-        val response = okHttpClient.newCall(request).execute()
-        if (response.body != null && response.isSuccessful) {
-            val json = response.body!!.string()
-            val item = gson.fromJson(json, ItemsClass::class.java)
-            return item.results.bindings
-        } else {
-            return null
+        okHttpClient.newCall(request).execute().use { response ->
+            if (response.body != null && response.isSuccessful) {
+                val json = response.body!!.string()
+                val item = gson.fromJson(json, ItemsClass::class.java)
+                return item.results.bindings
+            } else {
+                return null
+            }
         }
     }
 }
