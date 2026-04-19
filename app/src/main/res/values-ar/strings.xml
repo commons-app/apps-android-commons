@@ -308,6 +308,7 @@
   <string name="upload_problem_image_dark">الصورة مظلمة للغاية.</string>
   <string name="upload_problem_image_blurry">الصورة ضبابية.</string>
   <string name="upload_problem_image_duplicate">الصورة موجودة بالفعل في كومنز.</string>
+  <string name="upload_problem_image_format_unsupported">صورتك بتنسيق غير مدعوم من قبل خادم Commons، لذلك قام التطبيق بتحويلها إلى JPG.</string>
   <string name="upload_problem_different_geolocation">تم التقاط هذه الصورة في موقع مختلف.</string>
   <string name="upload_problem_fbmd">من فضلك فقط ارفع الصور التي التقطها بنفسك. لا ترفع الصور التي وجدتها على حسابات الآخرين في فيسبوك.</string>
   <string name="upload_problem_do_you_continue">هل ما زلت تريد رفع هذه الصورة؟</string>
@@ -407,6 +408,7 @@
   <string name="quiz_screenshot_question">هل هذه الصورة موافقة للرفع؟</string>
   <string name="share_app_title">شارك التطبيق</string>
   <string name="rotate">تدوير</string>
+  <string name="crop">قص</string>
   <string name="error_fetching_nearby_places">تعذر تحميل الأماكن القريبة</string>
   <string name="no_pictures_in_this_area">لا توجد صور في هذه المنطقة</string>
   <string name="no_nearby_places_around">لا توجد أماكن قريبة بالجوار</string>
@@ -474,6 +476,9 @@
   <string name="no_categories_selected_warning_desc">نادرًا ما تكون الصور الخالية من التصنيفات قابلة للاستخدام، هل أنت متأكد أنك تريد الإرسال دون تحديد التصنيفات؟</string>
   <string name="no_depictions_selected">لم يتم تحديد الصور</string>
   <string name="no_depictions_selected_warning_desc">يتم العثور على الصور التي تحتوي على صور بسهولة أكبر و يكونون أكثر استعمالا</string>
+  <string name="depictions_choose_from_map">اختر من الخريطة</string>
+  <string name="depictions_map_confirm">تأكيد</string>
+  <string name="depictions_map_no_photo_location">الصورة لا تحتوي على موقع، وتظهر موقعك الحالي</string>
   <string name="back_button_warning">إلغاء الرفع</string>
   <string name="back_button_warning_desc">سيؤدي استخدام زر الرجوع إلى إلغاء هذا التحميل وستفقد ما سبق تحميله</string>
   <string name="back_button_continue">مواصلة التحميل</string>
@@ -871,6 +876,7 @@
   <string name="pending">قيد الانتظار</string>
   <string name="failed">فشل</string>
   <string name="could_not_load_place_data">تعذر تحميل بيانات المكان</string>
+  <string name="warning_for_no_option_selected">اختر أحد الخيارات للإجابة على السؤال</string>
   <string name="custom_selector_delete_folder">حذف المجلد</string>
   <string name="custom_selector_confirm_deletion_title">تأكيد الحذف</string>
   <string name="custom_selector_confirm_deletion_message">هل أنت متأكد أنك تريد حذف المجلد %1$s الذي يحتوي على %2$d عنصرا؟</string>
@@ -901,4 +907,11 @@
   <string name="image_tag_line_created_by_and_uploaded_by">تم إنشاؤه بواسطة %1$s وتم تحميله بواسطة %2$s</string>
   <string name="nominated_for_deletion_btn">مرشح للحذف</string>
   <string name="custom_selector_max_image_limit_reached">يمكنك فقط تحديد الحد الأقصى من الصور %d.</string>
+  <string name="edit_unsupported_format_explanation">تتوفر خاصية التحرير داخل التطبيق لملفات JPEG فقط. لتحرير الصيغ الأخرى، يُرجى استخدام أداة خارجية.</string>
+  <string name="license_cc0_description">لا توجد حقوق ملكية فكرية. أنت تتنازل عن جميع الحقوق، لذا يمكن لأي شخص استخدام هذا العمل بأي شكل من الأشكال.</string>
+  <string name="license_cc_by_description">الإسناد. يحق للآخرين المشاركة والتعديل طالما أنهم ينسبون الفضل إليك.</string>
+  <string name="license_cc_by_sa_description">نسب العمل إليك - المشاركة بالمثل. يمكن للآخرين المشاركة والتعديل، ولكن يجب عليهم استخدام نفس الترخيص ونسب العمل إليك.</string>
+  <string name="license_cc0_long_description">تسمح هذه الرخصة للمستخدمين بإعادة توزيع المادة وإعادة مزجها وتعديلها والبناء عليها بأي وسيلة أو شكل، دون أي شروط.</string>
+  <string name="license_cc_by_long_description">تسمح هذه الرخصة للمستخدمين بإعادة توزيع المادة وإعادة مزجها وتكييفها والبناء عليها بأي وسيلة أو شكل، حتى للأغراض التجارية، طالما يتم إسناد الفضل إلى المبدع.</string>
+  <string name="license_cc_by_sa_long_description">تسمح هذه الرخصة للمستخدمين بإعادة توزيع المادة وإعادة مزجها وتكييفها والبناء عليها بأي وسيلة أو شكل، حتى لأغراض تجارية، طالما يتم إسناد العمل إلى المبدع ويتم ترخيص العمل الجديد بموجب شروط مماثلة.</string>
 </resources>

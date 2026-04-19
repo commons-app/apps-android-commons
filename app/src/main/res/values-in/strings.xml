@@ -4,8 +4,10 @@
 * Akmaie Ajam
 * Arifin.wijaya
 * Bagas Chrisara
+* Bayahiu
 * Birusian
 * Boesenbergia
+* Budhiastawa
 * DARMAS BUDI SANTOSO
 * Daud I.F. Argana
 * Fafau06
@@ -45,6 +47,8 @@
   <string name="show_captions_description">Deskripsi</string>
   <string name="nearby_row_image">Gambar</string>
   <string name="nearby_all">Semua</string>
+  <string name="nearby_filter_toggle">Gulingkan</string>
+  <string name="nearby_filter_search">Layar Pencarian</string>
   <string name="appwidget_img">Gambar hari ini</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="other">mengunggah %1$d berkas</item>
@@ -90,6 +94,7 @@
   <string name="upload_failed">Berkas tidak ditemukan. Silakan coba berkas lain.</string>
   <string name="retry_limit_reached">Batas pencobaan ulang maksimum telah tercapai! Harap batalkan pengunggahan dan coba lagi</string>
   <string name="unrestricted_battery_mode">Matikan pengoptimalan baterai?</string>
+  <string name="suggest_unrestricted_mode">Mengunggah lebih dari 3 gambar akan lebih baik ketika fitur pengoptimalan baterai dimatikan. Harap matikan fitur pengoptimalan baterai untuk aplikasi Commons dari pengaturan agar pengalaman penggunggahan lebih lancar.\n\nLangkah-langkah untuk mematikan pengoptimalan baterai:\n\nLangkah 1: Ketuk tombol \'Pengaturan\' di bawah.\n\nLangkah 2: Ubah dari \'Tidak dioptimalkan\' menjadi \'Semua aplikasi\'.\n\nLangkah 3: Cari \"Commons\" atau \"fr.free.nrw.commons\".\n\nLangkah 4: Ketuk dan pilih \'Jangan dioptimalkan\'.\n\nLangkah 5: Tekan \'Selesai\'.</string>
   <string name="authentication_failed">Autentikasi gagal. Silakan masuk kembali.</string>
   <string name="uploading_started">Mulai mengunggah!</string>
   <string name="uploading_queued">Unggahan dalam antrian (mode sambungan terbatas diaktifkan)</string>
@@ -132,6 +137,7 @@
   <string name="categories_search_text_hint">Telusuri kategori</string>
   <string name="depicts_search_text_hint">Cari butir yang menggambarkan media Anda (gunung, Taj Mahal, dll.)</string>
   <string name="menu_save_categories">Simpan</string>
+  <string name="menu_overflow_desc">Menu luapan</string>
   <string name="refresh_button">Perbaharui</string>
   <string name="display_list_button">Daftar</string>
   <string name="contributions_subtitle_zero">(Belum ada unggahan)</string>
@@ -162,6 +168,8 @@
   <string name="menu_retry_upload">Coba lagi</string>
   <string name="menu_cancel_upload">Batal</string>
   <string name="language_search_type_language_name">Ketik Nama Bahasa</string>
+  <string name="language_search_recent_searches">Pencarian Terbaru</string>
+  <string name="language_search_all_languages">Semua Bahasa</string>
   <string name="media_upload_policy">Dengan mengirim foto ini, saya menyatakan bahwa ini adalah karya saya sendiri yang tidak mengandung bahan atau foto narsis berhak cipta, dan tidak menyalahi &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;kebijakan Wikimedia Commons&lt;/a&gt;.</string>
   <string name="menu_download">Unduh</string>
   <string name="preference_license">Lisensi standar</string>
@@ -209,6 +217,8 @@
   <string name="read_storage_permission_rationale">Perlu Izin: Membaca penyimpanan eksternal. Tanpa izin ini aplikasi tidak dapat mengakses galeri Anda.</string>
   <string name="write_storage_permission_rationale">Perlu Izin: Menulis penyimpanan eksternal. Tanpa hal ini aplikasi tidak dapat mengakses kamera/galeri.</string>
   <string name="location_permission_title">Meminta Izin Lokasi</string>
+  <string name="in_app_camera_location_permission_title">Rekam lokasi untuk tangkapan layar dalam aplikasi.</string>
+  <string name="in_app_camera_location_switch_pref_summary">Aktifkan opsi ini untuk merekam lokasi dengan foto dalam aplikasi jika kamera perangkat tidak merekamnya.</string>
   <string name="ok">OKE</string>
   <string name="warning">Peringatan</string>
   <string name="duplicate_file_name">Ditemukan Nama Berkas Duplikat</string>
@@ -221,6 +231,7 @@
   <string name="media_detail_description">Deskripsi</string>
   <string name="media_detail_discussion">Pembicaraan</string>
   <string name="media_detail_author">Pembuat</string>
+  <string name="media_detail_uploader">Pengunggah</string>
   <string name="media_detail_uploaded_date">Tanggal unggah</string>
   <string name="media_detail_license">Lisensi</string>
   <string name="media_detail_coordinates">Koordinat</string>
@@ -263,6 +274,7 @@
   <string name="upload_problem_image_dark">Gambar terlalu gelap.</string>
   <string name="upload_problem_image_blurry">Gambar buram.</string>
   <string name="upload_problem_image_duplicate">Gambar sudah ada di Commons.</string>
+  <string name="upload_problem_image_format_unsupported">Gambar anda berada dalam format yang tidak didukung oleh peladen Commons, jadi aplikasi mengonversinya ke JPG.</string>
   <string name="upload_problem_different_geolocation">Gambar diambil di lokasi berbeda.</string>
   <string name="upload_problem_fbmd">Tolong hanya unggah gambar-gambar yang Anda ambil sendiri. Jangan unggah gambar yang Anda temukan di akun Facebook orang lain.</string>
   <string name="upload_problem_do_you_continue">Apakah Anda masih ingin mengunggah gambar ini?</string>
@@ -362,6 +374,7 @@
   <string name="quiz_screenshot_question">Apakah tangkapan layar ini OKE untuk diunggah?</string>
   <string name="share_app_title">Bagikan Aplikasi</string>
   <string name="rotate">Putar</string>
+  <string name="crop">Pangkas</string>
   <string name="error_fetching_nearby_places">Tidak dapat memuat tempat-tempat terdekat.</string>
   <string name="no_pictures_in_this_area">Tidak ada gambar di area ini</string>
   <string name="no_nearby_places_around">Tidak ditemukan tempat yang dekat</string>
@@ -375,10 +388,12 @@
   <string name="delete">Hapus</string>
   <string name="Achievements">Pencapaian</string>
   <string name="Profile">Profil</string>
+  <string name="badges">Lencana</string>
   <string name="statistics_thanks">Ucapan terima kasih diterima</string>
   <string name="statistics_featured">Gambar Pilihan</string>
   <string name="statistics_wikidata_edits">Gambar via \"Tempat di Sekitar\"</string>
   <string name="level">Tingkat %1$d</string>
+  <string name="profile_withLevel">%1$s (Level %2$s )</string>
   <string name="images_uploaded">Gambar Diunggah</string>
   <string name="image_reverts">Gambar Tidak Dikembalikan</string>
   <string name="images_used_by_wiki">Gambar Digunakan</string>
@@ -427,6 +442,9 @@
   <string name="no_categories_selected_warning_desc">Gambar tanpa kategori jarang dapat digunakan. Apakah Anda yakin ingin mengirim tanpa memilih kategori?</string>
   <string name="no_depictions_selected">Tidak Ada Penggambaran yang Dipilih</string>
   <string name="no_depictions_selected_warning_desc">Gambar yang punya penggambaran lebih mudah ditemukan dan kemungkinan lebih banyak digunakan. Apakah Anda yakin Anda ingin melanjurkan tanpa memilih penggambaran?</string>
+  <string name="depictions_choose_from_map">Pilih dari peta</string>
+  <string name="depictions_map_confirm">Konfirmasikan</string>
+  <string name="depictions_map_no_photo_location">Foto tidak ada lokasi, hanya menampilkan lokasi Anda saat ini.</string>
   <string name="back_button_warning">Batalkan Unggah</string>
   <string name="back_button_warning_desc">Menggunakan tombol kembali akan membatalkan unggahan ini dan Anda akan kehilangan kemajuan Anda.</string>
   <string name="back_button_continue">Lanjutkan Unggah</string>
@@ -443,8 +461,12 @@
   <string name="ends_on">Berakhir pada:</string>
   <string name="display_campaigns">Sinahang penyobyahan</string>
   <string name="display_campaigns_explanation">Lihat kampanye yang sedang berlangsung</string>
+  <string name="show_deletion_button">Tampilkan tombol hapus</string>
+  <string name="show_deletion_button_explanation">Aktifkan tombol \"Hapus Folder\" di pemilih kustom</string>
+  <string name="in_app_camera_location_access_explanation">Izinkan aplikasi untuk mengambil lokasi jika kamera tidak merekamnya. Beberapa jenis kamera perangkat tidak merekam lokasi. Dalam kasus seperti itu, mengizinkan aplikasi untuk mengambil dan melampirkan lokasi akan membuat kontribusi Anda lebih bermanfaat. Anda dapat mengubah pengaturan ini kapan saja dari Pengaturan.</string>
   <string name="option_allow">Izinkan</string>
   <string name="option_dismiss">Tutup</string>
+  <string name="in_app_camera_needs_location">Harap aktifkan akses lokasi dari Pengaturan dan coba lagi. \n\nCatatan: Unggahan mungkin tidak memiliki lokasi jika aplikasi tidak dapat mengambil lokasi dari perangkat dalam interval waktu singkat.</string>
   <string name="nearby_campaign_dismiss_message">Anda tidak akan melihat kampanye ini lagi. Namun, Anda bisa mengaktifkan kembali pemberitahuan ini di Pengaturan jika diinginkan.</string>
   <string name="this_function_needs_network_connection">Fungsi ini memerlukan hubungan jaringan. Tolong periksa pengaturan jaringan Anda.</string>
   <string name="error_processing_image">Terjadi masalah saat memproses gambar. Harap mengulang lagi.</string>
@@ -765,4 +787,5 @@
   <string name="uploads">Unggahan</string>
   <string name="pending">Menunggu</string>
   <string name="failed">Gagal</string>
+  <string name="edit_unsupported_format_explanation">Pengeditan dalam aplikasi hanya tersedia untuk file JPEG. Untuk mengedit format lain, silakan gunakan alat pihak ketiga.</string>
 </resources>

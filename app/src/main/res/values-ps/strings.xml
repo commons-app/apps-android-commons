@@ -125,10 +125,10 @@
   <string name="menu_overflow_desc">څنگزنه خوښنۍ</string>
   <string name="refresh_button">بياتازه کول</string>
   <string name="display_list_button">لړليک</string>
-  <string name="contributions_subtitle_zero">(تراوسه هيڅ راپورته کېدنه نشته)</string>
-  <string name="categories_not_found">%1$s سره ورته هيڅ وېشنيزې ونه موندل شوې</string>
-  <string name="depictions_not_found">%1$s سره هيڅ ورته ويکي‌اومتوک توکي ونه موندل شوه</string>
-  <string name="no_child_classes">%1$s هيڅ کوشنۍ ټولگې نه لري</string>
+  <string name="contributions_subtitle_zero">(تراوسه هېڅ راپورته کېدنه نشته)</string>
+  <string name="categories_not_found">%1$s سره ورته هېڅ وېشنيزې ونه موندل شوې</string>
+  <string name="depictions_not_found">%1$s سره هېڅ ورته ويکي‌اومتوک توکي ونه موندل شوه</string>
+  <string name="no_child_classes">%1$s هېڅ کوشنۍ ټولگې نه لري</string>
   <string name="no_parent_classes">%1$s مور ټولگې نه لري</string>
   <string name="categories_skip_explanation">ويکي‌اوتوک خونديځ کې د خپلو انځورونو موندلو لپاره وېشنيزې ورگډې کړئ.\nوېشنيزو ورگډولو لپاره ټاپل پيل کړئ.</string>
   <string name="categories_activity_title">وېشنيزې</string>
@@ -144,7 +144,7 @@
   <string name="about_privacy_policy">د پټنتيا تگلار</string>
   <string name="title_activity_about">په اړه</string>
   <string name="menu_feedback">غبرگون لېږنه (برېښليک له لارې)</string>
-  <string name="no_email_client">هيڅ برېښليک سرچينه نه ده ځای پرځای شوې</string>
+  <string name="no_email_client">هېڅ برېښليک سرچينه نه ده ځای پرځای شوې</string>
   <string name="provider_categories">وروستۍ کارېدلې وېشنيزې</string>
   <string name="waiting_first_sync">د لومړۍ همغږۍ په تمه...</string>
   <string name="no_uploads_yet">تاسې تر اوسه کوم انځور نه دی پورته کړی.</string>
@@ -186,7 +186,7 @@
   <string name="detail_panel_cats_label">وېشنيزې</string>
   <string name="detail_panel_cats_loading">رابرسېرېږي...</string>
   <string name="detail_panel_cats_none">هېڅ هم نه دی ټاکل شوی</string>
-  <string name="detail_caption_empty">هيڅ نيونگ نشته</string>
+  <string name="detail_caption_empty">هېڅ نيونگ نشته</string>
   <string name="detail_description_empty">څرگنداوی نشته</string>
   <string name="detail_discussion_empty">هېڅ شننه نشته</string>
   <string name="detail_license_empty">ناجوت منښتليک</string>
@@ -239,7 +239,9 @@
   <string name="nearby_info_menu_wikipedia_article">ويکيپېډيا ليکنه</string>
   <string name="upload_problem_image_dark">انځور ډېر تياره دی.</string>
   <string name="upload_problem_image_blurry">انځور ډېر جړ دی.</string>
+  <string name="upload_problem_image_duplicate">انځور لادمخه خونديځ کې دی.</string>
   <string name="upload_connection_error_alert_title">نښلېدا تېروتنه</string>
+  <string name="upload_connection_error_alert_detail">د راپورته کولو بهير ته کارنده اينټرنېټ لاسرسي ته اړتيا ده. مهرباني وکړئ خپل د شبکې د نښلېدا سم‌کتنه وکړئ.</string>
   <string name="upload_problem_image">په انځور کې موندل شوې ستونزې</string>
   <string name="preferences_uploads">راپورته‌کېدنې</string>
   <string name="send_log_file">يادښت دوتنه لېږل</string>
@@ -279,7 +281,7 @@
   <string name="showcase_view_needs_photo">داځای انځور ته اړتيا لري.</string>
   <string name="showcase_view_has_photo">دا ځای لادمخه انځور لري.</string>
   <string name="showcase_view_no_longer_exists">دا ځای نور شتون نه لري.</string>
-  <string name="no_images_found">هيڅ انځور و‌نه موندل شو!</string>
+  <string name="no_images_found">هېڅ انځور و‌نه موندل شو!</string>
   <string name="error_loading_images">د انځورونو د راپورته کولو پرمهال يوه تېروتنه رامنځته شوه.</string>
   <string name="image_uploaded_by">راپورته کوونکی: %1$s</string>
   <string name="block_notification_title">بنديز لگېدلی</string>
@@ -358,6 +360,7 @@
   <string name="option_allow">پرېښول</string>
   <string name="option_dismiss">تړل</string>
   <string name="open_document_photo_picker_title">د لاسوند پربنسټ انځور راخيستونکی کارول</string>
+  <string name="this_function_needs_network_connection">دا کړنچار د شبکې نښلېدا ته اړتيا لري. مهرباني وکړئ خپل د نښلېدا اوڼنې وگورئ.</string>
   <string name="error_processing_image">د انځور پروسس‌کولو پرمهال تېروتنه رامنځته شوه. مهرباني وکړئ بيا هڅه وکړئ!</string>
   <string name="getting_edit_token">د سمون لپاره نښه ترلاسه کول</string>
   <string name="check_category_adding_template">د وېشنيزې سم‌کتنې لپاره کينډۍ ورگډول</string>
@@ -379,6 +382,8 @@
   <string name="review_spam">ايا دا د منلو وړ دي؟</string>
   <string name="review_thanks">ايا تاسو غواړئ له ونډه‌وال نه مننه وکړئ؟</string>
   <string name="review_spam_explanation">که دا انځور ټولگټی نه وي؛ نو ړنگېدو ته د نوماندولو لپاره يې په نه کليک وکړئ.</string>
+  <string name="review_no_category">او، دا لا ډلبندي شوې نه ده!</string>
+  <string name="review_category_explanation">دا انځور د %1$s وېشنيزو لاندې دی.</string>
   <string name="review_thanks_yes_button_text">بل انځور</string>
   <string name="review_thanks_no_button_text">هو، ولې نه</string>
   <string name="no_image">هېڅ انځورونه کارېدلې نه دي</string>
