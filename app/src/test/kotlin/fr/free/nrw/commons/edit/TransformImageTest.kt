@@ -2,8 +2,11 @@ package fr.free.nrw.commons.edit
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.mediautil.image.jpeg.LLJTran
+import androidx.exifinterface.media.ExifInterface
 import org.junit.Assert.assertArrayEquals
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNotNull
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -88,6 +91,37 @@ class TransformImageTest {
             finalBytes
         )
     }
+
+    private fun getTempFileForRotationType(expectPerfect: Boolean): File {
+        val candidates =
+            listOf(
+                "TEST_1.jpg",
+                "TEST_IMAGE.jpg",
+                "Landscape_1.jpg",
+                "Landscape_2.jpg",
+                "Landscape_3.jpg",
+                "Portrait_1.jpg",
+                "Portrait_2.jpg",
+                "Portrait_3.jpg",
+            )
+
+        for (fileName in candidates) {
+            val file = getResourceAsTempFile(fileName) ?: continue
+            val lljTran = LLJTran(file)
+            try {
+                lljTran.read(LLJTran.READ_ALL, false)
+                val isPerfect = lljTran.checkPerfect(LLJTran.ROT_90, null) == 0
+                if (isPerfect == expectPerfect) {
+                    return file
+                }
+            } finally {
+                lljTran.freeMemory()
+            }
+        }
+
+        throw AssertionError("No ${if (expectPerfect) "perfect" else "imperfect"} JPEG test resource found")
+    }
+
     @Ignore("Disabled due to ICC Color Profile brightness shift during rotation. see issue https://github.com/commons-app/apps-android-commons/issues/6659 ")
     @Test
     fun `test 360 degree rotation cycles for all EXIF images`() {
@@ -131,5 +165,90 @@ class TransformImageTest {
 
             println("$fileName passed all rotation cycle tests")
         }
+    }
+
+    @Test
+    fun `rotateImage keeps lossless pixel rotation for perfect JPEG`() {
+        val originalFile = getTempFileForRotationType(expectPerfect = true)
+        val rotatedFile = transformImage.rotateImage(originalFile, 90, savePath)
+        assertNotNull(rotatedFile)
+        assertRotationWorked(originalFile, rotatedFile!!, 90)
+
+        val rotatedExif = ExifInterface(rotatedFile.absolutePath)
+        assertEquals(
+            "Perfect JPEG path should write pixels rotated and reset orientation to normal",
+            ExifInterface.ORIENTATION_NORMAL,
+            rotatedExif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_UNDEFINED)
+        )
+    }
+
+    @Test
+    fun `rotateImage applies EXIF-only rotation for imperfect JPEG`() {
+        val originalFile = getTempFileForRotationType(expectPerfect = false)
+
+        val sourceExif = ExifInterface(originalFile.absolutePath)
+        sourceExif.setAttribute(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL.toString())
+        sourceExif.saveAttributes()
+
+        val rotatedFile = transformImage.rotateImage(originalFile, 90, savePath)
+        assertNotNull(rotatedFile)
+
+        val rotatedExif = ExifInterface(rotatedFile!!.absolutePath)
+        assertEquals(
+            "Imperfect JPEG path should rotate via EXIF orientation only",
+            ExifInterface.ORIENTATION_ROTATE_90,
+            rotatedExif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_UNDEFINED)
+        )
+
+        val originalBitmap = decodeBitmap(originalFile)
+        val rotatedBitmap = decodeBitmap(rotatedFile)
+        assertEquals("EXIF-only rotation should keep pixel width unchanged", originalBitmap.width, rotatedBitmap.width)
+        assertEquals("EXIF-only rotation should keep pixel height unchanged", originalBitmap.height, rotatedBitmap.height)
+
+        val testX = originalBitmap.width / 3
+        val testY = originalBitmap.height / 3
+        assertEquals(
+            "EXIF-only rotation should not change pixel matrix",
+            originalBitmap.getPixel(testX, testY),
+            rotatedBitmap.getPixel(testX, testY)
+        )
+    }
+
+    @Test
+    fun `rotateImage EXIF-only path uses absolute target orientation`() {
+        val originalFile = getTempFileForRotationType(expectPerfect = false)
+
+        val sourceExif = ExifInterface(originalFile.absolutePath)
+        sourceExif.setAttribute(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_ROTATE_90.toString())
+        sourceExif.saveAttributes()
+
+        val rotatedFile = transformImage.rotateImage(originalFile, 180, savePath)
+        assertNotNull(rotatedFile)
+
+        val rotatedExif = ExifInterface(rotatedFile!!.absolutePath)
+        assertEquals(
+            "EXIF-only path must set final orientation to the absolute requested rotation",
+            ExifInterface.ORIENTATION_ROTATE_180,
+            rotatedExif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_UNDEFINED)
+        )
+    }
+
+    @Test
+    fun `rotateImage zero degree normalizes EXIF orientation`() {
+        val originalFile = getTempFileForRotationType(expectPerfect = false)
+
+        val sourceExif = ExifInterface(originalFile.absolutePath)
+        sourceExif.setAttribute(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_ROTATE_90.toString())
+        sourceExif.saveAttributes()
+
+        val rotatedFile = transformImage.rotateImage(originalFile, 0, savePath)
+        assertNotNull(rotatedFile)
+
+        val rotatedExif = ExifInterface(rotatedFile!!.absolutePath)
+        assertEquals(
+            "Zero-degree target should save with NORMAL orientation",
+            ExifInterface.ORIENTATION_NORMAL,
+            rotatedExif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_UNDEFINED)
+        )
     }
 }
