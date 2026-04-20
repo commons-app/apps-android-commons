@@ -6,6 +6,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 
 /**
  * Bookmark categories dao
@@ -13,7 +14,7 @@ import kotlinx.coroutines.flow.Flow
  * @constructor Create empty Bookmark categories dao
  */
 @Dao
-interface BookmarkCategoriesDao {
+abstract class BookmarkCategoriesDao {
 
     /**
      * Insert or Delete category bookmark into DB
@@ -21,8 +22,11 @@ interface BookmarkCategoriesDao {
      * @param bookmarksCategoryModal
      */
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(bookmarksCategoryModal: BookmarksCategoryModal)
+    protected abstract suspend fun insertInternal(bookmarkCategoryRoomEntity: BookmarkCategoryRoomEntity)
 
+    suspend fun insert(bookmarksCategoryModal: BookmarksCategoryModal) {
+        insertInternal(toEntity(bookmarksCategoryModal))
+    }
 
     /**
      * Delete category bookmark from DB
@@ -30,7 +34,11 @@ interface BookmarkCategoriesDao {
      * @param bookmarksCategoryModal
      */
     @Delete
-    suspend fun delete(bookmarksCategoryModal: BookmarksCategoryModal)
+    protected abstract suspend fun deleteInternal(bookmarkCategoryRoomEntity: BookmarkCategoryRoomEntity)
+
+    suspend fun delete(bookmarksCategoryModal: BookmarksCategoryModal) {
+        deleteInternal(toEntity(bookmarksCategoryModal))
+    }
 
     /**
      * Checks if given category exist in DB
@@ -39,7 +47,7 @@ interface BookmarkCategoriesDao {
      * @return
      */
     @Query("SELECT EXISTS (SELECT 1 FROM bookmarks_categories WHERE categoryName = :categoryName)")
-    suspend fun doesExist(categoryName: String): Boolean
+    abstract suspend fun doesExist(categoryName: String): Boolean
 
     /**
      * Get all categories
@@ -47,6 +55,14 @@ interface BookmarkCategoriesDao {
      * @return
      */
     @Query("SELECT * FROM bookmarks_categories")
-    fun getAllCategories(): Flow<List<BookmarksCategoryModal>>
+    protected abstract fun getAllCategoriesInternal(): Flow<List<BookmarkCategoryRoomEntity>>
 
+    fun getAllCategories(): Flow<List<BookmarksCategoryModal>> =
+        getAllCategoriesInternal().map { entities -> entities.map { fromEntity(it) } }
+
+    private fun toEntity(model: BookmarksCategoryModal): BookmarkCategoryRoomEntity =
+        BookmarkCategoryRoomEntity(categoryName = model.categoryName)
+
+    private fun fromEntity(entity: BookmarkCategoryRoomEntity): BookmarksCategoryModal =
+        BookmarksCategoryModal(categoryName = entity.categoryName)
 }

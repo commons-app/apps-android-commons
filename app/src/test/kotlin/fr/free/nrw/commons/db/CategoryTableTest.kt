@@ -24,9 +24,9 @@ class CategoryTableTest : InMemoryDatabaseTest() {
             thumbnail = "http://test.com/thumb.jpg",
             timesUsed = 5
         )
-        categoryDao.insert(category)
+        categoryDao.insert(category).blockingGet()
 
-        val retrieved = categoryDao.findEntity("Test Category")
+        val retrieved = categoryDao.findEntity("Test Category").blockingGet().firstOrNull()
         assertNotNull(retrieved)
         assertEquals("Test Category", retrieved?.name)
         assertEquals("Test Description", retrieved?.description)
@@ -43,7 +43,7 @@ class CategoryTableTest : InMemoryDatabaseTest() {
         // Insert with legacy SQL
         db.execSQL("INSERT INTO categories (name, description, times_used) VALUES ('Nature', 'Nature category', 10);")
 
-        val entity = categoryDao.findEntity("Nature")
+        val entity = categoryDao.findEntity("Nature").blockingGet().firstOrNull()
         assertNotNull(entity)
         assertEquals("Nature", entity?.name)
         assertEquals("Nature category", entity?.description)
@@ -55,13 +55,13 @@ class CategoryTableTest : InMemoryDatabaseTest() {
     fun testUpdateCategory() {
         val categoryDao = roomDatabase.categoryRoomDao()
         val category = CategoryRoomEntity(name = "Original Name", timesUsed = 1)
-        categoryDao.insert(category)
+        categoryDao.insert(category).blockingGet()
 
-        val savedCategory = categoryDao.findEntity("Original Name")!!
-        val updatedCategory = savedCategory.copy(timesUsed = 2)
-        categoryDao.insert(updatedCategory)
+        val savedCategory = categoryDao.findEntity("Original Name").blockingGet().firstOrNull()
+        val updatedCategory = savedCategory?.copy(timesUsed = 2)
+        categoryDao.insert(updatedCategory!!).blockingGet()
 
-        val retrieved = categoryDao.findEntity("Original Name")
+        val retrieved = categoryDao.findEntity("Original Name").blockingGet().firstOrNull()
         assertEquals(2, retrieved?.timesUsed)
         assertRowCount(CategoryTable.TABLE_NAME, 1)
     }
@@ -69,8 +69,8 @@ class CategoryTableTest : InMemoryDatabaseTest() {
     @Test
     fun testClearAllTables() {
         val categoryDao = roomDatabase.categoryRoomDao()
-        categoryDao.insert(CategoryRoomEntity(name = "Cat 1"))
-        categoryDao.insert(CategoryRoomEntity(name = "Cat 2"))
+        categoryDao.insert(CategoryRoomEntity(name = "Cat 1")).blockingGet()
+        categoryDao.insert(CategoryRoomEntity(name = "Cat 2")).blockingGet()
         assertRowCount(CategoryTable.TABLE_NAME, 2)
 
         clearAllTables()
@@ -80,9 +80,9 @@ class CategoryTableTest : InMemoryDatabaseTest() {
     @Test
     fun testFindCategory() {
         val categoryDao = roomDatabase.categoryRoomDao()
-        categoryDao.insert(CategoryRoomEntity(name = "Exist"))
+        categoryDao.insert(CategoryRoomEntity(name = "Exist")).blockingGet()
 
-        assertTrue(categoryDao.findCategory("Exist"))
-        assertTrue(!categoryDao.findCategory("NotExist"))
+        assertTrue(categoryDao.findCategory("Exist").blockingGet())
+        assertTrue(!categoryDao.findCategory("NotExist").blockingGet())
     }
 }

@@ -22,16 +22,24 @@ abstract class DepictsDao {
     private val maxItemsAllowed = 10
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    abstract suspend fun insert(depictedItem: Depicts)
+    protected abstract fun insertInternal(depicts: DepictsRoomEntity)
+
+    fun insertDepict(depict: Depicts) =
+        CoroutineScope(Dispatchers.IO).launch {
+            insertInternal(toEntity(depict))
+        }
 
     @Query("Select * From depicts_table order by lastUsed DESC")
-    abstract suspend fun getAllDepicts(): List<Depicts>
+    protected abstract fun getAllDepictsInternal(): List<DepictsRoomEntity>
+
+    fun getAllDepicts(): List<Depicts> =
+        getAllDepictsInternal().map { fromEntity(it) }
 
     @Query("Select * From depicts_table order by lastUsed DESC LIMIT :n OFFSET 10")
-    abstract suspend fun getDepictsForDeletion(n: Int): List<Depicts>
+    protected abstract fun getDepictsForDeletionInternal(n: Int): List<DepictsRoomEntity>
 
-    @Delete
-    abstract suspend fun delete(depicts: Depicts)
+    fun getDepictsForDeletion(n: Int): List<Depicts> =
+        getDepictsForDeletionInternal(n).map { fromEntity(it) }
 
     /**
      * Gets all Depicts objects from the database, ordered by lastUsed in descending order.
@@ -41,16 +49,6 @@ abstract class DepictsDao {
     fun depictsList(): Deferred<List<Depicts>> =
         CoroutineScope(Dispatchers.IO).async {
             getAllDepicts()
-        }
-
-    /**
-     * Inserts a Depicts object into the database.
-     *
-     * @param depictedItem The Depicts object to insert.
-     */
-    fun insertDepict(depictedItem: Depicts) =
-        CoroutineScope(Dispatchers.IO).launch {
-            insert(depictedItem)
         }
 
     /**
@@ -64,15 +62,25 @@ abstract class DepictsDao {
             getDepictsForDeletion(n)
         }
 
-    /**
-     * Deletes a Depicts object from the database.
-     *
-     * @param depicts The Depicts object to delete.
-     */
+    @Delete
+    protected abstract fun deleteInternal(depicts: DepictsRoomEntity)
+
     fun deleteDepicts(depicts: Depicts) =
         CoroutineScope(Dispatchers.IO).launch {
-            delete(depicts)
+            deleteInternal(toEntity(depicts))
         }
+
+    private fun toEntity(depicts: Depicts): DepictsRoomEntity =
+        DepictsRoomEntity(
+            item = depicts.item,
+            lastUsed = depicts.lastUsed
+        )
+
+    private fun fromEntity(entity: DepictsRoomEntity): Depicts =
+        Depicts(
+            item = entity.item,
+            lastUsed = entity.lastUsed
+        )
 
     /**
      * Saves a list of DepictedItems in the DepictsRoomDataBase.

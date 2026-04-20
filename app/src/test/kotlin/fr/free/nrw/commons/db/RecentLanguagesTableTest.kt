@@ -21,7 +21,7 @@ class RecentLanguagesTableTest : InMemoryDatabaseTest() {
             languageName = "English",
             languageCode = "en"
         )
-        dao.insert(language)
+        dao.insert(language).blockingAwait()
 
         val allLanguages = dao.getAll().blockingGet()
         assertEquals(1, allLanguages.size)
@@ -38,7 +38,7 @@ class RecentLanguagesTableTest : InMemoryDatabaseTest() {
         // Insert with legacy SQL
         db.execSQL("INSERT INTO recent_languages (language_name, language_code) VALUES ('French', 'fr');")
 
-        val exists = dao.findRecentLanguage("fr")
+        val exists = dao.findRecentLanguage("fr").blockingGet()
         assertTrue(exists)
         val allLanguages = dao.getAll().blockingGet()
         assertEquals(1, allLanguages.size)
@@ -49,18 +49,18 @@ class RecentLanguagesTableTest : InMemoryDatabaseTest() {
     @Test
     fun testDeleteRecentLanguage() {
         val dao = roomDatabase.recentLanguagesRoomDao()
-        dao.insert(RecentLanguageRoomEntity("Spanish", "es"))
+        dao.insert(RecentLanguageRoomEntity("Spanish", "es")).blockingAwait()
         assertRowCount(RecentLanguagesTable.TABLE_NAME, 1)
 
-        dao.deleteRecentLanguage("es")
+        dao.deleteRecentLanguage("es").blockingAwait()
         assertRowCount(RecentLanguagesTable.TABLE_NAME, 0)
     }
 
     @Test
     fun testClearAllTables() {
         val dao = roomDatabase.recentLanguagesRoomDao()
-        dao.insert(RecentLanguageRoomEntity("Language 1", "l1"))
-        dao.insert(RecentLanguageRoomEntity("Language 2", "l2"))
+        dao.insert(RecentLanguageRoomEntity("Language 1", "l1")).blockingAwait()
+        dao.insert(RecentLanguageRoomEntity("Language 2", "l2")).blockingAwait()
         assertRowCount(RecentLanguagesTable.TABLE_NAME, 2)
 
         clearAllTables()
