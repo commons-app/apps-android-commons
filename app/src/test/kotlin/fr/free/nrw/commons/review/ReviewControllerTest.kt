@@ -143,22 +143,46 @@ class ReviewControllerTest {
         whenever(firstRevision.user()).thenReturn("test_user")
         Whitebox.setInternalState(controller, "firstRevision", firstRevision)
         controller.sendThanks(activity)
+        assertEquals(
+            ShadowToast.getTextOfLatestToast().toString(),
+            context.getString(
+                R.string.send_thank_toast,
+                media.displayTitle,
+                "test_user"
+            ),
+        )
+
         val method: Method =
             ReviewController::class.java.getDeclaredMethod(
                 "displayThanksToast",
-                Activity::class.java,
+                Context::class.java,
                 Boolean::class.java,
             )
 
         method.isAccessible = true
-        method.invoke(controller, activity, true)
-        assertNotNull(controller)
+        method.invoke(controller, context, true)
+
+        assertEquals(
+            ShadowToast.getTextOfLatestToast().toString(),
+            context.getString(
+                R.string.send_thank_success_message,
+                media.displayTitle,
+                "test_user"
+            ),
+        )
     }
 
     @Test
     fun testSendThanksCaseNull() {
         shadowOf(Looper.getMainLooper()).idle()
         controller.sendThanks(activity)
-        assertNotNull(controller)
+        assertEquals(
+            ShadowToast.getTextOfLatestToast().toString(),
+            context.getString(
+                R.string.send_thank_toast,
+                media.displayTitle,
+                context.getString(R.string.unknown)
+            ),
+        )
     }
 }
