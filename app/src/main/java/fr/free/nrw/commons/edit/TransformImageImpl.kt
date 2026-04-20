@@ -30,38 +30,40 @@ class TransformImageImpl : TransformImage {
     ): File? {
         Timber.tag("Trying to rotate image").d("Starting")
 
+        val normalizedDegree = ((degree % 360) + 360) % 360
+        val rotationOp =
+            when (normalizedDegree) {
+                0 -> null
+                90 -> LLJTran.ROT_90
+                180 -> LLJTran.ROT_180
+                270 -> LLJTran.ROT_270
+                else -> {
+                    Timber.w("Unsupported rotation degree: $degree")
+                    return null
+                }
+            }
+
         val imagePath = System.currentTimeMillis()
         val output = File(savePath, "rotated_$imagePath.jpg")
 
         val rotated =
             try {
-                val lljTran = LLJTran(imageFile)
-                lljTran.read(
-                    LLJTran.READ_ALL,
-                    false,
-                ) // This could throw an LLJTranException. I am not catching it for now... Let's see.
-                lljTran.transform(
-                    when (degree) {
-                        90 -> LLJTran.ROT_90
-                        180 -> LLJTran.ROT_180
-                        270 -> LLJTran.ROT_270
-                        else -> LLJTran.OPT_DEFAULTS
-                    },
-                    LLJTran.OPT_DEFAULTS or LLJTran.OPT_XFORM_ORIENTATION,
-                )
-                BufferedOutputStream(FileOutputStream(output)).use { writer ->
-                    lljTran.save(writer, LLJTran.OPT_WRITE_ALL)
-                }
-                lljTran.freeMemory()
-                try {
-                    val exif = ExifInterface(output.absolutePath)
-                    exif.setAttribute(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL.toString())
-                    exif.saveAttributes()
-                } catch (ex: Exception) {
-                    Timber.w(ex, "Failed to force EXIF orientation to tha Normal")
+                if (rotationOp == null) {
+                    imageFile.copyTo(output, overwrite = true)
+                    // Keep save behavior consistent with absolute rotation=0 target.
+                    // If source had non-normal EXIF orientation, normalize it here.
+                    forceExifOrientationNormal(output)
+                } else if (shouldRotateLosslessly(imageFile, rotationOp)) {
+                    rotateLosslessly(imageFile, output, rotationOp)
+                    forceExifOrientationNormal(output)
+                } else {
+                    rotateWithExifOrientationOnly(imageFile, output, normalizedDegree)
                 }
                 true
             } catch (e: LLJTranException) {
+                Timber.tag("Error").d(e)
+                return null
+            } catch (e: Exception) {
                 Timber.tag("Error").d(e)
                 return null
             }
@@ -71,6 +73,70 @@ class TransformImageImpl : TransformImage {
             Timber.tag("Add").d(output.absolutePath)
         }
         return output
+    }
+
+    private fun shouldRotateLosslessly(imageFile: File, rotationOp: Int): Boolean {
+        val lljTran = LLJTran(imageFile)
+        try {
+            lljTran.read(
+                LLJTran.READ_ALL,
+                false,
+            ) // This could throw an LLJTranException. I am not catching it for now... Let's see.
+            return lljTran.checkPerfect(rotationOp, null) == 0
+        } finally {
+            lljTran.freeMemory()
+        }
+    }
+
+    private fun rotateLosslessly(imageFile: File, output: File, rotationOp: Int) {
+        val lljTran = LLJTran(imageFile)
+        try {
+            lljTran.read(
+                LLJTran.READ_ALL,
+                false,
+            ) // This could throw an LLJTranException. I am not catching it for now... Let's see.
+            lljTran.transform(
+                rotationOp,
+                LLJTran.OPT_DEFAULTS or LLJTran.OPT_XFORM_ORIENTATION,
+            )
+            BufferedOutputStream(FileOutputStream(output)).use { writer ->
+                lljTran.save(writer, LLJTran.OPT_WRITE_ALL)
+            }
+        } finally {
+            lljTran.freeMemory()
+        }
+    }
+
+    private fun rotateWithExifOrientationOnly(
+        imageFile: File,
+        output: File,
+        normalizedDegree: Int,
+    ) {
+        imageFile.copyTo(output, overwrite = true)
+        val exif = ExifInterface(output.absolutePath)
+        val targetOrientation = exifOrientationForAbsoluteRotation(normalizedDegree)
+        exif.setAttribute(ExifInterface.TAG_ORIENTATION, targetOrientation.toString())
+        exif.saveAttributes()
+    }
+
+    private fun forceExifOrientationNormal(output: File) {
+        try {
+            val exif = ExifInterface(output.absolutePath)
+            exif.setAttribute(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL.toString())
+            exif.saveAttributes()
+        } catch (ex: Exception) {
+            Timber.w(ex, "Failed to force EXIF orientation to tha Normal")
+        }
+    }
+
+    private fun exifOrientationForAbsoluteRotation(rotationDegrees: Int): Int {
+        return when (rotationDegrees) {
+            0 -> ExifInterface.ORIENTATION_NORMAL
+            90 -> ExifInterface.ORIENTATION_ROTATE_90
+            180 -> ExifInterface.ORIENTATION_ROTATE_180
+            270 -> ExifInterface.ORIENTATION_ROTATE_270
+            else -> ExifInterface.ORIENTATION_UNDEFINED
+        }
     }
 
     /**
