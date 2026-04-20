@@ -2,6 +2,7 @@ package fr.free.nrw.commons.customselector.ui.selector
 
 import android.Manifest
 import android.app.Activity
+import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Intent
 import android.content.SharedPreferences
@@ -652,19 +653,38 @@ class CustomSelectorActivity :
             return
         }
         scope.launch(ioDispatcher) {
-            val uniqueImages = selectedImages.distinctBy { image ->
-                CustomSelectorUtils.getImageSHA1(
-                    image.uri,
-                    ioDispatcher,
-                    fileUtilsWrapper,
-                    contentResolver
-                )
-            }
+            val uniqueImages =
+                    selectedImages.distinctBy { image ->
+                        CustomSelectorUtils.getImageSHA1(
+                            image.uri,
+                            ioDispatcher,
+                            fileUtilsWrapper,
+                            contentResolver,
+                        )
+                    }
 
             withContext(Dispatchers.Main) {
-                finishPickImages(ArrayList(uniqueImages))
+                if (uniqueImages.size != selectedImages.size) {
+                    showDuplicateSelectionWarning {
+                        finishPickImages(ArrayList(uniqueImages))
+                    }
+                } else {
+                    finishPickImages(ArrayList(uniqueImages))
+                }
             }
         }
+    }
+
+    /**
+     * Warns users when duplicate-content images are selected before finishing selection.
+     */
+    private fun showDuplicateSelectionWarning(onConfirm: () -> Unit) {
+        AlertDialog.Builder(this)
+            .setTitle(R.string.warning)
+            .setMessage(R.string.duplicates_removed_before_upload)
+            .setCancelable(false)
+            .setPositiveButton(R.string.ok) { _, _ -> onConfirm() }
+            .show()
     }
 
     /**
