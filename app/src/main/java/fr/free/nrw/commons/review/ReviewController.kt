@@ -12,8 +12,6 @@ import fr.free.nrw.commons.auth.csrf.InvalidLoginTokenException
 import fr.free.nrw.commons.wikidata.mwapi.MwQueryPage
 
 import java.util.ArrayList
-import android.view.View
-import com.google.android.material.snackbar.Snackbar
 
 import javax.inject.Inject
 import javax.inject.Named
@@ -168,11 +166,11 @@ class ReviewController @Inject constructor(
             .inject(this)
 
         val authorName = firstRevision?.user() ?: context.getString(R.string.unknown)
-        val rootView = activity.findViewById<View>(android.R.id.content)
-        Snackbar.make(rootView, context.getString(
-            R.string.send_thank_toast,
-            media?.displayTitle ?: "", authorName),
-            Snackbar.LENGTH_LONG).show()
+        ViewUtil.showShortToast(
+            context,
+            context.getString(R.string.send_thank_toast, media?.displayTitle ?: "", authorName)
+        )
+
         if (firstRevision == null) return
 
         Observable.defer {
@@ -181,7 +179,7 @@ class ReviewController @Inject constructor(
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ result ->
-                displayThanksToast(activity, result)
+                displayThanksToast(context, result)
             }, { throwable ->
                 if (throwable is InvalidLoginTokenException) {
                     val username = sessionManager.userName
@@ -198,19 +196,17 @@ class ReviewController @Inject constructor(
     }
 
     @SuppressLint("StringFormatInvalid")
-    private fun displayThanksToast(activity: Activity, result: Boolean) {
-        val context = activity.applicationContext
+    private fun displayThanksToast(context: Context, result: Boolean) {
         val authorName = firstRevision?.user() ?: context.getString(R.string.unknown)
-        val message = if (result) { context.getString(R.string.send_thank_success_message,
-            media?.displayTitle ?: "", authorName)
+        val (title, message) = if (result) {
+            context.getString(R.string.send_thank_success_title) to
+                    context.getString(R.string.send_thank_success_message, media?.displayTitle, authorName)
         } else {
-            context.getString(R.string.send_thank_failure_message,
-                media?.displayTitle ?: "", authorName)
+            context.getString(R.string.send_thank_failure_title) to
+                    context.getString(R.string.send_thank_failure_message, media?.displayTitle, authorName)
         }
 
-        val rootView = activity.findViewById<View>(android.R.id.content)
-        Snackbar.make(rootView, message,
-            Snackbar.LENGTH_LONG).show()
+        ViewUtil.showShortToast(context, message)
     }
 
     private fun showNotification(title: String, message: String) {
