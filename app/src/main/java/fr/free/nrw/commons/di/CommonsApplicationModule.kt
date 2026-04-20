@@ -27,6 +27,7 @@ import fr.free.nrw.commons.customselector.domain.ImageRepository
 import fr.free.nrw.commons.customselector.ui.selector.ImageFileLoader
 import fr.free.nrw.commons.data.DBOpenHelper
 import fr.free.nrw.commons.db.AppDatabase
+import fr.free.nrw.commons.di.CommonsApplicationModule.Companion.appContext
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.location.LocationServiceManager
 import fr.free.nrw.commons.nearby.PlaceDao
@@ -204,7 +205,8 @@ open class CommonsApplicationModule(private val applicationContext: Context) {
         "commons_room.db"
     ).addMigrations(
         MIGRATION_1_2,
-        MIGRATION_19_TO_20
+        MIGRATION_19_TO_20,
+        MIGRATION_21_22
     ).fallbackToDestructiveMigration().build()
 
     @Provides
@@ -368,3 +370,163 @@ open class CommonsApplicationModule(private val applicationContext: Context) {
         }
     }
 }
+
+val MIGRATION_21_22 = object : Migration(21, 22) {
+    override fun migrate(db: SupportSQLiteDatabase) {
+        db.execSQL(
+            """
+                    CREATE TABLE IF NOT EXISTS `categories` (
+                        `_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+                        `name` TEXT NOT NULL,
+                        `description` TEXT,
+                        `thumbnail` TEXT,
+                        `last_used` INTEGER,
+                        `times_used` INTEGER NOT NULL DEFAULT 0
+                    )
+                    """.trimIndent()
+        )
+
+        db.execSQL(
+            """
+                    CREATE TABLE IF NOT EXISTS `bookmarks` (
+                        `media_name` TEXT NOT NULL,
+                        `media_creator` TEXT,
+                        PRIMARY KEY(`media_name`)
+                    )
+                    """.trimIndent()
+        )
+
+        db.execSQL(
+            """
+                    CREATE TABLE IF NOT EXISTS `bookmarksItems` (
+                        `item_name` TEXT NOT NULL,
+                        `item_description` TEXT,
+                        `item_image_url` TEXT,
+                        `item_instance_of` TEXT NOT NULL,
+                        `item_name_categories` TEXT NOT NULL,
+                        `item_description_categories` TEXT NOT NULL,
+                        `item_thumbnail_categories` TEXT NOT NULL,
+                        `item_is_selected` INTEGER NOT NULL,
+                        `item_id` TEXT NOT NULL,
+                        PRIMARY KEY(`item_id`)
+                    )
+                    """.trimIndent()
+        )
+
+        db.execSQL(
+            """
+                    CREATE TABLE IF NOT EXISTS `recent_searches` (
+                        `_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+                        `name` TEXT NOT NULL,
+                        `last_used` INTEGER NOT NULL
+                    )
+                    """.trimIndent()
+        )
+
+        db.execSQL(
+            """
+                    CREATE TABLE IF NOT EXISTS `recent_languages` (
+                        `language_name` TEXT NOT NULL,
+                        `language_code` TEXT NOT NULL,
+                        PRIMARY KEY(`language_code`)
+                    )
+                    """.trimIndent()
+        )
+        // copying data from old "commons.db"  to new "commons_room.db".
+        try {
+            val legacyDbFile = appContext.getDatabasePath("commons.db")
+            if (!legacyDbFile.exists()) {
+                return
+            }
+            val legacyDbPath = legacyDbFile.path
+
+            val oldDb = SQLiteDatabase.openDatabase(
+                legacyDbPath, null, SQLiteDatabase.OPEN_READONLY
+            )
+
+            // categories
+            var cursor = oldDb.rawQuery("SELECT * FROM categories", null)
+            while (cursor.moveToNext()) {
+                db.execSQL(
+                    "INSERT OR IGNORE INTO categories (_id, name, description, thumbnail, last_used, times_used) VALUES (?, ?, ?, ?, ?, ?)",
+                    arrayOf(
+                        cursor.getLong(cursor.getColumnIndexOrThrow("_id")),
+                        cursor.getString(cursor.getColumnIndexOrThrow("name")) ?: "",
+                        cursor.getString(cursor.getColumnIndexOrThrow("description")),
+                        cursor.getString(cursor.getColumnIndexOrThrow("thumbnail")),
+                        cursor.getLong(cursor.getColumnIndexOrThrow("last_used")),
+                        cursor.getInt(cursor.getColumnIndexOrThrow("times_used"))
+                    )
+                )
+            }
+            cursor.close()
+
+            // bookmarks
+            cursor = oldDb.rawQuery("SELECT * FROM bookmarks", null)
+            while (cursor.moveToNext()) {
+                db.execSQL(
+                    "INSERT OR IGNORE INTO bookmarks (media_name, media_creator) VALUES (?, ?)",
+                    arrayOf(
+                        cursor.getString(cursor.getColumnIndexOrThrow("media_name")) ?: "",
+                        cursor.getString(cursor.getColumnIndexOrThrow("media_creator"))
+                    )
+                )
+            }
+            cursor.close()
+
+            // bookmarksItems
+            cursor = oldDb.rawQuery("SELECT * FROM bookmarksItems", null)
+            while (cursor.moveToNext()) {
+                db.execSQL(
+                    "INSERT OR IGNORE INTO bookmarksItems (item_name, item_description, item_image_url, item_instance_of, item_name_categories, item_description_categories, item_thumbnail_categories, item_is_selected, item_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                    arrayOf(
+                        cursor.getString(cursor.getColumnIndexOrThrow("item_name")) ?: "",
+                        cursor.getString(cursor.getColumnIndexOrThrow("item_description")),
+                        cursor.getString(cursor.getColumnIndexOrThrow("item_image_url")),
+                        cursor.getString(cursor.getColumnIndexOrThrow("item_instance_of")) ?: "",
+                        cursor.getString(cursor.getColumnIndexOrThrow("item_name_categories"))
+                            ?: "",
+                        cursor.getString(cursor.getColumnIndexOrThrow("item_description_categories"))
+                            ?: "",
+                        cursor.getString(cursor.getColumnIndexOrThrow("item_thumbnail_categories"))
+                            ?: "",
+                        cursor.getInt(cursor.getColumnIndexOrThrow("item_is_selected")),
+                        cursor.getString(cursor.getColumnIndexOrThrow("item_id")) ?: ""
+                    )
+                )
+            }
+            cursor.close()
+
+            // recent_searches
+            cursor = oldDb.rawQuery("SELECT * FROM recent_searches", null)
+            while (cursor.moveToNext()) {
+                db.execSQL(
+                    "INSERT OR IGNORE INTO recent_searches (_id, name, last_used) VALUES (?, ?, ?)",
+                    arrayOf(
+                        cursor.getLong(cursor.getColumnIndexOrThrow("_id")),
+                        cursor.getString(cursor.getColumnIndexOrThrow("name")) ?: "",
+                        cursor.getLong(cursor.getColumnIndexOrThrow("last_used"))
+                    )
+                )
+            }
+            cursor.close()
+            // recent_languages
+            cursor = oldDb.rawQuery("SELECT * FROM recent_languages", null)
+            while (cursor.moveToNext()) {
+                db.execSQL(
+                    "INSERT OR IGNORE INTO recent_languages (language_name, language_code) VALUES (?, ?)",
+                    arrayOf(
+                        cursor.getString(cursor.getColumnIndexOrThrow("language_name")) ?: "",
+                        cursor.getString(cursor.getColumnIndexOrThrow("language_code")) ?: ""
+                    )
+                )
+            }
+            cursor.close()
+            oldDb.close()
+        } catch (e: Exception) {
+            Timber.e(e, "Exception during legacy database migration")
+            throw e
+        }
+    }
+}
+
