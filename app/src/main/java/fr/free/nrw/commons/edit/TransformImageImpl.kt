@@ -31,6 +31,7 @@ class TransformImageImpl : TransformImage {
         Timber.tag("Trying to rotate image").d("Starting")
 
         val normalizedDegree = ((degree % 360) + 360) % 360
+        val currentExifOrientation = readExifOrientation(imageFile)
         val rotationOp =
             when (normalizedDegree) {
                 0 -> null
@@ -50,12 +51,9 @@ class TransformImageImpl : TransformImage {
             try {
                 if (rotationOp == null) {
                     imageFile.copyTo(output, overwrite = true)
-                    // Keep save behavior consistent with absolute rotation=0 target.
-                    // If source had non-normal EXIF orientation, normalize it here.
-                    forceExifOrientationNormal(output)
                 } else if (shouldRotateLosslessly(imageFile, rotationOp)) {
                     rotateLosslessly(imageFile, output, rotationOp)
-                    forceExifOrientationNormal(output)
+                    forceExifOrientation(output, currentExifOrientation)
                 } else {
                     rotateWithExifOrientationOnly(imageFile, output, normalizedDegree)
                 }
@@ -113,29 +111,49 @@ class TransformImageImpl : TransformImage {
         normalizedDegree: Int,
     ) {
         imageFile.copyTo(output, overwrite = true)
-        val exif = ExifInterface(output.absolutePath)
-        val targetOrientation = exifOrientationForAbsoluteRotation(normalizedDegree)
-        exif.setAttribute(ExifInterface.TAG_ORIENTATION, targetOrientation.toString())
-        exif.saveAttributes()
+        val currentOrientation = readExifOrientation(output)
+        val currentDegrees = exifOrientationToDegrees(currentOrientation)
+        val targetDegrees = ((currentDegrees + normalizedDegree) % 360 + 360) % 360
+        val targetOrientation = degreesToExifOrientation(targetDegrees)
+        forceExifOrientation(output, targetOrientation)
     }
 
-    private fun forceExifOrientationNormal(output: File) {
+    private fun forceExifOrientation(output: File, orientation: Int) {
         try {
             val exif = ExifInterface(output.absolutePath)
-            exif.setAttribute(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL.toString())
+            exif.setAttribute(ExifInterface.TAG_ORIENTATION, orientation.toString())
             exif.saveAttributes()
         } catch (ex: Exception) {
-            Timber.w(ex, "Failed to force EXIF orientation to tha Normal")
+            Timber.w(ex, "Failed to set EXIF orientation")
         }
     }
 
-    private fun exifOrientationForAbsoluteRotation(rotationDegrees: Int): Int {
-        return when (rotationDegrees) {
-            0 -> ExifInterface.ORIENTATION_NORMAL
+    private fun readExifOrientation(imageFile: File): Int {
+        return try {
+            ExifInterface(imageFile.absolutePath).getAttributeInt(
+                ExifInterface.TAG_ORIENTATION,
+                ExifInterface.ORIENTATION_NORMAL
+            )
+        } catch (_: Exception) {
+            ExifInterface.ORIENTATION_NORMAL
+        }
+    }
+
+    private fun exifOrientationToDegrees(orientation: Int): Int {
+        return when (orientation) {
+            ExifInterface.ORIENTATION_ROTATE_90 -> 90
+            ExifInterface.ORIENTATION_ROTATE_180 -> 180
+            ExifInterface.ORIENTATION_ROTATE_270 -> 270
+            else -> 0
+        }
+    }
+
+    private fun degreesToExifOrientation(degrees: Int): Int {
+        return when (((degrees % 360) + 360) % 360) {
             90 -> ExifInterface.ORIENTATION_ROTATE_90
             180 -> ExifInterface.ORIENTATION_ROTATE_180
             270 -> ExifInterface.ORIENTATION_ROTATE_270
-            else -> ExifInterface.ORIENTATION_UNDEFINED
+            else -> ExifInterface.ORIENTATION_NORMAL
         }
     }
 
