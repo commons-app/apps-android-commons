@@ -170,6 +170,10 @@ class TransformImageTest {
     @Test
     fun `rotateImage keeps lossless pixel rotation for perfect JPEG`() {
         val originalFile = getTempFileForRotationType(expectPerfect = true)
+        val sourceExif = ExifInterface(originalFile.absolutePath)
+        sourceExif.setAttribute(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL.toString())
+        sourceExif.saveAttributes()
+
         val rotatedFile = transformImage.rotateImage(originalFile, 90, savePath)
         assertNotNull(rotatedFile)
         assertRotationWorked(originalFile, rotatedFile!!, 90)
@@ -215,7 +219,7 @@ class TransformImageTest {
     }
 
     @Test
-    fun `rotateImage EXIF-only path uses absolute target orientation`() {
+    fun `rotateImage EXIF-only path applies relative rotation on current orientation`() {
         val originalFile = getTempFileForRotationType(expectPerfect = false)
 
         val sourceExif = ExifInterface(originalFile.absolutePath)
@@ -227,18 +231,18 @@ class TransformImageTest {
 
         val rotatedExif = ExifInterface(rotatedFile!!.absolutePath)
         assertEquals(
-            "EXIF-only path must set final orientation to the absolute requested rotation",
-            ExifInterface.ORIENTATION_ROTATE_180,
+            "EXIF-only path should add relative rotation to current orientation",
+            ExifInterface.ORIENTATION_ROTATE_270,
             rotatedExif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_UNDEFINED)
         )
     }
 
     @Test
-    fun `rotateImage zero degree normalizes EXIF orientation`() {
+    fun `rotateImage zero degree keeps EXIF orientation when already normal`() {
         val originalFile = getTempFileForRotationType(expectPerfect = false)
 
         val sourceExif = ExifInterface(originalFile.absolutePath)
-        sourceExif.setAttribute(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_ROTATE_90.toString())
+        sourceExif.setAttribute(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL.toString())
         sourceExif.saveAttributes()
 
         val rotatedFile = transformImage.rotateImage(originalFile, 0, savePath)
@@ -246,9 +250,62 @@ class TransformImageTest {
 
         val rotatedExif = ExifInterface(rotatedFile!!.absolutePath)
         assertEquals(
-            "Zero-degree target should save with NORMAL orientation",
+            "Zero-degree save should keep NORMAL orientation",
             ExifInterface.ORIENTATION_NORMAL,
             rotatedExif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_UNDEFINED)
+        )
+    }
+
+    @Test
+    fun `rotateImage repeated saves returns to original orientation after full cycle`() {
+        val originalFile = getTempFileForRotationType(expectPerfect = false)
+
+        val sourceExif = ExifInterface(originalFile.absolutePath)
+        sourceExif.setAttribute(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL.toString())
+        sourceExif.saveAttributes()
+
+        val fileAfterFirstSave = transformImage.rotateImage(originalFile, 90, savePath)
+        assertNotNull(fileAfterFirstSave)
+
+        val fileAfterSecondSave = transformImage.rotateImage(fileAfterFirstSave!!, 90, savePath)
+        assertNotNull(fileAfterSecondSave)
+
+        val fileAfterThirdSave = transformImage.rotateImage(fileAfterSecondSave!!, 180, savePath)
+        assertNotNull(fileAfterThirdSave)
+
+        val finalExif = ExifInterface(fileAfterThirdSave!!.absolutePath)
+        assertEquals(
+            "After 90 -> 90 -> 180 relative saves, EXIF orientation should return to NORMAL",
+            ExifInterface.ORIENTATION_NORMAL,
+            finalExif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_UNDEFINED)
+        )
+    }
+
+    @Test
+    fun `rotateImage 180 then another 180 returns to normal for imperfect JPEG`() {
+        val originalFile = getTempFileForRotationType(expectPerfect = false)
+        val sourceExif = ExifInterface(originalFile.absolutePath)
+        sourceExif.setAttribute(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL.toString())
+        sourceExif.saveAttributes()
+
+        val afterFirst180 = transformImage.rotateImage(originalFile, 180, savePath)
+        assertNotNull(afterFirst180)
+
+        val exifAfterFirst = ExifInterface(afterFirst180!!.absolutePath)
+        assertEquals(
+            "After first 180 save, EXIF should represent 180 orientation",
+            ExifInterface.ORIENTATION_ROTATE_180,
+            exifAfterFirst.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_UNDEFINED)
+        )
+
+        val afterSecond180 = transformImage.rotateImage(afterFirst180, 180, savePath)
+        assertNotNull(afterSecond180)
+
+        val finalExif = ExifInterface(afterSecond180!!.absolutePath)
+        assertEquals(
+            "After 180 + 180, EXIF should return to NORMAL",
+            ExifInterface.ORIENTATION_NORMAL,
+            finalExif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_UNDEFINED)
         )
     }
 }
