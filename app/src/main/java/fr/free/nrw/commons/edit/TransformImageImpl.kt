@@ -73,6 +73,14 @@ class TransformImageImpl : TransformImage {
         return output
     }
 
+    /**
+     * Checks whether the requested JPEG transform can be applied as a perfect
+     * lossless operation for the given image.
+     *
+     * @param imageFile The source JPEG file.
+     * @param rotationOp The LLJTran rotation operation (for example, ROT_90).
+     * @return True if the transform is perfect-lossless for this file, false otherwise.
+     */
     private fun shouldRotateLosslessly(imageFile: File, rotationOp: Int): Boolean {
         val lljTran = LLJTran(imageFile)
         try {
@@ -86,6 +94,15 @@ class TransformImageImpl : TransformImage {
         }
     }
 
+    /**
+     * Applies LLJTran lossless rotation and writes the full JPEG structure to [output].
+     *
+     * This path is used only when [shouldRotateLosslessly] returns true.
+     *
+     * @param imageFile The source JPEG file.
+     * @param output The destination file where the rotated JPEG is written.
+     * @param rotationOp The LLJTran rotation operation to apply.
+     */
     private fun rotateLosslessly(imageFile: File, output: File, rotationOp: Int) {
         val lljTran = LLJTran(imageFile)
         try {
@@ -105,6 +122,16 @@ class TransformImageImpl : TransformImage {
         }
     }
 
+    /**
+     * Performs a relative rotation by updating only EXIF orientation after copying
+     * the original JPEG bytes to [output].
+     *
+     * This path is used for imperfect JPEG transforms to avoid edge artifacts.
+     *
+     * @param imageFile The source JPEG file.
+     * @param output The destination file to write.
+     * @param normalizedDegree The clockwise relative rotation in degrees (0/90/180/270).
+     */
     private fun rotateWithExifOrientationOnly(
         imageFile: File,
         output: File,
@@ -118,6 +145,12 @@ class TransformImageImpl : TransformImage {
         forceExifOrientation(output, targetOrientation)
     }
 
+    /**
+     * Sets EXIF orientation on the given file.
+     *
+     * @param output The JPEG file whose EXIF orientation will be updated.
+     * @param orientation The EXIF orientation constant to set.
+     */
     private fun forceExifOrientation(output: File, orientation: Int) {
         try {
             val exif = ExifInterface(output.absolutePath)
@@ -128,6 +161,12 @@ class TransformImageImpl : TransformImage {
         }
     }
 
+    /**
+     * Reads EXIF orientation from [imageFile], defaulting to NORMAL on read failure.
+     *
+     * @param imageFile The JPEG file to inspect.
+     * @return The EXIF orientation constant. Returns ORIENTATION_NORMAL on failure.
+     */
     private fun readExifOrientation(imageFile: File): Int {
         return try {
             ExifInterface(imageFile.absolutePath).getAttributeInt(
@@ -139,6 +178,14 @@ class TransformImageImpl : TransformImage {
         }
     }
 
+    /**
+     * Converts EXIF orientation constants to clockwise degrees.
+     *
+     * Non-rotating and unsupported values are treated as 0 degrees.
+     *
+     * @param orientation The EXIF orientation constant.
+     * @return The equivalent clockwise rotation in degrees.
+     */
     private fun exifOrientationToDegrees(orientation: Int): Int {
         return when (orientation) {
             ExifInterface.ORIENTATION_ROTATE_90 -> 90
@@ -148,6 +195,12 @@ class TransformImageImpl : TransformImage {
         }
     }
 
+    /**
+     * Converts clockwise degrees to EXIF orientation constants.
+     *
+     * @param degrees The clockwise rotation in degrees.
+     * @return The corresponding EXIF orientation constant.
+     */
     private fun degreesToExifOrientation(degrees: Int): Int {
         return when (((degrees % 360) + 360) % 360) {
             90 -> ExifInterface.ORIENTATION_ROTATE_90
