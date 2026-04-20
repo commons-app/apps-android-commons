@@ -116,7 +116,7 @@ class CommonsApplication : MultiDexApplication() {
             defaultPrefs.putStringSet(Prefs.MANAGED_EXIF_TAGS, defaultExifTagsSet)
         }
 
-        // Set DownsampleEnabled to True to downsample the image in case it's heavy
+        //        Set DownsampleEnabled to True to downsample the image in case it's heavy
         val config = ImagePipelineConfig.newBuilder(this)
             .setNetworkFetcher(customOkHttpNetworkFetcher)
             .setDownsampleEnabled(true)
@@ -220,22 +220,9 @@ class CommonsApplication : MultiDexApplication() {
             .andThen(Completable.fromAction {
                 Timber.d("All accounts have been removed")
                 clearImageCache()
-
-                //fix:capture the preferences that should survive a logout/data clear
-                val currentTheme = defaultPrefs.getString(Prefs.KEY_THEME_VALUE)
-                val currentLanguage = defaultPrefs.getString(Prefs.APP_UI_LANGUAGE)
-
-                // Clear the preference manager
-                defaultPrefs.clearAll()
-
-                //restore non-account-specific ui settings
-                if (currentTheme != null) {
-                    defaultPrefs.putString(Prefs.KEY_THEME_VALUE, currentTheme)
-                }
-                if (currentLanguage != null) {
-                    defaultPrefs.putString(Prefs.APP_UI_LANGUAGE, currentLanguage)
-                }
-
+                defaultPrefs.remove("isUserLoggedIn")
+                defaultPrefs.remove(Prefs.DEFAULT_LICENSE)
+                defaultPrefs.remove(Prefs.VANISHED_ACCOUNT)
                 defaultPrefs.putBoolean("firstrun", false)
                 updateAllDatabases()
             })
