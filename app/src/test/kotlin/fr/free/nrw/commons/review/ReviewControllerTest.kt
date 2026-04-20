@@ -179,9 +179,8 @@ class ReviewControllerTest {
         assertEquals(
             ShadowToast.getTextOfLatestToast().toString(),
             context.getString(
-                R.string.send_thank_toast,
+                R.string.send_thank_toast_no_author,
                 media.displayTitle,
-                context.getString(R.string.unknown)
             ),
         )
     }
