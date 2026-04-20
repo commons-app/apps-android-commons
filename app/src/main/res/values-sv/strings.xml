@@ -6,6 +6,7 @@
 * Jopparn
 * Kakan spelar
 * Liuxinyu970226
+* Michael FOSS
 * Sabelöga
 * Skalman
 * Tor.klingberg
@@ -262,6 +263,7 @@
   <string name="upload_problem_image_dark">Bilden är för mörk.</string>
   <string name="upload_problem_image_blurry">Bilden är suddig.</string>
   <string name="upload_problem_image_duplicate">Bilden finns redan på Commons.</string>
+  <string name="upload_problem_image_format_unsupported">Din bild är i ett format som inte stöds av Commons-servern, så appen konverterade den till JPG.</string>
   <string name="upload_problem_different_geolocation">Bilden togs på en annan plats.</string>
   <string name="upload_problem_fbmd">Var god ladda bara upp bilder som du själv har tagit. Ladda inte upp bilder som du har hittat på andra personers Facebook-konton.</string>
   <string name="upload_problem_do_you_continue">Vill du fortfarande ladda upp denna bild?</string>
@@ -361,6 +363,7 @@
   <string name="quiz_screenshot_question">Är det okej att ladda upp denna skärmdump?</string>
   <string name="share_app_title">Dela app</string>
   <string name="rotate">Rotera</string>
+  <string name="crop">Beskär</string>
   <string name="error_fetching_nearby_places">Kunde inte ladda in platser i närheten</string>
   <string name="no_pictures_in_this_area">Inga bilder i detta område</string>
   <string name="no_nearby_places_around">Inga platser i närheten</string>
@@ -428,6 +431,9 @@
   <string name="no_categories_selected_warning_desc">Bilder utan kategorier används sällan. Är du säker på att du vill fortsätta utan att välja kategorier?</string>
   <string name="no_depictions_selected">Inga beskrivningar har valts</string>
   <string name="no_depictions_selected_warning_desc">Bilder med beskrivningar kan hittas lättare och kommer mer sannolikt användas. Är du säker på att du vill fortsätta utan att välja beskrivningar?</string>
+  <string name="depictions_choose_from_map">Välj från karta</string>
+  <string name="depictions_map_confirm">Bekräfta</string>
+  <string name="depictions_map_no_photo_location">Fotot saknar plats, så din nuvarande plats visas</string>
   <string name="back_button_warning">Avbryt uppladdning</string>
   <string name="back_button_warning_desc">Bakåtknappen avbryter denna uppladdning och du förlorar dina framsteg</string>
   <string name="back_button_continue">Fortsätt uppladdning</string>
@@ -537,6 +543,7 @@
   <string name="delete_helper_ask_spam_blurry">helt suddig</string>
   <string name="delete_helper_ask_spam_nonsense">trams, fullständigt oanvändbart i alla artiklar</string>
   <string name="delete_helper_ask_spam_other">Annat</string>
+  <string name="delete_helper_other_notes_hint">Berättigande</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">Pressfoto</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">Slumpbild från Internet</string>
   <string name="delete_helper_ask_reason_copyright_logo">Logotyp</string>
@@ -809,6 +816,7 @@
   <string name="pending">Pågår</string>
   <string name="failed">Misslyckades</string>
   <string name="could_not_load_place_data">Kunde inte läsa in platsdata</string>
+  <string name="warning_for_no_option_selected">Välj ett av alternativen för att svara på frågan</string>
   <string name="custom_selector_delete_folder">Radera mapp</string>
   <string name="custom_selector_confirm_deletion_title">Bekräfta radering</string>
   <string name="custom_selector_confirm_deletion_message">Vill du verkligen radera mappen %1$s som innehåller %2$d objekt?</string>
@@ -839,4 +847,6 @@
   <string name="image_tag_line_created_by_and_uploaded_by">Skapad av %1$s och laddades upp av %2$s</string>
   <string name="nominated_for_deletion_btn">Nominerad för radering</string>
   <string name="custom_selector_max_image_limit_reached">Du kan välja högst %d bilder.</string>
+  <string name="edit_unsupported_format_explanation">Redigering i appen är endast tillgängligt för JPEG-filer. Om du vill redigera andra format behöver du använda ett tredjepartsverktyg.</string>
+  <string name="license_cc0_description">Ingen upphovsrätt. Du avstår från alla rättigheter så att vem som helst kan använda detta verk på valfritt sätt.</string>
 </resources>
