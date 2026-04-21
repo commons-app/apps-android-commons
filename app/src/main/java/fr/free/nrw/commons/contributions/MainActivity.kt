@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.work.ExistingWorkPolicy
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import androidx.activity.OnBackPressedCallback
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.bookmarks.BookmarkFragment
@@ -104,7 +105,7 @@ class MainActivity : BaseActivity(), FragmentManager.OnBackStackChangedListener 
                 return false
             }
         } else {
-            onBackPressed()
+            onBackPressedDispatcher.onBackPressed()
             showTabs()
         }
         return true
@@ -156,6 +157,52 @@ after opening the app.
 
             checkAndResumeStuckUploads()
         }
+
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                when (activeFragment) {
+                    ActiveFragment.CONTRIBUTIONS -> {
+                        // Means that contribution fragment is visible
+                        if (nearbyParentFragment?.backButtonClicked() != true) {
+                            isEnabled = false
+                            onBackPressedDispatcher.onBackPressed()
+                            isEnabled = true
+                        }
+                    }
+                    ActiveFragment.NEARBY -> {
+                        // Means that nearby fragment is visible
+                        if (nearbyParentFragment?.backButtonClicked() != true) {
+                            nearbyParentFragment?.let {
+                                supportFragmentManager.beginTransaction().remove(it).commit()
+                            }
+                            setSelectedItemId(NavTab.CONTRIBUTIONS.code())
+                        }
+                    }
+                    ActiveFragment.EXPLORE -> {
+                        // Explore Fragment is visible
+                        if(exploreFragment?.onBackPressed() != true) {
+                            if (applicationKvStore?.getBoolean("login_skipped") == true) {
+                                isEnabled = false
+                                onBackPressedDispatcher.onBackPressed()
+                                isEnabled = true
+                            } else {
+                                setSelectedItemId(NavTab.CONTRIBUTIONS.code())
+                            }
+                        }
+                    }
+                    ActiveFragment.BOOKMARK -> {
+                        // Means that bookmark fragment is visible
+                        bookmarkFragment?.onBackPressed()
+                        setSelectedItemId(NavTab.CONTRIBUTIONS.code())
+                    }
+                    else -> {
+                        isEnabled = false
+                        onBackPressedDispatcher.onBackPressed()
+                        isEnabled = true
+                    }
+                }
+            }
+        })
     }
 
     fun setSelectedItemId(id: Int) {
@@ -371,45 +418,6 @@ after opening the app.
         } else if (fragmentName == ActiveFragment.BOOKMARK.name) {
             title = getString(R.string.bookmarks)
             loadFragment(BookmarkFragment.newInstance(), false)
-        }
-    }
-
-    override fun onBackPressed() {
-        when (activeFragment) {
-            ActiveFragment.CONTRIBUTIONS -> {
-            // Means that contribution fragment is visible
-            if (contributionsFragment?.backButtonClicked() != true) { //If this one does not want to handle
-                // the back press, let the activity do so
-                super.onBackPressed()
-                }
-            }
-        ActiveFragment.NEARBY -> {
-            // Means that nearby fragment is visible
-            if (nearbyParentFragment?.backButtonClicked() != true) {
-            nearbyParentFragment?.let {
-                supportFragmentManager.beginTransaction().remove(it).commit()
-                    }
-                setSelectedItemId(NavTab.CONTRIBUTIONS.code())
-                }
-            }
-         ActiveFragment.EXPLORE -> {
-            // Explore Fragment is visible
-            if (exploreFragment?.onBackPressed() != true) {
-                if (applicationKvStore?.getBoolean("login_skipped") == true) {
-                    super.onBackPressed()
-                } else {
-                    setSelectedItemId(NavTab.CONTRIBUTIONS.code())
-                    }
-                }
-            }
-         ActiveFragment.BOOKMARK -> {
-            // Means that bookmark fragment is visible
-            bookmarkFragment?.onBackPressed()
-            setSelectedItemId(NavTab.CONTRIBUTIONS.code())
-            }
-         else -> {
-            super.onBackPressed()
-            }
         }
     }
 

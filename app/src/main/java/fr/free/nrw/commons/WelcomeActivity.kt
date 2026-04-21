@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import androidx.activity.OnBackPressedCallback
 import fr.free.nrw.commons.databinding.ActivityWelcomeBinding
 import fr.free.nrw.commons.databinding.PopupForCopyrightBinding
 import fr.free.nrw.commons.quiz.QuizActivity
@@ -48,6 +49,22 @@ class WelcomeActivity : BaseActivity() {
         binding!!.welcomePager.adapter = adapter
         binding!!.welcomePagerIndicator.setViewPager(binding!!.welcomePager)
         binding!!.finishTutorialButton.setOnClickListener { v: View? -> finishTutorial() }
+
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                if (binding!!.welcomePager.currentItem != 0) {
+                    binding!!.welcomePager.setCurrentItem(binding!!.welcomePager.currentItem - 1, true)
+                } else {
+                    if (defaultKvStore.getBoolean("firstrun", true)) {
+                        finishAffinity()
+                    } else {
+                        isEnabled = false
+                        onBackPressedDispatcher.onBackPressed()
+                        isEnabled = true
+                    }
+                }
+            }
+        })
     }
 
     public override fun onDestroy() {
@@ -55,18 +72,6 @@ class WelcomeActivity : BaseActivity() {
             startActivity(Intent(this, QuizActivity::class.java))
         }
         super.onDestroy()
-    }
-
-    override fun onBackPressed() {
-        if (binding!!.welcomePager.currentItem != 0) {
-            binding!!.welcomePager.setCurrentItem(binding!!.welcomePager.currentItem - 1, true)
-        } else {
-            if (defaultKvStore.getBoolean("firstrun", true)) {
-                finishAffinity()
-            } else {
-                super.onBackPressed()
-            }
-        }
     }
 
     fun finishTutorial() {
