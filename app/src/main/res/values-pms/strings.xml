@@ -253,6 +253,7 @@
   <string name="upload_problem_image_dark">La plancia a l\'é tròp sombra.</string>
   <string name="upload_problem_image_blurry">La plancia a l\'é tërbola.</string>
   <string name="upload_problem_image_duplicate">La plancia a l\'é già su Commons.</string>
+  <string name="upload_problem_image_format_unsupported">Soa plancia a l\'é ant un formà nen mantnù dal servent ëd Commons, antlora l\'aplicassion a l\'ha convertilo an JPG.</string>
   <string name="upload_problem_different_geolocation">Sa fòto a l\'é stàita fàita ant un pòst diferent.</string>
   <string name="upload_problem_fbmd">Për piasì, ch\'a caria mach dle fòto che a l\'ha fàit chiel-midem. Ch\'a caria pa dle fòto che a l\'ha trovà an sij cont Facebook d\'àutra gent.</string>
   <string name="upload_problem_do_you_continue">Veul-lo istess carié sta plancia?</string>
