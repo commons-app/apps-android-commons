@@ -35,7 +35,7 @@ class SetWallpaperWorker(context: Context, params: WorkerParameters) :
             val result = imageLoader.execute(request)
             if (result is SuccessResult) {
                 val bitmap = result.image.toBitmap()
-                setWallpaper(context, Bitmap.createBitmap(bitmap))
+                setWallpaper(context, bitmap)
             } else {
                 Timber.d("Error getting bitmap from image url %s", imageUrl)
                 showNotification(context, "Setting Wallpaper Failed", "Failed to download image.")

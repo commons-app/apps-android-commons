@@ -66,6 +66,12 @@ private fun ImageView.tryLoadDownsampledImage(
         load(downsampledBitmap) {
             placeholder(placeholderResId)
             error(placeholderResId)
+            listener(
+                onError = { _, result ->
+                    Timber.e(result.throwable, "Unable to load downsampled upload item image: %s", imageSource)
+                    setImageResource(placeholderResId)
+                }
+            )
         }
         true
     } catch (oom: OutOfMemoryError) {
@@ -152,8 +158,11 @@ private fun calculateInSampleSize(
     var inSampleSize = 1
 
     if (height > safeRequestedHeight || width > safeRequestedWidth) {
-        while (height / inSampleSize > safeRequestedHeight ||
-            width / inSampleSize > safeRequestedWidth
+        val halfHeight = height / 2
+        val halfWidth = width / 2
+
+        while (halfHeight / inSampleSize >= safeRequestedHeight &&
+            halfWidth / inSampleSize >= safeRequestedWidth
         ) {
             inSampleSize *= 2
         }
