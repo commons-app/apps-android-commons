@@ -163,7 +163,7 @@ after opening the app.
                 when (activeFragment) {
                     ActiveFragment.CONTRIBUTIONS -> {
                         // Means that contribution fragment is visible
-                        if (nearbyParentFragment?.backButtonClicked() != true) {
+                        if (contributionsFragment?.backButtonClicked() != true) {
                             isEnabled = false
                             onBackPressedDispatcher.onBackPressed()
                             isEnabled = true
