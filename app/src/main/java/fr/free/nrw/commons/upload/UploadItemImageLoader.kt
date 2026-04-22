@@ -152,11 +152,8 @@ private fun calculateInSampleSize(
     var inSampleSize = 1
 
     if (height > safeRequestedHeight || width > safeRequestedWidth) {
-        val currentHeight = height / 2
-        val currentWidth = width / 2
-
-        while (currentHeight / inSampleSize > safeRequestedHeight &&
-            currentWidth / inSampleSize > safeRequestedWidth
+        while (height / inSampleSize > safeRequestedHeight ||
+            width / inSampleSize > safeRequestedWidth
         ) {
             inSampleSize *= 2
         }
