@@ -34,11 +34,11 @@ internal fun ImageView.loadUploadItemImage(
                 }
             )
         }
-    } catch (outOfMemoryError: OutOfMemoryError) {
-        Timber.e(outOfMemoryError, "Out of memory while loading upload item image: %s", imageSource)
+    } catch (error: OutOfMemoryError) {
+        Timber.e(error, "Out of memory while preparing upload item image load: %s", imageSource)
         setImageResource(placeholderResId)
-    } catch (exception: Exception) {
-        Timber.e(exception, "Unable to start loading upload item image: %s", imageSource)
+    } catch (error: Exception) {
+        Timber.e(error, "Unable to start upload item image load: %s", imageSource)
         setImageResource(placeholderResId)
     }
 }
