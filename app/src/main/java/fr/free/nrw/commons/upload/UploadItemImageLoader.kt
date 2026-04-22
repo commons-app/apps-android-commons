@@ -4,7 +4,6 @@ import android.net.Uri
 import android.webkit.URLUtil
 import android.widget.ImageView
 import coil3.load
-import coil3.request.crossfade
 import coil3.request.error
 import coil3.request.placeholder
 import fr.free.nrw.commons.R
@@ -23,14 +22,13 @@ internal fun ImageView.loadUploadItemImage(imageSource: String?) {
         else -> File(imageSource)
     }
 
-    try {
-        load(data) {
-            crossfade(true)
-            placeholder(R.drawable.ic_image_black_24dp)
-            error(R.drawable.ic_image_black_24dp)
-        }
-    } catch (throwable: Throwable) {
-        Timber.e(throwable, "Unable to load upload item image: %s", imageSource)
-        setImageResource(R.drawable.ic_image_black_24dp)
+    load(data) {
+        placeholder(R.drawable.ic_image_black_24dp)
+        error(R.drawable.ic_image_black_24dp)
+        listener(
+            onError = { _, result ->
+                Timber.e(result.throwable, "Unable to load upload item image: %s", imageSource)
+            }
+        )
     }
 }
