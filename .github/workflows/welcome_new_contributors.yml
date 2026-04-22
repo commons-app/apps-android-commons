@@ -11,7 +11,7 @@ permissions:
 jobs:
   welcome:
     runs-on: ubuntu-latest
-    if: github.event.pull_request.author_association == 'FIRST_TIME_CONTRIBUTOR'
+    if: github.event.pull_request.author_association == 'FIRST_TIMER' || github.event.pull_request.author_association == 'CONTRIBUTOR'
     steps:
       - name: Generate welcome message
         uses: actions/ai-inference@v1
