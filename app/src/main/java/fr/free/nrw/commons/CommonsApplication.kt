@@ -124,19 +124,12 @@ class CommonsApplication : MultiDexApplication() {
             defaultPrefs.putStringSet(Prefs.MANAGED_EXIF_TAGS, defaultExifTagsSet)
         }
 
-        // Create a dedicated OkHttpClient for image loading:
-        // - Shares connection pool with the DI client via newBuilder()
-        // - Inherits User-Agent header from CommonHeaderRequestInterceptor
-        // - Removes OkHttp's HTTP cache (Coil manages its own disk cache)
-        val imageHttpClient = okHttpClient.newBuilder()
-            .cache(null)
-            .build()
-
-        // Initialize Coil image loader
+        // Initialize Coil with the shared app OkHttpClient so image requests keep the
+        // existing headers, logging, and timeout configuration.
         val imageLoader = ImageLoader.Builder(this)
             .crossfade(true)
             .components {
-                add(OkHttpNetworkFetcherFactory(callFactory = { imageHttpClient }))
+                add(OkHttpNetworkFetcherFactory(callFactory = { okHttpClient }))
                 // Skip image loading when limited connection mode is enabled
                 // (replaces the original CustomOkHttpNetworkFetcher behavior)
                 add(LimitedConnectionModeInterceptor(defaultPrefs))
@@ -470,4 +463,3 @@ class LimitedConnectionModeInterceptor(
         return chain.proceed()
     }
 }
-

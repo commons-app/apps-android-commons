@@ -3,25 +3,18 @@ package fr.free.nrw.commons.upload
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context.CLIPBOARD_SERVICE
-import android.net.Uri
-import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.webkit.URLUtil
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import coil3.load
-import coil3.request.placeholder
-import coil3.request.error
 import com.google.android.material.snackbar.Snackbar
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.contributions.Contribution
-import java.io.File
 
 /**
  * Adapter for displaying failed uploads in a paginated list in FailedUploadsFragment. This adapter
@@ -78,18 +71,7 @@ class FailedUploadsAdapter(
         if (item != null) {
             holder.titleTextView.setText(item.media.displayTitle)
         }
-        val imageSource: String = item?.localUri.toString()
-
-        if (!TextUtils.isEmpty(imageSource)) {
-            val data: Any = when {
-                URLUtil.isFileUrl(imageSource) -> Uri.parse(imageSource)
-                else -> File(imageSource)
-            }
-            holder.itemImage.load(data) {
-                placeholder(R.drawable.ic_image_black_24dp)
-                error(R.drawable.ic_image_black_24dp)
-            }
-        }
+        holder.itemImage.loadUploadItemImage(item?.localUri?.toString())
 
         if (item != null) {
             if (item.state == Contribution.STATE_FAILED) {

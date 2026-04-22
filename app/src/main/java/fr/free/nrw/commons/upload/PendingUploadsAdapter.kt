@@ -3,25 +3,18 @@ package fr.free.nrw.commons.upload
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context.CLIPBOARD_SERVICE
-import android.net.Uri
-import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.webkit.URLUtil
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import coil3.load
-import coil3.request.placeholder
-import coil3.request.error
 import com.google.android.material.snackbar.Snackbar
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.contributions.Contribution
-import java.io.File
 
 /**
  * Adapter for displaying pending uploads in a paginated list in PendingUploadsFragment. This adapter
@@ -122,18 +115,7 @@ class PendingUploadsAdapter(
                 true
             }
 
-            val imageSource: String = contribution.localUri.toString()
-
-            if (!TextUtils.isEmpty(imageSource)) {
-                val data: Any = when {
-                    URLUtil.isFileUrl(imageSource) -> Uri.parse(imageSource)
-                    else -> File(imageSource)
-                }
-                itemImage.load(data) {
-                    placeholder(R.drawable.ic_image_black_24dp)
-                    error(R.drawable.ic_image_black_24dp)
-                }
-            }
+            itemImage.loadUploadItemImage(contribution.localUri?.toString())
 
             bindState(contribution.state)
             bindProgress(contribution.transferred, contribution.dataLength, contribution.state)
