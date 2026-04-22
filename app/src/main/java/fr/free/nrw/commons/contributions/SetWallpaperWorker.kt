@@ -7,7 +7,7 @@ import android.content.Context
 import android.graphics.Bitmap
 import android.os.Build
 import androidx.core.app.NotificationCompat
-import androidx.work.Worker
+import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
 import coil3.SingletonImageLoader
 import coil3.request.ImageRequest
@@ -15,39 +15,36 @@ import coil3.request.SuccessResult
 import coil3.request.allowHardware
 import coil3.toBitmap
 import fr.free.nrw.commons.R
-import kotlinx.coroutines.runBlocking
 import timber.log.Timber
 
 class SetWallpaperWorker(context: Context, params: WorkerParameters) :
-    Worker(context, params) {
-    override fun doWork(): Result {
+    CoroutineWorker(context, params) {
+    override suspend fun doWork(): Result {
         val context = applicationContext
         createNotificationChannel(context)
         showProgressNotification(context)
 
         val imageUrl = inputData.getString("imageUrl") ?: return Result.failure()
 
-        return runBlocking {
-            try {
-                val imageLoader = SingletonImageLoader.get(context)
-                val request = ImageRequest.Builder(context)
-                    .data(imageUrl)
-                    .allowHardware(false)
-                    .build()
-                val result = imageLoader.execute(request)
-                if (result is SuccessResult) {
-                    val bitmap = result.image.toBitmap()
-                    setWallpaper(context, Bitmap.createBitmap(bitmap))
-                } else {
-                    Timber.d("Error getting bitmap from image url %s", imageUrl)
-                    showNotification(context, "Setting Wallpaper Failed", "Failed to download image.")
-                }
-                Result.success()
-            } catch (e: Exception) {
-                Timber.e(e, "Error getting bitmap from image url %s", imageUrl)
+        return try {
+            val imageLoader = SingletonImageLoader.get(context)
+            val request = ImageRequest.Builder(context)
+                .data(imageUrl)
+                .allowHardware(false)
+                .build()
+            val result = imageLoader.execute(request)
+            if (result is SuccessResult) {
+                val bitmap = result.image.toBitmap()
+                setWallpaper(context, Bitmap.createBitmap(bitmap))
+            } else {
+                Timber.d("Error getting bitmap from image url %s", imageUrl)
                 showNotification(context, "Setting Wallpaper Failed", "Failed to download image.")
-                Result.failure()
             }
+            Result.success()
+        } catch (e: Exception) {
+            Timber.e(e, "Error getting bitmap from image url %s", imageUrl)
+            showNotification(context, "Setting Wallpaper Failed", "Failed to download image.")
+            Result.failure()
         }
     }
 
