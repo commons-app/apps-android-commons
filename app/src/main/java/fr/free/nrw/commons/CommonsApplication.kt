@@ -125,7 +125,7 @@ class CommonsApplication : MultiDexApplication() {
         }
 
         // Initialize Coil with the shared app OkHttpClient so image requests keep the
-        // existing headers, logging, and timeout configuration.
+        // existing headers, logging, timeout, and HTTP cache configuration.
         val imageLoader = ImageLoader.Builder(this)
             .crossfade(true)
             .components {
