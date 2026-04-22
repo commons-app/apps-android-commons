@@ -71,7 +71,10 @@ class FailedUploadsAdapter(
         if (item != null) {
             holder.titleTextView.setText(item.media.displayTitle)
         }
-        holder.itemImage.loadUploadItemImage(item?.localUri?.toString())
+        holder.itemImage.loadUploadItemImage(
+            item?.localUri?.toString(),
+            R.drawable.ic_image_black_24dp
+        )
 
         if (item != null) {
             if (item.state == Contribution.STATE_FAILED) {

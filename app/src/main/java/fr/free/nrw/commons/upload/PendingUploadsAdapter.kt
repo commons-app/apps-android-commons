@@ -115,7 +115,10 @@ class PendingUploadsAdapter(
                 true
             }
 
-            itemImage.loadUploadItemImage(contribution.localUri?.toString())
+            itemImage.loadUploadItemImage(
+                contribution.localUri?.toString(),
+                R.drawable.ic_image_black_24dp
+            )
 
             bindState(contribution.state)
             bindProgress(contribution.transferred, contribution.dataLength, contribution.state)
