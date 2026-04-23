@@ -12,7 +12,7 @@ import fr.free.nrw.commons.upload.UploadItem
 import fr.free.nrw.commons.upload.UploadMediaDetail
 
 /**
- * The contract with with UploadMediaDetails and its presenter would talk to each other
+ * The contract with UploadMediaDetails and its presenter would talk to each other
  */
 interface UploadMediaDetailsContract {
     interface View : SimilarImageInterface {
@@ -124,5 +124,10 @@ interface UploadMediaDetailsContract {
         fun onEditButtonClicked(indexInViewFlipper: Int)
 
         fun onUserConfirmedUploadIsOfPlace(place: Place?, uploadItemIndex: Int)
+
+        /**
+         * Forces a check on the image quality for a specific fragment index
+         */
+        fun verifyImageQuality(index: Int)
     }
 }

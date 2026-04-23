@@ -12,6 +12,7 @@ import fr.free.nrw.commons.upload.FileProcessor
 import fr.free.nrw.commons.upload.FileUtilsWrapper
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
+import kotlinx.coroutines.rx2.await
 import timber.log.Timber
 import java.io.FileNotFoundException
 import java.io.IOException
@@ -82,12 +83,12 @@ class CustomSelectorUtils {
             withContext(ioDispatcher) {
                 var result: ImageLoader.Result = ImageLoader.Result.FALSE
                 try {
-                    if (mediaClient.checkFileExistsUsingSha(SHA1).blockingGet()) {
+                    // Changed .blockingGet() to .await()
+                    if (mediaClient.checkFileExistsUsingSha(SHA1).await()) {
                         result = ImageLoader.Result.TRUE
                     }
                 } catch (e: Exception) {
                     if (e is UnknownHostException) {
-                        // Handle no network connection.
                         Timber.e(e, "Network Connection Error")
                     }
                     result = ImageLoader.Result.ERROR

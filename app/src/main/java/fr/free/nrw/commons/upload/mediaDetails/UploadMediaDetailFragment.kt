@@ -236,10 +236,6 @@ class UploadMediaDetailFragment : UploadBaseFragment(), UploadMediaDetailsContra
         if (_binding == null) {
             return
         }
-        binding.tvTitle.text = getString(
-            R.string.step_count, (indexOfFragment + 1),
-            fragmentCallback!!.totalNumberOfSteps, getString(R.string.media_detail_step_title)
-        )
         binding.tooltip.setOnClickListener {
             showInfoAlert(
                 R.string.media_detail_step_title,
@@ -495,6 +491,9 @@ class UploadMediaDetailFragment : UploadBaseFragment(), UploadMediaDetailsContra
             return
         }
         presenter.fetchTitleAndDescription(indexOfFragment)
+        if (indexOfFragment > 0) {
+            presenter.verifyImageQuality(indexOfFragment)
+        }
         if (showNearbyFound) {
             if (UploadActivity.nearbyPopupAnswers!!.containsKey(nearbyPlace!!)) {
                 val response = UploadActivity.nearbyPopupAnswers!![nearbyPlace!!]!!
@@ -514,6 +513,7 @@ class UploadMediaDetailFragment : UploadBaseFragment(), UploadMediaDetailsContra
     override fun showMessage(message: String, colorResourceId: Int) =
         showLongToast(requireContext(), message)
 
+    @SuppressLint("StringFormatInvalid")
     override fun showDuplicatePicturePopup(uploadItem: UploadItem) {
         if (defaultKvStore.getBoolean("showDuplicatePicturePopup", true)) {
             val uploadTitleFormat = getString(R.string.upload_title_duplicate)

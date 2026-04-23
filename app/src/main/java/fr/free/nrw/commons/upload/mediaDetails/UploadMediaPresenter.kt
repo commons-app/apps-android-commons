@@ -32,6 +32,8 @@ import java.net.UnknownHostException
 import java.util.Locale
 import javax.inject.Inject
 import javax.inject.Named
+import kotlin.collections.get
+import kotlin.compareTo
 
 class UploadMediaPresenter @Inject constructor(
     private val repository: UploadRepository,
@@ -369,6 +371,16 @@ class UploadMediaPresenter @Inject constructor(
             } catch (e: Exception) {
                 Timber.e(e)
             }
+        }
+    }
+
+    /**
+     * Forces a check on the image quality for a specific fragment index
+     */
+    override fun verifyImageQuality(index: Int) {
+        val uploadItems = repository.getUploads()
+        if (uploadItems.size > index) {
+            checkImageQuality(uploadItems[index], index)
         }
     }
 
