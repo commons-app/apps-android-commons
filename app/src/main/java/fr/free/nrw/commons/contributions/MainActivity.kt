@@ -347,30 +347,36 @@ after opening the app.
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         outState.putInt("viewPagerCurrentItem", binding!!.pager.currentItem)
-        outState.putString("activeFragment", activeFragment!!.name)
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         super.onRestoreInstanceState(savedInstanceState)
-        val activeFragmentName = savedInstanceState.getString("activeFragment")
-        if (activeFragmentName != null) {
-            restoreActiveFragment(activeFragmentName)
-        }
+        restoreActiveFragment()
     }
 
-    private fun restoreActiveFragment(fragmentName: String) {
-        if (fragmentName == ActiveFragment.CONTRIBUTIONS.name) {
-            title = getString(R.string.contributions_fragment)
-            loadFragment(newInstance(), false)
-        } else if (fragmentName == ActiveFragment.NEARBY.name) {
-            title = getString(R.string.nearby_fragment)
-            loadFragment(NearbyParentFragment.newInstance(), false)
-        } else if (fragmentName == ActiveFragment.EXPLORE.name) {
-            title = getString(R.string.navigation_item_explore)
-            loadFragment(ExploreFragment.newInstance(), false)
-        } else if (fragmentName == ActiveFragment.BOOKMARK.name) {
-            title = getString(R.string.bookmarks)
-            loadFragment(BookmarkFragment.newInstance(), false)
+    private fun restoreActiveFragment() {
+        when (val existing = supportFragmentManager.findFragmentById(R.id.fragmentContainer)) {
+            is ContributionsFragment -> {
+                title = getString(R.string.contributions_fragment)
+                contributionsFragment = existing
+                activeFragment = ActiveFragment.CONTRIBUTIONS
+            }
+            is NearbyParentFragment -> {
+                title = getString(R.string.nearby_fragment)
+                nearbyParentFragment = existing
+                activeFragment = ActiveFragment.NEARBY
+            }
+            is ExploreFragment -> {
+                title = getString(R.string.navigation_item_explore)
+                exploreFragment = existing
+                activeFragment = ActiveFragment.EXPLORE
+            }
+            is BookmarkFragment -> {
+                title = getString(R.string.bookmarks)
+                bookmarkFragment = existing
+                activeFragment = ActiveFragment.BOOKMARK
+            }
+            else -> loadFragment(newInstance(), false)
         }
     }
 
