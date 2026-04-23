@@ -165,10 +165,11 @@ class ReviewController @Inject constructor(
             .commonsApplicationComponent
             .inject(this)
 
-        val authorName = firstRevision?.user()
-        val message = if (authorName != null) {
-            context.getString(R.string.send_thank_toast, media?.displayTitle, authorName)
-        } else { context.getString(R.string.send_thank_toast_no_author, media?.displayTitle) }
+        val message = firstRevision?.user()?.let {
+            context.getString(R.string.send_thank_toast, media?.displayTitle, it)
+        } ?: run {
+            context.getString(R.string.send_thank_toast_no_author, media?.displayTitle)
+        }
         ViewUtil.showShortToast(context, message)
 
         if (firstRevision == null) return
@@ -197,17 +198,20 @@ class ReviewController @Inject constructor(
 
     @SuppressLint("StringFormatInvalid")
     private fun displayThanksToast(context: Context, result: Boolean) {
-        val authorName = firstRevision?.user()
         val (title, message) = if (result) {
             context.getString(R.string.send_thank_success_title) to
-                    if (authorName != null) {
-                        context.getString(R.string.send_thank_success_message, media?.displayTitle, authorName)
-                    } else { context.getString(R.string.send_thank_success_message_no_author, media?.displayTitle) }
+                    (firstRevision?.user()?.let {
+                        context.getString(R.string.send_thank_success_message, media?.displayTitle, it)
+                    } ?: run {
+                        context.getString(R.string.send_thank_success_message_no_author, media?.displayTitle)
+                    })
         } else {
             context.getString(R.string.send_thank_failure_title) to
-                    if (authorName != null) {
-                        context.getString(R.string.send_thank_failure_message, media?.displayTitle, authorName)
-                    } else { context.getString(R.string.send_thank_failure_message_no_author, media?.displayTitle) }
+                    (firstRevision?.user()?.let {
+                        context.getString(R.string.send_thank_failure_message, media?.displayTitle, it)
+                    } ?: run {
+                        context.getString(R.string.send_thank_failure_message_no_author, media?.displayTitle)
+                    })
         }
 
         ViewUtil.showShortToast(context, message)
