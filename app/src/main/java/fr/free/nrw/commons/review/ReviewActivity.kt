@@ -21,6 +21,7 @@ import fr.free.nrw.commons.utils.DialogUtil
 import fr.free.nrw.commons.utils.ViewUtil
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import timber.log.Timber
 import java.util.Locale
 import javax.inject.Inject
 
@@ -148,13 +149,13 @@ class ReviewActivity : BaseActivity() {
             reviewHelper.checkFileUsage(media.filename)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe { result ->
+                .subscribe({ result ->
                     if (!result) {
                         findNonHiddenCategories(media)
                     } else {
                         runRandomizer()
                     }
-                }
+                }, { Timber.e(it) })
         )
     }
 
@@ -195,7 +196,7 @@ class ReviewActivity : BaseActivity() {
             reviewHelper.getFirstRevisionOfFile(fileName)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe { revision ->
+                .subscribe({ revision ->
                     reviewController.firstRevision = revision
                     reviewPagerAdapter.updateFileInformation()
                     val caption = getString(
@@ -207,7 +208,7 @@ class ReviewActivity : BaseActivity() {
                     binding.pbReviewImage.visibility = View.GONE
                     reviewImageFragment = getInstanceOfReviewImageFragment()
                     reviewImageFragment?.enableButtons()
-                }
+                }, { Timber.e(it) })
         )
         binding.viewPagerReview.currentItem = 0
     }

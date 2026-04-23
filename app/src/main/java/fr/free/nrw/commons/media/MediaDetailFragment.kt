@@ -971,11 +971,11 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
             reviewHelper.getFirstRevisionOfFile(fileName)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe { revision: Revision? ->
+                .subscribe({ revision: Revision? ->
                     sendThanks(
                         requireContext(), revision
                     )
-                }
+                }, { Timber.e(it) })
         )
     }
 
