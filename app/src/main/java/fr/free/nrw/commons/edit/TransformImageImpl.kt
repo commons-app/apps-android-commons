@@ -30,38 +30,38 @@ class TransformImageImpl : TransformImage {
     ): File? {
         Timber.tag("Trying to rotate image").d("Starting")
 
+        val normalizedDegree = ((degree % 360) + 360) % 360
+        val currentExifOrientation = readExifOrientation(imageFile)
+        val rotationOp =
+            when (normalizedDegree) {
+                0 -> null
+                90 -> LLJTran.ROT_90
+                180 -> LLJTran.ROT_180
+                270 -> LLJTran.ROT_270
+                else -> {
+                    Timber.w("Unsupported rotation degree: $degree")
+                    return null
+                }
+            }
+
         val imagePath = System.currentTimeMillis()
         val output = File(savePath, "rotated_$imagePath.jpg")
 
         val rotated =
             try {
-                val lljTran = LLJTran(imageFile)
-                lljTran.read(
-                    LLJTran.READ_ALL,
-                    false,
-                ) // This could throw an LLJTranException. I am not catching it for now... Let's see.
-                lljTran.transform(
-                    when (degree) {
-                        90 -> LLJTran.ROT_90
-                        180 -> LLJTran.ROT_180
-                        270 -> LLJTran.ROT_270
-                        else -> LLJTran.OPT_DEFAULTS
-                    },
-                    LLJTran.OPT_DEFAULTS or LLJTran.OPT_XFORM_ORIENTATION,
-                )
-                BufferedOutputStream(FileOutputStream(output)).use { writer ->
-                    lljTran.save(writer, LLJTran.OPT_WRITE_ALL)
-                }
-                lljTran.freeMemory()
-                try {
-                    val exif = ExifInterface(output.absolutePath)
-                    exif.setAttribute(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL.toString())
-                    exif.saveAttributes()
-                } catch (ex: Exception) {
-                    Timber.w(ex, "Failed to force EXIF orientation to tha Normal")
+                if (rotationOp == null) {
+                    imageFile.copyTo(output, overwrite = true)
+                } else if (shouldRotateLosslessly(imageFile, rotationOp)) {
+                    rotateLosslessly(imageFile, output, rotationOp)
+                    forceExifOrientation(output, currentExifOrientation)
+                } else {
+                    rotateWithExifOrientationOnly(imageFile, output, normalizedDegree)
                 }
                 true
             } catch (e: LLJTranException) {
+                Timber.tag("Error").d(e)
+                return null
+            } catch (e: Exception) {
                 Timber.tag("Error").d(e)
                 return null
             }
@@ -71,6 +71,143 @@ class TransformImageImpl : TransformImage {
             Timber.tag("Add").d(output.absolutePath)
         }
         return output
+    }
+
+    /**
+     * Checks whether the requested JPEG transform can be applied as a perfect
+     * lossless operation for the given image.
+     *
+     * @param imageFile The source JPEG file.
+     * @param rotationOp The LLJTran rotation operation (for example, ROT_90).
+     * @return True if the transform is perfect-lossless for this file, false otherwise.
+     */
+    private fun shouldRotateLosslessly(imageFile: File, rotationOp: Int): Boolean {
+        val lljTran = LLJTran(imageFile)
+        try {
+            lljTran.read(
+                LLJTran.READ_ALL,
+                false,
+            ) // This could throw an LLJTranException. I am not catching it for now... Let's see.
+            return lljTran.checkPerfect(rotationOp, null) == 0
+        } finally {
+            lljTran.freeMemory()
+        }
+    }
+
+    /**
+     * Applies LLJTran lossless rotation and writes the full JPEG structure to [output].
+     *
+     * This path is used only when [shouldRotateLosslessly] returns true.
+     *
+     * @param imageFile The source JPEG file.
+     * @param output The destination file where the rotated JPEG is written.
+     * @param rotationOp The LLJTran rotation operation to apply.
+     */
+    private fun rotateLosslessly(imageFile: File, output: File, rotationOp: Int) {
+        val lljTran = LLJTran(imageFile)
+        try {
+            lljTran.read(
+                LLJTran.READ_ALL,
+                false,
+            ) // This could throw an LLJTranException. I am not catching it for now... Let's see.
+            lljTran.transform(
+                rotationOp,
+                LLJTran.OPT_DEFAULTS or LLJTran.OPT_XFORM_ORIENTATION,
+            )
+            BufferedOutputStream(FileOutputStream(output)).use { writer ->
+                lljTran.save(writer, LLJTran.OPT_WRITE_ALL)
+            }
+        } finally {
+            lljTran.freeMemory()
+        }
+    }
+
+    /**
+     * Performs a relative rotation by updating only EXIF orientation after copying
+     * the original JPEG bytes to [output].
+     *
+     * This path is used for imperfect JPEG transforms to avoid edge artifacts.
+     *
+     * @param imageFile The source JPEG file.
+     * @param output The destination file to write.
+     * @param normalizedDegree The clockwise relative rotation in degrees (0/90/180/270).
+     */
+    private fun rotateWithExifOrientationOnly(
+        imageFile: File,
+        output: File,
+        normalizedDegree: Int,
+    ) {
+        imageFile.copyTo(output, overwrite = true)
+        val currentOrientation = readExifOrientation(output)
+        val currentDegrees = exifOrientationToDegrees(currentOrientation)
+        val targetDegrees = ((currentDegrees + normalizedDegree) % 360 + 360) % 360
+        val targetOrientation = degreesToExifOrientation(targetDegrees)
+        forceExifOrientation(output, targetOrientation)
+    }
+
+    /**
+     * Sets EXIF orientation on the given file.
+     *
+     * @param output The JPEG file whose EXIF orientation will be updated.
+     * @param orientation The EXIF orientation constant to set.
+     */
+    private fun forceExifOrientation(output: File, orientation: Int) {
+        try {
+            val exif = ExifInterface(output.absolutePath)
+            exif.setAttribute(ExifInterface.TAG_ORIENTATION, orientation.toString())
+            exif.saveAttributes()
+        } catch (ex: Exception) {
+            Timber.w(ex, "Failed to set EXIF orientation")
+        }
+    }
+
+    /**
+     * Reads EXIF orientation from [imageFile], defaulting to NORMAL on read failure.
+     *
+     * @param imageFile The JPEG file to inspect.
+     * @return The EXIF orientation constant. Returns ORIENTATION_NORMAL on failure.
+     */
+    private fun readExifOrientation(imageFile: File): Int {
+        return try {
+            ExifInterface(imageFile.absolutePath).getAttributeInt(
+                ExifInterface.TAG_ORIENTATION,
+                ExifInterface.ORIENTATION_NORMAL
+            )
+        } catch (_: Exception) {
+            ExifInterface.ORIENTATION_NORMAL
+        }
+    }
+
+    /**
+     * Converts EXIF orientation constants to clockwise degrees.
+     *
+     * Non-rotating and unsupported values are treated as 0 degrees.
+     *
+     * @param orientation The EXIF orientation constant.
+     * @return The equivalent clockwise rotation in degrees.
+     */
+    private fun exifOrientationToDegrees(orientation: Int): Int {
+        return when (orientation) {
+            ExifInterface.ORIENTATION_ROTATE_90 -> 90
+            ExifInterface.ORIENTATION_ROTATE_180 -> 180
+            ExifInterface.ORIENTATION_ROTATE_270 -> 270
+            else -> 0
+        }
+    }
+
+    /**
+     * Converts clockwise degrees to EXIF orientation constants.
+     *
+     * @param degrees The clockwise rotation in degrees.
+     * @return The corresponding EXIF orientation constant.
+     */
+    private fun degreesToExifOrientation(degrees: Int): Int {
+        return when (((degrees % 360) + 360) % 360) {
+            90 -> ExifInterface.ORIENTATION_ROTATE_90
+            180 -> ExifInterface.ORIENTATION_ROTATE_180
+            270 -> ExifInterface.ORIENTATION_ROTATE_270
+            else -> ExifInterface.ORIENTATION_NORMAL
+        }
     }
 
     /**
